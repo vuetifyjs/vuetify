@@ -2,7 +2,7 @@
   "name": "vuetify",
   "description": "A Vue.js project",
   "author": "John Leider <john.j.leider@gmail.com>",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "main": "dist/vuetify",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config build/webpack.build.config.js --progress --hide-modules"

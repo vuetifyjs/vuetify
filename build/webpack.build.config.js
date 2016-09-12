@@ -10,7 +10,9 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/dist/',
-    filename: 'vuetify.js'
+    filename: 'vuetify.js',
+    library: 'Vuetify',
+    libraryTarget: 'umd'
   },
   resolveLoader: {
     root: path.join(__dirname, '../node_modules'),
