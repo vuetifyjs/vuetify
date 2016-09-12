@@ -1,0 +1,40 @@
+.primary
+  background-color: $primary-color !important
+  border-color: $primary-color !important
+  
+.primary--text
+  color: $primary-color !important
+  
+.secondary
+  background-color: $secondary-color !important
+  border-color: $secondary-color !important
+  
+.secondary--text
+  color: $secondary-color !important
+
+for color_name, color in $colors
+  for color_type, color_value in color
+    if color_type == 'base'
+      .{color_name}
+        background-color color_value !important
+        border-color: color_value !important
+        
+      .{color_name}--text
+        color color_value !important
+    else if color_type != 'shades'
+      .{color_name}
+        &.{color_type}
+          background-color color_value !important
+          border-color: color_value !important
+        
+      .{color_name}--text
+        &.text--{color_type}
+          color: color_value !important
+
+for color, color_value in $shades
+  .{color}
+    background-color color_value !important
+    border-color: color_value !important
+    
+  .{color}--text
+    color color_value !important

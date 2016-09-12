@@ -1,0 +1,65 @@
+.tooltip
+  background: $secondary-color
+  border-radius: $button-radius
+  color: $shades.white
+  font-size: .9rem
+  padding: .5rem
+  position: absolute
+  z-index: 999999999999
+  opacity: 0
+  transition: $primary-transition
+  @extend .z-depth-1
+  
+  &:after
+    position: absolute
+    content: ""
+    width: 0
+    height: 0
+  
+  &--left
+    &:after
+      right: -7px
+      top: calc(50% - 7px)
+      border-top: 7px solid transparent
+      border-bottom: 7px solid transparent
+      border-left: 7px solid $secondary-color
+
+    &.tooltip--active
+      transform: translate3d(-1.5rem, 0, 0)
+      
+  &--right
+    &:after
+      left: -7px
+      top: calc(50% - 7px)
+      border-top: 7px solid transparent
+      border-bottom: 7px solid transparent
+      border-right: 7px solid $secondary-color
+      
+    &.tooltip--active
+      transform: translate3d(1.5rem, 0, 0)
+      
+  &--top
+    &:after
+      left: calc(50% - 7px)
+      bottom: -7px
+      border-left: 7px solid transparent
+      border-right: 7px solid transparent
+      border-top: 7px solid $secondary-color
+      
+    &.tooltip--active
+      transform: translate3d(0, -1.5rem, 0)
+      
+  &--bottom
+    &:after
+      left: calc(50% - 7px)
+      top: -7px
+      border-left: 7px solid transparent
+      border-right: 7px solid transparent
+      border-bottom: 7px solid $secondary-color
+      
+    &.tooltip--active
+      transform: translate3d(0, 1.5rem, 0)
+  
+  &--active
+    opacity: 1
+    

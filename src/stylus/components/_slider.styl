@@ -1,0 +1,100 @@
+.slider
+  height: 500px
+  width: 100%
+  background: #ddd
+  position: relative
+  @extend .z-depth-1
+  
+  &__left
+    position: absolute
+    top: calc(50% - 20px)
+    z-index: 3
+    left: 1.5rem
+    
+    &:hover
+      &:before
+        color: rgba(255, 255, 255, .7)
+    
+    &:before
+      cursor: pointer
+      border-style: solid
+      border-width: 0.15rem 0.15rem 0 0
+      content: ''
+      display: inline-block
+      height: $slider-arrow-size
+      left: 0
+      position: relative
+      top: 0
+      transform: rotate(-135deg)
+      transition: $primary-transition
+      vertical-align: top
+      width: $slider-arrow-size
+      color: rgba(255, 255, 255, .5)
+      
+  &__right
+    @extend .slider__left
+    left: initial
+    right: 1.5rem
+    
+    &:before
+      transform: rotate(45deg)
+  
+  &__controls
+    align-items: center
+    bottom: 2rem
+    display: flex !important
+    justify-content: center
+    left: 0
+    position: absolute
+    list-style-type: none
+    width: 100%
+    z-index: 4
+    
+    li
+      height: 1.7rem
+      width: 1.7rem
+      margin: 0 .4rem
+      
+      a
+        color: rgba(255, 255, 255, .5)
+        transition: $primary-transition
+        
+        &.active
+          color: rgba(255, 255, 255, .7)
+        
+        &:hover
+          color: rgba(255, 255, 255, 1)
+      
+      i
+        font-size: 1.7rem
+  
+  &__progress
+    position: absolute
+    z-index: 2
+    bottom: 0
+    left: 0
+    width: 0%
+    height: 6px
+    background: rgba(255, 255, 255, .7)
+    border-bottom: 1px solid rgba(0, 0, 0, .1)
+  
+  &__item
+    height: 100%
+    width: 100%
+    background: #ccc
+    transition: .6s ease-out
+    position: absolute
+    top: 0
+    left: 0
+    background-position: center center
+    background-size: cover
+    background-repeat: no-repeat
+    display: flex
+    justify-content: flex-start
+    align-items: flex-start
+    padding: calc(5% + 2rem)
+    color: #fff
+    
+    h1
+      font-weight: 100
+      font-size: 5rem

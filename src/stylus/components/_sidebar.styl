@@ -1,0 +1,90 @@
+.sidebar
+  display: flex
+  flex-direction: column
+  width: $sidebar-width
+  flex-basis: $sidebar-width
+  z-index: 3
+  overflow-y: auto
+  position: relative
+  top: 0
+  background-color: #fff
+  transition: $primary-transition
+  @extend .z-depth-2
+  
+  &::-webkit-scrollbar
+      width: 14px
+      height: 18px
+      
+  &::-webkit-scrollbar-thumb
+      height: 6px
+      border: 5px solid rgba(0, 0, 0, 0)
+      background-clip: padding-box
+      -webkit-border-radius: 7px
+      background-color: rgba($grey.base, 0.15)
+      -webkit-box-shadow: inset -1px -1px 0px rgba(0, 0, 0, 0.05), inset 1px 1px 0px rgba(0, 0, 0, 0.05)
+
+  &::-webkit-scrollbar-button
+      width: 0
+      height: 0
+      display: none
+      
+  &::-webkit-scrollbar-corner
+      background-color: transparent
+
+  &--right
+    order: +1
+  
+  &--fixed
+    left: 0
+    position: fixed
+    z-index: 5
+    
+  &--fixed--right
+    right: 0
+    position: fixed
+    z-index: 5
+    
+  &--drawer
+    flex-basis: 0
+    transform: translateX(-($sidebar-width + 25))
+    
+  &--drawer--right
+    transform: translateX($sidebar-width + 25)
+    
+  &--open
+    transform: translateX(0) !important
+    width: $sidebar-width
+    
+  &__items
+    display: flex
+    flex-direction: column
+    
+  &__item
+    color: $shades.black
+    display: flex
+    align-items: center
+    text-decoration: none
+    transition: $primary-transition
+    font-weight: 300
+    padding: $sidebar-item-padding
+  
+    &--active
+      background-color: $primary-color
+    
+    &:hover
+      background-color: $primary-color
+      color: $shades.white
+      
+    i
+      margin-right: $spacers.one.x
+  
+  @media screen and (max-width: $grid-breakpoints.sm)
+    transform: translateX(-($sidebar-width + 25))
+    flex-basis: 0 !important
+    
+    &--right
+      transform: translateX($sidebar-width + 25)
+
+  ul
+    list-style-type: none
+    width: 100%

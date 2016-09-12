@@ -1,0 +1,41 @@
+.chip
+  background: $grey.lighten-2
+  border: 1px solid $grey.lighten-2
+  border-radius: 2rem
+  display: inline-flex
+  align-items: center
+  justify-content: space-between
+  font-size: .8rem
+  padding: 0 .8rem
+  height: 25px
+  
+  &:active
+    @extend .grey.lighten-3
+    
+  &--label
+    border-radius: .2rem
+  
+  &--outline
+    background: transparent !important
+    color: $grey.base
+    
+  &--small
+    height: 20px
+    padding: 0 .2rem
+    
+  &__close
+    color: inherit
+    display: flex
+    align-items: center
+    text-decoration: none
+    
+  .icon
+    font-size: 1.3rem
+    
+    &--left
+      margin-left: -.6rem
+      margin-right: 1rem
+      
+    &--right
+      margin-left: 1rem
+      margin-right: -.6rem

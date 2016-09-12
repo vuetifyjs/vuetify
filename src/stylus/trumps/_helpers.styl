@@ -1,0 +1,43 @@
+.right
+  float: right !important
+  
+.left
+  float: left !important
+  
+.left-align
+  text-align: left !important
+
+.center-align
+  text-align: center !important
+  
+.right-align
+  text-align: right !important
+  
+.with
+  &.left-fixed-sidebar
+    main,
+    header,
+    footer
+      padding-left: $sidebar-width
+      transition: $primary-transition
+  
+      @media screen and (max-width: $grid-breakpoints.sm)
+        padding-left: 0
+  
+  &.right-fixed-sidebar
+    main,
+    header,
+    footer
+      padding-right: $sidebar-width
+      transition: $primary-transition
+      
+      @media screen and (max-width: $grid-breakpoints.sm)
+        padding-right: 0
+
+  &.navbar
+    main
+      min-height: "calc(100vh - %s)" % $nav-height
+    
+  &.navbar-and-footer
+    main
+      min-height: "calc(100vh - %s)" % ($navbar-height + $footer-height)

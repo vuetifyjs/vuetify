@@ -1,0 +1,37 @@
+.collapsible
+  background: #fff
+  text-align: left
+  list-style-type: none
+  border-top: 1px solid #ddd
+  border-right: 1px solid #ddd
+  border-left: 1px solid #ddd
+  margin-bottom: 1rem
+  @extend .z-depth-1
+  
+  li
+    height: $collapsible-collapse-height
+    overflow: hidden
+    transition: $secondary-transition, height $collapsible-transition-height ease-out
+    
+    &.collapsible--active
+      transition: height $collapsible-transition-height ease-in
+      
+    &:not(:first-child) .collapsible__header
+      border-top: 1px solid #ddd
+  
+  &__header
+    height: $collapsible-collapse-height
+    padding-left: 1rem
+    cursor: pointer
+    display: flex;
+    align-items: center;
+    
+    i
+      margin-right: 1rem
+    
+  &__body
+    padding: 1rem
+    background-color: rgba(0, 0, 0, 0.03)
+    
+    &:last-child
+      border-bottom: 1px solid #ddd

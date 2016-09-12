@@ -1,0 +1,49 @@
+.tabs
+  display: flex
+  justify-content: center
+  align-items: center
+  border-bottom: 1px solid $grey.lighten-2
+    
+  &__tab
+    flex: 1
+    color: $grey.lighten-2
+    text-decoration: none
+    font-weight: 300
+    display: block
+    padding: 1rem
+    position: relative
+    text-align: center
+    text-transform: uppercase
+    transition: $primary-transition
+    
+    &:after
+      content: ""
+      position: absolute
+      left: 0
+      bottom: 0
+      width: 0%
+      height: 2px
+      transition: $primary-transition
+      background: $primary-color
+  
+    &--active
+      color: $primary-color
+      
+      &:after
+        width: 100%
+    
+  &__content
+    display: none
+    padding: 2rem 0
+    transition: $primary-transition
+    
+    &-enter-active,
+    &-leave-active
+      transition: opacity .3s ease-out
+    
+    &-enter,
+    &-leave-active
+      opacity: 0
+    
+    &--active
+      display: block

@@ -1,0 +1,43 @@
+.list
+  list-style-type: none
+  padding: 0
+  margin: 0
+  
+  &__item
+    align-items: center
+    display: flex
+    padding: 1rem 0
+    
+    &-action
+      display: flex
+      flex-direction: column
+      margin-left: 2rem
+      align-items: center
+      
+    &-action-title
+      color: $grey.base
+      font-size: .82rem
+      font-weight: 300
+          
+    &-avatar
+      align-self: flex-start
+      color: $shades.white
+      margin-right: 2rem
+      border-radius: 50%
+      padding: .3rem
+    
+    &-title
+      display: flex
+      flex-direction: column
+      letter-spacing: .05rem
+      font-weight: 400
+      
+    &-sub-title
+      color: $grey.base
+      font-size: .9rem
+      font-weight: 300
+      letter-spacing: 0
+      
+    &-icon
+      color: $grey.base
+      margin-right: 2rem

@@ -1,0 +1,58 @@
+.navbar
+  background-color: $primary-color
+  display: flex
+  height: $navbar-height
+  z-index: 2
+  width: 100%
+  @extend .z-depth-1
+  
+  &--fixed
+    position: fixed
+    top: 0
+    
+  &__side-icon
+    display: inline-flex
+    align-items: center
+    
+    a
+      color: $shades.white
+      display: flex
+      align-items: center
+      flex: 1
+      text-decoration: none
+      padding: 0 .5rem
+      
+      i
+        font-size: 3rem
+  
+  &__logo
+    color: #fff
+    font-size: 3rem
+    flex: 1;
+    text-decoration: none
+    padding: 0 .5rem
+  
+  &__items
+    list-style-type: none
+    padding: 0
+    height: $navbar-height
+    
+    > li
+      float: left
+      height: $navbar-height
+      
+  &__item
+    align-items: center
+    color: #fff
+    display: inline-flex
+    padding: $navbar-item-padding
+    height: $navbar-height
+    text-decoration: none
+    transition: all 0.3s ease-out
+    
+    i
+      font-size: 2rem
+      line-height: $navbar-height
+    
+    &:hover
+      background: rgba(0,0,0,0.1)

@@ -1,0 +1,36 @@
+.dropdown
+  list-style-type: none
+  padding: 0
+  background-color: #fff
+  position: absolute
+  width: auto
+  transform: translateY(-50%) translateX(-50%) scale(0)
+  opacity: 0
+  transition: $primary-transition
+  white-space: nowrap
+  z-index: 2
+  @extend .z-depth-1
+  
+  &--open-from-right
+    transform: translateY(-50%) translateX(50%) scale(0)
+  
+  &--open
+    opacity: 1
+    transform: translateY(0) translateX(0) scale(1)
+  
+  li
+    text-align: left
+    
+    a
+      text-decoration: none
+      display: inline-block
+      transition: all 0.2s ease-out
+      text-transform: none
+      padding: 1rem
+      width: 100%
+      font-weight: 500
+      font-size: 1rem
+      color: $primary-color
+      
+      &:hover
+        background-color: rgba(0, 0, 0, 0.1)

@@ -1,0 +1,115 @@
+.btn
+  border: 1px solid $button-background
+  border-radius: $button-radius
+  background: $button-background
+  color: $button-color
+  display: inline-flex
+  justify-content: center
+  align-items: center
+  font-size: $button-font-size
+  font-weight: $button-font-weight
+  height: $button-height
+  letter-spacing: $button-letter-spacing
+  line-height: $button-height
+  outline: 0
+  padding: $button-padding-top $button-padding-left
+  position: relative
+  text-decoration: none
+  text-transform: $button-text-transform
+  transition: $button-transition
+  @extend .z-depth-1
+
+  &:disabled
+    box-shadow: none
+    background-color: $grey.base
+    opacity: $button-disabled-opacity
+    
+  &:hover
+    @extend .z-depth-1-half
+    
+  &--block
+    display: flex
+    width: 100%
+    
+  &--flat
+    background-color: transparent !important
+    border-color: transparent
+    box-shadow: none
+    
+    &:hover:not(:disabled)
+      background-color: $button-flat-hover !important
+      box-shadow: none
+    
+  &--floating
+    border-radius: 50%
+    padding: $button-floating-padding
+    letter-spacing: normal
+    line-height: $button-height
+    height: $button-height
+    
+  &--icon
+    background: transparent
+    box-shadow: none
+    position: relative
+    border-radius: 50%
+    border-color: transparent
+    height: auto
+    width: auto
+    padding: $button-padding-left * .3
+    
+    i
+      font-size: $button-font-size * 1.5
+    
+    &:hover
+      background: rgba($grey.lighten-1, .4)
+      box-shadow: none
+    
+  &--large
+    height: $button-height * $button-large-multiplier
+    line-height: $button-height * $button-large-multiplier
+    
+    &.btn--floating
+      width: $button-height * $button-large-multiplier
+    
+    i
+      font-size: $button-height * 0.7
+  
+  &--outline
+    background: transparent !important
+    box-shadow: none
+    color: $button-background
+    
+    &:hover
+      box-shadow: none
+
+  &--primary
+    background: $primary-color
+    color: $shades.white
+    
+  &--round
+    border-radius: 2rem
+    
+  &--secondary
+    background: $secondary-color
+    color: $shades.white
+    
+  &--small
+    height: $button-height * $button-small-multiplier
+    line-height: $button-height * ($button-small-multiplier / 2)
+    
+    &.btn--floating
+      width: $button-height * $button-small-multiplier
+      
+      i
+        font-size: $button-height * .4
+        
+  .icon
+    &--left
+      margin-right: 1rem
+      font-size: 1.3rem
+      line-height: inherit
+    
+    &--right
+      margin-left: 1rem
+      font-size: 1.3rem
+      line-height: inherit

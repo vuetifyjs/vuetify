@@ -1,0 +1,47 @@
+.modal
+  display: block
+  position: fixed
+  top: 15%
+  right: 0
+  left: 0
+  width: 55%
+  z-index: 1001
+  background: #fff
+  border-radius: 2px
+  margin: auto
+  max-height: 55%
+  padding: 2rem
+  transition: $primary-transition
+  transform: translateY(100%) scaleX(0)
+  opacity: 0
+  @extend .z-depth-3
+    
+  &--bottom
+    top: initial !important
+    bottom: 0
+    border-radius: 0
+    transform: translateY(100%)
+    opacity: 1
+    box-shadow 0 -4px 15px 0 rgba(0, 0, 0, 0.2), 0 -6px 50px 0 rgba(0, 0, 0, 0.19)
+    width: 100%
+  
+  &--open
+    opacity: 1
+    transform: none !important
+    
+.modal-overlay
+  display: block
+  position: fixed
+  width: 100%
+  height: 100%
+  background-color: rgba(0,0,0,0.3)
+  transition: $primary-transition
+  top: 0
+  opacity: 0
+  filter: blur(10%)
+  z-index: -1
+  
+  &--open
+    opacity: 1
+    z-index: 1000
+  

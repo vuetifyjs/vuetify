@@ -1,0 +1,51 @@
+.card
+  @extend .z-depth-1
+  background: #fff
+  display: flex
+  flex-direction: column
+  position: relative
+  margin-bottom: $spacers.one.y
+  
+  &--horizontal
+    flex-direction: row
+    
+    .card__title
+      flex-basis: 30%
+      
+  &__stack
+    display: flex
+    flex-direction: column
+    flex: 1
+  
+  &__title
+    display: flex
+    padding: $card-padding * 2
+    
+    &-text
+      font-size: $card-title-text-size
+      font-weight: $card-title-text-font-weight
+      letter-spacing: $card-title-text-letter-spacing
+      display: flex
+      align-self: flex-end
+      align-items: center
+      
+  &__text
+    padding: $card-padding * 2
+  
+  &__actions
+    box-sizing: border-box
+    border-top: 1px solid rgba(0, 0, 0, .1)
+    display: flex
+    align-items: center
+    padding: $card-padding
+    min-height: $card-actions-min-height
+    font-size: $card-actions-font-size
+    margin-top: auto
+    width: 100%
+    
+    i
+      margin: 0 $card-actions-button-padding
+    
+    .btn
+      margin: 0
+      padding: 0 $card-actions-button-padding

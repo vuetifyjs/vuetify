@@ -1,0 +1,41 @@
+.badge
+  position: relative
+  padding-right: 22px
+  
+  &:after
+    content: attr(data-badge)
+    color: #fff
+    display: flex
+    position: absolute
+    font-family: $body-font-family
+    top: -11px
+    right: 0
+    background-color: $primary-color
+    border-radius: 50%
+    height: 22px
+    width: 22px
+    font-size: .9rem
+    justify-content: center
+    align-items: center
+    flex-direction: row
+    flex-wrap: wrap
+  
+  &--overlap
+    &.badge--left
+      &:after
+        left: 11px
+        
+    &:after
+      top: -8px
+      right: 11px
+      
+  &--icon
+    &:after
+      font-family: 'Material Icons'
+      
+  &--left
+    padding-right: inherit
+    padding-left: 22px
+    
+    &:after
+      left: 0

@@ -1,0 +1,48 @@
+.container, .container-fluid
+  margin-right: auto
+  margin-left: auto
+  flex-basis: 100%
+  
+.container
+  padding-left: $grid-outer-margin
+  padding-right: $grid-outer-margin
+  
+  for width in $container-max-widths
+    @media only screen and (min-width: width)
+      max-width: width
+  
+.row
+  box-sizing: border-box;
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: $grid-gutter-full
+  margin-right: $grid-gutter-full
+  
+  &--reverse
+    flex-direction: row-reverse
+    
+  .col
+    box-sizing: border-box
+    flex: 0 0 auto
+    padding-right: $grid-gutter-half
+    padding-left: $grid-gutter-half
+    
+    &--spacer
+      flex-grow: 1
+        
+    for size, width in $grid-breakpoints
+      &.{size}
+        flex-grow: 1
+        flex-basis: 0
+        max-width: 100%
+        
+      @media only screen and (min-width: width)
+        for n in (1..$grid-columns)
+          &.{size}{n}
+            flex-basis: (n / $grid-columns * 100)%
+            max-width: (n / $grid-columns * 100)%
+            
+          &.offset-{size}{n}
+            margin-left: (n / $grid-columns * 100)%
