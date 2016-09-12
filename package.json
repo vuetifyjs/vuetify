@@ -2,7 +2,7 @@
   "name": "vuetify",
   "description": "A Vue.js project",
   "author": "John Leider <john.j.leider@gmail.com>",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "main": "dist/vuetify",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config build/webpack.build.config.js --progress --hide-modules"
@@ -17,10 +17,8 @@
     "babel-preset-stage-2": "^6.13.0",
     "cross-env": "^1.0.6",
     "css-loader": "^0.23.1",
-    "extract-text-webpack-plugin": "^2.0.0-beta.4",
     "pug": "^2.0.0-beta3",
     "ress": "^1.1.1",
-    "sass-loader": "^4.0.0",
     "serialize-javascript": "^1.3.0",
     "style-loader": "^0.13.1",
     "stylus": "^0.54.5",
