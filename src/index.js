@@ -27,4 +27,4 @@ function plugin(Vue) {
   })
 }
 
-export default plugin
+module.exports = plugin

@@ -1,51 +1,47 @@
-function bind (el, binding, vnode) {
-  if (binding.modifiers.overlap) {
-    el.classList.add('badge--overlap')
-  }
-
-  if (binding.modifiers.icon) {
-    el.classList.add('badge--icon')
-  }
-
-  if (binding.modifiers.left) {
-    el.classList.add('badge--left')
-  }
-
-  el.setAttribute('data-badge', binding.arg)
-  el.classList.add('badge')
+var defaults = {
+  icon: false,
+  left: false,
+  overlap: false
 }
 
-function unbind (el, binding) {
-  if (binding.modifiers.overlap) {
-    el.classList.remove('badge--overlap')
-  }
+function directive (el, binding, bind) {
+  let config = {}
 
-  if (binding.modifiers.icon) {
-    el.classList.remove('badge--icon')
-  }
+  Object.assign(
+    config,
+    defaults,
+    binding.modifiers,
+    { value: binding.arg },
+    binding.value || {}
+  )
 
-  if (binding.modifiers.left) {
-    el.classList.remove('badge--left')
-  }
+  if (config.overlap) el.classList.add('badge--overlap')
+  if (config.icon)    el.classList.add('badge--icon')
+  if (config.left)    el.classList.add('badge--left')
 
-  el.removeAttribute('data-badge')
-  el.classList.remove('badge')
+  if (bind) {
+    el.setAttribute('data-badge', config.value)
+    el.classList.add('badge')
+  } else {
+    el.removeAttribute('data-badge')
+    el.classList.remove('badge')
+  }
 }
 
 export default {
-  bind (el, binding, vnode) {
-    bind(el, binding, vnode)
+  bind (el, binding) {
+    directive(el, binding, true)
   },
 
-  updated (el, binding, vnode) {
-    vnode.context.$nextTick(() => bind(el, binding, vnode))
+  updated (el, binding, v) {
+    v.context.$nextTick(() => directive(el, binding, true))
   },
 
-  componentUpdated (el, binding, vnode) {
-    vnode.context.$nextTick(() => bind(el, binding, vnode))
+  componentUpdated (el, binding, v) {
+    v.context.$nextTick(() => directive(el, binding, true))
   },
 
   unbind (el, binding) {
-    unbind(el, binding)
+    directive(el, binding, false)
   }
 }

@@ -1,15 +1,60 @@
 {
-  "name": "vuetify",
-  "description": "A Vue.js project",
-  "author": "John Leider <john.j.leider@gmail.com>",
-  "version": "0.1.3",
-  "main": "dist/vuetify",
-  "scripts": {
-    "build": "cross-env NODE_ENV=production webpack --config build/webpack.build.config.js --progress --hide-modules"
+  "_args": [
+    [
+      {
+        "raw": "vuetify",
+        "scope": null,
+        "escapedName": "vuetify",
+        "name": "vuetify",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "/home/homeserver/Sites/vuetify.js/docs"
+    ]
+  ],
+  "_from": "vuetify@latest",
+  "_id": "vuetify@0.1.3",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/vuetify",
+  "_nodeVersion": "6.4.0",
+  "_npmOperationalInternal": {
+    "host": "packages-16-east.internal.npmjs.com",
+    "tmp": "tmp/vuetify-0.1.3.tgz_1473643269596_0.17287911102175713"
+  },
+  "_npmUser": {
+    "name": "johnjleider",
+    "email": "john.j.leider@gmail.com"
+  },
+  "_npmVersion": "3.10.3",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "vuetify",
+    "scope": null,
+    "escapedName": "vuetify",
+    "name": "vuetify",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#DEV:/",
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/vuetify/-/vuetify-0.1.3.tgz",
+  "_shasum": "c0de6203960814c2281b30e4b23b89b9e6cf909e",
+  "_shrinkwrap": null,
+  "_spec": "vuetify",
+  "_where": "/home/homeserver/Sites/vuetify.js/docs",
+  "author": {
+    "name": "John Leider",
+    "email": "john.j.leider@gmail.com"
   },
   "dependencies": {
     "vue": "^2.0.0-rc.5"
   },
+  "description": "A Vue.js project",
   "devDependencies": {
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",
@@ -25,5 +70,25 @@
     "stylus-loader": "^2.1.1",
     "vue-loader": "^9.0.0",
     "webpack": "^2.1.0-beta.22"
-  }
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "c0de6203960814c2281b30e4b23b89b9e6cf909e",
+    "tarball": "https://registry.npmjs.org/vuetify/-/vuetify-0.1.3.tgz"
+  },
+  "gitHead": "533bb7b5e4cc316745d47e6ea5c26658719c64e1",
+  "main": "dist/vuetify",
+  "maintainers": [
+    {
+      "name": "johnjleider",
+      "email": "john.j.leider@gmail.com"
+    }
+  ],
+  "name": "vuetify",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack --config build/webpack.build.config.js --progress --hide-modules"
+  },
+  "version": "0.1.3"
 }

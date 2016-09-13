@@ -3,6 +3,7 @@ const webpack = require('webpack')
 
 module.exports = {
   devtool: false,
+  watch: true,
   entry: {
     app: './src/index.js'
   },

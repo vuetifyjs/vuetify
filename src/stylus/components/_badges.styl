@@ -3,18 +3,18 @@
   padding-right: 22px
   
   &:after
+    color: $badge-color
     content: attr(data-badge)
-    color: #fff
     display: flex
     position: absolute
-    font-family: $body-font-family
-    top: -11px
-    right: 0
+    font-family: $badge-font-family
+    top: $badge-top
+    right: $badge-right
     background-color: $primary-color
     border-radius: 50%
-    height: 22px
-    width: 22px
-    font-size: .9rem
+    height: $badge-height
+    width: $badge-width
+    font-size: $badge-font-size
     justify-content: center
     align-items: center
     flex-direction: row
