@@ -1,31 +1,43 @@
-function init (el, binding, vnode) {
-  el.setAttribute('data-sidebar', binding.arg)
+var defaults = {}
+
+function directive (el, binding, v) {
+  let config = {}
+
+  Object.assign(
+    config,
+    defaults,
+    binding.modifiers,
+    { value: binding.arg },
+    binding.value || {}
+  )
+
+  el.setAttribute('data-sidebar', config.value)
 
   el.onclick = e => {
     e.preventDefault()
     
-    vnode.context.$vuetify.bus.pub(`sidebar:toggle:${binding.arg}`)
+    v.context.$vuetify.bus.pub(`sidebar:toggle:${config.value}`)
   }
 }
 
-function unbind (el) {
-  el.removeAttribute('onclick')
-}
-
 export default {
-  bind (el, binding, vnode) {
-    vnode.context.$vuetify.load.call(vnode.context, () => init(el, binding, vnode))
+  bind (el, binding, v) {
+    v.context.$vuetify.load.call(
+      v.context,
+      () => directive(el, binding, v)
+    )
   },
 
-  updated (el) {
-    unbind(el)
+  updated (el, binding, v) {
+    directive(el, binding, v)
   },
 
-  componentUpdated (el, binding, vnode) {
-    vnode.context.$vuetify.load.call(vnode.context, () => init(el, binding, vnode))
+  componentUpdated (el, binding, v) {
+    directive(el, binding, v)
   },
 
   unbind (el) {
-    unbind(el)
+    el.removeAttribute('data-sidebar')
+    el.removeAttribute('onclick')
   }
 }

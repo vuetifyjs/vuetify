@@ -1,6 +1,7 @@
 var defaults = {
   hover: false
 }
+
 function dropdown (el, config) {
   const component = document.getElementById(config.value)
   let width = 0
@@ -53,17 +54,11 @@ export default {
   },
 
   updated (el, binding, v) {
-    v.context.$vuetify.load.call(
-      v.context,
-      () => directive(el, binding, v)
-    )
+    directive(el, binding, v)
   },
 
   componentUpdated (el, binding, v) {
-    v.context.$vuetify.load.call(
-      v.context,
-      () => directive(el, binding, v)
-    )
+    directive(el, binding, v)
   },
 
   unbind (el) {
