@@ -1,3 +1,5 @@
+var defaults = {}
+
 function setPositions (tooltip, el, position) {
     if (position === 'top') {
       tooltip.style.top = `${el.offsetTop - (tooltip.clientHeight)}px`
@@ -14,12 +16,21 @@ function setPositions (tooltip, el, position) {
     }
 }
 
-function init (el, binding, vnode) {
+function directive (el, binding) {
   const tooltip = document.createElement('div')
+  let config = {}
+
+  Object.assign(
+    config,
+    defaults,
+    binding.modifiers,
+    { value: binding.arg },
+    binding.value || {}
+  )
 
   tooltip.classList.add('tooltip')
-  tooltip.classList.add(`tooltip--${binding.arg}`)
-  tooltip.innerHTML = binding.value
+  tooltip.classList.add(`tooltip--${config.value}`)
+  tooltip.innerHTML = config.html
 
   if (el.parentNode.lastChild === el) {
     el.parentNode.appendChild(tooltip)
@@ -27,12 +38,12 @@ function init (el, binding, vnode) {
     el.parentNode.insertBefore(tooltip, el.nextSibling)
   }
 
-  setTimeout(() => setPositions(tooltip, el, binding.arg), 200)
+  setTimeout(() => setPositions(tooltip, el, config.value), 200)
 
   let timeout = {}
 
   el.onmouseenter = function () {
-    setPositions(tooltip, el, binding.arg)
+    setPositions(tooltip, el, config.value)
     
     timeout = setTimeout(() => tooltip.classList.add('tooltip--active'), 100)
   }
@@ -45,23 +56,26 @@ function init (el, binding, vnode) {
 }
 
 export default {
-  bind (el, binding, vnode) {
-    vnode.context.$vuetify.load.call(vnode.context, () => init(el, binding, vnode))
+  bind (el, binding, v) {
+    v.context.$vuetify.load.call(
+      v.context,
+      () => directive(el, binding, v)
+    )
+  },
+
+  updated (el, binding, v) {
+    el.nextSibling.remove()
+    directive(el, binding, v)
+  },
+
+  componentUpdated (el, binding, v) {
+    el.nextSibling.remove()
+    directive(el, binding, v)
   },
 
   unbind (el) {
     el.nextSibling.remove()
     el.removeAttribute('mouseenter')
     el.removeAttribute('mouseleave')
-  },
-
-  componentUpdated (el, binding, vnode) {
-    el.nextSibling.remove()
-    vnode.context.$vuetify.load.call(vnode.context, () => init(el, binding, vnode))
-  },
-
-  updated (el, binding, vnode) {
-    el.nextSibling.remove()
-    vnode.context.$vuetify.load.call(vnode.context, () => init(el, binding, vnode))
   }
 }
