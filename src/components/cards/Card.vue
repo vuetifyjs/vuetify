@@ -13,7 +13,7 @@
     
     props: {
       height: {
-        type: [String, Number],
+        type: String,
         default: 'auto'
       },
 
