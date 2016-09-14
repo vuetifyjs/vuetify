@@ -1,10 +1,16 @@
 {
+  "name": "vuetify",
+  "version": "0.2.0",
   "author": {
     "name": "John Leider",
     "email": "john.j.leider@gmail.com"
   },
+  "main": "dist/vuetify",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack --config build/webpack.build.config.js --progress --hide-modules"
+  },
   "dependencies": {
-    "vue": "^2.0.0-rc.5"
+    "vue": "^2.0.0-rc.6"
   },
   "description": "A Vue.js project",
   "devDependencies": {
@@ -21,18 +27,7 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^2.1.1",
     "vue-loader": "^9.0.0",
+    "vue-template-compiler": "^2.0.0-rc.6",
     "webpack": "^2.1.0-beta.22"
-  },
-  "main": "dist/vuetify",
-  "maintainers": [
-    {
-      "name": "johnjleider",
-      "email": "john.j.leider@gmail.com"
-    }
-  ],
-  "name": "vuetify",
-  "scripts": {
-    "build": "cross-env NODE_ENV=production webpack --config build/webpack.build.config.js --progress --hide-modules"
-  },
-  "version": "0.1.3"
+  }
 }
