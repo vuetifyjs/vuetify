@@ -34,6 +34,7 @@ export default {
 
     open () {
       this.active = true
+      this.$vuetify.bus.pub(`${this.$options.name}:opened`, this.id)
     },
 
     close (e) {

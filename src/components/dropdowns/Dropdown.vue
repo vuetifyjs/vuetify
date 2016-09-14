@@ -6,11 +6,10 @@
     v-bind:id="id"
     ref="dropdown"
   )
-    li(v-for="item in items")
-      a(
-        v-bind:href="item.href"
-        v-html="item.text"
-      )
+    v-dropdown-item(
+      v-for="item in items"
+      v-bind:item="item"
+    )
     slot
 </template>
 
@@ -46,6 +45,19 @@
         return {
           'dropdown--open': this.active,
           'dropdown--open-from-right': this.right
+        }
+      }
+    },
+
+    mounted () {
+      this.$vuetify.bus.sub(`${this.$options.name}:opened`, this.opened)
+    },
+
+    methods: {
+      opened (id) {
+        console.log(id)
+        if (id !== this.id) {
+          this.active = false
         }
       }
     }

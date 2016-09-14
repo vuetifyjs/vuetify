@@ -21,16 +21,18 @@
   li
     text-align: left
     
-    a
-      text-decoration: none
-      display: inline-block
-      transition: all 0.2s ease-out
-      text-transform: none
-      padding: 1rem
-      width: 100%
-      font-weight: 500
-      font-size: 1rem
-      color: $primary-color
-      
-      &:hover
-        background-color: rgba(0, 0, 0, 0.1)
+  &__item
+    text-decoration: none
+    display: inline-flex
+    justify-content: space-between
+    align-items: center
+    transition: all 0.2s ease-out
+    text-transform: none
+    padding: 1rem
+    width: 100%
+    font-weight: 500
+    font-size: 1rem
+    color: $primary-color
+    
+    &:hover
+      background-color: rgba(0, 0, 0, 0.1)

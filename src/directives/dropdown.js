@@ -5,16 +5,21 @@ var defaults = {
 function dropdown (el, config) {
   const component = document.getElementById(config.value)
   let width = 0
+  let height = 0
 
   if (component.clientWidth > el.clientWidth
       && component.hasAttribute('data-right')
     ) {
-    width = component.clientWidth - el.clientWidth - 1
+    width = component.clientWidth - el.clientWidth
+  }
+
+  if (config.bottom) {
+    height = el.clientHeight
   }
 
   component.style.minWidth = `${el.clientWidth}px`
   component.style.left = `${el.offsetLeft - width}px`
-  component.style.top = `${el.offsetTop}px`
+  component.style.top = `${el.offsetTop + height}px`
 }
 
 function directive (el, binding, v) {
