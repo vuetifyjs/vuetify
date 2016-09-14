@@ -1,6 +1,5 @@
 import Vuetify from './util/vuetify'
 import Directives from './directives/_index'
-import Functional from './components/functional/_index'
 import Components from './components/_index'
 
 function plugin(Vue) {
@@ -10,10 +9,6 @@ function plugin(Vue) {
 
   Object.keys(Directives).forEach(key => {
     Vue.directive(key, Directives[key])
-  })
-
-  Object.keys(Functional).forEach(key => {
-    Vue.component(key, Functional[key])
   })
   
   Object.keys(Components).forEach(key => {

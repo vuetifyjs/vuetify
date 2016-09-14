@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import Eventable from '../mixins/eventable'
+  import Eventable from '../../mixins/eventable'
 
   export default {
     name: 'tabs',

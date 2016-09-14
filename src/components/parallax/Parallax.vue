@@ -14,7 +14,7 @@
 </template>
 
 <script>
-  import Translatable from '../mixins/translatable'
+  import Translatable from '../../mixins/translatable'
 
   export default {
     name: 'parallax',
@@ -46,11 +46,17 @@
 
     methods: {
       init () {
-        this.$refs.img.addEventListener('load', () => {
+        if (this.$refs.img.complete) {
           this.translate()
           this.listeners()
           this.$vuetify.bus.pub('parallax:ready')
-        })
+        } else {
+          this.$refs.img.addEventListener('load', () => {
+            this.translate()
+            this.listeners()
+            this.$vuetify.bus.pub('parallax:ready')
+          })
+        }
       },
 
       objHeight () {

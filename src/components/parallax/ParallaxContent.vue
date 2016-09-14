@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import Translatable from '../mixins/translatable'
+  import Translatable from '../../mixins/translatable'
 
   export default {
     name: 'parallax-content',
@@ -37,9 +37,6 @@
           transform: `translate3d(0, ${this.parallax - (this.height * .35)}px, 0)`
         }
       }
-    },
-
-    mounted () {
     },
 
     methods: {

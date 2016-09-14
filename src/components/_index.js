@@ -1,65 +1,49 @@
-import VBreadcrumbs from './Breadcrumbs.vue'
-import VBtn from './Button.vue'
-import VCard from './Card.vue'
-import VCardTitle from './CardTitle.vue'
-import VCheckbox from './Checkbox.vue'
-import VChip from './Chip.vue'
-import VCollapsible from './Collapsible.vue'
-import VCollapsibleBody from './CollapsibleBody.vue'
-import VCollapsibleHeader from './CollapsibleHeader.vue'
-import VDropdown from './Dropdown.vue'
-import VDropdownItem from './DropdownItem.vue'
-import VIcon from './Icon.vue'
-import VModal from './Modal.vue'
-import VFooter from './Footer.vue'
-import VNavbar from './Navbar.vue'
-import VNavbarItems from './NavbarItems.vue'
-import VNavbarItem from './NavbarItem.vue'
-import VParallax from './Parallax.vue'
-import VParallaxContent from './ParallaxContent.vue'
-import VRadio from './Radio.vue'
-import VSelect from './Select.vue'
-import VSidebar from './Sidebar.vue'
-import VSidebarItem from './SidebarItem.vue'
-import VSidebarItems from './SidebarItems.vue'
-import VSlider from './Slider.vue'
-import VSliderItem from './SliderItem.vue'
-import VTable from './Table.vue'
-import VTab from './Tab.vue'
-import VTabContent from './TabContent.vue'
-import VTabs from './Tabs.vue'
-import VTextInput from './TextInput.vue'
+import * as Buttons from './buttons/index'
+import * as Cards from './cards/index'
+import * as Chips from './chips/index'
+import * as Collapsible from './collapsible/index'
+import * as Dropdowns from './dropdowns/index'
+import * as Footer from './footer/index'
+import * as Forms from './forms/index'
+import * as Grid from './grid/index'
+import * as Icons from './icons/index'
+import * as Lists from './lists/index'
+import * as Modal from './modal/index'
+import * as Navbar from './navbar/index'
+import * as Parallax from './parallax/index'
+import * as Sidebar from './sidebar/index'
+import * as Slider from './slider/index'
+import * as Tabs from './tabs/index'
+import * as Toasts from './toasts/index'
 
-export default {
-  VBreadcrumbs,
-  VBtn,
-  VCard,
-  VCardTitle,
-  VCheckbox,
-  VChip,
-  VCollapsible,
-  VCollapsibleBody,
-  VCollapsibleHeader,
-  VDropdown,
-  VDropdownItem,
-  VIcon,
-  VModal,
-  VFooter,
-  VNavbar,
-  VNavbarItem,
-  VNavbarItems,
-  VParallax,
-  VParallaxContent,
-  VRadio,
-  VSelect,
-  VSidebar,
-  VSidebarItem,
-  VSidebarItems,
-  VSlider,
-  VSliderItem,
-  VTable,
-  VTab,
-  VTabContent,
-  VTabs,
-  VTextInput
+function bootstrap (...components) {
+  let entries = {}
+
+  components.forEach(component => {
+    Object.keys(component).forEach(key => {
+      entries[`V${key}`] = component[key]
+    })
+  })
+
+  return entries
 }
+
+export default bootstrap(
+  Buttons,
+  Cards,
+  Chips,
+  Collapsible,
+  Dropdowns,
+  Footer,
+  Forms,
+  Grid,
+  Icons,
+  Lists,
+  Modal,
+  Navbar,
+  Parallax,
+  Sidebar,
+  Slider,
+  Tabs,
+  Toasts
+)

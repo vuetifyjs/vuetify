@@ -16,6 +16,11 @@ export default {
     this.$vuetify.load.call(this, this.init)
   },
 
+  beforeDestroy () {
+    document.removeEventListener('scroll', this.translate)
+    document.removeEventListener('resize', this.translate)
+  },
+
   methods: {
     listeners () {
       document.addEventListener('scroll', this.translate)
@@ -29,7 +34,7 @@ export default {
         (this.window_bottom - this.top) / (this.height + this.window_height)
       )
       
-      this.parallax = Math.round((this.parallax_dist * percent_scrolled))
+      this.parallax = Math.round(this.parallax_dist * percent_scrolled)
 
       if (this.translated) {
         this.translated()

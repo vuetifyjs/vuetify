@@ -9,7 +9,7 @@
 </template>
 
 <script>
-  import Toggleable from '../mixins/toggleable'
+  import Toggleable from '../../mixins/toggleable'
 
   export default {
     name: 'sidebar',
