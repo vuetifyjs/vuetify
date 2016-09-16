@@ -1,27 +1,43 @@
 .breadcrumbs
   display: flex
-  justify-content: flex-end
+  align-items: center
   margin: .5rem 0
   list-style-type: none
-  position: relative
+  width: 100%
   
-  li
-    font-size: .9rem
-    
+  li    
     &:not(:last-child):after
-      font-family: 'Material Icons'
-      content: 'keyboard_arrow_right'
-      vertical-align: middle
+      color: $grey.lighten-1
+      content: attr(data-divider)
+      vertical-align: text-top
       
     &:last-child a
-      @extend .blue--text
+      color: $primary-color
       
-    a
-      display: inline-block
-      padding: $breadcrumb-padding
-      height: $breadcrumb-height
-      text-decoration: none
-      line-height: $breadcrumb-height
-      position: relative
-      transition: $primary-transition
-  
+      &:hover
+        color: $primary-color-accent
+      
+  &--with-icons
+    li
+      &:not(:last-child):after
+        font-family: 'Material Icons'
+      
+        
+  &__item
+    align-items: center
+    color: $grey.lighten-1
+    display: inline-flex
+    font-size: 1rem
+    padding: $breadcrumb-padding
+    height: $breadcrumb-height
+    text-decoration: none
+    line-height: $breadcrumb-height
+    position: relative
+    transition: $primary-transition
+    
+    &:hover
+      color: $grey.darken-1
+      
+    &--disabled
+      color: $grey.lighten-2
+      pointer-events: none

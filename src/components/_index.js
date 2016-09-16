@@ -1,3 +1,4 @@
+import Breadcrumbs from './breadcrumbs/index'
 import * as Buttons from './buttons/index'
 import * as Cards from './cards/index'
 import * as Chips from './chips/index'
@@ -29,6 +30,7 @@ function bootstrap (...components) {
 }
 
 export default bootstrap(
+  Breadcrumbs,
   Buttons,
   Cards,
   Chips,
