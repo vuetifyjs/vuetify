@@ -31,9 +31,6 @@
     flex: 0 0 auto
     padding-right: $grid-gutter-half
     padding-left: $grid-gutter-half
-    
-    &--spacer
-      flex-grow: 1
         
     for size, width in $grid-breakpoints
       &.{size}
@@ -49,3 +46,6 @@
             
           &.offset-{size}{n}
             margin-left: (n / $grid-columns * 100)%
+            
+.col--spacer
+  flex-grow: 1

@@ -1,10 +1,54 @@
 .slider
   height: 500px
   width: 100%
-  background: #ddd
+  background: $shades.black
   position: relative
   @extend .z-depth-1
   
+  &__item
+    height: 100%
+    width: 100%
+    background: #ccc
+    position: relative
+    transition: .6s ease-out
+    background-position: center center
+    background-size: cover
+    background-repeat: no-repeat
+    display: none
+    justify-content: flex-start
+    align-items: flex-start
+    padding: calc(5% + 2rem)
+    color: #fff
+    z-index: 1
+    
+    h1
+      color: $shades.white
+      font-weight: 100
+      font-size: 5rem
+      
+    &--active
+      display: block
+      left: 0
+      transform: translate3d(0, 0, 0)
+      
+    &--left
+      display: block
+      position: absolute
+      top: 0
+      transform: translate3d(-100%, 0, 0)
+    
+    &--right
+      display: block
+      position: absolute
+      top: 0
+      transform: translate3d(100%, 0, 0)
+      
+    &--next&--left
+      transform: translate3d(100%, 0, 0) !important
+      
+    &--next&--right
+      transform: translate3d(-100%, 0, 0) !important
+      
   &__left
     position: absolute
     top: calc(50% - 20px)
@@ -55,18 +99,22 @@
       width: 1.7rem
       margin: 0 .4rem
       
-      a
-        color: rgba(255, 255, 255, .5)
-        transition: $primary-transition
-        
-        &.active
-          color: rgba(255, 255, 255, .7)
-        
-        &:hover
-          color: rgba(255, 255, 255, 1)
+    &__item
+      @extend .z-depth-1
+      background: rgba(255, 255, 255, .7) !important
+      display: block
+      width: 20px
+      height: 20px
+      border-radius: 50%
+      transition: $primary-transition
       
-      i
-        font-size: 1.7rem
+      &.active
+        @extend .z-depth-1-half
+        background: rgba(255, 255, 255, 1)
+        transform: scale(1.2)
+      
+      &:hover
+        background: rgba(255, 255, 255, 1)
   
   &__progress
     position: absolute
@@ -77,24 +125,3 @@
     height: 6px
     background: rgba(255, 255, 255, .7)
     border-bottom: 1px solid rgba(0, 0, 0, .1)
-  
-  &__item
-    height: 100%
-    width: 100%
-    background: #ccc
-    transition: .6s ease-out
-    position: absolute
-    top: 0
-    left: 0
-    background-position: center center
-    background-size: cover
-    background-repeat: no-repeat
-    display: flex
-    justify-content: flex-start
-    align-items: flex-start
-    padding: calc(5% + 2rem)
-    color: #fff
-    
-    h1
-      font-weight: 100
-      font-size: 5rem

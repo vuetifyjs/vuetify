@@ -12,19 +12,18 @@
       @click="next"
     )
 
-    ul(class="slider__controls")
-      li(v-for="(i, index) in items.length") 
+    ul(
+      class="slider__controls"
+    )
+      li(v-for="(n, index) in items.length") 
         a(
+          class="slider__controls__item"
           href="#!",
           v-bind:class="{ 'active': index === current }"
           @click="select(index)"
         )
-          v-icon fiber_manual_record
 
-    v-slider-item(
-      v-bind:item="active"
-      v-if="active"
-    )
+    slot
 </template>
 
 <script>
@@ -33,8 +32,18 @@
 
     data () {
       return {
-        current: 0,
+        current: 1,
+        items: [],
+        previous: 0,
+        transitioning: false,
         cycle_interval: {},
+      }
+    },
+
+    watch: {
+      current () {
+        clearInterval(this.cycle_interval)
+        this.$nextTick(this.startCycle)
       }
     },
 
@@ -52,13 +61,6 @@
       }
     },
 
-    watch: {
-      current () {
-        clearInterval(this.cycle_interval)
-        this.startCycle()
-      }
-    },
-
     props: {
       cycle: {
         type: Boolean,
@@ -70,20 +72,9 @@
         default: 5000
       },
 
-      items: {
-        type: Array,
-        default: () => []
-      },
-
       progress: {
         type: Boolean,
         default: true
-      }
-    },
-
-    computed: {
-      active () {
-        return this.items[this.current]
       }
     },
 
@@ -92,7 +83,22 @@
     },
 
     methods: {
+      change (direction) {
+        this.$vuetify.bus.pub(`slider-item:activate:${this.items[this.current]}`, direction)
+        this.$vuetify.bus.pub(`slider-item:deactivate:${this.items[this.previous]}`, direction)
+        this.transitioning = true
+        
+        const vnode = this.$children.find(i => i._uid === this.items[this.current])
+
+        setTimeout(() => {
+          this.transitioning = false
+        }, 600)
+      },
+
       init () {
+        this.items = this.$children.filter(i => i.$el.classList.contains('slider__item')).map(i => i._uid)
+        this.change()
+
         if (this.cycle) {
           this.startCycle()
         }
@@ -103,24 +109,47 @@
       },
 
       next () {
-        if (this.current === this.items.length - 1) {
-          this.current = 0
+        if (this.transitioning) {
+          return
+        }
+
+        if (this.current + 1 < this.items.length) {
+          this.previous = this.current
+          this.current = this.current + 1
+          this.change('left')
+          
         } else {
-          this.current++
+          this.previous = this.current
+          this.current = 0
+          this.change('left')
         }
       },
 
       prev () {
-        if (this.current === 0) {
-          this.current = this.items.length - 1
+        if (this.transitioning) {
+          return
+        }
+
+        if (this.current !== 0) {
+          this.previous = this.current
+          this.current = this.current - 1
+          this.change('right')
+          
         } else {
-          this.current--
-        }        
+          this.previous = this.current
+          this.current = this.items.length - 1
+          this.change('right')
+        }       
       },
 
       select (i) {
-        this.progress_time = 0
+        if (this.transitioning) {
+          return
+        }
+
+        this.previous = this.current
         this.current = i
+        this.change(this.previous < this.current ? 'left' : 'right')
       }
     }
   }

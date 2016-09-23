@@ -1,0 +1,66 @@
+.pagination
+  list-style-type: none
+  display: flex
+  align-items: center
+  
+  a
+    transition: $secondary-transition
+    
+    &:hover
+      @extend .z-depth-1-half
+      
+  &--circle
+    .pagination__item,
+    .pagination__more,
+    .pagination__navigation
+      border-radius: 50%
+  
+  &__item
+    @extend .z-depth-1
+    border-radius: 4px
+    color: $shades.black
+    display: inline-flex
+    justify-content: center
+    align-items: center
+    background: transparent
+    height: 2rem
+    width: 2rem
+    margin: .3rem
+    text-decoration: none
+    transform: scale(.8)
+    
+    &--active
+      @extend .z-depth-1-half
+      background: $primary-color
+      color: $shades.white
+      transform: scale(1.15)
+    
+  &__navigation
+    @extend .z-depth-1
+    display: inline-flex
+    justify-content: center
+    align-items: center
+    text-decoration: none
+    color: $grey.darken-2
+    height: 2rem
+    
+    border-radius: 4px
+    width: 2rem
+    margin: .3rem
+    
+    .icon
+      font-size: 2rem
+      transition: $secondary-transition
+      vertical-align: middle
+      
+    &--disabled
+      opacity: .6
+      pointer-events: none
+      
+  &__more
+    margin: .3rem
+    display: inline-flex
+    align-items: flex-end
+    justify-content: center
+    height: 2rem
+    width: 2rem

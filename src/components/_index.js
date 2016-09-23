@@ -11,6 +11,7 @@ import * as Icons from './icons/index'
 import * as Lists from './lists/index'
 import * as Modal from './modal/index'
 import * as Navbar from './navbar/index'
+import Pagination from './pagination/index'
 import * as Parallax from './parallax/index'
 import * as Sidebar from './sidebar/index'
 import * as Slider from './slider/index'
@@ -43,6 +44,7 @@ export default bootstrap(
   Lists,
   Modal,
   Navbar,
+  Pagination,
   Parallax,
   Sidebar,
   Slider,

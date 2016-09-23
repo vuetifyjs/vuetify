@@ -4,44 +4,81 @@
       v-bind:class="classes"
       v-bind:style="styles"
     )
-      h1(
-        v-html="item.text"
-      )
+      slot
 </template>
 
 <script>
+  import Eventable from '../../mixins/eventable'
+
   export default {
     name: 'slider-item',
 
+    mixins: [
+      Eventable
+    ],
+
+    data () {
+      return {
+        active: false,
+        left: false,
+        right: false,
+        next: false
+      }
+    },
+
     props: {
-      current: {
-        type: Boolean,
-        default: false
-      },
-
-      item: {
-        type: Object,
+      src: {
+        type: String,
         required: true
-      },
-
-      past: {
-        type: Boolean,
-        default: false
       }
     },
 
     computed: {
       classes () {
         return {
-          'slider__item--active': this.current,
-          'slider__item--left': this.past
+          'slider__item--active': this.active,
+          'slider__item--left': this.left,
+          'slider__item--right': this.right,
+          'slider__item--next': this.next
         }
+      },
+
+      events () {
+        return [
+          [`slider-item:activate:${this._uid}`, d => this.activate(d)],
+          [`slider-item:deactivate:${this._uid}`, d => this.deactivate(d)]
+        ]
       },
 
       styles () {
         return { 
-          backgroundImage: `url(${this.item.bg})`
+          backgroundImage: `url(${this.src})`
         }
+      }
+    },
+
+    methods: {
+      activate (direction) {
+        this[direction] = true
+        this.next = true
+        this.active = true
+
+        setTimeout(() => {
+          this.next = false
+          this[direction] = false
+        }, 1)
+      },
+
+      deactivate (direction) {
+        setTimeout(() => {
+          this[direction] = true
+        }, 1)
+
+        // Need to figure out transition event for this
+        setTimeout(() => {
+          this.active = false
+          this[direction] = false
+        }, 600)
       }
     }
   }

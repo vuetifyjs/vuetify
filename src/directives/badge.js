@@ -34,11 +34,11 @@ export default {
   },
 
   updated (el, binding, v) {
-    v.context.$nextTick(() => directive(el, binding, true))
+    directive(el, binding, true)
   },
 
   componentUpdated (el, binding, v) {
-    v.context.$nextTick(() => directive(el, binding, true))
+    directive(el, binding, true)
   },
 
   unbind (el, binding) {

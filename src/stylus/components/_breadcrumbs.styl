@@ -1,6 +1,7 @@
 .breadcrumbs
   display: flex
   align-items: center
+  flex-wrap: wrap
   margin: .5rem 0
   list-style-type: none
   width: 100%
@@ -12,7 +13,7 @@
       vertical-align: text-top
       
     &:last-child a
-      color: $primary-color
+      color: $grey.lighten-1
       
       &:hover
         color: $primary-color-accent
@@ -25,7 +26,7 @@
         
   &__item
     align-items: center
-    color: $grey.lighten-1
+    color: $primary-color
     display: inline-flex
     font-size: 1rem
     padding: $breadcrumb-padding

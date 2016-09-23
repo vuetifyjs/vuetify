@@ -21,11 +21,19 @@ for color_name, color in $colors
         
       .{color_name}--text
         color color_value !important
+        
+      .{color_name}--after
+        &:after
+          background: color_value !important
     else if color_type != 'shades'
       .{color_name}
         &.{color_type}
           background-color color_value !important
           border-color: color_value !important
+        
+        &.{color_type}--after
+          &:after
+            background-color: color_value !important
         
       .{color_name}--text
         &.text--{color_type}

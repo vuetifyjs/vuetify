@@ -5,7 +5,7 @@
   font-size: .9rem
   padding: .5rem
   position: absolute
-  z-index: 999999999999
+  z-index: -1
   opacity: 0
   transition: $primary-transition
   @extend .z-depth-1
@@ -62,4 +62,5 @@
   
   &--active
     opacity: 1
+    z-index: 999999999999
     
