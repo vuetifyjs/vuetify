@@ -47,10 +47,10 @@
     watch: {
       active (bool) {
         if (bool) {
-          this.open()
-        } else {
-          this.close()
+          return this.open()
         }
+
+        this.close()
       }
     },
 
@@ -66,13 +66,13 @@
       },
 
       toggle (uid) {
-        if (uid != this._uid
+        if (uid !== this._uid
             && !this.$parent.params.expand
         ) {
           return this.active = false
         }
 
-        if (uid == this._uid) {
+        if (uid === this._uid) {
           this.active = !this.active
         }
       }
