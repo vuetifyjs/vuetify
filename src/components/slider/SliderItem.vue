@@ -66,13 +66,13 @@
         setTimeout(() => {
           this.next = false
           this[direction] = false
-        }, 1)
+        }, 10)
       },
 
       deactivate (direction) {
         setTimeout(() => {
           this[direction] = true
-        }, 1)
+        }, 10)
 
         // Need to figure out transition event for this
         setTimeout(() => {

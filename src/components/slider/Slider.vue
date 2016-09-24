@@ -32,9 +32,9 @@
 
     data () {
       return {
-        current: 1,
+        current: 0,
         items: [],
-        previous: 0,
+        previous: 2,
         transitioning: false,
         cycle_interval: {},
       }
@@ -88,15 +88,24 @@
         this.$vuetify.bus.pub(`slider-item:deactivate:${this.items[this.previous]}`, direction)
         this.transitioning = true
         
-        const vnode = this.$children.find(i => i._uid === this.items[this.current])
+        const node = this.$children.find(i => i._uid === this.items[this.current])
 
-        setTimeout(() => {
+        if (!node) {
+          return
+        }
+
+        var cb = e => {
           this.transitioning = false
-        }, 600)
+
+          e.target.removeEventListener(e.type, cb)
+        }
+
+        node.$el.addEventListener('transitionend', cb)
       },
 
       init () {
         this.items = this.$children.filter(i => i.$el.classList.contains('slider__item')).map(i => i._uid)
+        this.previous = this.items.length - 1
         this.change()
 
         if (this.cycle) {
