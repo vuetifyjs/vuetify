@@ -55,7 +55,6 @@
 
     methods: {
       opened (id) {
-        console.log(id)
         if (id !== this.id) {
           this.active = false
         }
