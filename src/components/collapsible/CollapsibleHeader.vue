@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import Transitionable from '../../util/transitionable'
+  import Transitionable from '../../mixins/transitionable'
   export default {
     name: 'collapsible-header',
 
@@ -17,8 +17,7 @@
 
     data () {
       return {
-        body_uid: null,
-        transitioning: false
+        body_uid: null
       }
     },
     

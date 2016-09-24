@@ -1,4 +1,10 @@
 export default {
+  data () {
+    return {
+      transitioning: false
+    }
+  },
+  
   mounted () {
     this.transitions.forEach(([el, cb]) => {
       el.addEventListener('transitionend', cb, false)
