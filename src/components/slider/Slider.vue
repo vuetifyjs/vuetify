@@ -37,6 +37,7 @@
         previous: 2,
         transitioning: false,
         cycle_interval: {},
+        hydrated: false
       }
     },
 
@@ -84,23 +85,26 @@
 
     methods: {
       change (direction) {
-        this.$vuetify.bus.pub(`slider-item:activate:${this.items[this.current]}`, direction)
-        this.$vuetify.bus.pub(`slider-item:deactivate:${this.items[this.previous]}`, direction)
-        this.transitioning = true
-        
         const node = this.$children.find(i => i._uid === this.items[this.current])
 
-        if (!node) {
-          return
+        if (this.hydrated) {
+          this.transitioning = true
         }
 
         var cb = e => {
           this.transitioning = false
 
+          if (!this.hydrated) {
+            this.hydrated = true
+          }
+
           e.target.removeEventListener(e.type, cb)
         }
 
         node.$el.addEventListener('transitionend', cb)
+
+        this.$vuetify.bus.pub(`slider-item:deactivate:${this.items[this.previous]}`, direction)
+        this.$vuetify.bus.pub(`slider-item:activate:${this.items[this.current]}`, direction)
       },
 
       init () {

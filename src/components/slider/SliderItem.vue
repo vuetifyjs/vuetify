@@ -78,7 +78,7 @@
         setTimeout(() => {
           this.active = false
           this[direction] = false
-        }, 600)
+        }, 700)
       }
     }
   }
