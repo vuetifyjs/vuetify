@@ -4,25 +4,34 @@
   )
     div(
       class="slider__left"
-      @click="prev"
     )
+      v-btn(
+        icon
+        @click.native="prev"
+      )
+        v-icon chevron_left
 
     div(
       class="slider__right"
-      @click="next"
     )
+      v-btn(
+        icon
+        @click.native="next"
+      )
+        v-icon chevron_right
 
-    ul(
+    div(
       class="slider__controls"
     )
-      li(v-for="(n, index) in items.length") 
-        a(
-          class="slider__controls__item"
-          href="#!",
-          v-bind:class="{ 'active': index === current }"
-          @click="select(index)"
-        )
-
+      v-btn(
+        class="slider__controls__item"
+        icon
+        v-for="(n, index) in items.length"
+        v-bind:class="{ 'slider__controls__item--active': index === current }"
+      )
+        v-icon(
+          @click.native="select(index)"
+        ) fiber_manual_record
     slot
 </template>
 
@@ -48,20 +57,6 @@
       }
     },
 
-    components: {
-      'v-slider-progress': {
-        name: 'slider-progress',
-
-        functional: true,
-
-        render: (h, { data }) => {
-          data.staticClass = 'slider__progress'
-          
-          return h('div', data)
-        }
-      }
-    },
-
     props: {
       cycle: {
         type: Boolean,
@@ -71,11 +66,6 @@
       interval: {
         type: Number,
         default: 5000
-      },
-
-      progress: {
-        type: Boolean,
-        default: true
       }
     },
 
