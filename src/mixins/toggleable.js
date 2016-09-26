@@ -42,11 +42,13 @@ export default {
         return
       }
       
-      if (e.target === this.activator
-          || this.activator.contains(e.target)
-      ) {
-        return
-      }
+      try {
+        if (e.target === this.activator
+            || this.activator.contains(e.target)
+        ) {
+          return
+        }
+      } catch (e) {}
 
       this.active = false
     },
