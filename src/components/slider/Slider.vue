@@ -43,17 +43,9 @@
       return {
         current: 0,
         items: [],
-        previous: 2,
         transitioning: false,
         cycle_interval: {},
         hydrated: false
-      }
-    },
-
-    watch: {
-      current () {
-        clearInterval(this.cycle_interval)
-        this.$nextTick(this.startCycle)
       }
     },
 
@@ -65,7 +57,32 @@
 
       interval: {
         type: Number,
-        default: 5000
+        default: 8000
+      }
+    },
+
+    computed: {
+      current_slide () {
+        return this.items[this.current]
+      },
+
+      previous_slide () {
+        let previous = this.current === 0 ? this.items.length - 1 : this.current - 1
+
+        return this.items[previous]
+      },
+
+      next_slide () {
+        let next = this.current === this.items.length - 1 ? 0 : this.current + 1
+
+        return this.items[next]
+      }
+    },
+
+    watch: {
+      current () {
+        clearInterval(this.cycle_interval)
+        this.$nextTick(this.startCycle)
       }
     },
 
@@ -74,8 +91,8 @@
     },
 
     methods: {
-      change (direction) {
-        const node = this.$children.find(i => i._uid === this.items[this.current])
+      change (direction = true) {
+        const node = this.$children.find(i => i._uid === this.current_slide)
 
         if (this.hydrated) {
           this.transitioning = true
@@ -93,13 +110,18 @@
 
         node.$el.addEventListener('transitionend', cb)
 
-        this.$vuetify.bus.pub(`slider-item:deactivate:${this.items[this.previous]}`, direction)
-        this.$vuetify.bus.pub(`slider-item:activate:${this.items[this.current]}`, direction)
+        this.$vuetify.bus.pub(
+          `slider-item:switch`,
+          this.current_slide,
+          this.next_slide,
+          this.previous_slide
+        )
       },
 
       init () {
         this.items = this.$children.filter(i => i.$el.classList.contains('slider__item')).map(i => i._uid)
         this.previous = this.items.length - 1
+
         this.change()
 
         if (this.cycle) {
@@ -116,16 +138,8 @@
           return
         }
 
-        if (this.current + 1 < this.items.length) {
-          this.previous = this.current
-          this.current = this.current + 1
-          this.change('left')
-          
-        } else {
-          this.previous = this.current
-          this.current = 0
-          this.change('left')
-        }
+        this.current = this.items.indexOf(this.next_slide)
+        this.change()
       },
 
       prev () {
@@ -133,16 +147,8 @@
           return
         }
 
-        if (this.current !== 0) {
-          this.previous = this.current
-          this.current = this.current - 1
-          this.change('right')
-          
-        } else {
-          this.previous = this.current
-          this.current = this.items.length - 1
-          this.change('right')
-        }       
+        this.current = this.items.indexOf(this.previous_slide)
+        this.change()      
       },
 
       select (i) {
@@ -150,9 +156,9 @@
           return
         }
 
-        this.previous = this.current
+        let from = this.current
         this.current = i
-        this.change(this.previous < this.current ? 'left' : 'right')
+        this.change()
       }
     }
   }

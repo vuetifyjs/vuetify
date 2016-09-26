@@ -9,50 +9,46 @@
     height: 100%
     width: 100%
     background: #ccc
-    position: relative
-    transition: .6s ease-out
+    display: block
+    position: absolute
+    top: 0
+    left: 0
+    transition: transform .6s ease-out
     background-position: center center
     background-size: cover
     background-repeat: no-repeat
-    display: none
     justify-content: flex-start
     align-items: flex-start
     padding: calc(5% + 2rem)
     color: #fff
-    z-index: 1
+    opacity: 1
     
     h1
       color: $shades.white
       font-weight: 100
       font-size: 5rem
       
-    &--active
-      display: block
-      left: 0
-      transform: translate3d(0, 0, 0)
-      
-    &--left
-      display: block
-      position: absolute
-      top: 0
-      transform: translate3d(-100%, 0, 0)
-    
-    &--right
-      display: block
-      position: absolute
-      top: 0
+    &--next
       transform: translate3d(100%, 0, 0)
+      z-index: 1
       
-    &--next&--left
-      transform: translate3d(100%, 0, 0) !important
+    &--previous
+      transform: translate3d(-100%, 0, 0)
+      z-index: 2
       
-    &--next&--right
-      transform: translate3d(-100%, 0, 0) !important
+    &--active
+      transform: translate3d(0, 0, 0)
+      z-index: 3
+      
+    &--previous&--next, &--next&--previous
+      display: none !important
+      
+      
       
   &__left
     position: absolute
     top: calc(50% - 50px)
-    z-index: 3
+    z-index: 10
     left: 0
     
     .btn

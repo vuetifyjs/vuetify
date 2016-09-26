@@ -20,9 +20,8 @@
     data () {
       return {
         active: false,
-        left: false,
-        right: false,
-        next: false
+        next: false,
+        previous: false
       }
     },
 
@@ -37,16 +36,14 @@
       classes () {
         return {
           'slider__item--active': this.active,
-          'slider__item--left': this.left,
-          'slider__item--right': this.right,
-          'slider__item--next': this.next
+          'slider__item--next': this.next,
+          'slider__item--previous': this.previous,
         }
       },
 
       events () {
         return [
-          [`slider-item:activate:${this._uid}`, d => this.activate(d)],
-          [`slider-item:deactivate:${this._uid}`, d => this.deactivate(d)]
+          [`slider-item:switch`, (cur, next, prev, d) => this.switch(cur, next, prev, d)]
         ]
       },
 
@@ -58,27 +55,28 @@
     },
 
     methods: {
-      activate (direction) {
-        this[direction] = true
-        this.next = true
-        this.active = true
-
-        setTimeout(() => {
-          this.next = false
-          this[direction] = false
-        }, 10)
-      },
-
-      deactivate (direction) {
-        setTimeout(() => {
-          this[direction] = true
-        }, 10)
-
-        // Need to figure out transition event for this
-        setTimeout(() => {
+      switch (cur, next, prev) {
+        if (prev === this._uid) {
+          this.previous = true
           this.active = false
-          this[direction] = false
-        }, 700)
+
+          setTimeout(() => {
+            this.next = false
+          }, 500)
+        } else if (cur === this._uid) {
+          this.active = true
+          this.$nextTick(() => {
+            this.previous = false
+            this.next = false
+          })
+        } else {
+          this.next = true
+          this.active = false
+          
+          setTimeout(() => {
+            this.previous = false
+          }, 500)
+        }
       }
     }
   }
