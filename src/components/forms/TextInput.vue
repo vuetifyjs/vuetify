@@ -13,10 +13,8 @@
       v-bind:id="id"
       v-bind:placeholder="placeholder"
       @blur="focused = false"
-      @change="update"
+      @input="update"
       @focus="focused = true"
-      @keyup="update"
-      @paste="update"
       ref="input"
     )
 </template>
