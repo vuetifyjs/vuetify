@@ -1,8 +1,8 @@
 <template lang="pug">
   a(
-    class="tabs__tab",
-    v-bind:class="classes",
-    v-bind:href="href",
+    class="tabs__tab"
+    v-bind:class="classes"
+    v-bind:href="href"
     @click.prevent="click"
   )
     slot

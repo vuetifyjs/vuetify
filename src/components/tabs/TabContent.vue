@@ -1,15 +1,14 @@
 <template lang="pug">
-  div
-    transition(
-      v-bind:name="transition"
+  transition(
+    v-bind:name="transition"
+    tag="div"
+  )
+    div(
+      class="tabs__content"
+      v-bind:id="id"
+      v-show="active"
     )
-      div(
-        class="tabs__content",
-        v-bind:class="classes",
-        v-bind:id="id",
-        v-if="active"
-      )
-        slot
+      slot
 </template>
 
 <script>
@@ -45,12 +44,6 @@
     },
 
     computed: {
-      classes () {
-        return {
-          'tabs__content--active': this.active
-        }
-      },
-
       events () {
         return [
           [`tab:open:${this.target}`, this.open]
@@ -60,12 +53,7 @@
 
     methods: {
       open (target) {
-        if (this.id === target) {
-          this.timeout = setTimeout(() => this.active = true, 300)
-        } else {
-          clearInterval(this.timeout)
-          this.active = false
-        }
+        this.active = this.id === target
       }
     }
   }
