@@ -6,7 +6,7 @@
   )
     v-breadcrumbs-item(
       v-for="item in items"
-      v-bind:item="item",
+      v-bind:item="item"
       v-bind:disabled="item.disabled"
     )
     slot
