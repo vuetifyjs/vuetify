@@ -1,5 +1,6 @@
 <template lang="pug">
   div(
+    class="modal"
     v-bind:class="classes"
     v-bind:id="id"
   )
@@ -47,7 +48,6 @@
     computed: {
       classes () {
         return {
-          'modal': true,
           'modal--open': this.active,
           'modal--bottom': this.bottom
         }
