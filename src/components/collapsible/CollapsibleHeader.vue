@@ -8,6 +8,7 @@
 
 <script>
   import Transitionable from '../../mixins/transitionable'
+  
   export default {
     name: 'collapsible-header',
 
