@@ -55,9 +55,7 @@
 
     methods: {
       opened (id) {
-        if (id !== this.id) {
-          this.active = false
-        }
+        this.active = id === this.id
       }
     }
   }
