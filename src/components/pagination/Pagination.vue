@@ -18,9 +18,9 @@
         href="#!"
         class="pagination__item"
         v-bind:class="{ 'pagination__item--active': n === selected }"
+        v-if="!isNaN(n)"
         v-text="n"
         @click.prevent="select(n)"
-        v-if="!isNaN(n)"
       )
       span(
         v-else
@@ -64,7 +64,7 @@
 
     watch: {
       value () {
-        this.transition()
+        this.init()
       }
     },
 
@@ -105,13 +105,14 @@
     },
 
     mounted () {
-      this.transition()
+      this.$vuetify.load.call(this, this.init)
     },
 
     methods: {
-      transition () {
+      init () {
         this.selected = null
 
+        // Change this
         setTimeout(() => this.selected = this.value, 100)
       },
 
