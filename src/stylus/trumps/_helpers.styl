@@ -14,6 +14,10 @@
   text-align: right !important
   
 .with
+  &.left-sidebar
+    main
+      display: flex
+      
   &.left-fixed-sidebar
     main,
     header,
@@ -40,4 +44,5 @@
     
   &.nav-and-footer
     main
+      margin: 0
       min-height: "calc(100vh - %s)" % ($navbar-height + $footer-height)
