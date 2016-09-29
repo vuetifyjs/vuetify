@@ -17,14 +17,14 @@ export default {
   },
 
   beforeDestroy () {
-    document.removeEventListener('scroll', this.translate)
-    document.removeEventListener('resize', this.translate)
+    document.removeEventListener('scroll', this.translate, false)
+    document.removeEventListener('resize', this.translate, false)
   },
 
   methods: {
     listeners () {
-      document.addEventListener('scroll', this.translate)
-      document.addEventListener('resize', this.translate)
+      document.addEventListener('scroll', this.translate, false)
+      document.addEventListener('resize', this.translate, false)
     },
 
     translate () {
