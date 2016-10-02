@@ -11,7 +11,7 @@ const CardText = createSimpleFunctional('card__text')
 const CardTitleActions = createSimpleFunctional('card__title-actions')
 const CardTitleText = createSimpleFunctional('card__title-text')
 
-export {
+export default {
   Card,
   CardActions,
   CardMenu,

@@ -7,7 +7,7 @@ import {
 
 const NavbarLogo = createSimpleFunctional('navbar__logo')
 
-export {
+export default {
   Navbar,
   NavbarItem,
   NavbarItems,

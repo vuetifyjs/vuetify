@@ -1,7 +1,7 @@
 import Slider from './Slider.vue'
 import SliderItem from './SliderItem.vue'
 
-export {
+export default {
   Slider,
   SliderItem
 }

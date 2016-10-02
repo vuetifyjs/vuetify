@@ -9,7 +9,7 @@ const ListItemActionTitle = createSimpleFunctional('list__item-action-title', 's
 const ListItemIcon = createSimpleFunctional('list__item-icon', 'v-icon')
 const ListItemAvatar = createSimpleFunctional('list__item-avatar', 'v-icon')
 
-export {
+export default {
   List,
   ListItem,
   ListItemIcon,

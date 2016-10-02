@@ -1,5 +1,5 @@
 import Chip from './Chip.vue'
 
-export {
+export default {
   Chip
 }

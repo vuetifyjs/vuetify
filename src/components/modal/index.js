@@ -1,5 +1,5 @@
 import Modal from './Modal.vue'
 
-export {
+export default {
   Modal
 }

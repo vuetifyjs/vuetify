@@ -1,22 +1,23 @@
+import Alerts from './alerts/index'
 import Breadcrumbs from './breadcrumbs/index'
-import * as Buttons from './buttons/index'
-import * as Cards from './cards/index'
-import * as Chips from './chips/index'
-import * as Collapsible from './collapsible/index'
-import * as Dropdowns from './dropdowns/index'
-import * as Footer from './footer/index'
-import * as Forms from './forms/index'
-import * as Grid from './grid/index'
-import * as Icons from './icons/index'
-import * as Lists from './lists/index'
-import * as Modal from './modal/index'
-import * as Navbar from './navbar/index'
+import Buttons from './buttons/index'
+import Cards from './cards/index'
+import Chips from './chips/index'
+import Collapsible from './collapsible/index'
+import Dropdowns from './dropdowns/index'
+import Footer from './footer/index'
+import Forms from './forms/index'
+import Grid from './grid/index'
+import Icons from './icons/index'
+import Lists from './lists/index'
+import Modal from './modal/index'
+import Navbar from './navbar/index'
 import Pagination from './pagination/index'
-import * as Parallax from './parallax/index'
-import * as Sidebar from './sidebar/index'
-import * as Slider from './slider/index'
-import * as Tabs from './tabs/index'
-import * as Toasts from './toasts/index'
+import Parallax from './parallax/index'
+import Sidebar from './sidebar/index'
+import Slider from './slider/index'
+import Tabs from './tabs/index'
+import Toasts from './toasts/index'
 
 function bootstrap (...components) {
   let entries = {}
@@ -31,6 +32,7 @@ function bootstrap (...components) {
 }
 
 export default bootstrap(
+  Alerts,
   Breadcrumbs,
   Buttons,
   Cards,

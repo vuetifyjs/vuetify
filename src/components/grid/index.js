@@ -20,7 +20,7 @@ const Container = createSimpleFunctional('container')
 const Row = createSimpleFunctional('row')
 const ColSpacer = createSimpleFunctional('col--spacer')
 
-export {
+export default {
   Col,
   ColSpacer,
   Container,

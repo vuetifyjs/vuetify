@@ -1,5 +1,5 @@
 import Icon from './Icon.vue'
 
-export {
+export default {
   Icon
 }

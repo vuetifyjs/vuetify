@@ -14,9 +14,6 @@ module.exports = {
     library: 'Vuetify',
     libraryTarget: 'umd'
   },
-  resolveLoader: {
-    root: path.join(__dirname, '../node_modules'),
-  },
   node: {
     fs: 'empty'
   },

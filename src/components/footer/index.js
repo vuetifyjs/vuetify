@@ -1,5 +1,5 @@
 import Footer from './Footer.vue'
 
-export {
+export default {
   Footer
 }

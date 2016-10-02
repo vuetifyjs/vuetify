@@ -3,7 +3,7 @@ import Radio from './Radio.vue'
 import Select from './Select.vue'
 import TextInput from './TextInput.vue'
 
-export {
+export default {
   Checkbox,
   Radio,
   Select,

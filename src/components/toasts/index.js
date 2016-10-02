@@ -1,5 +1,5 @@
 import Toast from './Toast.vue'
 
-export {
+export default {
   Toast
 }
