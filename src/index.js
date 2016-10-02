@@ -1,9 +1,11 @@
-import Vuetify from './util/vuetify'
-import Directives from './directives/_index'
+import Bus from './util/bus'
 import Components from './components/_index'
+import Directives from './directives/_index'
+import Load from './util/load'
+import Toast from './functions/toast'
 
 function plugin(Vue) {
-  if (Vue.prototype.hasOwnProperty('$vuetify')) {
+  if (plugin.installed) {
     return
   }
 
@@ -15,11 +17,19 @@ function plugin(Vue) {
     Vue.component(key, Components[key])
   })
 
-  Vue.vuetify = Vuetify
+  Vue.prototype.$vuetify = {
+    bus: Bus,
 
-  Object.defineProperty(Vue.prototype, '$vuetify', {
-    get: () => Vue.vuetify
-  })
+    load: Load,
+
+    init () {
+      document.body.addEventListener('click', e => {
+        Bus.pub('body:click', e)
+      })
+    },
+
+    toast: Toast
+  }
 }
 
 module.exports = plugin
