@@ -1,0 +1,52 @@
+.alert
+  padding: 1.5rem
+  border-radius: 4px
+  border-width: 1px
+  border-style: solid
+  width: 100%
+  text-align: left
+  margin: 1rem
+  position: relative
+  overflow: hidden
+  z-index: 1
+  
+  &:after
+    font-family: 'Material Icons'
+    right: 1.5rem
+    top: 0
+    font-size: 4rem
+    position: absolute
+    z-index: 0
+    opacity: .1
+
+  &--info
+    background-color: $blue.lighten-4
+    border-color: $blue.lighten-3
+    color: $blue.darken-3
+    
+    &:after
+      content: 'info_outline'
+        
+  &--error
+    background-color: $red.lighten-4
+    border-color: $red.lighten-3
+    color: $red.darken-3
+    
+    &:after
+      content: 'error_outline'
+
+  &--success
+    background-color: $green.lighten-4
+    border-color: $green.lighten-3
+    color: $green.darken-3
+    
+    &:after
+      content: 'check'
+    
+  &--warning
+    background-color: $yellow.lighten-4
+    border-color: $yellow.lighten-3
+    color: $yellow.darken-3
+    
+    &:after
+      content: 'warning'
