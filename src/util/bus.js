@@ -1,28 +1,31 @@
-import Vue from 'vue'
+import EventEmitter from 'events'
 
-class Bus {
-  constructor() {
-    this.bus = new Vue()
+class Bus extends EventEmitter {
+  constructor () {
+    super()
+    this.setMaxListeners(50)
   }
 
   sub (event, cb) {
-    if (typeof event === 'object') {
-      event.forEach(i => this.bus.$on(...i))
+    const type = typeof event
+    if (type === 'object' || type === 'array') {
+      event.forEach(i => this.on(...i))
     } else {
-      this.bus.$on(event, cb)
+      this.on(event, cb)
     }
   }
 
   unsub (event, cb) {
-    if (typeof event === 'object') {
-      event.forEach(i => this.bus.$off(...i))
+    const type = typeof event
+    if (type === 'object' || type === 'array') {
+      event.forEach(i => this.removeListener(...i))
     } else {
-      this.bus.$off(event, cb)
+      this.removeListener(event, cb)
     }
   }
 
   pub () {
-    this.bus.$emit(...arguments)
+    this.emit(...arguments)
   }
 }
 
