@@ -14,6 +14,7 @@ import Modal from './modal/index'
 import Navbar from './navbar/index'
 import Pagination from './pagination/index'
 import Parallax from './parallax/index'
+import Progress from './progress/index'
 import Sidebar from './sidebar/index'
 import Slider from './slider/index'
 import Tabs from './tabs/index'
@@ -48,6 +49,7 @@ export default bootstrap(
   Navbar,
   Pagination,
   Parallax,
+  Progress,
   Sidebar,
   Slider,
   Tabs,

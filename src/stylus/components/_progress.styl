@@ -1,0 +1,27 @@
+.progress
+  background: $grey.lighten-2
+  transition: $primary-transition
+  width: 100%
+  border-radius: 4px
+  overflow: hidden
+  position: relative
+  margin: 1rem 0
+  
+  &__bar
+    height: inherit
+    background: $blue.base
+    border-radius: 4px
+    overflow: hidden
+    position: absolute
+    
+  &--indeterminate    
+    .progress__bar
+      width: 30% !important
+      animation: loading 1.2s linear infinite alternate
+    
+  @keyframes loading
+    0%
+      left: 0%
+      
+    100%
+      left: 70%
