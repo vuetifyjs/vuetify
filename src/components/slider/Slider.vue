@@ -98,17 +98,13 @@
           this.transitioning = true
         }
 
-        var cb = e => {
+        node.$el.addEventListener('transitionend', () => {
           this.transitioning = false
 
           if (!this.hydrated) {
             this.hydrated = true
           }
-
-          e.target.removeEventListener(e.type, cb)
-        }
-
-        node.$el.addEventListener('transitionend', cb)
+        }, { once: true })
 
         this.$vuetify.bus.pub(
           `slider-item:switch`,

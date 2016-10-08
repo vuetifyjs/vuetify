@@ -1,14 +1,13 @@
 .alert
-  padding: 1.5rem
-  border-radius: 4px
+  padding: $alert-padding
+  border-radius: $alert-border-radius
   border-width: 1px
   border-style: solid
-  width: 100%
   text-align: left
-  margin: 1rem
   position: relative
   overflow: hidden
   z-index: 1
+  margin: $alert-margin
   
   &:after
     font-family: 'Material Icons'
@@ -44,8 +43,8 @@
       content: 'check'
     
   &--warning
-    background-color: $yellow.lighten-4
-    border-color: $yellow.lighten-3
+    background-color: $yellow.lighten-3
+    border-color: $yellow.lighten-2
     color: $yellow.darken-3
     
     &:after

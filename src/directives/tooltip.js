@@ -18,7 +18,8 @@ function setPositions (tooltip, el, position) {
 
 function directive (el, binding) {
   const tooltip = document.createElement('div')
-  let config = {}
+  let config = {},
+      timeout = {}
 
   Object.assign(
     config,
@@ -38,14 +39,12 @@ function directive (el, binding) {
     el.parentNode.insertBefore(tooltip, el.nextSibling)
   }
 
-  setTimeout(() => setPositions(tooltip, el, config.value), 200)
-
-  let timeout = {}
+  setPositions(tooltip, el, config.value)
 
   el.onmouseenter = function () {
     setPositions(tooltip, el, config.value)
     
-    timeout = setTimeout(() => tooltip.classList.add('tooltip--active'), 100)
+    timeout = setTimeout(() => tooltip.classList.add('tooltip--active'), 1)
   }
 
   el.onmouseleave = function () {

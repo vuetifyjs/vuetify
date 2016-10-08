@@ -4,7 +4,7 @@ var defaults = {
   overlap: false
 }
 
-function directive (el, binding, bind) {
+function directive (el, binding) {
   let config = {}
 
   Object.assign(
@@ -19,29 +19,25 @@ function directive (el, binding, bind) {
   if (config.icon)    el.classList.add('badge--icon')
   if (config.left)    el.classList.add('badge--left')
 
-  if (bind) {
-    el.setAttribute('data-badge', config.value)
-    el.classList.add('badge')
-  } else {
-    el.removeAttribute('data-badge')
-    el.classList.remove('badge')
-  }
+  el.setAttribute('data-badge', config.value)
+  el.classList.add('badge')
 }
 
 export default {
-  bind (el, binding) {
-    directive(el, binding, true)
+  bind: (el, binding) => {
+    directive(el, binding)
   },
 
-  updated (el, binding, v) {
-    directive(el, binding, true)
+  updated: (el, binding) => {
+    directive(el, binding)
   },
 
-  componentUpdated (el, binding, v) {
-    directive(el, binding, true)
+  componentUpdated: (el, binding) => {
+    directive(el, binding)
   },
 
-  unbind (el, binding) {
-    directive(el, binding, false)
+  unbind: (el) => {
+    el.removeAttribute('data-badge')
+    el.classList.remove('badge')
   }
 }

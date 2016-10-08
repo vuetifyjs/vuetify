@@ -22,10 +22,7 @@ function directive (el, binding, v) {
 
 export default {
   bind (el, binding, v) {
-    v.context.$vuetify.load.call(
-      v.context,
-      () => directive(el, binding, v)
-    )
+    directive(el, binding, v)
   },
 
   updated (el, binding, v) {

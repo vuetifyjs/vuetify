@@ -2,14 +2,16 @@ var defaults = {
   hover: false
 }
 
-function dropdown (el, config) {
+function dropdown (e, el, config, bus) {
+  e.preventDefault()
+
   const component = document.getElementById(config.value)
   let width = 0
   let height = 0
 
   if (component.clientWidth > el.clientWidth
       && component.hasAttribute('data-right')
-    ) {
+  ) {
     width = component.clientWidth - el.clientWidth
   }
 
@@ -20,6 +22,8 @@ function dropdown (el, config) {
   component.style.minWidth = `${el.clientWidth}px`
   component.style.left = `${el.offsetLeft - width}px`
   component.style.top = `${el.offsetTop + height}px`
+  
+  bus.pub(`dropdown:open:${config.value}`)
 }
 
 function directive (el, binding, v) {
@@ -37,15 +41,11 @@ function directive (el, binding, v) {
 
   if (!config.hover) {
     el.onclick = e => {
-      e.preventDefault()
-      
-      v.context.$vuetify.bus.pub(`dropdown:open:${config.value}`)
-      dropdown(el, config)
+      dropdown(e, el, config, v.context.$vuetify.bus)
     }
   } else {
-    el.onmouseenter = () => {
-      v.context.$vuetify.bus.pub(`dropdown:open:${config.value}`)    
-      dropdown(el, config)
+    el.onmouseenter = e => {
+      dropdown(e, el, config, v.context.$vuetify.bus)
     }
   }
 }
