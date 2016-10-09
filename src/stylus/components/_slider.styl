@@ -3,49 +3,35 @@
   width: 100%
   background: $shades.black
   position: relative
-  overflow: hidden;
+  overflow: hidden
   @extend .z-depth-1
   
-  &__item
+  &__slides
+    margin: 0
+    padding: 0
+    display: flex
     height: 100%
-    width: 100%
-    background: #ccc
-    display: block
-    position: absolute
-    top: 0
-    left: 0
-    transition: transform .6s ease-out
-    background-position: center center
-    background-size: cover
-    background-repeat: no-repeat
-    justify-content: flex-start
-    align-items: flex-start
-    padding: calc(5% + 2rem)
-    color: #fff
-    opacity: 1
+    position: relative
+    left: -100%
+    transform: translateX(100%)
     
-    h1
-      color: $shades.white
-      font-weight: 100
-      font-size: 5rem
-      
-    &--next
-      transform: translate3d(100%, 0, 0)
-      z-index: 1
-      
-    &--previous
-      transform: translate3d(-100%, 0, 0)
-      z-index: 2
-      
-    &--active
-      transform: translate3d(0, 0, 0)
-      z-index: 3
-      
-    &--previous&--next, &--next&--previous
-      display: none !important
-      
-      
-      
+    &--is-reversing
+      transform: translateX(-100%)
+    
+    &--is-set
+      transform: none
+      transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)
+  
+  &__item
+    display: flex
+    align-items: center
+    justify-content: center
+    flex: 1 0 100%
+    order: 2
+    height: 100%
+    background-size: cover
+    background-position: center center
+  
   &__left
     position: absolute
     top: calc(50% - 50px)

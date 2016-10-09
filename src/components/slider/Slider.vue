@@ -1,38 +1,26 @@
 <template lang="pug">
-  div(
-    class="slider"
-  )
-    div(
-      class="slider__left"
-    )
-      v-btn(
-        icon
-        @click.native="prev"
-      )
+  div(class="slider")
+    div(class="slider__left")
+      v-btn(icon, @click.native="prev")
         v-icon chevron_left
 
-    div(
-      class="slider__right"
-    )
-      v-btn(
-        icon
-        @click.native="next"
-      )
+    div(class="slider__right")
+      v-btn(icon, @click.native="next")
         v-icon chevron_right
 
-    div(
-      class="slider__controls"
-    )
+    div(class="slider__controls")
       v-btn(
         class="slider__controls__item"
         icon
-        v-for="(n, index) in items.length"
         v-bind:class="{ 'slider__controls__item--active': index === current }"
+        v-for="(n, index) in items.length"
       )
-        v-icon(
-          @click.native="select(index)"
-        ) fiber_manual_record
-    slot
+        v-icon(@click.native="select(index)") fiber_manual_record
+    div(
+      class="slider__slides"
+      v-bind:class="classes"
+    )
+      slot
 </template>
 
 <script>
@@ -41,11 +29,11 @@
 
     data () {
       return {
-        current: 0,
+        current: null,
         items: [],
-        transitioning: false,
-        cycle_interval: {},
-        hydrated: false
+        slide_interval: {},
+        set: true,
+        reverse: false
       }
     },
 
@@ -53,7 +41,7 @@
       cycle: {
         type: Boolean,
         default: true
-      },
+      },  
 
       interval: {
         type: Number,
@@ -62,27 +50,19 @@
     },
 
     computed: {
-      current_slide () {
-        return this.items[this.current]
-      },
-
-      previous_slide () {
-        let previous = this.current === 0 ? this.items.length - 1 : this.current - 1
-
-        return this.items[previous]
-      },
-
-      next_slide () {
-        let next = this.current === this.items.length - 1 ? 0 : this.current + 1
-
-        return this.items[next]
+      classes () {
+        return {
+          'slider__slides--is-reversing': this.reverse,
+          'slider__slides--is-set': this.set
+        }
       }
     },
 
     watch: {
       current () {
-        clearInterval(this.cycle_interval)
-        this.$nextTick(this.startCycle)
+        this.startInterval()
+        this.order()
+        this.transition()
       }
     },
 
@@ -91,70 +71,83 @@
     },
 
     methods: {
-      change (direction = true) {
-        const node = this.$children.find(i => i._uid === this.current_slide)
-
-        if (this.hydrated) {
-          this.transitioning = true
-        }
-
-        node.$el.addEventListener('transitionend', () => {
-          this.transitioning = false
-
-          if (!this.hydrated) {
-            this.hydrated = true
-          }
-        }, { once: true })
-
-        this.$vuetify.bus.pub(
-          `slider-item:switch`,
-          this.current_slide,
-          this.next_slide,
-          this.previous_slide
-        )
-      },
-
       init () {
-        this.items = this.$children.filter(i => i.$el.classList.contains('slider__item')).map(i => i._uid)
-        this.previous = this.items.length - 1
+        this.items = this.$children.filter(i => {
+          return i.$el.classList && i.$el.classList.contains('slider__item')
+        })
 
-        this.change()
+        this.current = 0
 
         if (this.cycle) {
-          this.startCycle()
+          this.startInterval()
         }
       },
 
-      startCycle () {
-        this.cycle_interval = setInterval(this.next, this.interval)
+      order () {
+        let pos = 0
+        let iter = this.items.length
+
+        if (this.current === 0) {
+          pos = iter - 1  
+        } else {
+          pos = this.current - 1
+        }
+
+        for (let i = 1; i <= iter; i++) {
+          this.items[pos].order = i
+          pos = pos + 1 === iter ? 0 : pos + 1
+        }
       },
 
       next () {
-        if (this.transitioning) {
-          return
+        this.reverse = false
+        
+        if (this.current + 1 === this.items.length) {
+          return this.current = 0
         }
 
-        this.current = this.items.indexOf(this.next_slide)
-        this.change()
+        this.current++
       },
 
       prev () {
-        if (this.transitioning) {
-          return
+        this.reverse = true
+
+        if (this.current - 1 < 0) {
+          return this.current = this.items.length - 1
         }
 
-        this.current = this.items.indexOf(this.previous_slide)
-        this.change()      
+        this.current--
       },
 
-      select (i) {
-        if (this.transitioning) {
+      select (index) {
+        if (index === this.current) {
           return
         }
 
-        let from = this.current
-        this.current = i
-        this.change()
+        let i = index > this.current ? false : true
+        let method = index > this.current ? this.next : this.prev
+        this.reverse = index < this.current
+
+        method()
+
+        var interval = setInterval(() => {
+          if (index == this.current) {
+            return clearInterval(interval)
+          }
+
+          method()
+        }, 200)
+      },
+
+      startInterval () {
+        clearInterval(this.slide_interval)
+
+        this.slide_interval = setInterval(this.next, this.interval)
+      },
+
+      transition () {
+        this.set = false
+        setTimeout(() => this.set = true, 50)
       }
     }
   }
