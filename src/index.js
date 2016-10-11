@@ -1,3 +1,5 @@
+require('./stylus/main.styl')
+
 import Bus from './util/bus'
 import Components from './components/_index'
 import Directives from './directives/_index'
