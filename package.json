@@ -1,11 +1,11 @@
 {
   "name": "vuetify",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "author": {
     "name": "John Leider",
     "email": "john.j.leider@gmail.com"
   },
-  "main": "dist/vuetify",
+  "main": "dist/vuetify.min",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config build/webpack.build.config.js --progress --hide-modules"
   },
