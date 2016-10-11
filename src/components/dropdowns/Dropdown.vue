@@ -34,10 +34,7 @@
         default: () => []
       },
 
-      right: {
-        type: Boolean,
-        default: false
-      }
+      right: Boolean
     },
 
     computed: {

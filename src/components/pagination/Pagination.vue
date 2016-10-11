@@ -46,10 +46,7 @@
     },
 
     props: {
-      circle: {
-        type: Boolean,
-        default: false
-      },
+      circle: Boolean,
 
       length: {
         type: Number,

@@ -1,66 +1,66 @@
 .tooltip
-  background: $secondary-color
-  border-radius: $button-radius
-  color: $shades.white
-  font-size: .9rem
-  padding: .5rem
-  position: absolute
-  z-index: -1
-  opacity: 0
-  transition: $primary-transition
-  @extend .z-depth-1
+  position: relative
   
   &:after
+    background: $secondary-color
+    border-radius: .2rem
+    color: $shades.white
+    content: attr(data-tooltip)
+    font-size: .8rem
+    line-height: 1.2rem
+    opacity: 0
+    padding: .4rem
     position: absolute
-    content: ""
-    width: 0
-    height: 0
-  
-  &--left
+    pointer-events: none
+    transition: $secondary-transition
+    visibility: hidden
+    width: auto
+    white-space: pre
+    z-index: 99
+    @extend .z-depth-1
+    
+  &--bottom
     &:after
-      right: -7px
-      top: calc(50% - 7px)
-      border-top: 7px solid transparent
-      border-bottom: 7px solid transparent
-      border-left: 7px solid $secondary-color
-
-    &.tooltip--active
-      transform: translate3d(-1.5rem, 0, 0)
+      top: 100%
+      left: 50%
+      transform: translate3d(-50%, -10px, 0)
       
-  &--right
-    &:after
-      left: -7px
-      top: calc(50% - 7px)
-      border-top: 7px solid transparent
-      border-bottom: 7px solid transparent
-      border-right: 7px solid $secondary-color
-      
-    &.tooltip--active
-      transform: translate3d(1.5rem, 0, 0)
+    &:hover
+      &:after
+        transform: translate3d(-50%, 10px, 0)
       
   &--top
     &:after
-      left: calc(50% - 7px)
-      bottom: -7px
-      border-left: 7px solid transparent
-      border-right: 7px solid transparent
-      border-top: 7px solid $secondary-color
+      bottom: 100%
+      left: 50%
+      transform: translate3d(-50%, 10px, 0)
       
-    &.tooltip--active
-      transform: translate3d(0, -1.5rem, 0)
-      
-  &--bottom
+    &:hover
+      &:after
+        transform: translate3d(-50%, -10px, 0)
+
+  &--left
     &:after
-      left: calc(50% - 7px)
-      top: -7px
-      border-left: 7px solid transparent
-      border-right: 7px solid transparent
-      border-bottom: 7px solid $secondary-color
+      bottom: 50%
+      right: 100%
+      transform: translate3d(10px, 50%, 0)
       
-    &.tooltip--active
-      transform: translate3d(0, 1.5rem, 0)
+    &:hover
+      &:after
+        transform: translate3d(-10px, 50%, 0)
+      
+  &--right
+    &:after
+      bottom: 50%
+      left: 100%
+      transform: translate3d(-10px, 50%, 0)
+      
+    &:hover
+      &:after
+        transform: translate3d(10px, 50%, 0)
   
-  &--active
-    opacity: 1
-    z-index: 999999999999
-    
+
+  &:hover
+    &:after
+      opacity: 1
+      visibility: visible

@@ -22,20 +22,14 @@
     name: 'radio',
     
     props: {      
-      disabled: {
-        type: Boolean,
-        default: false
-      },
+      disabled: Boolean,
 
       label: {
         type: String,
         default: ''
       },
 
-      gap: {
-        type: Boolean,
-        default: false
-      },
+      gap: Boolean,
 
       id: {
         type: String,

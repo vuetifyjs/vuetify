@@ -38,10 +38,7 @@
     },
 
     props: {
-      cycle: {
-        type: Boolean,
-        default: true
-      },  
+      cycle: Boolean,  
 
       interval: {
         type: Number,

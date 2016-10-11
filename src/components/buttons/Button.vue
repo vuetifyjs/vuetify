@@ -12,55 +12,25 @@
     name: 'button',
     
     props: {
-      block: {
-        type: Boolean,
-        default: false
-      },
+      block: Boolean,
 
-      flat: {
-        type: Boolean,
-        default: false
-      },
+      flat: Boolean,
 
-      floating: {
-        type: Boolean,
-        default: false
-      },
+      floating: Boolean,
 
-      icon: {
-        type: Boolean,
-        default: false
-      },
+      icon: Boolean,
 
-      large: {
-        type: Boolean,
-        default: false
-      },
+      large: Boolean,
 
-      outline: {
-        type: Boolean,
-        default: false
-      },
+      outline: Boolean,
 
-      primary: {
-        type: Boolean,
-        default: false
-      },
+      primary: Boolean,
 
-      round: {
-        type: Boolean,
-        default: false
-      },
+      round: Boolean,
 
-      secondary: {
-        type: Boolean,
-        default: false
-      },
+      secondary: Boolean,
 
-      small: {
-        type: Boolean,
-        default: false
-      },
+      small: Boolean,
 
       type: {
         type: String,
@@ -77,10 +47,10 @@
           'btn--icon': this.icon,
           'btn--large': this.large,
           'btn--outline': this.outline,
-          'primary white--text': this.primary,
           'btn--round': this.round,
-          'secondary white--text': this.secondary,
-          'btn--small': this.small
+          'btn--small': this.small,
+          'primary white--text': this.primary,
+          'secondary white--text': this.secondary
         }
       }
     }

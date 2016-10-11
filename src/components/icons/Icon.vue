@@ -11,25 +11,13 @@
     name: 'icon',
     
     props: {
-      large: {
-        type: Boolean,
-        default: false
-      },
+      large: Boolean,
 
-      left: {
-        type: Boolean,
-        default: false
-      },
+      left: Boolean,
 
-      medium: {
-        type: Boolean,
-        default: false
-      },
+      medium: Boolean,
 
-      right: {
-        type: Boolean,
-        default: false
-      }
+      right: Boolean
     },
 
     computed: {

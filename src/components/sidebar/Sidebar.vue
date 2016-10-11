@@ -19,20 +19,11 @@
     ],
 
     props: {
-      closeOnClick: {
-        type: Boolean,
-        default: false
-      },
+      closeOnClick: Boolean,
 
-      drawer: {
-        type: Boolean,
-        default: false
-      },
+      drawer: Boolean,
 
-      fixed: {
-        type: Boolean,
-        default: false
-      },
+      fixed: Boolean,
 
       height: {
         type: String,
@@ -44,10 +35,7 @@
         required: true
       },
 
-      right: {
-        type: Boolean,
-        default: false
-      }
+      right: Boolean
     },
 
     computed: {

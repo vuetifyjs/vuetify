@@ -18,10 +18,7 @@
         default: '7px'
       },
 
-      indeterminate: {
-        type: Boolean,
-        default: false
-      },
+      indeterminate: Boolean,
 
       max: {
         type: [String, Number],

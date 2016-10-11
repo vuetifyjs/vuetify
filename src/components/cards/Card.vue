@@ -18,13 +18,11 @@
       },
 
       horizontal: {
-        type: Boolean,
-        default: false
+        type: Boolean
       },
 
       img: {
-        type: [Boolean, String],
-        default: false
+        type: String
       }
     },
 

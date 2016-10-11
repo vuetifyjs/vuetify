@@ -51,10 +51,7 @@
         value: ''
       },
 
-      multiple: {
-        type: Boolean,
-        default: false
-      },
+      multiple: Boolean,
 
       name: {
         type: String,

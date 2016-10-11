@@ -28,30 +28,18 @@
     },
 
     props: {
-      disabled: {
-        type: Boolean,
-        default: false
-      },
+      disabled: Boolean,
 
-      filled: {
-        type: Boolean,
-        default: false
-      },
+      filled: Boolean,
 
-      gap: {
-        type: Boolean,
-        default: false
-      },
+      gap: Boolean,
 
       id: {
         type: String,
         default: ''
       },
 
-      indeterminate: {
-        type: Boolean,
-        default: false
-      },
+      indeterminate: Boolean,
       
       label: {
         type: String,

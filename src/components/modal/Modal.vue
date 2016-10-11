@@ -24,10 +24,7 @@
     },
 
     props: {
-      bottom: {
-        type: Boolean,
-        default: false
-      },
+      bottom: Boolean,
 
       id: {
         type: String,

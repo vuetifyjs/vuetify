@@ -17,8 +17,7 @@
       },
 
       img: {
-        type: [Boolean, String],
-        default: false
+        type: String
       }
     },
 

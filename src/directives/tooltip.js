@@ -1,25 +1,9 @@
-var defaults = {}
-
-function setPositions (tooltip, el, position) {
-    if (position === 'top') {
-      tooltip.style.top = `${el.offsetTop - (tooltip.clientHeight)}px`
-      tooltip.style.left = `${el.offsetLeft + el.clientWidth / 2 - tooltip.clientWidth / 2}px`
-    } else if (position === 'left') {
-      tooltip.style.top = `${el.offsetTop + ((el.clientHeight - tooltip.clientHeight) / 2) + 1}px`
-      tooltip.style.left = `${el.offsetLeft - tooltip.clientWidth}px`
-    } else if (position === 'right') {
-      tooltip.style.top = `${el.offsetTop + ((el.clientHeight - tooltip.clientHeight) / 2) + 1}px`
-      tooltip.style.left = `${el.offsetLeft + el.clientWidth + 2}px`
-    } else if (position === 'bottom') {
-      tooltip.style.top = `${el.offsetTop + el.clientHeight + 2}px`
-      tooltip.style.left = `${el.offsetLeft + el.clientWidth / 2 - tooltip.clientWidth / 2}px`
-    }
+var defaults = {
+  top: true
 }
 
-function directive (el, binding) {
-  const tooltip = document.createElement('div')
-  let config = {},
-      timeout = {}
+function directive (el, binding, bind = true) {
+  let config = {}
 
   Object.assign(
     config,
@@ -29,52 +13,31 @@ function directive (el, binding) {
     binding.value || {}
   )
 
-  tooltip.classList.add('tooltip')
-  tooltip.classList.add(`tooltip--${config.value}`)
-  tooltip.innerHTML = config.html
-
-  if (el.parentNode.lastChild === el) {
-    el.parentNode.appendChild(tooltip)
+  if (bind) {
+    el.setAttribute('data-tooltip', config.html)
+    el.classList.add('tooltip')
+    el.classList.add(`tooltip--${config.value}`)
   } else {
-    el.parentNode.insertBefore(tooltip, el.nextSibling)
-  }
-
-  setPositions(tooltip, el, config.value)
-
-  el.onmouseenter = function () {
-    setPositions(tooltip, el, config.value)
-    
-    timeout = setTimeout(() => tooltip.classList.add('tooltip--active'), 1)
-  }
-
-  el.onmouseleave = function () {
-    clearTimeout(timeout)
-
-    tooltip.classList.remove('tooltip--active')
+    el.removeAttribute('data-tooltip', config.html)
+    el.classList.remove('tooltip')
+    el.classList.remove(`tooltip--${config.value}`)
   }
 }
 
 export default {
-  bind (el, binding, v) {
-    v.context.$vuetify.load.call(
-      v.context,
-      () => directive(el, binding, v)
-    )
+  bind (el, binding) {
+    directive(el, binding)
   },
 
   updated (el, binding, v) {
-    el.nextSibling.remove()
-    directive(el, binding, v)
+    directive(el, binding)
   },
 
-  componentUpdated (el, binding, v) {
-    el.nextSibling.remove()
-    directive(el, binding, v)
+  componentUpdated (el, binding) {
+    directive(el, binding)
   },
 
-  unbind (el) {
-    el.nextSibling.remove()
-    el.removeAttribute('mouseenter')
-    el.removeAttribute('mouseleave')
+  unbind (el, binding) {
+    directive(el, binding, false)
   }
 }

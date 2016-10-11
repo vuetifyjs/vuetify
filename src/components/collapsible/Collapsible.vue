@@ -10,10 +10,7 @@
     name: 'collapsible',
 
     props: {
-      expand: {
-        type: Boolean,
-        default: false
-      }
+      expand: Boolean
     },
 
     computed: {

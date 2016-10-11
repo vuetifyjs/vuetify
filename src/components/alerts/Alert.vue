@@ -8,26 +8,16 @@
 
 <script>
   export default {
+    name: 'alert',
+    
     props: {
-      error: {
-        type: Boolean,
-        default: false
-      },
+      error: Boolean,
 
-      info: {
-        type: Boolean,
-        default: false
-      },
+      info: Boolean,
 
-      success: {
-        type: Boolean,
-        default: false
-      },
-
-      warning: {
-        type: Boolean,
-        default: false
-      }
+      success: Boolean,
+      
+      warning: Boolean
     },
 
     computed: {

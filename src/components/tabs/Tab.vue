@@ -28,10 +28,7 @@
         required: true
       },
 
-      selected: {
-        type: Boolean,
-        default: false
-      }
+      selected: Boolean
     },
 
     computed: {

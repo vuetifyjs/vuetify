@@ -25,25 +25,13 @@
     },
 
     props: {
-      close: {
-        type: Boolean,
-        default: false
-      },
+      close: Boolean,
 
-      label: {
-        type: Boolean,
-        default: false
-      },
+      label: Boolean,
 
-      outline: {
-        type: Boolean,
-        default: false
-      },
+      outline: Boolean,
 
-      small: {
-        type: Boolean,
-        default: false
-      }
+      small: Boolean
     },
 
     computed: {

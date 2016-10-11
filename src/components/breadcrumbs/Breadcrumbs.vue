@@ -14,16 +14,15 @@
 
 <script>
   export default {
+    name: 'breadcrumbs',
+    
     props: {
       divider: {
         type: String,
         default: '/'
       },
 
-      icons: {
-        type: Boolean,
-        default: false
-      },
+      icons: Boolean,
 
       items: {
         type: Array,

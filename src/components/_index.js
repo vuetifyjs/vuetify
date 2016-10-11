@@ -1,4 +1,5 @@
 import Alerts from './alerts/index'
+import App from './app/index'
 import Breadcrumbs from './breadcrumbs/index'
 import Buttons from './buttons/index'
 import Cards from './cards/index'
@@ -18,7 +19,6 @@ import Progress from './progress/index'
 import Sidebar from './sidebar/index'
 import Slider from './slider/index'
 import Tabs from './tabs/index'
-import Toasts from './toasts/index'
 
 function bootstrap (...components) {
   let entries = {}
@@ -34,6 +34,7 @@ function bootstrap (...components) {
 
 export default bootstrap(
   Alerts,
+  App,
   Breadcrumbs,
   Buttons,
   Cards,
@@ -52,6 +53,5 @@ export default bootstrap(
   Progress,
   Sidebar,
   Slider,
-  Tabs,
-  Toasts
+  Tabs
 )

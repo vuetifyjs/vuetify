@@ -10,11 +10,10 @@
 
 <script>
   export default {
+    name: 'breadcrumbs-item',
+    
     props: {
-      disabled: {
-        type: Boolean,
-        default: false
-      },
+      disabled: Boolean,
 
       item: {
         type: Object,
