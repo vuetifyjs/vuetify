@@ -1,5 +1,5 @@
 function directive (el, binding, v) {
-  Object.assign(
+  const config = Object.assign(
     {},
     binding.modifiers,
     { 
