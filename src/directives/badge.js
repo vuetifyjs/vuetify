@@ -1,17 +1,14 @@
-var defaults = {
-  icon: false,
-  left: false,
-  overlap: false
-}
-
 function directive (el, binding) {
-  let config = {}
-
-  Object.assign(
-    config,
-    defaults,
+  const config = Object.assign(
+    {
+      icon: false,
+      left: false,
+      overlap: false
+    },
     binding.modifiers,
-    { value: binding.arg },
+    { 
+      value: binding.arg
+    },
     binding.value || {}
   )
 

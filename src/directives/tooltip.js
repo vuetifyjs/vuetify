@@ -1,15 +1,12 @@
-var defaults = {
-  top: true
-}
-
 function directive (el, binding, bind = true) {
-  let config = {}
-
-  Object.assign(
-    config,
-    defaults,
+  const config = Object.assign(
+    {
+      top: true
+    },
     binding.modifiers,
-    { value: binding.arg },
+    { 
+      value: binding.arg 
+    },
     binding.value || {}
   )
 

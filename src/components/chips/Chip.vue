@@ -9,7 +9,7 @@
       class="chip__close"
       href="#!"
       v-if="close"
-      @click.prevent="active = false"
+      v-on:click.prevent="active = false"
     )
       v-icon(right) cancel
 </template>

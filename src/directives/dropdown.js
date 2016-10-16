@@ -1,7 +1,3 @@
-var defaults = {
-  hover: false
-}
-
 function dropdown (e, el, config, bus) {
   e.preventDefault()
 
@@ -27,13 +23,14 @@ function dropdown (e, el, config, bus) {
 }
 
 function directive (el, binding, v) {
-  let config = {}
-
-  Object.assign(
-    config,
-    defaults,
+  const config = Object.assign(
+    {
+      hover: false
+    },
     binding.modifiers,
-    { value: binding.arg },
+    { 
+      value: binding.arg 
+    },
     binding.value || {}
   )
 
@@ -52,10 +49,7 @@ function directive (el, binding, v) {
 
 export default {
   bind (el, binding, v) {
-    v.context.$vuetify.load.call(
-      v.context,
-      () => directive(el, binding, v)
-    )
+    directive(el, binding, v)
   },
 
   updated (el, binding, v) {

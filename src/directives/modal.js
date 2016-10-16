@@ -1,13 +1,10 @@
-var defaults = {}
-
 function directive (el, binding, v) {
-  let config = {}
-
   Object.assign(
-    config,
-    defaults,
+    {},
     binding.modifiers,
-    { value: binding.arg },
+    { 
+      value: binding.arg 
+    },
     binding.value || {}
   )
 

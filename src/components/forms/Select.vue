@@ -13,8 +13,8 @@
       v-bind:multiple="multiple"
       v-bind:id="id"
       v-bind:name="name"
-      @click="focused = true"
-      @blur="focused = false"
+      v-on:blur="focused = false"
+      v-on:click="focused = true"
       ref="select"
     )
       option(
@@ -63,9 +63,7 @@
         default: () => []
       },
 
-      value: {
-        type: [String, Number, Array, Boolean]
-      }
+      value: [String, Number, Array, Boolean]
     },
 
     computed: {

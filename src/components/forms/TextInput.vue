@@ -12,9 +12,9 @@
       v-bind:name="name"
       v-bind:id="id"
       v-bind:placeholder="placeholder"
-      @blur="focused = false"
-      @input="update"
-      @focus="focused = true"
+      v-on:blur="focused = false"
+      v-on:input="$emit('input', $event.target.value)"
+      v-on:focus="focused = true"
       ref="input"
     )
 </template>
@@ -39,40 +39,20 @@
     },
 
     props: {
-      label: {
-        type: String,
-        default: ''
-      },
+      label: String,
 
-      id: {
-        type: String,
-        default: ''
-      },
+      id: String,
 
-      name: {
-        type: String,
-        default: ''
-      },
+      name: String,
 
-      placeholder: {
-        type: String,
-        default: ''
-      },
+      placeholder: String,
 
-      value: {
-        type: [String, Number, Boolean]
-      }
+      value: [String, Number, Boolean]
     },
 
     mounted () {
       if (this.value) {
         this.$refs.input.value = this.value
-      }
-    },
-
-    methods: {
-      update () {
-        this.$emit('input', this.$refs.input.value)
       }
     }
   }

@@ -17,13 +17,9 @@
         default: 'auto'
       },
 
-      horizontal: {
-        type: Boolean
-      },
+      horizontal: Boolean,
 
-      img: {
-        type: String
-      }
+      img: String
     },
 
     computed: {
@@ -35,7 +31,7 @@
 
       styles () {
         let styles = {
-          height: `${this.height}`
+          height: this.height
         }
 
         if (this.img) {

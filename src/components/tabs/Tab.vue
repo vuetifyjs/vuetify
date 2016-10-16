@@ -3,7 +3,7 @@
     class="tabs__tab"
     v-bind:class="classes"
     v-bind:href="href"
-    @click.prevent="click"
+    v-on:click.prevent="click"
   )
     slot
 </template>

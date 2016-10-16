@@ -1,35 +1,35 @@
 .sidebar
+  background-color: #fff
   display: flex
-  flex-direction: column
-  width: $sidebar-width
   flex-basis: $sidebar-width
-  z-index: 3
+  flex-direction: column
   overflow-y: auto
   position: relative
   top: 0
-  background-color: #fff
   transition: $primary-transition
+  width: $sidebar-width
+  z-index: 3
   @extend .z-depth-2
   
   &::-webkit-scrollbar
-      width: 14px
-      height: 18px
+    width: 14px
+    height: 18px
       
   &::-webkit-scrollbar-thumb
-      height: 6px
-      border: 5px solid rgba(0, 0, 0, 0)
-      background-clip: padding-box
-      -webkit-border-radius: 7px
-      background-color: rgba($grey.base, 0.15)
-      -webkit-box-shadow: inset -1px -1px 0px rgba(0, 0, 0, 0.05), inset 1px 1px 0px rgba(0, 0, 0, 0.05)
+    height: 6px
+    border: 5px solid rgba(0, 0, 0, 0)
+    background-clip: padding-box
+    -webkit-border-radius: 7px
+    background-color: rgba($grey.base, 0.15)
+    -webkit-box-shadow: inset -1px -1px 0px rgba(0, 0, 0, 0.05), inset 1px 1px 0px rgba(0, 0, 0, 0.05)
 
   &::-webkit-scrollbar-button
-      width: 0
-      height: 0
-      display: none
+    width: 0
+    height: 0
+    display: none
       
   &::-webkit-scrollbar-corner
-      background-color: transparent
+    background-color: transparent
 
   &--right
     order: +1

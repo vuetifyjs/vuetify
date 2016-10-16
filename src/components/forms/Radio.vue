@@ -1,7 +1,5 @@
 <template lang="pug">
-  div(
-    class="form-input"
-  )
+  div(class="form-input")
     input(
       type="radio"
       v-bind:class="classes"
@@ -41,9 +39,7 @@
         default: ''
       },
 
-      value: {
-        type: [String, Number, Boolean]
-      }
+      value: [String, Number, Boolean]
     },
 
     computed: {

@@ -1,7 +1,7 @@
 <template lang="pug">
   div(
     v-bind:class="classes"
-    @click="click"
+    v-on:click="click"
   )
     slot
 </template>

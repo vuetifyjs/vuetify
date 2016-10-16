@@ -1,12 +1,12 @@
 .breadcrumbs
   display: flex
-  align-items: center
+  align-items: space-between
   flex-wrap: wrap
+  flex: 0 1 auto
   margin: .5rem 0
   list-style-type: none
-  width: 100%
   
-  li    
+  li
     &:not(:last-child):after
       color: $grey.lighten-1
       content: attr(data-divider)
@@ -33,7 +33,6 @@
     height: $breadcrumb-height
     text-decoration: none
     line-height: $breadcrumb-height
-    position: relative
     transition: $primary-transition
     
     &:hover

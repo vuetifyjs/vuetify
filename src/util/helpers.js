@@ -6,7 +6,7 @@ export function createSimpleFunctional (c, el = 'div') {
       if (data.staticClass) {
         data.staticClass += ` ${c}`
       } else {
-        data.staticClass = `${c}`
+        data.staticClass = c
       }
 
       return h(el, data, children)

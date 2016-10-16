@@ -7,9 +7,10 @@
   },
   "main": "dist/vuetify.min",
   "scripts": {
+    "dev": "webpack --config build/webpack.build.config.js --progress --hide-modules",
     "build": "cross-env NODE_ENV=production webpack --config build/webpack.build.config.js --progress --hide-modules"
   },
-  "description": "A Vue.js project",
+  "description": "Vue JS 2.0 Components Framework",
   "devDependencies": {
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",

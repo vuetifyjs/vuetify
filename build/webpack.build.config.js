@@ -4,7 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   devtool: false,
-  watch: true,
+  watch: process.env.NODE_ENV !== 'production',
   entry: {
     app: './src/index.js'
   },

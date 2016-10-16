@@ -8,7 +8,7 @@
         href="#!"
         class="pagination__navigation"
         v-bind:class="{ 'pagination__navigation--disabled': value === 1 }"
-        @click.prevent="prev()"
+        v-on:click.prevent="$emit('input', value - 1)"
       )
         v-icon chevron_left
     li(
@@ -19,8 +19,8 @@
         class="pagination__item"
         v-bind:class="{ 'pagination__item--active': n === selected }"
         v-if="!isNaN(n)"
+        v-on:click.prevent="$emit('input', n)"
         v-text="n"
-        @click.prevent="select(n)"
       )
       span(
         v-else
@@ -32,13 +32,15 @@
         href="#!"
         class="pagination__navigation"
         v-bind:class="{ 'pagination__navigation--disabled': value === length }"
-        @click.prevent="next()"
+        v-on:click.prevent="$emit('input', value + 1)"
       )
         v-icon chevron_right
 </template>
 
 <script>
   export default {
+    name: 'pagination',
+    
     data () {
       return {
         selected: null
@@ -113,14 +115,6 @@
         setTimeout(() => this.selected = this.value, 100)
       },
 
-      select (n) {
-        this.$emit('input', n)
-      },
-
-      next () {
-        this.$emit('input', this.value + 1)
-      },
-
       range (from, to) {
         let range = []
 
@@ -131,10 +125,6 @@
         }
 
         return range
-      },
-
-      prev () {
-        this.$emit('input', this.value - 1)
       }
     }
   }

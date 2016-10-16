@@ -12,6 +12,8 @@
 
 <script>
   export default {
+    name: 'progress',
+    
     props: {
       height: {
         type: String,
