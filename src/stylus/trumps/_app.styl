@@ -1,0 +1,37 @@
+.with
+  &.left-sidebar
+    main
+      display: flex
+      
+  &.left-fixed-sidebar
+    main,
+    header,
+    footer
+      padding-left: $sidebar-width
+      transition: $primary-transition
+  
+      @media screen and (max-width: $grid-breakpoints.sm)
+        padding-left: 0
+  
+  &.right-fixed-sidebar
+    main,
+    header,
+    footer
+      padding-right: $sidebar-width
+      transition: $primary-transition
+      
+      @media screen and (max-width: $grid-breakpoints.sm)
+        padding-right: 0
+
+  &.nav
+    main
+      min-height: "calc(100vh - %s)" % $nav-height
+      
+  &.footer
+    main
+      min-height: "calc(100vh - %s)" % $footer-height
+    
+  &.nav-and-footer
+    main
+      margin: 0
+      min-height: "calc(100vh - %s)" % ($navbar-height + $footer-height)
