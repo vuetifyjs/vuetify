@@ -2,9 +2,19 @@
   li
     a(
       class="sidebar__item"
+      v-if="!router"
       v-bind:href="item.href"
-      v-html="item.text"
+      v-on:click="click()"
     )
+    router-link(
+      class="sidebar__item"
+      active-class="sidebar__item--active"
+      v-bind:to="item.href"
+      v-on:click.native="click()"
+      v-else
+    )
+      v-icon(v-if="item.icon") {{ item.icon }}
+      span {{ item.text }}
 </template>
 
 <script>
@@ -15,6 +25,16 @@
       item: {
         type: Object,
         required: true
+      },
+
+      router: Boolean
+    },
+
+    methods: {
+      click () {
+        if (!this.$parent.$el.classList.contains('sidebar__group')) {
+          this.$vuetify.bus.pub('sidebar-group:close')
+        }
       }
     }
   }

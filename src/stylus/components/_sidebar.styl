@@ -56,9 +56,19 @@
     transform: translateX(0) !important
     width: $sidebar-width
     
+  &__group
+    transition: $primary-transition
+    
+    .sidebar__items
+      overflow: hidden
+    
+    .sidebar__item
+      padding-left: 3rem
+    
   &__items
     display: flex
     flex-direction: column
+    transition: $primary-transition
     
   &__item
     color: $sidebar-item-color
@@ -68,6 +78,7 @@
     transition: $primary-transition
     font-weight: 300
     padding: $sidebar-item-padding
+    height: 3rem
   
     &--active
       background-color: $secondary-color
@@ -78,6 +89,16 @@
       
     i
       margin-right: $spacers.one.x
+      
+  &__item-header
+    @extend .sidebar__item
+    font-weight: 500
+    
+    &--active
+      background: $primary-color
+      
+    &:hover
+      background: $primary-color
   
   @media screen and (max-width: $grid-breakpoints.sm)
     transform: translateX(-($sidebar-width + 25))

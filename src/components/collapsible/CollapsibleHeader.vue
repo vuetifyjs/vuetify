@@ -1,6 +1,6 @@
 <template lang="pug">
   div(
-    v-bind:class="classes"
+    class="collapsible__header"
     v-on:click="click"
   )
     slot
@@ -23,12 +23,6 @@
     },
     
     computed: {
-      classes () {
-        return {
-          'collapsible__header': true
-        }
-      },
-
       transitions () {
         return [
           [this.$el.parentNode, () => this.transitioning = false]

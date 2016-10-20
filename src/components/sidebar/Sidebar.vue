@@ -55,6 +55,27 @@
           'height': this.height
         }
       }
+    },
+
+    methods: {
+
+
+    close (e) {
+      if (this.activator === null) {
+        return
+      }
+      
+      try {
+        if (e.target === this.activator
+            || this.activator.contains(e.target)
+            || e.target.classList.contains('sidebar__item-header')
+        ) {
+          return
+        }
+      } catch (e) {}
+
+      this.active = false
+    }
     }
   }
 </script>

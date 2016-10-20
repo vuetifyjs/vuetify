@@ -1,9 +1,9 @@
-for n in (6..1)
-  h{n}
+for heading, options in $headings
+  {heading}
     color: $heading-color
-    font-size: $heading-base + ($heading-growth * (7 - n))
-    font-weight: 400
+    font-size: options.size
+    font-weight: options.weight
     line-height: 110%
     
     @media screen and (max-width: $grid-breakpoints.sm)
-      font-size: $heading-base + ($heading-growth * .6 * (7 - n))
+      font-size: options.size * .6
