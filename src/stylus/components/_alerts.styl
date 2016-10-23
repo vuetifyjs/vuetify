@@ -1,51 +1,35 @@
 .alert
-  padding: $alert-padding
   border-radius: $alert-border-radius
-  border-width: 1px
+  border-width: $alert-border-width
   border-style: solid
+  color: $alert-color
   text-align: left
+  padding: $alert-padding
   position: relative
-  overflow: hidden
-  z-index: 1
   margin: $alert-margin
   
   &:after
     font-family: 'Material Icons'
-    right: 1.5rem
-    top: 0
-    font-size: 4rem
+    left: -13px
+    top: 1rem
+    color: #fff
+    font-size: 1.2rem
     position: absolute
-    z-index: 0
-    opacity: .1
+    border-radius: 50%
+    display: flex
+    align-items: center
+    justify-content: center
+    height: 22px
+    width: 22px
 
   &--info
-    background-color: $blue.lighten-4
-    border-color: $blue.lighten-3
-    color: $blue.darken-3
-    
-    &:after
-      content: 'info_outline'
+    alert($theme.info, $blue.lighten-2, 'notifications')
         
   &--error
-    background-color: $red.lighten-4
-    border-color: $red.lighten-3
-    color: $red.darken-3
-    
-    &:after
-      content: 'error_outline'
+    alert($theme.error, $red.lighten-2, 'priority_high')
 
   &--success
-    background-color: $green.lighten-4
-    border-color: $green.lighten-3
-    color: $green.darken-3
-    
-    &:after
-      content: 'check'
+    alert($theme.success, $green.lighten-2, 'check')
     
   &--warning
-    background-color: $amber.lighten-4
-    border-color: $amber.lighten-3
-    color: $amber.darken-3
-    
-    &:after
-      content: 'warning'
+    alert($theme.warning, $amber.lighten-2, 'notifications_active')

@@ -1,8 +1,5 @@
 <template lang="pug">
-  div(
-    class="form-input"
-    v-bind:class="classes"
-  )
+  div(v-bind:class="classes")
     label(
       v-bind:for="id"
       v-html="label"

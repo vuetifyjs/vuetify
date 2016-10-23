@@ -1,48 +1,14 @@
-.primary
-  background-color: $primary-color !important
-  border-color: $primary-color !important
-  
-.primary--text
-  color: $primary-color !important
-  
-.secondary
-  background-color: $secondary-color !important
-  border-color: $secondary-color !important
-  
-.secondary--text
-  color: $secondary-color !important
+for color_name, color_value in $theme
+  global-color(color_name, color_value)
 
-for color_name, color in $colors
-  for color_type, color_value in color
-    if color_type == 'base'
-      .{color_name}
-        background-color color_value !important
-        border-color: color_value !important
-        
-      .{color_name}--text
-        color color_value !important
-        
-      .{color_name}--after
-        &:after
-          background: color_value !important
-    else if color_type != 'shades'
-      .{color_name}
-        &.{color_type}
-          background-color color_value !important
-          border-color: color_value !important
-        
-        &.{color_type}--after
-          &:after
-            background-color: color_value !important
-        
-      .{color_name}--text
-        &.text--{color_type}
-          color: color_value !important
+for color_name, color_value in $shades
+  global-color(color_name, color_value)
 
-for color, color_value in $shades
-  .{color}
-    background-color color_value !important
-    border-color: color_value !important
-    
-  .{color}--text
-    color color_value !important
+if ($color-pack)
+  for color_name, color in $colors
+    for color_type, color_value in color
+      if color_type == 'base'
+        global-color(color_name, color_value)
+        
+      else if color_type != 'shades'
+        global-color-accent(color_name, color_value)

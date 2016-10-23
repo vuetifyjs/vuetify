@@ -1,9 +1,14 @@
 <template lang="pug">
-  div(
-    v-bind:class="classes"
-    v-bind:uid="uid"
+  transition(
+    v-on:enter="enter"
+    v-on:leave="leave"
   )
-    slot
+    div(
+      class="collapsible__body"
+      v-bind:uid="_uid"
+      v-show="active"
+    )
+      slot
 </template>
 
 <script>
@@ -23,46 +28,22 @@
     },
 
     computed: {
-      classes () {
-        return {
-          'collapsible__body': true
-        }
-      },
-
       events () {
         return [
           [`collapse:toggle:${this.$parent._uid}`, this.toggle]
         ]
-      },
-
-      parent () {
-        return this.$el.parentNode
-      },
-
-      uid () {
-        return this._uid
-      }
-    },
-
-    watch: {
-      active (bool) {
-        if (bool) {
-          return this.open()
-        }
-
-        this.close()
       }
     },
 
     methods: {
-      close () {
-        this.parent.classList.remove('collapsible--active')
-        this.parent.style.height = `${this.parent.clientHeight - this.$el.clientHeight}px`
+      enter (el) {
+        el.style.display = 'block'
+        el.style.height = 0
+        el.style.height = `${el.scrollHeight}px`
       },
 
-      open () {
-        this.parent.classList.add('collapsible--active')
-        this.parent.style.height = `${this.parent.clientHeight + this.$el.clientHeight}px`
+      leave (el) {
+        el.style.height = 0
       },
 
       toggle (uid) {

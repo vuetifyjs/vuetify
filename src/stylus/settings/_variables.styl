@@ -1,12 +1,20 @@
 // Theme
 $body-font-family := 'Roboto', san-serif
-$body-bg := $shades.white
+$body-bg := #FFFFFF
 $color-root := $grey.darken-3
 $font-size-root := 14px
 $line-height-root := 20px
-$primary-color := $blue.base
-$primary-color-accent := $blue.accent-4
-$secondary-color := $grey.darken-3
+$theme := {
+  primary: $blue.base,
+  secondary: $grey.darken-3,
+  info: $blue.base,
+  warning: $amber.base,
+  error: $red.base,
+  success: $green.base
+}
+
+// Addons
+$color-pack := false
 
 // Grid
 $grid-breakpoints := {
@@ -85,12 +93,14 @@ $primary-transition := all 0.3s cubic-bezier(0, 0, .2, 1)
 $secondary-transition := all 0.2s ease-out
 
 // Alerts
+$alert-color := #FFFFFF
 $alert-padding := 1.5rem
 $alert-border-radius := 0
+$alert-border-width := 1px 1px 1px 4px
 $alert-margin := $spacers.one.y auto
 
 // Badges
-$badge-color := $shades.white
+$badge-color := #FFFFFF
 $badge-font-family := $body-font-family
 $badge-font-size := .9rem
 $badge-height := 22px
@@ -106,7 +116,7 @@ $breadcrumb-padding := 0 1rem
 $button-background := $grey.lighten-2
 $button-border := none
 $button-border-radius := 2px
-$button-color := $shades.black
+$button-color := #000000
 $button-disabled-opacity := .5
 $button-height := 2.6rem
 $button-flat-hover := rgba(158, 158, 158, .2)

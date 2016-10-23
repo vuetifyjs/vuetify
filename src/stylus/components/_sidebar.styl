@@ -56,9 +56,7 @@
     transform: translateX(0) !important
     width: $sidebar-width
     
-  &__group
-    transition: $primary-transition
-    
+  &__group    
     .sidebar__items
       overflow: hidden
     
@@ -85,20 +83,31 @@
     
     &:hover
       background-color: $secondary-color
-      color: $shades.white
+      color: #FFFFFF
       
     i
       margin-right: $spacers.one.x
       
   &__item-header
     @extend .sidebar__item
-    font-weight: 500
     
-    &--active
-      background: $primary-color
+    &:after
+      content: 'keyboard_arrow_left'
+      font-family: 'Material Icons'
+      font-size: 1.5rem
+      position: absolute
+      right: 15px
+      color: inherit
+      transition: $primary-transition
       
     &:hover
-      background: $primary-color
+      background: $theme.primary
+      
+    &--active
+      background: $theme.primary
+      
+      &:after
+        transform: rotate3d(0, 0, 1, -90deg)
   
   @media screen and (max-width: $grid-breakpoints.sm)
     transform: translateX(-($sidebar-width + 25))

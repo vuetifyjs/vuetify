@@ -8,14 +8,7 @@
   margin-bottom: 1rem
   @extend .z-depth-1
   
-  li
-    height: $collapsible-collapse-height
-    overflow: hidden
-    transition: $secondary-transition, height $collapsible-transition-height ease-out
-    
-    &.collapsible--active
-      transition: height $collapsible-transition-height ease-in
-      
+  li    
     &:not(:first-child) .collapsible__header
       border-top: 1px solid #ddd
   
@@ -30,8 +23,9 @@
       margin-right: 1rem
     
   &__body
-    padding: 1rem
     background-color: rgba(0, 0, 0, 0.03)
+    transition: $primary-transition
+    overflow: hidden
     
     &:last-child
       border-bottom: 1px solid #ddd

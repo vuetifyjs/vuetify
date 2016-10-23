@@ -43,9 +43,16 @@
     transition: $primary-transition
     
     &-enter, &-leave-active
-      opacity: 0
-      transform: translate3d(0, 2rem, 0)
+      transform: translate3d(100%, 0, 0)
       
     &-leave, &-leave-active
       top: 0
       position: absolute
+      transform: translate3d(-100%, 0, 0)
+      
+    &--reverse
+      &-enter, &-leave-active
+        transform: translate3d(-100%, 0, 0)
+        
+      &-leave, &-leave-active
+        transform: translate3d(100%, 0, 0)

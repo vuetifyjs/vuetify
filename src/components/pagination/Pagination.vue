@@ -10,10 +10,8 @@
         v-bind:class="{ 'pagination__navigation--disabled': value === 1 }"
         v-on:click.prevent="$emit('input', value - 1)"
       )
-        v-icon chevron_left
-    li(
-      v-for="n in items"
-    )
+        v-icon(v-text="chevron_left")
+    li(v-for="n in items")
       a(
         href="#!"
         class="pagination__item"
@@ -34,7 +32,7 @@
         v-bind:class="{ 'pagination__navigation--disabled': value === length }"
         v-on:click.prevent="$emit('input', value + 1)"
       )
-        v-icon chevron_right
+        v-icon(v-text="chevron_right")
 </template>
 
 <script>

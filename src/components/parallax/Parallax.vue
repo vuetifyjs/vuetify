@@ -55,7 +55,7 @@
             this.translate()
             this.listeners()
             this.$vuetify.bus.pub('parallax:ready')
-          }, false)
+          }, { once: true })
         }
       },
 

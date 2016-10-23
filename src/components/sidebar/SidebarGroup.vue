@@ -1,36 +1,42 @@
 <template lang="pug">
   li(class="sidebar__group")
     a(
-      class="sidebar__item-header grey--text text--lighten-2"
-      v-bind:class="{ 'sidebar__item-header--active': this.active }"
+      class="sidebar__item-header"
+      v-bind:class="{ 'sidebar__item-header--active': active }"
       v-bind:href="item.href"
       v-on:click="toggle()"
-      v-text="item.text"
     )
-    ul(
-      class="sidebar__items"
-      v-bind:style="{ height: height + 'px' }"
-      ref="collapse"
+      v-icon(
+        v-if="item.icon"
+        v-text="item.icon"
+      )
+      span(v-text="item.text")
+    transition(
+      v-on:enter="enter"
+      v-on:leave="leave"
     )
-      slot
+      ul(
+        class="sidebar__items"
+        v-show="active"
+        ref="group"
+      )
+        slot
 </template>
 
 <script>
-  import Transitionable from '../../mixins/transitionable'
   import Eventable from '../../mixins/eventable'
 
   export default {
     name: 'sidebar-group',
 
     mixins: [
-      Transitionable,
       Eventable
     ],
 
     data () {
       return {
         active: false,
-        height: 0,
+        height: 0
       }
     },
 
@@ -44,49 +50,35 @@
         return [
           ['sidebar-group:close', this.close]
         ]
-      },
-
-      transitions () {
-        return [
-          [this.$el.parentNode, () => this.transitioning = false]
-        ]
       }
-
-    },
-
-    watch: {
-      active (b) {
-        this.transitioning = true
-
-        if (b) {
-          this.height = this.$refs.collapse.scrollHeight
-        } else {
-          this.height = 0
-        }
-      },
     },
 
     mounted () {
-      if (this.$refs.collapse.querySelector('.sidebar__item--active')) {
-        this.toggle()
+      if (this.$refs.group.querySelector('.sidebar__item--active')) {
+        this.active = true
       }
     },
 
     methods: {
-      toggle () {
-        if (!this.transitioning) {
-          this.active = !this.active
-        }
-
+      enter (el) {
+        el.style.display = 'block'
+        el.style.height = 0
+        el.style.height = `${el.scrollHeight}px`
         this.$vuetify.bus.pub('sidebar-group:close', this._uid)
       },
 
-      close (uid = null) {
-        if (uid === this._uid) {
-          return
-        }
+      leave (el, done) {
+        el.style.height = 0
+      },
 
-        this.active = false
+      toggle () {
+        this.active = !this.active
+      },
+
+      close (uid = null) {
+        if (uid !== this._uid) {
+          this.active = false
+        }
       }
     }
   }

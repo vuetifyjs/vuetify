@@ -4,7 +4,6 @@
     v-bind:class="classes"
     v-bind:data-right="right"
     v-bind:id="id"
-    ref="dropdown"
   )
     v-dropdown-item(
       v-for="item in items"

@@ -9,12 +9,16 @@
     router-link(
       class="sidebar__item"
       active-class="sidebar__item--active"
+      v-bind:exact="item.href === '/'"
       v-bind:to="item.href"
       v-on:click.native="click()"
       v-else
     )
-      v-icon(v-if="item.icon") {{ item.icon }}
-      span {{ item.text }}
+      v-icon(
+        v-if="item.icon"
+        v-text="item.icon"
+      )
+      span(v-text="item.text")
 </template>
 
 <script>

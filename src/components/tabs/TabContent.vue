@@ -2,6 +2,7 @@
   transition(
     v-bind:name="transition"
     tag="div"
+    mode="out-in"
   )
     div(
       class="tabs__content"
