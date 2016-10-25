@@ -1,5 +1,5 @@
 <template lang="pug">
-  div
+  div(class="input-group")
     input(
       type="radio"
       v-bind:class="classes"

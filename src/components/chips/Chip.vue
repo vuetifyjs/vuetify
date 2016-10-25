@@ -11,10 +11,7 @@
       v-if="close"
       v-on:click.prevent="active = false"
     )
-      v-icon(
-        right
-        v-text="cancel"
-      )
+      v-icon(right) cancel
 </template>
 
 <script>

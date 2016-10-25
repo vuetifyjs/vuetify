@@ -1,5 +1,5 @@
 <template lang="pug">
-  div
+  div(class="input-group")
     input(
       type="checkbox"
       v-bind:class="classes"

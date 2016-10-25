@@ -5,14 +5,14 @@
         icon
         v-on:click.native="prev"
       )
-        v-icon(v-text="chevron_left")
+        v-icon chevron_left
 
     div(class="slider__right")
       v-btn(
         icon
         v-on:click.native="next"
       )
-        v-icon(v-text="chevron_right")
+        v-icon chevron_right
 
     div(class="slider__controls")
       v-btn(
@@ -21,10 +21,7 @@
         v-bind:class="{ 'slider__controls__item--active': index === current }"
         v-for="(n, index) in items.length"
       )
-        v-icon(
-          v-on:click.native="select(index)"
-          v-text="fiber_manual_record"
-        )
+        v-icon(v-on:click.native="select(index)") fiber_manual_record
     div(
       class="slider__slides"
       v-bind:class="classes"

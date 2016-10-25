@@ -1,4 +1,4 @@
-.form-input
+.input-group
   position: relative
   margin-bottom: 1rem
   width: 100%
@@ -62,11 +62,11 @@
       &:checked
         + label
           &:before
-            border: 2px solid $secondary-color
+            border: 2px solid $theme.secondary
             background: transparent
             
           &:after
-            background: $secondary-color
+            background: $theme.secondary
             transform: scale(1)
 
       &.gap
@@ -111,9 +111,9 @@
       &:checked
         + label
           &:before
-            border-bottom-color: $secondary-color
+            border-bottom-color: $theme.secondary
             border-left-color: transparent
-            border-right-color: $secondary-color
+            border-right-color: $theme.secondary
             border-top-color: transparent
             transform: rotate(40deg)
             width: .5rem
@@ -148,13 +148,13 @@
               transform: rotate(37deg) scale(.8)
             
             &:after
-              background: $secondary-color
-              border-color: $secondary-color
+              background: $theme.secondary
+              border-color: $theme.secondary
               
       &:indeterminate
         + label    
           &:before
-            border-right-color: $secondary-color
+            border-right-color: $theme.secondary
             left: -20px
             top: -8px
             border-top: 0px solid transparent
@@ -169,7 +169,7 @@
             background: transparent
               
   select
-    @extend .form-input input[type=text]
+    @extend .input-group input[type=text]
     width: 100%
     
     &[multiple]
@@ -179,7 +179,7 @@
       margin-bottom: 1rem
       
   label
-    color: $primary-color
+    color: $theme.primary
     position: absolute
     top: 15px
     transition: $primary-transition
@@ -188,7 +188,7 @@
     content: ""
     width: 0%
     height: 2px
-    background-color: $primary-color
+    background-color: $theme.primary
     position: absolute
     bottom: -1px
     left: 0

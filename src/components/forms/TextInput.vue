@@ -1,5 +1,8 @@
 <template lang="pug">
-  div(v-bind:class="classes")
+  div(
+    class="input-group"
+    v-bind:class="classes"
+  )
     label(
       v-bind:for="id"
       v-html="label"
@@ -29,8 +32,8 @@
     computed: {
       classes () {
         return {
-          'form-input--focused': this.focused,
-          'form-input--dirty': this.value || this.placeholder || (this.$refs.input && this.$refs.input.value)
+          'input-group--focused': this.focused,
+          'input-group--dirty': this.value || this.placeholder || (this.$refs.input && this.$refs.input.value)
         }
       }
     },
