@@ -13,7 +13,7 @@ export default {
   },
 
   mounted () {
-    this.$vuetify.load.call(this, this.init)
+    this.$vuetify.load(this.init)
   },
 
   beforeDestroy () {
