@@ -1,3 +1,7 @@
+import {
+  directiveConfig
+} from '../util/helpers'
+
 function dropdown (e, el, config, bus) {
   e.preventDefault()
 
@@ -23,18 +27,14 @@ function dropdown (e, el, config, bus) {
 }
 
 function directive (el, binding, v) {
-  const config = Object.assign(
+  const config = directiveConfig(
+    binding,
     {
       hover: false
-    },
-    binding.modifiers,
-    { 
-      value: binding.arg 
-    },
-    binding.value || {}
+    }
   )
 
-  el.setAttribute('data-dropdown', config.value)
+  el.dataset.dropdown = config.value
 
   if (!config.hover) {
     el.onclick = e => {

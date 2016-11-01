@@ -1,23 +1,19 @@
-function directive (el, binding, bind = true) {
-  const config = Object.assign(
+import {
+  directiveConfig
+} from '../util/helpers'
+
+function directive (el, binding) {
+  const config = directiveConfig(
+    binding,
     {
       top: true
-    },
-    binding.modifiers,
-    { 
-      value: binding.arg 
-    },
-    binding.value || {}
+    }
   )
 
   if (bind) {
-    el.setAttribute('data-tooltip', config.html)
+    el.dataset.tooltip = config.html
     el.classList.add('tooltip')
     el.classList.add(`tooltip--${config.value}`)
-  } else {
-    el.removeAttribute('data-tooltip', config.html)
-    el.classList.remove('tooltip')
-    el.classList.remove(`tooltip--${config.value}`)
   }
 }
 
@@ -35,6 +31,8 @@ export default {
   },
 
   unbind (el, binding) {
-    directive(el, binding, false)
+    el.removeAttribute('data-tooltip', config.html)
+    el.classList.remove('tooltip')
+    el.classList.remove(`tooltip--${config.value}`)
   }
 }

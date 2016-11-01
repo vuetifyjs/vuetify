@@ -1,14 +1,11 @@
-function directive (el, binding, v) {
-  const config = Object.assign(
-    {},
-    binding.modifiers,
-    { 
-      value: binding.arg 
-    },
-    binding.value || {}
-  )
+import {
+  directiveConfig
+} from '../util/helpers'
 
-  el.setAttribute('data-sidebar', config.value)
+function directive (el, binding, v) {
+  const config = directiveConfig(binding)
+
+  el.dataset.sidebar = config.value
 
   el.onclick = e => {
     e.preventDefault()
