@@ -17,12 +17,7 @@
 
       item: {
         type: Object,
-        default: () => {
-          return {
-            href: '#!',
-            text: ''
-          }
-        }
+        required: true
       }
     },
 

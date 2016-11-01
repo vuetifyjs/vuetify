@@ -49,14 +49,14 @@
         if (this.$refs.img.complete) {
           this.translate()
           this.listeners()
-          this.$vuetify.bus.pub('parallax:ready')
-        } else {
-          this.$refs.img.addEventListener('load', () => {
-            this.translate()
-            this.listeners()
-            this.$vuetify.bus.pub('parallax:ready')
-          }, { once: true })
+          return this.$vuetify.bus.pub('parallax:ready')
         }
+        
+        this.$refs.img.addEventListener('load', () => {
+          this.translate()
+          this.listeners()
+          this.$vuetify.bus.pub('parallax:ready')
+        }, { once: true })
       },
 
       objHeight () {

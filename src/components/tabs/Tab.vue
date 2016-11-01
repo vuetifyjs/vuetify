@@ -53,7 +53,7 @@
       if (this.selected) {
         this.active = true
 
-        this.$vuetify.load.call(this, this.click)
+        this.$vuetify.load(this.click)
       }
     },
 

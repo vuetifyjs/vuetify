@@ -39,12 +39,12 @@
     },
 
     mounted () {
-      this.$vuetify.load.call(this, this.init)
+      this.$vuetify.load(this.init)
     },
 
     methods: {
       init () {
-        this.$children.forEach(i => i.$el.setAttribute('data-divider', this.divider))
+        this.$children.forEach(i => i.$el.dataset.divider = this.divider)
       }
     }
   }
