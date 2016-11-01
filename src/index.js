@@ -7,10 +7,6 @@ import Load from './util/load'
 import Toast from './functions/toast'
 
 function plugin(Vue) {
-  if (plugin.installed) {
-    return
-  }
-
   Object.keys(Directives).forEach(key => {
     Vue.directive(key, Directives[key])
   })
@@ -32,6 +28,10 @@ function plugin(Vue) {
 
     toast: Toast
   }
+}
+
+if (typeof window !== 'undefined' && window.Vue) {
+    window.Vue.use(plugin);
 }
 
 module.exports = plugin
