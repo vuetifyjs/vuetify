@@ -64,7 +64,6 @@
 
     mounted () {
       const vm = this
-      this.model = this.$el._value
 
       this.$refs.input.indeterminate = this.indeterminate
 
@@ -77,7 +76,7 @@
         if (!vm.model
             || typeof vm.model === 'string'
         ) {
-          return vm.$emit('input', c ? v || true : null)
+          return vm.$emit('input', c ? true : false)
         }
 
         const i = vm.model.indexOf(v)
@@ -94,13 +93,9 @@
 
     methods: {
       state () {
-        if (!this.model) {
-          return
-        }
-
-        if (typeof this.model === 'string' 
-            && this.model === this.value
-            || this.model.includes(this.value)
+        if (typeof this.model === 'array' 
+            && this.model.includes(this.value)
+            || this.value
         ) {
           this.$refs.input.checked = true
         }

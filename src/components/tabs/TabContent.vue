@@ -1,9 +1,5 @@
 <template lang="pug">
-  transition(
-    v-bind:name="transition"
-    tag="div"
-    mode="out-in"
-  )
+  transition(v-bind:name="transition")
     div(
       class="tabs__content"
       v-bind:id="id"
@@ -33,11 +29,6 @@
         required: true
       },
 
-      target: {
-        type: String,
-        required: true
-      },
-
       transition: {
         type: String,
         default: 'tabs__content'
@@ -47,7 +38,7 @@
     computed: {
       events () {
         return [
-          [`tab:open:${this.target}`, this.open]
+          ['tab:open', this.open]
         ]
       }
     },

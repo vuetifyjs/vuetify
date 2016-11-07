@@ -2,6 +2,12 @@
   position: relative
   margin-bottom: 1rem
   width: 100%
+      
+  label
+    color: $theme.primary
+    position: absolute
+    top: 15px
+    transition: $primary-transition
     
   input
     &[type=text]
@@ -33,6 +39,7 @@
         padding-left: 1.5rem
         cursor: pointer
         position: relative
+        top: 0
         
         &:before
           content: ""
@@ -95,6 +102,7 @@
         padding-left: 1.5rem
         cursor: pointer
         position: relative
+        top: 0
         
         &:before
           content: ""
@@ -177,12 +185,6 @@
       height: 10rem
       top: 9px
       margin-bottom: 1rem
-      
-  label
-    color: $theme.primary
-    position: absolute
-    top: 15px
-    transition: $primary-transition
   
   &:after
     content: ""

@@ -17,7 +17,9 @@
 
       medium: Boolean,
 
-      right: Boolean
+      right: Boolean,
+
+      xLarge: Boolean
     },
 
     computed: {
@@ -26,7 +28,8 @@
           'icon--large': this.large,
           'icon--left': this.left,
           'icon--medium': this.medium,
-          'icon--right': this.right
+          'icon--right': this.right,
+          'icon--x-large': this.xLarge
         }
       }
     }

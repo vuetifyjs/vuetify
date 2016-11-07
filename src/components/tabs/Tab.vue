@@ -23,7 +23,7 @@
     ],
 
     props: {
-      target: {
+      href: {
         type: String,
         required: true
       },
@@ -40,30 +40,28 @@
 
       events () {
         return [
-          [`tab:activate:${this.$parent.id}`, this.activate]
+          ['tab:open', this.activate]
         ]
       },
 
-      href () {
-        return `#${this.target}`
+      target () {
+        return this.href.replace('#', '')
       }
     },
 
     mounted () {
       if (this.selected) {
-        this.active = true
-
         this.$vuetify.load(this.click)
       }
     },
 
     methods: {
-      activate (uid) {
-        this.active = uid === this._uid
+      activate (target) {
+        this.active = target === this.target
       },
 
       click () {
-        this.$vuetify.bus.pub(`tab:open:${this.$parent.id}`, this.target, this._uid)
+        this.$vuetify.bus.pub('tab:open', this.target)
       }
     }
   }

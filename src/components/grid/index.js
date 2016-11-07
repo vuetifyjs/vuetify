@@ -12,19 +12,23 @@ const Col = {
   }
 }
 
-// const Container = {
-//   functional: true,
+const Container = {
+  functional: true,
 
-//   render (h, { data, children }) {
-//     let staticClass = ''
+  render (h, { data, children }) {
+    let staticClass = data.staticClass ? `container ${data.staticClass}` : 'container'
 
-//     if (data.staticClass) {
-//       staticClass = data.staticClass
-//     }
-//   }
-// }
+    if (data.attrs && data.attrs.fluid) {
+      staticClass += ' container--fluid'
+    }
 
-const Container = createSimpleFunctional('container')
+    data.staticClass = staticClass
+
+    return h('div', data, children)
+  }
+}
+
+const Content = createSimpleFunctional('content')
 const Row = createSimpleFunctional('row')
 const ColSpacer = createSimpleFunctional('col--spacer')
 
@@ -32,5 +36,6 @@ export default {
   Col,
   ColSpacer,
   Container,
+  Content,
   Row
 }

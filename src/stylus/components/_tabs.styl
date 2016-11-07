@@ -1,13 +1,13 @@
 .tabs
-  display: flex
-  justify-content: center
-  position: relative
-  align-items: center
-  border-bottom: 1px solid $grey.lighten-2
-    
+  margin-bottom: $spacers.double.y
+  
   &__tab
     flex: 1
-    color: $grey.lighten-2
+    background: $grey.lighten-3
+    border-width: 1px 0 1px 1px
+    border-color: $grey.lighten-2
+    border-style: solid
+    color: $grey.base
     text-decoration: none
     font-weight: 300
     display: block
@@ -17,37 +17,58 @@
     text-transform: uppercase
     transition: $primary-transition
     
+    &:last-child
+      border-width: 1px
+    
     &:after
       content: ""
       position: absolute
       left: 0
-      bottom: 0
-      width: 0%
-      height: 2px
+      top: 0
+      width: 100%
+      height: 0
       transition: $secondary-transition
       background: $theme.primary
   
     &--active
       color: $theme.primary
+      background: #fff
+      border-top-color: $theme.primary
+      border-bottom-color: transparent
       
       &:after
-        width: 100%
+        height: 3px
         
   &__container
+    display: flex
     position: relative
+    align-items: center
+    flex-wrap: nowrap
+    white-space: nowrap
+    overflow-x: auto
     
-  &__content
-    padding: 2rem 0
+  &__content-container
+    background: #fff
+    border-width: 0 1px 1px 1px
+    border-color: $grey.lighten-2
+    border-style: solid
     width: 100%
     height: 100%
-    transition: $primary-transition
+    position: relative
+    overflow: hidden
     
-    &-enter, &-leave-active
+  &__content
+    transition: .4s ease-out
+    padding: 1rem
+    height: 100%
+    width: 100%
+    
+    &-enter
       transform: translate3d(100%, 0, 0)
       
     &-leave, &-leave-active
-      top: 0
       position: absolute
+      top: 2rem
       transform: translate3d(-100%, 0, 0)
       
     &--reverse

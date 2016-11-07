@@ -21,23 +21,24 @@
         default: 'app'
       },
 
-      navbar: Boolean,
-
       rightFixedSidebar: Boolean,
 
-      rightSidebar: Boolean
+      rightSidebar: Boolean,
+
+      topFixedNavbar: Boolean,
+
+      topNavbar: Boolean
     },
 
     computed: {
       classes () {
         return {
-          'footer': this.footer && !this.navbar,
           'left-fixed-sidebar': this.leftFixedSidebar,
           'left-sidebar': this.leftSidebar,
-          'nav': this.navbar && !this.footer,
-          'nav-and-footer': this.navbar && this.footer,
           'right-fixed-sidebar': this.rightFixedSidebar,
-          'right-sidebar': this.rightSidebar
+          'right-sidebar': this.rightSidebar,
+          'top-fixed-navbar': this.topFixedNavbar,
+          'top-navbar': this.topNavbar
         }
       }
     }

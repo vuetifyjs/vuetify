@@ -1,7 +1,20 @@
 .with
-  &.left-sidebar
+  display: flex
+  flex-flow: column nowrap
+  min-height: 100vh
+  
+  &.top-fixed-navbar
+    padding-top: $navbar-min-height + $spacers.double.y
+      
+    header
+      position: fixed
+      top: 0
+      z-index: 4
+
+  &.top-navbar
     main
-      display: flex
+      > .content
+        padding-top: $spacers.one.y
       
   &.left-fixed-sidebar
     main,
@@ -12,6 +25,16 @@
   
       @media screen and (max-width: $grid-breakpoints.sm)
         padding-left: 0
+        
+  &.left-sidebar
+    .sidebar
+      box-shadow: none
+      
+    main
+      background: $theme.secondary
+      
+      > .content
+        background: #fff
   
   &.right-fixed-sidebar
     main,
@@ -22,16 +45,3 @@
       
       @media screen and (max-width: $grid-breakpoints.sm)
         padding-right: 0
-
-  &.nav
-    main
-      min-height: "calc(100vh - %s)" % $nav-height
-      
-  &.footer
-    main
-      min-height: "calc(100vh - %s)" % $footer-height
-    
-  &.nav-and-footer
-    main
-      margin: 0
-      min-height: "calc(100vh - %s)" % ($navbar-height + $footer-height)
