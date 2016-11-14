@@ -17,6 +17,10 @@
     text-transform: uppercase
     transition: $primary-transition
     
+    @media screen and (max-width: $grid-breakpoints.sm)
+      border-width: 1px
+      flex-basis: 100%
+    
     &:last-child
       border-width: 1px
     
@@ -47,6 +51,9 @@
     white-space: nowrap
     overflow-x: auto
     
+    @media screen and (max-width: $grid-breakpoints.sm)
+      flex-wrap: wrap
+    
   &__content-container
     background: #fff
     border-width: 0 1px 1px 1px
@@ -68,7 +75,7 @@
       
     &-leave, &-leave-active
       position: absolute
-      top: 2rem
+      top: 0
       transform: translate3d(-100%, 0, 0)
       
     &--reverse
