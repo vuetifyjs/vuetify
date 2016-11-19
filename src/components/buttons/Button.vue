@@ -48,9 +48,7 @@
           'btn--large': this.large,
           'btn--outline': this.outline,
           'btn--round': this.round,
-          'btn--small': this.small,
-          'primary white--text': this.primary,
-          'secondary white--text': this.secondary
+          'btn--small': this.small
         }
       }
     }

@@ -1,6 +1,5 @@
 .badge
   position: relative
-  padding-right: 22px
   
   &:after
     color: $badge-color
@@ -8,8 +7,8 @@
     display: flex
     position: absolute
     font-family: $badge-font-family
-    top: $badge-top
-    right: $badge-right
+    top: -($badge-height / 2)
+    right: -($badge-width)
     background-color: $theme.primary
     border-radius: 50%
     height: $badge-height
@@ -23,19 +22,16 @@
   &--overlap
     &.badge--left
       &:after
-        left: 11px
+        left: 0
         
     &:after
-      top: -8px
-      right: 11px
+      top: 0
+      right: 0
       
   &--icon
     &:after
       font-family: 'Material Icons'
       
   &--left
-    padding-right: inherit
-    padding-left: 22px
-    
     &:after
-      left: 0
+      left: -($badge-width)

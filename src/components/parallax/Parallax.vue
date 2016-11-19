@@ -47,6 +47,7 @@
     methods: {
       init () {
         if (this.$refs.img.complete) {
+          console.log('here')
           this.translate()
           this.listeners()
           return this.$vuetify.bus.pub('parallax:ready')

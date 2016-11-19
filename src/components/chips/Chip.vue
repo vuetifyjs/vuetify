@@ -2,12 +2,12 @@
   span(
     class="chip"
     v-bind:class="classes"
-    v-if="active"
+    v-show="active"
   )
     slot
-    a(
+    v-btn(
       class="chip__close"
-      href="#!"
+      icon
       v-if="close"
       v-on:click.prevent="active = false"
     )

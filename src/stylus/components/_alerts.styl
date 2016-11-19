@@ -3,33 +3,31 @@
   border-width: $alert-border-width
   border-style: solid
   color: $alert-color
+  display: flex
+  font-size: 1.1rem
   text-align: left
   padding: $alert-padding
   position: relative
   margin: $alert-margin
   
-  &:after
-    font-family: 'Material Icons'
-    left: -13px
-    top: 1rem
-    color: #fff
-    font-size: 1.2rem
-    position: absolute
-    border-radius: 50%
-    display: flex
-    align-items: center
-    justify-content: center
-    height: 22px
-    width: 22px
+  > .icon
+    align-self: center
+    margin-right: $alert-padding
+    margin-bottom: 4px
+    font-size: 2rem
+    color: rgba($shades.black, .3)
+    
+  > div
+    width: 100%
 
   &--info
-    alert($theme.info, $blue.lighten-2, 'notifications')
+    alert($theme.info, $blue.darken-2)
         
   &--error
-    alert($theme.error, $red.lighten-2, 'priority_high')
+    alert($theme.error, $red.darken-2)
 
   &--success
-    alert($theme.success, $green.lighten-2, 'check')
+    alert($theme.success, $green.darken-2)
     
   &--warning
-    alert($theme.warning, $amber.lighten-2, 'notifications_active')
+    alert($theme.warning, $amber.darken-2)

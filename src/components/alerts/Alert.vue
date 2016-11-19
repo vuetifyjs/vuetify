@@ -3,7 +3,9 @@
     class="alert"
     v-bind:class="classes"
   )
-    slot
+    v-icon {{ icon }}
+    div
+      slot
 </template>
 
 <script>
@@ -27,6 +29,23 @@
           'alert--info': this.info,
           'alert--success': this.success,
           'alert--warning': this.warning,
+        }
+      },
+
+      icon () {
+        switch (true) {
+          case this.error:
+            return 'warning'
+          break
+          case this.info:
+            return 'info'
+          break
+          case this.success:
+            return 'check_circle'
+          break
+          case this.warning:
+            return 'priority_high'
+          break
         }
       }
     }

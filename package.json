@@ -5,15 +5,15 @@
     "name": "John Leider",
     "email": "john.j.leider@gmail.com"
   },
-  "main": "dist/vuetify.min",
+  "main": "dist/vuetify.common.js",
   "scripts": {
-    "dev": "webpack --config build/webpack.build.config.js --progress --hide-modules",
-    "build": "cross-env NODE_ENV=production webpack --config build/webpack.build.config.js --progress --hide-modules"
+    "dev": "TARGET=dev webpack --config build/config.js --progress --hide-modules",
+    "build": "NODE_ENV=production node build/build.js"
   },
   "description": "Vue JS 2.0 Components Framework",
   "devDependencies": {
     "babel-core": "^6.0.0",
-    "babel-loader": "^6.0.0",
+    "babel-loader": "^6.2.8",
     "babel-preset-es2015": "^6.13.2",
     "babel-preset-stage-2": "^6.13.0",
     "cross-env": "^1.0.6",
@@ -27,6 +27,7 @@
     "stylus-loader": "^2.1.1",
     "vue-loader": "^9.5.1",
     "vue-template-compiler": "^2.0.1",
-    "webpack": "^2.1.0-beta.25"
+    "webpack": "^2.1.0-beta.25",
+    "webpack-merge": "^0.17.0"
   }
 }
