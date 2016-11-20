@@ -806,6 +806,7 @@ var Bus = function (_EventEmitter) {
 //
 //
 //
+//
 
 /* harmony default export */ exports["default"] = {
   name: 'card-title',
@@ -820,6 +821,11 @@ var Bus = function (_EventEmitter) {
   },
 
   computed: {
+    classes: function classes() {
+      return {
+        'card__title--img': this.img
+      };
+    },
     styles: function styles() {
       var styles = {
         height: this.height
@@ -4891,6 +4897,7 @@ module.exports={render:function (){var _vm=this;
 module.exports={render:function (){var _vm=this;
   return _vm._h('div', {
     staticClass: "card__title",
+    class: _vm.classes,
     style: (_vm.styles)
   }, [_vm._t("default")])
 },staticRenderFns: []}
@@ -4983,7 +4990,9 @@ module.exports={render:function (){var _vm=this;
   return _vm._h('div', {
     staticClass: "alert",
     class: _vm.classes
-  }, [_vm._h('v-icon', [_vm._s(_vm.icon)]), _vm._h('div', [_vm._t("default")])])
+  }, [_vm._h('v-icon', {
+    staticClass: "alert__icon"
+  }, [_vm._s(_vm.icon)]), _vm._h('div', [_vm._t("default")])])
 },staticRenderFns: []}
 
 /***/ },
@@ -5143,10 +5152,10 @@ module.exports={render:function (){var _vm=this;
     }],
     staticClass: "chip",
     class: _vm.classes
-  }, [_vm._t("default"), (_vm.close) ? _vm._h('v-btn', {
+  }, [_vm._t("default"), (_vm.close) ? _vm._h('a', {
     staticClass: "chip__close",
     attrs: {
-      "icon": "icon"
+      "href": "#!"
     },
     on: {
       "click": function($event) {
@@ -5178,6 +5187,7 @@ module.exports={render:function (){var _vm=this;
     },
     on: {
       "click": function($event) {
+        $event.preventDefault();
         _vm.toggle()
       }
     }

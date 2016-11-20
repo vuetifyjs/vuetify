@@ -1,6 +1,7 @@
 <template lang="pug">
   div(
     class="card__title"
+    v-bind:class="classes"
     v-bind:style="styles"
   )
     slot
@@ -20,6 +21,12 @@
     },
 
     computed: {
+      classes () {
+        return {
+          'card__title--img': this.img
+        }
+      },
+
       styles () {
         let styles = {
           height: this.height

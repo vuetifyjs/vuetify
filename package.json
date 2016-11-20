@@ -5,7 +5,7 @@
     "name": "John Leider",
     "email": "john.j.leider@gmail.com"
   },
-  "main": "dist/vuetify.common.js",
+  "main": "dist/vuetify.js",
   "scripts": {
     "dev": "TARGET=dev webpack --config build/config.js --progress --hide-modules",
     "build": "NODE_ENV=production node build/build.js"

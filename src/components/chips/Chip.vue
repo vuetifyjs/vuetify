@@ -5,9 +5,9 @@
     v-show="active"
   )
     slot
-    v-btn(
+    a(
       class="chip__close"
-      icon
+      href="#!"
       v-if="close"
       v-on:click.prevent="active = false"
     )

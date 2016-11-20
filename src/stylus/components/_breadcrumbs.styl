@@ -2,15 +2,15 @@
   display: flex
   align-items: space-between
   flex-wrap: wrap
-  flex: 0 1 auto
-  margin: .5rem 0
+  flex: $breadcrumbs-flex
+  margin: $breadcrumbs-margin
   list-style-type: none
   
   li
     &:not(:last-child):after
       color: $grey.lighten-1
       content: attr(data-divider)
-      vertical-align: text-top
+      vertical-align: middle
       
     &:last-child a
       color: $grey.lighten-1
@@ -28,11 +28,11 @@
     align-items: center
     color: $theme.primary
     display: inline-flex
-    font-size: 1rem
-    padding: $breadcrumb-padding
-    height: $breadcrumb-height
+    font-size: $breadcrumbs-item-font-size
+    padding: $breadcrumbs-padding
+    height: $breadcrumbs-height
     text-decoration: none
-    line-height: $breadcrumb-height
+    line-height: $breadcrumbs-height
     transition: $primary-transition
     
     &:hover

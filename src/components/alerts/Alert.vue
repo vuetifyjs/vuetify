@@ -3,7 +3,7 @@
     class="alert"
     v-bind:class="classes"
   )
-    v-icon {{ icon }}
+    v-icon(class="alert__icon") {{ icon }}
     div
       slot
 </template>

@@ -1,27 +1,27 @@
 .chip
-  background: $grey.lighten-2
-  border: 1px solid $grey.lighten-2
-  border-radius: 2rem
+  background: $chip-background
+  border: $chip-border
+  border-radius: $chip-border-radius
   display: inline-flex
   align-items: center
   justify-content: space-between
-  font-size: .8rem
-  padding: 0 .8rem
-  height: 25px
+  font-size: $chip-font-size
+  padding: $chip-padding
+  min-height: $chip-min-height
   
   &:active
-    background: $grey.lighten-3
+    background: $chip-background-active
     
   &--label
-    border-radius: .2rem
+    border-radius: $chip-label-border-radius
   
   &--outline
-    background: transparent !important
-    color: $grey.base
+    background: $chip-outline-background
+    color: $chip-outline-color
     
   &--small
-    height: 20px
-    padding: 0 .2rem
+    min-height: $chip-small-min-height
+    padding: $chip-small-padding
     
   &__close
     color: inherit
@@ -30,7 +30,7 @@
     text-decoration: none
     
   .icon
-    font-size: 1.2rem
+    font-size: $chip-icon-font-size
     
     &--left
       margin-left: -.6rem

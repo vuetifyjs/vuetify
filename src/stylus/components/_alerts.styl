@@ -4,18 +4,18 @@
   border-style: solid
   color: $alert-color
   display: flex
-  font-size: 1.1rem
+  font-size: $alert-font-size
   text-align: left
   padding: $alert-padding
   position: relative
   margin: $alert-margin
   
-  > .icon
+  &__icon
     align-self: center
     margin-right: $alert-padding
     margin-bottom: 4px
-    font-size: 2rem
-    color: rgba($shades.black, .3)
+    font-size: $alert-icon-font-size
+    color: $alert-icon-color
     
   > div
     width: 100%

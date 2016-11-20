@@ -55,13 +55,14 @@
     border-color: transparent
     height: auto
     width: auto
+    min-height: initial
     padding: $button-padding-left * .3
     
     i
       font-size: $button-font-size * 1.5
     
     &:hover
-      background: rgba($grey.lighten-1, .4)
+      background: $button-icon-hover-background
       box-shadow: none
     
   &--large
@@ -99,6 +100,7 @@
     line-height: $button-height * ($button-small-multiplier / 2)
     
     &.btn--floating
+      min-height: initial
       width: $button-height * $button-small-multiplier
       padding: $button-floating-small-padding
       
@@ -113,5 +115,6 @@
     
     &--right
       margin-left: 1rem
+      margin-bottom: 1px
       font-size: 1.3rem
       line-height: inherit

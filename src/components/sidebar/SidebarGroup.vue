@@ -4,7 +4,7 @@
       class="sidebar__item-header"
       v-bind:class="{ 'sidebar__item-header--active': active }"
       v-bind:href="item.href"
-      v-on:click="toggle()"
+      v-on:click.prevent="toggle()"
     )
       v-icon(
         v-if="item.icon"

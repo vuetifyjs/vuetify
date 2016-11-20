@@ -1,6 +1,6 @@
 .card
   @extend .z-depth-1
-  background: #fff
+  background: $card-background
   display: flex
   flex-direction: column
   position: relative
@@ -9,7 +9,7 @@
     flex-direction: row
     
     .card__title
-      flex-basis: 30%
+      flex: 1 0 30%
       
   &__stack
     display: flex
@@ -22,12 +22,16 @@
     justify-content: space-between
     padding: $card-padding * 2
     
+    &--img
+      .card__title-text
+        align-self: flex-end
+    
     &-text
       font-size: $card-title-text-size
       font-weight: $card-title-text-font-weight
       letter-spacing: $card-title-text-letter-spacing
       display: flex
-      align-self: flex-end
+      align-self: center
       align-items: center
       
   &__text
@@ -35,7 +39,7 @@
   
   &__actions
     box-sizing: border-box
-    border-top: 1px solid rgba(0, 0, 0, .1)
+    border-top: $card-actions-border-top
     display: flex
     align-items: center
     padding: $card-padding
