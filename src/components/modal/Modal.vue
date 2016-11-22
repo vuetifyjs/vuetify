@@ -1,10 +1,12 @@
 <template lang="pug">
-  div(
-    class="modal"
-    v-bind:class="classes"
-    v-bind:id="id"
-  )
-    slot
+  transition(name="modal")
+    div(
+      class="modal"
+      v-bind:class="classes"
+      v-bind:id="id"
+      v-show="active"
+    )
+      slot
 </template>
 
 <script>
@@ -19,6 +21,7 @@
 
     data () {
       return {
+        closeOnClick: false,
         overlay: {}
       }
     },
@@ -45,7 +48,6 @@
     computed: {
       classes () {
         return {
-          'modal--open': this.active,
           'modal--bottom': this.bottom
         }
       }
@@ -55,7 +57,31 @@
       this.initOverlay()
     },
 
-    methods: {      
+    methods: {
+      close (e, force = false) {
+        if (force) {
+          return this.active = false
+        }
+
+        if (e.target === this.$el || this.$el.contains(e.target)) {
+          return
+        }
+
+        if (this.activator === null) {
+          return
+        }
+        
+        try {
+          if (e.target === this.activator
+              || this.activator.contains(e.target)
+          ) {
+            return
+          }
+        } catch (e) {}
+
+        this.active = false
+      },
+
       initOverlay() {
         const overlay = document.getElementById('modal-overlay')
         

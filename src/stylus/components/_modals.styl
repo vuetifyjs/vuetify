@@ -4,30 +4,37 @@
   top: 15%
   right: 0
   left: 0
-  width: 55%
-  z-index: 1001
-  background: #fff
-  border-radius: 2px
+  width: 500px
+  max-width: 70%
   margin: auto
+  z-index: 1001
   max-height: 55%
-  padding: 2rem
-  transition: $primary-transition
-  transform: translateY(100%) scaleX(0)
-  opacity: 0
+  opacity: 1
   @extend .z-depth-3
+  
+  &-enter-active,
+  &-leave-active
+    transition: $primary-transition
+    
+  &-enter,
+  &-leave-active
+    transform: translateY(100%) scale(.5)
+    opacity: 0
+    
     
   &--bottom
     top: initial !important
     bottom: 0
     border-radius: 0
-    transform: translateY(100%)
-    opacity: 0
     box-shadow 0 -4px 15px 0 rgba(0, 0, 0, 0.2), 0 -6px 50px 0 rgba(0, 0, 0, 0.19)
     width: 100%
-  
-  &--open
-    opacity: 1
-    transform: none !important
+    margin: 0
+    max-width: none
+    
+    &.modal-enter,
+    &.modal-leave-active
+      transform: translateY(100%)
+      opacity: 1
     
 .modal-overlay
   display: block
@@ -44,4 +51,3 @@
   &--open
     opacity: 1
     z-index: 1000
-  

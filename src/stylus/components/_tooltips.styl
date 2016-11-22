@@ -23,41 +23,41 @@
     &:after
       top: 100%
       left: 50%
-      transform: translate3d(-50%, -10px, 0)
+      transform: translateX(-50%) translateY(-10px)
       
     &:hover
       &:after
-        transform: translate3d(-50%, 10px, 0)
+        transform: translateX(-50%) translateY(10px)
       
   &--top
     &:after
       bottom: 100%
       left: 50%
-      transform: translate3d(-50%, 10px, 0)
+      transform: translateX(-50%) translateY(10px)
       
     &:hover
       &:after
-        transform: translate3d(-50%, -10px, 0)
+        transform: translateX(-50%) translateY(-10px)
 
   &--left
     &:after
       bottom: 50%
       right: 100%
-      transform: translate3d(10px, 50%, 0)
+      transform: translateX(10px) translateY(50%)
       
     &:hover
       &:after
-        transform: translate3d(-10px, 50%, 0)
+        transform: translateX(-10px) translateY(50%)
       
   &--right
     &:after
       bottom: 50%
       left: 100%
-      transform: translate3d(-10px, 50%, 0)
+      transform: translateX(-10px) translateY(50%)
       
     &:hover
       &:after
-        transform: translate3d(10px, 50%, 0)
+        transform: translateX(10px) translateY(50%)
   
 
   &:hover

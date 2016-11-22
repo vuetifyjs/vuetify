@@ -157,6 +157,12 @@ function directiveConfig(binding) {
       this.$vuetify.bus.pub(this.$options.name + ':opened', this.id);
     },
     close: function close(e) {
+      var force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+      if (force) {
+        return this.active = !this.active;
+      }
+
       if (this.activator === null) {
         return;
       }
@@ -1521,6 +1527,8 @@ var Bus = function (_EventEmitter) {
 //
 //
 //
+//
+//
 
 
 
@@ -1531,6 +1539,7 @@ var Bus = function (_EventEmitter) {
 
   data: function data() {
     return {
+      closeOnClick: false,
       overlay: {}
     };
   },
@@ -1558,7 +1567,6 @@ var Bus = function (_EventEmitter) {
   computed: {
     classes: function classes() {
       return {
-        'modal--open': this.active,
         'modal--bottom': this.bottom
       };
     }
@@ -1570,6 +1578,29 @@ var Bus = function (_EventEmitter) {
 
 
   methods: {
+    close: function close(e) {
+      var force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+      if (force) {
+        return this.active = false;
+      }
+
+      if (e.target === this.$el || this.$el.contains(e.target)) {
+        return;
+      }
+
+      if (this.activator === null) {
+        return;
+      }
+
+      try {
+        if (e.target === this.activator || this.activator.contains(e.target)) {
+          return;
+        }
+      } catch (e) {}
+
+      this.active = false;
+    },
     initOverlay: function initOverlay() {
       var overlay = document.getElementById('modal-overlay');
 
@@ -4881,13 +4912,23 @@ module.exports={render:function (){var _vm=this;
 /***/ function(module, exports) {
 
 module.exports={render:function (){var _vm=this;
-  return _vm._h('div', {
+  return _vm._h('transition', {
+    attrs: {
+      "name": "modal"
+    }
+  }, [_vm._h('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.active),
+      expression: "active"
+    }],
     staticClass: "modal",
     class: _vm.classes,
     attrs: {
       "id": _vm.id
     }
-  }, [_vm._t("default")])
+  }, [_vm._t("default")])])
 },staticRenderFns: []}
 
 /***/ },

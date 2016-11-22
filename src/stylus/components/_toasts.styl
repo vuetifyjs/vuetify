@@ -13,14 +13,17 @@
   &--top
     top: 5%
     left: 50%
+    transform: translateX(-50%)
   
   &--bottom
     bottom: 5%
     left: 50%
+    transform: translateX(-50%)
     
   &--snack
     bottom: 0
     left: 50%
+    transform: translateX(-50%)
     
     .toast__content
       margin-bottom: 0
@@ -28,7 +31,6 @@
       
       &--remove
         margin-top: 0
-        transform: translate3d(0, 3rem, 0)
     
   &__content
     background: $theme.secondary
