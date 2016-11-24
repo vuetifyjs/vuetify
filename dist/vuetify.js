@@ -81,27 +81,32 @@ return /******/ (function(modules) { // webpackBootstrap
 "use strict";
 /* harmony export (immutable) */ exports["a"] = createSimpleFunctional;
 /* harmony export (immutable) */ exports["b"] = directiveConfig;
-function createSimpleFunctional(c) {
-  var el = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'div';
+function createSimpleFunctional (c, el) {
+  if ( el === void 0 ) el = 'div';
 
   return {
     functional: true,
 
-    render: function render(h, _ref) {
-      var data = _ref.data,
-          children = _ref.children;
+    render: function (h, ref) {
+      var data = ref.data;
+      var children = ref.children;
 
-      data.staticClass = data.staticClass ? c + ' ' + data.staticClass : c;
+      data.staticClass = data.staticClass ? (c + " " + (data.staticClass)) : c
 
-      return h(el, data, children);
+      return h(el, data, children)
     }
-  };
+  }
 }
 
-function directiveConfig(binding) {
-  var defaults = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+function directiveConfig (binding, defaults) {
+  if ( defaults === void 0 ) defaults = {};
 
-  return Object.assign(defaults, binding.modifiers, { value: binding.arg }, binding.value || {});
+  return Object.assign(
+    defaults,
+    binding.modifiers,
+    { value: binding.arg },
+    binding.value || {}
+  )
 }
 
 /***/ },
@@ -110,11 +115,12 @@ function directiveConfig(binding) {
 
 "use strict";
 /* harmony default export */ exports["a"] = {
-  mounted: function mounted() {
-    this.$vuetify.bus.sub(this.events);
+  mounted: function mounted () {
+    this.$vuetify.bus.sub(this.events)
   },
-  beforeDestroy: function beforeDestroy() {
-    this.$vuetify.bus.unsub(this.events);
+
+  beforeDestroy: function beforeDestroy () {
+    this.$vuetify.bus.unsub(this.events)
   }
 };
 
@@ -127,56 +133,65 @@ function directiveConfig(binding) {
 
 
 /* harmony default export */ exports["a"] = {
-  data: function data() {
+  data: function data () {
     return {
       active: false,
       activator: {}
-    };
+    }
   },
 
+  mixins: [
+    __WEBPACK_IMPORTED_MODULE_0__eventable__["a" /* default */]
+  ],
 
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__eventable__["a" /* default */]],
-
-  mounted: function mounted() {
-    this.$vuetify.load(this.init);
+  mounted: function mounted () {
+    this.$vuetify.load(this.init)
   },
-
 
   computed: {
-    events: function events() {
-      return [[this.$options.name + ':open:' + this.id, this.open], [this.$options.name + ':close:' + this.id, this.close], [this.$options.name + ':toggle:' + this.id, this.toggle], ['body:click', this.close]];
+    events: function events () {
+      return [
+        [((this.$options.name) + ":open:" + (this.id)), this.open],
+        [((this.$options.name) + ":close:" + (this.id)), this.close],
+        [((this.$options.name) + ":toggle:" + (this.id)), this.toggle],
+        ["body:click", this.close] ]
     }
   },
 
   methods: {
-    init: function init() {
-      this.activator = document.querySelector('[data-' + this.$options.name + '="' + this.id + '"]');
+    init: function init () {
+      this.activator = document.querySelector(("[data-" + (this.$options.name) + "=\"" + (this.id) + "\"]"))
     },
-    open: function open() {
-      this.active = true;
-      this.$vuetify.bus.pub(this.$options.name + ':opened', this.id);
+
+    open: function open () {
+      this.active = true
+      this.$vuetify.bus.pub(((this.$options.name) + ":opened"), this.id)
     },
-    close: function close(e) {
-      var force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+    close: function close (e, force) {
+      if ( force === void 0 ) force = false;
 
       if (force) {
-        return this.active = !this.active;
+        return this.active = !this.active
       }
 
       if (this.activator === null) {
-        return;
+        return
       }
-
+      
       try {
-        if (e.target === this.activator || this.activator.contains(e.target)) {
-          return;
+        if (e.target === this.activator
+            || this.activator.contains(e.target)
+        ) {
+          return
         }
       } catch (e) {}
 
-      this.active = false;
+      this.active = false
     },
-    toggle: function toggle() {
-      this.active = !this.active;
+
+    toggle: function toggle () {
+      this.active = !this.active
     }
   }
 };
@@ -187,7 +202,7 @@ function directiveConfig(binding) {
 
 "use strict";
 /* harmony default export */ exports["a"] = {
-  data: function data() {
+  data: function data () {
     return {
       obj_height: null,
       parallax: null,
@@ -197,41 +212,46 @@ function directiveConfig(binding) {
       scroll_top: null,
       window_height: null,
       window_bottom: null
-    };
-  },
-  mounted: function mounted() {
-    this.$vuetify.load(this.init);
-  },
-  beforeDestroy: function beforeDestroy() {
-    document.removeEventListener('scroll', this.translate, false);
-    document.removeEventListener('resize', this.translate, false);
+    }
   },
 
+  mounted: function mounted () {
+    this.$vuetify.load(this.init)
+  },
+
+  beforeDestroy: function beforeDestroy () {
+    document.removeEventListener('scroll', this.translate, false)
+    document.removeEventListener('resize', this.translate, false)
+  },
 
   methods: {
-    listeners: function listeners() {
-      document.addEventListener('scroll', this.translate, false);
-      document.addEventListener('resize', this.translate, false);
+    listeners: function listeners () {
+      document.addEventListener('scroll', this.translate, false)
+      document.addEventListener('resize', this.translate, false)
     },
-    translate: function translate() {
-      this.calcDimensions();
 
-      var percent_scrolled = (this.window_bottom - this.top) / (Number(this.height) + this.window_height);
+    translate: function translate () {
+      this.calcDimensions()
 
-      this.parallax = Math.round(this.parallax_dist * percent_scrolled);
+      var percent_scrolled = (
+        (this.window_bottom - this.top) / (Number(this.height) + this.window_height)
+      )
+      
+      this.parallax = Math.round(this.parallax_dist * percent_scrolled)
 
       if (this.translated) {
-        this.translated();
+        this.translated()
       }
     },
-    calcDimensions: function calcDimensions() {
-      this.obj_height = this.objHeight();
-      this.parallax_dist = this.obj_height - this.height;
-      this.top = this.elOffsetTop();
-      this.bottom = this.top + this.height;
-      this.scroll_top = window.pageYOffset;
-      this.window_height = window.innerHeight;
-      this.window_bottom = this.scroll_top + this.window_height;
+
+    calcDimensions: function calcDimensions () {
+      this.obj_height = this.objHeight()
+      this.parallax_dist = this.obj_height - this.height
+      this.top = this.elOffsetTop()
+      this.bottom = this.top + this.height
+      this.scroll_top = window.pageYOffset
+      this.window_height = window.innerHeight
+      this.window_bottom = this.scroll_top + this.window_height
     }
   }
 };
@@ -284,23 +304,44 @@ function directiveConfig(binding) {
 
 
 
-function bootstrap() {
-  var entries = {};
+function bootstrap () {
+  var components = [], len = arguments.length;
+  while ( len-- ) components[ len ] = arguments[ len ];
 
-  for (var _len = arguments.length, components = Array(_len), _key = 0; _key < _len; _key++) {
-    components[_key] = arguments[_key];
-  }
+  var entries = {}
 
   components.forEach(function (component) {
     Object.keys(component).forEach(function (key) {
-      entries['V' + key] = component[key];
-    });
-  });
+      entries[("V" + key)] = component[key]
+    })
+  })
 
-  return entries;
+  return entries
 }
 
-/* harmony default export */ exports["a"] = bootstrap(__WEBPACK_IMPORTED_MODULE_0__alerts_index__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__app_index__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__breadcrumbs_index__["a" /* default */], __WEBPACK_IMPORTED_MODULE_3__buttons_index__["a" /* default */], __WEBPACK_IMPORTED_MODULE_4__cards_index__["a" /* default */], __WEBPACK_IMPORTED_MODULE_5__chips_index__["a" /* default */], __WEBPACK_IMPORTED_MODULE_6__collapsible_index__["a" /* default */], __WEBPACK_IMPORTED_MODULE_7__dropdowns_index__["a" /* default */], __WEBPACK_IMPORTED_MODULE_8__footer_index__["a" /* default */], __WEBPACK_IMPORTED_MODULE_9__forms_index__["a" /* default */], __WEBPACK_IMPORTED_MODULE_10__grid_index__["a" /* default */], __WEBPACK_IMPORTED_MODULE_11__icons_index__["a" /* default */], __WEBPACK_IMPORTED_MODULE_12__lists_index__["a" /* default */], __WEBPACK_IMPORTED_MODULE_13__modal_index__["a" /* default */], __WEBPACK_IMPORTED_MODULE_14__navbar_index__["a" /* default */], __WEBPACK_IMPORTED_MODULE_15__pagination_index__["a" /* default */], __WEBPACK_IMPORTED_MODULE_16__parallax_index__["a" /* default */], __WEBPACK_IMPORTED_MODULE_17__progress_index__["a" /* default */], __WEBPACK_IMPORTED_MODULE_18__sidebar_index__["a" /* default */], __WEBPACK_IMPORTED_MODULE_19__slider_index__["a" /* default */], __WEBPACK_IMPORTED_MODULE_20__tabs_index__["a" /* default */]);
+/* harmony default export */ exports["a"] = bootstrap(
+  __WEBPACK_IMPORTED_MODULE_0__alerts_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__app_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_2__breadcrumbs_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_3__buttons_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_4__cards_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_5__chips_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_6__collapsible_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_7__dropdowns_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_8__footer_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_9__forms_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_10__grid_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_11__icons_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_12__lists_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_13__modal_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_14__navbar_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_15__pagination_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_16__parallax_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_17__progress_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_18__sidebar_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_19__slider_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_20__tabs_index__["a" /* default */]
+);
 
 /***/ },
 /* 5 */
@@ -331,65 +372,48 @@ function bootstrap() {
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var Toast = function Toast () {};
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+Toast.prototype.toast = function toast (location) {
+  var toast = document.createElement('div')
 
-var Toast = function () {
-  function Toast() {
-    _classCallCheck(this, Toast);
+  toast.classList.add('toast')
+  toast.classList.add(("toast--" + location))
+
+  document.body.appendChild(toast)
+
+  return toast
+};
+
+Toast.prototype.create = function create (message, location, duration, cb) {
+    if ( location === void 0 ) location = 'right';
+    if ( duration === void 0 ) duration = 3000;
+
+  var toast = document.querySelector((".toast--" + location))
+
+  if (!toast) {
+    toast = this.toast(location)
   }
 
-  _createClass(Toast, [{
-    key: 'toast',
-    value: function toast(location) {
-      var toast = document.createElement('div');
+  var content = document.createElement('div')
+  content.classList.add('toast__content')
+  content.innerHTML = message
 
-      toast.classList.add('toast');
-      toast.classList.add('toast--' + location);
+  toast.appendChild(content)
+  setTimeout(function () { return content.classList.add('toast__content--active'); }, 10)
 
-      document.body.appendChild(toast);
+  setTimeout(function () {
+      content.classList.add('toast__content--remove')
 
-      return toast;
-    }
-  }, {
-    key: 'create',
-    value: function create(message) {
-      var location = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'right';
-      var duration = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 3000;
-      var cb = arguments[3];
+    setTimeout(function () {
+      content.remove()
 
-      var toast = document.querySelector('.toast--' + location);
-
-      if (!toast) {
-        toast = this.toast(location);
+      if (cb) {
+        cb()
       }
-
-      var content = document.createElement('div');
-      content.classList.add('toast__content');
-      content.innerHTML = message;
-
-      toast.appendChild(content);
-      setTimeout(function () {
-        return content.classList.add('toast__content--active');
-      }, 10);
-
-      setTimeout(function () {
-        content.classList.add('toast__content--remove');
-
-        setTimeout(function () {
-          content.remove();
-
-          if (cb) {
-            cb();
-          }
-        }, 300);
-      }, duration);
-    }
-  }]);
-
-  return Toast;
-}();
+    }, 300)
+  }, duration)
+};
 
 /* harmony default export */ exports["a"] = new Toast();
 
@@ -400,71 +424,51 @@ var Toast = function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_events__ = __webpack_require__(70);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_events___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_events__);
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 
-
-var Bus = function (_EventEmitter) {
-  _inherits(Bus, _EventEmitter);
-
-  function Bus() {
-    _classCallCheck(this, Bus);
-
-    var _this = _possibleConstructorReturn(this, (Bus.__proto__ || Object.getPrototypeOf(Bus)).call(this));
-
-    _this.setMaxListeners(50);
-    return _this;
+var Bus = (function (EventEmitter) {
+  function Bus () {
+    EventEmitter.call(this)
+    this.setMaxListeners(50)
   }
 
-  _createClass(Bus, [{
-    key: 'sub',
-    value: function sub(event, cb) {
-      var _this2 = this;
+  if ( EventEmitter ) Bus.__proto__ = EventEmitter;
+  Bus.prototype = Object.create( EventEmitter && EventEmitter.prototype );
+  Bus.prototype.constructor = Bus;
 
-      var type = typeof event === 'undefined' ? 'undefined' : _typeof(event);
+  Bus.prototype.sub = function sub (event, cb) {
+    var this$1 = this;
 
-      if (type === 'object' || type === 'array') {
-        event.forEach(function (i) {
-          return _this2.on.apply(_this2, _toConsumableArray(i));
-        });
-      } else {
-        this.on(event, cb);
-      }
+    var type = typeof event
+    
+    if (type === 'object' || type === 'array') {
+      event.forEach(function (i) { return (ref = this$1).on.apply(ref, i)
+        var ref;; })
+    } else {
+      this.on(event, cb)
     }
-  }, {
-    key: 'unsub',
-    value: function unsub(event, cb) {
-      var _this3 = this;
+  };
 
-      var type = typeof event === 'undefined' ? 'undefined' : _typeof(event);
+  Bus.prototype.unsub = function unsub (event, cb) {
+    var this$1 = this;
 
-      if (type === 'object' || type === 'array') {
-        event.forEach(function (i) {
-          return _this3.removeListener.apply(_this3, _toConsumableArray(i));
-        });
-      } else {
-        this.removeListener(event, cb);
-      }
+    var type = typeof event
+
+    if (type === 'object' || type === 'array') {
+      event.forEach(function (i) { return (ref = this$1).removeListener.apply(ref, i)
+        var ref;; })
+    } else {
+      this.removeListener(event, cb)
     }
-  }, {
-    key: 'pub',
-    value: function pub() {
-      this.emit.apply(this, arguments);
-    }
-  }]);
+  };
+
+  Bus.prototype.pub = function pub () {
+    (ref = this).emit.apply(ref, arguments)
+    var ref;
+  };
 
   return Bus;
-}(__WEBPACK_IMPORTED_MODULE_0_events___default.a);
+}(__WEBPACK_IMPORTED_MODULE_0_events___default.a));
 
 /* harmony default export */ exports["a"] = new Bus();
 
@@ -475,10 +479,10 @@ var Bus = function (_EventEmitter) {
 "use strict";
 /* harmony default export */ exports["a"] = function (cb) {
   if (document.readyState === 'complete') {
-    return setTimeout(cb, 0);
+    return setTimeout(cb, 0)
   }
 
-  document.addEventListener('DOMContentLoaded', cb);
+  document.addEventListener('DOMContentLoaded', cb)
 };
 
 /***/ },
@@ -499,44 +503,46 @@ var Bus = function (_EventEmitter) {
 
 /* harmony default export */ exports["default"] = {
   name: 'alert',
-
+  
   props: {
     error: Boolean,
 
     info: Boolean,
 
     success: Boolean,
-
+    
     warning: Boolean
   },
 
   computed: {
-    classes: function classes() {
+    classes: function classes () {
       return {
         'alert--error': this.error,
         'alert--info': this.info,
         'alert--success': this.success,
-        'alert--warning': this.warning
-      };
+        'alert--warning': this.warning,
+      }
     },
-    icon: function icon() {
+
+    icon: function icon () {
       switch (true) {
         case this.error:
-          return 'warning';
-          break;
+          return 'warning'
+        break
         case this.info:
-          return 'info';
-          break;
+          return 'info'
+        break
         case this.success:
-          return 'check_circle';
-          break;
+          return 'check_circle'
+        break
         case this.warning:
-          return 'priority_high';
-          break;
+          return 'priority_high'
+        break
       }
     }
   }
 };
+
 
 /***/ },
 /* 10 */
@@ -576,7 +582,7 @@ var Bus = function (_EventEmitter) {
   },
 
   computed: {
-    classes: function classes() {
+    classes: function classes () {
       return {
         'left-fixed-sidebar': this.leftFixedSidebar,
         'left-sidebar': this.leftSidebar,
@@ -584,10 +590,11 @@ var Bus = function (_EventEmitter) {
         'right-sidebar': this.rightSidebar,
         'top-fixed-navbar': this.topFixedNavbar,
         'top-navbar': this.topNavbar
-      };
+      }
     }
   }
 };
+
 
 /***/ },
 /* 11 */
@@ -611,7 +618,7 @@ var Bus = function (_EventEmitter) {
 
 /* harmony default export */ exports["default"] = {
   name: 'breadcrumbs',
-
+  
   props: {
     divider: {
       type: String,
@@ -622,35 +629,31 @@ var Bus = function (_EventEmitter) {
 
     items: {
       type: Array,
-      default: function _default() {
-        return [];
-      }
+      default: function () { return []; }
     }
   },
 
   computed: {
-    classes: function classes() {
+    classes: function classes () {
       return {
         'breadcrumbs--with-icons': this.icons
-      };
+      }
     }
   },
 
-  mounted: function mounted() {
-    this.$vuetify.load(this.init);
+  mounted: function mounted () {
+    this.$vuetify.load(this.init)
   },
 
-
   methods: {
-    init: function init() {
-      var _this = this;
+    init: function init () {
+      var this$1 = this;
 
-      this.$children.forEach(function (i) {
-        return i.$el.dataset.divider = _this.divider;
-      });
+      this.$children.forEach(function (i) { return i.$el.dataset.divider = this$1.divider; })
     }
   }
 };
+
 
 /***/ },
 /* 12 */
@@ -670,7 +673,7 @@ var Bus = function (_EventEmitter) {
 
 /* harmony default export */ exports["default"] = {
   name: 'breadcrumbs-item',
-
+  
   props: {
     disabled: Boolean,
 
@@ -681,13 +684,14 @@ var Bus = function (_EventEmitter) {
   },
 
   computed: {
-    classes: function classes() {
+    classes: function classes () {
       return {
         'breadcrumbs__item--disabled': this.disabled
-      };
+      }
     }
   }
 };
+
 
 /***/ },
 /* 13 */
@@ -706,7 +710,7 @@ var Bus = function (_EventEmitter) {
 
 /* harmony default export */ exports["default"] = {
   name: 'button',
-
+  
   props: {
     block: Boolean,
 
@@ -735,7 +739,7 @@ var Bus = function (_EventEmitter) {
   },
 
   computed: {
-    classes: function classes() {
+    classes: function classes () {
       return {
         'btn--block': this.block,
         'btn--flat': this.flat,
@@ -745,10 +749,11 @@ var Bus = function (_EventEmitter) {
         'btn--outline': this.outline,
         'btn--round': this.round,
         'btn--small': this.small
-      };
+      }
     }
   }
 };
+
 
 /***/ },
 /* 14 */
@@ -767,7 +772,7 @@ var Bus = function (_EventEmitter) {
 
 /* harmony default export */ exports["default"] = {
   name: 'card',
-
+  
   props: {
     height: {
       type: String,
@@ -780,24 +785,26 @@ var Bus = function (_EventEmitter) {
   },
 
   computed: {
-    classes: function classes() {
+    classes: function classes () {
       return {
         'card--horizontal': this.horizontal
-      };
+      }
     },
-    styles: function styles() {
+
+    styles: function styles () {
       var styles = {
         height: this.height
-      };
-
-      if (this.img) {
-        styles.background = 'url(' + this.img + ') center center / cover no-repeat';
       }
 
-      return styles;
+      if (this.img) {
+        styles.background = "url(" + (this.img) + ") center center / cover no-repeat"
+      }
+
+      return styles
     }
   }
 };
+
 
 /***/ },
 /* 15 */
@@ -816,7 +823,7 @@ var Bus = function (_EventEmitter) {
 
 /* harmony default export */ exports["default"] = {
   name: 'card-title',
-
+  
   props: {
     height: {
       type: String,
@@ -827,24 +834,26 @@ var Bus = function (_EventEmitter) {
   },
 
   computed: {
-    classes: function classes() {
+    classes: function classes () {
       return {
         'card__title--img': this.img
-      };
+      }
     },
-    styles: function styles() {
+
+    styles: function styles () {
       var styles = {
         height: this.height
-      };
-
-      if (this.img) {
-        styles.background = 'url(' + this.img + ') center center / cover no-repeat';
       }
 
-      return styles;
+      if (this.img) {
+        styles.background = "url(" + (this.img) + ") center center / cover no-repeat"
+      }
+      
+      return styles
     }
   }
 };
+
 
 /***/ },
 /* 16 */
@@ -870,13 +879,12 @@ var Bus = function (_EventEmitter) {
 
 /* harmony default export */ exports["default"] = {
   name: 'chip',
-
-  data: function data() {
+  
+  data: function data () {
     return {
       active: true
-    };
+    }
   },
-
 
   props: {
     close: Boolean,
@@ -889,16 +897,17 @@ var Bus = function (_EventEmitter) {
   },
 
   computed: {
-    classes: function classes() {
+    classes: function classes () {
       return {
         'chip--label': this.label,
         'chip--outline': this.outline,
         'chip--small': this.small,
         'chip--removable': this.close
-      };
+      }
     }
   }
 };
+
 
 /***/ },
 /* 17 */
@@ -921,18 +930,20 @@ var Bus = function (_EventEmitter) {
   },
 
   computed: {
-    classes: function classes() {
+    classes: function classes () {
       return {
         'collapsible': true
-      };
+      }
     },
-    params: function params() {
+
+    params: function params () {
       return {
         expand: this.expand
-      };
+      }
     }
   }
 };
+
 
 /***/ },
 /* 18 */
@@ -959,41 +970,49 @@ var Bus = function (_EventEmitter) {
 /* harmony default export */ exports["default"] = {
   name: 'collapsible-body',
 
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_eventable__["a" /* default */]],
+  mixins: [
+    __WEBPACK_IMPORTED_MODULE_0__mixins_eventable__["a" /* default */]
+  ],
 
-  data: function data() {
+  data: function data () {
     return {
       active: false
-    };
+    }
   },
 
-
   computed: {
-    events: function events() {
-      return [['collapse:toggle:' + this.$parent._uid, this.toggle]];
+    events: function events () {
+      return [
+        [("collapse:toggle:" + (this.$parent._uid)), this.toggle]
+      ]
     }
   },
 
   methods: {
-    enter: function enter(el) {
-      el.style.display = 'block';
-      el.style.height = 0;
-      el.style.height = el.scrollHeight + 'px';
+    enter: function enter (el) {
+      el.style.display = 'block'
+      el.style.height = 0
+      el.style.height = (el.scrollHeight) + "px"
     },
-    leave: function leave(el) {
-      el.style.height = 0;
+
+    leave: function leave (el) {
+      el.style.height = 0
     },
-    toggle: function toggle(uid) {
-      if (uid !== this._uid && !this.$parent.params.expand) {
-        return this.active = false;
+
+    toggle: function toggle (uid) {
+      if (uid !== this._uid
+          && !this.$parent.params.expand
+      ) {
+        return this.active = false
       }
 
       if (uid === this._uid) {
-        this.active = !this.active;
+        this.active = !this.active
       }
     }
   }
 };
+
 
 /***/ },
 /* 19 */
@@ -1013,11 +1032,15 @@ var Bus = function (_EventEmitter) {
   name: 'collapsible-header',
 
   methods: {
-    click: function click() {
-      this.$vuetify.bus.pub('collapse:toggle:' + this.$parent._uid, Number(this.$el.nextSibling.getAttribute('uid')));
+    click: function click () {
+      this.$vuetify.bus.pub(
+        ("collapse:toggle:" + (this.$parent._uid)),
+        Number(this.$el.nextSibling.getAttribute('uid'))
+      )
     }
   }
 };
+
 
 /***/ },
 /* 20 */
@@ -1045,7 +1068,9 @@ var Bus = function (_EventEmitter) {
 /* harmony default export */ exports["default"] = {
   name: 'dropdown',
 
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__["a" /* default */]],
+  mixins: [
+    __WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__["a" /* default */]
+  ],
 
   props: {
     id: {
@@ -1055,34 +1080,32 @@ var Bus = function (_EventEmitter) {
 
     items: {
       type: Array,
-      default: function _default() {
-        return [];
-      }
+      default: function () { return []; }
     },
 
     right: Boolean
   },
 
   computed: {
-    classes: function classes() {
+    classes: function classes () {
       return {
         'dropdown--open': this.active,
         'dropdown--open-from-right': this.right
-      };
+      }
     }
   },
 
-  mounted: function mounted() {
-    this.$vuetify.bus.sub(this.$options.name + ':opened', this.opened);
+  mounted: function mounted () {
+    this.$vuetify.bus.sub(((this.$options.name) + ":opened"), this.opened)
   },
 
-
   methods: {
-    opened: function opened(id) {
-      this.active = id === this.id;
+    opened: function opened (id) {
+      this.active = id === this.id
     }
   }
 };
+
 
 /***/ },
 /* 21 */
@@ -1101,7 +1124,7 @@ var Bus = function (_EventEmitter) {
 
 /* harmony default export */ exports["default"] = {
   name: 'dropdown-item',
-
+  
   props: {
     item: {
       type: Object,
@@ -1109,6 +1132,7 @@ var Bus = function (_EventEmitter) {
     }
   }
 };
+
 
 /***/ },
 /* 22 */
@@ -1124,6 +1148,7 @@ var Bus = function (_EventEmitter) {
 /* harmony default export */ exports["default"] = {
   name: 'footer'
 };
+
 
 /***/ },
 /* 23 */
@@ -1150,13 +1175,12 @@ var Bus = function (_EventEmitter) {
 
 /* harmony default export */ exports["default"] = {
   name: 'checkbox',
-
-  data: function data() {
+  
+  data: function data () {
     return {
       model: null
-    };
+    }
   },
-
 
   props: {
     disabled: Boolean,
@@ -1171,7 +1195,7 @@ var Bus = function (_EventEmitter) {
     },
 
     indeterminate: Boolean,
-
+    
     label: {
       type: String,
       default: ''
@@ -1188,49 +1212,54 @@ var Bus = function (_EventEmitter) {
   },
 
   computed: {
-    classes: function classes() {
+    classes: function classes () {
       return {
         'filled': this.filled
-      };
+      }
     }
   },
 
-  mounted: function mounted() {
-    var vm = this;
+  mounted: function mounted () {
+    var vm = this
 
-    this.$refs.input.indeterminate = this.indeterminate;
+    this.$refs.input.indeterminate = this.indeterminate
 
-    this.state();
+    this.state()
 
     this.$refs.input.onchange = function () {
       var c = this.checked,
-          v = this.value;
+            v = this.value
 
-      if (!vm.model || typeof vm.model === 'string') {
-        return vm.$emit('input', c ? true : false);
+      if (!vm.model
+          || typeof vm.model === 'string'
+      ) {
+        return vm.$emit('input', c ? true : false)
       }
 
-      var i = vm.model.indexOf(v);
+      var i = vm.model.indexOf(v)
 
       if (c) {
-        vm.model.push(v);
+        vm.model.push(v)
       } else {
-        vm.model.splice(i, 1);
+        vm.model.splice(i, 1)
       }
 
-      vm.$emit('input', vm.model);
-    };
+      vm.$emit('input', vm.model)
+    }
   },
 
-
   methods: {
-    state: function state() {
-      if (typeof this.model === 'array' && this.model.includes(this.value) || this.value) {
-        this.$refs.input.checked = true;
+    state: function state () {
+      if (typeof this.model === 'array' 
+          && this.model.includes(this.value)
+          || this.value
+      ) {
+        this.$refs.input.checked = true
       }
     }
   }
 };
+
 
 /***/ },
 /* 24 */
@@ -1257,8 +1286,8 @@ var Bus = function (_EventEmitter) {
 
 /* harmony default export */ exports["default"] = {
   name: 'radio',
-
-  props: {
+  
+  props: {      
     disabled: Boolean,
 
     label: {
@@ -1282,23 +1311,24 @@ var Bus = function (_EventEmitter) {
   },
 
   computed: {
-    classes: function classes() {
+    classes: function classes () {
       return {
         'gap': this.gap
-      };
+      }
     }
   },
 
-  mounted: function mounted() {
-    var vm = this;
+  mounted: function mounted () {
+    var vm = this
 
-    this.$refs.input.checked = this.$el.value === this.value;
+    this.$refs.input.checked = this.$el.value === this.value
 
     this.$refs.input.onchange = function () {
-      vm.$emit('input', this.value);
-    };
+      vm.$emit('input', this.value)
+    }
   }
 };
+
 
 /***/ },
 /* 25 */
@@ -1340,13 +1370,12 @@ var Bus = function (_EventEmitter) {
 
 /* harmony default export */ exports["default"] = {
   name: 'select',
-
-  data: function data() {
+  
+  data: function data () {
     return {
       focused: false
-    };
+    }
   },
-
 
   props: {
     id: {
@@ -1368,42 +1397,37 @@ var Bus = function (_EventEmitter) {
 
     options: {
       type: Array,
-      default: function _default() {
-        return [];
-      }
+      default: function () { return []; }
     },
 
     value: [String, Number, Array, Boolean]
   },
 
   computed: {
-    classes: function classes() {
+    classes: function classes () {
       return {
         'input-group--dirty': true,
         'input-group--focused': this.focused && !this.multiple
-      };
+      }
     }
   },
 
-  mounted: function mounted() {
+  mounted: function mounted () {
     if (this.value) {
-      this.$refs.select.value = this.value;
+      this.$refs.select.value = this.value
     }
 
-    var vm = this;
+    var vm = this
     this.$refs.select.onchange = function () {
       if (!vm.multiple) {
-        vm.$emit('input', this.value);
+        vm.$emit('input', this.value)
       } else {
-        vm.$emit('input', vm.$refs.options.filter(function (i) {
-          return i.selected;
-        }).map(function (i) {
-          return i.value;
-        }));
+        vm.$emit('input', vm.$refs.options.filter(function (i) { return i.selected; }).map(function (i) { return i.value; }))
       }
-    };
+    }
   }
 };
+
 
 /***/ },
 /* 26 */
@@ -1434,20 +1458,19 @@ var Bus = function (_EventEmitter) {
 
 /* harmony default export */ exports["default"] = {
   name: 'text-input',
-
-  data: function data() {
+  
+  data: function data () {
     return {
       focused: false
-    };
+    }
   },
 
-
   computed: {
-    classes: function classes() {
+    classes: function classes () {
       return {
         'input-group--focused': this.focused,
-        'input-group--dirty': this.value || this.placeholder || this.$refs.input && this.$refs.input.value
-      };
+        'input-group--dirty': this.value || this.placeholder || (this.$refs.input && this.$refs.input.value)
+      }
     }
   },
 
@@ -1463,12 +1486,13 @@ var Bus = function (_EventEmitter) {
     value: [String, Number, Boolean]
   },
 
-  mounted: function mounted() {
+  mounted: function mounted () {
     if (this.value) {
-      this.$refs.input.value = this.value;
+      this.$refs.input.value = this.value
     }
   }
 };
+
 
 /***/ },
 /* 27 */
@@ -1486,7 +1510,7 @@ var Bus = function (_EventEmitter) {
 
 /* harmony default export */ exports["default"] = {
   name: 'icon',
-
+  
   props: {
     large: Boolean,
 
@@ -1500,17 +1524,18 @@ var Bus = function (_EventEmitter) {
   },
 
   computed: {
-    classes: function classes() {
+    classes: function classes () {
       return {
         'icon--large': this.large,
         'icon--left': this.left,
         'icon--medium': this.medium,
         'icon--right': this.right,
         'icon--x-large': this.xLarge
-      };
+      }
     }
   }
 };
+
 
 /***/ },
 /* 28 */
@@ -1535,15 +1560,16 @@ var Bus = function (_EventEmitter) {
 /* harmony default export */ exports["default"] = {
   name: 'modal',
 
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__["a" /* default */]],
+  mixins: [ 
+    __WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__["a" /* default */] 
+  ],
 
-  data: function data() {
+  data: function data () {
     return {
       closeOnClick: false,
       overlay: {}
-    };
+    }
   },
-
 
   props: {
     bottom: Boolean,
@@ -1555,76 +1581,82 @@ var Bus = function (_EventEmitter) {
   },
 
   watch: {
-    active: function active(bool) {
+    active: function active (bool) {
       if (bool) {
-        this.openOverlay();
+        this.openOverlay()
       } else {
-        this.closeOverlay();
+        this.closeOverlay()
       }
     }
   },
 
   computed: {
-    classes: function classes() {
+    classes: function classes () {
       return {
         'modal--bottom': this.bottom
-      };
+      }
     }
   },
 
-  mounted: function mounted() {
-    this.initOverlay();
+  mounted: function mounted () {
+    this.initOverlay()
   },
 
-
   methods: {
-    close: function close(e) {
-      var force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    close: function close (e, force) {
+      if ( force === void 0 ) force = false;
 
       if (force) {
-        return this.active = false;
+        return this.active = false
       }
 
       if (e.target === this.$el || this.$el.contains(e.target)) {
-        return;
+        return
       }
 
       if (this.activator === null) {
-        return;
+        return
       }
-
+      
       try {
-        if (e.target === this.activator || this.activator.contains(e.target)) {
-          return;
+        if (e.target === this.activator
+            || this.activator.contains(e.target)
+        ) {
+          return
         }
       } catch (e) {}
 
-      this.active = false;
+      this.active = false
     },
-    initOverlay: function initOverlay() {
-      var overlay = document.getElementById('modal-overlay');
 
+    initOverlay: function initOverlay() {
+      var overlay = document.getElementById('modal-overlay')
+      
       if (overlay) {
-        return this.overlay = overlay;
+        return this.overlay = overlay
       }
 
-      this.appendOverlay();
+      this.appendOverlay()
     },
-    openOverlay: function openOverlay() {
-      this.overlay.classList.add('modal-overlay--open');
-    },
-    closeOverlay: function closeOverlay() {
-      this.overlay.classList.remove('modal-overlay--open');
-    },
-    appendOverlay: function appendOverlay() {
-      this.overlay = document.createElement('div');
-      this.overlay.id = 'modal-overlay';
-      this.overlay.classList.add('modal-overlay');
 
-      document.body.appendChild(this.overlay);
+    openOverlay: function openOverlay () {
+      this.overlay.classList.add('modal-overlay--open')
+    },
+
+    closeOverlay: function closeOverlay () {
+      this.overlay.classList.remove('modal-overlay--open')
+    },
+
+    appendOverlay: function appendOverlay () {
+      this.overlay = document.createElement('div')
+      this.overlay.id = 'modal-overlay'
+      this.overlay.classList.add('modal-overlay')
+      
+      document.body.appendChild(this.overlay)
     }
   }
 };
+
 
 /***/ },
 /* 29 */
@@ -1643,6 +1675,7 @@ var Bus = function (_EventEmitter) {
   name: 'navbar'
 };
 
+
 /***/ },
 /* 30 */
 /***/ function(module, exports, __webpack_require__) {
@@ -1660,7 +1693,7 @@ var Bus = function (_EventEmitter) {
 
 /* harmony default export */ exports["default"] = {
   name: 'navbar-item',
-
+  
   props: {
     item: {
       type: Object,
@@ -1668,6 +1701,7 @@ var Bus = function (_EventEmitter) {
     }
   }
 };
+
 
 /***/ },
 /* 31 */
@@ -1686,16 +1720,15 @@ var Bus = function (_EventEmitter) {
 
 /* harmony default export */ exports["default"] = {
   name: 'navbar-items',
-
+  
   props: {
     items: {
       type: Array,
-      default: function _default() {
-        return [];
-      }
+      default: function () { return []; }
     }
   }
 };
+
 
 /***/ },
 /* 32 */
@@ -1742,13 +1775,12 @@ var Bus = function (_EventEmitter) {
 
 /* harmony default export */ exports["default"] = {
   name: 'pagination',
-
-  data: function data() {
+  
+  data: function data () {
     return {
       selected: null
-    };
+    }
   },
-
 
   props: {
     circle: Boolean,
@@ -1765,75 +1797,75 @@ var Bus = function (_EventEmitter) {
   },
 
   watch: {
-    value: function value() {
-      this.init();
+    value: function value () {
+      this.init()
     }
   },
 
   computed: {
-    classes: function classes() {
+    classes: function classes () {
       return {
         'pagination--circle': this.circle
-      };
+      }
     },
-    items: function items() {
+
+    items: function items () {
       if (this.length <= 5) {
-        return this.range(1, this.length);
+        return this.range(1, this.length)
       }
 
-      var min = this.value - 3;
-      min = min > 0 ? min : 1;
+      var min = this.value - 3
+      min = min > 0 ? min : 1
 
-      var max = min + 6;
-      max = max <= this.length ? max : this.length;
+      var max = min + 6
+      max = max <= this.length ? max : this.length
 
       if (max === this.length) {
-        min = this.length - 6;
+        min = this.length - 6
       }
 
-      var range = this.range(min, max);
+      var range = this.range(min, max)
 
       if (this.value >= 4 && this.length > 6) {
-        range.splice(0, 2, 1, '...');
+        range.splice(0, 2, 1, '...')
       }
 
       if (this.value + 3 < this.length && this.length > 6) {
-        range.splice(range.length - 2, 2, '...', this.length);
+        range.splice(range.length - 2, 2, '...', this.length)
       }
 
-      return range;
+      return range
     }
   },
 
-  mounted: function mounted() {
-    this.$vuetify.load.call(this, this.init);
+  mounted: function mounted () {
+    this.$vuetify.load.call(this, this.init)
   },
 
-
   methods: {
-    init: function init() {
-      var _this = this;
+    init: function init () {
+      var this$1 = this;
 
-      this.selected = null;
+      this.selected = null
 
       // Change this
-      setTimeout(function () {
-        return _this.selected = _this.value;
-      }, 100);
+      setTimeout(function () { return this$1.selected = this$1.value; }, 100)
     },
-    range: function range(from, to) {
-      var range = [];
 
-      from = from > 0 ? from : 1;
+    range: function range (from, to) {
+      var range = []
+
+      from = from > 0 ? from : 1
 
       for (var i = from; i <= to; i++) {
-        range.push(i);
+        range.push(i)
       }
 
-      return range;
+      return range
     }
   }
 };
+
 
 /***/ },
 /* 33 */
@@ -1861,8 +1893,10 @@ var Bus = function (_EventEmitter) {
 
 /* harmony default export */ exports["default"] = {
   name: 'parallax',
-
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_translatable__["a" /* default */]],
+  
+  mixins: [
+    __WEBPACK_IMPORTED_MODULE_0__mixins_translatable__["a" /* default */]
+  ],
 
   props: {
     height: {
@@ -1877,39 +1911,42 @@ var Bus = function (_EventEmitter) {
   },
 
   computed: {
-    styles: function styles() {
+    styles: function styles () {
       return {
         display: 'block',
-        transform: 'translate3d(-50%, ' + this.parallax + 'px, 0)'
-      };
+        transform: ("translate3d(-50%, " + (this.parallax) + "px, 0)")
+      }
     }
   },
 
   methods: {
-    init: function init() {
-      var _this = this;
+    init: function init () {
+      var this$1 = this;
 
       if (this.$refs.img.complete) {
-        console.log('here');
-        this.translate();
-        this.listeners();
-        return this.$vuetify.bus.pub('parallax:ready');
+        console.log('here')
+        this.translate()
+        this.listeners()
+        return this.$vuetify.bus.pub('parallax:ready')
       }
-
+      
       this.$refs.img.addEventListener('load', function () {
-        _this.translate();
-        _this.listeners();
-        _this.$vuetify.bus.pub('parallax:ready');
-      }, { once: true });
+        this$1.translate()
+        this$1.listeners()
+        this$1.$vuetify.bus.pub('parallax:ready')
+      }, { once: true })
     },
-    objHeight: function objHeight() {
-      return this.$refs.img.naturalHeight;
+
+    objHeight: function objHeight () {
+      return this.$refs.img.naturalHeight
     },
-    elOffsetTop: function elOffsetTop() {
-      return this.$el.offsetTop;
+
+    elOffsetTop: function elOffsetTop () {
+      return this.$el.offsetTop
     }
   }
 };
+
 
 /***/ },
 /* 34 */
@@ -1931,15 +1968,16 @@ var Bus = function (_EventEmitter) {
 /* harmony default export */ exports["default"] = {
   name: 'parallax-content',
 
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_translatable__["a" /* default */]],
-
-  data: function data() {
+  mixins: [
+    __WEBPACK_IMPORTED_MODULE_0__mixins_translatable__["a" /* default */]
+  ],
+  
+  data: function data () {
     return {
       height: null,
       opacity: 1
-    };
+    }
   },
-
 
   props: {
     opacityOffset: {
@@ -1949,35 +1987,41 @@ var Bus = function (_EventEmitter) {
   },
 
   computed: {
-    styles: function styles() {
+    styles: function styles () {
       return {
         opacity: this.opacity,
-        transform: 'translate3d(0, ' + (this.parallax - this.height * .35) + 'px, 0)'
-      };
+        transform: ("translate3d(0, " + (this.parallax - (this.height * .35)) + "px, 0)")
+      }
     }
   },
 
   methods: {
-    init: function init() {
-      var _this = this;
+    init: function init () {
+      var this$1 = this;
 
       this.$vuetify.bus.sub('parallax:ready', function () {
-        _this.height = _this.$el.closest('.parallax').clientHeight;
-        _this.translate();
-        _this.listeners();
-      });
+        this$1.height = this$1.$el.closest('.parallax').clientHeight
+        this$1.translate()
+        this$1.listeners()
+      })
     },
-    elOffsetTop: function elOffsetTop() {
-      return this.$el.closest('.parallax').offsetTop;
+
+    elOffsetTop: function elOffsetTop () {
+      return this.$el.closest('.parallax').offsetTop
     },
-    objHeight: function objHeight() {
-      return this.$el.previousSibling.naturalHeight;
+
+    objHeight: function objHeight () {
+      return this.$el.previousSibling.naturalHeight
     },
-    translated: function translated() {
-      this.opacity = this.height * this.opacityOffset / this.parallax - this.opacityOffset * 1.7;
+
+    translated: function translated () {
+      this.opacity = (
+        (this.height * this.opacityOffset) / this.parallax - this.opacityOffset * 1.7
+      )
     }
   }
 };
+
 
 /***/ },
 /* 35 */
@@ -1999,7 +2043,7 @@ var Bus = function (_EventEmitter) {
 
 /* harmony default export */ exports["default"] = {
   name: 'progress',
-
+  
   props: {
     height: {
       type: String,
@@ -2025,18 +2069,20 @@ var Bus = function (_EventEmitter) {
   },
 
   computed: {
-    classes: function classes() {
+    classes: function classes () {
       return {
         'progress--indeterminate': this.indeterminate
-      };
+      }
     },
-    styles: function styles() {
+
+    styles: function styles () {
       return {
-        'width': this.value + '%'
-      };
+        'width': ((this.value) + "%")
+      }
     }
   }
 };
+
 
 /***/ },
 /* 36 */
@@ -2060,7 +2106,9 @@ var Bus = function (_EventEmitter) {
 /* harmony default export */ exports["default"] = {
   name: 'sidebar',
 
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__["a" /* default */]],
+  mixins: [
+    __WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__["a" /* default */]
+  ],
 
   props: {
     closeOnClick: Boolean,
@@ -2083,7 +2131,7 @@ var Bus = function (_EventEmitter) {
   },
 
   computed: {
-    classes: function classes() {
+    classes: function classes () {
       return {
         'sidebar--drawer': this.drawer && !this.right,
         'sidebar--drawer--right': this.drawer && this.right,
@@ -2091,31 +2139,37 @@ var Bus = function (_EventEmitter) {
         'sidebar--fixed--right': (this.fixed || this.drawer) && this.right,
         'sidebar--open': this.active,
         'sidebar--right': this.right
-      };
+      }
     },
-    styles: function styles() {
+
+    styles: function styles () {
       return {
         'height': this.height
-      };
+      }
     }
   },
 
   methods: {
-    close: function close(e) {
+    close: function close (e) {
       if (this.activator === null) {
-        return;
+        return
       }
-
+      
       try {
-        if (e.target === this.activator || this.activator.contains(e.target) || e.target.classList.contains('sidebar__item-header') || e.target.parentNode.classList.contains('sidebar__item-header')) {
-          return;
+        if (e.target === this.activator
+            || this.activator.contains(e.target)
+            || e.target.classList.contains('sidebar__item-header')
+            || e.target.parentNode.classList.contains('sidebar__item-header')
+        ) {
+          return
         }
       } catch (e) {}
 
-      this.active = false;
+      this.active = false
     }
   }
 };
+
 
 /***/ },
 /* 37 */
@@ -2153,56 +2207,62 @@ var Bus = function (_EventEmitter) {
 /* harmony default export */ exports["default"] = {
   name: 'sidebar-group',
 
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_eventable__["a" /* default */]],
+  mixins: [
+    __WEBPACK_IMPORTED_MODULE_0__mixins_eventable__["a" /* default */]
+  ],
 
-  data: function data() {
+  data: function data () {
     return {
       active: false,
       height: 0
-    };
+    }
   },
-
 
   props: {
     item: Object,
     required: true
   },
-
+  
   computed: {
-    events: function events() {
-      return [['sidebar-group:close', this.close]];
+    events: function events () {
+      return [
+        ['sidebar-group:close', this.close]
+      ]
     }
   },
 
-  mounted: function mounted() {
+  mounted: function mounted () {
     if (this.$refs.group.querySelector('.sidebar__item--active')) {
-      this.active = true;
+      this.active = true
     }
   },
-
 
   methods: {
-    enter: function enter(el) {
-      el.style.display = 'block';
-      el.style.height = 0;
-      el.style.height = el.scrollHeight + 'px';
-      this.$vuetify.bus.pub('sidebar-group:close', this._uid);
+    enter: function enter (el) {
+      el.style.display = 'block'
+      el.style.height = 0
+      el.style.height = (el.scrollHeight) + "px"
+      this.$vuetify.bus.pub('sidebar-group:close', this._uid)
     },
-    leave: function leave(el, done) {
-      el.style.height = 0;
+
+    leave: function leave (el, done) {
+      el.style.height = 0
     },
-    toggle: function toggle() {
-      this.active = !this.active;
+
+    toggle: function toggle () {
+      this.active = !this.active
     },
-    close: function close() {
-      var uid = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+    close: function close (uid) {
+      if ( uid === void 0 ) uid = null;
 
       if (uid !== this._uid) {
-        this.active = false;
+        this.active = false
       }
     }
   }
 };
+
 
 /***/ },
 /* 38 */
@@ -2234,7 +2294,7 @@ var Bus = function (_EventEmitter) {
 
 /* harmony default export */ exports["default"] = {
   name: 'sidebar-item',
-
+  
   props: {
     item: {
       type: Object,
@@ -2245,13 +2305,14 @@ var Bus = function (_EventEmitter) {
   },
 
   methods: {
-    click: function click() {
+    click: function click () {
       if (!this.$parent.$el.classList.contains('sidebar__group')) {
-        this.$vuetify.bus.pub('sidebar-group:close');
+        this.$vuetify.bus.pub('sidebar-group:close')
       }
     }
   }
 };
+
 
 /***/ },
 /* 39 */
@@ -2274,12 +2335,11 @@ var Bus = function (_EventEmitter) {
   props: {
     items: {
       type: Array,
-      default: function _default() {
-        return [];
-      }
+      default: function () { return []; }
     }
   }
 };
+
 
 /***/ },
 /* 40 */
@@ -2321,19 +2381,18 @@ var Bus = function (_EventEmitter) {
 /* harmony default export */ exports["default"] = {
   name: 'slider',
 
-  data: function data() {
+  data: function data () {
     return {
       current: null,
       items: [],
       slide_interval: {},
       set: true,
       reverse: false
-    };
+    }
   },
 
-
   props: {
-    cycle: Boolean,
+    cycle: Boolean,  
 
     interval: {
       type: Number,
@@ -2342,108 +2401,114 @@ var Bus = function (_EventEmitter) {
   },
 
   computed: {
-    classes: function classes() {
+    classes: function classes () {
       return {
         'slider__slides--is-reversing': this.reverse,
         'slider__slides--is-set': this.set
-      };
+      }
     }
   },
 
   watch: {
-    current: function current() {
-      this.startInterval();
-      this.order();
-      this.transition();
+    current: function current () {
+      this.startInterval()
+      this.order()
+      this.transition()
     }
   },
 
-  mounted: function mounted() {
-    this.$vuetify.load.call(this, this.init);
+  mounted: function mounted () {
+    this.$vuetify.load.call(this, this.init)
   },
 
-
   methods: {
-    init: function init() {
+    init: function init () {
       this.items = this.$children.filter(function (i) {
-        return i.$el.classList && i.$el.classList.contains('slider__item');
-      });
+        return i.$el.classList && i.$el.classList.contains('slider__item')
+      })
 
-      this.current = 0;
+      this.current = 0
 
       if (this.cycle) {
-        this.startInterval();
+        this.startInterval()
       }
     },
-    order: function order() {
-      var pos = 0;
-      var iter = this.items.length;
+
+    order: function order () {
+      var this$1 = this;
+
+      var pos = 0
+      var iter = this.items.length
 
       if (this.current === 0) {
-        pos = iter - 1;
+        pos = iter - 1  
       } else {
-        pos = this.current - 1;
+        pos = this.current - 1
       }
 
       for (var i = 1; i <= iter; i++) {
-        this.items[pos].order = i;
-        pos = pos + 1 === iter ? 0 : pos + 1;
+        this$1.items[pos].order = i
+        pos = pos + 1 === iter ? 0 : pos + 1
       }
     },
-    next: function next() {
-      this.reverse = false;
 
+    next: function next () {
+      this.reverse = false
+      
       if (this.current + 1 === this.items.length) {
-        return this.current = 0;
+        return this.current = 0
       }
 
-      this.current++;
+      this.current++
     },
-    prev: function prev() {
-      this.reverse = true;
+
+    prev: function prev () {
+      this.reverse = true
 
       if (this.current - 1 < 0) {
-        return this.current = this.items.length - 1;
+        return this.current = this.items.length - 1
       }
 
-      this.current--;
+      this.current--
     },
-    select: function select(index) {
-      var _this = this;
+
+    select: function select (index) {
+      var this$1 = this;
 
       if (index === this.current) {
-        return;
+        return
       }
 
-      var i = index > this.current ? false : true;
-      var method = index > this.current ? this.next : this.prev;
-      this.reverse = index < this.current;
+      var i = index > this.current ? false : true
+      var method = index > this.current ? this.next : this.prev
+      this.reverse = index < this.current
 
-      method();
+      method()
 
       var interval = setInterval(function () {
-        if (index == _this.current) {
-          return clearInterval(interval);
+        if (index == this$1.current) {
+          return clearInterval(interval)
         }
 
-        method();
-      }, 200);
+        method()
+      }, 200)
     },
-    startInterval: function startInterval() {
-      clearInterval(this.slide_interval);
 
-      this.slide_interval = setInterval(this.next, this.interval);
+    startInterval: function startInterval () {
+      clearInterval(this.slide_interval)
+
+      this.slide_interval = setInterval(this.next, this.interval)
     },
-    transition: function transition() {
-      var _this2 = this;
 
-      this.set = false;
-      setTimeout(function () {
-        return _this2.set = true;
-      }, 50);
+    transition: function transition () {
+      var this$1 = this;
+
+      this.set = false
+      setTimeout(function () { return this$1.set = true; }, 50)
     }
   }
 };
+
 
 /***/ },
 /* 41 */
@@ -2462,12 +2527,11 @@ var Bus = function (_EventEmitter) {
 /* harmony default export */ exports["default"] = {
   name: 'slider-item',
 
-  data: function data() {
+  data: function data () {
     return {
       order: 0
-    };
+    }
   },
-
 
   props: {
     src: {
@@ -2477,14 +2541,15 @@ var Bus = function (_EventEmitter) {
   },
 
   computed: {
-    styles: function styles() {
-      return {
-        backgroundImage: 'url(' + this.src + ')',
+    styles: function styles () {
+      return { 
+        backgroundImage: ("url(" + (this.src) + ")"),
         order: this.order
-      };
+      }
     }
   }
 };
+
 
 /***/ },
 /* 42 */
@@ -2506,14 +2571,15 @@ var Bus = function (_EventEmitter) {
 
 
 /* harmony default export */ exports["default"] = {
-  data: function data() {
+  data: function data () {
     return {
       active: false
-    };
+    }
   },
 
-
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_eventable__["a" /* default */]],
+  mixins: [
+    __WEBPACK_IMPORTED_MODULE_0__mixins_eventable__["a" /* default */]
+  ],
 
   props: {
     href: {
@@ -2525,35 +2591,40 @@ var Bus = function (_EventEmitter) {
   },
 
   computed: {
-    classes: function classes() {
+    classes: function classes () {
       return {
         'tabs__tab--active': this.active
-      };
+      }
     },
-    events: function events() {
-      return [['tab:open', this.activate]];
+
+    events: function events () {
+      return [
+        ['tab:open', this.activate]
+      ]
     },
-    target: function target() {
-      return this.href.replace('#', '');
+
+    target: function target () {
+      return this.href.replace('#', '')
     }
   },
 
-  mounted: function mounted() {
+  mounted: function mounted () {
     if (this.selected) {
-      this.$vuetify.load(this.click);
+      this.$vuetify.load(this.click)
     }
   },
-
 
   methods: {
-    activate: function activate(target) {
-      this.active = target === this.target;
+    activate: function activate (target) {
+      this.active = target === this.target
     },
-    click: function click() {
-      this.$vuetify.bus.pub('tab:open', this.target);
+
+    click: function click () {
+      this.$vuetify.bus.pub('tab:open', this.target)
     }
   }
 };
+
 
 /***/ },
 /* 43 */
@@ -2575,15 +2646,16 @@ var Bus = function (_EventEmitter) {
 
 
 /* harmony default export */ exports["default"] = {
-  data: function data() {
+  data: function data () {
     return {
       active: false,
       timeout: {}
-    };
+    }
   },
 
-
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_eventable__["a" /* default */]],
+  mixins: [
+    __WEBPACK_IMPORTED_MODULE_0__mixins_eventable__["a" /* default */]
+  ],
 
   props: {
     id: {
@@ -2598,17 +2670,20 @@ var Bus = function (_EventEmitter) {
   },
 
   computed: {
-    events: function events() {
-      return [['tab:open', this.open]];
+    events: function events () {
+      return [
+        ['tab:open', this.open]
+      ]
     }
   },
 
   methods: {
-    open: function open(target) {
-      this.active = this.id === target;
+    open: function open (target) {
+      this.active = this.id === target
     }
   }
 };
+
 
 /***/ },
 /* 44 */
@@ -2680,12 +2755,12 @@ var Bus = function (_EventEmitter) {
 
 
 
-var CardMenu = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers__["a" /* createSimpleFunctional */])('card__menu');
-var CardStack = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers__["a" /* createSimpleFunctional */])('card__stack');
-var CardActions = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers__["a" /* createSimpleFunctional */])('card__actions');
-var CardText = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers__["a" /* createSimpleFunctional */])('card__text');
-var CardTitleActions = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers__["a" /* createSimpleFunctional */])('card__title-actions');
-var CardTitleText = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers__["a" /* createSimpleFunctional */])('card__title-text');
+var CardMenu = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers__["a" /* createSimpleFunctional */])('card__menu')
+var CardStack = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers__["a" /* createSimpleFunctional */])('card__stack')
+var CardActions = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers__["a" /* createSimpleFunctional */])('card__actions')
+var CardText = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers__["a" /* createSimpleFunctional */])('card__text')
+var CardTitleActions = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers__["a" /* createSimpleFunctional */])('card__title-actions')
+var CardTitleText = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers__["a" /* createSimpleFunctional */])('card__title-text')
 
 /* harmony default export */ exports["a"] = {
   Card: __WEBPACK_IMPORTED_MODULE_0__Card_vue___default.a,
@@ -2798,40 +2873,40 @@ var CardTitleText = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_help
 var Col = {
   functional: true,
 
-  render: function render(h, _ref) {
-    var data = _ref.data,
-        children = _ref.children;
+  render: function (h, ref) {
+    var data = ref.data;
+    var children = ref.children;
 
-    data.staticClass = data.staticClass ? 'col ' + data.staticClass : 'col';
-    data.staticClass += ' ' + Object.keys(data.attrs).join(' ');
-    delete data.attrs;
+    data.staticClass = data.staticClass ? ("col " + (data.staticClass)) : 'col'
+    data.staticClass += " " + (Object.keys(data.attrs).join(' '))
+    delete data.attrs
 
-    return h('div', data, children);
+    return h('div', data, children)
   }
-};
+}
 
 var Container = {
   functional: true,
 
-  render: function render(h, _ref2) {
-    var data = _ref2.data,
-        children = _ref2.children;
+  render: function render (h, ref) {
+    var data = ref.data;
+    var children = ref.children;
 
-    var staticClass = data.staticClass ? 'container ' + data.staticClass : 'container';
+    var staticClass = data.staticClass ? ("container " + (data.staticClass)) : 'container'
 
     if (data.attrs && data.attrs.fluid) {
-      staticClass += ' container--fluid';
+      staticClass += ' container--fluid'
     }
 
-    data.staticClass = staticClass;
+    data.staticClass = staticClass
 
-    return h('div', data, children);
+    return h('div', data, children)
   }
-};
+}
 
-var Content = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('content');
-var Row = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('row');
-var ColSpacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('col--spacer');
+var Content = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('content')
+var Row = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('row')
+var ColSpacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('col--spacer')
 
 /* harmony default export */ exports["a"] = {
   Col: Col,
@@ -2862,14 +2937,14 @@ var ColSpacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers_
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(0);
 
 
-var List = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('list', 'ul');
-var ListItem = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('list__item', 'li');
-var ListItemTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('list__item-title', 'span');
-var ListItemSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('list__item-sub-title', 'span');
-var ListItemAction = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('list__item-action', 'span');
-var ListItemActionTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('list__item-action-title', 'span');
-var ListItemIcon = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('list__item-icon', 'v-icon');
-var ListItemAvatar = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('list__item-avatar', 'v-icon');
+var List = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('list', 'ul')
+var ListItem = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('list__item', 'li')
+var ListItemTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('list__item-title', 'span')
+var ListItemSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('list__item-sub-title', 'span')
+var ListItemAction = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('list__item-action', 'span')
+var ListItemActionTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('list__item-action-title', 'span')
+var ListItemIcon = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('list__item-icon', 'v-icon')
+var ListItemAvatar = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('list__item-avatar', 'v-icon')
 
 /* harmony default export */ exports["a"] = {
   List: List,
@@ -2912,7 +2987,7 @@ var ListItemAvatar = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_hel
 
 
 
-var NavbarLogo = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__util_helpers__["a" /* createSimpleFunctional */])('navbar__logo');
+var NavbarLogo = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__util_helpers__["a" /* createSimpleFunctional */])('navbar__logo')
 
 /* harmony default export */ exports["a"] = {
   Navbar: __WEBPACK_IMPORTED_MODULE_0__Navbar_vue___default.a,
@@ -3020,9 +3095,9 @@ var NavbarLogo = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__util_helpers
 
 
 
-var Tabs = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('tabs');
-var TabsContainer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('tabs__container');
-var TabsContentContainer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('tabs__content-container');
+var Tabs = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('tabs')
+var TabsContainer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('tabs__container')
+var TabsContentContainer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('tabs__content-container')
 
 /* harmony default export */ exports["a"] = {
   Tab: __WEBPACK_IMPORTED_MODULE_1__Tab_vue___default.a,
@@ -3040,37 +3115,40 @@ var TabsContentContainer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__ut
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(0);
 
 
-function directive(el, binding) {
-  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* directiveConfig */])(binding, {
-    icon: false,
-    left: false,
-    overlap: false
-  });
+function directive (el, binding) {
+  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* directiveConfig */])(
+    binding,
+    {
+      icon: false,
+      left: false,
+      overlap: false
+    }
+  )
 
-  if (config.overlap) el.classList.add('badge--overlap');
-  if (config.icon) el.classList.add('badge--icon');
-  if (config.left) el.classList.add('badge--left');
+  if (config.overlap) { el.classList.add('badge--overlap') }
+  if (config.icon)    { el.classList.add('badge--icon') }
+  if (config.left)    { el.classList.add('badge--left') }
 
-  el.dataset.badge = config.value;
-  el.classList.add('badge');
+  el.dataset.badge = config.value
+  el.classList.add('badge')
 }
 
 /* harmony default export */ exports["a"] = {
-  bind: function bind(el, binding) {
-    directive(el, binding);
+  bind: function (el, binding) {
+    directive(el, binding)
   },
 
-  updated: function updated(el, binding) {
-    directive(el, binding);
+  updated: function (el, binding) {
+    directive(el, binding)
   },
 
-  componentUpdated: function componentUpdated(el, binding) {
-    directive(el, binding);
+  componentUpdated: function (el, binding) {
+    directive(el, binding)
   },
 
-  unbind: function unbind(el) {
-    el.removeAttribute('data-badge');
-    el.classList.remove('badge');
+  unbind: function (el) {
+    el.removeAttribute('data-badge')
+    el.classList.remove('badge')
   }
 };
 
@@ -3082,61 +3160,69 @@ function directive(el, binding) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(0);
 
 
-function dropdown(e, el, config, bus) {
-  e.preventDefault();
+function dropdown (e, el, config, bus) {
+  e.preventDefault()
 
-  var component = document.getElementById(config.value);
-  var width = 0;
-  var height = 0;
+  var component = document.getElementById(config.value)
+  var width = 0
+  var height = 0
 
-  if (component.clientWidth > el.clientWidth && component.hasAttribute('data-right')) {
-    width = component.clientWidth - el.clientWidth;
+  if (component.clientWidth > el.clientWidth
+      && component.hasAttribute('data-right')
+  ) {
+    width = component.clientWidth - el.clientWidth
   }
 
   if (config.bottom) {
-    height = el.clientHeight;
+    height = el.clientHeight
   }
 
-  component.style.minWidth = el.clientWidth + 'px';
-  component.style.left = el.offsetLeft - width + 'px';
-  component.style.top = el.offsetTop + height + 'px';
-
-  bus.pub('dropdown:open:' + config.value);
+  component.style.minWidth = (el.clientWidth) + "px"
+  component.style.left = (el.offsetLeft - width) + "px"
+  component.style.top = (el.offsetTop + height) + "px"
+  
+  bus.pub(("dropdown:open:" + (config.value)))
 }
 
-function directive(el, binding, v) {
-  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* directiveConfig */])(binding, {
-    hover: false
-  });
+function directive (el, binding, v) {
+  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* directiveConfig */])(
+    binding,
+    {
+      hover: false
+    }
+  )
 
-  el.dataset.dropdown = config.value;
+  el.dataset.dropdown = config.value
 
   if (!config.hover) {
     el.onclick = function (e) {
-      dropdown(e, el, config, v.context.$vuetify.bus);
-    };
+      dropdown(e, el, config, v.context.$vuetify.bus)
+    }
   } else {
     el.onmouseenter = function (e) {
-      dropdown(e, el, config, v.context.$vuetify.bus);
-    };
+      dropdown(e, el, config, v.context.$vuetify.bus)
+    }
   }
 }
 
 /* harmony default export */ exports["a"] = {
-  bind: function bind(el, binding, v) {
-    directive(el, binding, v);
+  bind: function bind (el, binding, v) {
+    directive(el, binding, v)
   },
-  updated: function updated(el, binding, v) {
-    directive(el, binding, v);
+
+  updated: function updated (el, binding, v) {
+    directive(el, binding, v)
   },
-  componentUpdated: function componentUpdated(el, binding, v) {
-    directive(el, binding, v);
+
+  componentUpdated: function componentUpdated (el, binding, v) {
+    directive(el, binding, v)
   },
-  unbind: function unbind(el) {
-    el.removeAttribute('onclick');
-    el.removeAttribute('onmouseenter');
-    el.removeAttribute('onmouseleave');
-    el.removeAttribute('data-dropdown');
+
+  unbind: function unbind (el) {
+    el.removeAttribute('onclick')
+    el.removeAttribute('onmouseenter')
+    el.removeAttribute('onmouseleave')
+    el.removeAttribute('data-dropdown')
   }
 };
 
@@ -3148,33 +3234,37 @@ function directive(el, binding, v) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(0);
 
 
-function directive(el, binding, v) {
-  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* directiveConfig */])(binding);
+function directive (el, binding, v) {
+  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* directiveConfig */])(binding)
 
-  el.dataset.modal = config.value;
+  el.dataset.modal = config.value
 
   el.onclick = function (e) {
-    e.preventDefault();
-
-    v.context.$vuetify.bus.pub('modal:open:' + config.value);
-  };
+    e.preventDefault()
+    
+    v.context.$vuetify.bus.pub(("modal:open:" + (config.value)))
+  }
 }
 
 /* harmony default export */ exports["a"] = {
-  bind: function bind(el, binding, v) {
-    directive(el, binding, v);
+  bind: function bind (el, binding, v) {
+    directive(el, binding, v)
   },
-  updated: function updated(el, binding, v) {
-    directive(el, binding, v);
+
+  updated: function updated (el, binding, v) {
+    directive(el, binding, v)
   },
-  componentUpdated: function componentUpdated(el, binding, v) {
-    directive(el, binding, v);
+
+  componentUpdated: function componentUpdated (el, binding, v) {
+    directive(el, binding, v)
   },
-  unbind: function unbind(el) {
-    el.removeAttribute('onclick');
-    el.removeAttribute('data-modal');
+
+  unbind: function unbind (el) {
+    el.removeAttribute('onclick')
+    el.removeAttribute('data-modal')
   }
 };
+
 
 /***/ },
 /* 68 */
@@ -3184,31 +3274,34 @@ function directive(el, binding, v) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(0);
 
 
-function directive(el, binding, v) {
-  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* directiveConfig */])(binding);
+function directive (el, binding, v) {
+  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* directiveConfig */])(binding)
 
-  el.dataset.sidebar = config.value;
+  el.dataset.sidebar = config.value
 
   el.onclick = function (e) {
-    e.preventDefault();
-
-    v.context.$vuetify.bus.pub('sidebar:toggle:' + config.value);
-  };
+    e.preventDefault()
+    
+    v.context.$vuetify.bus.pub(("sidebar:toggle:" + (config.value)))
+  }
 }
 
 /* harmony default export */ exports["a"] = {
-  bind: function bind(el, binding, v) {
-    directive(el, binding, v);
+  bind: function bind (el, binding, v) {
+    directive(el, binding, v)
   },
-  updated: function updated(el, binding, v) {
-    directive(el, binding, v);
+
+  updated: function updated (el, binding, v) {
+    directive(el, binding, v)
   },
-  componentUpdated: function componentUpdated(el, binding, v) {
-    directive(el, binding, v);
+
+  componentUpdated: function componentUpdated (el, binding, v) {
+    directive(el, binding, v)
   },
-  unbind: function unbind(el) {
-    el.removeAttribute('data-sidebar');
-    el.removeAttribute('onclick');
+
+  unbind: function unbind (el) {
+    el.removeAttribute('data-sidebar')
+    el.removeAttribute('onclick')
   }
 };
 
@@ -3220,30 +3313,39 @@ function directive(el, binding, v) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(0);
 
 
-function directive(el, binding) {
-  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* directiveConfig */])(binding, { top: true });
+function directive (el, binding) {
+  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* directiveConfig */])(
+    binding,
+    { top: true }
+  )
 
-  el.dataset.tooltip = config.html;
-  el.classList.add('tooltip');
-  el.classList.add('tooltip--' + config.value);
+  el.dataset.tooltip = config.html
+  el.classList.add('tooltip')
+  el.classList.add(("tooltip--" + (config.value)))
 }
 
 /* harmony default export */ exports["a"] = {
-  bind: function bind(el, binding) {
-    directive(el, binding);
+  bind: function bind (el, binding) {
+    directive(el, binding)
   },
-  updated: function updated(el, binding, v) {
-    directive(el, binding);
-  },
-  componentUpdated: function componentUpdated(el, binding) {
-    directive(el, binding);
-  },
-  unbind: function unbind(el, binding) {
-    var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* directiveConfig */])(binding, { top: true });
 
-    el.removeAttribute('data-tooltip', config.html);
-    el.classList.remove('tooltip');
-    el.classList.remove('tooltip--' + config.value);
+  updated: function updated (el, binding, v) {
+    directive(el, binding)
+  },
+
+  componentUpdated: function componentUpdated (el, binding) {
+    directive(el, binding)
+  },
+
+  unbind: function unbind (el, binding) {
+    var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* directiveConfig */])(
+      binding,
+      { top: true }
+    )
+    
+    el.removeAttribute('data-tooltip', config.html)
+    el.classList.remove('tooltip')
+    el.classList.remove(("tooltip--" + (config.value)))
   }
 };
 
@@ -4788,7 +4890,13 @@ module.exports={render:function (){var _vm=this;
         _vm.focused = true
       }
     }
-  }, [_vm._m(0), _vm._l((_vm.options), function(o) {
+  }, [_vm._h('option', {
+    attrs: {
+      "value": "",
+      "disabled": "disabled",
+      "selected": "selected"
+    }
+  }, ["Select..."]), _vm._l((_vm.options), function(o) {
     return _vm._h('option', {
       ref: "options",
       refInFor: true,
@@ -4798,15 +4906,7 @@ module.exports={render:function (){var _vm=this;
       }
     })
   })])])
-},staticRenderFns: [function (){var _vm=this;
-  return _vm._h('option', {
-    attrs: {
-      "value": "",
-      "disabled": "disabled",
-      "selected": "selected"
-    }
-  }, ["Select..."])
-}]}
+},staticRenderFns: []}
 
 /***/ },
 /* 117 */
@@ -5368,34 +5468,33 @@ module.exports={render:function (){var _vm=this;
 
 function plugin(Vue) {
   Object.keys(__WEBPACK_IMPORTED_MODULE_2__directives_index__["a" /* default */]).forEach(function (key) {
-    Vue.directive(key, __WEBPACK_IMPORTED_MODULE_2__directives_index__["a" /* default */][key]);
-  });
-
+    Vue.directive(key, __WEBPACK_IMPORTED_MODULE_2__directives_index__["a" /* default */][key])
+  })
+  
   Object.keys(__WEBPACK_IMPORTED_MODULE_1__components_index__["a" /* default */]).forEach(function (key) {
-    Vue.component(key, __WEBPACK_IMPORTED_MODULE_1__components_index__["a" /* default */][key]);
-  });
+    Vue.component(key, __WEBPACK_IMPORTED_MODULE_1__components_index__["a" /* default */][key])
+  })
 
   Vue.prototype.$vuetify = {
     bus: __WEBPACK_IMPORTED_MODULE_0__util_bus__["a" /* default */],
 
     load: __WEBPACK_IMPORTED_MODULE_3__util_load__["a" /* default */],
 
-    init: function init() {
+    init: function init () {
       document.body.addEventListener('click', function (e) {
-        __WEBPACK_IMPORTED_MODULE_0__util_bus__["a" /* default */].pub('body:click', e);
-      });
+        __WEBPACK_IMPORTED_MODULE_0__util_bus__["a" /* default */].pub('body:click', e)
+      })
     },
 
-
     toast: __WEBPACK_IMPORTED_MODULE_4__functions_toast__["a" /* default */]
-  };
+  }
 }
 
 if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(plugin);
+    window.Vue.use(plugin);
 }
 
-module.exports = plugin;
+module.exports = plugin
 
 /***/ }
 /******/ ]);
