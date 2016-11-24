@@ -2147,7 +2147,6 @@ var Bus = function (_EventEmitter) {
 //
 //
 //
-//
 
 
 
@@ -2210,7 +2209,6 @@ var Bus = function (_EventEmitter) {
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-//
 //
 //
 //
@@ -4647,11 +4645,7 @@ module.exports={render:function (){var _vm=this;
         _vm.click()
       }
     }
-  }, [(_vm.item.icon) ? _vm._h('v-icon', {
-    domProps: {
-      "textContent": _vm._s(_vm.item.icon)
-    }
-  }) : _vm._e(), _vm._h('span', {
+  }, [(_vm.item.icon) ? _vm._h('v-icon', [_vm._s(_vm.item.icon)]) : _vm._e(), _vm._h('span', {
     domProps: {
       "textContent": _vm._s(_vm.item.text)
     }
@@ -5232,11 +5226,7 @@ module.exports={render:function (){var _vm=this;
         _vm.toggle()
       }
     }
-  }, [(_vm.item.icon) ? _vm._h('v-icon', {
-    domProps: {
-      "textContent": _vm._s(_vm.item.icon)
-    }
-  }) : _vm._e(), _vm._h('span', {
+  }, [(_vm.item.icon) ? _vm._h('v-icon', [_vm._s(_vm.item.icon)]) : _vm._e(), _vm._h('span', {
     domProps: {
       "textContent": _vm._s(_vm.item.text)
     }
