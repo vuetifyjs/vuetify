@@ -8,8 +8,7 @@
     )
       v-icon(
         v-if="item.icon"
-        v-text="item.icon"
-      )
+      ) {{ item.icon }}
       span(v-text="item.text")
     transition(
       v-on:enter="enter"
