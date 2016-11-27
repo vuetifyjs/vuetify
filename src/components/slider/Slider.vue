@@ -1,17 +1,11 @@
 <template lang="pug">
   div(class="slider")
     div(class="slider__left")
-      v-btn(
-        icon
-        v-on:click.native="prev"
-      )
+      v-btn(icon v-on:click.native="prev")
         v-icon chevron_left
 
     div(class="slider__right")
-      v-btn(
-        icon
-        v-on:click.native="next"
-      )
+      v-btn(icon v-on:click.native="next")
         v-icon chevron_right
 
     div(class="slider__controls")
@@ -19,14 +13,11 @@
         class="slider__controls__item"
         icon
         v-bind:class="{ 'slider__controls__item--active': index === current }"
-        v-for="(n, index) in items.length"
+        v-for="(item, index) in items"
       )
-        v-icon(v-on:click.native="select(index)") fiber_manual_record
-    div(
-      class="slider__slides"
-      v-bind:class="classes"
-    )
-      slot
+        v-icon(v-on:click.native="select(index)") {{ icon }}
+
+    slot
 </template>
 
 <script>
@@ -38,13 +29,17 @@
         current: null,
         items: [],
         slide_interval: {},
-        set: true,
         reverse: false
       }
     },
 
     props: {
-      cycle: Boolean,  
+      cycle: Boolean,
+
+      icon: {
+        type: String,
+        default: 'fiber_manual_record'
+      },
 
       interval: {
         type: Number,
@@ -52,25 +47,23 @@
       }
     },
 
-    computed: {
-      classes () {
-        return {
-          'slider__slides--is-reversing': this.reverse,
-          'slider__slides--is-set': this.set
-        }
-      }
-    },
-
     watch: {
       current () {
-        this.startInterval()
-        this.order()
-        this.transition()
+        if (this.cycle) {
+          clearInterval(this.slide_interval)
+          this.startInterval()
+        }
+
+        this.$vuetify.bus.pub('slider:open', this.items[this.current]._uid, this.reverse)
       }
     },
 
     mounted () {
-      this.$vuetify.load.call(this, this.init)
+      this.init()
+    },
+
+    activated () {
+      this.init()
     },
 
     methods: {
@@ -80,26 +73,6 @@
         })
 
         this.current = 0
-
-        if (this.cycle) {
-          this.startInterval()
-        }
-      },
-
-      order () {
-        let pos = 0
-        let iter = this.items.length
-
-        if (this.current === 0) {
-          pos = iter - 1  
-        } else {
-          pos = this.current - 1
-        }
-
-        for (let i = 1; i <= iter; i++) {
-          this.items[pos].order = i
-          pos = pos + 1 === iter ? 0 : pos + 1
-        }
       },
 
       next () {
@@ -123,34 +96,12 @@
       },
 
       select (index) {
-        if (index === this.current) {
-          return
-        }
-
-        let i = index > this.current ? false : true
-        let method = index > this.current ? this.next : this.prev
         this.reverse = index < this.current
-
-        method()
-
-        var interval = setInterval(() => {
-          if (index == this.current) {
-            return clearInterval(interval)
-          }
-
-          method()
-        }, 200)
+        this.current = index
       },
 
       startInterval () {
-        clearInterval(this.slide_interval)
-
         this.slide_interval = setInterval(this.next, this.interval)
-      },
-
-      transition () {
-        this.set = false
-        setTimeout(() => this.set = true, 50)
       }
     }
   }
