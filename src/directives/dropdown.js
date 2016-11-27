@@ -1,65 +1,46 @@
-import {
-  directiveConfig
-} from '../util/helpers'
-
-function dropdown (e, el, config, bus) {
+function dropdown (e, el, binding, bus, hover) {
   e.preventDefault()
 
-  const component = document.getElementById(config.value)
+  const component = document.getElementById(binding.arg)
+
+  if (!component.dataset.hover && hover) {
+    return
+  }
+
   let width = 0
   let height = 0
 
   if (component.clientWidth > el.clientWidth
-      && component.hasAttribute('data-right')
+      && Boolean(component.dataset.right)
   ) {
     width = component.clientWidth - el.clientWidth
   }
 
-  if (config.bottom) {
+  if (component.dataset.bottom == true) {
     height = el.clientHeight
   }
 
   component.style.minWidth = `${el.clientWidth}px`
   component.style.left = `${el.offsetLeft - width}px`
   component.style.top = `${el.offsetTop + height}px`
-  
-  bus.pub(`dropdown:open:${config.value}`)
+
+  bus.pub(`dropdown:open:${binding.arg}`)
 }
 
 function directive (el, binding, v) {
-  const config = directiveConfig(
-    binding,
-    {
-      hover: false
-    }
-  )
+  el.dataset.dropdown = binding.arg
 
-  el.dataset.dropdown = config.value
-
-  if (!config.hover) {
-    el.onclick = e => {
-      dropdown(e, el, config, v.context.$vuetify.bus)
-    }
-  } else {
-    el.onmouseenter = e => {
-      dropdown(e, el, config, v.context.$vuetify.bus)
-    }
-  }
+  // Directive binding happens before all components are rendered
+  // When changing routes, dropdown element may not be ready
+  // Do hover check within dropdown function
+  el.onclick = e => dropdown(e, el, binding, v.context.$vuetify.bus, false)
+  el.onmouseenter = e => dropdown(e, el, binding, v.context.$vuetify.bus, true)
 }
 
 export default {
-  bind (el, binding, v) {
-    directive(el, binding, v)
-  },
-
-  updated (el, binding, v) {
-    directive(el, binding, v)
-  },
-
-  componentUpdated (el, binding, v) {
-    directive(el, binding, v)
-  },
-
+  bind: directive,
+  updated: directive,
+  componentUpdated: directive,
   unbind (el) {
     el.removeAttribute('onclick')
     el.removeAttribute('onmouseenter')

@@ -1,34 +1,19 @@
-import {
-  directiveConfig
-} from '../util/helpers'
-
 function directive (el, binding, v) {
-  const config = directiveConfig(binding)
-
-  el.dataset.sidebar = config.value
+  el.dataset.sidebar = binding.arg
 
   el.onclick = e => {
     e.preventDefault()
     
-    v.context.$vuetify.bus.pub(`sidebar:toggle:${config.value}`)
+    v.context.$vuetify.bus.pub(`sidebar:toggle:${binding.arg}`)
   }
 }
 
 export default {
-  bind (el, binding, v) {
-    directive(el, binding, v)
-  },
-
-  updated (el, binding, v) {
-    directive(el, binding, v)
-  },
-
-  componentUpdated (el, binding, v) {
-    directive(el, binding, v)
-  },
-
+  bind: directive,
+  updated: directive,
+  componentUpdated: directive,
   unbind (el) {
-    el.removeAttribute('data-sidebar')
     el.removeAttribute('onclick')
+    el.removeAttribute('data-sidebar')
   }
 }

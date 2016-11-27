@@ -14,18 +14,9 @@ function directive (el, binding) {
 }
 
 export default {
-  bind (el, binding) {
-    directive(el, binding)
-  },
-
-  updated (el, binding, v) {
-    directive(el, binding)
-  },
-
-  componentUpdated (el, binding) {
-    directive(el, binding)
-  },
-
+  bind: directive,
+  updated: directive,
+  componentUpdated: directive,
   unbind (el, binding) {
     const config = directiveConfig(
       binding,
