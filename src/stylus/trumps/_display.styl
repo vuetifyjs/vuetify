@@ -1,4 +1,8 @@
 for size, width in $grid-breakpoints
   @media screen and (min-width: width)
-    .hidden-{size}
+    .hidden-{size}-and-up
+      display: none !important
+      
+  @media screen and (max-width: width)
+    .hidden-{size}-and-down
       display: none !important

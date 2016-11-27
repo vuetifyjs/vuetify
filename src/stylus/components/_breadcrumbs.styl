@@ -1,6 +1,6 @@
 .breadcrumbs
   display: flex
-  align-items: space-between
+  justify-content: space-between
   flex-wrap: wrap
   flex: $breadcrumbs-flex
   margin: $breadcrumbs-margin
@@ -14,9 +14,8 @@
       
     &:last-child a
       color: $grey.lighten-1
-      
-      &:hover
-        color: $theme.secondary
+      pointer-events: none
+      cursor: default
       
   &--with-icons
     li

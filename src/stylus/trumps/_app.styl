@@ -7,8 +7,6 @@
     padding-top: $navbar-min-height + $spacers.double.y
       
     header
-      position: fixed
-      top: 0
       z-index: 4
 
   &.top-navbar
@@ -17,8 +15,8 @@
         padding-top: $spacers.one.y
       
   &.left-fixed-sidebar
+    .navbar,
     main,
-    header,
     footer
       padding-left: $sidebar-width
       transition: $primary-transition
@@ -37,8 +35,8 @@
         background: #fff
   
   &.right-fixed-sidebar
+    .navbar,
     main,
-    header,
     footer
       padding-right: $sidebar-width
       transition: $primary-transition
