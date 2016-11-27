@@ -1,0 +1,16 @@
+.shift-enter
+  transform: translate3d(100%, 0, 0)
+    
+.shift-leave, .shift-leave-active
+  position: absolute
+  top: 0
+  transform: translate3d(-100%, 0, 0)
+
+.reverse
+  &.shift-enter
+    transform: translate3d(-100%, 0, 0)
+        
+  &.shift-leave, &.shift-leave-active
+    position: absolute
+    top: 0
+    transform: translate3d(100%, 0, 0)

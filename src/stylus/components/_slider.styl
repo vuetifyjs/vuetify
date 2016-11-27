@@ -6,31 +6,16 @@
   overflow: hidden
   @extend .z-depth-1
   
-  &__slides
-    margin: 0
-    padding: 0
-    display: flex
-    height: 100%
-    position: relative
-    left: -100%
-    transform: translateX(100%)
-    
-    &--is-reversing
-      transform: translateX(-100%)
-    
-    &--is-set
-      transform: none
-      transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)
-  
   &__item
     display: flex
     align-items: center
     justify-content: center
     flex: 1 0 100%
-    order: 2
     height: 100%
+    width: 100%
     background-size: cover
     background-position: center center
+    transition: .2s ease-out
   
   &__left
     position: absolute

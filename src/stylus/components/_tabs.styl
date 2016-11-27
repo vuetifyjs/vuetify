@@ -43,7 +43,7 @@
       &:after
         height: 3px
         
-  &__container
+  &__tabs
     display: flex
     position: relative
     align-items: center
@@ -54,7 +54,7 @@
     @media screen and (max-width: $grid-breakpoints.sm)
       flex-wrap: wrap
     
-  &__content-container
+  &__items
     background: #fff
     border-width: 0 1px 1px 1px
     border-color: $grey.lighten-2
@@ -64,23 +64,8 @@
     position: relative
     overflow: hidden
     
-  &__content
+  &__item
     transition: .2s ease-out
     padding: 1rem
     height: 100%
     width: 100%
-    
-    &-enter
-      transform: translate3d(100%, 0, 0)
-      
-    &-leave, &-leave-active
-      position: absolute
-      top: 0
-      transform: translate3d(-100%, 0, 0)
-      
-    &--reverse
-      &-enter, &-leave-active
-        transform: translate3d(-100%, 0, 0)
-        
-      &-leave, &-leave-active
-        transform: translate3d(100%, 0, 0)

@@ -85,8 +85,8 @@
       background-color: $secondary-color
       color: #FFFFFF
       
-    i
-      margin-right: $spacers.one.x
+    > span
+      margin-left: $spacers.one.x
       
   &__item-header
     @extend .sidebar__item
@@ -107,7 +107,7 @@
       background: $theme.primary
       
       &:after
-        transform: rotate3d(0, 0, 1, -90deg)
+        transform: rotate(-90deg)
   
   @media screen and (max-width: $grid-breakpoints.sm)
     transform: translateX(-($sidebar-width + 25))
