@@ -6,6 +6,7 @@
       v-bind:href="item.href"
       v-on:click="click()"
     )
+      span(v-text="item.text")
     router-link(
       class="sidebar__item"
       active-class="sidebar__item--active"
@@ -14,9 +15,7 @@
       v-on:click.native="click()"
       v-else
     )
-      v-icon(
-        v-if="item.icon"
-      ) {{ item.icon }}
+      v-icon(v-if="item.icon") {{ item.icon }}
       span(v-text="item.text")
 </template>
 
@@ -35,9 +34,7 @@
 
     methods: {
       click () {
-        if (!this.$parent.$el.classList.contains('sidebar__group')) {
-          this.$vuetify.bus.pub('sidebar-group:close')
-        }
+        this.$vuetify.bus.pub('sidebar-group:close', this.$parent.$parent._uid, this.$parent._uid)
       }
     }
   }

@@ -63,7 +63,6 @@
         el.style.display = 'block'
         el.style.height = 0
         el.style.height = `${el.scrollHeight}px`
-        this.$vuetify.bus.pub('sidebar-group:close', this._uid)
       },
 
       leave (el, done) {
@@ -74,10 +73,12 @@
         this.active = !this.active
       },
 
-      close (uid = null) {
-        if (uid !== this._uid) {
-          this.active = false
+      close (parent_uid = null, uid = null) {
+        if (parent_uid !== this.$parent._uid) {
+          return
         }
+
+        this.active = uid === this._uid
       }
     }
   }

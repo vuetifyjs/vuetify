@@ -5,6 +5,8 @@
     v-bind:id="id"
     v-bind:style="styles"
   )
+    slot(name="top")
+    v-sidebar-items(v-if="items.length > 0" v-bind:items="items")
     slot
 </template>
 
@@ -19,7 +21,10 @@
     ],
 
     props: {
-      closeOnClick: Boolean,
+      closeOnClick: {
+        type: Boolean,
+        default: false
+      },
 
       drawer: Boolean,
 
@@ -33,6 +38,11 @@
       id: {
         type: String,
         required: true
+      },
+
+      items: {
+        type: Array,
+        default: () => []
       },
 
       right: Boolean
@@ -61,6 +71,10 @@
       close (e) {
         if (this.activator === null) {
           return
+        }
+
+        if (e.target === this.activator && this.toggleable) {
+          return this.toggle()
         }
         
         try {
