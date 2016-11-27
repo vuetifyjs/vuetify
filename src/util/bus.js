@@ -3,31 +3,31 @@ import EventEmitter from 'events'
 class Bus extends EventEmitter {
   constructor () {
     super()
-    this.setMaxListeners(50)
+    this.setMaxListeners(500)
   }
 
   sub (event, cb) {
     const type = typeof event
     
-    if (type === 'object' || type === 'array') {
-      event.forEach(i => this.on(...i))
-    } else {
-      this.on(event, cb)
+    if (type !== 'object' && type !== 'array') {
+      return this.on(event, cb)
     }
+
+    event.forEach(i => this.on.apply(null, i))
   }
 
   unsub (event, cb) {
     const type = typeof event
 
-    if (type === 'object' || type === 'array') {
-      event.forEach(i => this.removeListener(...i))
-    } else {
-      this.removeListener(event, cb)
+    if (type !== 'object' && type !== 'array') {
+      return this.removeListener(event, cb)
     }
+    
+    event.forEach(i => this.removeListener.apply(null, i))
   }
 
   pub () {
-    this.emit(...arguments)
+    this.emit.apply(null, arguments)
   }
 }
 
