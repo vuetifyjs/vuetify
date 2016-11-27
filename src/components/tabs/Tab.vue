@@ -50,7 +50,7 @@
     },
 
     mounted () {
-      if (this.selected) {
+      if (this.selected || window.location.hash.substr(1) === this.target) {
         this.$vuetify.load(this.click)
       }
     },

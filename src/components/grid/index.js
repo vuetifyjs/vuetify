@@ -20,6 +20,7 @@ const Container = {
 
     if (data.attrs && data.attrs.fluid) {
       staticClass += ' container--fluid'
+      data.attrs.fluid = undefined
     }
 
     data.staticClass = staticClass
@@ -31,11 +32,13 @@ const Container = {
 const Content = createSimpleFunctional('content')
 const Row = createSimpleFunctional('row')
 const ColSpacer = createSimpleFunctional('col--spacer')
+const Spacer = createSimpleFunctional('spacer')
 
 export default {
   Col,
   ColSpacer,
   Container,
   Content,
+  Spacer,
   Row
 }

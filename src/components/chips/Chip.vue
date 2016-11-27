@@ -2,14 +2,14 @@
   span(
     class="chip"
     v-bind:class="classes"
-    v-show="active"
+    v-show="value"
   )
     slot
     a(
       class="chip__close"
       href="#!"
       v-if="close"
-      v-on:click.prevent="active = false"
+      v-on:click.prevent="$emit('input', false)"
     )
       v-icon(right) cancel
 </template>
@@ -17,12 +17,6 @@
 <script>
   export default {
     name: 'chip',
-    
-    data () {
-      return {
-        active: true
-      }
-    },
 
     props: {
       close: Boolean,
@@ -31,7 +25,12 @@
 
       outline: Boolean,
 
-      small: Boolean
+      small: Boolean,
+
+      value: {
+        type: Boolean,
+        default: true
+      }
     },
 
     computed: {

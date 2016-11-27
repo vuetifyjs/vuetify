@@ -2,6 +2,8 @@
   ul(
     class="dropdown"
     v-bind:class="classes"
+    v-bind:data-bottom="bottom"
+    v-bind:data-hover="hover"
     v-bind:data-right="right"
     v-bind:id="id"
   )
@@ -23,10 +25,14 @@
     ],
 
     props: {
+      bottom: Boolean,
+
       id: {
         type: String,
         required: true
       },
+
+      hover: Boolean,
 
       items: {
         type: Array,
