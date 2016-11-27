@@ -12,6 +12,8 @@
   import Eventable from '../../mixins/eventable'
 
   export default {
+    name: 'tab',
+
     data () {
       return {
         active: false

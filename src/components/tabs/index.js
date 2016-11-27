@@ -3,15 +3,15 @@ import {
 } from '../../util/helpers'
 
 import Tab from './Tab.vue'
-import TabContent from './TabContent.vue'
+import TabsItem from './TabsItem.vue'
 const Tabs = createSimpleFunctional('tabs')
-const TabsContainer = createSimpleFunctional('tabs__container')
-const TabsContentContainer = createSimpleFunctional('tabs__content-container')
+const TabsTabs = createSimpleFunctional('tabs__tabs')
+const TabsItems = createSimpleFunctional('tabs__items')
 
 export default {
   Tab,
-  TabsContainer,
-  TabContent,
-  TabsContentContainer,
-  Tabs
+  Tabs,
+  TabsItem,
+  TabsItems,
+  TabsTabs
 }

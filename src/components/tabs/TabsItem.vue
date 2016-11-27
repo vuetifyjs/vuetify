@@ -1,7 +1,7 @@
 <template lang="pug">
   transition(v-bind:name="transition")
     div(
-      class="tabs__content"
+      class="tabs__item shift"
       v-bind:id="id"
       v-show="active"
     )
@@ -12,10 +12,11 @@
   import Eventable from '../../mixins/eventable'
 
   export default {
+    name: 'tabs-item',
+    
     data () {
       return {
-        active: false,
-        timeout: {}
+        active: false
       }
     },
 
@@ -31,7 +32,7 @@
 
       transition: {
         type: String,
-        default: 'tabs__content'
+        default: 'shift'
       }
     },
 
