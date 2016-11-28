@@ -13,7 +13,7 @@ class Bus extends EventEmitter {
       return this.on(event, cb)
     }
 
-    event.forEach(i => this.on.apply(null, i))
+    event.forEach(i => this.on.apply(this, i))
   }
 
   unsub (event, cb) {
@@ -27,7 +27,7 @@ class Bus extends EventEmitter {
   }
 
   pub () {
-    this.emit.apply(null, arguments)
+    this.emit.apply(this, arguments)
   }
 }
 
