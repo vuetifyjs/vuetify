@@ -1,12 +1,14 @@
 <template lang="pug">
-  transition(name="modal")
-    div(
-      class="modal"
-      v-bind:class="classes"
-      v-bind:id="id"
-      v-show="active"
-    )
-      slot
+  div(class="modal-overlay" v-bind:class="{ 'modal-overlay--open': this.active }")
+    transition(name="modal")
+      div(
+        class="modal"
+        v-bind:class="classes"
+        v-bind:id="id"
+        v-show="active"
+        ref="modal"
+      )
+        slot
 </template>
 
 <script>
@@ -35,16 +37,6 @@
       }
     },
 
-    watch: {
-      active (bool) {
-        if (bool) {
-          this.openOverlay()
-        } else {
-          this.closeOverlay()
-        }
-      }
-    },
-
     computed: {
       classes () {
         return {
@@ -53,17 +45,13 @@
       }
     },
 
-    mounted () {
-      this.initOverlay()
-    },
-
     methods: {
       close (e, force = false) {
         if (force) {
           return this.active = false
         }
 
-        if (e.target === this.$el || this.$el.contains(e.target)) {
+        if (e.target === this.$refs.modal || this.$refs.modal.contains(e.target)) {
           return
         }
 
@@ -80,32 +68,6 @@
         } catch (e) {}
 
         this.active = false
-      },
-
-      initOverlay() {
-        const overlay = document.getElementById('modal-overlay')
-        
-        if (overlay) {
-          return this.overlay = overlay
-        }
-
-        this.appendOverlay()
-      },
-
-      openOverlay () {
-        this.overlay.classList.add('modal-overlay--open')
-      },
-
-      closeOverlay () {
-        this.overlay.classList.remove('modal-overlay--open')
-      },
-
-      appendOverlay () {
-        this.overlay = document.createElement('div')
-        this.overlay.id = 'modal-overlay'
-        this.overlay.classList.add('modal-overlay')
-        
-        document.body.appendChild(this.overlay)
       }
     }
   }
