@@ -35,15 +35,14 @@
     padding: 0 2rem
     display: flex
     align-items: center
+    min-height: $navbar-min-height
   
   &__items
     list-style-type: none
     padding: 0
-    height: $navbar-height
     
     > li
       float: left
-      height: $navbar-height
       
     a
       color: #fff
@@ -53,13 +52,12 @@
     color: #fff
     display: inline-flex
     padding: $navbar-item-padding
-    min-height: $navbar-min-height
     text-decoration: none
     transition: all 0.3s ease-out
     
     i
       font-size: 2rem
-      line-height: $navbar-height
+      line-height: $navbar-min-height
     
     &:hover
       background: rgba(0,0,0,0.1)
