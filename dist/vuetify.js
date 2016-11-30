@@ -445,7 +445,7 @@ var Bus = (function (EventEmitter) {
       return this.on(event, cb)
     }
 
-    event.forEach(function (i) { return this$1.on.apply(null, i); })
+    event.forEach(function (i) { return this$1.on.apply(this$1, i); })
   };
 
   Bus.prototype.unsub = function unsub (event, cb) {
@@ -461,13 +461,14 @@ var Bus = (function (EventEmitter) {
   };
 
   Bus.prototype.pub = function pub () {
-    this.emit.apply(null, arguments)
+    this.emit.apply(this, arguments)
   };
 
   return Bus;
 }(__WEBPACK_IMPORTED_MODULE_0_events___default.a));
 
 /* harmony default export */ exports["a"] = new Bus();
+
 
 /***/ },
 /* 8 */
@@ -505,10 +506,12 @@ var Bus = (function (EventEmitter) {
 //
 //
 //
+//
+//
 
 /* harmony default export */ exports["default"] = {
   name: 'alert',
-  
+
   props: {
     close: Boolean,
 
@@ -517,7 +520,7 @@ var Bus = (function (EventEmitter) {
     info: Boolean,
 
     success: Boolean,
-    
+
     warning: Boolean,
 
     value: {
@@ -527,7 +530,7 @@ var Bus = (function (EventEmitter) {
   },
 
   computed: {
-    classes: function classes () {
+    classes: function classes() {
       return {
         'alert--close': this.close,
         'alert--error': this.error,
@@ -537,20 +540,20 @@ var Bus = (function (EventEmitter) {
       }
     },
 
-    icon: function icon () {
+    icon: function icon() {
       switch (true) {
         case this.error:
           return 'warning'
-        break
+          break
         case this.info:
           return 'info'
-        break
+          break
         case this.success:
           return 'check_circle'
-        break
+          break
         case this.warning:
           return 'priority_high'
-        break
+          break
       }
     }
   }
@@ -1572,6 +1575,8 @@ var Bus = (function (EventEmitter) {
 //
 //
 //
+//
+//
 
 
 
@@ -1598,26 +1603,12 @@ var Bus = (function (EventEmitter) {
     }
   },
 
-  watch: {
-    active: function active (bool) {
-      if (bool) {
-        this.openOverlay()
-      } else {
-        this.closeOverlay()
-      }
-    }
-  },
-
   computed: {
     classes: function classes () {
       return {
         'modal--bottom': this.bottom
       }
     }
-  },
-
-  mounted: function mounted () {
-    this.initOverlay()
   },
 
   methods: {
@@ -1628,7 +1619,7 @@ var Bus = (function (EventEmitter) {
         return this.active = false
       }
 
-      if (e.target === this.$el || this.$el.contains(e.target)) {
+      if (e.target === this.$refs.modal || this.$refs.modal.contains(e.target)) {
         return
       }
 
@@ -1645,32 +1636,6 @@ var Bus = (function (EventEmitter) {
       } catch (e) {}
 
       this.active = false
-    },
-
-    initOverlay: function initOverlay() {
-      var overlay = document.getElementById('modal-overlay')
-      
-      if (overlay) {
-        return this.overlay = overlay
-      }
-
-      this.appendOverlay()
-    },
-
-    openOverlay: function openOverlay () {
-      this.overlay.classList.add('modal-overlay--open')
-    },
-
-    closeOverlay: function closeOverlay () {
-      this.overlay.classList.remove('modal-overlay--open')
-    },
-
-    appendOverlay: function appendOverlay () {
-      this.overlay = document.createElement('div')
-      this.overlay.id = 'modal-overlay'
-      this.overlay.classList.add('modal-overlay')
-      
-      document.body.appendChild(this.overlay)
     }
   }
 };
@@ -2245,7 +2210,6 @@ var Bus = (function (EventEmitter) {
 //
 //
 //
-//
 
 
 
@@ -2277,20 +2241,23 @@ var Bus = (function (EventEmitter) {
   },
 
   mounted: function mounted () {
-    if (this.$refs.group.querySelector('.sidebar__item--active')) {
+    if (this.$refs.group.$el.querySelector('.sidebar__item--active')) {
       this.active = true
     }
   },
 
   methods: {
-    enter: function enter (el) {
+    enter: function enter (el, done) {
       el.style.display = 'block'
       el.style.height = 0
       el.style.height = (el.scrollHeight) + "px"
+      
+      el.addEventListener('transitionend', done, { once: true })
     },
 
     leave: function leave (el, done) {
       el.style.height = 0
+      el.addEventListener('transitionend', done, { once: true })
     },
 
     toggle: function toggle () {
@@ -5014,7 +4981,12 @@ module.exports={render:function (){var _vm=this;
 /***/ function(module, exports) {
 
 module.exports={render:function (){var _vm=this;
-  return _vm._h('transition', {
+  return _vm._h('div', {
+    staticClass: "modal-overlay",
+    class: {
+      'modal-overlay--open': this.active
+    }
+  }, [_vm._h('transition', {
     attrs: {
       "name": "modal"
     }
@@ -5025,12 +4997,13 @@ module.exports={render:function (){var _vm=this;
       value: (_vm.active),
       expression: "active"
     }],
+    ref: "modal",
     staticClass: "modal",
     class: _vm.classes,
     attrs: {
       "id": _vm.id
     }
-  }, [_vm._t("default")])])
+  }, [_vm._t("default")])])])
 },staticRenderFns: []}
 
 /***/ },
@@ -5061,7 +5034,7 @@ module.exports={render:function (){var _vm=this;
 /***/ function(module, exports) {
 
 module.exports={render:function (){var _vm=this;
-  return _vm._h('nav', {
+  return _vm._h('aside', {
     staticClass: "sidebar",
     class: _vm.classes,
     style: (_vm.styles),
@@ -5369,15 +5342,14 @@ module.exports={render:function (){var _vm=this;
       "enter": _vm.enter,
       "leave": _vm.leave
     }
-  }, [_vm._h('ul', {
+  }, [_vm._h('v-sidebar-items', {
     directives: [{
       name: "show",
       rawName: "v-show",
       value: (_vm.active),
       expression: "active"
     }],
-    ref: "group",
-    staticClass: "sidebar__items"
+    ref: "group"
   }, [_vm._t("default")])])])
 },staticRenderFns: []}
 

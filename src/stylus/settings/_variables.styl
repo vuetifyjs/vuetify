@@ -119,27 +119,49 @@ $breadcrumbs-item-font-size := 1rem
 $breadcrumbs-margin := 0
 $breadcrumbs-padding := 0 1rem
 
-// Buttons
+/** Buttons */
+
+// Base
 $button-background := $grey.lighten-2
-$button-border := none
+$button-border := 1px solid $button-background
 $button-border-radius := 0
 $button-color := #000000
 $button-disabled-opacity := .5
-$button-height := 2.6rem
-$button-flat-hover := rgba(158, 158, 158, .2)
-$button-floating-small-padding := .1rem
-$button-floating-padding := .3rem
-$button-floating-large-padding := .5rem
-$button-font-size := .9rem
-$button-font-weight := 500
-$button-icon-hover-background := rgba($grey.lighten-1, .4)
-$button-large-multiplier := 1.3
-$button-letter-spacing := .5px
 $button-padding-left := 1.3rem
 $button-padding-top := 0
-$button-small-multiplier := .7
+$button-min-height := 2.5rem
 $button-text-transform := uppercase
 $button-transition := all .2s ease-out
+$button-font-size := .9rem
+$button-font-weight := 500
+$button-letter-spacing := .5px
+
+// Flat
+$button-flat-hover := rgba(158, 158, 158, .2)
+
+// Floating
+$button-floating-padding := .4rem
+$button-floating-large-padding := .5rem
+
+// Small
+$button-small-min-height := 2rem
+$button-small-line-height := 2rem
+$button-small-floating-width := 2rem
+$button-small-floating-font-size := $button-min-height * .4
+$button-small-floating-padding := 0
+
+// Large
+$button-large-min-height := 3rem
+$button-large-line-height := 3rem
+$button-large-padding := 0 4rem
+$button-large-floating-font-size := $button-min-height * 0.7
+$button-large-floating-width := 4rem
+$button-large-floating-padding := 1rem
+
+// Icon
+$button-icon-hover-background := rgba($grey.lighten-1, .4)
+$button-icon-padding := $button-padding-left * .3
+$button-icon-font-size := $button-font-size * 1.5
 
 // Card
 $card-actions-border-top := 1px solid rgba(#000000, .1)

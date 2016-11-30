@@ -1,5 +1,5 @@
 <template lang="pug">
-  nav(
+  aside(
     class="sidebar"
     v-bind:class="classes"
     v-bind:id="id"

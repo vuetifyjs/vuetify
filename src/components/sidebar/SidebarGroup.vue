@@ -14,8 +14,7 @@
       v-on:enter="enter"
       v-on:leave="leave"
     )
-      ul(
-        class="sidebar__items"
+      v-sidebar-items(
         v-show="active"
         ref="group"
       )
@@ -53,20 +52,23 @@
     },
 
     mounted () {
-      if (this.$refs.group.querySelector('.sidebar__item--active')) {
+      if (this.$refs.group.$el.querySelector('.sidebar__item--active')) {
         this.active = true
       }
     },
 
     methods: {
-      enter (el) {
+      enter (el, done) {
         el.style.display = 'block'
         el.style.height = 0
         el.style.height = `${el.scrollHeight}px`
+        
+        el.addEventListener('transitionend', done, { once: true })
       },
 
       leave (el, done) {
         el.style.height = 0
+        el.addEventListener('transitionend', done, { once: true })
       },
 
       toggle () {

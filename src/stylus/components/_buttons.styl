@@ -1,5 +1,5 @@
 .btn
-  border: 1px solid $button-background
+  border: $button-border
   border-radius: $button-border-radius
   background: $button-background
   color: $button-color
@@ -8,9 +8,9 @@
   align-items: center
   font-size: $button-font-size
   font-weight: $button-font-weight
-  min-height: $button-height
+  min-height: $button-min-height
   letter-spacing: $button-letter-spacing
-  line-height: $button-height
+  line-height: $button-min-height
   outline: 0
   padding: $button-padding-top $button-padding-left
   position: relative
@@ -43,8 +43,8 @@
   &--floating
     border-radius: 50%
     letter-spacing: normal
-    line-height: $button-height
-    height: $button-height
+    line-height: $button-min-height
+    min-height: $button-min-height
     padding: $button-floating-padding
     
   &--icon
@@ -56,25 +56,26 @@
     height: auto
     width: auto
     min-height: initial
-    padding: $button-padding-left * .3
+    padding: $button-icon-padding
     
     i
-      font-size: $button-font-size * 1.5
+      font-size: $button-icon-font-size
     
     &:hover
       background: $button-icon-hover-background
       box-shadow: none
     
   &--large
-    height: $button-height * $button-large-multiplier
-    line-height: $button-height * $button-large-multiplier
+    min-height: $button-large-min-height
+    line-height: $button-large-line-height
+    padding: $button-large-padding
     
     &.btn--floating
-      width: $button-height * $button-large-multiplier
-      padding: $button-floating-large-padding
+      width: $button-large-floating-width
+      padding: $button-large-floating-padding
     
     i
-      font-size: $button-height * 0.7
+      font-size: $button-large-floating-font-size
   
   &--outline
     background: transparent !important
@@ -83,29 +84,20 @@
     
     &:hover
       box-shadow: none
-
-  &--primary
-    background: $primary-color
-    color: #FFFFFF
     
   &--round
     border-radius: 2rem
     
-  &--secondary
-    background: $secondary-color
-    color: #FFFFFF
-    
   &--small
-    height: $button-height * $button-small-multiplier
-    line-height: $button-height * ($button-small-multiplier / 2)
+    min-height: $button-small-min-height
+    line-height: $button-small-line-height
     
     &.btn--floating
-      min-height: initial
-      width: $button-height * $button-small-multiplier
-      padding: $button-floating-small-padding
+      width: $button-small-floating-width
+      padding: $button-small-floating-padding
       
       i
-        font-size: $button-height * .4
+        font-size: $button-small-floating-font-size
         
   .icon
     &--left
