@@ -20,9 +20,18 @@
 </template>
 
 <script>
+  import { closest } from '../../util/helpers'
+
   export default {
     name: 'sidebar-item',
     
+    data () {
+      return {
+        sidebar: null,
+        group: null
+      }
+    },
+
     props: {
       item: {
         type: Object,
@@ -32,9 +41,19 @@
       router: Boolean
     },
 
+    computed: {
+      group () {
+        return closest.call(this, 'sidebar__group')
+      },
+
+      sidebar () {
+        return closest.call(this, 'sidebar')
+      }
+    },
+
     methods: {
       click () {
-        this.$vuetify.bus.pub('sidebar-group:close', this.$parent.$parent._uid, this.$parent._uid)
+        this.$vuetify.bus.pub(`sidebar-group:close:${this.sidebar}`, this.group)
       }
     }
   }

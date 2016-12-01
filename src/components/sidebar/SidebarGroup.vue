@@ -23,6 +23,7 @@
 
 <script>
   import Eventable from '../../mixins/eventable'
+  import { closest } from '../../util/helpers'
 
   export default {
     name: 'sidebar-group',
@@ -46,8 +47,12 @@
     computed: {
       events () {
         return [
-          ['sidebar-group:close', this.close]
+          [`sidebar-group:close:${this.sidebar}`, this.close]
         ]
+      },
+
+      sidebar () {
+        return closest.call(this, 'sidebar')
       }
     },
 
@@ -75,11 +80,7 @@
         this.active = !this.active
       },
 
-      close (parent_uid = null, uid = null) {
-        if (parent_uid !== this.$parent._uid) {
-          return
-        }
-
+      close (uid) {
         this.active = uid === this._uid
       }
     }
