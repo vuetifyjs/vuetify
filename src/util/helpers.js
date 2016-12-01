@@ -18,3 +18,21 @@ export function directiveConfig (binding, defaults = {}) {
     binding.value || {}
   )
 }
+
+export function closest (className) {
+  let parent = this.$parent
+
+  while(parent) {
+    if (!parent.$el) {
+      return null
+    }
+    
+    if (parent.$el.classList.contains(className)) {
+      return parent._uid
+    }
+
+    parent = parent.$parent
+  }
+
+  return null
+}

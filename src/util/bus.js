@@ -23,7 +23,7 @@ class Bus extends EventEmitter {
       return this.removeListener(event, cb)
     }
     
-    event.forEach(i => this.removeListener.apply(null, i))
+    event.forEach(i => this.removeListener.apply(this, i))
   }
 
   pub () {
