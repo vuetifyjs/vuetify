@@ -1613,19 +1613,6 @@ Toast.prototype.create = function create (message, location, duration, cb) {
         'icon--x-large': this.xLarge
       }
     }
-  },
-
-  mounted: function mounted () {
-    this.$vuetify.load(this.init)
-  },
-
-  methods: {
-    init: function init () {
-      var this$1 = this;
-
-      // Prevent FOUT
-      setTimeout(function () { return this$1.active = true; }, 100)
-    }
   }
 };
 
@@ -5063,14 +5050,7 @@ module.exports={render:function (){var _vm=this;
   return _vm._h('i', {
     staticClass: "material-icons icon",
     class: _vm.classes
-  }, [_vm._h('span', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.active),
-      expression: "active"
-    }]
-  }, [_vm._t("default")])])
+  }, [_vm._h('span', [_vm._t("default")])])
 },staticRenderFns: []}
 
 /***/ },

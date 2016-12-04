@@ -3,7 +3,7 @@
     class="material-icons icon"
     v-bind:class="classes"
   )
-    span(v-show="active")
+    span
       slot
 </template>
 
@@ -38,17 +38,6 @@
           'icon--right': this.right,
           'icon--x-large': this.xLarge
         }
-      }
-    },
-
-    mounted () {
-      this.$vuetify.load(this.init)
-    },
-
-    methods: {
-      init () {
-        // Prevent FOUT
-        setTimeout(() => this.active = true, 100)
       }
     }
   }
