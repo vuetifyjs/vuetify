@@ -21,6 +21,7 @@
     margin-right: 0
     margin-left: $alert-padding
     transition: $primary-transition
+    align-self: flex-start
     
     &:hover
       color: lighten($alert-icon-color, 10%)
@@ -39,3 +40,7 @@
     
   &--warning
     alert($theme.warning, $amber.darken-2)
+    
+  @media screen and (max-width: $grid-breakpoints.sm)
+    &__icon
+      display: none

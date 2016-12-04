@@ -1,23 +1,17 @@
 import Card from './Card.vue'
-import CardTitle from './CardTitle.vue'
+import CardRow from './CardRow.vue'
 import { 
   createSimpleFunctional
 } from '../../util/helpers'
 
-const CardMenu = createSimpleFunctional('card__menu')
-const CardStack = createSimpleFunctional('card__stack')
-const CardActions = createSimpleFunctional('card__actions')
+const CardColumn = createSimpleFunctional('card__column')
 const CardText = createSimpleFunctional('card__text')
-const CardTitleActions = createSimpleFunctional('card__title-actions')
-const CardTitleText = createSimpleFunctional('card__title-text')
+const CardTitle = createSimpleFunctional('card__title')
 
 export default {
   Card,
-  CardActions,
-  CardMenu,
-  CardStack,
+  CardRow,
+  CardColumn,
   CardText,
-  CardTitle,
-  CardTitleActions,
-  CardTitleText
+  CardTitle
 }

@@ -12,6 +12,7 @@
       v-bind:name="name"
       v-bind:id="id"
       v-bind:placeholder="placeholder"
+      v-bind:value="value"
       v-on:blur="focused = false"
       v-on:input="$emit('input', $event.target.value)"
       v-on:focus="focused = true"
@@ -47,12 +48,8 @@
 
       placeholder: String,
 
-      value: [String, Number, Boolean]
-    },
-
-    mounted () {
-      if (this.value) {
-        this.$refs.input.value = this.value
+      value: {
+        required: false
       }
     }
   }

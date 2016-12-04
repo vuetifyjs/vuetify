@@ -3,13 +3,20 @@
     class="material-icons icon"
     v-bind:class="classes"
   )
-    slot
+    span(v-show="active")
+      slot
 </template>
 
 <script>
   export default {
     name: 'icon',
     
+    data () {
+      return {
+        active: false
+      }
+    },
+
     props: {
       large: Boolean,
 
@@ -31,6 +38,17 @@
           'icon--right': this.right,
           'icon--x-large': this.xLarge
         }
+      }
+    },
+
+    mounted () {
+      this.$vuetify.load(this.init)
+    },
+
+    methods: {
+      init () {
+        // Prevent FOUT
+        setTimeout(() => this.active = true, 100)
       }
     }
   }

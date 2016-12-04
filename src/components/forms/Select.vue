@@ -8,20 +8,20 @@
       v-text="label"
     )
     select(
-      id="id"
-      name="name"
-      v-bind:multiple="multiple"
       v-bind:id="id"
       v-bind:name="name"
+      v-bind:multiple="multiple"
+      v-bind:value="value"
       v-on:blur="focused = false"
       v-on:click="focused = true"
+      v-on:input="update"
       ref="select"
     )
       option(
         value=''
         disabled
-        selected
-      ) Select...
+        v-text="defaultText"
+      )
       option(
         v-bind:value="o.value"
         v-for="o in options"
@@ -41,6 +41,11 @@
     },
 
     props: {
+      defaultText: {
+        type: String,
+        default: 'Select...'
+      },
+
       id: {
         type: String,
         value: ''
@@ -63,7 +68,9 @@
         default: () => []
       },
 
-      value: [String, Number, Array, Boolean]
+      value: {
+        required: false
+      }
     },
 
     computed: {
@@ -79,13 +86,14 @@
       if (this.value) {
         this.$refs.select.value = this.value
       }
+    },
 
-      const vm = this
-      this.$refs.select.onchange = function () {
-        if (!vm.multiple) {
-          vm.$emit('input', this.value)
+    methods: {
+      update () {
+        if (!this.multiple) {
+          this.$emit('input', this.$refs.select.value)
         } else {
-          vm.$emit('input', vm.$refs.options.filter(i => i.selected).map(i => i.value))
+          this.$emit('input', this.$refs.options.filter(i => i.selected).map(i => i.value))
         }
       }
     }

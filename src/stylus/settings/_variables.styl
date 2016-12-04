@@ -39,19 +39,27 @@ $spacer := 1rem
 $spacer-x := $spacer
 $spacer-y := $spacer
 $spacers := {
-  none: {
+  zero: {
     x: 0,
     y: 0
   },
   one: {
+    x: ($spacer-x * .25),
+    y: ($spacer-y * .25)
+  },
+  two: {
+    x: ($spacer-x * .5),
+    y: ($spacer-y * .5)
+  },
+  three: {
     x: $spacer-x,
     y: $spacer-y
   },
-  one-half: {
+  four: {
     x: ($spacer-x * 1.5),
     y: ($spacer-y * 1.5)
   },
-  double: {
+  five: {
     x: ($spacer-x * 3),
     y: ($spacer-y * 3)
   }
@@ -166,11 +174,11 @@ $button-icon-font-size := $button-font-size * 1.5
 // Card
 $card-actions-border-top := 1px solid rgba(#000000, .1)
 $card-background := #FFFFFF
-$card-padding := .4rem
+$card-padding := .8rem
 $card-title-text-size := 1.5rem
 $card-title-text-letter-spacing := .1rem
 $card-title-text-font-weight := 400
-$card-actions-min-height := 3rem
+$card-row-min-height := 4rem
 $card-actions-font-size := .9rem
 $card-actions-button-padding := .7rem
 

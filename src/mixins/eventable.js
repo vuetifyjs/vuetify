@@ -1,5 +1,5 @@
 export default {
-  mounted () {
+  created () {
     this.$vuetify.bus.sub(this.events)
   },
 

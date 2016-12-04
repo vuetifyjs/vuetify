@@ -1,6 +1,7 @@
 import Bus from './util/bus'
 import Components from './components/_index'
 import Directives from './directives/_index'
+import Init from './util/init'
 import Load from './util/load'
 import Toast from './functions/toast'
 
@@ -18,11 +19,7 @@ function plugin(Vue) {
 
     load: Load,
 
-    init () {
-      document.body.addEventListener('click', e => {
-        Bus.pub('body:click', e)
-      })
-    },
+    init: Init,
 
     toast: Toast
   }

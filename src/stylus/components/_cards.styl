@@ -1,53 +1,43 @@
 .card
   @extend .z-depth-1
   background: $card-background
-  display: flex
-  flex-direction: column
   position: relative
+  display: flex
+  flex-flow: column nowrap
   
   &--horizontal
-    flex-direction: row
+    flex-flow: row nowrap
     
-    .card__title
+    > .card__row
       flex: 0 1 30%
       
-  &__stack
+  &__column
     display: flex
-    flex-direction: column
     flex: 1
+    flex-flow: column nowrap
+    
+  &__row
+    align-items: center
+    display: flex
+    padding: $card-padding
+    margin-top: auto
+    flex: 1 1 auto
+    flex-flow: row nowrap
+    min-height: $card-row-min-height
+    
+    &--actions
+      border-top: $card-actions-border-top
+      padding: ($card-padding / 2)
+      min-height: ($card-row-min-height / 2)
+      flex: 0 0 auto
   
   &__title
-    align-items: center
+    font-size: $card-title-text-size
+    font-weight: $card-title-text-font-weight
+    letter-spacing: $card-title-text-letter-spacing
     display: flex
-    justify-content: space-between
-    padding: $card-padding * 2
-    
-    &--img
-      .card__title-text
-        align-self: flex-end
-    
-    &-text
-      font-size: $card-title-text-size
-      font-weight: $card-title-text-font-weight
-      letter-spacing: $card-title-text-letter-spacing
-      display: flex
-      align-self: center
-      align-items: center
+    align-self: center
+    align-items: center
       
   &__text
-    padding: $card-padding * 2
-  
-  &__actions
-    box-sizing: border-box
-    border-top: $card-actions-border-top
-    display: flex
-    align-items: center
     padding: $card-padding
-    min-height: $card-actions-min-height
-    font-size: $card-actions-font-size
-    margin-top: auto
-    width: 100%
-    
-    .btn
-      margin: 0
-      padding: 0 $card-actions-button-padding

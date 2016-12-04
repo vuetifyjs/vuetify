@@ -1,6 +1,6 @@
 <template lang="pug">
   div(
-    class="card__title"
+    class="card__row"
     v-bind:class="classes"
     v-bind:style="styles"
   )
@@ -9,9 +9,11 @@
 
 <script>
   export default {
-    name: 'card-title',
+    name: 'card-row',
     
     props: {
+      actions: Boolean,
+
       height: {
         type: String,
         default: 'auto'
@@ -23,7 +25,7 @@
     computed: {
       classes () {
         return {
-          'card__title--img': this.img
+          'card__row--actions': this.actions
         }
       },
 
