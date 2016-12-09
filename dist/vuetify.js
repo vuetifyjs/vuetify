@@ -1435,6 +1435,7 @@ Toast.prototype.create = function create (message, location, duration, cb) {
 //
 //
 //
+//
 
 /* harmony default export */ exports["default"] = {
   name: 'select',
@@ -2168,11 +2169,6 @@ Toast.prototype.create = function create (message, location, duration, cb) {
   ],
 
   props: {
-    closeOnClick: {
-      type: Boolean,
-      default: false
-    },
-
     drawer: Boolean,
 
     fixed: Boolean,
@@ -2187,6 +2183,11 @@ Toast.prototype.create = function create (message, location, duration, cb) {
       required: true
     },
 
+    mobile: {
+      type: Boolean,
+      default: true
+    },
+
     items: {
       type: Array,
       default: function () { return []; }
@@ -2198,12 +2199,11 @@ Toast.prototype.create = function create (message, location, duration, cb) {
   computed: {
     classes: function classes () {
       return {
-        'sidebar--drawer': this.drawer && !this.right,
-        'sidebar--drawer--right': this.drawer && this.right,
-        'sidebar--fixed': (this.fixed || this.drawer) && !this.right,
-        'sidebar--fixed--right': (this.fixed || this.drawer) && this.right,
-        'sidebar--open': this.active,
-        'sidebar--right': this.right
+        'sidebar--mobile': this.mobile,
+        'sidebar--fixed': this.fixed && !this.right,
+        'sidebar--fixed-right': this.fixed && this.right,
+        'sidebar--close': !this.active,
+        'sidebar--open': this.active
       }
     },
 
@@ -2214,25 +2214,45 @@ Toast.prototype.create = function create (message, location, duration, cb) {
     }
   },
 
+  mounted: function mounted () {
+    var this$1 = this;
+
+    this.$vuetify.load(function () {
+      this$1.resize()
+      window.addEventListener('resize', this$1.resize, false)
+    })
+  },
+
+  beforeDestroy: function beforeDestroy () {
+    window.removeEventListener('resize', this.resize)
+  },
+
   methods: {
+    resize: function resize () {
+      if (!this.drawer) {
+        this.active = window.innerWidth > 768
+      }
+    },
+
     close: function close (e) {
-      if (this.activator === null) {
+      var group = e.target.classList.contains('sidebar__item-header')
+        || e.target.parentNode.classList.contains('sidebar__item-header')
+        
+      if (this.activator === null || group) {
         return
       }
 
-      if (e.target === this.activator && this.toggleable) {
-        return this.toggle()
-      }
-      
       try {
-        if (e.target === this.activator
-            || this.activator.contains(e.target)
-            || e.target.classList.contains('sidebar__item-header')
-            || e.target.parentNode.classList.contains('sidebar__item-header')
-        ) {
+        if (e.target === this.activator || this.activator.contains(e.target)) {
           return
         }
       } catch (e) {}
+
+      var width = window.innerWidth
+
+      if (width > 768 && !this.drawer) {
+        return
+      }
 
       this.active = false
     }
@@ -2296,7 +2316,8 @@ Toast.prototype.create = function create (message, location, duration, cb) {
   computed: {
     events: function events () {
       return [
-        [("sidebar-group:close:" + (this.sidebar)), this.close]
+        [("sidebar-group:close:" + (this.sidebar)), this.close],
+        [("sidebar-group:open:" + (this.sidebar)), this.open]
       ]
     },
 
@@ -2323,6 +2344,10 @@ Toast.prototype.create = function create (message, location, duration, cb) {
     leave: function leave (el, done) {
       el.style.height = 0
       el.addEventListener('transitionend', done, { once: true })
+    },
+
+    open: function open () {
+      this.active = true
     },
 
     toggle: function toggle () {
@@ -2963,7 +2988,7 @@ var Container = {
 
     var staticClass = data.staticClass ? ("container " + (data.staticClass)) : 'container'
 
-    if (data.attrs && data.attrs.fluid) {
+    if (data.attrs && typeof data.attrs.fluid !== 'undefined') {
       staticClass += ' container--fluid'
       data.attrs.fluid = undefined
     }
@@ -4923,7 +4948,8 @@ module.exports={render:function (){var _vm=this;
   }, [_vm._h('option', {
     attrs: {
       "value": "",
-      "disabled": "disabled"
+      "disabled": "disabled",
+      "selected": "selected"
     },
     domProps: {
       "textContent": _vm._s(_vm.defaultText)
