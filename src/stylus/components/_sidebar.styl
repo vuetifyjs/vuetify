@@ -1,49 +1,29 @@
 .sidebar
-  background-color: #fff
+  background-color: $theme.secondary
   display: flex
   flex-basis: $sidebar-width
   flex-direction: column
-  font-size: 1rem
   overflow-y: auto
-  position: relative
-  top: 0
   transition: transform .3s cubic-bezier(0,0,.2,1)
   width: $sidebar-width
   z-index: 3
   @extend .z-depth-2
-  
-  &::-webkit-scrollbar
-    width: 14px
-    height: 18px
-      
-  &::-webkit-scrollbar-thumb
-    height: 6px
-    border: 5px solid rgba(0, 0, 0, 0)
-    background-clip: padding-box
-    -webkit-border-radius: 7px
-    background-color: rgba($grey.base, 0.15)
-    -webkit-box-shadow: inset -1px -1px 0px rgba(0, 0, 0, 0.05), inset 1px 1px 0px rgba(0, 0, 0, 0.05)
 
-  &::-webkit-scrollbar-button
-    width: 0
-    height: 0
-    display: none
-      
-  &::-webkit-scrollbar-corner
-    background-color: transparent
-
+  ul
+    list-style-type: none
+    width: 100%
+    
   &--right
     order: +1
   
   &--fixed
+    top: 0
     left: 0
     position: fixed
     z-index: 5
     
-  &--fixed--right
-    right: 0
-    position: fixed
-    z-index: 5
+    &-right
+      right: 0
     
   &--drawer
     flex-basis: 0
@@ -55,6 +35,21 @@
   &--open
     transform: translateX(0) !important
     width: $sidebar-width
+    
+  &--close
+    transform: translateX(-($sidebar-width + 25))
+    flex-basis: 0 !important
+    
+    .sidebar--fixed-right
+      transform: translateX($sidebar-width + 25)
+    
+  &--mobile
+    @media screen and (max-width: $grid-breakpoints.sm)
+      transform: translateX(-($sidebar-width + 25))
+      flex-basis: 0 !important
+      
+      .sidebar--fixed-right
+        transform: translateX($sidebar-width + 25)
     
   &__group    
     .sidebar__items
@@ -108,14 +103,3 @@
       
       &:after
         transform: rotate(-90deg)
-  
-  @media screen and (max-width: $grid-breakpoints.sm)
-    transform: translateX(-($sidebar-width + 25))
-    flex-basis: 0 !important
-    
-    &--right
-      transform: translateX($sidebar-width + 25)
-
-  ul
-    list-style-type: none
-    width: 100%
