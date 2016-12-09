@@ -21,11 +21,6 @@
     ],
 
     props: {
-      closeOnClick: {
-        type: Boolean,
-        default: false
-      },
-
       drawer: Boolean,
 
       fixed: Boolean,
@@ -40,6 +35,11 @@
         required: true
       },
 
+      mobile: {
+        type: Boolean,
+        default: true
+      },
+
       items: {
         type: Array,
         default: () => []
@@ -51,12 +51,11 @@
     computed: {
       classes () {
         return {
-          'sidebar--drawer': this.drawer && !this.right,
-          'sidebar--drawer--right': this.drawer && this.right,
-          'sidebar--fixed': (this.fixed || this.drawer) && !this.right,
-          'sidebar--fixed--right': (this.fixed || this.drawer) && this.right,
-          'sidebar--open': this.active,
-          'sidebar--right': this.right
+          'sidebar--mobile': this.mobile,
+          'sidebar--fixed': this.fixed && !this.right,
+          'sidebar--fixed-right': this.fixed && this.right,
+          'sidebar--close': !this.active,
+          'sidebar--open': this.active
         }
       },
 
@@ -67,25 +66,43 @@
       }
     },
 
+    mounted () {
+      this.$vuetify.load(() => {
+        this.resize()
+        window.addEventListener('resize', this.resize, false)
+      })
+    },
+
+    beforeDestroy () {
+      window.removeEventListener('resize', this.resize)
+    },
+
     methods: {
+      resize () {
+        if (!this.drawer) {
+          this.active = window.innerWidth > 768
+        }
+      },
+
       close (e) {
-        if (this.activator === null) {
+        let group = e.target.classList.contains('sidebar__item-header')
+          || e.target.parentNode.classList.contains('sidebar__item-header')
+          
+        if (this.activator === null || group) {
           return
         }
 
-        if (e.target === this.activator && this.toggleable) {
-          return this.toggle()
-        }
-        
         try {
-          if (e.target === this.activator
-              || this.activator.contains(e.target)
-              || e.target.classList.contains('sidebar__item-header')
-              || e.target.parentNode.classList.contains('sidebar__item-header')
-          ) {
+          if (e.target === this.activator || this.activator.contains(e.target)) {
             return
           }
         } catch (e) {}
+
+        let width = window.innerWidth
+
+        if (width > 768 && !this.drawer) {
+          return
+        }
 
         this.active = false
       }

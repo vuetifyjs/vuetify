@@ -47,7 +47,8 @@
     computed: {
       events () {
         return [
-          [`sidebar-group:close:${this.sidebar}`, this.close]
+          [`sidebar-group:close:${this.sidebar}`, this.close],
+          [`sidebar-group:open:${this.sidebar}`, this.open]
         ]
       },
 
@@ -74,6 +75,10 @@
       leave (el, done) {
         el.style.height = 0
         el.addEventListener('transitionend', done, { once: true })
+      },
+
+      open () {
+        this.active = true
       },
 
       toggle () {
