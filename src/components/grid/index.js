@@ -18,7 +18,7 @@ const Container = {
   render (h, { data, children }) {
     let staticClass = data.staticClass ? `container ${data.staticClass}` : 'container'
 
-    if (data.attrs && data.attrs.fluid) {
+    if (data.attrs && typeof data.attrs.fluid !== 'undefined') {
       staticClass += ' container--fluid'
       data.attrs.fluid = undefined
     }
