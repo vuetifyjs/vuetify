@@ -20,6 +20,7 @@
       option(
         value=''
         disabled
+        selected
         v-text="defaultText"
       )
       option(
