@@ -1,5 +1,8 @@
 <template lang="pug">
-  div(class="modal-overlay" v-bind:class="{ 'modal-overlay--open': this.active }")
+  div(
+    class="modal-overlay" 
+    v-bind:class="{ 'modal-overlay--open': this.active }"
+  )
     transition(name="modal")
       div(
         class="modal"
@@ -17,16 +20,7 @@
   export default {
     name: 'modal',
 
-    mixins: [ 
-      Toggleable 
-    ],
-
-    data () {
-      return {
-        closeOnClick: false,
-        overlay: {}
-      }
-    },
+    mixins: [Toggleable],
 
     props: {
       bottom: Boolean,
@@ -46,8 +40,8 @@
     },
 
     methods: {
-      close (e, force = false) {
-        if (force) {
+      close (e) {
+        if (!e) {
           return this.active = false
         }
 

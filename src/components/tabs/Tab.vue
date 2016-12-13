@@ -20,9 +20,7 @@
       }
     },
 
-    mixins: [
-      Eventable
-    ],
+    mixins: [Eventable],
 
     props: {
       href: {

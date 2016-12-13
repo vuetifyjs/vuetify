@@ -34,7 +34,10 @@
     },
 
     props: {
-      cycle: Boolean,
+      cycle: {
+        type: Boolean,
+        default: true
+      },
 
       icon: {
         type: String,
@@ -43,7 +46,7 @@
 
       interval: {
         type: Number,
-        default: 8000
+        default: 6000
       }
     },
 

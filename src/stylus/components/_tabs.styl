@@ -1,15 +1,16 @@
 .tabs
   margin-bottom: $spacers.five.y
   
+  &__slider
+    position: absolute
+    top: calc(100% - 4px)
+    height: 4px
+    with: 100%
+  
   &__tab
+    color: #fff
     flex: 1
-    background: $grey.lighten-3
-    border-width: 1px 0 1px 1px
-    border-color: $grey.lighten-2
-    border-style: solid
-    color: $grey.base
     text-decoration: none
-    font-weight: 300
     display: block
     padding: 1rem
     position: relative
@@ -17,33 +18,23 @@
     text-transform: uppercase
     transition: $primary-transition
     
-    @media screen and (max-width: $grid-breakpoints.sm)
-      border-width: 1px
-      flex-basis: 100%
-    
-    &:last-child
-      border-width: 1px
-    
     &:after
-      content: ""
+      content: ''
       position: absolute
+      bottom: 0
       left: 0
-      top: 0
-      width: 100%
-      height: 0
-      transition: $secondary-transition
+      width: 0
+      height: 3px
+      transition: $primary-transition
       background: $theme.primary
-  
-    &--active
-      color: $theme.primary
-      background: #fff
-      border-top-color: $theme.primary
-      border-bottom-color: transparent
       
+    &--active
       &:after
-        height: 3px
+        width: 100%
+      
         
   &__tabs
+    background: $theme.secondary
     display: flex
     position: relative
     align-items: center
@@ -55,10 +46,6 @@
       flex-wrap: wrap
     
   &__items
-    background: #fff
-    border-width: 0 1px 1px 1px
-    border-color: $grey.lighten-2
-    border-style: solid
     width: 100%
     height: 100%
     position: relative
