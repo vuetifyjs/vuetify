@@ -23,4 +23,4 @@ import Vuetify from 'vuetify'
 Vue.use(Vuetify)
 ```
 
-For additional information, please visit the [Official Documentation](http://vuetifyjs.com).
+For additional information, please visit the [Official Documentation](https://vuetifyjs.com).
