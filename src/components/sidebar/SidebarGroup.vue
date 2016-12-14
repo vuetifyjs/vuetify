@@ -68,13 +68,24 @@
         el.style.display = 'block'
         el.style.height = 0
         el.style.height = `${el.scrollHeight}px`
+
+        var transition = () => {
+          done()
+          el.removeEventListener('transitionend', transition, false)
+        }
         
-        el.addEventListener('transitionend', done, { once: true })
+        el.addEventListener('transitionend', transition, false)
       },
 
       leave (el, done) {
         el.style.height = 0
-        el.addEventListener('transitionend', done, { once: true })
+        
+        var transition = () => {
+          done()
+          el.removeEventListener('transitionend', transition, false)
+        }
+        
+        el.addEventListener('transitionend', transition, false)
       },
 
       open () {
