@@ -21,7 +21,6 @@
   &__row
     align-items: center
     display: flex
-    padding: $card-padding
     margin-top: auto
     flex: 1 1 auto
     flex-flow: row nowrap
@@ -32,14 +31,22 @@
       padding: ($card-padding / 2)
       min-height: ($card-row-min-height / 2)
       flex: 0 0 auto
+      
+      > .btn
+        padding: 0 ($card-padding / 2)
+        
+      > .icon
+        padding: 0 ($card-padding / 2)
   
   &__title
     font-size: $card-title-text-size
     font-weight: $card-title-text-font-weight
     letter-spacing: $card-title-text-letter-spacing
     display: flex
+    flex: 1
     align-self: center
     align-items: center
+    padding: $card-padding
       
   &__text
     padding: $card-padding
