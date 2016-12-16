@@ -1,6 +1,6 @@
 .navbar
   background-color: $theme.primary
-  min-height: $navbar-min-height
+  height: $navbar-height
   display: flex
   flex-wrap: wrap
   position: relative
@@ -37,30 +37,29 @@
     padding: 0 2rem
     display: flex
     align-items: center
-    min-height: $navbar-min-height
   
   &__items
     list-style-type: none
     padding: 0
     
     > li
+      height: 100%
       float: left
       
-    a
-      color: #fff
+    > a
+        color: #fff
       
   &__item
     align-items: center
     color: #fff
-    display: inline-flex
+    display: flex
     padding: $navbar-item-padding
     text-decoration: none
     transition: all 0.3s ease-out
-    min-height: $navbar-min-height
+    height: 100%
     
     i
       font-size: 2rem
-      line-height: $navbar-min-height
     
     &:hover
-      background: rgba(0,0,0,0.1)
+      background: rgba(#fff,0.2)
