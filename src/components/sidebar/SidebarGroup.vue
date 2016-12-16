@@ -67,7 +67,8 @@
       enter (el, done) {
         el.style.display = 'block'
         el.style.height = 0
-        el.style.height = `${el.scrollHeight}px`
+        
+        setTimeout(() => el.style.height = `${el.scrollHeight}px`, 50)
 
         var transition = () => {
           done()
