@@ -3,8 +3,9 @@
     a(
       class="navbar__item"
       v-bind:href="item.href"
-      v-html="item.text"
     )
+      span(v-if="!item.icon" v-html="item.text")
+      v-icon(v-else) {{ item.text }}
 </template>
 
 <script>
