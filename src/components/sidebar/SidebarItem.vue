@@ -6,7 +6,9 @@
       v-bind:href="item.href"
       v-on:click="click()"
     )
+      v-icon(v-if="item.icon") {{ item.icon }}
       span(v-text="item.text")
+      slot
     router-link(
       class="sidebar__item"
       active-class="sidebar__item--active"
@@ -17,6 +19,7 @@
     )
       v-icon(v-if="item.icon") {{ item.icon }}
       span(v-text="item.text")
+      slot
 </template>
 
 <script>
