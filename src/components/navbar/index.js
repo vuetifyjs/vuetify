@@ -12,7 +12,6 @@ const NavbarSideIcon = {
   render (h, { data, children }) {
     data.staticClass = data.staticClass ? `navbar__side-icon ${data.staticClass}` : 'navbar__side-icon'
 
-    console.log(data)
     const icon = [h('v-icon', 'reorder')]
     const anchor = [h('a', { attrs: { href: '#!' } }, icon)]
 
