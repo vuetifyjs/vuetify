@@ -14,8 +14,8 @@
   },
   "description": "Vue JS 2.0 Components Framework",
   "devDependencies": {
-    "buble": "^0.14.2",
-    "buble-loader": "^0.3.2",
+    "buble": "^0.15.1",
+    "buble-loader": "^0.4.0",
     "css-loader": "^0.23.1",
     "extract-text-webpack-plugin": "^2.0.0-beta.3",
     "pug": "^2.0.0-beta3",
@@ -25,10 +25,10 @@
     "style-loader": "^0.13.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^2.1.1",
-    "vue-loader": "^9.5.1",
-    "vue-template-compiler": "^2.0.1",
-    "webpack": "^2.1.0-beta.25",
+    "vue-loader": "^10.0.2",
+    "vue-template-compiler": "^2.1.6",
+    "webpack": "2.2.0-rc.0",
     "webpack-merge": "^0.17.0"
   },
-  "dependencies": []
+  "dependencies": {}
 }
