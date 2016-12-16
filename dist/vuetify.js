@@ -2265,7 +2265,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
       }
 
       try {
-        if (e.target === this.activator || this.activator.contains(e.target)) {
+        if (e.target === this.activator 
+          || this.activator.contains(e.target) 
+          || e.target === this.$el
+        ) {
           return
         }
       } catch (e) {}
