@@ -1762,6 +1762,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ exports["default"] = {
   name: 'navbar-item',
@@ -2405,6 +2406,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(0);
+//
+//
+//
 //
 //
 //
@@ -4847,11 +4851,11 @@ module.exports={render:function (){var _vm=this;
         _vm.click()
       }
     }
-  }, [_vm._c('span', {
+  }, [(_vm.item.icon) ? _vm._c('v-icon', [_vm._v(_vm._s(_vm.item.icon))]) : _vm._e(), _vm._c('span', {
     domProps: {
       "textContent": _vm._s(_vm.item.text)
     }
-  })]) : _vm._c('router-link', {
+  }), _vm._t("default")], true) : _vm._c('router-link', {
     staticClass: "sidebar__item",
     attrs: {
       "active-class": "sidebar__item--active",
@@ -4867,7 +4871,7 @@ module.exports={render:function (){var _vm=this;
     domProps: {
       "textContent": _vm._s(_vm.item.text)
     }
-  })])])
+  }), _vm._t("default")], true)])
 },staticRenderFns: []}
 
 /***/ },
@@ -4938,11 +4942,12 @@ module.exports={render:function (){var _vm=this;
     staticClass: "navbar__item",
     attrs: {
       "href": _vm.item.href
-    },
+    }
+  }, [(!_vm.item.icon) ? _vm._c('span', {
     domProps: {
       "innerHTML": _vm._s(_vm.item.text)
     }
-  })])
+  }) : _vm._c('v-icon', [_vm._v(_vm._s(_vm.item.text))])])])
 },staticRenderFns: []}
 
 /***/ },
