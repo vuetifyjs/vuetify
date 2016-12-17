@@ -8,6 +8,14 @@ for level, spacer in $spacers
     margin-bottom: spacer.y !important
   .ml-{$i}
     margin-left: spacer.x !important
+  .mx-{$i}
+    margin-left: spacer.x !important
+    margin-right: spacer.x !important
+  .my-{$i}
+    margin-top: spacer.y !important
+    margin-bottom: spacer.y !important
+  .ma-{$i}
+    margin: spacer.y spacer.x !important
     
   .pt-{$i}
     padding-top: spacer.y !important
@@ -17,5 +25,13 @@ for level, spacer in $spacers
     padding-bottom: spacer.y !important
   .pl-{$i}
     padding-left: spacer.x !important
+  .px-{$i}
+    padding-left: spacer.x !important
+    padding-right: spacer.x !important
+  .py-{$i}
+    padding-top: spacer.y !important
+    padding-bottom: spacer.y !important
+  .pa-{$i}
+    padding: spacer.y spacer.x !important
     
   $i = $i + 1
