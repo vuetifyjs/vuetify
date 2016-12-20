@@ -26,6 +26,11 @@
 
       primary: Boolean,
 
+      raised: {
+        type: Boolean,
+        default: true
+      },
+
       round: Boolean,
 
       secondary: Boolean,
@@ -47,6 +52,7 @@
           'btn--icon': this.icon,
           'btn--large': this.large,
           'btn--outline': this.outline,
+          'btn--raised': this.raised,
           'btn--round': this.round,
           'btn--small': this.small
         }

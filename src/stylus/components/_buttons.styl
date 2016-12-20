@@ -17,15 +17,14 @@
   text-decoration: none
   text-transform: $button-text-transform
   transition: $button-transition
-  @extend .z-depth-1
+  
+  &.primary, &.secondary, &.success, &.info, &.warning, &.error
+    color: #fff
 
   &:disabled
     box-shadow: none
     background-color: $grey.base
     opacity: $button-disabled-opacity
-    
-  &:hover
-    @extend .z-depth-1-half
     
   &--block
     display: flex
@@ -56,10 +55,11 @@
     height: auto
     width: auto
     min-height: initial
-    padding: $button-icon-padding
+    padding: 0
     
     i
       font-size: $button-icon-font-size
+      padding: .2em
     
     &:hover
       background: $button-icon-hover-background
@@ -84,6 +84,12 @@
     
     &:hover
       box-shadow: none
+    
+  &--raised
+    @extend .z-depth-1
+    
+    &:hover
+      @extend .z-depth-1-half
     
   &--round
     border-radius: 2rem
