@@ -1,21 +1,19 @@
 <template lang="pug">
-
 	div(
 		class="alert"
 		v-bind:class="classes"
 		v-show="value"
 	)
-		v-icon(class="alert__icon") {{ icon }}
+		v-icon(class="alert__icon" v-if="!hideIcon") {{ mdIcon }}
 		div
 			slot
 		a(
-			class="alert__close"
+			class="alert__dismissible"
 			href="#!"
-			v-if="close"
+			v-if="dismissible"
 			v-on:click.prevent="$emit('input', false)"
 		)
 			v-icon(right) cancel
-
 </template>
 
 <script>
@@ -23,9 +21,13 @@ export default {
   name: 'alert',
 
   props: {
-    close: Boolean,
+    dismissible: Boolean,
 
     error: Boolean,
+
+    hideIcon: Boolean,
+
+    icon: String,
 
     info: Boolean,
 
@@ -42,7 +44,7 @@ export default {
   computed: {
     classes() {
       return {
-        'alert--close': this.close,
+        'alert--dismissible': this.dismissible,
         'alert--error': this.error,
         'alert--info': this.info,
         'alert--success': this.success,
@@ -50,7 +52,11 @@ export default {
       }
     },
 
-    icon() {
+    mdIcon() {
+      if (this.icon) {
+        return this.icon
+      }
+
       switch (true) {
         case this.error:
           return 'warning'

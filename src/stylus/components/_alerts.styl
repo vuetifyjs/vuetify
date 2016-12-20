@@ -2,6 +2,7 @@
   border-radius: $alert-border-radius
   border-width: $alert-border-width
   border-style: solid
+  border-color: rgba(#000, .8)
   color: $alert-color
   display: flex
   font-size: $alert-font-size
@@ -10,14 +11,14 @@
   position: relative
   margin: $alert-margin
   
-  &__icon, &__close
+  &__icon, &__dismissible
     align-self: center
     margin-right: $alert-padding
     margin-bottom: 4px
     font-size: $alert-icon-font-size
     color: $alert-icon-color
     
-  &__close
+  &__dismissible
     margin-right: 0
     margin-left: $alert-padding
     transition: $primary-transition
@@ -31,16 +32,20 @@
     width: 100%
 
   &--info
-    alert($theme.info, $blue.darken-2)
+    alert($theme.info)
         
   &--error
-    alert($theme.error, $red.darken-2)
+    alert($theme.error)
 
   &--success
-    alert($theme.success, $green.darken-2)
+    alert($theme.success)
     
   &--warning
-    alert($theme.warning, $amber.darken-2)
+    alert($theme.warning)
+    
+  &--no-icon
+    .alert__icon
+      display: none
     
   @media screen and (max-width: $grid-breakpoints.sm)
     &__icon
