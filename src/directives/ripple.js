@@ -1,6 +1,12 @@
 function ripple (el, binding) {
+  let animation = el.querySelector('.ripple__animation')
+
+  if (animation) {
+    return animation
+  }
+
   let container = document.createElement('span')
-  let animation = document.createElement('span')
+  animation = document.createElement('span')
 
   container.appendChild(animation)
   container.classList.add('ripple__container')
@@ -23,9 +29,10 @@ function directive (el, binding, v) {
     return
   }
 
-  const animation = ripple(el, binding)
+  let animation = {}
 
   el.onmousedown = e => {
+    animation = ripple(el, binding)
     animation.classList.add('ripple__animation--enter')
     animation.classList.add('ripple__animation--visible')
     animation.style.transform = `translate(-50%, -50%) translate(${e.layerX}px, ${e.layerY}px) scale(.001)`
@@ -48,7 +55,7 @@ export default {
   unbind (el) {
     el.removeAttribute('onmousedown')
     el.removeAttribute('onmouseup')
-    
+
     let container = el.querySelector('.ripple__container')
     if (container) {
       container.remove()
