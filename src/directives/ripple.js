@@ -21,7 +21,7 @@ let ripple = {
 
     animation.classList.add('ripple__animation--enter')
     animation.classList.add('ripple__animation--visible')
-    animation.style.transform = `translate3d(-50%, -50%, 0) translate3d(${x}px, ${y}px, 0) scale3d(.001, .001, 1)`
+    animation.style.transform = `translate3d(-50%, -50%, 0) translate3d(${x}px, ${y}px, 0) scale3d(.15, .15, 1)`
     animation.dataset.activated = Date.now()
 
     setTimeout(() => {
@@ -33,8 +33,7 @@ let ripple = {
   hide: (el) => {
     let ripples = el.getElementsByClassName('ripple__animation')
 
-    if (!ripples) return
-
+    if (ripples.length === 0) return
     let animation = ripples[ripples.length - 1]
     let diff = Date.now() - Number(animation.dataset.activated)
     let delay = 350 - diff

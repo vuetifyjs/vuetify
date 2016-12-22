@@ -18,6 +18,12 @@
   text-transform: $button-text-transform
   transition: $button-transition
   
+  &:focus
+    outline:none
+    
+  &::-moz-focus-inner
+    border: 0
+  
   &.primary, &.secondary, &.success, &.info, &.warning, &.error
     color: #fff
 

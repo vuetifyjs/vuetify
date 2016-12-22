@@ -13,13 +13,13 @@
     position: absolute
     top: 0
     left: 0
-    transform: translate3d(-50%, -50%, 0)
     border-radius: 50%
     background: $ripple-animation-background
     opacity: 0
     transition: $ripple-animation-transition
     pointer-events: none
     overflow: hidden
+    will-change: opacity
       
     &--enter
       transition: none
