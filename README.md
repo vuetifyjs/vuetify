@@ -1,6 +1,6 @@
 # Vuetify
 
-> A Vue JS 2.0 Component Framework
+> A Vue.js 2 Component Framework
 
 ## Install
 
