@@ -1,64 +1,71 @@
-function ripple (el, binding) {
-  let animation = el.querySelector('.ripple__animation')
+let ripple = {
+  show: (e, el, binding) => {
+    var container = document.createElement('span')
+    var animation = document.createElement('span')
 
-  if (animation) {
-    return animation
-  }
+    container.appendChild(animation)
+    container.className = 'ripple__container'
+    
+    if (binding.value.class) {
+      container.classList.add(binding.value.class)
+    }
 
-  let container = document.createElement('span')
-  animation = document.createElement('span')
+    animation.className = 'ripple__animation'
+    animation.style.width = `${el.clientWidth * 2.2}px`
+    animation.style.height = animation.style.width
 
-  container.appendChild(animation)
-  container.classList.add('ripple__container')
-  
-  if (binding.value.class) {
-    container.classList.add(binding.value.class)
-  }
+    el.appendChild(container)
 
-  animation.classList.add('ripple__animation')
-  animation.style.width = `${el.clientWidth * 2.2}px`
-  animation.style.height = animation.style.width
+    const x = e.layerX
+    const y = e.layerY
 
-  el.appendChild(container)
-
-  return animation
-}
-
-function directive (el, binding, v) {
-  if (!binding.value) {
-    return
-  }
-
-  let animation = {}
-
-  el.onmousedown = e => {
-    animation = ripple(el, binding)
     animation.classList.add('ripple__animation--enter')
     animation.classList.add('ripple__animation--visible')
-    animation.style.transform = `translate(-50%, -50%) translate(${e.layerX}px, ${e.layerY}px) scale(.001)`
+    animation.style.transform = `translate3d(-50%, -50%, 0) translate3d(${x}px, ${y}px, 0) scale3d(.001, .001, 1)`
+    animation.dataset.activated = Date.now()
 
     setTimeout(() => {
       animation.classList.remove('ripple__animation--enter')
-      animation.style.transform = `translate(-50%, -50%) translate(${e.layerX}px, ${e.layerY}px)`
+      animation.style.transform = `translate3d(-50%, -50%, 0) translate3d(${x}px, ${y}px, 0)`
     }, 0)
+  },
+
+  hide: (el) => {
+    let ripples = el.getElementsByClassName('ripple__animation')
+
+    if (!ripples) return
+
+    let animation = ripples[ripples.length - 1]
+    let diff = Date.now() - Number(animation.dataset.activated)
+    let delay = 350 - diff
+
+    delay = delay < 0 ? 0 : delay
+
+    setTimeout(() => {
+      animation.classList.remove('ripple__animation--visible')
+
+      setTimeout(() => {
+        animation.parentNode.remove()
+      }, 300)
+    }, delay)
+  }
+}
+
+function directive (el, binding, v) {
+  if (!binding.value) return
+
+  if ('ontouchstart' in window) {
+    el.addEventListener('touchend', () => ripple.hide(el), false)
+    el.addEventListener('touchcancel', () => ripple.hide(el), false)
   }
 
-  el.onmouseup = e => {
-    animation.classList.remove('ripple__animation--visible')
-  }
+  el.addEventListener('mousedown', e => ripple.show(e, el, binding), false)
+  el.addEventListener('mouseup', () => ripple.hide(el), false)
+  el.addEventListener('mouseleave', () => ripple.hide(el), false)
 }
 
 export default {
   bind: directive,
   updated: directive,
-  componentUpdated: directive,
-  unbind (el) {
-    el.removeAttribute('onmousedown')
-    el.removeAttribute('onmouseup')
-
-    let container = el.querySelector('.ripple__container')
-    if (container) {
-      container.remove()
-    }
-  }
+  componentUpdated: directive
 }
