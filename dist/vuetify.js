@@ -1792,6 +1792,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ exports["default"] = {
   name: 'navbar-item',
@@ -5393,7 +5396,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }) : _c('v-icon', [_vm._v(_vm._s(_vm.item.text))])]) : _c('router-link', {
     staticClass: "navbar__item",
     attrs: {
+      "active-class": "navbar__item--active",
+      "exact": _vm.item.href === '/',
       "to": _vm.item.href
+    },
+    nativeOn: {
+      "click": function($event) {
+        _vm.click()
+      }
     }
   }, [(!_vm.item.icon) ? _c('span', {
     domProps: {
