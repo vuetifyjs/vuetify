@@ -78,6 +78,7 @@
       font-size: $button-large-floating-font-size
   
   &--outline
+    border: 1px solid currentColor
     background: transparent !important
     box-shadow: none
     color: $button-background
@@ -86,10 +87,15 @@
       box-shadow: none
     
   &--raised
+    will-change: box-shadow
+    
     @extend .z-depth-1
     
     &:hover
       @extend .z-depth-1-half
+      
+    &:active
+      @extend .z-depth-2
     
   &--round
     border-radius: 2rem

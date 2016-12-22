@@ -3,6 +3,7 @@
     class="btn"
     v-bind:class="classes"
     v-bind:type="type"
+    v-ripple="ripple"
   )
     slot
 </template>
@@ -29,6 +30,11 @@
       raised: {
         type: Boolean,
         default: true
+      },
+
+      ripple: {
+        type: [Boolean, Object],
+        default: false
       },
 
       round: Boolean,

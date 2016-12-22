@@ -1,4 +1,11 @@
+// ============================================================
+// Vuetify variables
+// ============================================================
+
+
+
 // Theme
+// ============================================================
 $body-font-family := 'Roboto', san-serif
 $body-bg := #FFFFFF
 $color-root := $grey.darken-3
@@ -13,10 +20,11 @@ $theme := {
   success: $green.base
 }
 
-// Addons
 $color-pack := true
 
+
 // Grid
+// ============================================================
 $grid-breakpoints := {
   xs: 0rem
   sm: 48rem
@@ -34,7 +42,9 @@ $grid-gutter-full := $grid-gutter * .25 * -1
 $grid-gutter-half := $grid-gutter * .25
 $grid-columns := 12
 
+
 // Spacing
+// ============================================================
 $spacer := 1rem
 $spacer-x := $spacer
 $spacer-y := $spacer
@@ -65,7 +75,9 @@ $spacers := {
   }
 }
 
+
 // Headings
+// ============================================================
 $heading-color := $grey.darken-3
 $headings := {
   h1: {
@@ -131,7 +143,7 @@ $breadcrumbs-padding := 0 1rem
 
 // Base
 $button-background := $grey.lighten-2
-$button-border := 1px solid $button-background
+$button-border := none
 $button-border-radius := 2px
 $button-color := inherit
 $button-disabled-opacity := .5
@@ -224,3 +236,12 @@ $sidebar-item-padding := .7rem 2rem
 
 // Slider
 $slider-arrow-size := 2rem
+
+// Directives
+// ============================================================
+
+// Ripple animation
+$ripple-container-color := #fff
+$ripple-animation-background := currentColor
+$ripple-animation-transition := .8s transform cubic-bezier(.2, .4, .4, .9), .3s opacity cubic-bezier(.2, .4, .4, .1)
+$ripple-animation-visible-opacity := .2
