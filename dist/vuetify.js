@@ -1805,6 +1805,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
       required: true
     },
     router: Boolean
+  },
+
+  methods: {
+    click: function click () {
+    }
   }
 };
 

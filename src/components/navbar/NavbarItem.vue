@@ -29,6 +29,11 @@
         required: true
       },
       router: Boolean
+    },
+
+    methods: {
+      click () {
+      }
     }
   }
 </script>
