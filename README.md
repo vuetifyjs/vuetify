@@ -1,6 +1,16 @@
-# Vuetify
+<p align="center"><a href="https://vuetifyjs.com" target="_blank"><img width="100"src="https://vuetifyjs.com/public/v.png"></a></p>
 
-> A Vue.js 2 Component Framework
+## Supporting
+<p align="center">
+  <strong>Vuetify.js is proudly sponsored by:</strong>
+  <br><br>
+  <a href="http://www.thedifferenceengine.io/">
+    <img width="300px" src="https://vuetifyjs.com/public/doc-images/browser-stack.svg">
+  </a>
+</p>
+
+
+> A Vue.js 2 Material Component Framework
 
 ## Install
 
