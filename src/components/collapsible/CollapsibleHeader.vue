@@ -14,8 +14,18 @@
       click () {
         this.$vuetify.bus.pub(
           `collapse:toggle:${this.$parent._uid}`,
-          Number(this.$el.nextSibling.getAttribute('uid'))
+          Number(this.getNextSibling(this.$el).getAttribute('uid'))
         )
+      },
+      
+      getNextSibling (el) {
+        if (!(el = el.nextSibling)) return null
+        
+        while (el.nodeType != 1) {
+          if (!(el = el.nextSibling)) return null
+        }
+      
+        return el
       }
     }
   }
