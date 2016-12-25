@@ -85,12 +85,17 @@
       },
 
       close (e) {
-        try {
-          let group = e.target.classList.contains('sidebar__item-header')
-          || e.target.parentNode.classList.contains('sidebar__item-header')
-        } catch (e) {}
+        let target = e.target
+        let parent = e.target.parentNode
+        let group = {}
 
-        if (typeof group === 'undefined') return 
+        if (target) {
+          group = target.classList.contains('sidebar__item-header')
+        }
+
+        if (!group && parent) {
+          group = parent.classList.contains('sidebar__item-header')
+        }
           
         if (this.activator === null || group) {
           return
