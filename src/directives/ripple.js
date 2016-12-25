@@ -11,17 +11,17 @@ let ripple = {
     }
 
     animation.className = 'ripple__animation'
-    animation.style.width = `${el.clientWidth * 2.2}px`
+    animation.style.width = `${el.clientWidth * 2}px`
     animation.style.height = animation.style.width
 
     el.appendChild(container)
 
-    const x = e.layerX
-    const y = e.layerY
+    const x = e.pageX - el.offsetLeft
+    const y = e.pageY - el.offsetTop
 
     animation.classList.add('ripple__animation--enter')
     animation.classList.add('ripple__animation--visible')
-    animation.style.transform = `translate3d(-50%, -50%, 0) translate3d(${x}px, ${y}px, 0) scale3d(.15, .15, 1)`
+    animation.style.transform = `translate3d(-50%, -50%, 0) translate3d(${x}px, ${y}px, 0) scale3d(.001, .001, 1)`
     animation.dataset.activated = Date.now()
 
     setTimeout(() => {
@@ -36,7 +36,7 @@ let ripple = {
     if (ripples.length === 0) return
     let animation = ripples[ripples.length - 1]
     let diff = Date.now() - Number(animation.dataset.activated)
-    let delay = 350 - diff
+    let delay = 400 - diff
 
     delay = delay < 0 ? 0 : delay
 
@@ -54,6 +54,7 @@ function directive (el, binding, v) {
   if (!binding.value) return
 
   if ('ontouchstart' in window) {
+    el.addEventListener('touchstart', e => ripple.show(e, el, binding), false)
     el.addEventListener('touchend', () => ripple.hide(el), false)
     el.addEventListener('touchcancel', () => ripple.hide(el), false)
   }
@@ -63,8 +64,16 @@ function directive (el, binding, v) {
   el.addEventListener('mouseleave', () => ripple.hide(el), false)
 }
 
+function unbind (el, binding) {
+  el.removeEventListener('touchstart', e => ripple.show(e, el, binding), false)
+  el.removeEventListener('mousedown', e => ripple.show(e, el, binding), false)
+  el.removeEventListener('touchend', () => ripple.hide(el), false)
+  el.removeEventListener('touchcancel', () => ripple.hide(el), false)
+  el.removeEventListener('mouseup', () => ripple.hide(el), false)
+  el.removeEventListener('mouseleave', () => ripple.hide(el), false)
+}
+
 export default {
   bind: directive,
-  updated: directive,
-  componentUpdated: directive
+  unbind: unbind
 }
