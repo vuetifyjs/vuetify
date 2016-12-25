@@ -8,23 +8,20 @@ function directive (el, binding) {
     { top: true }
   )
 
+  unbind(el, binding, config)
+
   el.dataset.tooltip = config.html
-  el.classList.add('tooltip')
-  el.classList.add(`tooltip--${config.value}`)
+  el.dataset['tooltipLocation'] = config.value
+}
+
+function unbind (el, binding, config) {
+  el.removeAttribute('data-tooltip')
+  el.removeAttribute('data-tooltip-location')
 }
 
 export default {
   bind: directive,
   updated: directive,
   componentUpdated: directive,
-  unbind (el, binding) {
-    const config = directiveConfig(
-      binding,
-      { top: true }
-    )
-    
-    el.removeAttribute('data-tooltip', config.html)
-    el.classList.remove('tooltip')
-    el.classList.remove(`tooltip--${config.value}`)
-  }
+  unbind: unbind
 }

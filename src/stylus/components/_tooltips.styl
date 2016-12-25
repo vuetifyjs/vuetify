@@ -1,5 +1,10 @@
-.tooltip
+[data-tooltip]
   position: relative
+  
+  &:hover
+    &:after
+      opacity: 1
+      visibility: visible
   
   &:after
     background: $theme.secondary
@@ -19,7 +24,7 @@
     z-index: 99
     @extend .z-depth-1
     
-  &--bottom
+  &[data-tooltip-location='bottom']
     &:after
       top: 100%
       left: 50%
@@ -29,7 +34,7 @@
       &:after
         transform: translateX(-50%) translateY(10px)
       
-  &--top
+  &[data-tooltip-location='top']
     &:after
       bottom: 100%
       left: 50%
@@ -39,7 +44,7 @@
       &:after
         transform: translateX(-50%) translateY(-10px)
 
-  &--left
+  &[data-tooltip-location='left']
     &:after
       bottom: 50%
       right: 100%
@@ -49,7 +54,7 @@
       &:after
         transform: translateX(-10px) translateY(50%)
       
-  &--right
+  &[data-tooltip-location='right']
     &:after
       bottom: 50%
       left: 100%
@@ -58,9 +63,3 @@
     &:hover
       &:after
         transform: translateX(10px) translateY(50%)
-  
-
-  &:hover
-    &:after
-      opacity: 1
-      visibility: visible
