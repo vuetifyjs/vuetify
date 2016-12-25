@@ -8,9 +8,6 @@
   </a>
 </p>
 
-
-> A Vue.js 2 Material Component Framework
-
 ## Install
 
 ``` bash
