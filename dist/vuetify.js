@@ -1145,8 +1145,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
     click: function click () {
       this.$vuetify.bus.pub(
         ("collapse:toggle:" + (this.$parent._uid)),
-        Number(this.$el.nextSibling.getAttribute('uid'))
+        Number(this.getNextSibling(this.$el).getAttribute('uid'))
       )
+    },
+    
+    getNextSibling: function getNextSibling (el) {
+      if (!(el = el.nextSibling)) { return null }
+      
+      while (el.nodeType != 1) {
+        if (!(el = el.nextSibling)) { return null }
+      }
+    
+      return el
     }
   }
 };
@@ -2451,12 +2461,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
     },
 
     close: function close (e) {
-      try {
-        var group$1 = e.target.classList.contains('sidebar__item-header')
-        || e.target.parentNode.classList.contains('sidebar__item-header')
-      } catch (e) {}
+      var target = e.target
+      var parent = e.target.parentNode
+      var group = {}
 
-      if (typeof group === 'undefined') { return } 
+      if (target) {
+        group = target.classList.contains('sidebar__item-header')
+      }
+
+      if (!group && parent) {
+        group = parent.classList.contains('sidebar__item-header')
+      }
         
       if (this.activator === null || group) {
         return
@@ -3651,7 +3666,7 @@ function directive (el, binding, v) {
   if (!binding.value) { return }
 
   if ('ontouchstart' in window) {
-    el.addEventListener('touchstart', function (e) { return ripple.show(e, el, binding); }, false)
+    // el.addEventListener('touchstart', e => ripple.show(e, el, binding), false)
     el.addEventListener('touchend', function () { return ripple.hide(el); }, false)
     el.addEventListener('touchcancel', function () { return ripple.hide(el); }, false)
   }
