@@ -23,14 +23,22 @@
     
   &::-moz-focus-inner
     border: 0
-  
-  &.primary, &.secondary, &.success, &.info, &.warning, &.error
-    color: #fff
-
+    
   &:disabled
-    box-shadow: none
-    background-color: $grey.base
     opacity: $button-disabled-opacity
+    
+  for color_name, color_value in $theme
+    &.{color_name}
+      color: #fff
+      
+      &.btn--outline
+        color: color_value
+        
+      &.btn--flat
+        color: color_value
+        
+        .ripple__animation
+          background: color_value
     
   &--block
     display: flex
@@ -40,6 +48,7 @@
     background-color: transparent !important
     border-color: transparent
     box-shadow: none
+    color: currentColor
     
     &:hover:not(:disabled)
       background-color: $button-flat-hover !important
@@ -51,6 +60,9 @@
     line-height: $button-min-height
     min-height: $button-min-height
     padding: $button-floating-padding
+    
+    .ripple__container
+      border-radius: 50%
     
   &--icon
     background: transparent
@@ -83,6 +95,12 @@
     i
       font-size: $button-large-floating-font-size
   
+  &--loading
+    pointer-events: none
+    
+    .btn__content
+      opacity: 0
+
   &--outline
     border: 1px solid currentColor
     background: transparent !important
@@ -97,11 +115,12 @@
     
     @extend .z-depth-1
     
+    &:disabled
+      &:hover
+        @extend .z-depth-1
+    
     &:hover
       @extend .z-depth-1-half
-      
-    &:active
-      @extend .z-depth-2
     
   &--round
     border-radius: 2rem
@@ -117,6 +136,23 @@
       i
         font-size: $button-small-floating-font-size
         
+  &__content
+    display: flex
+    justify-content: center
+    align-items: center
+    transition: $primary-transition
+    flex: 1
+      
+  &__loading
+    position: absolute
+    width: 100%
+    height: 100%
+    left: 0
+    top: 0
+    display: flex
+    justify-content: center
+    align-items: center
+    
   .icon
     &--left
       margin-right: 1rem
@@ -125,3 +161,6 @@
     &--right
       margin-left: 1rem
       line-height: inherit
+      
+  .progress-circular
+    height: 20px !important

@@ -5,12 +5,20 @@
     v-bind:type="type"
     v-ripple="ripple"
   )
-    slot
+    span(class="btn__content")
+      slot
+    span(class="btn__loading" v-if="loading")
+      slot(name="loader")
+      v-progress-circular(indeterminate v-if="!$slots['loader']")
 </template>
 
 <script>
+  import Contextualable from '../../mixins/contextualable'
+
   export default {
     name: 'button',
+
+    mixins: [Contextualable],
     
     props: {
       block: Boolean,
@@ -23,9 +31,9 @@
 
       large: Boolean,
 
-      outline: Boolean,
+      loading: Boolean,
 
-      primary: Boolean,
+      outline: Boolean,
 
       raised: {
         type: Boolean,
@@ -38,8 +46,6 @@
       },
 
       round: Boolean,
-
-      secondary: Boolean,
 
       small: Boolean,
 
@@ -57,10 +63,17 @@
           'btn--floating': this.floating,
           'btn--icon': this.icon,
           'btn--large': this.large,
+          'btn--loading': this.loading,
           'btn--outline': this.outline,
           'btn--raised': this.raised,
           'btn--round': this.round,
-          'btn--small': this.small
+          'btn--small': this.small,
+          'primary': this.primary,
+          'secondary': this.secondary,
+          'success': this.success,
+          'info': this.info,
+          'warning': this.warning,
+          'error': this.error,
         }
       }
     }
