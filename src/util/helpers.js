@@ -28,7 +28,7 @@ export function closest (className) {
     }
     
     if (parent.$el.classList.contains(className)) {
-      return parent._uid
+      return parent
     }
 
     parent = parent.$parent
