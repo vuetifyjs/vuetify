@@ -8,6 +8,7 @@
       v-text="label"
     )
     select(
+      v-bind:disabled="disabled"
       v-bind:id="id"
       v-bind:name="name"
       v-bind:multiple="multiple"
@@ -46,6 +47,8 @@
         type: String,
         default: 'Select...'
       },
+
+      disabled: Boolean,
 
       id: {
         type: String,

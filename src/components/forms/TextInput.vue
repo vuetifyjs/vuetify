@@ -8,6 +8,7 @@
       v-html="label"
     )
     input(
+      v-bind:disabled="disabled"
       v-bind:id="id"
       v-bind:name="name"
       v-bind:placeholder="placeholder"
@@ -41,6 +42,8 @@
     },
 
     props: {
+      disabled: Boolean,
+
       label: String,
 
       id: String,
