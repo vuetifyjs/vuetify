@@ -121,7 +121,7 @@ function closest (className) {
     }
     
     if (parent.$el.classList.contains(className)) {
-      return parent._uid
+      return parent
     }
 
     parent = parent.$parent
@@ -503,9 +503,13 @@ Toast.prototype.create = function create (message, location, duration, cb) {
 
 
 /* harmony default export */ exports["a"] = function () {
-  document.body.addEventListener('click', function (e) {
-    __WEBPACK_IMPORTED_MODULE_0__bus__["a" /* default */].pub('body:click', e)
-  })
+  var click = function (e) { return __WEBPACK_IMPORTED_MODULE_0__bus__["a" /* default */].pub('body:click', e); }
+
+  if (typeof window.orientation !== 'undefined') {
+    document.body.addEventListener('touchstart', click, false)
+  } else {
+    document.body.addEventListener('click', click, false)
+  }
 
   __WEBPACK_IMPORTED_MODULE_0__bus__["a" /* default */].sub('meta:title', function (title) {
     document.title = title
@@ -1500,6 +1504,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ exports["default"] = {
   name: 'select',
@@ -1515,6 +1520,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
       type: String,
       default: 'Select...'
     },
+
+    disabled: Boolean,
 
     id: {
       type: String,
@@ -1598,13 +1605,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ exports["default"] = {
   name: 'text-input',
   
   data: function data () {
     return {
-      focused: false
+      focused: false,
+      inputValue: ''
     }
   },
 
@@ -1612,12 +1621,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
     classes: function classes () {
       return {
         'input-group--focused': this.focused,
-        'input-group--dirty': this.value || this.placeholder || (this.$refs.input && this.$refs.input.value)
+        'input-group--dirty': this.inputValue || this.placeholder || (this.$refs.input && this.$refs.input.value)
       }
     }
   },
 
   props: {
+    disabled: Boolean,
+
     label: String,
 
     id: String,
@@ -1626,8 +1637,23 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
     placeholder: String,
 
+    type: {
+      default: 'text'
+    },
+
     value: {
       required: false
+    }
+  },
+
+  mounted: function mounted () {
+    this.inputValue = this.value
+  },
+
+  methods: {
+    updateValue: function updateValue (e) {
+      this.inputValue = e.target.value
+      this.$emit('input', this.inputValue)
     }
   }
 };
@@ -2460,7 +2486,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
       }
     },
 
-    close: function close (e) {
+    close: function close (e, force) {
+      if ( force === void 0 ) force = false;
+
+      var width = window.innerWidth
+
+      if (force) {
+        return width > 768 && !this.drawer ? null : this.active = false
+      }
+
+      if (this.$el.contains(e.target)) {
+        return
+      }
+
       var target = e.target
       var parent = e.target.parentNode
       var group = {}
@@ -2485,8 +2523,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
           return
         }
       } catch (e) {}
-
-      var width = window.innerWidth
 
       if (width > 768 && !this.drawer) {
         return
@@ -2561,7 +2597,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
     },
 
     sidebar: function sidebar () {
-      return __WEBPACK_IMPORTED_MODULE_1__util_helpers__["b" /* closest */].call(this, 'sidebar')
+      var sidebar = __WEBPACK_IMPORTED_MODULE_1__util_helpers__["b" /* closest */].call(this, 'sidebar')
+
+      if (!sidebar) { return null }
+
+      return sidebar.id
     }
   },
 
@@ -2667,17 +2707,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
   computed: {
     group: function group () {
-      return __WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* closest */].call(this, 'sidebar__group')
+      var sidebar = __WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* closest */].call(this, 'sidebar__group')
+
+      if (!sidebar) { return null }
+
+      return sidebar._uid
     },
 
     sidebar: function sidebar () {
-      return __WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* closest */].call(this, 'sidebar')
+      var sidebar = __WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* closest */].call(this, 'sidebar')
+
+      if (!sidebar) { return null }
+
+      return sidebar.id
     }
   },
 
   methods: {
     click: function click () {
       this.$vuetify.bus.pub(("sidebar-group:close:" + (this.sidebar)), this.group)
+      this.$vuetify.bus.pub(("sidebar:close:" + (this.sidebar)), {}, true)
     }
   }
 };
@@ -2779,6 +2828,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
   watch: {
     current: function current () {
+      // Evaulate items when current changes to account for
+      // dynamic changing of children
+      this.items = this.$children.filter(function (i) {
+        return i.$el.classList && i.$el.classList.contains('slider__item')
+      })
+
       if (this.cycle) {
         clearInterval(this.slide_interval)
         this.startInterval()
@@ -2798,10 +2853,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
   methods: {
     init: function init () {
-      this.items = this.$children.filter(function (i) {
-        return i.$el.classList && i.$el.classList.contains('slider__item')
-      })
-
       this.current = 0
     },
 
@@ -5134,21 +5185,20 @@ module.exports={render:function (){var _vm=this;
   }), _vm._c('input', {
     ref: "input",
     attrs: {
-      "type": "text",
-      "name": _vm.name,
+      "disabled": _vm.disabled,
       "id": _vm.id,
-      "placeholder": _vm.placeholder
+      "name": _vm.name,
+      "placeholder": _vm.placeholder,
+      "type": _vm.type
     },
     domProps: {
-      "value": _vm.value
+      "value": _vm.inputValue
     },
     on: {
       "blur": function($event) {
         _vm.focused = false
       },
-      "input": function($event) {
-        _vm.$emit('input', $event.target.value)
-      },
+      "input": _vm.updateValue,
       "focus": function($event) {
         _vm.focused = true
       }
@@ -5373,6 +5423,7 @@ module.exports={render:function (){var _vm=this;
   }), _vm._c('select', {
     ref: "select",
     attrs: {
+      "disabled": _vm.disabled,
       "id": _vm.id,
       "name": _vm.name,
       "multiple": _vm.multiple
