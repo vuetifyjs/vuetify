@@ -52,6 +52,12 @@
 
     watch: {
       current () {
+        // Evaulate items when current changes to account for
+        // dynamic changing of children
+        this.items = this.$children.filter(i => {
+          return i.$el.classList && i.$el.classList.contains('slider__item')
+        })
+
         if (this.cycle) {
           clearInterval(this.slide_interval)
           this.startInterval()
@@ -71,10 +77,6 @@
 
     methods: {
       init () {
-        this.items = this.$children.filter(i => {
-          return i.$el.classList && i.$el.classList.contains('slider__item')
-        })
-
         this.current = 0
       },
 
