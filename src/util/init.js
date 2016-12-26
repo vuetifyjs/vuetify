@@ -1,9 +1,13 @@
 import Bus from './bus'
 
 export default function () {
-  document.body.addEventListener('click', e => {
-    Bus.pub('body:click', e)
-  })
+  const click = e => Bus.pub('body:click', e)
+
+  if (window.orientation !== 'undefined') {
+    document.body.addEventListener('touchstart', click, false)
+  } else {
+    document.body.addEventListener('click', click, false)
+  }
 
   Bus.sub('meta:title', title => {
     document.title = title
