@@ -8,13 +8,13 @@
       v-html="label"
     )
     input(
-      type="text"
-      v-bind:name="name"
       v-bind:id="id"
+      v-bind:name="name"
       v-bind:placeholder="placeholder"
-      v-bind:value="value"
+      v-bind:type="type"
+      v-bind:value="inputValue"
       v-on:blur="focused = false"
-      v-on:input="$emit('input', $event.target.value)"
+      v-on:input="updateValue"
       v-on:focus="focused = true"
       ref="input"
     )
@@ -26,7 +26,8 @@
     
     data () {
       return {
-        focused: false
+        focused: false,
+        inputValue: ''
       }
     },
 
@@ -34,7 +35,7 @@
       classes () {
         return {
           'input-group--focused': this.focused,
-          'input-group--dirty': this.value || this.placeholder || (this.$refs.input && this.$refs.input.value)
+          'input-group--dirty': this.inputValue || this.placeholder || (this.$refs.input && this.$refs.input.value)
         }
       }
     },
@@ -48,8 +49,23 @@
 
       placeholder: String,
 
+      type: {
+        default: 'text'
+      },
+
       value: {
         required: false
+      }
+    },
+
+    mounted () {
+      this.inputValue = this.value
+    },
+
+    methods: {
+      updateValue (e) {
+        this.inputValue = e.target.value
+        this.$emit('input', this.inputValue)
       }
     }
   }

@@ -10,14 +10,13 @@
     transition: $primary-transition
     
   input
-    &[type=text]
-      border-bottom: 1px solid #ddd
-      height: 3rem
-      width: 100%
-      position: relative
-      
-      &:focus
-        outline: none
+    border-bottom: 1px solid #ddd
+    height: 3rem
+    width: 100%
+    position: relative
+    
+    &:focus
+      outline: none
         
     &[type=radio]
       display: none
@@ -177,8 +176,13 @@
             background: transparent
               
   select
-    @extend .input-group input[type=text]
+    border-bottom: 1px solid #ddd
+    height: 3rem
     width: 100%
+    position: relative
+    
+    &:focus
+      outline: none
     
     &[multiple]
       border: 1px solid #ddd
