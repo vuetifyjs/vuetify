@@ -46,17 +46,26 @@
 
     computed: {
       group () {
-        return closest.call(this, 'sidebar__group')
+        let sidebar = closest.call(this, 'sidebar__group')
+
+        if (!sidebar) return null
+
+        return sidebar._uid
       },
 
       sidebar () {
-        return closest.call(this, 'sidebar')
+        let sidebar = closest.call(this, 'sidebar')
+
+        if (!sidebar) return null
+
+        return sidebar.id
       }
     },
 
     methods: {
       click () {
         this.$vuetify.bus.pub(`sidebar-group:close:${this.sidebar}`, this.group)
+        this.$vuetify.bus.pub(`sidebar:close:${this.sidebar}`, {}, true)
       }
     }
   }

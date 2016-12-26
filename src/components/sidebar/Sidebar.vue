@@ -84,7 +84,17 @@
         }
       },
 
-      close (e) {
+      close (e, force = false) {
+        let width = window.innerWidth
+
+        if (force) {
+          return width > 768 && !this.drawer ? null : this.active = false
+        }
+
+        if (this.$el.contains(e.target)) {
+          return
+        }
+
         let target = e.target
         let parent = e.target.parentNode
         let group = {}
@@ -109,8 +119,6 @@
             return
           }
         } catch (e) {}
-
-        let width = window.innerWidth
 
         if (width > 768 && !this.drawer) {
           return

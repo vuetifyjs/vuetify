@@ -53,7 +53,11 @@
       },
 
       sidebar () {
-        return closest.call(this, 'sidebar')
+        let sidebar = closest.call(this, 'sidebar')
+
+        if (!sidebar) return null
+
+        return sidebar.id
       }
     },
 
