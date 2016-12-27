@@ -1,8 +1,8 @@
 <template lang="pug">
   li(class="sidebar__group")
     a(
-      class="sidebar__item-header"
-      v-bind:class="{ 'sidebar__item-header--active': active }"
+      class="sidebar__group-header"
+      v-bind:class="{ 'sidebar__group-header--active': active }"
       v-bind:href="item.href"
       v-on:click.prevent="toggle()"
     )

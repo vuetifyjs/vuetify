@@ -2,9 +2,9 @@
   li
     a(
       class="sidebar__item"
-      v-if="!router"
+      v-if="!router && !item.router"
       v-bind:href="item.href"
-      v-on:click="click()"
+      v-on:click="click"
     )
       v-icon(v-if="item.icon") {{ item.icon }}
       span(v-text="item.text")
@@ -14,7 +14,7 @@
       active-class="sidebar__item--active"
       v-bind:exact="item.href === '/'"
       v-bind:to="item.href"
-      v-on:click.native="click()"
+      v-on:click.native="click"
       v-else
     )
       v-icon(v-if="item.icon") {{ item.icon }}

@@ -49,16 +49,7 @@
       .sidebar--fixed-right
         transform: translateX($sidebar-width + 25)
     
-  &__group    
-    .sidebar__items
-      overflow: hidden
-    
-    .sidebar__item
-      padding-left: 3rem
-    
   &__items
-    display: flex
-    flex-direction: column
     transition: $primary-transition
     
   &__item
@@ -69,35 +60,58 @@
     transition: $primary-transition
     font-weight: 300
     padding: $sidebar-item-padding
-    height: 3rem
+    height: $sidebar-item-height
   
     &--active
-      background-color: $theme.secondary
+      background-color: $sidebar-item-active-background-color
+      color: $sidebar-item-active-color
     
-    &:hover
-      background-color: $theme.secondary
-      color: #FFFFFF
+    &:hover:not(&--active)
+      background-color: $sidebar-item-hover-background-color
+      color: $sidebar-item-active-color
       
     > span
       margin-left: $spacers.three.x
       
-  &__item-header
-    @extend .sidebar__item
+    &-header
+      background: lighten($theme.secondary, 20%)
+      padding: $sidebar-item-header-padding
+      color: $sidebar-item-header-color
+      text-transform: uppercase
+      font-size: $sidebar-item-header-font-size
+      letter-spacing: $sidebar-item-header-letter-spacing
     
-    &:after
-      content: 'keyboard_arrow_left'
-      font-family: 'Material Icons'
-      font-size: 1.5rem
-      position: absolute
-      right: 15px
-      color: inherit
-      transition: $primary-transition
+  &__group    
+    .sidebar__items
+      overflow: hidden
+      background-color: $sidebar-group-items-background-color
+    
+    .sidebar__item
+      padding-left: 3rem
       
-    &:hover
-      background: $theme.primary
-      
-    &--active
-      background: $theme.primary
+    &-header
+      @extend .sidebar__item
       
       &:after
-        transform: rotate(-90deg)
+        content: 'keyboard_arrow_left'
+        font-family: 'Material Icons'
+        font-size: 1.5rem
+        position: absolute
+        right: 15px
+        color: inherit
+        transition: transform $primary-transition
+        
+      &:hover
+        background: $theme.primary
+        
+      &--active
+        background: $theme.primary
+        
+        ~ .sidebar__items
+          border-bottom: $sidebar-group-header-active-sidebar-items-border
+          
+          .sidebar__item--active
+            background-color: $sidebar-group-header-active-sidebar-item-active-background-color
+         
+        &:after
+          transform: rotate(-90deg)

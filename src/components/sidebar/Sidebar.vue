@@ -94,20 +94,8 @@
         if (this.$el.contains(e.target)) {
           return
         }
-
-        let target = e.target
-        let parent = e.target.parentNode
-        let group = {}
-
-        if (target) {
-          group = target.classList.contains('sidebar__item-header')
-        }
-
-        if (!group && parent) {
-          group = parent.classList.contains('sidebar__item-header')
-        }
           
-        if (this.activator === null || group) {
+        if (this.activator === null) {
           return
         }
 
