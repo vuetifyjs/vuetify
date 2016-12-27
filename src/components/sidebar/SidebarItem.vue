@@ -6,7 +6,8 @@
       v-bind:href="item.href"
       v-on:click="click"
     )
-      v-icon(v-if="item.icon") {{ item.icon }}
+      template(v-if="item.icon")
+        v-icon {{ item.icon }}
       span(v-text="item.text")
       slot
     router-link(
@@ -17,7 +18,8 @@
       v-on:click.native="click"
       v-else
     )
-      v-icon(v-if="item.icon") {{ item.icon }}
+      template(v-if="item.icon")
+        v-icon {{ item.icon }}
       span(v-text="item.text")
       slot
 </template>
