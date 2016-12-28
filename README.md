@@ -1,5 +1,9 @@
 <p align="center"><a href="https://vuetifyjs.com" target="_blank"><img width="100"src="https://vuetifyjs.com/public/v.png"></a></p>
-
+<p align="center">
+<a href="https://www.npmjs.com/package/vuetify"><img src="https://img.shields.io/npm/dt/vuetify.svg" alt="Downloads"></a>
+  <a href="https://www.npmjs.com/package/vuetify"><img src="https://img.shields.io/npm/v/vuetify.svg" alt="Version"></a>
+  <a href="https://www.npmjs.com/package/vuetify"><img src="https://img.shields.io/npm/l/vuetify.svg" alt="License"></a>
+</p>
 <p align="center">
   <strong>Vuetify.js is proudly sponsored by:</strong>
   <br><br>
