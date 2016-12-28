@@ -61,6 +61,12 @@
       }
     },
 
+    watch: {
+      value (value) {
+        this.inputValue = value
+      }
+    },
+
     mounted () {
       this.inputValue = this.value
     },
