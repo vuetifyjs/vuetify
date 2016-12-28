@@ -112,6 +112,9 @@ $heading-growth := .6
 $primary-transition := all 0.3s cubic-bezier(0, 0, .2, 1)
 $secondary-transition := all 0.2s ease-out
 
+// Components
+// ============================================================
+
 // Alerts
 $alert-color := inherit
 $alert-border-radius := 0
@@ -229,11 +232,29 @@ $process-circular-intermediate-svg-transition := all .2s ease-in-out
 $progress-circular-underlay-stroke := rgba(#000, 0.1)
 $progress-circular-overlay-transition := all .6s ease-in-out
 
-// Sidebar
+/* Sidebar */
+
 $sidebar-height := 100vh
 $sidebar-width := 260px
-$sidebar-item-color := $grey.darken-3
+
+// Sidebar Item
+$sidebar-item-color := #fff
+$sidebar-item-height := 2.8rem
 $sidebar-item-padding := .7rem 2rem
+$sidebar-item-active-color := #fff
+$sidebar-item-active-background-color := $theme.primary
+$sidebar-item-hover-background-color := rgba($theme.primary, .4)
+
+// Sidebar Item Header
+$sidebar-item-header-padding := .2rem .2rem .2rem 2rem
+$sidebar-item-header-color := #fff
+$sidebar-item-header-font-size := 90%
+$sidebar-item-header-letter-spacing := .1px
+
+// Sidebar Group
+$sidebar-group-items-background-color := darken($theme.secondary, 15%)
+$sidebar-group-header-active-sidebar-items-border := 1px solid rgba(#fff, .1)
+$sidebar-group-header-active-sidebar-item-active-background-color := rgba($theme.primary, .4)
 
 // Slider
 $slider-arrow-size := 2rem
