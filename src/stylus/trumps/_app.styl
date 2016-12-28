@@ -2,15 +2,26 @@
   min-height: 100vh
   
   &.top-fixed-navbar
-    padding-top: $navbar-min-height + $spacers.five.y
+    padding-top: $navbar-height + $spacers.five.y
       
     header
       z-index: 4
 
   &.top-navbar
     main
+      min-height: 'calc(100vh - %s)' % $navbar-height
+      
       > .content
         padding-top: $spacers.three.y
+        
+  &.bottom-footer
+    main
+      min-height: 'calc(100vh - %s)' % $footer-height
+      
+  &.bottom-footer&.top-navbar
+    main
+      min-height: 'calc(100vh - %s - %s)' % ($navbar-height $footer-height)
+    
       
   &.left-fixed-sidebar
     .navbar,
