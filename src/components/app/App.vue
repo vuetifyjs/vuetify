@@ -35,6 +35,7 @@
         return {
           'left-fixed-sidebar': this.leftFixedSidebar,
           'left-sidebar': this.leftSidebar,
+          'bottom-footer': this.footer,
           'right-fixed-sidebar': this.rightFixedSidebar,
           'right-sidebar': this.rightSidebar,
           'top-fixed-navbar': this.topFixedNavbar,

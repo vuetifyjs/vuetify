@@ -16,9 +16,7 @@
   export default {
     name: 'sidebar',
 
-    mixins: [
-      Toggleable
-    ],
+    mixins: [Toggleable],
 
     props: {
       drawer: Boolean,
@@ -71,44 +69,37 @@
         this.resize()
         window.addEventListener('resize', this.resize, false)
       })
+
+      this.$vuetify.bus.sub(`${this.$options.name}:item-clicked:${this.id}`, this.itemClicked)
     },
 
     beforeDestroy () {
       window.removeEventListener('resize', this.resize)
+      this.$vuetify.bus.unsub(`${this.$options.name}:item-clicked:${this.id}`, this.itemClicked)
     },
 
     methods: {
       resize () {
         if (!this.drawer) {
-          this.active = window.innerWidth > 768
+          this.active = window.innerWidth >= 768
         }
       },
 
-      close (e, force = false) {
-        let width = window.innerWidth
-
-        if (force) {
-          return width > 768 && !this.drawer ? null : this.active = false
+      itemClicked () {
+        if (window.innerWidth < 768 && !this.drawer) {
+          this.active = false
         }
+      },
 
-        if (this.$el.contains(e.target)) {
-          return
-        }
-          
-        if (this.activator === null) {
-          return
-        }
-
-        try {
-          if (e.target === this.activator 
-            || this.activator.contains(e.target) 
-            || e.target === this.$el
-          ) {
-            return
-          }
-        } catch (e) {}
-
-        if (width > 768 && !this.drawer) {
+      close (e) {
+        if ((!e || !e.target)
+          || this.activator === null
+          || e.target === this.activator 
+          || e.target === this.$el
+          || this.$el.contains(e.target)
+          || this.activator.contains(e.target)
+          || (window.innerWidth >= 768 && !this.drawer)
+        ) {
           return
         }
 

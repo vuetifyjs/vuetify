@@ -1,5 +1,5 @@
 .content
-  flex-basis: 100%
+  flex: 1 1 auto
   
 .container, .container-fluid
   margin-right: auto
@@ -18,10 +18,9 @@
       max-width: width
   
 .row
-  box-sizing: border-box
   display: flex
   flex: 0 1 auto
-  flex-flow: row wrap
+  flex-wrap: wrap
   margin-left: $grid-gutter-full
   margin-right: $grid-gutter-full
   
@@ -29,16 +28,13 @@
     flex-direction: row-reverse
     
   .col
-    box-sizing: border-box
-    flex: 0 0 auto
     padding-right: $grid-gutter-half
     padding-left: $grid-gutter-half
         
     for size, width in $grid-breakpoints
       &.{size}
         flex-grow: 1
-        flex-basis: 0
-        max-width: 100%
+        flex-shrink: 1
         
       @media only screen and (min-width: width)
         for n in (1..$grid-columns)

@@ -3,8 +3,7 @@
     class="material-icons icon"
     v-bind:class="classes"
   )
-    span
-      slot
+    slot
 </template>
 
 <script>

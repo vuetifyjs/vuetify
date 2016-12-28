@@ -2,13 +2,12 @@
   li(class="sidebar__group")
     a(
       class="sidebar__group-header"
-      v-bind:class="{ 'sidebar__group-header--active': active }"
+      v-bind:class="classes"
       v-bind:href="item.href"
-      v-on:click.prevent="toggle()"
+      v-on:click.prevent="toggle"
     )
-      v-icon(
-        v-if="item.icon"
-      ) {{ item.icon }}
+      template(v-if="item.icon")
+        v-icon {{ item.icon }}
       span(v-text="item.text")
     transition(
       v-on:enter="enter"
@@ -28,9 +27,7 @@
   export default {
     name: 'sidebar-group',
 
-    mixins: [
-      Eventable
-    ],
+    mixins: [Eventable],
 
     data () {
       return {
@@ -40,11 +37,24 @@
     },
 
     props: {
-      item: Object,
-      required: true
+      item: {
+        type: Object,
+        default () {
+          return {
+            parent: { href: '#!', text: '', icon: false },
+            items: []
+          }
+        }
+      }
     },
     
     computed: {
+      classes () {
+        return {
+          'sidebar__group-header--active': this.active
+        }
+      },
+
       events () {
         return [
           [`sidebar-group:close:${this.sidebar}`, this.close],
@@ -55,13 +65,12 @@
       sidebar () {
         let sidebar = closest.call(this, 'sidebar')
 
-        if (!sidebar) return null
-
-        return sidebar.id
+        return sidebar ? sidebar.id : null
       }
     },
 
     mounted () {
+      // console.log(this.$refs.group)
       if (this.$refs.group.$el.querySelector('.sidebar__item--active')) {
         this.active = true
       }
@@ -72,7 +81,7 @@
         el.style.display = 'block'
         el.style.height = 0
         
-        setTimeout(() => el.style.height = `${el.scrollHeight}px`, 50)
+        setTimeout(() => el.style.height = `${el.scrollHeight}px`, 0)
 
         var transition = () => {
           done()

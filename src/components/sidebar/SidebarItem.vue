@@ -29,45 +29,44 @@
 
   export default {
     name: 'sidebar-item',
-    
-    data () {
-      return {
-        sidebar: null,
-        group: null
-      }
-    },
 
     props: {
       item: {
         type: Object,
-        required: true
+        default () {
+          return {
+            href: '#!',
+            text: '',
+            icon: false,
+            router: true
+          }
+        }
       },
 
-      router: Boolean
+      router: {
+        type: Boolean,
+        default: true
+      }
     },
 
     computed: {
-      group () {
-        let sidebar = closest.call(this, 'sidebar__group')
+      groupUid () {
+        let group = closest.call(this, 'sidebar__group')
 
-        if (!sidebar) return null
-
-        return sidebar._uid
+        return group ? group._uid : null
       },
 
-      sidebar () {
+      sidebarId () {
         let sidebar = closest.call(this, 'sidebar')
 
-        if (!sidebar) return null
-
-        return sidebar.id
+        return sidebar ? sidebar.id : null
       }
     },
 
     methods: {
       click () {
-        this.$vuetify.bus.pub(`sidebar-group:close:${this.sidebar}`, this.group)
-        this.$vuetify.bus.pub(`sidebar:close:${this.sidebar}`, {}, true)
+        this.$vuetify.bus.pub(`sidebar-group:close:${this.sidebarId}`, this.groupUid)
+        this.$vuetify.bus.pub(`sidebar:item-clicked:${this.sidebarId}`)
       }
     }
   }
