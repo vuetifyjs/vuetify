@@ -6072,7 +6072,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "router": item.router
         }
       }) : _vm._e()
-    })) : _vm._e(), (item.href) ? _c('v-sidebar-item', {
+    })) : (item.href) ? _c('v-sidebar-item', {
       attrs: {
         "item": item,
         "router": item.router
