@@ -12,7 +12,7 @@
       v-sidebar-item(
         v-bind:item="item"
         v-bind:router="item.router"
-        v-else-if="item.href" // This must be else-if
+        v-else-if="item.href"
       )
     slot
 </template>
