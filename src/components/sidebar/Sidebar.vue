@@ -81,12 +81,12 @@
     methods: {
       resize () {
         if (!this.drawer) {
-          this.active = window.innerWidth >= 768
+          this.active = window.innerWidth >= 672
         }
       },
 
       itemClicked () {
-        if (window.innerWidth < 768 && !this.drawer) {
+        if (window.innerWidth < 672 && !this.drawer) {
           this.active = false
         }
       },
@@ -98,7 +98,7 @@
           || e.target === this.$el
           || this.$el.contains(e.target)
           || this.activator.contains(e.target)
-          || (window.innerWidth >= 768 && !this.drawer)
+          || (window.innerWidth >= 672 && !this.drawer)
         ) {
           return
         }
