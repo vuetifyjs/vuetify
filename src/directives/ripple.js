@@ -1,3 +1,12 @@
+function style (el, value) {
+  [
+    'transform',
+    'webkitTransform'
+  ].forEach(i => {
+    el.style[i] = value
+  })
+}
+
 let ripple = {
   show: (e, el, binding) => {
     var container = document.createElement('span')
@@ -21,12 +30,12 @@ let ripple = {
 
     animation.classList.add('ripple__animation--enter')
     animation.classList.add('ripple__animation--visible')
-    animation.style.transform = `translate3d(-50%, -50%, 0) translate3d(${x}px, ${y}px, 0) scale3d(.001, .001, 1)`
+    style(animation, `translate3d(-50%, -50%, 0) translate3d(${x}px, ${y}px, 0) scale3d(.001, .001, 1)`)
     animation.dataset.activated = Date.now()
 
     setTimeout(() => {
       animation.classList.remove('ripple__animation--enter')
-      animation.style.transform = `translate3d(-50%, -50%, 0) translate3d(${x}px, ${y}px, 0)`
+      style(animation, `translate3d(-50%, -50%, 0) translate3d(${x}px, ${y}px, 0)`)
     }, 0)
   },
 
