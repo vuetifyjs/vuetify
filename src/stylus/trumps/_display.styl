@@ -4,10 +4,10 @@ for size, width in $grid-breakpoints
       display: none
       
       @media screen and (max-width: width)
-        display: initial !important
+        display: inherit !important
 
     &-{size}-and-down
       display: none
       
       @media screen and (min-width: width)
-        display: initial !important
+        display: inherit !important
