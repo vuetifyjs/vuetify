@@ -76,9 +76,6 @@
     },
 
     mounted () {
-      this.$el.style.transition = 'none'
-      setTimeout(() => this.$el.style.transition = 'inherit', 0)
-
       this.$vuetify.load(() => {
         this.resize()
         window.addEventListener('resize', this.resize, false)
