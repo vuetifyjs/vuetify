@@ -3,6 +3,7 @@
     class="navbar"
     v-bind:class="classes"
   )
+    v-navbar-items(v-if="items.length > 0" v-bind:items="items")
     slot
 </template>
 
@@ -11,7 +12,12 @@
     name: 'navbar',
 
     props: {
-      fixed: Boolean
+      fixed: Boolean,
+
+      items: {
+        type: Array,
+        default: () => []
+      }
     },
 
     computed: {
