@@ -26,28 +26,12 @@
 
 <script>
   import { closest } from '../../util/helpers'
+  import Itemable from '../../mixins/itemable'
 
   export default {
     name: 'sidebar-item',
 
-    props: {
-      item: {
-        type: Object,
-        default () {
-          return {
-            href: '#!',
-            text: '',
-            icon: false,
-            router: true
-          }
-        }
-      },
-
-      router: {
-        type: Boolean,
-        default: true
-      }
-    },
+    mixins: [Itemable],
 
     computed: {
       groupUid () {

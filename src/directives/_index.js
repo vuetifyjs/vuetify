@@ -11,5 +11,6 @@ export default {
   Modal,
   Ripple,
   SideBar,
+  sidebar: SideBar,
   Tooltip
 }

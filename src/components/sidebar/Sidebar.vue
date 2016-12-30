@@ -19,6 +19,11 @@
     mixins: [Toggleable],
 
     props: {
+      closeOnClick: {
+        type: Boolean,
+        default: true
+      },
+
       drawer: Boolean,
 
       fixed: Boolean,
@@ -38,6 +43,11 @@
         default: true
       },
 
+      mobileBreakPoint: {
+        type: Number,
+        default: 768
+      },
+
       items: {
         type: Array,
         default: () => []
@@ -49,10 +59,11 @@
     computed: {
       classes () {
         return {
-          'sidebar--mobile': this.mobile,
-          'sidebar--fixed': this.fixed && !this.right,
-          'sidebar--fixed-right': this.fixed && this.right,
           'sidebar--close': !this.active,
+          'sidebar--drawer': this.drawer,
+          'sidebar--fixed': this.fixed || this.drawer,
+          'sidebar--fixed-right': this.fixed && this.right,
+          'sidebar--mobile': this.mobile,
           'sidebar--open': this.active
         }
       },
@@ -80,13 +91,16 @@
 
     methods: {
       resize () {
-        if (!this.drawer) {
-          this.active = window.innerWidth >= 672
+        if (this.mobile && !this.drawer) {
+          this.active = window.innerWidth > this.mobileBreakPoint
         }
       },
 
       itemClicked () {
-        if (window.innerWidth < 672 && !this.drawer) {
+        if (
+          (window.innerWidth < this.mobileBreakPoint && this.mobile && this.closeOnClick)
+          || (this.drawer && this.closeOnClick)
+        ) {
           this.active = false
         }
       },
@@ -98,7 +112,8 @@
           || e.target === this.$el
           || this.$el.contains(e.target)
           || this.activator.contains(e.target)
-          || (window.innerWidth >= 672 && !this.drawer)
+          || (window.innerWidth >= this.mobileBreakPoint && !this.drawer)
+          || !this.closeOnClick
         ) {
           return
         }
