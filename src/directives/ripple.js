@@ -25,8 +25,9 @@ let ripple = {
 
     el.appendChild(container)
 
-    const x = e.pageX - el.offsetLeft
-    const y = e.pageY - el.offsetTop
+    const offset = el.getBoundingClientRect()
+    const x = e.x - offset.left
+    const y = e.y - offset.top
 
     animation.classList.add('ripple__animation--enter')
     animation.classList.add('ripple__animation--visible')
