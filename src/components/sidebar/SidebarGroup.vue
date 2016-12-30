@@ -15,6 +15,7 @@
     )
       v-sidebar-items(
         v-show="active"
+        v-bind:items="items"
         ref="group"
       )
         slot
@@ -22,7 +23,7 @@
 
 <script>
   import Eventable from '../../mixins/eventable'
-  import { closest } from '../../util/helpers'
+  import { closest, addOnceEventListener } from '../../util/helpers'
 
   export default {
     name: 'sidebar-group',
@@ -40,11 +41,13 @@
       item: {
         type: Object,
         default () {
-          return {
-            parent: { href: '#!', text: '', icon: false },
-            items: []
-          }
+          return { href: '#!', text: '',icon: false }
         }
+      },
+
+      items: {
+        type: Array,
+        default: () => []
       }
     },
     
@@ -70,7 +73,6 @@
     },
 
     mounted () {
-      // console.log(this.$refs.group)
       if (this.$refs.group.$el.querySelector('.sidebar__item--active')) {
         this.active = true
       }
@@ -83,23 +85,13 @@
         
         setTimeout(() => el.style.height = `${el.scrollHeight}px`, 0)
 
-        var transition = () => {
-          done()
-          el.removeEventListener('transitionend', transition, false)
-        }
-        
-        el.addEventListener('transitionend', transition, false)
+        addOnceEventListener(el, done, 'transitionend')
       },
 
       leave (el, done) {
         el.style.height = 0
         
-        var transition = () => {
-          done()
-          el.removeEventListener('transitionend', transition, false)
-        }
-        
-        el.addEventListener('transitionend', transition, false)
+        addOnceEventListener(el, done, 'transitionend')
       },
 
       open () {

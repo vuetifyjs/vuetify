@@ -36,3 +36,12 @@ export function closest (className) {
 
   return null
 }
+
+export function addOnceEventListener (el, event, cb) {
+  var once = () => {
+    cb()
+    el.removeEventListener(event, once, false)
+  }
+  
+  el.addEventListener(event, once, false)
+}
