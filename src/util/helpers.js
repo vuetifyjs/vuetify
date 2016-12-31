@@ -78,3 +78,11 @@ export function browserTransform (el, value) {
     el.style[i] = value
   })
 }
+export function browserTransform (el, value) {
+  [
+    'transform',
+    'webkitTransform'
+  ].forEach(i => {
+    el.style[i] = value
+  })
+}
