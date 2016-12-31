@@ -80,7 +80,6 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 0 */
 /***/ function(module, exports) {
 
-"use strict";
 throw new Error("Module parse failed: /home/homeserver/Sites/vuetify.js/vuetify/node_modules/buble-loader/index.js?{\"objectAssign\":\"Object.assign\"}!/home/homeserver/Sites/vuetify.js/vuetify/src/util/helpers.js Duplicate export 'browserTransform' (88:16)\nYou may need an appropriate loader to handle this file type.\n|   })\r\n| }\r\n| export function browserTransform (el, value) {\r\n|   [\r\n|     'transform',\r");
 
 /***/ },
@@ -340,6 +339,8 @@ var Bus = (function (EventEmitter) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__slider_index__ = __webpack_require__(68);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__tabs_index__ = __webpack_require__(69);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__transitions_index__ = __webpack_require__(157);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__transitions_dropdown_scale__ = __webpack_require__(162);
+
 
 
 
@@ -386,6 +387,7 @@ function bootstrap () {
   __WEBPACK_IMPORTED_MODULE_4__cards_index__["a" /* default */],
   __WEBPACK_IMPORTED_MODULE_5__chips_index__["a" /* default */],
   __WEBPACK_IMPORTED_MODULE_6__collapsible_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_22__transitions_dropdown_scale__["a" /* default */],
   __WEBPACK_IMPORTED_MODULE_7__dropdowns_index__["a" /* default */],
   __WEBPACK_IMPORTED_MODULE_8__footer_index__["a" /* default */],
   __WEBPACK_IMPORTED_MODULE_9__forms_index__["a" /* default */],
@@ -1185,9 +1187,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 
@@ -1230,7 +1229,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
   computed: {
     classes: function classes () {
       return {
-        'dropdown--open': this.active,
         'dropdown--open-from-right': this.right
       }
     },
@@ -3753,7 +3751,7 @@ function dropdown (e, el, binding, bus, hover) {
   component.style.left = (el.offsetLeft - width) + "px"
   component.style.top = (el.offsetTop - height) + "px"
 
-  bus.pub(("dropdown:open:" + (binding.arg)))
+  setTimeout(function () { return bus.pub(("dropdown:open:" + (binding.arg))); }, 0)
 }
 
 function directive (el, binding, v) {
@@ -5465,12 +5463,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "origin": _vm.origin
     }
   }, [_c('ul', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.active),
-      expression: "active"
-    }],
     staticClass: "dropdown",
     class: _vm.classes,
     attrs: {
@@ -5479,10 +5471,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "data-bottom": _vm.bottom,
       "data-left": _vm.left,
       "data-hover": _vm.hover,
-      "data-offset": _vm.offset,
-      "id": _vm.id
+      "data-offset": _vm.offset
     }
-  }), _vm._t("default")], 2)
+  })])
 },staticRenderFns: []}
 
 /***/ },
@@ -6422,6 +6413,32 @@ var ScaleTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_he
   SlideXTransition: SlideXTransition,
   SlideYTransition: SlideYTransition,
   ScaleTransition: ScaleTransition
+};
+
+/***/ },
+/* 158 */,
+/* 159 */,
+/* 160 */,
+/* 161 */,
+/* 162 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+var DropdownScale = {
+  functional: true,
+  render: function render (createElement, context) {
+    var data = {
+      props: {
+        name: 'dropdown-scale'
+      }
+    }
+
+    return createElement('transition', data, context.children)
+  }
+}
+
+/* harmony default export */ exports["a"] = {
+  DropdownScale: DropdownScale
 };
 
 /***/ }

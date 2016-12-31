@@ -12,10 +12,7 @@
       v-bind:data-left="left"
       v-bind:data-hover="hover"
       v-bind:data-offset="offset"
-      v-bind:id="id"
-      v-show="active"
     )
-    slot
 </template>
 
 <script>
@@ -60,7 +57,6 @@
     computed: {
       classes () {
         return {
-          'dropdown--open': this.active,
           'dropdown--open-from-right': this.right
         }
       },

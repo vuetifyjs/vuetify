@@ -34,7 +34,7 @@ function dropdown (e, el, binding, bus, hover) {
   component.style.left = `${el.offsetLeft - width}px`
   component.style.top = `${el.offsetTop - height}px`
 
-  bus.pub(`dropdown:open:${binding.arg}`)
+  setTimeout(() => bus.pub(`dropdown:open:${binding.arg}`), 0)
 }
 
 function directive (el, binding, v) {
