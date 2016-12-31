@@ -75,15 +75,21 @@
       right: 0
       z-index: 99
       background-color: #fff
-      transition: .3s cubic-bezier(0,0,.2,1)
       transform-origin: top right
+      flex-direction: column
       overflow: hidden
+      @extend .z-depth-1
+      
+      li
+        width: 100%
+      
         
       .navbar__item
         padding: 1rem
         white-space: nowrap
         color: $theme.primary
         font-weight: 500
+        width: 100%
         
         &:hover
           background-color: rgba(0,0,0,0.1)
