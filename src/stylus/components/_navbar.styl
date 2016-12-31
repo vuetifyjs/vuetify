@@ -1,6 +1,5 @@
 .navbar
   background-color: $theme.primary
-  height: $navbar-height
   display: flex
   flex-wrap: wrap
   position: relative
@@ -41,14 +40,14 @@
   &__items
     list-style-type: none
     padding: 0
-    height: 100%
-    
+    background-color: inherit
+    display: flex
+    align-items: center    
+
     > li
+      display: flex
+      align-items: center
       height: 100%
-      float: left
-      
-    > a
-        color: #fff
       
   &__item
     align-items: center
@@ -57,8 +56,8 @@
     padding: $navbar-item-padding
     text-decoration: none
     transition: all 0.3s ease-out
-    height: 100%
     position: relative
+    height: 100%
     
     i
       font-size: 2rem
@@ -67,19 +66,39 @@
       background: rgba(#fff,0.2)
       
   &__group
+    position: relative
+    background-color: inherit
+    
     .navbar__items
-        overflow: hidden
+      position: absolute
+      top: 0
+      right: 0
+      z-index: 99
+      background-color: #fff
+      transition: .3s cubic-bezier(0,0,.2,1)
+      transform-origin: top right
+      overflow: hidden
         
-      &-header
-        @extend .navbar__item
-        padding-right: 45px
+      .navbar__item
+        padding: 1rem
+        white-space: nowrap
+        color: $theme.primary
+        font-weight: 500
         
-        &:after
-          content: 'keyboard_arrow_left'
-          font-family: 'Material Icons'
-          font-size: 1.5rem
-          position: absolute
-          right: 15px
-          color: inherit
-          transition: transform 0.3s cubic-bezier(0, 0, .2, 1)
-          transform: rotate(-90deg)
+        &:hover
+          background-color: rgba(0,0,0,0.1)
+        
+    &-header
+      @extend .navbar__item
+      padding-right: 45px
+      
+      &:after
+        content: 'keyboard_arrow_left'
+        font-family: 'Material Icons'
+        font-size: 1.5rem
+        position: absolute
+        right: 15px
+        top: calc(50% - 16px)
+        color: inherit
+        transition: transform 0.3s cubic-bezier(0, 0, .2, 1)
+        transform: rotate(-90deg)

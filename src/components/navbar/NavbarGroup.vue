@@ -4,7 +4,7 @@
       class="navbar__group-header"
       v-bind:class="classes"
       v-bind:href="item.href"
-      v-on:click.prevent="toggle"
+      v-on:click.prevent="open"
     )
       template(v-if="item.icon")
         v-icon {{ item.icon }}
@@ -23,7 +23,7 @@
 
 <script>
   import Eventable from '../../mixins/eventable'
-  import { closest, addOnceEventListener } from '../../util/helpers'
+  import { closest, addOnceEventListener, browserTransform } from '../../util/helpers'
 
   export default {
     name: 'navbar-group',
@@ -59,8 +59,7 @@
 
       events () {
         return [
-          [`navbar-group:close:${this.navbar}`, this.close],
-          [`navbar-group:open:${this.navbar}`, this.open]
+          [`body:click`, this.close]
         ]
       },
 
@@ -79,16 +78,19 @@
 
     methods: {
       enter (el, done) {
+        browserTransform(el, 'scale(0)')
         el.style.display = 'block'
-        el.style.height = 0
+        el.style.height = `${el.scrollHeight}px`
         
-        setTimeout(() => el.style.height = `${el.scrollHeight}px`, 0)
+        setTimeout(() => {
+          browserTransform(el, 'scale(1)')
+        }, 0)
 
         addOnceEventListener(el, done, 'transitionend')
       },
 
       leave (el, done) {
-        el.style.height = 0
+        browserTransform(el, 'scale(0)')
         
         addOnceEventListener(el, done, 'transitionend')
       },
@@ -98,11 +100,18 @@
       },
 
       toggle () {
-        this.active = !this.active
       },
 
-      close (uid) {
-        this.active = uid === this._uid
+      close (e) {
+        if ((!e || !e.target)
+          || e.target === this.$el
+          || this.$el.contains(e.target)
+          && !this.$refs.group.$el.contains(e.target)
+        ) {
+          return
+        }
+
+        this.active = false
       }
     }
   }
