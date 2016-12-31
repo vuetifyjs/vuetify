@@ -1,11 +1,4 @@
-function style (el, value) {
-  [
-    'transform',
-    'webkitTransform'
-  ].forEach(i => {
-    el.style[i] = value
-  })
-}
+import { browserTransform } from '../util/helpers'
 
 let ripple = {
   show: (e, el, binding) => {
@@ -31,12 +24,12 @@ let ripple = {
 
     animation.classList.add('ripple__animation--enter')
     animation.classList.add('ripple__animation--visible')
-    style(animation, `translate3d(-50%, -50%, 0) translate3d(${x}px, ${y}px, 0) scale3d(.001, .001, 1)`)
+    browserTransform(animation, `translate3d(-50%, -50%, 0) translate3d(${x}px, ${y}px, 0) scale3d(.001, .001, 1)`)
     animation.dataset.activated = Date.now()
 
     setTimeout(() => {
       animation.classList.remove('ripple__animation--enter')
-      style(animation, `translate3d(-50%, -50%, 0) translate3d(${x}px, ${y}px, 0)`)
+      browserTransform(animation, `translate3d(-50%, -50%, 0) translate3d(${x}px, ${y}px, 0)`)
     }, 0)
   },
 
