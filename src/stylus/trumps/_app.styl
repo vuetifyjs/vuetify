@@ -29,7 +29,7 @@
       padding-left: $sidebar-width
       transition: $primary-transition
   
-      @media screen and (max-width: $grid-breakpoints.md)
+      @media screen and (max-width: ($grid-breakpoints.lg - 1))
         padding-left: 0
         
   &.left-sidebar
@@ -49,5 +49,5 @@
       padding-right: $sidebar-width
       transition: $primary-transition
       
-      @media screen and (max-width: $grid-breakpoints.md)
+      @media screen and (max-width: ($grid-breakpoints.lg - 1))
         padding-right: 0
