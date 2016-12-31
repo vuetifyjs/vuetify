@@ -30,17 +30,31 @@ $grid-breakpoints := {
   sm: 576px
   md: 768px
   lg: 992px
+  xl: 1200px
 }
 $container-max-widths := {
-  sm: $grid-breakpoints.sm * .9,
-  md: $grid-breakpoints.md * .9,
+  sm: $grid-breakpoints.sm * .9
+  md: $grid-breakpoints.md * .9
   lg: $grid-breakpoints.lg * .9
+  xl: $grid-breakpoints.xl * .9
 }
 $grid-gutter := 2rem
 $grid-outer-margin := 2rem
 $grid-gutter-full := $grid-gutter * .25 * -1
 $grid-gutter-half := $grid-gutter * .25
 $grid-columns := 12
+
+// Display
+// ============================================================
+$display-breakpoints := {
+  sm-and-down: "only screen and (max-width: ($grid-breakpoints.md - 1))"
+  md-only: "only screen and (min-width: $grid-breakpoints.md) and (max-width: ($grid-breakpoints.lg - 1))"
+  md-and-down: "only screen and (max-width: $grid-breakpoints.lg - 1)"
+  md-and-up: "only screen and (min-width: ($grid-breakpoints.lg))"
+  lg-only: "only screen and (min-width: $grid-breakpoints.lg) and (max-width: ($grid-breakpoints.xl - 1))"
+  lg-and-down: "only screen and (max-width: ($grid-breakpoints.xl - 1))"
+  lg-and-up: "only screen and (min-width: $grid-breakpoints.xl)"
+}
 
 
 // Spacing
