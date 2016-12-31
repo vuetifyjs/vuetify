@@ -1,17 +1,19 @@
 <template lang="pug">
-  ul(
-    class="dropdown"
-    v-bind:class="classes"
-    v-bind:data-bottom="bottom"
-    v-bind:data-hover="hover"
-    v-bind:data-right="right"
-    v-bind:id="id"
-  )
-    v-dropdown-item(
-      v-for="item in items"
-      v-bind:item="item"
+  v-dropdown-scale
+    ul(
+      class="dropdown"
+      v-bind:class="classes"
+      v-bind:data-bottom="bottom"
+      v-bind:data-hover="hover"
+      v-bind:data-right="right"
+      v-bind:id="id"
+      v-show="active"
     )
-    slot
+      v-dropdown-item(
+        v-for="item in items"
+        v-bind:item="item"
+      )
+      slot
 </template>
 
 <script>
@@ -20,9 +22,7 @@
   export default {
     name: 'dropdown',
 
-    mixins: [
-      Toggleable
-    ],
+    mixins: [Toggleable],
 
     props: {
       bottom: Boolean,
@@ -45,7 +45,6 @@
     computed: {
       classes () {
         return {
-          'dropdown--open': this.active,
           'dropdown--open-from-right': this.right
         }
       }
