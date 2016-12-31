@@ -1,13 +1,5 @@
-for size, width in $grid-breakpoints
+for size, query in $display-breakpoints
   .hidden
-    &-{size}-and-up
-      display: none
-      
-      @media screen and (max-width: width)
-        display: inherit !important
-
-    &-{size}-and-down
-      display: none
-      
-      @media screen and (min-width: width)
-        display: inherit !important
+    &-{size}
+      @media query
+        display: none !important
