@@ -1,7 +1,7 @@
 <template lang="pug">
   div(
     class="parallax"
-    v-bind:style="{ minHeight: this.height + 'px' }"
+    v-bind:style="{ minHeight: this.normalizedHeight + 'px' }"
   )
     div(class="parallax__image-container")
       img(
@@ -47,7 +47,6 @@
     methods: {
       init () {
         if (this.$refs.img.complete) {
-          console.log('here')
           this.translate()
           this.listeners()
           return this.$vuetify.bus.pub('parallax:ready')
@@ -57,7 +56,7 @@
           this.translate()
           this.listeners()
           this.$vuetify.bus.pub('parallax:ready')
-        }, { once: true })
+        }, false)
       },
 
       objHeight () {
