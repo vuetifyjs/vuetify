@@ -3751,7 +3751,17 @@ function dropdown (e, el, binding, bus, hover) {
   component.style.left = (el.offsetLeft - width) + "px"
   component.style.top = (el.offsetTop - height) + "px"
 
-  setTimeout(function () { return bus.pub(("dropdown:open:" + (binding.arg))); }, 0)
+  if (Boolean(component.dataset.right)) {
+    component.style.display = 'block'
+    var cw = component.clientWidth
+    component.style.display = 'none'
+    width = cw - el.clientWidth
+  }
+
+  component.style.left = (el.offsetLeft - width) + "px"
+  component.style.top = (el.offsetTop) + "px"
+
+  bus.pub(("dropdown:open:" + (binding.arg)))
 }
 
 function directive (el, binding, v) {
