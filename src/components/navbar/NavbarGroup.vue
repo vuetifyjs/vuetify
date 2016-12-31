@@ -78,6 +78,24 @@
     },
 
     methods: {
+      enter (el, done) {
+        browserTransform(el, 'scale(0)')
+        el.style.display = 'block'
+        el.style.height = `${el.scrollHeight}px`
+        
+        setTimeout(() => {
+          browserTransform(el, 'scale(1)')
+        }, 0)
+
+        addOnceEventListener(el, done, 'transitionend')
+      },
+
+      leave (el, done) {
+        browserTransform(el, 'scale(0)')
+        
+        addOnceEventListener(el, done, 'transitionend')
+      },
+      
       open () {
         this.active = true
       },
