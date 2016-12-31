@@ -45,3 +45,12 @@ export function addOnceEventListener (el, event, cb) {
   
   el.addEventListener(event, once, false)
 }
+
+export function browserTransform (el, value) {
+  [
+    'transform',
+    'webkitTransform'
+  ].forEach(i => {
+    el.style[i] = value
+  })
+}
