@@ -83,10 +83,10 @@ return /******/ (function(modules) { // webpackBootstrap
 "use strict";
 /* harmony export (immutable) */ exports["b"] = createSimpleFunctional;
 /* harmony export (immutable) */ exports["a"] = createSimpleTransition;
-/* harmony export (immutable) */ exports["f"] = directiveConfig;
+/* harmony export (immutable) */ exports["e"] = directiveConfig;
 /* harmony export (immutable) */ exports["c"] = closest;
 /* harmony export (immutable) */ exports["d"] = addOnceEventListener;
-/* harmony export (immutable) */ exports["e"] = browserTransform;
+/* harmony export (immutable) */ exports["f"] = browserTransform;
 function createSimpleFunctional (c, el) {
   if ( el === void 0 ) el = 'div';
 
@@ -109,7 +109,7 @@ function createSimpleTransition (name) {
     functional: true,
     
     render: function render (createElement, context) {
-      var origin = context.data.attrs.origin || 'top center 0'
+      var origin = (context.data.attrs || {}).origin || 'top center 0'
 
       var data = Object.assign({},
         (context.data || {}),
@@ -1933,7 +1933,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_eventable__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__util_helpers__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_transitionable__ = __webpack_require__(154);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__util_helpers__ = __webpack_require__(0);
 //
 //
 //
@@ -1957,6 +1958,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -1964,7 +1966,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /* harmony default export */ exports["default"] = {
   name: 'navbar-group',
 
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_eventable__["a" /* default */]],
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_eventable__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__mixins_transitionable__["a" /* default */]],
 
   data: function data () {
     return {
@@ -2000,7 +2002,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
     },
 
     navbar: function navbar () {
-      var navbar = __WEBPACK_IMPORTED_MODULE_1__util_helpers__["c" /* closest */].call(this, 'navbar')
+      var navbar = __WEBPACK_IMPORTED_MODULE_2__util_helpers__["c" /* closest */].call(this, 'navbar')
 
       return navbar ? navbar._uid : null
     }
@@ -2013,24 +2015,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
   },
 
   methods: {
-    enter: function enter (el, done) {
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["e" /* browserTransform */])(el, 'scale(0)')
-      el.style.display = 'block'
-      el.style.height = (el.scrollHeight) + "px"
-      
-      setTimeout(function () {
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["e" /* browserTransform */])(el, 'scale(1)')
-      }, 0)
-
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["d" /* addOnceEventListener */])(el, done, 'transitionend')
-    },
-
-    leave: function leave (el, done) {
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["e" /* browserTransform */])(el, 'scale(0)')
-      
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["d" /* addOnceEventListener */])(el, done, 'transitionend')
-    },
-
     open: function open () {
       this.active = true
     },
@@ -2099,6 +2083,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+//
+//
 //
 //
 //
@@ -3763,7 +3749,7 @@ var TabsSlider = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers
 
 
 function directive (el, binding) {
-  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* directiveConfig */])(
+  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* directiveConfig */])(
     binding,
     {
       icon: false,
@@ -3865,7 +3851,7 @@ function directive (el, binding, v) {
 
 
 function directive (el, binding, v) {
-  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* directiveConfig */])(binding)
+  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* directiveConfig */])(binding)
   el.dataset.modal = config.value
 
   el.onclick = function (e) {
@@ -3918,12 +3904,12 @@ var ripple = {
 
     animation.classList.add('ripple__animation--enter')
     animation.classList.add('ripple__animation--visible')
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* browserTransform */])(animation, ("translate3d(-50%, -50%, 0) translate3d(" + x + "px, " + y + "px, 0) scale3d(.001, .001, 1)"))
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* browserTransform */])(animation, ("translate3d(-50%, -50%, 0) translate3d(" + x + "px, " + y + "px, 0) scale3d(.001, .001, 1)"))
     animation.dataset.activated = Date.now()
 
     setTimeout(function () {
       animation.classList.remove('ripple__animation--enter')
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* browserTransform */])(animation, ("translate3d(-50%, -50%, 0) translate3d(" + x + "px, " + y + "px, 0)"))
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* browserTransform */])(animation, ("translate3d(-50%, -50%, 0) translate3d(" + x + "px, " + y + "px, 0)"))
     }, 0)
   },
 
@@ -4010,7 +3996,7 @@ function directive (el, binding, v) {
 
 
 function directive (el, binding) {
-  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* directiveConfig */])(
+  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* directiveConfig */])(
     binding,
     { top: true }
   )
@@ -6126,7 +6112,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     return [(item.items) ? _c('v-navbar-group', {
       attrs: {
         "item": item.parent,
-        "items": item.items
+        "items": item.items,
+        "origin": item.parent.origin,
+        "transition": item.parent.transition
       }
     }) : _c('v-navbar-item', {
       attrs: {
@@ -6310,10 +6298,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.item.text)
     }
-  })], 2), _c('transition', {
-    on: {
-      "enter": _vm.enter,
-      "leave": _vm.leave
+  })], 2), _c(_vm.transition, {
+    tag: "component",
+    attrs: {
+      "origin": _vm.origin
     }
   }, [_c('v-navbar-items', {
     directives: [{
