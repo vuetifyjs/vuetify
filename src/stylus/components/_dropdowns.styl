@@ -4,19 +4,20 @@
   background-color: #fff
   position: absolute
   width: auto
-  transform: translateY(-50%) translateX(-50%) scale(0)
+  transform: scale(0)
   opacity: .3
   transition: $primary-transition
+  transform-origin: top left
   white-space: nowrap
   z-index: 2
   @extend .z-depth-1
   
   &--open-from-right
-    transform: translateY(-50%) translateX(50%) scale(0)
+    transform-origin: top right
   
   &--open
     opacity: 1
-    transform: translateY(0) translateX(0) scale(1)
+    transform: scale(1)
   
   li
     text-align: left
