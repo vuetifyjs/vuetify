@@ -81,9 +81,10 @@
     methods: {
       enter (el, done) {
         el.style.display = 'block'
+        let scrollHeight = el.scrollHeight
         el.style.height = 0
         
-        setTimeout(() => el.style.height = `${el.scrollHeight}px`, 0)
+        setTimeout(() => el.style.height = `${scrollHeight}px`, 0)
 
         addOnceEventListener(el, done, 'transitionend')
       },
