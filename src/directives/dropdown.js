@@ -10,19 +10,17 @@ function dropdown (e, el, binding, bus, hover) {
   let width = 0
   let height = 0
 
-  if (component.clientWidth > el.clientWidth
-      && Boolean(component.dataset.right)
-  ) {
-    width = component.clientWidth - el.clientWidth
-  }
-
-  if (component.dataset.bottom == true) {
-    height = el.clientHeight
-  }
-
   component.style.minWidth = `${el.clientWidth}px`
+
+  if (Boolean(component.dataset.right)) {
+    component.style.display = 'block'
+    let cw = component.clientWidth
+    component.style.display = 'none'
+    width = cw - el.clientWidth
+  }
+
   component.style.left = `${el.offsetLeft - width}px`
-  component.style.top = `${el.offsetTop + height}px`
+  component.style.top = `${el.offsetTop}px`
 
   bus.pub(`dropdown:open:${binding.arg}`)
 }

@@ -82,9 +82,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 "use strict";
 /* harmony export (immutable) */ exports["a"] = createSimpleFunctional;
-/* harmony export (immutable) */ exports["d"] = directiveConfig;
+/* harmony export (immutable) */ exports["e"] = directiveConfig;
 /* harmony export (immutable) */ exports["b"] = closest;
 /* harmony export (immutable) */ exports["c"] = addOnceEventListener;
+/* harmony export (immutable) */ exports["d"] = browserTransform;
 function createSimpleFunctional (c, el) {
   if ( el === void 0 ) el = 'div';
 
@@ -138,6 +139,15 @@ function addOnceEventListener (el, event, cb) {
   }
   
   el.addEventListener(event, once, false)
+}
+
+function browserTransform (el, value) {
+  [
+    'transform',
+    'webkitTransform'
+  ].forEach(function (i) {
+    el.style[i] = value
+  })
 }
 
 /***/ },
@@ -1931,8 +1941,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
     events: function events () {
       return [
-        [("navbar-group:close:" + (this.navbar)), this.close],
-        [("navbar-group:open:" + (this.navbar)), this.open]
+        ["body:click", this.close]
       ]
     },
 
@@ -1951,16 +1960,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
   methods: {
     enter: function enter (el, done) {
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["d" /* browserTransform */])(el, 'scale(0)')
       el.style.display = 'block'
-      el.style.height = 0
+      el.style.height = (el.scrollHeight) + "px"
       
-      setTimeout(function () { return el.style.height = (el.scrollHeight) + "px"; }, 0)
+      setTimeout(function () {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["d" /* browserTransform */])(el, 'scale(1)')
+      }, 0)
 
       __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["c" /* addOnceEventListener */])(el, done, 'transitionend')
     },
 
     leave: function leave (el, done) {
-      el.style.height = 0
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["d" /* browserTransform */])(el, 'scale(0)')
       
       __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["c" /* addOnceEventListener */])(el, done, 'transitionend')
     },
@@ -1970,11 +1982,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
     },
 
     toggle: function toggle () {
-      this.active = !this.active
     },
 
-    close: function close (uid) {
-      this.active = uid === this._uid
+    close: function close (e) {
+      if ((!e || !e.target)
+        || e.target === this.$el
+        || this.$el.contains(e.target)
+        && !this.$refs.group.$el.contains(e.target)
+      ) {
+        return
+      }
+
+      this.active = false
     }
   }
 };
@@ -2606,7 +2625,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
     mobileBreakPoint: {
       type: Number,
-      default: 768
+      default: 992
     },
 
     items: {
@@ -2655,7 +2674,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
   methods: {
     resize: function resize () {
       if (this.mobile && !this.drawer) {
-        this.active = window.innerWidth > this.mobileBreakPoint
+        this.active = window.innerWidth >= this.mobileBreakPoint
       }
     },
 
@@ -2769,9 +2788,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
   methods: {
     enter: function enter (el, done) {
       el.style.display = 'block'
+      var scrollHeight = el.scrollHeight
       el.style.height = 0
       
-      setTimeout(function () { return el.style.height = (el.scrollHeight) + "px"; }, 0)
+      setTimeout(function () { return el.style.height = scrollHeight + "px"; }, 0)
 
       __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["c" /* addOnceEventListener */])(el, done, 'transitionend')
     },
@@ -3689,7 +3709,7 @@ var TabsSlider = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers
 
 
 function directive (el, binding) {
-  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* directiveConfig */])(
+  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* directiveConfig */])(
     binding,
     {
       icon: false,
@@ -3733,19 +3753,17 @@ function dropdown (e, el, binding, bus, hover) {
   var width = 0
   var height = 0
 
-  if (component.clientWidth > el.clientWidth
-      && Boolean(component.dataset.right)
-  ) {
-    width = component.clientWidth - el.clientWidth
-  }
-
-  if (component.dataset.bottom == true) {
-    height = el.clientHeight
-  }
-
   component.style.minWidth = (el.clientWidth) + "px"
+
+  if (Boolean(component.dataset.right)) {
+    component.style.display = 'block'
+    var cw = component.clientWidth
+    component.style.display = 'none'
+    width = cw - el.clientWidth
+  }
+
   component.style.left = (el.offsetLeft - width) + "px"
-  component.style.top = (el.offsetTop + height) + "px"
+  component.style.top = (el.offsetTop) + "px"
 
   bus.pub(("dropdown:open:" + (binding.arg)))
 }
@@ -3781,7 +3799,7 @@ function directive (el, binding, v) {
 
 
 function directive (el, binding, v) {
-  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* directiveConfig */])(binding)
+  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* directiveConfig */])(binding)
   el.dataset.modal = config.value
 
   el.onclick = function (e) {
@@ -3807,14 +3825,8 @@ function directive (el, binding, v) {
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-function style (el, value) {
-  [
-    'transform',
-    'webkitTransform'
-  ].forEach(function (i) {
-    el.style[i] = value
-  })
-}
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(0);
+
 
 var ripple = {
   show: function (e, el, binding) {
@@ -3840,12 +3852,12 @@ var ripple = {
 
     animation.classList.add('ripple__animation--enter')
     animation.classList.add('ripple__animation--visible')
-    style(animation, ("translate3d(-50%, -50%, 0) translate3d(" + x + "px, " + y + "px, 0) scale3d(.001, .001, 1)"))
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* browserTransform */])(animation, ("translate3d(-50%, -50%, 0) translate3d(" + x + "px, " + y + "px, 0) scale3d(.001, .001, 1)"))
     animation.dataset.activated = Date.now()
 
     setTimeout(function () {
       animation.classList.remove('ripple__animation--enter')
-      style(animation, ("translate3d(-50%, -50%, 0) translate3d(" + x + "px, " + y + "px, 0)"))
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* browserTransform */])(animation, ("translate3d(-50%, -50%, 0) translate3d(" + x + "px, " + y + "px, 0)"))
     }, 0)
   },
 
@@ -3932,7 +3944,7 @@ function directive (el, binding, v) {
 
 
 function directive (el, binding) {
-  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* directiveConfig */])(
+  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* directiveConfig */])(
     binding,
     { top: true }
   )
@@ -6217,7 +6229,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": function($event) {
         $event.preventDefault();
-        _vm.toggle($event)
+        _vm.open($event)
       }
     }
   }, [(_vm.item.icon) ? [_c('v-icon', [_vm._v(_vm._s(_vm.item.icon))])] : _vm._e(), _c('span', {
