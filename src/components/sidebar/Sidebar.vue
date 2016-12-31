@@ -45,7 +45,7 @@
 
       mobileBreakPoint: {
         type: Number,
-        default: 768
+        default: 992
       },
 
       items: {
@@ -92,7 +92,7 @@
     methods: {
       resize () {
         if (this.mobile && !this.drawer) {
-          this.active = window.innerWidth > this.mobileBreakPoint
+          this.active = window.innerWidth >= this.mobileBreakPoint
         }
       },
 
