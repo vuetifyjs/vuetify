@@ -1,5 +1,5 @@
 <template lang="pug">
-  component(v-bind:is="transition")
+  transition(v-bind:name="transition")
     div(
       class="tabs__item shift"
       v-bind:id="id"
@@ -20,7 +20,9 @@
       }
     },
 
-    mixins: [Eventable],
+    mixins: [
+      Eventable
+    ],
 
     props: {
       id: {
