@@ -37,22 +37,16 @@ export default {
       this.$vuetify.bus.pub(`${this.$options.name}:opened`, this.id)
     },
 
-    close (e, force = false) {
-      if (force) {
-        return this.active = !this.active
-      }
+    close (e, force) {
+      if (force) return this.active = false
 
-      if (this.activator === null) {
+      if ((!e || !e.target)
+          || this.activator === null
+          || this.activator.contains(e.target)
+          || e.target === this.activator 
+      ) {
         return
       }
-      
-      try {
-        if (e.target === this.activator
-            || this.activator.contains(e.target)
-        ) {
-          return
-        }
-      } catch (e) {}
 
       this.active = false
     },
