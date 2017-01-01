@@ -9,9 +9,9 @@
       template(v-if="item.icon")
         v-icon {{ item.icon }}
       span(v-text="item.text")
-    transition(
-      v-on:enter="enter"
-      v-on:leave="leave"
+    component(
+      v-bind:is="transition"
+      v-bind:origin="origin"
     )
       v-navbar-items(
         v-show="active"
@@ -23,12 +23,13 @@
 
 <script>
   import Eventable from '../../mixins/eventable'
+  import Transitionable from '../../mixins/transitionable'
   import { closest, addOnceEventListener, browserTransform } from '../../util/helpers'
 
   export default {
     name: 'navbar-group',
 
-    mixins: [Eventable],
+    mixins: [Eventable, Transitionable],
 
     data () {
       return {
@@ -77,24 +78,6 @@
     },
 
     methods: {
-      enter (el, done) {
-        browserTransform(el, 'scale(0)')
-        el.style.display = 'block'
-        el.style.height = `${el.scrollHeight}px`
-        
-        setTimeout(() => {
-          browserTransform(el, 'scale(1)')
-        }, 0)
-
-        addOnceEventListener(el, done, 'transitionend')
-      },
-
-      leave (el, done) {
-        browserTransform(el, 'scale(0)')
-        
-        addOnceEventListener(el, done, 'transitionend')
-      },
-
       open () {
         this.active = true
       },
