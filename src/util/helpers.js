@@ -10,6 +10,30 @@ export function createSimpleFunctional (c, el = 'div') {
   }
 }
 
+export function createSimpleTransition (name) {
+  return {
+    functional: true,
+    
+    render (createElement, context) {
+      let origin = context.data.attrs.origin || 'top center 0'
+
+      let data = Object.assign({},
+        (context.data || {}),
+        {
+          props: { name },
+          on: {
+            beforeEnter (el) {
+              el.style.transformOrigin = origin
+            }
+          }
+        }
+      )
+
+      return createElement('transition', data, context.children)
+    }
+  }
+}
+
 export function directiveConfig (binding, defaults = {}) {
   return Object.assign(
     defaults,

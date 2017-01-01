@@ -82,6 +82,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 "use strict";
 /* harmony export (immutable) */ exports["a"] = createSimpleFunctional;
+/* unused harmony export createSimpleTransition */
 /* harmony export (immutable) */ exports["e"] = directiveConfig;
 /* harmony export (immutable) */ exports["b"] = closest;
 /* harmony export (immutable) */ exports["c"] = addOnceEventListener;
@@ -99,6 +100,30 @@ function createSimpleFunctional (c, el) {
       data.staticClass = data.staticClass ? (c + " " + (data.staticClass)) : c
 
       return h(el, data, children)
+    }
+  }
+}
+
+function createSimpleTransition (name) {
+  return {
+    functional: true,
+    
+    render: function render (createElement, context) {
+      var origin = context.data.attrs.origin || 'top center 0'
+
+      var data = Object.assign({},
+        (context.data || {}),
+        {
+          props: { name: name },
+          on: {
+            beforeEnter: function beforeEnter (el) {
+              el.style.transformOrigin = origin
+            }
+          }
+        }
+      )
+
+      return createElement('transition', data, context.children)
     }
   }
 }
@@ -406,6 +431,9 @@ var Bus = (function (EventEmitter) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__sidebar_index__ = __webpack_require__(67);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__slider_index__ = __webpack_require__(68);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__tabs_index__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__transitions_index__ = __webpack_require__(157);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__transitions_index___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_21__transitions_index__);
+
 
 
 
@@ -464,7 +492,8 @@ function bootstrap () {
   __WEBPACK_IMPORTED_MODULE_17__progress_index__["a" /* default */],
   __WEBPACK_IMPORTED_MODULE_18__sidebar_index__["a" /* default */],
   __WEBPACK_IMPORTED_MODULE_19__slider_index__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_20__tabs_index__["a" /* default */]
+  __WEBPACK_IMPORTED_MODULE_20__tabs_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_21__transitions_index__["default"]
 );
 
 /***/ },
@@ -1247,6 +1276,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1272,7 +1319,29 @@ Object.defineProperty(exports, "__esModule", { value: true });
       default: function () { return []; }
     },
 
-    right: Boolean
+    left: {
+      type: Boolean,
+      default: true
+    },
+
+    offset: Boolean,
+
+    origin: {
+      type: String,
+      default: 'top left'
+    },
+
+    right: Boolean,
+
+    top: {
+      type: Boolean,
+      default: true
+    },
+
+    transition: {
+      type: String,
+      default: 'v-scale-transition'
+    }
   },
 
   computed: {
@@ -1281,11 +1350,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
         'dropdown--open': this.active,
         'dropdown--open-from-right': this.right
       }
+    },
+
+    customEvents: function customEvents () {
+      return [
+        [((this.$options.name) + ":opened"), this.opened]
+      ]
     }
   },
 
   mounted: function mounted () {
-    this.$vuetify.bus.sub(((this.$options.name) + ":opened"), this.opened)
+    this.$vuetify.bus.sub(this.customEvents)
+  },
+
+  beforeDestroy: function beforeDestroy () {
+    this.$vuetify.bus.unsub(this.customEvents)
   },
 
   methods: {
@@ -3746,24 +3825,36 @@ function dropdown (e, el, binding, bus, hover) {
 
   var component = document.getElementById(binding.arg)
 
-  if (!component.dataset.hover && hover) {
+  if (!component.dataset.hover && hover 
+    || component.style.display !== 'none'
+  ) {
     return
   }
 
   var width = 0
   var height = 0
+  var offset = component.dataset.offset
 
   component.style.minWidth = (el.clientWidth) + "px"
+  component.style.display = 'block'
+  var componentWidth = component.clientWidth
+  var componentHeight = component.clientHeight
+  component.style.display = 'none'
 
-  if (Boolean(component.dataset.right)) {
-    component.style.display = 'block'
-    var cw = component.clientWidth
-    component.style.display = 'none'
-    width = cw - el.clientWidth
+  if (component.dataset.bottom) {
+    height = componentHeight - (offset ? 0 : el.clientHeight)
+  } else {
+    height = offset ? -el.clientHeight : 0
+  }
+
+  if (component.dataset.right) {
+    width = componentWidth - (offset ? 0 : el.clientWidth)
+  } else {
+    width = offset ? -el.clientWidth : 0
   }
 
   component.style.left = (el.offsetLeft - width) + "px"
-  component.style.top = (el.offsetTop) + "px"
+  component.style.top = (el.offsetTop - height) + "px"
 
   bus.pub(("dropdown:open:" + (binding.arg)))
 }
@@ -5467,24 +5558,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 /* 118 */
 /***/ function(module, exports) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('ul', {
-    staticClass: "dropdown",
-    class: _vm.classes,
-    attrs: {
-      "data-bottom": _vm.bottom,
-      "data-hover": _vm.hover,
-      "data-right": _vm.right,
-      "id": _vm.id
-    }
-  }, [_vm._l((_vm.items), function(item) {
-    return _c('v-dropdown-item', {
-      attrs: {
-        "item": item
-      }
-    })
-  }), _vm._t("default")], 2)
-},staticRenderFns: []}
+throw new Error("Module build failed: Error: /home/homeserver/Sites/vuetify.js/vuetify/src/components/dropdowns/Dropdown.vue:33:1\n    31|     )\n    32|     slot\n  > 33| \n--------^\n\nThe end of the string reached with no closing bracket ) found.\n    at makeError (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/pug-error/index.js:32:13)\n    at Lexer.error (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/pug-lexer/index.js:58:15)\n    at Lexer.bracketExpression (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/pug-lexer/index.js:234:14)\n    at Lexer.attrs (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/pug-lexer/index.js:1010:24)\n    at Lexer.callLexerFunction (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/pug-lexer/index.js:1315:23)\n    at Lexer.advance (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/pug-lexer/index.js:1352:15)\n    at Lexer.callLexerFunction (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/pug-lexer/index.js:1315:23)\n    at Lexer.getTokens (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/pug-lexer/index.js:1371:12)\n    at lex (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/pug-lexer/index.js:12:42)\n    at Object.lex (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/pug/lib/index.js:93:27)\n    at Function.loadString [as string] (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/pug-load/index.js:44:24)\n    at compileBody (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/pug/lib/index.js:80:18)\n    at Object.exports.compile (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/pug/lib/index.js:237:16)\n    at /home/homeserver/Sites/vuetify.js/vuetify/node_modules/consolidate/lib/consolidate.js:836:58\n    at /home/homeserver/Sites/vuetify.js/vuetify/node_modules/consolidate/lib/consolidate.js:144:5\n    at Promise._execute (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/bluebird/js/release/debuggability.js:300:9)\n    at Promise._resolveFromExecutor (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/bluebird/js/release/promise.js:481:18)\n    at new Promise (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/bluebird/js/release/promise.js:77:14)\n    at promisify (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/consolidate/lib/consolidate.js:137:10)\n    at Function.exports.pug.render (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/consolidate/lib/consolidate.js:821:10)\n    at Object.module.exports (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/vue-loader/lib/template-loader.js:39:20)");
 
 /***/ },
 /* 119 */
@@ -6381,6 +6455,16 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 module.exports = plugin
+
+/***/ },
+/* 153 */,
+/* 154 */,
+/* 155 */,
+/* 156 */,
+/* 157 */
+/***/ function(module, exports) {
+
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/home/homeserver/Sites/vuetify.js/vuetify/src/components/transitions/_index.js'");
 
 /***/ }
 /******/ ]);

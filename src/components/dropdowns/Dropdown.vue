@@ -1,4 +1,5 @@
 <template lang="pug">
+<<<<<<< 0f540838cd2cd8c005958f5cbbb15dedb0b84743
   ul(
     class="dropdown"
     v-bind:class="classes"
@@ -10,6 +11,23 @@
     v-dropdown-item(
       v-for="item in items"
       v-bind:item="item"
+=======
+  component(
+    v-bind:is="transition" 
+    v-bind:origin="origin"
+  )
+    ul(
+      class="dropdown"
+      v-bind:class="classes"
+      v-bind:data-top="top"
+      v-bind:data-right="right"
+      v-bind:data-bottom="bottom"
+      v-bind:data-left="left"
+      v-bind:data-hover="hover"
+      v-bind:data-offset="offset"
+      v-bind:id="id"
+      v-show="active"
+>>>>>>> updated dropdown api
     )
     slot
 </template>
@@ -39,7 +57,29 @@
         default: () => []
       },
 
-      right: Boolean
+      left: {
+        type: Boolean,
+        default: true
+      },
+
+      offset: Boolean,
+
+      origin: {
+        type: String,
+        default: 'top left'
+      },
+
+      right: Boolean,
+
+      top: {
+        type: Boolean,
+        default: true
+      },
+
+      transition: {
+        type: String,
+        default: 'v-scale-transition'
+      }
     },
 
     computed: {
@@ -48,11 +88,21 @@
           'dropdown--open': this.active,
           'dropdown--open-from-right': this.right
         }
+      },
+
+      customEvents () {
+        return [
+          [`${this.$options.name}:opened`, this.opened]
+        ]
       }
     },
 
     mounted () {
-      this.$vuetify.bus.sub(`${this.$options.name}:opened`, this.opened)
+      this.$vuetify.bus.sub(this.customEvents)
+    },
+
+    beforeDestroy () {
+      this.$vuetify.bus.unsub(this.customEvents)
     },
 
     methods: {
