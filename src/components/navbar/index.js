@@ -1,6 +1,8 @@
 import Navbar from './Navbar.vue'
 import NavbarItem from './NavbarItem.vue'
 import NavbarItems from './NavbarItems.vue'
+import NavbarGroup from './NavbarGroup.vue'
+
 import {
   createSimpleFunctional 
 } from '../../util/helpers'
@@ -21,6 +23,7 @@ const NavbarSideIcon = {
 
 export default {
   Navbar,
+  NavbarGroup,
   NavbarItem,
   NavbarItems,
   NavbarLogo,
