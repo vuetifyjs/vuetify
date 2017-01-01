@@ -5,6 +5,8 @@
         v-if="item.items"
         v-bind:item="item.parent"
         v-bind:items="item.items"
+        v-bind:origin="item.parent.origin"
+        v-bind:transition="item.parent.transition"
       )
       v-navbar-item(
         v-else
