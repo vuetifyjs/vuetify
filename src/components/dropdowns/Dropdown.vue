@@ -1,11 +1,17 @@
 <template lang="pug">
-  v-dropdown-scale
+  component(
+    v-bind:is="transition" 
+    v-bind:origin="origin"
+  )
     ul(
       class="dropdown"
       v-bind:class="classes"
-      v-bind:data-bottom="bottom"
-      v-bind:data-hover="hover"
+      v-bind:data-top="top"
       v-bind:data-right="right"
+      v-bind:data-bottom="bottom"
+      v-bind:data-left="left"
+      v-bind:data-hover="hover"
+      v-bind:data-offset="offset"
       v-bind:id="id"
       v-show="active"
     )
@@ -39,7 +45,29 @@
         default: () => []
       },
 
-      right: Boolean
+      left: {
+        type: Boolean,
+        default: true
+      },
+
+      offset: Boolean,
+
+      origin: {
+        type: String,
+        default: 'top left'
+      },
+
+      right: Boolean,
+
+      top: {
+        type: Boolean,
+        default: true
+      },
+
+      transition: {
+        type: String,
+        default: 'v-scale-transition'
+      }
     },
 
     computed: {
@@ -47,11 +75,21 @@
         return {
           'dropdown--open-from-right': this.right
         }
+      },
+
+      customEvents () {
+        return [
+          [`${this.$options.name}:opened`, this.opened]
+        ]
       }
     },
 
     mounted () {
-      this.$vuetify.bus.sub(`${this.$options.name}:opened`, this.opened)
+      this.$vuetify.bus.sub(this.customEvents)
+    },
+
+    beforeDestroy () {
+      this.$vuetify.bus.unsub(this.customEvents)
     },
 
     methods: {

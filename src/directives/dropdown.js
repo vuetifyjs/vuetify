@@ -3,24 +3,36 @@ function dropdown (e, el, binding, bus, hover) {
 
   const component = document.getElementById(binding.arg)
 
-  if (!component.dataset.hover && hover) {
+  if (!component.dataset.hover && hover 
+    || component.style.display !== 'none'
+  ) {
     return
   }
 
   let width = 0
   let height = 0
+  let offset = component.dataset.offset
 
   component.style.minWidth = `${el.clientWidth}px`
+  component.style.display = 'block'
+  let componentWidth = component.clientWidth
+  let componentHeight = component.clientHeight
+  component.style.display = 'none'
 
-  if (Boolean(component.dataset.right)) {
-    component.style.display = 'block'
-    let cw = component.clientWidth
-    component.style.display = 'none'
-    width = cw - el.clientWidth
+  if (component.dataset.bottom) {
+    height = componentHeight - (offset ? 0 : el.clientHeight)
+  } else {
+    height = offset ? -el.clientHeight : 0
+  }
+
+  if (component.dataset.right) {
+    width = componentWidth - (offset ? 0 : el.clientWidth)
+  } else {
+    width = offset ? -el.clientWidth : 0
   }
 
   component.style.left = `${el.offsetLeft - width}px`
-  component.style.top = `${el.offsetTop}px`
+  component.style.top = `${el.offsetTop - height}px`
 
   bus.pub(`dropdown:open:${binding.arg}`)
 }
