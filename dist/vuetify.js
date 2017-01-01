@@ -1259,6 +1259,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_transitionable__ = __webpack_require__(154);
 //
 //
 //
@@ -1279,29 +1280,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 
 
 /* harmony default export */ exports["default"] = {
   name: 'dropdown',
 
-  mixins: [
-    __WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__["a" /* default */]
-  ],
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__mixins_transitionable__["a" /* default */]],
 
   props: {
     bottom: Boolean,
@@ -1325,21 +1311,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
     offset: Boolean,
 
-    origin: {
-      type: String,
-      default: 'top left'
-    },
-
     right: Boolean,
 
     top: {
       type: Boolean,
       default: true
-    },
-
-    transition: {
-      type: String,
-      default: 'v-scale-transition'
     }
   },
 
@@ -5557,7 +5533,32 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 /* 118 */
 /***/ function(module, exports) {
 
-throw new Error("Module build failed: Error: /home/homeserver/Sites/vuetify.js/vuetify/src/components/dropdowns/Dropdown.vue:33:1\n    31|     )\n    32|     slot\n  > 33| \n--------^\n\nThe end of the string reached with no closing bracket ) found.\n    at makeError (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/pug-error/index.js:32:13)\n    at Lexer.error (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/pug-lexer/index.js:58:15)\n    at Lexer.bracketExpression (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/pug-lexer/index.js:234:14)\n    at Lexer.attrs (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/pug-lexer/index.js:1010:24)\n    at Lexer.callLexerFunction (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/pug-lexer/index.js:1315:23)\n    at Lexer.advance (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/pug-lexer/index.js:1352:15)\n    at Lexer.callLexerFunction (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/pug-lexer/index.js:1315:23)\n    at Lexer.getTokens (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/pug-lexer/index.js:1371:12)\n    at lex (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/pug-lexer/index.js:12:42)\n    at Object.lex (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/pug/lib/index.js:93:27)\n    at Function.loadString [as string] (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/pug-load/index.js:44:24)\n    at compileBody (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/pug/lib/index.js:80:18)\n    at Object.exports.compile (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/pug/lib/index.js:237:16)\n    at /home/homeserver/Sites/vuetify.js/vuetify/node_modules/consolidate/lib/consolidate.js:836:58\n    at /home/homeserver/Sites/vuetify.js/vuetify/node_modules/consolidate/lib/consolidate.js:144:5\n    at Promise._execute (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/bluebird/js/release/debuggability.js:300:9)\n    at Promise._resolveFromExecutor (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/bluebird/js/release/promise.js:481:18)\n    at new Promise (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/bluebird/js/release/promise.js:77:14)\n    at promisify (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/consolidate/lib/consolidate.js:137:10)\n    at Function.exports.pug.render (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/consolidate/lib/consolidate.js:821:10)\n    at Object.module.exports (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/vue-loader/lib/template-loader.js:39:20)");
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c(_vm.transition, {
+    tag: "component",
+    attrs: {
+      "origin": _vm.origin
+    }
+  }, [_c('ul', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.active),
+      expression: "active"
+    }],
+    staticClass: "dropdown",
+    class: _vm.classes,
+    attrs: {
+      "data-top": _vm.top,
+      "data-right": _vm.right,
+      "data-bottom": _vm.bottom,
+      "data-left": _vm.left,
+      "data-hover": _vm.hover,
+      "data-offset": _vm.offset,
+      "id": _vm.id
+    }
+  }), _vm._t("default")], 2)
+},staticRenderFns: []}
 
 /***/ },
 /* 119 */
@@ -6457,7 +6458,25 @@ module.exports = plugin
 
 /***/ },
 /* 153 */,
-/* 154 */,
+/* 154 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ exports["a"] = {
+  props: {
+    origin: {
+      type: String,
+      default: 'top left'
+    },
+    
+    transition: {
+      type: String,
+      default: 'v-scale-transition'
+    }
+  }
+};
+
+/***/ },
 /* 155 */,
 /* 156 */,
 /* 157 */
