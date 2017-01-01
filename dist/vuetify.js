@@ -81,12 +81,12 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ exports["a"] = createSimpleFunctional;
-/* unused harmony export createSimpleTransition */
-/* harmony export (immutable) */ exports["e"] = directiveConfig;
-/* harmony export (immutable) */ exports["b"] = closest;
-/* harmony export (immutable) */ exports["c"] = addOnceEventListener;
-/* harmony export (immutable) */ exports["d"] = browserTransform;
+/* harmony export (immutable) */ exports["b"] = createSimpleFunctional;
+/* harmony export (immutable) */ exports["a"] = createSimpleTransition;
+/* harmony export (immutable) */ exports["f"] = directiveConfig;
+/* harmony export (immutable) */ exports["c"] = closest;
+/* harmony export (immutable) */ exports["d"] = addOnceEventListener;
+/* harmony export (immutable) */ exports["e"] = browserTransform;
 function createSimpleFunctional (c, el) {
   if ( el === void 0 ) el = 'div';
 
@@ -432,7 +432,6 @@ var Bus = (function (EventEmitter) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__slider_index__ = __webpack_require__(68);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__tabs_index__ = __webpack_require__(69);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__transitions_index__ = __webpack_require__(157);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__transitions_index___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_21__transitions_index__);
 
 
 
@@ -493,7 +492,7 @@ function bootstrap () {
   __WEBPACK_IMPORTED_MODULE_18__sidebar_index__["a" /* default */],
   __WEBPACK_IMPORTED_MODULE_19__slider_index__["a" /* default */],
   __WEBPACK_IMPORTED_MODULE_20__tabs_index__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_21__transitions_index__["default"]
+  __WEBPACK_IMPORTED_MODULE_21__transitions_index__["a" /* default */]
 );
 
 /***/ },
@@ -2025,7 +2024,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
     },
 
     navbar: function navbar () {
-      var navbar = __WEBPACK_IMPORTED_MODULE_1__util_helpers__["b" /* closest */].call(this, 'navbar')
+      var navbar = __WEBPACK_IMPORTED_MODULE_1__util_helpers__["c" /* closest */].call(this, 'navbar')
 
       return navbar ? navbar._uid : null
     }
@@ -2039,21 +2038,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
   methods: {
     enter: function enter (el, done) {
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["d" /* browserTransform */])(el, 'scale(0)')
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["e" /* browserTransform */])(el, 'scale(0)')
       el.style.display = 'block'
       el.style.height = (el.scrollHeight) + "px"
       
       setTimeout(function () {
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["d" /* browserTransform */])(el, 'scale(1)')
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["e" /* browserTransform */])(el, 'scale(1)')
       }, 0)
 
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["c" /* addOnceEventListener */])(el, done, 'transitionend')
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["d" /* addOnceEventListener */])(el, done, 'transitionend')
     },
 
     leave: function leave (el, done) {
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["d" /* browserTransform */])(el, 'scale(0)')
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["e" /* browserTransform */])(el, 'scale(0)')
       
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["c" /* addOnceEventListener */])(el, done, 'transitionend')
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["d" /* addOnceEventListener */])(el, done, 'transitionend')
     },
 
     open: function open () {
@@ -2852,7 +2851,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
     },
 
     sidebar: function sidebar () {
-      var sidebar = __WEBPACK_IMPORTED_MODULE_1__util_helpers__["b" /* closest */].call(this, 'sidebar')
+      var sidebar = __WEBPACK_IMPORTED_MODULE_1__util_helpers__["c" /* closest */].call(this, 'sidebar')
 
       return sidebar ? sidebar.id : null
     }
@@ -2872,13 +2871,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
       
       setTimeout(function () { return el.style.height = scrollHeight + "px"; }, 0)
 
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["c" /* addOnceEventListener */])(el, done, 'transitionend')
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["d" /* addOnceEventListener */])(el, done, 'transitionend')
     },
 
     leave: function leave (el, done) {
       el.style.height = 0
       
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["c" /* addOnceEventListener */])(el, done, 'transitionend')
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["d" /* addOnceEventListener */])(el, done, 'transitionend')
     },
 
     open: function open () {
@@ -2941,13 +2940,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
   computed: {
     groupUid: function groupUid () {
-      var group = __WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* closest */].call(this, 'sidebar__group')
+      var group = __WEBPACK_IMPORTED_MODULE_0__util_helpers__["c" /* closest */].call(this, 'sidebar__group')
 
       return group ? group._uid : null
     },
 
     sidebarId: function sidebarId () {
-      var sidebar = __WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* closest */].call(this, 'sidebar')
+      var sidebar = __WEBPACK_IMPORTED_MODULE_0__util_helpers__["c" /* closest */].call(this, 'sidebar')
 
       return sidebar ? sidebar.id : null
     }
@@ -3397,9 +3396,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 
-var CardColumn = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers__["a" /* createSimpleFunctional */])('card__column')
-var CardText = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers__["a" /* createSimpleFunctional */])('card__text')
-var CardTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers__["a" /* createSimpleFunctional */])('card__title')
+var CardColumn = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers__["b" /* createSimpleFunctional */])('card__column')
+var CardText = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers__["b" /* createSimpleFunctional */])('card__text')
+var CardTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers__["b" /* createSimpleFunctional */])('card__title')
 
 /* harmony default export */ exports["a"] = {
   Card: __WEBPACK_IMPORTED_MODULE_0__Card_vue___default.a,
@@ -3541,10 +3540,10 @@ var Container = {
   }
 }
 
-var Content = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('content')
-var Row = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('row')
-var ColSpacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('col--spacer')
-var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('spacer')
+var Content = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('content')
+var Row = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('row')
+var ColSpacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('col--spacer')
+var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('spacer')
 
 /* harmony default export */ exports["a"] = {
   Col: Col,
@@ -3576,14 +3575,14 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(0);
 
 
-var List = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('list', 'ul')
-var ListItem = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('list__item', 'li')
-var ListItemTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('list__item-title', 'span')
-var ListItemSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('list__item-sub-title', 'span')
-var ListItemAction = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('list__item-action', 'span')
-var ListItemActionTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('list__item-action-title', 'span')
-var ListItemIcon = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('list__item-icon', 'v-icon')
-var ListItemAvatar = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('list__item-avatar', 'v-icon')
+var List = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('list', 'ul')
+var ListItem = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('list__item', 'li')
+var ListItemTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('list__item-title', 'span')
+var ListItemSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('list__item-sub-title', 'span')
+var ListItemAction = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('list__item-action', 'span')
+var ListItemActionTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('list__item-action-title', 'span')
+var ListItemIcon = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('list__item-icon', 'v-icon')
+var ListItemAvatar = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('list__item-avatar', 'v-icon')
 
 /* harmony default export */ exports["a"] = {
   List: List,
@@ -3630,7 +3629,7 @@ var ListItemAvatar = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_hel
 
 
 
-var NavbarLogo = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__util_helpers__["a" /* createSimpleFunctional */])('navbar__logo')
+var NavbarLogo = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__util_helpers__["b" /* createSimpleFunctional */])('navbar__logo')
 var NavbarSideIcon = {
   functional: true,
 
@@ -3724,7 +3723,7 @@ var NavbarSideIcon = {
 
 
 
-var SidebarItemHeader = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('sidebar__item-header', 'li')
+var SidebarItemHeader = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('sidebar__item-header', 'li')
 
 /* harmony default export */ exports["a"] = {
   Sidebar: __WEBPACK_IMPORTED_MODULE_1__Sidebar_vue___default.a,
@@ -3765,10 +3764,10 @@ var SidebarItemHeader = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_
 
 
 
-var Tabs = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('tabs')
-var TabsTabs = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('tabs__tabs')
-var TabsItems = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('tabs__items')
-var TabsSlider = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleFunctional */])('tabs__slider')
+var Tabs = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('tabs')
+var TabsTabs = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('tabs__tabs')
+var TabsItems = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('tabs__items')
+var TabsSlider = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('tabs__slider')
 
 /* harmony default export */ exports["a"] = {
   Tab: __WEBPACK_IMPORTED_MODULE_1__Tab_vue___default.a,
@@ -3788,7 +3787,7 @@ var TabsSlider = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers
 
 
 function directive (el, binding) {
-  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* directiveConfig */])(
+  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* directiveConfig */])(
     binding,
     {
       icon: false,
@@ -3890,7 +3889,7 @@ function directive (el, binding, v) {
 
 
 function directive (el, binding, v) {
-  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* directiveConfig */])(binding)
+  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* directiveConfig */])(binding)
   el.dataset.modal = config.value
 
   el.onclick = function (e) {
@@ -3943,12 +3942,12 @@ var ripple = {
 
     animation.classList.add('ripple__animation--enter')
     animation.classList.add('ripple__animation--visible')
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* browserTransform */])(animation, ("translate3d(-50%, -50%, 0) translate3d(" + x + "px, " + y + "px, 0) scale3d(.001, .001, 1)"))
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* browserTransform */])(animation, ("translate3d(-50%, -50%, 0) translate3d(" + x + "px, " + y + "px, 0) scale3d(.001, .001, 1)"))
     animation.dataset.activated = Date.now()
 
     setTimeout(function () {
       animation.classList.remove('ripple__animation--enter')
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* browserTransform */])(animation, ("translate3d(-50%, -50%, 0) translate3d(" + x + "px, " + y + "px, 0)"))
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* browserTransform */])(animation, ("translate3d(-50%, -50%, 0) translate3d(" + x + "px, " + y + "px, 0)"))
     }, 0)
   },
 
@@ -4035,7 +4034,7 @@ function directive (el, binding, v) {
 
 
 function directive (el, binding) {
-  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* directiveConfig */])(
+  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* directiveConfig */])(
     binding,
     { top: true }
   )
@@ -6462,9 +6461,21 @@ module.exports = plugin
 /* 155 */,
 /* 156 */,
 /* 157 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/home/homeserver/Sites/vuetify.js/vuetify/src/components/transitions/_index.js'");
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(0);
+
+
+var SlideXTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('slide-x-transition')
+var SlideYTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('slide-y-transition')
+var ScaleTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('scale-transition')
+
+/* harmony default export */ exports["a"] = {
+  SlideXTransition: SlideXTransition,
+  SlideYTransition: SlideYTransition,
+  ScaleTransition: ScaleTransition
+};
 
 /***/ }
 /******/ ]);
