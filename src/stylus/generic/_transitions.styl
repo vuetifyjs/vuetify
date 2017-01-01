@@ -14,3 +14,27 @@
     position: absolute
     top: 0
     transform: translate3d(100%, 0, 0)
+
+.scale-transition
+  &-enter, &-enter-active, &-leave, &-leave-to
+    transition: $primary-transition
+    
+  &-enter, &-leave, &-leave-to
+    opacity: 0
+    transform: scale(0)
+
+.slide-y-transition
+  &-enter-active, &-leave, &-leave-to
+    transition: $primary-transition
+    
+  &-enter, &-leave-to
+    opacity: 0
+    transform: translateY(-15px)
+
+.slide-x-transition
+  &-enter-active, &-leave, &-leave-to
+    transition: $primary-transition
+    
+  &-enter, &-leave-to
+    opacity: 0
+    transform: translateX(-15px)
