@@ -1,6 +1,7 @@
 <template lang="pug">
   div(
     class="tabs"
+    v-bind:class="classes"
     v-bind:id="id"
   )
     slot
@@ -12,12 +13,27 @@
   export default {
     name: 'tabs',
 
+    props: {
+      centered: Boolean,
+      
+      grow: Boolean
+    },
+
     mounted () {
       this.init()
     },
 
     activated () {
       this.init()
+    },
+
+    computed: {
+      classes () {
+        return {
+          'tabs--grow': this.grow,
+          'tabs--centered': this.centered
+        }
+      }
     },
 
     methods: {

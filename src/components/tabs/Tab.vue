@@ -4,6 +4,7 @@
     v-bind:class="classes"
     v-bind:href="href"
     v-on:click.prevent="click"
+    v-ripple="ripple"
   )
     slot
 </template>
@@ -26,6 +27,11 @@
       href: {
         type: String,
         required: true
+      },
+
+      ripple: {
+        type: [Boolean, Object],
+        default: false
       },
 
       selected: Boolean

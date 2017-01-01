@@ -1,62 +1,54 @@
 .tabs
   margin-bottom: $spacers.five.y
-  background: $blue.accent-1
+  overflow: hidden
+    
+  &--grow
+    .tabs__tab
+      flex-grow: 1
+      
+  &--centered
+    .tabs__tabs
+      justify-content: center
   
   > .card
     background: inherit
     box-shadow: none
   
-  &__slider
-    position: absolute
-    top: calc(100% - 4px)
-    height: 4px
-    with: 100%
-  
   &__tab
-    color: #fff
-    flex: 1
+    color: $grey.lighten-2
     text-decoration: none
-    display: block
     padding: 1rem
-    position: relative
     text-align: center
     text-transform: uppercase
     transition: $primary-transition
+    display: flex
+    flex-shrink: 0
+    position: relative
     
-    &:after
-      content: ''
-      position: absolute
-      bottom: 0
-      left: 0
-      width: 0
-      height: 3px
-      transition: $primary-transition
-      background: $theme.primary
-      
     &--active
-      &:after
-        width: 100%
+      color: #fff
       
+      &:after
+        content: ''
+        position: absolute
+        bottom: 0
+        left: 0
+        width: 100%
+        height: 5px
+        background: $theme.accent
         
   &__tabs
     display: flex
-    position: relative
-    align-items: center
-    flex-wrap: nowrap
-    white-space: nowrap
     overflow-x: auto
-    
-    @media screen and (max-width: $grid-breakpoints.sm)
-      flex-wrap: wrap
+    overflow-y: hidden
+    background: $theme.primary
     
   &__items
-    width: 100%
-    height: 100%
-    position: relative
     overflow: hidden
+    position: relative
     
   &__item
     transition: .2s ease-out
-    padding: 1rem
-    height: 100%
-    width: 100%
+  
+    > .card
+      box-shadow: none
