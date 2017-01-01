@@ -19,7 +19,7 @@ import Progress from './progress/index'
 import Sidebar from './sidebar/index'
 import Slider from './slider/index'
 import Tabs from './tabs/index'
-import DropdownScale from './transitions/dropdown-scale'
+import Transitions from './transitions/_index'
 
 function bootstrap (...components) {
   let entries = {}
@@ -41,7 +41,6 @@ export default bootstrap(
   Cards,
   Chips,
   Collapsible,
-  DropdownScale,
   Dropdowns,
   Footer,
   Forms,
@@ -55,5 +54,6 @@ export default bootstrap(
   Progress,
   Sidebar,
   Slider,
-  Tabs
+  Tabs,
+  Transitions
 )
