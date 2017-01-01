@@ -1950,7 +1950,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
       
       __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers__["addOnceEventListener"])(el, done, 'transitionend')
     },
-    
+  
     open: function open () {
       this.active = true
     },

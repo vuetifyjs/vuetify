@@ -95,7 +95,7 @@
         
         addOnceEventListener(el, done, 'transitionend')
       },
-      
+    
       open () {
         this.active = true
       },
