@@ -48,27 +48,21 @@
 
       offset: Boolean,
 
-<<<<<<< 01b361a25a45e0c3c0eb64a1ba589710d1a7b66a
-=======
       origin: {
         type: String,
         default: 'top left'
       },
 
->>>>>>> updated dropdown api
       right: Boolean,
 
       top: {
         type: Boolean,
         default: true
-<<<<<<< 01b361a25a45e0c3c0eb64a1ba589710d1a7b66a
-=======
       },
 
       transition: {
         type: String,
         default: 'v-scale-transition'
->>>>>>> updated dropdown api
       }
     },
 

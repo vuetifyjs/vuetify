@@ -1163,9 +1163,109 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 /***/ },
 /* 23 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed: \n47 :       },\n48 : \n49 :       offset: Boolean,\n50 : \n51 : <<<<<<< 01b361a25a45e0c3c0eb64a1ba589710d1a7b66a\n     ^\nUnexpected token (51:0)");
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_transitionable__ = __webpack_require__(154);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ exports["default"] = {
+  name: 'dropdown',
+
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__mixins_transitionable__["a" /* default */]],
+
+  props: {
+    bottom: Boolean,
+
+    id: {
+      type: String,
+      required: true
+    },
+
+    hover: Boolean,
+
+    items: {
+      type: Array,
+      default: function () { return []; }
+    },
+
+    left: {
+      type: Boolean,
+      default: true
+    },
+
+    offset: Boolean,
+
+    origin: {
+      type: String,
+      default: 'top left'
+    },
+
+    right: Boolean,
+
+    top: {
+      type: Boolean,
+      default: true
+    },
+
+    transition: {
+      type: String,
+      default: 'v-scale-transition'
+    }
+  },
+
+  computed: {
+    classes: function classes () {
+      return {
+        'dropdown--open-from-right': this.right
+      }
+    },
+
+    customEvents: function customEvents () {
+      return [
+        [((this.$options.name) + ":opened"), this.opened]
+      ]
+    }
+  },
+
+  mounted: function mounted () {
+    this.$vuetify.bus.sub(this.customEvents)
+  },
+
+  beforeDestroy: function beforeDestroy () {
+    this.$vuetify.bus.unsub(this.customEvents)
+  },
+
+  methods: {
+    opened: function opened (id) {
+      this.active = id === this.id
+    }
+  }
+};
+
 
 /***/ },
 /* 24 */
