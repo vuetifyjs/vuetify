@@ -80,6 +80,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 0 */
 /***/ function(module, exports) {
 
+"use strict";
 throw new Error("Module parse failed: /home/homeserver/Sites/vuetify.js/vuetify/node_modules/buble-loader/index.js?{\"objectAssign\":\"Object.assign\"}!/home/homeserver/Sites/vuetify.js/vuetify/src/util/helpers.js Duplicate export 'browserTransform' (88:16)\nYou may need an appropriate loader to handle this file type.\n|   })\r\n| }\r\n| export function browserTransform (el, value) {\r\n|   [\r\n|     'transform',\r");
 
 /***/ },
@@ -387,7 +388,6 @@ function bootstrap () {
   __WEBPACK_IMPORTED_MODULE_4__cards_index__["a" /* default */],
   __WEBPACK_IMPORTED_MODULE_5__chips_index__["a" /* default */],
   __WEBPACK_IMPORTED_MODULE_6__collapsible_index__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_22__transitions_dropdown_scale__["a" /* default */],
   __WEBPACK_IMPORTED_MODULE_7__dropdowns_index__["a" /* default */],
   __WEBPACK_IMPORTED_MODULE_8__footer_index__["a" /* default */],
   __WEBPACK_IMPORTED_MODULE_9__forms_index__["a" /* default */],
@@ -1164,97 +1164,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 /***/ },
 /* 23 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_transitionable__ = __webpack_require__(154);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-/* harmony default export */ exports["default"] = {
-  name: 'dropdown',
-
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__mixins_transitionable__["a" /* default */]],
-
-  props: {
-    bottom: Boolean,
-
-    id: {
-      type: String,
-      required: true
-    },
-
-    hover: Boolean,
-
-    items: {
-      type: Array,
-      default: function () { return []; }
-    },
-
-    left: {
-      type: Boolean,
-      default: true
-    },
-
-    offset: Boolean,
-
-    right: Boolean,
-
-    top: {
-      type: Boolean,
-      default: true
-    }
-  },
-
-  computed: {
-    classes: function classes () {
-      return {
-        'dropdown--open-from-right': this.right
-      }
-    },
-
-    customEvents: function customEvents () {
-      return [
-        [((this.$options.name) + ":opened"), this.opened]
-      ]
-    }
-  },
-
-  mounted: function mounted () {
-    this.$vuetify.bus.sub(this.customEvents)
-  },
-
-  beforeDestroy: function beforeDestroy () {
-    this.$vuetify.bus.unsub(this.customEvents)
-  },
-
-  methods: {
-    opened: function opened (id) {
-      this.active = id === this.id
-    }
-  }
-};
-
+throw new Error("Module build failed: \n47 :       },\n48 : \n49 :       offset: Boolean,\n50 : \n51 : <<<<<<< 01b361a25a45e0c3c0eb64a1ba589710d1a7b66a\n     ^\nUnexpected token (51:0)");
 
 /***/ },
 /* 24 */
@@ -3751,16 +3663,6 @@ function dropdown (e, el, binding, bus, hover) {
   component.style.left = (el.offsetLeft - width) + "px"
   component.style.top = (el.offsetTop - height) + "px"
 
-  if (Boolean(component.dataset.right)) {
-    component.style.display = 'block'
-    var cw = component.clientWidth
-    component.style.display = 'none'
-    width = cw - el.clientWidth
-  }
-
-  component.style.left = (el.offsetLeft - width) + "px"
-  component.style.top = (el.offsetTop) + "px"
-
   bus.pub(("dropdown:open:" + (binding.arg)))
 }
 
@@ -5473,6 +5375,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "origin": _vm.origin
     }
   }, [_c('ul', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.active),
+      expression: "active"
+    }],
     staticClass: "dropdown",
     class: _vm.classes,
     attrs: {
@@ -5481,7 +5389,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "data-bottom": _vm.bottom,
       "data-left": _vm.left,
       "data-hover": _vm.hover,
-      "data-offset": _vm.offset
+      "data-offset": _vm.offset,
+      "id": _vm.id
     }
   })])
 },staticRenderFns: []}
@@ -6447,7 +6356,7 @@ var DropdownScale = {
   }
 }
 
-/* harmony default export */ exports["a"] = {
+/* unused harmony default export */ var _unused_webpack_default_export = {
   DropdownScale: DropdownScale
 };
 

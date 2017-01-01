@@ -42,7 +42,6 @@ export default bootstrap(
   Cards,
   Chips,
   Collapsible,
-  DropdownScale,
   Dropdowns,
   Footer,
   Forms,
