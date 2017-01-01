@@ -24,11 +24,12 @@
 
 <script>
   import Toggleable from '../../mixins/toggleable'
+  import Transitionable from '../../mixins/transitionable'
 
   export default {
     name: 'dropdown',
 
-    mixins: [Toggleable],
+    mixins: [Toggleable, Transitionable],
 
     props: {
       bottom: Boolean,
@@ -52,21 +53,11 @@
 
       offset: Boolean,
 
-      origin: {
-        type: String,
-        default: 'top left'
-      },
-
       right: Boolean,
 
       top: {
         type: Boolean,
         default: true
-      },
-
-      transition: {
-        type: String,
-        default: 'v-scale-transition'
       }
     },
 
