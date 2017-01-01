@@ -80,7 +80,6 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 0 */
 /***/ function(module, exports) {
 
-"use strict";
 throw new Error("Module parse failed: /home/homeserver/Sites/vuetify.js/vuetify/node_modules/buble-loader/index.js?{\"objectAssign\":\"Object.assign\"}!/home/homeserver/Sites/vuetify.js/vuetify/src/util/helpers.js Duplicate export 'browserTransform' (88:16)\nYou may need an appropriate loader to handle this file type.\n|   })\r\n| }\r\n| export function browserTransform (el, value) {\r\n|   [\r\n|     'transform',\r");
 
 /***/ },
@@ -6340,25 +6339,10 @@ var ScaleTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_he
 /* 160 */,
 /* 161 */,
 /* 162 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 "use strict";
-var DropdownScale = {
-  functional: true,
-  render: function render (createElement, context) {
-    var data = {
-      props: {
-        name: 'dropdown-scale'
-      }
-    }
-
-    return createElement('transition', data, context.children)
-  }
-}
-
-/* unused harmony default export */ var _unused_webpack_default_export = {
-  DropdownScale: DropdownScale
-};
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/home/homeserver/Sites/vuetify.js/vuetify/src/components/transitions/dropdown-scale.js'");
 
 /***/ }
 /******/ ]);
