@@ -20,8 +20,8 @@
     )
       option(
         value=''
-        disabled
         selected
+        v-bind:disabled="defaultDisabled"
         v-text="defaultText"
       )
       option(
@@ -43,6 +43,11 @@
     },
 
     props: {
+      defaultDisabled: {
+        type: Boolean,
+        default: true
+      },
+      
       defaultText: {
         type: String,
         default: 'Select...'
