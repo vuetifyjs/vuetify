@@ -77,15 +77,4 @@ export function browserTransform (el, value) {
   ].forEach(i => {
     el.style[i] = value
   })
-<<<<<<< HEAD
-}
-export function browserTransform (el, value) {
-  [
-    'transform',
-    'webkitTransform'
-  ].forEach(i => {
-    el.style[i] = value
-  })
-=======
->>>>>>> e4bef95939049bcb669dd88de9074a8268ecb28b
 }

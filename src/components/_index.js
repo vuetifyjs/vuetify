@@ -20,10 +20,6 @@ import Sidebar from './sidebar/index'
 import Slider from './slider/index'
 import Tabs from './tabs/index'
 import Transitions from './transitions/_index'
-<<<<<<< HEAD
-import DropdownScale from './transitions/dropdown-scale'
-=======
->>>>>>> e4bef95939049bcb669dd88de9074a8268ecb28b
 
 function bootstrap (...components) {
   let entries = {}

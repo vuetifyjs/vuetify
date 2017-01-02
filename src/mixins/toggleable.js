@@ -36,7 +36,6 @@ export default {
       this.$vuetify.bus.pub(`${this.$options.name}:opened`, this.id)
     },
 
-<<<<<<< HEAD
     close (e) {
       if (arguments.length === 0 || this.activators.length === 0) {
         return this.active = false
@@ -51,15 +50,6 @@ export default {
       if ((!e || !e.target)
         || Array.apply(null, this.activators).some(i => i.contains(e.target))
         || closeConditional
-=======
-    close (e, force) {
-      if (force) return this.active = false
-
-      if ((!e || !e.target)
-          || this.activator === null
-          || this.activator.contains(e.target)
-          || e.target === this.activator 
->>>>>>> e4bef95939049bcb669dd88de9074a8268ecb28b
       ) {
         return
       }
