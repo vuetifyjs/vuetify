@@ -1,10 +1,13 @@
+import { directiveConfig } from '../util/helpers'
+
 function directive (el, binding, v) {
-  el.dataset.modal = binding.arg
+  const config = directiveConfig(binding)
+  el.dataset.modal = config.value
 
   el.onclick = e => {
     e.preventDefault()
     
-    v.context.$vuetify.bus.pub(`modal:open:${binding.arg}`)
+    v.context.$vuetify.bus.pub(`modal:open:${config.value}`)
   }
 }
 
