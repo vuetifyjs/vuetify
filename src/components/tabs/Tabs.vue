@@ -13,18 +13,19 @@
   export default {
     name: 'tabs',
 
+    mixins: [Eventable],
+
+    data () {
+      return {
+        index: null,
+        reversing: false
+      }
+    },
+
     props: {
       centered: Boolean,
       
       grow: Boolean
-    },
-
-    mounted () {
-      this.init()
-    },
-
-    activated () {
-      this.init()
     },
 
     computed: {
@@ -33,23 +34,39 @@
           'tabs--grow': this.grow,
           'tabs--centered': this.centered
         }
+      },
+
+      events () {
+        return [
+          ['tab:click', this.tabClick]
+        ]
+      },
+
+      items () {
+        return this.$children.filter(i => i.$options._componentTag === 'v-tabs-item')
       }
+    },
+
+    watch: {
+      index (i) {
+        this.$vuetify.bus.pub('tab:open', this.items[i].id, this.reversing)
+      }
+    },
+
+    mounted () {
+      this.$vuetify.load(this.init)
     },
 
     methods: {
       init () {
-        if (window.location.hash === '') {
-          return
-        }
-
-        let active = window.location.hash.substr(1)
-        
-        this.$children.forEach(i => {
-          if (active === i.$el.id) {
-            this.$vuetify.bus.pub('tab:open', i.$el.id)
-          }
-        })
-      }
+        this.index = 0
+      },
+      
+      tabClick (target) {
+        let nextIndex = this.items.findIndex(i => i.$el.id === target)
+        this.reversing = nextIndex > this.index ? false : true
+        this.index = nextIndex
+      },
     }
   }
 </script>

@@ -7,6 +7,7 @@
       class="tabs__container"
       ref="container"
     )
+      v-tab(v-for="item in items" v-bind:item="item")
       slot
       v-tabs-slider(ref="slider")
     v-icon(
@@ -25,13 +26,22 @@
   import Eventable from '../../mixins/eventable'
 
   export default {
+    name: 'tabs-tabs',
+
+    mixins: [Eventable],
+
     data () {
       return {
         mobile: false
       }
     },
 
-    mixins: [Eventable],
+    props: {
+      items: {
+        type: Array,
+        default: () => []
+      }
+    },
 
     computed: {
       classes () {
@@ -60,12 +70,9 @@
     },
 
     methods: {
-      containerIsOverflowed () {
-        return this.$refs.container.scrollWidth > this.$refs.container.clientWidth; 
-      },
-
       resize () {
-        this.mobile = this.containerIsOverflowed()
+        this.mobile = this.$refs.container.scrollWidth > this.$refs.container.clientWidth
+        this.$vuetify.bus.pub('tab:resize')
       },
 
       scrollLeft () {

@@ -1,7 +1,7 @@
 <template lang="pug">
-  component(v-bind:is="transition")
+  component(v-bind:is="computedTransition")
     div(
-      class="tabs__item shift"
+      class="tabs__item"
       v-bind:id="id"
       v-show="active"
     )
@@ -13,16 +13,15 @@
 
   export default {
     name: 'tabs-item',
+
+    mixins: [Eventable],
     
     data () {
       return {
-        active: false
+        active: false,
+        reversing: false
       }
     },
-
-    mixins: [
-      Eventable
-    ],
 
     props: {
       id: {
@@ -32,11 +31,20 @@
 
       transition: {
         type: String,
-        default: 'shift'
+        default: 'v-tab-transition'
+      },
+
+      reverseTransition: {
+        type: String,
+        default: 'v-tab-reverse-transition'
       }
     },
 
     computed: {
+      computedTransition () {
+        return this.reversing ? this.reverseTransition : this.transition
+      },
+
       events () {
         return [
           ['tab:open', this.open]
@@ -45,7 +53,8 @@
     },
 
     methods: {
-      open (target) {
+      open (target, reversing = false) {
+        this.reversing = reversing
         this.active = this.id === target
       }
     }
