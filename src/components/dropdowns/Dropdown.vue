@@ -15,6 +15,14 @@
       v-bind:id="id"
       v-show="active"
     )
+<<<<<<< HEAD
+=======
+      v-dropdown-item(
+        v-for="item in items"
+        v-bind:item="item"
+      )
+      slot
+>>>>>>> e4bef95939049bcb669dd88de9074a8268ecb28b
 </template>
 
 <script>
@@ -48,21 +56,27 @@
 
       offset: Boolean,
 
+<<<<<<< HEAD
       origin: {
         type: String,
         default: 'top left'
       },
 
+=======
+>>>>>>> e4bef95939049bcb669dd88de9074a8268ecb28b
       right: Boolean,
 
       top: {
         type: Boolean,
         default: true
+<<<<<<< HEAD
       },
 
       transition: {
         type: String,
         default: 'v-scale-transition'
+=======
+>>>>>>> e4bef95939049bcb669dd88de9074a8268ecb28b
       }
     },
 

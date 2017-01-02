@@ -78,6 +78,7 @@
     },
 
     methods: {
+<<<<<<< HEAD
       enter (el, done) {
         browserTransform(el, 'scale(0)')
         el.style.display = 'block'
@@ -96,6 +97,8 @@
         addOnceEventListener(el, done, 'transitionend')
       },
     
+=======
+>>>>>>> e4bef95939049bcb669dd88de9074a8268ecb28b
       open () {
         this.active = true
       },
