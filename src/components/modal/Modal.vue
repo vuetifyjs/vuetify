@@ -40,28 +40,8 @@
     },
 
     methods: {
-      close (e) {
-        if (!e) {
-          return this.active = false
-        }
-
-        if (e.target === this.$refs.modal || this.$refs.modal.contains(e.target)) {
-          return
-        }
-
-        if (this.activator === null) {
-          return
-        }
-        
-        try {
-          if (e.target === this.activator
-              || this.activator.contains(e.target)
-          ) {
-            return
-          }
-        } catch (e) {}
-
-        this.active = false
+      closeConditional (e) {
+        return this.$refs.modal === e.target || this.$refs.modal.contains(e.target)
       }
     }
   }

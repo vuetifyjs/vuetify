@@ -4,13 +4,11 @@ export default {
   data () {
     return {
       active: false,
-      activator: {}
+      activator: []
     }
   },
 
-  mixins: [
-    Eventable
-  ],
+  mixins: [Eventable],
 
   mounted () {
     this.$vuetify.load(this.init)
@@ -29,7 +27,8 @@ export default {
 
   methods: {
     init () {
-      this.activator = document.querySelector(`[data-${this.$options.name}="${this.id}"]`)
+      let activators = document.querySelectorAll(`[data-${this.$options.name}="${this.id}"]`)
+      this.activators = Array.apply(null, activators)
     },
 
     open () {
@@ -37,22 +36,23 @@ export default {
       this.$vuetify.bus.pub(`${this.$options.name}:opened`, this.id)
     },
 
-    close (e, force = false) {
-      if (force) {
-        return this.active = !this.active
+    close (e) {
+      if (arguments.length === 0 || this.activators.length === 0) {
+        return this.active = false
       }
 
-      if (this.activator === null) {
+      let closeConditional = false
+
+      if (this.closeConditional) {
+        closeConditional = this.closeConditional(e)
+      }
+
+      if ((!e || !e.target)
+        || Array.apply(null, this.activators).some(i => i.contains(e.target))
+        || closeConditional
+      ) {
         return
       }
-      
-      try {
-        if (e.target === this.activator
-            || this.activator.contains(e.target)
-        ) {
-          return
-        }
-      } catch (e) {}
 
       this.active = false
     },

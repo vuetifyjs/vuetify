@@ -105,20 +105,11 @@
         }
       },
 
-      close (e) {
-        if ((!e || !e.target)
-          || this.activator === null
-          || e.target === this.activator 
-          || e.target === this.$el
-          || this.$el.contains(e.target)
-          || this.activator.contains(e.target)
-          || (window.innerWidth >= this.mobileBreakPoint && !this.drawer)
+      closeConditional () {
+        return (
+          (window.innerWidth >= this.mobileBreakPoint && !this.drawer)
           || !this.closeOnClick
-        ) {
-          return
-        }
-
-        this.active = false
+        )
       }
     }
   }
