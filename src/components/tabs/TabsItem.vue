@@ -1,5 +1,5 @@
 <template lang="pug">
-  transition(v-bind:name="transition")
+  component(v-bind:is="transition")
     div(
       class="tabs__item shift"
       v-bind:id="id"
