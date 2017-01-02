@@ -3,7 +3,8 @@ function dropdown (e, el, binding, bus, hover) {
 
   const component = document.getElementById(binding.arg)
 
-  if (!component.dataset.hover && hover 
+  if (!component
+    ||!component.dataset.hover && hover 
     || component.style.display !== 'none'
   ) {
     return
