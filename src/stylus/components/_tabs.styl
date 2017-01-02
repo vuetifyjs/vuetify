@@ -1,6 +1,14 @@
 .tabs
   margin-bottom: $spacers.five.y
   overflow: hidden
+  position: relative
+  
+  > .card
+    background: inherit
+    box-shadow: none
+    
+  ul
+    padding: 0
     
   &--grow
     .tabs__tab
@@ -9,39 +17,74 @@
   &--centered
     .tabs__tabs
       justify-content: center
-  
-  > .card
-    background: inherit
-    box-shadow: none
+    
+  &__tabs
+    background: $theme.primary
+    width: 100%
+    position: relative
+    height: 60px
+    
+    .icon--left, .icon--right
+      position: absolute
+      top: 0
+      width: 35px
+      display: none
+      color: #fff
+      align-items: center
+      height: 100%
+      cursor: pointer
+      
+    .icon--left
+      left: 0
+      
+    .icon--right
+      right: 0
+      
+    &--mobile
+      padding: 0 35px
+      
+      .icon--left, .icon--right
+        display: flex
+    
+  &__container
+    background: $theme.primary
+    overflow-x: auto
+    overflow-y: hidden
+    display: flex
+    height: 100%
+    width: calc(100% - 70px)
+    position: absolute
+    padding: 1rem
+    top: 0
+    align-items: center
+    
+    &-left
+      position: absolute
+      left: 0
+      top: 0
+      height: 100%
+      width: 35px
+      display: flex
+      align-items: center
   
   &__tab
     color: $grey.lighten-2
-    text-decoration: none
-    padding: 1rem
-    text-align: center
-    text-transform: uppercase
-    transition: $primary-transition
     display: flex
     flex-shrink: 0
+    align-items: center
+    justify-content: center
+    min-width: 125px
+    height: 100%
+    padding: 1rem
+    min-width: 0
     position: relative
+    text-decoration: none
+    text-transform: uppercase
+    text-overflow: ellipsis
+    overflow: hidden
     
     &--active
       color: #fff
-      
-      &:after
-        content: ''
-        position: absolute
-        bottom: 0
-        left: 0
-        width: 100%
-        height: 5px
-        background: $theme.accent
-        
-  &__tabs
-    display: flex
-    overflow-x: auto
-    overflow-y: hidden
-    background: $theme.primary
     
   &__items
     overflow: hidden

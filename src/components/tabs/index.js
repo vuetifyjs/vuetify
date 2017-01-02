@@ -5,8 +5,8 @@ import {
 import Tab from './Tab.vue'
 import Tabs from './Tabs.vue'
 import TabsItem from './TabsItem.vue'
+import TabsTabs from './TabsTabs.vue'
 const TabsItems = createSimpleFunctional('tabs__items')
-const TabsTabs = createSimpleFunctional('tabs__tabs')
 const TabsSlider = createSimpleFunctional('tabs__slider')
 
 export default {
