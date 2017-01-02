@@ -33,6 +33,7 @@
       align-items: center
       height: 100%
       cursor: pointer
+      user-select: none
       
     .icon--left
       left: 0
@@ -78,6 +79,7 @@
     padding: 1rem
     min-width: 0
     position: relative
+    text-align: center
     text-decoration: none
     text-transform: uppercase
     text-overflow: ellipsis
@@ -95,3 +97,10 @@
   
     > .card
       box-shadow: none
+      
+  &__slider
+    position: absolute
+    bottom: 0
+    height: 4px
+    background: $theme.accent
+    transition: $primary-transition

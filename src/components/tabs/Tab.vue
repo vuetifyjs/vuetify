@@ -64,6 +64,11 @@
     methods: {
       activate (target) {
         this.active = target === this.target
+
+        if (this.active) {
+
+          this.$vuetify.bus.pub('tab:location', this.$el.clientWidth, this.$el.offsetLeft)
+        }
       },
 
       click () {

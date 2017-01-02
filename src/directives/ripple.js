@@ -54,7 +54,6 @@ let ripple = {
 }
 
 function directive (el, binding, v) {
-  console.log(binding.value)
   if (binding.value === false) return
 
   if ('ontouchstart' in window) {
