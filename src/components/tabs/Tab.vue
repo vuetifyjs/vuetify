@@ -1,16 +1,33 @@
 <template lang="pug">
+  router-link(
+    class="tabs__tab"
+    active-class="tabs__tab--active"
+    v-bind:class="classes"
+    v-bind:exact="item.href === '/'"
+    v-bind:to="item.href"
+    v-on:click.native="click"
+    v-if="router || item.router"
+  )
+    template(v-if="item.icon")
+      v-icon {{ item.icon }}
+    span(v-text="item.text")
+    slot
   a(
+    v-else
     class="tabs__tab"
     v-bind:class="classes"
-    v-bind:href="href"
+    v-bind:href="item.href"
     v-on:click.prevent="click"
-    v-ripple="ripple"
   )
+    template(v-if="item.icon")
+      v-icon {{ item.icon }}
+    span(v-text="item.text")
     slot
 </template>
 
 <script>
   import Eventable from '../../mixins/eventable'
+  import Itemable from '../../mixins/itemable'
 
   export default {
     name: 'tab',
@@ -21,14 +38,9 @@
       }
     },
 
-    mixins: [Eventable],
+    mixins: [Eventable, Itemable],
 
     props: {
-      href: {
-        type: String,
-        required: true
-      },
-
       ripple: {
         type: [Boolean, Object],
         default: false
@@ -46,12 +58,13 @@
 
       events () {
         return [
-          ['tab:open', this.activate]
+          ['tab:open', this.activate],
+          ['tab:resize', this.resize]
         ]
       },
 
       target () {
-        return this.href.replace('#', '')
+        return this.item.href.replace('#', '')
       }
     },
 
@@ -65,14 +78,23 @@
       activate (target) {
         this.active = target === this.target
 
-        if (this.active) {
+        if (!this.active) return
 
-          this.$vuetify.bus.pub('tab:location', this.$el.clientWidth, this.$el.offsetLeft)
-        }
+        this.$vuetify.load(this.location)
       },
 
       click () {
-        this.$vuetify.bus.pub('tab:open', this.target)
+        this.$vuetify.bus.pub('tab:click', this.target)
+      },
+
+      location () {
+        this.$vuetify.bus.pub('tab:location', this.$el.clientWidth, this.$el.offsetLeft)
+      },
+
+      resize () {
+        if (this.active) {
+          this.location()
+        }
       }
     }
   }
