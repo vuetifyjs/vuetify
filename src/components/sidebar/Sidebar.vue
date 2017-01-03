@@ -105,10 +105,11 @@
         }
       },
 
-      closeConditional () {
+      closeConditional (e) {
         return (
           (window.innerWidth >= this.mobileBreakPoint && !this.drawer)
           || !this.closeOnClick
+          || this.$el.contains(e.target)
         )
       }
     }
