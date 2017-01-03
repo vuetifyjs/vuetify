@@ -7,6 +7,7 @@
     v-bind:to="item.href"
     v-on:click.native="click"
     v-if="router || item.router"
+    v-ripple="ripple"
   )
     template(v-if="item.icon")
       v-icon {{ item.icon }}
@@ -18,6 +19,7 @@
     v-bind:class="classes"
     v-bind:href="item.href"
     v-on:click.prevent="click"
+    v-ripple="ripple"
   )
     template(v-if="item.icon")
       v-icon {{ item.icon }}
