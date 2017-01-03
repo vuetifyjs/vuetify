@@ -2,6 +2,10 @@
   margin-bottom: $spacers.five.y
   overflow: hidden
   position: relative
+  border: 1px solid rgba(0,0,0,0.05)
+  
+  > .card
+    border-radius: 0
   
   .card
     background: inherit
@@ -17,6 +21,21 @@
   &--centered
     .tabs__container
       margin: 0 auto
+      
+  &--icons
+    .tabs__tabs
+      height: 90px
+      
+  &--scroll-bars     
+    .tabs__tabs--mobile
+      padding: 0 35px
+      
+      .icon--left, .icon--right
+        display: flex
+        
+      .tabs__container
+        width: calc(100% - 70px)
+    
     
   &__tabs
     background: $theme.primary
@@ -40,15 +59,6 @@
       
     .icon--right
       right: 0
-      
-    &--mobile
-      padding: 0 35px
-      
-      .icon--left, .icon--right
-        display: flex
-        
-      .tabs__container
-        width: calc(100% - 70px)
     
   &__container
     background: $theme.primary
@@ -75,6 +85,7 @@
     color: $grey.lighten-2
     display: flex
     flex-shrink: 0
+    flex-direction: column
     align-items: center
     justify-content: center
     min-width: 125px
@@ -86,8 +97,15 @@
     text-decoration: none
     text-transform: uppercase
     text-overflow: ellipsis
+    transition: $primary-transition
     overflow: hidden
     
+    .icon
+      flex: 1
+      flex-basis: 100%
+      font-size: 32px
+      margin: 1.5rem 0
+
     &--active
       color: #fff
     

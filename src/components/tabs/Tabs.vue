@@ -25,14 +25,20 @@
     props: {
       centered: Boolean,
       
-      grow: Boolean
+      grow: Boolean,
+
+      icons: Boolean,
+
+      scrollBars: Boolean
     },
 
     computed: {
       classes () {
         return {
+          'tabs--centered': this.centered,
           'tabs--grow': this.grow,
-          'tabs--centered': this.centered
+          'tabs--icons': this.icons,
+          'tabs--scroll-bars': this.scrollBars
         }
       },
 
