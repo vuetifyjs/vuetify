@@ -167,7 +167,7 @@ function addOnceEventListener (el, event, cb) {
   data: function data () {
     return {
       active: false,
-      activator: []
+      activators: []
     }
   },
 
@@ -2668,10 +2668,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
       }
     },
 
-    closeConditional: function closeConditional () {
+    closeConditional: function closeConditional (e) {
       return (
         (window.innerWidth >= this.mobileBreakPoint && !this.drawer)
         || !this.closeOnClick
+        || this.$el.contains(e.target)
       )
     }
   }
@@ -3835,17 +3836,17 @@ var ripple = {
     el.appendChild(container)
 
     var offset = el.getBoundingClientRect()
-    var x = e.x - offset.left
-    var y = e.y - offset.top
+    var x = e.clientX - offset.left
+    var y = e.clientY - offset.top
 
     animation.classList.add('ripple__animation--enter')
     animation.classList.add('ripple__animation--visible')
-    style(animation, ("translate3d(-50%, -50%, 0) translate3d(" + x + "px, " + y + "px, 0) scale3d(.001, .001, 1)"))
+    style(animation, ("translate(-50%, -50%) translate(" + x + "px, " + y + "px) scale(.001)"))
     animation.dataset.activated = Date.now()
 
     setTimeout(function () {
       animation.classList.remove('ripple__animation--enter')
-      style(animation, ("translate3d(-50%, -50%, 0) translate3d(" + x + "px, " + y + "px, 0)"))
+      style(animation, ("translate(-50%, -50%) translate(" + x + "px, " + y + "px)"))
     }, 0)
   },
 
@@ -6047,8 +6048,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "item": item,
         "router": item.router
       }
-    }), _vm._t("default")]
-  })], 2)
+    })]
+  }), _vm._t("default")], 2)
 },staticRenderFns: []}
 
 /***/ },
