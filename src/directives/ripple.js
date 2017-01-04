@@ -26,17 +26,17 @@ let ripple = {
     el.appendChild(container)
 
     const offset = el.getBoundingClientRect()
-    const x = e.x - offset.left
-    const y = e.y - offset.top
+    const x = e.clientX - offset.left
+    const y = e.clientY - offset.top
 
     animation.classList.add('ripple__animation--enter')
     animation.classList.add('ripple__animation--visible')
-    style(animation, `translate3d(-50%, -50%, 0) translate3d(${x}px, ${y}px, 0) scale3d(.001, .001, 1)`)
+    style(animation, `translate(-50%, -50%) translate(${x}px, ${y}px) scale(.001)`)
     animation.dataset.activated = Date.now()
 
     setTimeout(() => {
       animation.classList.remove('ripple__animation--enter')
-      style(animation, `translate3d(-50%, -50%, 0) translate3d(${x}px, ${y}px, 0)`)
+      style(animation, `translate(-50%, -50%) translate(${x}px, ${y}px)`)
     }, 0)
   },
 
