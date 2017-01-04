@@ -37,7 +37,7 @@ export default {
     },
 
     close (e) {
-      if (arguments.length === 0 || this.activators.length === 0) {
+      if (arguments.length === 0 && this.activators.length === 0) {
         return this.active = false
       }
 
