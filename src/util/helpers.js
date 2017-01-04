@@ -43,15 +43,15 @@ export function directiveConfig (binding, defaults = {}) {
   )
 }
 
-export function closest (className) {
+export function closest (tag) {
   let parent = this.$parent
 
   while(parent) {
-    if (!parent.$el) {
+    if (!parent.$options._componentTag) {
       return null
     }
     
-    if (parent.$el.classList.contains(className)) {
+    if (parent.$options._componentTag === tag) {
       return parent
     }
 
