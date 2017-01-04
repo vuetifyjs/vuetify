@@ -5,6 +5,7 @@
       v-if="!router && !item.router"
       v-bind:href="item.href"
       v-on:click="click"
+      v-ripple="ripple || item.ripple"
     )
       template(v-if="item.icon")
         v-icon {{ item.icon }}
@@ -16,6 +17,7 @@
       v-bind:exact="item.href === '/'"
       v-bind:to="item.href"
       v-on:click.native="click"
+      v-ripple="ripple || item.ripple"
       v-else
     )
       template(v-if="item.icon")
@@ -33,9 +35,13 @@
 
     mixins: [Itemable],
 
+    props: {
+      ripple: Boolean
+    },
+
     computed: {
       groupUid () {
-        let group = closestParentTag.call(this, 'sidebar__group')
+        let group = closestParentTag.call(this, 'v-sidebar-group')
 
         return group ? group._uid : null
       },

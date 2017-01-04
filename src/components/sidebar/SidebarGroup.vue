@@ -5,6 +5,7 @@
       v-bind:class="classes"
       v-bind:href="item.href"
       v-on:click.prevent="toggle"
+      v-ripple="ripple || item.ripple"
     )
       template(v-if="item.icon")
         v-icon {{ item.icon }}
@@ -48,7 +49,9 @@
       items: {
         type: Array,
         default: () => []
-      }
+      },
+
+      ripple: Boolean
     },
     
     computed: {
@@ -66,7 +69,7 @@
       },
 
       sidebar () {
-        let sidebar = closestParentTag.call(this, 'sidebar')
+        let sidebar = closestParentTag.call(this, 'v-sidebar')
 
         return sidebar ? sidebar.id : null
       }
