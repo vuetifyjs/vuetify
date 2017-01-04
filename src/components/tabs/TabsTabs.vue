@@ -24,6 +24,7 @@
 
 <script>
   import Eventable from '../../mixins/eventable'
+  import { closest } from '../../util/helpers'
 
   export default {
     name: 'tabs-tabs',
@@ -52,8 +53,14 @@
 
       events () {
         return [
-          ['tab:location', this.slider]
+          [`tab:location:${this.tabsUid}`, this.slider]
         ]
+      },
+
+      tabsUid () {
+        let tabs = closest.call(this, 'tabs')
+
+        return tabs ? tabs._uid : null
       }
     },
 
@@ -72,7 +79,7 @@
     methods: {
       resize () {
         this.mobile = this.$refs.container.scrollWidth > this.$refs.container.clientWidth
-        this.$vuetify.bus.pub('tab:resize')
+        this.$vuetify.bus.pub(`tab:resize:${this.tabsUid}`)
       },
 
       scrollLeft () {

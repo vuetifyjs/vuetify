@@ -44,7 +44,7 @@
 
       events () {
         return [
-          ['tab:click', this.tabClick]
+          [`tab:click:${this._uid}`, this.tabClick]
         ]
       },
 
@@ -55,11 +55,15 @@
 
     watch: {
       index (i) {
-        this.$vuetify.bus.pub('tab:open', this.items[i].id, this.reversing)
+        this.$vuetify.bus.pub(`tab:open:${this._uid}`, this.items[i].id, this.reversing)
       }
     },
 
     mounted () {
+      this.$vuetify.load(this.init)
+    },
+
+    activated () {
       this.$vuetify.load(this.init)
     },
 

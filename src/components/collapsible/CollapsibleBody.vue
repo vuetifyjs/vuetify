@@ -13,6 +13,7 @@
 
 <script>
   import Eventable from '../../mixins/eventable'
+  import { addOnceEventListener } from '../../util/helpers'
 
   export default {
     name: 'collapsible-body',
@@ -36,14 +37,18 @@
     },
 
     methods: {
-      enter (el) {
+      enter (el, done) {
         el.style.display = 'block'
         el.style.height = 0
         el.style.height = `${el.scrollHeight}px`
+
+        addOnceEventListener(el, 'transitionend', done)
       },
 
-      leave (el) {
+      leave (el, done) {
         el.style.height = 0
+
+        addOnceEventListener(el, 'transitionend', done)
       },
 
       toggle (uid) {

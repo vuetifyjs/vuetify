@@ -1,8 +1,6 @@
 .tabs
-  margin-bottom: $spacers.five.y
   overflow: hidden
   position: relative
-  border: 1px solid rgba(0,0,0,0.05)
   
   > .card
     border-radius: 0
@@ -114,7 +112,10 @@
     position: relative
     
   &__item
-    transition: .2s ease-out
+    transition: $primary-transition
+    border-width: 0 1px 1px 1px
+    border-style: solid
+    border-color: rgba(#000, .1)
   
     > .card
       box-shadow: none

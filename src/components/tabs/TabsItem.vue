@@ -10,6 +10,7 @@
 
 <script>
   import Eventable from '../../mixins/eventable'
+  import { closest } from '../../util/helpers'
 
   export default {
     name: 'tabs-item',
@@ -47,8 +48,14 @@
 
       events () {
         return [
-          ['tab:open', this.open]
+          [`tab:open:${this.tabsUid}`, this.open]
         ]
+      },
+
+      tabsUid () {
+        let tabs = closest.call(this, 'tabs')
+
+        return tabs ? tabs._uid : null
       }
     },
 

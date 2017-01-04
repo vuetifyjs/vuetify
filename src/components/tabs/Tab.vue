@@ -30,6 +30,7 @@
 <script>
   import Eventable from '../../mixins/eventable'
   import Itemable from '../../mixins/itemable'
+  import { closest } from '../../util/helpers'
 
   export default {
     name: 'tab',
@@ -60,13 +61,19 @@
 
       events () {
         return [
-          ['tab:open', this.activate],
-          ['tab:resize', this.resize]
+          [`tab:open:${this.tabsUid}`, this.activate],
+          [`tab:resize:${this.tabsUid}`, this.resize]
         ]
       },
 
       target () {
         return this.item.href.replace('#', '')
+      },
+
+      tabsUid () {
+        let tabs = closest.call(this, 'tabs')
+
+        return tabs ? tabs._uid : null
       }
     },
 
@@ -86,11 +93,12 @@
       },
 
       click () {
-        this.$vuetify.bus.pub('tab:click', this.target)
+        this.$vuetify.bus.pub(`tab:click:${this.tabsUid}`, this.target)
+        this.location()
       },
 
       location () {
-        this.$vuetify.bus.pub('tab:location', this.$el.clientWidth, this.$el.offsetLeft)
+        this.$vuetify.bus.pub(`tab:location:${this.tabsUid}`, this.$el.clientWidth, this.$el.offsetLeft)
       },
 
       resize () {
