@@ -25,8 +25,8 @@
 </template>
 
 <script>
-  import { closest } from '../../util/helpers'
   import Itemable from '../../mixins/itemable'
+  import { closestParentTag } from '../../util/helpers'
 
   export default {
     name: 'sidebar-item',
@@ -35,13 +35,13 @@
 
     computed: {
       groupUid () {
-        let group = closest.call(this, 'sidebar__group')
+        let group = closestParentTag.call(this, 'sidebar__group')
 
         return group ? group._uid : null
       },
 
       sidebarId () {
-        let sidebar = closest.call(this, 'sidebar')
+        let sidebar = closestParentTag.call(this, 'v-sidebar')
 
         return sidebar ? sidebar.id : null
       }

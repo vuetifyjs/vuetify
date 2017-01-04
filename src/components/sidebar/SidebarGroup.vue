@@ -23,7 +23,7 @@
 
 <script>
   import Eventable from '../../mixins/eventable'
-  import { closest, addOnceEventListener } from '../../util/helpers'
+  import { closestParentTag, addOnceEventListener } from '../../util/helpers'
 
   export default {
     name: 'sidebar-group',
@@ -66,7 +66,7 @@
       },
 
       sidebar () {
-        let sidebar = closest.call(this, 'sidebar')
+        let sidebar = closestParentTag.call(this, 'sidebar')
 
         return sidebar ? sidebar.id : null
       }

@@ -10,7 +10,7 @@
 
 <script>
   import Eventable from '../../mixins/eventable'
-  import { closest } from '../../util/helpers'
+  import { closestParentTag } from '../../util/helpers'
 
   export default {
     name: 'tabs-item',
@@ -53,7 +53,7 @@
       },
 
       tabsUid () {
-        let tabs = closest.call(this, 'tabs')
+        let tabs = closestParentTag.call(this, 'v-tabs')
 
         return tabs ? tabs._uid : null
       }

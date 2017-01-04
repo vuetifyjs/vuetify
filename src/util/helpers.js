@@ -43,7 +43,7 @@ export function directiveConfig (binding, defaults = {}) {
   )
 }
 
-export function closest (tag) {
+export function closestParentTag (tag) {
   let parent = this.$parent
 
   while(parent) {

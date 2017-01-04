@@ -63,10 +63,6 @@
       this.$vuetify.load(this.init)
     },
 
-    activated () {
-      this.$vuetify.load(this.init)
-    },
-
     methods: {
       init () {
         this.index = 0

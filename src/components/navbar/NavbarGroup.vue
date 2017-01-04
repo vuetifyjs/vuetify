@@ -24,7 +24,7 @@
 <script>
   import Eventable from '../../mixins/eventable'
   import Transitionable from '../../mixins/transitionable'
-  import { closest, addOnceEventListener, browserTransform } from '../../util/helpers'
+  import { closestParentTag, addOnceEventListener, browserTransform } from '../../util/helpers'
 
   export default {
     name: 'navbar-group',
@@ -65,7 +65,7 @@
       },
 
       navbar () {
-        let navbar = closest.call(this, 'navbar')
+        let navbar = closestParentTag.call(this, 'navbar')
 
         return navbar ? navbar._uid : null
       }
