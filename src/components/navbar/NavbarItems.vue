@@ -11,7 +11,7 @@
         v-bind:item="item"
         v-bind:router="item.router"
       )
-      slot
+    slot
 </template>
 
 <script>
