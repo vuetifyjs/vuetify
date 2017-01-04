@@ -1,4 +1,11 @@
-import { browserTransform } from '../util/helpers'
+function style (el, value) {
+  [
+    'transform',
+    'webkitTransform'
+  ].forEach(i => {
+    el.style[i] = value
+  })
+}
 
 let ripple = {
   show: (e, el, binding) => {
