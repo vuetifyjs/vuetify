@@ -48,7 +48,7 @@ export default {
       }
 
       if ((!e || !e.target)
-        || Array.apply(null, this.activators).some(i => i.contains(e.target))
+        || this.activators.some(i => i.contains(e.target))
         || closeConditional
       ) {
         return
