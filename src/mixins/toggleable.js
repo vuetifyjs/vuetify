@@ -4,7 +4,7 @@ export default {
   data () {
     return {
       active: false,
-      activator: []
+      activators: []
     }
   },
 
