@@ -87,7 +87,7 @@
         let scrollHeight = el.scrollHeight
         el.style.height = 0
         
-        setTimeout(() => el.style.height = `${scrollHeight}px`, 0)
+        setTimeout(() => el.style.height = `${scrollHeight}px`, 50)
 
         addOnceEventListener(el, done, 'transitionend')
       },
