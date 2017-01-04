@@ -63,6 +63,7 @@
     font-weight: 300
     padding: $sidebar-item-padding
     height: $sidebar-item-height
+    position: relative
   
     &--active
       background-color: $sidebar-item-active-background-color
@@ -73,7 +74,7 @@
       color: $sidebar-item-active-color
       
     > span
-      margin-left: $spacers.three.x
+      padding: 0 $spacers.three.x
       
     &-header
       background: lighten($theme.secondary, 20%)

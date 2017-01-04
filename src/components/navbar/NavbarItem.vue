@@ -13,7 +13,6 @@
       active-class="navbar__item--active"
       v-bind:exact="item.href === '/'"
       v-bind:to="item.href"
-      v-on:click.native="click"
       v-else
     )
       span(v-if="!item.icon" v-html="item.text")
