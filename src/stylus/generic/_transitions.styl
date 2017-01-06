@@ -1,24 +1,25 @@
 .tab-transition
   &-enter
-    transform: translate3d(100%, 0, 0)
+    transform: translate(100%, 0)
       
   &-leave, &-leave-active
     position: absolute
     top: 0
     
   &-leave-to
-    transform: translate3d(-100%, 0, 0)
+    position: absolute
+    transform: translate(-100%, 0)
 
 .tab-reverse-transition
   &-enter
-    transform: translate3d(-100%, 0, 0)
+    transform: translate(-100%, 0)
         
-  &-leave, &-leave-active
-    position: absolute
+  &-leave, &-leave-to
     top: 0
+    position: absolute
+    transform: translate(100%, 0)
   
-  &-leave-to
-    transform: translate3d(100%, 0, 0)
+  
 
 .scale-transition
   &-enter, &-enter-active, &-leave, &-leave-to
