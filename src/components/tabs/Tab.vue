@@ -44,6 +44,8 @@
     mixins: [Eventable, Itemable],
 
     props: {
+      disabled: Boolean,
+
       ripple: {
         type: [Boolean, Object],
         default: false
@@ -55,7 +57,8 @@
     computed: {
       classes () {
         return {
-          'tabs__tab--active': this.active
+          'tabs__tab--active': this.active,
+          'tabs__tab--disabled': this.disabled
         }
       },
 

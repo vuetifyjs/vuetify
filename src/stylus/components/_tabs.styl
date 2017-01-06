@@ -18,7 +18,7 @@
       
   &--centered
     .tabs__container
-      margin: 0 auto
+      justify-content: center
       
   &--icons
     .tabs__tabs
@@ -106,6 +106,10 @@
 
     &--active
       color: #fff
+      
+    &--disabled
+      opacity: .5
+      pointer-events: none
     
   &__items
     overflow: hidden
@@ -116,6 +120,7 @@
     
   &__item
     transition: $primary-transition
+    width: 100%
   
     > .card
       box-shadow: none
