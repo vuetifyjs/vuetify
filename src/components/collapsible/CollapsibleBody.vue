@@ -38,11 +38,15 @@
 
     methods: {
       enter (el, done) {
+        el.style.height = null
         el.style.display = 'block'
+        let height = `${el.clientHeight}px`
         el.style.height = 0
-        el.style.height = `${el.scrollHeight}px`
-
-        addOnceEventListener(el, 'transitionend', done)
+        
+        setTimeout(() => {
+          el.style.height = height
+          addOnceEventListener(el, 'transitionend', done)
+        }, 50)
       },
 
       leave (el, done) {
