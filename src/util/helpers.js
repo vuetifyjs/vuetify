@@ -16,18 +16,14 @@ export function createSimpleTransition (name) {
     
     render (createElement, context) {
       let origin = (context.data.attrs || {}).origin || 'top center 0'
+      let data = context.data || {}
 
-      let data = Object.assign({},
-        (context.data || {}),
-        {
-          props: { name },
-          on: {
-            beforeEnter (el) {
-              el.style.transformOrigin = origin
-            }
-          }
+      data.props = { name }
+      data.on = {
+        beforeEnter (el) {
+          el.style.transformOrigin = origin
         }
-      )
+      }
 
       return createElement('transition', data, context.children)
     }
@@ -35,7 +31,7 @@ export function createSimpleTransition (name) {
 }
 
 export function directiveConfig (binding, defaults = {}) {
-  return Object.assign(
+  return mergeObject(
     defaults,
     binding.modifiers,
     { value: binding.arg },
@@ -77,4 +73,17 @@ export function browserTransform (el, value) {
   ].forEach(i => {
     el.style[i] = value
   })
+}
+
+export function mergeObject(target) {
+  for (let i = 1, length = arguments.length; i < length; i++) {
+    let source = arguments[i];
+    for (let key in source) {
+      if (source.hasOwnProperty(key)) {
+        target[key] = source[key];
+      }
+    }
+  }
+
+  return target;
 }
