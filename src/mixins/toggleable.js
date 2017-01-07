@@ -41,20 +41,17 @@ export default {
         return this.active = false
       }
 
-      let closeConditional = false
-
-      if (this.closeConditional) {
-        closeConditional = this.closeConditional(e)
-      }
-
       if ((!e || !e.target)
-        || this.activators.some(i => i.contains(e.target))
-        || closeConditional
+        || this.activators.some(i => i.contains(e.target) || i === e.target)
+        || this.closeConditional(e)
       ) {
         return
       }
-
       this.active = false
+    },
+
+    closeConditional () {
+      return false
     },
 
     toggle () {
