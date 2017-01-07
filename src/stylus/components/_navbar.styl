@@ -61,25 +61,28 @@
     
     i
       font-size: 2rem
+      
+      + span
+        margin-left: 5px
     
-    &:hover
-      background: rgba(#fff,0.2)
+    &:hover, &--active
+      background: rgba(#000,0.1)
       
   &__group
     position: relative
     background-color: inherit
+    color: #fff
     
     .navbar__items
       position: absolute
-      top: 0
-      right: 0
+      top: 100%
+      left: 0
       z-index: 99
-      background-color: #fff
-      transform-origin: top right
+      min-width: 100%
+      background-color: $theme.secondary
       flex-direction: column
       overflow: hidden
       transition: .3s cubic-bezier(0,0,.2,1)
-      transform-origin: top right
       flex-direction: column
       @extend .z-depth-1
       
@@ -89,12 +92,12 @@
       .navbar__item
         padding: 1rem
         white-space: nowrap
-        color: $theme.primary
+        color: inherit
         font-weight: 500
         width: 100%
         
         &:hover
-          background-color: rgba(0,0,0,0.1)
+          background-color: rgba(#fff,.2)
         
     &-header
       @extend .navbar__item

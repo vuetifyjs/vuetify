@@ -3,8 +3,13 @@
     class="navbar"
     v-bind:class="classes"
   )
-    v-navbar-items(v-if="items.length > 0" v-bind:items="items")
     slot
+    v-navbar-items(
+      v-if="items.length > 0"
+      v-bind:group-class="groupClass"
+      v-bind:items="items"
+    )
+    slot(name="right")
 </template>
 
 <script>
@@ -13,6 +18,11 @@
 
     props: {
       fixed: Boolean,
+      
+      groupClass: {
+        type: String,
+        default: ''
+      },
 
       items: {
         type: Array,

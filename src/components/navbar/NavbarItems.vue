@@ -3,6 +3,7 @@
     template(v-for="item in items")
       v-navbar-group(
         v-if="item.items"
+        v-bind:group-class="groupClass"
         v-bind:item="item.parent"
         v-bind:items="item.items"
         v-bind:origin="item.parent.origin"
@@ -21,6 +22,11 @@
     name: 'navbar-items',
 
     props: {
+      groupClass: {
+        type: String,
+        default: ''
+      },
+
       items: {
         type: Array,
         default: () => []

@@ -2,8 +2,8 @@
   li(class="navbar__group")
     a(
       class="navbar__group-header"
+      href="javascript:;"
       v-bind:class="classes"
-      v-bind:href="item.href"
       v-on:click.prevent="open"
     )
       template(v-if="item.icon")
@@ -14,7 +14,8 @@
       v-bind:origin="origin"
     )
       v-navbar-items(
-        v-show="active"
+        v-bind:class="groupClass"
+        v-show="opened"
         v-bind:items="items"
         ref="group"
       )
@@ -33,34 +34,47 @@
 
     data () {
       return {
-        active: false
+        active: false,
+        opened: false
       }
     },
 
     props: {
+      groupClass: {
+        type: String,
+        default: ''
+      },
+      
       item: {
         type: Object,
         default () {
-          return { href: '#!', text: '', icon: false }
+          return { text: '', icon: '' }
         }
       },
 
       items: {
         type: Array,
         default: () => []
+      },
+
+      transition: {
+        type: String,
+        default: 'v-slide-y-transition'
       }
     },
     
     computed: {
       classes () {
         return {
-          'navbar__group-header--active': this.active
+          'navbar__group-header--active': this.active || this.opened
         }
       },
 
       events () {
         return [
-          [`body:click`, this.close]
+          [`body:click`, this.close],
+          [`navbar-group:close:${this.navbar}`, this.close],
+          [`navbar-group:open:${this.navbar}`, this.open]
         ]
       },
 
@@ -72,9 +86,9 @@
     },
 
     mounted () {
-      if (this.$refs.group.$el.querySelector('.navbar__item--active')) {
-        this.active = true
-      }
+      // if (this.$refs.group.$el.querySelector('.navbar__item--active')) {
+        // this.active = true
+      // }
     },
 
     methods: {
@@ -97,10 +111,11 @@
       },
     
       open () {
-        this.active = true
+        this.opened = true
       },
 
       toggle () {
+        this.opened = !this.opened
       },
 
       close (e) {
@@ -112,7 +127,7 @@
           return
         }
 
-        this.active = false
+        this.opened = false
       }
     }
   }
