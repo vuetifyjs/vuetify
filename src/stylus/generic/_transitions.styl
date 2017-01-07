@@ -1,3 +1,11 @@
+.modal-transition
+  &-enter, &-leave-to
+    transform: scale(0.5)
+
+.modal-bottom-transition 
+  &-enter, &-leave-to
+    transform: translateY(100%)
+    
 .tab-transition
   &-enter
     transform: translate(100%, 0)
@@ -17,9 +25,7 @@
   &-leave, &-leave-to
     top: 0
     position: absolute
-    transform: translate(100%, 0)
-  
-  
+    transform: translate(100%, 0)  
 
 .scale-transition
   &-enter, &-enter-active, &-leave, &-leave-to

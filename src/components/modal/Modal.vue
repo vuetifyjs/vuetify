@@ -3,7 +3,10 @@
     class="modal-overlay" 
     v-bind:class="{ 'modal-overlay--open': this.active }"
   )
-    transition(name="modal")
+    component(
+      v-bind:is="transition"
+      v-bind:origin="origin"
+    )
       div(
         class="modal"
         v-bind:class="classes"
@@ -28,6 +31,16 @@
       id: {
         type: String,
         required: true
+      },
+
+      origin: {
+        type: String,
+        default: 'bottom center'
+      },
+
+      transition: {
+        type: String,
+        default: 'v-modal-transition'
       }
     },
 

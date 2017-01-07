@@ -2,6 +2,7 @@ import { directiveConfig } from '../util/helpers'
 
 function directive (el, binding, v) {
   const config = directiveConfig(binding)
+
   el.dataset.modal = config.value
 
   el.onclick = e => {
