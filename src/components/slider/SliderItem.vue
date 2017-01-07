@@ -1,5 +1,7 @@
 <template lang="pug">
-  transition(v-bind:name="transition")
+  component(
+    v-bind:is="computedTransition"
+  )
     div(
       class="slider__item"
       v-bind:class="{ 'reverse': reverse }"
@@ -15,14 +17,12 @@
   export default {
     name: 'slider-item',
 
-    mixins: [
-      Eventable
-    ],
+    mixins: [Eventable],
 
     data () {
       return {
         active: false,
-        reverse: false
+        reversing: false
       }
     },
 
@@ -34,11 +34,20 @@
 
       transition: {
         type: String,
-        default: 'shift'
+        default: 'v-tab-transition'
+      },
+
+      reverseTransition: {
+        type: String,
+        default: 'v-tab-reverse-transition'
       }
     },
 
     computed: {
+      computedTransition () {
+        return this.reversing ? this.reverseTransition : this.transition
+      },
+
       events () {
         return [
           ['slider:open', this.open]
@@ -53,9 +62,9 @@
     },
 
     methods: {
-      open (target, reverse = false) {
+      open (target, reversing = false) {
         this.active = this._uid === target
-        this.reverse = reverse
+        this.reversing = reversing
       }
     }
   }
