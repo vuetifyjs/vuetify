@@ -2,6 +2,8 @@ import { closestParentTag } from '../util/helpers'
 
 export default {
   props: {
+    disabled: Boolean,
+
     item: {
       type: Object,
       default () {
@@ -55,7 +57,20 @@ export default {
     let data = {
       attrs: {},
       class: {},
-      props: {},
+      computed: {
+        classes () {
+          let classes = {}
+          classes[`${name}--active`] = this.active
+          classes[`${name}--disabled`] = this.disabled
+          
+          return classes
+        }
+      },
+      props: {
+        active: Boolean,
+
+        disabled: Boolean
+      },
       directives: [
         {
           name: 'ripple',

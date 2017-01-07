@@ -13,8 +13,9 @@
     padding: 0
     
   &--grow
-    .tabs__tab
-      flex-grow: 1
+    .tabs__container
+      > li
+        flex-grow: 1
       
   &--centered
     .tabs__container
@@ -69,6 +70,10 @@
     padding: 1rem
     top: 0
     align-items: center
+    list-style: none
+    
+    > li
+      height: 100%
     
     &-left
       position: absolute
@@ -79,7 +84,7 @@
       display: flex
       align-items: center
   
-  &__tab
+  .tab__item
     color: $grey.lighten-2
     display: flex
     flex-shrink: 0
@@ -97,12 +102,13 @@
     text-overflow: ellipsis
     transition: $primary-transition
     overflow: hidden
+    white-space: nowrap
     
     .icon
       flex: 1
       flex-basis: 100%
       font-size: 32px
-      margin: 1.5rem 0
+      margin: .5rem 0
 
     &--active
       color: #fff
