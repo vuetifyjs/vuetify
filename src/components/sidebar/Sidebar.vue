@@ -96,12 +96,12 @@
         window.addEventListener('resize', this.resize, false)
       })
 
-      this.$vuetify.bus.sub(`${this.$options.name}:item-clicked:${this.id}`, this.itemClicked)
+      this.$vuetify.bus.sub(`${this.$options.name}:item-clicked:${this._uid}`, this.itemClicked)
     },
 
     beforeDestroy () {
       window.removeEventListener('resize', this.resize)
-      this.$vuetify.bus.unsub(`${this.$options.name}:item-clicked:${this.id}`, this.itemClicked)
+      this.$vuetify.bus.unsub(`${this.$options.name}:item-clicked:${this._uid}`, this.itemClicked)
     },
 
     methods: {
