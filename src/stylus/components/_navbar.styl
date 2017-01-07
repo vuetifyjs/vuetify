@@ -2,10 +2,17 @@
   background-color: $theme.primary
   display: flex
   flex-wrap: wrap
+  height: $navbar-height
   position: relative
   width: 100%
   @extend .z-depth-1
   
+  ul
+    list-style: none
+    
+  li
+    height: 100%
+
   &--fixed
     position: fixed
     top: 0
@@ -42,12 +49,12 @@
     padding: 0
     background-color: inherit
     display: flex
-    align-items: center    
+    align-items: center
+    height: 100%
 
     > li
       display: flex
       align-items: center
-      height: 100%
       
   &__item
     align-items: center
@@ -72,6 +79,7 @@
     position: relative
     background-color: inherit
     color: #fff
+    height: 100%
     
     .navbar__items
       position: absolute
@@ -84,6 +92,7 @@
       overflow: hidden
       transition: .3s cubic-bezier(0,0,.2,1)
       flex-direction: column
+      height: auto
       @extend .z-depth-1
       
       li
@@ -104,7 +113,7 @@
       padding-right: 45px
       
       &:after
-        content: 'keyboard_arrow_left'
+        content: '\E314'
         font-family: 'Material Icons'
         font-size: 1.5rem
         position: absolute
