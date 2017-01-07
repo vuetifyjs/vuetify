@@ -5,6 +5,7 @@
       href="javascript:;"
       v-bind:class="classes"
       v-on:click.prevent="open"
+      v-ripple="ripple || item.ripple"
     )
       template(v-if="item.icon")
         v-icon {{ item.icon }}
@@ -17,6 +18,8 @@
         v-bind:class="groupClass"
         v-show="opened"
         v-bind:items="items"
+        v-bind:ripple="ripple"
+        v-bind:router="router"
         ref="group"
       )
         slot
@@ -56,6 +59,10 @@
         type: Array,
         default: () => []
       },
+
+      ripple: Boolean,
+
+      router: Boolean,
 
       transition: {
         type: String,

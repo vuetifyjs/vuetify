@@ -8,11 +8,14 @@
         v-bind:items="item.items"
         v-bind:origin="item.parent.origin"
         v-bind:transition="item.parent.transition"
+        v-bind:ripple="ripple"
+        v-bind:router="router"
       )
       v-navbar-item(
         v-else
         v-bind:item="item"
-        v-bind:router="item.router"
+        v-bind:router="item.router || router"
+        v-bind:ripple="item.ripple || ripple"
       )
     slot
 </template>
@@ -30,7 +33,11 @@
       items: {
         type: Array,
         default: () => []
-      }
+      },
+
+      ripple: Boolean,
+
+      router: Boolean
     }
   }
 </script>

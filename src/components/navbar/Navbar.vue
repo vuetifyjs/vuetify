@@ -8,6 +8,8 @@
       v-if="items.length > 0"
       v-bind:group-class="groupClass"
       v-bind:items="items"
+      v-bind:ripple="ripple"
+      v-bind:router="router"
     )
     slot(name="right")
 </template>
@@ -27,7 +29,11 @@
       items: {
         type: Array,
         default: () => []
-      }
+      },
+
+      ripple: Boolean,
+
+      router: Boolean
     },
 
     computed: {
