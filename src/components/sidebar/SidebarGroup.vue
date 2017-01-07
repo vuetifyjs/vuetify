@@ -2,10 +2,10 @@
   li(class="sidebar__group")
     a(
       class="sidebar__group-header"
+      href="javascript:;"
       v-bind:class="classes"
-      v-bind:href="item.href"
       v-on:click.prevent="toggle"
-      v-ripple="ripple || item.ripple"
+      v-ripple="ripple || item.ripple === true"
     )
       template(v-if="item.icon")
         v-icon {{ item.icon }}
@@ -16,7 +16,10 @@
     )
       v-sidebar-items(
         v-show="active"
+        v-bind:class="groupClass"
         v-bind:items="items"
+        v-bind:ripple="ripple"
+        v-bind:router="router"
         ref="group"
       )
         slot
@@ -39,10 +42,15 @@
     },
 
     props: {
+      groupClass: {
+        type: String,
+        default: ''
+      },
+
       item: {
         type: Object,
         default () {
-          return { href: '#!', text: '',icon: false }
+          return { text: '', icon: '', ripple: false }
         }
       },
 
@@ -51,7 +59,9 @@
         default: () => []
       },
 
-      ripple: Boolean
+      ripple: Boolean,
+
+      router: Boolean
     },
     
     computed: {

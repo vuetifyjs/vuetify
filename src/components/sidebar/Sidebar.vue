@@ -6,7 +6,13 @@
     v-bind:style="styles"
   )
     slot(name="top")
-    v-sidebar-items(v-if="items.length > 0" v-bind:items="items")
+    v-sidebar-items(
+      v-if="items.length > 0"
+      v-bind:group-class="groupClass"
+      v-bind:items="items"
+      v-bind:ripple="ripple"
+      v-bind:router="router"
+    )
     slot
 </template>
 
@@ -27,6 +33,11 @@
       drawer: Boolean,
 
       fixed: Boolean,
+      
+      groupClass: {
+        type: String,
+        default: ''
+      },
 
       height: {
         type: String,
@@ -53,7 +64,11 @@
         default: () => []
       },
 
-      right: Boolean
+      right: Boolean,
+
+      ripple: Boolean,
+
+      router: Boolean
     },
 
     computed: {
