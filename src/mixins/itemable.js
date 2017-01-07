@@ -1,3 +1,5 @@
+import { closestParentTag } from '../util/helpers'
+
 export default {
   props: {
     item: {
@@ -12,7 +14,38 @@ export default {
       }
     },
 
+    ripple: Boolean,
+
     router: Boolean
+  },
+
+  computed: {
+    groupName () {
+      return `${this.$options.name.replace(/([a-z]*)-[a-z]*/g, '$1')}-group`
+    },
+
+    groupUid () {
+      let group = closestParentTag.call(this, `v-${this.groupName}`)
+
+      return group ? group._uid : null
+    },
+
+    rootName () {
+      return this.$options.name.replace(/([a-z]*)-[a-z]*/g, '$1')
+    },
+
+    rootId () {
+      let root = closestParentTag.call(this, `v-${this.rootName}`)
+
+      return root ? root._uid : null
+    }
+  },
+
+  methods: {
+    click () {
+      this.$vuetify.bus.pub(`${this.groupName}:close:${this.rootId}`, this.groupUid)
+      this.$vuetify.bus.pub(`${this.rootName}:item-clicked:${this.rootId}`)
+    }
   },
 
   render (createElement) {
@@ -57,7 +90,10 @@ export default {
       children.push(createElement('v-icon', this.item.icon))
     }
 
-    children.push(createElement('span', this.item.text))
+    if (this.item.text) {
+      children.push(createElement('span', this.item.text))
+    }
+
     children.push(this.$slots.default)
 
     return createElement('li', {}, [
