@@ -71,7 +71,7 @@
       sidebar () {
         let sidebar = closestParentTag.call(this, 'v-sidebar')
 
-        return sidebar ? sidebar.id : null
+        return sidebar ? sidebar._uid : null
       }
     },
 
