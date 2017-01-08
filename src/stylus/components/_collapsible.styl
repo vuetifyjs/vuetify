@@ -6,6 +6,7 @@
   border-right: 1px solid #ddd
   border-left: 1px solid #ddd
   padding: 0
+  width: 100%
   @extend .z-depth-1
   
   li    
@@ -18,6 +19,7 @@
     cursor: pointer
     display: flex
     align-items: center
+    position: relative
     
     i
       margin-right: 1rem
@@ -27,6 +29,9 @@
     transition: $primary-transition
     overflow: hidden
     position: relative
+    
+    .card
+      border-radius: 0
     
     &:last-child
       border-bottom: 1px solid #ddd
