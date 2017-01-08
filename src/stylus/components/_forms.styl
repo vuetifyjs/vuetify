@@ -102,14 +102,21 @@
         cursor: pointer
         position: relative
         top: 0
+        left: 0
+        
+        &:after
+          top: 0
+          left: 0
+          width: 20px
+          height: 20px
         
         &:before
           content: ""
           position: absolute
           left: 0
           top: 2px
-          width: 1rem
-          height: 1rem
+          width: 20px
+          height: 16px
           z-index: 2
           transition: $secondary-transition
           border: 2px solid $grey.darken-1
@@ -122,25 +129,20 @@
             border-left-color: transparent
             border-right-color: $theme.secondary
             border-top-color: transparent
-            transform: rotate(40deg)
-            width: .5rem
+            transform: rotate(50deg)
+            width: 8px
             top: 0
-            left: -2px
+            left: 0
             
       &.filled
         + label
           &:before
             border-color: transparent
-            left: -4px
             
           &:after
             content: ""
-            width: 1.2rem
-            height: 1.2rem
             background: transparent
             position: absolute
-            left: -1.7px
-            top: 1px
             border: 2px solid $grey.darken-1
             border-radius: .15rem
             transition: $secondary-transition
@@ -151,7 +153,7 @@
               border-bottom: 2px solid #fff
               border-right: 2px solid #fff
               top: -1px
-              left: -1px
+              left: 0
               transform: rotate(37deg) scale(.8)
             
             &:after
