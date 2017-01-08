@@ -2,16 +2,14 @@
   background: #fff
   text-align: left
   list-style-type: none
-  border-top: 1px solid #ddd
-  border-right: 1px solid #ddd
-  border-left: 1px solid #ddd
   padding: 0
   width: 100%
   @extend .z-depth-1
   
-  li    
-    &:not(:first-child) .collapsible__header
-      border-top: 1px solid #ddd
+  li
+    border: 1px solid #ddd
+    &:not(:first-child)
+      border-top: none
   
   &__header
     height: $collapsible-collapse-height
