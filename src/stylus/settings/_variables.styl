@@ -33,17 +33,20 @@ $grid-breakpoints := {
   lg: 992px
   xl: 1200px
 }
+
 $container-max-widths := {
   sm: $grid-breakpoints.sm * .9
   md: $grid-breakpoints.md * .9
   lg: $grid-breakpoints.lg * .9
   xl: $grid-breakpoints.xl * .9
 }
+
 $grid-gutter := 2rem
 $grid-outer-margin := 2rem
 $grid-gutter-full := $grid-gutter * .25 * -1
 $grid-gutter-half := $grid-gutter * .25
 $grid-columns := 12
+
 
 // Display
 // ============================================================
@@ -95,37 +98,18 @@ $spacers := {
 // ============================================================
 $heading-color := $grey.darken-3
 $headings := {
-  h1: {
-    size: 7rem,
-    weight: 300
-  },
-  h2: {
-    size: 3.5rem,
-    weight: 400
-  },
-  h3: {
-    size: 3rem,
-    weight: 400
-  },
-  h4: {
-    size: 2.5rem,
-    weight: 400
-  },
-  h5: {
-    size: 2rem,
-    weight: 400
-  },
-  h6: {
-    size: 1.5rem,
-    weight: 500
-  }
+  h1: { size: 112px, weight: 300, line-height: 1, letter-spacing: -.04em },
+  h2: { size: 56px, weight: 400, line-height: 1.35, letter-spacing: -.02em },
+  h3: { size: 45px, weight: 400, line-height: 48px, letter-spacing: normal },
+  h4: { size: 34px, weight: 400, line-height: 40px, letter-spacing: normal },
+  h5: { size: 24px, weight: 400, line-height: 32px, letter-spacing: normal },
+  h6: { size: 20px, weight: 500, line-height: 1, letter-spacing: .02em }
 }
-$heading-base := 1rem
-$heading-growth := .6
+
 
 // Transitions
-$primary-transition := all 0.3s cubic-bezier(0, 0, .2, 1)
-$secondary-transition := all 0.2s ease-out
+$primary-transition := 0.3s cubic-bezier(0, 0, .2, 1)
+$secondary-transition := 0.2s ease-out
 
 // Components
 // ============================================================

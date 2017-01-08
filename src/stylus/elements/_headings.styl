@@ -3,7 +3,8 @@ for heading, options in $headings
     color: $heading-color
     font-size: options.size
     font-weight: options.weight
-    line-height: 110%
+    line-height: options.line-height
+    letter-spacing: options.letter-spacing
     margin-bottom: $spacers.three.y
     
     @media screen and (max-width: $grid-breakpoints.sm)
