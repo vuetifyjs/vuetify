@@ -5,11 +5,14 @@ function directive (el, binding, v) {
 
   el.dataset.modal = config.value
 
-  el.onclick = e => {
+  function click (e) {
     e.preventDefault()
     
     v.context.$vuetify.bus.pub(`modal:open:${config.value}`)
   }
+
+  el.removeEventListener('click', click, false)
+  el.addEventListener('click', click, false)
 }
 
 export default {
