@@ -1,6 +1,12 @@
 import { closestParentTag } from '../util/helpers'
 
 export default {
+  data () {
+    return {
+      active: false
+    }
+  },
+  
   props: {
     disabled: Boolean,
 
@@ -22,6 +28,14 @@ export default {
   },
 
   computed: {
+    classes () {
+      let classes = {}
+      classes[`${this.className}--active`] = this.active
+      classes[`${this.className}--disabled`] = this.disabled
+      
+      return classes
+    },
+
     groupName () {
       return `${this.$options.name.replace(/([a-z]*)-[a-z]*/g, '$1')}-group`
     },
@@ -30,6 +44,10 @@ export default {
       let group = closestParentTag.call(this, `v-${this.groupName}`)
 
       return group ? group._uid : null
+    },
+
+    className () {
+      return this.$options.name.replace(/-/g, '__')
     },
 
     rootName () {
@@ -52,25 +70,11 @@ export default {
 
   render (createElement) {
     let el
-    let name = this.$options.name.replace(/-/g, '__')
 
     let data = {
       attrs: {},
-      class: {},
-      computed: {
-        classes () {
-          let classes = {}
-          classes[`${name}--active`] = this.active
-          classes[`${name}--disabled`] = this.disabled
-          
-          return classes
-        }
-      },
-      props: {
-        active: Boolean,
-
-        disabled: Boolean
-      },
+      class: this.classes,
+      props: {},
       directives: [
         {
           name: 'ripple',
@@ -79,13 +83,13 @@ export default {
       ]
     }
 
-    data.class[name] = true
+    data.class[this.className] = true
 
     if (this.router || this.item.router) {
       el = 'router-link'
       data.props.to = this.item.href
       data.props.exact = this.item.href === '/'
-      data.props.activeClass = `${name}--active`
+      data.props.activeClass = `${this.className}--active`
       
       if (this.click) {
         data.nativeOn = { click: this.click }
