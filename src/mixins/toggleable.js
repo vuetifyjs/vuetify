@@ -10,6 +10,16 @@ export default {
 
   mixins: [Eventable],
 
+  watch: {
+    active (active) {
+      if (active) {
+        this.$vuetify.bus.pub(`${this.$options.name}:opened:${this.id}`)
+      } else {
+        this.$vuetify.bus.pub(`${this.$options.name}:closed:${this.id}`)
+      }
+    }
+  },
+
   mounted () {
     this.$vuetify.load(this.init)
   },
