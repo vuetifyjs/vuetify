@@ -19,8 +19,9 @@ let ripple = {
       container.classList.add(binding.value.class)
     }
 
+    let size = el.clientWidth > el.clientHeight ? el.clientWidth : el.clientHeight
     animation.className = 'ripple__animation'
-    animation.style.width = `${el.clientWidth * 2}px`
+    animation.style.width = `${size * 2}px`
     animation.style.height = animation.style.width
 
     el.appendChild(container)
