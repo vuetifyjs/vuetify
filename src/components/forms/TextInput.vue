@@ -12,6 +12,7 @@
       v-bind:id="id"
       v-bind:name="name"
       v-bind:placeholder="placeholder"
+      v-bind:required="required"
       v-bind:type="type"
       v-bind:value="inputValue"
       v-on:blur="focused = false"
@@ -51,6 +52,8 @@
       name: String,
 
       placeholder: String,
+
+      required: Boolean,
 
       type: {
         default: 'text'
