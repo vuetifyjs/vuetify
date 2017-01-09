@@ -21,6 +21,20 @@
     
     i
       margin-right: 1rem
+      
+    &:after
+      content: '\E314'
+      font-family: 'Material Icons'
+      font-size: 1.5rem
+      position: absolute
+      right: 15px
+      top: calc(50% - 16px)
+      color: inherit
+      transition: transform 0.3s cubic-bezier(0, 0, .2, 1)
+        
+    &--active
+      &:after
+        transform: rotate(-90deg)
     
   &__body
     background-color: rgba(0, 0, 0, 0.03)

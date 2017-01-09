@@ -13,14 +13,12 @@
 
 <script>
   import Eventable from '../../mixins/eventable'
-  import { addOnceEventListener } from '../../util/helpers'
+  import { addOnceEventListener, closestParentTag } from '../../util/helpers'
 
   export default {
     name: 'collapsible-body',
 
-    mixins: [
-      Eventable
-    ],
+    mixins: [Eventable],
 
     data () {
       return {
@@ -28,11 +26,27 @@
       }
     },
 
+    watch: {
+      active (active) {
+        if (active) {
+          this.$vuetify.bus.pub(`collapse:opened:${this.rootId}`, this._uid)
+        } else {
+          this.$vuetify.bus.pub(`collapse:closed:${this.rootId}`, this._uid)
+        }
+      }
+    },
+
     computed: {
       events () {
         return [
-          [`collapse:toggle:${this.$parent._uid}`, this.toggle]
+          [`collapse:toggle:${this.rootId}`, this.toggle]
         ]
+      },
+
+      rootId () {
+        let root = closestParentTag.call(this, 'v-collapsible')
+
+        return root ? root._uid : null
       }
     },
 
