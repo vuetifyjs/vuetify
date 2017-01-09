@@ -3,6 +3,7 @@ table
   border-collapse: collapse
   border-spacing: 0
   width: 100%
+  max-width: 100%
   @extend .z-depth-1
   
   td, th
@@ -10,12 +11,14 @@ table
     text-align: left
     
   thead
+    
     th
       color: $grey.darken-1
       font-weight: 600
       font-size: .95rem
       
   tbody
+    
     tr
       border-top: 1px solid $grey.lighten-2
       transition: background $primary-transition
