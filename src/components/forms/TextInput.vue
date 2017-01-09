@@ -14,9 +14,9 @@
       v-bind:placeholder="placeholder"
       v-bind:type="type"
       v-bind:value="inputValue"
-      v-on:blur="focused = false"
+      v-on:blur="blur"
       v-on:input="updateValue"
-      v-on:focus="focused = true"
+      v-on:focus="focus"
       ref="input"
     )
 </template>
@@ -72,6 +72,18 @@
     },
 
     methods: {
+      blur () {
+        this.focused = false
+
+        this.$emit('blur')
+      },
+
+      focus () {
+        this.focused = true
+
+        this.$emit('focus')
+      },
+
       updateValue (e) {
         this.inputValue = e.target.value
         this.$emit('input', this.inputValue)
