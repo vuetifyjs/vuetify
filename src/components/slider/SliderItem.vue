@@ -50,7 +50,7 @@
 
       events () {
         return [
-          ['slider:open', this.open]
+          [`slider:open:${this.$parent._uid}`, this.open]
         ]
       },
 
