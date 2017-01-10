@@ -31,7 +31,7 @@ export default {
     classes () {
       let classes = {}
       classes[`${this.className}--active`] = this.active
-      classes[`${this.className}--disabled`] = this.disabled
+      classes[`${this.className}--disabled`] = this.disabled || this.item.disabled
       
       return classes
     },
