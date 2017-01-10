@@ -12,8 +12,7 @@
       v-bind:id="id"
       v-bind:name="name"
       v-bind:multiple="multiple"
-      v-bind:value="value"
-      v-on:blur="focused = false"
+      v-on:blur="update"
       v-on:click="focused = true"
       v-on:input="update"
       ref="select"
@@ -85,15 +84,8 @@
     computed: {
       classes () {
         return {
-          'input-group--dirty': true,
-          'input-group--focused': this.focused && !this.multiple
+          'input-group--dirty': true
         }
-      }
-    },
-
-    mounted () {
-      if (this.value) {
-        this.$refs.select.value = this.value
       }
     },
 
