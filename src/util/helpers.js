@@ -22,6 +22,7 @@ export function createSimpleTransition (name) {
       data.on = {
         beforeEnter (el) {
           el.style.transformOrigin = origin
+          el.style.webkitTransformOrigin = origin
         }
       }
 
