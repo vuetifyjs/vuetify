@@ -14,7 +14,7 @@
     font-size: .8rem
     line-height: 1.2rem
     opacity: 0
-    padding: .4rem
+    padding: .8rem
     position: absolute
     pointer-events: none
     transition: $secondary-transition
@@ -28,38 +28,42 @@
     &:after
       top: 100%
       left: 50%
-      transform: translateX(-50%) translateY(-10px)
+      transform: translate(-50%, -10px) scale(0.1)
+      transform-origin: center top
       
     &:hover
       &:after
-        transform: translateX(-50%) translateY(10px)
+        transform: translate(-50%, 10px)
       
   &[data-tooltip-location='top']
     &:after
       bottom: 100%
       left: 50%
-      transform: translateX(-50%) translateY(10px)
+      transform: translate(-50%, 10px) scale(0.1)
+      transform-origin: center bottom
       
     &:hover
       &:after
-        transform: translateX(-50%) translateY(-10px)
+        transform: translate(-50%, -10px)
 
   &[data-tooltip-location='left']
     &:after
       bottom: 50%
       right: 100%
-      transform: translateX(10px) translateY(50%)
+      transform: translate(10px, 50%) scale(0.1)
+      transform-origin: center right
       
     &:hover
       &:after
-        transform: translateX(-10px) translateY(50%)
+        transform: translate(-10px, 50%)
       
   &[data-tooltip-location='right']
     &:after
       bottom: 50%
       left: 100%
-      transform: translateX(-10px) translateY(50%)
+      transform: translate(-10px, 50%) scale(0.1)
+      transform-origin: center left
       
     &:hover
       &:after
-        transform: translateX(10px) translateY(50%)
+        transform: translate(10px, 50%)

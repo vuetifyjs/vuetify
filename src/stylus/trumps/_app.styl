@@ -2,7 +2,7 @@
   min-height: 100vh
   
   &.top-fixed-navbar
-    padding-top: $navbar-height + $spacers.five.y
+    padding-top: $navbar-height
       
     header
       z-index: 4
@@ -18,7 +18,7 @@
     main
       min-height: 'calc(100vh - %s)' % $footer-height
       
-  &.bottom-footer&.top-navbar
+  &.bottom-footer&.top-navbar, &.bottom-footer&.top-fixed-navbar
     main
       min-height: 'calc(100vh - %s - %s)' % ($navbar-height $footer-height)
       
@@ -29,7 +29,7 @@
       padding-left: $sidebar-width
       transition: $primary-transition
   
-      @media screen and (max-width: $grid-breakpoints.md)
+      @media screen and (max-width: ($grid-breakpoints.lg - 1))
         padding-left: 0
         
   &.left-sidebar
@@ -49,5 +49,5 @@
       padding-right: $sidebar-width
       transition: $primary-transition
       
-      @media screen and (max-width: $grid-breakpoints.md)
+      @media screen and (max-width: ($grid-breakpoints.lg - 1))
         padding-right: 0

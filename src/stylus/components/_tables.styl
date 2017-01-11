@@ -1,9 +1,34 @@
 table
+  border-radius: 2px
   border-collapse: collapse
+  border-spacing: 0
   width: 100%
+  max-width: 100%
+  @extend .z-depth-1
   
   td, th
-    padding: .6rem 0
-  
-table, th, td
-  text-align: left
+    padding: 8px
+    text-align: left
+    
+  thead
+    
+    th
+      color: $grey.darken-1
+      font-weight: 600
+      font-size: .95rem
+      
+  tbody
+    
+    tr
+      border-top: 1px solid $grey.lighten-2
+      transition: background $primary-transition
+      will-change: background
+      
+      &:hover
+        background: $grey.lighten-3
+        
+    td
+      font-weight: 500
+    
+  .input-group
+    margin: 0

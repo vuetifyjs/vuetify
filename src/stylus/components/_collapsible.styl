@@ -2,31 +2,48 @@
   background: #fff
   text-align: left
   list-style-type: none
-  border-top: 1px solid #ddd
-  border-right: 1px solid #ddd
-  border-left: 1px solid #ddd
-  margin-bottom: 1rem
   padding: 0
+  width: 100%
   @extend .z-depth-1
   
-  li    
-    &:not(:first-child) .collapsible__header
-      border-top: 1px solid #ddd
+  li
+    border: 1px solid #ddd
+    &:not(:first-child)
+      border-top: none
   
   &__header
     height: $collapsible-collapse-height
     padding-left: 1rem
     cursor: pointer
-    display: flex;
-    align-items: center;
+    display: flex
+    align-items: center
+    position: relative
     
     i
       margin-right: 1rem
+      
+    &:after
+      content: '\E314'
+      font-family: 'Material Icons'
+      font-size: 1.5rem
+      position: absolute
+      right: 15px
+      top: calc(50% - 16px)
+      color: inherit
+      transition: transform 0.3s cubic-bezier(0, 0, .2, 1)
+        
+    &--active
+      &:after
+        transform: rotate(-90deg)
     
   &__body
     background-color: rgba(0, 0, 0, 0.03)
     transition: $primary-transition
     overflow: hidden
+    position: relative
+    
+    .card
+      border-radius: 0
     
     &:last-child
       border-bottom: 1px solid #ddd

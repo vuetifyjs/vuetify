@@ -1,12 +1,18 @@
 .navbar
   background-color: $theme.primary
-  height: $navbar-height
   display: flex
   flex-wrap: wrap
+  height: $navbar-height
   position: relative
   width: 100%
   @extend .z-depth-1
   
+  ul
+    list-style: none
+    
+  li
+    height: 100%
+
   &--fixed
     position: fixed
     top: 0
@@ -41,14 +47,14 @@
   &__items
     list-style-type: none
     padding: 0
+    background-color: inherit
+    display: flex
+    align-items: center
     height: 100%
-    
+
     > li
-      height: 100%
-      float: left
-      
-    > a
-        color: #fff
+      display: flex
+      align-items: center
       
   &__item
     align-items: center
@@ -57,29 +63,61 @@
     padding: $navbar-item-padding
     text-decoration: none
     transition: all 0.3s ease-out
-    height: 100%
     position: relative
+    height: 100%
     
     i
       font-size: 2rem
+      
+      + span
+        margin-left: 5px
     
-    &:hover
-      background: rgba(#fff,0.2)
+    &:hover, &--active
+      background: rgba(#000,0.1)
       
   &__group
+    position: relative
+    background-color: inherit
+    color: #fff
+    height: 100%
+    
     .navbar__items
-        overflow: hidden
+      position: absolute
+      top: 100%
+      left: 0
+      z-index: 99
+      min-width: 100%
+      background-color: $theme.secondary
+      overflow: hidden
+      transition: .3s cubic-bezier(0,0,.2,1)
+      flex-wrap: wrap
+      height: auto
+      @extend .z-depth-1
+      
+      li
+        width: 100%
         
-      &-header
-        @extend .navbar__item
-        padding-right: 45px
+      .navbar__item
+        padding: 1rem
+        white-space: nowrap
+        color: inherit
+        font-weight: 500
+        width: 100%
         
-        &:after
-          content: 'keyboard_arrow_left'
-          font-family: 'Material Icons'
-          font-size: 1.5rem
-          position: absolute
-          right: 15px
-          color: inherit
-          transition: transform 0.3s cubic-bezier(0, 0, .2, 1)
-          transform: rotate(-90deg)
+        &:hover
+          background-color: rgba(#fff,.2)
+        
+    &-header
+      @extend .navbar__item
+      padding-right: 45px
+      
+      &:after
+        content: '\E314'
+        font-family: 'Material Icons'
+        font-size: 1.5rem
+        position: absolute
+        right: 15px
+        top: calc(50% - 16px)
+        color: inherit
+        transition: transform 0.3s cubic-bezier(0, 0, .2, 1)
+        transform: rotate(-90deg)

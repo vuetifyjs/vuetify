@@ -40,7 +40,7 @@
     transform: translateX(-($sidebar-width + 25))
     flex-basis: 0 !important
     
-    .sidebar--fixed-right
+    &.sidebar--fixed-right
       transform: translateX($sidebar-width + 25)
     
   &--mobile
@@ -48,7 +48,7 @@
       transform: translateX(-($sidebar-width + 25))
       flex-basis: 0 !important
       
-      .sidebar--fixed-right
+      &.sidebar--fixed-right
         transform: translateX($sidebar-width + 25)
     
   &__items
@@ -63,17 +63,22 @@
     font-weight: 300
     padding: $sidebar-item-padding
     height: $sidebar-item-height
+    position: relative
   
     &--active
       background-color: $sidebar-item-active-background-color
       color: $sidebar-item-active-color
+      
+    &--disabled
+      opacity: .4
+      pointer-events: none
     
     &:hover:not(&--active)
       background-color: $sidebar-item-hover-background-color
       color: $sidebar-item-active-color
       
     > span
-      margin-left: $spacers.three.x
+      padding: 0 $spacers.three.x
       
     &-header
       background: lighten($theme.secondary, 20%)
@@ -95,11 +100,12 @@
       @extend .sidebar__item
       
       &:after
-        content: 'keyboard_arrow_left'
+        content: '\E314'
         font-family: 'Material Icons'
         font-size: 1.5rem
         position: absolute
         right: 15px
+        top: calc(50% - 16px)
         color: inherit
         transition: transform 0.3s cubic-bezier(0, 0, .2, 1)
         

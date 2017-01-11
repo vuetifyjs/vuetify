@@ -8,19 +8,10 @@
   max-width: 90%
   margin: auto
   z-index: 1001
+  transition: $primary-transition
   max-height: 55%
   opacity: 1
   @extend .z-depth-3
-  
-  &-enter-active,
-  &-leave-active
-    transition: $primary-transition
-    
-  &-enter,
-  &-leave-active
-    transform: translateY(100%) scale(.5)
-    opacity: 0
-    
     
   &--bottom
     top: initial !important

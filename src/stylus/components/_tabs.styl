@@ -1,58 +1,139 @@
 .tabs
-  margin-bottom: $spacers.five.y
+  overflow: hidden
+  position: relative
+  width: 100%
   
-  &__slider
+  > .card
+    border-radius: 0
+  
+  .card
+    background: inherit
+    box-shadow: none
+    
+  ul
+    padding: 0
+    
+  &--grow
+    .tabs__container
+      > li
+        flex-grow: 1
+      
+  &--centered
+    .tabs__container
+      justify-content: center
+      
+  &--icons
+    .tabs__tabs
+      height: 90px
+      
+  &--scroll-bars     
+    .tabs__tabs--mobile
+      padding: 0 35px
+      
+      .icon--left, .icon--right
+        display: flex
+        
+      .tabs__container
+        width: calc(100% - 70px)
+    
+    
+  &__tabs
+    background-color: $theme.primary
+    width: 100%
+    position: relative
+    height: 60px
+    
+    .icon--left, .icon--right
+      position: absolute
+      top: 0
+      width: 35px
+      display: none
+      color: #fff
+      align-items: center
+      height: 100%
+      cursor: pointer
+      user-select: none
+      
+    .icon--left
+      left: 0
+      
+    .icon--right
+      right: 0
+    
+  &__container
+    overflow-x: auto
+    overflow-y: hidden
+    display: flex
+    height: 100%
+    width: 100%
     position: absolute
-    top: calc(100% - 4px)
-    height: 4px
-    with: 100%
-  
-  &__tab
-    color: #fff
-    flex: 1
-    text-decoration: none
-    display: block
     padding: 1rem
+    top: 0
+    align-items: center
+    list-style: none
+    
+    > li
+      height: 100%
+    
+    &-left
+      position: absolute
+      left: 0
+      top: 0
+      height: 100%
+      width: 35px
+      display: flex
+      align-items: center
+  
+  .tab__item
+    color: $grey.lighten-2
+    display: flex
+    flex-shrink: 0
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    min-width: 125px
+    height: 100%
+    padding: 1rem
+    min-width: 0
     position: relative
     text-align: center
+    text-decoration: none
     text-transform: uppercase
+    text-overflow: ellipsis
     transition: $primary-transition
-    
-    &:after
-      content: ''
-      position: absolute
-      bottom: 0
-      left: 0
-      width: 0
-      height: 3px
-      transition: $primary-transition
-      background: $theme.primary
-      
-    &--active
-      &:after
-        width: 100%
-      
-        
-  &__tabs
-    background: $theme.secondary
-    display: flex
-    position: relative
-    align-items: center
-    flex-wrap: nowrap
+    overflow: hidden
     white-space: nowrap
-    overflow-x: auto
     
-    @media screen and (max-width: $grid-breakpoints.sm)
-      flex-wrap: wrap
+    .icon
+      flex: 1
+      flex-basis: 100%
+      font-size: 32px
+      margin: .5rem 0
+
+    &--active
+      color: #fff
+      
+    &--disabled
+      opacity: .5
+      pointer-events: none
     
   &__items
-    width: 100%
-    height: 100%
-    position: relative
     overflow: hidden
+    position: relative
+    border-width: 0 1px 1px 1px
+    border-style: solid
+    border-color: rgba(#000, .1)
     
   &__item
-    transition: .2s ease-out
-    padding: 1rem
-    height: 100%
+    transition: $primary-transition
     width: 100%
+  
+    > .card
+      box-shadow: none
+      
+  &__slider
+    position: absolute
+    bottom: 0
+    height: 4px
+    background: $theme.accent
+    transition: $primary-transition

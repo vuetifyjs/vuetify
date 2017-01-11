@@ -2,9 +2,10 @@
   li(class="sidebar__group")
     a(
       class="sidebar__group-header"
+      href="javascript:;"
       v-bind:class="classes"
-      v-bind:href="item.href"
       v-on:click.prevent="toggle"
+      v-ripple="ripple || item.ripple === true"
     )
       template(v-if="item.icon")
         v-icon {{ item.icon }}
@@ -15,7 +16,10 @@
     )
       v-sidebar-items(
         v-show="active"
+        v-bind:class="groupClass"
         v-bind:items="items"
+        v-bind:ripple="ripple"
+        v-bind:router="router"
         ref="group"
       )
         slot
@@ -23,7 +27,7 @@
 
 <script>
   import Eventable from '../../mixins/eventable'
-  import { closest, addOnceEventListener } from '../../util/helpers'
+  import { closestParentTag, addOnceEventListener } from '../../util/helpers'
 
   export default {
     name: 'sidebar-group',
@@ -38,17 +42,26 @@
     },
 
     props: {
+      groupClass: {
+        type: String,
+        default: ''
+      },
+
       item: {
         type: Object,
         default () {
-          return { href: '#!', text: '',icon: false }
+          return { text: '', icon: '', ripple: false }
         }
       },
 
       items: {
         type: Array,
         default: () => []
-      }
+      },
+
+      ripple: Boolean,
+
+      router: Boolean
     },
     
     computed: {
@@ -66,9 +79,9 @@
       },
 
       sidebar () {
-        let sidebar = closest.call(this, 'sidebar')
+        let sidebar = closestParentTag.call(this, 'v-sidebar')
 
-        return sidebar ? sidebar.id : null
+        return sidebar ? sidebar._uid : null
       }
     },
 
@@ -81,9 +94,10 @@
     methods: {
       enter (el, done) {
         el.style.display = 'block'
+        let scrollHeight = el.scrollHeight
         el.style.height = 0
         
-        setTimeout(() => el.style.height = `${el.scrollHeight}px`, 0)
+        setTimeout(() => el.style.height = `${scrollHeight}px`, 50)
 
         addOnceEventListener(el, done, 'transitionend')
       },

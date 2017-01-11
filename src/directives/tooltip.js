@@ -14,7 +14,7 @@ function directive (el, binding) {
   el.dataset['tooltipLocation'] = config.value
 }
 
-function unbind (el, binding, config) {
+function unbind (el) {
   el.removeAttribute('data-tooltip')
   el.removeAttribute('data-tooltip-location')
 }

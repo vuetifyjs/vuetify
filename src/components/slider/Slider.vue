@@ -52,7 +52,7 @@
 
     watch: {
       current () {
-        // Evaulate items when current changes to account for
+        // Evaluate items when current changes to account for
         // dynamic changing of children
         this.items = this.$children.filter(i => {
           return i.$el.classList && i.$el.classList.contains('slider__item')
@@ -63,7 +63,7 @@
           this.startInterval()
         }
 
-        this.$vuetify.bus.pub('slider:open', this.items[this.current]._uid, this.reverse)
+        this.$vuetify.bus.pub(`slider:open:${this._uid}`, this.items[this.current]._uid, this.reverse)
       }
     },
 

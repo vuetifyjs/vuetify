@@ -15,12 +15,13 @@ let ripple = {
     container.appendChild(animation)
     container.className = 'ripple__container'
     
-    if (binding.value.class) {
+    if ((binding.value || {}).class) {
       container.classList.add(binding.value.class)
     }
 
+    let size = el.clientWidth > el.clientHeight ? el.clientWidth : el.clientHeight
     animation.className = 'ripple__animation'
-    animation.style.width = `${el.clientWidth * 2}px`
+    animation.style.width = `${size * 2}px`
     animation.style.height = animation.style.width
 
     el.appendChild(container)
@@ -61,7 +62,7 @@ let ripple = {
 }
 
 function directive (el, binding, v) {
-  if (!binding.value) return
+  if (binding.value === false) return
 
   if ('ontouchstart' in window) {
     // el.addEventListener('touchstart', e => ripple.show(e, el, binding), false)

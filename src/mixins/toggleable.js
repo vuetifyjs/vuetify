@@ -10,6 +10,16 @@ export default {
 
   mixins: [Eventable],
 
+  watch: {
+    active (active) {
+      if (active) {
+        this.$vuetify.bus.pub(`${this.$options.name}:opened:${this.id}`)
+      } else {
+        this.$vuetify.bus.pub(`${this.$options.name}:closed:${this.id}`)
+      }
+    }
+  },
+
   mounted () {
     this.$vuetify.load(this.init)
   },
@@ -37,24 +47,21 @@ export default {
     },
 
     close (e) {
-      if (arguments.length === 0 || this.activators.length === 0) {
+      if (arguments.length === 0 && this.activators.length === 0) {
         return this.active = false
       }
 
-      let closeConditional = false
-
-      if (this.closeConditional) {
-        closeConditional = this.closeConditional(e)
-      }
-
       if ((!e || !e.target)
-        || Array.apply(null, this.activators).some(i => i.contains(e.target))
-        || closeConditional
+        || this.activators.some(i => i.contains(e.target) || i === e.target)
+        || this.closeConditional(e)
       ) {
         return
       }
-
       this.active = false
+    },
+
+    closeConditional () {
+      return false
     },
 
     toggle () {

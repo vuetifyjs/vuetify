@@ -6,7 +6,13 @@
     v-bind:style="styles"
   )
     slot(name="top")
-    v-sidebar-items(v-if="items.length > 0" v-bind:items="items")
+    v-sidebar-items(
+      v-if="items.length > 0"
+      v-bind:group-class="groupClass"
+      v-bind:items="items"
+      v-bind:ripple="ripple"
+      v-bind:router="router"
+    )
     slot
 </template>
 
@@ -27,6 +33,11 @@
       drawer: Boolean,
 
       fixed: Boolean,
+      
+      groupClass: {
+        type: String,
+        default: ''
+      },
 
       height: {
         type: String,
@@ -45,7 +56,7 @@
 
       mobileBreakPoint: {
         type: Number,
-        default: 768
+        default: 992
       },
 
       items: {
@@ -53,7 +64,11 @@
         default: () => []
       },
 
-      right: Boolean
+      right: Boolean,
+
+      ripple: Boolean,
+
+      router: Boolean
     },
 
     computed: {
@@ -81,18 +96,18 @@
         window.addEventListener('resize', this.resize, false)
       })
 
-      this.$vuetify.bus.sub(`${this.$options.name}:item-clicked:${this.id}`, this.itemClicked)
+      this.$vuetify.bus.sub(`${this.$options.name}:item-clicked:${this._uid}`, this.itemClicked)
     },
 
     beforeDestroy () {
       window.removeEventListener('resize', this.resize)
-      this.$vuetify.bus.unsub(`${this.$options.name}:item-clicked:${this.id}`, this.itemClicked)
+      this.$vuetify.bus.unsub(`${this.$options.name}:item-clicked:${this._uid}`, this.itemClicked)
     },
 
     methods: {
       resize () {
         if (this.mobile && !this.drawer) {
-          this.active = window.innerWidth > this.mobileBreakPoint
+          this.active = window.innerWidth >= this.mobileBreakPoint
         }
       },
 

@@ -2,20 +2,24 @@
   li(class="navbar__group")
     a(
       class="navbar__group-header"
+      href="javascript:;"
       v-bind:class="classes"
-      v-bind:href="item.href"
-      v-on:click.prevent="toggle"
+      v-on:click.prevent="open"
+      v-ripple="ripple || item.ripple"
     )
       template(v-if="item.icon")
         v-icon {{ item.icon }}
       span(v-text="item.text")
-    transition(
-      v-on:enter="enter"
-      v-on:leave="leave"
+    component(
+      v-bind:is="transition"
+      v-bind:origin="origin"
     )
       v-navbar-items(
-        v-show="active"
+        v-bind:class="groupClass"
+        v-show="opened"
         v-bind:items="items"
+        v-bind:ripple="ripple"
+        v-bind:router="router"
         ref="group"
       )
         slot
@@ -23,86 +27,114 @@
 
 <script>
   import Eventable from '../../mixins/eventable'
-  import { closest, addOnceEventListener } from '../../util/helpers'
+  import Transitionable from '../../mixins/transitionable'
+  import { closestParentTag, addOnceEventListener, browserTransform } from '../../util/helpers'
 
   export default {
     name: 'navbar-group',
 
-    mixins: [Eventable],
+    mixins: [Eventable, Transitionable],
 
     data () {
       return {
-        active: false
+        active: false,
+        opened: false
       }
     },
 
     props: {
+      groupClass: {
+        type: String,
+        default: ''
+      },
+      
       item: {
         type: Object,
         default () {
-          return { href: '#!', text: '', icon: false }
+          return { text: '', icon: '' }
         }
       },
 
       items: {
         type: Array,
         default: () => []
+      },
+
+      ripple: Boolean,
+
+      router: Boolean,
+
+      transition: {
+        type: String,
+        default: 'v-slide-y-transition'
       }
     },
     
     computed: {
       classes () {
         return {
-          'navbar__group-header--active': this.active
+          'navbar__group-header--active': this.active || this.opened
         }
       },
 
       events () {
         return [
+          [`body:click`, this.close],
           [`navbar-group:close:${this.navbar}`, this.close],
           [`navbar-group:open:${this.navbar}`, this.open]
         ]
       },
 
       navbar () {
-        let navbar = closest.call(this, 'navbar')
+        let navbar = closestParentTag.call(this, 'navbar')
 
         return navbar ? navbar._uid : null
       }
     },
 
     mounted () {
-      if (this.$refs.group.$el.querySelector('.navbar__item--active')) {
-        this.active = true
-      }
+      // if (this.$refs.group.$el.querySelector('.navbar__item--active')) {
+        // this.active = true
+      // }
     },
 
     methods: {
       enter (el, done) {
+        browserTransform(el, 'scale(0)')
         el.style.display = 'block'
-        el.style.height = 0
+        el.style.height = `${el.scrollHeight}px`
         
-        setTimeout(() => el.style.height = `${el.scrollHeight}px`, 0)
+        setTimeout(() => {
+          browserTransform(el, 'scale(1)')
+        }, 0)
 
         addOnceEventListener(el, done, 'transitionend')
       },
 
       leave (el, done) {
-        el.style.height = 0
+        browserTransform(el, 'scale(0)')
         
         addOnceEventListener(el, done, 'transitionend')
       },
-
+    
       open () {
-        this.active = true
+        this.opened = true
       },
 
       toggle () {
-        this.active = !this.active
+        this.opened = !this.opened
       },
 
-      close (uid) {
-        this.active = uid === this._uid
+      close (e) {
+        if ((!e || !e.target)
+          || e.target === this.$el
+          || this.$el.contains(e.target)
+          && !this.$refs.group.$el.contains(e.target)
+        ) {
+          return
+        }
+
+        this.opened = false
       }
     }
   }

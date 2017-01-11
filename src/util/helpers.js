@@ -10,8 +10,29 @@ export function createSimpleFunctional (c, el = 'div') {
   }
 }
 
+export function createSimpleTransition (name) {
+  return {
+    functional: true,
+    
+    render (createElement, context) {
+      let origin = (context.data.attrs || {}).origin || 'top center 0'
+      let data = context.data || {}
+
+      data.props = { name }
+      data.on = {
+        beforeEnter (el) {
+          el.style.transformOrigin = origin
+          el.style.webkitTransformOrigin = origin
+        }
+      }
+
+      return createElement('transition', data, context.children)
+    }
+  }
+}
+
 export function directiveConfig (binding, defaults = {}) {
-  return Object.assign(
+  return mergeObject(
     defaults,
     binding.modifiers,
     { value: binding.arg },
@@ -19,15 +40,15 @@ export function directiveConfig (binding, defaults = {}) {
   )
 }
 
-export function closest (className) {
+export function closestParentTag (tag) {
   let parent = this.$parent
 
   while(parent) {
-    if (!parent.$el) {
+    if (!parent.$options._componentTag) {
       return null
     }
     
-    if (parent.$el.classList.contains(className)) {
+    if (parent.$options._componentTag === tag) {
       return parent
     }
 
@@ -44,4 +65,26 @@ export function addOnceEventListener (el, event, cb) {
   }
   
   el.addEventListener(event, once, false)
+}
+
+export function browserTransform (el, value) {
+  [
+    'transform',
+    'webkitTransform'
+  ].forEach(i => {
+    el.style[i] = value
+  })
+}
+
+export function mergeObject(target) {
+  for (let i = 1, length = arguments.length; i < length; i++) {
+    let source = arguments[i];
+    for (let key in source) {
+      if (source.hasOwnProperty(key)) {
+        target[key] = source[key];
+      }
+    }
+  }
+
+  return target;
 }
