@@ -1,7 +1,7 @@
-import Progress from './Progress.vue'
+import ProgressLinear from './ProgressLinear.vue'
 import ProgressCircular from './ProgressCircular.vue'
 
 export default {
-  Progress,
+  ProgressLinear,
   ProgressCircular
 }

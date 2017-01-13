@@ -1,0 +1,160 @@
+.progress-linear
+  background: transparent
+  border-radius: 4px
+  margin: 1rem 0
+  overflow: hidden
+  width: 100%
+  position: relative
+  
+  &__bar
+    background: lighten($theme.accent, 40%)
+    width: 100%
+    height: inherit
+    position: relative
+    transition: .3s ease-in
+    border-radius: 4px
+    z-index: 2
+    
+    &__buffer
+      display: flex
+      align-items: center
+      position: absolute
+      top: 0
+      right: -300%
+      width: 400%
+      height: inherit
+      z-index: 1
+      
+      > span
+        width: 5px
+        height: 5px
+        opacity: 1
+        animation: buffer
+        animation-duration: 8s
+        animation-iteration-count: infinite
+        animation-timing-function: ease-in-out
+        position: relative
+        
+        &:after
+          content: ''
+          position: absolute
+          height: 5px
+          width: 5px
+          display: flex
+          align-items: center
+          border-radius: 50%
+          background: rgba($theme.accent, .5)
+        
+      @keyframes buffer
+        0%
+          flex-basis: 0
+          opacity: 0
+          transform: translateX(0)
+          
+        20%
+          flex-basis: 35px
+          opacity: 1
+          transform: translateX(-400px)
+          
+        40%
+          opacity: 0.4
+          transform: translateX(-600px), scale(0)
+          
+        60%
+          opacity: 1
+          
+        80%
+          opacity: 0.4
+          
+        99%
+          flex-basis: 35px
+          transform: translateX(-1200px)
+          
+        100%
+          opacity: 0
+          flex-basis: 0
+    
+    &__determinate
+      border-radius: 4px
+      background: $theme.primary
+      height: inherit
+      transition: .3s ease-in
+      
+    &__indeterminate      
+      &:before, &:after
+        border-radius: 4px
+        background: $theme.primary
+        content: ''
+        height: inherit
+        position: absolute
+        left: 0
+        top: 0
+        bottom: 0
+        will-change: left, right
+        width: auto
+      
+      &:before
+        animation: indeterminate
+        animation-duration: 2s
+        animation-iteration-count: infinite
+        
+      &:after
+        animation: indeterminate-short
+        animation-duration: 2s
+        animation-iteration-count: infinite
+        
+  &--query
+    .progress-linear__bar__indeterminate
+      &:before
+        animation: query
+        animation-duration: 2s
+        animation-iteration-count: infinite
+        
+      &:after
+        animation: query-short
+        animation-duration: 2s
+        animation-iteration-count: infinite
+        
+  @keyframes indeterminate
+    0%
+      left: -90%
+      right: 100%
+    60%
+      left: -90%
+      right: 100%
+    100%
+      left: 100%
+      right: -35%
+      
+  @keyframes indeterminate-short
+    0%
+      left: -200%
+      right: 100%
+    60%
+      left: 107%
+      right: -8%
+    100%
+      left: 107%
+      right: -8%
+      
+  @keyframes query
+    0%
+      right: -90%
+      left: 100%
+    60%
+      right: -90%
+      left: 100%
+    100%
+      right: 100%
+      left: -35%
+      
+  @keyframes query-short
+    0%
+      right: -200%
+      left: 100%
+    60%
+      right: 107%
+      left: -8%
+    100%
+      right: 107%
+      left: -8%
