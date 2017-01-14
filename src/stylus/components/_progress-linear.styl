@@ -1,6 +1,5 @@
 .progress-linear
   background: transparent
-  border-radius: 4px
   margin: 1rem 0
   overflow: hidden
   width: 100%
@@ -12,18 +11,15 @@
     height: inherit
     position: relative
     transition: .3s ease-in
-    border-radius: 4px
     z-index: 2
     
     &__determinate
-      border-radius: 4px
       background: $theme.primary
       height: inherit
       transition: .3s ease-in
       
     &__indeterminate      
       &:before, &:after
-        border-radius: 4px
         background: $theme.primary
         content: ''
         height: inherit

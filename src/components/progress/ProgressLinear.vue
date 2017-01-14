@@ -31,7 +31,10 @@
 
       indeterminate: Boolean,
 
-      hide: Boolean,
+      active: {
+        type: Boolean,
+        default: true
+      },
 
       query: Boolean,
 
@@ -51,7 +54,7 @@
       styles () {
         let styles = {}
 
-        if (this.hide) {
+        if (!this.active) {
           styles.height = 0
         }
 
@@ -65,7 +68,7 @@
       bufferStyles () {
         let styles = {}
 
-        if (this.hide) {
+        if (!this.active) {
           styles.height = 0
         }
 
