@@ -1,50 +1,160 @@
 .list
   list-style-type: none
   padding: 0
-  margin: 0
-
+  
   a
     text-decoration: none
-  
-  &__item
-    align-items: center
-    display: flex
-    padding: 1rem 0
     
-    &-action
-      display: flex
-      flex-direction: column
-      margin-left: 2rem
-      align-items: center
+  li
+    min-height: 72px
+    display: flex
+    align-items: center
+    justify-content: center
+    margin: 0 -14px
+    transition: $primary-transition
+    
+    &:first-child
+      margin-top: -14px
       
-    &-action-title
-      color: $grey.base
-      font-size: .82rem
-      font-weight: 300
-          
-    &-avatar
-      align-self: flex-start
-      color: #FFFFFF
-      margin-right: 2rem
-      flex: 0 1 auto
-      border-radius: 50%
+    &:last-child
+      margin-bottom: -14px
+    
+    &.disabled
+      pointer-events: none
+    
+    &:hover
+      background: rgba(#000, .1)
+    
+  &__item
+    display: flex
+    align-items: center
+    text-decoration: none
+    color: inherit
+    margin: 0 -14px
+    padding: 14px
+    width: 100%
+    height: 100%
+    
+    &:not(:first-child)
+      padding: 14px 0 0
+      
+    .input-group
+      margin: 0
+              
+    &__avatar, &__action
       display: flex
+      align-items: left
+      flex: 1 0 78px
+      
+    &__action
       align-items: center
-      justify-content: center
-  
-    &-title
-      display: flex
-      flex-direction: column
-      letter-spacing: .05rem
+      justify-content: flex-start
+      flex-wrap: wrap
+      
+      &-text
+        flex: 1 0 100%
+        margin-bottom: 24px
+        text-align: right
+        color: $grey.base
+      
+    &__avatar
+      justify-content: flex-start
+      
+      img, .icon
+        height: 48px
+        width: 48px
+        border-radius: 50%
+        
+      img
+        border: 1px solid #ccc
+        
+      .icon
+        font-size: 32px
+        color: $grey.darken-3
+    
+    &__title
+      font-size: 17px
       font-weight: 500
-      flex: 1 1 auto
       
-    &-sub-title
-      color: $grey.darken-1
-      font-size: .9rem
-      font-weight: 300
-      letter-spacing: 0
+    &__content
+      text-align: left
+      flex: 0 1 100%
+      font-size: 15px
+      overflow: hidden
       
-    &-icon
+      + .list__item__avatar, + .list__item__action
+        justify-content: flex-end
+        
+    &__sub-title
       color: $grey.base
-      margin-right: 2rem
+      font-size: 15px
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
+      
+      &--clamp
+        white-space: initial
+        -webkit-line-clamp: 2
+        -webkit-box-orient: vertical
+        display: -webkit-box
+
+// .list
+//   list-style-type: none
+//   padding: 0
+//   margin: 0
+
+//   a
+//     text-decoration: none
+  
+//   &__item
+//     align-items: center
+//     display: flex
+    
+//     &:not(:only-child):not(:last-child)
+//       .list__item__content
+//         border-bottom: 1px solid rgba(#000, 0.1)
+    
+//     &__content
+//       text-align: left
+//       overflow: hidden
+//       padding: 1rem 0
+    
+//     &-action
+//       display: flex
+//       flex-direction: column
+//       margin-left: 2rem
+//       align-items: center
+      
+//     &-action-title
+//       color: $grey.base
+//       font-size: .82rem
+//       font-weight: 300
+          
+//     &-avatar
+//       color: $grey.darken-3
+//       margin-right: 2rem
+//       flex: 0 1 auto
+//       border-radius: 50%
+//       display: flex
+//       align-items: center
+//       justify-content: center
+  
+//     &-title
+//       display: flex
+//       letter-spacing: .05rem
+//       font-weight: 500
+//       flex: 1 1 auto
+//       font-size: 1.2rem
+      
+//     &-sub-title
+//       color: $grey.darken-1
+//       font-size: 1.1rem
+//       font-weight: 400
+//       letter-spacing: 0
+//       white-space: nowrap
+//       overflow: hidden
+//       text-overflow: ellipsis
+      
+//     &-icon
+//       color: $grey.base
+//       margin-right: 2rem
