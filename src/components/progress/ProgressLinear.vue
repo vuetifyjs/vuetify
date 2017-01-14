@@ -13,13 +13,6 @@
           v-bind:style="{ width: value + '%' }"
           v-if="!indeterminate"
         )
-    v-fade-transition
-      div(
-        v-if="buffer && !hide"
-        class="progress-linear__bar__buffer"
-        v-bind:style="bufferStyles"
-      )
-        span(v-for="i in 100")
 </template>
 
 <script>

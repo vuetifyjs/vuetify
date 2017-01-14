@@ -15,65 +15,6 @@
     border-radius: 4px
     z-index: 2
     
-    &__buffer
-      display: flex
-      align-items: center
-      position: absolute
-      top: 0
-      right: -300%
-      width: 400%
-      height: inherit
-      z-index: 1
-      
-      > span
-        width: 5px
-        height: 5px
-        opacity: 1
-        animation: buffer
-        animation-duration: 8s
-        animation-iteration-count: infinite
-        animation-timing-function: ease-in-out
-        position: relative
-        
-        &:after
-          content: ''
-          position: absolute
-          height: 5px
-          width: 5px
-          display: flex
-          align-items: center
-          border-radius: 50%
-          background: rgba($theme.accent, .5)
-        
-      @keyframes buffer
-        0%
-          flex-basis: 0
-          opacity: 0
-          transform: translateX(0)
-          
-        20%
-          flex-basis: 35px
-          opacity: 1
-          transform: translateX(-400px)
-          
-        40%
-          opacity: 0.4
-          transform: translateX(-600px), scale(0)
-          
-        60%
-          opacity: 1
-          
-        80%
-          opacity: 0.4
-          
-        99%
-          flex-basis: 35px
-          transform: translateX(-1200px)
-          
-        100%
-          opacity: 0
-          flex-basis: 0
-    
     &__determinate
       border-radius: 4px
       background: $theme.primary
@@ -95,12 +36,12 @@
       
       &:before
         animation: indeterminate
-        animation-duration: 2s
+        animation-duration: 2.2s
         animation-iteration-count: infinite
         
       &:after
         animation: indeterminate-short
-        animation-duration: 2s
+        animation-duration: 2.2s
         animation-iteration-count: infinite
         
   &--query
