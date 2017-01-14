@@ -98,11 +98,13 @@
               border-right-color: $grey.lighten-2
       
       + label
-        padding-left: 1.5rem
+        padding-left: 30px
         cursor: pointer
         position: relative
         top: 0
         left: 0
+        display: flex
+        align-items: center
         
         &:after
           top: 0
@@ -114,9 +116,9 @@
           content: ""
           position: absolute
           left: 0
-          top: 2px
+          top: 0
           width: 20px
-          height: 16px
+          height: 20px
           z-index: 2
           transition: $secondary-transition
           border: 2px solid $grey.darken-1
@@ -131,7 +133,7 @@
             border-top-color: transparent
             transform: rotate(50deg)
             width: 8px
-            top: 0
+            top: -2px
             left: 0
             
       &.filled
@@ -152,7 +154,7 @@
             &:before
               border-bottom: 2px solid #fff
               border-right: 2px solid #fff
-              top: -1px
+              top: -3px
               left: 0
               transform: rotate(37deg) scale(.8)
             
@@ -164,8 +166,8 @@
         + label    
           &:before
             border-right-color: $theme.secondary
-            left: -20px
-            top: -8px
+            left: -15px
+            top: -6px
             border-top: 0px solid transparent
             border-left: 0px solid transparent
             border-bottom: 0px solid transparent
