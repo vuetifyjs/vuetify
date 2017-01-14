@@ -89,6 +89,12 @@
       }
     },
 
+    mounted () {
+      if (this.value) {
+        this.$refs.select.value = this.value
+      }
+    },
+
     methods: {
       update () {
         if (!this.multiple) {
