@@ -17,7 +17,9 @@
 
     data () {
       return {
+        childrenCount: 0,
         index: null,
+        items: [],
         reversing: false
       }
     },
@@ -46,10 +48,6 @@
         return [
           [`tab:click:${this._uid}`, this.tabClick]
         ]
-      },
-
-      items () {
-        return this.$children.filter(i => i.$options._componentTag === 'v-tabs-item')
       }
     },
 
@@ -65,13 +63,27 @@
 
     methods: {
       init () {
+        this.getItems()
         this.index = 0
+      },
+
+      getItems () {
+        if (this.$children.length === this.childrenCount) {
+          return
+        }
+
+        this.childrenCount = this.$children.length
+        this.items = this.$children.filter(i => i.$options._componentTag === 'v-tabs-item')
       },
       
       tabClick (target) {
-        let nextIndex = this.items.findIndex(i => i.$el.id === target)
-        this.reversing = nextIndex > this.index ? false : true
-        this.index = nextIndex
+        this.getItems()
+
+        this.$nextTick(() => {
+          let nextIndex = this.items.findIndex(i => i.$el.id === target)
+          this.reversing = nextIndex > this.index ? false : true
+          this.index = nextIndex
+        })
       },
     }
   }

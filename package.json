@@ -1,6 +1,6 @@
 {
   "name": "vuetify",
-  "version": "0.8.5",
+  "version": "0.8.6",
   "author": {
     "name": "John Leider",
     "email": "john.j.leider@gmail.com"
@@ -12,7 +12,7 @@
     "dev": "TARGET=dev webpack --config build/config.js --progress --hide-modules",
     "build": "rimraf dist && NODE_ENV=production node build/build.js --progress --hide-modules"
   },
-  "description": "Vue JS 2.0 Components Framework",
+  "description": "Vue.js 2 Semantic Component Framework",
   "devDependencies": {
     "buble": "^0.15.1",
     "buble-loader": "^0.4.0",
