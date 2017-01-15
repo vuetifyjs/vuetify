@@ -6,13 +6,15 @@
     v-bind:style="styles"
   )
     slot(name="top")
-    v-sidebar-items(
-      v-if="items.length > 0"
-      v-bind:group-class="groupClass"
-      v-bind:items="items"
-      v-bind:ripple="ripple"
-      v-bind:router="router"
-    )
+    v-list(ref="list")
+      template(v-for="item in items")
+        div(v-if="item.header" v-html="item.header")
+        v-list-item(
+          v-else
+          v-bind:item="item"
+          v-bind:router="router"
+          v-bind:ripple="ripple"
+        )
     slot
 </template>
 
@@ -90,18 +92,18 @@
       }
     },
 
-    mounted () {
+    mounted () {      
       this.$vuetify.load(() => {
         this.resize()
         window.addEventListener('resize', this.resize, false)
       })
 
-      this.$vuetify.bus.sub(`${this.$options.name}:item-clicked:${this._uid}`, this.itemClicked)
+      this.$vuetify.bus.sub(`list-item:selected:${this.$refs.list._uid}`, this.itemClicked)
     },
 
     beforeDestroy () {
       window.removeEventListener('resize', this.resize)
-      this.$vuetify.bus.unsub(`${this.$options.name}:item-clicked:${this._uid}`, this.itemClicked)
+      this.$vuetify.bus.unsub(`list-item:selected:${this.$refs.list_uid}`, this.itemClicked)
     },
 
     methods: {
