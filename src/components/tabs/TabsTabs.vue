@@ -7,7 +7,8 @@
       class="tabs__container"
       ref="container"
     )
-      v-tab-item(v-for="item in items" v-bind:item="item" v-bind:ripple="ripple")
+      v-list(v-if="items.length")
+        v-list-item(v-for="item in items" v-bind:item="item" v-bind:ripple="ripple")
       slot
       v-tabs-slider(ref="slider")
     v-icon(
