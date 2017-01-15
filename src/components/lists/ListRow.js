@@ -1,7 +1,7 @@
 import Itemable from '../../mixins/itemable'
 
 export default {
-  name: 'list-item',
+  name: 'list-row',
 
   mixins: [Itemable]
 }
