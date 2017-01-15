@@ -5,22 +5,29 @@
   position: absolute
   white-space: nowrap
   z-index: 4
+  display: flex
   @extend .z-depth-1
   
   li
     text-align: left
-    
-  &__item
-    text-decoration: none
-    display: inline-flex
-    justify-content: space-between
-    align-items: center
-    text-transform: none
-    padding: 1rem
+  
+  .list
     width: 100%
-    font-weight: 500
-    font-size: 1rem
-    color: inherit
     
-    &:hover
-      background-color: rgba(0, 0, 0, 0.1)
+    li, li:first-child, li:last-child, .list__item
+      margin: 0
+    
+  // &__item
+  //   text-decoration: none
+  //   display: inline-flex
+  //   justify-content: space-between
+  //   align-items: center
+  //   text-transform: none
+  //   padding: 1rem
+  //   width: 100%
+  //   font-weight: 500
+  //   font-size: 1rem
+  //   color: inherit
+    
+  //   &:hover
+  //     background-color: rgba(0, 0, 0, 0.1)
