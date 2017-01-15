@@ -1,25 +1,28 @@
 import { createSimpleFunctional } from '../../util/helpers'
 
-const List = createSimpleFunctional('list', 'ul')
+import ListItem from './ListItem'
+import ListGroup from './ListGroup.vue'
+
+const List = {
+  name: 'list',
+
+  render (createElement) {
+    let data = { 
+      'class': 'list',
+      attrs: {
+        'data-uid': this._uid
+      }
+    }
+
+    return createElement('ul', data, this.$slots.default)
+  }
+}
+
 const ListItemAction = createSimpleFunctional('list__item__action', 'div')
 const ListItemActionText = createSimpleFunctional('list__item__action-text', 'span')
 const ListItemAvatar = createSimpleFunctional('list__item__avatar', 'div')
 const ListItemContent = createSimpleFunctional('list__item__content', 'div')
 const ListItemTitle = createSimpleFunctional('list__item__title', 'div')
-const ListItem = {
-  functional: true,
-
-  render (h, { data, children }) {
-    const a = [h('a', { attrs: { href: 'javascript:;' }, staticClass: 'list__item' }, children)]
-
-    if (data.attrs && data.attrs.disabled) {
-      data.staticClass = data.staticClass ? `disabled ${data.staticClass}` : 'disabled'
-      delete data.attrs.disabled
-    }
-
-    return h('li', data, a)
-  }
-}
 
 const ListItemSubTitle = {
   functional: true,
@@ -40,6 +43,7 @@ const ListItemSubTitle = {
 export default {
   List,
   ListItem,
+  ListGroup,
   ListItemAction,
   ListItemActionText,
   ListItemAvatar,

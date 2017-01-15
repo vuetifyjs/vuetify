@@ -6,12 +6,14 @@
     text-decoration: none
     
   li
-    min-height: 72px
+    min-height: 50px
     display: flex
     align-items: center
     justify-content: center
     margin: 0 -14px
     transition: $primary-transition
+    position: relative
+    flex-wrap: wrap
     
     &:first-child
       margin-top: -14px
@@ -24,6 +26,12 @@
     
     &:hover
       background: rgba(#000, .1)
+      
+  &--group
+    overflow: hidden
+    
+    .list__item
+      padding-left: 92px
     
   &__item
     display: flex
@@ -40,6 +48,12 @@
       
     .input-group
       margin: 0
+      
+    &--toggle
+      &.list__item--active
+        .list__item__action
+          i
+            transform: rotate(180deg)
               
     &__avatar, &__action
       display: flex
@@ -50,6 +64,10 @@
       align-items: center
       justify-content: flex-start
       flex-wrap: wrap
+      flex-shrink: 1
+      
+      i
+        transition: $primary-transition
       
       &-text
         flex: 1 0 100%
@@ -73,14 +91,18 @@
         color: $grey.darken-3
     
     &__title
-      font-size: 17px
+      font-size: 16px
       font-weight: 500
+      flex: 1
       
     &__content
       text-align: left
       flex: 0 1 100%
       font-size: 15px
       overflow: hidden
+      display: flex
+      align-items: center
+      flex-wrap: wrap
       
       + .list__item__avatar, + .list__item__action
         justify-content: flex-end
@@ -91,6 +113,7 @@
       white-space: nowrap
       overflow: hidden
       text-overflow: ellipsis
+      flex: 1 0 100%
       
       &--clamp
         white-space: initial

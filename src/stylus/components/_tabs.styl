@@ -59,6 +59,13 @@
       
     .icon--right
       right: 0
+      
+  &__items
+    overflow: hidden
+    position: relative
+    border-width: 0 1px 1px 1px
+    border-style: solid
+    border-color: rgba(#000, .1)
     
   &__container
     overflow-x: auto
@@ -84,16 +91,15 @@
       display: flex
       align-items: center
   
-  .tab__item
-    color: $grey.lighten-2
+  .list__item
     display: flex
     flex-shrink: 0
-    flex-direction: column
-    align-items: center
+    align-items: initial
     justify-content: center
     min-width: 125px
     height: 100%
-    padding: 1rem
+    padding: 0
+    margin: 0
     min-width: 0
     position: relative
     text-align: center
@@ -103,12 +109,25 @@
     transition: $primary-transition
     overflow: hidden
     white-space: nowrap
+    flex-wrap: wrap
+    
+    > .list__item__avatar,
+    > .list__item__content,
+    > .list__item__actions
+      flex: 1 0 100%
+      justify-content: center
+      
+    .list__item__title
+      color: #fff
+      text-align: center
     
     .icon
-      flex: 1
-      flex-basis: 100%
+      color: #fff
+      flex: 0 1 auto
       font-size: 32px
-      margin: .5rem 0
+      margin: 0
+      height: auto
+      width: auto
 
     &--active
       color: #fff
@@ -116,13 +135,6 @@
     &--disabled
       opacity: .5
       pointer-events: none
-    
-  &__items
-    overflow: hidden
-    position: relative
-    border-width: 0 1px 1px 1px
-    border-style: solid
-    border-color: rgba(#000, .1)
     
   &__item
     transition: $primary-transition
