@@ -1,0 +1,97 @@
+.progress-linear
+  background: transparent
+  margin: 1rem 0
+  overflow: hidden
+  width: 100%
+  position: relative
+  
+  &__bar
+    background: lighten($theme.accent, 40%)
+    width: 100%
+    height: inherit
+    position: relative
+    transition: .3s ease-in
+    z-index: 2
+    
+    &__determinate
+      background: $theme.primary
+      height: inherit
+      transition: .3s ease-in
+      
+    &__indeterminate      
+      &:before, &:after
+        background: $theme.primary
+        content: ''
+        height: inherit
+        position: absolute
+        left: 0
+        top: 0
+        bottom: 0
+        will-change: left, right
+        width: auto
+      
+      &:before
+        animation: indeterminate
+        animation-duration: 2.2s
+        animation-iteration-count: infinite
+        
+      &:after
+        animation: indeterminate-short
+        animation-duration: 2.2s
+        animation-iteration-count: infinite
+        
+  &--query
+    .progress-linear__bar__indeterminate
+      &:before
+        animation: query
+        animation-duration: 2s
+        animation-iteration-count: infinite
+        
+      &:after
+        animation: query-short
+        animation-duration: 2s
+        animation-iteration-count: infinite
+        
+  @keyframes indeterminate
+    0%
+      left: -90%
+      right: 100%
+    60%
+      left: -90%
+      right: 100%
+    100%
+      left: 100%
+      right: -35%
+      
+  @keyframes indeterminate-short
+    0%
+      left: -200%
+      right: 100%
+    60%
+      left: 107%
+      right: -8%
+    100%
+      left: 107%
+      right: -8%
+      
+  @keyframes query
+    0%
+      right: -90%
+      left: 100%
+    60%
+      right: -90%
+      left: 100%
+    100%
+      right: 100%
+      left: -35%
+      
+  @keyframes query-short
+    0%
+      right: -200%
+      left: 100%
+    60%
+      right: 107%
+      left: -8%
+    100%
+      right: 107%
+      left: -8%
