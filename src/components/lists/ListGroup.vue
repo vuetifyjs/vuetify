@@ -8,7 +8,7 @@
       v-bind:class="classes"
       v-show="active"
     )
-      v-list-item(
+      v-list-tile(
         v-for="item in items"
         v-bind:item="item"
         v-bind:ripple="ripple"
@@ -52,8 +52,8 @@
 
       events () {
         return [
-          [`list-item-group:toggle:${this.listUid}`, this.toggle],
-          [`list-item-group:open:${this.listUid}`, this.open],
+          [`list-tile-group:toggle:${this.listUid}`, this.toggle],
+          [`list-tile-group:open:${this.listUid}`, this.open],
         ]
       },
 
@@ -67,7 +67,7 @@
     watch: {
       active (active) {
         if (!active) {
-          this.$vuetify.bus.pub(`list-item-group:closed:${this._uid}`)
+          this.$vuetify.bus.pub(`list-tile-group:closed:${this._uid}`)
         }
       }
     },
