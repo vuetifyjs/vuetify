@@ -53,86 +53,61 @@
     display: flex
     align-items: center
     
+  > .list:not(.list--group)
+    display: flex
+    
+    > .list__row
+      margin: 0
+      
+      > li
+        display: flex
+        align-items: center
+        position: relative
+        height: $navbar-height
+        
+        > .list__tile
+          justify-content: center
+          height: 100%
+          
+          &.list__tile--toggle
+            .list__tile__action
+              .icon
+                color: #fff
+          
+          .list__tile__avatar
+            color: #fff
+            flex: initial
+          
+          .list__tile__title
+            color: #fff
+            
+          .list__tile__sub-title
+            color: darken(#fff, 10%)
+            
+          .list__tile__content
+            overflow: initial
+            padding: 0 8px
+    
+  > .list
+    .list--group
+      background: #fff
+      position: absolute
+      top: 100%
+      left: 0
+      width: 100%
+      z-index: 3
+      @extend .z-depth-1
+      
+      .list__row
+        &:first-child
+          margin: 0
+      
+      .list__tile
+        color: initial
+        padding-left: 16px
+    
   &__title
     color: #fff
     font-size: $headings.h6.size
     flex: 1;
     padding: 0 2rem
-  
-  &__items
-    list-style-type: none
-    padding: 0
-    background-color: inherit
-    display: flex
-    align-items: center
-    height: 100%
-
-    > li
-      display: flex
-      align-items: center
-      
-  &__item
-    align-items: center
-    color: #fff
-    display: flex
-    padding: $navbar-item-padding
-    text-decoration: none
-    transition: all 0.3s ease-out
-    position: relative
-    height: 100%
-    
-    i
-      font-size: 2rem
-      
-      + span
-        margin-left: 5px
-    
-    &:hover, &--active
-      background: rgba(#000,0.1)
-      
-  &__group
-    position: relative
-    background-color: inherit
-    color: #fff
-    height: 100%
-    
-    .navbar__items
-      position: absolute
-      top: 100%
-      left: 0
-      z-index: 99
-      min-width: 100%
-      background-color: $theme.secondary
-      overflow: hidden
-      transition: .3s cubic-bezier(0,0,.2,1)
-      flex-wrap: wrap
-      height: auto
-      @extend .z-depth-1
-      
-      li
-        width: 100%
-        
-      .navbar__item
-        padding: 1rem
-        white-space: nowrap
-        color: inherit
-        font-weight: 500
-        width: 100%
-        
-        &:hover
-          background-color: rgba(#fff,.2)
-        
-    &-header
-      @extend .navbar__item
-      padding-right: 45px
-      
-      &:after
-        content: '\E314'
-        font-family: 'Material Icons'
-        font-size: 1.5rem
-        position: absolute
-        right: 15px
-        top: calc(50% - 16px)
-        color: inherit
-        transition: transform 0.3s cubic-bezier(0, 0, .2, 1)
-        transform: rotate(-90deg)

@@ -6,7 +6,7 @@
     v-bind:style="styles"
   )
     slot(name="top")
-    v-list(ref="list" dense)
+    v-list(ref="list" v-if="items.length" dense)
       v-list-row(v-for="item in items")
         div(v-if="item.header" v-html="item.header")
         v-list-tile(
@@ -25,6 +25,12 @@
     name: 'sidebar',
 
     mixins: [Toggleable],
+
+    data () {
+      return {
+        list: {}
+      }
+    },
 
     props: {
       closeOnClick: {
@@ -92,18 +98,33 @@
       }
     },
 
-    mounted () {      
+    mounted () {
+      this.list = this.$children.find(i => i.$options._componentTag === 'v-list')
+
       this.$vuetify.load(() => {
         this.resize()
         window.addEventListener('resize', this.resize, false)
       })
 
-      this.$vuetify.bus.sub(`list-item:selected:${this.$refs.list._uid}`, this.itemClicked)
+      if (this.list) {
+        const events = [
+          [`list-tile:selected:${this.list._uid}`, this.itemClicked]
+        ]
+
+        this.$vuetify.bus.sub(events)
+      }
     },
 
     beforeDestroy () {
       window.removeEventListener('resize', this.resize)
-      this.$vuetify.bus.unsub(`list-item:selected:${this.$refs.list_uid}`, this.itemClicked)
+
+      if (this.list) {
+        const events = [
+          [`list-tile:selected:${this.list._uid}`, this.itemClicked]
+        ]
+
+        this.$vuetify.bus.unsub(events)
+      }
     },
 
     methods: {
