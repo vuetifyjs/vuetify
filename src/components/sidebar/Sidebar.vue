@@ -6,10 +6,10 @@
     v-bind:style="styles"
   )
     slot(name="top")
-    v-list(ref="list")
-      template(v-for="item in items")
+    v-list(ref="list" dense)
+      v-list-row(v-for="item in items")
         div(v-if="item.header" v-html="item.header")
-        v-list-item(
+        v-list-tile(
           v-else
           v-bind:item="item"
           v-bind:router="router"

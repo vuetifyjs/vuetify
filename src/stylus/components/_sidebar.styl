@@ -7,10 +7,10 @@
   z-index: 3
   @extend .z-depth-2
 
-  ul
-    list-style-type: none
-    width: 100%
-    padding: 0
+  // ul
+  //   list-style-type: none
+  //   width: 100%
+  //   padding: 0
     
   li.disabled
     opacity: 0.4
@@ -60,28 +60,13 @@
     li
       margin: 0
     
-  .list__item
+  .list__tile
     color: $sidebar-item-color
-    display: flex
-    align-items: center
-    text-decoration: none
     transition: $primary-transition
-    font-weight: 300
-    height: $sidebar-item-height
     position: relative
     
-    .list__item__avatar, .list__item__action, .icon
+    .list__tile__avatar, .list__tile__action, .icon
       color: $sidebar-item-color
-      
-    .list__item__action
-      justify-content: center
-      
-    .list__item__title
-      font-weight: 300
-  
-    &--active
-      background-color: $sidebar-item-active-background-color
-      color: $sidebar-item-active-color
       
     &--disabled
       opacity: .4
@@ -92,5 +77,5 @@
       color: $sidebar-item-active-color
       
   .list--group
-    .list__item--active
-      background-color: $sidebar-group-header-active-sidebar-item-active-background-color !important
+    > .list__tile--active
+      color: $sidebar-item-color
