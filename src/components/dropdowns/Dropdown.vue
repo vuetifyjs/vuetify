@@ -16,7 +16,8 @@
       v-show="active"
     )
       v-list(v-if="items.length")
-        v-list-item(v-for="item in items" v-bind:item="item")
+        v-list-row(v-for="item in items")
+          v-list-tile(v-bind:item="item")
       slot
 </template>
 
