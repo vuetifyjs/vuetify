@@ -41,34 +41,35 @@ export default {
 
     events () {
       return [
-        [`list-tile:click:${this.list._uid}`, this.toggle],
-        [`list-tile-group:click:${this.list._uid}`, this.close]
+        [`list-tile:click:${this.listUid}`, this.toggle],
+        [`list-tile-group:click:${this.listUid}`, this.close],
+        [`list:close:${this.listUid}`, () => this.active = false]
       ]
     },
 
-    list () {
-      return closestParentTag.call(this, 'v-list')
+    listUid () {
+      return closestParentTag.call(this, 'v-list')._uid
     }
   },
 
   methods: {
     click () {
       if (this.group) {
-        this.$vuetify.bus.pub(`list-tile-group:toggle:${this.list._uid}`, this.group._uid)
+        this.$vuetify.bus.pub(`list-tile-group:toggle:${this.listUid}`, this.group._uid)
 
         return this.toggle(this._uid)
       }
 
       if (this.parent) {
-        this.$vuetify.bus.pub(`list-tile-group:open:${this.list._uid}`, this.parent._uid)
-        this.$vuetify.bus.pub(`list-tile:selected:${this.list._uid}`)
+        this.$vuetify.bus.pub(`list-tile-group:open:${this.listUid}`, this.parent._uid)
+        this.$vuetify.bus.pub(`list-tile:selected:${this.listUid}`)
 
         return this.open()
       }
 
-      this.$vuetify.bus.pub(`list-tile-group:open:${this.list._uid}`, null)
-      this.$vuetify.bus.pub(`list-tile:click:${this.list._uid}`, this._uid)
-      this.$vuetify.bus.pub(`list-tile:selected:${this.list._uid}`)
+      this.$vuetify.bus.pub(`list-tile-group:open:${this.listUid}`, null)
+      this.$vuetify.bus.pub(`list-tile:click:${this.listUid}`, this._uid)
+      this.$vuetify.bus.pub(`list-tile:selected:${this.listUid}`)
     },
 
     open () {
@@ -145,7 +146,7 @@ export default {
 
     let children = []
 
-    if (this.item.avatar && typeof this.item.avatar === 'string') {
+    if (this.item.avatar) {
       let icon = createElement('v-icon', this.item.avatar)
       let avatar = createElement('v-list-tile-avatar', {}, [icon])
 
@@ -153,9 +154,14 @@ export default {
     }
 
     if (this.item.title) {
-      let title = createElement('v-list-tile-title', { domProps: { innerHTML: this.item.title } })
-      let content = createElement('v-list-tile-content', {}, [title])
-      children.push(content)
+      let items = []
+      items.push(createElement('v-list-tile-title', { domProps: { innerHTML: this.item.title } }))
+
+      if (this.item.subtitle) {
+        items.push(createElement('v-list-tile-sub-title', { domProps: { innerHTML: this.item.subtitle } }))
+      }
+
+      children.push(createElement('v-list-tile-content', {}, items))
     }
 
     if (this.item.action) {

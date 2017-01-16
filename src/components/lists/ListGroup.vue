@@ -8,12 +8,12 @@
       v-bind:class="classes"
       v-show="active"
     )
-      v-list-tile(
-        v-for="item in items"
-        v-bind:item="item"
-        v-bind:ripple="ripple"
-        v-bind:router="router"
-      )
+      v-list-row(v-for="item in items")
+        v-list-tile(
+          v-bind:item="item"
+          v-bind:ripple="ripple"
+          v-bind:router="router"
+        )
 </template>
 <script>
   import Eventable from '../../mixins/eventable'
@@ -54,6 +54,7 @@
         return [
           [`list-tile-group:toggle:${this.listUid}`, this.toggle],
           [`list-tile-group:open:${this.listUid}`, this.open],
+          [`list:close:${this.listUid}`, () => this.active = false]
         ]
       },
 

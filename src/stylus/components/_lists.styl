@@ -1,6 +1,7 @@
 .list
   list-style-type: none
   padding: 0
+  transition: $primary-transition
   
   .input-group
   
@@ -45,6 +46,7 @@
       overflow: hidden
       text-overflow: ellipsis
       font-weight: 400
+      width: 100%
     
     &__action, &__avatar
       display: flex
@@ -53,7 +55,7 @@
       flex: 1 0 56px
       
     &__action
-      justify-content: flex-start
+      align-items: flex-start
       flex-direction: column
       justify-content: center
       
@@ -76,7 +78,7 @@
       font-size: 15px
       overflow: hidden
       display: flex
-      align-items: left
+      align-items: flex-start
       justify-content: center
       flex-direction: column
       
@@ -85,6 +87,7 @@
         
       + .list__tile__action
         flex: 1 0 48px
+        align-items: center
         
     &--toggle
       &.list__tile--active
