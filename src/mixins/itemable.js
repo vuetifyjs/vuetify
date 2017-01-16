@@ -1,13 +1,9 @@
 import { closestParentTag } from '../util/helpers'
-import Eventable from '../mixins/eventable'
 
 export default {
-  mixins: [Eventable],
-
   data () {
     return {
-      active: false,
-      group: {}
+      active: false
     }
   },
   
@@ -34,82 +30,46 @@ export default {
   computed: {
     classes () {
       let classes = {}
-      classes['list__item--active'] = this.group ? this.active : false
+      classes[`${this.className}--active`] = this.active
+      classes[`${this.className}--disabled`] = this.disabled || this.item.disabled
       
       return classes
     },
 
-    events () {
-      return [
-        [`list-item:click:${this.list._uid}`, this.toggle],
-        [`list-item-group:click:${this.list._uid}`, this.close]
-      ]
+    groupName () {
+      return `${this.$options.name.replace(/([a-z]*)-[a-z]*/g, '$1')}-group`
     },
 
-    list () {
-      return closestParentTag.call(this, 'v-list')
+    groupUid () {
+      let group = closestParentTag.call(this, `v-${this.groupName}`)
+
+      return group ? group._uid : null
+    },
+
+    className () {
+      return this.$options.name.replace(/-/g, '__')
+    },
+
+    rootName () {
+      return this.$options.name.replace(/([a-z]*)-[a-z]*/g, '$1')
+    },
+
+    rootId () {
+      let root = closestParentTag.call(this, `v-${this.rootName}`)
+
+      return root ? root._uid : null
     }
   },
 
   methods: {
     click () {
-      if (this.group) {
-        this.$vuetify.bus.pub(`list-item-group:toggle:${this.list._uid}`, this.group._uid)
-
-        return this.toggle(this._uid)
-      }
-
-      if (this.parent) {
-        this.$vuetify.bus.pub(`list-item-group:open:${this.list._uid}`, this.parent._uid)
-        this.$vuetify.bus.pub(`list-item:selected:${this.list._uid}`)
-
-        return this.open()
-      }
-
-      this.$vuetify.bus.pub(`list-item-group:open:${this.list._uid}`, null)
-      this.$vuetify.bus.pub(`list-item:click:${this.list._uid}`, this._uid)
-      this.$vuetify.bus.pub(`list-item:selected:${this.list._uid}`)
-    },
-
-    open () {
-      this.active = true
-    },
-
-    close (uid) {
-      this.active = this._uid === uid
-    },
-
-    toggle (uid) {
-      if (this._uid !== uid) {
-        return this.active = false
-      }
-
-      this.active = !this.active
-    }
-  },
-
-  mounted () {
-    this.group = this.$children.find(i => i.$options._componentTag === 'v-list-group')
-    this.parent = closestParentTag.call(this, 'v-list-group')
-
-    if (this.group) {
-      if (this.$el.querySelector('.list__item--active')) {
-        this.click()
-      }
-
-      this.$vuetify.bus.sub(`list-item-group:closed:${this.group._uid}`, this.close)
-    }
-  },
-
-  beforeDestroy () {
-    if (this.group) {
-      this.$vuetify.bus.unsub(`list-item-group:closed:${this.group._uid}`, this.close)
+      this.$vuetify.bus.pub(`${this.groupName}:close:${this.rootId}`, this.groupUid)
+      this.$vuetify.bus.pub(`${this.rootName}:item-clicked:${this.rootId}`)
     }
   },
 
   render (createElement) {
-    let el,
-        list = []
+    let el
 
     let data = {
       attrs: {},
@@ -123,20 +83,20 @@ export default {
       ]
     }
 
-    data.class['list__item'] = true
+    data.class[this.className] = true
 
-    if (this.item.href && (this.router || this.item.router)) {
+    if (this.router || this.item.router) {
       el = 'router-link'
       data.props.to = this.item.href
       data.props.exact = this.item.href === '/'
-      data.props.activeClass = 'list__item--active'
+      data.props.activeClass = `${this.className}--active`
       
       if (this.click) {
         data.nativeOn = { click: this.click }
       }
     } else {
       el = 'a'
-      data.attrs.href = this.item.href || 'javascript:;'
+      data.attrs.href = this.item.href
       
       if (this.click) {
         data.on = { click: this.click }
@@ -145,58 +105,18 @@ export default {
 
     let children = []
 
-    if (this.item.avatar && typeof this.item.avatar === 'string') {
-      let icon = createElement('v-icon', this.item.avatar)
-      let avatar = createElement('v-list-item-avatar', {}, [icon])
-
-      children.push(avatar)
+    if (this.item.icon && typeof this.item.icon === 'string') {
+      children.push(createElement('v-icon', this.item.icon))
     }
 
-    if (this.item.title) {
-      let title = createElement('v-list-item-title', { domProps: { innerHTML: this.item.title } })
-      let content = createElement('v-list-item-content', {}, [title])
-      children.push(content)
-    }
-
-    if (this.item.action) {
-      let data = {}
-
-      if (typeof this.item.action === 'object') {
-        data['class'] = this.item.action.class || ''
-        data.domProps = {
-          innerText: this.item.action.icon
-        }
-      } else {
-        data = this.item.action
-      }
-
-      let icon = createElement('v-icon', data)
-      let action = createElement('v-list-item-action', {}, [icon])
-
-      children.push(action)
-    }
-
-    if (this.item.items) {
-      let icon = createElement('v-icon', 'keyboard_arrow_down')
-      children.push(createElement('v-list-item-action', {}, [icon]))
-
-      data.class['list__item--toggle'] = true
+    if (this.item.text) {
+      children.push(createElement('span', this.item.text))
     }
 
     children.push(this.$slots.default)
 
-    list.push(createElement(el, data, children))
-
-    if (this.item.items) {
-      list.push(createElement('v-list-group', { 
-        props: { 
-          items: this.item.items,
-          ripple: this.ripple,
-          router: this.router
-        }
-      }))
-    }
-
-    return createElement('li', { 'class': { 'disabled': this.disabled || this.item.disabled } }, list)
+    return createElement('li', {}, [
+      createElement(el, data, children)
+    ])
   }
 }
