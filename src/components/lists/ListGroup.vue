@@ -19,12 +19,14 @@
         class="list list--group"
         v-show="active"
       )
+        v-divider(light)
         v-list-row(v-for="item in items")
           v-list-tile(
             v-bind:item="item"
             v-bind:ripple="ripple"
             v-bind:router="router"
           )
+        v-divider(light)
 </template>
 <script>
   import { closestParentTag, addOnceEventListener } from '../../util/helpers'

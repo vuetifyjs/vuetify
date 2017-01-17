@@ -17,7 +17,10 @@ const ListSubHeader = {
   render (h, { data, children }) {
     let listClass = 'list__sub-header'
 
-    if (data.props && data.props.inset) {
+    if (
+      (data.props && data.props.inset) ||
+      (data.attrs && data.attrs.inset)
+    ) {
       listClass += ' list__sub-header--inset'
     }
 
