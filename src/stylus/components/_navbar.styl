@@ -57,41 +57,38 @@
   > .list:not(.list--group)
     display: flex
     
-    > .list__row
+    .list--group__container
+      height: $navbar-height
+      position: relative
+    
+    > .list__row,
+    .list--group__container
       margin: 0
+      display: flex
+      align-items: center
+      height: $navbar-height
       
-      .list--group__container
-        height: $navbar-height
-        position: relative
+      > .list__tile
+        justify-content: center
+        height: 100%
         
-      .list--group__container > li,
-      > li
-        display: flex
-        align-items: center
-        position: relative
-        height: $navbar-height
+        .list__tile__action
+          .icon
+            color: #fff
         
-        > .list__tile
-          justify-content: center
-          height: 100%
+        .list__tile__avatar
+          color: #fff
+          flex: initial
+        
+        .list__tile__title
+          color: #fff
           
-          .list__tile__action
-            .icon
-              color: #fff
+        .list__tile__sub-title
+          color: darken(#fff, 10%)
           
-          .list__tile__avatar
-            color: #fff
-            flex: initial
-          
-          .list__tile__title
-            color: #fff
-            
-          .list__tile__sub-title
-            color: darken(#fff, 10%)
-            
-          .list__tile__content
-            overflow: initial
-            padding: 0 8px
+        .list__tile__content
+          overflow: initial
+          padding: 0 8px
     
   > .list
     .list--group
