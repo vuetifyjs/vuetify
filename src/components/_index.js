@@ -5,6 +5,7 @@ import Buttons from './buttons/index'
 import Cards from './cards/index'
 import Chips from './chips/index'
 import Collapsible from './collapsible/index'
+import Dividers from './dividers/index'
 import Dropdowns from './dropdowns/index'
 import Footer from './footer/index'
 import Forms from './forms/index'
@@ -42,6 +43,7 @@ export default bootstrap(
   Cards,
   Chips,
   Collapsible,
+  Dividers,
   Dropdowns,
   Footer,
   Forms,
