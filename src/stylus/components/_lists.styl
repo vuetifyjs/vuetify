@@ -28,6 +28,12 @@
     &__action,
     &__avatar
       height: 100%
+      
+    &__title, &__subtitle
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
+      width: 100%
     
     &__title
       font-size: 16px
@@ -42,11 +48,7 @@
       color: $grey.base
       font-size: 14px
       line-height: 1.2
-      white-space: nowrap
-      overflow: hidden
-      text-overflow: ellipsis
       font-weight: 400
-      width: 100%
     
     &__action, &__avatar
       display: flex
@@ -88,15 +90,6 @@
       + .list__tile__action
         flex: 1 0 48px
         align-items: center
-        
-    &--toggle
-      &.list__tile--active
-        .list__tile__title
-          color: inherit
-          
-        .list__tile__action          
-          .icon
-            transform: rotate(180deg)
             
     &--active
       .list__tile__title
@@ -156,3 +149,12 @@
       .list__tile__title
         color: $theme.primary
         font-weight: 500
+        
+    &__header
+      .list__tile
+        .list__tile__title
+          color: inherit
+          
+        .list__tile__action          
+          .icon
+            transform: rotate(180deg)

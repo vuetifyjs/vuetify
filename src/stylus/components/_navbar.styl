@@ -60,6 +60,11 @@
     > .list__row
       margin: 0
       
+      .list--group__container
+        height: $navbar-height
+        position: relative
+        
+      .list--group__container > li,
       > li
         display: flex
         align-items: center
@@ -70,10 +75,9 @@
           justify-content: center
           height: 100%
           
-          &.list__tile--toggle
-            .list__tile__action
-              .icon
-                color: #fff
+          .list__tile__action
+            .icon
+              color: #fff
           
           .list__tile__avatar
             color: #fff
@@ -106,6 +110,7 @@
       .list__tile
         color: initial
         padding-left: 16px
+        height: 100%
     
   &__title
     color: #fff
