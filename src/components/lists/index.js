@@ -3,7 +3,7 @@ import { createSimpleFunctional } from '../../util/helpers'
 import ListGroup from './ListGroup.vue'
 import ListTile from './ListTile'
 
-const ListRow = createSimpleFunctional('list__row', 'div')
+const ListRow = createSimpleFunctional('list__row', 'li')
 const ListTileActionText = createSimpleFunctional('list__tile__action-text', 'span')
 const ListTileAvatar = createSimpleFunctional('list__tile__avatar', 'div')
 const ListTileContent = createSimpleFunctional('list__tile__content', 'div')
@@ -13,11 +13,16 @@ const List = {
   name: 'list',
 
   props: {
-    twoLine: Boolean,
-
     dense: Boolean,
 
-    threeLine: Boolean
+    items: {
+      type: Array,
+      default: () => []
+    },
+
+    threeLine: Boolean,
+
+    twoLine: Boolean
   },
 
   computed: {
@@ -38,6 +43,16 @@ const List = {
         'data-uid': this._uid
       }
     }
+
+    // if (this.items) {
+    //   let items = []
+
+    //   this.items.forEach(obj => {
+    //     items.push(
+    //       createElement('div')
+    //     )
+    //   })
+    // }
 
     return createElement('ul', data, this.$slots.default)
   }

@@ -32,6 +32,13 @@ export default {
   },
 
   computed: {
+    classes () {
+      return {
+        'list__tile': true,
+        'list__tile--disabled': this.disabled || this.item.disabled
+      }
+    },
+
     listUID () {
       return closestParentTag.call(this, 'v-list')
     }
@@ -59,12 +66,11 @@ export default {
       })
     }
 
-    let el,
-        list = []
+    let el
 
     let data = {
       attrs: {},
-      class: {},
+      class: this.classes,
       props: {},
       directives: [
         {
@@ -73,8 +79,6 @@ export default {
         }
       ]
     }
-
-    data.class['list__tile'] = true
 
     if (this.item.href && (this.router || this.item.router)) {
       el = 'router-link'
@@ -138,8 +142,6 @@ export default {
 
     children.push(this.$slots.default)
 
-    list.push(createElement(el, data, children))
-
-    return createElement('li', { 'class': { 'disabled': this.disabled || this.item.disabled } }, list)
+    return createElement(el, data, children)
   }
 }
