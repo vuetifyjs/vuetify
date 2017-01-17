@@ -11,7 +11,11 @@ export default {
 
     threeLine: Boolean,
 
-    twoLine: Boolean
+    twoLine: Boolean,
+
+    ripple: Boolean,
+
+    router: Boolean
   },
 
   computed: {
@@ -52,14 +56,21 @@ export default {
           children.push(
             createElement('v-divider', { 
               attrs: { 
-                inset: obj.inset
+                inset: obj.inset,
+                light: obj.light
               } 
             })
           )
         } else {
           children.push(
             createElement('v-list-row', {}, [
-              createElement('v-list-tile', { props: { item: obj } })
+              createElement('v-list-tile', {
+                props: { 
+                  item: obj,
+                  ripple: this.ripple || obj.ripple,
+                  router: this.router || obj.router
+                } 
+              })
             ])
           )
         }

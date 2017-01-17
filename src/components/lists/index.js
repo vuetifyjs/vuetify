@@ -17,13 +17,13 @@ const ListSubHeader = {
   render (h, { data, children }) {
     let listClass = 'list__sub-header'
 
-    if (data.attrs && data.attrs.inset) {
+    if (data.props && data.props.inset) {
       listClass += ' list__sub-header--inset'
     }
 
     data.staticClass = data.staticClass ? `${listClass} ${data.staticClass}` : listClass
 
-    return h('div', data, children)
+    return h('li', data, children)
   }
 }
 
