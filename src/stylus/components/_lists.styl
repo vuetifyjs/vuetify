@@ -4,6 +4,19 @@
   transition: $primary-transition
   
   .input-group
+    margin: 0
+    
+  &__sub-header
+    height: 48px
+    display: flex
+    align-items: center
+    font-size: 14px
+    color: $grey.darken-1
+    font-weight: 500
+    padding: 0 16px
+    
+    &--inset
+      margin-left: 56px
   
   &__row
     li.disabled
@@ -37,7 +50,7 @@
     
     &__title
       font-size: 16px
-      line-height: 1
+      line-height: 1.15
       font-weight: 500
       transition: $primary-transition
       position: relative
@@ -48,7 +61,7 @@
     &__sub-title
       color: $grey.base
       font-size: 14px
-      line-height: 1.2
+      line-height: 1.3
       font-weight: 400
     
     &__action, &__avatar

@@ -105,10 +105,18 @@ export default {
     let children = []
 
     if (this.item.avatar) {
-      let icon = createElement('v-icon', this.item.avatar)
-      let avatar = createElement('v-list-tile-avatar', {}, [icon])
+      let avatar = []
+      if (this.item.avatar.indexOf('.') !== -1) {
+        avatar.push(
+          createElement('img', { domProps: { src: this.item.avatar } })
+        )
+      } else {
+        avatar.push(
+          createElement('v-icon', this.item.avatar)
+        )
+      }
 
-      children.push(avatar)
+      children.push(createElement('v-list-tile-avatar', {}, avatar))
     }
 
     if (this.item.title) {
