@@ -81,6 +81,10 @@
 
     methods: {
       resize () {
+        if (!this.$refs.container) {
+          return
+        }
+        
         this.mobile = this.$refs.container.scrollWidth > this.$refs.container.clientWidth
         this.$vuetify.bus.pub(`tab:resize:${this.tabsUid}`)
       },
