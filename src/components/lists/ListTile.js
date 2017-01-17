@@ -2,7 +2,7 @@ import { closestParentTag } from '../../util/helpers'
 import Eventable from '../../mixins/eventable'
 
 export default {
-  mixins: [Eventable],
+  name: 'list-tile',
 
   data () {
     return {
@@ -18,7 +18,7 @@ export default {
       type: Object,
       default () {
         return {
-          href: '#!',
+          href: 'javascript:;',
           text: '',
           icon: false,
           router: false
@@ -32,89 +32,39 @@ export default {
   },
 
   computed: {
-    classes () {
-      let classes = {}
-      classes['list__tile--active'] = this.group ? this.active : false
-      
-      return classes
-    },
-
-    events () {
-      return [
-        [`list-tile:click:${this.listUid}`, this.toggle],
-        [`list-tile-group:click:${this.listUid}`, this.close],
-        [`list:close:${this.listUid}`, () => this.active = false]
-      ]
-    },
-
-    listUid () {
-      return closestParentTag.call(this, 'v-list')._uid
+    listUID () {
+      return closestParentTag.call(this, 'v-list')
     }
   },
 
   methods: {
     click () {
-      if (this.group) {
-        this.$vuetify.bus.pub(`list-tile-group:toggle:${this.listUid}`, this.group._uid)
-
-        return this.toggle(this._uid)
-      }
-
-      if (this.parent) {
-        this.$vuetify.bus.pub(`list-tile-group:open:${this.listUid}`, this.parent._uid)
-        this.$vuetify.bus.pub(`list-tile:selected:${this.listUid}`)
-
-        return this.open()
-      }
-
-      this.$vuetify.bus.pub(`list-tile-group:open:${this.listUid}`, null)
-      this.$vuetify.bus.pub(`list-tile:click:${this.listUid}`, this._uid)
-      this.$vuetify.bus.pub(`list-tile:selected:${this.listUid}`)
-    },
-
-    open () {
-      this.active = true
-    },
-
-    close (uid) {
-      this.active = this._uid === uid
-    },
-
-    toggle (uid) {
-      if (this._uid !== uid) {
-        return this.active = false
-      }
-
-      this.active = !this.active
-    }
-  },
-
-  mounted () {
-    this.group = this.$children.find(i => i.$options._componentTag === 'v-list-group')
-    this.parent = closestParentTag.call(this, 'v-list-group')
-
-    if (this.group) {
-      if (this.$el.querySelector('.list__tile--active')) {
-        this.click()
-      }
-
-      this.$vuetify.bus.sub(`list-tile-group:closed:${this.group._uid}`, this.close)
-    }
-  },
-
-  beforeDestroy () {
-    if (this.group) {
-      this.$vuetify.bus.unsub(`list-tile-group:closed:${this.group._uid}`, this.close)
+      this.$vuetify.bus.pub('list-item:selected')
     }
   },
 
   render (createElement) {
+    if (this.item.items) {
+      return createElement('v-list-group', { 
+        props: {
+          item: {
+            avatar: this.item.avatar,
+            title: this.item.title,
+            group: this.item.group
+          },
+          items: this.item.items,
+          ripple: this.ripple,
+          router: this.router
+        }
+      })
+    }
+
     let el,
         list = []
 
     let data = {
       attrs: {},
-      class: this.classes,
+      class: {},
       props: {},
       directives: [
         {
@@ -142,6 +92,10 @@ export default {
       if (this.click) {
         data.on = { click: this.click }
       }
+    }
+
+    if (this.item.href == '#!') {
+      console.log(this.item)
     }
 
     let children = []
@@ -182,26 +136,9 @@ export default {
       children.push(action)
     }
 
-    if (this.item.items) {
-      let icon = createElement('v-icon', 'keyboard_arrow_down')
-      children.push(createElement('v-list-tile-action', {}, [icon]))
-
-      data.class['list__tile--toggle'] = true
-    }
-
     children.push(this.$slots.default)
 
     list.push(createElement(el, data, children))
-
-    if (this.item.items) {
-      list.push(createElement('v-list-group', { 
-        props: { 
-          items: this.item.items,
-          ripple: this.ripple,
-          router: this.router
-        }
-      }))
-    }
 
     return createElement('li', { 'class': { 'disabled': this.disabled || this.item.disabled } }, list)
   }

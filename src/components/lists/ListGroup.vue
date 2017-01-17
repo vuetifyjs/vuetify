@@ -1,23 +1,34 @@
 <template lang="pug">
-  transition(
-    v-on:enter="enter"
-    v-on:leave="leave"
-  )
-    ul(
-      class="list"
+  div(class="list--group__container")
+    v-list-tile(
+      v-on:click.native="toggle"
       v-bind:class="classes"
-      v-show="active"
     )
-      v-list-row(v-for="item in items")
-        v-list-tile(
-          v-bind:item="item"
-          v-bind:ripple="ripple"
-          v-bind:router="router"
-        )
+      v-list-tile-avatar(v-if="item.avatar")
+        v-icon {{ item.avatar }}
+      v-list-tile-content
+        v-list-tile-title {{ item.title }}
+      v-list-tile-action
+        v-icon keyboard_arrow_down
+
+    transition(
+      v-on:enter="enter"
+      v-on:leave="leave"
+    )
+      ul(
+        class="list list--group"
+        v-show="active"
+      )
+        v-list-row(v-for="item in items")
+          v-list-tile(
+            v-bind:item="item"
+            v-bind:ripple="ripple"
+            v-bind:router="router"
+          )
 </template>
 <script>
-  import Eventable from '../../mixins/eventable'
   import { closestParentTag, addOnceEventListener } from '../../util/helpers'
+  import Eventable from '../../mixins/eventable'
 
   export default {
     name: 'list-group',
@@ -32,6 +43,8 @@
     },
 
     props: {
+      item: Object,
+
       items: {
         type: Array,
         default: () => []
@@ -45,47 +58,34 @@
     computed: {
       classes () {
         return {
-          'list--group': true,
-          'list--group--active': this.active
+          'list--group__header': this.active
         }
+      },
+
+      listUID () {
+        return closestParentTag.call(this, 'v-list')._uid
       },
 
       events () {
         return [
-          [`list-tile-group:toggle:${this.listUid}`, this.toggle],
-          [`list-tile-group:open:${this.listUid}`, this.open],
-          [`list:close:${this.listUid}`, () => this.active = false]
+          [`list:close:${this.listUID}`, () => this.active = false]
         ]
-      },
-
-      listUid () {
-        let list = closestParentTag.call(this, 'v-list')
-
-        return list ? list._uid : null
       }
     },
 
     watch: {
-      active (active) {
-        if (!active) {
-          this.$vuetify.bus.pub(`list-tile-group:closed:${this._uid}`)
-        }
+      '$route' (to) {
+        this.active = this.matchRoute(to.path)
+      }
+    },
+
+    mounted () {
+      if (this.router) {
+        this.active = this.matchRoute(this.$route.path)
       }
     },
 
     methods: {
-      open (uid) {
-        this.active = this._uid === uid
-      },
-
-      toggle (uid) {
-        if (this._uid !== uid) {
-          return
-        }
-
-        this.active = !this.active
-      },
-
       enter (el, done) {
         el.style.display = 'block'
         let scrollHeight = el.scrollHeight
@@ -100,6 +100,14 @@
         el.style.height = 0
         
         addOnceEventListener(el, done, 'transitionend')
+      },
+
+      matchRoute (to) {
+        return to.match(this.item.group) !== null
+      },
+
+      toggle () {
+        this.active = !this.active
       }
     }
   }
