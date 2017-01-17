@@ -6,15 +6,14 @@
     v-bind:style="styles"
   )
     slot(name="top")
-    v-list(ref="list" v-if="items.length" dense)
-      v-list-row(v-for="item in items")
-        div(v-if="item.header" v-html="item.header")
-        v-list-tile(
-          v-else
-          v-bind:item="item"
-          v-bind:router="router"
-          v-bind:ripple="ripple"
-        )
+    v-list(
+      dense
+      v-if="items.length"
+      v-bind:items="items"
+      v-bind:ripple="ripple"
+      v-bind:router="router"
+      ref="list"
+    )
     slot
 </template>
 
