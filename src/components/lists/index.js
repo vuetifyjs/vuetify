@@ -46,21 +46,23 @@ const List = {
 const ListTileAction = {
   name: 'list-tile-action',
 
+  data () {
+    return {
+      stack: false
+    }
+  },
+
   computed: {
     classes () {
       return {
         'list__tile__action': true,
         'list__tile__action--stack': this.stack
       }
-    },
-
-    stack () {
-      if (!this.$el) {
-        return false
-      }
-
-      return this.$el.childElementCount > 1
     }
+  },
+
+  mounted () {
+    this.stack = this.$el.childElementCount > 1
   },
 
   render (createElement) {
