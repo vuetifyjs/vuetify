@@ -3,9 +3,10 @@
     v-list-tile(
       v-on:click.native="toggle"
       v-bind:class="classes"
+      v-bind:ripple="ripple"
     )
-      v-list-tile-avatar(v-if="item.avatar")
-        v-icon {{ item.avatar }}
+      v-list-tile-action(v-if="item.action")
+        v-icon {{ item.action }}
       v-list-tile-content
         v-list-tile-title {{ item.title }}
       v-list-tile-action
@@ -19,7 +20,6 @@
         class="list list--group"
         v-show="active"
       )
-        v-divider(light)
         v-list-row(v-for="item in items")
           v-list-tile(
             v-bind:item="item"

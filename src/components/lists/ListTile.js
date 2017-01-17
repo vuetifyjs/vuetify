@@ -55,7 +55,7 @@ export default {
       return createElement('v-list-group', { 
         props: {
           item: {
-            avatar: this.item.avatar,
+            action: this.item.action,
             title: this.item.title,
             group: this.item.group
           },
@@ -96,10 +96,6 @@ export default {
       if (this.click) {
         data.on = { click: this.click }
       }
-    }
-
-    if (this.item.href == '#!') {
-      console.log(this.item)
     }
 
     let children = []
@@ -145,7 +141,11 @@ export default {
       let icon = createElement('v-icon', data)
       let action = createElement('v-list-tile-action', {}, [icon])
 
-      children.push(action)
+      if ((this.router || this.item.router) && !this.avatar) {
+        children.splice(-1, 0, action)
+      } else {
+        children.push(action)
+      }
     }
 
     children.push(this.$slots.default)
