@@ -98,33 +98,21 @@
       }
     },
 
-    mounted () {
-      this.list = this.$children.find(i => i.$options._componentTag === 'v-list')
+    watch: {
+      '$route' () {
+        this.routeChanged()
+      }
+    },
 
+    mounted () {
       this.$vuetify.load(() => {
         this.resize()
         window.addEventListener('resize', this.resize, false)
       })
-
-      if (this.list) {
-        const events = [
-          [`list-tile:selected:${this.list._uid}`, this.itemClicked]
-        ]
-
-        this.$vuetify.bus.sub(events)
-      }
     },
 
     beforeDestroy () {
       window.removeEventListener('resize', this.resize)
-
-      if (this.list) {
-        const events = [
-          [`list-tile:selected:${this.list._uid}`, this.itemClicked]
-        ]
-
-        this.$vuetify.bus.unsub(events)
-      }
     },
 
     methods: {
@@ -134,7 +122,7 @@
         }
       },
 
-      itemClicked () {
+      routeChanged () {
         if (
           (window.innerWidth < this.mobileBreakPoint && this.mobile && this.closeOnClick)
           || (this.drawer && this.closeOnClick)
