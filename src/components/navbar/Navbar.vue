@@ -78,7 +78,6 @@
 
     methods: {
       close (e) {
-        console.log('here')
         if (
           (!e || !e.target)
           || !this.$el.contains(e.target)
