@@ -34,6 +34,16 @@
     padding: 8px 16px
     margin: 0
     
+    &:after
+      content: ''
+      position: absolute
+      left: 0
+      top: 0
+      height: 0
+      width: 100%
+      transition: $primary-transition
+      background-color: rgba(#fff, .12)
+    
     &:hover
       background: rgba(#000, 0.1)
     
@@ -82,7 +92,7 @@
         justify-content: space-between
         align-items: flex-end
       
-    &__avatar
+    &__avatar        
       img, .icon
         height: 42px
         width: 42px
@@ -166,9 +176,14 @@
         
     &__header
       &.list__tile
+        background: rgba(#000, 0.1)
+        
+        &:after
+          height: 1px
+        
         .list__tile__title
           color: inherit
           
-        .list__tile__action          
+        .list__tile__action:last-of-type
           .icon
             transform: rotate(180deg)
