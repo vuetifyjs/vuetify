@@ -39,7 +39,8 @@
       position: absolute
       left: 0
       top: 0
-      height: 0
+      height: 1px
+      opacity: 0
       width: 100%
       transition: $primary-transition
       background-color: rgba(#fff, .12)
@@ -162,6 +163,17 @@
         
   &--group
     overflow: hidden
+    position: relative
+    
+    &:after
+      content: ''
+      position: absolute
+      left: 0
+      bottom: 0
+      height: 1px
+      opacity: 0
+      width: 100%
+      background-color: rgba(#fff, .12)
     
     .list__tile
       padding-left: 72px
@@ -175,11 +187,15 @@
         font-weight: 500
         
     &__header
+      + .list--group
+        &:after
+          opacity: 1
+            
       &.list__tile
         background: rgba(#000, 0.1)
         
         &:after
-          height: 1px
+          opacity: 1
         
         .list__tile__title
           color: inherit
