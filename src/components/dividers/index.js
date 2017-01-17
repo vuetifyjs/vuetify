@@ -1,13 +1,19 @@
 const Divider = {
   functional: true,
 
-  render (createElement, context) {
+  render (createElement, { data }) {
     let params = {
       'class': 'divider'
     }
 
-    if (context.data.attrs && context.data.attrs.inset) {
-      params.class += ' divider--inset'
+    if (data.attrs) {
+      if (data.attrs.inset) {
+        params.class += ' divider--inset'
+      }
+
+      if (data.attrs.light) {
+        params.class += ' divider--light'
+      }
     }
 
     return createElement('hr', params)
