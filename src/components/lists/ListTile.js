@@ -21,8 +21,11 @@ export default {
       default () {
         return {
           href: 'javascript:;',
-          text: '',
-          icon: false,
+          avatar: false,
+          title: false,
+          subtitle: false,
+          action: false,
+          ripple: false,
           router: false
         }
       }
@@ -54,7 +57,6 @@ export default {
   },
 
   render (createElement) {
-    console.log(this.avatar)
     if (this.item.items) {
       return createElement('v-list-group', { 
         props: {
@@ -79,7 +81,7 @@ export default {
       directives: [
         {
           name: 'ripple',
-          value: this.ripple || false
+          value: (this.ripple || this.item.ripple) || false
         }
       ]
     }
@@ -132,18 +134,29 @@ export default {
 
     if (this.item.action) {
       let data = {}
+      let actions = []
+      let actionText = false
 
       if (typeof this.item.action === 'object') {
         data['class'] = this.item.action.class || ''
         data.domProps = {
           innerText: this.item.action.icon
         }
+
+        if (this.item.action.text) {
+          actionText = createElement('v-list-tile-action-text', this.item.action.text)
+        }
       } else {
         data = this.item.action
       }
 
-      let icon = createElement('v-icon', data)
-      let action = createElement('v-list-tile-action', {}, [icon])
+      actions.push(createElement('v-icon', data))
+
+      if (actionText) {
+        actions.push(actionText)
+      }
+
+      let action = createElement('v-list-tile-action', {}, actions)
 
       if ((this.router || this.item.router) && !this.avatar) {
         children.splice(-1, 0, action)

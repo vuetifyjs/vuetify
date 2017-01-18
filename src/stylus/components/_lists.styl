@@ -1,7 +1,7 @@
 .list
   lists()
-  padding-top: $list-item-top-padding
-  padding-bottom: $list-item-bottom-padding
+  padding-top: $list-top-padding
+  padding-bottom: $list-bottom-padding
   transition: $primary-transition
   
   .input-group
@@ -23,7 +23,8 @@
     margin-top: 0
   
   &__item
-
+    position: relative
+    
     li.disabled
       pointer-events: none
       
@@ -90,8 +91,10 @@
         transition: $primary-transition
       
       &--stack
-        justify-content: space-between
         align-items: flex-end
+        justify-content: space-between
+        padding-top: $list-top-padding
+        padding-bottom: $list-bottom-padding
       
     &__avatar        
       img, .icon

@@ -21,9 +21,9 @@ export default {
 
     twoLine: Boolean,
 
-    ripple: Boolean,
+    router: Boolean,
 
-    router: Boolean
+    ripple: Boolean
   },
 
   computed: {
