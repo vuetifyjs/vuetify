@@ -19,13 +19,22 @@
     left: 0
     z-index: 4
     
+  &__toolbar
+    display: flex
+    flex: 1 0 100%
+    padding: 14px
+    
+  &__sub
+    flex: 1 0 100%
+    padding: 24px 0 24px 72px
+    
   &__side-icon
     display: inline-flex
     align-items: center
-    margin: 0 1rem
+    margin: 0 14px 0 0
     
     a
-      color: #FFFFFF
+      color: inherit
       display: flex
       align-items: center
       flex: 1
@@ -33,7 +42,7 @@
       text-decoration: none
       
       i
-        font-size: 3rem
+        font-size: 24px
   
   &__logo
     color: #fff
@@ -43,6 +52,12 @@
     padding: 0 2rem
     display: flex
     align-items: center
+    
+  &__title
+    color: #fff
+    font-size: $headings.h6.size
+    flex: 1;
+    padding: 0 2rem
   
   &__items
     list-style-type: none
