@@ -89,6 +89,10 @@
       
       .icon
         transition: $primary-transition
+        
+      &-text
+        color: $grey.base
+        font-size: $list-action-text-font-size
       
       &--stack
         align-items: flex-end
@@ -115,7 +119,7 @@
       + .list__tile__avatar
         justify-content: flex-end
         
-      + .list__tile__action
+      + .list__tile__action:not(.list__tile__action--stack)
         flex: 1 0 48px
         align-items: center
             
