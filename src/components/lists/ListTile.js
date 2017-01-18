@@ -12,6 +12,8 @@ export default {
   },
   
   props: {
+    avatar: Boolean,
+
     disabled: Boolean,
 
     item: {
@@ -35,6 +37,7 @@ export default {
     classes () {
       return {
         'list__tile': true,
+        'list__tile--avatar': this.avatar || this.item.avatar,
         'list__tile--disabled': this.disabled || this.item.disabled
       }
     },
@@ -51,6 +54,7 @@ export default {
   },
 
   render (createElement) {
+    console.log(this.avatar)
     if (this.item.items) {
       return createElement('v-list-group', { 
         props: {

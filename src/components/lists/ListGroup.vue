@@ -20,7 +20,7 @@
         class="list list--group"
         v-show="active"
       )
-        v-list-row(v-for="item in items")
+        v-list-item(v-for="item in items")
           v-list-tile(
             v-bind:item="item"
             v-bind:ripple="ripple"

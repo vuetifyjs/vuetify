@@ -63,7 +63,7 @@ export default {
           )
         } else {
           children.push(
-            createElement('v-list-row', {}, [
+            createElement('v-list-item', {}, [
               createElement('v-list-tile', {
                 props: { 
                   item: obj,

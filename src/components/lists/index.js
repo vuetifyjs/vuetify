@@ -5,7 +5,7 @@ import ListGroup from './ListGroup.vue'
 import ListTile from './ListTile'
 import ListTileAction from './ListTileAction'
 
-const ListRow = createSimpleFunctional('list__row', 'li')
+const ListItem = createSimpleFunctional('list__item', 'li')
 const ListTileActionText = createSimpleFunctional('list__tile__action-text', 'span')
 const ListTileAvatar = createSimpleFunctional('list__tile__avatar', 'div')
 const ListTileContent = createSimpleFunctional('list__tile__content', 'div')
@@ -48,7 +48,7 @@ const ListTileSubTitle = {
 
 export default {
   List,
-  ListRow,
+  ListItem,
   ListTile,
   ListGroup,
   ListSubHeader,
