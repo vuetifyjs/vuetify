@@ -20,13 +20,14 @@ export default {
       type: Object,
       default () {
         return {
-          href: 'javascript:;',
-          avatar: false,
-          title: false,
-          subtitle: false,
           action: false,
+          avatar: false,
+          disabled: false,
+          href: 'javascript:;',
           ripple: false,
-          router: false
+          router: false,
+          subtitle: false,
+          title: false
         }
       }
     },
