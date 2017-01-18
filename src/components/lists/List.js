@@ -1,8 +1,16 @@
 export default {
   name: 'list',
 
+  data () {
+    return {
+      hasHeader: false
+    }
+  },
+
   props: {
     dense: Boolean,
+
+    subHeader: Boolean,
 
     items: {
       type: Array,
@@ -24,7 +32,8 @@ export default {
         'list': true,
         'list--two-line': this.twoLine,
         'list--dense': this.dense,
-        'list--three-line': this.threeLine
+        'list--three-line': this.threeLine,
+        'list--sub-header': this.subHeader || this.hasHeader
       }
     }
   },
@@ -41,6 +50,10 @@ export default {
     if (this.items.length) {
       this.items.forEach(obj => {
         if (obj.header) {
+          if (!this.hasHeader) {
+            this.hasHeader = true
+          }
+
           children.push(
             createElement('v-list-sub-header', {
               'class': obj.class,
