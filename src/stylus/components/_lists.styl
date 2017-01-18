@@ -1,38 +1,41 @@
 .list
-  list-style-type: none
-  padding: 0
+  lists()
+  padding-top: $list-item-top-padding
+  padding-bottom: $list-item-bottom-padding
   transition: $primary-transition
   
   .input-group
     margin: 0
     
   &__sub-header
-    height: 48px
+    height: $list-item-single-height
     display: flex
     align-items: center
-    font-size: 14px
+    font-size: $list-sub-header-height-font-size
     color: $grey.darken-1
-    font-weight: 500
-    padding: 0 16px
+    font-weight: $list-sub-header-font-weight
+    padding: 0 $list-right-padding 0 $list-left-padding
     
     &--inset
-      margin-left: 56px
+      margin-left: $list-sub-header-inset-margin
+      
+  > .list__item ~ .list__item
+    margin-top: 0
   
-  &__row
+  &__item
+
     li.disabled
       pointer-events: none
-      
-    &:first-child
-      margin-top: 8px
       
   &__tile
     color: $color-root
     display: flex
-    height: 56px
+    height: $list-item-single-height
     text-decoration: none
     align-items: center
-    padding: 8px 16px
+    padding: 0 16px
     margin: 0
+    transition: $primary-transition
     
     &:after
       content: ''
@@ -43,10 +46,10 @@
       opacity: 0
       width: 100%
       transition: $primary-transition
-      background-color: rgba(#fff, .12)
+      background-color: $material-twelve-percent-light
     
     &:hover
-      background: rgba(#000, 0.1)
+      background: $material-twelve-percent-dark
     
     &__content,
     &__action,
@@ -60,20 +63,17 @@
       width: 100%
     
     &__title
-      font-size: 16px
+      font-size: $list-title-font-size
       line-height: 1.15
-      font-weight: 500
+      font-weight: $list-title-font-weight
       transition: $primary-transition
       position: relative
       
-      &:not(:only-child)
-        margin-bottom: 4px
-      
     &__sub-title
       color: $grey.base
-      font-size: 14px
+      font-size: $list-sub-title-font-size
       line-height: 1.3
-      font-weight: 400
+      font-weight: $list-sub-title-font-weight
     
     &__action, &__avatar
       display: flex
@@ -102,7 +102,7 @@
     &__content
       text-align: left
       flex: 0 1 100%
-      font-size: 15px
+      font-size: $list-content-font-size
       overflow: hidden
       display: flex
       align-items: flex-start
@@ -119,34 +119,35 @@
     &--active
       .list__tile__title
         color: $theme.primary
+
+    &--avatar
+      height: $list-item-avatar-single-height
   
   &--dense
-    .list__row      
-      &:first-child
-        margin-top: 4px
+    padding-top: $list-item-dense-top-padding
         
     .list__tile
-      height: 48px
-      font-size: 13px
+      height: $list-item-dense-single-height
+      font-size: $list-item-dense-font-size
       
     .list__tile__title
-      font-size: 13px
-      font-weight: 500
+      font-size: $list-item-dense-font-size
+      font-weight: $list-title-dense-font-weight
       
     .list__tile__sub-title
-      font-size: 13px
+      font-size: $list-item-dense-font-size
       
   &--two-line
     .list__tile
-      height: 72px
+      height: $list-item-double-height
       
     &.list--dense
       .list__tile
-        height: 60px
+        height: $list-item-dense-double-height
         
   &--three-line
     .list__tile
-      height: 88px
+      height: $list-item-triple-height
       
     .list__tile__action
       align-items: flex-start
@@ -159,7 +160,7 @@
       
     &.list--dense
       .list__tile
-        height: 76px    
+        height: $list-item-dense-triple-height    
         
   &--group
     overflow: hidden
@@ -173,18 +174,18 @@
       height: 1px
       opacity: 0
       width: 100%
-      background-color: rgba(#fff, .12)
+      background-color: $material-twelve-percent-light
     
     .list__tile
-      padding-left: 72px
+      padding-left: $list-item-left-padding
       
       .list__tile__title
-        font-weight: 300
+        font-weight: $list-group-tile-title-font-weight
       
     .list__tile--active
       .list__tile__title
         color: $theme.primary
-        font-weight: 500
+        font-weight: $list-group-tile-title-active-font-weight
         
     &__header
       + .list--group
@@ -192,7 +193,7 @@
           opacity: 1
             
       &.list__tile
-        background: rgba(#000, 0.1)
+        background: $material-twelve-percent-dark
         
         &:after
           opacity: 1
