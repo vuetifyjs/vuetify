@@ -4,27 +4,23 @@
   background-color: #fff
   position: absolute
   white-space: nowrap
-  z-index: 3
-  display: flex
+  z-index: 4
   @extend .z-depth-1
   
   li
     text-align: left
-  
-  .list
-    width: 100%
     
-    .list__row
-      margin: 0
-      height: auto
-      
-    .list__tile__content
-      overflow: initial
-      
-    .list__tile__action, .list__tile__avatar
-      flex: 0 1 auto
-      
-    .list__tile__action
-      .icon
-        width: 42px
-        height: 42px
+  &__item
+    text-decoration: none
+    display: inline-flex
+    justify-content: space-between
+    align-items: center
+    text-transform: none
+    padding: 1rem
+    width: 100%
+    font-weight: 500
+    font-size: 1rem
+    color: inherit
+    
+    &:hover
+      background-color: rgba(0, 0, 0, 0.1)
