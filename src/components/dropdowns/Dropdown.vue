@@ -3,7 +3,7 @@
     v-bind:is="transition" 
     v-bind:origin="origin"
   )
-    div(
+    ul(
       class="dropdown"
       v-bind:class="classes"
       v-bind:data-top="top"
@@ -15,9 +15,10 @@
       v-bind:id="id"
       v-show="active"
     )
-      v-list(v-if="items.length")
-        v-list-row(v-for="item in items")
-          v-list-tile(v-bind:item="item")
+      v-dropdown-item(
+        v-for="item in items"
+        v-bind:item="item"
+      )
       slot
 </template>
 
