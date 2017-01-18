@@ -94,13 +94,12 @@
         
         setTimeout(() => el.style.height = `${scrollHeight}px`, 50)
 
-        addOnceEventListener(el, done, 'transitionend')
+        addOnceEventListener(el, 'transitionend', done)
       },
 
       leave (el, done) {
         el.style.height = 0
-        
-        addOnceEventListener(el, done, 'transitionend')
+        addOnceEventListener(el, 'transitionend', done)
       },
 
       matchRoute (to) {
