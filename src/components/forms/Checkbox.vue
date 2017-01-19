@@ -22,7 +22,6 @@
     
     data () {
       return {
-        checked: false,
         inputValue: this.value
       }
     },
@@ -81,34 +80,35 @@
     },
 
     methods: {
+      isArray () {
+        return typeof this.inputValue === 'array'
+          || typeof this.inputValue === 'object'
+      },
+      
       updateValue (e) {
-        if (typeof this.inputValue !== 'array'
-          && typeof this.inputValue !== 'object'
-        ) {
-          this.$emit('input', e.target.checked)
-        } else {
-          let i = this.inputValue.indexOf(this.valueV)
-
-          if (i === -1) {
-            this.inputValue.push(this.valueV)
-          } else {
-            this.inputValue.splice(i, 1)
-          }
-
-          this.$emit('input', this.inputValue)
+        if (!this.isArray()) {
+          return this.$emit('input', e.target.checked)
         }
+
+        let i = this.inputValue.indexOf(this.valueV)
+
+        if (i === -1) {
+          this.inputValue.push(this.valueV)
+        } else {
+          this.inputValue.splice(i, 1)
+        }
+
+        this.$emit('input', this.inputValue)
       },
 
       isChecked () {
-        if (typeof this.inputValue !== 'array'
-            && typeof this.inputValue !== 'object'
-        ) {
+        if (!this.isArray()) {
           this.$refs.input.checked = Boolean(this.inputValue)
-        } else {
-          let i = this.inputValue.indexOf(this.valueV)
-
-          this.$refs.input.checked = i !== -1
         }
+
+        let i = this.inputValue.indexOf(this.valueV)
+
+        this.$refs.input.checked = i !== -1
       }
     }
   }
