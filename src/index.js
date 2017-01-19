@@ -5,6 +5,7 @@ import Components from './components/_index'
 import Directives from './directives/_index'
 import Init from './util/init'
 import Load from './util/load'
+import { mergeObject } from './util/helpers'
 import Toast from './functions/toast'
 
 const defaults = {
@@ -13,7 +14,7 @@ const defaults = {
 }
 
 function plugin(Vue, options) {
-  options = Object.assign({}, defaults, (options || {}))
+  options = mergeObject(defaults, (options || {}))
 
   Object.keys(Directives).forEach(key => {
     Vue.directive(`${options.directivePrefix}${key}`, Directives[key])
