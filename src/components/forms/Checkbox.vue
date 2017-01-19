@@ -6,7 +6,8 @@
       v-bind:disabled="disabled"
       v-bind:id="id"
       v-bind:name="name"
-      v-bind:value="value"
+      v-bind:value="valueV || inputValue"
+      v-on:change="updateValue"
       ref="input"
     )
     label(
@@ -21,7 +22,7 @@
     
     data () {
       return {
-        model: null
+        inputValue: this.value
       }
     },
 
@@ -51,6 +52,10 @@
 
       value: {
         required: false
+      },
+
+      valueV: {
+        required: false
       }
     },
 
@@ -62,43 +67,48 @@
       }
     },
 
-    mounted () {
-      const vm = this
-
-      this.$refs.input.indeterminate = this.indeterminate
-
-      this.state()
-
-      this.$refs.input.onchange = function () {
-        const c = this.checked,
-              v = this.value
-
-        if (!vm.model
-            || typeof vm.model === 'string'
-        ) {
-          return vm.$emit('input', c ? true : false)
-        }
-
-        const i = vm.model.indexOf(v)
-
-        if (c) {
-          vm.model.push(v)
-        } else {
-          vm.model.splice(i, 1)
-        }
-
-        vm.$emit('input', vm.model)
+    watch: {
+      value () {
+        this.inputValue = this.value
+        this.isChecked()
       }
     },
 
+    mounted () {
+      this.$refs.input.indeterminate = this.indeterminate
+      this.isChecked()
+    },
+
     methods: {
-      state () {
-        if (typeof this.model === 'array' 
-            && this.model.includes(this.value)
-            || this.value
-        ) {
-          this.$refs.input.checked = true
+      isArray () {
+        return typeof this.inputValue === 'array'
+          || typeof this.inputValue === 'object'
+      },
+      
+      updateValue (e) {
+        if (!this.isArray()) {
+          return this.$emit('input', e.target.checked)
         }
+
+        let i = this.inputValue.indexOf(this.valueV)
+
+        if (i === -1) {
+          this.inputValue.push(this.valueV)
+        } else {
+          this.inputValue.splice(i, 1)
+        }
+
+        this.$emit('input', this.inputValue)
+      },
+
+      isChecked () {
+        if (!this.isArray()) {
+          this.$refs.input.checked = Boolean(this.inputValue)
+        }
+
+        let i = this.inputValue.indexOf(this.valueV)
+
+        this.$refs.input.checked = i !== -1
       }
     }
   }
