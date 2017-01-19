@@ -23,7 +23,9 @@ export default {
 
     router: Boolean,
 
-    ripple: Boolean
+    ripple: Boolean,
+
+    unshift: Boolean
   },
 
   computed: {
@@ -81,7 +83,8 @@ export default {
                 props: { 
                   item: obj,
                   ripple: this.ripple || obj.ripple,
-                  router: this.router || obj.router
+                  router: this.router || obj.router,
+                  unshift: this.unshift
                 } 
               })
             ])

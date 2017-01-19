@@ -12,6 +12,7 @@
       v-bind:items="items"
       v-bind:ripple="ripple"
       v-bind:router="router"
+      v-bind:unshift="unshift"
       ref="list"
     )
     slot
@@ -75,7 +76,9 @@
 
       ripple: Boolean,
 
-      router: Boolean
+      router: Boolean,
+
+      unshift: Boolean
     },
 
     computed: {

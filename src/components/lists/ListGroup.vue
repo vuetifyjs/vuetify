@@ -5,8 +5,12 @@
       v-bind:class="classes"
       v-bind:ripple="ripple"
     )
-      v-list-tile-action(v-if="item.action")
-        v-icon {{ item.action }}
+      template(v-if="item.action")
+        v-list-tile-action
+          template(v-if="typeof item.action === 'object'")
+            v-icon(v-bind:class="[item.action.class || '']") {{ item.action.icon }}
+          template(v-else)
+            v-icon {{ item.action }}
       v-list-tile-content
         v-list-tile-title {{ item.title }}
       v-list-tile-action
@@ -76,7 +80,9 @@
 
     watch: {
       '$route' (to) {
-        this.active = this.matchRoute(to.path)
+        if (this.router) {
+          this.active = this.matchRoute(to.path)
+        }
       }
     },
 

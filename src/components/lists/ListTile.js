@@ -27,6 +27,7 @@ export default {
           ripple: false,
           router: false,
           subtitle: false,
+          tag: false,
           title: false
         }
       }
@@ -34,7 +35,11 @@ export default {
 
     ripple: Boolean,
 
-    router: Boolean
+    router: Boolean,
+
+    tag: String,
+
+    unshift: Boolean
   },
 
   computed: {
@@ -54,12 +59,64 @@ export default {
   methods: {
     click () {
       this.$vuetify.bus.pub('list-item:selected')
-    }
-  },
+    },
 
-  render (createElement) {
-    if (this.item.items) {
-      return createElement('v-list-group', { 
+    createAvatar (h) {
+      let avatar = []
+      if (this.item.avatar.indexOf('.') !== -1) {
+        avatar.push(
+          h('img', { domProps: { src: this.item.avatar } })
+        )
+      } else {
+        avatar.push(
+          h('v-icon', this.item.avatar)
+        )
+      }
+
+      return h('v-list-tile-avatar', {}, avatar)
+    },
+
+    createAction (h) {
+      let data = {}
+      let actions = []
+      let actionText = false
+
+      if (typeof this.item.action === 'object') {
+        data['class'] = this.item.action.class || ''
+        data.domProps = {
+          innerText: this.item.action.icon
+        }
+
+        if (this.item.action.text) {
+          actionText = h('v-list-tile-action-text', this.item.action.text)
+        }
+      } else {
+        data = this.item.action
+      }
+
+      actions.push(h('v-icon', data))
+
+      if (actionText) {
+        actions.push(actionText)
+      }
+
+      return h('v-list-tile-action', {}, actions)
+    },
+
+    createContent (h) {
+      let items = []
+
+      items.push(h('v-list-tile-title', { domProps: { innerHTML: this.item.title } }))
+
+      if (this.item.subtitle) {
+        items.push(h('v-list-tile-sub-title', { domProps: { innerHTML: this.item.subtitle } }))
+      }
+
+      return h('v-list-tile-content', {}, items)
+    },
+
+    createGroup (h) {
+      return h('v-list-group', { 
         props: {
           item: {
             action: this.item.action,
@@ -72,8 +129,30 @@ export default {
         }
       })
     }
+  },
 
-    let el
+  render (createElement) {
+    if (this.item.items) {
+      return this.createGroup(createElement)
+    }
+
+    let avatar,
+        action,
+        content,
+        tag,
+        children = []
+
+    if (this.item.avatar) {
+      avatar = this.createAvatar(createElement)
+    }
+
+    if (this.item.title) {
+      content = this.createContent(createElement)
+    }
+
+    if (this.item.action) {
+      action = this.createAction(createElement)
+    }
 
     let data = {
       attrs: {},
@@ -87,8 +166,10 @@ export default {
       ]
     }
 
-    if (this.item.href && (this.router || this.item.router)) {
-      el = 'router-link'
+    if (this.item.tag || this.tag) {
+      tag = this.item.tag || this.tag
+    } else if (this.item.href && (this.router || this.item.router)) {
+      tag = 'router-link'
       data.props.to = this.item.href
       data.props.exact = this.item.href === '/'
       data.props.activeClass = 'list__tile--active'
@@ -97,7 +178,7 @@ export default {
         data.nativeOn = { click: this.click }
       }
     } else {
-      el = 'a'
+      tag = 'a'
       data.attrs.href = this.item.href || 'javascript:;'
       
       if (this.click) {
@@ -105,69 +186,17 @@ export default {
       }
     }
 
-    let children = []
+    children.push(avatar)
+    children.push(content)
 
-    if (this.item.avatar) {
-      let avatar = []
-      if (this.item.avatar.indexOf('.') !== -1) {
-        avatar.push(
-          createElement('img', { domProps: { src: this.item.avatar } })
-        )
-      } else {
-        avatar.push(
-          createElement('v-icon', this.item.avatar)
-        )
-      }
-
-      children.push(createElement('v-list-tile-avatar', {}, avatar))
-    }
-
-    if (this.item.title) {
-      let items = []
-      items.push(createElement('v-list-tile-title', { domProps: { innerHTML: this.item.title } }))
-
-      if (this.item.subtitle) {
-        items.push(createElement('v-list-tile-sub-title', { domProps: { innerHTML: this.item.subtitle } }))
-      }
-
-      children.push(createElement('v-list-tile-content', {}, items))
-    }
-
-    if (this.item.action) {
-      let data = {}
-      let actions = []
-      let actionText = false
-
-      if (typeof this.item.action === 'object') {
-        data['class'] = this.item.action.class || ''
-        data.domProps = {
-          innerText: this.item.action.icon
-        }
-
-        if (this.item.action.text) {
-          actionText = createElement('v-list-tile-action-text', this.item.action.text)
-        }
-      } else {
-        data = this.item.action
-      }
-
-      actions.push(createElement('v-icon', data))
-
-      if (actionText) {
-        actions.push(actionText)
-      }
-
-      let action = createElement('v-list-tile-action', {}, actions)
-
-      if ((this.router || this.item.router) && !this.avatar) {
-        children.splice(-1, 0, action)
-      } else {
-        children.push(action)
-      }
+    if (this.unshift || (this.item.action && this.item.action.unshift)) {
+      children.unshift(action)
+    } else {
+      children.push(action)
     }
 
     children.push(this.$slots.default)
 
-    return createElement(el, data, children)
+    return createElement(tag, data, children)
   }
 }
