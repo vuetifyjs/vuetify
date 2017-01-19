@@ -1,0 +1,10 @@
+progress-linear(progress)
+  .progress-linear__bar
+    background: lighten(progress, 50%)
+    
+  .progress-linear__bar__determinate
+    background: progress
+    
+  .progress-linear__bar__indeterminate
+    &:before, &:after
+      background: progress

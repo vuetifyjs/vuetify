@@ -6,12 +6,14 @@
     v-bind:style="styles"
   )
     slot(name="top")
-    v-sidebar-items(
-      v-if="items.length > 0"
-      v-bind:group-class="groupClass"
+    v-list(
+      dense
+      v-if="items.length"
       v-bind:items="items"
       v-bind:ripple="ripple"
       v-bind:router="router"
+      v-bind:unshift="unshift"
+      ref="list"
     )
     slot
 </template>
@@ -23,6 +25,12 @@
     name: 'sidebar',
 
     mixins: [Toggleable],
+
+    data () {
+      return {
+        list: {}
+      }
+    },
 
     props: {
       closeOnClick: {
@@ -68,7 +76,9 @@
 
       ripple: Boolean,
 
-      router: Boolean
+      router: Boolean,
+
+      unshift: Boolean
     },
 
     computed: {
@@ -90,18 +100,21 @@
       }
     },
 
+    watch: {
+      '$route' () {
+        this.routeChanged()
+      }
+    },
+
     mounted () {
       this.$vuetify.load(() => {
         this.resize()
         window.addEventListener('resize', this.resize, false)
       })
-
-      this.$vuetify.bus.sub(`${this.$options.name}:item-clicked:${this._uid}`, this.itemClicked)
     },
 
     beforeDestroy () {
       window.removeEventListener('resize', this.resize)
-      this.$vuetify.bus.unsub(`${this.$options.name}:item-clicked:${this._uid}`, this.itemClicked)
     },
 
     methods: {
@@ -111,7 +124,7 @@
         }
       },
 
-      itemClicked () {
+      routeChanged () {
         if (
           (window.innerWidth < this.mobileBreakPoint && this.mobile && this.closeOnClick)
           || (this.drawer && this.closeOnClick)

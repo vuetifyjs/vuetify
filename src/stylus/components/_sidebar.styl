@@ -6,11 +6,9 @@
   width: $sidebar-width
   z-index: 3
   @extend .z-depth-2
-
-  ul
-    list-style-type: none
-    width: 100%
-    padding: 0
+    
+  li.disabled
+    opacity: 0.4
     
   &--right
     order: +1
@@ -51,23 +49,17 @@
       &.sidebar--fixed-right
         transform: translateX($sidebar-width + 25)
     
-  &__items
-    transition: $primary-transition
+  .list    
+    li
+      // margin: 0
     
-  &__item
+  .list__tile
     color: $sidebar-item-color
-    display: flex
-    align-items: center
-    text-decoration: none
     transition: $primary-transition
-    font-weight: 300
-    padding: $sidebar-item-padding
-    height: $sidebar-item-height
     position: relative
-  
-    &--active
-      background-color: $sidebar-item-active-background-color
-      color: $sidebar-item-active-color
+    
+    .list__tile__avatar, .list__tile__action, .icon
+      color: $sidebar-item-color
       
     &--disabled
       opacity: .4
@@ -77,49 +69,12 @@
       background-color: $sidebar-item-hover-background-color
       color: $sidebar-item-active-color
       
-    > span
-      padding: 0 $spacers.three.x
+    &:after
+      background: $material-twelve-percent-light
       
-    &-header
-      background: lighten($theme.secondary, 20%)
-      padding: $sidebar-item-header-padding
-      color: $sidebar-item-header-color
-      text-transform: uppercase
-      font-size: $sidebar-item-header-font-size
-      letter-spacing: $sidebar-item-header-letter-spacing
-    
-  &__group    
-    .sidebar__items
-      overflow: hidden
-      background-color: $sidebar-group-items-background-color
-    
-    .sidebar__item
-      padding-left: 3rem
-      
-    &-header
-      @extend .sidebar__item
-      
-      &:after
-        content: '\E314'
-        font-family: 'Material Icons'
-        font-size: 1.5rem
-        position: absolute
-        right: 15px
-        top: calc(50% - 16px)
-        color: inherit
-        transition: transform 0.3s cubic-bezier(0, 0, .2, 1)
-        
-      &:hover
-        background: $theme.primary
-        
-      &--active
-        background: $theme.primary
-        
-        ~ .sidebar__items
-          border-bottom: $sidebar-group-header-active-sidebar-items-border
-          
-          .sidebar__item--active
-            background-color: $sidebar-group-header-active-sidebar-item-active-background-color
-         
-        &:after
-          transform: rotate(-90deg)
+  .list--group
+    > .list__tile--active
+      color: $sidebar-item-color
+
+    &:after
+      background: $material-twelve-percent-light

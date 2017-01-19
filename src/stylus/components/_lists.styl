@@ -1,50 +1,221 @@
 .list
-  list-style-type: none
-  padding: 0
-  margin: 0
-
-  a
-    text-decoration: none
+  lists()
+  padding-top: $list-top-padding
+  padding-bottom: $list-bottom-padding
+  transition: $primary-transition
+  
+  .input-group
+    margin: 0
+    
+  &__sub-header
+    height: $list-item-single-height
+    display: flex
+    align-items: center
+    font-size: $list-sub-header-height-font-size
+    color: $grey.darken-1
+    font-weight: $list-sub-header-font-weight
+    padding: 0 $list-right-padding 0 $list-left-padding
+    
+    &--inset
+      margin-left: $list-sub-header-inset-margin
+      
+  > .list__item ~ .list__item
+    margin-top: 0
   
   &__item
-    align-items: center
-    display: flex
-    padding: 1rem 0
+    position: relative
     
-    &-action
-      display: flex
-      flex-direction: column
-      margin-left: 2rem
-      align-items: center
+    li.disabled
+      pointer-events: none
       
-    &-action-title
+  &__tile
+    color: $color-root
+    display: flex
+    height: $list-item-single-height
+    text-decoration: none
+    align-items: center
+    padding: 0 16px
+    margin: 0
+    transition: $primary-transition
+    
+    &:after
+      content: ''
+      position: absolute
+      left: 0
+      top: 0
+      height: 1px
+      opacity: 0
+      width: 100%
+      transition: $primary-transition
+      background-color: $material-twelve-percent-dark
+    
+    a&:hover
+      background: $material-twelve-percent-dark
+    
+    &__content,
+    &__action,
+    &__avatar
+      height: 100%
+      
+    &__title, &__sub-title
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
+      width: 100%
+    
+    &__title
+      font-size: $list-title-font-size
+      line-height: 1.15
+      font-weight: $list-title-font-weight
+      transition: $primary-transition
+      position: relative
+      
+    &__sub-title
       color: $grey.base
-      font-size: .82rem
-      font-weight: 300
-          
-    &-avatar
-      align-self: flex-start
-      color: #FFFFFF
-      margin-right: 2rem
-      flex: 0 1 auto
-      border-radius: 50%
+      font-size: $list-sub-title-font-size
+      line-height: 1.3
+      font-weight: $list-sub-title-font-weight
+    
+    &__action, &__avatar
       display: flex
+      justify-content: flex-start
       align-items: center
+      flex: 1 0 56px
+      
+    &__action
+      align-items: flex-start
+      flex-direction: column
       justify-content: center
-  
-    &-title
+      
+      .icon
+        transition: $primary-transition
+        
+      &-text
+        color: $grey.base
+        font-size: $list-action-text-font-size
+      
+      &--stack
+        align-items: flex-end
+        justify-content: space-between
+        padding-top: $list-top-padding
+        padding-bottom: $list-bottom-padding
+      
+    &__avatar        
+      img, .icon
+        height: 42px
+        width: 42px
+        border-radius: 50%
+      
+    &__content
+      text-align: left
+      flex: 0 1 100%
+      font-size: $list-content-font-size
+      overflow: hidden
       display: flex
+      align-items: flex-start
+      justify-content: center
       flex-direction: column
-      letter-spacing: .05rem
-      font-weight: 500
-      flex: 1 1 auto
       
-    &-sub-title
-      color: $grey.darken-1
-      font-size: .9rem
-      font-weight: 300
-      letter-spacing: 0
+      + .list__tile__avatar
+        justify-content: flex-end
+        
+      + .list__tile__action:not(.list__tile__action--stack)
+        flex: 1 0 48px
+        align-items: center
+            
+    &--active
+      .list__tile__title
+        color: $theme.primary
+        
+    &--disabled
+      pointer-events: none
+      opacity: 0.4
+
+    &--avatar
+      height: $list-item-avatar-single-height
+  
+  &--dense
+    padding-top: $list-item-dense-top-padding
+        
+    .list__tile
+      height: $list-item-dense-single-height
+      font-size: $list-item-dense-font-size
       
-    &-icon
-      color: $grey.base
-      margin-right: 2rem
+    .list__tile__title
+      font-size: $list-item-dense-font-size
+      font-weight: $list-title-dense-font-weight
+      
+    .list__tile__sub-title
+      font-size: $list-item-dense-font-size
+      
+  &--two-line
+    .list__tile
+      height: $list-item-double-height
+      
+    &.list--dense
+      .list__tile
+        height: $list-item-dense-double-height
+        
+  &--three-line
+    .list__tile
+      height: $list-item-triple-height
+      
+    .list__tile__action
+      align-items: flex-start
+      
+    .list__tile__sub-title
+      white-space: initial
+      -webkit-line-clamp: 2
+      -webkit-box-orient: vertical
+      display: -webkit-box
+      
+    &.list--dense
+      .list__tile
+        height: $list-item-dense-triple-height    
+        
+  &--group
+    overflow: hidden
+    position: relative
+    padding: 0
+    
+    &:after
+      content: ''
+      position: absolute
+      left: 0
+      bottom: 0
+      height: 1px
+      opacity: 0
+      width: 100%
+      background-color: $material-twelve-percent-dark
+    
+    .list__tile
+      padding-left: $list-item-left-padding
+      
+      .list__tile__title
+        font-weight: $list-group-tile-title-font-weight
+      
+    .list__tile--active
+      .list__tile__title
+        color: $theme.primary
+        font-weight: $list-group-tile-title-active-font-weight
+        
+    &__header
+      + .list--group
+        &:after
+          opacity: 1
+            
+      &.list__tile
+        background: $material-twelve-percent-dark
+        
+        &:after
+          opacity: 1
+        
+        .list__tile__title
+          color: inherit
+          
+        .list__tile__action:last-of-type
+          .icon
+            transform: rotate(180deg)
+            
+  &--sub-header
+    padding-top: 0

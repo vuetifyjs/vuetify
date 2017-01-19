@@ -9,11 +9,13 @@ const SliderTransition = createSimpleTransition('slider-transition')
 const SliderReverseTransition = createSimpleTransition('slider-reverse-transition')
 const ModalTransition = createSimpleTransition('modal-transition')
 const ModalBottomTransition = createSimpleTransition('modal-bottom-transition')
+const FadeTransition = createSimpleTransition('fade-transition')
 
 export default {
   SlideXTransition,
   SlideYTransition,
   ScaleTransition,
+  FadeTransition,
   TabTransition,
   TabReverseTransition,
   ModalTransition,

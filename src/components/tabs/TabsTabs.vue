@@ -7,7 +7,8 @@
       class="tabs__container"
       ref="container"
     )
-      v-tab-item(v-for="item in items" v-bind:item="item" v-bind:ripple="ripple")
+      v-list(v-if="items.length")
+        v-list-item(v-for="item in items" v-bind:item="item" v-bind:ripple="ripple")
       slot
       v-tabs-slider(ref="slider")
     v-icon(
@@ -80,6 +81,10 @@
 
     methods: {
       resize () {
+        if (!this.$refs.container) {
+          return
+        }
+        
         this.mobile = this.$refs.container.scrollWidth > this.$refs.container.clientWidth
         this.$vuetify.bus.pub(`tab:resize:${this.tabsUid}`)
       },
