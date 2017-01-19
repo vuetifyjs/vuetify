@@ -1,16 +1,7 @@
 import { directiveConfig } from '../util/helpers'
 
-function dropdown (e, el, id, bus, hover) {
+function dropdown (e, el, component, bus, hover) {
   e.preventDefault()
-
-  const component = document.getElementById(id)
-
-  if (!component
-    ||!component.dataset.hover && hover 
-    || component.style.display !== 'none'
-  ) {
-    return
-  }
 
   let width = 0
   let height = 0
@@ -37,7 +28,7 @@ function dropdown (e, el, id, bus, hover) {
   component.style.left = `${el.offsetLeft - width}px`
   component.style.top = `${el.offsetTop - height}px`
 
-  bus.pub(`dropdown:open:${id}`)
+  bus.pub(`dropdown:open:${component.id}`)
 }
 
 function directive (el, binding, v) {
@@ -46,12 +37,16 @@ function directive (el, binding, v) {
   let bus = v.context.$vuetify.bus
 
   el.dataset.dropdown = id
+  const component = document.getElementById(id)
 
   // Directive binding happens before all components are rendered
   // When changing routes, dropdown element may not be ready
   // Do hover check within dropdown function
-  el.onclick = e => dropdown(e, el, id, bus, false)
-  el.onmouseenter = e => dropdown(e, el, id, bus, true)
+  if (component.dataset && component.dataset.hover) {
+    el.onmouseenter = e => dropdown(e, el, component, bus, true)
+  } else {
+    el.onclick = e => dropdown(e, el, component, bus, false)
+  }
 }
 
 export default {
