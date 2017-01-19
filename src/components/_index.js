@@ -21,7 +21,9 @@ import Slider from './slider/index'
 import Tabs from './tabs/index'
 import Transitions from './transitions/_index'
 
-export default Object.assign({},
+import { mergeObject } from '../util/helpers'
+
+export default mergeObject(
   Alerts,
   App,
   Breadcrumbs,
