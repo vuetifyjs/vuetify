@@ -4,9 +4,9 @@
   overflow: hidden
   width: 100%
   position: relative
+  progress-linear($theme.primary)
   
   &__bar
-    background: lighten($theme.accent, 40%)
     width: 100%
     height: inherit
     position: relative
@@ -14,13 +14,11 @@
     z-index: 2
     
     &__determinate
-      background: $theme.primary
       height: inherit
       transition: .3s ease-in
       
-    &__indeterminate      
+    &__indeterminate
       &:before, &:after
-        background: $theme.primary
         content: ''
         height: inherit
         position: absolute
@@ -50,7 +48,22 @@
       &:after
         animation: query-short
         animation-duration: 2s
-        animation-iteration-count: infinite
+        animation-iteration-count: infinite  
+
+  &--secondary
+    progress-linear($theme.secondary)
+  
+  &--success
+    progress-linear($theme.success)
+  
+  &--info
+    progress-linear($theme.info)
+    
+  &--warning
+    progress-linear($theme.warning)
+    
+  &--error
+    progress-linear($theme.error)
         
   @keyframes indeterminate
     0%
