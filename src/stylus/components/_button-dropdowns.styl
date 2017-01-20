@@ -1,0 +1,51 @@
+.btn-dropdown
+  position: relative
+  
+  button
+    display: inline-flex
+    font-size: 16px
+    align-items: center
+    justify-content: space-between
+    min-width: $button-min-width
+    padding-bottom: 3px
+    border-bottom: 1px solid $material-twelve-percent-dark
+    outline: 0
+    
+    span
+      z-index: 0
+    
+    .icon
+      color: $grey.base
+      width: 10px
+      
+  ul
+    lists()
+    padding: 8px 0
+    background: #fff
+    border-radius: 2px
+    position: absolute
+    padding: 8px 0
+    max-height: 200px
+    overflow-y: auto
+    top: 0
+    left: 0
+    z-index: 4
+    width: calc(100% + 40px)
+    
+    @extend .z-depth-1
+    
+    li
+      display: flex
+      align-items: center
+      height: 48px
+      font-size: 16px
+      cursor: pointer
+      padding: 0 16px
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
+      transition: $primary-transition
+      pointer-events: auto
+      
+      &:hover
+        background: $material-twelve-percent-dark

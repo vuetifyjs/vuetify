@@ -5,11 +5,11 @@
     v-bind:type="type"
     v-ripple="ripple"
   )
-    span(class="btn__content")
-      slot
-    span(class="btn__loading" v-if="loading")
-      slot(name="loader")
-      v-progress-circular(indeterminate v-if="!$slots['loader']")
+    //- span(class="btn__content")
+    slot
+    //- span(class="btn__loading" v-if="loading")
+    //-   slot(name="loader")
+    //-   v-progress-circular(indeterminate v-if="!$slots['loader']")
 </template>
 
 <script>
@@ -22,6 +22,8 @@
     
     props: {
       block: Boolean,
+
+      dark: Boolean,
 
       flat: Boolean,
 
@@ -60,6 +62,7 @@
         return {
           'btn--block': this.block,
           'btn--flat': this.flat,
+          'btn--dark': this.dark,
           'btn--floating': this.floating,
           'btn--icon': this.icon,
           'btn--large': this.large,
