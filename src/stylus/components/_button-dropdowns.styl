@@ -1,5 +1,13 @@
 .btn-dropdown
   position: relative
+  display: inline-flex
+  
+  .list
+    transition: $primary-transition
+    
+  &--active
+    .list
+      opacity: 0
   
   button
     display: inline-flex
@@ -12,40 +20,45 @@
     outline: 0
     
     span
-      z-index: 0
+      font-weight: 500
     
     .icon
       color: $grey.base
       width: 10px
       
-  ul
-    lists()
-    padding: 8px 0
-    background: #fff
-    border-radius: 2px
-    position: absolute
-    padding: 8px 0
+  > .card
     max-height: 200px
     overflow-y: auto
-    top: 0
-    left: 0
     z-index: 4
-    width: calc(100% + 40px)
+    position: absolute
+    overflow-x: hidden
+    width: auto
+    transition: .2s ease-in
     
-    @extend .z-depth-1
+    .list__tile, .list
+      transition: opacity .4s linear, transform .4s linear
     
-    li
-      display: flex
-      align-items: center
-      height: 48px
-      font-size: 16px
-      cursor: pointer
-      padding: 0 16px
-      white-space: nowrap
-      overflow: hidden
-      text-overflow: ellipsis
-      transition: $primary-transition
-      pointer-events: auto
+    .list__tile__content
+      flex: 1 0 auto
       
-      &:hover
-        background: $material-twelve-percent-dark
+    .list__tile--dropdown--active
+      opacity: 1 !important
+      transform: translateY(0) !important
+      
+.drop
+  &-enter
+    opacity: 0
+    
+    .list__tile
+      transform: translateY(-4px)
+      
+  &-enter, &-leave-to
+    .list__tile
+      opacity: 0
+    
+  &-enter-to, &-leave
+    .list__tile
+      opacity: 1
+      
+  &-leave-to
+    opacity: 0
