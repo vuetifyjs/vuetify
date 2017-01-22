@@ -6,12 +6,12 @@ import Cards from './cards/index'
 import Chips from './chips/index'
 import Collapsible from './collapsible/index'
 import Dividers from './dividers/index'
-import Dropdowns from './dropdowns/index'
 import Footer from './footer/index'
 import Forms from './forms/index'
 import Grid from './grid/index'
 import Icons from './icons/index'
 import Lists from './lists/index'
+import Menu from './menus/index'
 import Modal from './modal/index'
 import Navbar from './navbar/index'
 import Pagination from './pagination/index'
@@ -44,12 +44,12 @@ export default bootstrap(
   Chips,
   Collapsible,
   Dividers,
-  Dropdowns,
   Footer,
   Forms,
   Grid,
   Icons,
   Lists,
+  Menu,
   Modal,
   Navbar,
   Pagination,

@@ -3,9 +3,10 @@
     v-bind:is="transition" 
     v-bind:origin="origin"
   )
-    ul(
-      class="dropdown"
+    div(
+      class="menu"
       v-bind:class="classes"
+      v-bind:data-auto="auto"
       v-bind:data-top="top"
       v-bind:data-right="right"
       v-bind:data-bottom="bottom"
@@ -13,13 +14,16 @@
       v-bind:data-hover="hover"
       v-bind:data-offset="offset"
       v-bind:id="id"
+      v-bind:style="styles"
       v-show="active"
     )
-      v-dropdown-item(
-        v-for="item in items"
-        v-bind:item="item"
-      )
-      slot
+      v-list
+        v-list-item(v-for="(item, index) in items")
+          v-list-tile(
+            v-bind:item="item" 
+            v-on:click.native="$emit('input', item)"
+            v-bind:class="{ 'list__tile--active': inputValue === item }"
+          )
 </template>
 
 <script>
@@ -27,11 +31,19 @@
   import Transitionable from '../../mixins/transitionable'
 
   export default {
-    name: 'dropdown',
+    name: 'menu',
 
     mixins: [Toggleable, Transitionable],
 
+    data () {
+      return {
+        inputValue: {}
+      }
+    },
+
     props: {
+      auto: Boolean,
+
       bottom: Boolean,
 
       id: {
@@ -51,6 +63,11 @@
         default: true
       },
 
+      maxHeight: {
+        type: [String, Number],
+        default: 200
+      },
+
       offset: Boolean,
 
       origin: {
@@ -68,13 +85,17 @@
       transition: {
         type: String,
         default: 'v-scale-transition'
+      },
+
+      value: {
+        requied: false
       }
     },
 
     computed: {
       classes () {
         return {
-          'dropdown--open-from-right': this.right
+          'menu--open-from-right': this.right
         }
       },
 
@@ -82,6 +103,18 @@
         return [
           [`${this.$options.name}:opened`, this.opened]
         ]
+      },
+
+      styles () {
+        return {
+          'max-height': `${this.maxHeight}px`
+        }
+      }
+    },
+
+    watch: {
+      value () {
+        this.inputValue = this.value
       }
     },
 

@@ -1,5 +1,5 @@
 import Badge from './badge'
-import Dropdown from './dropdown'
+import Menu from './menu'
 import Modal from './modal'
 import Ripple from './ripple'
 import SideBar from './sidebar'
@@ -7,7 +7,7 @@ import Tooltip from './tooltip'
 
 export default {
   Badge,
-  Dropdown,
+  Menu,
   Modal,
   Ripple,
   SideBar,
