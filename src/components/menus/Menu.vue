@@ -1,7 +1,7 @@
 <template lang="pug">
   component(
     v-bind:is="transition" 
-    v-bind:origin="origin"
+    v-bind:origin="computedOrigin"
   )
     div(
       class="menu"
@@ -99,10 +99,28 @@
         }
       },
 
+      computedOrigin () {
+        if (this.index === -1) {
+          return this.origin
+        }
+
+        if (this.index === 0) {
+          return 'top left'
+        } else if (this.index === this.items.length - 1) {
+          return 'bottom left'
+        } else {
+          return 'left center'
+        }
+      },
+
       customEvents () {
         return [
           [`${this.$options.name}:opened`, this.opened]
         ]
+      },
+
+      index () {
+        return this.items.indexOf(this.inputValue)
       },
 
       styles () {
