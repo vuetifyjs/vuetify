@@ -21,7 +21,7 @@
         v-list-item(v-for="(item, index) in items")
           v-list-tile(
             v-bind:item="item" 
-            v-on:click.native="$emit('input', item)"
+            v-on:click.stop.native="updateValue"
             v-bind:class="{ 'list__tile--active': inputValue === item }"
           )
 </template>
@@ -65,7 +65,7 @@
 
       maxHeight: {
         type: [String, Number],
-        default: 200
+        default: 'none'
       },
 
       offset: Boolean,
@@ -125,7 +125,7 @@
 
       styles () {
         return {
-          'max-height': `${this.maxHeight}px`
+          'max-height': isNaN(this.maxHeight) ? this.maxHeight : `${this.maxHeight}px`
         }
       }
     },
@@ -147,6 +147,15 @@
     methods: {
       opened (id) {
         this.active = id === this.id
+      },
+
+      closeConditional (e) {
+        return this.$el.contains(e.target)
+      },
+
+      updateValue (item) {
+        this.active = false
+        this.$emit('input', item)
       }
     }
   }
