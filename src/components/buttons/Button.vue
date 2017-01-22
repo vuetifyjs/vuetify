@@ -42,7 +42,7 @@
 
       ripple: {
         type: [Boolean, Object],
-        default: false
+        default: true
       },
 
       round: Boolean,

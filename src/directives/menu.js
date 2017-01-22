@@ -31,7 +31,7 @@ function autoSize (el, component) {
   
   return {
     left: data.left - 16,
-    top: data.top - top,
+    top: data.top - top + 6,
     scrollTop
   }
 }
@@ -40,7 +40,7 @@ function getSize (el, component) {
   let width = 0
   let height = 0
   let offset = component.dataset.offset
-  component.style.minWidth = `${el.clientWidth}px`
+  component.style.minWidth = `${el.clientWidth + 20}px`
   component.style.display = 'block'
   let componentWidth = component.clientWidth
   let componentHeight = component.clientHeight

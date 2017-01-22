@@ -84,7 +84,7 @@
 
       transition: {
         type: String,
-        default: 'v-scale-transition'
+        default: 'v-menu-transition'
       },
 
       value: {

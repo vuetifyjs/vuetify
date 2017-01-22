@@ -1,6 +1,10 @@
 <template lang="pug">
   div(class="btn-dropdown")
-    v-btn(menu v-menu:test="") {{ inputValue.title }}
+    v-btn(
+      menu 
+      v-menu:test="" 
+      ripple
+    ) {{ inputValue.title }}
     v-menu(
       v-bind:items="items" 
       id="test" 
