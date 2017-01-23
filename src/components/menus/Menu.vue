@@ -12,7 +12,8 @@
       v-bind:data-bottom="bottom"
       v-bind:data-left="left"
       v-bind:data-hover="hover"
-      v-bind:data-offset="offset"
+      v-bind:data-offset-x="offsetX"
+      v-bind:data-offset-y="offsetY"
       v-bind:id="id"
       v-bind:style="styles"
       v-show="active"
@@ -21,7 +22,7 @@
         v-list-item(v-for="(item, index) in items")
           v-list-tile(
             v-bind:item="item" 
-            v-on:click.stop.native="updateValue"
+            v-on:click.stop.native="updateValue(item)"
             v-bind:class="{ 'list__tile--active': inputValue === item }"
           )
 </template>
@@ -68,7 +69,9 @@
         default: 'none'
       },
 
-      offset: Boolean,
+      offsetX: Boolean,
+
+      offsetY: Boolean,
 
       origin: {
         type: String,
@@ -113,12 +116,6 @@
         }
       },
 
-      customEvents () {
-        return [
-          [`${this.$options.name}:opened`, this.opened]
-        ]
-      },
-
       index () {
         return this.items.indexOf(this.inputValue)
       },
@@ -136,19 +133,7 @@
       }
     },
 
-    mounted () {
-      this.$vuetify.bus.sub(this.customEvents)
-    },
-
-    beforeDestroy () {
-      this.$vuetify.bus.unsub(this.customEvents)
-    },
-
     methods: {
-      opened (id) {
-        this.active = id === this.id
-      },
-
       closeConditional (e) {
         return this.$el.contains(e.target)
       },

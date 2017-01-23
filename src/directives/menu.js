@@ -1,29 +1,33 @@
 import { directiveConfig } from '../util/helpers'
 
 function autoSize (el, component) {
-  let scrollTop = 0,
+  let children = Array.from(component.getElementsByClassName('list__tile')),
+      height = 0,
+      index = 0,
+      scrollTop = 0,
       top = 0,
-      index = 0
+      selected = {}
 
-  let children = Array.from(component.getElementsByClassName('list__tile'))
   children.forEach((el, i) => {
     if (el.classList.contains('list__tile--active')) {
       index = i
+      selected = el
     }
   })
 
   component.style.display = 'block'
   if (index < 2) {
-    top = 20 + (48 * index)
-  } else if (index === children.length - 2) {
-    top = 12 + (48 * 2)
-    scrollTop = component.scrollHeight
-  } else if (index === children.length - 1) {
-    top = 12 + (48 * 3)
-    scrollTop = component.scrollHeight
-  } else {
+    top = 20 + (children[0].clientHeight * index)
+  } else if (index < children.length - 2) {
     top = component.clientHeight / 2 - 19
-    scrollTop = 35 + ((index - 2) * children[index].clientHeight)
+    scrollTop = 35 + ((index - 2) * selected.clientHeight)
+  } else {
+    let number = children.length - 2 === index
+      ? 2
+      : 3
+
+    top = 12 + (selected.clientHeight * number)
+    scrollTop = component.scrollHeight
   }
   component.style.display = 'none'
 
@@ -39,23 +43,26 @@ function autoSize (el, component) {
 function getSize (el, component) {
   let width = 0
   let height = 0
-  let offset = component.dataset.offset
-  component.style.minWidth = `${el.clientWidth + 20}px`
+  let offsetX = component.dataset.offsetX
+  let offsetY = component.dataset.offsetY
+  let autoWidth = component.dataset.auto ? 20 : 0
+
+  component.style.minWidth = `${el.clientWidth + autoWidth}px`
   component.style.display = 'block'
   let componentWidth = component.clientWidth
   let componentHeight = component.clientHeight
   component.style.display = 'none'
 
   if (component.dataset.bottom) {
-    height = componentHeight - (offset ? 0 : el.clientHeight)
+    height = componentHeight - (offsetY ? 0 : el.clientHeight)
   } else {
-    height = offset ? -el.clientHeight : 0
+    height = offsetY ? -el.clientHeight : 0
   }
 
   if (component.dataset.right) {
-    width = componentWidth - (offset ? 0 : el.clientWidth)
+    width = componentWidth - (offsetX ? 0 : el.clientWidth)
   } else {
-    width = offset ? -el.clientWidth : 0
+    width = offsetX ? -el.clientWidth : 0
   }
 
   return { 
@@ -65,56 +72,53 @@ function getSize (el, component) {
   }
 }
 
-function dropdown (e, el, id, bus, hover) {
-  e.preventDefault()
+function dropdown (e, el, component, bus) {
+  e.stopPropagation()
 
-  const component = document.getElementById(id)
-
-  if (!component
-    ||!component.dataset.hover && hover 
-    || component.style.display !== 'none'
-  ) {
+  if (!component || component.style.display !== 'none') {
     return
   }
 
-  let size = {}
-
-  if (component.dataset.auto) {
-    size = autoSize(el, component)
-  } else {
-    size = getSize(el, component)
-  }
+  let size = component.dataset.auto
+    ? autoSize(el, component)
+    : getSize(el, component)
 
   component.style.left = `${size.left}px`
   component.style.top = `${size.top}px`
 
-  bus.pub(`menu:open:${id}`)
-
-  setTimeout(() => component.scrollTop = size.scrollTop, 100)
+  setTimeout(() => component.scrollTop = size.scrollTop, 0)
 }
 
 function directive (el, binding, v) {
-  const config = directiveConfig(binding)
-  let id = config.value
-  let bus = v.context.$vuetify.bus
+  const config = directiveConfig(binding),
+        bus = v.context.$vuetify.bus,
+        component = document.getElementById(config.value)
 
-  el.dataset.menu = id
+  el.dataset.menu = config.value
 
   // Directive binding happens before all components are rendered
   // When changing routes, dropdown element may not be ready
-  // Do hover check within dropdown function
-  el.onclick = e => dropdown(e, el, id, bus, false)
-  el.onmouseenter = e => dropdown(e, el, id, bus, true)
+  let event = component.dataset.hover ? 'mouseenter' : 'click'
+
+  el.addEventListener(event, e => {
+    if (config.cb && !config.cb()) {
+      return
+    }
+
+    dropdown(e, el, component, bus)
+    bus.pub(`menu:${config.toggle ? 'toggle': 'open'}:${component.id}`)
+  }, false)
 }
 
 export default {
-  bind: directive,
-  updated: directive,
-  componentUpdated: directive,
+  bind (el, binding, v) {
+    v.context.$vuetify.load(() => directive(el, binding, v))
+  },
   unbind (el) {
-    el.removeAttribute('onclick')
-    el.removeAttribute('onmouseenter')
-    el.removeAttribute('onmouseleave')
-    el.removeAttribute('data-dropdown')
+    const component = document.getElementById(el.dataset.menu)
+    let event = component.dataset.hover ? 'mouseenter' : 'click'
+
+    el.removeEventListener(event, dropdown, false)
+    el.removeAttribute('data-menu')
   }
 }

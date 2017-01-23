@@ -11,10 +11,12 @@
   min-width: 0
   @extend .z-depth-1
   
+  .list__tile__title
+    text-overflow: initial
+  
   &-transition
     &-enter
       max-width: 50px !important
-      pointer-events: none
       min-width: 0
       
       .list__tile
@@ -40,6 +42,9 @@
       .list__tile--active
         opacity: 1 !important
         
+    &-leave
+      pointer-events: none
+      
     &-leave-to
       transform: translateY(-10px)
         
