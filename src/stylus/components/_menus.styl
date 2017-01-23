@@ -7,7 +7,7 @@
   border-radius: 2px
   overflow-y: auto
   overflow-x: hidden
-  transition: .3s ease-in-out, max-width 1s linear, transform .2s linear
+  transition: $primary-transition
   min-width: 0
   @extend .z-depth-1
   
@@ -36,21 +36,18 @@
       max-width: 300px
         
       .list__tile
-        transition-delay: .3s
+        pointer-events: auto
         opacity: 1
       
       .list__tile--active
         opacity: 1 !important
-        
-    &-leave
-      pointer-events: none
       
     &-leave-to
       transform: translateY(-10px)
         
     &-enter, &-leave-to
-      pointer-events: none
       opacity: 0
+      z-index: -1
       
     &-enter-to, &-leave
       opacity: 1

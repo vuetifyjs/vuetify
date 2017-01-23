@@ -14,6 +14,7 @@
       v-bind:data-hover="hover"
       v-bind:data-offset-x="offsetX"
       v-bind:data-offset-y="offsetY"
+      v-bind:data-scrollable="maxHeight !== 'auto'"
       v-bind:id="id"
       v-bind:style="styles"
       v-show="active"
@@ -59,14 +60,11 @@
         default: () => []
       },
 
-      left: {
-        type: Boolean,
-        default: true
-      },
+      left: Boolean,
 
       maxHeight: {
         type: [String, Number],
-        default: 'none'
+        default: 'auto'
       },
 
       offsetX: Boolean,
@@ -80,10 +78,7 @@
 
       right: Boolean,
 
-      top: {
-        type: Boolean,
-        default: true
-      },
+      top: Boolean,
 
       transition: {
         type: String,
@@ -103,7 +98,7 @@
       },
 
       computedOrigin () {
-        if (this.index === -1) {
+        if (this.index === -1 || !this.auto) {
           return this.origin
         }
 

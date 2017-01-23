@@ -1,4 +1,6 @@
 .btn-dropdown
+  display: inline-block
+  
   .btn
     background: transparent
     box-shadow: initial
@@ -14,28 +16,29 @@
     border-radius: 0
     
     .icon
-      margin-left: 16px
+      margin-left: 24px
       color: $grey.base
       margin-right: -9px
       
-  &--segmented
-    .btn
-      &:before
-        content: ''
-        position: absolute
-        top: 0
-        right: 36px
-        width: 1px
-        height: 100%
-        background: $material-twelve-percent-dark
+  &--segmented .btn, &--editable .btn--active
+    &:before
+      content: ''
+      position: absolute
+      top: 0
+      right: 38px
+      width: 1px
+      height: 100%
+      background: $material-twelve-percent-dark
       
-  &--overflow
+  &--overflow, &--editable
     .btn
       border-top: 1px solid $material-twelve-percent-dark
       height: 42px
       min-width: 102px
       padding: 0 16px
-      z-index: 2
+      
+      .icon
+        transition: $primary-transition
       
       &:hover
         background: #fff
@@ -50,5 +53,10 @@
           top: initial
           background: #fff
           
+        .icon
+          transform: rotate(180deg)
+          
     .menu
-      z-index: 1
+      border-top-left-radius: 0
+      border-top-right-radius: 0
+      border-top: 1px solid $material-twelve-percent-dark

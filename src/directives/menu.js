@@ -16,15 +16,13 @@ function autoSize (el, component) {
   })
 
   component.style.display = 'block'
-  if (index < 2) {
+  if (index < 2 || children.length < 4 || !component.dataset.scrollable) {
     top = 20 + (children[0].clientHeight * index)
   } else if (index < children.length - 2) {
     top = component.clientHeight / 2 - 19
     scrollTop = 35 + ((index - 2) * selected.clientHeight)
   } else {
-    let number = children.length - 2 === index
-      ? 2
-      : 3
+    let number = children.length - 2 === index ? 2 : 3
 
     top = 12 + (selected.clientHeight * number)
     scrollTop = component.scrollHeight
