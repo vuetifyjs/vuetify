@@ -1,6 +1,8 @@
 .btn
   background: $grey.lighten-2
   color: $button-color
+  display: inline-flex
+  align-items: center
   height: $button-height
   margin: $button-margin
   border-radius: $button-border-radius
@@ -71,3 +73,27 @@
     
     &:active
       @extend .z-depth-2
+      
+  &--icon
+    background: transparent
+    box-shadow: none !important
+    border-radius: 50%
+    justify-content: center
+    height: $button-height
+    width: $button-height
+    min-width: auto
+    padding: 0
+    
+    &:after
+      border-radius: 50%
+    
+    &:focus, &:active
+      border-radius: 50%
+      
+      &:after
+        background-color: currentColor !important
+        opacity: .12
+        
+    &:disabled
+      background-color: transparent !important
+    
