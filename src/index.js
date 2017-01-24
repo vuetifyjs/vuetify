@@ -5,15 +5,23 @@ import Components from './components/_index'
 import Directives from './directives/_index'
 import Init from './util/init'
 import Load from './util/load'
+import { mergeObject } from './util/helpers'
 import Toast from './functions/toast'
 
-function plugin(Vue) {
+const defaults = {
+  componentPrefix: 'V',
+  directivePrefix: ''
+}
+
+function plugin(Vue, options) {
+  options = mergeObject(defaults, (options || {}))
+
   Object.keys(Directives).forEach(key => {
-    Vue.directive(key, Directives[key])
+    Vue.directive(`${options.directivePrefix}${key}`, Directives[key])
   })
-  
+
   Object.keys(Components).forEach(key => {
-    Vue.component(key, Components[key])
+    Vue.component(`${options.componentPrefix}${key}`, Components[key])
   })
 
   Vue.prototype.$vuetify = {
@@ -23,7 +31,9 @@ function plugin(Vue) {
 
     init: Init,
 
-    toast: Toast
+    toast: Toast,
+
+    options
   }
 }
 

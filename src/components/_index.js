@@ -23,19 +23,9 @@ import Tables from './tables/index'
 import Tabs from './tabs/index'
 import Transitions from './transitions/_index'
 
-function bootstrap (...components) {
-  let entries = {}
+import { mergeObject } from '../util/helpers'
 
-  components.forEach(component => {
-    Object.keys(component).forEach(key => {
-      entries[`V${key}`] = component[key]
-    })
-  })
-
-  return entries
-}
-
-export default bootstrap(
+export default mergeObject(
   Alerts,
   App,
   Breadcrumbs,
