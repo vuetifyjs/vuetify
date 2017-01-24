@@ -10,7 +10,6 @@
       v-bind:data-index="index"
       v-bind:data-only-child="isSelected(item) && (!multiple || inputValue.length === 1)"
       flat
-      icon
     )
       span(v-if="item.text" v-text="item.text")
       v-icon(v-if="item.icon") {{ item.icon }}
