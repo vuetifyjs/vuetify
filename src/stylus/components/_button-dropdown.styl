@@ -1,34 +1,54 @@
 .btn-dropdown
   display: inline-block
+  position: relative
+  
+  input
+    position: absolute
+    top: 0
+    left: 0
+    height: 100%
+    font-size: 16px
+    font-weight: 500
+    padding-left: 22px
+    width: 100%
+    outline: none
   
   .btn
+    align-items: center
     background: transparent
+    border-bottom: 1px solid $material-twelve-percent-dark
+    border-radius: 0
     box-shadow: initial
     display: flex
-    align-items: center
-    justify-content: space-between
     font-size: 16px
+    font-weight: 500
+    justify-content: space-between
     min-width: $button-min-width
     padding: 0
-    border-bottom: 1px solid $material-twelve-percent-dark
-    font-weight: 500
     text-transform: initial
-    border-radius: 0
     
-    .icon
-      margin-left: 24px
-      color: $grey.base
-      margin-right: -9px
+    &--editable
+      > span
+        opacity: 0
+    
+  .icon:not(.btn-dropdown__arrow)
+    padding: 0 6px
+    
+  &__arrow
+    color: $grey.base
+    margin-left: 24px
+    margin-right: -9px
+    transition: $primary-transition
       
   &--segmented .btn, &--editable .btn--active
     &:before
-      content: ''
-      position: absolute
-      top: 0
-      right: 38px
-      width: 1px
-      height: 100%
       background: $material-twelve-percent-dark
+      content: ''
+      height: 100%
+      position: absolute
+      right: 38px
+      top: 0
+      width: 1px
       
   &--overflow, &--editable
     .btn
@@ -36,9 +56,6 @@
       height: 42px
       min-width: 102px
       padding: 0 16px
-      
-      .icon
-        transition: $primary-transition
       
       &:hover
         background: #fff
@@ -48,15 +65,15 @@
         @extend .z-depth-1
         
         &:after
+          background: #fff
           bottom: -4px
           height: 3px
           top: initial
-          background: #fff
           
-        .icon
+        .btn-dropdown__arrow
           transform: rotate(180deg)
           
     .menu
+      border-top: 1px solid $material-twelve-percent-dark
       border-top-left-radius: 0
       border-top-right-radius: 0
-      border-top: 1px solid $material-twelve-percent-dark

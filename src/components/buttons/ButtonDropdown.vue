@@ -4,12 +4,20 @@
     v-bind:class="classes"
   )
     v-btn(
-      v-bind:class="{ 'btn--active': active }"
+      v-bind:class="{ 'btn--active': active, 'btn--editable': active && editable }"
       v-menu="{ toggle: true, value: id }"
     )
-      span {{ inputValue.title }}
-      v-icon arrow_drop_down
-    text-input
+      span(v-if="inputValue.title" v-text="inputValue.title")
+      v-icon(v-if="inputValue.action") {{ inputValue.action }}
+      v-icon(class="btn-dropdown__arrow") arrow_drop_down
+    div(v-show="editable && active")
+      input(
+        type="text"
+        ref="input"
+        v-model="editableValue"
+        v-on:keypress.enter="updateValue($event.target.value)"
+        v-on:click.stop=""
+      )
     v-menu(
       v-bind:auto="!overflow && !segmented && !editable"
       v-bind:items="computedItems"
@@ -30,7 +38,8 @@
     data () {
       return {
         active: false,
-        inputValue: { title: this.placeholder }
+        inputValue: { title: this.placeholder },
+        editableValue: ''
       }
     },
 
@@ -71,6 +80,10 @@
       },
 
       computedItems () {
+        if (this.editable) {
+          return this.items
+        }
+
         if (this.index !== -1 &&
           (this.overflow || this.segmented || this.editable)
         ) {
@@ -105,14 +118,39 @@
     },
 
     watch: {
+      active () {
+        if (this.editable) {
+          if (this.active) {
+            setTimeout(() => this.$refs.input.focus(), 0)
+          } else {
+            this.editableValue = this.inputValue.title
+          }
+        }
+      },
+
       value () {
+        if (typeof this.value === 'string') {
+          return this.inputValue = { title: this.value }
+        }
+
         this.inputValue = this.value
       }
     },
 
     methods: {
       updateValue (obj) {
+        if (typeof obj === 'string') {
+          obj = { title: obj }
+          
+          this.$vuetify.bus.pub(`menu:toggle:${this.id}`)
+        }
+
         this.$emit('input', obj)
+
+        if (this.editable) {
+          this.editableValue = obj.title
+          this.inputValue = obj
+        }
       }
     }
   }
