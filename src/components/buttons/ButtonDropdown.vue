@@ -9,15 +9,15 @@
     )
       span(v-if="inputValue.title" v-text="inputValue.title")
       v-icon(v-if="inputValue.action") {{ inputValue.action }}
-      v-icon(class="btn-dropdown__arrow") arrow_drop_down
-    div(v-show="editable && active")
-      input(
-        type="text"
-        ref="input"
-        v-model="editableValue"
-        v-on:keypress.enter="updateValue($event.target.value)"
-        v-on:click.stop=""
-      )
+      v-icon(class="btn-dropdown__arrow" v-on:click="$vuetify.bus.pub(`menu:toggle:${id}`)") arrow_drop_down
+    input(
+      type="text"
+      ref="input"
+      v-model="editableValue"
+      v-on:keypress.enter="updateValue($event.target.value)"
+      v-on:click.stop=""
+      v-show="editable && active"
+    )
     v-menu(
       v-bind:auto="!overflow && !segmented && !editable"
       v-bind:items="computedItems"
@@ -111,6 +111,7 @@
 
     mounted () {
       this.$vuetify.bus.sub(this.customEvents)
+      this.editableValue = this.inputValue.title
     },
 
     beforeDestroy () {
@@ -121,7 +122,7 @@
       active () {
         if (this.editable) {
           if (this.active) {
-            setTimeout(() => this.$refs.input.focus(), 0)
+            setTimeout(() => this.$refs.input.select(), 0)
           } else {
             this.editableValue = this.inputValue.title
           }

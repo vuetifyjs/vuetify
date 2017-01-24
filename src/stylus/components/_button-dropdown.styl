@@ -3,25 +3,26 @@
   position: relative
   
   input
+    background: transparent
+    font-size: $button-dropdown-font-size
+    font-weight: $button-dropdown-font-weight
+    height: 100%
+    left: 0
+    outline: none
+    padding-left: $button-dropdown-input-padding-left
     position: absolute
     top: 0
-    left: 0
-    height: 100%
-    font-size: 16px
-    font-weight: 500
-    padding-left: 22px
-    width: 100%
-    outline: none
+    width: $button-dropdown-input-width
   
   .btn
     align-items: center
     background: transparent
-    border-bottom: 1px solid $material-twelve-percent-dark
+    border-bottom: $button-dropdown-border-bottom
     border-radius: 0
     box-shadow: initial
     display: flex
-    font-size: 16px
-    font-weight: 500
+    font-size: $button-dropdown-font-size
+    font-weight: $button-dropdown-font-weight
     justify-content: space-between
     min-width: $button-min-width
     padding: 0
@@ -39,6 +40,7 @@
     margin-left: 24px
     margin-right: -9px
     transition: $primary-transition
+    cursor: pointer
       
   &--segmented .btn, &--editable .btn--active
     &:before
@@ -53,15 +55,15 @@
   &--overflow, &--editable
     .btn
       border-top: 1px solid $material-twelve-percent-dark
-      height: 42px
-      min-width: 102px
-      padding: 0 16px
+      height: $button-dropdown-overflow-editable-height
+      min-width: $button-dropdown-overflow-editable-min-width
+      padding: $button-dropdown-overflow-editable-padding
       
       &:hover
-        background: #fff
+        background: $button-dropdown-background
         
       &.btn--active
-        background: #fff
+        background: $button-dropdown-background
         @extend .z-depth-1
         
         &:after
