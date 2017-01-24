@@ -8,6 +8,7 @@
       v-on:click.native.stop="updateValue(item)"
       v-bind:data-selected="isSelected(item)"
       v-bind:data-index="index"
+      v-bind:data-only-child="isSelected(item) && (!multiple || inputValue.length === 1)"
       flat
       icon
     )
