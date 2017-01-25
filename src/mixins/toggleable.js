@@ -3,58 +3,41 @@ import Eventable from './eventable'
 export default {
   data () {
     return {
-      active: false,
-      activators: []
+      active: false
     }
   },
 
   mixins: [Eventable],
 
-  watch: {
-    active (active) {
-      // if (active) {
-      //   this.$vuetify.bus.pub(`${this.$options.name}:opened:${this.id}`)
-      // } else {
-      //   this.$vuetify.bus.pub(`${this.$options.name}:closed:${this.id}`)
-      // }
-    }
-  },
-
-  mounted () {
-    // this.$vuetify.load(this.init)
-  },
-
   computed: {
     events () {
       return [
-        [`${this.$options.name}`, this.id, this.toggle, { deep: true }]
+        [`${this.$options.name}`, this.id, this.toggle, { deep: true }],
+        ['common', 'bodyClick', this.close]
       ]
     }
   },
 
   methods: {
-    init () {
-      // let activators = document.querySelectorAll(`[data-${this.$options.name}="${this.id}"]`)
-      // this.activators = Array.apply(null, activators)
-    },
-
-    open () {
-      // this.active = true
-      // this.$vuetify.bus.pub(`${this.$options.name}:opened`, this.id)
+    commit (active) {
+      return this.$store.commit(`vuetify/${this.$options.name.toUpperCase()}_TOGGLE`, {
+        id: this.id,
+        active: active
+      })
     },
 
     close (e) {
-      if (arguments.length === 0 && this.activators.length === 0) {
-        return this.active = false
+      if (arguments.length === 0) {
+        return this.commit(false)
       }
 
       if ((!e || !e.target)
-        || this.activators.some(i => i.contains(e.target) || i === e.target)
         || this.closeConditional(e)
       ) {
         return
       }
-      this.active = false
+
+      return this.commit(false)
     },
 
     closeConditional () {

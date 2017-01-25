@@ -2,7 +2,7 @@ import Bus from './bus'
 
 export default function () {
   const click = e => {
-    this.$store.commit('vuetify/BODY_CLICK', new Date())
+    this.$store.commit('vuetify/BODY_CLICK', e)
   }
 
   if (typeof window.orientation !== 'undefined') {

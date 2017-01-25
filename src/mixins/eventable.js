@@ -9,6 +9,7 @@ export default {
   },
 
   beforeDestroy () {
+    console.log('here')
     // this.$vuetify.bus.unsub(this.events)
   }
 }

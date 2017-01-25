@@ -2,9 +2,12 @@ function directive (el, binding, v) {
   el.dataset.sidebar = binding.arg
 
   el.onclick = e => {
-    e.preventDefault()
+    e.stopPropagation()
     
-    v.context.$vuetify.bus.pub(`sidebar:toggle:${binding.arg}`)
+    v.context.$store.commit('vuetify/SIDEBAR_TOGGLE', {
+      id: binding.arg,
+      active: true
+    })
   }
 }
 

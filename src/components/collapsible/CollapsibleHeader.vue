@@ -2,7 +2,7 @@
   div(
     class="collapsible__header"
     v-bind:class="classes"
-    v-on:click="click"
+    v-on:click.stop="click"
   )
     slot
 </template>
@@ -31,8 +31,8 @@
 
       events () {
         return [
-          [`collapse:opened:${this.rootId}`, this.opened],
-          [`collapse:closed:${this.rootId}`, this.closed]
+          // [`collapse:opened:${this.rootId}`, this.opened],
+          // [`collapse:closed:${this.rootId}`, this.closed]
         ]
       },
 
@@ -47,9 +47,13 @@
       }
     },
 
+    created () {
+      this.$store.commit('vuetify/COLLAPSIBLE_HEADER_INIT', { id: this.rootId, headerId: this._uid })
+    },
+
     methods: {
       click () {
-        this.$vuetify.bus.pub(`collapse:toggle:${this.rootId}`, this.bodySiblingUid)
+        this.$store.commit('vuetify/COLLAPSIBLE_HEADER_TOGGLE', { id: this.rootId, headerId: this._uid, active: true })
       },
       
       getNextSibling (el) {

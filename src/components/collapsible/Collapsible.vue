@@ -25,6 +25,10 @@
           expand: this.expand
         }
       }
+    },
+
+    created () {
+      this.$store.commit('vuetify/COLLAPSIBLE_INIT', this._uid)
     }
   }
 </script>

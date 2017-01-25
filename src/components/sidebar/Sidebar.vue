@@ -124,14 +124,7 @@
     methods: {
       resize () {
         if (this.mobile && !this.drawer) {
-          let active = window.innerWidth >= this.mobileBreakPoint
-
-          if (active !== this.active) {
-            this.$store.commit('vuetify/SIDEBAR_TOGGLE', {
-              id: this.id,
-              active: active
-            })
-          }
+          this.active = window.innerWidth >= this.mobileBreakPoint
         }
       },
 
