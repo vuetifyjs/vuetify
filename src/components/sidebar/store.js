@@ -4,8 +4,8 @@ export default {
   },
 
   mutations: {
-    'vuetify/BODY_CLICK' (store, obj) {
-      store.common.bodyClick = obj
+    'vuetify/SIDEBAR_INIT' (store, obj) {
+      store.sidebar[obj] = { active: false }
     },
 
     'vuetify/SIDEBAR_TOGGLE' (store, obj) {

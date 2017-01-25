@@ -4,7 +4,12 @@ var Store = {
       bodyClick: null
     }
   },
-  mutations: {}
+  
+  mutations: {
+    'vuetify/BODY_CLICK' (store, obj) {
+      store.common.bodyClick = obj
+    }
+  }
 }
 
 function mergeStore (obj) {

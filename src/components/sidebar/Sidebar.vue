@@ -103,11 +103,32 @@
     watch: {
       '$route' () {
         this.routeChanged()
+      },
+
+      '$store' () {
+        console.log('here2')
       }
     },
 
     mounted () {
-      this.$store.state.vuetify.sidebar[this.id] = {}
+      this.$store.commit('vuetify/SIDEBAR_INIT', this.id)
+      
+      this.$store.watch(state => {
+        return state.vuetify.sidebar[this.id]
+      }, (sidebar) => {
+        this.active = sidebar.active
+      }, {
+        deep: true
+      }),
+
+      // Watch on body click changes
+      this.$store.watch((state) => {
+        return state.vuetify.common.bodyClick
+      }, (bodyClick) => {
+          
+      }, {
+        deep: true
+      })
       
       this.$vuetify().load(() => {
         this.resize()
@@ -125,8 +146,6 @@
           let active = window.innerWidth >= this.mobileBreakPoint
 
           if (active !== this.active) {
-            this.active = active
-
             this.$store.commit('vuetify/SIDEBAR_TOGGLE', {
               id: this.id,
               active: active
