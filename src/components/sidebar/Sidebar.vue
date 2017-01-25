@@ -103,33 +103,14 @@
     watch: {
       '$route' () {
         this.routeChanged()
-      },
-
-      '$store' () {
-        console.log('here2')
       }
     },
 
-    mounted () {
+    created () {
       this.$store.commit('vuetify/SIDEBAR_INIT', this.id)
-      
-      this.$store.watch(state => {
-        return state.vuetify.sidebar[this.id]
-      }, (sidebar) => {
-        this.active = sidebar.active
-      }, {
-        deep: true
-      }),
+    },
 
-      // Watch on body click changes
-      this.$store.watch((state) => {
-        return state.vuetify.common.bodyClick
-      }, (bodyClick) => {
-          
-      }, {
-        deep: true
-      })
-      
+    mounted () {      
       this.$vuetify().load(() => {
         this.resize()
         window.addEventListener('resize', this.resize, false)
@@ -150,7 +131,7 @@
               id: this.id,
               active: active
             })
-          }          
+          }
         }
       },
 

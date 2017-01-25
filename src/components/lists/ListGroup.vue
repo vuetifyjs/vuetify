@@ -73,7 +73,7 @@
 
       events () {
         return [
-          [`list:close:${this.listUID}`, () => this.active = false]
+          // [`list:close:${this.listUID}`, () => this.active = false]
         ]
       }
     },

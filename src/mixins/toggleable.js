@@ -27,10 +27,7 @@ export default {
   computed: {
     events () {
       return [
-        // [`${this.$options.name}:open:${this.id}`, this.open],
-        // [`${this.$options.name}:close:${this.id}`, this.close],
-        // [`${this.$options.name}:toggle:${this.id}`, this.toggle],
-        // [`body:click`, this.close],
+        [`${this.$options.name}`, this.id, this.toggle, { deep: true }]
       ]
     }
   },
@@ -47,25 +44,25 @@ export default {
     },
 
     close (e) {
-      // if (arguments.length === 0 && this.activators.length === 0) {
-      //   return this.active = false
-      // }
+      if (arguments.length === 0 && this.activators.length === 0) {
+        return this.active = false
+      }
 
-      // if ((!e || !e.target)
-      //   || this.activators.some(i => i.contains(e.target) || i === e.target)
-      //   || this.closeConditional(e)
-      // ) {
-      //   return
-      // }
-      // this.active = false
+      if ((!e || !e.target)
+        || this.activators.some(i => i.contains(e.target) || i === e.target)
+        || this.closeConditional(e)
+      ) {
+        return
+      }
+      this.active = false
     },
 
     closeConditional () {
       return false
     },
 
-    toggle () {
-      // this.active = !this.active
+    toggle (state) {
+      this.active = state.active
     }
   }
 }
