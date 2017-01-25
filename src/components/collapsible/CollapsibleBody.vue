@@ -60,7 +60,8 @@
       },
 
       toggle (uid) {
-        console.log('made it')
+        console.log(uid.indexOf(this._uid), this._uid, uid)
+        return this.active = uid.includes(this._uid)
         return
         if (uid !== this._uid
             && !this.$parent.params.expand

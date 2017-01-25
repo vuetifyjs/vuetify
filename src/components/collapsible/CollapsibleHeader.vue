@@ -47,13 +47,9 @@
       }
     },
 
-    created () {
-      this.$store.commit('vuetify/COLLAPSIBLE_HEADER_INIT', { id: this.rootId, headerId: this._uid })
-    },
-
     methods: {
       click () {
-        this.$store.commit('vuetify/COLLAPSIBLE_HEADER_TOGGLE', { id: this.rootId, headerId: this._uid, active: true })
+        this.$store.commit('vuetify/COLLAPSIBLE_TOGGLE', { id: this.rootId, headerId: this.bodySiblingUid })
       },
       
       getNextSibling (el) {

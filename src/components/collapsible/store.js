@@ -5,19 +5,19 @@ export default {
 
   mutations: {
     'vuetify/COLLAPSIBLE_INIT' (store, obj) {
-      store.collapsible[obj] = {}
+      store.collapsible[obj] = []
     },
 
-    'vuetify/COLLAPSIBLE_HEADER_INIT' (store, obj) {
-      store.collapsible[obj.id][obj.headerId] = { active: null }
+    'vuetify/COLLAPSIBLE_BODY_INIT' (store, obj) {
+      // store.collapsible[obj.id][obj.headerId] = null
     },
 
     'vuetify/COLLAPSIBLE_TOGGLE' (store, obj) {
-      store.collapsible[obj.id].active = obj.active
+      store.collapsible[obj.id].push(obj.headerId)
     },
 
-    'vuetify/COLLAPSIBLE_HEADER_TOGGLE' (store, obj) {
-      store.collapsible[obj.id][obj.headerId].active = obj.active
+    'vuetify/COLLAPSIBLE_BODY_TOGGLE' (store, obj) {
+      // store.collapsible[obj.id][obj.headerId] = obj.active
     }
   }
 }
