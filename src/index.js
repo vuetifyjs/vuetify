@@ -6,6 +6,7 @@ import Directives from './directives/_index'
 import Init from './util/init'
 import Load from './util/load'
 import Toast from './functions/toast'
+import Store from './store/index'
 
 function plugin(Vue) {
   Object.keys(Directives).forEach(key => {
@@ -16,14 +17,13 @@ function plugin(Vue) {
     Vue.component(key, Components[key])
   })
 
-  Vue.prototype.$vuetify = {
-    bus: Bus,
-
-    load: Load,
-
-    init: Init,
-
-    toast: Toast
+  Vue.prototype.$vuetify = function () {
+    return {
+      bus: Bus,
+      load: Load,
+      init: Init.bind(this),
+      toast: Toast
+    }
   }
 }
 
@@ -32,3 +32,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 module.exports = plugin
+
+module.exports.vuetifySync = (store) => {
+  store.registerModule('vuetify', Store)
+}

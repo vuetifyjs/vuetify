@@ -107,7 +107,9 @@
     },
 
     mounted () {
-      this.$vuetify.load(() => {
+      this.$store.state.vuetify.sidebar[this.id] = {}
+      
+      this.$vuetify().load(() => {
         this.resize()
         window.addEventListener('resize', this.resize, false)
       })
@@ -120,7 +122,16 @@
     methods: {
       resize () {
         if (this.mobile && !this.drawer) {
-          this.active = window.innerWidth >= this.mobileBreakPoint
+          let active = window.innerWidth >= this.mobileBreakPoint
+
+          if (active !== this.active) {
+            this.active = active
+
+            this.$store.commit('vuetify/SIDEBAR_TOGGLE', {
+              id: this.id,
+              active: active
+            })
+          }          
         }
       },
 

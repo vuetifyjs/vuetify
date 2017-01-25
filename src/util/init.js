@@ -1,7 +1,9 @@
 import Bus from './bus'
 
 export default function () {
-  const click = e => Bus.pub('body:click', e)
+  const click = e => {
+    this.$store.commit('vuetify/BODY_CLICK', new Date())
+  }
 
   if (typeof window.orientation !== 'undefined') {
     document.body.addEventListener('touchstart', click, false)
