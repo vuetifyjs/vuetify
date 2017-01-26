@@ -6,8 +6,12 @@
 </template>
 
 <script>
+  import Storable from '../../mixins/storable'
+
   export default {
     name: 'collapsible',
+
+    mixins: [Storable],
 
     props: {
       expand: Boolean
@@ -20,15 +24,18 @@
         }
       },
 
+      defaultState () {
+        return {
+          items: [],
+          expand: this.expand
+        }
+      },
+
       params () {
         return {
           expand: this.expand
         }
       }
-    },
-
-    created () {
-      this.$store.commit('vuetify/COLLAPSIBLE_INIT', this._uid)
     }
   }
 </script>

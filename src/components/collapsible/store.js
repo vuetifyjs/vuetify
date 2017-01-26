@@ -4,20 +4,22 @@ export default {
   },
 
   mutations: {
-    'vuetify/COLLAPSIBLE_INIT' (store, obj) {
-      store.collapsible[obj] = []
-    },
-
-    'vuetify/COLLAPSIBLE_BODY_INIT' (store, obj) {
-      // store.collapsible[obj.id][obj.headerId] = null
-    },
-
     'vuetify/COLLAPSIBLE_TOGGLE' (store, obj) {
-      store.collapsible[obj.id].push(obj.headerId)
-    },
+      let index = store.collapsible[obj.id].items.indexOf(obj.headerId)
 
-    'vuetify/COLLAPSIBLE_BODY_TOGGLE' (store, obj) {
-      // store.collapsible[obj.id][obj.headerId] = obj.active
+      if (!store.collapsible[obj.id].expand) {
+        if (index !== -1) {
+          return store.collapsible[obj.id].items = []
+        }
+        
+        return store.collapsible[obj.id].items = [obj.headerId]
+      }
+
+      if (index !== -1) {
+        store.collapsible[obj.id].items.splice(index, 1)
+      } else {
+        store.collapsible[obj.id].items.push(obj.headerId)
+      }
     }
   }
 }

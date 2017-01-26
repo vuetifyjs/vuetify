@@ -23,6 +23,10 @@
     },
 
     computed: {
+      bodySiblingUid () {
+        return Number(this.getNextSibling(this.$el).getAttribute('uid'))
+      },
+
       classes () {
         return {
           'collapsible__header--active': this.active
@@ -31,8 +35,7 @@
 
       events () {
         return [
-          // [`collapse:opened:${this.rootId}`, this.opened],
-          // [`collapse:closed:${this.rootId}`, this.closed]
+          ['collapsible', this.rootId, this.toggle, { deep: true }]
         ]
       },
 
@@ -40,16 +43,15 @@
         let root = closestParentTag.call(this, 'v-collapsible')
 
         return root ? root._uid : null
-      },
-
-      bodySiblingUid () {
-        return Number(this.getNextSibling(this.$el).getAttribute('uid'))
       }
     },
 
     methods: {
       click () {
-        this.$store.commit('vuetify/COLLAPSIBLE_TOGGLE', { id: this.rootId, headerId: this.bodySiblingUid })
+        this.$store.commit('vuetify/COLLAPSIBLE_TOGGLE', { 
+          id: this.rootId,
+          headerId: this.bodySiblingUid
+        })
       },
       
       getNextSibling (el) {
@@ -62,12 +64,8 @@
         return el
       },
 
-      opened (uid) {
-        this.active = this.bodySiblingUid !== uid ? this.active : true
-      },
-
-      closed (uid) {
-        this.active = this.bodySiblingUid !== uid ? this.active : false
+      toggle (parent) {
+        this.active = parent.items.includes(this.bodySiblingUid)
       }
     }
   }

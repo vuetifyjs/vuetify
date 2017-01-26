@@ -59,19 +59,8 @@
         addOnceEventListener(el, 'transitionend', done)
       },
 
-      toggle (uid) {
-        console.log(uid.indexOf(this._uid), this._uid, uid)
-        return this.active = uid.includes(this._uid)
-        return
-        if (uid !== this._uid
-            && !this.$parent.params.expand
-        ) {
-          return this.active = false
-        }
-
-        if (uid === this._uid) {
-          this.active = !this.active
-        }
+      toggle (parent) {
+        this.active = parent.items.includes(this._uid)
       }
     }
   }
