@@ -70,7 +70,7 @@ function getSize (el, component) {
   }
 }
 
-function dropdown (e, el, component, bus) {
+function dropdown (e, el, component) {
   e.stopPropagation()
 
   if (!component || component.style.display !== 'none') {
@@ -89,28 +89,31 @@ function dropdown (e, el, component, bus) {
 
 function directive (el, binding, v) {
   const config = directiveConfig(binding),
-        bus = v.context.$vuetify.bus,
+        event = v.context.$vuetify().event,
         component = document.getElementById(config.value)
 
   el.dataset.menu = config.value
 
   // Directive binding happens before all components are rendered
   // When changing routes, dropdown element may not be ready
-  let event = component.dataset.hover ? 'mouseenter' : 'click'
+  let eventType = component.dataset.hover ? 'mouseenter' : 'click'
 
-  el.addEventListener(event, e => {
+  el.addEventListener(eventType, e => {
     if (config.cb && !config.cb()) {
       return
     }
 
-    dropdown(e, el, component, bus)
-    bus.pub(`menu:${config.toggle ? 'toggle': 'open'}:${component.id}`)
+    dropdown(e, el, component)
+
+    event('menu toggle', { id: component.id, active: true, toggle: config.toggle })
+
+    // bus.pub(`menu:${config.toggle ? 'toggle': 'open'}:${component.id}`)
   }, false)
 }
 
 export default {
   bind (el, binding, v) {
-    v.context.$vuetify.load(() => directive(el, binding, v))
+    v.context.$vuetify().load(() => directive(el, binding, v))
   },
   unbind (el) {
     const component = document.getElementById(el.dataset.menu)

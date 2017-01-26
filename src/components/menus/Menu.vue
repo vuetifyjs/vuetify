@@ -30,12 +30,13 @@
 
 <script>
   import Toggleable from '../../mixins/toggleable'
+  import Storable from '../../mixins/storable'
   import Transitionable from '../../mixins/transitionable'
 
   export default {
     name: 'menu',
 
-    mixins: [Toggleable, Transitionable],
+    mixins: [Storable, Toggleable, Transitionable],
 
     data () {
       return {
@@ -123,6 +124,10 @@
     },
 
     watch: {
+      active () {
+        this.$emit('active', this.active)
+      },
+      
       value () {
         this.inputValue = this.value
       }
@@ -134,7 +139,8 @@
       },
 
       updateValue (item) {
-        this.active = false
+        this.commit(false)
+
         this.$emit('input', item)
       }
     }

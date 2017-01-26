@@ -68,7 +68,7 @@
     },
 
     mounted () {
-      this.$vuetify.load(() => {
+      this.$vuetify().load(() => {
         this.resize()
         this.slider()
         window.addEventListener('resize', this.resize, false)

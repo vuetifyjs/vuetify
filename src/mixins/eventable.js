@@ -6,7 +6,7 @@ export default {
   },
 
   created () {
-    this.events.forEach(event => {
+    this.events.concat(this.customEvents || []).forEach(event => {
       let component, id, cb, options
 
       [component, id, cb, options] = event
@@ -18,7 +18,7 @@ export default {
   beforeDestroy () {
     this.watchers.forEach(w => w())
 
-    this.events.forEach(event => {
+    this.events.concat(this.customEvents || []).forEach(event => {
       let component, id
       [component, id] = event
 

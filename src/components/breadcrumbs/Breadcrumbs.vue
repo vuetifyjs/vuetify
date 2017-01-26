@@ -39,7 +39,7 @@
     },
 
     mounted () {
-      this.$vuetify.load(this.init)
+      this.$vuetify().load(this.init)
     },
 
     methods: {

@@ -32,7 +32,7 @@ export default {
 
   mounted () {
     if (this.selected || window.location.hash.substr(1) === this.target) {
-      this.$vuetify.load(this.click)
+      this.$vuetify().load(this.click)
     }
   },
 
@@ -42,7 +42,7 @@ export default {
 
       if (!this.active) return
 
-      this.$vuetify.load(this.location)
+      this.$vuetify().load(this.location)
     },
 
     click (e) {

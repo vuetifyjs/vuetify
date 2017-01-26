@@ -48,7 +48,7 @@
 
     methods: {
       click () {
-        this.$store.commit('vuetify/COLLAPSIBLE_TOGGLE', { 
+        this.$vuetify().event('collapsible toggle', { 
           id: this.rootId,
           bodyId: this.bodySiblingUid
         })

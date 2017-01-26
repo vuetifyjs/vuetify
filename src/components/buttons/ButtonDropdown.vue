@@ -26,6 +26,7 @@
       v-bind:max-height="maxHeight"
       v-bind:offset-y="overflow || segmented || editable"
       v-on:input="updateValue"
+      v-on:active="toggle"
       v-model="inputValue"
       top
     )
@@ -93,13 +94,6 @@
         return this.items
       },
 
-      customEvents () {
-        return [
-          [`menu:opened:${this.id}`, () => this.active = true],
-          [`menu:closed:${this.id}`, () => this.active = false]
-        ]
-      },
-
       id () {
         return 'btn-dropdown-' + this._uid
       },
@@ -110,12 +104,7 @@
     },
 
     mounted () {
-      this.$vuetify.bus.sub(this.customEvents)
       this.editableValue = this.inputValue.title
-    },
-
-    beforeDestroy () {
-      this.$vuetify.bus.unsub(this.customEvents)
     },
 
     watch: {
@@ -139,11 +128,18 @@
     },
 
     methods: {
+      toggle (active) {
+        this.active = active
+      },
+
       updateValue (obj) {
         if (typeof obj === 'string') {
           obj = { title: obj }
           
-          this.$vuetify.bus.pub(`menu:toggle:${this.id}`)
+          this.$vuetify().event('menu toggle', {
+            id: this.id,
+            active: false
+          })
         }
 
         this.$emit('input', obj)
