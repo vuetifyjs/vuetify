@@ -50,7 +50,7 @@
       click () {
         this.$store.commit('vuetify/COLLAPSIBLE_TOGGLE', { 
           id: this.rootId,
-          headerId: this.bodySiblingUid
+          bodyId: this.bodySiblingUid
         })
       },
       
