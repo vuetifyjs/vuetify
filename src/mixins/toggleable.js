@@ -20,6 +20,10 @@ export default {
 
   methods: {
     commit (active) {
+      if (this.active === active) {
+        return
+      }
+      
       return this.$store.commit(`vuetify/${this.$options.name.toUpperCase()}_TOGGLE`, {
         id: this.id,
         active: active
@@ -43,11 +47,7 @@ export default {
     },
 
     toggle (state) {
-      if (state) {
-        this.active = state.active
-      } else {
-        console.log(arguments)
-      }
+      this.active = state.active
     }
   }
 }
