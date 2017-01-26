@@ -45,7 +45,7 @@ export default {
     },
 
     toggle (state) {
-      console.log(state)
+      console.log(state, this.id)
       this.active = state.active
     }
   }
