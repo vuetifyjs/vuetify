@@ -14,5 +14,6 @@ function getComponentStores (array) {
 export default getComponentStores([
   'sidebar',
   'collapsible',
-  'menus'
+  'menus',
+  'modal'
 ])

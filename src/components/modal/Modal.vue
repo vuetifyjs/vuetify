@@ -19,11 +19,12 @@
 
 <script>
   import Toggleable from '../../mixins/toggleable'
+  import Storable from '../../mixins/storable'
 
   export default {
     name: 'modal',
 
-    mixins: [Toggleable],
+    mixins: [Storable, Toggleable],
 
     props: {
       bottom: Boolean,
