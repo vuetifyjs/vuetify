@@ -13,7 +13,7 @@ export default {
     events () {
       return [
         [`${this.$options.name}`, this.id, this.toggle, { deep: true }],
-        ['common', 'bodyClick', this.close]
+        // ['common', 'bodyClick', this.close]
       ]
     }
   },
@@ -45,6 +45,7 @@ export default {
     },
 
     toggle (state) {
+      console.log(state)
       this.active = state.active
     }
   }

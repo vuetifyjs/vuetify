@@ -20,11 +20,12 @@
 
 <script>
   import Toggleable from '../../mixins/toggleable'
+  import Storable from '../../mixins/storable'
 
   export default {
     name: 'sidebar',
 
-    mixins: [Toggleable],
+    mixins: [Toggleable, Storable],
 
     data () {
       return {
@@ -104,10 +105,6 @@
       '$route' () {
         this.routeChanged()
       }
-    },
-
-    created () {
-      this.$store.commit('vuetify/SIDEBAR_INIT', this.id)
     },
 
     mounted () {      

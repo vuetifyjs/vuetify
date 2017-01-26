@@ -1,16 +1,4 @@
-var Store = {
-  state: {
-    common: {
-      bodyClick: null
-    }
-  },
-  
-  mutations: {
-    'vuetify/BODY_CLICK' (store, obj) {
-      store.common.bodyClick = obj
-    }
-  }
-}
+import Store from './base.js'
 
 function mergeStore (obj) {
   Store.state = Object.assign(Store.state, obj.state)
