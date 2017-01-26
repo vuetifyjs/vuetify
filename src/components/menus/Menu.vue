@@ -19,24 +19,24 @@
       v-bind:style="styles"
       v-show="active"
     )
-      v-list
+      v-list(v-if="items.length")
         v-list-item(v-for="(item, index) in items")
           v-list-tile(
             v-bind:item="item" 
             v-on:click.stop.native="updateValue(item)"
             v-bind:class="{ 'list__tile--active': inputValue === item }"
           )
+      slot
 </template>
 
 <script>
   import Toggleable from '../../mixins/toggleable'
   import Storable from '../../mixins/storable'
-  import Transitionable from '../../mixins/transitionable'
 
   export default {
     name: 'menu',
 
-    mixins: [Storable, Toggleable, Transitionable],
+    mixins: [Storable, Toggleable],
 
     data () {
       return {
