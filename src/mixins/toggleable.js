@@ -13,7 +13,7 @@ export default {
     events () {
       return [
         [`${this.$options.name}`, this.id, this.toggle, { deep: true }],
-        // ['common', 'bodyClick', this.close]
+        ['common', 'bodyClick', this.close]
       ]
     }
   },
@@ -31,9 +31,7 @@ export default {
         return this.commit(false)
       }
 
-      if ((!e || !e.target)
-        || this.closeConditional(e)
-      ) {
+      if ((!e || !e.target) || this.closeConditional(e)) {
         return
       }
 
@@ -45,7 +43,11 @@ export default {
     },
 
     toggle (state) {
-      this.active = state.active
+      if (state) {
+        this.active = state.active
+      } else {
+        console.log(arguments)
+      }
     }
   }
 }
