@@ -40,7 +40,7 @@
       },
 
       rootId () {
-        let root = closestParentTag.call(this, 'v-collapsible')
+        const root = closestParentTag.call(this, 'v-collapsible')
 
         return root ? root._uid : null
       }
@@ -48,20 +48,20 @@
 
     methods: {
       click () {
-        this.$vuetify().event('component toggle', { 
+        this.$vuetify().event('component toggle', {
           bodyId: this.bodySiblingUid,
           component: 'collapsible',
           id: this.rootId
         })
       },
-      
+
       getNextSibling (el) {
         if (!(el = el.nextSibling)) return null
-        
-        while (el.nodeType != 1) {
+
+        while (el.nodeType !== 1) {
           if (!(el = el.nextSibling)) return null
         }
-      
+
         return el
       },
 

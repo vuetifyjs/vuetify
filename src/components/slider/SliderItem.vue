@@ -55,7 +55,7 @@
       },
 
       styles () {
-        return { 
+        return {
           backgroundImage: `url(${this.src})`
         }
       }

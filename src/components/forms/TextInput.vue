@@ -25,7 +25,7 @@
 <script>
   export default {
     name: 'text-input',
-    
+
     data () {
       return {
         focused: false,

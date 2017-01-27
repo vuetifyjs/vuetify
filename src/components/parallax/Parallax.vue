@@ -18,7 +18,7 @@
 
   export default {
     name: 'parallax',
-    
+
     mixins: [
       Translatable
     ],
@@ -51,7 +51,7 @@
           this.listeners()
           return this.$vuetify.bus.pub('parallax:ready')
         }
-        
+
         this.$refs.img.addEventListener('load', () => {
           this.translate()
           this.listeners()

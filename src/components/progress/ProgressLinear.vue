@@ -9,7 +9,7 @@
         div(class="progress-linear__bar__indeterminate" v-if="indeterminate")
       v-slide-x-transition
         div(
-          class="progress-linear__bar__determinate" 
+          class="progress-linear__bar__determinate"
           v-bind:style="{ width: value + '%' }"
           v-if="!indeterminate"
         )
@@ -67,7 +67,7 @@
       },
 
       styles () {
-        let styles = {}
+        const styles = {}
 
         if (!this.active) {
           styles.height = 0
@@ -81,7 +81,7 @@
       },
 
       bufferStyles () {
-        let styles = {}
+        const styles = {}
 
         if (!this.active) {
           styles.height = 0

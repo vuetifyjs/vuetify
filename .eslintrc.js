@@ -22,6 +22,10 @@ module.exports = {
     'generator-star-spacing': 0,
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
-    'no-return-assign': 2
+    'no-return-assign': 2,
+    // disallow indentation using both tabs and spaces
+    'no-mixed-spaces-and-tabs': 2,
+    // ensure consistent 2 space indentation and indent cases under switch
+    'indent': [2, 2, {'SwitchCase': 1}]
   }
 }

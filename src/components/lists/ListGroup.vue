@@ -59,7 +59,7 @@
 
       router: Boolean
     },
-    
+
     computed: {
       classes () {
         return {
@@ -95,10 +95,10 @@
     methods: {
       enter (el, done) {
         el.style.display = 'block'
-        let scrollHeight = el.scrollHeight
+        const scrollHeight = el.scrollHeight
         el.style.height = 0
-        
-        setTimeout(() => el.style.height = `${scrollHeight}px`, 50)
+
+        setTimeout(() => (el.style.height = `${scrollHeight}px`), 50)
 
         addOnceEventListener(el, 'transitionend', done)
       },

@@ -1,19 +1,19 @@
 <template lang="pug">
-	div(
-		class="alert"
-		v-bind:class="classes"
-		v-show="value"
-	)
-		v-icon(class="alert__icon" v-if="!hideIcon") {{ mdIcon }}
-		div
-			slot
-		a(
-			class="alert__dismissible"
-			href="#!"
-			v-if="dismissible"
-			v-on:click.prevent="$emit('input', false)"
-		)
-			v-icon(right) cancel
+  div(
+    class="alert"
+    v-bind:class="classes"
+    v-show="value"
+  )
+    v-icon(class="alert__icon" v-if="!hideIcon") {{ mdIcon }}
+    div
+      slot
+    a(
+      class="alert__dismissible"
+      href="#!"
+      v-if="dismissible"
+      v-on:click.prevent="$emit('input', false)"
+    )
+      v-icon(right) cancel
 </template>
 
 <script>
@@ -42,17 +42,17 @@ export default {
   },
 
   computed: {
-    classes() {
+    classes () {
       return {
         'alert--dismissible': this.dismissible,
         'alert--error': this.error,
         'alert--info': this.info,
         'alert--success': this.success,
-        'alert--warning': this.warning,
+        'alert--warning': this.warning
       }
     },
 
-    mdIcon() {
+    mdIcon () {
       if (this.icon) {
         return this.icon
       }
@@ -60,16 +60,12 @@ export default {
       switch (true) {
         case this.error:
           return 'warning'
-          break
         case this.info:
           return 'info'
-          break
         case this.success:
           return 'check_circle'
-          break
         case this.warning:
           return 'priority_high'
-          break
       }
     }
   }

@@ -18,7 +18,7 @@
 <script>
   export default {
     name: 'checkbox',
-    
+
     data () {
       return {
         model: null
@@ -38,7 +38,7 @@
       },
 
       indeterminate: Boolean,
-      
+
       label: {
         type: String,
         default: ''
@@ -70,13 +70,13 @@
       this.state()
 
       this.$refs.input.onchange = function () {
-        const c = this.checked,
-              v = this.value
+        const c = this.checked
+        const v = this.value
 
-        if (!vm.model
-            || typeof vm.model === 'string'
+        if (!vm.model ||
+            typeof vm.model === 'string'
         ) {
-          return vm.$emit('input', c ? true : false)
+          return vm.$emit('input', c)
         }
 
         const i = vm.model.indexOf(v)
@@ -93,9 +93,9 @@
 
     methods: {
       state () {
-        if (typeof this.model === 'array' 
-            && this.model.includes(this.value)
-            || this.value
+        if (this.model.constructor === Array &&
+            this.model.includes(this.value) ||
+            this.value
         ) {
           this.$refs.input.checked = true
         }

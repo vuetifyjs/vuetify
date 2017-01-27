@@ -26,7 +26,7 @@
 
     props: {
       centered: Boolean,
-      
+
       grow: Boolean,
 
       icons: Boolean,
@@ -75,16 +75,16 @@
         this.childrenCount = this.$children.length
         this.items = this.$children.filter(i => i.$options._componentTag === 'v-tabs-item')
       },
-      
+
       tabClick (target) {
         this.getItems()
 
         this.$nextTick(() => {
-          let nextIndex = this.items.findIndex(i => i.$el.id === target)
-          this.reversing = nextIndex > this.index ? false : true
+          const nextIndex = this.items.findIndex(i => i.$el.id === target)
+          this.reversing = nextIndex > this.index
           this.index = nextIndex
         })
-      },
+      }
     }
   }
 </script>

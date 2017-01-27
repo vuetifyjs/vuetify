@@ -34,7 +34,7 @@
       },
 
       rootId () {
-        let root = closestParentTag.call(this, 'v-collapsible')
+        const root = closestParentTag.call(this, 'v-collapsible')
 
         return root ? root._uid : null
       }
@@ -44,9 +44,9 @@
       enter (el, done) {
         el.style.height = null
         el.style.display = 'block'
-        let height = `${el.clientHeight}px`
+        const height = `${el.clientHeight}px`
         el.style.height = 0
-        
+
         setTimeout(() => {
           el.style.height = height
           addOnceEventListener(el, 'transitionend', done)

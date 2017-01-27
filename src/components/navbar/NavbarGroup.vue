@@ -47,7 +47,7 @@
         type: String,
         default: ''
       },
-      
+
       item: {
         type: Object,
         default () {
@@ -69,7 +69,7 @@
         default: 'v-slide-y-transition'
       }
     },
-    
+
     computed: {
       classes () {
         return {
@@ -86,7 +86,7 @@
       },
 
       navbar () {
-        let navbar = closestParentTag.call(this, 'navbar')
+        const navbar = closestParentTag.call(this, 'navbar')
 
         return navbar ? navbar._uid : null
       }
@@ -103,7 +103,7 @@
         browserTransform(el, 'scale(0)')
         el.style.display = 'block'
         el.style.height = `${el.scrollHeight}px`
-        
+
         setTimeout(() => {
           browserTransform(el, 'scale(1)')
         }, 0)
@@ -113,10 +113,10 @@
 
       leave (el, done) {
         browserTransform(el, 'scale(0)')
-        
+
         addOnceEventListener(el, done, 'transitionend')
       },
-    
+
       open () {
         this.opened = true
       },
@@ -126,10 +126,10 @@
       },
 
       close (e) {
-        if ((!e || !e.target)
-          || e.target === this.$el
-          || this.$el.contains(e.target)
-          && !this.$refs.group.$el.contains(e.target)
+        if ((!e || !e.target) ||
+          e.target === this.$el ||
+          this.$el.contains(e.target) &&
+          !this.$refs.group.$el.contains(e.target)
         ) {
           return
         }

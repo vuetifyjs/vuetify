@@ -17,7 +17,7 @@
       v-on:click.native="scrollLeft"
     ) chevron_left
     v-icon(
-      right 
+      right
       v-ripple=""
       v-on:click.native="scrollRight"
     ) chevron_right
@@ -61,7 +61,7 @@
       },
 
       tabsUid () {
-        let tabs = closestParentTag.call(this, 'v-tabs')
+        const tabs = closestParentTag.call(this, 'v-tabs')
 
         return tabs ? tabs._uid : null
       }
@@ -84,7 +84,7 @@
         if (!this.$refs.container) {
           return
         }
-        
+
         this.mobile = this.$refs.container.scrollWidth > this.$refs.container.clientWidth
         this.$vuetify.bus.pub(`tab:resize:${this.tabsUid}`)
       },

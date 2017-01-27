@@ -9,7 +9,7 @@
 <script>
   export default {
     name: 'icon',
-    
+
     data () {
       return {
         active: false

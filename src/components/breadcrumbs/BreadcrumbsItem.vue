@@ -11,7 +11,7 @@
 <script>
   export default {
     name: 'breadcrumbs-item',
-    
+
     props: {
       disabled: Boolean,
 
