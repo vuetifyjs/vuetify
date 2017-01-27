@@ -38,7 +38,7 @@
 <script>
   export default {
     name: 'pagination',
-    
+
     data () {
       return {
         selected: null
@@ -87,7 +87,7 @@
           min = this.length - 6
         }
 
-        let range = this.range(min, max)
+        const range = this.range(min, max)
 
         if (this.value >= 4 && this.length > 6) {
           range.splice(0, 2, 1, '...')
@@ -110,11 +110,11 @@
         this.selected = null
 
         // Change this
-        setTimeout(() => this.selected = this.value, 100)
+        setTimeout(() => (this.selected = this.value), 100)
       },
 
       range (from, to) {
-        let range = []
+        const range = []
 
         from = from > 0 ? from : 1
 

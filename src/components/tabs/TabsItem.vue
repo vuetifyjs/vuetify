@@ -16,7 +16,7 @@
     name: 'tabs-item',
 
     mixins: [Eventable],
-    
+
     data () {
       return {
         active: false,
@@ -53,7 +53,7 @@
       },
 
       tabsUid () {
-        let tabs = closestParentTag.call(this, 'v-tabs')
+        const tabs = closestParentTag.call(this, 'v-tabs')
 
         return tabs ? tabs._uid : null
       }

@@ -28,7 +28,7 @@
       return {
         current: null,
         items: [],
-        slide_interval: {},
+        slideInterval: {},
         reverse: false
       }
     },
@@ -59,7 +59,7 @@
         })
 
         if (this.cycle) {
-          clearInterval(this.slide_interval)
+          clearInterval(this.slideInterval)
           this.startInterval()
         }
 
@@ -82,9 +82,9 @@
 
       next () {
         this.reverse = false
-        
+
         if (this.current + 1 === this.items.length) {
-          return this.current = 0
+          return (this.current = 0)
         }
 
         this.current++
@@ -94,7 +94,7 @@
         this.reverse = true
 
         if (this.current - 1 < 0) {
-          return this.current = this.items.length - 1
+          return (this.current = this.items.length - 1)
         }
 
         this.current--
@@ -106,7 +106,7 @@
       },
 
       startInterval () {
-        this.slide_interval = setInterval(this.next, this.interval)
+        this.slideInterval = setInterval(this.next, this.interval)
       }
     }
   }

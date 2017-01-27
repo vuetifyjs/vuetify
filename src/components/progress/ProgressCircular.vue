@@ -107,8 +107,8 @@
       },
 
       styles () {
-        return { 
-          height: `${this.size}px`, 
+        return {
+          height: `${this.size}px`,
           width: `${this.size}px`
         }
       },

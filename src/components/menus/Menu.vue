@@ -1,6 +1,6 @@
 <template lang="pug">
   component(
-    v-bind:is="transition" 
+    v-bind:is="transition"
     v-bind:origin="computedOrigin"
   )
     div(
@@ -22,7 +22,7 @@
       v-list(v-if="items.length")
         v-list-item(v-for="(item, index) in items")
           v-list-tile(
-            v-bind:item="item" 
+            v-bind:item="item"
             v-on:click.stop.native="updateValue(item)"
             v-bind:class="{ 'list__tile--active': inputValue === item }"
           )
@@ -127,7 +127,7 @@
       active () {
         this.$emit('active', this.active)
       },
-      
+
       value () {
         this.inputValue = this.value
       }

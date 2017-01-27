@@ -120,7 +120,7 @@
 
       value () {
         if (typeof this.value === 'string') {
-          return this.inputValue = { title: this.value }
+          return (this.inputValue = { title: this.value })
         }
 
         this.inputValue = this.value
@@ -135,7 +135,7 @@
       updateValue (obj) {
         if (typeof obj === 'string') {
           obj = { title: obj }
-          
+
           this.$vuetify().event('component toggle', {
             active: false,
             component: 'menu',

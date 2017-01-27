@@ -34,7 +34,7 @@
 <script>
   export default {
     name: 'select',
-    
+
     data () {
       return {
         focused: false
@@ -46,7 +46,7 @@
         type: Boolean,
         default: true
       },
-      
+
       defaultText: {
         type: String,
         default: 'Select...'

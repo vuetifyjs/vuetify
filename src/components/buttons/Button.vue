@@ -15,7 +15,7 @@
     name: 'button',
 
     mixins: [Contextualable],
-    
+
     props: {
       block: Boolean,
 
@@ -75,7 +75,7 @@
           'success': this.success,
           'info': this.info,
           'warning': this.warning,
-          'error': this.error,
+          'error': this.error
         }
       }
     }

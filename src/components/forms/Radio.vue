@@ -18,8 +18,8 @@
 <script>
   export default {
     name: 'radio',
-    
-    props: {      
+
+    props: {
       disabled: Boolean,
 
       label: {

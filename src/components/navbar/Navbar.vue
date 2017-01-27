@@ -20,7 +20,7 @@
 
     props: {
       fixed: Boolean,
-      
+
       groupClass: {
         type: String,
         default: ''

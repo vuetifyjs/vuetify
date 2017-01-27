@@ -41,7 +41,7 @@
       drawer: Boolean,
 
       fixed: Boolean,
-      
+
       groupClass: {
         type: String,
         default: ''
@@ -106,7 +106,7 @@
       }
     },
 
-    mounted () {      
+    mounted () {
       this.$vuetify().load(() => {
         this.resize()
         window.addEventListener('resize', this.resize, false)
@@ -120,7 +120,7 @@
     methods: {
       resize () {
         if (this.mobile && !this.drawer) {
-          let active = window.innerWidth >= this.mobileBreakPoint
+          const active = window.innerWidth >= this.mobileBreakPoint
 
           if (active !== this.active) {
             this.commit(active)
@@ -130,8 +130,8 @@
 
       routeChanged () {
         if (
-          (window.innerWidth < this.mobileBreakPoint && this.mobile && this.closeOnClick)
-          || (this.drawer && this.closeOnClick)
+          (window.innerWidth < this.mobileBreakPoint && this.mobile && this.closeOnClick) ||
+          (this.drawer && this.closeOnClick)
         ) {
           this.commit(false)
         }
@@ -139,9 +139,9 @@
 
       closeConditional (e) {
         return (
-          (window.innerWidth >= this.mobileBreakPoint && !this.drawer)
-          || !this.closeOnClick
-          || this.$el.contains(e.target)
+          (window.innerWidth >= this.mobileBreakPoint && !this.drawer) ||
+          !this.closeOnClick ||
+          this.$el.contains(e.target)
         )
       }
     }

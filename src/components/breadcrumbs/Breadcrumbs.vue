@@ -15,7 +15,7 @@
 <script>
   export default {
     name: 'breadcrumbs',
-    
+
     props: {
       divider: {
         type: String,
@@ -44,7 +44,7 @@
 
     methods: {
       init () {
-        this.$children.forEach(i => i.$el.dataset.divider = this.divider)
+        this.$children.forEach(i => (i.$el.dataset.divider = this.divider))
       }
     }
   }

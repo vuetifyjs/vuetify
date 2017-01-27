@@ -66,9 +66,9 @@
           return this.$emit('input', this.inputValue === item.value ? null : item.value)
         }
 
-        let items = this.inputValue
+        const items = this.inputValue
 
-        let i = items.indexOf(item.value)
+        const i = items.indexOf(item.value)
         if (i !== -1) {
           items.splice(i, 1)
         } else {

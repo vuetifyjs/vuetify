@@ -15,7 +15,7 @@
     mixins: [
       Translatable
     ],
-    
+
     data () {
       return {
         height: null,
@@ -26,7 +26,7 @@
     props: {
       opacityOffset: {
         type: [String, Number],
-        default: .7
+        default: 0.7
       }
     },
 
@@ -34,7 +34,7 @@
       styles () {
         return {
           opacity: this.opacity,
-          transform: `translate3d(0, ${this.parallax - (this.height * .35)}px, 0)`
+          transform: `translate3d(0, ${this.parallax - (this.height * 0.35)}px, 0)`
         }
       }
     },
