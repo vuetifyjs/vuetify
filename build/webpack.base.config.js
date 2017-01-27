@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+var projectRoot = path.resolve(__dirname, '../')
 
 module.exports = {
   devtool: '#source-map',
@@ -21,18 +22,14 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'eslint-loader!vue-loader',
-        include: [
-          path.resolve(__dirname, '../src')
-        ],
+        loaders: ['vue-loader', 'eslint-loader'],
+        include: projectRoot,
         exclude: /node_modules/
       },
       {
         test: /\.js$/,
-        loaders: ['eslint-loader', 'buble-loader'],
-        include: [
-          path.resolve(__dirname, '../src')
-        ],
+        loaders: ['buble-loader', 'eslint-loader'],
+        include: projectRoot,
         exclude: /node_modules/
       },
       {
@@ -40,9 +37,7 @@ module.exports = {
         loaders: ExtractTextPlugin.extract({
           loader: ['eslint-loader', 'css-loader', 'postcss-loader', 'stylus-loader']
         }),
-        include: [
-          path.resolve(__dirname, '../src')
-        ],
+        include: projectRoot,
         exclude: /node_modules/
       }
     ]

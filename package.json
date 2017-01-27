@@ -37,7 +37,6 @@
     "eslint-plugin-html": "^1.3.0",
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-pug": "^1.0.0",
-    "eslint-plugin-standard": "^2.0.1",
     "eslint-plugin-vue": "^1.0.0",
     "eventsource-polyfill": "^0.9.6",
     "extract-text-webpack-plugin": "^2.0.0-beta.3",
