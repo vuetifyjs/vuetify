@@ -1,4 +1,5 @@
 import Eventable from './eventable'
+import Storable from './storable'
 
 export default {
   data () {
@@ -7,7 +8,7 @@ export default {
     }
   },
 
-  mixins: [Eventable],
+  mixins: [Storable, Eventable],
 
   computed: {
     events () {
@@ -23,19 +24,16 @@ export default {
       if (this.active === active) {
         return
       }
-      
-      return this.$store.commit(`vuetify/${this.$options.name.toUpperCase()}_TOGGLE`, {
-        id: this.id,
-        active: active
+
+      this.$vuetify().event('component toggle', {
+        active: active,
+        component: this.$options.name,
+        id: this.id
       })
     },
 
     close (e) {
-      if (arguments.length === 0) {
-        return this.commit(false)
-      }
-
-      if ((!e || !e.target) || this.closeConditional(e)) {
+      if (this.closeConditional(e)) {
         return
       }
 

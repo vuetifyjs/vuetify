@@ -20,12 +20,11 @@
 
 <script>
   import Toggleable from '../../mixins/toggleable'
-  import Storable from '../../mixins/storable'
 
   export default {
     name: 'sidebar',
 
-    mixins: [Toggleable, Storable],
+    mixins: [Toggleable],
 
     data () {
       return {

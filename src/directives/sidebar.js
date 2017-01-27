@@ -4,9 +4,10 @@ function directive (el, binding, v) {
   el.onclick = e => {
     e.stopPropagation()
     
-    v.context.$store.commit('vuetify/SIDEBAR_TOGGLE', {
-      id: binding.arg,
-      active: true
+    v.context.$vuetify().event('component toggle', {
+      active: true,
+      component: 'sidebar',
+      id: binding.arg
     })
   }
 }

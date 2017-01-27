@@ -1,7 +1,5 @@
 export default {
-  state: {
-    collapsible: {}
-  },
+  state: {},
 
   mutations: {
     'vuetify/COLLAPSIBLE_TOGGLE' (store, obj) {

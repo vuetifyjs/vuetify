@@ -105,7 +105,12 @@ function directive (el, binding, v) {
 
     dropdown(e, el, component)
 
-    event('menu toggle', { id: component.id, active: true, toggle: config.toggle })
+    event('component toggle', { 
+      active: true, 
+      component: 'menu',
+      id: component.id,
+      toggle: config.toggle }
+    )
 
     // bus.pub(`menu:${config.toggle ? 'toggle': 'open'}:${component.id}`)
   }, false)

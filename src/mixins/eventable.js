@@ -11,7 +11,7 @@ export default {
 
       [component, id, cb, options] = event
 
-      this.watchers.push(this.$store.watch(state => state.vuetify[component][id], cb, options || {}))
+      this.watchers.push(this.$store.watch(state => state.vuetify[component][id], cb, (options || {})))
     })
   },
 
@@ -24,7 +24,7 @@ export default {
 
       if (component === 'common') return
 
-      this.$store.commit('vuetify/COMPONENT_DESTROY', { component, id })
+      this.$vuetify().event('component destroy', { component, id })
     })
   }
 }

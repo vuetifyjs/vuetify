@@ -1,11 +1,5 @@
 export default {
-  state: {
-    menu: {}
-  },
+  state: {},
 
-  mutations: {
-    'vuetify/MENU_TOGGLE' (state, payload) {
-      state.menu[payload.id].active = payload.active
-    }
-  }
+  mutations: {}
 }

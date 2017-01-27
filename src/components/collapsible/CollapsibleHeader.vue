@@ -48,9 +48,10 @@
 
     methods: {
       click () {
-        this.$vuetify().event('collapsible toggle', { 
-          id: this.rootId,
-          bodyId: this.bodySiblingUid
+        this.$vuetify().event('component toggle', { 
+          bodyId: this.bodySiblingUid,
+          component: 'collapsible',
+          id: this.rootId
         })
       },
       

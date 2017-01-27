@@ -1,11 +1,5 @@
 export default {
-  state: {
-    modal: {}
-  },
+  state: {},
 
-  mutations: {
-    'vuetify/MODAL_TOGGLE' (store, payload) {
-      store.modal[payload.id].active = payload.active
-    }
-  }
+  mutations: {}
 }

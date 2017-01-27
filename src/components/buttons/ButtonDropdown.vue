@@ -136,9 +136,10 @@
         if (typeof obj === 'string') {
           obj = { title: obj }
           
-          this.$vuetify().event('menu toggle', {
-            id: this.id,
-            active: false
+          this.$vuetify().event('component toggle', {
+            active: false,
+            component: 'menu',
+            id: this.id
           })
         }
 
