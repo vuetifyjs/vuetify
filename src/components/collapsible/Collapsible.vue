@@ -6,8 +6,12 @@
 </template>
 
 <script>
+  import Storable from '../../mixins/storable'
+
   export default {
     name: 'collapsible',
+
+    mixins: [Storable],
 
     props: {
       expand: Boolean
@@ -17,6 +21,13 @@
       classes () {
         return {
           'collapsible': true
+        }
+      },
+
+      defaultState () {
+        return {
+          items: [],
+          expand: this.expand
         }
       },
 

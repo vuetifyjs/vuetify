@@ -2,7 +2,7 @@
   div(
     class="collapsible__header"
     v-bind:class="classes"
-    v-on:click="click"
+    v-on:click.stop="click"
   )
     slot
 </template>
@@ -23,6 +23,10 @@
     },
 
     computed: {
+      bodySiblingUid () {
+        return Number(this.getNextSibling(this.$el).getAttribute('uid'))
+      },
+
       classes () {
         return {
           'collapsible__header--active': this.active
@@ -31,8 +35,7 @@
 
       events () {
         return [
-          [`collapse:opened:${this.rootId}`, this.opened],
-          [`collapse:closed:${this.rootId}`, this.closed]
+          ['collapsible', this.rootId, this.toggle, { deep: true }]
         ]
       },
 
@@ -40,16 +43,16 @@
         let root = closestParentTag.call(this, 'v-collapsible')
 
         return root ? root._uid : null
-      },
-
-      bodySiblingUid () {
-        return Number(this.getNextSibling(this.$el).getAttribute('uid'))
       }
     },
 
     methods: {
       click () {
-        this.$vuetify.bus.pub(`collapse:toggle:${this.rootId}`, this.bodySiblingUid)
+        this.$vuetify().event('component toggle', { 
+          bodyId: this.bodySiblingUid,
+          component: 'collapsible',
+          id: this.rootId
+        })
       },
       
       getNextSibling (el) {
@@ -62,12 +65,8 @@
         return el
       },
 
-      opened (uid) {
-        this.active = this.bodySiblingUid !== uid ? this.active : true
-      },
-
-      closed (uid) {
-        this.active = this.bodySiblingUid !== uid ? this.active : false
+      toggle (parent) {
+        this.active = parent.items.includes(this.bodySiblingUid)
       }
     }
   }

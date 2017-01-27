@@ -1,0 +1,34 @@
+.btn-toggle
+  display: inline-flex
+  border-radius: 2px
+  transition: $primary-transition
+  will-change: background, box-shadow
+  
+  .btn
+    justify-content: center
+    min-width: auto
+    padding: 0 8px
+    margin: 0
+    opacity: .4
+    border-radius: 0
+    
+    &:after
+      display: none
+      
+    &[data-selected]
+      opacity: 1
+      background: $material-twelve-percent-dark
+      
+      &:not(:nth-last-child(2)):not(:last-child):not([data-only-child])
+        border-right: 1px solid $material-twelve-percent-dark
+      
+    .icon
+      font-size: 30px
+      
+    span + .icon
+      font-size: initial
+      margin-left: 10px
+      
+  &--selected
+    background: #fff
+    @extend .z-depth-1

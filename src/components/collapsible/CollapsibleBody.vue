@@ -26,20 +26,10 @@
       }
     },
 
-    watch: {
-      active (active) {
-        if (active) {
-          this.$vuetify.bus.pub(`collapse:opened:${this.rootId}`, this._uid)
-        } else {
-          this.$vuetify.bus.pub(`collapse:closed:${this.rootId}`, this._uid)
-        }
-      }
-    },
-
     computed: {
       events () {
         return [
-          [`collapse:toggle:${this.rootId}`, this.toggle]
+          ['collapsible', this.rootId, this.toggle, { deep: true }]
         ]
       },
 
@@ -69,16 +59,8 @@
         addOnceEventListener(el, 'transitionend', done)
       },
 
-      toggle (uid) {
-        if (uid !== this._uid
-            && !this.$parent.params.expand
-        ) {
-          return this.active = false
-        }
-
-        if (uid === this._uid) {
-          this.active = !this.active
-        }
+      toggle (parent) {
+        this.active = parent.items.includes(this._uid)
       }
     }
   }

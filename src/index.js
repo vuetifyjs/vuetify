@@ -5,8 +5,9 @@ import Components from './components/_index'
 import Directives from './directives/_index'
 import Init from './util/init'
 import Load from './util/load'
-import { mergeObject } from './util/helpers'
+import Event from './util/event'
 import Toast from './functions/toast'
+import Store from './store/index'
 
 const defaults = {
   componentPrefix: 'V',
@@ -24,16 +25,14 @@ function plugin(Vue, options) {
     Vue.component(`${options.componentPrefix}${key}`, Components[key])
   })
 
-  Vue.prototype.$vuetify = {
-    bus: Bus,
-
-    load: Load,
-
-    init: Init,
-
-    toast: Toast,
-
-    options
+  Vue.prototype.$vuetify = function () {
+    return {
+      bus: Bus,
+      event: Event.bind(this),
+      load: Load,
+      init: Init.bind(this),
+      toast: Toast
+    }
   }
 }
 
@@ -42,3 +41,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 module.exports = plugin
+
+module.exports.vuetifySync = (store) => {
+  store.registerModule('vuetify', Store)
+}

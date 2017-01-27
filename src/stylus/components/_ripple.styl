@@ -1,5 +1,6 @@
 .ripple    
   &__container
+    color: inherit
     border-radius: inherit
     position: absolute
     width: 100%
@@ -8,15 +9,15 @@
     top: 0
     overflow: hidden
     z-index: 0
-    color: $ripple-container-color
     pointer-events: none
           
   &__animation
+    color: inherit
     position: absolute
     top: 0
     left: 0
     border-radius: 50%
-    background: $ripple-animation-background
+    background: currentColor
     opacity: 0
     transition: $ripple-animation-transition
     pointer-events: none

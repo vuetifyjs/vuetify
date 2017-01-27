@@ -106,8 +106,8 @@
       }
     },
 
-    mounted () {
-      this.$vuetify.load(() => {
+    mounted () {      
+      this.$vuetify().load(() => {
         this.resize()
         window.addEventListener('resize', this.resize, false)
       })
@@ -120,7 +120,11 @@
     methods: {
       resize () {
         if (this.mobile && !this.drawer) {
-          this.active = window.innerWidth >= this.mobileBreakPoint
+          let active = window.innerWidth >= this.mobileBreakPoint
+
+          if (active !== this.active) {
+            this.commit(active)
+          }
         }
       },
 
@@ -129,7 +133,7 @@
           (window.innerWidth < this.mobileBreakPoint && this.mobile && this.closeOnClick)
           || (this.drawer && this.closeOnClick)
         ) {
-          this.active = false
+          this.commit(false)
         }
       },
 

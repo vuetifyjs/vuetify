@@ -1,166 +1,99 @@
 .btn
-  border: $button-border
-  border-radius: $button-border-radius
-  background: $button-background
+  background: $grey.lighten-2
   color: $button-color
   display: inline-flex
-  justify-content: center
   align-items: center
+  height: $button-height
+  margin: $button-margin
+  border-radius: $button-border-radius
+  padding: $button-padding
   font-size: $button-font-size
   font-weight: $button-font-weight
-  min-height: $button-min-height
-  line-height: $button-min-height
+  min-width: $button-min-width
+  text-transform: uppercase
   outline: 0
-  padding: $button-padding-top $button-padding-left
+  transition: $primary-transition
   position: relative
-  text-decoration: none
-  text-transform: $button-text-transform
-  transition: $button-transition
   
-  &:focus
-    outline:none
-    
-  &::-moz-focus-inner
-    border: 0
+  &:after
+    position: absolute
+    content: ''
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    transition: $primary-transition
     
   &:disabled
-    opacity: $button-disabled-opacity
-    
-  for color_name, color_value in $theme
-    &.{color_name}
-      color: #fff
-      
-      &.btn--outline
-        color: color_value
-        
-      &.btn--flat
-        color: color_value
-        
-        .ripple__animation
-          background: color_value
-    
-  &--block
-    display: flex
-    width: 100%
-    
-  &--flat
-    background-color: transparent !important
-    border-color: transparent
-    box-shadow: none
-    color: currentColor
-    
-    &:hover:not(:disabled)
-      background-color: $button-flat-hover !important
-      box-shadow: none
-    
-  &--floating
-    border-radius: 50%
-    letter-spacing: normal
-    line-height: $button-min-height
-    min-height: $button-min-height
-    padding: $button-floating-padding
-    
-    .ripple__container
-      border-radius: 50%
-    
-  &--icon
-    background: transparent
-    box-shadow: none
-    position: relative
-    border-radius: 50%
-    border-color: transparent
-    height: auto
-    width: auto
-    min-height: initial
-    padding: 0
-    
-    i
-      padding: .2em
-    
-    &:hover
-      background: $button-icon-hover-background
-      box-shadow: none
-    
-  &--large
-    min-height: $button-large-min-height
-    line-height: $button-large-line-height
-    padding: $button-large-padding
-    
-    &.btn--floating
-      width: $button-large-floating-width
-      padding: $button-large-floating-padding
-    
-    i
-      font-size: $button-large-floating-font-size
+    box-shadow: none !important
+    color: $button-disabled-color !important
+    background-color: $button-disabled-background-color !important
   
-  &--loading
+  &:focus
+    &:after
+      background-color: $button-focus-background-color
+    
+  &:disabled
+    color: rgba(#000000, .26)
     pointer-events: none
     
-    .btn__content
-      opacity: 0
+  &--dark
+    color: $button-dark-color
+    
+    &:disabled
+      color: $button-disabled-dark-color !important
+      background-color: $button-disabled-dark-background-color !important
+      
+  &--index
+    z-index: 5
 
-  &--outline
-    border: 1px solid currentColor
-    background: transparent !important
-    box-shadow: none
-    color: $button-background
+  &--flat
+    background-color: transparent
+    box-shadow: none !important
     
-    &:hover
-      box-shadow: none
+    &:focus
+      &:after
+        background-color: $button-flat-focus-background-color
     
+    &:active
+      &:after
+        background: $button-flat-active-background-color
+      
+    &:disabled
+      color: $button-flat-disabled-color
+      
+    &.btn--dark
+      &:disabled
+        color: $button-flat-dark-disabled-color
+        
   &--raised
     will-change: box-shadow
     
     @extend .z-depth-1
     
-    &:disabled
-      &:hover
-        @extend .z-depth-1
-    
-    &:hover
-      @extend .z-depth-1-half
-    
-  &--round
-    border-radius: 2rem
-    
-  &--small
-    min-height: $button-small-min-height
-    line-height: $button-small-line-height
-    
-    &.btn--floating
-      width: $button-small-floating-width
-      padding: $button-small-floating-padding
+    &:active
+      @extend .z-depth-2
       
-      i
-        font-size: $button-small-floating-font-size
+  &--icon
+    background: transparent
+    box-shadow: none !important
+    border-radius: 50%
+    justify-content: center
+    height: $button-height
+    width: $button-height
+    min-width: auto
+    padding: 0
+    
+    &:after
+      border-radius: 50%
+    
+    &:focus, &:active
+      border-radius: 50%
+      
+      &:after
+        background-color: currentColor !important
+        opacity: .12
         
-  &__content
-    display: flex
-    justify-content: center
-    align-items: center
-    transition: $primary-transition
-    flex: 1
-    letter-spacing: $button-content-letter-spacing
-    margin-right: $button-content-margin-right
-      
-  &__loading
-    position: absolute
-    width: 100%
-    height: 100%
-    left: 0
-    top: 0
-    display: flex
-    justify-content: center
-    align-items: center
+    &:disabled
+      background-color: transparent !important
     
-  .icon
-    &--left
-      margin-right: 1rem
-      line-height: inherit
-    
-    &--right
-      margin-left: 1rem
-      line-height: inherit
-      
-  .progress-circular
-    height: 20px !important

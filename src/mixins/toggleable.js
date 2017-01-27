@@ -1,71 +1,51 @@
 import Eventable from './eventable'
+import Storable from './storable'
 
 export default {
   data () {
     return {
-      active: false,
-      activators: []
+      active: false
     }
   },
 
-  mixins: [Eventable],
-
-  watch: {
-    active (active) {
-      if (active) {
-        this.$vuetify.bus.pub(`${this.$options.name}:opened:${this.id}`)
-      } else {
-        this.$vuetify.bus.pub(`${this.$options.name}:closed:${this.id}`)
-      }
-    }
-  },
-
-  mounted () {
-    this.$vuetify.load(this.init)
-  },
+  mixins: [Storable, Eventable],
 
   computed: {
     events () {
       return [
-        [`${this.$options.name}:open:${this.id}`, this.open],
-        [`${this.$options.name}:close:${this.id}`, this.close],
-        [`${this.$options.name}:toggle:${this.id}`, this.toggle],
-        [`body:click`, this.close],
+        [`${this.$options.name}`, this.id, this.toggle, { deep: true }],
+        ['common', 'bodyClick', this.close]
       ]
     }
   },
 
   methods: {
-    init () {
-      let activators = document.querySelectorAll(`[data-${this.$options.name}="${this.id}"]`)
-      this.activators = Array.apply(null, activators)
-    },
+    commit (active) {
+      if (this.active === active) {
+        return
+      }
 
-    open () {
-      this.active = true
-      this.$vuetify.bus.pub(`${this.$options.name}:opened`, this.id)
+      this.$vuetify().event('component toggle', {
+        active: active,
+        component: this.$options.name,
+        id: this.id
+      })
     },
 
     close (e) {
-      if (arguments.length === 0 && this.activators.length === 0) {
-        return this.active = false
-      }
-
-      if ((!e || !e.target)
-        || this.activators.some(i => i.contains(e.target) || i === e.target)
-        || this.closeConditional(e)
-      ) {
+      if (this.closeConditional(e)) {
         return
       }
-      this.active = false
+
+      return this.commit(false)
     },
 
     closeConditional () {
       return false
     },
 
-    toggle () {
-      this.active = !this.active
+    toggle (state) {
+      this.active = state.active
     }
   }
 }

@@ -58,7 +58,7 @@ export default {
 
   methods: {
     click () {
-      this.$vuetify.bus.pub('list-item:selected')
+      // this.$vuetify.bus.pub('list-item:selected')
     },
 
     createAvatar (h) {

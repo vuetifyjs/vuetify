@@ -1,0 +1,81 @@
+.btn-dropdown
+  display: inline-block
+  position: relative
+  
+  input
+    background: transparent
+    font-size: $button-dropdown-font-size
+    font-weight: $button-dropdown-font-weight
+    height: 100%
+    left: 0
+    outline: none
+    padding-left: $button-dropdown-input-padding-left
+    position: absolute
+    top: 0
+    width: $button-dropdown-input-width
+  
+  .btn
+    align-items: center
+    background: transparent
+    border-bottom: $button-dropdown-border-bottom
+    border-radius: 0
+    box-shadow: initial
+    display: flex
+    font-size: $button-dropdown-font-size
+    font-weight: $button-dropdown-font-weight
+    justify-content: space-between
+    min-width: $button-min-width
+    padding: 0
+    text-transform: initial
+    
+    &--editable
+      > span
+        opacity: 0
+    
+  .icon:not(.btn-dropdown__arrow)
+    padding: 0 6px
+    
+  &__arrow
+    color: $grey.base
+    margin-left: 24px
+    margin-right: -9px
+    transition: $primary-transition
+    cursor: pointer
+      
+  &--segmented .btn, &--editable .btn--active
+    &:before
+      background: $material-twelve-percent-dark
+      content: ''
+      height: 100%
+      position: absolute
+      right: 38px
+      top: 0
+      width: 1px
+      
+  &--overflow, &--editable
+    .btn
+      border-top: 1px solid $material-twelve-percent-dark
+      height: $button-dropdown-overflow-editable-height
+      min-width: $button-dropdown-overflow-editable-min-width
+      padding: $button-dropdown-overflow-editable-padding
+      
+      &:hover
+        background: $button-dropdown-background
+        
+      &.btn--active
+        background: $button-dropdown-background
+        @extend .z-depth-1
+        
+        &:after
+          background: #fff
+          bottom: -4px
+          height: 3px
+          top: initial
+          
+        .btn-dropdown__arrow
+          transform: rotate(180deg)
+          
+    .menu
+      border-top: 1px solid $material-twelve-percent-dark
+      border-top-left-radius: 0
+      border-top-right-radius: 0

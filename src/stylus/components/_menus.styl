@@ -1,0 +1,53 @@
+.menu
+  list-style-type: none
+  padding: 0
+  background-color: #fff
+  position: absolute
+  z-index: 3
+  border-radius: 2px
+  overflow-y: auto
+  overflow-x: hidden
+  transition: $primary-transition
+  min-width: 0
+  @extend .z-depth-1
+  
+  .list__tile__title
+    text-overflow: initial
+  
+  &-transition
+    &-enter
+      max-width: 50px !important
+      min-width: 0
+      
+      .list__tile
+        min-width: 0
+        transition-delay: .1s
+        opacity: 0
+        transform: translateY(-5px)
+        
+      .list__tile--active
+        opacity: 1 !important
+        transform: translateY(0) !important
+      
+    &-enter-to
+      margin-top: initial
+      max-height: initial
+      pointer-events: auto
+      max-width: 300px
+        
+      .list__tile
+        pointer-events: auto
+        opacity: 1
+      
+      .list__tile--active
+        opacity: 1 !important
+      
+    &-leave-to
+      transform: translateY(-10px)
+        
+    &-enter, &-leave-to
+      opacity: 0
+      z-index: -1
+      
+    &-enter-to, &-leave
+      opacity: 1

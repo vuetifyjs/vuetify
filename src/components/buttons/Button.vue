@@ -5,11 +5,7 @@
     v-bind:type="type"
     v-ripple="ripple"
   )
-    span(class="btn__content")
-      slot
-    span(class="btn__loading" v-if="loading")
-      slot(name="loader")
-      v-progress-circular(indeterminate v-if="!$slots['loader']")
+    slot
 </template>
 
 <script>
@@ -23,6 +19,8 @@
     props: {
       block: Boolean,
 
+      dark: Boolean,
+
       flat: Boolean,
 
       floating: Boolean,
@@ -33,6 +31,8 @@
 
       loading: Boolean,
 
+      menu: Boolean,
+
       outline: Boolean,
 
       raised: {
@@ -42,7 +42,7 @@
 
       ripple: {
         type: [Boolean, Object],
-        default: false
+        default: true
       },
 
       round: Boolean,
@@ -59,7 +59,9 @@
       classes () {
         return {
           'btn--block': this.block,
-          'btn--flat': this.flat,
+          'btn--dark': this.dark,
+          'btn--menu': this.menu,
+          'btn--flat': this.flat || this.menu,
           'btn--floating': this.floating,
           'btn--icon': this.icon,
           'btn--large': this.large,

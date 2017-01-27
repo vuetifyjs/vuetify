@@ -10,6 +10,7 @@ const SliderReverseTransition = createSimpleTransition('slider-reverse-transitio
 const ModalTransition = createSimpleTransition('modal-transition')
 const ModalBottomTransition = createSimpleTransition('modal-bottom-transition')
 const FadeTransition = createSimpleTransition('fade-transition')
+const MenuTransition = createSimpleTransition('menu-transition')
 
 export default {
   SlideXTransition,
@@ -20,6 +21,7 @@ export default {
   TabReverseTransition,
   ModalTransition,
   ModalBottomTransition,
+  MenuTransition,
   SliderTransition,
   SliderReverseTransition
 }
