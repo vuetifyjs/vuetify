@@ -56,6 +56,9 @@ module.exports = {
       progress: true,
       hide_modules: true
     }),
-    new ExtractTextPlugin('vuetify.min.css')
+    new ExtractTextPlugin('vuetify.min.css'),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+    })
   ]
 }

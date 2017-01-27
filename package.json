@@ -33,7 +33,7 @@
     "eslint-config-standard": "^6.1.0",
     "eslint-config-vue": "^2.0.2",
     "eslint-friendly-formatter": "^2.0.5",
-    "eslint-loader": "^1.5.0",
+    "eslint-loader": "^1.6.1",
     "eslint-plugin-html": "^1.3.0",
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-pug": "^1.0.0",
@@ -71,12 +71,14 @@
     "style-loader": "^0.13.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^2.1.1",
-    "vue-loader": "^10.0.2",
-    "vue-template-compiler": "^2.1.8",
+    "vue-loader": "^10.1.0",
+    "vue-template-compiler": "^2.1.10",
     "webpack": "2.2.0-rc.2",
     "webpack-merge": "^0.17.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "vue": "^2.1.10"
+  },
   "engines": {
     "node": ">= 4.0.0",
     "npm": ">= 3.0.0"

@@ -93,7 +93,7 @@ module.exports = function normalizeComponent (
   var type = typeof scriptExports.default
   if (type === 'object' || type === 'function') {
     // check named exports
-    if (development !== 'production') {
+    if (true) {
       if (Object.keys(scriptExports).some(function (key) {
         return key !== 'default' && key !== '__esModule'
       })) {
