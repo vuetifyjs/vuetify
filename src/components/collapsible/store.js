@@ -3,14 +3,14 @@ export default {
 
   mutations: {
     'vuetify/COLLAPSIBLE_TOGGLE' (store, obj) {
-      let index = store.collapsible[obj.id].items.indexOf(obj.bodyId)
+      const index = store.collapsible[obj.id].items.indexOf(obj.bodyId)
 
       if (!store.collapsible[obj.id].expand) {
         if (index !== -1) {
-          return store.collapsible[obj.id].items = []
+          store.collapsible[obj.id].items = []
+        } else {
+          store.collapsible[obj.id].items = [obj.bodyId]
         }
-        
-        return store.collapsible[obj.id].items = [obj.bodyId]
       }
 
       if (index !== -1) {

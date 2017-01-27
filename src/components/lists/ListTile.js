@@ -1,5 +1,4 @@
 import { closestParentTag } from '../../util/helpers'
-import Eventable from '../../mixins/eventable'
 
 export default {
   name: 'list-tile',
@@ -10,7 +9,7 @@ export default {
       group: {}
     }
   },
-  
+
   props: {
     avatar: Boolean,
 
@@ -62,10 +61,10 @@ export default {
     },
 
     createAvatar (h) {
-      let avatar = []
+      const avatar = []
       if (this.item.avatar.indexOf('.') !== -1) {
         avatar.push(
-          h('img', { domProps: { src: this.item.avatar } })
+          h('img', { domProps: { src: this.item.avatar }})
         )
       } else {
         avatar.push(
@@ -77,8 +76,8 @@ export default {
     },
 
     createAction (h) {
+      const actions = []
       let data = {}
-      let actions = []
       let actionText = false
 
       if (typeof this.item.action === 'object') {
@@ -104,19 +103,19 @@ export default {
     },
 
     createContent (h) {
-      let items = []
+      const items = []
 
-      items.push(h('v-list-tile-title', { domProps: { innerHTML: this.item.title } }))
+      items.push(h('v-list-tile-title', { domProps: { innerHTML: this.item.title }}))
 
       if (this.item.subtitle) {
-        items.push(h('v-list-tile-sub-title', { domProps: { innerHTML: this.item.subtitle } }))
+        items.push(h('v-list-tile-sub-title', { domProps: { innerHTML: this.item.subtitle }}))
       }
 
       return h('v-list-tile-content', {}, items)
     },
 
     createGroup (h) {
-      return h('v-list-group', { 
+      return h('v-list-group', {
         props: {
           item: {
             action: this.item.action,
@@ -136,11 +135,11 @@ export default {
       return this.createGroup(createElement)
     }
 
-    let avatar,
-        action,
-        content,
-        tag,
-        children = []
+    const children = []
+    let avatar
+    let action
+    let content
+    let tag
 
     if (this.item.avatar) {
       avatar = this.createAvatar(createElement)
@@ -154,7 +153,7 @@ export default {
       action = this.createAction(createElement)
     }
 
-    let data = {
+    const data = {
       attrs: {},
       class: this.classes,
       props: {},
@@ -173,14 +172,14 @@ export default {
       data.props.to = this.item.href
       data.props.exact = this.item.href === '/'
       data.props.activeClass = 'list__tile--active'
-      
+
       if (this.click) {
         data.nativeOn = { click: this.click }
       }
     } else {
       tag = 'a'
       data.attrs.href = this.item.href || 'javascript:;'
-      
+
       if (this.click) {
         data.on = { click: this.click }
       }

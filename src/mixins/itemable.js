@@ -6,7 +6,7 @@ export default {
       active: false
     }
   },
-  
+
   props: {
     disabled: Boolean,
 
@@ -29,10 +29,10 @@ export default {
 
   computed: {
     classes () {
-      let classes = {}
+      const classes = {}
       classes[`${this.className}--active`] = this.active
       classes[`${this.className}--disabled`] = this.disabled || this.item.disabled
-      
+
       return classes
     },
 
@@ -41,7 +41,7 @@ export default {
     },
 
     groupUid () {
-      let group = closestParentTag.call(this, `v-${this.groupName}`)
+      const group = closestParentTag.call(this, `v-${this.groupName}`)
 
       return group ? group._uid : null
     },
@@ -55,7 +55,7 @@ export default {
     },
 
     rootId () {
-      let root = closestParentTag.call(this, `v-${this.rootName}`)
+      const root = closestParentTag.call(this, `v-${this.rootName}`)
 
       return root ? root._uid : null
     }
@@ -71,7 +71,7 @@ export default {
   render (createElement) {
     let el
 
-    let data = {
+    const data = {
       attrs: {},
       class: this.classes,
       props: {},
@@ -90,20 +90,20 @@ export default {
       data.props.to = this.item.href
       data.props.exact = this.item.href === '/'
       data.props.activeClass = `${this.className}--active`
-      
+
       if (this.click) {
         data.nativeOn = { click: this.click }
       }
     } else {
       el = 'a'
       data.attrs.href = this.item.href
-      
+
       if (this.click) {
         data.on = { click: this.click }
       }
     }
 
-    let children = []
+    const children = []
 
     if (this.item.icon && typeof this.item.icon === 'string') {
       children.push(createElement('v-icon', this.item.icon))

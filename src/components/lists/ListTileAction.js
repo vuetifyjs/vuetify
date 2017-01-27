@@ -21,7 +21,7 @@ export default {
   },
 
   render (createElement) {
-    let data = { 
+    const data = {
       'class': this.classes
     }
 

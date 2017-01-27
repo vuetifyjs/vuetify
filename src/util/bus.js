@@ -8,7 +8,7 @@ class Bus extends EventEmitter {
 
   sub (event, cb) {
     const type = typeof event
-    
+
     if (type !== 'object' && type !== 'array') {
       return this.on(event, cb)
     }
@@ -22,7 +22,7 @@ class Bus extends EventEmitter {
     if (type !== 'object' && type !== 'array') {
       return this.removeListener(event, cb)
     }
-    
+
     event.forEach(i => this.removeListener.apply(this, i))
   }
 

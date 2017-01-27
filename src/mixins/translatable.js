@@ -42,7 +42,7 @@ export default {
       this.percentScrolled = (
         (this.windowBottom - this.elOffsetTop) / (this.normalizedHeight + this.windowHeight)
       )
-      
+
       this.parallax = Math.round(this.parallaxDist * this.percentScrolled)
 
       if (this.translated) {
@@ -51,7 +51,7 @@ export default {
     },
 
     calcDimensions () {
-      let offset = this.$el.getBoundingClientRect()
+      const offset = this.$el.getBoundingClientRect()
 
       this.scrollTop = window.pageYOffset
       this.parallaxDist = this.imgHeight - this.normalizedHeight

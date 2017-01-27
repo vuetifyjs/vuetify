@@ -13,10 +13,10 @@ export function createSimpleFunctional (c, el = 'div') {
 export function createSimpleTransition (name) {
   return {
     functional: true,
-    
+
     render (createElement, context) {
-      let origin = (context.data.attrs || {}).origin || 'top center 0'
-      let data = context.data || {}
+      const origin = (context.data.attrs || {}).origin || 'top center 0'
+      const data = context.data || {}
 
       data.props = { name }
       data.on = {
@@ -43,11 +43,11 @@ export function directiveConfig (binding, defaults = {}) {
 export function closestParentTag (tag) {
   let parent = this.$parent
 
-  while(parent) {
+  while (parent) {
     if (!parent.$options._componentTag) {
       return null
     }
-    
+
     if (parent.$options._componentTag === tag) {
       return parent
     }
@@ -63,7 +63,7 @@ export function addOnceEventListener (el, event, cb) {
     cb()
     el.removeEventListener(event, once, false)
   }
-  
+
   el.addEventListener(event, once, false)
 }
 
@@ -76,15 +76,15 @@ export function browserTransform (el, value) {
   })
 }
 
-export function mergeObject(target) {
+export function mergeObject (target) {
   for (let i = 1, length = arguments.length; i < length; i++) {
-    let source = arguments[i];
-    for (let key in source) {
+    const source = arguments[i]
+    for (const key in source) {
       if (source.hasOwnProperty(key)) {
-        target[key] = source[key];
+        target[key] = source[key]
       }
     }
   }
 
-  return target;
+  return target
 }

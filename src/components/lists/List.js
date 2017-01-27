@@ -41,8 +41,8 @@ export default {
   },
 
   render (createElement) {
-    let children = []
-    let data = { 
+    const children = []
+    const data = {
       'class': this.classes,
       attrs: {
         'data-uid': this._uid
@@ -59,7 +59,7 @@ export default {
           children.push(
             createElement('v-list-sub-header', {
               'class': obj.class,
-              attrs: { 
+              attrs: {
                 inset: obj.inset
               },
               domProps: {
@@ -69,23 +69,23 @@ export default {
           )
         } else if (obj.divider) {
           children.push(
-            createElement('v-divider', { 
-              attrs: { 
+            createElement('v-divider', {
+              attrs: {
                 inset: obj.inset,
                 light: obj.light
-              } 
+              }
             })
           )
         } else {
           children.push(
             createElement('v-list-item', {}, [
               createElement('v-list-tile', {
-                props: { 
+                props: {
                   item: obj,
                   ripple: this.ripple || obj.ripple,
                   router: this.router || obj.router,
                   unshift: this.unshift
-                } 
+                }
               })
             ])
           )

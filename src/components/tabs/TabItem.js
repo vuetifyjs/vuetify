@@ -24,7 +24,7 @@ export default {
     },
 
     tabsUid () {
-      let tabs = closestParentTag.call(this, 'v-tabs')
+      const tabs = closestParentTag.call(this, 'v-tabs')
 
       return tabs ? tabs._uid : null
     }
@@ -47,7 +47,7 @@ export default {
 
     click (e) {
       e.preventDefault()
-      
+
       this.$vuetify.bus.pub(`tab:click:${this.tabsUid}`, this.target)
       this.location()
     },

@@ -1,6 +1,5 @@
 const webpack = require('webpack')
-let builds  = require('./config').getAllBuilds()
-// require('./stylus')
+const builds = require('./config').getAllBuilds()
 
 build(builds)
 

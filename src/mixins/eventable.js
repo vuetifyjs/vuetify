@@ -7,9 +7,7 @@ export default {
 
   created () {
     this.events.concat(this.customEvents || []).forEach(event => {
-      let component, id, cb, options
-
-      [component, id, cb, options] = event
+      const [component, id, cb, options] = event
 
       this.watchers.push(this.$store.watch(state => state.vuetify[component][id], cb, (options || {})))
     })
@@ -19,8 +17,7 @@ export default {
     this.watchers.forEach(w => w())
 
     this.events.concat(this.customEvents || []).forEach(event => {
-      let component, id
-      [component, id] = event
+      const [component, id] = event
 
       if (component === 'common') return
 

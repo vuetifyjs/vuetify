@@ -4,7 +4,7 @@ import NavbarItems from './NavbarItems.vue'
 import NavbarGroup from './NavbarGroup.vue'
 
 import {
-  createSimpleFunctional 
+  createSimpleFunctional
 } from '../../util/helpers'
 
 const NavbarLogo = createSimpleFunctional('navbar__logo')
@@ -18,9 +18,9 @@ const NavbarSideIcon = {
     data.staticClass = data.staticClass ? `navbar__side-icon ${data.staticClass}` : 'navbar__side-icon'
 
     const icon = [h('v-icon', 'menu')]
-    const anchor = [h('a', { attrs: { href: '#!' } }, icon)]
+    const anchor = [h('a', { attrs: { href: '#!' }}, icon)]
 
-    return h('div',data, [anchor])
+    return h('div', data, [anchor])
   }
 }
 

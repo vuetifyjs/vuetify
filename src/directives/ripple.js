@@ -7,19 +7,19 @@ function style (el, value) {
   })
 }
 
-let ripple = {
+const ripple = {
   show: (e, el, binding) => {
     var container = document.createElement('span')
     var animation = document.createElement('span')
 
     container.appendChild(animation)
     container.className = 'ripple__container'
-    
+
     if ((binding.value || {}).class) {
       container.classList.add(binding.value.class)
     }
 
-    let size = el.clientWidth > el.clientHeight ? el.clientWidth : el.clientHeight
+    const size = el.clientWidth > el.clientHeight ? el.clientWidth : el.clientHeight
     animation.className = 'ripple__animation'
     animation.style.width = `${size * 2}px`
     animation.style.height = animation.style.width
@@ -42,11 +42,11 @@ let ripple = {
   },
 
   hide: (el) => {
-    let ripples = el.getElementsByClassName('ripple__animation')
+    const ripples = el.getElementsByClassName('ripple__animation')
 
     if (ripples.length === 0) return
-    let animation = ripples[ripples.length - 1]
-    let diff = Date.now() - Number(animation.dataset.activated)
+    const animation = ripples[ripples.length - 1]
+    const diff = Date.now() - Number(animation.dataset.activated)
     let delay = 400 - diff
 
     delay = delay < 0 ? 0 : delay

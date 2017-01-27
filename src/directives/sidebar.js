@@ -3,7 +3,7 @@ function directive (el, binding, v) {
 
   el.onclick = e => {
     e.stopPropagation()
-    
+
     v.context.$vuetify().event('component toggle', {
       active: true,
       component: 'sidebar',

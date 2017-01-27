@@ -2,7 +2,7 @@ const Divider = {
   functional: true,
 
   render (createElement, { data }) {
-    let params = {
+    const params = {
       'class': 'divider'
     }
 

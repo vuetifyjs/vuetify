@@ -14,8 +14,8 @@ const defaults = {
   directivePrefix: ''
 }
 
-function plugin(Vue, options) {
-  options = mergeObject(defaults, (options || {}))
+function plugin (Vue, options) {
+  options = Object.assign(defaults, (options || {}))
 
   Object.keys(Directives).forEach(key => {
     Vue.directive(`${options.directivePrefix}${key}`, Directives[key])
@@ -37,7 +37,7 @@ function plugin(Vue, options) {
 }
 
 if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(plugin);
+  window.Vue.use(plugin)
 }
 
 module.exports = plugin

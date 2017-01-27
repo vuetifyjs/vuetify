@@ -5,7 +5,7 @@ module.exports = {
   plugins: [
     precss,
     autoprefixer({
-      browsers: ['> 1%', 'last 4 versions']
+      browsers: ['> 1%', 'last 3 versions']
     })
   ]
 }
