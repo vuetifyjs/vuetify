@@ -1,6 +1,5 @@
 require('./stylus/main.styl')
 
-import Bus from './util/bus'
 import Components from './components/_index'
 import Directives from './directives/_index'
 import Init from './util/init'
@@ -27,7 +26,6 @@ function plugin (Vue, options) {
 
   Vue.prototype.$vuetify = function () {
     return {
-      bus: Bus,
       event: Event.bind(this),
       load: Load,
       init: Init.bind(this),
@@ -40,8 +38,12 @@ if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(plugin)
 }
 
-module.exports = plugin
+export default plugin
 
-module.exports.vuetifySync = (store) => {
+const vuetifySync = store => {
   store.registerModule('vuetify', Store)
+}
+
+export {
+  vuetifySync
 }
