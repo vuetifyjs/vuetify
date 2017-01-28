@@ -1,11 +1,11 @@
 <template lang="pug">
   div(class="slider")
     div(class="slider__left")
-      v-btn(icon v-on:click.native="prev")
+      v-btn(icon v-on:click.native.stop="prev")
         v-icon chevron_left
 
     div(class="slider__right")
-      v-btn(icon v-on:click.native="next")
+      v-btn(icon v-on:click.native.stop="next")
         v-icon chevron_right
 
     div(class="slider__controls")
@@ -14,15 +14,20 @@
         icon
         v-bind:class="{ 'slider__controls__item--active': index === current }"
         v-for="(item, index) in items"
+        v-on:click.native.stop="select(index)"
       )
-        v-icon(v-on:click.native="select(index)") {{ icon }}
+        v-icon {{ icon }}
 
     slot
 </template>
 
 <script>
+  import Storable from '../../mixins/storable'
+
   export default {
-    name: 'slider',
+    name: 'carousel',
+
+    mixins: [Storable],
 
     data () {
       return {
@@ -50,6 +55,15 @@
       }
     },
 
+    computed: {
+      defaultState () {
+        return {
+          current: null,
+          reverse: false
+        }
+      }
+    },
+
     watch: {
       current () {
         // Evaluate items when current changes to account for
@@ -63,7 +77,12 @@
           this.startInterval()
         }
 
-        this.$vuetify.bus.pub(`slider:open:${this._uid}`, this.items[this.current]._uid, this.reverse)
+        this.$vuetify().event('component toggle', {
+          component: 'carousel',
+          id: this._uid,
+          current: this.items[this.current]._uid,
+          reverse: this.reverse
+        })
       }
     },
 
@@ -101,6 +120,7 @@
       },
 
       select (index) {
+        console.log('here')
         this.reverse = index < this.current
         this.current = index
       },

@@ -5,8 +5,8 @@ const SlideYTransition = createSimpleTransition('slide-y-transition')
 const ScaleTransition = createSimpleTransition('scale-transition')
 const TabTransition = createSimpleTransition('tab-transition')
 const TabReverseTransition = createSimpleTransition('tab-reverse-transition')
-const SliderTransition = createSimpleTransition('slider-transition')
-const SliderReverseTransition = createSimpleTransition('slider-reverse-transition')
+const CarouselTransition = createSimpleTransition('carousel-transition')
+const CarouselReverseTransition = createSimpleTransition('carousel-reverse-transition')
 const ModalTransition = createSimpleTransition('modal-transition')
 const ModalBottomTransition = createSimpleTransition('modal-bottom-transition')
 const FadeTransition = createSimpleTransition('fade-transition')
@@ -22,6 +22,6 @@ export default {
   ModalTransition,
   ModalBottomTransition,
   MenuTransition,
-  SliderTransition,
-  SliderReverseTransition
+  CarouselTransition,
+  CarouselReverseTransition
 }

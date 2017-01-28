@@ -15,14 +15,14 @@
   import Eventable from '../../mixins/eventable'
 
   export default {
-    name: 'slider-item',
-
+    name: 'carousel-item',
+ 
     mixins: [Eventable],
 
     data () {
       return {
         active: false,
-        reversing: false
+        reverse: false
       }
     },
 
@@ -45,12 +45,12 @@
 
     computed: {
       computedTransition () {
-        return this.reversing ? this.reverseTransition : this.transition
+        return this.reverse ? this.reverseTransition : this.transition
       },
 
       events () {
         return [
-          [`slider:open:${this.$parent._uid}`, this.open]
+          ['carousel', this.$parent._uid, this.open, { deep: true }]
         ]
       },
 
@@ -62,9 +62,9 @@
     },
 
     methods: {
-      open (target, reversing = false) {
-        this.active = this._uid === target
-        this.reversing = reversing
+      open (state) {
+        this.active = this._uid === state.current
+        this.reverse = state.reverse
       }
     }
   }

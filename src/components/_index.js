@@ -3,6 +3,7 @@ import App from './app/index'
 import Breadcrumbs from './breadcrumbs/index'
 import Buttons from './buttons/index'
 import Cards from './cards/index'
+import Carousel from './carousel/index'
 import Chips from './chips/index'
 import Collapsible from './collapsible/index'
 import Dividers from './dividers/index'
@@ -18,7 +19,6 @@ import Pagination from './pagination/index'
 import Parallax from './parallax/index'
 import Progress from './progress/index'
 import Sidebar from './sidebar/index'
-import Slider from './slider/index'
 import Tables from './tables/index'
 import Tabs from './tabs/index'
 import Transitions from './transitions/_index'
@@ -29,6 +29,7 @@ export default Object.assign({},
   Breadcrumbs,
   Buttons,
   Cards,
+  Carousel,
   Chips,
   Collapsible,
   Dividers,
@@ -44,7 +45,6 @@ export default Object.assign({},
   Parallax,
   Progress,
   Sidebar,
-  Slider,
   Tables,
   Tabs,
   Transitions
