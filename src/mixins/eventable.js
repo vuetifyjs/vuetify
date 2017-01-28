@@ -7,7 +7,7 @@ export default {
 
   created () {
     if (!this.events) {
-      console.warn('Eventable mixin requires the {{ events }} property on the instance')
+      console.warn('Eventable mixin requires the "events" property on the instance')
     }
 
     this.events.concat(this.customEvents || []).forEach(event => {
@@ -19,7 +19,7 @@ export default {
         if (id.toString().indexOf('.') !== -1) {
           target = id.split('.').reduce((nestedObj, key) => {
             if (!(key in nestedObj)) {
-              console.warn(`Key {{ ${key} }} does not exist in store`)
+              console.warn(`Key "${key}" does not exist in store. Initialized from component "${this.$options.name}"`)
             }
 
             return nestedObj[key]
