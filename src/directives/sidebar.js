@@ -2,6 +2,7 @@ function directive (el, binding, v) {
   el.dataset.sidebar = binding.arg
 
   el.onclick = e => {
+    e.preventDefault()
     e.stopPropagation()
 
     v.context.$vuetify().event('component toggle', {
