@@ -20,24 +20,16 @@ export default {
   },
 
   methods: {
-    commit (active) {
-      if (this.active === active) {
+    close (e) {
+      if ((!e || !e.target || !(e.target instanceof Node)) || this.closeConditional(e)) {
         return
       }
 
       this.$vuetify().event('component toggle', {
-        active: active,
+        active: false,
         component: this.$options.name,
         id: this.id
       })
-    },
-
-    close (e) {
-      if (this.closeConditional(e)) {
-        return
-      }
-
-      return this.commit(false)
     },
 
     closeConditional () {
