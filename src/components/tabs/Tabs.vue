@@ -47,6 +47,8 @@
 
       defaultState () {
         return {
+          click: null,
+          resize: null,
           active: {
             target: null,
             reverse: false
@@ -54,21 +56,20 @@
           location: {
             width: null,
             offset: null
-          },
-          item: null
+          }
         }
       },
 
       events () {
         return [
-          ['tabs', `${this._uid}.item`, this.tabClick]
+          ['tabs', `${this._uid}.click`, this.tabClick]
         ]
       }
     },
 
     watch: {
       index (i) {
-        this.$vuetify().event('component.toggle', {
+        this.$vuetify().event('tabs.toggle', {
           id: this._uid,
           component: 'tabs',
           active: {
@@ -95,6 +96,7 @@
         }
 
         this.childrenCount = this.$children.length
+
         this.items = this.$children.filter(i => i.$options._componentTag === 'v-tabs-item')
       },
 

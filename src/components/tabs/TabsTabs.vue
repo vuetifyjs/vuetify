@@ -34,7 +34,8 @@
 
     data () {
       return {
-        mobile: false
+        mobile: false,
+        resizeDebounce: {}
       }
     },
 
@@ -56,7 +57,7 @@
 
       events () {
         return [
-          ['tabs', this.tabsUid, this.slider, { deep: true }]
+          ['tabs', `${this.tabsUid}.location`, this.slider]
         ]
       },
 
@@ -84,7 +85,17 @@
           return
         }
 
-        this.mobile = this.$refs.container.scrollWidth > this.$refs.container.clientWidth
+        clearTimeout(this.resizeDebounce)
+
+        this.resizeDebounce = setTimeout(() => {
+          this.mobile = this.$refs.container.scrollWidth > this.$refs.container.clientWidth
+
+          this.$vuetify().event('tabs.resize', {
+            id: this.tabsUid,
+            component: 'tabs',
+            resize: new Date()
+          })
+        }, 250)
       },
 
       scrollLeft () {
@@ -96,8 +107,8 @@
       },
 
       slider (state) {
-        this.$refs.slider.style.width = `${state.location.width}px`
-        this.$refs.slider.style.left = `${state.location.offset}px`
+        this.$refs.slider.style.width = `${state.width}px`
+        this.$refs.slider.style.left = `${state.offset}px`
       }
     }
   }

@@ -14,7 +14,8 @@ export default {
   computed: {
     events () {
       return [
-        ['tabs', `${this.tabsUid}.active.target`, this.activate]
+        ['tabs', `${this.tabsUid}.active.target`, this.activate],
+        ['tabs', `${this.tabsUid}.resize`, this.resize]
       ]
     },
 
@@ -38,25 +39,40 @@ export default {
   methods: {
     activate (target) {
       this.active = target === this.target
+
+      if (this.active) {
+        this.$vuetify().load(this.location)
+      }
     },
 
     click (e) {
       e.preventDefault()
       e.stopPropagation()
 
-      this.event()
-    },
-
-    event () {
-      this.$vuetify().event('tabs tab click', {
+      this.$vuetify().event('tabs.tab.click', {
         id: this.tabsUid,
         component: 'tabs',
-        item: this.target,
+        click: this.target
+      })
+
+      this.location()
+    },
+
+    location () {
+      this.$vuetify().event('tabs.tab.location', {
+        id: this.tabsUid,
+        component: 'tabs',
         location: {
           width: this.$el.clientWidth,
           offset: this.$el.offsetLeft
         }
       })
+    },
+
+    resize () {
+      if (this.active) {
+        this.location()
+      }
     }
   }
 }
