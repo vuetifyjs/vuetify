@@ -51,3 +51,47 @@
       
       @media screen and (max-width: ($grid-breakpoints.lg - 1))
         padding-right: 0
+        
+.app
+  &__bar
+    background: $grey.lighten-3
+    display: flex
+    align-items: center
+    
+    > div
+      &:not(:first-child)
+        margin-left: 1px
+        
+        &:before
+          content: ''
+          position: absolute
+          height: 60%
+          top: 50%
+          transform: translateY(-50%)
+          left: -1px
+          background: $material-twelve-percent-dark
+          width: 1px
+          z-index: 0
+    
+    .btn
+      border-color: transparent
+      margin: 0
+      
+      &:hover
+        background: $grey.lighten-4
+        
+    .btn-toggle
+      box-shadow: none
+      background: transparent
+      position: relative
+      padding: 0 8px
+      
+      .btn
+        background: transparent
+        border: none !important
+        height: 42px
+        margin: 0 8px
+        
+        .icon
+          font-size: 26px
+          width: 26px

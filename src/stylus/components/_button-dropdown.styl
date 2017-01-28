@@ -13,6 +13,7 @@
     position: absolute
     top: 0
     width: $button-dropdown-input-width
+    z-index: 2
   
   .btn
     align-items: center
@@ -52,6 +53,10 @@
       top: 0
       width: 1px
       
+  &--editable
+    .btn--active
+      pointer-events: none
+      
   &--overflow, &--editable
     .btn
       border-top: 1px solid $material-twelve-percent-dark
@@ -64,7 +69,10 @@
         
       &.btn--active
         background: $button-dropdown-background
-        @extend .z-depth-1
+        border-top-left-radius: 2px
+        border-top-right-radius: 2px
+        z-index: 1
+        @extend .z-depth-2
         
         &:after
           background: #fff

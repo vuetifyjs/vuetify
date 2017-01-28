@@ -110,7 +110,7 @@
     watch: {
       active () {
         if (this.editable) {
-          if (this.active) {
+          if (!this.active) {
             setTimeout(() => this.$refs.input.select(), 0)
           } else {
             this.editableValue = this.inputValue.title
