@@ -15,10 +15,6 @@ const Store = {
 
   mutations: {
     'vuetify/COMPONENT_INIT' (state, payload) {
-      if (!(payload.component in state)) {
-        state[payload.component] = {}
-      }
-
       state[payload.component] = Object.assign({},
         state[payload.component],
         { [payload.id]: payload.defaultState }
