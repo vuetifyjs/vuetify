@@ -32,7 +32,7 @@ export function createSimpleTransition (name) {
 }
 
 export function directiveConfig (binding, defaults = {}) {
-  return mergeObject(
+  return Object.assign({},
     defaults,
     binding.modifiers,
     { value: binding.arg },
@@ -74,17 +74,4 @@ export function browserTransform (el, value) {
   ].forEach(i => {
     el.style[i] = value
   })
-}
-
-export function mergeObject (target) {
-  for (let i = 1, length = arguments.length; i < length; i++) {
-    const source = arguments[i]
-    for (const key in source) {
-      if (source.hasOwnProperty(key)) {
-        target[key] = source[key]
-      }
-    }
-  }
-
-  return target
 }

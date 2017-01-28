@@ -23,9 +23,7 @@ import Tables from './tables/index'
 import Tabs from './tabs/index'
 import Transitions from './transitions/_index'
 
-import { mergeObject } from '../util/helpers'
-
-export default mergeObject(
+export default Object.assign({},
   Alerts,
   App,
   Breadcrumbs,
