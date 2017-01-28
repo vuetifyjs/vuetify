@@ -61,8 +61,8 @@
 
     methods: {
       open (active) {
-        this.active = this.id === active.target
         this.reverse = active.reverse
+        this.active = this.id === active.target
       }
     }
   }

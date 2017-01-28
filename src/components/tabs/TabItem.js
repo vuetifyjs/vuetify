@@ -38,13 +38,10 @@ export default {
   methods: {
     activate (target) {
       this.active = target === this.target
-
-      if (!this.active) return
-
-      this.$vuetify().load(this.event)
     },
 
     click (e) {
+      e.preventDefault()
       e.stopPropagation()
 
       this.event()
