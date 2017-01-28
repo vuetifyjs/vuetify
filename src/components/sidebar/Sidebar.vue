@@ -123,7 +123,11 @@
           const active = window.innerWidth >= this.mobileBreakPoint
 
           if (active !== this.active) {
-            this.commit(active)
+            this.$vuetify().event('component.toggle', {
+              id: this.id,
+              component: 'sidebar',
+              active: active
+            })
           }
         }
       },
@@ -133,7 +137,11 @@
           (window.innerWidth < this.mobileBreakPoint && this.mobile && this.closeOnClick) ||
           (this.drawer && this.closeOnClick)
         ) {
-          this.commit(false)
+          this.$vuetify().event('component.toggle', {
+            id: this.id,
+            component: 'sidebar',
+            active: false
+          })
         }
       },
 
