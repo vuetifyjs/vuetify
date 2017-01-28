@@ -49,13 +49,11 @@
         if (this.$refs.img.complete) {
           this.translate()
           this.listeners()
-          return this.$vuetify.bus.pub('parallax:ready')
         }
 
         this.$refs.img.addEventListener('load', () => {
           this.translate()
           this.listeners()
-          this.$vuetify.bus.pub('parallax:ready')
         }, false)
       },
 
