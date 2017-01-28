@@ -16,7 +16,7 @@
 
   export default {
     name: 'carousel-item',
- 
+
     mixins: [Eventable],
 
     data () {
