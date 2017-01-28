@@ -81,13 +81,13 @@
 
     methods: {
       resize () {
-        if (!this.$refs.container) {
-          return
-        }
-
         clearTimeout(this.resizeDebounce)
 
         this.resizeDebounce = setTimeout(() => {
+          if (!this.$refs.container) {
+            return
+          }
+
           this.mobile = this.$refs.container.scrollWidth > this.$refs.container.clientWidth
 
           this.$vuetify().event('tabs.resize', {
