@@ -4,7 +4,7 @@ function load (cb) {
   }
 
   if (document.readyState === 'interactive') {
-    return setTimeout(() => load(cb), 500)
+    return setTimeout(() => load(cb), 150)
   }
 
   document.addEventListener('DOMContentLoaded', cb)
