@@ -31,12 +31,11 @@
 
 <script>
   import Toggleable from '../../mixins/toggleable'
-  import Storable from '../../mixins/storable'
 
   export default {
     name: 'menu',
 
-    mixins: [Storable, Toggleable],
+    mixins: [Toggleable],
 
     data () {
       return {
@@ -139,7 +138,11 @@
       },
 
       updateValue (item) {
-        this.commit(false)
+        this.$vuetify().event('component toggle', {
+          active: false,
+          component: this.$options.name,
+          id: this.id
+        })
 
         this.$emit('input', item)
       }
