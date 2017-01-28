@@ -20,7 +20,7 @@
     data () {
       return {
         active: false,
-        reversing: false
+        reverse: false
       }
     },
 
@@ -43,12 +43,12 @@
 
     computed: {
       computedTransition () {
-        return this.reversing ? this.reverseTransition : this.transition
+        return this.reverse ? this.reverseTransition : this.transition
       },
 
       events () {
         return [
-          [`tab:open:${this.tabsUid}`, this.open]
+          ['tabs', `${this.tabsUid}.active`, this.open]
         ]
       },
 
@@ -60,9 +60,9 @@
     },
 
     methods: {
-      open (target, reversing = false) {
-        this.reversing = reversing
-        this.active = this.id === target
+      open (active) {
+        this.active = this.id === active.target
+        this.reverse = active.reverse
       }
     }
   }

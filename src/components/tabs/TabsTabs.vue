@@ -56,7 +56,7 @@
 
       events () {
         return [
-          [`tab:location:${this.tabsUid}`, this.slider]
+          ['tabs', this.tabsUid, this.slider, { deep: true }]
         ]
       },
 
@@ -70,7 +70,6 @@
     mounted () {
       this.$vuetify().load(() => {
         this.resize()
-        this.slider()
         window.addEventListener('resize', this.resize, false)
       })
     },
@@ -86,7 +85,6 @@
         }
 
         this.mobile = this.$refs.container.scrollWidth > this.$refs.container.clientWidth
-        this.$vuetify.bus.pub(`tab:resize:${this.tabsUid}`)
       },
 
       scrollLeft () {
@@ -97,9 +95,9 @@
         this.$refs.container.scrollLeft += 50
       },
 
-      slider (width, offsetLeft) {
-        this.$refs.slider.style.width = `${width}px`
-        this.$refs.slider.style.left = `${offsetLeft}px`
+      slider (state) {
+        this.$refs.slider.style.width = `${state.location.width}px`
+        this.$refs.slider.style.left = `${state.location.offset}px`
       }
     }
   }

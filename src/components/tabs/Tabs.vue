@@ -9,18 +9,19 @@
 
 <script>
   import Eventable from '../../mixins/eventable'
+  import Storable from '../../mixins/storable'
 
   export default {
     name: 'tabs',
 
-    mixins: [Eventable],
+    mixins: [Storable, Eventable],
 
     data () {
       return {
         childrenCount: 0,
         index: null,
         items: [],
-        reversing: false
+        reverse: false
       }
     },
 
@@ -44,16 +45,37 @@
         }
       },
 
+      defaultState () {
+        return {
+          active: {
+            target: null,
+            reverse: false
+          },
+          location: {
+            width: null,
+            offset: null
+          },
+          item: null
+        }
+      },
+
       events () {
         return [
-          [`tab:click:${this._uid}`, this.tabClick]
+          ['tabs', `${this._uid}.item`, this.tabClick]
         ]
       }
     },
 
     watch: {
       index (i) {
-        this.$vuetify.bus.pub(`tab:open:${this._uid}`, this.items[i].id, this.reversing)
+        this.$vuetify().event('component.toggle', {
+          id: this._uid,
+          component: 'tabs',
+          active: {
+            target: this.items[i].id,
+            reverse: this.reverse
+          }
+        })
       }
     },
 
@@ -81,7 +103,7 @@
 
         this.$nextTick(() => {
           const nextIndex = this.items.findIndex(i => i.$el.id === target)
-          this.reversing = nextIndex > this.index
+          this.reverse = nextIndex < this.index
           this.index = nextIndex
         })
       }

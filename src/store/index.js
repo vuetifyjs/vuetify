@@ -13,5 +13,6 @@ function getComponentStores (array) {
 
 export default getComponentStores([
   'collapsible',
-  'carousel'
+  'carousel',
+  'tabs'
 ])
