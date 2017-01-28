@@ -120,7 +120,6 @@
       },
 
       select (index) {
-        console.log('here')
         this.reverse = index < this.current
         this.current = index
       },
