@@ -1,17 +1,18 @@
 .btn
+  align-items: center
   background: $grey.lighten-2
+  border-radius: $button-border-radius
   color: $button-color
   display: inline-flex
-  align-items: center
   height: $button-height
-  margin: $button-margin
-  border-radius: $button-border-radius
-  padding: $button-padding
   font-size: $button-font-size
   font-weight: $button-font-weight
+  margin: $button-margin
   min-width: $button-min-width
-  text-transform: uppercase
   outline: 0
+  padding: $button-padding
+  text-transform: uppercase
+  text-decoration: none
   transition: $primary-transition
   position: relative
   
@@ -97,3 +98,10 @@
     &:disabled
       background-color: transparent !important
     
+
+  .icon
+    &--right
+      margin-left: 16px
+      
+    &--left
+      margin-right: 16px

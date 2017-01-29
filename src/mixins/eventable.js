@@ -5,7 +5,7 @@ export default {
     }
   },
 
-  created () {
+  mounted () {
     if (!this.events) {
       console.warn('Eventable mixin requires the "events" property on the instance')
     }

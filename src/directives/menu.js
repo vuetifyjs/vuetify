@@ -118,10 +118,10 @@ export default {
     v.context.$vuetify().load(() => directive(el, binding, v))
   },
   unbind (el) {
-    const component = document.getElementById(el.dataset.menu)
-    const event = component.dataset.hover ? 'mouseenter' : 'click'
+    // const component = document.getElementById(el.dataset.menu)
+    // const event = component.dataset.hover ? 'mouseenter' : 'click'
 
-    el.removeEventListener(event, dropdown, false)
-    el.removeAttribute('data-menu')
+    // el.removeEventListener(event, dropdown, false)
+    // el.removeAttribute('data-menu')
   }
 }

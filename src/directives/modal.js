@@ -2,10 +2,11 @@ import { directiveConfig } from '../util/helpers'
 
 var config = {}
 
-function click (config, e) {
+function click (e, config, v) {
   e.stopPropagation()
+  e.preventDefault()
 
-  this.context.$vuetify().event('component toggle', {
+  v.context.$vuetify().event('component toggle', {
     active: true,
     component: 'modal',
     id: config.value
@@ -17,20 +18,16 @@ function directive (el, binding, v) {
 
   el.dataset.modal = config.value
 
-  const event = click.bind(v, config)
-
-  el.removeEventListener('click', event, false)
-  el.addEventListener('click', event, false)
+  el.removeEventListener('click', e => click(e, config, v), false)
+  el.addEventListener('click', e => click(e, config, v), false)
 }
 
 export default {
   bind: directive,
-  updated: directive,
-  commponentUpdated: directive,
   unbind (el, binding, v) {
-    const event = click.bind(v, config)
+    // const event = click.bind(v, config)
 
-    el.removeEventListener('click', event, false)
-    el.removeAttribute('data-modal')
+    // el.removeEventListener('click', event, false)
+    // el.removeAttribute('data-modal')
   }
 }

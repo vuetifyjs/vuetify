@@ -34,15 +34,16 @@ function plugin (Vue, options) {
   }
 }
 
-if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(plugin)
-}
-
-export default plugin
-
 const vuetifySync = store => {
   store.registerModule('vuetify', Store)
 }
+
+if (typeof window !== 'undefined' && window.Vue) {
+  window.Vue.use(plugin)
+  window.vuetifySync = vuetifySync
+}
+
+export default plugin
 
 export {
   vuetifySync

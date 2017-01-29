@@ -6,6 +6,12 @@ const Store = {
     // mutations that need to override the generic ones for components
     // for example: collapasible toggle
     common: {
+      meta: {
+        title: null,
+        description: null,
+        keywords: null
+      },
+
       bodyClick: {
         ticker: null,
         target: null
@@ -22,9 +28,9 @@ const Store = {
     },
 
     'vuetify/COMPONENT_DESTROY' (state, payload) {
-      delete state[payload.component][payload.id]
+      // delete state[payload.component][payload.id]
 
-      state[payload.component] = Object.assign({}, state[payload.component])
+      // state[payload.component] = Object.assign({}, state[payload.component])
     },
 
     'vuetify/COMPONENT_TOGGLE' (state, payload) {
@@ -36,7 +42,7 @@ const Store = {
       if (`vuetify/${payload.component.toUpperCase()}_TOGGLE` in Store.mutations) {
         Store.mutations[`vuetify/${payload.component.toUpperCase()}_TOGGLE`](state, payload)
       } else {
-        state[payload.component][payload.id].active = payload.active
+        state[payload.component][payload.id] = Object.assign({}, { active: payload.active })
       }
     },
 
@@ -45,6 +51,21 @@ const Store = {
     // use 'payload' for the payload
     'vuetify/BODY_CLICK' (state, payload) {
       state.common.bodyClick = { target: payload.target, ticker: new Date() }
+    },
+
+    // Meta data specific mutations
+    // Updating these will change the corresponding meta fields
+    // in the application
+    'vuetify/META_TITLE' (state, payload) {
+      state.common.meta.title = payload
+    },
+
+    'vuetify/META_DESCRIPTION' (state, payload) {
+      state.common.meta.description = payload
+    },
+
+    'vuetify/META_KEYWORDS' (state, payload) {
+      state.common.meta.keywords = payload
     }
   }
 }
