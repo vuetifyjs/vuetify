@@ -14,7 +14,7 @@ export default {
       type: Object,
       default () {
         return {
-          href: '#!',
+          href: 'javascript:;',
           text: '',
           icon: false,
           router: false
@@ -63,8 +63,7 @@ export default {
 
   methods: {
     click () {
-      this.$vuetify.bus.pub(`${this.groupName}:close:${this.rootId}`, this.groupUid)
-      this.$vuetify.bus.pub(`${this.rootName}:item-clicked:${this.rootId}`)
+      //
     }
   },
 
