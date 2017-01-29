@@ -1,6 +1,4 @@
 export default {
-  state: {},
-
   mutations: {
     'vuetify/COLLAPSIBLE_TOGGLE' (store, obj) {
       const index = store.collapsible[obj.id].items.indexOf(obj.bodyId)
