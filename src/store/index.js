@@ -28,6 +28,7 @@ export default getComponentStores([
   'carousel',
   'menu',
   'modal',
+  'navbar',
   'sidebar',
   'tabs'
 ])
