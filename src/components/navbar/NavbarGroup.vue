@@ -79,23 +79,22 @@
 
       events () {
         return [
-          [`body:click`, this.close],
-          [`navbar-group:close:${this.navbar}`, this.close],
-          [`navbar-group:open:${this.navbar}`, this.open]
+          ['common', 'bodyClick', this.close, { deep: true }],
+          ['navbar', this.navbarUid, this.close, { deep: true }]
         ]
       },
 
-      navbar () {
-        const navbar = closestParentTag.call(this, 'navbar')
+      navbarUid () {
+        const navbar = closestParentTag.call(this, 'v-navbar')
 
         return navbar ? navbar._uid : null
       }
     },
 
     mounted () {
-      // if (this.$refs.group.$el.querySelector('.navbar__item--active')) {
-        // this.active = true
-      // }
+      if (this.$refs.group.$el.querySelector('.navbar__item--active')) {
+        this.active = true
+      }
     },
 
     methods: {
