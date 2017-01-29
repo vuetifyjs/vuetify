@@ -1,5 +1,6 @@
 .with
   min-height: 100vh
+  -webkit-backface-visibility: hidden
   
   &.top-fixed-navbar
     padding-top: $navbar-height
@@ -54,9 +55,9 @@
         
 .app
   &__bar
+    align-items: center
     background: $grey.lighten-3
     display: flex
-    align-items: center
     width: 100%
     
     > div
