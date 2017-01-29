@@ -93,7 +93,7 @@
 
     methods: {
       state () {
-        if (this.model.constructor === Array &&
+        if (Array.isArray(this.model) &&
             this.model.includes(this.value) ||
             this.value
         ) {
