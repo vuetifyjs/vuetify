@@ -20,11 +20,12 @@
     .progress-circular__overlay
       animation: $progress-circular-rotate-dash
       stroke-linecap: round
-      stroke-dasharray: 1,200
-      stroke-dashoffset: 0px
+      stroke-dasharray: 1200
+      stroke-dashoffset: 0
     
   &__underlay
-    stroke: $progress-circular-underlay-stroke
+    opacity: .6
+    stroke: currentColor
     z-index: 1
     
   &__overlay
@@ -38,17 +39,38 @@
     left: 50%
     transform: translate3d(-50%, -50%, 0)
     
+  &--button
+    .progress-circular__overlay
+      animation: button-circular 2.3s linear
+      stroke-dasharray: 200
+      stroke-dashoffset: 0
+      transform-origin: center
+      transform: rotate(-75deg)
+    
+  @keyframes button-circular
+    0%
+      stroke-dasharray: 200
+      stroke-dashoffset: 195
+      
+    50%
+      stroke-dashoffset: 100
+      transform: rotate(180deg)
+      
+    100%
+      stroke-dashoffset: 0
+      transform: rotate(270deg)
+      
   @keyframes progress-circular-dash
     0%
-      stroke-dasharray: 1,200
+      stroke-dasharray: 1200
       stroke-dashoffset: 0px
     
     50%
-      stroke-dasharray: 100,200
+      stroke-dasharray: 100200
       stroke-dashoffset: -15px
     
     100%
-      stroke-dasharray: 100,200
+      stroke-dasharray: 100200
       stroke-dashoffset: -125px
       
   @keyframes progress-circular-rotate

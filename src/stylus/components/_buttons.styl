@@ -7,6 +7,7 @@
   height: $button-height
   font-size: $button-font-size
   font-weight: $button-font-weight
+  justify-content: center
   margin: $button-margin
   min-width: $button-min-width
   outline: 0
@@ -45,8 +46,9 @@
       color: $button-disabled-dark-color !important
       background-color: $button-disabled-dark-background-color !important
       
-  &--index
-    z-index: 5
+  &--small
+    font-size: $button-small-font-size
+    height: $button-small-height
 
   &--flat
     background-color: transparent
@@ -97,7 +99,45 @@
         
     &:disabled
       background-color: transparent !important
+      
+  &--floating
+    border-radius: 50%
+    min-width: auto
+    height: $button-floating-width
+    width: $button-floating-width
     
+    &:after
+      border-radius: 50%
+      
+    .icon
+      height: $button-floating-icon-width
+      width: $button-floating-icon-width
+      
+    &.btn--small
+      height: $button-floating-small-width
+      width: $button-floating-small-width
+      
+    &.btn--large
+      height: $button-floating-large-width
+      width: $button-floating-large-width
+      
+  &--outline
+    border: 1px solid currentColor
+    background: transparent
+    box-shadow: none
+    
+    &:hover
+      box-shadow: none
+      
+  &--block
+    display: flex
+    flex: 1
+    
+  &--round
+    border-radius: 28px
+    
+  &--progress
+    box-shadow: none
 
   .icon
     &--right

@@ -29,6 +29,7 @@ export default getComponentStores([
   'menu',
   'modal',
   'navbar',
+  'progress-circular',
   'sidebar',
   'tabs'
 ])
