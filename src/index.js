@@ -16,6 +16,13 @@ const defaults = {
 function plugin (Vue, options) {
   options = Object.assign(defaults, (options || {}))
 
+  if (!options.store) {
+    throw {
+      message: 'Vuetify requires a Vuex store to initialize',
+      name: 'VuetifyVuex'
+    }
+  }
+
   Object.keys(Directives).forEach(key => {
     Vue.directive(`${options.directivePrefix}${key}`, Directives[key])
   })
@@ -32,19 +39,12 @@ function plugin (Vue, options) {
       toast: Toast
     }
   }
-}
 
-const vuetifySync = store => {
-  store.registerModule('vuetify', Store)
+  options.store.registerModule('vuetify', Store)
 }
 
 if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(plugin)
-  window.vuetifySync = vuetifySync
+  window.Vue.use(plugin, window.store)
 }
 
 export default plugin
-
-export {
-  vuetifySync
-}
