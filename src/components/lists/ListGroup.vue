@@ -1,6 +1,7 @@
 <template lang="pug">
   div(class="list--group__container")
-    slot(name="item")
+    div(v-on:click="toggle")
+      slot(name="item")
 
     transition(
       v-on:enter="enter"
@@ -20,7 +21,7 @@
 
     data () {
       return {
-        active: false,
+        isActive: false,
         height: 0
       }
     },
@@ -46,7 +47,6 @@
     },
 
     mounted () {
-      console.log(this)
       // if (this.router) {
       //   this.active = this.matchRoute(this.$route.path)
       // }
@@ -73,7 +73,7 @@
       },
 
       toggle () {
-        this.active = !this.active
+        this.isActive = !this.isActive
       }
     }
   }

@@ -89,10 +89,7 @@
 
     methods: {
       closeConditional (e) {
-        return (
-          (window.innerWidth >= this.mobileBreakPoint && this.drawer)
-          && !this.$el.contains(e.target)
-        )
+        return window.innerWidth <= this.mobileBreakPoint || this.drawer
       },
 
       resize () {

@@ -1,6 +1,13 @@
 function click (e, el, binding, v) {
+  let cb = () => true
+
+  if(binding.value) {
+    cb = binding.value
+  }
+
   if ((e && e.target)
-    && (binding.value && binding.value(e))
+    && (e.target !== el && !el.contains(e.target))
+    && cb()
   ) {
     v.context.isActive = false
   }
