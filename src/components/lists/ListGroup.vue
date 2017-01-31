@@ -1,20 +1,6 @@
 <template lang="pug">
   div(class="list--group__container")
-    v-list-tile(
-      v-on:click.native="toggle"
-      v-bind:class="classes"
-      v-bind:ripple="ripple"
-    )
-      template(v-if="item.action")
-        v-list-tile-action
-          template(v-if="typeof item.action === 'object'")
-            v-icon(v-bind:class="[item.action.class || '']") {{ item.action.icon }}
-          template(v-else)
-            v-icon {{ item.action }}
-      v-list-tile-content
-        v-list-tile-title {{ item.title }}
-      v-list-tile-action
-        v-icon keyboard_arrow_down
+    slot(name="item")
 
     transition(
       v-on:enter="enter"
@@ -24,12 +10,7 @@
         class="list list--group"
         v-show="active"
       )
-        v-list-item(v-for="item in items")
-          v-list-tile(
-            v-bind:item="item"
-            v-bind:ripple="ripple"
-            v-bind:router="router"
-          )
+        slot
 </template>
 <script>
   import { closestParentTag, addOnceEventListener } from '../../util/helpers'
@@ -44,43 +25,30 @@
       }
     },
 
-    props: {
-      item: Object,
-
-      items: {
-        type: Array,
-        default: () => []
-      },
-
-      ripple: Boolean,
-
-      router: Boolean
-    },
-
     computed: {
       classes () {
         return {
-          'list--group__header': this.active
+          // 'list--group__header': this.active
         }
       },
 
       listUID () {
-        return closestParentTag.call(this, 'v-list')._uid
+        // return closestParentTag.call(this, 'v-list')._uid
       }
     },
 
     watch: {
       '$route' (to) {
-        if (this.router) {
-          this.active = this.matchRoute(to.path)
-        }
+        // if (this.router) {
+        //   this.active = this.matchRoute(to.path)
+        // }
       }
     },
 
     mounted () {
-      if (this.router) {
-        this.active = this.matchRoute(this.$route.path)
-      }
+      // if (this.router) {
+      //   this.active = this.matchRoute(this.$route.path)
+      // }
     },
 
     methods: {
