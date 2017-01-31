@@ -19,12 +19,8 @@
 </template>
 
 <script>
-  import Toggleable from '../../mixins/toggleable'
-
   export default {
     name: 'sidebar',
-
-    mixins: [Toggleable],
 
     data () {
       return {

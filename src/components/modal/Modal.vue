@@ -18,12 +18,8 @@
 </template>
 
 <script>
-  import Toggleable from '../../mixins/toggleable'
-
   export default {
     name: 'modal',
-
-    mixins: [Toggleable],
 
     props: {
       bottom: Boolean,

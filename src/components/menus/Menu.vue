@@ -30,12 +30,8 @@
 </template>
 
 <script>
-  import Toggleable from '../../mixins/toggleable'
-
   export default {
     name: 'menu',
-
-    mixins: [Toggleable],
 
     data () {
       return {
