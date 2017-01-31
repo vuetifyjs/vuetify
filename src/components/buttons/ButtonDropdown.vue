@@ -135,12 +135,6 @@
       updateValue (obj) {
         if (typeof obj === 'string') {
           obj = { title: obj }
-
-          this.$vuetify().event('component toggle', {
-            active: false,
-            component: 'menu',
-            id: this.id
-          })
         }
 
         this.$emit('input', obj)

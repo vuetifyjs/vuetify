@@ -103,13 +103,6 @@ function directive (el, binding, v) {
     }
 
     dropdown(e, el, component)
-
-    event('component.toggle', {
-      active: true,
-      component: 'menu',
-      id: component.id,
-      toggle: config.toggle
-    })
   }, false)
 }
 

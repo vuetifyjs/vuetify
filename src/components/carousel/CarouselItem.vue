@@ -12,12 +12,8 @@
 </template>
 
 <script>
-  import Eventable from '../../mixins/eventable'
-
   export default {
     name: 'carousel-item',
-
-    mixins: [Eventable],
 
     data () {
       return {
@@ -46,12 +42,6 @@
     computed: {
       computedTransition () {
         return this.reverse ? this.reverseTransition : this.transition
-      },
-
-      events () {
-        return [
-          ['carousel', this.$parent._uid, this.open, { deep: true }]
-        ]
       },
 
       styles () {

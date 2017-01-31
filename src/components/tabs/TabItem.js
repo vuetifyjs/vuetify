@@ -1,11 +1,10 @@
-import Eventable from '../../mixins/eventable'
 import Itemable from '../../mixins/itemable'
 import { closestParentTag } from '../../util/helpers'
 
 export default {
   name: 'tab-item',
 
-  mixins: [Eventable, Itemable],
+  mixins: [Itemable],
 
   props: {
     selected: Boolean
@@ -49,24 +48,10 @@ export default {
       e.preventDefault()
       e.stopPropagation()
 
-      this.$vuetify().event('tabs.tab.click', {
-        id: this.tabsUid,
-        component: 'tabs',
-        click: this.target
-      })
-
       this.location()
     },
 
     location () {
-      this.$vuetify().event('tabs.tab.location', {
-        id: this.tabsUid,
-        component: 'tabs',
-        location: {
-          width: this.$el.clientWidth,
-          offset: this.$el.offsetLeft
-        }
-      })
     },
 
     resize () {

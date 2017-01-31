@@ -12,13 +12,10 @@
 </template>
 
 <script>
-  import Eventable from '../../mixins/eventable'
   import { addOnceEventListener, closestParentTag } from '../../util/helpers'
 
   export default {
     name: 'collapsible-body',
-
-    mixins: [Eventable],
 
     data () {
       return {
@@ -27,12 +24,6 @@
     },
 
     computed: {
-      events () {
-        return [
-          ['collapsible', this.rootId, this.toggle, { deep: true }]
-        ]
-      },
-
       rootId () {
         const root = closestParentTag.call(this, 'v-collapsible')
 

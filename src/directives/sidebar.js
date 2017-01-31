@@ -4,12 +4,6 @@ function directive (el, binding, v) {
   el.onclick = e => {
     e.preventDefault()
     e.stopPropagation()
-
-    v.context.$vuetify().event('component toggle', {
-      active: true,
-      component: 'sidebar',
-      id: binding.arg
-    })
   }
 }
 

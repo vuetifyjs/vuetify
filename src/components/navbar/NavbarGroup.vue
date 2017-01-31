@@ -26,14 +26,13 @@
 </template>
 
 <script>
-  import Eventable from '../../mixins/eventable'
   import Transitionable from '../../mixins/transitionable'
   import { closestParentTag, addOnceEventListener, browserTransform } from '../../util/helpers'
 
   export default {
     name: 'navbar-group',
 
-    mixins: [Eventable, Transitionable],
+    mixins: [Transitionable],
 
     data () {
       return {
@@ -75,13 +74,6 @@
         return {
           'navbar__group-header--active': this.active || this.opened
         }
-      },
-
-      events () {
-        return [
-          ['common', 'bodyClick', this.close, { deep: true }],
-          ['navbar', this.navbarUid, this.close, { deep: true }]
-        ]
       },
 
       navbarUid () {

@@ -134,12 +134,6 @@
       },
 
       updateValue (item) {
-        this.$vuetify().event('component toggle', {
-          active: false,
-          component: this.$options.name,
-          id: this.id
-        })
-
         this.$emit('input', item)
       }
     }

@@ -8,13 +8,8 @@
 </template>
 
 <script>
-  import Eventable from '../../mixins/eventable'
-  import Storable from '../../mixins/storable'
-
   export default {
     name: 'tabs',
-
-    mixins: [Storable, Eventable],
 
     data () {
       return {
@@ -58,25 +53,11 @@
             offset: null
           }
         }
-      },
-
-      events () {
-        return [
-          ['tabs', `${this._uid}.click`, this.tabClick]
-        ]
       }
     },
 
     watch: {
       index (i) {
-        this.$vuetify().event('tabs.toggle', {
-          id: this._uid,
-          component: 'tabs',
-          active: {
-            target: this.items[i].id,
-            reverse: this.reverse
-          }
-        })
       }
     },
 

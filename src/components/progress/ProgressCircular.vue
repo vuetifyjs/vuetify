@@ -37,12 +37,8 @@
 </template>
 
 <script>
-  import Storable from '../../mixins/storable'
-
   export default {
     name: 'progress-circular',
-
-    mixins: [Storable],
 
     props: {
       button: Boolean,

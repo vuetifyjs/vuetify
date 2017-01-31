@@ -9,13 +9,10 @@
 </template>
 
 <script>
-  import Eventable from '../../mixins/eventable'
   import { closestParentTag } from '../../util/helpers'
 
   export default {
     name: 'tabs-item',
-
-    mixins: [Eventable],
 
     data () {
       return {
@@ -44,12 +41,6 @@
     computed: {
       computedTransition () {
         return this.reverse ? this.reverseTransition : this.transition
-      },
-
-      events () {
-        return [
-          ['tabs', `${this.tabsUid}.active`, this.open]
-        ]
       },
 
       tabsUid () {

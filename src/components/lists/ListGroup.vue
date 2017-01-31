@@ -33,12 +33,9 @@
 </template>
 <script>
   import { closestParentTag, addOnceEventListener } from '../../util/helpers'
-  import Eventable from '../../mixins/eventable'
 
   export default {
     name: 'list-group',
-
-    mixins: [Eventable],
 
     data () {
       return {

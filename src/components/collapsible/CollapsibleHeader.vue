@@ -8,13 +8,10 @@
 </template>
 
 <script>
-  import Eventable from '../../mixins/eventable'
   import { closestParentTag } from '../../util/helpers'
 
   export default {
     name: 'collapsible-header',
-
-    mixins: [Eventable],
 
     data () {
       return {
@@ -33,12 +30,6 @@
         }
       },
 
-      events () {
-        return [
-          ['collapsible', this.rootId, this.toggle, { deep: true }]
-        ]
-      },
-
       rootId () {
         const root = closestParentTag.call(this, 'v-collapsible')
 
@@ -48,11 +39,6 @@
 
     methods: {
       click () {
-        this.$vuetify().event('component toggle', {
-          bodyId: this.bodySiblingUid,
-          component: 'collapsible',
-          id: this.rootId
-        })
       },
 
       getNextSibling (el) {

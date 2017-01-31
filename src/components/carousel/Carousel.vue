@@ -22,12 +22,8 @@
 </template>
 
 <script>
-  import Storable from '../../mixins/storable'
-
   export default {
     name: 'carousel',
-
-    mixins: [Storable],
 
     data () {
       return {
@@ -76,13 +72,6 @@
           clearInterval(this.slideInterval)
           this.startInterval()
         }
-
-        this.$vuetify().event('component toggle', {
-          component: 'carousel',
-          id: this._uid,
-          current: this.items[this.current]._uid,
-          reverse: this.reverse
-        })
       }
     },
 

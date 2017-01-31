@@ -24,13 +24,10 @@
 </template>
 
 <script>
-  import Eventable from '../../mixins/eventable'
   import { closestParentTag } from '../../util/helpers'
 
   export default {
     name: 'tabs-tabs',
-
-    mixins: [Eventable],
 
     data () {
       return {
@@ -53,12 +50,6 @@
         return {
           'tabs__tabs--mobile': this.mobile
         }
-      },
-
-      events () {
-        return [
-          ['tabs', `${this.tabsUid}.location`, this.slider]
-        ]
       },
 
       tabsUid () {
@@ -89,12 +80,6 @@
           }
 
           this.mobile = this.$refs.container.scrollWidth > this.$refs.container.clientWidth
-
-          this.$vuetify().event('tabs.resize', {
-            id: this.tabsUid,
-            component: 'tabs',
-            resize: new Date()
-          })
         }, 250)
       },
 

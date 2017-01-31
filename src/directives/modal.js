@@ -4,12 +4,6 @@ var config = {}
 
 function click (config, e) {
   e.stopPropagation()
-
-  this.context.$vuetify().event('component toggle', {
-    active: true,
-    component: 'modal',
-    id: config.value
-  })
 }
 
 function directive (el, binding, v) {
