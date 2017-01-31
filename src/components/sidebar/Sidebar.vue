@@ -4,6 +4,7 @@
     v-bind:class="classes"
     v-bind:id="id"
     v-bind:style="styles"
+    v-click-outside="closeConditional"
   )
     slot
 </template>
@@ -87,6 +88,13 @@
     },
 
     methods: {
+      closeConditional (e) {
+        return (
+          (window.innerWidth >= this.mobileBreakPoint && this.drawer)
+          && !this.$el.contains(e.target)
+        )
+      },
+
       resize () {
         if (this.mobile && !this.drawer) {
           const active = window.innerWidth >= this.mobileBreakPoint
