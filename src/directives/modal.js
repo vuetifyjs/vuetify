@@ -11,8 +11,6 @@ function directive (el, binding, v) {
 
   el.dataset.modal = config.value
 
-  const event = click.bind(v, config)
-
   el.removeEventListener('click', event, false)
   el.addEventListener('click', event, false)
 }

@@ -88,7 +88,6 @@ function dropdown (e, el, component) {
 
 function directive (el, binding, v) {
   const config = directiveConfig(binding)
-  const event = v.context.$vuetify().event
   const component = document.getElementById(config.value)
 
   el.dataset.menu = config.value

@@ -11,13 +11,6 @@ export default {
   },
 
   computed: {
-    events () {
-      return [
-        ['tabs', `${this.tabsUid}.active.target`, this.activate],
-        ['tabs', `${this.tabsUid}.resize`, this.resize]
-      ]
-    },
-
     target () {
       return this.item.href.replace('#', '')
     },

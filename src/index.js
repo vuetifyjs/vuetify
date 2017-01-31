@@ -3,7 +3,6 @@ require('./stylus/main.styl')
 import Components from './components/_index'
 import Directives from './directives/_index'
 import Load from './util/load'
-import Event from './util/event'
 import Toast from './functions/toast'
 
 const defaults = {

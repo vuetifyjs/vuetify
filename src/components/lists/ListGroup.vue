@@ -66,12 +66,6 @@
 
       listUID () {
         return closestParentTag.call(this, 'v-list')._uid
-      },
-
-      events () {
-        return [
-          // [`list:close:${this.listUID}`, () => this.active = false]
-        ]
       }
     },
 
