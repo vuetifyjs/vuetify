@@ -45,7 +45,7 @@ export default {
 
   render (createElement) {
     let tag
-    
+
     const data = {
       attrs: {},
       class: this.classes,

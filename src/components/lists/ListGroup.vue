@@ -46,6 +46,7 @@
     },
 
     mounted () {
+      console.log(this)
       // if (this.router) {
       //   this.active = this.matchRoute(this.$route.path)
       // }

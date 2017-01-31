@@ -23,7 +23,7 @@ export default {
     }
   },
 
-  render (createElement) {
+  render (h) {
     const data = {
       'class': this.classes,
       attrs: {
@@ -31,6 +31,6 @@ export default {
       }
     }
 
-    return createElement('ul', data, [this.$slots.default])
+    return h('ul', data, [this.$slots.default])
   }
 }
