@@ -204,19 +204,20 @@
       + .list--group
         &:after
           opacity: 1
-            
-      &.list__tile
-        background: $material-twelve-percent-dark
-        
-        &:after
-          opacity: 1
-        
-        .list__tile__title
-          color: inherit
           
-        .list__tile__action:last-of-type
-          .icon
-            transform: rotate(180deg)
+      &--active  
+        .list__tile
+          background: $material-twelve-percent-dark
+          
+          &:after
+            opacity: 1
+          
+          .list__tile__title
+            color: inherit
+            
+          .list__tile__action:last-of-type
+            .icon
+              transform: rotate(-180deg)
             
   &--sub-header
     padding-top: 0

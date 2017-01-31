@@ -1,6 +1,13 @@
 <template lang="pug">
-  div(class="list--group__container")
-    div(v-on:click="toggle")
+  div(
+    class="list--group__container" 
+    v-click-outside="closeConditional"
+  )
+    div(
+      class="list--group__header"
+      v-bind:class="classes"
+      v-on:click="toggle"
+    )
       slot(name="item")
 
     transition(
@@ -9,7 +16,7 @@
     )
       ul(
         class="list list--group"
-        v-show="active"
+        v-show="isActive"
       )
         slot
 </template>
@@ -21,38 +28,58 @@
 
     data () {
       return {
-        isActive: false,
+        isActive: this.active,
         height: 0
       }
+    },
+
+    props: {
+      active: Boolean,
+
+      group: String
     },
 
     computed: {
       classes () {
         return {
-          // 'list--group__header': this.active
+          'list--group__header--active': this.isActive
         }
       },
 
-      listUID () {
-        // return closestParentTag.call(this, 'v-list')._uid
+      list () {
+        return closestParentTag.call(this, 'v-list')
       }
     },
 
     watch: {
+      active () {
+        this.isActive = this.active
+      },
+
+      isActive () {
+        if (this.isActive !== this.active) {
+          this.$emit('active', this.active)
+        }
+      },
+
       '$route' (to) {
-        // if (this.router) {
-        //   this.active = this.matchRoute(to.path)
-        // }
+        if (this.router) {
+          this.isActive = this.matchRoute(to.path)
+        }
       }
     },
 
     mounted () {
-      // if (this.router) {
-      //   this.active = this.matchRoute(this.$route.path)
-      // }
+      if (this.group) {
+        this.isActive = this.matchRoute(this.$route.path)
+      }
     },
 
     methods: {
+      closeConditional (e) {
+        return this.list.$el.contains(e.target)
+      },
+
       enter (el, done) {
         el.style.display = 'block'
         const scrollHeight = el.scrollHeight
@@ -69,7 +96,7 @@
       },
 
       matchRoute (to) {
-        return to.match(this.item.group) !== null
+        return to.match(this.group) !== null
       },
 
       toggle () {
