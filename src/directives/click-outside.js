@@ -20,6 +20,6 @@ function directive (el, binding, v) {
 export default {
   bind: directive,
   unbind (e, binding, v) {
-    document.removeEventListener('click')
+    // document.removeEventListener('click')
   }
 }

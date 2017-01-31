@@ -63,7 +63,7 @@
       },
 
       '$route' (to) {
-        if (this.router) {
+        if (this.group) {
           this.isActive = this.matchRoute(to.path)
         }
       }
