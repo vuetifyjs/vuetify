@@ -1,4 +1,4 @@
-function click (e, el, binding, v) {
+function directive (e, el, binding, v) {
   let cb = () => true
 
   if (binding.value) {
@@ -13,13 +13,14 @@ function click (e, el, binding, v) {
   }
 }
 
-function directive (el, binding, v) {
-  document.addEventListener('click', e => click(e, el, binding, v), false)
-}
+let click
 
 export default {
-  bind: directive,
-  unbind (e, binding, v) {
-    // document.removeEventListener('click')
+  bind (el, binding, v) {
+    click = e => directive(e, el, binding, v)
+    document.addEventListener('click', click, false)
+  },
+  unbind (el, binding, v) {
+    document.removeEventListener('click', click, false)
   }
 }
