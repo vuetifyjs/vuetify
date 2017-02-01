@@ -4,32 +4,20 @@
     v-on:leave="leave"
   )
     div(
-      class="collapsible__body"
-      v-bind:uid="_uid"
-      v-show="active"
+      class="expansion-panel__body"
+      v-show="isActive"
     )
       slot
 </template>
 
 <script>
+  import Toggleable from '../../mixins/toggleable'
   import { addOnceEventListener, closestParentTag } from '../../util/helpers'
 
   export default {
-    name: 'collapsible-body',
+    name: 'expansion-panel-body',
 
-    data () {
-      return {
-        active: false
-      }
-    },
-
-    computed: {
-      rootId () {
-        const root = closestParentTag.call(this, 'v-collapsible')
-
-        return root ? root._uid : null
-      }
-    },
+    mixins: [Toggleable],
 
     methods: {
       enter (el, done) {
@@ -48,10 +36,6 @@
         el.style.height = 0
 
         addOnceEventListener(el, 'transitionend', done)
-      },
-
-      toggle (parent) {
-        this.active = parent.items.includes(this._uid)
       }
     }
   }

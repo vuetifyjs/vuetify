@@ -1,4 +1,4 @@
-.collapsible
+.expansion-panel
   background: #fff
   text-align: left
   list-style-type: none
@@ -12,18 +12,18 @@
       border-top: none
   
   &__header
-    height: $collapsible-collapse-height
-    padding-left: 1rem
-    cursor: pointer
     display: flex
+    cursor: pointer
     align-items: center
+    height: $collapsible-collapse-height
     position: relative
+    padding-left: 1rem
     
     i
       margin-right: 1rem
       
     &:after
-      content: '\E314'
+      content: '\E313'
       font-family: 'Material Icons'
       font-size: 1.5rem
       position: absolute
@@ -34,7 +34,7 @@
         
     &--active
       &:after
-        transform: rotate(-90deg)
+        transform: rotate(-180deg)
     
   &__body
     background-color: rgba(0, 0, 0, 0.03)
