@@ -17,6 +17,8 @@
       ul(
         class="list list--group"
         v-show="isActive"
+        v-bind:style="styles"
+        ref="group"
       )
         slot
 </template>
@@ -48,6 +50,12 @@
 
       list () {
         return closestParentTag.call(this, 'v-list')
+      },
+
+      styles () {
+        return {
+          height: `${this.height}px`
+        }
       }
     },
 
@@ -73,6 +81,8 @@
       if (this.group) {
         this.isActive = this.matchRoute(this.$route.path)
       }
+
+      this.height = this.$refs.group.scrollHeight
     },
 
     methods: {
@@ -83,15 +93,15 @@
       enter (el, done) {
         el.style.display = 'block'
         const scrollHeight = el.scrollHeight
-        el.style.height = 0
+        this.height = 0
 
-        setTimeout(() => (el.style.height = `${scrollHeight}px`), 50)
+        setTimeout(() => (this.height = scrollHeight), 50)
 
         addOnceEventListener(el, 'transitionend', done)
       },
 
       leave (el, done) {
-        el.style.height = 0
+        this.height = 0
         addOnceEventListener(el, 'transitionend', done)
       },
 
