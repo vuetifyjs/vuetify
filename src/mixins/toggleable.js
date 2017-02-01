@@ -15,9 +15,7 @@ export default {
     },
 
     isActive () {
-      if (this.isActive !== this.active) {
-        this.$emit('active', this.isActive)
-      }
+      this.$emit('active', this.isActive)
     }
   }
 }
