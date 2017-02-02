@@ -91,7 +91,10 @@
         })
 
         this.$refs.content.$children.forEach(i => this.content.push(i))
-        this.tabClick(this.activators[0].target)
+
+        setTimeout(() => {
+          this.tabClick(this.activators[0].target)
+        }, 200)
       },
 
       resize () {
@@ -104,11 +107,8 @@
 
       slider (el) {
         this.targetEl = el || this.targetEl
-
-        setTimeout(() => {
-          this.$refs.slider.style.width = `${this.targetEl.clientWidth}px`
-          this.$refs.slider.style.left = `${this.targetEl.offsetLeft}px`
-        }, 200)
+        this.$refs.slider.style.width = `${this.targetEl.clientWidth}px`
+        this.$refs.slider.style.left = `${this.targetEl.offsetLeft}px`
       },
 
       tabClick (target) {
