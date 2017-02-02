@@ -23,12 +23,14 @@
         content: [],
         isActive: null,
         reverse: false,
-        target: null
+        target: null,
+        resizeDebounce: {},
+        targetEl: null
       }
     },
 
     props: {
-      active: Number,
+      active: String,
 
       centered: Boolean,
 
@@ -52,18 +54,32 @@
 
     watch: {
       active () {
-        this.tabClick(this.activators[this.active].target)
+        this.tabClick(this.active)
       },
 
       isActive () {
-        this.activators.forEach(i => i.toggle(this.target))
+        this.activators.forEach(i => {
+          i.toggle(this.target)
+
+          if (i.isActive) {
+            this.slider(i.$el)
+          }
+        })
+
         this.content.forEach(i => i.toggle(this.target, this.reverse))
-        this.$emit('active', this.isActive)
+        this.$emit('active', this.target)
       }
     },
 
     mounted () {
-      this.$vuetify().load(this.init)
+      this.$vuetify().load(() => {
+        this.init()
+        window.addEventListener('resize', this.resize, false)
+      })
+    },
+
+    beforeDestroy () {
+      window.removeEventListener('resize', this.resize, false)
     },
 
     methods: {
@@ -76,6 +92,23 @@
 
         this.$refs.content.$children.forEach(i => this.content.push(i))
         this.tabClick(this.activators[0].target)
+      },
+
+      resize () {
+        clearTimeout(this.resizeDebounce)
+
+        this.resizeDebounce = setTimeout(() => {
+          this.slider()
+        }, 250)
+      },
+
+      slider (el) {
+        this.targetEl = el || this.targetEl
+
+        setTimeout(() => {
+          this.$refs.slider.style.width = `${this.targetEl.clientWidth}px`
+          this.$refs.slider.style.left = `${this.targetEl.offsetLeft}px`
+        }, 200)
       },
 
       tabClick (target) {

@@ -21,25 +21,13 @@
 </template>
 
 <script>
-  import { closestParentTag } from '../../util/helpers'
-
   export default {
     name: 'tabs-tabs',
 
     data () {
       return {
-        mobile: false,
-        resizeDebounce: {}
+        mobile: false
       }
-    },
-
-    props: {
-      items: {
-        type: Array,
-        default: () => []
-      },
-
-      ripple: Boolean
     },
 
     computed: {
@@ -47,50 +35,16 @@
         return {
           'tabs__tabs--mobile': this.mobile
         }
-      },
-
-      tabsUid () {
-        const tabs = closestParentTag.call(this, 'v-tabs')
-
-        return tabs ? tabs._uid : null
       }
     },
 
-    mounted () {
-      this.$vuetify().load(() => {
-        this.resize()
-        window.addEventListener('resize', this.resize, false)
-      })
-    },
-
-    beforeDestroy () {
-      window.removeEventListener('resize', this.resize, false)
-    },
-
     methods: {
-      resize () {
-        clearTimeout(this.resizeDebounce)
-
-        this.resizeDebounce = setTimeout(() => {
-          if (!this.$refs.container) {
-            return
-          }
-
-          this.mobile = this.$refs.container.scrollWidth > this.$refs.container.clientWidth
-        }, 250)
-      },
-
       scrollLeft () {
         this.$refs.container.scrollLeft -= 50
       },
 
       scrollRight () {
         this.$refs.container.scrollLeft += 50
-      },
-
-      slider (state) {
-        this.$refs.slider.style.width = `${state.width}px`
-        this.$refs.slider.style.left = `${state.offset}px`
       }
     }
   }

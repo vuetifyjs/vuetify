@@ -10,7 +10,10 @@ export default {
   },
 
   props: {
-    href: String,
+    href: {
+      type: String,
+      required: true
+    },
 
     ripple: Boolean
   },
@@ -29,12 +32,6 @@ export default {
 
     tabs () {
       return closestParentTag.call(this, 'v-tabs')
-    }
-  },
-
-  mounted () {
-    if (this.selected || window.location.hash.substr(1) === this.target) {
-      this.$vuetify().load(this.click)
     }
   },
 
