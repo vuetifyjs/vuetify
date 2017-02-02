@@ -5,6 +5,12 @@
     v-bind:id="id"
   )
     slot
+    v-tabs-tabs
+      slot(name="activators")
+      v-tabs-slider(ref="slider")
+
+    div(class="tabs__items")
+      slot(name="content")
 </template>
 
 <script>
@@ -13,10 +19,12 @@
 
     data () {
       return {
-        childrenCount: 0,
+        tabCount: 0,
         index: null,
-        items: [],
-        reverse: false
+        tabs: [],
+        content: [],
+        reverse: false,
+        target: null
       }
     },
 
@@ -38,26 +46,17 @@
           'tabs--icons': this.icons,
           'tabs--scroll-bars': this.scrollBars
         }
-      },
-
-      defaultState () {
-        return {
-          click: null,
-          resize: null,
-          active: {
-            target: null,
-            reverse: false
-          },
-          location: {
-            width: null,
-            offset: null
-          }
-        }
       }
     },
 
     watch: {
-      index (i) {
+      target () {
+        this.$slots.activators.forEach(i => {
+          i.componentInstance.isActive = i.componentInstance.target === this.target
+        })
+        this.$slots.content.forEach(i => {
+          i.componentInstance.isActive = i.componentInstance.id === this.target
+        })
       }
     },
 
@@ -67,28 +66,11 @@
 
     methods: {
       init () {
-        this.getItems()
-        this.index = 0
-      },
-
-      getItems () {
-        if (this.$children.length === this.childrenCount) {
-          return
-        }
-
-        this.childrenCount = this.$children.length
-
-        this.items = this.$children.filter(i => i.$options._componentTag === 'v-tabs-item')
+        this.tabClick(this.$slots.activators[0].componentInstance.target)
       },
 
       tabClick (target) {
-        this.getItems()
-
-        this.$nextTick(() => {
-          const nextIndex = this.items.findIndex(i => i.$el.id === target)
-          this.reverse = nextIndex < this.index
-          this.index = nextIndex
-        })
+        this.target = target
       }
     }
   }

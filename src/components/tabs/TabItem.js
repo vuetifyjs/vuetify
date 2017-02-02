@@ -1,24 +1,32 @@
-import Itemable from '../../mixins/itemable'
 import { closestParentTag } from '../../util/helpers'
 
 export default {
   name: 'tab-item',
 
-  mixins: [Itemable],
-
+  data () {
+    return {
+      isActive: false
+    }
+  },
+  
   props: {
-    selected: Boolean
+    href: String
   },
 
   computed: {
-    target () {
-      return this.item.href.replace('#', '')
+    classes () {
+      return {
+        'tab__item': true,
+        'tab__item--active': this.isActive
+      }
     },
 
-    tabsUid () {
-      const tabs = closestParentTag.call(this, 'v-tabs')
+    target () {
+      return this.href.replace('#', '')
+    },
 
-      return tabs ? tabs._uid : null
+    tabs () {
+      return closestParentTag.call(this, 'v-tabs')
     }
   },
 
@@ -29,28 +37,35 @@ export default {
   },
 
   methods: {
-    activate (target) {
-      this.active = target === this.target
-
-      if (this.active) {
-        this.$vuetify().load(this.location)
-      }
-    },
-
     click (e) {
-      e.preventDefault()
-      e.stopPropagation()
-
-      this.location()
-    },
-
-    location () {
-    },
-
-    resize () {
-      if (this.active) {
-        this.location()
-      }
+      this.tabs.tabClick(this.target)
     }
+  },
+
+  render (h) {
+    const data = {
+      attrs: {},
+      class: this.classes,
+      props: {},
+      domProps: {
+        href: 'javascript:;'
+      },
+      on: {
+        click: this.click
+      },
+      directives: [
+        {
+          name: 'ripple',
+          value: this.ripple || false
+        },
+        {
+          name: 'click-outside'
+        }
+      ]
+    }
+
+    const tab = h('a', data, [this.$slots.default])
+
+    return h('li', {}, [tab])
   }
 }
