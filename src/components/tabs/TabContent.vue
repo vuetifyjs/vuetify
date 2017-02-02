@@ -42,12 +42,6 @@
       }
     },
 
-    mounted () {
-      setTimeout(() => {
-        this.isActive = true
-      }, 2000)
-    },
-
     methods: {
       toggle (target) {
         this.isActive = true
