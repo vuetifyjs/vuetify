@@ -1,140 +1,94 @@
 <template lang="pug">
-  component(
-    v-bind:is="transition"
-    v-bind:origin="computedOrigin"
+  div(
+    class="menu" 
+    ref="menu"
+    v-click-outside 
   )
+
+    div(v-on:click="activate" ref="activator")
+      slot(name="activator")
+
     div(
-      class="menu"
-      v-bind:class="classes"
-      v-bind:data-auto="auto"
-      v-bind:data-top="top"
-      v-bind:data-right="right"
-      v-bind:data-bottom="bottom"
-      v-bind:data-left="left"
-      v-bind:data-hover="hover"
-      v-bind:data-offset-x="offsetX"
-      v-bind:data-offset-y="offsetY"
-      v-bind:data-scrollable="maxHeight !== 'auto'"
-      v-bind:id="id"
+      ref="content"
+      class="menu__content"
+      v-on:click="isActive = false"
+      v-show="isActive"
       v-bind:style="styles"
-      v-show="active"
     )
-      v-list(v-if="items.length")
-        v-list-item(v-for="(item, index) in items")
-          v-list-tile(
-            v-bind:item="item"
-            v-on:click.stop.native="updateValue(item)"
-            v-bind:class="{ 'list__tile--active': inputValue === item }"
-          )
       slot
 </template>
 
 <script>
+  import toggleable from '../../mixins/toggleable'
+
   export default {
     name: 'menu',
+    mixins: [toggleable],
 
     data () {
       return {
-        inputValue: {}
+        top: 0,
+        left: 0
       }
     },
 
     props: {
-      auto: Boolean,
 
-      bottom: Boolean,
-
-      id: {
-        type: String,
-        required: true
-      },
-
-      hover: Boolean,
-
-      items: {
-        type: Array,
-        default: () => []
-      },
-
-      left: Boolean,
-
-      maxHeight: {
-        type: [String, Number],
-        default: 'auto'
-      },
-
-      offsetX: Boolean,
-
-      offsetY: Boolean,
-
-      origin: {
-        type: String,
-        default: 'top left'
-      },
-
-      right: Boolean,
-
-      top: Boolean,
-
-      transition: {
-        type: String,
-        default: 'v-menu-transition'
-      },
-
-      value: {
-        requied: false
-      }
     },
 
     computed: {
       classes () {
         return {
-          'menu--open-from-right': this.right
         }
-      },
-
-      computedOrigin () {
-        if (this.index === -1 || !this.auto) {
-          return this.origin
-        }
-
-        if (this.index === 0) {
-          return 'top left'
-        } else if (this.index === this.items.length - 1) {
-          return 'bottom left'
-        } else {
-          return 'left center'
-        }
-      },
-
-      index () {
-        return this.items.indexOf(this.inputValue)
       },
 
       styles () {
         return {
-          'max-height': isNaN(this.maxHeight) ? this.maxHeight : `${this.maxHeight}px`
+          'top': `${this.top}px`,
+          'left': `${this.left}px`
         }
       }
     },
 
-    watch: {
-      active () {
-        this.$emit('active', this.active)
-      },
+    mounted () {
 
-      value () {
-        this.inputValue = this.value
-      }
     },
 
     methods: {
-      closeConditional (e) {
-        return this.$el.contains(e.target)
+
+      activate () {
+        this.isActive = true
+        this.top = this.getPosition('height')
+        this.left = this.getPosition('width')
       },
 
-      updateValue (item) {
-        this.$emit('input', item)
+      getActivatorBox () {
+        return this.$refs.activator.children[0].getBoundingClientRect()
+      },
+
+      getContentBox () {
+        const content = this.$refs.content
+
+        // Turn on display so we can get the dimensions
+        content.style.display = 'block'
+        const box = content.getBoundingClientRect()
+        content.style.display = 'none'
+
+        return box
+      },
+
+      getPosition (dimension) {
+        const activatorBox = this.getActivatorBox()
+        const contentBox = this.getContentBox()
+        const winDimension = window[dimension === 'width' ? 'innerWidth' : 'innerHeight']
+
+        // Flip opposite direction when offscreen
+        let position = activatorBox[dimension === 'width' ? 'left' : 'top']
+        if (position + contentBox[dimension] > winDimension && contentBox[dimension] < position) {
+          position -= contentBox[dimension] - activatorBox.box[dimension]
+        }
+
+        return position + window[dimension === 'width' ? 'scrollX' : 'scrollY']
       }
     }
   }
