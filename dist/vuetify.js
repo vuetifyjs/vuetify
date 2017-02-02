@@ -3805,52 +3805,92 @@ Object.defineProperty(exports, "__esModule", { value: true });
     }
   },
 
-  mounted: function mounted () {
-
-  },
-
   methods: {
-
+    /**
+     * Activate
+     *
+     * @return {void}
+     */
     activate: function activate () {
       this.isActive = true
-      this.origin.top = this.computeOrigin('top')
-      this.origin.left = this.computeOrigin('left')
+      this.origin.top = this.computeOrigin('top', this.top)
+      this.origin.left = this.computeOrigin('left', this.left)
     },
 
+    /**
+     * Get Activator Dimensions
+     *
+     * @return {ClientRect}
+     */
     getActivatorDimensions: function getActivatorDimensions () {
-      // Todo: check if activators exist
-      var dimensions = this.$refs.activator.children[0].getBoundingClientRect()
-      dimensions.offsetX = this.offsetX ? dimensions.width : 0
-      dimensions.offsetY = this.offsetY ? dimensions.height : 0
-      return dimensions
+      var el = this.$refs.activator.children[0]  // <-- Todo: Check if activator exists.
+      return el.getBoundingClientRect()
     },
 
+    /**
+     * Get Content Dimensions
+     *
+     * @return {ClientRect}
+     */
     getContentDimensions: function getContentDimensions () {
       var el = this.$refs.content
 
-      // Turn on display so we can get the dimensions
-      el.style.display = 'block'
+      el.style.display = 'block' // <-- Turn on display so we can get the dimensions.
       var dimensions = el.getBoundingClientRect()
       el.style.display = 'none'
 
       return dimensions
     },
 
-    computeOrigin: function computeOrigin (coord) {
+    /**
+     * Get Offset
+     *
+     * Computes the top or left offset of menu content
+     *
+     * @param {'top'|'left'} coord Designates whether to compute top or left offset.
+     * @param {boolean} isDefaultDirection Set to true for bottom or right menu direction.
+     * @param {boolean} amount Set to the amount you want to offset.
+     * @return {integer}
+     */
+    getOffset: function getOffset (coord, isDefaultDirection, amount) {
+      var offset = coord === 'left' ? this.offsetX : this.offsetY
+      if (!offset) { return 0 }
+      return isDefaultDirection ? -amount : amount
+    },
+
+    /**
+     * Compute Origin
+     *
+     * Computes the top or left position of menu content.
+     *
+     * @param {'top'|'left'} coord Designates whether to compute top or left position.
+     * @param {boolean} isDefaultDirection Set to true for bottom or right menu direction.
+     * @param {boolean} checkBounds Set to true if you want to check/fix menu when it appears
+     *    over the screen edge.
+     * @return {integer}
+     */
+    computeOrigin: function computeOrigin (coord, isDefaultDirection, checkBounds) {
+      if ( checkBounds === void 0 ) checkBounds = true;
+
       var dimension = coord === 'left' ? 'width' : 'height'
       var inner = coord === 'left' ? 'innerWidth' : 'innerHeight'
       var scroll = coord === 'left' ? 'scrollX' : 'scrollY'
-      var offset = coord === 'left' ? 'offsetX' : 'offsetY'
       var activator = this.getActivatorDimensions()
       var content = this.getContentDimensions()
+      var offset = this.getOffset(coord, isDefaultDirection, activator[dimension])
 
-      // Flip opposite direction when offscreen
-      var position = activator[coord] + activator[offset]
-      if (position + content[dimension] > window[inner] && content[dimension] < position) {
-        position -= content[dimension] - activator[dimension]
+      // For left & top (non-default) directions we need to pull back/up the coordinates.
+      var directionAdjust = isDefaultDirection ? activator[dimension] - content[dimension] : 0
+
+      // Compute the origin.
+      var pos = activator[coord] + offset + directionAdjust + window[scroll]
+
+      // Flip direction if menu appears over the screen edge.
+      if (pos - window[scroll] < 0 || pos - window[scroll] + content[dimension] > window[inner]) {
+        pos = checkBounds ? this.computeOrigin(coord, !isDefaultDirection, false) : pos
       }
 
-      return position + window[scroll]
+      return pos
     }
   }
 };
