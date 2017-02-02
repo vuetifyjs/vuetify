@@ -27,13 +27,20 @@
 
     data () {
       return {
-        top: 0,
-        left: 0
+        origin: {
+          top: 0,
+          left: 0
+        }
       }
     },
 
     props: {
-
+      top: Boolean,
+      left: Boolean,
+      bottom: Boolean,
+      right: Boolean,
+      offsetX: Boolean,
+      offsetY: Boolean
     },
 
     computed: {
@@ -44,8 +51,8 @@
 
       styles () {
         return {
-          'top': `${this.top}px`,
-          'left': `${this.left}px`
+          'top': `${this.origin.top}px`,
+          'left': `${this.origin.left}px`
         }
       }
     },
@@ -58,37 +65,44 @@
 
       activate () {
         this.isActive = true
-        this.top = this.getPosition('height')
-        this.left = this.getPosition('width')
+        this.origin.top = this.computeOrigin('top')
+        this.origin.left = this.computeOrigin('left')
       },
 
-      getActivatorBox () {
-        return this.$refs.activator.children[0].getBoundingClientRect()
+      getActivatorDimensions () {
+        // Todo: check if activators exist
+        var dimensions = this.$refs.activator.children[0].getBoundingClientRect()
+        dimensions.offsetX = this.offsetX ? dimensions.width : 0
+        dimensions.offsetY = this.offsetY ? dimensions.height : 0
+        return dimensions
       },
 
-      getContentBox () {
-        const content = this.$refs.content
+      getContentDimensions () {
+        const el = this.$refs.content
 
         // Turn on display so we can get the dimensions
-        content.style.display = 'block'
-        const box = content.getBoundingClientRect()
-        content.style.display = 'none'
+        el.style.display = 'block'
+        const dimensions = el.getBoundingClientRect()
+        el.style.display = 'none'
 
-        return box
+        return dimensions
       },
 
-      getPosition (dimension) {
-        const activatorBox = this.getActivatorBox()
-        const contentBox = this.getContentBox()
-        const winDimension = window[dimension === 'width' ? 'innerWidth' : 'innerHeight']
+      computeOrigin (coord) {
+        const dimension = coord === 'left' ? 'width' : 'height'
+        const inner = coord === 'left' ? 'innerWidth' : 'innerHeight'
+        const scroll = coord === 'left' ? 'scrollX' : 'scrollY'
+        const offset = coord === 'left' ? 'offsetX' : 'offsetY'
+        const activator = this.getActivatorDimensions()
+        const content = this.getContentDimensions()
 
         // Flip opposite direction when offscreen
-        let position = activatorBox[dimension === 'width' ? 'left' : 'top']
-        if (position + contentBox[dimension] > winDimension && contentBox[dimension] < position) {
-          position -= contentBox[dimension] - activatorBox.box[dimension]
+        let position = activator[coord] + activator[offset]
+        if (position + content[dimension] > window[inner] && content[dimension] < position) {
+          position -= content[dimension] - activator[dimension]
         }
 
-        return position + window[dimension === 'width' ? 'scrollX' : 'scrollY']
+        return position + window[scroll]
       }
     }
   }
