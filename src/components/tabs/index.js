@@ -2,18 +2,29 @@ import {
   createSimpleFunctional
 } from '../../util/helpers'
 
-import TabItem from './TabItem'
 import Tabs from './Tabs.vue'
-import TabsItem from './TabsItem.vue'
+import TabItem from './TabItem'
+import TabContent from './TabContent.vue'
 import TabsTabs from './TabsTabs.vue'
-const TabsItems = createSimpleFunctional('tabs__items')
 const TabsSlider = createSimpleFunctional('tabs__slider')
+
+const TabsItems = {
+  render (h) {
+    const data = {
+      'class': {
+        'tabs__items': true
+      }
+    }
+
+    return h('div', data, [this.$slots.default])
+  }
+}
 
 export default {
   TabItem,
-  Tabs,
-  TabsItem,
   TabsItems,
+  Tabs,
+  TabContent,
   TabsTabs,
   TabsSlider
 }
