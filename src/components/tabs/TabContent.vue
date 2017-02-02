@@ -43,9 +43,9 @@
     },
 
     methods: {
-      toggle (target) {
-        this.isActive = true
-        // this.isActive = target === this.id
+      toggle (target, reverse) {
+        this.reverse = reverse
+        this.isActive = this.id === target
       }
     }
   }

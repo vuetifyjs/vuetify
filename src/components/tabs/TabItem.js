@@ -8,9 +8,11 @@ export default {
       isActive: false
     }
   },
-  
+
   props: {
-    href: String
+    href: String,
+
+    ripple: Boolean
   },
 
   computed: {
@@ -39,6 +41,10 @@ export default {
   methods: {
     click (e) {
       this.tabs.tabClick(this.target)
+    },
+
+    toggle (target) {
+      this.isActive = this.target === target
     }
   },
 

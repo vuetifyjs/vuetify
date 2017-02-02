@@ -5,11 +5,11 @@
     v-bind:id="id"
   )
     slot
-    v-tabs-tabs
+    v-tabs-tabs(ref="activators")
       slot(name="activators")
       v-tabs-slider(ref="slider")
 
-    div(class="tabs__items")
+    v-tabs-items(class="tabs__items" ref="content")
       slot(name="content")
 </template>
 
@@ -19,16 +19,17 @@
 
     data () {
       return {
-        tabCount: 0,
-        index: null,
-        tabs: [],
+        activators: [],
         content: [],
+        isActive: null,
         reverse: false,
         target: null
       }
     },
 
     props: {
+      active: Number,
+
       centered: Boolean,
 
       grow: Boolean,
@@ -50,13 +51,14 @@
     },
 
     watch: {
-      target () {
-        this.$slots.activators.forEach(i => {
-          i.componentInstance.isActive = i.componentInstance.target === this.target
-        })
-        this.$slots.content.forEach(i => {
-          i.componentInstance.isActive = i.componentInstance.id === this.target
-        })
+      active () {
+        this.tabClick(this.activators[this.active].target)
+      },
+
+      isActive () {
+        this.activators.forEach(i => i.toggle(this.target))
+        this.content.forEach(i => i.toggle(this.target, this.reverse))
+        this.$emit('active', this.isActive)
       }
     },
 
@@ -66,11 +68,24 @@
 
     methods: {
       init () {
-        this.tabClick(this.$slots.activators[0].componentInstance.target)
+        this.$refs.activators.$children.forEach(i => {
+          if (i.$options._componentTag === 'v-tab-item') {
+            this.activators.push(i)
+          }
+        })
+
+        this.$refs.content.$children.forEach(i => this.content.push(i))
+        this.tabClick(this.activators[0].target)
       },
 
       tabClick (target) {
         this.target = target
+
+        this.$nextTick(() => {
+          const nextIndex = this.content.findIndex(i => i.id === this.target)
+          this.reverse = nextIndex > this.isActive ? false : true
+          this.isActive = nextIndex
+        })
       }
     }
   }
