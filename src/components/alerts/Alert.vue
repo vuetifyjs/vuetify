@@ -2,7 +2,7 @@
   div(
     class="alert"
     v-bind:class="classes"
-    v-show="value"
+    v-show="isActive"
   )
     v-icon(class="alert__icon" v-if="!hideIcon") {{ mdIcon }}
     div
@@ -17,8 +17,18 @@
 </template>
 
 <script>
+import Toggleable from '../../toggleable'
+
 export default {
   name: 'alert',
+
+  data () {
+    return {
+      isActive: true
+    }
+  },
+
+  mixins: [Toggleable],
 
   props: {
     dismissible: Boolean,
@@ -33,12 +43,7 @@ export default {
 
     success: Boolean,
 
-    warning: Boolean,
-
-    value: {
-      type: Boolean,
-      default: true
-    }
+    warning: Boolean
   },
 
   computed: {
