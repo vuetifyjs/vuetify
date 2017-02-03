@@ -1,7 +1,7 @@
 export default {
   data () {
     return {
-      isActive: false
+      isActive: this.value
     }
   },
 
