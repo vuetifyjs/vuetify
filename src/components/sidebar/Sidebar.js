@@ -1,15 +1,11 @@
+import Toggleable from '../../mixins/toggleable'
+
 export default {
   name: 'sidebar',
 
-  data () {
-    return {
-      isActive: this.active
-    }
-  },
+  mixins: [Toggleable],
 
   props: {
-    active: Boolean,
-
     closeOnClick: {
       type: Boolean,
       default: true
@@ -56,10 +52,6 @@ export default {
   },
 
   watch: {
-    active () {
-      this.isActive = this.active
-    },
-
     '$route' () {
       this.routeChanged()
     }
@@ -83,11 +75,7 @@ export default {
 
     resize () {
       if (this.mobile && !this.drawer) {
-        const active = window.innerWidth >= this.mobileBreakPoint
-
-        if (active !== this.active) {
-          this.$emit('active', active)
-        }
+        this.isActive = window.innerWidth >= this.mobileBreakPoint
       }
     },
 
@@ -96,7 +84,7 @@ export default {
         (window.innerWidth < this.mobileBreakPoint && this.mobile && this.closeOnClick) ||
         (this.drawer && this.closeOnClick)
       ) {
-        this.$emit('active', false)
+        this.isActive = false
       }
     }
   },

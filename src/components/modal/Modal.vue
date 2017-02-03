@@ -21,18 +21,14 @@
 </template>
 
 <script>
+  import Toggleable from '../../mixins/toggleable'
+  
   export default {
     name: 'modal',
 
-    data () {
-      return {
-        isActive: this.active
-      }
-    },
+    mixins: [Toggleable],
 
     props: {
-      active: Boolean,
-
       origin: {
         type: String,
         default: 'center center'
@@ -49,18 +45,6 @@
         return {
           'modal--active': this.isActive,
           'modal--bottom': this.bottom
-        }
-      }
-    },
-
-    watch: {
-      active () {
-        this.isActive = this.active
-      },
-
-      isActive () {
-        if (this.isActive !== this.active) {
-          this.$emit('active', this.isActive)
         }
       }
     },

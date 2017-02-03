@@ -3,7 +3,7 @@
     a(
       class="breadcrumbs__item"
       v-bind:class="classes"
-      v-bind:href="item.href"
+      v-bind:href="href"
     )
       slot
 </template>

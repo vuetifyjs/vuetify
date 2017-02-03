@@ -2,7 +2,7 @@
   span(
     class="chip"
     v-bind:class="classes"
-    v-show="value"
+    v-show="isActive"
   )
     slot
     a(
@@ -15,8 +15,18 @@
 </template>
 
 <script>
+  import Toggleable from '../../mixins/toggleable'
+
   export default {
     name: 'chip',
+
+    mixins: [Toggleable],
+
+    data () {
+      return {
+        isActive: true
+      }
+    },
 
     props: {
       close: Boolean,
@@ -26,11 +36,6 @@
       outline: Boolean,
 
       small: Boolean,
-
-      value: {
-        type: Boolean,
-        default: true
-      }
     },
 
     computed: {

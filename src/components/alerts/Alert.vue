@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import Toggleable from '../../toggleable'
+import Toggleable from '../../mixins/toggleable'
 
 export default {
   name: 'alert',
