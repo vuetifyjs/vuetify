@@ -1,13 +1,51 @@
 .menu
   display: inline-block
+  position: relative
   
   &__content
     background-color: #fff
     position: absolute
     display: inline-block
-    width: 300px
     border-radius: 2px
     overflow-y: auto
     overflow-x: hidden
     z-index: 3
+    transition: .3s $transition.ease-in-out
     @extend .z-depth-2
+    
+  &-transition
+    &-enter
+      max-width: 50px !important
+      min-width: 0
+      
+      .list__tile
+        min-width: 0
+        transition-delay: .1s
+        opacity: 0
+        transform: translateY(-5px)
+        
+      .list__tile--active
+        opacity: 1 !important
+        transform: translateY(0) !important
+      
+    &-enter-to
+      margin-top: initial
+      max-height: initial
+      pointer-events: auto
+      max-width: 300px
+        
+      .list__tile
+        pointer-events: auto
+        opacity: 1
+      
+      .list__tile--active
+        opacity: 1 !important
+      
+    &-leave-to
+      transform: translateY(-10px)
+        
+    &-enter, &-leave-to
+      opacity: 0
+      
+    &-enter-to, &-leave
+      opacity: 1

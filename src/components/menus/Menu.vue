@@ -1,33 +1,43 @@
 <template lang="pug">
   div(
-    class="menu" 
-    ref="menu"
-    v-click-outside 
+    class="menu"
+    v-click-outside
   )
 
-    div(v-on:click="activate" ref="activator")
+    div(
+      v-on:click="activate"
+      ref="activator"
+    )
       slot(name="activator")
 
-    div(
-      ref="content"
-      class="menu__content"
-      v-on:click="isActive = false"
-      v-show="isActive"
-      v-bind:style="styles"
+    component(
+      v-bind:is="transition"
+      v-bind:origin="origin"
     )
-      slot
+      div(
+        ref="content"
+        class="menu__content"
+        v-on:click="isActive = false"
+        v-show="isActive"
+        v-bind:style="styles"
+      )
+        slot
 </template>
 
 <script>
-  import toggleable from '../../mixins/toggleable'
+  import Toggleable from '../../mixins/toggleable'
 
   export default {
     name: 'menu',
-    mixins: [toggleable],
+
+    mixins: [Toggleable],
 
     data () {
       return {
-        origin: {
+        activatorDimensions: {},
+        contentDimensions: {},
+        minWidth: 'auto',
+        offset: {
           top: 0,
           left: 0
         }
@@ -35,24 +45,33 @@
     },
 
     props: {
-      top: Boolean,
       left: Boolean,
       bottom: Boolean,
       right: Boolean,
+      maxHeight: {
+        type: [String, Number],
+        default: 'auto'
+      },
       offsetX: Boolean,
-      offsetY: Boolean
+      offsetY: Boolean,
+      origin: {
+        type: String,
+        default: 'top left'
+      },
+      top: Boolean,
+      transition: {
+        type: String,
+        default: 'v-menu-transition'
+      }
     },
 
     computed: {
-      classes () {
-        return {
-        }
-      },
-
       styles () {
         return {
-          'top': `${this.origin.top}px`,
-          'left': `${this.origin.left}px`
+          top: `${this.offset.top}px`,
+          left: `${this.offset.left}px`,
+          maxHeight: isNaN(this.maxHeight) ? this.maxHeight : `${this.maxHeight}px`,
+          minWidth: `${this.minWidth}px`
         }
       }
     },
@@ -64,9 +83,11 @@
        * @return {void}
        */
       activate () {
+        const { top, left } = this.computeLocation()
         this.isActive = true
-        this.origin.top = this.computeOrigin('top', this.top)
-        this.origin.left = this.computeOrigin('left', this.left)
+        this.minWidth = this.$el.clientWidth
+        this.offset.top = top
+        this.offset.left = left
       },
 
       /**
@@ -75,8 +96,12 @@
        * @return {ClientRect}
        */
       getActivatorDimensions () {
-        const el = this.$refs.activator.children[0]  // <-- Todo: Check if activator exists.
-        return el.getBoundingClientRect()
+        return {
+          top: this.$refs.activator.offsetTop,
+          left: this.$refs.activator.offsetLeft,
+          width: this.$refs.activator.clientWidth,
+          height: this.$refs.activator.clientHeight
+        }
       },
 
       /**
@@ -125,24 +150,33 @@
         const dimension = coord === 'left' ? 'width' : 'height'
         const inner = coord === 'left' ? 'innerWidth' : 'innerHeight'
         const scroll = coord === 'left' ? 'scrollX' : 'scrollY'
-        const activator = this.getActivatorDimensions()
-        const content = this.getContentDimensions()
+        const activator = this.activatorDimensions
+        const content = this.contentDimensions
         const offset = this.getOffset(coord, isDefaultDirection, activator[dimension])
 
         // For left & top (non-default) directions we need to pull back/up the coordinates.
         const directionAdjust = isDefaultDirection ? activator[dimension] - content[dimension] : 0
 
         // Compute the origin.
-        let pos = activator[coord] + offset + directionAdjust + window[scroll]
+        let pos = activator[coord] + offset + directionAdjust
 
         // Flip direction if menu appears over the screen edge.
-        if (pos - window[scroll] < 0 || pos - window[scroll] + content[dimension] > window[inner]) {
-          pos = checkBounds ? this.computeOrigin(coord, !isDefaultDirection, false) : pos
-        }
+        // if (pos - window[scroll] < 0 || pos - window[scroll] + content[dimension] > window[inner]) {
+        //   pos = checkBounds ? this.computeOrigin(coord, !isDefaultDirection, false) : pos
+        // }
 
         return pos
+      },
+
+      computeLocation () {
+        this.activatorDimensions = this.getActivatorDimensions()
+        this.contentDimensions = this.getContentDimensions()
+
+        return {
+          top: this.computeOrigin('top', this.top),
+          left: this.computeOrigin('left', this.left)
+        }
       }
     }
   }
 </script>
-
