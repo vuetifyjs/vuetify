@@ -14,6 +14,9 @@ module.exports = {
     publicPath: '/dist/',
     library: 'Vuetify'
   },
+  resolve: {
+    extensions: ['*', '.js', '.json', '.vue']
+  },
   node: {
     fs: 'empty'
   },

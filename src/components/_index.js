@@ -5,7 +5,7 @@ import Buttons from './buttons/index'
 import Cards from './cards/index'
 import Carousel from './carousel/index'
 import Chips from './chips/index'
-import Collapsible from './collapsible/index'
+import ExpansionPanel from './expansion-panel/index'
 import Dividers from './dividers/index'
 import Footer from './footer/index'
 import Forms from './forms/index'
@@ -32,8 +32,8 @@ export default Object.assign({},
   Cards,
   Carousel,
   Chips,
-  Collapsible,
   Dividers,
+  ExpansionPanel,
   Footer,
   Forms,
   Grid,

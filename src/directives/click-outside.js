@@ -13,14 +13,14 @@ function directive (e, el, binding, v) {
   }
 }
 
-let click
-
 export default {
   bind (el, binding, v) {
-    click = e => directive(e, el, binding, v)
+    const click = e => directive(e, el, binding, v)
     document.addEventListener('click', click, false)
+    el._clickOutside = click
   },
-  unbind (el, binding, v) {
-    document.removeEventListener('click', click, false)
+  
+  unbind (el) {
+    document.removeEventListener('click', el._clickOutside, false)
   }
 }

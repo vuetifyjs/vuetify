@@ -7,7 +7,7 @@
 
 <script>
   export default {
-    name: 'collapsible',
+    name: 'expansion-panel',
 
     props: {
       expand: Boolean
@@ -16,7 +16,7 @@
     computed: {
       classes () {
         return {
-          'collapsible': true
+          'expansion-panel': true
         }
       },
 

@@ -1,56 +1,74 @@
-import Itemable from '../../mixins/itemable'
 import { closestParentTag } from '../../util/helpers'
 
 export default {
   name: 'tab-item',
 
-  mixins: [Itemable],
-
-  props: {
-    selected: Boolean
-  },
-
-  computed: {
-    target () {
-      return this.item.href.replace('#', '')
-    },
-
-    tabsUid () {
-      const tabs = closestParentTag.call(this, 'v-tabs')
-
-      return tabs ? tabs._uid : null
+  data () {
+    return {
+      isActive: false
     }
   },
 
-  mounted () {
-    if (this.selected || window.location.hash.substr(1) === this.target) {
-      this.$vuetify().load(this.click)
+  props: {
+    href: {
+      type: String,
+      required: true
+    },
+
+    ripple: Boolean
+  },
+
+  computed: {
+    classes () {
+      return {
+        'tab__item': true,
+        'tab__item--active': this.isActive
+      }
+    },
+
+    target () {
+      return this.href.replace('#', '')
+    },
+
+    tabs () {
+      return closestParentTag.call(this, 'v-tabs')
     }
   },
 
   methods: {
-    activate (target) {
-      this.active = target === this.target
-
-      if (this.active) {
-        this.$vuetify().load(this.location)
-      }
-    },
-
     click (e) {
-      e.preventDefault()
-      e.stopPropagation()
-
-      this.location()
+      this.tabs.tabClick(this.target)
     },
 
-    location () {
-    },
-
-    resize () {
-      if (this.active) {
-        this.location()
-      }
+    toggle (target) {
+      this.isActive = this.target === target
     }
+  },
+
+  render (h) {
+    const data = {
+      attrs: {},
+      class: this.classes,
+      props: {},
+      domProps: {
+        href: 'javascript:;'
+      },
+      on: {
+        click: this.click
+      },
+      directives: [
+        {
+          name: 'ripple',
+          value: this.ripple || false
+        },
+        {
+          name: 'click-outside'
+        }
+      ]
+    }
+
+    const tab = h('a', data, [this.$slots.default])
+
+    return h('li', {}, [tab])
   }
 }

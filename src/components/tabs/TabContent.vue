@@ -3,20 +3,18 @@
     div(
       class="tabs__item"
       v-bind:id="id"
-      v-show="active"
+      v-show="isActive"
     )
       slot
 </template>
 
 <script>
-  import { closestParentTag } from '../../util/helpers'
-
   export default {
     name: 'tabs-item',
 
     data () {
       return {
-        active: false,
+        isActive: false,
         reverse: false
       }
     },
@@ -41,19 +39,13 @@
     computed: {
       computedTransition () {
         return this.reverse ? this.reverseTransition : this.transition
-      },
-
-      tabsUid () {
-        const tabs = closestParentTag.call(this, 'v-tabs')
-
-        return tabs ? tabs._uid : null
       }
     },
 
     methods: {
-      open (active) {
-        this.reverse = active.reverse
-        this.active = this.id === active.target
+      toggle (target, reverse) {
+        this.reverse = reverse
+        this.isActive = this.id === target
       }
     }
   }
