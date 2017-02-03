@@ -4,8 +4,8 @@
       class="breadcrumbs__item"
       v-bind:class="classes"
       v-bind:href="item.href"
-      v-html="item.text"
     )
+      slot
 </template>
 
 <script>
@@ -15,9 +15,9 @@
     props: {
       disabled: Boolean,
 
-      item: {
-        type: Object,
-        required: true
+      href: {
+        type: String,
+        default: 'javascript:;'
       }
     },
 
