@@ -35,6 +35,7 @@
     data () {
       return {
         activatorDimensions: {},
+        autoTop: null,
         contentDimensions: {},
         minWidth: 'auto',
         offset: {
@@ -45,6 +46,7 @@
     },
 
     props: {
+      auto: Boolean,
       left: Boolean,
       bottom: Boolean,
       right: Boolean,
@@ -85,9 +87,50 @@
       activate () {
         const { top, left } = this.computeLocation()
         this.isActive = true
-        this.minWidth = this.$el.clientWidth
-        this.offset.top = top
-        this.offset.left = left
+        this.minWidth = this.$el.clientWidth + (this.auto ? 20 : 0)
+        if (this.auto) {
+          const { top, scrollTop } = this.autoTop
+          this.offset.top = top
+          setTimeout(() => this.$refs.content.scrollTop = scrollTop, 0)
+        } else {
+          this.offset.top = top
+        }
+        this.offset.left = left - (this.auto ? 10 : 0)
+      },
+
+      autoHeight () {
+        const children = Array.from(this.$refs.content.getElementsByClassName('list__tile'))
+        const el = this.$refs.content
+        let scrollTop = 0
+        let top = 0
+        let selected = {}
+        let index = 0
+
+        children.forEach((el, i) => {
+          if (el.classList.contains('list__tile--active')) {
+            index = i
+            selected = el
+          }
+        })
+
+        el.style.display = 'block'
+        if (index < 2 || children.length < 4) {
+          top = 8 + (children[0].clientHeight * index)
+        } else if (index < children.length - 2) {
+          top = el.clientHeight / 2 - 31
+          scrollTop = 35 + ((index - 2) * selected.clientHeight)
+        } else {
+          const number = children.length - 2 === index ? 2 : 3
+
+          top = (selected.clientHeight * number)
+          scrollTop = el.scrollHeight
+        }
+        el.style.display = 'none'
+
+        return {
+          top: -top,
+          scrollTop
+        }
       },
 
       /**
@@ -114,6 +157,9 @@
 
         el.style.display = 'block' // <-- Turn on display so we can get the dimensions.
         const dimensions = el.getBoundingClientRect()
+        if (this.auto) {
+          this.autoTop = this.autoHeight()
+        }
         el.style.display = 'none'
 
         return dimensions

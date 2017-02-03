@@ -3,33 +3,25 @@
     class="btn-dropdown"
     v-bind:class="classes"
   )
-    v-btn(
-      v-bind:class="{ 'btn--active': active, 'btn--editable': active && editable }"
-      v-menu="{ toggle: true, value: id }"
-    )
-      span(v-if="inputValue.title" v-text="inputValue.title")
-      v-icon(v-if="inputValue.action") {{ inputValue.action }}
-      v-icon(class="btn-dropdown__arrow" v-on:click="$vuetify.bus.pub(`menu:toggle:${id}`)") arrow_drop_down
-    input(
-      type="text"
-      ref="input"
-      v-model="editableValue"
-      v-on:keypress.enter="updateValue($event.target.value)"
-      v-on:click.stop=""
-      v-show="editable && active"
-    )
     v-menu(
       v-bind:auto="!overflow && !segmented && !editable"
-      v-bind:items="computedItems"
-      v-bind:id="id"
-      v-bind:left="!overflow && !segmented && !editable"
+      v-bind:right="!overflow && !segmented && !editable"
       v-bind:max-height="maxHeight"
       v-bind:offset-y="overflow || segmented || editable"
-      v-on:input="updateValue"
-      v-on:active="toggle"
-      v-model="inputValue"
-      top
+      bottom
     )
+      v-btn(
+        v-bind:class="{ 'btn--active': active, 'btn--editable': active && editable }"
+        slot="activator"
+      )
+        span(v-if="inputValue.title" v-text="inputValue.title")
+        v-icon(v-if="inputValue.action") {{ inputValue.action }}
+        v-icon(class="btn-dropdown__arrow" v-on:click="active = !active") arrow_drop_down
+      v-list
+        v-list-item(v-for="(item, index) in items")
+          v-list-tile(v-bind:class="{ 'list__tile--active': inputValue === item }" v-on:click.native="updateValue(item)")
+            v-list-tile-content
+              v-list-tile-title {{ item.title }}
 </template>
 
 <script>
@@ -118,6 +110,10 @@
         }
       },
 
+      inputValue () {
+        this.$emit('input', this.inputValue)
+      },
+
       value () {
         if (typeof this.value === 'string') {
           return (this.inputValue = { title: this.value })
@@ -136,6 +132,8 @@
         if (typeof obj === 'string') {
           obj = { title: obj }
         }
+
+        this.inputValue = obj
 
         this.$emit('input', obj)
 
