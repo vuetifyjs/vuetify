@@ -1,5 +1,8 @@
 <template lang="pug">
-  li(class="toolbar__group")
+  li(
+    class="toolbar__group"
+    v-click-outside="closeConditional"
+  )
     a(
       class="toolbar__group-header"
       href="javascript:;"
@@ -16,7 +19,7 @@
     )
       v-toolbar-items(
         v-bind:class="groupClass"
-        v-show="opened"
+        v-show="isActive"
         v-bind:items="items"
         v-bind:ripple="ripple"
         v-bind:router="router"
@@ -27,16 +30,16 @@
 
 <script>
   import Transitionable from '../../mixins/transitionable'
+  import Toggleable from '../../mixins/toggleable'
   import { closestParentTag, addOnceEventListener, browserTransform } from '../../util/helpers'
 
   export default {
     name: 'toolbar-group',
 
-    mixins: [Transitionable],
+    mixins: [Toggleable, Transitionable],
 
     data () {
       return {
-        active: false,
         opened: false
       }
     },
@@ -109,11 +112,15 @@
       },
 
       open () {
-        this.opened = true
+        this.isActive = true
       },
 
       toggle () {
-        this.opened = !this.opened
+        this.isActive = !this.isActive
+      },
+
+      closeConditional (e) {
+        return true
       },
 
       close (e) {
@@ -125,7 +132,7 @@
           return
         }
 
-        this.opened = false
+        this.isActive = false
       }
     }
   }
