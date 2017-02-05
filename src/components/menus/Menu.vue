@@ -34,14 +34,17 @@
 
     data () {
       return {
-        activatorDimensions: {},
-        autoTop: null,
-        contentDimensions: {},
-        minWidth: 'auto',
-        offset: {
+        dimensions: {
+          activator: {},
+          content: {},
+          list: {},
+          item: {}
+        },
+        position: {
           top: 0,
           left: 0
-        }
+        },
+        minWidth: 'auto'
       }
     },
 
@@ -68,160 +71,151 @@
     },
 
     computed: {
+      direction () {
+        return {
+          'vertical': (this.bottom || this.auto) ? 'bottom' : 'top',
+          'horizontal': (this.right || this.auto) ? 'right' : 'left'
+        }
+      },
+
       styles () {
         return {
-          top: `${this.offset.top}px`,
-          left: `${this.offset.left}px`,
+          top: `${this.position.top}px`,
+          left: `${this.position.left}px`,
           maxHeight: isNaN(this.maxHeight) ? this.maxHeight : `${this.maxHeight}px`,
           minWidth: `${this.minWidth}px`
         }
       }
     },
 
+    mounted () {
+      // Move content to beginning of the document (easier to re-position later).
+      document.body.insertBefore(this.$refs.content, document.body.firstChild)
+    },
+
     methods: {
-      /**
-       * Activate
-       *
-       * @return {void}
-       */
+
       activate () {
-        const { top, left } = this.computeLocation()
         this.isActive = true
-        this.minWidth = this.$el.clientWidth + (this.auto ? 20 : 0)
-        if (this.auto) {
-          const { top, scrollTop } = this.autoTop
-          this.offset.top = top
-          setTimeout(() => (this.$refs.content.scrollTop = scrollTop), 0)
-        } else {
-          this.offset.top = top
-        }
-        this.offset.left = left - (this.auto ? 10 : 0)
+        this.updateDimensions()
+        this.updatePosition()
       },
 
-      autoHeight () {
-        const children = Array.from(this.$refs.content.getElementsByClassName('list__tile'))
-        const el = this.$refs.content
-        let scrollTop = 0
-        let top = 0
-        let selected = {}
-        let index = 0
-
-        children.forEach((el, i) => {
-          if (el.classList.contains('list__tile--active')) {
-            index = i
-            selected = el
-          }
-        })
-
-        el.style.display = 'block'
-        if (index < 2 || children.length < 4) {
-          top = 8 + (children[0].clientHeight * index)
-        } else if (index < children.length - 2) {
-          top = el.clientHeight / 2 - 31
-          scrollTop = 35 + ((index - 2) * selected.clientHeight)
-        } else {
-          const number = children.length - 2 === index ? 2 : 3
-
-          top = (selected.clientHeight * number)
-          scrollTop = el.scrollHeight
-        }
-        el.style.display = 'none'
-
-        return {
-          top: -top,
-          scrollTop
+      updateDimensions () {
+        this.$refs.content.style.display = 'block'
+        this.dimensions = {
+          'activator': this.rect(this.$refs.activator),
+          'content': this.rect(this.$refs.content),
+          'list': this.rect(this.$refs.content, '.list'),
+          'item': this.rect(this.$refs.content, '.list__item')
         }
       },
 
-      /**
-       * Get Activator Dimensions
-       *
-       * @return {ClientRect}
-       */
-      getActivatorDimensions () {
-        return {
-          top: this.$refs.activator.offsetTop,
-          left: this.$refs.activator.offsetLeft,
-          width: this.$refs.activator.clientWidth,
-          height: this.$refs.activator.clientHeight
+      updatePosition () {
+        const { vertical, horizontal } = this.direction
+        this.position.top = this.computePosition(vertical)
+        this.position.left = this.computePosition(horizontal)
+      },
+
+      computeOffset (dir, amount = 0) {
+        const isVertical = this.isVertical(dir)
+        const isAuto = this.auto
+        const isOffset = isVertical ? this.offsetY : this.offsetX
+
+        if (isAuto) return isVertical ? this.computeAutoOffset(dir) : 0
+        if (isOffset) return this.isTopOrLeft(dir) ? -amount : amount
+        return 0
+      },
+
+      computeAutoOffset (dir) {
+        const { activator, content, list, item } = this.dimensions
+        const isReversed = this.isReversed(dir)
+        const selected = this.$refs.content.querySelector('.list__tile--active')
+        let offset = (activator.height - content.height) / 2
+
+        if (!selected) return isReversed ? 0 : offset
+
+        const scrollHeight = content.height - item.height
+        const scrollToMiddle = scrollHeight / 2
+        const offsetTop = selected.parentElement.offsetTop
+        const offsetBottom = list.height - item.height - offsetTop
+
+        if (offsetTop < scrollToMiddle) offset += scrollToMiddle - offsetTop
+        if (offsetBottom < scrollToMiddle) offset += offsetBottom - scrollToMiddle
+
+        this.scrollToItem(dir, offsetTop, scrollHeight)
+
+        // Todo: Temporary out-of-bound fix. Need to discuss.
+        return isReversed ? 0 : offset
+      },
+
+      scrollToItem (dir, offsetTop, scrollHeight) {
+        let scroll = offsetTop - (scrollHeight / 2)
+
+        // Todo: Temporary out-of-bound fix. Need to discuss.
+        if (this.isReversed(dir)) {
+          scroll = dir === 'top' ? offsetTop - scrollHeight : offsetTop
         }
+
+        this.$refs.content.scrollTop = scroll
       },
 
-      /**
-       * Get Content Dimensions
-       *
-       * @return {ClientRect}
-       */
-      getContentDimensions () {
-        const el = this.$refs.content
+      computePosition (dir, fixBounds = true) {
+        const { activator, content } = this.dimensions
+        const isVertical = this.isVertical(dir)
+        const coord = isVertical ? 'top' : 'left'
+        const dimen = isVertical ? 'height' : 'width'
+        const winInner = isVertical ? window['innerHeight'] : window['innerWidth']
+        const winScroll = isVertical ? window['pageYOffset'] : window['pageXOffset']
+        const offset = this.computeOffset(dir, activator[dimen])
 
-        el.style.display = 'block' // <-- Turn on display so we can get the dimensions.
-        const dimensions = el.getBoundingClientRect()
-        if (this.auto) {
-          this.autoTop = this.autoHeight()
-        }
-        el.style.display = 'none'
+        // Adjust for Top or Left direction to push the coordinates back.
+        const dirAdjust = this.isTopOrLeft(dir) ? activator[dimen] - content[dimen] : 0
 
-        return dimensions
-      },
+        // Compute the new position.
+        let pos = activator[coord] + offset + dirAdjust + winScroll
 
-      /**
-       * Get Offset
-       *
-       * Computes the top or left offset of menu content
-       *
-       * @param {'top'|'left'} coord Designates whether to compute top or left offset.
-       * @param {boolean} isDefaultDirection Set to true for bottom or right menu direction.
-       * @param {boolean} amount Set to the amount you want to offset.
-       * @return {integer}
-       */
-      getOffset (coord, isDefaultDirection, amount) {
-        const offset = coord === 'left' ? this.offsetX : this.offsetY
-        if (!offset) return 0
-        return isDefaultDirection ? -amount : amount
-      },
-
-      /**
-       * Compute Origin
-       *
-       * Computes the top or left position of menu content.
-       *
-       * @param {'top'|'left'} coord Designates whether to compute top or left position.
-       * @param {boolean} isDefaultDirection Set to true for bottom or right menu direction.
-       * @param {boolean} checkBounds Set to true if you want to check/fix menu when it appears
-       *    over the screen edge.
-       * @return {integer}
-       */
-      computeOrigin (coord, isDefaultDirection, checkBounds = true) {
-        const dimension = coord === 'left' ? 'width' : 'height'
-        const inner = coord === 'left' ? 'innerWidth' : 'innerHeight'
-        const scroll = coord === 'left' ? 'scrollX' : 'scrollY'
-        const activator = this.activatorDimensions
-        const content = this.contentDimensions
-        const offset = this.getOffset(coord, isDefaultDirection, activator[dimension])
-
-        // For left & top (non-default) directions we need to pull back/up the coordinates.
-        const directionAdjust = isDefaultDirection ? activator[dimension] - content[dimension] : 0
-
-        // Compute the origin.
-        let pos = activator[coord] + offset + directionAdjust
-
-        // Flip direction if menu appears over the screen edge.
-        if (pos - window[scroll] < 0 || pos - window[scroll] + content[dimension] > window[inner]) {
-          pos = checkBounds ? this.computeOrigin(coord, !isDefaultDirection, false) : pos
+        // Reverse direction if menu appears over the screen edge.
+        if (this.isOutOfBounds(pos, content[dimen], winScroll, winInner)) {
+          pos = fixBounds ? this.computePosition(this.reverse(dir), false) : pos
         }
 
         return pos
       },
 
-      computeLocation () {
-        this.activatorDimensions = this.getActivatorDimensions()
-        this.contentDimensions = this.getContentDimensions()
+      isOutOfBounds (pos, content, winScroll, winInner) {
+        pos -= winScroll
+        return pos < 0 || pos + content > winInner
+      },
 
-        return {
-          top: this.computeOrigin('top', this.top),
-          left: this.computeOrigin('left', this.left)
+      reverse (dir) {
+        if (this.isVertical(dir)) {
+          return this.direction['vertical'] === 'top' ? 'bottom' : 'top'
         }
+        return this.direction['horizontal'] === 'left' ? 'right' : 'left'
+      },
+
+      isReversed (dir) {
+        return this.isVertical(dir)
+          ? this.direction['vertical'] !== dir
+          : this.direction['horizontal'] !== dir
+      },
+
+      // Utils
+      // ====================
+
+      rect (el, classSelector = '') {
+        if (!classSelector) return el.getBoundingClientRect()
+        const descendant = el.querySelector(classSelector)
+        return descendant ? descendant.getBoundingClientRect() : null
+      },
+
+      isVertical (dir) {
+        return ['top', 'bottom'].includes(dir)
+      },
+
+      isTopOrLeft (dir) {
+        return ['top', 'left'].includes(dir)
       }
     }
   }
