@@ -1,21 +1,21 @@
 export default {
   data () {
     return {
-      isActive: false
+      isActive: this.value
     }
   },
 
   props: {
-    active: Boolean
+    value: Boolean
   },
 
   watch: {
-    active () {
-      this.isActive = this.active
+    value () {
+      this.isActive = this.value
     },
 
     isActive () {
-      this.$emit('active', this.isActive)
+      this.$emit('input', this.isActive)
     }
   }
 }

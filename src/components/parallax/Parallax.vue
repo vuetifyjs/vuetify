@@ -19,9 +19,7 @@
   export default {
     name: 'parallax',
 
-    mixins: [
-      Translatable
-    ],
+    mixins: [Translatable],
 
     props: {
       height: {

@@ -4,11 +4,6 @@
     v-bind:class="classes"
     v-bind:items="items"
   )
-    v-breadcrumbs-item(
-      v-for="item in items"
-      v-bind:item="item"
-      v-bind:disabled="item.disabled"
-    )
     slot
 </template>
 
@@ -22,12 +17,7 @@
         default: '/'
       },
 
-      icons: Boolean,
-
-      items: {
-        type: Array,
-        default: () => []
-      }
+      icons: Boolean
     },
 
     computed: {

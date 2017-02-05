@@ -36,12 +36,16 @@
 </template>
 
 <script>
+  import Toggleable from '../../mixins/toggleable'
+
   export default {
     name: 'pagination',
 
+    mixins: [Toggleable],
+
     data () {
       return {
-        selected: null
+        isActive: 0
       }
     },
 
@@ -49,11 +53,6 @@
       circle: Boolean,
 
       length: {
-        type: Number,
-        default: 0
-      },
-
-      value: {
         type: Number,
         default: 0
       }
