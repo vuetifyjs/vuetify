@@ -15,7 +15,7 @@
       a(
         href="#!"
         class="pagination__item"
-        v-bind:class="{ 'pagination__item--active': n === selected }"
+        v-bind:class="{ 'pagination__item--active': n === isActive }"
         v-if="!isNaN(n)"
         v-on:click.prevent="$emit('input', n)"
         v-text="n"
@@ -43,16 +43,15 @@
 
     mixins: [Toggleable],
 
-    data () {
-      return {
-        isActive: 0
-      }
-    },
-
     props: {
       circle: Boolean,
 
       length: {
+        type: Number,
+        default: 0
+      },
+
+      value: {
         type: Number,
         default: 0
       }
