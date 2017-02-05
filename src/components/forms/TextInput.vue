@@ -60,6 +60,7 @@
       },
 
       value: {
+        type: String,
         required: false
       }
     },
