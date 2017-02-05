@@ -116,7 +116,7 @@
 
         this.$nextTick(() => {
           const nextIndex = this.content.findIndex(i => i.id === this.target)
-          this.reverse = nextIndex > this.isActive
+          this.reverse = nextIndex < this.isActive
           this.isActive = nextIndex
         })
       }
