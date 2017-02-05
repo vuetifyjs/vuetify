@@ -58,7 +58,7 @@ export default {
   },
 
   mounted () {
-    this.$vuetify().load(() => {
+    this.$vuetify.load(() => {
       this.resize()
       window.addEventListener('resize', this.resize, false)
     })

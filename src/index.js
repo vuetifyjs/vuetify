@@ -21,11 +21,9 @@ function plugin (Vue, options) {
     Vue.component(`${options.componentPrefix}${key}`, Components[key])
   })
 
-  Vue.prototype.$vuetify = function () {
-    return {
-      load: Load,
-      toast: Toast
-    }
+  Vue.prototype.$vuetify = {
+    load: Load,
+    toast: Toast
   }
 }
 

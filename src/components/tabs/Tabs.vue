@@ -72,7 +72,7 @@
     },
 
     mounted () {
-      this.$vuetify().load(() => {
+      this.$vuetify.load(() => {
         this.init()
         window.addEventListener('resize', this.resize, false)
       })
