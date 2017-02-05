@@ -53,13 +53,15 @@ export default {
 
   watch: {
     '$route' () {
-      this.routeChanged()
+      this.isActive = !this.routeChanged()
     }
   },
 
   mounted () {
     this.$vuetify().load(() => {
-      this.resize()
+      if (this.value === 'undefined') {
+        this.resize()
+      }
       window.addEventListener('resize', this.resize, false)
     })
   },
@@ -69,8 +71,8 @@ export default {
   },
 
   methods: {
-    closeConditional (e) {
-      return window.innerWidth <= this.mobileBreakPoint || this.drawer
+    closeConditional () {
+      return this.routeChanged()
     },
 
     resize () {
@@ -81,11 +83,13 @@ export default {
 
     routeChanged () {
       if (
-        (window.innerWidth < this.mobileBreakPoint && this.mobile && this.closeOnClick) ||
+        (window.innerWidth < this.mobileBreakPoint && this.mobile) ||
         (this.drawer && this.closeOnClick)
       ) {
-        this.isActive = false
+        return true
       }
+
+      return false
     }
   },
 
