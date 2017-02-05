@@ -72,7 +72,7 @@
     },
 
     mounted () {
-      this.$vuetify().load(() => {
+      this.$vuetify.load(() => {
         this.init()
         window.addEventListener('resize', this.resize, false)
       })
@@ -116,7 +116,7 @@
 
         this.$nextTick(() => {
           const nextIndex = this.content.findIndex(i => i.id === this.target)
-          this.reverse = nextIndex > this.isActive ? false : true
+          this.reverse = nextIndex > this.isActive
           this.isActive = nextIndex
         })
       }

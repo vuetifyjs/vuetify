@@ -1,10 +1,10 @@
 <template lang="pug">
   nav(
-    class="navbar"
+    class="toolbar"
     v-bind:class="classes"
   )
     slot
-    v-navbar-items(
+    v-toolbar-items(
       v-if="items.length > 0"
       v-bind:group-class="groupClass"
       v-bind:items="items"
@@ -16,7 +16,7 @@
 
 <script>
   export default {
-    name: 'navbar',
+    name: 'toolbar',
 
     props: {
       fixed: Boolean,
@@ -39,7 +39,7 @@
     computed: {
       classes () {
         return {
-          'navbar--fixed': this.fixed
+          'toolbar--fixed': this.fixed
         }
       }
     }

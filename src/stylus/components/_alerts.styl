@@ -14,7 +14,6 @@
   &__icon, &__dismissible
     align-self: center
     margin-right: $alert-padding
-    margin-bottom: 4px
     font-size: $alert-icon-font-size
     color: $alert-icon-color
     
@@ -29,6 +28,8 @@
       color: lighten($alert-icon-color, 10%)
     
   > div
+    display: flex
+    align-items: center
     width: 100%
 
   &--info

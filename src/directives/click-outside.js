@@ -19,7 +19,7 @@ export default {
     document.addEventListener('click', click, false)
     el._clickOutside = click
   },
-  
+
   unbind (el) {
     document.removeEventListener('click', el._clickOutside, false)
   }

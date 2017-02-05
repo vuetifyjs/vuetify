@@ -1,7 +1,10 @@
 <template lang="pug">
-  li(class="navbar__group")
+  li(
+    class="toolbar__group"
+    v-click-outside="closeConditional"
+  )
     a(
-      class="navbar__group-header"
+      class="toolbar__group-header"
       href="javascript:;"
       v-bind:class="classes"
       v-on:click.prevent="open"
@@ -14,9 +17,9 @@
       v-bind:is="transition"
       v-bind:origin="origin"
     )
-      v-navbar-items(
+      v-toolbar-items(
         v-bind:class="groupClass"
-        v-show="opened"
+        v-show="isActive"
         v-bind:items="items"
         v-bind:ripple="ripple"
         v-bind:router="router"
@@ -27,16 +30,16 @@
 
 <script>
   import Transitionable from '../../mixins/transitionable'
+  import Toggleable from '../../mixins/toggleable'
   import { closestParentTag, addOnceEventListener, browserTransform } from '../../util/helpers'
 
   export default {
-    name: 'navbar-group',
+    name: 'toolbar-group',
 
-    mixins: [Transitionable],
+    mixins: [Toggleable, Transitionable],
 
     data () {
       return {
-        active: false,
         opened: false
       }
     },
@@ -72,19 +75,19 @@
     computed: {
       classes () {
         return {
-          'navbar__group-header--active': this.active || this.opened
+          'toolbar__group-header--active': this.active || this.opened
         }
       },
 
-      navbarUid () {
-        const navbar = closestParentTag.call(this, 'v-navbar')
+      toolbarUid () {
+        const toolbar = closestParentTag.call(this, 'v-toolbar')
 
-        return navbar ? navbar._uid : null
+        return toolbar ? toolbar._uid : null
       }
     },
 
     mounted () {
-      if (this.$refs.group.$el.querySelector('.navbar__item--active')) {
+      if (this.$refs.group.$el.querySelector('.toolbar__item--active')) {
         this.active = true
       }
     },
@@ -109,11 +112,15 @@
       },
 
       open () {
-        this.opened = true
+        this.isActive = true
       },
 
       toggle () {
-        this.opened = !this.opened
+        this.isActive = !this.isActive
+      },
+
+      closeConditional (e) {
+        return true
       },
 
       close (e) {
@@ -125,7 +132,7 @@
           return
         }
 
-        this.opened = false
+        this.isActive = false
       }
     }
   }
