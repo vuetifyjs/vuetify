@@ -29,7 +29,7 @@
     data () {
       return {
         focused: false,
-        inputValue: ''
+        inputValue: this.value
       }
     },
 
@@ -37,7 +37,7 @@
       classes () {
         return {
           'input-group--focused': this.focused,
-          'input-group--dirty': this.inputValue || this.placeholder || (this.$refs.input && this.$refs.input.value)
+          'input-group--dirty': this.value || this.placeholder
         }
       }
     },
@@ -67,29 +67,24 @@
     watch: {
       value (value) {
         this.inputValue = value
-      }
-    },
+      },
 
-    mounted () {
-      this.inputValue = this.value
+      inputValue () {
+        this.$emit('input', this.inputValue)
+      }
     },
 
     methods: {
       blur () {
         this.focused = false
-
-        this.$emit('blur')
       },
 
       focus () {
         this.focused = true
-
-        this.$emit('focus')
       },
 
       updateValue (e) {
         this.inputValue = e.target.value
-        this.$emit('input', this.inputValue)
       }
     }
   }
