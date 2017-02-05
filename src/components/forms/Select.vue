@@ -12,9 +12,10 @@
       v-bind:id="id"
       v-bind:name="name"
       v-bind:multiple="multiple"
-      v-on:blur="update"
+      v-bind:value="inputValue"
+      v-on:blur="updateValue"
       v-on:click="focused = true"
-      v-on:input="update"
+      v-on:input="updateValue"
       ref="select"
     )
       option(
@@ -37,7 +38,8 @@
 
     data () {
       return {
-        focused: false
+        focused: false,
+        inputValue: this.value
       }
     },
 
@@ -89,6 +91,12 @@
       }
     },
 
+    watch: {
+      value () {
+        this.inputValue = this.value
+      }
+    },
+
     mounted () {
       if (this.value) {
         this.$refs.select.value = this.value
@@ -96,7 +104,7 @@
     },
 
     methods: {
-      update () {
+      updateValue () {
         if (!this.multiple) {
           this.$emit('input', this.$refs.select.value)
         } else {
