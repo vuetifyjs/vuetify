@@ -59,9 +59,7 @@ export default {
 
   mounted () {
     this.$vuetify().load(() => {
-      if (this.value === 'undefined') {
-        this.resize()
-      }
+      this.resize()
       window.addEventListener('resize', this.resize, false)
     })
   },
