@@ -35,7 +35,7 @@
 
       outline: Boolean,
 
-      small: Boolean,
+      small: Boolean
     },
 
     computed: {
