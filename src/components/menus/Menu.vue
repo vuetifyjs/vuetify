@@ -91,7 +91,7 @@
         if (this.auto) {
           const { top, scrollTop } = this.autoTop
           this.offset.top = top
-          setTimeout(() => this.$refs.content.scrollTop = scrollTop, 0)
+          setTimeout(() => (this.$refs.content.scrollTop = scrollTop), 0)
         } else {
           this.offset.top = top
         }
@@ -207,9 +207,9 @@
         let pos = activator[coord] + offset + directionAdjust
 
         // Flip direction if menu appears over the screen edge.
-        // if (pos - window[scroll] < 0 || pos - window[scroll] + content[dimension] > window[inner]) {
-        //   pos = checkBounds ? this.computeOrigin(coord, !isDefaultDirection, false) : pos
-        // }
+        if (pos - window[scroll] < 0 || pos - window[scroll] + content[dimension] > window[inner]) {
+          pos = checkBounds ? this.computeOrigin(coord, !isDefaultDirection, false) : pos
+        }
 
         return pos
       },
