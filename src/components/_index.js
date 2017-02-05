@@ -14,7 +14,7 @@ import Icons from './icons/index'
 import Lists from './lists/index'
 import Menu from './menus/index'
 import Modal from './modal/index'
-import Navbar from './navbar/index'
+import Toolbar from './toolbar/index'
 import Overlay from './overlay/index'
 import Pagination from './pagination/index'
 import Parallax from './parallax/index'
@@ -41,7 +41,7 @@ export default Object.assign({},
   Lists,
   Menu,
   Modal,
-  Navbar,
+  Toolbar,
   Overlay,
   Pagination,
   Parallax,

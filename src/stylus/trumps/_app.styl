@@ -2,15 +2,15 @@
   min-height: 100vh
   -webkit-backface-visibility: hidden
   
-  &.top-fixed-navbar
-    padding-top: $navbar-height
+  &.top-fixed-toolbar
+    padding-top: $toolbar-height
       
     header
       z-index: 4
 
-  &.top-navbar
+  &.top-toolbar
     main
-      min-height: 'calc(100vh - %s)' % $navbar-height
+      min-height: 'calc(100vh - %s)' % $toolbar-height
       
       > .content
         padding-top: $spacers.three.y
@@ -19,12 +19,12 @@
     main
       min-height: 'calc(100vh - %s)' % $footer-height
       
-  &.bottom-footer&.top-navbar, &.bottom-footer&.top-fixed-navbar
+  &.bottom-footer&.top-toolbar, &.bottom-footer&.top-fixed-toolbar
     main
-      min-height: 'calc(100vh - %s - %s)' % ($navbar-height $footer-height)
+      min-height: 'calc(100vh - %s - %s)' % ($toolbar-height $footer-height)
       
   &.left-fixed-sidebar
-    header .navbar,
+    header .toolbar,
     main,
     footer
       padding-left: $sidebar-width
@@ -44,7 +44,7 @@
         background: #fff
   
   &.right-fixed-sidebar
-    header .navbar,
+    header .toolbar,
     main,
     footer
       padding-right: $sidebar-width

@@ -1,7 +1,7 @@
 <template lang="pug">
-  li(class="navbar__group")
+  li(class="toolbar__group")
     a(
-      class="navbar__group-header"
+      class="toolbar__group-header"
       href="javascript:;"
       v-bind:class="classes"
       v-on:click.prevent="open"
@@ -14,7 +14,7 @@
       v-bind:is="transition"
       v-bind:origin="origin"
     )
-      v-navbar-items(
+      v-toolbar-items(
         v-bind:class="groupClass"
         v-show="opened"
         v-bind:items="items"
@@ -30,7 +30,7 @@
   import { closestParentTag, addOnceEventListener, browserTransform } from '../../util/helpers'
 
   export default {
-    name: 'navbar-group',
+    name: 'toolbar-group',
 
     mixins: [Transitionable],
 
@@ -72,19 +72,19 @@
     computed: {
       classes () {
         return {
-          'navbar__group-header--active': this.active || this.opened
+          'toolbar__group-header--active': this.active || this.opened
         }
       },
 
-      navbarUid () {
-        const navbar = closestParentTag.call(this, 'v-navbar')
+      toolbarUid () {
+        const toolbar = closestParentTag.call(this, 'v-toolbar')
 
-        return navbar ? navbar._uid : null
+        return toolbar ? toolbar._uid : null
       }
     },
 
     mounted () {
-      if (this.$refs.group.$el.querySelector('.navbar__item--active')) {
+      if (this.$refs.group.$el.querySelector('.toolbar__item--active')) {
         this.active = true
       }
     },

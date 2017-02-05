@@ -25,9 +25,9 @@
 
       rightSidebar: Boolean,
 
-      topFixedNavbar: Boolean,
+      topFixedToolbar: Boolean,
 
-      topNavbar: Boolean
+      topToolbar: Boolean
     },
 
     computed: {
@@ -38,8 +38,8 @@
           'bottom-footer': this.footer,
           'right-fixed-sidebar': this.rightFixedSidebar,
           'right-sidebar': this.rightSidebar,
-          'top-fixed-navbar': this.topFixedNavbar,
-          'top-navbar': this.topNavbar
+          'top-fixed-toolbar': this.topFixedToolbar,
+          'top-toolbar': this.topToolbar
         }
       }
     }

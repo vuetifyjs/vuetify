@@ -1,7 +1,7 @@
 <template lang="pug">
-  ul(class="navbar__items")
+  ul(class="toolbar__items")
     template(v-for="item in items")
-      v-navbar-group(
+      v-toolbar-group(
         v-if="item.items"
         v-bind:group-class="groupClass"
         v-bind:item="item.parent"
@@ -11,7 +11,7 @@
         v-bind:ripple="ripple"
         v-bind:router="router"
       )
-      v-navbar-item(
+      v-toolbar-item(
         v-else
         v-bind:item="item"
         v-bind:router="item.router || router"
@@ -22,7 +22,7 @@
 
 <script>
   export default {
-    name: 'navbar-items',
+    name: 'toolbar-items',
 
     props: {
       groupClass: {

@@ -1,9 +1,10 @@
-.navbar
+.toolbar
   background-color: $theme.primary
   display: flex
   flex-wrap: wrap
-  height: $navbar-height
+  height: $toolbar-height
   position: relative
+  padding: 0 14px
   width: 100%
   @extend .z-depth-1
   
@@ -12,17 +13,15 @@
     
   li
     height: 100%
+    
+  .menu, .menu > div
+    height: 100%
 
   &--fixed
     position: fixed
     top: 0
     left: 0
     z-index: 4
-    
-  &__toolbar
-    display: flex
-    flex: 1 0 100%
-    padding: 14px
     
   &__sub
     flex: 1 0 100%
@@ -49,7 +48,7 @@
     font-size: 3rem
     flex: 1;
     text-decoration: none
-    padding: 0 2rem
+    padding: 0
     display: flex
     align-items: center
     
@@ -75,7 +74,7 @@
     align-items: center
     color: #fff
     display: flex
-    padding: $navbar-item-padding
+    padding: $toolbar-item-padding
     text-decoration: none
     transition: all 0.3s ease-out
     position: relative
@@ -96,7 +95,7 @@
     color: #fff
     height: 100%
     
-    .navbar__items
+    .toolbar__items
       position: absolute
       top: 100%
       left: 0
@@ -112,7 +111,7 @@
       li
         width: 100%
         
-      .navbar__item
+      .toolbar__item
         padding: 1rem
         white-space: nowrap
         color: inherit
@@ -123,7 +122,7 @@
           background-color: rgba(#fff,.2)
         
     &-header
-      @extend .navbar__item
+      @extend .toolbar__item
       padding-right: 45px
       
       &:after
