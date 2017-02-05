@@ -16,6 +16,10 @@
     .pagination__more,
     .pagination__navigation
       border-radius: 50%
+      
+  &--disabled
+    pointer-events: none
+    opacity: .6
   
   &__item
     @extend .z-depth-1
@@ -32,7 +36,7 @@
     transform: scale(.8)
     
     &--active
-      @extend .z-depth-1
+      @extend .z-depth-2
       background: $theme.primary
       color: #FFFFFF
       transform: scale(1.15)

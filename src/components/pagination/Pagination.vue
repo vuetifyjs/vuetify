@@ -46,6 +46,8 @@
     props: {
       circle: Boolean,
 
+      disabled: Boolean,
+
       length: {
         type: Number,
         default: 0
@@ -66,7 +68,8 @@
     computed: {
       classes () {
         return {
-          'pagination--circle': this.circle
+          'pagination--circle': this.circle,
+          'pagination--disabled': this.disabled
         }
       },
 
