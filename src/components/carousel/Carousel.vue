@@ -17,7 +17,6 @@
         v-on:click.native.stop="select(index)"
       )
         v-icon {{ icon }}
-
     slot
 </template>
 
@@ -68,6 +67,8 @@
           return i.$el.classList && i.$el.classList.contains('slider__item')
         })
 
+        this.items.forEach(i => i.open(this.items[this.current]._uid, this.reverse))
+
         if (this.cycle) {
           clearInterval(this.slideInterval)
           this.startInterval()
@@ -76,10 +77,6 @@
     },
 
     mounted () {
-      this.init()
-    },
-
-    activated () {
       this.init()
     },
 
