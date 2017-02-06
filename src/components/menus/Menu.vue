@@ -5,6 +5,7 @@
   )
 
     div(
+      class="menu__activator"
       v-on:click="activate"
       ref="activator"
     )
