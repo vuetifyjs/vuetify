@@ -1,6 +1,5 @@
 import Toolbar from './Toolbar.vue'
 import ToolbarItem from './ToolbarItem'
-import ToolbarItems from './ToolbarItems.vue'
 import ToolbarGroup from './ToolbarGroup.vue'
 
 import {
@@ -10,16 +9,18 @@ import {
 const ToolbarLogo = createSimpleFunctional('toolbar__logo')
 const ToolbarTitle = createSimpleFunctional('toolbar__title')
 const ToolbarSub = createSimpleFunctional('toolbar__sub')
+const ToolbarItems = createSimpleFunctional('toolbar__items', 'ul')
 const ToolbarSideIcon = {
   functional: true,
 
   render (h, { data, children }) {
     data.staticClass = data.staticClass ? `toolbar__side-icon ${data.staticClass}` : 'toolbar__side-icon'
+    data.props = {
+      icon: true,
+      dark: true
+    }
 
-    const icon = [h('v-icon', 'menu')]
-    const anchor = [h('a', { attrs: { href: 'javascript:;' }}, icon)]
-
-    return h('div', data, [anchor])
+    return h('v-btn', data, [h('v-icon', 'menu')])
   }
 }
 

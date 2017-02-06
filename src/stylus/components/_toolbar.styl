@@ -15,8 +15,20 @@
   li
     height: 100%
     
+  i
+    font-size: 24px
+
   .menu, .menu > div
     height: 100%
+
+  .btn
+    margin: 0 6px
+    
+    &:first-child
+      margin-left: 0
+      
+    &:last-child
+      margin-right: 0
 
   &--fixed
     position: fixed
@@ -31,18 +43,7 @@
   &__side-icon
     display: inline-flex
     align-items: center
-    margin: 0 14px 0 0
-    
-    a
-      color: #fff
-      display: flex
-      align-items: center
-      flex: 1
-      font-size: 1rem
-      text-decoration: none
-      
-      i
-        font-size: 24px
+    position: relative
   
   &__logo
     color: #fff
@@ -83,9 +84,6 @@
     
     i
       font-size: 2rem
-      
-      + span
-        margin-left: 5px
     
     &:hover, &--active
       background: rgba(#000,0.1)
