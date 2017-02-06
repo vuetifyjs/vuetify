@@ -27,7 +27,9 @@
 
       topFixedToolbar: Boolean,
 
-      topToolbar: Boolean
+      topToolbar: Boolean,
+
+      sidebarUnderToolbar: Boolean
     },
 
     computed: {
@@ -39,7 +41,8 @@
           'right-fixed-sidebar': this.rightFixedSidebar,
           'right-sidebar': this.rightSidebar,
           'top-fixed-toolbar': this.topFixedToolbar,
-          'top-toolbar': this.topToolbar
+          'top-toolbar': this.topToolbar,
+          'sidebar-under-toolbar': this.sidebarUnderToolbar
         }
       }
     }

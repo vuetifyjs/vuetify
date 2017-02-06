@@ -53,6 +53,15 @@
       @media screen and (max-width: ($grid-breakpoints.lg - 1))
         padding-right: 0
         
+  &.sidebar-under-toolbar
+    .sidebar
+      margin-top: $toolbar-height
+    
+    &.left-fixed-sidebar,
+    &.right-fixed-sidebar
+      .toolbar
+        padding-left: inherit
+        
 .app
   &__bar
     align-items: center
