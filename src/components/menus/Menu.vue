@@ -106,9 +106,11 @@
     methods: {
       activate () {
         this.minWidth = this.$el.clientWidth
-        this.isActive = true
-        this.updateDimensions()
-        this.updatePosition()
+        this.$nextTick(() => {
+          this.isActive = true
+          this.updateDimensions()
+          this.updatePosition()
+        })
       },
 
       updateDimensions () {
