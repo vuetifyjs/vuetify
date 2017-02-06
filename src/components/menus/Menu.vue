@@ -78,6 +78,13 @@
         }
       },
 
+      offset () {
+        return {
+          'top': this.offsetY ? this.dimensions.activator.height : 0,
+          'left': this.offsetX ? this.dimensions.activator.width : 0
+        }
+      },
+
       styles () {
         return {
           top: `${this.position.top}px`,
@@ -115,30 +122,30 @@
         const { vertical, horizontal } = this.direction
         this.position.top = this.computePosition(vertical)
         this.position.left = this.computePosition(horizontal)
+        this.fixOffScreen()
       },
 
-      computeOffset (dir, amount = 0) {
-        const isVertical = this.isVertical(dir)
-        const isAuto = this.auto
-        const isOffset = isVertical ? this.offsetY : this.offsetX
-
-        if (isAuto) return isVertical ? this.computeAutoOffset(dir) : 0
-        if (isOffset) return this.isTopOrLeft(dir) ? -amount : amount
-        return 0
+      computeOffset (dir) {
+        return this.isTopOrLeft(dir) ? -this.offset : this.offset
       },
 
-      computeAutoOffset (dir) {
+      computeAuto (dir) {
+        if (!this.isVertical(dir)) return 0
+        console.log('here')
+
         const { activator, content, list, item } = this.dimensions
-        const isReversed = this.isReversed(dir)
         const selected = this.$refs.content.querySelector('.list__tile--active')
-        let offset = (activator.height - content.height) / 2
 
-        if (!selected) return isReversed ? 0 : offset
+        let offset = this.isReversed(dir)
+          ? 0
+          : (activator.height - content.height) / 2
 
-        const scrollHeight = content.height - item.height
-        const scrollToMiddle = scrollHeight / 2
+        if (!selected) return offset
+
         const offsetTop = selected.parentElement.offsetTop
         const offsetBottom = list.height - item.height - offsetTop
+        const scrollHeight = content.height - item.height
+        const scrollToMiddle = scrollHeight / 2
 
         if (offsetTop < scrollToMiddle) offset += scrollToMiddle - offsetTop
         if (offsetBottom < scrollToMiddle) offset += offsetBottom - scrollToMiddle
@@ -146,7 +153,7 @@
         this.scrollToItem(dir, offsetTop, scrollHeight)
 
         // Todo: Temporary out-of-bound fix. Need to discuss.
-        return isReversed ? 0 : offset
+        return this.isReversed(dir) ? 0 : offset
       },
 
       scrollToItem (dir, offsetTop, scrollHeight) {
@@ -160,39 +167,35 @@
         this.$refs.content.scrollTop = scroll
       },
 
-      computePosition (dir, fixBounds = true) {
+      computePosition (dir) {
         const { activator, content } = this.dimensions
         const isVertical = this.isVertical(dir)
         const coord = isVertical ? 'top' : 'left'
         const dimen = isVertical ? 'height' : 'width'
-        const winInner = isVertical ? window['innerHeight'] : window['innerWidth']
         const winScroll = isVertical ? window['pageYOffset'] : window['pageXOffset']
-        const offset = this.computeOffset(dir, activator[dimen])
+        const offset = this.auto ? this.computeAuto(dir) : this.computeOffset(dir)
 
-        // Adjust for Top or Left direction to push the coordinates back.
-        const dirAdjust = this.isTopOrLeft(dir) ? activator[dimen] - content[dimen] : 0
+        // Adjust for Top or Left direction (inverse direction)
+        const dirAdjust = this.isTopOrLeft(dir)
+          ? activator[dimen] - content[dimen]
+          : 0
 
-        // Compute the new position.
-        let pos = activator[coord] + offset + dirAdjust + winScroll
-
-        // Reverse direction if menu appears over the screen edge.
-        if (this.isOutOfBounds(pos, content[dimen], winScroll, winInner)) {
-          pos = fixBounds ? this.computePosition(this.reverse(dir), false) : pos
-        }
-
-        return pos
+        return activator[coord] + offset + dirAdjust + winScroll
       },
 
-      isOutOfBounds (pos, content, winScroll, winInner) {
-        pos -= winScroll
-        return pos < 0 || pos + content > winInner
-      },
+      fixOffScreen () {
+        const content = this.dimensions.content
+        const { vertical, horizontal } = this.direction
+        const top = this.position.top - window['pageYOffset']
+        const left = this.position.left - window['pageXOffset']
 
-      reverse (dir) {
-        if (this.isVertical(dir)) {
-          return this.direction['vertical'] === 'top' ? 'bottom' : 'top'
+        if (top < 0 || top + content['height'] > window['innerHeight']) {
+          this.position.top = this.computePosition(this.reverse(vertical), false)
         }
-        return this.direction['horizontal'] === 'left' ? 'right' : 'left'
+
+        if (left < 0 || left + content['width'] > window['innerWidth']) {
+          this.position.left = this.computePosition(this.reverse(horizontal), false)
+        }
       },
 
       isReversed (dir) {
@@ -216,6 +219,13 @@
 
       isTopOrLeft (dir) {
         return ['top', 'left'].includes(dir)
+      },
+
+      reverse (dir) {
+        if (dir === 'top') return 'bottom'
+        if (dir === 'bottom') return 'top'
+        if (dir === 'left') return 'right'
+        if (dir === 'right') return 'left'
       }
     }
   }
