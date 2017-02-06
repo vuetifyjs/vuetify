@@ -5,6 +5,7 @@
   )
 
     div(
+      class="menu__activator"
       v-on:click="activate"
       ref="activator"
     )
@@ -116,6 +117,7 @@
           'list': this.rect(this.$refs.content, '.list'),
           'item': this.rect(this.$refs.content, '.list__item')
         }
+        this.$refs.content.style.display = 'none'
       },
 
       updatePosition () {
