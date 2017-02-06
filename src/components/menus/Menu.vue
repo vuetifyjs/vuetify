@@ -80,8 +80,10 @@
 
       offset () {
         return {
-          'top': this.offsetY ? this.dimensions.activator.height : 0,
-          'left': this.offsetX ? this.dimensions.activator.width : 0
+          'top': this.offsetY ? -this.dimensions.activator.height : 0,
+          'left': this.offsetX ? -this.dimensions.activator.width : 0,
+          'bottom': this.offsetY ? this.dimensions.activator.height : 0,
+          'right': this.offsetX ? this.dimensions.activator.width : 0
         }
       },
 
@@ -125,13 +127,8 @@
         this.fixOffScreen()
       },
 
-      computeOffset (dir) {
-        return this.isTopOrLeft(dir) ? -this.offset : this.offset
-      },
-
       computeAuto (dir) {
         if (!this.isVertical(dir)) return 0
-        console.log('here')
 
         const { activator, content, list, item } = this.dimensions
         const selected = this.$refs.content.querySelector('.list__tile--active')
@@ -173,9 +170,9 @@
         const coord = isVertical ? 'top' : 'left'
         const dimen = isVertical ? 'height' : 'width'
         const winScroll = isVertical ? window['pageYOffset'] : window['pageXOffset']
-        const offset = this.auto ? this.computeAuto(dir) : this.computeOffset(dir)
+        const offset = this.auto ? this.computeAuto(dir) : this.offset[dir]
 
-        // Adjust for Top or Left direction (inverse direction)
+        // Adjust for 'top' or 'left' direction (inverse direction)
         const dirAdjust = this.isTopOrLeft(dir)
           ? activator[dimen] - content[dimen]
           : 0
@@ -190,11 +187,11 @@
         const left = this.position.left - window['pageXOffset']
 
         if (top < 0 || top + content['height'] > window['innerHeight']) {
-          this.position.top = this.computePosition(this.reverse(vertical), false)
+          this.position.top = this.computePosition(this.reverse(vertical))
         }
 
         if (left < 0 || left + content['width'] > window['innerWidth']) {
-          this.position.left = this.computePosition(this.reverse(horizontal), false)
+          this.position.left = this.computePosition(this.reverse(horizontal))
         }
       },
 
