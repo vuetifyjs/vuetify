@@ -1,6 +1,6 @@
 <template lang="pug">
   ul(
-    v-bind:class="classes"
+    class="expansion-panel"
   )
     slot
 </template>
@@ -14,12 +14,6 @@
     },
 
     computed: {
-      classes () {
-        return {
-          'expansion-panel': true
-        }
-      },
-
       params () {
         return {
           expand: this.expand
