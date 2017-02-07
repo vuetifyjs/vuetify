@@ -4,6 +4,7 @@
       class="breadcrumbs__item"
       v-bind:class="classes"
       v-bind:href="href"
+      v-bind:target="target"
     )
       slot
 </template>
@@ -18,7 +19,9 @@
       href: {
         type: String,
         default: 'javascript:;'
-      }
+      },
+
+      target: String
     },
 
     computed: {
