@@ -12,7 +12,6 @@
       v-bind:id="id"
       v-bind:name="name"
       v-bind:multiple="multiple"
-      v-bind:value="inputValue"
       v-on:blur="updateValue"
       v-on:click="focused = true"
       v-on:input="updateValue"
@@ -20,7 +19,7 @@
     )
       option(
         value=''
-        selected
+        v-bind:selected="!multiple"
         v-bind:disabled="defaultDisabled"
         v-text="defaultText"
       )
@@ -39,7 +38,7 @@
     data () {
       return {
         focused: false,
-        inputValue: this.value
+        inputValue: null
       }
     },
 
@@ -92,6 +91,14 @@
     },
 
     watch: {
+      inputValue () {
+        if (this.multiple) {
+          this.$refs.options.filter(i => i.selected = this.inputValue.includes(i.value))
+        } else {
+          this.$refs.select.value = this.inputValue
+        }
+      },
+
       value () {
         this.inputValue = this.value
       }
@@ -99,16 +106,16 @@
 
     mounted () {
       if (this.value) {
-        this.$refs.select.value = this.value
+        this.inputValue = this.value
       }
     },
 
     methods: {
       updateValue () {
-        if (!this.multiple) {
-          this.$emit('input', this.$refs.select.value)
-        } else {
+        if (this.multiple) {
           this.$emit('input', this.$refs.options.filter(i => i.selected).map(i => i.value))
+        } else {
+          this.$emit('input', this.$refs.select.value)
         }
       }
     }
