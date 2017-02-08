@@ -19,13 +19,19 @@
   
   &__left
     position: absolute
-    top: calc(50% - 50px)
+    top: 50%
     z-index: 2
-    left: 0
+    left: 5px
+    transform: translateY(-50%)
     
     .btn
       color: #FFFFFF
       margin: 0 !important
+      height: auto
+      width: auto
+      
+      i
+        font-size: 48px
         
       &:hover
         background: none
@@ -33,7 +39,7 @@
   &__right
     @extend .slider__left
     left: initial
-    right: 0
+    right: 5px
   
   &__controls
     background: rgba(0, 0, 0, .5)
