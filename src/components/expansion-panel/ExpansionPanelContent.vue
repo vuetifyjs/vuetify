@@ -57,7 +57,9 @@
 
     methods: {
       closeConditional (e) {
-        return this.$parent.$el.contains(e.target) && !this.$parent.expand
+        return this.$parent.$el.contains(e.target) && 
+          !this.$parent.expand &&
+          !this.$el.contains(e.target)
       },
 
       enter (el, done) {
