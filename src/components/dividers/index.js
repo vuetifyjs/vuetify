@@ -7,11 +7,11 @@ const Divider = {
     }
 
     if (data.attrs) {
-      if (data.attrs.inset) {
+      if ('inset' in data.attrs) {
         params.class += ' divider--inset'
       }
 
-      if (data.attrs.light) {
+      if ('light' in data.attrs) {
         params.class += ' divider--light'
       }
     }
