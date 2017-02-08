@@ -13,7 +13,6 @@
     overflow-y: auto
     overflow-x: hidden
     z-index: 3
-    transition: .3s $transition.ease-in-out
     @extend .z-depth-2
     
   &-transition
@@ -52,3 +51,7 @@
       
     &-enter-to, &-leave
       opacity: 1
+      
+    &-enter-active, &-leave-active
+      transition: all .3s $transition.ease-in-out, top 1ms, left 1ms
+      
