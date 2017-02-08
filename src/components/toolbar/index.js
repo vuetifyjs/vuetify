@@ -1,6 +1,5 @@
 import Toolbar from './Toolbar.vue'
 import ToolbarItem from './ToolbarItem'
-import ToolbarGroup from './ToolbarGroup.vue'
 
 import {
   createSimpleFunctional
@@ -26,7 +25,6 @@ const ToolbarSideIcon = {
 
 export default {
   Toolbar,
-  ToolbarGroup,
   ToolbarItem,
   ToolbarItems,
   ToolbarLogo,

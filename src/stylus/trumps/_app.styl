@@ -24,7 +24,13 @@
       min-height: 'calc(100vh - %s - %s)' % ($toolbar-height $footer-height)
       
   &.left-fixed-sidebar
-    header .toolbar,
+    header .toolbar
+      padding-left: $sidebar-width + $toolbar-padding-x
+      transition: $primary-transition
+  
+      @media screen and (max-width: ($grid-breakpoints.lg - 1))
+        padding-left: $toolbar-padding-x
+      
     main,
     footer
       padding-left: $sidebar-width
@@ -36,12 +42,6 @@
   &.left-sidebar
     .sidebar
       box-shadow: none
-      
-    main
-      background: $theme.secondary
-      
-      > .content
-        background: #fff
   
   &.right-fixed-sidebar
     header .toolbar,

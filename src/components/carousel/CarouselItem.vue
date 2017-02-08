@@ -52,9 +52,9 @@
     },
 
     methods: {
-      open (state) {
-        this.active = this._uid === state.current
-        this.reverse = state.reverse
+      open (id, reverse) {
+        this.active = this._uid === id
+        this.reverse = reverse
       }
     }
   }

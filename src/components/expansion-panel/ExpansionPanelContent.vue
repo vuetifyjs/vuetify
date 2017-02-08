@@ -16,6 +16,7 @@
       div(
         class="expansion-panel__body"
         v-show="isActive"
+        ref="body"
       )
         slot
 </template>
@@ -40,17 +41,25 @@
         return {
           'expansion-panel__header--active': this.isActive
         }
-      },
-      styles () {
-        return {
-          height: `${this.height}px`
-        }
+      }
+    },
+
+    mounted () {
+      // TODO: This is temporary, replace
+      if (this.value) {
+        this.$vuetify.load(() => {
+          setTimeout(() => {
+            this.$refs.body.style.height = `${this.$refs.body.clientHeight}px`
+          }, 1000)
+        })
       }
     },
 
     methods: {
       closeConditional (e) {
-        return this.$parent.$el.contains(e.target) && !this.$parent.expand
+        return this.$parent.$el.contains(e.target) && 
+          !this.$parent.expand &&
+          !this.$el.contains(e.target)
       },
 
       enter (el, done) {

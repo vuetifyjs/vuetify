@@ -4,9 +4,11 @@
   align-items: center
   padding: 0
   margin: 0
+  height: 40px
+  align-items: center
   
   a
-    transition: $secondary-transition
+    transition: .3s $transition.linear-out-slow-in
     
     &:hover
       @extend .z-depth-1
@@ -29,17 +31,15 @@
     justify-content: center
     align-items: center
     background: transparent
-    height: 2rem
-    width: 2rem
+    height: 34px
+    width: 34px
     margin: .3rem
     text-decoration: none
-    transform: scale(.8)
     
     &--active
       @extend .z-depth-2
       background: $theme.primary
       color: #FFFFFF
-      transform: scale(1.15)
     
   &__navigation
     @extend .z-depth-1
@@ -52,7 +52,7 @@
     
     border-radius: 4px
     width: 2rem
-    margin: .3rem
+    margin: .3rem 15px
     
     .icon
       font-size: 2rem

@@ -36,22 +36,16 @@
     
   &--close
     transform: translateX(-($sidebar-width + 25))
-    flex-basis: 0 !important
     
     &.sidebar--fixed-right
       transform: translateX($sidebar-width + 25)
     
   &--mobile
-    @media screen and (max-width: $grid-breakpoints.sm)
+    @media screen and (max-width: $grid-breakpoints.lg)
       transform: translateX(-($sidebar-width + 25))
-      flex-basis: 0 !important
       
       &.sidebar--fixed-right
         transform: translateX($sidebar-width + 25)
-    
-  .list    
-    li
-      // margin: 0
     
   .list__tile
     color: $sidebar-item-color
