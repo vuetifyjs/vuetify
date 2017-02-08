@@ -81,7 +81,7 @@
 
         return {
           'top': this.offsetY ? -c.height + pageY : a.height - c.height + pageY,
-          'left': this.offsetX ? -c.width + pageX : a.width - c.width + pageX,
+          'left': this.offsetX ? -c.width + pageX : pageX,
           'bottom': this.offsetY ? a.height + pageY : pageY,
           'right': this.offsetX ? a.width + pageX : pageX
         }
@@ -128,7 +128,7 @@
 
         return {
           top: a.top + this.offset[vert] + this.autoOffset + this.offscreen.vert,
-          left: a.left + this.offset[horiz] + this.offscreen.horiz
+          left: a.left + this.offset[horiz] + this.offscreen.horiz - (this.auto ? 9 : 0)
         }
       },
 
