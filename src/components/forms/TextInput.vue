@@ -29,7 +29,7 @@
     data () {
       return {
         focused: false,
-        inputValue: this.value
+        inputValue: this.value.toString()
       }
     },
 
@@ -60,7 +60,6 @@
       },
 
       value: {
-        type: String,
         required: false
       }
     },
