@@ -11,9 +11,25 @@
   overflow: hidden
   @extend .z-depth-3
   
+  &--bottom
+    top: initial !important
+    bottom: 0
+    border-radius: 0
+    box-shadow 0 -4px 15px 0 rgba(0, 0, 0, 0.2), 0 -6px 50px 0 rgba(0, 0, 0, 0.19)
+    width: 100%
+    margin: 0
+    max-width: none
+    
+    .card
+      border-radius: 0
+  
   .card
     .title
       margin: 0
 
   &__container
     position: relative
+    display: inline-block
+    
+  &__activator
+    display: inline-block

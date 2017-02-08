@@ -1,13 +1,20 @@
 <template lang="pug">
   div(class="modal__container")
 
-    div(v-on:click="isActive = !isActive" ref="button")
+    div(
+      class="modal__activator"
+      v-on:click="isActive = !isActive" 
+      ref="button"
+    )
       slot(name="button")
 
-    v-overlay(v-bind:active="isActive")
+    v-overlay(
+      v-bind:active="isActive"
+      v-bind:class="overlayClasses"
+    )
       component(
-        v-bind:is="transition"
-        v-bind:origin="origin"
+        v-bind:is="computedTransition"
+        v-bind:origin="computedOrigin"
       )
         div(
           class="modal"
@@ -29,6 +36,8 @@
     mixins: [Toggleable],
 
     props: {
+      bottom: Boolean,
+
       origin: {
         type: String,
         default: 'center center'
@@ -45,6 +54,28 @@
         return {
           'modal--active': this.isActive,
           'modal--bottom': this.bottom
+        }
+      },
+
+      computedOrigin () {
+        if (this.origin !== 'center center') {
+          return this.origin
+        }
+
+        return this.bottom ? 'bottom' : this.origin
+      },
+
+      computedTransition () {
+        if (this.transition !== 'v-modal-transition') {
+          return this.transition
+        }
+
+        return this.bottom ? 'v-slide-y-transition' : this.transition
+      },
+
+      overlayClasses () {
+        return {
+          'overlay--modal-bottom': this.bottom
         }
       }
     },
