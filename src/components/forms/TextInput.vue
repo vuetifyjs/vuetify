@@ -29,7 +29,7 @@
     data () {
       return {
         focused: false,
-        inputValue: this.value.toString()
+        inputValue: this.value ? this.value.toString() : null
       }
     },
 
