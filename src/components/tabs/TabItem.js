@@ -60,9 +60,6 @@ export default {
         {
           name: 'ripple',
           value: this.ripple || false
-        },
-        {
-          name: 'click-outside'
         }
       ]
     }
