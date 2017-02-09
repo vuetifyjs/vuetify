@@ -65,7 +65,6 @@ function directive (el, binding, v) {
   if (binding.value === false) return
 
   if ('ontouchstart' in window) {
-    // el.addEventListener('touchstart', e => ripple.show(e, el, binding), false)
     el.addEventListener('touchend', () => ripple.hide(el), false)
     el.addEventListener('touchcancel', () => ripple.hide(el), false)
   }
