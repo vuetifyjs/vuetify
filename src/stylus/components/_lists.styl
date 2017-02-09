@@ -15,6 +15,7 @@
     color: $grey.darken-1
     font-weight: $list-sub-header-font-weight
     padding: 0 $list-right-padding 0 $list-left-padding
+    pointer-events: none
     
     &--inset
       margin-left: $list-sub-header-inset-margin
@@ -24,9 +25,6 @@
   
   &__item
     position: relative
-    
-    li.disabled
-      pointer-events: none
       
   &__tile
     color: $color-root

@@ -1,6 +1,6 @@
 <template lang="pug">
   div(
-    class="list--group__container" 
+    class="list--group__container"
     v-click-outside="closeConditional"
   )
     div(
@@ -52,10 +52,6 @@
         return closestParentTag.call(this, 'v-list')
       },
 
-      sidebar () {
-        return closestParentTag.call(this, 'v-sidebar')
-      },
-
       styles () {
         return {
           height: `${this.height}px`
@@ -91,23 +87,7 @@
 
     methods: {
       closeConditional (e) {
-        const target = e.target
-
-        if (this.sidebar) {
-          if (!this.sidebar.$el.contains(target)) {
-            return false
-          } else {
-            if (target.classList.contains('list--group__header--active') ||
-              target.parentNode.classList.contains('list--group__header--active')
-            ) {
-              return true
-            } else {
-              return false
-            }
-          }
-        }
-
-        return this.list.$el.contains(target)
+        return this.list.$el.contains(e.target)
       },
 
       enter (el, done) {
