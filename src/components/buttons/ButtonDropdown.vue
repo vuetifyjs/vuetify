@@ -3,24 +3,41 @@
     class="btn-dropdown"
     v-bind:class="classes"
   )
+    input(
+      v-if="editable" 
+      ref="input"
+      v-bind:class="{ 'active': isActive }"
+      v-on:click.stop="isActive = true"
+      v-on:keyup.enter="updateValue(editableValue)"
+      v-model="editableValue"
+    )
     v-menu(
       v-bind:auto="!overflow && !segmented && !editable"
       v-bind:right="!overflow && !segmented && !editable"
       v-bind:max-height="maxHeight"
       v-bind:offset-y="overflow || segmented || editable"
+      v-model="isActive"
       bottom
     )
       v-btn(
-        v-bind:class="{ 'btn--active': active, 'btn--editable': active && editable }"
+        v-bind:class="{ 'btn--active': isActive, 'btn--editable': isActive && editable }"
         slot="activator"
       )
         span(v-if="inputValue.title" v-text="inputValue.title")
         v-icon(v-if="inputValue.action") {{ inputValue.action }}
-        v-icon(class="btn-dropdown__arrow" v-on:click="active = !active") arrow_drop_down
+        v-icon(
+          class="btn-dropdown__arrow" 
+          v-on:click.native.stop="isActive = !isActive"
+        ) arrow_drop_down
       v-list
         v-list-item(v-for="(item, index) in items")
-          v-list-tile(v-bind:class="{ 'list__tile--active': inputValue === item }" v-on:click.native="updateValue(item)")
-            v-list-tile-content
+          v-list-tile(
+            v-bind:class="{ 'list__tile--active': inputValue === item }" 
+            v-on:click.native="updateValue(item)"
+          )
+            v-list-tile-action(v-if="item.action")
+              v-icon {{ item.action }}
+            v-list-tile-content(v-if="item.title")
               v-list-tile-title {{ item.title }}
 </template>
 
@@ -30,7 +47,7 @@
 
     data () {
       return {
-        active: false,
+        isActive: false,
         inputValue: { title: this.placeholder },
         editableValue: ''
       }
@@ -86,10 +103,6 @@
         return this.items
       },
 
-      id () {
-        return 'btn-dropdown-' + this._uid
-      },
-
       index () {
         return this.items.findIndex(i => i === this.inputValue)
       }
@@ -100,12 +113,10 @@
     },
 
     watch: {
-      active () {
+      isActive () {
         if (this.editable) {
-          if (!this.active) {
-            setTimeout(() => this.$refs.input.select(), 0)
-          } else {
-            this.editableValue = this.inputValue.title
+          if (!this.isActive) {
+            this.$refs.input.blur()
           }
         }
       },
@@ -125,7 +136,7 @@
 
     methods: {
       toggle (active) {
-        this.active = active
+        this.isActive = active
       },
 
       updateValue (obj) {
@@ -141,6 +152,8 @@
           this.editableValue = obj.title
           this.inputValue = obj
         }
+
+        this.isActive = false
       }
     }
   }

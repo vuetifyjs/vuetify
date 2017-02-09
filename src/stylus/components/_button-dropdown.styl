@@ -1,18 +1,22 @@
 .btn-dropdown
   display: inline-block
+  position: relative
   
   input
     background: transparent
     font-size: $button-dropdown-font-size
     font-weight: $button-dropdown-font-weight
-    height: 100%
+    height: calc(100% - 2px)
     left: 0
     outline: none
     padding-left: $button-dropdown-input-padding-left
     position: absolute
-    top: 0
+    top: 1px
     width: $button-dropdown-input-width
     z-index: 2
+    
+    &.active
+      background: #fff
   
   .btn
     align-items: center
@@ -24,13 +28,10 @@
     font-size: $button-dropdown-font-size
     font-weight: $button-dropdown-font-weight
     justify-content: space-between
-    min-width: $button-min-width
+    width: 100%
     padding: 0
     text-transform: initial
-    
-    &--editable
-      > span
-        opacity: 0
+    z-index: 1
     
   .icon:not(.btn-dropdown__arrow)
     padding: 0 6px
@@ -52,10 +53,6 @@
       top: 0
       width: 1px
       
-  &--editable
-    .btn--active
-      pointer-events: none
-      
   &--overflow, &--editable
     .btn
       border-top: 1px solid $material-twelve-percent-dark
@@ -70,7 +67,6 @@
         background: $button-dropdown-background
         border-top-left-radius: 2px
         border-top-right-radius: 2px
-        z-index: 1
         @extend .z-depth-2
         
         &:after
@@ -80,9 +76,15 @@
           top: initial
           
         .btn-dropdown__arrow
-          transform: rotate(180deg)
-          
-    .menu
-      border-top: 1px solid $material-twelve-percent-dark
-      border-top-left-radius: 0
-      border-top-right-radius: 0
+          transform: rotate(-180deg)
+  
+  &--overflow, &--editable, &--segmented
+    .btn
+      margin: 0
+      
+  &--editable
+    .btn
+      pointer-events: none
+      
+      span
+        opacity: 0

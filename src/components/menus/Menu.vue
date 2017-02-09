@@ -5,7 +5,7 @@
 
     div(
       class="menu__activator"
-      v-on:click="activate"
+      v-on:click="isActive = true"
       ref="activator"
       v-click-outside
     )
@@ -35,7 +35,7 @@
 
     data () {
       return {
-        autoAdjustment: 9,
+        autoAdjustment: 10,
         dimensions: {
           activator: { top: 0, left: 0, bottom: 0, right: 0, height: 0, width: 0, offsetTop: 0 },
           content: { top: 0, left: 0, bottom: 0, right: 0, height: 0, width: 0, offsetTop: 0 },
@@ -65,6 +65,16 @@
       transition: {
         type: String,
         default: 'v-menu-transition'
+      }
+    },
+
+    watch: {
+      isActive () {
+        if (this.isActive) {
+          this.activate()
+        }
+
+        this.$emit('input', this.isActive)
       }
     },
 
@@ -136,9 +146,7 @@
       styles () {
         return {
           top: `${this.position.top}px`,
-          left: `${this.position.left}px`,
-          maxHeight: isNaN(this.maxHeight) ? this.maxHeight : `${this.maxHeight}px`,
-          minWidth: `${this.minWidth}px`
+          left: `${this.position.left}px`
         }
       }
     },
@@ -161,8 +169,7 @@
       updateDimensions () {
         this.sneakPeek()
 
-        this.minWidth = this.$el.clientWidth + (this.auto ? this.autoAdjustment : 0)
-        this.$refs.content.style.minWidth = `${this.minWidth}px`
+        this.$refs.content.style.minWidth = `${this.$el.clientWidth + (this.auto ? this.autoAdjustment : 0)}px`
         this.$refs.content.style.maxHeight = isNaN(this.maxHeight) ? this.maxHeight : `${this.maxHeight}px`
         this.dimensions = {
           'activator': this.rect(this.$refs.activator),
