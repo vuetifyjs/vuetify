@@ -6,6 +6,7 @@
       v-click-outside="closeConditional"
       v-on:click="isActive = !isActive"
       v-if="$slots.header"
+      v-ripple="ripple"
     )
       slot(name="header")
 
@@ -34,6 +35,10 @@
       return {
         height: 'auto'
       }
+    },
+
+    props: {
+      ripple: Boolean
     },
 
     computed: {
