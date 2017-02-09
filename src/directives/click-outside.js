@@ -17,16 +17,12 @@ export default {
   bind (el, binding, v) {
     const click = e => directive(e, el, binding, v)
 
-    if (typeof window.orientation !== 'undefined') {
-      document.addEventListener('touchstart', click, false)
-    } else {
-      document.addEventListener('click', click, false)
-    }
+    document.body.firstChild.addEventListener('click', click, false)
 
     el._clickOutside = click
   },
 
   unbind (el) {
-    document.removeEventListener('click', el._clickOutside, false)
+    document.body.firstChild.removeEventListener('click', el._clickOutside, false)
   }
 }
