@@ -1,13 +1,13 @@
 <template lang="pug">
   div(
     class="menu"
-    v-click-outside
   )
 
     div(
       class="menu__activator"
       v-on:click="activate"
       ref="activator"
+      v-click-outside
     )
       slot(name="activator")
 
@@ -81,7 +81,7 @@
 
         return {
           'top': this.offsetY ? -c.height + pageY : a.height - c.height + pageY,
-          'left': this.offsetX ? -c.width + pageX : pageX,
+          'left': this.offsetX ? -c.width + pageX : a.width - c.width + pageX,
           'bottom': this.offsetY ? a.height + pageY : pageY,
           'right': this.offsetX ? a.width + pageX : pageX
         }
@@ -161,6 +161,8 @@
         this.sneakPeek()
 
         this.minWidth = this.$el.clientWidth
+        this.$refs.content.style.minWidth = `${this.minWidth}px`
+        this.$refs.content.style.maxHeight = isNaN(this.maxHeight) ? this.maxHeight : `${this.maxHeight}px`
         this.dimensions = {
           'activator': this.rect(this.$refs.activator),
           'content': this.rect(this.$refs.content),
