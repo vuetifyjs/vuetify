@@ -91,11 +91,23 @@
 
     methods: {
       closeConditional (e) {
+        const target = e.target
+
         if (this.sidebar) {
-          return this.sidebar.$el.contains(e.target)
+          if (!this.sidebar.$el.contains(target)) {
+            return false
+          } else {
+            if (target.classList.contains('list--group__header--active') ||
+              target.parentNode.classList.contains('list--group__header--active')
+            ) {
+              return true
+            } else {
+              return false
+            }
+          }
         }
 
-        return this.list.$el.contains(e.target)
+        return this.list.$el.contains(target)
       },
 
       enter (el, done) {

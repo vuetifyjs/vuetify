@@ -153,7 +153,7 @@
 
     mounted () {
       // Move content to beginning of the document (for more functionality).
-      document.body.insertBefore(this.$refs.content, document.body.firstChild)
+      document.body.appendChild(this.$refs.content)
     },
 
     methods: {

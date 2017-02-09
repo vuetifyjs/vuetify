@@ -23,7 +23,10 @@
         v-bind:class="{ 'btn--active': isActive, 'btn--editable': isActive && editable }"
         slot="activator"
       )
-        span(v-if="inputValue.title" v-text="inputValue.title")
+        span(
+          v-if="inputValue.title" 
+          v-text="inputValue.title"
+        )
         v-icon(v-if="inputValue.action") {{ inputValue.action }}
         v-icon(
           class="btn-dropdown__arrow" 
