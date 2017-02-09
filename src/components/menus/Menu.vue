@@ -35,6 +35,7 @@
 
     data () {
       return {
+        autoAdjustment: 9,
         dimensions: {
           activator: { top: 0, left: 0, bottom: 0, right: 0, height: 0, width: 0, offsetTop: 0 },
           content: { top: 0, left: 0, bottom: 0, right: 0, height: 0, width: 0, offsetTop: 0 },
@@ -128,7 +129,7 @@
 
         return {
           top: a.top + this.offset[vert] + this.autoOffset + this.offscreen.vert,
-          left: a.left + this.offset[horiz] + this.offscreen.horiz - (this.auto ? 9 : 0)
+          left: a.left + this.offset[horiz] + this.offscreen.horiz - (this.auto ? this.autoAdjustment : 0)
         }
       },
 
@@ -160,7 +161,7 @@
       updateDimensions () {
         this.sneakPeek()
 
-        this.minWidth = this.$el.clientWidth
+        this.minWidth = this.$el.clientWidth + (this.auto ? this.autoAdjustment : 0)
         this.$refs.content.style.minWidth = `${this.minWidth}px`
         this.$refs.content.style.maxHeight = isNaN(this.maxHeight) ? this.maxHeight : `${this.maxHeight}px`
         this.dimensions = {
