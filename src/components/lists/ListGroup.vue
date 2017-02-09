@@ -92,12 +92,7 @@
     methods: {
       closeConditional (e) {
         if (this.sidebar) {
-          if (e.target.classList.contains('list__tile')) {
-            return this.list.$el.contains(e.target)
-          }
-
-          return !this.sidebar.$el.contains(e.target) && 
-            this.list.$el.contains(e.target)
+          return this.sidebar.$el.contains(e.target)
         }
 
         return this.list.$el.contains(e.target)
