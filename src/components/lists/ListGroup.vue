@@ -87,6 +87,10 @@
 
     methods: {
       closeConditional (e) {
+        if(this.list.$el === e.target) {
+          return false
+        }
+
         return this.list.$el.contains(e.target)
       },
 
