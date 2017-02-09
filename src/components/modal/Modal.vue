@@ -4,9 +4,9 @@
     div(
       class="modal__activator"
       v-on:click="isActive = !isActive" 
-      ref="button"
+      ref="activator"
     )
-      slot(name="button")
+      slot(name="activator")
 
     v-overlay(
       v-bind:active="isActive"
@@ -84,8 +84,8 @@
       closeConditional (e) {
         return this.$refs.modal !== e.target &&
           !this.$refs.modal.contains(e.target) &&
-          this.$refs.button !== e.target &&
-          !this.$refs.button.contains(e.target)
+          this.$refs.activator !== e.target &&
+          !this.$refs.activator.contains(e.target)
       }
     }
   }
