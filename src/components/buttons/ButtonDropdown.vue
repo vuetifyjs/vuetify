@@ -26,6 +26,7 @@
         span(
           v-if="inputValue.title" 
           v-text="inputValue.title"
+          class="btn-dropdown__title"
         )
         v-icon(v-if="inputValue.action") {{ inputValue.action }}
         v-icon(

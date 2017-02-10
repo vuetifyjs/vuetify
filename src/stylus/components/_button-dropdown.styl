@@ -1,5 +1,5 @@
 .btn-dropdown
-  display: inline-block
+  display: block
   position: relative
   
   input
@@ -17,6 +17,9 @@
     
     &.active
       background: #fff
+      
+  .menu, .menu__activator
+    width: 100%
   
   .btn
     align-items: center
@@ -33,15 +36,20 @@
     text-transform: initial
     z-index: 1
     
+    .btn__content
+      justify-content: space-between
+    
   .icon:not(.btn-dropdown__arrow)
     padding: 0 6px
     
   &__arrow
     color: $grey.base
-    margin-left: 24px
-    margin-right: -9px
-    transition: $primary-transition
     cursor: pointer
+    position: absolute
+    right: 7px
+    top: 50%
+    transform: translateY(-50%)
+    transition: $primary-transition
       
   &--segmented .btn, &--editable .btn--active
     &:before
@@ -76,7 +84,7 @@
           top: initial
           
         .btn-dropdown__arrow
-          transform: rotate(-180deg)
+          transform: rotate(-180deg) translateY(50%)
   
   &--overflow, &--editable, &--segmented
     .btn
@@ -86,5 +94,5 @@
     .btn
       pointer-events: none
       
-      span
+      &-dropdown__title
         opacity: 0
