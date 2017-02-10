@@ -29,16 +29,48 @@
     
   &:disabled
     box-shadow: none !important
-    color: $button-disabled-color !important
+    color: $button-disabled-color
     background-color: $button-disabled-background-color !important
+    pointer-events: none
   
   &:focus
     &:after
-      background-color: $button-focus-background-color
+      background-color: $button-focus-background-color !important
     
-  &:disabled
-    color: rgba(#000000, .26)
+  &--loader
     pointer-events: none
+    
+    .btn__content
+      opacity: 0
+      
+    &:disabled
+      color: initial
+    
+  &__content
+    display: flex
+    justify-content: center
+    align-items: center
+    transition: $primary-transition
+    flex: 1
+    
+  &__loading
+    position: absolute
+    width: 100%
+    height: 100%
+    left: 0
+    top: 0
+    display: flex
+    justify-content: center
+    align-items: center
+    
+    .icon
+      &--left
+        margin-right: 1rem
+        line-height: inherit
+      
+      &--right
+        margin-left: 1rem
+        line-height: inherit
     
   &--dark
     color: $button-dark-color
@@ -50,6 +82,10 @@
   &--small
     font-size: $button-small-font-size
     height: $button-small-height
+    
+  &--large
+    font-size: $button-large-font-size
+    height: $button-large-height
 
   &--flat
     background-color: transparent
@@ -118,9 +154,20 @@
       height: $button-floating-small-width
       width: $button-floating-small-width
       
+      .icon
+        font-size: $button-floating-small-icon-width
+        height: $button-floating-small-icon-width
+        width: $button-floating-small-icon-width
+        
+      
     &.btn--large
       height: $button-floating-large-width
       width: $button-floating-large-width
+      
+      .icon
+        font-size: $button-floating-large-icon-width
+        height: $button-floating-large-icon-width
+        width: $button-floating-large-icon-width
       
   &--outline
     border: 1px solid currentColor
@@ -133,6 +180,7 @@
   &--block
     display: flex
     flex: 1
+    width: 100%
     
   &--round
     border-radius: 28px

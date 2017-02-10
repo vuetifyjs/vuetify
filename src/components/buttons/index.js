@@ -1,4 +1,4 @@
-import Btn from './Button'
+import Btn from './Button.vue'
 import BtnDropdown from './ButtonDropdown.vue'
 import BtnToggle from './ButtonToggle.vue'
 
