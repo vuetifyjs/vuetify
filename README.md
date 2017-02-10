@@ -3,6 +3,7 @@
 <a href="https://www.npmjs.com/package/vuetify"><img src="https://img.shields.io/npm/dt/vuetify.svg" alt="Downloads"></a>
   <a href="https://www.npmjs.com/package/vuetify"><img src="https://img.shields.io/npm/v/vuetify.svg" alt="Version"></a>
   <a href="https://www.npmjs.com/package/vuetify"><img src="https://img.shields.io/npm/l/vuetify.svg" alt="License"></a>
+  <a href="https://gitter.im/vuetifyjs"><img src="https://img.shields.io/gitter/room/vuetifyjs/home.svg" alt="Gitter Chat"></a>
 </p>
 <p align="center">
   <strong>Vuetify.js is proudly sponsored by:</strong>
