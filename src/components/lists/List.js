@@ -1,6 +1,13 @@
 export default {
   name: 'list',
 
+  data () {
+    return {
+      uid: null,
+      groups: []
+    }
+  },
+
   props: {
     dense: Boolean,
 
@@ -20,6 +27,30 @@ export default {
         'list--three-line': this.threeLine,
         'list--sub-header': this.subHeader
       }
+    }
+  },
+
+  watch: {
+    uid () {
+      this.groups.forEach(i => i.toggle(this.uid))
+    }
+  },
+
+  mounted () {
+    this.init()
+  },
+
+  methods: {
+    init () {
+      this.$children.forEach(i => {
+        if (i.$options._componentTag === 'v-list-group') {
+          this.groups.push(i)
+        }
+      })
+    },
+
+    listClick (uid) {
+      this.uid = this.uid === uid ? null : uid
     }
   },
 

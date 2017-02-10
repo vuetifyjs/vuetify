@@ -1,12 +1,11 @@
 <template lang="pug">
   div(
     class="list--group__container"
-    v-click-outside="closeConditional"
   )
     div(
       class="list--group__header"
       v-bind:class="classes"
-      v-on:click="toggle"
+      v-on:click="click"
     )
       slot(name="item")
 
@@ -82,16 +81,20 @@
         this.isActive = this.matchRoute(this.$route.path)
       }
 
+      if (this.isActive) {
+        this.list.listClick(this._uid)
+      }
+
       this.height = this.$refs.group.scrollHeight
     },
 
     methods: {
-      closeConditional (e) {
-        if(this.list.$el === e.target) {
-          return false
-        }
+      click () {
+        this.list.listClick(this._uid)
+      },
 
-        return this.list.$el.contains(e.target)
+      toggle (uid) {
+        this.isActive = this._uid === uid
       },
 
       enter (el, done) {
@@ -111,10 +114,6 @@
 
       matchRoute (to) {
         return to.match(this.group) !== null
-      },
-
-      toggle () {
-        this.isActive = !this.isActive
       }
     }
   }
