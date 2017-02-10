@@ -7,6 +7,7 @@
       v-if="editable" 
       ref="input"
       v-bind:class="{ 'active': isActive }"
+      v-bind:placeholder="placeholder"
       v-on:click.stop="isActive = true"
       v-on:keyup.enter="updateValue(editableValue)"
       v-model="editableValue"
@@ -24,25 +25,25 @@
         slot="activator"
       )
         span(
-          v-if="inputValue.title" 
+          v-if="inputValue && inputValue.title"
           v-text="inputValue.title"
           class="btn-dropdown__title"
         )
-        v-icon(v-if="inputValue.action") {{ inputValue.action }}
+        v-icon(v-if="inputValue && inputValue.action") {{ inputValue.action }}
         v-icon(
           class="btn-dropdown__arrow" 
           v-on:click.native.stop="isActive = !isActive"
         ) arrow_drop_down
       v-list
-        v-list-item(v-for="(item, index) in items")
+        v-list-item(v-for="(option, index) in options")
           v-list-tile(
-            v-bind:class="{ 'list__tile--active': inputValue === item }" 
-            v-on:click.native="updateValue(item)"
+            v-bind:class="{ 'list__tile--active': inputValue === option }" 
+            v-on:click.native="updateValue(option)"
           )
-            v-list-tile-action(v-if="item.action")
-              v-icon {{ item.action }}
-            v-list-tile-content(v-if="item.title")
-              v-list-tile-title {{ item.title }}
+            v-list-tile-action(v-if="option.action")
+              v-icon {{ option.action }}
+            v-list-tile-content(v-if="option.title")
+              v-list-tile-title {{ option.title }}
 </template>
 
 <script>
@@ -52,7 +53,7 @@
     data () {
       return {
         isActive: false,
-        inputValue: { title: this.placeholder },
+        inputValue: this.value || { title: this.placeholder },
         editableValue: ''
       }
     },
@@ -60,7 +61,7 @@
     props: {
       editable: Boolean,
 
-      items: {
+      options: {
         type: Array,
         default: () => []
       },
@@ -95,20 +96,20 @@
 
       computedItems () {
         if (this.editable) {
-          return this.items
+          return this.options
         }
 
         if (this.index !== -1 &&
           (this.overflow || this.segmented || this.editable)
         ) {
-          return this.items.filter((obj, i) => i !== this.index)
+          return this.options.filter((obj, i) => i !== this.index)
         }
 
-        return this.items
+        return this.options
       },
 
       index () {
-        return this.items.findIndex(i => i === this.inputValue)
+        return this.options.findIndex(i => i === this.inputValue)
       }
     },
 

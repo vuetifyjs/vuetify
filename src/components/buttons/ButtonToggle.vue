@@ -4,15 +4,15 @@
     v-bind:class="classes"
   )
     v-btn(
-      v-for="(item, index) in items"
-      v-on:click.native.stop="updateValue(item)"
-      v-bind:data-selected="isSelected(item)"
+      v-for="(option, index) in options"
+      v-on:click.native.stop="updateValue(option)"
+      v-bind:data-selected="isSelected(option)"
       v-bind:data-index="index"
-      v-bind:data-only-child="isSelected(item) && (!multiple || inputValue.length === 1)"
+      v-bind:data-only-child="isSelected(option) && (!multiple || inputValue.length === 1)"
       flat
     )
-      span(v-if="item.text" v-text="item.text")
-      v-icon(v-if="item.icon") {{ item.icon }}
+      span(v-if="option.text" v-text="option.text")
+      v-icon(v-if="option.icon") {{ option.icon }}
 </template>
 
 <script>
@@ -26,7 +26,7 @@
     },
 
     props: {
-      items: {
+      options: {
         type: Array,
         default: () => []
       },
