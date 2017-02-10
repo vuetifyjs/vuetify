@@ -34,7 +34,7 @@ export default {
         return this.height
       }
 
-      return this.fixed ? '100vh' : 'auto'
+      return this.fixed || this.drawer ? '100vh' : 'auto'
     },
 
     classes () {
