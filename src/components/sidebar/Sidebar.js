@@ -15,10 +15,7 @@ export default {
 
     fixed: Boolean,
 
-    height: {
-      type: String,
-      default: '100vh'
-    },
+    height: String,
 
     mobile: {
       type: Boolean,
@@ -32,6 +29,14 @@ export default {
   },
 
   computed: {
+    calculatedHeight () {
+      if (this.height) {
+        return this.height
+      }
+
+      return this.fixed ? '100vh' : 'auto'
+    },
+
     classes () {
       return {
         'sidebar': true,
@@ -46,7 +51,7 @@ export default {
 
     styles () {
       return {
-        'height': this.height
+        'height': this.calculatedHeight
       }
     }
   },
