@@ -25,8 +25,8 @@
         slot="activator"
       )
         span(
-          v-if="inputValue && inputValue.title"
-          v-text="inputValue.title"
+          v-if="inputValue && inputValue.text"
+          v-text="inputValue.text"
           class="btn-dropdown__title"
         )
         v-icon(v-if="inputValue && inputValue.action") {{ inputValue.action }}
@@ -42,8 +42,8 @@
           )
             v-list-tile-action(v-if="option.action")
               v-icon {{ option.action }}
-            v-list-tile-content(v-if="option.title")
-              v-list-tile-title {{ option.title }}
+            v-list-tile-content(v-if="option.text")
+              v-list-tile-title {{ option.text }}
 </template>
 
 <script>
@@ -53,7 +53,7 @@
     data () {
       return {
         isActive: false,
-        inputValue: this.value || { title: this.placeholder },
+        inputValue: this.value || { text: this.placeholder },
         editableValue: ''
       }
     },
@@ -114,7 +114,7 @@
     },
 
     mounted () {
-      this.editableValue = this.inputValue.title
+      this.editableValue = this.inputValue.text
     },
 
     watch: {
@@ -154,7 +154,7 @@
         this.$emit('input', obj)
 
         if (this.editable) {
-          this.editableValue = obj.title
+          this.editableValue = obj.text
           this.inputValue = obj
         }
 

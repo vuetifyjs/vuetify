@@ -27,9 +27,11 @@
     height: 100%
     transition: $primary-transition
     
+  &:disabled:not(.btn--loader)
+    color: $button-disabled-color !important
+    
   &:disabled
     box-shadow: none !important
-    color: $button-disabled-color
     background-color: $button-disabled-background-color !important
     pointer-events: none
   
@@ -184,6 +186,9 @@
     
   &--round
     border-radius: 28px
+    
+    &:after
+      border-radius: 28px
     
   &--progress
     box-shadow: none
