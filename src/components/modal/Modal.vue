@@ -5,6 +5,7 @@
       class="modal__activator"
       v-on:click="isActive = !isActive" 
       ref="activator"
+      v-show="$slots.activator"
     )
       slot(name="activator")
 
