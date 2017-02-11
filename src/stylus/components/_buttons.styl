@@ -101,7 +101,7 @@
     &:after
       border-radius: 50%
     
-    &:focus, &:active
+    &:hover
       border-radius: 50%
       
       &:after
@@ -110,6 +110,8 @@
         
     &:disabled
       background-color: transparent !important
+      color: $button-light-disabled-color !important
+      pointer-events: none
 
   &--floating
     border-radius: 50%
