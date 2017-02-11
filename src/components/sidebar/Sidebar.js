@@ -15,6 +15,8 @@ export default {
 
     fixed: Boolean,
 
+    right: Boolean,
+    
     height: String,
 
     mobile: {
