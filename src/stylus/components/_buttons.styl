@@ -64,9 +64,6 @@
     background-color: transparent
     box-shadow: none !important
     color: $color-root
-    
-    &:disabled
-      color: $button-flat-disabled-color
       
     &.btn--light
       &:hover:after
@@ -154,18 +151,22 @@
       background-color: $button-light-overlay
       
     &:disabled
-      background-color: $button-light-overlay !important
       color: $button-light-disabled-color !important
       opacity: 1
+    
+    &:disabled:not(.btn--flat)
+      background-color: $button-light-overlay !important
 
   &--dark
     &:hover:after
       background-color: $button-dark-overlay
 
     &:disabled
-      background-color: $button-dark-overlay !important
       color: $button-dark-disabled-color !important
       opacity: 1
+      
+    &:disabled:not(.btn--flat)
+      background-color: $button-dark-overlay !important
 
 /** Sizes */
 .btn
