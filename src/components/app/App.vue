@@ -3,6 +3,7 @@
     class="with"
     v-bind:id="id"
     v-bind:class="classes"
+    data-app
   )
     slot
 </template>

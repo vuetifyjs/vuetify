@@ -16,12 +16,12 @@ export default {
   bind (el, binding, v) {
     const click = e => directive(e, el, binding, v)
 
-    document.body.firstChild.addEventListener('click', click, false)
+    document.querySelector('[data-app]').addEventListener('click', click, false)
 
     el._clickOutside = click
   },
 
   unbind (el) {
-    document.body.firstChild.removeEventListener('click', el._clickOutside, false)
+    document.querySelector('[data-app]').removeEventListener('click', el._clickOutside, false)
   }
 }
