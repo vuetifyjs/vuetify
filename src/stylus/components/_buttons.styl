@@ -1,3 +1,4 @@
+/** Base Spec */
 .btn
   align-items: center
   background: $grey.lighten-2
@@ -17,105 +18,79 @@
   transition: $primary-transition
   position: relative
   vertical-align: middle
-  
+
+
+/** Psuedo */
+.btn
+  &:hover:after
+    background: $button-dark-overlay
+
   &:after
-    position: absolute
+    bottom: 0
     content: ''
-    top: 0
     left: 0
-    width: 100%
-    height: 100%
+    position: absolute
+    top: 0
+    right: 0
     transition: $primary-transition
-    
-  &:disabled:not(.btn--loader)
-    color: $button-disabled-color !important
-    
+    z-index: 0
+
   &:disabled
     box-shadow: none !important
-    background-color: $button-disabled-background-color !important
     pointer-events: none
-  
-  &:focus
-    &:after
-      background-color: $button-focus-background-color !important
+    opacity: .4
     
-  &--loader
-    pointer-events: none
-    
-    .btn__content
-      opacity: 0
-      
-    &:disabled
-      color: initial
-    
+    &:not(.btn--loader)
+      color: $button-dark-disabled-color
+
+
+/** Content */
+.btn
   &__content
-    display: flex
-    justify-content: center
     align-items: center
-    transition: $primary-transition
+    display: flex
     flex: 1
-    
-  &__loading
-    position: absolute
-    width: 100%
-    height: 100%
-    left: 0
-    top: 0
-    display: flex
     justify-content: center
-    align-items: center
-    
-    .icon
-      &--left
-        margin-right: 1rem
-        line-height: inherit
-      
-      &--right
-        margin-left: 1rem
-        line-height: inherit
-    
-  &--dark
-    color: $button-dark-color
-    
-    &:disabled
-      color: $button-disabled-dark-color !important
-      background-color: $button-disabled-dark-background-color !important
-      
-  &--small
-    font-size: $button-small-font-size
-    height: $button-small-height
-    
-  &--large
-    font-size: $button-large-font-size
-    height: $button-large-height
+    transition: $primary-transition
+    z-index: 1
+
+
+/** Types */
+.btn
+  &--default
+    color: $color-root
 
   &--flat
     background-color: transparent
     box-shadow: none !important
+    color: $color-root
     
-    &:focus
-      &:after
-        background-color: $button-flat-focus-background-color
-    
-    &:active
-      &:after
-        background: $button-flat-active-background-color
-      
     &:disabled
       color: $button-flat-disabled-color
       
-    &.btn--dark
+    &.btn--light
+      &:hover:after
+        background-color: $button-light-overlay
+
       &:disabled
-        color: $button-flat-dark-disabled-color
+        color: $button-light-disabled-color
+
+    &.btn--dark
+      color: $button-color
+
+      &:hover:after
+        background-color: $button-dark-overlay
         
+      &:disabled
+        color: $button-dark-disabled-color
+
   &--raised
     will-change: box-shadow
-    
     @extend .z-depth-1
-    
+
     &:active
       @extend .z-depth-2
-      
+
   &--icon
     background: transparent
     box-shadow: none !important
@@ -133,12 +108,12 @@
       border-radius: 50%
       
       &:after
-        background-color: currentColor !important
+        background-color: currentColor
         opacity: .12
         
     &:disabled
       background-color: transparent !important
-      
+
   &--floating
     border-radius: 50%
     min-width: auto
@@ -170,7 +145,69 @@
         font-size: $button-floating-large-icon-width
         height: $button-floating-large-icon-width
         width: $button-floating-large-icon-width
+
+
+/** Themes */
+.btn
+  &--light
+    &:hover:after
+      background-color: $button-light-overlay
       
+    &:disabled
+      background-color: $button-light-overlay !important
+      color: $button-light-disabled-color !important
+      opacity: 1
+
+  &--dark
+    &:hover:after
+      background-color: $button-dark-overlay
+
+    &:disabled
+      background-color: $button-dark-overlay !important
+      color: $button-dark-disabled-color !important
+      opacity: 1
+
+/** Sizes */
+.btn
+  &--small
+    font-size: $button-small-font-size
+    height: $button-small-height
+
+  &--large
+    font-size: $button-large-font-size
+    height: $button-large-height
+
+
+/** Loader */
+.btn
+  &--loader
+    pointer-events: none
+    
+    .btn__content
+      opacity: 0
+
+  &__loading
+    position: absolute
+    width: 100%
+    height: 100%
+    left: 0
+    top: 0
+    display: flex
+    justify-content: center
+    align-items: center
+    
+    .icon
+      &--left
+        margin-right: 1rem
+        line-height: inherit
+      
+      &--right
+        margin-left: 1rem
+        line-height: inherit
+
+
+/** Custom Buttons */
+.btn
   &--outline
     border: 1px solid currentColor
     background: transparent
@@ -178,21 +215,21 @@
     
     &:hover
       box-shadow: none
-      
+
   &--block
     display: flex
     flex: 1
     width: 100%
-    
+
   &--round
     border-radius: 28px
     
     &:after
       border-radius: 28px
-    
-  &--progress
-    box-shadow: none
 
+
+/** Button w/ directional Icon */
+.btn
   .icon
     &--right
       margin-left: 16px
