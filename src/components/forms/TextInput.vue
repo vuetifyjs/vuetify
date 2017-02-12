@@ -4,7 +4,7 @@
     v-bind:class="classes"
   )
     label(
-      v-bind:for="id"
+      v-bind:for="id || name"
       v-html="label"
     )
     input(
@@ -37,15 +37,25 @@
       classes () {
         return {
           'input-group--focused': this.focused,
-          'input-group--dirty': this.value || this.placeholder
+          'input-group--dirty': this.value || this.placeholder,
+          'input-group--disabled': this.disabled,
+          'input-group--light': this.light && !this.dark,
+          'input-group--dark': this.dark
         }
       }
     },
 
     props: {
+      dark: Boolean,
+
       disabled: Boolean,
 
       label: String,
+
+      light: {
+        type: Boolean,
+        default: true
+      },
 
       id: String,
 
