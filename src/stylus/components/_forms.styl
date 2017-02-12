@@ -1,27 +1,10 @@
 /** Base Spec */
 .input-group
-  height: $input-group-height
+  display: flex
+  flex-wrap: wrap
+  margin: $input-group-margin
   position: relative
   width: 100%
-  
-  &:after, &:before
-    content: ''
-    position: absolute
-    left: 0
-  
-  &:after
-    background-color: $theme.primary
-    bottom: 7px
-    height: 2px
-    transition: .3s $transition.fast-out-slow-in
-    width: 0%
-    z-index: 1
-    
-  &:before
-    bottom: 8px
-    height: 1px
-    width: 100%
-    z-index: 0
 
 
 /** Label */
@@ -30,81 +13,135 @@
   font-size $input-font-size
   pointer-events: none
   position: absolute
-  transform: translate3d(0, 34px, 0)
+  transform: translate3d(0, 3px, 0)
   transform-origin: top left
   transition: .4s $transition.fast-in-fast-out
-  
+
+
 /** Input */
 .input-group input
   font-size: $input-font-size
-  margin-top: 36px
-  margin-bottom: 16px
-  height: 20px
-  transition: .3s $transition.ease-in-out
-  width: 100%
+  flex: 1
+  margin: 0
+  min-width: 0
+  height: $input-height
   
+  + .icon
+    padding: 0 6px
+    transition: .3s $transition.ease-in-out
+
   &:focus
     outline: none
     
+    + .icon
+      transform: rotate(-180deg)
+    
   &:disabled
     pointer-events: none
-      
+
+
+/** Hint Text */
+.input-group
+  &__hint
+    color: $theme.error
+    flex: 1 0 100%
+    font-size: 12px
+    min-height: 16px
+    position: relative
+    margin-top: 1px
+    padding-top: 4px
+    width: 100%
+
+    &:after, &:before
+      content: ''
+      position: absolute
+      left: 0
+
+    &:after
+      background-color: $theme.primary
+      top: -1.5px
+      height: 2px
+      transition: .3s $transition.fast-out-slow-in
+      width: 0%
+      z-index: 1
+
+    &:before
+      top: -1px
+      height: 1px
+      width: 100%
+      z-index: 0
 
 /** Themes */
 .input-group
   &--light
-    &:before
-      background-color: $material-twelve-percent-dark
-      
-    input
-      color: rgba(#000, .87)
-      
-      &:disabled
-        color: rgba(#000, .38)
-      
-    label
-      color: rgba(#000, .38)
+    input-group-theme($input-group-light-normal, #000, $input-group-light-focus, $material-twelve-percent-dark)
 
-    &.input-group--disabled:before
-      background-image: linear-gradient(to right, rgba(#000,0.38) 0, rgba(#000,0.38) 33%, transparent 0)
-      
-      
   &--dark
-    &:before
-      background-color: $material-twelve-percent-light
-      
-    input
-      color: #fff
-      
-      &:disabled
-        color: rgba(#fff, .5)
-      
-    label
-      color: rgba(#fff, .50)
-
-    &.input-group--disabled:before
-      background-image: linear-gradient(to right, rgba(#fff,0.38) 0, rgba(#fff,0.38) 33%, transparent 0)
-
+    input-group-theme($input-group-dark-normal, #fff, $input-group-dark-focus, $material-twelve-percent-light)
 
 /** Input States */
 .input-group
   &--focused
     label
       color: $theme.primary
-      transform: translate3d(0, 16px, 0) scale(.75)
+      transform: translate3d(0, -18px, 0) scale(.75)
 
-    &:after
-      width: 100%
+    .input-group__hint
+      &:after
+        width: 100%
 
   &--dirty
     label
-     transform: translate3d(0, 16px, 0) scale(.75)
+     transform: translate3d(0, -18px, 0) scale(.75)
      
-  &.input-group--disabled:before
+  &.input-group--disabled .input-group__hint:before
       background-color: transparent
       background-position: bottom
       background-size: 3px 1px
       background-repeat: repeat-x
+      
+
+/** Types */
+.input-group
+  &--error
+    .input-group__hint:after
+      background-color: $theme.error
+    
+  &--icon
+    .icon
+      align-items: center
+      display: flex
+      justify-content: flex-start
+      flex-basis: 56px
+      transition: .3s $transition.fast-in-fast-out
+     
+    .input-group__hint 
+      &:before, &:after
+        margin-left: 56px
+        max-width: calc(100% - 56px)
+
+    label
+      padding-left: 56px
+      
+    input
+      flex: auto
+      
+    &.input-group--focused
+      .icon
+        color: $theme.primary
+
+  &--single-line      
+    label
+      transform: translate3d(0,4px,0)
+      
+    &.input-group--dirty
+      label
+        display: none
+  
+  &__wrapper
+    display: flex
+    flex-basis: 100%
+    min-width: 0
 
 
 // .input-group

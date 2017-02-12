@@ -1,0 +1,34 @@
+input-group-theme(color, offset, dirty, background)
+  .input-group__hint:before
+    background-color: background
+
+  input
+    color: color
+    
+    + .icon
+      color: color
+
+    &:disabled
+      color: color
+    
+  label
+    color: color
+
+  &.input-group--disabled
+    input
+      color: color !important
+
+    .input-group__hint:before
+      background-image: linear-gradient(to right, rgba(offset,0.38) 0, rgba(offset,0.38) 33%, transparent 0)
+    
+  &.input-group--single-line&.input-group--focused
+    label
+      color: color
+    
+  &.input-group--icon
+    .icon
+      color: rgba(offset, .6)
+    
+  &.input-group--dirty
+    input
+      color: dirty

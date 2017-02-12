@@ -7,18 +7,24 @@
       v-bind:for="id || name"
       v-html="label"
     )
-    input(
-      v-bind:disabled="disabled"
-      v-bind:id="id"
-      v-bind:name="name"
-      v-bind:placeholder="placeholder"
-      v-bind:required="required"
-      v-bind:type="type"
-      v-bind:value="inputValue"
-      v-on:blur="blur"
-      v-on:input="updateValue"
-      v-on:focus="focus"
-      ref="input"
+    div(class="input-group__wrapper")
+      v-icon(v-if="icon") {{ icon }}
+      input(
+        v-bind:disabled="disabled"
+        v-bind:id="id"
+        v-bind:name="name"
+        v-bind:required="required"
+        v-bind:type="type"
+        v-bind:value="inputValue"
+        v-on:blur="blur"
+        v-on:input="updateValue"
+        v-on:focus="focus"
+        ref="input"
+      )
+      v-icon(v-if="menu" class="input-group__menu") arrow_drop_down
+    div(
+      class="input-group__hint"
+      v-text="error"
     )
 </template>
 
@@ -37,10 +43,13 @@
       classes () {
         return {
           'input-group--focused': this.focused,
-          'input-group--dirty': this.value || this.placeholder,
+          'input-group--dirty': this.inputValue,
           'input-group--disabled': this.disabled,
           'input-group--light': this.light && !this.dark,
-          'input-group--dark': this.dark
+          'input-group--dark': this.dark,
+          'input-group--single-line': this.singleLine,
+          'input-group--error': this.error,
+          'input-group--icon': this.icon
         }
       }
     },
@@ -50,6 +59,8 @@
 
       disabled: Boolean,
 
+      error: String,
+
       label: String,
 
       light: {
@@ -57,13 +68,19 @@
         default: true
       },
 
+      icon: String,
+
       id: String,
+
+      menu: Boolean,
 
       name: String,
 
       placeholder: String,
 
       required: Boolean,
+
+      singleLine: Boolean,
 
       type: {
         default: 'text'
