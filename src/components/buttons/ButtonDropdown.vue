@@ -3,15 +3,6 @@
     class="btn-dropdown"
     v-bind:class="classes"
   )
-    input(
-      v-if="editable" 
-      ref="input"
-      v-bind:class="{ 'active': isActive }"
-      v-bind:placeholder="placeholder"
-      v-on:click.stop="isActive = true"
-      v-on:keyup.enter="updateValue(editableValue)"
-      v-model="editableValue"
-    )
     v-menu(
       v-bind:auto="!overflow && !segmented && !editable"
       v-bind:right="!overflow && !segmented && !editable"
@@ -20,21 +11,17 @@
       v-model="isActive"
       bottom
     )
-      v-btn(
-        v-bind:class="{ 'btn--active': isActive, 'btn--editable': isActive && editable }"
+      v-text-input(
+        ref="input"
+        v-bind:type="editable ? 'text' : 'button'"
+        v-bind:label="label"
+        v-on:click.native.stop="isActive = true"
+        v-on:keyup.native.enter="updateValue(editableValue)"
         slot="activator"
-        light
+        v-model="editableValue"
+        single-line
+        menu
       )
-        span(
-          v-if="inputValue && inputValue.text"
-          v-text="inputValue.text"
-          class="btn-dropdown__title"
-        )
-        v-icon(v-if="inputValue && inputValue.action") {{ inputValue.action }}
-        v-icon(
-          class="btn-dropdown__arrow" 
-          v-on:click.native.stop="isActive = !isActive"
-        ) arrow_drop_down
       v-list
         v-list-item(v-for="(option, index) in options")
           v-list-tile(
@@ -54,33 +41,29 @@
     data () {
       return {
         isActive: false,
-        inputValue: this.value || { text: this.placeholder },
-        editableValue: ''
+        inputValue: this.value,
+        editableValue: null
       }
     },
 
     props: {
+      dark: Boolean,
       editable: Boolean,
-
+      light: {
+        type: Boolean,
+        default: true
+      },
       options: {
         type: Array,
         default: () => []
       },
-
       maxHeight: {
         type: [String, Number],
         default: 200
       },
-
       overflow: Boolean,
-
-      placeholder: {
-        type: String,
-        default: 'Select'
-      },
-
+      label: String,
       segmented: Boolean,
-
       value: {
         required: false
       }
@@ -91,7 +74,9 @@
         return {
           'btn-dropdown--editable': this.editable,
           'btn-dropdown--overflow': this.overflow || this.segmented || this.editable,
-          'btn-dropdown--segmented': this.segmented
+          'btn-dropdown--segmented': this.segmented,
+          'btn-dropdown--light': this.light && !this.dark,
+          'btn-dropdown--dark': this.dark
         }
       },
 
@@ -101,7 +86,7 @@
         }
 
         if (this.index !== -1 &&
-          (this.overflow || this.segmented || this.editable)
+          (this.overflow || this.segmented)
         ) {
           return this.options.filter((obj, i) => i !== this.index)
         }
@@ -115,14 +100,16 @@
     },
 
     mounted () {
-      this.editableValue = this.inputValue.text
+      if (this.inputValue) {
+        this.editableValue = this.inputValue.text
+      } 
     },
 
     watch: {
       isActive () {
         if (this.editable) {
           if (!this.isActive) {
-            this.$refs.input.blur()
+            this.$refs.input.$el.querySelector('input').blur()
           }
         }
       },
@@ -147,18 +134,11 @@
 
       updateValue (obj) {
         if (typeof obj === 'string') {
-          obj = { title: obj }
+          obj = { text: obj }
         }
 
         this.inputValue = obj
-
-        this.$emit('input', obj)
-
-        if (this.editable) {
-          this.editableValue = obj.text
-          this.inputValue = obj
-        }
-
+        this.editableValue = obj.text || obj.action
         this.isActive = false
       }
     }
