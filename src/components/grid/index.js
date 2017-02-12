@@ -3,7 +3,7 @@ import { createSimpleFunctional } from '../../util/helpers'
 const Col = {
   functional: true,
 
-  render: (h, {data, children}) => {
+  render: (h, { data, children }) => {
     data.staticClass = data.staticClass ? `col ${data.staticClass}` : 'col'
     data.staticClass += ` ${Object.keys(data.attrs).join(' ')}`
     delete data.attrs

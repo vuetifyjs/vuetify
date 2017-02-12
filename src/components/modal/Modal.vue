@@ -1,25 +1,36 @@
 <template lang="pug">
-  div(
-    class="modal-overlay" 
-    v-bind:class="{ 'modal-overlay--open': this.active }"
-  )
-    component(
-      v-bind:is="transition"
-      v-bind:origin="origin"
+  div(class="modal__container")
+
+    div(
+      class="modal__activator"
+      v-on:click="isActive = !isActive" 
+      ref="activator"
+      v-show="$slots.activator"
     )
-      div(
-        class="modal"
-        v-bind:class="classes"
-        v-bind:id="id"
-        v-show="active"
-        ref="modal"
+      slot(name="activator")
+
+    v-overlay(
+      v-bind:active="isActive"
+      v-bind:class="overlayClasses"
+    )
+      component(
+        v-bind:is="computedTransition"
+        v-bind:origin="computedOrigin"
       )
-        slot
+        div(
+          class="modal"
+          v-bind:class="classes"
+          v-bind:id="id"
+          v-show="isActive"
+          v-click-outside="closeConditional"
+          ref="modal"
+        )
+          slot
 </template>
 
 <script>
   import Toggleable from '../../mixins/toggleable'
-
+  
   export default {
     name: 'modal',
 
@@ -28,14 +39,9 @@
     props: {
       bottom: Boolean,
 
-      id: {
-        type: String,
-        required: true
-      },
-
       origin: {
         type: String,
-        default: 'bottom center'
+        default: 'center center'
       },
 
       transition: {
@@ -47,14 +53,40 @@
     computed: {
       classes () {
         return {
+          'modal--active': this.isActive,
           'modal--bottom': this.bottom
+        }
+      },
+
+      computedOrigin () {
+        if (this.origin !== 'center center') {
+          return this.origin
+        }
+
+        return this.bottom ? 'bottom' : this.origin
+      },
+
+      computedTransition () {
+        if (this.transition !== 'v-modal-transition') {
+          return this.transition
+        }
+
+        return this.bottom ? 'v-slide-y-transition' : this.transition
+      },
+
+      overlayClasses () {
+        return {
+          'overlay--modal-bottom': this.bottom
         }
       }
     },
 
     methods: {
       closeConditional (e) {
-        return this.$refs.modal === e.target || this.$refs.modal.contains(e.target)
+        return this.$refs.modal !== e.target &&
+          !this.$refs.modal.contains(e.target) &&
+          this.$refs.activator !== e.target &&
+          !this.$refs.activator.contains(e.target)
       }
     }
   }

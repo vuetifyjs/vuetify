@@ -7,9 +7,16 @@
   )
     span(class="btn__content")
       slot
-    span(class="btn__loading" v-if="loading")
+    span(
+      class="btn__loading" 
+      v-if="loading"
+    )
       slot(name="loader")
-      v-progress-circular(indeterminate v-if="!$slots['loader']")
+      v-progress-circular(
+        indeterminate 
+        v-if="!$slots['loader']"
+        size="26"
+      )
 </template>
 
 <script>
@@ -19,9 +26,11 @@
     name: 'button',
 
     mixins: [Contextualable],
-    
+
     props: {
       block: Boolean,
+
+      dark: Boolean,
 
       flat: Boolean,
 
@@ -33,7 +42,11 @@
 
       loading: Boolean,
 
+      menu: Boolean,
+
       outline: Boolean,
+
+      progress: Boolean,
 
       raised: {
         type: Boolean,
@@ -42,7 +55,7 @@
 
       ripple: {
         type: [Boolean, Object],
-        default: false
+        default: true
       },
 
       round: Boolean,
@@ -58,13 +71,17 @@
     computed: {
       classes () {
         return {
+          'btn': true,
           'btn--block': this.block,
-          'btn--flat': this.flat,
-          'btn--floating': this.floating,
+          'btn--dark': this.dark,
+          'btn--menu': this.menu,
+          'btn--flat': this.flat || this.menu,
+          'btn--floating': this.floating || this.progress,
           'btn--icon': this.icon,
           'btn--large': this.large,
-          'btn--loading': this.loading,
+          'btn--loader': this.loading,
           'btn--outline': this.outline,
+          'btn--progress': this.progress,
           'btn--raised': this.raised,
           'btn--round': this.round,
           'btn--small': this.small,
@@ -73,7 +90,7 @@
           'success': this.success,
           'info': this.info,
           'warning': this.warning,
-          'error': this.error,
+          'error': this.error
         }
       }
     }

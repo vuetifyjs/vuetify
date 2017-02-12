@@ -1,5 +1,5 @@
 import {
-  createSimpleFunctional 
+  createSimpleFunctional
 } from '../../util/helpers'
 
 const TableOverflow = createSimpleFunctional('table__overflow')

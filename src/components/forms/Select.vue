@@ -12,14 +12,14 @@
       v-bind:id="id"
       v-bind:name="name"
       v-bind:multiple="multiple"
-      v-on:blur="update"
+      v-on:blur="updateValue"
       v-on:click="focused = true"
-      v-on:input="update"
+      v-on:input="updateValue"
       ref="select"
     )
       option(
         value=''
-        selected
+        v-bind:selected="!multiple"
         v-bind:disabled="defaultDisabled"
         v-text="defaultText"
       )
@@ -34,10 +34,11 @@
 <script>
   export default {
     name: 'select',
-    
+
     data () {
       return {
-        focused: false
+        focused: false,
+        inputValue: null
       }
     },
 
@@ -46,7 +47,7 @@
         type: Boolean,
         default: true
       },
-      
+
       defaultText: {
         type: String,
         default: 'Select...'
@@ -89,18 +90,32 @@
       }
     },
 
+    watch: {
+      inputValue () {
+        if (this.multiple) {
+          this.$refs.options.filter(i => i.selected = this.inputValue.includes(i.value))
+        } else {
+          this.$refs.select.value = this.inputValue
+        }
+      },
+
+      value () {
+        this.inputValue = this.value
+      }
+    },
+
     mounted () {
       if (this.value) {
-        this.$refs.select.value = this.value
+        this.inputValue = this.value
       }
     },
 
     methods: {
-      update () {
-        if (!this.multiple) {
-          this.$emit('input', this.$refs.select.value)
-        } else {
+      updateValue () {
+        if (this.multiple) {
           this.$emit('input', this.$refs.options.filter(i => i.selected).map(i => i.value))
+        } else {
+          this.$emit('input', this.$refs.select.value)
         }
       }
     }

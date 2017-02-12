@@ -3,6 +3,7 @@
     class="with"
     v-bind:id="id"
     v-bind:class="classes"
+    data-app
   )
     slot
 </template>
@@ -25,9 +26,11 @@
 
       rightSidebar: Boolean,
 
-      topFixedNavbar: Boolean,
+      topFixedToolbar: Boolean,
 
-      topNavbar: Boolean
+      topToolbar: Boolean,
+
+      sidebarUnderToolbar: Boolean
     },
 
     computed: {
@@ -38,8 +41,9 @@
           'bottom-footer': this.footer,
           'right-fixed-sidebar': this.rightFixedSidebar,
           'right-sidebar': this.rightSidebar,
-          'top-fixed-navbar': this.topFixedNavbar,
-          'top-navbar': this.topNavbar
+          'top-fixed-toolbar': this.topFixedToolbar,
+          'top-toolbar': this.topToolbar,
+          'sidebar-under-toolbar': this.sidebarUnderToolbar
         }
       }
     }

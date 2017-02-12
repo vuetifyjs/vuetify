@@ -1,8 +1,4 @@
-import {
-  createSimpleFunctional
-} from '../../util/helpers'
-
-import Sidebar from './Sidebar.vue'
+import Sidebar from './Sidebar'
 
 export default {
   Sidebar

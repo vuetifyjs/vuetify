@@ -38,7 +38,11 @@
 
 <script>
   export default {
+    name: 'progress-circular',
+
     props: {
+      button: Boolean,
+
       fill: {
         type: [Boolean, String],
         default: () => this.indeterminate ? 'none' : 'transparent'
@@ -52,7 +56,7 @@
       },
 
       size: {
-        type: Number,
+        type: [Number, String],
         default: 32
       },
 
@@ -68,18 +72,29 @@
     },
 
     computed: {
+      calculatedSize () {
+        let size = Number(this.size)
+
+        if (this.button) {
+          size += 8
+        }
+
+        return size
+      },
+
       circumference () {
         return 2 * Math.PI * this.radius
       },
 
       classes () {
         return {
-          'progress-circular--indeterminate': this.indeterminate
+          'progress-circular--indeterminate': this.indeterminate,
+          'progress-circular--button': this.button
         }
       },
 
       cxy () {
-        return this.indeterminate ? 50 : this.size / 2
+        return this.indeterminate && !this.button ? 50 : this.calculatedSize / 2
       },
 
       normalizedValue () {
@@ -95,7 +110,7 @@
       },
 
       radius () {
-        return this.indeterminate ? 20 : (this.size - this.width) / 2
+        return this.indeterminate && !this.button ? 20 : (this.calculatedSize - this.width) / 2
       },
 
       strokeDashArray () {
@@ -107,14 +122,14 @@
       },
 
       styles () {
-        return { 
-          height: `${this.size}px`, 
-          width: `${this.size}px`
+        return {
+          height: `${this.calculatedSize}px`,
+          width: `${this.calculatedSize}px`
         }
       },
 
       svgSize () {
-        return this.indeterminate ? false : this.size
+        return this.indeterminate ? false : this.calculatedSize
       },
 
       svgStyles () {

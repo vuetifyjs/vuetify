@@ -1,15 +1,16 @@
 .with
   min-height: 100vh
+  -webkit-backface-visibility: hidden
   
-  &.top-fixed-navbar
-    padding-top: $navbar-height
+  &.top-fixed-toolbar
+    padding-top: $toolbar-height
       
     header
       z-index: 4
 
-  &.top-navbar
+  &.top-toolbar
     main
-      min-height: 'calc(100vh - %s)' % $navbar-height
+      min-height: 'calc(100vh - %s)' % $toolbar-height
       
       > .content
         padding-top: $spacers.three.y
@@ -18,12 +19,18 @@
     main
       min-height: 'calc(100vh - %s)' % $footer-height
       
-  &.bottom-footer&.top-navbar, &.bottom-footer&.top-fixed-navbar
+  &.bottom-footer&.top-toolbar, &.bottom-footer&.top-fixed-toolbar
     main
-      min-height: 'calc(100vh - %s - %s)' % ($navbar-height $footer-height)
+      min-height: 'calc(100vh - %s - %s)' % ($toolbar-height $footer-height)
       
   &.left-fixed-sidebar
-    header .navbar,
+    header .toolbar
+      padding-left: $sidebar-width + $toolbar-padding-x
+      transition: $primary-transition
+  
+      @media screen and (max-width: ($grid-breakpoints.lg - 1))
+        padding-left: $toolbar-padding-x
+      
     main,
     footer
       padding-left: $sidebar-width
@@ -35,15 +42,9 @@
   &.left-sidebar
     .sidebar
       box-shadow: none
-      
-    main
-      background: $theme.secondary
-      
-      > .content
-        background: #fff
   
   &.right-fixed-sidebar
-    header .navbar,
+    header .toolbar,
     main,
     footer
       padding-right: $sidebar-width
@@ -51,3 +52,58 @@
       
       @media screen and (max-width: ($grid-breakpoints.lg - 1))
         padding-right: 0
+        
+  &.sidebar-under-toolbar
+    .sidebar
+      margin-top: $toolbar-height
+    
+    &.left-fixed-sidebar,
+    &.right-fixed-sidebar
+      .toolbar
+        padding-left: inherit
+        
+.app
+  &__bar
+    align-items: center
+    background: $grey.lighten-3
+    display: flex
+    width: 100%
+    
+    > div
+      min-width: 130px
+      &:not(:first-child)
+        margin-left: 1px
+        
+        &:before
+          content: ''
+          position: absolute
+          height: 60%
+          top: 50%
+          transform: translateY(-50%)
+          left: -1px
+          background: $material-twelve-percent-dark
+          width: 1px
+          z-index: 0
+    
+    .btn
+      border-color: transparent
+      margin: 0
+      
+      &:hover
+        background: $grey.lighten-4
+        
+    .btn-toggle
+      box-shadow: none
+      background: transparent
+      position: relative
+      padding: 0 8px
+      
+      .btn
+        background: transparent
+        border: none !important
+        height: 42px
+        margin: 0 8px
+        
+        .icon
+          font-size: 26px
+          width: 26px

@@ -1,65 +1,81 @@
-import Eventable from '../../mixins/eventable'
-import Itemable from '../../mixins/itemable'
 import { closestParentTag } from '../../util/helpers'
 
 export default {
   name: 'tab-item',
 
-  mixins: [Eventable, Itemable],
-
-  props: {
-    selected: Boolean
-  },
-
-  computed: {
-    events () {
-      return [
-        [`tab:open:${this.tabsUid}`, this.activate],
-        [`tab:resize:${this.tabsUid}`, this.resize]
-      ]
-    },
-
-    target () {
-      return this.item.href.replace('#', '')
-    },
-
-    tabsUid () {
-      let tabs = closestParentTag.call(this, 'v-tabs')
-
-      return tabs ? tabs._uid : null
+  data () {
+    return {
+      isActive: false
     }
   },
 
-  mounted () {
-    if (this.selected || window.location.hash.substr(1) === this.target) {
-      this.$vuetify.load(this.click)
+  props: {
+    href: {
+      type: String,
+      required: true
+    },
+
+    ripple: Boolean,
+
+    router: Boolean
+  },
+
+  computed: {
+    classes () {
+      return {
+        'tab__item': true,
+        'tab__item--active': this.isActive
+      }
+    },
+
+    target () {
+      return this.href.replace('#', '')
+    },
+
+    tabs () {
+      return closestParentTag.call(this, 'v-tabs')
     }
   },
 
   methods: {
-    activate (target) {
-      this.active = target === this.target
-
-      if (!this.active) return
-
-      this.$vuetify.load(this.location)
-    },
-
     click (e) {
-      e.preventDefault()
-      
-      this.$vuetify.bus.pub(`tab:click:${this.tabsUid}`, this.target)
-      this.location()
+      this.tabs.tabClick(this.target)
     },
 
-    location () {
-      this.$vuetify.bus.pub(`tab:location:${this.tabsUid}`, this.$el.clientWidth, this.$el.offsetLeft)
-    },
-
-    resize () {
-      if (this.active) {
-        this.location()
-      }
+    toggle (target) {
+      this.isActive = this.target === target
     }
+  },
+
+  render (h) {
+    const data = {
+      attrs: {},
+      class: this.classes,
+      props: {},
+      directives: [
+        {
+          name: 'ripple',
+          value: this.ripple || false
+        }
+      ]
+    }
+
+    let tag
+
+    if (this.href && this.router) {
+      tag = 'router-link'
+      data.props.to = this.href
+      data.props.exact = this.href === '/'
+      data.props.activeClass = 'tab__item--active'
+      data.nativeOn = { click: this.click }
+    } else {
+      tag = 'a'
+      data.attrs.href = this.href || 'javascript:;'
+      data.on = { click: this.click }
+    }
+
+    const tab = h(tag, data, [this.$slots.default])
+
+    return h('li', {}, [tab])
   }
 }

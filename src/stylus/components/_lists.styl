@@ -2,7 +2,7 @@
   lists()
   padding-top: $list-top-padding
   padding-bottom: $list-bottom-padding
-  transition: $primary-transition
+  transition: height .3s $transition.ease-in-out
   
   .input-group
     margin: 0
@@ -24,9 +24,6 @@
   
   &__item
     position: relative
-    
-    li.disabled
-      pointer-events: none
       
   &__tile
     color: $color-root
@@ -128,8 +125,8 @@
         color: $theme.primary
         
     &--disabled
-      pointer-events: none
       opacity: 0.4
+      pointer-events: none
 
     &--avatar
       height: $list-item-avatar-single-height
@@ -203,19 +200,20 @@
       + .list--group
         &:after
           opacity: 1
-            
-      &.list__tile
-        background: $material-twelve-percent-dark
-        
-        &:after
-          opacity: 1
-        
-        .list__tile__title
-          color: inherit
           
-        .list__tile__action:last-of-type
-          .icon
-            transform: rotate(180deg)
+      &--active  
+        .list__tile
+          background: $material-twelve-percent-dark
+          
+          &:after
+            opacity: 1
+          
+          .list__tile__title
+            color: inherit
+            
+          .list__tile__action:last-of-type
+            .icon
+              transform: rotate(-180deg)
             
   &--sub-header
     padding-top: 0

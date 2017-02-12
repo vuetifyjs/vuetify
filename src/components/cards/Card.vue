@@ -10,7 +10,7 @@
 <script>
   export default {
     name: 'card',
-    
+
     props: {
       height: {
         type: String,
@@ -30,7 +30,7 @@
       },
 
       styles () {
-        let styles = {
+        const styles = {
           height: this.height
         }
 

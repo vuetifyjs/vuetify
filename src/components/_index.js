@@ -3,60 +3,50 @@ import App from './app/index'
 import Breadcrumbs from './breadcrumbs/index'
 import Buttons from './buttons/index'
 import Cards from './cards/index'
+import Carousel from './carousel/index'
 import Chips from './chips/index'
-import Collapsible from './collapsible/index'
+import ExpansionPanel from './expansion-panel/index'
 import Dividers from './dividers/index'
-import Dropdowns from './dropdowns/index'
 import Footer from './footer/index'
 import Forms from './forms/index'
 import Grid from './grid/index'
 import Icons from './icons/index'
 import Lists from './lists/index'
+import Menu from './menus/index'
 import Modal from './modal/index'
-import Navbar from './navbar/index'
+import Toolbar from './toolbar/index'
+import Overlay from './overlay/index'
 import Pagination from './pagination/index'
 import Parallax from './parallax/index'
 import Progress from './progress/index'
 import Sidebar from './sidebar/index'
-import Slider from './slider/index'
 import Tables from './tables/index'
 import Tabs from './tabs/index'
 import Transitions from './transitions/_index'
 
-function bootstrap (...components) {
-  let entries = {}
-
-  components.forEach(component => {
-    Object.keys(component).forEach(key => {
-      entries[`V${key}`] = component[key]
-    })
-  })
-
-  return entries
-}
-
-export default bootstrap(
+export default Object.assign({},
   Alerts,
   App,
   Breadcrumbs,
   Buttons,
   Cards,
+  Carousel,
   Chips,
-  Collapsible,
   Dividers,
-  Dropdowns,
+  ExpansionPanel,
   Footer,
   Forms,
   Grid,
   Icons,
   Lists,
+  Menu,
   Modal,
-  Navbar,
+  Toolbar,
+  Overlay,
   Pagination,
   Parallax,
   Progress,
   Sidebar,
-  Slider,
   Tables,
   Tabs,
   Transitions

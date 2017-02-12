@@ -10,7 +10,7 @@
 <script>
   export default {
     name: 'card-row',
-    
+
     props: {
       actions: Boolean,
 
@@ -30,14 +30,14 @@
       },
 
       styles () {
-        let styles = {
+        const styles = {
           height: this.height
         }
 
         if (this.img) {
           styles.background = `url(${this.img}) center center / cover no-repeat`
         }
-        
+
         return styles
       }
     }

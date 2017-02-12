@@ -1,9 +1,10 @@
 const webpack = require('webpack')
 const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+var projectRoot = path.resolve(__dirname, '../')
 
 module.exports = {
-  devtool: false,
+  devtool: '#source-map',
   watch: process.env.TARGET === 'dev',
   entry: {
     app: './src/index.js'
@@ -13,30 +14,39 @@ module.exports = {
     publicPath: '/dist/',
     library: 'Vuetify'
   },
+  resolve: {
+    extensions: ['*', '.js', '.json', '.vue']
+  },
   node: {
     fs: 'empty'
   },
   module: {
-    loaders: [
+    noParse: /es6-promise\.js$/, // avoid webpack shimming process
+    rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
+        loaders: ['vue-loader', 'eslint-loader'],
+        include: projectRoot,
+        exclude: /node_modules/
       },
       {
         test: /\.js$/,
-        loader: 'buble-loader',
-        exclude: /node_modules/,
-        query: {
-          objectAssign: 'Object.assign'
-        }
+        loaders: ['buble-loader', 'eslint-loader'],
+        include: projectRoot,
+        exclude: /node_modules/
       },
       {
         test: /\.styl$/,
         loaders: ExtractTextPlugin.extract({
-          loader: ['css-loader', 'postcss-loader', 'stylus-loader']
-        })
+          loader: ['eslint-loader', 'css-loader', 'postcss-loader', 'stylus-loader']
+        }),
+        include: projectRoot,
+        exclude: /node_modules/
       }
     ]
+  },
+  performance: {
+    hints: process.env.NODE_ENV === 'production' ? 'warning' : false
   },
   plugins: [
     new webpack.LoaderOptionsPlugin({
@@ -44,6 +54,9 @@ module.exports = {
       progress: true,
       hide_modules: true
     }),
-    new ExtractTextPlugin('vuetify.min.css')
+    new ExtractTextPlugin('vuetify.min.css'),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+    })
   ]
 }
