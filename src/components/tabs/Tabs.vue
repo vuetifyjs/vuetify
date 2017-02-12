@@ -38,7 +38,9 @@
 
       icons: Boolean,
 
-      scrollBars: Boolean
+      scrollBars: Boolean,
+
+      value: String
     },
 
     computed: {
@@ -93,7 +95,7 @@
         this.$refs.content.$children.forEach(i => this.content.push(i))
 
         setTimeout(() => {
-          this.tabClick(this.activators[0].target)
+          this.tabClick(this.value || this.activators[0].target)
         }, 200)
       },
 

@@ -15,7 +15,9 @@ export default {
       required: true
     },
 
-    ripple: Boolean
+    ripple: Boolean,
+
+    router: Boolean
   },
 
   computed: {
@@ -50,12 +52,6 @@ export default {
       attrs: {},
       class: this.classes,
       props: {},
-      domProps: {
-        href: 'javascript:;'
-      },
-      on: {
-        click: this.click
-      },
       directives: [
         {
           name: 'ripple',
@@ -64,7 +60,21 @@ export default {
       ]
     }
 
-    const tab = h('a', data, [this.$slots.default])
+    let tag
+
+    if (this.href && this.router) {
+      tag = 'router-link'
+      data.props.to = this.href
+      data.props.exact = this.href === '/'
+      data.props.activeClass = 'tab__item--active'
+      data.nativeOn = { click: this.click }
+    } else {
+      tag = 'a'
+      data.attrs.href = this.href || 'javascript:;'
+      data.on = { click: this.click }
+    }
+
+    const tab = h(tag, data, [this.$slots.default])
 
     return h('li', {}, [tab])
   }
