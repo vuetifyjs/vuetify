@@ -15,12 +15,14 @@
         ref="input"
         v-bind:type="editable ? 'text' : 'button'"
         v-bind:label="label"
+        v-bind:light="light && !dark"
+        v-bind:dark="dark"
         v-on:click.native.stop="isActive = true"
         v-on:keyup.native.enter="updateValue(editableValue)"
-        slot="activator"
         v-model="editableValue"
+        slot="activator"
         single-line
-        menu
+        append-icon="arrow_drop_down"
       )
       v-list
         v-list-item(v-for="(option, index) in options")

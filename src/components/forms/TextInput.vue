@@ -8,7 +8,7 @@
       v-html="label"
     )
     div(class="input-group__wrapper")
-      v-icon(v-if="icon") {{ icon }}
+      v-icon(v-if="prependIcon" class="input-group__prepend-icon") {{ prependIcon }}
       input(
         v-bind:disabled="disabled"
         v-bind:id="id"
@@ -21,7 +21,7 @@
         v-on:focus="focus"
         ref="input"
       )
-      v-icon(v-if="menu" class="input-group__menu") arrow_drop_down
+      v-icon(v-if="appendIcon" class="input-group__append-icon") {{ appendIcon }}
     div(
       class="input-group__hint"
       v-text="error"
@@ -49,12 +49,15 @@
           'input-group--dark': this.dark,
           'input-group--single-line': this.singleLine,
           'input-group--error': this.error,
-          'input-group--icon': this.icon
+          'input-group--append-icon': this.appendIcon,
+          'input-group--prepend-icon': this.prependIcon
         }
       }
     },
 
     props: {
+      appendIcon: String,
+
       dark: Boolean,
 
       disabled: Boolean,
@@ -68,8 +71,6 @@
         default: true
       },
 
-      icon: String,
-
       id: String,
 
       menu: Boolean,
@@ -77,6 +78,8 @@
       name: String,
 
       placeholder: String,
+
+      prependIcon: String,
 
       required: Boolean,
 
