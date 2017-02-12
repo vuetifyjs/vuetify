@@ -17,7 +17,7 @@
         v-bind:label="label"
         v-bind:light="light && !dark"
         v-bind:dark="dark"
-        v-on:click.native.stop="isActive = true"
+        v-on:click.native="isActive = true"
         v-on:keyup.native.enter="updateValue(editableValue)"
         v-model="editableValue"
         slot="activator"
