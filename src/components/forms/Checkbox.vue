@@ -6,7 +6,7 @@
       v-bind:disabled="disabled"
       v-bind:id="id"
       v-bind:name="name"
-      v-bind:value="value"
+      v-bind:value="valueV"
       ref="input"
     )
     label(
@@ -21,7 +21,7 @@
 
     data () {
       return {
-        model: null
+        inputValue: null
       }
     },
 
@@ -51,6 +51,28 @@
 
       value: {
         required: false
+      },
+
+      valueV: {
+        required: false
+      },
+    },
+
+    watch: {
+      inputValue () {
+        if ((Array.isArray(this.inputValue) &&
+            this.inputValue.includes(this.valueV)) ||
+            (!Array.isArray(this.inputValue) &&
+              this.inputValue)
+        ) {
+          this.$refs.input.checked = true
+        } else {
+          this.$refs.input.checked = false
+        }
+      },
+
+      value () {
+        this.inputValue = this.value
       }
     },
 
@@ -65,40 +87,25 @@
     mounted () {
       const vm = this
 
+      this.inputValue = this.value
       this.$refs.input.indeterminate = this.indeterminate
 
-      this.state()
-
-      this.$refs.input.onchange = function () {
-        const c = this.checked
-        const v = this.value
-
-        if (!vm.model ||
-            typeof vm.model === 'string'
-        ) {
-          return vm.$emit('input', c)
+      this.$refs.input.onchange = function (e) {
+        if (!Array.isArray(vm.inputValue)) {
+          return vm.$emit('input', e.target.checked)
         }
 
-        const i = vm.model.indexOf(v)
+        const i = vm.inputValue.indexOf(vm.valueV)
+        let input = vm.inputValue
 
-        if (c) {
-          vm.model.push(v)
+        if (i === -1) {
+          console.log(vm.valueV)
+          input.push(vm.valueV)
         } else {
-          vm.model.splice(i, 1)
+          input.splice(i, 1)
         }
 
-        vm.$emit('input', vm.model)
-      }
-    },
-
-    methods: {
-      state () {
-        if (Array.isArray(this.model) &&
-            this.model.includes(this.value) ||
-            this.value
-        ) {
-          this.$refs.input.checked = true
-        }
+        vm.$emit('input', input)
       }
     }
   }
