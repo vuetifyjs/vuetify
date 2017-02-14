@@ -17,14 +17,23 @@
       
     .input-group--focused .input-group__wrapper
       background-color: #fff
+      @extend .z-depth-2
       
     .input-group__wrapper
       transition: .3s $transition.ease-in-out
       
       &:hover
         background-color: #fff
-        
-    .input-group__details:after
+
+    .input-group__details
+      height: 0
+      min-height: 0
+      padding: 0
+      
+      &:after
+        display: none
+      
+    .input-group__hint
       display: none
       
   &--light

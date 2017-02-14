@@ -72,6 +72,10 @@ export default {
 
     inputValue () {
       this.$emit('input', this.inputValue)
+    },
+
+    focused () {
+      this.$emit('focused', this.focused)
     }
   },
 
