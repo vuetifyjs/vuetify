@@ -9,11 +9,13 @@
 
 /** Label */
 .input-group label
-  display: block
+  display: flex
+  align-items: center
   font-size $input-font-size
+  height: $input-height
   pointer-events: none
   position: absolute
-  transform: translate3d(0, 3px, 0)
+  transform: translate3d(0, 0, 0)
   transform-origin: top left
   transition: .4s $transition.fast-in-fast-out
   
@@ -156,7 +158,7 @@
 
   &--single-line      
     label
-      transform: translate3d(0,4px,0)
+      transform: translate3d(0,0,0)
       
     &.input-group--dirty
       label

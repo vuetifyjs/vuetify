@@ -64,7 +64,10 @@
         default: 200
       },
       overflow: Boolean,
-      label: String,
+      label: {
+        type: String,
+        default: 'Select'
+      },
       segmented: Boolean,
       value: {
         required: false

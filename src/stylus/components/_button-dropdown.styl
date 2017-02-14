@@ -9,9 +9,11 @@
     width: 100%
   
   &--overflow, &--editable, &--segmented
-    input
-      padding-left: 16px
+    input, label
       min-height: 40px
+      
+    input, label
+      padding-left: 16px
       
     .input-group--focused .input-group__wrapper
       background-color: #fff
@@ -21,6 +23,9 @@
       
       &:hover
         background-color: #fff
+        
+    .input-group__details:after
+      display: none
       
   &--light
     btn-dropdown-theme($material-twelve-percent-dark)
