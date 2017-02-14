@@ -67,6 +67,10 @@
         if (this.isActive !== this.active) {
           this.$emit('active', this.active)
         }
+
+        if (!this.isActive) {
+          this.list.listClose(this._uid)
+        }
       },
 
       '$route' (to) {
