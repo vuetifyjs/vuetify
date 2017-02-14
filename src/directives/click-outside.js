@@ -14,11 +14,11 @@ function directive (e, el, binding, v) {
 
 export default {
   bind (el, binding, v) {
-    const click = e => directive(e, el, binding, v)
-
-    document.querySelector('[data-app]').addEventListener('click', click, false)
-
-    el._clickOutside = click
+    v.context.$vuetify.load(() => {
+      const click = e => directive(e, el, binding, v)
+      document.querySelector('[data-app]').addEventListener('click', click, false)
+      el._clickOutside = click
+    })
   },
 
   unbind (el) {

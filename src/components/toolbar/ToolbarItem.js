@@ -55,7 +55,7 @@ export default {
       tag = 'router-link'
       data.props.to = this.href
       data.props.exact = this.href === '/'
-      data.props.activeClass = 'list__tile--active'
+      data.props.activeClass = 'toolbar__item--active'
 
       if (this.click) {
         data.nativeOn = { click: this.click }
