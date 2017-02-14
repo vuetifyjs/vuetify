@@ -49,8 +49,18 @@ export default {
       })
     },
 
-    listClick (uid) {
+    listClick (uid, force) {
+      if (force) {
+        return this.uid = uid
+      }
+
       this.uid = this.uid === uid ? null : uid
+    },
+
+    listClose (uid) {
+      if (this.uid === uid) {
+        this.uid = null
+      }
     }
   },
 
