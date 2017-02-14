@@ -2,7 +2,7 @@ input-group-theme(color, offset, dirty, background)
   .input-group__hint:before
     background-color: background
 
-  input
+  input, textarea
     color: color
     
     + .icon
@@ -15,7 +15,7 @@ input-group-theme(color, offset, dirty, background)
     color: color
 
   &.input-group--disabled
-    input
+    input, textarea
       color: color !important
 
     .input-group__hint:before
@@ -29,5 +29,5 @@ input-group-theme(color, offset, dirty, background)
     color: rgba(offset, .6)
     
   &.input-group--dirty
-    input
+    input, textarea
       color: dirty

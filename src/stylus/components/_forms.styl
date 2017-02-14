@@ -16,6 +16,9 @@
   transform: translate3d(0, 3px, 0)
   transform-origin: top left
   transition: .4s $transition.fast-in-fast-out
+  
+.input-group.input-group--multi-line:not(.input-group--focused):not(.input-group--dirty) label
+  transform: translate3d(0,0,0)
 
 
 /** Input */
@@ -38,6 +41,14 @@
     
   &:disabled
     pointer-events: none
+
+/** Textarea */
+.input-group textarea
+  font-size: $input-font-size
+  width: 100%
+  
+  &:focus
+    outline: none
 
 
 /** Hint Text */
