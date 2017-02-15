@@ -23,6 +23,7 @@
       v-btn(
         v-bind:class="{ 'btn--active': isActive, 'btn--editable': isActive && editable }"
         slot="activator"
+        light
       )
         span(
           v-if="inputValue && inputValue.text"

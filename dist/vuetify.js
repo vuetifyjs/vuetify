@@ -93,7 +93,7 @@ module.exports = function normalizeComponent (
   var type = typeof scriptExports.default
   if (type === 'object' || type === 'function') {
     // check named exports
-    if (false) {
+    if (true) {
       if (Object.keys(scriptExports).some(function (key) {
         return key !== 'default' && key !== '__esModule'
       })) {
@@ -2117,39 +2117,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
   props: {
     block: Boolean,
-
     dark: Boolean,
-
+    default: Boolean,
     flat: Boolean,
-
     floating: Boolean,
-
     icon: Boolean,
-
     large: Boolean,
-
+    light: Boolean,
     loading: Boolean,
-
-    menu: Boolean,
-
     outline: Boolean,
-
     progress: Boolean,
-
     raised: {
       type: Boolean,
       default: true
     },
-
     ripple: {
       type: [Boolean, Object],
       default: true
     },
-
     round: Boolean,
-
     small: Boolean,
-
     type: {
       type: String,
       default: 'button'
@@ -2162,14 +2149,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
         'btn': true,
         'btn--block': this.block,
         'btn--dark': this.dark,
-        'btn--menu': this.menu,
-        'btn--flat': this.flat || this.menu,
-        'btn--floating': this.floating || this.progress,
+        'btn--default': this.default,
+        'btn--flat': this.flat,
+        'btn--floating': this.floating,
         'btn--icon': this.icon,
         'btn--large': this.large,
+        'btn--light': this.light && !this.dark,
         'btn--loader': this.loading,
         'btn--outline': this.outline,
-        'btn--progress': this.progress,
         'btn--raised': this.raised,
         'btn--round': this.round,
         'btn--small': this.small,
@@ -2191,6 +2178,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+//
 //
 //
 //
@@ -6168,6 +6156,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('v-btn', {
     class: {
       'btn--active': _vm.isActive, 'btn--editable': _vm.isActive && _vm.editable
+    },
+    attrs: {
+      "light": "light"
     },
     slot: "activator"
   }, [(_vm.inputValue && _vm.inputValue.text) ? _c('span', {

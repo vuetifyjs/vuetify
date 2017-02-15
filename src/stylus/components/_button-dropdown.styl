@@ -27,6 +27,7 @@
     border-bottom: $button-dropdown-border-bottom
     border-radius: 0
     box-shadow: initial
+    color: $color-root
     display: flex
     font-size: $button-dropdown-font-size
     font-weight: $button-dropdown-font-weight
@@ -36,6 +37,9 @@
     text-transform: initial
     z-index: 1
     
+    &:after
+      display: none
+
     .btn__content
       justify-content: space-between
     
@@ -69,7 +73,7 @@
       padding: $button-dropdown-overflow-editable-padding
       
       &:hover
-        background: $button-dropdown-background
+        background-color: $button-dropdown-background
         
       &.btn--active
         background: $button-dropdown-background
