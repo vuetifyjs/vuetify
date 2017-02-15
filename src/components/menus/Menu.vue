@@ -37,25 +37,25 @@
       return {
         window: {},
         dimensions: {
-          activator: { top: 0, left: 0, bottom: 0, right: 0, height: 0, width: 0, offsetTop: 0 },
-          content: { top: 0, left: 0, bottom: 0, right: 0, height: 0, width: 0, offsetTop: 0 },
+          activator: {
+            cssTop: 0, cssLeft: 0,
+            top: 0, left: 0, bottom: 0, right: 0, height: 0, width: 0, offsetTop: 0
+          },
+          content: {
+            cssTop: 0, cssLeft: 0,
+            top: 0, left: 0, bottom: 0, right: 0, height: 0, width: 0, offsetTop: 0
+          },
           list: null,
           selected: null
         },
-        minWidth: 'auto'
+        minWidth: 'auto',
+        autoNudgeX: -8,
+        autoNudgeY: -8
       }
     },
 
     props: {
       auto: Boolean,
-      autoVAdjust: {
-        type: Number,
-        default: 16
-      },
-      autoHAdjust: {
-        type: Number,
-        default: 9
-      },
       left: Boolean,
       bottom: Boolean,
       right: Boolean,
@@ -88,52 +88,55 @@
 
     computed: {
       direction () {
-        const { offsetY, offsetX, edgeDistance: edge } = this
+        const { edgeDistance: edge } = this
         const { content: c } = this.dimensions
-        let vert = (this.bottom || this.auto) ? 'bottom' : 'top'
-        let horiz = (this.right || this.auto) ? 'right' : 'left'
+        let vert = this.top && !this.auto ? 'top' : 'bottom'
+        let horiz = this.left && !this.auto ? 'left' : 'left'
 
         // Flip direction, if needed, to where there's more room from the screen edge.
-        vert = offsetY && c.height > edge[vert] ? edge.maxVertDir : vert
-        horiz = offsetX && c.width > edge[horiz] ? edge.maxHorizDir : horiz
+        vert = !this.auto && c.height > edge[vert] ? edge.maxVertDir : vert
+        horiz = !this.auto && c.width > edge[horiz] ? edge.maxHorizDir : horiz
 
         return { vert, horiz }
       },
 
       offset () {
         const { activator: a, content: c } = this.dimensions
-        const { pageYOffset: pageY, pageXOffset: pageX } = this.window
+        const y = a.top - c.top    // <-- Start with the diff between content and activator to
+        const x = a.left - c.left  // <-- shift content to activator's position.
 
         return {
-          'top': this.offsetY ? -c.height + pageY : a.height - c.height + pageY,
-          'left': this.offsetX ? -c.width + pageX : a.width - c.width + pageX,
-          'bottom': this.offsetY ? a.height + pageY : pageY,
-          'right': this.offsetX ? a.width + pageX : pageX
+          'top': this.offsetY ? y - c.height : y + a.height - c.height,
+          'left': this.offsetX ? x - c.width : x + a.width - c.width,
+          'bottom': this.offsetY ? y + a.height : y,
+          'right': this.offsetX ? x + a.width : x
         }
       },
 
-      autoOffset () {
-        if (!(this.auto && this.dimensions.selected)) return 0
+      autoOffsetY () {
+        if (!this.auto || !this.dimensions.selected) return this.auto ? this.autoNudgeY - 8 : 0
 
         const { activator: a, content: c, selected: s, list } = this.dimensions
         const offsetBottom = list.height - s.height - s.offsetTop
         const scrollMiddle = (c.height - s.height) / 2
+        let auto = (a.height - c.height) / 2 + this.autoNudgeY
 
-        let auto = (a.height - c.height) / 2
         if (s.offsetTop < scrollMiddle) auto += scrollMiddle - s.offsetTop
         if (offsetBottom < scrollMiddle) auto += offsetBottom - scrollMiddle
 
         return auto
       },
 
+      autoOffsetX () {
+        return this.auto ? this.autoNudgeX : 0
+      },
+
       edgeDistance () {
         const { activator: a } = this.dimensions
-        const edge = {}
+        const { innerHeight: innerH, innerWidth: innerW } = this.window
+        let edge = {}
 
-        edge.top = a.top
-        edge.bottom = this.window.innerHeight - a.bottom
-        edge.left = a.left
-        edge.right = this.window.innerWidth - a.right
+        edge = { top: a.top, left: a.left, bottom: innerH - a.bottom, right: innerW - a.right }
         edge.maxVert = edge.top > edge.bottom ? edge.top : edge.bottom
         edge.maxHoriz = edge.left > edge.right ? edge.left : edge.right
         edge.maxVertDir = edge.top > edge.bottom ? 'top' : 'bottom'
@@ -143,35 +146,31 @@
       },
 
       offscreen () {
-        if (this.offsetX || this.offsetY) return { vert: 0, horiz: 0 }
-
-        const { activator: a, content: c } = this.dimensions
-        const top = a.top + this.offset[this.direction.vert] + this.autoOffset
-        const left = a.left + this.offset[this.direction.horiz]
-        const { pageYOffset: pageY, pageXOffset: pageX } = this.window
-        const { innerHeight: innerH, innerWidth: innerW } = this.window
+        const { content: c } = this.dimensions
+        const top = c.top + this.offset[this.direction.vert] + this.autoOffsetY
+        const left = c.left + this.offset[this.direction.horiz] + this.autoOffsetX
 
         return {
-          'vert': top + c.height - pageY > innerH
-            ? innerH - (top + c.height - pageY)
-            : top - pageY < 0
-              ? pageY - top
+          'vert': this.auto && top + c.height > this.window.innerHeight
+            ? this.window.innerHeight - (top + c.height)
+            : this.auto && top < 0
+              ? -top
               : 0,
-          'horiz': left + c.width - pageX > innerW
-            ? innerW - (left + c.width - pageX)
-            : left - pageX < 0
-              ? pageX - left
+          'horiz': this.auto && left + c.width > this.window.innerWidth
+            ? this.window.innerWidth - (left + c.width)
+            : this.auto && left < 0
+              ? -left
               : 0
         }
       },
 
       position () {
         const { vert, horiz } = this.direction
-        const a = this.dimensions.activator
+        const { content: c } = this.dimensions
 
         return {
-          top: a.top + this.offset[vert] + this.autoOffset + this.offscreen.vert - (this.auto ? this.autoHAdjust : 0),
-          left: a.left + this.offset[horiz] + this.offscreen.horiz - (this.auto ? this.autoVAdjust : 0)
+          top: c.cssTop + this.offset[vert] + this.autoOffsetY + this.offscreen.vert,
+          left: c.cssLeft + this.offset[horiz] + this.autoOffsetX + this.offscreen.horiz
         }
       },
 
@@ -183,13 +182,9 @@
       }
     },
 
-    mounted () {
-      // Move content to beginning of the document (for more functionality).
-      document.body.appendChild(this.$refs.content)
-    },
-
     methods: {
       activate () {
+        console.log(this.auto)
         // Get measurements before transitions mess with them.
         this.updateDimensions()
 
@@ -200,34 +195,41 @@
 
       updateDimensions () {
         this.sneakPeek()
-
-        // Set minWidth & maxHeight.
-        const { $el, $refs, maxHeight, auto, autoVAdjust } = this
-        $refs.content.style.minWidth = `${$el.clientWidth + (auto ? autoVAdjust : 0)}px`
-        $refs.content.style.maxHeight = null
-        $refs.content.style.maxHeight = isNaN(maxHeight) ? maxHeight : `${maxHeight}px`
+        this.updateMaxMin()
 
         // Let the DOM compute dimensions.
         this.window = window
         this.dimensions = {
-          'activator': $refs.activator.children
-            ? this.rect($refs.activator.children[0])
-            : this.rect($refs.activator),
-          'content': this.rect($refs.content),
-          'list': this.rect($refs.content, '.list'),
-          'selected': this.rect($refs.content, '.list__tile--active', 'parent')
+          'activator': this.$refs.activator.children
+            ? this.measure(this.$refs.activator.children[0])
+            : this.measure(this.$refs.activator),
+          'content': this.measure(this.$refs.content),
+          'list': this.measure(this.$refs.content, '.list'),
+          'selected': this.measure(this.$refs.content, '.list__tile--active', 'parent')
         }
 
-        // If offsetY, reduce height to the max vertical distance to a screen edge.
-        const { edgeDistance: edge } = this
+        this.fixOffscreen()
+        this.updateScroll()
+        this.sneakPeek(false)
+      },
+
+      updateMaxMin () {
+        const { $el, $refs, maxHeight, auto, autoNudgeX } = this
+
+        $refs.content.style.minWidth = `${$el.clientWidth + Math.abs(auto ? autoNudgeX : 0)}px`
+        $refs.content.style.maxHeight = null  // <-- TODO: This is a temporary fix.
+        $refs.content.style.maxHeight = isNaN(maxHeight) ? maxHeight : `${maxHeight}px`
+      },
+
+      fixOffscreen () {
+        const { $refs, edgeDistance: edge } = this
         const { vert } = this.direction
-        if (this.offsetY && this.dimensions.content.height > edge[vert]) {
+
+        // If not auto, reduce height to the max vertical distance to a screen edge.
+        if (!this.auto && this.dimensions.content.height > edge[vert]) {
           $refs.content.style.maxHeight = `${edge.maxVert}px`
           this.dimensions.content.height = $refs.content.getBoundingClientRect().height
         }
-
-        this.updateScroll()
-        this.sneakPeekOff()
       },
 
       updateScroll () {
@@ -247,23 +249,28 @@
       // Utils
       // ====================
 
-      rect (el, selector, getParent = false) {
+      measure (el, selector, getParent = false) {
         el = selector ? el.querySelector(selector) : el
         el = el && getParent ? el.parentElement : el
 
         if (!el) return null
+
         const { top, bottom, right, left, width, height } = el.getBoundingClientRect()
-        return { top, bottom, right, left, width, height, offsetTop: el.offsetTop }
+        const cssTop = parseInt(el.style.top) || 0
+        const cssLeft = parseInt(el.style.left) || 0
+        const offsetTop = el.offsetTop
+
+        return { cssTop, cssLeft, top, bottom, right, left, width, height, offsetTop }
       },
 
-      sneakPeek () {
-        this.$refs.content.style.opacity = 0
-        this.$refs.content.style.display = 'inline-block'
-      },
-
-      sneakPeekOff () {
-        this.$refs.content.style.display = 'none'
-        this.$refs.content.style.opacity = null
+      sneakPeek (on = true) {
+        if (on) {
+          this.$refs.content.style.opacity = 0
+          this.$refs.content.style.display = 'inline-block'
+        } else {
+          this.$refs.content.style.display = 'none'
+          this.$refs.content.style.opacity = null
+        }
       }
     }
   }
