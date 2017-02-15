@@ -91,7 +91,7 @@
         const { edgeDistance: edge } = this
         const { content: c } = this.dimensions
         let vert = this.top && !this.auto ? 'top' : 'bottom'
-        let horiz = this.left && !this.auto ? 'left' : 'left'
+        let horiz = this.left && !this.auto ? 'left' : 'right'
 
         // Flip direction, if needed, to where there's more room from the screen edge.
         vert = !this.auto && c.height > edge[vert] ? edge.maxVertDir : vert
