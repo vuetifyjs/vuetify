@@ -184,7 +184,6 @@
 
     methods: {
       activate () {
-        console.log(this.auto)
         // Get measurements before transitions mess with them.
         this.updateDimensions()
 
