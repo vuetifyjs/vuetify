@@ -19,7 +19,7 @@ export default {
         'input-group--light': this.light && !this.dark,
         'input-group--dark': this.dark,
         'input-group--single-line': this.singleLine,
-        'input-group--error': this.error,
+        'input-group--error': this.error || this.errors.length > 0,
         'input-group--append-icon': this.appendIcon,
         'input-group--prepend-icon': this.prependIcon,
         'input-group--multi-line': this.multiLine,
@@ -28,7 +28,7 @@ export default {
     },
 
     count () {
-      let inputLength = (this.inputValue || '').length
+      const inputLength = (this.inputValue || '').length
       let min = inputLength
 
       if (this.min !== 0 && inputLength < this.min) {
@@ -103,7 +103,7 @@ export default {
   methods: {
     blur () {
       this.validate()
-      this.$nextTick(() => this.focused = false)
+      this.$nextTick(() => (this.focused = false))
     },
 
     focus () {
@@ -142,7 +142,7 @@ export default {
       })
     },
 
-    genError(h, error) {
+    genError (h, error) {
       return h(
         'div',
         {
@@ -208,7 +208,7 @@ export default {
       })
 
       return h(
-        'transition-group', 
+        'transition-group',
         {
           'class': {
             'input-group__messages': true
