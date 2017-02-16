@@ -19,7 +19,7 @@
     )
       option(
         value=''
-        v-bind:selected="!multiple"
+        v-bind:selected="!multiple && !this.value"
         v-bind:disabled="defaultDisabled"
         v-text="defaultText"
       )
@@ -85,8 +85,8 @@
     computed: {
       classes () {
         return {
-          'input-group--focused': this.focused,
-          'input-group--dirty': true
+          'input-group--dirty': true,
+          'input-group--focused': this.focused
         }
       }
     },
@@ -116,14 +116,16 @@
         this.focused = true
       },
 
-      updateValue () {
+      updateValue (evt) {
         if (this.multiple) {
           this.$emit('input', this.$refs.options.filter(i => i.selected).map(i => i.value))
         } else {
           this.$emit('input', this.$refs.select.value)
         }
 
-        this.focused = false
+        if (evt.type !== 'input') {
+          this.focused = false
+        }
       }
     }
   }
