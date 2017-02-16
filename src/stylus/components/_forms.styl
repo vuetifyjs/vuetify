@@ -37,9 +37,6 @@
   &:focus
     outline: none
     
-    + .icon
-      transform: rotate(-180deg)
-    
   &:disabled
     pointer-events: none
 
@@ -55,7 +52,6 @@
 /** Details */
 .input-group
   &__details
-    color: $theme.error
     display: flex
     flex: 1 0 100%
     font-size: 12px
@@ -88,12 +84,23 @@
 .input-group
   &__hint
     flex: 1 0
+    transition: .3s $transition.fast-out-fast-out
 
+
+/** Error */
+.input-group
+  &__error
+    flex: 1 0
+    transition: .3s $transition.fast-out-fast-out
+    color: $theme.error
 
 /** Counter */
 .input-group
-  &__counter--error
-    color: inherit !important
+  &__counter
+    margin-left: auto
+
+    &--error
+      color: $theme.error !important
 
 
 /** Themes */
@@ -131,6 +138,9 @@
   &--error
     .input-group__details:after
       background-color: $theme.error
+      
+    .input-group__append-icon
+      color: $theme.error !important
     
   &--prepend-icon
     .input-group__prepend-icon
@@ -162,6 +172,21 @@
     &.input-group--dirty
       label
         display: none
+        
+  &--required
+    label:after
+      content: '*'
+      
+    &.input-group--focused
+      label:after
+        color: $theme.error
+        
+  &--error
+    label
+      color: $theme.error
+      
+    .input-group__details:before, .input-group__details:after
+      background-color: $theme.error
   
   &__wrapper
     display: flex

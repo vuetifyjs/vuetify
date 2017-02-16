@@ -18,7 +18,7 @@ input-group-theme(color, offset, dirty, background)
     input, textarea
       color: color !important
 
-    .input-group__hint:before
+    .input-group__details:before
       background-image: linear-gradient(to right, rgba(offset,0.38) 0, rgba(offset,0.38) 33%, transparent 0)
     
   &.input-group--single-line&.input-group--focused
@@ -33,4 +33,7 @@ input-group-theme(color, offset, dirty, background)
       color: dirty
   
   .input-group__counter
+    color: color
+    
+  .input-group__details
     color: color
