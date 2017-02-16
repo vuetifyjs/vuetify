@@ -72,12 +72,18 @@
           'btn--raised': this.raised,
           'btn--round': this.round,
           'btn--small': this.small,
-          'primary': this.primary,
-          'secondary': this.secondary,
-          'success': this.success,
-          'info': this.info,
-          'warning': this.warning,
-          'error': this.error
+          'primary': this.primary && !this.outline,
+          'secondary': this.secondary && !this.outline,
+          'success': this.success && !this.outline,
+          'info': this.info && !this.outline,
+          'warning': this.warning && !this.outline,
+          'error': this.error && !this.outline,
+          'primary--text': this.primary && this.outline,
+          'secondary--text': this.secondary && this.outline,
+          'success--text': this.success && this.outline,
+          'info--text': this.info && this.outline,
+          'warning--text': this.warning && this.outline,
+          'error--text': this.error && this.outline
         }
       }
     }
