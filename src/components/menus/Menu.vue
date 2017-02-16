@@ -49,7 +49,7 @@
           selected: null
         },
         minWidth: 'auto',
-        autoNudgeX: -8,
+        autoNudgeX: -16,
         autoNudgeY: -8
       }
     },
