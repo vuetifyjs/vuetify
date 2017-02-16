@@ -10,6 +10,8 @@ export default {
   },
 
   props: {
+    disabled: Boolean,
+
     href: {
       type: String,
       required: true
@@ -24,7 +26,8 @@ export default {
     classes () {
       return {
         'tab__item': true,
-        'tab__item--active': this.isActive
+        'tab__item--active': this.isActive,
+        'tab__item--disabled': this.disabled
       }
     },
 
