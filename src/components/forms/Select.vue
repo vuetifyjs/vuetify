@@ -13,7 +13,7 @@
       v-bind:name="name"
       v-bind:multiple="multiple"
       v-on:blur="updateValue"
-      v-on:click="focused = true"
+      v-on:focus="focus"
       v-on:input="updateValue"
       ref="select"
     )
@@ -111,6 +111,10 @@
     },
 
     methods: {
+      focus () {
+        this.focused = true
+      },
+
       updateValue () {
         if (this.multiple) {
           this.$emit('input', this.$refs.options.filter(i => i.selected).map(i => i.value))
