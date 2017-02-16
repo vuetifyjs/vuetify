@@ -85,6 +85,7 @@
     computed: {
       classes () {
         return {
+          'input-group--focused': this.focused,
           'input-group--dirty': true
         }
       }
