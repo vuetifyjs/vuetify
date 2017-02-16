@@ -23,11 +23,16 @@ export default {
         'input-group--prepend-icon': this.prependIcon,
         'input-group--multi-line': this.multiLine
       }
+    },
+
+    count () {
+      return `${(this.inputValue || '').length} / ${this.max}`
     }
   },
 
   props: {
     appendIcon: String,
+    counter: Boolean,
     dark: Boolean,
     disabled: Boolean,
     error: String,
@@ -37,6 +42,14 @@ export default {
       default: true
     },
     id: String,
+    min: {
+      type: [Number, String],
+      default: 0
+    },
+    max: {
+      type: [Number, String],
+      default: 25
+    },
     menu: Boolean,
     multiLine: Boolean,
     name: String,
@@ -59,6 +72,10 @@ export default {
 
     inputValue () {
       this.$emit('input', this.inputValue)
+    },
+
+    focused () {
+      this.$emit('focused', this.focused)
     }
   },
 
@@ -80,6 +97,7 @@ export default {
     const tag = this.multiLine ? 'textarea' : 'input'
     const children = []
     const wrapperChildren = []
+    const detailsChildren = []
 
     if (this.label) {
       children.push(
@@ -143,13 +161,33 @@ export default {
       }, wrapperChildren)
     )
 
-    children.push(
+    detailsChildren.push(
       h('div', {
         'class': { 'input-group__hint': true },
         domProps: {
           innerText: this.error || ''
         }
       })
+    )
+
+    if (this.counter) {
+      detailsChildren.push(
+        h('div', {
+          'class': {
+            'input-group__counter': true,
+            'input-group__counter--error': (this.inputValue || '').length > this.max
+          },
+          domProps: {
+            innerText: this.count
+          }
+        })
+      )
+    }
+
+    children.push(
+      h('div', {
+        'class': { 'input-group__details': true }
+      }, detailsChildren)
     )
 
     return h('div', { 'class': this.classes }, children)

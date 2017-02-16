@@ -17,8 +17,8 @@
         v-bind:label="label"
         v-bind:light="light && !dark"
         v-bind:dark="dark"
-        v-on:click.native="isActive = true"
         v-on:keyup.native.enter="updateValue(editableValue)"
+        v-on:focused="isActive = arguments[0]"
         v-model="editableValue"
         slot="activator"
         single-line
@@ -64,7 +64,10 @@
         default: 200
       },
       overflow: Boolean,
-      label: String,
+      label: {
+        type: String,
+        default: 'Select'
+      },
       segmented: Boolean,
       value: {
         required: false
