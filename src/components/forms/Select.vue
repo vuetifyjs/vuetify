@@ -122,6 +122,8 @@
         } else {
           this.$emit('input', this.$refs.select.value)
         }
+
+        this.focused = false
       }
     }
   }
