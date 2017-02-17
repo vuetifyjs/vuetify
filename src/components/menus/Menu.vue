@@ -103,14 +103,14 @@
         const x = a.left - c.left  // <-- Start with the diff between content and activator
         const y = a.top - c.top    // <-- to shift content to activator's position.
 
-        return {
-          horiz: direction.horiz === 'left'
+        const horiz = direction.horiz === 'left'
             ? offsetX ? x - c.width : x + a.width - c.width + offsetAuto.horiz   // left
-            : offsetX ? x + a.width : x + offsetAuto.horiz,                      // right
-          vert: direction.vert === 'top'
+            : offsetX ? x + a.width : x + offsetAuto.horiz                       // right
+        const vert = direction.vert === 'top'
             ? offsetY ? y - c.height : y + a.height - c.height + offsetAuto.vert // top
             : offsetY ? y + a.height : y + offsetAuto.vert                       // bottom
-        }
+
+        return { horiz, vert }
       },
 
       offsetAuto () {
@@ -150,18 +150,18 @@
         const left = c.left + this.offset.horiz
         const top = c.top + this.offset.vert
 
-        return {
-          'horiz': this.auto && left + c.width > this.window.innerWidth
+        const horiz = this.auto && left + c.width > this.window.innerWidth
             ? (left + c.width) - this.window.innerWidth
             : this.auto && left < 0
               ? left
-              : 0,
-          'vert': this.auto && top + c.height > this.window.innerHeight
+              : 0
+        const vert = this.auto && top + c.height > this.window.innerHeight
             ? (top + c.height) - this.window.innerHeight
             : this.auto && top < 0
               ? top
               : 0
-        }
+
+        return { horiz, vert }
       },
 
       position () {
