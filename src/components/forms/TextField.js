@@ -13,6 +13,7 @@ export default {
     classes () {
       return {
         'input-group': true,
+        'input-group--text-field': true,
         'input-group--focused': this.focused,
         'input-group--dirty': this.inputValue,
         'input-group--disabled': this.disabled,

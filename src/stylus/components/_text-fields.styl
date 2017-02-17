@@ -1,5 +1,5 @@
 /** Base Spec */
-.input-group
+.input-group--text-field
   display: flex
   flex-wrap: wrap
   margin: $input-group-margin
@@ -7,7 +7,7 @@
   width: 100%
 
 /** Label */
-.input-group label
+.input-group--text-field label
   display: flex
   align-items: center
   font-size $input-font-size
@@ -18,12 +18,12 @@
   transform-origin: top left
   transition: .4s $transition.fast-in-fast-out
   
-.input-group.input-group--multi-line:not(.input-group--focused):not(.input-group--dirty) label
+.input-group--text-field.input-group--multi-line:not(.input-group--focused):not(.input-group--dirty) label
   transform: translate3d(0,0,0)
 
 
 /** Input */
-.input-group input
+.input-group--text-field input
   font-size: $input-font-size
   flex: 1
   margin: 0
@@ -41,7 +41,7 @@
     pointer-events: none
 
 /** Textarea */
-.input-group textarea
+.input-group--text-field textarea
   font-size: $input-font-size
   width: 100%
   
