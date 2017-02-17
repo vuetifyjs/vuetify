@@ -42,6 +42,8 @@ export default {
 
   methods: {
     click (e) {
+      e.preventDefault()
+
       this.tabs.tabClick(this.target)
     },
 
