@@ -11,7 +11,7 @@
       v-model="isActive"
       bottom
     )
-      v-text-input(
+      v-text-field(
         ref="input"
         v-bind:type="editable ? 'text' : 'button'"
         v-bind:label="label"

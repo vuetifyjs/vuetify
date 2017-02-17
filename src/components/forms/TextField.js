@@ -1,5 +1,5 @@
 export default {
-  name: 'text-input',
+  name: 'text-field',
 
   data () {
     return {
