@@ -24,7 +24,7 @@ export default {
 
   data () {
     return {
-      isActive: this.value || true
+      isActive: this.value
     }
   },
 

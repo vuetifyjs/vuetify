@@ -30,8 +30,6 @@
     },
 
     props: {
-      active: String,
-
       centered: Boolean,
 
       grow: Boolean,
@@ -55,8 +53,8 @@
     },
 
     watch: {
-      active () {
-        this.tabClick(this.active)
+      value () {
+        this.tabClick(this.value)
       },
 
       isActive () {
@@ -69,7 +67,7 @@
         })
 
         this.content.forEach(i => i.toggle(this.target, this.reverse))
-        this.$emit('active', this.target)
+        this.$emit('input', this.target)
       }
     },
 
