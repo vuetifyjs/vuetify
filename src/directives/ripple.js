@@ -8,36 +8,36 @@ function style (el, value) {
 }
 
 const ripple = {
-  show: (e, el, binding) => {
+  show: (e, el, { value = {}}) => {
     var container = document.createElement('span')
     var animation = document.createElement('span')
 
     container.appendChild(animation)
     container.className = 'ripple__container'
 
-    if ((binding.value || {}).class) {
-      container.classList.add(binding.value.class)
+    if (value.class) {
+      container.classList.add(value.class)
     }
 
     const size = el.clientWidth > el.clientHeight ? el.clientWidth : el.clientHeight
     animation.className = 'ripple__animation'
-    animation.style.width = `${size * 2}px`
+    animation.style.width = `${size * (value.center ? 1 : 2)}px`
     animation.style.height = animation.style.width
 
     el.appendChild(container)
 
     const offset = el.getBoundingClientRect()
-    const x = e.clientX - offset.left
-    const y = e.clientY - offset.top
+    const x = value.center ? '50%' : `${e.clientX - offset.left}px`
+    const y = value.center ? '50%' : `${e.clientY - offset.top}px`
 
     animation.classList.add('ripple__animation--enter')
     animation.classList.add('ripple__animation--visible')
-    style(animation, `translate(-50%, -50%) translate(${x}px, ${y}px) scale(.001)`)
+    style(animation, `translate(-50%, -50%) translate(${x}, ${y}) scale3d(0.01,0.01,0.01)`)
     animation.dataset.activated = Date.now()
 
     setTimeout(() => {
       animation.classList.remove('ripple__animation--enter')
-      style(animation, `translate(-50%, -50%) translate(${x}px, ${y}px)`)
+      style(animation, `translate(-50%, -50%) translate(${x}, ${y})  scale3d(0.99,0.99,0.99)`)
     }, 0)
   },
 

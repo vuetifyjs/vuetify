@@ -1,4 +1,4 @@
-import Checkbox from './Checkbox.vue'
+import Checkbox from './Checkbox'
 import Radio from './Radio.vue'
 import Select from './Select.vue'
 import TextField from './TextField'

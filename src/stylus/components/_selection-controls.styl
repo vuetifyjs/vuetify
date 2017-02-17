@@ -1,0 +1,37 @@
+/** Input */
+.input-group.input-group--selection-controls
+  display: flex
+  align-items: center
+    
+  .icon
+    color: $grey.darken-1
+    cursor: pointer
+    position: absolute
+    left: 0
+    user-select: none
+    transition: .3s $transition.ease-in-out
+    
+    &--checkbox
+      color: inherit
+    
+/** Label */
+.input-group--selection-controls label
+  cursor: pointer
+  padding-left: 12px
+  
+.input-group--selection-controls__container
+  color: inherit
+  position: relative
+  width: 24px
+  height: 24px
+  
+.input-group--selection-controls__ripple
+  border-radius: 50%
+  height: 48px
+  width: 48px
+  cursor: pointer
+  position: absolute
+  transform: translate3d(-12px, -12px, 0)
+  transform-origin: center center
+  top: 0
+  left: 0
