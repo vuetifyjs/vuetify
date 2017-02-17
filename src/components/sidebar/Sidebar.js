@@ -16,7 +16,7 @@ export default {
     fixed: Boolean,
 
     right: Boolean,
-    
+
     height: String,
 
     mobile: {
@@ -27,7 +27,9 @@ export default {
     mobileBreakPoint: {
       type: Number,
       default: 992
-    }
+    },
+
+    disableRouteWatcher: Boolean
   },
 
   computed: {
@@ -60,7 +62,8 @@ export default {
 
   watch: {
     '$route' () {
-      this.isActive = !this.routeChanged()
+      if (!this.disableRouteWatcher)
+        this.isActive = !this.routeChanged()
     }
   },
 
