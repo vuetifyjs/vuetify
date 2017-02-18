@@ -4,15 +4,11 @@
   align-items: center
     
   .icon
-    color: $grey.darken-1
     cursor: pointer
     position: absolute
     left: 0
     user-select: none
     transition: .3s $transition.ease-in-out
-    
-    &--checkbox
-      color: inherit
     
 /** Label */
 .input-group--selection-controls label
@@ -20,10 +16,30 @@
   padding-left: 12px
   
 .input-group--selection-controls__container
-  color: inherit
   position: relative
   width: 24px
   height: 24px
+  
+  &--light
+    .input-group--selection-controls__ripple
+      color: rgba(#000, .54)
+      
+    .icon
+      color: rgba(#000, .54)
+      
+    &.input-group--selection-controls__container--active
+      .input-group--selection-controls__ripple
+        color: inherit
+        
+      .icon
+        color: inherit
+      
+    &.input-group--selection-controls__container--disabled
+      .input-group--selection-controls__ripple
+        color: rgba(#000, .26)
+        
+      .icon
+        color: rgba(#000, .26)
   
 .input-group--selection-controls__ripple
   border-radius: 50%
@@ -35,3 +51,91 @@
   transform-origin: center center
   top: 0
   left: 0
+  
+/** Switch */
+.input-group.input-group--selection-controls
+  &.switch
+    .input-group--selection-controls__container
+      position: relative
+      
+      &--light
+        &.input-group--selection-controls__container--disabled          
+          .input-group--selection-controls__toggle
+            background: rgba(#000, .12)
+            
+          .input-group--selection-controls__ripple
+            color: rgba(#000, .12)
+            
+            &:after
+              background: #bdbdbd
+
+        .input-group--selection-controls__toggle
+          background: rgba(#000, .38)
+            
+        .input-group--selection-controls__ripple
+          color: rgba(#000, .38)
+          
+          &:after
+            background: #fafafa
+            
+      &--dark
+        &.input-group--selection-controls__container--disabled          
+          .input-group--selection-controls__toggle
+            background: rgba(#fff, .10)
+            
+          .input-group--selection-controls__ripple
+            color: rgba(#fff, .10)
+            
+            &:after
+              background: #424242
+              
+        .input-group--selection-controls__toggle
+          background: rgba(#fff, .30)
+            
+        .input-group--selection-controls__ripple
+          color: rgba(#fff, .30)
+          
+          &:after
+            background: #bdbdbd
+            
+    .input-group--selection-controls__toggle
+      color: inherit
+      position: absolute
+      height: 14px
+      top: 50%
+      left: 0
+      width: 34px
+      border-radius: 8px
+      transform: translateY(-50%)
+      
+      &--active
+        background: currentColor !important
+        opacity: .5
+      
+    .input-group--selection-controls__ripple
+      transform: translate3d(-15px, -12px, 0)
+      transition: .3s $transition.fast-in-fast-out
+
+      &:after
+        content: ''
+        background: #fafafa
+        position: absolute
+        display: inline-block
+        cursor: pointer
+        width: 20px
+        border-radius: 50%
+        top: 50%
+        left: 50%
+        transform: translate3d(-50%, -50%, 0)
+        height: 20px
+        @extend .z-depth-1
+        
+      &--active
+        color: inherit !important
+        transform: translate3d(2px, -12px, 0)
+        
+        &:after
+          background: currentColor !important
+      
+    label
+      padding-left: 24px

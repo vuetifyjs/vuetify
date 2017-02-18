@@ -1,15 +1,14 @@
 import Contextualable from '../../mixins/contextualable'
 
 export default {
-  name: 'checkbox',
+  name: 'switch',
 
   mixins: [Contextualable],
 
   data () {
     return {
       focused: false,
-      inputValue: this.value,
-      inputDeterminate: this.indeterminate
+      inputValue: this.value
     }
   },
 
@@ -29,9 +28,6 @@ export default {
 
   watch: {
     inputValue () {
-      if (this.indeterminate) {
-        this.inputDeterminate = false
-      }
       const input = this.inputValue
       if (Array.isArray(this.inputValue)) {
         const i = this.inputValue.indexOf(this.valueV)
@@ -45,6 +41,7 @@ export default {
 
       this.$emit('input', input)
     },
+
     value () {
       if (!this.disabled) {
         this.inputValue = this.value
@@ -55,8 +52,18 @@ export default {
   computed: {
     classes () {
       return {
+        'input-group input-group--selection-controls switch': true
+      }
+    },
+    rippleClasses () {
+      return {
+        'input-group--selection-controls__ripple': true,
+        'input-group--selection-controls__ripple--active': this.isActive
+      }
+    },
+    containerClasses () {
+      return {
         'input-group--selection-controls__container': true,
-        'input-group--selection-controls__container--active': this.isActive,
         'input-group--selection-controls__container--light': this.light,
         'input-group--selection-controls__container--dark': this.dark,
         'input-group--selection-controls__container--disabled': this.disabled,
@@ -68,13 +75,10 @@ export default {
         'warning--text': this.warning
       }
     },
-    icon () {
-      if (this.inputDeterminate) {
-        return 'indeterminate_check_box'
-      } else if (this.inputValue) {
-        return 'check_box'
-      } else {
-        return 'check_box_outline_blank'
+    toggleClasses () {
+      return {
+        'input-group--selection-controls__toggle': true,
+        'input-group--selection-controls__toggle--active': this.inputValue
       }
     },
     isActive () {
@@ -93,18 +97,10 @@ export default {
       }
     }
   },
-  render (h) {
-    const transition = h('v-fade-transition', {}, [
-      h('v-icon', {
-        'class': {
-          'icon--checkbox': this.icon === 'check_box'
-        },
-        key: this.icon
-      }, this.icon)
-    ])
 
+  render (h) {
     const ripple = h('div', {
-      'class': 'input-group--selection-controls__ripple',
+      'class': this.rippleClasses,
       on: { click: this.toggle },
       directives: [
         {
@@ -114,10 +110,17 @@ export default {
       ]
     })
 
-    return h('div', {
-      'class': 'input-group input-group--selection-controls'
+    const container = h('div', {
+      'class': this.containerClasses
     }, [
-      h('div', { 'class': this.classes }, [transition, ripple]),
+      h('div', { 'class': this.toggleClasses }),
+      ripple
+    ])
+
+    return h('div', {
+      'class': this.classes
+    }, [
+      container,
       h('label', { on: { click: this.toggle }}, this.label)
     ])
   }

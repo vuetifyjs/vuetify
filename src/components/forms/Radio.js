@@ -1,22 +1,20 @@
 import Contextualable from '../../mixins/contextualable'
 
 export default {
-  name: 'checkbox',
+  name: 'radio',
 
   mixins: [Contextualable],
 
   data () {
     return {
       focused: false,
-      inputValue: this.value,
-      inputDeterminate: this.indeterminate
+      inputValue: this.value === this.valueV
     }
   },
 
   props: {
     dark: Boolean,
     disabled: Boolean,
-    indeterminate: Boolean,
     label: String,
     light: Boolean,
     value: {
@@ -28,26 +26,9 @@ export default {
   },
 
   watch: {
-    inputValue () {
-      if (this.indeterminate) {
-        this.inputDeterminate = false
-      }
-      const input = this.inputValue
-      if (Array.isArray(this.inputValue)) {
-        const i = this.inputValue.indexOf(this.valueV)
-
-        if (i === -1) {
-          input.push(this.valueV)
-        } else {
-          input.splice(i, 1)
-        }
-      }
-
-      this.$emit('input', input)
-    },
     value () {
       if (!this.disabled) {
-        this.inputValue = this.value
+        this.inputValue = this.value === this.valueV
       }
     }
   },
@@ -56,7 +37,7 @@ export default {
     classes () {
       return {
         'input-group--selection-controls__container': true,
-        'input-group--selection-controls__container--active': this.isActive,
+        'input-group--selection-controls__container--active': this.inputValue,
         'input-group--selection-controls__container--light': this.light,
         'input-group--selection-controls__container--dark': this.dark,
         'input-group--selection-controls__container--disabled': this.disabled,
@@ -68,36 +49,25 @@ export default {
         'warning--text': this.warning
       }
     },
+
     icon () {
-      if (this.inputDeterminate) {
-        return 'indeterminate_check_box'
-      } else if (this.inputValue) {
-        return 'check_box'
-      } else {
-        return 'check_box_outline_blank'
-      }
-    },
-    isActive () {
-      return (
-        (Array.isArray(this.inputValue) &&
-          this.inputValue.indexOf(this.valueV) !== -1) ||
-        this.inputValue
-      )
+      return this.inputValue ? 'radio_button_checked' : 'radio_button_unchecked'
     }
   },
 
   methods: {
     toggle () {
       if (!this.disabled) {
-        this.inputValue = !this.inputValue
+        this.$emit('input', this.valueV)
       }
     }
   },
+
   render (h) {
     const transition = h('v-fade-transition', {}, [
       h('v-icon', {
         'class': {
-          'icon--checkbox': this.icon === 'check_box'
+          'icon--radio': this.inputValue
         },
         key: this.icon
       }, this.icon)
