@@ -6,8 +6,13 @@
       class="slider__item"
       v-bind:class="{ 'reverse': reverse }"
       v-bind:style="styles"
+      v-bind:img="img"
       v-show="active"
     )
+      img(
+        v-if="img"
+        v-bind:src="src"
+        )
       slot
 </template>
 
@@ -28,6 +33,11 @@
         required: true
       },
 
+      img: {
+        type: Boolean,
+        default: false
+      },
+
       transition: {
         type: String,
         default: 'v-tab-transition'
@@ -46,7 +56,7 @@
 
       styles () {
         return {
-          backgroundImage: `url(${this.src})`
+          backgroundImage: this.img ? null : `url(${this.src})`
         }
       }
     },
