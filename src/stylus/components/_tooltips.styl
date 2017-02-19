@@ -1,7 +1,7 @@
 [data-tooltip]
   position: relative
   
-  &:after
+  &:before
     background: $theme.secondary
     border-radius: .2rem
     color: #FFFFFF
@@ -20,48 +20,48 @@
     @extend .z-depth-1
   
   &:hover
-    &:after
+    &:before
       opacity: 1
       visibility: visible
     
   &[data-tooltip-location='bottom']
-    &:after
+    &:before
       top: 100%
       left: 50%
       transform: translate(-50%, -10px) scale(0.1)
       transform-origin: center top
       
     &:hover
-      &:after
+      &:before
         transform: translate(-50%, 10px)
       
   &[data-tooltip-location='top']
-    &:after
+    &:before
       top: -100%
       left: 50%
       transform: translate(-50%, 10px) scale(0.1)
       transform-origin: center bottom
       
     &:hover
-      &:after
+      &:before
         transform: translate(-50%, -10px)
 
   &[data-tooltip-location='left']
-    &:after
+    &:before
       left: -100%
       transform: translate(10px, 0%) scale(0.1)
       transform-origin: center right
       
     &:hover
-      &:after
+      &:before
         transform: translate(-10px, 0)
       
   &[data-tooltip-location='right']
-    &:after
+    &:before
       left: 100%
       transform: translate(-10px, 0%) scale(0.1)
       transform-origin: center left
       
     &:hover
-      &:after
+      &:before
         transform: translate(10px, 0)
