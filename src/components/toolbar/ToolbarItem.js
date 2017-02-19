@@ -1,18 +1,16 @@
 import { closestParentTag } from '../../util/helpers'
+import GenerateRouteLink from '../../mixins/route-link'
 
 export default {
   name: 'toolbar-item',
 
+  mixins: [GenerateRouteLink],
+
   props: {
-    disabled: Boolean,
-
-    href: String,
-
-    ripple: Boolean,
-
-    router: Boolean,
-
-    tag: String
+    activeClass: {
+      type: String,
+      default: 'toolbar__item--active'
+    }
   },
 
   computed: {
@@ -35,39 +33,8 @@ export default {
   },
 
   render (h) {
-    let tag
+    const { tag, data } = this.generateRouteLink()
 
-    const data = {
-      attrs: {},
-      class: this.classes,
-      props: {},
-      directives: [
-        {
-          name: 'ripple',
-          value: this.ripple || false
-        }
-      ]
-    }
-
-    if (this.tag) {
-      tag = this.tag
-    } else if (this.href && this.router) {
-      tag = 'router-link'
-      data.props.to = this.href
-      data.props.exact = this.href === '/'
-      data.props.activeClass = 'toolbar__item--active'
-
-      if (this.click) {
-        data.nativeOn = { click: this.click }
-      }
-    } else {
-      tag = 'a'
-      data.attrs.href = this.href || 'javascript:;'
-
-      if (this.click) {
-        data.on = { click: this.click }
-      }
-    }
     const item = h(tag, data, [this.$slots.default])
 
     return h('li', {}, [item])
