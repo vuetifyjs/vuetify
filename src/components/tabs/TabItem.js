@@ -1,25 +1,23 @@
 import { closestParentTag } from '../../util/helpers'
+import GenerateRouteLink from '../../mixins/route-link'
 
 export default {
   name: 'tab-item',
 
+  mixins: [GenerateRouteLink],
+
   data () {
     return {
-      isActive: false
+      isActive: false,
+      defaultActiveClass: 'tab__item--active'
     }
   },
 
   props: {
-    disabled: Boolean,
-
-    href: {
+    activeClass: {
       type: String,
-      required: true
-    },
-
-    ripple: Boolean,
-
-    router: Boolean
+      default: 'tab__item--active'
+    }
   },
 
   computed: {
@@ -53,31 +51,7 @@ export default {
   },
 
   render (h) {
-    const data = {
-      attrs: {},
-      class: this.classes,
-      props: {},
-      directives: [
-        {
-          name: 'ripple',
-          value: this.ripple || false
-        }
-      ]
-    }
-
-    let tag
-
-    if (this.href && this.router) {
-      tag = 'router-link'
-      data.props.to = this.href
-      data.props.exact = this.href === '/'
-      data.props.activeClass = 'tab__item--active'
-      data.nativeOn = { click: this.click }
-    } else {
-      tag = 'a'
-      data.attrs.href = this.href || 'javascript:;'
-      data.on = { click: this.click }
-    }
+    const { tag, data } = this.generateRouteLink()
 
     const tab = h(tag, data, [this.$slots.default])
 

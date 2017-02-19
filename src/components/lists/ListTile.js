@@ -1,7 +1,10 @@
 import { closestParentTag } from '../../util/helpers'
+import GenerateRouteLink from '../../mixins/route-link'
 
 export default {
   name: 'list-tile',
+
+  mixins: [GenerateRouteLink],
 
   data () {
     return {
@@ -10,17 +13,11 @@ export default {
   },
 
   props: {
-    avatar: Boolean,
-
-    disabled: Boolean,
-
-    href: String,
-
-    ripple: Boolean,
-
-    router: Boolean,
-
-    tag: String
+    activeClass: {
+      type: String,
+      default: 'list__tile--active'
+    },
+    avatar: Boolean
   },
 
   computed: {
@@ -44,39 +41,7 @@ export default {
   },
 
   render (createElement) {
-    let tag
-
-    const data = {
-      attrs: {},
-      class: this.classes,
-      props: {},
-      directives: [
-        {
-          name: 'ripple',
-          value: this.ripple || false
-        }
-      ]
-    }
-
-    if (this.tag) {
-      tag = this.tag
-    } else if (this.href && this.router) {
-      tag = 'router-link'
-      data.props.to = this.href
-      data.props.exact = this.href === '/'
-      data.props.activeClass = 'list__tile--active'
-
-      if (this.click) {
-        data.nativeOn = { click: this.click }
-      }
-    } else {
-      tag = 'a'
-      data.attrs.href = this.href || 'javascript:;'
-
-      if (this.click) {
-        data.on = { click: this.click }
-      }
-    }
+    const { tag, data } = this.generateRouteLink()
 
     return createElement(tag, data, [this.$slots.default])
   }
