@@ -42,6 +42,7 @@ export default {
 
   props: {
     appendIcon: String,
+    autocomplete: Boolean,
     counter: Boolean,
     dark: Boolean,
     disabled: Boolean,
@@ -170,6 +171,7 @@ export default {
 
       const inputData = {
         domProps: {
+          autocomplete: this.autocomplete,
           disabled: this.disabled,
           id: this.id || this.name || this._uid,
           name: this.name,
