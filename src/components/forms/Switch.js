@@ -1,30 +1,9 @@
-import Contextualable from '../../mixins/contextualable'
+import Checkbox from '../../mixins/checkbox'
 
 export default {
   name: 'switch',
 
-  mixins: [Contextualable],
-
-  data () {
-    return {
-      focused: false,
-      inputValue: this.value
-    }
-  },
-
-  props: {
-    dark: Boolean,
-    disabled: Boolean,
-    indeterminate: Boolean,
-    label: String,
-    light: Boolean,
-    value: {
-      required: false
-    },
-    valueV: {
-      required: false
-    }
-  },
+  mixins: [Checkbox],
 
   computed: {
     classes () {
@@ -57,37 +36,6 @@ export default {
         'input-group--selection-controls__toggle': true,
         'input-group--selection-controls__toggle--active': this.isActive
       }
-    },
-    isActive () {
-      return (
-        (Array.isArray(this.value) &&
-          this.value.indexOf(this.valueV) !== -1) ||
-        (!Array.isArray(this.value) &&
-          this.value)
-      )
-    }
-  },
-
-  methods: {
-    toggle () {
-      if (this.disabled) {
-        return
-      }
-
-      let input = this.value
-      if (Array.isArray(input)) {
-        const i = input.indexOf(this.valueV)
-
-        if (i === -1) {
-          input.push(this.valueV)
-        } else {
-          input.splice(i, 1)
-        }
-      } else {
-        input = !input
-      }
-
-      this.$emit('input', input)
     }
   },
 

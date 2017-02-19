@@ -85,7 +85,7 @@ export default {
     })
 
     return h('div', {
-      'class': 'input-group input-group--selection-controls'
+      'class': 'input-group input-group--selection-controls radio'
     }, [
       h('div', { 'class': this.classes }, [transition, ripple]),
       h('label', { on: { click: this.toggle }}, this.label)

@@ -1,30 +1,18 @@
-import Contextualable from '../../mixins/contextualable'
+import Checkbox from '../../mixins/checkbox'
 
 export default {
   name: 'checkbox',
 
-  mixins: [Contextualable],
+  mixins: [Checkbox],
 
   data () {
     return {
-      focused: false,
-      inputValue: this.value,
       inputDeterminate: this.indeterminate
     }
   },
 
   props: {
-    dark: Boolean,
-    disabled: Boolean,
-    indeterminate: Boolean,
-    label: String,
-    light: Boolean,
-    value: {
-      required: true
-    },
-    valueV: {
-      required: false
-    }
+    indeterminate: Boolean
   },
 
   computed: {
@@ -51,43 +39,17 @@ export default {
       } else {
         return 'check_box_outline_blank'
       }
-    },
-    isActive () {
-      return (
-        (Array.isArray(this.value) &&
-          this.value.indexOf(this.valueV) !== -1) ||
-        (!Array.isArray(this.value) &&
-          this.value)
-      )
     }
   },
 
-  methods: {
-    toggle () {
-      if (this.disabled) {
-        return
-      }
-
+  watch: {
+    value () {
       if (this.indeterminate) {
         this.inputDeterminate = false
       }
-
-      let input = this.value
-      if (Array.isArray(input)) {
-        const i = input.indexOf(this.valueV)
-
-        if (i === -1) {
-          input.push(this.valueV)
-        } else {
-          input.splice(i, 1)
-        }
-      } else {
-        input = !input
-      }
-
-      this.$emit('input', input)
     }
   },
+
   render (h) {
     const transition = h('v-fade-transition', {}, [
       h('v-icon', {
@@ -110,7 +72,7 @@ export default {
     })
 
     return h('div', {
-      'class': 'input-group input-group--selection-controls'
+      'class': 'input-group input-group--selection-controls checkbox'
     }, [
       h('div', { 'class': this.classes }, [transition, ripple]),
       h('label', { on: { click: this.toggle }}, this.label)

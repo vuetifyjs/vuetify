@@ -9,7 +9,8 @@
     left: 0
     user-select: none
     transition: .3s $transition.ease-in-out
-    
+
+
 /** Label */
 .input-group--selection-controls label
   cursor: pointer
@@ -19,54 +20,6 @@
   position: relative
   width: 24px
   height: 24px
-  
-  &--light
-    + label
-      color: #000
-      
-    .input-group--selection-controls__ripple
-      color: rgba(#000, .54)
-      
-    .icon
-      color: rgba(#000, .54)
-      
-    &.input-group--selection-controls__container--active
-      .input-group--selection-controls__ripple
-        color: inherit
-        
-      .icon
-        color: inherit
-      
-    &.input-group--selection-controls__container--disabled
-      .input-group--selection-controls__ripple
-        color: rgba(#000, .26)
-        
-      .icon
-        color: rgba(#000, .26)
-  
-  &--dark
-    + label
-      color: #fff
-      
-    .input-group--selection-controls__ripple
-      color: rgba(#fff, .70)
-      
-    .icon
-      color: rgba(#fff, .70)
-      
-    &.input-group--selection-controls__container--active
-      .input-group--selection-controls__ripple
-        color: inherit
-        
-      .icon
-        color: inherit
-      
-    &.input-group--selection-controls__container--disabled
-      .input-group--selection-controls__ripple
-        color: rgba(#fff, .30)
-        
-      .icon
-        color: rgba(#fff, .30)
   
 .input-group--selection-controls__ripple
   border-radius: 50%
@@ -78,52 +31,13 @@
   transform-origin: center center
   top: 0
   left: 0
-  
+
+
 /** Switch */
 .input-group.input-group--selection-controls
   &.switch
     .input-group--selection-controls__container
       position: relative
-      
-      &--light
-        &.input-group--selection-controls__container--disabled          
-          .input-group--selection-controls__toggle
-            background: rgba(#000, .12) !important
-            
-          .input-group--selection-controls__ripple
-            color: rgba(#000, .12) !important
-            
-            &:after
-              background: #bdbdbd !important
-
-        .input-group--selection-controls__toggle
-          background: rgba(#000, .38) 
-            
-        .input-group--selection-controls__ripple
-          color: rgba(#000, .38)
-          
-          &:after
-            background: #fafafa
-            
-      &--dark
-        &.input-group--selection-controls__container--disabled          
-          .input-group--selection-controls__toggle
-            background: rgba(#fff, .10) !important
-            
-          .input-group--selection-controls__ripple
-            color: rgba(#fff, .10) !important
-            
-            &:after
-              background: #424242 !important
-              
-        .input-group--selection-controls__toggle
-          background: rgba(#fff, .30)
-            
-        .input-group--selection-controls__ripple
-          color: rgba(#fff, .30)
-          
-          &:after
-            background: #bdbdbd
             
     .input-group--selection-controls__toggle
       color: inherit
@@ -165,3 +79,31 @@
       
     label
       padding-left: 24px
+      
+/* Theme */
+.input-group--selection-controls
+  &.switch
+    .input-group--selection-controls__container
+      &--light
+        selection-controls-switch-theme($selection-switch-light-color,
+          $selection-switch-light-background, 
+          $selection-switch-light-disabled-color, 
+          $selection-switch-light-disabled-background)
+      &--dark
+        selection-controls-switch-theme($selection-switch-dark-color, 
+          $selection-switch-dark-background, 
+          $selection-switch-dark-disabled-color, 
+          $selection-switch-dark-disabled-background)
+        
+  &.checkbox, &.radio
+    .input-group--selection-controls__container
+      &--light
+        selection-controls-checkbox-theme($selection-controls-light-color,
+          $selection-controls-light-label-color,
+          $selection-controls-light-disabled-color)
+
+      &--dark
+        selection-controls-checkbox-theme($selection-controls-dark-color,
+          $selection-controls-dark-label-color,
+          $selection-controls-dark-disabled-color)
+    
