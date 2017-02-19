@@ -26,29 +26,6 @@ export default {
     }
   },
 
-  watch: {
-    inputValue () {
-      const input = this.inputValue
-      if (Array.isArray(this.inputValue)) {
-        const i = this.inputValue.indexOf(this.valueV)
-
-        if (i === -1) {
-          input.push(this.valueV)
-        } else {
-          input.splice(i, 1)
-        }
-      }
-
-      this.$emit('input', input)
-    },
-
-    value () {
-      if (!this.disabled) {
-        this.inputValue = this.value
-      }
-    }
-  },
-
   computed: {
     classes () {
       return {
@@ -78,23 +55,39 @@ export default {
     toggleClasses () {
       return {
         'input-group--selection-controls__toggle': true,
-        'input-group--selection-controls__toggle--active': this.inputValue
+        'input-group--selection-controls__toggle--active': this.isActive
       }
     },
     isActive () {
       return (
-        (Array.isArray(this.inputValue) &&
-          this.inputValue.indexOf(this.valueV) !== -1) ||
-        this.inputValue
+        (Array.isArray(this.value) &&
+          this.value.indexOf(this.valueV) !== -1) ||
+        (!Array.isArray(this.value) &&
+          this.value)
       )
     }
   },
 
   methods: {
     toggle () {
-      if (!this.disabled) {
-        this.inputValue = !this.inputValue
+      if (this.disabled) {
+        return
       }
+
+      let input = this.value
+      if (Array.isArray(input)) {
+        const i = input.indexOf(this.valueV)
+
+        if (i === -1) {
+          input.push(this.valueV)
+        } else {
+          input.splice(i, 1)
+        }
+      } else {
+        input = !input
+      }
+
+      this.$emit('input', input)
     }
   },
 

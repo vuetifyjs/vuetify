@@ -21,6 +21,9 @@
   height: 24px
   
   &--light
+    + label
+      color: #000
+      
     .input-group--selection-controls__ripple
       color: rgba(#000, .54)
       
@@ -40,6 +43,30 @@
         
       .icon
         color: rgba(#000, .26)
+  
+  &--dark
+    + label
+      color: #fff
+      
+    .input-group--selection-controls__ripple
+      color: rgba(#fff, .70)
+      
+    .icon
+      color: rgba(#fff, .70)
+      
+    &.input-group--selection-controls__container--active
+      .input-group--selection-controls__ripple
+        color: inherit
+        
+      .icon
+        color: inherit
+      
+    &.input-group--selection-controls__container--disabled
+      .input-group--selection-controls__ripple
+        color: rgba(#fff, .30)
+        
+      .icon
+        color: rgba(#fff, .30)
   
 .input-group--selection-controls__ripple
   border-radius: 50%
@@ -61,16 +88,16 @@
       &--light
         &.input-group--selection-controls__container--disabled          
           .input-group--selection-controls__toggle
-            background: rgba(#000, .12)
+            background: rgba(#000, .12) !important
             
           .input-group--selection-controls__ripple
-            color: rgba(#000, .12)
+            color: rgba(#000, .12) !important
             
             &:after
-              background: #bdbdbd
+              background: #bdbdbd !important
 
         .input-group--selection-controls__toggle
-          background: rgba(#000, .38)
+          background: rgba(#000, .38) 
             
         .input-group--selection-controls__ripple
           color: rgba(#000, .38)
@@ -81,13 +108,13 @@
       &--dark
         &.input-group--selection-controls__container--disabled          
           .input-group--selection-controls__toggle
-            background: rgba(#fff, .10)
+            background: rgba(#fff, .10) !important
             
           .input-group--selection-controls__ripple
-            color: rgba(#fff, .10)
+            color: rgba(#fff, .10) !important
             
             &:after
-              background: #424242
+              background: #424242 !important
               
         .input-group--selection-controls__toggle
           background: rgba(#fff, .30)
@@ -118,7 +145,6 @@
 
       &:after
         content: ''
-        background: #fafafa
         position: absolute
         display: inline-block
         cursor: pointer

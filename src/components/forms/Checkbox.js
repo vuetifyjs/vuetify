@@ -20,35 +20,10 @@ export default {
     label: String,
     light: Boolean,
     value: {
-      required: false
+      required: true
     },
     valueV: {
       required: false
-    }
-  },
-
-  watch: {
-    inputValue () {
-      if (this.indeterminate) {
-        this.inputDeterminate = false
-      }
-      const input = this.inputValue
-      if (Array.isArray(this.inputValue)) {
-        const i = this.inputValue.indexOf(this.valueV)
-
-        if (i === -1) {
-          input.push(this.valueV)
-        } else {
-          input.splice(i, 1)
-        }
-      }
-
-      this.$emit('input', input)
-    },
-    value () {
-      if (!this.disabled) {
-        this.inputValue = this.value
-      }
     }
   },
 
@@ -71,7 +46,7 @@ export default {
     icon () {
       if (this.inputDeterminate) {
         return 'indeterminate_check_box'
-      } else if (this.inputValue) {
+      } else if (this.isActive) {
         return 'check_box'
       } else {
         return 'check_box_outline_blank'
@@ -79,18 +54,38 @@ export default {
     },
     isActive () {
       return (
-        (Array.isArray(this.inputValue) &&
-          this.inputValue.indexOf(this.valueV) !== -1) ||
-        this.inputValue
+        (Array.isArray(this.value) &&
+          this.value.indexOf(this.valueV) !== -1) ||
+        (!Array.isArray(this.value) &&
+          this.value)
       )
     }
   },
 
   methods: {
     toggle () {
-      if (!this.disabled) {
-        this.inputValue = !this.inputValue
+      if (this.disabled) {
+        return
       }
+
+      if (this.indeterminate) {
+        this.inputDeterminate = false
+      }
+
+      let input = this.value
+      if (Array.isArray(input)) {
+        const i = input.indexOf(this.valueV)
+
+        if (i === -1) {
+          input.push(this.valueV)
+        } else {
+          input.splice(i, 1)
+        }
+      } else {
+        input = !input
+      }
+
+      this.$emit('input', input)
     }
   },
   render (h) {
