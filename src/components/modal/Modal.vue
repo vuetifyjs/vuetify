@@ -38,12 +38,11 @@
 
     props: {
       bottom: Boolean,
-
       origin: {
         type: String,
         default: 'center center'
       },
-
+      persistent: Boolean,
       transition: {
         type: String,
         default: 'v-modal-transition'
@@ -83,6 +82,10 @@
 
     methods: {
       closeConditional (e) {
+        if (this.persistent) {
+          return false
+        }
+
         return this.$refs.modal !== e.target &&
           !this.$refs.modal.contains(e.target) &&
           this.$refs.activator !== e.target &&
