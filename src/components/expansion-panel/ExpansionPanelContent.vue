@@ -12,6 +12,7 @@
 
     transition(
       v-on:enter="enter"
+      v-on:after-enter="afterEnter"
       v-on:leave="leave"
     )
       div(
@@ -61,6 +62,10 @@
     },
 
     methods: {
+      afterEnter (el) {
+        el.style.height = 'auto'
+      },
+
       closeConditional (e) {
         return this.$parent.$el.contains(e.target) && 
           !this.$parent.expand &&
