@@ -5,7 +5,7 @@ export default {
     return {
       error: false,
       focused: false,
-      inputValue: this.value ? this.value.toString() : null
+      inputValue: this.value
     }
   },
 
@@ -270,7 +270,9 @@ export default {
       }, wrapperChildren)
     )
 
-    detailsChildren.push(this.genMessages(h))
+    if (this.errors > 0 || this.hint) {
+      detailsChildren.push(this.genMessages(h))
+    }
 
     if (this.counter) {
       detailsChildren.push(this.genCounter(h))

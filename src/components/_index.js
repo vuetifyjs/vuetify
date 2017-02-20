@@ -20,6 +20,7 @@ import Pagination from './pagination/index'
 import Parallax from './parallax/index'
 import Progress from './progress/index'
 import Sidebar from './sidebar/index'
+import Slider from './sliders/index'
 import Tables from './tables/index'
 import Tabs from './tabs/index'
 import Transitions from './transitions/_index'
@@ -47,6 +48,7 @@ export default Object.assign({},
   Parallax,
   Progress,
   Sidebar,
+  Slider,
   Tables,
   Tabs,
   Transitions

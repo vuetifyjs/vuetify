@@ -1,0 +1,59 @@
+.input-group--active
+  .slider__thumb
+    border-color: $slider-light-focus-off
+    transform: translateY(-50%) scale(1)
+    
+  .slider__thumb-container, .slider__track-fill
+    transition: none
+
+  .slider__track
+    background: $slider-light-focus-off
+
+.input-group--dirty
+  .slider__thumb
+    background: $theme.primary
+    border-color: $theme.primary
+
+.slider
+  display: flex
+  align-items: center
+  position: relative
+  height: 30px
+  flex: 1
+  
+  &__track, &__thumb
+    position: absolute
+    top: 50%
+    transform: translateY(-50%)
+    
+  &__track
+    height: 2px
+    background: $slider-light-off
+    left: 0
+    transition: .3s ease-in-out
+    width: 100%
+    
+    &-fill
+      position: absolute
+      left: 0
+      height: 2px
+      background: $theme.primary
+      transition: .3s ease-in-out
+    
+  &__thumb-container
+    position: absolute
+    transition: .3s ease-in-out
+    
+  &__thumb
+    cursor: pointer
+    width: 20px
+    height: 20px
+    left: -10px
+    border-radius: 50%
+    background: #fff
+    border: 2px solid $slider-light-off
+    transition: .3s ease-in-out
+    transform: translateY(-50%) scale(.8)
+    
+    &:hover
+      transform: translateY(-50%) scale(1)
