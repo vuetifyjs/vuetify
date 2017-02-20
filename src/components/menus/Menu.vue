@@ -5,7 +5,7 @@
 
     div(
       class="menu__activator"
-      v-on:click="isActive = true"
+      v-on:click="isActive = !isActive"
       ref="activator"
       v-click-outside
     )
