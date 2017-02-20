@@ -70,7 +70,7 @@
           return this.value
         },
         set (val) {
-          const inputValue = ((this.max - this.min) * (val / 100)).toFixed(2)
+          const inputValue = ((this.max - this.min) * (val / 100))
           this.inputWidth = inputValue
           this.$emit('input', Math.round(inputValue))
         }
