@@ -1,5 +1,9 @@
 <template lang="pug">
-  div(v-bind:class="classes")
+  div(
+    v-bind:class="classes"
+    role="slider"
+    v-on:click="onMouseMove"
+  )
     v-icon(
       v-if="prependIcon" 
       class="input-group__prepend-icon"
@@ -9,18 +13,42 @@
       v-html="label"
     )
     div(class="slider")
-      div(class="slider__track" ref="track")
+      div(
+        class="slider__track"
+        ref="track"
+      )
         div(
           class="slider__track-fill"
           v-bind:style="trackFillStyles"
         )
       div(
-        class="slider__thumb-container"
+        class="slider__ticks-container"
+        v-bind:style="tickContainerStyles"
+        v-if="tickInterval"
+      )
+        div(
+          class="slider__ticks"
+          v-bind:style="tickStyles"
+        )
+      div(
+        v-bind:class="thumbContainerClasses"
         v-on:mousedown="onMouseDown"
         v-bind:style="thumbStyles"
         ref="thumb"
       )
         div(class="slider__thumb")
+        v-scale-transition(
+          origin="bottom center"
+          v-if="thumbLabel"
+        )
+          div(
+            class="slider__thumb--label__container"
+            v-if="isActive"
+          )
+            div(
+              class="slider__thumb--label"
+            )
+              span {{ inputValue }}
 </template>
 
 <script>
@@ -37,8 +65,9 @@
     },
 
     props: {
+      disabled: Boolean,
       label: String,
-      prependIcon: String,
+      inverted: Boolean,
       min: {
         type: [Number, String],
         default: 0
@@ -47,7 +76,15 @@
         type: [Number, String],
         default: 100
       },
-      value: [Number, String]
+      prependIcon: String,
+      stepSize: {
+        type: [Number, String],
+        default: 2
+      },
+      tickInterval: [Number, String],
+      thumbLabel: Boolean,
+      value: [Number, String],
+      vertical: Boolean
     },
 
     watch: {
@@ -62,7 +99,9 @@
           'input-group': true,
           'input-group--prepend-icon': this.prependIcon,
           'input-group--dirty': this.inputValue > this.min,
-          'input-group--active': this.isActive
+          'input-group--disabled': this.disabled,
+          'input-group--active': this.isActive,
+          'input-group--ticks': this.tickInterval
         }
       },
       inputValue: {
@@ -70,14 +109,38 @@
           return this.value
         },
         set (val) {
-          const inputValue = ((this.max - this.min) * (val / 100))
-          this.inputWidth = inputValue
-          this.$emit('input', Math.round(inputValue))
+          // Do not re-calc width if not needed, causes jump
+          if (val !== Math.round(this.inputWidth)) {
+            this.inputWidth = ((this.max - this.min) * (val / 100))
+          }
+
+          let value = Math.round(this.inputWidth)
+
+          value = value < this.min ? 0 : value > this.max ? this.max : value
+
+          this.$emit('input', value)
+        }
+      },
+      thumbContainerClasses () {
+        return {
+          'slider__thumb-container': true,
+          'slider__thumb-container--label': this.thumbLabel
         }
       },
       thumbStyles () {
         return {
           left: `${this.inputWidth}%`
+        }
+      },
+      tickContainerStyles () {
+        return {
+          transform: `translate3d(-${this.tickInterval / 2 * this.stepSize}%, -50%, 0)`
+        }
+      },
+      tickStyles () {
+        return {
+          backgroundSize: `${this.tickInterval * this.stepSize}% 2px`,
+          transform: `translate3d(${this.tickInterval / 2 * this.stepSize}%, -50%, 0)`
         }
       },
       trackFillStyles () {

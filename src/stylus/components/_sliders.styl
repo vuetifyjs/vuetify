@@ -3,6 +3,14 @@
     border-color: $slider-light-focus-off
     transform: translateY(-50%) scale(1)
     
+  .slider__thumb-container
+    &--label
+      .slider__thumb
+        transform: translateY(-50%) scale(0)
+        
+        &:hover
+          transform: translateY(-50%) scale(0)
+    
   .slider__thumb-container, .slider__track-fill
     transition: none
 
@@ -13,15 +21,39 @@
   .slider__thumb
     background: $theme.primary
     border-color: $theme.primary
+    
+  .slider__thumb--label
+    background: $theme.primary
+    
+.input-group--disabled
+  pointer-events: none
+  
+  .slider__thumb
+    transform: translateY(-50%) scale(.8)
+    border: 4px solid #fff
+    background: #bcbcbc
+    
+  .slider__track-fill
+    background: transparent
 
+
+/** Slider */
 .slider
   display: flex
   align-items: center
   position: relative
   height: 30px
   flex: 1
-  
-  &__track, &__thumb
+
+/** Types */
+.input-group
+  &--ticks:hover
+    .slider__track:after, .slider__ticks
+      opacity: 1
+
+/** Thumb/Track/Ticks */
+.slider
+  &__track, &__thumb, &__ticks
     position: absolute
     top: 50%
     transform: translateY(-50%)
@@ -33,6 +65,18 @@
     transition: .3s ease-in-out
     width: 100%
     
+    &:after
+      content: ''
+      position: absolute
+      right: 0
+      top: 0
+      border: 0 solid rgba(#000, .6)
+      border-left-width: 2px
+      height: 2px
+      transition: .3s ease-in-out
+      width: 1px
+      opacity: 0
+    
     &-fill
       position: absolute
       left: 0
@@ -40,12 +84,26 @@
       background: $theme.primary
       transition: .3s ease-in-out
     
+  &__ticks, 
+  &__ticks-container
+    position: absolute
+    left: 0
+    height: 2px
+    width: 100%
+    
+  &__ticks-container
+    top: 50%
+    
+  &__ticks
+    background: repeating-linear-gradient(90deg,rgba(0,0,0,.6),rgba(0,0,0,.6) 2px,transparent 0,transparent)
+    transition: .3s ease-in-out
+    opacity: 0
+    
   &__thumb-container
     position: absolute
     transition: .3s ease-in-out
     
   &__thumb
-    cursor: pointer
     width: 20px
     height: 20px
     left: -10px
@@ -54,6 +112,36 @@
     border: 2px solid $slider-light-off
     transition: .3s ease-in-out
     transform: translateY(-50%) scale(.8)
+    user-select: none
     
     &:hover
       transform: translateY(-50%) scale(1)
+
+
+/** Thumb Label */
+.slider
+  &__thumb--label__container
+    position: absolute
+    left: 0
+    top: 0
+    transition: .3s ease-in-out
+    
+  &__thumb--label
+    display: flex
+    align-items: center
+    justify-content: center
+    font-size: 12px
+    color: #fff
+    width: 28px
+    height: 28px
+    background: $slider-light-off
+    border-radius: 50% 50% 0
+    position: absolute
+    left: -14px
+    top: -42px
+    transform: rotate(45deg)
+    user-select: none
+    transition: .3s ease-in-out
+    
+    span
+      transform: rotate(-45deg)
