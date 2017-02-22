@@ -14,9 +14,13 @@
     )
     div(class="slider")
       div(
-        class="slider__track"
+        class="slider__track__container"
         ref="track"
       )
+        div(
+          class="slider__track"
+          v-bind:style="trackStyles"
+        )
         div(
           class="slider__track-fill"
           v-bind:style="trackFillStyles"
@@ -65,8 +69,10 @@
     },
 
     props: {
+      dark: Boolean,
       disabled: Boolean,
       label: String,
+      light: Boolean,
       inverted: Boolean,
       min: {
         type: [Number, String],
@@ -98,6 +104,8 @@
         return {
           'input-group': true,
           'input-group--prepend-icon': this.prependIcon,
+          'input-group--dark': this.dark,
+          'input-group--light': this.light,
           'input-group--dirty': this.inputValue > this.min,
           'input-group--disabled': this.disabled,
           'input-group--active': this.isActive,
@@ -143,11 +151,22 @@
           transform: `translate3d(${this.tickInterval / 2 * this.stepSize}%, -50%, 0)`
         }
       },
-      trackFillStyles () {
+      trackStyles () {
+        const scale = 1 - (this.inputWidth / 100) - .012
         return {
-          width: `${this.inputWidth}%`
+          transform: `scaleX(${scale < .02 ? 0 : scale})`
+        }
+      },
+      trackFillStyles () {
+        const scale = this.inputWidth / 100 - .012
+        return {
+          transform: `scaleX(${scale < .02 ? 0 : scale})`
         }
       }
+    },
+
+    mounted () {
+      this.inputValue = this.value
     },
 
     methods: {

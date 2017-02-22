@@ -3,6 +3,9 @@
     border-color: $slider-light-focus-off
     transform: translateY(-50%) scale(1)
     
+  .slider__track
+    transition: none
+    
   .slider__thumb-container
     &--label
       .slider__thumb
@@ -29,21 +32,27 @@
   pointer-events: none
   
   .slider__thumb
-    transform: translateY(-50%) scale(.8)
-    border: 4px solid #fff
-    background: #bcbcbc
+    transform: translateY(-50%) scale(.5)
+    background: transparent
     
   .slider__track-fill
-    background: transparent
+    background: $slider-light-off
+    
+  &.input-group--dirty
+    .slider__thumb
+      background: $slider-light-focus-off
+      border-color: transparent
 
 
 /** Slider */
 .slider
+  cursor: default
   display: flex
   align-items: center
   position: relative
   height: 30px
   flex: 1
+  user-select: none
 
 /** Types */
 .input-group
@@ -53,16 +62,23 @@
 
 /** Thumb/Track/Ticks */
 .slider
-  &__track, &__thumb, &__ticks
+  &__track__container
     position: absolute
     top: 50%
     transform: translateY(-50%)
+    height: 2px
+    width: 100%
+    
+  &__track, &__thumb, &__ticks
+    position: absolute
+    top: 0
     
   &__track
     height: 2px
     background: $slider-light-off
     left: 0
     transition: .3s ease-in-out
+    transform-origin: right
     width: 100%
     
     &:after
@@ -82,6 +98,8 @@
       left: 0
       height: 2px
       background: $theme.primary
+      transform-origin: left
+      width: 100%
       transition: .3s ease-in-out
     
   &__ticks, 
@@ -108,8 +126,8 @@
     height: 20px
     left: -10px
     border-radius: 50%
-    background: #fff
-    border: 2px solid $slider-light-off
+    background: transparent
+    border: 4px solid $slider-light-off
     transition: .3s ease-in-out
     transform: translateY(-50%) scale(.8)
     user-select: none
@@ -138,7 +156,7 @@
     border-radius: 50% 50% 0
     position: absolute
     left: -14px
-    top: -42px
+    top: -36px
     transform: rotate(45deg)
     user-select: none
     transition: .3s ease-in-out
