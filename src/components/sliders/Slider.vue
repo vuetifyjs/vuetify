@@ -2,7 +2,8 @@
   div(
     v-bind:class="classes"
     role="slider"
-    v-on:click="onMouseMove"
+    v-on:mouseup="sliderMove"
+    v-click-outside
   )
     v-icon(
       v-if="prependIcon" 
@@ -36,7 +37,8 @@
         )
       div(
         v-bind:class="thumbContainerClasses"
-        v-on:mousedown="onMouseDown"
+        v-on:touchstart.stop="onMouseDown"
+        v-on:mousedown.stop="onMouseDown"
         v-bind:style="thumbStyles"
         ref="thumb"
       )
@@ -49,9 +51,7 @@
             class="slider__thumb--label__container"
             v-if="isActive"
           )
-            div(
-              class="slider__thumb--label"
-            )
+            div(class="slider__thumb--label")
               span {{ inputValue }}
 </template>
 
@@ -102,13 +102,13 @@
     computed: {
       classes () {
         return {
-          'input-group': true,
-          'input-group--prepend-icon': this.prependIcon,
+          'input-group input-group--slider': true,
+          'input-group--active': this.isActive,
           'input-group--dark': this.dark,
-          'input-group--light': this.light,
           'input-group--dirty': this.inputValue > this.min,
           'input-group--disabled': this.disabled,
-          'input-group--active': this.isActive,
+          'input-group--light': this.light,
+          'input-group--prepend-icon': this.prependIcon,
           'input-group--ticks': this.tickInterval
         }
       },
@@ -148,19 +148,21 @@
       tickStyles () {
         return {
           backgroundSize: `${this.tickInterval * this.stepSize}% 2px`,
-          transform: `translate3d(${this.tickInterval / 2 * this.stepSize}%, -50%, 0)`
+          transform: `translate3d(${this.tickInterval / 2 * this.stepSize}%, 0, 0)`
         }
       },
       trackStyles () {
-        const scale = 1 - (this.inputWidth / 100) - .012
+        const scaleX = this.calculateScale(1 - (this.inputWidth / 100))
+        const translateX = this.inputWidth < 1 && !this.thumbLabel ? `${8}px` : 0
         return {
-          transform: `scaleX(${scale < .02 ? 0 : scale})`
+          transform: `scaleX(${scaleX}) translateX(${translateX})`
         }
       },
       trackFillStyles () {
-        const scale = this.inputWidth / 100 - .012
+        const scaleX = this.calculateScale(this.inputWidth / 100)
+        const translateX = this.inputWidth > 99 && !this.thumbLabel ? `${-8}px` : 0
         return {
-          transform: `scaleX(${scale < .02 ? 0 : scale})`
+          transform: `scaleX(${scaleX}) translateX(${translateX})`
         }
       }
     },
@@ -170,28 +172,39 @@
     },
 
     methods: {
+      calculateScale (scale) {
+        if (scale < .02 && !this.thumbLabel) {
+          return 0
+        }
+
+        return this.disabled ? scale - .015 : scale
+      },
       onMouseDown (e) {
         this.isActive = true
-        document.addEventListener('mousemove', this.onMouseMove, false)
+        document.addEventListener('touchmove', this.onMouseMove, false)
+        document.addEventListener('pointermove', this.onMouseMove, false)
         document.addEventListener('mouseup', this.onMouseUp, false)
       },
       onMouseUp (e) {
         this.isActive = false
-        document.removeEventListener('mousemove', this.onMouseMove, false)
+        document.removeEventListener('pointermove', this.onMouseMove, false)
+        document.removeEventListener('touchmove', this.onMouseMove, false)
       },
       onMouseMove (e) {
         let { left: offsetLeft, width: trackWidth } = this.$refs.track.getBoundingClientRect()
         let { width: thumbWidth } = this.$refs.thumb.getBoundingClientRect()
+        const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
         let left = (
-          ((e.clientX - offsetLeft - thumbWidth)
+          ((clientX - offsetLeft - thumbWidth)
           / trackWidth) * 100
         )
 
-        this.inputValue = left < 0
-          ? 0
-          : left > 100
-            ? 100
-            : left
+        this.inputValue = left < 0 ? 0 : left > 100 ? 100 : left
+      },
+      sliderMove (e) {
+        if (!this.isActive) {
+          this.onMouseMove(e)
+        }
       }
     }
   }
