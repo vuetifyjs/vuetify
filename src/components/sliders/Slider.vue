@@ -85,7 +85,7 @@
       prependIcon: String,
       stepSize: {
         type: [Number, String],
-        default: 2
+        default: 1
       },
       tickInterval: [Number, String],
       thumbLabel: Boolean,
