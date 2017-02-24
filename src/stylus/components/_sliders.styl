@@ -69,7 +69,7 @@
 /** Types */
 .input-group
   &--ticks:hover
-    .slider__track:after, .slider__ticks
+    .slider__track__container:after, .slider__ticks
       opacity: 1
 
 
@@ -83,6 +83,16 @@
     width: 100%
     overflow: hidden
     
+    &:after
+      content: ''
+      position: absolute
+      right: 0
+      top: 0
+      height: 2px
+      transition: .3s ease-in-out
+      width: 2px
+      opacity: 0
+    
   &__track, &__thumb, &__ticks
     position: absolute
     top: 0
@@ -92,17 +102,8 @@
     left: 0
     transition: .3s ease-in-out
     transform-origin: right
+    overflow: hidden
     width: 100%
-    
-    &:after
-      content: ''
-      position: absolute
-      right: 0
-      top: 0
-      height: 2px
-      transition: .3s ease-in-out
-      width: 1px
-      opacity: 0
     
     &-fill
       position: absolute
