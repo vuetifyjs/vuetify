@@ -9,17 +9,21 @@
     left: 0
     user-select: none
     transition: .3s $transition.ease-in-out
+    
+  .input-group__details:before, .input-group__details:after
+    display: none
 
+  .input-group__input
+    height: $input-height
+    width: 100%;
+    align-items: center;
 
 /** Label */
 .input-group--selection-controls label
   cursor: pointer
-  padding-left: 12px
-  
-.input-group--selection-controls__container
-  position: relative
-  width: 24px
-  height: 24px
+  padding-left: 32px
+  position: absolute
+  left: 0
   
 .input-group--selection-controls__ripple
   border-radius: 50%
@@ -27,7 +31,7 @@
   width: 48px
   cursor: pointer
   position: absolute
-  transform: translate3d(-12px, -12px, 0)
+  transform: translate3d(-12px, -9px, 0)
   transform-origin: center center
   top: 0
   left: 0
@@ -54,8 +58,9 @@
         opacity: .5
       
     .input-group--selection-controls__ripple
-      transform: translate3d(-15px, -12px, 0)
+      transform: translate3d(-15px, -24px, 0)
       transition: .3s $transition.fast-in-fast-out
+      z-index: 1
 
       &:after
         content: ''
@@ -72,18 +77,18 @@
         
       &--active
         color: inherit !important
-        transform: translate3d(2px, -12px, 0)
+        transform: translate3d(2px, -24px, 0)
         
         &:after
           background: currentColor !important
       
     label
-      padding-left: 24px
+      padding-left: 44px
       
 /* Theme */
 .input-group--selection-controls
   &.switch
-    .input-group--selection-controls__container
+    &.input-group
       &--light
         selection-controls-switch-theme($selection-switch-light-color,
           $selection-switch-light-background,
@@ -98,7 +103,7 @@
           $selection-switch-dark-disabled-background)
         
   &.checkbox, &.radio
-    .input-group--selection-controls__container
+    &.input-group
       &--light
         selection-controls-checkbox-theme($selection-controls-light-color,
           $selection-controls-light-label-color,

@@ -1,7 +1,4 @@
-input-group-theme(color, offset, dirty, background)
-  .input-group__details:before
-    background-color: background
-
+input-group-theme(color, offset, dirty)
   input, textarea
     color: color
     
@@ -17,9 +14,6 @@ input-group-theme(color, offset, dirty, background)
   &.input-group--disabled
     input, textarea
       color: color !important
-
-    .input-group__details:before
-      background-image: linear-gradient(to right, rgba(offset,0.38) 0, rgba(offset,0.38) 33%, transparent 0)
     
   &.input-group--single-line&.input-group--focused
     label

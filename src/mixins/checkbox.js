@@ -1,23 +1,16 @@
 import Contextualable from './contextualable'
+import Input from './input'
 
 export default {
-  mixins: [Contextualable],
+  mixins: [Contextualable, Input],
 
   data () {
     return {
-      focused: false,
       inputValue: this.value
     }
   },
 
   props: {
-    dark: Boolean,
-    disabled: Boolean,
-    label: String,
-    light: Boolean,
-    value: {
-      required: false
-    },
     valueV: {
       required: false
     }
