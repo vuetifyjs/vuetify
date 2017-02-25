@@ -21,13 +21,17 @@ export default {
   props: {
     value: {
       type: Object,
-      default: () => { return { text: '', value: '' } }
+      default: () => { return { text: '' } }
     },
 
     options: {
       type: Array,
       default: []
     },
+
+    multiple: Boolean,
+
+    autocomplete: Boolean,
 
     debounce: {
       type: Number,
@@ -56,31 +60,37 @@ export default {
     },
 
     genMenu (h) {
-      const input = this.genInput(h)
+      const input = this.genTextField(h)
       const list = this.genList(h)
       const data = {
         props: {
-          offsetY: true
+          offsetY: this.autocomplete,
+          auto: !this.autocomplete
         }
       }
 
       return h('v-menu', data, [input, list])
     },
 
-    genInput (h) {
+    genTextField (h) {
       const data = {
         slot: 'activator',
         props: {
           value: this.selected.text,
           appendIcon: 'arrow_drop_down'
         },
+        ref: 'textField',
         on: {
           input: (...args) => {
             this.inputText = args.join('')
           }
         },
         nativeOn: {
-          keyup: debounce(this.filterOptions, this.debounce)
+          keyup: debounce(this.filterOptions, this.debounce),
+          click: () => {
+            const input = this.$refs.textField.$el.querySelector('input')
+            console.log(input.selectionStart)
+          }
         }
       }
 
@@ -101,15 +111,30 @@ export default {
     },
 
     genListItem (h, option) {
-      const title = h('v-list-tile-title', { domProps: { innerHTML: option.text }})
-      const tile = h('v-list-tile', [title])
-      const data = {
-        on: {
-          click: () => { this.selected = option }
+      const checkbox = h(
+        'v-checkbox',
+        {
+          props: {
+            'value': 
+          }
         }
-      }
+      )
+      const action = this.multiple ? h('v-list-tile-action', [h('v-checkbox')]) : null
+      const title = h('v-list-tile-title', { domProps: { innerHTML: option.text }})
+      const content = h('v-list-tile-content', [title])
 
-      return h('v-list-item', data, [tile])
+      const tile = h(
+        'v-list-tile',
+        {
+          'class': { 'list__tile--active': this.selected.text === option.text },
+          nativeOn: {
+            click: () => { this.selected = option }
+          }
+        },
+        [action, content]
+      )
+
+      return h('v-list-item', [tile])
     }
   },
 
