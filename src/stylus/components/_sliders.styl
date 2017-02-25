@@ -18,6 +18,17 @@
 
 /** Input Group */
 .input-group--slider
+  .input-group__details:before, .input-group__details:after
+    display: none
+    
+
+  label 
+    position: absolute
+    left: 0
+    top: 0
+    + .input-group__input
+      margin-left: 56px
+
   &.input-group--active
     .slider__thumb
       transform: translateY(-50%) scale(1)
@@ -53,6 +64,10 @@
       
     &.input-group--dirty
       border-color: transparent
+      
+  &.input-group--prepend-icon
+    .slider
+      margin-left: 56px
 
 
 /** Slider */

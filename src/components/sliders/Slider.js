@@ -146,28 +146,57 @@ export default {
   },
 
   render (h) {
-    const slider = h('div', { 'class': 'slider' })
-    // const sliderTrackContainer = h('div', {'class': 'slider__track__container', ref:"track"})
-    // const sliderTrack = h('div', {style: this.trackStyles})
-    // const sliderTrackFill = h('div', {style: this.trackFillStyles})
-    // const ticksContainer = h('div', {'class': 'slider__ticks-container', style: this.tickContainerStyles}) // v-if
-    // const sliderTicks = h('div', {'class': 'slider__ticks', style: this.tickStyles})
-    // const thumbContainer = h('div', {
-    //   'class': this.thumbContainerClasses,
-    //   style: this.thumbStyles,
-    //   on: {
-    //     touchstart: this.onMouseDown,
-    //     mousedown: this.onMouseDown
-    //   },
-    //   ref: 'thumb'
-    // })
-    // const thumbContainer = h('div', {
-    //   'class': 'slider__thumb'
-    // })
-    // // v-scale transition if thumbLabel origin bottom center
-    // const thumbLabelContainer = h('div', {'class': 'slider__thumb--label__container'}) // v-if isActive
-    // const thumbLabel = h('div', {'class': 'slider__thumb--label'}) // span with {{ inputValue }}
+    const children = []
+    const trackChildren = []
+    const thumbChildren = []
 
+    trackChildren.push(h('div', { 'class': 'slider__track', style: this.trackStyles }))
+    trackChildren.push(h('div', { 'class': 'slider__track-fill', style: this.trackFillStyles }))
+    children.push(h('div', { 'class': 'slider__track__container', ref: 'track' }, trackChildren))
+
+    if (this.tickInterval) {
+      children.push(
+        h('div', { 'class': 'slider__ticks-container', style: this.tickContainerStyles }, [
+          h('div', { 'class': 'slider__ticks', style: this.tickStyles })
+        ])
+      )
+    }
+
+    thumbChildren.push(h('div', { 'class': 'slider__thumb' }))
+
+    if (this.thumbLabel) {
+      thumbChildren.push(
+        h('v-scale-transition', { props: { origin: 'bottom center' }}, [
+          h('div', {
+            'class': 'slider__thumb--label__container',
+            directives: [
+              {
+                name: 'show',
+                value: this.isActive
+              }
+            ]
+          }, [
+            h('div', { 'class': 'slider__thumb--label' }, [
+              h('span', {}, this.inputValue)
+            ])
+          ])
+        ])
+      )
+    }
+
+    const thumbContainer = h('div', {
+      'class': this.thumbContainerClasses,
+      style: this.thumbStyles,
+      on: {
+        touchstart: this.onMouseDown,
+        mousedown: this.onMouseDown
+      },
+      ref: 'thumb'
+    }, thumbChildren)
+
+    children.push(thumbContainer)
+
+    const slider = h('div', { 'class': 'slider' }, children)
     return this.genInputGroup(h, [slider])
   }
 }
