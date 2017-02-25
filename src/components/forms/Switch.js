@@ -8,7 +8,7 @@ export default {
   computed: {
     classes () {
       return {
-        'input-group input-group--selection-controls switch': true
+        'input-group--selection-controls switch': true
       }
     },
     rippleClasses () {
@@ -58,9 +58,7 @@ export default {
       ripple
     ])
 
-    return h('div', {
-      'class': this.classes
-    }, [
+    return this.genInputGroup(h, [
       container,
       h('label', { on: { click: this.toggle }}, this.label)
     ])
