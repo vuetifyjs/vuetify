@@ -1,20 +1,24 @@
 const Overlay = {
   props: {
-    active: Boolean
+    value: Boolean
   },
 
   computed: {
     classes () {
       return {
         'overlay': true,
-        'overlay--active': this.active
+        'overlay--active': this.value
       }
     }
   },
 
   render (h) {
     const data = {
-      'class': this.classes
+      'class': this.classes,
+      directives: [{
+        name: 'show',
+        value: this.value
+      }]
     }
 
     return h('div', data, [this.$slots.default])
