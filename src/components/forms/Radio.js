@@ -6,32 +6,24 @@ export default {
 
   mixins: [Contextualable, Input],
 
-  data () {
-    return {
-      inputValue: this.value === this.valueV
-    }
+  model: {
+    prop: 'inputValue',
+    event: 'change'
   },
 
   props: {
-    valueV: {
-      required: false
-    }
-  },
-
-  watch: {
-    value () {
-      if (!this.disabled) {
-        this.inputValue = this.value === this.valueV
-      }
-    }
+    inputValue: [String, Number]
   },
 
   computed: {
+    isActive () {
+      return this.inputValue === this.value
+    },
     classes () {
       return {
         'radio': true,
         'input-group--selection-controls': true,
-        'input-group--active': this.inputValue,
+        'input-group--active': this.isActive,
         'primary--text': this.primary,
         'secondary--text': this.secondary,
         'error--text': this.error,
@@ -42,14 +34,17 @@ export default {
     },
 
     icon () {
-      return this.inputValue ? 'radio_button_checked' : 'radio_button_unchecked'
+      return this.isActive ? 'radio_button_checked' : 'radio_button_unchecked'
     }
   },
 
   methods: {
+    genLabel (h) {
+      return h('label', { on: { click: this.toggle }}, this.label)
+    },
     toggle () {
       if (!this.disabled) {
-        this.$emit('input', this.valueV)
+        this.$emit('change', this.value)
       }
     }
   },
@@ -58,7 +53,7 @@ export default {
     const transition = h('v-fade-transition', {}, [
       h('v-icon', {
         'class': {
-          'icon--radio': this.inputValue
+          'icon--radio': this.isActive
         },
         key: this.icon
       }, this.icon)

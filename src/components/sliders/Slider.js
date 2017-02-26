@@ -32,12 +32,6 @@ export default {
     vertical: Boolean
   },
 
-  watch: {
-    value () {
-      this.inputValue = this.value
-    }
-  },
-
   computed: {
     classes () {
       return {
@@ -197,6 +191,19 @@ export default {
     children.push(thumbContainer)
 
     const slider = h('div', { 'class': 'slider' }, children)
-    return this.genInputGroup(h, [slider])
+
+    return this.genInputGroup(h, [slider], {
+      attrs: {
+        role: 'slider'
+      },
+      on: {
+        mouseup: this.sliderMove
+      },
+      directives: [
+        {
+          name: 'click-outside'
+        }
+      ]
+    })
   }
 }

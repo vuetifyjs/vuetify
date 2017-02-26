@@ -61,12 +61,10 @@ export default {
     const ripple = h('div', {
       'class': 'input-group--selection-controls__ripple',
       on: { click: this.toggle },
-      directives: [
-        {
-          name: 'ripple',
-          value: { center: true }
-        }
-      ]
+      directives: [{
+        name: 'ripple',
+        value: { center: true }
+      }]
     })
 
     return this.genInputGroup(h, [transition, ripple])

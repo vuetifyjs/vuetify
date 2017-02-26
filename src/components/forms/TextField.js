@@ -7,7 +7,7 @@ export default {
 
   data () {
     return {
-      inputValue: this.value
+      hasFocused: false
     }
   },
 
@@ -21,7 +21,9 @@ export default {
     },
 
     hasError () {
-      return this.errors.length !== 0 || !this.counterIsValid()
+      return this.errors.length !== 0 ||
+        !this.counterIsValid() ||
+        !this.validateIsValid()
     },
 
     count () {
@@ -33,6 +35,19 @@ export default {
       }
 
       return `${min} / ${this.max}`
+    },
+
+    inputValue: {
+      get () {
+        return this.value
+      },
+      set (val) {
+        if (!this.lazy) {
+          this.$emit('input', val)
+        }
+
+        this.lazyValue = val
+      }
     }
   },
 
@@ -58,22 +73,16 @@ export default {
   },
 
   watch: {
-    value () {
-      this.inputValue = this.value
-    },
-
-    inputValue () {
-      if (!this.lazy) {
-        this.$emit('input', this.inputValue)
-      }
-    },
-
     focused () {
       this.$emit('focused', this.focused)
+      this.hasFocused = true
 
       if (!this.focused) {
-        this.$emit('input', this.inputValue)
+        this.$emit('input', this.lazyValue)
       }
+    },
+    value () {
+      this.lazyValue = this.value
     }
   },
 
@@ -81,12 +90,6 @@ export default {
     blur () {
       this.validate()
       this.$nextTick(() => (this.focused = false))
-    },
-    focus () {
-      this.focused = true
-    },
-    updateValue (e) {
-      this.inputValue = e.target.value
     },
     genCounter (h) {
       return h('div', {
@@ -110,9 +113,10 @@ export default {
         },
         on: {
           blur: this.blur,
-          input: this.updateValue,
+          input: e => (this.inputValue = e.target.value),
           focus: () => (this.focused = true)
-        }
+        },
+        ref: 'input'
       }
 
       if (this.multiLine) {
@@ -130,8 +134,11 @@ export default {
       )
     },
     validateIsValid () {
-      return (!this.required || this.required &&
-        (this.inputValue || '').length !== 0)
+      return (!this.required ||
+        (this.required &&
+          this.inputValue) ||
+        !this.hasFocused ||
+        (this.hasFocused && this.focused))
     }
   },
 

@@ -2,7 +2,8 @@ export default {
   data () {
     return {
       errors: [],
-      focused: false
+      focused: false,
+      lazyValue: this.value
     }
   },
 
@@ -110,13 +111,14 @@ export default {
         }
       })
     },
-    genInputGroup (h, input) {
+    genInputGroup (h, input, data = {}) {
       const children = []
       const wrapperChildren = []
       const detailsChildren = []
-      const data = {
+
+      data = Object.assign(data, {
         'class': this.inputGroupClasses
-      }
+      })
 
       if (this.label) {
         children.push(this.genLabel(h))
