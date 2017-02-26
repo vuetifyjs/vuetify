@@ -12,7 +12,7 @@ export default {
     dark: Boolean,
     disabled: Boolean,
     hint: String,
-    hintOnFocus: Boolean,
+    persistentHint: Boolean,
     label: String,
     lazy: Boolean,
     light: {
@@ -87,7 +87,7 @@ export default {
         directives: [
           {
             name: 'show',
-            value: (!this.hintOnFocus || (this.hintOnFocus && this.focused)) && !this.errors.length
+            value: (this.persistentHint || (!this.persistentHint && this.focused)) && !this.errors.length
           }
         ],
         key: 'hint'
