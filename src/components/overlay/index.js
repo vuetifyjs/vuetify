@@ -14,11 +14,7 @@ const Overlay = {
 
   render (h) {
     const data = {
-      'class': this.classes,
-      directives: [{
-        name: 'show',
-        value: this.value
-      }]
+      'class': this.classes
     }
 
     return h('div', data, [this.$slots.default])
