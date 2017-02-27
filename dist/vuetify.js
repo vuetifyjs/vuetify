@@ -4568,7 +4568,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
       return this.$refs.modal !== e.target &&
         !this.$refs.modal.contains(e.target) && 
-        (this.$refs.activator &&
+        (!this.$refs.activator || this.$refs.activator &&
           !this.$refs.activator.contains(e.target) &&
           this.$refs.activator !== e.target)
     }
