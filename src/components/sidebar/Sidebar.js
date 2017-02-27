@@ -10,25 +10,18 @@ export default {
       type: Boolean,
       default: true
     },
-
     drawer: Boolean,
-
     fixed: Boolean,
-
     right: Boolean,
-
     height: String,
-
     mobile: {
       type: Boolean,
       default: true
     },
-
     mobileBreakPoint: {
       type: Number,
       default: 992
     },
-
     disableRouteWatcher: Boolean
   },
 
@@ -40,7 +33,6 @@ export default {
 
       return this.fixed || this.drawer ? '100vh' : 'auto'
     },
-
     classes () {
       return {
         'sidebar': true,
@@ -52,7 +44,6 @@ export default {
         'sidebar--open': this.isActive
       }
     },
-
     styles () {
       return {
         'height': this.calculatedHeight
@@ -62,8 +53,9 @@ export default {
 
   watch: {
     '$route' () {
-      if (!this.disableRouteWatcher)
+      if (!this.disableRouteWatcher) {
         this.isActive = !this.routeChanged()
+      }
     }
   },
 
