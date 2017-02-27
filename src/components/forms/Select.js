@@ -7,7 +7,7 @@ export default {
     return {
       selected: Array.isArray(this.value) ? this.value : [this.value],
       filtered: null,
-      textFieldString: ''
+      searchText: 'test'
     }
   },
 
@@ -15,6 +15,9 @@ export default {
     classes () {
       return {
       }
+    },
+    selectedString () {
+      return this.selected.length ? this.selected.map(s => s.text).join(', ') : ''
     }
   },
 
@@ -24,9 +27,14 @@ export default {
       default: () => { return [] }
     },
 
-    options: {
+    items: {
       type: Array,
-      default: []
+      default: () => { return [] }
+    },
+
+    itemText: {
+      type: String,
+      default: 'text'
     },
 
     multiple: Boolean,
@@ -50,24 +58,26 @@ export default {
   },
 
   methods: {
-    filterOptions () {
-      if (this.textFieldString) {
-        this.filtered = this.options.filter(option => option.text.includes(this.textFieldString))
+    filterItems () {
+      const { items, searchText, itemText: text } = this
+
+      if (searchText) {
+        this.filtered = items.filter(item => item[text].includes(searchText))
       } else {
         this.filtered = null
       }
     },
 
-    isSelected (option) {
-      return this.selected.includes(option)
+    isSelected (item) {
+      return this.selected.includes(item)
     },
 
-    addSelected (option) {
-      this.multiple ? this.selected.push(option) : this.selected = [option]
+    addSelected (item) {
+      this.multiple ? this.selected.push(item) : this.selected = [item]
     },
 
-    removeSelected (option) {
-      this.selected.splice(this.selected.findIndex(s => s === option), 1)
+    removeSelected (item) {
+      this.selected.splice(this.selected.findIndex(s => s === item), 1)
     },
 
     genMenu (h) {
@@ -87,17 +97,17 @@ export default {
       const data = {
         slot: 'activator',
         props: {
-          value: this.selected.length ? this.selected.map(s => s.text).join(', ') : '',
+          value: this.selectedString,
           appendIcon: 'arrow_drop_down'
         },
         ref: 'textField',
         on: {
           input: (...args) => {
-            this.textFieldString = args.join('')
+            this.searchText = args.join('')
           }
         },
         nativeOn: {
-          keyup: debounce(this.filterOptions, this.debounce),
+          keyup: debounce(this.filterItems, this.debounce),
           click: () => {
             // const input = this.$refs.textField.$el.querySelector('input')
             // console.log(input.selectionStart)
@@ -109,32 +119,32 @@ export default {
     },
 
     genList (h) {
-      const items = []
-      const options = this.filtered || this.options
+      const listItems = []
+      const items = this.filtered || this.items
 
-      options.forEach(option => {
+      items.forEach(item => {
         this.$scopedSlots.default
-          ? items.push(this.$scopedSlots.default({ option }))
-          : items.push(this.genListItem(h, option))
+          ? listItems.push(this.$scopedSlots.default({ item }))
+          : listItems.push(this.genListItem(h, item))
       })
 
-      return h('v-list', items)
+      return h('v-list', listItems)
     },
 
-    genListItem (h, option) {
-      const action = this.genAction(h, option)
-      const title = h('v-list-tile-title', { domProps: { innerHTML: option.text }})
+    genListItem (h, item) {
+      const action = this.genAction(h, item)
+      const title = h('v-list-tile-title', { domProps: { innerHTML: item.text }})
       const content = h('v-list-tile-content', [title])
 
       const tile = h(
         'v-list-tile',
         {
-          'class': { 'list__tile--active': this.isSelected(option) },
+          'class': { 'list__tile--active': this.isSelected(item) },
           nativeOn: {
             click: () => {
-              this.multiple && this.isSelected(option)
-                ? this.removeSelected(option)
-                : this.addSelected(option)
+              this.multiple && this.isSelected(item)
+                ? this.removeSelected(item)
+                : this.addSelected(item)
             }
           }
         },
@@ -144,12 +154,12 @@ export default {
       return h('v-list-item', [tile])
     },
 
-    genAction (h, option) {
+    genAction (h, item) {
       const checkbox = h(
         'v-checkbox',
         {
           props: {
-            'value': this.isSelected(option)
+            'inputValue': this.isSelected(item)
           }
         }
       )
