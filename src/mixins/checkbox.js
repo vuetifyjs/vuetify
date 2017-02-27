@@ -4,49 +4,57 @@ import Input from './input'
 export default {
   mixins: [Contextualable, Input],
 
-  data () {
-    return {
-      inputValue: this.value
-    }
+  model: {
+    prop: 'inputValue',
+    event: 'change'
   },
 
   props: {
-    valueV: {
-      required: false
-    }
+    inputValue: [Array, Boolean, String],
+    falseValue: String,
+    trueValue: String
   },
 
   computed: {
     isActive () {
-      return (
-        (Array.isArray(this.value) &&
-          this.value.indexOf(this.valueV) !== -1) ||
-        (!Array.isArray(this.value) &&
-          this.value)
-      )
+      if ((Array.isArray(this.inputValue))
+      ) {
+        return this.inputValue.indexOf(this.value) !== -1
+      }
+
+      if (!this.trueValue || !this.falseValue) {
+        return Boolean(this.inputValue)
+      }
+
+      return this.inputValue === this.trueValue
     }
   },
 
   methods: {
+    genLabel (h) {
+      return h('label', { on: { click: this.toggle }}, this.label)
+    },
     toggle () {
       if (this.disabled) {
         return
       }
 
-      let input = this.value
+      let input = this.inputValue
       if (Array.isArray(input)) {
-        const i = input.indexOf(this.valueV)
+        const i = input.indexOf(this.value)
 
         if (i === -1) {
-          input.push(this.valueV)
+          input.push(this.value)
         } else {
           input.splice(i, 1)
         }
+      } else if (this.trueValue || this.falseValue) {
+        input = input === this.trueValue ? this.falseValue : this.trueValue
       } else {
         input = !input
       }
 
-      this.$emit('input', input)
+      this.$emit('change', input)
     }
   }
 }

@@ -2,7 +2,8 @@ export default {
   data () {
     return {
       errors: [],
-      focused: false
+      focused: false,
+      lazyValue: this.value
     }
   },
 
@@ -11,7 +12,7 @@ export default {
     dark: Boolean,
     disabled: Boolean,
     hint: String,
-    hintOnFocus: Boolean,
+    persistentHint: Boolean,
     label: String,
     lazy: Boolean,
     light: {
@@ -86,7 +87,7 @@ export default {
         directives: [
           {
             name: 'show',
-            value: (!this.hintOnFocus || (this.hintOnFocus && this.focused)) && !this.errors.length
+            value: (this.persistentHint || (!this.persistentHint && this.focused)) && !this.errors.length
           }
         ],
         key: 'hint'
@@ -110,13 +111,14 @@ export default {
         }
       })
     },
-    genInputGroup (h, input) {
+    genInputGroup (h, input, data = {}) {
       const children = []
       const wrapperChildren = []
       const detailsChildren = []
-      const data = {
+
+      data = Object.assign(data, {
         'class': this.inputGroupClasses
-      }
+      })
 
       if (this.label) {
         children.push(this.genLabel(h))
