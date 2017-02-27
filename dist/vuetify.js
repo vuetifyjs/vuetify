@@ -4920,10 +4920,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
       set: function set (val) {
         // Do not re-calc width if not needed, causes jump
         if (val !== Math.round(this.inputWidth)) {
+<<<<<<< HEAD
           this.inputWidth = (100 * (val / this.max))
         }
 
         var value = Math.round(val)
+=======
+          this.inputWidth = ((this.max - this.min) * (val / 100))
+        }
+
+        var value = Math.round(this.inputWidth)
+>>>>>>> 1cf244924cd0a101146e2727319a3feb02328ed9
 
         value = value < this.min ? 0 : value > this.max ? this.max : value
 
@@ -5003,9 +5010,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
         / trackWidth) * 100
       )
 
+<<<<<<< HEAD
       left = left < 0 ? 0 : left > 100 ? 100 : left
 
       this.inputValue = this.max * (left / 100)
+=======
+      this.inputValue = left < 0 ? 0 : left > 100 ? 100 : left
+>>>>>>> 1cf244924cd0a101146e2727319a3feb02328ed9
     },
     sliderMove: function sliderMove (e) {
       if (!this.isActive) {
