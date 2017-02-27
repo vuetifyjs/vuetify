@@ -2,7 +2,7 @@
   lists()
   padding-top: $list-top-padding
   padding-bottom: $list-bottom-padding
-  transition: height .3s $transition.ease-in-out
+  transition: height .4s $transition.fast-out-slow-in
   
   .input-group
     margin: 0
@@ -126,6 +126,7 @@
         
     &--disabled
       opacity: 0.4
+      pointer-events: none
 
     &--avatar
       height: $list-item-avatar-single-height

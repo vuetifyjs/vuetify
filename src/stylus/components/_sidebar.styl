@@ -62,9 +62,25 @@
     &:after
       background: $material-twelve-percent-light
       
+    &--active
+      .list__tile__title
+        color: inherit
+
+      &:first-child
+        .icon
+          color: $theme.primary
+      
   .list--group
-    > .list__tile--active
-      color: $sidebar-item-color
+    &__header--active
+      &:first-child
+        .list__tile__action:first-child
+          .icon
+            color: $theme.primary
 
     &:after
       background: $material-twelve-percent-light
+
+  .list--group__container
+    .list__tile--active
+      .list__tile__title
+        color: $theme.primary
