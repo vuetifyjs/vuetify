@@ -1,0 +1,37 @@
+.stepper
+  height: 400px
+  border: 1px solid black
+  
+.stepper
+  &__header
+    border: 1px solid red
+    align-items: center
+    display: flex
+    flex-wrap: wrap
+    justify-content: space-between
+    padding: 24px
+    
+
+.stepper
+  &__step
+    display: flex
+    flex-direction: column
+    text-align: center
+    padding: 0 8px
+    
+    span
+      height: 32px
+      width: 32px
+      line-height: 32px
+      background: blue
+      color: white
+      border-radius: 50%
+      
+.stepper
+  &__labels
+    display: flex
+    justify-content: space-between
+    flex: 1 0 100%
+    
+    > div
+      margin-top: 16px
