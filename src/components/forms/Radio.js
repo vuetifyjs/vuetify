@@ -1,46 +1,29 @@
 import Contextualable from '../../mixins/contextualable'
+import Input from '../../mixins/input'
 
 export default {
   name: 'radio',
 
-  mixins: [Contextualable],
+  mixins: [Contextualable, Input],
 
-  data () {
-    return {
-      focused: false,
-      inputValue: this.value === this.valueV
-    }
+  model: {
+    prop: 'inputValue',
+    event: 'change'
   },
 
   props: {
-    dark: Boolean,
-    disabled: Boolean,
-    label: String,
-    light: Boolean,
-    value: {
-      required: false
-    },
-    valueV: {
-      required: false
-    }
-  },
-
-  watch: {
-    value () {
-      if (!this.disabled) {
-        this.inputValue = this.value === this.valueV
-      }
-    }
+    inputValue: [String, Number]
   },
 
   computed: {
+    isActive () {
+      return this.inputValue === this.value
+    },
     classes () {
       return {
-        'input-group--selection-controls__container': true,
-        'input-group--selection-controls__container--active': this.inputValue,
-        'input-group--selection-controls__container--light': this.light,
-        'input-group--selection-controls__container--dark': this.dark,
-        'input-group--selection-controls__container--disabled': this.disabled,
+        'radio': true,
+        'input-group--selection-controls': true,
+        'input-group--active': this.isActive,
         'primary--text': this.primary,
         'secondary--text': this.secondary,
         'error--text': this.error,
@@ -51,14 +34,17 @@ export default {
     },
 
     icon () {
-      return this.inputValue ? 'radio_button_checked' : 'radio_button_unchecked'
+      return this.isActive ? 'radio_button_checked' : 'radio_button_unchecked'
     }
   },
 
   methods: {
+    genLabel (h) {
+      return h('label', { on: { click: this.toggle }}, this.label)
+    },
     toggle () {
       if (!this.disabled) {
-        this.$emit('input', this.valueV)
+        this.$emit('change', this.value)
       }
     }
   },
@@ -67,7 +53,7 @@ export default {
     const transition = h('v-fade-transition', {}, [
       h('v-icon', {
         'class': {
-          'icon--radio': this.inputValue
+          'icon--radio': this.isActive
         },
         key: this.icon
       }, this.icon)
@@ -84,11 +70,6 @@ export default {
       ]
     })
 
-    return h('div', {
-      'class': 'input-group input-group--selection-controls radio'
-    }, [
-      h('div', { 'class': this.classes }, [transition, ripple]),
-      h('label', { on: { click: this.toggle }}, this.label)
-    ])
+    return this.genInputGroup(h, [transition, ripple])
   }
 }

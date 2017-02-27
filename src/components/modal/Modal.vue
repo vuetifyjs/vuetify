@@ -5,12 +5,12 @@
       class="modal__activator"
       v-on:click="isActive = !isActive" 
       ref="activator"
-      v-show="$slots.activator"
+      v-if="$slots.activator"
     )
       slot(name="activator")
 
     v-overlay(
-      v-bind:active="isActive"
+      v-model="isActive"
       v-bind:class="overlayClasses"
     )
       component(

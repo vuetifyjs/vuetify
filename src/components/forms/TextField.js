@@ -1,31 +1,29 @@
+import Input from '../../mixins/input'
+
 export default {
   name: 'text-field',
 
+  mixins: [Input],
+
   data () {
     return {
-      error: false,
-      focused: false,
-      inputValue: this.value
+      hasFocused: false
     }
   },
 
   computed: {
     classes () {
       return {
-        'input-group': true,
         'input-group--text-field': true,
-        'input-group--focused': this.focused,
-        'input-group--dirty': this.inputValue,
-        'input-group--disabled': this.disabled,
-        'input-group--light': this.light && !this.dark,
-        'input-group--dark': this.dark,
         'input-group--single-line': this.singleLine,
-        'input-group--error': this.error || this.errors.length > 0,
-        'input-group--append-icon': this.appendIcon,
-        'input-group--prepend-icon': this.prependIcon,
-        'input-group--multi-line': this.multiLine,
-        'input-group--required': this.required
+        'input-group--multi-line': this.multiLine
       }
+    },
+
+    hasError () {
+      return this.errors.length !== 0 ||
+        !this.counterIsValid() ||
+        !this.validateIsValid()
     },
 
     count () {
@@ -37,27 +35,25 @@ export default {
       }
 
       return `${min} / ${this.max}`
+    },
+
+    inputValue: {
+      get () {
+        return this.value
+      },
+      set (val) {
+        if (!this.lazy) {
+          this.$emit('input', val)
+        }
+
+        this.lazyValue = val
+      }
     }
   },
 
   props: {
-    appendIcon: String,
     autocomplete: Boolean,
     counter: Boolean,
-    dark: Boolean,
-    disabled: Boolean,
-    errors: {
-      type: Array,
-      default: () => []
-    },
-    hint: String,
-    hintOnFocus: Boolean,
-    label: String,
-    lazy: Boolean,
-    light: {
-      type: Boolean,
-      default: true
-    },
     id: String,
     min: {
       type: [Number, String],
@@ -70,35 +66,23 @@ export default {
     menu: Boolean,
     multiLine: Boolean,
     name: String,
-    prependIcon: String,
-    required: Boolean,
-    rules: Array,
     singleLine: Boolean,
     type: {
       default: 'text'
-    },
-    value: {
-      required: false
     }
   },
 
   watch: {
-    value (value) {
-      this.inputValue = value
-    },
-
-    inputValue () {
-      if (!this.lazy) {
-        this.$emit('input', this.inputValue)
-      }
-    },
-
     focused () {
       this.$emit('focused', this.focused)
+      this.hasFocused = true
 
       if (!this.focused) {
-        this.$emit('input', this.inputValue)
+        this.$emit('input', this.lazyValue)
       }
+    },
+    value () {
+      this.lazyValue = this.value
     }
   },
 
@@ -107,16 +91,6 @@ export default {
       this.validate()
       this.$nextTick(() => (this.focused = false))
     },
-
-    focus () {
-      this.focused = true
-    },
-
-    updateValue (e) {
-      this.inputValue = e.target.value
-    },
-
-    /** Generators */
     genCounter (h) {
       return h('div', {
         'class': {
@@ -125,47 +99,6 @@ export default {
         }
       }, this.count)
     },
-
-    genHint (h) {
-      return h('div', {
-        'class': {
-          'input-group__hint': true
-        },
-        directives: [
-          {
-            name: 'show',
-            value: (!this.hintOnFocus || (this.hintOnFocus && this.focused)) && !this.errors.length
-          }
-        ],
-        domProps: {
-          innerHTML: this.hint
-        },
-        key: 'hint'
-      })
-    },
-
-    genError (h, error) {
-      return h(
-        'div',
-        {
-          domProps: {
-            className: 'input-group__error'
-          },
-          key: error
-        },
-        error
-      )
-    },
-
-    genIcon (h, type) {
-      return h('v-icon', {
-        'class': { ['input-group__' + type + '-icon']: true },
-        domProps: {
-          innerText: this[`${type}Icon`]
-        }
-      })
-    },
-
     genInput (h) {
       const tag = this.multiLine ? 'textarea' : 'input'
 
@@ -180,9 +113,10 @@ export default {
         },
         on: {
           blur: this.blur,
-          input: this.updateValue,
-          focus: this.focus
-        }
+          input: e => (this.inputValue = e.target.value),
+          focus: () => (this.focused = true)
+        },
+        ref: 'input'
       }
 
       if (this.multiLine) {
@@ -193,97 +127,22 @@ export default {
 
       return h(tag, inputData)
     },
-
-    genLabel (h) {
-      return h('label', {
-        domProps: {
-          for: this.id || this.name,
-          innerHTML: this.label
-        }
-      })
-    },
-
-    genMessages (h) {
-      const messages = [this.genHint(h)]
-
-      this.errors.forEach(i => {
-        messages.push(this.genError(h, i))
-      })
-
-      return h(
-        'transition-group',
-        {
-          'class': {
-            'input-group__messages': true
-          },
-          props: {
-            tag: 'div',
-            name: 'slide-y-transition'
-          }
-        },
-        messages
-      )
-    },
-
-    /** Validators */
     counterIsValid () {
       return (!this.counter ||
         !this.inputValue ||
         (this.inputValue.length >= this.min && this.inputValue.length <= this.max)
       )
     },
-
     validateIsValid () {
-      return (!this.required || this.required &&
-        (this.inputValue || '').length !== 0)
-    },
-
-    validate () {
-      this.error = (
-        !this.validateIsValid()
-      )
+      return (!this.required ||
+        (this.required &&
+          this.inputValue) ||
+        !this.hasFocused ||
+        (this.hasFocused && this.focused))
     }
   },
 
   render (h) {
-    const children = []
-    const wrapperChildren = []
-    const detailsChildren = []
-
-    if (this.label) {
-      children.push(this.genLabel(h))
-    }
-
-    wrapperChildren.push(this.genInput(h))
-
-    if (this.prependIcon) {
-      wrapperChildren.unshift(this.genIcon(h, 'prepend'))
-    }
-
-    if (this.appendIcon) {
-      wrapperChildren.push(this.genIcon(h, 'append'))
-    }
-
-    children.push(
-      h('div', {
-        'class': { 'input-group__wrapper': true }
-      }, wrapperChildren)
-    )
-
-    if (this.errors > 0 || this.hint) {
-      detailsChildren.push(this.genMessages(h))
-    }
-
-    if (this.counter) {
-      detailsChildren.push(this.genCounter(h))
-    }
-
-    children.push(
-      h('div', {
-        'class': { 'input-group__details': true }
-      }, detailsChildren)
-    )
-
-    return h('div', { 'class': this.classes }, children)
+    return this.genInputGroup(h, this.genInput(h))
   }
 }

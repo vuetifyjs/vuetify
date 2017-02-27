@@ -18,11 +18,9 @@ export default {
   computed: {
     classes () {
       return {
-        'input-group--selection-controls__container': true,
-        'input-group--selection-controls__container--active': this.isActive,
-        'input-group--selection-controls__container--light': this.light,
-        'input-group--selection-controls__container--dark': this.dark,
-        'input-group--selection-controls__container--disabled': this.disabled,
+        'checkbox': true,
+        'input-group--selection-controls': true,
+        'input-group--active': this.isActive,
         'primary--text': this.primary,
         'secondary--text': this.secondary,
         'error--text': this.error,
@@ -63,19 +61,12 @@ export default {
     const ripple = h('div', {
       'class': 'input-group--selection-controls__ripple',
       on: { click: this.toggle },
-      directives: [
-        {
-          name: 'ripple',
-          value: { center: true }
-        }
-      ]
+      directives: [{
+        name: 'ripple',
+        value: { center: true }
+      }]
     })
 
-    return h('div', {
-      'class': 'input-group input-group--selection-controls checkbox'
-    }, [
-      h('div', { 'class': this.classes }, [transition, ripple]),
-      h('label', { on: { click: this.toggle }}, this.label)
-    ])
+    return this.genInputGroup(h, [transition, ripple])
   }
 }
