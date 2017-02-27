@@ -57,7 +57,6 @@ export default {
         value = value < this.min ? 0 : value > this.max ? this.max : value
 
         this.$emit('input', value)
-        console.log(value)
       }
     },
     thumbContainerClasses () {
