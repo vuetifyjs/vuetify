@@ -5,9 +5,9 @@ export default {
 
   data () {
     return {
-      selected: this.value,
+      selected: Array.isArray(this.value) ? this.value : [this.value],
       filtered: null,
-      inputText: ''
+      textFieldString: ''
     }
   },
 
@@ -20,8 +20,8 @@ export default {
 
   props: {
     value: {
-      type: Object,
-      default: () => { return { text: '' } }
+      type: [Object, Array],
+      default: () => { return [] }
     },
 
     options: {
@@ -40,23 +40,34 @@ export default {
   },
 
   watch: {
-    value (value) {
-      this.selected = value
+    value (val) {
+      this.selected = this.multiple ? val : [val]
     },
 
-    selected (value) {
-      this.inputText = value
-      this.$emit('input', this.selected)
+    selected (val) {
+      this.$emit('input', this.multiple ? this.selected : this.selected[0])
     }
   },
 
   methods: {
     filterOptions () {
-      if (this.inputText) {
-        this.filtered = this.options.filter(option => option.text.includes(this.inputText))
+      if (this.textFieldString) {
+        this.filtered = this.options.filter(option => option.text.includes(this.textFieldString))
       } else {
         this.filtered = null
       }
+    },
+
+    isSelected (option) {
+      return this.selected.includes(option)
+    },
+
+    addSelected (option) {
+      this.multiple ? this.selected.push(option) : this.selected = [option]
+    },
+
+    removeSelected (option) {
+      this.selected.splice(this.selected.findIndex(s => s === option), 1)
     },
 
     genMenu (h) {
@@ -76,20 +87,20 @@ export default {
       const data = {
         slot: 'activator',
         props: {
-          value: this.selected.text,
+          value: this.selected.length ? this.selected.map(s => s.text).join(', ') : '',
           appendIcon: 'arrow_drop_down'
         },
         ref: 'textField',
         on: {
           input: (...args) => {
-            this.inputText = args.join('')
+            this.textFieldString = args.join('')
           }
         },
         nativeOn: {
           keyup: debounce(this.filterOptions, this.debounce),
           click: () => {
-            const input = this.$refs.textField.$el.querySelector('input')
-            console.log(input.selectionStart)
+            // const input = this.$refs.textField.$el.querySelector('input')
+            // console.log(input.selectionStart)
           }
         }
       }
@@ -111,30 +122,39 @@ export default {
     },
 
     genListItem (h, option) {
-      const checkbox = h(
-        'v-checkbox',
-        {
-          props: {
-            'value': 
-          }
-        }
-      )
-      const action = this.multiple ? h('v-list-tile-action', [h('v-checkbox')]) : null
+      const action = this.genAction(h, option)
       const title = h('v-list-tile-title', { domProps: { innerHTML: option.text }})
       const content = h('v-list-tile-content', [title])
 
       const tile = h(
         'v-list-tile',
         {
-          'class': { 'list__tile--active': this.selected.text === option.text },
+          'class': { 'list__tile--active': this.isSelected(option) },
           nativeOn: {
-            click: () => { this.selected = option }
+            click: () => {
+              this.multiple && this.isSelected(option)
+                ? this.removeSelected(option)
+                : this.addSelected(option)
+            }
           }
         },
         [action, content]
       )
 
       return h('v-list-item', [tile])
+    },
+
+    genAction (h, option) {
+      const checkbox = h(
+        'v-checkbox',
+        {
+          props: {
+            'value': this.isSelected(option)
+          }
+        }
+      )
+
+      return this.multiple ? h('v-list-tile-action', [checkbox]) : null
     }
   },
 
