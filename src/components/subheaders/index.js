@@ -5,8 +5,8 @@ const Subheader = {
     let listClass = 'subheader'
 
     if (
-      (data.props && data.props.inset) ||
-      (data.attrs && data.attrs.inset)
+      (data.props && 'inset' in data.props) ||
+      (data.attrs && 'inset' in data.attrs)
     ) {
       listClass += ' subheader--inset'
     }
