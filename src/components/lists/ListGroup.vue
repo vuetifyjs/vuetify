@@ -23,20 +23,20 @@
 </template>
 <script>
   import { closestParentTag, addOnceEventListener } from '../../util/helpers'
+  import Toggleable from '../../mixins/toggleable'
 
   export default {
     name: 'list-group',
 
+    mixins: [Toggleable],
+
     data () {
       return {
-        isActive: this.active,
         height: 0
       }
     },
 
     props: {
-      active: Boolean,
-
       group: String
     },
 
@@ -59,14 +59,8 @@
     },
 
     watch: {
-      active () {
-        this.isActive = this.active
-      },
-
       isActive () {
-        if (this.isActive !== this.active) {
-          this.$emit('active', this.active)
-        }
+        this.$emit('input', this.isActive)
 
         if (!this.isActive) {
           this.list.listClose(this._uid)
