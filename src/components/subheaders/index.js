@@ -1,14 +1,14 @@
-const SubHeader = {
+const Subheader = {
   functional: true,
 
   render (h, { data, children }) {
-    let listClass = 'sub-header'
+    let listClass = 'subheader'
 
     if (
       (data.props && data.props.inset) ||
       (data.attrs && data.attrs.inset)
     ) {
-      listClass += ' sub-header--inset'
+      listClass += ' subheader--inset'
     }
 
     data.staticClass = data.staticClass ? `${listClass} ${data.staticClass}` : listClass
@@ -18,5 +18,5 @@ const SubHeader = {
 }
 
 export default {
-  SubHeader
+  Subheader
 }

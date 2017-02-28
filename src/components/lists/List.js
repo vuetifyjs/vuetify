@@ -25,7 +25,7 @@ export default {
         'list--two-line': this.twoLine,
         'list--dense': this.dense,
         'list--three-line': this.threeLine,
-        'list--sub-header': this.subHeader
+        'list--subheader': this.subHeader
       }
     }
   },
