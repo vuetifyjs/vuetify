@@ -37,13 +37,15 @@
     },
 
     props: {
-      group: String
+      group: String,
+      noAction: Boolean
     },
 
     computed: {
       classes () {
         return {
-          'list--group__header--active': this.isActive
+          'list--group__header--active': this.isActive,
+          'list--group__header--no-action': this.noAction
         }
       },
 
