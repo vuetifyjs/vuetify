@@ -1,37 +1,82 @@
 .stepper
-  height: 400px
-  border: 1px solid black
+  overflow: hidden
+  position: relative
+  @extend .z-depth-1
+  
+  &--vertical
+    .stepper__content
+      margin: -16px 0 -16px 36px
+    .stepper__content:not(:last-child)
+      border-left: 1px solid $material-twelve-percent-dark
+  
+.stepper
+  .divider
+    align-self: center
+    margin: 0 -8px
   
 .stepper
   &__header
-    border: 1px solid red
-    align-items: center
+    align-items: stretch
     display: flex
     flex-wrap: wrap
     justify-content: space-between
-    padding: 24px
+    @extend .z-depth-1
     
 
 .stepper
   &__step
+    align-items: center
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    padding: 24px
+    position: relative
+    
+    &--active
+      .stepper__label
+        text-shadow: 0px 0px 0px black
+        transition: .3s $transition.ease-in-out
+    
+    &--editable
+      cursor: pointer
+
+      &:hover
+        background: rgba(#000, .1)
+
+    &__step
+      align-items: center
+      background: $theme.primary
+      border-radius: 50%
+      color: white
+      display: flex
+      font-size: 12px
+      justify-content: center
+      height: 24px
+      margin-right: 8px
+      width: 24px
+    
+.stepper
+  &__label
+    align-items: flex-start
     display: flex
     flex-direction: column
-    text-align: center
-    padding: 0 8px
+    text-align: left
     
-    span
-      height: 32px
-      width: 32px
-      line-height: 32px
-      background: blue
-      color: white
-      border-radius: 50%
-      
+    small
+      font-size: 12px
+      color: rgba(#000, .54)
+      text-shadow: none
+
 .stepper
-  &__labels
-    display: flex
-    justify-content: space-between
-    flex: 1 0 100%
-    
-    > div
-      margin-top: 16px
+  &__wrapper
+    overflow: hidden
+    transition: .3s $transition.ease-in-out
+
+.stepper
+  &__content
+    top: initial
+    bottom: 0
+    padding: 16px
+    overflow: hidden
+    transition: .3s $transition.ease-in-out
+    width: 100%
