@@ -1,0 +1,54 @@
+.snack
+	position: fixed
+	display: flex
+	z-index: 1
+	visibility: visible
+
+	&--position-left
+		left: 0
+	&--position-right
+		right: 0
+	&--position-top
+		top: 0
+		left: 50%
+		transform: translateX(-50%)
+	&--position-bottom
+		bottom: 0
+		left: 50%
+		transform: translateX(-50%)
+
+	&--body
+		font-family: Roboto
+		background-color: #323232
+		padding: 14px 24px
+		height: 48px
+		border-radius: 2px
+		max-width: 568px
+		min-width: 288px
+		width: auto
+		height: auto
+		flex-grow: 0
+
+	&--content
+		font-size: 14px
+		color: white
+		opacity: 1
+		display: flex
+		justify-content: space-between
+
+	&--action-btn
+		text-transform: uppercase
+		color: white
+		background-color: transparent
+		padding: 0
+		margin: auto 0
+		min-width: 0
+		margin-left: 48px
+		height: 100%
+
+	@media screen and (max-width: 568px)
+		&--body
+			max-width: 100vw
+			width: 100vw
+			flex-grow: 1
+			border-radius: 0
