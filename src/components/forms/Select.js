@@ -1,23 +1,30 @@
+import Input from '../../mixins/input'
 import { debounce } from '../../util/helpers'
 
 export default {
   name: 'select',
 
+  mixins: [Input],
+
   data () {
     return {
       selected: Array.isArray(this.value) ? this.value : [this.value],
       filtered: null,
-      searchText: 'test'
+      searchText: ''
     }
   },
 
   computed: {
     classes () {
       return {
+        'input-group--text-field': true,
+        'input-group--single-line': this.singleLine,
+        'input-group--multi-line': this.multiLine
       }
     },
-    selectedString () {
-      return this.selected.length ? this.selected.map(s => s.text).join(', ') : ''
+
+    single () {
+      return !this.multiple
     }
   },
 
@@ -26,21 +33,21 @@ export default {
       type: [Object, Array],
       default: () => { return [] }
     },
-
     items: {
       type: Array,
       default: () => { return [] }
     },
-
     itemText: {
       type: String,
       default: 'text'
     },
-
+    appendIcon: {
+      type: String,
+      default: 'arrow_drop_down'
+    },
     multiple: Boolean,
-
     autocomplete: Boolean,
-
+    chips: Boolean,
     debounce: {
       type: Number,
       default: 300
@@ -48,6 +55,10 @@ export default {
   },
 
   watch: {
+    focused () {
+      this.$emit('focused', this.focused)
+    },
+
     value (val) {
       this.selected = this.multiple ? val : [val]
     },
@@ -58,14 +69,16 @@ export default {
   },
 
   methods: {
-    filterItems () {
-      const { items, searchText, itemText: text } = this
+    blur () {
+      this.$nextTick(() => (this.focused = false))
+    },
 
-      if (searchText) {
-        this.filtered = items.filter(item => item[text].includes(searchText))
-      } else {
-        this.filtered = null
-      }
+    filterItems () {
+      const { items, searchText, itemText } = this
+
+      this.filtered = searchText
+        ? items.filter(item => item[itemText].includes(searchText))
+        : null
     },
 
     isSelected (item) {
@@ -73,7 +86,16 @@ export default {
     },
 
     addSelected (item) {
-      this.multiple ? this.selected.push(item) : this.selected = [item]
+      if (this.single) {
+        this.searchText = item.text
+        this.selected = [item]
+      }
+
+      if (this.multiple) {
+        this.searchText = ''
+        this.filtered = null
+        this.selected.push(item)
+      }
     },
 
     removeSelected (item) {
@@ -81,80 +103,130 @@ export default {
     },
 
     genMenu (h) {
-      const input = this.genTextField(h)
-      const list = this.genList(h)
       const data = {
+        style: {
+          width: '100%'
+        },
         props: {
           offsetY: this.autocomplete,
           auto: !this.autocomplete
         }
       }
 
-      return h('v-menu', data, [input, list])
+      return h('v-menu', data, [this.genActivator(h), this.genList(h)])
     },
 
-    genTextField (h) {
+    genActivator (h) {
+      const data = { slot: 'activator' }
+      return h('div', data, [this.genInputGroup(h, [this.genSelectionsAndSearch(h)])])
+    },
+
+    genSelectionsAndSearch (h) {
       const data = {
         slot: 'activator',
+        style: { // TODO: Move this to stylus file somewhere.
+          'display': 'flex',
+          'flex-wrap': 'wrap',
+          'width': '100%'
+        }
+      }
+
+      return this.multiple
+        ? h('div', data, this.genSelections(h).concat(this.genSearchField(h)))
+        : h('div', data, [this.genSearchField(h)])
+    },
+
+    genSelections (h) {
+      const chips = this.chips
+      const slots = this.$scopedSlots.selection
+      const comma = true // <-- default
+
+      return this.selected.map(item => {
+        if (slots) return this.genSlotSelection(h, item)
+        if (chips) return this.genChipSelection(h, item)
+        if (comma) return this.genCommaSelection(h, item)
+      })
+    },
+
+    genSlotSelection (h, item) {
+      return this.$scopedSlots.selection({ item })
+    },
+
+    genChipSelection (h, item) {
+      const data = {
         props: {
-          value: this.selectedString,
-          appendIcon: 'arrow_drop_down'
+          close: true
         },
-        ref: 'textField',
         on: {
-          input: (...args) => {
-            this.searchText = args.join('')
-          }
+          input: arg => { if (arg === false) this.removeSelected(item) }
         },
         nativeOn: {
-          keyup: debounce(this.filterItems, this.debounce),
+          click: e => { e.stopPropagation() }
+        }
+      }
+
+      return h('v-chip', data, item.text)
+    },
+
+    genCommaSelection (h, item) {
+      const data = {
+        style: { // TODO: Move this to stylus file somewhere.
+          'font-size': '16px',
+          'height': '30px',
+          'padding-top': '4px',
+          'padding-right': '4px'
+        }
+      }
+
+      return h('div', data, item.text + ',')
+    },
+
+    genSearchField (h) {
+      const data = {
+        domProps: {
+          value: this.searchText
+        },
+        on: {
+          input: e => { this.searchText = e.target.value },
+          focus: () => (this.focused = true),
+          blur: this.blur,
+          keyup: debounce(this.filterItems, this.debounce)
+        }
+      }
+
+      return h('input', data)
+    },
+
+    genList (h) {
+      const list = this.$scopedSlots.item
+        ? (this.filtered || this.items).map(item => this.$scopedSlots.default({ item }))
+        : (this.filtered || this.items).map(item => this.genListItem(h, item))
+
+      return h('v-list', list)
+    },
+
+    genListItem (h, item) {
+      return h('v-list-item', [this.genTile(h, item)])
+    },
+
+    genTile (h, item) {
+      const data = {
+        'class': { 'list__tile--active': this.isSelected(item) },
+        'nativeOn': {
           click: () => {
-            // const input = this.$refs.textField.$el.querySelector('input')
-            // console.log(input.selectionStart)
+            this.multiple && this.isSelected(item)
+              ? this.removeSelected(item)
+              : this.addSelected(item)
           }
         }
       }
 
-      return h('v-text-field', data)
-    },
-
-    genList (h) {
-      const listItems = []
-      const items = this.filtered || this.items
-
-      items.forEach(item => {
-        this.$scopedSlots.default
-          ? listItems.push(this.$scopedSlots.default({ item }))
-          : listItems.push(this.genListItem(h, item))
-      })
-
-      return h('v-list', listItems)
-    },
-
-    genListItem (h, item) {
-      const action = this.genAction(h, item)
-      const title = h('v-list-tile-title', { domProps: { innerHTML: item.text }})
-      const content = h('v-list-tile-content', [title])
-
-      const tile = h(
-        'v-list-tile',
-        {
-          'class': { 'list__tile--active': this.isSelected(item) },
-          nativeOn: {
-            click: () => {
-              this.multiple && this.isSelected(item)
-                ? this.removeSelected(item)
-                : this.addSelected(item)
-            }
-          }
-        },
-        [action, content]
-      )
-
-      return h('v-list-item', [tile])
+      return h('v-list-tile', data, [this.genAction(h, item), this.genContent(h, item)])
     },
 
     genAction (h, item) {
+      if (this.single) return null
+
       const checkbox = h(
         'v-checkbox',
         {
@@ -164,11 +236,15 @@ export default {
         }
       )
 
-      return this.multiple ? h('v-list-tile-action', [checkbox]) : null
+      return h('v-list-tile-action', [checkbox])
+    },
+
+    genContent (h, item) {
+      return h('v-list-tile-content', [h('v-list-tile-title', item.text)])
     }
   },
 
   render (h) {
-    return h('div', [this.genMenu(h)])
+    return this.genMenu(h)
   }
 }
