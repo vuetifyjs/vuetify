@@ -1,6 +1,6 @@
 <template lang="pug">
 
-div(class='snack')
+div(v-bind:class='[{snack: true}, classes]')
     v-slide-y-transition
         div(
             class='snack--body'
@@ -23,11 +23,29 @@ div(class='snack')
 export default {
     name: 'snackbar',
 
+    props: {
+        left: Boolean,
+        right: Boolean,
+        top: Boolean,
+        bottom: Boolean
+    },
+
 	data () {
 		return {
 			snack: false,
 			hasAction: true,
 			foo: ""
+		}
+	},
+
+    computed: {
+		classes () {
+			return {
+				'snack--position-left': this.left,
+				'snack--position-right': this.right,
+				'snack--position-top': this.top,
+				'snack--position-bottom': this.bottom
+			}
 		}
 	},
 
@@ -44,7 +62,7 @@ export default {
 	},
 
 	mounted () {
-		// setTimeout(this.activate, 2000)
+		setTimeout(this.activate, 2000)
 	}
 
 }
