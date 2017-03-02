@@ -8,7 +8,7 @@ export default {
 
   data () {
     return {
-      selected: Array.isArray(this.value) ? this.value : [this.value],
+      selected: Array.isArray(this.value || []) ? this.value : [this.value],
       filtered: null,
       searchText: ''
     }
@@ -87,7 +87,7 @@ export default {
 
     addSelected (item) {
       if (this.single) {
-        this.searchText = item.text
+        this.searchText = item[this.itemText]
         this.selected = [item]
       }
 
@@ -109,7 +109,8 @@ export default {
         },
         props: {
           offsetY: this.autocomplete,
-          auto: !this.autocomplete
+          auto: !this.autocomplete,
+          closeOnClick: this.single
         }
       }
 
@@ -165,7 +166,7 @@ export default {
         }
       }
 
-      return h('v-chip', data, item.text)
+      return h('v-chip', data, item[this.itemText])
     },
 
     genCommaSelection (h, item) {
@@ -178,7 +179,7 @@ export default {
         }
       }
 
-      return h('div', data, item.text + ',')
+      return h('div', data, item[this.itemText] + ',')
     },
 
     genSearchField (h) {
@@ -240,7 +241,7 @@ export default {
     },
 
     genContent (h, item) {
-      return h('v-list-tile-content', [h('v-list-tile-title', item.text)])
+      return h('v-list-tile-content', [h('v-list-tile-title', item[this.itemText])])
     }
   },
 

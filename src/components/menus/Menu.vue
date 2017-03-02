@@ -1,13 +1,14 @@
 <template lang="pug">
   div(
     class="menu"
+    v-on:keyup.esc="isActive = false"
+    v-click-outside
   )
 
     div(
       class="menu__activator"
       v-on:click="isActive = !isActive"
       ref="activator"
-      v-click-outside
     )
       slot(name="activator")
 
@@ -20,6 +21,7 @@
         class="menu__content"
         v-show="isActive"
         v-bind:style="styles"
+        v-on:click="isActive = !closeOnClick"
       )
         slot
 </template>
@@ -61,6 +63,10 @@
       auto: Boolean,
       offsetX: Boolean,
       offsetY: Boolean,
+      closeOnClick: {
+        type: Boolean,
+        default: true
+      },
       maxHeight: {
         type: [String, Number],
         default: 'auto'
