@@ -3,6 +3,7 @@ export default {
 
   data () {
     return {
+      altLabels: Boolean,
       inputValue: null,
       steps: [],
       content: [],
@@ -19,7 +20,8 @@ export default {
     classes () {
       return {
         'stepper': true,
-        'stepper--vertical': this.vertical
+        'stepper--vertical': this.vertical,
+        'stepper--alt-labels': this.altLabels
       }
     }
   },

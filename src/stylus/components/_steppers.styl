@@ -3,12 +3,6 @@
   position: relative
   @extend .z-depth-1
   
-  &--vertical
-    .stepper__content
-      margin: -16px 0 -16px 36px
-    .stepper__content:not(:last-child)
-      border-left: 1px solid $material-twelve-percent-dark
-  
 .stepper
   .divider
     align-self: center
@@ -21,7 +15,24 @@
     flex-wrap: wrap
     justify-content: space-between
     @extend .z-depth-1
+
+
+.stepper
+  &__step__step
+    align-items: center
+    background: $theme.primary
+    border-radius: 50%
+    color: white
+    display: flex
+    font-size: 12px
+    justify-content: center
+    height: 24px
+    margin-right: 8px
+    width: 24px
+    transition: .3s $transition.fast-in-fast-out
     
+    .icon
+      font-size: 18px
 
 .stepper
   &__step
@@ -36,24 +47,41 @@
       .stepper__label
         text-shadow: 0px 0px 0px black
         transition: .3s $transition.ease-in-out
+      
+    &--error
+      .stepper__step__step
+        background: transparent
+        color: $theme.error
+        
+        .icon
+          font-size: 24px
+
+      .stepper__label
+        color: $theme.error
+        text-shadow: none
+        font-weight: 500
+        
+        small
+          color: $theme.error
     
     &--editable
       cursor: pointer
 
       &:hover
-        background: rgba(#000, .1)
-
-    &__step
-      align-items: center
-      background: $theme.primary
-      border-radius: 50%
-      color: white
-      display: flex
-      font-size: 12px
-      justify-content: center
-      height: 24px
-      margin-right: 8px
-      width: 24px
+        background: rgba(#000, .06)
+        
+    &--inactive
+      .stepper__step__step
+        color: #fff
+        background: rgba(#000, .38)
+        
+        &:hover
+          background: rgba(#000, .50)
+          
+      &.stepper__step--editable
+        &:hover
+          .stepper__step__step
+            background: rgba(#000, .5)
     
 .stepper
   &__label
@@ -79,4 +107,37 @@
     padding: 16px
     overflow: hidden
     transition: .3s $transition.ease-in-out
+    flex: 1
     width: 100%
+    
+.stepper
+  &--vertical
+    .stepper__content
+      margin: -8px 0 -16px 36px
+      padding: 16px 0 16px 23px
+
+    .stepper__content:not(:last-child)
+      border-left: 1px solid $material-twelve-percent-dark
+      
+    .stepper__step
+      padding: 24px 24px 16px
+
+    .stepper__step__step
+      margin-right: 12px
+      
+    .stepper__content .btn
+      margin-left: 0
+    
+  &--alt-labels
+    .divider
+      margin: 35px -63px 0 -71px
+      align-self: flex-start
+
+    .stepper__step
+      flex-direction: column
+      justify-content: flex-start
+      align-items: center
+      flex-basis: 175px
+    
+    .stepper__step__step
+      margin-bottom: 12px

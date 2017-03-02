@@ -5,16 +5,30 @@ export default {
 
   data () {
     return {
-      isActive: false
+      isActive: false,
+      isInactive: false
     }
   },
 
   props: {
+    complete: Boolean,
     completeIcon: {
       type: String,
-      default: 'success'
+      default: 'check'
+    },
+    editIcon: {
+      type: String,
+      default: 'edit'
+    },
+    errorIcon: {
+      type: String,
+      default: 'warning'
     },
     editable: Boolean,
+    rules: {
+      type: Array,
+      default: () => []
+    },
     step: [Number, String]
   },
 
@@ -23,8 +37,13 @@ export default {
       return {
         'stepper__step': true,
         'stepper__step--active': this.isActive,
-        'stepper__step--editable': this.editable
+        'stepper__step--editable': this.editable,
+        'stepper__step--inactive': this.isInactive,
+        'stepper__step--error': this.hasError
       }
+    },
+    hasError () {
+      return this.rules.some(i => (i() !== true))
     },
     stepper () {
       return closestParentTag.call(this, 'v-stepper')
@@ -39,6 +58,7 @@ export default {
     },
     toggle (step) {
       this.isActive = step.toString() === this.step.toString()
+      this.isInactive = Number(step) < Number(this.step)
     }
   },
 
@@ -53,8 +73,21 @@ export default {
         click: this.click
       }
     }
+    let stepContent
 
-    const step = h('span', { 'class': 'stepper__step__step' }, this.step)
+    if (this.hasError) {
+      stepContent = [h('v-icon', {}, this.errorIcon)]
+    } else if (this.complete) {
+      if (this.editable) {
+        stepContent = [h('v-icon', {}, this.editIcon)]
+      } else {
+        stepContent = [h('v-icon', {}, this.completeIcon)]
+      }
+    } else {
+      stepContent = this.step
+    }
+
+    const step = h('span', { 'class': 'stepper__step__step' }, stepContent)
     const label = h('div', { 'class': 'stepper__label' }, [this.$slots.default])
 
     return h('div', data, [step, label])
