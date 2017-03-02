@@ -10,7 +10,8 @@ export default {
     return {
       selected: Array.isArray(this.value || []) ? this.value : [this.value],
       filtered: null,
-      searchText: ''
+      searchText: '',
+      menuActive: false
     }
   },
 
@@ -69,16 +70,13 @@ export default {
   },
 
   methods: {
-    blur () {
-      this.$nextTick(() => (this.focused = false))
-    },
-
     filterItems () {
       const { items, searchText, itemText } = this
 
       this.filtered = searchText
         ? items.filter(item => item[itemText].includes(searchText))
         : null
+      this.$refs.menu.updateDimensions()
     },
 
     isSelected (item) {
@@ -104,13 +102,18 @@ export default {
 
     genMenu (h) {
       const data = {
+        ref: 'menu',
         style: {
           width: '100%'
         },
         props: {
           offsetY: this.autocomplete,
           auto: !this.autocomplete,
-          closeOnClick: this.single
+          closeOnClick: this.single,
+          value: this.menuActive
+        },
+        on: {
+          input: (val) => { this.menuActive = val }
         }
       }
 
@@ -155,15 +158,9 @@ export default {
 
     genChipSelection (h, item) {
       const data = {
-        props: {
-          close: true
-        },
-        on: {
-          input: arg => { if (arg === false) this.removeSelected(item) }
-        },
-        nativeOn: {
-          click: e => { e.stopPropagation() }
-        }
+        props: { close: true },
+        on: { input: val => { if (val === false) this.removeSelected(item) } },
+        nativeOn: { click: e => { e.stopPropagation() } }
       }
 
       return h('v-chip', data, item[this.itemText])
@@ -184,13 +181,15 @@ export default {
 
     genSearchField (h) {
       const data = {
+        ref: 'searchField',
         domProps: {
           value: this.searchText
         },
         on: {
           input: e => { this.searchText = e.target.value },
-          focus: () => (this.focused = true),
-          blur: this.blur,
+          click: e => { if (this.menuActive) e.stopPropagation() },
+          focus: () => { this.focused = true },
+          blur: () => this.$nextTick(() => (this.focused = false)),
           keyup: debounce(this.filterItems, this.debounce)
         }
       }
@@ -212,12 +211,15 @@ export default {
 
     genTile (h, item) {
       const data = {
-        'class': { 'list__tile--active': this.isSelected(item) },
+        'class': {
+          'list__tile--active': this.isSelected(item)
+        },
         'nativeOn': {
           click: () => {
             this.multiple && this.isSelected(item)
               ? this.removeSelected(item)
               : this.addSelected(item)
+            this.$refs.searchField.focus()
           }
         }
       }
@@ -228,14 +230,7 @@ export default {
     genAction (h, item) {
       if (this.single) return null
 
-      const checkbox = h(
-        'v-checkbox',
-        {
-          props: {
-            'inputValue': this.isSelected(item)
-          }
-        }
-      )
+      const checkbox = h('v-checkbox', { props: { 'inputValue': this.isSelected(item) }})
 
       return h('v-list-tile-action', [checkbox])
     },

@@ -14,7 +14,7 @@
     border-radius: 2px
     overflow-y: auto
     overflow-x: hidden
-    z-index: 3
+    z-index: 100
     @extend .z-depth-2
     
   &-transition
@@ -55,5 +55,5 @@
       opacity: 1
       
     &-enter-active, &-leave-active
-      transition: all .3s $transition.ease-in-out, top 1ms, left 1ms
+      transition: all .3s $transition.ease-in-out, top 1ms, left 1ms, bottom 1ms, right 1ms
       

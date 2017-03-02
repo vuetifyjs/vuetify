@@ -138,11 +138,12 @@
       screenDistance () {
         const { activator: a } = this.dimensions
         const { innerHeight: innerH, innerWidth: innerW } = this.window
-        const x = this.offsetX ? a.right : a.left  // <-- Determine which edge of the
-        const y = this.offsetY ? a.bottom : a.top  // <-- activator to measure distance from.
-        let distance = {}
+        const distance = {}
 
-        distance = { top: y, left: x, bottom: innerH - y, right: innerW - x }
+        distance.top = this.offsetY ? a.top : a.bottom
+        distance.left = this.offsetX ? a.left : a.right
+        distance.bottom = this.offsetY ? innerH - a.bottom : innerH - a.top
+        distance.right = this.offsetX ? innerW - a.right : innerW - a.left
         distance.horizMax = distance.left > distance.right ? distance.left : distance.right
         distance.horizMaxDir = distance.left > distance.right ? 'left' : 'right'
         distance.vertMax = distance.top > distance.bottom ? distance.top : distance.bottom
@@ -260,11 +261,13 @@
       },
 
       sneakPeek (on = true) {
+        const original = this.$refs.content.style.display
+
         if (on) {
           this.$refs.content.style.opacity = 0
           this.$refs.content.style.display = 'inline-block'
         } else {
-          this.$refs.content.style.display = 'none'
+          this.$refs.content.style.display = original
           this.$refs.content.style.opacity = null
         }
       }
