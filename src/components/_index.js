@@ -21,6 +21,7 @@ import Parallax from './parallax/index'
 import Progress from './progress/index'
 import Sidebar from './sidebar/index'
 import Slider from './sliders/index'
+import Subheader from './subheaders/index'
 import Tables from './tables/index'
 import Tabs from './tabs/index'
 import Transitions from './transitions/_index'
@@ -49,6 +50,7 @@ export default Object.assign({},
   Progress,
   Sidebar,
   Slider,
+  Subheader,
   Tables,
   Tabs,
   Transitions

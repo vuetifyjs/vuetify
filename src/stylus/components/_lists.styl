@@ -6,18 +6,6 @@
   
   .input-group
     margin: 0
-    
-  &__sub-header
-    height: $list-item-single-height
-    display: flex
-    align-items: center
-    font-size: $list-sub-header-height-font-size
-    color: $grey.darken-1
-    font-weight: $list-sub-header-font-weight
-    padding: 0 $list-right-padding 0 $list-left-padding
-    
-    &--inset
-      margin-left: $list-sub-header-inset-margin
       
   > .list__item ~ .list__item
     margin-top: 0
@@ -83,6 +71,9 @@
       align-items: flex-start
       flex-direction: column
       justify-content: center
+      
+      .input-group__details
+        display: none
       
       .icon
         transition: $primary-transition
@@ -214,6 +205,10 @@
           .list__tile__action:last-of-type
             .icon
               transform: rotate(-180deg)
-            
-  &--sub-header
+
+      &--no-action + .list--group
+        .list__tile
+          padding-left: $list-left-padding
+
+  &--subheader
     padding-top: 0
