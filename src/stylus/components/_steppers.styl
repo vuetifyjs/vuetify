@@ -6,7 +6,7 @@
 .stepper
   .divider
     align-self: center
-    margin: 0 -8px
+    margin: 0 -16px
   
 .stepper
   &__header
@@ -20,7 +20,7 @@
 .stepper
   &__step__step
     align-items: center
-    background: $theme.primary
+    background: rgba(#000, .38)
     border-radius: 50%
     color: white
     display: flex
@@ -48,6 +48,34 @@
         text-shadow: 0px 0px 0px black
         transition: .3s $transition.ease-in-out
       
+      .stepper__step__step
+        background: $theme.primary
+    
+    &--editable
+      cursor: pointer
+
+      &:hover
+        background: rgba(#000, .06)
+        
+    &--inactive
+      .stepper__label
+        color: rgba(#000, .38)
+        
+        small
+          color: rgba(#000, .38)
+
+      .stepper__step__step:not(&.stepper__step--error)
+        color: #fff
+        background: rgba(#000, .38)
+        
+        &:hover
+          background: rgba(#000, .50)
+          
+      &.stepper__step--editable
+        &:hover
+          .stepper__step__step
+            background: rgba(#000, .5)
+      
     &--error
       .stepper__step__step
         background: transparent
@@ -63,25 +91,14 @@
         
         small
           color: $theme.error
-    
-    &--editable
-      cursor: pointer
-
-      &:hover
-        background: rgba(#000, .06)
-        
-    &--inactive
-      .stepper__step__step
-        color: #fff
-        background: rgba(#000, .38)
-        
-        &:hover
-          background: rgba(#000, .50)
           
-      &.stepper__step--editable
-        &:hover
-          .stepper__step__step
-            background: rgba(#000, .5)
+    &--complete
+      .stepper__label
+        color: rgba(#000, .5)
+        text-shadow: 0px 0px 0px black
+
+      .stepper__step__step
+        background: $theme.primary
     
 .stepper
   &__label
@@ -89,10 +106,12 @@
     display: flex
     flex-direction: column
     text-align: left
+    color: rgba(#000, .38)
     
     small
       font-size: 12px
-      color: rgba(#000, .54)
+      font-weight: 300
+      color: rgba(#000, .38)
       text-shadow: none
 
 .stepper
@@ -112,9 +131,12 @@
     
 .stepper
   &--vertical
+    padding-bottom: 36px
+
     .stepper__content
       margin: -8px 0 -16px 36px
-      padding: 16px 0 16px 23px
+      padding: 16px 60px 16px 23px
+      width: auto
 
     .stepper__content:not(:last-child)
       border-left: 1px solid $material-twelve-percent-dark
@@ -130,7 +152,7 @@
     
   &--alt-labels
     .divider
-      margin: 35px -63px 0 -71px
+      margin: 35px -67px 0
       align-self: flex-start
 
     .stepper__step
@@ -138,6 +160,10 @@
       justify-content: flex-start
       align-items: center
       flex-basis: 175px
+      
+      small
+        align-self: center
     
     .stepper__step__step
+      margin-right: 0
       margin-bottom: 12px

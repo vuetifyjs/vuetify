@@ -6,7 +6,7 @@ export default {
   data () {
     return {
       isActive: false,
-      isInactive: false
+      isInactive: true
     }
   },
 
@@ -39,7 +39,8 @@ export default {
         'stepper__step--active': this.isActive,
         'stepper__step--editable': this.editable,
         'stepper__step--inactive': this.isInactive,
-        'stepper__step--error': this.hasError
+        'stepper__step--error': this.hasError,
+        'stepper__step--complete': this.complete
       }
     },
     hasError () {

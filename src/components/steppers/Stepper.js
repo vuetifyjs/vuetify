@@ -3,7 +3,6 @@ export default {
 
   data () {
     return {
-      altLabels: Boolean,
       inputValue: null,
       steps: [],
       content: [],
@@ -12,6 +11,7 @@ export default {
   },
 
   props: {
+    altLabels: Boolean,
     vertical: Boolean,
     value: [Number, String]
   },
