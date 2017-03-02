@@ -1,16 +1,11 @@
 import Badge from './badge'
-import Dropdown from './dropdown'
-import Modal from './modal'
+import ClickOutside from './click-outside'
 import Ripple from './ripple'
-import SideBar from './sidebar'
 import Tooltip from './tooltip'
 
 export default {
   Badge,
-  Dropdown,
-  Modal,
+  ClickOutside,
   Ripple,
-  SideBar,
-  sidebar: SideBar,
   Tooltip
 }

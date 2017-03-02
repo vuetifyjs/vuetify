@@ -1,6 +1,6 @@
 class Toast {
   toast (location) {
-    let toast = document.createElement('div')
+    const toast = document.createElement('div')
 
     toast.classList.add('toast')
     toast.classList.add(`toast--${location}`)

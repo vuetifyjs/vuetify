@@ -5,33 +5,40 @@
     v-bind:id="id"
   )
     slot
+    v-tabs-tabs(ref="activators")
+      slot(name="activators")
+      v-tabs-slider(ref="slider")
+
+    v-tabs-items(class="tabs__items" ref="content")
+      slot(name="content")
 </template>
 
 <script>
-  import Eventable from '../../mixins/eventable'
-
   export default {
     name: 'tabs',
 
-    mixins: [Eventable],
-
     data () {
       return {
-        childrenCount: 0,
-        index: null,
-        items: [],
-        reversing: false
+        activators: [],
+        content: [],
+        isActive: null,
+        reverse: false,
+        target: null,
+        resizeDebounce: {},
+        targetEl: null
       }
     },
 
     props: {
       centered: Boolean,
-      
+
       grow: Boolean,
 
       icons: Boolean,
 
-      scrollBars: Boolean
+      scrollBars: Boolean,
+
+      value: String
     },
 
     computed: {
@@ -42,49 +49,77 @@
           'tabs--icons': this.icons,
           'tabs--scroll-bars': this.scrollBars
         }
-      },
-
-      events () {
-        return [
-          [`tab:click:${this._uid}`, this.tabClick]
-        ]
       }
     },
 
     watch: {
-      index (i) {
-        this.$vuetify.bus.pub(`tab:open:${this._uid}`, this.items[i].id, this.reversing)
+      value () {
+        this.tabClick(this.value)
+      },
+
+      isActive () {
+        this.activators.forEach(i => {
+          i.toggle(this.target)
+
+          if (i.isActive) {
+            this.slider(i.$el)
+          }
+        })
+
+        this.content.forEach(i => i.toggle(this.target, this.reverse))
+        this.$emit('input', this.target)
       }
     },
 
     mounted () {
-      this.$vuetify.load(this.init)
+      this.$vuetify.load(() => {
+        this.init()
+        window.addEventListener('resize', this.resize, false)
+      })
+    },
+
+    beforeDestroy () {
+      window.removeEventListener('resize', this.resize, false)
     },
 
     methods: {
       init () {
-        this.getItems()
-        this.index = 0
+        this.$refs.activators.$children.forEach(i => {
+          if (i.$options._componentTag === 'v-tab-item') {
+            this.activators.push(i)
+          }
+        })
+
+        this.$refs.content.$children.forEach(i => this.content.push(i))
+
+        setTimeout(() => {
+          this.tabClick(this.value || this.activators[0].target)
+        }, 200)
       },
 
-      getItems () {
-        if (this.$children.length === this.childrenCount) {
-          return
-        }
+      resize () {
+        clearTimeout(this.resizeDebounce)
 
-        this.childrenCount = this.$children.length
-        this.items = this.$children.filter(i => i.$options._componentTag === 'v-tabs-item')
+        this.resizeDebounce = setTimeout(() => {
+          this.slider()
+        }, 250)
       },
-      
+
+      slider (el) {
+        this.targetEl = el || this.targetEl
+        this.$refs.slider.style.width = `${this.targetEl.clientWidth}px`
+        this.$refs.slider.style.left = `${this.targetEl.offsetLeft}px`
+      },
+
       tabClick (target) {
-        this.getItems()
+        this.target = target
 
         this.$nextTick(() => {
-          let nextIndex = this.items.findIndex(i => i.$el.id === target)
-          this.reversing = nextIndex > this.index ? false : true
-          this.index = nextIndex
+          const nextIndex = this.content.findIndex(i => i.id === this.target)
+          this.reverse = nextIndex < this.isActive
+          this.isActive = nextIndex
         })
-      },
+      }
     }
   }
 </script>

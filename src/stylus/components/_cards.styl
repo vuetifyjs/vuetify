@@ -4,8 +4,6 @@
   position: relative
   border-radius: $card-border-radius
   min-width: 0
-  width: 100%
-  max-width: 100%
   
   &--horizontal
     display: flex
@@ -36,17 +34,19 @@
     flex-flow: row nowrap
     min-height: $card-row-min-height
     
+    .card__text
+      height: 100%
+    
     &--actions
-      border-top: $card-actions-border-top
-      padding: ($card-padding / 2)
-      min-height: ($card-row-min-height / 2)
+      border-top: 1px solid $material-twelve-percent-dark
+      padding: 8px
+      height: 52px
       flex: 0 0 auto
+      justify-content: flex-end
       
-      > .btn
-        padding: 0 ($card-padding / 2)
-        
-      > .icon
-        padding: 0 ($card-padding / 2)
+      .btn
+        margin: 0
+        padding: 0 8px
   
   &__title
     font-size: $card-title-text-size
@@ -61,4 +61,3 @@
   &__text
     padding: $card-padding
     width: 100%
-    height: 100%

@@ -1,20 +1,13 @@
 <template lang="pug">
-  div(class="list--group__container")
-    v-list-tile(
-      v-on:click.native="toggle"
+  div(
+    class="list--group__container"
+  )
+    div(
+      class="list--group__header"
       v-bind:class="classes"
-      v-bind:ripple="ripple"
+      v-on:click="click"
     )
-      template(v-if="item.action")
-        v-list-tile-action
-          template(v-if="typeof item.action === 'object'")
-            v-icon(v-bind:class="[item.action.class || '']") {{ item.action.icon }}
-          template(v-else)
-            v-icon {{ item.action }}
-      v-list-tile-content
-        v-list-tile-title {{ item.title }}
-      v-list-tile-action
-        v-icon keyboard_arrow_down
+      slot(name="item")
 
     transition(
       v-on:enter="enter"
@@ -22,98 +15,109 @@
     )
       ul(
         class="list list--group"
-        v-show="active"
+        v-show="isActive"
+        v-bind:style="styles"
+        ref="group"
       )
-        v-list-item(v-for="item in items")
-          v-list-tile(
-            v-bind:item="item"
-            v-bind:ripple="ripple"
-            v-bind:router="router"
-          )
+        slot
 </template>
 <script>
   import { closestParentTag, addOnceEventListener } from '../../util/helpers'
-  import Eventable from '../../mixins/eventable'
 
   export default {
     name: 'list-group',
 
-    mixins: [Eventable],
-
     data () {
       return {
-        active: false,
+        isActive: this.active,
         height: 0
       }
     },
 
     props: {
-      item: Object,
+      active: Boolean,
 
-      items: {
-        type: Array,
-        default: () => []
-      },
-
-      ripple: Boolean,
-
-      router: Boolean
+      group: String
     },
-    
+
     computed: {
       classes () {
         return {
-          'list--group__header': this.active
+          'list--group__header--active': this.isActive
         }
       },
 
-      listUID () {
-        return closestParentTag.call(this, 'v-list')._uid
+      list () {
+        return closestParentTag.call(this, 'v-list')
       },
 
-      events () {
-        return [
-          [`list:close:${this.listUID}`, () => this.active = false]
-        ]
+      styles () {
+        return {
+          height: `${this.height}px`
+        }
       }
     },
 
     watch: {
+      active () {
+        this.isActive = this.active
+      },
+
+      isActive () {
+        if (this.isActive !== this.active) {
+          this.$emit('active', this.active)
+        }
+
+        if (!this.isActive) {
+          this.list.listClose(this._uid)
+        }
+      },
+
       '$route' (to) {
-        if (this.router) {
-          this.active = this.matchRoute(to.path)
+        if (this.group) {
+          this.isActive = this.matchRoute(to.path)
         }
       }
     },
 
     mounted () {
-      if (this.router) {
-        this.active = this.matchRoute(this.$route.path)
+      if (this.group) {
+        this.isActive = this.matchRoute(this.$route.path)
       }
+
+      if (this.isActive) {
+        this.list.listClick(this._uid)
+      }
+
+      this.height = this.$refs.group.scrollHeight
     },
 
     methods: {
+      click () {
+        this.list.listClick(this._uid)
+      },
+
+      toggle (uid) {
+        this.isActive = this._uid === uid
+      },
+
       enter (el, done) {
         el.style.display = 'block'
-        let scrollHeight = el.scrollHeight
-        el.style.height = 0
-        
-        setTimeout(() => el.style.height = `${scrollHeight}px`, 50)
+        const scrollHeight = el.scrollHeight
+        this.height = 0
+
+        setTimeout(() => (this.height = scrollHeight), 50)
 
         addOnceEventListener(el, 'transitionend', done)
       },
 
       leave (el, done) {
-        el.style.height = 0
+        this.height = 0
         addOnceEventListener(el, 'transitionend', done)
       },
 
       matchRoute (to) {
-        return to.match(this.item.group) !== null
-      },
-
-      toggle () {
-        this.active = !this.active
+        return to.match(this.group) !== null
       }
     }
   }

@@ -6,8 +6,7 @@
       v-bind:disabled="disabled"
       v-bind:id="id"
       v-bind:name="name"
-      v-bind:value="valueV || inputValue"
-      v-on:change="updateValue"
+      v-bind:value="valueV"
       ref="input"
     )
     label(
@@ -19,10 +18,10 @@
 <script>
   export default {
     name: 'checkbox',
-    
+
     data () {
       return {
-        inputValue: this.value
+        inputValue: null
       }
     },
 
@@ -39,7 +38,7 @@
       },
 
       indeterminate: Boolean,
-      
+
       label: {
         type: String,
         default: ''
@@ -56,6 +55,24 @@
 
       valueV: {
         required: false
+      },
+    },
+
+    watch: {
+      inputValue () {
+        if ((Array.isArray(this.inputValue) &&
+            this.inputValue.includes(this.valueV)) ||
+            (!Array.isArray(this.inputValue) &&
+              this.inputValue)
+        ) {
+          this.$refs.input.checked = true
+        } else {
+          this.$refs.input.checked = false
+        }
+      },
+
+      value () {
+        this.inputValue = this.value
       }
     },
 
@@ -67,48 +84,28 @@
       }
     },
 
-    watch: {
-      value () {
-        this.inputValue = this.value
-        this.isChecked()
-      }
-    },
-
     mounted () {
-      this.$refs.input.indeterminate = this.indeterminate
-      this.isChecked()
-    },
+      const vm = this
 
-    methods: {
-      isArray () {
-        return typeof this.inputValue === 'array'
-          || typeof this.inputValue === 'object'
-      },
-      
-      updateValue (e) {
-        if (!this.isArray()) {
-          return this.$emit('input', e.target.checked)
+      this.inputValue = this.value
+      this.$refs.input.indeterminate = this.indeterminate
+
+      this.$refs.input.onchange = function (e) {
+        if (!Array.isArray(vm.inputValue)) {
+          return vm.$emit('input', e.target.checked)
         }
 
-        let i = this.inputValue.indexOf(this.valueV)
+        const i = vm.inputValue.indexOf(vm.valueV)
+        let input = vm.inputValue
 
         if (i === -1) {
-          this.inputValue.push(this.valueV)
+          console.log(vm.valueV)
+          input.push(vm.valueV)
         } else {
-          this.inputValue.splice(i, 1)
+          input.splice(i, 1)
         }
 
-        this.$emit('input', this.inputValue)
-      },
-
-      isChecked () {
-        if (!this.isArray()) {
-          this.$refs.input.checked = Boolean(this.inputValue)
-        }
-
-        let i = this.inputValue.indexOf(this.valueV)
-
-        this.$refs.input.checked = i !== -1
+        vm.$emit('input', input)
       }
     }
   }

@@ -3,11 +3,11 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 
 const builds = {
-  'dev' : {
+  'dev': {
     filename: 'vuetify.js',
-    libraryTarget: 'umd',
+    libraryTarget: 'umd'
   },
-  'prod' : {
+  'prod': {
     filename: 'vuetify.min.js',
     libraryTarget: 'umd',
     env: 'production'
@@ -15,7 +15,7 @@ const builds = {
 }
 
 function genConfig (opts) {
-  let config = merge({}, base, {
+  const config = merge({}, base, {
     output: {
       filename: opts.filename,
       libraryTarget: opts.libraryTarget
@@ -27,7 +27,6 @@ function genConfig (opts) {
       'process.env.NODE_ENV': opts.env || 'development'
     })
   ])
-
   if (opts.env) {
     config.plugins = config.plugins.concat([
       new webpack.optimize.UglifyJsPlugin({
