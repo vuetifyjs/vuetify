@@ -1,21 +1,10 @@
 <template lang="pug">
 
-div(v-bind:class='[{snack: true}, classes]')
+div(v-bind:class='[{snack: true}, snackClasses]')
     v-slide-y-transition
-        div(
-            class='snack--body'
-            v-show="snack"
-        )
-            div(class='snack--content')
-                span(
-                    id='snack--msg'
-                ) Connection timed out. Please try again. Please try again.
-                v-btn(
-                    flat
-                    class='snack--action-btn'
-                    v-if='hasAction'
-                    @click.native="onAction"
-                ) Undo
+        div( class='snack--body' v-show="isActive" )
+            div( class='snack--content' )
+                slot
 </template>
 
 <script>
@@ -30,39 +19,24 @@ export default {
         bottom: Boolean
     },
 
-	data () {
-		return {
-			snack: false,
-			hasAction: true,
-			foo: ""
-		}
-	},
-
     computed: {
-		classes () {
+		snackClasses () {
+            // default to bottom
+            let bottom = !this.left && !this.right && !this.top ? true : this.bottom
+
 			return {
 				'snack--position-left': this.left,
 				'snack--position-right': this.right,
 				'snack--position-top': this.top,
-				'snack--position-bottom': this.bottom
+				'snack--position-bottom': bottom
 			}
 		}
 	},
 
 	methods: {
-		onAction () {
-			console.log('action btn clicked')
-			this.snack = false
-		},
 		activate () {
-			this.foo = document.getElementById('snack--msg').clientHeight
-			this.snack = true
-			setTimeout(() => this.snack = false, 6000)
+			this.isActive = true
 		}
-	},
-
-	mounted () {
-		setTimeout(this.activate, 2000)
 	}
 
 }
