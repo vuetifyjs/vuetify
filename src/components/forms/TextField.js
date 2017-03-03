@@ -19,13 +19,11 @@ export default {
         'input-group--multi-line': this.multiLine
       }
     },
-
     hasError () {
       return this.errors.length !== 0 ||
         !this.counterIsValid() ||
         !this.validateIsValid()
     },
-
     count () {
       const inputLength = (this.inputValue || '').length
       let min = inputLength
@@ -36,7 +34,6 @@ export default {
 
       return `${min} / ${this.max}`
     },
-
     inputValue: {
       get () {
         return this.value
@@ -83,6 +80,7 @@ export default {
     },
     value () {
       this.lazyValue = this.value
+      this.validate()
     }
   },
 
