@@ -8,9 +8,9 @@ export default {
 
   data () {
     return {
-      selected: Array.isArray(this.value || []) ? this.value : [this.value],
+      selected: this.multiple ? this.value : [this.value],
       filtered: null,
-      searchText: '',
+      searchText: this.multiple ? '' : this.value[this.itemText],
       menuActive: false
     }
   },
@@ -24,17 +24,13 @@ export default {
         'input-group--single-line': this.singleLine,
         'input-group--multi-line': this.multiLine
       }
-    },
-
-    single () {
-      return !this.multiple
     }
   },
 
   props: {
     value: {
       type: [Object, Array],
-      default: () => []
+      default: () => {}
     },
     items: {
       type: Array,
@@ -68,6 +64,7 @@ export default {
     },
 
     selected (val) {
+      this.searchText = this.multiple ? '' : this.selected[0][this.itemText]
       this.$emit('input', this.multiple ? this.selected : this.selected[0])
     }
   },
@@ -82,7 +79,6 @@ export default {
       this.filtered = searchText
         ? items.filter(item => item[itemText].includes(searchText))
         : null
-      this.$refs.menu.updateDimensions()
     },
 
     isSelected (item) {
@@ -90,16 +86,8 @@ export default {
     },
 
     addSelected (item) {
-      if (this.single) {
-        this.searchText = item[this.itemText]
-        this.selected = [item]
-      }
-
-      if (this.multiple) {
-        this.searchText = ''
-        this.filtered = null
-        this.selected.push(item)
-      }
+      this.selected = this.multiple ? this.selected.push(item) : [item]
+      this.filtered = null
     },
 
     removeSelected (item) {
@@ -115,8 +103,10 @@ export default {
         props: {
           offsetY: this.autocomplete,
           auto: !this.autocomplete,
-          closeOnClick: this.single,
-          value: this.menuActive
+          closeOnClick: !this.multiple,
+          value: this.menuActive,
+          nudgeBottom: -20,
+          nudgeTop: -5
         },
         on: {
           input: (val) => { this.menuActive = val }
@@ -159,14 +149,18 @@ export default {
     },
 
     genSlotSelection (h, item) {
-      return this.$scopedSlots.selection({ item })
+      return this.$scopedSlots.selection({ parent: this, item: item })
     },
 
     genChipSelection (h, item) {
       const data = {
         props: { close: true },
-        on: { input: val => { if (val === false) this.removeSelected(item) } },
-        nativeOn: { click: e => { e.stopPropagation() } }
+        on: {
+          input: val => { if (val === false) this.removeSelected(item) }
+        },
+        nativeOn: {
+          click: e => { e.stopPropagation() }
+        }
       }
 
       return h('v-chip', data, item[this.itemText])
@@ -204,10 +198,7 @@ export default {
     },
 
     genList (h) {
-      const list = this.$scopedSlots.item
-        ? (this.filtered || this.items).map(item => this.$scopedSlots.default({ item }))
-        : (this.filtered || this.items).map(item => this.genListItem(h, item))
-
+      const list = (this.filtered || this.items).map(item => this.genListItem(h, item))
       return h('v-list', list)
     },
 
@@ -230,14 +221,15 @@ export default {
         }
       }
 
-      return h('v-list-tile', data, [this.genAction(h, item), this.genContent(h, item)])
+      return this.$scopedSlots.item
+        ? h('v-list-tile', data, this.$scopedSlots.item({ parent: this, item: item }))
+        : h('v-list-tile', data, [this.genAction(h, item), this.genContent(h, item)])
     },
 
     genAction (h, item) {
-      if (this.single) return null
+      if (!this.multiple) return null
 
       const checkbox = h('v-checkbox', { props: { 'inputValue': this.isSelected(item) }})
-
       return h('v-list-tile-action', [checkbox])
     },
 

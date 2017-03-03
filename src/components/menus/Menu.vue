@@ -20,7 +20,6 @@
         ref="content"
         class="menu__content"
         v-show="isActive"
-        v-bind:style="styles"
         v-on:click="isActive = !closeOnClick"
       )
         slot
@@ -39,19 +38,17 @@
         window: {},
         dimensions: {
           activator: {
-            cssTop: 0, cssLeft: 0,
             top: 0, left: 0, bottom: 0, right: 0, width: 0, height: 0, offsetTop: 0
           },
           content: {
-            cssTop: 0, cssLeft: 0,
             top: 0, left: 0, bottom: 0, right: 0, width: 0, height: 0, offsetTop: 0
           },
           list: null,
           selected: null
         },
-        minWidth: 'auto',
-        nudgeX: -16,
-        nudgeY: -16
+        direction: { vert: '', horiz: '' },
+        position: { left: '0px', top: '0px', right: 'auto', bottom: 'auto' },
+        minWidth: 'auto'
       }
     },
 
@@ -63,6 +60,30 @@
       auto: Boolean,
       offsetX: Boolean,
       offsetY: Boolean,
+      nudgeXAuto: {
+        type: Number,
+        default: -16
+      },
+      nudgeYAuto: {
+        type: Number,
+        default: -16
+      },
+      nudgeTop: {
+        type: Number,
+        default: 0
+      },
+      nudgeLeft: {
+        type: Number,
+        default: 0
+      },
+      nudgeBottom: {
+        type: Number,
+        default: 0
+      },
+      nudgeRight: {
+        type: Number,
+        default: 0
+      },
       closeOnClick: {
         type: Boolean,
         default: true
@@ -83,51 +104,37 @@
 
     watch: {
       isActive () {
-        if (this.isActive) this.updateDimensions()
+        if (this.isActive) this.activate()
 
         this.$emit('input', this.isActive)
       }
     },
 
     computed: {
-      direction () {
-        const { left, top, auto, screenDistance } = this
-        const { content: c } = this.dimensions
-        let horiz = left && !auto ? 'left' : 'right'
-        let vert = top && !auto ? 'top' : 'bottom'
-
-        // Flip direction, if needed, to where there's more room from the window edge.
-        horiz = !auto && c.width > screenDistance[horiz] ? screenDistance.horizMaxDir : horiz
-        vert = !auto && c.height > screenDistance[vert] ? screenDistance.vertMaxDir : vert
-
-        return { horiz, vert }
-      },
-
       offset () {
         const { activator: a, content: c } = this.dimensions
-        const { direction, offsetX, offsetY, offsetAuto } = this
-        const x = a.left - c.left  // <-- Start with the diff between content and activator
-        const y = a.top - c.top    // <-- to shift content to activator's position.
+        const { direction, offsetX, offsetY, offsetAuto: auto } = this
+        const { nudgeLeft: nl, nudgeTop: nt, nudgeRight: nr, nudgeBottom: nb } = this
 
         const horiz = direction.horiz === 'left'
-            ? offsetX ? x - c.width : x + a.width - c.width + offsetAuto.horiz   // left
-            : offsetX ? x + a.width : x + offsetAuto.horiz                       // right
+            ? offsetX ? a.left - c.right + nl : a.right - c.right + nl + auto.horiz
+            : offsetX ? a.right - c.left + nr : a.left - c.left + nr + auto.horiz
         const vert = direction.vert === 'top'
-            ? offsetY ? y - c.height : y + a.height - c.height + offsetAuto.vert // top
-            : offsetY ? y + a.height : y + offsetAuto.vert                       // bottom
+            ? offsetY ? a.top - c.bottom + nt : a.bottom - c.bottom + nt + auto.vert
+            : offsetY ? a.bottom - c.top + nb : a.top - c.top + nb + auto.vert
 
         return { horiz, vert }
       },
 
       offsetAuto () {
         if (!this.auto) return { horiz: 0, vert: 0 }
-        if (!this.dimensions.selected) return { horiz: this.nudgeX, vert: this.nudgeY }
+        if (!this.dimensions.selected) return { horiz: this.nudgeXAuto, vert: this.nudgeYAuto }
 
         const { activator: a, content: c, selected: s, list } = this.dimensions
         const offsetBottom = list.height - s.height - s.offsetTop
         const scrollMiddle = (c.height - s.height) / 2
-        const horiz = this.nudgeX
-        let vert = (a.height - c.height + this.nudgeY) / 2
+        const horiz = this.nudgeXAuto
+        let vert = (a.height - c.height + this.nudgeYAuto) / 2
 
         vert += s.offsetTop < scrollMiddle ? scrollMiddle - s.offsetTop : 0
         vert += offsetBottom < scrollMiddle ? offsetBottom - scrollMiddle : 0
@@ -169,39 +176,80 @@
               : 0
 
         return { horiz, vert }
-      },
-
-      position () {
-        const { content: c } = this.dimensions
-
-        return {
-          left: c.cssLeft + this.offset.horiz - this.screenOverflow.horiz,
-          top: c.cssTop + this.offset.vert - this.screenOverflow.vert
-        }
-      },
-
-      styles () {
-        return {
-          left: `${this.position.left}px`,
-          top: `${this.position.top}px`
-        }
       }
     },
 
     methods: {
+      activate () {
+        this.window = window
+        this.setDirection()
+        this.updatePosition()
+      },
+
+      updatePosition () {
+        this.updateDimensions()
+
+        const { horiz, vert } = this.direction
+        const { offset, screenOverflow } = this
+
+        const left = horiz === 'left' ? 'auto' : `${offset.horiz - screenOverflow.horiz}px`
+        const top = vert === 'top' ? 'auto' : `${offset.vert - screenOverflow.vert}px`
+        const right = horiz === 'right' ? 'auto' : `${-offset.horiz - screenOverflow.horiz}px`
+        const bottom = vert === 'bottom' ? 'auto' : `${-offset.vert - screenOverflow.vert}px`
+
+        this.setContentPosition({ left, top, right, bottom })
+        this.flipFix()
+      },
+
+      setContentPosition (position) {
+        this.$refs.content.style.top = position.top
+        this.$refs.content.style.left = position.left
+        this.$refs.content.style.bottom = position.bottom
+        this.$refs.content.style.right = position.right
+      },
+
+      flipFix () {
+        const { auto, screenDistance } = this
+        const { content: c } = this.dimensions
+        let { horiz, vert } = this.direction
+
+        // Flip direction, if needed, to where there's more room from the window edge.
+        horiz = !auto && c.width > screenDistance[horiz] ? screenDistance.horizMaxDir : horiz
+        vert = !auto && c.height > screenDistance[vert] ? screenDistance.vertMaxDir : vert
+
+        if (horiz === this.direction.horiz && vert === this.direction.vert) return
+
+        this.setDirection(horiz, vert)
+        this.updatePosition(false)
+      },
+
+      setDirection (horiz = '', vert = '') {
+        this.direction = {
+          horiz: horiz || (this.left && !this.auto ? 'left' : 'right'),
+          vert: vert || (this.top && !this.auto ? 'top' : 'bottom')
+        }
+
+        // On every direction change, we must reset/reorientate position.
+        const top = this.direction.vert === 'top' ? 'auto' : '0px'
+        const left = this.direction.vert === 'left' ? 'auto' : '0px'
+        const bottom = this.direction.vert === 'bottom' ? 'auto' : '0px'
+        const right = this.direction.vert === 'right' ? 'auto' : '0px'
+
+        this.setContentPosition({ left, top, right, bottom })
+      },
+
       updateDimensions () {
         this.sneakPeek()
         this.updateMaxMin()
 
+        const { activator: a, content: c } = this.$refs
+
         // Let the DOM compute dimensions.
-        this.window = window
         this.dimensions = {
-          'activator': this.$refs.activator.children
-            ? this.measure(this.$refs.activator.children[0])
-            : this.measure(this.$refs.activator),
-          'content': this.measure(this.$refs.content),
-          'list': this.measure(this.$refs.content, '.list'),
-          'selected': this.measure(this.$refs.content, '.list__tile--active', 'parent')
+          'activator': a.children ? this.measure(a.children[0]) : this.measure(a),
+          'content': this.measure(c),
+          'list': this.measure(c, '.list'),
+          'selected': this.measure(c, '.list__tile--active', 'parent')
         }
 
         this.fixOffscreen()
@@ -210,7 +258,7 @@
       },
 
       updateMaxMin () {
-        const { $el, $refs, maxHeight, auto, nudgeX } = this
+        const { $el, $refs, maxHeight, auto, nudgeXAuto: nudgeX } = this
 
         $refs.content.style.minWidth = `${$el.clientWidth + Math.abs(auto ? nudgeX : 0)}px`
         $refs.content.style.maxHeight = null  // <-- TODO: This is a temporary fix.
@@ -251,23 +299,18 @@
         el = el && getParent ? el.parentElement : el
 
         if (!el) return null
-
         const { top, left, bottom, right, width, height } = el.getBoundingClientRect()
-        const cssLeft = parseInt(el.style.left) || 0
-        const cssTop = parseInt(el.style.top) || 0
-        const offsetTop = el.offsetTop
-
-        return { cssTop, cssLeft, top, left, bottom, right, width, height, offsetTop }
+        return { top, left, bottom, right, width, height, offsetTop: el.offsetTop }
       },
 
       sneakPeek (on = true) {
-        const original = this.$refs.content.style.display
+        const originalDisplay = this.$refs.content.style.display
 
         if (on) {
           this.$refs.content.style.opacity = 0
           this.$refs.content.style.display = 'inline-block'
         } else {
-          this.$refs.content.style.display = original
+          this.$refs.content.style.display = originalDisplay
           this.$refs.content.style.opacity = null
         }
       }
