@@ -14,7 +14,6 @@ export default {
     hint: String,
     persistentHint: Boolean,
     label: String,
-    lazy: Boolean,
     light: {
       type: Boolean,
       default: true
@@ -35,7 +34,7 @@ export default {
       return this.errors.length !== 0
     },
     inputGroupClasses () {
-      return Object.assign({}, {
+      return Object.assign({
         'input-group': true,
         'input-group--focused': this.focused,
         'input-group--dirty': this.isDirty(),
@@ -47,6 +46,25 @@ export default {
         'input-group--prepend-icon': this.prependIcon,
         'input-group--required': this.required
       }, this.classes)
+    },
+    modifiers () {
+      const modifiers = {
+        lazy: false,
+        number: false,
+        trim: false
+      }
+
+      if (!this.$vnode.data.directives) {
+        return modifiers
+      }
+
+      const model = this.$vnode.data.directives.find(i => i.name === 'model')
+
+      if (!model) {
+        return modifiers
+      }
+
+      return Object.assign(modifiers, model.modifiers)
     }
   },
 
