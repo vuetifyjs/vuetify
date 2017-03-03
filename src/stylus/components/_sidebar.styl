@@ -47,14 +47,22 @@
   &--open
     transform: translateX(0)
     width: $sidebar-width
-        
-  &:not(.sidebar--fixed)
+
+  &:not(.sidebar--fixed):not(.sidebar--right)
     @media screen and (max-width: $grid-breakpoints.lg)
       margin-left: -300px
       transform: none
       
       &.sidebar--open
         transform: translateX(300px)
+        
+  &:not(.sidebar--fixed):not(.sidebar--right)
+    @media screen and (max-width: $grid-breakpoints.lg)
+      margin-right: -300px
+      transform: none
+      
+      &.sidebar--open
+        transform: translateX(-300px)
     
   .list__tile
     color: $sidebar-item-color
