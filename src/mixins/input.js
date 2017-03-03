@@ -38,7 +38,7 @@ export default {
       return Object.assign({}, {
         'input-group': true,
         'input-group--focused': this.focused,
-        'input-group--dirty': this.inputValue,
+        'input-group--dirty': this.isDirty(),
         'input-group--disabled': this.disabled,
         'input-group--light': this.light && !this.dark,
         'input-group--dark': this.dark,
@@ -55,6 +55,9 @@ export default {
   },
 
   methods: {
+    isDirty () {
+      return this.inputValue
+    },
     genLabel (h) {
       return h('label', {}, this.label)
     },
