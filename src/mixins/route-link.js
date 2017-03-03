@@ -11,6 +11,7 @@ export default {
   },
 
   methods: {
+    click () {},
     generateRouteLink () {
       let tag
 

@@ -38,7 +38,7 @@ export default {
       return Object.assign({}, {
         'input-group': true,
         'input-group--focused': this.focused,
-        'input-group--dirty': this.inputValue,
+        'input-group--dirty': this.isDirty(),
         'input-group--disabled': this.disabled,
         'input-group--light': this.light && !this.dark,
         'input-group--dark': this.dark,
@@ -55,11 +55,23 @@ export default {
   },
 
   methods: {
+    isDirty () {
+      return this.inputValue
+    },
     genLabel (h) {
       return h('label', {}, this.label)
     },
     genMessages (h) {
-      const messages = [this.genHint(h)]
+      const messages = []
+
+      if ((this.hint &&
+            this.focused ||
+            this.hint &&
+            this.persistentHint) &&
+          this.errors.length === 0
+      ) {
+        messages.push(this.genHint(h))
+      }
 
       this.errors.forEach(i => {
         messages.push(this.genError(h, i))
@@ -84,13 +96,7 @@ export default {
         'class': {
           'input-group__hint': true
         },
-        directives: [
-          {
-            name: 'show',
-            value: (this.persistentHint || (!this.persistentHint && this.focused)) && !this.errors.length
-          }
-        ],
-        key: 'hint'
+        key: this.hint
       }, this.hint)
     },
     genError (h, error) {
@@ -105,11 +111,8 @@ export default {
     },
     genIcon (h, type) {
       return h('v-icon', {
-        'class': 'input-group__' + type + '-icon',
-        domProps: {
-          innerText: this[`${type}Icon`]
-        }
-      })
+        'class': 'input-group__' + type + '-icon'
+      }, this[`${type}Icon`])
     },
     genInputGroup (h, input, data = {}) {
       const children = []

@@ -1,4 +1,6 @@
-import Footer from './Footer.vue'
+import { createSimpleFunctional } from '../../util/helpers'
+
+const Footer = createSimpleFunctional('footer', 'footer')
 
 export default {
   Footer
