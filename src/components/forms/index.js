@@ -1,6 +1,6 @@
 import Checkbox from './Checkbox'
 import Radio from './Radio'
-import Select from './Select.vue'
+import Select from './Select'
 import Switch from './Switch'
 import TextField from './TextField'
 
