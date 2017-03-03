@@ -8,15 +8,19 @@ div(v-bind:class='[{snack: true}, snackClasses]')
 </template>
 
 <script>
+import Toggleable from '../../mixins/toggleable'
 
 export default {
     name: 'snackbar',
+
+    mixins: [Toggleable],
 
     props: {
         left: Boolean,
         right: Boolean,
         top: Boolean,
-        bottom: Boolean
+        bottom: Boolean,
+        timeout: Number
     },
 
     computed: {
@@ -32,6 +36,13 @@ export default {
 			}
 		}
 	},
+
+    watch: {
+        isActive () {
+            if (this.isActive)
+                setTimeout(() => this.isActive = false, this.timeout || 6000)
+        }
+    },
 
 	methods: {
 		activate () {
