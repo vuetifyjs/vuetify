@@ -19,6 +19,8 @@ export default {
     classes () {
       return {
         'input-group--text-field': true,
+        'input-group--select': true,
+        'input-group--autocomplete': this.autocomplete,
         'input-group--single-line': this.singleLine,
         'input-group--multi-line': this.multiLine
       }
@@ -32,11 +34,11 @@ export default {
   props: {
     value: {
       type: [Object, Array],
-      default: () => { return [] }
+      default: () => []
     },
     items: {
       type: Array,
-      default: () => { return [] }
+      default: () => []
     },
     itemText: {
       type: String,
@@ -48,6 +50,7 @@ export default {
     },
     multiple: Boolean,
     autocomplete: Boolean,
+    singleLine: Boolean,
     chips: Boolean,
     debounce: {
       type: Number,
@@ -70,6 +73,9 @@ export default {
   },
 
   methods: {
+    isDirty () {
+      return this.selected.length
+    },
     filterItems () {
       const { items, searchText, itemText } = this
 
