@@ -16,7 +16,8 @@ export default {
       return {
         'input-group--text-field': true,
         'input-group--single-line': this.singleLine,
-        'input-group--multi-line': this.multiLine
+        'input-group--multi-line': this.multiLine,
+        'input-group--full-width': this.fullWidth
       }
     },
     hasError () {
@@ -25,7 +26,7 @@ export default {
         !this.validateIsValid()
     },
     count () {
-      const inputLength = (this.inputValue.toString() || '').length
+      const inputLength = (this.inputValue && this.inputValue.toString() || '').length
       let min = inputLength
 
       if (this.min !== 0 && inputLength < this.min) {
@@ -60,6 +61,7 @@ export default {
     autocomplete: Boolean,
     counter: Boolean,
     id: String,
+    fullWidth: Boolean,
     min: {
       type: [Number, String],
       default: 0
@@ -137,7 +139,7 @@ export default {
       return h(tag, inputData)
     },
     counterIsValid: function counterIsValid () {
-      const val = this.inputValue.toString()
+      const val = (this.inputValue && this.inputValue.toString() || '')
       return (!this.counter ||
         !this.inputValue.toString() ||
         (val.length >= this.min && val.length <= this.max)
