@@ -70,7 +70,7 @@
           return this.transition
         }
 
-        return this.bottom ? 'v-slide-y-transition' : this.transition
+        return this.bottom ? 'v-slide-y-reverse-transition' : this.transition
       },
 
       overlayClasses () {
