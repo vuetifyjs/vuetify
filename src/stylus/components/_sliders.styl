@@ -18,16 +18,16 @@
 
 /** Input Group */
 .input-group--slider
+  flex-direction: row
+  flex-wrap: wrap
+  
   .input-group__details:before, .input-group__details:after
     display: none
     
 
-  label 
-    position: absolute
-    left: 0
-    top: 0
+  label
     + .input-group__input
-      margin-left: 56px
+      margin-left: 16px
 
   &.input-group--active
     .slider__thumb
