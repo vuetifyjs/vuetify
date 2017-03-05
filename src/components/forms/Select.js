@@ -8,30 +8,15 @@ export default {
 
   data () {
     return {
-      selected: this.multiple ? this.value : [this.value],
-      filtered: null,
-      searchText: this.multiple ? '' : this.value[this.itemText],
-      menuActive: false
-    }
-  },
-
-  computed: {
-    classes () {
-      return {
-        'input-group--text-field': true,
-        'input-group--select': true,
-        'input-group--autocomplete': this.autocomplete,
-        'input-group--single-line': this.singleLine,
-        'input-group--multi-line': this.multiLine
-      }
+      inputValue: this.multiple ? Array.from(this.value || []) : new Array(this.value || 0),
+      inputSearch: this.value ? this.value[this.itemText] : '',
+      filteredItems: null,
+      menuActive: false,
+      appendIconCbPrivate: this.removeAllSelected
     }
   },
 
   props: {
-    value: {
-      type: [Object, Array],
-      default: () => {}
-    },
     items: {
       type: Array,
       default: () => []
@@ -48,9 +33,22 @@ export default {
     autocomplete: Boolean,
     singleLine: Boolean,
     chips: Boolean,
+    close: Boolean,
     debounce: {
       type: Number,
       default: 300
+    }
+  },
+
+  computed: {
+    classes () {
+      return {
+        'input-group--text-field': true,
+        'input-group--select': true,
+        'input-group--autocomplete': this.autocomplete,
+        'input-group--single-line': this.singleLine,
+        'input-group--multi-line': this.multiLine
+      }
     }
   },
 
@@ -58,40 +56,71 @@ export default {
     focused () {
       this.$emit('focused', this.focused)
     },
-
     value (val) {
-      this.selected = this.multiple ? val : [val]
+      this.inputValue = this.multiple ? val || [] : new Array(val)
     },
-
-    selected (val) {
-      this.searchText = this.multiple ? '' : this.selected[0][this.itemText]
-      this.$emit('input', this.multiple ? this.selected : this.selected[0])
+    inputValue (val) {
+      this.$emit('input', this.multiple ? val : val[0])
+    },
+    menuActive (isActive) {
+      if (!isActive) this.$refs.searchField.blur()
     }
   },
 
   methods: {
     isDirty () {
-      return this.selected.length
+      return this.inputValue.length
     },
-    filterItems () {
-      const { items, searchText, itemText } = this
 
-      this.filtered = searchText
-        ? items.filter(item => item[itemText].includes(searchText))
+    focus () {
+      this.focused = true
+      this.closeAction(true)
+    },
+
+    blur () {
+      this.$nextTick(() => (this.focused = false))
+      this.closeAction(false)
+    },
+
+    // TODO: Maybe this should be computed prop?
+    filterItems () {
+      const { items, inputSearch, itemText } = this
+
+      this.filteredItems = inputSearch && this.autocomplete
+        ? items.filter(item => item[itemText].includes(inputSearch))
         : null
     },
 
     isSelected (item) {
-      return this.selected.includes(item)
+      return this.inputValue.includes(item)
     },
 
     addSelected (item) {
-      this.selected = this.multiple ? this.selected.push(item) : [item]
-      this.filtered = null
+      if (this.multiple) {
+        this.inputValue.push(item)
+        this.inputSearch = ''
+      } else {
+        this.inputValue = [item]
+        this.inputSearch = item[this.itemText]
+      }
+      this.filterItems()
     },
 
     removeSelected (item) {
-      this.selected.splice(this.selected.findIndex(s => s === item), 1)
+      this.inputValue.splice(this.inputValue.findIndex(s => s === item), 1)
+    },
+
+    removeAllSelected (e) {
+      if (!this.appendIconAlt) return
+
+      e.stopPropagation()
+      this.inputValue = []
+      this.inputSearch = ''
+      this.closeAction(false)
+    },
+
+    closeAction (on = true) {
+      this.appendIconAlt = on && this.close && this.inputValue.length ? 'close' : ''
     },
 
     genMenu (h) {
@@ -110,6 +139,10 @@ export default {
         },
         on: {
           input: (val) => { this.menuActive = val }
+        },
+        nativeOn: {
+          '!mouseenter': () => { this.closeAction() },
+          'mouseleave': () => { this.closeAction(false) }
         }
       }
 
@@ -141,7 +174,7 @@ export default {
       const slots = this.$scopedSlots.selection
       const comma = true // <-- default
 
-      return this.selected.map(item => {
+      return this.inputValue.map(item => {
         if (slots) return this.genSlotSelection(h, item)
         if (chips) return this.genChipSelection(h, item)
         if (comma) return this.genCommaSelection(h, item)
@@ -183,13 +216,12 @@ export default {
       const data = {
         ref: 'searchField',
         domProps: {
-          value: this.searchText
+          value: this.inputSearch
         },
         on: {
-          input: e => { this.searchText = e.target.value },
-          click: e => { if (this.menuActive) e.stopPropagation() },
-          focus: () => { this.focused = true },
-          blur: () => this.$nextTick(() => (this.focused = false)),
+          input: e => { this.inputSearch = e.target.value },
+          focus: () => { this.focus() },
+          blur: () => { this.blur() },
           keyup: debounce(this.filterItems, this.debounce)
         }
       }
@@ -198,7 +230,7 @@ export default {
     },
 
     genList (h) {
-      const list = (this.filtered || this.items).map(item => this.genListItem(h, item))
+      const list = (this.filteredItems || this.items).map(item => this.genListItem(h, item))
       return h('v-list', list)
     },
 
@@ -216,6 +248,7 @@ export default {
             this.multiple && this.isSelected(item)
               ? this.removeSelected(item)
               : this.addSelected(item)
+
             this.$refs.searchField.focus()
           }
         }
