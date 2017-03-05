@@ -23,7 +23,9 @@ export default {
       }
 
       if (!this.trueValue || !this.falseValue) {
-        return Boolean(this.inputValue)
+        return this.value
+          ? this.value === this.inputValue
+          : Boolean(this.inputValue)
       }
 
       return this.inputValue === this.trueValue
@@ -50,6 +52,10 @@ export default {
         }
       } else if (this.trueValue || this.falseValue) {
         input = input === this.trueValue ? this.falseValue : this.trueValue
+      } else if (this.value) {
+        input = this.value === this.inputValue
+          ? null
+          : this.value
       } else {
         input = !input
       }

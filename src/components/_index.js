@@ -25,6 +25,7 @@ import Subheader from './subheaders/index'
 import Tables from './tables/index'
 import Tabs from './tabs/index'
 import Transitions from './transitions/_index'
+import Snackbar from './snackbars/index'
 
 export default Object.assign({},
   Alerts,
@@ -53,5 +54,6 @@ export default Object.assign({},
   Subheader,
   Tables,
   Tabs,
-  Transitions
+  Transitions,
+  Snackbar
 )

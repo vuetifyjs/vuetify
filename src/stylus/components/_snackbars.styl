@@ -1,0 +1,69 @@
+.snack
+	position: fixed
+	display: flex
+	height: 48px
+	z-index: 1000
+	visibility: visible
+	
+	&--multi-line
+		min-height: 48px
+		height: auto
+
+	&--top
+		top: 0
+		left: 50%
+		transform: translate3d(-50%, 0, 0) translateZ(0)
+
+	&--bottom
+		bottom: 0
+		left: 50%
+		transform: translate3d(-50%, 0, 0) translateZ(0)
+
+	&--left
+		left: 8px
+		right: initial
+		transform: none
+		
+		&.snack--top
+			top: 8px
+			
+		&.snack--bottom
+			bottom: 8px
+
+	&--right
+		left: initial
+		right: 8px
+		transform: none
+		
+		&.snack--top
+			top: 8px
+			
+		&.snack--bottom
+			top: initial
+			bottom: 8px
+
+	&__content
+		background-color: $snackbar-background-color
+		padding: 14px 24px
+		border-radius: 2px
+		max-width: 568px
+		min-width: 288px
+		align-items: center
+		color: #fff
+		display: flex
+		font-size: 14px
+		justify-content: space-between
+		transition: .4s $transition.swing
+		
+		.btn
+			margin: 0 -16px 0 24px
+			min-width: 0
+
+@media $display-breakpoints.md-and-down
+	.snack
+		width: 100%
+
+	.snack__content
+		border-radius: 0
+		max-width: 100%
+		width: 100%
