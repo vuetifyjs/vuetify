@@ -1,59 +1,69 @@
 .snack
 	position: fixed
 	display: flex
+	height: 48px
 	z-index: 1000
 	visibility: visible
+	
+	&--multi-line
+		min-height: 48px
+		height: auto
 
-	&--position-left
-		left: 0
-	&--position-right
-		right: 0
-	&--position-top
+	&--top
 		top: 0
 		left: 50%
-		transform: translateX(-50%)
-	&--position-bottom
+		transform: translate3d(-50%, 0, 0) translateZ(0)
+
+	&--bottom
 		bottom: 0
 		left: 50%
-		transform: translateX(-50%)
+		transform: translate3d(-50%, 0, 0) translateZ(0)
 
-	&--body
-		font-family: Roboto
-		background-color: #323232
+	&--left
+		left: 8px
+		right: initial
+		transform: none
+		
+		&.snack--top
+			top: 8px
+			
+		&.snack--bottom
+			bottom: 8px
+
+	&--right
+		left: initial
+		right: 8px
+		transform: none
+		
+		&.snack--top
+			top: 8px
+			
+		&.snack--bottom
+			top: initial
+			bottom: 8px
+
+	&__content
+		background-color: $snackbar-background-color
 		padding: 14px 24px
-		height: 48px
 		border-radius: 2px
 		max-width: 568px
 		min-width: 288px
-		width: auto
-		height: auto
-		flex-grow: 0
-
-		&-line
-			padding: 14px 24px
-		&-lines
-			padding: 24px 24px
-
-	&--content
-		font-size: 14px
-		color: white
-		opacity: 1
+		align-items: center
+		color: #fff
 		display: flex
+		font-size: 14px
 		justify-content: space-between
+		transition: .4s $transition.swing
+		
+		.btn
+			margin: 0 -16px 0 24px
+			min-width: 0
 
-	@media screen and (max-width: 568px)
-		&--body
-			max-width: 100vw
-			width: 100vw
-			flex-grow: 1
-			border-radius: 0
+@media $display-breakpoints.md-and-down
+	.snack
+		width: 100%
 
-button.btn
-	text-transform: uppercase
-	color: white
-	background-color: transparent
-	padding: 0
-	margin: auto 0
-	min-width: 0
-	margin-left: 48px
-	height: 100%
+	.snack__content
+		border-radius: 0
+		max-width: 100%
+		width: 100%
