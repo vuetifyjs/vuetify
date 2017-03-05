@@ -62,6 +62,15 @@
 @media $display-breakpoints.md-and-down
 	.snack
 		width: 100%
+		left: 0
+		right: initial
+		
+		&--right, &--left
+			&.snack--top
+				top: 0
+
+			&.snack--bottom
+				bottom: 0
 
 	.snack__content
 		border-radius: 0
