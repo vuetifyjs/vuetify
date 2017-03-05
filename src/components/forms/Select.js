@@ -58,6 +58,7 @@ export default {
     },
     value (val) {
       this.inputValue = this.multiple ? val || [] : new Array(val)
+      this.inputSearch = this.multiple ? '' : val[this.itemText]
     },
     inputValue (val) {
       this.$emit('input', this.multiple ? val : val[0])
