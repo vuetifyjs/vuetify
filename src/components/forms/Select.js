@@ -158,11 +158,7 @@ export default {
     genSelectionsAndSearch (h) {
       const data = {
         slot: 'activator',
-        style: { // TODO: Move this to stylus file somewhere.
-          'display': 'flex',
-          'flex-wrap': 'wrap',
-          'width': '100%'
-        }
+        'class': 'input-group__selections'
       }
 
       return this.multiple
@@ -196,7 +192,7 @@ export default {
           input: val => { if (val === false) this.removeSelected(item) }
         },
         nativeOn: {
-          click: e => { e.stopPropagation() }
+          click: e => e.stopPropagation()
         }
       }
 
@@ -205,12 +201,7 @@ export default {
 
     genCommaSelection (h, item, hasComma) {
       const data = {
-        style: { // TODO: Move this to stylus file somewhere.
-          fontSize: '16px',
-          height: '30px',
-          paddingTop: '4px',
-          paddingRight: '4px'
-        }
+        'class': 'input-group__selections__comma'
       }
       return h('div', data, `${item[this.itemText]}${hasComma ? ',' : ''}`)
     },
@@ -222,10 +213,10 @@ export default {
           value: this.inputSearch
         },
         on: {
-          input: e => { this.inputSearch = e.target.value },
-          focus: () => { this.focus() },
-          blur: () => { this.blur() },
-          keyup: debounce(this.filterItems, this.debounce)
+          input: e => (this.inputSearch = e.target.value),
+          focus: () => this.focus,
+          blur: () => this.blur,
+          keyup: () => debounce(this.filterItems, this.debounce)
         }
       }
 

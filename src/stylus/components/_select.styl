@@ -1,3 +1,25 @@
 .input-group--select
   input
     cursor: pointer
+    
+.input-group--select
+  .input-group__selections
+    display: flex
+    flex-wrap: wrap
+    width: 100%
+    
+    &__comma
+      font-size: 16px
+      height: 30px
+      padding-top: 4px
+      padding-right: 4px
+      
+
+.input-group--select
+  &.input-group--light
+    .input-group__selections__comma
+      color: rgba(#000, .87)
+      
+  &.input-group--dark
+    .input-group__selections__comma
+      color: #fff
