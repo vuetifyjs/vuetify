@@ -24,10 +24,14 @@
   .input-group__details:before, .input-group__details:after
     display: none
     
+  .input-group__input
+    flex: 1 1 100%
+    
 
   label
     + .input-group__input
       margin-left: 16px
+      flex: 1 1 auto
 
   &.input-group--active
     .slider__thumb
