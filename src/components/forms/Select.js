@@ -134,8 +134,8 @@ export default {
           auto: !this.autocomplete,
           closeOnClick: !this.multiple,
           value: this.menuActive,
-          nudgeBottom: -20,
-          nudgeTop: -5
+          nudgeBottom: 0,
+          nudgeTop: 0
         },
         on: {
           input: (val) => { this.menuActive = val }
