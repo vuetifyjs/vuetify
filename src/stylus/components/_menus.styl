@@ -2,8 +2,13 @@
   display: inline-block
   position: relative
   
+  &--disabled
+    cursor: not-allowed
+    
+    .menu__activator
+      cursor: not-allowed
+  
   &__activator
-    /* display: inline-flex */
     align-items: center
     cursor: pointer
     position: relative

@@ -1,11 +1,11 @@
 <template lang="pug">
   div(
-    class="menu"
+    v-bind:class="classes"
   )
 
     div(
       class="menu__activator"
-      v-on:click="isActive = true"
+      v-on:click="click"
       ref="activator"
       v-click-outside
     )
@@ -49,6 +49,7 @@
 
     props: {
       auto: Boolean,
+      disabled: Boolean,
       left: Boolean,
       bottom: Boolean,
       right: Boolean,
@@ -80,6 +81,12 @@
     },
 
     computed: {
+      classes () {
+        return {
+          'menu': true,
+          'menu--disabled': this.disabled
+        }
+      },
       direction () {
         return {
           'vert': (this.bottom || this.auto) ? 'bottom' : 'top',
@@ -176,6 +183,12 @@
         this.$nextTick(() => {
           this.isActive = true
         })
+      },
+
+      click () {
+        if (!this.disabled) {
+          this.isActive = true
+        }
       },
 
       updateDimensions () {

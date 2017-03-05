@@ -131,15 +131,14 @@ export default {
           width: '100%'
         },
         props: {
-          offsetY: this.autocomplete,
           auto: !this.autocomplete,
           closeOnClick: !this.multiple,
-          value: this.menuActive,
-          nudgeBottom: 0,
-          nudgeTop: 0
+          disabled: this.disabled,
+          offsetY: this.autocomplete,
+          value: this.menuActive
         },
         on: {
-          input: (val) => { this.menuActive = val }
+          input: (val) => (this.menuActive = val)
         },
         nativeOn: {
           '!mouseenter': this.closeAction,
@@ -151,8 +150,10 @@ export default {
     },
 
     genActivator (h) {
-      const data = { slot: 'activator' }
-      return h('div', data, [this.genInputGroup(h, [this.genSelectionsAndSearch(h)])])
+      const data = {
+        slot: 'activator'
+      }
+      return this.genInputGroup(h, [this.genSelectionsAndSearch(h)], data)
     },
 
     genSelectionsAndSearch (h) {
