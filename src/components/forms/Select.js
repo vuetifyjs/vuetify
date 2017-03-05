@@ -69,7 +69,7 @@ export default {
 
   methods: {
     isDirty () {
-      return this.inputValue.length
+      return this.inputSearch || this.multiple && this.inputValue.length
     },
 
     focus () {
@@ -141,8 +141,8 @@ export default {
           input: (val) => { this.menuActive = val }
         },
         nativeOn: {
-          '!mouseenter': () => { this.closeAction() },
-          'mouseleave': () => { this.closeAction(false) }
+          '!mouseenter': this.closeAction,
+          mouseleave: () => (this.closeAction(false))
         }
       }
 
@@ -174,10 +174,13 @@ export default {
       const slots = this.$scopedSlots.selection
       const comma = true // <-- default
 
-      return this.inputValue.map(item => {
+      return this.inputValue.map((item, index, array) => {
         if (slots) return this.genSlotSelection(h, item)
         if (chips) return this.genChipSelection(h, item)
-        if (comma) return this.genCommaSelection(h, item)
+        if (comma) {
+          const length = array.length
+          return this.genCommaSelection(h, item, length !== 1 && index !== length - 1)
+        }
       })
     },
 
@@ -199,17 +202,16 @@ export default {
       return h('v-chip', data, item[this.itemText])
     },
 
-    genCommaSelection (h, item) {
+    genCommaSelection (h, item, hasComma) {
       const data = {
         style: { // TODO: Move this to stylus file somewhere.
-          'font-size': '16px',
-          'height': '30px',
-          'padding-top': '4px',
-          'padding-right': '4px'
+          fontSize: '16px',
+          height: '30px',
+          paddingTop: '4px',
+          paddingRight: '4px'
         }
       }
-
-      return h('div', data, item[this.itemText] + ',')
+      return h('div', data, `${item[this.itemText]}${hasComma ? ',' : ''}`)
     },
 
     genSearchField (h) {
@@ -231,11 +233,11 @@ export default {
 
     genList (h) {
       const list = (this.filteredItems || this.items).map(item => this.genListItem(h, item))
-      return h('v-list', list)
+      return h('v-list', {}, list)
     },
 
     genListItem (h, item) {
-      return h('v-list-item', [this.genTile(h, item)])
+      return h('v-list-item', {}, [this.genTile(h, item)])
     },
 
     genTile (h, item) {
@@ -243,12 +245,25 @@ export default {
         'class': {
           'list__tile--active': this.isSelected(item)
         },
-        'nativeOn': {
-          click: () => {
-            this.multiple && this.isSelected(item)
+        nativeOn: {
+          click: e => {
+            if (!this.multiple) {
+              return
+            }
+
+            e.stopPropagation()
+            e.preventDefault()
+            this.isSelected(item)
               ? this.removeSelected(item)
               : this.addSelected(item)
 
+            this.$refs.searchField.focus()
+          },
+          mousedown: e => {
+            if (this.multiple) {
+              return
+            }
+            this.addSelected(item)
             this.$refs.searchField.focus()
           }
         }
@@ -263,11 +278,11 @@ export default {
       if (!this.multiple) return null
 
       const checkbox = h('v-checkbox', { props: { 'inputValue': this.isSelected(item) }})
-      return h('v-list-tile-action', [checkbox])
+      return h('v-list-tile-action', {}, [checkbox])
     },
 
     genContent (h, item) {
-      return h('v-list-tile-content', [h('v-list-tile-title', item[this.itemText])])
+      return h('v-list-tile-content', {}, [h('v-list-tile-title', item[this.itemText])])
     }
   },
 
