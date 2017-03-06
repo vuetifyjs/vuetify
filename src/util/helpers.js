@@ -19,11 +19,10 @@ export function createSimpleTransition (name) {
       const data = context.data || {}
 
       data.props = { name }
-      data.on = {
-        beforeEnter (el) {
-          el.style.transformOrigin = origin
-          el.style.webkitTransformOrigin = origin
-        }
+      data.on = data.on || {}
+      data.on.beforeEnter = (el) => {
+        el.style.transformOrigin = origin
+        el.style.webkitTransformOrigin = origin
       }
 
       return createElement('transition', data, context.children)
