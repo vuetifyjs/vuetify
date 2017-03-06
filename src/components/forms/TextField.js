@@ -16,7 +16,8 @@ export default {
       return {
         'input-group--text-field': true,
         'input-group--single-line': this.singleLine,
-        'input-group--multi-line': this.multiLine
+        'input-group--multi-line': this.multiLine,
+        'input-group--full-width': this.fullWidth
       }
     },
     hasError () {
@@ -25,7 +26,7 @@ export default {
         !this.validateIsValid()
     },
     count () {
-      const inputLength = (this.inputValue || '').length
+      const inputLength = (this.inputValue && this.inputValue.toString() || '').length
       let min = inputLength
 
       if (this.min !== 0 && inputLength < this.min) {
@@ -39,7 +40,15 @@ export default {
         return this.value
       },
       set (val) {
-        if (!this.lazy) {
+        if (this.modifiers.trim) {
+          val = val.trim()
+        }
+
+        if (this.modifiers.number) {
+          val = Number(val)
+        }
+
+        if (!this.modifiers.lazy) {
           this.$emit('input', val)
         }
 
@@ -52,6 +61,7 @@ export default {
     autocomplete: Boolean,
     counter: Boolean,
     id: String,
+    fullWidth: Boolean,
     min: {
       type: [Number, String],
       default: 0
@@ -75,7 +85,7 @@ export default {
       this.hasFocused = true
 
       if (!this.focused) {
-        this.$emit('input', this.lazyValue)
+        this.$emit('change', this.lazyValue)
       }
     },
     value () {
@@ -85,6 +95,9 @@ export default {
   },
 
   methods: {
+    isDirty () {
+      return this.lazyValue
+    },
     blur () {
       this.validate()
       this.$nextTick(() => (this.focused = false))
@@ -107,7 +120,7 @@ export default {
           id: this.id || this.name || this._uid,
           name: this.name,
           required: this.required,
-          value: this.inputValue
+          value: this.lazyValue
         },
         on: {
           blur: this.blur,
@@ -125,10 +138,11 @@ export default {
 
       return h(tag, inputData)
     },
-    counterIsValid () {
+    counterIsValid: function counterIsValid () {
+      const val = (this.inputValue && this.inputValue.toString() || '')
       return (!this.counter ||
-        !this.inputValue ||
-        (this.inputValue.length >= this.min && this.inputValue.length <= this.max)
+        !this.inputValue.toString() ||
+        (val.length >= this.min && val.length <= this.max)
       )
     },
     validateIsValid () {

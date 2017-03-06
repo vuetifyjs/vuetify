@@ -15,19 +15,17 @@
 
   .input-group__input
     height: $input-height
-    width: 100%;
-    align-items: center;
+    width: 100%
+    align-items: center
     position: relative
-    
-.list__tile__action .input-group.input-group--selection-controls .icon
-  top: 10px
 
 /** Label */
 .input-group--selection-controls label
   cursor: pointer
-  padding-left: 32px
+  margin-left: 32px
   position: absolute
   left: 0
+  z-index: 1
   
 .input-group--selection-controls__ripple
   border-radius: 50%
@@ -43,6 +41,8 @@
 
 /** Switch */
 .input-group.input-group--selection-controls
+  z-index: 0
+
   &.switch
     .input-group--selection-controls__container
       position: relative
@@ -87,7 +87,7 @@
           background: currentColor !important
       
     label
-      padding-left: 44px
+      margin-left: 44px
       
 /* Theme */
 .input-group--selection-controls

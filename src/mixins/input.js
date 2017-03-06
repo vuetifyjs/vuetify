@@ -3,23 +3,28 @@ export default {
     return {
       errors: [],
       focused: false,
-      lazyValue: this.value
+      lazyValue: this.value,
+      appendIconAlt: '',
+      prependIconAlt: '',
+      appendIconCbPrivate: null,
+      prependIconCbPrivate: null
     }
   },
 
   props: {
     appendIcon: String,
+    appendIconCb: Function,
     dark: Boolean,
     disabled: Boolean,
     hint: String,
     persistentHint: Boolean,
     label: String,
-    lazy: Boolean,
     light: {
       type: Boolean,
       default: true
     },
     prependIcon: String,
+    prependIconCb: Function,
     required: Boolean,
     rules: {
       type: Array,
@@ -35,7 +40,7 @@ export default {
       return this.errors.length !== 0
     },
     inputGroupClasses () {
-      return Object.assign({}, {
+      return Object.assign({
         'input-group': true,
         'input-group--focused': this.focused,
         'input-group--dirty': this.isDirty(),
@@ -47,6 +52,25 @@ export default {
         'input-group--prepend-icon': this.prependIcon,
         'input-group--required': this.required
       }, this.classes)
+    },
+    modifiers () {
+      const modifiers = {
+        lazy: false,
+        number: false,
+        trim: false
+      }
+
+      if (!this.$vnode.data.directives) {
+        return modifiers
+      }
+
+      const model = this.$vnode.data.directives.find(i => i.name === 'model')
+
+      if (!model) {
+        return modifiers
+      }
+
+      return Object.assign(modifiers, model.modifiers)
     }
   },
 
@@ -110,9 +134,23 @@ export default {
       )
     },
     genIcon (h, type) {
-      return h('v-icon', {
-        'class': 'input-group__' + type + '-icon'
-      }, this[`${type}Icon`])
+      const icon = this[`${type}IconAlt`] || this[`${type}Icon`]
+      const callback = this[`${type}IconCb`]
+      const callbackPrivate = this[`${type}IconCbPrivate`]
+
+      return h(
+        'v-icon',
+        {
+          'class': 'input-group__' + type + '-icon',
+          'nativeOn': {
+            'click': e => {
+              if (typeof callbackPrivate === 'function') callbackPrivate(e)
+              if (typeof callback === 'function') callback(e)
+            }
+          }
+        },
+        icon
+      )
     },
     genInputGroup (h, input, data = {}) {
       const children = []

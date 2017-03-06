@@ -86,7 +86,7 @@
       
 
 /** Types */
-.input-group
+.input-group--text-field
   &.input-group--error
     .input-group__details:after
       background-color: $theme.error
@@ -136,3 +136,9 @@
       
     .input-group__details:before, .input-group__details:after
       background-color: $theme.error
+      
+  &.input-group--full-width
+    padding: 0 16px
+
+    .input-group__details:before, .input-group__details:after
+      display: none
