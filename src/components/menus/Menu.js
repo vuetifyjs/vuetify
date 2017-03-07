@@ -240,7 +240,9 @@ export default {
       vert = !auto && c.height > screenDist[vert] ? screenDist.vertMaxDir : vert
 
       if (horiz === this.direction.horiz && vert === this.direction.vert) {
-        this.startTransition() // <-- Todo: Maybe refactor and put this elsewhere.
+        // No more flipping needed, now start transition.
+        // Todo: Maybe move this call to a better place.
+        this.startTransition()
         return
       }
 
