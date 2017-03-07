@@ -36,24 +36,7 @@
 
       currentNav () {
         this.toggleActiveBtn()
-
-        // let n = this.nodes[this.currentNav]
-        // n.classList.add('btn--nav-active')
-
-        for (let i=this.nodes.length; i--;) {
-          let n = this.nodes[i]
-          n.style.opacity = this.currentNav === i? 1 : .5
-          if (this.nodes.length > 3) {
-            let content = n.getElementsByClassName('btn__content')[0]
-            if (i === this.value) {
-              n.classList.add('btn--nav-active')
-              n.classList.remove('btn--nav-inactive')
-            }
-            else if (content.childNodes.length > 1) {
-              n.classList.add('btn--nav-inactive')
-            }
-          }
-        }
+        this.activateBtn(this.currentNav)
       }
     },
     mounted () {
@@ -83,6 +66,11 @@
         }
     },
     methods: {
+      activateBtn (i) {
+        let n = this.nodes[this.currentNav]
+        n.classList.add('btn--nav-active')
+        n.classList.remove('btn--nav-inactive')
+      },
       toggleActiveBtn () {
         let active = document.getElementsByClassName('btn--nav-active')[0]
         // console.log(active)
