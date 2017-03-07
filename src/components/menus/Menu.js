@@ -1,5 +1,4 @@
 import Toggleable from '../../mixins/toggleable'
-import { addOnceEventListener } from '../../util/helpers'
 
 export default {
   name: 'menu',
@@ -19,7 +18,7 @@ export default {
         list: null,
         selected: null
       },
-      direction: { vert: '', horiz: '' },
+      direction: { vert: 'bottom', horiz: 'right' },
       position: { left: '0px', top: '0px', right: 'auto', bottom: 'auto' },
       isContentActive: false
     }
@@ -33,6 +32,14 @@ export default {
     auto: Boolean,
     offsetX: Boolean,
     offsetY: Boolean,
+    nudgeXAuto: {
+      type: Number,
+      default: 0
+    },
+    nudgeYAuto: {
+      type: Number,
+      default: 0
+    },
     openOnClick: {
       type: Boolean,
       default: true
@@ -63,7 +70,55 @@ export default {
     },
 
     offsetAuto () {
-      return { horiz: 0, vert: 0 }
+      if (!this.auto) return { horiz: 0, vert: 0 }
+      if (!this.dimensions.selected) return { horiz: this.nudgeXAuto, vert: this.nudgeYAuto }
+
+      const { activator: a, content: c, selected: s, list } = this.dimensions
+      const offsetBottom = list.height - s.height - s.offsetTop
+      const scrollMiddle = (c.height - s.height) / 2
+      const horiz = this.nudgeXAuto
+      let vert = (a.height - c.height + this.nudgeYAuto) / 2
+
+      vert += s.offsetTop < scrollMiddle ? scrollMiddle - s.offsetTop : 0
+      vert += offsetBottom < scrollMiddle ? offsetBottom - scrollMiddle : 0
+
+      return { horiz, vert }
+    },
+
+    screenDist () {
+      const { activator: a } = this.dimensions
+      const { innerHeight: innerH, innerWidth: innerW } = this.window
+      const dist = {}
+
+      dist.top = this.offsetY ? a.top : a.bottom
+      dist.left = this.offsetX ? a.left : a.right
+      dist.bottom = this.offsetY ? innerH - a.bottom : innerH - a.top
+      dist.right = this.offsetX ? innerW - a.right : innerW - a.left
+      dist.horizMax = dist.left > dist.right ? dist.left : dist.right
+      dist.horizMaxDir = dist.left > dist.right ? 'left' : 'right'
+      dist.vertMax = dist.top > dist.bottom ? dist.top : dist.bottom
+      dist.vertMaxDir = dist.top > dist.bottom ? 'top' : 'bottom'
+
+      return dist
+    },
+
+    screenOverflow () {
+      const { content: c } = this.dimensions
+      const left = c.left + this.offset.horiz
+      const top = c.top + this.offset.vert
+
+      const horiz = this.auto && left + c.width > this.window.innerWidth
+          ? (left + c.width) - this.window.innerWidth
+          : this.auto && left < 0
+            ? left
+            : 0
+      const vert = this.auto && top + c.height > this.window.innerHeight
+          ? (top + c.height) - this.window.innerHeight
+          : this.auto && top < 0
+            ? top
+            : 0
+
+      return { horiz, vert }
     },
 
     styles () {
@@ -78,21 +133,21 @@ export default {
 
   watch: {
     isActive (val) {
-      if (val) {
-        this.setDirection()
-          .then(this.updatePosition)
-          .then(() => (this.isContentActive = true))
-      } else {
-        this.isContentActive = false
-      }
+      if (val) this.activate()
+      else this.isContentActive = false
     }
   },
 
-  mounted () {
-    this.window = window
-  },
-
   methods: {
+    activate () {
+      this.window = window
+
+      this.setDirection()
+      this.$nextTick(() => {
+        this.updatePosition()
+      })
+    },
+
     setDirection (horiz = '', vert = '') {
       this.direction = {
         horiz: horiz || (this.left && !this.auto ? 'left' : 'right'),
@@ -104,37 +159,102 @@ export default {
       this.position.left = this.direction.vert === 'left' ? 'auto' : '0px'
       this.position.bottom = this.direction.vert === 'bottom' ? 'auto' : '0px'
       this.position.right = this.direction.vert === 'right' ? 'auto' : '0px'
-
-      return Promise.resolve()
     },
 
     updatePosition () {
       this.updateDimensions()
-      return new Promise((resolve, reject) => {
-        this.$nextTick(this.assignPosition)
-        setTimeout(resolve, 0)
-      })
-    },
 
-    assignPosition () {
-      this.position.left = this.direction.horiz === 'left' ? 'auto' : `${this.offset.horiz}px`
-      this.position.top = this.direction.vert === 'top' ? 'auto' : `${this.offset.vert}px`
-      this.position.right = this.direction.horiz === 'right' ? 'auto' : `${-this.offset.horiz}px`
-      this.position.bottom = this.direction.vert === 'bottom' ? 'auto' : `${-this.offset.vert}px`
+      const { horiz, vert } = this.direction
+      const { offset, screenOverflow: screen } = this
+
+      this.position.left = horiz === 'left' ? 'auto' : `${offset.horiz - screen.horiz}px`
+      this.position.top = vert === 'top' ? 'auto' : `${offset.vert - screen.vert}px`
+      this.position.right = horiz === 'right' ? 'auto' : `${-offset.horiz - screen.horiz}px`
+      this.position.bottom = vert === 'bottom' ? 'auto' : `${-offset.vert - screen.vert}px`
+
+      this.flipFix()
     },
 
     updateDimensions () {
-      this.$refs.content.style.display = 'inline-block'
+      this.sneakPeek()
+      this.updateMaxMin()
+
+      const { activator: a, content: c } = this.$refs
+
       this.dimensions = {
-        activator: this.$refs.activator.children
-          ? this.measure(this.$refs.activator.children[0])
-          : this.measure(this.$refs.activator),
-        content: {},
-        list: {},
-        selected: {}
+        'activator': this.measure(a.children ? a.children[0] : a),
+        'content': this.measure(c),
+        'list': this.measure(c, '.list'),
+        'selected': this.measure(c, '.list__tile--active', 'parent')
       }
-      this.$refs.content.style.display = 'none'
+
+      this.offscreenFix()
+      this.updateScroll()
+      this.sneakPeek(false)
     },
+
+    updateMaxMin () {
+      const { $refs, maxHeight } = this
+      const a = $refs.activator.children ? $refs.activator.children[0] : $refs.activator
+      const c = $refs.content
+
+      c.style.minWidth = `${a.getBoundingClientRect().width}px`
+      c.style.width = c.style.width || c.style.minWidth
+      c.style.maxHeight = null  // <-- TODO: This is a temporary fix.
+      c.style.maxHeight = isNaN(maxHeight) ? maxHeight : `${maxHeight}px`
+    },
+
+    offscreenFix () {
+      const { $refs, screenDist } = this
+      const { vert } = this.direction
+
+      // If not auto, reduce height to the max vertical distance to a window edge.
+      if (!this.auto && this.dimensions.content.height > screenDist[vert]) {
+        $refs.content.style.maxHeight = `${screenDist.vertMax}px`
+        this.dimensions.content.height = $refs.content.getBoundingClientRect().height
+      }
+    },
+
+    updateScroll () {
+      if (!this.auto || !this.dimensions.selected) return
+
+      const { content: c, selected: s, list: l } = this.dimensions
+      const scrollMiddle = (c.height - s.height) / 2
+      const scrollMax = l.height - c.height
+      let offsetTop = s.offsetTop - scrollMiddle
+
+      offsetTop = this.screenOverflow.vert && offsetTop > scrollMax ? scrollMax : offsetTop
+      offsetTop = this.screenOverflow.vert && offsetTop < 0 ? 0 : offsetTop
+      offsetTop -= this.screenOverflow.vert
+
+      this.$refs.content.scrollTop = offsetTop
+    },
+
+    flipFix () {
+      const { auto, screenDist } = this
+      const { content: c } = this.dimensions
+      let { horiz, vert } = this.direction
+
+      // Flip direction, if needed, to where there's more distance from the screen edge.
+      horiz = !auto && c.width > screenDist[horiz] ? screenDist.horizMaxDir : horiz
+      vert = !auto && c.height > screenDist[vert] ? screenDist.vertMaxDir : vert
+
+      if (horiz === this.direction.horiz && vert === this.direction.vert) {
+        this.startTransition() // <-- Todo: Maybe refactor and put this elsewhere.
+        return
+      }
+
+      this.setDirection(horiz, vert)
+      this.$nextTick(() => { this.updatePosition(false) })
+    },
+
+    startTransition () {
+      this.$refs.content.offsetHeight // <-- Force DOM to repaint first.
+      this.isContentActive = true
+    },
+
+    // Render functions
+    // ====================
 
     genActivator (h) {
       const data = {
@@ -171,7 +291,7 @@ export default {
           name: 'show',
           value: this.isContentActive
         }],
-        'class': 'menu__content',
+        'class': { 'menu__content': true },
         on: {
           click: () => { if (this.closeOnClick) this.isActive = false }
         }
@@ -188,7 +308,17 @@ export default {
       el = el && getParent ? el.parentElement : el
 
       if (!el) return null
-      return Object.assign(el.getBoundingClientRect(), { offsetTop: el.offsetTop })
+      const { top, left, bottom, right, width, height } = el.getBoundingClientRect()
+      return { top, left, bottom, right, width, height, offsetTop: el.offsetTop }
+    },
+
+    // Todo: Need to pass original display and opacity into this method.
+    sneakPeek (on = true) {
+      if (on) {
+        this.$refs.content.style.display = 'inline-block'
+      } else {
+        this.$refs.content.style.display = 'none'
+      }
     }
   },
 
