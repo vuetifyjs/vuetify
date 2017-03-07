@@ -1,0 +1,169 @@
+.stepper
+  overflow: hidden
+  position: relative
+  @extend .z-depth-1
+  
+.stepper
+  .divider
+    align-self: center
+    margin: 0 -16px
+  
+.stepper
+  &__header
+    align-items: stretch
+    display: flex
+    flex-wrap: wrap
+    justify-content: space-between
+    @extend .z-depth-1
+
+
+.stepper
+  &__step__step
+    align-items: center
+    background: rgba(#000, .38)
+    border-radius: 50%
+    color: white
+    display: flex
+    font-size: 12px
+    justify-content: center
+    height: 24px
+    margin-right: 8px
+    width: 24px
+    transition: .3s $transition.fast-in-fast-out
+    
+    .icon
+      font-size: 18px
+
+.stepper
+  &__step
+    align-items: center
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    padding: 24px
+    position: relative
+    
+    &--active
+      .stepper__label
+        text-shadow: 0px 0px 0px black
+        transition: .3s $transition.ease-in-out
+      
+      .stepper__step__step
+        background: $theme.primary
+    
+    &--editable
+      cursor: pointer
+
+      &:hover
+        background: rgba(#000, .06)
+        
+    &--inactive
+      .stepper__label
+        color: rgba(#000, .38)
+        
+        small
+          color: rgba(#000, .38)
+
+      .stepper__step__step:not(&.stepper__step--error)
+        color: #fff
+        background: rgba(#000, .38)
+        
+        &:hover
+          background: rgba(#000, .50)
+          
+      &.stepper__step--editable
+        &:hover
+          .stepper__step__step
+            background: rgba(#000, .5)
+      
+    &--error
+      .stepper__step__step
+        background: transparent
+        color: $theme.error
+        
+        .icon
+          font-size: 24px
+
+      .stepper__label
+        color: $theme.error
+        text-shadow: none
+        font-weight: 500
+        
+        small
+          color: $theme.error
+          
+    &--complete
+      .stepper__label
+        color: rgba(#000, .5)
+        text-shadow: 0px 0px 0px black
+
+      .stepper__step__step
+        background: $theme.primary
+    
+.stepper
+  &__label
+    align-items: flex-start
+    display: flex
+    flex-direction: column
+    text-align: left
+    color: rgba(#000, .38)
+    
+    small
+      font-size: 12px
+      font-weight: 300
+      color: rgba(#000, .38)
+      text-shadow: none
+
+.stepper
+  &__wrapper
+    overflow: hidden
+    transition: .3s $transition.ease-in-out
+
+.stepper
+  &__content
+    top: initial
+    bottom: 0
+    padding: 16px
+    overflow: hidden
+    transition: .3s $transition.ease-in-out
+    flex: 1
+    width: 100%
+    
+.stepper
+  &--vertical
+    padding-bottom: 36px
+
+    .stepper__content
+      margin: -8px 0 -16px 36px
+      padding: 16px 60px 16px 23px
+      width: auto
+
+    .stepper__content:not(:last-child)
+      border-left: 1px solid $material-twelve-percent-dark
+      
+    .stepper__step
+      padding: 24px 24px 16px
+
+    .stepper__step__step
+      margin-right: 12px
+      
+    .stepper__content .btn
+      margin-left: 0
+    
+  &--alt-labels
+    .divider
+      margin: 35px -67px 0
+      align-self: flex-start
+
+    .stepper__step
+      flex-direction: column
+      justify-content: flex-start
+      align-items: center
+      flex-basis: 175px
+      
+      small
+        align-self: center
+    
+    .stepper__step__step
+      margin-right: 0
+      margin-bottom: 12px
