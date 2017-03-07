@@ -247,7 +247,7 @@ export default {
       }
 
       this.setDirection(horiz, vert)
-      this.$nextTick(() => { this.updatePosition(false) })
+      this.$nextTick(() => { this.updatePosition() })
     },
 
     startTransition () {
