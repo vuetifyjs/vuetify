@@ -34,11 +34,11 @@ export default {
     offsetY: Boolean,
     nudgeXAuto: {
       type: Number,
-      default: 0
+      default: -16
     },
     nudgeYAuto: {
       type: Number,
-      default: 0
+      default: -16
     },
     openOnClick: {
       type: Boolean,
@@ -194,11 +194,11 @@ export default {
     },
 
     updateMaxMin () {
-      const { $refs, maxHeight } = this
+      const { $refs, maxHeight, offsetAuto } = this
       const a = $refs.activator.children ? $refs.activator.children[0] : $refs.activator
       const c = $refs.content
 
-      c.style.minWidth = `${a.getBoundingClientRect().width}px`
+      c.style.minWidth = `${a.getBoundingClientRect().width + offsetAuto.horiz}px`
       c.style.maxHeight = null  // <-- TODO: This is a temporary fix.
       c.style.maxHeight = isNaN(maxHeight) ? maxHeight : `${maxHeight}px`
     },
