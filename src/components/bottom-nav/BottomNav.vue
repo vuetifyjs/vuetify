@@ -97,13 +97,6 @@
   display: flex
   justify-content: center
 
-  .icon
-    transition: all .4s cubic-bezier(.25,.8,.25,1),color .15s linear;
-  .btn--nav-text
-    font-family: 'Roboto', san-serif
-    transform: scale(1) translateY(2px);
-    transition: font-size .1s ease-in-out
-
   button.btn
     flex: 1;
     height: 100%
@@ -114,17 +107,23 @@
     max-width: 168px
     padding: 0px 12px
     text-transform: capitalize
-    transition: all .1s
+    opacity: .5
+
+    .icon
+      transition: all .4s cubic-bezier(.25,.8,.50,1),color .15s linear;
+
+    .btn--nav-text
+      font-family: 'Roboto', san-serif
+      font-size: 12px
+      transform: scale(1) translateY(2px);
+      transition: font-size .1s ease-in-out
+      transition-property: flex, min-width, max-width;
 
     &--nav-active
       opacity: 1
-      font-size: 14px
       .btn--nav-text
-        scale(1)
         transform: translateY(1px);
-    &--nav-inactive
-      opacity: .5
-      font-size: 12px
+        font-size: 14px
 
     .btn__content
       flex-direction: column-reverse
@@ -155,4 +154,5 @@
         .btn--nav-text
           opacity: 0
           transform: scale(1) translate3d(0,6px,0);
+
 </style>
