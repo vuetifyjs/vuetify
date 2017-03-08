@@ -40,14 +40,7 @@ export default {
   },
 
   mounted () {
-    this.$vuetify.load(() => {
-      this.init()
-      // window.addEventListener('resize', this.resize, false)
-    })
-  },
-
-  beforeDestroy () {
-    // window.removeEventListener('resize', this.resize, false)
+    this.$vuetify.load(this.init)
   },
 
   methods: {
@@ -62,14 +55,6 @@ export default {
       })
 
       this.inputValue = this.value || this.steps[0].step || 1
-    },
-
-    resize () {
-      clearTimeout(this.resizeDebounce)
-
-      this.resizeDebounce = setTimeout(() => {
-        this.slider()
-      }, 250)
     },
     stepClick (step) {
       this.inputValue = step
