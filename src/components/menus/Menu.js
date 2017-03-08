@@ -156,9 +156,9 @@ export default {
 
       // On every direction change, we must reset/reorientate position.
       this.position.top = this.direction.vert === 'top' ? 'auto' : '0px'
-      this.position.left = this.direction.vert === 'left' ? 'auto' : '0px'
+      this.position.left = this.direction.horiz === 'left' ? 'auto' : '0px'
       this.position.bottom = this.direction.vert === 'bottom' ? 'auto' : '0px'
-      this.position.right = this.direction.vert === 'right' ? 'auto' : '0px'
+      this.position.right = this.direction.horiz === 'right' ? 'auto' : '0px'
     },
 
     updatePosition () {
@@ -199,7 +199,6 @@ export default {
       const c = $refs.content
 
       c.style.minWidth = `${a.getBoundingClientRect().width}px`
-      c.style.width = c.style.width || c.style.minWidth
       c.style.maxHeight = null  // <-- TODO: This is a temporary fix.
       c.style.maxHeight = isNaN(maxHeight) ? maxHeight : `${maxHeight}px`
     },
