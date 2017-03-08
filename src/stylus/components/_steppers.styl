@@ -128,6 +128,9 @@
     transition: .3s $transition.ease-in-out
     flex: 1
     width: 100%
+      
+    .btn
+      margin-left: 0
     
 .stepper
   &--vertical
@@ -146,9 +149,6 @@
 
     .stepper__step__step
       margin-right: 12px
-      
-    .stepper__content .btn
-      margin-left: 0
     
   &--alt-labels
     .divider
@@ -167,3 +167,12 @@
     .stepper__step__step
       margin-right: 0
       margin-bottom: 12px
+      
+@media $display-breakpoints.sm-and-down
+  .stepper:not(.stepper--vertical)
+    .stepper__label
+      display: none
+
+    .stepper__step__step
+      margin-right: 0
+    
