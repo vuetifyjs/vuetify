@@ -9,7 +9,8 @@
 
     props: {
       value: Number,
-      shift: Boolean
+      shift: Boolean,
+      hidden: Boolean
     },
 
     data () {
@@ -24,7 +25,8 @@
       classes () {
         return {
           'bottom-nav': true, // always on
-          'bottom-nav--shift': this.shift
+          'bottom-nav--shift': this.shift,
+          'bottom-nav--hidden': this.hidden
         }
       }
     },
@@ -93,9 +95,13 @@
   position: fixed
   width: 100%
   height: 56px
-  box-shadow: 0px 0px 11px 9px rgba(50, 50, 50, 0.1);
+  box-shadow: 0 3px 14px 2px rgba(#000, .12)
   display: flex
   justify-content: center
+  transition: all .4s cubic-bezier(.25,.8,.50,1)
+
+  &--hidden
+    bottom: -60px
 
   button.btn
     flex: 1;
