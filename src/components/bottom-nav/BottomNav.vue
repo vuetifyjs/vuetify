@@ -99,10 +99,10 @@
 
   .icon
     transition: all .4s cubic-bezier(.25,.8,.25,1),color .15s linear;
-    // background: green
   .btn--nav-text
     font-family: 'Roboto', san-serif
-    transform: translateY(2px);
+    transform: scale(1) translateY(2px);
+    transition: font-size .1s ease-in-out
 
   button.btn
     flex: 1;
@@ -120,6 +120,7 @@
       opacity: 1
       font-size: 14px
       .btn--nav-text
+        scale(1)
         transform: translateY(1px);
     &--nav-inactive
       opacity: .5
@@ -134,6 +135,9 @@
   &--shift
     .icon
       transform: translate3d(0, 10px, 0);
+    .btn--nav-text
+      font-size: 14px
+
     button.btn
       transition: all .3s
       &--nav-active
@@ -142,6 +146,7 @@
         .icon
           transform: scale(1) translateZ(0);
         .btn--nav-text
+          transform: scale(1) translate3d(0, 2px, 0);
           opacity: 1
 
       &--nav-inactive
@@ -150,5 +155,4 @@
         .btn--nav-text
           opacity: 0
           transform: scale(1) translate3d(0,6px,0);
-
 </style>
