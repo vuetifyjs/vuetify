@@ -15,7 +15,7 @@ export function createSimpleTransition (name) {
     functional: true,
 
     render (createElement, context) {
-      const origin = (context.data.attrs || {}).origin || 'top center 0'
+      const origin = (context.data.attrs || context.data.props || {}).origin || 'top center 0'
       const data = context.data || {}
 
       data.props = { name }

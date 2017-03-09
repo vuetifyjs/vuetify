@@ -5,6 +5,12 @@ export default {
 
   mixins: [Toggleable],
 
+  data () {
+    return {
+      timeout: {}
+    }
+  },
+
   props: {
     bottom: Boolean,
     left: Boolean,
@@ -35,8 +41,10 @@ export default {
 
   watch: {
     isActive () {
+      clearTimeout(this.timeout)
+
       if (this.isActive) {
-        setTimeout(() => (this.isActive = false), this.timeout)
+        this.timeout = setTimeout(() => (this.isActive = false), this.timeout)
       }
     }
   },

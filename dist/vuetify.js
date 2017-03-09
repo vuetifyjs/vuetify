@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 131);
+/******/ 	return __webpack_require__(__webpack_require__.s = 139);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -147,12 +147,10 @@ module.exports = function normalizeComponent (
 "use strict";
 /* harmony export (immutable) */ exports["b"] = createSimpleFunctional;
 /* harmony export (immutable) */ exports["a"] = createSimpleTransition;
-/* harmony export (immutable) */ exports["f"] = directiveConfig;
+/* harmony export (immutable) */ exports["e"] = directiveConfig;
 /* harmony export (immutable) */ exports["c"] = closestParentTag;
 /* harmony export (immutable) */ exports["d"] = addOnceEventListener;
 /* unused harmony export browserTransform */
-/* harmony export (immutable) */ exports["e"] = debounce;
-/* unused harmony export delay */
 function createSimpleFunctional (c, el) {
   if ( el === void 0 ) el = 'div';
 
@@ -179,10 +177,11 @@ function createSimpleTransition (name) {
       var data = context.data || {}
 
       data.props = { name: name }
-      data.on = data.on || {}
-      data.on.beforeEnter = function (el) {
-        el.style.transformOrigin = origin
-        el.style.webkitTransformOrigin = origin
+      data.on = {
+        beforeEnter: function beforeEnter (el) {
+          el.style.transformOrigin = origin
+          el.style.webkitTransformOrigin = origin
+        }
       }
 
       return createElement('transition', data, context.children)
@@ -237,57 +236,6 @@ function browserTransform (el, value) {
   })
 }
 
-// Returns a function, that, as long as it continues to be invoked, will not
-// be triggered. The function will be called after it stops being called for
-// N milliseconds. If `immediate` is passed, trigger the function on the
-// leading edge, instead of the trailing. Adapted from Underscore.js.
-//
-// Example:
-// var lazyLayout = debounce(calculateLayout, 300);
-// windowResize(lazyLayout);
-function debounce (func, wait, immediate) {
-  var timeout, result
-
-  var later = function (context, args) {
-    timeout = null
-    if (args) { result = func.apply(context, args) }
-  }
-
-  var debounced = function () {
-    var args = [], len = arguments.length;
-    while ( len-- ) args[ len ] = arguments[ len ];
-
-    if (timeout) { clearTimeout(timeout) }
-    if (immediate) {
-      var callNow = !timeout
-      timeout = setTimeout(later, wait)
-      if (callNow) { result = func.apply(this, args) }
-    } else {
-      timeout = delay(later, wait, this, args)
-    }
-
-    return result
-  }
-
-  debounced.cancel = function () {
-    clearTimeout(timeout)
-    timeout = null
-  }
-
-  return debounced
-}
-
-// Delays a function for the given number of milliseconds, and then calls
-// it with the arguments supplied. Adapted from Underscore.js.
-function delay (func, wait) {
-  var args = [], len = arguments.length - 2;
-  while ( len-- > 0 ) args[ len ] = arguments[ len + 2 ];
-
-  return setTimeout(function () {
-    return func.apply(null, args)
-  }, wait)
-}
-
 
 /***/ },
 /* 2 */
@@ -323,231 +271,6 @@ function delay (func, wait) {
 
 "use strict";
 /* harmony default export */ exports["a"] = {
-  data: function data () {
-    return {
-      errors: [],
-      focused: false,
-      lazyValue: this.value,
-      appendIconAlt: '',
-      prependIconAlt: '',
-      appendIconCbPrivate: null,
-      prependIconCbPrivate: null
-    }
-  },
-
-  props: {
-    appendIcon: String,
-    appendIconCb: Function,
-    dark: Boolean,
-    disabled: Boolean,
-    hint: String,
-    persistentHint: Boolean,
-    label: String,
-    light: {
-      type: Boolean,
-      default: true
-    },
-    prependIcon: String,
-    prependIconCb: Function,
-    required: Boolean,
-    rules: {
-      type: Array,
-      default: function () { return []; }
-    },
-    value: {
-      required: false
-    }
-  },
-
-  computed: {
-    hasError: function hasError () {
-      return this.errors.length !== 0
-    },
-    inputGroupClasses: function inputGroupClasses () {
-      return Object.assign({
-        'input-group': true,
-        'input-group--focused': this.focused,
-        'input-group--dirty': this.isDirty(),
-        'input-group--disabled': this.disabled,
-        'input-group--light': this.light && !this.dark,
-        'input-group--dark': this.dark,
-        'input-group--error': this.hasError || this.errors.length > 0,
-        'input-group--append-icon': this.appendIcon,
-        'input-group--prepend-icon': this.prependIcon,
-        'input-group--required': this.required
-      }, this.classes)
-    },
-    modifiers: function modifiers () {
-      var modifiers = {
-        lazy: false,
-        number: false,
-        trim: false
-      }
-
-      if (!this.$vnode.data.directives) {
-        return modifiers
-      }
-
-      var model = this.$vnode.data.directives.find(function (i) { return i.name === 'model'; })
-
-      if (!model) {
-        return modifiers
-      }
-
-      return Object.assign(modifiers, model.modifiers)
-    }
-  },
-
-  created: function created () {
-    this.validate()
-  },
-
-  methods: {
-    isDirty: function isDirty () {
-      return this.inputValue
-    },
-    genLabel: function genLabel (h) {
-      return h('label', {}, this.label)
-    },
-    genMessages: function genMessages (h) {
-      var this$1 = this;
-
-      var messages = []
-
-      if ((this.hint &&
-            this.focused ||
-            this.hint &&
-            this.persistentHint) &&
-          this.errors.length === 0
-      ) {
-        messages.push(this.genHint(h))
-      }
-
-      this.errors.forEach(function (i) {
-        messages.push(this$1.genError(h, i))
-      })
-
-      return h(
-        'transition-group',
-        {
-          'class': {
-            'input-group__messages': true
-          },
-          props: {
-            tag: 'div',
-            name: 'slide-y-transition'
-          }
-        },
-        messages
-      )
-    },
-    genHint: function genHint (h) {
-      return h('div', {
-        'class': {
-          'input-group__hint': true
-        },
-        key: this.hint
-      }, this.hint)
-    },
-    genError: function genError (h, error) {
-      return h(
-        'div',
-        {
-          'class': 'input-group__error',
-          key: error
-        },
-        error
-      )
-    },
-    genIcon: function genIcon (h, type) {
-      var icon = this[(type + "IconAlt")] || this[(type + "Icon")]
-      var callback = this[(type + "IconCb")]
-      var callbackPrivate = this[(type + "IconCbPrivate")]
-
-      return h(
-        'v-icon',
-        {
-          'class': 'input-group__' + type + '-icon',
-          'nativeOn': {
-            'click': function (e) {
-              if (typeof callbackPrivate === 'function') { callbackPrivate(e) }
-              if (typeof callback === 'function') { callback(e) }
-            }
-          }
-        },
-        icon
-      )
-    },
-    genInputGroup: function genInputGroup (h, input, data) {
-      if ( data === void 0 ) data = {};
-
-      var children = []
-      var wrapperChildren = []
-      var detailsChildren = []
-
-      data = Object.assign(data, {
-        'class': this.inputGroupClasses
-      })
-
-      if (this.label) {
-        children.push(this.genLabel(h))
-      }
-
-      wrapperChildren.push(input)
-
-      if (this.prependIcon) {
-        wrapperChildren.unshift(this.genIcon(h, 'prepend'))
-      }
-
-      if (this.appendIcon) {
-        wrapperChildren.push(this.genIcon(h, 'append'))
-      }
-
-      children.push(
-        h('div', {
-          'class': 'input-group__input'
-        }, wrapperChildren)
-      )
-
-      if (this.errors.length > 0 || this.hint) {
-        detailsChildren.push(this.genMessages(h))
-      }
-
-      if (this.counter) {
-        detailsChildren.push(this.genCounter(h))
-      }
-
-      children.push(
-        h('div', {
-          'class': 'input-group__details'
-        }, detailsChildren)
-      )
-
-      return h('div', data, children)
-    },
-    validate: function validate () {
-      var this$1 = this;
-
-      this.errors = []
-
-      this.rules.forEach(function (rule) {
-        var valid = rule()
-
-        if (valid !== true) {
-          this$1.errors.push(valid)
-        }
-      })
-    }
-  }
-};
-
-
-/***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony default export */ exports["a"] = {
   props: {
     primary: Boolean,
     secondary: Boolean,
@@ -560,7 +283,7 @@ function delay (func, wait) {
 
 
 /***/ },
-/* 5 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -577,7 +300,6 @@ function delay (func, wait) {
   },
 
   methods: {
-    click: function click () {},
     generateRouteLink: function generateRouteLink () {
       var tag
 
@@ -614,12 +336,12 @@ function delay (func, wait) {
 
 
 /***/ },
-/* 6 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__contextualable__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__input__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__contextualable__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__input__ = __webpack_require__(141);
 
 
 
@@ -645,9 +367,7 @@ function delay (func, wait) {
       }
 
       if (!this.trueValue || !this.falseValue) {
-        return this.value
-          ? this.value === this.inputValue
-          : Boolean(this.inputValue)
+        return Boolean(this.inputValue)
       }
 
       return this.inputValue === this.trueValue
@@ -674,10 +394,6 @@ function delay (func, wait) {
         }
       } else if (this.trueValue || this.falseValue) {
         input = input === this.trueValue ? this.falseValue : this.trueValue
-      } else if (this.value) {
-        input = this.value === this.inputValue
-          ? null
-          : this.value
       } else {
         input = !input
       }
@@ -689,7 +405,7 @@ function delay (func, wait) {
 
 
 /***/ },
-/* 7 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -699,29 +415,27 @@ function delay (func, wait) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__buttons_index__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__cards_index__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__carousel_index__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__chips_index__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__expansion_panel_index__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__dividers_index__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__footer_index__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__forms_index__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__grid_index__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__icons_index__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__lists_index__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__menus_index__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__modal_index__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__toolbar_index__ = __webpack_require__(52);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__overlay_index__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pagination_index__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__parallax_index__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__progress_index__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__sidebar_index__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__sliders_index__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__subheaders_index__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__tables_index__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__tabs_index__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__transitions_index__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__snackbars_index__ = __webpack_require__(46);
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__chips_index__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__expansion_panel_index__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__dividers_index__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__footer_index__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__forms_index__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__grid_index__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__icons_index__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__lists_index__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__menus_index__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__modal_index__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__toolbar_index__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__overlay_index__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pagination_index__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__parallax_index__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__progress_index__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__sidebar_index__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__sliders_index__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__steppers_index__ = __webpack_require__(157);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__tables_index__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__tabs_index__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__transitions_index__ = __webpack_require__(46);
 
 
 
@@ -774,23 +488,22 @@ function delay (func, wait) {
   __WEBPACK_IMPORTED_MODULE_20__progress_index__["a" /* default */],
   __WEBPACK_IMPORTED_MODULE_21__sidebar_index__["a" /* default */],
   __WEBPACK_IMPORTED_MODULE_22__sliders_index__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_23__subheaders_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_23__steppers_index__["a" /* default */],
   __WEBPACK_IMPORTED_MODULE_24__tables_index__["a" /* default */],
   __WEBPACK_IMPORTED_MODULE_25__tabs_index__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_26__transitions_index__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_27__snackbars_index__["a" /* default */]
+  __WEBPACK_IMPORTED_MODULE_26__transitions_index__["a" /* default */]
 );
 
 
 /***/ },
-/* 8 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__badge__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__click_outside__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ripple__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tooltip__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__badge__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__click_outside__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ripple__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tooltip__ = __webpack_require__(50);
 
 
 
@@ -802,6 +515,57 @@ function delay (func, wait) {
   Ripple: __WEBPACK_IMPORTED_MODULE_2__ripple__["a" /* default */],
   Tooltip: __WEBPACK_IMPORTED_MODULE_3__tooltip__["a" /* default */]
 };
+
+
+/***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+var Toast = function Toast () {};
+
+Toast.prototype.toast = function toast (location) {
+  var toast = document.createElement('div')
+
+  toast.classList.add('toast')
+  toast.classList.add(("toast--" + location))
+
+  document.body.appendChild(toast)
+
+  return toast
+};
+
+Toast.prototype.create = function create (message, location, duration, cb) {
+    if ( location === void 0 ) location = 'right';
+    if ( duration === void 0 ) duration = 3000;
+
+  var toast = document.querySelector((".toast--" + location))
+
+  if (!toast) {
+    toast = this.toast(location)
+  }
+
+  var content = document.createElement('div')
+  content.classList.add('toast__content')
+  content.innerHTML = message
+
+  toast.appendChild(content)
+  setTimeout(function () { return content.classList.add('toast__content--active'); }, 10)
+
+  setTimeout(function () {
+    content.classList.add('toast__content--remove')
+
+    setTimeout(function () {
+      content.remove()
+
+      if (cb) {
+        cb()
+      }
+    }, 300)
+  }, duration)
+};
+
+/* harmony default export */ exports["a"] = new Toast();
 
 
 /***/ },
@@ -835,7 +599,7 @@ function load (cb) {
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Alert_vue__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Alert_vue__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Alert_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Alert_vue__);
 
 
@@ -850,7 +614,7 @@ function load (cb) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__App_vue__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__App_vue__ = __webpack_require__(82);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__App_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__App_vue__);
 
 
@@ -868,9 +632,9 @@ var AppBar = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Breadcrumbs_vue__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Breadcrumbs_vue__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Breadcrumbs_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Breadcrumbs_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__BreadcrumbsItem_vue__ = __webpack_require__(86);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__BreadcrumbsItem_vue__ = __webpack_require__(84);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__BreadcrumbsItem_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__BreadcrumbsItem_vue__);
 
 
@@ -886,11 +650,11 @@ var AppBar = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Button_vue__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Button_vue__ = __webpack_require__(85);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Button_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Button_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ButtonDropdown_vue__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ButtonDropdown_vue__ = __webpack_require__(86);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ButtonDropdown_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ButtonDropdown_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ButtonToggle_vue__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ButtonToggle_vue__ = __webpack_require__(87);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ButtonToggle_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__ButtonToggle_vue__);
 
 
@@ -908,9 +672,9 @@ var AppBar = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Card_vue__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Card_vue__ = __webpack_require__(88);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Card_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Card_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CardRow_vue__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CardRow_vue__ = __webpack_require__(89);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CardRow_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__CardRow_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__util_helpers__ = __webpack_require__(1);
 
@@ -935,9 +699,9 @@ var CardTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers_
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Carousel_vue__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Carousel_vue__ = __webpack_require__(90);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Carousel_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Carousel_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CarouselItem_vue__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CarouselItem_vue__ = __webpack_require__(91);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CarouselItem_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__CarouselItem_vue__);
 
 
@@ -953,90 +717,7 @@ var CardTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers_
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__ = __webpack_require__(2);
-
-
-/* harmony default export */ exports["a"] = {
-  name: 'chip',
-
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__["a" /* default */]],
-
-  props: {
-    close: Boolean,
-    contact: String,
-    label: Boolean,
-    outline: Boolean,
-    small: Boolean,
-    value: {
-      type: Boolean,
-      default: true
-    }
-  },
-
-  computed: {
-    classes: function classes () {
-      return {
-        'chip': true,
-        'chip--label': this.label,
-        'chip--outline': this.outline,
-        'chip--small': this.small,
-        'chip--removable': this.close
-      }
-    }
-  },
-
-  render: function render (h) {
-    var this$1 = this;
-
-    var children = [this.$slots.default]
-    var data = {
-      'class': this.classes,
-      attrs: {
-        tabindex: -1
-      },
-      directives: [{
-        name: 'show',
-        value: this.isActive
-      }]
-    }
-
-    if (this.contact) {
-      children.unshift(h('img', {
-        domProps: {
-          src: this.contact
-        }
-      }))
-    }
-
-    if (this.close) {
-      var icon = h('v-icon', { props: { right: true }}, 'cancel')
-
-      children.push(h('a', {
-        'class': 'chip__close',
-        domProps: {
-          href: 'javascript:;'
-        },
-        on: {
-          click: function (e) {
-            e.preventDefault()
-
-            this$1.$emit('input', false)
-          }
-        }
-      }, [icon]))
-    }
-
-    return h('span', data, children)
-  }
-};
-
-
-/***/ },
-/* 18 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Chip__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Chip__ = __webpack_require__(155);
 
 
 /* harmony default export */ exports["a"] = {
@@ -1045,7 +726,7 @@ var CardTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers_
 
 
 /***/ },
-/* 19 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1079,13 +760,13 @@ var Divider = {
 
 
 /***/ },
-/* 20 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ExpansionPanel_vue__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ExpansionPanel_vue__ = __webpack_require__(93);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ExpansionPanel_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ExpansionPanel_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ExpansionPanelContent_vue__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ExpansionPanelContent_vue__ = __webpack_require__(94);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ExpansionPanelContent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ExpansionPanelContent_vue__);
 
 
@@ -1097,26 +778,25 @@ var Divider = {
 
 
 /***/ },
-/* 21 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Footer_vue__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Footer_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Footer_vue__);
 
-
-var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('footer', 'footer')
 
 /* harmony default export */ exports["a"] = {
-  Footer: Footer
+  Footer: __WEBPACK_IMPORTED_MODULE_0__Footer_vue___default.a
 };
 
 
 /***/ },
-/* 22 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_checkbox__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_checkbox__ = __webpack_require__(5);
 
 
 /* harmony default export */ exports["a"] = {
@@ -1192,12 +872,12 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
 
 /***/ },
-/* 23 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_contextualable__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_input__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_contextualable__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_input__ = __webpack_require__(141);
 
 
 
@@ -1276,324 +956,11 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
 
 /***/ },
-/* 24 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_input__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__util_helpers__ = __webpack_require__(1);
-
-
-
-/* harmony default export */ exports["a"] = {
-  name: 'select',
-
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_input__["a" /* default */]],
-
-  data: function data () {
-    return {
-      inputValue: this.multiple ? Array.from(this.value || []) : new Array(this.value || 0),
-      inputSearch: this.value ? this.value[this.itemText] : '',
-      filteredItems: null,
-      menuActive: false,
-      appendIconCbPrivate: this.removeAllSelected
-    }
-  },
-
-  props: {
-    items: {
-      type: Array,
-      default: function () { return []; }
-    },
-    itemText: {
-      type: String,
-      default: 'text'
-    },
-    appendIcon: {
-      type: String,
-      default: 'arrow_drop_down'
-    },
-    multiple: Boolean,
-    autocomplete: Boolean,
-    singleLine: Boolean,
-    chips: Boolean,
-    close: Boolean,
-    debounce: {
-      type: Number,
-      default: 300
-    }
-  },
-
-  computed: {
-    classes: function classes () {
-      return {
-        'input-group--text-field': true,
-        'input-group--select': true,
-        'input-group--autocomplete': this.autocomplete,
-        'input-group--single-line': this.singleLine,
-        'input-group--multi-line': this.multiLine
-      }
-    }
-  },
-
-  watch: {
-    focused: function focused () {
-      this.$emit('focused', this.focused)
-    },
-    value: function value (val) {
-      this.inputValue = this.multiple ? val || [] : new Array(val)
-      this.inputSearch = this.multiple ? '' : val[this.itemText]
-    },
-    inputValue: function inputValue (val) {
-      this.$emit('input', this.multiple ? val : val[0])
-    },
-    menuActive: function menuActive (isActive) {
-      if (!isActive) { this.$refs.searchField.blur() }
-    }
-  },
-
-  methods: {
-    isDirty: function isDirty () {
-      return this.inputSearch || this.multiple && this.inputValue.length
-    },
-
-    focus: function focus () {
-      this.focused = true
-      this.closeAction(true)
-    },
-
-    blur: function blur () {
-      var this$1 = this;
-
-      this.$nextTick(function () { return (this$1.focused = false); })
-      this.closeAction(false)
-    },
-
-    // TODO: Maybe this should be computed prop?
-    filterItems: function filterItems () {
-      var ref = this;
-      var items = ref.items;
-      var inputSearch = ref.inputSearch;
-      var itemText = ref.itemText;
-
-      this.filteredItems = inputSearch && this.autocomplete
-        ? items.filter(function (item) { return item[itemText].includes(inputSearch); })
-        : null
-    },
-
-    isSelected: function isSelected (item) {
-      return this.inputValue.includes(item)
-    },
-
-    addSelected: function addSelected (item) {
-      if (this.multiple) {
-        this.inputValue.push(item)
-        this.inputSearch = ''
-      } else {
-        this.inputValue = [item]
-        this.inputSearch = item[this.itemText]
-      }
-      this.filterItems()
-    },
-
-    removeSelected: function removeSelected (item) {
-      this.inputValue.splice(this.inputValue.findIndex(function (s) { return s === item; }), 1)
-    },
-
-    removeAllSelected: function removeAllSelected (e) {
-      if (!this.appendIconAlt) { return }
-
-      e.stopPropagation()
-      this.inputValue = []
-      this.inputSearch = ''
-      this.closeAction(false)
-    },
-
-    closeAction: function closeAction (on) {
-      if ( on === void 0 ) on = true;
-
-      this.appendIconAlt = on && this.close && this.inputValue.length ? 'close' : ''
-    },
-
-    genMenu: function genMenu (h) {
-      var this$1 = this;
-
-      var data = {
-        ref: 'menu',
-        style: {
-          width: '100%'
-        },
-        props: {
-          auto: !this.autocomplete,
-          closeOnClick: !this.multiple,
-          disabled: this.disabled,
-          offsetY: this.autocomplete,
-          value: this.menuActive
-        },
-        on: {
-          input: function (val) { return (this$1.menuActive = val); }
-        },
-        nativeOn: {
-          '!mouseenter': this.closeAction,
-          mouseleave: function () { return (this$1.closeAction(false)); }
-        }
-      }
-
-      return h('v-menu', data, [this.genActivator(h), this.genList(h)])
-    },
-
-    genActivator: function genActivator (h) {
-      var data = {
-        slot: 'activator'
-      }
-      return this.genInputGroup(h, [this.genSelectionsAndSearch(h)], data)
-    },
-
-    genSelectionsAndSearch: function genSelectionsAndSearch (h) {
-      var data = {
-        slot: 'activator',
-        'class': 'input-group__selections'
-      }
-
-      return this.multiple
-        ? h('div', data, this.genSelections(h).concat(this.genSearchField(h)))
-        : h('div', data, [this.genSearchField(h)])
-    },
-
-    genSelections: function genSelections (h) {
-      var this$1 = this;
-
-      var chips = this.chips
-      var slots = this.$scopedSlots.selection
-      var comma = true // <-- default
-
-      return this.inputValue.map(function (item, index, array) {
-        if (slots) { return this$1.genSlotSelection(h, item) }
-        if (chips) { return this$1.genChipSelection(h, item) }
-        if (comma) {
-          var length = array.length
-          return this$1.genCommaSelection(h, item, length !== 1 && index !== length - 1)
-        }
-      })
-    },
-
-    genSlotSelection: function genSlotSelection (h, item) {
-      return this.$scopedSlots.selection({ parent: this, item: item })
-    },
-
-    genChipSelection: function genChipSelection (h, item) {
-      var this$1 = this;
-
-      var data = {
-        props: { close: true },
-        on: {
-          input: function (val) { if (val === false) { this$1.removeSelected(item) } }
-        },
-        nativeOn: {
-          click: function (e) { return e.stopPropagation(); }
-        }
-      }
-
-      return h('v-chip', data, item[this.itemText])
-    },
-
-    genCommaSelection: function genCommaSelection (h, item, hasComma) {
-      var data = {
-        'class': 'input-group__selections__comma'
-      }
-      return h('div', data, ("" + (item[this.itemText]) + (hasComma ? ',' : '')))
-    },
-
-    genSearchField: function genSearchField (h) {
-      var this$1 = this;
-
-      var data = {
-        ref: 'searchField',
-        domProps: {
-          value: this.inputSearch
-        },
-        on: {
-          input: function (e) { return (this$1.inputSearch = e.target.value); },
-          focus: function () { return this$1.focus; },
-          blur: function () { return this$1.blur; },
-          keyup: function () { return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["e" /* debounce */])(this$1.filterItems, this$1.debounce); }
-        }
-      }
-
-      return h('input', data)
-    },
-
-    genList: function genList (h) {
-      var this$1 = this;
-
-      var list = (this.filteredItems || this.items).map(function (item) { return this$1.genListItem(h, item); })
-      return h('v-list', {}, list)
-    },
-
-    genListItem: function genListItem (h, item) {
-      return h('v-list-item', {}, [this.genTile(h, item)])
-    },
-
-    genTile: function genTile (h, item) {
-      var this$1 = this;
-
-      var data = {
-        'class': {
-          'list__tile--active': this.isSelected(item)
-        },
-        nativeOn: {
-          click: function (e) {
-            if (!this$1.multiple) {
-              return
-            }
-
-            e.stopPropagation()
-            e.preventDefault()
-            this$1.isSelected(item)
-              ? this$1.removeSelected(item)
-              : this$1.addSelected(item)
-
-            this$1.$refs.searchField.focus()
-          },
-          mousedown: function (e) {
-            if (this$1.multiple) {
-              return
-            }
-            this$1.addSelected(item)
-            this$1.$refs.searchField.focus()
-          }
-        }
-      }
-
-      return this.$scopedSlots.item
-        ? h('v-list-tile', data, this.$scopedSlots.item({ parent: this, item: item }))
-        : h('v-list-tile', data, [this.genAction(h, item), this.genContent(h, item)])
-    },
-
-    genAction: function genAction (h, item) {
-      if (!this.multiple) { return null }
-
-      var checkbox = h('v-checkbox', { props: { 'inputValue': this.isSelected(item) }})
-      return h('v-list-tile-action', {}, [checkbox])
-    },
-
-    genContent: function genContent (h, item) {
-      return h('v-list-tile-content', {}, [h('v-list-tile-title', item[this.itemText])])
-    }
-  },
-
-  render: function render (h) {
-    return this.genMenu(h)
-  }
-};
-
-
-/***/ },
-/* 25 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_checkbox__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_checkbox__ = __webpack_require__(5);
 
 
 /* harmony default export */ exports["a"] = {
@@ -1663,11 +1030,11 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
 
 /***/ },
-/* 26 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_input__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_input__ = __webpack_require__(141);
 
 
 /* harmony default export */ exports["a"] = {
@@ -1686,17 +1053,18 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
       return {
         'input-group--text-field': true,
         'input-group--single-line': this.singleLine,
-        'input-group--multi-line': this.multiLine,
-        'input-group--full-width': this.fullWidth
+        'input-group--multi-line': this.multiLine
       }
     },
+
     hasError: function hasError () {
       return this.errors.length !== 0 ||
         !this.counterIsValid() ||
         !this.validateIsValid()
     },
+
     count: function count () {
-      var inputLength = (this.inputValue && this.inputValue.toString() || '').length
+      var inputLength = (this.inputValue || '').length
       var min = inputLength
 
       if (this.min !== 0 && inputLength < this.min) {
@@ -1705,20 +1073,13 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
       return (min + " / " + (this.max))
     },
+
     inputValue: {
       get: function get () {
         return this.value
       },
       set: function set (val) {
-        if (this.modifiers.trim) {
-          val = val.trim()
-        }
-
-        if (this.modifiers.number) {
-          val = Number(val)
-        }
-
-        if (!this.modifiers.lazy) {
+        if (!this.lazy) {
           this.$emit('input', val)
         }
 
@@ -1731,7 +1092,6 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
     autocomplete: Boolean,
     counter: Boolean,
     id: String,
-    fullWidth: Boolean,
     min: {
       type: [Number, String],
       default: 0
@@ -1755,19 +1115,15 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
       this.hasFocused = true
 
       if (!this.focused) {
-        this.$emit('change', this.lazyValue)
+        this.$emit('input', this.lazyValue)
       }
     },
     value: function value () {
       this.lazyValue = this.value
-      this.validate()
     }
   },
 
   methods: {
-    isDirty: function isDirty () {
-      return this.lazyValue
-    },
     blur: function blur () {
       var this$1 = this;
 
@@ -1794,7 +1150,7 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
           id: this.id || this.name || this._uid,
           name: this.name,
           required: this.required,
-          value: this.lazyValue
+          value: this.inputValue
         },
         on: {
           blur: this.blur,
@@ -1813,10 +1169,9 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
       return h(tag, inputData)
     },
     counterIsValid: function counterIsValid () {
-      var val = (this.inputValue && this.inputValue.toString() || '')
       return (!this.counter ||
-        !this.inputValue.toString() ||
-        (val.length >= this.min && val.length <= this.max)
+        !this.inputValue ||
+        (this.inputValue.length >= this.min && this.inputValue.length <= this.max)
       )
     },
     validateIsValid: function validateIsValid () {
@@ -1835,15 +1190,16 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
 
 /***/ },
-/* 27 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Checkbox__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Radio__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Select__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Switch__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__TextField__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Checkbox__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Radio__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Select_vue__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Select_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Select_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Switch__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__TextField__ = __webpack_require__(24);
 
 
 
@@ -1853,14 +1209,14 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 /* harmony default export */ exports["a"] = {
   Checkbox: __WEBPACK_IMPORTED_MODULE_0__Checkbox__["a" /* default */],
   Radio: __WEBPACK_IMPORTED_MODULE_1__Radio__["a" /* default */],
-  Select: __WEBPACK_IMPORTED_MODULE_2__Select__["a" /* default */],
+  Select: __WEBPACK_IMPORTED_MODULE_2__Select_vue___default.a,
   Switch: __WEBPACK_IMPORTED_MODULE_3__Switch__["a" /* default */],
   TextField: __WEBPACK_IMPORTED_MODULE_4__TextField__["a" /* default */]
 };
 
 
 /***/ },
-/* 28 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1918,11 +1274,11 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
 
 /***/ },
-/* 29 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Icon_vue__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Icon_vue__ = __webpack_require__(97);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Icon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Icon_vue__);
 
 
@@ -1932,7 +1288,7 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
 
 /***/ },
-/* 30 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1963,7 +1319,7 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
         'list--two-line': this.twoLine,
         'list--dense': this.dense,
         'list--three-line': this.threeLine,
-        'list--subheader': this.subHeader
+        'list--sub-header': this.subHeader
       }
     }
   },
@@ -2020,21 +1376,25 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
 
 /***/ },
-/* 31 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_route_link__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_toggleable__ = __webpack_require__(2);
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_route_link__ = __webpack_require__(4);
 
 
 
 /* harmony default export */ exports["a"] = {
   name: 'list-tile',
 
-  mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_route_link__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__mixins_toggleable__["a" /* default */]],
+  mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_route_link__["a" /* default */]],
+
+  data: function data () {
+    return {
+      active: false
+    }
+  },
 
   props: {
     activeClass: {
@@ -2048,7 +1408,6 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
     classes: function classes () {
       return {
         'list__tile': true,
-        'list__tile--active': this.isActive,
         'list__tile--avatar': this.avatar,
         'list__tile--disabled': this.disabled
       }
@@ -2056,6 +1415,12 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
     listUID: function listUID () {
       return __WEBPACK_IMPORTED_MODULE_0__util_helpers__["c" /* closestParentTag */].call(this, 'v-list')
+    }
+  },
+
+  methods: {
+    click: function click () {
+      //
     }
   },
 
@@ -2070,7 +1435,7 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
 
 /***/ },
-/* 32 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2107,16 +1472,16 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
 
 /***/ },
-/* 33 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__List__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ListGroup_vue__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__List__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ListGroup_vue__ = __webpack_require__(98);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ListGroup_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__ListGroup_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ListTile__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ListTileAction__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ListTile__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ListTileAction__ = __webpack_require__(30);
 
 
 
@@ -2131,11 +1496,34 @@ var ListTileContent = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_he
 var ListTileTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('list__tile__title', 'div')
 var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('list__tile__sub-title', 'div')
 
+var ListSubHeader = {
+  functional: true,
+
+  render: function render (h, ref) {
+    var data = ref.data;
+    var children = ref.children;
+
+    var listClass = 'list__sub-header'
+
+    if (
+      (data.props && data.props.inset) ||
+      (data.attrs && data.attrs.inset)
+    ) {
+      listClass += ' list__sub-header--inset'
+    }
+
+    data.staticClass = data.staticClass ? (listClass + " " + (data.staticClass)) : listClass
+
+    return h('li', data, children)
+  }
+}
+
 /* harmony default export */ exports["a"] = {
   List: __WEBPACK_IMPORTED_MODULE_1__List__["a" /* default */],
   ListItem: ListItem,
   ListTile: __WEBPACK_IMPORTED_MODULE_3__ListTile__["a" /* default */],
   ListGroup: __WEBPACK_IMPORTED_MODULE_2__ListGroup_vue___default.a,
+  ListSubHeader: ListSubHeader,
   ListTileAction: __WEBPACK_IMPORTED_MODULE_4__ListTileAction__["a" /* default */],
   ListTileActionText: ListTileActionText,
   ListTileAvatar: ListTileAvatar,
@@ -2146,292 +1534,25 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
 
 
 /***/ },
-/* 34 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Menu_vue__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Menu_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Menu_vue__);
 
 
 /* harmony default export */ exports["a"] = {
-  name: 'menu',
-
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__["a" /* default */]],
-
-  data: function data () {
-    return {
-      window: {},
-      dimensions: {
-        activator: {
-          top: 0, left: 0, bottom: 0, right: 0, width: 0, height: 0, offsetTop: 0
-        },
-        content: {
-          top: 0, left: 0, bottom: 0, right: 0, width: 0, height: 0, offsetTop: 0
-        },
-        list: null,
-        selected: null
-      },
-      direction: { vert: '', horiz: '' },
-      position: { left: '0px', top: '0px', right: 'auto', bottom: 'auto' },
-      isContentActive: false
-    }
-  },
-
-  props: {
-    top: Boolean,
-    left: Boolean,
-    bottom: Boolean,
-    right: Boolean,
-    auto: Boolean,
-    offsetX: Boolean,
-    offsetY: Boolean,
-    openOnClick: {
-      type: Boolean,
-      default: true
-    },
-    closeOnClick: {
-      type: Boolean,
-      default: true
-    },
-    origin: {
-      type: String,
-      default: 'top left'
-    }
-  },
-
-  computed: {
-    offset: function offset () {
-      var ref = this.dimensions;
-      var a = ref.activator;
-      var c = ref.content;
-      var ref$1 = this;
-      var direction = ref$1.direction;
-      var offsetX = ref$1.offsetX;
-      var offsetY = ref$1.offsetY;
-      var auto = ref$1.offsetAuto;
-
-      var horiz = direction.horiz === 'left'
-          ? offsetX ? a.left - c.right : a.right - c.right + auto.horiz
-          : offsetX ? a.right - c.left : a.left - c.left + auto.horiz
-      var vert = direction.vert === 'top'
-          ? offsetY ? a.top - c.bottom : a.bottom - c.bottom + auto.vert
-          : offsetY ? a.bottom - c.top : a.top - c.top + auto.vert
-
-      return { horiz: horiz, vert: vert }
-    },
-
-    offsetAuto: function offsetAuto () {
-      return { horiz: 0, vert: 0 }
-    },
-
-    styles: function styles () {
-      return {
-        top: this.position.top,
-        left: this.position.left,
-        right: this.position.right,
-        bottom: this.position.bottom
-      }
-    }
-  },
-
-  watch: {
-    isActive: function isActive (val) {
-      if (val) { this.activate() }
-      else { this.isContentActive = false }
-    }
-  },
-
-  methods: {
-    activate: function activate () {
-      var this$1 = this;
-
-      this.window = window
-      this.setDirection()
-      this.$nextTick(function () { this$1.updatePosition() })
-      setTimeout(function () { this$1.isContentActive = true }, 50)
-    },
-
-    setDirection: function setDirection (horiz, vert) {
-      if ( horiz === void 0 ) horiz = '';
-      if ( vert === void 0 ) vert = '';
-
-      this.direction = {
-        horiz: horiz || (this.left && !this.auto ? 'left' : 'right'),
-        vert: vert || (this.top && !this.auto ? 'top' : 'bottom')
-      }
-
-      // On every direction change, we must reset/reorientate position.
-      this.position.top = this.direction.vert === 'top' ? 'auto' : '0px'
-      this.position.left = this.direction.vert === 'left' ? 'auto' : '0px'
-      this.position.bottom = this.direction.vert === 'bottom' ? 'auto' : '0px'
-      this.position.right = this.direction.vert === 'right' ? 'auto' : '0px'
-    },
-
-    updatePosition: function updatePosition () {
-      this.updateDimensions()
-
-      var ref = this.direction;
-      var horiz = ref.horiz;
-      var vert = ref.vert;
-      var ref$1 = this;
-      var offset = ref$1.offset;
-
-      this.position.left = horiz === 'left' ? 'auto' : ((offset.horiz) + "px")
-      this.position.top = vert === 'top' ? 'auto' : ((offset.vert) + "px")
-      this.position.right = horiz === 'right' ? 'auto' : ((-offset.horiz) + "px")
-      this.position.bottom = vert === 'bottom' ? 'auto' : ((-offset.vert) + "px")
-    },
-
-    updateDimensions: function updateDimensions () {
-      this.sneakPeek()
-      var ref = this.$refs;
-      var a = ref.activator;
-      var c = ref.content;
-
-      this.dimensions = {
-        'activator': a.children ? this.measure(a.children[0]) : this.measure(a),
-        'content': this.measure(c),
-        'list': this.measure(c, '.list'),
-        'selected': this.measure(c, '.list__tile--active', 'parent')
-      }
-      this.sneakPeek(false)
-    },
-
-    genActivator: function genActivator (h) {
-      var this$1 = this;
-
-      var data = {
-        ref: 'activator',
-        slot: 'activator',
-        class: {
-          'menu__activator': true
-        },
-        on: {
-          click: function () {
-            if (this$1.openOnClick) { this$1.isActive = !this$1.isActive }
-          }
-        }
-      }
-
-      return h('div', data, [this.$slots.activator || null])
-    },
-
-    genTransition: function genTransition (h) {
-      var data = {
-        props: {
-          name: 'menu-transition',
-          origin: this.origin
-        },
-        on: {
-          // 'before-enter': () => { this.beforeEnter() }
-          // 'enter': (el, done) => { this.enter() }
-        }
-      }
-
-      return h('transition', data, [this.genContent(h)])
-    },
-
-    genContent: function genContent (h) {
-      var this$1 = this;
-
-      var data = {
-        ref: 'content',
-        style: this.styles,
-        directives: [{
-          name: 'show',
-          value: this.isContentActive
-        }],
-        'class': { 'menu__content': true },
-        on: {
-          click: function () { if (this$1.closeOnClick) { this$1.isActive = false } }
-        }
-      }
-
-      return h('div', data, [this.$slots.default])
-    },
-
-    beforeEnter: function beforeEnter () {
-
-    },
-
-    enter: function enter (el, done) {
-
-    },
-
-    // Utils
-    // ====================
-
-    measure: function measure (el, selector, getParent) {
-      if ( getParent === void 0 ) getParent = false;
-
-      el = selector ? el.querySelector(selector) : el
-      el = el && getParent ? el.parentElement : el
-
-      if (!el) { return null }
-      var ref = el.getBoundingClientRect();
-      var top = ref.top;
-      var left = ref.left;
-      var bottom = ref.bottom;
-      var right = ref.right;
-      var width = ref.width;
-      var height = ref.height;
-      return { top: top, left: left, bottom: bottom, right: right, width: width, height: height, offsetTop: el.offsetTop }
-    },
-
-    sneakPeek: function sneakPeek (on) {
-      if ( on === void 0 ) on = true;
-
-      if (on) {
-        // this.$refs.content.style.opacity = 0
-        this.$refs.content.style.display = 'inline-block'
-      } else {
-        this.$refs.content.style.display = 'none'
-        // this.$refs.content.style.opacity = null
-      }
-    }
-  },
-
-  render: function render (h) {
-    var this$1 = this;
-
-    var data = {
-      'class': {
-        'menu': true
-      },
-      directives: [
-        {
-          name: 'click-outside'
-        }
-      ],
-      on: {
-        'keyup': function (e) { if (e.keyCode === 27) { this$1.isActive = false } }
-      }
-    }
-
-    return h('div', data, [this.genActivator(h), this.genTransition(h)])
-  }
+  Menu: __WEBPACK_IMPORTED_MODULE_0__Menu_vue___default.a
 };
 
 
 /***/ },
-/* 35 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Menu_js__ = __webpack_require__(34);
-
-
-/* harmony default export */ exports["a"] = {
-  Menu: __WEBPACK_IMPORTED_MODULE_0__Menu_js__["a" /* default */]
-};
-
-
-/***/ },
-/* 36 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Modal_vue__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Modal_vue__ = __webpack_require__(100);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Modal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Modal_vue__);
 
 
@@ -2441,7 +1562,7 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
 
 
 /***/ },
-/* 37 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2474,11 +1595,11 @@ var Overlay = {
 
 
 /***/ },
-/* 38 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Pagination_vue__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Pagination_vue__ = __webpack_require__(101);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Pagination_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Pagination_vue__);
 
 
@@ -2488,11 +1609,11 @@ var Overlay = {
 
 
 /***/ },
-/* 39 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Parallax_vue__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Parallax_vue__ = __webpack_require__(102);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Parallax_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Parallax_vue__);
 
 
@@ -2502,13 +1623,13 @@ var Overlay = {
 
 
 /***/ },
-/* 40 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ProgressLinear_vue__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ProgressLinear_vue__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ProgressLinear_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ProgressLinear_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ProgressCircular_vue__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ProgressCircular_vue__ = __webpack_require__(103);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ProgressCircular_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ProgressCircular_vue__);
 
 
@@ -2520,7 +1641,7 @@ var Overlay = {
 
 
 /***/ },
-/* 41 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2640,11 +1761,11 @@ var Overlay = {
 
 
 /***/ },
-/* 42 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Sidebar__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Sidebar__ = __webpack_require__(38);
 
 
 /* harmony default export */ exports["a"] = {
@@ -2653,11 +1774,4685 @@ var Overlay = {
 
 
 /***/ },
+/* 40 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Slider__ = __webpack_require__(142);
+
+
+/* harmony default export */ exports["a"] = {
+  Slider: __WEBPACK_IMPORTED_MODULE_0__Slider__["a" /* default */]
+};
+
+
+/***/ },
+/* 41 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(1);
+
+
+var TableOverflow = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('table__overflow')
+
+/* harmony default export */ exports["a"] = {
+  TableOverflow: TableOverflow
+};
+
+
+/***/ },
+/* 42 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_route_link__ = __webpack_require__(4);
+
+
+
+/* harmony default export */ exports["a"] = {
+  name: 'tab-item',
+
+  mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_route_link__["a" /* default */]],
+
+  data: function data () {
+    return {
+      isActive: false,
+      defaultActiveClass: 'tab__item--active'
+    }
+  },
+
+  props: {
+    activeClass: {
+      type: String,
+      default: 'tab__item--active'
+    }
+  },
+
+  computed: {
+    classes: function classes () {
+      return {
+        'tab__item': true,
+        'tab__item--active': this.isActive,
+        'tab__item--disabled': this.disabled
+      }
+    },
+
+    target: function target () {
+      return this.href.replace('#', '')
+    },
+
+    tabs: function tabs () {
+      return __WEBPACK_IMPORTED_MODULE_0__util_helpers__["c" /* closestParentTag */].call(this, 'v-tabs')
+    }
+  },
+
+  methods: {
+    click: function click (e) {
+      e.preventDefault()
+
+      this.tabs.tabClick(this.target)
+    },
+
+    toggle: function toggle (target) {
+      this.isActive = this.target === target
+    }
+  },
+
+  render: function render (h) {
+    var ref = this.generateRouteLink();
+    var tag = ref.tag;
+    var data = ref.data;
+
+    var tab = h(tag, data, [this.$slots.default])
+
+    return h('li', {}, [tab])
+  }
+};
+
+
+/***/ },
 /* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_input__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Tabs_vue__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Tabs_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Tabs_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__TabItem__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__TabContent_vue__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__TabContent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__TabContent_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__TabsTabs_vue__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__TabsTabs_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__TabsTabs_vue__);
+
+
+
+
+
+
+var TabsSlider = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('tabs__slider')
+
+var TabsItems = {
+  render: function render (h) {
+    var data = {
+      'class': {
+        'tabs__items': true
+      }
+    }
+
+    return h('div', data, [this.$slots.default])
+  }
+}
+
+/* harmony default export */ exports["a"] = {
+  TabItem: __WEBPACK_IMPORTED_MODULE_2__TabItem__["a" /* default */],
+  TabsItems: TabsItems,
+  Tabs: __WEBPACK_IMPORTED_MODULE_1__Tabs_vue___default.a,
+  TabContent: __WEBPACK_IMPORTED_MODULE_3__TabContent_vue___default.a,
+  TabsTabs: __WEBPACK_IMPORTED_MODULE_4__TabsTabs_vue___default.a,
+  TabsSlider: TabsSlider
+};
+
+
+/***/ },
+/* 44 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_route_link__ = __webpack_require__(4);
+
+
+
+/* harmony default export */ exports["a"] = {
+  name: 'toolbar-item',
+
+  mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_route_link__["a" /* default */]],
+
+  props: {
+    activeClass: {
+      type: String,
+      default: 'toolbar__item--active'
+    }
+  },
+
+  computed: {
+    classes: function classes () {
+      return {
+        'toolbar__item': true,
+        'toolbar__item--disabled': this.disabled
+      }
+    },
+
+    listUID: function listUID () {
+      return __WEBPACK_IMPORTED_MODULE_0__util_helpers__["c" /* closestParentTag */].call(this, 'v-list')
+    }
+  },
+
+  methods: {
+    click: function click () {
+      //
+    }
+  },
+
+  render: function render (h) {
+    var ref = this.generateRouteLink();
+    var tag = ref.tag;
+    var data = ref.data;
+
+    var item = h(tag, data, [this.$slots.default])
+
+    return h('li', {}, [item])
+  }
+};
+
+
+/***/ },
+/* 45 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Toolbar_vue__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Toolbar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Toolbar_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ToolbarItem__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__util_helpers__ = __webpack_require__(1);
+
+
+
+
+
+var ToolbarLogo = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers__["b" /* createSimpleFunctional */])('toolbar__logo')
+var ToolbarTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers__["b" /* createSimpleFunctional */])('toolbar__title')
+var ToolbarSub = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers__["b" /* createSimpleFunctional */])('toolbar__sub')
+var ToolbarItems = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers__["b" /* createSimpleFunctional */])('toolbar__items', 'ul')
+var ToolbarSideIcon = {
+  functional: true,
+
+  render: function render (h, ref) {
+    var data = ref.data;
+    var children = ref.children;
+
+    data.staticClass = data.staticClass ? ("toolbar__side-icon " + (data.staticClass)) : 'toolbar__side-icon'
+    data.props = {
+      icon: true,
+      dark: true
+    }
+
+    return h('v-btn', data, [h('v-icon', 'menu')])
+  }
+}
+
+/* harmony default export */ exports["a"] = {
+  Toolbar: __WEBPACK_IMPORTED_MODULE_0__Toolbar_vue___default.a,
+  ToolbarItem: __WEBPACK_IMPORTED_MODULE_1__ToolbarItem__["a" /* default */],
+  ToolbarItems: ToolbarItems,
+  ToolbarLogo: ToolbarLogo,
+  ToolbarTitle: ToolbarTitle,
+  ToolbarSideIcon: ToolbarSideIcon,
+  ToolbarSub: ToolbarSub
+};
+
+
+/***/ },
+/* 46 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(1);
+
+
+var SlideXTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('slide-x-transition')
+var SlideYTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('slide-y-transition')
+var ScaleTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('scale-transition')
+var TabTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('tab-transition')
+var TabReverseTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('tab-reverse-transition')
+var CarouselTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('carousel-transition')
+var CarouselReverseTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('carousel-reverse-transition')
+var ModalTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('modal-transition')
+var ModalBottomTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('modal-bottom-transition')
+var FadeTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('fade-transition')
+var MenuTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('menu-transition')
+
+/* harmony default export */ exports["a"] = {
+  SlideXTransition: SlideXTransition,
+  SlideYTransition: SlideYTransition,
+  ScaleTransition: ScaleTransition,
+  FadeTransition: FadeTransition,
+  TabTransition: TabTransition,
+  TabReverseTransition: TabReverseTransition,
+  ModalTransition: ModalTransition,
+  ModalBottomTransition: ModalBottomTransition,
+  MenuTransition: MenuTransition,
+  CarouselTransition: CarouselTransition,
+  CarouselReverseTransition: CarouselReverseTransition
+};
+
+
+/***/ },
+/* 47 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(1);
+
+
+function directive (el, binding) {
+  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* directiveConfig */])(
+    binding,
+    {
+      icon: false,
+      left: false,
+      overlap: false
+    }
+  )
+
+  if (config.overlap) { el.classList.add('badge--overlap') }
+  if (config.icon) { el.classList.add('badge--icon') }
+  if (config.left) { el.classList.add('badge--left') }
+
+  el.dataset.badge = config.value
+  el.classList.add('badge')
+}
+
+/* harmony default export */ exports["a"] = {
+  bind: directive,
+  updated: directive,
+  componentUpdated: directive,
+  unbind: function (el) {
+    el.removeAttribute('data-badge')
+    el.classList.remove('badge')
+  }
+};
+
+
+/***/ },
+/* 48 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+function directive (e, el, binding, v) {
+  var cb = function () { return true; }
+
+  if (binding.value) {
+    cb = binding.value
+  }
+  if ((e && e.target) &&
+    (e.target !== el && !el.contains(e.target)) &&
+    cb(e)
+  ) {
+    v.context.isActive = false
+  }
+}
+
+/* harmony default export */ exports["a"] = {
+  bind: function bind (el, binding, v) {
+    v.context.$vuetify.load(function () {
+      var click = function (e) { return directive(e, el, binding, v); }
+      document.querySelector('[data-app]').addEventListener('click', click, false)
+      el._clickOutside = click
+    })
+  },
+
+  unbind: function unbind (el) {
+    document.querySelector('[data-app]').removeEventListener('click', el._clickOutside, false)
+  }
+};
+
+
+/***/ },
+/* 49 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+function style (el, value) {
+  [
+    'transform',
+    'webkitTransform'
+  ].forEach(function (i) {
+    el.style[i] = value
+  })
+}
+
+var ripple = {
+  show: function (e, el, ref) {
+    var value = ref.value; if ( value === void 0 ) value = {};
+
+    var container = document.createElement('span')
+    var animation = document.createElement('span')
+
+    container.appendChild(animation)
+    container.className = 'ripple__container'
+
+    if (value.class) {
+      container.classList.add(value.class)
+    }
+
+    var size = el.clientWidth > el.clientHeight ? el.clientWidth : el.clientHeight
+    animation.className = 'ripple__animation'
+    animation.style.width = (size * (value.center ? 1 : 2)) + "px"
+    animation.style.height = animation.style.width
+
+    el.appendChild(container)
+
+    var offset = el.getBoundingClientRect()
+    var x = value.center ? '50%' : ((e.clientX - offset.left) + "px")
+    var y = value.center ? '50%' : ((e.clientY - offset.top) + "px")
+
+    animation.classList.add('ripple__animation--enter')
+    animation.classList.add('ripple__animation--visible')
+    style(animation, ("translate(-50%, -50%) translate(" + x + ", " + y + ") scale3d(0.01,0.01,0.01)"))
+    animation.dataset.activated = Date.now()
+
+    setTimeout(function () {
+      animation.classList.remove('ripple__animation--enter')
+      style(animation, ("translate(-50%, -50%) translate(" + x + ", " + y + ")  scale3d(0.99,0.99,0.99)"))
+    }, 0)
+  },
+
+  hide: function (el) {
+    var ripples = el.getElementsByClassName('ripple__animation')
+
+    if (ripples.length === 0) { return }
+    var animation = ripples[ripples.length - 1]
+    var diff = Date.now() - Number(animation.dataset.activated)
+    var delay = 400 - diff
+
+    delay = delay < 0 ? 0 : delay
+
+    setTimeout(function () {
+      animation.classList.remove('ripple__animation--visible')
+
+      setTimeout(function () {
+        animation.parentNode.remove()
+      }, 300)
+    }, delay)
+  }
+}
+
+function directive (el, binding, v) {
+  if (binding.value === false) { return }
+
+  if ('ontouchstart' in window) {
+    el.addEventListener('touchend', function () { return ripple.hide(el); }, false)
+    el.addEventListener('touchcancel', function () { return ripple.hide(el); }, false)
+  }
+
+  el.addEventListener('mousedown', function (e) { return ripple.show(e, el, binding); }, false)
+  el.addEventListener('mouseup', function () { return ripple.hide(el); }, false)
+  el.addEventListener('mouseleave', function () { return ripple.hide(el); }, false)
+}
+
+function unbind (el, binding) {
+  el.removeEventListener('touchstart', function (e) { return ripple.show(e, el, binding); }, false)
+  el.removeEventListener('mousedown', function (e) { return ripple.show(e, el, binding); }, false)
+  el.removeEventListener('touchend', function () { return ripple.hide(el); }, false)
+  el.removeEventListener('touchcancel', function () { return ripple.hide(el); }, false)
+  el.removeEventListener('mouseup', function () { return ripple.hide(el); }, false)
+  el.removeEventListener('mouseleave', function () { return ripple.hide(el); }, false)
+}
+
+/* harmony default export */ exports["a"] = {
+  bind: directive,
+  unbind: unbind
+};
+
+
+/***/ },
+/* 50 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(1);
+
+
+function directive (el, binding) {
+  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* directiveConfig */])(
+    binding,
+    { top: true }
+  )
+
+  unbind(el, binding, config)
+
+  el.dataset.tooltip = config.html
+  el.dataset['tooltipLocation'] = config.value
+}
+
+function unbind (el) {
+  el.removeAttribute('data-tooltip')
+  el.removeAttribute('data-tooltip-location')
+}
+
+/* harmony default export */ exports["a"] = {
+  bind: directive,
+  updated: directive,
+  componentUpdated: directive,
+  unbind: unbind
+};
+
+
+/***/ },
+/* 51 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ exports["a"] = {
+  data: function data () {
+    return {
+      parallax: null,
+      parallaxDist: null,
+      elOffsetTop: null,
+      percentScrolled: null,
+      scrollTop: null,
+      windowHeight: null,
+      windowBottom: null
+    }
+  },
+
+  computed: {
+    normalizedHeight: function normalizedHeight () {
+      return Number(this.height.toString().replace(/(^[0-9]*$)/, '$1'))
+    },
+
+    imgHeight: function imgHeight () {
+      return this.objHeight()
+    }
+  },
+
+  mounted: function mounted () {
+    this.$vuetify.load(this.init)
+  },
+
+  beforeDestroy: function beforeDestroy () {
+    document.removeEventListener('scroll', this.translate, false)
+    document.removeEventListener('resize', this.translate, false)
+  },
+
+  methods: {
+    listeners: function listeners () {
+      document.addEventListener('scroll', this.translate, false)
+      document.addEventListener('resize', this.translate, false)
+    },
+
+    translate: function translate () {
+      this.calcDimensions()
+
+      this.percentScrolled = (
+        (this.windowBottom - this.elOffsetTop) / (this.normalizedHeight + this.windowHeight)
+      )
+
+      this.parallax = Math.round(this.parallaxDist * this.percentScrolled)
+
+      if (this.translated) {
+        this.translated()
+      }
+    },
+
+    calcDimensions: function calcDimensions () {
+      var offset = this.$el.getBoundingClientRect()
+
+      this.scrollTop = window.pageYOffset
+      this.parallaxDist = this.imgHeight - this.normalizedHeight
+      this.elOffsetTop = offset.top + this.scrollTop
+      this.windowHeight = window.innerHeight
+      this.windowBottom = this.scrollTop + this.windowHeight
+    }
+  }
+};
+
+
+/***/ },
+/* 52 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__ = __webpack_require__(2);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ exports["default"] = {
+  name: 'alert',
+
+  data: function data () {
+    return {
+      isActive: this.value
+    }
+  },
+
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__["a" /* default */]],
+
+  props: {
+    dismissible: Boolean,
+
+    error: Boolean,
+
+    hideIcon: Boolean,
+
+    icon: String,
+
+    info: Boolean,
+
+    success: Boolean,
+
+    warning: Boolean
+  },
+
+  computed: {
+    classes: function classes () {
+      return {
+        'alert--dismissible': this.dismissible,
+        'alert--error': this.error,
+        'alert--info': this.info,
+        'alert--success': this.success,
+        'alert--warning': this.warning
+      }
+    },
+
+    mdIcon: function mdIcon () {
+      if (this.icon) {
+        return this.icon
+      }
+
+      switch (true) {
+        case this.error:
+          return 'warning'
+        case this.info:
+          return 'info'
+        case this.success:
+          return 'check_circle'
+        case this.warning:
+          return 'priority_high'
+      }
+    }
+  }
+};
+
+
+/***/ },
+/* 53 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ exports["default"] = {
+  props: {
+    footer: Boolean,
+
+    leftFixedSidebar: Boolean,
+
+    leftSidebar: Boolean,
+
+    id: {
+      type: String,
+      default: 'app'
+    },
+
+    rightFixedSidebar: Boolean,
+
+    rightSidebar: Boolean,
+
+    topFixedToolbar: Boolean,
+
+    topToolbar: Boolean,
+
+    sidebarUnderToolbar: Boolean
+  },
+
+  computed: {
+    classes: function classes () {
+      return {
+        'left-fixed-sidebar': this.leftFixedSidebar,
+        'left-sidebar': this.leftSidebar,
+        'bottom-footer': this.footer,
+        'right-fixed-sidebar': this.rightFixedSidebar,
+        'right-sidebar': this.rightSidebar,
+        'top-fixed-toolbar': this.topFixedToolbar,
+        'top-toolbar': this.topToolbar,
+        'sidebar-under-toolbar': this.sidebarUnderToolbar
+      }
+    }
+  }
+};
+
+
+/***/ },
+/* 54 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ exports["default"] = {
+  name: 'breadcrumbs',
+
+  props: {
+    divider: {
+      type: String,
+      default: '/'
+    },
+
+    icons: Boolean
+  },
+
+  computed: {
+    classes: function classes () {
+      return {
+        'breadcrumbs--with-icons': this.icons
+      }
+    }
+  },
+
+  mounted: function mounted () {
+    this.$vuetify.load(this.init)
+  },
+
+  methods: {
+    init: function init () {
+      var this$1 = this;
+
+      this.$children.forEach(function (i) { return (i.$el.dataset.divider = this$1.divider); })
+    }
+  }
+};
+
+
+/***/ },
+/* 55 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ exports["default"] = {
+  name: 'breadcrumbs-item',
+
+  props: {
+    disabled: Boolean,
+
+    href: {
+      type: String,
+      default: 'javascript:;'
+    },
+
+    target: String
+  },
+
+  computed: {
+    classes: function classes () {
+      return {
+        'breadcrumbs__item--disabled': this.disabled
+      }
+    }
+  }
+};
+
+
+/***/ },
+/* 56 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_contextualable__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ exports["default"] = {
+  name: 'button',
+
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_contextualable__["a" /* default */]],
+
+  props: {
+    block: Boolean,
+    dark: Boolean,
+    default: Boolean,
+    flat: Boolean,
+    floating: Boolean,
+    icon: Boolean,
+    large: Boolean,
+    light: Boolean,
+    loading: Boolean,
+    outline: Boolean,
+    progress: Boolean,
+    raised: {
+      type: Boolean,
+      default: true
+    },
+    ripple: {
+      type: [Boolean, Object],
+      default: true
+    },
+    round: Boolean,
+    small: Boolean,
+    type: {
+      type: String,
+      default: 'button'
+    }
+  },
+
+  computed: {
+    classes: function classes () {
+      return {
+        'btn': true,
+        'btn--block': this.block,
+        'btn--dark': this.dark,
+        'btn--default': this.default,
+        'btn--flat': this.flat,
+        'btn--floating': this.floating,
+        'btn--icon': this.icon,
+        'btn--large': this.large,
+        'btn--light': this.light && !this.dark,
+        'btn--loader': this.loading,
+        'btn--outline': this.outline,
+        'btn--raised': this.raised,
+        'btn--round': this.round,
+        'btn--small': this.small,
+        'primary': this.primary && !this.outline,
+        'secondary': this.secondary && !this.outline,
+        'success': this.success && !this.outline,
+        'info': this.info && !this.outline,
+        'warning': this.warning && !this.outline,
+        'error': this.error && !this.outline,
+        'primary--text': this.primary && this.outline,
+        'secondary--text': this.secondary && this.outline,
+        'success--text': this.success && this.outline,
+        'info--text': this.info && this.outline,
+        'warning--text': this.warning && this.outline,
+        'error--text': this.error && this.outline
+      }
+    }
+  }
+};
+
+
+/***/ },
+/* 57 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ exports["default"] = {
+  name: 'button-dropdown',
+
+  data: function data () {
+    return {
+      isActive: false,
+      inputValue: this.value,
+      editableValue: null
+    }
+  },
+
+  props: {
+    dark: Boolean,
+    editable: Boolean,
+    light: {
+      type: Boolean,
+      default: true
+    },
+    options: {
+      type: Array,
+      default: function () { return []; }
+    },
+    maxHeight: {
+      type: [String, Number],
+      default: 200
+    },
+    overflow: Boolean,
+    label: {
+      type: String,
+      default: 'Select'
+    },
+    segmented: Boolean,
+    value: {
+      required: false
+    }
+  },
+
+  computed: {
+    classes: function classes () {
+      return {
+        'btn-dropdown--editable': this.editable,
+        'btn-dropdown--overflow': this.overflow || this.segmented || this.editable,
+        'btn-dropdown--segmented': this.segmented,
+        'btn-dropdown--light': this.light && !this.dark,
+        'btn-dropdown--dark': this.dark
+      }
+    },
+
+    computedItems: function computedItems () {
+      var this$1 = this;
+
+      if (this.editable) {
+        return this.options
+      }
+
+      if (this.index !== -1 &&
+        (this.overflow || this.segmented)
+      ) {
+        return this.options.filter(function (obj, i) { return i !== this$1.index; })
+      }
+
+      return this.options
+    },
+
+    index: function index () {
+      var this$1 = this;
+
+      return this.options.findIndex(function (i) { return i === this$1.inputValue; })
+    }
+  },
+
+  mounted: function mounted () {
+    if (this.inputValue) {
+      this.editableValue = this.inputValue.text
+    } 
+  },
+
+  watch: {
+    isActive: function isActive () {
+      if (this.editable) {
+        if (!this.isActive) {
+          this.$refs.input.$el.querySelector('input').blur()
+        }
+      }
+    },
+
+    inputValue: function inputValue () {
+      this.$emit('input', this.inputValue)
+    },
+
+    value: function value () {
+      if (typeof this.value === 'string') {
+        return (this.inputValue = { title: this.value })
+      }
+
+      this.inputValue = this.value
+    }
+  },
+
+  methods: {
+    toggle: function toggle (active) {
+      this.isActive = active
+    },
+
+    updateValue: function updateValue (obj) {
+      if (typeof obj === 'string') {
+        obj = { text: obj }
+      }
+
+      this.inputValue = obj
+      this.editableValue = obj.text || obj.action
+      this.isActive = false
+    }
+  }
+};
+
+
+/***/ },
+/* 58 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ exports["default"] = {
+  name: 'button-toggle',
+
+  data: function data () {
+    return {
+      inputValue: this.value
+    }
+  },
+
+  props: {
+    options: {
+      type: Array,
+      default: function () { return []; }
+    },
+
+    multiple: Boolean,
+
+    value: {
+      required: false
+    }
+  },
+
+  computed: {
+    classes: function classes () {
+      return {
+        'btn-toggle--selected': this.inputValue && !this.multiple || this.inputValue && this.inputValue.length > 0
+      }
+    }
+  },
+
+  watch: {
+    value: function value () {
+      this.inputValue = this.value
+    }
+  },
+
+  methods: {
+    isSelected: function isSelected (item) {
+      if (!this.multiple) {
+        return this.inputValue === item.value
+      }
+
+      return this.inputValue.includes(item.value)
+    },
+
+    updateValue: function updateValue (item) {
+      if (!this.multiple) {
+        return this.$emit('input', this.inputValue === item.value ? null : item.value)
+      }
+
+      var items = this.inputValue
+
+      var i = items.indexOf(item.value)
+      if (i !== -1) {
+        items.splice(i, 1)
+      } else {
+        items.push(item.value)
+      }
+
+      this.$emit('input', items)
+    }
+  }
+};
+
+
+/***/ },
+/* 59 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ exports["default"] = {
+  name: 'card',
+
+  props: {
+    height: {
+      type: String,
+      default: 'auto'
+    },
+
+    horizontal: Boolean,
+
+    img: String
+  },
+
+  computed: {
+    classes: function classes () {
+      return {
+        'card--horizontal': this.horizontal
+      }
+    },
+
+    styles: function styles () {
+      var styles = {
+        height: this.height
+      }
+
+      if (this.img) {
+        styles.background = "url(" + (this.img) + ") center center / cover no-repeat"
+      }
+
+      return styles
+    }
+  }
+};
+
+
+/***/ },
+/* 60 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ exports["default"] = {
+  name: 'card-row',
+
+  props: {
+    actions: Boolean,
+
+    height: {
+      type: String,
+      default: 'auto'
+    },
+
+    img: String
+  },
+
+  computed: {
+    classes: function classes () {
+      return {
+        'card__row--actions': this.actions
+      }
+    },
+
+    styles: function styles () {
+      var styles = {
+        height: this.height
+      }
+
+      if (this.img) {
+        styles.background = "url(" + (this.img) + ") center center / cover no-repeat"
+      }
+
+      return styles
+    }
+  }
+};
+
+
+/***/ },
+/* 61 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ exports["default"] = {
+  name: 'carousel',
+
+  data: function data () {
+    return {
+      current: null,
+      items: [],
+      slideInterval: {},
+      reverse: false
+    }
+  },
+
+  props: {
+    cycle: {
+      type: Boolean,
+      default: true
+    },
+
+    icon: {
+      type: String,
+      default: 'fiber_manual_record'
+    },
+
+    interval: {
+      type: Number,
+      default: 6000
+    }
+  },
+
+  computed: {
+    defaultState: function defaultState () {
+      return {
+        current: null,
+        reverse: false
+      }
+    }
+  },
+
+  watch: {
+    current: function current () {
+      var this$1 = this;
+
+      // Evaluate items when current changes to account for
+      // dynamic changing of children
+      this.items = this.$children.filter(function (i) {
+        return i.$el.classList && i.$el.classList.contains('carousel__item')
+      })
+
+      this.items.forEach(function (i) { return i.open(this$1.items[this$1.current]._uid, this$1.reverse); })
+
+      if (this.cycle) {
+        clearInterval(this.slideInterval)
+        this.startInterval()
+      }
+    }
+  },
+
+  mounted: function mounted () {
+    this.init()
+  },
+
+  methods: {
+    init: function init () {
+      this.current = 0
+    },
+
+    next: function next () {
+      this.reverse = false
+
+      if (this.current + 1 === this.items.length) {
+        return (this.current = 0)
+      }
+
+      this.current++
+    },
+
+    prev: function prev () {
+      this.reverse = true
+
+      if (this.current - 1 < 0) {
+        return (this.current = this.items.length - 1)
+      }
+
+      this.current--
+    },
+
+    select: function select (index) {
+      this.reverse = index < this.current
+      this.current = index
+    },
+
+    startInterval: function startInterval () {
+      this.slideInterval = setInterval(this.next, this.interval)
+    }
+  }
+};
+
+
+/***/ },
+/* 62 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ exports["default"] = {
+  name: 'carousel-item',
+
+  data: function data () {
+    return {
+      active: false,
+      reverse: false
+    }
+  },
+
+  props: {
+    src: {
+      type: String,
+      required: true
+    },
+
+    transition: {
+      type: String,
+      default: 'v-tab-transition'
+    },
+
+    reverseTransition: {
+      type: String,
+      default: 'v-tab-reverse-transition'
+    }
+  },
+
+  computed: {
+    computedTransition: function computedTransition () {
+      return this.reverse ? this.reverseTransition : this.transition
+    },
+
+    styles: function styles () {
+      return {
+        backgroundImage: ("url(" + (this.src) + ")")
+      }
+    }
+  },
+
+  methods: {
+    open: function open (id, reverse) {
+      this.active = this._uid === id
+      this.reverse = reverse
+    }
+  }
+};
+
+
+/***/ },
+/* 63 */,
+/* 64 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ exports["default"] = {
+  name: 'expansion-panel',
+
+  props: {
+    expand: Boolean
+  },
+
+  computed: {
+    params: function params () {
+      return {
+        expand: this.expand
+      }
+    }
+  }
+};
+
+
+/***/ },
+/* 65 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__util_helpers__ = __webpack_require__(1);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ exports["default"] = {
+  name: 'expansion-panel-content',
+
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__["a" /* default */]],
+
+  data: function data () {
+    return {
+      height: 'auto'
+    }
+  },
+
+  props: {
+    ripple: Boolean
+  },
+
+  computed: {
+    classes: function classes () {
+      return {
+        'expansion-panel__header--active': this.isActive
+      }
+    }
+  },
+
+  mounted: function mounted () {
+    var this$1 = this;
+
+    // TODO: This is temporary, replace
+    if (this.value) {
+      this.$vuetify.load(function () {
+        setTimeout(function () {
+          this$1.$refs.body.style.height = (this$1.$refs.body.clientHeight) + "px"
+        }, 1000)
+      })
+    }
+  },
+
+  methods: {
+    afterEnter: function afterEnter (el) {
+      el.style.height = 'auto'
+    },
+
+    closeConditional: function closeConditional (e) {
+      return this.$parent.$el.contains(e.target) && 
+        !this.$parent.expand &&
+        !this.$el.contains(e.target)
+    },
+
+    enter: function enter (el, done) {
+      el.style.height = null
+      el.style.display = 'block'
+      var height = (el.clientHeight) + "px"
+      el.style.height = 0
+
+      setTimeout(function () {
+        el.style.height = height
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["d" /* addOnceEventListener */])(el, 'transitionend', done)
+      }, 50)
+    },
+
+    leave: function leave (el, done) {
+      el.style.height = (el.clientHeight) + "px"
+      
+      setTimeout(function () { return el.style.height = 0; }, 0)
+
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["d" /* addOnceEventListener */])(el, 'transitionend', done)
+    },
+
+    toggle: function toggle () {
+      this.isActive = !this.isActive
+    }
+  }
+};
+
+
+/***/ },
+/* 66 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+//
+//
+//
+//
+//
+
+/* harmony default export */ exports["default"] = {
+  name: 'footer'
+};
+
+
+/***/ },
+/* 67 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ exports["default"] = {
+  name: 'select',
+
+  data: function data () {
+    return {
+      focused: false,
+      inputValue: null
+    }
+  },
+
+  props: {
+    defaultDisabled: {
+      type: Boolean,
+      default: true
+    },
+
+    defaultText: {
+      type: String,
+      default: 'Select...'
+    },
+
+    disabled: Boolean,
+
+    id: {
+      type: String,
+      value: ''
+    },
+
+    label: {
+      type: String,
+      value: ''
+    },
+
+    multiple: Boolean,
+
+    name: {
+      type: String,
+      value: ''
+    },
+
+    options: {
+      type: Array,
+      default: function () { return []; }
+    },
+
+    value: {
+      required: false
+    }
+  },
+
+  computed: {
+    classes: function classes () {
+      return {
+        'input-group--dirty': true
+      }
+    }
+  },
+
+  watch: {
+    inputValue: function inputValue () {
+      var this$1 = this;
+
+      if (this.multiple) {
+        this.$refs.options.filter(function (i) { return i.selected = this$1.inputValue.includes(i.value); })
+      } else {
+        this.$refs.select.value = this.inputValue
+      }
+    },
+
+    value: function value () {
+      this.inputValue = this.value
+    }
+  },
+
+  mounted: function mounted () {
+    if (this.value) {
+      this.inputValue = this.value
+    }
+  },
+
+  methods: {
+    updateValue: function updateValue () {
+      if (this.multiple) {
+        this.$emit('input', this.$refs.options.filter(function (i) { return i.selected; }).map(function (i) { return i.value; }))
+      } else {
+        this.$emit('input', this.$refs.select.value)
+      }
+    }
+  }
+};
+
+
+/***/ },
+/* 68 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ exports["default"] = {
+  name: 'icon',
+
+  props: {
+    large: Boolean,
+
+    left: Boolean,
+
+    medium: Boolean,
+
+    right: Boolean,
+
+    xLarge: Boolean
+  },
+
+  computed: {
+    classes: function classes () {
+      return {
+        'icon--large': this.large,
+        'icon--left': this.left,
+        'icon--medium': this.medium,
+        'icon--right': this.right,
+        'icon--x-large': this.xLarge
+      }
+    }
+  }
+};
+
+
+/***/ },
+/* 69 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(1);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ exports["default"] = {
+  name: 'list-group',
+
+  data: function data () {
+    return {
+      isActive: this.active,
+      height: 0
+    }
+  },
+
+  props: {
+    active: Boolean,
+
+    group: String
+  },
+
+  computed: {
+    classes: function classes () {
+      return {
+        'list--group__header--active': this.isActive
+      }
+    },
+
+    list: function list () {
+      return __WEBPACK_IMPORTED_MODULE_0__util_helpers__["c" /* closestParentTag */].call(this, 'v-list')
+    },
+
+    styles: function styles () {
+      return {
+        height: ((this.height) + "px")
+      }
+    }
+  },
+
+  watch: {
+    active: function active () {
+      this.isActive = this.active
+    },
+
+    isActive: function isActive () {
+      if (this.isActive !== this.active) {
+        this.$emit('active', this.active)
+      }
+
+      if (!this.isActive) {
+        this.list.listClose(this._uid)
+      }
+    },
+
+    '$route': function $route (to) {
+      if (this.group) {
+        this.isActive = this.matchRoute(to.path)
+      }
+    }
+  },
+
+  mounted: function mounted () {
+    if (this.group) {
+      this.isActive = this.matchRoute(this.$route.path)
+    }
+
+    if (this.isActive) {
+      this.list.listClick(this._uid)
+    }
+
+    this.height = this.$refs.group.scrollHeight
+  },
+
+  methods: {
+    click: function click () {
+      this.list.listClick(this._uid)
+    },
+
+    toggle: function toggle (uid) {
+      this.isActive = this._uid === uid
+    },
+
+    enter: function enter (el, done) {
+      var this$1 = this;
+
+      el.style.display = 'block'
+      var scrollHeight = el.scrollHeight
+      this.height = 0
+
+      setTimeout(function () { return (this$1.height = scrollHeight); }, 50)
+
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* addOnceEventListener */])(el, 'transitionend', done)
+    },
+
+    leave: function leave (el, done) {
+      this.height = 0
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* addOnceEventListener */])(el, 'transitionend', done)
+    },
+
+    matchRoute: function matchRoute (to) {
+      return to.match(this.group) !== null
+    }
+  }
+};
+
+
+/***/ },
+/* 70 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__ = __webpack_require__(2);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ exports["default"] = {
+  name: 'menu',
+
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__["a" /* default */]],
+
+  data: function data () {
+    return {
+      window: {},
+      dimensions: {
+        activator: {
+          cssTop: 0, cssLeft: 0,
+          top: 0, left: 0, bottom: 0, right: 0, width: 0, height: 0, offsetTop: 0
+        },
+        content: {
+          cssTop: 0, cssLeft: 0,
+          top: 0, left: 0, bottom: 0, right: 0, width: 0, height: 0, offsetTop: 0
+        },
+        list: null,
+        selected: null
+      },
+      minWidth: 'auto',
+      nudgeX: -16,
+      nudgeY: -16
+    }
+  },
+
+  props: {
+    top: Boolean,
+    left: Boolean,
+    bottom: Boolean,
+    right: Boolean,
+    auto: Boolean,
+    offsetX: Boolean,
+    offsetY: Boolean,
+    maxHeight: {
+      type: [String, Number],
+      default: 'auto'
+    },
+    origin: {
+      type: String,
+      default: 'top left'
+    },
+    transition: {
+      type: String,
+      default: 'v-menu-transition'
+    }
+  },
+
+  watch: {
+    isActive: function isActive () {
+      if (this.isActive) { this.updateDimensions() }
+
+      this.$emit('input', this.isActive)
+    }
+  },
+
+  computed: {
+    direction: function direction () {
+      var ref = this;
+      var left = ref.left;
+      var top = ref.top;
+      var auto = ref.auto;
+      var screenDistance = ref.screenDistance;
+      var ref$1 = this.dimensions;
+      var c = ref$1.content;
+      var horiz = left && !auto ? 'left' : 'right'
+      var vert = top && !auto ? 'top' : 'bottom'
+
+      // Flip direction, if needed, to where there's more room from the window edge.
+      horiz = !auto && c.width > screenDistance[horiz] ? screenDistance.horizMaxDir : horiz
+      vert = !auto && c.height > screenDistance[vert] ? screenDistance.vertMaxDir : vert
+
+      return { horiz: horiz, vert: vert }
+    },
+
+    offset: function offset () {
+      var ref = this.dimensions;
+      var a = ref.activator;
+      var c = ref.content;
+      var ref$1 = this;
+      var direction = ref$1.direction;
+      var offsetX = ref$1.offsetX;
+      var offsetY = ref$1.offsetY;
+      var offsetAuto = ref$1.offsetAuto;
+      var x = a.left - c.left  // <-- Start with the diff between content and activator
+      var y = a.top - c.top    // <-- to shift content to activator's position.
+
+      var horiz = direction.horiz === 'left'
+          ? offsetX ? x - c.width : x + a.width - c.width + offsetAuto.horiz   // left
+          : offsetX ? x + a.width : x + offsetAuto.horiz                       // right
+      var vert = direction.vert === 'top'
+          ? offsetY ? y - c.height : y + a.height - c.height + offsetAuto.vert // top
+          : offsetY ? y + a.height : y + offsetAuto.vert                       // bottom
+
+      return { horiz: horiz, vert: vert }
+    },
+
+    offsetAuto: function offsetAuto () {
+      if (!this.auto) { return { horiz: 0, vert: 0 } }
+      if (!this.dimensions.selected) { return { horiz: this.nudgeX, vert: this.nudgeY } }
+
+      var ref = this.dimensions;
+      var a = ref.activator;
+      var c = ref.content;
+      var s = ref.selected;
+      var list = ref.list;
+      var offsetBottom = list.height - s.height - s.offsetTop
+      var scrollMiddle = (c.height - s.height) / 2
+      var horiz = this.nudgeX
+      var vert = (a.height - c.height + this.nudgeY) / 2
+
+      vert += s.offsetTop < scrollMiddle ? scrollMiddle - s.offsetTop : 0
+      vert += offsetBottom < scrollMiddle ? offsetBottom - scrollMiddle : 0
+
+      return { horiz: horiz, vert: vert }
+    },
+
+    screenDistance: function screenDistance () {
+      var ref = this.dimensions;
+      var a = ref.activator;
+      var ref$1 = this.window;
+      var innerH = ref$1.innerHeight;
+      var innerW = ref$1.innerWidth;
+      var x = this.offsetX ? a.right : a.left  // <-- Determine which edge of the
+      var y = this.offsetY ? a.bottom : a.top  // <-- activator to measure distance from.
+      var distance = {}
+
+      distance = { top: y, left: x, bottom: innerH - y, right: innerW - x }
+      distance.horizMax = distance.left > distance.right ? distance.left : distance.right
+      distance.horizMaxDir = distance.left > distance.right ? 'left' : 'right'
+      distance.vertMax = distance.top > distance.bottom ? distance.top : distance.bottom
+      distance.vertMaxDir = distance.top > distance.bottom ? 'top' : 'bottom'
+
+      return distance
+    },
+
+    screenOverflow: function screenOverflow () {
+      var ref = this.dimensions;
+      var c = ref.content;
+      var left = c.left + this.offset.horiz
+      var top = c.top + this.offset.vert
+
+      var horiz = this.auto && left + c.width > this.window.innerWidth
+          ? (left + c.width) - this.window.innerWidth
+          : this.auto && left < 0
+            ? left
+            : 0
+      var vert = this.auto && top + c.height > this.window.innerHeight
+          ? (top + c.height) - this.window.innerHeight
+          : this.auto && top < 0
+            ? top
+            : 0
+
+      return { horiz: horiz, vert: vert }
+    },
+
+    position: function position () {
+      var ref = this.dimensions;
+      var c = ref.content;
+
+      return {
+        left: c.cssLeft + this.offset.horiz - this.screenOverflow.horiz,
+        top: c.cssTop + this.offset.vert - this.screenOverflow.vert
+      }
+    },
+
+    styles: function styles () {
+      return {
+        left: ((this.position.left) + "px"),
+        top: ((this.position.top) + "px")
+      }
+    }
+  },
+
+  methods: {
+    updateDimensions: function updateDimensions () {
+      this.sneakPeek()
+      this.updateMaxMin()
+
+      // Let the DOM compute dimensions.
+      this.window = window
+      this.dimensions = {
+        'activator': this.$refs.activator.children
+          ? this.measure(this.$refs.activator.children[0])
+          : this.measure(this.$refs.activator),
+        'content': this.measure(this.$refs.content),
+        'list': this.measure(this.$refs.content, '.list'),
+        'selected': this.measure(this.$refs.content, '.list__tile--active', 'parent')
+      }
+
+      this.fixOffscreen()
+      this.updateScroll()
+      this.sneakPeek(false)
+    },
+
+    updateMaxMin: function updateMaxMin () {
+      var ref = this;
+      var $el = ref.$el;
+      var $refs = ref.$refs;
+      var maxHeight = ref.maxHeight;
+      var auto = ref.auto;
+      var nudgeX = ref.nudgeX;
+
+      $refs.content.style.minWidth = ($el.clientWidth + Math.abs(auto ? nudgeX : 0)) + "px"
+      $refs.content.style.maxHeight = null  // <-- TODO: This is a temporary fix.
+      $refs.content.style.maxHeight = isNaN(maxHeight) ? maxHeight : (maxHeight + "px")
+    },
+
+    fixOffscreen: function fixOffscreen () {
+      var ref = this;
+      var $refs = ref.$refs;
+      var screenDistance = ref.screenDistance;
+      var ref$1 = this.direction;
+      var vert = ref$1.vert;
+
+      // If not auto, reduce height to the max vertical distance to a window edge.
+      if (!this.auto && this.dimensions.content.height > screenDistance[vert]) {
+        $refs.content.style.maxHeight = (screenDistance.vertMax) + "px"
+        this.dimensions.content.height = $refs.content.getBoundingClientRect().height
+      }
+    },
+
+    updateScroll: function updateScroll () {
+      if (!this.auto || !this.dimensions.selected) { return }
+
+      var ref = this.dimensions;
+      var c = ref.content;
+      var s = ref.selected;
+      var l = ref.list;
+      var scrollMiddle = (c.height - s.height) / 2
+      var scrollMax = l.height - c.height
+      var offsetTop = s.offsetTop - scrollMiddle
+
+      offsetTop = this.screenOverflow.vert && offsetTop > scrollMax ? scrollMax : offsetTop
+      offsetTop = this.screenOverflow.vert && offsetTop < 0 ? 0 : offsetTop
+      offsetTop -= this.screenOverflow.vert
+
+      this.$refs.content.scrollTop = offsetTop
+    },
+
+    // Utils
+    // ====================
+
+    measure: function measure (el, selector, getParent) {
+      if ( getParent === void 0 ) getParent = false;
+
+      el = selector ? el.querySelector(selector) : el
+      el = el && getParent ? el.parentElement : el
+
+      if (!el) { return null }
+
+      var ref = el.getBoundingClientRect();
+      var top = ref.top;
+      var left = ref.left;
+      var bottom = ref.bottom;
+      var right = ref.right;
+      var width = ref.width;
+      var height = ref.height;
+      var cssLeft = parseInt(el.style.left) || 0
+      var cssTop = parseInt(el.style.top) || 0
+      var offsetTop = el.offsetTop
+
+      return { cssTop: cssTop, cssLeft: cssLeft, top: top, left: left, bottom: bottom, right: right, width: width, height: height, offsetTop: offsetTop }
+    },
+
+    sneakPeek: function sneakPeek (on) {
+      if ( on === void 0 ) on = true;
+
+      if (on) {
+        this.$refs.content.style.opacity = 0
+        this.$refs.content.style.display = 'inline-block'
+      } else {
+        this.$refs.content.style.display = 'none'
+        this.$refs.content.style.opacity = null
+      }
+    }
+  }
+};
+
+
+/***/ },
+/* 71 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__ = __webpack_require__(2);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ exports["default"] = {
+  name: 'modal',
+
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__["a" /* default */]],
+
+  props: {
+    bottom: Boolean,
+    origin: {
+      type: String,
+      default: 'center center'
+    },
+    persistent: Boolean,
+    transition: {
+      type: String,
+      default: 'v-modal-transition'
+    }
+  },
+
+  computed: {
+    classes: function classes () {
+      return {
+        'modal--active': this.isActive,
+        'modal--bottom': this.bottom
+      }
+    },
+
+    computedOrigin: function computedOrigin () {
+      if (this.origin !== 'center center') {
+        return this.origin
+      }
+
+      return this.bottom ? 'bottom' : this.origin
+    },
+
+    computedTransition: function computedTransition () {
+      if (this.transition !== 'v-modal-transition') {
+        return this.transition
+      }
+
+      return this.bottom ? 'v-slide-y-transition' : this.transition
+    },
+
+    overlayClasses: function overlayClasses () {
+      return {
+        'overlay--modal-bottom': this.bottom
+      }
+    }
+  },
+
+  methods: {
+    closeConditional: function closeConditional (e) {
+      if (this.persistent) {
+        return false
+      }
+
+      return this.$refs.modal !== e.target &&
+        !this.$refs.modal.contains(e.target) && 
+        (!this.$refs.activator || this.$refs.activator &&
+          !this.$refs.activator.contains(e.target) &&
+          this.$refs.activator !== e.target)
+    }
+  }
+};
+
+
+/***/ },
+/* 72 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__ = __webpack_require__(2);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ exports["default"] = {
+  name: 'pagination',
+
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__["a" /* default */]],
+
+  props: {
+    circle: Boolean,
+
+    disabled: Boolean,
+
+    length: {
+      type: Number,
+      default: 0
+    },
+
+    value: {
+      type: Number,
+      default: 0
+    }
+  },
+
+  watch: {
+    value: function value () {
+      this.init()
+    }
+  },
+
+  computed: {
+    classes: function classes () {
+      return {
+        'pagination--circle': this.circle,
+        'pagination--disabled': this.disabled
+      }
+    },
+
+    items: function items () {
+      if (this.length <= 5) {
+        return this.range(1, this.length)
+      }
+
+      var min = this.value - 3
+      min = min > 0 ? min : 1
+
+      var max = min + 6
+      max = max <= this.length ? max : this.length
+
+      if (max === this.length) {
+        min = this.length - 6
+      }
+
+      var range = this.range(min, max)
+
+      if (this.value >= 4 && this.length > 6) {
+        range.splice(0, 2, 1, '...')
+      }
+
+      if (this.value + 3 < this.length && this.length > 6) {
+        range.splice(range.length - 2, 2, '...', this.length)
+      }
+
+      return range
+    }
+  },
+
+  mounted: function mounted () {
+    this.$vuetify.load.call(this, this.init)
+  },
+
+  methods: {
+    init: function init () {
+      var this$1 = this;
+
+      this.selected = null
+
+      // Change this
+      setTimeout(function () { return (this$1.selected = this$1.value); }, 100)
+    },
+
+    range: function range (from, to) {
+      var range = []
+
+      from = from > 0 ? from : 1
+
+      for (var i = from; i <= to; i++) {
+        range.push(i)
+      }
+
+      return range
+    }
+  }
+};
+
+
+/***/ },
+/* 73 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_translatable__ = __webpack_require__(51);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ exports["default"] = {
+  name: 'parallax',
+
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_translatable__["a" /* default */]],
+
+  props: {
+    height: {
+      type: [String, Number],
+      default: 500
+    },
+
+    src: {
+      type: String,
+      required: true
+    }
+  },
+
+  computed: {
+    styles: function styles () {
+      return {
+        display: 'block',
+        transform: ("translate3d(-50%, " + (this.parallax) + "px, 0)")
+      }
+    }
+  },
+
+  methods: {
+    init: function init () {
+      var this$1 = this;
+
+      if (this.$refs.img.complete) {
+        this.translate()
+        this.listeners()
+      }
+
+      this.$refs.img.addEventListener('load', function () {
+        this$1.translate()
+        this$1.listeners()
+      }, false)
+    },
+
+    objHeight: function objHeight () {
+      return this.$refs.img.naturalHeight
+    },
+
+    elOffsetTop: function elOffsetTop () {
+      return this.$el.offsetTop
+    }
+  }
+};
+
+
+/***/ },
+/* 74 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+
+var this$1 = this;
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ exports["default"] = {
+  name: 'progress-circular',
+
+  props: {
+    button: Boolean,
+
+    fill: {
+      type: [Boolean, String],
+      default: function () { return this$1.indeterminate ? 'none' : 'transparent'; }
+    },
+
+    indeterminate: Boolean,
+
+    rotate: {
+      type: Number,
+      default: 0
+    },
+
+    size: {
+      type: [Number, String],
+      default: 32
+    },
+
+    width: {
+      type: Number,
+      default: 4
+    },
+
+    value: {
+      type: Number,
+      default: 0
+    }
+  },
+
+  computed: {
+    calculatedSize: function calculatedSize () {
+      var size = Number(this.size)
+
+      if (this.button) {
+        size += 8
+      }
+
+      return size
+    },
+
+    circumference: function circumference () {
+      return 2 * Math.PI * this.radius
+    },
+
+    classes: function classes () {
+      return {
+        'progress-circular--indeterminate': this.indeterminate,
+        'progress-circular--button': this.button
+      }
+    },
+
+    cxy: function cxy () {
+      return this.indeterminate && !this.button ? 50 : this.calculatedSize / 2
+    },
+
+    normalizedValue: function normalizedValue () {
+      if (this.value < 0) {
+        return 0
+      }
+
+      if (this.value > 100) {
+        return 100
+      }
+
+      return this.value
+    },
+
+    radius: function radius () {
+      return this.indeterminate && !this.button ? 20 : (this.calculatedSize - this.width) / 2
+    },
+
+    strokeDashArray: function strokeDashArray () {
+      return Math.round(this.circumference * 1000) / 1000
+    },
+
+    strokeDashOffset: function strokeDashOffset () {
+      return ((100 - this.normalizedValue) / 100) * this.circumference + 'px'
+    },
+
+    styles: function styles () {
+      return {
+        height: ((this.calculatedSize) + "px"),
+        width: ((this.calculatedSize) + "px")
+      }
+    },
+
+    svgSize: function svgSize () {
+      return this.indeterminate ? false : this.calculatedSize
+    },
+
+    svgStyles: function svgStyles () {
+      return {
+        transform: ("rotate(" + (this.rotate) + "deg)")
+      }
+    },
+
+    viewBox: function viewBox () {
+      return this.indeterminate ? '25 25 50 50' : false
+    }
+  }
+};
+
+
+/***/ },
+/* 75 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ exports["default"] = {
+  name: 'progress',
+
+  props: {
+    active: {
+      type: Boolean,
+      default: true
+    },
+
+    buffer: Boolean,
+
+    bufferValue: Number,
+
+    error: Boolean,
+
+    height: {
+      type: [Number, String],
+      default: 7
+    },
+
+    indeterminate: Boolean,
+
+    info: Boolean,
+
+    secondary: Boolean,
+
+    success: Boolean,
+
+    query: Boolean,
+
+    warning: Boolean,
+
+    value: {
+      type: [Number, String],
+      default: 0
+    }
+  },
+
+  computed: {
+    classes: function classes () {
+      return {
+        'progress-linear--query': this.query,
+        'progress-linear--secondary': this.secondary,
+        'progress-linear--success': this.success,
+        'progress-linear--info': this.info,
+        'progress-linear--warning': this.warning,
+        'progress-linear--error': this.error
+      }
+    },
+
+    styles: function styles () {
+      var styles = {}
+
+      if (!this.active) {
+        styles.height = 0
+      }
+
+      if (this.buffer) {
+        styles.width = (this.bufferValue) + "%"
+      }
+
+      return styles
+    },
+
+    bufferStyles: function bufferStyles () {
+      var styles = {}
+
+      if (!this.active) {
+        styles.height = 0
+      }
+
+      return styles
+    }
+  }
+};
+
+
+/***/ },
+/* 76 */,
+/* 77 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ exports["default"] = {
+  name: 'tabs-item',
+
+  data: function data () {
+    return {
+      isActive: false,
+      reverse: false
+    }
+  },
+
+  props: {
+    id: {
+      type: String,
+      required: true
+    },
+
+    transition: {
+      type: String,
+      default: 'v-tab-transition'
+    },
+
+    reverseTransition: {
+      type: String,
+      default: 'v-tab-reverse-transition'
+    }
+  },
+
+  computed: {
+    computedTransition: function computedTransition () {
+      return this.reverse ? this.reverseTransition : this.transition
+    }
+  },
+
+  methods: {
+    toggle: function toggle (target, reverse) {
+      this.reverse = reverse
+      this.isActive = this.id === target
+    }
+  }
+};
+
+
+/***/ },
+/* 78 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ exports["default"] = {
+  name: 'tabs',
+
+  data: function data () {
+    return {
+      activators: [],
+      content: [],
+      isActive: null,
+      reverse: false,
+      target: null,
+      resizeDebounce: {},
+      targetEl: null
+    }
+  },
+
+  props: {
+    centered: Boolean,
+
+    grow: Boolean,
+
+    icons: Boolean,
+
+    scrollBars: Boolean,
+
+    value: String
+  },
+
+  computed: {
+    classes: function classes () {
+      return {
+        'tabs--centered': this.centered,
+        'tabs--grow': this.grow,
+        'tabs--icons': this.icons,
+        'tabs--scroll-bars': this.scrollBars
+      }
+    }
+  },
+
+  watch: {
+    value: function value () {
+      this.tabClick(this.value)
+    },
+
+    isActive: function isActive () {
+      var this$1 = this;
+
+      this.activators.forEach(function (i) {
+        i.toggle(this$1.target)
+
+        if (i.isActive) {
+          this$1.slider(i.$el)
+        }
+      })
+
+      this.content.forEach(function (i) { return i.toggle(this$1.target, this$1.reverse); })
+      this.$emit('input', this.target)
+    }
+  },
+
+  mounted: function mounted () {
+    var this$1 = this;
+
+    this.$vuetify.load(function () {
+      this$1.init()
+      window.addEventListener('resize', this$1.resize, false)
+    })
+  },
+
+  beforeDestroy: function beforeDestroy () {
+    window.removeEventListener('resize', this.resize, false)
+  },
+
+  methods: {
+    init: function init () {
+      var this$1 = this;
+
+      this.$refs.activators.$children.forEach(function (i) {
+        if (i.$options._componentTag === 'v-tab-item') {
+          this$1.activators.push(i)
+        }
+      })
+
+      this.$refs.content.$children.forEach(function (i) { return this$1.content.push(i); })
+
+      setTimeout(function () {
+        this$1.tabClick(this$1.value || this$1.activators[0].target)
+      }, 200)
+    },
+
+    resize: function resize () {
+      var this$1 = this;
+
+      clearTimeout(this.resizeDebounce)
+
+      this.resizeDebounce = setTimeout(function () {
+        this$1.slider()
+      }, 250)
+    },
+
+    slider: function slider (el) {
+      this.targetEl = el || this.targetEl
+      this.$refs.slider.style.width = (this.targetEl.clientWidth) + "px"
+      this.$refs.slider.style.left = (this.targetEl.offsetLeft) + "px"
+    },
+
+    tabClick: function tabClick (target) {
+      var this$1 = this;
+
+      this.target = target
+
+      this.$nextTick(function () {
+        var nextIndex = this$1.content.findIndex(function (i) { return i.id === this$1.target; })
+        this$1.reverse = nextIndex < this$1.isActive
+        this$1.isActive = nextIndex
+      })
+    }
+  }
+};
+
+
+/***/ },
+/* 79 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ exports["default"] = {
+  name: 'tabs-tabs',
+
+  data: function data () {
+    return {
+      mobile: false
+    }
+  },
+
+  computed: {
+    classes: function classes () {
+      return {
+        'tabs__tabs--mobile': this.mobile
+      }
+    }
+  },
+
+  methods: {
+    scrollLeft: function scrollLeft () {
+      this.$refs.container.scrollLeft -= 50
+    },
+
+    scrollRight: function scrollRight () {
+      this.$refs.container.scrollLeft += 50
+    }
+  }
+};
+
+
+/***/ },
+/* 80 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ exports["default"] = {
+  name: 'toolbar',
+
+  props: {
+    fixed: Boolean
+  },
+
+  computed: {
+    classes: function classes () {
+      return {
+        'toolbar--fixed': this.fixed
+      }
+    }
+  }
+};
+
+
+/***/ },
+/* 81 */
+/***/ function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* name */
+  "Alert",
+  /* script */
+  __webpack_require__(52),
+  /* template */
+  __webpack_require__(126),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ },
+/* 82 */
+/***/ function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* name */
+  "App",
+  /* script */
+  __webpack_require__(53),
+  /* template */
+  __webpack_require__(113),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ },
+/* 83 */
+/***/ function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* name */
+  "Breadcrumbs",
+  /* script */
+  __webpack_require__(54),
+  /* template */
+  __webpack_require__(130),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ },
+/* 84 */
+/***/ function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* name */
+  "BreadcrumbsItem",
+  /* script */
+  __webpack_require__(55),
+  /* template */
+  __webpack_require__(117),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ },
+/* 85 */
+/***/ function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* name */
+  "Button",
+  /* script */
+  __webpack_require__(56),
+  /* template */
+  __webpack_require__(118),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ },
+/* 86 */
+/***/ function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* name */
+  "ButtonDropdown",
+  /* script */
+  __webpack_require__(57),
+  /* template */
+  __webpack_require__(137),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ },
+/* 87 */
+/***/ function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* name */
+  "ButtonToggle",
+  /* script */
+  __webpack_require__(58),
+  /* template */
+  __webpack_require__(120),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ },
+/* 88 */
+/***/ function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* name */
+  "Card",
+  /* script */
+  __webpack_require__(59),
+  /* template */
+  __webpack_require__(114),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ },
+/* 89 */
+/***/ function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* name */
+  "CardRow",
+  /* script */
+  __webpack_require__(60),
+  /* template */
+  __webpack_require__(136),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ },
+/* 90 */
+/***/ function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* name */
+  "Carousel",
+  /* script */
+  __webpack_require__(61),
+  /* template */
+  __webpack_require__(129),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ },
+/* 91 */
+/***/ function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* name */
+  "CarouselItem",
+  /* script */
+  __webpack_require__(62),
+  /* template */
+  __webpack_require__(135),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ },
+/* 92 */,
+/* 93 */
+/***/ function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* name */
+  "ExpansionPanel",
+  /* script */
+  __webpack_require__(64),
+  /* template */
+  __webpack_require__(112),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ },
+/* 94 */
+/***/ function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* name */
+  "ExpansionPanelContent",
+  /* script */
+  __webpack_require__(65),
+  /* template */
+  __webpack_require__(133),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ },
+/* 95 */
+/***/ function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* name */
+  "Footer",
+  /* script */
+  __webpack_require__(66),
+  /* template */
+  __webpack_require__(115),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ },
+/* 96 */
+/***/ function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* name */
+  "Select",
+  /* script */
+  __webpack_require__(67),
+  /* template */
+  __webpack_require__(119),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ },
+/* 97 */
+/***/ function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* name */
+  "Icon",
+  /* script */
+  __webpack_require__(68),
+  /* template */
+  __webpack_require__(122),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ },
+/* 98 */
+/***/ function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* name */
+  "ListGroup",
+  /* script */
+  __webpack_require__(69),
+  /* template */
+  __webpack_require__(132),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ },
+/* 99 */
+/***/ function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* name */
+  "Menu",
+  /* script */
+  __webpack_require__(70),
+  /* template */
+  __webpack_require__(121),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ },
+/* 100 */
+/***/ function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* name */
+  "Modal",
+  /* script */
+  __webpack_require__(71),
+  /* template */
+  __webpack_require__(123),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ },
+/* 101 */
+/***/ function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* name */
+  "Pagination",
+  /* script */
+  __webpack_require__(72),
+  /* template */
+  __webpack_require__(127),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ },
+/* 102 */
+/***/ function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* name */
+  "Parallax",
+  /* script */
+  __webpack_require__(73),
+  /* template */
+  __webpack_require__(134),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ },
+/* 103 */
+/***/ function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* name */
+  "ProgressCircular",
+  /* script */
+  __webpack_require__(74),
+  /* template */
+  __webpack_require__(125),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ },
+/* 104 */
+/***/ function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* name */
+  "ProgressLinear",
+  /* script */
+  __webpack_require__(75),
+  /* template */
+  __webpack_require__(111),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ },
+/* 105 */,
+/* 106 */
+/***/ function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* name */
+  "TabContent",
+  /* script */
+  __webpack_require__(77),
+  /* template */
+  __webpack_require__(138),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ },
+/* 107 */
+/***/ function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* name */
+  "Tabs",
+  /* script */
+  __webpack_require__(78),
+  /* template */
+  __webpack_require__(110),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ },
+/* 108 */
+/***/ function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* name */
+  "TabsTabs",
+  /* script */
+  __webpack_require__(79),
+  /* template */
+  __webpack_require__(128),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ },
+/* 109 */
+/***/ function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* name */
+  "Toolbar",
+  /* script */
+  __webpack_require__(80),
+  /* template */
+  __webpack_require__(124),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ },
+/* 110 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "tabs",
+    class: _vm.classes,
+    attrs: {
+      "id": _vm.id
+    }
+  }, [_vm._t("default"), _c('v-tabs-tabs', {
+    ref: "activators"
+  }, [_vm._t("activators"), _c('v-tabs-slider', {
+    ref: "slider"
+  })], 2), _c('v-tabs-items', {
+    ref: "content",
+    staticClass: "tabs__items"
+  }, [_vm._t("content")], 2)], 2)
+},staticRenderFns: []}
+
+/***/ },
+/* 111 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "progress-linear",
+    class: _vm.classes,
+    style: ({
+      height: _vm.height + 'px'
+    })
+  }, [_c('div', {
+    staticClass: "progress-linear__bar",
+    style: (_vm.styles)
+  }, [_c('v-fade-transition', [(_vm.indeterminate) ? _c('div', {
+    staticClass: "progress-linear__bar__indeterminate"
+  }) : _vm._e()]), _c('v-slide-x-transition', [(!_vm.indeterminate) ? _c('div', {
+    staticClass: "progress-linear__bar__determinate",
+    style: ({
+      width: _vm.value + '%'
+    })
+  }) : _vm._e()])], 1)])
+},staticRenderFns: []}
+
+/***/ },
+/* 112 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('ul', {
+    staticClass: "expansion-panel"
+  }, [_vm._t("default")], 2)
+},staticRenderFns: []}
+
+/***/ },
+/* 113 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "with",
+    class: _vm.classes,
+    attrs: {
+      "id": _vm.id,
+      "data-app": "data-app"
+    }
+  }, [_vm._t("default")], 2)
+},staticRenderFns: []}
+
+/***/ },
+/* 114 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "card",
+    class: _vm.classes,
+    style: (_vm.styles)
+  }, [_vm._t("default")], 2)
+},staticRenderFns: []}
+
+/***/ },
+/* 115 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('footer', {
+    staticClass: "footer"
+  }, [_vm._t("default")], 2)
+},staticRenderFns: []}
+
+/***/ },
+/* 116 */,
+/* 117 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('li', [_c('a', {
+    staticClass: "breadcrumbs__item",
+    class: _vm.classes,
+    attrs: {
+      "href": _vm.href,
+      "target": _vm.target
+    }
+  }, [_vm._t("default")], 2)])
+},staticRenderFns: []}
+
+/***/ },
+/* 118 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('button', {
+    directives: [{
+      name: "ripple",
+      rawName: "v-ripple",
+      value: (_vm.ripple),
+      expression: "ripple"
+    }],
+    staticClass: "btn",
+    class: _vm.classes,
+    attrs: {
+      "type": _vm.type
+    }
+  }, [_c('span', {
+    staticClass: "btn__content"
+  }, [_vm._t("default")], 2), (_vm.loading) ? _c('span', {
+    staticClass: "btn__loading"
+  }, [_vm._t("loader"), (!_vm.$slots['loader']) ? _c('v-progress-circular', {
+    attrs: {
+      "indeterminate": "indeterminate",
+      "size": "26"
+    }
+  }) : _vm._e()], 2) : _vm._e()])
+},staticRenderFns: []}
+
+/***/ },
+/* 119 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "input-group",
+    class: _vm.classes
+  }, [_c('label', {
+    attrs: {
+      "for": _vm.id
+    },
+    domProps: {
+      "textContent": _vm._s(_vm.label)
+    }
+  }), _c('select', {
+    ref: "select",
+    attrs: {
+      "disabled": _vm.disabled,
+      "id": _vm.id,
+      "name": _vm.name,
+      "multiple": _vm.multiple
+    },
+    on: {
+      "blur": _vm.updateValue,
+      "click": function($event) {
+        _vm.focused = true
+      },
+      "input": _vm.updateValue
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": "",
+      "disabled": _vm.defaultDisabled
+    },
+    domProps: {
+      "selected": !_vm.multiple,
+      "textContent": _vm._s(_vm.defaultText)
+    }
+  }), _vm._l((_vm.options), function(o) {
+    return _c('option', {
+      ref: "options",
+      refInFor: true,
+      domProps: {
+        "value": o.value,
+        "textContent": _vm._s(o.text)
+      }
+    })
+  })], 2)])
+},staticRenderFns: []}
+
+/***/ },
+/* 120 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "btn-toggle",
+    class: _vm.classes
+  }, _vm._l((_vm.options), function(option, index) {
+    return _c('v-btn', {
+      attrs: {
+        "data-selected": _vm.isSelected(option),
+        "data-index": index,
+        "data-only-child": _vm.isSelected(option) && (!_vm.multiple || _vm.inputValue.length === 1),
+        "flat": "flat"
+      },
+      nativeOn: {
+        "click": function($event) {
+          $event.stopPropagation();
+          _vm.updateValue(option)
+        }
+      }
+    }, [(option.text) ? _c('span', {
+      domProps: {
+        "textContent": _vm._s(option.text)
+      }
+    }) : _vm._e(), (option.icon) ? _c('v-icon', [_vm._v(_vm._s(option.icon))]) : _vm._e()], 1)
+  }))
+},staticRenderFns: []}
+
+/***/ },
+/* 121 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "menu"
+  }, [_c('div', {
+    directives: [{
+      name: "click-outside",
+      rawName: "v-click-outside",
+      value: (_vm.v - _vm.click - _vm.outside),
+      expression: "v-click-outside"
+    }],
+    ref: "activator",
+    staticClass: "menu__activator",
+    on: {
+      "click": function($event) {
+        _vm.isActive = !_vm.isActive
+      }
+    }
+  }, [_vm._t("activator")], 2), _c(_vm.transition, {
+    tag: "component",
+    attrs: {
+      "origin": _vm.origin
+    }
+  }, [_c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.isActive),
+      expression: "isActive"
+    }],
+    ref: "content",
+    staticClass: "menu__content",
+    style: (_vm.styles)
+  }, [_vm._t("default")], 2)])], 1)
+},staticRenderFns: []}
+
+/***/ },
+/* 122 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('i', {
+    staticClass: "material-icons icon",
+    class: _vm.classes
+  }, [_vm._t("default")], 2)
+},staticRenderFns: []}
+
+/***/ },
+/* 123 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "modal__container"
+  }, [(_vm.$slots.activator) ? _c('div', {
+    ref: "activator",
+    staticClass: "modal__activator",
+    on: {
+      "click": function($event) {
+        _vm.isActive = !_vm.isActive
+      }
+    }
+  }, [_vm._t("activator")], 2) : _vm._e(), _c('v-overlay', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.isActive),
+      expression: "isActive"
+    }],
+    class: _vm.overlayClasses,
+    domProps: {
+      "value": (_vm.isActive)
+    },
+    on: {
+      "input": function($event) {
+        _vm.isActive = $event
+      }
+    }
+  }, [_c(_vm.computedTransition, {
+    tag: "component",
+    attrs: {
+      "origin": _vm.computedOrigin
+    }
+  }, [_c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.isActive),
+      expression: "isActive"
+    }, {
+      name: "click-outside",
+      rawName: "v-click-outside",
+      value: (_vm.closeConditional),
+      expression: "closeConditional"
+    }],
+    ref: "modal",
+    staticClass: "modal",
+    class: _vm.classes,
+    attrs: {
+      "id": _vm.id
+    }
+  }, [_vm._t("default")], 2)])], 1)], 1)
+},staticRenderFns: []}
+
+/***/ },
+/* 124 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('nav', {
+    staticClass: "toolbar",
+    class: _vm.classes
+  }, [_vm._t("default")], 2)
+},staticRenderFns: []}
+
+/***/ },
+/* 125 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "progress-circular",
+    class: _vm.classes,
+    style: (_vm.styles)
+  }, [_c('svg', {
+    style: (_vm.svgStyles),
+    attrs: {
+      "xmlns": "http://www.w3.org/2000/svg",
+      "height": _vm.svgSize,
+      "width": _vm.svgSize,
+      "viewBox": _vm.viewBox
+    }
+  }, [(!_vm.indeterminate) ? _c('circle', {
+    staticClass: "progress-circular__underlay",
+    attrs: {
+      "fill": "transparent",
+      "cx": _vm.cxy,
+      "cy": _vm.cxy,
+      "r": _vm.radius,
+      "stroke-width": _vm.width,
+      "stroke-dasharray": _vm.strokeDashArray,
+      "stroke-dashoffset": 0
+    }
+  }) : _vm._e(), _c('circle', {
+    staticClass: "progress-circular__overlay",
+    attrs: {
+      "fill": _vm.fill,
+      "cx": _vm.cxy,
+      "cy": _vm.cxy,
+      "r": _vm.radius,
+      "stroke-width": _vm.width,
+      "stroke-dasharray": _vm.strokeDashArray,
+      "stroke-dashoffset": _vm.strokeDashOffset
+    }
+  })]), _c('div', {
+    staticClass: "progress-circular__info"
+  }, [_vm._t("default")], 2)])
+},staticRenderFns: []}
+
+/***/ },
+/* 126 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.isActive),
+      expression: "isActive"
+    }],
+    staticClass: "alert",
+    class: _vm.classes
+  }, [(!_vm.hideIcon) ? _c('v-icon', {
+    staticClass: "alert__icon"
+  }, [_vm._v(_vm._s(_vm.mdIcon))]) : _vm._e(), _c('div', [_vm._t("default")], 2), (_vm.dismissible) ? _c('a', {
+    staticClass: "alert__dismissible",
+    attrs: {
+      "href": "#!"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.$emit('input', false)
+      }
+    }
+  }, [_c('v-icon', {
+    attrs: {
+      "right": "right"
+    }
+  }, [_vm._v("cancel")])], 1) : _vm._e()], 1)
+},staticRenderFns: []}
+
+/***/ },
+/* 127 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('ul', {
+    staticClass: "pagination",
+    class: _vm.classes
+  }, [_c('li', [_c('a', {
+    staticClass: "pagination__navigation",
+    class: {
+      'pagination__navigation--disabled': _vm.value === 1
+    },
+    attrs: {
+      "href": "#!"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.$emit('input', _vm.value - 1)
+      }
+    }
+  }, [_c('v-icon', [_vm._v("chevron_left")])], 1)]), _vm._l((_vm.items), function(n) {
+    return _c('li', [(!isNaN(n)) ? _c('a', {
+      staticClass: "pagination__item",
+      class: {
+        'pagination__item--active': n === _vm.isActive
+      },
+      attrs: {
+        "href": "#!"
+      },
+      domProps: {
+        "textContent": _vm._s(n)
+      },
+      on: {
+        "click": function($event) {
+          $event.preventDefault();
+          _vm.$emit('input', n)
+        }
+      }
+    }) : _c('span', {
+      staticClass: "pagination__more",
+      domProps: {
+        "textContent": _vm._s(n)
+      }
+    })])
+  }), _c('li', [_c('a', {
+    staticClass: "pagination__navigation",
+    class: {
+      'pagination__navigation--disabled': _vm.value === _vm.length
+    },
+    attrs: {
+      "href": "#!"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.$emit('input', _vm.value + 1)
+      }
+    }
+  }, [_c('v-icon', [_vm._v("chevron_right")])], 1)])], 2)
+},staticRenderFns: []}
+
+/***/ },
+/* 128 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "tabs__tabs",
+    class: _vm.classes
+  }, [_c('ul', {
+    ref: "container",
+    staticClass: "tabs__container"
+  }, [_vm._t("default")], 2), _c('v-icon', {
+    directives: [{
+      name: "ripple",
+      rawName: "v-ripple"
+    }],
+    attrs: {
+      "left": "left"
+    },
+    nativeOn: {
+      "click": function($event) {
+        _vm.scrollLeft($event)
+      }
+    }
+  }, [_vm._v("chevron_left")]), _c('v-icon', {
+    directives: [{
+      name: "ripple",
+      rawName: "v-ripple"
+    }],
+    attrs: {
+      "right": "right"
+    },
+    nativeOn: {
+      "click": function($event) {
+        _vm.scrollRight($event)
+      }
+    }
+  }, [_vm._v("chevron_right")])], 1)
+},staticRenderFns: []}
+
+/***/ },
+/* 129 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "carousel"
+  }, [_c('div', {
+    staticClass: "carousel__left"
+  }, [_c('v-btn', {
+    attrs: {
+      "icon": "icon"
+    },
+    nativeOn: {
+      "click": function($event) {
+        $event.stopPropagation();
+        _vm.prev($event)
+      }
+    }
+  }, [_c('v-icon', [_vm._v("chevron_left")])], 1)], 1), _c('div', {
+    staticClass: "carousel__right"
+  }, [_c('v-btn', {
+    attrs: {
+      "icon": "icon"
+    },
+    nativeOn: {
+      "click": function($event) {
+        $event.stopPropagation();
+        _vm.next($event)
+      }
+    }
+  }, [_c('v-icon', [_vm._v("chevron_right")])], 1)], 1), _c('div', {
+    staticClass: "carousel__controls"
+  }, _vm._l((_vm.items), function(item, index) {
+    return _c('v-btn', {
+      staticClass: "carousel__controls__item",
+      class: {
+        'carousel__controls__item--active': index === _vm.current
+      },
+      attrs: {
+        "icon": "icon"
+      },
+      nativeOn: {
+        "click": function($event) {
+          $event.stopPropagation();
+          _vm.select(index)
+        }
+      }
+    }, [_c('v-icon', [_vm._v(_vm._s(_vm.icon))])], 1)
+  })), _vm._t("default")], 2)
+},staticRenderFns: []}
+
+/***/ },
+/* 130 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('ul', {
+    staticClass: "breadcrumbs",
+    class: _vm.classes,
+    attrs: {
+      "items": _vm.items
+    }
+  }, [_vm._t("default")], 2)
+},staticRenderFns: []}
+
+/***/ },
+/* 131 */,
+/* 132 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "list--group__container"
+  }, [_c('div', {
+    staticClass: "list--group__header",
+    class: _vm.classes,
+    on: {
+      "click": _vm.click
+    }
+  }, [_vm._t("item")], 2), _c('transition', {
+    on: {
+      "enter": _vm.enter,
+      "leave": _vm.leave
+    }
+  }, [_c('ul', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.isActive),
+      expression: "isActive"
+    }],
+    ref: "group",
+    staticClass: "list list--group",
+    style: (_vm.styles)
+  }, [_vm._t("default")], 2)])], 1)
+},staticRenderFns: []}
+
+/***/ },
+/* 133 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('li', [(_vm.$slots.header) ? _c('div', {
+    directives: [{
+      name: "click-outside",
+      rawName: "v-click-outside",
+      value: (_vm.closeConditional),
+      expression: "closeConditional"
+    }, {
+      name: "ripple",
+      rawName: "v-ripple",
+      value: (_vm.ripple),
+      expression: "ripple"
+    }],
+    staticClass: "expansion-panel__header",
+    class: _vm.classes,
+    on: {
+      "click": function($event) {
+        _vm.isActive = !_vm.isActive
+      }
+    }
+  }, [_vm._t("header")], 2) : _vm._e(), _c('transition', {
+    on: {
+      "enter": _vm.enter,
+      "after-enter": _vm.afterEnter,
+      "leave": _vm.leave
+    }
+  }, [_c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.isActive),
+      expression: "isActive"
+    }],
+    ref: "body",
+    staticClass: "expansion-panel__body"
+  }, [_vm._t("default")], 2)])], 1)
+},staticRenderFns: []}
+
+/***/ },
+/* 134 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "parallax",
+    style: ({
+      minHeight: this.normalizedHeight + 'px'
+    })
+  }, [_c('div', {
+    staticClass: "parallax__image-container"
+  }, [_c('img', {
+    ref: "img",
+    staticClass: "parallax__image",
+    style: (_vm.styles),
+    attrs: {
+      "src": _vm.src
+    }
+  }), _vm._t("default")], 2)])
+},staticRenderFns: []}
+
+/***/ },
+/* 135 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c(_vm.computedTransition, {
+    tag: "component"
+  }, [_c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.active),
+      expression: "active"
+    }],
+    staticClass: "carousel__item",
+    class: {
+      'reverse': _vm.reverse
+    },
+    style: (_vm.styles)
+  }, [_vm._t("default")], 2)])
+},staticRenderFns: []}
+
+/***/ },
+/* 136 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "card__row",
+    class: _vm.classes,
+    style: (_vm.styles)
+  }, [_vm._t("default")], 2)
+},staticRenderFns: []}
+
+/***/ },
+/* 137 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "btn-dropdown",
+    class: _vm.classes
+  }, [_c('v-menu', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.isActive),
+      expression: "isActive"
+    }],
+    attrs: {
+      "auto": !_vm.overflow && !_vm.segmented && !_vm.editable,
+      "right": !_vm.overflow && !_vm.segmented && !_vm.editable,
+      "max-height": _vm.maxHeight,
+      "offset-y": _vm.overflow || _vm.segmented || _vm.editable,
+      "bottom": "bottom"
+    },
+    domProps: {
+      "value": (_vm.isActive)
+    },
+    on: {
+      "input": function($event) {
+        _vm.isActive = $event
+      }
+    }
+  }, [_c('v-text-field', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.editableValue),
+      expression: "editableValue"
+    }],
+    ref: "input",
+    attrs: {
+      "type": _vm.editable ? 'text' : 'button',
+      "label": _vm.label,
+      "light": _vm.light && !_vm.dark,
+      "dark": _vm.dark,
+      "single-line": "single-line",
+      "append-icon": "arrow_drop_down"
+    },
+    domProps: {
+      "value": (_vm.editableValue)
+    },
+    on: {
+      "focused": function($event) {
+        _vm.isActive = arguments[0]
+      },
+      "input": function($event) {
+        _vm.editableValue = $event
+      }
+    },
+    nativeOn: {
+      "keyup": function($event) {
+        if (_vm._k($event.keyCode, "enter", 13)) { return; }
+        _vm.updateValue(_vm.editableValue)
+      }
+    },
+    slot: "activator"
+  }), _c('v-list', _vm._l((_vm.options), function(option, index) {
+    return _c('v-list-item', [_c('v-list-tile', {
+      class: {
+        'list__tile--active': _vm.inputValue === option
+      },
+      nativeOn: {
+        "click": function($event) {
+          _vm.updateValue(option)
+        }
+      }
+    }, [(option.action) ? _c('v-list-tile-action', [_c('v-icon', [_vm._v(_vm._s(option.action))])], 1) : _vm._e(), (option.text) ? _c('v-list-tile-content', [_c('v-list-tile-title', [_vm._v(_vm._s(option.text))])], 1) : _vm._e()], 1)], 1)
+  }))], 1)], 1)
+},staticRenderFns: []}
+
+/***/ },
+/* 138 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c(_vm.computedTransition, {
+    tag: "component"
+  }, [_c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.isActive),
+      expression: "isActive"
+    }],
+    staticClass: "tabs__item",
+    attrs: {
+      "id": _vm.id
+    }
+  }, [_vm._t("default")], 2)])
+},staticRenderFns: []}
+
+/***/ },
+/* 139 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_index__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__directives_index__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__util_load__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__functions_toast__ = __webpack_require__(8);
+__webpack_require__(10)
+
+
+
+
+
+
+var defaults = {
+  componentPrefix: 'V',
+  directivePrefix: ''
+}
+
+function plugin (Vue, options) {
+  options = Object.assign(defaults, (options || {}))
+
+  Object.keys(__WEBPACK_IMPORTED_MODULE_1__directives_index__["a" /* default */]).forEach(function (key) {
+    Vue.directive(("" + (options.directivePrefix) + key), __WEBPACK_IMPORTED_MODULE_1__directives_index__["a" /* default */][key])
+  })
+
+  Object.keys(__WEBPACK_IMPORTED_MODULE_0__components_index__["a" /* default */]).forEach(function (key) {
+    Vue.component(("" + (options.componentPrefix) + key), __WEBPACK_IMPORTED_MODULE_0__components_index__["a" /* default */][key])
+  })
+
+  Vue.prototype.$vuetify = {
+    load: __WEBPACK_IMPORTED_MODULE_2__util_load__["a" /* default */],
+    toast: __WEBPACK_IMPORTED_MODULE_3__functions_toast__["a" /* default */]
+  }
+}
+
+if (typeof window !== 'undefined' && window.Vue) {
+  window.Vue.use(plugin)
+}
+
+/* harmony default export */ exports["default"] = plugin;
+
+
+/***/ },
+/* 140 */,
+/* 141 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ exports["a"] = {
+  data: function data () {
+    return {
+      errors: [],
+      focused: false,
+      lazyValue: this.value
+    }
+  },
+
+  props: {
+    appendIcon: String,
+    dark: Boolean,
+    disabled: Boolean,
+    hint: String,
+    persistentHint: Boolean,
+    label: String,
+    lazy: Boolean,
+    light: {
+      type: Boolean,
+      default: true
+    },
+    prependIcon: String,
+    required: Boolean,
+    rules: {
+      type: Array,
+      default: function () { return []; }
+    },
+    value: {
+      required: false
+    }
+  },
+
+  computed: {
+    hasError: function hasError () {
+      return this.errors.length !== 0
+    },
+    inputGroupClasses: function inputGroupClasses () {
+      return Object.assign({}, {
+        'input-group': true,
+        'input-group--focused': this.focused,
+        'input-group--dirty': this.inputValue,
+        'input-group--disabled': this.disabled,
+        'input-group--light': this.light && !this.dark,
+        'input-group--dark': this.dark,
+        'input-group--error': this.hasError || this.errors.length > 0,
+        'input-group--append-icon': this.appendIcon,
+        'input-group--prepend-icon': this.prependIcon,
+        'input-group--required': this.required
+      }, this.classes)
+    }
+  },
+
+  created: function created () {
+    this.validate()
+  },
+
+  methods: {
+    genLabel: function genLabel (h) {
+      return h('label', {}, this.label)
+    },
+    genMessages: function genMessages (h) {
+      var this$1 = this;
+
+      var messages = [this.genHint(h)]
+
+      this.errors.forEach(function (i) {
+        messages.push(this$1.genError(h, i))
+      })
+
+      return h(
+        'transition-group',
+        {
+          'class': {
+            'input-group__messages': true
+          },
+          props: {
+            tag: 'div',
+            name: 'slide-y-transition'
+          }
+        },
+        messages
+      )
+    },
+    genHint: function genHint (h) {
+      return h('div', {
+        'class': {
+          'input-group__hint': true
+        },
+        directives: [
+          {
+            name: 'show',
+            value: (this.persistentHint || (!this.persistentHint && this.focused)) && !this.errors.length
+          }
+        ],
+        key: 'hint'
+      }, this.hint)
+    },
+    genError: function genError (h, error) {
+      return h(
+        'div',
+        {
+          'class': 'input-group__error',
+          key: error
+        },
+        error
+      )
+    },
+    genIcon: function genIcon (h, type) {
+      return h('v-icon', {
+        'class': 'input-group__' + type + '-icon',
+        domProps: {
+          innerText: this[(type + "Icon")]
+        }
+      })
+    },
+    genInputGroup: function genInputGroup (h, input, data) {
+      if ( data === void 0 ) data = {};
+
+      var children = []
+      var wrapperChildren = []
+      var detailsChildren = []
+
+      data = Object.assign(data, {
+        'class': this.inputGroupClasses
+      })
+
+      if (this.label) {
+        children.push(this.genLabel(h))
+      }
+
+      wrapperChildren.push(input)
+
+      if (this.prependIcon) {
+        wrapperChildren.unshift(this.genIcon(h, 'prepend'))
+      }
+
+      if (this.appendIcon) {
+        wrapperChildren.push(this.genIcon(h, 'append'))
+      }
+
+      children.push(
+        h('div', {
+          'class': 'input-group__input'
+        }, wrapperChildren)
+      )
+
+      if (this.errors.length > 0 || this.hint) {
+        detailsChildren.push(this.genMessages(h))
+      }
+
+      if (this.counter) {
+        detailsChildren.push(this.genCounter(h))
+      }
+
+      children.push(
+        h('div', {
+          'class': 'input-group__details'
+        }, detailsChildren)
+      )
+
+      return h('div', data, children)
+    },
+    validate: function validate () {
+      var this$1 = this;
+
+      this.errors = []
+
+      this.rules.forEach(function (rule) {
+        var valid = rule()
+
+        if (valid !== true) {
+          this$1.errors.push(valid)
+        }
+      })
+    }
+  }
+};
+
+
+/***/ },
+/* 142 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_input__ = __webpack_require__(141);
 
 
 /* harmony default export */ exports["a"] = {
@@ -2879,20 +6674,19 @@ var Overlay = {
 
 
 /***/ },
-/* 44 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Slider__ = __webpack_require__(43);
-
-
-/* harmony default export */ exports["a"] = {
-  Slider: __WEBPACK_IMPORTED_MODULE_0__Slider__["a" /* default */]
-};
-
-
-/***/ },
-/* 45 */
+/* 143 */,
+/* 144 */,
+/* 145 */,
+/* 146 */,
+/* 147 */,
+/* 148 */,
+/* 149 */,
+/* 150 */,
+/* 151 */,
+/* 152 */,
+/* 153 */,
+/* 154 */,
+/* 155 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2900,3948 +6694,145 @@ var Overlay = {
 
 
 /* harmony default export */ exports["a"] = {
-  name: 'snackbar',
+  name: 'chip',
 
   mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__["a" /* default */]],
 
   props: {
-    bottom: Boolean,
-    left: Boolean,
-    multiLine: Boolean,
-    right: Boolean,
-    top: Boolean,
-    timeout: {
-      type: Number,
-      default: 6000
+    close: Boolean,
+    contact: String,
+    label: Boolean,
+    outline: Boolean,
+    small: Boolean,
+    value: {
+      type: Boolean,
+      default: true
     }
   },
 
   computed: {
     classes: function classes () {
       return {
-        'snack': true,
-        'snack--bottom': this.bottom || !this.top,
-        'snack--left': this.left,
-        'snack--right': this.right,
-        'snack--top': this.top,
-        'snack--multi-line': this.multiLine
-      }
-    },
-    computedTransition: function computedTransition () {
-      return this.top ? 'v-slide-y-transition' : 'v-slide-y-reverse-transition'
-    }
-  },
-
-  watch: {
-    isActive: function isActive () {
-      var this$1 = this;
-
-      if (this.isActive) {
-        setTimeout(function () { return (this$1.isActive = false); }, this.timeout)
+        'chip': true,
+        'chip--label': this.label,
+        'chip--outline': this.outline,
+        'chip--small': this.small,
+        'chip--removable': this.close
       }
     }
   },
 
   render: function render (h) {
-    var content = h('div', {
-      'class': 'snack__content',
+    var this$1 = this;
+
+    var children = [this.$slots.default]
+    var data = {
+      'class': this.classes,
+      attrs: {
+        tabindex: -1
+      },
       directives: [{
         name: 'show',
         value: this.isActive
       }]
-    }, [this.$slots.default])
+    }
 
-    return h('div', {
-      'class': this.classes
-    }, [h(this.computedTransition, {}, [content])])
+    if (this.contact) {
+      children.unshift(h('img', {
+        domProps: {
+          src: this.contact
+        }
+      }))
+    }
+
+    if (this.close) {
+      var icon = h('v-icon', { props: { right: true }}, 'cancel')
+
+      children.push(h('a', {
+        'class': 'chip__close',
+        domProps: {
+          href: 'javascript:;'
+        },
+        on: {
+          click: function (e) {
+            e.preventDefault()
+
+            this$1.$emit('input', false)
+          }
+        }
+      }, [icon]))
+    }
+
+    return h('span', data, children)
   }
 };
 
 
 /***/ },
-/* 46 */
+/* 156 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Snackbar__ = __webpack_require__(45);
-
-
 /* harmony default export */ exports["a"] = {
-  Snackbar: __WEBPACK_IMPORTED_MODULE_0__Snackbar__["a" /* default */]
-};
-
-
-/***/ },
-/* 47 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-var Subheader = {
-  functional: true,
-
-  render: function render (h, ref) {
-    var data = ref.data;
-    var children = ref.children;
-
-    var listClass = 'subheader'
-
-    if (
-      (data.props && 'inset' in data.props) ||
-      (data.attrs && 'inset' in data.attrs)
-    ) {
-      listClass += ' subheader--inset'
-    }
-
-    data.staticClass = data.staticClass ? (listClass + " " + (data.staticClass)) : listClass
-
-    return h('li', data, children)
-  }
-}
-
-/* harmony default export */ exports["a"] = {
-  Subheader: Subheader
-};
-
-
-/***/ },
-/* 48 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(1);
-
-
-var TableOverflow = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('table__overflow')
-
-/* harmony default export */ exports["a"] = {
-  TableOverflow: TableOverflow
-};
-
-
-/***/ },
-/* 49 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_route_link__ = __webpack_require__(5);
-
-
-
-/* harmony default export */ exports["a"] = {
-  name: 'tab-item',
-
-  mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_route_link__["a" /* default */]],
-
-  data: function data () {
-    return {
-      isActive: false,
-      defaultActiveClass: 'tab__item--active'
-    }
-  },
-
-  props: {
-    activeClass: {
-      type: String,
-      default: 'tab__item--active'
-    }
-  },
+  name: 'stepper',
 
   computed: {
     classes: function classes () {
       return {
-        'tab__item': true,
-        'tab__item--active': this.isActive,
-        'tab__item--disabled': this.disabled
+        'stepper': true
       }
-    },
-
-    target: function target () {
-      return this.href.replace('#', '')
-    },
-
-    tabs: function tabs () {
-      return __WEBPACK_IMPORTED_MODULE_0__util_helpers__["c" /* closestParentTag */].call(this, 'v-tabs')
-    }
-  },
-
-  methods: {
-    click: function click (e) {
-      e.preventDefault()
-
-      this.tabs.tabClick(this.target)
-    },
-
-    toggle: function toggle (target) {
-      this.isActive = this.target === target
     }
   },
 
   render: function render (h) {
-    var ref = this.generateRouteLink();
-    var tag = ref.tag;
-    var data = ref.data;
+    var children = []
+    var steps = []
+    var label = []
 
-    var tab = h(tag, data, [this.$slots.default])
-
-    return h('li', {}, [tab])
-  }
-};
-
-
-/***/ },
-/* 50 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Tabs_vue__ = __webpack_require__(104);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Tabs_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Tabs_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__TabItem__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__TabContent_vue__ = __webpack_require__(103);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__TabContent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__TabContent_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__TabsTabs_vue__ = __webpack_require__(105);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__TabsTabs_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__TabsTabs_vue__);
-
-
-
-
-
-
-var TabsSlider = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('tabs__slider')
-
-var TabsItems = {
-  render: function render (h) {
     var data = {
-      'class': {
-        'tabs__items': true
+      'class': this.classes
+    }
+
+    for (var i = 0; i < 3; i++) {
+      steps.push(h('div', { 'class': 'stepper__step' }, [
+        h('span', {}, i)
+      ]))
+
+      if (i !== 2) {
+        steps.push(h('v-divider'))
       }
     }
 
-    return h('div', data, [this.$slots.default])
+    for (var i$1 = 0; i$1 < 3; i$1++) {
+      label.push(h('div', {}, ("Label " + i$1)))
+    }
+
+    var labels = h('div', {
+      'class': 'stepper__labels'
+    }, label)
+
+    var header = h('div', {
+      'class': 'stepper__header'
+    }, [steps, labels])
+
+    children.push(header)
+
+    return h('div', data, children)
   }
-}
+};
+
+
+/***/ },
+/* 157 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Stepper__ = __webpack_require__(156);
+
 
 /* harmony default export */ exports["a"] = {
-  TabItem: __WEBPACK_IMPORTED_MODULE_2__TabItem__["a" /* default */],
-  TabsItems: TabsItems,
-  Tabs: __WEBPACK_IMPORTED_MODULE_1__Tabs_vue___default.a,
-  TabContent: __WEBPACK_IMPORTED_MODULE_3__TabContent_vue___default.a,
-  TabsTabs: __WEBPACK_IMPORTED_MODULE_4__TabsTabs_vue___default.a,
-  TabsSlider: TabsSlider
+  Stepper: __WEBPACK_IMPORTED_MODULE_0__Stepper__["a" /* default */]
 };
-
-
-/***/ },
-/* 51 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_route_link__ = __webpack_require__(5);
-
-
-
-/* harmony default export */ exports["a"] = {
-  name: 'toolbar-item',
-
-  mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_route_link__["a" /* default */]],
-
-  props: {
-    activeClass: {
-      type: String,
-      default: 'toolbar__item--active'
-    }
-  },
-
-  computed: {
-    classes: function classes () {
-      return {
-        'toolbar__item': true,
-        'toolbar__item--disabled': this.disabled
-      }
-    },
-
-    listUID: function listUID () {
-      return __WEBPACK_IMPORTED_MODULE_0__util_helpers__["c" /* closestParentTag */].call(this, 'v-list')
-    }
-  },
-
-  methods: {
-    click: function click () {
-      //
-    }
-  },
-
-  render: function render (h) {
-    var ref = this.generateRouteLink();
-    var tag = ref.tag;
-    var data = ref.data;
-
-    var item = h(tag, data, [this.$slots.default])
-
-    return h('li', {}, [item])
-  }
-};
-
-
-/***/ },
-/* 52 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Toolbar_vue__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Toolbar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Toolbar_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ToolbarItem__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__util_helpers__ = __webpack_require__(1);
-
-
-
-
-
-var ToolbarLogo = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers__["b" /* createSimpleFunctional */])('toolbar__logo')
-var ToolbarTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers__["b" /* createSimpleFunctional */])('toolbar__title')
-var ToolbarSub = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers__["b" /* createSimpleFunctional */])('toolbar__sub')
-var ToolbarItems = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers__["b" /* createSimpleFunctional */])('toolbar__items', 'ul')
-var ToolbarSideIcon = {
-  functional: true,
-
-  render: function render (h, ref) {
-    var data = ref.data;
-    var children = ref.children;
-
-    data.staticClass = data.staticClass ? ("toolbar__side-icon " + (data.staticClass)) : 'toolbar__side-icon'
-    data.props = {
-      icon: true,
-      dark: true
-    }
-
-    return h('v-btn', data, [h('v-icon', 'menu')])
-  }
-}
-
-/* harmony default export */ exports["a"] = {
-  Toolbar: __WEBPACK_IMPORTED_MODULE_0__Toolbar_vue___default.a,
-  ToolbarItem: __WEBPACK_IMPORTED_MODULE_1__ToolbarItem__["a" /* default */],
-  ToolbarItems: ToolbarItems,
-  ToolbarLogo: ToolbarLogo,
-  ToolbarTitle: ToolbarTitle,
-  ToolbarSideIcon: ToolbarSideIcon,
-  ToolbarSub: ToolbarSub
-};
-
-
-/***/ },
-/* 53 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(1);
-
-
-var SlideXTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('slide-x-transition')
-var SlideYTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('slide-y-transition')
-var SlideYReverseTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('slide-y-reverse-transition')
-var ScaleTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('scale-transition')
-var TabTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('tab-transition')
-var TabReverseTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('tab-reverse-transition')
-var CarouselTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('carousel-transition')
-var CarouselReverseTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('carousel-reverse-transition')
-var ModalTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('modal-transition')
-var ModalBottomTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('modal-bottom-transition')
-var FadeTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('fade-transition')
-var MenuTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('menu-transition')
-
-/* harmony default export */ exports["a"] = {
-  SlideXTransition: SlideXTransition,
-  SlideYTransition: SlideYTransition,
-  SlideYReverseTransition: SlideYReverseTransition,
-  ScaleTransition: ScaleTransition,
-  FadeTransition: FadeTransition,
-  TabTransition: TabTransition,
-  TabReverseTransition: TabReverseTransition,
-  ModalTransition: ModalTransition,
-  ModalBottomTransition: ModalBottomTransition,
-  MenuTransition: MenuTransition,
-  CarouselTransition: CarouselTransition,
-  CarouselReverseTransition: CarouselReverseTransition
-};
-
-
-/***/ },
-/* 54 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(1);
-
-
-function directive (el, binding) {
-  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* directiveConfig */])(
-    binding,
-    {
-      icon: false,
-      left: false,
-      overlap: false
-    }
-  )
-
-  if (config.overlap) { el.classList.add('badge--overlap') }
-  if (config.icon) { el.classList.add('badge--icon') }
-  if (config.left) { el.classList.add('badge--left') }
-
-  el.dataset.badge = config.value
-  el.classList.add('badge')
-}
-
-/* harmony default export */ exports["a"] = {
-  bind: directive,
-  updated: directive,
-  componentUpdated: directive,
-  unbind: function (el) {
-    el.removeAttribute('data-badge')
-    el.classList.remove('badge')
-  }
-};
-
-
-/***/ },
-/* 55 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-function directive (e, el, binding, v) {
-  var cb = function () { return true; }
-
-  if (binding.value) {
-    cb = binding.value
-  }
-  if ((e && e.target) &&
-    (e.target !== el && !el.contains(e.target)) &&
-    cb(e)
-  ) {
-    v.context.isActive = false
-  }
-}
-
-/* harmony default export */ exports["a"] = {
-  bind: function bind (el, binding, v) {
-    v.context.$vuetify.load(function () {
-      var click = function (e) { return directive(e, el, binding, v); }
-      document.querySelector('[data-app]').addEventListener('click', click, false)
-      el._clickOutside = click
-    })
-  },
-
-  unbind: function unbind (el) {
-    document.querySelector('[data-app]').removeEventListener('click', el._clickOutside, false)
-  }
-};
-
-
-/***/ },
-/* 56 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-function style (el, value) {
-  [
-    'transform',
-    'webkitTransform'
-  ].forEach(function (i) {
-    el.style[i] = value
-  })
-}
-
-var ripple = {
-  show: function (e, el, ref) {
-    var value = ref.value; if ( value === void 0 ) value = {};
-
-    var container = document.createElement('span')
-    var animation = document.createElement('span')
-
-    container.appendChild(animation)
-    container.className = 'ripple__container'
-
-    if (value.class) {
-      container.classList.add(value.class)
-    }
-
-    var size = el.clientWidth > el.clientHeight ? el.clientWidth : el.clientHeight
-    animation.className = 'ripple__animation'
-    animation.style.width = (size * (value.center ? 1 : 2)) + "px"
-    animation.style.height = animation.style.width
-
-    el.appendChild(container)
-
-    var offset = el.getBoundingClientRect()
-    var x = value.center ? '50%' : ((e.clientX - offset.left) + "px")
-    var y = value.center ? '50%' : ((e.clientY - offset.top) + "px")
-
-    animation.classList.add('ripple__animation--enter')
-    animation.classList.add('ripple__animation--visible')
-    style(animation, ("translate(-50%, -50%) translate(" + x + ", " + y + ") scale3d(0.01,0.01,0.01)"))
-    animation.dataset.activated = Date.now()
-
-    setTimeout(function () {
-      animation.classList.remove('ripple__animation--enter')
-      style(animation, ("translate(-50%, -50%) translate(" + x + ", " + y + ")  scale3d(0.99,0.99,0.99)"))
-    }, 0)
-  },
-
-  hide: function (el) {
-    var ripples = el.getElementsByClassName('ripple__animation')
-
-    if (ripples.length === 0) { return }
-    var animation = ripples[ripples.length - 1]
-    var diff = Date.now() - Number(animation.dataset.activated)
-    var delay = 400 - diff
-
-    delay = delay < 0 ? 0 : delay
-
-    setTimeout(function () {
-      animation.classList.remove('ripple__animation--visible')
-
-      setTimeout(function () {
-        animation.parentNode.remove()
-      }, 300)
-    }, delay)
-  }
-}
-
-function directive (el, binding, v) {
-  if (binding.value === false) { return }
-
-  if ('ontouchstart' in window) {
-    el.addEventListener('touchend', function () { return ripple.hide(el); }, false)
-    el.addEventListener('touchcancel', function () { return ripple.hide(el); }, false)
-  }
-
-  el.addEventListener('mousedown', function (e) { return ripple.show(e, el, binding); }, false)
-  el.addEventListener('mouseup', function () { return ripple.hide(el); }, false)
-  el.addEventListener('mouseleave', function () { return ripple.hide(el); }, false)
-}
-
-function unbind (el, binding) {
-  el.removeEventListener('touchstart', function (e) { return ripple.show(e, el, binding); }, false)
-  el.removeEventListener('mousedown', function (e) { return ripple.show(e, el, binding); }, false)
-  el.removeEventListener('touchend', function () { return ripple.hide(el); }, false)
-  el.removeEventListener('touchcancel', function () { return ripple.hide(el); }, false)
-  el.removeEventListener('mouseup', function () { return ripple.hide(el); }, false)
-  el.removeEventListener('mouseleave', function () { return ripple.hide(el); }, false)
-}
-
-/* harmony default export */ exports["a"] = {
-  bind: directive,
-  unbind: unbind
-};
-
-
-/***/ },
-/* 57 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(1);
-
-
-function directive (el, binding) {
-  var config = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* directiveConfig */])(
-    binding,
-    { top: true }
-  )
-
-  unbind(el, binding, config)
-
-  el.dataset.tooltip = config.html
-  el.dataset['tooltipLocation'] = config.value
-}
-
-function unbind (el) {
-  el.removeAttribute('data-tooltip')
-  el.removeAttribute('data-tooltip-location')
-}
-
-/* harmony default export */ exports["a"] = {
-  bind: directive,
-  updated: directive,
-  componentUpdated: directive,
-  unbind: unbind
-};
-
-
-/***/ },
-/* 58 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony default export */ exports["a"] = {
-  data: function data () {
-    return {
-      parallax: null,
-      parallaxDist: null,
-      elOffsetTop: null,
-      percentScrolled: null,
-      scrollTop: null,
-      windowHeight: null,
-      windowBottom: null
-    }
-  },
-
-  computed: {
-    normalizedHeight: function normalizedHeight () {
-      return Number(this.height.toString().replace(/(^[0-9]*$)/, '$1'))
-    },
-
-    imgHeight: function imgHeight () {
-      return this.objHeight()
-    }
-  },
-
-  mounted: function mounted () {
-    this.$vuetify.load(this.init)
-  },
-
-  beforeDestroy: function beforeDestroy () {
-    document.removeEventListener('scroll', this.translate, false)
-    document.removeEventListener('resize', this.translate, false)
-  },
-
-  methods: {
-    listeners: function listeners () {
-      document.addEventListener('scroll', this.translate, false)
-      document.addEventListener('resize', this.translate, false)
-    },
-
-    translate: function translate () {
-      this.calcDimensions()
-
-      this.percentScrolled = (
-        (this.windowBottom - this.elOffsetTop) / (this.normalizedHeight + this.windowHeight)
-      )
-
-      this.parallax = Math.round(this.parallaxDist * this.percentScrolled)
-
-      if (this.translated) {
-        this.translated()
-      }
-    },
-
-    calcDimensions: function calcDimensions () {
-      var offset = this.$el.getBoundingClientRect()
-
-      this.scrollTop = window.pageYOffset
-      this.parallaxDist = this.imgHeight - this.normalizedHeight
-      this.elOffsetTop = offset.top + this.scrollTop
-      this.windowHeight = window.innerHeight
-      this.windowBottom = this.scrollTop + this.windowHeight
-    }
-  }
-};
-
-
-/***/ },
-/* 59 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__ = __webpack_require__(2);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ exports["default"] = {
-  name: 'alert',
-
-  data: function data () {
-    return {
-      isActive: this.value
-    }
-  },
-
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__["a" /* default */]],
-
-  props: {
-    dismissible: Boolean,
-
-    error: Boolean,
-
-    hideIcon: Boolean,
-
-    icon: String,
-
-    info: Boolean,
-
-    success: Boolean,
-
-    warning: Boolean
-  },
-
-  computed: {
-    classes: function classes () {
-      return {
-        'alert--dismissible': this.dismissible,
-        'alert--error': this.error,
-        'alert--info': this.info,
-        'alert--success': this.success,
-        'alert--warning': this.warning
-      }
-    },
-
-    mdIcon: function mdIcon () {
-      if (this.icon) {
-        return this.icon
-      }
-
-      switch (true) {
-        case this.error:
-          return 'warning'
-        case this.info:
-          return 'info'
-        case this.success:
-          return 'check_circle'
-        case this.warning:
-          return 'priority_high'
-      }
-    }
-  }
-};
-
-
-/***/ },
-/* 60 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ exports["default"] = {
-  props: {
-    footer: Boolean,
-
-    leftFixedSidebar: Boolean,
-
-    leftSidebar: Boolean,
-
-    id: {
-      type: String,
-      default: 'app'
-    },
-
-    rightFixedSidebar: Boolean,
-
-    rightSidebar: Boolean,
-
-    topFixedToolbar: Boolean,
-
-    topToolbar: Boolean,
-
-    sidebarUnderToolbar: Boolean
-  },
-
-  computed: {
-    classes: function classes () {
-      return {
-        'left-fixed-sidebar': this.leftFixedSidebar,
-        'left-sidebar': this.leftSidebar,
-        'bottom-footer': this.footer,
-        'right-fixed-sidebar': this.rightFixedSidebar,
-        'right-sidebar': this.rightSidebar,
-        'top-fixed-toolbar': this.topFixedToolbar,
-        'top-toolbar': this.topToolbar,
-        'sidebar-under-toolbar': this.sidebarUnderToolbar
-      }
-    }
-  }
-};
-
-
-/***/ },
-/* 61 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ exports["default"] = {
-  name: 'breadcrumbs',
-
-  props: {
-    divider: {
-      type: String,
-      default: '/'
-    },
-
-    icons: Boolean
-  },
-
-  computed: {
-    classes: function classes () {
-      return {
-        'breadcrumbs--with-icons': this.icons
-      }
-    }
-  },
-
-  mounted: function mounted () {
-    this.$vuetify.load(this.init)
-  },
-
-  methods: {
-    init: function init () {
-      var this$1 = this;
-
-      this.$children.forEach(function (i) { return (i.$el.dataset.divider = this$1.divider); })
-    }
-  }
-};
-
-
-/***/ },
-/* 62 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ exports["default"] = {
-  name: 'breadcrumbs-item',
-
-  props: {
-    disabled: Boolean,
-
-    href: {
-      type: String,
-      default: 'javascript:;'
-    },
-
-    target: String
-  },
-
-  computed: {
-    classes: function classes () {
-      return {
-        'breadcrumbs__item--disabled': this.disabled
-      }
-    }
-  }
-};
-
-
-/***/ },
-/* 63 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_contextualable__ = __webpack_require__(4);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ exports["default"] = {
-  name: 'button',
-
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_contextualable__["a" /* default */]],
-
-  props: {
-    block: Boolean,
-    dark: Boolean,
-    default: Boolean,
-    flat: Boolean,
-    floating: Boolean,
-    icon: Boolean,
-    large: Boolean,
-    light: Boolean,
-    loading: Boolean,
-    outline: Boolean,
-    progress: Boolean,
-    raised: {
-      type: Boolean,
-      default: true
-    },
-    ripple: {
-      type: [Boolean, Object],
-      default: true
-    },
-    round: Boolean,
-    small: Boolean,
-    type: {
-      type: String,
-      default: 'button'
-    }
-  },
-
-  computed: {
-    classes: function classes () {
-      return {
-        'btn': true,
-        'btn--block': this.block,
-        'btn--dark': this.dark,
-        'btn--default': this.default,
-        'btn--flat': this.flat,
-        'btn--floating': this.floating,
-        'btn--icon': this.icon,
-        'btn--large': this.large,
-        'btn--light': this.light && !this.dark,
-        'btn--loader': this.loading,
-        'btn--outline': this.outline,
-        'btn--raised': this.raised,
-        'btn--round': this.round,
-        'btn--small': this.small,
-        'primary': this.primary && !this.outline,
-        'secondary': this.secondary && !this.outline,
-        'success': this.success && !this.outline,
-        'info': this.info && !this.outline,
-        'warning': this.warning && !this.outline,
-        'error': this.error && !this.outline,
-        'primary--text': this.primary && this.outline,
-        'secondary--text': this.secondary && this.outline,
-        'success--text': this.success && this.outline,
-        'info--text': this.info && this.outline,
-        'warning--text': this.warning && this.outline,
-        'error--text': this.error && this.outline
-      }
-    }
-  }
-};
-
-
-/***/ },
-/* 64 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ exports["default"] = {
-  name: 'button-dropdown',
-
-  data: function data () {
-    return {
-      isActive: false,
-      inputValue: this.value,
-      editableValue: null
-    }
-  },
-
-  props: {
-    dark: Boolean,
-    editable: Boolean,
-    light: {
-      type: Boolean,
-      default: true
-    },
-    options: {
-      type: Array,
-      default: function () { return []; }
-    },
-    maxHeight: {
-      type: [String, Number],
-      default: 200
-    },
-    overflow: Boolean,
-    label: {
-      type: String,
-      default: 'Select'
-    },
-    segmented: Boolean,
-    value: {
-      required: false
-    }
-  },
-
-  computed: {
-    classes: function classes () {
-      return {
-        'btn-dropdown--editable': this.editable,
-        'btn-dropdown--overflow': this.overflow || this.segmented || this.editable,
-        'btn-dropdown--segmented': this.segmented,
-        'btn-dropdown--light': this.light && !this.dark,
-        'btn-dropdown--dark': this.dark
-      }
-    },
-
-    computedItems: function computedItems () {
-      var this$1 = this;
-
-      if (this.editable) {
-        return this.options
-      }
-
-      if (this.index !== -1 &&
-        (this.overflow || this.segmented)
-      ) {
-        return this.options.filter(function (obj, i) { return i !== this$1.index; })
-      }
-
-      return this.options
-    },
-
-    index: function index () {
-      var this$1 = this;
-
-      return this.options.findIndex(function (i) { return i === this$1.inputValue; })
-    }
-  },
-
-  mounted: function mounted () {
-    if (this.inputValue) {
-      this.editableValue = this.inputValue.text
-    } 
-  },
-
-  watch: {
-    isActive: function isActive () {
-      if (this.editable) {
-        if (!this.isActive) {
-          this.$refs.input.$el.querySelector('input').blur()
-        }
-      }
-    },
-
-    inputValue: function inputValue () {
-      this.$emit('input', this.inputValue)
-    },
-
-    value: function value () {
-      if (typeof this.value === 'string') {
-        return (this.inputValue = { title: this.value })
-      }
-
-      this.inputValue = this.value
-    }
-  },
-
-  methods: {
-    toggle: function toggle (active) {
-      this.isActive = active
-    },
-
-    updateValue: function updateValue (obj) {
-      if (typeof obj === 'string') {
-        obj = { text: obj }
-      }
-
-      this.inputValue = obj
-      this.editableValue = obj.text || obj.action
-      this.isActive = false
-    }
-  }
-};
-
-
-/***/ },
-/* 65 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ exports["default"] = {
-  name: 'button-toggle',
-
-  data: function data () {
-    return {
-      inputValue: this.value
-    }
-  },
-
-  props: {
-    options: {
-      type: Array,
-      default: function () { return []; }
-    },
-
-    multiple: Boolean,
-
-    value: {
-      required: false
-    }
-  },
-
-  computed: {
-    classes: function classes () {
-      return {
-        'btn-toggle--selected': this.inputValue && !this.multiple || this.inputValue && this.inputValue.length > 0
-      }
-    }
-  },
-
-  watch: {
-    value: function value () {
-      this.inputValue = this.value
-    }
-  },
-
-  methods: {
-    isSelected: function isSelected (item) {
-      if (!this.multiple) {
-        return this.inputValue === item.value
-      }
-
-      return this.inputValue.includes(item.value)
-    },
-
-    updateValue: function updateValue (item) {
-      if (!this.multiple) {
-        return this.$emit('input', this.inputValue === item.value ? null : item.value)
-      }
-
-      var items = this.inputValue
-
-      var i = items.indexOf(item.value)
-      if (i !== -1) {
-        items.splice(i, 1)
-      } else {
-        items.push(item.value)
-      }
-
-      this.$emit('input', items)
-    }
-  }
-};
-
-
-/***/ },
-/* 66 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ exports["default"] = {
-  name: 'card',
-
-  props: {
-    height: {
-      type: String,
-      default: 'auto'
-    },
-
-    horizontal: Boolean,
-
-    img: String
-  },
-
-  computed: {
-    classes: function classes () {
-      return {
-        'card--horizontal': this.horizontal
-      }
-    },
-
-    styles: function styles () {
-      var styles = {
-        height: this.height
-      }
-
-      if (this.img) {
-        styles.background = "url(" + (this.img) + ") center center / cover no-repeat"
-      }
-
-      return styles
-    }
-  }
-};
-
-
-/***/ },
-/* 67 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ exports["default"] = {
-  name: 'card-row',
-
-  props: {
-    actions: Boolean,
-
-    height: {
-      type: String,
-      default: 'auto'
-    },
-
-    img: String
-  },
-
-  computed: {
-    classes: function classes () {
-      return {
-        'card__row--actions': this.actions
-      }
-    },
-
-    styles: function styles () {
-      var styles = {
-        height: this.height
-      }
-
-      if (this.img) {
-        styles.background = "url(" + (this.img) + ") center center / cover no-repeat"
-      }
-
-      return styles
-    }
-  }
-};
-
-
-/***/ },
-/* 68 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ exports["default"] = {
-  name: 'carousel',
-
-  data: function data () {
-    return {
-      current: null,
-      items: [],
-      slideInterval: {},
-      reverse: false
-    }
-  },
-
-  props: {
-    cycle: {
-      type: Boolean,
-      default: true
-    },
-
-    icon: {
-      type: String,
-      default: 'fiber_manual_record'
-    },
-
-    interval: {
-      type: Number,
-      default: 6000
-    }
-  },
-
-  computed: {
-    defaultState: function defaultState () {
-      return {
-        current: null,
-        reverse: false
-      }
-    }
-  },
-
-  watch: {
-    current: function current () {
-      var this$1 = this;
-
-      // Evaluate items when current changes to account for
-      // dynamic changing of children
-      this.items = this.$children.filter(function (i) {
-        return i.$el.classList && i.$el.classList.contains('carousel__item')
-      })
-
-      this.items.forEach(function (i) { return i.open(this$1.items[this$1.current]._uid, this$1.reverse); })
-
-      if (this.cycle) {
-        clearInterval(this.slideInterval)
-        this.startInterval()
-      }
-    }
-  },
-
-  mounted: function mounted () {
-    this.init()
-  },
-
-  methods: {
-    init: function init () {
-      this.current = 0
-    },
-
-    next: function next () {
-      this.reverse = false
-
-      if (this.current + 1 === this.items.length) {
-        return (this.current = 0)
-      }
-
-      this.current++
-    },
-
-    prev: function prev () {
-      this.reverse = true
-
-      if (this.current - 1 < 0) {
-        return (this.current = this.items.length - 1)
-      }
-
-      this.current--
-    },
-
-    select: function select (index) {
-      this.reverse = index < this.current
-      this.current = index
-    },
-
-    startInterval: function startInterval () {
-      this.slideInterval = setInterval(this.next, this.interval)
-    }
-  }
-};
-
-
-/***/ },
-/* 69 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ exports["default"] = {
-  name: 'carousel-item',
-
-  data: function data () {
-    return {
-      active: false,
-      reverse: false
-    }
-  },
-
-  props: {
-    src: {
-      type: String,
-      required: true
-    },
-
-    transition: {
-      type: String,
-      default: 'v-tab-transition'
-    },
-
-    reverseTransition: {
-      type: String,
-      default: 'v-tab-reverse-transition'
-    }
-  },
-
-  computed: {
-    computedTransition: function computedTransition () {
-      return this.reverse ? this.reverseTransition : this.transition
-    },
-
-    styles: function styles () {
-      return {
-        backgroundImage: ("url(" + (this.src) + ")")
-      }
-    }
-  },
-
-  methods: {
-    open: function open (id, reverse) {
-      this.active = this._uid === id
-      this.reverse = reverse
-    }
-  }
-};
-
-
-/***/ },
-/* 70 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ exports["default"] = {
-  name: 'expansion-panel',
-
-  props: {
-    expand: Boolean
-  },
-
-  computed: {
-    params: function params () {
-      return {
-        expand: this.expand
-      }
-    }
-  }
-};
-
-
-/***/ },
-/* 71 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__util_helpers__ = __webpack_require__(1);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-/* harmony default export */ exports["default"] = {
-  name: 'expansion-panel-content',
-
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__["a" /* default */]],
-
-  data: function data () {
-    return {
-      height: 'auto'
-    }
-  },
-
-  props: {
-    ripple: Boolean
-  },
-
-  computed: {
-    classes: function classes () {
-      return {
-        'expansion-panel__header--active': this.isActive
-      }
-    }
-  },
-
-  mounted: function mounted () {
-    var this$1 = this;
-
-    // TODO: This is temporary, replace
-    if (this.value) {
-      this.$vuetify.load(function () {
-        setTimeout(function () {
-          this$1.$refs.body.style.height = (this$1.$refs.body.clientHeight) + "px"
-        }, 1000)
-      })
-    }
-  },
-
-  methods: {
-    afterEnter: function afterEnter (el) {
-      el.style.height = 'auto'
-    },
-
-    closeConditional: function closeConditional (e) {
-      return this.$parent.$el.contains(e.target) && 
-        !this.$parent.expand &&
-        !this.$el.contains(e.target)
-    },
-
-    enter: function enter (el, done) {
-      el.style.height = null
-      el.style.display = 'block'
-      var height = (el.clientHeight) + "px"
-      el.style.height = 0
-
-      setTimeout(function () {
-        el.style.height = height
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["d" /* addOnceEventListener */])(el, 'transitionend', done)
-      }, 50)
-    },
-
-    leave: function leave (el, done) {
-      el.style.height = (el.clientHeight) + "px"
-      
-      setTimeout(function () { return el.style.height = 0; }, 0)
-
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["d" /* addOnceEventListener */])(el, 'transitionend', done)
-    },
-
-    toggle: function toggle () {
-      this.isActive = !this.isActive
-    }
-  }
-};
-
-
-/***/ },
-/* 72 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ exports["default"] = {
-  name: 'icon',
-
-  props: {
-    large: Boolean,
-
-    left: Boolean,
-
-    medium: Boolean,
-
-    right: Boolean,
-
-    xLarge: Boolean
-  },
-
-  computed: {
-    classes: function classes () {
-      return {
-        'icon--large': this.large,
-        'icon--left': this.left,
-        'icon--medium': this.medium,
-        'icon--right': this.right,
-        'icon--x-large': this.xLarge
-      }
-    }
-  }
-};
-
-
-/***/ },
-/* 73 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_toggleable__ = __webpack_require__(2);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-/* harmony default export */ exports["default"] = {
-  name: 'list-group',
-
-  mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_toggleable__["a" /* default */]],
-
-  data: function data () {
-    return {
-      height: 0
-    }
-  },
-
-  props: {
-    group: String,
-    noAction: Boolean
-  },
-
-  computed: {
-    classes: function classes () {
-      return {
-        'list--group__header--active': this.isActive,
-        'list--group__header--no-action': this.noAction
-      }
-    },
-
-    list: function list () {
-      return __WEBPACK_IMPORTED_MODULE_0__util_helpers__["c" /* closestParentTag */].call(this, 'v-list')
-    },
-
-    styles: function styles () {
-      return {
-        height: ((this.height) + "px")
-      }
-    }
-  },
-
-  watch: {
-    isActive: function isActive () {
-      this.$emit('input', this.isActive)
-
-      if (!this.isActive) {
-        this.list.listClose(this._uid)
-      }
-    },
-
-    '$route': function $route (to) {
-      if (this.group) {
-        this.isActive = this.matchRoute(to.path)
-      }
-    }
-  },
-
-  mounted: function mounted () {
-    if (this.group) {
-      this.isActive = this.matchRoute(this.$route.path)
-    }
-
-    if (this.isActive) {
-      this.list.listClick(this._uid)
-    }
-
-    this.height = this.$refs.group.scrollHeight
-  },
-
-  methods: {
-    click: function click () {
-      this.list.listClick(this._uid)
-    },
-
-    toggle: function toggle (uid) {
-      this.isActive = this._uid === uid
-    },
-
-    enter: function enter (el, done) {
-      var this$1 = this;
-
-      el.style.display = 'block'
-      var scrollHeight = el.scrollHeight
-      this.height = 0
-
-      setTimeout(function () { return (this$1.height = scrollHeight); }, 50)
-
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* addOnceEventListener */])(el, 'transitionend', done)
-    },
-
-    leave: function leave (el, done) {
-      this.height = 0
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* addOnceEventListener */])(el, 'transitionend', done)
-    },
-
-    matchRoute: function matchRoute (to) {
-      return to.match(this.group) !== null
-    }
-  }
-};
-
-
-/***/ },
-/* 74 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__ = __webpack_require__(2);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ exports["default"] = {
-  name: 'modal',
-
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__["a" /* default */]],
-
-  props: {
-    bottom: Boolean,
-    origin: {
-      type: String,
-      default: 'center center'
-    },
-    persistent: Boolean,
-    transition: {
-      type: String,
-      default: 'v-modal-transition'
-    }
-  },
-
-  computed: {
-    classes: function classes () {
-      return {
-        'modal--active': this.isActive,
-        'modal--bottom': this.bottom
-      }
-    },
-
-    computedOrigin: function computedOrigin () {
-      if (this.origin !== 'center center') {
-        return this.origin
-      }
-
-      return this.bottom ? 'bottom' : this.origin
-    },
-
-    computedTransition: function computedTransition () {
-      if (this.transition !== 'v-modal-transition') {
-        return this.transition
-      }
-
-      return this.bottom ? 'v-slide-y-reverse-transition' : this.transition
-    },
-
-    overlayClasses: function overlayClasses () {
-      return {
-        'overlay--modal-bottom': this.bottom
-      }
-    }
-  },
-
-  methods: {
-    closeConditional: function closeConditional (e) {
-      if (this.persistent) {
-        return false
-      }
-
-      return this.$refs.modal !== e.target &&
-        !this.$refs.modal.contains(e.target) && 
-        (!this.$refs.activator || this.$refs.activator &&
-          !this.$refs.activator.contains(e.target) &&
-          this.$refs.activator !== e.target)
-    }
-  }
-};
-
-
-/***/ },
-/* 75 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__ = __webpack_require__(2);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ exports["default"] = {
-  name: 'pagination',
-
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__["a" /* default */]],
-
-  props: {
-    circle: Boolean,
-
-    disabled: Boolean,
-
-    length: {
-      type: Number,
-      default: 0
-    },
-
-    value: {
-      type: Number,
-      default: 0
-    }
-  },
-
-  watch: {
-    value: function value () {
-      this.init()
-    }
-  },
-
-  computed: {
-    classes: function classes () {
-      return {
-        'pagination--circle': this.circle,
-        'pagination--disabled': this.disabled
-      }
-    },
-
-    items: function items () {
-      if (this.length <= 5) {
-        return this.range(1, this.length)
-      }
-
-      var min = this.value - 3
-      min = min > 0 ? min : 1
-
-      var max = min + 6
-      max = max <= this.length ? max : this.length
-
-      if (max === this.length) {
-        min = this.length - 6
-      }
-
-      var range = this.range(min, max)
-
-      if (this.value >= 4 && this.length > 6) {
-        range.splice(0, 2, 1, '...')
-      }
-
-      if (this.value + 3 < this.length && this.length > 6) {
-        range.splice(range.length - 2, 2, '...', this.length)
-      }
-
-      return range
-    }
-  },
-
-  mounted: function mounted () {
-    this.$vuetify.load.call(this, this.init)
-  },
-
-  methods: {
-    init: function init () {
-      var this$1 = this;
-
-      this.selected = null
-
-      // Change this
-      setTimeout(function () { return (this$1.selected = this$1.value); }, 100)
-    },
-
-    range: function range (from, to) {
-      var range = []
-
-      from = from > 0 ? from : 1
-
-      for (var i = from; i <= to; i++) {
-        range.push(i)
-      }
-
-      return range
-    }
-  }
-};
-
-
-/***/ },
-/* 76 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_translatable__ = __webpack_require__(58);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ exports["default"] = {
-  name: 'parallax',
-
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_translatable__["a" /* default */]],
-
-  props: {
-    height: {
-      type: [String, Number],
-      default: 500
-    },
-
-    src: {
-      type: String,
-      required: true
-    }
-  },
-
-  computed: {
-    styles: function styles () {
-      return {
-        display: 'block',
-        transform: ("translate3d(-50%, " + (this.parallax) + "px, 0)")
-      }
-    }
-  },
-
-  methods: {
-    init: function init () {
-      var this$1 = this;
-
-      if (this.$refs.img.complete) {
-        this.translate()
-        this.listeners()
-      }
-
-      this.$refs.img.addEventListener('load', function () {
-        this$1.translate()
-        this$1.listeners()
-      }, false)
-    },
-
-    objHeight: function objHeight () {
-      return this.$refs.img.naturalHeight
-    },
-
-    elOffsetTop: function elOffsetTop () {
-      return this.$el.offsetTop
-    }
-  }
-};
-
-
-/***/ },
-/* 77 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-
-var this$1 = this;
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ exports["default"] = {
-  name: 'progress-circular',
-
-  props: {
-    button: Boolean,
-
-    fill: {
-      type: [Boolean, String],
-      default: function () { return this$1.indeterminate ? 'none' : 'transparent'; }
-    },
-
-    indeterminate: Boolean,
-
-    rotate: {
-      type: Number,
-      default: 0
-    },
-
-    size: {
-      type: [Number, String],
-      default: 32
-    },
-
-    width: {
-      type: Number,
-      default: 4
-    },
-
-    value: {
-      type: Number,
-      default: 0
-    }
-  },
-
-  computed: {
-    calculatedSize: function calculatedSize () {
-      var size = Number(this.size)
-
-      if (this.button) {
-        size += 8
-      }
-
-      return size
-    },
-
-    circumference: function circumference () {
-      return 2 * Math.PI * this.radius
-    },
-
-    classes: function classes () {
-      return {
-        'progress-circular--indeterminate': this.indeterminate,
-        'progress-circular--button': this.button
-      }
-    },
-
-    cxy: function cxy () {
-      return this.indeterminate && !this.button ? 50 : this.calculatedSize / 2
-    },
-
-    normalizedValue: function normalizedValue () {
-      if (this.value < 0) {
-        return 0
-      }
-
-      if (this.value > 100) {
-        return 100
-      }
-
-      return this.value
-    },
-
-    radius: function radius () {
-      return this.indeterminate && !this.button ? 20 : (this.calculatedSize - this.width) / 2
-    },
-
-    strokeDashArray: function strokeDashArray () {
-      return Math.round(this.circumference * 1000) / 1000
-    },
-
-    strokeDashOffset: function strokeDashOffset () {
-      return ((100 - this.normalizedValue) / 100) * this.circumference + 'px'
-    },
-
-    styles: function styles () {
-      return {
-        height: ((this.calculatedSize) + "px"),
-        width: ((this.calculatedSize) + "px")
-      }
-    },
-
-    svgSize: function svgSize () {
-      return this.indeterminate ? false : this.calculatedSize
-    },
-
-    svgStyles: function svgStyles () {
-      return {
-        transform: ("rotate(" + (this.rotate) + "deg)")
-      }
-    },
-
-    viewBox: function viewBox () {
-      return this.indeterminate ? '25 25 50 50' : false
-    }
-  }
-};
-
-
-/***/ },
-/* 78 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ exports["default"] = {
-  name: 'progress',
-
-  props: {
-    active: {
-      type: Boolean,
-      default: true
-    },
-
-    buffer: Boolean,
-
-    bufferValue: Number,
-
-    error: Boolean,
-
-    height: {
-      type: [Number, String],
-      default: 7
-    },
-
-    indeterminate: Boolean,
-
-    info: Boolean,
-
-    secondary: Boolean,
-
-    success: Boolean,
-
-    query: Boolean,
-
-    warning: Boolean,
-
-    value: {
-      type: [Number, String],
-      default: 0
-    }
-  },
-
-  computed: {
-    classes: function classes () {
-      return {
-        'progress-linear--query': this.query,
-        'progress-linear--secondary': this.secondary,
-        'progress-linear--success': this.success,
-        'progress-linear--info': this.info,
-        'progress-linear--warning': this.warning,
-        'progress-linear--error': this.error
-      }
-    },
-
-    styles: function styles () {
-      var styles = {}
-
-      if (!this.active) {
-        styles.height = 0
-      }
-
-      if (this.buffer) {
-        styles.width = (this.bufferValue) + "%"
-      }
-
-      return styles
-    },
-
-    bufferStyles: function bufferStyles () {
-      var styles = {}
-
-      if (!this.active) {
-        styles.height = 0
-      }
-
-      return styles
-    }
-  }
-};
-
-
-/***/ },
-/* 79 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ exports["default"] = {
-  name: 'tabs-item',
-
-  data: function data () {
-    return {
-      isActive: false,
-      reverse: false
-    }
-  },
-
-  props: {
-    id: {
-      type: String,
-      required: true
-    },
-
-    transition: {
-      type: String,
-      default: 'v-tab-transition'
-    },
-
-    reverseTransition: {
-      type: String,
-      default: 'v-tab-reverse-transition'
-    }
-  },
-
-  computed: {
-    computedTransition: function computedTransition () {
-      return this.reverse ? this.reverseTransition : this.transition
-    }
-  },
-
-  methods: {
-    toggle: function toggle (target, reverse) {
-      this.reverse = reverse
-      this.isActive = this.id === target
-    }
-  }
-};
-
-
-/***/ },
-/* 80 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ exports["default"] = {
-  name: 'tabs',
-
-  data: function data () {
-    return {
-      activators: [],
-      content: [],
-      isActive: null,
-      reverse: false,
-      target: null,
-      resizeDebounce: {},
-      targetEl: null
-    }
-  },
-
-  props: {
-    centered: Boolean,
-
-    grow: Boolean,
-
-    icons: Boolean,
-
-    scrollBars: Boolean,
-
-    value: String
-  },
-
-  computed: {
-    classes: function classes () {
-      return {
-        'tabs--centered': this.centered,
-        'tabs--grow': this.grow,
-        'tabs--icons': this.icons,
-        'tabs--scroll-bars': this.scrollBars
-      }
-    }
-  },
-
-  watch: {
-    value: function value () {
-      this.tabClick(this.value)
-    },
-
-    isActive: function isActive () {
-      var this$1 = this;
-
-      this.activators.forEach(function (i) {
-        i.toggle(this$1.target)
-
-        if (i.isActive) {
-          this$1.slider(i.$el)
-        }
-      })
-
-      this.content.forEach(function (i) { return i.toggle(this$1.target, this$1.reverse); })
-      this.$emit('input', this.target)
-    }
-  },
-
-  mounted: function mounted () {
-    var this$1 = this;
-
-    this.$vuetify.load(function () {
-      this$1.init()
-      window.addEventListener('resize', this$1.resize, false)
-    })
-  },
-
-  beforeDestroy: function beforeDestroy () {
-    window.removeEventListener('resize', this.resize, false)
-  },
-
-  methods: {
-    init: function init () {
-      var this$1 = this;
-
-      this.$refs.activators.$children.forEach(function (i) {
-        if (i.$options._componentTag === 'v-tab-item') {
-          this$1.activators.push(i)
-        }
-      })
-
-      this.$refs.content.$children.forEach(function (i) { return this$1.content.push(i); })
-
-      setTimeout(function () {
-        this$1.tabClick(this$1.value || this$1.activators[0].target)
-      }, 200)
-    },
-
-    resize: function resize () {
-      var this$1 = this;
-
-      clearTimeout(this.resizeDebounce)
-
-      this.resizeDebounce = setTimeout(function () {
-        this$1.slider()
-      }, 250)
-    },
-
-    slider: function slider (el) {
-      this.targetEl = el || this.targetEl
-      this.$refs.slider.style.width = (this.targetEl.clientWidth) + "px"
-      this.$refs.slider.style.left = (this.targetEl.offsetLeft) + "px"
-    },
-
-    tabClick: function tabClick (target) {
-      var this$1 = this;
-
-      this.target = target
-
-      this.$nextTick(function () {
-        var nextIndex = this$1.content.findIndex(function (i) { return i.id === this$1.target; })
-        this$1.reverse = nextIndex < this$1.isActive
-        this$1.isActive = nextIndex
-      })
-    }
-  }
-};
-
-
-/***/ },
-/* 81 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ exports["default"] = {
-  name: 'tabs-tabs',
-
-  data: function data () {
-    return {
-      mobile: false
-    }
-  },
-
-  computed: {
-    classes: function classes () {
-      return {
-        'tabs__tabs--mobile': this.mobile
-      }
-    }
-  },
-
-  methods: {
-    scrollLeft: function scrollLeft () {
-      this.$refs.container.scrollLeft -= 50
-    },
-
-    scrollRight: function scrollRight () {
-      this.$refs.container.scrollLeft += 50
-    }
-  }
-};
-
-
-/***/ },
-/* 82 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ exports["default"] = {
-  name: 'toolbar',
-
-  props: {
-    fixed: Boolean
-  },
-
-  computed: {
-    classes: function classes () {
-      return {
-        'toolbar--fixed': this.fixed
-      }
-    }
-  }
-};
-
-
-/***/ },
-/* 83 */
-/***/ function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* name */
-  "Alert",
-  /* script */
-  __webpack_require__(59),
-  /* template */
-  __webpack_require__(117),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-
-module.exports = Component.exports
-
-
-/***/ },
-/* 84 */
-/***/ function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* name */
-  "App",
-  /* script */
-  __webpack_require__(60),
-  /* template */
-  __webpack_require__(109),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-
-module.exports = Component.exports
-
-
-/***/ },
-/* 85 */
-/***/ function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* name */
-  "Breadcrumbs",
-  /* script */
-  __webpack_require__(61),
-  /* template */
-  __webpack_require__(129),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-
-module.exports = Component.exports
-
-
-/***/ },
-/* 86 */
-/***/ function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* name */
-  "BreadcrumbsItem",
-  /* script */
-  __webpack_require__(62),
-  /* template */
-  __webpack_require__(112),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-
-module.exports = Component.exports
-
-
-/***/ },
-/* 87 */
-/***/ function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* name */
-  "Button",
-  /* script */
-  __webpack_require__(63),
-  /* template */
-  __webpack_require__(107),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-
-module.exports = Component.exports
-
-
-/***/ },
-/* 88 */
-/***/ function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* name */
-  "ButtonDropdown",
-  /* script */
-  __webpack_require__(64),
-  /* template */
-  __webpack_require__(127),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-
-module.exports = Component.exports
-
-
-/***/ },
-/* 89 */
-/***/ function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* name */
-  "ButtonToggle",
-  /* script */
-  __webpack_require__(65),
-  /* template */
-  __webpack_require__(119),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-
-module.exports = Component.exports
-
-
-/***/ },
-/* 90 */
-/***/ function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* name */
-  "Card",
-  /* script */
-  __webpack_require__(66),
-  /* template */
-  __webpack_require__(120),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-
-module.exports = Component.exports
-
-
-/***/ },
-/* 91 */
-/***/ function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* name */
-  "CardRow",
-  /* script */
-  __webpack_require__(67),
-  /* template */
-  __webpack_require__(116),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-
-module.exports = Component.exports
-
-
-/***/ },
-/* 92 */
-/***/ function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* name */
-  "Carousel",
-  /* script */
-  __webpack_require__(68),
-  /* template */
-  __webpack_require__(130),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-
-module.exports = Component.exports
-
-
-/***/ },
-/* 93 */
-/***/ function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* name */
-  "CarouselItem",
-  /* script */
-  __webpack_require__(69),
-  /* template */
-  __webpack_require__(128),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-
-module.exports = Component.exports
-
-
-/***/ },
-/* 94 */
-/***/ function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* name */
-  "ExpansionPanel",
-  /* script */
-  __webpack_require__(70),
-  /* template */
-  __webpack_require__(124),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-
-module.exports = Component.exports
-
-
-/***/ },
-/* 95 */
-/***/ function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* name */
-  "ExpansionPanelContent",
-  /* script */
-  __webpack_require__(71),
-  /* template */
-  __webpack_require__(114),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-
-module.exports = Component.exports
-
-
-/***/ },
-/* 96 */
-/***/ function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* name */
-  "Icon",
-  /* script */
-  __webpack_require__(72),
-  /* template */
-  __webpack_require__(121),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-
-module.exports = Component.exports
-
-
-/***/ },
-/* 97 */
-/***/ function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* name */
-  "ListGroup",
-  /* script */
-  __webpack_require__(73),
-  /* template */
-  __webpack_require__(126),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-
-module.exports = Component.exports
-
-
-/***/ },
-/* 98 */
-/***/ function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* name */
-  "Modal",
-  /* script */
-  __webpack_require__(74),
-  /* template */
-  __webpack_require__(108),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-
-module.exports = Component.exports
-
-
-/***/ },
-/* 99 */
-/***/ function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* name */
-  "Pagination",
-  /* script */
-  __webpack_require__(75),
-  /* template */
-  __webpack_require__(123),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-
-module.exports = Component.exports
-
-
-/***/ },
-/* 100 */
-/***/ function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* name */
-  "Parallax",
-  /* script */
-  __webpack_require__(76),
-  /* template */
-  __webpack_require__(122),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-
-module.exports = Component.exports
-
-
-/***/ },
-/* 101 */
-/***/ function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* name */
-  "ProgressCircular",
-  /* script */
-  __webpack_require__(77),
-  /* template */
-  __webpack_require__(111),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-
-module.exports = Component.exports
-
-
-/***/ },
-/* 102 */
-/***/ function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* name */
-  "ProgressLinear",
-  /* script */
-  __webpack_require__(78),
-  /* template */
-  __webpack_require__(110),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-
-module.exports = Component.exports
-
-
-/***/ },
-/* 103 */
-/***/ function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* name */
-  "TabContent",
-  /* script */
-  __webpack_require__(79),
-  /* template */
-  __webpack_require__(115),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-
-module.exports = Component.exports
-
-
-/***/ },
-/* 104 */
-/***/ function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* name */
-  "Tabs",
-  /* script */
-  __webpack_require__(80),
-  /* template */
-  __webpack_require__(118),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-
-module.exports = Component.exports
-
-
-/***/ },
-/* 105 */
-/***/ function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* name */
-  "TabsTabs",
-  /* script */
-  __webpack_require__(81),
-  /* template */
-  __webpack_require__(125),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-
-module.exports = Component.exports
-
-
-/***/ },
-/* 106 */
-/***/ function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* name */
-  "Toolbar",
-  /* script */
-  __webpack_require__(82),
-  /* template */
-  __webpack_require__(113),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-
-module.exports = Component.exports
-
-
-/***/ },
-/* 107 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('button', {
-    directives: [{
-      name: "ripple",
-      rawName: "v-ripple",
-      value: (_vm.ripple),
-      expression: "ripple"
-    }],
-    staticClass: "btn",
-    class: _vm.classes,
-    attrs: {
-      "type": _vm.type
-    }
-  }, [_c('span', {
-    staticClass: "btn__content"
-  }, [_vm._t("default")], 2), (_vm.loading) ? _c('span', {
-    staticClass: "btn__loading"
-  }, [_vm._t("loader"), (!_vm.$slots['loader']) ? _c('v-progress-circular', {
-    attrs: {
-      "indeterminate": "indeterminate",
-      "size": "26"
-    }
-  }) : _vm._e()], 2) : _vm._e()])
-},staticRenderFns: []}
-
-/***/ },
-/* 108 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "modal__container"
-  }, [(_vm.$slots.activator) ? _c('div', {
-    ref: "activator",
-    staticClass: "modal__activator",
-    on: {
-      "click": function($event) {
-        _vm.isActive = !_vm.isActive
-      }
-    }
-  }, [_vm._t("activator")], 2) : _vm._e(), _c('v-overlay', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.isActive),
-      expression: "isActive"
-    }],
-    class: _vm.overlayClasses,
-    domProps: {
-      "value": (_vm.isActive)
-    },
-    on: {
-      "input": function($event) {
-        _vm.isActive = $event
-      }
-    }
-  }, [_c(_vm.computedTransition, {
-    tag: "component",
-    attrs: {
-      "origin": _vm.computedOrigin
-    }
-  }, [_c('div', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.isActive),
-      expression: "isActive"
-    }, {
-      name: "click-outside",
-      rawName: "v-click-outside",
-      value: (_vm.closeConditional),
-      expression: "closeConditional"
-    }],
-    ref: "modal",
-    staticClass: "modal",
-    class: _vm.classes,
-    attrs: {
-      "id": _vm.id
-    }
-  }, [_vm._t("default")], 2)])], 1)], 1)
-},staticRenderFns: []}
-
-/***/ },
-/* 109 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "with",
-    class: _vm.classes,
-    attrs: {
-      "id": _vm.id,
-      "data-app": "data-app"
-    }
-  }, [_vm._t("default")], 2)
-},staticRenderFns: []}
-
-/***/ },
-/* 110 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "progress-linear",
-    class: _vm.classes,
-    style: ({
-      height: _vm.height + 'px'
-    })
-  }, [_c('div', {
-    staticClass: "progress-linear__bar",
-    style: (_vm.styles)
-  }, [_c('v-fade-transition', [(_vm.indeterminate) ? _c('div', {
-    staticClass: "progress-linear__bar__indeterminate"
-  }) : _vm._e()]), _c('v-slide-x-transition', [(!_vm.indeterminate) ? _c('div', {
-    staticClass: "progress-linear__bar__determinate",
-    style: ({
-      width: _vm.value + '%'
-    })
-  }) : _vm._e()])], 1)])
-},staticRenderFns: []}
-
-/***/ },
-/* 111 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "progress-circular",
-    class: _vm.classes,
-    style: (_vm.styles)
-  }, [_c('svg', {
-    style: (_vm.svgStyles),
-    attrs: {
-      "xmlns": "http://www.w3.org/2000/svg",
-      "height": _vm.svgSize,
-      "width": _vm.svgSize,
-      "viewBox": _vm.viewBox
-    }
-  }, [(!_vm.indeterminate) ? _c('circle', {
-    staticClass: "progress-circular__underlay",
-    attrs: {
-      "fill": "transparent",
-      "cx": _vm.cxy,
-      "cy": _vm.cxy,
-      "r": _vm.radius,
-      "stroke-width": _vm.width,
-      "stroke-dasharray": _vm.strokeDashArray,
-      "stroke-dashoffset": 0
-    }
-  }) : _vm._e(), _c('circle', {
-    staticClass: "progress-circular__overlay",
-    attrs: {
-      "fill": _vm.fill,
-      "cx": _vm.cxy,
-      "cy": _vm.cxy,
-      "r": _vm.radius,
-      "stroke-width": _vm.width,
-      "stroke-dasharray": _vm.strokeDashArray,
-      "stroke-dashoffset": _vm.strokeDashOffset
-    }
-  })]), _c('div', {
-    staticClass: "progress-circular__info"
-  }, [_vm._t("default")], 2)])
-},staticRenderFns: []}
-
-/***/ },
-/* 112 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', [_c('a', {
-    staticClass: "breadcrumbs__item",
-    class: _vm.classes,
-    attrs: {
-      "href": _vm.href,
-      "target": _vm.target
-    }
-  }, [_vm._t("default")], 2)])
-},staticRenderFns: []}
-
-/***/ },
-/* 113 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('nav', {
-    staticClass: "toolbar",
-    class: _vm.classes
-  }, [_vm._t("default")], 2)
-},staticRenderFns: []}
-
-/***/ },
-/* 114 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', [(_vm.$slots.header) ? _c('div', {
-    directives: [{
-      name: "click-outside",
-      rawName: "v-click-outside",
-      value: (_vm.closeConditional),
-      expression: "closeConditional"
-    }, {
-      name: "ripple",
-      rawName: "v-ripple",
-      value: (_vm.ripple),
-      expression: "ripple"
-    }],
-    staticClass: "expansion-panel__header",
-    class: _vm.classes,
-    on: {
-      "click": function($event) {
-        _vm.isActive = !_vm.isActive
-      }
-    }
-  }, [_vm._t("header")], 2) : _vm._e(), _c('transition', {
-    on: {
-      "enter": _vm.enter,
-      "after-enter": _vm.afterEnter,
-      "leave": _vm.leave
-    }
-  }, [_c('div', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.isActive),
-      expression: "isActive"
-    }],
-    ref: "body",
-    staticClass: "expansion-panel__body"
-  }, [_vm._t("default")], 2)])], 1)
-},staticRenderFns: []}
-
-/***/ },
-/* 115 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c(_vm.computedTransition, {
-    tag: "component"
-  }, [_c('div', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.isActive),
-      expression: "isActive"
-    }],
-    staticClass: "tabs__item",
-    attrs: {
-      "id": _vm.id
-    }
-  }, [_vm._t("default")], 2)])
-},staticRenderFns: []}
-
-/***/ },
-/* 116 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "card__row",
-    class: _vm.classes,
-    style: (_vm.styles)
-  }, [_vm._t("default")], 2)
-},staticRenderFns: []}
-
-/***/ },
-/* 117 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.isActive),
-      expression: "isActive"
-    }],
-    staticClass: "alert",
-    class: _vm.classes
-  }, [(!_vm.hideIcon) ? _c('v-icon', {
-    staticClass: "alert__icon"
-  }, [_vm._v(_vm._s(_vm.mdIcon))]) : _vm._e(), _c('div', [_vm._t("default")], 2), (_vm.dismissible) ? _c('a', {
-    staticClass: "alert__dismissible",
-    attrs: {
-      "href": "#!"
-    },
-    on: {
-      "click": function($event) {
-        $event.preventDefault();
-        _vm.$emit('input', false)
-      }
-    }
-  }, [_c('v-icon', {
-    attrs: {
-      "right": "right"
-    }
-  }, [_vm._v("cancel")])], 1) : _vm._e()], 1)
-},staticRenderFns: []}
-
-/***/ },
-/* 118 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "tabs",
-    class: _vm.classes,
-    attrs: {
-      "id": _vm.id
-    }
-  }, [_vm._t("default"), _c('v-tabs-tabs', {
-    ref: "activators"
-  }, [_vm._t("activators"), _c('v-tabs-slider', {
-    ref: "slider"
-  })], 2), _c('v-tabs-items', {
-    ref: "content",
-    staticClass: "tabs__items"
-  }, [_vm._t("content")], 2)], 2)
-},staticRenderFns: []}
-
-/***/ },
-/* 119 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "btn-toggle",
-    class: _vm.classes
-  }, _vm._l((_vm.options), function(option, index) {
-    return _c('v-btn', {
-      attrs: {
-        "data-selected": _vm.isSelected(option),
-        "data-index": index,
-        "data-only-child": _vm.isSelected(option) && (!_vm.multiple || _vm.inputValue.length === 1),
-        "flat": "flat"
-      },
-      nativeOn: {
-        "click": function($event) {
-          $event.stopPropagation();
-          _vm.updateValue(option)
-        }
-      }
-    }, [(option.text) ? _c('span', {
-      domProps: {
-        "textContent": _vm._s(option.text)
-      }
-    }) : _vm._e(), (option.icon) ? _c('v-icon', [_vm._v(_vm._s(option.icon))]) : _vm._e()], 1)
-  }))
-},staticRenderFns: []}
-
-/***/ },
-/* 120 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "card",
-    class: _vm.classes,
-    style: (_vm.styles)
-  }, [_vm._t("default")], 2)
-},staticRenderFns: []}
-
-/***/ },
-/* 121 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('i', {
-    staticClass: "material-icons icon",
-    class: _vm.classes
-  }, [_vm._t("default")], 2)
-},staticRenderFns: []}
-
-/***/ },
-/* 122 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "parallax",
-    style: ({
-      minHeight: this.normalizedHeight + 'px'
-    })
-  }, [_c('div', {
-    staticClass: "parallax__image-container"
-  }, [_c('img', {
-    ref: "img",
-    staticClass: "parallax__image",
-    style: (_vm.styles),
-    attrs: {
-      "src": _vm.src
-    }
-  }), _vm._t("default")], 2)])
-},staticRenderFns: []}
-
-/***/ },
-/* 123 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('ul', {
-    staticClass: "pagination",
-    class: _vm.classes
-  }, [_c('li', [_c('a', {
-    staticClass: "pagination__navigation",
-    class: {
-      'pagination__navigation--disabled': _vm.value === 1
-    },
-    attrs: {
-      "href": "#!"
-    },
-    on: {
-      "click": function($event) {
-        $event.preventDefault();
-        _vm.$emit('input', _vm.value - 1)
-      }
-    }
-  }, [_c('v-icon', [_vm._v("chevron_left")])], 1)]), _vm._l((_vm.items), function(n) {
-    return _c('li', [(!isNaN(n)) ? _c('a', {
-      staticClass: "pagination__item",
-      class: {
-        'pagination__item--active': n === _vm.isActive
-      },
-      attrs: {
-        "href": "#!"
-      },
-      domProps: {
-        "textContent": _vm._s(n)
-      },
-      on: {
-        "click": function($event) {
-          $event.preventDefault();
-          _vm.$emit('input', n)
-        }
-      }
-    }) : _c('span', {
-      staticClass: "pagination__more",
-      domProps: {
-        "textContent": _vm._s(n)
-      }
-    })])
-  }), _c('li', [_c('a', {
-    staticClass: "pagination__navigation",
-    class: {
-      'pagination__navigation--disabled': _vm.value === _vm.length
-    },
-    attrs: {
-      "href": "#!"
-    },
-    on: {
-      "click": function($event) {
-        $event.preventDefault();
-        _vm.$emit('input', _vm.value + 1)
-      }
-    }
-  }, [_c('v-icon', [_vm._v("chevron_right")])], 1)])], 2)
-},staticRenderFns: []}
-
-/***/ },
-/* 124 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('ul', {
-    staticClass: "expansion-panel"
-  }, [_vm._t("default")], 2)
-},staticRenderFns: []}
-
-/***/ },
-/* 125 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "tabs__tabs",
-    class: _vm.classes
-  }, [_c('ul', {
-    ref: "container",
-    staticClass: "tabs__container"
-  }, [_vm._t("default")], 2), _c('v-icon', {
-    directives: [{
-      name: "ripple",
-      rawName: "v-ripple"
-    }],
-    attrs: {
-      "left": "left"
-    },
-    nativeOn: {
-      "click": function($event) {
-        _vm.scrollLeft($event)
-      }
-    }
-  }, [_vm._v("chevron_left")]), _c('v-icon', {
-    directives: [{
-      name: "ripple",
-      rawName: "v-ripple"
-    }],
-    attrs: {
-      "right": "right"
-    },
-    nativeOn: {
-      "click": function($event) {
-        _vm.scrollRight($event)
-      }
-    }
-  }, [_vm._v("chevron_right")])], 1)
-},staticRenderFns: []}
-
-/***/ },
-/* 126 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "list--group__container"
-  }, [_c('div', {
-    staticClass: "list--group__header",
-    class: _vm.classes,
-    on: {
-      "click": _vm.click
-    }
-  }, [_vm._t("item")], 2), _c('transition', {
-    on: {
-      "enter": _vm.enter,
-      "leave": _vm.leave
-    }
-  }, [_c('ul', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.isActive),
-      expression: "isActive"
-    }],
-    ref: "group",
-    staticClass: "list list--group",
-    style: (_vm.styles)
-  }, [_vm._t("default")], 2)])], 1)
-},staticRenderFns: []}
-
-/***/ },
-/* 127 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "btn-dropdown",
-    class: _vm.classes
-  }, [_c('v-menu', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.isActive),
-      expression: "isActive"
-    }],
-    attrs: {
-      "auto": !_vm.overflow && !_vm.segmented && !_vm.editable,
-      "right": !_vm.overflow && !_vm.segmented && !_vm.editable,
-      "max-height": _vm.maxHeight,
-      "offset-y": _vm.overflow || _vm.segmented || _vm.editable,
-      "bottom": "bottom"
-    },
-    domProps: {
-      "value": (_vm.isActive)
-    },
-    on: {
-      "input": function($event) {
-        _vm.isActive = $event
-      }
-    }
-  }, [_c('v-text-field', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.editableValue),
-      expression: "editableValue"
-    }],
-    ref: "input",
-    attrs: {
-      "type": _vm.editable ? 'text' : 'button',
-      "label": _vm.label,
-      "light": _vm.light && !_vm.dark,
-      "dark": _vm.dark,
-      "single-line": "single-line",
-      "append-icon": "arrow_drop_down"
-    },
-    domProps: {
-      "value": (_vm.editableValue)
-    },
-    on: {
-      "focused": function($event) {
-        _vm.isActive = arguments[0]
-      },
-      "input": function($event) {
-        _vm.editableValue = $event
-      }
-    },
-    nativeOn: {
-      "keyup": function($event) {
-        if (_vm._k($event.keyCode, "enter", 13)) { return; }
-        _vm.updateValue(_vm.editableValue)
-      }
-    },
-    slot: "activator"
-  }), _c('v-list', _vm._l((_vm.options), function(option, index) {
-    return _c('v-list-item', [_c('v-list-tile', {
-      class: {
-        'list__tile--active': _vm.inputValue === option
-      },
-      nativeOn: {
-        "click": function($event) {
-          _vm.updateValue(option)
-        }
-      }
-    }, [(option.action) ? _c('v-list-tile-action', [_c('v-icon', [_vm._v(_vm._s(option.action))])], 1) : _vm._e(), (option.text) ? _c('v-list-tile-content', [_c('v-list-tile-title', [_vm._v(_vm._s(option.text))])], 1) : _vm._e()], 1)], 1)
-  }))], 1)], 1)
-},staticRenderFns: []}
-
-/***/ },
-/* 128 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c(_vm.computedTransition, {
-    tag: "component"
-  }, [_c('div', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.active),
-      expression: "active"
-    }],
-    staticClass: "carousel__item",
-    class: {
-      'reverse': _vm.reverse
-    },
-    style: (_vm.styles)
-  }, [_vm._t("default")], 2)])
-},staticRenderFns: []}
-
-/***/ },
-/* 129 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('ul', {
-    staticClass: "breadcrumbs",
-    class: _vm.classes,
-    attrs: {
-      "items": _vm.items
-    }
-  }, [_vm._t("default")], 2)
-},staticRenderFns: []}
-
-/***/ },
-/* 130 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "carousel"
-  }, [_c('div', {
-    staticClass: "carousel__left"
-  }, [_c('v-btn', {
-    attrs: {
-      "icon": "icon"
-    },
-    nativeOn: {
-      "click": function($event) {
-        $event.stopPropagation();
-        _vm.prev($event)
-      }
-    }
-  }, [_c('v-icon', [_vm._v("chevron_left")])], 1)], 1), _c('div', {
-    staticClass: "carousel__right"
-  }, [_c('v-btn', {
-    attrs: {
-      "icon": "icon"
-    },
-    nativeOn: {
-      "click": function($event) {
-        $event.stopPropagation();
-        _vm.next($event)
-      }
-    }
-  }, [_c('v-icon', [_vm._v("chevron_right")])], 1)], 1), _c('div', {
-    staticClass: "carousel__controls"
-  }, _vm._l((_vm.items), function(item, index) {
-    return _c('v-btn', {
-      staticClass: "carousel__controls__item",
-      class: {
-        'carousel__controls__item--active': index === _vm.current
-      },
-      attrs: {
-        "icon": "icon"
-      },
-      nativeOn: {
-        "click": function($event) {
-          $event.stopPropagation();
-          _vm.select(index)
-        }
-      }
-    }, [_c('v-icon', [_vm._v(_vm._s(_vm.icon))])], 1)
-  })), _vm._t("default")], 2)
-},staticRenderFns: []}
-
-/***/ },
-/* 131 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_index__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__directives_index__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__util_load__ = __webpack_require__(9);
-__webpack_require__(10)
-
-
-
-
-
-var defaults = {
-  componentPrefix: 'V',
-  directivePrefix: ''
-}
-
-function plugin (Vue, options) {
-  options = Object.assign(defaults, (options || {}))
-
-  Object.keys(__WEBPACK_IMPORTED_MODULE_1__directives_index__["a" /* default */]).forEach(function (key) {
-    Vue.directive(("" + (options.directivePrefix) + key), __WEBPACK_IMPORTED_MODULE_1__directives_index__["a" /* default */][key])
-  })
-
-  Object.keys(__WEBPACK_IMPORTED_MODULE_0__components_index__["a" /* default */]).forEach(function (key) {
-    Vue.component(("" + (options.componentPrefix) + key), __WEBPACK_IMPORTED_MODULE_0__components_index__["a" /* default */][key])
-  })
-
-  Vue.prototype.$vuetify = {
-    load: __WEBPACK_IMPORTED_MODULE_2__util_load__["a" /* default */]
-  }
-}
-
-if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(plugin)
-}
-
-/* harmony default export */ exports["default"] = plugin;
 
 
 /***/ }
