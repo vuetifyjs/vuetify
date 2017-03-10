@@ -20,7 +20,8 @@ export default {
       },
       direction: { vert: 'bottom', horiz: 'right' },
       position: { left: '0px', top: '0px', right: 'auto', bottom: 'auto' },
-      isContentActive: false
+      isContentActive: false,
+      maxHeightAutoDefault: '200px'
     }
   },
 
@@ -33,6 +34,9 @@ export default {
     offsetX: Boolean,
     offsetY: Boolean,
     disabled: Boolean,
+    maxHeight: {
+      default: null
+    },
     nudgeXAuto: {
       type: Number,
       default: -16
@@ -201,13 +205,13 @@ export default {
     },
 
     updateMaxMin () {
-      const { $refs, maxHeight, offsetAuto } = this
+      const { $refs, maxHeight, maxHeightAutoDefault: maxAuto, offsetAuto, auto } = this
       const a = $refs.activator.children ? $refs.activator.children[0] : $refs.activator
       const c = $refs.content
 
       c.style.minWidth = `${a.getBoundingClientRect().width + Math.abs(offsetAuto.horiz)}px`
-      c.style.maxHeight = null  // <-- TODO: This is a temporary fix.
       c.style.maxHeight = isNaN(maxHeight) ? maxHeight : `${maxHeight}px`
+      c.style.maxHeight = maxHeight === null && auto ? maxAuto : c.style.maxHeight
     },
 
     offscreenFix () {

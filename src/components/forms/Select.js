@@ -11,8 +11,9 @@ export default {
       inputValue: this.multiple ? Array.from(this.value || []) : new Array(this.value || 0),
       inputSearch: this.value ? this.value[this.itemText] : '',
       filteredItems: null,
-      menuActive: false && !this.disabled,
-      appendIconCbPrivate: this.removeAllSelected
+      menuActive: false,
+      appendIconCbPrivate: this.removeAllSelected,
+      noResultsFoundText: 'No search results found.'
     }
   },
 
@@ -37,7 +38,7 @@ export default {
     close: Boolean,
     debounce: {
       type: Number,
-      default: 300
+      default: 200
     }
   },
 
@@ -57,13 +58,16 @@ export default {
     focused (val) {
       this.$emit('focused', val)
     },
+
     value (val) {
       this.inputValue = this.multiple ? val || [] : new Array(val)
       this.inputSearch = this.multiple ? '' : val[this.itemText]
     },
+
     inputValue (val) {
       this.$emit('input', this.multiple ? val : val[0])
     },
+
     menuActive (val) {
       if (!val) this.$refs.searchField.blur()
     }
@@ -76,25 +80,33 @@ export default {
 
     focus () {
       this.focused = true
-      this.closeAction(true)
+      this.showClearIcon(true)
     },
 
     blur () {
       this.$nextTick(() => (this.focused = false))
-      this.closeAction(false)
+      this.showClearIcon(false)
     },
 
-    // TODO: Maybe this should be computed prop?
+    // TODO: Maybe convert to computed prop on inputSearch and items.
     filterItems () {
-      const { items, inputSearch, itemText } = this
+      const { items, inputSearch } = this
+      const isFilterable = inputSearch && this.autocomplete
+      let filtered = null
 
-      this.filteredItems = inputSearch && this.autocomplete
-        ? items.filter(item => {
-          return this.filter
-            ? this.filter(item, inputSearch)
-            : item[itemText].toLowerCase().includes(inputSearch.toLowerCase())
-        })
-        : null
+      if (isFilterable) {
+        filtered = this.filter
+          ? items.filter(item => (this.filter(item, inputSearch)))
+          : items.filter(item => (this.defaultFilter(item, inputSearch)))
+
+        filtered = filtered.length ? filtered : null
+      }
+
+      this.filteredItems = filtered
+    },
+
+    defaultFilter (item, inputSearch) {
+      return item[this.itemText].toLowerCase().includes(inputSearch.toLowerCase())
     },
 
     isSelected (item) {
@@ -117,15 +129,16 @@ export default {
     },
 
     removeAllSelected (e) {
+      console.log('here')
       if (!this.appendIconAlt) return
 
       e.stopPropagation()
       this.inputValue = []
       this.inputSearch = ''
-      this.closeAction(false)
+      this.showClearIcon(false)
     },
 
-    closeAction (on = true) {
+    showClearIcon (on = true) {
       this.appendIconAlt = on && this.close && this.inputValue.length ? 'close' : ''
     },
 
@@ -146,8 +159,8 @@ export default {
           input: (val) => (this.menuActive = val)
         },
         nativeOn: {
-          '!mouseenter': this.closeAction,
-          mouseleave: () => { this.closeAction(false) }
+          '!mouseenter': this.showClearIcon,
+          mouseleave: () => { this.showClearIcon(false) }
         }
       }
 
@@ -219,10 +232,12 @@ export default {
           value: this.inputSearch
         },
         on: {
-          input: e => { this.inputSearch = e.target.value },
+          input: debounce(e => {
+            this.inputSearch = e.target.value
+            this.filterItems()
+          }, this.debounce),
           focus: this.focus,
-          blur: this.blur,
-          keyup: debounce(this.filterItems, this.debounce)
+          blur: this.blur
         }
       }
 
@@ -230,7 +245,12 @@ export default {
     },
 
     genList (h) {
-      const list = (this.filteredItems || this.items).map(item => this.genListItem(h, item))
+      const noResultsFound = this.autocomplete && this.inputSearch && !this.filteredItems
+
+      const list = noResultsFound
+        ? [this.genNoResultsFound(h)]
+        : (this.filteredItems || this.items).map(item => this.genListItem(h, item))
+
       return h('v-list', {}, list)
     },
 
@@ -245,24 +265,10 @@ export default {
         },
         nativeOn: {
           click: e => {
-            if (!this.multiple) {
-              return
-            }
-
-            e.stopPropagation()
-            e.preventDefault()
-
-            this.isSelected(item)
+            this.isSelected(item) && this.multiple
               ? this.removeSelected(item)
               : this.addSelected(item)
 
-            this.$refs.searchField.focus()
-          },
-          mousedown: e => {
-            if (this.multiple) {
-              return
-            }
-            this.addSelected(item)
             this.$refs.searchField.focus()
           }
         }
@@ -278,6 +284,14 @@ export default {
 
       const checkbox = h('v-checkbox', { props: { 'inputValue': this.isSelected(item) }})
       return h('v-list-tile-action', {}, [checkbox])
+    },
+
+    genNoResultsFound (h) {
+      const text = this.noResultsFoundText
+      const content = h('v-list-tile-content', {}, [h('v-list-tile-title', {}, text)])
+      const tile = h('v-list-tile', [content])
+
+      return h('v-list-item', [tile])
     },
 
     genContent (h, item) {
