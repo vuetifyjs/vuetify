@@ -4,6 +4,8 @@
   
   input
     text-align: left
+    border-right: 1px solid transparent
+    transition: border-right .3s $transition.ease-in-out
     
     &:focus
       + .icon
@@ -11,19 +13,25 @@
       
   .menu, .menu__activator
     width: 100%
+    
+  .menu__content
+    border-top-left-radius: 0
+    border-top-right-radius: 0
   
   &--overflow, &--editable, &--segmented
-    input, label
-      min-height: 40px
+    .input-group
+      input, label
+        height: 40px
+        line-height: 40px
       
     input, label
       padding-left: 16px
       
-    .input-group--focused .input-group__wrapper
+    .input-group--focused .input-group__input
       background-color: #fff
       @extend .z-depth-2
       
-    .input-group__wrapper
+    .input-group__input
       transition: .3s $transition.ease-in-out
       
       &:hover

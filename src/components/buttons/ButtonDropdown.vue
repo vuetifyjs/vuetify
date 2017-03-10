@@ -9,6 +9,7 @@
       v-bind:max-height="maxHeight"
       v-bind:offset-y="overflow || segmented || editable"
       v-model="isActive"
+      v-bind:open-on-click="false"
       bottom
     )
       v-text-field(
