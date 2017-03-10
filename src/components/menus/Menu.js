@@ -52,6 +52,10 @@ export default {
     origin: {
       type: String,
       default: 'top left'
+    },
+    transition: {
+      type: String,
+      default: 'v-menu-transition'
     }
   },
 
@@ -284,7 +288,7 @@ export default {
         }
       }
 
-      return h('v-menu-transition', data, [this.genContent(h)])
+      return h(this.transition, data, [this.genContent(h)])
     },
 
     genContent (h) {
