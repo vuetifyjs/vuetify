@@ -32,6 +32,7 @@ export default {
     auto: Boolean,
     offsetX: Boolean,
     offsetY: Boolean,
+    disabled: Boolean,
     nudgeXAuto: {
       type: Number,
       default: -16
@@ -133,8 +134,10 @@ export default {
 
   watch: {
     isActive (val) {
-      if (val) this.activate()
+      if (val && !this.disabled) this.activate()
       else this.isContentActive = false
+
+      this.isActive = val && !this.disabled
     }
   },
 
@@ -167,12 +170,13 @@ export default {
 
         const { offset, screenOverflow: screen } = this
         const { horiz, vert } = this.direction
-        const noMoreFlipping = this.flip() === false
 
         this.position.left = horiz === 'left' ? 'auto' : `${offset.horiz - screen.horiz}px`
         this.position.top = vert === 'top' ? 'auto' : `${offset.vert - screen.vert}px`
         this.position.right = horiz === 'right' ? 'auto' : `${-offset.horiz - screen.horiz}px`
         this.position.bottom = vert === 'bottom' ? 'auto' : `${-offset.vert - screen.vert}px`
+
+        const noMoreFlipping = this.flip() === false
 
         if (noMoreFlipping) this.startTransition()
       })
@@ -201,7 +205,7 @@ export default {
       const a = $refs.activator.children ? $refs.activator.children[0] : $refs.activator
       const c = $refs.content
 
-      c.style.minWidth = `${a.getBoundingClientRect().width + offsetAuto.horiz}px`
+      c.style.minWidth = `${a.getBoundingClientRect().width + Math.abs(offsetAuto.horiz)}px`
       c.style.maxHeight = null  // <-- TODO: This is a temporary fix.
       c.style.maxHeight = isNaN(maxHeight) ? maxHeight : `${maxHeight}px`
     },
@@ -265,7 +269,7 @@ export default {
         },
         on: {
           click: () => {
-            if (this.openOnClick) this.isActive = !this.isActive
+            if (this.openOnClick) this.isActive = !this.isActive && !this.disabled
           }
         }
       }

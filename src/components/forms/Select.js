@@ -11,7 +11,7 @@ export default {
       inputValue: this.multiple ? Array.from(this.value || []) : new Array(this.value || 0),
       inputSearch: this.value ? this.value[this.itemText] : '',
       filteredItems: null,
-      menuActive: false,
+      menuActive: false && !this.disabled,
       appendIconCbPrivate: this.removeAllSelected
     }
   },
@@ -31,6 +31,7 @@ export default {
     },
     multiple: Boolean,
     autocomplete: Boolean,
+    filter: Function,
     singleLine: Boolean,
     chips: Boolean,
     close: Boolean,
@@ -53,8 +54,8 @@ export default {
   },
 
   watch: {
-    focused () {
-      this.$emit('focused', this.focused)
+    focused (val) {
+      this.$emit('focused', val)
     },
     value (val) {
       this.inputValue = this.multiple ? val || [] : new Array(val)
@@ -63,8 +64,8 @@ export default {
     inputValue (val) {
       this.$emit('input', this.multiple ? val : val[0])
     },
-    menuActive (isActive) {
-      if (!isActive) this.$refs.searchField.blur()
+    menuActive (val) {
+      if (!val) this.$refs.searchField.blur()
     }
   },
 
@@ -88,7 +89,11 @@ export default {
       const { items, inputSearch, itemText } = this
 
       this.filteredItems = inputSearch && this.autocomplete
-        ? items.filter(item => item[itemText].includes(inputSearch))
+        ? items.filter(item => {
+          return this.filter
+            ? this.filter(item, inputSearch)
+            : item[itemText].toLowerCase().includes(inputSearch.toLowerCase())
+        })
         : null
     },
 
@@ -142,7 +147,7 @@ export default {
         },
         nativeOn: {
           '!mouseenter': this.closeAction,
-          mouseleave: () => (this.closeAction(false))
+          mouseleave: () => { this.closeAction(false) }
         }
       }
 
@@ -214,10 +219,10 @@ export default {
           value: this.inputSearch
         },
         on: {
-          input: e => (this.inputSearch = e.target.value),
-          focus: () => this.focus,
-          blur: () => this.blur,
-          keyup: () => debounce(this.filterItems, this.debounce)
+          input: e => { this.inputSearch = e.target.value },
+          focus: this.focus,
+          blur: this.blur,
+          keyup: debounce(this.filterItems, this.debounce)
         }
       }
 
@@ -246,6 +251,7 @@ export default {
 
             e.stopPropagation()
             e.preventDefault()
+
             this.isSelected(item)
               ? this.removeSelected(item)
               : this.addSelected(item)

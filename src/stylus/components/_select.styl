@@ -2,6 +2,10 @@
   input
     cursor: pointer
     
+  input:focus
+    +.icon
+      transform: rotate(-180deg)
+    
   &.input-group--disabled
     cursor: not-allowed
     pointer-events: none
@@ -11,7 +15,7 @@
     display: flex
     flex-wrap: wrap
     width: 100%
-    
+
     &__comma
       font-size: 16px
       height: 30px
