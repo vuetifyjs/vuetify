@@ -2,8 +2,11 @@
   input
     cursor: pointer
     
-  input:focus
-    +.icon
+  .input-group__append-icon
+    transition: .3s $transition.linear-out-slow-in
+    
+  &.input-group--focused
+    .input-group__append-icon
       transform: rotate(-180deg)
     
   &.input-group--disabled
