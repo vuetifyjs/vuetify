@@ -67,7 +67,7 @@
       justify-content: flex-start
       align-items: center
       flex: 1 0 56px
-      
+            
     &__action
       align-items: flex-start
       flex-direction: column
@@ -88,6 +88,9 @@
         justify-content: space-between
         padding-top: $list-top-padding
         padding-bottom: $list-bottom-padding
+        
+      &--select-multi
+        flex: 1 0 30px
       
     &__avatar        
       img, .icon
@@ -122,6 +125,9 @@
 
     &--avatar
       height: $list-item-avatar-single-height
+      
+    &--select-multi
+      padding: 0 10px
   
   &--dense
     padding-top: $list-item-dense-top-padding

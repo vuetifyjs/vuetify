@@ -1,6 +1,13 @@
 import Input from '../../mixins/input'
 import { debounce } from '../../util/helpers'
 
+// Todo: Debounce double/triple clicks.
+// Todo: Animate progress bar between debounces on search.
+// Todo: Confirm css changes to list tiles are good.
+// Todo: Keyboard down arrow.
+// Todo: Enter key on autocomplete selects top pick in list.
+// Todo: Click on chip should focus input and open menu.
+// Todo: Ability to add new items on the fly (and select them simultaneously).
 export default {
   name: 'select',
 
@@ -8,12 +15,12 @@ export default {
 
   data () {
     return {
-      inputValue: this.multiple ? Array.from(this.value || []) : new Array(this.value || 0),
-      inputSearch: this.value ? this.value[this.itemText] : '',
+      inputValue: this.parseInputValue(),
+      inputSearch: this.parseInputSearch(),
       filteredItems: null,
       menuActive: false,
       appendIconCbPrivate: this.removeAllSelected,
-      noResultsFoundText: 'No search results found.'
+      noResultsFoundText: 'No search noResultsFoundts found.'
     }
   },
 
@@ -51,6 +58,9 @@ export default {
         'input-group--single-line': this.singleLine,
         'input-group--multi-line': this.multiLine
       }
+    },
+    inputValueLength () {
+      return this.inputValue.length
     }
   },
 
@@ -60,12 +70,16 @@ export default {
     },
 
     value (val) {
-      this.inputValue = this.multiple ? val || [] : new Array(val)
-      this.inputSearch = this.multiple ? '' : val[this.itemText]
+      this.inputValue = this.parseInputValue()
+      this.inputSearch = this.parseInputSearch()
     },
 
     inputValue (val) {
-      this.$emit('input', this.multiple ? val : val[0])
+      if (this.multiple) {
+        this.$emit('input', !val.length ? null : val)
+      } else {
+        this.$emit('input', !val.length ? null : val[0])
+      }
     },
 
     menuActive (val) {
@@ -86,6 +100,17 @@ export default {
     blur () {
       this.$nextTick(() => (this.focused = false))
       this.showClearIcon(false)
+    },
+
+    parseInputValue () {
+      if (this.value === null) return []
+      if (this.multiple) return this.value
+      return this.isEmptyObject(this.value) ? [] : [this.value]
+    },
+
+    parseInputSearch () {
+      if (this.multiple || this.value === null) return ''
+      return this.value[this.itemText]
     },
 
     // TODO: Maybe convert to computed prop on inputSearch and items.
@@ -129,7 +154,6 @@ export default {
     },
 
     removeAllSelected (e) {
-      console.log('here')
       if (!this.appendIconAlt) return
 
       e.stopPropagation()
@@ -142,6 +166,9 @@ export default {
       this.appendIconAlt = on && this.close && this.inputValue.length ? 'close' : ''
     },
 
+    // Render functions
+    // ====================
+
     genMenu (h) {
       const data = {
         ref: 'menu',
@@ -153,7 +180,10 @@ export default {
           closeOnClick: !this.multiple,
           disabled: this.disabled,
           offsetY: this.autocomplete,
-          value: this.menuActive
+          value: this.menuActive,
+          nudgeBottom: -20,
+          nudgeTop: -16,
+          nudgeXAuto: this.multiple ? -40 : -16
         },
         on: {
           input: (val) => (this.menuActive = val)
@@ -190,22 +220,22 @@ export default {
       const slots = this.$scopedSlots.selection
       const comma = true // <-- default
 
-      return this.inputValue.map((item, index, array) => {
-        if (slots) return this.genSlotSelection(h, item)
-        if (chips) return this.genChipSelection(h, item)
-        if (comma) {
-          const length = array.length
-          return this.genCommaSelection(h, item, length !== 1 && index !== length - 1)
-        }
+      return this.inputValue.map((item, index) => {
+        if (slots) return this.genSlotSelection(h, item, index)
+        if (chips) return this.genChipSelection(h, item, index)
+        if (comma) return this.genCommaSelection(h, item, index)
       })
     },
 
-    genSlotSelection (h, item) {
-      return this.$scopedSlots.selection({ parent: this, item: item })
+    genSlotSelection (h, item, index) {
+      return this.$scopedSlots.selection({ parent: this, item: item, index: index })
     },
 
-    genChipSelection (h, item) {
+    genChipSelection (h, item, index) {
       const data = {
+        'class': {
+          'chip--select-multi': true
+        },
         props: { close: true },
         on: {
           input: val => { if (val === false) this.removeSelected(item) }
@@ -218,11 +248,13 @@ export default {
       return h('v-chip', data, item[this.itemText])
     },
 
-    genCommaSelection (h, item, hasComma) {
+    genCommaSelection (h, item, index) {
+      const comma = index !== this.inputValueLength - 1 ? ',' : ''
+
       const data = {
         'class': 'input-group__selections__comma'
       }
-      return h('div', data, `${item[this.itemText]}${hasComma ? ',' : ''}`)
+      return h('div', data, item[this.itemText] + comma)
     },
 
     genSearchField (h) {
@@ -261,7 +293,8 @@ export default {
     genTile (h, item) {
       const data = {
         'class': {
-          'list__tile--active': this.isSelected(item)
+          'list__tile--active': this.isSelected(item),
+          'list__tile--select-multi': this.multiple
         },
         nativeOn: {
           click: e => {
@@ -282,8 +315,14 @@ export default {
     genAction (h, item) {
       if (!this.multiple) return null
 
+      const data = {
+        'class': {
+          'list__tile__action--select-multi': this.multiple
+        }
+      }
+
       const checkbox = h('v-checkbox', { props: { 'inputValue': this.isSelected(item) }})
-      return h('v-list-tile-action', {}, [checkbox])
+      return h('v-list-tile-action', data, [checkbox])
     },
 
     genNoResultsFound (h) {
@@ -296,6 +335,13 @@ export default {
 
     genContent (h, item) {
       return h('v-list-tile-content', {}, [h('v-list-tile-title', item[this.itemText])])
+    },
+
+    // Utils
+    // ====================
+
+    isEmptyObject (obj) {
+      return obj.constructor === Object && Object.keys(obj).length === 0
     }
   },
 

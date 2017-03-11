@@ -45,6 +45,22 @@ export default {
       type: Number,
       default: -18
     },
+    nudgeTop: {
+      type: Number,
+      default: 0
+    },
+    nudgeBottom: {
+      type: Number,
+      default: 0
+    },
+    nudgeLeft: {
+      type: Number,
+      default: 0
+    },
+    nudgeRight: {
+      type: Number,
+      default: 0
+    },
     openOnClick: {
       type: Boolean,
       default: true
@@ -67,13 +83,14 @@ export default {
     offset () {
       const { activator: a, content: c } = this.dimensions
       const { direction, offsetX, offsetY, offsetAuto: auto } = this
+      const { nudgeTop: nt, nudgeBottom: nb, nudgeRight: nr, nudgeLeft: nl } = this
 
       const horiz = direction.horiz === 'left'
-          ? offsetX ? a.left - c.right : a.right - c.right + auto.horiz
-          : offsetX ? a.right - c.left : a.left - c.left + auto.horiz
+          ? offsetX ? a.left - c.right + nl : a.right - c.right + auto.horiz
+          : offsetX ? a.right - c.left + nr : a.left - c.left + auto.horiz
       const vert = direction.vert === 'top'
-          ? offsetY ? a.top - c.bottom : a.bottom - c.bottom + auto.vert
-          : offsetY ? a.bottom - c.top : a.top - c.top + auto.vert
+          ? offsetY ? a.top - c.bottom + nt : a.bottom - c.bottom + auto.vert
+          : offsetY ? a.bottom - c.top + nb : a.top - c.top + auto.vert
 
       return { horiz, vert }
     },
@@ -97,12 +114,13 @@ export default {
     screenDist () {
       const { activator: a } = this.dimensions
       const { innerHeight: innerH, innerWidth: innerW } = this.window
+      const { nudgeTop: nt, nudgeBottom: nb, nudgeRight: nr, nudgeLeft: nl } = this
       const dist = {}
 
-      dist.top = this.offsetY ? a.top : a.bottom
-      dist.left = this.offsetX ? a.left : a.right
-      dist.bottom = this.offsetY ? innerH - a.bottom : innerH - a.top
-      dist.right = this.offsetX ? innerW - a.right : innerW - a.left
+      dist.top = this.offsetY ? a.top + nt : a.bottom
+      dist.left = this.offsetX ? a.left + nl : a.right
+      dist.bottom = this.offsetY ? innerH - a.bottom - nb : innerH - a.top
+      dist.right = this.offsetX ? innerW - a.right - nr : innerW - a.left
       dist.horizMax = dist.left > dist.right ? dist.left : dist.right
       dist.horizMaxDir = dist.left > dist.right ? 'left' : 'right'
       dist.vertMax = dist.top > dist.bottom ? dist.top : dist.bottom
@@ -213,7 +231,8 @@ export default {
       const a = $refs.activator.children ? $refs.activator.children[0] : $refs.activator
       const c = $refs.content
 
-      c.style.minWidth = `${a.getBoundingClientRect().width + Math.abs(offsetAuto.horiz)}px`
+      c.style.minWidth = `${a.getBoundingClientRect().width + Math.abs(offsetAuto.horiz) * 2}px`
+      c.style.maxHeight = null  // <-- Todo: Investigate why this fixes rendering.
       c.style.maxHeight = isNaN(maxHeight) ? maxHeight : `${maxHeight}px`
       c.style.maxHeight = maxHeight === null && auto ? maxAuto : c.style.maxHeight
     },

@@ -8,7 +8,7 @@
   justify-content: space-between
   font-size: $chip-font-size
   padding: $chip-padding
-  margin: 8px
+  margin: $chip-margin
   height: $chip-height
   transition: .3s $transition.ease-in-out
   vertical-align: middle
@@ -48,6 +48,9 @@
       
   &--removable
     padding: $chip-removeable-padding
+    
+  &--select-multi
+    margin: $chip-margin $chip-margin $chip-margin 0
     
   .icon--right
     margin-left: 4px
