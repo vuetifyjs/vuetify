@@ -52,9 +52,7 @@
     },
 
     mounted () {
-      this.children = this.$slots.default.filter(slot => {
-        return slot.elm.nodeName === 'BUTTON'
-      })
+      this.children = this.$slots.default
 
       for (let i=this.children.length; i--;) {
         if (i === this.value) {
