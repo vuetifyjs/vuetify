@@ -1,0 +1,81 @@
+.bottom-nav
+  bottom: 0
+  position: fixed
+  width: 100%
+  height: 56px
+  box-shadow: 0 3px 14px 2px rgba(#000, .12)
+  display: flex
+  justify-content: center
+  transition: all .4s cubic-bezier(.25,.8,.50,1)
+
+  &--hidden
+    bottom: -60px
+
+  .btn
+    flex: 1;
+    height: 100%
+    top: 0
+    border-radius: 0
+    margin: 0
+    min-width: 80px
+    max-width: 168px
+    padding: 0px 12px
+    text-transform: capitalize
+    opacity: .5
+
+    .icon
+      transition: all .4s cubic-bezier(.25,.8,.50,1)
+
+    .btn__content
+      font-family: 'Roboto'
+      font-size: 12px
+      transform: scale(1) translateY(2px)
+      transition: font-size .1s ease-in-out
+      transition-property: flex, min-width, max-width
+      flex-direction: column-reverse
+
+
+    &--nav-active
+      opacity: 1
+
+      .btn__content
+        transform: translateY(1px)
+        font-size: 14px
+
+        .icon
+          transform: translateY(1px)
+
+  &--shift
+
+    .btn__content
+      font-size: 14px
+      transform: scale(1) translate3d(0,6px,0)
+
+      .icon
+        transform: translate3d(0, 10px, 0)
+        opacity: 1
+
+    .btn
+      transition: all .3s
+      min-width: 56px
+      max-width: 96px
+
+      &--nav-active
+        min-width: 96px
+        max-width: 168px
+
+        .icon
+          transform: scale(1) translateZ(0)
+
+        .btn__content
+          transform: scale(1) translate3d(0, 2px, 0)
+          opacity: 1
+
+
+.bottom-nav--shift
+  .btn:not(.btn--nav-active)
+    .btn__content
+      color: transparent
+
+      .icon
+        color: initial
