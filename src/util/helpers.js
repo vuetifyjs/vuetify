@@ -77,45 +77,28 @@ export function browserTransform (el, value) {
 
 // Returns a function, that, as long as it continues to be invoked, will not
 // be triggered. The function will be called after it stops being called for
-// N milliseconds. If `immediate` is passed, trigger the function on the
-// leading edge, instead of the trailing. Adapted from Underscore.js.
+// N milliseconds. If `execAsap` is passed, trigger the function on the
+// leading edge, instead of the trailing.
 //
 // Example:
-// var lazyLayout = debounce(calculateLayout, 300);
-// windowResize(lazyLayout);
-export function debounce (func, wait, immediate) {
-  var timeout, result
+// var calculateLayout = function () { ... }
+// window.addEventListner('resize', debounce(calculateLayout, 300)
+export function debounce (func, threshold, execAsap) {
+  var timeout
 
-  var later = function (context, args) {
-    timeout = null
-    if (args) result = func.apply(context, args)
-  }
+  return function debounced () {
+    var obj = this
+    var args = arguments
 
-  var debounced = function (...args) {
-    if (timeout) clearTimeout(timeout)
-    if (immediate) {
-      var callNow = !timeout
-      timeout = setTimeout(later, wait)
-      if (callNow) result = func.apply(this, args)
-    } else {
-      timeout = delay(later, wait, this, args)
+    function delayed () {
+      if (!execAsap) func.apply(obj, args)
+      timeout = null
     }
 
-    return result
-  }
+    if (timeout) clearTimeout(timeout)
+    else if (execAsap) func.apply(obj, args)
 
-  debounced.cancel = function () {
-    clearTimeout(timeout)
-    timeout = null
+    timeout = setTimeout(delayed, threshold || 100)
   }
-
-  return debounced
 }
 
-// Delays a function for the given number of milliseconds, and then calls
-// it with the arguments supplied. Adapted from Underscore.js.
-export function delay (func, wait, ...args) {
-  return setTimeout(function () {
-    return func.apply(null, args)
-  }, wait)
-}
