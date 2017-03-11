@@ -52,7 +52,10 @@
     },
 
     mounted () {
-      this.children = this.$slots.default
+      // #text nodes may be included in $slots
+      this.children = this.$slots.default.filter(slot => {
+        return slot.elm.nodeName === 'A'
+      })
 
       for (let i=this.children.length; i--;) {
         if (i === this.value) {
@@ -64,6 +67,8 @@
 
     methods: {
       activateBtn (i) {
+        if (i > this.children.length)
+          return
         this.children[i].elm.classList.add('btn--nav-active')
       },
 
