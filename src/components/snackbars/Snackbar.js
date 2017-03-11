@@ -7,7 +7,7 @@ export default {
 
   data () {
     return {
-      timeout: {}
+      activeTimeout: {}
     }
   },
 
@@ -44,7 +44,7 @@ export default {
       clearTimeout(this.timeout)
 
       if (this.isActive) {
-        this.timeout = setTimeout(() => (this.isActive = false), this.timeout)
+        this.activeTimeout = setTimeout(() => (this.isActive = false), this.timeout)
       }
     }
   },
