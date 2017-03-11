@@ -8,6 +8,14 @@ import { debounce } from '../../util/helpers'
 // Todo: Enter key on autocomplete selects top pick in list.
 // Todo: Click on chip should focus input and open menu.
 // Todo: Ability to add new items on the fly (and select them simultaneously).
+// Todo: Sorting?
+// Todo: Menu open upwards should open above input not above stack of chips.
+// Todo: Subheaders (option groups) are outside of the slot. So either we expand the slot
+//       (which will mean we have to handle events higher up) or we offer
+//       another slot for the subheaders.
+// Todo: Chips push input down and menu overlaps a bit afterwards. More chips
+//       stacked downwards get covered too. So probably refresh after each selection.
+// Todo: Discuss: Pass class to slot for chips or just demonstrate in docs the classes needed.
 export default {
   name: 'select',
 
@@ -20,7 +28,7 @@ export default {
       filteredItems: null,
       menuActive: false,
       appendIconCbPrivate: this.removeAllSelected,
-      noResultsFoundText: 'No search noResultsFoundts found.'
+      noResultsFoundText: 'No search results found.'
     }
   },
 
@@ -32,6 +40,10 @@ export default {
     itemText: {
       type: String,
       default: 'text'
+    },
+    itemGroup: {
+      type: String,
+      default: 'group'
     },
     appendIcon: {
       type: String,
@@ -206,7 +218,6 @@ export default {
 
     genSelectionsAndSearch (h) {
       const data = {
-        slot: 'activator',
         'class': 'input-group__selections'
       }
 
@@ -281,13 +292,21 @@ export default {
 
       const list = noResultsFound
         ? [this.genNoResultsFound(h)]
-        : (this.filteredItems || this.items).map(item => this.genListItem(h, item))
+        : (this.filteredItems || this.items).map((item, index, items) => this.genListItem(h, item, index, items))
 
       return h('v-list', {}, list)
     },
 
-    genListItem (h, item) {
-      return h('v-list-item', {}, [this.genTile(h, item)])
+    genListItem (h, item, index, items) {
+      // WIP
+      const prevItem = index ? items[index - 1] : [this.itemGroup]
+      const listItem = h('v-list-item', {}, [this.genTile(h, item)])
+
+      if (item[this.itemGroup] && item[this.itemGroup] !== prevItem[this.itemGroup]) {
+        return [h('v-subheader', {}, item[this.itemGroup]), listItem]
+      }
+
+      return listItem
     },
 
     genTile (h, item) {
@@ -308,7 +327,7 @@ export default {
       }
 
       return this.$scopedSlots.item
-        ? h('v-list-tile', data, this.$scopedSlots.item({ parent: this, item: item }))
+        ? h('v-list-tile', data, [this.$scopedSlots.item({ parent: this, item: item })])
         : h('v-list-tile', data, [this.genAction(h, item), this.genContent(h, item)])
     },
 
