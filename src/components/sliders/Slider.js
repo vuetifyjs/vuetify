@@ -7,6 +7,7 @@ export default {
 
   data () {
     return {
+      app: {},
       isActive: false,
       inputWidth: 0
     }
@@ -105,6 +106,7 @@ export default {
 
   mounted () {
     this.inputValue = this.value
+    this.app = document.querySelector('[data-app]')
   },
 
   methods: {
@@ -117,14 +119,14 @@ export default {
     },
     onMouseDown (e) {
       this.isActive = true
-      document.addEventListener('touchmove', this.onMouseMove, false)
-      document.addEventListener('pointermove', this.onMouseMove, false)
-      document.addEventListener('mouseup', this.onMouseUp, false)
+      this.app.addEventListener('touchmove', this.onMouseMove, false)
+      this.app.addEventListener('mousemove', this.onMouseMove, false)
+      this.app.addEventListener('mouseup', this.onMouseUp, false)
     },
     onMouseUp (e) {
       this.isActive = false
-      document.removeEventListener('pointermove', this.onMouseMove, false)
-      document.removeEventListener('touchmove', this.onMouseMove, false)
+      this.app.removeEventListener('mousemove', this.onMouseMove, false)
+      this.app.removeEventListener('touchmove', this.onMouseMove, false)
     },
     onMouseMove (e) {
       const { left: offsetLeft, width: trackWidth } = this.$refs.track.getBoundingClientRect()
