@@ -23,11 +23,7 @@ export default {
       type: [Number, String],
       default: 100
     },
-    stepSize: {
-      type: [Number, String],
-      default: 1
-    },
-    tickInterval: [Number, String],
+    step: [Number, String],
     thumbLabel: Boolean,
     value: [Number, String],
     vertical: Boolean
@@ -40,7 +36,7 @@ export default {
         'input-group--active': this.isActive,
         'input-group--dirty': this.inputValue > this.min,
         'input-group--disabled': this.disabled,
-        'input-group--ticks': this.tickInterval
+        'input-group--ticks': this.step
       }
     },
     inputValue: {
@@ -73,13 +69,13 @@ export default {
     },
     tickContainerStyles () {
       return {
-        transform: `translate3d(-${this.tickInterval / 2 * this.stepSize}%, -50%, 0)`
+        transform: `translate3d(-${this.step}%, -50%, 0)`
       }
     },
     tickStyles () {
       return {
-        backgroundSize: `${this.tickInterval * this.stepSize}% 2px`,
-        transform: `translate3d(${this.tickInterval / 2 * this.stepSize}%, 0, 0)`
+        backgroundSize: `${this.step}% 2px`,
+        transform: `translate3d(${this.step}%, 0, 0)`
       }
     },
     trackStyles () {
@@ -156,7 +152,7 @@ export default {
     trackChildren.push(h('div', { 'class': 'slider__track-fill', style: this.trackFillStyles }))
     children.push(h('div', { 'class': 'slider__track__container', ref: 'track' }, trackChildren))
 
-    if (this.tickInterval) {
+    if (this.step) {
       children.push(
         h('div', { 'class': 'slider__ticks-container', style: this.tickContainerStyles }, [
           h('div', { 'class': 'slider__ticks', style: this.tickStyles })
