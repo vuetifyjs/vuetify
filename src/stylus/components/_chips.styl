@@ -13,11 +13,16 @@
   transition: .3s $transition.ease-in-out
   vertical-align: middle
   
-  img
+  .avatar
     border-radius: 50%
     height: $chip-height
-    margin-left: -12px
+    width: $chip-height
+    margin-left: -14px
     margin-right: 8px
+    
+    img
+      width: 100%
+      height: 100%
     
   &:focus
     @extend .z-depth-1
@@ -41,6 +46,7 @@
     text-decoration: none
     font-size: $chip-icon-font-size
     margin-left: 4px
+    margin-right: -2px
     transition: .3s $transition.ease-in-out
 
     &:hover

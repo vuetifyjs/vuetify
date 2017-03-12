@@ -62,10 +62,14 @@
       line-height: 1.3
       font-weight: $list-sub-title-font-weight
     
-    &__action, &__avatar
+    &__action
       display: flex
       justify-content: flex-start
       align-items: center
+      flex: 1 0 56px
+    
+    .avatar
+      justify-content: flex-start
       flex: 1 0 56px
             
     &__action
@@ -92,12 +96,6 @@
       &--select-multi
         flex: 1 0 30px
       
-    &__avatar        
-      img, .icon
-        height: 42px
-        width: 42px
-        border-radius: 50%
-      
     &__content
       text-align: left
       flex: 0 1 100%
@@ -108,7 +106,7 @@
       justify-content: center
       flex-direction: column
       
-      + .list__tile__avatar
+      + .avatar
         justify-content: flex-end
         
       + .list__tile__action:not(.list__tile__action--stack)
