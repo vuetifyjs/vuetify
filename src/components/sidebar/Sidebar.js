@@ -27,11 +27,7 @@ export default {
 
   computed: {
     calculatedHeight () {
-      if (this.height) {
-        return this.height
-      }
-
-      return this.fixed || this.drawer ? '100vh' : 'auto'
+      return this.height || this.fixed || this.drawer ? '100vh' : 'auto'
     },
     classes () {
       return {
@@ -46,7 +42,7 @@ export default {
     },
     styles () {
       return {
-        'height': this.calculatedHeight
+        height: this.calculatedHeight
       }
     }
   },
@@ -82,14 +78,10 @@ export default {
     },
 
     routeChanged () {
-      if (
+      return (
         (window.innerWidth < this.mobileBreakPoint && this.mobile) ||
         (this.drawer && this.closeOnClick)
-      ) {
-        return true
-      }
-
-      return false
+      )
     }
   },
 
