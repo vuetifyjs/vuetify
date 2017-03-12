@@ -8,6 +8,7 @@ export default {
 
   data () {
     return {
+      booted: this.value,
       height: 0
     }
   },
@@ -37,6 +38,7 @@ export default {
 
   watch: {
     isActive () {
+      this.booted = true
       this.$emit('input', this.isActive)
 
       if (!this.isActive) {
@@ -71,10 +73,9 @@ export default {
     },
     enter (el, done) {
       el.style.display = 'block'
-      const scrollHeight = el.scrollHeight
       this.height = 0
 
-      setTimeout(() => (this.height = scrollHeight), 50)
+      setTimeout(() => (this.height = el.scrollHeight), 50)
 
       addOnceEventListener(el, 'transitionend', done)
     },
@@ -96,7 +97,7 @@ export default {
         value: this.isActive
       }],
       ref: 'group'
-    }, [this.$slots.default])
+    }, this.booted ? this.$slots.default : [])
 
     const item = h('div', {
       'class': this.classes,

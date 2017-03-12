@@ -25,9 +25,9 @@ export default {
     }
   },
 
-  render (createElement) {
+  render (h) {
     const { tag, data } = this.generateRouteLink()
 
-    return createElement(tag, data, [this.$slots.default])
+    return h(tag, data, [this.$slots.default])
   }
 }
