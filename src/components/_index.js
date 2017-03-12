@@ -1,5 +1,6 @@
 import Alerts from './alerts/index'
 import App from './app/index'
+import Avatars from './avatars/index'
 import Breadcrumbs from './breadcrumbs/index'
 import Buttons from './buttons/index'
 import Cards from './cards/index'
@@ -31,6 +32,7 @@ import Snackbar from './snackbars/index'
 export default Object.assign({},
   Alerts,
   App,
+  Avatars,
   Breadcrumbs,
   Buttons,
   Cards,
