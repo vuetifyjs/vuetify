@@ -7,7 +7,7 @@ export default {
 
   data () {
     return {
-      inputDeterminate: this.indeterminate
+      inputDeterminant: this.indeterminate
     }
   },
 
@@ -30,7 +30,7 @@ export default {
       }
     },
     icon () {
-      if (this.inputDeterminate) {
+      if (this.inputDeterminant) {
         return 'indeterminate_check_box'
       } else if (this.isActive) {
         return 'check_box'
@@ -43,7 +43,7 @@ export default {
   watch: {
     value () {
       if (this.indeterminate) {
-        this.inputDeterminate = false
+        this.inputDeterminant = false
       }
     }
   },
