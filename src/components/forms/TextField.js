@@ -118,7 +118,7 @@ export default {
           autocomplete: this.autocomplete,
           disabled: this.disabled,
           id: this.id || this.name || this._uid,
-          name: this.name,
+          name: this.name || this._uid,
           required: this.required,
           value: this.lazyValue
         },

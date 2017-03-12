@@ -7,9 +7,9 @@
     border-right: 1px solid transparent
     transition: border-right .3s $transition.ease-in-out
     
-    &:focus
-      + .icon
-        transform: rotate(-180deg)
+  .input-group--focused
+    input + .icon
+      transform: rotate(-180deg)
       
   .menu, .menu__activator
     width: 100%
