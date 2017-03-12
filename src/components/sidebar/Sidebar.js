@@ -33,6 +33,7 @@ export default {
       return {
         'sidebar': true,
         'sidebar--close': !this.isActive,
+        'sidebar--right': this.right,
         'sidebar--drawer': this.drawer,
         'sidebar--fixed': this.fixed || this.drawer,
         'sidebar--fixed-right': this.fixed && this.right,
