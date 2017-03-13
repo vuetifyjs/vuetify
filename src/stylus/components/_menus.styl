@@ -1,6 +1,5 @@
 .menu
   display: inline-block
-  position: relative
   
   &--disabled
     cursor: not-allowed
@@ -25,7 +24,6 @@
     
   &-transition
     &-enter
-      opacity: 0
       
       .list__tile
         min-width: 0
@@ -40,7 +38,6 @@
         pointer-events: auto
       
     &-enter-to
-      opacity: 1
         
       .list__tile
         pointer-events: auto
@@ -59,5 +56,4 @@
       opacity: 1
       
     &-enter-active, &-leave-active
-      transition: all .3s $transition.ease-in-out, top 1ms, left 1ms, bottom 1ms, right 1ms
-      
+      transition: all .3s $transition.ease-in-out
