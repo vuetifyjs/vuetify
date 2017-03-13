@@ -72,6 +72,7 @@ export default {
     multiLine: Boolean,
     singleLine: Boolean,
     type: {
+      type: String,
       default: 'text'
     }
   },
