@@ -13,13 +13,13 @@
       v-bind:name="name"
       v-bind:multiple="multiple"
       v-on:blur="updateValue"
-      v-on:click="focused = true"
+      v-on:focus="focus"
       v-on:input="updateValue"
       ref="select"
     )
       option(
         value=''
-        v-bind:selected="!multiple"
+        v-bind:selected="!multiple && !this.value"
         v-bind:disabled="defaultDisabled"
         v-text="defaultText"
       )
@@ -85,7 +85,8 @@
     computed: {
       classes () {
         return {
-          'input-group--dirty': true
+          'input-group--dirty': true,
+          'input-group--focused': this.focused
         }
       }
     },
@@ -111,11 +112,19 @@
     },
 
     methods: {
-      updateValue () {
+      focus () {
+        this.focused = true
+      },
+
+      updateValue (evt) {
         if (this.multiple) {
           this.$emit('input', this.$refs.options.filter(i => i.selected).map(i => i.value))
         } else {
           this.$emit('input', this.$refs.select.value)
+        }
+
+        if (evt.type !== 'input') {
+          this.focused = false
         }
       }
     }
