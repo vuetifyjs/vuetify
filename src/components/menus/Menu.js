@@ -1,4 +1,5 @@
 import Toggleable from '../../mixins/toggleable'
+import { debounce } from '../../util/helpers'
 
 export default {
   name: 'menu',
@@ -8,6 +9,7 @@ export default {
   data () {
     return {
       window: {},
+      windowResizeHandler: () => {},
       dimensions: {
         activator: {
           top: 0, left: 0, bottom: 0, right: 0, width: 0, height: 0, offsetTop: 0
@@ -61,6 +63,10 @@ export default {
       type: Number,
       default: 0
     },
+    nudgeWidth: {
+      type: Number,
+      default: 0
+    },
     openOnClick: {
       type: Boolean,
       default: true
@@ -68,6 +74,12 @@ export default {
     closeOnClick: {
       type: Boolean,
       default: true
+    },
+    activator: {
+      default: null
+    },
+    activatorXY: {
+      default: null
     },
     origin: {
       type: String,
@@ -160,18 +172,66 @@ export default {
 
   watch: {
     isActive (val) {
-      if (val && !this.disabled) this.activate()
+      if (val) this.activate()
       else this.isContentActive = false
+    },
 
-      this.isActive = val && !this.disabled
+    activator (newActivator, oldActivator) {
+      this.removeActivatorEvents(oldActivator)
+      this.addActivatorEvents(newActivator)
+    },
+
+    activatorXY (val) {
+      this.isActive = true
     }
+  },
+
+  mounted () {
+    this.addActivatorEvents(this.activator)
+  },
+
+  beforeDestroy () {
+    this.removeActivatorEvents(this.activator)
+    this.window.removeEventListener('resize', this.windowResizeHandler)
   },
 
   methods: {
     activate () {
-      this.window = window
+      if (!this.isActive || this.disabled) return
+
+      this.initWindow()
       this.setDirection()
       this.updatePosition()
+    },
+
+    initWindow () {
+      if (this.window === window) return
+
+      this.window = window
+      this.windowResizeHandler = debounce(this.activate, 200)
+      this.window.addEventListener('resize', this.windowResizeHandler)
+    },
+
+    getActivator () {
+      const { $refs } = this
+
+      if (this.activator) return this.activator
+      if (this.activatorXY) return this.activatorXY
+      return $refs.activator.children ? $refs.activator.children[0] : $refs.activator
+    },
+
+    activatorClickHandler () {
+      if (this.openOnClick) this.isActive = !this.isActive && !this.disabled
+    },
+
+    addActivatorEvents (activator = null) {
+      if (!activator) return
+      activator.addEventListener('click', this.activatorClickHandler)
+    },
+
+    removeActivatorEvents (activator = null) {
+      if (!activator) return
+      activator.removeEventListener('click', this.activatorClickHandler)
     },
 
     setDirection (horiz = '', vert = '') {
@@ -209,13 +269,14 @@ export default {
     },
 
     updateDimensions () {
-      const { activator: a, content: c } = this.$refs
+      const a = this.getActivator()
+      const c = this.$refs.content
 
       this.sneakPeek(c, () => {
         this.updateMaxMin()
 
         this.dimensions = {
-          'activator': this.measure(a.children ? a.children[0] : a),
+          'activator': this.measure(a),
           'content': this.measure(c),
           'list': this.measure(c, '.list'),
           'selected': this.measure(c, '.list__tile--active', 'parent')
@@ -227,11 +288,14 @@ export default {
     },
 
     updateMaxMin () {
-      const { $refs, maxHeight, maxHeightAutoDefault: maxAuto, offsetAuto, auto } = this
-      const a = $refs.activator.children ? $refs.activator.children[0] : $refs.activator
-      const c = $refs.content
+      const { maxHeight, maxHeightAutoDefault: maxAuto, offsetAuto, auto } = this
+      const a = this.getActivator()
+      const c = this.$refs.content
+      const widthAdjust = this.nudgeWidth + Math.abs(offsetAuto.horiz) * 2
 
-      c.style.minWidth = `${a.getBoundingClientRect().width + Math.abs(offsetAuto.horiz) * 2}px`
+      if (!this.activatorXY) {
+        c.style.minWidth = `${a.getBoundingClientRect().width + widthAdjust}px`
+      }
       c.style.maxHeight = null  // <-- Todo: Investigate why this fixes rendering.
       c.style.maxHeight = isNaN(maxHeight) ? maxHeight : `${maxHeight}px`
       c.style.maxHeight = maxHeight === null && auto ? maxAuto : c.style.maxHeight
@@ -295,9 +359,7 @@ export default {
           'menu__activator': true
         },
         on: {
-          click: () => {
-            if (this.openOnClick) this.isActive = !this.isActive && !this.disabled
-          }
+          click: this.activatorClickHandler
         }
       }
 
@@ -339,6 +401,13 @@ export default {
       el = el && getParent ? el.parentElement : el
 
       if (!el) return null
+      if (!el.nodeName && el.hasOwnProperty('clientX') && el.hasOwnProperty('clientY')) {
+        return {
+          top: el.clientY, bottom: el.clientY, left: el.clientX, right: el.clientX,
+          width: 0, height: 0, offsetTop: 0
+        }
+      }
+
       const { top, left, bottom, right, width, height } = el.getBoundingClientRect()
       return { top, left, bottom, right, width, height, offsetTop: el.offsetTop }
     },
@@ -362,7 +431,12 @@ export default {
       },
       directives: [
         {
-          name: 'click-outside'
+          name: 'click-outside',
+          value: e => {
+            const a = this.activator
+            if (a && (a === e.target || a.contains(e.target))) return false
+            return true
+          }
         }
       ],
       on: {

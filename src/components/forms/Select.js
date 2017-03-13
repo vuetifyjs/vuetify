@@ -3,19 +3,9 @@ import { debounce } from '../../util/helpers'
 
 // Todo: Debounce double/triple clicks.
 // Todo: Animate progress bar between debounces on search.
-// Todo: Confirm css changes to list tiles are good.
-// Todo: Keyboard down arrow.
-// Todo: Enter key on autocomplete selects top pick in list.
-// Todo: Click on chip should focus input and open menu.
+// Todo: Arrow controls on chips.
 // Todo: Ability to add new items on the fly (and select them simultaneously).
-// Todo: Sorting?
-// Todo: Menu open upwards should open above input not above stack of chips.
-// Todo: Subheaders (option groups) are outside of the slot. So either we expand the slot
-//       (which will mean we have to handle events higher up) or we offer
-//       another slot for the subheaders.
-// Todo: Chips push input down and menu overlaps a bit afterwards. More chips
-//       stacked downwards get covered too. So probably refresh after each selection.
-// Todo: Discuss: Pass class to slot for chips or just demonstrate in docs the classes needed.
+// Todo: Scroll to highlighted when key up/down.
 export default {
   name: 'select',
 
@@ -25,8 +15,11 @@ export default {
     return {
       inputValue: this.parseInputValue(),
       inputSearch: this.parseInputSearch(),
-      filteredItems: null,
       menuActive: false,
+      menuActivator: null,
+      keyUpDown: 0,
+      keyLeftRight: 0,
+      backspaces: 0,
       appendIconCbPrivate: this.removeAllSelected,
       noResultsFoundText: 'No search results found.'
     }
@@ -71,8 +64,32 @@ export default {
         'input-group--multi-line': this.multiLine
       }
     },
-    inputValueLength () {
-      return this.inputValue.length
+
+    filteredItems () {
+      let filtered = this.items
+
+      if (this.inputSearch) {
+        filtered = this.filter
+          ? this.items.filter(item => (this.filter(item, this.inputSearch)))
+          : this.items.filter(item => (this.defaultFilter(item, this.inputSearch)))
+
+        filtered = filtered.length ? filtered : this.items
+      }
+
+      return filtered
+    },
+
+    inputCommaCount () {
+      return this.inputValue.length + (this.focused ? 1 : 0)
+    },
+
+    highlighted () {
+      return this.filteredItems[this.keyUpDown - 1]
+    },
+
+    activeSelection () {
+      const activeIndex = this.inputValue.length - this.keyLeftRight
+      return this.inputValue[activeIndex]
     }
   },
 
@@ -88,6 +105,7 @@ export default {
 
     inputValue (val) {
       if (this.multiple) {
+        this.$refs.menu.activate()
         this.$emit('input', !val.length ? null : val)
       } else {
         this.$emit('input', !val.length ? null : val[0])
@@ -95,13 +113,31 @@ export default {
     },
 
     menuActive (val) {
-      if (!val) this.$refs.searchField.blur()
+      if (!val && this.autocomplete) this.$refs.searchField.blur()
+    },
+
+    keyUpDown (val) {
+      const numItems = this.filteredItems.length
+      if (val < 0) this.keyUpDown = 0
+      if (val > numItems) this.keyUpDown = numItems
+
+      // Todo: Scroll to highlighted here.
+    },
+
+    keyLeftRight (val) {
+      const numSelections = this.inputValue.length
+      if (val > numSelections) this.keyLeftRight = 0
+      if (val < 0) this.keyLeftRight = numSelections
     }
+  },
+
+  mounted () {
+    this.menuActivator = this.$refs.inputgroup.querySelector('.input-group__input')
   },
 
   methods: {
     isDirty () {
-      return this.inputSearch || this.multiple && this.inputValue.length
+      return this.inputSearch || this.inputValue.length
     },
 
     focus () {
@@ -112,6 +148,8 @@ export default {
     blur () {
       this.$nextTick(() => (this.focused = false))
       this.showClearIcon(false)
+      this.keyUpDown = 0
+      this.keyLeftRight = 0
     },
 
     parseInputValue () {
@@ -121,29 +159,20 @@ export default {
     },
 
     parseInputSearch () {
-      if (this.multiple || this.value === null) return ''
-      return this.value[this.itemText]
-    },
-
-    // TODO: Maybe convert to computed prop on inputSearch and items.
-    filterItems () {
-      const { items, inputSearch } = this
-      const isFilterable = inputSearch && this.autocomplete
-      let filtered = null
-
-      if (isFilterable) {
-        filtered = this.filter
-          ? items.filter(item => (this.filter(item, inputSearch)))
-          : items.filter(item => (this.defaultFilter(item, inputSearch)))
-
-        filtered = filtered.length ? filtered : null
-      }
-
-      this.filteredItems = filtered
+      if (this.autocomplete && !this.multiple && this.value) return this.value[this.itemText]
+      return this.inputSearch
     },
 
     defaultFilter (item, inputSearch) {
       return item[this.itemText].toLowerCase().includes(inputSearch.toLowerCase())
+    },
+
+    isHighlighted (item) {
+      return item === this.highlighted
+    },
+
+    isActiveSelection (item) {
+      return item === this.activeSelection
     },
 
     isSelected (item) {
@@ -151,18 +180,26 @@ export default {
     },
 
     addSelected (item) {
-      if (this.multiple) {
-        this.inputValue.push(item)
-        this.inputSearch = ''
-      } else {
-        this.inputValue = [item]
-        this.inputSearch = item[this.itemText]
+      if (!item) return
+
+      const uncheck = this.isSelected(item) && this.multiple
+      if (uncheck) {
+        this.removeSelected(item)
+        return
       }
-      this.filterItems()
+
+      this.multiple ? this.inputValue.push(item) : this.inputValue = [item]
+      this.inputSearch = this.autocomplete && !this.multiple ? item[this.itemText] : ''
+
+      if (!this.multiple) this.menuActive = false
+      if (this.autocomplete) this.$refs.searchField.focus()
     },
 
     removeSelected (item) {
+      if (!item) return
+
       this.inputValue.splice(this.inputValue.findIndex(s => s === item), 1)
+      if (this.autocomplete && !this.multiple) this.inputSearch = ''
     },
 
     removeAllSelected (e) {
@@ -193,9 +230,11 @@ export default {
           disabled: this.disabled,
           offsetY: this.autocomplete,
           value: this.menuActive,
-          nudgeBottom: -20,
+          nudgeBottom: 2,
           nudgeTop: -16,
-          nudgeXAuto: this.multiple ? -40 : -16
+          // nudgeWidth: this.appendIcon ? 30 : 0,
+          nudgeXAuto: this.multiple ? -40 : -16,
+          activator: this.menuActivator
         },
         on: {
           input: (val) => (this.menuActive = val)
@@ -206,14 +245,14 @@ export default {
         }
       }
 
-      return h('v-menu', data, [this.genActivator(h), this.genList(h)])
+      return h('v-menu', data, [this.genList(h)])
     },
 
     genActivator (h) {
       const data = {
         slot: 'activator'
       }
-      return this.genInputGroup(h, [this.genSelectionsAndSearch(h)], data)
+      return h('div', data, [this.genSelectionsAndSearch(h)])
     },
 
     genSelectionsAndSearch (h) {
@@ -221,9 +260,9 @@ export default {
         'class': 'input-group__selections'
       }
 
-      return this.multiple
-        ? h('div', data, this.genSelections(h).concat(this.genSearchField(h)))
-        : h('div', data, [this.genSearchField(h)])
+      if (this.multiple) return h('div', data, this.genSelections(h).concat(this.genSearchField(h)))
+      if (this.autocomplete) return [this.genSearchField(h)]
+      return h('div', data, this.genSelections(h))
     },
 
     genSelections (h) {
@@ -260,10 +299,13 @@ export default {
     },
 
     genCommaSelection (h, item, index) {
-      const comma = index !== this.inputValueLength - 1 ? ',' : ''
+      const comma = index < this.inputCommaCount - 1 ? ',' : ''
 
       const data = {
-        'class': 'input-group__selections__comma'
+        'class': {
+          'input-group__selections__comma': true,
+          'input-group__selections__comma--active': this.isActiveSelection(item)
+        }
       }
       return h('div', data, item[this.itemText] + comma)
     },
@@ -276,11 +318,29 @@ export default {
         },
         on: {
           input: debounce(e => {
-            this.inputSearch = e.target.value
-            this.filterItems()
+            this.inputSearch = this.autocomplete ? e.target.value : ''
           }, this.debounce),
           focus: this.focus,
-          blur: this.blur
+          blur: this.blur,
+          keyup: e => {
+            // Arrow down.
+            if (e.keyCode === 40) this.keyUpDown++
+            // Arrow up.
+            if (e.keyCode === 38) this.keyUpDown--
+            // Enter.
+            if (e.keyCode === 13) this.addSelected(this.highlighted)
+            // Arrow left.
+            if (e.keyCode === 37) this.keyLeftRight++
+            // Arrow right.
+            if (e.keyCode === 39) this.keyLeftRight--
+            // Backspace.
+            if (e.keyCode === 8) {
+              this.removeSelected(this.activeSelection)
+              this.keyLeftRight++
+            }
+            // Delete.
+            if (e.keyCode === 46) this.removeSelected(this.activeSelection)
+          }
         }
       }
 
@@ -288,46 +348,55 @@ export default {
     },
 
     genList (h) {
-      const noResultsFound = this.autocomplete && this.inputSearch && !this.filteredItems
+      const noResultsFound = this.inputSearch && !this.filteredItems
+      let list
 
-      const list = noResultsFound
-        ? [this.genNoResultsFound(h)]
-        : (this.filteredItems || this.items).map((item, index, items) => this.genListItem(h, item, index, items))
+      if (noResultsFound) {
+        list = [this.genNoResultsFound(h)]
+      } else {
+        list = (this.filteredItems).map((item, index, items) => {
+          const prevItem = items[index - 1] || null
+          return this.genListItem(h, item, prevItem)
+        })
+      }
 
       return h('v-list', {}, list)
     },
 
-    genListItem (h, item, index, items) {
-      // WIP
-      const prevItem = index ? items[index - 1] : [this.itemGroup]
-      const listItem = h('v-list-item', {}, [this.genTile(h, item)])
+    genListItem (h, item, prevItem) {
+      const group = item[this.itemGroup]
+      const prevGroup = prevItem ? prevItem[this.itemGroup] : null
+      const isNewGroup = group && group !== prevGroup
+      const listItem = h('v-list-item', {}, [this.genTile(h, item, prevItem)])
 
-      if (item[this.itemGroup] && item[this.itemGroup] !== prevItem[this.itemGroup]) {
-        return [h('v-subheader', {}, item[this.itemGroup]), listItem]
+      // Check for option groups.
+      if (isNewGroup) {
+        return [h('v-subheader', {}, group), listItem]
       }
 
       return listItem
     },
 
-    genTile (h, item) {
+    genTile (h, item, prevItem) {
       const data = {
         'class': {
           'list__tile--active': this.isSelected(item),
-          'list__tile--select-multi': this.multiple
+          'list__tile--select-multi': this.multiple,
+          'list__tile--highlighted': this.isHighlighted(item)
         },
         nativeOn: {
-          click: e => {
-            this.isSelected(item) && this.multiple
-              ? this.removeSelected(item)
-              : this.addSelected(item)
-
-            this.$refs.searchField.focus()
-          }
+          click: e => { this.addSelected(item) }
         }
       }
 
+      const scopeData = {
+        parent: this,
+        item: item,
+        prevItem: prevItem
+      }
+
       return this.$scopedSlots.item
-        ? h('v-list-tile', data, [this.$scopedSlots.item({ parent: this, item: item })])
+        ? h('v-list-tile', data, [this.$scopedSlots.item(scopeData)])
         : h('v-list-tile', data, [this.genAction(h, item), this.genContent(h, item)])
     },
 
@@ -365,6 +434,10 @@ export default {
   },
 
   render (h) {
-    return this.genMenu(h)
+    const data = { ref: 'inputgroup' }
+    const inputGroup = this.genInputGroup(h, [this.genSelectionsAndSearch(h)], data)
+    const menu = this.genMenu(h)
+
+    return h('div', {}, [inputGroup, menu])
   }
 }
