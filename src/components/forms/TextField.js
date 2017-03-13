@@ -60,7 +60,6 @@ export default {
   props: {
     autocomplete: Boolean,
     counter: Boolean,
-    id: String,
     fullWidth: Boolean,
     min: {
       type: [Number, String],
@@ -70,11 +69,10 @@ export default {
       type: [Number, String],
       default: 25
     },
-    menu: Boolean,
     multiLine: Boolean,
-    name: String,
     singleLine: Boolean,
     type: {
+      type: String,
       default: 'text'
     }
   },
@@ -117,8 +115,6 @@ export default {
         domProps: {
           autocomplete: this.autocomplete,
           disabled: this.disabled,
-          id: this.id || this.name || this._uid,
-          name: this.name || this._uid,
           required: this.required,
           value: this.lazyValue
         },

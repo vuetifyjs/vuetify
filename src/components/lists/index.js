@@ -1,7 +1,7 @@
 import { createSimpleFunctional } from '../../util/helpers'
 
 import List from './List'
-import ListGroup from './ListGroup.vue'
+import ListGroup from './ListGroup'
 import ListTile from './ListTile'
 import ListTileAction from './ListTileAction'
 
