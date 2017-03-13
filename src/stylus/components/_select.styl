@@ -1,6 +1,11 @@
 .input-group--select
-  input
-    cursor: pointer
+    
+  .input-group__append-icon
+    transition: .3s $transition.linear-out-slow-in
+    
+  &.input-group--focused
+    .input-group__append-icon
+      transform: rotate(-180deg)
     
   &.input-group--disabled
     cursor: not-allowed
@@ -12,6 +17,9 @@
     flex-wrap: wrap
     width: 100%
     
+    input
+      cursor: pointer
+
     &__comma
       font-size: 16px
       height: 30px

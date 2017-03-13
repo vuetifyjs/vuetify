@@ -1,6 +1,21 @@
 import Input from '../../mixins/input'
 import { debounce } from '../../util/helpers'
 
+// Todo: Debounce double/triple clicks.
+// Todo: Animate progress bar between debounces on search.
+// Todo: Confirm css changes to list tiles are good.
+// Todo: Keyboard down arrow.
+// Todo: Enter key on autocomplete selects top pick in list.
+// Todo: Click on chip should focus input and open menu.
+// Todo: Ability to add new items on the fly (and select them simultaneously).
+// Todo: Sorting?
+// Todo: Menu open upwards should open above input not above stack of chips.
+// Todo: Subheaders (option groups) are outside of the slot. So either we expand the slot
+//       (which will mean we have to handle events higher up) or we offer
+//       another slot for the subheaders.
+// Todo: Chips push input down and menu overlaps a bit afterwards. More chips
+//       stacked downwards get covered too. So probably refresh after each selection.
+// Todo: Discuss: Pass class to slot for chips or just demonstrate in docs the classes needed.
 export default {
   name: 'select',
 
@@ -8,11 +23,12 @@ export default {
 
   data () {
     return {
-      inputValue: this.multiple ? Array.from(this.value || []) : new Array(this.value || 0),
-      inputSearch: this.value ? this.value[this.itemText] : '',
+      inputValue: this.parseInputValue(),
+      inputSearch: this.parseInputSearch(),
       filteredItems: null,
       menuActive: false,
-      appendIconCbPrivate: this.removeAllSelected
+      appendIconCbPrivate: this.removeAllSelected,
+      noResultsFoundText: 'No search results found.'
     }
   },
 
@@ -25,18 +41,23 @@ export default {
       type: String,
       default: 'text'
     },
+    itemGroup: {
+      type: String,
+      default: 'group'
+    },
     appendIcon: {
       type: String,
       default: 'arrow_drop_down'
     },
     multiple: Boolean,
     autocomplete: Boolean,
+    filter: Function,
     singleLine: Boolean,
     chips: Boolean,
     close: Boolean,
     debounce: {
       type: Number,
-      default: 300
+      default: 200
     }
   },
 
@@ -49,22 +70,32 @@ export default {
         'input-group--single-line': this.singleLine,
         'input-group--multi-line': this.multiLine
       }
+    },
+    inputValueLength () {
+      return this.inputValue.length
     }
   },
 
   watch: {
-    focused () {
-      this.$emit('focused', this.focused)
+    focused (val) {
+      this.$emit('focused', val)
     },
+
     value (val) {
-      this.inputValue = this.multiple ? val || [] : new Array(val)
-      this.inputSearch = this.multiple ? '' : val[this.itemText]
+      this.inputValue = this.parseInputValue()
+      this.inputSearch = this.parseInputSearch()
     },
+
     inputValue (val) {
-      this.$emit('input', this.multiple ? val : val[0])
+      if (this.multiple) {
+        this.$emit('input', !val.length ? null : val)
+      } else {
+        this.$emit('input', !val.length ? null : val[0])
+      }
     },
-    menuActive (isActive) {
-      if (!isActive) this.$refs.searchField.blur()
+
+    menuActive (val) {
+      if (!val) this.$refs.searchField.blur()
     }
   },
 
@@ -75,21 +106,44 @@ export default {
 
     focus () {
       this.focused = true
-      this.closeAction(true)
+      this.showClearIcon(true)
     },
 
     blur () {
       this.$nextTick(() => (this.focused = false))
-      this.closeAction(false)
+      this.showClearIcon(false)
     },
 
-    // TODO: Maybe this should be computed prop?
-    filterItems () {
-      const { items, inputSearch, itemText } = this
+    parseInputValue () {
+      if (this.value === null) return []
+      if (this.multiple) return this.value
+      return this.isEmptyObject(this.value) ? [] : [this.value]
+    },
 
-      this.filteredItems = inputSearch && this.autocomplete
-        ? items.filter(item => item[itemText].includes(inputSearch))
-        : null
+    parseInputSearch () {
+      if (this.multiple || this.value === null) return ''
+      return this.value[this.itemText]
+    },
+
+    // TODO: Maybe convert to computed prop on inputSearch and items.
+    filterItems () {
+      const { items, inputSearch } = this
+      const isFilterable = inputSearch && this.autocomplete
+      let filtered = null
+
+      if (isFilterable) {
+        filtered = this.filter
+          ? items.filter(item => (this.filter(item, inputSearch)))
+          : items.filter(item => (this.defaultFilter(item, inputSearch)))
+
+        filtered = filtered.length ? filtered : null
+      }
+
+      this.filteredItems = filtered
+    },
+
+    defaultFilter (item, inputSearch) {
+      return item[this.itemText].toLowerCase().includes(inputSearch.toLowerCase())
     },
 
     isSelected (item) {
@@ -117,12 +171,15 @@ export default {
       e.stopPropagation()
       this.inputValue = []
       this.inputSearch = ''
-      this.closeAction(false)
+      this.showClearIcon(false)
     },
 
-    closeAction (on = true) {
+    showClearIcon (on = true) {
       this.appendIconAlt = on && this.close && this.inputValue.length ? 'close' : ''
     },
+
+    // Render functions
+    // ====================
 
     genMenu (h) {
       const data = {
@@ -135,14 +192,17 @@ export default {
           closeOnClick: !this.multiple,
           disabled: this.disabled,
           offsetY: this.autocomplete,
-          value: this.menuActive
+          value: this.menuActive,
+          nudgeBottom: -20,
+          nudgeTop: -16,
+          nudgeXAuto: this.multiple ? -40 : -16
         },
         on: {
           input: (val) => (this.menuActive = val)
         },
         nativeOn: {
-          '!mouseenter': this.closeAction,
-          mouseleave: () => (this.closeAction(false))
+          '!mouseenter': this.showClearIcon,
+          mouseleave: () => { this.showClearIcon(false) }
         }
       }
 
@@ -158,7 +218,6 @@ export default {
 
     genSelectionsAndSearch (h) {
       const data = {
-        slot: 'activator',
         'class': 'input-group__selections'
       }
 
@@ -172,22 +231,22 @@ export default {
       const slots = this.$scopedSlots.selection
       const comma = true // <-- default
 
-      return this.inputValue.map((item, index, array) => {
-        if (slots) return this.genSlotSelection(h, item)
-        if (chips) return this.genChipSelection(h, item)
-        if (comma) {
-          const length = array.length
-          return this.genCommaSelection(h, item, length !== 1 && index !== length - 1)
-        }
+      return this.inputValue.map((item, index) => {
+        if (slots) return this.genSlotSelection(h, item, index)
+        if (chips) return this.genChipSelection(h, item, index)
+        if (comma) return this.genCommaSelection(h, item, index)
       })
     },
 
-    genSlotSelection (h, item) {
-      return this.$scopedSlots.selection({ parent: this, item: item })
+    genSlotSelection (h, item, index) {
+      return this.$scopedSlots.selection({ parent: this, item: item, index: index })
     },
 
-    genChipSelection (h, item) {
+    genChipSelection (h, item, index) {
       const data = {
+        'class': {
+          'chip--select-multi': true
+        },
         props: { close: true },
         on: {
           input: val => { if (val === false) this.removeSelected(item) }
@@ -200,11 +259,13 @@ export default {
       return h('v-chip', data, item[this.itemText])
     },
 
-    genCommaSelection (h, item, hasComma) {
+    genCommaSelection (h, item, index) {
+      const comma = index !== this.inputValueLength - 1 ? ',' : ''
+
       const data = {
         'class': 'input-group__selections__comma'
       }
-      return h('div', data, `${item[this.itemText]}${hasComma ? ',' : ''}`)
+      return h('div', data, item[this.itemText] + comma)
     },
 
     genSearchField (h) {
@@ -214,10 +275,12 @@ export default {
           value: this.inputSearch
         },
         on: {
-          input: e => (this.inputSearch = e.target.value),
-          focus: () => this.focus,
-          blur: () => this.blur,
-          keyup: () => debounce(this.filterItems, this.debounce)
+          input: debounce(e => {
+            this.inputSearch = e.target.value
+            this.filterItems()
+          }, this.debounce),
+          focus: this.focus,
+          blur: this.blur
         }
       }
 
@@ -225,57 +288,79 @@ export default {
     },
 
     genList (h) {
-      const list = (this.filteredItems || this.items).map(item => this.genListItem(h, item))
+      const noResultsFound = this.autocomplete && this.inputSearch && !this.filteredItems
+
+      const list = noResultsFound
+        ? [this.genNoResultsFound(h)]
+        : (this.filteredItems || this.items).map((item, index, items) => this.genListItem(h, item, index, items))
+
       return h('v-list', {}, list)
     },
 
-    genListItem (h, item) {
-      return h('v-list-item', {}, [this.genTile(h, item)])
+    genListItem (h, item, index, items) {
+      // WIP
+      const prevItem = index ? items[index - 1] : [this.itemGroup]
+      const listItem = h('v-list-item', {}, [this.genTile(h, item)])
+
+      if (item[this.itemGroup] && item[this.itemGroup] !== prevItem[this.itemGroup]) {
+        return [h('v-subheader', {}, item[this.itemGroup]), listItem]
+      }
+
+      return listItem
     },
 
     genTile (h, item) {
       const data = {
         'class': {
-          'list__tile--active': this.isSelected(item)
+          'list__tile--active': this.isSelected(item),
+          'list__tile--select-multi': this.multiple
         },
         nativeOn: {
           click: e => {
-            if (!this.multiple) {
-              return
-            }
-
-            e.stopPropagation()
-            e.preventDefault()
-            this.isSelected(item)
+            this.isSelected(item) && this.multiple
               ? this.removeSelected(item)
               : this.addSelected(item)
 
-            this.$refs.searchField.focus()
-          },
-          mousedown: e => {
-            if (this.multiple) {
-              return
-            }
-            this.addSelected(item)
             this.$refs.searchField.focus()
           }
         }
       }
 
       return this.$scopedSlots.item
-        ? h('v-list-tile', data, this.$scopedSlots.item({ parent: this, item: item }))
+        ? h('v-list-tile', data, [this.$scopedSlots.item({ parent: this, item: item })])
         : h('v-list-tile', data, [this.genAction(h, item), this.genContent(h, item)])
     },
 
     genAction (h, item) {
       if (!this.multiple) return null
 
+      const data = {
+        'class': {
+          'list__tile__action--select-multi': this.multiple
+        }
+      }
+
       const checkbox = h('v-checkbox', { props: { 'inputValue': this.isSelected(item) }})
-      return h('v-list-tile-action', {}, [checkbox])
+      return h('v-list-tile-action', data, [checkbox])
+    },
+
+    genNoResultsFound (h) {
+      const text = this.noResultsFoundText
+      const content = h('v-list-tile-content', {}, [h('v-list-tile-title', {}, text)])
+      const tile = h('v-list-tile', [content])
+
+      return h('v-list-item', [tile])
     },
 
     genContent (h, item) {
       return h('v-list-tile-content', {}, [h('v-list-tile-title', item[this.itemText])])
+    },
+
+    // Utils
+    // ====================
+
+    isEmptyObject (obj) {
+      return obj.constructor === Object && Object.keys(obj).length === 0
     }
   },
 

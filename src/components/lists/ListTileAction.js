@@ -1,30 +1,16 @@
 export default {
+  functional: true,
+
   name: 'list-tile-action',
 
-  data () {
-    return {
-      stack: false
-    }
-  },
-
-  computed: {
-    classes () {
-      return {
+  render (h, context) {
+    const data = {
+      'class': {
         'list__tile__action': true,
-        'list__tile__action--stack': this.stack
+        'list__tile__action--stack': context.children.length > 1
       }
     }
-  },
 
-  mounted () {
-    this.stack = this.$el.childElementCount > 1
-  },
-
-  render (createElement) {
-    const data = {
-      'class': this.classes
-    }
-
-    return createElement('div', data, this.$slots.default)
+    return h('div', data, context.children)
   }
 }

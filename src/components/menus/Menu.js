@@ -20,7 +20,8 @@ export default {
       },
       direction: { vert: 'bottom', horiz: 'right' },
       position: { left: '0px', top: '0px', right: 'auto', bottom: 'auto' },
-      isContentActive: false
+      isContentActive: false,
+      maxHeightAutoDefault: '200px'
     }
   },
 
@@ -32,13 +33,33 @@ export default {
     auto: Boolean,
     offsetX: Boolean,
     offsetY: Boolean,
+    disabled: Boolean,
+    maxHeight: {
+      default: null
+    },
     nudgeXAuto: {
       type: Number,
       default: -16
     },
     nudgeYAuto: {
       type: Number,
-      default: -16
+      default: -18
+    },
+    nudgeTop: {
+      type: Number,
+      default: 0
+    },
+    nudgeBottom: {
+      type: Number,
+      default: 0
+    },
+    nudgeLeft: {
+      type: Number,
+      default: 0
+    },
+    nudgeRight: {
+      type: Number,
+      default: 0
     },
     openOnClick: {
       type: Boolean,
@@ -51,6 +72,10 @@ export default {
     origin: {
       type: String,
       default: 'top left'
+    },
+    transition: {
+      type: String,
+      default: 'v-menu-transition'
     }
   },
 
@@ -58,13 +83,14 @@ export default {
     offset () {
       const { activator: a, content: c } = this.dimensions
       const { direction, offsetX, offsetY, offsetAuto: auto } = this
+      const { nudgeTop: nt, nudgeBottom: nb, nudgeRight: nr, nudgeLeft: nl } = this
 
       const horiz = direction.horiz === 'left'
-          ? offsetX ? a.left - c.right : a.right - c.right + auto.horiz
-          : offsetX ? a.right - c.left : a.left - c.left + auto.horiz
+          ? offsetX ? a.left - c.right + nl : a.right - c.right + auto.horiz
+          : offsetX ? a.right - c.left + nr : a.left - c.left + auto.horiz
       const vert = direction.vert === 'top'
-          ? offsetY ? a.top - c.bottom : a.bottom - c.bottom + auto.vert
-          : offsetY ? a.bottom - c.top : a.top - c.top + auto.vert
+          ? offsetY ? a.top - c.bottom + nt : a.bottom - c.bottom + auto.vert
+          : offsetY ? a.bottom - c.top + nb : a.top - c.top + auto.vert
 
       return { horiz, vert }
     },
@@ -88,12 +114,13 @@ export default {
     screenDist () {
       const { activator: a } = this.dimensions
       const { innerHeight: innerH, innerWidth: innerW } = this.window
+      const { nudgeTop: nt, nudgeBottom: nb, nudgeRight: nr, nudgeLeft: nl } = this
       const dist = {}
 
-      dist.top = this.offsetY ? a.top : a.bottom
-      dist.left = this.offsetX ? a.left : a.right
-      dist.bottom = this.offsetY ? innerH - a.bottom : innerH - a.top
-      dist.right = this.offsetX ? innerW - a.right : innerW - a.left
+      dist.top = this.offsetY ? a.top + nt : a.bottom
+      dist.left = this.offsetX ? a.left + nl : a.right
+      dist.bottom = this.offsetY ? innerH - a.bottom - nb : innerH - a.top
+      dist.right = this.offsetX ? innerW - a.right - nr : innerW - a.left
       dist.horizMax = dist.left > dist.right ? dist.left : dist.right
       dist.horizMaxDir = dist.left > dist.right ? 'left' : 'right'
       dist.vertMax = dist.top > dist.bottom ? dist.top : dist.bottom
@@ -133,19 +160,18 @@ export default {
 
   watch: {
     isActive (val) {
-      if (val) this.activate()
+      if (val && !this.disabled) this.activate()
       else this.isContentActive = false
+
+      this.isActive = val && !this.disabled
     }
   },
 
   methods: {
     activate () {
       this.window = window
-
       this.setDirection()
-      this.$nextTick(() => {
-        this.updatePosition()
-      })
+      this.updatePosition()
     },
 
     setDirection (horiz = '', vert = '') {
@@ -154,7 +180,10 @@ export default {
         vert: vert || (this.top && !this.auto ? 'top' : 'bottom')
       }
 
-      // On every direction change, we must reset/reorientate position.
+      this.resetPosition()
+    },
+
+    resetPosition () {
       this.position.top = this.direction.vert === 'top' ? 'auto' : '0px'
       this.position.left = this.direction.horiz === 'left' ? 'auto' : '0px'
       this.position.bottom = this.direction.vert === 'bottom' ? 'auto' : '0px'
@@ -162,53 +191,58 @@ export default {
     },
 
     updatePosition () {
-      this.updateDimensions()
+      this.$nextTick(() => {
+        this.updateDimensions()
 
-      const { horiz, vert } = this.direction
-      const { offset, screenOverflow: screen } = this
+        const { offset, screenOverflow: screen } = this
+        const { horiz, vert } = this.direction
 
-      this.position.left = horiz === 'left' ? 'auto' : `${offset.horiz - screen.horiz}px`
-      this.position.top = vert === 'top' ? 'auto' : `${offset.vert - screen.vert}px`
-      this.position.right = horiz === 'right' ? 'auto' : `${-offset.horiz - screen.horiz}px`
-      this.position.bottom = vert === 'bottom' ? 'auto' : `${-offset.vert - screen.vert}px`
+        this.position.left = horiz === 'left' ? 'auto' : `${offset.horiz - screen.horiz}px`
+        this.position.top = vert === 'top' ? 'auto' : `${offset.vert - screen.vert}px`
+        this.position.right = horiz === 'right' ? 'auto' : `${-offset.horiz - screen.horiz}px`
+        this.position.bottom = vert === 'bottom' ? 'auto' : `${-offset.vert - screen.vert}px`
 
-      this.flipFix()
+        const noMoreFlipping = this.flip() === false
+
+        if (noMoreFlipping) this.startTransition()
+      })
     },
 
     updateDimensions () {
-      this.sneakPeek()
-      this.updateMaxMin()
-
       const { activator: a, content: c } = this.$refs
 
-      this.dimensions = {
-        'activator': this.measure(a.children ? a.children[0] : a),
-        'content': this.measure(c),
-        'list': this.measure(c, '.list'),
-        'selected': this.measure(c, '.list__tile--active', 'parent')
-      }
+      this.sneakPeek(c, () => {
+        this.updateMaxMin()
 
-      this.offscreenFix()
-      this.updateScroll()
-      this.sneakPeek(false)
+        this.dimensions = {
+          'activator': this.measure(a.children ? a.children[0] : a),
+          'content': this.measure(c),
+          'list': this.measure(c, '.list'),
+          'selected': this.measure(c, '.list__tile--active', 'parent')
+        }
+
+        this.offscreenFix()
+        this.updateScroll()
+      })
     },
 
     updateMaxMin () {
-      const { $refs, maxHeight, offsetAuto } = this
+      const { $refs, maxHeight, maxHeightAutoDefault: maxAuto, offsetAuto, auto } = this
       const a = $refs.activator.children ? $refs.activator.children[0] : $refs.activator
       const c = $refs.content
 
-      c.style.minWidth = `${a.getBoundingClientRect().width + offsetAuto.horiz}px`
-      c.style.maxHeight = null  // <-- TODO: This is a temporary fix.
+      c.style.minWidth = `${a.getBoundingClientRect().width + Math.abs(offsetAuto.horiz) * 2}px`
+      c.style.maxHeight = null  // <-- Todo: Investigate why this fixes rendering.
       c.style.maxHeight = isNaN(maxHeight) ? maxHeight : `${maxHeight}px`
+      c.style.maxHeight = maxHeight === null && auto ? maxAuto : c.style.maxHeight
     },
 
     offscreenFix () {
-      const { $refs, screenDist } = this
+      const { $refs, screenDist, auto } = this
       const { vert } = this.direction
+      const contentIsOverTheEdge = this.dimensions.content.height > screenDist[vert]
 
-      // If not auto, reduce height to the max vertical distance to a window edge.
-      if (!this.auto && this.dimensions.content.height > screenDist[vert]) {
+      if (!auto && contentIsOverTheEdge) {
         $refs.content.style.maxHeight = `${screenDist.vertMax}px`
         this.dimensions.content.height = $refs.content.getBoundingClientRect().height
       }
@@ -229,29 +263,25 @@ export default {
       this.$refs.content.scrollTop = offsetTop
     },
 
-    flipFix () {
+    flip () {
       const { auto, screenDist } = this
       const { content: c } = this.dimensions
-      let { horiz, vert } = this.direction
+      const { horiz, vert } = this.direction
+      const flipHoriz = !auto && c.width > screenDist[horiz] ? screenDist.horizMaxDir : horiz
+      const flipVert = !auto && c.height > screenDist[vert] ? screenDist.vertMaxDir : vert
+      const doFlip = flipHoriz !== horiz || flipVert !== vert
 
-      // Flip direction, if needed, to where there's more distance from the screen edge.
-      horiz = !auto && c.width > screenDist[horiz] ? screenDist.horizMaxDir : horiz
-      vert = !auto && c.height > screenDist[vert] ? screenDist.vertMaxDir : vert
-
-      if (horiz === this.direction.horiz && vert === this.direction.vert) {
-        // No more flipping needed, now start transition.
-        // Todo: Maybe move this call to a better place.
-        this.startTransition()
-        return
+      if (doFlip) {
+        this.setDirection(flipHoriz, flipVert)
+        this.updatePosition()
       }
 
-      this.setDirection(horiz, vert)
-      this.$nextTick(() => { this.updatePosition() })
+      return doFlip
     },
 
     startTransition () {
       this.$refs.content.offsetHeight // <-- Force DOM to repaint first.
-      this.isContentActive = true
+      this.isContentActive = true     // <-- Trigger v-show on content.
     },
 
     // Render functions
@@ -266,7 +296,7 @@ export default {
         },
         on: {
           click: () => {
-            if (this.openOnClick) this.isActive = !this.isActive
+            if (this.openOnClick) this.isActive = !this.isActive && !this.disabled
           }
         }
       }
@@ -281,7 +311,7 @@ export default {
         }
       }
 
-      return h('v-menu-transition', data, [this.genContent(h)])
+      return h(this.transition, data, [this.genContent(h)])
     },
 
     genContent (h) {
@@ -313,13 +343,15 @@ export default {
       return { top, left, bottom, right, width, height, offsetTop: el.offsetTop }
     },
 
-    // Todo: Need to pass original display and opacity into this method.
-    sneakPeek (on = true) {
-      if (on) {
-        this.$refs.content.style.display = 'inline-block'
-      } else {
-        this.$refs.content.style.display = 'none'
-      }
+    sneakPeek (el, cb) {
+      const oldOpacity = el.style.opacity
+      const oldDisplay = el.style.display
+
+      el.style.opacity = 0
+      el.style.display = 'inline-block'
+      cb()
+      el.style.opacity = oldOpacity
+      el.style.display = oldDisplay
     }
   },
 
