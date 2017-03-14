@@ -12,12 +12,13 @@
   padding-left: $grid-outer-margin
   padding-right: $grid-outer-margin
   
-  &--fluid
-    padding: 0
-  
-  for width in $container-max-widths
+  for size, width in $container-max-widths
     @media only screen and (min-width: width)
       max-width: width
+
+  &--fluid
+    padding: 0
+    max-width: 100%
   
 .row
   display: flex
