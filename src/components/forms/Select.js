@@ -103,7 +103,7 @@ export default {
     },
 
     inputValue (val) {
-      if (this.multiple && !this.auto) this.$refs.menu.activate()
+      if (this.multiple && this.autocomplete) this.$refs.menu.activate()
 
       if (this.multiple) {
         this.$emit('input', !val.length ? null : val)
