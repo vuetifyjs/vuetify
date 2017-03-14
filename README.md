@@ -14,7 +14,7 @@
 </p>
 
 <p align="center">
-  <strong>Looking for Vue.js jobs? Check out <a href="https://vuejobs.com/" target="_blank">vuejobs.com</a></strong>
+  <strong>Looking for Vue.js jobs? Check out <a href="https://vuejobs.com/?ref=vuetify" target="_blank">vuejobs.com</a></strong>
 </p>
 
 ## Install
