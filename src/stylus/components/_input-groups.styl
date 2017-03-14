@@ -1,0 +1,133 @@
+.input-group
+  display: flex
+  flex: 1
+  flex-wrap: wrap
+  min-width: 24px
+  margin: $input-group-margin
+  position: relative
+  width: 100%
+
+
+/** Label */
+.input-group
+  label
+    font-size $input-font-size
+    line-height: $input-font-size * 2
+    height: $input-height
+    transition: .4s $transition.fast-in-fast-out
+    z-index: 0
+
+/** Blocks */
+.input-group
+  &__input
+    display: flex
+    flex: 1 0 100%
+    min-width: 0
+    min-height: $input-height
+  
+
+/** States */
+.input-group
+  &--disabled
+    .input-group__details:before
+      background-color: transparent
+      background-position: bottom
+      background-size: 3px 1px
+      background-repeat: repeat-x
+      
+    &.input-group--light
+      .input-group__details:before
+        background-image: linear-gradient(to right, rgba(0, 0, 0, .38) 0, rgba(0, 0, 0, .38) 33%, transparent 0)
+      
+    &.input-group--dark
+      .input-group__details:before
+        background-image: linear-gradient(to right, rgba(255, 255, 255, .38) 0, rgba(255, 255, 255, .38) 33%, transparent 0)
+      
+  &--focused
+    .input-group__details
+      &:after
+        width: 100%
+      
+  &--active
+    //
+      
+  &--error
+    .input-group__details:after
+      background-color: $theme.error
+      
+  &--light
+    .input-group__details:before
+      background-color: $material-twelve-percent-dark
+      
+  &--dark
+    .input-group__details:before
+      background-color: $material-twelve-percent-light
+
+
+/** Details */
+.input-group
+  .slide-y-transition-leave,
+  .slide-y-transition-leave-to
+    position: absolute
+
+  &__details
+    display: flex
+    padding-top: 4px
+    flex: 1 0 100%
+    font-size: 12px
+    min-height: 22px
+    position: relative
+    width: 100%
+
+    &:after, &:before
+      content: ''
+      position: absolute
+      left: 0
+
+    &:after
+      background-color: $theme.primary
+      top: -1px
+      height: 2px
+      transition: .3s $transition.fast-out-slow-in
+      width: 0%
+      z-index: 1
+
+    &:before
+      top: 0
+      height: 1px
+      width: 100%
+      z-index: 0
+      
+/** Hint */
+.input-group
+  &__hint
+    flex: 1 0
+    transition: .3s $transition.fast-out-fast-out
+
+
+/** Icons */
+.input-group
+  &--prepend-icon
+    .input-group__prepend-icon
+      align-items: center
+      display: flex
+      justify-content: flex-start
+      width: 56px
+      height: 30px
+      position: absolute
+      left: 0
+      top: 0
+      transition: .3s $transition.fast-in-fast-out
+     
+    .input-group__details 
+      &:before, &:after
+        margin-left: 56px
+        max-width: calc(100% - 56px)
+
+
+/** Error */
+.input-group
+  .input-group__error
+    flex: 1 0
+    transition: .3s $transition.fast-out-fast-out
+    color: $theme.error

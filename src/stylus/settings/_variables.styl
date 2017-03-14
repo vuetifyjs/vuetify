@@ -17,7 +17,7 @@ $theme := {
   secondary: $grey.darken-3
   info: $blue.base
   warning: $amber.base
-  error: $red.base
+  error: $red.accent-2
   success: $green.base
 }
 
@@ -59,14 +59,14 @@ $grid-columns := 12
 // Display
 // ============================================================
 $display-breakpoints := {
-  sm-and-down: "only screen and (max-width: ($grid-breakpoints.md - 1))"
-  sm-and-up: "only screen and (min-width: ($grid-breakpoints.md))"
-  md-only: "only screen and (min-width: $grid-breakpoints.md) and (max-width: ($grid-breakpoints.lg - 1))"
-  md-and-down: "only screen and (max-width: $grid-breakpoints.lg - 1)"
-  md-and-up: "only screen and (min-width: ($grid-breakpoints.lg))"
-  lg-only: "only screen and (min-width: $grid-breakpoints.lg) and (max-width: ($grid-breakpoints.xl - 1))"
-  lg-and-down: "only screen and (max-width: ($grid-breakpoints.xl - 1))"
-  lg-and-up: "only screen and (min-width: $grid-breakpoints.xl)"
+  sm-and-down: "only screen and (max-width: %s)" % ($grid-breakpoints.md - 1)
+  sm-and-up: "only screen and (min-width: (%s))" % $grid-breakpoints.md
+  md-only: "only screen and (min-width: %s) and (max-width: %s)" % $grid-breakpoints.md ($grid-breakpoints.lg  - 1)
+  md-and-down: "only screen and (max-width: %s )" % ($grid-breakpoints.lg - 1)
+  md-and-up: "only screen and (min-width: %s)" % $grid-breakpoints.lg
+  lg-only: "only screen and (min-width: %s) and (max-width: %s)" % $grid-breakpoints.lg ($grid-breakpoints.xl - 1)
+  lg-and-down: "only screen and (max-width: (%s - 1))" % $grid-breakpoints.xl
+  lg-and-up: "only screen and (min-width: %s)" % $grid-breakpoints.xl
 }
 
 
@@ -124,7 +124,9 @@ $transition := {
   fast-out-slow-in: cubic-bezier(0.4, 0.0, 0.2, 1),
   linear-out-slow-in: cubic-bezier(0.0, 0.0, 0.2, 1),
   fast-out-linear-in: cubic-bezier(0.4, 0.0, 1, 1),
-  ease-in-out: cubic-bezier(0.4, 0.0, 0.6, 1)
+  ease-in-out: cubic-bezier(0.4, 0.0, 0.6, 1),
+  fast-in-fast-out: cubic-bezier(.25,.8,.25,1),
+  swing: cubic-bezier(.25,.8,.25,1)
 }
 
 // Components
@@ -215,18 +217,18 @@ $card-actions-button-padding := .7rem
 
 // Chip
 $chip-background := $grey.lighten-2
-$chip-background-active := $grey.lighten-3
 $chip-border := 1px solid $grey.lighten-2
 $chip-border-radius := 2rem
-$chip-font-size := .8rem
+$chip-font-size := 14px
 $chip-label-border-radius := 0
-$chip-icon-font-size := 1.2rem
-$chip-padding := 0 $chip-font-size
+$chip-icon-font-size := 24px
+$chip-icon-color := rgba(#000, .54)
+$chip-padding := 0 12px
+$chip-removeable-padding := 0 4px 0 12px
 $chip-outline-background := transparent !important
 $chip-outline-color := $grey.base
-$chip-min-height := 25px
-$chip-small-min-height := 20px
-$chip-small-padding := 0 .2rem
+$chip-height := 32px
+$chip-margin := 8px
 
 // Collapsible
 $collapsible-collapse-height := 3rem
@@ -260,9 +262,9 @@ $list-item-dense-double-height := 60px
 $list-item-triple-height := 88px
 $list-item-dense-triple-height := 76px
 
-$list-sub-header-inset-margin := $list-item-right-margin
-$list-sub-header-font-weight := 500
-$list-sub-header-height-font-size := 14px
+$subheader-inset-margin := $list-item-right-margin
+$subheader-font-weight := 500
+$subheader-height-font-size := 14px
 
 $list-title-font-size := 16px
 $list-title-font-weight := 500
@@ -274,7 +276,7 @@ $list-sub-title-font-weight := 400
 $list-content-font-size := 15px
 
 $list-group-tile-title-font-weight := 300
-$list-group-tile-title-active-font-weight := 500
+$list-group-tile-title-active-font-weight := 300
 
 $list-action-text-font-size := 12px
 
@@ -290,6 +292,29 @@ $progress-circular-rotate-dash := progress-circular-dash 1.4s ease-in-out infini
 $process-circular-intermediate-svg-transition := all .2s ease-in-out
 $progress-circular-underlay-stroke := rgba(#000, 0.1)
 $progress-circular-overlay-transition := all .6s ease-in-out
+
+
+/* Selection Controls */
+$selection-switch-light-color := rgba(#000, .38)
+$selection-switch-light-background := #fafafa
+$selection-switch-light-label-color := #424242
+$selection-switch-light-disabled-color := rgba(#000, .12)
+$selection-switch-light-disabled-background := #bdbdbd
+
+$selection-switch-dark-color := rgba(#fff, .30)
+$selection-switch-dark-background := #bdbdbd
+$selection-switch-dark-label-color := #fff
+$selection-switch-dark-disabled-color := rgba(#fff, .10)
+$selection-switch-dark-disabled-background := #424242
+
+$selection-controls-light-color := rgba(#000, .54)
+$selection-controls-light-disabled-color := rgba(#000, .26)
+$selection-controls-light-label-color := #000
+
+$selection-controls-dark-color := rgba(#fff, .70)
+$selection-controls-dark-disabled-color := rgba(#fff, .30)
+$selection-controls-dark-label-color := #fff
+
 
 /* Sidebar */
 
@@ -317,11 +342,48 @@ $sidebar-group-header-active-sidebar-item-active-background-color := rgba($theme
 // Slider
 $slider-arrow-size := 2rem
 
+
+/* Slider */
+$slider-light-off := rgba(#000, .26)
+$slider-light-focus-off := rgba(#000, .38)
+$slider-light-disabled := rgba(#000, .26)
+$slider-light-label := #000
+$slider-light-ticks := rgba(#000, .6)
+
+$slider-dark-off := rgba(#fff, .3)
+$slider-dark-focus-off := rgba(#fff, .3)
+$slider-dark-disabled := rgba(#fff, .3)
+$slider-dark-label := #fff
+$slider-dark-ticks := rgba(#fff, .6)
+
+
+/** Snackbar */
+$snackbar-background-color := #323232
+
+
+/* Text Input */
+$input-group-height := 58px
+$input-group-margin := 18px 0
+$input-font-size := 16px
+$label-font-size := 12px
+$input-height := 30px
+
+$input-group-light-normal := rgba(#000, .38)
+$input-group-light-focus := rgba(#000, .87)
+
+$input-group-dark-normal := rgba(#fff, .5)
+$input-group-dark-focus := #fff
+
+
+$label-padding-top := 16px
+$label-padding-bottom := 8px
+$input-padding-bottom := 8px
+
 // Directives
 // ============================================================
 
 // Ripple animation
 $ripple-container-color := currentColor
 $ripple-animation-background := currentColor
-$ripple-animation-transition := .5s transform cubic-bezier(.2, .4, .4, .9), .3s opacity cubic-bezier(.2, .4, .4, .1)
-$ripple-animation-visible-opacity := .3
+$ripple-animation-transition := .4s $transition.linear-out-slow-in
+$ripple-animation-visible-opacity := .15

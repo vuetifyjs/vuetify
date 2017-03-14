@@ -1,17 +1,33 @@
 .chip
+  align-items: center
   background: $chip-background
   border: $chip-border
   border-radius: $chip-border-radius
+  cursor: default
   display: inline-flex
-  align-items: center
   justify-content: space-between
   font-size: $chip-font-size
   padding: $chip-padding
-  min-height: $chip-min-height
+  margin: $chip-margin
+  height: $chip-height
+  transition: .3s $transition.ease-in-out
   vertical-align: middle
   
-  &:active
-    background: $chip-background-active
+  .avatar
+    border-radius: 50%
+    height: $chip-height
+    width: $chip-height
+    margin-left: -14px
+    margin-right: 8px
+    color: #fff
+    
+    img
+      width: 100%
+      height: 100%
+    
+  &:focus
+    @extend .z-depth-1
+    outline: none
     
   &--label
     border-radius: $chip-label-border-radius
@@ -29,17 +45,22 @@
     display: flex
     align-items: center
     text-decoration: none
-    
-    .icon
-      color: inherit
-    
-  .icon
     font-size: $chip-icon-font-size
-    
-    &--left
-      margin-left: -.6rem
-      margin-right: 1rem
+    margin-left: 4px
+    margin-right: -2px
+    transition: .3s $transition.ease-in-out
+
+    &:hover
+      opacity: .8
       
-    &--right
-      margin-left: 1rem
-      margin-right: -.6rem
+  &--removable
+    padding: $chip-removeable-padding
+    
+  &--select-multi
+    margin: $chip-margin $chip-margin $chip-margin 0
+    
+  .icon--right
+    margin-left: 4px
+    
+  .icon--left
+    margin-right: 4px

@@ -85,7 +85,9 @@
       },
 
       leave (el, done) {
-        el.style.height = 0
+        el.style.height = `${el.clientHeight}px`
+        
+        setTimeout(() => el.style.height = 0, 0)
 
         addOnceEventListener(el, 'transitionend', done)
       },

@@ -1,13 +1,13 @@
-import Checkbox from './Checkbox.vue'
-import Radio from './Radio.vue'
-import Select from './Select.vue'
-import TextInput from './TextInput.vue'
-import Textarea from './Textarea.vue'
+import Checkbox from './Checkbox'
+import Radio from './Radio'
+import Select from './Select'
+import Switch from './Switch'
+import TextField from './TextField'
 
 export default {
   Checkbox,
   Radio,
   Select,
-  TextInput,
-  Textarea
+  Switch,
+  TextField
 }

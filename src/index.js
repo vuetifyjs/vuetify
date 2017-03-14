@@ -3,7 +3,6 @@ require('./stylus/main.styl')
 import Components from './components/_index'
 import Directives from './directives/_index'
 import Load from './util/load'
-import Toast from './functions/toast'
 
 const defaults = {
   componentPrefix: 'V',
@@ -22,8 +21,7 @@ function plugin (Vue, options) {
   })
 
   Vue.prototype.$vuetify = {
-    load: Load,
-    toast: Toast
+    load: Load
   }
 }
 

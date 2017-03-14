@@ -2,7 +2,8 @@
   background-color: $theme.secondary
   overflow-y: auto
   padding: 0 0 100px
-  transition: transform .3s cubic-bezier(0,0,.2,1)
+  transition: transform .3s $transition.ease-in-out,
+    margin .3s $transition.ease-in-out
   width: $sidebar-width
   z-index: 3
   @extend .z-depth-2
@@ -27,13 +28,6 @@
     flex-basis: 0
     transform: translateX(-($sidebar-width + 25))
     
-  &--drawer--right
-    transform: translateX($sidebar-width + 25)
-    
-  &--open
-    transform: translateX(0) !important
-    width: $sidebar-width
-    
   &--close
     transform: translateX(-($sidebar-width + 25))
     
@@ -44,8 +38,28 @@
     @media screen and (max-width: $grid-breakpoints.lg)
       transform: translateX(-($sidebar-width + 25))
       
-      &.sidebar--fixed-right
+      &.sidebar--fixed-right, &.sidebar--right
         transform: translateX($sidebar-width + 25)
+    
+  &--open
+    transform: translateX(0)
+    width: $sidebar-width
+
+  &:not(.sidebar--fixed):not(.sidebar--right)
+    @media screen and (max-width: $grid-breakpoints.lg)
+      margin-left: -300px
+      transform: none
+      
+      &.sidebar--open
+        transform: translateX(300px)
+        
+  &:not(.sidebar--fixed).sidebar--right
+    @media screen and (max-width: $grid-breakpoints.lg)
+      margin-right: -300px
+      transform: none
+      
+      &.sidebar--open
+        transform: translateX(-300px)
     
   .list__tile
     color: $sidebar-item-color
@@ -62,9 +76,25 @@
     &:after
       background: $material-twelve-percent-light
       
+    &--active
+      .list__tile__title
+        color: inherit
+
+      &:first-child
+        .icon
+          color: $theme.primary
+      
   .list--group
-    > .list__tile--active
-      color: $sidebar-item-color
+    &__header--active
+      &:first-child
+        .list__tile__action:first-child
+          .icon
+            color: $theme.primary
 
     &:after
       background: $material-twelve-percent-light
+
+  .list--group__container
+    .list__tile--active
+      .list__tile__title
+        color: $theme.primary

@@ -53,8 +53,6 @@ export default {
   render (h) {
     const { tag, data } = this.generateRouteLink()
 
-    const tab = h(tag, data, [this.$slots.default])
-
-    return h('li', {}, [tab])
+    return h('li', {}, [h(tag, data, [this.$slots.default])])
   }
 }

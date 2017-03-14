@@ -18,14 +18,14 @@
   i
     font-size: 24px
 
-  .menu, .menu > div
+  .menu__activator
     height: 100%
 
   .btn:not(.toolbar__side-icon)
     margin: 0 6px
     
     &:first-child
-      margin-left: 0
+      margin-left: -6px
       
     &:last-child
       margin-right: 0
@@ -59,7 +59,10 @@
     color: #fff
     font-size: $headings.h6.size
     flex: 1;
-    padding: 0 2rem
+    padding: 0 16px
+    
+    &:first-child
+      padding-left: 2px
   
   &__items
     list-style-type: none
@@ -88,7 +91,7 @@
     
     &:hover, &--active
       background: rgba(#000,0.1)
-
+      
     &--disabled
       opacity: .5
       pointer-events: none

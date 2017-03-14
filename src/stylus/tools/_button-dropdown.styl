@@ -1,0 +1,16 @@
+btn-dropdown-theme(theme)
+  &.btn-dropdown--segmented
+    input
+      border-right-color: theme
+      
+  &.btn-dropdown--editable
+    .input-group--focused
+      input
+        border-right-color: theme
+  
+  &.btn-dropdown--overflow, &.btn-dropdown--editable, &.btn-dropdown--segmented
+    .input-group
+      border-top: 1px solid theme
+      
+  .input-group__hint:after
+    display: none

@@ -40,6 +40,9 @@
         padding-left: 0
         
   &.left-sidebar
+    main
+      background: $theme.secondary
+
     .sidebar
       box-shadow: none
   
@@ -69,6 +72,13 @@
     display: flex
     width: 100%
     
+    .btn-dropdown--overflow .input-group
+      border: none
+      margin: 0
+    
+    .input-group__details
+      display: none
+    
     > div
       min-width: 130px
       &:not(:first-child)
@@ -84,13 +94,11 @@
           background: $material-twelve-percent-dark
           width: 1px
           z-index: 0
-    
-    .btn
-      border-color: transparent
-      margin: 0
       
-      &:hover
-        background: $grey.lighten-4
+    .input-group:not(.input-group--focused)
+      .input-group__input
+        &:hover
+          background: $grey.lighten-4
         
     .btn-toggle
       box-shadow: none

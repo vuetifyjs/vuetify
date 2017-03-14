@@ -3,7 +3,7 @@
     v-bind:is="computedTransition"
   )
     div(
-      class="slider__item"
+      class="carousel__item"
       v-bind:class="{ 'reverse': reverse }"
       v-bind:style="styles"
       v-show="active"

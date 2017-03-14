@@ -2,22 +2,11 @@
   lists()
   padding-top: $list-top-padding
   padding-bottom: $list-bottom-padding
-  transition: height .3s $transition.ease-in-out
+  overflow: hidden
+  transition: height .4s $transition.fast-out-slow-in
   
   .input-group
     margin: 0
-    
-  &__sub-header
-    height: $list-item-single-height
-    display: flex
-    align-items: center
-    font-size: $list-sub-header-height-font-size
-    color: $grey.darken-1
-    font-weight: $list-sub-header-font-weight
-    padding: 0 $list-right-padding 0 $list-left-padding
-    
-    &--inset
-      margin-left: $list-sub-header-inset-margin
       
   > .list__item ~ .list__item
     margin-top: 0
@@ -46,7 +35,7 @@
       transition: $primary-transition
       background-color: $material-twelve-percent-dark
     
-    a&:hover
+    a&:hover, &--highlighted
       background: $material-twelve-percent-dark
     
     &__content,
@@ -73,16 +62,26 @@
       line-height: 1.3
       font-weight: $list-sub-title-font-weight
     
-    &__action, &__avatar
+    &__action
       display: flex
       justify-content: flex-start
       align-items: center
       flex: 1 0 56px
       
+      .input-group
+        align-items: center
+    
+    .avatar
+      justify-content: flex-start
+      flex: 1 0 56px
+            
     &__action
       align-items: flex-start
       flex-direction: column
       justify-content: center
+      
+      .input-group__details
+        display: none
       
       .icon
         transition: $primary-transition
@@ -96,12 +95,9 @@
         justify-content: space-between
         padding-top: $list-top-padding
         padding-bottom: $list-bottom-padding
-      
-    &__avatar        
-      img, .icon
-        height: 42px
-        width: 42px
-        border-radius: 50%
+        
+      &--select-multi
+        flex: 1 0 30px
       
     &__content
       text-align: left
@@ -113,7 +109,7 @@
       justify-content: center
       flex-direction: column
       
-      + .list__tile__avatar
+      + .avatar
         justify-content: flex-end
         
       + .list__tile__action:not(.list__tile__action--stack)
@@ -126,9 +122,13 @@
         
     &--disabled
       opacity: 0.4
+      pointer-events: none
 
     &--avatar
       height: $list-item-avatar-single-height
+      
+    &--select-multi
+      padding: 0 10px
   
   &--dense
     padding-top: $list-item-dense-top-padding
@@ -213,6 +213,10 @@
           .list__tile__action:last-of-type
             .icon
               transform: rotate(-180deg)
-            
-  &--sub-header
+
+      &--no-action + .list--group
+        .list__tile
+          padding-left: $list-left-padding
+
+  &--subheader
     padding-top: 0

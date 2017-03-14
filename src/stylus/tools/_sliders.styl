@@ -1,0 +1,40 @@
+slider-theme(off, focus, label, thumb, ticks)
+  label
+    transform: none
+    flex-basis: 56px
+    color: label
+    display: flex
+    font-size: 18px
+    align-items: center
+
+  .slider__track
+    background: off
+
+  .slider__track__container    
+    &:after
+      border: 0 solid ticks
+      border-left-width: 2px
+    
+  .slider__thumb
+    border: 4px solid off
+    
+  .slider__thumb--label
+    background: off
+    
+  .slider__ticks
+    background: repeating-linear-gradient(90deg,ticks,ticks 2px,transparent 0,transparent)
+      
+  &.input-group--disabled
+    .slider__thumb
+      background: focus
+      border-color: transparent
+      
+    &.input-group--dirty
+      .slider__track-fill
+        background: off
+  
+  &:not(.input-group--dirty)
+    .slider__thumb-container--label
+      .slider__thumb
+        background: thumb
+  

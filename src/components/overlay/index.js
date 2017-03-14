@@ -1,13 +1,13 @@
 const Overlay = {
   props: {
-    active: Boolean
+    value: Boolean
   },
 
   computed: {
     classes () {
       return {
         'overlay': true,
-        'overlay--active': this.active
+        'overlay--active': this.value
       }
     }
   },

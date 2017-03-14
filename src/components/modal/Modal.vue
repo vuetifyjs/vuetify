@@ -5,12 +5,12 @@
       class="modal__activator"
       v-on:click="isActive = !isActive" 
       ref="activator"
-      v-show="$slots.activator"
+      v-if="$slots.activator"
     )
       slot(name="activator")
 
     v-overlay(
-      v-bind:active="isActive"
+      v-model="isActive"
       v-bind:class="overlayClasses"
     )
       component(
@@ -70,7 +70,7 @@
           return this.transition
         }
 
-        return this.bottom ? 'v-slide-y-transition' : this.transition
+        return this.bottom ? 'v-slide-y-reverse-transition' : this.transition
       },
 
       overlayClasses () {
@@ -87,9 +87,10 @@
         }
 
         return this.$refs.modal !== e.target &&
-          !this.$refs.modal.contains(e.target) &&
-          this.$refs.activator !== e.target &&
-          !this.$refs.activator.contains(e.target)
+          !this.$refs.modal.contains(e.target) && 
+          (!this.$refs.activator || this.$refs.activator &&
+            !this.$refs.activator.contains(e.target) &&
+            this.$refs.activator !== e.target)
       }
     }
   }

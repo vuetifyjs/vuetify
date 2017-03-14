@@ -68,6 +68,14 @@
     opacity: 0
     transform: translateY(-15px)
 
+.slide-y-reverse-transition
+  &-enter-active, &-leave, &-leave-to
+    transition: $primary-transition
+    
+  &-enter, &-leave-to
+    opacity: 0
+    transform: translateY(15px)
+
 .slide-x-transition
   &-enter-active, &-leave, &-leave-to
     transition: $primary-transition

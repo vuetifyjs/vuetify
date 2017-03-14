@@ -10,11 +10,8 @@ export default {
 
   props: {
     dense: Boolean,
-
     subHeader: Boolean,
-
     threeLine: Boolean,
-
     twoLine: Boolean
   },
 
@@ -25,7 +22,7 @@ export default {
         'list--two-line': this.twoLine,
         'list--dense': this.dense,
         'list--three-line': this.threeLine,
-        'list--sub-header': this.subHeader
+        'list--subheader': this.subHeader
       }
     }
   },
@@ -42,19 +39,15 @@ export default {
 
   methods: {
     init () {
-      this.$children.forEach(i => {
-        if (i.$options._componentTag === 'v-list-group') {
-          this.groups.push(i)
-        }
-      })
+      this.groups = this.$children.filter(i => i.$options._componentTag === 'v-list-group')
     },
 
     listClick (uid, force) {
       if (force) {
-        return this.uid = uid
+        this.uid = uid
+      } else {
+        this.uid = this.uid === uid ? null : uid
       }
-
-      this.uid = this.uid === uid ? null : uid
     },
 
     listClose (uid) {
@@ -67,9 +60,7 @@ export default {
   render (h) {
     const data = {
       'class': this.classes,
-      attrs: {
-        'data-uid': this._uid
-      }
+      attrs: { 'data-uid': this._uid }
     }
 
     return h('ul', data, [this.$slots.default])

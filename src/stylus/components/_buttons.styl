@@ -22,9 +22,6 @@
 
 /** Psuedo */
 .btn
-  &:hover:after
-    background: $button-dark-overlay
-
   &:after
     bottom: 0
     content: ''
@@ -35,7 +32,7 @@
     transition: $primary-transition
     z-index: 0
 
-  &:disabled
+  &.btn--disabled
     box-shadow: none !important
     pointer-events: none
     opacity: .4
@@ -69,7 +66,7 @@
       &:hover:after
         background-color: $button-light-overlay
 
-      &:disabled
+      &.btn--disabled
         color: $button-light-disabled-color
 
     &.btn--dark
@@ -78,7 +75,7 @@
       &:hover:after
         background-color: $button-dark-overlay
         
-      &:disabled
+      &.btn--disabled
         color: $button-dark-disabled-color
 
   &--raised
@@ -100,6 +97,7 @@
     
     &:after
       border-radius: 50%
+      opacity: .12
     
     &:hover
       border-radius: 50%
@@ -108,7 +106,7 @@
         background-color: currentColor
         opacity: .12
         
-    &:disabled
+    &.btn--disabled
       background-color: transparent !important
       color: $button-light-disabled-color !important
       pointer-events: none
@@ -152,22 +150,22 @@
     &:hover:after
       background-color: $button-light-overlay
       
-    &:disabled
+    &.btn--disabled
       color: $button-light-disabled-color !important
       opacity: 1
     
-    &:disabled:not(.btn--flat)
+    &.btn--disabled:not(.btn--flat)
       background-color: $button-light-overlay !important
 
   &--dark
     &:hover:after
       background-color: $button-dark-overlay
 
-    &:disabled
+    &.btn--disabled
       color: $button-dark-disabled-color !important
       opacity: 1
       
-    &:disabled:not(.btn--flat)
+    &.btn--disabled:not(.btn--flat)
       background-color: $button-dark-overlay !important
 
 /** Sizes */
@@ -175,10 +173,16 @@
   &--small
     font-size: $button-small-font-size
     height: $button-small-height
+    
+    &.btn--icon
+      width: $button-small-height
 
   &--large
     font-size: $button-large-font-size
     height: $button-large-height
+    
+    &.btn--icon
+      width: $button-large-height
 
 
 /** Loader */
@@ -222,6 +226,7 @@
   &--block
     display: flex
     flex: 1
+    margin: $button-margin 0
     width: 100%
 
   &--round

@@ -10,39 +10,30 @@ export default {
       type: Boolean,
       default: true
     },
-
     drawer: Boolean,
-
     fixed: Boolean,
-
     right: Boolean,
-    
     height: String,
-
     mobile: {
       type: Boolean,
       default: true
     },
-
     mobileBreakPoint: {
       type: Number,
       default: 992
-    }
+    },
+    disableRouteWatcher: Boolean
   },
 
   computed: {
     calculatedHeight () {
-      if (this.height) {
-        return this.height
-      }
-
-      return this.fixed || this.drawer ? '100vh' : 'auto'
+      return this.height || this.fixed || this.drawer ? '100vh' : 'auto'
     },
-
     classes () {
       return {
         'sidebar': true,
         'sidebar--close': !this.isActive,
+        'sidebar--right': this.right,
         'sidebar--drawer': this.drawer,
         'sidebar--fixed': this.fixed || this.drawer,
         'sidebar--fixed-right': this.fixed && this.right,
@@ -50,17 +41,18 @@ export default {
         'sidebar--open': this.isActive
       }
     },
-
     styles () {
       return {
-        'height': this.calculatedHeight
+        height: this.calculatedHeight
       }
     }
   },
 
   watch: {
     '$route' () {
-      this.isActive = !this.routeChanged()
+      if (!this.disableRouteWatcher) {
+        this.isActive = !this.routeChanged()
+      }
     }
   },
 
@@ -87,14 +79,10 @@ export default {
     },
 
     routeChanged () {
-      if (
+      return (
         (window.innerWidth < this.mobileBreakPoint && this.mobile) ||
         (this.drawer && this.closeOnClick)
-      ) {
-        return true
-      }
-
-      return false
+      )
     }
   },
 

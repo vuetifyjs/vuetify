@@ -1,0 +1,36 @@
+input-group-theme(color, offset, dirty)
+  input, textarea
+    color: color
+    
+    + .icon
+      color: color
+
+    &:disabled
+      color: color
+    
+  label
+    color: color
+    
+  &.input-group--single-line&.input-group--focused
+    label
+      color: color
+    
+  .input-group__append-icon, .input-group__prepend-icon
+    color: rgba(offset, .6)
+    
+  &.input-group--dirty
+    input, textarea
+      color: dirty
+  
+  .input-group__counter
+    color: color
+    
+  .input-group__details
+    color: color
+
+  &.input-group--disabled
+    input, textarea
+      color: color
+    
+    .input-group__details:before
+      background-color: transparent
