@@ -103,8 +103,9 @@ export default {
     },
 
     inputValue (val) {
+      if (this.multiple && !this.auto) this.$refs.menu.activate()
+
       if (this.multiple) {
-        this.$refs.menu.activate()
         this.$emit('input', !val.length ? null : val)
       } else {
         this.$emit('input', !val.length ? null : val[0])
@@ -231,6 +232,7 @@ export default {
           value: this.menuActive,
           nudgeBottom: 2,
           nudgeTop: -16,
+          nudgeYAuto: 2,
           nudgeXAuto: this.multiple ? -40 : -16,
           activator: this.menuActivator
         },
