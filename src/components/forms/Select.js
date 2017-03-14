@@ -25,10 +25,22 @@ export default {
   },
 
   props: {
+    appendIcon: {
+      type: String,
+      default: 'arrow_drop_down'
+    },
+    autocomplete: Boolean,
+    chips: Boolean,
+    close: Boolean,
+    debounce: {
+      type: Number,
+      default: 200
+    },
     items: {
       type: Array,
       default: () => []
     },
+    filter: Function,
     itemText: {
       type: String,
       default: 'text'
@@ -37,20 +49,11 @@ export default {
       type: String,
       default: 'group'
     },
-    appendIcon: {
-      type: String,
-      default: 'arrow_drop_down'
-    },
-    multiple: Boolean,
-    autocomplete: Boolean,
-    filter: Function,
-    singleLine: Boolean,
-    chips: Boolean,
-    close: Boolean,
-    debounce: {
-      type: Number,
+    maxHeight: {
+      type: [Number, String],
       default: 200
-    }
+    },
+    multiple: Boolean
   },
 
   computed: {
@@ -60,7 +63,8 @@ export default {
         'input-group--select': true,
         'input-group--autocomplete': this.autocomplete,
         'input-group--single-line': this.singleLine,
-        'input-group--multi-line': this.multiLine
+        'input-group--multi-line': this.multiLine,
+        'input-group--chips': this.chips
       }
     },
 
@@ -100,6 +104,7 @@ export default {
     value (val) {
       this.inputValue = this.parseInputValue()
       this.inputSearch = this.parseInputSearch()
+      this.validate()
     },
 
     inputValue (val) {
@@ -234,7 +239,8 @@ export default {
           nudgeTop: -16,
           nudgeYAuto: 2,
           nudgeXAuto: this.multiple ? -40 : -16,
-          activator: this.menuActivator
+          activator: this.menuActivator,
+          maxHeight: this.maxHeight
         },
         on: {
           input: (val) => (this.menuActive = val)

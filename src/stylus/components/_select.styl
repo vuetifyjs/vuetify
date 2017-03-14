@@ -1,11 +1,17 @@
-.input-group--select
-    
+.input-group--select    
   .input-group__append-icon
     transition: .3s $transition.linear-out-slow-in
     
   &.input-group--focused
     .input-group__append-icon
       transform: rotate(-180deg)
+  
+  &.input-group--dirty.input-group--focused.input-group--chips
+    input
+      margin: 8px 0
+      
+  .input-group__input, input
+    cursor: pointer
     
   &.input-group--disabled
     cursor: not-allowed
@@ -16,9 +22,6 @@
     display: flex
     flex-wrap: wrap
     width: 100%
-    
-    input
-      cursor: pointer
 
     &__comma
       font-size: 16px
