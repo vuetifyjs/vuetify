@@ -19,7 +19,6 @@ export default {
       menuActivator: null,
       keyUpDown: 0,
       keyLeftRight: 0,
-      backspaces: 0,
       appendIconCbPrivate: this.removeAllSelected,
       noResultsFoundText: 'No search results found.'
     }
@@ -118,7 +117,7 @@ export default {
 
     keyUpDown (val) {
       const numItems = this.filteredItems.length
-      if (val < 0) this.keyUpDown = 0
+      if (val < 1) this.keyUpDown = 1
       if (val > numItems) this.keyUpDown = numItems
 
       // Todo: Scroll to highlighted here.
@@ -232,7 +231,6 @@ export default {
           value: this.menuActive,
           nudgeBottom: 2,
           nudgeTop: -16,
-          // nudgeWidth: this.appendIcon ? 30 : 0,
           nudgeXAuto: this.multiple ? -40 : -16,
           activator: this.menuActivator
         },
@@ -335,8 +333,7 @@ export default {
             if (e.keyCode === 39) this.keyLeftRight--
             // Backspace.
             if (e.keyCode === 8) {
-              this.removeSelected(this.activeSelection)
-              this.keyLeftRight++
+              this.keyLeftRight === 0 ? this.keyLeftRight++ : this.removeSelected(this.activeSelection)
             }
             // Delete.
             if (e.keyCode === 46) this.removeSelected(this.activeSelection)
