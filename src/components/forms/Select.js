@@ -330,15 +330,15 @@ export default {
             // Enter.
             if (e.keyCode === 13) this.addSelected(this.highlighted)
             // Arrow left.
-            if (e.keyCode === 37) this.keyLeftRight++
+            if (e.keyCode === 37 && !this.inputSearch) this.keyLeftRight++
             // Arrow right.
-            if (e.keyCode === 39) this.keyLeftRight--
+            if (e.keyCode === 39 && !this.inputSearch) this.keyLeftRight--
             // Backspace.
-            if (e.keyCode === 8) {
+            if (e.keyCode === 8 && !this.inputSearch) {
               this.keyLeftRight === 0 ? this.keyLeftRight++ : this.removeSelected(this.activeSelection)
             }
             // Delete.
-            if (e.keyCode === 46) this.removeSelected(this.activeSelection)
+            if (e.keyCode === 46 && !this.inputSearch) this.removeSelected(this.activeSelection)
           }
         }
       }
