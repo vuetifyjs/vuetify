@@ -12,6 +12,9 @@
     opacity: .4
     border-radius: 0
     
+    &:not(:last-child)
+      border-right: 1px solid transparent
+    
     &:after
       display: none
       
@@ -20,7 +23,7 @@
       background: $material-twelve-percent-dark
       
       &:not(:nth-last-child(2)):not(:last-child):not([data-only-child])
-        border-right: 1px solid $material-twelve-percent-dark
+        border-right-color: $material-twelve-percent-dark
       
     .icon
       font-size: 30px
