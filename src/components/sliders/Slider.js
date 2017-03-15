@@ -1,4 +1,5 @@
 import Input from '../../mixins/input'
+import { addOnceEventListener } from '../../util/helpers'
 
 export default {
   name: 'slider',
@@ -117,7 +118,7 @@ export default {
       this.isActive = true
       this.app.addEventListener('touchmove', this.onMouseMove, false)
       this.app.addEventListener('mousemove', this.onMouseMove, false)
-      this.app.addEventListener('mouseup', this.onMouseUp, false)
+      addOnceEventListener(this.app, 'mouseup', this.onMouseUp)
     },
     onMouseUp (e) {
       this.isActive = false
