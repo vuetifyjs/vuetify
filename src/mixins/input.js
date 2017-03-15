@@ -201,7 +201,7 @@ export default {
       this.errors = []
 
       this.rules.forEach(rule => {
-        const valid = rule()
+        const valid = rule(this.value)
 
         if (valid !== true) {
           this.errors.push(valid)
