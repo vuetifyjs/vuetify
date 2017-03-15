@@ -60,25 +60,20 @@
       color: $grey.base
       font-size: $list-sub-title-font-size
       line-height: 1.3
-      font-weight: $list-sub-title-font-weight
-    
-    &__action
-      display: flex
-      justify-content: flex-start
-      align-items: center
-      flex: 1 0 56px
-      
-      .input-group
-        align-items: center
+      font-weight: $list-sub-title-font-weight      
     
     .avatar
       justify-content: flex-start
-      flex: 1 0 56px
+      min-width: 56px
             
     &__action
-      align-items: flex-start
-      flex-direction: column
-      justify-content: center
+      display: flex
+      justify-content: flex-start
+      min-width: 56px
+      align-items: center
+      
+      .input-group
+        align-items: center
       
       .input-group__details
         display: none
@@ -95,9 +90,8 @@
         justify-content: space-between
         padding-top: $list-top-padding
         padding-bottom: $list-bottom-padding
-        
-      &--select-multi
-        flex: 1 0 30px
+        white-space: nowrap
+        flex-direction: column
       
     &__content
       text-align: left
@@ -113,8 +107,7 @@
         justify-content: flex-end
         
       + .list__tile__action:not(.list__tile__action--stack)
-        flex: 1 0 48px
-        align-items: center
+        justify-content: flex-end
             
     &--active
       .list__tile__title
@@ -155,9 +148,6 @@
   &--three-line
     .list__tile
       height: $list-item-triple-height
-      
-    .list__tile__action
-      align-items: flex-start
       
     .list__tile__sub-title
       white-space: initial
