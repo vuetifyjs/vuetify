@@ -74,10 +74,6 @@ export default {
     }
   },
 
-  created () {
-    this.validate()
-  },
-
   methods: {
     isDirty () {
       return this.inputValue
@@ -86,7 +82,7 @@ export default {
       return h('label', {}, this.label)
     },
     genMessages (h) {
-      const messages = []
+      let messages = []
 
       if ((this.hint &&
             this.focused ||
@@ -94,12 +90,10 @@ export default {
             this.persistentHint) &&
           this.errors.length === 0
       ) {
-        messages.push(this.genHint(h))
+        messages = [this.genHint(h)]
+      } else if (this.errors.length) {
+        messages = this.errors.map(i => this.genError(h, i))
       }
-
-      this.errors.forEach(i => {
-        messages.push(this.genError(h, i))
-      })
 
       return h(
         'transition-group',
@@ -117,9 +111,7 @@ export default {
     },
     genHint (h) {
       return h('div', {
-        'class': {
-          'input-group__hint': true
-        },
+        'class': 'input-group__hint',
         key: this.hint
       }, this.hint)
     },
