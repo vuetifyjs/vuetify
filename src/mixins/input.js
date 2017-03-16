@@ -74,6 +74,10 @@ export default {
     }
   },
 
+  mounted () {
+    this.validate()
+  },
+
   methods: {
     isDirty () {
       return this.inputValue
