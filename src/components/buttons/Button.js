@@ -99,7 +99,7 @@ export default {
   render (h) {
     const { tag, data } = this.generateRouteLink()
     const children = []
-    data.type = this.type
+    data.attrs.type = this.type
 
     children.push(this.genContent(h))
 
