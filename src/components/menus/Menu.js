@@ -279,10 +279,10 @@ export default {
         this.updateMaxMin()
 
         this.dimensions = {
-          'activator': this.measure(a),
-          'content': this.measure(c),
-          'list': this.measure(c, '.list'),
-          'selected': this.measure(c, '.list__tile--active', 'parent')
+          activator: this.measure(a),
+          content: this.measure(c),
+          list: this.measure(c, '.list'),
+          selected: this.auto ? this.measure(c, '.list__tile--active', 'parent') : null
         }
 
         this.offscreenFix()

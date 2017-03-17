@@ -8,9 +8,11 @@ export default {
 
   data () {
     return {
+      content: {},
       inputValue: this.value,
       inputSearch: '',
       isBooted: false,
+      lastItem: 20,
       menuActive: false
     }
   },
@@ -45,7 +47,8 @@ export default {
       type: [Number, String],
       default: 300
     },
-    multiple: Boolean
+    multiple: Boolean,
+    offset: Boolean
   },
 
   computed: {
@@ -59,17 +62,17 @@ export default {
       }
     },
     filteredItems () {
-      return this.items
+      return !this.auto ? this.items.slice(0, this.lastItem) : this.items
     },
     selectedItems () {
       if (!this.multiple) {
-        return [this.items.findIndex(i => this.getValue(i) === this.inputValue)]
+        return [this.inputValue]
       }
 
       const selected = []
 
-      this.items.forEach((o, i) => {
-        if (this.inputValue.find(j => this.getValue(j) === this.getValue(o))) {
+      this.items.forEach(i => {
+        if (this.inputValue.find(j => this.getValue(j) === this.getValue(i))) {
           selected.push(i)
         }
       })
@@ -82,11 +85,28 @@ export default {
     inputValue (val) {
       this.$emit('input', val)
     },
-    menuActive () {
-      this.isBooted = true
-    },
     value (val) {
       this.inputValue = val
+    },
+    menuActive (val) {
+      this.isBooted = true
+
+      if (!val) {
+        this.lastItem = 20
+      }
+    },
+    isBooted () {
+      this.$nextTick(() => {
+        this.content = this.$refs.menu.$el.querySelector('.menu__content')
+
+        this.content.addEventListener('scroll', this.onScroll, false)
+      })
+    }
+  },
+
+  beforeDestroy () {
+    if (this.isBooted) {
+      this.content.removeEventListener('scroll', this.onScroll, false)
     }
   },
 
@@ -95,15 +115,7 @@ export default {
       this.$nextTick(() => (this.focused = false))
     },
     isDirty () {
-      return (
-        (!this.multiple &&
-          this.inputValue ||
-          this.inputValue &&
-          this.inputValue.toString().length > 0
-        ) ||
-        this.multiple &&
-        this.inputValue.length > 0
-      )
+      return this.selectedItems.length
     },
     focus () {
       this.focused = true
@@ -113,6 +125,21 @@ export default {
     },
     getValue (item) {
       return typeof item === 'object' ? item[this.itemValue] : item
+    },
+    onScroll () {
+      if (!this.menuActive) {
+        setTimeout(() => (this.content.scrollTop = 0), 50)
+      } else {
+        const showMoreItems = (
+          this.content.scrollHeight -
+          (this.content.scrollTop +
+          this.content.clientHeight)
+        ) < 200
+
+        if (showMoreItems) {
+          this.lastItem += 20
+        }
+      }
     },
     selectItem (item) {
       if (!this.multiple) {

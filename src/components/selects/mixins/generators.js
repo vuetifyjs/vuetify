@@ -7,12 +7,13 @@ export default {
           auto: this.auto,
           closeOnClick: !this.multiple,
           disabled: this.disabled,
-          offsetY: this.autocomplete,
+          offsetY: this.autocomplete || this.offset,
           value: this.menuActive,
           nudgeBottom: 2,
           nudgeTop: -16,
           nudgeYAuto: 2,
           nudgeXAuto: this.multiple ? -40 : -16,
+          nudgeWidth: 25,
           maxHeight: this.maxHeight,
           activator: this.$refs.activator
         },
@@ -25,7 +26,6 @@ export default {
     },
     genSelectionsAndSearch (h) {
       return h('div', {
-        functional: true,
         'class': 'input-group__selections',
         ref: 'activator'
       }, this.isDirty() ? this.genSelections(h) : null)
@@ -39,7 +39,7 @@ export default {
       const chips = this.chips
       const slots = this.$scopedSlots.selection
 
-      this.inputValue.forEach((item, i) => {
+      this.selectedItems.forEach((item, i) => {
         if (slots) {
           children.push(this.genSlotSelection(h, item))
         } else if (chips) {
@@ -62,12 +62,12 @@ export default {
       return h('v-chip', {
         'class': 'chip--select-multi',
         props: { close: true },
-        on: { input: () => this.selectItem(item) }
+        on: { input: () => this.selectItem(item) },
+        nativeOn: { click: e => e.stopPropagation() }
       }, this.getText(item))
     },
     genCommaSelection (h, item) {
       return h('div', {
-        functional: true,
         'class': {
           'input-group__selections__comma': true
         }
@@ -109,13 +109,13 @@ export default {
       return h('input', data)
     },
     genList (h) {
-      return h('v-list', {}, this.filteredItems.map((o, i) => this.genListItem(h, o, i)))
+      return h('v-list', { ref: 'list' }, this.filteredItems.map(o => this.genListItem(h, o)))
     },
-    genListItem (h, item, i) {
-      return h('v-list-item', {}, [this.genTile(h, item, i)])
+    genListItem (h, item) {
+      return h('v-list-item', {}, [this.genTile(h, item)])
     },
-    genTile (h, item, i) {
-      const active = this.selectedItems.includes(i)
+    genTile (h, item) {
+      const active = this.selectedItems.includes(item)
       const data = {
         'class': {
           'list__tile--active': active,
