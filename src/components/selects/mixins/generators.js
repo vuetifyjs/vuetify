@@ -69,8 +69,7 @@ export default {
       return h('div', {
         functional: true,
         'class': {
-          'input-group__selections__comma': true,
-          'input-group__selections__comma--active': false
+          'input-group__selections__comma': true
         }
       }, this.getText(item))
     },
@@ -110,17 +109,17 @@ export default {
       return h('input', data)
     },
     genList (h) {
-      return h('v-list', {}, this.filteredItems.map(i => this.genListItem(h, i)))
+      return h('v-list', {}, this.filteredItems.map((o, i) => this.genListItem(h, o, i)))
     },
-    genListItem (h, item) {
-      return h('v-list-item', {}, [this.genTile(h, item)])
+    genListItem (h, item, i) {
+      return h('v-list-item', {}, [this.genTile(h, item, i)])
     },
-    genTile (h, item) {
+    genTile (h, item, i) {
+      const active = this.selectedItems.includes(i)
       const data = {
         'class': {
-          'list__tile--active': this.isSelected(item),
-          'list__tile--select-multi': this.multiple,
-          'list__tile--highlighted': false
+          'list__tile--active': active,
+          'list__tile--select-multi': this.multiple
         },
         nativeOn: {
           click: () => this.selectItem(item)
@@ -134,9 +133,9 @@ export default {
 
       return this.$scopedSlots.item
         ? h('v-list-tile', data, [this.$scopedSlots.item(scopeData)])
-        : h('v-list-tile', data, [this.genAction(h, item), this.genContent(h, item)])
+        : h('v-list-tile', data, [this.genAction(h, item, active), this.genContent(h, item)])
     },
-    genAction (h, item) {
+    genAction (h, item, active) {
       if (!this.multiple) return null
 
       const data = {
@@ -147,8 +146,9 @@ export default {
           click: i => this.selectItem(i)
         }
       }
+
       return h('v-list-tile-action', data, [
-        h('v-checkbox', { props: { inputValue: this.isSelected(item) }})
+        h('v-checkbox', { props: { inputValue: active }})
       ])
     },
     genContent (h, item) {

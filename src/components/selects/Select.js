@@ -10,6 +10,7 @@ export default {
     return {
       inputValue: this.value,
       inputSearch: '',
+      isBooted: false,
       menuActive: false
     }
   },
@@ -59,12 +60,30 @@ export default {
     },
     filteredItems () {
       return this.items
+    },
+    selectedItems () {
+      if (!this.multiple) {
+        return [this.items.findIndex(i => this.getValue(i) === this.inputValue)]
+      }
+
+      const selected = []
+
+      this.items.forEach((o, i) => {
+        if (this.inputValue.find(j => this.getValue(j) === this.getValue(o))) {
+          selected.push(i)
+        }
+      })
+
+      return selected
     }
   },
 
   watch: {
     inputValue (val) {
       this.$emit('input', val)
+    },
+    menuActive () {
+      this.isBooted = true
     },
     value (val) {
       this.inputValue = val
@@ -95,15 +114,6 @@ export default {
     getValue (item) {
       return typeof item === 'object' ? item[this.itemValue] : item
     },
-    isSelected (item) {
-      return (
-        (!this.multiple &&
-          this.getValue(item) === this.inputValue
-        ) ||
-        this.multiple &&
-        this.inputValue.find(i => this.getValue(i) === this.getValue(item))
-      )
-    },
     selectItem (item) {
       if (!this.multiple) {
         this.inputValue = item
@@ -122,7 +132,7 @@ export default {
   render (h) {
     return h('div', {}, [
       this.genInputGroup(h, [this.genSelectionsAndSearch(h)]),
-      this.genMenu(h)]
-    )
+      this.genMenu(h)
+    ])
   }
 }

@@ -23,6 +23,7 @@ export default {
       direction: { vert: 'bottom', horiz: 'right' },
       position: { left: '0px', top: '0px', right: 'auto', bottom: 'auto' },
       isContentActive: false,
+      isBooted: false,
       maxHeightAutoDefault: '200px'
     }
   },
@@ -172,6 +173,7 @@ export default {
 
   watch: {
     isActive (val) {
+      this.isBooted = true
       if (val) this.activate()
       else this.isContentActive = false
     },
@@ -391,7 +393,7 @@ export default {
         }
       }
 
-      return h('div', data, [this.$slots.default])
+      return h('div', data, [this.isBooted ? this.$slots.default : null])
     },
 
     // Utils
