@@ -65,19 +65,13 @@ export default {
       return !this.auto ? this.items.slice(0, this.lastItem) : this.items
     },
     selectedItems () {
-      if (!this.multiple) {
-        return [this.inputValue]
-      }
-
-      const selected = []
-
-      this.items.forEach(i => {
-        if (this.inputValue.find(j => this.getValue(j) === this.getValue(i))) {
-          selected.push(i)
+      return this.items.filter(i => {
+        if (!this.multiple) {
+          return this.getValue(i) === this.getValue(this.inputValue)
+        } else {
+          return this.inputValue.find(j => this.getValue(j) === this.getValue(i))
         }
       })
-
-      return selected
     }
   },
 
