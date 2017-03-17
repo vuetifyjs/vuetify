@@ -215,7 +215,7 @@ module.exports = function normalizeComponent (
   var type = typeof scriptExports.default
   if (type === 'object' || type === 'function') {
     // check named exports
-    if (false) {
+    if (true) {
       if (Object.keys(scriptExports).some(function (key) {
         return key !== 'default' && key !== '__esModule'
       })) {
@@ -371,7 +371,7 @@ module.exports = function normalizeComponent (
     }
   },
 
-  created: function created () {
+  mounted: function mounted () {
     this.validate()
   },
 
@@ -393,12 +393,10 @@ module.exports = function normalizeComponent (
             this.persistentHint) &&
           this.errors.length === 0
       ) {
-        messages.push(this.genHint(h))
+        messages = [this.genHint(h)]
+      } else if (this.errors.length) {
+        messages = this.errors.map(function (i) { return this$1.genError(h, i); })
       }
-
-      this.errors.forEach(function (i) {
-        messages.push(this$1.genError(h, i))
-      })
 
       return h(
         'transition-group',
@@ -416,9 +414,7 @@ module.exports = function normalizeComponent (
     },
     genHint: function genHint (h) {
       return h('div', {
-        'class': {
-          'input-group__hint': true
-        },
+        'class': 'input-group__hint',
         key: this.hint
       }, this.hint)
     },
@@ -688,14 +684,16 @@ module.exports = function normalizeComponent (
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pagination_index__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__parallax_index__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__progress_index__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__sidebar_index__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__sliders_index__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__subheaders_index__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__steppers_index__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__tables_index__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__tabs_index__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__transitions_index__ = __webpack_require__(63);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__snackbars_index__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__selects_index__ = __webpack_require__(129);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__sidebar_index__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__sliders_index__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__subheaders_index__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__steppers_index__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__tables_index__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__tabs_index__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__transitions_index__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__snackbars_index__ = __webpack_require__(49);
+
 
 
 
@@ -750,14 +748,15 @@ module.exports = function normalizeComponent (
   __WEBPACK_IMPORTED_MODULE_19__pagination_index__["a" /* default */],
   __WEBPACK_IMPORTED_MODULE_20__parallax_index__["a" /* default */],
   __WEBPACK_IMPORTED_MODULE_21__progress_index__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_22__sidebar_index__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_23__sliders_index__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_24__subheaders_index__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_25__steppers_index__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_26__tables_index__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_27__tabs_index__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_28__transitions_index__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_29__snackbars_index__["a" /* default */]
+  __WEBPACK_IMPORTED_MODULE_22__selects_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_23__sidebar_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_24__sliders_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_25__subheaders_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_26__steppers_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_27__tables_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_28__tabs_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_29__transitions_index__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_30__snackbars_index__["a" /* default */]
 );
 
 
@@ -1391,483 +1390,7 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
 
 /***/ },
-/* 26 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_input__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__util_helpers__ = __webpack_require__(0);
-
-
-
-// Todo: Debounce double/triple clicks.
-// Todo: Animate progress bar between debounces on search.
-// Todo: Arrow controls on chips.
-// Todo: Ability to add new items on the fly (and select them simultaneously).
-// Todo: Scroll to highlighted when key up/down.
-/* harmony default export */ exports["a"] = {
-  name: 'select',
-
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_input__["a" /* default */]],
-
-  data: function data () {
-    return {
-      inputValue: [],
-      inputSearch: '',
-      menuActive: false,
-      menuActivator: null,
-      keyUpDown: 0,
-      keyLeftRight: 0,
-      appendIconCbPrivate: this.removeAllSelected,
-      noResultsFoundText: 'No search results found.'
-    }
-  },
-
-  props: {
-    appendIcon: {
-      type: String,
-      default: 'arrow_drop_down'
-    },
-    autocomplete: Boolean,
-    chips: Boolean,
-    close: Boolean,
-    debounce: {
-      type: Number,
-      default: 200
-    },
-    items: {
-      type: Array,
-      default: function () { return []; }
-    },
-    filter: Function,
-    itemText: {
-      type: String,
-      default: 'text'
-    },
-    itemGroup: {
-      type: String,
-      default: 'group'
-    },
-    maxHeight: {
-      type: [Number, String],
-      default: 200
-    },
-    multiple: Boolean
-  },
-
-  computed: {
-    classes: function classes () {
-      return {
-        'input-group--text-field': true,
-        'input-group--select': true,
-        'input-group--autocomplete': this.autocomplete,
-        'input-group--single-line': this.singleLine,
-        'input-group--multi-line': this.multiLine,
-        'input-group--chips': this.chips
-      }
-    },
-
-    filteredItems: function filteredItems () {
-      var this$1 = this;
-
-      var filtered = this.items
-
-      if (this.inputSearch) {
-        filtered = this.filter
-          ? this.items.filter(function (item) { return (this$1.filter(item, this$1.inputSearch)); })
-          : this.items.filter(function (item) { return (this$1.defaultFilter(item, this$1.inputSearch)); })
-
-        filtered = filtered.length ? filtered : this.items
-      }
-
-      return filtered
-    },
-
-    inputCommaCount: function inputCommaCount () {
-      return this.inputValue.length + (this.focused ? 1 : 0)
-    },
-
-    highlighted: function highlighted () {
-      return this.filteredItems[this.keyUpDown - 1]
-    },
-
-    activeSelection: function activeSelection () {
-      var activeIndex = this.inputValue.length - this.keyLeftRight
-      return this.inputValue[activeIndex]
-    }
-  },
-
-  watch: {
-    focused: function focused (val) {
-      this.$emit('focused', val)
-    },
-
-    value: function value (val) {
-      this.inputValue = this.parseInputValue()
-      this.inputSearch = this.parseInputSearch()
-      this.validate()
-    },
-
-    inputValue: function inputValue (val) {
-      if (this.multiple && this.autocomplete) { this.$refs.menu.activate() }
-
-      if (this.multiple) {
-        this.$emit('input', !val.length ? null : val)
-      } else {
-        this.$emit('input', !val.length ? null : val[0])
-      }
-    },
-
-    menuActive: function menuActive (val) {
-      if (!val && this.autocomplete) { this.$refs.searchField.blur() }
-    },
-
-    keyUpDown: function keyUpDown (val) {
-      var numItems = this.filteredItems.length
-      if (val < 1) { this.keyUpDown = 1 }
-      if (val > numItems) { this.keyUpDown = numItems }
-
-      // Todo: Scroll to highlighted here.
-    },
-
-    keyLeftRight: function keyLeftRight (val) {
-      var numSelections = this.inputValue.length
-      if (val > numSelections) { this.keyLeftRight = 0 }
-      if (val < 0) { this.keyLeftRight = numSelections }
-    }
-  },
-
-  mounted: function mounted () {
-    this.menuActivator = this.$refs.inputgroup.querySelector('.input-group__input')
-    this.inputValue = this.parseInputValue()
-    this.inputSearch = this.parseInputSearch()
-  },
-
-  methods: {
-    isDirty: function isDirty () {
-      return this.inputSearch || this.inputValue.length
-    },
-
-    focus: function focus () {
-      this.focused = true
-      this.showClearIcon(true)
-    },
-
-    blur: function blur () {
-      var this$1 = this;
-
-      this.$nextTick(function () { return (this$1.focused = false); })
-      this.showClearIcon(false)
-      this.keyUpDown = 0
-      this.keyLeftRight = 0
-    },
-
-    parseInputValue: function parseInputValue () {
-      if (this.value === null) { return [] }
-      if (this.multiple) { return this.value }
-      return this.isEmptyObject(this.value) ? [] : [this.value]
-    },
-
-    parseInputSearch: function parseInputSearch () {
-      if (this.autocomplete && !this.multiple && this.value) { return this.value[this.itemText] }
-      return this.inputSearch
-    },
-
-    defaultFilter: function defaultFilter (item, inputSearch) {
-      return item[this.itemText].toLowerCase().includes(inputSearch.toLowerCase())
-    },
-
-    isHighlighted: function isHighlighted (item) {
-      return item === this.highlighted
-    },
-
-    isActiveSelection: function isActiveSelection (item) {
-      return item === this.activeSelection
-    },
-
-    isSelected: function isSelected (item) {
-      return this.inputValue.includes(item)
-    },
-
-    addSelected: function addSelected (item) {
-      if (!item) { return }
-
-      var uncheck = this.isSelected(item) && this.multiple
-      if (uncheck) {
-        this.removeSelected(item)
-        return
-      }
-
-      this.multiple ? this.inputValue.push(item) : this.inputValue = [item]
-      this.inputSearch = this.autocomplete && !this.multiple ? item[this.itemText] : ''
-
-      if (!this.multiple) { this.menuActive = false }
-      if (this.autocomplete) { this.$refs.searchField.focus() }
-    },
-
-    removeSelected: function removeSelected (item) {
-      if (!item) { return }
-
-      this.inputValue.splice(this.inputValue.findIndex(function (s) { return s === item; }), 1)
-      if (this.autocomplete && !this.multiple) { this.inputSearch = '' }
-    },
-
-    removeAllSelected: function removeAllSelected (e) {
-      if (!this.appendIconAlt) { return }
-
-      e.stopPropagation()
-      this.inputValue = []
-      this.inputSearch = ''
-      this.showClearIcon(false)
-    },
-
-    showClearIcon: function showClearIcon (on) {
-      if ( on === void 0 ) on = true;
-
-      this.appendIconAlt = on && this.close && this.inputValue.length ? 'close' : ''
-    },
-
-    // Render functions
-    // ====================
-
-    genMenu: function genMenu (h) {
-      var this$1 = this;
-
-      var data = {
-        ref: 'menu',
-        style: {
-          width: '100%'
-        },
-        props: {
-          auto: !this.autocomplete,
-          closeOnClick: !this.multiple,
-          disabled: this.disabled,
-          offsetY: this.autocomplete,
-          value: this.menuActive,
-          nudgeBottom: 2,
-          nudgeTop: -16,
-          nudgeYAuto: 2,
-          nudgeXAuto: this.multiple ? -40 : -16,
-          activator: this.menuActivator,
-          maxHeight: this.maxHeight
-        },
-        on: {
-          input: function (val) { return (this$1.menuActive = val); }
-        },
-        nativeOn: {
-          '!mouseenter': this.showClearIcon,
-          mouseleave: function () { this$1.showClearIcon(false) }
-        }
-      }
-
-      return h('v-menu', data, [this.genList(h)])
-    },
-
-    genActivator: function genActivator (h) {
-      var data = {
-        slot: 'activator'
-      }
-      return h('div', data, [this.genSelectionsAndSearch(h)])
-    },
-
-    genSelectionsAndSearch: function genSelectionsAndSearch (h) {
-      var data = {
-        'class': 'input-group__selections'
-      }
-
-      if (!this.autocomplete) { return h('div', data, this.genSelections(h)) }
-      if (!this.multiple && this.autocomplete) { return [this.genSearchField(h)] }
-      return h('div', data, this.genSelections(h).concat(this.genSearchField(h)))
-    },
-
-    genSelections: function genSelections (h) {
-      var this$1 = this;
-
-      var chips = this.chips
-      var slots = this.$scopedSlots.selection
-      var comma = true // <-- default
-
-      return this.inputValue.map(function (item, index) {
-        if (slots) { return this$1.genSlotSelection(h, item, index) }
-        if (chips) { return this$1.genChipSelection(h, item, index) }
-        if (comma) { return this$1.genCommaSelection(h, item, index) }
-      })
-    },
-
-    genSlotSelection: function genSlotSelection (h, item, index) {
-      return this.$scopedSlots.selection({ parent: this, item: item, index: index })
-    },
-
-    genChipSelection: function genChipSelection (h, item, index) {
-      var this$1 = this;
-
-      var data = {
-        'class': {
-          'chip--select-multi': true
-        },
-        props: { close: true },
-        on: {
-          input: function (val) { if (val === false) { this$1.removeSelected(item) } }
-        },
-        nativeOn: {
-          click: function (e) { return e.stopPropagation(); }
-        }
-      }
-
-      return h('v-chip', data, item[this.itemText])
-    },
-
-    genCommaSelection: function genCommaSelection (h, item, index) {
-      var comma = index < this.inputCommaCount - 1 ? ',' : ''
-
-      var data = {
-        'class': {
-          'input-group__selections__comma': true,
-          'input-group__selections__comma--active': this.isActiveSelection(item)
-        }
-      }
-      return h('div', data, item[this.itemText] + comma)
-    },
-
-    genSearchField: function genSearchField (h) {
-      var this$1 = this;
-
-      var data = {
-        ref: 'searchField',
-        domProps: {
-          value: this.inputSearch
-        },
-        on: {
-          input: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["e" /* debounce */])(function (e) {
-            this$1.inputSearch = this$1.autocomplete ? e.target.value : ''
-          }, this.debounce),
-          focus: this.focus,
-          blur: this.blur,
-          keyup: function (e) {
-            // Arrow down.
-            if (e.keyCode === 40) { this$1.keyUpDown++ }
-            // Arrow up.
-            if (e.keyCode === 38) { this$1.keyUpDown-- }
-            // Enter.
-            if (e.keyCode === 13) { this$1.addSelected(this$1.highlighted) }
-            // Arrow left.
-            if (e.keyCode === 37 && !this$1.inputSearch) { this$1.keyLeftRight++ }
-            // Arrow right.
-            if (e.keyCode === 39 && !this$1.inputSearch) { this$1.keyLeftRight-- }
-            // Backspace.
-            if (e.keyCode === 8 && !this$1.inputSearch) {
-              this$1.keyLeftRight === 0 ? this$1.keyLeftRight++ : this$1.removeSelected(this$1.activeSelection)
-            }
-            // Delete.
-            if (e.keyCode === 46 && !this$1.inputSearch) { this$1.removeSelected(this$1.activeSelection) }
-          }
-        }
-      }
-
-      return h('input', data)
-    },
-
-    genList: function genList (h) {
-      var this$1 = this;
-
-      var noResultsFound = this.inputSearch && !this.filteredItems
-      var list
-
-      if (noResultsFound) {
-        list = [this.genNoResultsFound(h)]
-      } else {
-        list = (this.filteredItems).map(function (item, index, items) {
-          var prevItem = items[index - 1] || null
-          return this$1.genListItem(h, item, prevItem)
-        })
-      }
-
-      return h('v-list', {}, list)
-    },
-
-    genListItem: function genListItem (h, item, prevItem) {
-      var group = item[this.itemGroup]
-      var prevGroup = prevItem ? prevItem[this.itemGroup] : null
-      var isNewGroup = group && group !== prevGroup
-      var listItem = h('v-list-item', {}, [this.genTile(h, item, prevItem)])
-
-      // Check for option groups.
-      if (isNewGroup) {
-        return [h('v-subheader', {}, group), listItem]
-      }
-
-      return listItem
-    },
-
-    genTile: function genTile (h, item, prevItem) {
-      var this$1 = this;
-
-      var data = {
-        'class': {
-          'list__tile--active': this.isSelected(item),
-          'list__tile--select-multi': this.multiple,
-          'list__tile--highlighted': this.isHighlighted(item)
-        },
-        nativeOn: {
-          click: function (e) { this$1.addSelected(item) }
-        }
-      }
-
-      var scopeData = {
-        parent: this,
-        item: item,
-        prevItem: prevItem
-      }
-
-      return this.$scopedSlots.item
-        ? h('v-list-tile', data, [this.$scopedSlots.item(scopeData)])
-        : h('v-list-tile', data, [this.genAction(h, item), this.genContent(h, item)])
-    },
-
-    genAction: function genAction (h, item) {
-      if (!this.multiple) { return null }
-
-      var data = {
-        'class': {
-          'list__tile__action--select-multi': this.multiple
-        }
-      }
-
-      var checkbox = h('v-checkbox', { props: { 'inputValue': this.isSelected(item) }})
-      return h('v-list-tile-action', data, [checkbox])
-    },
-
-    genNoResultsFound: function genNoResultsFound (h) {
-      var text = this.noResultsFoundText
-      var content = h('v-list-tile-content', {}, [h('v-list-tile-title', {}, text)])
-      var tile = h('v-list-tile', [content])
-
-      return h('v-list-item', [tile])
-    },
-
-    genContent: function genContent (h, item) {
-      return h('v-list-tile-content', {}, [h('v-list-tile-title', item[this.itemText])])
-    },
-
-    // Utils
-    // ====================
-
-    isEmptyObject: function isEmptyObject (obj) {
-      return obj.constructor === Object && Object.keys(obj).length === 0
-    }
-  },
-
-  render: function render (h) {
-    var data = { ref: 'inputgroup' }
-    var inputGroup = this.genInputGroup(h, [this.genSelectionsAndSearch(h)], data)
-    var menu = this.genMenu(h)
-
-    return h('div', {}, [inputGroup, menu])
-  }
-};
-
-
-/***/ },
+/* 26 */,
 /* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -2116,10 +1639,8 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Checkbox__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Radio__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Select__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Switch__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__TextField__ = __webpack_require__(28);
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Switch__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__TextField__ = __webpack_require__(28);
 
 
 
@@ -2128,9 +1649,8 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 /* harmony default export */ exports["a"] = {
   Checkbox: __WEBPACK_IMPORTED_MODULE_0__Checkbox__["a" /* default */],
   Radio: __WEBPACK_IMPORTED_MODULE_1__Radio__["a" /* default */],
-  Select: __WEBPACK_IMPORTED_MODULE_2__Select__["a" /* default */],
-  Switch: __WEBPACK_IMPORTED_MODULE_3__Switch__["a" /* default */],
-  TextField: __WEBPACK_IMPORTED_MODULE_4__TextField__["a" /* default */]
+  Switch: __WEBPACK_IMPORTED_MODULE_2__Switch__["a" /* default */],
+  TextField: __WEBPACK_IMPORTED_MODULE_3__TextField__["a" /* default */]
 };
 
 
@@ -2547,6 +2067,7 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
       direction: { vert: 'bottom', horiz: 'right' },
       position: { left: '0px', top: '0px', right: 'auto', bottom: 'auto' },
       isContentActive: false,
+      isBooted: false,
       maxHeightAutoDefault: '200px'
     }
   },
@@ -2718,6 +2239,7 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
 
   watch: {
     isActive: function isActive (val) {
+      this.isBooted = true
       if (val) { this.activate() }
       else { this.isContentActive = false }
     },
@@ -2764,6 +2286,7 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
 
       if (this.activator) { return this.activator }
       if (this.activatorXY) { return this.activatorXY }
+      console.log($refs.activator)
       return $refs.activator.children ? $refs.activator.children[0] : $refs.activator
     },
 
@@ -2970,7 +2493,7 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
         }
       }
 
-      return h('div', data, [this.$slots.default])
+      return h('div', data, [this.isBooted ? this.$slots.default : null])
     },
 
     // Utils
@@ -7315,6 +6838,352 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 /* harmony default export */ exports["default"] = plugin;
+
+
+/***/ },
+/* 127 */,
+/* 128 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_input__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_generators__ = __webpack_require__(130);
+
+
+
+/* harmony default export */ exports["a"] = {
+  name: 'select',
+
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_input__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__mixins_generators__["a" /* default */]],
+
+  data: function data () {
+    return {
+      inputValue: this.value,
+      inputSearch: '',
+      isBooted: false,
+      menuActive: false
+    }
+  },
+
+  props: {
+    appendIcon: {
+      type: String,
+      default: 'arrow_drop_down'
+    },
+    auto: Boolean,
+    autocomplete: Boolean,
+    chips: Boolean,
+    close: Boolean,
+    debounce: {
+      type: Number,
+      default: 200
+    },
+    items: {
+      type: Array,
+      default: function () { return []; }
+    },
+    filter: Function,
+    itemText: {
+      type: String,
+      default: 'text'
+    },
+    itemValue: {
+      type: String,
+      default: 'value'
+    },
+    maxHeight: {
+      type: [Number, String],
+      default: 300
+    },
+    multiple: Boolean
+  },
+
+  computed: {
+    classes: function classes () {
+      return {
+        'input-group--text-field input-group--select': true,
+        'input-group--autocomplete': this.autocomplete,
+        'input-group--single-line': this.singleLine,
+        'input-group--multi-line': this.multiLine,
+        'input-group--chips': this.chips
+      }
+    },
+    filteredItems: function filteredItems () {
+      return this.items
+    },
+    selectedItems: function selectedItems () {
+      var this$1 = this;
+
+      if (!this.multiple) {
+        return [this.items.findIndex(function (i) { return this$1.getValue(i) === this$1.inputValue; })]
+      }
+
+      var selected = []
+
+      this.items.forEach(function (o, i) {
+        if (this$1.inputValue.find(function (j) { return this$1.getValue(j) === this$1.getValue(o); })) {
+          selected.push(i)
+        }
+      })
+
+      return selected
+    }
+  },
+
+  watch: {
+    inputValue: function inputValue (val) {
+      this.$emit('input', val)
+    },
+    menuActive: function menuActive () {
+      this.isBooted = true
+    },
+    value: function value (val) {
+      this.inputValue = val
+    }
+  },
+
+  methods: {
+    blur: function blur () {
+      var this$1 = this;
+
+      this.$nextTick(function () { return (this$1.focused = false); })
+    },
+    isDirty: function isDirty () {
+      return (
+        (!this.multiple &&
+          this.inputValue ||
+          this.inputValue &&
+          this.inputValue.toString().length > 0
+        ) ||
+        this.multiple &&
+        this.inputValue.length > 0
+      )
+    },
+    focus: function focus () {
+      this.focused = true
+    },
+    getText: function getText (item) {
+      return typeof item === 'object' ? item[this.itemText] : item
+    },
+    getValue: function getValue (item) {
+      return typeof item === 'object' ? item[this.itemValue] : item
+    },
+    selectItem: function selectItem (item) {
+      var this$1 = this;
+
+      if (!this.multiple) {
+        this.inputValue = item
+      } else {
+        var i = this.inputValue.findIndex(function (i) { return this$1.getValue(i) === this$1.getValue(item); })
+
+        if (i !== -1) {
+          this.inputValue.splice(i, 1)
+        } else {
+          this.inputValue.push(item)
+        }
+      }
+    }
+  },
+
+  render: function render (h) {
+    return h('div', {}, [
+      this.genInputGroup(h, [this.genSelectionsAndSearch(h)]),
+      this.genMenu(h)
+    ])
+  }
+};
+
+
+/***/ },
+/* 129 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Select__ = __webpack_require__(128);
+
+
+/* harmony default export */ exports["a"] = {
+  Select: __WEBPACK_IMPORTED_MODULE_0__Select__["a" /* default */]
+};
+
+
+/***/ },
+/* 130 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ exports["a"] = {
+  methods: {
+    genMenu: function genMenu (h) {
+      var this$1 = this;
+
+      var data = {
+        ref: 'menu',
+        props: {
+          auto: this.auto,
+          closeOnClick: !this.multiple,
+          disabled: this.disabled,
+          offsetY: this.autocomplete,
+          value: this.menuActive,
+          nudgeBottom: 2,
+          nudgeTop: -16,
+          nudgeYAuto: 2,
+          nudgeXAuto: this.multiple ? -40 : -16,
+          maxHeight: this.maxHeight,
+          activator: this.$refs.activator
+        },
+        on: {
+          input: function (val) { return (this$1.menuActive = val); }
+        }
+      }
+
+      return h('v-menu', data, [this.genList(h)])
+    },
+    genSelectionsAndSearch: function genSelectionsAndSearch (h) {
+      return h('div', {
+        functional: true,
+        'class': 'input-group__selections',
+        ref: 'activator'
+      }, this.isDirty() ? this.genSelections(h) : null)
+    },
+    genSelections: function genSelections (h) {
+      var this$1 = this;
+
+      if (!this.multiple) {
+        return [this.genCommaSelection(h, this.inputValue)]
+      }
+
+      var children = []
+      var chips = this.chips
+      var slots = this.$scopedSlots.selection
+
+      this.inputValue.forEach(function (item, i) {
+        if (slots) {
+          children.push(this$1.genSlotSelection(h, item))
+        } else if (chips) {
+          children.push(this$1.genChipSelection(h, item))
+        } else {
+          children.push(this$1.genCommaSelection(h, item))
+
+          if (i < this$1.inputValue.length - 1) {
+            children.push(this$1.genCommaSelection(h, ', '))
+          }
+        }
+      })
+
+      return children
+    },
+    genSlotSelection: function genSlotSelection (h, item) {
+      return this.$scopedSlots.selection({ parent: this, item: item })
+    },
+    genChipSelection: function genChipSelection (h, item) {
+      var this$1 = this;
+
+      return h('v-chip', {
+        'class': 'chip--select-multi',
+        props: { close: true },
+        on: { input: function () { return this$1.selectItem(item); } }
+      }, this.getText(item))
+    },
+    genCommaSelection: function genCommaSelection (h, item) {
+      return h('div', {
+        functional: true,
+        'class': {
+          'input-group__selections__comma': true
+        }
+      }, this.getText(item))
+    },
+    genSearchField: function genSearchField (h) {
+      var this$1 = this;
+
+      var data = {
+        ref: 'searchField',
+        domProps: {
+          value: this.inputSearch
+        },
+        on: {
+          input: debounce(function (e) {
+            this$1.inputSearch = this$1.autocomplete ? e.target.value : ''
+          }, this.debounce),
+          focus: this.focus,
+          blur: this.blur,
+          keyup: function (e) {
+            // Arrow down.
+            if (e.keyCode === 40) { this$1.keyUpDown++ }
+            // Arrow up.
+            if (e.keyCode === 38) { this$1.keyUpDown-- }
+            // Enter.
+            if (e.keyCode === 13) { this$1.selectItem(this$1.highlighted) }
+            // Arrow left.
+            if (e.keyCode === 37 && !this$1.inputSearch) { this$1.keyLeftRight++ }
+            // Arrow right.
+            if (e.keyCode === 39 && !this$1.inputSearch) { this$1.keyLeftRight-- }
+            // Backspace.
+            if (e.keyCode === 8 && !this$1.inputSearch) {
+              this$1.keyLeftRight === 0 ? this$1.keyLeftRight++ : this$1.selectItem(this$1.activeSelection)
+            }
+            // Delete.
+            if (e.keyCode === 46 && !this$1.inputSearch) { this$1.selectItem(this$1.activeSelection) }
+          }
+        }
+      }
+
+      return h('input', data)
+    },
+    genList: function genList (h) {
+      var this$1 = this;
+
+      return h('v-list', {}, this.filteredItems.map(function (o, i) { return this$1.genListItem(h, o, i); }))
+    },
+    genListItem: function genListItem (h, item, i) {
+      return h('v-list-item', {}, [this.genTile(h, item, i)])
+    },
+    genTile: function genTile (h, item, i) {
+      var this$1 = this;
+
+      var active = this.selectedItems.includes(i)
+      var data = {
+        'class': {
+          'list__tile--active': active,
+          'list__tile--select-multi': this.multiple
+        },
+        nativeOn: {
+          click: function () { return this$1.selectItem(item); }
+        }
+      }
+
+      var scopeData = {
+        parent: this,
+        item: item
+      }
+
+      return this.$scopedSlots.item
+        ? h('v-list-tile', data, [this.$scopedSlots.item(scopeData)])
+        : h('v-list-tile', data, [this.genAction(h, item, active), this.genContent(h, item)])
+    },
+    genAction: function genAction (h, item, active) {
+      var this$1 = this;
+
+      if (!this.multiple) { return null }
+
+      var data = {
+        'class': {
+          'list__tile__action--select-multi': this.multiple
+        },
+        nativeOn: {
+          click: function (i) { return this$1.selectItem(i); }
+        }
+      }
+
+      return h('v-list-tile-action', data, [
+        h('v-checkbox', { props: { inputValue: active }})
+      ])
+    },
+    genContent: function genContent (h, item) {
+      return h('v-list-tile-content', {}, [h('v-list-tile-title', this.getText(item))])
+    }
+  }
+};
 
 
 /***/ }
