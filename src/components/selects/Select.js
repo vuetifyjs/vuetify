@@ -8,13 +8,9 @@ export default {
 
   data () {
     return {
-      inputValue: [],
+      inputValue: this.value,
       inputSearch: '',
-      menuActive: false,
-      menuActivator: null,
-      keyUpDown: 0,
-      keyLeftRight: 0,
-      noResultsFoundText: 'No search results found.'
+      menuActive: false
     }
   },
 
@@ -23,6 +19,7 @@ export default {
       type: String,
       default: 'arrow_drop_down'
     },
+    auto: Boolean,
     autocomplete: Boolean,
     chips: Boolean,
     close: Boolean,
@@ -39,13 +36,13 @@ export default {
       type: String,
       default: 'text'
     },
-    itemGroup: {
+    itemValue: {
       type: String,
-      default: 'group'
+      default: 'value'
     },
     maxHeight: {
       type: [Number, String],
-      default: 200
+      default: 300
     },
     multiple: Boolean
   },
@@ -53,144 +50,79 @@ export default {
   computed: {
     classes () {
       return {
-        'input-group--text-field': true,
-        'input-group--select': true,
+        'input-group--text-field input-group--select': true,
         'input-group--autocomplete': this.autocomplete,
         'input-group--single-line': this.singleLine,
         'input-group--multi-line': this.multiLine,
         'input-group--chips': this.chips
       }
     },
-
     filteredItems () {
-      let filtered = this.items
-
-      if (this.inputSearch) {
-        filtered = this.filter
-          ? this.items.filter(item => (this.filter(item, this.inputSearch)))
-          : this.items.filter(item => (this.defaultFilter(item, this.inputSearch)))
-
-        filtered = filtered.length ? filtered : this.items
-      }
-
-      return filtered
-    },
-
-    inputCommaCount () {
-      return this.inputValue.length + (this.focused ? 1 : 0)
-    },
-
-    highlighted () {
-      return this.filteredItems[this.keyUpDown - 1]
-    },
-
-    activeSelection () {
-      const activeIndex = this.inputValue.length - this.keyLeftRight
-      return this.inputValue[activeIndex]
+      return this.items
     }
   },
 
   watch: {
-    value (val) {
-      this.inputValue = val
-    },
     inputValue (val) {
       this.$emit('input', val)
     },
-    focused (val) {
-      if (val) {
-        this.keyUpDown = 0
-        this.keyLeftRight = 0
-      }
-
-      this.$emit('focused', val)
-    },
-    menuActive (val) {
-      if (!val && this.autocomplete) this.$refs.searchField.blur()
-    },
-    keyUpDown (val) {
-      const numItems = this.filteredItems.length
-      if (val < 1) this.keyUpDown = 1
-      if (val > numItems) this.keyUpDown = numItems
-
-      // Todo: Scroll to highlighted here.
-    },
-    keyLeftRight (val) {
-      const numSelections = this.inputValue.length
-      if (val > numSelections) this.keyLeftRight = 0
-      if (val < 0) this.keyLeftRight = numSelections
+    value (val) {
+      this.inputValue = val
     }
   },
 
-  mounted () {
-    this.menuActivator = this.$refs.inputgroup.querySelector('.input-group__input')
-  },
-
   methods: {
-    isDirty () {
-      return this.inputSearch || this.inputValue.length
-    },
-
-    focus () {
-      this.focused = true
-    },
-
     blur () {
       this.$nextTick(() => (this.focused = false))
     },
-
-    defaultFilter (item, inputSearch) {
-      return item[this.itemText].toLowerCase().includes(inputSearch.toLowerCase())
+    isDirty () {
+      return (
+        (!this.multiple &&
+          this.inputValue ||
+          this.inputValue &&
+          this.inputValue.toString().length > 0
+        ) ||
+        this.multiple &&
+        this.inputValue.length > 0
+      )
     },
-
-    isHighlighted (item) {
-      return item === this.highlighted
+    focus () {
+      this.focused = true
     },
-
-    isActiveSelection (item) {
-      return item === this.activeSelection
+    getText (item) {
+      return typeof item === 'object' ? item[this.itemText] : item
     },
-
+    getValue (item) {
+      return typeof item === 'object' ? item[this.itemValue] : item
+    },
     isSelected (item) {
-      return this.inputValue.includes(item)
+      return (
+        (!this.multiple &&
+          this.getValue(item) === this.inputValue
+        ) ||
+        this.multiple &&
+        this.inputValue.find(i => this.getValue(i) === this.getValue(item))
+      )
     },
-
-    addSelected (item) {
-      if (!item) return
-
+    selectItem (item) {
       if (!this.multiple) {
-        this.inputValue = typeof item === 'string'
-          ? item
-          : item[this.itemText]
-        return
+        this.inputValue = item
+      } else {
+        const i = this.inputValue.findIndex(i => this.getValue(i) === this.getValue(item))
+
+        if (i !== -1) {
+          this.inputValue.splice(i, 1)
+        } else {
+          this.inputValue.push(item)
+        }
       }
-
-      const uncheck = this.isSelected(item) && this.multiple
-      if (uncheck) {
-        this.removeSelected(item)
-        return
-      }
-
-      this.multiple ? this.inputValue.push(item) : this.inputValue = [item]
-      this.inputSearch = this.autocomplete && !this.multiple ? item[this.itemText] : ''
-
-      if (!this.multiple) this.menuActive = false
-      if (this.autocomplete) this.$refs.searchField.focus()
-    },
-
-    removeSelected (item) {
-      if (!item) return
-
-      this.inputValue.splice(this.inputValue.findIndex(s => s === item), 1)
-      if (this.autocomplete && !this.multiple) this.inputSearch = ''
     }
   },
 
   render (h) {
-    const data = { ref: 'inputgroup' }
-    const inputGroup = this.genInputGroup(h, [this.genSelectionsAndSearch(h)], data)
-    const menu = this.genMenu(h)
-
-    return h('div', {}, [inputGroup, menu])
+    return h('div', {}, [
+      this.genInputGroup(h, [this.genSelectionsAndSearch(h)]),
+      this.genMenu(h)]
+    )
   }
 }
