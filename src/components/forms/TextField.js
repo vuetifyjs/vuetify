@@ -75,10 +75,7 @@ export default {
       type: String,
       default: 'text'
     },
-    name: {
-      type: String,
-      default: ''
-    }
+    name: String
   },
 
   watch: {
@@ -131,7 +128,7 @@ export default {
       }
       // add only if set
       if(this.name) {
-        inputData.domProps.name = this.name
+        inputData.attrs = { name: this.name }
       }
 
       if (this.multiLine) {
