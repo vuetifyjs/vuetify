@@ -10,7 +10,6 @@ export default {
     return {
       content: {},
       inputValue: this.value,
-      inputSearch: '',
       isBooted: false,
       lastItem: 20,
       menuActive: false
@@ -64,7 +63,12 @@ export default {
     filteredItems () {
       return !this.auto ? this.items.slice(0, this.lastItem) : this.items
     },
+    isDirty () {
+      return this.selectedItems.length
+    },
     selectedItems () {
+      if (this.inputValue === null) return []
+
       return this.items.filter(i => {
         if (!this.multiple) {
           return this.getValue(i) === this.getValue(this.inputValue)
@@ -81,13 +85,11 @@ export default {
     },
     value (val) {
       this.inputValue = val
+      this.validate()
     },
     menuActive (val) {
       this.isBooted = true
-
-      if (!val) {
-        this.lastItem = 20
-      }
+      this.lastItem += !val ? 20 : 0
     },
     isBooted () {
       this.$nextTick(() => {
@@ -108,17 +110,14 @@ export default {
     blur () {
       this.$nextTick(() => (this.focused = false))
     },
-    isDirty () {
-      return this.selectedItems.length
-    },
     focus () {
       this.focused = true
     },
     getText (item) {
-      return typeof item === 'object' ? item[this.itemText] : item
+      return item === Object(item) ? item[this.itemText] : item
     },
     getValue (item) {
-      return typeof item === 'object' ? item[this.itemValue] : item
+      return item === Object(item) ? item[this.itemValue] : item
     },
     onScroll () {
       if (!this.menuActive) {
@@ -139,12 +138,16 @@ export default {
       if (!this.multiple) {
         this.inputValue = item
       } else {
-        const i = this.inputValue.findIndex(i => this.getValue(i) === this.getValue(item))
-
-        if (i !== -1) {
-          this.inputValue.splice(i, 1)
+        if (this.inputValue === null) {
+          this.inputValue = [item]
         } else {
-          this.inputValue.push(item)
+          const i = this.inputValue.findIndex(i => this.getValue(i) === this.getValue(item))
+
+          if (i !== -1) {
+            this.inputValue.splice(i, 1)
+          } else {
+            this.inputValue.push(item)
+          }
         }
       }
     }
@@ -152,8 +155,8 @@ export default {
 
   render (h) {
     return h('div', {}, [
-      this.genInputGroup(h, [this.genSelectionsAndSearch(h)]),
-      this.genMenu(h)
+      this.genInputGroup([this.genSelectionsAndSearch()]),
+      this.genMenu()
     ])
   }
 }
