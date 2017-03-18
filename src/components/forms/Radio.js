@@ -70,6 +70,6 @@ export default {
       ]
     })
 
-    return this.genInputGroup(h, [transition, ripple])
+    return this.genInputGroup([transition, ripple])
   }
 }

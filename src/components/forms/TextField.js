@@ -151,6 +151,6 @@ export default {
   },
 
   render (h) {
-    return this.genInputGroup(h, this.genInput(h))
+    return this.genInputGroup(this.genInput(h))
   }
 }

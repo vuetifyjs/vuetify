@@ -197,7 +197,7 @@ export default {
 
     const slider = h('div', { 'class': 'slider' }, children)
 
-    return this.genInputGroup(h, [slider], {
+    return this.genInputGroup([slider], {
       attrs: {
         role: 'slider'
       },

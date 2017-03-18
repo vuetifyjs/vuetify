@@ -1,6 +1,6 @@
 export default {
   methods: {
-    genMenu (h) {
+    genMenu () {
       const data = {
         ref: 'menu',
         props: {
@@ -17,142 +17,115 @@ export default {
           maxHeight: this.maxHeight,
           activator: this.$refs.activator
         },
-        on: {
-          input: val => (this.menuActive = val)
-        }
+        on: { input: val => (this.menuActive = val) }
       }
 
-      return h('v-menu', data, [this.genList(h)])
+      return this.$createElement('v-menu', data, [this.genList()])
     },
-    genSelectionsAndSearch (h) {
-      return h('div', {
+    genSelectionsAndSearch () {
+      return this.$createElement('div', {
         'class': 'input-group__selections',
         ref: 'activator'
-      }, this.isDirty() ? this.genSelections(h) : null)
+      }, this.isDirty ? this.genSelections() : null)
     },
-    genSelections (h) {
-      if (!this.multiple) {
-        return [this.genCommaSelection(h, this.inputValue)]
-      }
-
+    genSelections () {
       const children = []
       const chips = this.chips
       const slots = this.$scopedSlots.selection
+      const length = this.selectedItems.length
 
       this.selectedItems.forEach((item, i) => {
         if (slots) {
-          children.push(this.genSlotSelection(h, item))
+          children.push(this.genSlotSelection(item))
         } else if (chips) {
-          children.push(this.genChipSelection(h, item))
+          children.push(this.genChipSelection(item))
         } else {
-          children.push(this.genCommaSelection(h, item))
+          children.push(this.genCommaSelection(item))
 
-          if (i < this.inputValue.length - 1) {
-            children.push(this.genCommaSelection(h, ', '))
+          if (i < length - 1) {
+            children.push(this.genCommaSelection())
           }
         }
       })
 
       return children
     },
-    genSlotSelection (h, item) {
+    genSlotSelection (item) {
       return this.$scopedSlots.selection({ parent: this, item })
     },
-    genChipSelection (h, item) {
-      return h('v-chip', {
+    genChipSelection (item) {
+      return this.$createElement('v-chip', {
         'class': 'chip--select-multi',
         props: { close: true },
         on: { input: () => this.selectItem(item) },
         nativeOn: { click: e => e.stopPropagation() }
       }, this.getText(item))
     },
-    genCommaSelection (h, item) {
-      return h('div', {
-        'class': {
-          'input-group__selections__comma': true
-        }
+    genCommaSelection (item = ', ') {
+      return this.$createElement('div', {
+        'class': 'input-group__selections__comma'
       }, this.getText(item))
     },
-    genSearchField (h) {
-      const data = {
-        ref: 'searchField',
-        domProps: {
-          value: this.inputSearch
-        },
-        on: {
-          input: debounce(e => {
-            this.inputSearch = this.autocomplete ? e.target.value : ''
-          }, this.debounce),
-          focus: this.focus,
-          blur: this.blur,
-          keyup: e => {
-            // Arrow down.
-            if (e.keyCode === 40) this.keyUpDown++
-            // Arrow up.
-            if (e.keyCode === 38) this.keyUpDown--
-            // Enter.
-            if (e.keyCode === 13) this.selectItem(this.highlighted)
-            // Arrow left.
-            if (e.keyCode === 37 && !this.inputSearch) this.keyLeftRight++
-            // Arrow right.
-            if (e.keyCode === 39 && !this.inputSearch) this.keyLeftRight--
-            // Backspace.
-            if (e.keyCode === 8 && !this.inputSearch) {
-              this.keyLeftRight === 0 ? this.keyLeftRight++ : this.selectItem(this.activeSelection)
-            }
-            // Delete.
-            if (e.keyCode === 46 && !this.inputSearch) this.selectItem(this.activeSelection)
-          }
-        }
-      }
-
-      return h('input', data)
+    genList () {
+      return this.$createElement('v-list', {
+        ref: 'list'
+      }, this.filteredItems.map(o => {
+        if (o.header) return this.genHeader(o)
+        if (o.divider) return this.genDivider(o)
+        else return this.genListItem(o)
+      }))
     },
-    genList (h) {
-      return h('v-list', { ref: 'list' }, this.filteredItems.map(o => this.genListItem(h, o)))
+    genHeader (item) {
+      return this.$createElement('v-subheader', {
+        props: item
+      }, item.header)
     },
-    genListItem (h, item) {
-      return h('v-list-item', {}, [this.genTile(h, item)])
+    genDivider (item) {
+      return this.$createElement('v-divider', {
+        props: item
+      })
     },
-    genTile (h, item) {
-      const active = this.selectedItems.includes(item)
+    genListItem (item) {
+      return this.$createElement('v-list-item', [this.genTile(item)])
+    },
+    genTile (item) {
+      const active = this.selectedItems.indexOf(item) !== -1
       const data = {
         'class': {
           'list__tile--active': active,
           'list__tile--select-multi': this.multiple
         },
-        nativeOn: {
-          click: () => this.selectItem(item)
-        }
+        nativeOn: { click: () => this.selectItem(item) }
       }
 
-      const scopeData = {
-        parent: this,
-        item: item
+      if (this.$scopedSlots.item) {
+        return this.$createElement('v-list-tile', data,
+          [this.$scopedSlots.item({ parent: this, item })]
+        )
       }
 
-      return this.$scopedSlots.item
-        ? h('v-list-tile', data, [this.$scopedSlots.item(scopeData)])
-        : h('v-list-tile', data, [this.genAction(h, item, active), this.genContent(h, item)])
+      return this.$createElement('v-list-tile', data,
+        [this.genAction(item, active), this.genContent(item)]
+      )
     },
-    genAction (h, item, active) {
+    genAction (item, active) {
       if (!this.multiple) return null
 
       const data = {
         'class': {
           'list__tile__action--select-multi': this.multiple
         },
-        nativeOn: {
-          click: i => this.selectItem(i)
-        }
+        nativeOn: { click: () => this.selectItem(item) }
       }
 
-      return h('v-list-tile-action', data, [
-        h('v-checkbox', { props: { inputValue: active }})
+      return this.$createElement('v-list-tile-action', data, [
+        this.$createElement('v-checkbox', { props: { inputValue: active }})
       ])
     },
-    genContent (h, item) {
-      return h('v-list-tile-content', {}, [h('v-list-tile-title', this.getText(item))])
+    genContent (item) {
+      return this.$createElement('v-list-tile-content',
+        [this.$createElement('v-list-tile-title', this.getText(item))]
+      )
     }
   }
 }
