@@ -74,6 +74,10 @@ export default {
     type: {
       type: String,
       default: 'text'
+    },
+    name: {
+      type: String,
+      default: ''
     }
   },
 
@@ -124,6 +128,10 @@ export default {
           focus: () => (this.focused = true)
         },
         ref: 'input'
+      }
+      // add only if set
+      if(this.name) {
+        inputData.domProps.name = this.name
       }
 
       if (this.multiLine) {
