@@ -23,10 +23,18 @@ export default {
       return this.$createElement('v-menu', data, [this.genList()])
     },
     genSelectionsAndSearch () {
+      const group = this.$createElement('transition-group', {
+        props: {
+          name: 'slide-y-reverse-transition',
+          tag: 'div'
+        },
+      }, this.isDirty ? this.genSelections() : null)
+
       return this.$createElement('div', {
         'class': 'input-group__selections',
+        style: { 'overflow': 'hidden' },
         ref: 'activator'
-      }, this.isDirty ? this.genSelections() : null)
+      }, [group])
     },
     genSelections () {
       const children = []
@@ -40,11 +48,7 @@ export default {
         } else if (chips) {
           children.push(this.genChipSelection(item))
         } else {
-          children.push(this.genCommaSelection(item))
-
-          if (i < length - 1) {
-            children.push(this.genCommaSelection())
-          }
+          children.push(this.genCommaSelection(item, i < length - 1))
         }
       })
 
@@ -58,13 +62,15 @@ export default {
         'class': 'chip--select-multi',
         props: { close: true },
         on: { input: () => this.selectItem(item) },
-        nativeOn: { click: e => e.stopPropagation() }
+        nativeOn: { click: e => e.stopPropagation() },
+        key: item
       }, this.getText(item))
     },
-    genCommaSelection (item = ', ') {
+    genCommaSelection (item, comma) {
       return this.$createElement('div', {
-        'class': 'input-group__selections__comma'
-      }, this.getText(item))
+        'class': 'input-group__selections__comma',
+        key: item
+      }, `${this.getText(item)}${comma ? ', ' : ''}`)
     },
     genList () {
       return this.$createElement('v-list', {

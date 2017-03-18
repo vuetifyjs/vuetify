@@ -53,6 +53,9 @@
     transform: translate(100%, 0)  
 
 .scale-transition
+  &-leave-active
+    position: absolute
+
   &-enter, &-enter-active, &-leave, &-leave-to
     transition: $primary-transition
     
@@ -61,6 +64,9 @@
     transform: scale(0)
 
 .slide-y-transition
+  &-leave-active
+    position: absolute
+
   &-enter-active, &-leave, &-leave-to
     transition: $primary-transition
     
@@ -69,6 +75,9 @@
     transform: translateY(-15px)
 
 .slide-y-reverse-transition
+  &-leave-active
+    position: absolute
+
   &-enter-active, &-leave, &-leave-to
     transition: $primary-transition
     
