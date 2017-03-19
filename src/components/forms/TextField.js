@@ -74,7 +74,8 @@ export default {
     type: {
       type: String,
       default: 'text'
-    }
+    },
+    name: String
   },
 
   watch: {
@@ -124,6 +125,10 @@ export default {
           focus: () => (this.focused = true)
         },
         ref: 'input'
+      }
+      // add only if set
+      if(this.name) {
+        inputData.attrs = { name: this.name }
       }
 
       if (this.multiLine) {
