@@ -7,7 +7,8 @@ export default {
 
   data () {
     return {
-      hasFocused: false
+      hasFocused: false,
+      inputHeight: null
     }
   },
 
@@ -34,6 +35,11 @@ export default {
       }
 
       return `${min} / ${this.max}`
+    },
+    inputHeight () {
+      if (!this.$refs.input) return null
+
+      return this.$refs.input.scrollHeight
     },
     inputValue: {
       get () {
@@ -90,10 +96,18 @@ export default {
     value () {
       this.lazyValue = this.value
       this.validate()
+      this.calculateInputHeight()
     }
   },
 
+  mounted () {
+    this.$vuetify.load(this.calculateInputHeight)
+  },
+
   methods: {
+    calculateInputHeight () {
+      this.inputHeight = this.$refs.input.scrollHeight
+    },
     isDirty () {
       return this.lazyValue
     },
@@ -113,6 +127,9 @@ export default {
       const tag = this.multiLine ? 'textarea' : 'input'
 
       const inputData = {
+        style: {
+          'height': this.inputHeight && `${this.inputHeight}px`
+        },
         domProps: {
           autocomplete: this.autocomplete,
           disabled: this.disabled,
@@ -127,7 +144,7 @@ export default {
         ref: 'input'
       }
       // add only if set
-      if(this.name) {
+      if (this.name) {
         inputData.attrs = { name: this.name }
       }
 
