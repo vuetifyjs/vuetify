@@ -1,0 +1,20 @@
+.datatable
+  thead
+    i
+      font-size: 13px
+      vertical-align: middle
+      display: inline-block
+      margin-right: 3px
+      opacity: 0
+      margin-left: -16px
+      transition: .3s $transition.swing
+
+    th
+      white-space: nowrap
+      cursor: pointer
+      user-select: none
+      
+      &.active
+        i
+          opacity: 1
+          margin-left: 0
