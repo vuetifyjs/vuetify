@@ -52,7 +52,7 @@ export default {
 
         let value = Math.round(val)
 
-        value = value < this.min ? 0 : value > this.max ? this.max : value
+        value = value < this.min ? this.min : value > this.max ? this.max : value
 
         this.$emit('input', value)
       }
