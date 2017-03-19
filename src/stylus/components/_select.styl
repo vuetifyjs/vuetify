@@ -1,8 +1,14 @@
-.input-group--select      
+.input-group--select
+  input
+    opacity: 0
+
   .input-group__append-icon
     transition: .3s $transition.linear-out-slow-in
     
   &.input-group--focused
+    input
+      opacity: 1
+
     .input-group__append-icon
       transform: rotate(-180deg)
   

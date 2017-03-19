@@ -17,18 +17,35 @@ export default {
           maxHeight: this.maxHeight,
           activator: this.$refs.activator
         },
-        on: { input: val => (this.menuActive = val) }
+        on: {
+          input: val => (this.menuActive = val)
+        }
       }
 
       return this.$createElement('v-menu', data, [this.genList()])
     },
     genSelectionsAndSearch () {
+      const input = this.$createElement('input', {
+        domProps: { value: this.searchValue },
+        on: {
+          input: e => (this.searchValue = e.target.value),
+          keyup: e => {
+            if (e.keyCode === 27) {
+              this.menuActive = false
+              e.target.blur()
+            }
+          }
+        },
+        ref: 'input',
+        key: 'input'
+      })
+
       const group = this.$createElement('transition-group', {
         props: {
-          name: 'slide-y-reverse-transition',
+          name: 'fade-transition',
           tag: 'div'
-        },
-      }, this.isDirty ? this.genSelections() : null)
+        }
+      }, (this.isDirty ? this.genSelections() : []).concat([input]))
 
       return this.$createElement('div', {
         'class': 'input-group__selections',

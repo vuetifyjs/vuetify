@@ -1,10 +1,11 @@
 import Input from '../../mixins/input'
 import Generators from './mixins/generators'
+import Autocomplete from './mixins/autocomplete'
 
 export default {
   name: 'select',
 
-  mixins: [Input, Generators],
+  mixins: [Autocomplete, Input, Generators],
 
   data () {
     return {
@@ -61,7 +62,11 @@ export default {
       }
     },
     filteredItems () {
-      return !this.auto ? this.items.slice(0, this.lastItem) : this.items
+      const items = this.autocomplete && this.searchValue
+        ? this.filterSearch()
+        : this.items
+
+      return !this.auto ? items.slice(0, this.lastItem) : items
     },
     isDirty () {
       return this.selectedItems.length
@@ -90,6 +95,9 @@ export default {
     menuActive (val) {
       this.isBooted = true
       this.lastItem += !val ? 20 : 0
+
+      if (!val) this.blur()
+      else this.focus()
     },
     isBooted () {
       this.$nextTick(() => {
@@ -149,6 +157,13 @@ export default {
             this.inputValue.push(item)
           }
         }
+      }
+
+      if (this.autocomplete) {
+        this.$nextTick(() => {
+          this.searchValue = null
+          this.$refs.input.focus()
+        })
       }
     }
   },
