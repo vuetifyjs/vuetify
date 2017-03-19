@@ -109,7 +109,9 @@ export default {
       this.inputHeight = this.$refs.input.scrollHeight
     },
     isDirty () {
-      return this.lazyValue
+      return this.lazyValue !== null &&
+        typeof this.lazyValue !== undefined &&
+        this.lazyValue.toString().length > 0
     },
     blur () {
       this.validate()
