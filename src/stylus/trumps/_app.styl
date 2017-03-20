@@ -5,9 +5,6 @@ html, body
   position: relative
 
 .with
-  height: 100%
-  min-height: 100%
-  overflow: hidden
   -webkit-backface-visibility: hidden
 
 //&.top-fixed-toolbar
@@ -40,7 +37,7 @@ html, body
         padding-left: $toolbar-padding-x
 
     main,
-    footer
+    > footer
       padding-left: $sidebar-width
       transition: $primary-transition
 

@@ -1,9 +1,9 @@
 <template lang="pug">
   div(
-    class="with"
-    v-bind:id="id"
-    v-bind:class="classes"
-    data-app
+  class="with"
+  v-bind:id="id"
+  v-bind:class="classes"
+  data-app
   )
     slot
 </template>
@@ -26,11 +26,13 @@
 
       rightSidebar: Boolean,
 
-      topFixedToolbar: Boolean,
+//      topFixedToolbar: Boolean,
 
-      topToolbar: Boolean,
+//      topToolbar: Boolean,
 
-      sidebarUnderToolbar: Boolean
+      sidebarUnderToolbar: Boolean,
+
+      column: Boolean
     },
 
     computed: {
@@ -43,7 +45,8 @@
           'right-sidebar': this.rightSidebar,
           'top-fixed-toolbar': this.topFixedToolbar,
           'top-toolbar': this.topToolbar,
-          'sidebar-under-toolbar': this.sidebarUnderToolbar
+          'sidebar-under-toolbar': this.sidebarUnderToolbar,
+          'column': this.column
         }
       }
     }

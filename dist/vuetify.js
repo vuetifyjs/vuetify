@@ -200,40 +200,28 @@ function debounce (func, threshold, execAsap) {
 
 /***/ },
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 module.exports = function normalizeComponent (
-  name,
-  scriptExports,
+  rawScriptExports,
   compiledTemplate,
   scopeId,
   cssModules
 ) {
-  scriptExports = scriptExports || {}
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
 
   // ES6 modules interop
-  var type = typeof scriptExports.default
+  var type = typeof rawScriptExports.default
   if (type === 'object' || type === 'function') {
-    // check named exports
-    if (false) {
-      if (Object.keys(scriptExports).some(function (key) {
-        return key !== 'default' && key !== '__esModule'
-      })) {
-        console.error('named exports are not supported in *.vue files.')
-      }
-    }
-    scriptExports = scriptExports.default
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
   }
 
   // Vue.extend constructor export interop
   var options = typeof scriptExports === 'function'
     ? scriptExports.options
     : scriptExports
-
-  // default name option based on filename
-  if (options.name == null) {
-    options.name = name
-  }
 
   // render functions
   if (compiledTemplate) {
@@ -256,6 +244,7 @@ module.exports = function normalizeComponent (
   }
 
   return {
+    esModule: esModule,
     exports: scriptExports,
     options: options
   }
@@ -371,7 +360,7 @@ module.exports = function normalizeComponent (
     }
   },
 
-  created: function created () {
+  mounted: function mounted () {
     this.validate()
   },
 
@@ -393,12 +382,10 @@ module.exports = function normalizeComponent (
             this.persistentHint) &&
           this.errors.length === 0
       ) {
-        messages.push(this.genHint(h))
+        messages = [this.genHint(h)]
+      } else if (this.errors.length) {
+        messages = this.errors.map(function (i) { return this$1.genError(h, i); })
       }
-
-      this.errors.forEach(function (i) {
-        messages.push(this$1.genError(h, i))
-      })
 
       return h(
         'transition-group',
@@ -416,9 +403,7 @@ module.exports = function normalizeComponent (
     },
     genHint: function genHint (h) {
       return h('div', {
-        'class': {
-          'input-group__hint': true
-        },
+        'class': 'input-group__hint',
         key: this.hint
       }, this.hint)
     },
@@ -482,9 +467,7 @@ module.exports = function normalizeComponent (
         }, wrapperChildren)
       )
 
-      if (this.errors.length > 0 || this.hint) {
-        detailsChildren.push(this.genMessages(h))
-      }
+      detailsChildren.push(this.genMessages(h))
 
       if (this.counter) {
         detailsChildren.push(this.genCounter(h))
@@ -504,7 +487,9 @@ module.exports = function normalizeComponent (
       this.errors = []
 
       this.rules.forEach(function (rule) {
-        var valid = rule(this$1.value)
+        var valid = typeof rule === 'function'
+          ? rule(this$1.value)
+          : rule
 
         if (valid !== true) {
           this$1.errors.push(valid)
@@ -559,7 +544,11 @@ module.exports = function normalizeComponent (
         data.nativeOn = { click: this.click }
       } else {
         tag = this.tag || 'a'
-        data.attrs.href = this.href || 'javascript:;'
+        
+        if (tag === 'a') {
+          data.attrs.href = this.href || 'javascript:;'
+        }
+
         data.on = { click: this.click }
       }
 
@@ -853,7 +842,7 @@ var Avatar = {
   render: function render (h, context) {
     var children = context.children
     var data = {
-      'class': ("avatar " + (context.data.staticClass || ''))
+      'class': ("avatar " + (context.data.staticClass || '') + " " + (context.data.class || ''))
     }
 
     return h('div', data, children)
@@ -926,6 +915,10 @@ var Avatar = {
     },
     round: Boolean,
     small: Boolean,
+    tag: {
+      type: String,
+      default: 'button'
+    },
     type: {
       type: String,
       default: 'button'
@@ -993,7 +986,10 @@ var Avatar = {
     var tag = ref.tag;
     var data = ref.data;
     var children = []
-    data.type = this.type
+    
+    if (tag === 'button') {
+      data.attrs.type = this.type
+    }
 
     children.push(this.genContent(h))
 
@@ -1956,7 +1952,8 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
   data: function data () {
     return {
-      hasFocused: false
+      hasFocused: false,
+      inputHeight: null
     }
   },
 
@@ -1983,6 +1980,11 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
       }
 
       return (min + " / " + (this.max))
+    },
+    inputHeight: function inputHeight () {
+      if (!this.$refs.input) { return null }
+
+      return this.$refs.input.scrollHeight
     },
     inputValue: {
       get: function get () {
@@ -2023,7 +2025,8 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
     type: {
       type: String,
       default: 'text'
-    }
+    },
+    name: String
   },
 
   watch: {
@@ -2038,12 +2041,22 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
     value: function value () {
       this.lazyValue = this.value
       this.validate()
+      this.calculateInputHeight()
     }
   },
 
+  mounted: function mounted () {
+    this.$vuetify.load(this.calculateInputHeight)
+  },
+
   methods: {
+    calculateInputHeight: function calculateInputHeight () {
+      this.inputHeight = this.$refs.input.scrollHeight
+    },
     isDirty: function isDirty () {
-      return this.lazyValue
+      return this.lazyValue !== null &&
+        typeof this.lazyValue !== undefined &&
+        this.lazyValue.toString().length > 0
     },
     blur: function blur () {
       var this$1 = this;
@@ -2065,6 +2078,9 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
       var tag = this.multiLine ? 'textarea' : 'input'
 
       var inputData = {
+        style: {
+          'height': this.inputHeight && ((this.inputHeight) + "px")
+        },
         domProps: {
           autocomplete: this.autocomplete,
           disabled: this.disabled,
@@ -2077,6 +2093,10 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
           focus: function () { return (this$1.focused = true); }
         },
         ref: 'input'
+      }
+      // add only if set
+      if (this.name) {
+        inputData.attrs = { name: this.name }
       }
 
       if (this.multiLine) {
@@ -2179,6 +2199,7 @@ var Container = {
 
 var Content = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('content')
 var Row = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('row')
+var Column = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('column')
 var ColSpacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('col--spacer')
 var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('spacer')
 
@@ -2188,7 +2209,8 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
   Container: Container,
   Content: Content,
   Spacer: Spacer,
-  Row: Row
+  Row: Row,
+  Column: Column
 };
 
 
@@ -2331,7 +2353,6 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
   watch: {
     isActive: function isActive () {
       this.booted = true
-      this.$emit('input', this.isActive)
 
       if (!this.isActive) {
         this.list.listClose(this._uid)
@@ -3304,7 +3325,10 @@ var Overlay = {
       type: [Number, String],
       default: 100
     },
-    step: [Number, String],
+    step: {
+      type: [Number, String],
+      default: 1
+    },
     thumbLabel: Boolean,
     value: [Number, String],
     vertical: Boolean
@@ -3317,7 +3341,7 @@ var Overlay = {
         'input-group--active': this.isActive,
         'input-group--dirty': this.inputValue > this.min,
         'input-group--disabled': this.disabled,
-        'input-group--ticks': this.step
+        'input-group--ticks': this.thumbLabel
       }
     },
     inputValue: {
@@ -3325,17 +3349,21 @@ var Overlay = {
         return this.value
       },
       set: function set (val) {
-        // Do not re-calc width if not needed, causes jump
-        if (val !== Math.round(this.inputWidth)) {
-          this.inputWidth = (100 * (val / this.max))
+        if (Math.ceil(val) !== Math.ceil(this.lazyValue)) {
+          this.inputWidth = this.calculateWidth(val)
         }
 
-        var value = Math.round(val)
+        var value = parseInt(val)
+        value = value < this.min ? this.min : value > this.max ? this.max : value
+        this.lazyValue = value
 
-        value = value < this.min ? 0 : value > this.max ? this.max : value
-
-        this.$emit('input', value)
+        if (value !== this.value) {
+          this.$emit('input', value)
+        }
       }
+    },
+    interval: function interval () {
+      return 100 / (this.max - this.min) * this.step
     },
     thumbContainerClasses: function thumbContainerClasses () {
       return {
@@ -3350,13 +3378,13 @@ var Overlay = {
     },
     tickContainerStyles: function tickContainerStyles () {
       return {
-        transform: ("translate3d(-" + (this.step) + "%, -50%, 0)")
+        transform: ("translate3d(-" + (this.interval) + "%, -50%, 0)")
       }
     },
     tickStyles: function tickStyles () {
       return {
-        backgroundSize: ((this.step) + "% 2px"),
-        transform: ("translate3d(" + (this.step) + "%, 0, 0)")
+        backgroundSize: ((this.interval) + "% 2px"),
+        transform: ("translate3d(" + (this.interval) + "%, 0, 0)")
       }
     },
     trackStyles: function trackStyles () {
@@ -3383,10 +3411,14 @@ var Overlay = {
 
   mounted: function mounted () {
     this.inputValue = this.value
+    this.inputWidth = this.calculateWidth(this.inputValue)
     this.app = document.querySelector('[data-app]')
   },
 
   methods: {
+    calculateWidth: function calculateWidth (val) {
+      return (val - this.min) / (this.max - this.min) * 100
+    },
     calculateScale: function calculateScale (scale) {
       if (scale < 0.02 && !this.thumbLabel) {
         return 0
@@ -3409,16 +3441,14 @@ var Overlay = {
       var ref = this.$refs.track.getBoundingClientRect();
       var offsetLeft = ref.left;
       var trackWidth = ref.width;
-      var ref$1 = this.$refs.thumb.getBoundingClientRect();
-      var thumbWidth = ref$1.width;
       var clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
       var left = (
-        ((clientX - offsetLeft - thumbWidth) / trackWidth) * 100
+        ((clientX - offsetLeft) / trackWidth) * 100
       )
 
       left = left < 0 ? 0 : left > 100 ? 100 : left
 
-      this.inputValue = this.max * (left / 100)
+      this.inputValue = this.min + ((left / 100) * (this.max - this.min))
     },
     sliderMove: function sliderMove (e) {
       if (!this.isActive) {
@@ -3459,7 +3489,7 @@ var Overlay = {
             ]
           }, [
             h('div', { 'class': 'slider__thumb--label' }, [
-              h('span', {}, this.inputValue)
+              h('span', {}, parseInt(this.inputValue))
             ])
           ])
         ])
@@ -3564,7 +3594,7 @@ var Overlay = {
 
       clearTimeout(this.timeout)
 
-      if (this.isActive) {
+      if (this.isActive && this.timeout) {
         this.activeTimeout = setTimeout(function () { return (this$1.isActive = false); }, this.timeout)
       }
     }
@@ -4440,6 +4470,7 @@ var ToolbarSideIcon = {
 
 
 var SlideXTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('slide-x-transition')
+var SlideXReverseTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('slide-x-reverse-transition')
 var SlideYTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('slide-y-transition')
 var SlideYReverseTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('slide-y-reverse-transition')
 var ScaleTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('scale-transition')
@@ -4454,6 +4485,7 @@ var MenuTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_hel
 
 /* harmony default export */ exports["a"] = {
   SlideXTransition: SlideXTransition,
+  SlideXReverseTransition: SlideXReverseTransition,
   SlideYTransition: SlideYTransition,
   SlideYReverseTransition: SlideYReverseTransition,
   ScaleTransition: ScaleTransition,
@@ -4843,45 +4875,48 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //
 //
 
-/* harmony default export */ exports["default"] = {
-  props: {
-    footer: Boolean,
+  /* harmony default export */ exports["default"] = {
+    props: {
+      footer: Boolean,
 
-    leftFixedSidebar: Boolean,
+      leftFixedSidebar: Boolean,
 
-    leftSidebar: Boolean,
+      leftSidebar: Boolean,
 
-    id: {
-      type: String,
-      default: 'app'
+      id: {
+        type: String,
+        default: 'app'
+      },
+
+      rightFixedSidebar: Boolean,
+
+      rightSidebar: Boolean,
+
+//      topFixedToolbar: Boolean,
+
+//      topToolbar: Boolean,
+
+      sidebarUnderToolbar: Boolean,
+
+      column: Boolean
     },
 
-    rightFixedSidebar: Boolean,
-
-    rightSidebar: Boolean,
-
-    topFixedToolbar: Boolean,
-
-    topToolbar: Boolean,
-
-    sidebarUnderToolbar: Boolean
-  },
-
-  computed: {
-    classes: function classes () {
-      return {
-        'left-fixed-sidebar': this.leftFixedSidebar,
-        'left-sidebar': this.leftSidebar,
-        'bottom-footer': this.footer,
-        'right-fixed-sidebar': this.rightFixedSidebar,
-        'right-sidebar': this.rightSidebar,
-        'top-fixed-toolbar': this.topFixedToolbar,
-        'top-toolbar': this.topToolbar,
-        'sidebar-under-toolbar': this.sidebarUnderToolbar
+    computed: {
+      classes: function classes () {
+        return {
+          'left-fixed-sidebar': this.leftFixedSidebar,
+          'left-sidebar': this.leftSidebar,
+          'bottom-footer': this.footer,
+          'right-fixed-sidebar': this.rightFixedSidebar,
+          'right-sidebar': this.rightSidebar,
+          'top-fixed-toolbar': this.topFixedToolbar,
+          'top-toolbar': this.topToolbar,
+          'sidebar-under-toolbar': this.sidebarUnderToolbar,
+          'column': this.column
+        }
       }
     }
-  }
-};
+  };
 
 
 /***/ },
@@ -6305,22 +6340,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ exports["default"] = {
-  name: 'toolbar',
-
-  props: {
-    fixed: Boolean
-  },
-
-  computed: {
-    classes: function classes () {
-      return {
-        'toolbar--fixed': this.fixed
-      }
-    }
-  }
+  name: 'toolbar'
 };
 
 
@@ -6329,12 +6351,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "Alert",
   /* script */
   __webpack_require__(69),
   /* template */
-  __webpack_require__(117),
+  __webpack_require__(116),
   /* scopeId */
   null,
   /* cssModules */
@@ -6349,12 +6369,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "App",
   /* script */
   __webpack_require__(70),
   /* template */
-  __webpack_require__(109),
+  __webpack_require__(124),
   /* scopeId */
   null,
   /* cssModules */
@@ -6369,12 +6387,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "Breadcrumbs",
   /* script */
   __webpack_require__(71),
   /* template */
-  __webpack_require__(120),
+  __webpack_require__(117),
   /* scopeId */
   null,
   /* cssModules */
@@ -6389,12 +6405,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "BreadcrumbsItem",
   /* script */
   __webpack_require__(72),
   /* template */
-  __webpack_require__(111),
+  __webpack_require__(113),
   /* scopeId */
   null,
   /* cssModules */
@@ -6409,12 +6423,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "ButtonDropdown",
   /* script */
   __webpack_require__(73),
   /* template */
-  __webpack_require__(125),
+  __webpack_require__(108),
   /* scopeId */
   null,
   /* cssModules */
@@ -6429,12 +6441,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "ButtonToggle",
   /* script */
   __webpack_require__(74),
   /* template */
-  __webpack_require__(112),
+  __webpack_require__(125),
   /* scopeId */
   null,
   /* cssModules */
@@ -6449,12 +6459,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "Card",
   /* script */
   __webpack_require__(75),
   /* template */
-  __webpack_require__(110),
+  __webpack_require__(119),
   /* scopeId */
   null,
   /* cssModules */
@@ -6469,12 +6477,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "CardRow",
   /* script */
   __webpack_require__(76),
   /* template */
-  __webpack_require__(124),
+  __webpack_require__(107),
   /* scopeId */
   null,
   /* cssModules */
@@ -6489,12 +6495,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "Carousel",
   /* script */
   __webpack_require__(77),
   /* template */
-  __webpack_require__(119),
+  __webpack_require__(112),
   /* scopeId */
   null,
   /* cssModules */
@@ -6509,12 +6513,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "CarouselItem",
   /* script */
   __webpack_require__(78),
   /* template */
-  __webpack_require__(123),
+  __webpack_require__(111),
   /* scopeId */
   null,
   /* cssModules */
@@ -6529,12 +6531,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "ExpansionPanel",
   /* script */
   __webpack_require__(79),
   /* template */
-  __webpack_require__(108),
+  __webpack_require__(115),
   /* scopeId */
   null,
   /* cssModules */
@@ -6549,12 +6549,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "ExpansionPanelContent",
   /* script */
   __webpack_require__(80),
   /* template */
-  __webpack_require__(121),
+  __webpack_require__(114),
   /* scopeId */
   null,
   /* cssModules */
@@ -6569,12 +6567,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "Icon",
   /* script */
   __webpack_require__(81),
   /* template */
-  __webpack_require__(113),
+  __webpack_require__(123),
   /* scopeId */
   null,
   /* cssModules */
@@ -6589,12 +6585,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "Modal",
   /* script */
   __webpack_require__(82),
   /* template */
-  __webpack_require__(114),
+  __webpack_require__(122),
   /* scopeId */
   null,
   /* cssModules */
@@ -6609,8 +6603,6 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "Pagination",
   /* script */
   __webpack_require__(83),
   /* template */
@@ -6629,12 +6621,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "Parallax",
   /* script */
   __webpack_require__(84),
   /* template */
-  __webpack_require__(122),
+  __webpack_require__(120),
   /* scopeId */
   null,
   /* cssModules */
@@ -6649,12 +6639,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "ProgressCircular",
   /* script */
   __webpack_require__(85),
   /* template */
-  __webpack_require__(116),
+  __webpack_require__(109),
   /* scopeId */
   null,
   /* cssModules */
@@ -6669,12 +6657,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "ProgressLinear",
   /* script */
   __webpack_require__(86),
   /* template */
-  __webpack_require__(107),
+  __webpack_require__(121),
   /* scopeId */
   null,
   /* cssModules */
@@ -6689,12 +6675,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "Toolbar",
   /* script */
   __webpack_require__(87),
   /* template */
-  __webpack_require__(115),
+  __webpack_require__(110),
   /* scopeId */
   null,
   /* cssModules */
@@ -6710,22 +6694,10 @@ module.exports = Component.exports
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "progress-linear",
+    staticClass: "card__row",
     class: _vm.classes,
-    style: ({
-      height: _vm.height + 'px'
-    })
-  }, [_c('div', {
-    staticClass: "progress-linear__bar",
     style: (_vm.styles)
-  }, [_c('v-fade-transition', [(_vm.indeterminate) ? _c('div', {
-    staticClass: "progress-linear__bar__indeterminate"
-  }) : _vm._e()]), _c('v-slide-x-transition', [(!_vm.indeterminate) ? _c('div', {
-    staticClass: "progress-linear__bar__determinate",
-    style: ({
-      width: _vm.value + '%'
-    })
-  }) : _vm._e()])], 1)])
+  }, [_vm._t("default")], 2)
 },staticRenderFns: []}
 
 /***/ },
@@ -6733,164 +6705,71 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 /***/ function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('ul', {
-    staticClass: "expansion-panel"
-  }, [_vm._t("default")], 2)
+  return _c('div', {
+    staticClass: "btn-dropdown",
+    class: _vm.classes
+  }, [_c('v-menu', {
+    attrs: {
+      "auto": !_vm.overflow && !_vm.segmented && !_vm.editable,
+      "right": !_vm.overflow && !_vm.segmented && !_vm.editable,
+      "max-height": _vm.maxHeight,
+      "offset-y": _vm.overflow || _vm.segmented || _vm.editable,
+      "close-on-click": !_vm.isActive,
+      "open-on-click": !_vm.isActive,
+      "bottom": "bottom"
+    },
+    model: {
+      value: (_vm.isActive),
+      callback: function($$v) {
+        _vm.isActive = $$v
+      },
+      expression: "isActive"
+    }
+  }, [_c('v-text-field', {
+    ref: "input",
+    attrs: {
+      "type": _vm.editable ? 'text' : 'button',
+      "label": _vm.label,
+      "light": _vm.light && !_vm.dark,
+      "dark": _vm.dark,
+      "single-line": "single-line",
+      "append-icon": "arrow_drop_down"
+    },
+    on: {
+      "focused": function($event) {
+        _vm.isActive = arguments[0]
+      }
+    },
+    nativeOn: {
+      "keyup": function($event) {
+        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
+        _vm.updateValue(_vm.editableValue)
+      }
+    },
+    slot: "activator",
+    model: {
+      value: (_vm.editableValue),
+      callback: function($$v) {
+        _vm.editableValue = $$v
+      },
+      expression: "editableValue"
+    }
+  }), _c('v-list', _vm._l((_vm.options), function(option, index) {
+    return _c('v-list-item', [_c('v-list-tile', {
+      class: {
+        'list__tile--active': _vm.inputValue === option
+      },
+      nativeOn: {
+        "click": function($event) {
+          _vm.updateValue(option)
+        }
+      }
+    }, [(option.action) ? _c('v-list-tile-action', [_c('v-icon', [_vm._v(_vm._s(option.action))])], 1) : _vm._e(), (option.text) ? _c('v-list-tile-content', [_c('v-list-tile-title', [_vm._v(_vm._s(option.text))])], 1) : _vm._e()], 1)], 1)
+  }))], 1)], 1)
 },staticRenderFns: []}
 
 /***/ },
 /* 109 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "with",
-    class: _vm.classes,
-    attrs: {
-      "id": _vm.id,
-      "data-app": "data-app"
-    }
-  }, [_vm._t("default")], 2)
-},staticRenderFns: []}
-
-/***/ },
-/* 110 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "card",
-    class: _vm.classes,
-    style: (_vm.styles)
-  }, [_vm._t("default")], 2)
-},staticRenderFns: []}
-
-/***/ },
-/* 111 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', [_c('a', {
-    staticClass: "breadcrumbs__item",
-    class: _vm.classes,
-    attrs: {
-      "href": _vm.href,
-      "target": _vm.target
-    }
-  }, [_vm._t("default")], 2)])
-},staticRenderFns: []}
-
-/***/ },
-/* 112 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "btn-toggle",
-    class: _vm.classes
-  }, _vm._l((_vm.options), function(option, index) {
-    return _c('v-btn', {
-      attrs: {
-        "data-selected": _vm.isSelected(option),
-        "data-index": index,
-        "data-only-child": _vm.isSelected(option) && (!_vm.multiple || _vm.inputValue.length === 1),
-        "flat": "flat"
-      },
-      nativeOn: {
-        "click": function($event) {
-          $event.stopPropagation();
-          _vm.updateValue(option)
-        }
-      }
-    }, [(option.text) ? _c('span', {
-      domProps: {
-        "textContent": _vm._s(option.text)
-      }
-    }) : _vm._e(), (option.icon) ? _c('v-icon', [_vm._v(_vm._s(option.icon))]) : _vm._e()], 1)
-  }))
-},staticRenderFns: []}
-
-/***/ },
-/* 113 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('i', {
-    staticClass: "material-icons icon",
-    class: _vm.classes
-  }, [_vm._t("default")], 2)
-},staticRenderFns: []}
-
-/***/ },
-/* 114 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "modal__container"
-  }, [(_vm.$slots.activator) ? _c('div', {
-    ref: "activator",
-    staticClass: "modal__activator",
-    on: {
-      "click": function($event) {
-        _vm.isActive = !_vm.isActive
-      }
-    }
-  }, [_vm._t("activator")], 2) : _vm._e(), _c('v-overlay', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.isActive),
-      expression: "isActive"
-    }],
-    class: _vm.overlayClasses,
-    domProps: {
-      "value": (_vm.isActive)
-    },
-    on: {
-      "input": function($event) {
-        _vm.isActive = $event
-      }
-    }
-  }, [_c(_vm.computedTransition, {
-    tag: "component",
-    attrs: {
-      "origin": _vm.computedOrigin
-    }
-  }, [_c('div', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.isActive),
-      expression: "isActive"
-    }, {
-      name: "click-outside",
-      rawName: "v-click-outside",
-      value: (_vm.closeConditional),
-      expression: "closeConditional"
-    }],
-    ref: "modal",
-    staticClass: "modal",
-    class: _vm.classes,
-    attrs: {
-      "id": _vm.id
-    }
-  }, [_vm._t("default")], 2)])], 1)], 1)
-},staticRenderFns: []}
-
-/***/ },
-/* 115 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('nav', {
-    staticClass: "toolbar",
-    class: _vm.classes
-  }, [_vm._t("default")], 2)
-},staticRenderFns: []}
-
-/***/ },
-/* 116 */
 /***/ function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -6934,7 +6813,158 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },staticRenderFns: []}
 
 /***/ },
-/* 117 */
+/* 110 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('nav', {
+    staticClass: "toolbar"
+  }, [_vm._t("default")], 2)
+},staticRenderFns: []}
+
+/***/ },
+/* 111 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c(_vm.computedTransition, {
+    tag: "component"
+  }, [_c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.active),
+      expression: "active"
+    }],
+    staticClass: "carousel__item",
+    class: {
+      'reverse': _vm.reverse
+    },
+    style: (_vm.styles)
+  }, [_vm._t("default")], 2)])
+},staticRenderFns: []}
+
+/***/ },
+/* 112 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "carousel"
+  }, [_c('div', {
+    staticClass: "carousel__left"
+  }, [_c('v-btn', {
+    attrs: {
+      "icon": "icon"
+    },
+    nativeOn: {
+      "click": function($event) {
+        $event.stopPropagation();
+        _vm.prev($event)
+      }
+    }
+  }, [_c('v-icon', [_vm._v("chevron_left")])], 1)], 1), _c('div', {
+    staticClass: "carousel__right"
+  }, [_c('v-btn', {
+    attrs: {
+      "icon": "icon"
+    },
+    nativeOn: {
+      "click": function($event) {
+        $event.stopPropagation();
+        _vm.next($event)
+      }
+    }
+  }, [_c('v-icon', [_vm._v("chevron_right")])], 1)], 1), _c('div', {
+    staticClass: "carousel__controls"
+  }, _vm._l((_vm.items), function(item, index) {
+    return _c('v-btn', {
+      staticClass: "carousel__controls__item",
+      class: {
+        'carousel__controls__item--active': index === _vm.current
+      },
+      attrs: {
+        "icon": "icon"
+      },
+      nativeOn: {
+        "click": function($event) {
+          $event.stopPropagation();
+          _vm.select(index)
+        }
+      }
+    }, [_c('v-icon', [_vm._v(_vm._s(_vm.icon))])], 1)
+  })), _vm._t("default")], 2)
+},staticRenderFns: []}
+
+/***/ },
+/* 113 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('li', [_c('a', {
+    staticClass: "breadcrumbs__item",
+    class: _vm.classes,
+    attrs: {
+      "href": _vm.href,
+      "target": _vm.target
+    }
+  }, [_vm._t("default")], 2)])
+},staticRenderFns: []}
+
+/***/ },
+/* 114 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('li', [(_vm.$slots.header) ? _c('div', {
+    directives: [{
+      name: "click-outside",
+      rawName: "v-click-outside",
+      value: (_vm.closeConditional),
+      expression: "closeConditional"
+    }, {
+      name: "ripple",
+      rawName: "v-ripple",
+      value: (_vm.ripple),
+      expression: "ripple"
+    }],
+    staticClass: "expansion-panel__header",
+    class: _vm.classes,
+    on: {
+      "click": function($event) {
+        _vm.isActive = !_vm.isActive
+      }
+    }
+  }, [_vm._t("header")], 2) : _vm._e(), _c('transition', {
+    on: {
+      "enter": _vm.enter,
+      "after-enter": _vm.afterEnter,
+      "leave": _vm.leave
+    }
+  }, [_c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.isActive),
+      expression: "isActive"
+    }],
+    ref: "body",
+    staticClass: "expansion-panel__body"
+  }, [_vm._t("default")], 2)])], 1)
+},staticRenderFns: []}
+
+/***/ },
+/* 115 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('ul', {
+    staticClass: "expansion-panel"
+  }, [_vm._t("default")], 2)
+},staticRenderFns: []}
+
+/***/ },
+/* 116 */
 /***/ function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -6965,6 +6995,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "right": "right"
     }
   }, [_vm._v("cancel")])], 1) : _vm._e()], 1)
+},staticRenderFns: []}
+
+/***/ },
+/* 117 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('ul', {
+    staticClass: "breadcrumbs",
+    class: _vm.classes,
+    attrs: {
+      "items": _vm.items
+    }
+  }, [_vm._t("default")], 2)
 },staticRenderFns: []}
 
 /***/ },
@@ -7036,110 +7080,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "carousel"
-  }, [_c('div', {
-    staticClass: "carousel__left"
-  }, [_c('v-btn', {
-    attrs: {
-      "icon": "icon"
-    },
-    nativeOn: {
-      "click": function($event) {
-        $event.stopPropagation();
-        _vm.prev($event)
-      }
-    }
-  }, [_c('v-icon', [_vm._v("chevron_left")])], 1)], 1), _c('div', {
-    staticClass: "carousel__right"
-  }, [_c('v-btn', {
-    attrs: {
-      "icon": "icon"
-    },
-    nativeOn: {
-      "click": function($event) {
-        $event.stopPropagation();
-        _vm.next($event)
-      }
-    }
-  }, [_c('v-icon', [_vm._v("chevron_right")])], 1)], 1), _c('div', {
-    staticClass: "carousel__controls"
-  }, _vm._l((_vm.items), function(item, index) {
-    return _c('v-btn', {
-      staticClass: "carousel__controls__item",
-      class: {
-        'carousel__controls__item--active': index === _vm.current
-      },
-      attrs: {
-        "icon": "icon"
-      },
-      nativeOn: {
-        "click": function($event) {
-          $event.stopPropagation();
-          _vm.select(index)
-        }
-      }
-    }, [_c('v-icon', [_vm._v(_vm._s(_vm.icon))])], 1)
-  })), _vm._t("default")], 2)
-},staticRenderFns: []}
-
-/***/ },
-/* 120 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('ul', {
-    staticClass: "breadcrumbs",
+    staticClass: "card",
     class: _vm.classes,
-    attrs: {
-      "items": _vm.items
-    }
+    style: (_vm.styles)
   }, [_vm._t("default")], 2)
 },staticRenderFns: []}
 
 /***/ },
-/* 121 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', [(_vm.$slots.header) ? _c('div', {
-    directives: [{
-      name: "click-outside",
-      rawName: "v-click-outside",
-      value: (_vm.closeConditional),
-      expression: "closeConditional"
-    }, {
-      name: "ripple",
-      rawName: "v-ripple",
-      value: (_vm.ripple),
-      expression: "ripple"
-    }],
-    staticClass: "expansion-panel__header",
-    class: _vm.classes,
-    on: {
-      "click": function($event) {
-        _vm.isActive = !_vm.isActive
-      }
-    }
-  }, [_vm._t("header")], 2) : _vm._e(), _c('transition', {
-    on: {
-      "enter": _vm.enter,
-      "after-enter": _vm.afterEnter,
-      "leave": _vm.leave
-    }
-  }, [_c('div', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.isActive),
-      expression: "isActive"
-    }],
-    ref: "body",
-    staticClass: "expansion-panel__body"
-  }, [_vm._t("default")], 2)])], 1)
-},staticRenderFns: []}
-
-/***/ },
-/* 122 */
+/* 120 */
 /***/ function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -7161,25 +7109,88 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },staticRenderFns: []}
 
 /***/ },
-/* 123 */
+/* 121 */
 /***/ function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c(_vm.computedTransition, {
-    tag: "component"
+  return _c('div', {
+    staticClass: "progress-linear",
+    class: _vm.classes,
+    style: ({
+      height: _vm.height + 'px'
+    })
+  }, [_c('div', {
+    staticClass: "progress-linear__bar",
+    style: (_vm.styles)
+  }, [_c('v-fade-transition', [(_vm.indeterminate) ? _c('div', {
+    staticClass: "progress-linear__bar__indeterminate"
+  }) : _vm._e()]), _c('v-slide-x-transition', [(!_vm.indeterminate) ? _c('div', {
+    staticClass: "progress-linear__bar__determinate",
+    style: ({
+      width: _vm.value + '%'
+    })
+  }) : _vm._e()])], 1)])
+},staticRenderFns: []}
+
+/***/ },
+/* 122 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "modal__container"
+  }, [(_vm.$slots.activator) ? _c('div', {
+    ref: "activator",
+    staticClass: "modal__activator",
+    on: {
+      "click": function($event) {
+        _vm.isActive = !_vm.isActive
+      }
+    }
+  }, [_vm._t("activator")], 2) : _vm._e(), _c('v-overlay', {
+    class: _vm.overlayClasses,
+    model: {
+      value: (_vm.isActive),
+      callback: function($$v) {
+        _vm.isActive = $$v
+      },
+      expression: "isActive"
+    }
+  }, [_c(_vm.computedTransition, {
+    tag: "component",
+    attrs: {
+      "origin": _vm.computedOrigin
+    }
   }, [_c('div', {
     directives: [{
       name: "show",
       rawName: "v-show",
-      value: (_vm.active),
-      expression: "active"
+      value: (_vm.isActive),
+      expression: "isActive"
+    }, {
+      name: "click-outside",
+      rawName: "v-click-outside",
+      value: (_vm.closeConditional),
+      expression: "closeConditional"
     }],
-    staticClass: "carousel__item",
-    class: {
-      'reverse': _vm.reverse
-    },
-    style: (_vm.styles)
-  }, [_vm._t("default")], 2)])
+    ref: "modal",
+    staticClass: "modal",
+    class: _vm.classes,
+    attrs: {
+      "id": _vm.id
+    }
+  }, [_vm._t("default")], 2)])], 1)], 1)
+},staticRenderFns: []}
+
+/***/ },
+/* 123 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('i', {
+    staticClass: "material-icons icon",
+    class: _vm.classes
+  }, [_vm._t("default")], 2)
 },staticRenderFns: []}
 
 /***/ },
@@ -7188,9 +7199,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "card__row",
+    staticClass: "with",
     class: _vm.classes,
-    style: (_vm.styles)
+    attrs: {
+      "id": _vm.id,
+      "data-app": "data-app"
+    }
   }, [_vm._t("default")], 2)
 },staticRenderFns: []}
 
@@ -7200,78 +7214,28 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "btn-dropdown",
+    staticClass: "btn-toggle",
     class: _vm.classes
-  }, [_c('v-menu', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.isActive),
-      expression: "isActive"
-    }],
-    attrs: {
-      "auto": !_vm.overflow && !_vm.segmented && !_vm.editable,
-      "right": !_vm.overflow && !_vm.segmented && !_vm.editable,
-      "max-height": _vm.maxHeight,
-      "offset-y": _vm.overflow || _vm.segmented || _vm.editable,
-      "close-on-click": !_vm.isActive,
-      "open-on-click": !_vm.isActive,
-      "bottom": "bottom"
-    },
-    domProps: {
-      "value": (_vm.isActive)
-    },
-    on: {
-      "input": function($event) {
-        _vm.isActive = $event
-      }
-    }
-  }, [_c('v-text-field', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.editableValue),
-      expression: "editableValue"
-    }],
-    ref: "input",
-    attrs: {
-      "type": _vm.editable ? 'text' : 'button',
-      "label": _vm.label,
-      "light": _vm.light && !_vm.dark,
-      "dark": _vm.dark,
-      "single-line": "single-line",
-      "append-icon": "arrow_drop_down"
-    },
-    domProps: {
-      "value": (_vm.editableValue)
-    },
-    on: {
-      "focused": function($event) {
-        _vm.isActive = arguments[0]
-      },
-      "input": function($event) {
-        _vm.editableValue = $event
-      }
-    },
-    nativeOn: {
-      "keyup": function($event) {
-        if (_vm._k($event.keyCode, "enter", 13)) { return; }
-        _vm.updateValue(_vm.editableValue)
-      }
-    },
-    slot: "activator"
-  }), _c('v-list', _vm._l((_vm.options), function(option, index) {
-    return _c('v-list-item', [_c('v-list-tile', {
-      class: {
-        'list__tile--active': _vm.inputValue === option
+  }, _vm._l((_vm.options), function(option, index) {
+    return _c('v-btn', {
+      attrs: {
+        "data-selected": _vm.isSelected(option),
+        "data-index": index,
+        "data-only-child": _vm.isSelected(option) && (!_vm.multiple || _vm.inputValue.length === 1),
+        "flat": "flat"
       },
       nativeOn: {
         "click": function($event) {
+          $event.stopPropagation();
           _vm.updateValue(option)
         }
       }
-    }, [(option.action) ? _c('v-list-tile-action', [_c('v-icon', [_vm._v(_vm._s(option.action))])], 1) : _vm._e(), (option.text) ? _c('v-list-tile-content', [_c('v-list-tile-title', [_vm._v(_vm._s(option.text))])], 1) : _vm._e()], 1)], 1)
-  }))], 1)], 1)
+    }, [(option.text) ? _c('span', {
+      domProps: {
+        "textContent": _vm._s(option.text)
+      }
+    }) : _vm._e(), (option.icon) ? _c('v-icon', [_vm._v(_vm._s(option.icon))]) : _vm._e()], 1)
+  }))
 },staticRenderFns: []}
 
 /***/ },

@@ -31,6 +31,7 @@ const Container = {
 
 const Content = createSimpleFunctional('content')
 const Row = createSimpleFunctional('row')
+const Column = createSimpleFunctional('column')
 const ColSpacer = createSimpleFunctional('col--spacer')
 const Spacer = createSimpleFunctional('spacer')
 
@@ -40,5 +41,6 @@ export default {
   Container,
   Content,
   Spacer,
-  Row
+  Row,
+  Column
 }
