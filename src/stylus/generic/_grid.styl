@@ -23,8 +23,6 @@
 
 .layout
   display: flex
-  //flex-wrap: wrap
-  //box-sizing border-box
 
   &.row
     flex: 0 1 auto
@@ -34,6 +32,11 @@
 
     &--reverse
       flex-direction: row-reverse
+
+  &.column
+    flex-direction: column
+    box-sizing: border-box
+
   &.wrap
     flex-wrap: wrap
 
@@ -70,13 +73,16 @@
       flex-shrink: 1
 
     @media only screen and (min-width: width)
-      .row-{size}
+      &.row-{size}
         flex: 0 1 auto
         margin-left: $grid-gutter-full
         margin-right: $grid-gutter-full
         flex-direction: row
+      &.column-{size}
+        flex-direction: column
+        box-sizing: border-box
 
-      for n in (1..$grid-columns)
+    for n in (1..$grid-columns)
         .col.{size}{n}
           flex-basis: (n / $grid-columns * 100)%
           max-width: (n / $grid-columns * 100)%
