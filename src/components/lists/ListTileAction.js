@@ -7,7 +7,7 @@ export default {
     const data = {
       'class': {
         'list__tile__action': true,
-        'list__tile__action--stack': context.children.length > 1
+        'list__tile__action--stack': (context.children || []).length > 1
       }
     }
 

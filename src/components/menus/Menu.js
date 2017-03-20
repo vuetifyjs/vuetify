@@ -192,7 +192,7 @@ export default {
 
   beforeDestroy () {
     this.removeActivatorEvents(this.activator)
-    this.window.removeEventListener('resize', this.windowResizeHandler)
+    window.removeEventListener('resize', this.windowResizeHandler)
   },
 
   methods: {

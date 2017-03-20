@@ -7,12 +7,6 @@
   width: $sidebar-width
   z-index: 3
   @extend .z-depth-2
-    
-  li.disabled
-    opacity: 0.4
-    
-  &--right
-    order: +1
   
   &--fixed
     top: 0
@@ -41,7 +35,7 @@
       &.sidebar--fixed-right, &.sidebar--right
         transform: translateX($sidebar-width + 25)
     
-  &--open
+  &--open, &--open.sidebar--mobile
     transform: translateX(0)
     width: $sidebar-width
 

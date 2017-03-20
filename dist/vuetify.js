@@ -85,9 +85,9 @@ return /******/ (function(modules) { // webpackBootstrap
 /* harmony export (immutable) */ exports["a"] = createSimpleTransition;
 /* harmony export (immutable) */ exports["f"] = directiveConfig;
 /* harmony export (immutable) */ exports["c"] = closestParentTag;
-/* harmony export (immutable) */ exports["e"] = addOnceEventListener;
+/* harmony export (immutable) */ exports["d"] = addOnceEventListener;
 /* unused harmony export browserTransform */
-/* harmony export (immutable) */ exports["d"] = debounce;
+/* harmony export (immutable) */ exports["e"] = debounce;
 function createSimpleFunctional (c, el) {
   if ( el === void 0 ) el = 'div';
 
@@ -504,7 +504,7 @@ module.exports = function normalizeComponent (
       this.errors = []
 
       this.rules.forEach(function (rule) {
-        var valid = rule()
+        var valid = rule(this$1.value)
 
         if (valid !== true) {
           this$1.errors.push(valid)
@@ -1412,8 +1412,8 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
   data: function data () {
     return {
-      inputValue: this.parseInputValue(),
-      inputSearch: this.parseInputSearch(),
+      inputValue: [],
+      inputSearch: '',
       menuActive: false,
       menuActivator: null,
       keyUpDown: 0,
@@ -1539,6 +1539,8 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
   mounted: function mounted () {
     this.menuActivator = this.$refs.inputgroup.querySelector('.input-group__input')
+    this.inputValue = this.parseInputValue()
+    this.inputSearch = this.parseInputSearch()
   },
 
   methods: {
@@ -1673,9 +1675,9 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
         'class': 'input-group__selections'
       }
 
-      if (this.multiple) { return h('div', data, this.genSelections(h).concat(this.genSearchField(h))) }
-      if (this.autocomplete) { return [this.genSearchField(h)] }
-      return h('div', data, this.genSelections(h))
+      if (!this.autocomplete) { return h('div', data, this.genSelections(h)) }
+      if (!this.multiple && this.autocomplete) { return [this.genSearchField(h)] }
+      return h('div', data, this.genSelections(h).concat(this.genSearchField(h)))
     },
 
     genSelections: function genSelections (h) {
@@ -1736,7 +1738,7 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
           value: this.inputSearch
         },
         on: {
-          input: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["d" /* debounce */])(function (e) {
+          input: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["e" /* debounce */])(function (e) {
             this$1.inputSearch = this$1.autocomplete ? e.target.value : ''
           }, this.debounce),
           focus: this.focus,
@@ -2369,11 +2371,11 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
       setTimeout(function () { return (this$1.height = el.scrollHeight); }, 50)
 
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* addOnceEventListener */])(el, 'transitionend', done)
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* addOnceEventListener */])(el, 'transitionend', done)
     },
     leave: function leave (el, done) {
       this.height = 0
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* addOnceEventListener */])(el, 'transitionend', done)
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* addOnceEventListener */])(el, 'transitionend', done)
     },
     matchRoute: function matchRoute (to) {
       return to.match(this.group) !== null
@@ -2466,7 +2468,7 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
     var data = {
       'class': {
         'list__tile__action': true,
-        'list__tile__action--stack': context.children.length > 1
+        'list__tile__action--stack': (context.children || []).length > 1
       }
     }
 
@@ -2736,7 +2738,7 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
 
   beforeDestroy: function beforeDestroy () {
     this.removeActivatorEvents(this.activator)
-    this.window.removeEventListener('resize', this.windowResizeHandler)
+    window.removeEventListener('resize', this.windowResizeHandler)
   },
 
   methods: {
@@ -2752,7 +2754,7 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
       if (this.window === window) { return }
 
       this.window = window
-      this.windowResizeHandler = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["d" /* debounce */])(this.activate, 200)
+      this.windowResizeHandler = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["e" /* debounce */])(this.activate, 200)
       this.window.addEventListener('resize', this.windowResizeHandler)
     },
 
@@ -3275,6 +3277,8 @@ var Overlay = {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_input__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__util_helpers__ = __webpack_require__(0);
+
 
 
 /* harmony default export */ exports["a"] = {
@@ -3394,7 +3398,7 @@ var Overlay = {
       this.isActive = true
       this.app.addEventListener('touchmove', this.onMouseMove, false)
       this.app.addEventListener('mousemove', this.onMouseMove, false)
-      this.app.addEventListener('mouseup', this.onMouseUp, false)
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["d" /* addOnceEventListener */])(this.app, 'mouseup', this.onMouseUp)
     },
     onMouseUp: function onMouseUp (e) {
       this.isActive = false
@@ -5647,7 +5651,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
       setTimeout(function () {
         el.style.height = height
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["e" /* addOnceEventListener */])(el, 'transitionend', done)
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["d" /* addOnceEventListener */])(el, 'transitionend', done)
       }, 50)
     },
 
@@ -5656,7 +5660,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
       
       setTimeout(function () { return el.style.height = 0; }, 0)
 
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["e" /* addOnceEventListener */])(el, 'transitionend', done)
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["d" /* addOnceEventListener */])(el, 'transitionend', done)
     },
 
     toggle: function toggle () {

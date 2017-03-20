@@ -102,32 +102,11 @@
 .input-group
   &__hint
     flex: 1 0
-    transition: .3s $transition.fast-out-fast-out
-
-
-/** Icons */
-.input-group
-  &--prepend-icon
-    .input-group__prepend-icon
-      align-items: center
-      display: flex
-      justify-content: flex-start
-      width: 56px
-      height: 30px
-      position: absolute
-      left: 0
-      top: 0
-      transition: .3s $transition.fast-in-fast-out
-     
-    .input-group__details 
-      &:before, &:after
-        margin-left: 56px
-        max-width: calc(100% - 56px)
-
+    transition: .3s $transition.fast-in-fast-out
 
 /** Error */
 .input-group
   .input-group__error
     flex: 1 0
-    transition: .3s $transition.fast-out-fast-out
+    transition: .3s $transition.fast-in-fast-out
     color: $theme.error
