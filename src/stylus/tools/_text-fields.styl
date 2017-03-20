@@ -10,10 +10,6 @@ input-group-theme(color, offset, dirty)
     
   label
     color: color
-
-  &.input-group--disabled
-    input, textarea
-      color: color !important
     
   &.input-group--single-line&.input-group--focused
     label
@@ -31,3 +27,10 @@ input-group-theme(color, offset, dirty)
     
   .input-group__details
     color: color
+
+  &.input-group--disabled
+    input, textarea
+      color: color
+    
+    .input-group__details:before
+      background-color: transparent

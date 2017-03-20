@@ -1,7 +1,7 @@
 .input-group
   display: flex
-  flex-direction: column
   flex: 1
+  flex-wrap: wrap
   min-width: 24px
   margin: $input-group-margin
   position: relative
@@ -21,8 +21,9 @@
 .input-group
   &__input
     display: flex
-    flex: 1
+    flex: 1 0 100%
     min-width: 0
+    min-height: $input-height
   
 
 /** States */
@@ -53,9 +54,6 @@
   &--error
     .input-group__details:after
       background-color: $theme.error
-      
-    .input-group__append-icon
-      color: $theme.error
       
   &--light
     .input-group__details:before

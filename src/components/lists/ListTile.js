@@ -1,4 +1,3 @@
-import { closestParentTag } from '../../util/helpers'
 import GenerateRouteLink from '../../mixins/route-link'
 import Toggleable from '../../mixins/toggleable'
 
@@ -23,16 +22,12 @@ export default {
         'list__tile--avatar': this.avatar,
         'list__tile--disabled': this.disabled
       }
-    },
-
-    listUID () {
-      return closestParentTag.call(this, 'v-list')
     }
   },
 
-  render (createElement) {
+  render (h) {
     const { tag, data } = this.generateRouteLink()
 
-    return createElement(tag, data, [this.$slots.default])
+    return h(tag, data, [this.$slots.default])
   }
 }

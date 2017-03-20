@@ -37,9 +37,6 @@
     
   &:disabled
     pointer-events: none
-    
-  &[type=number]
-    text-align: right
 
 /** Textarea */
 .input-group--text-field textarea
@@ -86,13 +83,10 @@
       
 
 /** Types */
-.input-group
+.input-group--text-field
   &.input-group--error
     .input-group__details:after
       background-color: $theme.error
-      
-    .input-group__append-icon
-      color: $theme.error !important
     
   &.input-group--prepend-icon
     .input-group__prepend-icon
@@ -139,3 +133,9 @@
       
     .input-group__details:before, .input-group__details:after
       background-color: $theme.error
+      
+  &.input-group--full-width
+    padding: 0 16px
+
+    .input-group__details:before, .input-group__details:after
+      display: none
