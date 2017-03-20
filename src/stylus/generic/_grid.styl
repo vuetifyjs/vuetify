@@ -1,8 +1,8 @@
 .content
   background: #fff
-  //flex: 1 1 auto
+  flex: 1 1 auto
   min-width: 0
-  height: 100%
+  //height: 100%
 
 .container, .container-fluid
   margin-right: auto
@@ -49,6 +49,8 @@
           &.offset-{size}{n}
             margin-left: (n / $grid-columns * 100)%
 
+          &.order-{size}{n}
+            order: n
 .col--spacer, .spacer
   flex-grow: 1
 
