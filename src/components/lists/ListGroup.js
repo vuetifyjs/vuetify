@@ -45,8 +45,10 @@ export default {
       }
     },
     '$route' (to) {
-      if (this.group) {
-        this.isActive = this.matchRoute(to.path)
+      this.isActive = this.matchRoute(to.path)
+
+      if (this.group && this.isActive) {
+        this.list.listClick(this._uid)
       }
     }
   },
