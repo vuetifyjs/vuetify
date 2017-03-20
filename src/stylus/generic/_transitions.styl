@@ -83,6 +83,14 @@
   &-enter, &-leave-to
     opacity: 0
     transform: translateX(-15px)
+
+.slide-x-reverse-transition
+  &-enter-active, &-leave, &-leave-to
+    transition: $primary-transition
+    
+  &-enter, &-leave-to
+    opacity: 0
+    transform: translateX(15px)
     
 .fade-transition
   &-enter, &-leave-to
