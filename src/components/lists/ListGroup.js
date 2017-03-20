@@ -39,7 +39,6 @@ export default {
   watch: {
     isActive () {
       this.booted = true
-      this.$emit('input', this.isActive)
 
       if (!this.isActive) {
         this.list.listClose(this._uid)
