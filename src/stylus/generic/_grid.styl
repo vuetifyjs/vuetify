@@ -21,36 +21,71 @@
     padding: 0
     max-width: 100%
 
-.row
+.layout
   display: flex
-  flex: 0 1 auto
-  flex-wrap: wrap
-  margin-left: $grid-gutter-full
-  margin-right: $grid-gutter-full
+  //flex-wrap: wrap
+  //box-sizing border-box
 
-  &--reverse
-    flex-direction: row-reverse
+  &.row
+    flex: 0 1 auto
+    margin-left: $grid-gutter-full
+    margin-right: $grid-gutter-full
+    flex-direction: row
+
+    &--reverse
+      flex-direction: row-reverse
+  &.wrap
+    flex-wrap: wrap
+
+  &.align
+    &-center,&-vert-center,&-horiz-center
+      align-items: center
+      align-content: center
+      justify-content: center
+    &-vert-end
+      align-content: flex-end
+      align-items: flex-end
+    &-vert-start
+      align-content: flex-start
+      align-items: flex-start
+    &-horiz-end
+      justify-content: flex-end
+    &-horiz-start
+      justify-content: flex-start
+    &-space-between
+      justify-content: space-between
+    &-space-around
+      justify-content: space-around
+
+
 
   .col
     padding-right: $grid-gutter-half
     padding-left: $grid-gutter-half
 
-    for size, width in $grid-breakpoints
-      &.{size}
-        flex-grow: 1
-        flex-shrink: 1
+  for size, width in $grid-breakpoints
 
-      @media only screen and (min-width: width)
-        for n in (1..$grid-columns)
-          &.{size}{n}
-            flex-basis: (n / $grid-columns * 100)%
-            max-width: (n / $grid-columns * 100)%
+    .col.{size}
+      flex-grow: 1
+      flex-shrink: 1
 
-          &.offset-{size}{n}
-            margin-left: (n / $grid-columns * 100)%
+    @media only screen and (min-width: width)
+      .row-{size}
+        flex: 0 1 auto
+        margin-left: $grid-gutter-full
+        margin-right: $grid-gutter-full
+        flex-direction: row
 
-          &.order-{size}{n}
-            order: n
+      for n in (1..$grid-columns)
+        .col.{size}{n}
+          flex-basis: (n / $grid-columns * 100)%
+          max-width: (n / $grid-columns * 100)%
+
+        .col.offset-{size}{n}
+          margin-left: (n / $grid-columns * 100)%
+
+        .col.order-{size}{n}
+          order: n
 .col--spacer, .spacer
   flex-grow: 1
 

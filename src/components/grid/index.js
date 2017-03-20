@@ -1,11 +1,31 @@
-import { createSimpleFunctional } from '../../util/helpers'
+import {createSimpleFunctional} from '../../util/helpers'
 
 const Col = {
   functional: true,
 
-  render: (h, { data, children }) => {
+  render: (h, {data, children}) => {
     data.staticClass = data.staticClass ? `col ${data.staticClass}` : 'col'
-    data.staticClass += ` ${Object.keys(data.attrs).join(' ')}`
+    if (data.attrs) {
+      data.staticClass += ` ${Object.keys(data.attrs).join(' ')}`
+    } else {
+      console.warn("you have to add static attributes of layout")
+    }
+    delete data.attrs
+
+    return h('div', data, children)
+  }
+}
+
+const Layout = {
+  functional: true,
+
+  render: (h, {data, children}) => {
+    data.staticClass = data.staticClass ? `layout ${data.staticClass}` : 'layout'
+    if (data.attrs) {
+      data.staticClass += ` ${Object.keys(data.attrs).join(' ')}`
+    } else {
+      console.warn("you have to add static attributes of layout")
+    }
     delete data.attrs
 
     return h('div', data, children)
@@ -15,7 +35,7 @@ const Col = {
 const Container = {
   functional: true,
 
-  render (h, { data, children }) {
+  render (h, {data, children}) {
     let staticClass = data.staticClass ? `container ${data.staticClass}` : 'container'
 
     if (data.attrs && typeof data.attrs.fluid !== 'undefined') {
@@ -42,5 +62,5 @@ export default {
   Content,
   Spacer,
   Row,
-  Column
+  Layout
 }

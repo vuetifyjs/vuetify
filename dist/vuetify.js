@@ -2170,7 +2170,30 @@ var Col = {
     var children = ref.children;
 
     data.staticClass = data.staticClass ? ("col " + (data.staticClass)) : 'col'
-    data.staticClass += " " + (Object.keys(data.attrs).join(' '))
+    if (data.attrs) {
+      data.staticClass += " " + (Object.keys(data.attrs).join(' '))
+    } else {
+      console.warn("you have to add static attributes of layout")
+    }
+    delete data.attrs
+
+    return h('div', data, children)
+  }
+}
+
+var Layout = {
+  functional: true,
+
+  render: function (h, ref) {
+    var data = ref.data;
+    var children = ref.children;
+
+    data.staticClass = data.staticClass ? ("layout " + (data.staticClass)) : 'layout'
+    if (data.attrs) {
+      data.staticClass += " " + (Object.keys(data.attrs).join(' '))
+    } else {
+      console.warn("you have to add static attributes of layout")
+    }
     delete data.attrs
 
     return h('div', data, children)
@@ -2210,7 +2233,7 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
   Content: Content,
   Spacer: Spacer,
   Row: Row,
-  Column: Column
+  Layout: Layout
 };
 
 
