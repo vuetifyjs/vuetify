@@ -36,11 +36,6 @@ export default {
 
       return `${min} / ${this.max}`
     },
-    inputHeight () {
-      if (!this.$refs.input) return null
-
-      return this.$refs.input.scrollHeight
-    },
     inputValue: {
       get () {
         return this.value
@@ -96,7 +91,6 @@ export default {
     value () {
       this.lazyValue = this.value
       this.validate()
-      this.calculateInputHeight()
     }
   },
 
@@ -108,9 +102,13 @@ export default {
     calculateInputHeight () {
       this.inputHeight = this.$refs.input.scrollHeight
     },
+    onInput (e) {
+      this.inputValue = e.target.value
+      this.calculateInputHeight()
+    },
     isDirty () {
       return this.lazyValue !== null &&
-        typeof this.lazyValue !== undefined &&
+        typeof this.lazyValue !== 'undefined' &&
         this.lazyValue.toString().length > 0
     },
     blur () {
@@ -140,7 +138,7 @@ export default {
         },
         on: {
           blur: this.blur,
-          input: e => (this.inputValue = e.target.value),
+          input: this.onInput,
           focus: () => (this.focused = true)
         },
         ref: 'input'
