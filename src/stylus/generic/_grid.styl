@@ -86,7 +86,7 @@
         box-sizing: border-box
       .flex, &.child-flex-{size} > *
         flex: 1
-    for n in (1..$grid-columns)
+      for n in (1..$grid-columns)
         .col.{size}{n}
           flex-basis: (n / $grid-columns * 100)%
           max-width: (n / $grid-columns * 100)%
