@@ -12,11 +12,16 @@
   height: $chip-height
   transition: .3s $transition.ease-in-out
   vertical-align: middle
+  white-space: nowrap
   
   .avatar
     border-radius: 50%
     height: $chip-height
     width: $chip-height
+<<<<<<< HEAD
+=======
+    min-width: $chip-height
+>>>>>>> dev
     margin-left: -14px
     margin-right: 8px
     color: #fff
@@ -37,9 +42,13 @@
     color: $chip-outline-color
     
   &--small
-    min-height: $chip-small-min-height
-    padding: $chip-small-padding
-    
+    height: $chip-small-height
+
+    .avatar
+      height: $chip-small-height
+      width: $chip-small-height
+      min-width: $chip-small-height
+
   &__close
     color: inherit
     display: flex

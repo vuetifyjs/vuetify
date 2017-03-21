@@ -74,7 +74,7 @@ export default {
     }
   },
 
-  created () {
+  mounted () {
     this.validate()
   },
 
@@ -86,7 +86,7 @@ export default {
       return h('label', {}, this.label)
     },
     genMessages (h) {
-      const messages = []
+      let messages = []
 
       if ((this.hint &&
             this.focused ||
@@ -94,12 +94,10 @@ export default {
             this.persistentHint) &&
           this.errors.length === 0
       ) {
-        messages.push(this.genHint(h))
+        messages = [this.genHint(h)]
+      } else if (this.errors.length) {
+        messages = this.errors.map(i => this.genError(h, i))
       }
-
-      this.errors.forEach(i => {
-        messages.push(this.genError(h, i))
-      })
 
       return h(
         'transition-group',
@@ -117,9 +115,7 @@ export default {
     },
     genHint (h) {
       return h('div', {
-        'class': {
-          'input-group__hint': true
-        },
+        'class': 'input-group__hint',
         key: this.hint
       }, this.hint)
     },
@@ -181,9 +177,7 @@ export default {
         }, wrapperChildren)
       )
 
-      if (this.errors.length > 0 || this.hint) {
-        detailsChildren.push(this.genMessages(h))
-      }
+      detailsChildren.push(this.genMessages(h))
 
       if (this.counter) {
         detailsChildren.push(this.genCounter(h))
@@ -201,7 +195,9 @@ export default {
       this.errors = []
 
       this.rules.forEach(rule => {
-        const valid = rule()
+        const valid = typeof rule === 'function'
+          ? rule(this.value)
+          : rule
 
         if (valid !== true) {
           this.errors.push(valid)

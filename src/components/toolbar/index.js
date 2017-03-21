@@ -1,4 +1,4 @@
-import Toolbar from './Toolbar.vue'
+import Toolbar from './Toolbar'
 import ToolbarItem from './ToolbarItem'
 
 import {

@@ -13,8 +13,8 @@ export default {
 
   data () {
     return {
-      inputValue: this.parseInputValue(),
-      inputSearch: this.parseInputSearch(),
+      inputValue: [],
+      inputSearch: '',
       menuActive: false,
       menuActivator: null,
       keyUpDown: 0,
@@ -138,6 +138,8 @@ export default {
 
   mounted () {
     this.menuActivator = this.$refs.inputgroup.querySelector('.input-group__input')
+    this.inputValue = this.parseInputValue()
+    this.inputSearch = this.parseInputSearch()
   },
 
   methods: {
@@ -266,9 +268,9 @@ export default {
         'class': 'input-group__selections'
       }
 
-      if (this.multiple) return h('div', data, this.genSelections(h).concat(this.genSearchField(h)))
-      if (this.autocomplete) return [this.genSearchField(h)]
-      return h('div', data, this.genSelections(h))
+      if (!this.autocomplete) return h('div', data, this.genSelections(h))
+      if (!this.multiple && this.autocomplete) return [this.genSearchField(h)]
+      return h('div', data, this.genSelections(h).concat(this.genSearchField(h)))
     },
 
     genSelections (h) {

@@ -7,7 +7,8 @@ export default {
 
   data () {
     return {
-      hasFocused: false
+      hasFocused: false,
+      inputHeight: null
     }
   },
 
@@ -74,7 +75,8 @@ export default {
     type: {
       type: String,
       default: 'text'
-    }
+    },
+    name: String
   },
 
   watch: {
@@ -92,9 +94,22 @@ export default {
     }
   },
 
+  mounted () {
+    this.$vuetify.load(this.calculateInputHeight)
+  },
+
   methods: {
+    calculateInputHeight () {
+      this.inputHeight = this.$refs.input.scrollHeight
+    },
+    onInput (e) {
+      this.inputValue = e.target.value
+      this.calculateInputHeight()
+    },
     isDirty () {
-      return this.lazyValue
+      return this.lazyValue !== null &&
+        typeof this.lazyValue !== 'undefined' &&
+        this.lazyValue.toString().length > 0
     },
     blur () {
       this.validate()
@@ -112,6 +127,9 @@ export default {
       const tag = this.multiLine ? 'textarea' : 'input'
 
       const inputData = {
+        style: {
+          'height': this.inputHeight && `${this.inputHeight}px`
+        },
         domProps: {
           autocomplete: this.autocomplete,
           disabled: this.disabled,
@@ -120,10 +138,14 @@ export default {
         },
         on: {
           blur: this.blur,
-          input: e => (this.inputValue = e.target.value),
+          input: this.onInput,
           focus: () => (this.focused = true)
         },
         ref: 'input'
+      }
+      // add only if set
+      if (this.name) {
+        inputData.attrs = { name: this.name }
       }
 
       if (this.multiLine) {

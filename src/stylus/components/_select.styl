@@ -1,22 +1,22 @@
-.input-group--select    
+.input-group--select
   .input-group__append-icon
     transition: .3s $transition.linear-out-slow-in
-    
+
   &.input-group--focused
     .input-group__append-icon
       transform: rotate(-180deg)
-  
+
   &.input-group--dirty.input-group--focused.input-group--chips
     input
       margin: 8px 0
-      
+
   .input-group__input, input
     cursor: pointer
-    
+
   &.input-group--disabled
     cursor: not-allowed
     pointer-events: none
-    
+
 .input-group--select
   .input-group__selections
     display: flex
@@ -33,10 +33,14 @@
   &.input-group--light
     .input-group__selections__comma
       color: rgba(#000, .87)
-      
+
     .input-group__selections__comma--active
       color: $theme.primary
-      
+
   &.input-group--dark
     .input-group__selections__comma
       color: #fff
+
+.input-group--select
+  .menu
+    display: inline
