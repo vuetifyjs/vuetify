@@ -2172,10 +2172,8 @@ var Col = {
     data.staticClass = data.staticClass ? ("col " + (data.staticClass)) : 'col'
     if (data.attrs) {
       data.staticClass += " " + (Object.keys(data.attrs).join(' '))
-    } else {
-      console.warn("you have to add static attributes of layout")
+      delete data.attrs
     }
-    delete data.attrs
 
     return h('div', data, children)
   }
@@ -2191,10 +2189,8 @@ var Layout = {
     data.staticClass = data.staticClass ? ("layout " + (data.staticClass)) : 'layout'
     if (data.attrs) {
       data.staticClass += " " + (Object.keys(data.attrs).join(' '))
-    } else {
-      console.warn("you have to add static attributes of layout")
+      delete data.attrs
     }
-    delete data.attrs
 
     return h('div', data, children)
   }
@@ -2221,8 +2217,6 @@ var Container = {
 }
 
 var Content = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('content')
-var Row = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('row')
-var Column = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('column')
 var ColSpacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('col--spacer')
 var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('spacer')
 
@@ -2232,7 +2226,6 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
   Container: Container,
   Content: Content,
   Spacer: Spacer,
-  Row: Row,
   Layout: Layout
 };
 
@@ -4935,7 +4928,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
           'top-fixed-toolbar': this.topFixedToolbar,
           'top-toolbar': this.topToolbar,
           'sidebar-under-toolbar': this.sidebarUnderToolbar,
-          'column': this.column
+          'layout-column': this.column
         }
       }
     }

@@ -46,7 +46,7 @@
           'top-fixed-toolbar': this.topFixedToolbar,
           'top-toolbar': this.topToolbar,
           'sidebar-under-toolbar': this.sidebarUnderToolbar,
-          'column': this.column
+          'layout-column': this.column
         }
       }
     }

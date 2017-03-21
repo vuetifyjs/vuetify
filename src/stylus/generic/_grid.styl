@@ -60,7 +60,8 @@
     &-space-around
       justify-content: space-around
 
-
+  .flex, &.child-flex > *
+    flex: 1
 
   .col
     padding-right: $grid-gutter-half
@@ -81,7 +82,8 @@
       &.column-{size}
         flex-direction: column
         box-sizing: border-box
-
+      .flex, &.child-flex-{size} > *
+        flex: 1
     for n in (1..$grid-columns)
         .col.{size}{n}
           flex-basis: (n / $grid-columns * 100)%
@@ -95,7 +97,7 @@
 .col--spacer, .spacer
   flex-grow: 1
 
-.column
+.layout-column
   box-sizing:border-box
   display:flex
   height:100%
