@@ -86,13 +86,33 @@
     transform: translateY(15px)
 
 .slide-x-transition
+  &-leave-active
+    position: absolute
+
   &-enter-active, &-leave, &-leave-to
     transition: $primary-transition
     
   &-enter, &-leave-to
     opacity: 0
     transform: translateX(-15px)
+
+.slide-x-reverse-transition
+  &-leave-active
+    position: absolute
+
+  &-enter-active, &-leave, &-leave-to
+    transition: $primary-transition
+    
+  &-enter, &-leave-to
+    opacity: 0
+    transform: translateX(15px)
     
 .fade-transition
+  &-leave-active
+    position: absolute
+
+  &-enter-active, &-leave, &-leave-to
+    transition: $primary-transition
+
   &-enter, &-leave-to
     opacity: 0

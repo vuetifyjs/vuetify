@@ -39,9 +39,13 @@
     color: $chip-outline-color
     
   &--small
-    min-height: $chip-small-min-height
-    padding: $chip-small-padding
-    
+    height: $chip-small-height
+
+    .avatar
+      height: $chip-small-height
+      width: $chip-small-height
+      min-width: $chip-small-height
+
   &__close
     color: inherit
     display: flex

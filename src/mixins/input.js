@@ -177,9 +177,7 @@ export default {
         }, wrapperChildren)
       )
 
-      if (this.errors.length > 0 || this.hint) {
-        detailsChildren.push(this.genMessages())
-      }
+      detailsChildren.push(this.genMessages())
 
       if (this.counter) {
         detailsChildren.push(this.genCounter())
@@ -197,7 +195,9 @@ export default {
       this.errors = []
 
       this.rules.forEach(rule => {
-        const valid = rule(this.value)
+        const valid = typeof rule === 'function'
+          ? rule(this.value)
+          : rule
 
         if (valid !== true) {
           this.errors.push(valid)

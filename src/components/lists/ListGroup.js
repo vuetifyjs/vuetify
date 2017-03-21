@@ -39,15 +39,19 @@ export default {
   watch: {
     isActive () {
       this.booted = true
-      this.$emit('input', this.isActive)
 
       if (!this.isActive) {
         this.list.listClose(this._uid)
       }
     },
     '$route' (to) {
+      const isActive = this.matchRoute(to.path)
+
       if (this.group) {
-        this.isActive = this.matchRoute(to.path)
+        if (isActive && this.isActive !== isActive) {
+          this.list.listClick(this._uid)
+        }
+        this.isActive = isActive
       }
     }
   },

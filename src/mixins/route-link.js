@@ -37,7 +37,11 @@ export default {
         data.nativeOn = { click: this.click }
       } else {
         tag = this.tag || 'a'
-        data.attrs.href = this.href || 'javascript:;'
+        
+        if (tag === 'a') {
+          data.attrs.href = this.href || 'javascript:;'
+        }
+
         data.on = { click: this.click }
       }
 
