@@ -76,7 +76,7 @@
     "webpack-merge": "^0.17.0"
   },
   "dependencies": {
-    "vue": "^2.1.10"
+    "vue": "^2.2.0"
   },
   "engines": {
     "node": ">= 4.0.0",
