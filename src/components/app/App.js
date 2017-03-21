@@ -1,8 +1,6 @@
 export default {
   functional: true,
 
-  name: 'app',
-
   props: {
     footer: Boolean,
     leftFixedSidebar: Boolean,
