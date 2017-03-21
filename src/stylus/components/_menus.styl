@@ -1,17 +1,17 @@
 .menu
   display: inline-block
-  
+
   &--disabled
     cursor: not-allowed
-    
+
     .menu__activator
       cursor: not-allowed
-  
+
   &__activator
     align-items: center
     cursor: pointer
     position: relative
-  
+
   &__content
     background-color: #fff
     position: absolute
@@ -21,37 +21,37 @@
     overflow-x: hidden
     z-index: 100
     @extend .z-depth-2
-    
+
   &-transition
-    &-enter      
+    &-enter
       .list__tile
         min-width: 0
         transition-delay: .3s
         opacity: 0
         transform: translateY(-15px)
         pointer-events: none
-        
+
       .list__tile--active
         opacity: 1
         transform: none
         pointer-events: auto
-      
+
     &-enter-to
       .list__tile
         pointer-events: auto
         opacity: 1
-      
+
       .list__tile--active
         transform: none
-      
+
     &-leave-to
       transform: translateY(-10px)
-        
+
     &-enter, &-leave-to
       opacity: 0
-      
+
     &-enter-to, &-leave
       opacity: 1
-      
+
     &-enter-active, &-leave-active
       transition: all .4s $transition.swing

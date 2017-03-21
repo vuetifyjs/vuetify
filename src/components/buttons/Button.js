@@ -103,7 +103,7 @@ export default {
   render (h) {
     const { tag, data } = this.generateRouteLink()
     const children = []
-    
+
     if (tag === 'button') {
       data.attrs.type = this.type
     }
