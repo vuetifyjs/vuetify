@@ -59,6 +59,7 @@ $grid-columns := 12
 // Display
 // ============================================================
 $display-breakpoints := {
+  xs-only: "only screen and (max-width: %s)" % ($grid-breakpoints.sm - 1)
   sm-and-down: "only screen and (max-width: %s)" % ($grid-breakpoints.md - 1)
   sm-and-up: "only screen and (min-width: (%s))" % $grid-breakpoints.md
   md-only: "only screen and (min-width: %s) and (max-width: %s)" % $grid-breakpoints.md ($grid-breakpoints.lg  - 1)
