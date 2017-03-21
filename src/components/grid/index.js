@@ -45,7 +45,23 @@ const Container = {
   }
 }
 
-const Content = createSimpleFunctional('content')
+const Content = {
+  functional: true,
+
+  render (h, {data, children}) {
+    let staticClass = data.staticClass ? `content ${data.staticClass}` : 'content'
+
+    if (data.attrs && typeof data.attrs.disableScroll !== 'undefined') {
+      staticClass += ' no-scroll-y'
+      data.attrs.disableScroll = undefined
+    }
+
+    data.staticClass = staticClass
+
+    return h('div', data, children)
+  }
+}
+
 const ColSpacer = createSimpleFunctional('col--spacer')
 const Spacer = createSimpleFunctional('spacer')
 

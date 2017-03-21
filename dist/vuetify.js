@@ -2216,7 +2216,26 @@ var Container = {
   }
 }
 
-var Content = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('content')
+var Content = {
+  functional: true,
+
+  render: function render (h, ref) {
+    var data = ref.data;
+    var children = ref.children;
+
+    var staticClass = data.staticClass ? ("content " + (data.staticClass)) : 'content'
+
+    if (data.attrs && typeof data.attrs.disableScroll !== 'undefined') {
+      staticClass += ' no-scroll-y'
+      data.attrs.disableScroll = undefined
+    }
+
+    data.staticClass = staticClass
+
+    return h('div', data, children)
+  }
+}
+
 var ColSpacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('col--spacer')
 var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('spacer')
 
@@ -4891,48 +4910,36 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //
 //
 
-  /* harmony default export */ exports["default"] = {
-    props: {
-      footer: Boolean,
-
-      leftFixedSidebar: Boolean,
-
-      leftSidebar: Boolean,
-
-      id: {
-        type: String,
-        default: 'app'
-      },
-
-      rightFixedSidebar: Boolean,
-
-      rightSidebar: Boolean,
-
-//      topFixedToolbar: Boolean,
-
-//      topToolbar: Boolean,
-
-      sidebarUnderToolbar: Boolean,
-
-      column: Boolean
+/* harmony default export */ exports["default"] = {
+  props: {
+    leftFixedSidebar: Boolean,
+    leftSidebar: Boolean,
+    id: {
+      type: String,
+      default: 'app'
     },
+    rightFixedSidebar: Boolean,
+    rightSidebar: Boolean,
+    sidebarUnderToolbar: Boolean,
+    column: {
+      type: Boolean,
+      default: true
+    }
+  },
 
-    computed: {
-      classes: function classes () {
-        return {
-          'left-fixed-sidebar': this.leftFixedSidebar,
-          'left-sidebar': this.leftSidebar,
-          'bottom-footer': this.footer,
-          'right-fixed-sidebar': this.rightFixedSidebar,
-          'right-sidebar': this.rightSidebar,
-          'top-fixed-toolbar': this.topFixedToolbar,
-          'top-toolbar': this.topToolbar,
-          'sidebar-under-toolbar': this.sidebarUnderToolbar,
-          'layout-column': this.column
-        }
+  computed: {
+    classes: function classes () {
+      return {
+        'left-fixed-sidebar': this.leftFixedSidebar,
+        'left-sidebar': this.leftSidebar,
+        'right-fixed-sidebar': this.rightFixedSidebar,
+        'right-sidebar': this.rightSidebar,
+        'sidebar-under-toolbar': this.sidebarUnderToolbar,
+        'layout-column': this.column
       }
     }
-  };
+  }
+};
 
 
 /***/ },
