@@ -48,6 +48,8 @@ export default {
       default: 300
     },
     multiple: Boolean,
+    singleLine: Boolean,
+    multiLine: Boolean,
     offset: Boolean
   },
 
@@ -173,9 +175,6 @@ export default {
   },
 
   render (h) {
-    return h('div', {}, [
-      this.genInputGroup([this.genSelectionsAndSearch()]),
-      this.genMenu()
-    ])
+    return this.genInputGroup([this.genSelectionsAndSearch(), this.genMenu()])
   }
 }
