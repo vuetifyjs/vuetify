@@ -1,4 +1,6 @@
 export default {
+  functional: true,
+
   name: 'app',
 
   props: {
@@ -16,23 +18,25 @@ export default {
     sidebarUnderToolbar: Boolean
   },
 
-  render (h) {
+  render (h, context) {
     return h('div', {
       'class': {
         'with': true,
-        'left-fixed-sidebar': this.leftFixedSidebar,
-        'left-sidebar': this.leftSidebar,
-        'bottom-footer': this.footer,
-        'right-fixed-sidebar': this.rightFixedSidebar,
-        'right-sidebar': this.rightSidebar,
-        'top-fixed-toolbar': this.topFixedToolbar,
-        'top-toolbar': this.topToolbar,
-        'sidebar-under-toolbar': this.sidebarUnderToolbar
+        'left-fixed-sidebar': context.props.leftFixedSidebar,
+        'left-sidebar': context.props.leftSidebar,
+        'bottom-footer': context.props.footer,
+        'right-fixed-sidebar': context.props.rightFixedSidebar,
+        'right-sidebar': context.props.rightSidebar,
+        'top-fixed-toolbar': context.props.topFixedToolbar,
+        'top-toolbar': context.props.topToolbar,
+        'sidebar-under-toolbar': context.props.sidebarUnderToolbar
+      },
+      attrs: {
+        'data-app': true
       },
       domProps: {
-        id: this.id,
-        'data-app': true
+        id: context.props.id
       }
-    }, [this.$slots.default])
+    }, context.children)
   }
 }
