@@ -3,29 +3,27 @@ import { createSimpleFunctional } from '../../util/helpers'
 const Col = {
   functional: true,
 
-  render: (h, { data, children }) => {
-    data.staticClass = data.staticClass ? `col ${data.staticClass}` : 'col'
-    data.staticClass += ` ${Object.keys(data.attrs).join(' ')}`
-    delete data.attrs
+  render: (h, context) => {
+    context.data.class = context.data.class || []
+    context.data.class.push('col')
+    context.data.class.concat(Object.keys.data.attrs)
 
-    return h('div', data, children)
+    return h('div', context.data, context.children)
   }
 }
 
 const Container = {
   functional: true,
 
-  render (h, { data, children }) {
-    let staticClass = data.staticClass ? `container ${data.staticClass}` : 'container'
+  render (h, context) {
+    context.data.class = context.data.class || []
+    context.data.class.push('container')
 
-    if (data.attrs && typeof data.attrs.fluid !== 'undefined') {
-      staticClass += ' container--fluid'
-      data.attrs.fluid = undefined
+    if (context.data.attrs) {
+      'fluid' in context.data.attrs && context.data.class.push('container--fluid')
     }
 
-    data.staticClass = staticClass
-
-    return h('div', data, children)
+    return h('div', context.data, context.children)
   }
 }
 
