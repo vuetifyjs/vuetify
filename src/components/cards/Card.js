@@ -14,15 +14,13 @@ export default {
 
   render (h, context) {
     context.data.style = context.style || {}
+    context.data.class = context.data.class || []
     context.data.style.height = context.props.height
+    context.data.class.push('card')
+    context.props.horizontal && context.data.class.push('card--horizontal')
 
     if (context.props.img) {
       context.data.style.background = `url(${context.props.img}) center center / cover no-repeat`
-    }
-
-    context.data.class = {
-      'card': true,
-      'card--horizontal': context.props.horizontal
     }
 
     return h('div', context.data, context.children)
