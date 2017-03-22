@@ -55,6 +55,11 @@ export default {
 
         this.lazyValue = val
       }
+    },
+    isDirty () {
+      return this.lazyValue !== null &&
+        typeof this.lazyValue !== 'undefined' &&
+        this.lazyValue.toString().length > 0
     }
   },
 
@@ -106,24 +111,19 @@ export default {
       this.inputValue = e.target.value
       this.calculateInputHeight()
     },
-    isDirty () {
-      return this.lazyValue !== null &&
-        typeof this.lazyValue !== 'undefined' &&
-        this.lazyValue.toString().length > 0
-    },
     blur () {
       this.validate()
       this.$nextTick(() => (this.focused = false))
     },
-    genCounter (h) {
-      return h('div', {
+    genCounter () {
+      return this.$createElement('div', {
         'class': {
           'input-group__counter': true,
           'input-group__counter--error': !this.counterIsValid()
         }
       }, this.count)
     },
-    genInput (h) {
+    genInput () {
       const tag = this.multiLine ? 'textarea' : 'input'
 
       const inputData = {
@@ -154,7 +154,7 @@ export default {
         inputData.domProps.type = this.type
       }
 
-      return h(tag, inputData)
+      return this.$createElement(tag, inputData)
     },
     counterIsValid: function counterIsValid () {
       const val = (this.inputValue && this.inputValue.toString() || '')
@@ -172,7 +172,7 @@ export default {
     }
   },
 
-  render (h) {
-    return this.genInputGroup(this.genInput(h))
+  render () {
+    return this.genInputGroup(this.genInput())
   }
 }

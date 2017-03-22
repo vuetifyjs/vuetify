@@ -2,11 +2,10 @@ export function createSimpleFunctional (c, el = 'div') {
   return {
     functional: true,
 
-    render: (h, context) => {
-      context.data.class = context.data.class || []
-      context.data.class.push(c)
+    render: (h, { data, children }) => {
+      data.staticClass = data.staticClass ? `${c} ${data.staticClass}` : c
 
-      return h(el, context.data, context.children)
+      return h(el, data, children)
     }
   }
 }
