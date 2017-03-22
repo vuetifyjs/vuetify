@@ -64,7 +64,7 @@ export default {
   },
 
   props: {
-    autocomplete: Boolean,
+    autofocus: Boolean,
     counter: Boolean,
     fullWidth: Boolean,
     min: {
@@ -101,7 +101,10 @@ export default {
   },
 
   mounted () {
-    this.$vuetify.load(this.calculateInputHeight)
+    this.$vuetify.load(() => {
+      this.calculateInputHeight()
+      this.autofocus && this.$refs.input.focus()
+    })
   },
 
   methods: {
@@ -110,7 +113,7 @@ export default {
     },
     isDirty () {
       return this.lazyValue !== null &&
-        typeof this.lazyValue !== undefined &&
+        typeof this.lazyValue !== 'undefined' &&
         this.lazyValue.toString().length > 0
     },
     blur () {
