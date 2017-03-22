@@ -60,7 +60,8 @@ export default {
         'input-group--autocomplete': this.autocomplete,
         'input-group--single-line': this.singleLine,
         'input-group--multi-line': this.multiLine,
-        'input-group--chips': this.chips
+        'input-group--chips': this.chips,
+        'input-group--multiple': this.multiple
       }
     },
     filteredItems () {

@@ -62,3 +62,15 @@
     
   .fade-transition-leave-active
     left: 0
+  
+  &:not(.input-group--multiple)
+    .menu-transition
+      &-enter
+        .list__tile--active
+          opacity: 1
+          transform: none
+          pointer-events: auto
+          
+      &-enter-to
+        .list__tile--active
+          transform: none
