@@ -1,22 +1,16 @@
 const Divider = {
   functional: true,
 
-  render (createElement, { data }) {
-    const params = {
-      'class': 'divider'
+  render (h, context) {
+    context.data.class = context.data.class || []
+    context.data.class.push('divider')
+
+    if (context.data.attrs) {
+      'inset' in context.data.attrs && context.data.class.push('divider--inset')
+      'light' in context.data.attrs && context.data.class.push('divider--light')
     }
 
-    if (data.attrs) {
-      if ('inset' in data.attrs) {
-        params.class += ' divider--inset'
-      }
-
-      if ('light' in data.attrs) {
-        params.class += ' divider--light'
-      }
-    }
-
-    return createElement('hr', params)
+    return h('hr', context.data)
   }
 }
 
