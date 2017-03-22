@@ -1,20 +1,22 @@
 .input-group--select
-  input
+  .input-group--select__autocomplete
     opacity: 0
+    height: 0
 
   .input-group__append-icon
     transition: .3s $transition.linear-out-slow-in
     
+  &.input-group--focused.input-group--dirty
+    .input-group--select__autocomplete
+      margin: 8px 0
+    
   &.input-group--focused
-    input
+    .input-group--select__autocomplete
       opacity: 1
+      height: 30px
 
     .input-group__append-icon
       transform: rotate(-180deg)
-  
-  &.input-group--dirty.input-group--focused.input-group--chips
-    input
-      margin: 8px 0
       
   .input-group__input, input
     cursor: pointer
@@ -56,3 +58,6 @@
 .input-group--select
   .menu
     display: inline
+    
+  .fade-transition-leave-active
+    left: 0

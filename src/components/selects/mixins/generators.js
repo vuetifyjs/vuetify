@@ -25,33 +25,37 @@ export default {
       return this.$createElement('v-menu', data, [this.genList()])
     },
     genSelectionsAndSearch () {
-      const input = this.$createElement('input', {
-        domProps: { value: this.searchValue },
-        on: {
-          input: e => (this.searchValue = e.target.value),
-          keyup: e => {
-            if (e.keyCode === 27) {
-              this.menuActive = false
-              e.target.blur()
+      let input
+
+      if (this.autocomplete) {
+        input = [this.$createElement('input', {
+          'class': 'input-group--select__autocomplete',
+          domProps: { value: this.searchValue },
+          on: {
+            input: e => (this.searchValue = e.target.value),
+            keyup: e => {
+              if (e.keyCode === 27) {
+                this.menuActive = false
+                e.target.blur()
+              }
             }
-          }
-        },
-        ref: 'input',
-        key: 'input'
-      })
+          },
+          ref: 'input',
+          key: 'input'
+        })]
+      }
 
       const group = this.$createElement('transition-group', {
         props: {
-          name: 'fade-transition',
-          tag: 'div'
+          name: 'fade-transition'
         }
-      }, (this.isDirty ? this.genSelections() : []).concat([input]))
+      }, this.isDirty ? this.genSelections() : [])
 
       return this.$createElement('div', {
         'class': 'input-group__selections',
         style: { 'overflow': 'hidden' },
         ref: 'activator'
-      }, [group])
+      }, [group, input])
     },
     genSelections () {
       const children = []
@@ -118,7 +122,8 @@ export default {
           'list__tile--active': active,
           'list__tile--select-multi': this.multiple
         },
-        nativeOn: { click: () => this.selectItem(item) }
+        nativeOn: { click: () => this.selectItem(item) },
+        props: { avatar: item === Object(item) && 'avatar' in item }
       }
 
       if (this.$scopedSlots.item) {

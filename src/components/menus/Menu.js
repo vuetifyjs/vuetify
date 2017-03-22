@@ -219,7 +219,6 @@ export default {
 
       if (this.activator) return this.activator
       if (this.activatorXY) return this.activatorXY
-      console.log($refs.activator)
       return $refs.activator.children ? $refs.activator.children[0] : $refs.activator
     },
 

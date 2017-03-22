@@ -91,6 +91,7 @@ export default {
     value (val) {
       this.inputValue = val
       this.validate()
+      this.autocomplete && this.$refs.menu.activate()
     },
     menuActive (val) {
       this.isBooted = true
@@ -120,6 +121,7 @@ export default {
     },
     focus () {
       this.focused = true
+      this.autocomplete && this.$refs.input.focus()
     },
     getText (item) {
       return item === Object(item) ? item[this.itemText] : item
@@ -145,17 +147,19 @@ export default {
     selectItem (item) {
       if (!this.multiple) {
         this.inputValue = item
-      } else {
-        if (this.inputValue === null) {
-          this.inputValue = [item]
-        } else {
-          const i = this.inputValue.findIndex(i => this.getValue(i) === this.getValue(item))
+      }
 
-          if (i !== -1) {
-            this.inputValue.splice(i, 1)
-          } else {
-            this.inputValue.push(item)
-          }
+      if (this.inputValue === null) {
+        this.inputValue = [item]
+      }
+
+      if (this.multiple) {
+        const i = this.inputValue.findIndex(i => this.getValue(i) === this.getValue(item))
+
+        if (i !== -1) {
+          this.inputValue.splice(i, 1)
+        } else {
+          this.inputValue.push(item)
         }
       }
 
