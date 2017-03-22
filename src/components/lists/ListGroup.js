@@ -48,7 +48,7 @@ export default {
       this.isActive = this.matchRoute(to.path)
 
       if (this.group && this.isActive) {
-        this.list.listClick(this._uid)
+        this.list.listClick(this._uid, true)
       }
     }
   },
@@ -85,6 +85,7 @@ export default {
       addOnceEventListener(el, 'transitionend', done)
     },
     matchRoute (to) {
+      if (!this.group) return false
       return to.match(this.group) !== null
     }
   },
