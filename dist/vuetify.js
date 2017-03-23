@@ -1576,7 +1576,7 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
     var this$1 = this;
 
     this.$vuetify.load(function () {
-      this$1.calculateInputHeight()
+      this$1.multiLine && this$1.calculateInputHeight()
       this$1.autofocus && this$1.$refs.input.focus()
     })
   },
