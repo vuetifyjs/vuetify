@@ -1,6 +1,6 @@
 {
   "name": "vuetify",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "author": {
     "name": "John Leider",
     "email": "john.j.leider@gmail.com"
@@ -71,12 +71,12 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^2.1.1",
     "vue-loader": "^10.1.0",
-    "vue-template-compiler": "^2.1.10",
+    "vue-template-compiler": "^2.2.4",
     "webpack": "2.2.0-rc.2",
     "webpack-merge": "^0.17.0"
   },
   "dependencies": {
-    "vue": "^2.1.10"
+    "vue": "^2.2.0"
   },
   "engines": {
     "node": ">= 4.0.0",

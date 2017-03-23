@@ -88,6 +88,7 @@ export default {
       addOnceEventListener(el, 'transitionend', done)
     },
     matchRoute (to) {
+      if (!this.group) return false
       return to.match(this.group) !== null
     }
   },

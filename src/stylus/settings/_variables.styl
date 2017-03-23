@@ -61,13 +61,13 @@ $grid-columns := 12
 $display-breakpoints := {
   xs-only: "only screen and (max-width: %s)" % ($grid-breakpoints.sm - 1)
   sm-and-down: "only screen and (max-width: %s)" % ($grid-breakpoints.md - 1)
-  sm-and-up: "only screen and (min-width: (%s))" % $grid-breakpoints.md
+  sm-and-up: "only screen and (min-width: (%s))" % $grid-breakpoints.sm
   md-only: "only screen and (min-width: %s) and (max-width: %s)" % $grid-breakpoints.md ($grid-breakpoints.lg  - 1)
   md-and-down: "only screen and (max-width: %s )" % ($grid-breakpoints.lg - 1)
-  md-and-up: "only screen and (min-width: %s)" % $grid-breakpoints.lg
+  md-and-up: "only screen and (min-width: %s)" % $grid-breakpoints.md
   lg-only: "only screen and (min-width: %s) and (max-width: %s)" % $grid-breakpoints.lg ($grid-breakpoints.xl - 1)
   lg-and-down: "only screen and (max-width: (%s - 1))" % $grid-breakpoints.xl
-  lg-and-up: "only screen and (min-width: %s)" % $grid-breakpoints.xl
+  lg-and-up: "only screen and (min-width: %s)" % $grid-breakpoints.lg
 }
 
 
