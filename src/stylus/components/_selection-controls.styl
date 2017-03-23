@@ -1,7 +1,6 @@
 /** Input */
 .input-group.input-group--selection-controls
   display: flex
-  align-items: center
     
   .icon
     cursor: pointer
@@ -14,10 +13,13 @@
     display: none
 
   .input-group__input
-    height: $input-height
     width: 100%
-    align-items: center
     position: relative
+    
+    // Needed for safari
+    .icon
+      height: 100%
+      margin: auto
 
 /** Label */
 .input-group--selection-controls label

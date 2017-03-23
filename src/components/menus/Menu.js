@@ -1,4 +1,5 @@
 import Toggleable from '../../mixins/toggleable'
+import { debounce } from '../../util/helpers'
 
 export default {
   name: 'menu',
@@ -8,6 +9,7 @@ export default {
   data () {
     return {
       window: {},
+      windowResizeHandler: () => {},
       dimensions: {
         activator: {
           top: 0, left: 0, bottom: 0, right: 0, width: 0, height: 0, offsetTop: 0
@@ -21,6 +23,7 @@ export default {
       direction: { vert: 'bottom', horiz: 'right' },
       position: { left: '0px', top: '0px', right: 'auto', bottom: 'auto' },
       isContentActive: false,
+      isBooted: false,
       maxHeightAutoDefault: '200px'
     }
   },
@@ -45,6 +48,26 @@ export default {
       type: Number,
       default: -18
     },
+    nudgeTop: {
+      type: Number,
+      default: 0
+    },
+    nudgeBottom: {
+      type: Number,
+      default: 0
+    },
+    nudgeLeft: {
+      type: Number,
+      default: 0
+    },
+    nudgeRight: {
+      type: Number,
+      default: 0
+    },
+    nudgeWidth: {
+      type: Number,
+      default: 0
+    },
     openOnClick: {
       type: Boolean,
       default: true
@@ -52,6 +75,12 @@ export default {
     closeOnClick: {
       type: Boolean,
       default: true
+    },
+    activator: {
+      default: null
+    },
+    activatorXY: {
+      default: null
     },
     origin: {
       type: String,
@@ -67,13 +96,14 @@ export default {
     offset () {
       const { activator: a, content: c } = this.dimensions
       const { direction, offsetX, offsetY, offsetAuto: auto } = this
+      const { nudgeTop: nt, nudgeBottom: nb, nudgeRight: nr, nudgeLeft: nl } = this
 
       const horiz = direction.horiz === 'left'
-          ? offsetX ? a.left - c.right : a.right - c.right + auto.horiz
-          : offsetX ? a.right - c.left : a.left - c.left + auto.horiz
+          ? offsetX ? a.left - c.right + nl : a.right - c.right + auto.horiz
+          : offsetX ? a.right - c.left + nr : a.left - c.left + auto.horiz
       const vert = direction.vert === 'top'
-          ? offsetY ? a.top - c.bottom : a.bottom - c.bottom + auto.vert
-          : offsetY ? a.bottom - c.top : a.top - c.top + auto.vert
+          ? offsetY ? a.top - c.bottom + nt : a.bottom - c.bottom + auto.vert
+          : offsetY ? a.bottom - c.top + nb : a.top - c.top + auto.vert
 
       return { horiz, vert }
     },
@@ -97,12 +127,13 @@ export default {
     screenDist () {
       const { activator: a } = this.dimensions
       const { innerHeight: innerH, innerWidth: innerW } = this.window
+      const { nudgeTop: nt, nudgeBottom: nb, nudgeRight: nr, nudgeLeft: nl } = this
       const dist = {}
 
-      dist.top = this.offsetY ? a.top : a.bottom
-      dist.left = this.offsetX ? a.left : a.right
-      dist.bottom = this.offsetY ? innerH - a.bottom : innerH - a.top
-      dist.right = this.offsetX ? innerW - a.right : innerW - a.left
+      dist.top = this.offsetY ? a.top + nt : a.bottom
+      dist.left = this.offsetX ? a.left + nl : a.right
+      dist.bottom = this.offsetY ? innerH - a.bottom - nb : innerH - a.top
+      dist.right = this.offsetX ? innerW - a.right - nr : innerW - a.left
       dist.horizMax = dist.left > dist.right ? dist.left : dist.right
       dist.horizMaxDir = dist.left > dist.right ? 'left' : 'right'
       dist.vertMax = dist.top > dist.bottom ? dist.top : dist.bottom
@@ -142,18 +173,67 @@ export default {
 
   watch: {
     isActive (val) {
-      if (val && !this.disabled) this.activate()
+      this.isBooted = true
+      if (val) this.activate()
       else this.isContentActive = false
+    },
 
-      this.isActive = val && !this.disabled
+    activator (newActivator, oldActivator) {
+      this.removeActivatorEvents(oldActivator)
+      this.addActivatorEvents(newActivator)
+    },
+
+    activatorXY (val) {
+      this.isActive = true
     }
+  },
+
+  mounted () {
+    this.addActivatorEvents(this.activator)
+  },
+
+  beforeDestroy () {
+    this.removeActivatorEvents(this.activator)
+    window.removeEventListener('resize', this.windowResizeHandler)
   },
 
   methods: {
     activate () {
-      this.window = window
+      if (!this.isActive || this.disabled) return
+
+      this.initWindow()
       this.setDirection()
       this.updatePosition()
+    },
+
+    initWindow () {
+      if (this.window === window) return
+
+      this.window = window
+      this.windowResizeHandler = debounce(this.activate, 200)
+      this.window.addEventListener('resize', this.windowResizeHandler)
+    },
+
+    getActivator () {
+      const { $refs } = this
+
+      if (this.activator) return this.activator
+      if (this.activatorXY) return this.activatorXY
+      return $refs.activator.children ? $refs.activator.children[0] : $refs.activator
+    },
+
+    activatorClickHandler () {
+      if (this.openOnClick) this.isActive = !this.isActive && !this.disabled
+    },
+
+    addActivatorEvents (activator = null) {
+      if (!activator) return
+      activator.addEventListener('click', this.activatorClickHandler)
+    },
+
+    removeActivatorEvents (activator = null) {
+      if (!activator) return
+      activator.removeEventListener('click', this.activatorClickHandler)
     },
 
     setDirection (horiz = '', vert = '') {
@@ -191,16 +271,17 @@ export default {
     },
 
     updateDimensions () {
-      const { activator: a, content: c } = this.$refs
+      const a = this.getActivator()
+      const c = this.$refs.content
 
       this.sneakPeek(c, () => {
         this.updateMaxMin()
 
         this.dimensions = {
-          'activator': this.measure(a.children ? a.children[0] : a),
-          'content': this.measure(c),
-          'list': this.measure(c, '.list'),
-          'selected': this.measure(c, '.list__tile--active', 'parent')
+          activator: this.measure(a),
+          content: this.measure(c),
+          list: this.measure(c, '.list'),
+          selected: this.auto ? this.measure(c, '.list__tile--active', 'parent') : null
         }
 
         this.offscreenFix()
@@ -209,11 +290,15 @@ export default {
     },
 
     updateMaxMin () {
-      const { $refs, maxHeight, maxHeightAutoDefault: maxAuto, offsetAuto, auto } = this
-      const a = $refs.activator.children ? $refs.activator.children[0] : $refs.activator
-      const c = $refs.content
+      const { maxHeight, maxHeightAutoDefault: maxAuto, offsetAuto, auto } = this
+      const a = this.getActivator()
+      const c = this.$refs.content
+      const widthAdjust = this.nudgeWidth + Math.abs(offsetAuto.horiz) * 2
 
-      c.style.minWidth = `${a.getBoundingClientRect().width + Math.abs(offsetAuto.horiz)}px`
+      if (!this.activatorXY) {
+        c.style.minWidth = `${a.getBoundingClientRect().width + widthAdjust}px`
+      }
+      c.style.maxHeight = null  // <-- Todo: Investigate why this fixes rendering.
       c.style.maxHeight = isNaN(maxHeight) ? maxHeight : `${maxHeight}px`
       c.style.maxHeight = maxHeight === null && auto ? maxAuto : c.style.maxHeight
     },
@@ -276,9 +361,7 @@ export default {
           'menu__activator': true
         },
         on: {
-          click: () => {
-            if (this.openOnClick) this.isActive = !this.isActive && !this.disabled
-          }
+          click: this.activatorClickHandler
         }
       }
 
@@ -309,7 +392,7 @@ export default {
         }
       }
 
-      return h('div', data, [this.$slots.default])
+      return h('div', data, [this.isBooted ? this.$slots.default : null])
     },
 
     // Utils
@@ -320,6 +403,13 @@ export default {
       el = el && getParent ? el.parentElement : el
 
       if (!el) return null
+      if (!el.nodeName && el.hasOwnProperty('clientX') && el.hasOwnProperty('clientY')) {
+        return {
+          top: el.clientY, bottom: el.clientY, left: el.clientX, right: el.clientX,
+          width: 0, height: 0, offsetTop: 0
+        }
+      }
+
       const { top, left, bottom, right, width, height } = el.getBoundingClientRect()
       return { top, left, bottom, right, width, height, offsetTop: el.offsetTop }
     },
@@ -343,7 +433,12 @@ export default {
       },
       directives: [
         {
-          name: 'click-outside'
+          name: 'click-outside',
+          value: e => {
+            const a = this.activator
+            if (a && (a === e.target || a.contains(e.target))) return false
+            return true
+          }
         }
       ],
       on: {

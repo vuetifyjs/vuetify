@@ -7,12 +7,6 @@
   width: $sidebar-width
   z-index: 3
   @extend .z-depth-2
-    
-  li.disabled
-    opacity: 0.4
-    
-  &--right
-    order: +1
   
   &--fixed
     top: 0
@@ -28,9 +22,6 @@
     flex-basis: 0
     transform: translateX(-($sidebar-width + 25))
     
-  &--drawer--right
-    transform: translateX($sidebar-width + 25)
-    
   &--close
     transform: translateX(-($sidebar-width + 25))
     
@@ -41,10 +32,10 @@
     @media screen and (max-width: $grid-breakpoints.lg)
       transform: translateX(-($sidebar-width + 25))
       
-      &.sidebar--fixed-right
+      &.sidebar--fixed-right, &.sidebar--right
         transform: translateX($sidebar-width + 25)
     
-  &--open
+  &--open, &--open.sidebar--mobile
     transform: translateX(0)
     width: $sidebar-width
 
@@ -56,7 +47,7 @@
       &.sidebar--open
         transform: translateX(300px)
         
-  &:not(.sidebar--fixed):not(.sidebar--right)
+  &:not(.sidebar--fixed).sidebar--right
     @media screen and (max-width: $grid-breakpoints.lg)
       margin-right: -300px
       transform: none

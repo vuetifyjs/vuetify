@@ -39,8 +39,8 @@ export default {
   },
 
   methods: {
-    genLabel (h) {
-      return h('label', { on: { click: this.toggle }}, this.label)
+    genLabel () {
+      return this.$createElement('label', { on: { click: this.toggle }}, this.label)
     },
     toggle () {
       if (!this.disabled) {
@@ -70,6 +70,6 @@ export default {
       ]
     })
 
-    return this.genInputGroup(h, [transition, ripple])
+    return this.genInputGroup([transition, ripple])
   }
 }

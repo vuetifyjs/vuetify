@@ -7,7 +7,8 @@ export default {
 
   data () {
     return {
-      hasFocused: false
+      hasFocused: false,
+      inputHeight: null
     }
   },
 
@@ -54,13 +55,17 @@ export default {
 
         this.lazyValue = val
       }
+    },
+    isDirty () {
+      return this.lazyValue !== null &&
+        typeof this.lazyValue !== 'undefined' &&
+        this.lazyValue.toString().length > 0
     }
   },
 
   props: {
-    autocomplete: Boolean,
+    autofocus: Boolean,
     counter: Boolean,
-    id: String,
     fullWidth: Boolean,
     min: {
       type: [Number, String],
@@ -70,13 +75,13 @@ export default {
       type: [Number, String],
       default: 25
     },
-    menu: Boolean,
     multiLine: Boolean,
-    name: String,
     singleLine: Boolean,
     type: {
+      type: String,
       default: 'text'
-    }
+    },
+    name: String
   },
 
   watch: {
@@ -94,40 +99,56 @@ export default {
     }
   },
 
+  mounted () {
+    this.$vuetify.load(() => {
+      this.calculateInputHeight()
+      this.autofocus && this.$refs.input.focus()
+    })
+  },
+
   methods: {
-    isDirty () {
-      return this.lazyValue
+    calculateInputHeight () {
+      this.inputHeight = this.$refs.input.scrollHeight
+    },
+    onInput (e) {
+      this.inputValue = e.target.value
+      this.calculateInputHeight()
     },
     blur () {
       this.validate()
       this.$nextTick(() => (this.focused = false))
     },
-    genCounter (h) {
-      return h('div', {
+    genCounter () {
+      return this.$createElement('div', {
         'class': {
           'input-group__counter': true,
           'input-group__counter--error': !this.counterIsValid()
         }
       }, this.count)
     },
-    genInput (h) {
+    genInput () {
       const tag = this.multiLine ? 'textarea' : 'input'
 
       const inputData = {
+        style: {
+          'height': this.inputHeight && `${this.inputHeight}px`
+        },
         domProps: {
           autocomplete: this.autocomplete,
           disabled: this.disabled,
-          id: this.id || this.name || this._uid,
-          name: this.name,
           required: this.required,
           value: this.lazyValue
         },
         on: {
           blur: this.blur,
-          input: e => (this.inputValue = e.target.value),
+          input: this.onInput,
           focus: () => (this.focused = true)
         },
         ref: 'input'
+      }
+      // add only if set
+      if (this.name) {
+        inputData.attrs = { name: this.name }
       }
 
       if (this.multiLine) {
@@ -136,7 +157,7 @@ export default {
         inputData.domProps.type = this.type
       }
 
-      return h(tag, inputData)
+      return this.$createElement(tag, inputData)
     },
     counterIsValid: function counterIsValid () {
       const val = (this.inputValue && this.inputValue.toString() || '')
@@ -154,7 +175,7 @@ export default {
     }
   },
 
-  render (h) {
-    return this.genInputGroup(h, this.genInput(h))
+  render () {
+    return this.genInputGroup(this.genInput())
   }
 }

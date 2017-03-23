@@ -7,7 +7,6 @@ export default {
 
   props: {
     close: Boolean,
-    contact: String,
     label: Boolean,
     outline: Boolean,
     small: Boolean,
@@ -40,14 +39,6 @@ export default {
         name: 'show',
         value: this.isActive
       }]
-    }
-
-    if (this.contact) {
-      children.unshift(h('img', {
-        domProps: {
-          src: this.contact
-        }
-      }))
     }
 
     if (this.close) {

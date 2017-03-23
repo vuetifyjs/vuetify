@@ -11,7 +11,10 @@ export default {
   },
 
   props: {
-    step: [Number, String]
+    step: {
+      type: [Number, String],
+      required: true
+    }
   },
 
   computed: {

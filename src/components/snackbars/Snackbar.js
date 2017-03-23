@@ -7,7 +7,7 @@ export default {
 
   data () {
     return {
-      timeout: {}
+      activeTimeout: {}
     }
   },
 
@@ -27,6 +27,7 @@ export default {
     classes () {
       return {
         'snack': true,
+        'snack--active': this.isActive,
         'snack--bottom': this.bottom || !this.top,
         'snack--left': this.left,
         'snack--right': this.right,
@@ -43,23 +44,23 @@ export default {
     isActive () {
       clearTimeout(this.timeout)
 
-      if (this.isActive) {
-        this.timeout = setTimeout(() => (this.isActive = false), this.timeout)
+      if (this.isActive && this.timeout) {
+        this.activeTimeout = setTimeout(() => (this.isActive = false), this.timeout)
       }
     }
   },
 
   render (h) {
-    const content = h('div', {
-      'class': 'snack__content',
-      directives: [{
-        name: 'show',
-        value: this.isActive
-      }]
-    }, [this.$slots.default])
+    const children = []
+
+    if (this.isActive) {
+      children.push(h('div', {
+        'class': 'snack__content'
+      }, [this.$slots.default]))
+    }
 
     return h('div', {
       'class': this.classes
-    }, [h(this.computedTransition, {}, [content])])
+    }, [h(this.computedTransition, {}, children)])
   }
 }

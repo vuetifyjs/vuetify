@@ -59,14 +59,15 @@ $grid-columns := 12
 // Display
 // ============================================================
 $display-breakpoints := {
+  xs-only: "only screen and (max-width: %s)" % ($grid-breakpoints.sm - 1)
   sm-and-down: "only screen and (max-width: %s)" % ($grid-breakpoints.md - 1)
-  sm-and-up: "only screen and (min-width: (%s))" % $grid-breakpoints.md
+  sm-and-up: "only screen and (min-width: (%s))" % $grid-breakpoints.sm
   md-only: "only screen and (min-width: %s) and (max-width: %s)" % $grid-breakpoints.md ($grid-breakpoints.lg  - 1)
   md-and-down: "only screen and (max-width: %s )" % ($grid-breakpoints.lg - 1)
-  md-and-up: "only screen and (min-width: %s)" % $grid-breakpoints.lg
+  md-and-up: "only screen and (min-width: %s)" % $grid-breakpoints.md
   lg-only: "only screen and (min-width: %s) and (max-width: %s)" % $grid-breakpoints.lg ($grid-breakpoints.xl - 1)
   lg-and-down: "only screen and (max-width: (%s - 1))" % $grid-breakpoints.xl
-  lg-and-up: "only screen and (min-width: %s)" % $grid-breakpoints.xl
+  lg-and-up: "only screen and (min-width: %s)" % $grid-breakpoints.lg
 }
 
 
@@ -228,6 +229,8 @@ $chip-removeable-padding := 0 4px 0 12px
 $chip-outline-background := transparent !important
 $chip-outline-color := $grey.base
 $chip-height := 32px
+$chip-margin := 8px
+$chip-small-height := 26px
 
 // Collapsible
 $collapsible-collapse-height := 3rem
@@ -384,5 +387,5 @@ $input-padding-bottom := 8px
 // Ripple animation
 $ripple-container-color := currentColor
 $ripple-animation-background := currentColor
-$ripple-animation-transition := 1s transform $transition.linear-out-slow-in, .3s opacity cubic-bezier(.2, .4, .4, .1)
-$ripple-animation-visible-opacity := .3
+$ripple-animation-transition := .4s $transition.linear-out-slow-in
+$ripple-animation-visible-opacity := .15

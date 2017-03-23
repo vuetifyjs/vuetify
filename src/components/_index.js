@@ -1,5 +1,6 @@
 import Alerts from './alerts/index'
 import App from './app/index'
+import Avatars from './avatars/index'
 import Breadcrumbs from './breadcrumbs/index'
 import Buttons from './buttons/index'
 import Cards from './cards/index'
@@ -19,6 +20,7 @@ import Overlay from './overlay/index'
 import Pagination from './pagination/index'
 import Parallax from './parallax/index'
 import Progress from './progress/index'
+import Select from './selects/index'
 import Sidebar from './sidebar/index'
 import Slider from './sliders/index'
 import Subheader from './subheaders/index'
@@ -32,6 +34,7 @@ import BottomNav from './bottom-nav/index'
 export default Object.assign({},
   Alerts,
   App,
+  Avatars,
   Breadcrumbs,
   Buttons,
   Cards,
@@ -51,6 +54,7 @@ export default Object.assign({},
   Pagination,
   Parallax,
   Progress,
+  Select,
   Sidebar,
   Slider,
   Subheader,

@@ -34,6 +34,10 @@ export default {
     },
     round: Boolean,
     small: Boolean,
+    tag: {
+      type: String,
+      default: 'button'
+    },
     type: {
       type: String,
       default: 'button'
@@ -99,7 +103,10 @@ export default {
   render (h) {
     const { tag, data } = this.generateRouteLink()
     const children = []
-    data.type = this.type
+    
+    if (tag === 'button') {
+      data.attrs.type = this.type
+    }
 
     children.push(this.genContent(h))
 
