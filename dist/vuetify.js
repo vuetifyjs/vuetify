@@ -371,7 +371,7 @@ module.exports = function normalizeComponent (
     }
   },
 
-  created: function created () {
+  mounted: function mounted () {
     this.validate()
   },
 
@@ -393,12 +393,10 @@ module.exports = function normalizeComponent (
             this.persistentHint) &&
           this.errors.length === 0
       ) {
-        messages.push(this.genHint(h))
+        messages = [this.genHint(h)]
+      } else if (this.errors.length) {
+        messages = this.errors.map(function (i) { return this$1.genError(h, i); })
       }
-
-      this.errors.forEach(function (i) {
-        messages.push(this$1.genError(h, i))
-      })
 
       return h(
         'transition-group',
@@ -416,9 +414,7 @@ module.exports = function normalizeComponent (
     },
     genHint: function genHint (h) {
       return h('div', {
-        'class': {
-          'input-group__hint': true
-        },
+        'class': 'input-group__hint',
         key: this.hint
       }, this.hint)
     },
@@ -482,9 +478,7 @@ module.exports = function normalizeComponent (
         }, wrapperChildren)
       )
 
-      if (this.errors.length > 0 || this.hint) {
-        detailsChildren.push(this.genMessages(h))
-      }
+      detailsChildren.push(this.genMessages(h))
 
       if (this.counter) {
         detailsChildren.push(this.genCounter(h))
@@ -504,7 +498,9 @@ module.exports = function normalizeComponent (
       this.errors = []
 
       this.rules.forEach(function (rule) {
-        var valid = rule(this$1.value)
+        var valid = typeof rule === 'function'
+          ? rule(this$1.value)
+          : rule
 
         if (valid !== true) {
           this$1.errors.push(valid)
@@ -559,7 +555,11 @@ module.exports = function normalizeComponent (
         data.nativeOn = { click: this.click }
       } else {
         tag = this.tag || 'a'
-        data.attrs.href = this.href || 'javascript:;'
+        
+        if (tag === 'a') {
+          data.attrs.href = this.href || 'javascript:;'
+        }
+
         data.on = { click: this.click }
       }
 
@@ -853,7 +853,7 @@ var Avatar = {
   render: function render (h, context) {
     var children = context.children
     var data = {
-      'class': ("avatar " + (context.data.staticClass || ''))
+      'class': ("avatar " + (context.data.staticClass || '') + " " + (context.data.class || ''))
     }
 
     return h('div', data, children)
@@ -926,6 +926,10 @@ var Avatar = {
     },
     round: Boolean,
     small: Boolean,
+    tag: {
+      type: String,
+      default: 'button'
+    },
     type: {
       type: String,
       default: 'button'
@@ -993,7 +997,10 @@ var Avatar = {
     var tag = ref.tag;
     var data = ref.data;
     var children = []
-    data.type = this.type
+    
+    if (tag === 'button') {
+      data.attrs.type = this.type
+    }
 
     children.push(this.genContent(h))
 
@@ -1956,7 +1963,8 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
   data: function data () {
     return {
-      hasFocused: false
+      hasFocused: false,
+      inputHeight: null
     }
   },
 
@@ -1984,6 +1992,11 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
       return (min + " / " + (this.max))
     },
+    inputHeight: function inputHeight () {
+      if (!this.$refs.input) { return null }
+
+      return this.$refs.input.scrollHeight
+    },
     inputValue: {
       get: function get () {
         return this.value
@@ -2007,7 +2020,7 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
   },
 
   props: {
-    autocomplete: Boolean,
+    autofocus: Boolean,
     counter: Boolean,
     fullWidth: Boolean,
     min: {
@@ -2023,7 +2036,8 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
     type: {
       type: String,
       default: 'text'
-    }
+    },
+    name: String
   },
 
   watch: {
@@ -2038,12 +2052,27 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
     value: function value () {
       this.lazyValue = this.value
       this.validate()
+      this.calculateInputHeight()
     }
   },
 
+  mounted: function mounted () {
+    var this$1 = this;
+
+    this.$vuetify.load(function () {
+      this$1.calculateInputHeight()
+      this$1.autofocus && this$1.$refs.input.focus()
+    })
+  },
+
   methods: {
+    calculateInputHeight: function calculateInputHeight () {
+      this.inputHeight = this.$refs.input.scrollHeight
+    },
     isDirty: function isDirty () {
-      return this.lazyValue
+      return this.lazyValue !== null &&
+        typeof this.lazyValue !== 'undefined' &&
+        this.lazyValue.toString().length > 0
     },
     blur: function blur () {
       var this$1 = this;
@@ -2065,6 +2094,9 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
       var tag = this.multiLine ? 'textarea' : 'input'
 
       var inputData = {
+        style: {
+          'height': this.inputHeight && ((this.inputHeight) + "px")
+        },
         domProps: {
           autocomplete: this.autocomplete,
           disabled: this.disabled,
@@ -2077,6 +2109,10 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
           focus: function () { return (this$1.focused = true); }
         },
         ref: 'input'
+      }
+      // add only if set
+      if (this.name) {
+        inputData.attrs = { name: this.name }
       }
 
       if (this.multiLine) {
@@ -2223,7 +2259,7 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
   props: {
     dense: Boolean,
-    subHeader: Boolean,
+    subheader: Boolean,
     threeLine: Boolean,
     twoLine: Boolean
   },
@@ -2235,7 +2271,7 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
         'list--two-line': this.twoLine,
         'list--dense': this.dense,
         'list--three-line': this.threeLine,
-        'list--subheader': this.subHeader
+        'list--subheader': this.subheader
       }
     }
   },
@@ -2331,15 +2367,16 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
   watch: {
     isActive: function isActive () {
       this.booted = true
-      this.$emit('input', this.isActive)
 
       if (!this.isActive) {
         this.list.listClose(this._uid)
       }
     },
     '$route': function $route (to) {
-      if (this.group) {
-        this.isActive = this.matchRoute(to.path)
+      this.isActive = this.matchRoute(to.path)
+
+      if (this.group && this.isActive) {
+        this.list.listClick(this._uid, true)
       }
     }
   },
@@ -2378,6 +2415,7 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
       __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* addOnceEventListener */])(el, 'transitionend', done)
     },
     matchRoute: function matchRoute (to) {
+      if (!this.group) { return false }
       return to.match(this.group) !== null
     }
   },
@@ -3304,7 +3342,10 @@ var Overlay = {
       type: [Number, String],
       default: 100
     },
-    step: [Number, String],
+    step: {
+      type: [Number, String],
+      default: 1
+    },
     thumbLabel: Boolean,
     value: [Number, String],
     vertical: Boolean
@@ -3317,7 +3358,7 @@ var Overlay = {
         'input-group--active': this.isActive,
         'input-group--dirty': this.inputValue > this.min,
         'input-group--disabled': this.disabled,
-        'input-group--ticks': this.step
+        'input-group--ticks': this.thumbLabel
       }
     },
     inputValue: {
@@ -3325,17 +3366,21 @@ var Overlay = {
         return this.value
       },
       set: function set (val) {
-        // Do not re-calc width if not needed, causes jump
-        if (val !== Math.round(this.inputWidth)) {
-          this.inputWidth = (100 * (val / this.max))
+        if (Math.ceil(val) !== Math.ceil(this.lazyValue)) {
+          this.inputWidth = this.calculateWidth(val)
         }
 
-        var value = Math.round(val)
+        var value = parseInt(val)
+        value = value < this.min ? this.min : value > this.max ? this.max : value
+        this.lazyValue = value
 
-        value = value < this.min ? 0 : value > this.max ? this.max : value
-
-        this.$emit('input', value)
+        if (value !== this.value) {
+          this.$emit('input', value)
+        }
       }
+    },
+    interval: function interval () {
+      return 100 / (this.max - this.min) * this.step
     },
     thumbContainerClasses: function thumbContainerClasses () {
       return {
@@ -3350,13 +3395,13 @@ var Overlay = {
     },
     tickContainerStyles: function tickContainerStyles () {
       return {
-        transform: ("translate3d(-" + (this.step) + "%, -50%, 0)")
+        transform: ("translate3d(-" + (this.interval) + "%, -50%, 0)")
       }
     },
     tickStyles: function tickStyles () {
       return {
-        backgroundSize: ((this.step) + "% 2px"),
-        transform: ("translate3d(" + (this.step) + "%, 0, 0)")
+        backgroundSize: ((this.interval) + "% 2px"),
+        transform: ("translate3d(" + (this.interval) + "%, 0, 0)")
       }
     },
     trackStyles: function trackStyles () {
@@ -3383,10 +3428,14 @@ var Overlay = {
 
   mounted: function mounted () {
     this.inputValue = this.value
+    this.inputWidth = this.calculateWidth(this.inputValue)
     this.app = document.querySelector('[data-app]')
   },
 
   methods: {
+    calculateWidth: function calculateWidth (val) {
+      return (val - this.min) / (this.max - this.min) * 100
+    },
     calculateScale: function calculateScale (scale) {
       if (scale < 0.02 && !this.thumbLabel) {
         return 0
@@ -3409,16 +3458,14 @@ var Overlay = {
       var ref = this.$refs.track.getBoundingClientRect();
       var offsetLeft = ref.left;
       var trackWidth = ref.width;
-      var ref$1 = this.$refs.thumb.getBoundingClientRect();
-      var thumbWidth = ref$1.width;
       var clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
       var left = (
-        ((clientX - offsetLeft - thumbWidth) / trackWidth) * 100
+        ((clientX - offsetLeft) / trackWidth) * 100
       )
 
       left = left < 0 ? 0 : left > 100 ? 100 : left
 
-      this.inputValue = this.max * (left / 100)
+      this.inputValue = this.min + ((left / 100) * (this.max - this.min))
     },
     sliderMove: function sliderMove (e) {
       if (!this.isActive) {
@@ -3459,7 +3506,7 @@ var Overlay = {
             ]
           }, [
             h('div', { 'class': 'slider__thumb--label' }, [
-              h('span', {}, this.inputValue)
+              h('span', {}, parseInt(this.inputValue))
             ])
           ])
         ])
@@ -3564,7 +3611,7 @@ var Overlay = {
 
       clearTimeout(this.timeout)
 
-      if (this.isActive) {
+      if (this.isActive && this.timeout) {
         this.activeTimeout = setTimeout(function () { return (this$1.isActive = false); }, this.timeout)
       }
     }
@@ -4440,6 +4487,7 @@ var ToolbarSideIcon = {
 
 
 var SlideXTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('slide-x-transition')
+var SlideXReverseTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('slide-x-reverse-transition')
 var SlideYTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('slide-y-transition')
 var SlideYReverseTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('slide-y-reverse-transition')
 var ScaleTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* createSimpleTransition */])('scale-transition')
@@ -4454,6 +4502,7 @@ var MenuTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_hel
 
 /* harmony default export */ exports["a"] = {
   SlideXTransition: SlideXTransition,
+  SlideXReverseTransition: SlideXReverseTransition,
   SlideYTransition: SlideYTransition,
   SlideYReverseTransition: SlideYReverseTransition,
   ScaleTransition: ScaleTransition,
@@ -6837,20 +6886,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }
   }, [_vm._t("activator")], 2) : _vm._e(), _c('v-overlay', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.isActive),
-      expression: "isActive"
-    }],
     class: _vm.overlayClasses,
-    domProps: {
-      "value": (_vm.isActive)
-    },
-    on: {
-      "input": function($event) {
-        _vm.isActive = $event
-      }
+    model: {
+      value: (_vm.isActive),
+      callback: function($$v) {
+        _vm.isActive = $$v
+      },
+      expression: "isActive"
     }
   }, [_c(_vm.computedTransition, {
     tag: "component",
@@ -7203,12 +7245,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "btn-dropdown",
     class: _vm.classes
   }, [_c('v-menu', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.isActive),
-      expression: "isActive"
-    }],
     attrs: {
       "auto": !_vm.overflow && !_vm.segmented && !_vm.editable,
       "right": !_vm.overflow && !_vm.segmented && !_vm.editable,
@@ -7218,21 +7254,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "open-on-click": !_vm.isActive,
       "bottom": "bottom"
     },
-    domProps: {
-      "value": (_vm.isActive)
-    },
-    on: {
-      "input": function($event) {
-        _vm.isActive = $event
-      }
+    model: {
+      value: (_vm.isActive),
+      callback: function($$v) {
+        _vm.isActive = $$v
+      },
+      expression: "isActive"
     }
   }, [_c('v-text-field', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.editableValue),
-      expression: "editableValue"
-    }],
     ref: "input",
     attrs: {
       "type": _vm.editable ? 'text' : 'button',
@@ -7242,24 +7271,25 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "single-line": "single-line",
       "append-icon": "arrow_drop_down"
     },
-    domProps: {
-      "value": (_vm.editableValue)
-    },
     on: {
       "focused": function($event) {
         _vm.isActive = arguments[0]
-      },
-      "input": function($event) {
-        _vm.editableValue = $event
       }
     },
     nativeOn: {
       "keyup": function($event) {
-        if (_vm._k($event.keyCode, "enter", 13)) { return; }
+        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
         _vm.updateValue(_vm.editableValue)
       }
     },
-    slot: "activator"
+    slot: "activator",
+    model: {
+      value: (_vm.editableValue),
+      callback: function($$v) {
+        _vm.editableValue = $$v
+      },
+      expression: "editableValue"
+    }
   }), _c('v-list', _vm._l((_vm.options), function(option, index) {
     return _c('v-list-item', [_c('v-list-tile', {
       class: {
