@@ -102,7 +102,7 @@ export default {
 
   mounted () {
     this.$vuetify.load(() => {
-      this.calculateInputHeight()
+      this.multiLine && this.calculateInputHeight()
       this.autofocus && this.$refs.input.focus()
     })
   },
