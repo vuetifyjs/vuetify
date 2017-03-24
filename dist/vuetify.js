@@ -200,40 +200,28 @@ function debounce (func, threshold, execAsap) {
 
 /***/ },
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 module.exports = function normalizeComponent (
-  name,
-  scriptExports,
+  rawScriptExports,
   compiledTemplate,
   scopeId,
   cssModules
 ) {
-  scriptExports = scriptExports || {}
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
 
   // ES6 modules interop
-  var type = typeof scriptExports.default
+  var type = typeof rawScriptExports.default
   if (type === 'object' || type === 'function') {
-    // check named exports
-    if (false) {
-      if (Object.keys(scriptExports).some(function (key) {
-        return key !== 'default' && key !== '__esModule'
-      })) {
-        console.error('named exports are not supported in *.vue files.')
-      }
-    }
-    scriptExports = scriptExports.default
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
   }
 
   // Vue.extend constructor export interop
   var options = typeof scriptExports === 'function'
     ? scriptExports.options
     : scriptExports
-
-  // default name option based on filename
-  if (options.name == null) {
-    options.name = name
-  }
 
   // render functions
   if (compiledTemplate) {
@@ -256,6 +244,7 @@ module.exports = function normalizeComponent (
   }
 
   return {
+    esModule: esModule,
     exports: scriptExports,
     options: options
   }
@@ -300,11 +289,8 @@ module.exports = function normalizeComponent (
     return {
       errors: [],
       focused: false,
-      lazyValue: this.value,
-      appendIconAlt: '',
-      prependIconAlt: '',
-      appendIconCbPrivate: null,
-      prependIconCbPrivate: null
+      tabFocused: false,
+      lazyValue: this.value
     }
   },
 
@@ -327,6 +313,9 @@ module.exports = function normalizeComponent (
       type: Array,
       default: function () { return []; }
     },
+    tabindex: {
+      default: 0
+    },
     value: {
       required: false
     }
@@ -340,6 +329,7 @@ module.exports = function normalizeComponent (
       return Object.assign({
         'input-group': true,
         'input-group--focused': this.focused,
+        'input-group--tab-focused': this.tabFocused,
         'input-group--dirty': this.isDirty(),
         'input-group--disabled': this.disabled,
         'input-group--light': this.light && !this.dark,
@@ -376,6 +366,7 @@ module.exports = function normalizeComponent (
   },
 
   methods: {
+    toggle: function toggle () {},
     isDirty: function isDirty () {
       return this.inputValue
     },
@@ -448,15 +439,29 @@ module.exports = function normalizeComponent (
       )
     },
     genInputGroup: function genInputGroup (h, input, data) {
+      var this$1 = this;
       if ( data === void 0 ) data = {};
 
       var children = []
       var wrapperChildren = []
       var detailsChildren = []
 
-      data = Object.assign(data, {
-        'class': this.inputGroupClasses
-      })
+      data = Object.assign({}, {
+        'class': this.inputGroupClasses,
+        attrs: {
+          tabindex: this.tabindex
+        },
+        on: {
+          focus: function () { return (this$1.tabFocused = true); },
+          blur: function () { return (this$1.tabFocused = false); },
+          click: function () { return (this$1.tabFocused = false); },
+          keyup: function (e) {
+            if (e.keyCode === 13) {
+              this$1.toggle()
+            }
+          }
+        }
+      }, data)
 
       if (this.label) {
         children.push(this.genLabel(h))
@@ -2021,6 +2026,7 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
   props: {
     autofocus: Boolean,
+    autoGrow: Boolean,
     counter: Boolean,
     fullWidth: Boolean,
     min: {
@@ -2037,7 +2043,10 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
       type: String,
       default: 'text'
     },
-    name: String
+    name: String,
+    rows: {
+      default: 5
+    }
   },
 
   watch: {
@@ -2052,7 +2061,7 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
     value: function value () {
       this.lazyValue = this.value
       this.validate()
-      this.calculateInputHeight()
+      this.multiLine && this.autoGrow && this.calculateInputHeight()
     }
   },
 
@@ -2060,7 +2069,7 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
     var this$1 = this;
 
     this.$vuetify.load(function () {
-      this$1.multiLine && this$1.calculateInputHeight()
+      this$1.multiLine && this$1.autoGrow && this$1.calculateInputHeight()
       this$1.autofocus && this$1.$refs.input.focus()
     })
   },
@@ -2103,6 +2112,9 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
           required: this.required,
           value: this.lazyValue
         },
+        attrs: {
+          tabindex: this.tabindex
+        },
         on: {
           blur: this.blur,
           input: function (e) { return (this$1.inputValue = e.target.value); },
@@ -2116,7 +2128,7 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
       }
 
       if (this.multiLine) {
-        inputData.domProps.rows = 5
+        inputData.domProps.rows = this.rows
       } else {
         inputData.domProps.type = this.type
       }
@@ -2140,7 +2152,11 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
   },
 
   render: function render (h) {
-    return this.genInputGroup(h, this.genInput(h))
+    return this.genInputGroup(h, this.genInput(h), {
+      attrs: {
+        tabindex: -1
+      }
+    })
   }
 };
 
@@ -2186,8 +2202,27 @@ var Col = {
     var children = ref.children;
 
     data.staticClass = data.staticClass ? ("col " + (data.staticClass)) : 'col'
-    data.staticClass += " " + (Object.keys(data.attrs).join(' '))
-    delete data.attrs
+    if (data.attrs) {
+      data.staticClass += " " + (Object.keys(data.attrs).join(' '))
+      delete data.attrs
+    }
+
+    return h('div', data, children)
+  }
+}
+
+var Layout = {
+  functional: true,
+
+  render: function (h, ref) {
+    var data = ref.data;
+    var children = ref.children;
+
+    data.staticClass = data.staticClass ? ("layout " + (data.staticClass)) : 'layout'
+    if (data.attrs) {
+      data.staticClass += " " + (Object.keys(data.attrs).join(' '))
+      delete data.attrs
+    }
 
     return h('div', data, children)
   }
@@ -2213,8 +2248,26 @@ var Container = {
   }
 }
 
-var Content = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('content')
-var Row = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('row')
+var Content = {
+  functional: true,
+
+  render: function render (h, ref) {
+    var data = ref.data;
+    var children = ref.children;
+
+    var staticClass = data.staticClass ? ("content " + (data.staticClass)) : 'content'
+
+    if (data.attrs && typeof data.attrs.disableScroll !== 'undefined') {
+      staticClass += ' no-scroll-y'
+      data.attrs.disableScroll = undefined
+    }
+
+    data.staticClass = staticClass
+
+    return h('div', data, children)
+  }
+}
+
 var ColSpacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('col--spacer')
 var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('spacer')
 
@@ -2224,7 +2277,7 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
   Container: Container,
   Content: Content,
   Spacer: Spacer,
-  Row: Row
+  Layout: Layout
 };
 
 
@@ -4894,26 +4947,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 /* harmony default export */ exports["default"] = {
   props: {
-    footer: Boolean,
-
     leftFixedSidebar: Boolean,
-
     leftSidebar: Boolean,
-
     id: {
       type: String,
       default: 'app'
     },
-
     rightFixedSidebar: Boolean,
-
     rightSidebar: Boolean,
-
-    topFixedToolbar: Boolean,
-
-    topToolbar: Boolean,
-
-    sidebarUnderToolbar: Boolean
+    sidebarUnderToolbar: Boolean,
+    column: {
+      type: Boolean,
+      default: true
+    }
   },
 
   computed: {
@@ -4921,12 +4967,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
       return {
         'left-fixed-sidebar': this.leftFixedSidebar,
         'left-sidebar': this.leftSidebar,
-        'bottom-footer': this.footer,
         'right-fixed-sidebar': this.rightFixedSidebar,
         'right-sidebar': this.rightSidebar,
-        'top-fixed-toolbar': this.topFixedToolbar,
-        'top-toolbar': this.topToolbar,
-        'sidebar-under-toolbar': this.sidebarUnderToolbar
+        'sidebar-under-toolbar': this.sidebarUnderToolbar,
+        'layout-column': this.column
       }
     }
   }
@@ -6354,22 +6398,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ exports["default"] = {
-  name: 'toolbar',
-
-  props: {
-    fixed: Boolean
-  },
-
-  computed: {
-    classes: function classes () {
-      return {
-        'toolbar--fixed': this.fixed
-      }
-    }
-  }
+  name: 'toolbar'
 };
 
 
@@ -6378,12 +6409,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "Alert",
   /* script */
   __webpack_require__(69),
   /* template */
-  __webpack_require__(114),
+  __webpack_require__(116),
   /* scopeId */
   null,
   /* cssModules */
@@ -6398,12 +6427,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "App",
   /* script */
   __webpack_require__(70),
   /* template */
-  __webpack_require__(122),
+  __webpack_require__(124),
   /* scopeId */
   null,
   /* cssModules */
@@ -6418,12 +6445,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "Breadcrumbs",
   /* script */
   __webpack_require__(71),
   /* template */
-  __webpack_require__(113),
+  __webpack_require__(117),
   /* scopeId */
   null,
   /* cssModules */
@@ -6438,12 +6463,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "BreadcrumbsItem",
   /* script */
   __webpack_require__(72),
   /* template */
-  __webpack_require__(121),
+  __webpack_require__(113),
   /* scopeId */
   null,
   /* cssModules */
@@ -6458,12 +6481,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "ButtonDropdown",
   /* script */
   __webpack_require__(73),
   /* template */
-  __webpack_require__(111),
+  __webpack_require__(108),
   /* scopeId */
   null,
   /* cssModules */
@@ -6478,12 +6499,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "ButtonToggle",
   /* script */
   __webpack_require__(74),
   /* template */
-  __webpack_require__(119),
+  __webpack_require__(125),
   /* scopeId */
   null,
   /* cssModules */
@@ -6498,12 +6517,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "Card",
   /* script */
   __webpack_require__(75),
   /* template */
-  __webpack_require__(112),
+  __webpack_require__(119),
   /* scopeId */
   null,
   /* cssModules */
@@ -6518,12 +6535,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "CardRow",
   /* script */
   __webpack_require__(76),
   /* template */
-  __webpack_require__(125),
+  __webpack_require__(107),
   /* scopeId */
   null,
   /* cssModules */
@@ -6538,12 +6553,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "Carousel",
   /* script */
   __webpack_require__(77),
   /* template */
-  __webpack_require__(117),
+  __webpack_require__(112),
   /* scopeId */
   null,
   /* cssModules */
@@ -6558,12 +6571,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "CarouselItem",
   /* script */
   __webpack_require__(78),
   /* template */
-  __webpack_require__(124),
+  __webpack_require__(111),
   /* scopeId */
   null,
   /* cssModules */
@@ -6578,12 +6589,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "ExpansionPanel",
   /* script */
   __webpack_require__(79),
   /* template */
-  __webpack_require__(116),
+  __webpack_require__(115),
   /* scopeId */
   null,
   /* cssModules */
@@ -6598,12 +6607,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "ExpansionPanelContent",
   /* script */
   __webpack_require__(80),
   /* template */
-  __webpack_require__(120),
+  __webpack_require__(114),
   /* scopeId */
   null,
   /* cssModules */
@@ -6618,12 +6625,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "Icon",
   /* script */
   __webpack_require__(81),
   /* template */
-  __webpack_require__(110),
+  __webpack_require__(123),
   /* scopeId */
   null,
   /* cssModules */
@@ -6638,12 +6643,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "Modal",
   /* script */
   __webpack_require__(82),
   /* template */
-  __webpack_require__(107),
+  __webpack_require__(122),
   /* scopeId */
   null,
   /* cssModules */
@@ -6658,8 +6661,6 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "Pagination",
   /* script */
   __webpack_require__(83),
   /* template */
@@ -6678,12 +6679,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "Parallax",
   /* script */
   __webpack_require__(84),
   /* template */
-  __webpack_require__(108),
+  __webpack_require__(120),
   /* scopeId */
   null,
   /* cssModules */
@@ -6698,8 +6697,6 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "ProgressCircular",
   /* script */
   __webpack_require__(85),
   /* template */
@@ -6718,12 +6715,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "ProgressLinear",
   /* script */
   __webpack_require__(86),
   /* template */
-  __webpack_require__(115),
+  __webpack_require__(121),
   /* scopeId */
   null,
   /* cssModules */
@@ -6738,12 +6733,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "Toolbar",
   /* script */
   __webpack_require__(87),
   /* template */
-  __webpack_require__(123),
+  __webpack_require__(110),
   /* scopeId */
   null,
   /* cssModules */
@@ -6759,129 +6752,14 @@ module.exports = Component.exports
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "modal__container"
-  }, [(_vm.$slots.activator) ? _c('div', {
-    ref: "activator",
-    staticClass: "modal__activator",
-    on: {
-      "click": function($event) {
-        _vm.isActive = !_vm.isActive
-      }
-    }
-  }, [_vm._t("activator")], 2) : _vm._e(), _c('v-overlay', {
-    class: _vm.overlayClasses,
-    model: {
-      value: (_vm.isActive),
-      callback: function($$v) {
-        _vm.isActive = $$v
-      },
-      expression: "isActive"
-    }
-  }, [_c(_vm.computedTransition, {
-    tag: "component",
-    attrs: {
-      "origin": _vm.computedOrigin
-    }
-  }, [_c('div', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.isActive),
-      expression: "isActive"
-    }, {
-      name: "click-outside",
-      rawName: "v-click-outside",
-      value: (_vm.closeConditional),
-      expression: "closeConditional"
-    }],
-    ref: "modal",
-    staticClass: "modal",
-    class: _vm.classes,
-    attrs: {
-      "id": _vm.id
-    }
-  }, [_vm._t("default")], 2)])], 1)], 1)
-},staticRenderFns: []}
-
-/***/ },
-/* 108 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "parallax",
-    style: ({
-      minHeight: this.normalizedHeight + 'px'
-    })
-  }, [_c('div', {
-    staticClass: "parallax__image-container"
-  }, [_c('img', {
-    ref: "img",
-    staticClass: "parallax__image",
-    style: (_vm.styles),
-    attrs: {
-      "src": _vm.src
-    }
-  }), _vm._t("default")], 2)])
-},staticRenderFns: []}
-
-/***/ },
-/* 109 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "progress-circular",
+    staticClass: "card__row",
     class: _vm.classes,
     style: (_vm.styles)
-  }, [_c('svg', {
-    style: (_vm.svgStyles),
-    attrs: {
-      "xmlns": "http://www.w3.org/2000/svg",
-      "height": _vm.svgSize,
-      "width": _vm.svgSize,
-      "viewBox": _vm.viewBox
-    }
-  }, [(!_vm.indeterminate) ? _c('circle', {
-    staticClass: "progress-circular__underlay",
-    attrs: {
-      "fill": "transparent",
-      "cx": _vm.cxy,
-      "cy": _vm.cxy,
-      "r": _vm.radius,
-      "stroke-width": _vm.width,
-      "stroke-dasharray": _vm.strokeDashArray,
-      "stroke-dashoffset": 0
-    }
-  }) : _vm._e(), _c('circle', {
-    staticClass: "progress-circular__overlay",
-    attrs: {
-      "fill": _vm.fill,
-      "cx": _vm.cxy,
-      "cy": _vm.cxy,
-      "r": _vm.radius,
-      "stroke-width": _vm.width,
-      "stroke-dasharray": _vm.strokeDashArray,
-      "stroke-dashoffset": _vm.strokeDashOffset
-    }
-  })]), _c('div', {
-    staticClass: "progress-circular__info"
-  }, [_vm._t("default")], 2)])
-},staticRenderFns: []}
-
-/***/ },
-/* 110 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('i', {
-    staticClass: "material-icons icon",
-    class: _vm.classes
   }, [_vm._t("default")], 2)
 },staticRenderFns: []}
 
 /***/ },
-/* 111 */
+/* 108 */
 /***/ function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -6949,101 +6827,83 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },staticRenderFns: []}
 
 /***/ },
-/* 112 */
+/* 109 */
 /***/ function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "card",
+    staticClass: "progress-circular",
     class: _vm.classes,
     style: (_vm.styles)
-  }, [_vm._t("default")], 2)
-},staticRenderFns: []}
-
-/***/ },
-/* 113 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('ul', {
-    staticClass: "breadcrumbs",
-    class: _vm.classes,
+  }, [_c('svg', {
+    style: (_vm.svgStyles),
     attrs: {
-      "items": _vm.items
+      "xmlns": "http://www.w3.org/2000/svg",
+      "height": _vm.svgSize,
+      "width": _vm.svgSize,
+      "viewBox": _vm.viewBox
     }
+  }, [(!_vm.indeterminate) ? _c('circle', {
+    staticClass: "progress-circular__underlay",
+    attrs: {
+      "fill": "transparent",
+      "cx": _vm.cxy,
+      "cy": _vm.cxy,
+      "r": _vm.radius,
+      "stroke-width": _vm.width,
+      "stroke-dasharray": _vm.strokeDashArray,
+      "stroke-dashoffset": 0
+    }
+  }) : _vm._e(), _c('circle', {
+    staticClass: "progress-circular__overlay",
+    attrs: {
+      "fill": _vm.fill,
+      "cx": _vm.cxy,
+      "cy": _vm.cxy,
+      "r": _vm.radius,
+      "stroke-width": _vm.width,
+      "stroke-dasharray": _vm.strokeDashArray,
+      "stroke-dashoffset": _vm.strokeDashOffset
+    }
+  })]), _c('div', {
+    staticClass: "progress-circular__info"
+  }, [_vm._t("default")], 2)])
+},staticRenderFns: []}
+
+/***/ },
+/* 110 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('nav', {
+    staticClass: "toolbar"
   }, [_vm._t("default")], 2)
 },staticRenderFns: []}
 
 /***/ },
-/* 114 */
+/* 111 */
 /***/ function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
+  return _c(_vm.computedTransition, {
+    tag: "component"
+  }, [_c('div', {
     directives: [{
       name: "show",
       rawName: "v-show",
-      value: (_vm.isActive),
-      expression: "isActive"
+      value: (_vm.active),
+      expression: "active"
     }],
-    staticClass: "alert",
-    class: _vm.classes
-  }, [(!_vm.hideIcon) ? _c('v-icon', {
-    staticClass: "alert__icon"
-  }, [_vm._v(_vm._s(_vm.mdIcon))]) : _vm._e(), _c('div', [_vm._t("default")], 2), (_vm.dismissible) ? _c('a', {
-    staticClass: "alert__dismissible",
-    attrs: {
-      "href": "#!"
+    staticClass: "carousel__item",
+    class: {
+      'reverse': _vm.reverse
     },
-    on: {
-      "click": function($event) {
-        $event.preventDefault();
-        _vm.$emit('input', false)
-      }
-    }
-  }, [_c('v-icon', {
-    attrs: {
-      "right": "right"
-    }
-  }, [_vm._v("cancel")])], 1) : _vm._e()], 1)
-},staticRenderFns: []}
-
-/***/ },
-/* 115 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "progress-linear",
-    class: _vm.classes,
-    style: ({
-      height: _vm.height + 'px'
-    })
-  }, [_c('div', {
-    staticClass: "progress-linear__bar",
     style: (_vm.styles)
-  }, [_c('v-fade-transition', [(_vm.indeterminate) ? _c('div', {
-    staticClass: "progress-linear__bar__indeterminate"
-  }) : _vm._e()]), _c('v-slide-x-transition', [(!_vm.indeterminate) ? _c('div', {
-    staticClass: "progress-linear__bar__determinate",
-    style: ({
-      width: _vm.value + '%'
-    })
-  }) : _vm._e()])], 1)])
+  }, [_vm._t("default")], 2)])
 },staticRenderFns: []}
 
 /***/ },
-/* 116 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('ul', {
-    staticClass: "expansion-panel"
-  }, [_vm._t("default")], 2)
-},staticRenderFns: []}
-
-/***/ },
-/* 117 */
+/* 112 */
 /***/ function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -7092,6 +6952,121 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }, [_c('v-icon', [_vm._v(_vm._s(_vm.icon))])], 1)
   })), _vm._t("default")], 2)
+},staticRenderFns: []}
+
+/***/ },
+/* 113 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('li', [_c('a', {
+    staticClass: "breadcrumbs__item",
+    class: _vm.classes,
+    attrs: {
+      "href": _vm.href,
+      "target": _vm.target
+    }
+  }, [_vm._t("default")], 2)])
+},staticRenderFns: []}
+
+/***/ },
+/* 114 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('li', [(_vm.$slots.header) ? _c('div', {
+    directives: [{
+      name: "click-outside",
+      rawName: "v-click-outside",
+      value: (_vm.closeConditional),
+      expression: "closeConditional"
+    }, {
+      name: "ripple",
+      rawName: "v-ripple",
+      value: (_vm.ripple),
+      expression: "ripple"
+    }],
+    staticClass: "expansion-panel__header",
+    class: _vm.classes,
+    on: {
+      "click": function($event) {
+        _vm.isActive = !_vm.isActive
+      }
+    }
+  }, [_vm._t("header")], 2) : _vm._e(), _c('transition', {
+    on: {
+      "enter": _vm.enter,
+      "after-enter": _vm.afterEnter,
+      "leave": _vm.leave
+    }
+  }, [_c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.isActive),
+      expression: "isActive"
+    }],
+    ref: "body",
+    staticClass: "expansion-panel__body"
+  }, [_vm._t("default")], 2)])], 1)
+},staticRenderFns: []}
+
+/***/ },
+/* 115 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('ul', {
+    staticClass: "expansion-panel"
+  }, [_vm._t("default")], 2)
+},staticRenderFns: []}
+
+/***/ },
+/* 116 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.isActive),
+      expression: "isActive"
+    }],
+    staticClass: "alert",
+    class: _vm.classes
+  }, [(!_vm.hideIcon) ? _c('v-icon', {
+    staticClass: "alert__icon"
+  }, [_vm._v(_vm._s(_vm.mdIcon))]) : _vm._e(), _c('div', [_vm._t("default")], 2), (_vm.dismissible) ? _c('a', {
+    staticClass: "alert__dismissible",
+    attrs: {
+      "href": "#!"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.$emit('input', false)
+      }
+    }
+  }, [_c('v-icon', {
+    attrs: {
+      "right": "right"
+    }
+  }, [_vm._v("cancel")])], 1) : _vm._e()], 1)
+},staticRenderFns: []}
+
+/***/ },
+/* 117 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('ul', {
+    staticClass: "breadcrumbs",
+    class: _vm.classes,
+    attrs: {
+      "items": _vm.items
+    }
+  }, [_vm._t("default")], 2)
 },staticRenderFns: []}
 
 /***/ },
@@ -7163,6 +7138,140 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
+    staticClass: "card",
+    class: _vm.classes,
+    style: (_vm.styles)
+  }, [_vm._t("default")], 2)
+},staticRenderFns: []}
+
+/***/ },
+/* 120 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "parallax",
+    style: ({
+      minHeight: this.normalizedHeight + 'px'
+    })
+  }, [_c('div', {
+    staticClass: "parallax__image-container"
+  }, [_c('img', {
+    ref: "img",
+    staticClass: "parallax__image",
+    style: (_vm.styles),
+    attrs: {
+      "src": _vm.src
+    }
+  }), _vm._t("default")], 2)])
+},staticRenderFns: []}
+
+/***/ },
+/* 121 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "progress-linear",
+    class: _vm.classes,
+    style: ({
+      height: _vm.height + 'px'
+    })
+  }, [_c('div', {
+    staticClass: "progress-linear__bar",
+    style: (_vm.styles)
+  }, [_c('v-fade-transition', [(_vm.indeterminate) ? _c('div', {
+    staticClass: "progress-linear__bar__indeterminate"
+  }) : _vm._e()]), _c('v-slide-x-transition', [(!_vm.indeterminate) ? _c('div', {
+    staticClass: "progress-linear__bar__determinate",
+    style: ({
+      width: _vm.value + '%'
+    })
+  }) : _vm._e()])], 1)])
+},staticRenderFns: []}
+
+/***/ },
+/* 122 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "modal__container"
+  }, [(_vm.$slots.activator) ? _c('div', {
+    ref: "activator",
+    staticClass: "modal__activator",
+    on: {
+      "click": function($event) {
+        _vm.isActive = !_vm.isActive
+      }
+    }
+  }, [_vm._t("activator")], 2) : _vm._e(), _c('v-overlay', {
+    class: _vm.overlayClasses,
+    model: {
+      value: (_vm.isActive),
+      callback: function($$v) {
+        _vm.isActive = $$v
+      },
+      expression: "isActive"
+    }
+  }, [_c(_vm.computedTransition, {
+    tag: "component",
+    attrs: {
+      "origin": _vm.computedOrigin
+    }
+  }, [_c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.isActive),
+      expression: "isActive"
+    }, {
+      name: "click-outside",
+      rawName: "v-click-outside",
+      value: (_vm.closeConditional),
+      expression: "closeConditional"
+    }],
+    ref: "modal",
+    staticClass: "modal",
+    class: _vm.classes,
+    attrs: {
+      "id": _vm.id
+    }
+  }, [_vm._t("default")], 2)])], 1)], 1)
+},staticRenderFns: []}
+
+/***/ },
+/* 123 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('i', {
+    staticClass: "material-icons icon",
+    class: _vm.classes
+  }, [_vm._t("default")], 2)
+},staticRenderFns: []}
+
+/***/ },
+/* 124 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "with",
+    class: _vm.classes,
+    attrs: {
+      "id": _vm.id,
+      "data-app": "data-app"
+    }
+  }, [_vm._t("default")], 2)
+},staticRenderFns: []}
+
+/***/ },
+/* 125 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
     staticClass: "btn-toggle",
     class: _vm.classes
   }, _vm._l((_vm.options), function(option, index) {
@@ -7185,123 +7294,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }) : _vm._e(), (option.icon) ? _c('v-icon', [_vm._v(_vm._s(option.icon))]) : _vm._e()], 1)
   }))
-},staticRenderFns: []}
-
-/***/ },
-/* 120 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', [(_vm.$slots.header) ? _c('div', {
-    directives: [{
-      name: "click-outside",
-      rawName: "v-click-outside",
-      value: (_vm.closeConditional),
-      expression: "closeConditional"
-    }, {
-      name: "ripple",
-      rawName: "v-ripple",
-      value: (_vm.ripple),
-      expression: "ripple"
-    }],
-    staticClass: "expansion-panel__header",
-    class: _vm.classes,
-    on: {
-      "click": function($event) {
-        _vm.isActive = !_vm.isActive
-      }
-    }
-  }, [_vm._t("header")], 2) : _vm._e(), _c('transition', {
-    on: {
-      "enter": _vm.enter,
-      "after-enter": _vm.afterEnter,
-      "leave": _vm.leave
-    }
-  }, [_c('div', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.isActive),
-      expression: "isActive"
-    }],
-    ref: "body",
-    staticClass: "expansion-panel__body"
-  }, [_vm._t("default")], 2)])], 1)
-},staticRenderFns: []}
-
-/***/ },
-/* 121 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', [_c('a', {
-    staticClass: "breadcrumbs__item",
-    class: _vm.classes,
-    attrs: {
-      "href": _vm.href,
-      "target": _vm.target
-    }
-  }, [_vm._t("default")], 2)])
-},staticRenderFns: []}
-
-/***/ },
-/* 122 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "with",
-    class: _vm.classes,
-    attrs: {
-      "id": _vm.id,
-      "data-app": "data-app"
-    }
-  }, [_vm._t("default")], 2)
-},staticRenderFns: []}
-
-/***/ },
-/* 123 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('nav', {
-    staticClass: "toolbar",
-    class: _vm.classes
-  }, [_vm._t("default")], 2)
-},staticRenderFns: []}
-
-/***/ },
-/* 124 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c(_vm.computedTransition, {
-    tag: "component"
-  }, [_c('div', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.active),
-      expression: "active"
-    }],
-    staticClass: "carousel__item",
-    class: {
-      'reverse': _vm.reverse
-    },
-    style: (_vm.styles)
-  }, [_vm._t("default")], 2)])
-},staticRenderFns: []}
-
-/***/ },
-/* 125 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "card__row",
-    class: _vm.classes,
-    style: (_vm.styles)
-  }, [_vm._t("default")], 2)
 },staticRenderFns: []}
 
 /***/ },

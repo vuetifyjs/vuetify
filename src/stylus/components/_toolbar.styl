@@ -8,13 +8,13 @@
   padding: $toolbar-padding-y $toolbar-padding-x
   width: 100%
   @extend .z-depth-1
-  
+
   ul
     list-style: none
-    
+
   li
     height: 100%
-    
+
   i
     font-size: 24px
 
@@ -23,29 +23,23 @@
 
   .btn:not(.toolbar__side-icon)
     margin: 0 6px
-    
+
     &:first-child
       margin-left: -6px
-      
+
     &:last-child
       margin-right: 0
 
-  &--fixed
-    position: fixed
-    top: 0
-    left: 0
-    z-index: 4
-    
   &__sub
     flex: 1 0 100%
     padding: 24px 0 24px 72px
-    
+
   &__side-icon
     display: inline-flex
     align-items: center
     position: relative
     margin-left: 10px
-  
+
   &__logo
     color: #fff
     font-size: 3rem
@@ -54,16 +48,16 @@
     padding: 0
     display: flex
     align-items: center
-    
+
   &__title
     color: #fff
     font-size: $headings.h6.size
     flex: 1;
     padding: 0 16px
-    
+
     &:first-child
       padding-left: 2px
-  
+
   &__items
     list-style-type: none
     padding: 0
@@ -75,7 +69,7 @@
     > li
       display: flex
       align-items: center
-      
+
   &__item
     align-items: center
     color: #fff
@@ -85,13 +79,13 @@
     transition: all 0.3s ease-out
     position: relative
     height: 100%
-    
+
     i
       font-size: 2rem
-    
+
     &:hover, &--active
       background: rgba(#000,0.1)
-      
+
     &--disabled
       opacity: .5
       pointer-events: none
@@ -101,7 +95,7 @@
     background-color: inherit
     color: #fff
     height: 100%
-    
+
     .toolbar__items
       position: absolute
       top: 100%
@@ -114,24 +108,24 @@
       flex-wrap: wrap
       height: auto
       @extend .z-depth-1
-      
+
       li
         width: 100%
-        
+
       .toolbar__item
         padding: 1rem
         white-space: nowrap
         color: inherit
         font-weight: 500
         width: 100%
-        
+
         &:hover
           background-color: rgba(#fff,.2)
-        
+
     &-header
       @extend .toolbar__item
       padding-right: 45px
-      
+
       &:after
         content: '\E314'
         font-family: 'Material Icons'
