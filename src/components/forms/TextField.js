@@ -65,6 +65,7 @@ export default {
 
   props: {
     autofocus: Boolean,
+    autoGrow: Boolean,
     counter: Boolean,
     fullWidth: Boolean,
     min: {
@@ -81,7 +82,10 @@ export default {
       type: String,
       default: 'text'
     },
-    name: String
+    name: String,
+    rows: {
+      default: 5
+    }
   },
 
   watch: {
@@ -96,13 +100,13 @@ export default {
     value () {
       this.lazyValue = this.value
       this.validate()
-      this.calculateInputHeight()
+      this.multiLine && this.autoGrow && this.calculateInputHeight()
     }
   },
 
   mounted () {
     this.$vuetify.load(() => {
-      this.multiLine && this.calculateInputHeight()
+      this.multiLine && this.autoGrow && this.calculateInputHeight()
       this.autofocus && this.$refs.input.focus()
     })
   },
@@ -154,7 +158,7 @@ export default {
       }
 
       if (this.multiLine) {
-        inputData.domProps.rows = 5
+        inputData.domProps.rows = this.rows
       } else {
         inputData.domProps.type = this.type
       }
