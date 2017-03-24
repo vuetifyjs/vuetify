@@ -64,7 +64,8 @@ export default {
   },
 
   props: {
-    autocomplete: Boolean,
+    autofocus: Boolean,
+    autoGrow: Boolean,
     counter: Boolean,
     fullWidth: Boolean,
     min: {
@@ -81,7 +82,10 @@ export default {
       type: String,
       default: 'text'
     },
-    name: String
+    name: String,
+    rows: {
+      default: 5
+    }
   },
 
   watch: {
@@ -96,12 +100,15 @@ export default {
     value () {
       this.lazyValue = this.value
       this.validate()
-      this.calculateInputHeight()
+      this.multiLine && this.autoGrow && this.calculateInputHeight()
     }
   },
 
   mounted () {
-    this.$vuetify.load(this.calculateInputHeight)
+    this.$vuetify.load(() => {
+      this.multiLine && this.autoGrow && this.calculateInputHeight()
+      this.autofocus && this.$refs.input.focus()
+    })
   },
 
   methods: {
@@ -110,7 +117,7 @@ export default {
     },
     isDirty () {
       return this.lazyValue !== null &&
-        typeof this.lazyValue !== undefined &&
+        typeof this.lazyValue !== 'undefined' &&
         this.lazyValue.toString().length > 0
     },
     blur () {
@@ -138,6 +145,9 @@ export default {
           required: this.required,
           value: this.lazyValue
         },
+        attrs: {
+          tabindex: this.tabindex
+        },
         on: {
           blur: this.blur,
           input: e => (this.inputValue = e.target.value),
@@ -151,7 +161,7 @@ export default {
       }
 
       if (this.multiLine) {
-        inputData.domProps.rows = 5
+        inputData.domProps.rows = this.rows
       } else {
         inputData.domProps.type = this.type
       }
@@ -175,6 +185,10 @@ export default {
   },
 
   render (h) {
-    return this.genInputGroup(h, this.genInput(h))
+    return this.genInputGroup(h, this.genInput(h), {
+      attrs: {
+        tabindex: -1
+      }
+    })
   }
 }

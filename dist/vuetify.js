@@ -289,11 +289,8 @@ module.exports = function normalizeComponent (
     return {
       errors: [],
       focused: false,
-      lazyValue: this.value,
-      appendIconAlt: '',
-      prependIconAlt: '',
-      appendIconCbPrivate: null,
-      prependIconCbPrivate: null
+      tabFocused: false,
+      lazyValue: this.value
     }
   },
 
@@ -316,6 +313,9 @@ module.exports = function normalizeComponent (
       type: Array,
       default: function () { return []; }
     },
+    tabindex: {
+      default: 0
+    },
     value: {
       required: false
     }
@@ -329,6 +329,7 @@ module.exports = function normalizeComponent (
       return Object.assign({
         'input-group': true,
         'input-group--focused': this.focused,
+        'input-group--tab-focused': this.tabFocused,
         'input-group--dirty': this.isDirty(),
         'input-group--disabled': this.disabled,
         'input-group--light': this.light && !this.dark,
@@ -365,6 +366,7 @@ module.exports = function normalizeComponent (
   },
 
   methods: {
+    toggle: function toggle () {},
     isDirty: function isDirty () {
       return this.inputValue
     },
@@ -437,15 +439,29 @@ module.exports = function normalizeComponent (
       )
     },
     genInputGroup: function genInputGroup (h, input, data) {
+      var this$1 = this;
       if ( data === void 0 ) data = {};
 
       var children = []
       var wrapperChildren = []
       var detailsChildren = []
 
-      data = Object.assign(data, {
-        'class': this.inputGroupClasses
-      })
+      data = Object.assign({}, {
+        'class': this.inputGroupClasses,
+        attrs: {
+          tabindex: this.tabindex
+        },
+        on: {
+          focus: function () { return (this$1.tabFocused = true); },
+          blur: function () { return (this$1.tabFocused = false); },
+          click: function () { return (this$1.tabFocused = false); },
+          keyup: function (e) {
+            if (e.keyCode === 13) {
+              this$1.toggle()
+            }
+          }
+        }
+      }, data)
 
       if (this.label) {
         children.push(this.genLabel(h))
@@ -2009,7 +2025,8 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
   },
 
   props: {
-    autocomplete: Boolean,
+    autofocus: Boolean,
+    autoGrow: Boolean,
     counter: Boolean,
     fullWidth: Boolean,
     min: {
@@ -2026,7 +2043,10 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
       type: String,
       default: 'text'
     },
-    name: String
+    name: String,
+    rows: {
+      default: 5
+    }
   },
 
   watch: {
@@ -2041,12 +2061,17 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
     value: function value () {
       this.lazyValue = this.value
       this.validate()
-      this.calculateInputHeight()
+      this.multiLine && this.autoGrow && this.calculateInputHeight()
     }
   },
 
   mounted: function mounted () {
-    this.$vuetify.load(this.calculateInputHeight)
+    var this$1 = this;
+
+    this.$vuetify.load(function () {
+      this$1.multiLine && this$1.autoGrow && this$1.calculateInputHeight()
+      this$1.autofocus && this$1.$refs.input.focus()
+    })
   },
 
   methods: {
@@ -2055,7 +2080,7 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
     },
     isDirty: function isDirty () {
       return this.lazyValue !== null &&
-        typeof this.lazyValue !== undefined &&
+        typeof this.lazyValue !== 'undefined' &&
         this.lazyValue.toString().length > 0
     },
     blur: function blur () {
@@ -2087,6 +2112,9 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
           required: this.required,
           value: this.lazyValue
         },
+        attrs: {
+          tabindex: this.tabindex
+        },
         on: {
           blur: this.blur,
           input: function (e) { return (this$1.inputValue = e.target.value); },
@@ -2100,7 +2128,7 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
       }
 
       if (this.multiLine) {
-        inputData.domProps.rows = 5
+        inputData.domProps.rows = this.rows
       } else {
         inputData.domProps.type = this.type
       }
@@ -2124,7 +2152,11 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
   },
 
   render: function render (h) {
-    return this.genInputGroup(h, this.genInput(h))
+    return this.genInputGroup(h, this.genInput(h), {
+      attrs: {
+        tabindex: -1
+      }
+    })
   }
 };
 
@@ -2280,7 +2312,7 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
   props: {
     dense: Boolean,
-    subHeader: Boolean,
+    subheader: Boolean,
     threeLine: Boolean,
     twoLine: Boolean
   },
@@ -2292,7 +2324,7 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
         'list--two-line': this.twoLine,
         'list--dense': this.dense,
         'list--three-line': this.threeLine,
-        'list--subheader': this.subHeader
+        'list--subheader': this.subheader
       }
     }
   },
@@ -2394,8 +2426,10 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
       }
     },
     '$route': function $route (to) {
-      if (this.group) {
-        this.isActive = this.matchRoute(to.path)
+      this.isActive = this.matchRoute(to.path)
+
+      if (this.group && this.isActive) {
+        this.list.listClick(this._uid, true)
       }
     }
   },
@@ -2434,6 +2468,7 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
       __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* addOnceEventListener */])(el, 'transitionend', done)
     },
     matchRoute: function matchRoute (to) {
+      if (!this.group) { return false }
       return to.match(this.group) !== null
     }
   },
