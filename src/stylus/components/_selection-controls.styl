@@ -39,6 +39,20 @@
   transform-origin: center center
   top: 50%
   left: 0
+  
+  &:before
+    content: ''
+    position: absolute
+    width: 36px
+    height: 36px
+    background: currentColor
+    border-radius: 50%
+    left: 50%
+    top: 50%
+    transform: translate3d(-50%, -50%, 0) scale(.3)
+    opacity: 0
+    transition: $ripple-animation-transition
+    transform-origin: center center
 
 
 /** Switch */
@@ -90,7 +104,15 @@
       
     label
       margin-left: 44px
-      
+
+/** Radio */
+.input-group--selection-controls
+  &.input-group--tab-focused
+    .input-group--selection-controls__ripple
+      &:before
+        transform: translate3d(-50%, -50%, 0) scale(1)
+        opacity: $ripple-animation-visible-opacity
+
 /* Theme */
 .input-group--selection-controls
   &.switch

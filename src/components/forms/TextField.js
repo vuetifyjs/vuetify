@@ -145,6 +145,9 @@ export default {
           required: this.required,
           value: this.lazyValue
         },
+        attrs: {
+          tabindex: this.tabindex
+        },
         on: {
           blur: this.blur,
           input: e => (this.inputValue = e.target.value),
@@ -182,6 +185,10 @@ export default {
   },
 
   render (h) {
-    return this.genInputGroup(h, this.genInput(h))
+    return this.genInputGroup(h, this.genInput(h), {
+      attrs: {
+        tabindex: -1
+      }
+    })
   }
 }
