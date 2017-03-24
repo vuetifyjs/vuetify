@@ -3,11 +3,8 @@ export default {
     return {
       errors: [],
       focused: false,
-      lazyValue: this.value,
-      appendIconAlt: '',
-      prependIconAlt: '',
-      appendIconCbPrivate: null,
-      prependIconCbPrivate: null
+      tabFocused: false,
+      lazyValue: this.value
     }
   },
 
@@ -30,6 +27,9 @@ export default {
       type: Array,
       default: () => []
     },
+    tabindex: {
+      default: 0
+    },
     value: {
       required: false
     }
@@ -44,6 +44,7 @@ export default {
         'input-group': true,
         'input-group--focused': this.focused,
         'input-group--dirty': this.isDirty,
+        'input-group--tab-focused': this.tabFocused,
         'input-group--disabled': this.disabled,
         'input-group--light': this.light && !this.dark,
         'input-group--dark': this.dark,
@@ -84,6 +85,10 @@ export default {
   methods: {
     genLabel () {
       return this.$createElement('label', {}, this.label)
+    },
+    toggle () {},
+    isDirty () {
+      return this.inputValue
     },
     genMessages () {
       let messages = []
@@ -153,9 +158,22 @@ export default {
       const wrapperChildren = []
       const detailsChildren = []
 
-      data = Object.assign(data, {
-        'class': this.inputGroupClasses
-      })
+      data = Object.assign({}, {
+        'class': this.inputGroupClasses,
+        attrs: {
+          tabindex: this.tabindex
+        },
+        on: {
+          focus: () => (this.tabFocused = true),
+          blur: () => (this.tabFocused = false),
+          click: () => (this.tabFocused = false),
+          keyup: e => {
+            if (e.keyCode === 13) {
+              this.toggle()
+            }
+          }
+        }
+      }, data)
 
       if (this.label) {
         children.push(this.genLabel())
