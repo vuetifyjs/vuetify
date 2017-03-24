@@ -3,6 +3,8 @@ html, body
   min-height: 100%
   overflow: hidden
   position: relative
+  max-height: 100%
+  max-width: 100%
 
 .with
   -webkit-backface-visibility: hidden
@@ -15,8 +17,7 @@ html, body
       @media screen and (max-width: ($grid-breakpoints.lg - 1))
         padding-left: $toolbar-padding-x
 
-    main,
-    > footer
+    main, > footer
       padding-left: $sidebar-width
       transition: $primary-transition
 
