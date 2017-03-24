@@ -98,11 +98,17 @@ elevation-24dp = 0 11px 15px -7px rgba(0,0,0, shadow-key-umbra-opacity),
                  0 24px 38px 3px rgba(0,0,0, shadow-key-penumbra-opacity),
                  0 9px 46px 8px rgba(0,0,0, shadow-ambient-shadow-opacity)
 
-// MIXIN
-elevation(z)
-  box-shadow: elevation-+z+dp
+// MIXINS
+elevation($z)
+  box-shadow: elevation-+$z+dp
+
+elevationTransition($duration = 280ms, $easing = cubic-bezier(.4, 0, .2, 1))
+  transition: box-shadow $duration $easing
+  will-change: box-shadow
+
 
 // GENERATE HELPER CLASSES
 for z in (1..24)
     .elevation-{z}dp
       elevation(z)
+
