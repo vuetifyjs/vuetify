@@ -1,6 +1,4 @@
 export default {
-  functional: true,
-
   name: 'card',
 
   props: {
@@ -9,20 +7,34 @@ export default {
       default: 'auto'
     },
     horizontal: Boolean,
-    img: String
+    img: String,
+    hover: Boolean,
+    raised: Boolean
+  },
+
+  computed: {
+    classes () {
+      return {
+        'card': true,
+        'card--horizontal': this.horizontal,
+        'card--hover': this.hover,
+        'card--raised': this.raised,
+      }
+    },
   },
 
   render (h, context) {
-    context.data.style = context.style || {}
-    context.data.class = context.data.class || []
-    context.data.style.height = context.props.height
-    context.data.class.push('card')
-    context.props.horizontal && context.data.class.push('card--horizontal')
-
-    if (context.props.img) {
-      context.data.style.background = `url(${context.props.img}) center center / cover no-repeat`
+    const data = {
+      'class': this.classes,
+      'style': {
+        height: this.height,
+      }
     }
 
-    return h('div', context.data, context.children)
+    if (this.img) {
+      data.style.background = `url(${this.img}) center center / cover no-repeat`
+    }
+
+    return h('div', data, this.$slots.default)
   }
 }
