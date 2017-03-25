@@ -1,11 +1,14 @@
 .snack
 	background-color: $snackbar-background-color
-	position: fixed !important
+	position: fixed
 	display: flex
 	height: 0
 	pointer-events: none
 	z-index: 1000
 	visibility: visible
+	
+	&--absolute
+		position: absolute
 
 	&--multi-line
 		min-height: 48px
