@@ -1,18 +1,12 @@
 export default {
   functional: true,
 
-  name: 'toolbar',
+  props: { fixed: Boolean },
 
-  props: {
-    fixed: Boolean
-  },
+  render (h, { data, props, children }) {
+    data.staticClass = data.staticClass ? `toolbar ${data.staticClass}` : 'toolbar'
+    if (props.fixed) data.staticClass += ' toolbar--fixed'
 
-  render (h, context) {
-    return h('nav', {
-      'class': {
-        'toolbar': true,
-        'toolbar--fixed': context.props.fixed
-      }
-    }, [context.children])
+    return h('nav', data, children)
   }
 }
