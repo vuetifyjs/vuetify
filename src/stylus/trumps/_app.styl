@@ -1,61 +1,46 @@
-.with
-  min-height: 100vh
-  -webkit-backface-visibility: hidden
-  
-  &.top-fixed-toolbar
-    padding-top: $toolbar-height
-      
-    header
-      z-index: 4
+html, body
+  height: 100%
+  min-height: 100%
+  overflow: hidden
+  position: relative
+  max-height: 100%
+  max-width: 100%
 
-  &.top-toolbar
-    main
-      min-height: 'calc(100vh - %s)' % $toolbar-height
-      
-      > .content
-        padding-top: $spacers.three.y
-        
-  &.bottom-footer
-    main
-      min-height: 'calc(100vh - %s)' % $footer-height
-      
-  &.bottom-footer&.top-toolbar, &.bottom-footer&.top-fixed-toolbar
-    main
-      min-height: 'calc(100vh - %s - %s)' % ($toolbar-height $footer-height)
-      
+.with
+  -webkit-backface-visibility: hidden
+
   &.left-fixed-sidebar
     header .toolbar
       padding-left: $sidebar-width + $toolbar-padding-x
       transition: $primary-transition
-  
+
       @media screen and (max-width: ($grid-breakpoints.lg - 1))
         padding-left: $toolbar-padding-x
-      
-    main,
-    footer
+
+    main, > footer
       padding-left: $sidebar-width
       transition: $primary-transition
-  
+
       @media screen and (max-width: ($grid-breakpoints.lg - 1))
         padding-left: 0
-        
+
   &.left-sidebar
     main
       background: $theme.secondary
 
     .sidebar
       box-shadow: none
-  
+
   &.right-fixed-sidebar
     header .toolbar,
     main,
     footer
       padding-right: $sidebar-width
       transition: $primary-transition
-      
+
       @media screen and (max-width: ($grid-breakpoints.lg - 1))
         padding-right: 0
-        
+
   &.sidebar-under-toolbar
     .sidebar
       padding-top: $toolbar-height
@@ -65,26 +50,26 @@
     &.right-fixed-sidebar
       .toolbar
         padding-left: inherit
-        
+
 .app
   &__bar
     align-items: center
     background: $grey.lighten-3
     display: flex
     width: 100%
-    
+
     .btn-dropdown--overflow .input-group
       border: none
       margin: 0
-    
+
     .input-group__details
       display: none
-    
+
     > div
       min-width: 130px
       &:not(:first-child)
         margin-left: 1px
-        
+
         &:before
           content: ''
           position: absolute
@@ -95,24 +80,24 @@
           background: $material-twelve-percent-dark
           width: 1px
           z-index: 0
-      
+
     .input-group:not(.input-group--focused)
       .input-group__input
         &:hover
           background: $grey.lighten-4
-        
+
     .btn-toggle
       box-shadow: none
       background: transparent
       position: relative
       padding: 0 8px
-      
+
       .btn
         background: transparent
         border: none !important
         height: 42px
         margin: 0 8px
-        
+
         .icon
           font-size: 26px
           width: 26px
