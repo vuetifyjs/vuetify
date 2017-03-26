@@ -106,8 +106,7 @@ export default {
     }, [this.$slots.content])
 
     return h('div', {
-      'class': this.classes,
-      domProps: { id: this.id }
+      'class': this.classes
     }, [this.$slots.default, tabs, items])
   }
 }
