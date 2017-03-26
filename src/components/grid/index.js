@@ -71,5 +71,5 @@ export default {
   Container,
   Content,
   Spacer,
-  Row
+  Layout
 }

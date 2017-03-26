@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 115);
+/******/ 	return __webpack_require__(__webpack_require__.s = 113);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -203,40 +203,28 @@ function debounce (func, threshold, execAsap) {
 
 /***/ },
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 module.exports = function normalizeComponent (
-  name,
-  scriptExports,
+  rawScriptExports,
   compiledTemplate,
   scopeId,
   cssModules
 ) {
-  scriptExports = scriptExports || {}
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
 
   // ES6 modules interop
-  var type = typeof scriptExports.default
+  var type = typeof rawScriptExports.default
   if (type === 'object' || type === 'function') {
-    // check named exports
-    if (true) {
-      if (Object.keys(scriptExports).some(function (key) {
-        return key !== 'default' && key !== '__esModule'
-      })) {
-        console.error('named exports are not supported in *.vue files.')
-      }
-    }
-    scriptExports = scriptExports.default
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
   }
 
   // Vue.extend constructor export interop
   var options = typeof scriptExports === 'function'
     ? scriptExports.options
     : scriptExports
-
-  // default name option based on filename
-  if (options.name == null) {
-    options.name = name
-  }
 
   // render functions
   if (compiledTemplate) {
@@ -259,6 +247,7 @@ module.exports = function normalizeComponent (
   }
 
   return {
+    esModule: esModule,
     exports: scriptExports,
     options: options
   }
@@ -695,29 +684,29 @@ module.exports = function normalizeComponent (
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__cards_index__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__carousel_index__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__chips_index__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__expansion_panel_index__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__expansion_panel_index__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__dividers_index__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__footer_index__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__forms_index__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__grid_index__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__icons_index__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__lists_index__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__menus_index__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__modal_index__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__toolbar_index__ = __webpack_require__(72);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__overlay_index__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pagination_index__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__parallax_index__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__progress_index__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__selects_index__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__sidebar_index__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__sliders_index__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__subheaders_index__ = __webpack_require__(63);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__steppers_index__ = __webpack_require__(62);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__tables_index__ = __webpack_require__(64);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__tabs_index__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__transitions_index__ = __webpack_require__(73);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__snackbars_index__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__footer_index__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__forms_index__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__grid_index__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__icons_index__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__lists_index__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__menus_index__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__modal_index__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__toolbar_index__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__overlay_index__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pagination_index__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__parallax_index__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__progress_index__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__selects_index__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__sidebar_index__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__sliders_index__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__subheaders_index__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__steppers_index__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__tables_index__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__tabs_index__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__transitions_index__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__snackbars_index__ = __webpack_require__(59);
 
 
 
@@ -790,10 +779,10 @@ module.exports = function normalizeComponent (
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__badge__ = __webpack_require__(74);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__click_outside__ = __webpack_require__(75);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ripple__ = __webpack_require__(76);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tooltip__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__badge__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__click_outside__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ripple__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tooltip__ = __webpack_require__(78);
 
 
 
@@ -951,7 +940,11 @@ function load (cb) {
     rightSidebar: Boolean,
     topFixedToolbar: Boolean,
     topToolbar: Boolean,
-    sidebarUnderToolbar: Boolean
+    sidebarUnderToolbar: Boolean,
+    column: {
+      type: Boolean,
+      default: true
+    }
   },
 
   render: function render (h, ref) {
@@ -968,7 +961,8 @@ function load (cb) {
         'right-sidebar': props.rightSidebar,
         'top-fixed-toolbar': props.topFixedToolbar,
         'top-toolbar': props.topToolbar,
-        'sidebar-under-toolbar': props.sidebarUnderToolbar
+        'sidebar-under-toolbar': props.sidebarUnderToolbar,
+        'layout-column': props.column
       },
       attrs: {
         'data-app': true
@@ -1466,8 +1460,36 @@ var Divider = {
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ExpansionPanel__ = __webpack_require__(117);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ExpansionPanelContent_vue__ = __webpack_require__(97);
+/* harmony default export */ exports["a"] = {
+  name: 'expansion-panel',
+
+  props: {
+    expand: Boolean
+  },
+
+  computed: {
+    params: function params () {
+      return {
+        expand: this.expand
+      }
+    }
+  },
+
+  render: function render (h) {
+    return h('ul', {
+      'class': 'expansion-panel'
+    }, this.$slots.default)
+  }
+};
+
+
+/***/ },
+/* 28 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ExpansionPanel__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ExpansionPanelContent_vue__ = __webpack_require__(96);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ExpansionPanelContent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ExpansionPanelContent_vue__);
 
 
@@ -1479,7 +1501,7 @@ var Divider = {
 
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1494,7 +1516,7 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1574,7 +1596,7 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1658,7 +1680,7 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1732,7 +1754,7 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1941,14 +1963,14 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Checkbox__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Radio__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Switch__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__TextField__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Checkbox__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Radio__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Switch__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__TextField__ = __webpack_require__(33);
 
 
 
@@ -1963,7 +1985,7 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1973,20 +1995,31 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 var Col = {
   functional: true,
 
+
   render: function (h, ref) {
     var data = ref.data;
     var children = ref.children;
 
     data.staticClass = data.staticClass ? ("col " + (data.staticClass)) : 'col'
-<<<<<<< HEAD
+    data.staticClass += " " + (Object.keys(data.attrs).join(' '))
+    delete data.attrs
+
+    return h('div', data, children)
+  }
+}
+
+var Layout = {
+  functional: true,
+
+  render: function (h, ref) {
+    var data = ref.data;
+    var children = ref.children;
+
+    data.staticClass = data.staticClass ? ("layout " + (data.staticClass)) : 'layout'
     if (data.attrs) {
       data.staticClass += " " + (Object.keys(data.attrs).join(' '))
       delete data.attrs
     }
-=======
-    data.staticClass += " " + (Object.keys(data.attrs).join(' '))
-    delete data.attrs
->>>>>>> dev
 
     return h('div', data, children)
   }
@@ -2012,7 +2045,6 @@ var Container = {
   }
 }
 
-<<<<<<< HEAD
 var Content = {
   functional: true,
 
@@ -2034,10 +2066,6 @@ var Content = {
   }
 }
 
-=======
-var Content = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('content')
-var Row = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('row')
->>>>>>> dev
 var ColSpacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('col--spacer')
 var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createSimpleFunctional */])('spacer')
 
@@ -2047,12 +2075,12 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
   Container: Container,
   Content: Content,
   Spacer: Spacer,
-  Row: Row
+  Layout: Layout
 };
 
 
 /***/ },
-/* 35 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2087,11 +2115,11 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
 
 /***/ },
-/* 36 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Icon__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Icon__ = __webpack_require__(36);
 
 
 /* harmony default export */ exports["a"] = {
@@ -2100,7 +2128,7 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
 
 /***/ },
-/* 37 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2177,7 +2205,7 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
 
 /***/ },
-/* 38 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2309,7 +2337,7 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
 
 /***/ },
-/* 39 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2353,7 +2381,7 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
 
 /***/ },
-/* 40 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2376,15 +2404,15 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
 
 /***/ },
-/* 41 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__List__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ListGroup__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ListTile__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ListTileAction__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__List__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ListGroup__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ListTile__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ListTileAction__ = __webpack_require__(41);
 
 
 
@@ -2414,7 +2442,7 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
 
 
 /***/ },
-/* 42 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2940,11 +2968,11 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
 
 
 /***/ },
-/* 43 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Menu_js__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Menu_js__ = __webpack_require__(43);
 
 
 /* harmony default export */ exports["a"] = {
@@ -2953,11 +2981,11 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
 
 
 /***/ },
-/* 44 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Modal_vue__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Modal_vue__ = __webpack_require__(97);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Modal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Modal_vue__);
 
 
@@ -2967,7 +2995,7 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
 
 
 /***/ },
-/* 45 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2996,11 +3024,11 @@ var Overlay = {
 
 
 /***/ },
-/* 46 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Pagination_vue__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Pagination_vue__ = __webpack_require__(98);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Pagination_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Pagination_vue__);
 
 
@@ -3010,11 +3038,11 @@ var Overlay = {
 
 
 /***/ },
-/* 47 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Parallax_vue__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Parallax_vue__ = __webpack_require__(99);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Parallax_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Parallax_vue__);
 
 
@@ -3024,13 +3052,13 @@ var Overlay = {
 
 
 /***/ },
-/* 48 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ProgressLinear_vue__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ProgressLinear_vue__ = __webpack_require__(101);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ProgressLinear_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ProgressLinear_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ProgressCircular_vue__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ProgressCircular_vue__ = __webpack_require__(100);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ProgressCircular_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ProgressCircular_vue__);
 
 
@@ -3042,13 +3070,13 @@ var Overlay = {
 
 
 /***/ },
-/* 49 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_input__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_generators__ = __webpack_require__(52);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_autocomplete__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_generators__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_autocomplete__ = __webpack_require__(52);
 
 
 
@@ -3243,11 +3271,11 @@ var Overlay = {
 
 
 /***/ },
-/* 50 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Select__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Select__ = __webpack_require__(50);
 
 
 /* harmony default export */ exports["a"] = {
@@ -3256,7 +3284,7 @@ var Overlay = {
 
 
 /***/ },
-/* 51 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3283,7 +3311,7 @@ var Overlay = {
 
 
 /***/ },
-/* 52 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3463,7 +3491,7 @@ var Overlay = {
 
 
 /***/ },
-/* 53 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3576,11 +3604,11 @@ var Overlay = {
 
 
 /***/ },
-/* 54 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Sidebar__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Sidebar__ = __webpack_require__(54);
 
 
 /* harmony default export */ exports["a"] = {
@@ -3589,7 +3617,7 @@ var Overlay = {
 
 
 /***/ },
-/* 55 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3829,11 +3857,11 @@ var Overlay = {
 
 
 /***/ },
-/* 56 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Slider__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Slider__ = __webpack_require__(56);
 
 
 /* harmony default export */ exports["a"] = {
@@ -3842,7 +3870,7 @@ var Overlay = {
 
 
 /***/ },
-/* 57 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3920,11 +3948,11 @@ var Overlay = {
 
 
 /***/ },
-/* 58 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Snackbar__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Snackbar__ = __webpack_require__(58);
 
 
 /* harmony default export */ exports["a"] = {
@@ -3933,7 +3961,7 @@ var Overlay = {
 
 
 /***/ },
-/* 59 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4015,7 +4043,7 @@ var Overlay = {
 
 
 /***/ },
-/* 60 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4129,7 +4157,7 @@ var Overlay = {
 
 
 /***/ },
-/* 61 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4233,14 +4261,14 @@ var Overlay = {
 
 
 /***/ },
-/* 62 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Stepper__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__StepperStep__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__StepperContent__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Stepper__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__StepperStep__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__StepperContent__ = __webpack_require__(61);
 
 
 
@@ -4257,7 +4285,7 @@ var StepperHeader = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_help
 
 
 /***/ },
-/* 63 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4286,7 +4314,7 @@ var Subheader = {
 
 
 /***/ },
-/* 64 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4301,7 +4329,7 @@ var TableOverflow = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_help
 
 
 /***/ },
-/* 65 */
+/* 66 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4358,7 +4386,7 @@ var TableOverflow = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_help
   
 
 /***/ },
-/* 66 */
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4427,7 +4455,7 @@ var TableOverflow = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_help
 
 
 /***/ },
-/* 67 */
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4549,15 +4577,14 @@ var TableOverflow = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_help
     }, [this.$slots.content])
 
     return h('div', {
-      'class': this.classes,
-      domProps: { id: this.id }
+      'class': this.classes
     }, [this.$slots.default, tabs, items])
   }
 };
 
 
 /***/ },
-/* 68 */
+/* 69 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4628,15 +4655,15 @@ var TableOverflow = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_help
 
 
 /***/ },
-/* 69 */
+/* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Tabs__ = __webpack_require__(67);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__TabItem__ = __webpack_require__(66);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__TabContent__ = __webpack_require__(65);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__TabsTabs__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Tabs__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__TabItem__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__TabContent__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__TabsTabs__ = __webpack_require__(69);
 
 
 
@@ -4664,7 +4691,7 @@ var TabsItems = {
 
 
 /***/ },
-/* 70 */
+/* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4689,7 +4716,7 @@ var TabsItems = {
 
 
 /***/ },
-/* 71 */
+/* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4734,12 +4761,12 @@ var TabsItems = {
 
 
 /***/ },
-/* 72 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Toolbar__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ToolbarItem__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Toolbar__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ToolbarItem__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__util_helpers__ = __webpack_require__(0);
 
 
@@ -4779,7 +4806,7 @@ var ToolbarSideIcon = {
 
 
 /***/ },
-/* 73 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4818,7 +4845,7 @@ var MenuTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_hel
 
 
 /***/ },
-/* 74 */
+/* 75 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4855,7 +4882,7 @@ function directive (el, binding) {
 
 
 /***/ },
-/* 75 */
+/* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4888,7 +4915,7 @@ function directive (e, el, binding, v) {
 
 
 /***/ },
-/* 76 */
+/* 77 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4986,7 +5013,7 @@ function unbind (el, binding) {
 
 
 /***/ },
-/* 77 */
+/* 78 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5019,7 +5046,7 @@ function unbind (el) {
 
 
 /***/ },
-/* 78 */
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5089,7 +5116,7 @@ function unbind (el) {
 
 
 /***/ },
-/* 79 */
+/* 80 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5253,7 +5280,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ },
-/* 80 */
+/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5342,7 +5369,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ },
-/* 81 */
+/* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5394,7 +5421,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ },
-/* 82 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5521,7 +5548,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ },
-/* 83 */
+/* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5589,7 +5616,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 /***/ },
-/* 84 */,
 /* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -5951,7 +5977,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_translatable__ = __webpack_require__(78);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_translatable__ = __webpack_require__(79);
 //
 //
 //
@@ -6283,12 +6309,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "ButtonDropdown",
   /* script */
-  __webpack_require__(79),
+  __webpack_require__(80),
   /* template */
-  __webpack_require__(114),
+  __webpack_require__(103),
   /* scopeId */
   null,
   /* cssModules */
@@ -6303,12 +6327,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "ButtonToggle",
   /* script */
-  __webpack_require__(80),
+  __webpack_require__(81),
   /* template */
-  __webpack_require__(105),
+  __webpack_require__(112),
   /* scopeId */
   null,
   /* cssModules */
@@ -6323,12 +6345,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "CardRow",
   /* script */
-  __webpack_require__(81),
+  __webpack_require__(82),
   /* template */
-  __webpack_require__(113),
+  __webpack_require__(102),
   /* scopeId */
   null,
   /* cssModules */
@@ -6343,12 +6363,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "Carousel",
   /* script */
-  __webpack_require__(82),
+  __webpack_require__(83),
   /* template */
-  __webpack_require__(109),
+  __webpack_require__(106),
   /* scopeId */
   null,
   /* cssModules */
@@ -6363,12 +6381,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "CarouselItem",
   /* script */
-  __webpack_require__(83),
+  __webpack_require__(84),
   /* template */
-  __webpack_require__(112),
+  __webpack_require__(105),
   /* scopeId */
   null,
   /* cssModules */
@@ -6379,17 +6395,32 @@ module.exports = Component.exports
 
 
 /***/ },
-/* 96 */,
+/* 96 */
+/***/ function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(85),
+  /* template */
+  __webpack_require__(107),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ },
 /* 97 */
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "ExpansionPanelContent",
   /* script */
-  __webpack_require__(85),
+  __webpack_require__(86),
   /* template */
-  __webpack_require__(110),
+  __webpack_require__(111),
   /* scopeId */
   null,
   /* cssModules */
@@ -6404,28 +6435,6 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "Modal",
-  /* script */
-  __webpack_require__(86),
-  /* template */
-  __webpack_require__(106),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-
-module.exports = Component.exports
-
-
-/***/ },
-/* 99 */
-/***/ function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(1)(
-  /* name */
-  "Pagination",
   /* script */
   __webpack_require__(87),
   /* template */
@@ -6440,16 +6449,32 @@ module.exports = Component.exports
 
 
 /***/ },
+/* 99 */
+/***/ function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(88),
+  /* template */
+  __webpack_require__(109),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+
+module.exports = Component.exports
+
+
+/***/ },
 /* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "Parallax",
   /* script */
-  __webpack_require__(88),
+  __webpack_require__(89),
   /* template */
-  __webpack_require__(111),
+  __webpack_require__(104),
   /* scopeId */
   null,
   /* cssModules */
@@ -6464,12 +6489,10 @@ module.exports = Component.exports
 /***/ function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
-  /* name */
-  "ProgressCircular",
   /* script */
-  __webpack_require__(89),
+  __webpack_require__(90),
   /* template */
-  __webpack_require__(107),
+  __webpack_require__(110),
   /* scopeId */
   null,
   /* cssModules */
@@ -6481,23 +6504,15 @@ module.exports = Component.exports
 
 /***/ },
 /* 102 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-var Component = __webpack_require__(1)(
-  /* name */
-  "ProgressLinear",
-  /* script */
-  __webpack_require__(90),
-  /* template */
-  __webpack_require__(103),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-
-module.exports = Component.exports
-
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "card__row",
+    class: _vm.classes,
+    style: (_vm.styles)
+  }, [_vm._t("default")], 2)
+},staticRenderFns: []}
 
 /***/ },
 /* 103 */
@@ -6505,72 +6520,18 @@ module.exports = Component.exports
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "progress-linear",
-    class: _vm.classes,
-    style: ({
-      height: _vm.height + 'px'
-    })
-  }, [_c('div', {
-    staticClass: "progress-linear__bar",
-    style: (_vm.styles)
-  }, [_c('v-fade-transition', [(_vm.indeterminate) ? _c('div', {
-    staticClass: "progress-linear__bar__indeterminate"
-  }) : _vm._e()]), _c('v-slide-x-transition', [(!_vm.indeterminate) ? _c('div', {
-    staticClass: "progress-linear__bar__determinate",
-    style: ({
-      width: _vm.value + '%'
-    })
-  }) : _vm._e()])], 1)])
-},staticRenderFns: []}
-
-/***/ },
-/* 104 */,
-/* 105 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "btn-toggle",
+    staticClass: "btn-dropdown",
     class: _vm.classes
-  }, _vm._l((_vm.options), function(option, index) {
-    return _c('v-btn', {
-      attrs: {
-        "data-selected": _vm.isSelected(option),
-        "data-index": index,
-        "data-only-child": _vm.isSelected(option) && (!_vm.multiple || _vm.inputValue.length === 1),
-        "flat": "flat"
-      },
-      nativeOn: {
-        "click": function($event) {
-          $event.stopPropagation();
-          _vm.updateValue(option)
-        }
-      }
-    }, [(option.text) ? _c('span', {
-      domProps: {
-        "textContent": _vm._s(option.text)
-      }
-    }) : _vm._e(), (option.icon) ? _c('v-icon', [_vm._v(_vm._s(option.icon))]) : _vm._e()], 1)
-  }))
-},staticRenderFns: []}
-
-/***/ },
-/* 106 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "modal__container"
-  }, [(_vm.$slots.activator) ? _c('div', {
-    ref: "activator",
-    staticClass: "modal__activator",
-    on: {
-      "click": function($event) {
-        _vm.isActive = !_vm.isActive
-      }
-    }
-  }, [_vm._t("activator")], 2) : _vm._e(), _c('v-overlay', {
-    class: _vm.overlayClasses,
+  }, [_c('v-menu', {
+    attrs: {
+      "auto": !_vm.overflow && !_vm.segmented && !_vm.editable,
+      "right": !_vm.overflow && !_vm.segmented && !_vm.editable,
+      "max-height": _vm.maxHeight,
+      "offset-y": _vm.overflow || _vm.segmented || _vm.editable,
+      "close-on-click": !_vm.isActive,
+      "open-on-click": !_vm.isActive,
+      "bottom": "bottom"
+    },
     model: {
       value: (_vm.isActive),
       callback: function($$v) {
@@ -6578,34 +6539,51 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "isActive"
     }
-  }, [_c(_vm.computedTransition, {
-    tag: "component",
+  }, [_c('v-text-field', {
+    ref: "input",
     attrs: {
-      "origin": _vm.computedOrigin
+      "type": _vm.editable ? 'text' : 'button',
+      "label": _vm.label,
+      "light": _vm.light && !_vm.dark,
+      "dark": _vm.dark,
+      "single-line": "single-line",
+      "append-icon": "arrow_drop_down"
+    },
+    on: {
+      "focused": function($event) {
+        _vm.isActive = arguments[0]
+      }
+    },
+    nativeOn: {
+      "keyup": function($event) {
+        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
+        _vm.updateValue(_vm.editableValue)
+      }
+    },
+    slot: "activator",
+    model: {
+      value: (_vm.editableValue),
+      callback: function($$v) {
+        _vm.editableValue = $$v
+      },
+      expression: "editableValue"
     }
-  }, [_c('div', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.isActive),
-      expression: "isActive"
-    }, {
-      name: "click-outside",
-      rawName: "v-click-outside",
-      value: (_vm.closeConditional),
-      expression: "closeConditional"
-    }],
-    ref: "modal",
-    staticClass: "modal",
-    class: _vm.classes,
-    attrs: {
-      "id": _vm.id
-    }
-  }, [_vm._t("default")], 2)])], 1)], 1)
+  }), _c('v-list', _vm._l((_vm.options), function(option, index) {
+    return _c('v-list-item', [_c('v-list-tile', {
+      class: {
+        'list__tile--active': _vm.inputValue === option
+      },
+      nativeOn: {
+        "click": function($event) {
+          _vm.updateValue(option)
+        }
+      }
+    }, [(option.action) ? _c('v-list-tile-action', [_c('v-icon', [_vm._v(_vm._s(option.action))])], 1) : _vm._e(), (option.text) ? _c('v-list-tile-content', [_c('v-list-tile-title', [_vm._v(_vm._s(option.text))])], 1) : _vm._e()], 1)], 1)
+  }))], 1)], 1)
 },staticRenderFns: []}
 
 /***/ },
-/* 107 */
+/* 104 */
 /***/ function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -6646,6 +6624,122 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   })]), _c('div', {
     staticClass: "progress-circular__info"
   }, [_vm._t("default")], 2)])
+},staticRenderFns: []}
+
+/***/ },
+/* 105 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c(_vm.computedTransition, {
+    tag: "component"
+  }, [_c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.active),
+      expression: "active"
+    }],
+    staticClass: "carousel__item",
+    class: {
+      'reverse': _vm.reverse
+    },
+    style: (_vm.styles)
+  }, [_vm._t("default")], 2)])
+},staticRenderFns: []}
+
+/***/ },
+/* 106 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "carousel"
+  }, [_c('div', {
+    staticClass: "carousel__left"
+  }, [_c('v-btn', {
+    attrs: {
+      "icon": "icon"
+    },
+    nativeOn: {
+      "click": function($event) {
+        $event.stopPropagation();
+        _vm.prev($event)
+      }
+    }
+  }, [_c('v-icon', [_vm._v("chevron_left")])], 1)], 1), _c('div', {
+    staticClass: "carousel__right"
+  }, [_c('v-btn', {
+    attrs: {
+      "icon": "icon"
+    },
+    nativeOn: {
+      "click": function($event) {
+        $event.stopPropagation();
+        _vm.next($event)
+      }
+    }
+  }, [_c('v-icon', [_vm._v("chevron_right")])], 1)], 1), _c('div', {
+    staticClass: "carousel__controls"
+  }, _vm._l((_vm.items), function(item, index) {
+    return _c('v-btn', {
+      staticClass: "carousel__controls__item",
+      class: {
+        'carousel__controls__item--active': index === _vm.current
+      },
+      attrs: {
+        "icon": "icon"
+      },
+      nativeOn: {
+        "click": function($event) {
+          $event.stopPropagation();
+          _vm.select(index)
+        }
+      }
+    }, [_c('v-icon', [_vm._v(_vm._s(_vm.icon))])], 1)
+  })), _vm._t("default")], 2)
+},staticRenderFns: []}
+
+/***/ },
+/* 107 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('li', [(_vm.$slots.header) ? _c('div', {
+    directives: [{
+      name: "click-outside",
+      rawName: "v-click-outside",
+      value: (_vm.closeConditional),
+      expression: "closeConditional"
+    }, {
+      name: "ripple",
+      rawName: "v-ripple",
+      value: (_vm.ripple),
+      expression: "ripple"
+    }],
+    staticClass: "expansion-panel__header",
+    class: _vm.classes,
+    on: {
+      "click": function($event) {
+        _vm.isActive = !_vm.isActive
+      }
+    }
+  }, [_vm._t("header")], 2) : _vm._e(), _c('transition', {
+    on: {
+      "enter": _vm.enter,
+      "after-enter": _vm.afterEnter,
+      "leave": _vm.leave
+    }
+  }, [_c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.isActive),
+      expression: "isActive"
+    }],
+    ref: "body",
+    staticClass: "expansion-panel__body"
+  }, [_vm._t("default")], 2)])], 1)
 },staticRenderFns: []}
 
 /***/ },
@@ -6717,100 +6811,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "carousel"
-  }, [_c('div', {
-    staticClass: "carousel__left"
-  }, [_c('v-btn', {
-    attrs: {
-      "icon": "icon"
-    },
-    nativeOn: {
-      "click": function($event) {
-        $event.stopPropagation();
-        _vm.prev($event)
-      }
-    }
-  }, [_c('v-icon', [_vm._v("chevron_left")])], 1)], 1), _c('div', {
-    staticClass: "carousel__right"
-  }, [_c('v-btn', {
-    attrs: {
-      "icon": "icon"
-    },
-    nativeOn: {
-      "click": function($event) {
-        $event.stopPropagation();
-        _vm.next($event)
-      }
-    }
-  }, [_c('v-icon', [_vm._v("chevron_right")])], 1)], 1), _c('div', {
-    staticClass: "carousel__controls"
-  }, _vm._l((_vm.items), function(item, index) {
-    return _c('v-btn', {
-      staticClass: "carousel__controls__item",
-      class: {
-        'carousel__controls__item--active': index === _vm.current
-      },
-      attrs: {
-        "icon": "icon"
-      },
-      nativeOn: {
-        "click": function($event) {
-          $event.stopPropagation();
-          _vm.select(index)
-        }
-      }
-    }, [_c('v-icon', [_vm._v(_vm._s(_vm.icon))])], 1)
-  })), _vm._t("default")], 2)
-},staticRenderFns: []}
-
-/***/ },
-/* 110 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', [(_vm.$slots.header) ? _c('div', {
-    directives: [{
-      name: "click-outside",
-      rawName: "v-click-outside",
-      value: (_vm.closeConditional),
-      expression: "closeConditional"
-    }, {
-      name: "ripple",
-      rawName: "v-ripple",
-      value: (_vm.ripple),
-      expression: "ripple"
-    }],
-    staticClass: "expansion-panel__header",
-    class: _vm.classes,
-    on: {
-      "click": function($event) {
-        _vm.isActive = !_vm.isActive
-      }
-    }
-  }, [_vm._t("header")], 2) : _vm._e(), _c('transition', {
-    on: {
-      "enter": _vm.enter,
-      "after-enter": _vm.afterEnter,
-      "leave": _vm.leave
-    }
-  }, [_c('div', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.isActive),
-      expression: "isActive"
-    }],
-    ref: "body",
-    staticClass: "expansion-panel__body"
-  }, [_vm._t("default")], 2)])], 1)
-},staticRenderFns: []}
-
-/***/ },
-/* 111 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
     staticClass: "parallax",
     style: ({
       minHeight: this.normalizedHeight + 'px'
@@ -6828,57 +6828,46 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },staticRenderFns: []}
 
 /***/ },
-/* 112 */
-/***/ function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c(_vm.computedTransition, {
-    tag: "component"
-  }, [_c('div', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.active),
-      expression: "active"
-    }],
-    staticClass: "carousel__item",
-    class: {
-      'reverse': _vm.reverse
-    },
-    style: (_vm.styles)
-  }, [_vm._t("default")], 2)])
-},staticRenderFns: []}
-
-/***/ },
-/* 113 */
+/* 110 */
 /***/ function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "card__row",
+    staticClass: "progress-linear",
     class: _vm.classes,
+    style: ({
+      height: _vm.height + 'px'
+    })
+  }, [_c('div', {
+    staticClass: "progress-linear__bar",
     style: (_vm.styles)
-  }, [_vm._t("default")], 2)
+  }, [_c('v-fade-transition', [(_vm.indeterminate) ? _c('div', {
+    staticClass: "progress-linear__bar__indeterminate"
+  }) : _vm._e()]), _c('v-slide-x-transition', [(!_vm.indeterminate) ? _c('div', {
+    staticClass: "progress-linear__bar__determinate",
+    style: ({
+      width: _vm.value + '%'
+    })
+  }) : _vm._e()])], 1)])
 },staticRenderFns: []}
 
 /***/ },
-/* 114 */
+/* 111 */
 /***/ function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "btn-dropdown",
-    class: _vm.classes
-  }, [_c('v-menu', {
-    attrs: {
-      "auto": !_vm.overflow && !_vm.segmented && !_vm.editable,
-      "right": !_vm.overflow && !_vm.segmented && !_vm.editable,
-      "max-height": _vm.maxHeight,
-      "offset-y": _vm.overflow || _vm.segmented || _vm.editable,
-      "close-on-click": !_vm.isActive,
-      "open-on-click": !_vm.isActive,
-      "bottom": "bottom"
-    },
+    staticClass: "modal__container"
+  }, [(_vm.$slots.activator) ? _c('div', {
+    ref: "activator",
+    staticClass: "modal__activator",
+    on: {
+      "click": function($event) {
+        _vm.isActive = !_vm.isActive
+      }
+    }
+  }, [_vm._t("activator")], 2) : _vm._e(), _c('v-overlay', {
+    class: _vm.overlayClasses,
     model: {
       value: (_vm.isActive),
       callback: function($$v) {
@@ -6886,51 +6875,64 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "isActive"
     }
-  }, [_c('v-text-field', {
-    ref: "input",
+  }, [_c(_vm.computedTransition, {
+    tag: "component",
     attrs: {
-      "type": _vm.editable ? 'text' : 'button',
-      "label": _vm.label,
-      "light": _vm.light && !_vm.dark,
-      "dark": _vm.dark,
-      "single-line": "single-line",
-      "append-icon": "arrow_drop_down"
-    },
-    on: {
-      "focused": function($event) {
-        _vm.isActive = arguments[0]
-      }
-    },
-    nativeOn: {
-      "keyup": function($event) {
-        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
-        _vm.updateValue(_vm.editableValue)
-      }
-    },
-    slot: "activator",
-    model: {
-      value: (_vm.editableValue),
-      callback: function($$v) {
-        _vm.editableValue = $$v
-      },
-      expression: "editableValue"
+      "origin": _vm.computedOrigin
     }
-  }), _c('v-list', _vm._l((_vm.options), function(option, index) {
-    return _c('v-list-item', [_c('v-list-tile', {
-      class: {
-        'list__tile--active': _vm.inputValue === option
-      },
-      nativeOn: {
-        "click": function($event) {
-          _vm.updateValue(option)
-        }
-      }
-    }, [(option.action) ? _c('v-list-tile-action', [_c('v-icon', [_vm._v(_vm._s(option.action))])], 1) : _vm._e(), (option.text) ? _c('v-list-tile-content', [_c('v-list-tile-title', [_vm._v(_vm._s(option.text))])], 1) : _vm._e()], 1)], 1)
-  }))], 1)], 1)
+  }, [_c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.isActive),
+      expression: "isActive"
+    }, {
+      name: "click-outside",
+      rawName: "v-click-outside",
+      value: (_vm.closeConditional),
+      expression: "closeConditional"
+    }],
+    ref: "modal",
+    staticClass: "modal",
+    class: _vm.classes,
+    attrs: {
+      "id": _vm.id
+    }
+  }, [_vm._t("default")], 2)])], 1)], 1)
 },staticRenderFns: []}
 
 /***/ },
-/* 115 */
+/* 112 */
+/***/ function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "btn-toggle",
+    class: _vm.classes
+  }, _vm._l((_vm.options), function(option, index) {
+    return _c('v-btn', {
+      attrs: {
+        "data-selected": _vm.isSelected(option),
+        "data-index": index,
+        "data-only-child": _vm.isSelected(option) && (!_vm.multiple || _vm.inputValue.length === 1),
+        "flat": "flat"
+      },
+      nativeOn: {
+        "click": function($event) {
+          $event.stopPropagation();
+          _vm.updateValue(option)
+        }
+      }
+    }, [(option.text) ? _c('span', {
+      domProps: {
+        "textContent": _vm._s(option.text)
+      }
+    }) : _vm._e(), (option.icon) ? _c('v-icon', [_vm._v(_vm._s(option.icon))]) : _vm._e()], 1)
+  }))
+},staticRenderFns: []}
+
+/***/ },
+/* 113 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6970,35 +6972,6 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 /* harmony default export */ exports["default"] = plugin;
-
-
-/***/ },
-/* 116 */,
-/* 117 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony default export */ exports["a"] = {
-  name: 'expansion-panel',
-
-  props: {
-    expand: Boolean
-  },
-
-  computed: {
-    params: function params () {
-      return {
-        expand: this.expand
-      }
-    }
-  },
-
-  render: function render (h) {
-    return h('ul', {
-      'class': 'expansion-panel'
-    }, this.$slots.default)
-  }
-};
 
 
 /***/ }

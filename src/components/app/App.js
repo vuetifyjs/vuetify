@@ -13,7 +13,11 @@ export default {
     rightSidebar: Boolean,
     topFixedToolbar: Boolean,
     topToolbar: Boolean,
-    sidebarUnderToolbar: Boolean
+    sidebarUnderToolbar: Boolean,
+    column: {
+      type: Boolean,
+      default: true
+    }
   },
 
   render (h, { props, children }) {
@@ -27,7 +31,8 @@ export default {
         'right-sidebar': props.rightSidebar,
         'top-fixed-toolbar': props.topFixedToolbar,
         'top-toolbar': props.topToolbar,
-        'sidebar-under-toolbar': props.sidebarUnderToolbar
+        'sidebar-under-toolbar': props.sidebarUnderToolbar,
+        'layout-column': props.column
       },
       attrs: {
         'data-app': true
