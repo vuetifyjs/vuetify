@@ -60,6 +60,9 @@
     font-size: $headings.h6.size
     flex: 1;
     padding: 0 16px
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
     
     &:first-child
       padding-left: 2px
@@ -71,6 +74,8 @@
     display: flex
     align-items: center
     height: 100%
+    max-width: 100%
+    overflow-x: auto
 
     > li
       display: flex
@@ -85,6 +90,7 @@
     transition: all 0.3s ease-out
     position: relative
     height: 100%
+    white-space: nowrap
     
     i
       font-size: 2rem
