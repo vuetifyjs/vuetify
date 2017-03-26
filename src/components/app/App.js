@@ -1,8 +1,6 @@
 export default {
   functional: true,
 
-  name: 'app',
-
   props: {
     footer: Boolean,
     leftFixedSidebar: Boolean,
@@ -15,33 +13,28 @@ export default {
     rightSidebar: Boolean,
     topFixedToolbar: Boolean,
     topToolbar: Boolean,
-    sidebarUnderToolbar: Boolean,
-    column: {
-      type: Boolean,
-      default: true
-    }
+    sidebarUnderToolbar: Boolean
   },
 
-  render (h, context) {
+  render (h, { props, children }) {
     return h('div', {
       'class': {
         'with': true,
-        'left-fixed-sidebar': context.props.leftFixedSidebar,
-        'left-sidebar': context.props.leftSidebar,
-        'bottom-footer': context.props.footer,
-        'right-fixed-sidebar': context.props.rightFixedSidebar,
-        'right-sidebar': context.props.rightSidebar,
-        'top-fixed-toolbar': context.props.topFixedToolbar,
-        'top-toolbar': context.props.topToolbar,
-        'sidebar-under-toolbar': context.props.sidebarUnderToolbar,
-        'layout-column': context.props.column
+        'left-fixed-sidebar': props.leftFixedSidebar,
+        'left-sidebar': props.leftSidebar,
+        'bottom-footer': props.footer,
+        'right-fixed-sidebar': props.rightFixedSidebar,
+        'right-sidebar': props.rightSidebar,
+        'top-fixed-toolbar': props.topFixedToolbar,
+        'top-toolbar': props.topToolbar,
+        'sidebar-under-toolbar': props.sidebarUnderToolbar
       },
       attrs: {
         'data-app': true
       },
       domProps: {
-        id: context.props.id
+        id: props.id
       }
-    }, context.children)
+    }, children)
   }
 }

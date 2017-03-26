@@ -3,12 +3,11 @@ import {createSimpleFunctional} from '../../util/helpers'
 const Col = {
   functional: true,
 
-  render: (h, {data, children}) => {
+
+  render: (h, { data, children }) => {
     data.staticClass = data.staticClass ? `col ${data.staticClass}` : 'col'
-    if (data.attrs) {
-      data.staticClass += ` ${Object.keys(data.attrs).join(' ')}`
-      delete data.attrs
-    }
+    data.staticClass += ` ${Object.keys(data.attrs).join(' ')}`
+    delete data.attrs
 
     return h('div', data, children)
   }
@@ -72,5 +71,5 @@ export default {
   Container,
   Content,
   Spacer,
-  Layout
+  Row
 }
