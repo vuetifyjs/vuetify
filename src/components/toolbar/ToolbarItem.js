@@ -26,17 +26,9 @@ export default {
     }
   },
 
-  methods: {
-    click () {
-      //
-    }
-  },
-
   render (h) {
     const { tag, data } = this.generateRouteLink()
 
-    const item = h(tag, data, [this.$slots.default])
-
-    return h('li', {}, [item])
+    return h('li', {}, [h(tag, data, [this.$slots.default])])
   }
 }

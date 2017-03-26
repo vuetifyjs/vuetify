@@ -1,6 +1,7 @@
 import { createSimpleTransition } from '../../util/helpers'
 
 const SlideXTransition = createSimpleTransition('slide-x-transition')
+const SlideXReverseTransition = createSimpleTransition('slide-x-reverse-transition')
 const SlideYTransition = createSimpleTransition('slide-y-transition')
 const SlideYReverseTransition = createSimpleTransition('slide-y-reverse-transition')
 const ScaleTransition = createSimpleTransition('scale-transition')
@@ -15,6 +16,7 @@ const MenuTransition = createSimpleTransition('menu-transition')
 
 export default {
   SlideXTransition,
+  SlideXReverseTransition,
   SlideYTransition,
   SlideYReverseTransition,
   ScaleTransition,

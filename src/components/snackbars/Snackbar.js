@@ -12,6 +12,7 @@ export default {
   },
 
   props: {
+    absolute: Boolean,
     bottom: Boolean,
     left: Boolean,
     multiLine: Boolean,
@@ -28,6 +29,7 @@ export default {
       return {
         'snack': true,
         'snack--active': this.isActive,
+        'snack--absolute': this.absolute,
         'snack--bottom': this.bottom || !this.top,
         'snack--left': this.left,
         'snack--right': this.right,
@@ -44,7 +46,7 @@ export default {
     isActive () {
       clearTimeout(this.timeout)
 
-      if (this.isActive) {
+      if (this.isActive && this.timeout) {
         this.activeTimeout = setTimeout(() => (this.isActive = false), this.timeout)
       }
     }

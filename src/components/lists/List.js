@@ -10,7 +10,7 @@ export default {
 
   props: {
     dense: Boolean,
-    subHeader: Boolean,
+    subheader: Boolean,
     threeLine: Boolean,
     twoLine: Boolean
   },
@@ -22,7 +22,7 @@ export default {
         'list--two-line': this.twoLine,
         'list--dense': this.dense,
         'list--three-line': this.threeLine,
-        'list--subheader': this.subHeader
+        'list--subheader': this.subheader
       }
     }
   },

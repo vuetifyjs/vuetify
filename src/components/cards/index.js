@@ -1,4 +1,4 @@
-import Card from './Card.vue'
+import Card from './Card'
 import CardRow from './CardRow.vue'
 import {
   createSimpleFunctional

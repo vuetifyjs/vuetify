@@ -24,7 +24,10 @@ export default {
       type: [Number, String],
       default: 100
     },
-    step: [Number, String],
+    step: {
+      type: [Number, String],
+      default: 1
+    },
     thumbLabel: Boolean,
     value: [Number, String],
     vertical: Boolean
@@ -37,7 +40,7 @@ export default {
         'input-group--active': this.isActive,
         'input-group--dirty': this.inputValue > this.min,
         'input-group--disabled': this.disabled,
-        'input-group--ticks': this.step
+        'input-group--ticks': this.thumbLabel
       }
     },
     inputValue: {
@@ -45,17 +48,21 @@ export default {
         return this.value
       },
       set (val) {
-        // Do not re-calc width if not needed, causes jump
-        if (val !== Math.round(this.inputWidth)) {
-          this.inputWidth = (100 * (val / this.max))
+        if (Math.ceil(val) !== Math.ceil(this.lazyValue)) {
+          this.inputWidth = this.calculateWidth(val)
         }
 
-        let value = Math.round(val)
+        let value = parseInt(val)
+        value = value < this.min ? this.min : value > this.max ? this.max : value
+        this.lazyValue = value
 
-        value = value < this.min ? 0 : value > this.max ? this.max : value
-
-        this.$emit('input', value)
+        if (value !== this.value) {
+          this.$emit('input', value)
+        }
       }
+    },
+    interval () {
+      return 100 / (this.max - this.min) * this.step
     },
     thumbContainerClasses () {
       return {
@@ -70,13 +77,13 @@ export default {
     },
     tickContainerStyles () {
       return {
-        transform: `translate3d(-${this.step}%, -50%, 0)`
+        transform: `translate3d(-${this.interval}%, -50%, 0)`
       }
     },
     tickStyles () {
       return {
-        backgroundSize: `${this.step}% 2px`,
-        transform: `translate3d(${this.step}%, 0, 0)`
+        backgroundSize: `${this.interval}% 2px`,
+        transform: `translate3d(${this.interval}%, 0, 0)`
       }
     },
     trackStyles () {
@@ -103,10 +110,14 @@ export default {
 
   mounted () {
     this.inputValue = this.value
+    this.inputWidth = this.calculateWidth(this.inputValue)
     this.app = document.querySelector('[data-app]')
   },
 
   methods: {
+    calculateWidth (val) {
+      return (val - this.min) / (this.max - this.min) * 100
+    },
     calculateScale (scale) {
       if (scale < 0.02 && !this.thumbLabel) {
         return 0
@@ -116,26 +127,30 @@ export default {
     },
     onMouseDown (e) {
       this.isActive = true
-      this.app.addEventListener('touchmove', this.onMouseMove, false)
-      this.app.addEventListener('mousemove', this.onMouseMove, false)
-      addOnceEventListener(this.app, 'mouseup', this.onMouseUp)
+
+      if ('touches' in e) {
+        this.app.addEventListener('touchmove', this.onMouseMove, false)
+        addOnceEventListener(this.app, 'touchend', this.onMouseUp)
+      } else {
+        this.app.addEventListener('mousemove', this.onMouseMove, false)
+        addOnceEventListener(this.app, 'mouseup', this.onMouseUp)
+      }
     },
-    onMouseUp (e) {
+    onMouseUp () {
       this.isActive = false
-      this.app.removeEventListener('mousemove', this.onMouseMove, false)
       this.app.removeEventListener('touchmove', this.onMouseMove, false)
+      this.app.removeEventListener('mousemove', this.onMouseMove, false)
     },
     onMouseMove (e) {
       const { left: offsetLeft, width: trackWidth } = this.$refs.track.getBoundingClientRect()
-      const { width: thumbWidth } = this.$refs.thumb.getBoundingClientRect()
       const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
       let left = (
-        ((clientX - offsetLeft - thumbWidth) / trackWidth) * 100
+        ((clientX - offsetLeft) / trackWidth) * 100
       )
 
       left = left < 0 ? 0 : left > 100 ? 100 : left
 
-      this.inputValue = this.max * (left / 100)
+      this.inputValue = this.min + ((left / 100) * (this.max - this.min))
     },
     sliderMove (e) {
       if (!this.isActive) {
@@ -176,7 +191,7 @@ export default {
             ]
           }, [
             h('div', { 'class': 'slider__thumb--label' }, [
-              h('span', {}, this.inputValue)
+              h('span', {}, parseInt(this.inputValue))
             ])
           ])
         ])
@@ -197,7 +212,7 @@ export default {
 
     const slider = h('div', { 'class': 'slider' }, children)
 
-    return this.genInputGroup(h, [slider], {
+    return this.genInputGroup([slider], {
       attrs: {
         role: 'slider'
       },

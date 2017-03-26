@@ -23,6 +23,7 @@ export default {
       direction: { vert: 'bottom', horiz: 'right' },
       position: { left: '0px', top: '0px', right: 'auto', bottom: 'auto' },
       isContentActive: false,
+      isBooted: false,
       maxHeightAutoDefault: '200px'
     }
   },
@@ -172,6 +173,7 @@ export default {
 
   watch: {
     isActive (val) {
+      this.isBooted = true
       if (val) this.activate()
       else this.isContentActive = false
     },
@@ -276,10 +278,10 @@ export default {
         this.updateMaxMin()
 
         this.dimensions = {
-          'activator': this.measure(a),
-          'content': this.measure(c),
-          'list': this.measure(c, '.list'),
-          'selected': this.measure(c, '.list__tile--active', 'parent')
+          activator: this.measure(a),
+          content: this.measure(c),
+          list: this.measure(c, '.list'),
+          selected: this.auto ? this.measure(c, '.list__tile--active', 'parent') : null
         }
 
         this.offscreenFix()
@@ -390,7 +392,7 @@ export default {
         }
       }
 
-      return h('div', data, [this.$slots.default])
+      return h('div', data, [this.isBooted ? this.$slots.default : null])
     },
 
     // Utils

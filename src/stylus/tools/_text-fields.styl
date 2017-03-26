@@ -1,9 +1,6 @@
 input-group-theme(color, offset, dirty)
   input, textarea
     color: color
-    
-    + .icon
-      color: color
 
     &:disabled
       color: color
@@ -14,9 +11,6 @@ input-group-theme(color, offset, dirty)
   &.input-group--single-line&.input-group--focused
     label
       color: color
-    
-  .input-group__append-icon, .input-group__prepend-icon
-    color: rgba(offset, .6)
     
   &.input-group--dirty
     input, textarea

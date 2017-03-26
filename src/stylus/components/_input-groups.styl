@@ -6,6 +6,7 @@
   margin: $input-group-margin
   position: relative
   width: 100%
+  outline: none
 
 
 /** Label */
@@ -14,6 +15,7 @@
     font-size $input-font-size
     line-height: $input-font-size * 2
     height: $input-height
+    max-width: 80%
     transition: .4s $transition.fast-in-fast-out
     z-index: 0
 
@@ -42,7 +44,7 @@
     &.input-group--dark
       .input-group__details:before
         background-image: linear-gradient(to right, rgba(255, 255, 255, .38) 0, rgba(255, 255, 255, .38) 33%, transparent 0)
-      
+
   &--focused
     .input-group__details
       &:after
@@ -58,11 +60,21 @@
   &--light
     .input-group__details:before
       background-color: $material-twelve-percent-dark
-      
+
+    .icon
+      color: rgba(#000, .6)
+
   &--dark
     .input-group__details:before
       background-color: $material-twelve-percent-light
 
+    .icon
+      color: rgba(#fff, .6)
+
+/** Icons */
+.input-group
+  &__icon-cb
+    cursor: pointer
 
 /** Details */
 .input-group
@@ -103,27 +115,6 @@
   &__hint
     flex: 1 0
     transition: .3s $transition.fast-in-fast-out
-
-
-/** Icons */
-.input-group
-  &--prepend-icon
-    .input-group__prepend-icon
-      align-items: center
-      display: flex
-      justify-content: flex-start
-      width: 56px
-      height: 30px
-      position: absolute
-      left: 0
-      top: 0
-      transition: .3s $transition.fast-in-fast-out
-     
-    .input-group__details 
-      &:before, &:after
-        margin-left: 56px
-        max-width: calc(100% - 56px)
-
 
 /** Error */
 .input-group

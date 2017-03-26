@@ -15,6 +15,7 @@ export default {
 
   props: {
     group: String,
+    lazy: Boolean,
     noAction: Boolean
   },
 
@@ -39,15 +40,19 @@ export default {
   watch: {
     isActive () {
       this.booted = true
-      this.$emit('input', this.isActive)
 
       if (!this.isActive) {
         this.list.listClose(this._uid)
       }
     },
     '$route' (to) {
+      const isActive = this.matchRoute(to.path)
+
       if (this.group) {
-        this.isActive = this.matchRoute(to.path)
+        if (isActive && this.isActive !== isActive) {
+          this.list.listClick(this._uid)
+        }
+        this.isActive = isActive
       }
     }
   },
@@ -84,6 +89,7 @@ export default {
       addOnceEventListener(el, 'transitionend', done)
     },
     matchRoute (to) {
+      if (!this.group) return false
       return to.match(this.group) !== null
     }
   },
@@ -97,7 +103,7 @@ export default {
         value: this.isActive
       }],
       ref: 'group'
-    }, this.booted ? this.$slots.default : [])
+    }, (this.lazy && this.booted) || !this.lazy ? this.$slots.default : [])
 
     const item = h('div', {
       'class': this.classes,

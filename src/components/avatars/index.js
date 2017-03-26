@@ -1,15 +1,6 @@
-const Avatar = {
-  functional: true,
+import { createSimpleFunctional } from '../../util/helpers'
 
-  render (h, context) {
-    const children = context.children
-    const data = {
-      'class': `avatar ${context.data.staticClass || ''} ${context.data.class || ''}`
-    }
-
-    return h('div', data, children)
-  }
-}
+const Avatar = createSimpleFunctional('avatar')
 
 export default {
   Avatar
