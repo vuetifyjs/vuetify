@@ -8,7 +8,7 @@
   max-width: 100%
   z-index: 3
   @extend .z-depth-2
-  
+
   &--fixed
     top: 0
     left: 0
@@ -18,24 +18,24 @@
     &-right
       right: 0
       left: initial
-    
+
   &--drawer
     flex-basis: 0
     transform: translateX(-($sidebar-width + 25))
-    
+
   &--close
     transform: translateX(-($sidebar-width + 25))
-    
+
     &.sidebar--fixed-right
       transform: translateX($sidebar-width + 25)
-    
+
   &--mobile
     @media screen and (max-width: $grid-breakpoints.lg)
       transform: translateX(-($sidebar-width + 25))
-      
+
       &.sidebar--fixed-right, &.sidebar--right
         transform: translateX($sidebar-width + 25)
-    
+
   &--open, &--open.sidebar--mobile
     transform: translateX(0)
     width: $sidebar-width
@@ -44,33 +44,33 @@
     @media screen and (max-width: $grid-breakpoints.lg)
       margin-left: -300px
       transform: none
-      
+
       &.sidebar--open
         transform: translateX(300px)
-        
+
   &:not(.sidebar--fixed).sidebar--right
     @media screen and (max-width: $grid-breakpoints.lg)
       margin-right: -300px
       transform: none
-      
+
       &.sidebar--open
         transform: translateX(-300px)
-    
+
   .list__tile
     color: $sidebar-item-color
     transition: $primary-transition
     position: relative
-    
+
     .list__tile__avatar, .list__tile__action, .icon
       color: $sidebar-item-color
-    
+
     &:hover:not(&--active)
       background-color: $sidebar-item-hover-background-color
       color: $sidebar-item-active-color
-      
+
     &:after
       background: $material-twelve-percent-light
-      
+
     &--active
       .list__tile__title
         color: inherit
@@ -78,7 +78,7 @@
       &:first-child
         .icon
           color: $theme.primary
-      
+
   .list--group
     &__header--active
       &:first-child

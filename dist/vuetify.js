@@ -1973,19 +1973,12 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 var Col = {
   functional: true,
 
-  props: {
-    class: {
-      type: String,
-      default: ''
-    }
-  },
-
   render: function (h, ref) {
     var data = ref.data;
     var children = ref.children;
 
     data.staticClass = data.staticClass ? ("col " + (data.staticClass)) : 'col'
-    if (data.attrs) { data.staticClass += " " + (Object.keys(data.attrs).join(' ')) }
+    data.staticClass += " " + (Object.keys(data.attrs).join(' '))
     delete data.attrs
 
     return h('div', data, children)
@@ -1999,9 +1992,14 @@ var Container = {
     var data = ref.data;
     var children = ref.children;
 
-    data.staticClass = data.staticClass ? ("container " + (data.staticClass)) : 'container'
-    if (data.attrs && 'fluid' in data.attrs) { data.staticClass += ' container--fluid' }
-    delete data.attrs
+    var staticClass = data.staticClass ? ("container " + (data.staticClass)) : 'container'
+
+    if (data.attrs && typeof data.attrs.fluid !== 'undefined') {
+      staticClass += ' container--fluid'
+      data.attrs.fluid = undefined
+    }
+
+    data.staticClass = staticClass
 
     return h('div', data, children)
   }
