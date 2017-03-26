@@ -44,7 +44,7 @@
     &.input-group--dark
       .input-group__details:before
         background-image: linear-gradient(to right, rgba(255, 255, 255, .38) 0, rgba(255, 255, 255, .38) 33%, transparent 0)
-      
+
   &--focused
     .input-group__details
       &:after
@@ -60,11 +60,21 @@
   &--light
     .input-group__details:before
       background-color: $material-twelve-percent-dark
-      
+
+    .icon
+      color: rgba(#000, .6)
+
   &--dark
     .input-group__details:before
       background-color: $material-twelve-percent-light
 
+    .icon
+      color: rgba(#fff, .6)
+
+/** Icons */
+.input-group
+  &__icon-cb
+    cursor: pointer
 
 /** Details */
 .input-group
