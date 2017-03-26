@@ -15,6 +15,7 @@ export default {
 
   props: {
     group: String,
+    lazy: Boolean,
     noAction: Boolean
   },
 
@@ -102,7 +103,7 @@ export default {
         value: this.isActive
       }],
       ref: 'group'
-    }, this.booted ? this.$slots.default : [])
+    }, (this.lazy && this.booted) || !this.lazy ? this.$slots.default : [])
 
     const item = h('div', {
       'class': this.classes,
