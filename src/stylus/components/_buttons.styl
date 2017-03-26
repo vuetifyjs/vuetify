@@ -23,6 +23,7 @@
 /** Psuedo */
 .btn
   &:after
+    border-radius: inherit
     bottom: 0
     content: ''
     left: 0
@@ -50,6 +51,9 @@
     justify-content: center
     transition: $primary-transition
     z-index: 1
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
 
 
 /** Types */

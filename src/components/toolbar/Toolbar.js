@@ -1,9 +1,11 @@
 export default {
   functional: true,
 
-  props: { fixed: Boolean },
+  props: {
+    fixed: Boolean
+  },
 
-  render (h, { data, props, children }) {
+  render (h, { data, children, props }) {
     data.staticClass = data.staticClass ? `toolbar ${data.staticClass}` : 'toolbar'
     if (props.fixed) data.staticClass += ' toolbar--fixed'
 

@@ -14,6 +14,7 @@ export default {
     dark: Boolean,
     disabled: Boolean,
     hint: String,
+    hideDetails: Boolean,
     persistentHint: Boolean,
     label: String,
     light: {
@@ -87,9 +88,6 @@ export default {
       return this.$createElement('label', {}, this.label)
     },
     toggle () {},
-    isDirty () {
-      return this.inputValue
-    },
     genMessages () {
       let messages = []
 
@@ -135,18 +133,20 @@ export default {
       )
     },
     genIcon (type) {
-      const icon = this[`${type}IconAlt`] || this[`${type}Icon`]
-      const callback = this[`${type}IconCb`]
-      const callbackPrivate = this[`${type}IconCbPrivate`]
+      const icon = this[`${type}Icon`]
+      const cb = this[`${type}IconCb`]
+      const hasCallback = typeof cb === 'function'
 
       return this.$createElement(
         'v-icon',
         {
-          'class': 'input-group__' + type + '-icon',
+          'class': {
+            [`input-group__${type}-icon`]: true,
+            'input-group__icon-cb': hasCallback
+          },
           'nativeOn': {
             'click': e => {
-              if (typeof callbackPrivate === 'function') callbackPrivate(e)
-              if (typeof callback === 'function') callback(e)
+              hasCallback && cb(e)
             }
           }
         },
@@ -195,17 +195,16 @@ export default {
         }, wrapperChildren)
       )
 
-      detailsChildren.push(this.genMessages())
+      if (!this.hideDetails) {
+        detailsChildren.push(this.genMessages())
+        this.counter && detailsChildren.push(this.genCounter())
 
-      if (this.counter) {
-        detailsChildren.push(this.genCounter())
+        children.push(
+          this.$createElement('div', {
+            'class': 'input-group__details'
+          }, detailsChildren)
+        )
       }
-
-      children.push(
-        this.$createElement('div', {
-          'class': 'input-group__details'
-        }, detailsChildren)
-      )
 
       return this.$createElement('div', data, children)
     },

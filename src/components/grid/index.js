@@ -3,31 +3,10 @@ import { createSimpleFunctional } from '../../util/helpers'
 const Col = {
   functional: true,
 
-  props: {
-    class: {
-      type: String,
-      default: ''
-    }
-  },
-
   render: (h, { data, children }) => {
     data.staticClass = data.staticClass ? `col ${data.staticClass}` : 'col'
-    if (data.attrs) data.staticClass += ` ${Object.keys(data.attrs).join(' ')}`
+    data.staticClass += ` ${Object.keys(data.attrs).join(' ')}`
     delete data.attrs
-
-    return h('div', data, children)
-  }
-}
-
-const Layout = {
-  functional: true,
-
-  render: (h, { data, children }) => {
-    data.staticClass = data.staticClass ? `layout ${data.staticClass}` : 'layout'
-    if (data.attrs) {
-      data.staticClass += ` ${Object.keys(data.attrs).join(' ')}`
-      delete data.attrs
-    }
 
     return h('div', data, children)
   }
@@ -50,23 +29,8 @@ const Container = {
   }
 }
 
-const Content = {
-  functional: true,
-
-  render (h, { data, children }) {
-    let staticClass = data.staticClass ? `content ${data.staticClass}` : 'content'
-
-    if (data.attrs && typeof data.attrs.disableScroll !== 'undefined') {
-      staticClass += ' no-scroll-y'
-      data.attrs.disableScroll = undefined
-    }
-
-    data.staticClass = staticClass
-
-    return h('div', data, children)
-  }
-}
-
+const Content = createSimpleFunctional('content')
+const Row = createSimpleFunctional('row')
 const ColSpacer = createSimpleFunctional('col--spacer')
 const Spacer = createSimpleFunctional('spacer')
 
@@ -76,5 +40,5 @@ export default {
   Container,
   Content,
   Spacer,
-  Layout
+  Row
 }
