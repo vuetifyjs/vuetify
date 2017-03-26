@@ -45,10 +45,13 @@ export default {
       }
     },
     '$route' (to) {
-      this.isActive = this.matchRoute(to.path)
+      const isActive = this.matchRoute(to.path)
 
-      if (this.group && this.isActive) {
-        this.list.listClick(this._uid, true)
+      if (this.group) {
+        if (isActive && this.isActive !== isActive) {
+          this.list.listClick(this._uid)
+        }
+        this.isActive = isActive
       }
     }
   },

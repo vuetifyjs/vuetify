@@ -49,6 +49,7 @@ const Content = {
   functional: true,
 
   render (h, {data, children}) {
+
     let staticClass = data.staticClass ? `content ${data.staticClass}` : 'content'
 
     if (data.attrs && typeof data.attrs.disableScroll !== 'undefined') {
