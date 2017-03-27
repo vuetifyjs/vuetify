@@ -1,20 +1,31 @@
 .datatable
   thead
-    i
-      font-size: 13px
-      vertical-align: middle
-      display: inline-block
-      margin-right: 3px
-      opacity: 0
-      margin-left: -16px
-      transition: .3s $transition.swing
-
     th
       white-space: nowrap
       cursor: pointer
       user-select: none
+      transition: .3s $transition.swing
+      
+      &:not(:first-child)
+        transform: translateX(-16px)
+
+        i
+          font-size: 16px
+          vertical-align: sub
+          display: inline-block
+          opacity: 0
       
       &.active
+        transform: none
+        color: rgba(#000, .87)
+
         i
           opacity: 1
-          margin-left: 0
+
+/** Actions */
+.datatable__actions
+  display: flex
+  justify-content: flex-end
+  height: 56px
+  align-items: center
+  

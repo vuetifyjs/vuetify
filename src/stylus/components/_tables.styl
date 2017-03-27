@@ -1,7 +1,8 @@
 .table
   &__overflow
     width: 100%
-    overflow: auto
+    overflow-x: auto
+    overflow-y: hidden
     
 table
   border-radius: 2px
@@ -9,31 +10,33 @@ table
   border-spacing: 0
   width: 100%
   max-width: 100%
-  @extend .z-depth-1
   
   td, th
     padding: 8px
     text-align: left
     
+  tr
+    border-bottom: 1px solid $grey.lighten-2
+    height: 48px
+
   thead
-    
     th
-      color: $grey.darken-1
+      color: rgba(#000, .54)
       font-weight: 600
-      font-size: 13px
+      font-size: 12px
       
   tbody
-    
     tr
-      border-top: 1px solid $grey.lighten-2
       transition: background $primary-transition
       will-change: background
       
-      &:hover
+      &:hover, &.active
         background: $grey.lighten-3
         
     td
       font-weight: 500
+      color: rgba(#000, .87)
+      font-size: 13px
     
   .input-group--selection-controls
     margin: 0
