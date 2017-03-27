@@ -6,38 +6,50 @@ html, body
 
 .with
 
-  &.left-fixed-sidebar
-    header .toolbar
-      padding-left: $sidebar-width + $toolbar-padding-x
-      transition: $primary-transition
-
-      @media screen and (max-width: ($grid-breakpoints.lg - 1))
-        padding-left: $toolbar-padding-x
-
-    main,
-    footer
-      padding-left: $sidebar-width
-      transition: $primary-transition
-
-      @media screen and (max-width: ($grid-breakpoints.lg - 1))
-        padding-left: 0
-
   &.left-sidebar
+
     main
       background: $theme.secondary
 
     .sidebar
       box-shadow: none
 
-  &.right-fixed-sidebar
-    header .toolbar,
-    main,
-    footer
-      padding-right: $sidebar-width
-      transition: $primary-transition
+  for size, width in $grid-breakpoints
+    @media screen and (min-width: width)
+      
+      &.left-sidebar.sidebar-break-{size}
+        header .toolbar
+          padding-left: $sidebar-width + $toolbar-padding-x
+          transition: $primary-transition
 
-      @media screen and (max-width: ($grid-breakpoints.lg - 1))
-        padding-right: 0
+        main, footer
+          padding-left: $sidebar-width
+          transition: $primary-transition
+
+        .sidebar
+          width: $sidebar-width
+
+        &.toolbar-inset
+          header .toolbar
+            padding-left: 0
+            margin-left: $sidebar-width
+      &.right-sidebar.sidebar-break-{size}
+        header .toolbar, main, footer
+          padding-right: $sidebar-width
+          transition: $primary-transition
+        .sidebar
+          width: $sidebar-width
+
+
+  //&.right-sidebar
+  //  header .toolbar,
+  //  main,
+  //  footer
+  //    padding-right: $sidebar-width
+  //    transition: $primary-transition
+  //
+  //    @media screen and (max-width: ($grid-breakpoints.lg - 1))
+  //      padding-right: 0
 
   &.sidebar-under-toolbar
     .sidebar
@@ -45,10 +57,11 @@ html, body
       //padding-top: $toolbar-height
       //z-index: 5
 
-    &.left-fixed-sidebar,
-    &.right-fixed-sidebar
-      .toolbar
-        padding-left: inherit
+    // todo not sure if still needed so will disable
+    //&.left-fixed-sidebar,
+    //&.right-fixed-sidebar
+    //  .toolbar
+    //    padding-left: inherit
 
 .app
   &__bar

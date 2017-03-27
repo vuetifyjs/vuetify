@@ -73,9 +73,11 @@ export default {
     },
 
     resize () {
-      if (this.mobile && !this.drawer) {
-        this.isActive = window.innerWidth >= this.mobileBreakPoint
-      }
+      // const rootAppClassNames = document.querySelectorAll('[data-app]')[0].className;
+      // console.log(rootAppClassNames)
+      // if (this.mobile && !this.drawer) {
+      //   this.isActive = window.innerWidth >= this.mobileBreakPoint
+      // }
     },
 
     routeChanged () {
