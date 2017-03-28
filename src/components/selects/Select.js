@@ -24,6 +24,7 @@ export default {
     },
     auto: Boolean,
     autocomplete: Boolean,
+    bottom: Boolean,
     chips: Boolean,
     close: Boolean,
     debounce: {
@@ -48,9 +49,10 @@ export default {
       default: 300
     },
     multiple: Boolean,
-    singleLine: Boolean,
     multiLine: Boolean,
-    offset: Boolean
+    offset: Boolean,
+    singleLine: Boolean,
+    top: Boolean
   },
 
   computed: {
@@ -176,6 +178,11 @@ export default {
   },
 
   render (h) {
-    return this.genInputGroup([this.genSelectionsAndSearch(), this.genMenu()])
+    return this.genInputGroup([
+      this.genSelectionsAndSearch(),
+      this.genMenu()
+    ], {
+      ref: 'activator'
+    })
   }
 }

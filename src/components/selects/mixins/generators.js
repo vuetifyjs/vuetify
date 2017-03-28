@@ -15,7 +15,9 @@ export default {
           nudgeXAuto: this.multiple ? -40 : -16,
           nudgeWidth: 25,
           maxHeight: this.maxHeight,
-          activator: this.$refs.activator
+          activator: this.$refs.activator,
+          top: this.top || !this.bottom,
+          bottom: this.bottom
         },
         on: {
           input: val => (this.menuActive = val)
@@ -53,8 +55,7 @@ export default {
 
       return this.$createElement('div', {
         'class': 'input-group__selections',
-        style: { 'overflow': 'hidden' },
-        ref: 'activator'
+        style: { 'overflow': 'hidden' }
       }, [group, input])
     },
     genSelections () {

@@ -11,7 +11,7 @@ export default {
 
   watch: {
     value () {
-      this.isActive = this.value
+      // this.isActive = this.value
     },
     isActive () {
       this.$emit('input', this.isActive)

@@ -24,8 +24,33 @@
 
 /** Actions */
 .datatable__actions
+  color: $grey.base
   display: flex
   justify-content: flex-end
-  height: 56px
+  height: 48px
   align-items: center
+  font-size: 12px
   
+  .btn
+    color: inherit
+
+  &__pagination
+    text-align: center
+    width: 125px
+    
+  &__select
+    display: flex
+    align-items: center
+    justify-content: center
+    
+    .input-group--select
+      max-width: 50px
+      margin: 0 0 0 25px
+      
+      .input-group__selections__comma
+        color: $grey.base !important
+        font-size: 12px
+        padding-top: 6px
+        
+      .input-group__append-icon
+        color: $grey.base !important

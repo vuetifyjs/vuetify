@@ -386,10 +386,7 @@ export default {
           name: 'show',
           value: this.isContentActive
         }],
-        'class': { 'menu__content': true },
-        on: {
-          click: () => { if (this.closeOnClick) this.isActive = false }
-        }
+        'class': { 'menu__content': true }
       }
 
       return h('div', data, [this.isBooted ? this.$slots.default : null])
