@@ -12,14 +12,27 @@ table
   max-width: 100%
   
   td, th
-    padding: 8px
     text-align: left
+    
+    &:first-child
+      padding-left: 24px
+      
+    &:last-child
+      padding-right: 24px
+      
+    &:nth-child(2)
+      padding: 0 24px
+    
+    &:not(:first-child):not(:nth-child(2)):not(:nth-child(3)):not(:last-child)
+      padding: 0 28px
     
   tr
     border-bottom: 1px solid $grey.lighten-2
-    height: 48px
 
   thead
+    tr
+      height: 56px
+
     th
       color: rgba(#000, .54)
       font-weight: 600
@@ -29,10 +42,16 @@ table
     tr
       transition: background $primary-transition
       will-change: background
-      
-      &:hover, &.active
-        background: $grey.lighten-3
         
+      &.active
+        background: #f5f5f5
+      
+      &:hover
+        background: #eeeeee
+        
+    td, th
+      height: 48px
+
     td
       font-weight: 500
       color: rgba(#000, .87)
@@ -52,3 +71,6 @@ table
       .input-group--selection-controls__ripple
         left: 50%
         transform: translate3d(-50%, -50%, 0)
+  tfoot
+    tr
+      height: 56px

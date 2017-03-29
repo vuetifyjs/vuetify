@@ -1,6 +1,7 @@
 .datatable
   thead
     th
+      color: rgba(#000, .54)
       white-space: nowrap
       cursor: pointer
       user-select: none
@@ -10,24 +11,28 @@
         transform: translateX(-16px)
 
         i
+          color: rgba(#000, .38)
           font-size: 16px
           vertical-align: sub
           display: inline-block
           opacity: 0
       
+      &:hover
+        color: rgba(#000, .87)
+
       &.active
         transform: none
         color: rgba(#000, .87)
 
         i
+          color: rgba(#000, .87)
           opacity: 1
 
 /** Actions */
 .datatable__actions
-  color: $grey.base
+  color: rgba(#000, .54)
   display: flex
   justify-content: flex-end
-  height: 48px
   align-items: center
   font-size: 12px
   
@@ -36,7 +41,7 @@
 
   &__pagination
     text-align: center
-    width: 125px
+    margin: 0 32px
     
   &__select
     display: flex
@@ -44,13 +49,12 @@
     justify-content: center
     
     .input-group--select
-      max-width: 50px
-      margin: 0 0 0 25px
+      margin-left: 40px
       
       .input-group__selections__comma
-        color: $grey.base !important
+        color: rgba(#000, .54) !important
         font-size: 12px
         padding-top: 6px
         
       .input-group__append-icon
-        color: $grey.base !important
+        color: rgba(#000, .54) !important
