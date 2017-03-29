@@ -11,6 +11,17 @@ export default {
     large: Boolean
   },
 
+  methods: {
+    cancel () {
+      this.isActive = false
+      this.$emit('cancel')
+    },
+    save () {
+      this.isActive = false
+      this.$emit('save')
+    }
+  },
+
   render (h) {
     return h('v-menu', {
       'class': 'small-dialog',
@@ -18,7 +29,6 @@ export default {
         transition: 'v-slide-x-reverse-transition',
         origin: 'top right',
         right: true,
-        nudgeWidth: 300,
         activator: this.$refs.activator,
         value: this.isActive
       },
@@ -36,7 +46,24 @@ export default {
       }, [this.$slots.input]),
       h('div', {
         'class': 'small-dialog__actions'
-      }, [this.$slots.actions])
+      }, [
+        h('v-btn', {
+          props: {
+            flat: true,
+            primary: true,
+            light: true
+          },
+          nativeOn: { click: this.cancel }
+        }, 'Cancel'),
+        h('v-btn', {
+          props: {
+            flat: true,
+            primary: true,
+            light: true
+          },
+          nativeOn: { click: this.save }
+        }, 'Save')
+      ])
     ])
   }
 }
