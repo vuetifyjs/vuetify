@@ -2,14 +2,16 @@
   position: relative
   
   &:before
-    background: $theme.secondary
+    background: $grey.darken-2
     border-radius: .2rem
     color: #FFFFFF
     content: attr(data-tooltip)
-    font-size: .8rem
-    line-height: 1.2rem
+    font-size: 10px
+    display: flex
+    align-items: center
     opacity: 0
-    padding: .8rem
+    height: 22px
+    padding: 0 8px
     position: absolute
     pointer-events: none
     transition: $secondary-transition
@@ -28,40 +30,65 @@
     &:before
       top: 100%
       left: 50%
-      transform: translate(-50%, -10px) scale(0.1)
+      transform: translate(-50%, -14px) scale(0.1)
       transform-origin: center top
       
     &:hover
       &:before
-        transform: translate(-50%, 10px)
+        transform: translate(-50%, 14px)
       
   &[data-tooltip-location='top']
     &:before
-      top: -100%
+      bottom: 100%
       left: 50%
-      transform: translate(-50%, 10px) scale(0.1)
+      transform: translate(-50%, 14px) scale(0.1)
       transform-origin: center bottom
       
     &:hover
       &:before
-        transform: translate(-50%, -10px)
+        transform: translate(-50%, -14px)
 
   &[data-tooltip-location='left']
     &:before
       right: 100%
-      transform: translate(10px, 0%) scale(0.1)
+      transform: translate(14px, 0%) scale(0.1)
       transform-origin: center right
       
     &:hover
       &:before
-        transform: translate(-10px, 0)
+        transform: translate(-14px, 0)
       
   &[data-tooltip-location='right']
     &:before
       left: 100%
-      transform: translate(-10px, 0%) scale(0.1)
+      transform: translate(-14px, 0%) scale(0.1)
       transform-origin: center left
       
     &:hover
       &:before
-        transform: translate(10px, 0)
+        transform: translate(14px, 0)
+    
+  @media $display-breakpoints.sm-and-down
+    &:before
+      padding: 0 16px
+      height: 32px
+      
+    &[data-tooltip-location='bottom']
+      &:hover
+        &:before
+          transform: translate(-50%, 24px)
+      
+    &[data-tooltip-location='top']
+      &:hover
+        &:before
+          transform: translate(-50%, -24px)
+      
+    &[data-tooltip-location='left']
+      &:hover
+        &:before
+          transform: translate(-24px, 0%)
+      
+    &[data-tooltip-location='right']
+      &:hover
+        &:before
+          transform: translate(24px, 0%)
