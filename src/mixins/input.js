@@ -79,6 +79,12 @@ export default {
     }
   },
 
+  watch: {
+    rules () {
+      this.validate()
+    }
+  },
+
   mounted () {
     this.validate()
   },
