@@ -15,9 +15,9 @@ export default {
     },
     genHeader (item, index) {
       const beingSorted = this.sorting === index
-      const icon = beingSorted && this.asc
-        ? 'arrow_upward'
-        : 'arrow_downward'
+      const classes = beingSorted && this.asc
+        ? 'asc'
+        : 'desc'
 
       return this.$createElement('th', {
         'class': {
@@ -25,7 +25,7 @@ export default {
         },
         on: { click: () => this.sort(index) }
       }, [
-        this.$createElement('v-icon', icon),
+        this.$createElement('v-icon', { 'class': classes }, 'arrow_downward'),
         this.$scopedSlots.headers ? this.$scopedSlots.headers({ item }) : item
       ])
     }

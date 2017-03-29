@@ -185,6 +185,10 @@ export default {
 
     activatorXY (val) {
       this.isActive = true
+    },
+
+    value (val) {
+      this.isActive = val
     }
   },
 
@@ -223,7 +227,7 @@ export default {
     },
 
     activatorClickHandler () {
-      if (this.openOnClick) this.isActive = !this.isActive && !this.disabled
+      if (this.openOnClick && !this.isActive) this.isActive = !this.isActive && !this.disabled
     },
 
     addActivatorEvents (activator = null) {
@@ -433,7 +437,7 @@ export default {
           name: 'click-outside',
           value: e => {
             const a = this.activator
-            if (a && (a === e.target || a.contains(e.target))) return false
+            if (!this.closeOnClick || a && (a === e.target || a.contains(e.target))) return false
             return true
           }
         }
