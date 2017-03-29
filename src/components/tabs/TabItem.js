@@ -1,4 +1,3 @@
-import { closestParentTag } from '../../util/helpers'
 import GenerateRouteLink from '../../mixins/route-link'
 
 export default {
@@ -27,29 +26,8 @@ export default {
         'tab__item--active': this.isActive,
         'tab__item--disabled': this.disabled
       }
-    },
-
-    target () {
-      return this.href.replace('#', '')
-    },
-
-    tabs () {
-      return closestParentTag.call(this, 'v-tabs')
     }
   },
-
-  methods: {
-    click (e) {
-      e.preventDefault()
-
-      this.tabs.tabClick(this.target)
-    },
-
-    toggle (target) {
-      this.isActive = this.target === target
-    }
-  },
-
   render (h) {
     const { tag, data } = this.generateRouteLink()
 

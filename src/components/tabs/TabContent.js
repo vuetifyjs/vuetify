@@ -3,7 +3,6 @@ export default {
 
   data () {
     return {
-      isActive: false,
       reverse: false
     }
   },
@@ -25,27 +24,16 @@ export default {
 
   computed: {
     computedTransition () {
-      return this.reverse ? this.reverseTransition : this.transition
+      return this.reverseTransition//Bug forward transtionts need to work too
+      //return this.reverse ? this.reverseTransition : this.transition
     }
   },
-
-  methods: {
-    toggle (target, reverse) {
-      this.reverse = reverse
-      this.isActive = this.id === target
-    }
-  },
-
   render (h) {
     return h(this.computedTransition, {}, [
       h('div', {
         'class': 'tabs__item',
+        //technically this isn't needed since we acces the component Props
         domProps: { id: this.id },
-        directives: [{
-          name: 'show', 
-          value: this.isActive
-        }]
     }, [this.$slots.default])])
   }
 }
-  

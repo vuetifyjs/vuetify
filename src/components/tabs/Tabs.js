@@ -4,11 +4,9 @@ export default {
   data () {
     return {
       activators: [],
-      isActive: null,
-      reverse: false,
-      target: null,
+      reverse: false,//This needs worked out
       resizeDebounce: {},
-      targetEl: null
+      active:''
     }
   },
 
@@ -31,25 +29,6 @@ export default {
       }
     }
   },
-
-  watch: {
-    value () {
-      this.tabClick(this.value)
-    },
-    isActive () {
-      this.activators.forEach(i => {
-        i.toggle(this.target)
-
-        if (i.isActive) {
-          this.slider(i.$el)
-        }
-      })
-
-      this.$refs.content.$children.forEach(i => i.toggle(this.target, this.reverse))
-      this.$emit('input', this.target)
-    }
-  },
-
   mounted () {
     this.$vuetify.load(() => {
       this.init()
@@ -63,50 +42,70 @@ export default {
 
   methods: {
     init () {
+      //Should find a way to just get the first v-tab-item child
+      //This removes need for most of the $refs
       this.activators = this.$refs.activators.$children.filter(i => i.$options._componentTag === 'v-tab-item')
       setTimeout(() => {
-        this.tabClick(this.value || this.activators[0].target)
+        //set active to starting postion either provided or first element
+          //!this.value may need to be reworked
+          //Also the above seems like it should be able to be simplified
+        this.active=this.value || this.activators[0].$el;
       }, 200)
     },
     resize () {
       clearTimeout(this.resizeDebounce)
-
       this.resizeDebounce = setTimeout(() => {
-        this.slider()
+        this.$refs.slider.$forceUpdate();
       }, 250)
     },
-    slider (el) {
-      this.targetEl = el || this.targetEl
-      this.$refs.slider.style.width = `${this.targetEl.clientWidth}px`
-      this.$refs.slider.style.left = `${this.targetEl.offsetLeft}px`
-    },
-    tabClick (target) {
-      this.target = target
-
-      this.$nextTick(() => {
-        const nextIndex = this.$refs.content.$children.findIndex(i => i.id === this.target)
-        this.reverse = nextIndex < this.isActive
-        this.isActive = nextIndex
-      })
+    tabClick(e){
+      e.preventDefault;
+      let el=e.target;
+      if(el==e.currentTarget)return;
+      while(!el.classList.contains('tab__item')){//This should be improved
+        el=el.parentNode;
+      }
+      this.active=el.parentNode;
     }
   },
 
   render (h) {
+    let tabsEls=[],tabsContent=[],tabsDefault=[],active=this.active;
+    //sort slots based on tag name
+    this.$slots.default.forEach(v=>{
+      let tag=v.componentOptions.tag
+      if(tag=='v-tab-item'){
+        tabsEls.push(v)
+      }
+      else if(tag=='v-tab-content'){
+        //only save tabs-content if id is equal to current active tab's href
+        //need to look for a more elegant solution
+        if(this.active&&this.active.children[0].getAttribute('href').replace('#','')==v.componentOptions.propsData.id){
+          tabsContent.push(v)
+        }
+      }
+      else tabsDefault.push(v)
+    });
+
     const tabs = h('v-tabs-tabs', {
-      ref: 'activators'
+      ref: 'activators',
+      nativeOn:{
+        click:this.tabClick
+      }
     }, [
-      h('v-tabs-slider', { ref: 'slider' }),
-      this.$slots.activators
+      h('v-tabs-slider',{
+        ref:'slider',
+        props:{active:active}
+      }),
+      tabsEls
     ])
 
     const items = h('v-tabs-items', {
       'class': 'tabs__items',
-      ref: 'content'
-    }, [this.$slots.content])
+    }, tabsContent)
 
     return h('div', {
       'class': this.classes,
-      domProps: { id: this.id }
-    }, [this.$slots.default, tabs, items])
+    }, [tabsDefault, tabs, items])
   }
 }
