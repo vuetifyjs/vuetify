@@ -24,10 +24,6 @@ export default {
   },
 
   methods: {
-    cancel () {
-      this.isActive = false
-      this.$emit('cancel')
-    },
     save () {
       this.isActive = false
       this.$emit('save')
@@ -65,7 +61,7 @@ export default {
             primary: true,
             light: true
           },
-          nativeOn: { click: this.cancel }
+          nativeOn: { click: () => (this.isActive = false) }
         }, this.cancelText),
         h('v-btn', {
           props: {
