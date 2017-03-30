@@ -5,7 +5,7 @@ export default {
         ref: 'menu',
         props: {
           auto: this.auto,
-          closeOnClick: !this.multiple,
+          closeOnContentClick: !this.multiple,
           disabled: this.disabled,
           offsetY: this.autocomplete || this.offset,
           value: this.menuActive,
@@ -15,9 +15,7 @@ export default {
           nudgeXAuto: this.multiple ? -40 : -16,
           nudgeWidth: 25,
           maxHeight: this.maxHeight,
-          activator: this.$refs.activator,
-          top: this.top || !this.bottom,
-          bottom: this.bottom
+          activator: this.$refs.activator
         },
         on: {
           input: val => (this.menuActive = val)
@@ -55,7 +53,8 @@ export default {
 
       return this.$createElement('div', {
         'class': 'input-group__selections',
-        style: { 'overflow': 'hidden' }
+        style: { 'overflow': 'hidden' },
+        ref: 'activator'
       }, [group, input])
     },
     genSelections () {

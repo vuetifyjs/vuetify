@@ -45,8 +45,8 @@ export default {
         transition: this.transition,
         origin: 'top right',
         right: true,
-        activator: this.$refs.activator,
-        value: this.isActive
+        value: this.isActive,
+        closeOnContentClick: false
       },
       on: {
         input: val => (this.isActive = val)
@@ -54,8 +54,7 @@ export default {
     }, [
       h('a', {
         domProps: { href: 'javascript:;' },
-        slot: 'activator',
-        ref: 'activator'
+        slot: 'activator'
       }, [this.$slots.default]),
       h('div', {
         'class': 'small-dialog__content',

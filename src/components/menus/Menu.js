@@ -76,6 +76,10 @@ export default {
       type: Boolean,
       default: true
     },
+    closeOnContentClick: {
+      type: Boolean,
+      default: true
+    },
     activator: {
       default: null
     },
@@ -185,10 +189,6 @@ export default {
 
     activatorXY (val) {
       this.isActive = true
-    },
-
-    value (val) {
-      this.isActive = val
     }
   },
 
@@ -227,7 +227,7 @@ export default {
     },
 
     activatorClickHandler () {
-      if (this.openOnClick && !this.isActive) this.isActive = !this.isActive && !this.disabled
+      if (this.openOnClick) this.isActive = !this.isActive && !this.disabled
     },
 
     addActivatorEvents (activator = null) {
@@ -390,7 +390,15 @@ export default {
           name: 'show',
           value: this.isContentActive
         }],
-        'class': { 'menu__content': true }
+        'class': { 'menu__content': true },
+        on: {
+          click: e => {
+            if (this.closeOnContentClick) {
+              e.stopPropagation()
+              this.isActive = false
+            }
+          }
+        }
       }
 
       return h('div', data, [this.isBooted ? this.$slots.default : null])
@@ -432,19 +440,21 @@ export default {
       'class': {
         'menu': true
       },
-      directives: [
-        {
-          name: 'click-outside',
-          value: e => {
-            const a = this.activator
-            if (!this.closeOnClick || a && (a === e.target || a.contains(e.target))) return false
-            return true
-          }
-        }
-      ],
+      directives: [],
       on: {
         'keyup': e => { if (e.keyCode === 27) this.isActive = false }
       }
+    }
+
+    if (this.closeOnClick) {
+      data.directives.push({
+        name: 'click-outside',
+        value: e => {
+          const a = this.activator
+          if (a && (a === e.target || a.contains(e.target))) return false
+          return true
+        }
+      })
     }
 
     return h('div', data, [this.genActivator(h), this.genTransition(h)])
