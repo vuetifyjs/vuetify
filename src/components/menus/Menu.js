@@ -227,7 +227,9 @@ export default {
     },
 
     activatorClickHandler () {
-      if (this.openOnClick) this.isActive = !this.isActive && !this.disabled
+      if (this.disabled) return
+      else if (this.openOnClick && !this.isActive) this.isActive = true
+      else if (this.closeOnClick && this.isActive) this.isActive = false
     },
 
     addActivatorEvents (activator = null) {
@@ -440,21 +442,17 @@ export default {
       'class': {
         'menu': true
       },
-      directives: [],
-      on: {
-        'keyup': e => { if (e.keyCode === 27) this.isActive = false }
-      }
-    }
-
-    if (this.closeOnClick) {
-      data.directives.push({
+      directives: [{
         name: 'click-outside',
         value: e => {
           const a = this.activator
           if (a && (a === e.target || a.contains(e.target))) return false
           return true
         }
-      })
+      }],
+      on: {
+        'keyup': e => { if (e.keyCode === 27) this.isActive = false }
+      }
     }
 
     return h('div', data, [this.genActivator(h), this.genTransition(h)])
