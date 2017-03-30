@@ -14,6 +14,10 @@ export default {
     large: Boolean,
     saveText: {
       default: 'Save'
+    },
+    transition: {
+      type: String,
+      default: 'v-slide-x-reverse-transition'
     }
   },
 
@@ -24,6 +28,10 @@ export default {
   },
 
   methods: {
+    cancel () {
+      this.isActive = false
+      this.$emit('cancel')
+    },
     save () {
       this.isActive = false
       this.$emit('save')
@@ -34,7 +42,7 @@ export default {
     return h('v-menu', {
       'class': 'small-dialog',
       props: {
-        transition: 'v-slide-x-reverse-transition',
+        transition: this.transition,
         origin: 'top right',
         right: true,
         activator: this.$refs.activator,
@@ -50,10 +58,20 @@ export default {
         ref: 'activator'
       }, [this.$slots.default]),
       h('div', {
-        'class': 'small-dialog__content'
+        'class': 'small-dialog__content',
+        on: {
+          keydown: e => {
+            e.keyCode === 27 && this.cancel()
+            e.keyCode === 13 && this.save()
+          }
+        }
       }, [this.$slots.input]),
       h('div', {
-        'class': 'small-dialog__actions'
+        'class': 'small-dialog__actions',
+        directives: [{
+          name: 'show',
+          value: this.large
+        }]
       }, [
         h('v-btn', {
           props: {
@@ -61,7 +79,7 @@ export default {
             primary: true,
             light: true
           },
-          nativeOn: { click: () => (this.isActive = false) }
+          nativeOn: { click: this.cancel }
         }, this.cancelText),
         h('v-btn', {
           props: {
