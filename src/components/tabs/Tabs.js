@@ -73,6 +73,13 @@ export default {
     let tabsEls=[],tabsContent=[],tabsDefault=[],active=this.active;
     //sort slots based on tag name
     this.$slots.default.forEach(v=>{
+      //Checks for empty text nodes
+      if(v.tag==undefined&&v.text==undefined)return;
+      //checks to see if it is normal html or non-empty text nodes
+      if(v.componentOptions==undefined){
+        tabsDefault.push(v);
+        return;
+      }
       let tag=v.componentOptions.tag
       if(tag=='v-tab-item'){
         tabsEls.push(v)
