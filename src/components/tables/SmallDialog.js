@@ -8,7 +8,19 @@ export default {
   },
 
   props: {
-    large: Boolean
+    cancelText: {
+      default: 'Cancel'
+    },
+    large: Boolean,
+    saveText: {
+      default: 'Save'
+    }
+  },
+
+  watch: {
+    isActive (val) {
+      val && this.$emit('open') || !val && this.$emit('close')
+    }
   },
 
   methods: {
@@ -54,7 +66,7 @@ export default {
             light: true
           },
           nativeOn: { click: this.cancel }
-        }, 'Cancel'),
+        }, this.cancelText),
         h('v-btn', {
           props: {
             flat: true,
@@ -62,7 +74,7 @@ export default {
             light: true
           },
           nativeOn: { click: this.save }
-        }, 'Save')
+        }, this.saveText)
       ])
     ])
   }
