@@ -12,7 +12,8 @@ export default {
       asc: null,
       page: 1,
       rowsPerPage: 5,
-      sorting: null
+      sorting: null,
+      all: false
     }
   },
 
@@ -25,15 +26,35 @@ export default {
       type: Array,
       default: () => []
     },
+    itemValue: {
+      default: 'value'
+    },
     rowsPerPageItems: {
       type: Array,
       default () {
         return [5, 10, 25]
       }
+    },
+    selectAll: Boolean,
+    search: {
+      required: false
+    },
+    filter: {
+      type: Function,
+      default: (val, search) => {
+        return val.toString().toLowerCase().indexOf(search) !== -1
+      }
+    },
+    value: {
+      type: Array,
+      default: () => []
     }
   },
 
   computed: {
+    indeterminate () {
+      return this.selectAll && this.value.some(i => i[this.itemValue])
+    },
     pageStart () {
       return (this.page - 1) * this.rowsPerPage
     },
@@ -41,7 +62,16 @@ export default {
       return this.page * this.rowsPerPage
     },
     filteredItems () {
-      const items = this.items.sort((a, b) => {
+      let items = this.value
+      const hasSearch = typeof this.search !== 'undefined' && this.search !== null
+
+      if (hasSearch) {
+        const search = this.search.toString().toLowerCase()
+
+        items = items.filter(i => Object.keys(i).some(j => this.filter(i[j], search)))
+      }
+
+      return items.sort((a, b) => {
         const sortA = a[Object.keys(a)[this.sorting]]
         const sortB = b[Object.keys(b)[this.sorting]]
 
@@ -54,13 +84,18 @@ export default {
           if (sortA > sortB) return -1
           return 0
         }
-      })
-
-      return items.slice(this.pageStart, this.pageStop)
+      }).slice(this.pageStart, this.pageStop)
     }
   },
 
   watch: {
+    all (val) {
+      this.$emit('input', this.value.map(i => {
+        i[this.itemValue] = this.filteredItems.includes(i) ? val : false
+
+        return i
+      }))
+    },
     rowsPerPage () {
       this.page = 1
     }

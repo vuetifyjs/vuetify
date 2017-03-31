@@ -15,13 +15,16 @@ table
     text-align: left
     
     &:first-child
-      padding-left: 24px
+      padding: 0 24px
       
     &:last-child
       padding-right: 24px
       
-    &:nth-child(2)
+    &:nth-child(1)
       padding: 0 24px
+      
+    &:nth-child(2)
+      padding-left: 24px
     
     &:not(:first-child):not(:nth-child(2)):not(:nth-child(3)):not(:last-child)
       padding: 0 28px

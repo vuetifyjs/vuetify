@@ -5,11 +5,14 @@ export default {
       const checkbox = this.$createElement('v-checkbox', {
         props: {
           'hide-details': true,
-          primary: true
-        }
+          primary: true,
+          inputValue: this.all,
+          indeterminate: this.indeterminate
+        },
+        on: { change: val => (this.all = val) }
       })
 
-      children.unshift(this.$createElement('th', [checkbox]))
+      this.selectAll && children.unshift(this.$createElement('th', [checkbox]))
 
       return this.$createElement('thead', [this.genTR(children)])
     },
@@ -21,7 +24,8 @@ export default {
 
       return this.$createElement('th', {
         'class': {
-          'active': beingSorted
+          active: beingSorted,
+          [classes]: beingSorted && true
         },
         on: { click: () => this.sort(index) }
       }, [

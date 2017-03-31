@@ -17,7 +17,7 @@ export default {
     genNextIcon () {
       return this.$createElement('v-btn', {
         props: {
-          disabled: this.page * this.rowsPerPage >= this.items.length,
+          disabled: this.page * this.rowsPerPage >= this.value.length,
           icon: true
         },
         nativeOn: {
@@ -47,13 +47,13 @@ export default {
       ])
     },
     genPagination () {
-      const stop = this.items.length < this.pageStop
-        ? this.items.length
+      const stop = this.value.length < this.pageStop
+        ? this.value.length
         : this.pageStop
 
       return this.$createElement('div', {
         'class': 'datatable__actions__pagination'
-      }, `${this.pageStart + 1}-${stop} of ${this.items.length}`)
+      }, `${this.pageStart + 1}-${stop} of ${this.value.length}`)
     },
     genActions () {
       return [this.$createElement('div', {

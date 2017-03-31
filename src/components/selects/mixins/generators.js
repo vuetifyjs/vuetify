@@ -16,7 +16,8 @@ export default {
           nudgeXAuto: this.multiple ? -40 : -16,
           nudgeWidth: 25,
           maxHeight: this.maxHeight,
-          activator: this.$refs.activator
+          activator: this.$refs.activator,
+          top: true
         },
         on: {
           input: val => (this.menuActive = val)
