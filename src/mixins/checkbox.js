@@ -67,8 +67,6 @@ export default {
       }
 
       this.$emit('change', input)
-
-      this.$nextTick(() => (this.inputDeterminate = false))
     }
   }
 }

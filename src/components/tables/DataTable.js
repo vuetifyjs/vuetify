@@ -53,7 +53,9 @@ export default {
 
   computed: {
     indeterminate () {
-      return this.selectAll && this.value.some(i => i[this.itemValue])
+      const all = this.value.every(i => i[this.itemValue])
+
+      return this.selectAll && this.value.some(i => i[this.itemValue]) && !all
     },
     pageStart () {
       return (this.page - 1) * this.rowsPerPage
@@ -98,6 +100,9 @@ export default {
     },
     rowsPerPage () {
       this.page = 1
+    },
+    indeterminate (val) {
+      if (!val) this.all = true
     }
   },
 
