@@ -1,7 +1,8 @@
 export default {
   methods: {
     genTHead () {
-      const children = this.headers.map((o, i) => this.genHeader(o, i))
+      const selectAll = this.selectAll ? 1 : 0
+      const children = this.headers.map((o, i) => this.genHeader(o, i + selectAll))
       const checkbox = this.$createElement('v-checkbox', {
         props: {
           'hide-details': true,
@@ -9,7 +10,7 @@ export default {
           inputValue: this.all,
           indeterminate: this.indeterminate
         },
-        on: { change: val => (this.all = val) }
+        on: { change: this.toggle }
       })
 
       this.selectAll && children.unshift(this.$createElement('th', [checkbox]))

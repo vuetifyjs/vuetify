@@ -72,6 +72,7 @@ export default {
       type: Boolean,
       default: true
     },
+    lazy: Boolean,
     closeOnClick: {
       type: Boolean,
       default: true
@@ -403,7 +404,7 @@ export default {
         }
       }
 
-      return h('div', data, [this.isBooted ? this.$slots.default : null])
+      return h('div', data, [this.lazy && !this.isBooted ? null : this.$slots.default])
     },
 
     // Utils

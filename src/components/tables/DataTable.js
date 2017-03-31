@@ -53,9 +53,13 @@ export default {
 
   computed: {
     indeterminate () {
-      const all = this.value.every(i => i[this.itemValue])
-
-      return this.selectAll && this.value.some(i => i[this.itemValue]) && !all
+      return this.selectAll && this.someItems && !this.everyItem
+    },
+    everyItem () {
+      return this.value.every(i => i[this.itemValue])
+    },
+    someItems () {
+      return this.value.some(i => i[this.itemValue])
     },
     pageStart () {
       return (this.page - 1) * this.rowsPerPage
@@ -91,18 +95,14 @@ export default {
   },
 
   watch: {
-    all (val) {
-      this.$emit('input', this.value.map(i => {
-        i[this.itemValue] = this.filteredItems.includes(i) ? val : false
-
-        return i
-      }))
-    },
     rowsPerPage () {
       this.page = 1
     },
     indeterminate (val) {
-      if (!val) this.all = true
+      if (val) this.all = true
+    },
+    someItems (val) {
+      if (!val) this.all = false
     }
   },
 
@@ -123,6 +123,15 @@ export default {
     },
     genTR (children) {
       return this.$createElement('tr', {}, children)
+    },
+    toggle (val) {
+      this.all = val
+
+      this.$emit('input', this.value.map(i => {
+        i[this.itemValue] = this.filteredItems.includes(i) ? val : false
+
+        return i
+      }))
     }
   },
 

@@ -141,7 +141,8 @@ export default {
         domProps: {
           disabled: this.disabled,
           required: this.required,
-          value: this.lazyValue
+          value: this.lazyValue,
+          autofucus: this.autofocus
         },
         attrs: {
           tabindex: this.tabindex

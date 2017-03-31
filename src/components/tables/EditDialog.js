@@ -1,9 +1,10 @@
 export default {
-  name: 'small-dialog',
+  name: 'edit-dialog',
 
   data () {
     return {
-      isActive: false
+      isActive: false,
+      isSaving: false
     }
   },
 
@@ -23,19 +24,31 @@ export default {
 
   watch: {
     isActive (val) {
-      val && this.$emit('open') || !val && this.$emit('close')
+      val && this.$emit('open') && this.focus()
+      if (!val) {
+        !this.isSaving && this.$emit('cancel')
+        this.isSaving && this.$emit('close')
+        this.isSaving = false
+      }
     }
   },
 
   methods: {
     cancel () {
       this.isActive = false
-      this.$emit('cancel')
+    },
+    focus () {
+      this.input && setTimeout(() => (this.input.focus()), 0)
     },
     save () {
+      this.isSaving = true
       this.isActive = false
       this.$emit('save')
     }
+  },
+
+  mounted () {
+    this.input = this.$el.querySelector('input')
   },
 
   render (h) {

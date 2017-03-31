@@ -3,11 +3,11 @@ import {
 } from '../../util/helpers'
 
 import DataTable from './DataTable'
-import SmallDialog from './SmallDialog'
+import EditDialog from './EditDialog'
 const TableOverflow = createSimpleFunctional('table__overflow')
 
 export default {
   DataTable,
-  SmallDialog,
+  EditDialog,
   TableOverflow
 }
