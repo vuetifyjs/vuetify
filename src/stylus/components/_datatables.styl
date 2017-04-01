@@ -6,20 +6,24 @@
       cursor: pointer
       user-select: none
       transition: .3s $transition.swing
-      position: relative
+      
+      > div
+        display: flex
       
       &:not(:first-child)
         i
-          position: absolute
-          left: 8px
           color: rgba(#000, .38)
           font-size: 16px
           vertical-align: sub
           display: inline-block
           opacity: 0
+          transition: .3s $transition.swing
       
       &:hover
         color: rgba(#000, .87)
+        
+        i
+          opacity: .6
 
       &.active
         transform: none
@@ -28,7 +32,6 @@
         i
           color: rgba(#000, .87)
           opacity: 1
-          transition: .3s $transition.swing
         
         &.asc
           i

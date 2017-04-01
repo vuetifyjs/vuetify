@@ -29,10 +29,7 @@ export default {
           [classes]: beingSorted && true
         },
         on: { click: () => this.sort(index) }
-      }, [
-        this.$createElement('v-icon', { 'class': classes }, 'arrow_downward'),
-        this.$scopedSlots.headers ? this.$scopedSlots.headers({ item }) : item
-      ])
+      }, [this.$scopedSlots.headers ? this.$scopedSlots.headers({ item }) : item])
     }
   }
 }
