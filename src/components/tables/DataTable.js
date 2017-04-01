@@ -9,7 +9,7 @@ export default {
 
   data () {
     return {
-      asc: null,
+      desc: null,
       page: 1,
       rowsPerPage: 5,
       sorting: null,
@@ -81,13 +81,13 @@ export default {
         const sortA = a[Object.keys(a)[this.sorting]]
         const sortB = b[Object.keys(b)[this.sorting]]
 
-        if (this.asc) {
-          if (sortA < sortB) return -1
-          if (sortA > sortB) return 1
-          return 0
-        } else {
+        if (this.desc) {
           if (sortA < sortB) return 1
           if (sortA > sortB) return -1
+          return 0
+        } else {
+          if (sortA < sortB) return -1
+          if (sortA > sortB) return 1
           return 0
         }
       }).slice(this.pageStart, this.pageStop)
@@ -110,15 +110,15 @@ export default {
     sort (index) {
       if (this.sorting === null) {
         this.sorting = index
-        this.asc = true
-      } else if (this.sorting === index && this.asc) {
-        this.asc = false
+        this.desc = true
+      } else if (this.sorting === index && this.desc) {
+        this.desc = false
       } else if (this.sorting !== index) {
         this.sorting = index
-        this.asc = true
+        this.desc = true
       } else {
         this.sorting = null
-        this.asc = null
+        this.desc = null
       }
     },
     genTR (children) {

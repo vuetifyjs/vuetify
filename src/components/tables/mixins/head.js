@@ -19,9 +19,9 @@ export default {
     },
     genHeader (item, index) {
       const beingSorted = this.sorting === index
-      const classes = beingSorted && this.asc
-        ? 'asc'
-        : 'desc'
+      const classes = beingSorted && this.desc
+        ? 'desc'
+        : 'asc'
 
       return this.$createElement('th', {
         'class': {
