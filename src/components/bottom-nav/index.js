@@ -1,4 +1,4 @@
-import BottomNav from './BottomNav.vue'
+import BottomNav from './BottomNav'
 
 export default {
   BottomNav

@@ -6,13 +6,16 @@
   box-shadow: 0 3px 14px 2px rgba(#000, .12)
   display: flex
   justify-content: center
-  transition: all .4s cubic-bezier(.25,.8,.50,1)
+  transition: all .4s cubic-bezier(.25, .8, .50, 1)
+
+  &--absolute
+    position: absolute
 
   &--hidden
     bottom: -60px
 
   .btn
-    flex: 1;
+    flex: 1
     height: 100%
     top: 0
     border-radius: 0
@@ -24,10 +27,9 @@
     opacity: .5
 
     .icon
-      transition: all .4s cubic-bezier(.25,.8,.50,1)
+      transition: all .4s cubic-bezier(.25, .8, .50, 1)
 
     .btn__content
-      font-family: 'Roboto'
       font-size: 12px
       transform: scale(1) translateY(2px)
       transition: font-size .1s ease-in-out
@@ -35,7 +37,7 @@
       flex-direction: column-reverse
 
 
-    &--nav-active
+    &--active
       opacity: 1
 
       .btn__content
@@ -60,7 +62,7 @@
       min-width: 56px
       max-width: 96px
 
-      &--nav-active
+      &--active
         min-width: 96px
         max-width: 168px
 
@@ -73,7 +75,7 @@
 
 
 .bottom-nav--shift
-  .btn:not(.btn--nav-active)
+  .btn:not(.btn--active)
     .btn__content
       color: transparent
 
