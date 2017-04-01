@@ -122,8 +122,8 @@ export default {
         this.desc = null
       }
     },
-    genTR (children) {
-      return this.$createElement('tr', {}, children)
+    genTR (children, data = {}) {
+      return this.$createElement('tr', data, children)
     },
     toggle (val) {
       this.all = val
