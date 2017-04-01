@@ -12,25 +12,15 @@ table
   max-width: 100%
   
   td, th
-    text-align: left
-    
-    &:first-child
-      padding: 0 24px
-      
-    &:last-child
-      padding-right: 24px
-      
-    &:nth-child(1)
-      padding: 0
-      
-    &:nth-child(2)
-      padding-left: 24px
-    
-    &:not(:first-child):not(:nth-child(2)):not(:nth-child(3)):not(:last-child)
-      padding: 0 28px
+    text-align: right
     
   tr
     border-bottom: 1px solid $grey.lighten-2
+  
+  thead, tbody
+    td, th
+      &:not(:nth-child(1)), &:first-child
+        padding: 0 24px
 
   thead
     tr

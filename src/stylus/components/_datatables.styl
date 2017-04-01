@@ -6,11 +6,12 @@
       cursor: pointer
       user-select: none
       transition: .3s $transition.swing
+      position: relative
       
       &:not(:first-child)
-        transform: translateX(-16px)
-
         i
+          position: absolute
+          left: 8px
           color: rgba(#000, .38)
           font-size: 16px
           vertical-align: sub
