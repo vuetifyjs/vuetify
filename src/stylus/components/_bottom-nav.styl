@@ -7,6 +7,7 @@
   display: flex
   justify-content: center
   transition: all .4s cubic-bezier(.25, .8, .50, 1)
+  will-change: font-size
 
   &--absolute
     position: absolute
@@ -31,9 +32,7 @@
 
     .btn__content
       font-size: 12px
-      transform: scale(1) translateY(2px)
-      transition: font-size .1s ease-in-out
-      transition-property: flex, min-width, max-width
+      transform: scale(1) translateY(1px)
       flex-direction: column-reverse
 
 
@@ -41,11 +40,11 @@
       opacity: 1
 
       .btn__content
-        transform: translateY(1px)
         font-size: 14px
+        transform: scale(1) translateY(0px);
 
         .icon
-          transform: translateY(1px)
+          margin-top: 1px
 
   &--shift
 
