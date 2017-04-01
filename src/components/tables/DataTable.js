@@ -42,7 +42,8 @@ export default {
     filter: {
       type: Function,
       default: (val, search) => {
-        return val.toString().toLowerCase().indexOf(search) !== -1
+        return ['undefined', 'boolean'].indexOf(typeof val) === -1 &&
+          val.toString().toLowerCase().indexOf(search) !== -1
       }
     },
     value: {
