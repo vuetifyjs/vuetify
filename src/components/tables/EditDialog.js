@@ -13,6 +13,7 @@ export default {
       default: 'Cancel'
     },
     large: Boolean,
+    lazy: Boolean,
     saveText: {
       default: 'Save'
     },
@@ -44,6 +45,39 @@ export default {
       this.isSaving = true
       this.isActive = false
       this.$emit('save')
+    },
+    genButton (fn, text) {
+      return this.$createElement('v-btn', {
+        props: {
+          flat: true,
+          primary: true,
+          light: true
+        },
+        nativeOn: { click: fn }
+      }, text)
+    },
+    genActions () {
+      return this.$createElement('div', {
+        'class': 'small-dialog__actions',
+        directives: [{
+          name: 'show',
+          value: this.large
+        }]
+      }, [
+        this.genButton(this.cancel, this.cancelText),
+        this.genButton(this.save, this.saveText)
+      ])
+    },
+    genContent () {
+      return this.$createElement('div', {
+        'class': 'small-dialog__content',
+        on: {
+          keydown: e => {
+            e.keyCode === 27 && this.cancel()
+            e.keyCode === 13 && this.save()
+          }
+        }
+      }, [this.$slots.input])
     }
   },
 
@@ -59,7 +93,8 @@ export default {
         origin: 'top right',
         right: true,
         value: this.isActive,
-        closeOnContentClick: false
+        closeOnContentClick: false,
+        lazy: this.lazy
       },
       on: {
         input: val => (this.isActive = val)
@@ -69,39 +104,8 @@ export default {
         domProps: { href: 'javascript:;' },
         slot: 'activator'
       }, [this.$slots.default]),
-      h('div', {
-        'class': 'small-dialog__content',
-        on: {
-          keydown: e => {
-            e.keyCode === 27 && this.cancel()
-            e.keyCode === 13 && this.save()
-          }
-        }
-      }, [this.$slots.input]),
-      h('div', {
-        'class': 'small-dialog__actions',
-        directives: [{
-          name: 'show',
-          value: this.large
-        }]
-      }, [
-        h('v-btn', {
-          props: {
-            flat: true,
-            primary: true,
-            light: true
-          },
-          nativeOn: { click: this.cancel }
-        }, this.cancelText),
-        h('v-btn', {
-          props: {
-            flat: true,
-            primary: true,
-            light: true
-          },
-          nativeOn: { click: this.save }
-        }, this.saveText)
-      ])
+      this.genContent(),
+      this.genActions()
     ])
   }
 }
