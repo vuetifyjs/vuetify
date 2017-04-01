@@ -25,7 +25,7 @@ export default {
 
   watch: {
     isActive (val) {
-      val && this.$emit('open') && this.focus()
+      val && this.$emit('open') && this.$nextTick(this.focus)
       if (!val) {
         !this.isSaving && this.$emit('cancel')
         this.isSaving && this.$emit('close')
@@ -39,7 +39,8 @@ export default {
       this.isActive = false
     },
     focus () {
-      this.input && setTimeout(() => (this.input.focus()), 0)
+      const input = this.$el.querySelector('input')
+      input && setTimeout(() => (input.focus()), 0)
     },
     save () {
       this.isSaving = true
@@ -79,10 +80,6 @@ export default {
         }
       }, [this.$slots.input])
     }
-  },
-
-  mounted () {
-    this.input = this.$el.querySelector('input')
   },
 
   render (h) {
