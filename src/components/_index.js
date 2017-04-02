@@ -29,6 +29,7 @@ import Tables from './tables/index'
 import Tabs from './tabs/index'
 import Transitions from './transitions/_index'
 import Snackbar from './snackbars/index'
+import BottomNav from './bottom-nav/index'
 
 export default Object.assign({},
   Alerts,
@@ -61,5 +62,6 @@ export default Object.assign({},
   Tables,
   Tabs,
   Transitions,
-  Snackbar
+  Snackbar,
+  BottomNav
 )

@@ -33,6 +33,7 @@
   &--mobile
     @media screen and (max-width: $grid-breakpoints.lg)
       transform: translateX(-($sidebar-width + 25))
+      z-index: 7
 
       &.sidebar--fixed-right, &.sidebar--right
         transform: translateX($sidebar-width + 25)
