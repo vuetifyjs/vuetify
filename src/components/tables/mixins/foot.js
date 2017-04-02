@@ -6,27 +6,17 @@ export default {
           disabled: this.page === 1,
           icon: true
         },
-        nativeOn: {
-          click: () => (this.page--)
-        }
-      }, [
-        this.$createElement('v-icon', {
-        }, 'chevron_left')
-      ])
+        nativeOn: { click: () => (this.page--) }
+      }, [this.$createElement('v-icon', 'chevron_left')])
     },
     genNextIcon () {
       return this.$createElement('v-btn', {
         props: {
-          disabled: this.page * this.rowsPerPage >= this.value.length,
+          disabled: this.page * this.rowsPerPage >= this.value.length || this.pageStop < 0,
           icon: true
         },
-        nativeOn: {
-          click: () => (this.page++)
-        }
-      }, [
-        this.$createElement('v-icon', {
-        }, 'chevron_right')
-      ])
+        nativeOn: { click: () => (this.page++) }
+      }, [this.$createElement('v-icon', 'chevron_right')])
     },
     genSelect () {
       return this.$createElement('div', {
@@ -38,16 +28,15 @@ export default {
             items: this.rowsPerPageItems,
             value: this.rowsPerPage,
             hideDetails: true,
-            top: true
+            top: true,
+            auto: true
           },
-          on: {
-            input: val => (this.rowsPerPage = val)
-          }
+          on: { input: val => (this.rowsPerPage = val) }
         })
       ])
     },
     genPagination () {
-      const stop = this.value.length < this.pageStop
+      const stop = this.value.length < this.pageStop || this.pageStop < 0
         ? this.value.length
         : this.pageStop
 

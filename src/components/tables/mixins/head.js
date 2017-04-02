@@ -28,7 +28,7 @@ export default {
     },
     genHeaderData (item, index, children) {
       let beingSorted = false
-      let classes = ['column']
+      const classes = ['column']
 
       if ('sortable' in item && item.sortable || !('sortable' in item)) {
         classes.push('sortable')
@@ -39,6 +39,8 @@ export default {
         beingSorted && classes.push('active')
         beingSorted && this.desc && classes.push('desc') || classes.push('asc')
       }
+
+      item.left && classes.push('text-xs-left') || classes.push('text-xs-right')
 
       return [
         {

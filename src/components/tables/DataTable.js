@@ -36,7 +36,12 @@ export default {
     rowsPerPageItems: {
       type: Array,
       default () {
-        return [5, 10, 25]
+        return [
+          5,
+          10,
+          25,
+          { text: 'All', value: -1 }
+        ]
       }
     },
     selectAll: Boolean,
@@ -67,10 +72,16 @@ export default {
       return this.value.some(i => i[this.itemValue])
     },
     pageStart () {
-      return (this.page - 1) * this.rowsPerPage
+      const page = this.rowsPerPage === Object(this.rowsPerPage)
+        ? this.rowsPerPage.value
+        : this.rowsPerPage
+      return (this.page - 1) * page
     },
     pageStop () {
-      return this.page * this.rowsPerPage
+      const page = this.rowsPerPage === Object(this.rowsPerPage)
+        ? this.rowsPerPage.value
+        : this.rowsPerPage
+      return this.page * page
     },
     filteredItems () {
       let items = this.value
