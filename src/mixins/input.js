@@ -52,7 +52,8 @@ export default {
         'input-group--error': this.hasError || this.errors.length > 0,
         'input-group--append-icon': this.appendIcon,
         'input-group--prepend-icon': this.prependIcon,
-        'input-group--required': this.required
+        'input-group--required': this.required,
+        'input-group--hide-details': this.hideDetails
       }, this.classes)
     },
     isDirty () {
@@ -201,16 +202,14 @@ export default {
         }, wrapperChildren)
       )
 
-      if (!this.hideDetails) {
-        detailsChildren.push(this.genMessages())
-        this.counter && detailsChildren.push(this.genCounter())
+      detailsChildren.push(this.genMessages())
+      this.counter && detailsChildren.push(this.genCounter())
 
-        children.push(
-          this.$createElement('div', {
-            'class': 'input-group__details'
-          }, detailsChildren)
-        )
-      }
+      children.push(
+        this.$createElement('div', {
+          'class': 'input-group__details'
+        }, detailsChildren)
+      )
 
       return this.$createElement('div', data, children)
     },

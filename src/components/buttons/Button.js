@@ -68,12 +68,12 @@ export default {
         'info': this.info && !this.outline,
         'warning': this.warning && !this.outline,
         'error': this.error && !this.outline,
-        'primary--text': this.primary && this.outline,
-        'secondary--text': this.secondary && this.outline,
-        'success--text': this.success && this.outline,
-        'info--text': this.info && this.outline,
-        'warning--text': this.warning && this.outline,
-        'error--text': this.error && this.outline
+        'primary--text': this.primary && (this.outline || this.flat),
+        'secondary--text': this.secondary && (this.outline || this.flat),
+        'success--text': this.success && (this.outline || this.flat),
+        'info--text': this.info && (this.outline || this.flat),
+        'warning--text': this.warning && (this.outline || this.flat),
+        'error--text': this.error && (this.outline || this.flat)
       }
     }
   },

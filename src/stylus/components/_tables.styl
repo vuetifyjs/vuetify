@@ -1,7 +1,8 @@
 .table
   &__overflow
     width: 100%
-    overflow: auto
+    overflow-x: auto
+    overflow-y: hidden
     
 table
   border-radius: 2px
@@ -9,31 +10,51 @@ table
   border-spacing: 0
   width: 100%
   max-width: 100%
-  elevation(2)
 
   td, th
-    padding: 8px
-    text-align: left
+    text-align: right
     
+  tr
+    border-bottom: 1px solid $grey.lighten-2
+  
+  thead, tbody
+    td, th
+      &:not(:nth-child(1)), &:first-child
+        padding: 0 24px
+
   thead
-    
+    tr
+      height: 56px
+
     th
-      color: $grey.darken-1
+      color: rgba(#000, .54)
       font-weight: 600
-      font-size: .95rem
+      font-size: 12px
+      transition: .3s $transition.swing
+      white-space: nowrap
+      user-select: none
+      
+      > div
+        width: 100%
       
   tbody
-    
     tr
-      border-top: 1px solid $grey.lighten-2
       transition: background $primary-transition
       will-change: background
+        
+      &[active]
+        background: #f5f5f5
       
       &:hover
-        background: $grey.lighten-3
+        background: #eeeeee
         
+    td, th
+      height: 48px
+
     td
       font-weight: 500
+      color: rgba(#000, .87)
+      font-size: 13px
     
   .input-group--selection-controls
     margin: 0
@@ -49,3 +70,6 @@ table
       .input-group--selection-controls__ripple
         left: 50%
         transform: translate3d(-50%, -50%, 0)
+  tfoot
+    tr
+      height: 56px
