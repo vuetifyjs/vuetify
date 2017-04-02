@@ -3,8 +3,8 @@
 
     props: {
       absolute: Boolean,
-      hidden: Boolean,
-      shift: Boolean
+      shift: Boolean,
+      value: { required: false }
     },
 
     render (h, { data, props, children }) {
@@ -12,7 +12,7 @@
 
       if (props.absolute) data.staticClass += ' bottom-nav--absolute'
       if (props.shift) data.staticClass += ' bottom-nav--shift'
-      if (props.hidden) data.staticClass += ' bottom-nav--hidden'
+      if (props.value) data.staticClass += ' bottom-nav--active'
 
       return h('div', data, children)
     }

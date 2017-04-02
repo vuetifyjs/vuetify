@@ -1,56 +1,57 @@
 .bottom-nav
+  background: $theme.primary
   bottom: 0
-  position: fixed
-  width: 100%
-  height: 56px
   box-shadow: 0 3px 14px 2px rgba(#000, .12)
   display: flex
+  height: 56px
   justify-content: center
+  position: fixed
+  transform: translate3d(0, 60px, 0)
   transition: all .4s cubic-bezier(.25, .8, .50, 1)
-  will-change: font-size
+  width: 100%
+  z-index: 6
 
   &--absolute
     position: absolute
 
-  &--hidden
-    bottom: -60px
+  &--active
+    transform: translate3d(0, 0, 0)
 
   .btn
+    border-radius: 0
     flex: 1
     height: 100%
-    top: 0
-    border-radius: 0
     margin: 0
-    min-width: 80px
     max-width: 168px
+    min-width: 80px
     padding: 0px 12px
-    text-transform: capitalize
     opacity: .5
+    text-transform: capitalize
 
     .icon
       transition: all .4s cubic-bezier(.25, .8, .50, 1)
 
     .btn__content
-      font-size: 12px
-      transform: scale(1) translateY(1px)
       flex-direction: column-reverse
-
+      font-size: 12px
+      transform: scale3d(1, 1, 1) translate3d(0, 1px, 0)
+      white-space: nowrap
+      will-change: font-size
 
     &--active
       opacity: 1
 
       .btn__content
         font-size: 14px
-        transform: scale(1) translateY(0px);
+        transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
 
         .icon
           margin-top: 1px
 
   &--shift
-
     .btn__content
       font-size: 14px
-      transform: scale(1) translate3d(0,6px,0)
+      transform: scale3d(1, 1, 1) translate3d(0, 6px, 0)
 
       .icon
         transform: translate3d(0, 10px, 0)
@@ -66,12 +67,11 @@
         max-width: 168px
 
         .icon
-          transform: scale(1) translateZ(0)
+          transform: scale3d(1, 1, 1)
 
         .btn__content
-          transform: scale(1) translate3d(0, 2px, 0)
           opacity: 1
-
+          transform: scale3d(1, 1, 1) translate3d(0, 2px, 0)
 
 .bottom-nav--shift
   .btn:not(.btn--active)
@@ -79,4 +79,4 @@
       color: transparent
 
       .icon
-        color: initial
+        color: inherit
