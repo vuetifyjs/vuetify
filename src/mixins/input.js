@@ -3,11 +3,8 @@ export default {
     return {
       errors: [],
       focused: false,
-      lazyValue: this.value,
-      appendIconAlt: '',
-      prependIconAlt: '',
-      appendIconCbPrivate: null,
-      prependIconCbPrivate: null
+      tabFocused: false,
+      lazyValue: this.value
     }
   },
 
@@ -17,6 +14,7 @@ export default {
     dark: Boolean,
     disabled: Boolean,
     hint: String,
+    hideDetails: Boolean,
     persistentHint: Boolean,
     label: String,
     light: {
@@ -29,6 +27,9 @@ export default {
     rules: {
       type: Array,
       default: () => []
+    },
+    tabindex: {
+      default: 0
     },
     value: {
       required: false
@@ -44,6 +45,7 @@ export default {
         'input-group': true,
         'input-group--focused': this.focused,
         'input-group--dirty': this.isDirty,
+        'input-group--tab-focused': this.tabFocused,
         'input-group--disabled': this.disabled,
         'input-group--light': this.light && !this.dark,
         'input-group--dark': this.dark,
@@ -77,6 +79,12 @@ export default {
     }
   },
 
+  watch: {
+    rules () {
+      this.validate()
+    }
+  },
+
   mounted () {
     this.validate()
   },
@@ -85,6 +93,7 @@ export default {
     genLabel () {
       return this.$createElement('label', {}, this.label)
     },
+    toggle () {},
     genMessages () {
       let messages = []
 
@@ -130,18 +139,20 @@ export default {
       )
     },
     genIcon (type) {
-      const icon = this[`${type}IconAlt`] || this[`${type}Icon`]
-      const callback = this[`${type}IconCb`]
-      const callbackPrivate = this[`${type}IconCbPrivate`]
+      const icon = this[`${type}Icon`]
+      const cb = this[`${type}IconCb`]
+      const hasCallback = typeof cb === 'function'
 
       return this.$createElement(
         'v-icon',
         {
-          'class': 'input-group__' + type + '-icon',
+          'class': {
+            [`input-group__${type}-icon`]: true,
+            'input-group__icon-cb': hasCallback
+          },
           'nativeOn': {
             'click': e => {
-              if (typeof callbackPrivate === 'function') callbackPrivate(e)
-              if (typeof callback === 'function') callback(e)
+              hasCallback && cb(e)
             }
           }
         },
@@ -153,9 +164,22 @@ export default {
       const wrapperChildren = []
       const detailsChildren = []
 
-      data = Object.assign(data, {
-        'class': this.inputGroupClasses
-      })
+      data = Object.assign({}, {
+        'class': this.inputGroupClasses,
+        attrs: {
+          tabindex: this.tabindex
+        },
+        on: {
+          focus: () => (this.tabFocused = true),
+          blur: () => (this.tabFocused = false),
+          click: () => (this.tabFocused = false),
+          keyup: e => {
+            if (e.keyCode === 13) {
+              this.toggle()
+            }
+          }
+        }
+      }, data)
 
       if (this.label) {
         children.push(this.genLabel())
@@ -177,17 +201,16 @@ export default {
         }, wrapperChildren)
       )
 
-      detailsChildren.push(this.genMessages())
+      if (!this.hideDetails) {
+        detailsChildren.push(this.genMessages())
+        this.counter && detailsChildren.push(this.genCounter())
 
-      if (this.counter) {
-        detailsChildren.push(this.genCounter())
+        children.push(
+          this.$createElement('div', {
+            'class': 'input-group__details'
+          }, detailsChildren)
+        )
       }
-
-      children.push(
-        this.$createElement('div', {
-          'class': 'input-group__details'
-        }, detailsChildren)
-      )
 
       return this.$createElement('div', data, children)
     },

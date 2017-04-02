@@ -65,6 +65,7 @@ export default {
 
   props: {
     autofocus: Boolean,
+    autoGrow: Boolean,
     counter: Boolean,
     fullWidth: Boolean,
     min: {
@@ -81,7 +82,10 @@ export default {
       type: String,
       default: 'text'
     },
-    name: String
+    name: String,
+    rows: {
+      default: 5
+    }
   },
 
   watch: {
@@ -96,12 +100,13 @@ export default {
     value () {
       this.lazyValue = this.value
       this.validate()
+      this.multiLine && this.autoGrow && this.calculateInputHeight()
     }
   },
 
   mounted () {
     this.$vuetify.load(() => {
-      this.calculateInputHeight()
+      this.multiLine && this.autoGrow && this.calculateInputHeight()
       this.autofocus && this.$refs.input.focus()
     })
   },
@@ -134,10 +139,12 @@ export default {
           'height': this.inputHeight && `${this.inputHeight}px`
         },
         domProps: {
-          autocomplete: this.autocomplete,
           disabled: this.disabled,
           required: this.required,
           value: this.lazyValue
+        },
+        attrs: {
+          tabindex: this.tabindex
         },
         on: {
           blur: this.blur,
@@ -146,13 +153,16 @@ export default {
         },
         ref: 'input'
       }
+
+      if (this.autocomplete) inputData.domProps.autocomplete = true
+
       // add only if set
       if (this.name) {
         inputData.attrs = { name: this.name }
       }
 
       if (this.multiLine) {
-        inputData.domProps.rows = 5
+        inputData.domProps.rows = this.rows
       } else {
         inputData.domProps.type = this.type
       }
@@ -176,6 +186,10 @@ export default {
   },
 
   render () {
-    return this.genInputGroup(this.genInput())
+    return this.genInputGroup(this.genInput(), {
+      attrs: {
+        tabindex: -1
+      }
+    })
   }
 }
