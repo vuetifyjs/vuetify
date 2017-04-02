@@ -5,7 +5,7 @@ export default {
       const children = this.headers.map((o, i) => this.genHeader(o, i + selectAll))
       const checkbox = this.$createElement('v-checkbox', {
         props: {
-          'hide-details': true,
+          hideDetails: true,
           primary: true,
           inputValue: this.all,
           indeterminate: this.indeterminate
@@ -18,18 +18,35 @@ export default {
       return this.$createElement('thead', [this.genTR(children)])
     },
     genHeader (item, index) {
-      const beingSorted = this.sorting === index
-      const classes = beingSorted && this.desc
-        ? 'desc'
-        : 'asc'
+      const array = [
+        this.$scopedSlots.headers
+          ? this.$scopedSlots.headers({ item })
+          : item[this.headerText]
+      ]
 
-      return this.$createElement('th', {
-        'class': {
-          active: beingSorted,
-          [classes]: beingSorted && true
+      return this.$createElement('th', ...this.genHeaderData(item, index, array))
+    },
+    genHeaderData (item, index, children) {
+      let beingSorted = false
+      let classes = ['column']
+
+      if ('sortable' in item && item.sortable || !('sortable' in item)) {
+        classes.push('sortable')
+        const icon = this.$createElement('v-icon', 'arrow_downward')
+        item.left && children.push(icon) || children.unshift(icon)
+
+        beingSorted = this.sorting === index
+        beingSorted && classes.push('active')
+        beingSorted && this.desc && classes.push('desc') || classes.push('asc')
+      }
+
+      return [
+        {
+          'class': classes,
+          on: { click: () => this.sort(index) }
         },
-        on: { click: () => this.sort(index) }
-      }, [this.$scopedSlots.headers ? this.$scopedSlots.headers({ item }) : item])
+        children
+      ]
     }
   }
 }

@@ -22,6 +22,10 @@ export default {
       type: Array,
       default: () => []
     },
+    headerText: {
+      type: String,
+      default: 'text'
+    },
     items: {
       type: Array,
       default: () => []
@@ -139,7 +143,10 @@ export default {
   render (h) {
     return h('v-table-overflow', {}, [
       h('table', {
-        'class': 'datatable'
+        'class': {
+          'datatable': true,
+          'datatable--select-all': this.selectAll
+        }
       }, [
         this.genTHead(),
         this.genTBody(),

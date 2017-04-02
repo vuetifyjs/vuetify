@@ -1,23 +1,15 @@
 .datatable
   thead
-    th
-      color: rgba(#000, .54)
-      white-space: nowrap
+    th.column.sortable
       cursor: pointer
-      user-select: none
-      transition: .3s $transition.swing
-      
-      > div
-        width: 100%
-      
-      &:not(:first-child)
-        i
-          color: rgba(#000, .38)
-          font-size: 16px
-          vertical-align: sub
-          display: inline-block
-          opacity: 0
-          transition: .3s $transition.swing
+
+      i
+        color: rgba(#000, .38)
+        font-size: 16px
+        vertical-align: sub
+        display: inline-block
+        opacity: 0
+        transition: .3s $transition.swing
       
       &:hover
         color: rgba(#000, .87)
