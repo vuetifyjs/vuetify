@@ -7,13 +7,13 @@
   width: $sidebar-width
   max-width: 100%
   z-index: 3
-  @extend .z-depth-2
 
   &--fixed
     top: 0
     left: 0
     position: fixed
     z-index: 6
+    elevation(0)
 
     &-right
       right: 0
@@ -22,6 +22,7 @@
   &--drawer
     flex-basis: 0
     transform: translateX(-($sidebar-width + 25))
+    elevation(16)
 
   &--close
     transform: translateX(-($sidebar-width + 25))
