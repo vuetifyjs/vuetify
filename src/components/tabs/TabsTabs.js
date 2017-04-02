@@ -53,7 +53,7 @@ export default {
         value: ''
       }],
       nativeOn: {
-        click: this.scrollLeft
+        click: this.scrollRight
       }
     }, 'chevron_right')
 
