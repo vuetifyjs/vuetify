@@ -119,6 +119,9 @@ export default {
     },
     someItems (val) {
       if (!val) this.all = false
+    },
+    search () {
+      this.page = 1
     }
   },
 
