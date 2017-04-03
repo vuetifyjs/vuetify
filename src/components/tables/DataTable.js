@@ -26,6 +26,7 @@ export default {
       type: String,
       default: 'text'
     },
+    hideActions: Boolean,
     items: {
       type: Array,
       default: () => []
@@ -93,7 +94,7 @@ export default {
         items = items.filter(i => Object.keys(i).some(j => this.filter(i[j], search)))
       }
 
-      return items.sort((a, b) => {
+      items = items.sort((a, b) => {
         const sortA = a[Object.keys(a)[this.sorting]]
         const sortB = b[Object.keys(b)[this.sorting]]
 
@@ -106,7 +107,9 @@ export default {
           if (sortA > sortB) return 1
           return 0
         }
-      }).slice(this.pageStart, this.pageStop)
+      })
+
+      return this.hideActions ? items : items.slice(this.pageStart, this.pageStop)
     }
   },
 
@@ -164,7 +167,7 @@ export default {
       }, [
         this.genTHead(),
         this.genTBody(),
-        this.genTFoot()
+        this.hideActions ? null : this.genTFoot()
       ])
     ])
   }
