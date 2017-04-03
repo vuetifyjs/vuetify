@@ -27,12 +27,14 @@
     padding: 0px 12px
     opacity: .5
     text-transform: capitalize
+    transform-origin: 50% 50%
 
     .icon
       transition: all .4s cubic-bezier(.25, .8, .50, 1)
 
     .btn__content
       flex-direction: column-reverse
+      height: 56px
       font-size: 12px
       transform: scale3d(1, 1, 1) translate3d(0, 1px, 0)
       white-space: nowrap
@@ -48,11 +50,9 @@
   &--shift
     .btn__content
       font-size: 14px
-      transform: scale3d(1, 1, 1) translate3d(0, 6px, 0)
 
-      .icon
-        transform: translate3d(0, 10px, 0)
-        opacity: 1
+      span
+        height: 21px
 
     .btn
       transition: all .3s
@@ -64,15 +64,12 @@
         max-width: 168px
         flex: 1 1 72px
 
-        .icon
-          transform: scale3d(1, 1, 1)
-
         .btn__content
-          opacity: 1
           transform: scale3d(1, 1, 1) translate3d(0, 2px, 0)
 
 .bottom-nav--shift
-  .btn:not(.btn--active)
-    .btn__content
-      span
-        color: transparent
+  .btn:not(.btn--active) .btn__content
+    transform: translateY(10px)
+
+    span
+      color: transparent
