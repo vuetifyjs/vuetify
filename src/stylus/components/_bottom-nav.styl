@@ -10,60 +10,69 @@
   transition: all .4s cubic-bezier(.25, .8, .50, 1)
   width: 100%
   z-index: 6
-  
-  &--active
-    transform: translate3d(0, 0, 0)
 
   &--absolute
     position: absolute
 
+  &--active
+    transform: translate3d(0, 0, 0)
+
   .btn
     border-radius: 0
-    flex: 1
+    flex: 1 1 32px
     height: 100%
     margin: 0
     max-width: 168px
     min-width: 80px
-    opacity: .6
     padding: 0px 12px
+    opacity: .5
     text-transform: capitalize
     transform-origin: 50% 50%
 
-    &:not(.btn--active)
-      filter: grayscale(100%)
+    .icon
+      transition: all .4s cubic-bezier(.25, .8, .50, 1)
 
     .btn__content
       flex-direction: column-reverse
       height: 56px
       font-size: 12px
+      transform: scale3d(1, 1, 1) translate3d(0, 1px, 0)
       white-space: nowrap
-      transition: all .4s $transition.swing
-      
-      span
-        height: 21px
+      will-change: font-size
 
     &--active
       opacity: 1
-      transform: none
 
       .btn__content
         font-size: 14px
+        transform: scale3d(1, 1, 1) translate3d(0, 0, 0)
+
+    &:not(.btn--active)
+      filter: grayscale(100%)
 
   &--shift
     .btn__content
       font-size: 14px
 
+      span
+        height: 21px
+
     .btn
+      transition: all .3s
       min-width: 56px
       max-width: 96px
 
       &--active
         min-width: 96px
         max-width: 168px
+        flex: 1 1 72px
+
+        .btn__content
+          transform: scale3d(1, 1, 1) translate3d(0, 2px, 0)
 
 .bottom-nav--shift
   .btn:not(.btn--active) .btn__content
-    transform: translateY(9px)
+    transform: scale3d(1, 1, 1) translate3d(0, 10px, 0)
 
     span
       color: transparent
