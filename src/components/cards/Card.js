@@ -14,19 +14,18 @@ export default {
     raised: Boolean,
   },
 
-  render (h, context) {
-    context.data.staticClass = context.data.staticClass ? `card ${context.data.staticClass}` : 'card'
-    context.data.style = context.style || {}
-    context.data.style.height = context.props.height
-    context.data.class.push('card')
-    context.props.horizontal && context.data.class.push('card--horizontal')
-    context.props.hover && context.data.class.push('card--hover')
-    context.props.raised && context.data.class.push('card--raised')
+  render (h, { data, props, children, style }) {
+    data.staticClass = data.staticClass ? `card ${data.staticClass}` : 'card'
+    data.style = style || {}
+    data.style.height = props.height
+    if (props.horizontal) data.staticClass += ' card--horizontal'
+    if (props.hover) data.staticClass += ' card--hover'
+    if (props.raised) data.staticClass += ' card--raised'
 
-    if (context.props.img) {
-      context.data.style.background = `url(${context.props.img}) center center / cover no-repeat`
+    if (props.img) {
+      data.style.background = `url(${props.img}) center center / cover no-repeat`
     }
 
-    return h('div', context.data, context.children)
+    return h('div', data, children)
   }
 }
