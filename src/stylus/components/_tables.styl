@@ -33,7 +33,6 @@ table
       transition: .3s $transition.swing
       white-space: nowrap
       user-select: none
-      pointer-events: none
       
       &.sortable
         pointer-events: auto
@@ -77,8 +76,3 @@ table
   tfoot
     tr
       height: 56px
-      
-table.datatable--select-all
-  thead
-    th:first-child
-      pointer-events: auto
