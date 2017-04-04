@@ -2,12 +2,7 @@ export default {
   props: {
     append: Boolean,
     disabled: Boolean,
-    exact: {
-      type: Boolean,
-      default () {
-        return this.href === '/'
-      }
-    },
+    exact: Boolean,
     href: [String, Object],
     to: [String, Object],
     nuxt: Boolean,
@@ -20,6 +15,7 @@ export default {
   methods: {
     click () {},
     generateRouteLink () {
+      let exact = this.exact
       let tag
       const options = this.to || this.href
 
@@ -33,10 +29,17 @@ export default {
         }]
       }
 
+      if (!this.exact) {
+        exact = this.href === '/' ||
+          this.to === '/' ||
+          (this.href === Object(this.href) && this.href.path === '/') ||
+          (this.to === Object(this.to) && this.to.path === '/')
+      }
+
       if (options && this.router) {
         tag = this.nuxt ? 'nuxt-link' : 'router-link'
         data.props.to = options
-        data.props.exact = this.exact
+        data.props.exact = exact
         data.props.activeClass = this.activeClass
         data.props.append = this.append
         data.props.replace = this.replace
