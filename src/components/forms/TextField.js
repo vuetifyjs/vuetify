@@ -90,7 +90,7 @@ export default {
 
   watch: {
     focused () {
-      this.$emit('focused', this.focused)
+      this.$emit('focus', this.focused)
       this.hasFocused = true
 
       if (!this.focused) {
@@ -120,6 +120,7 @@ export default {
       this.calculateInputHeight()
     },
     blur () {
+      this.$emit('blur')
       this.validate()
       this.$nextTick(() => (this.focused = false))
     },
@@ -139,10 +140,10 @@ export default {
           'height': this.inputHeight && `${this.inputHeight}px`
         },
         domProps: {
-          autocomplete: this.autocomplete,
           disabled: this.disabled,
           required: this.required,
-          value: this.lazyValue
+          value: this.lazyValue,
+          autofucus: this.autofocus
         },
         attrs: {
           tabindex: this.tabindex
@@ -154,6 +155,9 @@ export default {
         },
         ref: 'input'
       }
+
+      if (this.autocomplete) inputData.domProps.autocomplete = true
+
       // add only if set
       if (this.name) {
         inputData.attrs = { name: this.name }
@@ -182,9 +186,9 @@ export default {
         (this.hasFocused && this.focused))
     }
   },
-  
-  render (h) {
-    return this.genInputGroup(h, this.genInput(h), {
+
+  render () {
+    return this.genInputGroup(this.genInput(), {
       attrs: {
         tabindex: -1
       }

@@ -1,18 +1,17 @@
 import Contextualable from '../../mixins/contextualable'
+import Toggleable from '../../mixins/toggleable'
 import GenerateRouteLink from '../../mixins/route-link'
 
 export default {
   name: 'button',
 
-  mixins: [Contextualable, GenerateRouteLink],
-
-  data () {
-    return {
-      activeClass: 'btn--active'
-    }
-  },
+  mixins: [Contextualable, GenerateRouteLink, Toggleable],
 
   props: {
+    activeClass: {
+      type: String,
+      default: 'btn--active'
+    },
     block: Boolean,
     dark: Boolean,
     default: Boolean,
@@ -23,7 +22,6 @@ export default {
     light: Boolean,
     loading: Boolean,
     outline: Boolean,
-    progress: Boolean,
     raised: {
       type: Boolean,
       default: true
@@ -48,6 +46,7 @@ export default {
     classes () {
       return {
         'btn': true,
+        'btn--active': this.isActive,
         'btn--block': this.block,
         'btn--dark': this.dark,
         'btn--default': this.default,
@@ -68,12 +67,12 @@ export default {
         'info': this.info && !this.outline,
         'warning': this.warning && !this.outline,
         'error': this.error && !this.outline,
-        'primary--text': this.primary && this.outline,
-        'secondary--text': this.secondary && this.outline,
-        'success--text': this.success && this.outline,
-        'info--text': this.info && this.outline,
-        'warning--text': this.warning && this.outline,
-        'error--text': this.error && this.outline
+        'primary--text': this.primary && (this.outline || this.flat),
+        'secondary--text': this.secondary && (this.outline || this.flat),
+        'success--text': this.success && (this.outline || this.flat),
+        'info--text': this.info && (this.outline || this.flat),
+        'warning--text': this.warning && (this.outline || this.flat),
+        'error--text': this.error && (this.outline || this.flat)
       }
     }
   },

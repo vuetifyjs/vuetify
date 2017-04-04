@@ -72,7 +72,12 @@ export default {
       type: Boolean,
       default: true
     },
+    lazy: Boolean,
     closeOnClick: {
+      type: Boolean,
+      default: true
+    },
+    closeOnContentClick: {
       type: Boolean,
       default: true
     },
@@ -223,7 +228,9 @@ export default {
     },
 
     activatorClickHandler () {
-      if (this.openOnClick) this.isActive = !this.isActive && !this.disabled
+      if (this.disabled) return
+      else if (this.openOnClick && !this.isActive) this.isActive = true
+      else if (this.closeOnClick && this.isActive) this.isActive = false
     },
 
     addActivatorEvents (activator = null) {
@@ -388,11 +395,16 @@ export default {
         }],
         'class': { 'menu__content': true },
         on: {
-          click: () => { if (this.closeOnClick) this.isActive = false }
+          click: e => {
+            if (this.closeOnContentClick) {
+              e.stopPropagation()
+              this.isActive = false
+            }
+          }
         }
       }
 
-      return h('div', data, [this.isBooted ? this.$slots.default : null])
+      return h('div', data, [this.lazy && !this.isBooted ? null : this.$slots.default])
     },
 
     // Utils
@@ -431,16 +443,14 @@ export default {
       'class': {
         'menu': true
       },
-      directives: [
-        {
-          name: 'click-outside',
-          value: e => {
-            const a = this.activator
-            if (a && (a === e.target || a.contains(e.target))) return false
-            return true
-          }
+      directives: [{
+        name: 'click-outside',
+        value: e => {
+          const a = this.activator
+          if (a && (a === e.target || a.contains(e.target))) return false
+          return true
         }
-      ],
+      }],
       on: {
         'keyup': e => { if (e.keyCode === 27) this.isActive = false }
       }

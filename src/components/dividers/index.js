@@ -1,16 +1,15 @@
 const Divider = {
   functional: true,
 
-  render (h, context) {
-    context.data.class = context.data.class || []
-    context.data.class.push('divider')
+  render (h, { data, children }) {
+    data.staticClass = data.staticClass ? `divider ${data.staticClass}` : 'divider'
 
-    if (context.data.attrs) {
-      'inset' in context.data.attrs && context.data.class.push('divider--inset')
-      'light' in context.data.attrs && context.data.class.push('divider--light')
+    if (data.attrs) {
+      if ('inset' in data.attrs) data.staticClass += ' divider--inset'
+      if ('light' in data.attrs) data.staticClass += ' divider--light'
     }
 
-    return h('hr', context.data)
+    return h('hr', data)
   }
 }
 

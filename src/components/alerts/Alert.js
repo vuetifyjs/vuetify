@@ -29,7 +29,7 @@ export default {
 
     mdIcon () {
       switch (true) {
-        case this.icon:
+        case Boolean(this.icon):
           return this.icon
         case this.error:
           return 'warning'

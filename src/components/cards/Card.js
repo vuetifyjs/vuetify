@@ -15,8 +15,8 @@ export default {
   },
 
   render (h, context) {
+    context.data.staticClass = context.data.staticClass ? `card ${context.data.staticClass}` : 'card'
     context.data.style = context.style || {}
-    context.data.class = context.data.class || []
     context.data.style.height = context.props.height
     context.data.class.push('card')
     context.props.horizontal && context.data.class.push('card--horizontal')

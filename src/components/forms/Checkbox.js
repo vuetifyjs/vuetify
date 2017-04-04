@@ -40,14 +40,6 @@ export default {
     }
   },
 
-  watch: {
-    value () {
-      if (this.indeterminate) {
-        this.inputDeterminate = false
-      }
-    }
-  },
-
   render (h) {
     const transition = h('v-fade-transition', [
       h('v-icon', {

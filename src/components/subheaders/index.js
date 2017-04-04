@@ -1,17 +1,13 @@
 const Subheader = {
   functional: true,
 
-  render (h, { data, children }) {
-    let listClass = 'subheader'
+  props: {
+    inset: Boolean
+  },
 
-    if (
-      (data.props && 'inset' in data.props) ||
-      (data.attrs && 'inset' in data.attrs)
-    ) {
-      listClass += ' subheader--inset'
-    }
-
-    data.staticClass = data.staticClass ? `${listClass} ${data.staticClass}` : listClass
+  render (h, { data, children, props }) {
+    data.staticClass = data.staticClass ? `subheader ${data.staticClass}` : 'subheader'
+    if (props.inset) data.staticClass += ' subheader--inset'
 
     return h('li', data, children)
   }

@@ -6,8 +6,8 @@ import Buttons from './buttons/index'
 import Cards from './cards/index'
 import Carousel from './carousel/index'
 import Chips from './chips/index'
-import ExpansionPanel from './expansion-panel/index'
 import Dividers from './dividers/index'
+import ExpansionPanel from './expansion-panel/index'
 import Footer from './footer/index'
 import Forms from './forms/index'
 import Grid from './grid/index'
@@ -29,6 +29,7 @@ import Tables from './tables/index'
 import Tabs from './tabs/index'
 import Transitions from './transitions/_index'
 import Snackbar from './snackbars/index'
+import BottomNav from './bottom-nav/index'
 
 export default Object.assign({},
   Alerts,
@@ -61,5 +62,6 @@ export default Object.assign({},
   Tables,
   Tabs,
   Transitions,
-  Snackbar
+  Snackbar,
+  BottomNav
 )
