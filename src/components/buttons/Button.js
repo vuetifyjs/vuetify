@@ -22,7 +22,6 @@ export default {
     light: Boolean,
     loading: Boolean,
     outline: Boolean,
-    progress: Boolean,
     raised: {
       type: Boolean,
       default: true
