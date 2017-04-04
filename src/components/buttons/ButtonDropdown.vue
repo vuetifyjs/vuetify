@@ -20,7 +20,7 @@
         v-bind:light="light && !dark"
         v-bind:dark="dark"
         v-on:keyup.native.enter="updateValue(editableValue)"
-        v-on:focused="isActive = arguments[0]"
+        v-on:focus="isActive = arguments[0]"
         v-model="editableValue"
         slot="activator"
         single-line
