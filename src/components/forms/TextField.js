@@ -90,11 +90,13 @@ export default {
 
   watch: {
     focused () {
-      this.$emit('focus', this.focused)
       this.hasFocused = true
 
       if (!this.focused) {
+        this.$emit('blur')
         this.$emit('change', this.lazyValue)
+      } else {
+        this.$emit('focus')
       }
     },
     value () {
@@ -120,7 +122,6 @@ export default {
       this.calculateInputHeight()
     },
     blur () {
-      this.$emit('blur')
       this.validate()
       this.$nextTick(() => (this.focused = false))
     },
