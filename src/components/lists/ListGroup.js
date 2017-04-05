@@ -8,7 +8,7 @@ export default {
 
   data () {
     return {
-      booted: this.value,
+      isBooted: this.value,
       height: 0
     }
   },
@@ -39,7 +39,7 @@ export default {
 
   watch: {
     isActive () {
-      this.booted = true
+      this.isBooted = true
 
       if (!this.isActive) {
         this.list.listClose(this._uid)
@@ -103,7 +103,7 @@ export default {
         value: this.isActive
       }],
       ref: 'group'
-    }, (this.lazy && this.booted) || !this.lazy ? this.$slots.default : [])
+    }, [this.lazy && !this.isBooted ? null : this.$slots.default])
 
     const item = h('div', {
       'class': this.classes,
