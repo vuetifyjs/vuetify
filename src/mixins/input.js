@@ -171,10 +171,13 @@ export default {
           tabindex: this.tabindex
         },
         on: {
-          focus: () => (this.tabFocused = true),
           blur: () => (this.tabFocused = false),
           click: () => (this.tabFocused = false),
           keyup: e => {
+            if ([9, 16].includes(e.keyCode)) {
+              this.tabFocused = true
+            }
+
             if (e.keyCode === 13) {
               this.toggle()
             }
