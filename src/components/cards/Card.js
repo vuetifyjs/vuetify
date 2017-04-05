@@ -11,7 +11,7 @@ export default {
     horizontal: Boolean,
     img: String,
     hover: Boolean,
-    raised: Boolean,
+    raised: Boolean
   },
 
   render (h, { data, props, children, style }) {
