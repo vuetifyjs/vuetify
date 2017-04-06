@@ -58,7 +58,7 @@ export default {
       ripple
     ])
 
-    return this.genInputGroup(h, [
+    return this.genInputGroup([
       container,
       h('label', { on: { click: this.toggle }}, this.label)
     ])

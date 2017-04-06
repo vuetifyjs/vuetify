@@ -7,8 +7,8 @@
   position: relative
   padding: $toolbar-padding-y $toolbar-padding-x
   width: 100%
-  @extend .z-depth-1
-  
+  elevation(4)
+
   ul
     list-style: none
     
@@ -34,8 +34,8 @@
     position: fixed
     top: 0
     left: 0
-    z-index: 4
-    
+    z-index: 6
+
   &__sub
     flex: 1 0 100%
     padding: 24px 0 24px 72px
@@ -60,6 +60,9 @@
     font-size: $headings.h6.size
     flex: 1;
     padding: 0 16px
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
     
     &:first-child
       padding-left: 2px
@@ -71,6 +74,8 @@
     display: flex
     align-items: center
     height: 100%
+    max-width: 100%
+    overflow-x: auto
 
     > li
       display: flex
@@ -85,6 +90,7 @@
     transition: all 0.3s ease-out
     position: relative
     height: 100%
+    white-space: nowrap
     
     i
       font-size: 2rem
@@ -95,50 +101,25 @@
     &--disabled
       opacity: .5
       pointer-events: none
-
-  &__group
-    position: relative
-    background-color: inherit
-    color: #fff
-    height: 100%
+      
+  .input-group
+    margin: 0 0 0 16px
+    flex: 1
+      
+    &--dark
+      .icon
+        color: #fff
     
-    .toolbar__items
-      position: absolute
-      top: 100%
-      left: 0
-      z-index: 3
-      min-width: 100%
-      background-color: $theme.secondary
-      overflow: hidden
-      transition: .3s cubic-bezier(0,0,.2,1)
-      flex-wrap: wrap
-      height: auto
-      @extend .z-depth-1
-      
-      li
-        width: 100%
-        
-      .toolbar__item
-        padding: 1rem
-        white-space: nowrap
-        color: inherit
-        font-weight: 500
-        width: 100%
-        
-        &:hover
-          background-color: rgba(#fff,.2)
-        
-    &-header
-      @extend .toolbar__item
-      padding-right: 45px
-      
-      &:after
-        content: '\E314'
-        font-family: 'Material Icons'
-        font-size: 1.5rem
-        position: absolute
-        right: 15px
-        top: calc(50% - 16px)
-        color: inherit
-        transition: transform 0.3s cubic-bezier(0, 0, .2, 1)
-        transform: rotate(-90deg)
+    &--light
+      .icon
+        color: #000
+    
+    &--dark.input-group--focused.input-group--prepend-icon,
+    &--dark.input-group--focused.input-group--append-icon
+      .icon
+        color: #fff
+    
+    &--light.input-group--focused.input-group--prepend-icon,
+    &--light.input-group--focused.input-group--append-icon
+      .icon
+        color: #000

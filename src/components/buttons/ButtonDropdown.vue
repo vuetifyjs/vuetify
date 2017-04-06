@@ -19,8 +19,8 @@
         v-bind:label="label"
         v-bind:light="light && !dark"
         v-bind:dark="dark"
-        v-on:keyup.native.enter="updateValue(editableValue)"
-        v-on:focused="isActive = arguments[0]"
+        v-on:keyup.native.enter="e => updateValue(e, editableValue)"
+        v-on:focus="isActive = arguments[0]"
         v-model="editableValue"
         slot="activator"
         single-line
@@ -30,7 +30,7 @@
         v-list-item(v-for="(option, index) in options")
           v-list-tile(
             v-bind:class="{ 'list__tile--active': inputValue === option }" 
-            v-on:click.native="updateValue(option)"
+            v-on:click.native="e => updateValue(e, option)"
           )
             v-list-tile-action(v-if="option.action")
               v-icon {{ option.action }}
@@ -113,14 +113,6 @@
     },
 
     watch: {
-      isActive () {
-        if (this.editable) {
-          if (!this.isActive) {
-            this.$refs.input.$el.querySelector('input').blur()
-          }
-        }
-      },
-
       inputValue () {
         this.$emit('input', this.inputValue)
       },
@@ -139,7 +131,12 @@
         this.isActive = active
       },
 
-      updateValue (obj) {
+      updateValue (e, obj) {
+        if (e.keyCode === 13) {
+          this.$refs.input.$el.querySelector('input').blur()
+          this.isActive = false
+        }
+
         if (typeof obj === 'string') {
           obj = { text: obj }
         }

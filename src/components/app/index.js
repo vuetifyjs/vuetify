@@ -1,5 +1,5 @@
 import { createSimpleFunctional } from '../../util/helpers'
-import App from './App.vue'
+import App from './App'
 
 const AppBar = createSimpleFunctional('app__bar')
 

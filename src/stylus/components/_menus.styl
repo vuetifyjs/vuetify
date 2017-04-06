@@ -1,5 +1,6 @@
 .menu
-  display: inline
+  display: inline-block
+  vertical-align: middle
   
   &--disabled
     cursor: not-allowed
@@ -20,8 +21,8 @@
     overflow-y: auto
     overflow-x: hidden
     z-index: 100
-    @extend .z-depth-2
-    
+    elevation(8)
+
   &-transition
     &-enter      
       .list__tile
@@ -30,19 +31,11 @@
         opacity: 0
         transform: translateY(-15px)
         pointer-events: none
-        
-      .list__tile--active
-        opacity: 1
-        transform: none
-        pointer-events: auto
       
     &-enter-to
       .list__tile
         pointer-events: auto
         opacity: 1
-      
-      .list__tile--active
-        transform: none
       
     &-leave-to
       transform: translateY(-10px)

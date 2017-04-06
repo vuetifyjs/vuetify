@@ -23,6 +23,7 @@ export default {
       direction: { vert: 'bottom', horiz: 'right' },
       position: { left: '0px', top: '0px', right: 'auto', bottom: 'auto' },
       isContentActive: false,
+      isBooted: false,
       maxHeightAutoDefault: '200px'
     }
   },
@@ -71,7 +72,12 @@ export default {
       type: Boolean,
       default: true
     },
+    lazy: Boolean,
     closeOnClick: {
+      type: Boolean,
+      default: true
+    },
+    closeOnContentClick: {
       type: Boolean,
       default: true
     },
@@ -172,6 +178,7 @@ export default {
 
   watch: {
     isActive (val) {
+      this.isBooted = true
       if (val) this.activate()
       else this.isContentActive = false
     },
@@ -221,7 +228,9 @@ export default {
     },
 
     activatorClickHandler () {
-      if (this.openOnClick) this.isActive = !this.isActive && !this.disabled
+      if (this.disabled) return
+      else if (this.openOnClick && !this.isActive) this.isActive = true
+      else if (this.closeOnClick && this.isActive) this.isActive = false
     },
 
     addActivatorEvents (activator = null) {
@@ -276,10 +285,10 @@ export default {
         this.updateMaxMin()
 
         this.dimensions = {
-          'activator': this.measure(a),
-          'content': this.measure(c),
-          'list': this.measure(c, '.list'),
-          'selected': this.measure(c, '.list__tile--active', 'parent')
+          activator: this.measure(a),
+          content: this.measure(c),
+          list: this.measure(c, '.list'),
+          selected: this.auto ? this.measure(c, '.list__tile--active', 'parent') : null
         }
 
         this.offscreenFix()
@@ -386,11 +395,16 @@ export default {
         }],
         'class': { 'menu__content': true },
         on: {
-          click: () => { if (this.closeOnClick) this.isActive = false }
+          click: e => {
+            if (this.closeOnContentClick) {
+              e.stopPropagation()
+              this.isActive = false
+            }
+          }
         }
       }
 
-      return h('div', data, [this.$slots.default])
+      return h('div', data, [this.lazy && !this.isBooted ? null : this.$slots.default])
     },
 
     // Utils
@@ -429,16 +443,14 @@ export default {
       'class': {
         'menu': true
       },
-      directives: [
-        {
-          name: 'click-outside',
-          value: e => {
-            const a = this.activator
-            if (a && (a === e.target || a.contains(e.target))) return false
-            return true
-          }
+      directives: [{
+        name: 'click-outside',
+        value: e => {
+          const a = this.activator
+          if (a && (a === e.target || a.contains(e.target))) return false
+          return true
         }
-      ],
+      }],
       on: {
         'keyup': e => { if (e.keyCode === 27) this.isActive = false }
       }

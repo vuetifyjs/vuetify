@@ -11,8 +11,8 @@
     transition: .3s $transition.linear-out-slow-in
     
     &:hover
-      @extend .z-depth-1
-      
+      elevation(2)
+
   &--circle
     .pagination__item,
     .pagination__more,
@@ -24,7 +24,7 @@
     opacity: .6
   
   &__item
-    @extend .z-depth-1
+    elevation(2)
     border-radius: 4px
     color: #000000
     display: inline-flex
@@ -37,12 +37,12 @@
     text-decoration: none
     
     &--active
-      @extend .z-depth-2
+      elevation(4)
       background: $theme.primary
       color: #FFFFFF
     
   &__navigation
-    @extend .z-depth-1
+    elevation(2)
     display: inline-flex
     justify-content: center
     align-items: center

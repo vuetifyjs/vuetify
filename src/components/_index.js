@@ -6,8 +6,8 @@ import Buttons from './buttons/index'
 import Cards from './cards/index'
 import Carousel from './carousel/index'
 import Chips from './chips/index'
-import ExpansionPanel from './expansion-panel/index'
 import Dividers from './dividers/index'
+import ExpansionPanel from './expansion-panel/index'
 import Footer from './footer/index'
 import Forms from './forms/index'
 import Grid from './grid/index'
@@ -20,6 +20,7 @@ import Overlay from './overlay/index'
 import Pagination from './pagination/index'
 import Parallax from './parallax/index'
 import Progress from './progress/index'
+import Select from './selects/index'
 import Sidebar from './sidebar/index'
 import Slider from './sliders/index'
 import Subheader from './subheaders/index'
@@ -28,6 +29,7 @@ import Tables from './tables/index'
 import Tabs from './tabs/index'
 import Transitions from './transitions/_index'
 import Snackbar from './snackbars/index'
+import BottomNav from './bottom-nav/index'
 
 export default Object.assign({},
   Alerts,
@@ -52,6 +54,7 @@ export default Object.assign({},
   Pagination,
   Parallax,
   Progress,
+  Select,
   Sidebar,
   Slider,
   Subheader,
@@ -59,5 +62,6 @@ export default Object.assign({},
   Tables,
   Tabs,
   Transitions,
-  Snackbar
+  Snackbar,
+  BottomNav
 )

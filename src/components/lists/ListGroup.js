@@ -8,13 +8,14 @@ export default {
 
   data () {
     return {
-      booted: this.value,
+      isBooted: this.value,
       height: 0
     }
   },
 
   props: {
     group: String,
+    lazy: Boolean,
     noAction: Boolean
   },
 
@@ -38,17 +39,20 @@ export default {
 
   watch: {
     isActive () {
-      this.booted = true
+      this.isBooted = true
 
       if (!this.isActive) {
         this.list.listClose(this._uid)
       }
     },
     '$route' (to) {
-      this.isActive = this.matchRoute(to.path)
+      const isActive = this.matchRoute(to.path)
 
-      if (this.group && this.isActive) {
-        this.list.listClick(this._uid, true)
+      if (this.group) {
+        if (isActive && this.isActive !== isActive) {
+          this.list.listClick(this._uid)
+        }
+        this.isActive = isActive
       }
     }
   },
@@ -99,7 +103,7 @@ export default {
         value: this.isActive
       }],
       ref: 'group'
-    }, this.booted ? this.$slots.default : [])
+    }, [this.lazy && !this.isBooted ? null : this.$slots.default])
 
     const item = h('div', {
       'class': this.classes,

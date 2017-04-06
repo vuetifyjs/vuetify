@@ -1,4 +1,4 @@
-import Alert from './Alert.vue'
+import Alert from './Alert'
 
 export default {
   Alert

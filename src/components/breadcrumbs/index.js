@@ -1,5 +1,5 @@
-import Breadcrumbs from './Breadcrumbs.vue'
-import BreadcrumbsItem from './BreadcrumbsItem.vue'
+import Breadcrumbs from './Breadcrumbs'
+import BreadcrumbsItem from './BreadcrumbsItem'
 
 export default {
   Breadcrumbs,

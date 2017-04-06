@@ -1,23 +1,15 @@
 const Overlay = {
+  functional: true,
+
   props: {
     value: Boolean
   },
 
-  computed: {
-    classes () {
-      return {
-        'overlay': true,
-        'overlay--active': this.value
-      }
-    }
-  },
+  render (h, { data, children, props }) {
+    data.staticClass = data.staticClass ? `overlay ${data.staticClass}` : 'overlay'
+    if (props.value) data.staticClass += ' overlay--active'
 
-  render (h) {
-    const data = {
-      'class': this.classes
-    }
-
-    return h('div', data, [this.$slots.default])
+    return h('div', data, children)
   }
 }
 

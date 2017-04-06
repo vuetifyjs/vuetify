@@ -2,10 +2,10 @@ export function createSimpleFunctional (c, el = 'div') {
   return {
     functional: true,
 
-    render: (h, context) => {
-      context.data.staticClass = context.data.staticClass ? `${c} ${context.data.staticClass}` : c
+    render: (h, { data, children }) => {
+      data.staticClass = data.staticClass ? `${c} ${data.staticClass}` : c
 
-      return h(el, context.data, context.children)
+      return h(el, data, children)
     }
   }
 }
@@ -14,18 +14,18 @@ export function createSimpleTransition (name) {
   return {
     functional: true,
 
-    render (createElement, context) {
+    render (h, context) {
       const origin = (context.data.attrs || context.data.props || {}).origin || 'top center 0'
-      const data = context.data || {}
+      context.data = context.data || {}
+      context.data.props = { name }
+      context.data.on = context.data.on || {}
 
-      data.props = { name }
-      data.on = data.on || {}
-      data.on.beforeEnter = (el) => {
+      context.data.on.beforeEnter = el => {
         el.style.transformOrigin = origin
         el.style.webkitTransformOrigin = origin
       }
 
-      return createElement('transition', data, context.children)
+      return h('transition', context.data, context.children)
     }
   }
 }

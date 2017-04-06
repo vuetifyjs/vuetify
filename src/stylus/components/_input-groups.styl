@@ -15,6 +15,7 @@
     font-size $input-font-size
     line-height: $input-font-size * 2
     height: $input-height
+    max-width: 80%
     transition: .4s $transition.fast-in-fast-out
     z-index: 0
 
@@ -43,7 +44,7 @@
     &.input-group--dark
       .input-group__details:before
         background-image: linear-gradient(to right, rgba(255, 255, 255, .38) 0, rgba(255, 255, 255, .38) 33%, transparent 0)
-      
+
   &--focused
     .input-group__details
       &:after
@@ -59,11 +60,21 @@
   &--light
     .input-group__details:before
       background-color: $material-twelve-percent-dark
-      
+
+    .icon
+      color: rgba(#000, .6)
+
   &--dark
     .input-group__details:before
       background-color: $material-twelve-percent-light
 
+    .icon
+      color: rgba(#fff, .6)
+
+/** Icons */
+.input-group
+  &__icon-cb
+    cursor: pointer
 
 /** Details */
 .input-group
@@ -98,6 +109,10 @@
       height: 1px
       width: 100%
       z-index: 0
+      
+  &--hide-details
+    .input-group__details
+      min-height: 0
       
 /** Hint */
 .input-group
