@@ -104,7 +104,7 @@ elevation-24dp = 0 11px 15px -7px shadow-key-umbra-opacity,
 
 // MIXINS
 elevation($z, important = false)
-  box-shadow: elevation-+$z+dp (important ? ' !important' : '')
+  box-shadow: elevation-+$z+dp (important ? !important : )
 
 elevationTransition($duration = 280ms, $easing = cubic-bezier(.4, 0, .2, 1))
   transition: box-shadow $duration $easing
