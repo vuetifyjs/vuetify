@@ -76,13 +76,13 @@ export default {
       const page = this.rowsPerPage === Object(this.rowsPerPage)
         ? this.rowsPerPage.value
         : this.rowsPerPage
-      return (this.page - 1) * page
+      return page === -1 ? 0 : (this.page - 1) * page
     },
     pageStop () {
       const page = this.rowsPerPage === Object(this.rowsPerPage)
         ? this.rowsPerPage.value
         : this.rowsPerPage
-      return this.page * page
+      return page === -1 ? this.value.length : this.page * page
     },
     filteredItems () {
       let items = this.value
