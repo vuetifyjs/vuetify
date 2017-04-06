@@ -102,19 +102,18 @@ export default {
     value () {
       this.lazyValue = this.value
       this.validate()
-      this.multiLine && this.autoGrow && this.calculateInputHeight()
+      this.calculateInputHeight()
     }
   },
 
   mounted () {
-    this.$vuetify.load(() => {
-      this.multiLine && this.autoGrow && this.calculateInputHeight()
-      this.autofocus && this.$refs.input.focus()
-    })
+    this.calculateInputHeight()
+    this.autofocus && this.$refs.input.focus()
   },
 
   methods: {
     calculateInputHeight () {
+      if (!this.multiLine || !this.autoGrow) return
       const height = this.$refs.input.scrollHeight
       const minHeight = this.rows * 24
       this.inputHeight = height < minHeight ? minHeight : height
