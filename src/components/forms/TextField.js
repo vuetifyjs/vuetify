@@ -115,7 +115,9 @@ export default {
 
   methods: {
     calculateInputHeight () {
-      this.inputHeight = this.$refs.input.scrollHeight
+      const height = this.$refs.input.scrollHeight
+      const minHeight = this.rows * 24
+      this.inputHeight = height < minHeight ? minHeight : height
     },
     onInput (e) {
       this.inputValue = e.target.value
