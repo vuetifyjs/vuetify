@@ -121,7 +121,7 @@ export default {
     },
     onInput (e) {
       this.inputValue = e.target.value
-      this.calculateInputHeight()
+      this.multiLine && this.autoGrow && this.calculateInputHeight()
     },
     blur () {
       this.validate()
