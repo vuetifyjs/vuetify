@@ -95,8 +95,8 @@ export default {
       }
 
       items = items.sort((a, b) => {
-        const sortA = a[Object.keys(a)[this.sorting]]
-        const sortB = b[Object.keys(b)[this.sorting]]
+        const sortA = a[this.sorting]
+        const sortB = b[this.sorting]
 
         if (this.desc) {
           if (sortA < sortB) return 1
