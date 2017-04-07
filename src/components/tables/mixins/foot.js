@@ -36,13 +36,20 @@ export default {
       ])
     },
     genPagination () {
-      const stop = this.value.length < this.pageStop || this.pageStop < 0
-        ? this.value.length
-        : this.pageStop
+      let pagination = '&mdash;'
+
+      if (this.value.length) {
+        const stop = this.value.length < this.pageStop || this.pageStop < 0
+                ? this.value.length
+                : this.pageStop
+
+        pagination = `${this.pageStart + 1}-${stop} of ${this.value.length}`
+      }
 
       return this.$createElement('div', {
-        'class': 'datatable__actions__pagination'
-      }, `${this.pageStart + 1}-${stop} of ${this.value.length}`)
+        'class': 'datatable__actions__pagination',
+        domProps: { innerHTML: pagination }
+      })
     },
     genActions () {
       return [this.$createElement('div', {

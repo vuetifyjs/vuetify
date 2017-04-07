@@ -27,12 +27,20 @@ export default {
       default: 'text'
     },
     hideActions: Boolean,
+    emptyTableText: {
+      type: String,
+      default: 'No data available in table'
+    },
     items: {
       type: Array,
       default: () => []
     },
     itemValue: {
       default: 'value'
+    },
+    noResultsText: {
+      type: String,
+      default: 'No matching records found'
     },
     rowsPerPageItems: {
       type: Array,
