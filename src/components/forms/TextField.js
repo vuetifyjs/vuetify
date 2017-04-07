@@ -177,7 +177,6 @@ export default {
     counterIsValid: function counterIsValid () {
       const val = (this.inputValue && this.inputValue.toString() || '')
       return (!this.counter ||
-        !this.inputValue.toString() ||
         (val.length >= this.min && val.length <= this.max)
       )
     },
