@@ -10,7 +10,7 @@
       slot(name="activator")
 
     v-overlay(
-      v-model="isActive"
+      v-bind:value="isActive"
       v-bind:class="overlayClasses"
     )
       component(
