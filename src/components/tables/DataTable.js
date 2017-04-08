@@ -27,16 +27,16 @@ export default {
       default: 'text'
     },
     hideActions: Boolean,
-    emptyTableText: {
-      type: String,
-      default: 'No data available in table'
-    },
     items: {
       type: Array,
       default: () => []
     },
     itemValue: {
       default: 'value'
+    },
+    noDataText: {
+      type: String,
+      default: 'No data available in table'
     },
     noResultsText: {
       type: String,

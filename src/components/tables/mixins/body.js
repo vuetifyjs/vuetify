@@ -4,7 +4,7 @@ export default {
       let children = []
 
       if (!this.value.length) {
-        children = [this.genEmptyBody(this.emptyTableText)]
+        children = [this.genEmptyBody(this.noDataText)]
       } else if (!this.filteredItems.length) {
         children = [this.genEmptyBody(this.noResultsText)]
       } else {
