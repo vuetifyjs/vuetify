@@ -3,7 +3,7 @@ import Toggleable from '../../mixins/toggleable'
 import GenerateRouteLink from '../../mixins/route-link'
 
 export default {
-  name: 'button',
+  name: 'btn',
 
   mixins: [Contextualable, GenerateRouteLink, Toggleable],
 
