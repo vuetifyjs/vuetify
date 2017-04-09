@@ -34,6 +34,14 @@ export default {
     itemValue: {
       default: 'value'
     },
+    noDataText: {
+      type: String,
+      default: 'No data available in table'
+    },
+    noResultsText: {
+      type: String,
+      default: 'No matching records found'
+    },
     rowsPerPageItems: {
       type: Array,
       default () {
