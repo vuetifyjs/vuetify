@@ -1,0 +1,58 @@
+.date-picker
+  background: $theme.primary
+  border-radius: $card-border-radius
+  color: #fff
+  display: flex
+  flex-direction: column
+  width: 350px
+  
+
+/** Header */
+.date-picker__header
+  height: 105px
+  justify-content: space-between
+  flex-direction: column
+  flex-wrap: wrap
+  width: 100%
+  
+  &-year
+    font-size: 14px
+    opacity: .8
+  
+  &-year, &-date
+    width: 100%
+    
+
+/** Body */
+.date-picker__body
+  background: #fff
+  color: #000
+  
+  &-selector
+    display: flex
+    align-items: center
+    justify-content: space-between
+    
+    .icon
+      cursor: pointer
+      user-select: none
+
+table
+  background: #fff
+  padding-bottom: 8px
+  
+  thead
+    th
+      padding: 16px 0
+
+  th
+    color: rgba(#000, .54)
+    font-weight: 600
+    font-size: 12px
+
+  th, td
+    width: 50px
+    text-align: center
+    
+  .btn
+    margin: 0

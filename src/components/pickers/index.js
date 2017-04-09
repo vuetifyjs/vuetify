@@ -1,5 +1,5 @@
-import DateTime from './DateTime'
+import DatePicker from './DatePicker'
 
 export default {
-  DateTime
+  DatePicker
 }
