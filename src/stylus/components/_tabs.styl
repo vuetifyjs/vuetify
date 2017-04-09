@@ -20,7 +20,10 @@
       
   &--centered
     .tabs__container
-      justify-content: center
+      > li:first-of-type
+        margin-left: auto
+      > li:last-of-type
+        margin-right: auto
       
   &--icons
     .tabs__tabs

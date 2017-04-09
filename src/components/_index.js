@@ -6,6 +6,7 @@ import Buttons from './buttons/index'
 import Cards from './cards/index'
 import Carousel from './carousel/index'
 import Chips from './chips/index'
+import DateTime from './pickers/index'
 import Dividers from './dividers/index'
 import ExpansionPanel from './expansion-panel/index'
 import Footer from './footer/index'
@@ -40,6 +41,7 @@ export default Object.assign({},
   Cards,
   Carousel,
   Chips,
+  DateTime,
   Dividers,
   ExpansionPanel,
   Footer,
