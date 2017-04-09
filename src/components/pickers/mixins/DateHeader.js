@@ -9,7 +9,7 @@ export default {
         }, this.year),
         this.$createElement('div', {
           'class': 'date-picker__header-date display-1'
-        }, 'Thu, Apr 13')
+        }, `${this.dayName.substr(0, 3)}, ${this.monthName.substr(0, 3)} ${this.day}`)
       ])
     }
   }

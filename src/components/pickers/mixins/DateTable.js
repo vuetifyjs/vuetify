@@ -25,7 +25,10 @@ export default {
         0
       ).getDate()
 
-      const day = this.inputDate.getDay()
+      const day = new Date(
+        this.inputDate.getFullYear(),
+        this.inputDate.getMonth()
+      ).getDay()
 
       for (let i = 0; i < day; i++) {
         rows.push(this.$createElement('td'))
@@ -34,7 +37,12 @@ export default {
       for (let i = 1; i <= length; i++) {
         rows.push(this.$createElement('td', [
           this.$createElement('v-btn', {
-            props: { floating: true, small: true, flat: true }
+            props: {
+              floating: true,
+              small: true,
+              flat: true,
+              value: this.day === i
+            }
           }, i)
         ]))
 

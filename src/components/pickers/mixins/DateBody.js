@@ -8,6 +8,9 @@ export default {
       ])
     },
     genSelector () {
+      const month = this.inputDate.getMonth()
+      const year = this.inputDate.getFullYear()
+
       return this.$createElement('div', {
         'class': 'date-picker__body-selector'
       }, [
@@ -15,19 +18,19 @@ export default {
           nativeOn: {
             click: () => {
               this.inputDate = new Date(
-                this.inputDate.getFullYear(),
-                this.inputDate.getMonth() - 1
+                year,
+                month - 1
               )
             }
           }
         }, 'chevron_left'),
-        this.$createElement('strong', `${this.month} ${this.year}`),
+        this.$createElement('strong', `${this.months[month]} ${year}`),
         this.$createElement('v-icon', {
           nativeOn: {
             click: () => {
               this.inputDate = new Date(
-                this.inputDate.getFullYear(),
-                this.inputDate.getMonth() + 1
+                year,
+                month + 1
               )
             }
           }

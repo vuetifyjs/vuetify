@@ -9,19 +9,35 @@ export default {
 
   data () {
     return {
-      inputDate: new Date(Date.now())
+      lazyDate: null
     }
   },
 
   computed: {
+    inputDate: {
+      get () {
+        return new Date(this.value)
+      },
+      set (val) {
+        this.$emit('input', val)
+
+        return val
+      }
+    },
     day () {
-      return 7
+      if (this.lazyDate) return this.lazyDate.getDate()
     },
     month () {
-      return this.months[this.inputDate.getMonth()]
+      if (this.lazyDate) return this.lazyDate.getMonth()
     },
     year () {
-      return this.inputDate.getFullYear()
+      if (this.lazyDate) return this.lazyDate.getFullYear()
+    },
+    dayName () {
+      return this.lazyDate ? this.days[this.lazyDate.getDay()] : ''
+    },
+    monthName () {
+      return this.lazyDate ? this.months[this.month] : ''
     }
   },
 
@@ -48,8 +64,19 @@ export default {
       ]
     },
     value: {
-      default: null
+      default: () => Date.now()
     }
+  },
+
+  watch: {
+    value (val) {
+      this.inputDate = val
+    }
+  },
+
+  mounted () {
+    this.inputDate = this.value
+    this.lazyDate = this.inputDate
   },
 
   render (h) {
