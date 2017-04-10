@@ -68,6 +68,7 @@ export default {
     autoGrow: Boolean,
     counter: Boolean,
     fullWidth: Boolean,
+    maxlength: [Number, String],
     min: {
       type: [Number, String],
       default: 0
@@ -160,11 +161,8 @@ export default {
       }
 
       if (this.autocomplete) inputData.domProps.autocomplete = true
-
-      // add only if set
-      if (this.name) {
-        inputData.attrs = { name: this.name }
-      }
+      if (this.name) inputData.attrs = { name: this.name }
+      if (this.maxlength) inputData.attrs.maxlength = this.maxlength
 
       if (this.multiLine) {
         inputData.domProps.rows = this.rows
