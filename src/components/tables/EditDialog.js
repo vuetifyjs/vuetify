@@ -41,7 +41,7 @@ export default {
 
   computed: {
     input () {
-      return this.$slots.input[0].componentInstance
+      return this.$slots.input.map(e => e.componentInstance).find(c => 'errors' in c)
     }
   },
 
@@ -54,7 +54,7 @@ export default {
       input && setTimeout(() => (input.focus()), 0)
     },
     save () {
-      if (this.validate && this.input.errors.length > 0) {
+      if (this.validate && this.input && this.input.errors.length > 0) {
         this.isInvalid = true
         return
       }
