@@ -6,6 +6,37 @@
   min-width: 315px
   max-width: 315px
   width: 100%
+  
+  &--dark
+    .card__row--actions
+      background: $grey.darken-3
+      
+      .btn
+        color: $theme.accent !important
+
+    .date-picker__title
+      background: $grey.darken-2
+    
+    .date-picker__header, .date-picker__years
+      background: $grey.darken-3
+      color: #fff
+      
+      .btn
+        color: #fff
+        
+    .date-picker__table
+      background: $grey.darken-3
+      
+      table
+        th, td, .btn
+          color: #fff
+          
+        .btn.btn--floating
+          &:after
+            background: $theme.accent !important
+
+        .btn--floating.btn--current:not(.button--active)
+          color: $theme.accent
 
 /** Years */
 .date-picker__years
@@ -99,12 +130,12 @@
 
 /** Transitions */
 .date-picker__table
+  background: #fff
   height: 310px
   position: relative
   overflow: hidden
 
 table
-  background: #fff
   padding-bottom: 8px
   transition: .3s $transition.swing
   top: 0

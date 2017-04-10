@@ -5,7 +5,7 @@ export default {
       const monthName = this.monthName || ''
       const date = `${dayName.substr(0, 3)}, ${monthName.substr(0, 3)} ${this.day}`
 
-      const text = this.$createElement('v-slide-y-transition', [
+      const text = this.$createElement('v-slide-x-transition', [
         this.$createElement('div', { key: date }, date)
       ])
 

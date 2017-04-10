@@ -21,6 +21,7 @@ export default {
   },
 
   props: {
+    dark: Boolean,
     dateFormat: {
       type: Function,
       default: val => {
@@ -128,7 +129,10 @@ export default {
     }
 
     return h('v-card', {
-      'class': 'date-picker'
+      'class': {
+        'date-picker': true,
+        'date-picker--dark': this.dark
+      }
     }, children)
   }
 }
