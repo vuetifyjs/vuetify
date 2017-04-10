@@ -14,8 +14,9 @@ export default {
             active: this.year === i
           },
           on: {
-            click: () => {
-              this.inputDate = `${i}-${this.lazyDate.getMonth() + 1}-${this.day}`
+            click: e => {
+              e.stopPropagation()
+              this.inputDate = `${i}-${this.tableDate.getMonth() + 1}-${this.day}`
               this.isSelected = false
             }
           }

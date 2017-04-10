@@ -1,25 +1,26 @@
 .date-picker
-  background: $theme.primary
   border-radius: $card-border-radius
   color: #fff
   display: flex
   flex-direction: column
-  width: 350px
+  min-width: 315px
+  max-width: 315px
+  width: 100%
 
 /** Years */
 .date-picker__years
   background: #fff
   color: #000
+  font-size: 18px
+  font-weight: 400
   list-style-type: none
   max-height: 408px
   overflow: auto
   text-align: center
-  font-size: 18px
-  font-weight: 400
   
   li
-    margin: 16px 0
     cursor: pointer
+    margin: 16px 0
     transition: .3s $transition.swing
     
     &:hover
@@ -27,17 +28,19 @@
 
     &.active
       color: $theme.primary
+      font-size: 24px
       font-weight: 500
       margin: 20px 0
-      font-size: 24px
   
 
-/** Header */
-.date-picker__header
-  height: 105px
+/** Title */
+.date-picker__title
+  background: $theme.primary
+  height: 100%
   justify-content: space-between
   flex-direction: column
   flex-wrap: wrap
+  min-height: 105px
   width: 100%
   
   &-year
@@ -59,15 +62,16 @@
       opacity: 1
     
 
-/** Body */
-.date-picker__body
+/** Header */
+.date-picker__header
   background: #fff
   color: #000
   
   &-selector
-    display: flex
     align-items: center
+    display: flex
     justify-content: space-between
+    position: relative
     
     .btn
       color: #000
@@ -76,11 +80,35 @@
     .icon
       cursor: pointer
       user-select: none
+      
+    &-date
+      flex: 1
+      text-align: center
+      position: relative
+      overflow: hidden
+      
+      strong
+        transition: .3s $transition.swing
+        display: block
+        width: 100%
+      
+
+/** Footer */
+.date-picker .card__row--actions
+  border: none
+
+/** Transitions */
+.date-picker__table
+  height: 310px
+  position: relative
+  overflow: hidden
 
 table
   background: #fff
   padding-bottom: 8px
-  
+  transition: .3s $transition.swing
+  top: 0
+
   thead
     th
       padding: 16px 0
@@ -94,8 +122,8 @@ table
     height: 40px
 
   th, td
-    width: 50px
     text-align: center
+    width: 45px
     
   .btn
     margin: 0
@@ -105,6 +133,8 @@ table
     
   .btn.btn--floating
     transition: none !important
+    height: 34px
+    width: 34px
 
     &:after
       background: $theme.primary !important

@@ -118,9 +118,6 @@ $headings := {
 
 
 // Transitions
-$primary-transition := 0.3s cubic-bezier(0, 0, .2, 1)
-$secondary-transition := 0.2s ease-out
-
 $transition := {
   fast-out-slow-in: cubic-bezier(0.4, 0.0, 0.2, 1),
   linear-out-slow-in: cubic-bezier(0.0, 0.0, 0.2, 1),
@@ -129,6 +126,9 @@ $transition := {
   fast-in-fast-out: cubic-bezier(.25,.8,.25,1),
   swing: cubic-bezier(.25,.8,.25,1)
 }
+
+$primary-transition := 0.3s $transition.swing
+$secondary-transition := 0.2s $transition.ease-in-out
 
 // Components
 // ============================================================

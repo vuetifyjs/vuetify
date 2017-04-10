@@ -1,11 +1,33 @@
 export default {
   methods: {
     genTable () {
-      return this.$createElement('table', {
+      const children = []
+
+      children.push(this.$createElement('table', {
+        key: this.tableDate.getMonth()
       }, [
         this.genTHead(),
-        this.genTBody(),
-        this.genTFoot()
+        this.genTBody()
+      ]))
+
+      return this.$createElement('div', {
+        'class': 'date-picker__table',
+        domProps: {
+          onwheel: (e) => {
+            e.preventDefault()
+
+            let month = this.tableDate.getMonth()
+            const year = this.tableDate.getFullYear()
+            const next = e.wheelDelta > 0
+
+            if (next) month++
+            else month--
+
+            this.tableDate = new Date(year, month)
+          }
+        }
+      }, [
+        this.$createElement(this.computedTransition, children)
       ])
     },
     genTHead () {
@@ -19,14 +41,14 @@ export default {
       const children = []
       let rows = []
       const length = new Date(
-        this.lazyDate.getFullYear(),
-        this.lazyDate.getMonth() + 1,
+        this.tableDate.getFullYear(),
+        this.tableDate.getMonth() + 1,
         0
       ).getDate()
 
       const day = new Date(
-        this.lazyDate.getFullYear(),
-        this.lazyDate.getMonth()
+        this.tableDate.getFullYear(),
+        this.tableDate.getMonth()
       ).getDay()
 
       for (let i = 0; i < day; i++) {
@@ -47,7 +69,7 @@ export default {
             },
             nativeOn: {
               click: () => {
-                this.inputDate = `${this.lazyDate.getFullYear()}-${this.lazyDate.getMonth() + 1}-${i} 00:00:00`
+                this.inputDate = `${this.tableDate.getFullYear()}-${this.tableDate.getMonth() + 1}-${i}`
               }
             }
           }, i)
@@ -69,36 +91,17 @@ export default {
 
       return this.$createElement('tbody', children)
     },
-    genTFoot () {
-      return this.$createElement('tfoot', {
-
-      }, [
-        this.genTR([
-          this.$createElement('td', {
-            'class': 'text-xs-right',
-            attrs: { colspan: '100%' }
-          }, [
-            this.$createElement('v-btn', {
-              props: { flat: true, primary: true }
-            }, 'Cancel'),
-            this.$createElement('v-btn', {
-              props: { flat: true, primary: true }
-            }, 'Ok')
-          ])
-        ])
-      ])
-    },
     genTR (children = [], data = {}) {
       return [this.$createElement('tr', data, children)]
     },
     isActive (i) {
-      return this.lazyDate.getFullYear() === this.year &&
-        this.lazyDate.getMonth() === this.month &&
-        this.lazyDate.getDate() === i
+      return this.tableDate.getFullYear() === this.year &&
+        this.tableDate.getMonth() === this.month &&
+        this.day === i
     },
     isCurrent (i) {
-      return this.currentYear === this.lazyDate.getFullYear() &&
-        this.currentMonth === this.lazyDate.getMonth() &&
+      return this.currentYear === this.tableDate.getFullYear() &&
+        this.currentMonth === this.tableDate.getMonth() &&
         this.currentDay === i
     }
   }
