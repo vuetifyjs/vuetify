@@ -27,9 +27,11 @@ export default {
   computed: {
     classes () {
       return {
+        'dialog': true,
         'dialog--active': this.isActive,
         'dialog--persistent': this.persistent,
         'dialog--fullscreen': this.fullscreen,
+        'dialog--stacked-actions': this.stackedActions,
       }
     },
 
@@ -66,21 +68,20 @@ export default {
 
       // make sure we have the actions card row
       if (actions.length) {
-        actions = actions[0]
-        let btns = actions.$slots.default
+        let btns = actions[0].$slots.default
 
         let maxButtonWidth = (this.$slots.default[0].elm.offsetWidth - 8 - (8 * btns.length) ) / btns.length
-        this.stackedActions = false
+        let shouldStack = false
 
         for (let i=btns.length; i--;) {
           let span = btns[i].child._vnode.children[0].elm
           if (span.scrollWidth > maxButtonWidth) {
-            this.stackedActions = true
+            shouldStack = true
             break
           }
         }
 
-        this.stackedActions ? actions.$el.classList.add('card__row--actions-stacked') : actions.$el.classList.remove('card__row--actions-stacked')
+        this.stackedActions = shouldStack
       }
     }
   },
@@ -98,7 +99,7 @@ export default {
 
   render (h) {
     return h('div', {
-      'class': 'dialog',
+      'class': this.classes,
       ref: 'dialog',
       directives: [{ name: 'click-outside', value: this.closeConditional }],
     }, [this.$slots.default])
