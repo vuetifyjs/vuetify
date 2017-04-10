@@ -14,27 +14,23 @@ export default {
       return this.$createElement('div', {
         'class': 'date-picker__body-selector'
       }, [
-        this.$createElement('v-icon', {
+        this.$createElement('v-btn', {
+          props: { icon: true },
           nativeOn: {
-            click: () => {
-              this.lazyDate = new Date(
-                year,
-                month - 1
-              )
-            }
+            click: () => (this.lazyDate = new Date(year, month - 1))
           }
-        }, 'chevron_left'),
+        }, [
+          this.$createElement('v-icon', 'chevron_left')
+        ]),
         this.$createElement('strong', `${this.months[month]} ${year}`),
-        this.$createElement('v-icon', {
+        this.$createElement('v-btn', {
+          props: { icon: true },
           nativeOn: {
-            click: () => {
-              this.lazyDate = new Date(
-                year,
-                month + 1
-              )
-            }
+            click: () => (this.lazyDate = new Date(year, month + 1))
           }
-        }, 'chevron_right')
+        }, [
+          this.$createElement('v-icon', 'chevron_right')
+        ])
       ])
     }
   }

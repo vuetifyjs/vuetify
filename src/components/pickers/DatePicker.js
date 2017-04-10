@@ -12,6 +12,8 @@ export default {
     return {
       lazyDate: new Date(this.value),
       currentDay: null,
+      currentMonth: null,
+      currentYear: null,
       isSelected: false
     }
   },
@@ -24,7 +26,7 @@ export default {
       set (val) {
         this.$emit('input', val)
 
-        return val
+        this.lazyDate = this.inputDate
       }
     },
     day () {
@@ -88,12 +90,26 @@ export default {
   mounted () {
     this.inputDate = this.value
     this.lazyDate = this.inputDate
-    this.currentDay = this.inputDate.getDate()
+    this.currentDay = this.day
+    this.currentMonth = this.month
+    this.currentYear = this.year
   },
 
   render (h) {
     return h('v-card', {
-      'class': 'date-picker'
+      'class': 'date-picker',
+      domProps: {
+        onwheel: (e) => {
+          let month = this.lazyDate.getMonth()
+          const year = this.lazyDate.getFullYear()
+          const next = e.wheelDelta > 0
+
+          if (next) month++
+          else month--
+
+          this.lazyDate = new Date(year, month)
+        }
+      }
     }, [
       this.genHeader(),
       !this.isSelected ? this.genBody() : null,

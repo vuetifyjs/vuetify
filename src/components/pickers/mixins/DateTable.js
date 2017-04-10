@@ -2,7 +2,6 @@ export default {
   methods: {
     genTable () {
       return this.$createElement('table', {
-        //
       }, [
         this.genTHead(),
         this.genTBody(),
@@ -47,7 +46,9 @@ export default {
               flat: true
             },
             nativeOn: {
-              click: () => (this.inputDate = `${this.year}-${this.lazyDate.getMonth() + 1}-${i}`)
+              click: () => {
+                this.inputDate = `${this.lazyDate.getFullYear()}-${this.lazyDate.getMonth() + 1}-${i} 00:00:00`
+              }
             }
           }, i)
         ]))
@@ -61,6 +62,10 @@ export default {
       if (rows.length) {
         children.push(this.genTR(rows))
       }
+
+      children.length < 6 && children.push(this.genTR([
+        this.$createElement('td', { domProps: { innerHTML: '&nbsp;' }})
+      ]))
 
       return this.$createElement('tbody', children)
     },
@@ -83,17 +88,17 @@ export default {
         ])
       ])
     },
-    genTR (children, data = {}) {
+    genTR (children = [], data = {}) {
       return [this.$createElement('tr', data, children)]
     },
     isActive (i) {
       return this.lazyDate.getFullYear() === this.year &&
         this.lazyDate.getMonth() === this.month &&
-        this.day === i
+        this.lazyDate.getDate() === i
     },
     isCurrent (i) {
-      return this.lazyDate.getFullYear() === this.year &&
-        this.lazyDate.getMonth() === this.month &&
+      return this.currentYear === this.lazyDate.getFullYear() &&
+        this.currentMonth === this.lazyDate.getMonth() &&
         this.currentDay === i
     }
   }
