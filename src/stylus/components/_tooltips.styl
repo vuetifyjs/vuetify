@@ -1,6 +1,5 @@
 [data-tooltip]
   position: relative
-  filter: blur(0)
   
   &:before
     background: $grey.darken-2
@@ -36,7 +35,7 @@
       
     &:hover
       &:before
-        transform: translate(-50%, 14px)
+        transform: translate(-50%, 14px) scale(1.01)
       
   &[data-tooltip-location='top']
     &:before
@@ -47,7 +46,7 @@
       
     &:hover
       &:before
-        transform: translate(-50%, -14px)
+        transform: translate(-50%, -14px) scale(1.01)
 
   &[data-tooltip-location='left']
     &:before
@@ -57,7 +56,7 @@
       
     &:hover
       &:before
-        transform: translate(-14px, 0)
+        transform: translate(-14px, 0) scale(1.01)
       
   &[data-tooltip-location='right']
     &:before
@@ -67,7 +66,7 @@
       
     &:hover
       &:before
-        transform: translate(14px, 0)
+        transform: translate(14px, 0) scale(1.01)
     
   @media $display-breakpoints.sm-and-down
     &:before
@@ -77,19 +76,19 @@
     &[data-tooltip-location='bottom']
       &:hover
         &:before
-          transform: translate(-50%, 24px)
+          transform: translate(-50%, 24px) scale(1.01)
       
     &[data-tooltip-location='top']
       &:hover
         &:before
-          transform: translate(-50%, -24px)
+          transform: translate(-50%, -24px) scale(1.01)
       
     &[data-tooltip-location='left']
       &:hover
         &:before
-          transform: translate(-24px, 0%)
+          transform: translate(-24px, 0%) scale(1.01)
       
     &[data-tooltip-location='right']
       &:hover
         &:before
-          transform: translate(24px, 0%)
+          transform: translate(24px, 0%) scale(1.01)
