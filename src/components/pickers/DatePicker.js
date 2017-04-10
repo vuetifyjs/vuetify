@@ -9,7 +9,8 @@ export default {
 
   data () {
     return {
-      lazyDate: null
+      lazyDate: new Date(this.value),
+      calendarDate: null
     }
   },
 
@@ -25,19 +26,19 @@ export default {
       }
     },
     day () {
-      if (this.lazyDate) return this.lazyDate.getDate()
+      return this.inputDate.getDate()
     },
     month () {
-      if (this.lazyDate) return this.lazyDate.getMonth()
+      return this.inputDate.getMonth()
     },
     year () {
-      if (this.lazyDate) return this.lazyDate.getFullYear()
+      return this.inputDate.getFullYear()
     },
     dayName () {
-      return this.lazyDate ? this.days[this.lazyDate.getDay()] : ''
+      return this.inputDate ? this.days[this.inputDate.getDay()] : ''
     },
     monthName () {
-      return this.lazyDate ? this.months[this.month] : ''
+      return this.inputDate ? this.months[this.month] : ''
     }
   },
 
@@ -70,13 +71,14 @@ export default {
 
   watch: {
     value (val) {
-      this.inputDate = val
+      this.lazyDate = new Date(val)
     }
   },
 
   mounted () {
     this.inputDate = this.value
     this.lazyDate = this.inputDate
+    this.calendarDate = this.inputDate
   },
 
   render (h) {

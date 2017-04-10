@@ -8,8 +8,8 @@ export default {
       ])
     },
     genSelector () {
-      const month = this.inputDate.getMonth()
-      const year = this.inputDate.getFullYear()
+      const month = this.lazyDate.getMonth()
+      const year = this.lazyDate.getFullYear()
 
       return this.$createElement('div', {
         'class': 'date-picker__body-selector'
@@ -17,7 +17,7 @@ export default {
         this.$createElement('v-icon', {
           nativeOn: {
             click: () => {
-              this.inputDate = new Date(
+              this.lazyDate = new Date(
                 year,
                 month - 1
               )
@@ -28,7 +28,7 @@ export default {
         this.$createElement('v-icon', {
           nativeOn: {
             click: () => {
-              this.inputDate = new Date(
+              this.lazyDate = new Date(
                 year,
                 month + 1
               )

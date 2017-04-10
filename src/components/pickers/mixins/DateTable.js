@@ -20,14 +20,14 @@ export default {
       const children = []
       let rows = []
       const length = new Date(
-        this.inputDate.getFullYear(),
-        this.inputDate.getMonth() + 1,
+        this.lazyDate.getFullYear(),
+        this.lazyDate.getMonth() + 1,
         0
       ).getDate()
 
       const day = new Date(
-        this.inputDate.getFullYear(),
-        this.inputDate.getMonth()
+        this.lazyDate.getFullYear(),
+        this.lazyDate.getMonth()
       ).getDay()
 
       for (let i = 0; i < day; i++) {
@@ -41,7 +41,10 @@ export default {
               floating: true,
               small: true,
               flat: true,
-              value: this.day === i
+              value: this.isActive(i)
+            },
+            nativeOn: {
+              click: () => (this.inputDate = `${this.year}-${this.month + 1}-${i}`)
             }
           }, i)
         ]))
@@ -79,6 +82,11 @@ export default {
     },
     genTR (children, data = {}) {
       return [this.$createElement('tr', data, children)]
+    },
+    isActive (i) {
+      return this.lazyDate.getFullYear() === this.year &&
+        this.lazyDate.getMonth() === this.month &&
+        this.day === i
     }
   }
 }

@@ -36,6 +36,30 @@
     .icon
       cursor: pointer
       user-select: none
+      
+.date-picker
+  .btn.btn--floating
+    transition: none !important
+
+    &:after
+      background: $theme.primary !important
+      opacity: 0
+      transform: scale(0)
+      
+    &:not(.btn--active):hover
+      color: #fff
+
+      &:after
+        opacity: .6
+        transform: scale(1)
+
+  .btn.btn--floating.btn--active
+    color: #fff
+    
+    &:after
+      background: $theme.primary !important
+      opacity: 1
+      transform: none
 
 table
   background: #fff
