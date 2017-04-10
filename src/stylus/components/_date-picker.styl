@@ -5,6 +5,31 @@
   display: flex
   flex-direction: column
   width: 350px
+
+/** Years */
+.date-picker__years
+  background: #fff
+  color: #000
+  list-style-type: none
+  max-height: 408px
+  overflow: auto
+  text-align: center
+  font-size: 18px
+  font-weight: 400
+  
+  li
+    margin: 16px 0
+    cursor: pointer
+    transition: .3s $transition.swing
+    
+    &:hover
+      color: $theme.primary
+
+    &.active
+      color: $theme.primary
+      font-weight: 500
+      margin: 20px 0
+      font-size: 24px
   
 
 /** Header */
@@ -29,6 +54,9 @@
     &:not(.active)
       cursor: pointer
       opacity: .8
+      
+    &:hover
+      opacity: 1
     
 
 /** Body */

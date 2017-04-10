@@ -1,11 +1,12 @@
 import DateHeader from './mixins/DateHeader'
 import DateBody from './mixins/DateBody'
 import DateTable from './mixins/DateTable'
+import DateYears from './mixins/DateYears'
 
 export default {
   name: 'date-picker',
 
-  mixins: [DateHeader, DateBody, DateTable],
+  mixins: [DateHeader, DateBody, DateTable, DateYears],
 
   data () {
     return {
@@ -71,6 +72,14 @@ export default {
   },
 
   watch: {
+    isSelected (val) {
+      if (val) {
+        this.$nextTick(() => {
+          const years = this.$refs.years
+          years.scrollTop = years.scrollHeight / 2 - 165
+        })
+      }
+    },
     value (val) {
       this.lazyDate = new Date(val)
     }
@@ -87,8 +96,9 @@ export default {
       'class': 'date-picker'
     }, [
       this.genHeader(),
-      this.genBody(),
-      this.genTable()
+      !this.isSelected ? this.genBody() : null,
+      !this.isSelected ? this.genTable() : null,
+      this.isSelected ? this.genYears() : null
     ])
   }
 }
