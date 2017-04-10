@@ -72,6 +72,12 @@ export default {
     year () {
       return this.inputDate.getFullYear()
     },
+    tableMonth () {
+      return this.tableDate.getMonth()
+    },
+    tableYear () {
+      return this.tableDate.getFullYear()
+    },
     dayName () {
       return this.inputDate ? this.days[this.inputDate.getDay()] : ''
     },
@@ -101,9 +107,11 @@ export default {
   methods: {
     cancel () {
       this.inputDate = this.originalDate
+      if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
     },
     save () {
       this.originalDate = this.value
+      if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
     }
   },
 

@@ -41,14 +41,14 @@ export default {
       const children = []
       let rows = []
       const length = new Date(
-        this.tableDate.getFullYear(),
-        this.tableDate.getMonth() + 1,
+        this.tableYear,
+        this.tableMonth + 1,
         0
       ).getDate()
 
       const day = new Date(
-        this.tableDate.getFullYear(),
-        this.tableDate.getMonth()
+        this.tableYear,
+        this.tableMonth
       ).getDay()
 
       for (let i = 0; i < day; i++) {
@@ -57,22 +57,21 @@ export default {
 
       for (let i = 1; i <= length; i++) {
         rows.push(this.$createElement('td', [
-          this.$createElement('v-btn', {
+          this.$createElement('button', {
             'class': {
+              'btn btn--floating btn--small btn--flat': true,
               'btn--active': this.isActive(i),
               'btn--current': this.isCurrent(i)
             },
-            props: {
-              floating: true,
-              small: true,
-              flat: true
+            domProps: {
+              innerHTML: `<span class="btn__content">${i}</span>`
             },
-            nativeOn: {
+            on: {
               click: () => {
                 this.inputDate = `${this.tableDate.getFullYear()}-${this.tableDate.getMonth() + 1}-${i}`
               }
             }
-          }, i)
+          })
         ]))
 
         if (rows.length % 7 === 0) {
@@ -95,13 +94,13 @@ export default {
       return [this.$createElement('tr', data, children)]
     },
     isActive (i) {
-      return this.tableDate.getFullYear() === this.year &&
-        this.tableDate.getMonth() === this.month &&
+      return this.tableYear === this.year &&
+        this.tableMonth === this.month &&
         this.day === i
     },
     isCurrent (i) {
-      return this.currentYear === this.tableDate.getFullYear() &&
-        this.currentMonth === this.tableDate.getMonth() &&
+      return this.currentYear === this.tableYear &&
+        this.currentMonth === this.tableMonth &&
         this.currentDay === i
     }
   }
