@@ -2,17 +2,17 @@
 import Toggleable from '../../mixins/toggleable'
 
 export default {
-  name: 'modal',
+  name: 'dialog',
 
   mixins: [Toggleable],
 
   props: {
-    bottom: Boolean,
+    persistent: Boolean,
+    fullscreen: Boolean,
     origin: {
       type: String,
       default: 'center center'
     },
-    persistent: Boolean,
     transition: {
       type: String,
       default: 'v-modal-transition'
@@ -22,17 +22,14 @@ export default {
   computed: {
     classes () {
       return {
-        'modal--active': this.isActive,
-        'modal--bottom': this.bottom
+        'dialog--active': this.isActive,
+        'dialog--persistent': this.persistent
+        'dialog--fullscreen': this.fullscreen
       }
     },
 
     computedOrigin () {
-      if (this.origin !== 'center center') {
-        return this.origin
-      }
-
-      return this.bottom ? 'bottom' : this.origin
+      return this.origin
     },
 
     computedTransition () {
@@ -51,26 +48,19 @@ export default {
   },
 
   methods: {
+    wasClickInside (target) {
+      return this.$refs.dialog !== target && !this.$refs.dialog.contains(target)
+    },
     closeConditional (e) {
-      if (this.persistent) {
-        return false
-      }
-
-      return this.$refs.modal !== e.target &&
-        !this.$refs.modal.contains(e.target) &&
-        (!this.$refs.activator || this.$refs.activator &&
-          !this.$refs.activator.contains(e.target) &&
-          this.$refs.activator !== e.target)
+      return this.persistent ? false : this.wasClickInside()
     }
   },
 
   render (h) {
-    let children = []
-
-
-
-    h('v-card', {
-
-    }, children)
+    h('div', {
+      'class': 'dialog',
+      ref: 'dialog',
+      directives: [{ name: 'click-outside', value: closeConditional }],
+    }, this.$slots.default)
   }
 }
