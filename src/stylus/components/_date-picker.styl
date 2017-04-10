@@ -17,10 +17,18 @@
   
   &-year
     font-size: 14px
-    opacity: .8
+    
+  &-date
+    font-size: 34px
   
   &-year, &-date
+    font-weight: 500
+    transition: .3s $transition.swing
     width: 100%
+    
+    &:not(.active)
+      cursor: pointer
+      opacity: .8
     
 
 /** Body */
@@ -38,6 +46,9 @@
       user-select: none
       
 .date-picker
+  .btn.btn--floating.btn--current:not(.btn--active)
+    color: rgba($theme.primary, .6)
+    
   .btn.btn--floating
     transition: none !important
 

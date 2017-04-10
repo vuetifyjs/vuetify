@@ -5,10 +5,18 @@ export default {
         'class': 'date-picker__header'
       }, [
         this.$createElement('div', {
-          'class': 'date-picker__header-year'
+          'class': {
+            'date-picker__header-year': true,
+            'active': this.isSelected
+          },
+          on: { click: () => (this.isSelected = true) }
         }, this.year),
         this.$createElement('div', {
-          'class': 'date-picker__header-date display-1'
+          'class': {
+            'date-picker__header-date': true,
+            'active': !this.isSelected
+          },
+          on: { click: () => (this.isSelected = false) }
         }, `${this.dayName.substr(0, 3)}, ${this.monthName.substr(0, 3)} ${this.day}`)
       ])
     }

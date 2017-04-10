@@ -37,14 +37,17 @@ export default {
       for (let i = 1; i <= length; i++) {
         rows.push(this.$createElement('td', [
           this.$createElement('v-btn', {
+            'class': {
+              'btn--active': this.isActive(i),
+              'btn--current': this.isCurrent(i)
+            },
             props: {
               floating: true,
               small: true,
-              flat: true,
-              value: this.isActive(i)
+              flat: true
             },
             nativeOn: {
-              click: () => (this.inputDate = `${this.year}-${this.month + 1}-${i}`)
+              click: () => (this.inputDate = `${this.year}-${this.lazyDate.getMonth() + 1}-${i}`)
             }
           }, i)
         ]))
@@ -87,6 +90,11 @@ export default {
       return this.lazyDate.getFullYear() === this.year &&
         this.lazyDate.getMonth() === this.month &&
         this.day === i
+    },
+    isCurrent (i) {
+      return this.lazyDate.getFullYear() === this.year &&
+        this.lazyDate.getMonth() === this.month &&
+        this.currentDay === i
     }
   }
 }

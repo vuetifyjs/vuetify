@@ -10,7 +10,8 @@ export default {
   data () {
     return {
       lazyDate: new Date(this.value),
-      calendarDate: null
+      currentDay: null,
+      isSelected: false
     }
   },
 
@@ -78,7 +79,7 @@ export default {
   mounted () {
     this.inputDate = this.value
     this.lazyDate = this.inputDate
-    this.calendarDate = this.inputDate
+    this.currentDay = this.inputDate.getDate()
   },
 
   render (h) {
