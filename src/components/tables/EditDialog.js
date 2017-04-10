@@ -41,7 +41,7 @@ export default {
 
   computed: {
     input () {
-      return this.$slots.input.map(e => e.componentInstance).find(c => 'errors' in c)
+      return this.$slots.input.find(e => 'errors' in e.componentInstance).componentInstance
     }
   },
 
