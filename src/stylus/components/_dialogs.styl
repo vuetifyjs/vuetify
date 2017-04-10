@@ -18,6 +18,35 @@
       .btn
         margin-right: 8px
 
+  &--fullscreen
+    width 100%
+    height 100%
+    position fixed
+
+    .toolbar
+      height 56px           // TODO: height with two lines of text: 80dp
+      padding 0 !important
+
+      &__title
+        font-size 20px      // TODO: convert from 20sp
+        padding: 20px 0     // TODO: convert from 20dp
+
+      .btn
+        &:first-child      // TODO: full width 72dp
+          width: 24px !important
+          height: 24px !important
+          margin: 0 32px 0 16px !important
+        &:last-child
+          margin 0 !important
+          height 100%
+          font-size 14px    // TODO: convert from 14sp
+
+    .card
+      height 100% !important
+      width 100% !important
+      margin 0 !important
+      padding 0 !important
+
   &--stacked-actions
     .card__row--actions
       flex-direction: column
@@ -33,4 +62,3 @@
         flex-direction: row-reverse
         span
           display: table
-

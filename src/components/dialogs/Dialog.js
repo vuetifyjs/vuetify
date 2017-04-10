@@ -31,7 +31,7 @@ export default {
         'dialog--active': this.isActive,
         'dialog--persistent': this.persistent,
         'dialog--fullscreen': this.fullscreen,
-        'dialog--stacked-actions': this.stackedActions,
+        'dialog--stacked-actions': this.stackedActions && !this.fullscreen,
       }
     },
 
