@@ -11,7 +11,6 @@ export default {
     return {
       desc: null,
       page: 1,
-      rowsPerPage: 5,
       sorting: null,
       all: false
     }
@@ -41,6 +40,10 @@ export default {
     noResultsText: {
       type: String,
       default: 'No matching records found'
+    },
+    rowsPerPage: {
+      type: [Number, String],
+      default: 5
     },
     rowsPerPageItems: {
       type: Array,
