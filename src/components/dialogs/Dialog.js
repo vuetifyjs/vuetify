@@ -14,6 +14,7 @@ export default {
   props: {
     persistent: Boolean,
     fullscreen: Boolean,
+    overlay: Boolean,
     origin: {
       type: String,
       default: 'center center'
@@ -49,7 +50,7 @@ export default {
 
     overlayClasses () {
       return {
-        'overlay--modal-bottom': this.bottom
+        'overlay--modal-bottom': false  // this.bottom
       }
     }
   },
@@ -98,10 +99,23 @@ export default {
   },
 
   render (h) {
-    return h('div', {
+    let dialog =  h('div', {
       'class': this.classes,
       ref: 'dialog',
-      directives: [{ name: 'click-outside', value: this.closeConditional }],
+      directives: [
+        { name: 'click-outside', value: this.closeConditional },
+        { name: 'show', value: this.isActive }
+      ],
     }, [this.$slots.default])
+
+    if (this.overlay)
+      dialog = h('v-overlay', {
+        'class': this.overlayClasses,
+        props: {
+          value: this.isActive
+        },
+      }, [dialog])
+
+    return dialog
   }
 }
