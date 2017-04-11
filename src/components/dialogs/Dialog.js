@@ -65,6 +65,8 @@ export default {
     },
 
     resize () {
+      if (!this.isActive) return
+
       let actions = this.$children.filter(c => c.$options.propsData.actions )
 
       // make sure we have the actions card row
