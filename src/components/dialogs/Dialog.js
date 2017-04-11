@@ -15,6 +15,7 @@ export default {
     persistent: Boolean,
     fullscreen: Boolean,
     overlay: Boolean,
+    removeTransition: Boolean,
     origin: {
       type: String,
       default: 'center center'
@@ -41,11 +42,7 @@ export default {
     },
 
     computedTransition () {
-      if (this.transition !== 'v-modal-transition') {
-        return this.transition
-      }
-
-      return this.bottom ? 'v-slide-y-reverse-transition' : this.transition
+      return this.transition
     },
 
     overlayClasses () {
@@ -109,6 +106,9 @@ export default {
         { name: 'show', value: this.isActive }
       ],
     }, [this.$slots.default])
+
+    if (!this.removeTransition)
+      dialog = h(this.computedTransition, {}, [dialog])
 
     if (this.overlay)
       dialog = h('v-overlay', {
