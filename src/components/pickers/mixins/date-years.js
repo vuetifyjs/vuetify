@@ -16,7 +16,7 @@ export default {
           on: {
             click: e => {
               e.stopPropagation()
-              this.inputDate = `${i}-${this.tableDate.getMonth() + 1}-${this.day}`
+              this.inputDate = `${i}-${this.tableMonth + 1}-${this.day}`
               this.isSelected = false
             }
           }

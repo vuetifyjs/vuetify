@@ -37,6 +37,44 @@
 
         .btn--floating.btn--current:not(.btn--active)
           color: $theme.accent
+          
+  &--landscape
+    flex-direction: row
+    min-width: 535px
+    max-width: 535px
+    overflow: hidden
+    
+    .date-picker__title
+      justify-content: flex-start
+      max-width: 150px
+    
+    .date-picker__body, .date-picker__years
+      flex: 1
+
+    .date-picker__header
+      padding: 4px 16px
+    
+    .date-picker__table
+      height: 218px
+      
+      table
+        width: 100%
+        
+        .btn.btn--floating
+          height: 30px
+          width: 30px
+        
+        tr
+          height: auto
+        
+        thead
+          th
+            padding: 8px 0
+
+/** Body */
+.date-picker__body
+  display: flex
+  flex-wrap: wrap
 
 /** Years */
 .date-picker__years
@@ -134,9 +172,9 @@
   height: 310px
   position: relative
   overflow: hidden
+  width: 100%
 
 table
-  padding-bottom: 8px
   transition: .3s $transition.swing
   top: 0
 

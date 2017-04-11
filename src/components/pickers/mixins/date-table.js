@@ -4,7 +4,7 @@ export default {
       const children = []
 
       children.push(this.$createElement('table', {
-        key: this.tableDate.getMonth()
+        key: this.tableMonth
       }, [
         this.genTHead(),
         this.genTBody()
@@ -16,8 +16,8 @@ export default {
           onwheel: (e) => {
             e.preventDefault()
 
-            let month = this.tableDate.getMonth()
-            const year = this.tableDate.getFullYear()
+            let month = this.tableMonth
+            const year = this.tableYear
             const next = e.wheelDelta > 0
 
             if (next) month++
@@ -68,7 +68,7 @@ export default {
             },
             on: {
               click: () => {
-                this.inputDate = `${this.tableDate.getFullYear()}-${this.tableDate.getMonth() + 1}-${i}`
+                this.inputDate = `${this.tableYear}-${this.tableMonth + 1}-${i}`
               }
             }
           })

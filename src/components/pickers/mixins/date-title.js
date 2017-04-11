@@ -1,9 +1,7 @@
 export default {
   methods: {
     genTitle () {
-      const dayName = this.dayName || ''
-      const monthName = this.monthName || ''
-      const date = `${dayName.substr(0, 3)}, ${monthName.substr(0, 3)} ${this.day}`
+      const date = `${this.dayName.substr(0, 3)}, ${this.monthName.substr(0, 3)} ${this.day}`
 
       const text = this.$createElement('v-slide-x-transition', [
         this.$createElement('div', { key: date }, date)

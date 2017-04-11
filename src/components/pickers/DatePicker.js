@@ -2,11 +2,12 @@ import DateTitle from './mixins/date-title'
 import DateHeader from './mixins/date-header'
 import DateTable from './mixins/date-table'
 import DateYears from './mixins/date-years'
+import CardActions from '../../mixins/card-actions'
 
 export default {
   name: 'date-picker',
 
-  mixins: [DateTitle, DateHeader, DateTable, DateYears],
+  mixins: [CardActions, DateTitle, DateHeader, DateTable, DateYears],
 
   data () {
     return {
@@ -21,6 +22,7 @@ export default {
   },
 
   props: {
+    actions: Boolean,
     dark: Boolean,
     dateFormat: {
       type: Function,
@@ -32,6 +34,7 @@ export default {
       type: Array,
       default: () => ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
     },
+    landscape: Boolean,
     months: {
       type: Array,
       default: () => [
@@ -100,16 +103,16 @@ export default {
     },
     value (val) {
       if (val) this.tableDate = this.inputDate
-      if (!this.$scopedSlots.default) this.originalDate = val
+      if (!this.$scopedSlots.default && !this.actions) this.originalDate = val
     }
   },
 
   methods: {
-    cancel () {
+    actionCancel () {
       this.inputDate = this.originalDate
       if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
     },
-    save () {
+    actionOk () {
       this.originalDate = this.value
       if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
     }
@@ -126,12 +129,15 @@ export default {
     const children = [this.genTitle()]
 
     if (!this.isSelected) {
-      children.push(this.genHeader())
-      children.push(this.genTable())
-      this.$scopedSlots.default && children.push(this.$scopedSlots.default({
-        save: this.save,
-        cancel: this.cancel
-      }))
+      const bodyChildren = []
+
+      bodyChildren.push(this.genHeader())
+      bodyChildren.push(this.genTable())
+      bodyChildren.push(this.genFooter(this.$scopedSlots.default))
+
+      children.push(h('div', {
+        'class': 'date-picker__body'
+      }, bodyChildren))
     } else {
       children.push(this.genYears())
     }
@@ -139,7 +145,11 @@ export default {
     return h('v-card', {
       'class': {
         'date-picker': true,
-        'date-picker--dark': this.dark
+        'date-picker--dark': this.dark,
+        'date-picker--landscape': this.landscape
+      },
+      props: {
+        height: this.landscape ? '310px' : null
       }
     }, children)
   }
