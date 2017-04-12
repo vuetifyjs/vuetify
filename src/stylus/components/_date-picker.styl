@@ -3,8 +3,8 @@
   color: #fff
   display: flex
   flex-direction: column
-  min-width: 315px
-  max-width: 315px
+  min-width: $picker-width
+  max-width: $picker-width
   width: 100%
   
   &--dark
@@ -116,7 +116,7 @@
   justify-content: space-between
   flex-direction: column
   flex-wrap: wrap
-  min-height: 105px
+  min-height: $picker-title-min-height
   width: 100%
   
   &-year
@@ -176,7 +176,7 @@
 /** Transitions */
 .date-picker__table
   background: #fff
-  height: 310px
+  height: $picker-content-height
   position: relative
   overflow: hidden
   width: 100%

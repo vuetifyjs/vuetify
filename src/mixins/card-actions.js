@@ -1,5 +1,7 @@
 export default {
   methods: {
+    actionCancel () {},
+    actionOk () {},
     genFooter (slot) {
       if (slot) {
         return slot({

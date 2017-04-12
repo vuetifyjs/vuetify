@@ -149,7 +149,7 @@ export default {
         'date-picker--landscape': this.landscape
       },
       props: {
-        height: this.landscape ? '310px' : null
+        height: this.landscape ? '310px' : 'auto'
       }
     }, children)
   }

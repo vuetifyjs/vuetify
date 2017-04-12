@@ -1,0 +1,75 @@
+.time-picker
+  border-radius: $card-border-radius
+  color: #fff
+  display: flex
+  flex-direction: column
+  min-width: $picker-width
+  max-width: $picker-width
+  width: 100%
+  
+
+/** Title */
+.time-picker__title
+  background: $theme.primary
+  height: 100%
+  justify-content: space-between
+  flex-direction: column
+  flex-wrap: wrap
+  min-height: $picker-title-min-height
+  width: 100%
+  
+
+/** Body */
+.time-picker__body
+  color: #000
+  height: $picker-content-height
+  display: flex
+  align-items: center
+  justify-content: center
+  
+  span
+    align-items: center
+    border-radius: 100%
+    display: flex
+    font-size: 18px
+    justify-content: center
+    left: calc(50% - 18px)
+    height: 32px
+    position: absolute
+    text-align: center
+    top: calc(50% - 18px)
+    width: 32px
+    user-select: none
+    
+    &.active
+      background: $theme.primary
+      color: #fff
+      cursor: pointer
+    
+/** Clock */
+.time-picker__clock
+  height: 280px
+  width: 280px
+  border-radius: 100%
+  background: $grey.lighten-2
+  position: relative
+  
+  &-hand
+    height: 40%
+    width: 2px
+    background: $theme.primary
+    bottom: 50%
+    left: calc(50% - 2px)
+    transform-origin: center bottom
+    position: absolute
+  
+  &:after
+    content: ''
+    position: absolute
+    height: 8px
+    width: 8px
+    top: 50%
+    left: 50%
+    background: #2196f3
+    border-radius: 100%
+    transform: translate3d(calc(-50%, - 1px), -50%, 0)
