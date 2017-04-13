@@ -130,11 +130,15 @@ export default {
       return true
     },
     changeMinute (time) {
-      this.minute = time < 0 && this.minute === 1
-        ? '00'
-        : time > 0 && this.minute === 60
-        ? 1
-        : this.minute + time
+      const current = Number(this.minute)
+
+      const minute = time < 0 && current === 0
+        ? 59
+        : time > 0 && current === 59
+        ? 0
+        : current + time
+
+      this.minute = minute < 10 ? `0${minute}` : minute
 
       return true
     }
