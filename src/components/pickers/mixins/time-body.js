@@ -21,6 +21,16 @@ export default {
               mouseup: () => {
                 this.isDragging = false
                 this.selectingHour = false
+              },
+              wheel: (e) => {
+                e.preventDefault()
+                const next = e.wheelDelta > 0
+
+                if (this.selectingHour) {
+                  next && this.changeHour(1) || this.changeHour(-1)
+                } else {
+                  next && this.changeMinute(1) || this.changeMinute(-1)
+                }
               }
             },
             key: this.selectingHour ? 'hour' : 'minute',
@@ -109,6 +119,24 @@ export default {
         x: Math.round(Math.sin(i * degrees) * radius),
         y: Math.round(Math.cos(i * degrees) * radius)
       }
+    },
+    changeHour (time) {
+      this.hour = time < 0 && this.hour === 1
+        ? 12
+        : time > 0 && this.hour === 12
+        ? 1
+        : this.hour + time
+
+      return true
+    },
+    changeMinute (time) {
+      this.minute = time < 0 && this.minute === 1
+        ? '00'
+        : time > 0 && this.minute === 60
+        ? 1
+        : this.minute + time
+
+      return true
     }
   }
 }

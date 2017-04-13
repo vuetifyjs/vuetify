@@ -12,8 +12,8 @@ export default {
 
       return this.$createElement('div', {
         'class': 'date-picker__table',
-        domProps: {
-          onwheel: (e) => {
+        on: {
+          wheel: (e) => {
             e.preventDefault()
 
             let month = this.tableMonth
