@@ -1,10 +1,11 @@
-import { closestParentTag, addOnceEventListener } from '../../util/helpers'
+import { closestParentTag } from '../../util/helpers'
+import Expand from '../../mixins/expand-transition'
 import Toggleable from '../../mixins/toggleable'
 
 export default {
   name: 'list-group',
 
-  mixins: [Toggleable],
+  mixins: [Expand, Toggleable],
 
   data () {
     return {
@@ -76,18 +77,6 @@ export default {
     toggle (uid) {
       this.isActive = this._uid === uid
     },
-    enter (el, done) {
-      el.style.display = 'block'
-      this.height = 0
-
-      setTimeout(() => (this.height = el.scrollHeight), 50)
-
-      addOnceEventListener(el, 'transitionend', done)
-    },
-    leave (el, done) {
-      this.height = 0
-      addOnceEventListener(el, 'transitionend', done)
-    },
     matchRoute (to) {
       if (!this.group) return false
       return to.match(this.group) !== null
@@ -113,6 +102,7 @@ export default {
     const transition = h('transition', {
       on: {
         enter: this.enter,
+        afterEnter: this.afterEnter,
         leave: this.leave
       }
     }, [group])

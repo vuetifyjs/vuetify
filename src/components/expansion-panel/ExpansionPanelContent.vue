@@ -24,13 +24,13 @@
 </template>
 
 <script>
+  import Expand from '../../mixins/expand-transition'
   import Toggleable from '../../mixins/toggleable'
-  import { addOnceEventListener } from '../../util/helpers'
 
   export default {
     name: 'expansion-panel-content',
 
-    mixins: [Toggleable],
+    mixins: [Expand, Toggleable],
 
     data () {
       return {
@@ -62,34 +62,10 @@
     },
 
     methods: {
-      afterEnter (el) {
-        el.style.height = 'auto'
-      },
-
       closeConditional (e) {
         return this.$parent.$el.contains(e.target) && 
           !this.$parent.expand &&
           !this.$el.contains(e.target)
-      },
-
-      enter (el, done) {
-        el.style.height = null
-        el.style.display = 'block'
-        const height = `${el.clientHeight}px`
-        el.style.height = 0
-
-        setTimeout(() => {
-          el.style.height = height
-          addOnceEventListener(el, 'transitionend', done)
-        }, 50)
-      },
-
-      leave (el, done) {
-        el.style.height = `${el.clientHeight}px`
-        
-        setTimeout(() => el.style.height = 0, 0)
-
-        addOnceEventListener(el, 'transitionend', done)
       },
 
       toggle () {
