@@ -7,44 +7,117 @@
   max-width: $picker-width
   width: 100%
   
+  &--dark
+    .time-picker__body
+      background: $grey.darken-3
+      color: #fff
+
+      .btn
+        color: $theme.accent !important
+
+    .time-picker__title, .time-picker__clock
+      background: $grey.darken-2
+      
+    .time-picker__clock
+      &-hand, &:after
+        background: $theme.accent
+
+      span.active
+        color: #000
+        
+        &:before
+          background: $theme.accent
+
+    .time-picker__header
+      background: $grey.darken-3
+      color: #fff
+      
+      .btn
+        color: #fff
+          
+  &--landscape
+    flex-direction: row
+    min-width: 535px
+    max-width: 535px
+    overflow: hidden
+    
+    .time-picker__title
+      flex-direction: column
+      justify-content: center
+      min-width: 175px
+
+      div:first-child
+        text-align: right
+        width: 145px
+
+        span
+          height: 55px
+          font-size: 55px
+
+      div:last-child
+        margin: 16px 0 0
+        align-self: initial
+    
+    .time-picker__clock
+      height: 240px
+      width: 240px
+      top: calc(50% - 140px)
+      left: calc(50% - 120px)
+      
+      &-hand
+        height: 97px
+    
+    .time-picker__body
+      height: 310px
 
 /** Title */
 .time-picker__title
   background: $theme.primary
   height: 100%
-  justify-content: space-between
-  flex-direction: column
-  flex-wrap: wrap
+  justify-content: flex-end
   min-height: $picker-title-min-height
   width: 100%
   
+  div:first-child
+    white-space: nowrap
+
+    span
+      align-items: center
+      cursor: pointer
+      display: inline-flex
+      height: 70px
+      font-size: 70px
+      justify-content: center
+      opacity: .6
+      transition: .3s $transition.swing
+      
+      &.active
+        opacity: 1
+    
+  div:last-child
+    align-self: flex-end
+    display: flex
+    flex-direction: column
+    font-size: 16px
+    margin: 8px 0 6px 8px
+    
+    span
+      cursor: pointer
+      opacity: .6
+      transition: .3s $transition.swing
+      
+      &.active
+        opacity: 1
 
 /** Body */
 .time-picker__body
   color: #000
-  height: $picker-content-height
+  height: 362px
   display: flex
   align-items: center
   justify-content: center
-  
-  span
-    align-items: center
-    border-radius: 100%
-    display: flex
-    font-size: 18px
-    justify-content: center
-    left: calc(50% - 18px)
-    height: 32px
-    position: absolute
-    text-align: center
-    top: calc(50% - 18px)
-    width: 32px
-    user-select: none
-    
-    &.active
-      background: $theme.primary
-      color: #fff
-      cursor: pointer
+  position: relative
+  padding: 0
     
 /** Clock */
 .time-picker__clock
@@ -52,17 +125,21 @@
   width: 280px
   border-radius: 100%
   background: $grey.lighten-2
-  position: relative
+  position: absolute
+  user-select: none
+  top: 16px
+  left: 16px
+  transition: .5s $transition.swing
   
   &-hand
-    height: 40%
+    height: 113px
     width: 2px
     background: $theme.primary
     bottom: 50%
-    left: calc(50% - 2px)
+    left: calc(50% - 1px)
     transform-origin: center bottom
     position: absolute
-  
+
   &:after
     content: ''
     position: absolute
@@ -73,3 +150,60 @@
     background: #2196f3
     border-radius: 100%
     transform: translate3d(calc(-50%, - 1px), -50%, 0)
+    
+  > span
+    align-items: center
+    border-radius: 100%
+    cursor: pointer
+    display: flex
+    font-size: $time-picker-number-font-size
+    justify-content: center
+    left: 'calc(50% - %s)' % ($time-picker-number-font-size + $time-picker-number-margin)
+    height: $time-picker-number-font-size * 2
+    margin: $time-picker-number-margin
+    position: absolute
+    text-align: center
+    top: 'calc(50% - %s)' % ($time-picker-number-font-size + $time-picker-number-margin)
+    width: $time-picker-number-font-size * 2
+    user-select: none
+    
+    > span
+      z-index: 1
+      
+    &:before, &:after
+      content: ''
+      border-radius: 100%
+      position: absolute
+      top: 50%
+      left: 50%
+      height: 14px
+      width: 14px
+      transform: translate3d(-50%, -50%, 0)
+    
+    &:after, &:before
+      height: $time-picker-number-font-size * 2
+      width: $time-picker-number-font-size * 2
+    
+    &.active
+      color: #fff
+      cursor: pointer
+
+      &:before
+        background: $theme.primary
+        height: $time-picker-number-font-size * 2
+        width: $time-picker-number-font-size * 2
+        
+      &.empty
+        &:before
+          background: transparent
+          border: 2px solid rgba($theme.primary, .8)
+
+    &.empty
+
+      &:after, &:before
+        height: $time-picker-number-font-size
+        width: $time-picker-number-font-size
+        
+.time-picker .card__row--actions
+  border: none
+          
