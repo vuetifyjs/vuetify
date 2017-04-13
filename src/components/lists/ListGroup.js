@@ -72,7 +72,9 @@ export default {
 
   methods: {
     click () {
-      this.list.listClick(this._uid)
+      if (!this.$refs.item.querySelector('.list__tile--disabled')) {
+        this.list.listClick(this._uid)
+      }
     },
     toggle (uid) {
       this.isActive = this._uid === uid
@@ -96,7 +98,8 @@ export default {
 
     const item = h('div', {
       'class': this.classes,
-      on: { click: this.click }
+      on: { click: this.click },
+      ref: 'item'
     }, [this.$slots.item])
 
     const transition = h('transition', {
