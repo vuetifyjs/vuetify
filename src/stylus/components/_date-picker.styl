@@ -1,0 +1,233 @@
+.date-picker
+  border-radius: $card-border-radius
+  color: #fff
+  display: flex
+  flex-direction: column
+  min-width: $picker-width
+  max-width: $picker-width
+  width: 100%
+  
+  &--dark
+    .card__row--actions
+      background: $grey.darken-3
+      
+      .btn
+        color: $theme.accent !important
+
+    .date-picker__title
+      background: $grey.darken-2
+    
+    .date-picker__header, .date-picker__years
+      background: $grey.darken-3
+      color: #fff
+      
+      .btn
+        color: #fff
+        
+    .date-picker__table
+      background: $grey.darken-3
+      
+      table
+        th, td, .btn
+          color: #fff
+          
+        .btn.btn--floating
+          &:after
+            background: $theme.accent !important
+
+        .btn--floating.btn--current:not(.btn--active)
+          color: $theme.accent
+          
+  &--landscape
+    flex-direction: row
+    min-width: 535px
+    max-width: 535px
+    overflow: hidden
+    
+    .card__row--actions
+      margin-top: -4px
+    
+    .date-picker__title
+      justify-content: flex-start
+      max-width: 160px
+      
+      &-date
+        > div
+          width: 130px
+    
+    .date-picker__body, .date-picker__years
+      flex: 1
+
+    .date-picker__header
+      padding: 4px 16px
+    
+    .date-picker__table
+      height: 218px
+      
+      table
+        width: 100%
+        
+        .btn.btn--floating
+          height: 30px
+          width: 30px
+        
+        tr
+          height: auto
+        
+        thead
+          th
+            padding: 8px 0
+
+/** Body */
+.date-picker__body
+  display: flex
+  flex-wrap: wrap
+
+/** Years */
+.date-picker__years
+  background: #fff
+  color: #000
+  font-size: 18px
+  font-weight: 400
+  list-style-type: none
+  max-height: 408px
+  overflow: auto
+  text-align: center
+  
+  li
+    cursor: pointer
+    margin: 16px 0
+    transition: .3s $transition.swing
+    
+    &:hover
+      color: $theme.primary
+
+    &.active
+      color: $theme.primary
+      font-size: 24px
+      font-weight: 500
+      margin: 20px 0
+  
+
+/** Title */
+.date-picker__title
+  background: $theme.primary
+  height: 100%
+  justify-content: space-between
+  flex-direction: column
+  flex-wrap: wrap
+  min-height: $picker-title-min-height
+  width: 100%
+  
+  &-year
+    font-size: 14px
+    
+  &-date
+    font-size: 34px
+  
+  &-year, &-date
+    font-weight: 500
+    transition: .3s $transition.swing
+    width: 100%
+    
+    &:not(.active)
+      cursor: pointer
+      opacity: .6
+      
+    &:hover
+      opacity: 1
+    
+
+/** Header */
+.date-picker__header
+  background: #fff
+  color: #000
+  
+  &-selector
+    align-items: center
+    display: flex
+    justify-content: space-between
+    position: relative
+    
+    .btn
+      color: #000
+      margin: 0
+    
+    .icon
+      cursor: pointer
+      user-select: none
+      
+    &-date
+      flex: 1
+      text-align: center
+      position: relative
+      overflow: hidden
+      
+      strong
+        transition: .3s $transition.swing
+        display: block
+        width: 100%
+      
+
+/** Footer */
+.date-picker .card__row--actions
+  border: none
+
+/** Transitions */
+.date-picker__table
+  background: #fff
+  height: 310px
+  position: relative
+  overflow: hidden
+  width: 100%
+
+table
+  transition: .3s $transition.swing
+  top: 0
+
+  thead
+    th
+      padding: 16px 0
+
+  th
+    color: rgba(#000, .54)
+    font-weight: 600
+    font-size: 12px
+    
+  tr
+    height: 40px
+
+  th, td
+    text-align: center
+    width: 45px
+    
+  .btn
+    margin: 0
+    
+  .btn.btn--floating.btn--current:not(.btn--active)
+    color: rgba($theme.primary, .6)
+    
+  .btn.btn--floating
+    transition: none !important
+    height: 34px
+    width: 34px
+
+    &:after
+      background: $theme.primary !important
+      opacity: 0
+      transform: scale(0)
+      
+    &:not(.btn--active):hover
+      color: #fff
+
+      &:after
+        opacity: .6
+        transform: scale(1)
+
+  .btn.btn--floating.btn--active
+    color: #fff
+    
+    &:after
+      background: $theme.primary !important
+      opacity: 1
+      transform: none

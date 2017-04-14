@@ -159,13 +159,11 @@ export default {
       }
 
       if (this.multiple) {
+        const inputValue = this.inputValue.slice()
         const i = this.inputValue.findIndex(i => this.getValue(i) === this.getValue(item))
 
-        if (i !== -1) {
-          this.inputValue.splice(i, 1)
-        } else {
-          this.inputValue.push(item)
-        }
+        i !== -1 && inputValue.splice(i, 1) || inputValue.push(item)
+        this.inputValue = inputValue
       }
 
       if (this.autocomplete) {
