@@ -11,8 +11,6 @@ export default {
     return {
       isDragging: false,
       rotate: 0,
-      hour: 3,
-      minute: 30,
       period: 'am',
       selectingHour: true
     }
@@ -27,10 +25,63 @@ export default {
       validator (val) {
         return ['ampm', '24hr'].includes(val)
       }
-    }
+    },
+    value: String
   },
 
   computed: {
+    inputTime: {
+      get () {
+        if(!this.value) {
+          const date = new Date()
+          let hour = date.getHours()
+          hour = this.format === 'ampm' && hour > 12
+            ? hour - 12
+            : hour
+          const minute = date.getMinutes()
+
+          return `${hour}:${minute}${this.format === 'ampm' ? this.format : ''}`
+        }
+
+
+        return this.value
+      },
+      set (val) {
+        return this.$emit('input', val)
+      }
+    },
+    hour: {
+      get () {
+        const time = this.inputTime.replace(/(am|pm)/,  '').split(':')
+        const hour = parseInt(time[0])
+
+        if (this.format === 'ampm') {
+          return hour > 12 ? hour - 12 : hour
+        }
+
+        return hour
+      },
+      set (val) {
+        if (this.format === 'ampm') {
+          val = val > 12 ? val -  12 : val
+        }
+
+        this.inputTime = `${val}:${this.minute}${this.period}`
+      }
+    },
+    minute:{
+      get () {
+        const time = this.inputTime.replace(/(am|pm)/,  '').split(':')
+        const minute = parseInt(time[1])
+
+        return minute < 10 ? `0${minute}` : minute
+      },
+      set (val) {
+        val = val < 10 ? `0${val}` : val
+
+        this.inputTime = `${this.hour}:${val}${this.period}`
+      }
+    },
     hourHand () {
       return this.format === 'ampm'
         ? 360 / 12 * this.hour
@@ -46,12 +97,13 @@ export default {
     }
   },
 
+  watch: {
+    period (val) {
+      this.inputTime = `${this.hour}:${this.minute}${val}`
+    }
+  },
+
   render (h) {
-    const children = []
-
-    children.push(this.genTitle())
-    children.push(this.genBody())
-
     return h('v-card', {
       'class': {
         'time-picker': true,
@@ -62,6 +114,6 @@ export default {
       props: {
         height: this.landscape ? '310px' : 'auto'
       }
-    }, children)
+    }, [this.genTitle(), this.genBody()])
   }
 }
