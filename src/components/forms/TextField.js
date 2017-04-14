@@ -128,6 +128,9 @@ export default {
       this.validate()
       this.$nextTick(() => (this.focused = false))
     },
+    focus () {
+      this.focused = true
+    },
     genCounter () {
       return this.$createElement('div', {
         'class': {
@@ -155,7 +158,7 @@ export default {
         on: {
           blur: this.blur,
           input: this.onInput,
-          focus: () => (this.focused = true)
+          focus: this.focus
         },
         ref: 'input'
       }
