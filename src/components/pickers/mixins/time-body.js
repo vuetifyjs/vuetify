@@ -51,8 +51,14 @@ export default {
     genHours (hours) {
       const children = []
       const degrees = -(360 / hours * Math.PI / 180)
+      let start = 0
 
-      for (let i = 1; i <= hours; i++) {
+      if (this.format === 'ampm') {
+        hours++
+        start = 1
+      }
+
+      for (let i = start; i < hours; i++) {
         children.push(this.$createElement('span', {
           'class': {
             'active': i === this.hour
@@ -82,10 +88,7 @@ export default {
 
         if (num < 10) num = `0${num}`
         if (num === 60) num = '00'
-
-        if (i % 5 === 0) {
-          text = num
-        }
+        if (i % 5 === 0) text = num
 
         children.push(this.$createElement('span', {
           'class': {
@@ -99,33 +102,33 @@ export default {
               if (this.isDragging) this.minute = num
             }
           },
-          domProps: {
-            innerHTML: `<span>${text}</span>`
-          }
+          domProps: { innerHTML: `<span>${text}</span>` }
         }))
       }
 
       return children
     },
     genHandStyles (i, degrees) {
-      const { x, y } = this.getPosition(i, degrees, this.radius)
+      const { x, y } = this.getPosition(i, degrees)
 
-      return {
-        transform: `translate(${x}px, ${y}px)`
-      }
+      return { transform: `translate(${x}px, ${y}px)` }
     },
-    getPosition (i, degrees, radius) {
+    getPosition (i, degrees) {
       return {
-        x: Math.round(Math.sin(i * degrees) * radius),
-        y: Math.round(Math.cos(i * degrees) * radius)
+        x: Math.round(Math.sin(i * degrees) * this.radius),
+        y: Math.round(Math.cos(i * degrees) * this.radius)
       }
     },
     changeHour (time) {
-      this.hour = time < 0 && this.hour === 1
-        ? 12
-        : time > 0 && this.hour === 12
-        ? 1
-        : this.hour + time
+      if (this.format === 'ampm') {
+        this.hour = time < 0 && this.hour === 1
+          ? 12 : time > 0 && this.hour === 12
+          ? 1  : this.hour + time
+      } else {
+        this.hour = time < 0 && this.hour === 0
+          ? 23 : time > 0 && this.hour === 23
+          ? 0  : this.hour + time
+      }
 
       return true
     },
@@ -133,10 +136,8 @@ export default {
       const current = Number(this.minute)
 
       const minute = time < 0 && current === 0
-        ? 59
-        : time > 0 && current === 59
-        ? 0
-        : current + time
+        ? 59 : time > 0 && current === 59
+        ? 0  : current + time
 
       this.minute = minute < 10 ? `0${minute}` : minute
 
