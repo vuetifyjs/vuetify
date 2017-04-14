@@ -11,7 +11,6 @@ export default {
     return {
       desc: null,
       page: 1,
-      rowsPerPage: 5,
       sorting: null,
       all: false
     }
@@ -42,6 +41,10 @@ export default {
       type: String,
       default: 'No matching records found'
     },
+    rowsPerPage: {
+      type: [Number, String],
+      default: 5
+    },
     rowsPerPageItems: {
       type: Array,
       default () {
@@ -52,6 +55,10 @@ export default {
           { text: 'All', value: -1 }
         ]
       }
+    },
+    rowsPerPageText: {
+      type: String,
+      default: 'Rows per page:'
     },
     selectAll: Boolean,
     search: {
@@ -169,7 +176,7 @@ export default {
     return h('v-table-overflow', {}, [
       h('table', {
         'class': {
-          'datatable': true,
+          'datatable table': true,
           'datatable--select-all': this.selectAll
         }
       }, [

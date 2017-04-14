@@ -1,7 +1,8 @@
 const webpack = require('webpack')
 const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-var projectRoot = path.resolve(__dirname, '../')
+const projectRoot = path.resolve(__dirname, '../')
+const version = process.env.VERSION || require('../../package.json').version
 
 module.exports = {
   devtool: '#source-map',
@@ -53,6 +54,15 @@ module.exports = {
       minimize: true,
       progress: true,
       hide_modules: true
+    }),
+    new webpack.BannerPlugin({
+      banner: `/*!
+* Vuetify v${version}
+* Forged by John Leider
+* Released under the MIT License.
+*/   `,
+      raw: true,
+      entryOnly: true
     }),
     new ExtractTextPlugin('vuetify.min.css'),
     new webpack.DefinePlugin({

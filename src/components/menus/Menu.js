@@ -446,6 +446,7 @@ export default {
       directives: [{
         name: 'click-outside',
         value: e => {
+          if (!this.closeOnClick) return false
           const a = this.activator
           if (a && (a === e.target || a.contains(e.target))) return false
           return true
