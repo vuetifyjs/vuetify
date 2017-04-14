@@ -15,6 +15,7 @@ export default {
 
   props: {
     group: String,
+    lazy: Boolean,
     noAction: Boolean
   },
 
@@ -45,10 +46,13 @@ export default {
       }
     },
     '$route' (to) {
-      this.isActive = this.matchRoute(to.path)
+      const isActive = this.matchRoute(to.path)
 
-      if (this.group && this.isActive) {
-        this.list.listClick(this._uid, true)
+      if (this.group) {
+        if (isActive && this.isActive !== isActive) {
+          this.list.listClick(this._uid)
+        }
+        this.isActive = isActive
       }
     }
   },
@@ -99,7 +103,7 @@ export default {
         value: this.isActive
       }],
       ref: 'group'
-    }, this.booted ? this.$slots.default : [])
+    }, (this.lazy && this.booted) || !this.lazy ? this.$slots.default : [])
 
     const item = h('div', {
       'class': this.classes,

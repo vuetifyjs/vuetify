@@ -49,7 +49,7 @@ export default {
   },
 
   render (h) {
-    const transition = h('v-fade-transition', {}, [
+    const transition = h('v-fade-transition', [
       h('v-icon', {
         'class': {
           'icon--checkbox': this.icon === 'check_box'
@@ -67,6 +67,6 @@ export default {
       }]
     })
 
-    return this.genInputGroup(h, [transition, ripple])
+    return this.genInputGroup([transition, ripple])
   }
 }

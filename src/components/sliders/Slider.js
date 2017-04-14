@@ -127,14 +127,19 @@ export default {
     },
     onMouseDown (e) {
       this.isActive = true
-      this.app.addEventListener('touchmove', this.onMouseMove, false)
-      this.app.addEventListener('mousemove', this.onMouseMove, false)
-      addOnceEventListener(this.app, 'mouseup', this.onMouseUp)
+
+      if ('touches' in e) {
+        this.app.addEventListener('touchmove', this.onMouseMove, false)
+        addOnceEventListener(this.app, 'touchend', this.onMouseUp)
+      } else {
+        this.app.addEventListener('mousemove', this.onMouseMove, false)
+        addOnceEventListener(this.app, 'mouseup', this.onMouseUp)
+      }
     },
-    onMouseUp (e) {
+    onMouseUp () {
       this.isActive = false
-      this.app.removeEventListener('mousemove', this.onMouseMove, false)
       this.app.removeEventListener('touchmove', this.onMouseMove, false)
+      this.app.removeEventListener('mousemove', this.onMouseMove, false)
     },
     onMouseMove (e) {
       const { left: offsetLeft, width: trackWidth } = this.$refs.track.getBoundingClientRect()
@@ -207,7 +212,7 @@ export default {
 
     const slider = h('div', { 'class': 'slider' }, children)
 
-    return this.genInputGroup(h, [slider], {
+    return this.genInputGroup([slider], {
       attrs: {
         role: 'slider'
       },

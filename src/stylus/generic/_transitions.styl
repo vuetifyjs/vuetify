@@ -53,6 +53,9 @@
     transform: translate(100%, 0)  
 
 .scale-transition
+  &-leave-active
+    position: absolute
+
   &-enter, &-enter-active, &-leave, &-leave-to
     transition: $primary-transition
     
@@ -61,6 +64,9 @@
     transform: scale(0)
 
 .slide-y-transition
+  &-leave-active
+    position: absolute
+
   &-enter-active, &-leave, &-leave-to
     transition: $primary-transition
     
@@ -69,6 +75,9 @@
     transform: translateY(-15px)
 
 .slide-y-reverse-transition
+  &-leave-active
+    position: absolute
+
   &-enter-active, &-leave, &-leave-to
     transition: $primary-transition
     
@@ -77,6 +86,9 @@
     transform: translateY(15px)
 
 .slide-x-transition
+  &-leave-active
+    position: absolute
+
   &-enter-active, &-leave, &-leave-to
     transition: $primary-transition
     
@@ -85,6 +97,9 @@
     transform: translateX(-15px)
 
 .slide-x-reverse-transition
+  &-leave-active
+    position: absolute
+
   &-enter-active, &-leave, &-leave-to
     transition: $primary-transition
     
@@ -93,5 +108,11 @@
     transform: translateX(15px)
     
 .fade-transition
+  &-leave-active
+    position: absolute
+
+  &-enter-active, &-leave, &-leave-to
+    transition: $primary-transition
+
   &-enter, &-leave-to
     opacity: 0

@@ -13,7 +13,6 @@ export default {
     value () {
       this.isActive = this.value
     },
-
     isActive () {
       this.$emit('input', this.isActive)
     }

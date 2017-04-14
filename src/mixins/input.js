@@ -14,6 +14,7 @@ export default {
     dark: Boolean,
     disabled: Boolean,
     hint: String,
+    hideDetails: Boolean,
     persistentHint: Boolean,
     label: String,
     light: {
@@ -43,8 +44,8 @@ export default {
       return Object.assign({
         'input-group': true,
         'input-group--focused': this.focused,
+        'input-group--dirty': this.isDirty,
         'input-group--tab-focused': this.tabFocused,
-        'input-group--dirty': this.isDirty(),
         'input-group--disabled': this.disabled,
         'input-group--light': this.light && !this.dark,
         'input-group--dark': this.dark,
@@ -53,6 +54,9 @@ export default {
         'input-group--prepend-icon': this.prependIcon,
         'input-group--required': this.required
       }, this.classes)
+    },
+    isDirty () {
+      return this.inputValue
     },
     modifiers () {
       const modifiers = {
@@ -80,14 +84,11 @@ export default {
   },
 
   methods: {
+    genLabel () {
+      return this.$createElement('label', {}, this.label)
+    },
     toggle () {},
-    isDirty () {
-      return this.inputValue
-    },
-    genLabel (h) {
-      return h('label', {}, this.label)
-    },
-    genMessages (h) {
+    genMessages () {
       let messages = []
 
       if ((this.hint &&
@@ -96,12 +97,12 @@ export default {
             this.persistentHint) &&
           this.errors.length === 0
       ) {
-        messages = [this.genHint(h)]
+        messages = [this.genHint()]
       } else if (this.errors.length) {
-        messages = this.errors.map(i => this.genError(h, i))
+        messages = this.errors.map(i => this.genError(i))
       }
 
-      return h(
+      return this.$createElement(
         'transition-group',
         {
           'class': {
@@ -115,14 +116,14 @@ export default {
         messages
       )
     },
-    genHint (h) {
-      return h('div', {
+    genHint () {
+      return this.$createElement('div', {
         'class': 'input-group__hint',
         key: this.hint
       }, this.hint)
     },
-    genError (h, error) {
-      return h(
+    genError (error) {
+      return this.$createElement(
         'div',
         {
           'class': 'input-group__error',
@@ -131,26 +132,28 @@ export default {
         error
       )
     },
-    genIcon (h, type) {
-      const icon = this[`${type}IconAlt`] || this[`${type}Icon`]
-      const callback = this[`${type}IconCb`]
-      const callbackPrivate = this[`${type}IconCbPrivate`]
+    genIcon (type) {
+      const icon = this[`${type}Icon`]
+      const cb = this[`${type}IconCb`]
+      const hasCallback = typeof cb === 'function'
 
-      return h(
+      return this.$createElement(
         'v-icon',
         {
-          'class': 'input-group__' + type + '-icon',
+          'class': {
+            [`input-group__${type}-icon`]: true,
+            'input-group__icon-cb': hasCallback
+          },
           'nativeOn': {
             'click': e => {
-              if (typeof callbackPrivate === 'function') callbackPrivate(e)
-              if (typeof callback === 'function') callback(e)
+              hasCallback && cb(e)
             }
           }
         },
         icon
       )
     },
-    genInputGroup (h, input, data = {}) {
+    genInputGroup (input, data = {}) {
       const children = []
       const wrapperChildren = []
       const detailsChildren = []
@@ -173,38 +176,37 @@ export default {
       }, data)
 
       if (this.label) {
-        children.push(this.genLabel(h))
+        children.push(this.genLabel())
       }
 
       wrapperChildren.push(input)
 
       if (this.prependIcon) {
-        wrapperChildren.unshift(this.genIcon(h, 'prepend'))
+        wrapperChildren.unshift(this.genIcon('prepend'))
       }
 
       if (this.appendIcon) {
-        wrapperChildren.push(this.genIcon(h, 'append'))
+        wrapperChildren.push(this.genIcon('append'))
       }
 
       children.push(
-        h('div', {
+        this.$createElement('div', {
           'class': 'input-group__input'
         }, wrapperChildren)
       )
 
-      detailsChildren.push(this.genMessages(h))
+      if (!this.hideDetails) {
+        detailsChildren.push(this.genMessages())
+        this.counter && detailsChildren.push(this.genCounter())
 
-      if (this.counter) {
-        detailsChildren.push(this.genCounter(h))
+        children.push(
+          this.$createElement('div', {
+            'class': 'input-group__details'
+          }, detailsChildren)
+        )
       }
 
-      children.push(
-        h('div', {
-          'class': 'input-group__details'
-        }, detailsChildren)
-      )
-
-      return h('div', data, children)
+      return this.$createElement('div', data, children)
     },
     validate () {
       this.errors = []

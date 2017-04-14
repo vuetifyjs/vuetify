@@ -1,22 +1,15 @@
 const Divider = {
   functional: true,
 
-  render (createElement, { data }) {
-    const params = {
-      'class': 'divider'
-    }
+  render (h, { data, children }) {
+    data.staticClass = data.staticClass ? `divider ${data.staticClass}` : 'divider'
 
     if (data.attrs) {
-      if ('inset' in data.attrs) {
-        params.class += ' divider--inset'
-      }
-
-      if ('light' in data.attrs) {
-        params.class += ' divider--light'
-      }
+      if ('inset' in data.attrs) data.staticClass += ' divider--inset'
+      if ('light' in data.attrs) data.staticClass += ' divider--light'
     }
 
-    return createElement('hr', params)
+    return h('hr', data)
   }
 }
 

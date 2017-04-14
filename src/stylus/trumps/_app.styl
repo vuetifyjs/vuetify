@@ -1,6 +1,7 @@
 .with
   min-height: 100vh
   -webkit-backface-visibility: hidden
+  overflow-x: hidden
   
   &.top-fixed-toolbar
     padding-top: $toolbar-height
@@ -58,8 +59,9 @@
         
   &.sidebar-under-toolbar
     .sidebar
-      margin-top: $toolbar-height
-    
+      padding-top: $toolbar-height
+      z-index: 5
+
     &.left-fixed-sidebar,
     &.right-fixed-sidebar
       .toolbar

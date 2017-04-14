@@ -20,6 +20,7 @@ import Overlay from './overlay/index'
 import Pagination from './pagination/index'
 import Parallax from './parallax/index'
 import Progress from './progress/index'
+import Select from './selects/index'
 import Sidebar from './sidebar/index'
 import Slider from './sliders/index'
 import Subheader from './subheaders/index'
@@ -52,6 +53,7 @@ export default Object.assign({},
   Pagination,
   Parallax,
   Progress,
+  Select,
   Sidebar,
   Slider,
   Subheader,
