@@ -2,7 +2,7 @@ const webpack = require('webpack')
 const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const projectRoot = path.resolve(__dirname, '../')
-const version = process.env.VERSION || require('../../package.json').version
+const version = process.env.VERSION || require('../package.json').version
 
 module.exports = {
   devtool: '#source-map',
