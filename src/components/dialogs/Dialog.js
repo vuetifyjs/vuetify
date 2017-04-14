@@ -108,7 +108,11 @@ export default {
     }, [this.$slots.default])
 
     if (!this.removeTransition)
-      dialog = h(this.computedTransition, {}, [dialog])
+      dialog = h(this.computedTransition, {
+        props: {
+          origin: this.computedOrigin
+        }
+      }, [dialog])
 
     if (this.overlay)
       dialog = h('v-overlay', {
