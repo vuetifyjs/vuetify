@@ -11,7 +11,6 @@ export default {
     return {
       desc: null,
       page: 1,
-      rowsPerPage: 5,
       sorting: null,
       all: false
     }
@@ -34,6 +33,18 @@ export default {
     itemValue: {
       default: 'value'
     },
+    noDataText: {
+      type: String,
+      default: 'No data available in table'
+    },
+    noResultsText: {
+      type: String,
+      default: 'No matching records found'
+    },
+    rowsPerPage: {
+      type: [Number, String],
+      default: 5
+    },
     rowsPerPageItems: {
       type: Array,
       default () {
@@ -44,6 +55,10 @@ export default {
           { text: 'All', value: -1 }
         ]
       }
+    },
+    rowsPerPageText: {
+      type: String,
+      default: 'Rows per page:'
     },
     selectAll: Boolean,
     search: {
@@ -85,7 +100,7 @@ export default {
       return page === -1 ? this.value.length : this.page * page
     },
     filteredItems () {
-      let items = this.value
+      let items = this.value.slice()
       const hasSearch = typeof this.search !== 'undefined' && this.search !== null
 
       if (hasSearch) {
