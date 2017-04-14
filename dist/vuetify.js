@@ -4234,6 +4234,10 @@ var Overlay = {
     var wrapper = h('div', wrapperData, [this.$slots.default])
     var content = h('div', contentData, [wrapper])
 
+    if (this.isVertical) {
+      return content
+    }
+
     return h(this.computedTransition, {}, [content])
   }
 };
