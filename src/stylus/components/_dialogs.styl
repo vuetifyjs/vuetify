@@ -34,8 +34,8 @@
 
       .btn
         &:first-child      // TODO: full width 72dp
-          width: 24px !important
-          height: 24px !important
+          max-width: 24px
+          max-height: 24px
           margin: 0 32px 0 16px !important
         &:last-child
           margin 0 !important
@@ -43,8 +43,8 @@
           font-size 14px    // TODO: convert from 14sp
 
     .card
-      height 100% !important
-      width 100% !important
+      min-height 100%
+      min-width 100%
       margin 0 !important
       padding 0 !important
 
@@ -61,5 +61,6 @@
         padding: 0 16px
         display: flex
         flex-direction: row-reverse
+
         span
           display: table

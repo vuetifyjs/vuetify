@@ -37,14 +37,6 @@ export default {
       }
     },
 
-    computedOrigin () {
-      return this.origin
-    },
-
-    computedTransition () {
-      return this.transition
-    },
-
     overlayClasses () {
       return {
         'overlay--modal-bottom': false  // this.bottom
@@ -53,24 +45,21 @@ export default {
   },
 
   methods: {
-    wasClickInside (target) {
-      return this.$refs.dialog !== target && !this.$refs.dialog.contains(target)
-    },
-
     closeConditional (e) {
-      return this.persistent ? false : this.wasClickInside()
+      // close dialog if !persistent and clicked outside
+      return this.persistent ? false : this.$refs.dialog !== target && !this.$refs.dialog.contains(target)
     },
 
     resize () {
       if (!this.isActive) return
 
-      let actions = this.$children.filter(c => c.$options.propsData.actions )
+      let actions = this.$children.filter(c => c.$options.propsData.actions)
 
       // make sure we have the actions card row
       if (actions.length) {
         let btns = actions[0].$slots.default
 
-        let maxButtonWidth = (this.$slots.default[0].elm.offsetWidth - 8 - (8 * btns.length) ) / btns.length
+        let maxButtonWidth = (this.$refs.dialog.offsetWidth - 8 - (8 * btns.length)) / btns.length
         let shouldStack = false
 
         for (let i=btns.length; i--;) {
@@ -108,9 +97,9 @@ export default {
     }, [this.$slots.default])
 
     if (!this.removeTransition)
-      dialog = h(this.computedTransition, {
+      dialog = h(this.transition, {
         props: {
-          origin: this.computedOrigin
+          origin: this.origin
         }
       }, [dialog])
 
