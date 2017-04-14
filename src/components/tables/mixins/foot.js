@@ -22,7 +22,7 @@ export default {
       return this.$createElement('div', {
         'class': 'datatable__actions__select'
       }, [
-        'Rows per page:',
+        this.rowsPerPageText,
         this.$createElement('v-select', {
           props: {
             items: this.rowsPerPageItems,

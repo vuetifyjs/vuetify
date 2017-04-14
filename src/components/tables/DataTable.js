@@ -56,6 +56,10 @@ export default {
         ]
       }
     },
+    rowsPerPageText: {
+      type: String,
+      default: 'Rows per page:'
+    },
     selectAll: Boolean,
     search: {
       required: false
