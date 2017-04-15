@@ -14,7 +14,10 @@ export default {
   props: {
     persistent: Boolean,
     fullscreen: Boolean,
-    overlay: Boolean,
+    overlay: {
+      type: Boolean,
+      default: true
+    },
     removeTransition: Boolean,
     origin: {
       type: String,
@@ -36,18 +39,13 @@ export default {
         'dialog--stacked-actions': this.stackedActions && !this.fullscreen,
       }
     },
-
-    overlayClasses () {
-      return {
-        'overlay--modal-bottom': false  // this.bottom
-      }
-    }
   },
 
   methods: {
     closeConditional (e) {
+      console.log(e.target)
       // close dialog if !persistent and clicked outside
-      return this.persistent ? false : this.$refs.dialog !== target && !this.$refs.dialog.contains(target)
+      return this.persistent ? false : true
     },
 
     resize () {
@@ -105,7 +103,6 @@ export default {
 
     if (this.overlay)
       dialog = h('v-overlay', {
-        'class': this.overlayClasses,
         props: {
           value: this.isActive
         },
