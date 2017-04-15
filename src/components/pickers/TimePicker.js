@@ -30,9 +30,23 @@ export default {
   },
 
   computed: {
+    degrees () {
+      let divider = this.format === 'ampm' ? 12 : 24
+
+      if (!this.selectingHour) divider = 60
+
+      return 360 / divider * Math.PI / 180
+    },
+    degreesPerUnit () {
+      let divider = this.format === 'ampm' ? 12 : 24
+
+      if (!this.selectingHour) divider = 60
+
+      return 360 / divider
+    },
     inputTime: {
       get () {
-        if(!this.value) {
+        if (!this.value) {
           const date = new Date()
           let hour = date.getHours()
           hour = this.format === 'ampm' && hour > 12
@@ -43,7 +57,6 @@ export default {
           return `${hour}:${minute}${this.format === 'ampm' ? this.format : ''}`
         }
 
-
         return this.value
       },
       set (val) {
@@ -52,7 +65,7 @@ export default {
     },
     hour: {
       get () {
-        const time = this.inputTime.replace(/(am|pm)/,  '').split(':')
+        const time = this.inputTime.replace(/(am|pm)/, '').split(':')
         const hour = parseInt(time[0])
 
         if (this.format === 'ampm') {
@@ -63,15 +76,15 @@ export default {
       },
       set (val) {
         if (this.format === 'ampm') {
-          val = val > 12 ? val -  12 : val
+          val = val > 12 ? val - 12 : val
         }
 
         this.inputTime = `${val}:${this.minute}${this.period}`
       }
     },
-    minute:{
+    minute: {
       get () {
-        const time = this.inputTime.replace(/(am|pm)/,  '').split(':')
+        const time = this.inputTime.replace(/(am|pm)/, '').split(':')
         const minute = parseInt(time[1])
 
         return minute < 10 ? `0${minute}` : minute
@@ -93,7 +106,7 @@ export default {
     radius () {
       const size = this.landscape ? 240 : 280
 
-      return -(size / 2 * 0.86)
+      return size / 2
     }
   },
 

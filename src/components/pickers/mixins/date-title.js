@@ -1,10 +1,13 @@
 export default {
   methods: {
     genTitle () {
-      const date = `${this.dayName.substr(0, 3)}, ${this.monthName.substr(0, 3)} ${this.day}`
+      const date = `${this.dayName.substr(0, 3)},${this.landscape ? '<br>' : ''} ${this.monthName.substr(0, 3)} ${this.day}`
 
       const text = this.$createElement('v-slide-x-transition', [
-        this.$createElement('div', { key: date }, date)
+        this.$createElement('div', {
+          domProps: { innerHTML: date },
+          key: date
+        })
       ])
 
       return this.$createElement('v-card-title', {
