@@ -126,6 +126,7 @@ export default {
     onDragMove (e) {
       if (!this.isDragging) return
       const rect = this.$refs.clock.getBoundingClientRect()
+      const center = {x: rect.width/2, y: 0}
 
       const coords = {
         y: rect.top - e.pageY,
@@ -133,24 +134,13 @@ export default {
       }
 
       if (this.selectingHour) {
-        this.hour = Math.round(this.angle(coords) / this.degreesPerUnit)
+        this.hour = Math.round(this.angle(center, coords) / this.degreesPerUnit)
       } else {
-        this.minute = Math.round(this.angle(coords) / this.degreesPerUnit)
+        this.minute = Math.round(this.angle(center, coords) / this.degreesPerUnit)
       }
     },
-    angle (p1) {
-      const center = { x: 140, y: -140 }
-
-      var p0 = {
-        x: center.x,
-        y: center.y + Math.sqrt(
-          Math.abs(p1.x - center.x) *
-          Math.abs(p1.x - center.x) +
-          Math.abs(p1.y - center.y) *
-          Math.abs(p1.y - center.y)
-        )
-      }
-      return (2 * Math.atan2(p1.y - p0.y, p1.x - p0.x)) * -180 / Math.PI
+    angle (center, p1) {
+      return Math.abs((2 * Math.atan2(p1.y - center.y, p1.x - center.x)) * 180 / Math.PI)
     }
   }
 }
