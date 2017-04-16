@@ -75,7 +75,7 @@ export default {
       },
       set (val) {
         if (!this.is24hr) {
-          val = val > 12 ? val - 12 : val
+          val = val > 12 ? val - 12 : val < 1 ? 12 : val
         }
 
         this.inputTime = `${val}:${this.minute}${this.period}`
@@ -85,7 +85,7 @@ export default {
       get () {
         const minute = parseInt(this.timeArray[1])
 
-        return minute < 10 ? `0${minute}` : minute
+        return minute < 10 ? `0${minute}` : minute > 59 ? '00' : minute
       },
       set (val) {
         val = val < 10 ? `0${val}` : val

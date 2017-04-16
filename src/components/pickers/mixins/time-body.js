@@ -16,10 +16,13 @@ export default {
           this.$createElement('div', {
             'class': 'time-picker__clock',
             on: {
-              mousedown: () => (this.isDragging = true),
+              mousedown: this.onMouseDown,
               mouseup: this.onMouseUp,
               mousemove: this.onDragMove,
-              wheel: (e) => {
+              touchstart: this.onMouseDown,
+              touchstop: this.onMouseUp,
+              touchmove: this.onDragMove,
+              wheel: e => {
                 e.preventDefault()
 
                 const diff = e.wheelDelta > 0 ? 1 : -1
@@ -78,8 +81,9 @@ export default {
           'class': {
             'active': num.toString() === this.minute.toString()
           },
-          style: this.getTransform(i)
-        }, num))
+          style: this.getTransform(i),
+          domProps: { innerHTML: `<span>${num}</span>` }
+        }))
       }
 
       return children
@@ -119,18 +123,26 @@ export default {
 
       return true
     },
+    onMouseDown (e) {
+      e.preventDefault()
+
+      this.isDragging = true
+      this.onDragMove(e)
+    },
     onMouseUp () {
       this.isDragging = false
       // this.selectingHour = false
     },
     onDragMove (e) {
-      if (!this.isDragging) return
+      if (!this.isDragging && e.type !== 'click') return
+
       const rect = this.$refs.clock.getBoundingClientRect()
       const center = { x: rect.width / 2, y: 0 - rect.width / 2}
-
+      const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY
+      const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
       const coords = {
-        y: rect.top - e.clientY,
-        x: e.clientX - rect.left
+        y: rect.top - clientY,
+        x: clientX - rect.left
       }
 
       const selecting = this.selectingHour ? 'hour' : 'minute'
