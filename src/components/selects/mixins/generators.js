@@ -12,7 +12,7 @@ export default {
           value: this.menuActive,
           nudgeBottom: 2,
           nudgeTop: -16,
-          nudgeYAuto: 2,
+          nudgeYAuto: -20,
           nudgeXAuto: this.multiple ? -40 : -16,
           nudgeWidth: 25,
           maxHeight: this.maxHeight,
