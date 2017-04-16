@@ -1,11 +1,10 @@
 export default {
   methods: {
     genBody () {
-      const hours = this.format === 'ampm' ? 12 : 24
       const children = [this.genHand(this.selectingHour ? 'hour' : 'minute')]
 
       this.selectingHour &&
-        children.push(this.genHours(hours)) ||
+        children.push(this.genHours()) ||
         children.push(this.genMinutes())
 
       return this.$createElement('v-card-text', {
@@ -18,20 +17,15 @@ export default {
             'class': 'time-picker__clock',
             on: {
               mousedown: () => (this.isDragging = true),
-              mouseup: () => {
-                this.isDragging = false
-                this.selectingHour = false
-              },
+              mouseup: this.onMouseUp,
               mousemove: this.onDragMove,
               wheel: (e) => {
                 e.preventDefault()
-                const next = e.wheelDelta > 0
 
-                if (this.selectingHour) {
-                  next && this.changeHour(1) || this.changeHour(-1)
-                } else {
-                  next && this.changeMinute(1) || this.changeMinute(-1)
-                }
+                const diff = e.wheelDelta > 0 ? 1 : -1
+                const changing = this.selectingHour ? 'changeHour' : 'changeMinute'
+
+                this[changing](diff)
               }
             },
             key: this.selectingHour ? 'hour' : 'minute',
@@ -45,15 +39,16 @@ export default {
       return [this.$createElement('div', {
         'class': `time-picker__clock-hand ${type}`,
         style: {
-          transform: `rotate(${this[`${type}Hand`]}deg)`
+          transform: `rotate(${this.clockHand}deg)`
         }
       })]
     },
-    genHours (hours) {
+    genHours () {
+      let hours = this.is24hr ? 24 : 12
       const children = []
       let start = 0
 
-      if (this.format === 'ampm') {
+      if (hours === 12) {
         hours++
         start = 1
       }
@@ -63,8 +58,9 @@ export default {
           'class': {
             'active': i === this.hour
           },
-          style: this.getTransform(i)
-        }, i))
+          style: this.getTransform(i),
+          domProps: { innerHTML: `<span>${i}</span>` }
+        }))
       }
 
       return children
@@ -89,7 +85,7 @@ export default {
       return children
     },
     getTransform (i) {
-      const { x, y } = this.getPosition(i, this.degrees)
+      const { x, y } = this.getPosition(i)
 
       return { transform: `translate(${x}px, ${y}px)` }
     },
@@ -100,7 +96,7 @@ export default {
       }
     },
     changeHour (time) {
-      if (this.format === 'ampm') {
+      if (!this.is24hr) {
         this.hour = time < 0 && this.hour === 1
           ? 12 : time > 0 && this.hour === 12
           ? 1 : this.hour + time
@@ -123,21 +119,24 @@ export default {
 
       return true
     },
+    onMouseUp () {
+      this.isDragging = false
+      // this.selectingHour = false
+    },
     onDragMove (e) {
       if (!this.isDragging) return
       const rect = this.$refs.clock.getBoundingClientRect()
-      const center = {x: rect.width/2, y: 0}
+      const center = { x: rect.width / 2, y: 0 }
+      console.log(center)
 
       const coords = {
         y: rect.top - e.pageY,
         x: e.pageX - rect.left
       }
 
-      if (this.selectingHour) {
-        this.hour = Math.round(this.angle(center, coords) / this.degreesPerUnit)
-      } else {
-        this.minute = Math.round(this.angle(center, coords) / this.degreesPerUnit)
-      }
+      const selecting = this.selectingHour ? 'hour' : 'minute'
+
+      this[selecting] = Math.round(this.angle(center, coords) / this.degreesPerUnit)
     },
     angle (center, p1) {
       return Math.abs((2 * Math.atan2(p1.y - center.y, p1.x - center.x)) * 180 / Math.PI)

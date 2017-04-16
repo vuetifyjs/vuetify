@@ -12,7 +12,8 @@ export default {
       isDragging: false,
       rotate: 0,
       period: 'am',
-      selectingHour: true
+      selectingHour: true,
+      size: 0
     }
   },
 
@@ -30,52 +31,50 @@ export default {
   },
 
   computed: {
+    is24hr () {
+      return this.format !== 'ampm'
+    },
+    divider () {
+      if (!this.selectingHour) return 60
+      return this.is24hr ? 24 : 12
+    },
     degrees () {
-      let divider = this.format === 'ampm' ? 12 : 24
-
-      if (!this.selectingHour) divider = 60
-
-      return 360 / divider * Math.PI / 180
+      return this.degreesPerUnit * Math.PI / 180
     },
     degreesPerUnit () {
-      let divider = this.format === 'ampm' ? 12 : 24
-
-      if (!this.selectingHour) divider = 60
-
-      return 360 / divider
+      return 360 / this.divider
     },
     inputTime: {
       get () {
-        if (!this.value) {
-          const date = new Date()
-          let hour = date.getHours()
-          hour = this.format === 'ampm' && hour > 12
-            ? hour - 12
-            : hour
-          const minute = date.getMinutes()
+        if (this.value && !(this.value instanceof Date)) return this.value
+        let value = new Date()
 
-          return `${hour}:${minute}${this.format === 'ampm' ? this.format : ''}`
+        if (this.value instanceof Date) {
+          value = this.value
         }
 
-        return this.value
+        let hour = value.getHours()
+        const minute = value.getMinutes()
+
+        if (!this.is24hr) {
+          hour = hour > 12 ? hour - 12 : hour
+        }
+
+        return `${hour}:${minute}${!this.is24hr ? this.period : ''}`
       },
       set (val) {
         return this.$emit('input', val)
       }
     },
+    timeArray () {
+      return this.inputTime.replace(/(am|pm)/, '').split(':')
+    },
     hour: {
       get () {
-        const time = this.inputTime.replace(/(am|pm)/, '').split(':')
-        const hour = parseInt(time[0])
-
-        if (this.format === 'ampm') {
-          return hour > 12 ? hour - 12 : hour
-        }
-
-        return hour
+        return parseInt(this.timeArray[0])
       },
       set (val) {
-        if (this.format === 'ampm') {
+        if (!this.is24hr) {
           val = val > 12 ? val - 12 : val
         }
 
@@ -84,8 +83,7 @@ export default {
     },
     minute: {
       get () {
-        const time = this.inputTime.replace(/(am|pm)/, '').split(':')
-        const minute = parseInt(time[1])
+        const minute = parseInt(this.timeArray[1])
 
         return minute < 10 ? `0${minute}` : minute
       },
@@ -95,18 +93,20 @@ export default {
         this.inputTime = `${this.hour}:${val}${this.period}`
       }
     },
-    hourHand () {
-      return this.format === 'ampm'
-        ? 360 / 12 * this.hour
-        : 360 / 24 * this.hour
-    },
-    minuteHand () {
-      return 360 / 60 * this.minute
+    clockHand () {
+      if (this.selectingHour) return this.degreesPerUnit * this.hour
+      return this.degreesPerUnit * this.minute
     },
     radius () {
-      const size = this.landscape ? 240 : 280
-
-      return size / 2
+      return this.clockSize / 2
+    },
+    clockSize: {
+      get () {
+        return this.size
+      },
+      set (val) {
+        this.size = val
+      }
     }
   },
 
@@ -114,6 +114,10 @@ export default {
     period (val) {
       this.inputTime = `${this.hour}:${this.minute}${val}`
     }
+  },
+
+  mounted () {
+    this.size = this.$refs.clock.clientWidth
   },
 
   render (h) {
