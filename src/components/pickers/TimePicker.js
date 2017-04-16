@@ -76,6 +76,8 @@ export default {
       set (val) {
         if (!this.is24hr) {
           val = val > 12 ? val - 12 : val < 1 ? 12 : val
+        } else {
+          val = val > 23 ? 0 : val
         }
 
         this.inputTime = `${val}:${this.minute}${this.period}`

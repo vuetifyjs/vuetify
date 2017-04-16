@@ -27,7 +27,7 @@ export default {
     dateFormat: {
       type: Function,
       default: val => {
-        return new Date(val).toISOString().substring(0, 10)
+        return new Date(val).toLocaleDateString()
       }
     },
     days: {
@@ -62,7 +62,7 @@ export default {
       get () {
         if (!this.value) return new Date()
         if (this.value instanceof Date) return this.value
-        if (!isNaN(this.value) || this.value.indexOf(':') !== -1) return new Date(this.value)
+        if (!isNaN(this.value) && this.value.indexOf(':') !== -1) return new Date(this.value)
 
         return new Date(`${this.value} 12:00:00`)
       },
