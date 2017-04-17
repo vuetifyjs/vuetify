@@ -59,11 +59,13 @@
         
   &.sidebar-under-toolbar
     .sidebar
-      padding-top: $toolbar-height
       z-index: 5
 
     &.left-fixed-sidebar,
     &.right-fixed-sidebar
+      .sidebar
+        padding-top: $toolbar-height
+
       .toolbar
         padding-left: inherit
         
