@@ -110,6 +110,7 @@ export default {
       }
 
       items = items.sort((a, b) => {
+        this.sorting = !this.sorting ? this.headers.find(h => !('sortable' in h) || h.sortable).value : this.sorting
         const sortA = a[this.sorting]
         const sortB = b[this.sorting]
 
