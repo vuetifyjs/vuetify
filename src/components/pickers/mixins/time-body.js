@@ -18,7 +18,9 @@ export default {
             on: {
               mousedown: this.onMouseDown,
               mouseup: this.onMouseUp,
-              mouseleave: this.onMouseUp,
+              mouseleave: () => {
+                this.isDragging && this.onMouseUp()
+              },
               mousemove: this.onDragMove,
               touchstart: this.onMouseDown,
               touchstop: this.onMouseUp,

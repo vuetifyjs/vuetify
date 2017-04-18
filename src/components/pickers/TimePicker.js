@@ -13,8 +13,7 @@ export default {
       rotate: 0,
       originalTime: this.value,
       period: 'am',
-      selectingHour: true,
-      size: 0
+      selectingHour: true
     }
   },
 
@@ -111,6 +110,9 @@ export default {
       set (val) {
         this.size = val
       }
+    },
+    size () {
+      return this.landscape ? 240 : 260
     }
   },
 
@@ -121,13 +123,6 @@ export default {
     value (val) {
       if (!this.$scopedSlots.default && !this.actions) this.originalTime = val
     }
-  },
-
-  mounted () {
-    this.$vuetify.load(() => {
-      const size = this.$refs.clock.offsetWidth
-      this.size = size || 240
-    })
   },
 
   methods: {
