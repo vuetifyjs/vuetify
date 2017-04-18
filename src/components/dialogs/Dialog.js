@@ -1,9 +1,10 @@
 import Toggleable from '../../mixins/toggleable'
+import CardActions from '../../mixins/card-actions'
 
 export default {
   name: 'dialog',
 
-  mixins: [Toggleable],
+  mixins: [Toggleable, CardActions],
 
   data () {
     return {
@@ -12,6 +13,7 @@ export default {
   },
 
   props: {
+    actions: Boolean,
     persistent: Boolean,
     fullscreen: Boolean,
     overlay: {
@@ -85,6 +87,8 @@ export default {
   },
 
   render (h) {
+    let card = h('v-card', [this.$slots.default, this.genFooter(this.$scopedSlots.default)])
+
     let dialog =  h('div', {
       'class': this.classes,
       ref: 'dialog',
@@ -92,7 +96,7 @@ export default {
         { name: 'click-outside', value: this.closeConditional },
         { name: 'show', value: this.isActive }
       ],
-    }, [this.$slots.default])
+    }, [card])
 
     if (!this.removeTransition)
       dialog = h(this.transition, {
