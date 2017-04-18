@@ -177,7 +177,7 @@ export default {
     return h('v-table-overflow', {}, [
       h('table', {
         'class': {
-          'datatable': true,
+          'datatable table': true,
           'datatable--select-all': this.selectAll
         }
       }, [
