@@ -27,7 +27,7 @@ export default {
     dateFormat: {
       type: Function,
       default: val => {
-        return new Date(val).toLocaleDateString()
+        return new Date(val).toISOString().substr(0, 10)
       }
     },
     days: {
