@@ -142,6 +142,14 @@ export default {
   },
 
   render (h) {
+    let height = 'auto'
+
+    if (this.landscape) {
+      height = this.actions ? '310px' : '258px'
+    } else {
+      height = this.actions ? '487x' : '385px'
+    }
+
     return h('v-card', {
       'class': {
         'time-picker': true,
@@ -150,10 +158,7 @@ export default {
         'time-picker--hours': this.selectingHour
       },
       props: {
-        height: this.landscape && !this.actions
-          ? '258px'
-          : this.landscape && this.actions ? '310px'
-          : 'auto'
+        height: height
       }
     }, [this.genTitle(), this.genBody(), this.actions ? this.genActions() : null])
   }
