@@ -3,7 +3,12 @@ export default {
     genTitle () {
       const date = `${this.dayName.substr(0, 3)},${this.landscape ? '<br>' : ''} ${this.monthName.substr(0, 3)} ${this.day}`
 
-      const text = this.$createElement('v-slide-x-transition', [
+      const text = this.$createElement('transition', {
+        props: {
+          name: 'slide-x-transition',
+          mode: 'out-in'
+        }
+      }, [
         this.$createElement('div', {
           domProps: { innerHTML: date },
           key: date
