@@ -2,21 +2,22 @@
   z-index 1001
   transition: .3s ease-in-out
 
-  .card
-    elevation(24)
+  >
+    .card
+      elevation(24)
 
-    &__title
-      padding 24px 24px 0
+      & ^[2..-1]__title
+        padding 24px 24px 0
 
-    &__text
-      padding 20px 24px 24px
+      & ^[2..-1]__text
+        padding 20px 24px 24px
 
-    &__row--actions
-      border initial
-      padding: 8px 0
+      & ^[2..-1]__row--actions
+        border initial
+        padding: 8px 0
 
-      .btn
-        margin-right: 8px
+        .btn
+          margin-right: 8px
 
   &--fullscreen
     width 100%
