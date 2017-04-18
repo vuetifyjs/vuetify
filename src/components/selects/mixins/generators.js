@@ -11,7 +11,7 @@ export default {
           offsetY: this.autocomplete || this.offset,
           value: this.menuActive,
           nudgeBottom: 2,
-          nudgeTop: -16,
+          nudgeTop: -11,
           nudgeYAuto: 2,
           nudgeXAuto: this.multiple ? -40 : -16,
           nudgeWidth: 25,
