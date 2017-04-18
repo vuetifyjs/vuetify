@@ -150,7 +150,10 @@ export default {
         'time-picker--hours': this.selectingHour
       },
       props: {
-        height: this.landscape ? '310px' : 'auto'
+        height: this.landscape && !this.actions
+          ? '258px'
+          : this.landscape && this.actions ? '310px'
+          : 'auto'
       }
     }, [this.genTitle(), this.genBody(), this.actions ? this.genActions() : null])
   }
