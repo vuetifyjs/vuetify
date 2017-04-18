@@ -45,15 +45,12 @@ export default {
 
   methods: {
     closeConditional (e) {
-      console.log(e.target)
       // close dialog if !persistent and clicked outside
       return this.persistent ? false : true
     },
 
     resize () {
-      if (!this.isActive) return
-
-      let actions = this.$children.filter(c => c.$options.propsData.actions)
+      let actions = this.$children.filter(c => c.actions)
 
       // make sure we have the actions card row
       if (actions.length) {
@@ -63,10 +60,12 @@ export default {
         let shouldStack = false
 
         for (let i=btns.length; i--;) {
-          let span = btns[i].child._vnode.children[0].elm
-          if (span.scrollWidth > maxButtonWidth) {
-            shouldStack = true
-            break
+          if (btns[i].child._vnode.children.length) {
+            let span = btns[i].child._vnode.children[0].elm
+            if (span.scrollWidth > maxButtonWidth) {
+              shouldStack = true
+              break
+            }
           }
         }
 
