@@ -38,7 +38,7 @@ export default {
     offsetY: Boolean,
     disabled: Boolean,
     maxHeight: {
-      default: null
+      default: 'auto'
     },
     nudgeXAuto: {
       type: Number,
@@ -291,7 +291,6 @@ export default {
           selected: this.auto ? this.measure(c, '.list__tile--active', 'parent') : null
         }
 
-        this.offscreenFix()
         this.updateScroll()
       })
     },
@@ -308,17 +307,6 @@ export default {
       c.style.maxHeight = null  // <-- Todo: Investigate why this fixes rendering.
       c.style.maxHeight = isNaN(maxHeight) ? maxHeight : `${maxHeight}px`
       c.style.maxHeight = maxHeight === null && auto ? maxAuto : c.style.maxHeight
-    },
-
-    offscreenFix () {
-      const { $refs, screenDist, auto } = this
-      const { vert } = this.direction
-      const contentIsOverTheEdge = this.dimensions.content.height > screenDist[vert]
-
-      if (!auto && contentIsOverTheEdge) {
-        $refs.content.style.maxHeight = `${screenDist.vertMax}px`
-        this.dimensions.content.height = $refs.content.getBoundingClientRect().height
-      }
     },
 
     updateScroll () {
