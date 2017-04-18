@@ -3,8 +3,7 @@
   color: #fff
   display: flex
   flex-direction: column
-  max-width: $picker-width
-  width: 100%
+  width: $picker-width
   
   &--dark
     .time-picker__body
@@ -36,17 +35,22 @@
       
       .btn
         color: #fff
+    
+    .card__row--actions     
+      background: $grey.darken-3
           
   &--landscape
-    flex-direction: row
     min-width: 535px
     max-width: 535px
+    flex-wrap: wrap
     overflow: hidden
     
     .time-picker__title
       flex-direction: column
       justify-content: center
-      min-width: 175px
+      flex: 0 1 175px
+      min-height: 100%
+      width: auto
 
       div:first-child
         text-align: right
@@ -68,7 +72,12 @@
         height: 97px
     
     .time-picker__body
-      height: 310px
+      min-height: 260px
+      width: 360px
+      
+    .card__row--actions
+      border-radius: 0
+      width: auto
 
 /** Title */
 .time-picker__title
@@ -115,7 +124,7 @@
 /** Body */
 .time-picker__body
   color: #000
-  height: 362px
+  height: 280px
   display: flex
   align-items: center
   justify-content: center
@@ -130,7 +139,7 @@
   background: $grey.lighten-2
   position: absolute
   user-select: none
-  top: calc(50% - 24px)
+  top: 50%
   left: 50%
   transition: .5s $transition.swing
   transform: translate(-50%, -50%)

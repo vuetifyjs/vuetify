@@ -11,6 +11,7 @@ export default {
     return {
       isDragging: false,
       rotate: 0,
+      originalTime: this.value,
       period: 'am',
       selectingHour: true,
       size: 0
@@ -18,6 +19,7 @@ export default {
   },
 
   props: {
+    actions: Boolean,
     dark: Boolean,
     landscape: Boolean,
     format: {
@@ -90,7 +92,7 @@ export default {
         return minute < 10 ? `0${minute}` : minute > 59 ? '00' : minute
       },
       set (val) {
-        val = val < 10 ? `0${val}` : val
+        val = val < 10 ? `0${val}` : val > 59 ? 0 : val
 
         this.inputTime = `${this.hour}:${val}${this.period}`
       }
@@ -115,11 +117,28 @@ export default {
   watch: {
     period (val) {
       this.inputTime = `${this.hour}:${this.minute}${val}`
+    },
+    value (val) {
+      if (!this.$scopedSlots.default && !this.actions) this.originalTime = val
     }
   },
 
   mounted () {
-    this.size = this.$refs.clock.clientWidth
+    this.$vuetify.load(() => {
+      const size = this.$refs.clock.offsetWidth
+      this.size = size || 240
+    })
+  },
+
+  methods: {
+    actionCancel () {
+      this.inputTime = this.originalTime
+      if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
+    },
+    actionOk () {
+      this.originalTime = this.value
+      if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
+    }
   },
 
   render (h) {
@@ -133,6 +152,6 @@ export default {
       props: {
         height: this.landscape ? '310px' : 'auto'
       }
-    }, [this.genTitle(), this.genBody()])
+    }, [this.genTitle(), this.genBody(), this.actions ? this.genActions() : null])
   }
 }

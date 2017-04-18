@@ -34,8 +34,7 @@ export default {
             key: this.selectingHour ? 'hour' : 'minute',
             ref: 'clock'
           }, children)
-        ]),
-        this.genActions()
+        ])
       ])
     },
     genHand (type) {
@@ -131,13 +130,18 @@ export default {
     },
     onMouseUp () {
       this.isDragging = false
+
+      if (!this.selectingHour && !this.actions) {
+        this.actionOk()
+      }
+
       this.selectingHour = false
     },
     onDragMove (e) {
       if (!this.isDragging && e.type !== 'click') return
 
       const rect = this.$refs.clock.getBoundingClientRect()
-      const center = { x: rect.width / 2, y: 0 - rect.width / 2}
+      const center = { x: rect.width / 2, y: 0 - rect.width / 2 }
       const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY
       const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
       const coords = {
