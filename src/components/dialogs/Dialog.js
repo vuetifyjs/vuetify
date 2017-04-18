@@ -41,6 +41,11 @@ export default {
         'dialog--stacked-actions': this.stackedActions && !this.fullscreen,
       }
     },
+    computedTransition () {
+      return this.removeTransition
+        ? 'transition'
+        : this.transition
+    }
   },
 
   methods: {
@@ -86,31 +91,47 @@ export default {
   },
 
   render (h) {
-    let card = h('v-card', [this.$slots.default, this.genFooter(this.$scopedSlots.default)])
-
-    let dialog =  h('div', {
+    const children = []
+    const data = {
       'class': this.classes,
       ref: 'dialog',
       directives: [
         { name: 'click-outside', value: this.closeConditional },
         { name: 'show', value: this.isActive }
-      ],
-    }, [card])
+      ]
+    }
 
-    if (!this.removeTransition)
-      dialog = h(this.transition, {
-        props: {
-          origin: this.origin
+    const card = h('v-card', [
+      this.$slots.default,
+      this.genFooter(this.$scopedSlots.default)
+    ])
+
+    if (this.$slots.activator) {
+      children.push(h('div', {
+        'class': 'dialog__activator',
+        on: { 
+          click: e => {
+            e.stopPropagation()
+            this.isActive = !this.isActive
+          }
         }
-      }, [dialog])
+      }, [this.$slots.activator]))
+    }
 
-    if (this.overlay)
+    let dialog = h(this.computedTransition, {
+      props: { origin: this.origin }
+    }, [h('div', data, [card])])
+
+    if (this.overlay) {
       dialog = h('v-overlay', {
-        props: {
-          value: this.isActive
-        },
+        props: { value: this.isActive }
       }, [dialog])
+    }
 
-    return dialog
+    children.push(dialog)
+
+    return h('div', {
+      'class': 'dialog__container'
+    }, children)
   }
 }
