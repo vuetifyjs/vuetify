@@ -64,7 +64,7 @@ export default {
         if (this.value instanceof Date) return this.value
         if (!isNaN(this.value) && this.value.indexOf(':') !== -1) return new Date(this.value)
 
-        return new Date(`${this.value} 12:00:00`)
+        return new Date(`${this.value}T12:00:00`)
       },
       set (val) {
         this.$emit('input', val ? this.dateFormat(val) : this.originalDate)
