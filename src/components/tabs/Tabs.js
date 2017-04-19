@@ -1,6 +1,10 @@
 export default {
   name: 'tabs',
-
+  provide(){
+    return{
+      tabs:this
+    }
+  },
   data () {
     return {
       activators: [],
@@ -17,7 +21,6 @@ export default {
     scrollBars: Boolean,
     value: String
   },
-
   computed: {
     classes () {
       return {

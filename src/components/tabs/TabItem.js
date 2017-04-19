@@ -11,7 +11,7 @@ export default {
       defaultActiveClass: 'tab__item--active'
     }
   },
-
+  inject:['tabs'],
   props: {
     activeClass: {
       type: String,
@@ -20,10 +20,9 @@ export default {
   },
 
   computed: {
-    classes () {
       return {
         'tab__item': true,
-        'tab__item--active': this.isActive,
+        'tab__item--active': this.tabs.active==this.$el,
         'tab__item--disabled': this.disabled
       }
     }
