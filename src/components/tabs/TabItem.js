@@ -30,8 +30,11 @@ export default {
     },
 
     target () {
-      if (this.href) return this.href.replace('#', '')
-      if (this.to) return this.to.replace('#', '')
+      const to = this.to || this.href
+
+      if (to === Object(to)) return this._uid
+
+      return to.replace('#', '')
     },
 
     tabs () {
