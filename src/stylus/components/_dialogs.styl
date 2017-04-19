@@ -1,0 +1,69 @@
+.dialog
+  z-index 1001
+  transition: .3s ease-in-out
+  margin: 24px 40px
+
+  >
+    .card
+      elevation(24)
+
+      & ^[2..-1]__title
+        padding 24px 24px 0
+
+      & ^[2..-1]__text
+        padding 20px 24px 24px
+
+      & ^[2..-1]__row--actions
+        border initial
+        padding: 8px 0
+
+        .btn
+          margin-right: 8px
+
+  &--fullscreen
+    margin 0
+    width 100%
+    height 100%
+    position fixed
+    top: 0
+
+    .toolbar
+      height 56px           // TODO: height with two lines of text: 80dp
+      padding 0 !important
+
+      &__title
+        font-size 20px      // TODO: convert from 20sp
+        padding: 20px 0     // TODO: convert from 20dp
+
+      .btn
+        &:first-child      // TODO: full width 72dp
+          max-width: 24px
+          max-height: 24px
+          margin: 0 32px 0 16px !important
+        &:last-child
+          margin 0 !important
+          height 100%
+          font-size 14px    // TODO: convert from 14sp
+
+    .card
+      min-height 100%
+      min-width 100%
+      margin 0 !important
+      padding 0 !important
+
+  &--stacked-actions
+    .card__row--actions
+      flex-direction: column
+      margin: 0 !important
+      padding: 0 0 8px !important
+
+      > .btn
+        width: 100%
+        height: 48px
+        margin: 0 !important
+        padding: 0 16px !important
+        display: flex
+        flex-direction: row-reverse
+
+        span
+          display: table
