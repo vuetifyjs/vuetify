@@ -55,6 +55,8 @@ export default {
     },
 
     resize () {
+      if (!this.value) return
+
       let actions = this.$children.filter(c => c.actions)
 
       // make sure we have the actions card row
@@ -81,13 +83,14 @@ export default {
 
   mounted () {
     this.$vuetify.load(() => {
-      this.resize()
       window.addEventListener('resize', this.resize, false)
+      this.$refs.dialog.addEventListener('transitionend', this.resize, false)
     })
   },
 
   beforeDestroy () {
     window.removeEventListener('resize', this.resize, false)
+    this.$refs.dialog.removeEventListener('transitionend', this.resize, false)
   },
 
   render (h) {
@@ -109,7 +112,7 @@ export default {
     if (this.$slots.activator) {
       children.push(h('div', {
         'class': 'dialog__activator',
-        on: { 
+        on: {
           click: e => {
             e.stopPropagation()
             this.isActive = !this.isActive
