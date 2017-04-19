@@ -67,7 +67,8 @@ export default {
     filter: {
       type: Function,
       default: (val, search) => {
-        return ['undefined', 'boolean'].indexOf(typeof val) === -1 &&
+        return val !== null &&
+          ['undefined', 'boolean'].indexOf(typeof val) === -1 &&
           val.toString().toLowerCase().indexOf(search) !== -1
       }
     },
