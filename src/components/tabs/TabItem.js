@@ -20,6 +20,7 @@ export default {
   },
 
   computed: {
+    classes () {//console.log(this.$parent,this.$parent.$parent)
       return {
         'tab__item': true,
         'tab__item--active': this.tabs.active==this.$el,
@@ -29,7 +30,7 @@ export default {
   },
   render (h) {
     const { tag, data } = this.generateRouteLink()
-
-    return h('li', {}, [h(tag, data, [this.$slots.default])])
+    let vm=this;
+    return h('li', {on:{click(){vm.$parent.$emit('selected',vm.$el)}}}, [h(tag, data, [this.$slots.default])])
   }
 }

@@ -60,22 +60,13 @@ export default {
       this.resizeDebounce = setTimeout(() => {
         this.$refs.slider.$forceUpdate();
       }, 250)
-    },
-    tabClick(e){
-      e.preventDefault;
-      let el=e.target;
-      if(el==e.currentTarget)return;
-      while(!el.classList.contains('tab__item')){//This should be improved
-        el=el.parentNode;
-      }
-      this.active=el.parentNode;
     }
   },
 
   render (h) {
-    let tabsEls=[],tabsContent=[],tabsDefault=[],active=this.active;
+    let tabsEls=[],tabsContent=[],tabsDefault=[],vm=this,active=vm.active;
     //sort slots based on tag name
-    this.$slots.default.forEach(v=>{
+    vm.$slots.default.forEach(v=>{
       //Checks for empty text nodes
       if(v.tag==undefined&&v.text==undefined)return;
       //checks to see if it is normal html or non-empty text nodes
@@ -90,7 +81,7 @@ export default {
       else if(tag=='v-tab-content'){
         //only save tabs-content if id is equal to current active tab's href
         //need to look for a more elegant solution
-        if(this.active&&this.active.children[0].getAttribute('href').replace('#','')==v.componentOptions.propsData.id){
+        if(vm.active&&vm.active.children[0].getAttribute('href').replace('#','')==v.componentOptions.propsData.id){
           tabsContent.push(v)
         }
       }
@@ -99,9 +90,12 @@ export default {
 
     const tabs = h('v-tabs-tabs', {
       ref: 'activators',
-      nativeOn:{
-        click:this.tabClick
+      on:{
+        selected(e){
+          vm.active=e;
+        }
       }
+
     }, [
       h('v-tabs-slider',{
         ref:'slider',
@@ -115,7 +109,7 @@ export default {
     }, tabsContent)
 
     return h('div', {
-      'class': this.classes,
+      'class': vm.classes,
     }, [tabsDefault, tabs, items])
   }
 }
