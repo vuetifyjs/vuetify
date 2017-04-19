@@ -29,6 +29,12 @@ export default {
         'tabs--icons': this.icons,
         'tabs--scroll-bars': this.scrollBars
       }
+    },
+    id(){
+      if(this.active.nodeType){
+        return this.active.children[0].getAttribute('href').replace('#','')
+      }
+      return ''
     }
   },
   mounted () {
@@ -68,8 +74,7 @@ export default {
       }
       else if(tag=='v-tab-content'){
         //only save tabs-content if id is equal to current active tab's href
-        //need to look for a more elegant solution
-        if(vm.active&&vm.active.children[0].getAttribute('href').replace('#','')==v.componentOptions.propsData.id){
+        if(vm.id==v.componentOptions.propsData.id){
           tabsContent.push(v)
         }
       }
