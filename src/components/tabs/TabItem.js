@@ -30,7 +30,8 @@ export default {
     },
 
     target () {
-      return this.href.replace('#', '')
+      if (this.href) return this.href.replace('#', '')
+      if (this.to) return this.to.replace('#', '')
     },
 
     tabs () {
