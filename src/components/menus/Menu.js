@@ -384,8 +384,8 @@ export default {
         'class': { 'menu__content': true },
         on: {
           click: e => {
+            e.stopPropagation()
             if (this.closeOnContentClick) {
-              e.stopPropagation()
               this.isActive = false
             }
           }
