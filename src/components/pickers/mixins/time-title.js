@@ -12,13 +12,19 @@ export default {
       }, children)
     },
     genTime () {
+      let hour = this.hour
+
+      if (this.is24hr && hour < 10) {
+        hour = `0${hour}`
+      }
+
       return this.$createElement('div', [
         this.$createElement('span', {
           'class': { active: this.selectingHour },
           on: {
             click: () => (this.selectingHour = true)
           }
-        }, this.hour),
+        }, hour),
         this.$createElement('span', {
           'class': { active: !this.selectingHour },
           on: {

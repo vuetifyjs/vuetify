@@ -3,22 +3,20 @@
   color: #fff
   display: flex
   flex-direction: column
-  min-width: $picker-width
-  max-width: $picker-width
-  width: 100%
+  width: $picker-width
   
   &--dark
     .time-picker__body
       background: $grey.darken-3
       color: #fff
 
-      .btn
-        color: $theme.accent !important
-
     .time-picker__title, .time-picker__clock
       background: $grey.darken-2
       
     .time-picker__clock
+      &-hand:before
+        border-color: $theme.accent
+
       &-hand, &:after
         background: $theme.accent
 
@@ -28,27 +26,31 @@
         &:before
           background: $theme.accent
 
-        &.empty
-          &:before
-            border: 2px solid rgba($theme.accent, .8)
-
     .time-picker__header
       background: $grey.darken-3
       color: #fff
       
       .btn
         color: #fff
+    
+    .card__row--actions     
+      background: $grey.darken-3
+
+      .btn
+        color: $theme.accent !important
           
   &--landscape
-    flex-direction: row
     min-width: 535px
     max-width: 535px
+    flex-wrap: wrap
     overflow: hidden
     
     .time-picker__title
       flex-direction: column
       justify-content: center
-      min-width: 175px
+      flex: 0 1 175px
+      min-height: 100%
+      width: auto
 
       div:first-child
         text-align: right
@@ -65,19 +67,21 @@
     .time-picker__clock
       height: 240px
       width: 240px
-      top: calc(50% - 140px)
-      left: calc(50% - 120px)
       
       &-hand
         height: 97px
     
     .time-picker__body
-      height: 310px
+      height: 258px
+      width: 360px
+      
+    .card__row--actions
+      border-radius: 0
+      width: auto
 
 /** Title */
 .time-picker__title
   background: $theme.primary
-  height: 100%
   justify-content: flex-end
   min-height: $picker-title-min-height
   width: 100%
@@ -112,37 +116,54 @@
       
       &.active
         opacity: 1
+        
+  div:only-child
+    flex-direction: row
 
 /** Body */
 .time-picker__body
   color: #000
-  height: 362px
+  height: 280px
   display: flex
   align-items: center
   justify-content: center
+  overflow: hidden
   position: relative
   padding: 0
     
 /** Clock */
 .time-picker__clock
-  height: 280px
-  width: 280px
+  height: 260px
+  width: 260px
   border-radius: 100%
   background: $grey.lighten-2
   position: absolute
   user-select: none
-  top: 16px
-  left: 16px
+  top: 50%
+  left: 50%
   transition: .5s $transition.swing
+  transform: translate(-50%, -50%)
   
   &-hand
-    height: 113px
+    height: 42%
     width: 2px
     background: $theme.primary
     bottom: 50%
     left: calc(50% - 1px)
     transform-origin: center bottom
     position: absolute
+    
+    &:before
+      background: transparent
+      border: 2px solid $theme.primary
+      border-radius: 100%
+      width: 10px
+      height: 10px
+      content: ''
+      position: absolute
+      top: -3%
+      left: 50%
+      transform: translate3d(-50%, -50%, 0)
 
   &:after
     content: ''
@@ -158,16 +179,15 @@
   > span
     align-items: center
     border-radius: 100%
-    cursor: pointer
+    cursor: default
     display: flex
     font-size: $time-picker-number-font-size
     justify-content: center
-    left: 'calc(50% - %s)' % ($time-picker-number-font-size + $time-picker-number-margin)
+    left: 'calc(50% - %s)' % $time-picker-number-font-size
     height: $time-picker-number-font-size * 2
-    margin: $time-picker-number-margin
     position: absolute
     text-align: center
-    top: 'calc(50% - %s)' % ($time-picker-number-font-size + $time-picker-number-margin)
+    top: 'calc(50% - %s)' % $time-picker-number-font-size
     width: $time-picker-number-font-size * 2
     user-select: none
 
@@ -190,23 +210,12 @@
     
     &.active
       color: #fff
-      cursor: pointer
+      cursor: default
 
       &:before
         background: $theme.primary
         height: $time-picker-number-font-size * 2
         width: $time-picker-number-font-size * 2
         
-      &.empty
-        &:before
-          background: transparent
-          border: 2px solid rgba($theme.primary, .8)
-
-    &.empty
-      &:after, &:before
-        height: $time-picker-number-font-size
-        width: $time-picker-number-font-size
-        
 .time-picker .card__row--actions
   border: none
-          

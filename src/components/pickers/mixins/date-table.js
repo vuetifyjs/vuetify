@@ -68,7 +68,11 @@ export default {
             },
             on: {
               click: () => {
-                this.inputDate = `${this.tableYear}-${this.tableMonth + 1}-${i}`
+                const day = i < 10 ? `0${i}` : i
+                let tableMonth = this.tableMonth + 1
+                tableMonth = tableMonth < 10 ? `0${tableMonth}` : tableMonth
+
+                this.inputDate = `${this.tableYear}-${tableMonth}-${day}T12:00:00`
               }
             }
           })

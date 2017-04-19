@@ -83,7 +83,11 @@ export default {
     tabClick (target) {
       this.target = target
 
-      if (!this.$refs.content) return
+      if (!this.$refs.content.length) {
+        this.isActive = target
+        return
+      }
+
       this.$nextTick(() => {
         const nextIndex = this.$refs.content.$children.findIndex(i => i.id === this.target)
         this.reverse = nextIndex < this.isActive

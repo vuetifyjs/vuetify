@@ -11,7 +11,7 @@ export default {
 
   data () {
     return {
-      tableDate: new Date(this.value ? `${this.value} 12:00:00` : Date.now()),
+      tableDate: new Date(),
       originalDate: this.value,
       currentDay: null,
       currentMonth: null,
@@ -27,7 +27,7 @@ export default {
     dateFormat: {
       type: Function,
       default: val => {
-        return new Date(val).toISOString().substring(0, 10)
+        return new Date(val).toISOString().substr(0, 10)
       }
     },
     days: {
@@ -60,7 +60,11 @@ export default {
   computed: {
     inputDate: {
       get () {
-        return new Date(this.value ? `${this.value} 12:00:00` : Date.now())
+        if (!this.value) return new Date()
+        if (this.value instanceof Date) return this.value
+        if (!isNaN(this.value) && this.value.indexOf(':') !== -1) return new Date(this.value)
+
+        return new Date(`${this.value}T12:00:00`)
       },
       set (val) {
         this.$emit('input', val ? this.dateFormat(val) : this.originalDate)
@@ -119,10 +123,10 @@ export default {
   },
 
   mounted () {
-    const currentDate = new Date(Date.now())
-    this.currentDay = currentDate.getDate()
-    this.currentMonth = currentDate.getMonth()
-    this.currentYear = currentDate.getFullYear()
+    this.currentDay = this.tableDate.getDate()
+    this.currentMonth = this.tableDate.getMonth()
+    this.currentYear = this.tableDate.getFullYear()
+    this.tableDate = this.inputDate
   },
 
   render (h) {
