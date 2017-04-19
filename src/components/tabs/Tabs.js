@@ -7,7 +7,6 @@ export default {
   },
   data () {
     return {
-      activators: [],
       reverse: false,//This needs worked out
       resizeDebounce: {},
       active:''
@@ -33,8 +32,8 @@ export default {
     }
   },
   mounted () {
+    this.active=this.$children[0].$children[0].$el;
     this.$vuetify.load(() => {
-      this.init()
       window.addEventListener('resize', this.resize, false)
     })
   },
@@ -44,17 +43,6 @@ export default {
   },
 
   methods: {
-    init () {
-      //Should find a way to just get the first v-tab-item child
-      //This removes need for most of the $refs
-      this.activators = this.$refs.activators.$children.filter(i => i.$options._componentTag === 'v-tab-item')
-      setTimeout(() => {
-        //set active to starting postion either provided or first element
-          //!this.value may need to be reworked
-          //Also the above seems like it should be able to be simplified
-        this.active=this.value || this.activators[0].$el;
-      }, 200)
-    },
     resize () {
       clearTimeout(this.resizeDebounce)
       this.resizeDebounce = setTimeout(() => {
