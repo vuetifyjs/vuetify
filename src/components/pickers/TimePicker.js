@@ -11,12 +11,14 @@ export default {
     return {
       isDragging: false,
       rotate: 0,
+      originalTime: this.value,
       period: 'am',
       selectingHour: true
     }
   },
 
   props: {
+    actions: Boolean,
     dark: Boolean,
     landscape: Boolean,
     format: {
@@ -30,80 +32,119 @@ export default {
   },
 
   computed: {
+    is24hr () {
+      return this.format !== 'ampm'
+    },
+    divider () {
+      if (!this.selectingHour) return 60
+      return this.is24hr ? 24 : 12
+    },
+    degrees () {
+      return this.degreesPerUnit * Math.PI / 180
+    },
+    degreesPerUnit () {
+      return 360 / this.divider
+    },
     inputTime: {
       get () {
-        if(!this.value) {
-          const date = new Date()
-          let hour = date.getHours()
-          hour = this.format === 'ampm' && hour > 12
-            ? hour - 12
-            : hour
-          const minute = date.getMinutes()
+        if (this.value && !(this.value instanceof Date)) return this.value
+        let value = new Date()
 
-          return `${hour}:${minute}${this.format === 'ampm' ? this.format : ''}`
+        if (this.value instanceof Date) {
+          value = this.value
         }
 
+        let hour = value.getHours()
+        const minute = value.getMinutes()
 
-        return this.value
+        if (!this.is24hr) {
+          hour = hour > 12 ? hour - 12 : hour
+        }
+
+        return `${hour}:${minute}${!this.is24hr ? this.period : ''}`
       },
       set (val) {
         return this.$emit('input', val)
       }
     },
+    timeArray () {
+      return this.inputTime.replace(/(am|pm)/, '').split(':')
+    },
     hour: {
       get () {
-        const time = this.inputTime.replace(/(am|pm)/,  '').split(':')
-        const hour = parseInt(time[0])
-
-        if (this.format === 'ampm') {
-          return hour > 12 ? hour - 12 : hour
-        }
-
-        return hour
+        return parseInt(this.timeArray[0])
       },
       set (val) {
-        if (this.format === 'ampm') {
-          val = val > 12 ? val -  12 : val
+        if (!this.is24hr) {
+          val = val > 12 ? val - 12 : val < 1 ? 12 : val
+        } else {
+          val = val > 23 ? 0 : val
         }
 
         this.inputTime = `${val}:${this.minute}${this.period}`
       }
     },
-    minute:{
+    minute: {
       get () {
-        const time = this.inputTime.replace(/(am|pm)/,  '').split(':')
-        const minute = parseInt(time[1])
+        const minute = parseInt(this.timeArray[1])
 
-        return minute < 10 ? `0${minute}` : minute
+        return minute < 10 ? `0${minute}` : minute > 59 ? '00' : minute
       },
       set (val) {
-        val = val < 10 ? `0${val}` : val
+        val = val < 10 ? `0${val}` : val > 59 ? 0 : val
 
         this.inputTime = `${this.hour}:${val}${this.period}`
       }
     },
-    hourHand () {
-      return this.format === 'ampm'
-        ? 360 / 12 * this.hour
-        : 360 / 24 * this.hour
-    },
-    minuteHand () {
-      return 360 / 60 * this.minute
+    clockHand () {
+      if (this.selectingHour) return this.degreesPerUnit * this.hour
+      return this.degreesPerUnit * this.minute
     },
     radius () {
-      const size = this.landscape ? 240 : 280
-
-      return -(size / 2 * 0.86)
+      return this.clockSize / 2
+    },
+    clockSize: {
+      get () {
+        return this.size
+      },
+      set (val) {
+        this.size = val
+      }
+    },
+    size () {
+      return this.landscape ? 240 : 260
     }
   },
 
   watch: {
     period (val) {
       this.inputTime = `${this.hour}:${this.minute}${val}`
+    },
+    value (val) {
+      if (!this.$scopedSlots.default && !this.actions) this.originalTime = val
+    }
+  },
+
+  methods: {
+    actionCancel () {
+      this.inputTime = this.originalTime
+      if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
+    },
+    actionOk () {
+      this.originalTime = this.value
+      if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
     }
   },
 
   render (h) {
+    let height = 'auto'
+
+    if (this.landscape) {
+      height = this.actions ? '310px' : '258px'
+    } else {
+      height = this.actions ? '487x' : '385px'
+    }
+
     return h('v-card', {
       'class': {
         'time-picker': true,
@@ -112,8 +153,8 @@ export default {
         'time-picker--hours': this.selectingHour
       },
       props: {
-        height: this.landscape ? '310px' : 'auto'
+        height: height
       }
-    }, [this.genTitle(), this.genBody()])
+    }, [this.genTitle(), this.genBody(), this.actions ? this.genActions() : null])
   }
 }

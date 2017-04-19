@@ -1,11 +1,10 @@
 export default {
   methods: {
     genBody () {
-      const hours = this.format === 'ampm' ? 12 : 24
       const children = [this.genHand(this.selectingHour ? 'hour' : 'minute')]
 
       this.selectingHour &&
-        children.push(this.genHours(hours)) ||
+        children.push(this.genHours()) ||
         children.push(this.genMinutes())
 
       return this.$createElement('v-card-text', {
@@ -17,43 +16,44 @@ export default {
           this.$createElement('div', {
             'class': 'time-picker__clock',
             on: {
-              mousedown: () => (this.isDragging = true),
-              mouseup: () => {
-                this.isDragging = false
-                this.selectingHour = false
+              mousedown: this.onMouseDown,
+              mouseup: this.onMouseUp,
+              mouseleave: () => {
+                this.isDragging && this.onMouseUp()
               },
-              wheel: (e) => {
+              mousemove: this.onDragMove,
+              touchstart: this.onMouseDown,
+              touchstop: this.onMouseUp,
+              touchmove: this.onDragMove,
+              wheel: e => {
                 e.preventDefault()
-                const next = e.wheelDelta > 0
 
-                if (this.selectingHour) {
-                  next && this.changeHour(1) || this.changeHour(-1)
-                } else {
-                  next && this.changeMinute(1) || this.changeMinute(-1)
-                }
+                const diff = e.wheelDelta > 0 ? 1 : -1
+                const changing = this.selectingHour ? 'changeHour' : 'changeMinute'
+
+                this[changing](diff)
               }
             },
             key: this.selectingHour ? 'hour' : 'minute',
             ref: 'clock'
           }, children)
-        ]),
-        this.genActions()
+        ])
       ])
     },
     genHand (type) {
       return [this.$createElement('div', {
         'class': `time-picker__clock-hand ${type}`,
         style: {
-          transform: `rotate(${this[`${type}Hand`]}deg)`
+          transform: `rotate(${this.clockHand}deg)`
         }
       })]
     },
-    genHours (hours) {
+    genHours () {
+      let hours = this.is24hr ? 24 : 12
       const children = []
-      const degrees = -(360 / hours * Math.PI / 180)
       let start = 0
 
-      if (this.format === 'ampm') {
+      if (hours === 12) {
         hours++
         start = 1
       }
@@ -63,16 +63,8 @@ export default {
           'class': {
             'active': i === this.hour
           },
-          style: this.genHandStyles(i, degrees),
-          on: {
-            mousedown: () => (this.hour = i),
-            mouseover: () => {
-              if (this.isDragging) this.hour = i
-            }
-          },
-          domProps: {
-            innerHTML: `<span>${i}</span>`
-          }
+          style: this.getTransform(i),
+          domProps: { innerHTML: `<span>${i}</span>` }
         }))
       }
 
@@ -80,54 +72,44 @@ export default {
     },
     genMinutes () {
       const children = []
-      const degrees = -(360 / 60 * Math.PI / 180)
 
-      for (let i = 1; i <= 60; i++) {
-        let text = ''
+      for (let i = 0; i < 60; i = i + 5) {
         let num = i
 
         if (num < 10) num = `0${num}`
         if (num === 60) num = '00'
-        if (i % 5 === 0) text = num
 
         children.push(this.$createElement('span', {
           'class': {
-            'active': num.toString() === this.minute.toString(),
-            'empty': !text
+            'active': num.toString() === this.minute.toString()
           },
-          style: this.genHandStyles(i, degrees),
-          on: {
-            mousedown: () => (this.minute = num),
-            mouseover: () => {
-              if (this.isDragging) this.minute = num
-            }
-          },
-          domProps: { innerHTML: `<span>${text}</span>` }
+          style: this.getTransform(i),
+          domProps: { innerHTML: `<span>${num}</span>` }
         }))
       }
 
       return children
     },
-    genHandStyles (i, degrees) {
-      const { x, y } = this.getPosition(i, degrees)
+    getTransform (i) {
+      const { x, y } = this.getPosition(i)
 
       return { transform: `translate(${x}px, ${y}px)` }
     },
-    getPosition (i, degrees) {
+    getPosition (i) {
       return {
-        x: Math.round(Math.sin(i * degrees) * this.radius),
-        y: Math.round(Math.cos(i * degrees) * this.radius)
+        x: Math.round(Math.sin(i * this.degrees) * this.radius * 0.86),
+        y: Math.round(-Math.cos(i * this.degrees) * this.radius * 0.86)
       }
     },
     changeHour (time) {
-      if (this.format === 'ampm') {
+      if (!this.is24hr) {
         this.hour = time < 0 && this.hour === 1
           ? 12 : time > 0 && this.hour === 12
-          ? 1  : this.hour + time
+          ? 1 : this.hour + time
       } else {
         this.hour = time < 0 && this.hour === 0
           ? 23 : time > 0 && this.hour === 23
-          ? 0  : this.hour + time
+          ? 0 : this.hour + time
       }
 
       return true
@@ -137,11 +119,50 @@ export default {
 
       const minute = time < 0 && current === 0
         ? 59 : time > 0 && current === 59
-        ? 0  : current + time
+        ? 0 : current + time
 
       this.minute = minute < 10 ? `0${minute}` : minute
 
       return true
+    },
+    onMouseDown (e) {
+      e.preventDefault()
+
+      this.isDragging = true
+      this.onDragMove(e)
+    },
+    onMouseUp () {
+      this.isDragging = false
+
+      if (!this.selectingHour && !this.actions) {
+        this.actionOk()
+      }
+
+      this.selectingHour = false
+    },
+    onDragMove (e) {
+      if (!this.isDragging && e.type !== 'click') return
+
+      const rect = this.$refs.clock.getBoundingClientRect()
+      const center = { x: rect.width / 2, y: 0 - rect.width / 2 }
+      const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY
+      const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
+      const coords = {
+        y: rect.top - clientY,
+        x: clientX - rect.left
+      }
+
+      const selecting = this.selectingHour ? 'hour' : 'minute'
+      this[selecting] = Math.round(this.angle(center, coords) / this.degreesPerUnit)
+    },
+    angle (center, p1) {
+      var p0 = {
+        x: center.x,
+        y: center.y + Math.sqrt(
+          Math.abs(p1.x - center.x) * Math.abs(p1.x - center.x) +
+          Math.abs(p1.y - center.y) * Math.abs(p1.y - center.y))
+      }
+      return Math.abs((2 * Math.atan2(p1.y - p0.y, p1.x - p0.x)) * 180 / Math.PI);
     }
   }
 }

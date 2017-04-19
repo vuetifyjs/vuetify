@@ -38,7 +38,7 @@ export default {
     offsetY: Boolean,
     disabled: Boolean,
     maxHeight: {
-      default: null
+      default: 'auto'
     },
     nudgeXAuto: {
       type: Number,
@@ -266,10 +266,10 @@ export default {
         const { offset, screenOverflow: screen } = this
         const { horiz, vert } = this.direction
 
-        this.position.left = horiz === 'left' ? 'auto' : `${offset.horiz - screen.horiz}px`
-        this.position.top = vert === 'top' ? 'auto' : `${offset.vert - screen.vert}px`
-        this.position.right = horiz === 'right' ? 'auto' : `${-offset.horiz - screen.horiz}px`
-        this.position.bottom = vert === 'bottom' ? 'auto' : `${-offset.vert - screen.vert}px`
+        this.position.left = horiz === 'left' ? 'auto' : `${offset.horiz - screen.horiz + this.nudgeLeft}px`
+        this.position.top = vert === 'top' ? 'auto' : `${offset.vert - screen.vert + this.nudgeTop}px`
+        this.position.right = horiz === 'right' ? 'auto' : `${-offset.horiz - screen.horiz + this.nudgeRight}px`
+        this.position.bottom = vert === 'bottom' ? 'auto' : `${-offset.vert - screen.vert + this.nudgeBottom}px`
 
         const noMoreFlipping = this.flip() === false
 
@@ -291,7 +291,6 @@ export default {
           selected: this.auto ? this.measure(c, '.list__tile--active', 'parent') : null
         }
 
-        this.offscreenFix()
         this.updateScroll()
       })
     },
@@ -308,17 +307,6 @@ export default {
       c.style.maxHeight = null  // <-- Todo: Investigate why this fixes rendering.
       c.style.maxHeight = isNaN(maxHeight) ? maxHeight : `${maxHeight}px`
       c.style.maxHeight = maxHeight === null && auto ? maxAuto : c.style.maxHeight
-    },
-
-    offscreenFix () {
-      const { $refs, screenDist, auto } = this
-      const { vert } = this.direction
-      const contentIsOverTheEdge = this.dimensions.content.height > screenDist[vert]
-
-      if (!auto && contentIsOverTheEdge) {
-        $refs.content.style.maxHeight = `${screenDist.vertMax}px`
-        this.dimensions.content.height = $refs.content.getBoundingClientRect().height
-      }
     },
 
     updateScroll () {
