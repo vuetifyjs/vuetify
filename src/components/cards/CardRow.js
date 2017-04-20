@@ -47,7 +47,7 @@ export default {
       let maxButtonWidth = (this.$parent.$refs.dialog.offsetWidth - 8 - (8 * btns.length)) / btns.length
       let shouldStack = false
 
-      for (let i=btns.length; i--;) {
+      for (let i = btns.length; i--;) {
         if (btns[i].children.length) {
           let span = btns[i].children[0]
           if (span.scrollWidth > maxButtonWidth) {
@@ -71,20 +71,17 @@ export default {
   },
 
   beforeDestroy () {
-    if (this.actions) {
-      window.removeEventListener('resize', this.resize, false)
-      this.$refs.actions.removeEventListener('transitionend', this.resize, false)
-    }
+    window.removeEventListener('resize', this.resize, false)
+    this.$refs.actions.removeEventListener('transitionend', this.resize, false)
   },
 
   render (h) {
     let data = {
       'class': this.classes,
-      'style': this.styles
+      style: this.styles
     }
 
-    if (this.actions)
-      data.ref = 'actions'
+    if (this.actions) data.ref = 'actions'
 
     return h('div', data, this.$slots.default)
   },
