@@ -2,14 +2,14 @@ export default {
   methods: {
     genHeader () {
       return this.$createElement('v-card-text', {
-        'class': 'date-picker__header'
+        'class': 'picker--date__header'
       }, [
         this.genSelector()
       ])
     },
     genSelector () {
       return this.$createElement('div', {
-        'class': 'date-picker__header-selector'
+        'class': 'picker--date__header-selector'
       }, [
         this.$createElement('v-btn', {
           props: { icon: true },
@@ -23,7 +23,7 @@ export default {
           this.$createElement('v-icon', 'chevron_left')
         ]),
         this.$createElement('div', {
-          'class': 'date-picker__header-selector-date'
+          'class': 'picker--date__header-selector-date'
         }, [
           this.$createElement(this.computedTransition, [
             this.$createElement('strong', {

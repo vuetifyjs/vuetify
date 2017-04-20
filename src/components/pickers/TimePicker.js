@@ -1,11 +1,11 @@
+import Picker from '../../mixins/picker'
 import TimeTitle from './mixins/time-title'
 import TimeBody from './mixins/time-body'
-import CardActions from '../../mixins/card-actions'
 
 export default {
   name: 'time-picker',
 
-  mixins: [CardActions, TimeBody, TimeTitle],
+  mixins: [Picker, TimeBody, TimeTitle],
 
   data () {
     return {
@@ -18,17 +18,13 @@ export default {
   },
 
   props: {
-    actions: Boolean,
-    dark: Boolean,
-    landscape: Boolean,
     format: {
       type: String,
       default: 'ampm',
       validator (val) {
         return ['ampm', '24hr'].includes(val)
       }
-    },
-    value: String
+    }
   },
 
   computed: {
@@ -112,49 +108,50 @@ export default {
       }
     },
     size () {
-      return this.landscape ? 240 : 260
+      return this.landscape ? 240 : 280
     }
   },
 
   watch: {
     period (val) {
       this.inputTime = `${this.hour}:${this.minute}${val}`
-    },
-    value (val) {
-      if (!this.$scopedSlots.default && !this.actions) this.originalTime = val
     }
   },
 
   methods: {
-    actionCancel () {
+    save () {
       this.inputTime = this.originalTime
       if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
+      this.isSaving = true
     },
-    actionOk () {
+    cancel () {
       this.originalTime = this.value
       if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
     }
   },
 
-  render (h) {
-    let height = 'auto'
-
-    if (this.landscape) {
-      height = this.actions ? '310px' : '258px'
-    } else {
-      height = this.actions ? '487x' : '385px'
+  watch: {
+    value (val) {
+      if (this.isSaving) {
+        this.originalTime = this.inputTime
+        this.isSaving = false
+      }
     }
+  },
+
+  render (h) {
+    const children = [this.genBody()]
+
+    !this.noTitle && children.unshift(this.genTitle())
+    this.$scopedSlots.default && children.push(this.genSlot())
 
     return h('v-card', {
       'class': {
-        'time-picker': true,
-        'time-picker--dark': this.dark,
-        'time-picker--landscape': this.landscape,
-        'time-picker--hours': this.selectingHour
-      },
-      props: {
-        height: height
+        'picker picker--time': true,
+        'picker--landscape': this.landscape,
+        'picker--dark': this.dark,
+        'picker--time--hours': this.selectingHour
       }
-    }, [this.genTitle(), this.genBody(), this.actions ? this.genActions() : null])
+    }, children)
   }
 }

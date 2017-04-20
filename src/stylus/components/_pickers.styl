@@ -1,0 +1,37 @@
+.picker
+  border-radius: $card-border-radius
+  color: #fff
+  display: flex
+  flex-direction: column
+  width: 315px
+
+  &__title
+    background: $theme.primary
+    height: 105px
+    padding: 16px
+    
+  &__body
+    color: #000
+    height: 300px
+    overflow: hidden
+    position: relative
+  
+  &--dark
+    .picker__body
+      background: $grey.darken-3
+      
+    .picker__title
+      background: $grey.darken-2
+    
+
+
+  &--landscape
+    flex-direction: row
+    width: 500px
+    
+    .picker__title
+      height: 300px
+      width: 170px
+      
+    .picker__body
+      width: 330px

@@ -7,8 +7,8 @@ export default {
         children.push(this.genAMPM())
       }
 
-      return this.$createElement('v-card-title', {
-        'class': 'time-picker__title'
+      return this.$createElement('div', {
+        'class': 'picker__title'
       }, children)
     },
     genTime () {
@@ -18,7 +18,9 @@ export default {
         hour = `0${hour}`
       }
 
-      return this.$createElement('div', [
+      return this.$createElement('div', {
+        'class': 'picker--time__title'
+      }, [
         this.$createElement('span', {
           'class': { active: this.selectingHour },
           on: {

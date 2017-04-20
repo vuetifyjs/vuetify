@@ -2,12 +2,12 @@ import DateTitle from './mixins/date-title'
 import DateHeader from './mixins/date-header'
 import DateTable from './mixins/date-table'
 import DateYears from './mixins/date-years'
-import CardActions from '../../mixins/card-actions'
+import Picker from '../../mixins/picker'
 
 export default {
   name: 'date-picker',
 
-  mixins: [CardActions, DateTitle, DateHeader, DateTable, DateYears],
+  mixins: [DateTitle, DateHeader, DateTable, DateYears, Picker],
 
   data () {
     return {
@@ -22,8 +22,6 @@ export default {
   },
 
   props: {
-    actions: Boolean,
-    dark: Boolean,
     dateFormat: {
       type: Function,
       default: val => {
@@ -51,9 +49,6 @@ export default {
         'November',
         'December'
       ]
-    },
-    value: {
-      required: true
     }
   },
 
@@ -106,18 +101,24 @@ export default {
       this.isReversing = val < prev
     },
     value (val) {
+      if (!this.isSaving) return
       if (val) this.tableDate = this.inputDate
-      if (!this.$scopedSlots.default && !this.actions) this.originalDate = val
+
+      if (this.isSaving) {
+        this.originalDate = val
+        this.isSaving = false
+      }
     }
   },
 
   methods: {
-    actionCancel () {
-      this.inputDate = this.originalDate
+    save () {
+      this.originalDate = this.value
+      this.isSaving = true
       if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
     },
-    actionOk () {
-      this.originalDate = this.value
+    cancel () {
+      this.inputDate = this.originalDate
       if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
     }
   },
@@ -130,17 +131,18 @@ export default {
   },
 
   render (h) {
-    const children = [this.genTitle()]
+    const children = []
+
+    !this.noTitle && children.push(this.genTitle())
 
     if (!this.isSelected) {
       const bodyChildren = []
 
       bodyChildren.push(this.genHeader())
       bodyChildren.push(this.genTable())
-      bodyChildren.push(this.genFooter(this.$scopedSlots.default))
 
       children.push(h('div', {
-        'class': 'date-picker__body'
+        'class': 'picker__body'
       }, bodyChildren))
     } else {
       children.push(this.genYears())
@@ -148,12 +150,9 @@ export default {
 
     return h('v-card', {
       'class': {
-        'date-picker': true,
-        'date-picker--dark': this.dark,
-        'date-picker--landscape': this.landscape
-      },
-      props: {
-        height: this.landscape ? '310px' : 'auto'
+        'picker picker--date': true,
+        'picker--landscape': this.landscape,
+        'picker--dark': this.dark
       }
     }, children)
   }

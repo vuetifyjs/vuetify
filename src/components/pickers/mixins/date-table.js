@@ -11,7 +11,7 @@ export default {
       ]))
 
       return this.$createElement('div', {
-        'class': 'date-picker__table',
+        'class': 'picker--date__table',
         on: {
           wheel: (e) => {
             e.preventDefault()

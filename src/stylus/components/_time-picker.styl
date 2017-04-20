@@ -1,60 +1,32 @@
-.time-picker
-  border-radius: $card-border-radius
-  color: #fff
-  display: flex
-  flex-direction: column
-  width: $picker-width
-  
-  &--dark
-    .time-picker__body
-      background: $grey.darken-3
-      color: #fff
-
-    .time-picker__title, .time-picker__clock
+.picker--time  
+  &.picker--dark      
+    .picker--time__clock
       background: $grey.darken-2
-      
-    .time-picker__clock
+
       &-hand:before
         border-color: $theme.accent
 
       &-hand, &:after
         background: $theme.accent
 
-      span.active
-        color: #000
-        
-        &:before
-          background: $theme.accent
-
-    .time-picker__header
-      background: $grey.darken-3
-      color: #fff
-      
-      .btn
+      > span
         color: #fff
-    
-    .card__row--actions     
-      background: $grey.darken-3
 
-      .btn
-        color: $theme.accent !important
+        &.active
+          color: #000
           
-  &--landscape
-    min-width: 535px
-    max-width: 535px
+          &:before
+            background: $theme.accent
+
+  &.picker--landscape
     flex-wrap: wrap
-    overflow: hidden
     
-    .time-picker__title
+    .picker__title
       flex-direction: column
       justify-content: center
-      flex: 0 1 175px
-      min-height: 100%
-      width: auto
 
       div:first-child
         text-align: right
-        width: 145px
 
         span
           height: 55px
@@ -63,78 +35,59 @@
       div:last-child
         margin: 16px 0 0
         align-self: initial
+        text-align: center
     
-    .time-picker__clock
+    .picker--time__clock
       height: 240px
       width: 240px
       
       &-hand
         height: 97px
-    
-    .time-picker__body
-      height: 258px
-      width: 360px
-      
-    .card__row--actions
-      border-radius: 0
-      width: auto
 
 /** Title */
-.time-picker__title
-  background: $theme.primary
-  justify-content: flex-end
-  min-height: $picker-title-min-height
-  width: 100%
-  
-  div:first-child
-    white-space: nowrap
-
-    span
-      align-items: center
-      cursor: pointer
-      display: inline-flex
-      height: 70px
-      font-size: 70px
-      justify-content: center
-      opacity: .6
-      transition: .3s $transition.swing
-      
-      &.active
-        opacity: 1
-    
-  div:last-child
-    align-self: flex-end
+.picker--time 
+  .picker__title
     display: flex
-    flex-direction: column
-    font-size: 16px
-    margin: 8px 0 6px 8px
-    
-    span
-      cursor: pointer
-      opacity: .6
-      transition: .3s $transition.swing
-      
-      &.active
-        opacity: 1
-        
-  div:only-child
-    flex-direction: row
+    justify-content: flex-end
 
-/** Body */
-.time-picker__body
-  color: #000
-  height: 280px
-  display: flex
-  align-items: center
-  justify-content: center
-  overflow: hidden
-  position: relative
-  padding: 0
+    div:first-child
+      white-space: nowrap
+
+      span
+        align-items: center
+        cursor: pointer
+        display: inline-flex
+        height: 70px
+        font-size: 70px
+        justify-content: center
+        opacity: .6
+        transition: .3s $transition.swing
+        
+        &.active
+          opacity: 1
+      
+    div:last-child
+      align-self: flex-end
+      display: flex
+      flex-direction: column
+      font-size: 16px
+      margin: 8px 0 6px 8px
+      
+      span
+        cursor: pointer
+        opacity: .6
+        transition: .3s $transition.swing
+        
+        &.active
+          opacity: 1
+          
+    div:only-child
+      flex-direction: row
     
 /** Clock */
-.time-picker__clock
-  height: 260px
-  width: 260px
+.picker--time__clock
+  height: 280px
+  width: 280px
   border-radius: 100%
   background: $grey.lighten-2
   position: absolute
@@ -217,5 +170,5 @@
         height: $time-picker-number-font-size * 2
         width: $time-picker-number-font-size * 2
         
-.time-picker .card__row--actions
+.picker--time .card__row--actions
   border: none

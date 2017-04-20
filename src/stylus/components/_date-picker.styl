@@ -1,93 +1,15 @@
-.date-picker
-  border-radius: $card-border-radius
+.picker--date
   color: #fff
-  display: flex
-  flex-direction: column
-  max-width: $picker-width
   width: 100%
-  
-  &--dark
-    .card__row--actions
-      background: $grey.darken-3
-      
-      .btn
-        color: $theme.accent !important
-
-    .date-picker__title
-      background: $grey.darken-2
-    
-    .date-picker__header, .date-picker__years
-      background: $grey.darken-3
-      color: #fff
-      
-      .btn
-        color: #fff
-        
-    .date-picker__table
-      background: $grey.darken-3
-      
-      table
-        th, td, .btn
-          color: #fff
-          
-        .btn.btn--floating
-          &:after
-            background: $theme.accent !important
-
-        .btn--floating.btn--current:not(.btn--active)
-          color: $theme.accent
-          
-  &--landscape
-    flex-direction: row
-    min-width: 535px
-    max-width: 535px
-    overflow: hidden
-    
-    .card__row--actions
-      margin-top: -15px
-    
-    .date-picker__title
-      justify-content: flex-start
-      max-width: 160px
-      
-      &-date
-        > div
-          width: 130px
-    
-    .date-picker__body, .date-picker__years
-      flex: 1
-    
-    .date-picker__table
-      height: 228px
-      
-      table
-        width: 100%
-        
-        .btn.btn--floating
-          height: 30px
-          width: 30px
-        
-        tr
-          height: auto
-        
-        thead
-          th
-            padding: 8px 0
-
-/** Body */
-.date-picker__body
-  display: flex
-  flex-wrap: wrap
-  max-height: 351px
 
 /** Years */
-.date-picker__years
+.picker--date__years
   background: #fff
   color: #000
   font-size: 18px
   font-weight: 400
   list-style-type: none
-  max-height: 350px
+  max-height: 300px
   overflow: auto
   padding: 0
   text-align: center
@@ -108,14 +30,10 @@
   
 
 /** Title */
-.date-picker__title
-  background: $theme.primary
-  height: 100%
+.picker--date__title
   justify-content: space-between
   flex-direction: column
   flex-wrap: wrap
-  min-height: $picker-title-min-height
-  width: 100%
   
   &-year
     font-size: 14px
@@ -140,8 +58,7 @@
     
 
 /** Header */
-.date-picker__header
-  background: #fff
+.picker--date__header
   color: #000
   padding: 4px 16px
 
@@ -169,67 +86,83 @@
         transition: .3s $transition.swing
         display: block
         width: 100%
-      
 
-/** Footer */
-.date-picker .card__row--actions
-  border: none
 
-/** Transitions */
-.date-picker__table
-  background: #fff
-  height: 255px
-  position: relative
-  overflow: hidden
-  width: 100%
+.picker--date
+  &__table
+    position: relative
 
-table
-  transition: .3s $transition.swing
-  top: 0
+  table
+    transition: .3s $transition.swing
+    top: 0
 
-  thead
+    thead
+      th
+        padding: 8px 0
+
     th
-      padding: 8px 0
+      color: rgba(#000, .54)
+      font-weight: 600
+      font-size: 12px
 
-  th
-    color: rgba(#000, .54)
-    font-weight: 600
-    font-size: 12px
-
-  th, td
-    text-align: center
-    width: 45px
-    
-  .btn
-    margin: 0
-    
-    &__content
-      overflow: visible
-      transition: none
-    
-  .btn.btn--floating.btn--current:not(.btn--active)
-    color: rgba($theme.primary, .6)
-    
-  .btn.btn--floating
-    height: 34px
-    width: 34px
-
-    &:after
-      background: $theme.primary !important
-      opacity: 0
-      transform: scale(0)
+    th, td
+      text-align: center
+      width: 45px
       
-    &:not(.btn--active):hover
-      color: #fff
+    .btn
+      margin: 0
+      
+      &__content
+        overflow: visible
+        transition: none
+      
+    .btn.btn--floating.btn--current:not(.btn--active)
+      color: rgba($theme.primary, .6)
+      
+    .btn.btn--floating
+      height: 34px
+      width: 34px
 
       &:after
-        opacity: .6
-        transform: scale(1)
+        background: $theme.primary !important
+        opacity: 0
+        transform: scale(0)
+        
+      &:not(.btn--active):hover
+        color: #fff
 
-  .btn.btn--floating.btn--active
-    color: #fff
-    
-    &:after
-      background: $theme.primary !important
-      opacity: 1
-      transform: none
+        &:after
+          opacity: .6
+          transform: scale(1)
+
+    .btn.btn--floating.btn--active
+      color: #fff
+      
+      &:after
+        background: $theme.primary !important
+        opacity: 1
+        transform: none
+        
+.picker--date
+  &.picker--dark
+    .picker--date__header, .picker--date__years
+      background: $grey.darken-3
+      color: #fff
+      
+      .btn
+        color: #fff
+        
+    .picker--date__table
+      table
+        th, td, .btn
+          color: #fff
+          
+        .btn.btn--floating
+          &:after
+            background: $theme.accent !important
+
+        .btn--active
+          color: #000
+
+        .btn--floating.btn--current:not(.btn--active)
+          color: $theme.accent

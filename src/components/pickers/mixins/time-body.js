@@ -7,14 +7,14 @@ export default {
         children.push(this.genHours()) ||
         children.push(this.genMinutes())
 
-      return this.$createElement('v-card-text', {
-        'class': 'time-picker__body'
+      return this.$createElement('div', {
+        'class': 'picker__body'
       }, [
         this.$createElement('v-fade-transition', {
           props: { mode: 'out-in' }
         }, [
           this.$createElement('div', {
-            'class': 'time-picker__clock',
+            'class': 'picker--time__clock',
             on: {
               mousedown: this.onMouseDown,
               mouseup: this.onMouseUp,
@@ -42,7 +42,7 @@ export default {
     },
     genHand (type) {
       return [this.$createElement('div', {
-        'class': `time-picker__clock-hand ${type}`,
+        'class': `picker--time__clock-hand ${type}`,
         style: {
           transform: `rotate(${this.clockHand}deg)`
         }
@@ -133,11 +133,7 @@ export default {
     },
     onMouseUp () {
       this.isDragging = false
-
-      if (!this.selectingHour && !this.actions) {
-        this.actionOk()
-      }
-
+      !this.selectingHour && !this.actions && this.save()
       this.selectingHour = false
     },
     onDragMove (e) {

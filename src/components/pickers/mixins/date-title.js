@@ -16,12 +16,12 @@ export default {
         })
       ])
 
-      return this.$createElement('v-card-title', {
-        'class': 'date-picker__title'
+      return this.$createElement('div', {
+        'class': 'picker__title'
       }, [
         this.$createElement('div', {
           'class': {
-            'date-picker__title-year': true,
+            'picker--date__title-year': true,
             'active': this.isSelected
           },
           on: {
@@ -33,7 +33,7 @@ export default {
         }, this.year),
         this.$createElement('div', {
           'class': {
-            'date-picker__title-date': true,
+            'picker--date__title-date': true,
             'active': !this.isSelected
           },
           on: {

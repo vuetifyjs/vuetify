@@ -2,7 +2,7 @@ export default {
   methods: {
     genYears () {
       return this.$createElement('ul', {
-        'class': 'date-picker__years',
+        'class': 'picker--date__years',
         ref: 'years'
       }, this.genYearItems())
     },
