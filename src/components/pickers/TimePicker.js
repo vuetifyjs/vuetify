@@ -87,7 +87,7 @@ export default {
         return minute < 10 ? `0${minute}` : minute > 59 ? '00' : minute
       },
       set (val) {
-        val = val < 10 ? `0${val}` : val > 59 ? 0 : val
+        val = val < 10 ? `0${parseInt(val)}` : val > 59 ? '00' : val
 
         this.inputTime = `${this.hour}:${val}${this.period}`
       }
