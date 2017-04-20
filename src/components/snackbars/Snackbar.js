@@ -35,7 +35,7 @@ export default {
         'snack--left': this.left,
         'snack--right': this.right,
         'snack--top': this.top,
-        'snack--multi-line': this.multiLine,
+        'snack--multi-line': this.multiLine && !this.vertical,
         'snack--vertical': this.vertical
       }
     },
