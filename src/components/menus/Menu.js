@@ -271,8 +271,10 @@ export default {
         let right = horiz === 'right' ? 'auto' : -offset.horiz - screen.horiz + this.nudgeRight
         let bottom = vert === 'bottom' ? 'auto' : -offset.vert - screen.vert + this.nudgeBottom
 
-        if (left + this.dimensions.content.width > this.window.innerWidth) {
-          left = 16
+        const leftSpace = left + this.dimensions.content.width
+        if (leftSpace > this.window.innerWidth) {
+          const diff = leftSpace - this.window.innerWidth
+          left = left - diff - 16
         }
 
         this.position.left = `${left}px`
