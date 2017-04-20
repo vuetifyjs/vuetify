@@ -101,20 +101,13 @@ export default {
       this.isReversing = val < prev
     },
     value (val) {
-      if (!this.isSaving) return
       if (val) this.tableDate = this.inputDate
-
-      if (this.isSaving) {
-        this.originalDate = val
-        this.isSaving = false
-      }
     }
   },
 
   methods: {
     save () {
       this.originalDate = this.value
-      this.isSaving = true
       if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
     },
     cancel () {

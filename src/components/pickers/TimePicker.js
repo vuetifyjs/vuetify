@@ -120,12 +120,11 @@ export default {
 
   methods: {
     save () {
-      this.inputTime = this.originalTime
+      this.originalTime = this.value
       if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
-      this.isSaving = true
     },
     cancel () {
-      this.originalTime = this.value
+      this.inputTime = this.originalTime
       if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
     }
   },
