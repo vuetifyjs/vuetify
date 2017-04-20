@@ -148,6 +148,8 @@ export default {
       children.push(this.genYears())
     }
 
+    this.$scopedSlots.default && children.push(this.genSlot())
+
     return h('v-card', {
       'class': {
         'picker picker--date': true,

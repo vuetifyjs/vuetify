@@ -42,9 +42,10 @@ export default {
 
   methods: {
     resize () {
-      let btns = this.$refs.actions.children
+      if (this.$el.offsetWidth === 0) return
 
-      let maxButtonWidth = (this.$parent.$refs.dialog.offsetWidth - 8 - (8 * btns.length)) / btns.length
+      const btns = this.$refs.actions.children
+      const maxButtonWidth = (this.$el.offsetWidth - 8 - (8 * btns.length)) / btns.length
       let shouldStack = false
 
       for (let i = btns.length; i--;) {

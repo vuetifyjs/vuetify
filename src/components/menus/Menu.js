@@ -266,10 +266,19 @@ export default {
         const { offset, screenOverflow: screen } = this
         const { horiz, vert } = this.direction
 
-        this.position.left = horiz === 'left' ? 'auto' : `${offset.horiz - screen.horiz + this.nudgeLeft}px`
-        this.position.top = vert === 'top' ? 'auto' : `${offset.vert - screen.vert + this.nudgeTop}px`
-        this.position.right = horiz === 'right' ? 'auto' : `${-offset.horiz - screen.horiz + this.nudgeRight}px`
-        this.position.bottom = vert === 'bottom' ? 'auto' : `${-offset.vert - screen.vert + this.nudgeBottom}px`
+        let left = horiz === 'left' ? 'auto' : offset.horiz - screen.horiz + this.nudgeLeft
+        let top = vert === 'top' ? 'auto' : offset.vert - screen.vert + this.nudgeTop
+        let right = horiz === 'right' ? 'auto' : -offset.horiz - screen.horiz + this.nudgeRight
+        let bottom = vert === 'bottom' ? 'auto' : -offset.vert - screen.vert + this.nudgeBottom
+
+        if (left + this.dimensions.content.width > this.window.innerWidth) {
+          left = 16
+        }
+
+        this.position.left = `${left}px`
+        this.position.right = `${right}px`
+        this.position.top = `${top}px`
+        this.position.bottom = `${bottom}px`
 
         const noMoreFlipping = this.flip() === false
 
