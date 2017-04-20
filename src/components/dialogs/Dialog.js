@@ -1,19 +1,11 @@
 import Toggleable from '../../mixins/toggleable'
-import CardActions from '../../mixins/card-actions'
 
 export default {
   name: 'dialog',
 
-  mixins: [Toggleable, CardActions],
-
-  data () {
-    return {
-      stackedActions: false
-    }
-  },
+  mixins: [Toggleable],
 
   props: {
-    actions: Boolean,
     persistent: Boolean,
     fullscreen: Boolean,
     overlay: {
@@ -53,44 +45,6 @@ export default {
       // close dialog if !persistent and clicked outside
       return this.persistent ? false : true
     },
-
-    resize () {
-      if (!this.value) return
-
-      let actions = this.$children.filter(c => c.actions)
-
-      // make sure we have the actions card row
-      if (actions.length) {
-        let btns = actions[0].$slots.default
-
-        let maxButtonWidth = (this.$refs.dialog.offsetWidth - 8 - (8 * btns.length)) / btns.length
-        let shouldStack = false
-
-        for (let i=btns.length; i--;) {
-          if (btns[i].child._vnode.children.length) {
-            let span = btns[i].child._vnode.children[0].elm
-            if (span.scrollWidth > maxButtonWidth) {
-              shouldStack = true
-              break
-            }
-          }
-        }
-
-        this.stackedActions = shouldStack
-      }
-    }
-  },
-
-  mounted () {
-    this.$vuetify.load(() => {
-      window.addEventListener('resize', this.resize, false)
-      this.$refs.dialog.addEventListener('transitionend', this.resize, false)
-    })
-  },
-
-  beforeDestroy () {
-    window.removeEventListener('resize', this.resize, false)
-    this.$refs.dialog.removeEventListener('transitionend', this.resize, false)
   },
 
   render (h) {
@@ -106,7 +60,6 @@ export default {
 
     const card = h('v-card', [
       this.$slots.default,
-      this.genFooter(this.$scopedSlots.default)
     ])
 
     if (this.$slots.activator) {
