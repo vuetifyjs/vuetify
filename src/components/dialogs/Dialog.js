@@ -23,7 +23,7 @@ export default {
     },
     transition: {
       type: String,
-      default: 'v-modal-transition'
+      default: 'v-dialog-transition'
     }
   },
 
