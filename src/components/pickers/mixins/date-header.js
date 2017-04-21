@@ -1,7 +1,7 @@
 export default {
   methods: {
     genHeader () {
-      return this.$createElement('v-card-text', {
+      return this.$createElement('div', {
         'class': 'picker--date__header'
       }, [
         this.genSelector()

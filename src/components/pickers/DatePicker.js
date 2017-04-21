@@ -32,7 +32,6 @@ export default {
       type: Array,
       default: () => ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
     },
-    landscape: Boolean,
     months: {
       type: Array,
       default: () => [
@@ -49,8 +48,7 @@ export default {
         'November',
         'December'
       ]
-    },
-    scrollable: Boolean
+    }
   },
 
   computed: {

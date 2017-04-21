@@ -3,19 +3,12 @@ export default {
 
   props: {
     actions: Boolean,
-
     height: {
       type: String,
       default: 'auto'
     },
-
-    img: String
-  },
-
-  data () {
-    return {
-      stackedActions: false
-    }
+    img: String,
+    stackedActions: Boolean
   },
 
   computed: {
@@ -40,42 +33,6 @@ export default {
     }
   },
 
-  methods: {
-    resize () {
-      if (this.$el.offsetWidth === 0) return
-
-      const btns = this.$refs.actions.children
-      const maxButtonWidth = (this.$el.offsetWidth - 8 - (8 * btns.length)) / btns.length
-      let shouldStack = false
-
-      for (let i = btns.length; i--;) {
-        if (btns[i].children.length) {
-          let span = btns[i].children[0]
-          if (span.scrollWidth > maxButtonWidth) {
-            shouldStack = true
-            break
-          }
-        }
-      }
-
-      this.stackedActions = shouldStack
-    }
-  },
-
-  mounted () {
-    if (this.actions) {
-      this.$vuetify.load(() => {
-        window.addEventListener('resize', this.resize, false)
-        this.$refs.actions.addEventListener('transitionend', this.resize, false)
-      })
-    }
-  },
-
-  beforeDestroy () {
-    window.removeEventListener('resize', this.resize, false)
-    this.$refs.actions.removeEventListener('transitionend', this.resize, false)
-  },
-
   render (h) {
     let data = {
       'class': this.classes,
@@ -85,6 +42,5 @@ export default {
     if (this.actions) data.ref = 'actions'
 
     return h('div', data, this.$slots.default)
-  },
-
+  }
 }

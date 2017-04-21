@@ -24,8 +24,7 @@ export default {
       validator (val) {
         return ['ampm', '24hr'].includes(val)
       }
-    },
-    scrollable: Boolean
+    }
   },
 
   computed: {

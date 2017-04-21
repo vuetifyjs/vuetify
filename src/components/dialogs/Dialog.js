@@ -17,6 +17,10 @@ export default {
       type: String,
       default: 'center center'
     },
+    maxWidth: {
+      type: [String, Number],
+      default: 320
+    },
     transition: {
       type: String,
       default: 'v-modal-transition'
@@ -58,9 +62,11 @@ export default {
       ]
     }
 
-    const card = h('v-card', [
-      this.$slots.default,
-    ])
+    if (!this.fullscreen) {
+      data.style = {
+        maxWidth: isNaN(this.maxWidth) ? this.maxWidth : `${this.maxWidth}px`
+      }
+    }
 
     if (this.$slots.activator) {
       children.push(h('div', {
@@ -76,7 +82,7 @@ export default {
 
     let dialog = h(this.computedTransition, {
       props: { origin: this.origin }
-    }, [h('div', data, [card])])
+    }, [h('div', data, [h('v-card', [this.$slots.default])])])
 
     if (this.overlay) {
       dialog = h('v-overlay', {
