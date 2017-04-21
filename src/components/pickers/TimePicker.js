@@ -108,7 +108,7 @@ export default {
       }
     },
     size () {
-      return this.landscape ? 240 : 280
+      return this.landscape ? 250 : 280
     }
   },
 
