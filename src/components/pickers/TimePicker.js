@@ -127,7 +127,12 @@ export default {
 
   methods: {
     save () {
-      this.originalTime = this.value
+      if (!this.originalTime) {
+        this.$emit('input', this.inputTime)
+      } else {
+        this.originalTime = this.value
+      }
+
       if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
     },
     cancel () {

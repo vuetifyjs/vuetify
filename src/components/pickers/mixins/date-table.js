@@ -77,6 +77,7 @@ export default {
                 tableMonth = tableMonth < 10 ? `0${tableMonth}` : tableMonth
 
                 this.inputDate = `${this.tableYear}-${tableMonth}-${day}T12:00:00`
+                !this.actions && this.save()
               }
             }
           })

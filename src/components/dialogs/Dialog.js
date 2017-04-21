@@ -44,7 +44,7 @@ export default {
     closeConditional (e) {
       // close dialog if !persistent and clicked outside
       return this.persistent ? false : true
-    },
+    }
   },
 
   render (h) {

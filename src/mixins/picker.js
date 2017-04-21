@@ -6,6 +6,7 @@ export default {
   },
 
   props: {
+    actions: Boolean,
     dark: Boolean,
     landscape: Boolean,
     noTitle: Boolean,
