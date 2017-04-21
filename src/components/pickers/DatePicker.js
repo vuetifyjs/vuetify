@@ -108,9 +108,7 @@ export default {
 
   methods: {
     save () {
-      if (!this.originalDate) {
-        this.$emit('input', this.dateFormat(this.inputDate))
-      } else {
+      if (this.originalDate) {
         this.originalDate = this.value
       }
 
