@@ -49,7 +49,8 @@ export default {
         'November',
         'December'
       ]
-    }
+    },
+    scrollable: Boolean
   },
 
   computed: {

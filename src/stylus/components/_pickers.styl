@@ -32,11 +32,24 @@
 
   &--landscape
     flex-direction: row
+    flex-wrap: wrap
     width: 500px
     
     .picker__title
-      height: 300px
+      flex: 0 1 170px
       width: 170px
+      height: auto
+      position: absolute
+      top: 0
+      left: 0
+      height: 100%
+      z-index: 1
       
     .picker__body
+      flex: 1 0
+      width: 330px
+      margin-left: 170px
+
+    .card__row--actions
+      margin-left: 170px
       width: 330px

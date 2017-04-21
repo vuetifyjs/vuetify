@@ -2,10 +2,37 @@ export default {
   methods: {
     genBody () {
       const children = [this.genHand(this.selectingHour ? 'hour' : 'minute')]
+      const data = {
+        'class': 'picker--time__clock',
+        on: {
+          mousedown: this.onMouseDown,
+          mouseup: this.onMouseUp,
+          mouseleave: () => {
+            this.isDragging && this.onMouseUp()
+          },
+          mousemove: this.onDragMove,
+          touchstart: this.onMouseDown,
+          touchstop: this.onMouseUp,
+          touchmove: this.onDragMove
+        },
+        key: this.selectingHour ? 'hour' : 'minute',
+        ref: 'clock'
+      }
 
       this.selectingHour &&
         children.push(this.genHours()) ||
         children.push(this.genMinutes())
+
+      if (this.scrollable) {
+        data.on.wheel = e => {
+          e.preventDefault()
+
+          const diff = e.wheelDelta > 0 ? 1 : -1
+          const changing = this.selectingHour ? 'changeHour' : 'changeMinute'
+
+          this[changing](diff)
+        }
+      }
 
       return this.$createElement('div', {
         'class': 'picker__body'
@@ -13,30 +40,7 @@ export default {
         this.$createElement('v-fade-transition', {
           props: { mode: 'out-in' }
         }, [
-          this.$createElement('div', {
-            'class': 'picker--time__clock',
-            on: {
-              mousedown: this.onMouseDown,
-              mouseup: this.onMouseUp,
-              mouseleave: () => {
-                this.isDragging && this.onMouseUp()
-              },
-              mousemove: this.onDragMove,
-              touchstart: this.onMouseDown,
-              touchstop: this.onMouseUp,
-              touchmove: this.onDragMove,
-              wheel: e => {
-                e.preventDefault()
-
-                const diff = e.wheelDelta > 0 ? 1 : -1
-                const changing = this.selectingHour ? 'changeHour' : 'changeMinute'
-
-                this[changing](diff)
-              }
-            },
-            key: this.selectingHour ? 'hour' : 'minute',
-            ref: 'clock'
-          }, children)
+          this.$createElement('div', data, children)
         ])
       ])
     },
@@ -97,8 +101,8 @@ export default {
     },
     getPosition (i) {
       return {
-        x: Math.round(Math.sin(i * this.degrees) * this.radius * 0.86),
-        y: Math.round(-Math.cos(i * this.degrees) * this.radius * 0.86)
+        x: Math.round(Math.sin(i * this.degrees) * this.radius * 0.8),
+        y: Math.round(-Math.cos(i * this.degrees) * this.radius * 0.8)
       }
     },
     changeHour (time) {

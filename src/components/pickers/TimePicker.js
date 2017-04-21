@@ -24,7 +24,8 @@ export default {
       validator (val) {
         return ['ampm', '24hr'].includes(val)
       }
-    }
+    },
+    scrollable: Boolean
   },
 
   computed: {
@@ -115,6 +116,12 @@ export default {
   watch: {
     period (val) {
       this.inputTime = `${this.hour}:${this.minute}${val}`
+    },
+    value (val) {
+      if (this.isSaving) {
+        this.originalTime = this.inputTime
+        this.isSaving = false
+      }
     }
   },
 
@@ -126,15 +133,6 @@ export default {
     cancel () {
       this.inputTime = this.originalTime
       if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
-    }
-  },
-
-  watch: {
-    value (val) {
-      if (this.isSaving) {
-        this.originalTime = this.inputTime
-        this.isSaving = false
-      }
     }
   },
 

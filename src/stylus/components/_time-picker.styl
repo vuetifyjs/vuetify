@@ -86,8 +86,8 @@
     
 /** Clock */
 .picker--time__clock
-  height: 280px
-  width: 280px
+  height: 270px
+  width: 270px
   border-radius: 100%
   background: $grey.lighten-2
   position: absolute
@@ -98,7 +98,7 @@
   transform: translate(-50%, -50%)
   
   &-hand
-    height: 42%
+    height: 40%
     width: 2px
     background: $theme.primary
     bottom: 50%
@@ -158,8 +158,8 @@
       transform: translate3d(-50%, -50%, 0)
     
     &:after, &:before
-      height: $time-picker-number-font-size * 2
-      width: $time-picker-number-font-size * 2
+      height: $time-picker-number-font-size * 2.5
+      width: $time-picker-number-font-size * 2.5
     
     &.active
       color: #fff
@@ -167,8 +167,6 @@
 
       &:before
         background: $theme.primary
-        height: $time-picker-number-font-size * 2
-        width: $time-picker-number-font-size * 2
         
 .picker--time .card__row--actions
   border: none

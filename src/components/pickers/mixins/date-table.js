@@ -2,17 +2,12 @@ export default {
   methods: {
     genTable () {
       const children = []
-
-      children.push(this.$createElement('table', {
-        key: this.tableMonth
-      }, [
-        this.genTHead(),
-        this.genTBody()
-      ]))
-
-      return this.$createElement('div', {
+      const data = {
         'class': 'picker--date__table',
-        on: {
+      }
+
+      if (this.scrollable) {
+        data.on = {
           wheel: (e) => {
             e.preventDefault()
 
@@ -26,7 +21,16 @@ export default {
             this.tableDate = new Date(year, month)
           }
         }
+      }
+
+      children.push(this.$createElement('table', {
+        key: this.tableMonth
       }, [
+        this.genTHead(),
+        this.genTBody()
+      ]))
+
+      return this.$createElement('div', data, [
         this.$createElement(this.computedTransition, children)
       ])
     },
