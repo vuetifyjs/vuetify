@@ -95,7 +95,7 @@ export default {
   watch: {
     isSelected (val) {
       val && this.$nextTick(() => {
-        this.$refs.years.scrollTop = this.$refs.years.scrollHeight / 2 - 165
+        this.$refs.years.scrollTop = this.$refs.years.scrollHeight / 2 - 125
       })
     },
     tableDate (val, prev) {
@@ -108,7 +108,12 @@ export default {
 
   methods: {
     save () {
-      this.originalDate = this.value
+      if (!this.originalDate) {
+        this.$emit('input', this.inputDate)
+      } else {
+        this.originalDate = this.value
+      }
+
       if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
     },
     cancel () {
