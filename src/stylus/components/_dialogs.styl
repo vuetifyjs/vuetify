@@ -1,5 +1,6 @@
 .dialog
   margin: 24px 40px
+  max-width: 90%
   transition: .3s ease-in-out
   z-index 1001
   
@@ -12,17 +13,21 @@
       elevation(24)
 
       & ^[2..-1]__title
-        padding 24px 24px 0
+        padding 12px 24px
 
       & ^[2..-1]__text
         padding 20px 24px 24px
 
       & ^[2..-1]__row--actions
-        border initial
         padding: 8px 0
 
         .btn
           margin-right: 8px
+
+  &:not(.dialog--scrollable)
+    > .card
+      .card__row--actions
+        border initial
 
   &--fullscreen
     margin 0
@@ -56,3 +61,13 @@
       min-width 100%
       margin 0 !important
       padding 0 !important
+      
+  &--scrollable
+    .card__row:not(.card__row--actions)
+      overflow-y: auto
+      
+    .card__title
+      border-bottom: 1px solid $material-twelve-percent-dark
+    
+    .card__row--actions
+      border-top: 1px solid $material-twelve-percent-dark
