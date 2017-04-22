@@ -9,8 +9,8 @@
   "homepage": "http://vuetifyjs.com",
   "main": "dist/vuetify.js",
   "scripts": {
-    "dev": "TARGET=dev webpack --config build/config.js --progress --hide-modules",
-    "build": "rimraf dist && NODE_ENV=production node build/build.js --progress --hide-modules",
+    "dev": "cross-env TARGET=dev webpack --config build/config.js --progress --hide-modules",
+    "build": "cross-env rimraf dist && NODE_ENV=production node build/build.js --progress --hide-modules",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",

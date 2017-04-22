@@ -3,11 +3,10 @@
   text-align: left
   list-style-type: none
   padding: 0
-  overflow: hidden
   width: 100%
   elevation(2)
 
-  li
+  > li
     border: 1px solid #ddd
     &:not(:first-child)
       border-top: none
@@ -40,11 +39,10 @@
   &__body
     background-color: rgba(0, 0, 0, 0.03)
     transition: $primary-transition
-    overflow: hidden
-    position: relative
     
     .card
       border-radius: 0
+      elevation(0)
     
     &:last-child
       border-bottom: 1px solid #ddd

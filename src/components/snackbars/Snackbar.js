@@ -44,7 +44,7 @@ export default {
 
   watch: {
     isActive () {
-      clearTimeout(this.timeout)
+      clearTimeout(this.activeTimeout)
 
       if (this.isActive && this.timeout) {
         this.activeTimeout = setTimeout(() => (this.isActive = false), this.timeout)
