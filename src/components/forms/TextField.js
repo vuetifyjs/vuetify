@@ -84,6 +84,7 @@ export default {
       default: 'text'
     },
     name: String,
+    readonly: Boolean,
     rows: {
       default: 5
     }
@@ -153,7 +154,8 @@ export default {
           autofucus: this.autofocus
         },
         attrs: {
-          tabindex: this.tabindex
+          tabindex: this.tabindex,
+          readonly: this.readonly
         },
         on: {
           blur: this.blur,

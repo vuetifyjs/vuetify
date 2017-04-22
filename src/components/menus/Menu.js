@@ -38,7 +38,7 @@ export default {
     offsetY: Boolean,
     disabled: Boolean,
     maxHeight: {
-      default: null
+      default: 'auto'
     },
     nudgeXAuto: {
       type: Number,
@@ -266,10 +266,21 @@ export default {
         const { offset, screenOverflow: screen } = this
         const { horiz, vert } = this.direction
 
-        this.position.left = horiz === 'left' ? 'auto' : `${offset.horiz - screen.horiz}px`
-        this.position.top = vert === 'top' ? 'auto' : `${offset.vert - screen.vert}px`
-        this.position.right = horiz === 'right' ? 'auto' : `${-offset.horiz - screen.horiz}px`
-        this.position.bottom = vert === 'bottom' ? 'auto' : `${-offset.vert - screen.vert}px`
+        let left = horiz === 'left' ? 'auto' : offset.horiz - screen.horiz + this.nudgeLeft
+        let top = vert === 'top' ? 'auto' : offset.vert - screen.vert + this.nudgeTop
+        let right = horiz === 'right' ? 'auto' : -offset.horiz - screen.horiz + this.nudgeRight
+        let bottom = vert === 'bottom' ? 'auto' : -offset.vert - screen.vert + this.nudgeBottom
+
+        const leftSpace = left + this.dimensions.content.width
+        if (leftSpace > this.window.innerWidth) {
+          const diff = leftSpace - this.window.innerWidth
+          left = left - diff - 16
+        }
+
+        this.position.left = `${left}px`
+        this.position.right = `${right}px`
+        this.position.top = `${top}px`
+        this.position.bottom = `${bottom}px`
 
         const noMoreFlipping = this.flip() === false
 
@@ -291,7 +302,6 @@ export default {
           selected: this.auto ? this.measure(c, '.list__tile--active', 'parent') : null
         }
 
-        this.offscreenFix()
         this.updateScroll()
       })
     },
@@ -308,17 +318,6 @@ export default {
       c.style.maxHeight = null  // <-- Todo: Investigate why this fixes rendering.
       c.style.maxHeight = isNaN(maxHeight) ? maxHeight : `${maxHeight}px`
       c.style.maxHeight = maxHeight === null && auto ? maxAuto : c.style.maxHeight
-    },
-
-    offscreenFix () {
-      const { $refs, screenDist, auto } = this
-      const { vert } = this.direction
-      const contentIsOverTheEdge = this.dimensions.content.height > screenDist[vert]
-
-      if (!auto && contentIsOverTheEdge) {
-        $refs.content.style.maxHeight = `${screenDist.vertMax}px`
-        this.dimensions.content.height = $refs.content.getBoundingClientRect().height
-      }
     },
 
     updateScroll () {
@@ -396,8 +395,8 @@ export default {
         'class': { 'menu__content': true },
         on: {
           click: e => {
+            e.stopPropagation()
             if (this.closeOnContentClick) {
-              e.stopPropagation()
               this.isActive = false
             }
           }
@@ -446,6 +445,7 @@ export default {
       directives: [{
         name: 'click-outside',
         value: e => {
+          if (!this.closeOnClick) return false
           const a = this.activator
           if (a && (a === e.target || a.contains(e.target))) return false
           return true

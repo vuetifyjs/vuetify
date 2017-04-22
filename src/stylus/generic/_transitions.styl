@@ -1,7 +1,7 @@
 .carousel-transition
   &-enter
     transform: translate3d(100%, 0, 0)
-    
+
   &-leave, &-leave-to
     position: absolute
     top: 0
@@ -10,35 +10,35 @@
 .carousel-reverse-transition
   &-enter
     transform: translate3d(-100%, 0, 0)
-        
+
   &-leave, &-leave-to
     position: absolute
     top: 0
     transform: translate3d(100%, 0, 0)
-    
-.modal-transition
+
+.dialog-transition
   &-enter, &-leave-to
     transform: scale(0.5)
     opacity: 0
-    
+
   &-enter-to, &-leave
     opacity: 1
 
-.modal-bottom-transition 
+.dialog-bottom-transition
   &-enter, &-leave-to
     transform: translateY(100%)
-    
+
 .tab-transition
   &-enter
     transform: translate(100%, 0)
-    
+
   &-enter-to
     transform: translate(0, 0)
-      
+
   &-leave, &-leave-active
     position: absolute
     top: 0
-    
+
   &-leave-to
     position: absolute
     transform: translate(-100%, 0)
@@ -46,11 +46,11 @@
 .tab-reverse-transition
   &-enter
     transform: translate(-100%, 0)
-        
+
   &-leave, &-leave-to
     top: 0
     position: absolute
-    transform: translate(100%, 0)  
+    transform: translate(100%, 0)
 
 .scale-transition
   &-leave-active
@@ -58,7 +58,7 @@
 
   &-enter, &-enter-active, &-leave, &-leave-to
     transition: $primary-transition
-    
+
   &-enter, &-leave, &-leave-to
     opacity: 0
     transform: scale(0)
@@ -69,7 +69,7 @@
 
   &-enter-active, &-leave, &-leave-to
     transition: $primary-transition
-    
+
   &-enter, &-leave-to
     opacity: 0
     transform: translateY(-15px)
@@ -80,7 +80,7 @@
 
   &-enter-active, &-leave, &-leave-to
     transition: $primary-transition
-    
+
   &-enter, &-leave-to
     opacity: 0
     transform: translateY(15px)
@@ -91,7 +91,7 @@
 
   &-enter-active, &-leave, &-leave-to
     transition: $primary-transition
-    
+
   &-enter, &-leave-to
     opacity: 0
     transform: translateX(-15px)
@@ -102,11 +102,11 @@
 
   &-enter-active, &-leave, &-leave-to
     transition: $primary-transition
-    
+
   &-enter, &-leave-to
     opacity: 0
     transform: translateX(15px)
-    
+
 .fade-transition
   &-leave-active
     position: absolute

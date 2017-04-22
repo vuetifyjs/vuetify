@@ -1,5 +1,7 @@
-import DateTime from './DateTime'
+import DatePicker from './DatePicker'
+import TimePicker from './TimePicker'
 
 export default {
-  DateTime
+  DatePicker,
+  TimePicker
 }

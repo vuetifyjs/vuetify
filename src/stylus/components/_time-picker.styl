@@ -1,0 +1,175 @@
+.picker--time
+  .card__row--actions
+    margin-top: -10px
+
+  &.picker--dark      
+    .picker--time__clock
+      background: $grey.darken-2
+
+      &-hand:before
+        border-color: $theme.accent
+
+      &-hand, &:after
+        background: $theme.accent
+
+      > span
+        color: #fff
+
+        &.active
+          color: #000
+          
+          &:before
+            background: $theme.accent
+
+  &.picker--landscape
+    flex-wrap: wrap
+    
+    .picker__title
+      flex-direction: column
+      justify-content: center
+
+      div:first-child
+        text-align: right
+
+        span
+          height: 55px
+          font-size: 55px
+
+      div:last-child
+        margin: 16px 0 0
+        align-self: initial
+        text-align: center
+    
+    .picker--time__clock
+      height: 250px
+      width: 250px
+      
+      &-hand
+        height: 97px
+
+/** Title */
+.picker--time 
+  .picker__title
+    display: flex
+    justify-content: flex-end
+
+    div:first-child
+      white-space: nowrap
+
+      span
+        align-items: center
+        cursor: pointer
+        display: inline-flex
+        height: 70px
+        font-size: 70px
+        justify-content: center
+        opacity: .6
+        transition: .3s $transition.swing
+        
+        &.active
+          opacity: 1
+      
+    div:last-child
+      align-self: flex-end
+      display: flex
+      flex-direction: column
+      font-size: 16px
+      margin: 8px 0 6px 8px
+      
+      span
+        cursor: pointer
+        opacity: .6
+        transition: .3s $transition.swing
+        
+        &.active
+          opacity: 1
+          
+    div:only-child
+      flex-direction: row
+    
+/** Clock */
+.picker--time__clock
+  height: 270px
+  width: 270px
+  border-radius: 100%
+  background: $grey.lighten-2
+  position: absolute
+  user-select: none
+  top: 50%
+  left: 50%
+  transition: .5s $transition.swing
+  transform: translate(-50%, -50%)
+  
+  &-hand
+    height: 40%
+    width: 2px
+    background: $theme.primary
+    bottom: 50%
+    left: calc(50% - 1px)
+    transform-origin: center bottom
+    position: absolute
+    
+    &:before
+      background: transparent
+      border: 2px solid $theme.primary
+      border-radius: 100%
+      width: 10px
+      height: 10px
+      content: ''
+      position: absolute
+      top: -3%
+      left: 50%
+      transform: translate3d(-50%, -50%, 0)
+
+  &:after
+    content: ''
+    position: absolute
+    height: 8px
+    width: 8px
+    top: 50%
+    left: 50%
+    background: #2196f3
+    border-radius: 100%
+    transform: translate3d(calc(-50%, - 1px), -50%, 0)
+    
+  > span
+    align-items: center
+    border-radius: 100%
+    cursor: default
+    display: flex
+    font-size: $time-picker-number-font-size
+    justify-content: center
+    left: 'calc(50% - %s)' % $time-picker-number-font-size
+    height: $time-picker-number-font-size * 2
+    position: absolute
+    text-align: center
+    top: 'calc(50% - %s)' % $time-picker-number-font-size
+    width: $time-picker-number-font-size * 2
+    user-select: none
+
+    > span
+      z-index: 1
+      
+    &:before, &:after
+      content: ''
+      border-radius: 100%
+      position: absolute
+      top: 50%
+      left: 50%
+      height: 14px
+      width: 14px
+      transform: translate3d(-50%, -50%, 0)
+    
+    &:after, &:before
+      height: $time-picker-number-font-size * 2.5
+      width: $time-picker-number-font-size * 2.5
+    
+    &.active
+      color: #fff
+      cursor: default
+
+      &:before
+        background: $theme.primary
+        
+.picker--time .card__row--actions
+  border: none

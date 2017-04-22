@@ -7,6 +7,7 @@ import Cards from './cards/index'
 import Carousel from './carousel/index'
 import Chips from './chips/index'
 import DateTime from './pickers/index'
+import Dialogs from './dialogs/index'
 import Dividers from './dividers/index'
 import ExpansionPanel from './expansion-panel/index'
 import Footer from './footer/index'
@@ -15,7 +16,6 @@ import Grid from './grid/index'
 import Icons from './icons/index'
 import Lists from './lists/index'
 import Menu from './menus/index'
-import Modal from './modal/index'
 import Toolbar from './toolbar/index'
 import Overlay from './overlay/index'
 import Pagination from './pagination/index'
@@ -42,6 +42,7 @@ export default Object.assign({},
   Carousel,
   Chips,
   DateTime,
+  Dialogs,
   Dividers,
   ExpansionPanel,
   Footer,
@@ -50,7 +51,6 @@ export default Object.assign({},
   Icons,
   Lists,
   Menu,
-  Modal,
   Toolbar,
   Overlay,
   Pagination,

@@ -3,8 +3,8 @@
     width: 100%
     overflow-x: auto
     overflow-y: hidden
-    
-table
+
+table.table
   border-radius: 2px
   border-collapse: collapse
   border-spacing: 0
@@ -13,10 +13,10 @@ table
 
   td, th
     text-align: left
-    
-  tr
+
+  tr:not(:last-child)
     border-bottom: 1px solid $grey.lighten-2
-  
+
   thead, tbody
     td, th
       &:not(:nth-child(1)), &:first-child
@@ -33,24 +33,24 @@ table
       transition: .3s $transition.swing
       white-space: nowrap
       user-select: none
-      
+
       &.sortable
         pointer-events: auto
-      
+
       > div
         width: 100%
-      
+
   tbody
     tr
       transition: background $primary-transition
       will-change: background
-        
+
       &[active]
         background: #f5f5f5
-      
+
       &:hover
         background: #eeeeee
-        
+
     td, th
       height: 48px
 
@@ -58,13 +58,13 @@ table
       font-weight: 500
       color: rgba(#000, .87)
       font-size: 13px
-    
+
   .input-group--selection-controls
     margin: 0
-    
+
     .input-group__details
       display: none
-      
+
     &.checkbox
       .icon
         left: 50%
@@ -76,3 +76,4 @@ table
   tfoot
     tr
       height: 56px
+      border-top: 1px solid $grey.lighten-2

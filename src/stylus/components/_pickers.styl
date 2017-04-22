@@ -1,0 +1,58 @@
+.picker
+  border-radius: $card-border-radius
+  color: #fff
+  display: flex
+  flex-direction: column
+  width: 290px
+  
+  .card__row--actions
+    border: none
+    margin-top: -20px
+
+  &__title
+    background: $theme.primary
+    height: 105px
+    border-top-left-radius: $card-border-radius
+    border-top-right-radius: $card-border-radius
+    padding: 16px
+    
+  &__body
+    color: #000
+    height: 290px
+    overflow: hidden
+    position: relative
+  
+  &--dark
+    .picker__body
+      background: $grey.darken-3
+      
+    .picker__title
+      background: $grey.darken-2
+    
+
+
+  &--landscape
+    flex-direction: row
+    flex-wrap: wrap
+    width: 500px
+    
+    .picker__title
+      border-top-right-radius: 0
+      border-bottom-right-radius: 0
+      flex: 0 1 170px
+      width: 170px
+      height: auto
+      position: absolute
+      top: 0
+      left: 0
+      height: 100%
+      z-index: 1
+      
+    .picker__body
+      flex: 1 0
+      width: 330px
+      margin-left: 170px
+
+    .card__row--actions
+      margin-left: 170px
+      width: 330px

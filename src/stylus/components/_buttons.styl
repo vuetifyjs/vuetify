@@ -37,7 +37,7 @@
     box-shadow: none !important
     pointer-events: none
     opacity: .4
-    
+
     &:not(.btn--loader)
       color: $button-dark-disabled-color
 
@@ -65,7 +65,7 @@
     background-color: transparent !important
     box-shadow: none !important
     color: $color-root
-      
+
     &.btn--light
       &:hover:after
         background-color: $button-light-overlay
@@ -78,7 +78,7 @@
 
       &:hover:after
         background-color: $button-dark-overlay
-        
+
       &.btn--disabled
         color: $button-dark-disabled-color
 
@@ -98,18 +98,18 @@
     width: $button-height
     min-width: initial
     padding: 0
-    
+
     &:after
       border-radius: 50%
       opacity: .12
-    
+
     &:hover
       border-radius: 50%
-      
+
       &:after
         background-color: currentColor
         opacity: .12
-        
+
     &.btn--disabled
       background-color: transparent !important
       color: $button-light-disabled-color !important
@@ -120,28 +120,29 @@
     min-width: initial
     height: $button-floating-width
     width: $button-floating-width
-    
+    padding: initial
+
     &:after
       border-radius: 50%
-      
+
     .icon
       height: $button-floating-icon-width
       width: $button-floating-icon-width
-      
+
     &.btn--small
       height: $button-floating-small-width
       width: $button-floating-small-width
-      
+
       .icon
         font-size: $button-floating-small-icon-width
         height: $button-floating-small-icon-width
         width: $button-floating-small-icon-width
-        
-      
+
+
     &.btn--large
       height: $button-floating-large-width
       width: $button-floating-large-width
-      
+
       .icon
         font-size: $button-floating-large-icon-width
         height: $button-floating-large-icon-width
@@ -153,11 +154,11 @@
   &--light
     &:hover:after
       background-color: $button-light-overlay
-      
+
     &.btn--disabled
       color: $button-light-disabled-color !important
       opacity: 1
-    
+
     &.btn--disabled:not(.btn--flat)
       background-color: $button-light-overlay !important
 
@@ -168,7 +169,7 @@
     &.btn--disabled
       color: $button-dark-disabled-color !important
       opacity: 1
-      
+
     &.btn--disabled:not(.btn--flat)
       background-color: $button-dark-overlay !important
 
@@ -177,14 +178,14 @@
   &--small
     font-size: $button-small-font-size
     height: $button-small-height
-    
+
     &.btn--icon
       width: $button-small-height
 
   &--large
     font-size: $button-large-font-size
     height: $button-large-height
-    
+
     &.btn--icon
       width: $button-large-height
 
@@ -193,7 +194,7 @@
 .btn
   &--loader
     pointer-events: none
-    
+
     .btn__content
       opacity: 0
 
@@ -206,12 +207,12 @@
     display: flex
     justify-content: center
     align-items: center
-    
+
     .icon
       &--left
         margin-right: 1rem
         line-height: inherit
-      
+
       &--right
         margin-left: 1rem
         line-height: inherit
@@ -223,7 +224,7 @@
     border: 1px solid currentColor
     background: transparent !important
     box-shadow: none
-    
+
     &:hover
       box-shadow: none
 
@@ -235,7 +236,7 @@
 
   &--round
     border-radius: 28px
-    
+
     &:after
       border-radius: 28px
 
@@ -245,6 +246,6 @@
   .icon
     &--right
       margin-left: 16px
-      
+
     &--left
       margin-right: 16px

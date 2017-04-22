@@ -1,0 +1,173 @@
+.picker--date
+  color: #fff
+  width: 100%
+
+/** Years */
+.picker--date__years
+  background: #fff
+  color: #000
+  font-size: 18px
+  font-weight: 400
+  list-style-type: none
+  max-height: 300px
+  overflow: auto
+  padding: 0
+  text-align: center
+  
+  li
+    cursor: pointer
+    margin: 16px 0
+    transition: .3s $transition.swing
+    
+    &:hover
+      color: $theme.primary
+
+    &.active
+      color: $theme.primary
+      font-size: 24px
+      font-weight: 500
+      margin: 20px 0
+  
+
+/** Title */
+.picker--date__title
+  justify-content: space-between
+  flex-direction: column
+  flex-wrap: wrap
+  
+  &-year
+    font-size: 14px
+    
+  &-date
+    font-size: 34px
+    
+    > div
+      position: relative
+  
+  &-year, &-date
+    font-weight: 500
+    transition: .3s $transition.swing
+    width: 100%
+    
+    &:not(.active)
+      cursor: pointer
+      opacity: .6
+      
+    &:hover
+      opacity: 1
+    
+
+/** Header */
+.picker--date__header
+  color: #000
+  padding: 4px 16px
+
+  &-selector
+    align-items: center
+    display: flex
+    justify-content: space-between
+    position: relative
+    
+    .btn
+      color: #000
+      margin: 0
+    
+    .icon
+      cursor: pointer
+      user-select: none
+      
+    &-date
+      flex: 1
+      text-align: center
+      position: relative
+      overflow: hidden
+      
+      strong
+        transition: .3s $transition.swing
+        display: block
+        width: 100%
+
+
+.picker--date
+  &__table
+    position: relative
+
+  table
+    transition: .3s $transition.swing
+    top: 0
+
+    thead
+      th
+        padding: 8px 0
+
+    th
+      color: rgba(#000, .54)
+      font-weight: 600
+      font-size: 12px
+
+    th, td
+      text-align: center
+      width: 45px
+      
+    .btn
+      margin: 0
+      
+      &__content
+        overflow: visible
+        transition: none
+      
+    .btn.btn--floating.btn--current:not(.btn--active)
+      color: rgba($theme.primary, .6)
+      
+    .btn.btn--floating
+      height: 32px
+      width: 32px
+
+      &:after
+        background: $theme.primary !important
+        opacity: 0
+        transform: scale(0)
+        
+      &:not(.btn--active):hover
+        color: #fff
+
+        &:after
+          opacity: .6
+          transform: scale(1)
+
+    .btn.btn--floating.btn--active
+      color: #fff
+      
+      &:after
+        background: $theme.primary !important
+        opacity: 1
+        transform: none
+        
+.picker--date
+  &.picker--dark
+    .picker--date__header, .picker--date__years
+      background: $grey.darken-3
+      color: #fff
+      
+      .btn
+        color: #fff
+        
+    .picker--date__table
+      table
+        th, td, .btn
+          color: #fff
+          
+        .btn.btn--floating
+          &:after
+            background: $theme.accent !important
+
+        .btn--active
+          color: #000
+
+        .btn--floating.btn--current:not(.btn--active)
+          color: $theme.accent
+          
+.picker--landscape
+  .picker--date__years
+    margin-left: 170px
+    width: 330px
