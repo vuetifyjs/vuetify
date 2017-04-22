@@ -57,8 +57,6 @@ export default {
   render (h) {
     const children = []
 
-    console.log(this.$slots.default)
-
     if (this.isActive) {
       children.push(h('div', {
         'class': 'snack__content'
