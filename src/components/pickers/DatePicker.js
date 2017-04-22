@@ -108,6 +108,9 @@ export default {
     save () {
       if (this.originalDate) {
         this.originalDate = this.value
+      } else {
+        this.inputDate = this.inputDate
+        this.originalDate = this.inputDate
       }
 
       if (this.$parent && this.$parent.isActive) this.$parent.isActive = false

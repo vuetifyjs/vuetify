@@ -128,6 +128,9 @@ export default {
     save () {
       if (this.originalTime) {
         this.originalTime = this.value
+      } else {
+        this.inputTime = this.inputTime
+        this.originalTime = this.inputTime
       }
 
       if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
