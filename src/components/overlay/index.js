@@ -9,12 +9,6 @@ const Overlay = {
     data.staticClass = data.staticClass ? `overlay ${data.staticClass}` : 'overlay'
     if (props.value) data.staticClass += ' overlay--active'
 
-    if (props.value) {
-      document.documentElement.style.overflow = 'hidden'
-    } else {
-      document.documentElement.style.overflow = null
-    }
-
     return h('div', data, children)
   }
 }

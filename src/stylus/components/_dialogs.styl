@@ -1,8 +1,10 @@
 .dialog
   margin: 24px 40px
-  max-width: 90%
   transition: .3s ease-in-out
   z-index 1001
+  
+  &:not(.dialog--fullscreen)
+    max-width: 90%
   
   &__container
     display: inline-block
