@@ -1,10 +1,13 @@
 .dialog
   margin: 24px 40px
+  overflow-y: auto
+  elevation(24)
   transition: .3s ease-in-out
   z-index 1001
   
   &:not(.dialog--fullscreen)
     max-width: 90%
+    max-height: 90%
   
   &__container
     display: inline-block
@@ -12,8 +15,6 @@
 
   >
     .card
-      elevation(24)
-
       & ^[2..-1]__title
         padding 12px 24px
 
@@ -39,10 +40,13 @@
     overflow-y: auto
     top: 0
     left 0
+    padding-top: 56px
 
     .toolbar
       height 56px           // TODO: height with two lines of text: 80dp
       padding 0 !important
+      position: fixed
+      top: 0
 
       &__title
         font-size 20px      // TODO: convert from 20sp
