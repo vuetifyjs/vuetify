@@ -151,7 +151,8 @@ export default {
           disabled: this.disabled,
           required: this.required,
           value: this.lazyValue,
-          autofucus: this.autofocus
+          autofucus: this.autofocus,
+          name: this.name
         },
         attrs: {
           tabindex: this.tabindex,
