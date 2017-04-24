@@ -1,10 +1,15 @@
 .dialog
+  elevation(24)
+  background: #fff
+  border-radius: $card-border-radius
   margin: 24px 40px
+  overflow-y: auto
   transition: .3s ease-in-out
   z-index 1001
   
   &:not(.dialog--fullscreen)
     max-width: 90%
+    max-height: 90%
   
   &__container
     display: inline-block
@@ -12,8 +17,7 @@
 
   >
     .card
-      elevation(24)
-
+    
       & ^[2..-1]__title
         padding 12px 24px
 
@@ -24,12 +28,8 @@
         padding: 8px 0
 
         .btn
+          min-width: 64px
           margin-right: 8px
-
-  &:not(.dialog--scrollable)
-    > .card
-      .card__row--actions
-        border initial
 
   &--fullscreen
     margin 0
@@ -39,10 +39,13 @@
     overflow-y: auto
     top: 0
     left 0
+    padding-top: 56px
 
     .toolbar
       height 56px           // TODO: height with two lines of text: 80dp
       padding 0 !important
+      position: fixed
+      top: 0
 
       &__title
         font-size 20px      // TODO: convert from 20sp
@@ -67,9 +70,3 @@
   &--scrollable
     .card__row:not(.card__row--actions)
       overflow-y: auto
-      
-    .card__title
-      border-bottom: 1px solid $material-twelve-percent-dark
-    
-    .card__row--actions
-      border-top: 1px solid $material-twelve-percent-dark

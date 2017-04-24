@@ -1,5 +1,5 @@
 /*!
-* Vuetify v0.10.4
+* Vuetify v0.11.1
 * Forged by John Leider
 * Released under the MIT License.
 */   
@@ -939,7 +939,7 @@ function load (cb) {
 /* 12 */
 /***/ function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+throw new Error("Module build failed: Error\n    at /home/homeserver/Sites/vuetify.js/vuetify/node_modules/webpack/lib/NormalModule.js:143:35\n    at /home/homeserver/Sites/vuetify.js/vuetify/node_modules/loader-runner/lib/LoaderRunner.js:364:11\n    at /home/homeserver/Sites/vuetify.js/vuetify/node_modules/loader-runner/lib/LoaderRunner.js:230:18\n    at context.callback (/home/homeserver/Sites/vuetify.js/vuetify/node_modules/loader-runner/lib/LoaderRunner.js:111:13)\n    at /home/homeserver/Sites/vuetify.js/vuetify/node_modules/postcss-loader/index.js:141:13");
 
 /***/ },
 /* 13 */
@@ -1674,7 +1674,7 @@ var CardTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers_
     },
     width: {
       type: [String, Number],
-      default: 320
+      default: 290
     },
     scrollable: Boolean,
     transition: {
@@ -1741,7 +1741,7 @@ var CardTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers_
 
     var dialog = h(this.computedTransition, {
       props: { origin: this.origin }
-    }, [h('div', data, [h('v-card', [this.$slots.default])])])
+    }, [h('div', data, [this.$slots.default])])
 
     if (this.overlay) {
       dialog = h('v-overlay', {
@@ -2210,7 +2210,7 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
     this.$vuetify.load(function () {
       this$1.multiLine && this$1.autoGrow && this$1.calculateInputHeight()
-      this$1.autofocus && this$1.$refs.input.focus()
+      this$1.autofocus && this$1.focus()
     })
   },
 
@@ -2232,6 +2232,7 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
     },
     focus: function focus () {
       this.focused = true
+      this.$refs.input.focus()
     },
     genCounter: function genCounter () {
       return this.$createElement('div', {
@@ -2735,20 +2736,33 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__util_helpers__ = __webpack_require__(0);
+throw new Error("Cannot find module \"./mixins/activator\"");
+throw new Error("Cannot find module \"./mixins/generators\"");
+throw new Error("Cannot find module \"./mixins/position\"");
+throw new Error("Cannot find module \"./mixins/utils\"");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mixins_toggleable__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__util_helpers__ = __webpack_require__(0);
+
+
+
+
 
 
 
 /* harmony default export */ exports["a"] = {
   name: 'menu',
 
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__["a" /* default */]],
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_activator___default.a, __WEBPACK_IMPORTED_MODULE_1__mixins_generators___default.a, __WEBPACK_IMPORTED_MODULE_2__mixins_position___default.a, __WEBPACK_IMPORTED_MODULE_3__mixins_utils___default.a, __WEBPACK_IMPORTED_MODULE_4__mixins_toggleable__["a" /* default */]],
 
   data: function data () {
+    var this$1 = this;
+
     return {
       window: {},
-      windowResizeHandler: function () {},
+      windowResizeHandler: function () {
+        this$1.isBooted = false
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__util_helpers__["e" /* debounce */])(this$1.activate, 200)
+      },
       dimensions: {
         activator: {
           top: 0, left: 0, bottom: 0, right: 0, width: 0, height: 0, offsetTop: 0
@@ -2858,7 +2872,6 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
       var vert = direction.vert === 'top'
           ? offsetY ? a.top - c.bottom + nt : a.bottom - c.bottom + auto.vert
           : offsetY ? a.bottom - c.top + nb : a.top - c.top + auto.vert
-
       return { horiz: horiz, vert: vert }
     },
 
@@ -2928,18 +2941,25 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
     },
 
     styles: function styles () {
+      var ref = this.position;
+      var top = ref.top;
+      var left = ref.left;
+      var right = ref.right;
+      var bottom = ref.bottom;
+
       return {
-        top: this.position.top,
-        left: this.position.left,
-        right: this.position.right,
-        bottom: this.position.bottom
+        top: isNaN(top) ? top : (top + "px"),
+        left: isNaN(left) ? left : (left + "px"),
+        right: isNaN(right) ? right : (right + "px"),
+        bottom: isNaN(bottom) ? bottom : (bottom + "px")
       }
     }
   },
 
   watch: {
     isActive: function isActive (val) {
-      this.isBooted = true
+      if (this.isBooted && val) { return this.startTransition() }
+
       if (val) { this.activate() }
       else { this.isContentActive = false }
     },
@@ -2951,6 +2971,10 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
 
     activatorXY: function activatorXY (val) {
       this.isActive = true
+    },
+
+    windowResizeHandler: function windowResizeHandler () {
+      this.isBooted = false
     }
   },
 
@@ -2966,7 +2990,7 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
   methods: {
     activate: function activate () {
       if (!this.isActive || this.disabled) { return }
-
+      this.isBooted = true
       this.initWindow()
       this.setDirection()
       this.updatePosition()
@@ -2976,263 +3000,12 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
       if (this.window === window) { return }
 
       this.window = window
-      this.windowResizeHandler = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["e" /* debounce */])(this.activate, 200)
       this.window.addEventListener('resize', this.windowResizeHandler)
     },
-
-    getActivator: function getActivator () {
-      var ref = this;
-      var $refs = ref.$refs;
-
-      if (this.activator) { return this.activator }
-      if (this.activatorXY) { return this.activatorXY }
-      return $refs.activator.children ? $refs.activator.children[0] : $refs.activator
-    },
-
-    activatorClickHandler: function activatorClickHandler () {
-      if (this.disabled) { return }
-      else if (this.openOnClick && !this.isActive) { this.isActive = true }
-      else if (this.closeOnClick && this.isActive) { this.isActive = false }
-    },
-
-    addActivatorEvents: function addActivatorEvents (activator) {
-      if ( activator === void 0 ) activator = null;
-
-      if (!activator) { return }
-      activator.addEventListener('click', this.activatorClickHandler)
-    },
-
-    removeActivatorEvents: function removeActivatorEvents (activator) {
-      if ( activator === void 0 ) activator = null;
-
-      if (!activator) { return }
-      activator.removeEventListener('click', this.activatorClickHandler)
-    },
-
-    setDirection: function setDirection (horiz, vert) {
-      if ( horiz === void 0 ) horiz = '';
-      if ( vert === void 0 ) vert = '';
-
-      this.direction = {
-        horiz: horiz || (this.left && !this.auto ? 'left' : 'right'),
-        vert: vert || (this.top && !this.auto ? 'top' : 'bottom')
-      }
-
-      this.resetPosition()
-    },
-
-    resetPosition: function resetPosition () {
-      this.position.top = this.direction.vert === 'top' ? 'auto' : '0px'
-      this.position.left = this.direction.horiz === 'left' ? 'auto' : '0px'
-      this.position.bottom = this.direction.vert === 'bottom' ? 'auto' : '0px'
-      this.position.right = this.direction.horiz === 'right' ? 'auto' : '0px'
-    },
-
-    updatePosition: function updatePosition () {
-      var this$1 = this;
-
-      this.$nextTick(function () {
-        this$1.updateDimensions()
-
-        var ref = this$1;
-        var offset = ref.offset;
-        var screen = ref.screenOverflow;
-        var ref$1 = this$1.direction;
-        var horiz = ref$1.horiz;
-        var vert = ref$1.vert;
-
-        var left = horiz === 'left' ? 'auto' : offset.horiz - screen.horiz + this$1.nudgeLeft
-        var top = vert === 'top' ? 'auto' : offset.vert - screen.vert + this$1.nudgeTop
-        var right = horiz === 'right' ? 'auto' : -offset.horiz - screen.horiz + this$1.nudgeRight
-        var bottom = vert === 'bottom' ? 'auto' : -offset.vert - screen.vert + this$1.nudgeBottom
-
-        var leftSpace = left + this$1.dimensions.content.width
-        if (leftSpace > this$1.window.innerWidth) {
-          var diff = leftSpace - this$1.window.innerWidth
-          left = left - diff - 16
-        }
-
-        this$1.position.left = left + "px"
-        this$1.position.right = right + "px"
-        this$1.position.top = top + "px"
-        this$1.position.bottom = bottom + "px"
-
-        var noMoreFlipping = this$1.flip() === false
-
-        if (noMoreFlipping) { this$1.startTransition() }
-      })
-    },
-
-    updateDimensions: function updateDimensions () {
-      var this$1 = this;
-
-      var a = this.getActivator()
-      var c = this.$refs.content
-
-      this.sneakPeek(c, function () {
-        this$1.updateMaxMin()
-
-        this$1.dimensions = {
-          activator: this$1.measure(a),
-          content: this$1.measure(c),
-          list: this$1.measure(c, '.list'),
-          selected: this$1.auto ? this$1.measure(c, '.list__tile--active', 'parent') : null
-        }
-
-        this$1.updateScroll()
-      })
-    },
-
-    updateMaxMin: function updateMaxMin () {
-      var ref = this;
-      var maxHeight = ref.maxHeight;
-      var maxAuto = ref.maxHeightAutoDefault;
-      var offsetAuto = ref.offsetAuto;
-      var auto = ref.auto;
-      var a = this.getActivator()
-      var c = this.$refs.content
-      var widthAdjust = this.nudgeWidth + Math.abs(offsetAuto.horiz) * 2
-
-      if (!this.activatorXY) {
-        c.style.minWidth = (a.getBoundingClientRect().width + widthAdjust) + "px"
-      }
-      c.style.maxHeight = null  // <-- Todo: Investigate why this fixes rendering.
-      c.style.maxHeight = isNaN(maxHeight) ? maxHeight : (maxHeight + "px")
-      c.style.maxHeight = maxHeight === null && auto ? maxAuto : c.style.maxHeight
-    },
-
-    updateScroll: function updateScroll () {
-      if (!this.auto || !this.dimensions.selected) { return }
-
-      var ref = this.dimensions;
-      var c = ref.content;
-      var s = ref.selected;
-      var l = ref.list;
-      var scrollMiddle = (c.height - s.height) / 2
-      var scrollMax = l.height - c.height
-      var offsetTop = s.offsetTop - scrollMiddle
-
-      offsetTop = this.screenOverflow.vert && offsetTop > scrollMax ? scrollMax : offsetTop
-      offsetTop = this.screenOverflow.vert && offsetTop < 0 ? 0 : offsetTop
-      offsetTop -= this.screenOverflow.vert
-
-      this.$refs.content.scrollTop = offsetTop
-    },
-
-    flip: function flip () {
-      var ref = this;
-      var auto = ref.auto;
-      var screenDist = ref.screenDist;
-      var ref$1 = this.dimensions;
-      var c = ref$1.content;
-      var ref$2 = this.direction;
-      var horiz = ref$2.horiz;
-      var vert = ref$2.vert;
-      var flipHoriz = !auto && c.width > screenDist[horiz] ? screenDist.horizMaxDir : horiz
-      var flipVert = !auto && c.height > screenDist[vert] ? screenDist.vertMaxDir : vert
-      var doFlip = flipHoriz !== horiz || flipVert !== vert
-
-      if (doFlip) {
-        this.setDirection(flipHoriz, flipVert)
-        this.updatePosition()
-      }
-
-      return doFlip
-    },
-
+    
     startTransition: function startTransition () {
       this.$refs.content.offsetHeight // <-- Force DOM to repaint first.
       this.isContentActive = true     // <-- Trigger v-show on content.
-    },
-
-    // Render functions
-    // ====================
-
-    genActivator: function genActivator (h) {
-      var data = {
-        ref: 'activator',
-        slot: 'activator',
-        class: {
-          'menu__activator': true
-        },
-        on: {
-          click: this.activatorClickHandler
-        }
-      }
-
-      return h('div', data, [this.$slots.activator || null])
-    },
-
-    genTransition: function genTransition (h) {
-      var data = {
-        props: {
-          origin: this.origin
-        }
-      }
-
-      return h(this.transition, data, [this.genContent(h)])
-    },
-
-    genContent: function genContent (h) {
-      var this$1 = this;
-
-      var data = {
-        ref: 'content',
-        style: this.styles,
-        directives: [{
-          name: 'show',
-          value: this.isContentActive
-        }],
-        'class': { 'menu__content': true },
-        on: {
-          click: function (e) {
-            e.stopPropagation()
-            if (this$1.closeOnContentClick) {
-              this$1.isActive = false
-            }
-          }
-        }
-      }
-
-      return h('div', data, [this.lazy && !this.isBooted ? null : this.$slots.default])
-    },
-
-    // Utils
-    // ====================
-
-    measure: function measure (el, selector, getParent) {
-      if ( getParent === void 0 ) getParent = false;
-
-      el = selector ? el.querySelector(selector) : el
-      el = el && getParent ? el.parentElement : el
-
-      if (!el) { return null }
-      if (!el.nodeName && el.hasOwnProperty('clientX') && el.hasOwnProperty('clientY')) {
-        return {
-          top: el.clientY, bottom: el.clientY, left: el.clientX, right: el.clientX,
-          width: 0, height: 0, offsetTop: 0
-        }
-      }
-
-      var ref = el.getBoundingClientRect();
-      var top = ref.top;
-      var left = ref.left;
-      var bottom = ref.bottom;
-      var right = ref.right;
-      var width = ref.width;
-      var height = ref.height;
-      return { top: top, left: left, bottom: bottom, right: right, width: width, height: height, offsetTop: el.offsetTop }
-    },
-
-    sneakPeek: function sneakPeek (el, cb) {
-      var oldOpacity = el.style.opacity
-      var oldDisplay = el.style.display
-
-      el.style.opacity = 0
-      el.style.display = 'inline-block'
-      cb()
-      el.style.opacity = oldOpacity
-      el.style.display = oldDisplay
     }
   },
 
@@ -3567,12 +3340,14 @@ var Overlay = {
 
         var hour = value.getHours()
         var minute = value.getMinutes()
+        var period = ''
 
         if (!this.is24hr) {
           hour = hour > 12 ? hour - 12 : hour
+          period = this.period
         }
 
-        return (hour + ":" + minute + (!this.is24hr ? this.period : ''))
+        return (hour + ":" + minute + period)
       },
       set: function set (val) {
         return this.$emit('input', val)
@@ -3589,10 +3364,10 @@ var Overlay = {
         if (!this.is24hr) {
           val = val > 12 ? val - 12 : val < 1 ? 12 : val
         } else {
-          val = val > 23 ? 0 : val
+          val = val < 10 ? ("0" + val) : val > 23 ? '00' : val
         }
 
-        this.inputTime = val + ":" + (this.minute) + (this.period)
+        this.inputTime = val + ":" + (this.minute) + (!this.is24hr ? this.period : '')
       }
     },
     minute: {
@@ -3603,8 +3378,13 @@ var Overlay = {
       },
       set: function set (val) {
         val = val < 10 ? ("0" + (parseInt(val))) : val > 59 ? '00' : val
+        var hour = this.hour
 
-        this.inputTime = (this.hour) + ":" + val + (this.period)
+        if (this.is24hr && hour < 10) {
+          hour = "0" + hour
+        }
+
+        this.inputTime = hour + ":" + val + (!this.is24hr ? this.period : '')
       }
     },
     clockHand: function clockHand () {
@@ -5085,7 +4865,8 @@ var Overlay = {
     timeout: {
       type: Number,
       default: 6000
-    }
+    },
+    vertical: Boolean
   },
 
   computed: {
@@ -5098,7 +4879,8 @@ var Overlay = {
         'snack--left': this.left,
         'snack--right': this.right,
         'snack--top': this.top,
-        'snack--multi-line': this.multiLine
+        'snack--multi-line': this.multiLine && !this.vertical,
+        'snack--vertical': this.vertical
       }
     },
     computedTransition: function computedTransition () {
