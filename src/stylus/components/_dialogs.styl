@@ -1,7 +1,8 @@
 .dialog
+  background: #fff
+  elevation(24)
   margin: 24px 40px
   overflow-y: auto
-  elevation(24)
   transition: .3s ease-in-out
   z-index 1001
   
@@ -26,11 +27,6 @@
 
         .btn
           margin-right: 8px
-
-  &:not(.dialog--scrollable)
-    > .card
-      .card__row--actions
-        border initial
 
   &--fullscreen
     margin 0
@@ -71,9 +67,3 @@
   &--scrollable
     .card__row:not(.card__row--actions)
       overflow-y: auto
-      
-    .card__title
-      border-bottom: 1px solid $material-twelve-percent-dark
-    
-    .card__row--actions
-      border-top: 1px solid $material-twelve-percent-dark
