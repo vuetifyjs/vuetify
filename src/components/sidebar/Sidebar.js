@@ -5,48 +5,50 @@ export default {
 
   mixins: [Toggleable],
 
+  data () {
+    return {
+      isMobile: false
+    }
+  },
+
   props: {
     absolute: Boolean,
     closeOnClick: {
       type: Boolean,
       default: true
     },
+    disableRouteWatcher: Boolean,
     drawer: Boolean,
     fixed: Boolean,
-    right: Boolean,
     height: String,
+    mini: Boolean,
     mobile: {
       type: Boolean,
       default: true
     },
     mobileBreakPoint: {
-      type: Number,
+      type: [Number, String],
       default: 992
     },
-    disableRouteWatcher: Boolean
+    right: Boolean
   },
 
   computed: {
     calculatedHeight () {
-      if (this.height) return this.height
-      return this.fixed || this.drawer ? '100vh' : 'auto'
+      return this.height || (this.fixed || this.drawer ? '100vh' : 'auto')
     },
     classes () {
       return {
         'sidebar': true,
-        'sidebar--close': !this.isActive,
-        'sidebar--right': this.right,
-        'sidebar--drawer': this.drawer,
         'sidebar--absolute': this.absolute,
-        'sidebar--fixed': this.fixed || this.drawer,
+        'sidebar--close': !this.isActive,
+        'sidebar--drawer': this.drawer,
+        'sidebar--fixed': this.fixed,
         'sidebar--fixed-right': this.fixed && this.right,
+        'sidebar--mini': this.mini,
         'sidebar--mobile': this.mobile,
-        'sidebar--open': this.isActive
-      }
-    },
-    styles () {
-      return {
-        height: this.calculatedHeight
+        'sidebar--open': this.isActive,
+        'sidebar--right': this.right
       }
     }
   },
@@ -77,13 +79,15 @@ export default {
 
     resize () {
       if (this.mobile && !this.drawer) {
-        this.isActive = window.innerWidth >= this.mobileBreakPoint
+        const isMobile = window.innerWidth <= parseInt(this.mobileBreakPoint)
+        this.isActive = !isMobile
+        this.isMobile = isMobile
       }
     },
 
     routeChanged () {
       return (
-        (window.innerWidth < this.mobileBreakPoint && this.mobile) ||
+        (window.innerWidth < parseInt(this.mobileBreakPoint) && this.mobile) ||
         (this.drawer && this.closeOnClick)
       )
     }
@@ -92,15 +96,18 @@ export default {
   render (h) {
     const data = {
       'class': this.classes,
-      style: this.styles,
-      directives: [
-        {
-          name: 'click-outside',
-          value: this.closeConditional
-        }
-      ]
+      style: { height: this.calculatedHeight },
+      directives: [{
+        name: 'click-outside',
+        value: this.closeConditional
+      }]
     }
 
-    return h('aside', data, [this.$slots.default])
+    return h('v-overlay', {
+      props: {
+        absolute: this.absolute,
+        value: this.isActive && (this.isMobile || this.drawer)
+      }
+    }, [h('aside', data, [this.$slots.default])])
   }
 }

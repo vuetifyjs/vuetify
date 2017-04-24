@@ -1,17 +1,29 @@
 .sidebar
   background-color: $theme.secondary
   overflow-y: auto
+  overflow-x: hidden
   padding: 0 0 100px
   transition: transform .3s $transition.ease-in-out,
-    margin .3s $transition.ease-in-out
+    margin .3s $transition.ease-in-out,
+    width .2s $transition.ease-in-out
   width: $sidebar-width
   max-width: 100%
+  pointer-events: auto
   z-index: 3
+  
+  &--mini
+    overflow: hidden
+    width: 75px
 
   &--fixed
+    position: fixed
+  
+  &--absolute
+    position: absolute
+
+  &--fixed, &--absolute
     top: 0
     left: 0
-    position: fixed
     z-index: 6
     elevation(0)
 
@@ -40,7 +52,6 @@
 
   &--open, &--open.sidebar--mobile
     transform: translateX(0)
-    width: $sidebar-width
 
   &:not(.sidebar--fixed):not(.sidebar--right)
     @media screen and (max-width: $grid-breakpoints.lg)
