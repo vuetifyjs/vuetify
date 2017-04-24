@@ -20,7 +20,7 @@ export default {
     },
     width: {
       type: [String, Number],
-      default: 320
+      default: 290
     },
     scrollable: Boolean,
     transition: {
@@ -85,7 +85,7 @@ export default {
 
     let dialog = h(this.computedTransition, {
       props: { origin: this.origin }
-    }, [h('div', data, [h('v-card', [this.$slots.default])])])
+    }, [h('div', data, [this.$slots.default])])
 
     if (this.overlay) {
       dialog = h('v-overlay', {

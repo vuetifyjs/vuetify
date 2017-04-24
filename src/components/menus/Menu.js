@@ -230,7 +230,7 @@ export default {
       this.window = window
       this.window.addEventListener('resize', this.windowResizeHandler)
     },
-
+    
     startTransition () {
       this.$refs.content.offsetHeight // <-- Force DOM to repaint first.
       this.isContentActive = true     // <-- Trigger v-show on content.
