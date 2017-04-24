@@ -52,12 +52,14 @@ export default {
 
         let hour = value.getHours()
         const minute = value.getMinutes()
+        let period = ''
 
         if (!this.is24hr) {
           hour = hour > 12 ? hour - 12 : hour
+          period = this.period
         }
 
-        return `${hour}:${minute}${!this.is24hr ? this.period : ''}`
+        return `${hour}:${minute}${period}`
       },
       set (val) {
         return this.$emit('input', val)
@@ -74,10 +76,10 @@ export default {
         if (!this.is24hr) {
           val = val > 12 ? val - 12 : val < 1 ? 12 : val
         } else {
-          val = val > 23 ? 0 : val
+          val = val < 10 ? `0${val}` : val > 23 ? '00' : val
         }
 
-        this.inputTime = `${val}:${this.minute}${this.period}`
+        this.inputTime = `${val}:${this.minute}${!this.is24hr ? this.period : ''}`
       }
     },
     minute: {
@@ -88,8 +90,13 @@ export default {
       },
       set (val) {
         val = val < 10 ? `0${parseInt(val)}` : val > 59 ? '00' : val
+        let hour = this.hour
 
-        this.inputTime = `${this.hour}:${val}${this.period}`
+        if (this.is24hr && hour < 10) {
+          hour = `0${hour}`
+        }
+
+        this.inputTime = `${hour}:${val}${!this.is24hr ? this.period : ''}`
       }
     },
     clockHand () {
