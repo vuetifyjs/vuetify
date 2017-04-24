@@ -20,7 +20,7 @@ export default {
     },
     width: {
       type: [String, Number],
-      default: 320
+      default: 290
     },
     scrollable: Boolean,
     transition: {
