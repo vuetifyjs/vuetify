@@ -15,7 +15,7 @@
     overflow: hidden
     width: 88px
     
-    .list__tile__action
+    .list__tile__action, .list__tile__avatar
       justify-content: center
     
     .subheader
@@ -76,21 +76,15 @@
 
       &.sidebar--open
         transform: translateX(-300px)
+        
+  &--dark
+    sidebar(#fff)
+    
+  &--light
+    sidebar(rgba(#000, .87))
 
   .list__tile
-    color: $sidebar-item-color
-    transition: $primary-transition
-    position: relative
-
-    .list__tile__avatar, .list__tile__action, .icon
-      color: $sidebar-item-color
-
-    &:hover:not(&--active)
-      background-color: $sidebar-item-hover-background-color
-      color: $sidebar-item-active-color
-
-    &:after
-      background: $material-twelve-percent-light
+    transition: none
 
     &--active
       .list__tile__title
@@ -106,9 +100,6 @@
         .list__tile__action:first-child
           .icon
             color: $theme.primary
-
-    &:after
-      background: $material-twelve-percent-light
 
   .list--group__container
     .list__tile--active

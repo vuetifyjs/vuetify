@@ -23,6 +23,7 @@ export default {
     drawer: Boolean,
     fixed: Boolean,
     height: String,
+    light: Boolean,
     mini: Boolean,
     mobile: {
       type: Boolean,
@@ -44,8 +45,10 @@ export default {
         'sidebar': true,
         'sidebar--absolute': this.absolute,
         'sidebar--close': !this.isActive,
+        'sidebar--dark': !this.light,
         'sidebar--drawer': this.drawer,
         'sidebar--fixed': this.fixed || this.drawer,
+        'sidebar--light': this.light,
         'sidebar--mini': this.mini,
         'sidebar--mobile': this.mobile,
         'sidebar--is-mobile': this.isMobile,
