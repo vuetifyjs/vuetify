@@ -94,7 +94,9 @@ export default {
       props: { origin: this.origin }
     }, [h('div', data, [this.$slots.default])])
 
-    children.push(dialog)
+    children.push(h('div', {
+      'class': 'dialog__content'
+    }, [dialog]))
 
     return h('div', {
       'class': 'dialog__container'

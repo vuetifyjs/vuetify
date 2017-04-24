@@ -1,32 +1,42 @@
 .sidebar
   background-color: $theme.secondary
+  max-width: 100%
   overflow-y: auto
   overflow-x: hidden
   padding: 0 0 100px
+  pointer-events: auto
   transition: transform .3s $transition.ease-in-out,
     margin .3s $transition.ease-in-out,
     width .2s $transition.ease-in-out
   width: $sidebar-width
-  max-width: 100%
-  pointer-events: auto
   z-index: 3
   
   &--mini
     overflow: hidden
-    width: 75px
+    width: 88px
+    
+    .list__tile__action
+      justify-content: center
+    
+    .subheader
+      display: none
 
   &--fixed
     position: fixed
   
   &--absolute
     position: absolute
+    
+  &--open
+    &.sidebar--drawer, &.sidebar--is-mobile
+      z-index: 5
 
   &--fixed, &--absolute
     top: 0
     left: 0
     elevation(0)
 
-    &-right
+    &.sidebar--right
       right: 0
       left: initial
 
@@ -38,15 +48,14 @@
   &--close
     transform: translateX(-($sidebar-width + 25))
 
-    &.sidebar--fixed-right
+    &.sidebar--right
       transform: translateX($sidebar-width + 25)
 
   &--mobile
     @media screen and (max-width: $grid-breakpoints.lg)
       transform: translateX(-($sidebar-width + 25))
-      z-index: 7
 
-      &.sidebar--fixed-right, &.sidebar--right
+      &.sidebar--right
         transform: translateX($sidebar-width + 25)
 
   &--open, &--open.sidebar--mobile

@@ -45,10 +45,10 @@ export default {
         'sidebar--absolute': this.absolute,
         'sidebar--close': !this.isActive,
         'sidebar--drawer': this.drawer,
-        'sidebar--fixed': this.fixed,
-        'sidebar--fixed-right': this.fixed && this.right,
+        'sidebar--fixed': this.fixed || this.drawer,
         'sidebar--mini': this.mini,
         'sidebar--mobile': this.mobile,
+        'sidebar--is-mobile': this.isMobile,
         'sidebar--open': this.isActive,
         'sidebar--right': this.right
       }
