@@ -21,7 +21,7 @@ export default {
     },
     mobileBreakPoint: {
       type: Number,
-      default: 1280
+      default: 1024
     },
     disableRouteWatcher: Boolean
   },
