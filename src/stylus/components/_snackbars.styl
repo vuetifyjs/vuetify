@@ -1,87 +1,106 @@
 .snack
-	background-color: $snackbar-background-color
-	position: fixed
-	display: flex
-	height: 0
-	pointer-events: none
-	z-index: 1000
-	visibility: visible
-	
-	&--absolute
-		position: absolute
+  background-color: $snackbar-background-color
+  position: fixed
+  display: flex
+  height: 0
+  pointer-events: none
+  z-index: 1000
+  visibility: visible
 
-	&--multi-line
-		min-height: 48px
-		height: auto
+  &--absolute
+    position: absolute
 
-	&--top
-		top: 0
-		left: 50%
-		transform: translate3d(-50%, 0, 0) translateZ(0)
+  &--top
+    top: 0
+    left: 50%
+    transform: translate3d(-50%, 0, 0) translateZ(0)
 
-	&--bottom
-		bottom: 48px
-		left: 50%
-		transform: translate3d(-50%, 0, 0) translateZ(0)
+  &--bottom
+    bottom: 48px
+    left: 50%
+    transform: translate3d(-50%, 0, 0) translateZ(0)
 
-	&--left
-		left: 8px
-		right: initial
-		transform: none
+  &--left
+    left: 8px
+    right: initial
+    transform: none
 
-		&.snack--top
-			top: 8px
+    &.snack--top
+      top: 8px
 
-		&.snack--bottom
-			bottom: 56px
+    &.snack--bottom
+      bottom: 56px
 
-	&--right
-		left: initial
-		right: 8px
-		transform: none
+  &--right
+    left: initial
+    right: 8px
+    transform: none
 
-		&.snack--top
-			top: 8px
+    &.snack--top
+      top: 8px
 
-		&.snack--bottom
-			top: initial
-			bottom: 56px
+    &.snack--bottom
+      top: initial
+      bottom: 56px
 
-	&__content
-		background-color: inherit
-		padding: 14px 24px
-		border-radius: 2px
-		pointer-events: auto
-		max-width: 568px
-		min-width: 288px
-		height: 48px
-		align-items: center
-		color: #fff
-		display: flex
-		font-size: 14px
-		justify-content: space-between
-		transition: .4s $transition.swing
-		position: relative !important
+  &__content
+    background-color: inherit
+    padding: 14px 24px
+    border-radius: 2px
+    pointer-events: auto
+    max-width: 568px
+    min-width: 288px
+    height: 48px
+    align-items: center
+    color: #fff
+    display: flex
+    font-size: 14px
+    justify-content: space-between
+    transition: .4s $transition.swing
+    position: relative !important
 
-		.btn
-			margin: 0 -16px 0 24px
-			min-width: 0
+    .btn
+      margin: 0 0 0 48px
 
 @media $display-breakpoints.xs-only
-	.snack
-		width: 100%
-		left: 0
-		right: initial
-		transform: none
+  .snack
+    width: 100%
+    left: 0
+    right: initial
+    transform: none
 
-		&--right, &--left
-			&.snack--top
-				top: 0
+    &--right, &--left
+      &.snack--top
+        top: 0
 
-			&.snack--bottom
-				bottom: 48px
+      &.snack--bottom
+        bottom: 48px
 
-	.snack__content
-		border-radius: 0
-		max-width: 100%
-		width: 100%
+    &__content
+      border-radius: 0
+      max-width: 100%
+      width: 100%
+
+      .btn
+        margin: 0 0 0 24px
+
+    &--multi-line &__content
+      height: 80px
+      padding: 24px
+
+    &--bottom, &--right
+      &.snack--multi-line
+        bottom: 80px
+
+    &--vertical &__content
+      height: 112px
+      padding: 24px 24px 14px
+      flex-direction: column
+      align-items: initial
+
+      .btn
+        align-self: flex-end
+
+    &--bottom, &--right
+      &.snack--vertical
+        bottom: 112px

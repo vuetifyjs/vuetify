@@ -21,7 +21,8 @@ export default {
     timeout: {
       type: Number,
       default: 6000
-    }
+    },
+    vertical: Boolean
   },
 
   computed: {
@@ -34,7 +35,8 @@ export default {
         'snack--left': this.left,
         'snack--right': this.right,
         'snack--top': this.top,
-        'snack--multi-line': this.multiLine
+        'snack--multi-line': this.multiLine && !this.vertical,
+        'snack--vertical': this.vertical
       }
     },
     computedTransition () {
