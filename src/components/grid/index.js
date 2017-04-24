@@ -4,6 +4,7 @@ const Col = {
   functional: true,
 
   render: (h, { data, children }) => {
+    console.log(data)
     data.staticClass = data.staticClass ? `col ${data.staticClass}` : 'col'
     data.staticClass += ` ${Object.keys(data.attrs).join(' ')}`
     delete data.attrs

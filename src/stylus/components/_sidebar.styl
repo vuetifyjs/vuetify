@@ -96,10 +96,12 @@
 
   .list--group
     &__header--active
-      &:first-child
-        .list__tile__action:first-child
-          .icon
-            color: $theme.primary
+      &:after
+        background: transparent
+
+      .list__tile__action
+        .icon
+          color: $theme.primary
 
   .list--group__container
     .list__tile--active
