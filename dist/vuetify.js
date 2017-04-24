@@ -1669,7 +1669,7 @@ var CardTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers_
     },
     width: {
       type: [String, Number],
-      default: 320
+      default: 290
     },
     scrollable: Boolean,
     transition: {
@@ -2209,7 +2209,7 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
     this.$vuetify.load(function () {
       this$1.multiLine && this$1.autoGrow && this$1.calculateInputHeight()
-      this$1.autofocus && this$1.$refs.input.focus()
+      this$1.autofocus && this$1.focus()
     })
   },
 
@@ -2231,6 +2231,7 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
     },
     focus: function focus () {
       this.focused = true
+      this.$refs.input.focus()
     },
     genCounter: function genCounter () {
       return this.$createElement('div', {
@@ -2734,20 +2735,33 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__util_helpers__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_activator__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_generators__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_position__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_utils__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mixins_toggleable__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__util_helpers__ = __webpack_require__(0);
+
+
+
+
 
 
 
 /* harmony default export */ exports["a"] = {
   name: 'menu',
 
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__["a" /* default */]],
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_activator__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__mixins_generators__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__mixins_position__["a" /* default */], __WEBPACK_IMPORTED_MODULE_3__mixins_utils__["a" /* default */], __WEBPACK_IMPORTED_MODULE_4__mixins_toggleable__["a" /* default */]],
 
   data: function data () {
+    var this$1 = this;
+
     return {
       window: {},
-      windowResizeHandler: function () {},
+      windowResizeHandler: function () {
+        this$1.isBooted = false
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__util_helpers__["e" /* debounce */])(this$1.activate, 200)
+      },
       dimensions: {
         activator: {
           top: 0, left: 0, bottom: 0, right: 0, width: 0, height: 0, offsetTop: 0
@@ -2857,7 +2871,6 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
       var vert = direction.vert === 'top'
           ? offsetY ? a.top - c.bottom + nt : a.bottom - c.bottom + auto.vert
           : offsetY ? a.bottom - c.top + nb : a.top - c.top + auto.vert
-
       return { horiz: horiz, vert: vert }
     },
 
@@ -2927,18 +2940,25 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
     },
 
     styles: function styles () {
+      var ref = this.position;
+      var top = ref.top;
+      var left = ref.left;
+      var right = ref.right;
+      var bottom = ref.bottom;
+
       return {
-        top: this.position.top,
-        left: this.position.left,
-        right: this.position.right,
-        bottom: this.position.bottom
+        top: isNaN(top) ? top : (top + "px"),
+        left: isNaN(left) ? left : (left + "px"),
+        right: isNaN(right) ? right : (right + "px"),
+        bottom: isNaN(bottom) ? bottom : (bottom + "px")
       }
     }
   },
 
   watch: {
     isActive: function isActive (val) {
-      this.isBooted = true
+      if (this.isBooted && val) { return this.startTransition() }
+
       if (val) { this.activate() }
       else { this.isContentActive = false }
     },
@@ -2950,6 +2970,10 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
 
     activatorXY: function activatorXY (val) {
       this.isActive = true
+    },
+
+    windowResizeHandler: function windowResizeHandler () {
+      this.isBooted = false
     }
   },
 
@@ -2965,7 +2989,7 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
   methods: {
     activate: function activate () {
       if (!this.isActive || this.disabled) { return }
-
+      this.isBooted = true
       this.initWindow()
       this.setDirection()
       this.updatePosition()
@@ -2975,20 +2999,69 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
       if (this.window === window) { return }
 
       this.window = window
-      this.windowResizeHandler = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["e" /* debounce */])(this.activate, 200)
       this.window.addEventListener('resize', this.windowResizeHandler)
     },
+    
+    startTransition: function startTransition () {
+      this.$refs.content.offsetHeight // <-- Force DOM to repaint first.
+      this.isContentActive = true     // <-- Trigger v-show on content.
+    }
+  },
 
+  render: function render (h) {
+    var this$1 = this;
+
+    var data = {
+      'class': {
+        'menu': true
+      },
+      directives: [{
+        name: 'click-outside',
+        value: function (e) {
+          if (!this$1.closeOnClick) { return false }
+          var a = this$1.activator
+          if (a && (a === e.target || a.contains(e.target))) { return false }
+          return true
+        }
+      }],
+      on: {
+        'keyup': function (e) { if (e.keyCode === 27) { this$1.isActive = false } }
+      }
+    }
+
+    return h('div', data, [this.genActivator(h), this.genTransition(h)])
+  }
+};
+
+
+/***/ },
+/* 51 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Menu_js__ = __webpack_require__(50);
+
+
+/* harmony default export */ exports["a"] = {
+  Menu: __WEBPACK_IMPORTED_MODULE_0__Menu_js__["a" /* default */]
+};
+
+
+/***/ },
+/* 52 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ exports["a"] = {
+  methods: {
     getActivator: function getActivator () {
-      var ref = this;
-      var $refs = ref.$refs;
-
       if (this.activator) { return this.activator }
-      if (this.activatorXY) { return this.activatorXY }
-      return $refs.activator.children ? $refs.activator.children[0] : $refs.activator
+      return this.$refs.activator.children
+        ? this.$refs.activator.children[0]
+        : this.$refs.activator
     },
 
-    activatorClickHandler: function activatorClickHandler () {
+    activatorClickHandler: function activatorClickHandler (e) {
       if (this.disabled) { return }
       else if (this.openOnClick && !this.isActive) { this.isActive = true }
       else if (this.closeOnClick && this.isActive) { this.isActive = false }
@@ -3006,25 +3079,77 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
 
       if (!activator) { return }
       activator.removeEventListener('click', this.activatorClickHandler)
+    }
+  }
+};
+
+
+/***/ },
+/* 53 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ exports["a"] = {
+  methods: {
+    genActivator: function genActivator () {
+      return this.$createElement('div', {
+        ref: 'activator',
+        slot: 'activator',
+        class: 'menu__activator',
+        on: { click: this.activatorClickHandler }
+      }, this.$slots.activator)
     },
 
+    genTransition: function genTransition () {
+      var children = []
+
+      return this.$createElement(this.transition, {
+        props: { origin: this.origin }
+      }, [this.genContent()])
+    },
+
+    genContent: function genContent () {
+      var this$1 = this;
+
+      return this.$createElement('div', {
+        ref: 'content',
+        style: this.styles,
+        'class': 'menu__content',
+        directives: [{
+          name: 'show',
+          value: this.isContentActive
+        }],
+        on: {
+          click: function (e) {
+            e.stopPropagation()
+            if (this$1.closeOnContentClick) { this$1.isActive = false }
+          }
+        }
+      }, [this.lazy && this.isBooted || !this.lazy ? this.$slots.default : null])
+    }
+  }
+};
+
+
+/***/ },
+/* 54 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ exports["a"] = {
+  methods: {
     setDirection: function setDirection (horiz, vert) {
       if ( horiz === void 0 ) horiz = '';
       if ( vert === void 0 ) vert = '';
 
-      this.direction = {
-        horiz: horiz || (this.left && !this.auto ? 'left' : 'right'),
-        vert: vert || (this.top && !this.auto ? 'top' : 'bottom')
-      }
+      horiz = horiz || (this.left && !this.auto ? 'left' : 'right')
+      vert = vert || (this.top && !this.auto ? 'top' : 'bottom')
 
-      this.resetPosition()
-    },
-
-    resetPosition: function resetPosition () {
-      this.position.top = this.direction.vert === 'top' ? 'auto' : '0px'
-      this.position.left = this.direction.horiz === 'left' ? 'auto' : '0px'
-      this.position.bottom = this.direction.vert === 'bottom' ? 'auto' : '0px'
-      this.position.right = this.direction.horiz === 'right' ? 'auto' : '0px'
+      this.direction = { horiz: horiz, vert: vert }
+      this.position.top = vert === 'top' ? 'auto' : '0px'
+      this.position.left = horiz === 'left' ? 'auto' : '0px'
+      this.position.bottom = vert === 'bottom' ? 'auto' : '0px'
+      this.position.right = horiz === 'right' ? 'auto' : '0px'
     },
 
     updatePosition: function updatePosition () {
@@ -3051,10 +3176,10 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
           left = left - diff - 16
         }
 
-        this$1.position.left = left + "px"
-        this$1.position.right = right + "px"
-        this$1.position.top = top + "px"
-        this$1.position.bottom = bottom + "px"
+        this$1.position.left = left
+        this$1.position.right = right
+        this$1.position.top = top
+        this$1.position.bottom = bottom
 
         var noMoreFlipping = this$1.flip() === false
 
@@ -3137,68 +3262,18 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
       }
 
       return doFlip
-    },
+    }
+  }
+};
 
-    startTransition: function startTransition () {
-      this.$refs.content.offsetHeight // <-- Force DOM to repaint first.
-      this.isContentActive = true     // <-- Trigger v-show on content.
-    },
 
-    // Render functions
-    // ====================
+/***/ },
+/* 55 */
+/***/ function(module, exports, __webpack_require__) {
 
-    genActivator: function genActivator (h) {
-      var data = {
-        ref: 'activator',
-        slot: 'activator',
-        class: {
-          'menu__activator': true
-        },
-        on: {
-          click: this.activatorClickHandler
-        }
-      }
-
-      return h('div', data, [this.$slots.activator || null])
-    },
-
-    genTransition: function genTransition (h) {
-      var data = {
-        props: {
-          origin: this.origin
-        }
-      }
-
-      return h(this.transition, data, [this.genContent(h)])
-    },
-
-    genContent: function genContent (h) {
-      var this$1 = this;
-
-      var data = {
-        ref: 'content',
-        style: this.styles,
-        directives: [{
-          name: 'show',
-          value: this.isContentActive
-        }],
-        'class': { 'menu__content': true },
-        on: {
-          click: function (e) {
-            e.stopPropagation()
-            if (this$1.closeOnContentClick) {
-              this$1.isActive = false
-            }
-          }
-        }
-      }
-
-      return h('div', data, [this.lazy && !this.isBooted ? null : this.$slots.default])
-    },
-
-    // Utils
-    // ====================
-
+"use strict";
+/* harmony default export */ exports["a"] = {
+  methods: {
     measure: function measure (el, selector, getParent) {
       if ( getParent === void 0 ) getParent = false;
 
@@ -3233,52 +3308,11 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
       el.style.opacity = oldOpacity
       el.style.display = oldDisplay
     }
-  },
-
-  render: function render (h) {
-    var this$1 = this;
-
-    var data = {
-      'class': {
-        'menu': true
-      },
-      directives: [{
-        name: 'click-outside',
-        value: function (e) {
-          if (!this$1.closeOnClick) { return false }
-          var a = this$1.activator
-          if (a && (a === e.target || a.contains(e.target))) { return false }
-          return true
-        }
-      }],
-      on: {
-        'keyup': function (e) { if (e.keyCode === 27) { this$1.isActive = false } }
-      }
-    }
-
-    return h('div', data, [this.genActivator(h), this.genTransition(h)])
   }
 };
 
 
 /***/ },
-/* 51 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Menu_js__ = __webpack_require__(50);
-
-
-/* harmony default export */ exports["a"] = {
-  Menu: __WEBPACK_IMPORTED_MODULE_0__Menu_js__["a" /* default */]
-};
-
-
-/***/ },
-/* 52 */,
-/* 53 */,
-/* 54 */,
-/* 55 */,
 /* 56 */,
 /* 57 */
 /***/ function(module, exports, __webpack_require__) {
@@ -3542,12 +3576,14 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
 
         var hour = value.getHours()
         var minute = value.getMinutes()
+        var period = ''
 
         if (!this.is24hr) {
           hour = hour > 12 ? hour - 12 : hour
+          period = this.period
         }
 
-        return (hour + ":" + minute + (!this.is24hr ? this.period : ''))
+        return (hour + ":" + minute + period)
       },
       set: function set (val) {
         return this.$emit('input', val)
@@ -3564,10 +3600,10 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
         if (!this.is24hr) {
           val = val > 12 ? val - 12 : val < 1 ? 12 : val
         } else {
-          val = val > 23 ? 0 : val
+          val = val < 10 ? ("0" + val) : val > 23 ? '00' : val
         }
 
-        this.inputTime = val + ":" + (this.minute) + (this.period)
+        this.inputTime = val + ":" + (this.minute) + (!this.is24hr ? this.period : '')
       }
     },
     minute: {
@@ -3578,8 +3614,13 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
       },
       set: function set (val) {
         val = val < 10 ? ("0" + (parseInt(val))) : val > 59 ? '00' : val
+        var hour = this.hour
 
-        this.inputTime = (this.hour) + ":" + val + (this.period)
+        if (this.is24hr && hour < 10) {
+          hour = "0" + hour
+        }
+
+        this.inputTime = hour + ":" + val + (!this.is24hr ? this.period : '')
       }
     },
     clockHand: function clockHand () {
@@ -5072,7 +5113,8 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
     timeout: {
       type: Number,
       default: 6000
-    }
+    },
+    vertical: Boolean
   },
 
   computed: {
@@ -5085,7 +5127,8 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
         'snack--left': this.left,
         'snack--right': this.right,
         'snack--top': this.top,
-        'snack--multi-line': this.multiLine
+        'snack--multi-line': this.multiLine && !this.vertical,
+        'snack--vertical': this.vertical
       }
     },
     computedTransition: function computedTransition () {
