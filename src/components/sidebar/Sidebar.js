@@ -1,13 +1,15 @@
 import Toggleable from '../../mixins/toggleable'
+import Overlayable from '../../mixins/overlayable'
 
 export default {
   name: 'sidebar',
 
-  mixins: [Toggleable],
+  mixins: [Overlayable, Toggleable],
 
   data () {
     return {
-      isMobile: false
+      isMobile: false,
+      overlay: null
     }
   },
 
@@ -54,6 +56,13 @@ export default {
   },
 
   watch: {
+    isActive () {
+      if (this.isActive && (this.isMobile || this.drawer)) {
+        this.genOverlay()
+      } else {
+        this.removeOverlay()
+      }
+    },
     '$route' () {
       if (!this.disableRouteWatcher) {
         this.isActive = !this.routeChanged()
@@ -80,8 +89,8 @@ export default {
     resize () {
       if (this.mobile && !this.drawer) {
         const isMobile = window.innerWidth <= parseInt(this.mobileBreakPoint)
-        this.isActive = !isMobile
         this.isMobile = isMobile
+        this.isActive = !isMobile
       }
     },
 
@@ -103,11 +112,6 @@ export default {
       }]
     }
 
-    return h('v-overlay', {
-      props: {
-        absolute: this.absolute,
-        value: this.isActive && (this.isMobile || this.drawer)
-      }
-    }, [h('aside', data, [this.$slots.default])])
+    return h('aside', data, [this.$slots.default])
   }
 }
