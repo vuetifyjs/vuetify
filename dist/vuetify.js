@@ -1,5 +1,5 @@
 /*!
-* Vuetify v0.10.4
+* Vuetify v0.11.0
 * Forged by John Leider
 * Released under the MIT License.
 */   
@@ -1674,7 +1674,7 @@ var CardTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers_
     },
     width: {
       type: [String, Number],
-      default: 320
+      default: 290
     },
     scrollable: Boolean,
     transition: {
@@ -1741,7 +1741,7 @@ var CardTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers_
 
     var dialog = h(this.computedTransition, {
       props: { origin: this.origin }
-    }, [h('div', data, [h('v-card', [this.$slots.default])])])
+    }, [h('div', data, [this.$slots.default])])
 
     if (this.overlay) {
       dialog = h('v-overlay', {
@@ -2210,7 +2210,7 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
     this.$vuetify.load(function () {
       this$1.multiLine && this$1.autoGrow && this$1.calculateInputHeight()
-      this$1.autofocus && this$1.$refs.input.focus()
+      this$1.autofocus && this$1.focus()
     })
   },
 
@@ -2232,6 +2232,7 @@ var Footer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
     },
     focus: function focus () {
       this.focused = true
+      this.$refs.input.focus()
     },
     genCounter: function genCounter () {
       return this.$createElement('div', {
@@ -3295,12 +3296,6 @@ var Overlay = {
     data.staticClass = data.staticClass ? ("overlay " + (data.staticClass)) : 'overlay'
     if (props.value) { data.staticClass += ' overlay--active' }
 
-    if (props.value) {
-      document.documentElement.style.overflow = 'hidden'
-    } else {
-      document.documentElement.style.overflow = null
-    }
-
     return h('div', data, children)
   }
 }
@@ -3573,12 +3568,14 @@ var Overlay = {
 
         var hour = value.getHours()
         var minute = value.getMinutes()
+        var period = ''
 
         if (!this.is24hr) {
           hour = hour > 12 ? hour - 12 : hour
+          period = this.period
         }
 
-        return (hour + ":" + minute + (!this.is24hr ? this.period : ''))
+        return (hour + ":" + minute + period)
       },
       set: function set (val) {
         return this.$emit('input', val)
@@ -3595,10 +3592,10 @@ var Overlay = {
         if (!this.is24hr) {
           val = val > 12 ? val - 12 : val < 1 ? 12 : val
         } else {
-          val = val > 23 ? 0 : val
+          val = val < 10 ? ("0" + val) : val > 23 ? '00' : val
         }
 
-        this.inputTime = val + ":" + (this.minute) + (this.period)
+        this.inputTime = val + ":" + (this.minute) + (!this.is24hr ? this.period : '')
       }
     },
     minute: {
@@ -3609,8 +3606,13 @@ var Overlay = {
       },
       set: function set (val) {
         val = val < 10 ? ("0" + (parseInt(val))) : val > 59 ? '00' : val
+        var hour = this.hour
 
-        this.inputTime = (this.hour) + ":" + val + (this.period)
+        if (this.is24hr && hour < 10) {
+          hour = "0" + hour
+        }
+
+        this.inputTime = hour + ":" + val + (!this.is24hr ? this.period : '')
       }
     },
     clockHand: function clockHand () {
@@ -7394,7 +7396,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__ = __webpack_require__(1);
 //
 //
 //
@@ -7432,13 +7433,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //
 //
 //
-
-
 
 /* harmony default export */ exports["default"] = {
   name: 'pagination',
-
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__["a" /* default */]],
 
   props: {
     circle: Boolean,
@@ -8165,7 +8162,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     return _c('li', [(!isNaN(n)) ? _c('a', {
       staticClass: "pagination__item",
       class: {
-        'pagination__item--active': n === _vm.isActive
+        'pagination__item--active': n === _vm.value
       },
       attrs: {
         "href": "#!"
