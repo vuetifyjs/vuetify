@@ -174,7 +174,8 @@ export default {
   },
 
   mounted () {
-    this.sorting = !this.sorting ? this.headers.find(h => !('sortable' in h) || h.sortable).value : this.sorting
+    const header = this.headers.find(h => !('sortable' in h) || h.sortable)
+    this.sorting = !this.sorting ? header.value : this.sorting
   },
 
   render (h) {
