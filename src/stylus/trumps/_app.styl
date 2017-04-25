@@ -10,25 +10,14 @@ html, body
   overflow-x: hidden
 
   &.top-fixed-toolbar
-    //padding-top: $toolbar-height
 
     header
       z-index: 4
 
   &.top-toolbar
     main
-      //min-height: 'calc(100vh - %s)' % $toolbar-height
-
       > .content
         padding-top: $spacers.three.y
-
-  &.bottom-footer
-    main
-      //min-height: 'calc(100vh - %s)' % $footer-height
-
-  &.bottom-footer&.top-toolbar, &.bottom-footer&.top-fixed-toolbar
-    main
-      //min-height: 'calc(100vh - %s - %s)' % ($toolbar-height $footer-height)
 
   &.left-fixed-sidebar
     header .toolbar
