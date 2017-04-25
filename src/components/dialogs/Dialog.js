@@ -1,19 +1,16 @@
 import Bootable from '../../mixins/bootable'
+import Overlayable from '../../mixins/overlayable'
 import Toggleable from '../../mixins/toggleable'
 
 export default {
   name: 'dialog',
 
-  mixins: [Bootable, Toggleable],
+  mixins: [Bootable, Overlayable, Toggleable],
 
   props: {
     persistent: Boolean,
     fullscreen: Boolean,
     lazy: Boolean,
-    overlay: {
-      type: Boolean,
-      default: true
-    },
     origin: {
       type: String,
       default: 'center center'
@@ -44,6 +41,16 @@ export default {
       return !this.transition
         ? 'transition'
         : this.transition
+    }
+  },
+
+  watch: {
+    isActive (val) {
+      if (val) {
+        !this.fullscreen && !this.hideOverlay && this.genOverlay()
+      } else {
+        this.removeOverlay()
+      }
     }
   },
 
@@ -83,17 +90,13 @@ export default {
       }, [this.$slots.activator]))
     }
 
-    let dialog = h(this.computedTransition, {
+    const dialog = h(this.computedTransition, {
       props: { origin: this.origin }
     }, [h('div', data, [this.$slots.default])])
 
-    if (this.overlay) {
-      dialog = h('v-overlay', {
-        props: { value: this.isActive }
-      }, [dialog])
-    }
-
-    children.push(dialog)
+    children.push(h('div', {
+      'class': 'dialog__content'
+    }, [dialog]))
 
     return h('div', {
       'class': 'dialog__container'

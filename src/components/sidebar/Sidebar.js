@@ -1,9 +1,17 @@
 import Toggleable from '../../mixins/toggleable'
+import Overlayable from '../../mixins/overlayable'
 
 export default {
   name: 'sidebar',
 
-  mixins: [Toggleable],
+  mixins: [Overlayable, Toggleable],
+
+  data () {
+    return {
+      isMobile: false,
+      overlay: null
+    }
+  },
 
   props: {
     absolute: Boolean,
@@ -11,10 +19,12 @@ export default {
       type: Boolean,
       default: true
     },
+    disableRouteWatcher: Boolean,
     drawer: Boolean,
     fixed: Boolean,
-    right: Boolean,
     height: String,
+    light: Boolean,
+    mini: Boolean,
     mobile: {
       type: Boolean,
       default: true
@@ -23,35 +33,39 @@ export default {
       type: Number,
       default: 1024
     },
-    disableRouteWatcher: Boolean
+    right: Boolean
   },
 
   computed: {
     calculatedHeight () {
-      if (this.height) return this.height
-      return this.fixed || this.drawer ? '100vh' : 'auto'
+      return this.height || (this.fixed || this.drawer ? '100vh' : 'auto')
     },
     classes () {
       return {
         'sidebar': true,
-        'sidebar--close': !this.isActive,
-        'sidebar--right': this.right,
-        'sidebar--drawer': this.drawer,
         'sidebar--absolute': this.absolute,
+        'sidebar--close': !this.isActive,
+        'sidebar--dark': !this.light,
+        'sidebar--drawer': this.drawer,
         'sidebar--fixed': this.fixed || this.drawer,
-        'sidebar--fixed-right': this.fixed && this.right,
+        'sidebar--light': this.light,
+        'sidebar--mini': this.mini,
         'sidebar--mobile': this.mobile,
-        'sidebar--open': this.isActive
-      }
-    },
-    styles () {
-      return {
-        height: this.calculatedHeight
+        'sidebar--is-mobile': this.isMobile,
+        'sidebar--open': this.isActive,
+        'sidebar--right': this.right
       }
     }
   },
 
   watch: {
+    isActive () {
+      if (this.isActive && !this.hideOverlay && (this.isMobile || this.drawer)) {
+        this.genOverlay()
+      } else {
+        this.removeOverlay()
+      }
+    },
     '$route' () {
       if (!this.disableRouteWatcher) {
         this.isActive = !this.routeChanged()
@@ -77,13 +91,15 @@ export default {
 
     resize () {
       if (this.mobile && !this.drawer) {
-        this.isActive = window.innerWidth >= this.mobileBreakPoint
+        const isMobile = window.innerWidth <= parseInt(this.mobileBreakPoint)
+        this.isMobile = isMobile
+        this.isActive = !isMobile
       }
     },
 
     routeChanged () {
       return (
-        (window.innerWidth < this.mobileBreakPoint && this.mobile) ||
+        (window.innerWidth < parseInt(this.mobileBreakPoint) && this.mobile) ||
         (this.drawer && this.closeOnClick)
       )
     }
@@ -92,13 +108,11 @@ export default {
   render (h) {
     const data = {
       'class': this.classes,
-      style: this.styles,
-      directives: [
-        {
-          name: 'click-outside',
-          value: this.closeConditional
-        }
-      ]
+      style: { height: this.calculatedHeight },
+      directives: [{
+        name: 'click-outside',
+        value: this.closeConditional
+      }]
     }
 
     return h('aside', data, [this.$slots.default])

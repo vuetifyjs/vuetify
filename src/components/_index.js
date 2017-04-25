@@ -17,7 +17,6 @@ import Icons from './icons/index'
 import Lists from './lists/index'
 import Menu from './menus/index'
 import Toolbar from './toolbar/index'
-import Overlay from './overlay/index'
 import Pagination from './pagination/index'
 import Parallax from './parallax/index'
 import Progress from './progress/index'
@@ -52,7 +51,6 @@ export default Object.assign({},
   Lists,
   Menu,
   Toolbar,
-  Overlay,
   Pagination,
   Parallax,
   Progress,

@@ -1,21 +1,42 @@
 .sidebar
   background-color: $theme.secondary
-  overflow-y: auto
-  padding: 0 0 100px
-  transition: transform .3s $transition.ease-in-out,
-    margin .3s $transition.ease-in-out
-  width: $sidebar-width
   max-width: 100%
+  overflow-y: auto
+  overflow-x: hidden
+  padding: 0 0 100px
+  pointer-events: auto
+  transition: transform .3s $transition.ease-in-out,
+    margin .3s $transition.ease-in-out,
+    width .2s $transition.ease-in-out
+  width: $sidebar-width
   z-index: 3
+  
+  &--mini
+    overflow: hidden
+    width: 88px
+    
+    .list__tile__action, .list__tile__avatar
+      justify-content: center
+    
+    .subheader
+      display: none
 
   &--fixed
+    position: fixed
+  
+  &--absolute
+    position: absolute
+    
+  &--open
+    &.sidebar--drawer, &.sidebar--is-mobile
+      z-index: 5
+
+  &--fixed, &--absolute
     top: 0
     left: 0
-    position: fixed
-    z-index: 6
     elevation(0)
 
-    &-right
+    &.sidebar--right
       right: 0
       left: initial
 
@@ -27,20 +48,18 @@
   &--close
     transform: translateX(-($sidebar-width + 25))
 
-    &.sidebar--fixed-right
+    &.sidebar--right
       transform: translateX($sidebar-width + 25)
 
   &--mobile
     @media $display-breakpoints.sm-and-down
       transform: translateX(-($sidebar-width + 25))
-      z-index: 7
 
-      &.sidebar--fixed-right, &.sidebar--right
+      &.sidebar--right
         transform: translateX($sidebar-width + 25)
 
   &--open, &--open.sidebar--mobile
     transform: translateX(0)
-    width: $sidebar-width
 
   &:not(.sidebar--fixed):not(.sidebar--right)
     @media $display-breakpoints.sm-and-down
@@ -57,21 +76,15 @@
 
       &.sidebar--open
         transform: translateX(-300px)
+        
+  &--dark
+    sidebar(#fff)
+    
+  &--light
+    sidebar(rgba(#000, .87))
 
   .list__tile
-    color: $sidebar-item-color
-    transition: $primary-transition
-    position: relative
-
-    .list__tile__avatar, .list__tile__action, .icon
-      color: $sidebar-item-color
-
-    &:hover:not(&--active)
-      background-color: $sidebar-item-hover-background-color
-      color: $sidebar-item-active-color
-
-    &:after
-      background: $material-twelve-percent-light
+    transition: none
 
     &--active
       .list__tile__title
@@ -83,13 +96,12 @@
 
   .list--group
     &__header--active
-      &:first-child
-        .list__tile__action:first-child
-          .icon
-            color: $theme.primary
+      &:after
+        background: transparent
 
-    &:after
-      background: $material-twelve-percent-light
+      .list__tile__action:first-of-type
+        .icon
+          color: $theme.primary
 
   .list--group__container
     .list__tile--active
