@@ -11,11 +11,13 @@
   position: relative
   margin: $alert-margin
   
-  &__icon, &__dismissible
+  &__icon.icon, &__dismissible .icon
     align-self: center
-    margin-right: $alert-padding
-    font-size: $alert-icon-font-size
     color: $alert-icon-color
+    font-size: $alert-icon-font-size
+    
+  &__icon
+    margin-right: $alert-padding
     
   &__dismissible
     margin-right: 0

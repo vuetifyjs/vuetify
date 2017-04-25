@@ -48,7 +48,8 @@ export default {
 
     if (!this.hideIcon) {
       children.unshift(h('v-icon', {
-        'class': 'alert__icon'
+        'class': 'alert__icon',
+        props: { large: true }
       }, this.mdIcon))
     }
 
@@ -60,7 +61,7 @@ export default {
           click: () => (this.$emit('input', false))
         }
       }, [
-        h('v-icon', { props: { right: true }}, 'cancel')
+        h('v-icon', { props: { right: true, large: true }}, 'cancel')
       ]))
     }
 
