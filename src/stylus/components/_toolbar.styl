@@ -12,10 +12,10 @@
 
   ul
     list-style: none
-    
+
   li
     height: 100%
-    
+
   i
     font-size: 24px
 
@@ -24,28 +24,23 @@
 
   .btn:not(.toolbar__side-icon)
     margin: 0 6px
-    
+
     &:first-child
       margin-left: -6px
-      
+
     &:last-child
       margin-right: 0
-
-  &--fixed
-    position: fixed
-    top: 0
-    left: 0
 
   &__sub
     flex: 1 0 100%
     padding: 24px 0 24px 72px
-    
+
   &__side-icon
     display: inline-flex
     align-items: center
     position: relative
     margin-left: 10px
-  
+
   &__logo
     color: #fff
     font-size: 3rem
@@ -54,7 +49,7 @@
     padding: 0
     display: flex
     align-items: center
-    
+
   &__title
     color: #fff
     font-size: $headings.h6.size
@@ -63,10 +58,10 @@
     white-space: nowrap
     overflow: hidden
     text-overflow: ellipsis
-    
+
     &:first-child
       padding-left: 2px
-  
+
   &__items
     list-style-type: none
     padding: 0
@@ -79,7 +74,7 @@
     > li
       display: flex
       align-items: center
-      
+
   &__item
     align-items: center
     color: #fff
@@ -90,34 +85,34 @@
     position: relative
     height: 100%
     white-space: nowrap
-    
+
     i
       font-size: 2rem
-    
+
     &:hover, &--active
       background: rgba(#000,0.1)
-      
+
     &--disabled
       opacity: .5
       pointer-events: none
-      
+
   .input-group
     margin: 0 0 0 16px
     flex: 1
-      
+
     &--dark
       .icon
         color: #fff
-    
+
     &--light
       .icon
         color: #000
-    
+
     &--dark.input-group--focused.input-group--prepend-icon,
     &--dark.input-group--focused.input-group--append-icon
       .icon
         color: #fff
-    
+
     &--light.input-group--focused.input-group--prepend-icon,
     &--light.input-group--focused.input-group--append-icon
       .icon

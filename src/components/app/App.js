@@ -13,10 +13,14 @@ export default {
     rightSidebar: Boolean,
     topFixedToolbar: Boolean,
     topToolbar: Boolean,
-    sidebarUnderToolbar: Boolean
+    sidebarUnderToolbar: Boolean,
+    column: {
+      type: Boolean,
+      default: true
+    }
   },
 
-  render (h, { props, data, children }) {
+  render (h, {props, data, children}) {
     data.staticClass = data.staticClass ? `with ${data.staticClass} ` : 'with '
 
     const classes = {
@@ -27,14 +31,17 @@ export default {
       'right-sidebar': props.rightSidebar,
       'top-fixed-toolbar': props.topFixedToolbar,
       'top-toolbar': props.topToolbar,
-      'sidebar-under-toolbar': props.sidebarUnderToolbar
+      'sidebar-under-toolbar': props.sidebarUnderToolbar,
+      'layout-column': props.column
     }
 
     data.staticClass += Object.keys(classes).filter(k => classes[k]).join(' ')
 
-    data.attrs = { 'data-app': true }
-    data.domProps = { id: props.id }
+    data.attrs = {'data-app': true}
+    data.domProps = {id: props.id}
 
     return h('div', data, children)
+
+    //>>>>>>> dev
   }
 }
