@@ -30,8 +30,8 @@ export default {
       default: true
     },
     mobileBreakPoint: {
-      type: [Number, String],
-      default: 992
+      type: Number,
+      default: 1024
     },
     right: Boolean
   },

@@ -52,7 +52,7 @@
       transform: translateX($sidebar-width + 25)
 
   &--mobile
-    @media screen and (max-width: $grid-breakpoints.lg)
+    @media $display-breakpoints.sm-and-down
       transform: translateX(-($sidebar-width + 25))
 
       &.sidebar--right
@@ -62,7 +62,7 @@
     transform: translateX(0)
 
   &:not(.sidebar--fixed):not(.sidebar--right)
-    @media screen and (max-width: $grid-breakpoints.lg)
+    @media $display-breakpoints.sm-and-down
       margin-left: -300px
       transform: none
 
@@ -70,7 +70,7 @@
         transform: translateX(300px)
 
   &:not(.sidebar--fixed).sidebar--right
-    @media screen and (max-width: $grid-breakpoints.lg)
+    @media $display-breakpoints.sm-and-down
       margin-right: -300px
       transform: none
 
