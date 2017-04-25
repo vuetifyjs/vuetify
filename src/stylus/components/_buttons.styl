@@ -58,13 +58,9 @@
 
 /** Types */
 .btn
-  &--default
-    color: $color-root
-
   &--flat
     background-color: transparent !important
     box-shadow: none !important
-    color: $color-root
 
     &.btn--light
       &:hover:after
@@ -74,8 +70,6 @@
         color: $button-light-disabled-color
 
     &.btn--dark
-      color: $button-color
-
       &:hover:after
         background-color: $button-dark-overlay
 
@@ -155,6 +149,8 @@
 /** Themes */
 .btn
   &--light
+    color: $color-light
+
     &:hover:after
       background-color: $button-light-overlay
 
@@ -166,6 +162,8 @@
       background-color: $button-light-overlay !important
 
   &--dark
+    color: $color-dark
+
     &:hover:after
       background-color: $button-dark-overlay
 

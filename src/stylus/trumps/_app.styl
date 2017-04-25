@@ -8,7 +8,15 @@ html, body
   //min-height: 100vh
   -webkit-backface-visibility: hidden
   overflow-x: hidden
-
+  
+  &.dark
+    background: $body-bg-dark
+    color: $color-dark
+    
+  &.light
+    background: $body-bg-light
+    color: $color-light
+    
   &.top-fixed-toolbar
     header
       z-index: 4

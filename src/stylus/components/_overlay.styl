@@ -1,6 +1,6 @@
 .overlay
-  pointer-events: none
   position: fixed
+  pointer-events: none
   top: 0
   left: 0
   right: 0
@@ -19,12 +19,13 @@
     left: 0
     opacity: 0
     position: absolute
-    pointer-events: none
     right: 0
     top: 0
     transition: $primary-transition
     width: 100%
 
   &--active
+    pointer-events: auto
+
     &:before
       opacity: .46
