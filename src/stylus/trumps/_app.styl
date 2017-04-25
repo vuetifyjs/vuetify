@@ -5,7 +5,7 @@ html, body
   position: relative
 
 .with
-  min-height: 100vh
+  //min-height: 100vh
   -webkit-backface-visibility: hidden
   overflow-x: hidden
 
@@ -18,6 +18,18 @@ html, body
     main
       > .content
         padding-top: $spacers.three.y
+
+  &.bottom-footer
+    main
+      > .content
+        > .container
+          min-height: 'calc(100vh - %s - %s)' % ($footer-height 42px)
+
+  &.bottom-footer&.top-toolbar, &.bottom-footer&.top-fixed-toolbar
+    main
+      > .content
+        > .container
+          min-height: 'calc(100vh - %s - %s - %s)' % ($toolbar-height $footer-height 42px)
 
   &.left-fixed-sidebar
     header .toolbar
