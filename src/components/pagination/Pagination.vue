@@ -10,12 +10,12 @@
         v-bind:class="{ 'pagination__navigation--disabled': value === 1 }"
         v-on:click.prevent="$emit('input', value - 1)"
       )
-        v-icon chevron_left
+        v-icon(light) chevron_left
     li(v-for="n in items")
       a(
         href="#!"
         class="pagination__item"
-        v-bind:class="{ 'pagination__item--active': n === isActive }"
+        v-bind:class="{ 'pagination__item--active': n === value }"
         v-if="!isNaN(n)"
         v-on:click.prevent="$emit('input', n)"
         v-text="n"
@@ -32,16 +32,12 @@
         v-bind:class="{ 'pagination__navigation--disabled': value === length }"
         v-on:click.prevent="$emit('input', value + 1)"
       )
-        v-icon chevron_right
+        v-icon(light) chevron_right
 </template>
 
 <script>
-  import Toggleable from '../../mixins/toggleable'
-
   export default {
     name: 'pagination',
-
-    mixins: [Toggleable],
 
     props: {
       circle: Boolean,

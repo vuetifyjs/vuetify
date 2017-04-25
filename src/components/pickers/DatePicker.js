@@ -32,7 +32,6 @@ export default {
       type: Array,
       default: () => ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
     },
-    landscape: Boolean,
     months: {
       type: Array,
       default: () => [
@@ -49,8 +48,7 @@ export default {
         'November',
         'December'
       ]
-    },
-    scrollable: Boolean
+    }
   },
 
   computed: {
@@ -108,10 +106,11 @@ export default {
 
   methods: {
     save () {
-      if (!this.originalDate) {
-        this.$emit('input', this.dateFormat(this.inputDate))
-      } else {
+      if (this.originalDate) {
         this.originalDate = this.value
+      } else {
+        this.inputDate = this.inputDate
+        this.originalDate = this.inputDate
       }
 
       if (this.$parent && this.$parent.isActive) this.$parent.isActive = false

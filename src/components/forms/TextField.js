@@ -111,7 +111,7 @@ export default {
   mounted () {
     this.$vuetify.load(() => {
       this.multiLine && this.autoGrow && this.calculateInputHeight()
-      this.autofocus && this.$refs.input.focus()
+      this.autofocus && this.focus()
     })
   },
 
@@ -131,6 +131,7 @@ export default {
     },
     focus () {
       this.focused = true
+      this.$refs.input.focus()
     },
     genCounter () {
       return this.$createElement('div', {

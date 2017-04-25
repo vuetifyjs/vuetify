@@ -55,7 +55,7 @@ export default {
         'btn--floating': this.floating,
         'btn--icon': this.icon,
         'btn--large': this.large,
-        'btn--light': this.light && !this.dark,
+        'btn--light': !this.dark,
         'btn--loader': this.loading,
         'btn--outline': this.outline,
         'btn--raised': this.raised,

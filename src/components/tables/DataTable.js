@@ -173,6 +173,11 @@ export default {
     }
   },
 
+  mounted () {
+    const header = this.headers.find(h => !('sortable' in h) || h.sortable)
+    this.sorting = !this.sorting ? header.value : this.sorting
+  },
+
   render (h) {
     return h('v-table-overflow', {}, [
       h('table', {

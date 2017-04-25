@@ -10,6 +10,7 @@ export default {
     dark: Boolean,
     landscape: Boolean,
     noTitle: Boolean,
+    scrollable: Boolean,
     value: {
       required: true
     }

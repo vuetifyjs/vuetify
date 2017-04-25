@@ -12,7 +12,7 @@ export default {
           },
           mousemove: this.onDragMove,
           touchstart: this.onMouseDown,
-          touchstop: this.onMouseUp,
+          touchcancel: this.onMouseUp,
           touchmove: this.onDragMove
         },
         key: this.selectingHour ? 'hour' : 'minute',

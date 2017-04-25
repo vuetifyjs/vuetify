@@ -1,7 +1,28 @@
 .dialog
+  elevation(24)
+  background: #fff
+  border-radius: $card-border-radius
   margin: 24px 40px
+  overflow-y: auto
+  pointer-events: auto
   transition: .3s ease-in-out
-  z-index 1001
+  
+  &__content
+    align-items: center
+    display: flex
+    height: 100%
+    justify-content: center
+    left: 0
+    pointer-events: none
+    position: fixed
+    top: 0
+    transition: .3s ease-in-out
+    width: 100%
+    z-index 5
+  
+  &:not(.dialog--fullscreen)
+    max-width: 90%
+    max-height: 90%
   
   &__container
     display: inline-block
@@ -9,19 +30,18 @@
 
   >
     .card
-      elevation(24)
-
+    
       & ^[2..-1]__title
-        padding 24px 24px 0
+        padding 24px 24px 20px
 
       & ^[2..-1]__text
-        padding 20px 24px 24px
+        padding 0 24px 24px
 
       & ^[2..-1]__row--actions
-        border initial
         padding: 8px 0
 
         .btn
+          min-width: 64px
           margin-right: 8px
 
   &--fullscreen
@@ -29,12 +49,16 @@
     width 100%
     height 100%
     position fixed
+    overflow-y: auto
     top: 0
     left 0
+    padding-top: 56px
 
     .toolbar
       height 56px           // TODO: height with two lines of text: 80dp
       padding 0 !important
+      position: fixed
+      top: 0
 
       &__title
         font-size 20px      // TODO: convert from 20sp
@@ -55,3 +79,7 @@
       min-width 100%
       margin 0 !important
       padding 0 !important
+      
+  &--scrollable
+    .card__row:not(.card__row--actions)
+      overflow-y: auto

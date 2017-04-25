@@ -4,8 +4,13 @@
   min-width: 0
   min-height: 0
   overflow-y: auto
+  padding: $grid-gutter
+  
   &.no-scroll-y
     overflow-y: hidden
+  
+  @media $display-breakpoints.xs-only
+    padding: $grid-gutter-mobile
 
 .container, .container-fluid
   margin-right: auto
@@ -13,9 +18,6 @@
   flex-basis: 100%
 
 .container
-  padding-left: $grid-outer-margin
-  padding-right: $grid-outer-margin
-
   for size, width in $container-max-widths
     @media only screen and (min-width: width)
       max-width: width
@@ -98,6 +100,7 @@
 
         .col.order-{size}{n}
           order: n
+
 .col--spacer, .spacer
   flex-grow: 1
 

@@ -10,7 +10,6 @@ html, body
   overflow-x: hidden
 
   &.top-fixed-toolbar
-
     header
       z-index: 4
 
@@ -35,8 +34,8 @@ html, body
     header .toolbar
       padding-left: $sidebar-width + $toolbar-padding-x
       transition: $primary-transition
-
-      @media screen and (max-width: ($grid-breakpoints.lg - 1))
+  
+      @media $display-breakpoints.sm-and-down
         padding-left: $toolbar-padding-x
 
     main,
@@ -44,7 +43,7 @@ html, body
       padding-left: $sidebar-width
       transition: $primary-transition
 
-      @media screen and (max-width: ($grid-breakpoints.lg - 1))
+      @media $display-breakpoints.sm-and-down
         padding-left: 0
 
   &.left-sidebar
@@ -61,16 +60,18 @@ html, body
       padding-right: $sidebar-width
       transition: $primary-transition
 
-      @media screen and (max-width: ($grid-breakpoints.lg - 1))
+      @media $display-breakpoints.sm-and-down
         padding-right: 0
 
   &.sidebar-under-toolbar
     .sidebar
-      padding-top: $toolbar-height
-      z-index: 5
+      z-index: 1
 
     &.left-fixed-sidebar,
     &.right-fixed-sidebar
+      .sidebar
+        padding-top: $toolbar-height
+
       .toolbar
         padding-left: inherit
 

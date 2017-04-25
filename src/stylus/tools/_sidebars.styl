@@ -1,0 +1,13 @@
+sidebar(color)
+  .list__tile
+    color: color
+    
+  .list--group__header--active
+    .list__tile
+      &:after
+        background: rgba(color, .12)
+      
+    + .list--group
+      &:after
+        background: rgba(color, .12)
+  
