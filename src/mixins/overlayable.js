@@ -7,6 +7,10 @@ export default {
     }
   },
 
+  props: {
+    hideOverlay: Boolean
+  },
+
   methods: {
     genOverlay () {
       const overlay = document.createElement('div')

@@ -47,7 +47,7 @@ export default {
   watch: {
     isActive (val) {
       if (val) {
-        !this.fullscreen && this.genOverlay()
+        !this.fullscreen && !this.hideOverlay && this.genOverlay()
       } else {
         this.removeOverlay()
       }

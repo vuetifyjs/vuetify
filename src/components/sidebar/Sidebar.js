@@ -60,7 +60,7 @@ export default {
 
   watch: {
     isActive () {
-      if (this.isActive && (this.isMobile || this.drawer)) {
+      if (this.isActive && !this.hideOverlay && (this.isMobile || this.drawer)) {
         this.genOverlay()
       } else {
         this.removeOverlay()
