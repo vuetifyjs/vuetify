@@ -6,6 +6,7 @@ export default {
   mixins: [Toggleable],
 
   props: {
+    absolute: Boolean,
     closeOnClick: {
       type: Boolean,
       default: true
@@ -27,7 +28,8 @@ export default {
 
   computed: {
     calculatedHeight () {
-      return this.height || this.fixed || this.drawer ? '100vh' : 'auto'
+      if (this.height) return this.height
+      return this.fixed || this.drawer ? '100vh' : 'auto'
     },
     classes () {
       return {
@@ -35,6 +37,7 @@ export default {
         'sidebar--close': !this.isActive,
         'sidebar--right': this.right,
         'sidebar--drawer': this.drawer,
+        'sidebar--absolute': this.absolute,
         'sidebar--fixed': this.fixed || this.drawer,
         'sidebar--fixed-right': this.fixed && this.right,
         'sidebar--mobile': this.mobile,
@@ -73,11 +76,9 @@ export default {
     },
 
     resize () {
-      // const rootAppClassNames = document.querySelectorAll('[data-app]')[0].className;
-      // console.log(rootAppClassNames)
-      // if (this.mobile && !this.drawer) {
-      //   this.isActive = window.innerWidth >= this.mobileBreakPoint
-      // }
+      if (this.mobile && !this.drawer) {
+        this.isActive = window.innerWidth >= this.mobileBreakPoint
+      }
     },
 
     routeChanged () {

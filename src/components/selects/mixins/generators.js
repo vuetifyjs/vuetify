@@ -5,17 +5,18 @@ export default {
         ref: 'menu',
         props: {
           auto: this.auto,
-          closeOnClick: !this.multiple,
+          closeOnContentClick: !this.multiple,
           disabled: this.disabled,
           offsetY: this.autocomplete || this.offset,
           value: this.menuActive,
           nudgeBottom: 2,
-          nudgeTop: -16,
+          nudgeTop: -11,
           nudgeYAuto: 2,
           nudgeXAuto: this.multiple ? -40 : -16,
           nudgeWidth: 25,
           maxHeight: this.maxHeight,
-          activator: this.$refs.activator
+          activator: this.$refs.activator,
+          top: true
         },
         on: {
           input: val => (this.menuActive = val)

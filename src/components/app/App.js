@@ -2,47 +2,46 @@ export default {
   functional: true,
 
   props: {
+    footer: Boolean,
+    leftFixedSidebar: Boolean,
+    leftSidebar: Boolean,
     id: {
       type: String,
       default: 'app'
     },
-    leftSidebar: Boolean,
+    rightFixedSidebar: Boolean,
     rightSidebar: Boolean,
+    topFixedToolbar: Boolean,
+    topToolbar: Boolean,
     sidebarUnderToolbar: Boolean,
-    toolbarInset: Boolean,
-    sidebarTemporary: Boolean,
-    sidebarBreakpoint: {
-      type: String,
-      default: 'lg'
-    },
-    sidebarPersistent: Boolean,
-    sidebarMini: Boolean,
     column: {
       type: Boolean,
       default: true
     }
   },
 
-  render (h, {props, children}) {
-    return h('div', {
-      'class': {
-        'with': props.leftSidebar || props.rightSidebar,
-        'left-sidebar': props.leftSidebar,
-        'right-sidebar': props.rightSidebar,
-        'sidebar-under-toolbar': props.sidebarUnderToolbar,
-        'layout-column': props.column,
-        'sidebar-temporary': props.sidebarTemporary,
-        'sidebar-persistent': props.sidebarPersistent,
-        [`sidebar-break-${props.sidebarBreakpoint}`]: !props.sidebarPersistent && props.sidebarBreakpoint,
-        'sidebar-mini': props.sidebarMini,
-        'toolbar-inset': props.toolbarInset
-      },
-      attrs: {
-        'data-app': true
-      },
-      domProps: {
-        id: props.id
-      }
-    }, children)
+  render (h, {props, data, children}) {
+    data.staticClass = data.staticClass ? `with ${data.staticClass} ` : 'with '
+
+    const classes = {
+      'left-fixed-sidebar': props.leftFixedSidebar,
+      'left-sidebar': props.leftSidebar,
+      'bottom-footer': props.footer,
+      'right-fixed-sidebar': props.rightFixedSidebar,
+      'right-sidebar': props.rightSidebar,
+      'top-fixed-toolbar': props.topFixedToolbar,
+      'top-toolbar': props.topToolbar,
+      'sidebar-under-toolbar': props.sidebarUnderToolbar,
+      'layout-column': props.column
+    }
+
+    data.staticClass += Object.keys(classes).filter(k => classes[k]).join(' ')
+
+    data.attrs = {'data-app': true}
+    data.domProps = {id: props.id}
+
+    return h('div', data, children)
+
+    //>>>>>>> dev
   }
 }

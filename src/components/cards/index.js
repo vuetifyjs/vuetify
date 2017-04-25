@@ -1,5 +1,5 @@
 import Card from './Card'
-import CardRow from './CardRow.vue'
+import CardRow from './CardRow'
 import {
   createSimpleFunctional
 } from '../../util/helpers'

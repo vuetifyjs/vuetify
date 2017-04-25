@@ -48,12 +48,12 @@ export default {
         return this.value
       },
       set (val) {
+        val = val < this.min ? this.min : val > this.max ? this.max : val
         if (Math.ceil(val) !== Math.ceil(this.lazyValue)) {
           this.inputWidth = this.calculateWidth(val)
         }
 
         let value = parseInt(val)
-        value = value < this.min ? this.min : value > this.max ? this.max : value
         this.lazyValue = value
 
         if (value !== this.value) {

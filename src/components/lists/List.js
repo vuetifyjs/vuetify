@@ -29,19 +29,11 @@ export default {
 
   watch: {
     uid () {
-      this.groups.forEach(i => i.toggle(this.uid))
+      this.$children.filter(i => i.$options._componentTag === 'v-list-group').forEach(i => i.toggle(this.uid))
     }
   },
 
-  mounted () {
-    this.init()
-  },
-
   methods: {
-    init () {
-      this.groups = this.$children.filter(i => i.$options._componentTag === 'v-list-group')
-    },
-
     listClick (uid, force) {
       if (force) {
         this.uid = uid

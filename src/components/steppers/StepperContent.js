@@ -96,10 +96,6 @@ export default {
     const wrapper = h('div', wrapperData, [this.$slots.default])
     const content = h('div', contentData, [wrapper])
 
-    if (this.isVertical) {
-      return content
-    }
-
     return h(this.computedTransition, {}, [content])
   }
 }

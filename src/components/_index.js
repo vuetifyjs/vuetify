@@ -6,15 +6,16 @@ import Buttons from './buttons/index'
 import Cards from './cards/index'
 import Carousel from './carousel/index'
 import Chips from './chips/index'
-import ExpansionPanel from './expansion-panel/index'
+import DateTime from './pickers/index'
+import Dialogs from './dialogs/index'
 import Dividers from './dividers/index'
+import ExpansionPanel from './expansion-panel/index'
 import Footer from './footer/index'
 import Forms from './forms/index'
 import Grid from './grid/index'
 import Icons from './icons/index'
 import Lists from './lists/index'
 import Menu from './menus/index'
-import Modal from './modal/index'
 import Toolbar from './toolbar/index'
 import Overlay from './overlay/index'
 import Pagination from './pagination/index'
@@ -29,6 +30,7 @@ import Tables from './tables/index'
 import Tabs from './tabs/index'
 import Transitions from './transitions/_index'
 import Snackbar from './snackbars/index'
+import BottomNav from './bottom-nav/index'
 
 export default Object.assign({},
   Alerts,
@@ -39,6 +41,8 @@ export default Object.assign({},
   Cards,
   Carousel,
   Chips,
+  DateTime,
+  Dialogs,
   Dividers,
   ExpansionPanel,
   Footer,
@@ -47,7 +51,6 @@ export default Object.assign({},
   Icons,
   Lists,
   Menu,
-  Modal,
   Toolbar,
   Overlay,
   Pagination,
@@ -61,5 +64,6 @@ export default Object.assign({},
   Tables,
   Tabs,
   Transitions,
-  Snackbar
+  Snackbar,
+  BottomNav
 )

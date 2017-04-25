@@ -14,6 +14,7 @@ export default {
     dark: Boolean,
     disabled: Boolean,
     hint: String,
+    hideDetails: Boolean,
     persistentHint: Boolean,
     label: String,
     light: {
@@ -51,7 +52,8 @@ export default {
         'input-group--error': this.hasError || this.errors.length > 0,
         'input-group--append-icon': this.appendIcon,
         'input-group--prepend-icon': this.prependIcon,
-        'input-group--required': this.required
+        'input-group--required': this.required,
+        'input-group--hide-details': this.hideDetails
       }, this.classes)
     },
     isDirty () {
@@ -78,6 +80,12 @@ export default {
     }
   },
 
+  watch: {
+    rules () {
+      this.validate()
+    }
+  },
+
   mounted () {
     this.validate()
   },
@@ -87,9 +95,6 @@ export default {
       return this.$createElement('label', {}, this.label)
     },
     toggle () {},
-    isDirty () {
-      return this.inputValue
-    },
     genMessages () {
       let messages = []
 
@@ -135,18 +140,20 @@ export default {
       )
     },
     genIcon (type) {
-      const icon = this[`${type}IconAlt`] || this[`${type}Icon`]
-      const callback = this[`${type}IconCb`]
-      const callbackPrivate = this[`${type}IconCbPrivate`]
+      const icon = this[`${type}Icon`]
+      const cb = this[`${type}IconCb`]
+      const hasCallback = typeof cb === 'function'
 
       return this.$createElement(
         'v-icon',
         {
-          'class': 'input-group__' + type + '-icon',
+          'class': {
+            [`input-group__${type}-icon`]: true,
+            'input-group__icon-cb': hasCallback
+          },
           'nativeOn': {
             'click': e => {
-              if (typeof callbackPrivate === 'function') callbackPrivate(e)
-              if (typeof callback === 'function') callback(e)
+              hasCallback && cb(e)
             }
           }
         },
@@ -164,10 +171,13 @@ export default {
           tabindex: this.tabindex
         },
         on: {
-          focus: () => (this.tabFocused = true),
           blur: () => (this.tabFocused = false),
           click: () => (this.tabFocused = false),
           keyup: e => {
+            if ([9, 16].includes(e.keyCode)) {
+              this.tabFocused = true
+            }
+
             if (e.keyCode === 13) {
               this.toggle()
             }
@@ -196,10 +206,7 @@ export default {
       )
 
       detailsChildren.push(this.genMessages())
-
-      if (this.counter) {
-        detailsChildren.push(this.genCounter())
-      }
+      this.counter && detailsChildren.push(this.genCounter())
 
       children.push(
         this.$createElement('div', {

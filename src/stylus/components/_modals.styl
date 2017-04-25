@@ -7,12 +7,11 @@
   margin: auto
   z-index: 1001
   transition: .3s ease-in-out
-  max-height: 55%
   overflow-x: hidden
   overflow-y: auto
 
-  @extend .z-depth-3
-  
+  elevation(8)
+
   &--bottom
     top: initial !important
     bottom: 0
@@ -30,8 +29,9 @@
       margin: 0
 
   &__container
+    display: inline-block;
     position: relative
-    display: inline-block
+    vertical-align: middle;
     
   &__activator
     display: inline-block

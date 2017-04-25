@@ -32,6 +32,12 @@ export default {
     }
   },
 
+  watch: {
+    indeterminate (val) {
+      this.inputDeterminate = val
+    }
+  },
+
   methods: {
     genLabel () {
       return this.$createElement('label', { on: { click: this.toggle }}, this.label)

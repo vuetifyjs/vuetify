@@ -24,6 +24,7 @@ export default {
     },
     auto: Boolean,
     autocomplete: Boolean,
+    bottom: Boolean,
     chips: Boolean,
     close: Boolean,
     debounce: {
@@ -48,9 +49,10 @@ export default {
       default: 300
     },
     multiple: Boolean,
-    singleLine: Boolean,
     multiLine: Boolean,
-    offset: Boolean
+    offset: Boolean,
+    singleLine: Boolean,
+    top: Boolean
   },
 
   computed: {
@@ -157,13 +159,11 @@ export default {
       }
 
       if (this.multiple) {
+        const inputValue = this.inputValue.slice()
         const i = this.inputValue.findIndex(i => this.getValue(i) === this.getValue(item))
 
-        if (i !== -1) {
-          this.inputValue.splice(i, 1)
-        } else {
-          this.inputValue.push(item)
-        }
+        i !== -1 && inputValue.splice(i, 1) || inputValue.push(item)
+        this.inputValue = inputValue
       }
 
       if (this.autocomplete) {
@@ -176,6 +176,11 @@ export default {
   },
 
   render (h) {
-    return this.genInputGroup([this.genSelectionsAndSearch(), this.genMenu()])
+    return this.genInputGroup([
+      this.genSelectionsAndSearch(),
+      this.genMenu()
+    ], {
+      ref: 'activator'
+    })
   }
 }

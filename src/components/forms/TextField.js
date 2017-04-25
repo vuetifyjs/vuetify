@@ -68,6 +68,7 @@ export default {
     autoGrow: Boolean,
     counter: Boolean,
     fullWidth: Boolean,
+    maxlength: [Number, String],
     min: {
       type: [Number, String],
       default: 0
@@ -83,6 +84,7 @@ export default {
       default: 'text'
     },
     name: String,
+    readonly: Boolean,
     rows: {
       default: 5
     }
@@ -90,11 +92,13 @@ export default {
 
   watch: {
     focused () {
-      this.$emit('focused', this.focused)
       this.hasFocused = true
 
       if (!this.focused) {
+        this.$emit('blur')
         this.$emit('change', this.lazyValue)
+      } else {
+        this.$emit('focus')
       }
     },
     value () {
@@ -113,15 +117,20 @@ export default {
 
   methods: {
     calculateInputHeight () {
-      this.inputHeight = this.$refs.input.scrollHeight
+      const height = this.$refs.input.scrollHeight
+      const minHeight = this.rows * 24
+      this.inputHeight = height < minHeight ? minHeight : height
     },
     onInput (e) {
       this.inputValue = e.target.value
-      this.calculateInputHeight()
+      this.multiLine && this.autoGrow && this.calculateInputHeight()
     },
     blur () {
       this.validate()
       this.$nextTick(() => (this.focused = false))
+    },
+    focus () {
+      this.focused = true
     },
     genCounter () {
       return this.$createElement('div', {
@@ -141,25 +150,24 @@ export default {
         domProps: {
           disabled: this.disabled,
           required: this.required,
-          value: this.lazyValue
+          value: this.lazyValue,
+          autofucus: this.autofocus
         },
         attrs: {
-          tabindex: this.tabindex
+          tabindex: this.tabindex,
+          readonly: this.readonly
         },
         on: {
           blur: this.blur,
           input: this.onInput,
-          focus: () => (this.focused = true)
+          focus: this.focus
         },
         ref: 'input'
       }
 
       if (this.autocomplete) inputData.domProps.autocomplete = true
-
-      // add only if set
-      if (this.name) {
-        inputData.attrs = { name: this.name }
-      }
+      if (this.name) inputData.attrs = { name: this.name }
+      if (this.maxlength) inputData.attrs.maxlength = this.maxlength
 
       if (this.multiLine) {
         inputData.domProps.rows = this.rows
@@ -172,7 +180,6 @@ export default {
     counterIsValid: function counterIsValid () {
       const val = (this.inputValue && this.inputValue.toString() || '')
       return (!this.counter ||
-        !this.inputValue.toString() ||
         (val.length >= this.min && val.length <= this.max)
       )
     },

@@ -1,0 +1,70 @@
+.datatable
+  thead
+    th.column.sortable
+      cursor: pointer
+
+      i
+        color: rgba(#000, .38)
+        font-size: 16px
+        vertical-align: sub
+        display: inline-block
+        opacity: 0
+        transition: .3s $transition.swing
+      
+      &:hover
+        color: rgba(#000, .87)
+        
+        i
+          opacity: .6
+
+      &.active
+        transform: none
+        color: rgba(#000, .87)
+
+        i
+          color: rgba(#000, .87)
+          opacity: 1
+        
+        &.asc
+          i
+            transform: rotate(-180deg)
+
+.datatable
+  tfoot
+    .input-group__details
+      display: none
+
+/** Actions */
+.datatable__actions
+  color: rgba(#000, .54)
+  display: flex
+  justify-content: flex-end
+  align-items: center
+  font-size: 12px
+  
+  .btn
+    color: inherit
+    
+    &:last-of-type
+      margin-left: 18px
+
+  &__pagination
+    text-align: center
+    margin: 0 26px 0 32px
+    
+  &__select
+    display: flex
+    align-items: center
+    justify-content: center
+    
+    .input-group--select
+      margin: 13px 0 13px 34px
+      position: initial
+      
+      .input-group__selections__comma
+        color: rgba(#000, .54) !important
+        font-size: 12px
+        padding-top: 6px
+        
+      .input-group__append-icon
+        color: rgba(#000, .54) !important

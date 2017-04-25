@@ -16,7 +16,7 @@ const ripple = {
     container.className = 'ripple__container'
 
     if (value.class) {
-      container.classList.add(value.class)
+      container.className += ` ${value.class}`
     }
 
     const size = el.clientWidth > el.clientHeight ? el.clientWidth : el.clientHeight

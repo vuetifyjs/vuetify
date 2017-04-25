@@ -5,63 +5,73 @@ html, body
   position: relative
 
 .with
+  min-height: 100vh
+  -webkit-backface-visibility: hidden
+  overflow-x: hidden
+
+  &.top-fixed-toolbar
+    //padding-top: $toolbar-height
+
+    header
+      z-index: 4
+
+  &.top-toolbar
+    main
+      //min-height: 'calc(100vh - %s)' % $toolbar-height
+
+      > .content
+        padding-top: $spacers.three.y
+
+  &.bottom-footer
+    main
+      //min-height: 'calc(100vh - %s)' % $footer-height
+
+  &.bottom-footer&.top-toolbar, &.bottom-footer&.top-fixed-toolbar
+    main
+      //min-height: 'calc(100vh - %s - %s)' % ($toolbar-height $footer-height)
+
+  &.left-fixed-sidebar
+    header .toolbar
+      padding-left: $sidebar-width + $toolbar-padding-x
+      transition: $primary-transition
+
+      @media screen and (max-width: ($grid-breakpoints.lg - 1))
+        padding-left: $toolbar-padding-x
+
+    main,
+    footer
+      padding-left: $sidebar-width
+      transition: $primary-transition
+
+      @media screen and (max-width: ($grid-breakpoints.lg - 1))
+        padding-left: 0
 
   &.left-sidebar
-
     main
       background: $theme.secondary
 
     .sidebar
       box-shadow: none
 
-  for size, width in $grid-breakpoints
-    @media screen and (min-width: width)
+  &.right-fixed-sidebar
+    header .toolbar,
+    main,
+    footer
+      padding-right: $sidebar-width
+      transition: $primary-transition
 
-      &.left-sidebar.sidebar-break-{size}
-        header .toolbar
-          padding-left: $sidebar-width + $toolbar-padding-x
-          transition: $primary-transition
-
-        main, footer
-          padding-left: $sidebar-width
-          transition: $primary-transition
-
-        .sidebar
-          width: $sidebar-width
-
-        &.toolbar-inset
-          header .toolbar
-            padding-left: 0
-            margin-left: $sidebar-width
-      &.right-sidebar.sidebar-break-{size}
-        header .toolbar, main, footer
-          padding-right: $sidebar-width
-          transition: $primary-transition
-        .sidebar
-          width: $sidebar-width
-
-
-  //&.right-sidebar
-  //  header .toolbar,
-  //  main,
-  //  footer
-  //    padding-right: $sidebar-width
-  //    transition: $primary-transition
-  //
-  //    @media screen and (max-width: ($grid-breakpoints.lg - 1))
-  //      padding-right: 0
+      @media screen and (max-width: ($grid-breakpoints.lg - 1))
+        padding-right: 0
 
   &.sidebar-under-toolbar
     .sidebar
-      margin-top: $toolbar-height
-      //padding-top: $toolbar-height
-      //z-index: 5
+      padding-top: $toolbar-height
+      z-index: 5
 
-    // todo not sure if still needed so will disable
-    //&.left-fixed-sidebar,
-    //&.right-fixed-sidebar
-    //  .toolbar
-    //    padding-left: inherit
+    &.left-fixed-sidebar,
+    &.right-fixed-sidebar
+      .toolbar
+        padding-left: inherit
 
 .app
   &__bar
