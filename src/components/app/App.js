@@ -2,6 +2,7 @@ export default {
   functional: true,
 
   props: {
+    dark: Boolean,
     footer: Boolean,
     leftFixedSidebar: Boolean,
     leftSidebar: Boolean,
@@ -20,9 +21,11 @@ export default {
     data.staticClass = data.staticClass ? `with ${data.staticClass} ` : 'with '
 
     const classes = {
+      'dark': props.dark,
       'left-fixed-sidebar': props.leftFixedSidebar,
       'left-sidebar': props.leftSidebar,
       'bottom-footer': props.footer,
+      'light': !props.dark,
       'right-fixed-sidebar': props.rightFixedSidebar,
       'right-sidebar': props.rightSidebar,
       'top-fixed-toolbar': props.topFixedToolbar,
