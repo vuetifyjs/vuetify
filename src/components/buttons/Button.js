@@ -19,7 +19,6 @@ export default {
     floating: Boolean,
     icon: Boolean,
     large: Boolean,
-    light: Boolean,
     loading: Boolean,
     outline: Boolean,
     raised: {

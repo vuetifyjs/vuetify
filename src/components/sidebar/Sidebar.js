@@ -49,17 +49,14 @@ export default {
         'sidebar--right': this.right
       }
     },
-    isDrawer () {
-      return this.drawer || this.isMobile
+    showOverlay () {
+      return this.isActive && !this.hideOverlay && (this.drawer || this.isMobile)
     }
   },
 
   watch: {
-    isDrawer () {
-      this.handleOverlay()
-    },
-    isActive () {
-      this.handleOverlay()
+    showOverlay (val) {
+      val && this.genOverlay() || this.removeOverlay()
     },
     '$route' () {
       if (!this.disableRouteWatcher) {
@@ -83,13 +80,6 @@ export default {
     closeConditional () {
       return this.routeChanged()
     },
-    handleOverlay () {
-      if (this.isActive && !this.hideOverlay && this.isDrawer) {
-        this.genOverlay()
-      } else {
-        this.removeOverlay()
-      }
-    },
     resize () {
       this.isMobile = window.innerWidth <= parseInt(this.mobileBreakPoint)
 
@@ -99,8 +89,7 @@ export default {
     },
     routeChanged () {
       return (
-        (window.innerWidth < parseInt(this.mobileBreakPoint) && this.mobile) ||
-        (this.isDrawer && !this.persistent)
+        !this.persistent && (this.drawer || this.isMobile)
       )
     }
   },

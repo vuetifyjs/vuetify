@@ -5,9 +5,6 @@ export default {
     column: Boolean,
     row: Boolean,
     dark: Boolean,
-    toolbar: Boolean,
-    sidebar: Boolean,
-    footer: Boolean,
     id: {
       type: String,
       default: 'app'
@@ -20,9 +17,6 @@ export default {
     const classes = {
       'application--dark': props.dark,
       'application--light': !props.dark,
-      'application--toolbar': props.toolbar,
-      'application--sidebar': props.sidebar,
-      'application--footer': props.footer,
       'application--column': props.column,
       'application--row': props.row
     }
