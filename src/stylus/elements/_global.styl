@@ -1,3 +1,9 @@
+html, body
+  height: 100%
+  min-height: 100%
+  overflow: hidden
+  position: relative
+
 html
   font-size: $font-size-root
   text-rendering: optimizeLegibility
@@ -6,18 +12,13 @@ html
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
 
 body
-  overflow-x: hidden
   font-family: $body-font-family
   line-height: $line-height-root
 
 main
   display: flex
-  flex: 1
   min-width: 0
   overflow: hidden
-
-header
-  width: 100%
 
 a
   color: $theme.primary

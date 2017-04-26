@@ -1,0 +1,13 @@
+.content
+  display: flex
+  flex: 1 1 auto
+  flex-direction: column
+  min-width: 0
+  min-height: 0
+  overflow-y: auto
+  
+  &--no-scroll-y
+    overflow-y: hidden
+  
+  @media $display-breakpoints.xs-only
+    padding: $grid-gutter-mobile

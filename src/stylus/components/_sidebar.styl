@@ -1,5 +1,6 @@
 .sidebar
   background-color: $theme.secondary
+  flex-shrink: 0
   max-width: 100%
   overflow-y: auto
   overflow-x: hidden
@@ -9,73 +10,103 @@
     margin .3s $transition.ease-in-out,
     width .2s $transition.ease-in-out
   width: $sidebar-width
-  z-index: 3
+  z-index: 2
   
-  &--mini
-    overflow: hidden
-    width: 88px
-    
-    .list__tile__action, .list__tile__avatar
-      justify-content: center
-    
-    .subheader
-      display: none
+  &--right
+    order: +1
+  
+  &--close
+    &:not(.sidebar--absolute):not(.sidebar--fixed)
+      &.sidebar--left
+        margin-left: "-%s" % $sidebar-width
 
-  &--fixed
-    position: fixed
+      &.sidebar--right
+        margin-right: "-%s" % $sidebar-width
+        
+    &.sidebar--fixed, &.sidebar--absolute
+      &.sidebar--left
+        transform: "translate3d(-%s, 0, 0)" % ($sidebar-width + 25)
+
+      &.sidebar--right
+        transform: "translate3d(%s, 0, 0)" % ($sidebar-width + 25)
   
   &--absolute
     position: absolute
-    
-  &--open
-    &.sidebar--drawer, &.sidebar--is-mobile
-      z-index: 5
-
-  &--fixed, &--absolute
     top: 0
     left: 0
-    elevation(0)
-
+    
     &.sidebar--right
-      right: 0
       left: initial
+      right: 0
 
   &--drawer
-    flex-basis: 0
-    transform: translateX(-($sidebar-width + 25))
     elevation(16)
 
-  &--close
-    transform: translateX(-($sidebar-width + 25))
+  // &--mini
+  //   overflow: hidden
+  //   width: 88px
+    
+  //   .list__tile__action, .list__tile__avatar
+  //     justify-content: center
+    
+  //   .subheader
+  //     display: none
 
-    &.sidebar--right
-      transform: translateX($sidebar-width + 25)
+  // &--fixed
+  //   // position: fixed
+  
+  // &--absolute
+  //   // position: absolute
+    
+  // &--open
+  //   &.sidebar--drawer, &.sidebar--is-mobile
+  //     z-index: 5
 
-  &--mobile
-    @media $display-breakpoints.sm-and-down
-      transform: translateX(-($sidebar-width + 25))
+  // &--fixed, &--absolute
+  //   top: 0
+  //   left: 0
+  //   elevation(0)
 
-      &.sidebar--right
-        transform: translateX($sidebar-width + 25)
+  //   &.sidebar--right
+  //     right: 0
+  //     left: initial
 
-  &--open, &--open.sidebar--mobile
-    transform: translateX(0)
+  // &--drawer
+  //   flex-basis: 0
+  //   transform: translateX(-($sidebar-width + 25))
+  //   elevation(16)
 
-  &:not(.sidebar--fixed):not(.sidebar--right)
-    @media $display-breakpoints.sm-and-down
-      margin-left: -300px
-      transform: none
+  // &--close
+  //   transform: translateX(-($sidebar-width + 25))
 
-      &.sidebar--open
-        transform: translateX(300px)
+  //   &.sidebar--right
+  //     transform: translateX($sidebar-width + 25)
 
-  &:not(.sidebar--fixed).sidebar--right
-    @media $display-breakpoints.sm-and-down
-      margin-right: -300px
-      transform: none
+  // &--mobile
+  //   @media $display-breakpoints.sm-and-down
+  //     transform: translateX(-($sidebar-width + 25))
 
-      &.sidebar--open
-        transform: translateX(-300px)
+  //     &.sidebar--right
+  //       transform: translateX($sidebar-width + 25)
+
+  // &--open, &--open.sidebar--mobile
+  //   transform: translateX(0)
+
+  // &:not(.sidebar--fixed):not(.sidebar--right)
+  //   @media $display-breakpoints.sm-and-down
+  //     margin-left: -300px
+  //     transform: none
+
+  //     &.sidebar--open
+  //       transform: translateX(300px)
+
+  // &:not(.sidebar--fixed).sidebar--right
+  //   @media $display-breakpoints.sm-and-down
+  //     margin-right: -300px
+  //     transform: none
+
+  //     &.sidebar--open
+  //       transform: translateX(-300px)
         
   &--dark
     sidebar(#fff)

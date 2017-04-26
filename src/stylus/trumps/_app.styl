@@ -1,87 +1,100 @@
-html, body
-  height: 100%
-  min-height: 100%
+.application
+  display: flex
+  -webkit-backface-visibility: hidden
+  flex-wrap: wrap
   overflow: hidden
   position: relative
-
-.with
-  //min-height: 100vh
-  -webkit-backface-visibility: hidden
-  overflow-x: hidden
+    
+  main
+    flex: 1 0 auto
+    max-height: 100vh
   
-  &.dark
+  &--column
+    flex-direction: column
+    
+    main
+      flex: 0
+      flex-grow: 1
+    
+  &--row
+    flex-direction: row
+      
+    main
+      flex-direction: column
+
+  &--dark
     background: $body-bg-dark
     color: $color-dark
     
-  &.light
+  &--light
     background: $body-bg-light
     color: $color-light
-    
-  &.top-fixed-toolbar
-    header
-      z-index: 4
 
-  &.top-toolbar
-    main
-      > .content
-        padding-top: $spacers.three.y
+  // &.top-fixed-toolbar
+  //   header
+  //     z-index: 4
 
-  &.bottom-footer
-    main
-      > .content
-        > .container
-          min-height: 'calc(100vh - %s - %s)' % ($footer-height 42px)
+  // &.top-toolbar
+  //   main
+  //     > .content
+  //       padding-top: $spacers.three.y
 
-  &.bottom-footer&.top-toolbar, &.bottom-footer&.top-fixed-toolbar
-    main
-      > .content
-        > .container
-          min-height: 'calc(100vh - %s - %s - %s)' % ($toolbar-height $footer-height 42px)
+  // &.bottom-footer
+  //   main
+  //     > .content
+  //       > .container
+  //         min-height: 'calc(100vh - %s - %s)' % ($footer-height 42px)
 
-  &.left-fixed-sidebar
-    header .toolbar
-      padding-left: $sidebar-width + $toolbar-padding-x
-      transition: $primary-transition
+  // &.bottom-footer&.top-toolbar, &.bottom-footer&.top-fixed-toolbar
+  //   main
+  //     > .content
+  //       > .container
+  //         min-height: 'calc(100vh - %s - %s - %s)' % ($toolbar-height $footer-height 42px)
+
+  // &.left-fixed-sidebar
+  //   header .toolbar
+  //     padding-left: $sidebar-width + $toolbar-padding-x
+  //     transition: $primary-transition
   
-      @media $display-breakpoints.sm-and-down
-        padding-left: $toolbar-padding-x
+  //     @media $display-breakpoints.sm-and-down
+  //       padding-left: $toolbar-padding-x
 
-    main,
-    footer
-      padding-left: $sidebar-width
-      transition: $primary-transition
+  //   main,
+  //   footer
+  //     padding-left: $sidebar-width
+  //     transition: $primary-transition
 
-      @media $display-breakpoints.sm-and-down
-        padding-left: 0
+  //     @media $display-breakpoints.sm-and-down
+  //       padding-left: 0
 
-  &.left-sidebar
-    main
-      background: $theme.secondary
+  // &.left-sidebar
+  //   main
+  //     background: $theme.secondary
 
-    .sidebar
-      box-shadow: none
+  //   .sidebar
+  //     box-shadow: none
 
-  &.right-fixed-sidebar
-    header .toolbar,
-    main,
-    footer
-      padding-right: $sidebar-width
-      transition: $primary-transition
+  // &.right-fixed-sidebar
+  //   header .toolbar,
+  //   main,
+  //   footer
+  //     padding-right: $sidebar-width
+  //     transition: $primary-transition
 
-      @media $display-breakpoints.sm-and-down
-        padding-right: 0
+  //     @media $display-breakpoints.sm-and-down
+  //       padding-right: 0
 
-  &.sidebar-under-toolbar
-    .sidebar
-      z-index: 1
+  // &.sidebar-under-toolbar
+  //   .sidebar
+  //     z-index: 1
 
-    &.left-fixed-sidebar,
-    &.right-fixed-sidebar
-      .sidebar
-        padding-top: $toolbar-height
+  //   &.left-fixed-sidebar,
+  //   &.right-fixed-sidebar
+  //     .sidebar
+  //       padding-top: $toolbar-height
 
-      .toolbar
-        padding-left: inherit
+  //     .toolbar
+  //       padding-left: inherit
 
 .app
   &__bar

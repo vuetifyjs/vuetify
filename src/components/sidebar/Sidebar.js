@@ -53,18 +53,18 @@ export default {
         'sidebar--mobile': this.mobile,
         'sidebar--is-mobile': this.isMobile,
         'sidebar--open': this.isActive,
+        'sidebar--left': !this.right,
         'sidebar--right': this.right
       }
     }
   },
 
   watch: {
+    drawer () {
+      this.handleOverlay()
+    },
     isActive () {
-      if (this.isActive && !this.hideOverlay && (this.isMobile || this.drawer)) {
-        this.genOverlay()
-      } else {
-        this.removeOverlay()
-      }
+      this.handleOverlay()
     },
     '$route' () {
       if (!this.disableRouteWatcher) {
@@ -88,7 +88,13 @@ export default {
     closeConditional () {
       return this.routeChanged()
     },
-
+    handleOverlay () {
+      if (this.isActive && !this.hideOverlay && (this.isMobile || this.drawer)) {
+        this.genOverlay()
+      } else {
+        this.removeOverlay()
+      }
+    },
     resize () {
       if (this.mobile && !this.drawer) {
         const isMobile = window.innerWidth <= parseInt(this.mobileBreakPoint)
@@ -96,7 +102,6 @@ export default {
         this.isActive = !isMobile
       }
     },
-
     routeChanged () {
       return (
         (window.innerWidth < parseInt(this.mobileBreakPoint) && this.mobile) ||

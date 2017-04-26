@@ -2,49 +2,36 @@ export default {
   functional: true,
 
   props: {
+    column: Boolean,
+    row: Boolean,
     dark: Boolean,
+    toolbar: Boolean,
+    sidebar: Boolean,
     footer: Boolean,
-    leftFixedSidebar: Boolean,
-    leftSidebar: Boolean,
     id: {
       type: String,
       default: 'app'
-    },
-    rightFixedSidebar: Boolean,
-    rightSidebar: Boolean,
-    topFixedToolbar: Boolean,
-    topToolbar: Boolean,
-    sidebarUnderToolbar: Boolean,
-    column: {
-      type: Boolean,
-      default: true
     }
   },
 
-  render (h, {props, data, children}) {
-    data.staticClass = data.staticClass ? `with ${data.staticClass} ` : 'with '
+  render (h, { props, data, children }) {
+    data.staticClass = data.staticClass ? `application ${data.staticClass} ` : 'application '
 
     const classes = {
-      'dark': props.dark,
-      'left-fixed-sidebar': props.leftFixedSidebar,
-      'left-sidebar': props.leftSidebar,
-      'bottom-footer': props.footer,
-      'light': !props.dark,
-      'right-fixed-sidebar': props.rightFixedSidebar,
-      'right-sidebar': props.rightSidebar,
-      'top-fixed-toolbar': props.topFixedToolbar,
-      'top-toolbar': props.topToolbar,
-      'sidebar-under-toolbar': props.sidebarUnderToolbar,
-      'layout-column': props.column
+      'application--dark': props.dark,
+      'application--light': !props.dark,
+      'application--toolbar': props.toolbar,
+      'application--sidebar': props.sidebar,
+      'application--footer': props.footer,
+      'application--column': props.column,
+      'application--row': props.row
     }
 
     data.staticClass += Object.keys(classes).filter(k => classes[k]).join(' ')
 
-    data.attrs = {'data-app': true}
-    data.domProps = {id: props.id}
+    data.attrs = { 'data-app': true }
+    data.domProps = { id: props.id }
 
     return h('div', data, children)
-
-    //>>>>>>> dev
   }
 }

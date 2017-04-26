@@ -1,8 +1,7 @@
-import {createSimpleFunctional} from '../../util/helpers'
+import { createSimpleFunctional } from '../../util/helpers'
 
 const Col = {
   functional: true,
-
 
   render: (h, { data, children }) => {
     data.staticClass = data.staticClass ? `col ${data.staticClass}` : 'col'
@@ -16,7 +15,7 @@ const Col = {
 const Layout = {
   functional: true,
 
-  render: (h, {data, children}) => {
+  render: (h, { data, children }) => {
     data.staticClass = data.staticClass ? `layout ${data.staticClass}` : 'layout'
     if (data.attrs) {
       data.staticClass += ` ${Object.keys(data.attrs).join(' ')}`
@@ -30,7 +29,7 @@ const Layout = {
 const Container = {
   functional: true,
 
-  render (h, {data, children}) {
+  render (h, { data, children }) {
     let staticClass = data.staticClass ? `container ${data.staticClass}` : 'container'
 
     if (data.attrs && typeof data.attrs.fluid !== 'undefined') {
@@ -47,18 +46,32 @@ const Container = {
 const Content = {
   functional: true,
 
-  render (h, {data, children}) {
+  props: {
+    noScroll: Boolean
+  },
 
-    let staticClass = data.staticClass ? `content ${data.staticClass}` : 'content'
+  render (h, { props, data, children }) {
+    data.staticClass = data.staticClass ? `content ${data.staticClass}` : 'content'
 
-    if (data.attrs && typeof data.attrs.disableScroll !== 'undefined') {
-      staticClass += ' no-scroll-y'
-      data.attrs.disableScroll = undefined
-    }
-
-    data.staticClass = staticClass
+    if (props.noScroll) data.staticClass += ' content--no-scroll-y'
 
     return h('div', data, children)
+  }
+}
+
+const Main = {
+  functional: true,
+
+  props: {
+    row: Boolean
+  },
+
+  render (h, { props, data, children }) {
+    if (props.row) {
+      data.staticClass = data.staticClass ? `row ${data.staticClass}` : 'row'
+    }
+
+    return h('main', data, children)
   }
 }
 
@@ -71,5 +84,6 @@ export default {
   Container,
   Content,
   Spacer,
-  Layout
+  Layout,
+  Main
 }
