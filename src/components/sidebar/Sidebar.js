@@ -15,20 +15,13 @@ export default {
 
   props: {
     absolute: Boolean,
-    closeOnClick: {
-      type: Boolean,
-      default: true
-    },
     disableRouteWatcher: Boolean,
     drawer: Boolean,
     fixed: Boolean,
     height: String,
     light: Boolean,
     mini: Boolean,
-    mobile: {
-      type: Boolean,
-      default: true
-    },
+    persistent: Boolean,
     mobileBreakPoint: {
       type: Number,
       default: 1024
@@ -38,7 +31,7 @@ export default {
 
   computed: {
     calculatedHeight () {
-      return this.height || (this.fixed || this.drawer ? '100vh' : 'auto')
+      return this.height || '100vh'
     },
     classes () {
       return {
@@ -46,21 +39,23 @@ export default {
         'sidebar--absolute': this.absolute,
         'sidebar--close': !this.isActive,
         'sidebar--dark': !this.light,
-        'sidebar--drawer': this.drawer,
-        'sidebar--fixed': this.fixed || this.drawer,
+        'sidebar--drawer': this.drawer || this.isMobile,
         'sidebar--light': this.light,
         'sidebar--mini': this.mini,
-        'sidebar--mobile': this.mobile,
+        'sidebar--persistent': this.persistent,
         'sidebar--is-mobile': this.isMobile,
         'sidebar--open': this.isActive,
         'sidebar--left': !this.right,
         'sidebar--right': this.right
       }
+    },
+    isDrawer () {
+      return this.drawer || this.isMobile
     }
   },
 
   watch: {
-    drawer () {
+    isDrawer () {
       this.handleOverlay()
     },
     isActive () {
@@ -89,23 +84,23 @@ export default {
       return this.routeChanged()
     },
     handleOverlay () {
-      if (this.isActive && !this.hideOverlay && (this.isMobile || this.drawer)) {
+      if (this.isActive && !this.hideOverlay && this.isDrawer) {
         this.genOverlay()
       } else {
         this.removeOverlay()
       }
     },
     resize () {
-      if (this.mobile && !this.drawer) {
-        const isMobile = window.innerWidth <= parseInt(this.mobileBreakPoint)
-        this.isMobile = isMobile
-        this.isActive = !isMobile
+      this.isMobile = window.innerWidth <= parseInt(this.mobileBreakPoint)
+
+      if (!this.persistent) {
+        this.isActive = !this.isMobile
       }
     },
     routeChanged () {
       return (
         (window.innerWidth < parseInt(this.mobileBreakPoint) && this.mobile) ||
-        (this.drawer && this.closeOnClick)
+        (this.isDrawer && !this.persistent)
       )
     }
   },

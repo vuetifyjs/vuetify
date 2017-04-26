@@ -16,31 +16,33 @@
     order: +1
   
   &--close
-    &:not(.sidebar--absolute):not(.sidebar--fixed)
+    &:not(.sidebar--drawer)
       &.sidebar--left
         margin-left: "-%s" % $sidebar-width
 
       &.sidebar--right
         margin-right: "-%s" % $sidebar-width
         
-    &.sidebar--fixed, &.sidebar--absolute
+    &.sidebar--drawer
       &.sidebar--left
         transform: "translate3d(-%s, 0, 0)" % ($sidebar-width + 25)
 
       &.sidebar--right
         transform: "translate3d(%s, 0, 0)" % ($sidebar-width + 25)
-  
-  &--absolute
-    position: absolute
+
+  &--drawer
+    position: fixed
     top: 0
     left: 0
+    z-index: 5
+    elevation(16)
     
     &.sidebar--right
       left: initial
       right: 0
 
-  &--drawer
-    elevation(16)
+  &--absolute
+    position: absolute
 
   // &--mini
   //   overflow: hidden

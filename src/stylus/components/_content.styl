@@ -5,9 +5,11 @@
   min-width: 0
   min-height: 0
   overflow-y: auto
+  overflow-x: hidden
   
-  &--no-scroll-y
-    overflow-y: hidden
+  // Used to make the container fill the entire height
+  > .container
+    flex: 1
   
   @media $display-breakpoints.xs-only
     padding: $grid-gutter-mobile
