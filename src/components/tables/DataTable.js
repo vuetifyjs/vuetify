@@ -1,11 +1,12 @@
 import Head from './mixins/head'
 import Body from './mixins/body'
 import Foot from './mixins/foot'
+import Progress from './mixins/progress'
 
 export default {
   name: 'datatable',
 
-  mixins: [Head, Body, Foot],
+  mixins: [Head, Body, Foot, Progress],
 
   data () {
     return {
@@ -42,7 +43,7 @@ export default {
       default: 'No matching records found'
     },
     rowsPerPage: {
-      type: [Number, String],
+      type: [Number, Object],
       default: 5
     },
     rowsPerPageItems: {
@@ -75,10 +76,21 @@ export default {
     value: {
       type: Array,
       default: () => []
+    },
+    totalItems: {
+      type: Number,
+      default: null
+    },
+    loading: {
+      type: Boolean,
+      default: false
     }
   },
 
   computed: {
+    length () {
+      return this.totalItems ? this.totalItems : this.value.length
+    },
     indeterminate () {
       return this.selectAll && this.someItems && !this.everyItem
     },
@@ -98,9 +110,12 @@ export default {
       const page = this.rowsPerPage === Object(this.rowsPerPage)
         ? this.rowsPerPage.value
         : this.rowsPerPage
-      return page === -1 ? this.value.length : this.page * page
+      return page === -1 ? this.length : this.page * page
     },
     filteredItems () {
+      if (this.totalItems)
+        return this.value
+
       let items = this.value.slice()
       const hasSearch = typeof this.search !== 'undefined' && this.search !== null
 
@@ -131,6 +146,10 @@ export default {
 
   watch: {
     rowsPerPage () {
+      if (this.page == 1) {
+        this.update()
+      }
+
       this.page = 1
     },
     indeterminate (val) {
@@ -141,10 +160,21 @@ export default {
     },
     search () {
       this.page = 1
+    },
+    page () {
+      this.update()
     }
   },
 
   methods: {
+    update () {
+      this.$emit('update', {
+        page: this.page,
+        rowsPerPage: this.rowsPerPage,
+        sorting: this.sorting,
+        desc: this.desc,
+      })
+    },
     sort (index) {
       if (this.sorting === null) {
         this.sorting = index
@@ -158,6 +188,8 @@ export default {
         this.sorting = null
         this.desc = null
       }
+
+      this.update()
     },
     genTR (children, data = {}) {
       return this.$createElement('tr', data, children)
@@ -175,7 +207,7 @@ export default {
 
   mounted () {
     const header = this.headers.find(h => !('sortable' in h) || h.sortable)
-    this.sorting = !this.sorting ? header.value : this.sorting
+    this.sort(header.value)
   },
 
   render (h) {
@@ -187,6 +219,7 @@ export default {
         }
       }, [
         this.genTHead(),
+        this.genTProgress(),
         this.genTBody(),
         this.hideActions ? null : this.genTFoot()
       ])
