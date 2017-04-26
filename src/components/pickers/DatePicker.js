@@ -48,13 +48,34 @@ export default {
         'November',
         'December'
       ]
+    },
+    allowedDates: {
+      type: [Array, Object, Function],
+      default: () => (null)
     }
   },
 
   computed: {
+    firstAllowedDate () {
+      const date = new Date()
+      date.setHours(12, 0, 0, 0)
+
+      if (this.allowedDates) {
+        const millisecondOffset = 1 * 24 * 60 * 60 * 1000
+        const valid = new Date(date)
+        for (let i = 0; i < 31; i++) {
+          if (this.isAllowed(valid))
+            return valid
+
+          valid.setTime(valid.getTime() + millisecondOffset)
+        }
+      }
+
+      return date
+    },
     inputDate: {
       get () {
-        if (!this.value) return new Date()
+        if (!this.value) return this.firstAllowedDate
         if (this.value instanceof Date) return this.value
         if (!isNaN(this.value) && this.value.indexOf(':') !== -1) return new Date(this.value)
 
@@ -118,6 +139,25 @@ export default {
     cancel () {
       this.inputDate = this.originalDate
       if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
+    },
+    isAllowed (date) {
+      if (!this.allowedDates)
+        return true
+
+      if (this.allowedDates instanceof Array) {
+        return !!this.allowedDates.find(d => {
+          if (!(d instanceof Date))
+            d = new Date(d)
+          d.setHours(12, 0, 0, 0)
+          return d - date == 0
+        })
+      } else if (this.allowedDates instanceof Function) {
+        return this.allowedDates(date)
+      } else if (this.allowedDates instanceof Object) {
+        this.allowedDates.min.setHours(12, 0, 0, 0)
+        this.allowedDates.max.setHours(12, 0, 0, 0)
+        return date >= this.allowedDates.min && date <= this.allowedDates.max
+      }
     }
   },
 
