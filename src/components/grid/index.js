@@ -29,15 +29,14 @@ const Layout = {
 const Container = {
   functional: true,
 
-  render (h, { data, children }) {
-    let staticClass = data.staticClass ? `container ${data.staticClass}` : 'container'
+  props: {
+    fluid: Boolean
+  },
 
-    if (data.attrs && typeof data.attrs.fluid !== 'undefined') {
-      staticClass += ' container--fluid'
-      data.attrs.fluid = undefined
-    }
+  render (h, { props, data, children }) {
+    data.staticClass = data.staticClass ? `container ${data.staticClass}` : 'container'
 
-    data.staticClass = staticClass
+    if (props.fluid) data.staticClass += ' container--fluid'
 
     return h('div', data, children)
   }

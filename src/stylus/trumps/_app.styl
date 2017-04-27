@@ -5,12 +5,16 @@
   overflow: hidden
   position: relative
   
+  > main
+    flex-direction: column
+  
   &--column
     flex-direction: column
     
-  &--row      
     > main
-      flex-direction: column
+      flex-direction: initial
+    
+  &--row      
 
   &--dark
     background: $body-bg-dark

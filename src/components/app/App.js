@@ -2,7 +2,6 @@ export default {
   functional: true,
 
   props: {
-    column: Boolean,
     row: Boolean,
     dark: Boolean,
     id: {
@@ -17,8 +16,7 @@ export default {
     const classes = {
       'application--dark': props.dark,
       'application--light': !props.dark,
-      'application--column': props.column,
-      'application--row': props.row
+      'application--column': !props.row
     }
 
     data.staticClass += Object.keys(classes).filter(k => classes[k]).join(' ')

@@ -1,18 +1,14 @@
 import Toggleable from '../../mixins/toggleable'
+import Contextualable from '../../mixins/contextualable'
 
 export default {
   name: 'alert',
 
-  mixins: [Toggleable],
+  mixins: [Contextualable, Toggleable],
 
   props: {
     dismissible: Boolean,
-    error: Boolean,
-    hideIcon: Boolean,
-    icon: String,
-    info: Boolean,
-    success: Boolean,
-    warning: Boolean
+    hideIcon: Boolean
   },
 
   computed: {
@@ -23,7 +19,9 @@ export default {
         'alert--error': this.error,
         'alert--info': this.info,
         'alert--success': this.success,
-        'alert--warning': this.warning
+        'alert--warning': this.warning,
+        'alert--primary': this.primary,
+        'alert--secondary': this.secondary
       }
     },
 
@@ -46,23 +44,17 @@ export default {
   render (h) {
     const children = [h('div', this.$slots.default)]
 
-    if (!this.hideIcon) {
-      children.unshift(h('v-icon', {
-        'class': 'alert__icon',
-        props: { large: true }
-      }, this.mdIcon))
-    }
+    !this.hideIcon && this.mdIcon && children.unshift(h('v-icon', {
+      'class': 'alert__icon',
+      props: { large: true }
+    }, this.mdIcon))
 
     if (this.dismissible) {
       children.push(h('a', {
         'class': 'alert__dismissible',
         domProps: { href: 'javascript:;' },
-        on: {
-          click: () => (this.$emit('input', false))
-        }
-      }, [
-        h('v-icon', { props: { right: true, large: true }}, 'cancel')
-      ]))
+        on: { click: () => (this.$emit('input', false)) }
+      }, [h('v-icon', { props: { right: true, large: true }}, 'cancel')]))
     }
 
     return h('div', {

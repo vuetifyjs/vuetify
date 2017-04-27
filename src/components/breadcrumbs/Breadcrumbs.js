@@ -1,6 +1,12 @@
 export default {
   name: 'breadcrumbs',
 
+  provide () {
+    return {
+      divider: this.divider
+    }
+  },
+
   props: {
     divider: {
       type: String,
@@ -15,16 +21,6 @@ export default {
         'breadcrumbs': true,
         'breadcrumbs--with-icons': this.icons
       }
-    }
-  },
-
-  mounted () {
-    this.$vuetify.load(this.init)
-  },
-
-  methods: {
-    init () {
-      this.$children.forEach(i => (i.$el.dataset.divider = this.divider))
     }
   },
 

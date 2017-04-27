@@ -1,5 +1,5 @@
 export default {
-  name: 'card-row',
+  functional: true,
 
   props: {
     actions: Boolean,
@@ -11,36 +11,17 @@ export default {
     stackedActions: Boolean
   },
 
-  computed: {
-    classes () {
-      return {
-        'card__row': true,
-        'card__row--actions': this.actions,
-        'card__row--actions-stacked': this.stackedActions,
-      }
-    },
+  render (h, { props, data, children }) {
+    data.staticClass = data.staticClass ? `card__row ${data.staticClass}` : 'card__row'
+    data.style = data.style || {}
+    data.style.height = props.height
 
-    styles () {
-      const styles = {
-        height: this.height
-      }
-
-      if (this.img) {
-        styles.background = `url(${this.img}) center center / cover no-repeat`
-      }
-
-      return styles
-    }
-  },
-
-  render (h) {
-    let data = {
-      'class': this.classes,
-      style: this.styles
+    if (props.img) data.style.background = `url(${props.img}) center center / cover no-repeat`
+    if (props.actions) {
+      data.ref = 'actions'
+      data.staticClass += ' card__row--actions'
     }
 
-    if (this.actions) data.ref = 'actions'
-
-    return h('div', data, this.$slots.default)
+    return h('div', data, children)
   }
 }
