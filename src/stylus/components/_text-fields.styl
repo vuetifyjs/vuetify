@@ -145,3 +145,19 @@
 
     .input-group__details:before, .input-group__details:after
       display: none
+
+
+/** Prefix/Suffix */
+.input-group--text-field
+  &__prefix, &__suffix
+    align-items: center
+    color: $input-group-light-normal
+    display: inline-flex
+    font-size: 16px
+    margin-top: 1px
+  
+  &__prefix
+    margin-right: 3px
+    
+  &__suffix
+    margin-left: 3px

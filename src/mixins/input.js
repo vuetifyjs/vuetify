@@ -55,7 +55,7 @@ export default {
         'input-group--prepend-icon': this.prependIcon,
         'input-group--required': this.required,
         'input-group--hide-details': this.hideDetails,
-        'input-group--placeholder': !!this.placeholder,
+        'input-group--placeholder': !!this.placeholder
       }, this.classes)
     },
     isDirty () {
@@ -94,7 +94,7 @@ export default {
 
   methods: {
     genLabel () {
-      return this.$createElement('label', {}, this.label)
+      return this.$createElement('label', this.label)
     },
     toggle () {},
     genMessages () {
@@ -114,9 +114,7 @@ export default {
       return this.$createElement(
         'transition-group',
         {
-          'class': {
-            'input-group__messages': true
-          },
+          'class': 'input-group__messages',
           props: {
             tag: 'div',
             name: 'slide-y-transition'
