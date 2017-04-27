@@ -3,7 +3,7 @@ export default {
     genTBody () {
       let children = []
 
-      if (!this.value.length) {
+      if (!this.itemsLength) {
         children = [this.genEmptyBody(this.noDataText)]
       } else if (!this.filteredItems.length) {
         children = [this.genEmptyBody(this.noResultsText)]

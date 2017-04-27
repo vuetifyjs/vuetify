@@ -4,7 +4,8 @@ export default {
       return this.$createElement('v-btn', {
         props: {
           disabled: this.page === 1,
-          icon: true
+          icon: true,
+          flat: true
         },
         nativeOn: { click: () => (this.page--) }
       }, [this.$createElement('v-icon', 'chevron_left')])
@@ -12,8 +13,9 @@ export default {
     genNextIcon () {
       return this.$createElement('v-btn', {
         props: {
-          disabled: this.page * this.rowsPerPage >= this.value.length || this.pageStop < 0,
-          icon: true
+          disabled: this.page * this.rowsPerPage >= this.itemsLength || this.pageStop < 0,
+          icon: true,
+          flat: true
         },
         nativeOn: { click: () => (this.page++) }
       }, [this.$createElement('v-icon', 'chevron_right')])
@@ -38,12 +40,12 @@ export default {
     genPagination () {
       let pagination = '&mdash;'
 
-      if (this.value.length) {
-        const stop = this.value.length < this.pageStop || this.pageStop < 0
-                ? this.value.length
+      if (this.itemsLength) {
+        const stop = this.itemsLength < this.pageStop || this.pageStop < 0
+                ? this.itemsLength
                 : this.pageStop
 
-        pagination = `${this.pageStart + 1}-${stop} of ${this.value.length}`
+        pagination = `${this.pageStart + 1}-${stop} of ${this.itemsLength}`
       }
 
       return this.$createElement('div', {
