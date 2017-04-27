@@ -5,6 +5,7 @@ export default {
     return {
       activators: [],
       isActive: null,
+      isMobile: false,
       reverse: false,
       target: null,
       resizeDebounce: {},
@@ -16,6 +17,10 @@ export default {
     centered: Boolean,
     grow: Boolean,
     icons: Boolean,
+    mobileBreakPoint: {
+      type: [Number, String],
+      default: 1024
+    },
     scrollBars: Boolean,
     value: String
   },
@@ -65,6 +70,7 @@ export default {
     init () {
       this.activators = this.$refs.activators.$children.filter(i => i.$options._componentTag === 'v-tab-item')
       setTimeout(() => {
+        this.resize()
         this.tabClick(this.value || this.activators[0].target)
       }, 200)
     },
@@ -73,6 +79,7 @@ export default {
 
       this.resizeDebounce = setTimeout(() => {
         this.slider()
+        this.isMobile = window.innerWidth < this.mobileBreakPoint
       }, 250)
     },
     slider (el) {
@@ -98,7 +105,10 @@ export default {
 
   render (h) {
     const tabs = h('v-tabs-tabs', {
-      ref: 'activators'
+      ref: 'activators',
+      props: {
+        mobile: this.isMobile
+      }
     }, [
       h('v-tabs-slider', { ref: 'slider' }),
       this.$slots.activators
