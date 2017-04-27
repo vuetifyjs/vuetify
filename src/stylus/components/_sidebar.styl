@@ -17,14 +17,14 @@
   
   &--close
     &:not(.sidebar--drawer)
-      &.sidebar--left
+      &.sidebar:not(.sidebar--right)
         margin-left: "-%s" % $sidebar-width
 
       &.sidebar--right
         margin-right: "-%s" % $sidebar-width
         
     &.sidebar--drawer
-      &.sidebar--left
+      &.sidebar:not(.sidebar--right)
         transform: "translate3d(-%s, 0, 0)" % ($sidebar-width + 25)
 
       &.sidebar--right

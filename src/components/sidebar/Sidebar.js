@@ -8,8 +8,7 @@ export default {
 
   data () {
     return {
-      isMobile: false,
-      overlay: null
+      isMobile: false
     }
   },
 
@@ -23,7 +22,7 @@ export default {
     mini: Boolean,
     persistent: Boolean,
     mobileBreakPoint: {
-      type: Number,
+      type: [Number, String],
       default: 1024
     },
     right: Boolean
@@ -31,7 +30,11 @@ export default {
 
   computed: {
     calculatedHeight () {
-      return this.height || '100vh'
+      return this.height
+        ? isNaN(this.mobileBreakPoint)
+          ? this.mobileBreakPoint
+          : `${this.mobileBreakPoint}px`
+        : '100vh'
     },
     classes () {
       return {
@@ -45,7 +48,6 @@ export default {
         'sidebar--persistent': this.persistent,
         'sidebar--is-mobile': this.isMobile,
         'sidebar--open': this.isActive,
-        'sidebar--left': !this.right,
         'sidebar--right': this.right
       }
     },
@@ -60,7 +62,7 @@ export default {
     },
     '$route' () {
       if (!this.disableRouteWatcher) {
-        this.isActive = !this.routeChanged()
+        this.isActive = !this.closeConditional()
       }
     }
   },
@@ -78,19 +80,12 @@ export default {
 
   methods: {
     closeConditional () {
-      return this.routeChanged()
+      return !this.persistent && (this.drawer || this.isMobile)
     },
     resize () {
       this.isMobile = window.innerWidth <= parseInt(this.mobileBreakPoint)
 
-      if (!this.persistent) {
-        this.isActive = !this.isMobile
-      }
-    },
-    routeChanged () {
-      return (
-        !this.persistent && (this.drawer || this.isMobile)
-      )
+      if (!this.persistent) this.isActive = !this.isMobile
     }
   },
 
