@@ -166,6 +166,7 @@ export default {
         ref: 'input'
       }
 
+      if (this.placeholder) inputData.domProps.placeholder = this.placeholder
       if (this.autocomplete) inputData.domProps.autocomplete = true
       if (this.name) inputData.attrs = { name: this.name }
       if (this.maxlength) inputData.attrs.maxlength = this.maxlength
