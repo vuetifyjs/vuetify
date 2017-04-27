@@ -88,8 +88,8 @@ export default {
   },
 
   computed: {
-    length () {
-      return this.totalItems ? this.totalItems : this.value.length
+    itemsLength () {
+      return this.totalItems || this.value.length
     },
     indeterminate () {
       return this.selectAll && this.someItems && !this.everyItem
@@ -110,7 +110,7 @@ export default {
       const page = this.rowsPerPage === Object(this.rowsPerPage)
         ? this.rowsPerPage.value
         : this.rowsPerPage
-      return page === -1 ? this.length : this.page * page
+      return page === -1 ? this.itemsLength : this.page * page
     },
     filteredItems () {
       if (this.totalItems)
@@ -146,9 +146,7 @@ export default {
 
   watch: {
     rowsPerPage () {
-      if (this.page == 1) {
-        this.update()
-      }
+      this.page === 1 && this.update()
 
       this.page = 1
     },

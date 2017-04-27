@@ -13,7 +13,7 @@ export default {
     genNextIcon () {
       return this.$createElement('v-btn', {
         props: {
-          disabled: this.page * this.rowsPerPage >= this.length || this.pageStop < 0,
+          disabled: this.page * this.rowsPerPage >= this.itemsLength || this.pageStop < 0,
           icon: true,
           flat: true
         },
@@ -40,12 +40,12 @@ export default {
     genPagination () {
       let pagination = '&mdash;'
 
-      if (this.length) {
-        const stop = this.length < this.pageStop || this.pageStop < 0
-                ? this.length
+      if (this.itemsLength) {
+        const stop = this.itemsLength < this.pageStop || this.pageStop < 0
+                ? this.itemsLength
                 : this.pageStop
 
-        pagination = `${this.pageStart + 1}-${stop} of ${this.length}`
+        pagination = `${this.pageStart + 1}-${stop} of ${this.itemsLength}`
       }
 
       return this.$createElement('div', {

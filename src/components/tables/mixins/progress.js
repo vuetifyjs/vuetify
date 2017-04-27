@@ -2,12 +2,10 @@ export default {
   methods: {
     genTProgress () {
       const loader = this.$createElement('v-progress-linear', {
-        class: {
-          'progress-linear--active': this.loading
-        },
         props: {
           indeterminate: true,
-          height: 3
+          height: 3,
+          active: this.loading
         }
       })
 
