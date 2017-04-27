@@ -3,16 +3,40 @@
 // ============================================================
 
 
+// Material Design
+// ============================================================
+$material-left-padding := 16px
+$material-right-padding := 16px
+
+$material-light := {
+  bg-color: #fff
+  fg-color: #000
+  text-color: #000
+  primary-text-percent: .87
+  secondary-text-percent: .54
+  disabledORhints-text-percent: .38
+  divider-percent: .12
+  active-icon-percent: .54
+  inactive-icon-percent: .38
+}
+$material-dark := {
+  bg-color: $grey.darken-3
+  fg-color: #fff
+  text-color: #fff
+  primary-text-percent: 1
+  secondary-text-percent: .70
+  disabledORhints-text-percent: .50
+  divider-percent: .12
+  active-icon-percent: 1
+  inactive-icon-percent: .50
+}
+
+$material-twelve-percent-light := rgba($material-dark.fg-color, $material-dark.divider-percent)
+$material-twelve-percent-dark := rgba($material-light.fg-color, $material-light.divider-percent)
+
 
 // Theme
 // ============================================================
-$body-font-family := 'Roboto', sans-serif
-$body-bg-light := #FFFFFF
-$body-bg-dark := $grey.darken-3
-$color-light := rgba(#000, .87)
-$color-dark := #fff
-$font-size-root := 14px
-$line-height-root := 1.5
 $theme := {
   primary: $blue.darken-2
   accent: $blue.accent-2
@@ -22,16 +46,17 @@ $theme := {
   error: $red.accent-2
   success: $green.base
 }
+$material-theme := $material-light
+
+$body-font-family := 'Roboto', sans-serif
+$body-bg-light := $material-light.bg-color
+$body-bg-dark := $material-dark.bg-color
+$color-light := rgba($material-light.text-color, $material-light.primary-text-percent)
+$color-dark := $material-dark.text-color
+$font-size-root := 14px
+$line-height-root := 1.5
 
 $color-pack := true
-
-
-// Material Design
-// ============================================================
-$material-left-padding := 16px
-$material-right-padding := 16px
-$material-twelve-percent-light := rgba(#fff, 0.12)
-$material-twelve-percent-dark := rgba(#000, 0.12)
 
 
 // Grid
@@ -139,14 +164,14 @@ $alert-color := inherit
 $alert-border-radius := 0
 $alert-border-width := 4px 0 0 0
 $alert-font-size := 1.1rem
-$alert-icon-color := rgba(#000000, .3)
+$alert-icon-color := rgba($material-light.fg-color, .3)
 $alert-icon-font-size := 2rem
 $alert-padding := 1.5rem
 $alert-margin := $spacers.one.y auto
 
 // Badges
 $badge-border-radius := 50%
-$badge-color := #FFFFFF
+$badge-color := $material-dark.fg-color
 $badge-font-family := $body-font-family
 $badge-font-size := .9rem
 $badge-height := 22px
@@ -165,7 +190,7 @@ $breadcrumbs-padding := 0 1rem
 
 // Base
 $button-border-radius := 2px
-$button-color := #fff
+$button-color := $material-dark.fg-color
 $button-background-color := #999999
 $button-height := 36px
 $button-font-size := 14px
@@ -175,10 +200,10 @@ $button-min-width := 88px
 $button-padding := 0 16px
 $button-text-transform := uppercase
 
-$button-dark-overlay := rgba(#fff, 0.12)
-$button-dark-disabled-color := rgba(#fff, 0.3)
-$button-light-overlay := rgba(#000, 0.12)
-$button-light-disabled-color := rgba(#000, 0.26)
+$button-dark-overlay := rgba($material-dark.fg-color, .12)
+$button-dark-disabled-color := rgba($material-dark.fg-color, .3)
+$button-light-overlay := rgba($material-light.fg-color, .12)
+$button-light-disabled-color := rgba($material-light.fg-color, .26)
 
 $button-small-height := 28px
 $button-small-font-size := 13px
@@ -206,8 +231,8 @@ $button-dropdown-input-padding-left := 16px
 $button-dropdown-background := #fff
 
 // Card
-$card-actions-border-top := 1px solid rgba(#000000, .1)
-$card-background := #FFFFFF
+$card-actions-border-top := 1px solid rgba($material-theme.fg-color, .1)
+$card-background := $material-theme.bg-color
 $card-padding := 16px
 $card-border-radius := 2px
 $card-title-text-size := 1.5rem
@@ -224,7 +249,7 @@ $chip-border-radius := 2rem
 $chip-font-size := 14px
 $chip-label-border-radius := 0
 $chip-icon-font-size := 24px
-$chip-icon-color := rgba(#000, .54)
+$chip-icon-color := rgba($material-light.fg-color, .54)
 $chip-padding := 0 12px
 $chip-removeable-padding := 0 4px 0 12px
 $chip-outline-background := transparent !important
@@ -299,30 +324,30 @@ $toolbar-padding-x := 14px
 $progress-circular-rotate-animation := progress-circular-rotate 1.4s linear infinite
 $progress-circular-rotate-dash := progress-circular-dash 1.4s ease-in-out infinite
 $process-circular-intermediate-svg-transition := all .2s ease-in-out
-$progress-circular-underlay-stroke := rgba(#000, 0.1)
+$progress-circular-underlay-stroke := rgba($material-light.fg-color, 0.1)
 $progress-circular-overlay-transition := all .6s ease-in-out
 
 
 /* Selection Controls */
-$selection-switch-light-color := rgba(#000, .38)
+$selection-switch-light-color := rgba($material-light.fg-color, $material-light.disabledORhints-text-percent)
 $selection-switch-light-background := #fafafa
 $selection-switch-light-label-color := #424242
-$selection-switch-light-disabled-color := rgba(#000, .12)
+$selection-switch-light-disabled-color := rgba($material-light.fg-color, $material-light.divider-percent)
 $selection-switch-light-disabled-background := #bdbdbd
 
-$selection-switch-dark-color := rgba(#fff, .30)
+$selection-switch-dark-color := rgba($material-dark.fg-color, .30)
 $selection-switch-dark-background := #bdbdbd
-$selection-switch-dark-label-color := #fff
-$selection-switch-dark-disabled-color := rgba(#fff, .10)
+$selection-switch-dark-label-color := $material-dark.text-color
+$selection-switch-dark-disabled-color := rgba($material-dark.fg-color, .10)
 $selection-switch-dark-disabled-background := #424242
 
-$selection-controls-light-color := rgba(#000, .54)
-$selection-controls-light-disabled-color := rgba(#000, .26)
-$selection-controls-light-label-color := #000
+$selection-controls-light-color := rgba($material-light.fg-color, .54)
+$selection-controls-light-disabled-color := rgba($material-light.fg-color, .26)
+$selection-controls-light-label-color := $material-light.text-color
 
-$selection-controls-dark-color := rgba(#fff, .70)
-$selection-controls-dark-disabled-color := rgba(#fff, .30)
-$selection-controls-dark-label-color := #fff
+$selection-controls-dark-color := rgba($material-dark.fg-color, .70)
+$selection-controls-dark-disabled-color := rgba($material-dark.fg-color, .30)
+$selection-controls-dark-label-color := $material-dark.text-color
 
 
 /* Sidebar */
@@ -331,21 +356,21 @@ $sidebar-height := 100vh
 $sidebar-width := 300px
 
 // Sidebar Item
-$sidebar-item-color := #fff
+$sidebar-item-color := $material-dark.fg-color
 $sidebar-item-height := 50px
-$sidebar-item-active-color := #fff
+$sidebar-item-active-color := $material-dark.fg-color
 $sidebar-item-active-background-color := $theme.primary
 $sidebar-item-hover-background-color := rgba($theme.primary, .4)
 
 // Sidebar Item Header
 $sidebar-item-header-padding := .2rem .2rem .2rem 2rem
-$sidebar-item-header-color := #fff
+$sidebar-item-header-color := $material-dark.fg-color
 $sidebar-item-header-font-size := 90%
 $sidebar-item-header-letter-spacing := .1px
 
 // Sidebar Group
 $sidebar-group-items-background-color := darken($theme.secondary, 15%)
-$sidebar-group-header-active-sidebar-items-border := 1px solid rgba(#fff, .1)
+$sidebar-group-header-active-sidebar-items-border := 1px solid rgba($material-dark.fg-color, .1)
 $sidebar-group-header-active-sidebar-item-active-background-color := rgba($theme.primary, .4)
 
 // Slider
@@ -353,17 +378,17 @@ $slider-arrow-size := 2rem
 
 
 /* Slider */
-$slider-light-off := rgba(#000, .26)
-$slider-light-focus-off := rgba(#000, .38)
-$slider-light-disabled := rgba(#000, .26)
-$slider-light-label := #000
-$slider-light-ticks := rgba(#000, .6)
+$slider-light-off := rgba($material-light.fg-color, .26)
+$slider-light-focus-off := rgba($material-light.fg-color, .38)
+$slider-light-disabled := rgba($material-light.fg-color, .26)
+$slider-light-label := $material-light.text-color
+$slider-light-ticks := rgba($material-light.fg-color, .6)
 
-$slider-dark-off := rgba(#fff, .3)
-$slider-dark-focus-off := rgba(#fff, .3)
-$slider-dark-disabled := rgba(#fff, .3)
-$slider-dark-label := #fff
-$slider-dark-ticks := rgba(#fff, .6)
+$slider-dark-off := rgba($material-dark.fg-color, .3)
+$slider-dark-focus-off := rgba($material-dark.fg-color, .3)
+$slider-dark-disabled := rgba($material-dark.fg-color, .3)
+$slider-dark-label := $material-dark.text-color
+$slider-dark-ticks := rgba($material-dark.fg-color, .6)
 
 
 /** Snackbar */
@@ -377,11 +402,11 @@ $input-font-size := 16px
 $label-font-size := 12px
 $input-height := 30px
 
-$input-group-light-normal := rgba(#000, .38)
-$input-group-light-focus := rgba(#000, .87)
+$input-group-light-normal := rgba($material-light.fg-color, $material-light.disabledORhints-text-percent)
+$input-group-light-focus := rgba($material-light.fg-color, .87)
 
-$input-group-dark-normal := rgba(#fff, .5)
-$input-group-dark-focus := #fff
+$input-group-dark-normal := rgba($material-dark.fg-color, $material-dark.disabledORhints-text-percent)
+$input-group-dark-focus := $material-dark.fg-color
 
 
 $label-padding-top := 16px
