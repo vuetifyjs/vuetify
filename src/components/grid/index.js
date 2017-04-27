@@ -29,31 +29,14 @@ const Layout = {
 const Container = {
   functional: true,
 
-  render (h, { data, children }) {
-    let staticClass = data.staticClass ? `container ${data.staticClass}` : 'container'
-
-    if (data.attrs && typeof data.attrs.fluid !== 'undefined') {
-      staticClass += ' container--fluid'
-      data.attrs.fluid = undefined
-    }
-
-    data.staticClass = staticClass
-
-    return h('div', data, children)
-  }
-}
-
-const Content = {
-  functional: true,
-
   props: {
-    noScroll: Boolean
+    fluid: Boolean
   },
 
   render (h, { props, data, children }) {
-    data.staticClass = data.staticClass ? `content ${data.staticClass}` : 'content'
+    data.staticClass = data.staticClass ? `container ${data.staticClass}` : 'container'
 
-    if (props.noScroll) data.staticClass += ' content--no-scroll-y'
+    if (props.fluid) data.staticClass += ' container--fluid'
 
     return h('div', data, children)
   }
@@ -77,6 +60,7 @@ const Main = {
 
 const ColSpacer = createSimpleFunctional('col--spacer')
 const Spacer = createSimpleFunctional('spacer')
+const Content = createSimpleFunctional('content')
 
 export default {
   Col,

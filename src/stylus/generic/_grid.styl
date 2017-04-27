@@ -3,6 +3,9 @@
   margin-left: auto
   flex-basis: 100%
   padding: $grid-gutter
+  
+  @media $display-breakpoints.xs-only
+    padding: $grid-gutter-mobile
 
 .container
   for size, width in $container-max-widths

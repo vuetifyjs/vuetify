@@ -1,13 +1,14 @@
 export default {
   name: 'breadcrumbs-item',
 
+  inject: ['divider'],
+
   props: {
     disabled: Boolean,
     href: {
       type: String,
       default: 'javascript:;'
-    },
-    target: String
+    }
   },
 
   computed: {
@@ -20,13 +21,12 @@ export default {
   },
 
   render (h) {
-    return h('li', {}, [
+    return h('li', {
+      attrs: { 'data-divider': this.divider }
+    }, [
       h('a', {
         'class': this.classes,
-        domProps: {
-          href: this.href,
-          target: this.target
-        }
+        domProps: { href: this.href }
       }, this.$slots.default)
     ])
   }

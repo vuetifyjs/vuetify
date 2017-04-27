@@ -5,17 +5,16 @@
   overflow: hidden
   position: relative
   
+  > main
+    flex-direction: column
+  
   &--column
     flex-direction: column
     
-  &--row
-    flex-direction: row
-      
     > main
-      flex-direction: column
-      
-      > .content
-        overflow-y: auto
+      flex-direction: initial
+    
+  &--row      
 
   &--dark
     background: $body-bg-dark
@@ -24,7 +23,6 @@
   &--light
     background: $body-bg-light
     color: $color-light
-
 
 .app
   &__bar
