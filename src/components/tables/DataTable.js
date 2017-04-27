@@ -113,8 +113,7 @@ export default {
       return page === -1 ? this.itemsLength : this.page * page
     },
     filteredItems () {
-      if (this.totalItems)
-        return this.value
+      if (this.totalItems) return this.value
 
       let items = this.value.slice()
       const hasSearch = typeof this.search !== 'undefined' && this.search !== null
