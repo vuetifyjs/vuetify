@@ -64,8 +64,7 @@ export default {
         const millisecondOffset = 1 * 24 * 60 * 60 * 1000
         const valid = new Date(date)
         for (let i = 0; i < 31; i++) {
-          if (this.isAllowed(valid))
-            return valid
+          if (this.isAllowed(valid)) return valid
 
           valid.setTime(valid.getTime() + millisecondOffset)
         }
@@ -141,23 +140,27 @@ export default {
       if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
     },
     isAllowed (date) {
-      if (!this.allowedDates)
-        return true
+      if (!this.allowedDates) return true
 
-      if (this.allowedDates instanceof Array) {
-        return !!this.allowedDates.find(d => {
-          if (!(d instanceof Date))
-            d = new Date(d)
+      if (Array.isArray(this.allowedDates)) {
+        return !!this.allowedDates.find(allowedDate => {
+          const d = new Date(allowedDate)
           d.setHours(12, 0, 0, 0)
+
           return d - date == 0
         })
       } else if (this.allowedDates instanceof Function) {
         return this.allowedDates(date)
       } else if (this.allowedDates instanceof Object) {
-        this.allowedDates.min.setHours(12, 0, 0, 0)
-        this.allowedDates.max.setHours(12, 0, 0, 0)
-        return date >= this.allowedDates.min && date <= this.allowedDates.max
+        const min = new Date(this.allowedDates.min)
+        min.setHours(12, 0, 0, 0)
+        const max = new Date(this.allowedDates.max)
+        max.setHours(12, 0, 0, 0)
+
+        return date >= min && date <= max
       }
+
+      return true
     }
   },
 
