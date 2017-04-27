@@ -74,20 +74,25 @@
 .input-group--text-field
   &.input-group--focused
     label
+      opacity: 1
       color: $theme.primary
       transform: translate3d(0, -18px, 0) scale(.75)
 
   &.input-group--dirty
     label
-     transform: translate3d(0, -18px, 0) scale(.75)
-      
+      transform: translate3d(0, -18px, 0) scale(.75)
+
+  &.input-group--placeholder:not(.input-group--focused):not(.input-group--dirty)
+    label
+      opacity: 0
+
 
 /** Types */
 .input-group--text-field
   &.input-group--error
     .input-group__details:after
       background-color: $theme.error
-    
+
   &.input-group--prepend-icon
     .input-group__prepend-icon
       align-items: center
@@ -95,46 +100,46 @@
       justify-content: flex-start
       flex-basis: 56px
       transition: .3s $transition.fast-in-fast-out
-     
-    .input-group__details 
+
+    .input-group__details
       margin-left: 56px
-      
+
       &:before, &:after
         max-width: calc(100% - 56px)
 
     label
       margin-left: 56px
-      
+
     input
       flex: auto
-      
+
     &.input-group--focused
       .icon
         color: $theme.primary
 
-  &.input-group--single-line      
+  &.input-group--single-line
     label
       transform: translate3d(0,0,0)
-      
+
     &.input-group--dirty
       label
         display: none
-        
+
   &.input-group--required
     label:after
       content: '*'
-      
+
     &.input-group--focused
       label:after
         color: $theme.error
-        
+
   &.input-group--error
     label
       color: $theme.error
-      
+
     .input-group__details:before, .input-group__details:after
       background-color: $theme.error
-      
+
   &.input-group--full-width
     padding: 0 16px
 

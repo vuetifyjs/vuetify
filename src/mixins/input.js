@@ -33,7 +33,8 @@ export default {
     },
     value: {
       required: false
-    }
+    },
+    placeholder: String
   },
 
   computed: {
@@ -53,7 +54,8 @@ export default {
         'input-group--append-icon': this.appendIcon,
         'input-group--prepend-icon': this.prependIcon,
         'input-group--required': this.required,
-        'input-group--hide-details': this.hideDetails
+        'input-group--hide-details': this.hideDetails,
+        'input-group--placeholder': !!this.placeholder,
       }, this.classes)
     },
     isDirty () {
