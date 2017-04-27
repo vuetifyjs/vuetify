@@ -44,71 +44,15 @@
   &--absolute
     position: absolute
 
-  // &--mini
-  //   overflow: hidden
-  //   width: 88px
+  &--mini
+    overflow: hidden
+    width: 88px
     
-  //   .list__tile__action, .list__tile__avatar
-  //     justify-content: center
+    .list__tile__action, .list__tile__avatar
+      justify-content: center
     
-  //   .subheader
-  //     display: none
-
-  // &--fixed
-  //   // position: fixed
-  
-  // &--absolute
-  //   // position: absolute
-    
-  // &--open
-  //   &.sidebar--drawer, &.sidebar--is-mobile
-  //     z-index: 5
-
-  // &--fixed, &--absolute
-  //   top: 0
-  //   left: 0
-  //   elevation(0)
-
-  //   &.sidebar--right
-  //     right: 0
-  //     left: initial
-
-  // &--drawer
-  //   flex-basis: 0
-  //   transform: translateX(-($sidebar-width + 25))
-  //   elevation(16)
-
-  // &--close
-  //   transform: translateX(-($sidebar-width + 25))
-
-  //   &.sidebar--right
-  //     transform: translateX($sidebar-width + 25)
-
-  // &--mobile
-  //   @media $display-breakpoints.sm-and-down
-  //     transform: translateX(-($sidebar-width + 25))
-
-  //     &.sidebar--right
-  //       transform: translateX($sidebar-width + 25)
-
-  // &--open, &--open.sidebar--mobile
-  //   transform: translateX(0)
-
-  // &:not(.sidebar--fixed):not(.sidebar--right)
-  //   @media $display-breakpoints.sm-and-down
-  //     margin-left: -300px
-  //     transform: none
-
-  //     &.sidebar--open
-  //       transform: translateX(300px)
-
-  // &:not(.sidebar--fixed).sidebar--right
-  //   @media $display-breakpoints.sm-and-down
-  //     margin-right: -300px
-  //     transform: none
-
-  //     &.sidebar--open
-  //       transform: translateX(-300px)
+    .subheader
+      display: none
         
   &--dark
     sidebar(#fff)
