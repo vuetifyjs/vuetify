@@ -65,7 +65,9 @@ export default {
             'class': {
               'btn btn--floating btn--small btn--flat': true,
               'btn--active': this.isActive(i),
-              'btn--current': this.isCurrent(i)
+              'btn--current': this.isCurrent(i),
+              'btn--light': !this.dark,
+              'btn--disabled': !this.isAllowed(new Date(this.tableYear, this.tableMonth, i, 12, 0, 0, 0))
             },
             domProps: {
               innerHTML: `<span class="btn__content">${i}</span>`
