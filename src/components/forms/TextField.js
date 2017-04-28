@@ -170,7 +170,7 @@ export default {
 
       if (this.placeholder) data.domProps.placeholder = this.placeholder
       if (this.autocomplete) data.domProps.autocomplete = true
-      if (this.name) data.attrs = { name: this.name }
+      if (this.name) data.attrs.name = this.name
       if (this.maxlength) data.attrs.maxlength = this.maxlength
 
       if (this.multiLine) {
