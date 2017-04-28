@@ -30,7 +30,8 @@ export default {
   },
 
   methods: {
-    toggle (target, reverse) {
+    toggle (target, reverse, showTransition) {
+      this.$el.style.transition = !showTransition ? 'none' : null
       this.reverse = reverse
       this.isActive = this.id === target
     }
@@ -42,10 +43,9 @@ export default {
         'class': 'tabs__item',
         domProps: { id: this.id },
         directives: [{
-          name: 'show', 
+          name: 'show',
           value: this.isActive
         }]
-    }, [this.$slots.default])])
+      }, [this.$slots.default])])
   }
 }
-  

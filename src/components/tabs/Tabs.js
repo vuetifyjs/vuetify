@@ -1,10 +1,14 @@
+import Bootable from '../../mixins/bootable'
+
 export default {
   name: 'tabs',
+
+  mixins: [Bootable],
 
   data () {
     return {
       activators: [],
-      isActive: null,
+      activeIndex: null,
       isMobile: false,
       reverse: false,
       target: null,
@@ -41,7 +45,7 @@ export default {
     value () {
       this.tabClick(this.value)
     },
-    isActive () {
+    activeIndex () {
       this.activators.forEach(i => {
         i.toggle(this.target)
 
@@ -50,14 +54,17 @@ export default {
         }
       })
 
-      this.$refs.content.$children.forEach(i => i.toggle(this.target, this.reverse))
+      this.$refs.content.$children.forEach(i => i.toggle(this.target, this.reverse, this.isBooted))
       this.$emit('input', this.target)
+      this.isBooted = true
     }
   },
 
   mounted () {
     this.$vuetify.load(() => {
-      this.init()
+      this.activators = this.$refs.activators.$children.filter(i => i.$options._componentTag === 'v-tab-item')
+      this.tabClick(this.value || this.activators[0].target)
+      this.resize()
       window.addEventListener('resize', this.resize, false)
     })
   },
@@ -67,20 +74,13 @@ export default {
   },
 
   methods: {
-    init () {
-      this.activators = this.$refs.activators.$children.filter(i => i.$options._componentTag === 'v-tab-item')
-      setTimeout(() => {
-        this.resize()
-        this.tabClick(this.value || this.activators[0].target)
-      }, 200)
-    },
     resize () {
       clearTimeout(this.resizeDebounce)
 
       this.resizeDebounce = setTimeout(() => {
         this.slider()
         this.isMobile = window.innerWidth < this.mobileBreakPoint
-      }, 250)
+      }, 0)
     },
     slider (el) {
       this.targetEl = el || this.targetEl
@@ -91,14 +91,14 @@ export default {
       this.target = target
 
       if (!this.$refs.content.length) {
-        this.isActive = target
+        this.activeIndex = target
         return
       }
 
       this.$nextTick(() => {
         const nextIndex = this.$refs.content.$children.findIndex(i => i.id === this.target)
-        this.reverse = nextIndex < this.isActive
-        this.isActive = nextIndex
+        this.reverse = nextIndex < this.activeIndex
+        this.activeIndex = nextIndex
       })
     }
   },
