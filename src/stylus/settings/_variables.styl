@@ -168,17 +168,17 @@ $secondary-transition := 0.2s $transition.ease-in-out
 $alert-color := inherit
 $alert-border-radius := 0
 $alert-border-width := 4px 0 0 0
-$alert-font-size := 1.1rem
+$alert-font-size := $font-size-root
 $alert-icon-color := rgba($material-light.fg-color, .3)
-$alert-icon-font-size := 2rem
-$alert-padding := 1.5rem
+$alert-icon-font-size := 24px
+$alert-padding := 16px
 $alert-margin := $spacers.one.y auto
 
 // Badges
 $badge-border-radius := 50%
 $badge-color := $material-dark.fg-color
 $badge-font-family := $body-font-family
-$badge-font-size := .9rem
+$badge-font-size := 14px
 $badge-height := 22px
 $badge-top := 0
 $badge-right := 0
@@ -187,9 +187,9 @@ $badge-width := 22px
 // Breadcrumbs
 $breadcrumbs-flex := 0 1 auto
 $breadcrumbs-height := 40px
-$breadcrumbs-item-font-size := 1rem
+$breadcrumbs-item-font-size := 14px
 $breadcrumbs-margin := 0
-$breadcrumbs-padding := 0 1rem
+$breadcrumbs-padding := 0 14px
 
 /** Buttons */
 
@@ -240,17 +240,15 @@ $card-actions-border-top := 1px solid rgba($material-theme.fg-color, .1)
 $card-background := $material-theme.bg-color
 $card-padding := 16px
 $card-border-radius := 2px
-$card-title-text-size := 1.5rem
-$card-title-text-letter-spacing := .1rem
+$card-title-text-size := 24px
+$card-title-text-letter-spacing := 1px
 $card-title-text-font-weight := 400
 $card-row-min-height := 36px
-$card-actions-font-size := .9rem
-$card-actions-button-padding := .7rem
 
 // Chip
 $chip-background := $grey.lighten-2
 $chip-border := 1px solid $grey.lighten-2
-$chip-border-radius := 2rem
+$chip-border-radius := 28px
 $chip-font-size := 14px
 $chip-label-border-radius := 0
 $chip-icon-font-size := 24px
@@ -264,7 +262,7 @@ $chip-margin := 8px
 $chip-small-height := 26px
 
 // Collapsible
-$collapsible-collapse-height := 3rem
+$expansion-panel-collapse-height := 48px
 $collapsible-transition-height := 0.23s
 
 // Footer
@@ -321,9 +319,9 @@ $time-picker-number-margin := 10px
 
 // Toolbar
 $toolbar-height := 64px
-$toolbar-item-padding := 0 1.2rem
+$toolbar-item-padding := 0 16px
 $toolbar-padding-y := 0
-$toolbar-padding-x := 14px
+$toolbar-padding-x := 16px
 
 // Progress Circular
 $progress-circular-rotate-animation := progress-circular-rotate 1.4s linear infinite
@@ -367,19 +365,10 @@ $sidebar-item-active-color := $material-dark.fg-color
 $sidebar-item-active-background-color := $theme.primary
 $sidebar-item-hover-background-color := rgba($theme.primary, .4)
 
-// Sidebar Item Header
-$sidebar-item-header-padding := .2rem .2rem .2rem 2rem
-$sidebar-item-header-color := $material-dark.fg-color
-$sidebar-item-header-font-size := 90%
-$sidebar-item-header-letter-spacing := .1px
-
 // Sidebar Group
 $sidebar-group-items-background-color := darken($theme.secondary, 15%)
 $sidebar-group-header-active-sidebar-items-border := 1px solid rgba($material-dark.fg-color, .1)
 $sidebar-group-header-active-sidebar-item-active-background-color := rgba($theme.primary, .4)
-
-// Slider
-$slider-arrow-size := 2rem
 
 
 /* Slider */
