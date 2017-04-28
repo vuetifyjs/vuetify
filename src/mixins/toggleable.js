@@ -12,11 +12,11 @@ export default {
   },
 
   watch: {
-    value () {
-      this.isActive = Boolean(this.value)
+    value (val) {
+      this.isActive = Boolean(val)
     },
-    isActive () {
-      this.$emit('input', this.isActive)
+    isActive (val) {
+      val !== this.value && this.$emit('input', val)
     }
   }
 }
