@@ -35,7 +35,7 @@ export default {
         !('value' in item) && console.warn('Data table headers must have a value property that corresponds to a value in the v-model array')
 
         classes.push('sortable')
-        const icon = this.$createElement('v-icon', 'arrow_downward')
+        const icon = this.$createElement('v-icon', 'arrow_upward')
         item.left && children.push(icon) || children.unshift(icon)
 
         beingSorted = this.sorting === item.value

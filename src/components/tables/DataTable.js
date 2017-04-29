@@ -179,12 +179,12 @@ export default {
     sort (index) {
       if (this.sorting === null) {
         this.sorting = index
-        this.desc = true
-      } else if (this.sorting === index && this.desc) {
         this.desc = false
+      } else if (this.sorting === index && !this.desc) {
+        this.desc = true
       } else if (this.sorting !== index) {
         this.sorting = index
-        this.desc = true
+        this.desc = false
       } else {
         this.sorting = null
         this.desc = null
