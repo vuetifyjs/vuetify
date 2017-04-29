@@ -84,6 +84,10 @@ export default {
     loading: {
       type: Boolean,
       default: false
+    },
+    defaultSort: {
+      type: Object,
+      default: () => null
     }
   },
 
@@ -204,7 +208,10 @@ export default {
 
   mounted () {
     const header = this.headers.find(h => !('sortable' in h) || h.sortable)
-    this.sort(header.value)
+    this.desc = this.defaultSort ? this.defaultSort.desc : this.desc
+    this.sorting = this.defaultSort ? this.defaultSort.field : header.value
+
+    this.update()
   },
 
   render (h) {
