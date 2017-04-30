@@ -8,6 +8,7 @@ export default {
 
   data () {
     return {
+      isBooted: false,
       isMobile: false
     }
   },
@@ -58,7 +59,7 @@ export default {
 
   watch: {
     showOverlay (val) {
-      val && this.genOverlay() || this.removeOverlay()
+      this.isBooted && val && this.genOverlay() || this.removeOverlay()
     },
     '$route' () {
       if (!this.disableRouteWatcher) {
@@ -70,12 +71,12 @@ export default {
   mounted () {
     this.$vuetify.load(() => {
       this.resize()
-      window.addEventListener('resize', this.resize, false)
+      window.addEventListener('resize', this.resize, { passive: false })
     })
   },
 
   beforeDestroy () {
-    window.removeEventListener('resize', this.resize)
+    window.removeEventListener('resize', this.resize, { passive: false })
   },
 
   methods: {
@@ -85,7 +86,10 @@ export default {
     resize () {
       this.isMobile = window.innerWidth <= parseInt(this.mobileBreakPoint)
 
-      if (!this.persistent) this.isActive = !this.isMobile
+      if (!this.persistent && !this.drawer) {
+        this.isActive = !this.isMobile && (!this.isMobile && !this.isBooted)
+      }
+      this.isBooted = true
     }
   },
 

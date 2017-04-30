@@ -1,20 +1,28 @@
 .application
-  display: flex
   -webkit-backface-visibility: hidden
-  flex-wrap: wrap
-  overflow: hidden
   position: relative
-  
-  > main
-    flex-direction: column
-  
-  &--column
-    flex-direction: column
-    
-    > main
-      flex-direction: initial
-    
-  &--row      
+
+  > .sidebar    
+    &.sidebar--open:not(.sidebar--drawer):not(.sidebar--is-mobile)
+      ~ main
+        padding-left: $sidebar-width
+        
+  &:not(.application--sidebar-under-toolbar)
+    > .sidebar
+      &.sidebar--open:not(.sidebar--drawer):not(.sidebar--is-mobile)
+        + header
+          padding-left: $sidebar-width
+
+  &--fixed-toolbar
+    > header
+      position: fixed
+      + main
+        padding-top: $toolbar-height
+
+  &--sidebar-under-toolbar
+    > .sidebar:not(.sidebar--is-mobile):not(.sidebar--drawer)
+      height: calc(100vh - $toolbar-height)
+      margin-top: 64px
 
   &--dark
     background: $body-bg-dark

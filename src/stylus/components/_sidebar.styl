@@ -1,45 +1,31 @@
 .sidebar
   background-color: $theme.secondary
-  flex-shrink: 0
   max-width: 100%
   overflow-y: auto
   overflow-x: hidden
   padding: 0 0 100px
   pointer-events: auto
-  transition: transform .3s $transition.ease-in-out,
-    margin .3s $transition.ease-in-out,
+  position: fixed
+  transition: transform .3s $transition.swing,
     width .2s $transition.ease-in-out
   width: $sidebar-width
-  z-index: 3
-  
-  &--right
-    order: +1
+  top: 0
+  left: 0
+  z-index: 5
   
   &--close
-    &:not(.sidebar--drawer)
-      &.sidebar:not(.sidebar--right)
-        margin-left: "-%s" % $sidebar-width
+    &.sidebar:not(.sidebar--right)
+      transform: "translate3d(-%s, 0, 0)" % ($sidebar-width)
 
-      &.sidebar--right
-        margin-right: "-%s" % $sidebar-width
-        
-    &.sidebar--drawer
-      &.sidebar:not(.sidebar--right)
-        transform: "translate3d(-%s, 0, 0)" % ($sidebar-width + 25)
-
-      &.sidebar--right
-        transform: "translate3d(%s, 0, 0)" % ($sidebar-width + 25)
+    &.sidebar--right
+      transform: "translate3d(%s, 0, 0)" % ($sidebar-width)
 
   &--drawer
-    position: fixed
-    top: 0
-    left: 0
-    z-index: 5
     elevation(16)
     
-    &.sidebar--right
-      left: initial
-      right: 0
+  &.sidebar--right
+    left: initial
+    right: 0
 
   &--absolute
     position: absolute

@@ -1,7 +1,6 @@
 html, body
   height: 100%
   min-height: 100%
-  overflow: hidden
   position: relative
 
 html
@@ -15,12 +14,13 @@ body
   font-family: $body-font-family
   line-height: $line-height-root
 
+header
+  transition: .3s padding $transition.swing
+  width: 100%
+  z-index: 1
+
 main
-  display: flex
-  flex: 1
-  max-height: 100vh
-  min-width: 0
-  overflow: hidden
+  transition: .3s padding $transition.swing
 
 a
   color: $theme.primary
