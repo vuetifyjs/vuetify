@@ -61,46 +61,10 @@ const Main = {
 const ColSpacer = createSimpleFunctional('col--spacer')
 const Spacer = createSimpleFunctional('spacer')
 
-const Content = {
-  name: 'content',
-
-  mounted () {
-    this.$vuetify.load(() => {
-      this.hasStorage = typeof sessionStorage !== 'undefined'
-      this.init()
-      this.$el.addEventListener('scroll', this.onScroll, { passive: true })
-    })
-  },
-
-  beforeDestroy () {
-    this.$el.removeEventListener('scroll', this.onScroll, { passive: true })
-  },
-
-  methods: {
-    init () {
-      if (this.hasStorage) {
-        this.$el.scrollTop = sessionStorage.scrollTop || 0
-      }
-    },
-    onScroll () {
-      if (this.hasStorage) {
-        sessionStorage.scrollTop = this.$el.scrollTop
-      }
-    }
-  },
-
-  render (h) {
-    return h('div', {
-      'class': 'content'
-    }, this.$slots.default)
-  }
-}
-
 export default {
   Col,
   ColSpacer,
   Container,
-  Content,
   Spacer,
   Layout,
   Main

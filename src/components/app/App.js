@@ -2,9 +2,6 @@ export default {
   functional: true,
 
   props: {
-    fixedToolbar: Boolean,
-    fixedFooter: Boolean,
-    sidebarUnderToolbar: Boolean,
     dark: Boolean,
     id: {
       type: String,
@@ -17,10 +14,7 @@ export default {
 
     const classes = {
       'application--dark': props.dark,
-      'application--light': !props.dark,
-      'application--fixed-toolbar': props.fixedToolbar && props.sidebarUnderToolbar,
-      'application--fixed-footer': props.fixedFooter,
-      'application--sidebar-under-toolbar': props.sidebarUnderToolbar
+      'application--light': !props.dark
     }
 
     data.staticClass += Object.keys(classes).filter(k => classes[k]).join(' ')

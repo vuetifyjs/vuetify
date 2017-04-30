@@ -9,6 +9,7 @@
   transition: .3s $transition.swing
   width: 100%
   elevation(4)
+  z-index: 2
 
   ul
     list-style: none
@@ -30,6 +31,16 @@
 
     &:last-child
       margin-right: 0
+    
+  &--fixed, &--absolute
+    + main
+      padding-top: $toolbar-height
+
+  &--fixed
+    position: fixed
+    
+  &--absolute
+    position: absolute
 
   &__sub
     flex: 1 0 100%

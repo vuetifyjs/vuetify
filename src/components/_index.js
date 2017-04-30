@@ -16,12 +16,12 @@ import Grid from './grid/index'
 import Icons from './icons/index'
 import Lists from './lists/index'
 import Menu from './menus/index'
+import NavigationDrawer from './navigation-drawer/index'
 import Toolbar from './toolbar/index'
 import Pagination from './pagination/index'
 import Parallax from './parallax/index'
 import Progress from './progress/index'
 import Select from './selects/index'
-import Sidebar from './sidebar/index'
 import Slider from './sliders/index'
 import Subheader from './subheaders/index'
 import Stepper from './steppers/index'
@@ -50,12 +50,12 @@ export default Object.assign({},
   Icons,
   Lists,
   Menu,
+  NavigationDrawer,
   Toolbar,
   Pagination,
   Parallax,
   Progress,
   Select,
-  Sidebar,
   Slider,
   Subheader,
   Stepper,
