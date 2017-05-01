@@ -5,11 +5,24 @@
   flex-wrap: wrap
   height: $toolbar-height
   position: relative
-  padding: $toolbar-padding-y $toolbar-padding-x
+  padding: $toolbar-padding-y 0
   transition: .3s $transition.swing
   width: 100%
   elevation(4)
   z-index: 2
+
+  > *:first-child
+    margin-left: $grid-gutter
+
+  > *:right-child
+    margin-right: $grid-gutter
+
+  @media $display-breakpoints.xs-only
+    > *:first-child
+      margin-left: $grid-gutter-mobile
+
+    > *:right-child
+      margin-right: $grid-gutter-mobile
 
   ul
     list-style: none
@@ -28,9 +41,6 @@
 
     &:first-child
       margin-left: -6px
-
-    &:last-child
-      margin-right: 0
     
   &--fixed, &--absolute
     + main
@@ -65,13 +75,12 @@
     color: #fff
     font-size: $headings.h6.size
     flex: 1;
-    padding: 0 16px
     white-space: nowrap
     overflow: hidden
     text-overflow: ellipsis
-
-    &:first-child
-      padding-left: 2px
+    
+    &:not(:first-child)
+      padding: 0 16px
 
   &__items
     list-style-type: none

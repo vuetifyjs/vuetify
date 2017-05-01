@@ -1,13 +1,13 @@
-import Toggleable from '../../mixins/toggleable'
 import Overlayable from '../../mixins/overlayable'
 
 export default {
   name: 'sidebar',
 
-  mixins: [Overlayable, Toggleable],
+  mixins: [Overlayable],
 
   data () {
     return {
+      isActive: this.value,
       isMini: this.mini,
       isMobile: false,
       mobileBreakPoint: 1024
@@ -26,7 +26,8 @@ export default {
     permanent: Boolean,
     persistent: Boolean,
     right: Boolean,
-    temporary: Boolean
+    temporary: Boolean,
+    value: { required: false }
   },
 
   computed: {
@@ -53,13 +54,16 @@ export default {
       }
     },
     showOverlay () {
-      return this.isActive && (this.temporary || this.isMobile)
+      return !this.permanent && this.isActive && (this.temporary || this.isMobile)
     }
   },
 
   watch: {
+    isActive (val) {
+      this.$emit('input', val)
+    },
     miniVariant (val) {
-      if (val) this.isMini = true
+      this.isMini = true
     },
     showOverlay (val) {
       val && this.genOverlay() || this.removeOverlay()
@@ -68,6 +72,10 @@ export default {
       if (!this.disableRouteWatcher) {
         this.isActive = !this.closeConditional()
       }
+    },
+    value (val) {
+      if (this.permanent) return
+      if (val !== this.isActive) this.isActive = val
     }
   },
 
@@ -82,17 +90,25 @@ export default {
 
   methods: {
     init () {
-      if (this.persistent && this.temporary) this.isActive = false
-      if (this.permanent) this.isActive = true
+      this.checkIfMobile()
 
-      this.resize()
+      if (this.permanent) {
+        this.isActive = true
+        return
+      } else if (this.isMobile) this.isActive = false
+      else if (!this.value && (this.persistent || this.temporary)) this.isActive = false
+
       window.addEventListener('resize', this.resize, { passive: false })
     },
+    checkIfMobile () {
+      this.isMobile = window.innerWidth <= parseInt(this.mobileBreakPoint)
+    },
     closeConditional () {
-      return this.temporary || this.isMobile
+      return !this.permanent && (this.temporary || this.isMobile)
     },
     resize () {
-      this.isMobile = window.innerWidth <= parseInt(this.mobileBreakPoint)
+      if (this.permanent) return
+      this.checkIfMobile()
       this.isActive = !this.isMobile
     }
   },
@@ -106,7 +122,10 @@ export default {
         value: this.closeConditional
       }],
       on: {
-        click: () => (this.isMini = false)
+        click: () => {
+          this.isMini = false
+          console.log(this.isMini, this.miniVariant)
+        }
       }
     }
 
