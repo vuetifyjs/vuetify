@@ -32,7 +32,7 @@ export default {
 
   computed: {
     calculatedHeight () {
-      return this.height || '100vh'
+      return this.height || '100%'
     },
     classes () {
       return {

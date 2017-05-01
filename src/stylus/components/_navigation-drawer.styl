@@ -98,9 +98,10 @@
       
   ~ main
     min-height: 100vh
-    display: flex
-    flex-direction: column
-    justify-content: space-between
+    
+  + toolbar
+    + main
+      min-height: "calc(100vh - %s)" % $toolbar-height
 
   .list__tile
     transition: none
