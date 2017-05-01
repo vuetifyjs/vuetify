@@ -97,7 +97,10 @@
       elevation(16)
       
   ~ main
-    min-height: "calc(100vh - %s)" % $toolbar-height
+    min-height: 100vh
+    display: flex
+    flex-direction: column
+    justify-content: space-between
 
   .list__tile
     transition: none
