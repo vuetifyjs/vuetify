@@ -2,6 +2,7 @@ import Head from './mixins/head'
 import Body from './mixins/body'
 import Foot from './mixins/foot'
 import Progress from './mixins/progress'
+import { getObjectValueByPath } from '../../util/helpers'
 
 export default {
   name: 'datatable',
@@ -125,8 +126,8 @@ export default {
       }
 
       items = items.sort((a, b) => {
-        const sortA = a[this.sorting]
-        const sortB = b[this.sorting]
+        const sortA = getObjectValueByPath(a, this.sorting)
+        const sortB = getObjectValueByPath(b, this.sorting)
 
         if (this.desc) {
           if (sortA < sortB) return 1
