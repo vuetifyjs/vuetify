@@ -1,3 +1,7 @@
+.application--dark
+  .toolbar
+    background: $grey.darken-4
+
 .toolbar
   align-items: center
   background-color: $theme.primary
@@ -8,6 +12,7 @@
   padding: $toolbar-padding-y 0
   transition: .3s $transition.swing
   width: 100%
+  will-change: padding-left
   elevation(4)
   z-index: 2
 

@@ -9,6 +9,7 @@
   width: $navigation-drawer-width
   top: 0
   left: 0
+  will-change: transform
   z-index: 3
   
   &--close:not(.navigation--permanent)
@@ -27,7 +28,6 @@
         
   &--dark
     background-color: $theme.secondary
-    border-right: 1px solid rgba(#fff, $material-dark.divider-percent)
     navigation-drawer(#fff)
     
     .divider
