@@ -21,6 +21,7 @@ export default {
   },
 
   unbind (el) {
-    document.querySelector('[data-app]').removeEventListener('click', el._clickOutside, false)
+    const app = document.querySelector('[data-app]')
+    app && app.removeEventListener('click', el._clickOutside, false)
   }
 }
