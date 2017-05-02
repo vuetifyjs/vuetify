@@ -103,27 +103,28 @@
     + main
       min-height: "calc(100vh - %s)" % $toolbar-height
 
-  .list__tile
-    transition: none
+  > .list
+    .list__tile
+      transition: none
 
-    &--active
-      .list__tile__title
-        color: inherit
+      &--active
+        .list__tile__title
+          color: inherit
 
-      &:first-child
-        .icon
+        &:first-child
+          .icon
+            color: $theme.primary
+
+    .list--group
+      &__header--active
+        &:after
+          background: transparent
+
+        .list__tile__action:first-of-type
+          .icon
+            color: $theme.primary
+
+    .list--group__container
+      .list__tile--active
+        .list__tile__title
           color: $theme.primary
-
-  .list--group
-    &__header--active
-      &:after
-        background: transparent
-
-      .list__tile__action:first-of-type
-        .icon
-          color: $theme.primary
-
-  .list--group__container
-    .list__tile--active
-      .list__tile__title
-        color: $theme.primary
