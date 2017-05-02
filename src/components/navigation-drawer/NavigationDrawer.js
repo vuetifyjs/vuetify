@@ -1,14 +1,13 @@
 import Overlayable from '../../mixins/overlayable'
 
 export default {
-  name: 'sidebar',
+  name: 'navigation-drawer',
 
   mixins: [Overlayable],
 
   data () {
     return {
       isActive: this.value,
-      isMini: this.mini,
       isMobile: false,
       mobileBreakPoint: 1024
     }
@@ -45,7 +44,7 @@ export default {
         'navigation-drawer--full-height': this.fullHeight,
         'navigation-drawer--is-mobile': this.isMobile,
         'navigation-drawer--light': !this.dark,
-        'navigation-drawer--mini': this.miniVariant && this.isMini,
+        'navigation-drawer--mini': this.miniVariant,
         'navigation-drawer--open': this.isActive,
         'navigation-drawer--permanent': this.permanent,
         'navigation-drawer--persistent': this.persistent,
@@ -61,9 +60,6 @@ export default {
   watch: {
     isActive (val) {
       this.$emit('input', val)
-    },
-    miniVariant (val) {
-      this.isMini = true
     },
     showOverlay (val) {
       val && this.genOverlay() || this.removeOverlay()
@@ -107,7 +103,7 @@ export default {
       return !this.permanent && (this.temporary || this.isMobile)
     },
     resize () {
-      if (this.permanent) return
+      if (this.permanent || this.temporary) return
       this.checkIfMobile()
       this.isActive = !this.isMobile
     }
@@ -123,8 +119,7 @@ export default {
       }],
       on: {
         click: () => {
-          this.isMini = false
-          console.log(this.isMini, this.miniVariant)
+          this.$emit('update:miniVariant', false)
         }
       }
     }
