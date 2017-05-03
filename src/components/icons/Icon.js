@@ -2,6 +2,7 @@ export default {
   functional: true,
 
   props: {
+    fa: Boolean,
     light: Boolean,
     large: Boolean,
     left: Boolean,
@@ -11,7 +12,8 @@ export default {
   },
 
   render (h, { props, data, children }) {
-    data.staticClass = data.staticClass ? `material-icons icon ${data.staticClass} ` : 'material-icons icon '
+    const icon = props.fa ? 'fa' : 'material-icons'
+    data.staticClass = data.staticClass ? `${icon} icon ${data.staticClass} ` : `${icon} icon `
 
     const classes = {
       'icon--dark': !props.light,
@@ -24,6 +26,8 @@ export default {
     }
 
     data.staticClass += Object.keys(classes).filter(k => classes[k]).join(' ')
+
+    if (props.fa) data.staticClass += ` ${children.pop().text}`
 
     return h('i', data, children)
   }

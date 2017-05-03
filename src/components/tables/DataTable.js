@@ -74,6 +74,32 @@ export default {
           val.toString().toLowerCase().indexOf(search) !== -1
       }
     },
+    customFilter: {
+      type: Function,
+      default: (items, search, filter) => {
+          search = search.toString().toLowerCase()
+          return items.filter(i => Object.keys(i).some(j => filter(i[j], search)))
+      }
+    },
+    customSort: {
+      type: Function,
+      default: (items, index, desc) => {
+        return items.sort((a, b) => {
+              const sortA = a[index]
+              const sortB = b[index]
+
+              if (desc) {
+                  if (sortA < sortB) return 1
+                  if (sortA > sortB) return -1
+                  return 0
+              } else {
+                  if (sortA < sortB) return -1
+                  if (sortA > sortB) return 1
+                  return 0
+              }
+          })
+      }
+    },
     value: {
       type: Array,
       default: () => []
@@ -85,6 +111,10 @@ export default {
     loading: {
       type: Boolean,
       default: false
+    },
+    defaultSort: {
+      type: Object,
+      default: () => null
     }
   },
 
@@ -120,25 +150,10 @@ export default {
       const hasSearch = typeof this.search !== 'undefined' && this.search !== null
 
       if (hasSearch) {
-        const search = this.search.toString().toLowerCase()
-
-        items = items.filter(i => Object.keys(i).some(j => this.filter(i[j], search)))
+          items = this.customFilter(items, this.search, this.filter);
       }
-
-      items = items.sort((a, b) => {
-        const sortA = getObjectValueByPath(a, this.sorting)
-        const sortB = getObjectValueByPath(b, this.sorting)
-
-        if (this.desc) {
-          if (sortA < sortB) return 1
-          if (sortA > sortB) return -1
-          return 0
-        } else {
-          if (sortA < sortB) return -1
-          if (sortA > sortB) return 1
-          return 0
-        }
-      })
+      
+      items = this.customSort(items, this.sorting, this.desc);
 
       return this.hideActions ? items : items.slice(this.pageStart, this.pageStop)
     }
@@ -176,12 +191,12 @@ export default {
     sort (index) {
       if (this.sorting === null) {
         this.sorting = index
-        this.desc = true
-      } else if (this.sorting === index && this.desc) {
         this.desc = false
+      } else if (this.sorting === index && !this.desc) {
+        this.desc = true
       } else if (this.sorting !== index) {
         this.sorting = index
-        this.desc = true
+        this.desc = false
       } else {
         this.sorting = null
         this.desc = null
@@ -205,7 +220,10 @@ export default {
 
   mounted () {
     const header = this.headers.find(h => !('sortable' in h) || h.sortable)
-    this.sort(header.value)
+    this.desc = this.defaultSort ? this.defaultSort.desc : this.desc
+    this.sorting = this.defaultSort ? this.defaultSort.field : header.value
+
+    this.update()
   },
 
   render (h) {
