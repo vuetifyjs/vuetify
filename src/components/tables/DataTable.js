@@ -2,6 +2,7 @@ import Head from './mixins/head'
 import Body from './mixins/body'
 import Foot from './mixins/foot'
 import Progress from './mixins/progress'
+import { getObjectValueByPath } from '../../util/helpers'
 
 export default {
   name: 'datatable',
@@ -151,7 +152,7 @@ export default {
       if (hasSearch) {
           items = this.customFilter(items, this.search, this.filter);
       }
-
+      
       items = this.customSort(items, this.sorting, this.desc);
 
       return this.hideActions ? items : items.slice(this.pageStart, this.pageStop)
