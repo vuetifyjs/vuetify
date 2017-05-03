@@ -151,19 +151,13 @@ export default {
     },
     selectItem (item) {
       if (!this.multiple) {
-        this.inputValue = item
-      }
-
-      if (this.inputValue === null) {
-        this.inputValue = [item]
-      }
-
-      if (this.multiple) {
+        this.inputValue = this.getValue(item)
+      } else {
         const inputValue = this.inputValue.slice()
         const i = this.inputValue.findIndex(i => this.getValue(i) === this.getValue(item))
 
         i !== -1 && inputValue.splice(i, 1) || inputValue.push(item)
-        this.inputValue = inputValue
+        this.inputValue = inputValue.map(i => this.getValue(i))
       }
 
       if (this.autocomplete) {
