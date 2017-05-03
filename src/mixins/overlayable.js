@@ -22,7 +22,7 @@ export default {
       setTimeout(() => {
         overlay.className += ' overlay--active'
         this.overlay = overlay
-      }, 25)
+      }, 0)
     },
     removeOverlay () {
       if (!this.overlay) return
