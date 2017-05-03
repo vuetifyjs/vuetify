@@ -90,7 +90,7 @@ export default {
     tabClick (target) {
       this.target = target
 
-      if (!this.$refs.content.length) {
+      if (!this.$refs.content) {
         this.activeIndex = target
         return
       }
