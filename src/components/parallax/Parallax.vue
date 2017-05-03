@@ -1,7 +1,7 @@
 <template lang="pug">
   div(
     class="parallax"
-    v-bind:style="{ minHeight: this.normalizedHeight + 'px' }"
+    v-bind:style="{ height: this.normalizedHeight + 'px' }"
   )
     div(class="parallax__image-container")
       img(
@@ -10,6 +10,7 @@
         v-bind:style="styles"
         ref="img"
       )
+    div.parallax__content
       slot
 </template>
 
