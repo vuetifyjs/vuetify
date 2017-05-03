@@ -109,7 +109,6 @@ export default {
       if (this.originalDate) {
         this.originalDate = this.value
       } else {
-        this.inputDate = this.inputDate
         this.originalDate = this.inputDate
       }
 
