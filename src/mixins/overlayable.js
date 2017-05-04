@@ -13,6 +13,8 @@ export default {
 
   methods: {
     genOverlay () {
+      if (!this.isActive) return
+
       const overlay = document.createElement('div')
       overlay.className = 'overlay'
       if (this.absolute) overlay.className += ' overlay--absolute'

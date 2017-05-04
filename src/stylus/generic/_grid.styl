@@ -1,8 +1,8 @@
-.container, .container-fluid
+.container
   margin-right: auto
   margin-left: auto
-  flex-basis: 100%
   padding: $grid-gutter
+  flex-basis: 100%
   
   @media $display-breakpoints.xs-only
     padding: $grid-gutter-mobile
@@ -21,8 +21,6 @@
 
   &.row
     flex: 0 1 auto
-    // margin-left: "-%s" % ($grid-gutter / 2)
-    // margin-right: "-%s" % ($grid-gutter / 2)
     flex-direction: row
 
     &--reverse

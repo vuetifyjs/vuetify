@@ -55,10 +55,9 @@
   
   &--permanent
     &:not(.navigation-drawer--clipped):not(.navigation-drawer--floating)
-      ~ main
-        padding-left: $navigation-drawer-width
-      
-      + .toolbar
+      ~ main, 
+      + .toolbar,
+      ~ .footer
         padding-left: $navigation-drawer-width
 
   &--persistent
@@ -67,7 +66,7 @@
         + .toolbar
           padding-left: $navigation-drawer-width
 
-      ~ main
+      ~ main, ~ .footer
         padding-left: $navigation-drawer-width
 
   &--mini
