@@ -71,12 +71,12 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^2.1.1",
     "vue-loader": "^10.1.0",
-    "vue-template-compiler": "^2.2.4",
+    "vue-template-compiler": "^2.3.2",
     "webpack": "2.2.0-rc.2",
     "webpack-merge": "^0.17.0"
   },
   "dependencies": {
-    "vue": "^2.2.0"
+    "vue": "^2.3.2"
   },
   "engines": {
     "node": ">= 4.0.0",
