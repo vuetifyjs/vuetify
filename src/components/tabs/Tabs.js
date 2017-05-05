@@ -63,8 +63,9 @@ export default {
   mounted () {
     this.$vuetify.load(() => {
       this.activators = this.$refs.activators.$children.filter(i => i.$options._componentTag === 'v-tab-item')
-      this.tabClick(this.value || this.activators[0].target)
-      this.resize()
+      const tab = this.value || (this.activators[0] || {}).target
+
+      tab && this.tabClick(tab) && this.resize()
       window.addEventListener('resize', this.resize, false)
     })
   },
