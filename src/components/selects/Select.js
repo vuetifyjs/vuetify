@@ -132,7 +132,7 @@ export default {
       return item === Object(item) ? item[this.itemText] : item
     },
     getValue (item) {
-      return item === Object(item) ? item[this.itemValue] : item
+      return item === Object(item) && (this.itemValue in item) ? item[this.itemValue] : item
     },
     onScroll () {
       if (!this.menuActive) {
