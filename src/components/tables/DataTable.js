@@ -2,7 +2,6 @@ import Head from './mixins/head'
 import Body from './mixins/body'
 import Foot from './mixins/foot'
 import Progress from './mixins/progress'
-import { getObjectValueByPath } from '../../util/helpers'
 
 export default {
   name: 'datatable',
@@ -77,27 +76,27 @@ export default {
     customFilter: {
       type: Function,
       default: (items, search, filter) => {
-          search = search.toString().toLowerCase()
-          return items.filter(i => Object.keys(i).some(j => filter(i[j], search)))
+        search = search.toString().toLowerCase()
+        return items.filter(i => Object.keys(i).some(j => filter(i[j], search)))
       }
     },
     customSort: {
       type: Function,
       default: (items, index, desc) => {
         return items.sort((a, b) => {
-              const sortA = a[index]
-              const sortB = b[index]
+          const sortA = a[index]
+          const sortB = b[index]
 
-              if (desc) {
-                  if (sortA < sortB) return 1
-                  if (sortA > sortB) return -1
-                  return 0
-              } else {
-                  if (sortA < sortB) return -1
-                  if (sortA > sortB) return 1
-                  return 0
-              }
-          })
+          if (desc) {
+            if (sortA < sortB) return 1
+            if (sortA > sortB) return -1
+            return 0
+          } else {
+            if (sortA < sortB) return -1
+            if (sortA > sortB) return 1
+            return 0
+          }
+        })
       }
     },
     value: {
@@ -150,10 +149,10 @@ export default {
       const hasSearch = typeof this.search !== 'undefined' && this.search !== null
 
       if (hasSearch) {
-          items = this.customFilter(items, this.search, this.filter);
+        items = this.customFilter(items, this.search, this.filter)
       }
-      
-      items = this.customSort(items, this.sorting, this.desc);
+
+      items = this.customSort(items, this.sorting, this.desc)
 
       return this.hideActions ? items : items.slice(this.pageStart, this.pageStop)
     }
@@ -185,7 +184,7 @@ export default {
         page: this.page,
         rowsPerPage: this.rowsPerPage,
         sorting: this.sorting,
-        desc: this.desc,
+        desc: this.desc
       })
     },
     sort (index) {
