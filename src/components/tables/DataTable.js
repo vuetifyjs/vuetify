@@ -20,7 +20,7 @@ export default {
         all: false,
         rowsPerPage: 5,
         checkedValue: 'value',
-        checked: null
+        checked: {}
       }
     }
   },
@@ -113,8 +113,7 @@ export default {
       default: false
     },
     options: {
-      type: Object,
-      default: () => ({})
+      type: Object
     }
   },
 
@@ -175,15 +174,6 @@ export default {
       },
       deep: true
     },
-    value: {
-      handler (value) {
-        Vue.set(this.options, 'checked', {})
-        this.value.forEach(i => {
-          Vue.set(this.options.checked, i[this.options.checkedValue], false)
-        })
-      },
-      deep: true
-    }
   },
 
   methods: {
