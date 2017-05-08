@@ -29,7 +29,7 @@
       v-list
         v-list-item(v-for="(option, index) in options")
           v-list-tile(
-            v-bind:class="{ 'list__tile--active': inputValue === option }" 
+            v-bind:class="{ 'list__tile--active': inputValue === option }"
             v-on:click.native="e => updateValue(e, option)"
           )
             v-list-tile-action(v-if="option.action")
@@ -109,7 +109,7 @@
     mounted () {
       if (this.inputValue) {
         this.editableValue = this.inputValue.text
-      } 
+      }
     },
 
     watch: {
@@ -118,11 +118,8 @@
       },
 
       value () {
-        if (typeof this.value === 'string') {
-          return (this.inputValue = { title: this.value })
-        }
-
-        this.inputValue = this.value
+        this.inputValue = typeof this.value === 'string' ? { text: this.value } : this.value
+        this.editableValue = this.inputValue.text
       }
     },
 
