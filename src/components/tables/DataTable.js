@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import Head from './mixins/head'
 import Body from './mixins/body'
 import Foot from './mixins/foot'
@@ -12,10 +13,15 @@ export default {
 
   data () {
     return {
-      desc: null,
-      page: 1,
-      sorting: null,
-      all: false
+      defaultOptions: {
+        desc: null,
+        page: 1,
+        sorting: null,
+        all: false,
+        rowsPerPage: 5,
+        checkedValue: 'value',
+        checked: null
+      }
     }
   },
 
@@ -33,9 +39,6 @@ export default {
       type: Array,
       default: () => []
     },
-    itemValue: {
-      default: 'value'
-    },
     noDataText: {
       type: String,
       default: 'No data available in table'
@@ -43,10 +46,6 @@ export default {
     noResultsText: {
       type: String,
       default: 'No matching records found'
-    },
-    rowsPerPage: {
-      type: [Number, Object],
-      default: 5
     },
     rowsPerPageItems: {
       type: Array,
@@ -113,9 +112,9 @@ export default {
       type: Boolean,
       default: false
     },
-    defaultSort: {
+    options: {
       type: Object,
-      default: () => null
+      default: () => ({})
     }
   },
 
@@ -127,22 +126,22 @@ export default {
       return this.selectAll && this.someItems && !this.everyItem
     },
     everyItem () {
-      return this.value.every(i => i[this.itemValue])
+      return this.value.every(i => this.isChecked(i))
     },
     someItems () {
-      return this.value.some(i => i[this.itemValue])
+      return this.value.some(i => this.isChecked(i))
     },
     pageStart () {
-      const page = this.rowsPerPage === Object(this.rowsPerPage)
-        ? this.rowsPerPage.value
-        : this.rowsPerPage
-      return page === -1 ? 0 : (this.page - 1) * page
+      const page = this.options.rowsPerPage === Object(this.options.rowsPerPage)
+        ? this.options.rowsPerPage.value
+        : this.options.rowsPerPage
+      return page === -1 ? 0 : (this.options.page - 1) * page
     },
     pageStop () {
-      const page = this.rowsPerPage === Object(this.rowsPerPage)
-        ? this.rowsPerPage.value
-        : this.rowsPerPage
-      return page === -1 ? this.itemsLength : this.page * page
+      const page = this.options.rowsPerPage === Object(this.options.rowsPerPage)
+        ? this.options.rowsPerPage.value
+        : this.options.rowsPerPage
+      return page === -1 ? this.itemsLength : this.options.page * page
     },
     filteredItems () {
       if (this.totalItems) return this.value
@@ -154,18 +153,13 @@ export default {
         items = this.customFilter(items, this.search, this.filter)
       }
 
-      items = this.customSort(items, this.sorting, this.desc)
+      items = this.customSort(items, this.options.sorting, this.options.desc)
 
       return this.hideActions ? items : items.slice(this.pageStart, this.pageStop)
     }
   },
 
   watch: {
-    rowsPerPage () {
-      this.page === 1 && this.update()
-
-      this.page = 1
-    },
     indeterminate (val) {
       if (val) this.all = true
     },
@@ -175,35 +169,41 @@ export default {
     search () {
       this.page = 1
     },
-    page () {
-      this.update()
+    options: {
+      handler (value) {
+        this.$emit('update:options', this.options)
+      },
+      deep: true
+    },
+    value: {
+      handler (value) {
+        Vue.set(this.options, 'checked', {})
+        this.value.forEach(i => {
+          Vue.set(this.options.checked, i[this.options.checkedValue], false)
+        })
+      },
+      deep: true
     }
   },
 
   methods: {
-    update () {
-      this.$emit('update', {
-        page: this.page,
-        rowsPerPage: this.rowsPerPage,
-        sorting: this.sorting,
-        desc: this.desc
-      })
+    isChecked (item) {
+      const value = item[this.options.checkedValue]
+      return this.options.checked && value && value in this.options.checked && this.options.checked[value] ? true : false
     },
     sort (index) {
-      if (this.sorting === null) {
-        this.sorting = index
-        this.desc = false
-      } else if (this.sorting === index && !this.desc) {
-        this.desc = true
-      } else if (this.sorting !== index) {
-        this.sorting = index
-        this.desc = false
+      if (this.options.sorting === null) {
+        this.options.sorting = index
+        this.options.desc = false
+      } else if (this.options.sorting === index && !this.options.desc) {
+        this.options.desc = true
+      } else if (this.options.sorting !== index) {
+        this.options.sorting = index
+        this.options.desc = false
       } else {
-        this.sorting = null
-        this.desc = null
+        this.options.sorting = null
+        this.options.desc = null
       }
-
-      this.update()
     },
     genTR (children, data = {}) {
       return this.$createElement('tr', data, children)
@@ -211,20 +211,22 @@ export default {
     toggle (val) {
       this.all = val
 
+      /*
       this.$emit('input', this.value.map(i => {
         i[this.itemValue] = this.filteredItems.includes(i) ? val : false
 
         return i
       }))
+      */
     }
   },
 
   mounted () {
-    const header = this.headers.find(h => !('sortable' in h) || h.sortable)
-    this.desc = this.defaultSort ? this.defaultSort.desc : this.desc
-    this.sorting = this.defaultSort ? this.defaultSort.field : header.value
+    this.$emit('update:options', Object.assign({}, this.defaultOptions, this.options))
 
-    this.update()
+    //const header = this.headers.find(h => !('sortable' in h) || h.sortable)
+    //this.options.desc = this.defaultSort ? this.defaultSort.desc : this.desc
+    //this.options.sorting = this.defaultSort ? this.defaultSort.field : header.value
   },
 
   render (h) {

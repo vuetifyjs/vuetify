@@ -6,7 +6,7 @@ export default {
         props: {
           hideDetails: true,
           primary: true,
-          inputValue: this.all,
+          inputValue: this.options.all,
           indeterminate: this.indeterminate
         },
         on: { change: this.toggle }
@@ -38,9 +38,9 @@ export default {
         const icon = this.$createElement('v-icon', 'arrow_upward')
         item.left && children.push(icon) || children.unshift(icon)
 
-        beingSorted = this.sorting === item.value
+        beingSorted = this.options.sorting === item.value
         beingSorted && classes.push('active')
-        beingSorted && this.desc && classes.push('desc') || classes.push('asc')
+        beingSorted && this.options.desc && classes.push('desc') || classes.push('asc')
       }
 
       item.left && classes.push('text-xs-left') || classes.push('text-xs-right')

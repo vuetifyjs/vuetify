@@ -9,8 +9,9 @@ export default {
         children = [this.genEmptyBody(this.noResultsText)]
       } else {
         children = this.filteredItems.map(item => {
-          return this.genTR(this.$scopedSlots.items({ item }), {
-            attrs: { active: item[this.itemValue] }
+          console.log(this.options.checked[item[this.options.checkedValue]])
+          return this.genTR(this.$scopedSlots.items({ item, checked: this.options.checked[item[this.options.checkedValue]] }), {
+            attrs: { active: this.isChecked(item) }
           })
         })
       }
