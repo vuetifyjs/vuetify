@@ -4,7 +4,8 @@ export default {
   data () {
     return {
       isActive: false,
-      isSaving: false
+      isSaving: false,
+      isInvalid: false
     }
   },
 
@@ -20,6 +21,10 @@ export default {
     transition: {
       type: String,
       default: 'v-slide-x-reverse-transition'
+    },
+    validate: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -34,6 +39,12 @@ export default {
     }
   },
 
+  computed: {
+    input () {
+      return this.$slots.input.find(e => 'errors' in e.componentInstance).componentInstance
+    }
+  },
+
   methods: {
     cancel () {
       this.isActive = false
@@ -43,6 +54,11 @@ export default {
       input && setTimeout(() => (input.focus()), 0)
     },
     save () {
+      if (this.validate && this.input && this.input.errors.length > 0) {
+        this.isInvalid = true
+        return
+      }
+
       this.isSaving = true
       this.isActive = false
       this.$emit('save')
@@ -71,9 +87,10 @@ export default {
     },
     genContent () {
       return this.$createElement('div', {
-        'class': 'small-dialog__content',
+        'class': ['small-dialog__content', { 'shake-animation': this.isInvalid }],
         on: {
           keydown: e => {
+            this.isInvalid = false
             e.keyCode === 27 && this.cancel()
             e.keyCode === 13 && this.save()
           }
