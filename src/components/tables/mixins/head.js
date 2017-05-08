@@ -6,7 +6,7 @@ export default {
         props: {
           hideDetails: true,
           primary: true,
-          inputValue: this.options.all,
+          inputValue: this.all,
           indeterminate: this.indeterminate
         },
         on: { change: this.toggle }

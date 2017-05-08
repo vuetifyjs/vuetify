@@ -13,11 +13,11 @@ export default {
 
   data () {
     return {
+      all: false,
       defaultOptions: {
         desc: null,
         page: 1,
         sorting: null,
-        all: false,
         rowsPerPage: 5,
         checkedValue: 'value',
         checked: {}
@@ -171,15 +171,18 @@ export default {
     options: {
       handler (value) {
         this.$emit('update:options', this.options)
+
+        if (this.everyItem)
+          this.all = true
       },
       deep: true
-    },
+    }
   },
 
   methods: {
     isChecked (item) {
       const value = item[this.options.checkedValue]
-      return this.options.checked && value && value in this.options.checked && this.options.checked[value] ? true : false
+      return value && value in this.options.checked && this.options.checked[value] ? true : false
     },
     sort (index) {
       if (this.options.sorting === null) {
@@ -198,25 +201,17 @@ export default {
     genTR (children, data = {}) {
       return this.$createElement('tr', data, children)
     },
-    toggle (val) {
-      this.all = val
+    toggle (value) {
+      this.all = value
 
-      /*
-      this.$emit('input', this.value.map(i => {
-        i[this.itemValue] = this.filteredItems.includes(i) ? val : false
-
-        return i
-      }))
-      */
+      this.value.forEach(i => {
+        this.$set(this.options.checked, i[this.options.checkedValue], value)
+      })
     }
   },
 
   mounted () {
     this.$emit('update:options', Object.assign({}, this.defaultOptions, this.options))
-
-    //const header = this.headers.find(h => !('sortable' in h) || h.sortable)
-    //this.options.desc = this.defaultSort ? this.defaultSort.desc : this.desc
-    //this.options.sorting = this.defaultSort ? this.defaultSort.field : header.value
   },
 
   render (h) {

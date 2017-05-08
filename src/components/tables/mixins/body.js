@@ -1,5 +1,3 @@
-import Vue from 'vue'
-
 export default {
   methods: {
     genTBody () {
@@ -11,14 +9,15 @@ export default {
         children = [this.genEmptyBody(this.noResultsText)]
       } else {
         children = this.filteredItems.map(item => {
-
           if (!(item.id in this.options.checked))
-            Vue.set(this.options.checked, item.id, false)
+            this.$set(this.options.checked, item.id, false)
 
-          const props = {
-            item,
-            checked: this.options.checked,
-          }
+          const props = { item }
+
+          Object.defineProperty(props, 'checked', {
+            get: () => this.options.checked[item[this.options.checkedValue]],
+            set: _ => this.options.checked[item[this.options.checkedValue]] = _
+          })
 
           return this.genTR(this.$scopedSlots.items(props), {
             attrs: { active: this.isChecked(item) }
