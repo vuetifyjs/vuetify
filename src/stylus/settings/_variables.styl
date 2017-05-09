@@ -1,35 +1,15 @@
+@require './_theme'
+
 // ============================================================
 // Vuetify variables
 // ============================================================
 
+$color-pack := true
 
 // Material Design
 // ============================================================
 $material-left-padding := 16px
 $material-right-padding := 16px
-
-$material-light := {
-  bg-color: #fff
-  fg-color: #000
-  text-color: #000
-  primary-text-percent: .87
-  secondary-text-percent: .54
-  disabledORhints-text-percent: .38
-  divider-percent: .12
-  active-icon-percent: .54
-  inactive-icon-percent: .38
-}
-$material-dark := {
-  bg-color: #303030
-  fg-color: #fff
-  text-color: #fff
-  primary-text-percent: 1
-  secondary-text-percent: .70
-  disabledORhints-text-percent: .50
-  divider-percent: .12
-  active-icon-percent: 1
-  inactive-icon-percent: .50
-}
 
 $material-twelve-percent-light := rgba($material-dark.fg-color, $material-dark.divider-percent)
 $material-twelve-percent-dark := rgba($material-light.fg-color, $material-light.divider-percent)
@@ -37,26 +17,10 @@ $material-twelve-percent-dark := rgba($material-light.fg-color, $material-light.
 
 // Theme
 // ============================================================
-$theme := {
-  primary: $blue.darken-2
-  accent: $blue.accent-2
-  secondary: $grey.darken-3
-  info: $blue.base
-  warning: $amber.base
-  error: $red.accent-2
-  success: $green.base
-}
-$material-theme := $material-light
-
-$body-font-family := 'Roboto', sans-serif
 $body-bg-light := $material-light.bg-color
 $body-bg-dark := $material-dark.bg-color
 $color-light := rgba($material-light.text-color, $material-light.primary-text-percent)
 $color-dark := $material-dark.text-color
-$font-size-root := 14px
-$line-height-root := 1.5
-
-$color-pack := true
 
 
 // Grid
