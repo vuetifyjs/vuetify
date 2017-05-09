@@ -5,7 +5,6 @@ import Directives from './directives/_index'
 import Load from './util/load'
 
 const defaults = {
-  componentPrefix: 'V',
   directivePrefix: ''
 }
 
@@ -17,7 +16,12 @@ function plugin (Vue, options) {
   })
 
   Object.keys(Components).forEach(key => {
-    Vue.component(`${options.componentPrefix}${key}`, Components[key])
+    if (options.componentPrefix) {
+      Vue.component(`${options.componentPrefix}${key}`, Components[key])
+    } else {
+      Vue.component(`V${key}`, Components[key])
+      Vue.component(`v:${key}`, Components[key])
+    }
   })
 
   Vue.prototype.$vuetify = {
