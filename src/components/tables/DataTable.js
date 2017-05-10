@@ -13,15 +13,7 @@ export default {
 
   data () {
     return {
-      all: false,
-      defaultOptions: {
-        desc: null,
-        page: 1,
-        sorting: null,
-        rowsPerPage: 5,
-        checkedValue: 'value',
-        checked: {}
-      }
+      all: false
     }
   },
 
@@ -83,12 +75,12 @@ export default {
     },
     customSort: {
       type: Function,
-      default: (items, index, desc) => {
+      default: (items, index, descending) => {
         return items.sort((a, b) => {
           const sortA = getObjectValueByPath(a, index)
           const sortB = getObjectValueByPath(b, index)
 
-          if (desc) {
+          if (descending) {
             if (sortA < sortB) return 1
             if (sortA > sortB) return -1
             return 0
@@ -112,12 +104,28 @@ export default {
       type: Boolean,
       default: false
     },
-    options: {
-      type: Object
+    selected: {
+      type: Array
+    },
+    selectedKey: {
+      type: String,
+      default: 'id'
+    },
+    pagination: {
+      type: Object,
+      default: () => ({
+        sortBy: null,
+        descending: null,
+        page: 1,
+        rowsPerPage: 5
+      })
     }
   },
 
   computed: {
+    computedOptions () {
+      return !this.options ? this.defaultOptions : this.options
+    },
     itemsLength () {
       return this.totalItems || this.value.length
     },
@@ -125,22 +133,22 @@ export default {
       return this.selectAll && this.someItems && !this.everyItem
     },
     everyItem () {
-      return this.value.every(i => this.isChecked(i))
+      return this.filteredItems.length > 0 && this.filteredItems.every(i => this.selected.find(j => i[this.selectedKey] === j[this.selectedKey]))
     },
     someItems () {
-      return this.value.some(i => this.isChecked(i))
+      return this.filteredItems.some(i => this.isSelected(i))
     },
     pageStart () {
-      const page = this.options.rowsPerPage === Object(this.options.rowsPerPage)
-        ? this.options.rowsPerPage.value
-        : this.options.rowsPerPage
-      return page === -1 ? 0 : (this.options.page - 1) * page
+      const page = this.pagination.rowsPerPage === Object(this.pagination.rowsPerPage)
+        ? this.pagination.rowsPerPage.value
+        : this.pagination.rowsPerPage
+      return page === -1 ? 0 : (this.pagination.page - 1) * page
     },
     pageStop () {
-      const page = this.options.rowsPerPage === Object(this.options.rowsPerPage)
-        ? this.options.rowsPerPage.value
-        : this.options.rowsPerPage
-      return page === -1 ? this.itemsLength : this.options.page * page
+      const page = this.pagination.rowsPerPage === Object(this.pagination.rowsPerPage)
+        ? this.pagination.rowsPerPage.value
+        : this.pagination.rowsPerPage
+      return page === -1 ? this.itemsLength : this.pagination.page * page
     },
     filteredItems () {
       if (this.totalItems) return this.value
@@ -152,7 +160,7 @@ export default {
         items = this.customFilter(items, this.search, this.filter)
       }
 
-      items = this.customSort(items, this.options.sorting, this.options.desc)
+      items = this.customSort(items, this.pagination.sortBy, this.pagination.descending)
 
       return this.hideActions ? items : items.slice(this.pageStart, this.pageStop)
     }
@@ -168,34 +176,30 @@ export default {
     search () {
       this.page = 1
     },
-    options: {
-      handler (value) {
-        this.$emit('update:options', this.options)
-
-        if (this.everyItem)
-          this.all = true
+    filteredItems: {
+      handler: function () {
+        if (this.everyItem) this.all = true
       },
       deep: true
+    },
+    selected () {
+      if (this.everyItem) this.all = true
     }
   },
 
   methods: {
-    isChecked (item) {
-      const value = item[this.options.checkedValue]
-      return value && value in this.options.checked && this.options.checked[value] ? true : false
+    isSelected (item) {
+      return this.selected && this.selected.find(i => i[this.selectedKey] === item[this.selectedKey])
     },
     sort (index) {
-      if (this.options.sorting === null) {
-        this.options.sorting = index
-        this.options.desc = false
-      } else if (this.options.sorting === index && !this.options.desc) {
-        this.options.desc = true
-      } else if (this.options.sorting !== index) {
-        this.options.sorting = index
-        this.options.desc = false
+      if (this.pagination.sortBy === null) {
+        this.$emit('update:pagination', Object.assign({}, this.pagination, { sortBy: index, descending: false }))
+      } else if (this.pagination.sortBy === index && !this.pagination.descending) {
+        this.$emit('update:pagination', Object.assign({}, this.pagination, { descending: true }))
+      } else if (this.pagination.sortBy !== index) {
+        this.$emit('update:pagination', Object.assign({}, this.pagination, { sortBy: index, descending: false }))
       } else {
-        this.options.sorting = null
-        this.options.desc = null
+        this.$emit('update:pagination', Object.assign({}, this.pagination, { sortBy: null, descending: null }))
       }
     },
     genTR (children, data = {}) {
@@ -204,14 +208,27 @@ export default {
     toggle (value) {
       this.all = value
 
-      this.value.forEach(i => {
-        this.$set(this.options.checked, i[this.options.checkedValue], value)
-      })
+      let selected = this.selected.slice()
+      if (value)
+        selected.push(...this.filteredItems)
+      else
+        selected = selected.filter(i => !this.filteredItems.find(j => j[this.selectedKey] === i[this.selectedKey]))
+
+      this.$emit('update:selected', selected)
     }
   },
 
   mounted () {
-    this.$emit('update:options', Object.assign({}, this.defaultOptions, this.options))
+    const firstSortable = this.headers.find(h => !('sortable' in h) || h.sortable)
+
+    let defaultPagination = {
+      page: 1,
+      rowsPerPage: 5,
+      sortBy: firstSortable ? firstSortable.value : null,
+      descending: null
+    }
+
+    this.$emit('update:pagination', Object.assign({}, defaultPagination, this.pagination))
   },
 
   render (h) {

@@ -9,18 +9,23 @@ export default {
         children = [this.genEmptyBody(this.noResultsText)]
       } else {
         children = this.filteredItems.map(item => {
-          if (!(item.id in this.options.checked))
-            this.$set(this.options.checked, item.id, false)
-
           const props = { item }
 
-          Object.defineProperty(props, 'checked', {
-            get: () => this.options.checked[item[this.options.checkedValue]],
-            set: _ => this.options.checked[item[this.options.checkedValue]] = _
-          })
+          if (this.selected) {
+            Object.defineProperty(props, 'selected', {
+              get: () => !!this.selected.find(i => i[this.selectedKey] === item[this.selectedKey]),
+              set: (value) => {
+                let selected = this.selected.slice()
+
+                value && selected.push(item) || (selected = selected.filter(i => i[this.selectedKey] !== item[this.selectedKey]))
+
+                this.$emit('update:selected', selected)
+              }
+            })
+          }
 
           return this.genTR(this.$scopedSlots.items(props), {
-            attrs: { active: this.isChecked(item) }
+            attrs: { active: this.isSelected(item) }
           })
         })
       }

@@ -3,21 +3,21 @@ export default {
     genPrevIcon () {
       return this.$createElement('v-btn', {
         props: {
-          disabled: this.options.page === 1,
+          disabled: this.pagination.page === 1,
           icon: true,
           flat: true
         },
-        nativeOn: { click: () => (this.options.page--) }
+        nativeOn: { click: () => (this.pagination.page--) }
       }, [this.$createElement('v-icon', 'chevron_left')])
     },
     genNextIcon () {
       return this.$createElement('v-btn', {
         props: {
-          disabled: this.options.page * this.options.rowsPerPage >= this.itemsLength || this.pageStop < 0,
+          disabled: this.pagination.page * this.pagination.rowsPerPage >= this.itemsLength || this.pageStop < 0,
           icon: true,
           flat: true
         },
-        nativeOn: { click: () => (this.options.page++) }
+        nativeOn: { click: () => (this.pagination.page++) }
       }, [this.$createElement('v-icon', 'chevron_right')])
     },
     genSelect () {
@@ -28,12 +28,12 @@ export default {
         this.$createElement('v-select', {
           props: {
             items: this.rowsPerPageItems,
-            value: this.options.rowsPerPage,
+            value: this.pagination.rowsPerPage,
             hideDetails: true,
             top: true,
             auto: true
           },
-          on: { input: val => { this.options.rowsPerPage = val; this.options.page = 1 } }
+          on: { input: val => { this.pagination.rowsPerPage = val; this.pagination.page = 1 } }
         })
       ])
     },
