@@ -8,7 +8,7 @@ export default {
     },
     genYearItems () {
       const children = []
-      for (let i = this.year - 100, length = this.year + 100; i < length; i++) {
+      for (let i = this.year + 100, length = this.year - 100; i > length; i--) {
         children.push(this.$createElement('li', {
           'class': {
             active: this.year === i

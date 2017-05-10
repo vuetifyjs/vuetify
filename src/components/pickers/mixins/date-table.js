@@ -13,7 +13,7 @@ export default {
 
             let month = this.tableMonth
             const year = this.tableYear
-            const next = e.wheelDelta > 0
+            const next = e.deltaY < 0
 
             if (next) month++
             else month--
