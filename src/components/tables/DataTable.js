@@ -3,7 +3,6 @@ import Body from './mixins/body'
 import Foot from './mixins/foot'
 import Progress from './mixins/progress'
 import { getObjectValueByPath } from '../../util/helpers'
-import Vue from 'vue'
 
 export default {
   name: 'datatable',
