@@ -2,24 +2,30 @@ global-color(color_name, color_value)
   .{color_name}
     background-color color_value !important
     border-color: color_value !important
-    
+
   .{color_name}--text
     color color_value !important
-    
+
   .{color_name}--after
     &:after
       background: color_value !important
-      
+
 global-color-accent(color_name, color_value)
   .{color_name}
     &.{color_type}
       background-color color_value !important
       border-color: color_value !important
-    
+
     &.{color_type}--after
       &:after
         background-color: color_value !important
-    
+
   .{color_name}--text
     &.text--{color_type}
       color: color_value !important
+
+.light--text
+  color $color-dark
+
+.dark--text
+  color $color-light
