@@ -80,10 +80,12 @@ export default {
           const sortB = getObjectValueByPath(b, index)
 
           if (descending) {
+            if (!isNaN(sortA) && !isNaN(sortB)) return sortB - sortA
             if (sortA < sortB) return 1
             if (sortA > sortB) return -1
             return 0
           } else {
+            if (!isNaN(sortA) && !isNaN(sortB)) return sortA - sortB
             if (sortA < sortB) return -1
             if (sortA > sortB) return 1
             return 0
