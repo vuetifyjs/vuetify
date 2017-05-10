@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import Head from './mixins/head'
 import Body from './mixins/body'
 import Foot from './mixins/foot'
