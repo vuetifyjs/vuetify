@@ -3,7 +3,7 @@ import Body from './mixins/body'
 import Foot from './mixins/foot'
 import Progress from './mixins/progress'
 import { getObjectValueByPath } from '../../util/helpers'
-
+import Vue from 'vue'
 
 export default {
   name: 'datatable',
@@ -97,6 +97,10 @@ export default {
       type: Array,
       default: () => []
     },
+    items: {
+      type: Array,
+      required: true
+    },
     totalItems: {
       type: Number,
       default: null
@@ -104,9 +108,6 @@ export default {
     loading: {
       type: Boolean,
       default: false
-    },
-    selected: {
-      type: Array
     },
     selectedKey: {
       type: String,
@@ -128,13 +129,13 @@ export default {
       return !this.options ? this.defaultOptions : this.options
     },
     itemsLength () {
-      return this.totalItems || this.value.length
+      return this.totalItems || this.items.length
     },
     indeterminate () {
       return this.selectAll && this.someItems && !this.everyItem
     },
     everyItem () {
-      return this.filteredItems.length > 0 && this.filteredItems.every(i => this.selected.find(j => i[this.selectedKey] === j[this.selectedKey]))
+      return this.filteredItems.length && this.filteredItems.every(i => this.isSelected(i))
     },
     someItems () {
       return this.filteredItems.some(i => this.isSelected(i))
@@ -152,9 +153,9 @@ export default {
       return page === -1 ? this.itemsLength : this.pagination.page * page
     },
     filteredItems () {
-      if (this.totalItems) return this.value
+      if (this.totalItems) return this.items
 
-      let items = this.value.slice()
+      let items = this.items.slice()
       const hasSearch = typeof this.search !== 'undefined' && this.search !== null
 
       if (hasSearch) {
@@ -164,6 +165,11 @@ export default {
       items = this.customSort(items, this.pagination.sortBy, this.pagination.descending)
 
       return this.hideActions ? items : items.slice(this.pageStart, this.pageStop)
+    },
+    selected () {
+      const selected = {}
+      this.value.forEach(i => selected[i[this.selectedKey]] = true)
+      return selected
     }
   },
 
@@ -177,20 +183,23 @@ export default {
     search () {
       this.page = 1
     },
-    filteredItems: {
+    value: {
       handler: function () {
         if (this.everyItem) this.all = true
       },
       deep: true
     },
-    selected () {
-      if (this.everyItem) this.all = true
+    filteredItems: {
+      handler: function () {
+        this.everyItem && (this.all = true) || !this.someItems && (this.all = false)
+      },
+      deep: true
     }
   },
 
   methods: {
     isSelected (item) {
-      return this.selected && this.selected.find(i => i[this.selectedKey] === item[this.selectedKey])
+      return this.selected[item[this.selectedKey]]
     },
     sort (index) {
       if (this.pagination.sortBy === null) {
@@ -209,20 +218,16 @@ export default {
     toggle (value) {
       this.all = value
 
-      let selected = this.selected.slice()
-      if (value)
-        selected.push(...this.filteredItems)
-      else
-        selected = selected.filter(i => !this.filteredItems.find(j => j[this.selectedKey] === i[this.selectedKey]))
-
-      this.$emit('update:selected', selected)
+      let selected = this.value.slice()
+      value && selected.push(...this.filteredItems) || (selected = selected.filter(i => !this.filteredItems.find(j => j[this.selectedKey] === i[this.selectedKey])))
+      this.$emit('input', selected)
     }
   },
 
   mounted () {
     const firstSortable = this.headers.find(h => !('sortable' in h) || h.sortable)
 
-    let defaultPagination = {
+    const defaultPagination = {
       page: 1,
       rowsPerPage: 5,
       sortBy: firstSortable ? firstSortable.value : null,
