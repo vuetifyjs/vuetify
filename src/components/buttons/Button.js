@@ -18,10 +18,7 @@ export default {
     floating: Boolean,
     icon: Boolean,
     large: Boolean,
-    dark: {
-      type: Boolean,
-      default: false
-    },
+    light: Boolean,
     loading: Boolean,
     outline: Boolean,
     ripple: {
@@ -46,14 +43,14 @@ export default {
         'btn': true,
         'btn--active': this.isActive,
         'btn--block': this.block,
-        'btn--dark': this.dark,
+        'btn--dark': !this.light,
         'btn--default': this.default,
         'btn--disabled': this.disabled,
         'btn--flat': this.flat,
         'btn--floating': this.floating,
         'btn--icon': this.icon,
         'btn--large': this.large,
-        'btn--light': !this.dark,
+        'btn--light': this.light,
         'btn--loader': this.loading,
         'btn--outline': this.outline,
         'btn--raised': !this.flat,
@@ -100,7 +97,7 @@ export default {
   render (h) {
     const { tag, data } = this.generateRouteLink()
     const children = []
-
+    
     if (tag === 'button') {
       data.attrs.type = this.type
     }
