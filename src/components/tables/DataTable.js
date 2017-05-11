@@ -182,17 +182,8 @@ export default {
     search () {
       this.page = 1
     },
-    value: {
-      handler: function () {
-        if (this.everyItem) this.all = true
-      },
-      deep: true
-    },
-    filteredItems: {
-      handler: function () {
-        this.everyItem && (this.all = true) || !this.someItems && (this.all = false)
-      },
-      deep: true
+    everyItem (val) {
+      if (val) this.all = true
     }
   },
 
@@ -215,11 +206,10 @@ export default {
       return this.$createElement('tr', data, children)
     },
     toggle (value) {
-      this.all = value
+      const selected = Object.assign({}, this.selected)
+      this.filteredItems.forEach(i => selected[i[this.selectedKey]] = value)
 
-      let selected = this.value.slice()
-      value && selected.push(...this.filteredItems) || (selected = selected.filter(i => !this.filteredItems.find(j => j[this.selectedKey] === i[this.selectedKey])))
-      this.$emit('input', selected)
+      this.$emit('input', this.items.filter(i => selected[i[this.selectedKey]]))
     }
   },
 
