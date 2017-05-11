@@ -17,6 +17,10 @@ selection-controls-switch-theme(color, background, labelColor, enabledColor, dis
     &:after
       background: background
 
+    &--active
+      &:after
+        background: enabledColor
+
   .input-group--selection-controls__container--disabled
     color: disabledColor
 
