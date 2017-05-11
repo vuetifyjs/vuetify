@@ -1,46 +1,55 @@
-selection-controls-switch-theme(color, background, labelColor, disabledColor, disabledBackground)
+selection-controls-switch-theme(color, background, labelColor, enabledColor, disabledColor, disabledBackground)
+  color: enabledColor
+
   label
     color: labelColor
 
   .input-group--selection-controls__toggle
     background: color
-      
+
+    &--active
+      background: currentColor
+      opacity: .5
+
   .input-group--selection-controls__ripple
     color: color
-    
+
     &:after
       background: background
 
-  &.input-group--selection-controls__container--disabled          
+  .input-group--selection-controls__container--disabled
+    color: disabledColor
+
     .input-group--selection-controls__toggle
-      background: disabledColor
-      
+      background: disabledBackground
+      opacity: 1
+
     .input-group--selection-controls__ripple
       color: disabledColor
-      
+
       &:after
-        background: disabledBackground
-        
+        background: disabledColor
+
 selection-controls-checkbox-theme(color, labelColor, disabledColor)
   label
     color: labelColor
-    
+
   .input-group--selection-controls__ripple
     color: color
-    
+
   .icon
     color: color
-    
+
   &.input-group--active
     .input-group--selection-controls__ripple
       color: inherit
-      
+
     .icon
       color: inherit
-    
+
   &.input-group--disabled
     .input-group--selection-controls__ripple
       color: disabledColor
-      
+
     .icon
       color: disabledColor

@@ -296,17 +296,19 @@ $progress-circular-overlay-transition := all .6s ease-in-out
 
 
 /* Selection Controls */
-$selection-switch-light-color := rgba($material-light.fg-color, $material-light.disabledORhints-text-percent)
+$selection-switch-light-color := rgba(#000, .38)
 $selection-switch-light-background := #fafafa
 $selection-switch-light-label-color := #424242
-$selection-switch-light-disabled-color := rgba($material-light.fg-color, $material-light.divider-percent)
-$selection-switch-light-disabled-background := #bdbdbd
+$selection-switch-light-enabled-color := rgba($teal.base, 1)
+$selection-switch-light-disabled-color := rgba($grey.lighten-1, 1)
+$selection-switch-light-disabled-background := rgba(#000, .12)
 
-$selection-switch-dark-color := rgba($material-dark.fg-color, .30)
+$selection-switch-dark-color := rgba(#fff, .3)
 $selection-switch-dark-background := #bdbdbd
 $selection-switch-dark-label-color := $material-dark.text-color
-$selection-switch-dark-disabled-color := rgba($material-dark.fg-color, .10)
-$selection-switch-dark-disabled-background := #424242
+$selection-switch-dark-enabled-color := rgba($teal.lighten-3, 1)
+$selection-switch-dark-disabled-color := rgba($grey.darken-3, 1)
+$selection-switch-dark-disabled-background := rgba(#fff, .1)
 
 $selection-controls-light-color := rgba($material-light.fg-color, .54)
 $selection-controls-light-disabled-color := rgba($material-light.fg-color, .26)
