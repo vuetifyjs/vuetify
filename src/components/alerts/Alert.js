@@ -8,7 +8,8 @@ export default {
 
   props: {
     dismissible: Boolean,
-    hideIcon: Boolean
+    hideIcon: Boolean,
+    icon: String
   },
 
   computed: {
