@@ -109,6 +109,12 @@
       background-color: transparent !important
       color: $button-light-disabled-color !important
       pointer-events: none
+      
+    &.btn--small
+      width: $button-small-height
+
+    &.btn--large
+      width: $button-large-height
 
   &--floating
     border-radius: 50%
@@ -152,12 +158,13 @@
     &:hover:after
       background-color: $button-light-overlay
 
-    &.btn--disabled
+    // Do not show disabled styles when using loader
+    &.btn--disabled:not(.btn--loader)
       color: $button-light-disabled-color !important
       opacity: 1
 
-    &.btn--disabled:not(.btn--flat)
-      background-color: $button-light-overlay !important
+      &:not(.btn--flat):not(.btn--icon)
+        background-color: $button-light-overlay !important
 
   &--dark
     color: $color-dark
@@ -165,12 +172,13 @@
     &:hover:after
       background-color: $button-dark-overlay
 
-    &.btn--disabled
+    // Do not show disabled styles when using loader
+    &.btn--disabled:not(.btn--loader)
       color: $button-dark-disabled-color !important
       opacity: 1
 
-    &.btn--disabled:not(.btn--flat)
-      background-color: $button-dark-overlay !important
+      &:not(.btn--flat):not(.btn--icon)
+        background-color: $button-dark-overlay !important
 
 /** Sizes */
 .btn
