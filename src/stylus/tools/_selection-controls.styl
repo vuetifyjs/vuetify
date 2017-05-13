@@ -17,6 +17,10 @@ selection-controls-switch-theme(color, background, labelColor, enabledColor, dis
     &:after
       background: background
 
+    &--active
+      &:after
+        background: enabledColor
+
   .input-group--selection-controls__container--disabled
     color: disabledColor
 
@@ -30,7 +34,7 @@ selection-controls-switch-theme(color, background, labelColor, enabledColor, dis
       &:after
         background: disabledColor
 
-selection-controls-checkbox-theme(color, labelColor, disabledColor)
+selection-controls-checkbox-theme(color, labelColor, disabledColor, activeColor)
   label
     color: labelColor
 
@@ -42,10 +46,10 @@ selection-controls-checkbox-theme(color, labelColor, disabledColor)
 
   &.input-group--active
     .input-group--selection-controls__ripple
-      color: inherit
+      color: activeColor
 
     .icon
-      color: inherit
+      color: activeColor
 
   &.input-group--disabled
     .input-group--selection-controls__ripple
