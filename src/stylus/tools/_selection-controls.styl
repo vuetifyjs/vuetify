@@ -12,14 +12,14 @@ selection-controls-switch-theme(color, background, labelColor, enabledColor, dis
       opacity: .5
 
   .input-group--selection-controls__ripple
-    color: color
+    color: currentColor
 
     &:after
       background: background
 
     &--active
       &:after
-        background: enabledColor
+        background: currentColor
 
   .input-group--selection-controls__container--disabled
     color: disabledColor
