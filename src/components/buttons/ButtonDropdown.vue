@@ -33,7 +33,7 @@
             v-on:click.native="e => updateValue(e, option)"
           )
             v-list-tile-action(v-if="option.action")
-              v-icon {{ option.action }}
+              v-icon(light) {{ option.action }}
             v-list-tile-content(v-if="option.text")
               v-list-tile-title {{ option.text }}
 </template>
