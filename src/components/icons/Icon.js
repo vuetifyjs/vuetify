@@ -27,7 +27,12 @@ export default {
 
     data.staticClass += Object.keys(classes).filter(k => classes[k]).join(' ')
 
-    if (props.fa) data.staticClass += ` ${children.pop().text}`
+    if (props.fa) {
+      const text = children.pop().text
+
+      if (text.indexOf(' ') === -1) data.staticClass += ` fa-${text}`
+      else data.staticClass += ` ${text.split(' ').join('fa- ')}`
+    }
 
     return h('i', data, children)
   }
