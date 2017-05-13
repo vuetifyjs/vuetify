@@ -38,9 +38,9 @@ export default {
         const icon = this.$createElement('v-icon', 'arrow_upward')
         item.left && children.push(icon) || children.unshift(icon)
 
-        beingSorted = this.pagination.sortBy === item.value
+        beingSorted = this.computedPagination.sortBy === item.value
         beingSorted && classes.push('active')
-        beingSorted && this.pagination.descending && classes.push('desc') || classes.push('asc')
+        beingSorted && this.computedPagination.descending && classes.push('desc') || classes.push('asc')
       }
 
       item.left && classes.push('text-xs-left') || classes.push('text-xs-right')

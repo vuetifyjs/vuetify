@@ -11,7 +11,13 @@ export default {
 
   data () {
     return {
-      all: false
+      all: false,
+      defaultPagination: {
+        page: 1,
+        rowsPerPage: 5,
+        descending: false,
+        totalItems: 0
+      }
     }
   },
 
@@ -25,10 +31,6 @@ export default {
       default: 'text'
     },
     hideActions: Boolean,
-    items: {
-      type: Array,
-      default: () => []
-    },
     noDataText: {
       type: String,
       default: 'No data available in table'
@@ -98,7 +100,8 @@ export default {
     },
     items: {
       type: Array,
-      required: true
+      required: true,
+      default: () => []
     },
     totalItems: {
       type: Number,
@@ -114,18 +117,13 @@ export default {
     },
     pagination: {
       type: Object,
-      default: () => ({
-        sortBy: null,
-        descending: null,
-        page: 1,
-        rowsPerPage: 5
-      })
+      default: null
     }
   },
 
   computed: {
-    computedOptions () {
-      return !this.options ? this.defaultOptions : this.options
+    computedPagination () {
+      return this.pagination || this.defaultPagination
     },
     itemsLength () {
       return this.totalItems || this.items.length
@@ -140,16 +138,16 @@ export default {
       return this.filteredItems.some(i => this.isSelected(i))
     },
     pageStart () {
-      const page = this.pagination.rowsPerPage === Object(this.pagination.rowsPerPage)
-        ? this.pagination.rowsPerPage.value
-        : this.pagination.rowsPerPage
-      return page === -1 ? 0 : (this.pagination.page - 1) * page
+      const page = this.computedPagination.rowsPerPage === Object(this.computedPagination.rowsPerPage)
+        ? this.computedPagination.rowsPerPage.value
+        : this.computedPagination.rowsPerPage
+      return page === -1 ? 0 : (this.computedPagination.page - 1) * page
     },
     pageStop () {
-      const page = this.pagination.rowsPerPage === Object(this.pagination.rowsPerPage)
-        ? this.pagination.rowsPerPage.value
-        : this.pagination.rowsPerPage
-      return page === -1 ? this.itemsLength : this.pagination.page * page
+      const page = this.computedPagination.rowsPerPage === Object(this.computedPagination.rowsPerPage)
+        ? this.computedPagination.rowsPerPage.value
+        : this.computedPagination.rowsPerPage
+      return page === -1 ? this.itemsLength : this.computedPagination.page * page
     },
     filteredItems () {
       if (this.totalItems) return this.items
@@ -161,9 +159,9 @@ export default {
         items = this.customFilter(items, this.search, this.filter)
       }
 
-      items = this.customSort(items, this.pagination.sortBy, this.pagination.descending)
+      items = this.customSort(items, this.computedPagination.sortBy, this.computedPagination.descending)
 
-      return this.hideActions ? items : items.slice(this.pageStart, this.pageStop)
+      return this.hideActions && !this.pagination ? items : items.slice(this.pageStart, this.pageStop)
     },
     selected () {
       const selected = {}
@@ -184,22 +182,29 @@ export default {
     },
     everyItem (val) {
       if (val) this.all = true
+    },
+    itemsLength () {
+      this.updatePagination({ totalItems: this.itemsLength })
     }
   },
 
   methods: {
+    updatePagination (val) {
+      if (this.pagination) return this.$emit('update:pagination', Object.assign({}, this.pagination, val))
+      else (this.defaultPagination = Object.assign({}, this.defaultPagination, val))
+    },
     isSelected (item) {
       return this.selected[item[this.selectedKey]]
     },
     sort (index) {
-      if (this.pagination.sortBy === null) {
-        this.$emit('update:pagination', Object.assign({}, this.pagination, { sortBy: index, descending: false }))
-      } else if (this.pagination.sortBy === index && !this.pagination.descending) {
-        this.$emit('update:pagination', Object.assign({}, this.pagination, { descending: true }))
-      } else if (this.pagination.sortBy !== index) {
-        this.$emit('update:pagination', Object.assign({}, this.pagination, { sortBy: index, descending: false }))
+      if (this.computedPagination.sortBy === null) {
+        this.updatePagination({ sortBy: index, descending: false })
+      } else if (this.computedPagination.sortBy === index && !this.computedPagination.descending) {
+        this.updatePagination({ descending: true })
+      } else if (this.computedPagination.sortBy !== index) {
+        this.updatePagination({ sortBy: index, descending: false })
       } else {
-        this.$emit('update:pagination', Object.assign({}, this.pagination, { sortBy: null, descending: null }))
+        this.updatePagination({ sortBy: null, descending: null })
       }
     },
     genTR (children, data = {}) {
@@ -213,17 +218,11 @@ export default {
     }
   },
 
-  mounted () {
+  created () {
     const firstSortable = this.headers.find(h => !('sortable' in h) || h.sortable)
+    this.defaultPagination.sortBy = firstSortable ? firstSortable.value : null
 
-    const defaultPagination = {
-      page: 1,
-      rowsPerPage: 5,
-      sortBy: firstSortable ? firstSortable.value : null,
-      descending: null
-    }
-
-    this.$emit('update:pagination', Object.assign({}, defaultPagination, this.pagination))
+    this.updatePagination(Object.assign({}, this.defaultPagination, this.pagination, { totalItems: this.itemsLength }))
   },
 
   render (h) {
