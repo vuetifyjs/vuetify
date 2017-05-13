@@ -144,10 +144,20 @@
       &--light
         selection-controls-checkbox-theme($selection-controls-light-color,
           $selection-controls-light-label-color,
-          $selection-controls-light-disabled-color)
+          $selection-controls-light-disabled-color,
+          $selection-controls-active-color)
 
       &--dark
         selection-controls-checkbox-theme($selection-controls-dark-color,
           $selection-controls-dark-label-color,
-          $selection-controls-dark-disabled-color)
+          $selection-controls-dark-disabled-color,
+          $selection-controls-active-color)
 
+      &.primary--text
+      &.secondary--text
+      &.success--text
+      &.info--text
+      &.warning--text
+      &.error--text
+        .icon
+          color: currentColor !important
