@@ -4,7 +4,6 @@ import Foot from './mixins/foot'
 import Progress from './mixins/progress'
 import { getObjectValueByPath } from '../../util/helpers'
 
-
 export default {
   name: 'datatable',
 
