@@ -116,7 +116,6 @@ export default {
     ])
 
     const items = h('v-tabs-items', {
-      'class': 'tabs__items',
       ref: 'content'
     }, [this.$slots.content])
 
