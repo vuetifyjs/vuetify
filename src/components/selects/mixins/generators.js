@@ -16,7 +16,8 @@ export default {
           nudgeWidth: 25,
           maxHeight: this.maxHeight,
           activator: this.$refs.activator,
-          top: true
+          bottom: this.bottom,
+          top: this.top
         },
         on: {
           input: val => (this.menuActive = val)
