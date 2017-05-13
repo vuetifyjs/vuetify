@@ -5,7 +5,6 @@ export default {
       const checkbox = this.$createElement('v-checkbox', {
         props: {
           hideDetails: true,
-          primary: true,
           inputValue: this.all,
           indeterminate: this.indeterminate
         },
