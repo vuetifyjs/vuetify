@@ -151,8 +151,8 @@ export default {
             [`input-group__${type}-icon`]: true,
             'input-group__icon-cb': hasCallback
           },
-          'nativeOn': {
-            'click': e => {
+          on: {
+            click: e => {
               hasCallback && cb(e)
             }
           }
