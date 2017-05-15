@@ -23,10 +23,12 @@ export default {
     const footer = children.find(c => c.tag === 'footer')
 
     if (toolbar) data.staticClass += ' application--toolbar'
-    if (footer) data.staticClass += ' application--footer'
-    if (footer.data.staticClass.indexOf('--fixed') !== -1 ||
-      footer.data.staticClass.indexOf('--absolute') !== -1
-    ) data.staticClass += ' application--footer-fixed'
+    if (footer) {
+      data.staticClass += ' application--footer'
+      if (footer.data.staticClass.indexOf('--fixed') !== -1 ||
+        footer.data.staticClass.indexOf('--absolute') !== -1
+      ) data.staticClass += ' application--footer-fixed'
+    }
 
     data.attrs = { 'data-app': true }
     data.domProps = { id: props.id }
