@@ -44,7 +44,7 @@ export default {
         'navigation-drawer--full-height': this.fullHeight,
         'navigation-drawer--is-mobile': this.isMobile,
         'navigation-drawer--light': !this.dark,
-        'navigation-drawer--mini': this.miniVariant,
+        'navigation-drawer--mini-variant': this.miniVariant,
         'navigation-drawer--open': this.isActive,
         'navigation-drawer--permanent': this.permanent,
         'navigation-drawer--persistent': this.persistent,

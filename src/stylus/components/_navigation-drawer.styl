@@ -46,7 +46,7 @@
       margin-top: $toolbar-height
       max-height: "calc(100vh - %s)" % $toolbar-height
 
-      + .toolbar
+      + .toolbar, ~ .footer.footer--fixed, ~ .footer.footer--absolute
         padding-left: 0
         z-index: 3
         
@@ -66,10 +66,10 @@
         + .toolbar
           padding-left: $navigation-drawer-width
 
-      ~ main, ~ .footer
+      ~ main, ~ .footer:not(.footer--fixed):not(.footer--absolute)
         padding-left: $navigation-drawer-width
 
-  &--mini
+  &--mini-variant
     margin-top: $toolbar-height
     max-height: "calc(100vh - %s)" % $toolbar-height
     overflow: hidden
@@ -92,14 +92,14 @@
       ~ main
         padding-left: $navigation-drawer-mini-variant-width !important
       
+      ~ .footer:not(.footer--fixed):not(.footer--absolute)
+        padding-left: $navigation-drawer-mini-variant-width !important
+      
   &--temporary, &--is-mobile:not(.navigation-drawer--permanent)
     z-index: 5
 
     &:not(.navigation-drawer--close)
       elevation(16)
-      
-  ~ main
-    min-height: 100vh
     
   + toolbar
     + main
