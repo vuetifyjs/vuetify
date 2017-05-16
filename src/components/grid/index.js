@@ -17,6 +17,7 @@ const Layout = {
 
   render: (h, { data, children }) => {
     data.staticClass = data.staticClass ? `layout ${data.staticClass}` : 'layout'
+
     if (data.attrs) {
       data.staticClass += ` ${Object.keys(data.attrs).join(' ')}`
       delete data.attrs
