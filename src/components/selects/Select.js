@@ -52,7 +52,8 @@ export default {
     multiLine: Boolean,
     offset: Boolean,
     singleLine: Boolean,
-    top: Boolean
+    top: Boolean,
+    returnObject: Boolean
   },
 
   computed: {
@@ -151,13 +152,13 @@ export default {
     },
     selectItem (item) {
       if (!this.multiple) {
-        this.inputValue = this.getValue(item)
+        this.inputValue = this.returnObject ? item : this.getValue(item)
       } else {
         const inputValue = this.inputValue.slice()
         const i = this.inputValue.findIndex(i => this.getValue(i) === this.getValue(item))
 
         i !== -1 && inputValue.splice(i, 1) || inputValue.push(item)
-        this.inputValue = inputValue.map(i => this.getValue(i))
+        this.inputValue = inputValue.map(i => this.returnObject ? i : this.getValue(i))
       }
 
       if (this.autocomplete) {
