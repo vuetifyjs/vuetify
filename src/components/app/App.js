@@ -25,6 +25,7 @@ export default {
     if (toolbar) data.staticClass += ' application--toolbar'
     if (footer) {
       data.staticClass += ' application--footer'
+
       if (footer.data.staticClass.indexOf('--fixed') !== -1 ||
         footer.data.staticClass.indexOf('--absolute') !== -1
       ) data.staticClass += ' application--footer-fixed'
