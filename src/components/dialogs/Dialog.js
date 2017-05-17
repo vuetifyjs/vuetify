@@ -46,6 +46,7 @@ export default {
 
   watch: {
     isActive (val) {
+      document.querySelector('body').classList.toggle('application--dialog-opened', val);
       if (val) {
         !this.fullscreen && !this.hideOverlay && this.genOverlay()
       } else {
