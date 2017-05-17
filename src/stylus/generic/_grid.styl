@@ -19,58 +19,65 @@
 .layout
   display: flex
 
-  &.row
+  &.row, &.column
     flex: 0 1 auto
-    flex-direction: row
-  
+    
     &.grow
       flex-grow: 1
 
-    &--reverse
+  &.row
+    flex-direction: row
+
+    &.reverse
       flex-direction: row-reverse
 
   &.column
     flex-direction: column
+    
+    &.reverse
+      flex-direction: column-reverse
 
   &.wrap
     flex-wrap: wrap
 
   &.align
-    &-center, &-vert-center, &-horiz-center
-      align-items: center
-      align-content: center
-      justify-content: center
-
-    &-vert-end
-      align-content: flex-end
-      align-items: flex-end
-
-    &-vert-start
-      align-content: flex-start
+    &-start
       align-items: flex-start
-
-    &-horiz-end
-      justify-content: flex-end
-
-    &-horiz-start
+    
+    &-end
+      align-items: flex-end
+      
+    &-center
+      align-items: center
+      
+    &-baseline
+      align-items: baseline
+      
+  &.justify
+    &-start
       justify-content: flex-start
-
-    &-space-between
-      justify-content: space-between
-
+      
+    &-end
+      justify-content: flex-end
+      
+    &-center
+      justify-content: center
+      
     &-space-around
       justify-content: space-around
+    
+    &-space-between
+      justify-content: space-between
 
   .flex, &.child-flex > *
     flex: 1
 
-  .col
+  .flex
     padding-right: ($grid-gutter / 2)
     padding-left: ($grid-gutter / 2)
 
   for size, width in $grid-breakpoints
-
-    .col.{size}
+    .flex.{size}
       flex-grow: 1
       flex-shrink: 1
 
@@ -82,24 +89,24 @@
         flex-direction: row
 
       &.column-{size}
+        flex: 0 1 auto
         flex-direction: column
-        box-sizing: border-box
-
+        
       .flex, &.child-flex-{size} > *
         flex: 1
 
       for n in (1..$grid-columns)
-        .col.{size}{n}
+        .flex.{size}{n}
           flex-basis: (n / $grid-columns * 100)%
           max-width: (n / $grid-columns * 100)%
 
-        .col.offset-{size}{n}
+        .flex.offset-{size}{n}
           margin-left: (n / $grid-columns * 100)%
 
-        .col.order-{size}{n}
+        .flex.order-{size}{n}
           order: n
 
-.col--spacer, .spacer
+.spacer
   flex-grow: 1
 
 .scroll-y

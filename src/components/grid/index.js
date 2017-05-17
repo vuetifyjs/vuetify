@@ -1,10 +1,10 @@
 import { createSimpleFunctional } from '../../util/helpers'
 
-const Col = {
+const Flex = {
   functional: true,
 
   render: (h, { data, children }) => {
-    data.staticClass = data.staticClass ? `col ${data.staticClass}` : 'col'
+    data.staticClass = data.staticClass ? `flex ${data.staticClass}` : 'flex'
     data.staticClass += ` ${Object.keys(data.attrs).join(' ')}`
     delete data.attrs
 
@@ -43,30 +43,11 @@ const Container = {
   }
 }
 
-const Main = {
-  functional: true,
-
-  props: {
-    row: Boolean
-  },
-
-  render (h, { props, data, children }) {
-    if (props.row) {
-      data.staticClass = data.staticClass ? `row ${data.staticClass}` : 'row'
-    }
-
-    return h('main', data, children)
-  }
-}
-
-const ColSpacer = createSimpleFunctional('col--spacer')
 const Spacer = createSimpleFunctional('spacer')
 
 export default {
-  Col,
-  ColSpacer,
+  Flex,
   Container,
   Spacer,
-  Layout,
-  Main
+  Layout
 }
