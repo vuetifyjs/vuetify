@@ -2,43 +2,43 @@
   overflow: hidden
   position: relative
   width: 100%
-  
+
   > .card
     border-radius: 0
-    
+
   &--grow
     .tabs__container
       > li
         flex-grow: 1
-      
+
   &--centered
     .tabs__container
       > li:first-of-type
         margin-left: auto
       > li:last-of-type
         margin-right: auto
-      
+
   &--icons
     .tabs__tabs
       height: 90px
-      
-  &--scroll-bars     
+
+  &--scroll-bars
     .tabs__tabs--mobile
       padding: 0 35px
-      
+
       .icon--left, .icon--right
         display: flex
-        
+
       .tabs__container
         width: calc(100% - 70px)
-    
-    
+
+
   &__tabs
     background-color: $theme.primary
     width: 100%
     position: relative
     height: 60px
-    
+
     .icon--left, .icon--right
       position: absolute
       top: 0
@@ -49,13 +49,13 @@
       height: 100%
       cursor: pointer
       user-select: none
-      
+
     .icon--left
       left: 0
-      
+
     .icon--right
       right: 0
-    
+
   &__container
     overflow-x: auto
     overflow-y: hidden
@@ -67,10 +67,10 @@
     top: 0
     align-items: center
     list-style: none
-    
+
     > li
       height: 100%
-    
+
     &-left
       position: absolute
       left: 0
@@ -79,9 +79,8 @@
       width: 35px
       display: flex
       align-items: center
-  
+
   .tab__item
-    color: $grey.lighten-2
     display: flex
     flex-shrink: 0
     flex-direction: column
@@ -99,7 +98,19 @@
     transition: $primary-transition
     overflow: hidden
     white-space: nowrap
-    
+
+    ^[0]--dark ^[-1..-1]
+      color: rgba($material-light.fg-color, $material-light.inactive-icon-percent)
+
+      &--active
+        color: rgba($material-light.fg-color, $material-light.active-icon-percent)
+
+    ^[0]--light ^[-1..-1]
+      color: rgba($material-dark.fg-color, $material-dark.inactive-icon-percent)
+
+      &--active
+        color: rgba($material-dark.fg-color, $material-dark.active-icon-percent)
+
     .icon
       color: inherit
       flex: 1
@@ -107,23 +118,27 @@
       font-size: 32px
       margin: .5rem 0
 
-    &--active
-      color: #fff
-      
+    // &--active
+    //   ^[0]--dark ^[-1..-1]
+    //     color: rgba($material-light.fg-color, $material-light.active-icon-percent)
+
+    //   ^[0]--light ^[-1..-1]
+    //     color: rgba($material-dark.fg-color, $material-dark.active-icon-percent)
+
     &--disabled
-      opacity: .5
+      // color: rgba($material-dark.fg-color, $material-dark.inactive-icon-percent)
       pointer-events: none
-    
+
   &__items
     position: relative
     border-width: 0 1px 1px 1px
     border-style: solid
     border-color: rgba(#000, .1)
-    
+
   &__item
     transition: $primary-transition
     width: 100%
-      
+
   &__slider
     position: absolute
     bottom: 0

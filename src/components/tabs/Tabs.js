@@ -1,9 +1,10 @@
 import Bootable from '../../mixins/bootable'
+import Themeable from '../../mixins/themeable'
 
 export default {
   name: 'tabs',
 
-  mixins: [Bootable],
+  mixins: [Bootable, Themeable],
 
   data () {
     return {
@@ -36,7 +37,9 @@ export default {
         'tabs--centered': this.centered,
         'tabs--grow': this.grow,
         'tabs--icons': this.icons,
-        'tabs--scroll-bars': this.scrollBars
+        'tabs--scroll-bars': this.scrollBars,
+        'tabs--dark': this.dark,
+        'tabs--light': this.light && !this.dark,
       }
     }
   },
