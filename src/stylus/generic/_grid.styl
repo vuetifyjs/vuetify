@@ -69,7 +69,7 @@
     &-space-between
       justify-content: space-between
 
-  .flex, &.child-flex > *
+  &.flex, &.child-flex > *
     flex: 1
 
   .flex
@@ -92,7 +92,7 @@
         flex: 0 1 auto
         flex-direction: column
         
-      .flex, &.child-flex-{size} > *
+      &.flex, &.child-flex-{size} > *
         flex: 1
 
       for n in (1..$grid-columns)
