@@ -46,7 +46,7 @@
   &__content
     align-items: center
     display: flex
-    flex: 1
+    flex: 1 0 auto
     justify-content: center
     transition: $primary-transition
     white-space: nowrap
@@ -88,7 +88,7 @@
     justify-content: center
     height: $button-height
     width: $button-height
-    min-width: initial
+    min-width: 0
     padding: 0
     
     .icon
@@ -118,10 +118,10 @@
 
   &--floating
     border-radius: 50%
-    min-width: initial
+    min-width: 0
     height: $button-floating-width
     width: $button-floating-width
-    padding: initial
+    padding: 0
 
     &:after
       border-radius: 50%
