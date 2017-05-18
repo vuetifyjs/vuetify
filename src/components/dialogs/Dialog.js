@@ -8,6 +8,7 @@ export default {
   mixins: [Bootable, Overlayable, Toggleable],
 
   props: {
+    disabled: Boolean,
     persistent: Boolean,
     fullscreen: Boolean,
     lazy: Boolean,
@@ -84,7 +85,7 @@ export default {
         on: {
           click: e => {
             e.stopPropagation()
-            this.isActive = !this.isActive
+            if (!this.disabled) this.isActive = !this.isActive
           }
         }
       }, [this.$slots.activator]))
