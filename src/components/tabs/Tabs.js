@@ -11,6 +11,7 @@ export default {
       activators: [],
       activeIndex: null,
       isMobile: false,
+      overflow: false,
       reverse: false,
       target: null,
       resizeDebounce: {},
@@ -40,6 +41,7 @@ export default {
         'tabs--scroll-bars': this.scrollBars,
         'tabs--dark': this.dark,
         'tabs--light': this.light && !this.dark,
+        'tabs--overflow': this.overflow
       }
     }
   },
@@ -49,6 +51,8 @@ export default {
       this.tabClick(this.value)
     },
     activeIndex () {
+      if (this.isBooted) this.overflow = true
+
       this.activators.forEach(i => {
         i.toggle(this.target)
 
@@ -66,8 +70,7 @@ export default {
   mounted () {
     this.$vuetify.load(() => {
       this.activators = this.$refs.activators.$children.filter(i => i.$options._componentTag === 'v-tab-item')
-      const tab = this.value || (this.activators[0] || {}).target
-
+      const tab = this.value || (this.activators[0] || {}).action
       tab && this.tabClick(tab) && this.resize()
       window.addEventListener('resize', this.resize, false)
     })
@@ -104,6 +107,9 @@ export default {
         this.reverse = nextIndex < this.activeIndex
         this.activeIndex = nextIndex
       })
+    },
+    transitionComplete () {
+      this.overflow = false
     }
   },
 

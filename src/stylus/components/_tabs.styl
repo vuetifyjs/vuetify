@@ -1,7 +1,12 @@
 .tabs
-  overflow: hidden
   position: relative
   width: 100%
+  
+  &--overflow
+    overflow: hidden
+    
+    .tabs__item
+      overflow: hidden
 
   > .card
     border-radius: 0
@@ -96,7 +101,6 @@
     text-transform: uppercase
     text-overflow: ellipsis
     transition: $primary-transition
-    overflow: hidden
     white-space: nowrap
 
     ^[0]--dark ^[-1..-1]

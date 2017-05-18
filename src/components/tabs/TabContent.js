@@ -1,3 +1,5 @@
+import { closestParentTag } from '../../util/helpers'
+
 export default {
   name: 'tabs-item',
 
@@ -26,10 +28,25 @@ export default {
   computed: {
     computedTransition () {
       return this.reverse ? this.reverseTransition : this.transition
+    },
+
+    tabs () {
+      return closestParentTag.call(this, 'v-tabs')
     }
   },
 
+  mounted () {
+    this.$el.addEventListener('transitionend', this.onTransitionEnd, false)
+  },
+
+  beforeDestroy () {
+    this.$el.removeEventListener('transitionend', this.onTransitionEnd, false)
+  },
+
   methods: {
+    onTransitionEnd () {
+      this.tabs.transitionComplete()
+    },
     toggle (target, reverse, showTransition) {
       this.$el.style.transition = !showTransition ? 'none' : null
       this.reverse = reverse
