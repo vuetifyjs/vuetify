@@ -5,11 +5,11 @@
 
   .input-group__append-icon
     transition: .3s $transition.linear-out-slow-in
-    
+
   &.input-group--focused.input-group--dirty
     .input-group--select__autocomplete
       margin: 8px 0
-    
+
   &.input-group--focused
     .input-group--select__autocomplete
       opacity: 1
@@ -17,21 +17,21 @@
 
     .input-group__append-icon
       transform: rotate(-180deg)
-      
+
   .input-group__input, input
     cursor: pointer
-    
+
   &.input-group--disabled
     cursor: not-allowed
     pointer-events: none
-    
+
 .input-group--select
   .input-group__selections
     display: flex
     flex-wrap: wrap
     width: 100%
     position: relative
-    
+
     > div
       display: flex
       flex-wrap: wrap
@@ -47,22 +47,22 @@
 .input-group--select
   &.input-group--light
     .input-group__selections__comma
-      color: rgba(#000, .87)
-      
+      color: $color-light
+
     .input-group__selections__comma--active
       color: $theme.primary
-      
+
   &.input-group--dark
     .input-group__selections__comma
-      color: #fff
-      
+      color: $color-dark
+
 .input-group--select
   .menu
     display: inline
-    
+
   .fade-transition-leave-active
     left: 0
-  
+
   &:not(.input-group--multiple)
     .menu-transition
       &-enter
@@ -70,7 +70,7 @@
           opacity: 1
           transform: none
           pointer-events: auto
-          
+
       &-enter-to
         .list__tile--active
           transform: none

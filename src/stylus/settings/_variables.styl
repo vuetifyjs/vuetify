@@ -19,8 +19,9 @@ $material-twelve-percent-dark := rgba($material-light.fg-color, $material-light.
 // ============================================================
 $body-bg-light := $material-light.bg-color
 $body-bg-dark := $material-dark.bg-color
-$color-light := rgba($material-light.text-color, $material-light.primary-text-percent)
-$color-dark := $material-dark.text-color
+$color-light := rgba($material-dark.text-color, $material-dark.primary-text-percent)
+$color-dark := rgba($material-light.text-color, $material-light.primary-text-percent)
+$color-theme := rgba($material-theme.text-color, $material-theme.primary-text-percent)
 
 
 // Grid
@@ -159,7 +160,7 @@ $breadcrumbs-padding := 0 14px
 
 // Base
 $button-border-radius := 2px
-$button-color := $material-dark.fg-color
+$button-color := $material-light.fg-color
 $button-background-color := #999999
 $button-height := 36px
 $button-font-size := 14px
@@ -169,10 +170,10 @@ $button-min-width := 88px
 $button-padding := 0 16px
 $button-text-transform := uppercase
 
-$button-dark-overlay := rgba($material-dark.fg-color, .12)
-$button-dark-disabled-color := rgba($material-dark.fg-color, .3)
-$button-light-overlay := rgba($material-light.fg-color, .12)
-$button-light-disabled-color := rgba($material-light.fg-color, .26)
+$button-dark-overlay := rgba($material-light.fg-color, .12)
+$button-dark-disabled-color := rgba($material-light.fg-color, .3)
+$button-light-overlay := rgba($material-dark.fg-color, .12)
+$button-light-disabled-color := rgba($material-dark.fg-color, .26)
 
 $button-small-height := 28px
 $button-small-font-size := 13px
@@ -296,28 +297,28 @@ $progress-circular-overlay-transition := all .6s ease-in-out
 
 
 /* Selection Controls */
-$selection-switch-light-color := rgba(#000, .38)
-$selection-switch-light-background := #fafafa
-$selection-switch-light-label-color := #424242
-$selection-switch-light-enabled-color := rgba($teal.base, 1)
-$selection-switch-light-disabled-color := rgba($grey.lighten-1, 1)
-$selection-switch-light-disabled-background := rgba(#000, .12)
+$selection-switch-dark-color := rgba(#000, .38)
+$selection-switch-dark-background := #fafafa
+$selection-switch-dark-label-color := #424242
+$selection-switch-dark-enabled-color := rgba($teal.base, 1)
+$selection-switch-dark-disabled-color := rgba($grey.lighten-1, 1)
+$selection-switch-dark-disabled-background := rgba(#000, .12)
 
-$selection-switch-dark-color := rgba(#fff, .3)
-$selection-switch-dark-background := #bdbdbd
-$selection-switch-dark-label-color := $material-dark.text-color
-$selection-switch-dark-enabled-color := rgba($teal.lighten-3, 1)
-$selection-switch-dark-disabled-color := rgba($grey.darken-3, 1)
-$selection-switch-dark-disabled-background := rgba(#fff, .1)
+$selection-switch-light-color := rgba(#fff, .3)
+$selection-switch-light-background := #bdbdbd
+$selection-switch-light-label-color := $material-dark.text-color
+$selection-switch-light-enabled-color := rgba($teal.lighten-3, 1)
+$selection-switch-light-disabled-color := rgba($grey.darken-3, 1)
+$selection-switch-light-disabled-background := rgba(#fff, .1)
 
 $selection-controls-active-color := rgba($teal.base, 1)
-$selection-controls-light-color := rgba($material-light.fg-color, .54)
-$selection-controls-light-disabled-color := rgba($material-light.fg-color, .26)
-$selection-controls-light-label-color := $material-light.text-color
+$selection-controls-light-color := rgba($material-dark.fg-color, .54)
+$selection-controls-light-disabled-color := rgba($material-dark.fg-color, .26)
+$selection-controls-light-label-color := $material-dark.text-color
 
-$selection-controls-dark-color := rgba($material-dark.fg-color, .70)
-$selection-controls-dark-disabled-color := rgba($material-dark.fg-color, .30)
-$selection-controls-dark-label-color := $material-dark.text-color
+$selection-controls-dark-color := rgba($material-light.fg-color, .70)
+$selection-controls-dark-disabled-color := rgba($material-light.fg-color, .30)
+$selection-controls-dark-label-color := $material-light.text-color
 
 
 /* Sidebar */
@@ -340,17 +341,17 @@ $navigation-drawer-group-header-active-navigation-drawer-item-active-background-
 
 
 /* Slider */
-$slider-light-off := rgba($material-light.fg-color, .26)
-$slider-light-focus-off := rgba($material-light.fg-color, .38)
-$slider-light-disabled := rgba($material-light.fg-color, .26)
-$slider-light-label := $material-light.text-color
-$slider-light-ticks := rgba($material-light.fg-color, .6)
+$slider-light-off := rgba($material-dark.fg-color, .26)
+$slider-light-focus-off := rgba($material-dark.fg-color, .38)
+$slider-light-disabled := rgba($material-dark.fg-color, .26)
+$slider-light-label := $material-dark.text-color
+$slider-light-ticks := rgba($material-dark.fg-color, .6)
 
-$slider-dark-off := rgba($material-dark.fg-color, .3)
-$slider-dark-focus-off := rgba($material-dark.fg-color, .3)
-$slider-dark-disabled := rgba($material-dark.fg-color, .3)
-$slider-dark-label := $material-dark.text-color
-$slider-dark-ticks := rgba($material-dark.fg-color, .6)
+$slider-dark-off := rgba($material-light.fg-color, .3)
+$slider-dark-focus-off := rgba($material-light.fg-color, .3)
+$slider-dark-disabled := rgba($material-light.fg-color, .3)
+$slider-dark-label := $material-light.text-color
+$slider-dark-ticks := rgba($material-light.fg-color, .6)
 
 
 /** Snackbar */
@@ -364,11 +365,11 @@ $input-font-size := 16px
 $label-font-size := 12px
 $input-height := 30px
 
-$input-group-light-normal := rgba($material-light.fg-color, $material-light.disabledORhints-text-percent)
-$input-group-light-focus := rgba($material-light.fg-color, .87)
+$input-group-light-normal := rgba($material-dark.fg-color, $material-dark.disabledORhints-text-percent)
+$input-group-light-focus := rgba($material-dark.fg-color, .87)
 
-$input-group-dark-normal := rgba($material-dark.fg-color, $material-dark.disabledORhints-text-percent)
-$input-group-dark-focus := $material-dark.fg-color
+$input-group-dark-normal := rgba($material-light.fg-color, $material-light.disabledORhints-text-percent)
+$input-group-dark-focus := $material-light.fg-color
 
 
 $label-padding-top := 16px

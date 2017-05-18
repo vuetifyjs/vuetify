@@ -17,8 +17,8 @@
         ref="input"
         v-bind:type="editable ? 'text' : 'button'"
         v-bind:label="label"
-        v-bind:light="light && !dark"
-        v-bind:dark="dark"
+        v-bind:light="light || !dark"
+        v-bind:dark="!light && dark"
         v-on:keyup.native.enter="e => updateValue(e, editableValue)"
         v-on:focus="isActive = arguments[0]"
         v-model="editableValue"
@@ -33,7 +33,7 @@
             v-on:click.native="e => updateValue(e, option)"
           )
             v-list-tile-action(v-if="option.action")
-              v-icon(light) {{ option.action }}
+              v-icon(v-bind:light="light || !dark" v-bind:dark="!light && dark") {{ option.action }}
             v-list-tile-content(v-if="option.text")
               v-list-tile-title {{ option.text }}
 </template>
@@ -81,8 +81,8 @@
           'btn-dropdown--editable': this.editable,
           'btn-dropdown--overflow': this.overflow || this.segmented || this.editable,
           'btn-dropdown--segmented': this.segmented,
-          'btn-dropdown--light': this.light && !this.dark,
-          'btn-dropdown--dark': this.dark
+          'btn-dropdown--light': this.light || !this.dark,
+          'btn-dropdown--dark': !this.light && this.dark
         }
       },
 

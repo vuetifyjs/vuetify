@@ -6,14 +6,14 @@
   margin: 0
   height: 40px
   align-items: center
-  
+
   > li
     align-items: center
     display: flex
-  
+
   a
     transition: .3s $transition.linear-out-slow-in
-    
+
     &:hover
       elevation(2)
 
@@ -22,15 +22,15 @@
     .pagination__more,
     .pagination__navigation
       border-radius: 50%
-      
+
   &--disabled
     pointer-events: none
     opacity: .6
-  
+
   &__item
     elevation(2)
     border-radius: 4px
-    color: #000000
+    color: $color-theme
     display: inline-flex
     justify-content: center
     align-items: center
@@ -39,34 +39,35 @@
     width: 34px
     margin: .3rem
     text-decoration: none
-    
+
     &--active
       elevation(4)
       background: $theme.primary
-      color: #FFFFFF
-    
+      color: $color-light
+
   &__navigation
     elevation(2)
     display: inline-flex
     justify-content: center
     align-items: center
     text-decoration: none
-    color: $grey.darken-2
+    color: $color-dark
     height: 2rem
-    
+
     border-radius: 4px
     width: 2rem
     margin: .3rem 15px
-    
+
     .icon
       font-size: 2rem
       transition: $secondary-transition
       vertical-align: middle
-      
+      color: rgba($material-theme.fg-color, $material-theme.active-icon-percent)
+
     &--disabled
       opacity: .6
       pointer-events: none
-      
+
   &__more
     margin: .3rem
     display: inline-flex

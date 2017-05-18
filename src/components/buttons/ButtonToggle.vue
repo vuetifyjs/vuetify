@@ -12,7 +12,7 @@
       flat
     )
       span(v-if="option.text" v-text="option.text")
-      v-icon(v-if="option.icon" light) {{ option.icon }}
+      v-icon(v-if="option.icon") {{ option.icon }}
 </template>
 
 <script>

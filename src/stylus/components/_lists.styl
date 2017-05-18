@@ -3,18 +3,18 @@
   padding-top: $list-top-padding
   padding-bottom: $list-bottom-padding
   transition: height .4s $transition.fast-out-slow-in
-  
+
   .input-group
     margin: 0
-      
+
   > .list__item ~ .list__item
     margin-top: 0
-  
+
   &__item
     position: relative
-      
+
   &__tile
-    color: $color-light
+    color: $color-theme
     display: flex
     height: $list-item-single-height
     text-decoration: none
@@ -23,7 +23,7 @@
     margin: 0
     transition: $primary-transition
     position: relative
-    
+
     &:after
       content: ''
       position: absolute
@@ -34,21 +34,21 @@
       width: 100%
       transition: $primary-transition
       background-color: $material-twelve-percent-dark
-    
+
     a&:hover, &--highlighted
       background: $material-twelve-percent-dark
-    
+
     &__content,
     &__action,
     &__avatar
       height: 100%
-      
+
     &__title, &__sub-title
       white-space: nowrap
       overflow-x: hidden
       text-overflow: ellipsis
       width: 100%
-    
+
     &__title
       font-size: $list-title-font-size
       // line-height: 1.15
@@ -56,36 +56,36 @@
       transition: $primary-transition
       position: relative
       text-align: left
-      
+
     &__sub-title
       color: $grey.base
       font-size: $list-sub-title-font-size
       // line-height: 1.3
-      font-weight: $list-sub-title-font-weight      
-    
+      font-weight: $list-sub-title-font-weight
+
     .avatar
       justify-content: flex-start
       min-width: 56px
-            
+
     &__action
       display: flex
       justify-content: flex-start
       min-width: 56px
       align-items: center
-      
+
       .input-group
         align-items: center
-      
+
       .input-group__details
         display: none
-      
+
       .icon
         transition: $primary-transition
-        
+
       &-text
         color: $grey.base
         font-size: $list-action-text-font-size
-      
+
       &--stack
         align-items: flex-end
         justify-content: space-between
@@ -93,7 +93,7 @@
         padding-bottom: $list-bottom-padding
         white-space: nowrap
         flex-direction: column
-      
+
     &__content
       text-align: left
       flex: 0 1 100%
@@ -103,66 +103,66 @@
       align-items: flex-start
       justify-content: center
       flex-direction: column
-      
+
       + .avatar
         justify-content: flex-end
-        
+
       + .list__tile__action:not(.list__tile__action--stack)
         justify-content: flex-end
-            
+
     &--active
       .list__tile__title
         color: $theme.primary
-        
+
     &--disabled
       opacity: 0.4
       pointer-events: none
 
     &--avatar
       height: $list-item-avatar-single-height
-      
+
     &--select-multi
       padding: 0 10px
-  
+
   &--dense
     padding-top: $list-item-dense-top-padding
-        
+
     .list__tile
       height: $list-item-dense-single-height
       font-size: $list-item-dense-font-size
-      
+
     .list__tile__title
       font-size: $list-item-dense-font-size
-      
+
     .list__tile__sub-title
       font-size: $list-item-dense-font-size
-      
+
   &--two-line
     .list__tile
       height: $list-item-double-height
-      
+
     &.list--dense
       .list__tile
         height: $list-item-dense-double-height
-        
+
   &--three-line
     .list__tile
       height: $list-item-triple-height
-      
+
     .list__tile__sub-title
       white-space: initial
       -webkit-line-clamp: 2
       -webkit-box-orient: vertical
       display: -webkit-box
-      
+
     &.list--dense
       .list__tile
-        height: $list-item-dense-triple-height    
-        
+        height: $list-item-dense-triple-height
+
   &--group
     position: relative
     padding: 0
-    
+
     &:after
       content: ''
       position: absolute
@@ -172,33 +172,33 @@
       opacity: 0
       width: 100%
       background-color: $material-twelve-percent-dark
-    
+
     .list__tile
       padding-left: $list-item-left-padding
-      
+
       .list__tile__title
         font-weight: $list-group-tile-title-font-weight
-      
+
     .list__tile--active
       .list__tile__title
         color: $theme.primary
         font-weight: $list-group-tile-title-active-font-weight
-        
+
     &__header
       + .list--group
         &:after
           opacity: 1
-          
-      &--active  
+
+      &--active
         .list__tile
           background: $material-twelve-percent-dark
-          
+
           &:after
             opacity: 1
-          
+
           .list__tile__title
             color: inherit
-            
+
           .list__tile__action:last-of-type
             .icon
               transform: rotate(-180deg)

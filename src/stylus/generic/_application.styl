@@ -4,28 +4,28 @@
 
   &--dark
     background: $body-bg-dark
-    color: $color-dark
-    
+    color: $color-light
+
   &--light
     background: $body-bg-light
-    color: $color-light
-    
+    color: $color-dark
+
   &--toolbar
     > main > .container
       min-height: 'calc(100vh - %s)' % $toolbar-height
-    
+
     &.application--footer
       > main > .container
         min-height: 'calc(100vh - %s - %s)' % ($toolbar-height $footer-height)
-  
+
   &--footer
     > main > .container
       min-height: 'calc(100vh - %s)' % $footer-height
-      
+
   &--footer-fixed
     > aside.navigation-drawer
       max-height: 'calc(100vh - %s)' % $footer-height
-      
+
     &.application--toolbar
       > aside.navigation-drawer.navigation-drawer--clipped
         max-height: 'calc(100vh - %s - %s)' % ($toolbar-height $footer-height)

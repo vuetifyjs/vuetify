@@ -40,14 +40,14 @@
 
   .menu__activator
     height: 100%
-    
+
   &--fixed, &--absolute
     + main
       padding-top: $toolbar-height
 
   &--fixed
     position: fixed
-    
+
   &--absolute
     position: absolute
 
@@ -62,7 +62,7 @@
     margin-left: 10px
 
   &__logo
-    color: #fff
+    color: $color-light
     font-size: 3rem
     flex: 1;
     text-decoration: none
@@ -71,13 +71,13 @@
     align-items: center
 
   &__title
-    color: #fff
+    color: $color-light
     font-size: $headings.h6.size
     flex: 1;
     white-space: nowrap
     overflow: hidden
     text-overflow: ellipsis
-    
+
     &:not(:first-child)
       padding: 0 16px
 
@@ -95,7 +95,7 @@
 
   &__item
     align-items: center
-    color: #fff
+    color: $color-light
     display: flex
     padding: $toolbar-item-padding
     text-decoration: none
@@ -120,18 +120,18 @@
 
     &--dark
       .icon
-        color: #fff
+        color: rgba($material-light.fg-color, $material-light.active-icon-percent)
 
     &--light
       .icon
-        color: #000
+        color: rgba($material-dark.fg-color, $material-dark.active-icon-percent)
 
     &--dark.input-group--focused.input-group--prepend-icon,
     &--dark.input-group--focused.input-group--append-icon
       .icon
-        color: #fff
+        color: rgba($material-light.fg-color, $material-light.active-icon-percent)
 
     &--light.input-group--focused.input-group--prepend-icon,
     &--light.input-group--focused.input-group--append-icon
       .icon
-        color: #000
+        color: rgba($material-dark.fg-color, $material-dark.active-icon-percent)

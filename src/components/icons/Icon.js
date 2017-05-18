@@ -22,7 +22,7 @@ export default {
       'icon--dark': !props.light || props.dark,
       'icon--large': props.large,
       'icon--left': props.left,
-      'icon--light': props.light && !props.dark,
+      'icon--light': props.light || !props.dark,
       'icon--medium': props.medium,
       'icon--right': props.right,
       'icon--x-large': props.xLarge

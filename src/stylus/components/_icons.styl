@@ -4,18 +4,18 @@
   font-size: 24px
   justify-content: center
   vertical-align: middle
-  
+
   &--dark
-    icon(#fff, rgba(#fff, .50))
-  
+    icon(rgba($material-light.fg-color, $material-light.active-icon-percent), rgba($material-light.fg-color, $material-light.inactive-icon-percent))
+
   &--light
-    icon(rgba(#000, .54), rgba(#000, .38))
+    icon(rgba($material-dark.fg-color, $material-dark.active-icon-percent), rgba($material-dark.fg-color, $material-dark.inactive-icon-percent))
 
   &--large
     font-size: 2.5rem
-    
+
   &--medium
     font-size: 2rem
-    
+
   &--x-large
     font-size: 3rem
