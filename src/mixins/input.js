@@ -93,7 +93,11 @@ export default {
 
   methods: {
     genLabel () {
-      return this.$createElement('label', this.label)
+      const data = {}
+
+      if (this.id) data.attrs = { for: this.id }
+
+      return this.$createElement('label', data, this.label)
     },
     toggle () {},
     genMessages () {

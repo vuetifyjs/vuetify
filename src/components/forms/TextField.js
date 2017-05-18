@@ -17,6 +17,7 @@ export default {
     autoGrow: Boolean,
     counter: Boolean,
     fullWidth: Boolean,
+    id: String,
     name: String,
     maxlength: [Number, String],
     max: {
@@ -172,6 +173,7 @@ export default {
       if (this.autocomplete) data.domProps.autocomplete = true
       if (this.name) data.attrs.name = this.name
       if (this.maxlength) data.attrs.maxlength = this.maxlength
+      if (this.id) data.domProps.id = this.id
 
       if (this.multiLine) {
         data.domProps.rows = this.rows
