@@ -2,15 +2,20 @@ export default {
   name: 'tabs-tabs',
 
   props: {
-    mobile: Boolean
+    mobile: Boolean,
+    bgColor: String,
   },
 
   computed: {
     classes () {
-      return {
+      // default classes
+      let c = {
         'tabs__tabs': true,
         'tabs__tabs--mobile': this.mobile
       }
+      // if set, add bg color class
+      if (this.bgColor !== undefined) c[this.bgColor] = true
+      return c
     }
   },
 

@@ -28,7 +28,9 @@ export default {
       default: 1024
     },
     scrollBars: Boolean,
-    value: String
+    value: String,
+    bgColor: String,
+    sliderColor: String,
   },
 
   computed: {
@@ -117,10 +119,18 @@ export default {
     const tabs = h('v-tabs-tabs', {
       ref: 'activators',
       props: {
-        mobile: this.isMobile
+        mobile: this.isMobile,
+        bgColor: this.bgColor
       }
     }, [
-      h('v-tabs-slider', { ref: 'slider' }),
+      h('v-tabs-slider', {
+        ref: 'slider',
+        class: ((colorClass) => {
+          let c = {}
+          c[colorClass] = true
+          return c
+        })(this.sliderColor)
+      }),
       this.$slots.activators
     ])
 
