@@ -1,4 +1,8 @@
+import Themeable from './themeable'
+
 export default {
+  mixins: [Themeable],
+
   data () {
     return {
       isSaving: false
@@ -7,7 +11,6 @@ export default {
 
   props: {
     actions: Boolean,
-    dark: Boolean,
     landscape: Boolean,
     noTitle: Boolean,
     scrollable: Boolean,

@@ -1,9 +1,10 @@
 import Overlayable from '../../mixins/overlayable'
+import Themeable from '../../mixins/themeable'
 
 export default {
   name: 'navigation-drawer',
 
-  mixins: [Overlayable],
+  mixins: [Overlayable, Themeable],
 
   data () {
     return {
@@ -16,7 +17,6 @@ export default {
   props: {
     absolute: Boolean,
     clipped: Boolean,
-    dark: Boolean,
     disableRouteWatcher: Boolean,
     height: String,
     floating: Boolean,

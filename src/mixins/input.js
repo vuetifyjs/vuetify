@@ -1,4 +1,8 @@
+import Themeable from './themeable'
+
 export default {
+  mixins: [Themeable],
+
   data () {
     return {
       errors: [],
@@ -11,16 +15,11 @@ export default {
   props: {
     appendIcon: String,
     appendIconCb: Function,
-    dark: Boolean,
     disabled: Boolean,
     hint: String,
     hideDetails: Boolean,
     persistentHint: Boolean,
     label: String,
-    light: {
-      type: Boolean,
-      default: true
-    },
     prependIcon: String,
     prependIconCb: Function,
     required: Boolean,
