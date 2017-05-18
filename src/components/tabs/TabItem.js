@@ -29,7 +29,7 @@ export default {
       }
     },
 
-    target () {
+    action () {
       const to = this.to || this.href
 
       if (to === Object(to)) return this._uid
@@ -46,11 +46,11 @@ export default {
     click (e) {
       e.preventDefault()
 
-      this.tabs.tabClick(this.target)
+      this.tabs.tabClick(this.action)
     },
 
-    toggle (target) {
-      this.isActive = this.target === target
+    toggle (action) {
+      this.isActive = this.action === action
     }
   },
 
