@@ -12,7 +12,7 @@
   transform: translate3d(0, 0, 0)
   transform-origin: top left
   width: 100%
-  
+
 .input-group--text-field.input-group--multi-line:not(.input-group--focused):not(.input-group--dirty) label
   transform: translate3d(0,0,0)
 
@@ -27,14 +27,14 @@
   overflow: hidden
   min-width: 0
   height: $input-height
-  
+
   + .icon
     padding: 0 6px
     transition: .3s $transition.ease-in-out
 
   &:focus
     outline: none
-    
+
   &:disabled
     pointer-events: none
 
@@ -42,7 +42,7 @@
 .input-group--text-field textarea
   font-size: $input-font-size
   flex: 1 1
-  
+
   &:focus
     outline: none
 
@@ -98,7 +98,7 @@
       align-items: center
       display: flex
       justify-content: flex-start
-      flex-basis: 56px
+      min-width: 56px
       transition: .3s $transition.fast-in-fast-out
 
     .input-group__details
@@ -155,9 +155,9 @@
     display: inline-flex
     font-size: 16px
     margin-top: 1px
-  
+
   &__prefix
     margin-right: 3px
-    
+
   &__suffix
     margin-left: 3px
