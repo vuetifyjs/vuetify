@@ -24,7 +24,7 @@ export default {
     classes () {
       return {
         'tab__item': true,
-        'tab__item--active': this.isActive,
+        'tab__item--active': !this.router && this.isActive,
         'tab__item--disabled': this.disabled
       }
     },

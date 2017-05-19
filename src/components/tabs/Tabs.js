@@ -30,7 +30,7 @@ export default {
     scrollBars: Boolean,
     value: String,
     bgColor: String,
-    sliderColor: String,
+    sliderColor: String
   },
 
   computed: {
@@ -63,7 +63,7 @@ export default {
         }
       })
 
-      this.$refs.content.$children.forEach(i => i.toggle(this.target, this.reverse, this.isBooted))
+      this.$refs.content && this.$refs.content.$children.forEach(i => i.toggle(this.target, this.reverse, this.isBooted))
       this.$emit('input', this.target)
       this.isBooted = true
     }
@@ -72,7 +72,15 @@ export default {
   mounted () {
     this.$vuetify.load(() => {
       this.activators = this.$refs.activators.$children.filter(i => i.$options._componentTag === 'v-tab-item')
-      const tab = this.value || (this.activators[0] || {}).action
+
+      // This is a workaround to detect if link is active
+      // when being used as a router or nuxt link
+      const i = this.activators.findIndex(t => {
+        return t.$el.firstChild.classList.contains('tab__item--active')
+      })
+
+      const tab = this.value || (this.activators[i !== -1 ? i : 0] || {}).action
+
       tab && this.tabClick(tab) && this.resize()
       window.addEventListener('resize', this.resize, false)
     })
@@ -125,18 +133,14 @@ export default {
     }, [
       h('v-tabs-slider', {
         ref: 'slider',
-        class: ((colorClass) => {
-          let c = {}
-          c[colorClass] = true
-          return c
-        })(this.sliderColor)
+        class: [this.sliderColor]
       }),
       this.$slots.activators
     ])
 
-    const items = h('v-tabs-items', {
+    const items = this.$slots.content ? h('v-tabs-items', {
       ref: 'content'
-    }, [this.$slots.content])
+    }, [this.$slots.content]) : null
 
     return h('div', {
       'class': this.classes
