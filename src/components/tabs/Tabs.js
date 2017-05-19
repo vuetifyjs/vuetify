@@ -55,13 +55,13 @@ export default {
     activeIndex () {
       if (this.isBooted) this.overflow = true
 
-      this.activators.forEach(i => {
-        i.toggle(this.target)
+      this.$refs.activators.$children
+          .filter(i => i.$options._componentTag === 'v-tab-item')
+          .forEach(i => {
+            i.toggle(this.target)
 
-        if (i.isActive) {
-          this.slider(i.$el)
-        }
-      })
+            i.isActive && this.slider(i.$el)
+          })
 
       this.$refs.content && this.$refs.content.$children.forEach(i => i.toggle(this.target, this.reverse, this.isBooted))
       this.$emit('input', this.target)
@@ -71,15 +71,15 @@ export default {
 
   mounted () {
     this.$vuetify.load(() => {
-      this.activators = this.$refs.activators.$children.filter(i => i.$options._componentTag === 'v-tab-item')
+      const activators = this.$refs.activators.$children.filter(i => i.$options._componentTag === 'v-tab-item')
 
       // This is a workaround to detect if link is active
       // when being used as a router or nuxt link
-      const i = this.activators.findIndex(t => {
+      const i = activators.findIndex(t => {
         return t.$el.firstChild.classList.contains('tab__item--active')
       })
 
-      const tab = this.value || (this.activators[i !== -1 ? i : 0] || {}).action
+      const tab = this.value || (activators[i !== -1 ? i : 0] || {}).action
 
       tab && this.tabClick(tab) && this.resize()
       window.addEventListener('resize', this.resize, false)
@@ -101,8 +101,14 @@ export default {
     },
     slider (el) {
       this.targetEl = el || this.targetEl
-      this.$refs.slider.style.width = `${this.targetEl.clientWidth}px`
-      this.$refs.slider.style.left = `${this.targetEl.offsetLeft}px`
+
+      // Gives DOM time to pain when
+      // processing slider for
+      // dynamic tabs
+      this.$nextTick(() => {
+        this.$refs.slider.style.width = `${this.targetEl.clientWidth}px`
+        this.$refs.slider.style.left = `${this.targetEl.offsetLeft}px`
+      })
     },
     tabClick (target) {
       this.target = target
