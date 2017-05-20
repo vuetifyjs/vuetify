@@ -2,30 +2,30 @@ import { closestParentTag } from '../../util/helpers'
 import GenerateRouteLink from '../../mixins/route-link'
 
 export default {
-  name: 'tab-item',
+  name: 'tabs-item',
 
   mixins: [GenerateRouteLink],
 
   data () {
     return {
       isActive: false,
-      defaultActiveClass: 'tab__item--active'
+      defaultActiveClass: 'tabs__item--active'
     }
   },
 
   props: {
     activeClass: {
       type: String,
-      default: 'tab__item--active'
+      default: 'tabs__item--active'
     }
   },
 
   computed: {
     classes () {
       return {
-        'tab__item': true,
-        'tab__item--active': !this.router && this.isActive,
-        'tab__item--disabled': this.disabled
+        'tabs__item': true,
+        'tabs__item--active': !this.router && this.isActive,
+        'tabs__item--disabled': this.disabled
       }
     },
 

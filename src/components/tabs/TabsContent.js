@@ -1,7 +1,7 @@
 import { closestParentTag } from '../../util/helpers'
 
 export default {
-  name: 'tabs-item',
+  name: 'tabs-content',
 
   data () {
     return {
@@ -57,7 +57,7 @@ export default {
   render (h) {
     return h(this.computedTransition, {}, [
       h('div', {
-        'class': 'tabs__item',
+        'class': 'tabs__content',
         domProps: { id: this.id },
         directives: [{
           name: 'show',

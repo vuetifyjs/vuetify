@@ -24,11 +24,11 @@
         margin-right: auto
 
   &--icons
-    .tabs__tabs
+    .tabs__bar
       height: 90px
 
   &--scroll-bars
-    .tabs__tabs--mobile
+    .tabs__bar--mobile
       padding: 0 35px
 
       .icon--left, .icon--right
@@ -38,7 +38,7 @@
         width: calc(100% - 70px)
 
 
-  &__tabs
+  &__bar
     background-color: $theme.primary
     width: 100%
     position: relative
@@ -73,7 +73,7 @@
     align-items: center
     list-style: none
 
-    > li
+    > li:not(.tabs__slider)
       height: 100%
 
     &-left
@@ -85,7 +85,7 @@
       display: flex
       align-items: center
 
-  .tab__item
+  &__item
     display: flex
     flex-shrink: 0
     flex-direction: column
@@ -103,13 +103,13 @@
     transition: $primary-transition
     white-space: nowrap
 
-    ^[0]--dark ^[-1..-1]
+    ^[0]--dark ^[-2..-1]
       color: rgba($material-light.fg-color, $material-light.inactive-icon-percent)
 
       &--active
         color: rgba($material-light.fg-color, $material-light.active-icon-percent)
 
-    ^[0]--light ^[-1..-1]
+    ^[0]--light ^[-2..-1]
       color: rgba($material-dark.fg-color, $material-dark.inactive-icon-percent)
 
       &--active
@@ -131,7 +131,7 @@
     border-style: solid
     border-color: rgba(#000, .1)
 
-  &__item
+  &__content
     transition: $primary-transition
     width: 100%
 

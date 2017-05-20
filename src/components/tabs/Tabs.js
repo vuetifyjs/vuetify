@@ -15,6 +15,7 @@ export default {
       reverse: false,
       target: null,
       resizeDebounce: {},
+      tabsSlider: null,
       targetEl: null
     }
   },
@@ -28,9 +29,7 @@ export default {
       default: 1024
     },
     scrollBars: Boolean,
-    value: String,
-    bgColor: String,
-    sliderColor: String
+    value: String
   },
 
   computed: {
@@ -55,13 +54,17 @@ export default {
     activeIndex () {
       if (this.isBooted) this.overflow = true
 
-      this.$refs.activators.$children
-          .filter(i => i.$options._componentTag === 'v-tab-item')
-          .forEach(i => {
-            i.toggle(this.target)
+      const activators = this.$slots.activators
 
-            i.isActive && this.slider(i.$el)
-          })
+      if (!activators || !activators.length || !activators[0].componentInstance.$children) return
+
+      activators[0].componentInstance.$children
+        .filter(i => i.$options._componentTag === 'v-tabs-item')
+        .forEach(i => {
+          i.toggle(this.target)
+
+          i.isActive && this.slider(i.$el)
+        })
 
       this.$refs.content && this.$refs.content.$children.forEach(i => i.toggle(this.target, this.reverse, this.isBooted))
       this.$emit('input', this.target)
@@ -71,18 +74,25 @@ export default {
 
   mounted () {
     this.$vuetify.load(() => {
-      const activators = this.$refs.activators.$children.filter(i => i.$options._componentTag === 'v-tab-item')
+      window.addEventListener('resize', this.resize, false)
 
-      // This is a workaround to detect if link is active
-      // when being used as a router or nuxt link
-      const i = activators.findIndex(t => {
-        return t.$el.firstChild.classList.contains('tab__item--active')
+      const activators = this.$slots.activators
+
+      if (!activators || !activators.length || !activators[0].componentInstance.$children) return
+
+      const bar = activators[0].componentInstance.$children
+      // // This is a workaround to detect if link is active
+      // // when being used as a router or nuxt link
+      const i = bar.findIndex(t => {
+        return t.$el.firstChild.classList.contains('tabs__item--active')
       })
 
-      const tab = this.value || (activators[i !== -1 ? i : 0] || {}).action
+      const tab = this.value || (bar[i !== -1 ? i : 0] || {}).action
 
-      tab && this.tabClick(tab) && this.resize()
-      window.addEventListener('resize', this.resize, false)
+      // Temp fix for slider loading issue
+      setTimeout(() => {
+        tab && this.tabClick(tab) && this.resize()
+      }, 250)
     })
   },
 
@@ -100,14 +110,18 @@ export default {
       }, 0)
     },
     slider (el) {
+      this.tabsSlider = this.tabsSlider || this.$el.querySelector('.tabs__slider')
+
+      if (!this.tabsSlider) return
+
       this.targetEl = el || this.targetEl
 
-      // Gives DOM time to pain when
+      // Gives DOM time to paint when
       // processing slider for
       // dynamic tabs
       this.$nextTick(() => {
-        this.$refs.slider.style.width = `${this.targetEl.clientWidth}px`
-        this.$refs.slider.style.left = `${this.targetEl.offsetLeft}px`
+        this.tabsSlider.style.width = `${this.targetEl.scrollWidth}px`
+        this.tabsSlider.style.left = `${this.targetEl.offsetLeft}px`
       })
     },
     tabClick (target) {
@@ -130,26 +144,23 @@ export default {
   },
 
   render (h) {
-    const tabs = h('v-tabs-tabs', {
-      ref: 'activators',
-      props: {
-        mobile: this.isMobile,
-        bgColor: this.bgColor
-      }
-    }, [
-      h('v-tabs-slider', {
-        ref: 'slider',
-        class: [this.sliderColor]
-      }),
-      this.$slots.activators
-    ])
+    const content = []
+    const slot = []
+    const iter = (this.$slots.default || [])
 
-    const items = this.$slots.content ? h('v-tabs-items', {
+    iter.forEach(c => {
+      if (!c.componentOptions) return false
+
+      if (c.componentOptions.tag === 'v-tabs-content') content.push(c)
+      else slot.push(c)
+    })
+
+    const tabs = content.length ? h('v-tabs-items', {
       ref: 'content'
-    }, [this.$slots.content]) : null
+    }, content) : null
 
     return h('div', {
       'class': this.classes
-    }, [this.$slots.default, tabs, items])
+    }, [slot, this.$slots.activators, tabs])
   }
 }

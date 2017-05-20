@@ -1,21 +1,16 @@
 export default {
-  name: 'tabs-tabs',
+  name: 'tabs-bar',
 
   props: {
-    mobile: Boolean,
-    bgColor: String,
+    mobile: Boolean
   },
 
   computed: {
     classes () {
-      // default classes
-      let c = {
-        'tabs__tabs': true,
-        'tabs__tabs--mobile': this.mobile
+      return {
+        'tabs__bar': true,
+        'tabs__bar--mobile': this.mobile
       }
-      // if set, add bg color class
-      if (this.bgColor !== undefined) c[this.bgColor] = true
-      return c
     }
   },
 
