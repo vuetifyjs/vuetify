@@ -3,6 +3,7 @@ export default {
     genTHead () {
       const children = this.headers.map(o => this.genHeader(o))
       const checkbox = this.$createElement('v-checkbox', {
+        class: 'primary--text',
         props: {
           hideDetails: true,
           inputValue: this.all,
