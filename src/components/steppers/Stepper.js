@@ -62,10 +62,8 @@ export default {
   },
 
   render (h) {
-    const data = {
+    return h('div', {
       'class': this.classes
-    }
-
-    return h('div', data, [this.$slots.default])
+    }, this.$slots.default)
   }
 }
