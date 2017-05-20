@@ -138,8 +138,9 @@
 
 .stepper
   &--non-linear
-    .stepper__label:not(& .stepper__step--complete)
-      color: rgba($material-theme.fg-color, $material-theme.secondary-text-percent)
+    .stepper__step:not(.stepper__step--complete)
+      .stepper__label
+        color: rgba($material-theme.fg-color, $material-theme.secondary-text-percent)
 
   &--vertical
     padding-bottom: 36px
