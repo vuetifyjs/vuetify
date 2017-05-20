@@ -7,7 +7,7 @@
   .divider
     align-self: center
     margin: 0 -16px
-  
+
 .stepper
   &__header
     align-items: stretch
@@ -20,9 +20,9 @@
 .stepper
   &__step__step
     align-items: center
-    background: rgba(#000, .38)
+    background: rgba($material-theme.fg-color, $material-theme.disabledORhints-text-percent)
     border-radius: 50%
-    color: white
+    color: $material-theme.bg-color
     display: flex
     font-size: 12px
     justify-content: center
@@ -30,9 +30,10 @@
     margin-right: 8px
     width: 24px
     transition: .3s $transition.fast-in-fast-out
-    
+
     .icon
       font-size: 18px
+      color: rgba($material-theme.bg-color)
 
 .stepper
   &__step
@@ -42,81 +43,84 @@
     flex-wrap: wrap
     padding: 24px
     position: relative
-    
+
     &--active
       .stepper__label
         text-shadow: 0px 0px 0px black
         transition: .3s $transition.ease-in-out
-      
+
       .stepper__step__step
         background: $theme.primary
-    
+        // font-size: 12px
+
     &--editable
       cursor: pointer
 
       &:hover
-        background: rgba(#000, .06)
-        
+        background: rgba($material-theme.fg-color, .06)
+        text-shadow: 0px 0px 0px black
+
     &--inactive
       .stepper__label
-        color: rgba(#000, .38)
-        
+        color: rgba($material-theme.fg-color, $material-theme.disabledORhints-text-percent)
+
         small
-          color: rgba(#000, .38)
+          color: rgba($material-theme.fg-color, $material-theme.disabledORhints-text-percent)
 
       .stepper__step__step:not(&.stepper__step--error)
-        color: #fff
-        background: rgba(#000, .38)
-        
+        color: $material-theme.bg-color
+        background: rgba($material-theme.fg-color, $material-theme.disabledORhints-text-percent)
+
         &:hover
           background: rgba(#000, .50)
-          
+
       &.stepper__step--editable
         &:hover
           .stepper__step__step
             background: rgba(#000, .5)
-      
+
     &--error
       .stepper__step__step
         background: transparent
         color: $theme.error
-        
+
         .icon
           font-size: 24px
+          color: $theme.error
 
       .stepper__label
         color: $theme.error
         text-shadow: none
         font-weight: 500
-        
+
         small
           color: $theme.error
-          
+
     &--complete
       .stepper__label
-        color: rgba(#000, .5)
-        text-shadow: 0px 0px 0px black
+        color: rgba($material-theme.fg-color, $material-theme.primary-text-percent)
 
       .stepper__step__step
         background: $theme.primary
-    
+
 .stepper
   &__label
     align-items: flex-start
     display: flex
     flex-direction: column
     text-align: left
-    color: rgba(#000, .38)
-    
+    color: rgba($material-theme.fg-color, $material-theme.disabledORhints-text-percent)
+
     small
       font-size: 12px
       font-weight: 300
-      color: rgba(#000, .38)
+      color: rgba($material-theme.fg-color, $material-theme.secondary-text-percent)
       text-shadow: none
 
 .stepper
   &__wrapper
     overflow: hidden
+    transform: translateZ(0) // fix for #512
     transition: .4s $transition.ease-in-out
 
 .stepper
@@ -128,11 +132,16 @@
     transition: .4s $transition.ease-in-out
     flex: 1
     width: 100%
-      
+
     .btn
       margin-left: 0
-    
+
 .stepper
+  &--non-linear
+    .stepper__step:not(.stepper__step--complete)
+      .stepper__label
+        color: rgba($material-theme.fg-color, $material-theme.secondary-text-percent)
+
   &--vertical
     padding-bottom: 36px
 
@@ -143,13 +152,13 @@
 
     .stepper__content:not(:last-child)
       border-left: 1px solid $material-twelve-percent-dark
-      
+
     .stepper__step
       padding: 24px 24px 16px
 
     .stepper__step__step
       margin-right: 12px
-    
+
   &--alt-labels
     .divider
       margin: 35px -67px 0
@@ -160,14 +169,14 @@
       justify-content: flex-start
       align-items: center
       flex-basis: 175px
-      
+
       small
         align-self: center
-    
+
     .stepper__step__step
       margin-right: 0
       margin-bottom: 12px
-      
+
 @media $display-breakpoints.sm-and-down
   .stepper:not(.stepper--vertical)
     .stepper__label
@@ -175,4 +184,4 @@
 
     .stepper__step__step
       margin-right: 0
-    
+

@@ -1,12 +1,22 @@
+.application--dark
+  .card
+    background: $grey.darken-3
+
+.application--light
+  .card
+    background: $body-bg-light
+
 .card
   elevation(2)
-  background: $card-background
   position: relative
   border-radius: $card-border-radius
   min-width: 0
 
   &--raised
     elevation(3, true)
+  
+  &--flat
+    box-shadow: none !important
 
   &--hover
     cursor: pointer
@@ -76,6 +86,8 @@
             display: table
 
   &__title
+    border-top-left-radius: inherit
+    border-top-right-radius: inherit
     font-size: $card-title-text-size
     font-weight: $card-title-text-font-weight
     letter-spacing: $card-title-text-letter-spacing

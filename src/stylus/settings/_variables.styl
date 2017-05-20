@@ -1,45 +1,37 @@
+@require './_theme'
+
 // ============================================================
 // Vuetify variables
 // ============================================================
 
-
-
-// Theme
-// ============================================================
-$body-font-family := 'Roboto', sans-serif
-$body-bg := #FFFFFF
-$color-root := $grey.darken-3
-$font-size-root := 14px
-$line-height-root := 1.5
-$theme := {
-  primary: $blue.darken-2
-  accent: $blue.accent-2
-  secondary: $grey.darken-3
-  info: $blue.base
-  warning: $amber.base
-  error: $red.accent-2
-  success: $green.base
-}
-
 $color-pack := true
-
 
 // Material Design
 // ============================================================
 $material-left-padding := 16px
 $material-right-padding := 16px
-$material-twelve-percent-light := rgba(#fff, 0.12)
-$material-twelve-percent-dark := rgba(#000, 0.12)
+
+$material-twelve-percent-light := rgba($material-dark.fg-color, $material-dark.divider-percent)
+$material-twelve-percent-dark := rgba($material-light.fg-color, $material-light.divider-percent)
+
+
+// Theme
+// ============================================================
+$body-bg-light := $material-light.bg-color
+$body-bg-dark := $material-dark.bg-color
+$color-light := rgba($material-dark.text-color, $material-dark.primary-text-percent)
+$color-dark := rgba($material-light.text-color, $material-light.primary-text-percent)
+$color-theme := rgba($material-theme.text-color, $material-theme.primary-text-percent)
 
 
 // Grid
 // ============================================================
 $grid-breakpoints := {
   xs: 0
-  sm: 576px
-  md: 768px
-  lg: 992px
-  xl: 1200px
+  sm: 600px
+  md: 1024px
+  lg: (1440px - 16px) // Desktop gets a 16dp reduction
+  xl: (1920px - 16px) // https://material.io/guidelines/layout/responsive-ui.html#responsive-ui-breakpoints
 }
 
 $container-max-widths := {
@@ -49,10 +41,8 @@ $container-max-widths := {
   xl: $grid-breakpoints.xl * .9
 }
 
-$grid-gutter := 2rem
-$grid-outer-margin := 2rem
-$grid-gutter-full := $grid-gutter * .25 * -1
-$grid-gutter-half := $grid-gutter * .25
+$grid-gutter := 24px
+$grid-gutter-mobile := 16px
 $grid-columns := 12
 
 
@@ -74,7 +64,7 @@ $display-breakpoints := {
 
 // Spacing
 // ============================================================
-$spacer := 1rem
+$spacer := 16px
 $spacer-x := $spacer
 $spacer-y := $spacer
 $spacers := {
@@ -114,7 +104,12 @@ $headings := {
   h3: { size: 45px, weight: 400, line-height: 48px, letter-spacing: normal },
   h4: { size: 34px, weight: 400, line-height: 40px, letter-spacing: normal },
   h5: { size: 24px, weight: 400, line-height: 32px, letter-spacing: normal },
-  h6: { size: 20px, weight: 500, line-height: 1, letter-spacing: .02em }
+  h6: { size: 20px, weight: 500, line-height: 1, letter-spacing: .02em },
+  subheading: { size: 16px, weight: 400 },
+  body-2: { size: 14px, weight: 500 },
+  body-1: { size: 14px, weight: 400 },
+  caption: { size: 12px, weight: 400 },
+  button: { size: 14px, weight: 500 }
 }
 
 
@@ -138,17 +133,17 @@ $secondary-transition := 0.2s $transition.ease-in-out
 $alert-color := inherit
 $alert-border-radius := 0
 $alert-border-width := 4px 0 0 0
-$alert-font-size := 1.1rem
-$alert-icon-color := rgba(#000000, .3)
-$alert-icon-font-size := 2rem
-$alert-padding := 1.5rem
+$alert-font-size := $font-size-root
+$alert-icon-color := rgba($material-light.fg-color, .3)
+$alert-icon-font-size := 24px
+$alert-padding := 16px
 $alert-margin := $spacers.one.y auto
 
 // Badges
 $badge-border-radius := 50%
-$badge-color := #FFFFFF
+$badge-color := $material-dark.fg-color
 $badge-font-family := $body-font-family
-$badge-font-size := .9rem
+$badge-font-size := 14px
 $badge-height := 22px
 $badge-top := 0
 $badge-right := 0
@@ -157,15 +152,15 @@ $badge-width := 22px
 // Breadcrumbs
 $breadcrumbs-flex := 0 1 auto
 $breadcrumbs-height := 40px
-$breadcrumbs-item-font-size := 1rem
+$breadcrumbs-item-font-size := 14px
 $breadcrumbs-margin := 0
-$breadcrumbs-padding := 0 1rem
+$breadcrumbs-padding := 0 14px
 
 /** Buttons */
 
 // Base
 $button-border-radius := 2px
-$button-color := #fff
+$button-color := $material-light.fg-color
 $button-background-color := #999999
 $button-height := 36px
 $button-font-size := 14px
@@ -175,10 +170,10 @@ $button-min-width := 88px
 $button-padding := 0 16px
 $button-text-transform := uppercase
 
-$button-dark-overlay := rgba(#fff, 0.12)
-$button-dark-disabled-color := rgba(#fff, 0.3)
-$button-light-overlay := rgba(#000, 0.12)
-$button-light-disabled-color := rgba(#000, 0.26)
+$button-dark-overlay := rgba($material-light.fg-color, .12)
+$button-dark-disabled-color := rgba($material-light.fg-color, .3)
+$button-light-overlay := rgba($material-dark.fg-color, .12)
+$button-light-disabled-color := rgba($material-dark.fg-color, .26)
 
 $button-small-height := 28px
 $button-small-font-size := 13px
@@ -206,25 +201,23 @@ $button-dropdown-input-padding-left := 16px
 $button-dropdown-background := #fff
 
 // Card
-$card-actions-border-top := 1px solid rgba(#000000, .1)
-$card-background := #FFFFFF
+$card-actions-border-top := 1px solid rgba($material-theme.fg-color, .1)
+$card-background := $material-theme.bg-color
 $card-padding := 16px
 $card-border-radius := 2px
-$card-title-text-size := 1.5rem
-$card-title-text-letter-spacing := .1rem
+$card-title-text-size := 24px
+$card-title-text-letter-spacing := 1px
 $card-title-text-font-weight := 400
 $card-row-min-height := 36px
-$card-actions-font-size := .9rem
-$card-actions-button-padding := .7rem
 
 // Chip
 $chip-background := $grey.lighten-2
 $chip-border := 1px solid $grey.lighten-2
-$chip-border-radius := 2rem
+$chip-border-radius := 28px
 $chip-font-size := 14px
-$chip-label-border-radius := 0
+$chip-label-border-radius := $card-border-radius
 $chip-icon-font-size := 24px
-$chip-icon-color := rgba(#000, .54)
+$chip-icon-color := rgba($material-light.fg-color, .54)
 $chip-padding := 0 12px
 $chip-removeable-padding := 0 4px 0 12px
 $chip-outline-background := transparent !important
@@ -234,11 +227,11 @@ $chip-margin := 8px
 $chip-small-height := 26px
 
 // Collapsible
-$collapsible-collapse-height := 3rem
+$expansion-panel-collapse-height := 48px
 $collapsible-transition-height := 0.23s
 
 // Footer
-$footer-height := 45px
+$footer-height := 36px
 
 /** Lists */
 $list-left-padding := 16px
@@ -290,80 +283,75 @@ $time-picker-number-font-size := 16px
 $time-picker-number-margin := 10px
 
 // Toolbar
-$toolbar-height := 64px
-$toolbar-item-padding := 0 1.2rem
+$toolbar-height := 56px
+$toolbar-item-padding := 0 16px
 $toolbar-padding-y := 0
-$toolbar-padding-x := 14px
+$toolbar-padding-x := 16px
 
 // Progress Circular
 $progress-circular-rotate-animation := progress-circular-rotate 1.4s linear infinite
 $progress-circular-rotate-dash := progress-circular-dash 1.4s ease-in-out infinite
 $process-circular-intermediate-svg-transition := all .2s ease-in-out
-$progress-circular-underlay-stroke := rgba(#000, 0.1)
+$progress-circular-underlay-stroke := rgba($material-light.fg-color, 0.1)
 $progress-circular-overlay-transition := all .6s ease-in-out
 
 
 /* Selection Controls */
-$selection-switch-light-color := rgba(#000, .38)
-$selection-switch-light-background := #fafafa
-$selection-switch-light-label-color := #424242
-$selection-switch-light-disabled-color := rgba(#000, .12)
-$selection-switch-light-disabled-background := #bdbdbd
+$selection-switch-dark-color := rgba(#000, .38)
+$selection-switch-dark-background := #fafafa
+$selection-switch-dark-label-color := #424242
+$selection-switch-dark-enabled-color := rgba($teal.base, 1)
+$selection-switch-dark-disabled-color := rgba($grey.lighten-1, 1)
+$selection-switch-dark-disabled-background := rgba(#000, .12)
 
-$selection-switch-dark-color := rgba(#fff, .30)
-$selection-switch-dark-background := #bdbdbd
-$selection-switch-dark-label-color := #fff
-$selection-switch-dark-disabled-color := rgba(#fff, .10)
-$selection-switch-dark-disabled-background := #424242
+$selection-switch-light-color := rgba(#fff, .3)
+$selection-switch-light-background := #bdbdbd
+$selection-switch-light-label-color := $material-dark.text-color
+$selection-switch-light-enabled-color := rgba($teal.lighten-3, 1)
+$selection-switch-light-disabled-color := rgba($grey.darken-3, 1)
+$selection-switch-light-disabled-background := rgba(#fff, .1)
 
-$selection-controls-light-color := rgba(#000, .54)
-$selection-controls-light-disabled-color := rgba(#000, .26)
-$selection-controls-light-label-color := #000
+$selection-controls-active-color := rgba($teal.base, 1)
+$selection-controls-light-color := rgba($material-dark.fg-color, .54)
+$selection-controls-light-disabled-color := rgba($material-dark.fg-color, .26)
+$selection-controls-light-label-color := $material-dark.text-color
 
-$selection-controls-dark-color := rgba(#fff, .70)
-$selection-controls-dark-disabled-color := rgba(#fff, .30)
-$selection-controls-dark-label-color := #fff
+$selection-controls-dark-color := rgba($material-light.fg-color, .70)
+$selection-controls-dark-disabled-color := rgba($material-light.fg-color, .30)
+$selection-controls-dark-label-color := $material-light.text-color
 
 
 /* Sidebar */
 
-$sidebar-height := 100vh
-$sidebar-width := 300px
+$navigation-drawer-height := 100vh
+$navigation-drawer-width := 300px
+$navigation-drawer-mini-variant-width := 80px
 
 // Sidebar Item
-$sidebar-item-color := #fff
-$sidebar-item-height := 50px
-$sidebar-item-active-color := #fff
-$sidebar-item-active-background-color := $theme.primary
-$sidebar-item-hover-background-color := rgba($theme.primary, .4)
-
-// Sidebar Item Header
-$sidebar-item-header-padding := .2rem .2rem .2rem 2rem
-$sidebar-item-header-color := #fff
-$sidebar-item-header-font-size := 90%
-$sidebar-item-header-letter-spacing := .1px
+$navigation-drawer-item-color := $material-dark.fg-color
+$navigation-drawer-item-height := 50px
+$navigation-drawer-item-active-color := $material-dark.fg-color
+$navigation-drawer-item-active-background-color := $theme.primary
+$navigation-drawer-item-hover-background-color := rgba($theme.primary, .4)
 
 // Sidebar Group
-$sidebar-group-items-background-color := darken($theme.secondary, 15%)
-$sidebar-group-header-active-sidebar-items-border := 1px solid rgba(#fff, .1)
-$sidebar-group-header-active-sidebar-item-active-background-color := rgba($theme.primary, .4)
-
-// Slider
-$slider-arrow-size := 2rem
+$navigation-drawer-group-items-background-color := darken($theme.secondary, 15%)
+$navigation-drawer-group-header-active-navigation-drawer-items-border := 1px solid rgba($material-dark.fg-color, .1)
+$navigation-drawer-group-header-active-navigation-drawer-item-active-background-color := rgba($theme.primary, .4)
 
 
 /* Slider */
-$slider-light-off := rgba(#000, .26)
-$slider-light-focus-off := rgba(#000, .38)
-$slider-light-disabled := rgba(#000, .26)
-$slider-light-label := #000
-$slider-light-ticks := rgba(#000, .6)
+$slider-light-off := rgba($material-dark.fg-color, .26)
+$slider-light-focus-off := rgba($material-dark.fg-color, .38)
+$slider-light-disabled := rgba($material-dark.fg-color, .26)
+$slider-light-label := $material-dark.text-color
+$slider-light-ticks := rgba($material-dark.fg-color, .6)
 
-$slider-dark-off := rgba(#fff, .3)
-$slider-dark-focus-off := rgba(#fff, .3)
-$slider-dark-disabled := rgba(#fff, .3)
-$slider-dark-label := #fff
-$slider-dark-ticks := rgba(#fff, .6)
+$slider-dark-off := rgba($material-light.fg-color, .3)
+$slider-dark-focus-off := rgba($material-light.fg-color, .3)
+$slider-dark-disabled := rgba($material-light.fg-color, .3)
+$slider-dark-label := $material-light.text-color
+$slider-dark-ticks := rgba($material-light.fg-color, .6)
 
 
 /** Snackbar */
@@ -377,11 +365,11 @@ $input-font-size := 16px
 $label-font-size := 12px
 $input-height := 30px
 
-$input-group-light-normal := rgba(#000, .38)
-$input-group-light-focus := rgba(#000, .87)
+$input-group-light-normal := rgba($material-dark.fg-color, $material-dark.disabledORhints-text-percent)
+$input-group-light-focus := rgba($material-dark.fg-color, .87)
 
-$input-group-dark-normal := rgba(#fff, .5)
-$input-group-dark-focus := #fff
+$input-group-dark-normal := rgba($material-light.fg-color, $material-light.disabledORhints-text-percent)
+$input-group-dark-focus := $material-light.fg-color
 
 
 $label-padding-top := 16px

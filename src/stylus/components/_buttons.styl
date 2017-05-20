@@ -31,7 +31,6 @@
     top: 0
     right: 0
     transition: $primary-transition
-    z-index: 0
 
   &.btn--disabled
     box-shadow: none !important
@@ -47,10 +46,9 @@
   &__content
     align-items: center
     display: flex
-    flex: 1
+    flex: 1 0 auto
     justify-content: center
     transition: $primary-transition
-    z-index: 1
     white-space: nowrap
     overflow: hidden
     text-overflow: ellipsis
@@ -58,13 +56,9 @@
 
 /** Types */
 .btn
-  &--default
-    color: $color-root
-
   &--flat
     background-color: transparent !important
     box-shadow: none !important
-    color: $color-root
 
     &.btn--light
       &:hover:after
@@ -74,8 +68,6 @@
         color: $button-light-disabled-color
 
     &.btn--dark
-      color: $button-color
-
       &:hover:after
         background-color: $button-dark-overlay
 
@@ -96,8 +88,11 @@
     justify-content: center
     height: $button-height
     width: $button-height
-    min-width: initial
+    min-width: 0
     padding: 0
+    
+    .icon
+      color: inherit
 
     &:after
       border-radius: 50%
@@ -114,13 +109,19 @@
       background-color: transparent !important
       color: $button-light-disabled-color !important
       pointer-events: none
+      
+    &.btn--small
+      width: $button-small-height
+
+    &.btn--large
+      width: $button-large-height
 
   &--floating
     border-radius: 50%
-    min-width: initial
+    min-width: 0
     height: $button-floating-width
     width: $button-floating-width
-    padding: initial
+    padding: 0
 
     &:after
       border-radius: 50%
@@ -152,26 +153,32 @@
 /** Themes */
 .btn
   &--light
+    color: $color-light
+
     &:hover:after
       background-color: $button-light-overlay
 
-    &.btn--disabled
+    // Do not show disabled styles when using loader
+    &.btn--disabled:not(.btn--loader)
       color: $button-light-disabled-color !important
       opacity: 1
 
-    &.btn--disabled:not(.btn--flat)
-      background-color: $button-light-overlay !important
+      &:not(.btn--flat):not(.btn--icon)
+        background-color: $button-light-overlay !important
 
   &--dark
+    color: $color-dark
+
     &:hover:after
       background-color: $button-dark-overlay
 
-    &.btn--disabled
+    // Do not show disabled styles when using loader
+    &.btn--disabled:not(.btn--loader)
       color: $button-dark-disabled-color !important
       opacity: 1
 
-    &.btn--disabled:not(.btn--flat)
-      background-color: $button-dark-overlay !important
+      &:not(.btn--flat):not(.btn--icon)
+        background-color: $button-dark-overlay !important
 
 /** Sizes */
 .btn
@@ -179,15 +186,9 @@
     font-size: $button-small-font-size
     height: $button-small-height
 
-    &.btn--icon
-      width: $button-small-height
-
   &--large
     font-size: $button-large-font-size
     height: $button-large-height
-
-    &.btn--icon
-      width: $button-large-height
 
 
 /** Loader */

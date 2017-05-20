@@ -1,0 +1,132 @@
+.navigation-drawer
+  max-width: 100%
+  overflow-y: auto
+  overflow-x: hidden
+  padding: 0 0 100px
+  pointer-events: auto
+  position: fixed
+  transition: .3s $transition.swing
+  width: $navigation-drawer-width
+  top: 0
+  left: 0
+  will-change: transform
+  z-index: 3
+  
+  &--close:not(.navigation--permanent)
+    &.navigation-drawer:not(.navigation-drawer--right)
+      transform: "translate3d(-%s, 0, 0)" % ($navigation-drawer-width)
+
+    &.navigation-drawer--right
+      transform: "translate3d(%s, 0, 0)" % ($navigation-drawer-width)
+
+  &--right
+    left: initial
+    right: 0
+
+  &--absolute
+    position: absolute
+        
+  &--dark
+    background-color: $theme.secondary
+    navigation-drawer(#fff)
+    
+    .divider
+      background: $material-twelve-percent-light
+    
+  &--light
+    background: #fff
+    border-right: 1px solid rgba(#000, $material-light.divider-percent)
+    navigation-drawer(rgba(#000, .87))
+    
+    .divider
+      background: $material-twelve-percent-dark
+  
+  &--permanent, &--persistent
+    &.navigation-drawer--clipped, &.navigation-drawer--floating
+      margin-top: $toolbar-height
+      max-height: "calc(100vh - %s)" % $toolbar-height
+
+      + .toolbar, ~ .footer.footer--fixed, ~ .footer.footer--absolute
+        padding-left: 0
+        z-index: 3
+        
+    &.navigation-drawer--floating
+      border-color: transparent
+  
+  &--permanent
+    &:not(.navigation-drawer--clipped):not(.navigation-drawer--floating)
+      ~ main, 
+      + .toolbar,
+      ~ .footer
+        padding-left: $navigation-drawer-width
+
+  &--persistent
+    &.navigation-drawer--open:not(.navigation-drawer--is-mobile)
+      &:not(.navigation-drawer--clipped)
+        + .toolbar
+          padding-left: $navigation-drawer-width
+
+      ~ main, ~ .footer:not(.footer--fixed):not(.footer--absolute)
+        padding-left: $navigation-drawer-width
+
+  &--mini-variant
+    margin-top: $toolbar-height
+    max-height: "calc(100vh - %s)" % $toolbar-height
+    overflow: hidden
+    width: $navigation-drawer-mini-variant-width
+    
+    .list__tile__action, .list__tile__avatar
+      justify-content: center
+      min-width: 48px
+    
+    .list__tile__content
+      opacity: 0
+    
+    .subheader, .divider
+      display: none
+      
+    ~ .toolbar
+      padding-left: 0 !important
+    
+    &:not(.navigation-drawer--close)
+      ~ main
+        padding-left: $navigation-drawer-mini-variant-width !important
+      
+      ~ .footer:not(.footer--fixed):not(.footer--absolute)
+        padding-left: $navigation-drawer-mini-variant-width !important
+      
+  &--temporary, &--is-mobile:not(.navigation-drawer--permanent)
+    z-index: 5
+
+    &:not(.navigation-drawer--close)
+      elevation(16)
+    
+  + toolbar
+    + main
+      min-height: "calc(100vh - %s)" % $toolbar-height
+
+  > .list
+    .list__tile
+      transition: none
+
+      &--active
+        .list__tile__title
+          color: inherit
+
+        &:first-child
+          .icon
+            color: $theme.primary
+
+    .list--group
+      &__header--active
+        &:after
+          background: transparent
+
+        .list__tile__action:first-of-type
+          .icon
+            color: $theme.primary
+
+    .list--group__container
+      .list__tile--active
+        .list__tile__title
+          color: $theme.primary

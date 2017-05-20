@@ -12,6 +12,36 @@ export default {
     }
   },
 
+  props: {
+    autofocus: Boolean,
+    autoGrow: Boolean,
+    counter: Boolean,
+    fullWidth: Boolean,
+    id: String,
+    name: String,
+    maxlength: [Number, String],
+    max: {
+      type: [Number, String],
+      default: 25
+    },
+    min: {
+      type: [Number, String],
+      default: 0
+    },
+    multiLine: Boolean,
+    prefix: String,
+    readonly: Boolean,
+    rows: {
+      default: 5
+    },
+    singleLine: Boolean,
+    suffix: String,
+    type: {
+      type: String,
+      default: 'text'
+    }
+  },
+
   computed: {
     classes () {
       return {
@@ -60,33 +90,6 @@ export default {
       return this.lazyValue !== null &&
         typeof this.lazyValue !== 'undefined' &&
         this.lazyValue.toString().length > 0
-    }
-  },
-
-  props: {
-    autofocus: Boolean,
-    autoGrow: Boolean,
-    counter: Boolean,
-    fullWidth: Boolean,
-    maxlength: [Number, String],
-    min: {
-      type: [Number, String],
-      default: 0
-    },
-    max: {
-      type: [Number, String],
-      default: 25
-    },
-    multiLine: Boolean,
-    singleLine: Boolean,
-    type: {
-      type: String,
-      default: 'text'
-    },
-    name: String,
-    readonly: Boolean,
-    rows: {
-      default: 5
     }
   },
 
@@ -144,7 +147,7 @@ export default {
     genInput () {
       const tag = this.multiLine ? 'textarea' : 'input'
 
-      const inputData = {
+      const data = {
         style: {
           'height': this.inputHeight && `${this.inputHeight}px`
         },
@@ -166,17 +169,29 @@ export default {
         ref: 'input'
       }
 
-      if (this.autocomplete) inputData.domProps.autocomplete = true
-      if (this.name) inputData.attrs = { name: this.name }
-      if (this.maxlength) inputData.attrs.maxlength = this.maxlength
+      if (this.placeholder) data.domProps.placeholder = this.placeholder
+      if (this.autocomplete) data.domProps.autocomplete = true
+      if (this.name) data.attrs.name = this.name
+      if (this.maxlength) data.attrs.maxlength = this.maxlength
+      if (this.id) data.domProps.id = this.id
 
       if (this.multiLine) {
-        inputData.domProps.rows = this.rows
+        data.domProps.rows = this.rows
       } else {
-        inputData.domProps.type = this.type
+        data.domProps.type = this.type
       }
 
-      return this.$createElement(tag, inputData)
+      const children = [this.$createElement(tag, data)]
+
+      this.prefix && children.unshift(this.genFix('prefix'))
+      this.suffix && children.push(this.genFix('suffix'))
+
+      return children
+    },
+    genFix (type) {
+      return this.$createElement('span', {
+        'class': `input-group--text-field__${type}`
+      }, this[type])
     },
     counterIsValid: function counterIsValid () {
       const val = (this.inputValue && this.inputValue.toString() || '')
@@ -194,10 +209,6 @@ export default {
   },
 
   render () {
-    return this.genInputGroup(this.genInput(), {
-      attrs: {
-        tabindex: -1
-      }
-    })
+    return this.genInputGroup(this.genInput(), { attrs: { tabindex: -1 }})
   }
 }

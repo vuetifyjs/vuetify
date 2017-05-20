@@ -1,3 +1,7 @@
+.application--dark
+  .toolbar
+    background: $grey.darken-4
+
 .toolbar
   align-items: center
   background-color: $theme.primary
@@ -5,72 +9,81 @@
   flex-wrap: wrap
   height: $toolbar-height
   position: relative
-  padding: $toolbar-padding-y $toolbar-padding-x
+  padding: $toolbar-padding-y 0
+  transition: .3s $transition.swing
   width: 100%
-  z-index: 6
+  will-change: padding-left
   elevation(4)
+  z-index: 2
+
+  > *:first-child
+    margin-left: $grid-gutter
+
+  > *:last-child
+    margin-right: $grid-gutter
+
+  @media $display-breakpoints.xs-only
+    > *:first-child
+      margin-left: $grid-gutter-mobile
+
+    > *:last-child
+      margin-right: $grid-gutter-mobile
 
   ul
     list-style: none
-    
+
   li
     height: 100%
-    
+
   i
     font-size: 24px
 
   .menu__activator
     height: 100%
 
-  .btn:not(.toolbar__side-icon)
-    margin: 0 6px
-    
-    &:first-child
-      margin-left: -6px
-      
-    &:last-child
-      margin-right: 0
+  &--fixed, &--absolute
+    + main
+      padding-top: $toolbar-height
 
   &--fixed
     position: fixed
-    top: 0
-    left: 0
+
+  &--absolute
+    position: absolute
 
   &__sub
     flex: 1 0 100%
     padding: 24px 0 24px 72px
-    
+
   &__side-icon
     display: inline-flex
     align-items: center
     position: relative
     margin-left: 10px
-  
+
   &__logo
-    color: #fff
+    color: $color-light
     font-size: 3rem
     flex: 1;
     text-decoration: none
     padding: 0
     display: flex
     align-items: center
-    
+
   &__title
-    color: #fff
+    color: $color-light
     font-size: $headings.h6.size
     flex: 1;
-    padding: 0 16px
     white-space: nowrap
     overflow: hidden
     text-overflow: ellipsis
-    
-    &:first-child
-      padding-left: 2px
-  
+
+    &:not(:first-child)
+      padding: 0 16px
+
   &__items
     list-style-type: none
     padding: 0
-    background-color: inherit
     display: flex
     align-items: center
     height: 100%
@@ -79,10 +92,10 @@
     > li
       display: flex
       align-items: center
-      
+
   &__item
     align-items: center
-    color: #fff
+    color: $color-light
     display: flex
     padding: $toolbar-item-padding
     text-decoration: none
@@ -90,35 +103,35 @@
     position: relative
     height: 100%
     white-space: nowrap
-    
+
     i
       font-size: 2rem
-    
+
     &:hover, &--active
       background: rgba(#000,0.1)
-      
+
     &--disabled
       opacity: .5
       pointer-events: none
-      
+
   .input-group
     margin: 0 0 0 16px
     flex: 1
-      
+
     &--dark
       .icon
-        color: #fff
-    
+        color: rgba($material-light.fg-color, $material-light.active-icon-percent)
+
     &--light
       .icon
-        color: #000
-    
+        color: rgba($material-dark.fg-color, $material-dark.active-icon-percent)
+
     &--dark.input-group--focused.input-group--prepend-icon,
     &--dark.input-group--focused.input-group--append-icon
       .icon
-        color: #fff
-    
+        color: rgba($material-light.fg-color, $material-light.active-icon-percent)
+
     &--light.input-group--focused.input-group--prepend-icon,
     &--light.input-group--focused.input-group--append-icon
       .icon
-        color: #000
+        color: rgba($material-dark.fg-color, $material-dark.active-icon-percent)

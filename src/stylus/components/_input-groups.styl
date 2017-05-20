@@ -26,7 +26,7 @@
     flex: 1 0 100%
     min-width: 0
     min-height: $input-height
-  
+
 
 /** States */
 .input-group
@@ -36,11 +36,11 @@
       background-position: bottom
       background-size: 3px 1px
       background-repeat: repeat-x
-      
+
     &.input-group--light
       .input-group__details:before
         background-image: linear-gradient(to right, rgba(0, 0, 0, .38) 0, rgba(0, 0, 0, .38) 33%, transparent 0)
-      
+
     &.input-group--dark
       .input-group__details:before
         background-image: linear-gradient(to right, rgba(255, 255, 255, .38) 0, rgba(255, 255, 255, .38) 33%, transparent 0)
@@ -49,33 +49,33 @@
     .input-group__details
       &:after
         width: 100%
-      
+
   &--active
     //
-      
+
   &--error
     .input-group__details:after
       background-color: $theme.error
-      
+
   &--light
     .input-group__hint
-      color: rgba(#000, .54)
-
-    .input-group__details:before
-      background-color: $material-twelve-percent-dark
-
-    .icon
-      color: rgba(#000, .6)
-
-  &--dark
-    .input-group__hint
-      color: rgba(#fff, .7)
+      color: rgba($material-dark.fg-color, .54)
 
     .input-group__details:before
       background-color: $material-twelve-percent-light
 
     .icon
-      color: rgba(#fff, .6)
+      color: rgba($material-dark.fg-color, .6)
+
+  &--dark
+    .input-group__hint
+      color: rgba($material-light.fg-color, .7)
+
+    .input-group__details:before
+      background-color: $material-twelve-percent-dark
+
+    .icon
+      color: rgba($material-light.fg-color, .6)
 
 /** Icons */
 .input-group
@@ -115,11 +115,11 @@
       height: 1px
       width: 100%
       z-index: 0
-      
+
   &--hide-details
     .input-group__details
       min-height: 0
-      
+
 /** Hint */
 .input-group
   &__hint

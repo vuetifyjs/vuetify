@@ -1,5 +1,6 @@
 .menu
   display: inline-block
+  position: relative
   vertical-align: middle
   
   &--disabled
@@ -14,13 +15,13 @@
     position: relative
   
   &__content
-    background-color: #fff
+    background: #fff
     position: absolute
     display: inline-block
     border-radius: 2px
     overflow-y: auto
     overflow-x: hidden
-    z-index: 5
+    z-index: 4
     elevation(8)
 
   &-transition

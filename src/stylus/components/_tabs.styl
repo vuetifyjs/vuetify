@@ -1,51 +1,49 @@
 .tabs
-  overflow: hidden
   position: relative
   width: 100%
   
+  &--overflow
+    overflow: hidden
+    
+    .tabs__item, .tabs__items
+      overflow: hidden
+
   > .card
     border-radius: 0
-  
-  .card
-    background: inherit
-    box-shadow: none
-    
-  ul
-    padding: 0
-    
+
   &--grow
     .tabs__container
       > li
         flex-grow: 1
-      
+
   &--centered
     .tabs__container
       > li:first-of-type
         margin-left: auto
       > li:last-of-type
         margin-right: auto
-      
+
   &--icons
-    .tabs__tabs
+    .tabs__bar
       height: 90px
-      
-  &--scroll-bars     
-    .tabs__tabs--mobile
+
+  &--scroll-bars
+    .tabs__bar--mobile
       padding: 0 35px
-      
+
       .icon--left, .icon--right
         display: flex
-        
+
       .tabs__container
         width: calc(100% - 70px)
-    
-    
-  &__tabs
+
+
+  &__bar
     background-color: $theme.primary
     width: 100%
     position: relative
     height: 60px
-    
+
     .icon--left, .icon--right
       position: absolute
       top: 0
@@ -56,13 +54,13 @@
       height: 100%
       cursor: pointer
       user-select: none
-      
+
     .icon--left
       left: 0
-      
+
     .icon--right
       right: 0
-    
+
   &__container
     overflow-x: auto
     overflow-y: hidden
@@ -70,14 +68,14 @@
     height: 100%
     width: 100%
     position: absolute
-    padding: 1rem
+    padding: 0
     top: 0
     align-items: center
     list-style: none
-    
-    > li
+
+    > li:not(.tabs__slider)
       height: 100%
-    
+
     &-left
       position: absolute
       left: 0
@@ -86,9 +84,8 @@
       width: 35px
       display: flex
       align-items: center
-  
-  .tab__item
-    color: $grey.lighten-2
+
+  &__item
     display: flex
     flex-shrink: 0
     flex-direction: column
@@ -104,36 +101,40 @@
     text-transform: uppercase
     text-overflow: ellipsis
     transition: $primary-transition
-    overflow: hidden
     white-space: nowrap
-    
+
+    ^[0]--dark ^[-2..-1]
+      color: rgba($material-light.fg-color, $material-light.inactive-icon-percent)
+
+      &--active
+        color: rgba($material-light.fg-color, $material-light.active-icon-percent)
+
+    ^[0]--light ^[-2..-1]
+      color: rgba($material-dark.fg-color, $material-dark.inactive-icon-percent)
+
+      &--active
+        color: rgba($material-dark.fg-color, $material-dark.active-icon-percent)
+
     .icon
+      color: inherit
       flex: 1
       flex-basis: 100%
       font-size: 32px
       margin: .5rem 0
 
-    &--active
-      color: #fff
-      
     &--disabled
-      opacity: .5
       pointer-events: none
-    
+
   &__items
-    overflow: hidden
     position: relative
     border-width: 0 1px 1px 1px
     border-style: solid
     border-color: rgba(#000, .1)
-    
-  &__item
+
+  &__content
     transition: $primary-transition
     width: 100%
-  
-    > .card
-      box-shadow: none
-      
+
   &__slider
     position: absolute
     bottom: 0

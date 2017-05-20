@@ -3,19 +3,21 @@ export default {
     genPrevIcon () {
       return this.$createElement('v-btn', {
         props: {
-          disabled: this.page === 1,
-          icon: true
+          disabled: this.computedPagination.page === 1,
+          icon: true,
+          flat: true
         },
-        nativeOn: { click: () => (this.page--) }
+        nativeOn: { click: () => (this.computedPagination.page--) }
       }, [this.$createElement('v-icon', 'chevron_left')])
     },
     genNextIcon () {
       return this.$createElement('v-btn', {
         props: {
-          disabled: this.page * this.rowsPerPage >= this.value.length || this.pageStop < 0,
-          icon: true
+          disabled: this.computedPagination.page * this.computedPagination.rowsPerPage >= this.itemsLength || this.pageStop < 0,
+          icon: true,
+          flat: true
         },
-        nativeOn: { click: () => (this.page++) }
+        nativeOn: { click: () => (this.computedPagination.page++) }
       }, [this.$createElement('v-icon', 'chevron_right')])
     },
     genSelect () {
@@ -26,24 +28,24 @@ export default {
         this.$createElement('v-select', {
           props: {
             items: this.rowsPerPageItems,
-            value: this.rowsPerPage,
+            value: this.computedPagination.rowsPerPage,
             hideDetails: true,
             top: true,
             auto: true
           },
-          on: { input: val => (this.rowsPerPage = val) }
+          on: { input: val => { this.computedPagination.rowsPerPage = val; this.computedPagination.page = 1 } }
         })
       ])
     },
     genPagination () {
       let pagination = '&mdash;'
 
-      if (this.value.length) {
-        const stop = this.value.length < this.pageStop || this.pageStop < 0
-                ? this.value.length
+      if (this.itemsLength) {
+        const stop = this.itemsLength < this.pageStop || this.pageStop < 0
+                ? this.itemsLength
                 : this.pageStop
 
-        pagination = `${this.pageStart + 1}-${stop} of ${this.value.length}`
+        pagination = `${this.pageStart + 1}-${stop} of ${this.itemsLength}`
       }
 
       return this.$createElement('div', {

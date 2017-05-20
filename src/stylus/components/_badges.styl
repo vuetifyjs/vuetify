@@ -20,13 +20,16 @@
     flex-wrap: wrap
   
   &--overlap
+    &:after
+      top: -8px
+
     &.badge--left
       &:after
-        left: 0
+        left: -8px
+        right: initial
         
     &:after
-      top: 0
-      right: 0
+      right: -8px
       
   &--icon
     &:after

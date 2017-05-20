@@ -1,25 +1,32 @@
+html, body
+  height: 100%
+  min-height: 100%
+  position: relative
+
 html
   font-size: $font-size-root
-  color: $color-root
   text-rendering: optimizeLegibility
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+  overflow-x: hidden
 
 body
-  background: $body-bg
-  overflow-x: hidden
   font-family: $body-font-family
   line-height: $line-height-root
 
-main
-  display: flex
-  flex: 1
-  min-width: 0
-  overflow: hidden
-
 header
+  transition: .3s padding $transition.swing
   width: 100%
+  z-index: 1
+
+main
+  transition: .3s padding $transition.swing
+  will-change: padding-left
 
 a
   color: $theme.primary
+
+::-ms-clear
+::-ms-reveal
+  display: none

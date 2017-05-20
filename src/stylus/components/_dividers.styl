@@ -1,5 +1,12 @@
+.application--light
+  .divider
+    background: $material-twelve-percent-dark
+
+.application--dark
+  .divider
+    background: $material-twelve-percent-light
+
 .divider
-  background: $material-twelve-percent-dark
   border: none
   display: block
   height: 1px
@@ -10,5 +17,8 @@
     margin-left: 72px
     width: calc(100% - 72px)
     
-  &--light
+  &.divider--dark
     background: $material-twelve-percent-light
+
+  &.divider--light
+    background: $material-twelve-percent-dark

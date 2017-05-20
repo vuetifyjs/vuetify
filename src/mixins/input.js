@@ -1,4 +1,8 @@
+import Themeable from './themeable'
+
 export default {
+  mixins: [Themeable],
+
   data () {
     return {
       errors: [],
@@ -11,16 +15,11 @@ export default {
   props: {
     appendIcon: String,
     appendIconCb: Function,
-    dark: Boolean,
     disabled: Boolean,
     hint: String,
     hideDetails: Boolean,
     persistentHint: Boolean,
     label: String,
-    light: {
-      type: Boolean,
-      default: true
-    },
     prependIcon: String,
     prependIconCb: Function,
     required: Boolean,
@@ -33,7 +32,8 @@ export default {
     },
     value: {
       required: false
-    }
+    },
+    placeholder: String
   },
 
   computed: {
@@ -47,13 +47,14 @@ export default {
         'input-group--dirty': this.isDirty,
         'input-group--tab-focused': this.tabFocused,
         'input-group--disabled': this.disabled,
-        'input-group--light': this.light && !this.dark,
-        'input-group--dark': this.dark,
+        'input-group--light': this.light || !this.dark,
+        'input-group--dark': !this.light && this.dark,
         'input-group--error': this.hasError || this.errors.length > 0,
         'input-group--append-icon': this.appendIcon,
         'input-group--prepend-icon': this.prependIcon,
         'input-group--required': this.required,
-        'input-group--hide-details': this.hideDetails
+        'input-group--hide-details': this.hideDetails,
+        'input-group--placeholder': !!this.placeholder
       }, this.classes)
     },
     isDirty () {
@@ -92,7 +93,11 @@ export default {
 
   methods: {
     genLabel () {
-      return this.$createElement('label', {}, this.label)
+      const data = {}
+
+      if (this.id) data.attrs = { for: this.id }
+
+      return this.$createElement('label', data, this.label)
     },
     toggle () {},
     genMessages () {
@@ -112,9 +117,7 @@ export default {
       return this.$createElement(
         'transition-group',
         {
-          'class': {
-            'input-group__messages': true
-          },
+          'class': 'input-group__messages',
           props: {
             tag: 'div',
             name: 'slide-y-transition'
@@ -151,8 +154,8 @@ export default {
             [`input-group__${type}-icon`]: true,
             'input-group__icon-cb': hasCallback
           },
-          'nativeOn': {
-            'click': e => {
+          on: {
+            click: e => {
               hasCallback && cb(e)
             }
           }

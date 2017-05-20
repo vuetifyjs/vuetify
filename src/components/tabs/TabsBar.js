@@ -1,27 +1,25 @@
 export default {
-  name: 'tabs-tabs',
+  name: 'tabs-bar',
 
-  data () {
-    return {
-      mobile: false
-    }
+  props: {
+    mobile: Boolean
   },
 
   computed: {
     classes () {
       return {
-        'tabs__tabs': true,
-        'tabs__tabs--mobile': this.mobile
+        'tabs__bar': true,
+        'tabs__bar--mobile': this.mobile
       }
     }
   },
 
   methods: {
     scrollLeft () {
-      this.$refs.container.scrollLeft -= 50
+      this.$refs.container.scrollLeft -= 75
     },
     scrollRight () {
-      this.$refs.container.scrollLeft += 50
+      this.$refs.container.scrollLeft += 75
     }
   },
 
@@ -29,7 +27,7 @@ export default {
     const container = h('ul', {
       'class': 'tabs__container',
       ref: 'container'
-    }, [this.$slots.default])
+    }, this.$slots.default)
 
     const left = h('v-icon', {
       props: {
@@ -39,7 +37,7 @@ export default {
         name: 'ripple',
         value: ''
       }],
-      nativeOn: {
+      on: {
         click: this.scrollLeft
       }
     }, 'chevron_left')
@@ -52,8 +50,8 @@ export default {
         name: 'ripple',
         value: ''
       }],
-      nativeOn: {
-        click: this.scrollLeft
+      on: {
+        click: this.scrollRight
       }
     }, 'chevron_right')
 

@@ -20,7 +20,7 @@
   &__left
     position: absolute
     top: 50%
-    z-index: 2
+    z-index: 1
     left: 5px
     transform: translateY(-50%)
     
@@ -38,7 +38,7 @@
       
   &__right
     @extend .carousel__left
-    left: initial
+    left: auto
     right: 5px
   
   &__controls
@@ -52,7 +52,7 @@
     height: 50px
     list-style-type: none
     width: 100%
-    z-index: 2
+    z-index: 1
     
     &__item
       color: #FFFFFF

@@ -16,7 +16,8 @@ export default {
           nudgeWidth: 25,
           maxHeight: this.maxHeight,
           activator: this.$refs.activator,
-          top: true
+          bottom: this.bottom,
+          top: this.top
         },
         on: {
           input: val => (this.menuActive = val)
@@ -95,13 +96,15 @@ export default {
       }, `${this.getText(item)}${comma ? ', ' : ''}`)
     },
     genList () {
-      return this.$createElement('v-list', {
-        ref: 'list'
-      }, this.filteredItems.map(o => {
-        if (o.header) return this.genHeader(o)
-        if (o.divider) return this.genDivider(o)
-        else return this.genListItem(o)
-      }))
+      return this.$createElement('v-card', [
+        this.$createElement('v-list', {
+          ref: 'list'
+        }, this.filteredItems.map(o => {
+          if (o.header) return this.genHeader(o)
+          if (o.divider) return this.genDivider(o)
+          else return this.genListItem(o)
+        }))
+      ])
     },
     genHeader (item) {
       return this.$createElement('v-subheader', {

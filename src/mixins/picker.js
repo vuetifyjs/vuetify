@@ -6,8 +6,8 @@ export default {
   },
 
   props: {
-    actions: Boolean,
     dark: Boolean,
+    actions: Boolean,
     landscape: Boolean,
     noTitle: Boolean,
     scrollable: Boolean,

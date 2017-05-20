@@ -10,7 +10,7 @@
   "main": "dist/vuetify.js",
   "scripts": {
     "dev": "cross-env TARGET=dev webpack --config build/config.js --progress --hide-modules",
-    "build": "cross-env rimraf dist && NODE_ENV=production node build/build.js --progress --hide-modules",
+    "build": "rimraf dist && cross-env NODE_ENV=production node build/build.js --progress --hide-modules",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
@@ -71,12 +71,13 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^2.1.1",
     "vue-loader": "^10.1.0",
-    "vue-template-compiler": "^2.2.4",
+    "vue-template-compiler": "^2.3.3",
     "webpack": "2.2.0-rc.2",
     "webpack-merge": "^0.17.0"
   },
   "dependencies": {
-    "vue": "^2.2.0"
+    "vue": "^2.3.3",
+    "vue-server-renderer": "^2.3.3"
   },
   "engines": {
     "node": ">= 4.0.0",

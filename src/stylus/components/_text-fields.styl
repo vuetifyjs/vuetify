@@ -12,7 +12,7 @@
   transform: translate3d(0, 0, 0)
   transform-origin: top left
   width: 100%
-  
+
 .input-group--text-field.input-group--multi-line:not(.input-group--focused):not(.input-group--dirty) label
   transform: translate3d(0,0,0)
 
@@ -27,14 +27,14 @@
   overflow: hidden
   min-width: 0
   height: $input-height
-  
+
   + .icon
     padding: 0 6px
     transition: .3s $transition.ease-in-out
 
   &:focus
     outline: none
-    
+
   &:disabled
     pointer-events: none
 
@@ -42,7 +42,7 @@
 .input-group--text-field textarea
   font-size: $input-font-size
   flex: 1 1
-  
+
   &:focus
     outline: none
 
@@ -74,69 +74,90 @@
 .input-group--text-field
   &.input-group--focused
     label
+      opacity: 1
       color: $theme.primary
       transform: translate3d(0, -18px, 0) scale(.75)
 
   &.input-group--dirty
     label
-     transform: translate3d(0, -18px, 0) scale(.75)
-      
+      transform: translate3d(0, -18px, 0) scale(.75)
+
+  &.input-group--placeholder:not(.input-group--focused):not(.input-group--dirty)
+    label
+      opacity: 0
+
 
 /** Types */
 .input-group--text-field
   &.input-group--error
     .input-group__details:after
       background-color: $theme.error
-    
+
   &.input-group--prepend-icon
     .input-group__prepend-icon
       align-items: center
       display: flex
       justify-content: flex-start
-      flex-basis: 56px
+      min-width: 40px
       transition: .3s $transition.fast-in-fast-out
-     
-    .input-group__details 
-      margin-left: 56px
-      
+
+    .input-group__details
+      margin-left: 40px
+
       &:before, &:after
         max-width: calc(100% - 56px)
 
     label
-      margin-left: 56px
-      
+      margin-left: 40px
+
     input
       flex: auto
-      
+
     &.input-group--focused
       .icon
         color: $theme.primary
 
-  &.input-group--single-line      
+  &.input-group--single-line
     label
       transform: translate3d(0,0,0)
-      
+
     &.input-group--dirty
       label
         display: none
-        
+
   &.input-group--required
     label:after
       content: '*'
-      
+
     &.input-group--focused
       label:after
         color: $theme.error
-        
+
   &.input-group--error
     label
       color: $theme.error
-      
+
     .input-group__details:before, .input-group__details:after
       background-color: $theme.error
-      
+
   &.input-group--full-width
     padding: 0 16px
 
     .input-group__details:before, .input-group__details:after
       display: none
+
+
+/** Prefix/Suffix */
+.input-group--text-field
+  &__prefix, &__suffix
+    align-items: center
+    color: $input-group-light-normal
+    display: inline-flex
+    font-size: 16px
+    margin-top: 1px
+
+  &__prefix
+    margin-right: 3px
+
+  &__suffix
+    margin-left: 3px

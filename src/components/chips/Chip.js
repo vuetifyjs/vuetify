@@ -46,9 +46,7 @@ export default {
 
       children.push(h('a', {
         'class': 'chip__close',
-        domProps: {
-          href: 'javascript:;'
-        },
+        domProps: { href: 'javascript:;' },
         on: {
           click: e => {
             e.preventDefault()

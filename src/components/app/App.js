@@ -2,35 +2,38 @@ export default {
   functional: true,
 
   props: {
-    footer: Boolean,
-    leftFixedSidebar: Boolean,
-    leftSidebar: Boolean,
+    light: {
+      type: Boolean,
+      default: true
+    },
+    dark: Boolean,
     id: {
       type: String,
       default: 'app'
-    },
-    rightFixedSidebar: Boolean,
-    rightSidebar: Boolean,
-    topFixedToolbar: Boolean,
-    topToolbar: Boolean,
-    sidebarUnderToolbar: Boolean
+    }
   },
 
   render (h, { props, data, children }) {
-    data.staticClass = data.staticClass ? `with ${data.staticClass} ` : 'with '
+    data.staticClass = data.staticClass ? `application ${data.staticClass} ` : 'application '
 
     const classes = {
-      'left-fixed-sidebar': props.leftFixedSidebar,
-      'left-sidebar': props.leftSidebar,
-      'bottom-footer': props.footer,
-      'right-fixed-sidebar': props.rightFixedSidebar,
-      'right-sidebar': props.rightSidebar,
-      'top-fixed-toolbar': props.topFixedToolbar,
-      'top-toolbar': props.topToolbar,
-      'sidebar-under-toolbar': props.sidebarUnderToolbar
+      'application--dark': props.dark,
+      'application--light': props.light && !props.dark
     }
 
     data.staticClass += Object.keys(classes).filter(k => classes[k]).join(' ')
+
+    const toolbar = children.find(c => c.tag === 'nav')
+    const footer = children.find(c => c.tag === 'footer')
+
+    if (toolbar) data.staticClass += ' application--toolbar'
+    if (footer) {
+      data.staticClass += ' application--footer'
+
+      if (footer.data.staticClass.indexOf('--fixed') !== -1 ||
+        footer.data.staticClass.indexOf('--absolute') !== -1
+      ) data.staticClass += ' application--footer-fixed'
+    }
 
     data.attrs = { 'data-app': true }
     data.domProps = { id: props.id }

@@ -2,34 +2,34 @@ import { closestParentTag } from '../../util/helpers'
 import GenerateRouteLink from '../../mixins/route-link'
 
 export default {
-  name: 'tab-item',
+  name: 'tabs-item',
 
   mixins: [GenerateRouteLink],
 
   data () {
     return {
       isActive: false,
-      defaultActiveClass: 'tab__item--active'
+      defaultActiveClass: 'tabs__item--active'
     }
   },
 
   props: {
     activeClass: {
       type: String,
-      default: 'tab__item--active'
+      default: 'tabs__item--active'
     }
   },
 
   computed: {
     classes () {
       return {
-        'tab__item': true,
-        'tab__item--active': this.isActive,
-        'tab__item--disabled': this.disabled
+        'tabs__item': true,
+        'tabs__item--active': !this.router && this.isActive,
+        'tabs__item--disabled': this.disabled
       }
     },
 
-    target () {
+    action () {
       const to = this.to || this.href
 
       if (to === Object(to)) return this._uid
@@ -46,11 +46,11 @@ export default {
     click (e) {
       e.preventDefault()
 
-      this.tabs.tabClick(this.target)
+      this.tabs.tabClick(this.action)
     },
 
-    toggle (target) {
-      this.isActive = this.target === target
+    toggle (action) {
+      this.isActive = this.action === action
     }
   },
 

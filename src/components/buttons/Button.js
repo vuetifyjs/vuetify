@@ -1,11 +1,12 @@
 import Contextualable from '../../mixins/contextualable'
 import Toggleable from '../../mixins/toggleable'
 import GenerateRouteLink from '../../mixins/route-link'
+import Themeable from '../../mixins/themeable'
 
 export default {
   name: 'btn',
 
-  mixins: [Contextualable, GenerateRouteLink, Toggleable],
+  mixins: [Contextualable, GenerateRouteLink, Toggleable, Themeable],
 
   props: {
     activeClass: {
@@ -13,19 +14,13 @@ export default {
       default: 'btn--active'
     },
     block: Boolean,
-    dark: Boolean,
     default: Boolean,
     flat: Boolean,
     floating: Boolean,
     icon: Boolean,
     large: Boolean,
-    light: Boolean,
     loading: Boolean,
     outline: Boolean,
-    raised: {
-      type: Boolean,
-      default: true
-    },
     ripple: {
       type: [Boolean, Object],
       default: true
@@ -48,17 +43,17 @@ export default {
         'btn': true,
         'btn--active': this.isActive,
         'btn--block': this.block,
-        'btn--dark': this.dark,
+        'btn--dark': !this.light && this.dark,
         'btn--default': this.default,
         'btn--disabled': this.disabled,
         'btn--flat': this.flat,
         'btn--floating': this.floating,
         'btn--icon': this.icon,
         'btn--large': this.large,
-        'btn--light': this.light && !this.dark,
+        'btn--light': this.light || !this.dark,
         'btn--loader': this.loading,
         'btn--outline': this.outline,
-        'btn--raised': this.raised,
+        'btn--raised': !this.flat,
         'btn--round': this.round,
         'btn--small': this.small,
         'primary': this.primary && !this.outline,
@@ -102,7 +97,7 @@ export default {
   render (h) {
     const { tag, data } = this.generateRouteLink()
     const children = []
-    
+
     if (tag === 'button') {
       data.attrs.type = this.type
     }

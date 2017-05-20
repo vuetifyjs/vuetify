@@ -13,7 +13,7 @@ export default {
 
             let month = this.tableMonth
             const year = this.tableYear
-            const next = e.wheelDelta > 0
+            const next = e.deltaY < 0
 
             if (next) month++
             else month--
@@ -61,13 +61,16 @@ export default {
 
       for (let i = 1; i <= length; i++) {
         rows.push(this.$createElement('td', [
-          this.$createElement('button', {
+          this.$createElement('a', {
             'class': {
               'btn btn--floating btn--small btn--flat': true,
               'btn--active': this.isActive(i),
-              'btn--current': this.isCurrent(i)
+              'btn--current': this.isCurrent(i),
+              'btn--light': this.dark,
+              'btn--disabled': !this.isAllowed(new Date(this.tableYear, this.tableMonth, i, 12, 0, 0, 0))
             },
             domProps: {
+              href: 'javascript:;',
               innerHTML: `<span class="btn__content">${i}</span>`
             },
             on: {
@@ -77,7 +80,7 @@ export default {
                 tableMonth = tableMonth < 10 ? `0${tableMonth}` : tableMonth
 
                 this.inputDate = `${this.tableYear}-${tableMonth}-${day}T12:00:00`
-                !this.actions && this.save()
+                this.$nextTick(() => !this.actions && this.save())
               }
             }
           })

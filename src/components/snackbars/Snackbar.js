@@ -1,9 +1,10 @@
 import Toggleable from '../../mixins/toggleable'
+import Contextualable from '../../mixins/contextualable'
 
 export default {
   name: 'snackbar',
 
-  mixins: [Toggleable],
+  mixins: [Contextualable, Toggleable],
 
   data () {
     return {
@@ -36,7 +37,13 @@ export default {
         'snack--right': this.right,
         'snack--top': this.top,
         'snack--multi-line': this.multiLine && !this.vertical,
-        'snack--vertical': this.vertical
+        'snack--vertical': this.vertical,
+        'primary': this.primary,
+        'secondary': this.secondary,
+        'success': this.success,
+        'info': this.info,
+        'warning': this.warning,
+        'error': this.error
       }
     },
     computedTransition () {

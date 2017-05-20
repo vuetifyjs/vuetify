@@ -1,13 +1,17 @@
+import GenerateRouteLink from '../../mixins/route-link'
+
 export default {
   name: 'breadcrumbs-item',
 
+  mixins: [GenerateRouteLink],
+
+  inject: ['divider'],
+
   props: {
-    disabled: Boolean,
-    href: {
+    activeClass: {
       type: String,
-      default: 'javascript:;'
-    },
-    target: String
+      default: 'breadcrumbs__item--active'
+    }
   },
 
   computed: {
@@ -20,14 +24,12 @@ export default {
   },
 
   render (h) {
-    return h('li', {}, [
-      h('a', {
-        'class': this.classes,
-        domProps: {
-          href: this.href,
-          target: this.target
-        }
-      }, this.$slots.default)
+    const { tag, data } = this.generateRouteLink()
+
+    return h('li', {
+      attrs: { 'data-divider': this.divider }
+    }, [
+      h(tag, data, this.$slots.default)
     ])
   }
 }

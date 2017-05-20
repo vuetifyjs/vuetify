@@ -1,3 +1,7 @@
+.application--dark
+  .expansion-panel
+    color: $color-light
+
 .expansion-panel
   background: #fff
   text-align: left
@@ -15,7 +19,7 @@
     display: flex
     cursor: pointer
     align-items: center
-    height: $collapsible-collapse-height
+    height: $expansion-panel-collapse-height
     position: relative
     padding-left: 1rem
     
@@ -43,6 +47,3 @@
     .card
       border-radius: 0
       elevation(0)
-    
-    &:last-child
-      border-bottom: 1px solid #ddd

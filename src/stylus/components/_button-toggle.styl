@@ -3,35 +3,36 @@
   border-radius: 2px
   transition: $primary-transition
   will-change: background, box-shadow
-  
+
   .btn
+    color: $color-theme
     justify-content: center
     min-width: auto
     padding: 0 8px
     margin: 0
     opacity: .4
     border-radius: 0
-    
+
     &:not(:last-child)
       border-right: 1px solid transparent
-    
+
     &:after
       display: none
-      
+
     &[data-selected]
       opacity: 1
-      background: $material-twelve-percent-dark
-      
+      background: rgba($material-theme.fg-color, $material-theme.divider-percent)
+
       &:not(:last-child):not([data-only-child])
-        border-right-color: $material-twelve-percent-dark
-      
+        border-right-color: rgba($material-theme.fg-color, $material-theme.divider-percent)
+
     .icon
       font-size: 30px
-      
+
     span + .icon
       font-size: initial
       margin-left: 10px
-      
+
   &--selected
     background: #fff
     elevation(2)

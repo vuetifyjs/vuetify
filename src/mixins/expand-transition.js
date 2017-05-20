@@ -21,8 +21,8 @@ export default {
     leave (el, done) {
       el.style.overflow = 'hidden'
       el.style.height = `${el.clientHeight}px`
-      
-      setTimeout(() => el.style.height = 0, 0)
+
+      setTimeout(() => (el.style.height = 0), 50)
 
       addOnceEventListener(el, 'transitionend', done)
     }
