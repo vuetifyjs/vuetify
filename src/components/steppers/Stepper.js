@@ -11,6 +11,7 @@ export default {
   },
 
   props: {
+    nonLinear: Boolean,
     altLabels: Boolean,
     vertical: Boolean,
     value: [Number, String]
@@ -21,7 +22,8 @@ export default {
       return {
         'stepper': true,
         'stepper--vertical': this.vertical,
-        'stepper--alt-labels': this.altLabels
+        'stepper--alt-labels': this.altLabels,
+        'stepper--non-linear': this.nonLinear
       }
     }
   },
