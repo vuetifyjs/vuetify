@@ -95,12 +95,6 @@ export default {
       props: { origin: this.origin }
     }, [h('div', data, [this.$slots.default])])
 
-    if (this.overlay) {
-      dialog = h('v-overlay', {
-        props: { value: this.isActive }
-      }, [dialog])
-    }
-
     children.push(h('div', {
       'class': 'dialog__content'
     }, [dialog]))
