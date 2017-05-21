@@ -55,7 +55,7 @@ const ripple = {
       animation.classList.remove('ripple__animation--visible')
 
       setTimeout(() => {
-        animation.parentNode.remove()
+        el.removeChild(animation.parentNode)
       }, 300)
     }, delay)
   }
