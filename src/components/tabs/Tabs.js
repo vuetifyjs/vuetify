@@ -116,6 +116,8 @@ export default {
 
       this.targetEl = el || this.targetEl
 
+      if (!this.targetEl) return
+
       // Gives DOM time to paint when
       // processing slider for
       // dynamic tabs
