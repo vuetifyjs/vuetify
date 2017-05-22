@@ -1,5 +1,5 @@
 /*!
-* Vuetify v0.12.0
+* Vuetify v0.12.1
 * Forged by John Leider
 * Released under the MIT License.
 */   
@@ -818,7 +818,7 @@ module.exports = function normalizeComponent (
     genOverlay: function genOverlay () {
       var this$1 = this;
 
-      if (!this.isActive) { return }
+      if (!this.isActive || this.hideOverlay) { return }
 
       var overlay = document.createElement('div')
       overlay.className = 'overlay'
