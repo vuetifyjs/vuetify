@@ -33,16 +33,23 @@
     > .card__row
       flex: 0 1 30%
 
+    > .card__row, > .card__column
+      overflow: hidden
+
+      &:first-child
+        border-radius: $card-border-radius 0 0 $card-border-radius
+
+      &:last-child
+        border-radius: 0 $card-border-radius $card-border-radius 0
+        
+        > *:first-child
+          border-top-right-radius: $card-border-radius
+          
+        > *:last-child
+          border-bottom-right-raidius: $card-border-radius
+
   &__column, &__row
     display: flex
-
-    &:first-child
-      border-top-left-radius: inherit
-      border-top-right-radius: inherit
-
-    &:last-child
-      border-bottom-left-radius: inherit
-      border-bottom-right-radius: inherit
 
   &__column
     flex: 1
