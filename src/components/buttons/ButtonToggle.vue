@@ -5,6 +5,7 @@
   )
     v-btn(
       v-for="(option, index) in options"
+      v-bind:key="index"
       v-on:click.native.stop="updateValue(option)"
       v-bind:data-selected="isSelected(option)"
       v-bind:data-index="index"
