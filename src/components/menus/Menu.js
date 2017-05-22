@@ -208,9 +208,15 @@ export default {
 
   mounted () {
     this.addActivatorEvents(this.activator)
+
+    const app = document.querySelector('[data-app]')
+    app && app.appendChild(this.$refs.content)
   },
 
   beforeDestroy () {
+    const app = document.querySelector('[data-app]')
+    app && app.contains(this.$refs.content) && app.removeChild(this.$refs.content)
+
     this.removeActivatorEvents(this.activator)
     window.removeEventListener('resize', this.windowResizeHandler)
   },
@@ -230,7 +236,7 @@ export default {
       this.window = window
       this.window.addEventListener('resize', this.windowResizeHandler)
     },
-    
+
     startTransition () {
       this.$refs.content.offsetHeight // <-- Force DOM to repaint first.
       this.isContentActive = true     // <-- Trigger v-show on content.

@@ -10,8 +10,6 @@ export default {
     },
 
     genTransition () {
-      const children = []
-
       return this.$createElement(this.transition, {
         props: { origin: this.origin }
       }, [this.genContent()])

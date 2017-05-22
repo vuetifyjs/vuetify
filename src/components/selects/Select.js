@@ -108,16 +108,18 @@ export default {
     },
     isBooted () {
       this.$nextTick(() => {
-        this.content = this.$refs.menu.$el.querySelector('.menu__content')
-
-        this.content.addEventListener('scroll', this.onScroll, false)
+        this.content && this.content.addEventListener('scroll', this.onScroll, false)
       })
     }
   },
 
+  mounted () {
+    this.content = this.$refs.menu.$refs.content
+  },
+
   beforeDestroy () {
     if (this.isBooted) {
-      this.content.removeEventListener('scroll', this.onScroll, false)
+      this.content && this.content.removeEventListener('scroll', this.onScroll, false)
     }
   },
 
