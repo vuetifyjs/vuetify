@@ -13,7 +13,7 @@ export default {
 
   methods: {
     genOverlay () {
-      if (!this.isActive) return
+      if (!this.isActive || this.hideOverlay) return
 
       const overlay = document.createElement('div')
       overlay.className = 'overlay'
