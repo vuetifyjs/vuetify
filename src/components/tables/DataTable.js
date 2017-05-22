@@ -208,7 +208,11 @@ export default {
       }
     },
     genTR (children, data = {}) {
-      return this.$createElement('tr', data, children)
+      if (children[0].tag === 'tr') {
+        return children.map(c => this.$createElement('tr', data, c.children))
+      } else {
+        return this.$createElement('tr', data, children)
+      }
     },
     toggle (value) {
       const selected = Object.assign({}, this.selected)
