@@ -8,19 +8,12 @@ export default {
           closeOnContentClick: !this.multiple,
           disabled: this.disabled,
           offsetY: this.autocomplete || this.offset,
-          value: this.menuActive,
-          nudgeBottom: 2,
-          nudgeTop: -11,
-          nudgeYAuto: 2,
-          nudgeXAuto: this.multiple ? -40 : -16,
-          nudgeWidth: 25,
+          // value: this.menuActive,
           maxHeight: this.maxHeight,
-          activator: this.$refs.activator,
-          bottom: this.bottom,
-          top: this.top
+          activator: this.$refs.activator
         },
         on: {
-          input: val => (this.menuActive = val)
+          // input: val => (this.menuActive = val)
         }
       }
 
