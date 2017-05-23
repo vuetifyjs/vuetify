@@ -18,14 +18,14 @@
 <hr>
 <p align="center">
   <strong>Want to support Vuetify.js?</strong>
-  <br><br><br>
+  <br>
   
   <a href="https://patreon.com/vuetify" target="_blank">
-    <img style="margin-right: 10px;" width="100px" src="https://vuetifyjs.com/static/doc-images/patreon.png" />
+    Patreon
   </a>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;or&nbsp;
   <a href="https://www.paypal.me/vuetify" target="_blank">
-    <img style="margin-right: 10px;" width="100px" src="https://vuetifyjs.com/static/doc-images/paypal.png" />
+    Paypal
   </a>
   
 </p>
