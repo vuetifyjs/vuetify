@@ -17,7 +17,7 @@
 </p>
 <hr>
 <p align="center">
-  <strong>Want to support Vuetify.js?</strong>
+  <strong>Support Vuetify.js's development with:</strong>
   <br>
   
   <a href="https://patreon.com/vuetify" target="_blank">
