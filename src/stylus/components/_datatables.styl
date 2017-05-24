@@ -4,7 +4,7 @@
       cursor: pointer
 
       i
-        color: rgba(#000, .38)
+        color: rgba($material-theme.fg-color, $material-theme.disabledORhints-text-percent)
         font-size: 16px
         vertical-align: sub
         display: inline-block
@@ -12,17 +12,17 @@
         transition: .3s $transition.swing
 
       &:hover
-        color: rgba(#000, .87)
+        color: rgba($material-theme.fg-color, $material-theme.primary-text-percent)
 
         i
           opacity: .6
 
       &.active
         transform: none
-        color: rgba(#000, .87)
+        color: rgba($material-theme.fg-color, $material-theme.primary-text-percent)
 
         i
-          color: rgba(#000, .87)
+          color: rgba($material-theme.fg-color, $material-theme.primary-text-percent)
           opacity: 1
 
         &.desc
@@ -36,7 +36,7 @@
 
 /** Actions */
 .datatable__actions
-  color: rgba(#000, .54)
+  color: rgba($material-theme.fg-color, $material-theme.secondary-text-percent)
   display: flex
   justify-content: flex-end
   align-items: center
@@ -62,12 +62,12 @@
       position: initial
 
       .input-group__selections__comma
-        color: rgba(#000, .54) !important
+        color: rgba($material-theme.fg-color, $material-theme.secondary-text-percent) !important
         font-size: 12px
         padding-top: 6px
 
       .input-group__append-icon
-        color: rgba(#000, .54) !important
+        color: rgba($material-theme.fg-color, $material-theme.secondary-text-percent) !important
 
 .datatable__progress
   tr
