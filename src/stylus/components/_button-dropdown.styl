@@ -1,55 +1,55 @@
 .btn-dropdown
   display: block
   position: relative
-  
+
   input
     text-align: left
     border-right: 1px solid transparent
     transition: border-right .3s $transition.ease-in-out
-    
+
   .input-group--focused
     input + .icon
       transform: rotate(-180deg)
-      
+
   .menu, .menu__activator
     width: 100%
-    
+
   .menu__content
     border-top-left-radius: 0
     border-top-right-radius: 0
-  
+
   &--overflow, &--editable, &--segmented
     .input-group
       input, label
         height: 40px
         line-height: 40px
-      
+
     input, label
       padding-left: 16px
-      
+
     .input-group--focused .input-group__input
-      background-color: #fff
+      background-color: $material-theme.bg-color
       elevation(8)
 
     .input-group__input
       transition: .3s $transition.ease-in-out
-      
+
       &:hover
-        background-color: #fff
+        background-color: $material-theme.bg-color
 
     .input-group__details
       height: 0
       min-height: 0
       padding: 0
-      
+
       &:after
         display: none
-      
+
     .input-group__hint
       display: none
-      
+
   &--light
     btn-dropdown-theme($material-twelve-percent-dark)
-      
+
   &--dark
     btn-dropdown-theme($material-twelve-percent-light)
