@@ -2,20 +2,20 @@
   display: inline-block
   position: relative
   vertical-align: middle
-  
+
   &--disabled
     cursor: not-allowed
-    
+
     .menu__activator
       cursor: not-allowed
-  
+
   &__activator
     align-items: center
     cursor: pointer
     position: relative
-  
+
   &__content
-    background: #fff
+    background: $material-theme.bg-color
     position: absolute
     display: inline-block
     border-radius: 2px
@@ -25,27 +25,27 @@
     elevation(8)
 
   &-transition
-    &-enter      
+    &-enter
       .list__tile
         min-width: 0
         transition-delay: .3s
         opacity: 0
         transform: translateY(-15px)
         pointer-events: none
-      
+
     &-enter-to
       .list__tile
         pointer-events: auto
         opacity: 1
-      
+
     &-leave-to
       transform: translateY(-10px)
-        
+
     &-enter, &-leave-to
       opacity: 0
-      
+
     &-enter-to, &-leave
       opacity: 1
-      
+
     &-enter-active, &-leave-active
       transition: all .4s $transition.swing
