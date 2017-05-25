@@ -57,4 +57,4 @@ Ask your support questions on the vuetifyjs [gitter](https://gitter.im/vuetifyjs
 For additional information, please visit the [Official Documentation](https://vuetifyjs.com).
 
 ## Info
-Codepen starter http://codepen.io/johnjleider/pen/bgJOrX
+Codepen starter [Vuetify Template](http://codepen.io/johnjleider/pen/bgJOrX)
