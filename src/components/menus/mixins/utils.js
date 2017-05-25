@@ -9,7 +9,8 @@ export default {
 
       return {
         offsetTop: el.offsetTop,
-        top, bottom, left, right, height, width  
+        scrollHeight: el.scrollHeight,
+        top, bottom, left, right, height, width
       }
     },
     initWindow () {

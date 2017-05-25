@@ -2,9 +2,9 @@ export default {
   methods: {
     genActivator () {
       return this.$createElement('div', {
+        'class': 'menu__activator',
         ref: 'activator',
         slot: 'activator',
-        class: 'menu__activator',
         on: { click: this.activatorClickHandler }
       }, this.$slots.activator)
     },
@@ -17,9 +17,9 @@ export default {
 
     genContent () {
       return this.$createElement('div', {
+        'class': 'menu__content',
         ref: 'content',
         style: this.styles,
-        'class': 'menu__content',
         directives: [{
           name: 'show',
           value: this.isContentActive

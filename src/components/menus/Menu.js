@@ -13,12 +13,19 @@ export default {
   data () {
     return {
       app: null,
+      autoIndex: null,
       dimensions: {
         activator: {
-          top: 0, left: 0, bottom: 0, right: 0, width: 0, height: 0, offsetTop: 0
+          top: 0, left: 0,
+          bottom: 0, right: 0,
+          width: 0, height: 0,
+          offsetTop: 0, scrollHeight: 0
         },
         content: {
-          top: 0, left: 0, bottom: 0, right: 0, width: 0, height: 0, offsetTop: 0
+          top: 0, left: 0,
+          bottom: 0, right: 0,
+          width: 0, height: 0,
+          offsetTop: 0, scrollHeight: 0
         },
         list: null,
         selected: null
@@ -27,7 +34,7 @@ export default {
       isContentActive: false,
       isBooted: false,
       maxHeightAutoDefault: '200px',
-      position: { left: '0px', top: '0px', right: 'auto', bottom: 'auto' },
+      tileLength: 0,
       window: {},
       windowResizeHandler: () => {
         this.isBooted = false
@@ -47,14 +54,6 @@ export default {
     disabled: Boolean,
     maxHeight: {
       default: 'auto'
-    },
-    nudgeXAuto: {
-      type: Number,
-      default: 0
-    },
-    nudgeYAuto: {
-      type: Number,
-      default: 0
     },
     nudgeTop: {
       type: Number,
@@ -106,14 +105,15 @@ export default {
   },
 
   computed: {
+    minWidth () {
+      return this.dimensions.activator.width + this.nudgeWidth
+    },
     styles () {
-      const { top, left, right, bottom, minWidth } = this.position
-
       return {
-        maxHeight: this.auto ? '200px' : this.maxHeight,
-        minWidth: isNaN(minWidth) ? minWidth : `${minWidth}px`,
-        top: isNaN(top) ? top : `${top}px`,
-        left: isNaN(left) ? left : `${left}px`
+        maxHeight: this.auto ? '200px' : isNaN(this.maxHeight) ? this.maxHeight : `${this.maxHeight}px`,
+        minWidth: `${this.minWidth}px`,
+        top: `${this.calcTop()}px`,
+        left: `${this.calcLeft()}px`
       }
     }
   },
@@ -160,6 +160,7 @@ export default {
     startTransition () {
       this.$refs.content.offsetHeight // <-- Force DOM to repaint first.
       this.isContentActive = true     // <-- Trigger v-show on content.
+      this.$nextTick(this.calculateScroll)
     }
   },
 

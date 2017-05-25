@@ -5,6 +5,7 @@ export default {
         ref: 'menu',
         props: {
           auto: this.auto,
+          closeOnClick: false,
           closeOnContentClick: !this.multiple,
           disabled: this.disabled,
           offsetY: this.autocomplete || this.offset,
