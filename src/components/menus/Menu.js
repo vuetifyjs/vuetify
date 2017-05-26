@@ -34,6 +34,8 @@ export default {
       isContentActive: false,
       isBooted: false,
       maxHeightAutoDefault: '200px',
+      startIndex: 3,
+      stopIndex: 0,
       tileLength: 0,
       window: {},
       windowResizeHandler: () => {

@@ -9,12 +9,8 @@ export default {
           closeOnContentClick: !this.multiple,
           disabled: this.disabled,
           offsetY: this.autocomplete || this.offset,
-          // value: this.menuActive,
           maxHeight: this.maxHeight,
           activator: this.$refs.activator
-        },
-        on: {
-          // input: val => (this.menuActive = val)
         }
       }
 
@@ -121,7 +117,10 @@ export default {
           'list__tile--select-multi': this.multiple
         },
         nativeOn: { click: () => this.selectItem(item) },
-        props: { avatar: item === Object(item) && 'avatar' in item }
+        props: {
+          avatar: item === Object(item) && 'avatar' in item,
+          ripple: true
+        }
       }
 
       if (this.$scopedSlots.item) {

@@ -1,11 +1,15 @@
 export default {
   methods: {
+    // Revisit this
     calculateScroll () {
-      let scrollTop = this.selectedIndex * 48 - 66
       if (this.selectedIndex === null) return
-      if (this.selectedIndex < 4) scrollTop = 0
-      else if (this.selectedIndex > this.tileLength - 2) {
+
+      let scrollTop = 0
+
+      if (this.selectedIndex >= this.stopIndex) {
         scrollTop = this.$refs.content.scrollHeight
+      } else if (this.selectedIndex > this.startIndex) {
+        scrollTop = (this.selectedIndex * 48) - 57
       }
 
       this.$refs.content.scrollTop = scrollTop
@@ -30,13 +34,19 @@ export default {
       }
 
       this.selectedIndex = selectedIndex
-      let actingIndex = this.selectedIndex
-      if (actingIndex > 3) actingIndex = 2
-      if (this.selectedIndex === tiles.length - 2) actingIndex = 2
-      if (this.selectedIndex === tiles.length - 1) actingIndex = 3
-      const auto = actingIndex * 48
+      let actingIndex = selectedIndex
 
-      return this.calcTop(true) - auto - (this.selectedIndex > 2 && this.selectedIndex < tiles.length - 2 ? -16 : 16) // 16 for padding
+      let offsetPadding = -16
+      this.stopIndex = tiles.length - 4
+      if (selectedIndex > this.startIndex && selectedIndex < this.stopIndex) {
+        actingIndex = 2
+        offsetPadding = 24
+      } else if (selectedIndex >= this.stopIndex) {
+        offsetPadding = -8
+        actingIndex = selectedIndex - this.stopIndex
+      }
+
+      return this.calcTop(true) + offsetPadding - (actingIndex * 48)
     },
     calcLeft () {
       if (this.auto) return this.calcLeftAuto()
