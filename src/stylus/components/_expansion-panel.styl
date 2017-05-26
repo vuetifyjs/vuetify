@@ -2,8 +2,12 @@
   .expansion-panel
     color: $color-light
 
+.application--light
+  .expansion-panel
+    color: $color-dark
+
 .expansion-panel
-  background: #fff
+  // background: #fff
   text-align: left
   list-style-type: none
   padding: 0
@@ -11,10 +15,10 @@
   elevation(2)
 
   > li
-    border: 1px solid #ddd
+    border: 1px solid rgba($material-theme.fg-color, $material-theme.divider-percent)
     &:not(:first-child)
       border-top: none
-  
+
   &__header
     display: flex
     cursor: pointer
@@ -22,10 +26,10 @@
     height: $expansion-panel-collapse-height
     position: relative
     padding-left: 1rem
-    
+
     i
       margin-right: 1rem
-      
+
     &:after
       content: '\E313'
       font-family: 'Material Icons'
@@ -35,15 +39,15 @@
       top: calc(50% - 16px)
       color: inherit
       transition: transform 0.3s cubic-bezier(0, 0, .2, 1)
-        
+
     &--active
       &:after
         transform: rotate(-180deg)
-    
+
   &__body
-    background-color: rgba(0, 0, 0, 0.03)
+    background-color: rgba($material-theme.fg-color, 0.03)
     transition: $primary-transition
-    
+
     .card
       border-radius: 0
       elevation(0)
