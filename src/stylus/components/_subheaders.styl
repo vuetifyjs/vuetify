@@ -1,12 +1,3 @@
-.application--dark
-  .subheader
-    color: rgba($material-dark.fg-color, $material-dark.secondary-text-percent)
-
-.application--light
-  .subheader
-    color: rgba($material-light.fg-color, $material-light.secondary-text-percent)
-
-
 .subheader
   height: $list-item-single-height
   display: flex
@@ -17,3 +8,17 @@
 
   &--inset
     margin-left: $subheader-inset-margin
+
+  &--dark
+    color: rgba($material-light.fg-color, $material-light.secondary-text-percent)
+
+  &--light
+    color: rgba($material-dark.fg-color, $material-light.secondary-text-percent)
+
+.application--dark
+  .subheader:not(.subheader--dark):not(.subheader--light)
+    color: rgba($material-dark.fg-color, $material-dark.secondary-text-percent)
+
+.application--light
+  .subheader:not(.subheader--dark):not(.subheader--light)
+    color: rgba($material-light.fg-color, $material-light.secondary-text-percent)
