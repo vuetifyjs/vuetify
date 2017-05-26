@@ -2690,7 +2690,7 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
       var text = children.pop().text
 
       if (text.indexOf(' ') === -1) { data.staticClass += " fa-" + text }
-      else { data.staticClass += "fa-" + (text.trim().split(' ').join(' fa-')) }
+      else { data.staticClass += " fa-" + (text.trim().split(' ').join(' fa-')) }
     }
 
     return h('i', data, children)
