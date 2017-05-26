@@ -97,7 +97,7 @@ export default {
     value (val) {
       this.inputValue = val
       this.validate()
-      this.autocomplete && this.$refs.menu.activate()
+      this.autocomplete && this.$nextTick(this.$refs.menu.updateDimensions)
     },
     menuActive (val) {
       this.isBooted = true

@@ -1,17 +1,13 @@
 .input-group--select
   .input-group--select__autocomplete
     opacity: 0
-    height: 0
 
   .input-group__append-icon
     transition: .3s $transition.linear-out-slow-in
 
-  &.input-group--focused.input-group--dirty
-    .input-group--select__autocomplete
-      margin: 8px 0
-
   &.input-group--focused
     .input-group--select__autocomplete
+      flex: 1 0 100%
       opacity: 1
       height: 30px
 
