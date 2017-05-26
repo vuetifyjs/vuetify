@@ -138,7 +138,9 @@ export default {
   mounted () {
     this.addActivatorEvents(this.activator)
     this.app = document.querySelector('[data-app]')
-    this.app && this.app.appendChild(this.$refs.content)
+    this.$nextTick(() => {
+      this.app && this.app.appendChild(this.$refs.content)
+    })
   },
 
   beforeDestroy () {
@@ -160,7 +162,6 @@ export default {
       this.isContentActive = false
     },
     startTransition () {
-      this.$refs.content.offsetHeight // <-- Force DOM to repaint first.
       this.isContentActive = true     // <-- Trigger v-show on content.
       this.$nextTick(this.calculateScroll)
     }
@@ -169,9 +170,7 @@ export default {
   render (h) {
     const data = {
       'class': 'menu',
-      directives: [{
-        name: 'click-outside'
-      }],
+      directives: [{ name: 'click-outside' }],
       on: {
         keyup: e => { if (e.keyCode === 27) this.isActive = false }
       }

@@ -9,7 +9,7 @@ export default {
       if (this.selectedIndex >= this.stopIndex) {
         scrollTop = this.$refs.content.scrollHeight
       } else if (this.selectedIndex > this.startIndex) {
-        scrollTop = (this.selectedIndex * 48) - 57
+        scrollTop = (this.selectedIndex * 48) - 56
       }
 
       this.$refs.content.scrollTop = scrollTop

@@ -10,12 +10,9 @@ export default {
           disabled: this.disabled,
           offsetY: this.autocomplete || this.offset,
           maxHeight: this.maxHeight,
-          activator: this.$refs.activator,
-          value: this.menuActive
+          activator: this.$refs.activator
         },
-        on: {
-          input: val => { (this.menuActive = val) }
-        }
+        on: { input: val => (this.menuActive = val) }
       }
 
       return this.$createElement('v-menu', data, [this.genList()])
