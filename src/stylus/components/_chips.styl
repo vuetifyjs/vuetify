@@ -13,7 +13,8 @@
   transition: .3s $transition.ease-in-out
   vertical-align: middle
   white-space: nowrap
-  
+  color: $chip-label-color
+
   .avatar
     border-radius: 50%
     height: $chip-height
@@ -22,22 +23,22 @@
     margin-left: -14px
     margin-right: 8px
     color: #fff
-    
+
     img
       width: 100%
       height: 100%
-    
+
   &:focus
     elevation(2)
     outline: none
-    
+
   &--label
     border-radius: $chip-label-border-radius
-  
+
   &--outline
     background: $chip-outline-background
     color: $chip-outline-color
-    
+
   &--small
     height: $chip-small-height
 
@@ -58,18 +59,19 @@
 
     &:hover
       opacity: .8
-      
+
   &--removable
     padding: $chip-removeable-padding
-    
+
   &--select-multi
     margin: $chip-margin $chip-margin $chip-margin 0
-  
+
   .icon
     color: inherit
+    opacity: .54
 
   .icon--right
     margin-left: 4px
-    
+
   .icon--left
     margin-right: 4px
