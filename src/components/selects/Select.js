@@ -94,10 +94,10 @@ export default {
     inputValue (val) {
       this.$emit('input', val)
     },
-    value (val) {
-      this.inputValue = val
-      this.validate()
-      this.autocomplete && this.$nextTick(this.$refs.menu.updateDimensions)
+    isBooted () {
+      this.$nextTick(() => {
+        this.content && this.content.addEventListener('scroll', this.onScroll, false)
+      })
     },
     menuActive (val) {
       this.isBooted = true
@@ -106,10 +106,10 @@ export default {
       if (!val) this.blur()
       else this.focus()
     },
-    isBooted () {
-      this.$nextTick(() => {
-        this.content && this.content.addEventListener('scroll', this.onScroll, false)
-      })
+    value (val) {
+      this.inputValue = val
+      this.validate()
+      this.autocomplete && this.$nextTick(this.$refs.menu.updateDimensions)
     }
   },
 
@@ -177,7 +177,17 @@ export default {
       this.genSelectionsAndSearch(),
       this.genMenu()
     ], {
-      ref: 'activator'
+      ref: 'activator',
+      directives: [{
+        name: 'click-outside',
+        value: () => (this.menuActive = false)
+      }],
+      on: {
+        keydown: e => {
+          if (e.keyCode === 27) this.$refs.menu.isActive = false
+          if ([40, 38].includes(e.keyCode)) this.$refs.menu.changeListIndex(e)
+        }
+      }
     })
   }
 }

@@ -1,6 +1,8 @@
 export default {
   methods: {
     genActivator () {
+      if (!this.$slots.activator) return null
+
       return this.$createElement('div', {
         'class': 'menu__activator',
         ref: 'activator',
