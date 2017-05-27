@@ -11,7 +11,7 @@
   left: 0
   will-change: transform
   z-index: 3
-  
+
   &--close:not(.navigation--permanent)
     &.navigation-drawer:not(.navigation-drawer--right)
       transform: "translate3d(-%s, 0, 0)" % ($navigation-drawer-width)
@@ -25,22 +25,22 @@
 
   &--absolute
     position: absolute
-        
+
   &--dark
-    background-color: $theme.secondary
-    navigation-drawer(#fff)
-    
+    background: $theme.secondary
+    navigation-drawer($material-dark.fg-color)
+
     .divider
       background: $material-twelve-percent-light
-    
+
   &--light
-    background: #fff
-    border-right: 1px solid rgba(#000, $material-light.divider-percent)
-    navigation-drawer(rgba(#000, .87))
-    
+    background: $material-light.bg-color
+    border-right: 1px solid rgba($material-light.fg-color, $material-light.divider-percent)
+    navigation-drawer(rgba($material-light.fg-color, .87))
+
     .divider
       background: $material-twelve-percent-dark
-  
+
   &--permanent, &--persistent
     &.navigation-drawer--clipped, &.navigation-drawer--floating
       margin-top: $toolbar-height
@@ -49,13 +49,13 @@
       + .toolbar, ~ .footer.footer--fixed, ~ .footer.footer--absolute
         padding-left: 0
         z-index: 3
-        
+
     &.navigation-drawer--floating
       border-color: transparent
-  
+
   &--permanent
     &:not(.navigation-drawer--clipped):not(.navigation-drawer--floating)
-      ~ main, 
+      ~ main,
       + .toolbar,
       ~ .footer
         padding-left: $navigation-drawer-width
@@ -74,33 +74,33 @@
     max-height: "calc(100vh - %s)" % $toolbar-height
     overflow: hidden
     width: $navigation-drawer-mini-variant-width
-    
+
     .list__tile__action, .list__tile__avatar
       justify-content: center
       min-width: 48px
-    
+
     .list__tile__content
       opacity: 0
-    
+
     .subheader, .divider
       display: none
-      
+
     ~ .toolbar
       padding-left: 0 !important
-    
+
     &:not(.navigation-drawer--close)
       ~ main
         padding-left: $navigation-drawer-mini-variant-width !important
-      
+
       ~ .footer:not(.footer--fixed):not(.footer--absolute)
         padding-left: $navigation-drawer-mini-variant-width !important
-      
+
   &--temporary, &--is-mobile:not(.navigation-drawer--permanent)
     z-index: 5
 
     &:not(.navigation-drawer--close)
       elevation(16)
-    
+
   + toolbar
     + main
       min-height: "calc(100vh - %s)" % $toolbar-height

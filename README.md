@@ -8,13 +8,26 @@
 <p align="center">
   <strong>Vuetify.js is proudly sponsored by:</strong>
   <br><br>
-  <a href="http://www.thedifferenceengine.io/">
-    <img width="300px" src="https://vuetifyjs.com/public/doc-images/browser-stack.svg">
+  <a href="https://www.browserstack.com" target="_blank">
+    <img width="300px" src="https://vuetifyjs.com/static/doc-images/browser-stack.svg">
   </a>
 </p>
-
 <p align="center">
   <strong>Looking for Vue.js jobs? Check out <a href="https://vuejobs.com/?ref=vuetify" target="_blank">vuejobs.com</a></strong>
+</p>
+<hr>
+<p align="center">
+  <strong>Support Vuetify.js's development with:</strong>
+  <br>
+  
+  <a href="https://patreon.com/vuetify" target="_blank">
+    Patreon
+  </a>
+  &nbsp;or&nbsp;
+  <a href="https://www.paypal.me/vuetify" target="_blank">
+    Paypal
+  </a>
+  
 </p>
 
 ## Install

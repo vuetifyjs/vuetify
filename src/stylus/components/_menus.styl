@@ -2,20 +2,20 @@
   display: inline-block
   position: relative
   vertical-align: middle
-  
+
   &--disabled
     cursor: not-allowed
-    
+
     .menu__activator
       cursor: not-allowed
-  
+
   &__activator
     align-items: center
     cursor: pointer
     position: relative
-  
+
   &__content
-    background: #fff
+    background: $material-theme.bg-color
     position: absolute
     display: inline-block
     border-radius: 2px
@@ -37,7 +37,6 @@
         opacity: 1
         transform: none !important
         pointer-events: auto
-      
     &-enter-to
       .list__tile
         pointer-events: auto
@@ -54,9 +53,9 @@
         
     &-enter, &-leave-to
       opacity: 0
-      
+
     &-enter-to, &-leave
       opacity: 1
-      
+
     &-enter-active, &-leave-active
       transition: all .5s $transition.swing
