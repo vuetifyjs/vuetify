@@ -30,7 +30,6 @@ export default {
             items: this.rowsPerPageItems,
             value: this.computedPagination.rowsPerPage,
             hideDetails: true,
-            top: true,
             auto: true
           },
           on: { input: val => { this.computedPagination.rowsPerPage = val; this.computedPagination.page = 1 } }
