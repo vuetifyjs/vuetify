@@ -3,7 +3,6 @@ import Generators from './mixins/generators'
 import Position from './mixins/position'
 import Utils from './mixins/utils'
 import Toggleable from '../../mixins/toggleable'
-import { debounce } from '../../util/helpers'
 
 export default {
   name: 'menu',
@@ -34,14 +33,11 @@ export default {
       isContentActive: false,
       isBooted: false,
       maxHeightAutoDefault: '200px',
+      resizeTimeout: {},
       startIndex: 3,
       stopIndex: 0,
       tileLength: 0,
-      window: {},
-      windowResizeHandler: () => {
-        this.isBooted = false
-        debounce(this.activate, 200)
-      }
+      window: {}
     }
   },
 
@@ -108,7 +104,7 @@ export default {
 
   computed: {
     minWidth () {
-      return this.dimensions.activator.width + this.nudgeWidth
+      return this.dimensions.activator.width + this.nudgeWidth + (this.auto ? 16 : 0)
     },
     styles () {
       return {
@@ -136,6 +132,7 @@ export default {
   },
 
   mounted () {
+    window.addEventListener('resize', this.onResize, { passive: true })
     this.addActivatorEvents(this.activator)
     this.app = document.querySelector('[data-app]')
     this.$nextTick(() => {
@@ -144,6 +141,7 @@ export default {
   },
 
   beforeDestroy () {
+    window.removeEventListener('resize', this.onResize, { passive: true })
     this.app &&
       this.app.contains(this.$refs.content) &&
       this.app.removeChild(this.$refs.content)
@@ -161,6 +159,11 @@ export default {
     deactivate () {
       this.isContentActive = false
     },
+    onResize () {
+      clearTimeout(this.resizeTimeout)
+      if (!this.isActive) return
+      this.resizeTimeout = setTimeout(this.updateDimensions, 200)
+    },
     startTransition () {
       this.isContentActive = true     // <-- Trigger v-show on content.
       this.$nextTick(this.calculateScroll)
@@ -170,7 +173,10 @@ export default {
   render (h) {
     const data = {
       'class': 'menu',
-      directives: [{ name: 'click-outside' }],
+      directives: [{
+        name: 'click-outside',
+        value: () => this.closeOnClick
+      }],
       on: {
         keyup: e => { if (e.keyCode === 27) this.isActive = false }
       }
