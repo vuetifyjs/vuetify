@@ -13,7 +13,11 @@ export default {
       rotate: 0,
       originalTime: this.value,
       period: 'am',
-      selectingHour: true
+      selectingHour: true,
+      ranges: {
+        hours: [...Array.from({ length: 24 }, (v, k) => k)],
+        minutes: [...Array.from({ length: 60 }, (v, k) => k)]
+      }
     }
   },
 
@@ -24,6 +28,14 @@ export default {
       validator (val) {
         return ['ampm', '24hr'].includes(val)
       }
+    },
+    allowedHours: {
+      type: [Array, Object, Function],
+      default: () => (null)
+    },
+    allowedMinutes: {
+      type: [Array, Object, Function],
+      default: () => (null)
     }
   },
 
@@ -51,13 +63,16 @@ export default {
         }
 
         let hour = value.getHours()
-        const minute = value.getMinutes()
+        let minute = value.getMinutes()
         let period = ''
 
         if (!this.is24hr) {
           hour = hour > 12 ? hour - 12 : hour
           period = this.period
         }
+
+        hour = this.firstAllowed('hour', hour)
+        minute = this.firstAllowed('minute', minute)
 
         return `${hour}:${minute}${period}`
       },
@@ -145,6 +160,56 @@ export default {
     cancel () {
       this.inputTime = this.originalTime
       if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
+    },
+    isAllowed(type, value) {
+      const allowed = this[`allowed${type.charAt(0).toUpperCase() + type.slice(1)}s`]
+
+      if (!allowed) return true
+
+      if (Array.isArray(allowed)) {
+        return !!allowed.find(v => v === value)
+      } else if (allowed instanceof Function) {
+        return allowed(value)
+      } else if (allowed instanceof Object) {
+        const range = type === 'minute' && this.ranges.minutes || !this.is24hr && this.ranges.hours.slice(1, 13) || this.ranges.hours
+        const mod = type === 'minute' && 60 || !this.is24hr && 12 || 24
+        const offset = type === 'hour' && !this.is24hr ? 1 : 0
+
+        let steps = allowed.max - allowed.min
+        steps < 0 && (steps = steps + mod)
+
+        let j = allowed.min
+        for (let i = 0; i <= steps; i++) {
+          const index = (j - offset + i) % mod
+          if (range[index] === value) return true
+        }
+
+        return false
+      }
+
+      return true
+    },
+    generateRange(type, start) {
+      let range = type === 'hour' ? this.ranges.hours : this.ranges.minutes
+      let offset = 1
+
+      if (type === 'hour' && !this.is24hr) {
+        range = range.slice(1, 13)
+        offset = 0
+      }
+
+      return range.slice(start + offset, range.length).concat(range.slice(0, start + offset))
+    },
+    firstAllowed (type, value) {
+      const allowed = this[`allowed${type.charAt(0).toUpperCase() + type.slice(1)}s`]
+
+      if (!allowed) return value
+
+      const range = this.generateRange(type, value)
+
+      const first = range.find(v => this.isAllowed(type, v))
+
+      return first || value
     }
   },
 
