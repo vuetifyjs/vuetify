@@ -94,15 +94,10 @@ export default {
   },
 
   watch: {
-    focused () {
+    focused (val) {
       this.hasFocused = true
 
-      if (!this.focused) {
-        this.$emit('blur')
-        this.$emit('change', this.lazyValue)
-      } else {
-        this.$emit('focus')
-      }
+      !val && this.$emit('change', this.lazyValue)
     },
     value () {
       this.lazyValue = this.value
@@ -128,13 +123,15 @@ export default {
       this.inputValue = e.target.value
       this.multiLine && this.autoGrow && this.calculateInputHeight()
     },
-    blur () {
+    blur (e) {
       this.validate()
       this.$nextTick(() => (this.focused = false))
+      this.$emit('blur', e)
     },
-    focus () {
+    focus (e) {
       this.focused = true
       this.$refs.input.focus()
+      this.$emit('focus', e)
     },
     genCounter () {
       return this.$createElement('div', {
