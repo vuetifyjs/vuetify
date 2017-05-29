@@ -34,7 +34,7 @@ export default {
       const text = children.pop().text
 
       if (text.indexOf(' ') === -1) data.staticClass += ` fa-${text}`
-      else data.staticClass += ` ${text.split(' ').join('fa- ')}`
+      else data.staticClass += ` fa-${text.trim().split(' ').join(' fa-')}`
     }
 
     return h('i', data, children)
