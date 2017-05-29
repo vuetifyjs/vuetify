@@ -1,19 +1,10 @@
 export default {
   props: {
-    dark: {
-      type: Boolean,
-      default: true
-    },
-    light: {
-      type: Boolean,
-      default: false
-    }
+    dark: Boolean,
+    light: Boolean
   },
 
-  computed: {
-    // hack: setting the `dark` prop default to `this.light ? false : true` didnt work
-    _dark () {
-      return this.dark = this.light ? false : true
-    }
+  created () {
+    this.dark = !this.light
   }
 }
