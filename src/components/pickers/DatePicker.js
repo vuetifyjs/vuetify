@@ -200,7 +200,8 @@ export default {
       'class': {
         'picker picker--date': true,
         'picker--landscape': this.landscape,
-        'picker--dark': this.dark
+        'picker--dark': this.dark,
+        'picker--light': this.light && !this.dark
       }
     }, children)
   }

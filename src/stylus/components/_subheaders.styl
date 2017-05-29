@@ -3,9 +3,22 @@
   display: flex
   align-items: center
   font-size: $subheader-height-font-size
-  color: $grey.darken-1
   font-weight: $subheader-font-weight
   padding: 0 $list-right-padding 0 $list-left-padding
 
   &--inset
     margin-left: $subheader-inset-margin
+
+  &--dark
+    color: rgba($material-light.fg-color, $material-light.secondary-text-percent)
+
+  &--light
+    color: rgba($material-dark.fg-color, $material-light.secondary-text-percent)
+
+.application--dark
+  .subheader:not(.subheader--dark):not(.subheader--light)
+    color: rgba($material-dark.fg-color, $material-dark.secondary-text-percent)
+
+.application--light
+  .subheader:not(.subheader--dark):not(.subheader--light)
+    color: rgba($material-light.fg-color, $material-light.secondary-text-percent)
