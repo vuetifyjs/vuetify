@@ -80,6 +80,12 @@
       .icon
         transition: $primary-transition
 
+      .btn //fix button padding if used
+        padding 0
+        margin 0
+        &--icon
+          margin -8px
+
       &-text
         color: $grey.base
         font-size: $list-action-text-font-size
@@ -124,23 +130,27 @@
 
   &--dense
     padding-top: $list-item-dense-top-padding
-    
-    .subheader
-      height: $list-dense-subheader-height
 
+    .subheader
+      font-size: $subheader-dense-font-size
+      height: $list-dense-subheader-height
+    .list--group
+      .subheader
+        height $list-dense-subheader-group-height
     .list__tile
       font-size: $list-item-dense-font-size
 
       &--avatar
         height: $list-item-dense-avatar-single-height
-        
-        .avatar img
-          height: $list-item-avatar-dense-height
-          width: $list-item-avatar-dense-width
+
+        .avatar
+          .icon, img
+            height: $list-item-dense-avatar-height
+            width: $list-item-dense-avatar-height
 
       &:not(.list__tile--avatar)
         height: $list-item-dense-single-height
-        
+
       .icon
         font-size: $list-item-dense-icon-font-size
 
