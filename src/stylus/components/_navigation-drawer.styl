@@ -108,12 +108,10 @@
   > .list
     .list__tile
       transition: none
-      font-size: $navigation-drawer-item-font-size
       font-weight: $navigation-drawer-item-font-weight
 
-      .list__tile__content, .list__tile__title
-        font-size: inherit
-        font-weight: inherit
+    .list__tile__content, .list__tile__title
+      font-weight: inherit
 
       &--active
         .list__tile__title
@@ -139,3 +137,7 @@
       .list__tile--active
         .list__tile__title
           color: $navigation-drawer-item-active-color
+
+  > .list:not(.list--dense)
+    .list__tile__content, .list__tile__title
+      font-size: $navigation-drawer-item-font-size
