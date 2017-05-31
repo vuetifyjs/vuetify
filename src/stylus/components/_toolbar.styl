@@ -1,6 +1,10 @@
 .application--dark
   .toolbar
-    background: $grey.darken-4
+    color: rgba($material-dark.fg-color, $material-dark.primary-text-percent)
+
+.application--light
+  .toolbar
+    color: rgba($material-light.fg-color, $material-light.primary-text-percent)
 
 .toolbar
   align-items: center
@@ -60,6 +64,12 @@
     align-items: center
     position: relative
     margin-left: 10px
+
+    ^[0]--dark &
+      color: rgba($material-light.fg-color, $material-light.active-icon-percent)
+
+    ^[0]--light &
+      color: rgba($material-dark.fg-color, $material-dark.active-icon-percent)
 
   &__logo
     font-size: 3rem

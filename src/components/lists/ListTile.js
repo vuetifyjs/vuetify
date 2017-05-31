@@ -22,8 +22,8 @@ export default {
         'list__tile--active': this.isActive,
         'list__tile--avatar': this.avatar,
         'list__tile--disabled': this.disabled,
-        'list__tile--dark': this.dark,
-        'list__tile--light': this.light,
+        'list__tile--dark': this._dark,
+        'list__tile--light': this._light,
       }
     }
   },

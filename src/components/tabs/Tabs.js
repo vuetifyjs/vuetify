@@ -40,8 +40,8 @@ export default {
         'tabs--grow': this.grow,
         'tabs--icons': this.icons,
         'tabs--scroll-bars': this.scrollBars,
-        'tabs--dark': !this.light && this.dark,
-        'tabs--light': this.light || !this.dark,
+        'tabs--dark': this._dark,
+        'tabs--light': this._light,
         'tabs--overflow': this.overflow
       }
     }

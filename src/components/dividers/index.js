@@ -1,10 +1,12 @@
+import Themeable from '../../mixins/themeable'
+
 const Divider = {
   functional: true,
 
+  mixins: [Themeable],
+
   props: {
-    dark: Boolean,
-    inset: Boolean,
-    light: Boolean
+    inset: Boolean
   },
 
   render (h, { props, data, children }) {
@@ -12,7 +14,7 @@ const Divider = {
 
     if (props.inset) data.staticClass += ' divider--inset'
     if (props.light) data.staticClass += ' divider--light'
-    if (props.dark) data.staticClass += ' divider--dark'
+    if (props.dark && !props.light) data.staticClass += ' divider--dark'
 
     return h('hr', data)
   }

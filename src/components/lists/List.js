@@ -27,8 +27,8 @@ export default {
         'list--dense': this.dense,
         'list--three-line': this.threeLine,
         'list--subheader': this.subheader,
-        'list--dark': this.dark,
-        'list--light': this.light,
+        'list--dark': this._dark,
+        'list--light': this._light,
       }
     }
   },

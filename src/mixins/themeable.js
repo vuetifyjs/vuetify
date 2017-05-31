@@ -1,10 +1,18 @@
 export default {
   props: {
-    dark: Boolean,
+    dark: {
+      type: Boolean,
+      default: true
+    },
     light: Boolean
   },
 
-  created () {
-    this.dark = !this.light
+  computed: {
+    _dark () {
+      return this.dark && !this.light
+    },
+    _light () {
+      return this.light
+    }
   }
 }
