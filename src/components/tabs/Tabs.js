@@ -11,7 +11,6 @@ export default {
       activators: [],
       activeIndex: null,
       isMobile: false,
-      overflow: false,
       reverse: false,
       target: null,
       resizeDebounce: {},
@@ -41,8 +40,7 @@ export default {
         'tabs--icons': this.icons,
         'tabs--scroll-bars': this.scrollBars,
         'tabs--dark': !this.light && this.dark,
-        'tabs--light': this.light || !this.dark,
-        'tabs--overflow': this.overflow
+        'tabs--light': this.light || !this.dark
       }
     }
   },
@@ -131,9 +129,6 @@ export default {
         this.reverse = nextIndex < this.activeIndex
         this.activeIndex = nextIndex
       })
-    },
-    transitionComplete () {
-      this.overflow = false
     }
   },
 
