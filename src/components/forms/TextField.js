@@ -20,14 +20,9 @@ export default {
     id: String,
     name: String,
     maxlength: [Number, String],
-    max: {
-      type: [Number, String],
-      default: 25
-    },
-    min: {
-      type: [Number, String],
-      default: 0
-    },
+    max: [Number, String],
+    min: [Number, String],
+    step: [Number, String],
     multiLine: Boolean,
     prefix: String,
     readonly: Boolean,
@@ -60,11 +55,19 @@ export default {
       const inputLength = (this.inputValue && this.inputValue.toString() || '').length
       let min = inputLength
 
-      if (this.min !== 0 && inputLength < this.min) {
-        min = this.min
+      if (this.counterMin !== 0 && inputLength < this.counterMin) {
+        min = this.counterMin
       }
 
-      return `${min} / ${this.max}`
+      return `${min} / ${this.counterMax}`
+    },
+    counterMin () {
+      const parsedMin = Number.parseInt(this.min, 10)
+      return Number.isNaN(parsedMin) ? 0 : parsedMin
+    },
+    counterMax () {
+      const parsedMax = Number.parseInt(this.max, 10)
+      return Number.isNaN(parsedMax) ? 25 : parsedMax
     },
     inputValue: {
       get () {
@@ -171,6 +174,11 @@ export default {
       if (this.name) data.attrs.name = this.name
       if (this.maxlength) data.attrs.maxlength = this.maxlength
       if (this.id) data.domProps.id = this.id
+      if (this.step) data.attrs.step = this.step
+      if (!this.counter) {
+        if (this.max) data.attrs.max = this.max
+        if (this.min) data.attrs.min = this.min
+      }
 
       if (this.multiLine) {
         data.domProps.rows = this.rows
@@ -192,14 +200,15 @@ export default {
     },
     counterIsValid: function counterIsValid () {
       const val = (this.inputValue && this.inputValue.toString() || '')
+
       return (!this.counter ||
-        (val.length >= this.min && val.length <= this.max)
+        (val.length >= this.counterMin && val.length <= this.counterMax)
       )
     },
     validateIsValid () {
       return (!this.required ||
         (this.required &&
-          this.inputValue) ||
+          this.isDirty) ||
         !this.hasFocused ||
         (this.hasFocused && this.focused))
     }
