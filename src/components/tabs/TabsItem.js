@@ -51,6 +51,9 @@ export default {
 
     toggle (action) {
       this.isActive = this.action === action
+      this.$nextTick(() => {
+        this.isActive && this.tabs.slider(this.$el)
+      })
     }
   },
 
