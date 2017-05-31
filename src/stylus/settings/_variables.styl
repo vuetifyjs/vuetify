@@ -94,6 +94,14 @@ $spacers := {
   }
 }
 
+$font-weights := {
+  thin: 100,
+  light: 300,
+  regular: 400,
+  medium: 500,
+  bold: 700,
+  black: 900
+}
 
 // Headings
 // ============================================================
@@ -235,6 +243,28 @@ $collapsible-transition-height := 0.23s
 $footer-height := 36px
 
 /** Lists */
+
+/**   list fonts and weights */
+$list-item-font-size := $headings.subheading.size //16px - the mdc scss uses subheading to configure like this
+$list-item-font-weight := $headings.subheading.weight //400
+
+$list-content-font-size := $list-item-font-size
+$list-action-text-font-size := 12px //TODO why is this 12?
+
+$list-title-font-size := $list-item-font-size
+$list-title-font-weight := $list-item-font-weight
+
+$list-sub-title-font-size := ($list-item-font-size - 2px)
+$list-sub-title-font-weight := $list-item-font-weight
+
+$list-group-tile-title-font-weight := $list-item-font-weight
+$list-group-tile-title-active-font-weight := $list-item-font-weight
+
+$subheader-height-font-size := ($list-item-font-size - 2px)
+$subheader-font-weight := $font-weights.medium //500
+
+
+/**   list spacing*/
 $list-left-padding := 16px
 $list-right-padding := 16px
 $list-top-padding := 8px
@@ -242,40 +272,32 @@ $list-bottom-padding := 8px
 
 $list-item-right-margin := 56px
 $list-item-left-padding := 72px
-$list-item-dense-top-padding := 4px
-
-$list-item-font-size := 16px
-$list-item-dense-font-size := 13px
-$list-item-font-weight := 500
 
 $list-item-single-height := 48px
-$list-item-dense-single-height := 40px
-$list-item-avatar-single-height := 56px
-$list-item-dense-avatar-single-height := 48px
-
 $list-item-double-height := 72px
-$list-item-dense-double-height := 60px
-
 $list-item-triple-height := 88px
-$list-item-dense-triple-height := 76px
+$list-item-avatar-single-height := 56px
 
 $subheader-inset-margin := $list-item-right-margin
-$subheader-font-weight := 500
-$subheader-height-font-size := 14px
 
-$list-title-font-size := 16px
-$list-title-font-weight := 400
-$list-title-dense-font-weight := 400
+/**   list dense overrides */
+$list-item-dense-font-size := ($list-item-font-size - 3px) //13px
+$subheader-dense-font-size := $list-item-dense-font-size
+$list-item-dense-icon-font-size := 20px
 
-$list-sub-title-font-size := 14px
-$list-sub-title-font-weight := 400
+$list-item-dense-top-padding := $list-top-padding / 2
+$list-item-dense-single-height := $list-item-single-height - 8px //40px
+$list-item-dense-double-height := $list-item-double-height - 12px //60px
+$list-item-dense-triple-height := $list-item-triple-height - 12px //76px
 
-$list-content-font-size := 15px
+$list-item-dense-avatar-single-height := $list-item-single-height //48px the dense concept was to take avatars to a normal single item height
+$list-item-dense-avatar-height := 38px
 
-$list-group-tile-title-font-weight := 400
-$list-group-tile-title-active-font-weight := 400
+$list-dense-subheader-height := $list-item-dense-single-height
+$list-dense-subheader-group-height := $list-dense-subheader-height //the subheader under a group menu
 
-$list-action-text-font-size := 12px
+
+/** End Lists */
 
 /** Pickers */
 $picker-width := 315px
