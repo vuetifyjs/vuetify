@@ -11,6 +11,14 @@
   left: 0
   will-change: transform
   z-index: 3
+  
+  // Remove animation when booting up
+  &:not(.navigation-drawer--is-booted)
+    display: none
+    transition: none !important
+
+    + .toolbar, ~ main, ~ .footer
+      transition: none !important
 
   &--close:not(.navigation--permanent)
     &.navigation-drawer:not(.navigation-drawer--right)
