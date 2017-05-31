@@ -11,7 +11,6 @@ export default {
       activators: [],
       activeIndex: null,
       isMobile: false,
-      overflow: false,
       reverse: false,
       target: null,
       resizeDebounce: {},
@@ -42,7 +41,6 @@ export default {
         'tabs--scroll-bars': this.scrollBars,
         'tabs--dark': this._dark,
         'tabs--light': this._light,
-        'tabs--overflow': this.overflow
       }
     }
   },
@@ -60,11 +58,7 @@ export default {
 
       activators[0].componentInstance.$children
         .filter(i => i.$options._componentTag === 'v-tabs-item')
-        .forEach(i => {
-          i.toggle(this.target)
-
-          i.isActive && this.slider(i.$el)
-        })
+        .forEach(i => i.toggle(this.target))
 
       this.$refs.content && this.$refs.content.$children.forEach(i => i.toggle(this.target, this.reverse, this.isBooted))
       this.$emit('input', this.target)
@@ -89,10 +83,7 @@ export default {
 
       const tab = this.value || (bar[i !== -1 ? i : 0] || {}).action
 
-      // Temp fix for slider loading issue
-      setTimeout(() => {
-        tab && this.tabClick(tab) && this.resize()
-      }, 250)
+      tab && this.tabClick(tab) && this.resize()
     })
   },
 
@@ -105,7 +96,6 @@ export default {
       clearTimeout(this.resizeDebounce)
 
       this.resizeDebounce = setTimeout(() => {
-        this.slider()
         this.isMobile = window.innerWidth < this.mobileBreakPoint
       }, 0)
     },
@@ -139,9 +129,6 @@ export default {
         this.reverse = nextIndex < this.activeIndex
         this.activeIndex = nextIndex
       })
-    },
-    transitionComplete () {
-      this.overflow = false
     }
   },
 
