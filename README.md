@@ -55,3 +55,6 @@ Vue.use(Vuetify)
 Ask your support questions on the vuetifyjs [gitter](https://gitter.im/vuetifyjs/Lobby/~chat#share).
 
 For additional information, please visit the [Official Documentation](https://vuetifyjs.com).
+
+## Info
+Codepen starter [Vuetify Template](http://codepen.io/johnjleider/pen/bgJOrX)

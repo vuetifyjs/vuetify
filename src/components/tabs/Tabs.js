@@ -151,9 +151,8 @@ export default {
     const iter = (this.$slots.default || [])
 
     iter.forEach(c => {
-      if (!c.componentOptions) return false
-
-      if (c.componentOptions.tag === 'v-tabs-content') content.push(c)
+      if (!c.componentOptions) slot.push(c)
+      else if (c.componentOptions.tag === 'v-tabs-content') content.push(c)
       else slot.push(c)
     })
 
