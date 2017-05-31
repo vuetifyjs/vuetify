@@ -5,23 +5,14 @@ export default {
         ref: 'menu',
         props: {
           auto: this.auto,
+          closeOnClick: false,
           closeOnContentClick: !this.multiple,
           disabled: this.disabled,
           offsetY: this.autocomplete || this.offset,
-          value: this.menuActive,
-          nudgeBottom: 2,
-          nudgeTop: -11,
-          nudgeYAuto: 2,
-          nudgeXAuto: this.multiple ? -40 : -16,
-          nudgeWidth: 25,
           maxHeight: this.maxHeight,
-          activator: this.$refs.activator,
-          bottom: this.bottom,
-          top: this.top
+          activator: this.$refs.activator
         },
-        on: {
-          input: val => (this.menuActive = val)
-        }
+        on: { input: val => (this.menuActive = val) }
       }
 
       return this.$createElement('v-menu', data, [this.genList()])
@@ -127,7 +118,10 @@ export default {
           'list__tile--select-multi': this.multiple
         },
         nativeOn: { click: () => this.selectItem(item) },
-        props: { avatar: item === Object(item) && 'avatar' in item }
+        props: {
+          avatar: item === Object(item) && 'avatar' in item,
+          ripple: true
+        }
       }
 
       if (this.$scopedSlots.item) {
