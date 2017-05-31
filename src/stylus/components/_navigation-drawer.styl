@@ -108,6 +108,12 @@
   > .list
     .list__tile
       transition: none
+      font-size: $navigation-drawer-item-font-size
+      font-weight: $navigation-drawer-item-font-weight
+
+      .list__tile__content, .list__tile__title
+        font-size: inherit
+        font-weight: inherit
 
       &--active
         .list__tile__title
@@ -115,18 +121,21 @@
 
         > *:first-child
           .icon
-            color: $theme.primary
+            color: $navigation-drawer-item-active-color
 
     .list--group
+      .list__tile
+        font-weight: $navigation-drawer-group-item-font-weight
+
       &__header--active
         &:after
           background: transparent
 
         .list__tile__action:first-of-type
           .icon
-            color: $theme.primary
+            color: $navigation-drawer-item-active-color
 
     .list--group__container
       .list__tile--active
         .list__tile__title
-          color: $theme.primary
+          color: $navigation-drawer-item-active-color
