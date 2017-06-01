@@ -7,6 +7,10 @@ export default {
 
   mixins: [Bootable, Overlayable, Toggleable],
 
+  data: () => ({
+    app: null
+  }),
+
   props: {
     disabled: Boolean,
     persistent: Boolean,
@@ -49,11 +53,28 @@ export default {
     isActive (val) {
       if (val) {
         !this.fullscreen && !this.hideOverlay && this.genOverlay()
+        document.body.style.overflowY = 'hidden'
+        document.body.style.paddingRight = '15px'
       } else {
-        this.removeOverlay()
+        this.removeOverlay()        
+        document.body.style.overflowY = null
+        document.body.style.paddingRight = null
       }
     }
   },
+
+  mounted () {
+    this.app = document.querySelector('[data-app]')
+    this.$nextTick(() => {
+      this.app && this.app.appendChild(this.$refs.content)
+    })
+  },
+
+  beforeDestroy () {
+    this.app &&
+      this.app.contains(this.$refs.content) &&
+      this.app.removeChild(this.$refs.content)
+    },
 
   methods: {
     closeConditional (e) {
@@ -96,7 +117,8 @@ export default {
     }, [h('div', data, [this.$slots.default])])
 
     children.push(h('div', {
-      'class': 'dialog__content'
+      'class': 'dialog__content',
+      ref: 'content'
     }, [dialog]))
 
     return h('div', {
