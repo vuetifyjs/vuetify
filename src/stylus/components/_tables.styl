@@ -12,7 +12,7 @@ table.table
   max-width: 100%
 
   tr:not(:last-child)
-    border-bottom: 1px solid $grey.lighten-2
+    border-bottom: 1px solid rgba($material-theme.fg-color, $material-theme.divider-percent)
 
   thead, tbody
     td, th
@@ -24,7 +24,7 @@ table.table
       height: 56px
 
     th
-      color: rgba(#000, .54)
+      color: rgba($material-theme.text-color, $material-theme.secondary-text-percent)
       font-weight: 600
       font-size: 12px
       transition: .3s $transition.swing
@@ -46,7 +46,7 @@ table.table
         background: #f5f5f5
 
       &:hover
-        background: #eeeeee
+        background: rgba($material-theme.fg-color, $material-theme.divider-percent)
 
     td, th
       height: 48px
@@ -72,4 +72,4 @@ table.table
   tfoot
     tr
       height: 56px
-      border-top: 1px solid $grey.lighten-2
+      border-top: 1px solid rgba($material-theme.fg-color, $material-theme.divider-percent)

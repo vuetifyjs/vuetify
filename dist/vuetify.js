@@ -1,5 +1,5 @@
 /*!
-* Vuetify v0.12.2
+* Vuetify v0.12.3
 * Forged by John Leider
 * Released under the MIT License.
 */   
@@ -92,7 +92,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* harmony export (immutable) */ exports["d"] = closestParentTag;
 /* harmony export (immutable) */ exports["f"] = addOnceEventListener;
 /* unused harmony export browserTransform */
-/* harmony export (immutable) */ exports["g"] = debounce;
+/* unused harmony export debounce */
 /* harmony export (immutable) */ exports["e"] = getObjectValueByPath;
 function createSimpleFunctional (c, el) {
   if ( el === void 0 ) el = 'div';
@@ -224,9 +224,28 @@ function getObjectValueByPath (obj, path) {
 
 "use strict";
 /* harmony default export */ exports["a"] = {
+  props: {
+    dark: {
+      type: Boolean,
+      default: true
+    },
+    light: {
+      type: Boolean,
+      default: false
+    }
+  }
+};
+
+
+/***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ exports["a"] = {
   data: function data () {
     return {
-      isActive: this.value
+      isActive: !!this.value
     }
   },
 
@@ -238,17 +257,17 @@ function getObjectValueByPath (obj, path) {
 
   watch: {
     value: function value (val) {
-      this.isActive = Boolean(val)
+      this.isActive = !!val
     },
     isActive: function isActive (val) {
-      val !== this.value && this.$emit('input', val)
+      this.$emit('input', val)
     }
   }
 };
 
 
 /***/ },
-/* 2 */
+/* 3 */
 /***/ function(module, exports) {
 
 module.exports = function normalizeComponent (
@@ -298,25 +317,6 @@ module.exports = function normalizeComponent (
     options: options
   }
 }
-
-
-/***/ },
-/* 3 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony default export */ exports["a"] = {
-  props: {
-    dark: {
-      type: Boolean,
-      default: true
-    },
-    light: {
-      type: Boolean,
-      default: false
-    }
-  }
-};
 
 
 /***/ },
@@ -410,7 +410,7 @@ module.exports = function normalizeComponent (
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__themeable__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__themeable__ = __webpack_require__(1);
 
 
 /* harmony default export */ exports["a"] = {
@@ -860,14 +860,18 @@ module.exports = function normalizeComponent (
   },
 
   props: {
-    dark: Boolean,
     actions: Boolean,
     landscape: Boolean,
     noTitle: Boolean,
     scrollable: Boolean,
     value: {
       required: true
-    }
+    },
+    light: {
+      type: Boolean,
+      default: true
+    },
+    dark: Boolean,
   },
 
   methods: {
@@ -1046,7 +1050,7 @@ function load (cb, i) {
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_contextualable__ = __webpack_require__(4);
 
 
@@ -1371,9 +1375,9 @@ var Avatar = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_contextualable__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_toggleable__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_toggleable__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_route_link__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_themeable__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_themeable__ = __webpack_require__(1);
 
 
 
@@ -1497,9 +1501,9 @@ var Avatar = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_contextualable__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_toggleable__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_toggleable__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_route_link__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_themeable__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_themeable__ = __webpack_require__(1);
 
 
 
@@ -1773,7 +1777,7 @@ var CardTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers_
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__ = __webpack_require__(2);
 
 
 /* harmony default export */ exports["a"] = {
@@ -1860,7 +1864,7 @@ var CardTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util_helpers_
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_bootable__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_overlayable__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_toggleable__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_toggleable__ = __webpack_require__(2);
 
 
 
@@ -2353,14 +2357,9 @@ var Footer = {
     id: String,
     name: String,
     maxlength: [Number, String],
-    max: {
-      type: [Number, String],
-      default: 25
-    },
-    min: {
-      type: [Number, String],
-      default: 0
-    },
+    max: [Number, String],
+    min: [Number, String],
+    step: [Number, String],
     multiLine: Boolean,
     prefix: String,
     readonly: Boolean,
@@ -2393,11 +2392,19 @@ var Footer = {
       var inputLength = (this.inputValue && this.inputValue.toString() || '').length
       var min = inputLength
 
-      if (this.min !== 0 && inputLength < this.min) {
-        min = this.min
+      if (this.counterMin !== 0 && inputLength < this.counterMin) {
+        min = this.counterMin
       }
 
-      return (min + " / " + (this.max))
+      return (min + " / " + (this.counterMax))
+    },
+    counterMin: function counterMin () {
+      var parsedMin = Number.parseInt(this.min, 10)
+      return Number.isNaN(parsedMin) ? 0 : parsedMin
+    },
+    counterMax: function counterMax () {
+      var parsedMax = Number.parseInt(this.max, 10)
+      return Number.isNaN(parsedMax) ? 25 : parsedMax
     },
     inputValue: {
       get: function get () {
@@ -2427,15 +2434,10 @@ var Footer = {
   },
 
   watch: {
-    focused: function focused () {
+    focused: function focused (val) {
       this.hasFocused = true
 
-      if (!this.focused) {
-        this.$emit('blur')
-        this.$emit('change', this.lazyValue)
-      } else {
-        this.$emit('focus')
-      }
+      !val && this.$emit('change', this.lazyValue)
     },
     value: function value () {
       this.lazyValue = this.value
@@ -2463,15 +2465,17 @@ var Footer = {
       this.inputValue = e.target.value
       this.multiLine && this.autoGrow && this.calculateInputHeight()
     },
-    blur: function blur () {
+    blur: function blur (e) {
       var this$1 = this;
 
       this.validate()
       this.$nextTick(function () { return (this$1.focused = false); })
+      this.$emit('blur', e)
     },
-    focus: function focus () {
+    focus: function focus (e) {
       this.focused = true
       this.$refs.input.focus()
+      this.$emit('focus', e)
     },
     genCounter: function genCounter () {
       return this.$createElement('div', {
@@ -2511,6 +2515,11 @@ var Footer = {
       if (this.name) { data.attrs.name = this.name }
       if (this.maxlength) { data.attrs.maxlength = this.maxlength }
       if (this.id) { data.domProps.id = this.id }
+      if (this.step) { data.attrs.step = this.step }
+      if (!this.counter) {
+        if (this.max) { data.attrs.max = this.max }
+        if (this.min) { data.attrs.min = this.min }
+      }
 
       if (this.multiLine) {
         data.domProps.rows = this.rows
@@ -2532,8 +2541,9 @@ var Footer = {
     },
     counterIsValid: function counterIsValid () {
       var val = (this.inputValue && this.inputValue.toString() || '')
+
       return (!this.counter ||
-        (val.length >= this.min && val.length <= this.max)
+        (val.length >= this.counterMin && val.length <= this.counterMax)
       )
     },
     validateIsValid: function validateIsValid () {
@@ -2649,7 +2659,7 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_themeable__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_themeable__ = __webpack_require__(1);
 
 
 /* harmony default export */ exports["a"] = {
@@ -2787,7 +2797,7 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_expand_transition__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_toggleable__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_toggleable__ = __webpack_require__(2);
 
 
 
@@ -2911,7 +2921,7 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_route_link__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_toggleable__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_toggleable__ = __webpack_require__(2);
 
 
 
@@ -3019,9 +3029,7 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_generators__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_position__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_utils__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mixins_toggleable__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__util_helpers__ = __webpack_require__(0);
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mixins_toggleable__ = __webpack_require__(2);
 
 
 
@@ -3034,29 +3042,34 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
   mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_activator__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__mixins_generators__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__mixins_position__["a" /* default */], __WEBPACK_IMPORTED_MODULE_3__mixins_utils__["a" /* default */], __WEBPACK_IMPORTED_MODULE_4__mixins_toggleable__["a" /* default */]],
 
   data: function data () {
-    var this$1 = this;
-
     return {
-      window: {},
-      windowResizeHandler: function () {
-        this$1.isBooted = false
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__util_helpers__["g" /* debounce */])(this$1.activate, 200)
-      },
+      app: null,
+      autoIndex: null,
       dimensions: {
         activator: {
-          top: 0, left: 0, bottom: 0, right: 0, width: 0, height: 0, offsetTop: 0
+          top: 0, left: 0,
+          bottom: 0, right: 0,
+          width: 0, height: 0,
+          offsetTop: 0, scrollHeight: 0
         },
         content: {
-          top: 0, left: 0, bottom: 0, right: 0, width: 0, height: 0, offsetTop: 0
+          top: 0, left: 0,
+          bottom: 0, right: 0,
+          width: 0, height: 0,
+          offsetTop: 0, scrollHeight: 0
         },
         list: null,
         selected: null
       },
       direction: { vert: 'bottom', horiz: 'right' },
-      position: { left: '0px', top: '0px', right: 'auto', bottom: 'auto' },
       isContentActive: false,
       isBooted: false,
-      maxHeightAutoDefault: '200px'
+      maxHeightAutoDefault: '200px',
+      resizeTimeout: {},
+      startIndex: 3,
+      stopIndex: 0,
+      tileLength: 0,
+      window: {}
     }
   },
 
@@ -3071,14 +3084,6 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
     disabled: Boolean,
     maxHeight: {
       default: 'auto'
-    },
-    nudgeXAuto: {
-      type: Number,
-      default: -16
-    },
-    nudgeYAuto: {
-      type: Number,
-      default: -18
     },
     nudgeTop: {
       type: Number,
@@ -3130,161 +3135,72 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
   },
 
   computed: {
-    offset: function offset () {
-      var ref = this.dimensions;
-      var a = ref.activator;
-      var c = ref.content;
-      var ref$1 = this;
-      var direction = ref$1.direction;
-      var offsetX = ref$1.offsetX;
-      var offsetY = ref$1.offsetY;
-      var auto = ref$1.offsetAuto;
-      var ref$2 = this;
-      var nt = ref$2.nudgeTop;
-      var nb = ref$2.nudgeBottom;
-      var nr = ref$2.nudgeRight;
-      var nl = ref$2.nudgeLeft;
-
-      var horiz = direction.horiz === 'left'
-          ? offsetX ? a.left - c.right + nl : a.right - c.right + auto.horiz
-          : offsetX ? a.right - c.left + nr : a.left - c.left + auto.horiz
-      var vert = direction.vert === 'top'
-          ? offsetY ? a.top - c.bottom + nt : a.bottom - c.bottom + auto.vert
-          : offsetY ? a.bottom - c.top + nb : a.top - c.top + auto.vert
-      return { horiz: horiz, vert: vert }
+    minWidth: function minWidth () {
+      return this.dimensions.activator.width + this.nudgeWidth + (this.auto ? 16 : 0)
     },
-
-    offsetAuto: function offsetAuto () {
-      if (!this.auto) { return { horiz: 0, vert: 0 } }
-      if (!this.dimensions.selected) { return { horiz: this.nudgeXAuto, vert: this.nudgeYAuto } }
-
-      var ref = this.dimensions;
-      var a = ref.activator;
-      var c = ref.content;
-      var s = ref.selected;
-      var list = ref.list;
-      var offsetBottom = list.height - s.height - s.offsetTop
-      var scrollMiddle = (c.height - s.height) / 2
-      var horiz = this.nudgeXAuto
-      var vert = (a.height - c.height + this.nudgeYAuto) / 2
-
-      vert += s.offsetTop < scrollMiddle ? scrollMiddle - s.offsetTop : 0
-      vert += offsetBottom < scrollMiddle ? offsetBottom - scrollMiddle : 0
-
-      return { horiz: horiz, vert: vert }
-    },
-
-    screenDist: function screenDist () {
-      var ref = this.dimensions;
-      var a = ref.activator;
-      var ref$1 = this.window;
-      var innerH = ref$1.innerHeight;
-      var innerW = ref$1.innerWidth;
-      var ref$2 = this;
-      var nt = ref$2.nudgeTop;
-      var nb = ref$2.nudgeBottom;
-      var nr = ref$2.nudgeRight;
-      var nl = ref$2.nudgeLeft;
-      var dist = {}
-
-      dist.top = this.offsetY ? a.top + nt : a.bottom
-      dist.left = this.offsetX ? a.left + nl : a.right
-      dist.bottom = this.offsetY ? innerH - a.bottom - nb : innerH - a.top
-      dist.right = this.offsetX ? innerW - a.right - nr : innerW - a.left
-      dist.horizMax = dist.left > dist.right ? dist.left : dist.right
-      dist.horizMaxDir = dist.left > dist.right ? 'left' : 'right'
-      dist.vertMax = dist.top > dist.bottom ? dist.top : dist.bottom
-      dist.vertMaxDir = dist.top > dist.bottom ? 'top' : 'bottom'
-
-      return dist
-    },
-
-    screenOverflow: function screenOverflow () {
-      var ref = this.dimensions;
-      var c = ref.content;
-      var left = c.left + this.offset.horiz
-      var top = c.top + this.offset.vert
-
-      var horiz = this.auto && left + c.width > this.window.innerWidth
-          ? (left + c.width) - this.window.innerWidth
-          : this.auto && left < 0
-            ? left
-            : 0
-      var vert = this.auto && top + c.height > this.window.innerHeight
-          ? (top + c.height) - this.window.innerHeight
-          : this.auto && top < 0
-            ? top
-            : 0
-
-      return { horiz: horiz, vert: vert }
-    },
-
     styles: function styles () {
-      var ref = this.position;
-      var top = ref.top;
-      var left = ref.left;
-      var right = ref.right;
-      var bottom = ref.bottom;
-
       return {
-        top: isNaN(top) ? top : (top + "px"),
-        left: isNaN(left) ? left : (left + "px"),
-        right: isNaN(right) ? right : (right + "px"),
-        bottom: isNaN(bottom) ? bottom : (bottom + "px")
+        maxHeight: this.auto ? '200px' : isNaN(this.maxHeight) ? this.maxHeight : ((this.maxHeight) + "px"),
+        minWidth: ((this.minWidth) + "px"),
+        top: ((this.calcTop()) + "px"),
+        left: ((this.calcLeft()) + "px")
       }
     }
   },
 
   watch: {
     isActive: function isActive (val) {
-      if (this.isBooted && val) { return this.startTransition() }
+      if (this.disabled) { return }
 
-      if (val) { this.activate() }
-      else { this.isContentActive = false }
+      val && this.activate() || this.deactivate()
     },
-
     activator: function activator (newActivator, oldActivator) {
       this.removeActivatorEvents(oldActivator)
       this.addActivatorEvents(newActivator)
     },
-
-    activatorXY: function activatorXY (val) {
-      this.isActive = true
-    },
-
     windowResizeHandler: function windowResizeHandler () {
       this.isBooted = false
     }
   },
 
   mounted: function mounted () {
+    var this$1 = this;
+
+    window.addEventListener('resize', this.onResize, { passive: true })
     this.addActivatorEvents(this.activator)
+    this.app = document.querySelector('[data-app]')
+    this.$nextTick(function () {
+      this$1.app && this$1.app.appendChild(this$1.$refs.content)
+    })
   },
 
   beforeDestroy: function beforeDestroy () {
+    window.removeEventListener('resize', this.onResize, { passive: true })
+    this.app &&
+      this.app.contains(this.$refs.content) &&
+      this.app.removeChild(this.$refs.content)
+
     this.removeActivatorEvents(this.activator)
     window.removeEventListener('resize', this.windowResizeHandler)
   },
 
   methods: {
     activate: function activate () {
-      if (!this.isActive || this.disabled) { return }
-      this.isBooted = true
       this.initWindow()
-      this.setDirection()
-      this.updatePosition()
+      this.updateDimensions()
+      this.$nextTick(this.startTransition)
     },
-
-    initWindow: function initWindow () {
-      if (this.window === window) { return }
-
-      this.window = window
-      this.window.addEventListener('resize', this.windowResizeHandler)
+    deactivate: function deactivate () {
+      this.isContentActive = false
     },
-    
+    onResize: function onResize () {
+      clearTimeout(this.resizeTimeout)
+      if (!this.isActive) { return }
+      this.resizeTimeout = setTimeout(this.updateDimensions, 200)
+    },
     startTransition: function startTransition () {
-      this.$refs.content.offsetHeight // <-- Force DOM to repaint first.
       this.isContentActive = true     // <-- Trigger v-show on content.
+      this.$nextTick(this.calculateScroll)
     }
   },
 
@@ -3292,24 +3208,20 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
     var this$1 = this;
 
     var data = {
-      'class': {
-        'menu': true
-      },
+      'class': 'menu',
       directives: [{
         name: 'click-outside',
-        value: function (e) {
-          if (!this$1.closeOnClick) { return false }
-          var a = this$1.activator
-          if (a && (a === e.target || a.contains(e.target))) { return false }
-          return true
-        }
+        value: function () { return this$1.closeOnClick; }
       }],
       on: {
-        'keyup': function (e) { if (e.keyCode === 27) { this$1.isActive = false } }
+        keyup: function (e) { if (e.keyCode === 27) { this$1.isActive = false } }
       }
     }
 
-    return h('div', data, [this.genActivator(h), this.genTransition(h)])
+    return h('div', data, [
+      this.genActivator(),
+      this.genTransition()
+    ])
   }
 };
 
@@ -3340,20 +3252,18 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
         ? this.$refs.activator.children[0]
         : this.$refs.activator
     },
-
     activatorClickHandler: function activatorClickHandler (e) {
+      if (!this.closeOnClick) { e.stopPropagation() }
       if (this.disabled) { return }
       else if (this.openOnClick && !this.isActive) { this.isActive = true }
       else if (this.closeOnClick && this.isActive) { this.isActive = false }
     },
-
     addActivatorEvents: function addActivatorEvents (activator) {
       if ( activator === void 0 ) activator = null;
 
       if (!activator) { return }
       activator.addEventListener('click', this.activatorClickHandler)
     },
-
     removeActivatorEvents: function removeActivatorEvents (activator) {
       if ( activator === void 0 ) activator = null;
 
@@ -3373,16 +3283,14 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
   methods: {
     genActivator: function genActivator () {
       return this.$createElement('div', {
+        'class': 'menu__activator',
         ref: 'activator',
         slot: 'activator',
-        class: 'menu__activator',
         on: { click: this.activatorClickHandler }
       }, this.$slots.activator)
     },
 
     genTransition: function genTransition () {
-      var children = []
-
       return this.$createElement(this.transition, {
         props: { origin: this.origin }
       }, [this.genContent()])
@@ -3392,9 +3300,9 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
       var this$1 = this;
 
       return this.$createElement('div', {
+        'class': 'menu__content',
         ref: 'content',
         style: this.styles,
-        'class': 'menu__content',
         directives: [{
           name: 'show',
           value: this.isContentActive
@@ -3418,130 +3326,100 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
 "use strict";
 /* harmony default export */ exports["a"] = {
   methods: {
-    setDirection: function setDirection (horiz, vert) {
-      if ( horiz === void 0 ) horiz = '';
-      if ( vert === void 0 ) vert = '';
+    // Revisit this
+    calculateScroll: function calculateScroll () {
+      if (this.selectedIndex === null) { return }
 
-      horiz = horiz || (this.left && !this.auto ? 'left' : 'right')
-      vert = vert || (this.top && !this.auto ? 'top' : 'bottom')
+      var scrollTop = 0
 
-      this.direction = { horiz: horiz, vert: vert }
-      this.position.top = vert === 'top' ? 'auto' : '0px'
-      this.position.left = horiz === 'left' ? 'auto' : '0px'
-      this.position.bottom = vert === 'bottom' ? 'auto' : '0px'
-      this.position.right = horiz === 'right' ? 'auto' : '0px'
+      if (this.selectedIndex >= this.stopIndex) {
+        scrollTop = this.$refs.content.scrollHeight
+      } else if (this.selectedIndex > this.startIndex) {
+        scrollTop = (this.selectedIndex * 48) - 56
+      }
+
+      this.$refs.content.scrollTop = scrollTop
     },
+    calcLeftAuto: function calcLeftAuto () {
+      var a = this.dimensions.activator
 
-    updatePosition: function updatePosition () {
-      var this$1 = this;
-
-      this.$nextTick(function () {
-        this$1.updateDimensions()
-
-        var ref = this$1;
-        var offset = ref.offset;
-        var screen = ref.screenOverflow;
-        var ref$1 = this$1.direction;
-        var horiz = ref$1.horiz;
-        var vert = ref$1.vert;
-
-        var left = horiz === 'left' ? 'auto' : offset.horiz - screen.horiz + this$1.nudgeLeft
-        var top = vert === 'top' ? 'auto' : offset.vert - screen.vert + this$1.nudgeTop
-        var right = horiz === 'right' ? 'auto' : -offset.horiz - screen.horiz + this$1.nudgeRight
-        var bottom = vert === 'bottom' ? 'auto' : -offset.vert - screen.vert + this$1.nudgeBottom
-
-        var leftSpace = left + this$1.dimensions.content.width
-        if (leftSpace > this$1.window.innerWidth) {
-          var diff = leftSpace - this$1.window.innerWidth
-          left = left - diff - 16
-        }
-
-        this$1.position.left = left
-        this$1.position.right = right
-        this$1.position.top = top
-        this$1.position.bottom = bottom
-
-        var noMoreFlipping = this$1.flip() === false
-
-        if (noMoreFlipping) { this$1.startTransition() }
-      })
+      return parseInt(a.left - 16)
     },
+    calcTopAuto: function calcTopAuto () {
+      if (!this.$refs.content) { return this.calcTop(true) }
 
+      var tiles = this.$refs.content.querySelectorAll('.list__tile')
+      var selectedIndex = Array.from(tiles).findIndex(function (n) { return n.classList.contains('list__tile--active'); })
+
+      this.tileLength = tiles.length
+
+      if (selectedIndex === -1) {
+        this.selectedIndex = null
+
+        return this.calcTop(true)
+      }
+
+      this.selectedIndex = selectedIndex
+      var actingIndex = selectedIndex
+
+      var offsetPadding = -16
+      this.stopIndex = tiles.length - 4
+      if (selectedIndex > this.startIndex && selectedIndex < this.stopIndex) {
+        actingIndex = 2
+        offsetPadding = 24
+      } else if (selectedIndex >= this.stopIndex) {
+        offsetPadding = -8
+        actingIndex = selectedIndex - this.stopIndex
+      }
+
+      return this.calcTop(true) + offsetPadding - (actingIndex * 48)
+    },
+    calcLeft: function calcLeft () {
+      if (this.auto) { return this.calcLeftAuto() }
+
+      var a = this.dimensions.activator
+      var left = a.left
+
+      if (this.offsetX) { left = this.left ? left - a.width : left + a.width }
+      if (this.nudgeLeft) { left += this.nudgeLeft }
+      if (this.nudgeRight) { left -= this.nudgeRight }
+
+      var totalWidth = left + this.minWidth - this.window.innerWidth
+
+      if (totalWidth > 0) { left -= (totalWidth + 24) } // give a little extra space
+
+      return left
+    },
+    calcTop: function calcTop (force) {
+      if (this.auto && !force) { return this.calcTopAuto() }
+
+      var a = this.dimensions.activator
+      var c = this.dimensions.content
+
+      var top = this.top ? a.top - c.height : a.top
+      if (this.offsetY) { top = this.top ? top : top + a.height }
+      if (this.nudgeTop) { top -= this.nudgeTop }
+      if (this.nudgeBottom) { top += this.nudgeBottom }
+
+      return top + this.window.pageYOffset
+    },
+    sneakPeek: function sneakPeek (cb) {
+      var el = this.$refs.content
+      var currentDisplay = el.style.display
+
+      el.style.display = 'inline-block'
+      cb()
+      el.style.display = currentDisplay
+    },
     updateDimensions: function updateDimensions () {
       var this$1 = this;
 
-      var a = this.getActivator()
-      var c = this.$refs.content
-
-      this.sneakPeek(c, function () {
-        this$1.updateMaxMin()
-
+      this.sneakPeek(function () {
         this$1.dimensions = {
-          activator: this$1.measure(a),
-          content: this$1.measure(c),
-          list: this$1.measure(c, '.list'),
-          selected: this$1.auto ? this$1.measure(c, '.list__tile--active', 'parent') : null
+          activator: this$1.measure(this$1.getActivator()),
+          content: this$1.measure(this$1.$refs.content)
         }
-
-        this$1.updateScroll()
       })
-    },
-
-    updateMaxMin: function updateMaxMin () {
-      var ref = this;
-      var maxHeight = ref.maxHeight;
-      var maxAuto = ref.maxHeightAutoDefault;
-      var offsetAuto = ref.offsetAuto;
-      var auto = ref.auto;
-      var a = this.getActivator()
-      var c = this.$refs.content
-      var widthAdjust = this.nudgeWidth + Math.abs(offsetAuto.horiz) * 2
-
-      if (!this.activatorXY) {
-        c.style.minWidth = (a.getBoundingClientRect().width + widthAdjust) + "px"
-      }
-      c.style.maxHeight = null  // <-- Todo: Investigate why this fixes rendering.
-      c.style.maxHeight = isNaN(maxHeight) ? maxHeight : (maxHeight + "px")
-      c.style.maxHeight = maxHeight === null && auto ? maxAuto : c.style.maxHeight
-    },
-
-    updateScroll: function updateScroll () {
-      if (!this.auto || !this.dimensions.selected) { return }
-
-      var ref = this.dimensions;
-      var c = ref.content;
-      var s = ref.selected;
-      var l = ref.list;
-      var scrollMiddle = (c.height - s.height) / 2
-      var scrollMax = l.height - c.height
-      var offsetTop = s.offsetTop - scrollMiddle
-
-      offsetTop = this.screenOverflow.vert && offsetTop > scrollMax ? scrollMax : offsetTop
-      offsetTop = this.screenOverflow.vert && offsetTop < 0 ? 0 : offsetTop
-      offsetTop -= this.screenOverflow.vert
-
-      this.$refs.content.scrollTop = offsetTop
-    },
-
-    flip: function flip () {
-      var ref = this;
-      var auto = ref.auto;
-      var screenDist = ref.screenDist;
-      var ref$1 = this.dimensions;
-      var c = ref$1.content;
-      var ref$2 = this.direction;
-      var horiz = ref$2.horiz;
-      var vert = ref$2.vert;
-      var flipHoriz = !auto && c.width > screenDist[horiz] ? screenDist.horizMaxDir : horiz
-      var flipVert = !auto && c.height > screenDist[vert] ? screenDist.vertMaxDir : vert
-      var doFlip = flipHoriz !== horiz || flipVert !== vert
-
-      if (doFlip) {
-        this.setDirection(flipHoriz, flipVert)
-        this.updatePosition()
-      }
-
-      return doFlip
     }
   }
 };
@@ -3558,35 +3436,30 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
       if ( getParent === void 0 ) getParent = false;
 
       el = selector ? el.querySelector(selector) : el
-      el = el && getParent ? el.parentElement : el
 
       if (!el) { return null }
-      if (!el.nodeName && el.hasOwnProperty('clientX') && el.hasOwnProperty('clientY')) {
-        return {
-          top: el.clientY, bottom: el.clientY, left: el.clientX, right: el.clientX,
-          width: 0, height: 0, offsetTop: 0
-        }
-      }
 
       var ref = el.getBoundingClientRect();
       var top = ref.top;
-      var left = ref.left;
       var bottom = ref.bottom;
+      var left = ref.left;
       var right = ref.right;
-      var width = ref.width;
       var height = ref.height;
-      return { top: top, left: left, bottom: bottom, right: right, width: width, height: height, offsetTop: el.offsetTop }
+      var width = ref.width;
+
+      return {
+        offsetTop: el.offsetTop,
+        scrollHeight: el.scrollHeight,
+        top: top, bottom: bottom, left: left, right: right, height: height, width: width
+      }
     },
+    initWindow: function initWindow () {
+      this.isBooted = true
 
-    sneakPeek: function sneakPeek (el, cb) {
-      var oldOpacity = el.style.opacity
-      var oldDisplay = el.style.display
+      if (this.window === window) { return }
 
-      el.style.opacity = 0
-      el.style.display = 'inline-block'
-      cb()
-      el.style.opacity = oldOpacity
-      el.style.display = oldDisplay
+      this.window = window
+      this.window.addEventListener('resize', this.windowResizeHandler)
     }
   }
 };
@@ -3598,7 +3471,7 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_overlayable__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_themeable__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_themeable__ = __webpack_require__(1);
 
 
 
@@ -3610,6 +3483,7 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
   data: function data () {
     return {
       isActive: this.value,
+      isBooted: false,
       isMobile: false,
       mobileBreakPoint: 1024
     }
@@ -3619,6 +3493,7 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
     absolute: Boolean,
     clipped: Boolean,
     disableRouteWatcher: Boolean,
+    enableResizeWatcher: Boolean,
     height: String,
     floating: Boolean,
     fullHeight: Boolean,
@@ -3638,6 +3513,7 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
       return {
         'navigation-drawer': true,
         'navigation-drawer--absolute': this.absolute,
+        'navigation-drawer--is-booted': this.isBooted,
         'navigation-drawer--clipped': this.clipped,
         'navigation-drawer--close': !this.isActive,
         'navigation-drawer--dark': this.dark,
@@ -3682,11 +3558,13 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
 
   beforeDestroy: function beforeDestroy () {
     if (this.permanent) { return }
-    window.removeEventListener('resize', this.resize, { passive: false })
+    window.removeEventListener('resize', this.onResize, { passive: false })
   },
 
   methods: {
     init: function init () {
+      var this$1 = this;
+
       this.checkIfMobile()
 
       if (this.permanent) {
@@ -3695,7 +3573,9 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
       } else if (this.isMobile) { this.isActive = false }
       else if (!this.value && (this.persistent || this.temporary)) { this.isActive = false }
 
-      window.addEventListener('resize', this.resize, { passive: false })
+      window.addEventListener('resize', this.onResize, { passive: false })
+
+      setTimeout(function () { return (this$1.isBooted = true); }, 0)
     },
     checkIfMobile: function checkIfMobile () {
       this.isMobile = window.innerWidth <= parseInt(this.mobileBreakPoint)
@@ -3703,8 +3583,8 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
     closeConditional: function closeConditional () {
       return !this.permanent && (this.temporary || this.isMobile)
     },
-    resize: function resize () {
-      if (this.permanent || this.temporary) { return }
+    onResize: function onResize () {
+      if (!this.enableResizeWatcher || this.permanent || this.temporary) { return }
       this.checkIfMobile()
       this.isActive = !this.isMobile
     }
@@ -3989,7 +3869,8 @@ var defaultDateFormat = function (val) { return new Date(val).toISOString().subs
       'class': {
         'picker picker--date': true,
         'picker--landscape': this.landscape,
-        'picker--dark': this.dark
+        'picker--dark': this.dark,
+        'picker--light': this.light && !this.dark
       }
     }, children)
   }
@@ -4165,6 +4046,7 @@ var defaultDateFormat = function (val) { return new Date(val).toISOString().subs
         'picker picker--time': true,
         'picker--landscape': this.landscape,
         'picker--dark': this.dark,
+        'picker--light': this.light && !this.dark,
         'picker--time--hours': this.selectingHour
       }
     }, children)
@@ -4857,7 +4739,7 @@ var defaultDateFormat = function (val) { return new Date(val).toISOString().subs
     value: function value (val) {
       this.inputValue = val
       this.validate()
-      this.autocomplete && this.$refs.menu.activate()
+      this.autocomplete && this.$nextTick(this.$refs.menu.updateDimensions)
     },
     menuActive: function menuActive (val) {
       this.isBooted = true
@@ -4870,16 +4752,18 @@ var defaultDateFormat = function (val) { return new Date(val).toISOString().subs
       var this$1 = this;
 
       this.$nextTick(function () {
-        this$1.content = this$1.$refs.menu.$el.querySelector('.menu__content')
-
-        this$1.content.addEventListener('scroll', this$1.onScroll, false)
+        this$1.content && this$1.content.addEventListener('scroll', this$1.onScroll, false)
       })
     }
   },
 
+  mounted: function mounted () {
+    this.content = this.$refs.menu.$refs.content
+  },
+
   beforeDestroy: function beforeDestroy () {
     if (this.isBooted) {
-      this.content.removeEventListener('scroll', this.onScroll, false)
+      this.content && this.content.removeEventListener('scroll', this.onScroll, false)
     }
   },
 
@@ -5003,23 +4887,14 @@ var defaultDateFormat = function (val) { return new Date(val).toISOString().subs
         ref: 'menu',
         props: {
           auto: this.auto,
+          closeOnClick: false,
           closeOnContentClick: !this.multiple,
           disabled: this.disabled,
           offsetY: this.autocomplete || this.offset,
-          value: this.menuActive,
-          nudgeBottom: 2,
-          nudgeTop: -11,
-          nudgeYAuto: 2,
-          nudgeXAuto: this.multiple ? -40 : -16,
-          nudgeWidth: 25,
           maxHeight: this.maxHeight,
-          activator: this.$refs.activator,
-          bottom: this.bottom,
-          top: this.top
+          activator: this.$refs.activator
         },
-        on: {
-          input: function (val) { return (this$1.menuActive = val); }
-        }
+        on: { input: function (val) { return (this$1.menuActive = val); } }
       }
 
       return this.$createElement('v-menu', data, [this.genList()])
@@ -5135,7 +5010,10 @@ var defaultDateFormat = function (val) { return new Date(val).toISOString().subs
           'list__tile--select-multi': this.multiple
         },
         nativeOn: { click: function () { return this$1.selectItem(item); } },
-        props: { avatar: item === Object(item) && 'avatar' in item }
+        props: {
+          avatar: item === Object(item) && 'avatar' in item,
+          ripple: true
+        }
       }
 
       if (this.$scopedSlots.item) {
@@ -5431,7 +5309,7 @@ var defaultDateFormat = function (val) { return new Date(val).toISOString().subs
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_toggleable__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_contextualable__ = __webpack_require__(4);
 
 
@@ -5852,8 +5730,13 @@ var StepperHeader = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_help
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_themeable__ = __webpack_require__(1);
+
+
 var Subheader = {
   functional: true,
+
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_themeable__["a" /* default */]],
 
   props: {
     inset: Boolean
@@ -5866,6 +5749,8 @@ var Subheader = {
 
     data.staticClass = data.staticClass ? ("subheader " + (data.staticClass)) : 'subheader'
     if (props.inset) { data.staticClass += ' subheader--inset' }
+    if (props.dark && !props.light) { data.staticClass += ' subheader--dark' }
+    if (props.light) { data.staticClass += ' subheader--light' }
 
     return h('li', data, children)
   }
@@ -6298,8 +6183,8 @@ var TableOverflow = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_help
       } else if (!this.filteredItems.length) {
         children = [this.genEmptyBody(this.noResultsText)]
       } else {
-        children = this.filteredItems.map(function (item) {
-          var props = { item: item }
+        children = this.filteredItems.map(function (item, index) {
+          var props = { item: item, index: index }
 
           Object.defineProperty(props, 'selected', {
             get: function () { return this$1.selected[item[this$1.selectedKey]]; },
@@ -6371,7 +6256,6 @@ var TableOverflow = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_help
             items: this.rowsPerPageItems,
             value: this.computedPagination.rowsPerPage,
             hideDetails: true,
-            top: true,
             auto: true
           },
           on: { input: function (val) { this$1.computedPagination.rowsPerPage = val; this$1.computedPagination.page = 1 } }
@@ -6517,7 +6401,7 @@ var TableOverflow = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_help
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_bootable__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_themeable__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_themeable__ = __webpack_require__(1);
 
 
 
@@ -6531,7 +6415,6 @@ var TableOverflow = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_help
       activators: [],
       activeIndex: null,
       isMobile: false,
-      overflow: false,
       reverse: false,
       target: null,
       resizeDebounce: {},
@@ -6561,8 +6444,7 @@ var TableOverflow = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_help
         'tabs--icons': this.icons,
         'tabs--scroll-bars': this.scrollBars,
         'tabs--dark': !this.light && this.dark,
-        'tabs--light': this.light || !this.dark,
-        'tabs--overflow': this.overflow
+        'tabs--light': this.light || !this.dark
       }
     }
   },
@@ -6582,11 +6464,7 @@ var TableOverflow = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_help
 
       activators[0].componentInstance.$children
         .filter(function (i) { return i.$options._componentTag === 'v-tabs-item'; })
-        .forEach(function (i) {
-          i.toggle(this$1.target)
-
-          i.isActive && this$1.slider(i.$el)
-        })
+        .forEach(function (i) { return i.toggle(this$1.target); })
 
       this.$refs.content && this.$refs.content.$children.forEach(function (i) { return i.toggle(this$1.target, this$1.reverse, this$1.isBooted); })
       this.$emit('input', this.target)
@@ -6613,10 +6491,7 @@ var TableOverflow = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_help
 
       var tab = this$1.value || (bar[i !== -1 ? i : 0] || {}).action
 
-      // Temp fix for slider loading issue
-      setTimeout(function () {
-        tab && this$1.tabClick(tab) && this$1.resize()
-      }, 250)
+      tab && this$1.tabClick(tab) && this$1.resize()
     })
   },
 
@@ -6631,7 +6506,6 @@ var TableOverflow = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_help
       clearTimeout(this.resizeDebounce)
 
       this.resizeDebounce = setTimeout(function () {
-        this$1.slider()
         this$1.isMobile = window.innerWidth < this$1.mobileBreakPoint
       }, 0)
     },
@@ -6669,9 +6543,6 @@ var TableOverflow = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_help
         this$1.reverse = nextIndex < this$1.activeIndex
         this$1.activeIndex = nextIndex
       })
-    },
-    transitionComplete: function transitionComplete () {
-      this.overflow = false
     }
   },
 
@@ -6809,18 +6680,7 @@ var TableOverflow = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_help
     }
   },
 
-  mounted: function mounted () {
-    this.$el.addEventListener('transitionend', this.onTransitionEnd, false)
-  },
-
-  beforeDestroy: function beforeDestroy () {
-    this.$el.removeEventListener('transitionend', this.onTransitionEnd, false)
-  },
-
   methods: {
-    onTransitionEnd: function onTransitionEnd () {
-      this.tabs.transitionComplete()
-    },
     toggle: function toggle (target, reverse, showTransition) {
       this.$el.style.transition = !showTransition ? 'none' : null
       this.reverse = reverse
@@ -6901,7 +6761,12 @@ var TableOverflow = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_help
     },
 
     toggle: function toggle (action) {
+      var this$1 = this;
+
       this.isActive = this.action === action
+      this.$nextTick(function () {
+        this$1.isActive && this$1.tabs.slider(this$1.$el)
+      })
     }
   },
 
@@ -6956,8 +6821,13 @@ var TabsItems = {
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_themeable__ = __webpack_require__(1);
+
+
 /* harmony default export */ exports["a"] = {
   functional: true,
+
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_themeable__["a" /* default */]],
 
   props: {
     fixed: Boolean
@@ -6970,6 +6840,8 @@ var TabsItems = {
 
     data.staticClass = data.staticClass ? ("toolbar " + (data.staticClass)) : 'toolbar'
     if (props.fixed) { data.staticClass += ' toolbar--fixed' }
+    if (props.dark) { data.staticClass += ' toolbar--dark' }
+    if (props.light) { data.staticClass += ' toolbar--light' }
 
     return h('nav', data, children)
   }
@@ -7387,7 +7259,7 @@ function unbind (el) {
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_themeable__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_themeable__ = __webpack_require__(1);
 //
 //
 //
@@ -7545,6 +7417,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_themeable__ = __webpack_require__(1);
+//
+//
 //
 //
 //
@@ -7563,8 +7438,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ exports["default"] = {
   name: 'button-toggle',
+
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_themeable__["a" /* default */]],
 
   data: function data () {
     return {
@@ -7613,7 +7492,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
         return this.$emit('input', this.inputValue === item.value ? null : item.value)
       }
 
-      var items = this.inputValue
+      var items = this.inputValue.slice()
 
       var i = items.indexOf(item.value)
       if (i !== -1) {
@@ -7634,6 +7513,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_bootable__ = __webpack_require__(7);
 //
 //
 //
@@ -7657,8 +7537,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ exports["default"] = {
   name: 'carousel',
+
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_bootable__["a" /* default */]],
 
   data: function data () {
     return {
@@ -7707,10 +7591,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
       this.items.forEach(function (i) { return i.open(this$1.items[this$1.current]._uid, this$1.reverse); })
 
-      if (this.cycle) {
-        clearInterval(this.slideInterval)
-        this.startInterval()
-      }
+      !this.isBooted && this.cycle && this.restartInterval()
+      this.isBooted = true
+    },
+    cycle: function cycle (val) {
+      val && this.restartInterval() || clearInterval(this.slideInterval)
     }
   },
 
@@ -7719,10 +7604,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
   },
 
   methods: {
+    restartInterval: function restartInterval () {
+      clearInterval(this.slideInterval)
+      this.$nextTick(this.startInterval)
+    },
     init: function init () {
       this.current = 0
     },
-
     next: function next () {
       this.reverse = false
 
@@ -7732,7 +7620,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
       this.current++
     },
-
     prev: function prev () {
       this.reverse = true
 
@@ -7742,12 +7629,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
       this.current--
     },
-
     select: function select (index) {
       this.reverse = index < this.current
       this.current = index
     },
-
     startInterval: function startInterval () {
       this.slideInterval = setInterval(this.next, this.interval)
     }
@@ -7830,7 +7715,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_expand_transition__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_toggleable__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_toggleable__ = __webpack_require__(2);
 //
 //
 //
@@ -8383,7 +8268,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /* 117 */
 /***/ function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(2)(
+var Component = __webpack_require__(3)(
   /* script */
   __webpack_require__(108),
   /* template */
@@ -8401,7 +8286,7 @@ module.exports = Component.exports
 /* 118 */
 /***/ function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(2)(
+var Component = __webpack_require__(3)(
   /* script */
   __webpack_require__(109),
   /* template */
@@ -8419,7 +8304,7 @@ module.exports = Component.exports
 /* 119 */
 /***/ function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(2)(
+var Component = __webpack_require__(3)(
   /* script */
   __webpack_require__(110),
   /* template */
@@ -8437,7 +8322,7 @@ module.exports = Component.exports
 /* 120 */
 /***/ function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(2)(
+var Component = __webpack_require__(3)(
   /* script */
   __webpack_require__(111),
   /* template */
@@ -8455,7 +8340,7 @@ module.exports = Component.exports
 /* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(2)(
+var Component = __webpack_require__(3)(
   /* script */
   __webpack_require__(112),
   /* template */
@@ -8473,7 +8358,7 @@ module.exports = Component.exports
 /* 122 */
 /***/ function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(2)(
+var Component = __webpack_require__(3)(
   /* script */
   __webpack_require__(113),
   /* template */
@@ -8491,7 +8376,7 @@ module.exports = Component.exports
 /* 123 */
 /***/ function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(2)(
+var Component = __webpack_require__(3)(
   /* script */
   __webpack_require__(114),
   /* template */
@@ -8509,7 +8394,7 @@ module.exports = Component.exports
 /* 124 */
 /***/ function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(2)(
+var Component = __webpack_require__(3)(
   /* script */
   __webpack_require__(115),
   /* template */
@@ -8527,7 +8412,7 @@ module.exports = Component.exports
 /* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(2)(
+var Component = __webpack_require__(3)(
   /* script */
   __webpack_require__(116),
   /* template */
@@ -8896,6 +8781,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, _vm._l((_vm.options), function(option, index) {
     return _c('v-btn', {
       attrs: {
+        "dark": _vm.dark,
+        "light": _vm.light,
         "data-selected": _vm.isSelected(option),
         "data-index": index,
         "data-only-child": _vm.isSelected(option) && (!_vm.multiple || _vm.inputValue.length === 1),
@@ -8911,7 +8798,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       domProps: {
         "textContent": _vm._s(option.text)
       }
-    }) : _vm._e(), (option.icon) ? _c('v-icon', [_vm._v(_vm._s(option.icon))]) : _vm._e()], 1)
+    }) : _vm._e(), (option.icon) ? _c('v-icon', {
+      attrs: {
+        "dark": _vm.dark,
+        "light": _vm.light
+      }
+    }, [_vm._v(_vm._s(option.icon))]) : _vm._e()], 1)
   }))
 },staticRenderFns: []}
 

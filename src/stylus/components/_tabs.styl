@@ -1,12 +1,7 @@
 .tabs
+  overflow: hidden
   position: relative
   width: 100%
-  
-  &--overflow
-    overflow: hidden
-    
-    .tabs__item, .tabs__items
-      overflow: hidden
 
   > .card
     border-radius: 0
@@ -49,11 +44,16 @@
       top: 0
       width: 35px
       display: none
-      color: #fff
       align-items: center
       height: 100%
       cursor: pointer
       user-select: none
+
+      ^[0]--dark &
+        color: $color-dark
+
+      ^[0]--light &
+        color: $color-light
 
     .icon--left
       left: 0
@@ -128,7 +128,7 @@
     position: relative
     border-width: 0 1px 1px 1px
     border-style: solid
-    border-color: rgba(#000, .1)
+    border-color: rgba($material-theme.fg-color, .1)
 
   &__content
     transition: $primary-transition

@@ -1,106 +1,97 @@
 export default {
   methods: {
-    setDirection (horiz = '', vert = '') {
-      horiz = horiz || (this.left && !this.auto ? 'left' : 'right')
-      vert = vert || (this.top && !this.auto ? 'top' : 'bottom')
+    // Revisit this
+    calculateScroll () {
+      if (this.selectedIndex === null) return
 
-      this.direction = { horiz, vert }
-      this.position.top = vert === 'top' ? 'auto' : '0px'
-      this.position.left = horiz === 'left' ? 'auto' : '0px'
-      this.position.bottom = vert === 'bottom' ? 'auto' : '0px'
-      this.position.right = horiz === 'right' ? 'auto' : '0px'
+      let scrollTop = 0
+
+      if (this.selectedIndex >= this.stopIndex) {
+        scrollTop = this.$refs.content.scrollHeight
+      } else if (this.selectedIndex > this.startIndex) {
+        scrollTop = (this.selectedIndex * 48) - 56
+      }
+
+      this.$refs.content.scrollTop = scrollTop
     },
+    calcLeftAuto () {
+      const a = this.dimensions.activator
 
-    updatePosition () {
-      this.$nextTick(() => {
-        this.updateDimensions()
-
-        const { offset, screenOverflow: screen } = this
-        const { horiz, vert } = this.direction
-
-        let left = horiz === 'left' ? 'auto' : offset.horiz - screen.horiz + this.nudgeLeft
-        const top = vert === 'top' ? 'auto' : offset.vert - screen.vert + this.nudgeTop
-        const right = horiz === 'right' ? 'auto' : -offset.horiz - screen.horiz + this.nudgeRight
-        const bottom = vert === 'bottom' ? 'auto' : -offset.vert - screen.vert + this.nudgeBottom
-
-        const leftSpace = left + this.dimensions.content.width
-        if (leftSpace > this.window.innerWidth) {
-          const diff = leftSpace - this.window.innerWidth
-          left = left - diff - 16
-        }
-
-        this.position.left = left
-        this.position.right = right
-        this.position.top = top
-        this.position.bottom = bottom
-
-        const noMoreFlipping = this.flip() === false
-
-        if (noMoreFlipping) this.startTransition()
-      })
+      return parseInt(a.left - 16)
     },
+    calcTopAuto () {
+      if (!this.$refs.content) return this.calcTop(true)
 
+      const tiles = this.$refs.content.querySelectorAll('.list__tile')
+      const selectedIndex = Array.from(tiles).findIndex(n => n.classList.contains('list__tile--active'))
+
+      this.tileLength = tiles.length
+
+      if (selectedIndex === -1) {
+        this.selectedIndex = null
+
+        return this.calcTop(true)
+      }
+
+      this.selectedIndex = selectedIndex
+      let actingIndex = selectedIndex
+
+      let offsetPadding = -16
+      this.stopIndex = tiles.length - 4
+      if (selectedIndex > this.startIndex && selectedIndex < this.stopIndex) {
+        actingIndex = 2
+        offsetPadding = 24
+      } else if (selectedIndex >= this.stopIndex) {
+        offsetPadding = -8
+        actingIndex = selectedIndex - this.stopIndex
+      }
+
+      return this.calcTop(true) + offsetPadding - (actingIndex * 48)
+    },
+    calcLeft () {
+      if (this.auto) return this.calcLeftAuto()
+
+      const a = this.dimensions.activator
+      let left = a.left
+
+      if (this.offsetX) left = this.left ? left - a.width : left + a.width
+      if (this.nudgeLeft) left += this.nudgeLeft
+      if (this.nudgeRight) left -= this.nudgeRight
+
+      const totalWidth = left + this.minWidth - this.window.innerWidth
+
+      if (totalWidth > 0) left -= (totalWidth + 24) // give a little extra space
+
+      return left
+    },
+    calcTop (force) {
+      if (this.auto && !force) return this.calcTopAuto()
+
+      const a = this.dimensions.activator
+      const c = this.dimensions.content
+
+      let top = this.top ? a.top - c.height : a.top
+      if (this.offsetY) top = this.top ? top : top + a.height
+      if (this.nudgeTop) top -= this.nudgeTop
+      if (this.nudgeBottom) top += this.nudgeBottom
+
+      return top + this.window.pageYOffset
+    },
+    sneakPeek (cb) {
+      const el = this.$refs.content
+      const currentDisplay = el.style.display
+
+      el.style.display = 'inline-block'
+      cb()
+      el.style.display = currentDisplay
+    },
     updateDimensions () {
-      const a = this.getActivator()
-      const c = this.$refs.content
-
-      this.sneakPeek(c, () => {
-        this.updateMaxMin()
-
+      this.sneakPeek(() => {
         this.dimensions = {
-          activator: this.measure(a),
-          content: this.measure(c),
-          list: this.measure(c, '.list'),
-          selected: this.auto ? this.measure(c, '.list__tile--active', 'parent') : null
+          activator: this.measure(this.getActivator()),
+          content: this.measure(this.$refs.content)
         }
-
-        this.updateScroll()
       })
-    },
-
-    updateMaxMin () {
-      const { maxHeight, maxHeightAutoDefault: maxAuto, offsetAuto, auto } = this
-      const a = this.getActivator()
-      const c = this.$refs.content
-      const widthAdjust = this.nudgeWidth + Math.abs(offsetAuto.horiz) * 2
-
-      if (!this.activatorXY) {
-        c.style.minWidth = `${a.getBoundingClientRect().width + widthAdjust}px`
-      }
-      c.style.maxHeight = null  // <-- Todo: Investigate why this fixes rendering.
-      c.style.maxHeight = isNaN(maxHeight) ? maxHeight : `${maxHeight}px`
-      c.style.maxHeight = maxHeight === null && auto ? maxAuto : c.style.maxHeight
-    },
-
-    updateScroll () {
-      if (!this.auto || !this.dimensions.selected) return
-
-      const { content: c, selected: s, list: l } = this.dimensions
-      const scrollMiddle = (c.height - s.height) / 2
-      const scrollMax = l.height - c.height
-      let offsetTop = s.offsetTop - scrollMiddle
-
-      offsetTop = this.screenOverflow.vert && offsetTop > scrollMax ? scrollMax : offsetTop
-      offsetTop = this.screenOverflow.vert && offsetTop < 0 ? 0 : offsetTop
-      offsetTop -= this.screenOverflow.vert
-
-      this.$refs.content.scrollTop = offsetTop
-    },
-
-    flip () {
-      const { auto, screenDist } = this
-      const { content: c } = this.dimensions
-      const { horiz, vert } = this.direction
-      const flipHoriz = !auto && c.width > screenDist[horiz] ? screenDist.horizMaxDir : horiz
-      const flipVert = !auto && c.height > screenDist[vert] ? screenDist.vertMaxDir : vert
-      const doFlip = flipHoriz !== horiz || flipVert !== vert
-
-      if (doFlip) {
-        this.setDirection(flipHoriz, flipVert)
-        this.updatePosition()
-      }
-
-      return doFlip
     }
   }
 }

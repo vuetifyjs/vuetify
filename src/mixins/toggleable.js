@@ -1,7 +1,7 @@
 export default {
   data () {
     return {
-      isActive: this.value
+      isActive: !!this.value
     }
   },
 
@@ -13,10 +13,10 @@ export default {
 
   watch: {
     value (val) {
-      this.isActive = Boolean(val)
+      this.isActive = !!val
     },
     isActive (val) {
-      val !== this.value && this.$emit('input', val)
+      this.$emit('input', val)
     }
   }
 }

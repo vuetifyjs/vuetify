@@ -62,7 +62,6 @@
     margin-left: 10px
 
   &__logo
-    color: $color-light
     font-size: 3rem
     flex: 1;
     text-decoration: none
@@ -70,13 +69,24 @@
     display: flex
     align-items: center
 
+    ^[0]--dark &
+      color: $color-dark
+
+    ^[0]--light &
+      color: $color-light
+
   &__title
-    color: $color-light
     font-size: $headings.h6.size
     flex: 1;
     white-space: nowrap
     overflow: hidden
     text-overflow: ellipsis
+
+    ^[0]--dark &
+      color: $color-dark
+
+    ^[0]--light &
+      color: $color-light
 
     &:not(:first-child)
       padding: 0 16px
@@ -95,7 +105,6 @@
 
   &__item
     align-items: center
-    color: $color-light
     display: flex
     padding: $toolbar-item-padding
     text-decoration: none
@@ -104,11 +113,23 @@
     height: 100%
     white-space: nowrap
 
+    ^[0]--dark &
+      color: $color-dark
+
+    ^[0]--light &
+      color: $color-light
+
     i
       font-size: 2rem
 
     &:hover, &--active
       background: rgba(#000,0.1)
+
+      ^[0]--dark &
+        background: rgba($material-dark.fg-color, 0.1)
+
+      ^[0]--light &
+        background: rgba($material-light.fg-color, 0.1)
 
     &--disabled
       opacity: .5
