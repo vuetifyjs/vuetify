@@ -1,7 +1,5 @@
-<<<<<<< HEAD
-=======
 /*!
-* Vuetify v0.12.4
+* Vuetify v0.12.5
 * Forged by John Leider
 * Released under the MIT License.
 */   
@@ -3420,9 +3418,10 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
       if (this.auto) { return this.calcLeftAuto() }
 
       var a = this.dimensions.activator
-      var left = a.left
+      var c = this.dimensions.content
+      var left = this.left ? a.right - c.width : a.left
 
-      if (this.offsetX) { left = this.left ? left - a.width : left + a.width }
+      if (this.offsetX) { left += this.left ? -a.width : a.width }
       if (this.nudgeLeft) { left += this.nudgeLeft }
       if (this.nudgeRight) { left -= this.nudgeRight }
 
@@ -3437,9 +3436,9 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
 
       var a = this.dimensions.activator
       var c = this.dimensions.content
+      var top = this.top ? a.bottom - c.height : a.top
 
-      var top = this.top ? a.top - c.height : a.top
-      if (this.offsetY) { top = this.top ? top : top + a.height }
+      if (this.offsetY) { top += this.top ? -a.height : a.height }
       if (this.nudgeTop) { top -= this.nudgeTop }
       if (this.nudgeBottom) { top += this.nudgeBottom }
 
@@ -3608,6 +3607,7 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
       var this$1 = this;
 
       this.checkIfMobile()
+      setTimeout(function () { return (this$1.isBooted = true); }, 0)
 
       if (this.permanent) {
         this.isActive = true
@@ -3616,8 +3616,6 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
       else if (!this.value && (this.persistent || this.temporary)) { this.isActive = false }
 
       window.addEventListener('resize', this.onResize, { passive: false })
-
-      setTimeout(function () { return (this$1.isBooted = true); }, 0)
     },
     checkIfMobile: function checkIfMobile () {
       this.isMobile = window.innerWidth <= parseInt(this.mobileBreakPoint)
@@ -4695,7 +4693,7 @@ var defaultDateFormat = function (val) { return new Date(val).toISOString().subs
       inputValue: this.value,
       isBooted: false,
       lastItem: 20,
-      menuActive: false
+      isActive: false
     }
   },
 
@@ -4783,7 +4781,7 @@ var defaultDateFormat = function (val) { return new Date(val).toISOString().subs
       this.validate()
       this.autocomplete && this.$nextTick(this.$refs.menu.updateDimensions)
     },
-    menuActive: function menuActive (val) {
+    isActive: function isActive (val) {
       this.isBooted = true
       this.lastItem += !val ? 20 : 0
 
@@ -4828,7 +4826,7 @@ var defaultDateFormat = function (val) { return new Date(val).toISOString().subs
     onScroll: function onScroll () {
       var this$1 = this;
 
-      if (!this.menuActive) {
+      if (!this.isActive) {
         setTimeout(function () { return (this$1.content.scrollTop = 0); }, 50)
       } else {
         var showMoreItems = (
@@ -4874,7 +4872,7 @@ var defaultDateFormat = function (val) { return new Date(val).toISOString().subs
       ref: 'activator',
       directives: [{
         name: 'click-outside',
-        value: function () { return (this$1.menuActive = false); }
+        value: function () { return (this$1.isActive = false); }
       }],
       on: {
         keydown: function (e) {
@@ -4947,9 +4945,9 @@ var defaultDateFormat = function (val) { return new Date(val).toISOString().subs
           offsetY: this.autocomplete || this.offset,
           maxHeight: this.maxHeight,
           activator: this.$refs.activator,
-          value: this.menuActive
+          value: this.isActive
         },
-        on: { input: function (val) { return (this$1.menuActive = val); } }
+        on: { input: function (val) { return (this$1.isActive = val); } }
       }
 
       return this.$createElement('v-menu', data, [this.genList()])
@@ -4967,7 +4965,7 @@ var defaultDateFormat = function (val) { return new Date(val).toISOString().subs
             input: function (e) { return (this$1.searchValue = e.target.value); },
             keyup: function (e) {
               if (e.keyCode === 27) {
-                this$1.menuActive = false
+                this$1.isActive = false
                 e.target.blur()
               }
             }
@@ -8902,4 +8900,3 @@ if (typeof window !== 'undefined' && window.Vue) {
 /******/ ]);
 });
 //# sourceMappingURL=vuetify.js.map
->>>>>>> master
