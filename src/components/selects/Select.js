@@ -177,7 +177,17 @@ export default {
       this.genSelectionsAndSearch(),
       this.genMenu()
     ], {
-      ref: 'activator'
+      ref: 'activator',
+      directives: [{
+        name: 'click-outside',
+        value: () => (this.menuActive = false)
+      }],
+      on: {
+        keydown: e => {
+          if (e.keyCode === 27) this.$refs.menu.isActive = false
+          if ([40, 38].includes(e.keyCode)) this.$refs.menu.changeListIndex(e)
+        }
+      }
     })
   }
 }

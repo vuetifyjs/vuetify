@@ -3,11 +3,12 @@ import Generators from './mixins/generators'
 import Position from './mixins/position'
 import Utils from './mixins/utils'
 import Toggleable from '../../mixins/toggleable'
+import Keyable from './mixins/keyable'
 
 export default {
   name: 'menu',
 
-  mixins: [Activator, Generators, Position, Utils, Toggleable],
+  mixins: [Activator, Generators, Keyable, Position, Utils, Toggleable],
 
   data () {
     return {
@@ -165,7 +166,7 @@ export default {
       this.resizeTimeout = setTimeout(this.updateDimensions, 200)
     },
     startTransition () {
-      this.isContentActive = true     // <-- Trigger v-show on content.
+      this.isContentActive = true
       this.$nextTick(this.calculateScroll)
     }
   },
@@ -178,7 +179,10 @@ export default {
         value: () => this.closeOnClick
       }],
       on: {
-        keyup: e => { if (e.keyCode === 27) this.isActive = false }
+        keydown: e => {
+          if (e.keyCode === 27) this.isActive = false
+          if ([40, 38].includes(e.keyCode)) this.changeListIndex(e)
+        }
       }
     }
 
