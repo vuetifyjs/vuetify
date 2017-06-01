@@ -10,7 +10,8 @@ export default {
           disabled: this.disabled,
           offsetY: this.autocomplete || this.offset,
           maxHeight: this.maxHeight,
-          activator: this.$refs.activator
+          activator: this.$refs.activator,
+          value: this.menuActive
         },
         on: { input: val => (this.menuActive = val) }
       }
