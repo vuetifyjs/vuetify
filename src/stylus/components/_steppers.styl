@@ -120,7 +120,6 @@
 .stepper
   &__wrapper
     overflow: hidden
-    transform: translateZ(0) // fix for #512
     transition: .4s $transition.ease-in-out
 
 .stepper
@@ -128,9 +127,13 @@
     top: initial
     bottom: 0
     padding: 16px
-    overflow: hidden
     transition: .4s $transition.ease-in-out
     flex: 1
+    // Chrome has an issue with overflow hidden for rendering
+    // Originally used translateZ but this messes up fixed
+    // elements within the stepper
+    // Fix for #512 and #620
+    // overflow: hidden
     width: 100%
 
     .btn

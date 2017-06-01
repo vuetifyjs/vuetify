@@ -71,7 +71,7 @@ export default {
       const c = this.dimensions.content
 
       let top = this.top ? a.top - c.height : a.top
-      if (this.offsetY) top = this.top ? top - a.height : top + a.height
+      if (this.offsetY) top = this.top ? top : top + a.height
       if (this.nudgeTop) top -= this.nudgeTop
       if (this.nudgeBottom) top += this.nudgeBottom
 

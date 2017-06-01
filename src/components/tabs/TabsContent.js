@@ -35,18 +35,7 @@ export default {
     }
   },
 
-  mounted () {
-    this.$el.addEventListener('transitionend', this.onTransitionEnd, false)
-  },
-
-  beforeDestroy () {
-    this.$el.removeEventListener('transitionend', this.onTransitionEnd, false)
-  },
-
   methods: {
-    onTransitionEnd () {
-      this.tabs.transitionComplete()
-    },
     toggle (target, reverse, showTransition) {
       this.$el.style.transition = !showTransition ? 'none' : null
       this.reverse = reverse

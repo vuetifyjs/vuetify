@@ -94,10 +94,10 @@ export default {
     inputValue (val) {
       this.$emit('input', val)
     },
-    isBooted () {
-      this.$nextTick(() => {
-        this.content && this.content.addEventListener('scroll', this.onScroll, false)
-      })
+    value (val) {
+      this.inputValue = val
+      this.validate()
+      this.autocomplete && this.$nextTick(this.$refs.menu.updateDimensions)
     },
     menuActive (val) {
       this.isBooted = true
@@ -106,10 +106,10 @@ export default {
       if (!val) this.blur()
       else this.focus()
     },
-    value (val) {
-      this.inputValue = val
-      this.validate()
-      this.autocomplete && this.$nextTick(this.$refs.menu.updateDimensions)
+    isBooted () {
+      this.$nextTick(() => {
+        this.content && this.content.addEventListener('scroll', this.onScroll, false)
+      })
     }
   },
 
