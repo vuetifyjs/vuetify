@@ -52,9 +52,10 @@ export default {
       if (this.auto) return this.calcLeftAuto()
 
       const a = this.dimensions.activator
-      let left = a.left
+      const c = this.dimensions.content
+      let left = this.left ? a.right - c.width : a.left
 
-      if (this.offsetX) left = this.left ? left - a.width : left + a.width
+      if (this.offsetX) left += this.left ? -a.width : a.width
       if (this.nudgeLeft) left += this.nudgeLeft
       if (this.nudgeRight) left -= this.nudgeRight
 
@@ -69,9 +70,9 @@ export default {
 
       const a = this.dimensions.activator
       const c = this.dimensions.content
+      let top = this.top ? a.bottom - c.height : a.top
 
-      let top = this.top ? a.top - c.height : a.top
-      if (this.offsetY) top = this.top ? top : top + a.height
+      if (this.offsetY) top += this.top ? -a.height : a.height
       if (this.nudgeTop) top -= this.nudgeTop
       if (this.nudgeBottom) top += this.nudgeBottom
 
