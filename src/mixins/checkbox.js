@@ -47,8 +47,9 @@ export default {
         return
       }
 
-      let input = this.inputValue.slice()
+      let input = this.inputValue
       if (Array.isArray(input)) {
+        input = input.slice()
         const i = input.indexOf(this.value)
 
         if (i === -1) {
