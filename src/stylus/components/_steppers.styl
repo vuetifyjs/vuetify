@@ -4,17 +4,16 @@
   elevation(2)
 
 .stepper
-  .divider
-    align-self: center
-    margin: 0 -16px
-
-.stepper
   &__header
     align-items: stretch
     display: flex
     flex-wrap: wrap
     justify-content: space-between
     elevation(2)
+
+    .divider
+      align-self: center
+      margin: 0 -16px
 
 
 .stepper
@@ -163,9 +162,10 @@
       margin-right: 12px
 
   &--alt-labels
-    .divider
-      margin: 35px -67px 0
-      align-self: flex-start
+    .stepper__header
+      .divider
+        margin: 35px -67px 0
+        align-self: flex-start
 
     .stepper__step
       flex-direction: column
