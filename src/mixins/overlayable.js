@@ -17,9 +17,12 @@ export default {
 
       const overlay = document.createElement('div')
       overlay.className = 'overlay'
+      overlay.onclick = () => {
+        if (!this.persistent) this.isActive = false
+      }
       if (this.absolute) overlay.className += ' overlay--absolute'
 
-      this.$el.parentNode.insertBefore(overlay, this.$el.nextSibling)
+      document.body.appendChild(overlay)
 
       setTimeout(() => {
         overlay.className += ' overlay--active'
