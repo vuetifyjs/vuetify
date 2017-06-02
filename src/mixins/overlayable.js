@@ -18,12 +18,19 @@ export default {
       const overlay = document.createElement('div')
       overlay.className = 'overlay'
       overlay.onclick = () => {
-        if (!this.persistent) this.isActive = false
+        if (this.permanet) return
+        else if (!this.persistent) this.isActive = false
+        else if (this.isMobile) this.isActive = false
       }
+
       if (this.absolute) overlay.className += ' overlay--absolute'
 
       this.hideScroll()
-      document.body.appendChild(overlay)
+
+      const app = this.$el.closest('[data-app]')
+      app &&
+        app.appendChild(overlay) ||
+        document.body.appendChild(overlay)
 
       setTimeout(() => {
         overlay.className += ' overlay--active'
