@@ -3,8 +3,15 @@ export default {
     genTHead () {
       const children = this.headers.map(o => this.genHeader(o))
       const checkbox = this.$createElement('v-checkbox', {
-        class: 'primary--text',
         props: {
+          dark: this.dark,
+          light: this.light,
+          primary: this.selectAll === 'primary',
+          secondary: this.selectAll === 'secondary',
+          success: this.selectAll === 'success',
+          info: this.selectAll === 'info',
+          warning: this.selectAll === 'warning',
+          error: this.selectAll === 'error',
           hideDetails: true,
           inputValue: this.all,
           indeterminate: this.indeterminate
