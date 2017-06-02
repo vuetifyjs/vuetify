@@ -3,7 +3,8 @@ function directive (e, el, binding, v) {
 
   if (binding.value) cb = binding.value
 
-  if ((e && e.target) &&
+  if (v.context.isActive &&
+    (e && e.target) &&
     (e.target !== el && !el.contains(e.target)) &&
     cb(e)
   ) {
