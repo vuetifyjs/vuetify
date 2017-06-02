@@ -53,8 +53,9 @@ export default {
     isActive (val) {
       if (val) {
         !this.fullscreen && !this.hideOverlay && this.genOverlay()
+        this.fullscreen && this.hideScroll()
       } else {
-        this.removeOverlay()        
+        this.removeOverlay()
       }
     }
   },

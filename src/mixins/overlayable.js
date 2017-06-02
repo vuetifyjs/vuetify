@@ -22,8 +22,7 @@ export default {
       }
       if (this.absolute) overlay.className += ' overlay--absolute'
 
-      document.documentElement.style.overflowY = 'hidden'
-      document.documentElement.style.paddingRight = '17px'
+      this.hideScroll()
       document.body.appendChild(overlay)
 
       setTimeout(() => {
@@ -37,11 +36,18 @@ export default {
       addOnceEventListener(this.overlay, 'transitionend', () => {
         this.overlay && this.overlay.remove()
         this.overlay = null
-        document.documentElement.style.overflowY = null
-        document.documentElement.style.paddingRight = null
+        this.showScroll()
       })
 
       this.overlay.className = this.overlay.className.replace('overlay--active', '')
+    },
+    hideScroll () {
+      document.documentElement.style.overflowY = 'hidden'
+      document.documentElement.style.paddingRight = '17px'
+    },
+    showScroll () {
+      document.documentElement.style.overflowY = null
+      document.documentElement.style.paddingRight = null
     }
   }
 }
