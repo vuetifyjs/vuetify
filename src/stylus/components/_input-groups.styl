@@ -45,10 +45,11 @@
       .input-group__details:before
         background-image: linear-gradient(to right, rgba(0, 0, 0, .38) 0, rgba(0, 0, 0, .38) 33%, transparent 0)
 
-  &--focused
-    .input-group__details
-      &:after
-        width: 100%
+  &--focused, &:focus
+    &:not(.input-group--disabled)
+      .input-group__details
+        &:after
+          width: 100%
 
   &--active
     //
