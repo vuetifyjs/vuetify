@@ -183,10 +183,7 @@ export default {
         value: () => (this.isActive = false)
       }],
       on: {
-        keydown: e => {
-          if (e.keyCode === 27) this.$refs.menu.isActive = false
-          if ([40, 38].includes(e.keyCode)) this.$refs.menu.changeListIndex(e)
-        }
+        keydown: e => this.$refs.menu.changeListIndex(e)
       }
     })
   }
