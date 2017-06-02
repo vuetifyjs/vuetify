@@ -3,7 +3,7 @@ export default {
     genTable () {
       const children = []
       const data = {
-        'class': 'picker--date__table',
+        'class': 'picker--date__table'
       }
 
       if (this.scrollable) {

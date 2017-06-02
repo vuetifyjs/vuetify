@@ -161,7 +161,7 @@ export default {
       this.inputTime = this.originalTime
       if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
     },
-    isAllowed(type, value) {
+    isAllowed (type, value) {
       const allowed = this[`allowed${type.charAt(0).toUpperCase() + type.slice(1)}s`]
 
       if (!allowed) return true
@@ -171,16 +171,18 @@ export default {
       } else if (allowed instanceof Function) {
         return allowed(value)
       } else if (allowed instanceof Object) {
-        const range = type === 'minute' && this.ranges.minutes || !this.is24hr && this.ranges.hours.slice(1, 13) || this.ranges.hours
+        const range = type === 'minute' && this.ranges.minutes ||
+          !this.is24hr && this.ranges.hours.slice(1, 13) ||
+          this.ranges.hours
+
         const mod = type === 'minute' && 60 || !this.is24hr && 12 || 24
         const offset = type === 'hour' && !this.is24hr ? 1 : 0
 
         let steps = allowed.max - allowed.min
         steps < 0 && (steps = steps + mod)
 
-        let j = allowed.min
         for (let i = 0; i <= steps; i++) {
-          const index = (j - offset + i) % mod
+          const index = (allowed.min - offset + i) % mod
           if (range[index] === value) return true
         }
 
@@ -189,7 +191,7 @@ export default {
 
       return true
     },
-    generateRange(type, start) {
+    generateRange (type, start) {
       let range = type === 'hour' ? this.ranges.hours : this.ranges.minutes
       let offset = 1
 
