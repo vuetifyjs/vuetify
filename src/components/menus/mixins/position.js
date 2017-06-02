@@ -22,10 +22,7 @@ export default {
     calcTopAuto () {
       if (!this.$refs.content) return this.calcTop(true)
 
-      const tiles = this.$refs.content.querySelectorAll('.list__tile')
-      const selectedIndex = Array.from(tiles).findIndex(n => n.classList.contains('list__tile--active'))
-
-      this.tileLength = tiles.length
+      const selectedIndex = Array.from(this.tiles).findIndex(n => n.classList.contains('list__tile--active'))
 
       if (selectedIndex === -1) {
         this.selectedIndex = null
@@ -37,7 +34,7 @@ export default {
       let actingIndex = selectedIndex
 
       let offsetPadding = -16
-      this.stopIndex = tiles.length - 4
+      this.stopIndex = this.tiles.length - 4
       if (selectedIndex > this.startIndex && selectedIndex < this.stopIndex) {
         actingIndex = 2
         offsetPadding = 24
