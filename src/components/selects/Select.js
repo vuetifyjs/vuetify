@@ -13,7 +13,7 @@ export default {
       inputValue: this.value,
       isBooted: false,
       lastItem: 20,
-      menuActive: false
+      isActive: false
     }
   },
 
@@ -99,7 +99,7 @@ export default {
       this.validate()
       this.autocomplete && this.$nextTick(this.$refs.menu.updateDimensions)
     },
-    menuActive (val) {
+    isActive (val) {
       this.isBooted = true
       this.lastItem += !val ? 20 : 0
 
@@ -138,7 +138,7 @@ export default {
       return item === Object(item) && (this.itemValue in item) ? item[this.itemValue] : item
     },
     onScroll () {
-      if (!this.menuActive) {
+      if (!this.isActive) {
         setTimeout(() => (this.content.scrollTop = 0), 50)
       } else {
         const showMoreItems = (
@@ -180,7 +180,7 @@ export default {
       ref: 'activator',
       directives: [{
         name: 'click-outside',
-        value: () => (this.menuActive = false)
+        value: () => (this.isActive = false)
       }],
       on: {
         keydown: e => {

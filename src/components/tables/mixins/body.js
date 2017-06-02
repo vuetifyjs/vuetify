@@ -8,8 +8,8 @@ export default {
       } else if (!this.filteredItems.length) {
         children = [this.genEmptyBody(this.noResultsText)]
       } else {
-        children = this.filteredItems.map((item, index) => {
-          const props = { item, index }
+        children = this.filteredItems.map((item) => {
+          const props = { item }
 
           Object.defineProperty(props, 'selected', {
             get: () => this.selected[item[this.selectedKey]],
