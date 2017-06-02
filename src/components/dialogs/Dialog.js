@@ -53,8 +53,12 @@ export default {
     isActive (val) {
       if (val) {
         !this.fullscreen && !this.hideOverlay && this.genOverlay()
+        document.body.style.overflowY = 'hidden'
+        document.body.style.paddingRight = '15px'
       } else {
-        this.removeOverlay()
+        this.removeOverlay()        
+        document.body.style.overflowY = null
+        document.body.style.paddingRight = null
       }
     }
   },
