@@ -26,6 +26,7 @@ export default {
     changeListIndex (e) {
       [40, 38].includes(e.keyCode) && e.preventDefault()
 
+      if (this.listIndex === -1) this.setActiveListIndex()
       if ([27, 9].includes(e.keyCode)) this.isActive = false
       else if (e.keyCode === 40 && this.listIndex < this.tiles.length - 1) this.listIndex++
       else if (e.keyCode === 38 && this.listIndex > 0) this.listIndex--
@@ -34,6 +35,14 @@ export default {
     },
     getTiles () {
       this.tiles = this.$refs.content.querySelectorAll('.list__tile')
+    },
+    setActiveListIndex () {
+      this.tiles.forEach((t, i) => {
+        if (t.classList.contains('list__tile--active')) {
+          this.listIndex = i
+          return
+        }
+      })
     }
   }
 }
