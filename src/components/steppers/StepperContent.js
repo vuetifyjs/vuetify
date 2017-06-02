@@ -29,9 +29,11 @@ export default {
         : 'v-tab-transition'
     },
     styles () {
-      return this.isVertical
-        ? { 'height': `${this.height}px` }
-        : {}
+      if (!this.isVertical) return {}
+
+      return {
+        height: !isNaN(this.height) ? `${this.height}px` : this.height
+      }
     },
     wrapperClasses () {
       return {
@@ -54,7 +56,28 @@ export default {
     }
   },
 
+  mounted () {
+    this.$refs.wrapper.addEventListener(
+      'transitionend',
+      this.onTransition,
+      false
+    )
+  },
+
+  beforeDestroy () {
+    this.$refs.wrapper.removeEventListener(
+      'transitionend',
+      this.onTransition,
+      false
+    )
+  },
+
   methods: {
+    onTransition () {
+      if (!this.isActive) return
+
+      this.height = 'auto'
+    },
     enter () {
       let scrollHeight = 0
 
@@ -65,10 +88,12 @@ export default {
 
       this.height = 0
 
+      // Give the collapsing element time to collapse
       setTimeout(() => (this.height = scrollHeight), 450)
     },
     leave () {
-      this.height = 0
+      this.height = this.$refs.wrapper.clientHeight
+      setTimeout(() => (this.height = 0), 0)
     },
     toggle (step, reverse) {
       this.isActive = step.toString() === this.step.toString()

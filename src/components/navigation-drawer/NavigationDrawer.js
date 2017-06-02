@@ -90,6 +90,7 @@ export default {
   methods: {
     init () {
       this.checkIfMobile()
+      setTimeout(() => (this.isBooted = true), 0)
 
       if (this.permanent) {
         this.isActive = true
@@ -98,8 +99,6 @@ export default {
       else if (!this.value && (this.persistent || this.temporary)) this.isActive = false
 
       window.addEventListener('resize', this.onResize, { passive: false })
-
-      setTimeout(() => (this.isBooted = true), 0)
     },
     checkIfMobile () {
       this.isMobile = window.innerWidth <= parseInt(this.mobileBreakPoint)

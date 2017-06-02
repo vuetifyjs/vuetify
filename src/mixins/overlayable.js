@@ -17,9 +17,20 @@ export default {
 
       const overlay = document.createElement('div')
       overlay.className = 'overlay'
+      overlay.onclick = () => {
+        if (this.permanet) return
+        else if (!this.persistent) this.isActive = false
+        else if (this.isMobile) this.isActive = false
+      }
+
       if (this.absolute) overlay.className += ' overlay--absolute'
 
-      this.$el.parentNode.insertBefore(overlay, this.$el.nextSibling)
+      this.hideScroll()
+
+      const app = this.$el.closest('[data-app]')
+      app &&
+        app.appendChild(overlay) ||
+        document.body.appendChild(overlay)
 
       setTimeout(() => {
         overlay.className += ' overlay--active'
@@ -32,9 +43,18 @@ export default {
       addOnceEventListener(this.overlay, 'transitionend', () => {
         this.overlay && this.overlay.remove()
         this.overlay = null
+        this.showScroll()
       })
 
       this.overlay.className = this.overlay.className.replace('overlay--active', '')
+    },
+    hideScroll () {
+      document.documentElement.style.overflowY = 'hidden'
+      document.documentElement.style.paddingRight = '17px'
+    },
+    showScroll () {
+      document.documentElement.style.overflowY = null
+      document.documentElement.style.paddingRight = null
     }
   }
 }
