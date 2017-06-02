@@ -42,18 +42,23 @@
 
   &--light
     background: $material-light.bg-color
-    border-right: 1px solid rgba($material-light.fg-color, $material-light.divider-percent)
     navigation-drawer(rgba($material-light.fg-color, .87))
 
     .divider
       background: $material-twelve-percent-dark
+      
+    &:not(.navigation-drawer--right)
+      border-right: 1px solid rgba($material-light.fg-color, $material-light.divider-percent)
+    
+    &.navigation-drawer--right
+      border-left: 1px solid rgba($material-light.fg-color, $material-light.divider-percent)
 
   &--permanent, &--persistent
     &.navigation-drawer--clipped, &.navigation-drawer--floating
       margin-top: $toolbar-height
       max-height: "calc(100vh - %s)" % $toolbar-height
 
-      + .toolbar, ~ .footer.footer--fixed, ~ .footer.footer--absolute
+      ~ .toolbar, ~ .footer.footer--fixed, ~ .footer.footer--absolute
         padding-left: 0
         z-index: 3
 
@@ -63,18 +68,26 @@
   &--permanent
     &:not(.navigation-drawer--clipped):not(.navigation-drawer--floating)
       ~ main,
-      + .toolbar,
+      ~ .toolbar,
       ~ .footer
         padding-left: $navigation-drawer-width
 
   &--persistent
-    &.navigation-drawer--open:not(.navigation-drawer--is-mobile)
+    &.navigation-drawer--open:not(.navigation-drawer--is-mobile):not(.navigation-drawer--right)
       &:not(.navigation-drawer--clipped)
-        + .toolbar
+        ~ .toolbar
           padding-left: $navigation-drawer-width
 
       ~ main, ~ .footer:not(.footer--fixed):not(.footer--absolute)
         padding-left: $navigation-drawer-width
+
+    &.navigation-drawer--open.navigation-drawer--right:not(.navigation-drawer--is-mobile)
+      &:not(.navigation-drawer--clipped)
+        + .toolbar
+          padding-right: $navigation-drawer-width
+
+      ~ main, ~ .footer:not(.footer--fixed):not(.footer--absolute)
+        padding-right: $navigation-drawer-width
 
   &--mini-variant
     margin-top: $toolbar-height
@@ -108,7 +121,7 @@
     &:not(.navigation-drawer--close)
       elevation(16)
 
-  + toolbar
+  ~ toolbar
     + main
       min-height: "calc(100vh - %s)" % $toolbar-height
 
