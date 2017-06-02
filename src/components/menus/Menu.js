@@ -154,6 +154,7 @@ export default {
   methods: {
     activate () {
       this.initWindow()
+      this.getTiles()
       this.updateDimensions()
       this.$nextTick(this.startTransition)
     },
@@ -181,7 +182,7 @@ export default {
       on: {
         keydown: e => {
           if (e.keyCode === 27) this.isActive = false
-          if ([40, 38].includes(e.keyCode)) this.changeListIndex(e)
+          else this.changeListIndex(e)
         }
       }
     }
