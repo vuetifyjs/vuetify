@@ -54,7 +54,10 @@ export default {
 
       const activators = this.$slots.activators
 
-      if (!activators || !activators.length || !activators[0].componentInstance.$children) return
+      if (!activators ||
+        !activators.length ||
+        (activators.length &&
+          !activators[0].componentInstance.$children)) return
 
       activators[0].componentInstance.$children
         .filter(i => i.$options._componentTag === 'v-tabs-item')
