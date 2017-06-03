@@ -55,7 +55,8 @@ export default {
         !this.fullscreen && !this.hideOverlay && this.genOverlay()
         this.fullscreen && this.hideScroll()
       } else {
-        this.removeOverlay()
+        if (!this.fullscreen) this.removeOverlay()
+        else this.showScroll()
       }
     }
   },
@@ -71,7 +72,7 @@ export default {
     this.app &&
       this.app.contains(this.$refs.content) &&
       this.app.removeChild(this.$refs.content)
-    },
+  },
 
   methods: {
     closeConditional (e) {

@@ -50,7 +50,8 @@ export default {
     },
     hideScroll () {
       document.documentElement.style.overflowY = 'hidden'
-      document.documentElement.style.paddingRight = '17px'
+      window.innerWidth > 1024 &&
+        (document.documentElement.style.paddingRight = '17px')
     },
     showScroll () {
       document.documentElement.style.overflowY = null
