@@ -1,5 +1,9 @@
+import Themeable from '../../mixins/themeable'
+
 const Footer = {
   functional: true,
+
+  mixins: [Themeable],
 
   props: {
     absolute: Boolean,
@@ -11,6 +15,8 @@ const Footer = {
 
     if (props.absolute) data.staticClass += ' footer--absolute'
     if (props.fixed) data.staticClass += ' footer--fixed'
+    if (props.dark && !props.light) data.staticClass += ' footer--dark'
+    if (props.light) data.staticClass += ' footer--light'
 
     return h('footer', data, children)
   }

@@ -1,5 +1,9 @@
+import Themeable from '../../mixins/themeable'
+
 export default {
   name: 'list',
+
+  mixins: [Themeable],
 
   data () {
     return {
@@ -22,7 +26,9 @@ export default {
         'list--two-line': this.twoLine,
         'list--dense': this.dense,
         'list--three-line': this.threeLine,
-        'list--subheader': this.subheader
+        'list--subheader': this.subheader,
+        'list--dark': this._dark,
+        'list--light': this._light,
       }
     }
   },

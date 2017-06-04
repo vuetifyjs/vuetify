@@ -1,10 +1,11 @@
 import GenerateRouteLink from '../../mixins/route-link'
 import Toggleable from '../../mixins/toggleable'
+import Themeable from '../../mixins/themeable'
 
 export default {
   name: 'list-tile',
 
-  mixins: [GenerateRouteLink, Toggleable],
+  mixins: [GenerateRouteLink, Toggleable, Themeable],
 
   props: {
     activeClass: {
@@ -20,7 +21,9 @@ export default {
         'list__tile': true,
         'list__tile--active': this.isActive,
         'list__tile--avatar': this.avatar,
-        'list__tile--disabled': this.disabled
+        'list__tile--disabled': this.disabled,
+        'list__tile--dark': this._dark,
+        'list__tile--light': this._light,
       }
     }
   },

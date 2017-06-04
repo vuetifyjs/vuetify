@@ -4,9 +4,15 @@ export default {
       type: Boolean,
       default: true
     },
-    light: {
-      type: Boolean,
-      default: false
+    light: Boolean
+  },
+
+  computed: {
+    _dark () {
+      return this.dark && !this.light
+    },
+    _light () {
+      return this.light
     }
   }
 }

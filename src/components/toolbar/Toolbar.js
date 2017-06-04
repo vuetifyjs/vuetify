@@ -12,7 +12,8 @@ export default {
   render (h, { data, children, props }) {
     data.staticClass = data.staticClass ? `toolbar ${data.staticClass}` : 'toolbar'
     if (props.fixed) data.staticClass += ' toolbar--fixed'
-    data.staticClass += props.light ? ' toolbar--light' : ' toolbar--dark'
+    if (props.dark && !props.light) data.staticClass += ' toolbar--dark'
+    if (props.light) data.staticClass += ' toolbar--light'
 
     return h('nav', data, children)
   }

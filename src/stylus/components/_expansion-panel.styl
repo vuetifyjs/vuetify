@@ -13,6 +13,12 @@
   width: 100%
   elevation(2)
 
+  &--dark
+    color: rgba($material-light.fg-color, $material-light.primary-text-percent)
+
+  &--light
+    color: rgba($material-dark.fg-color, $material-dark.primary-text-percent)
+
   > li
     border: 1px solid rgba($material-theme.fg-color, $material-theme.divider-percent)
     &:not(:first-child)

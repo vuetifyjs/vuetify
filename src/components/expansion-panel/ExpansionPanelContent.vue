@@ -1,5 +1,5 @@
 <template lang="pug">
-  li
+  li(v-bind:class="panelClasses")
     div(
       class="expansion-panel__header"
       v-bind:class="classes"
@@ -26,11 +26,12 @@
 <script>
   import Expand from '../../mixins/expand-transition'
   import Toggleable from '../../mixins/toggleable'
+  import Themeable from '../../mixins/themeable'
 
   export default {
     name: 'expansion-panel-content',
 
-    mixins: [Expand, Toggleable],
+    mixins: [Expand, Toggleable, Themeable],
 
     data () {
       return {
@@ -46,6 +47,12 @@
       classes () {
         return {
           'expansion-panel__header--active': this.isActive
+        }
+      },
+      panelClasses () {
+        return {
+          'expansion-panel--dark': this._dark,
+          'expansion-panel--light': this._light,
         }
       }
     },
@@ -63,7 +70,7 @@
 
     methods: {
       closeConditional (e) {
-        return this.$parent.$el.contains(e.target) && 
+        return this.$parent.$el.contains(e.target) &&
           !this.$parent.expand &&
           !this.$el.contains(e.target)
       },

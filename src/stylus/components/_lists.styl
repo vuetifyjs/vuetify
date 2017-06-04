@@ -4,6 +4,16 @@
   padding-bottom: $list-bottom-padding
   transition: height .4s $transition.fast-out-slow-in
 
+  &--dark
+    color: rgba($material-light.fg-color, $material-light.primary-text-percent)
+    .icon
+      color: rgba($material-light.fg-color, $material-light.primary-text-percent)
+
+  &--light
+    color: rgba($material-dark.fg-color, $material-dark.primary-text-percent)
+    .icon
+      color: rgba($material-dark.fg-color, $material-dark.primary-text-percent)
+
   .input-group
     margin: 0
 
@@ -25,6 +35,18 @@
     margin: 0
     transition: $primary-transition
     position: relative
+
+    &--dark
+      color: rgba($material-light.fg-color, $material-light.primary-text-percent)
+
+      .icon
+        color: rgba($material-light.fg-color, $material-light.primary-text-percent)
+
+    &--light
+      color: rgba($material-dark.fg-color, $material-dark.primary-text-percent)
+
+      .icon
+        color: rgba($material-dark.fg-color, $material-dark.primary-text-percent)
 
     &:after
       content: ''
@@ -211,6 +233,10 @@
 
           .list__tile__title
             color: inherit
+            opacity: $material-theme.secondary-text-percent
+
+          .list__tile__action:first-of-type
+            opacity: $material-theme.secondary-text-percent
 
           .list__tile__action:last-of-type
             .icon
