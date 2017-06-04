@@ -11,9 +11,9 @@ export default {
           offsetY: this.autocomplete || this.offset,
           maxHeight: this.maxHeight,
           activator: this.$refs.activator,
-          value: this.menuActive
+          value: this.isActive
         },
-        on: { input: val => (this.menuActive = val) }
+        on: { input: val => (this.isActive = val) }
       }
 
       return this.$createElement('v-menu', data, [this.genList()])
@@ -29,7 +29,7 @@ export default {
             input: e => (this.searchValue = e.target.value),
             keyup: e => {
               if (e.keyCode === 27) {
-                this.menuActive = false
+                this.isActive = false
                 e.target.blur()
               }
             }

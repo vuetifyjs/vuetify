@@ -28,7 +28,6 @@ export default {
         'tabs__item--disabled': this.disabled
       }
     },
-
     action () {
       const to = this.to || this.href
 
@@ -36,17 +35,34 @@ export default {
 
       return to.replace('#', '')
     },
-
     tabs () {
       return closestParentTag.call(this, 'v-tabs')
     }
   },
 
+  watch: {
+    '$route' () {
+      this.router && this.callSlider()
+    }
+  },
+
+  mounted () {
+    this.callSlider()
+  },
+
   methods: {
+    callSlider () {
+      setTimeout(() => {
+        this.$el.firstChild.classList.contains('tabs__item--active') &&
+        this.tabs.slider(this.$el)
+      }, 0)
+    },
     click (e) {
       e.preventDefault()
 
-      this.tabs.tabClick(this.action)
+      !this.router &&
+        this.tabs.tabClick(this.action) ||
+        this.callSlider()
     },
 
     toggle (action) {

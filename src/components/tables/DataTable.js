@@ -54,7 +54,7 @@ export default {
       type: String,
       default: 'Rows per page:'
     },
-    selectAll: Boolean,
+    selectAll: [Boolean, String],
     search: {
       required: false
     },
@@ -108,7 +108,7 @@ export default {
       default: null
     },
     loading: {
-      type: Boolean,
+      type: [Boolean, String],
       default: false
     },
     selectedKey: {
