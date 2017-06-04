@@ -21,8 +21,6 @@
     "autoprefixer": "^6.6.0",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.10",
-    "buble": "^0.15.1",
-    "buble-loader": "^0.4.0",
     "chai": "^3.5.0",
     "chalk": "^1.1.3",
     "chromedriver": "^2.21.2",
@@ -76,8 +74,7 @@
     "webpack-merge": "^0.17.0"
   },
   "dependencies": {
-    "vue": "^2.3.3",
-    "vue-server-renderer": "^2.3.3"
+    "vue": "^2.3.3"
   },
   "engines": {
     "node": ">= 4.0.0",
