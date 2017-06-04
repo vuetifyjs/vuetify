@@ -3,14 +3,6 @@
   position: relative
   min-height: 100vh
 
-  &--dark
-    background: $body-bg-dark
-    color: $color-light
-
-  &--light
-    background: $body-bg-light
-    color: $color-dark
-
   &--toolbar
     > main > .container
       min-height: 'calc(100vh - %s)' % $toolbar-height
@@ -30,3 +22,388 @@
     &.application--toolbar
       > aside.navigation-drawer.navigation-drawer--clipped
         max-height: 'calc(100vh - %s - %s)' % ($toolbar-height $footer-height)
+
+// Main theme
+.application
+  &--dark
+    application(
+      $body-bg-dark,
+      $color-light
+    )
+
+  &--light
+    application(
+      $body-bg-light,
+      $color-dark
+    )
+    
+
+
+  // drawer
+  // &--dark
+  //   background: $navigation-drawer-background-dark
+  //   navigation-drawer($material-dark.fg-color)
+
+  //   .divider
+  //     background: $material-twelve-percent-light
+
+  // &--light
+  //   background: $navigation-drawer-background-light
+  //   navigation-drawer(rgba($material-light.fg-color, .87))
+
+  //   .divider
+  //     background: $material-twelve-percent-dark
+
+  //   &:not(.navigation-drawer--right)
+  //     border-right: 1px solid rgba($material-light.fg-color, $material-light.divider-percent)
+
+  //   &.navigation-drawer--right
+  //     border-left: 1px solid rgba($material-light.fg-color, $material-light.divider-percent)
+
+  // toolbar
+    
+    // ^[0]--dark &
+    //   color: $color-dark
+
+    // ^[0]--light &
+    //   color: $color-light
+      
+    // item
+      
+
+    // ^[0]--dark &
+    //   color: $color-dark
+
+    // ^[0]--light &
+    //   color: $color-light
+      
+    // item hover
+      
+
+    // &:hover, &--active
+    //   background: rgba(#000,0.1)
+
+      // ^[0]--dark &
+      //   background: rgba($material-dark.fg-color, 0.1)
+
+      // ^[0]--light &
+      //   background: rgba($material-light.fg-color, 0.1)
+    // input-group
+      
+
+    // &--dark
+    //   .icon
+    //     color: rgba($material-light.fg-color, $material-light.active-icon-percent)
+
+    // &--light
+    //   .icon
+    //     color: rgba($material-dark.fg-color, $material-dark.active-icon-percent)
+
+    // &--dark.input-group--focused.input-group--prepend-icon,
+    // &--dark.input-group--focused.input-group--append-icon
+    //   .icon
+    //     color: rgba($material-light.fg-color, $material-light.active-icon-percent)
+
+    // &--light.input-group--focused.input-group--prepend-icon,
+    // &--light.input-group--focused.input-group--append-icon
+    //   .icon
+    //     color: rgba($material-dark.fg-color, $material-dark.active-icon-percent)
+  // button
+  // flat
+    
+
+    // &.btn--dark
+    //   &:hover:after
+    //     background-color: $button-dark-overlay
+
+    //   &.btn--disabled
+    //     color: $button-dark-disabled-color
+
+// .btn
+//   &--light
+//     color: $color-light
+
+//     &:hover:after
+//       background-color: $button-light-overlay
+
+//     // Do not show disabled styles when using loader
+//     &.btn--disabled:not(.btn--loader)
+//       color: $button-light-disabled-color !important
+//       opacity: 1
+
+//       &:not(.btn--flat):not(.btn--icon)
+//         background-color: $button-light-overlay !important
+
+//   &--dark
+//     color: $color-dark
+
+//     &:hover:after
+//       background-color: $button-dark-overlay
+
+//     // Do not show disabled styles when using loader
+//     &.btn--disabled:not(.btn--loader)
+//       color: $button-dark-disabled-color !important
+//       opacity: 1
+
+//       &:not(.btn--flat):not(.btn--icon)
+//         background-color: $button-dark-overlay !important
+
+// button dropdown
+
+
+  // &--light
+  //   btn-dropdown-theme($material-twelve-percent-dark)
+
+  // &--dark
+  //   btn-dropdown-theme($material-twelve-percent-light)
+    
+// cards
+// .application--dark
+//   .card
+//     background: $grey.darken-3
+
+// .application--light
+//   .card
+//     background: $body-bg-light
+
+// time-picker
+  // &.picker--dark      
+  //   .picker--time__clock
+  //     background: $grey.darken-2
+
+  //     &-hand:before
+  //       border-color: $theme.accent
+
+  //     &-hand, &:after
+  //       background: $theme.accent
+
+  //     > span
+  //       color: #fff
+
+  //       &.active
+  //         color: #000
+          
+  //         &:before
+  //           background: $theme.accent
+// date-picker
+// .picker--date
+//   &.picker--dark
+//     .picker--date__header, .picker--date__years
+//       background: $grey.darken-3
+//       color: #fff
+      
+//       .btn
+//         color: #fff
+        
+//     .picker--date__table
+//       table
+//         th, td, .btn
+//           color: #fff
+          
+//         .btn.btn--floating
+//           &:after
+//             background: $theme.accent !important
+
+//         .btn--active
+//           color: #000
+
+//         .btn--floating.btn--current:not(.btn--active)
+//           color: $theme.accent
+// pickers
+
+
+  // &--dark
+  //   color: $color-light
+
+  //   .btn
+  //     color: $color-light
+
+  //   .picker__body
+  //     background: $grey.darken-3
+
+  //   .picker__title
+  //     background: $grey.darken-2
+
+  // &--light
+  //   color: $color-light
+
+  //   .btn
+  //     color: $color-dark
+
+  //   .picker__body
+  //     background: $material-light.bg-color
+  //     color: $color-dark
+
+  //   .picker__title
+  //     background: $theme.primary
+// dividers
+// .application--light
+//   .divider
+//     background: $material-twelve-percent-dark
+
+// .application--dark
+//   .divider
+//     background: $material-twelve-percent-light
+
+    
+//   &.divider--dark
+//     background: $material-twelve-percent-light
+
+//   &.divider--light
+//     background: $material-twelve-percent-dark
+
+// expansion-panel
+// .application--dark
+//   .expansion-panel
+//     color: $color-light
+
+// .application--light
+//   .expansion-panel
+//     color: $color-dark
+
+// input-group-disabled
+    // &.input-group--light
+    //   .input-group__details:before
+    //     background-image: linear-gradient(to right, rgba(255, 255, 255, .38) 0, rgba(255, 255, 255, .38) 33%, transparent 0)
+
+    // &.input-group--dark
+    //   .input-group__details:before
+    //     background-image: linear-gradient(to right, rgba(0, 0, 0, .38) 0, rgba(0, 0, 0, .38) 33%, transparent 0)
+      
+// input-group
+  // &--light
+  //   .input-group__hint
+  //     color: rgba($material-dark.fg-color, .54)
+
+  //   .input-group__details:before
+  //     background-color: $material-twelve-percent-light
+
+  //   .icon
+  //     color: rgba($material-dark.fg-color, .6)
+
+  // &--dark
+  //   .input-group__hint
+  //     color: rgba($material-light.fg-color, .7)
+
+  //   .input-group__details:before
+  //     background-color: $material-twelve-percent-dark
+
+  //   .icon
+  //     color: rgba($material-light.fg-color, .6)
+    
+// icons
+
+
+  // &--dark
+  //   icon(rgba($material-light.fg-color, $material-light.active-icon-percent), rgba($material-light.fg-color, $material-light.inactive-icon-percent))
+
+  // &--light
+  //   icon(rgba($material-dark.fg-color, $material-dark.active-icon-percent), rgba($material-dark.fg-color, $material-dark.inactive-icon-percent))
+    
+  // select
+    
+// .input-group--select
+//   &.input-group--light
+//     .input-group__selections__comma
+//       color: $color-light
+
+//     .input-group__selections__comma--active
+//       color: $theme.primary
+
+//   &.input-group--dark
+//     .input-group__selections__comma
+//       color: $color-dark
+
+// selection controls
+// .input-group--selection-controls
+//   &.switch
+//     &.input-group
+//       &--light
+//         selection-controls-switch-theme($selection-switch-light-color,
+//           $selection-switch-light-background,
+//           $selection-switch-light-label-color,
+//           $selection-switch-light-enabled-color,
+//           $selection-switch-light-disabled-color,
+//           $selection-switch-light-disabled-background)
+//       &--dark
+//         selection-controls-switch-theme($selection-switch-dark-color,
+//           $selection-switch-dark-background,
+//           $selection-switch-dark-label-color,
+//           $selection-switch-dark-enabled-color,
+//           $selection-switch-dark-disabled-color,
+//           $selection-switch-dark-disabled-background)
+
+//   &.checkbox, &.radio
+//     &.input-group
+//       &--light
+//         selection-controls-checkbox-theme($selection-controls-light-color,
+//           $selection-controls-light-label-color,
+//           $selection-controls-light-disabled-color,
+//           $selection-controls-active-color)
+
+//       &--dark
+//         selection-controls-checkbox-theme($selection-controls-dark-color,
+//           $selection-controls-dark-label-color,
+//           $selection-controls-dark-disabled-color,
+//           $selection-controls-active-color)
+
+//       &.input-group--active
+//         &.primary--text
+//         &.secondary--text
+//         &.success--text
+//         &.info--text
+//         &.warning--text
+//         &.error--text
+//           .icon, .input-group--selection-controls__ripple
+//             color: currentColor !important
+
+// sliders
+// .input-group--slider
+//   &.input-group--light
+//     slider-theme($slider-light-off,
+//       $slider-light-focus-off,
+//       $input-group-light-focus,
+//       $slider-light-label,
+//       $slider-light-ticks
+//     )
+    
+//   &.input-group--dark
+//     slider-theme($slider-dark-off,
+//       $slider-dark-focus-off,
+//       $input-group-dark-focus,
+//       $slider-dark-label,
+//       $slider-dark-ticks
+//     )
+
+// subheaders
+
+
+//   &--dark
+//     color: rgba($material-light.fg-color, $material-light.secondary-text-percent)
+
+//   &--light
+//     color: rgba($material-dark.fg-color, $material-light.secondary-text-percent)
+
+// .application--dark
+//   .subheader:not(.subheader--dark):not(.subheader--light)
+//     color: rgba($material-dark.fg-color, $material-dark.secondary-text-percent)
+
+// .application--light
+//   .subheader:not(.subheader--dark):not(.subheader--light)
+//     color: rgba($material-light.fg-color, $material-light.secondary-text-percent)
+
+// text-fields
+// .input-group--text-field
+//   &.input-group--light
+//     input-group-theme(
+//       $input-group-light-normal,
+//       #000,
+//       $input-group-light-focus
+//     )
+
+//   &.input-group--dark
+//     input-group-theme(
+//       $input-group-dark-normal,
+//       #fff,
+//       $input-group-dark-focus
+//     )

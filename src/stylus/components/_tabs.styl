@@ -46,12 +46,6 @@
       cursor: pointer
       user-select: none
 
-      ^[0]--dark &
-        color: $color-dark
-
-      ^[0]--light &
-        color: $color-light
-
     .icon--left
       left: 0
 
@@ -98,18 +92,6 @@
     text-overflow: ellipsis
     transition: $primary-transition
     white-space: nowrap
-
-    ^[0]--dark ^[-2..-1]
-      color: rgba($material-light.fg-color, $material-light.inactive-icon-percent)
-
-      &--active
-        color: rgba($material-light.fg-color, $material-light.active-icon-percent)
-
-    ^[0]--light ^[-2..-1]
-      color: rgba($material-dark.fg-color, $material-dark.inactive-icon-percent)
-
-      &--active
-        color: rgba($material-dark.fg-color, $material-dark.active-icon-percent)
 
     .icon
       color: inherit

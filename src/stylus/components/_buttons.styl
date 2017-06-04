@@ -67,13 +67,6 @@
       &.btn--disabled
         color: $button-light-disabled-color
 
-    &.btn--dark
-      &:hover:after
-        background-color: $button-dark-overlay
-
-      &.btn--disabled
-        color: $button-dark-disabled-color
-
   &--raised
     will-change: box-shadow
     elevation(2)
@@ -148,37 +141,6 @@
         font-size: $button-floating-large-icon-width
         height: $button-floating-large-icon-width
         width: $button-floating-large-icon-width
-
-
-/** Themes */
-.btn
-  &--light
-    color: $color-light
-
-    &:hover:after
-      background-color: $button-light-overlay
-
-    // Do not show disabled styles when using loader
-    &.btn--disabled:not(.btn--loader)
-      color: $button-light-disabled-color !important
-      opacity: 1
-
-      &:not(.btn--flat):not(.btn--icon)
-        background-color: $button-light-overlay !important
-
-  &--dark
-    color: $color-dark
-
-    &:hover:after
-      background-color: $button-dark-overlay
-
-    // Do not show disabled styles when using loader
-    &.btn--disabled:not(.btn--loader)
-      color: $button-dark-disabled-color !important
-      opacity: 1
-
-      &:not(.btn--flat):not(.btn--icon)
-        background-color: $button-dark-overlay !important
 
 /** Sizes */
 .btn

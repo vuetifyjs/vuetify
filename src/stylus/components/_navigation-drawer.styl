@@ -33,26 +33,6 @@
   &--absolute
     position: absolute
 
-  &--dark
-    background: $navigation-drawer-background-dark
-    navigation-drawer($material-dark.fg-color)
-
-    .divider
-      background: $material-twelve-percent-light
-
-  &--light
-    background: $navigation-drawer-background-light
-    navigation-drawer(rgba($material-light.fg-color, .87))
-
-    .divider
-      background: $material-twelve-percent-dark
-
-    &:not(.navigation-drawer--right)
-      border-right: 1px solid rgba($material-light.fg-color, $material-light.divider-percent)
-
-    &.navigation-drawer--right
-      border-left: 1px solid rgba($material-light.fg-color, $material-light.divider-percent)
-
   &--permanent, &--persistent
     &.navigation-drawer--clipped, &.navigation-drawer--floating
       margin-top: $toolbar-height

@@ -1,6 +1,5 @@
 .picker
   border-radius: $card-border-radius
-  // color: $material-theme.fg-color
   display: flex
   flex-direction: column
   width: 290px
@@ -16,35 +15,9 @@
     padding: 16px
 
   &__body
-    // color: #000
     height: 290px
     overflow: hidden
     position: relative
-
-  &--dark
-    color: $color-light
-
-    .btn
-      color: $color-light
-
-    .picker__body
-      background: $grey.darken-3
-
-    .picker__title
-      background: $grey.darken-2
-
-  &--light
-    color: $color-light
-
-    .btn
-      color: $color-dark
-
-    .picker__body
-      background: $material-light.bg-color
-      color: $color-dark
-
-    .picker__title
-      background: $theme.primary
 
   &--landscape
     flex-direction: row

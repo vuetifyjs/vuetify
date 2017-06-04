@@ -37,14 +37,6 @@
       background-size: 3px 1px
       background-repeat: repeat-x
 
-    &.input-group--light
-      .input-group__details:before
-        background-image: linear-gradient(to right, rgba(255, 255, 255, .38) 0, rgba(255, 255, 255, .38) 33%, transparent 0)
-
-    &.input-group--dark
-      .input-group__details:before
-        background-image: linear-gradient(to right, rgba(0, 0, 0, .38) 0, rgba(0, 0, 0, .38) 33%, transparent 0)
-
   &--focused, &:focus
     &:not(.input-group--disabled)
       .input-group__details
@@ -57,26 +49,6 @@
   &--error
     .input-group__details:after
       background-color: $theme.error
-
-  &--light
-    .input-group__hint
-      color: rgba($material-dark.fg-color, .54)
-
-    .input-group__details:before
-      background-color: $material-twelve-percent-light
-
-    .icon
-      color: rgba($material-dark.fg-color, .6)
-
-  &--dark
-    .input-group__hint
-      color: rgba($material-light.fg-color, .7)
-
-    .input-group__details:before
-      background-color: $material-twelve-percent-dark
-
-    .icon
-      color: rgba($material-light.fg-color, .6)
 
 /** Icons */
 .input-group
