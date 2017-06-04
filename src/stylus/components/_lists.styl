@@ -14,6 +14,8 @@
     position: relative
 
   &__tile
+    font-size: $list-tile-font-size
+    font-weight: $list-tile-font-weight
     color: $color-theme
     display: flex
     height: $list-item-single-height
@@ -50,9 +52,6 @@
       width: 100%
 
     &__title
-      font-size: $list-title-font-size
-      // line-height: 1.15
-      font-weight: $list-title-font-weight
       transition: $primary-transition
       position: relative
       text-align: left
@@ -60,8 +59,6 @@
     &__sub-title
       color: rgba($material-theme.fg-color, $material-theme.secondary-text-percent)
       font-size: $list-sub-title-font-size
-      // line-height: 1.3
-      font-weight: $list-sub-title-font-weight
 
     .avatar
       justify-content: flex-start
@@ -82,8 +79,14 @@
       .icon
         transition: $primary-transition
 
+      .btn //fix button padding if used
+        padding 0
+        margin 0
+        &--icon
+          margin -8px
+
       &-text
-        color: $grey.base
+        color: $list-action-text-font-color
         font-size: $list-action-text-font-size
 
       &--stack
@@ -97,7 +100,6 @@
     &__content
       text-align: left
       flex: 0 1 100%
-      font-size: $list-content-font-size
       overflow: hidden
       display: flex
       align-items: flex-start
@@ -111,28 +113,43 @@
         justify-content: flex-end
 
     &--active
-      .list__tile__title
-        color: $theme.primary
+        color: $list-tile-active-color
 
     &--disabled
       opacity: 0.4
       pointer-events: none
 
-    &--avatar
-      height: $list-item-avatar-single-height
-
     &--select-multi
       padding: 0 10px
+
+    &--avatar
+      height: $list-item-avatar-single-height
 
   &--dense
     padding-top: $list-item-dense-top-padding
 
+    .subheader
+      font-size: $subheader-dense-font-size
+      height: $list-dense-subheader-height
+    .list--group
+      .subheader
+        height $list-dense-subheader-group-height
     .list__tile
-      height: $list-item-dense-single-height
       font-size: $list-item-dense-font-size
 
-    .list__tile__title
-      font-size: $list-item-dense-font-size
+      &--avatar
+        height: $list-item-dense-avatar-single-height
+
+        .avatar
+          .icon, img
+            height: $list-item-dense-avatar-height
+            width: $list-item-dense-avatar-height
+
+      &:not(.list__tile--avatar)
+        height: $list-item-dense-single-height
+
+      .icon
+        font-size: $list-item-dense-icon-font-size
 
     .list__tile__sub-title
       font-size: $list-item-dense-font-size
@@ -176,13 +193,9 @@
     .list__tile
       padding-left: $list-item-left-padding
 
-      .list__tile__title
-        font-weight: $list-group-tile-title-font-weight
-
     .list__tile--active
       .list__tile__title
         color: $theme.primary
-        font-weight: $list-group-tile-title-active-font-weight
 
     &__header
       + .list--group

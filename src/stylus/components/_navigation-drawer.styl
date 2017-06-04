@@ -11,7 +11,7 @@
   left: 0
   will-change: transform
   z-index: 3
-  
+
   // Remove animation when booting up
   &:not(.navigation-drawer--is-booted)
     transition: none !important
@@ -34,22 +34,22 @@
     position: absolute
 
   &--dark
-    background: $theme.secondary
+    background: $navigation-drawer-background-dark
     navigation-drawer($material-dark.fg-color)
 
     .divider
       background: $material-twelve-percent-light
 
   &--light
-    background: $material-light.bg-color
+    background: $navigation-drawer-background-light
     navigation-drawer(rgba($material-light.fg-color, .87))
 
     .divider
       background: $material-twelve-percent-dark
-      
+
     &:not(.navigation-drawer--right)
       border-right: 1px solid rgba($material-light.fg-color, $material-light.divider-percent)
-    
+
     &.navigation-drawer--right
       border-left: 1px solid rgba($material-light.fg-color, $material-light.divider-percent)
 
@@ -128,6 +128,7 @@
   > .list
     .list__tile
       transition: none
+      font-weight: $navigation-drawer-item-font-weight
 
       &--active
         .list__tile__title
@@ -135,18 +136,25 @@
 
         > *:first-child
           .icon
-            color: $theme.primary
+            color: $navigation-drawer-item-active-color
 
     .list--group
+      .list__tile
+        font-weight: $navigation-drawer-group-item-font-weight
+
       &__header--active
         &:after
           background: transparent
 
         .list__tile__action:first-of-type
           .icon
-            color: $theme.primary
+            color: $navigation-drawer-item-active-color
 
     .list--group__container
       .list__tile--active
         .list__tile__title
-          color: $theme.primary
+          color: $navigation-drawer-item-active-color
+
+  > .list:not(.list--dense)
+    .list__tile
+      font-size: $navigation-drawer-item-font-size
