@@ -1,12 +1,11 @@
 import Contextualable from '../../mixins/contextualable'
 import Toggleable from '../../mixins/toggleable'
 import GenerateRouteLink from '../../mixins/route-link'
-import Themeable from '../../mixins/themeable'
 
 export default {
   name: 'fab',
 
-  mixins: [Contextualable, GenerateRouteLink, Toggleable, Themeable],
+  mixins: [Contextualable, GenerateRouteLink, Toggleable],
 
   data: () => ({
     changeTimeout: {},
@@ -43,8 +42,6 @@ export default {
     classes () {
       return {
         'fab': true,
-        'fab--dark': this.dark && !this.light,
-        'fab--light': this.light,
         'fab--small': this.mini,
         'fab--hidden': this.hidden,
         'fab--lateral': this.lateral,

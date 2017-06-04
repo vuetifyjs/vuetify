@@ -1,10 +1,9 @@
 import Overlayable from '../../mixins/overlayable'
-import Themeable from '../../mixins/themeable'
 
 export default {
   name: 'navigation-drawer',
 
-  mixins: [Overlayable, Themeable],
+  mixins: [Overlayable],
 
   data () {
     return {
@@ -42,11 +41,9 @@ export default {
         'navigation-drawer--is-booted': this.isBooted,
         'navigation-drawer--clipped': this.clipped,
         'navigation-drawer--close': !this.isActive,
-        'navigation-drawer--dark': this.dark,
         'navigation-drawer--floating': this.floating,
         'navigation-drawer--full-height': this.fullHeight,
         'navigation-drawer--is-mobile': this.isMobile,
-        'navigation-drawer--light': this.light,
         'navigation-drawer--mini-variant': this.miniVariant,
         'navigation-drawer--open': this.isActive,
         'navigation-drawer--permanent': this.permanent,

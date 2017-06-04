@@ -1,12 +1,11 @@
 import Contextualable from '../../mixins/contextualable'
 import Toggleable from '../../mixins/toggleable'
 import GenerateRouteLink from '../../mixins/route-link'
-import Themeable from '../../mixins/themeable'
 
 export default {
   name: 'btn',
 
-  mixins: [Contextualable, GenerateRouteLink, Toggleable, Themeable],
+  mixins: [Contextualable, GenerateRouteLink, Toggleable],
 
   props: {
     activeClass: {
@@ -43,14 +42,12 @@ export default {
         'btn': true,
         'btn--active': this.isActive,
         'btn--block': this.block,
-        'btn--dark': !this.light && this.dark,
         'btn--default': this.default,
         'btn--disabled': this.disabled,
         'btn--flat': this.flat,
         'btn--floating': this.floating,
         'btn--icon': this.icon,
         'btn--large': this.large,
-        'btn--light': this.light || !this.dark,
         'btn--loader': this.loading,
         'btn--outline': this.outline,
         'btn--raised': !this.flat,

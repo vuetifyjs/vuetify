@@ -4,8 +4,6 @@
     v-bind:class="classes"
   )
     v-btn(
-      v-bind:dark="dark"
-      v-bind:light="light"
       v-for="(option, index) in options"
       v-on:click.native.stop="updateValue(option)"
       v-bind:data-selected="isSelected(option)"
@@ -14,16 +12,12 @@
       flat
     )
       span(v-if="option.text" v-text="option.text")
-      v-icon(v-if="option.icon" v-bind:dark="dark" v-bind:light="light") {{ option.icon }}
+      v-icon(v-if="option.icon") {{ option.icon }}
 </template>
 
 <script>
-  import Themeable from '../../mixins/themeable'
-
   export default {
     name: 'button-toggle',
-
-    mixins: [Themeable],
 
     data () {
       return {
