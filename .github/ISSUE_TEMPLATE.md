@@ -1,10 +1,11 @@
 <!--
+Any issue created without this markup will be immediately closed
 
 Reporting a bug?
 ================
 - Always search for your issue first. It may have already been answered, planned or fixed in some branch.
 
-- Can you reproduce the issue outside of your environment? Please provide a jsfiddle or codepen example that demonstrates the bug. A codepen template can be found [here](http://codepen.io/pen?template=bgJOrX)
+- Can you reproduce the issue outside of your environment? Please provide a jsfiddle or codepen example that demonstrates the bug. A codepen template can be found [here](https://codepen.io/johnjleider/pen/bgJOrX)
 
 Have a feature request?
 =======================
