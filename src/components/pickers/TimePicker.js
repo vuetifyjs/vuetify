@@ -136,7 +136,7 @@ export default {
 
   watch: {
     period (val) {
-      const hour = this.selectingHour ? this.firstAllowed('hour', this.hour) : this.hour
+      const hour = !!this.allowedHours && this.selectingHour ? this.firstAllowed('hour', this.hour) : this.hour
       this.inputTime = `${hour}:${this.minute}${val}`
     },
     value (val) {
