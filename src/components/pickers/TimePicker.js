@@ -136,7 +136,8 @@ export default {
 
   watch: {
     period (val) {
-      this.inputTime = `${this.hour}:${this.minute}${val}`
+      const hour = this.selectingHour ? this.firstAllowed('hour', this.hour) : this.hour
+      this.inputTime = `${hour}:${this.minute}${val}`
     },
     value (val) {
       if (this.isSaving) {
@@ -170,19 +171,23 @@ export default {
         return !!allowed.find(v => v === value)
       } else if (allowed instanceof Function) {
         return allowed(value)
-      } else if (allowed instanceof Object) {
-        const range = type === 'minute' && this.ranges.minutes ||
-          !this.is24hr && this.ranges.hours.slice(1, 13) ||
-          this.ranges.hours
+      } else if (allowed === Object(allowed)) {
+        const range = type === 'minute' ? this.ranges.minutes : this.ranges.hours
+        const mod = type === 'minute' ? 60 : 24
 
-        const mod = type === 'minute' && 60 || !this.is24hr && 12 || 24
-        const offset = type === 'hour' && !this.is24hr ? 1 : 0
+        if (allowed.min === String(allowed.min)) {
+          allowed.min = this.convert12to24hr(allowed.min)
+        }
 
-        let steps = allowed.max - allowed.min
-        steps < 0 && (steps = steps + mod)
+        if (allowed.max === String(allowed.max)) {
+          allowed.max = this.convert12to24hr(allowed.max)
+        }
+
+        const steps = allowed.max - allowed.min
+        value = type === 'hour' && !this.is24hr && this.period === 'pm' ? value + 12 : value
 
         for (let i = 0; i <= steps; i++) {
-          const index = (allowed.min - offset + i) % mod
+          const index = (allowed.min + i) % mod
           if (range[index] === value) return true
         }
 
@@ -190,6 +195,13 @@ export default {
       }
 
       return true
+    },
+    convert12to24hr (input) {
+      input = input.toLowerCase()
+      const pm = input.indexOf('pm') !== -1
+      const hour = parseInt(input.slice(0, input.indexOf(pm ? 'pm' : 'am')))
+
+      return pm ? hour + 12 : hour
     },
     generateRange (type, start) {
       let range = type === 'hour' ? this.ranges.hours : this.ranges.minutes
