@@ -1,5 +1,5 @@
 /*!
-* Vuetify v0.12.6
+* Vuetify v0.12.7
 * Forged by John Leider
 * Released under the MIT License.
 */   
@@ -418,7 +418,7 @@ module.exports = function normalizeComponent (
 
   data: function data () {
     return {
-      errors: [],
+      errorBucket: [],
       focused: false,
       tabFocused: false,
       lazyValue: this.value
@@ -429,10 +429,16 @@ module.exports = function normalizeComponent (
     appendIcon: String,
     appendIconCb: Function,
     disabled: Boolean,
+    error: Boolean,
+    errors: {
+      type: [String, Array],
+      default: function () { return []; }
+    },
     hint: String,
     hideDetails: Boolean,
-    persistentHint: Boolean,
     label: String,
+    persistentHint: Boolean,
+    placeholder: String,
     prependIcon: String,
     prependIconCb: Function,
     required: Boolean,
@@ -445,13 +451,12 @@ module.exports = function normalizeComponent (
     },
     value: {
       required: false
-    },
-    placeholder: String
+    }
   },
 
   computed: {
     hasError: function hasError () {
-      return this.errors.length !== 0
+      return this.validations.length || this.error
     },
     inputGroupClasses: function inputGroupClasses () {
       return Object.assign({
@@ -462,7 +467,7 @@ module.exports = function normalizeComponent (
         'input-group--disabled': this.disabled,
         'input-group--light': this.light || !this.dark,
         'input-group--dark': !this.light && this.dark,
-        'input-group--error': this.hasError || this.errors.length > 0,
+        'input-group--error': this.hasError,
         'input-group--append-icon': this.appendIcon,
         'input-group--prepend-icon': this.prependIcon,
         'input-group--required': this.required,
@@ -491,6 +496,11 @@ module.exports = function normalizeComponent (
       }
 
       return Object.assign(modifiers, model.modifiers)
+    },
+    validations: function validations () {
+      return (!Array.isArray(this.errors)
+        ? [this.errors]
+        : this.errors).concat(this.errorBucket)
     }
   },
 
@@ -522,11 +532,11 @@ module.exports = function normalizeComponent (
             this.focused ||
             this.hint &&
             this.persistentHint) &&
-          this.errors.length === 0
+          this.validations.length === 0
       ) {
         messages = [this.genHint()]
-      } else if (this.errors.length) {
-        messages = this.errors.map(function (i) { return this$1.genError(i); })
+      } else if (this.validations.length) {
+        messages = this.validations.map(function (i) { return this$1.genError(i); })
       }
 
       return this.$createElement(
@@ -640,7 +650,7 @@ module.exports = function normalizeComponent (
     validate: function validate () {
       var this$1 = this;
 
-      this.errors = []
+      this.errorBucket = []
 
       this.rules.forEach(function (rule) {
         var valid = typeof rule === 'function'
@@ -648,7 +658,7 @@ module.exports = function normalizeComponent (
           : rule
 
         if (valid !== true) {
-          this$1.errors.push(valid)
+          this$1.errorBucket.push(valid)
         }
       })
     }
@@ -2426,9 +2436,10 @@ var Footer = {
       }
     },
     hasError: function hasError () {
-      return this.errors.length !== 0 ||
+      return this.errors.length > 0 ||
         !this.counterIsValid() ||
-        !this.validateIsValid()
+        !this.validateIsValid() ||
+        this.error
     },
     count: function count () {
       var inputLength = (this.inputValue && this.inputValue.toString() || '').length
@@ -6032,7 +6043,7 @@ var Subheader = {
       return this.totalItems || this.items.length
     },
     indeterminate: function indeterminate () {
-      return this.selectAll && this.someItems && !this.everyItem
+      return this.selectAll !== false && this.someItems && !this.everyItem
     },
     everyItem: function everyItem () {
       var this$1 = this;
@@ -6143,7 +6154,7 @@ var Subheader = {
       h('table', {
         'class': {
           'datatable table': true,
-          'datatable--select-all': this.selectAll
+          'datatable--select-all': this.selectAll !== false
         }
       }, [
         this.genTHead(),
@@ -6459,7 +6470,7 @@ var TableOverflow = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_help
         on: { change: this.toggle }
       })
 
-      this.selectAll && children.unshift(this.$createElement('th', [checkbox]))
+      this.selectAll !== false && children.unshift(this.$createElement('th', [checkbox]))
 
       return this.$createElement('thead', [this.genTR(children)])
     },
