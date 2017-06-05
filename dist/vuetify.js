@@ -219,19 +219,7 @@ function getObjectValueByPath (obj, path) {
 
 
 /***/ },
-/* 1 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony default export */ exports["a"] = {
-  props: {
-    dark: Boolean,
-    light: Boolean
-  }
-};
-
-
-/***/ },
+/* 1 */,
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -358,7 +346,9 @@ module.exports = function normalizeComponent (
       var options = this.to || this.href
 
       var data = {
-        attrs: {},
+        attrs: {
+          disabled: this.disabled
+        },
         class: this.classes,
         props: {},
         directives: [{
@@ -404,12 +394,7 @@ module.exports = function normalizeComponent (
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__themeable__ = __webpack_require__(1);
-
-
 /* harmony default export */ exports["a"] = {
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__themeable__["a" /* default */]],
-
   data: function data () {
     return {
       errors: [],
@@ -454,8 +439,6 @@ module.exports = function normalizeComponent (
         'input-group--dirty': this.isDirty,
         'input-group--tab-focused': this.tabFocused,
         'input-group--disabled': this.disabled,
-        'input-group--light': this.light || !this.dark,
-        'input-group--dark': !this.light && this.dark,
         'input-group--error': this.hasError || this.errors.length > 0,
         'input-group--append-icon': this.appendIcon,
         'input-group--prepend-icon': this.prependIcon,
@@ -1392,8 +1375,8 @@ var Avatar = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_contextualable__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_toggleable__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_route_link__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_themeable__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_schemable__ = __webpack_require__(138);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_route_link__ = __webpack_require__(5);
 
 
 
@@ -1402,7 +1385,7 @@ var Avatar = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 /* harmony default export */ exports["a"] = {
   name: 'btn',
 
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_contextualable__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__mixins_route_link__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__mixins_toggleable__["a" /* default */], __WEBPACK_IMPORTED_MODULE_3__mixins_themeable__["a" /* default */]],
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_contextualable__["a" /* default */], __WEBPACK_IMPORTED_MODULE_3__mixins_route_link__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__mixins_schemable__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__mixins_toggleable__["a" /* default */]],
 
   props: {
     activeClass: {
@@ -1439,19 +1422,18 @@ var Avatar = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
         'btn': true,
         'btn--active': this.isActive,
         'btn--block': this.block,
-        'btn--dark': !this.light && this.dark,
         'btn--default': this.default,
-        'btn--disabled': this.disabled,
         'btn--flat': this.flat,
         'btn--floating': this.floating,
         'btn--icon': this.icon,
         'btn--large': this.large,
-        'btn--light': this.light || !this.dark,
         'btn--loader': this.loading,
         'btn--outline': this.outline,
         'btn--raised': !this.flat,
         'btn--round': this.round,
         'btn--small': this.small,
+        'dark--text dark--bg': this.dark,
+        'light--text light--bg': this.light,
         'primary': this.primary && !this.outline,
         'secondary': this.secondary && !this.outline,
         'success': this.success && !this.outline,
@@ -1519,8 +1501,6 @@ var Avatar = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_contextualable__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_toggleable__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_route_link__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_themeable__ = __webpack_require__(1);
-
 
 
 
@@ -1528,7 +1508,7 @@ var Avatar = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 /* harmony default export */ exports["a"] = {
   name: 'fab',
 
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_contextualable__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__mixins_route_link__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__mixins_toggleable__["a" /* default */], __WEBPACK_IMPORTED_MODULE_3__mixins_themeable__["a" /* default */]],
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_contextualable__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__mixins_route_link__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__mixins_toggleable__["a" /* default */]],
 
   data: function () { return ({
     changeTimeout: {},
@@ -1565,8 +1545,6 @@ var Avatar = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
     classes: function classes () {
       return {
         'fab': true,
-        'fab--dark': this.dark && !this.light,
-        'fab--light': this.light,
         'fab--small': this.mini,
         'fab--hidden': this.hidden,
         'fab--lateral': this.lateral,
@@ -2697,15 +2675,16 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_themeable__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_schemable__ = __webpack_require__(138);
 
 
 /* harmony default export */ exports["a"] = {
   functional: true,
 
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_themeable__["a" /* default */]],
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_schemable__["a" /* default */]],
 
   props: {
+    disabled: Boolean,
     fa: Boolean,
     large: Boolean,
     left: Boolean,
@@ -2720,25 +2699,32 @@ var Spacer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["
     var children = ref.children;
 
     var icon = props.fa ? 'fa' : 'material-icons'
-    data.staticClass = data.staticClass ? (icon + " icon " + (data.staticClass) + " ") : (icon + " icon ")
+    data.staticClass = data.staticClass ? (icon + " icon " + (data.staticClass) + " ") : (icon + " icon")
+    data.attrs = data.attrs || {}
+
+    if (props.dark) { data.staticClass += ' dark--text' }
+    if (props.light) { data.staticClass += ' light--text' }
 
     var classes = {
-      'icon--dark': !props.light || props.dark,
       'icon--large': props.large,
       'icon--left': props.left,
-      'icon--light': props.light || !props.dark,
       'icon--medium': props.medium,
       'icon--right': props.right,
       'icon--x-large': props.xLarge
     }
 
-    data.staticClass += Object.keys(classes).filter(function (k) { return classes[k]; }).join(' ')
+    var iconClasses = Object.keys(classes).filter(function (k) { return classes[k]; }).join(' ')
+    iconClasses && (data.staticClass += " " + iconClasses)
 
     if (props.fa) {
       var text = children.pop().text
 
       if (text.indexOf(' ') === -1) { data.staticClass += " fa-" + text }
       else { data.staticClass += " " + (text.split(' ').join('fa- ')) }
+    }
+
+    if (props.disabled) {
+      data.attrs.disabled = props.disabled
     }
 
     return h('i', data, children)
@@ -3572,14 +3558,14 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_overlayable__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_themeable__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_schemable__ = __webpack_require__(138);
 
 
 
 /* harmony default export */ exports["a"] = {
   name: 'navigation-drawer',
 
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_overlayable__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__mixins_themeable__["a" /* default */]],
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_overlayable__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__mixins_schemable__["a" /* default */]],
 
   data: function data () {
     return {
@@ -3617,17 +3603,17 @@ var ListTileSubTitle = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_h
         'navigation-drawer--is-booted': this.isBooted,
         'navigation-drawer--clipped': this.clipped,
         'navigation-drawer--close': !this.isActive,
-        'navigation-drawer--dark': this.dark,
         'navigation-drawer--floating': this.floating,
         'navigation-drawer--full-height': this.fullHeight,
         'navigation-drawer--is-mobile': this.isMobile,
-        'navigation-drawer--light': this.light,
         'navigation-drawer--mini-variant': this.miniVariant,
         'navigation-drawer--open': this.isActive,
         'navigation-drawer--permanent': this.permanent,
         'navigation-drawer--persistent': this.persistent,
         'navigation-drawer--right': this.right,
-        'navigation-drawer--temporary': this.temporary
+        'navigation-drawer--temporary': this.temporary,
+        'dark--text dark--bg': this.dark,
+        'light--text light--bg': this.light
       }
     },
     showOverlay: function showOverlay () {
@@ -5867,13 +5853,8 @@ var StepperHeader = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_help
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_themeable__ = __webpack_require__(1);
-
-
 var Subheader = {
   functional: true,
-
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_themeable__["a" /* default */]],
 
   props: {
     inset: Boolean
@@ -5886,8 +5867,6 @@ var Subheader = {
 
     data.staticClass = data.staticClass ? ("subheader " + (data.staticClass)) : 'subheader'
     if (props.inset) { data.staticClass += ' subheader--inset' }
-    if (props.dark && !props.light) { data.staticClass += ' subheader--dark' }
-    if (props.light) { data.staticClass += ' subheader--light' }
 
     return h('li', data, children)
   }
@@ -6567,14 +6546,12 @@ var TableOverflow = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_help
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_bootable__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_themeable__ = __webpack_require__(1);
-
 
 
 /* harmony default export */ exports["a"] = {
   name: 'tabs',
 
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_bootable__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__mixins_themeable__["a" /* default */]],
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_bootable__["a" /* default */]],
 
   data: function data () {
     return {
@@ -6609,8 +6586,6 @@ var TableOverflow = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util_help
         'tabs--grow': this.grow,
         'tabs--icons': this.icons,
         'tabs--scroll-bars': this.scrollBars,
-        'tabs--dark': !this.light && this.dark,
-        'tabs--light': this.light || !this.dark
       }
     }
   },
@@ -7008,13 +6983,13 @@ var TabsItems = {
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_themeable__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_schemable__ = __webpack_require__(138);
 
 
 /* harmony default export */ exports["a"] = {
   functional: true,
 
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_themeable__["a" /* default */]],
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_schemable__["a" /* default */]],
 
   props: {
     fixed: Boolean
@@ -7027,8 +7002,8 @@ var TabsItems = {
 
     data.staticClass = data.staticClass ? ("toolbar " + (data.staticClass)) : 'toolbar'
     if (props.fixed) { data.staticClass += ' toolbar--fixed' }
-    if (props.light) { data.staticClass += ' toolbar--light' }
-    if (props.dark) { data.staticClass += ' toolbar--dark' }
+    if (props.dark) { data.staticClass += ' dark--text dark--bg' }
+    if (props.light) { data.staticClass += ' light--text light--bg' }
 
     return h('nav', data, children)
   }
@@ -7447,7 +7422,6 @@ function unbind (el) {
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_themeable__ = __webpack_require__(1);
 //
 //
 //
@@ -7488,13 +7462,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //
 //
 //
-
 
 
 /* harmony default export */ exports["default"] = {
   name: 'button-dropdown',
-
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_themeable__["a" /* default */]],
 
   data: function data () {
     return {
@@ -7531,8 +7502,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
         'btn-dropdown--editable': this.editable,
         'btn-dropdown--overflow': this.overflow || this.segmented || this.editable,
         'btn-dropdown--segmented': this.segmented,
-        'btn-dropdown--light': this.light || !this.dark,
-        'btn-dropdown--dark': !this.light && this.dark
       }
     },
 
@@ -7605,7 +7574,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_themeable__ = __webpack_require__(1);
 //
 //
 //
@@ -7623,15 +7591,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //
 //
 //
-//
-//
-
-
 
 /* harmony default export */ exports["default"] = {
   name: 'button-toggle',
-
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_themeable__["a" /* default */]],
 
   data: function data () {
     return {
@@ -8969,8 +8931,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, _vm._l((_vm.options), function(option, index) {
     return _c('v-btn', {
       attrs: {
-        "dark": _vm.dark,
-        "light": _vm.light,
         "data-selected": _vm.isSelected(option),
         "data-index": index,
         "data-only-child": _vm.isSelected(option) && (!_vm.multiple || _vm.inputValue.length === 1),
@@ -8986,12 +8946,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       domProps: {
         "textContent": _vm._s(option.text)
       }
-    }) : _vm._e(), (option.icon) ? _c('v-icon', {
-      attrs: {
-        "dark": _vm.dark,
-        "light": _vm.light
-      }
-    }, [_vm._v(_vm._s(option.icon))]) : _vm._e()], 1)
+    }) : _vm._e(), (option.icon) ? _c('v-icon', [_vm._v(_vm._s(option.icon))]) : _vm._e()], 1)
   }))
 },staticRenderFns: []}
 
@@ -9029,6 +8984,20 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 /* harmony default export */ exports["default"] = plugin;
+
+
+/***/ },
+/* 137 */,
+/* 138 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ exports["a"] = {
+  props: {
+    dark: Boolean,
+    light: Boolean
+  }
+};
 
 
 /***/ }

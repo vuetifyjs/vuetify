@@ -26,16 +26,16 @@
 // Main theme
 .application
   &--dark
-    application(
-      $body-bg-dark,
-      $color-light
-    )
+    application($material-dark)
 
   &--light
-    application(
-      $body-bg-light,
-      $color-dark
-    )
+    application($material-light)
+
+  .dark--text
+    text($material-dark, $material-light)
+
+  .light--text
+    text($material-light, $material-dark)
     
 
 

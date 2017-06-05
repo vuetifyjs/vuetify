@@ -1,6 +1,37 @@
-application(
-  $body-bg,
-  $body-color
-)
-  background: $body-bg
-  color: $body-color
+application($material)
+  background: $material.background
+  color: $material.text.primary
+  
+  .toolbar
+    toolbar($material)
+  
+  .navigation-drawer
+    navigation-drawer($material)
+    
+  .btn
+    button($material)
+    
+  .footer
+    background-color: $material.app-bar
+    
+  .card
+    background-color: $material.cards
+
+  .icon
+    icon($material)
+  
+  .divider
+    background-color: $material.dividers
+
+text($main, $alt)
+  &.toolbar
+    toolbar($main)
+    
+  &.navigation-drawer
+    navigation-drawer($main)
+    
+  &.btn
+    button($alt)
+
+  &.icon
+    icon($alt)

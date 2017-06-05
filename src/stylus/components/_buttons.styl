@@ -1,9 +1,7 @@
 /** Base Spec */
 .btn
   align-items: center
-  background: $grey.lighten-2
   border-radius: $button-border-radius
-  color: $button-color
   display: inline-flex
   height: $button-height
   font-size: $button-font-size
@@ -15,7 +13,7 @@
   padding: $button-padding
   text-transform: $button-text-transform
   text-decoration: none
-  transition: $primary-transition
+  transition: background-color $primary-transition
   position: relative
   vertical-align: middle
 
@@ -31,14 +29,6 @@
     top: 0
     right: 0
     transition: $primary-transition
-
-  &.btn--disabled
-    box-shadow: none !important
-    pointer-events: none
-    opacity: .4
-
-    &:not(.btn--loader)
-      color: $button-dark-disabled-color
 
 
 /** Content */
@@ -64,9 +54,6 @@
       &:hover:after
         background-color: $button-light-overlay
 
-      &.btn--disabled
-        color: $button-light-disabled-color
-
   &--raised
     will-change: box-shadow
     elevation(2)
@@ -83,9 +70,6 @@
     width: $button-height
     min-width: 0
     padding: 0
-    
-    .icon
-      color: inherit
 
     &:after
       border-radius: 50%
@@ -97,11 +81,6 @@
       &:after
         background-color: currentColor
         opacity: .12
-
-    &.btn--disabled
-      background-color: transparent !important
-      color: $button-light-disabled-color !important
-      pointer-events: none
       
     &.btn--small
       width: $button-small-height
@@ -162,14 +141,14 @@
       opacity: 0
 
   &__loading
-    position: absolute
-    width: 100%
-    height: 100%
-    left: 0
-    top: 0
-    display: flex
-    justify-content: center
     align-items: center
+    display: flex
+    height: 100%
+    justify-content: center
+    left: 0
+    position: absolute
+    top: 0
+    width: 100%
 
     .icon
       &--left
@@ -187,6 +166,9 @@
     border: 1px solid currentColor
     background: transparent !important
     box-shadow: none
+    
+    .icon
+      color: inherit !important
 
     &:hover
       box-shadow: none
@@ -212,3 +194,14 @@
 
     &--left
       margin-right: 16px
+
+
+/** Themes */
+.btn
+  &.primary,
+  &.secondary,
+  &.success,
+  &.error,
+  &.warning,
+  &.info
+    color: $material-dark.text.primary
