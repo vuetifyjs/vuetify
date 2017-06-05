@@ -12,6 +12,12 @@ navigation-drawer($material)
   .divider
     background-color: $material.dividers
 
+  .list
+    background: $material.cards
+    
+    &__tile
+      color: $material.text.primary
+
   .list--group__header--active
     .list__tile, + .list--group
       &:after

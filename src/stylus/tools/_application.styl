@@ -22,6 +22,9 @@ application($material)
   
   .divider
     background-color: $material.dividers
+  
+  .list
+    list($material)
 
 text($main, $alt)
   &.toolbar
@@ -35,3 +38,6 @@ text($main, $alt)
 
   &.icon
     icon($alt)
+    
+  &.list
+    list($main)

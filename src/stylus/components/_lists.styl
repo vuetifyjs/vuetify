@@ -1,7 +1,6 @@
 .list
-  lists()
-  padding-top: $list-top-padding
-  padding-bottom: $list-bottom-padding
+  list-style-type: none
+  padding: $list-top-padding 0 $list-bottom-padding
   transition: height .4s $transition.fast-out-slow-in
 
   .input-group
@@ -56,7 +55,6 @@
       text-align: left
 
     &__sub-title
-      color: rgba($material-theme.fg-color, $material-theme.secondary-text-percent)
       font-size: $list-sub-title-font-size
 
     .avatar

@@ -1,5 +1,9 @@
+import Schemable from '../../mixins/schemable'
+
 export default {
   name: 'list',
+
+  mixins: [Schemable],
 
   data () {
     return {
@@ -22,7 +26,9 @@ export default {
         'list--two-line': this.twoLine,
         'list--dense': this.dense,
         'list--three-line': this.threeLine,
-        'list--subheader': this.subheader
+        'list--subheader': this.subheader,
+        'dark--text dark--bg': this.dark,
+        'light--text light--bg': this.light
       }
     }
   },
