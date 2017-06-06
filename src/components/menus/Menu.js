@@ -100,6 +100,14 @@ export default {
     transition: {
       type: String,
       default: 'v-menu-transition'
+    },
+    positionX: {
+      type: Number,
+      default: 0
+    },
+    positionY: {
+      type: Number,
+      default: 0
     }
   },
 
@@ -114,6 +122,9 @@ export default {
         top: `${this.calcTop()}px`,
         left: `${this.calcLeft()}px`
       }
+    },
+    hasActivator () {
+      return !!this.$refs.activator
     }
   },
 

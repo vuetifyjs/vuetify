@@ -83,10 +83,22 @@ export default {
       cb()
       el.style.display = currentDisplay
     },
+    absolutePosition () {
+      return {
+        offsetTop: 0,
+        scrollHeight: 0,
+        top: this.positionY,
+        bottom: this.positionY,
+        left: this.positionX,
+        right: this.positionX,
+        height: 0,
+        width: 0
+      }
+    },
     updateDimensions () {
       this.sneakPeek(() => {
         this.dimensions = {
-          activator: this.measure(this.getActivator()),
+          activator: this.hasActivator ? this.measure(this.getActivator()) : this.absolutePosition(),
           content: this.measure(this.$refs.content)
         }
       })
