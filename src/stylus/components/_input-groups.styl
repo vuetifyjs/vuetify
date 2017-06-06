@@ -54,6 +54,13 @@
 .input-group
   &__icon-cb
     cursor: pointer
+    
+.input-group
+  &.input-group--prepend-icon,
+  &.input-group--append-icon
+    &.input-group--focused
+      .input-group__input .icon
+        color: $theme.primary
 
 /** Details */
 .input-group

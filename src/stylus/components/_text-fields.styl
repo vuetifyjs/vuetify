@@ -56,7 +56,7 @@
 
 /** Input States */
 .input-group--text-field
-  &.input-group--focused
+  &.input-group--focused:not(.input-group--single-line)
     label
       opacity: 1
       color: $theme.primary
@@ -96,10 +96,6 @@
 
     input
       flex: auto
-
-    &.input-group--focused
-      .icon
-        color: $theme.primary
 
   &.input-group--single-line
     label

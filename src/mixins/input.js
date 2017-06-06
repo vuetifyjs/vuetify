@@ -1,4 +1,8 @@
+import Schemable from './schemable'
+
 export default {
+  mixins: [Schemable],
+
   data () {
     return {
       errors: [],
@@ -48,7 +52,9 @@ export default {
         'input-group--prepend-icon': this.prependIcon,
         'input-group--required': this.required,
         'input-group--hide-details': this.hideDetails,
-        'input-group--placeholder': !!this.placeholder
+        'input-group--placeholder': !!this.placeholder,
+        'dark--text': this.dark,
+        'light--text': this.light
       }, this.classes)
     },
     isDirty () {

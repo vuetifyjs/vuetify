@@ -1,34 +1,44 @@
-input-group(color, offset, dirty)
+input-group($material)
   input, textarea
-    color: color
+    color: $material.text.primary
 
     &:disabled
-      color: color
+      color: $material.text.disabled
     
   label
-    color: color
+    color: $material.text.secondary
     
-  &.input-group--single-line&.input-group--focused
-    label
-      color: color
+  // &.input-group--dirty
+  //   input, textarea
+  //     color: dirty
     
-  &.input-group--dirty
-    input, textarea
-      color: dirty
+  &.input-group--prepend-icon,
+  &.input-group--append-icon
+    .icon
+      color: $material.text.secondary
   
   .input-group__counter
-    color: color
+    color: $material.text.secondary
     
   .input-group__details
-    color: color
+    color: $material.text.secondary
+    
+    &:before
+      background-color: $material.dividers      
 
   &.input-group--disabled
     input, textarea
-      color: color
+      color: $material.text.secondary
     
     .input-group__details:before
       background-color: transparent
+      background-image: linear-gradient(
+        to right,
+        $material.text.disabled 0,
+        $material.text.disabled 33%,
+        transparent 0
+      )
   
   .input-group--text-field
     &__prefix, &__suffix
-      color: color
+      color: $material.text.secondary
