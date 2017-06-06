@@ -21,7 +21,6 @@ export default {
       return {
         'input-group--selection-controls__container': true,
         'input-group--selection-controls__container--light': this.light,
-        'input-group--selection-controls__container--dark': this.dark,
         'input-group--selection-controls__container--disabled': this.disabled,
         'primary--text': this.primary,
         'secondary--text': this.secondary,

@@ -26,9 +26,12 @@ application($material)
   .input-group
     input-group($material)
 
-    .input-group--selection-controls
+    &.input-group--selection-controls
       &.switch
         switch($material)
+
+      &.radio
+        radio($material)
 
   .list
     list($material)
@@ -48,6 +51,13 @@ text($main, $alt)
 
   &.input-group
     input-group($main)
+
+    &.input-group--selection-controls
+      &.switch
+        switch($main)
+
+      &.radio
+        radio($alt)
 
   &.list
     list($main)
