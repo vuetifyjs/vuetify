@@ -12,12 +12,16 @@ const ToolbarItems = createSimpleFunctional('toolbar__items', 'ul')
 const ToolbarSideIcon = {
   functional: true,
 
-  render (h, { data, children }) {
+  props: {
+    dark: Boolean,
+    light: Boolean
+  },
+
+  render (h, { data, props, children }) {
     data.staticClass = data.staticClass ? `toolbar__side-icon ${data.staticClass}` : 'toolbar__side-icon'
-    data.props = {
-      icon: true,
-      dark: true
-    }
+    data.props = Object.assign({
+      icon: true
+    }, props)
 
     return h('v-btn', data, [h('v-icon', 'menu')])
   }
