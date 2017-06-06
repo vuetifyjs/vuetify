@@ -3,7 +3,8 @@ import { addOnceEventListener } from '../util/helpers'
 export default {
   data () {
     return {
-      overlay: null
+      overlay: null,
+      isTransitioning: false
     }
   },
 
@@ -32,6 +33,9 @@ export default {
         app.appendChild(overlay) ||
         document.body.appendChild(overlay)
 
+      this.isTransitioning = true
+      addOnceEventListener(overlay, 'transitionend', () => (this.isTransitioning = false))
+
       setTimeout(() => {
         overlay.className += ' overlay--active'
         this.overlay = overlay
@@ -44,7 +48,10 @@ export default {
         this.overlay && this.overlay.remove()
         this.overlay = null
         this.showScroll()
+        this.isTransitioning = false
       })
+
+      if (this.isTransitioning) return
 
       this.overlay.className = this.overlay.className.replace('overlay--active', '')
     },
