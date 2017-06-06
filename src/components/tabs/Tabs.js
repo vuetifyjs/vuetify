@@ -68,7 +68,7 @@ export default {
 
   mounted () {
     this.$vuetify.load(() => {
-      window.addEventListener('resize', this.resize, false)
+      window.addEventListener('resize', this.resize, { passive: true })
 
       const activators = this.$slots.activators
 
@@ -88,7 +88,7 @@ export default {
   },
 
   beforeDestroy () {
-    window.removeEventListener('resize', this.resize, false)
+    window.removeEventListener('resize', this.resize, { passive: true })
   },
 
   methods: {
@@ -97,7 +97,8 @@ export default {
 
       this.resizeDebounce = setTimeout(() => {
         this.isMobile = window.innerWidth < this.mobileBreakPoint
-      }, 0)
+        this.slider()
+      }, 50)
     },
     slider (el) {
       this.tabsSlider = this.tabsSlider || this.$el.querySelector('.tabs__slider')
@@ -112,7 +113,10 @@ export default {
       // processing slider for
       // dynamic tabs
       this.$nextTick(() => {
-        this.tabsSlider.style.width = `${this.targetEl.scrollWidth}px`
+        // #684 Calculate width as %
+        const width = this.targetEl.scrollWidth / this.$el.clientWidth * 100
+
+        this.tabsSlider.style.width = `${width}%`
         this.tabsSlider.style.left = `${this.targetEl.offsetLeft}px`
       })
     },
