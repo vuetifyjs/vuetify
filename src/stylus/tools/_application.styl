@@ -22,13 +22,16 @@ application($material)
   
   .divider
     background-color: $material.dividers
-  
+
   .input-group
     input-group($material)
 
     .input-group--selection-controls
       &.switch
         switch($material)
+
+  .list
+    list($material)
 
 text($main, $alt)
   &.toolbar
@@ -42,6 +45,9 @@ text($main, $alt)
 
   &.icon
     icon($alt)
-    
+
   &.input-group
     input-group($main)
+
+  &.list
+    list($main)
