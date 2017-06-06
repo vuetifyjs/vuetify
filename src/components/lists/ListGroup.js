@@ -33,7 +33,7 @@ export default {
     },
     styles () {
       return {
-        height: `${this.height}px`
+        height: `auto`
       }
     }
   },
@@ -66,8 +66,6 @@ export default {
     if (this.isActive) {
       this.list.listClick(this._uid)
     }
-
-    this.height = this.$refs.group.scrollHeight
   },
 
   methods: {
