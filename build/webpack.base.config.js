@@ -40,7 +40,7 @@ module.exports = {
       {
         test: /\.styl$/,
         loaders: ExtractTextPlugin.extract({
-          loader: ['eslint-loader', 'css-loader', 'postcss-loader', 'stylus-loader']
+          use: ['eslint-loader', 'css-loader', 'postcss-loader', 'stylus-loader']
         }),
         include: projectRoot,
         exclude: /node_modules/
