@@ -19,6 +19,8 @@
   "description": "Vue.js 2 Semantic Component Framework",
   "devDependencies": {
     "autoprefixer": "^6.6.0",
+    "babel": "^6.23.0",
+    "babel-core": "^6.24.1",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.10",
     "chai": "^3.5.0",
@@ -71,6 +73,7 @@
     "vue-loader": "^10.1.0",
     "vue-template-compiler": "^2.3.3",
     "webpack": "2.2.0-rc.2",
+    "webpack-bundle-analyzer": "^2.8.2",
     "webpack-merge": "^0.17.0"
   },
   "dependencies": {
