@@ -1,7 +1,7 @@
-import { closestParentTag } from '../../util/helpers'
-
 export default {
   name: 'stepper-step',
+
+  inject: ['stepClick'],
 
   data () {
     return {
@@ -45,16 +45,13 @@ export default {
     },
     hasError () {
       return this.rules.some(i => (i() !== true))
-    },
-    stepper () {
-      return closestParentTag.call(this, 'v-stepper')
     }
   },
 
   methods: {
     click () {
       if (this.editable) {
-        this.stepper.stepClick(this.step)
+        this.stepClick(this.step)
       }
     },
     toggle (step) {
