@@ -58,7 +58,7 @@ export default {
     },
     firstDayOfWeek: {
       type: String,
-      default: 'Monday'
+      default: 'Sunday'
     }
   },
 
