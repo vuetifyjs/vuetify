@@ -39,19 +39,6 @@ export function directiveConfig (binding, defaults = {}) {
   )
 }
 
-export function closestParentTag (tag) {
-  let parent = this.$parent
-
-  while (parent) {
-    if (!parent.$options._componentTag) return null
-    if (parent.$options._componentTag === tag) return parent
-
-    parent = parent.$parent
-  }
-
-  return null
-}
-
 export function addOnceEventListener (el, event, cb) {
   var once = () => {
     cb()
