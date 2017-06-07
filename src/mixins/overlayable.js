@@ -57,12 +57,9 @@ export default {
     },
     hideScroll () {
       document.documentElement.style.overflowY = 'hidden'
-      window.innerWidth > 1024 &&
-        (document.documentElement.style.paddingRight = '17px')
     },
     showScroll () {
       document.documentElement.style.overflowY = null
-      document.documentElement.style.paddingRight = null
     }
   }
 }
