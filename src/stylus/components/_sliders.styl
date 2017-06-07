@@ -15,6 +15,10 @@
       margin-left: 16px
       flex: 1 1 auto
 
+  &:not(.input-group--disabled)
+    .slider__track-fill
+      background: $theme.primary
+
   &.input-group--active
     .slider__thumb
       transform: translateY(-50%) scale(1)
@@ -110,7 +114,6 @@
       position: absolute
       left: 0
       height: 2px
-      background: $theme.primary
       transform-origin: left
       width: 100%
       transition: .3s ease-in-out
