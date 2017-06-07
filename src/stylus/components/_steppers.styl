@@ -4,17 +4,16 @@
   elevation(2)
 
 .stepper
-  .divider
-    align-self: center
-    margin: 0 -16px
-
-.stepper
   &__header
     align-items: stretch
     display: flex
     flex-wrap: wrap
     justify-content: space-between
     elevation(2)
+
+    .divider
+      align-self: center
+      margin: 0 -16px
 
 
 .stepper
@@ -120,7 +119,6 @@
 .stepper
   &__wrapper
     overflow: hidden
-    transform: translateZ(0) // fix for #512
     transition: .4s $transition.ease-in-out
 
 .stepper
@@ -128,9 +126,13 @@
     top: initial
     bottom: 0
     padding: 16px
-    overflow: hidden
     transition: .4s $transition.ease-in-out
     flex: 1
+    // Chrome has an issue with overflow hidden for rendering
+    // Originally used translateZ but this messes up fixed
+    // elements within the stepper
+    // Fix for #512 and #620
+    // overflow: hidden
     width: 100%
 
     .btn
@@ -160,9 +162,10 @@
       margin-right: 12px
 
   &--alt-labels
-    .divider
-      margin: 35px -67px 0
-      align-self: flex-start
+    .stepper__header
+      .divider
+        margin: 35px -67px 0
+        align-self: flex-start
 
     .stepper__step
       flex-direction: column

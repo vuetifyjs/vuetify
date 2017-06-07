@@ -61,6 +61,7 @@
 
       span
         align-items: center
+        color: $material-dark.text.primary
         cursor: pointer
         display: inline-flex
         height: 70px
@@ -74,6 +75,7 @@
 
     div:last-child
       align-self: flex-end
+      color: $material-dark.text.primary
       display: flex
       flex-direction: column
       font-size: 16px
@@ -180,3 +182,23 @@
 
 .picker--time .card__row--actions
   border: none
+
+/** Theme */
+&.picker--dark
+  .picker--time__clock
+    background: $grey.darken-2
+
+    &-hand:before
+      border-color: $theme.accent
+
+    &-hand, &:after
+      background: $theme.accent
+
+    > span
+      color: $material-dark.text.primary
+
+      &.active
+        color: $material-light.text.primary
+        
+        &:before
+          background: $theme.accent

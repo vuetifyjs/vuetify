@@ -39,12 +39,9 @@
 </template>
 
 <script>
-  import Themeable from '../../mixins/themeable'
 
   export default {
     name: 'button-dropdown',
-
-    mixins: [Themeable],
 
     data () {
       return {
@@ -81,8 +78,6 @@
           'btn-dropdown--editable': this.editable,
           'btn-dropdown--overflow': this.overflow || this.segmented || this.editable,
           'btn-dropdown--segmented': this.segmented,
-          'btn-dropdown--light': this.light || !this.dark,
-          'btn-dropdown--dark': !this.light && this.dark
         }
       },
 

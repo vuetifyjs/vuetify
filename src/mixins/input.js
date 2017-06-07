@@ -1,7 +1,7 @@
-import Themeable from './themeable'
+import Schemable from './schemable'
 
 export default {
-  mixins: [Themeable],
+  mixins: [Schemable],
 
   data () {
     return {
@@ -47,14 +47,14 @@ export default {
         'input-group--dirty': this.isDirty,
         'input-group--tab-focused': this.tabFocused,
         'input-group--disabled': this.disabled,
-        'input-group--light': this.light || !this.dark,
-        'input-group--dark': !this.light && this.dark,
         'input-group--error': this.hasError || this.errors.length > 0,
         'input-group--append-icon': this.appendIcon,
         'input-group--prepend-icon': this.prependIcon,
         'input-group--required': this.required,
         'input-group--hide-details': this.hideDetails,
-        'input-group--placeholder': !!this.placeholder
+        'input-group--placeholder': !!this.placeholder,
+        'dark--text': this.dark,
+        'light--text': this.light
       }, this.classes)
     },
     isDirty () {

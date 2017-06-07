@@ -1,6 +1,12 @@
 export default {
   name: 'stepper',
 
+  provide () {
+    return {
+      stepClick: this.stepClick
+    }
+  },
+
   data () {
     return {
       inputValue: null,

@@ -8,7 +8,7 @@ export default {
       } else if (!this.filteredItems.length) {
         children = [this.genEmptyBody(this.noResultsText)]
       } else {
-        children = this.filteredItems.map(item => {
+        children = this.filteredItems.map((item) => {
           const props = { item }
 
           Object.defineProperty(props, 'selected', {

@@ -1,15 +1,7 @@
 .tabs
+  overflow: hidden
   position: relative
   width: 100%
-  
-  &--overflow
-    overflow: hidden
-    
-    .tabs__item, .tabs__items
-      overflow: hidden
-
-  > .card
-    border-radius: 0
 
   &--grow
     .tabs__container
@@ -19,7 +11,10 @@
   &--centered
     .tabs__container
       > li:first-of-type
-        margin-left: auto
+        &:not(.tabs__slider),
+        &.tabs__slider + .tabs__li
+          margin-left: auto
+
       > li:last-of-type
         margin-right: auto
 
@@ -49,7 +44,6 @@
       top: 0
       width: 35px
       display: none
-      color: #fff
       align-items: center
       height: 100%
       cursor: pointer
@@ -86,12 +80,13 @@
       align-items: center
 
   &__item
+    align-items: center
+    color: $material-dark.text.primary
     display: flex
     flex-shrink: 0
     flex-direction: column
-    align-items: center
     justify-content: center
-    min-width: 125px
+    min-width: 0
     height: 100%
     padding: 1rem
     position: relative
@@ -101,18 +96,6 @@
     text-overflow: ellipsis
     transition: $primary-transition
     white-space: nowrap
-
-    ^[0]--dark ^[-2..-1]
-      color: rgba($material-light.fg-color, $material-light.inactive-icon-percent)
-
-      &--active
-        color: rgba($material-light.fg-color, $material-light.active-icon-percent)
-
-    ^[0]--light ^[-2..-1]
-      color: rgba($material-dark.fg-color, $material-dark.inactive-icon-percent)
-
-      &--active
-        color: rgba($material-dark.fg-color, $material-dark.active-icon-percent)
 
     .icon
       color: inherit
@@ -128,7 +111,7 @@
     position: relative
     border-width: 0 1px 1px 1px
     border-style: solid
-    border-color: rgba(#000, .1)
+    border-color: rgba($material-theme.fg-color, .1)
 
   &__content
     transition: $primary-transition

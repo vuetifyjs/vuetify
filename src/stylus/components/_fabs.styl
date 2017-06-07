@@ -1,0 +1,65 @@
+.fab
+  @extend .btn, .btn--floating, .btn--raised
+
+  position: fixed
+  bottom: 125px
+  right: 24px
+  
+  &--hidden
+    transform: scale(0) rotate(-45deg)
+    
+  &--lateral
+    .fab__content
+      transform: none !important
+  
+  @keyframes is-changing
+    0%
+      transform: scale(1)
+    
+    50%
+      transform: scale(0)
+      
+    100%
+      transform: scale(1)
+  
+  @keyframes lateral
+    0%
+      opacity: 0
+      
+    60%
+      opacity: 0
+
+    100%
+      opacity: 1
+
+  &--is-changing
+    animation-duration: .6s
+    animation-name: is-changing
+    animation-delay: 50ms
+    
+    .fab__content
+      animation-name: lateral
+      animation-duration: .6s
+      
+  &:focus
+    .fab__content
+      transform: rotate(45deg)
+
+  &.fab--small
+    height: $button-floating-small-width
+    width: $button-floating-small-width
+
+    .icon
+      font-size: $button-floating-small-icon-width
+      height: $button-floating-small-icon-width
+      width: $button-floating-small-icon-width
+
+
+  &.fab--large
+    height: $button-floating-large-width
+    width: $button-floating-large-width
+
+    .icon
+      font-size: $button-floating-large-icon-width
+      height: $button-floating-large-icon-width
+      width: $button-floating-large-icon-width

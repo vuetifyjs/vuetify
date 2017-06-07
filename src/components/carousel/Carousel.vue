@@ -1,17 +1,18 @@
 <template lang="pug">
   div(class="carousel")
     div(class="carousel__left")
-      v-btn(icon v-on:click.native.stop="prev")
+      v-btn(icon v-on:click.native.stop="prev" dark)
         v-icon chevron_left
 
     div(class="carousel__right")
-      v-btn(icon v-on:click.native.stop="next")
+      v-btn(icon v-on:click.native.stop="next" dark)
         v-icon chevron_right
 
     div(class="carousel__controls")
       v-btn(
         class="carousel__controls__item"
         icon
+        dark
         v-bind:class="{ 'carousel__controls__item--active': index === current }"
         v-for="(item, index) in items"
         v-on:click.native.stop="select(index)"
@@ -21,8 +22,12 @@
 </template>
 
 <script>
+  import Bootable from '../../mixins/bootable'
+
   export default {
     name: 'carousel',
+
+    mixins: [Bootable],
 
     data () {
       return {
@@ -69,10 +74,11 @@
 
         this.items.forEach(i => i.open(this.items[this.current]._uid, this.reverse))
 
-        if (this.cycle) {
-          clearInterval(this.slideInterval)
-          this.startInterval()
-        }
+        !this.isBooted && this.cycle && this.restartInterval()
+        this.isBooted = true
+      },
+      cycle (val) {
+        val && this.restartInterval() || clearInterval(this.slideInterval)
       }
     },
 
@@ -81,10 +87,13 @@
     },
 
     methods: {
+      restartInterval () {
+        clearInterval(this.slideInterval)
+        this.$nextTick(this.startInterval)
+      },
       init () {
         this.current = 0
       },
-
       next () {
         this.reverse = false
 
@@ -94,7 +103,6 @@
 
         this.current++
       },
-
       prev () {
         this.reverse = true
 
@@ -104,12 +112,10 @@
 
         this.current--
       },
-
       select (index) {
         this.reverse = index < this.current
         this.current = index
       },
-
       startInterval () {
         this.slideInterval = setInterval(this.next, this.interval)
       }

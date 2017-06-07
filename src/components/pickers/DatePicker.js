@@ -4,6 +4,8 @@ import DateTable from './mixins/date-table'
 import DateYears from './mixins/date-years'
 import Picker from '../../mixins/picker'
 
+const defaultDateFormat = val => new Date(val).toISOString().substr(0, 10)
+
 export default {
   name: 'date-picker',
 
@@ -24,13 +26,14 @@ export default {
   props: {
     dateFormat: {
       type: Function,
-      default: val => {
-        return new Date(val).toISOString().substr(0, 10)
-      }
+      default: defaultDateFormat
     },
     days: {
       type: Array,
       default: () => ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    },
+    formattedValue: {
+      required: false
     },
     months: {
       type: Array,
@@ -52,6 +55,10 @@ export default {
     allowedDates: {
       type: [Array, Object, Function],
       default: () => (null)
+    },
+    firstDayOfWeek: {
+      type: String,
+      default: 'Sunday'
     }
   },
 
@@ -76,12 +83,15 @@ export default {
       get () {
         if (!this.value) return this.firstAllowedDate
         if (this.value instanceof Date) return this.value
-        if (!isNaN(this.value) && this.value.indexOf(':') !== -1) return new Date(this.value)
+        if (!isNaN(this.value) ||
+            typeof this.value === 'string' && this.value.indexOf(':') !== -1
+        ) return new Date(this.value)
 
         return new Date(`${this.value}T12:00:00`)
       },
       set (val) {
-        this.$emit('input', val ? this.dateFormat(val) : this.originalDate)
+        this.$emit('input', val ? defaultDateFormat(val) : this.originalDate)
+        this.$emit('update:formattedValue', val ? this.dateFormat(val) : this.dateFormat(this.originalDate))
       }
     },
     day () {
@@ -100,13 +110,24 @@ export default {
       return this.tableDate.getFullYear()
     },
     dayName () {
-      return this.inputDate ? this.days[this.inputDate.getDay()] : ''
+      return this.inputDate ? this.week[this.inputDate.getDay()] : ''
     },
     monthName () {
       return this.inputDate ? this.months[this.month] : ''
     },
     computedTransition () {
       return this.isReversing ? 'v-tab-reverse-transition' : 'v-tab-transition'
+    },
+    week () {
+      const week = []
+      let index = this.days.indexOf(this.firstDayOfWeek)
+
+      while (week.length < 7) {
+        week.push(this.days[index % 7])
+        index += 1
+      }
+
+      return week
     }
   },
 
@@ -194,7 +215,8 @@ export default {
       'class': {
         'picker picker--date': true,
         'picker--landscape': this.landscape,
-        'picker--dark': this.dark
+        'picker--dark': this.dark,
+        'picker--light': this.light && !this.dark
       }
     }, children)
   }

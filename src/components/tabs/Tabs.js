@@ -1,17 +1,22 @@
 import Bootable from '../../mixins/bootable'
-import Themeable from '../../mixins/themeable'
 
 export default {
   name: 'tabs',
 
-  mixins: [Bootable, Themeable],
+  provide () {
+    return {
+      slider: this.slider,
+      tabClick: this.tabClick
+    }
+  },
+
+  mixins: [Bootable],
 
   data () {
     return {
       activators: [],
       activeIndex: null,
       isMobile: false,
-      overflow: false,
       reverse: false,
       target: null,
       resizeDebounce: {},
@@ -40,9 +45,6 @@ export default {
         'tabs--grow': this.grow,
         'tabs--icons': this.icons,
         'tabs--scroll-bars': this.scrollBars,
-        'tabs--dark': !this.light && this.dark,
-        'tabs--light': this.light || !this.dark,
-        'tabs--overflow': this.overflow
       }
     }
   },
@@ -56,15 +58,14 @@ export default {
 
       const activators = this.$slots.activators
 
-      if (!activators || !activators.length || !activators[0].componentInstance.$children) return
+      if (!activators ||
+        !activators.length ||
+        (activators.length &&
+          !activators[0].componentInstance.$children)) return
 
       activators[0].componentInstance.$children
         .filter(i => i.$options._componentTag === 'v-tabs-item')
-        .forEach(i => {
-          i.toggle(this.target)
-
-          i.isActive && this.slider(i.$el)
-        })
+        .forEach(i => i.toggle(this.target))
 
       this.$refs.content && this.$refs.content.$children.forEach(i => i.toggle(this.target, this.reverse, this.isBooted))
       this.$emit('input', this.target)
@@ -74,7 +75,7 @@ export default {
 
   mounted () {
     this.$vuetify.load(() => {
-      window.addEventListener('resize', this.resize, false)
+      window.addEventListener('resize', this.resize, { passive: true })
 
       const activators = this.$slots.activators
 
@@ -89,15 +90,12 @@ export default {
 
       const tab = this.value || (bar[i !== -1 ? i : 0] || {}).action
 
-      // Temp fix for slider loading issue
-      setTimeout(() => {
-        tab && this.tabClick(tab) && this.resize()
-      }, 250)
+      tab && this.tabClick(tab) && this.resize()
     })
   },
 
   beforeDestroy () {
-    window.removeEventListener('resize', this.resize, false)
+    window.removeEventListener('resize', this.resize, { passive: true })
   },
 
   methods: {
@@ -105,9 +103,9 @@ export default {
       clearTimeout(this.resizeDebounce)
 
       this.resizeDebounce = setTimeout(() => {
-        this.slider()
         this.isMobile = window.innerWidth < this.mobileBreakPoint
-      }, 0)
+        this.slider()
+      }, 50)
     },
     slider (el) {
       this.tabsSlider = this.tabsSlider || this.$el.querySelector('.tabs__slider')
@@ -116,11 +114,16 @@ export default {
 
       this.targetEl = el || this.targetEl
 
+      if (!this.targetEl) return
+
       // Gives DOM time to paint when
       // processing slider for
       // dynamic tabs
       this.$nextTick(() => {
-        this.tabsSlider.style.width = `${this.targetEl.scrollWidth}px`
+        // #684 Calculate width as %
+        const width = this.targetEl.scrollWidth / this.$el.clientWidth * 100
+
+        this.tabsSlider.style.width = `${width}%`
         this.tabsSlider.style.left = `${this.targetEl.offsetLeft}px`
       })
     },
@@ -137,9 +140,6 @@ export default {
         this.reverse = nextIndex < this.activeIndex
         this.activeIndex = nextIndex
       })
-    },
-    transitionComplete () {
-      this.overflow = false
     }
   },
 
@@ -149,9 +149,8 @@ export default {
     const iter = (this.$slots.default || [])
 
     iter.forEach(c => {
-      if (!c.componentOptions) return false
-
-      if (c.componentOptions.tag === 'v-tabs-content') content.push(c)
+      if (!c.componentOptions) slot.push(c)
+      else if (c.componentOptions.tag === 'v-tabs-content') content.push(c)
       else slot.push(c)
     })
 

@@ -6,14 +6,18 @@ export default {
   },
 
   props: {
-    dark: Boolean,
     actions: Boolean,
     landscape: Boolean,
     noTitle: Boolean,
     scrollable: Boolean,
     value: {
       required: true
-    }
+    },
+    light: {
+      type: Boolean,
+      default: true
+    },
+    dark: Boolean,
   },
 
   methods: {

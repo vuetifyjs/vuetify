@@ -1,14 +1,15 @@
 import Overlayable from '../../mixins/overlayable'
-import Themeable from '../../mixins/themeable'
+import Schemable from '../../mixins/schemable'
 
 export default {
   name: 'navigation-drawer',
 
-  mixins: [Overlayable, Themeable],
+  mixins: [Overlayable, Schemable],
 
   data () {
     return {
       isActive: this.value,
+      isBooted: false,
       isMobile: false,
       mobileBreakPoint: 1024
     }
@@ -18,6 +19,7 @@ export default {
     absolute: Boolean,
     clipped: Boolean,
     disableRouteWatcher: Boolean,
+    enableResizeWatcher: Boolean,
     height: String,
     floating: Boolean,
     fullHeight: Boolean,
@@ -37,19 +39,20 @@ export default {
       return {
         'navigation-drawer': true,
         'navigation-drawer--absolute': this.absolute,
+        'navigation-drawer--is-booted': this.isBooted,
         'navigation-drawer--clipped': this.clipped,
         'navigation-drawer--close': !this.isActive,
-        'navigation-drawer--dark': this.dark,
         'navigation-drawer--floating': this.floating,
         'navigation-drawer--full-height': this.fullHeight,
         'navigation-drawer--is-mobile': this.isMobile,
-        'navigation-drawer--light': this.light,
         'navigation-drawer--mini-variant': this.miniVariant,
         'navigation-drawer--open': this.isActive,
         'navigation-drawer--permanent': this.permanent,
         'navigation-drawer--persistent': this.persistent,
         'navigation-drawer--right': this.right,
-        'navigation-drawer--temporary': this.temporary
+        'navigation-drawer--temporary': this.temporary,
+        'dark--text': this.dark,
+        'light--text': this.light
       }
     },
     showOverlay () {
@@ -81,12 +84,13 @@ export default {
 
   beforeDestroy () {
     if (this.permanent) return
-    window.removeEventListener('resize', this.resize, { passive: false })
+    window.removeEventListener('resize', this.onResize, { passive: false })
   },
 
   methods: {
     init () {
       this.checkIfMobile()
+      setTimeout(() => (this.isBooted = true), 0)
 
       if (this.permanent) {
         this.isActive = true
@@ -94,7 +98,7 @@ export default {
       } else if (this.isMobile) this.isActive = false
       else if (!this.value && (this.persistent || this.temporary)) this.isActive = false
 
-      window.addEventListener('resize', this.resize, { passive: false })
+      window.addEventListener('resize', this.onResize, { passive: false })
     },
     checkIfMobile () {
       this.isMobile = window.innerWidth <= parseInt(this.mobileBreakPoint)
@@ -102,8 +106,8 @@ export default {
     closeConditional () {
       return !this.permanent && (this.temporary || this.isMobile)
     },
-    resize () {
-      if (this.permanent || this.temporary) return
+    onResize () {
+      if (!this.enableResizeWatcher || this.permanent || this.temporary) return
       this.checkIfMobile()
       this.isActive = !this.isMobile
     }

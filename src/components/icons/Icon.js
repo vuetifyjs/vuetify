@@ -1,11 +1,12 @@
-import Themeable from '../../mixins/themeable'
+import Schemable from '../../mixins/schemable'
 
 export default {
   functional: true,
 
-  mixins: [Themeable],
+  mixins: [Schemable],
 
   props: {
+    disabled: Boolean,
     fa: Boolean,
     large: Boolean,
     left: Boolean,
@@ -16,25 +17,32 @@ export default {
 
   render (h, { props, data, children }) {
     const icon = props.fa ? 'fa' : 'material-icons'
-    data.staticClass = data.staticClass ? `${icon} icon ${data.staticClass} ` : `${icon} icon `
+    data.staticClass = data.staticClass ? `${icon} icon ${data.staticClass} ` : `${icon} icon`
+    data.attrs = data.attrs || {}
+
+    if (props.dark) data.staticClass += ' dark--text'
+    if (props.light) data.staticClass += ' light--text'
 
     const classes = {
-      'icon--dark': !props.light || props.dark,
       'icon--large': props.large,
       'icon--left': props.left,
-      'icon--light': props.light || !props.dark,
       'icon--medium': props.medium,
       'icon--right': props.right,
       'icon--x-large': props.xLarge
     }
 
-    data.staticClass += Object.keys(classes).filter(k => classes[k]).join(' ')
+    const iconClasses = Object.keys(classes).filter(k => classes[k]).join(' ')
+    iconClasses && (data.staticClass += ` ${iconClasses}`)
 
     if (props.fa) {
       const text = children.pop().text
 
       if (text.indexOf(' ') === -1) data.staticClass += ` fa-${text}`
       else data.staticClass += ` ${text.split(' ').join('fa- ')}`
+    }
+
+    if (props.disabled) {
+      data.attrs.disabled = props.disabled
     }
 
     return h('i', data, children)

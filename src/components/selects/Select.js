@@ -13,7 +13,7 @@ export default {
       inputValue: this.value,
       isBooted: false,
       lastItem: 20,
-      menuActive: false
+      isActive: false
     }
   },
 
@@ -97,9 +97,9 @@ export default {
     value (val) {
       this.inputValue = val
       this.validate()
-      this.autocomplete && this.$refs.menu.activate()
+      this.autocomplete && this.$nextTick(this.$refs.menu.updateDimensions)
     },
-    menuActive (val) {
+    isActive (val) {
       this.isBooted = true
       this.lastItem += !val ? 20 : 0
 
@@ -108,16 +108,18 @@ export default {
     },
     isBooted () {
       this.$nextTick(() => {
-        this.content = this.$refs.menu.$el.querySelector('.menu__content')
-
-        this.content.addEventListener('scroll', this.onScroll, false)
+        this.content && this.content.addEventListener('scroll', this.onScroll, false)
       })
     }
   },
 
+  mounted () {
+    this.content = this.$refs.menu.$refs.content
+  },
+
   beforeDestroy () {
     if (this.isBooted) {
-      this.content.removeEventListener('scroll', this.onScroll, false)
+      this.content && this.content.removeEventListener('scroll', this.onScroll, false)
     }
   },
 
@@ -136,7 +138,7 @@ export default {
       return item === Object(item) && (this.itemValue in item) ? item[this.itemValue] : item
     },
     onScroll () {
-      if (!this.menuActive) {
+      if (!this.isActive) {
         setTimeout(() => (this.content.scrollTop = 0), 50)
       } else {
         const showMoreItems = (
@@ -175,7 +177,14 @@ export default {
       this.genSelectionsAndSearch(),
       this.genMenu()
     ], {
-      ref: 'activator'
+      ref: 'activator',
+      directives: [{
+        name: 'click-outside',
+        value: () => (this.isActive = false)
+      }],
+      on: {
+        keydown: e => this.$refs.menu.changeListIndex(e)
+      }
     })
   }
 }

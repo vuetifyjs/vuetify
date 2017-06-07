@@ -238,6 +238,7 @@ export default {
         'picker picker--time': true,
         'picker--landscape': this.landscape,
         'picker--dark': this.dark,
+        'picker--light': this.light && !this.dark,
         'picker--time--hours': this.selectingHour
       }
     }, children)

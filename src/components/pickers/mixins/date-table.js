@@ -37,7 +37,7 @@ export default {
     genTHead () {
       return this.$createElement('thead', {
 
-      }, this.genTR(this.days.map(o => {
+      }, this.genTR(this.week.map(o => {
         return this.$createElement('th', o.substr(0, 1))
       })))
     },
@@ -53,7 +53,7 @@ export default {
       const day = new Date(
         this.tableYear,
         this.tableMonth
-      ).getDay()
+      ).getDay() - this.days.indexOf(this.firstDayOfWeek)
 
       for (let i = 0; i < day; i++) {
         rows.push(this.$createElement('td'))
@@ -61,16 +61,18 @@ export default {
 
       for (let i = 1; i <= length; i++) {
         rows.push(this.$createElement('td', [
-          this.$createElement('a', {
+          this.$createElement('button', {
             'class': {
               'btn btn--floating btn--small btn--flat': true,
               'btn--active': this.isActive(i),
               'btn--current': this.isCurrent(i),
-              'btn--light': this.dark,
-              'btn--disabled': !this.isAllowed(new Date(this.tableYear, this.tableMonth, i, 12, 0, 0, 0))
+              'btn--light': this.dark
+            },
+            attrs: {
+              disabled: !this.isAllowed(new Date(this.tableYear, this.tableMonth, i, 12, 0, 0, 0)),
+              type: 'button'
             },
             domProps: {
-              href: 'javascript:;',
               innerHTML: `<span class="btn__content">${i}</span>`
             },
             on: {

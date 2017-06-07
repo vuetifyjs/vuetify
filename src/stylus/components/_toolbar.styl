@@ -1,10 +1,5 @@
-.application--dark
-  .toolbar
-    background: $grey.darken-4
-
 .toolbar
   align-items: center
-  background-color: $theme.primary
   display: flex
   flex-wrap: wrap
   height: $toolbar-height
@@ -29,12 +24,6 @@
     > *:last-child
       margin-right: $grid-gutter-mobile
 
-  ul
-    list-style: none
-
-  li
-    height: 100%
-
   i
     font-size: 24px
 
@@ -56,59 +45,53 @@
     padding: 24px 0 24px 72px
 
   &__side-icon
-    display: inline-flex
     align-items: center
-    position: relative
+    display: inline-flex
     margin-left: 10px
+    position: relative
 
   &__logo
-    color: $color-light
+    align-items: center
+    display: flex
     font-size: 3rem
     flex: 1;
-    text-decoration: none
     padding: 0
-    display: flex
-    align-items: center
+    text-decoration: none
 
   &__title
-    color: $color-light
     font-size: $headings.h6.size
     flex: 1;
-    white-space: nowrap
     overflow: hidden
     text-overflow: ellipsis
+    white-space: nowrap
 
     &:not(:first-child)
       padding: 0 16px
 
   &__items
-    list-style-type: none
-    padding: 0
-    display: flex
     align-items: center
+    display: flex
     height: 100%
+    list-style-type: none
     max-width: 100%
+    padding: 0
 
     > li
-      display: flex
       align-items: center
+      display: flex
 
   &__item
     align-items: center
-    color: $color-light
     display: flex
+    height: 100%
     padding: $toolbar-item-padding
+    position: relative
     text-decoration: none
     transition: all 0.3s ease-out
-    position: relative
-    height: 100%
     white-space: nowrap
 
     i
       font-size: 2rem
-
-    &:hover, &--active
-      background: rgba(#000,0.1)
 
     &--disabled
       opacity: .5
@@ -117,21 +100,3 @@
   .input-group
     margin: 0 0 0 16px
     flex: 1
-
-    &--dark
-      .icon
-        color: rgba($material-light.fg-color, $material-light.active-icon-percent)
-
-    &--light
-      .icon
-        color: rgba($material-dark.fg-color, $material-dark.active-icon-percent)
-
-    &--dark.input-group--focused.input-group--prepend-icon,
-    &--dark.input-group--focused.input-group--append-icon
-      .icon
-        color: rgba($material-light.fg-color, $material-light.active-icon-percent)
-
-    &--light.input-group--focused.input-group--prepend-icon,
-    &--light.input-group--focused.input-group--append-icon
-      .icon
-        color: rgba($material-dark.fg-color, $material-dark.active-icon-percent)
