@@ -1,8 +1,9 @@
-import { closestParentTag } from '../../util/helpers'
 import GenerateRouteLink from '../../mixins/route-link'
 
 export default {
   name: 'tabs-item',
+
+  inject: ['slider', 'tabClick'],
 
   mixins: [GenerateRouteLink],
 
@@ -34,9 +35,6 @@ export default {
       if (to === Object(to)) return this._uid
 
       return to.replace('#', '')
-    },
-    tabs () {
-      return closestParentTag.call(this, 'v-tabs')
     }
   },
 
@@ -54,21 +52,21 @@ export default {
     callSlider () {
       setTimeout(() => {
         this.$el.firstChild.classList.contains('tabs__item--active') &&
-        this.tabs.slider(this.$el)
+        this.slider(this.$el)
       }, 0)
     },
     click (e) {
       e.preventDefault()
 
       !this.router &&
-        this.tabs.tabClick(this.action) ||
+        this.tabClick(this.action) ||
         this.callSlider()
     },
 
     toggle (action) {
       this.isActive = this.action === action
       this.$nextTick(() => {
-        this.isActive && this.tabs.slider(this.$el)
+        this.isActive && this.slider(this.$el)
       })
     }
   },
