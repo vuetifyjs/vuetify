@@ -55,6 +55,10 @@ export default {
     allowedDates: {
       type: [Array, Object, Function],
       default: () => (null)
+    },
+    firstDayOfWeek: {
+      type: String,
+      default: 'Sunday'
     }
   },
 
@@ -106,13 +110,24 @@ export default {
       return this.tableDate.getFullYear()
     },
     dayName () {
-      return this.inputDate ? this.days[this.inputDate.getDay()] : ''
+      return this.inputDate ? this.week[this.inputDate.getDay()] : ''
     },
     monthName () {
       return this.inputDate ? this.months[this.month] : ''
     },
     computedTransition () {
       return this.isReversing ? 'v-tab-reverse-transition' : 'v-tab-transition'
+    },
+    week () {
+      const week = []
+      let index = this.days.indexOf(this.firstDayOfWeek)
+
+      while (week.length < 7) {
+        week.push(this.days[index % 7])
+        index += 1
+      }
+
+      return week
     }
   },
 
