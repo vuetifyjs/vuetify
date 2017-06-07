@@ -21,7 +21,7 @@ application($material)
     icon($material)
   
   .divider
-    background-color: $material.dividers
+    divider($material)
 
   .input-group
     input-group($material)
@@ -44,7 +44,7 @@ text($main, $alt)
     navigation-drawer($main)
     
   &.btn
-    button($alt)
+    button($main)
 
   &.icon
     icon($alt)
@@ -61,3 +61,6 @@ text($main, $alt)
 
   &.list
     list($main)
+  
+  &.divider
+    divider($main)

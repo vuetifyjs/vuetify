@@ -7,10 +7,11 @@ input-group($material)
     
   label
     color: $material.text.secondary
-    
-  // &.input-group--dirty
-  //   input, textarea
-  //     color: dirty
+  
+  // This is specific for selects
+  &.input-group--dirty
+    .input-group__selections__comma
+      color: $material.text.primary
     
   &.input-group--prepend-icon,
   &.input-group--append-icon

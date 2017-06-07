@@ -9,9 +9,10 @@
     margin-top: -20px
 
   &__title
-    height: 105px
+    background: $theme.primary
     border-top-left-radius: $card-border-radius
     border-top-right-radius: $card-border-radius
+    height: 105px
     padding: 16px
 
   &__body
@@ -44,3 +45,15 @@
     .card__row--actions
       margin-left: 170px
       width: 330px
+      
+  &--dark
+    color: $material-dark.text.primary
+
+    .btn
+      color: $material-dark.text.primary
+
+    .picker__body
+      background: $material-dark.cards
+
+    .picker__title
+      background: $grey.darken-2

@@ -51,8 +51,8 @@ export default {
         'navigation-drawer--persistent': this.persistent,
         'navigation-drawer--right': this.right,
         'navigation-drawer--temporary': this.temporary,
-        'dark--text dark--bg': this.dark,
-        'light--text light--bg': this.light
+        'dark--text': this.dark,
+        'light--text': this.light
       }
     },
     showOverlay () {

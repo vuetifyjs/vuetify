@@ -17,3 +17,11 @@ switch($material)
     
     &--active
       color: inherit
+    
+  &.input-group--disabled
+    .input-group--selection-controls__ripple
+      &:after
+        background-color: $material.selection-controls.thumb.disabled !important
+
+    .input-group--selection-controls__toggle
+      color: $material.selection-controls.track.disabled !important
