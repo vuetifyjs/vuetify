@@ -3,6 +3,7 @@ const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const projectRoot = path.resolve(__dirname, '../')
 const version = process.env.VERSION || require('../package.json').version
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = {
   devtool: '#source-map',
@@ -32,7 +33,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        loaders: ['buble-loader', 'eslint-loader'],
+        loaders: ['babel-loader', 'eslint-loader'],
         include: projectRoot,
         exclude: /node_modules/
       },
@@ -50,6 +51,7 @@ module.exports = {
     hints: process.env.NODE_ENV === 'production' ? 'warning' : false
   },
   plugins: [
+    new BundleAnalyzerPlugin(),
     new webpack.LoaderOptionsPlugin({
       minimize: true,
       progress: true,

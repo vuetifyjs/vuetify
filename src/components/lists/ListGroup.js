@@ -9,8 +9,7 @@ export default {
 
   data () {
     return {
-      isBooted: this.value,
-      height: 0
+      isBooted: this.value
     }
   },
 
@@ -30,11 +29,6 @@ export default {
     },
     list () {
       return closestParentTag.call(this, 'v-list')
-    },
-    styles () {
-      return {
-        height: `${this.height}px`
-      }
     }
   },
 
@@ -66,8 +60,6 @@ export default {
     if (this.isActive) {
       this.list.listClick(this._uid)
     }
-
-    this.height = this.$refs.group.scrollHeight
   },
 
   methods: {
@@ -88,7 +80,6 @@ export default {
   render (h) {
     const group = h('ul', {
       'class': 'list list--group',
-      style: this.styles,
       directives: [{
         name: 'show',
         value: this.isActive
