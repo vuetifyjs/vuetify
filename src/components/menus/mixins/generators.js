@@ -3,12 +3,21 @@ export default {
     genActivator () {
       if (!this.$slots.activator) return null
 
-      return this.$createElement('div', {
+      const options = {
         'class': 'menu__activator',
         ref: 'activator',
         slot: 'activator',
-        on: { click: this.activatorClickHandler }
-      }, this.$slots.activator)
+        on: {}
+      }
+
+      if (this.openOnHover) {
+        options.on['mouseenter'] = this.mouseEnterHandler
+        options.on['mouseleave'] = this.mouseLeaveHandler
+      } else if (this.openOnClick) {
+        options.on['click'] = this.activatorClickHandler
+      }
+
+      return this.$createElement('div', options, this.$slots.activator)
     },
 
     genTransition () {
@@ -30,6 +39,13 @@ export default {
           click: e => {
             e.stopPropagation()
             if (this.closeOnContentClick) this.isActive = false
+          },
+          mouseenter: e => {
+            this.insideContent = true
+          },
+          mouseleave: e => {
+            this.insideContent = false
+            this.openOnHover && this.mouseLeaveHandler()
           }
         }
       }, [this.lazy && this.isBooted || !this.lazy ? this.$slots.default : null])

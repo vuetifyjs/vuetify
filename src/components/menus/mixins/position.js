@@ -87,10 +87,23 @@ export default {
       cb()
       el.style.display = currentDisplay
     },
+    absolutePosition () {
+      return {
+        offsetTop: 0,
+        scrollHeight: 0,
+        top: this.positionY !== null ? this.positionY : this.absoluteY,
+        bottom: this.positionY !== null ? this.positionY : this.absoluteY,
+        left: this.positionX !== null ? this.positionX : this.absoluteX,
+        right: this.positionX !== null ? this.positionX : this.absoluteX,
+        height: 0,
+        width: 0
+      }
+    },
     updateDimensions () {
       this.sneakPeek(() => {
         this.dimensions = {
-          activator: this.measure(this.getActivator()),
+          activator: !this.hasActivator || this.positionAbsolutely
+            ? this.absolutePosition() : this.measure(this.getActivator()),
           content: this.measure(this.$refs.content)
         }
       })
