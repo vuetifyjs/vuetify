@@ -76,6 +76,8 @@ export default {
   render (h) {
     const { tag, data } = this.generateRouteLink()
 
-    return h('li', {}, [h(tag, data, [this.$slots.default])])
+    return h('li', {
+      'class': 'tabs__li'
+    }, [h(tag, data, [this.$slots.default])])
   }
 }
