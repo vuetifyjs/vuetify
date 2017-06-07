@@ -91,10 +91,10 @@ export default {
       return {
         offsetTop: 0,
         scrollHeight: 0,
-        top: this.positionY,
-        bottom: this.positionY,
-        left: this.positionX,
-        right: this.positionX,
+        top: this.positionY !== null ? this.positionY : this.absoluteY,
+        bottom: this.positionY !== null ? this.positionY : this.absoluteY,
+        left: this.positionX !== null ? this.positionX : this.absoluteX,
+        right: this.positionX !== null ? this.positionX : this.absoluteX,
         height: 0,
         width: 0
       }
@@ -102,7 +102,8 @@ export default {
     updateDimensions () {
       this.sneakPeek(() => {
         this.dimensions = {
-          activator: this.hasActivator ? this.measure(this.getActivator()) : this.absolutePosition(),
+          activator: !this.hasActivator || this.positionAbsolutely
+            ? this.absolutePosition() : this.measure(this.getActivator()),
           content: this.measure(this.$refs.content)
         }
       })

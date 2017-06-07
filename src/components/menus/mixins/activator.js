@@ -9,16 +9,19 @@ export default {
     activatorClickHandler (e) {
       if (!this.closeOnClick) e.stopPropagation()
       if (this.disabled) return
-      else if (this.openOnClick && !this.isActive) this.isActive = true
-      else if (this.closeOnClick && this.isActive) this.isActive = false
+      else if (this.openOnClick && !this.isActive) {
+        this.isActive = true
+        this.absoluteX = e.clientX
+        this.absoluteY = e.clientY
+      } else if (this.closeOnClick && this.isActive) this.isActive = false
     },
-    addActivatorEvents (activator = null) {
-      if (!activator) return
-      activator.addEventListener('click', this.activatorClickHandler)
+    mouseEnterHandler (e) {
+      if (this.disabled) return
+      this.isActive = true
     },
-    removeActivatorEvents (activator = null) {
-      if (!activator) return
-      activator.removeEventListener('click', this.activatorClickHandler)
+    mouseLeaveHandler (e) {
+      if (this.insideContent) return
+      this.isActive = false
     }
   }
 }

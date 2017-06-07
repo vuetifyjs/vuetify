@@ -38,7 +38,10 @@ export default {
       startIndex: 3,
       stopIndex: 0,
       tileLength: 0,
-      window: {}
+      window: {},
+      absoluteX: 0,
+      absoluteY: 0,
+      insideContent: false
     }
   },
 
@@ -78,6 +81,10 @@ export default {
       type: Boolean,
       default: true
     },
+    openOnHover: {
+      type: Boolean,
+      default: false
+    },
     lazy: Boolean,
     closeOnClick: {
       type: Boolean,
@@ -86,12 +93,6 @@ export default {
     closeOnContentClick: {
       type: Boolean,
       default: true
-    },
-    activator: {
-      default: null
-    },
-    activatorXY: {
-      default: null
     },
     origin: {
       type: String,
@@ -103,11 +104,15 @@ export default {
     },
     positionX: {
       type: Number,
-      default: 0
+      default: null
     },
     positionY: {
       type: Number,
-      default: 0
+      default: null
+    },
+    positionAbsolutely: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -134,10 +139,6 @@ export default {
 
       val && this.activate() || this.deactivate()
     },
-    activator (newActivator, oldActivator) {
-      this.removeActivatorEvents(oldActivator)
-      this.addActivatorEvents(newActivator)
-    },
     windowResizeHandler () {
       this.isBooted = false
     }
@@ -145,7 +146,6 @@ export default {
 
   mounted () {
     window.addEventListener('resize', this.onResize, { passive: true })
-    this.addActivatorEvents(this.activator)
     this.app = document.querySelector('[data-app]')
     this.$nextTick(() => {
       this.app && this.app.appendChild(this.$refs.content)
@@ -158,12 +158,12 @@ export default {
       this.app.contains(this.$refs.content) &&
       this.app.removeChild(this.$refs.content)
 
-    this.removeActivatorEvents(this.activator)
     window.removeEventListener('resize', this.windowResizeHandler)
   },
 
   methods: {
     activate () {
+      this.insideContent = true
       this.initWindow()
       this.getTiles()
       this.updateDimensions()
@@ -184,12 +184,14 @@ export default {
   },
 
   render (h) {
+    const directives = !this.openOnHover ? [{
+      name: 'click-outside',
+      value: () => this.closeOnClick
+    }] : []
+
     const data = {
       'class': 'menu',
-      directives: [{
-        name: 'click-outside',
-        value: () => this.closeOnClick
-      }],
+      directives,
       on: {
         keydown: e => {
           if (e.keyCode === 27) this.isActive = false
