@@ -167,7 +167,7 @@ export default {
           const d = new Date(allowedDate)
           d.setHours(12, 0, 0, 0)
 
-          return d - date == 0
+          return d - date === 0
         })
       } else if (this.allowedDates instanceof Function) {
         return this.allowedDates(date)

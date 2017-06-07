@@ -13,7 +13,11 @@ export default {
       rotate: 0,
       originalTime: this.value,
       period: 'am',
-      selectingHour: true
+      selectingHour: true,
+      ranges: {
+        hours: [...Array.from({ length: 24 }, (v, k) => k)],
+        minutes: [...Array.from({ length: 60 }, (v, k) => k)]
+      }
     }
   },
 
@@ -24,6 +28,14 @@ export default {
       validator (val) {
         return ['ampm', '24hr'].includes(val)
       }
+    },
+    allowedHours: {
+      type: [Array, Object, Function],
+      default: () => (null)
+    },
+    allowedMinutes: {
+      type: [Array, Object, Function],
+      default: () => (null)
     }
   },
 
@@ -51,13 +63,16 @@ export default {
         }
 
         let hour = value.getHours()
-        const minute = value.getMinutes()
+        let minute = value.getMinutes()
         let period = ''
 
         if (!this.is24hr) {
           hour = hour > 12 ? hour - 12 : hour
           period = this.period
         }
+
+        hour = this.firstAllowed('hour', hour)
+        minute = this.firstAllowed('minute', minute)
 
         return `${hour}:${minute}${period}`
       },
@@ -121,7 +136,8 @@ export default {
 
   watch: {
     period (val) {
-      this.inputTime = `${this.hour}:${this.minute}${val}`
+      const hour = !!this.allowedHours && this.selectingHour ? this.firstAllowed('hour', this.hour - 1) : this.hour
+      this.inputTime = `${hour}:${this.minute}${val}`
     },
     value (val) {
       if (this.isSaving) {
@@ -145,6 +161,69 @@ export default {
     cancel () {
       this.inputTime = this.originalTime
       if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
+    },
+    isAllowed (type, value) {
+      const allowed = this[`allowed${type.charAt(0).toUpperCase() + type.slice(1)}s`]
+
+      if (!allowed) return true
+
+      if (Array.isArray(allowed)) {
+        return !!allowed.find(v => v === value)
+      } else if (allowed instanceof Function) {
+        return allowed(value)
+      } else if (allowed === Object(allowed)) {
+        const range = type === 'minute' ? this.ranges.minutes : this.ranges.hours
+        const mod = type === 'minute' ? 60 : 24
+
+        if (allowed.min === String(allowed.min)) {
+          allowed.min = this.convert12to24hr(allowed.min)
+        }
+
+        if (allowed.max === String(allowed.max)) {
+          allowed.max = this.convert12to24hr(allowed.max)
+        }
+
+        const steps = allowed.max - allowed.min
+        value = type === 'hour' && !this.is24hr && this.period === 'pm' ? value + 12 : value
+
+        for (let i = 0; i <= steps; i++) {
+          const index = (allowed.min + i) % mod
+          if (range[index] === value) return true
+        }
+
+        return false
+      }
+
+      return true
+    },
+    convert12to24hr (input) {
+      input = input.toLowerCase()
+      const pm = input.indexOf('pm') !== -1
+      const hour = parseInt(input.slice(0, input.indexOf(pm ? 'pm' : 'am')))
+
+      return pm ? hour + 12 : hour
+    },
+    generateRange (type, start) {
+      let range = type === 'hour' ? this.ranges.hours : this.ranges.minutes
+      let offset = 1
+
+      if (type === 'hour' && !this.is24hr) {
+        range = range.slice(1, 13)
+        offset = 0
+      }
+
+      return range.slice(start + offset, range.length).concat(range.slice(0, start + offset))
+    },
+    firstAllowed (type, value) {
+      const allowed = this[`allowed${type.charAt(0).toUpperCase() + type.slice(1)}s`]
+
+      if (!allowed) return value
+
+      const range = this.generateRange(type, value)
+
+      const first = range.find(v => this.isAllowed(type, v))
+
+      return first || value
     }
   },
 
