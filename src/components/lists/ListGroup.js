@@ -1,9 +1,10 @@
-import { closestParentTag } from '../../util/helpers'
 import Expand from '../../mixins/expand-transition'
 import Toggleable from '../../mixins/toggleable'
 
 export default {
   name: 'list-group',
+
+  inject: ['listClick', 'listClose'],
 
   mixins: [Expand, Toggleable],
 
@@ -26,9 +27,6 @@ export default {
         'list--group__header--active': this.isActive,
         'list--group__header--no-action': this.noAction
       }
-    },
-    list () {
-      return closestParentTag.call(this, 'v-list')
     }
   },
 
@@ -37,7 +35,7 @@ export default {
       this.isBooted = true
 
       if (!this.isActive) {
-        this.list.listClose(this._uid)
+        this.listClose(this._uid)
       }
     },
     '$route' (to) {
@@ -45,7 +43,7 @@ export default {
 
       if (this.group) {
         if (isActive && this.isActive !== isActive) {
-          this.list.listClick(this._uid)
+          this.listClick(this._uid)
         }
         this.isActive = isActive
       }
@@ -58,14 +56,14 @@ export default {
     }
 
     if (this.isActive) {
-      this.list.listClick(this._uid)
+      this.listClick(this._uid)
     }
   },
 
   methods: {
     click () {
       if (!this.$refs.item.querySelector('.list__tile--disabled')) {
-        this.list.listClick(this._uid)
+        this.listClick(this._uid)
       }
     },
     toggle (uid) {
