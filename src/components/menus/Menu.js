@@ -118,14 +118,17 @@ export default {
   },
 
   watch: {
+    activator (newActivator, oldActivator) {
+      this.removeActivatorEvents(oldActivator)
+      this.addActivatorEvents(newActivator)
+    },
+    disabled (val) {
+      val && this.deactivate()
+    },
     isActive (val) {
       if (this.disabled) return
 
       val && this.activate() || this.deactivate()
-    },
-    activator (newActivator, oldActivator) {
-      this.removeActivatorEvents(oldActivator)
-      this.addActivatorEvents(newActivator)
     },
     windowResizeHandler () {
       this.isBooted = false
