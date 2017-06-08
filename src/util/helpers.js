@@ -48,42 +48,6 @@ export function addOnceEventListener (el, event, cb) {
   el.addEventListener(event, once, false)
 }
 
-export function browserTransform (el, value) {
-  [
-    'transform',
-    'webkitTransform'
-  ].forEach(i => {
-    el.style[i] = value
-  })
-}
-
-// Returns a function, that, as long as it continues to be invoked, will not
-// be triggered. The function will be called after it stops being called for
-// N milliseconds. If `execAsap` is passed, trigger the function on the
-// leading edge, instead of the trailing.
-//
-// Example:
-// var calculateLayout = function () { ... }
-// window.addEventListner('resize', debounce(calculateLayout, 300)
-export function debounce (func, threshold, execAsap) {
-  var timeout
-
-  return function debounced () {
-    var obj = this
-    var args = arguments
-
-    function delayed () {
-      if (!execAsap) func.apply(obj, args)
-      timeout = null
-    }
-
-    if (timeout) clearTimeout(timeout)
-    else if (execAsap) func.apply(obj, args)
-
-    timeout = setTimeout(delayed, threshold || 100)
-  }
-}
-
 export function getObjectValueByPath (obj, path) {
   // credit: http://stackoverflow.com/questions/6491463/accessing-nested-javascript-objects-with-string-key#comment55278413_6491621
   if (!path || path.constructor !== String) return

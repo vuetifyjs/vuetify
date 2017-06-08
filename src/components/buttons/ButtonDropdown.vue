@@ -27,15 +27,16 @@
         append-icon="arrow_drop_down"
       )
       v-list
-        v-list-item(v-for="(option, index) in options")
-          v-list-tile(
-            v-bind:class="{ 'list__tile--active': inputValue === option }"
-            v-on:click.native="e => updateValue(e, option)"
-          )
-            v-list-tile-action(v-if="option.action")
-              v-icon(v-bind:light="light || !dark" v-bind:dark="!light && dark") {{ option.action }}
-            v-list-tile-content(v-if="option.text")
-              v-list-tile-title {{ option.text }}
+        v-list-tile(
+          v-bind:class="{ 'list__tile--active': inputValue === option }"
+          v-on:click.native="e => updateValue(e, option)"
+          v-for="(option, index) in options"
+          v-bind:key="option"
+        )
+          v-list-tile-action(v-if="option.action")
+            v-icon(v-bind:light="light || !dark" v-bind:dark="!light && dark") {{ option.action }}
+          v-list-tile-content(v-if="option.text")
+            v-list-tile-title {{ option.text }}
 </template>
 
 <script>
