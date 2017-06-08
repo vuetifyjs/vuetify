@@ -111,14 +111,11 @@ export default {
     genTile (item) {
       const active = this.selectedItems.indexOf(item) !== -1
       const data = {
-        'class': {
-          'list__tile--active': active,
-          'list__tile--select-multi': this.multiple
-        },
         nativeOn: { click: () => this.selectItem(item) },
         props: {
           avatar: item === Object(item) && 'avatar' in item,
-          ripple: true
+          ripple: true,
+          value: active
         }
       }
 

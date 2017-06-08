@@ -185,7 +185,7 @@ export default {
       this.initWindow()
       this.getTiles()
       this.updateDimensions()
-      this.$nextTick(this.startTransition)
+      setTimeout(this.startTransition, 50)
     },
     deactivate () {
       this.isContentActive = false
@@ -197,7 +197,7 @@ export default {
     },
     startTransition () {
       this.isContentActive = true
-      this.$nextTick(this.calculateScroll)
+      setTimeout(this.calculateScroll, 0)
     }
   },
 
