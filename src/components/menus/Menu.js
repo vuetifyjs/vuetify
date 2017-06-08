@@ -41,7 +41,9 @@ export default {
       window: {},
       absoluteX: 0,
       absoluteY: 0,
-      insideContent: false
+      insideContent: false,
+      hasJustFocused: false,
+      focusedTimeout: {}
     }
   },
 
@@ -140,6 +142,12 @@ export default {
     },
     disabled (val) {
       val && this.deactivate()
+    },
+    hasJustFocused (val) {
+      if (!val) return
+
+      clearTimeout(this.focusedTimeout)
+      this.focusedTimeout = setTimeout(() => (this.hasJustFocused = false), 600)
     },
     isActive (val) {
       if (this.disabled) return

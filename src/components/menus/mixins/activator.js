@@ -16,12 +16,13 @@ export default {
       } else if (this.closeOnClick && this.isActive) this.isActive = false
     },
     mouseEnterHandler (e) {
-      if (this.disabled) return
+      if (this.disabled || this.hasJustFocused) return
       this.isActive = true
     },
     mouseLeaveHandler (e) {
       if (this.insideContent) return
       this.isActive = false
+      this.hasJustFocused = true
     }
   }
 }

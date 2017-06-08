@@ -91,10 +91,10 @@ export default {
       return {
         offsetTop: 0,
         scrollHeight: 0,
-        top: this.positionY !== null ? this.positionY : this.absoluteY,
-        bottom: this.positionY !== null ? this.positionY : this.absoluteY,
-        left: this.positionX !== null ? this.positionX : this.absoluteX,
-        right: this.positionX !== null ? this.positionX : this.absoluteX,
+        top: this.positionY || this.absoluteY,
+        bottom: this.positionY || this.absoluteY,
+        left: this.positionX || this.absoluteX,
+        right: this.positionX || this.absoluteX,
         height: 0,
         width: 0
       }
