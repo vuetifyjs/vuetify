@@ -23,6 +23,14 @@ export default {
       if (this.insideContent) return
       this.isActive = false
       this.hasJustFocused = true
+    },
+    addActivatorEvents (activator = null) {
+      if (!activator) return
+      activator.addEventListener('click', this.activatorClickHandler)
+    },
+    removeActivatorEvents (activator = null) {
+      if (!activator) return
+      activator.removeEventListener('click', this.activatorClickHandler)
     }
   }
 }

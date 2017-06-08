@@ -20,7 +20,7 @@ export default {
       return parseInt(a.left - 16)
     },
     calcTopAuto () {
-      if (!this.$refs.content) return this.calcTop(true)
+      if (!this.hasActivator) return this.calcTop(true)
 
       const selectedIndex = Array.from(this.tiles).findIndex(n => n.classList.contains('list__tile--active'))
 

@@ -94,7 +94,7 @@ export default {
         }, this.filteredItems.map(o => {
           if (o.header) return this.genHeader(o)
           if (o.divider) return this.genDivider(o)
-          else return this.genListItem(o)
+          else return this.genTile(o)
         }))
       ])
     },
@@ -107,9 +107,6 @@ export default {
       return this.$createElement('v-divider', {
         props: item
       })
-    },
-    genListItem (item) {
-      return this.$createElement('v-list-item', [this.genTile(item)])
     },
     genTile (item) {
       const active = this.selectedItems.indexOf(item) !== -1

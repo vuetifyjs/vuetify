@@ -96,6 +96,9 @@ export default {
       type: Boolean,
       default: true
     },
+    activator: {
+      default: null
+    },
     origin: {
       type: String,
       default: 'top left'
@@ -131,7 +134,7 @@ export default {
       }
     },
     hasActivator () {
-      return !!this.$refs.activator
+      return !!this.$refs.activator || this.activator
     }
   },
 
