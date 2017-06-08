@@ -5,7 +5,7 @@ export default {
 
   data () {
     return {
-      errors: [],
+      errorBucket: [],
       focused: false,
       tabFocused: false,
       lazyValue: this.value
@@ -16,10 +16,16 @@ export default {
     appendIcon: String,
     appendIconCb: Function,
     disabled: Boolean,
+    error: Boolean,
+    errors: {
+      type: [String, Array],
+      default: () => []
+    },
     hint: String,
     hideDetails: Boolean,
-    persistentHint: Boolean,
     label: String,
+    persistentHint: Boolean,
+    placeholder: String,
     prependIcon: String,
     prependIconCb: Function,
     required: Boolean,
@@ -32,13 +38,12 @@ export default {
     },
     value: {
       required: false
-    },
-    placeholder: String
+    }
   },
 
   computed: {
     hasError () {
-      return this.errors.length !== 0
+      return this.validations.length || this.error
     },
     inputGroupClasses () {
       return Object.assign({
@@ -47,7 +52,7 @@ export default {
         'input-group--dirty': this.isDirty,
         'input-group--tab-focused': this.tabFocused,
         'input-group--disabled': this.disabled,
-        'input-group--error': this.hasError || this.errors.length > 0,
+        'input-group--error': this.hasError,
         'input-group--append-icon': this.appendIcon,
         'input-group--prepend-icon': this.prependIcon,
         'input-group--required': this.required,
@@ -78,6 +83,11 @@ export default {
       }
 
       return Object.assign(modifiers, model.modifiers)
+    },
+    validations () {
+      return (!Array.isArray(this.errors)
+        ? [this.errors]
+        : this.errors).concat(this.errorBucket)
     }
   },
 
@@ -107,11 +117,11 @@ export default {
             this.focused ||
             this.hint &&
             this.persistentHint) &&
-          this.errors.length === 0
+          this.validations.length === 0
       ) {
         messages = [this.genHint()]
-      } else if (this.errors.length) {
-        messages = this.errors.map(i => this.genError(i))
+      } else if (this.validations.length) {
+        messages = this.validations.map(i => this.genError(i))
       }
 
       return this.$createElement(
@@ -220,7 +230,7 @@ export default {
       return this.$createElement('div', data, children)
     },
     validate () {
-      this.errors = []
+      this.errorBucket = []
 
       this.rules.forEach(rule => {
         const valid = typeof rule === 'function'
@@ -228,7 +238,7 @@ export default {
           : rule
 
         if (valid !== true) {
-          this.errors.push(valid)
+          this.errorBucket.push(valid)
         }
       })
     }

@@ -129,7 +129,7 @@ export default {
       return this.totalItems || this.items.length
     },
     indeterminate () {
-      return this.selectAll && this.someItems && !this.everyItem
+      return this.selectAll !== false && this.someItems && !this.everyItem
     },
     everyItem () {
       return this.filteredItems.length && this.filteredItems.every(i => this.isSelected(i))
@@ -230,7 +230,7 @@ export default {
       h('table', {
         'class': {
           'datatable table': true,
-          'datatable--select-all': this.selectAll
+          'datatable--select-all': this.selectAll !== false
         }
       }, [
         this.genTHead(),

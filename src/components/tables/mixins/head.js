@@ -19,7 +19,7 @@ export default {
         on: { change: this.toggle }
       })
 
-      this.selectAll && children.unshift(this.$createElement('th', [checkbox]))
+      this.selectAll !== false && children.unshift(this.$createElement('th', [checkbox]))
 
       return this.$createElement('thead', [this.genTR(children)])
     },

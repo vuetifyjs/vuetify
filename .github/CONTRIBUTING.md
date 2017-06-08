@@ -8,3 +8,8 @@ Hello and thank you for interest in helping make Vuetify better. Please take a f
 * Try to search for your issue, it may have been answered.
 * See if the error is reproduceable with the latest version.
 * If reproduceable, please provide a simple www.jsfiddle.com or repository that can be cloned to produce the expected behavior.
+
+## Pull Requests
+* All PR's should be made to the ```dev``` branch of Vuetify.
+* For changes and feature requests, please include an example of what you are trying to solve and an example of the markup
+* For bug fixes please reference the issue # that the PR resolves

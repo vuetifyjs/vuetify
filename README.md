@@ -52,7 +52,7 @@ Vue.use(Vuetify)
 ```
 
 ## Support
-Ask your support questions on the vuetifyjs [gitter](https://gitter.im/vuetifyjs/Lobby/~chat#share).
+Ask your support questions on the vuetifyjs [gitter](https://gitter.im/vuetifyjs/Lobby/).
 
 For additional information, please visit the [Official Documentation](https://vuetifyjs.com).
 
