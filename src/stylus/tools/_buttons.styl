@@ -1,9 +1,16 @@
 button($material)
   color: $material.text.primary
+
+  &:focus
+    .btn__content
+      &:before
+        background-color: $material.buttons.focused
   
-  &:focus:after
-    background-color: $material.buttons.focused
-    
+  &.btn--flat .btn__content
+    &:after
+      animation: 3s button-focus infinite
+      background-color: $material.buttons.focused-alt
+
   &:disabled
     box-shadow: none !important
     color: $material.buttons.disabled

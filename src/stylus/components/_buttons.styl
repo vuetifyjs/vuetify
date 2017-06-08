@@ -9,38 +9,63 @@
   justify-content: center
   margin: $button-margin
   min-width: $button-min-width
+  overflow: hidden
   outline: 0
-  padding: $button-padding
   text-transform: $button-text-transform
   text-decoration: none
   transition: opacity, width, height, padding, margin, background, background-color, box-shadow $primary-transition
   position: relative
   vertical-align: middle
+  z-index: 0
 
 
 /** Psuedo */
 .btn
-  &:after
-    border-radius: inherit
-    bottom: 0
-    content: ''
-    left: 0
-    position: absolute
-    top: 0
-    right: 0
-    transition: $primary-transition
+  &__content
+    > span
+      z-index: 1
 
+    &:after, &:before
+      border-radius: inherit
+      bottom: 0
+      content: ''
+      left: 0
+      position: absolute
+      top: 0
+      right: 0
+      transition: $primary-transition
+
+  &.btn--flat
+    .btn__content
+      &:after
+        content: ''
+        position: absolute
+        background-color: transparent
+        bottom: initial
+        top: calc(50% - 36px)
+        left: calc(50% - 36px)
+        right: initial
+        pointer-events: none
+        height: 72px
+        width: 72px
+        opacity: 0
+        transition: .4s $transition.swing
+        transition-delay: .2s
+        border-radius: 50%
+        z-index: 0
 
 /** Content */
 .btn
   &__content
     align-items: center
     display: flex
-    flex: 1 0 auto
+    height: $button-height
+    flex: 1 0 100%
     justify-content: center
     transition: $primary-transition
     white-space: nowrap
     overflow: hidden
+    padding: $button-padding
     text-overflow: ellipsis
 
 
@@ -205,3 +230,16 @@
   &.warning,
   &.info
     color: $material-dark.text.primary
+    
+@keyframes button-focus
+  0%
+    transform: scale(1)
+    opacity: 1
+  
+  50%
+    transform: scale(1.1)
+    opacity: 1
+    
+  100%
+    transform: scale(1)
+    opacity: 1
