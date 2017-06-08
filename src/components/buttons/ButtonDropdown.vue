@@ -27,7 +27,7 @@
         append-icon="arrow_drop_down"
       )
       v-list
-        v-list-item(v-for="(option, index) in options")
+        v-list-item(v-for="(option, index) in options", v-bind:key="index")
           v-list-tile(
             v-bind:class="{ 'list__tile--active': inputValue === option }"
             v-on:click.native="e => updateValue(e, option)"

@@ -15,6 +15,7 @@
         dark
         v-bind:class="{ 'carousel__controls__item--active': index === current }"
         v-for="(item, index) in items"
+        v-bind:key="index"
         v-on:click.native.stop="select(index)"
       )
         v-icon {{ icon }}
