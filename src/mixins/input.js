@@ -17,7 +17,7 @@ export default {
     appendIconCb: Function,
     disabled: Boolean,
     error: Boolean,
-    errors: {
+    errorMessages: {
       type: [String, Array],
       default: () => []
     },
@@ -85,9 +85,9 @@ export default {
       return Object.assign(modifiers, model.modifiers)
     },
     validations () {
-      return (!Array.isArray(this.errors)
-        ? [this.errors]
-        : this.errors).concat(this.errorBucket)
+      return (!Array.isArray(this.errorMessages)
+        ? [this.errorMessages]
+        : this.errorMessages).concat(this.errorBucket)
     }
   },
 
