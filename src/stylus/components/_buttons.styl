@@ -13,7 +13,7 @@
   outline: 0
   text-transform: $button-text-transform
   text-decoration: none
-  transition: opacity, width, height, padding, margin, background, background-color, box-shadow $primary-transition
+  transition: opacity, width, height, padding, margin, background, background-color, box-shadow, transform $primary-transition
   position: relative
   vertical-align: middle
   z-index: 0
@@ -23,6 +23,9 @@
 .btn
   &__content
     > span
+      align-items: center
+      display: inline-flex
+      justify-content: center
       z-index: 1
 
     &:after, &:before
