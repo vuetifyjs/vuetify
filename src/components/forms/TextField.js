@@ -47,7 +47,7 @@ export default {
       }
     },
     hasError () {
-      return this.errors.length > 0 ||
+      return this.errorMessages.length > 0 ||
         !this.counterIsValid() ||
         !this.validateIsValid() ||
         this.error
