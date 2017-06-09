@@ -14,7 +14,6 @@ export default {
       default: 'btn--active'
     },
     block: Boolean,
-    default: Boolean,
     flat: Boolean,
     floating: Boolean,
     icon: Boolean,
@@ -43,7 +42,6 @@ export default {
         'btn': true,
         'btn--active': this.isActive,
         'btn--block': this.block,
-        'btn--default': this.default,
         'btn--flat': this.flat,
         'btn--floating': this.floating,
         'btn--icon': this.icon,
@@ -73,7 +71,9 @@ export default {
 
   methods: {
     genContent (h) {
-      return h('span', { 'class': 'btn__content' }, [this.$slots.default])
+      return h('div', { 'class': 'btn__content' }, [
+        h('span', this.$slots.default)
+      ])
     },
     genLoader (h) {
       const children = []

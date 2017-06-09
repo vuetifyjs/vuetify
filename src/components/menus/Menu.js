@@ -38,7 +38,12 @@ export default {
       startIndex: 3,
       stopIndex: 0,
       tileLength: 0,
-      window: {}
+      window: {},
+      absoluteX: 0,
+      absoluteY: 0,
+      insideContent: false,
+      hasJustFocused: false,
+      focusedTimeout: {}
     }
   },
 
@@ -78,6 +83,10 @@ export default {
       type: Boolean,
       default: true
     },
+    openOnHover: {
+      type: Boolean,
+      default: false
+    },
     lazy: Boolean,
     closeOnClick: {
       type: Boolean,
@@ -90,9 +99,6 @@ export default {
     activator: {
       default: null
     },
-    activatorXY: {
-      default: null
-    },
     origin: {
       type: String,
       default: 'top left'
@@ -100,6 +106,18 @@ export default {
     transition: {
       type: String,
       default: 'v-menu-transition'
+    },
+    positionX: {
+      type: Number,
+      default: null
+    },
+    positionY: {
+      type: Number,
+      default: null
+    },
+    positionAbsolutely: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -114,18 +132,30 @@ export default {
         top: `${this.calcTop()}px`,
         left: `${this.calcLeft()}px`
       }
+    },
+    hasActivator () {
+      return !!this.$refs.activator || this.activator
     }
   },
 
   watch: {
+    activator (newActivator, oldActivator) {
+      this.removeActivatorEvents(oldActivator)
+      this.addActivatorEvents(newActivator)
+    },
+    disabled (val) {
+      val && this.deactivate()
+    },
+    hasJustFocused (val) {
+      if (!val) return
+
+      clearTimeout(this.focusedTimeout)
+      this.focusedTimeout = setTimeout(() => (this.hasJustFocused = false), 600)
+    },
     isActive (val) {
       if (this.disabled) return
 
       val && this.activate() || this.deactivate()
-    },
-    activator (newActivator, oldActivator) {
-      this.removeActivatorEvents(oldActivator)
-      this.addActivatorEvents(newActivator)
     },
     windowResizeHandler () {
       this.isBooted = false
@@ -134,7 +164,6 @@ export default {
 
   mounted () {
     window.addEventListener('resize', this.onResize, { passive: true })
-    this.addActivatorEvents(this.activator)
     this.app = document.querySelector('[data-app]')
     this.$nextTick(() => {
       this.app && this.app.appendChild(this.$refs.content)
@@ -147,16 +176,16 @@ export default {
       this.app.contains(this.$refs.content) &&
       this.app.removeChild(this.$refs.content)
 
-    this.removeActivatorEvents(this.activator)
     window.removeEventListener('resize', this.windowResizeHandler)
   },
 
   methods: {
     activate () {
+      this.insideContent = true
       this.initWindow()
       this.getTiles()
       this.updateDimensions()
-      this.$nextTick(this.startTransition)
+      setTimeout(this.startTransition, 50)
     },
     deactivate () {
       this.isContentActive = false
@@ -168,17 +197,19 @@ export default {
     },
     startTransition () {
       this.isContentActive = true
-      this.$nextTick(this.calculateScroll)
+      setTimeout(this.calculateScroll, 0)
     }
   },
 
   render (h) {
+    const directives = !this.openOnHover ? [{
+      name: 'click-outside',
+      value: () => this.closeOnClick
+    }] : []
+
     const data = {
       'class': 'menu',
-      directives: [{
-        name: 'click-outside',
-        value: () => this.closeOnClick
-      }],
+      directives,
       on: {
         keydown: e => {
           if (e.keyCode === 27) this.isActive = false

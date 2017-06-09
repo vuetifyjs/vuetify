@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Alert.vue should render correct contents 1`] = `"<div data-server-rendered=\\"true\\" class=\\"alert\\" style=\\"display:none;\\"><div></div></div>"`;

@@ -28,6 +28,6 @@ export default {
   render (h) {
     const { tag, data } = this.generateRouteLink()
 
-    return h(tag, data, [this.$slots.default])
+    return h('li', [h(tag, data, [this.$slots.default])])
   }
 }

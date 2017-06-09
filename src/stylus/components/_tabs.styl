@@ -11,7 +11,10 @@
   &--centered
     .tabs__container
       > li:first-of-type
-        margin-left: auto
+        &:not(.tabs__slider),
+        &.tabs__slider + .tabs__li
+          margin-left: auto
+
       > li:last-of-type
         margin-right: auto
 

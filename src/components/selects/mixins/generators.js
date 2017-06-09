@@ -94,7 +94,7 @@ export default {
         }, this.filteredItems.map(o => {
           if (o.header) return this.genHeader(o)
           if (o.divider) return this.genDivider(o)
-          else return this.genListItem(o)
+          else return this.genTile(o)
         }))
       ])
     },
@@ -108,20 +108,14 @@ export default {
         props: item
       })
     },
-    genListItem (item) {
-      return this.$createElement('v-list-item', [this.genTile(item)])
-    },
     genTile (item) {
       const active = this.selectedItems.indexOf(item) !== -1
       const data = {
-        'class': {
-          'list__tile--active': active,
-          'list__tile--select-multi': this.multiple
-        },
         nativeOn: { click: () => this.selectItem(item) },
         props: {
           avatar: item === Object(item) && 'avatar' in item,
-          ripple: true
+          ripple: true,
+          value: active
         }
       }
 

@@ -41,7 +41,7 @@
     &:not(.input-group--disabled)
       .input-group__details
         &:after
-          width: 100%
+          transform: scaleX(1)
 
   &--active
     //
@@ -87,7 +87,9 @@
       top: -1px
       height: 2px
       transition: .3s $transition.fast-out-slow-in
-      width: 0%
+      transform: scaleX(0)
+      transform-origin: center center 0
+      width: 100%
       z-index: 1
 
     &:before

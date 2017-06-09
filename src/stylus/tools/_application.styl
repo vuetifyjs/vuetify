@@ -21,7 +21,7 @@ application($material)
     icon($material)
   
   .divider
-    background-color: $material.dividers
+    divider($material)
 
   .input-group
     input-group($material)
@@ -32,6 +32,9 @@ application($material)
 
       &.radio, &.checkbox
         radio($material)
+
+    &--slider
+      slider($material)
 
   .list
     list($material)
@@ -44,7 +47,7 @@ text($main, $alt)
     navigation-drawer($main)
     
   &.btn
-    button($alt)
+    button($main)
 
   &.icon
     icon($alt)
@@ -59,5 +62,11 @@ text($main, $alt)
       &.radio, &.checkbox
         radio($main)
 
+    &--slider
+      slider($main)
+
   &.list
     list($main)
+  
+  &.divider
+    divider($main)

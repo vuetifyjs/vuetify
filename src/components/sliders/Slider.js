@@ -53,7 +53,7 @@ export default {
           this.inputWidth = this.calculateWidth(val)
         }
 
-        let value = parseInt(val)
+        const value = parseInt(val)
         this.lazyValue = value
 
         if (value !== this.value) {
@@ -214,7 +214,8 @@ export default {
 
     return this.genInputGroup([slider], {
       attrs: {
-        role: 'slider'
+        role: 'slider',
+        tabindex: this.tabindex
       },
       on: {
         mouseup: this.sliderMove

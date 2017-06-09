@@ -47,9 +47,10 @@ export default {
       }
     },
     hasError () {
-      return this.errors.length !== 0 ||
+      return this.errorMessages.length > 0 ||
         !this.counterIsValid() ||
-        !this.validateIsValid()
+        !this.validateIsValid() ||
+        this.error
     },
     count () {
       const inputLength = (this.inputValue && this.inputValue.toString() || '').length

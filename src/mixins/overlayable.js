@@ -9,7 +9,8 @@ export default {
   },
 
   props: {
-    hideOverlay: Boolean
+    hideOverlay: Boolean,
+    overflow: Boolean
   },
 
   methods: {
@@ -40,6 +41,8 @@ export default {
         overlay.className += ' overlay--active'
         this.overlay = overlay
       }, 0)
+
+      return true
     },
     removeOverlay () {
       if (!this.overlay) return
@@ -56,13 +59,11 @@ export default {
       this.overlay.className = this.overlay.className.replace('overlay--active', '')
     },
     hideScroll () {
+      if (this.overflow) return
       document.documentElement.style.overflowY = 'hidden'
-      window.innerWidth > 1024 &&
-        (document.documentElement.style.paddingRight = '17px')
     },
     showScroll () {
       document.documentElement.style.overflowY = null
-      document.documentElement.style.paddingRight = null
     }
   }
 }

@@ -1,17 +1,18 @@
 <template lang="pug">
   div(class="carousel")
     div(class="carousel__left")
-      v-btn(icon v-on:click.native.stop="prev")
+      v-btn(icon v-on:click.native.stop="prev" dark)
         v-icon chevron_left
 
     div(class="carousel__right")
-      v-btn(icon v-on:click.native.stop="next")
+      v-btn(icon v-on:click.native.stop="next" dark)
         v-icon chevron_right
 
     div(class="carousel__controls")
       v-btn(
         class="carousel__controls__item"
         icon
+        dark
         v-bind:class="{ 'carousel__controls__item--active': index === current }"
         v-for="(item, index) in items"
         v-on:click.native.stop="select(index)"

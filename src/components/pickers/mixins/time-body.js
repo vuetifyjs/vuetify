@@ -1,4 +1,9 @@
 export default {
+  data () {
+    return {
+      hasChanged: false
+    }
+  },
   methods: {
     genBody () {
       const children = [this.genHand(this.selectingHour ? 'hour' : 'minute')]
@@ -65,7 +70,8 @@ export default {
       for (let i = start; i < hours; i++) {
         children.push(this.$createElement('span', {
           'class': {
-            'active': i === this.hour
+            'active': i === this.hour,
+            'disabled': !this.isAllowed('hour', i)
           },
           style: this.getTransform(i),
           domProps: { innerHTML: `<span>${i}</span>` }
@@ -85,7 +91,8 @@ export default {
 
         children.push(this.$createElement('span', {
           'class': {
-            'active': num.toString() === this.minute.toString()
+            'active': num.toString() === this.minute.toString(),
+            'disabled': !this.isAllowed('minute', i)
           },
           style: this.getTransform(i),
           domProps: { innerHTML: `<span>${num}</span>` }
@@ -106,24 +113,19 @@ export default {
       }
     },
     changeHour (time) {
-      if (!this.is24hr) {
-        this.hour = time < 0 && this.hour === 1
-          ? 12 : time > 0 && this.hour === 12
-          ? 1 : this.hour + time
-      } else {
-        this.hour = time < 0 && this.hour === 0
-          ? 23 : time > 0 && this.hour === 23
-          ? 0 : this.hour + time
-      }
+      let range = this.generateRange('hour', this.hour)
+
+      time < 0 && (range = range.reverse().slice(1))
+      this.hour = range.find(h => this.allowedHours ? this.isAllowed('hour', h) : true)
 
       return true
     },
     changeMinute (time) {
       const current = Number(this.minute)
+      let range = this.generateRange('minute', current)
 
-      const minute = time < 0 && current === 0
-        ? 59 : time > 0 && current === 59
-        ? 0 : current + time
+      time < 0 && (range = range.reverse().slice(1))
+      const minute = range.find(m => this.allowedMinutes ? this.isAllowed('minute', m) : true)
 
       this.minute = minute < 10 ? `0${minute}` : minute
 
@@ -138,7 +140,10 @@ export default {
     onMouseUp () {
       this.isDragging = false
       !this.selectingHour && !this.actions && this.save()
-      this.selectingHour = false
+      if (this.hasChanged) {
+        this.selectingHour = false
+        this.hasChanged = false
+      }
     },
     onDragMove (e) {
       if (!this.isDragging && e.type !== 'click') return
@@ -153,7 +158,12 @@ export default {
       }
 
       const selecting = this.selectingHour ? 'hour' : 'minute'
-      this[selecting] = Math.round(this.angle(center, coords) / this.degreesPerUnit)
+      const value = Math.round(this.angle(center, coords) / this.degreesPerUnit)
+
+      if (this.isAllowed(selecting, value)) {
+        this[selecting] = value
+        this.hasChanged = true
+      }
     },
     angle (center, p1) {
       var p0 = {
@@ -162,7 +172,7 @@ export default {
           Math.abs(p1.x - center.x) * Math.abs(p1.x - center.x) +
           Math.abs(p1.y - center.y) * Math.abs(p1.y - center.y))
       }
-      return Math.abs((2 * Math.atan2(p1.y - p0.y, p1.x - p0.x)) * 180 / Math.PI);
+      return Math.abs((2 * Math.atan2(p1.y - p0.y, p1.x - p0.x)) * 180 / Math.PI)
     }
   }
 }

@@ -3,6 +3,13 @@ import Schemable from '../../mixins/schemable'
 export default {
   name: 'list',
 
+  provide () {
+    return {
+      listClick: this.listClick,
+      listClose: this.listClose
+    }
+  },
+
   mixins: [Schemable],
 
   data () {

@@ -9,7 +9,7 @@
   font-size: 18px
   font-weight: 400
   list-style-type: none
-  max-height: 300px
+  max-height: 290px
   overflow: auto
   padding: 0
   text-align: center
@@ -117,8 +117,8 @@
         transition: none
         z-index: 1
       
-    .btn.btn--floating.btn--current:not(.btn--active)
-      color: rgba($theme.primary, .6)
+    .btn.btn--current:not(.btn--active)
+      color: $theme.primary
       
     .btn.btn--floating
       height: 32px
@@ -148,3 +148,34 @@
   .picker--date__years
     margin-left: 170px
     width: 330px
+    
+/** Theme */
+.picker--date
+  &.picker--dark
+    .picker--date__years
+      background: $material-dark.cards
+
+      li
+        color: $material-dark.text.primary
+
+        &.active
+          color: $theme.accent
+
+    .picker--date__header
+      color: $material-dark.text.primary
+        
+    .picker--date__table
+      table
+        th
+          color: $material-dark.text.primary
+          
+        .btn
+          &--current
+            color: $theme.accent
+
+          &--active
+            color: #000
+
+          &--floating
+            &:after
+              background: $theme.accent !important

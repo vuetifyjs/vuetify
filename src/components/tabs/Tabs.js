@@ -3,6 +3,13 @@ import Bootable from '../../mixins/bootable'
 export default {
   name: 'tabs',
 
+  provide () {
+    return {
+      slider: this.slider,
+      tabClick: this.tabClick
+    }
+  },
+
   mixins: [Bootable],
 
   data () {

@@ -1,4 +1,3 @@
-import { closestParentTag } from '../../util/helpers'
 import GenerateRouteLink from '../../mixins/route-link'
 
 export default {
@@ -19,10 +18,6 @@ export default {
         'toolbar__item': true,
         'toolbar__item--disabled': this.disabled
       }
-    },
-
-    listUID () {
-      return closestParentTag.call(this, 'v-list')
     }
   },
 
