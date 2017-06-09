@@ -9,7 +9,8 @@ export default {
   },
 
   props: {
-    hideOverlay: Boolean
+    hideOverlay: Boolean,
+    overflow: Boolean
   },
 
   methods: {
@@ -40,6 +41,8 @@ export default {
         overlay.className += ' overlay--active'
         this.overlay = overlay
       }, 0)
+
+      return true
     },
     removeOverlay () {
       if (!this.overlay) return
@@ -56,6 +59,7 @@ export default {
       this.overlay.className = this.overlay.className.replace('overlay--active', '')
     },
     hideScroll () {
+      if (this.overflow) return
       document.documentElement.style.overflowY = 'hidden'
     },
     showScroll () {

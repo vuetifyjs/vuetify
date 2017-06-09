@@ -22,7 +22,6 @@ export default {
     enableResizeWatcher: Boolean,
     height: String,
     floating: Boolean,
-    fullHeight: Boolean,
     miniVariant: Boolean,
     permanent: Boolean,
     persistent: Boolean,
@@ -43,7 +42,6 @@ export default {
         'navigation-drawer--clipped': this.clipped,
         'navigation-drawer--close': !this.isActive,
         'navigation-drawer--floating': this.floating,
-        'navigation-drawer--full-height': this.fullHeight,
         'navigation-drawer--is-mobile': this.isMobile,
         'navigation-drawer--mini-variant': this.miniVariant,
         'navigation-drawer--open': this.isActive,
@@ -63,14 +61,15 @@ export default {
   watch: {
     isActive (val) {
       this.$emit('input', val)
-    },
-    showOverlay (val) {
-      val && this.genOverlay() || this.removeOverlay()
+      this.showOverlay && val && this.genOverlay() || this.removeOverlay()
     },
     '$route' () {
       if (!this.disableRouteWatcher) {
         this.isActive = !this.closeConditional()
       }
+    },
+    permanent (val) {
+      val && this.$emit('input', val)
     },
     value (val) {
       if (this.permanent) return
