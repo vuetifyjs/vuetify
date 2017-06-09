@@ -6,7 +6,7 @@ export default {
         props: {
           dark: this.dark,
           light: this.light,
-          primary: this.selectAll === 'primary',
+          primary: this.selectAll === 'primary' || this.selectAll === true,
           secondary: this.selectAll === 'secondary',
           success: this.selectAll === 'success',
           info: this.selectAll === 'info',
