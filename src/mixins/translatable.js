@@ -27,13 +27,13 @@ export default {
 
   beforeDestroy () {
     window.removeEventListener('scroll', this.translate, false)
-    document.removeEventListener('resize', this.translate, false)
+    window.removeEventListener('resize', this.translate, false)
   },
 
   methods: {
     listeners () {
       window.addEventListener('scroll', this.translate, false)
-      document.addEventListener('resize', this.translate, false)
+      window.addEventListener('resize', this.translate, false)
     },
 
     translate () {
