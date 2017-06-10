@@ -5,7 +5,6 @@
   will-change: background, box-shadow
 
   .btn
-    color: $color-theme
     justify-content: center
     min-width: auto
     padding: 0 8px
@@ -21,10 +20,6 @@
 
     &[data-selected]
       opacity: 1
-      background: rgba($material-theme.fg-color, $material-theme.divider-percent)
-
-      &:not(:last-child):not([data-only-child])
-        border-right-color: rgba($material-theme.fg-color, $material-theme.divider-percent)
 
     .icon
       font-size: 30px
@@ -34,5 +29,4 @@
       margin-left: 10px
 
   &--selected
-    background: $material-theme.bg-color
     elevation(2)
