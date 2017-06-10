@@ -5,11 +5,6 @@ button($material)
     .btn__content
       &:before
         background-color: $material.buttons.focused
-  
-  &.btn--flat 
-    &:focus .btn__content:after
-      animation: 3s button-focus infinite
-      background-color: $material.buttons.focused-alt
 
   &:disabled
     box-shadow: none !important

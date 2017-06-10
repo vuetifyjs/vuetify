@@ -9,14 +9,12 @@
   justify-content: center
   margin: $button-margin
   min-width: $button-min-width
-  overflow: hidden
   outline: 0
   text-transform: $button-text-transform
   text-decoration: none
   transition: opacity, width, height, padding, margin, background, background-color, box-shadow, transform $primary-transition
   position: relative
   vertical-align: middle
-  z-index: 0
 
 
 /** Psuedo */
@@ -26,9 +24,8 @@
       align-items: center
       display: inline-flex
       justify-content: center
-      z-index: 1
 
-    &:after, &:before
+    &:before
       border-radius: inherit
       bottom: 0
       content: ''
@@ -37,25 +34,6 @@
       top: 0
       right: 0
       transition: $primary-transition
-
-  &.btn--flat
-    .btn__content
-      &:after
-        content: ''
-        position: absolute
-        background-color: transparent
-        bottom: initial
-        top: calc(50% - 36px)
-        left: calc(50% - 36px)
-        right: initial
-        pointer-events: none
-        height: 72px
-        width: 72px
-        opacity: 0
-        transition: .4s $transition.swing
-        transition-delay: .2s
-        border-radius: 50%
-        z-index: 0
 
 /** Content */
 .btn
@@ -233,16 +211,3 @@
   &.warning,
   &.info
     color: $material-dark.text.primary
-    
-@keyframes button-focus
-  0%
-    transform: scale(1)
-    opacity: 1
-  
-  50%
-    transform: scale(1.1)
-    opacity: 1
-    
-  100%
-    transform: scale(1)
-    opacity: 1
