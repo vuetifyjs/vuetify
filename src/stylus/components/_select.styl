@@ -49,3 +49,36 @@
   .fade-transition-leave-active
     position: absolute
     left: 0
+
+
+.input-group
+  &--overflow, &--editable, &--segmented
+    .input-group__input
+      transition: .3s $transition.swing
+
+    .input-group__input:hover
+      background: #fff
+
+    &.input-group--focused
+      .input-group__input
+        background: #fff
+        elevation(8)
+    
+    label
+      left: 16px !important
+
+    .input-group__details      
+      &:after
+        display: none
+
+    .input-group__input
+      padding: 0 16px
+
+      &:before
+        content: ''
+        position: absolute
+        left: 0
+        width: 100%
+        height: 1px
+        top: 0
+    

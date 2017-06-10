@@ -96,6 +96,9 @@ export default {
       type: Boolean,
       default: true
     },
+    contentClass: {
+      default: ''
+    },
     activator: {
       default: null
     },
@@ -134,7 +137,7 @@ export default {
       }
     },
     hasActivator () {
-      return !!this.$refs.activator || this.activator
+      return !!this.$slots.activator || this.activator
     }
   },
 

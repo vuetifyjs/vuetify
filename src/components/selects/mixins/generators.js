@@ -4,13 +4,15 @@ export default {
       const data = {
         ref: 'menu',
         props: {
+          activator: this.$refs.activator,
           auto: this.auto,
           closeOnClick: false,
           closeOnContentClick: !this.multiple,
+          contentClass: this.isDropdown ? 'menu__content--dropdown' : '',
           disabled: this.disabled,
-          offsetY: this.autocomplete || this.offset,
           maxHeight: this.maxHeight,
-          activator: this.$refs.activator,
+          nudgeTop: this.isDropdown ? 22 : 0,
+          offsetY: this.autocomplete || this.offset || this.isDropdown,
           value: this.isActive
         },
         on: { input: val => (this.isActive = val) }

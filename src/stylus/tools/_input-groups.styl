@@ -25,7 +25,13 @@ input-group($material)
     color: $material.text.secondary
     
     &:before
-      background-color: $material.dividers      
+      background-color: $material.dividers
+
+  &.input-group
+    &--overflow, &--segmented, &--editable
+      .input-group__input
+        &:before
+          background-color: $material.dividers
 
   &.input-group--disabled
     input, textarea

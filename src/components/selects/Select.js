@@ -53,15 +53,21 @@ export default {
     offset: Boolean,
     singleLine: Boolean,
     top: Boolean,
-    returnObject: Boolean
+    returnObject: Boolean,
+    overflow: Boolean,
+    segmented: Boolean,
+    editable: Boolean
   },
 
   computed: {
     classes () {
       return {
         'input-group--text-field input-group--select': true,
+        'input-group--overflow': this.overflow,
+        'input-group--segmented': this.segmented,
+        'input-group--editable': this.editable,
         'input-group--autocomplete': this.autocomplete,
-        'input-group--single-line': this.singleLine,
+        'input-group--single-line': this.singleLine || this.isDropdown,
         'input-group--multi-line': this.multiLine,
         'input-group--chips': this.chips,
         'input-group--multiple': this.multiple
@@ -76,6 +82,9 @@ export default {
     },
     isDirty () {
       return this.selectedItems.length
+    },
+    isDropdown () {
+      return this.segmented || this.overflow || this.editable
     },
     selectedItems () {
       if (this.inputValue === null) return []

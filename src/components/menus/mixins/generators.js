@@ -28,7 +28,7 @@ export default {
 
     genContent () {
       return this.$createElement('div', {
-        'class': 'menu__content',
+        'class': (`menu__content ${this.contentClass}`).trim(),
         ref: 'content',
         style: this.styles,
         directives: [{
