@@ -185,7 +185,7 @@ export default {
       this.initWindow()
       this.getTiles()
       this.updateDimensions()
-      setTimeout(this.startTransition, 50)
+      requestAnimationFrame(this.startTransition)
     },
     deactivate () {
       this.isContentActive = false
@@ -197,7 +197,7 @@ export default {
     },
     startTransition () {
       this.isContentActive = true
-      setTimeout(this.calculateScroll, 0)
+      requestAnimationFrame(this.calculateScroll)
     }
   },
 

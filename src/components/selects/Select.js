@@ -139,7 +139,7 @@ export default {
     },
     onScroll () {
       if (!this.isActive) {
-        setTimeout(() => (this.content.scrollTop = 0), 50)
+        requestAnimationFrame(() => (this.content.scrollTop = 0))
       } else {
         const showMoreItems = (
           this.content.scrollHeight -
