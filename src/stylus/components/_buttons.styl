@@ -20,27 +20,26 @@
 /** Psuedo */
 .btn
   &__content
-    > span
-      align-items: center
-      display: inline-flex
-      justify-content: center
+    align-items: center
+    display: inline-flex
+    justify-content: center
 
-    &:before
-      border-radius: inherit
-      bottom: 0
-      content: ''
-      left: 0
-      position: absolute
-      top: 0
-      right: 0
-      transition: $primary-transition
+  &:before
+    border-radius: inherit
+    bottom: 0
+    content: ''
+    left: 0
+    position: absolute
+    top: 0
+    right: 0
+    transition: $primary-transition
 
 /** Content */
 .btn
   &__content
     align-items: center
     display: flex
-    height: $button-height
+    height: 100%
     flex: 1 0 100%
     justify-content: center
     transition: $primary-transition

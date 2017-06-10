@@ -71,9 +71,7 @@ export default {
 
   methods: {
     genContent (h) {
-      return h('div', { 'class': 'btn__content' }, [
-        h('span', this.$slots.default)
-      ])
+      return h('div', { 'class': 'btn__content' }, [this.$slots.default])
     },
     genLoader (h) {
       const children = []
