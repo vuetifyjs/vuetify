@@ -216,6 +216,6 @@ export default {
   },
 
   render () {
-    return this.genInputGroup(this.genInput(), { attrs: { tabindex: -1 }})
+    return this.genInputGroup(this.genInput(), { attrs: { tabindex: false }})
   }
 }
