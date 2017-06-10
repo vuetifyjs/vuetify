@@ -51,7 +51,9 @@ module.exports = {
     hints: process.env.NODE_ENV === 'production' ? 'warning' : false
   },
   plugins: [
-    new BundleAnalyzerPlugin(),
+    new BundleAnalyzerPlugin({
+      analyzerHost: '0.0.0.0'
+    }),
     new webpack.LoaderOptionsPlugin({
       minimize: true,
       progress: true,
