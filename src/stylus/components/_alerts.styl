@@ -2,11 +2,10 @@
   border-radius: $alert-border-radius
   border-width: $alert-border-width
   border-style: solid
-  border-color: rgba(#000, .8)
-  color: $alert-color
+  border-color: $material-light.dividers !important
+  color: #fff
   display: flex
   font-size: $alert-font-size
-  text-align: left
   padding: $alert-padding
   position: relative
   margin: $alert-margin
@@ -33,24 +32,6 @@
     display: flex
     align-items: center
     width: 100%
-  
-  &--primary
-    alert($theme.primary)
-
-  &--secondary
-    alert($theme.primary)
-
-  &--info
-    alert($theme.info)
-        
-  &--error
-    alert($theme.error)
-
-  &--success
-    alert($theme.success)
-    
-  &--warning
-    alert($theme.warning)
     
   &--no-icon
     .alert__icon
