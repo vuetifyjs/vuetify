@@ -1,4 +1,5 @@
 import Activator from './mixins/activator'
+import Detachable from '../../mixins/detachable'
 import Generators from './mixins/generators'
 import Position from './mixins/position'
 import Utils from './mixins/utils'
@@ -8,7 +9,15 @@ import Keyable from './mixins/keyable'
 export default {
   name: 'menu',
 
-  mixins: [Activator, Generators, Keyable, Position, Utils, Toggleable],
+  mixins: [
+    Activator,
+    Detachable,
+    Generators,
+    Keyable,
+    Position,
+    Utils,
+    Toggleable
+  ],
 
   data () {
     return {
@@ -95,9 +104,6 @@ export default {
     closeOnContentClick: {
       type: Boolean,
       default: true
-    },
-    contentClass: {
-      default: ''
     },
     activator: {
       default: null

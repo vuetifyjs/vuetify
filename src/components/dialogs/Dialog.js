@@ -1,11 +1,12 @@
 import Bootable from '../../mixins/bootable'
+import Detachable from '../../mixins/detachable'
 import Overlayable from '../../mixins/overlayable'
 import Toggleable from '../../mixins/toggleable'
 
 export default {
   name: 'dialog',
 
-  mixins: [Bootable, Overlayable, Toggleable],
+  mixins: [Bootable, Detachable, Overlayable, Toggleable],
 
   data: () => ({
     app: null
@@ -34,7 +35,7 @@ export default {
   computed: {
     classes () {
       return {
-        'dialog': true,
+        [(`dialog ${this.contentClass}`).trim()]: true,
         'dialog--active': this.isActive,
         'dialog--persistent': this.persistent,
         'dialog--fullscreen': this.fullscreen,
