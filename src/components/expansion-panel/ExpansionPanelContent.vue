@@ -50,17 +50,6 @@
       }
     },
 
-    mounted () {
-      // TODO: This is temporary, replace
-      if (this.value) {
-        this.$vuetify.load(() => {
-          setTimeout(() => {
-            this.$refs.body.style.height = `${this.$refs.body.clientHeight}px`
-          }, 1000)
-        })
-      }
-    },
-
     methods: {
       closeConditional (e) {
         return this.$parent.$el.contains(e.target) && 
