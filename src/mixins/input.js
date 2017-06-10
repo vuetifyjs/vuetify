@@ -190,8 +190,10 @@ export default {
             if ([9, 16].includes(e.keyCode)) {
               this.tabFocused = true
             }
-
-            if (e.keyCode === 13) {
+          },
+          keydown: e => {
+            if ([13, 32].includes(e.keyCode)) {
+              e.preventDefault()
               this.toggle()
             }
           }

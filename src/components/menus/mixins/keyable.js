@@ -24,14 +24,14 @@ export default {
 
   methods: {
     changeListIndex (e) {
-      [40, 38, 13].includes(e.keyCode) && e.preventDefault()
+      [40, 38, 13, 32].includes(e.keyCode) && e.preventDefault()
 
       if (this.listIndex === -1) this.setActiveListIndex()
       if ([27, 9].includes(e.keyCode)) this.isActive = false
       else if (e.keyCode === 40 && this.listIndex < this.tiles.length - 1) this.listIndex++
       else if (e.keyCode === 38 && this.listIndex > 0) this.listIndex--
       else if (e.keyCode === 13 && this.listIndex !== -1) this.tiles[this.listIndex].click()
-      else if (e.keyCode === 13) this.isActive = true
+      else if ([13, 32].includes(e.keyCode)) this.isActive = true
     },
     getTiles () {
       this.tiles = this.$refs.content.querySelectorAll('.list__tile')
