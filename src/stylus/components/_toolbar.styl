@@ -39,7 +39,7 @@
       height: $toolbar-mobile-portrait-height
 
   @media screen and (max-width: $grid-breakpoints.sm) and (orientation: portrait)
-    content(7px)
+    toolbar-content(7px)
   
   @media screen and (max-width: $grid-breakpoints.lg) and (orientation: landscape)
     &__content, &__extension
@@ -50,13 +50,13 @@
     &.toolbar__extension
       height: $toolbar-mobile-landscape-height
 
-    content(7px)
+    toolbar-content(7px)
   
   &--prominent
     &.toolbar__extension
       height: $toolbar-height
 
-    content(15px)
+    toolbar-content(15px)
 
 
 /** Types */
@@ -72,7 +72,7 @@
     + main
       padding-top: $toolbar-height
 
-content(left)
+toolbar-content(left)
   &__content, &__extension
     > *:first-child
       margin-left: left
