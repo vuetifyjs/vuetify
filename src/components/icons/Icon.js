@@ -8,6 +8,7 @@ export default {
   props: {
     disabled: Boolean,
     fa: Boolean,
+    mdi: Boolean,
     large: Boolean,
     left: Boolean,
     medium: Boolean,
@@ -16,7 +17,7 @@ export default {
   },
 
   render (h, { props, data, children }) {
-    const icon = props.fa ? 'fa' : 'material-icons'
+    const icon = props.fa ? 'fa' : props.mdi ? 'mdi' : 'material-icons'
     data.staticClass = data.staticClass ? `${icon} icon ${data.staticClass} ` : `${icon} icon`
     data.attrs = data.attrs || {}
 
@@ -34,11 +35,12 @@ export default {
     const iconClasses = Object.keys(classes).filter(k => classes[k]).join(' ')
     iconClasses && (data.staticClass += ` ${iconClasses}`)
 
-    if (props.fa) {
+    if (props.fa || props.mdi) {
+      const comparison = props.fa ? 'fa' : 'mdi'
       const text = children.pop().text
 
-      if (text.indexOf(' ') === -1) data.staticClass += ` fa-${text}`
-      else data.staticClass += ` ${text.split(' ').join('fa- ')}`
+      if (text.indexOf(' ') === -1) data.staticClass += ` ${comparison}-${text}`
+      else data.staticClass += ` ${text.split(' ').join(`${comparison}- `)}`
     }
 
     if (props.disabled) {
