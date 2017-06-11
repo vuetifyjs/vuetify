@@ -1,12 +1,22 @@
 navigation-drawer($material)
   background-color: $material.cards
   border-right: 1px solid $material.dividers
+
+  &:after
+    background-color: $material.dividers
+    content: ''
+    right: 0
+    top: 0
+    position: absolute
+    height: 100%
+    width: 1px    
   
   &.navigation-drawer--right
-    border-right: none
-    border-left:  1px solid $material.dividers
+    &:after
+      left: 0
+      right: initial
 
-  a, .icon, .subheader, .list
+  a, .subheader, .list
     color: $material.text.primary
     
   .divider

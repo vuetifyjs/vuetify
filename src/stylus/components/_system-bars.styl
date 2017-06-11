@@ -20,3 +20,13 @@
     .icon
       font-size: $headings.h6.size
       margin-right: 8px
+
+  &--status
+    + .navigation-drawer
+      margin-top: 24px
+      max-height: "calc(100vh - %s)" % 24px
+
+  &--window
+    + .navigation-drawer
+      margin-top: 32px
+      max-height: "calc(100vh - %s)" % 32px

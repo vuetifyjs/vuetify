@@ -49,12 +49,12 @@
     &.navigation-drawer--floating
       border-color: transparent
 
-  &--permanent
-    &:not(.navigation-drawer--clipped):not(.navigation-drawer--floating)
-      ~ main,
-      ~ .toolbar,
-      ~ .footer
-        padding-left: $navigation-drawer-width
+  // &--permanent
+  //   &:not(.navigation-drawer--clipped):not(.navigation-drawer--floating)
+  //     ~ main,
+  //     ~ .toolbar,
+  //     ~ .footer
+  //       padding-left: $navigation-drawer-width
 
   &--persistent, &--permanent
     &.navigation-drawer--open:not(.navigation-drawer--is-mobile):not(.navigation-drawer--right)
@@ -62,15 +62,17 @@
         ~ .toolbar
           padding-left: $navigation-drawer-width
 
-      ~ main, ~ .footer:not(.footer--fixed):not(.footer--absolute)
+      ~ main,
+      ~ .footer:not(.footer--fixed):not(.footer--absolute)
         padding-left: $navigation-drawer-width
 
-    &.navigation-drawer--open.navigation-drawer--right:not(.navigation-drawer--is-mobile)
+    &.navigation-drawer--open.navigation-drawer--right
       &:not(.navigation-drawer--clipped)
         + .toolbar
           padding-right: $navigation-drawer-width
 
-      ~ main, ~ .footer:not(.footer--fixed):not(.footer--absolute)
+      ~ main,
+      ~ .footer:not(.footer--fixed):not(.footer--absolute)
         padding-right: $navigation-drawer-width
 
   &--mini-variant
