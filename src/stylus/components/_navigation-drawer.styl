@@ -15,9 +15,13 @@
   // Remove animation when booting up
   &:not(.navigation-drawer--is-booted)
     transition: none !important
+    z-index: -1
 
     + .toolbar, ~ main, ~ .footer
       transition: none !important
+      
+      @media $display-breakpoints.sm-and-down
+        padding-left: 0 !important
 
   &--close:not(.navigation--permanent)
     &.navigation-drawer:not(.navigation-drawer--right)
