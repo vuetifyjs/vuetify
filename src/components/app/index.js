@@ -1,7 +1,5 @@
-import { createSimpleFunctional } from '../../util/helpers'
 import App from './App'
-
-const AppBar = createSimpleFunctional('app__bar')
+import AppBar from './AppBar'
 
 export default {
   App,

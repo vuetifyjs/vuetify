@@ -1,103 +1,148 @@
 .toolbar
-  align-items: center
-  display: flex
-  flex-wrap: wrap
-  height: $toolbar-height
+  // padding: 0 $grid-gutter-mobile
   position: relative
-  padding: $toolbar-padding-y 0
   transition: .3s $transition.swing
   width: 100%
   will-change: padding-left
-  elevation(4)
   z-index: 2
+  elevation(4)
 
-  > *:first-child
-    margin-left: $grid-gutter
 
-  > *:last-child
-    margin-right: $grid-gutter
+/** Children */
+.toolbar
+  &__title
+    @extend .title
+    margin-left: 16px
 
-  @media $display-breakpoints.xs-only
+  &__content, &__extension
+    align-items: center
+    display: flex
+    flex-wrap: wrap
+
     > *:first-child
-      margin-left: $grid-gutter-mobile
+      margin-left: 15px
 
     > *:last-child
-      margin-right: $grid-gutter-mobile
+      margin-right: 15px
+  
+  &__content
+    height: $toolbar-height
 
-  i
-    font-size: 24px
+  &__extension
+    height: $toolbar-extension-height
+    
+    .toolbar__title
+      margin-left: 72px
+    
+  @media $display-breakpoints.xs-only
+    &__content, &__extension
+      height: $toolbar-mobile-portrait-height
 
-  .menu__activator
-    height: 100%
+  @media screen and (max-width: $grid-breakpoints.sm) and (orientation: portrait)
+    content(7px)
+  
+  @media screen and (max-width: $grid-breakpoints.lg) and (orientation: landscape)
+    &__content, &__extension
+      height: $toolbar-mobile-landscape-height
+      
+  &--dense
+    &.toolbar__content,
+    &.toolbar__extension
+      height: $toolbar-mobile-landscape-height
+
+    content(7px)
+  
+  &--prominent
+    &.toolbar__extension
+      height: $toolbar-height
+
+    content(15px)
+
+
+/** Types */
+.toolbar
+  &--card
+    border-radius: $card-border-radius $card-border-radius 0 0
+    elevation(0)
+    
+  &--fixed
+    position: fixed
 
   &--fixed, &--absolute
     + main
       padding-top: $toolbar-height
 
-  &--fixed
-    position: fixed
+content(left)
+  &__content, &__extension
+    > *:first-child
+      margin-left: left
 
-  &--absolute
-    position: absolute
+    > *:last-child
+      margin-right: left
 
-  &__sub
-    flex: 1 0 100%
-    padding: 24px 0 24px 72px
 
-  &__side-icon
-    align-items: center
-    display: inline-flex
-    margin-left: 10px
-    position: relative
 
-  &__logo
-    align-items: center
-    display: flex
-    font-size: 3rem
-    flex: 1;
-    padding: 0
-    text-decoration: none
+  // &--absolute
+  //   position: absolute
 
-  &__title
-    font-size: $headings.h6.size
-    flex: 1;
-    overflow: hidden
-    text-overflow: ellipsis
-    white-space: nowrap
+  // &__sub
+  //   flex: 1 0 100%
+  //   padding: 24px 0 24px 72px
 
-    &:not(:first-child)
-      padding: 0 16px
+  // &__side-icon
+  //   align-items: center
+  //   display: inline-flex
+  //   margin-left: 10px
+  //   position: relative
 
-  &__items
-    align-items: center
-    display: flex
-    height: 100%
-    list-style-type: none
-    max-width: 100%
-    padding: 0
+  // &__logo
+  //   align-items: center
+  //   display: flex
+  //   font-size: 3rem
+  //   flex: 1;
+  //   padding: 0
+  //   text-decoration: none
 
-    > li
-      align-items: center
-      display: flex
-      height: 100%
+  // &__title
+  //   font-size: $headings.h6.size
+  //   flex: 1;
+  //   overflow: hidden
+  //   text-overflow: ellipsis
+  //   white-space: nowrap
 
-  &__item
-    align-items: center
-    display: flex
-    height: 100%
-    padding: $toolbar-item-padding
-    position: relative
-    text-decoration: none
-    transition: all 0.3s ease-out
-    white-space: nowrap
+  //   &:not(:first-child)
+  //     padding: 0 16px
 
-    i
-      font-size: 2rem
+  // &__items
+  //   align-items: center
+  //   display: flex
+  //   height: 100%
+  //   list-style-type: none
+  //   max-width: 100%
+  //   padding: 0
 
-    &--disabled
-      opacity: .5
-      pointer-events: none
+  //   > li
+  //     align-items: center
+  //     display: flex
+  //     height: 100%
 
-  .input-group
-    margin: 0 0 0 16px
-    flex: 1
+  // &__item
+  //   align-items: center
+  //   display: flex
+  //   height: 100%
+  //   padding: $toolbar-item-padding
+  //   position: relative
+  //   text-decoration: none
+  //   transition: all 0.3s ease-out
+  //   white-space: nowrap
+
+  //   i
+  //     font-size: 2rem
+
+  //   &--disabled
+  //     opacity: .5
+  //     pointer-events: none
+
+  // .input-group
+  //   margin: 0 0 0 16px
+  //   flex: 1

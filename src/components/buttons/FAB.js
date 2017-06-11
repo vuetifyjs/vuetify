@@ -1,11 +1,12 @@
 import Contextualable from '../../mixins/contextualable'
-import Toggleable from '../../mixins/toggleable'
 import GenerateRouteLink from '../../mixins/route-link'
+import Schemable from '../../mixins/schemable'
+import Toggleable from '../../mixins/toggleable'
 
 export default {
   name: 'fab',
 
-  mixins: [Contextualable, GenerateRouteLink, Toggleable],
+  mixins: [Contextualable, GenerateRouteLink, Schemable, Toggleable],
 
   data: () => ({
     changeTimeout: {},
@@ -13,6 +14,7 @@ export default {
   }),
 
   props: {
+    absolute: Boolean,
     activeClass: {
       type: String,
       default: 'fab--active'
@@ -22,6 +24,8 @@ export default {
     lateral: Boolean,
     loading: Boolean,
     outline: Boolean,
+    positionX: [Number, String],
+    positionY: [Number, String],
     hidden: Boolean,
     ripple: {
       type: [Boolean, Object],
@@ -31,6 +35,20 @@ export default {
     tag: {
       type: String,
       default: 'button'
+    },
+    top: {
+      type: [Number, String]
+    },
+    right: {
+      type: [Number, String],
+      default: 24
+    },
+    bottom: {
+      type: [Number, String],
+      default: 124
+    },
+    left: {
+      type: [Number, String]
     },
     type: {
       type: String,
@@ -42,6 +60,7 @@ export default {
     classes () {
       return {
         'fab': true,
+        'fab--absolute': this.absolute,
         'fab--small': this.mini,
         'fab--hidden': this.hidden,
         'fab--lateral': this.lateral,
@@ -51,13 +70,17 @@ export default {
         'success': this.success && !this.outline,
         'info': this.info && !this.outline,
         'warning': this.warning && !this.outline,
-        'error': this.error && !this.outline,
-        'primary--text': this.primary && (this.outline || this.flat),
-        'secondary--text': this.secondary && (this.outline || this.flat),
-        'success--text': this.success && (this.outline || this.flat),
-        'info--text': this.info && (this.outline || this.flat),
-        'warning--text': this.warning && (this.outline || this.flat),
-        'error--text': this.error && (this.outline || this.flat)
+        'error': this.error && !this.outline
+      }
+    },
+    styles () {
+      const pos = (p) => typeof p === 'undefined' ? 'initial' : !isNaN(p) ? `${p}px` : p
+
+      return {
+        top: pos(this.top),
+        right: pos(this.right),
+        bottom: pos(this.bottom),
+        left: pos(this.left)
       }
     }
   },
@@ -96,6 +119,8 @@ export default {
     if (tag === 'button') {
       data.attrs.type = this.type
     }
+
+    data.style = this.styles
 
     children.push(this.genContent(h))
 

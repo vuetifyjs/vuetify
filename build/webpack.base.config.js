@@ -3,11 +3,9 @@ const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const projectRoot = path.resolve(__dirname, '../')
 const version = process.env.VERSION || require('../package.json').version
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = {
   devtool: '#source-map',
-  watch: process.env.TARGET === 'dev',
   entry: {
     app: './src/index.js'
   },
@@ -51,9 +49,6 @@ module.exports = {
     hints: process.env.NODE_ENV === 'production' ? 'warning' : false
   },
   plugins: [
-    new BundleAnalyzerPlugin({
-      analyzerHost: '0.0.0.0'
-    }),
     new webpack.LoaderOptionsPlugin({
       minimize: true,
       progress: true,
