@@ -26,70 +26,70 @@ describe('ButtonToggle.vue', () => {
   it('should not allow empty value when mandatory prop is used', () => {
     const wrapper = mount(ButtonToggle, {
       propsData: {
-        value: 1,
-        options: toggle_text,
+        inputValue: 1,
+        items: toggle_text,
         mandatory: true
       }
     })
 
-    const input = jest.fn()
-    wrapper.instance().$on('input', input)
+    const change = jest.fn()
+    wrapper.instance().$on('change', change)
 
     wrapper.instance().updateValue(toggle_text[0])
 
-    expect(input).not.toBeCalled()
+    expect(change).not.toBeCalled()
   })
 
   it('should allow new value when mandatory prop is used', () => {
     const wrapper = mount(ButtonToggle, {
       propsData: {
-        value: 1,
-        options: toggle_text,
+        inputValue: 1,
+        items: toggle_text,
         mandatory: true
       }
     })
 
-    const input = jest.fn()
-    wrapper.instance().$on('input', input)
+    const change = jest.fn()
+    wrapper.instance().$on('change', change)
 
     wrapper.instance().updateValue(toggle_text[1])
 
-    expect(input).toBeCalledWith(2)
+    expect(change).toBeCalledWith(2)
   })
 
   it('should not allow empty value when mandatory prop is used with multiple prop', () => {
     const wrapper = mount(ButtonToggle, {
       propsData: {
-        value: [1],
-        options: toggle_text,
+        inputValue: [1],
+        items: toggle_text,
         mandatory: true,
         multiple: true
       }
     })
 
-    const input = jest.fn()
-    wrapper.instance().$on('input', input)
+    const change = jest.fn()
+    wrapper.instance().$on('change', change)
 
     wrapper.instance().updateValue(toggle_text[0])
 
-    expect(input).toBeCalledWith([1])
+    expect(change).toBeCalledWith([1])
   })
 
   it('should allow new value when mandatory prop is used with multiple prop', () => {
     const wrapper = mount(ButtonToggle, {
       propsData: {
-        value: [1],
-        options: toggle_text,
+        inputValue: [1],
+        items: toggle_text,
         mandatory: true,
         multiple: true
       }
     })
 
-    const input = jest.fn()
-    wrapper.instance().$on('input', input)
+    const change = jest.fn()
+    wrapper.instance().$on('change', change)
 
     wrapper.instance().updateValue(toggle_text[1])
 
-    expect(input).toBeCalledWith([1, 2])
+    expect(change).toBeCalledWith([1, 2])
   })
 })
