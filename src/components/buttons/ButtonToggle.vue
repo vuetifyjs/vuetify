@@ -33,6 +33,11 @@
 
       multiple: Boolean,
 
+      mandatory: {
+        type: Boolean,
+        value: false
+      },
+
       value: {
         required: false
       }
@@ -63,6 +68,7 @@
 
       updateValue (item) {
         if (!this.multiple) {
+          if (this.mandatory && this.inputValue === item.value) return
           return this.$emit('input', this.inputValue === item.value ? null : item.value)
         }
 
@@ -70,7 +76,7 @@
 
         const i = items.indexOf(item.value)
         if (i !== -1) {
-          items.splice(i, 1)
+          items.length > 1 && !this.mandatory && items.splice(i, 1)
         } else {
           items.push(item.value)
         }
