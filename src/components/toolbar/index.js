@@ -5,9 +5,7 @@ import {
   createSimpleFunctional
 } from '../../util/helpers'
 
-const ToolbarLogo = createSimpleFunctional('toolbar__logo')
 const ToolbarTitle = createSimpleFunctional('toolbar__title')
-const ToolbarSub = createSimpleFunctional('toolbar__sub')
 const ToolbarItems = createSimpleFunctional('toolbar__items', 'ul')
 const ToolbarSideIcon = {
   functional: true,
@@ -26,13 +24,35 @@ const ToolbarSideIcon = {
     return h('v-btn', data, [h('v-icon', 'menu')])
   }
 }
+const SystemBar = {
+  functional: true,
+
+  props: {
+    dark: Boolean,
+    light: Boolean,
+    lightsOut: Boolean,
+    status: Boolean,
+    window: Boolean
+  },
+
+  render (h, { data, props, children }) {
+    data.staticClass = (`system-bar ${data.staticClass || ''}`).trim()
+
+    if (props.dark) data.staticClass += ' dark--text'
+    if (props.light) data.staticClass += ' light--text'
+    if (props.status) data.staticClass += ' system-bar--status'
+    if (props.window) data.staticClass += ' system-bar--window'
+    if (props.lightsOut) data.staticClass += ' system-bar--lights-out'
+
+    return h('div', data, children)
+  }
+}
 
 export default {
+  SystemBar,
   Toolbar,
   ToolbarItem,
   ToolbarItems,
-  ToolbarLogo,
   ToolbarTitle,
-  ToolbarSideIcon,
-  ToolbarSub
+  ToolbarSideIcon
 }

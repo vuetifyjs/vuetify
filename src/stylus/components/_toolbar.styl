@@ -6,6 +6,9 @@
   will-change: padding-left
   z-index: 2
   elevation(4)
+    
+  .input-group__details
+    display: none
 
 
 /** Children */
@@ -44,19 +47,6 @@
   @media screen and (max-width: $grid-breakpoints.lg) and (orientation: landscape)
     &__content, &__extension
       height: $toolbar-mobile-landscape-height
-      
-  &--dense
-    &.toolbar__content,
-    &.toolbar__extension
-      height: $toolbar-mobile-landscape-height
-
-    toolbar-content(7px)
-  
-  &--prominent
-    &.toolbar__extension
-      height: $toolbar-height
-
-    toolbar-content(15px)
 
 
 /** Types */
@@ -71,9 +61,28 @@
   &--fixed, &--absolute
     + main
       padding-top: $toolbar-height
+      
+  &--floating
+    display: inline-flex
+    margin: 16px
+    width: auto
+
+  &--prominent
+    .toolbar__extension
+      height: $toolbar-height
+
+    toolbar-content(15px)
+
+  &--dense
+    .toolbar__content,
+    .toolbar__extension
+      height: $toolbar-mobile-landscape-height
+
+    toolbar-content(7px)
 
 toolbar-content(left)
-  &__content, &__extension
+  .toolbar__content,
+  .toolbar__extension
     > *:first-child
       margin-left: left
 

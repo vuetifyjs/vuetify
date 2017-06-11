@@ -1,12 +1,14 @@
 .btn-toggle
-  display: inline-flex
+  display: flex
   border-radius: 2px
+  justify-content: center
   transition: $primary-transition
   will-change: background, box-shadow
 
   .btn
     justify-content: center
     min-width: auto
+    width: auto
     padding: 0 8px
     margin: 0
     opacity: .4
@@ -20,13 +22,13 @@
 
     &[data-selected]
       opacity: 1
-
-    .icon
-      font-size: 30px
+      
+    &__content
+      padding: 0
 
     span + .icon
       font-size: initial
       margin-left: 10px
 
   &--selected
-    elevation(2)
+    // elevation(2)

@@ -8,6 +8,8 @@ export default {
     dense: Boolean,
     extended: Boolean,
     fixed: Boolean,
+    flat: Boolean,
+    floating: Boolean,
     prominent: Boolean
   },
 
@@ -16,8 +18,9 @@ export default {
       return {
         'toolbar': true,
         'toolbar--card': this.card,
-        'toolbar--extended': this.extended,
         'toolbar--fixed': this.fixed,
+        'elevation-0': this.flat,
+        'toolbar--floating': this.floating,
         'toolbar--dense': this.dense,
         'toolbar--prominent': this.prominent,
         'dark--text': this.dark,

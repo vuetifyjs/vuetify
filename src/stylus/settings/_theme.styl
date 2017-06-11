@@ -19,7 +19,10 @@ $theme := {
 // Material Design - https://material.io/guidelines/style/color.html#color-usability
 // ============================================================
 $material-light := {
-  status-bar: #E0E0E0,
+  status-bar: {
+    regular: #E0E0E0,
+    lights-out: rgba(#fff, .7)
+  },
   app-bar: #F5F5F5,
   background: #FAFAFA,
   cards: #FFFFFF,
@@ -69,7 +72,10 @@ $material-light := {
   inactive-icon-percent: .38
 }
 $material-dark := {
-  status-bar: #000000,
+  status-bar: {
+    regular: #000000,
+    lights-out: rgba(#000, .2)
+  },
   app-bar: #212121,
   background: #303030,
   cards: #424242,

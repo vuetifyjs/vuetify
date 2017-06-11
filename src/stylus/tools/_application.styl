@@ -1,7 +1,10 @@
 application($material)
   background: $material.background
   color: $material.text.primary
-  
+
+  .system-bar
+    system-bar($material)
+
   .toolbar
     toolbar($material)
   
@@ -40,6 +43,9 @@ application($material)
     list($material)
 
 text($main, $alt)
+  &.system-bar
+    system-bar($main)
+
   &.toolbar
     toolbar($main)
     
