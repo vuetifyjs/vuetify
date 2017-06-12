@@ -6,7 +6,7 @@ import {
 } from '../../util/helpers'
 
 const ToolbarTitle = createSimpleFunctional('toolbar__title')
-const ToolbarItems = createSimpleFunctional('toolbar__items', 'ul')
+const ToolbarItems = createSimpleFunctional('toolbar__items')
 const ToolbarSideIcon = {
   functional: true,
 

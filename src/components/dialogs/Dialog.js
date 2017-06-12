@@ -62,19 +62,6 @@ export default {
     }
   },
 
-  mounted () {
-    this.app = document.querySelector('[data-app]')
-    this.$nextTick(() => {
-      this.app && this.app.appendChild(this.$refs.content)
-    })
-  },
-
-  beforeDestroy () {
-    this.app &&
-      this.app.contains(this.$refs.content) &&
-      this.app.removeChild(this.$refs.content)
-  },
-
   methods: {
     closeConditional (e) {
       // close dialog if !persistent and clicked outside

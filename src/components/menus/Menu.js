@@ -21,7 +21,6 @@ export default {
 
   data () {
     return {
-      app: null,
       autoIndex: null,
       dimensions: {
         activator: {
@@ -173,18 +172,10 @@ export default {
 
   mounted () {
     window.addEventListener('resize', this.onResize, { passive: true })
-    this.app = document.querySelector('[data-app]')
-    this.$nextTick(() => {
-      this.app && this.app.appendChild(this.$refs.content)
-    })
   },
 
   beforeDestroy () {
     window.removeEventListener('resize', this.onResize, { passive: true })
-    this.app &&
-      this.app.contains(this.$refs.content) &&
-      this.app.removeChild(this.$refs.content)
-
     window.removeEventListener('resize', this.windowResizeHandler)
   },
 

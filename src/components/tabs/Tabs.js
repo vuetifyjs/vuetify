@@ -1,5 +1,3 @@
-import Bootable from '../../mixins/bootable'
-
 export default {
   name: 'tabs',
 
@@ -9,8 +7,6 @@ export default {
       tabClick: this.tabClick
     }
   },
-
-  mixins: [Bootable],
 
   data () {
     return {
@@ -54,8 +50,6 @@ export default {
       this.tabClick(this.value)
     },
     activeIndex () {
-      if (this.isBooted) this.overflow = true
-
       const activators = this.$slots.activators
 
       if (!activators ||
@@ -63,7 +57,6 @@ export default {
         (activators.length &&
           !activators[0].componentInstance.$children)) return
 
-console.log( activators[0].componentInstance.$children)
       activators[0].componentInstance.$children
         .filter(i => i.$options._componentTag === 'v-tabs-item')
         .forEach(i => i.toggle(this.target))
