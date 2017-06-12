@@ -37,6 +37,19 @@
     .toolbar__title
       margin-left: 72px
     
+  &__items
+    display: flex
+    height: 100%
+    max-width: 100%
+    padding: 0
+    
+    > .btn
+      height: 100%
+      margin: 0
+      
+      &:focus:not(:hover) .btn__content:before
+        opacity: 0
+
   @media $display-breakpoints.xs-only
     &__content, &__extension
       height: $toolbar-mobile-portrait-height

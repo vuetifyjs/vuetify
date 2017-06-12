@@ -37,19 +37,17 @@
 
     .btn__content
       height: 56px
-
-      > span
-        flex-direction: column-reverse
-        height: 56px
-        font-size: 12px
-        transform: scale3d(1, 1, 1) translate3d(0, 1px, 0)
-        white-space: nowrap
-        will-change: font-size
+      flex-direction: column-reverse
+      height: 56px
+      font-size: 12px
+      transform: scale3d(1, 1, 1) translate3d(0, 1px, 0)
+      white-space: nowrap
+      will-change: font-size
 
     &--active
       opacity: 1
 
-      .btn__content > span
+      .btn__content
         font-size: 14px
         transform: scale3d(1, 1, 1) translate3d(0, 0, 0)
 
@@ -57,7 +55,7 @@
       filter: grayscale(100%)
 
   &--shift
-    .btn__content > span
+    .btn__content
       font-size: 14px
 
       span
@@ -73,11 +71,11 @@
         max-width: 168px
         flex: 1 1 72px
 
-        .btn__content > span
+        .btn__content
           transform: scale3d(1, 1, 1) translate3d(0, 2px, 0)
 
 .bottom-nav--shift
-  .btn:not(.btn--active) .btn__content > span
+  .btn:not(.btn--active) .btn__content
     transform: scale3d(1, 1, 1) translate3d(0, 10px, 0)
 
     span
