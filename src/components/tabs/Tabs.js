@@ -63,6 +63,7 @@ export default {
         (activators.length &&
           !activators[0].componentInstance.$children)) return
 
+console.log( activators[0].componentInstance.$children)
       activators[0].componentInstance.$children
         .filter(i => i.$options._componentTag === 'v-tabs-item')
         .forEach(i => i.toggle(this.target))

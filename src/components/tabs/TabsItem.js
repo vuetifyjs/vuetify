@@ -58,9 +58,11 @@ export default {
     click (e) {
       e.preventDefault()
 
-      !this.router &&
-        this.tabClick(this.action) ||
-        this.callSlider()
+      if (!this.router) {
+        this.tabClick(this.action)
+      }
+
+      this.callSlider()
     },
 
     toggle (action) {

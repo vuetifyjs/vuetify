@@ -81,12 +81,12 @@
 
   &__item
     align-items: center
-    color: $material-dark.text.primary
     display: flex
     flex-shrink: 0
     flex-direction: column
     justify-content: center
     min-width: 0
+    
     height: 100%
     padding: 1rem
     position: relative
@@ -104,6 +104,8 @@
       font-size: 32px
       margin: .5rem 0
 
+    &--active
+      color: $material-dark.text.primary
     &--disabled
       pointer-events: none
 
