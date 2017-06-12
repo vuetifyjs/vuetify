@@ -2,7 +2,7 @@ import Toggleable from '../../mixins/toggleable'
 import Contextualable from '../../mixins/contextualable'
 
 export default {
-  name: 'snackbar',
+  name: 'v-snackbar',
 
   mixins: [Contextualable, Toggleable],
 

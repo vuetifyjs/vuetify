@@ -7,7 +7,7 @@ import Toggleable from '../../mixins/toggleable'
 import Keyable from './mixins/keyable'
 
 export default {
-  name: 'menu',
+  name: 'v-menu',
 
   mixins: [
     Activator,

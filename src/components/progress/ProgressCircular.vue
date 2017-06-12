@@ -38,7 +38,7 @@
 
 <script>
   export default {
-    name: 'progress-circular',
+    name: 'v-progress-circular',
 
     props: {
       button: Boolean,

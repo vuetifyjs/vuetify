@@ -2,7 +2,7 @@ import Expand from '../../mixins/expand-transition'
 import Toggleable from '../../mixins/toggleable'
 
 export default {
-  name: 'list-group',
+  name: 'v-list-group',
 
   inject: ['listClick', 'listClose'],
 

@@ -3,7 +3,7 @@ import Generators from './mixins/generators'
 import Autocomplete from './mixins/autocomplete'
 
 export default {
-  name: 'select',
+  name: 'v-select',
 
   mixins: [Autocomplete, Input, Generators],
 

@@ -1,6 +1,8 @@
 const Subheader = {
   functional: true,
 
+  name: 'v-subheader',
+
   props: {
     inset: Boolean
   },

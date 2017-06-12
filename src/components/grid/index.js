@@ -3,6 +3,8 @@ import { createSimpleFunctional } from '../../util/helpers'
 const Flex = {
   functional: true,
 
+  name: 'v-flex',
+
   render: (h, { data, children }) => {
     data.staticClass = data.staticClass ? `flex ${data.staticClass}` : 'flex'
     data.staticClass += ` ${Object.keys(data.attrs).join(' ')}`
@@ -14,6 +16,8 @@ const Flex = {
 
 const Layout = {
   functional: true,
+
+  name: 'v-layout',
 
   render: (h, { data, children }) => {
     data.staticClass = data.staticClass ? `layout ${data.staticClass}` : 'layout'
@@ -29,6 +33,8 @@ const Layout = {
 
 const Container = {
   functional: true,
+
+  name: 'v-container',
 
   props: {
     fluid: Boolean

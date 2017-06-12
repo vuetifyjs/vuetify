@@ -2,7 +2,7 @@ import Overlayable from '../../mixins/overlayable'
 import Schemable from '../../mixins/schemable'
 
 export default {
-  name: 'navigation-drawer',
+  name: 'v-navigation-drawer',
 
   mixins: [Overlayable, Schemable],
 

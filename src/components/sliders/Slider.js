@@ -2,7 +2,7 @@ import Input from '../../mixins/input'
 import { addOnceEventListener } from '../../util/helpers'
 
 export default {
-  name: 'slider',
+  name: 'v-slider',
 
   mixins: [Input],
 

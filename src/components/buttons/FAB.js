@@ -4,7 +4,7 @@ import Schemable from '../../mixins/schemable'
 import Toggleable from '../../mixins/toggleable'
 
 export default {
-  name: 'fab',
+  name: 'v-fab',
 
   mixins: [Contextualable, GenerateRouteLink, Schemable, Toggleable],
 

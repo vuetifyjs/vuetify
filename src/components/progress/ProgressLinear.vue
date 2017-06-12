@@ -17,7 +17,7 @@
 
 <script>
   export default {
-    name: 'progress',
+    name: 'v-progress',
 
     props: {
       active: {

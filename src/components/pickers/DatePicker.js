@@ -7,7 +7,7 @@ import Picker from '../../mixins/picker'
 const defaultDateFormat = val => new Date(val).toISOString().substr(0, 10)
 
 export default {
-  name: 'date-picker',
+  name: 'v-date-picker',
 
   mixins: [DateTitle, DateHeader, DateTable, DateYears, Picker],
 

@@ -2,7 +2,7 @@ import GenerateRouteLink from '../../mixins/route-link'
 import Toggleable from '../../mixins/toggleable'
 
 export default {
-  name: 'list-tile',
+  name: 'v-list-tile',
 
   mixins: [GenerateRouteLink, Toggleable],
 

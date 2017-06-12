@@ -1,7 +1,7 @@
 export default {
   functional: true,
 
-  name: 'list-tile-action',
+  name: 'v-list-tile-action',
 
   render (h, context) {
     const data = {

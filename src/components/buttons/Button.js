@@ -4,7 +4,7 @@ import Schemable from '../../mixins/schemable'
 import GenerateRouteLink from '../../mixins/route-link'
 
 export default {
-  name: 'btn',
+  name: 'v-btn',
 
   mixins: [Contextualable, GenerateRouteLink, Schemable, Toggleable],
 

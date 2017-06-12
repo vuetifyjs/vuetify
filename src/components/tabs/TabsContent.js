@@ -1,5 +1,5 @@
 export default {
-  name: 'tabs-content',
+  name: 'v-tabs-content',
 
   data () {
     return {

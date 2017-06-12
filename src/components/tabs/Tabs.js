@@ -1,7 +1,7 @@
 import Bootable from '../../mixins/bootable'
 
 export default {
-  name: 'tabs',
+  name: 'v-tabs',
 
   provide () {
     return {

@@ -1,5 +1,5 @@
 export default {
-  name: 'edit-dialog',
+  name: 'v-edit-dialog',
 
   data () {
     return {

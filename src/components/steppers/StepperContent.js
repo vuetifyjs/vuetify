@@ -1,5 +1,5 @@
 export default {
-  name: 'stepper-content',
+  name: 'v-stepper-content',
 
   data () {
     return {

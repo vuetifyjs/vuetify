@@ -1,7 +1,7 @@
 import GenerateRouteLink from '../../mixins/route-link'
 
 export default {
-  name: 'toolbar-item',
+  name: 'v-toolbar-item',
 
   mixins: [GenerateRouteLink],
 
