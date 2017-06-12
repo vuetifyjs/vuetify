@@ -29,10 +29,7 @@ export default {
 
       this.hideScroll()
 
-      const app = this.$el.closest('[data-app]')
-      app &&
-        app.appendChild(overlay) ||
-        document.body.appendChild(overlay)
+      document.body.appendChild(overlay)
 
       this.isTransitioning = true
       addOnceEventListener(overlay, 'transitionend', () => (this.isTransitioning = false))
