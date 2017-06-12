@@ -28,8 +28,10 @@ export default {
       if (this.absolute) overlay.className += ' overlay--absolute'
 
       this.hideScroll()
-
-      document.body.appendChild(overlay)
+      const app = this.$el.closest('[data-app]')
+      app && 
+        app.appendChild(overlay) ||
+        console.warn('Application is missing <v-app> component')
 
       this.isTransitioning = true
       addOnceEventListener(overlay, 'transitionend', () => (this.isTransitioning = false))

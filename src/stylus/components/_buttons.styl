@@ -20,12 +20,6 @@
 /** Psuedo */
 .btn
   &__content
-    align-items: center
-    border-radius: inherit
-    color: inherit
-    display: inline-flex
-    justify-content: center
-    
     &:before
       border-radius: inherit
       color: inherit
@@ -41,6 +35,8 @@
 .btn
   &__content
     align-items: center
+    border-radius: inherit
+    color: inherit
     display: flex
     height: 100%
     flex: 1 0 100%
@@ -131,6 +127,18 @@
         font-size: $button-floating-large-icon-width
         height: $button-floating-large-icon-width
         width: $button-floating-large-icon-width
+  
+  &--stacked
+    .btn__content
+      flex-direction: column
+    
+  &--reverse
+    .btn__content
+      flex-direction: row-reverse
+    
+    &.btn--stacked
+      .btn__content
+        flex-direction: column-reverse
 
 /** Sizes */
 .btn

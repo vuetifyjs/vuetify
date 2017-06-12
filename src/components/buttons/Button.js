@@ -24,8 +24,10 @@ export default {
       type: [Boolean, Object],
       default: true
     },
+    reverse: Boolean,
     round: Boolean,
     small: Boolean,
+    stacked: Boolean,
     tag: {
       type: String,
       default: 'button'
@@ -49,8 +51,10 @@ export default {
         'btn--loader': this.loading,
         'btn--outline': this.outline,
         'btn--raised': !this.flat,
+        'btn--reverse': this.reverse,
         'btn--round': this.round,
         'btn--small': this.small,
+        'btn--stacked': this.stacked,
         'dark--text dark--bg': this.dark,
         'light--text light--bg': this.light,
         'primary': this.primary && !this.outline,
