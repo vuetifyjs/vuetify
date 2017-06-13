@@ -27,7 +27,7 @@ export default {
 
   props: {
     centered: Boolean,
-    grow: Boolean,
+    fixed: Boolean,
     icons: Boolean,
     mobileBreakPoint: {
       type: [Number, String],
@@ -42,7 +42,7 @@ export default {
       return {
         'tabs': true,
         'tabs--centered': this.centered,
-        'tabs--grow': this.grow,
+        'tabs--fixed': this.fixed,
         'tabs--icons': this.icons,
         'tabs--scroll-bars': this.scrollBars,
         'dark--text': this.dark,

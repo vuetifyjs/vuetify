@@ -3,10 +3,17 @@
   position: relative
   width: 100%
 
-  &--grow
+  &--fixed
     .tabs__container
       > li
         flex-grow: 1
+    
+    .tabs__item
+      min-width: 160px
+      max-width: 264px
+
+      @media $display-breakpoints.xs-only
+        min-width: 72px
 
   &--centered
     .tabs__container
@@ -85,8 +92,8 @@
     flex-shrink: 0
     flex-direction: column
     justify-content: center
-    min-width: 0
     height: 100%
+    padding: 0 12px
     position: relative
     text-align: center
     text-decoration: none
