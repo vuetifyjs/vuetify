@@ -36,10 +36,10 @@ export default {
       this.isTransitioning = true
       addOnceEventListener(overlay, 'transitionend', () => (this.isTransitioning = false))
 
-      setTimeout(() => {
+      requestAnimationFrame(() => {
         overlay.className += ' overlay--active'
         this.overlay = overlay
-      }, 0)
+      })
 
       return true
     },
