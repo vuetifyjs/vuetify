@@ -3,14 +3,11 @@
   position: relative
   width: 100%
 
-  &--fixed
-    .tabs__container
-      > li
-        flex-grow: 1
-    
-    .tabs__item
+  &--fixed    
+    .tabs__li
       min-width: 160px
       max-width: 264px
+      flex: 1 1 160px
 
       @media $display-breakpoints.xs-only
         min-width: 72px
