@@ -126,6 +126,10 @@ export default {
     positionAbsolutely: {
       type: Boolean,
       default: false
+    },
+    disableContentMinWidth: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -136,7 +140,7 @@ export default {
     styles () {
       return {
         maxHeight: this.auto ? '200px' : isNaN(this.maxHeight) ? this.maxHeight : `${this.maxHeight}px`,
-        minWidth: `${this.minWidth}px`,
+        minWidth: this.disableContentMinWidth ? 0 : `${this.minWidth}px`,
         top: `${this.calcTop()}px`,
         left: `${this.calcLeft()}px`
       }
