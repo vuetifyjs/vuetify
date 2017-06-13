@@ -30,6 +30,7 @@ export default {
       default: 5
     },
     singleLine: Boolean,
+    solo: Boolean,
     suffix: String,
     type: {
       type: String,
@@ -42,6 +43,7 @@ export default {
       return {
         'input-group--text-field': true,
         'input-group--single-line': this.singleLine,
+        'input-group--solo': this.solo,
         'input-group--multi-line': this.multiLine,
         'input-group--full-width': this.fullWidth
       }

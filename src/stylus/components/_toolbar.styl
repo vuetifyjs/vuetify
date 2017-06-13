@@ -13,7 +13,10 @@
 /** Children */
 .toolbar
   &__title
-    @extend .title
+    font-size: $headings.h6.size
+    font-weight: $headings.h6.weight
+    letter-spacing: $headings.h6.letter-spacing
+    line-height: $headings.h6.line-height
     margin-left: 16px
 
   &__content, &__extension
@@ -45,9 +48,6 @@
     > .btn
       height: 100%
       margin: 0
-      
-      &:focus:not(:hover) .btn__content:before
-        opacity: 0
 
   @media $display-breakpoints.xs-only
     &__content, &__extension

@@ -73,10 +73,16 @@
 
 /** Types */
 .input-group--text-field
+  // Errors
   &.input-group--error
+    label
+      color: $theme.error
+
+    .input-group__details:before,
     .input-group__details:after
       background-color: $theme.error
 
+  // Icons
   &.input-group--prepend-icon
     .input-group__prepend-icon
       align-items: center
@@ -98,6 +104,7 @@
     input
       flex: auto
 
+  // Single Line
   &.input-group--single-line
     label
       transform: translate3d(0,0,0)
@@ -106,6 +113,7 @@
       label
         display: none
 
+  // Required
   &.input-group--required
     label:after
       content: '*'
@@ -114,19 +122,31 @@
       label:after
         color: $theme.error
 
-  &.input-group--error
-    label
-      color: $theme.error
-
-    .input-group__details:before, .input-group__details:after
-      background-color: $theme.error
-
+  // Full Width
   &.input-group--full-width
     padding: 0 16px
 
     .input-group__details:before, .input-group__details:after
       display: none
+      
+  // Solo
+  &.input-group--solo
+    background: #fff
+    height: 46px
+    border-radius: $card-border-radius
+    padding: 0 16px
+    elevation(2)
+    
+    input
+      margin-top: 8px
 
+    label
+      top: 8px
+      left: 16px
+      transform: none !important
+    
+    &:hover
+      elevation(4)
 
 /** Prefix/Suffix */
 .input-group--text-field

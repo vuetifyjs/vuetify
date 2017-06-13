@@ -20,7 +20,7 @@
 
   &--icons
     .tabs__bar
-      height: 90px
+      height: 72px
 
   &--scroll-bars
     .tabs__bar--mobile
@@ -37,7 +37,7 @@
     background-color: $theme.primary
     width: 100%
     position: relative
-    height: 60px
+    height: 48px
 
     .icon--left, .icon--right
       position: absolute
@@ -86,9 +86,7 @@
     flex-direction: column
     justify-content: center
     min-width: 0
-    
     height: 100%
-    padding: 1rem
     position: relative
     text-align: center
     text-decoration: none
@@ -99,13 +97,8 @@
 
     .icon
       color: inherit
-      flex: 1
-      flex-basis: 100%
-      font-size: 32px
-      margin: .5rem 0
+      margin: 0 0 5px
 
-    &--active
-      color: $material-dark.text.primary
     &--disabled
       pointer-events: none
 
@@ -123,6 +116,6 @@
   &__slider
     position: absolute
     bottom: 0
-    height: 4px
+    height: 2px
     background: $theme.accent
     transition: $primary-transition

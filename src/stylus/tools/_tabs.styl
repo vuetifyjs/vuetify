@@ -1,3 +1,6 @@
 tabs($material)
-  &__item:not(.tabs__item--active)
-    color: hsla(0, 0%, 100%, .5)
+  .tabs__item
+    color: $material.tabs.inactive
+
+    &.tabs__item--active
+      color: $material.tabs.active

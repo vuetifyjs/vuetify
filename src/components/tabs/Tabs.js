@@ -1,5 +1,9 @@
+import Schemable from '../../mixins/schemable'
+
 export default {
   name: 'tabs',
+
+  mixins: [Schemable],
 
   provide () {
     return {
@@ -41,6 +45,8 @@ export default {
         'tabs--grow': this.grow,
         'tabs--icons': this.icons,
         'tabs--scroll-bars': this.scrollBars,
+        'dark--text': this.dark,
+        'light--text': this.light
       }
     }
   },
