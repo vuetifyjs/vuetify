@@ -6,7 +6,9 @@
           "targets": {
             "node": "current"
           }
-        }]
+        }],
+        ["stage-2"],
+        ["es2015",  {"modules": false}]
       ]
     }
   }
