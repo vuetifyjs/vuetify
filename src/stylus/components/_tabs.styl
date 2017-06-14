@@ -2,46 +2,51 @@
   overflow: hidden
   position: relative
   width: 100%
+  
+  &--grow
+    .tabs__li
+      flex: 1
 
   &--fixed    
     .tabs__li
       min-width: 160px
       max-width: 264px
-      flex: 1 1 160px
+      flex: 0 1 160px
 
       @media $display-breakpoints.xs-only
         min-width: 72px
 
   &--centered
     .tabs__container
-      > li:first-of-type
-        &:not(.tabs__slider),
-        &.tabs__slider + .tabs__li
-          margin-left: auto
-
-      > li:last-of-type
-        margin-right: auto
+      justify-content: center
 
   &--icons
     .tabs__bar
       height: 72px
+      
+    .tabs__item
+      flex-direction: column
 
   &--scroll-bars
-    .tabs__bar--mobile
-      padding: 0 35px
+    &.tabs--mobile
+      .tabs__bar
+        padding: 0 35px
 
-      .icon--left, .icon--right
-        display: flex
+        .icon--left, .icon--right
+          display: flex
 
-      .tabs__container
-        width: calc(100% - 70px)
-
+        .tabs__container
+          width: calc(100% - 70px)
 
   &__bar
     background-color: $theme.primary
     width: 100%
+    padding-left: 62px
     position: relative
     height: 48px
+    
+    @media $display-breakpoints.sm-and-down
+      padding-left: 0
 
     .icon--left, .icon--right
       position: absolute
@@ -87,7 +92,6 @@
     align-items: center
     display: flex
     flex-shrink: 0
-    flex-direction: column
     justify-content: center
     height: 100%
     padding: 0 12px

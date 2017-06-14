@@ -28,12 +28,13 @@ export default {
   props: {
     centered: Boolean,
     fixed: Boolean,
+    grow: Boolean,
     icons: Boolean,
     mobileBreakPoint: {
       type: [Number, String],
       default: 1024
     },
-    scrollBars: Boolean,
+    scrollable: Boolean,
     value: String
   },
 
@@ -43,8 +44,10 @@ export default {
         'tabs': true,
         'tabs--centered': this.centered,
         'tabs--fixed': this.fixed,
+        'tabs--grow': this.grow,
         'tabs--icons': this.icons,
-        'tabs--scroll-bars': this.scrollBars,
+        'tabs--mobile': this.isMobile,
+        'tabs--scroll-bars': this.scrollable,
         'dark--text': this.dark,
         'light--text': this.light
       }

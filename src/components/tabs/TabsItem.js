@@ -32,7 +32,7 @@ export default {
     action () {
       const to = this.to || this.href
 
-      if (to === Object(to)) return this._uid
+      if (!to || to === Object(to)) return this._uid
 
       return to.replace('#', '')
     }
@@ -57,6 +57,8 @@ export default {
     },
     click (e) {
       e.preventDefault()
+
+      if (!this.to && !this.href) return
 
       if (!this.router) {
         this.tabClick(this.action)
