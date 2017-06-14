@@ -1,12 +1,13 @@
 .card
   elevation(2)
   position: relative
+  background-color: $card-background
   border-radius: $card-border-radius
   min-width: 0
 
   &--raised
     elevation(3)
-  
+
   &--flat
     elevation(0)
 
@@ -23,32 +24,32 @@
     display: flex
     flex-wrap: wrap
     padding: 16px
-    
+
     &--primary
       padding-top: 24px
 
   &__text
     padding: 16px
     width: 100%
-    
+
   &__media
     overflow: hidden
 
     img
       height: 100%
       width: 100%
-      
+
     &:first-child
       border-top-left-radius: inherit
       border-top-right-radius: inherit
-      
+
     &:last-child
       border-bottom-left-radius: inherit
       border-bottom-right-radius: inherit
-    
+
   &__actions
     display: flex
     padding: 8px
-    
+
     > .btn
       margin: 0
