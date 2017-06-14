@@ -6,9 +6,13 @@
           "targets": {
             "node": "current"
           }
-        }],
-        ["stage-2"],
-        ["es2015",  {"modules": false}]
+        }]
+      ]
+    },
+    "production": {
+      "presets": [
+        ["es2015",  {"modules": false}],
+        ["stage-2"]
       ]
     }
   }
