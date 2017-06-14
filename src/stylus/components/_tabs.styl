@@ -38,10 +38,13 @@
         .tabs__container
           width: calc(100% - 70px)
 
+  &:not(.tabs--centered)
+    .tabs__bar
+      padding-left: 62px
+
   &__bar
     background-color: $theme.primary
     width: 100%
-    padding-left: 62px
     position: relative
     height: 48px
     
