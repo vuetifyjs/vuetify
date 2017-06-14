@@ -21,6 +21,7 @@
   &__title
     align-items: center
     display: flex
+    flex-wrap: wrap
     padding: 16px
     
     &--primary
@@ -30,6 +31,24 @@
     padding: 16px
     width: 100%
     
+  &__media
+    overflow: hidden
+
+    img
+      height: 100%
+      width: 100%
+      
+    &:first-child
+      border-top-left-radius: inherit
+      border-top-right-radius: inherit
+      
+    &:last-child
+      border-bottom-left-radius: inherit
+      border-bottom-right-radius: inherit
+    
   &__actions
     display: flex
     padding: 8px
+    
+    > .btn
+      margin: 0
