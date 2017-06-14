@@ -149,15 +149,21 @@
       elevation(4)
 
 /** Prefix/Suffix */
-.input-group--text-field
-  &__prefix, &__suffix
+.input-group--prefix,
+.input-group--suffix
+  &:not(.input-group--focused):not(.input-group--dirty)
+    label
+      left: 16px
+
+  .input-group--text-field__prefix,
+  .input-group--text-field__suffix
     align-items: center
     display: inline-flex
     font-size: 16px
     margin-top: 1px
 
-  &__prefix
+  .input-group--text-field__prefix
     margin-right: 3px
 
-  &__suffix
+  .input-group--text-field__suffix
     margin-left: 3px

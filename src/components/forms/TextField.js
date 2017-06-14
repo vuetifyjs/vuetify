@@ -45,7 +45,9 @@ export default {
         'input-group--single-line': this.singleLine,
         'input-group--solo': this.solo,
         'input-group--multi-line': this.multiLine,
-        'input-group--full-width': this.fullWidth
+        'input-group--full-width': this.fullWidth,
+        'input-group--prefix': this.prefix,
+        'input-group--suffix': this.suffix
       }
     },
     hasError () {
