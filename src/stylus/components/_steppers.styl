@@ -119,14 +119,13 @@
 .stepper
   &__wrapper
     overflow: hidden
-    transition: .4s $transition.ease-in-out
+    transition: none
 
 .stepper
   &__content
     top: initial
     bottom: 0
     padding: 16px
-    transition: .4s $transition.ease-in-out
     flex: 1
     // Chrome has an issue with overflow hidden for rendering
     // Originally used translateZ but this messes up fixed
@@ -137,6 +136,10 @@
 
     .btn
       margin-left: 0
+
+  &--is-booted
+    .stepper__content
+      transition: .4s $transition.ease-in-out
 
 .stepper
   &--non-linear

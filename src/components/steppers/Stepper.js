@@ -10,6 +10,7 @@ export default {
   data () {
     return {
       inputValue: null,
+      isBooted: false,
       steps: [],
       content: [],
       isReverse: false
@@ -27,6 +28,7 @@ export default {
     classes () {
       return {
         'stepper': true,
+        'stepper--is-booted': this.isBooted,
         'stepper--vertical': this.vertical,
         'stepper--alt-labels': this.altLabels,
         'stepper--non-linear': this.nonLinear
@@ -63,6 +65,10 @@ export default {
       })
 
       this.inputValue = this.value || this.steps[0].step || 1
+
+      // TODO: Figure out a way to fix this hack
+      // No transition before booted
+      setTimeout(() => (this.isBooted = true), 25)
     },
     stepClick (step) {
       this.inputValue = step
