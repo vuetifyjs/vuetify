@@ -1,5 +1,5 @@
 export default {
-  name: 'tabs-bar',
+  name: 'v-tabs-bar',
 
   props: {
     mobile: Boolean

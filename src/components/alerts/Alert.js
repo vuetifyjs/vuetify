@@ -2,7 +2,7 @@ import Toggleable from '../../mixins/toggleable'
 import Contextualable from '../../mixins/contextualable'
 
 export default {
-  name: 'alert',
+  name: 'v-alert',
 
   mixins: [Contextualable, Toggleable],
 

@@ -1,6 +1,8 @@
 import Schemable from '../../mixins/schemable'
 
 export default {
+  name: 'v-toolbar',
+
   mixins: [Schemable],
 
   props: {

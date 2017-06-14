@@ -1,6 +1,8 @@
 const Divider = {
   functional: true,
 
+  name: 'v-divider',
+
   props: {
     dark: Boolean,
     inset: Boolean,

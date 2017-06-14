@@ -1,5 +1,5 @@
 export default {
-  name: 'breadcrumbs',
+  name: 'v-breadcrumbs',
 
   provide () {
     return {

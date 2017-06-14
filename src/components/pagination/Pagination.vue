@@ -37,7 +37,7 @@
 
 <script>
   export default {
-    name: 'pagination',
+    name: 'v-pagination',
 
     props: {
       circle: Boolean,

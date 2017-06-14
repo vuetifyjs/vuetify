@@ -1,7 +1,7 @@
 import Schemable from '../../mixins/schemable'
 
 export default {
-  name: 'tabs',
+  name: 'v-tabs',
 
   mixins: [Schemable],
 

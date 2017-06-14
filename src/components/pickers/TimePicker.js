@@ -3,7 +3,7 @@ import TimeTitle from './mixins/time-title'
 import TimeBody from './mixins/time-body'
 
 export default {
-  name: 'time-picker',
+  name: 'v-time-picker',
 
   mixins: [Picker, TimeBody, TimeTitle],
 

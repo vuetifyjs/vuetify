@@ -18,7 +18,7 @@
 
 <script>
   export default {
-    name: 'button-toggle',
+    name: 'v-button-toggle',
 
     model: {
       prop: 'inputValue',

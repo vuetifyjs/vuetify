@@ -1,6 +1,8 @@
   export default {
     functional: true,
 
+    name: 'v-bottom-nav',
+
     props: {
       absolute: Boolean,
       shift: Boolean,

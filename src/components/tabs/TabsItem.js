@@ -1,7 +1,7 @@
 import GenerateRouteLink from '../../mixins/route-link'
 
 export default {
-  name: 'tabs-item',
+  name: 'v-tabs-item',
 
   inject: ['slider', 'tabClick'],
 

@@ -28,7 +28,7 @@
   import Toggleable from '../../mixins/toggleable'
 
   export default {
-    name: 'expansion-panel-content',
+    name: 'v-expansion-panel-content',
 
     mixins: [Expand, Toggleable],
 
@@ -52,7 +52,7 @@
 
     methods: {
       closeConditional (e) {
-        return this.$parent.$el.contains(e.target) && 
+        return this.$parent.$el.contains(e.target) &&
           !this.$parent.expand &&
           !this.$el.contains(e.target)
       },

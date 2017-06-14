@@ -1,6 +1,8 @@
 const Footer = {
   functional: true,
 
+  name: 'v-footer',
+
   props: {
     absolute: Boolean,
     fixed: Boolean

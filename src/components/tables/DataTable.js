@@ -5,7 +5,7 @@ import Progress from './mixins/progress'
 import { getObjectValueByPath } from '../../util/helpers'
 
 export default {
-  name: 'datatable',
+  name: 'v-datatable',
 
   mixins: [Head, Body, Foot, Progress],
 

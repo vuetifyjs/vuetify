@@ -25,7 +25,7 @@
   import Bootable from '../../mixins/bootable'
 
   export default {
-    name: 'carousel',
+    name: 'v-carousel',
 
     mixins: [Bootable],
 

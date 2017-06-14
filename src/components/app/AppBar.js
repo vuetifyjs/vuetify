@@ -1,5 +1,5 @@
 export default {
-  name: 'app-bar',
+  name: 'v-app-bar',
 
   render (h) {
     return h('v-toolbar')

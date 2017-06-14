@@ -2,7 +2,7 @@ import Contextualable from '../../mixins/contextualable'
 import Input from '../../mixins/input'
 
 export default {
-  name: 'radio',
+  name: 'v-radio',
 
   mixins: [Contextualable, Input],
 

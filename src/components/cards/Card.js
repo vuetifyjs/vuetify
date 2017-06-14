@@ -1,7 +1,7 @@
 export default {
   functional: true,
 
-  name: 'card',
+  name: 'v-card',
 
   props: {
     flat: Boolean,

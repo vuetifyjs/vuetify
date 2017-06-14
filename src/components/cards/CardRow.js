@@ -1,6 +1,8 @@
 export default {
   functional: true,
 
+  name: 'v-card-row',
+
   props: {
     actions: Boolean,
     height: {

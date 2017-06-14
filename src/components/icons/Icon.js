@@ -3,6 +3,8 @@ import Schemable from '../../mixins/schemable'
 export default {
   functional: true,
 
+  name: 'v-icon',
+
   mixins: [Schemable],
 
   props: {

@@ -1,7 +1,7 @@
 import Checkbox from '../../mixins/checkbox'
 
 export default {
-  name: 'switch',
+  name: 'v-switch',
 
   mixins: [Checkbox],
 

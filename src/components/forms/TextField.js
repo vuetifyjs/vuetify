@@ -1,7 +1,7 @@
 import Input from '../../mixins/input'
 
 export default {
-  name: 'text-field',
+  name: 'v-text-field',
 
   mixins: [Input],
 

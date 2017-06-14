@@ -18,7 +18,7 @@
   import Translatable from '../../mixins/translatable'
 
   export default {
-    name: 'parallax',
+    name: 'v-parallax',
 
     mixins: [Translatable],
 

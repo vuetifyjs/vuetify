@@ -1,5 +1,5 @@
 export default {
-  name: 'stepper-step',
+  name: 'v-stepper-step',
 
   inject: ['stepClick'],
 

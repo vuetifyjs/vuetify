@@ -1,6 +1,8 @@
 export default {
   functional: true,
 
+  name: 'v-app',
+
   props: {
     light: {
       type: Boolean,

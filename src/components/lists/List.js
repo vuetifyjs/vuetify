@@ -1,7 +1,7 @@
 import Schemable from '../../mixins/schemable'
 
 export default {
-  name: 'list',
+  name: 'v-list',
 
   provide () {
     return {

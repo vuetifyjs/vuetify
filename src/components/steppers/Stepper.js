@@ -1,5 +1,5 @@
 export default {
-  name: 'stepper',
+  name: 'v-stepper',
 
   provide () {
     return {

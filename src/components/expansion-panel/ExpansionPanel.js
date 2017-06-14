@@ -1,5 +1,5 @@
 export default {
-  name: 'expansion-panel',
+  name: 'v-expansion-panel',
 
   props: {
     expand: Boolean
