@@ -18,7 +18,7 @@ application($material)
     background-color: $material.app-bar
     
   .card
-    background-color: $material.cards
+    card($material)
 
   .icon
     icon($material)
@@ -46,6 +46,9 @@ application($material)
     tabs($material)
 
 text($main, $alt)
+  &.card
+    card($main)
+
   &.system-bar
     system-bar($main)
 
