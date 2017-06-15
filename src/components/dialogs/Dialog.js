@@ -62,6 +62,10 @@ export default {
     }
   },
 
+  mounted () {
+    this.$vuetify.load(() => (this.isActive && this.genOverlay()))
+  },
+
   methods: {
     closeConditional (e) {
       // close dialog if !persistent and clicked outside

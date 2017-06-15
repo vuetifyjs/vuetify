@@ -29,7 +29,7 @@ export default {
 
       this.hideScroll()
       const app = this.$el.closest('[data-app]')
-      app && 
+      app &&
         app.appendChild(overlay) ||
         console.warn('Application is missing <v-app> component')
 
