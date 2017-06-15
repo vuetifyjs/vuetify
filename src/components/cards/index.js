@@ -13,6 +13,10 @@ const CardMedia = {
     height: {
       type: [Number, String],
       default: 'auto'
+    },
+    src: {
+      type: String,
+      required: true
     }
   },
 
@@ -24,7 +28,18 @@ const CardMedia = {
       }
     }
 
-    return h('div', data, this.$slots.default)
+    const background = h('div', {
+      'class': 'card__media__background',
+      style: {
+        background: `url(${this.src}) center center`
+      }
+    })
+
+    const content = h('div', {
+      'class': 'card__media__content'
+    }, this.$slots.default)
+
+    return h('div', data, [background, content])
   }
 }
 
@@ -32,13 +47,13 @@ const CardTitle = {
   functional: true,
 
   props: {
-    primary: Boolean
+    primaryTitle: Boolean
   },
 
   render (h, { data, props, children }) {
     data.staticClass = (`card__title ${data.staticClass || ''}`).trim()
 
-    if (props.primary) data.staticClass += ' card__title--primary'
+    if (props.primaryTitle) data.staticClass += ' card__title--primary'
 
     return h('div', data, children)
   }

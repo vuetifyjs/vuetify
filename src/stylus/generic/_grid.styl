@@ -41,35 +41,6 @@
   &.wrap
     flex-wrap: wrap
 
-  &.align
-    &-start
-      align-items: flex-start
-    
-    &-end
-      align-items: flex-end
-      
-    &-center
-      align-items: center
-      
-    &-baseline
-      align-items: baseline
-      
-  &.justify
-    &-start
-      justify-content: flex-start
-      
-    &-end
-      justify-content: flex-end
-      
-    &-center
-      justify-content: center
-      
-    &-space-around
-      justify-content: space-around
-    
-    &-space-between
-      justify-content: space-between
-
   &.flex, &.child-flex > *
     flex: 1
 
@@ -90,6 +61,35 @@
 
         .flex.order-{size}{n}
           order: n
+
+.align
+  &-start
+    align-items: flex-start
+  
+  &-end
+    align-items: flex-end
+    
+  &-center
+    align-items: center
+    
+  &-baseline
+    align-items: baseline
+    
+.justify
+  &-start
+    justify-content: flex-start
+    
+  &-end
+    justify-content: flex-end
+    
+  &-center
+    justify-content: center
+    
+  &-space-around
+    justify-content: space-around
+  
+  &-space-between
+    justify-content: space-between
 
 .spacer
   flex-grow: 1
