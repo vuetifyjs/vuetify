@@ -49,7 +49,9 @@
 
       .btn__content
         font-size: 14px
-        transform: scale3d(1, 1, 1) translate3d(0, 0, 0)
+        
+        .icon
+          transform: scale3d(1, 1, 1) translate3d(0, 0, 0)
 
     &:not(.btn--active)
       filter: grayscale(100%)
@@ -71,12 +73,13 @@
         max-width: 168px
         flex: 1 1 72px
 
-        .btn__content
+        .btn__content .icon
           transform: scale3d(1, 1, 1) translate3d(0, 2px, 0)
 
 .bottom-nav--shift
   .btn:not(.btn--active) .btn__content
-    transform: scale3d(1, 1, 1) translate3d(0, 10px, 0)
+    .icon
+      transform: scale3d(1, 1, 1) translate3d(0, 10px, 0)
 
     span
       color: transparent
