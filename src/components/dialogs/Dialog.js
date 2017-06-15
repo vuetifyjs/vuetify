@@ -63,6 +63,7 @@ export default {
   },
 
   mounted () {
+    this.isBooted = this.isActive
     this.$vuetify.load(() => (this.isActive && this.genOverlay()))
   },
 
@@ -104,7 +105,9 @@ export default {
 
     const dialog = h(this.computedTransition, {
       props: { origin: this.origin }
-    }, [h('div', data, [this.$slots.default])])
+    }, [h('div', data,
+      this.lazy && this.isBooted || !this.lazy ? this.$slots.default : null
+    )])
 
     children.push(h('div', {
       'class': 'dialog__content',
