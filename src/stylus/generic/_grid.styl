@@ -2,23 +2,34 @@
   margin-right: auto
   margin-left: auto
   flex-basis: 100%
-  padding: $grid-gutter
+  padding: $grid-gutters.md
 
   for size, width in $container-max-widths
     @media only screen and (min-width: width)
       max-width: width
   
   @media $display-breakpoints.xs-only
-    padding: $grid-gutter-mobile
+    padding: $grid-gutters.md-mobile
 
-  &--fluid
+  &.fluid
     max-width: 100%
     width: 100%
+  
+  &.grid-list
+    for $size, $gutter in $grid-gutters
+      &-{$size}
+        padding: 0 $gutter
+        
+        .layout
+          margin: -($gutter / 2)
+          
+        .flex
+          padding: ($gutter / 2)
 
 .layout
   display: flex
-  margin-right: -($grid-gutter / 2)
-  margin-left: -($grid-gutter / 2)
+  margin-right: -($grid-gutters.md / 2)
+  margin-left: -($grid-gutters.md / 2)
 
   &.row, &.column
     flex: 0 1 auto
@@ -46,8 +57,8 @@
 
   .flex
     flex: 1 1
-    padding-right: ($grid-gutter / 2)
-    padding-left: ($grid-gutter / 2)
+    padding-right: ($grid-gutters.md / 2)
+    padding-left: ($grid-gutters.md / 2)
 
   for size, width in $grid-breakpoints
     @media only screen and (min-width: width)

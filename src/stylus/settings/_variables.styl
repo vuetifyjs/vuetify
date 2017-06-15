@@ -21,16 +21,22 @@ $grid-breakpoints := {
   xl: (1920px - 16px) // https://material.io/guidelines/layout/responsive-ui.html#responsive-ui-breakpoints
 }
 
+$grid-gutter = 8px
+$grid-columns := 12
+$grid-gutters := {
+  xs: ($grid-gutter / 2)
+  sm: $grid-gutter
+  md: ($grid-gutter * 2)
+  lg: ($grid-gutter * 3)
+  xl: ($grid-gutter * 4)
+}
+
 $container-max-widths := {
   sm: $grid-breakpoints.sm
   md: $grid-breakpoints.md
   lg: $grid-breakpoints.lg
   xl: $grid-breakpoints.xl
 }
-
-$grid-gutter := 24px
-$grid-gutter-mobile := 16px
-$grid-columns := 12
 
 
 // Display
