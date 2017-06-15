@@ -112,6 +112,17 @@
     .btn
       margin: 0
       
+      &:hover, .btn__content:before
+        background-color: transparent !important
+      
+      &:after
+        position: absolute
+        content: ''
+        left: 0
+        top: 0
+        height: 100%
+        width: 100%
+      
       &__content
         overflow: visible
         transition: none
