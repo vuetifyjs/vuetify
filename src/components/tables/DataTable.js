@@ -12,6 +12,7 @@ export default {
   data () {
     return {
       all: false,
+      searchLength: 0,
       defaultPagination: {
         page: 1,
         rowsPerPage: 5,
@@ -126,7 +127,7 @@ export default {
       return this.pagination || this.defaultPagination
     },
     itemsLength () {
-      return this.totalItems || this.items.length
+      return this.totalItems || this.search && this.searchLength || this.items.length
     },
     indeterminate () {
       return this.selectAll !== false && this.someItems && !this.everyItem
@@ -157,6 +158,7 @@ export default {
 
       if (hasSearch) {
         items = this.customFilter(items, this.search, this.filter)
+        this.searchLength = items.length
       }
 
       items = this.customSort(items, this.computedPagination.sortBy, this.computedPagination.descending)
@@ -178,7 +180,7 @@ export default {
       if (!val) this.all = false
     },
     search () {
-      this.page = 1
+      this.updatePagination({ page: 1 })
     },
     everyItem (val) {
       if (val) this.all = true
