@@ -15,8 +15,7 @@ const CardMedia = {
       default: 'auto'
     },
     src: {
-      type: String,
-      required: true
+      type: String
     }
   },
 
@@ -28,18 +27,22 @@ const CardMedia = {
       }
     }
 
-    const background = h('div', {
-      'class': 'card__media__background',
-      style: {
-        background: `url(${this.src}) center center`
-      }
-    })
+    const children = []
 
-    const content = h('div', {
+    if (this.src) {
+      children.push(h('div', {
+        'class': 'card__media__background',
+        style: {
+          background: `url(${this.src}) center center`
+        }
+      }))
+    }
+
+    children.push(h('div', {
       'class': 'card__media__content'
-    }, this.$slots.default)
+    }, this.$slots.default))
 
-    return h('div', data, [background, content])
+    return h('div', data, children)
   }
 }
 
