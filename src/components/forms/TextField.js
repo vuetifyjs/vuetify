@@ -30,6 +30,7 @@ export default {
       default: 5
     },
     singleLine: Boolean,
+    solo: Boolean,
     suffix: String,
     type: {
       type: String,
@@ -42,12 +43,15 @@ export default {
       return {
         'input-group--text-field': true,
         'input-group--single-line': this.singleLine,
+        'input-group--solo': this.solo,
         'input-group--multi-line': this.multiLine,
-        'input-group--full-width': this.fullWidth
+        'input-group--full-width': this.fullWidth,
+        'input-group--prefix': this.prefix,
+        'input-group--suffix': this.suffix
       }
     },
     hasError () {
-      return this.errors.length > 0 ||
+      return this.errorMessages.length > 0 ||
         !this.counterIsValid() ||
         !this.validateIsValid() ||
         this.error
@@ -216,6 +220,6 @@ export default {
   },
 
   render () {
-    return this.genInputGroup(this.genInput(), { attrs: { tabindex: -1 }})
+    return this.genInputGroup(this.genInput(), { attrs: { tabindex: false }})
   }
 }

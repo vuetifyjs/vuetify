@@ -1,9 +1,7 @@
 /** Base Spec */
 .btn
   align-items: center
-  background: $grey.lighten-2
   border-radius: $button-border-radius
-  color: $button-color
   display: inline-flex
   height: $button-height
   font-size: $button-font-size
@@ -12,45 +10,41 @@
   margin: $button-margin
   min-width: $button-min-width
   outline: 0
-  padding: $button-padding
   text-transform: $button-text-transform
   text-decoration: none
-  transition: $primary-transition
+  transition: .3s $transition.swing, color 1ms
   position: relative
   vertical-align: middle
 
 
 /** Psuedo */
 .btn
-  &:after
-    border-radius: inherit
-    bottom: 0
-    content: ''
-    left: 0
-    position: absolute
-    top: 0
-    right: 0
-    transition: $primary-transition
-
-  &.btn--disabled
-    box-shadow: none !important
-    pointer-events: none
-    opacity: .4
-
-    &:not(.btn--loader)
-      color: $button-dark-disabled-color
-
+  &__content
+    &:before
+      border-radius: inherit
+      color: inherit
+      content: ''
+      position: absolute
+      left: 0
+      top: 0
+      height: 100%
+      transition: $primary-transition
+      width: 100%
 
 /** Content */
 .btn
   &__content
     align-items: center
+    border-radius: inherit
+    color: inherit
     display: flex
-    flex: 1 0 auto
+    height: 100%
+    flex: 1 0 100%
     justify-content: center
     transition: $primary-transition
     white-space: nowrap
     overflow: hidden
+    padding: $button-padding
     text-overflow: ellipsis
 
 
@@ -63,16 +57,6 @@
     &.btn--light
       &:hover:after
         background-color: $button-light-overlay
-
-      &.btn--disabled
-        color: $button-light-disabled-color
-
-    &.btn--dark
-      &:hover:after
-        background-color: $button-dark-overlay
-
-      &.btn--disabled
-        color: $button-dark-disabled-color
 
   &--raised
     will-change: box-shadow
@@ -89,10 +73,10 @@
     height: $button-height
     width: $button-height
     min-width: 0
-    padding: 0
     
-    .icon
-      color: inherit
+    .btn__content
+      height: $button-height
+      padding: 0
 
     &:after
       border-radius: 50%
@@ -104,11 +88,6 @@
       &:after
         background-color: currentColor
         opacity: .12
-
-    &.btn--disabled
-      background-color: transparent !important
-      color: $button-light-disabled-color !important
-      pointer-events: none
       
     &.btn--small
       width: $button-small-height
@@ -148,37 +127,14 @@
         font-size: $button-floating-large-icon-width
         height: $button-floating-large-icon-width
         width: $button-floating-large-icon-width
-
-
-/** Themes */
-.btn
-  &--light
-    color: $color-light
-
-    &:hover:after
-      background-color: $button-light-overlay
-
-    // Do not show disabled styles when using loader
-    &.btn--disabled:not(.btn--loader)
-      color: $button-light-disabled-color !important
-      opacity: 1
-
-      &:not(.btn--flat):not(.btn--icon)
-        background-color: $button-light-overlay !important
-
-  &--dark
-    color: $color-dark
-
-    &:hover:after
-      background-color: $button-dark-overlay
-
-    // Do not show disabled styles when using loader
-    &.btn--disabled:not(.btn--loader)
-      color: $button-dark-disabled-color !important
-      opacity: 1
-
-      &:not(.btn--flat):not(.btn--icon)
-        background-color: $button-dark-overlay !important
+    
+  &--reverse
+    .btn__content
+      flex-direction: row-reverse
+    
+    &.btn--column
+      .btn__content
+        flex-direction: column-reverse
 
 /** Sizes */
 .btn
@@ -200,14 +156,14 @@
       opacity: 0
 
   &__loading
-    position: absolute
-    width: 100%
-    height: 100%
-    left: 0
-    top: 0
-    display: flex
-    justify-content: center
     align-items: center
+    display: flex
+    height: 100%
+    justify-content: center
+    left: 0
+    position: absolute
+    top: 0
+    width: 100%
 
     .icon
       &--left
@@ -225,6 +181,9 @@
     border: 1px solid currentColor
     background: transparent !important
     box-shadow: none
+    
+    .icon
+      color: inherit !important
 
     &:hover
       box-shadow: none
@@ -250,3 +209,14 @@
 
     &--left
       margin-right: 16px
+
+
+/** Themes */
+.btn
+  &.primary,
+  &.secondary,
+  &.success,
+  &.error,
+  &.warning,
+  &.info
+    color: $material-dark.text.primary

@@ -1,10 +1,16 @@
-import Bootable from '../../mixins/bootable'
-import Themeable from '../../mixins/themeable'
+import Schemable from '../../mixins/schemable'
 
 export default {
   name: 'tabs',
 
-  mixins: [Bootable, Themeable],
+  mixins: [Schemable],
+
+  provide () {
+    return {
+      slider: this.slider,
+      tabClick: this.tabClick
+    }
+  },
 
   data () {
     return {
@@ -21,13 +27,14 @@ export default {
 
   props: {
     centered: Boolean,
+    fixed: Boolean,
     grow: Boolean,
     icons: Boolean,
     mobileBreakPoint: {
       type: [Number, String],
       default: 1024
     },
-    scrollBars: Boolean,
+    scrollable: Boolean,
     value: String
   },
 
@@ -36,11 +43,13 @@ export default {
       return {
         'tabs': true,
         'tabs--centered': this.centered,
+        'tabs--fixed': this.fixed,
         'tabs--grow': this.grow,
         'tabs--icons': this.icons,
-        'tabs--scroll-bars': this.scrollBars,
-        'tabs--dark': !this.light && this.dark,
-        'tabs--light': this.light || !this.dark
+        'tabs--mobile': this.isMobile,
+        'tabs--scroll-bars': this.scrollable,
+        'dark--text': this.dark,
+        'light--text': this.light
       }
     }
   },
@@ -50,11 +59,12 @@ export default {
       this.tabClick(this.value)
     },
     activeIndex () {
-      if (this.isBooted) this.overflow = true
-
       const activators = this.$slots.activators
 
-      if (!activators || !activators.length || !activators[0].componentInstance.$children) return
+      if (!activators ||
+        !activators.length ||
+        (activators.length &&
+          !activators[0].componentInstance.$children)) return
 
       activators[0].componentInstance.$children
         .filter(i => i.$options._componentTag === 'v-tabs-item')
@@ -68,7 +78,7 @@ export default {
 
   mounted () {
     this.$vuetify.load(() => {
-      window.addEventListener('resize', this.resize, false)
+      window.addEventListener('resize', this.resize, { passive: true })
 
       const activators = this.$slots.activators
 
@@ -88,7 +98,7 @@ export default {
   },
 
   beforeDestroy () {
-    window.removeEventListener('resize', this.resize, false)
+    window.removeEventListener('resize', this.resize, { passive: true })
   },
 
   methods: {
@@ -97,7 +107,8 @@ export default {
 
       this.resizeDebounce = setTimeout(() => {
         this.isMobile = window.innerWidth < this.mobileBreakPoint
-      }, 0)
+        this.slider()
+      }, 50)
     },
     slider (el) {
       this.tabsSlider = this.tabsSlider || this.$el.querySelector('.tabs__slider')
@@ -112,7 +123,10 @@ export default {
       // processing slider for
       // dynamic tabs
       this.$nextTick(() => {
-        this.tabsSlider.style.width = `${this.targetEl.scrollWidth}px`
+        // #684 Calculate width as %
+        const width = this.targetEl.scrollWidth / this.$el.clientWidth * 100
+
+        this.tabsSlider.style.width = `${width}%`
         this.tabsSlider.style.left = `${this.targetEl.offsetLeft}px`
       })
     },

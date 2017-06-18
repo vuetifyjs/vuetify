@@ -1,0 +1,19 @@
+{
+  "env": {
+    "test": {
+      "presets": [
+        ["env", {
+          "targets": {
+            "node": "current"
+          }
+        }]
+      ]
+    },
+    "production": {
+      "presets": [
+        ["es2015",  {"modules": false}],
+        ["stage-2"]
+      ]
+    }
+  }
+}

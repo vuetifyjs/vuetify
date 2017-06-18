@@ -2,42 +2,54 @@
   overflow: hidden
   position: relative
   width: 100%
-
-  > .card
-    border-radius: 0
-
+  
   &--grow
-    .tabs__container
-      > li
-        flex-grow: 1
+    .tabs__li
+      flex: 1
+
+  &--fixed    
+    .tabs__li
+      min-width: 160px
+      max-width: 264px
+      flex: 0 1 160px
+
+      @media $display-breakpoints.xs-only
+        min-width: 72px
 
   &--centered
     .tabs__container
-      > li:first-of-type
-        margin-left: auto
-      > li:last-of-type
-        margin-right: auto
+      justify-content: center
 
   &--icons
     .tabs__bar
-      height: 90px
+      height: 72px
+      
+    .tabs__item
+      flex-direction: column
 
   &--scroll-bars
-    .tabs__bar--mobile
-      padding: 0 35px
+    &.tabs--mobile
+      .tabs__bar
+        padding: 0 35px
 
-      .icon--left, .icon--right
-        display: flex
+        .icon--left, .icon--right
+          display: flex
 
-      .tabs__container
-        width: calc(100% - 70px)
+        .tabs__container
+          width: calc(100% - 70px)
 
+  &:not(.tabs--centered):not(.tabs--grow)
+    .tabs__bar
+      padding-left: 62px
 
   &__bar
     background-color: $theme.primary
     width: 100%
     position: relative
-    height: 60px
+    height: 48px
+    
+    @media $display-breakpoints.sm-and-down
+      padding-left: 0
 
     .icon--left, .icon--right
       position: absolute
@@ -48,12 +60,6 @@
       height: 100%
       cursor: pointer
       user-select: none
-
-      ^[0]--dark &
-        color: $color-dark
-
-      ^[0]--light &
-        color: $color-light
 
     .icon--left
       left: 0
@@ -86,14 +92,12 @@
       align-items: center
 
   &__item
+    align-items: center
     display: flex
     flex-shrink: 0
-    flex-direction: column
-    align-items: center
     justify-content: center
-    min-width: 0
     height: 100%
-    padding: 1rem
+    padding: 0 12px
     position: relative
     text-align: center
     text-decoration: none
@@ -102,24 +106,9 @@
     transition: $primary-transition
     white-space: nowrap
 
-    ^[0]--dark ^[-2..-1]
-      color: rgba($material-light.fg-color, $material-light.inactive-icon-percent)
-
-      &--active
-        color: rgba($material-light.fg-color, $material-light.active-icon-percent)
-
-    ^[0]--light ^[-2..-1]
-      color: rgba($material-dark.fg-color, $material-dark.inactive-icon-percent)
-
-      &--active
-        color: rgba($material-dark.fg-color, $material-dark.active-icon-percent)
-
     .icon
       color: inherit
-      flex: 1
-      flex-basis: 100%
-      font-size: 32px
-      margin: .5rem 0
+      margin: 0 0 5px
 
     &--disabled
       pointer-events: none
@@ -129,6 +118,7 @@
     border-width: 0 1px 1px 1px
     border-style: solid
     border-color: rgba($material-theme.fg-color, .1)
+    overflow: hidden
 
   &__content
     transition: $primary-transition
@@ -137,6 +127,6 @@
   &__slider
     position: absolute
     bottom: 0
-    height: 4px
+    height: 2px
     background: $theme.accent
     transition: $primary-transition

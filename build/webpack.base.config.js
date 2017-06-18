@@ -6,7 +6,6 @@ const version = process.env.VERSION || require('../package.json').version
 
 module.exports = {
   devtool: '#source-map',
-  watch: process.env.TARGET === 'dev',
   entry: {
     app: './src/index.js'
   },
@@ -32,14 +31,14 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        loaders: ['buble-loader', 'eslint-loader'],
+        loaders: ['babel-loader', 'eslint-loader'],
         include: projectRoot,
         exclude: /node_modules/
       },
       {
         test: /\.styl$/,
         loaders: ExtractTextPlugin.extract({
-          loader: ['eslint-loader', 'css-loader', 'postcss-loader', 'stylus-loader']
+          use: ['eslint-loader', 'css-loader', 'postcss-loader', 'stylus-loader']
         }),
         include: projectRoot,
         exclude: /node_modules/

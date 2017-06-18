@@ -1,0 +1,87 @@
+application($material)
+  background: $material.background
+  color: $material.text.primary
+
+  .system-bar
+    system-bar($material)
+
+  .toolbar
+    toolbar($material)
+  
+  .navigation-drawer
+    navigation-drawer($material)
+    
+  .btn
+    button($material)
+    
+  .footer
+    background-color: $material.app-bar
+    
+  .card
+    card($material)
+
+  .icon
+    icon($material)
+  
+  .divider
+    divider($material)
+
+  .input-group
+    input-group($material)
+
+    &.input-group--selection-controls
+      &.switch
+        switch($material)
+
+      &.radio, &.checkbox
+        radio($material)
+
+    &--slider
+      slider($material)
+
+  .list
+    list($material)
+    
+  .tabs
+    tabs($material)
+
+text($main, $alt)
+  &.card
+    card($main)
+
+  &.system-bar
+    system-bar($main)
+
+  &.toolbar
+    toolbar($main)
+    
+  &.navigation-drawer
+    navigation-drawer($main)
+    
+  &.btn
+    button($main)
+
+  &.icon
+    icon($main)
+
+  &.input-group
+    input-group($main)
+
+    &.input-group--selection-controls
+      &.switch
+        switch($main)
+
+      &.radio, &.checkbox
+        radio($main)
+
+    &--slider
+      slider($main)
+
+  &.list
+    list($main)
+  
+  &.divider
+    divider($main)
+
+  &.tabs
+    tabs($main)

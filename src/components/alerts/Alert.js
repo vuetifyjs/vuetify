@@ -17,12 +17,12 @@ export default {
       return {
         'alert': true,
         'alert--dismissible': this.dismissible,
-        'alert--error': this.error,
-        'alert--info': this.info,
-        'alert--success': this.success,
-        'alert--warning': this.warning,
-        'alert--primary': this.primary,
-        'alert--secondary': this.secondary
+        'error': this.error,
+        'info': this.info,
+        'success': this.success,
+        'warning': this.warning,
+        'primary': this.primary,
+        'secondary': this.secondary
       }
     },
 

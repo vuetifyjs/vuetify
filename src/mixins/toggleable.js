@@ -16,7 +16,7 @@ export default {
       this.isActive = !!val
     },
     isActive (val) {
-      this.$emit('input', val)
+      !!val !== this.value && this.$emit('input', val)
     }
   }
 }

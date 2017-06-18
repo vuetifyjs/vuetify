@@ -1,9 +1,9 @@
 .fab
   @extend .btn, .btn--floating, .btn--raised
-
   position: fixed
-  bottom: 125px
-  right: 24px
+  
+  &--absolute
+    position: absolute
   
   &--hidden
     transform: scale(0) rotate(-45deg)
@@ -63,3 +63,15 @@
       font-size: $button-floating-large-icon-width
       height: $button-floating-large-icon-width
       width: $button-floating-large-icon-width
+      
+
+/** Themes */
+.fab
+  &.primary,
+  &.secondary,
+  &.success,
+  &.error,
+  &.warning,
+  &.info
+    .icon
+      color: $material-dark.text.primary

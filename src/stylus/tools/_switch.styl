@@ -1,0 +1,27 @@
+switch($material)
+  .input-group--selection-controls__container
+    color: $material.selection-controls.active
+  
+  .input-group--selection-controls__ripple
+    &:after
+      background-color: $material.selection-controls.thumb.inactive
+
+    &:not(.input-group--selection-controls__ripple--active)
+      color: $material.selection-controls.track.inactive
+
+    &--active:after
+      background-color: $material.selection-controls.active
+  
+  .input-group--selection-controls__toggle
+    color: $material.selection-controls.track.inactive
+    
+    &--active
+      color: inherit
+    
+  &.input-group--disabled
+    .input-group--selection-controls__ripple
+      &:after
+        background-color: $material.selection-controls.thumb.disabled !important
+
+    .input-group--selection-controls__toggle
+      color: $material.selection-controls.track.disabled !important

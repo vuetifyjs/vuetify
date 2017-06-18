@@ -6,7 +6,7 @@
   )
     div(class="progress-linear__bar" v-bind:style="styles")
       v-fade-transition
-        div(class="progress-linear__bar__indeterminate" v-if="indeterminate")
+        div(v-bind:class="['progress-linear__bar__indeterminate', { 'progress-linear__bar__indeterminate--active': active }]" v-if="indeterminate")
       v-slide-x-transition
         div(
           class="progress-linear__bar__determinate"

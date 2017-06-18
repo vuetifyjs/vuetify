@@ -5,8 +5,8 @@ for color_name, color_value in $shades
   global-color(color_name, color_value)
 
 if ($color-pack)
-  for color_name, color in $colors
-    for color_type, color_value in color
+  for color_name, color_color in $colors
+    for color_type, color_value in color_color
       if color_type == 'base'
         global-color(color_name, color_value)
         

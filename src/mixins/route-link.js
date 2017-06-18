@@ -21,7 +21,7 @@ export default {
       const options = this.to || this.href
 
       const data = {
-        attrs: {},
+        attrs: { disabled: this.disabled },
         class: this.classes,
         props: {},
         directives: [{

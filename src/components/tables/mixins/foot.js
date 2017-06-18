@@ -44,13 +44,17 @@ export default {
                 ? this.itemsLength
                 : this.pageStop
 
-        pagination = `${this.pageStart + 1}-${stop} of ${this.itemsLength}`
+        pagination = this.$scopedSlots.pageText
+          ? this.$scopedSlots.pageText({
+            pageStart: this.pageStart,
+            pageStop: this.itemsLength
+          })
+          : `${this.pageStart + 1}-${stop} of ${this.itemsLength}`
       }
 
       return this.$createElement('div', {
-        'class': 'datatable__actions__pagination',
-        domProps: { innerHTML: pagination }
-      })
+        'class': 'datatable__actions__pagination'
+      }, [pagination])
     },
     genActions () {
       return [this.$createElement('div', {

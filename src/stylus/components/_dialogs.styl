@@ -2,6 +2,7 @@
   elevation(24)
   border-radius: $card-border-radius
   margin: 24px 40px
+  overflow-y: auto
   pointer-events: auto
   transition: .3s ease-in-out
   
@@ -22,10 +23,6 @@
     max-width: 90%
     max-height: 90%
   
-  &:not(.dialog--fullscreen)
-    max-width: 90%
-    max-height: 90%
-  
   &__container
     display: inline-block
     vertical-align: middle
@@ -38,27 +35,6 @@
     overflow-y: auto
     top: 0
     left 0
-    padding-top: 56px
-
-    .toolbar
-      height 56px           // TODO: height with two lines of text: 80dp
-      padding 0 !important
-      position: fixed
-      top: 0
-
-      &__title
-        font-size 20px      // TODO: convert from 20sp
-        padding: 20px 0     // TODO: convert from 20dp
-
-      .btn
-        &:first-child      // TODO: full width 72dp
-          max-width: 24px
-          max-height: 24px
-          margin: 0 32px 0 16px !important
-        &:last-child
-          margin 0 !important
-          height 100%
-          font-size 14px    // TODO: convert from 14sp
 
     >
       .card
@@ -66,7 +42,9 @@
         min-width 100%
         margin 0 !important
         padding 0 !important
-      
+        
   &--scrollable
-    .card__row:not(.card__row--actions)
+    overflow: hidden
+    
+    .card__text
       overflow-y: auto

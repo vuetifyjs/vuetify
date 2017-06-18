@@ -1,7 +1,9 @@
+import Schemable from '../../mixins/schemable'
+
 export default {
   functional: true,
 
-  name: 'card',
+  mixins: [Schemable],
 
   props: {
     flat: Boolean,
@@ -24,6 +26,8 @@ export default {
     if (props.hover) data.staticClass += ' card--hover'
     if (props.raised) data.staticClass += ' card--raised'
     if (props.flat) data.staticClass += ' card--flat'
+    if (props.light) data.staticClass += ' light--text'
+    if (props.dark) data.staticClass += ' dark--text'
 
     if (props.img) {
       data.style.background = `url(${props.img}) center center / cover no-repeat`

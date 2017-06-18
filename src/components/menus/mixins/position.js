@@ -20,7 +20,7 @@ export default {
       return parseInt(a.left - 16)
     },
     calcTopAuto () {
-      if (!this.$refs.content) return this.calcTop(true)
+      if (!this.hasActivator) return this.calcTop(true)
 
       const selectedIndex = Array.from(this.tiles).findIndex(n => n.classList.contains('list__tile--active'))
 
@@ -34,7 +34,11 @@ export default {
       let actingIndex = selectedIndex
 
       let offsetPadding = -16
-      this.stopIndex = this.tiles.length - 4
+      // #708 Stop index should vary by tile length
+      this.stopIndex = this.tiles.length > 4
+        ? this.tiles.length - 4
+        : this.tiles.length
+
       if (selectedIndex > this.startIndex && selectedIndex < this.stopIndex) {
         actingIndex = 2
         offsetPadding = 24
@@ -83,10 +87,23 @@ export default {
       cb()
       el.style.display = currentDisplay
     },
+    absolutePosition () {
+      return {
+        offsetTop: 0,
+        scrollHeight: 0,
+        top: this.positionY || this.absoluteY,
+        bottom: this.positionY || this.absoluteY,
+        left: this.positionX || this.absoluteX,
+        right: this.positionX || this.absoluteX,
+        height: 0,
+        width: 0
+      }
+    },
     updateDimensions () {
       this.sneakPeek(() => {
         this.dimensions = {
-          activator: this.measure(this.getActivator()),
+          activator: !this.hasActivator || this.positionAbsolutely
+            ? this.absolutePosition() : this.measure(this.getActivator()),
           content: this.measure(this.$refs.content)
         }
       })

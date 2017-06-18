@@ -8,8 +8,8 @@ export default {
       } else if (!this.filteredItems.length) {
         children = [this.genEmptyBody(this.noResultsText)]
       } else {
-        children = this.filteredItems.map((item) => {
-          const props = { item }
+        children = this.filteredItems.map((item, index) => {
+          const props = { item, index }
 
           Object.defineProperty(props, 'selected', {
             get: () => this.selected[item[this.selectedKey]],
@@ -20,9 +20,13 @@ export default {
             }
           })
 
-          return this.genTR(this.$scopedSlots.items(props), {
-            attrs: { active: this.isSelected(item) }
-          })
+          const row = this.$scopedSlots.items(props)
+
+          if (row.length && row[0].tag === 'tr') {
+            return row
+          } else {
+            return this.genTR(row, { attrs: { active: this.isSelected(item) } })
+          }
         })
       }
 

@@ -12,7 +12,10 @@ export default {
         'class': 'picker--date__header-selector'
       }, [
         this.$createElement('v-btn', {
-          props: { icon: true },
+          props: {
+            dark: this.dark,
+            icon: true
+          },
           nativeOn: {
             click: e => {
               e.stopPropagation()
@@ -32,7 +35,10 @@ export default {
           ])
         ]),
         this.$createElement('v-btn', {
-          props: { icon: true },
+          props: {
+            dark: this.dark,
+            icon: true
+          },
           nativeOn: {
             click: e => {
               e.stopPropagation()

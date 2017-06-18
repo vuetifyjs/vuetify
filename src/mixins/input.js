@@ -1,7 +1,7 @@
-import Themeable from './themeable'
+import Schemable from './schemable'
 
 export default {
-  mixins: [Themeable],
+  mixins: [Schemable],
 
   data () {
     return {
@@ -17,7 +17,7 @@ export default {
     appendIconCb: Function,
     disabled: Boolean,
     error: Boolean,
-    errors: {
+    errorMessages: {
       type: [String, Array],
       default: () => []
     },
@@ -52,14 +52,14 @@ export default {
         'input-group--dirty': this.isDirty,
         'input-group--tab-focused': this.tabFocused,
         'input-group--disabled': this.disabled,
-        'input-group--light': this.light || !this.dark,
-        'input-group--dark': !this.light && this.dark,
         'input-group--error': this.hasError,
         'input-group--append-icon': this.appendIcon,
         'input-group--prepend-icon': this.prependIcon,
         'input-group--required': this.required,
         'input-group--hide-details': this.hideDetails,
-        'input-group--placeholder': !!this.placeholder
+        'input-group--placeholder': !!this.placeholder,
+        'dark--text': this.dark,
+        'light--text': this.light
       }, this.classes)
     },
     isDirty () {
@@ -85,9 +85,9 @@ export default {
       return Object.assign(modifiers, model.modifiers)
     },
     validations () {
-      return (!Array.isArray(this.errors)
-        ? [this.errors]
-        : this.errors).concat(this.errorBucket)
+      return (!Array.isArray(this.errorMessages)
+        ? [this.errorMessages]
+        : this.errorMessages).concat(this.errorBucket)
     }
   },
 
@@ -190,8 +190,10 @@ export default {
             if ([9, 16].includes(e.keyCode)) {
               this.tabFocused = true
             }
-
-            if (e.keyCode === 13) {
+          },
+          keydown: e => {
+            if ([13, 32].includes(e.keyCode)) {
+              e.preventDefault()
               this.toggle()
             }
           }

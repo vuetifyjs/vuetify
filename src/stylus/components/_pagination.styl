@@ -1,11 +1,14 @@
 .pagination
-  list-style-type: none
+  align-items: center
+  align-items: center
   display: inline-flex
-  align-items: center
-  padding: 0
-  margin: 0
+  list-style-type: none
   height: 40px
-  align-items: center
+  margin: 0
+  overflow-x: auto
+  overflow-y: hidden
+  max-width: 100%
+  padding: 0
 
   > li
     align-items: center
@@ -43,7 +46,7 @@
     &--active
       elevation(4)
       background: $theme.primary
-      color: $color-light
+      color: $material-dark.text.primary
 
   &__navigation
     elevation(2)
