@@ -109,7 +109,6 @@ export default {
 
       return this.$createElement('label', data, this.label)
     },
-    toggle () {},
     genMessages () {
       let messages = []
 
@@ -192,6 +191,8 @@ export default {
             }
           },
           keydown: e => {
+            if (!this.toggle) return
+
             if ([13, 32].includes(e.keyCode)) {
               e.preventDefault()
               this.toggle()
