@@ -7,7 +7,7 @@ export default {
 
   watch: {
     loading (val) {
-      if (!!val) this.color = val
+      if (val) this.color = val
     }
   },
 

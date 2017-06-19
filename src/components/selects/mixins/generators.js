@@ -142,7 +142,7 @@ export default {
       }
 
       return this.$createElement('v-list-tile-action', data, [
-        this.$createElement('v-checkbox', { props: { inputValue: active }})
+        this.$createElement('v-checkbox', { props: { inputValue: active } })
       ])
     },
     genContent (item) {

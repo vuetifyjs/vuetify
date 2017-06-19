@@ -42,7 +42,7 @@ export default {
     }
 
     if (this.close) {
-      const icon = h('v-icon', { props: { right: true }}, 'cancel')
+      const icon = h('v-icon', { props: { right: true } }, 'cancel')
 
       children.push(h('a', {
         'class': 'chip__close',

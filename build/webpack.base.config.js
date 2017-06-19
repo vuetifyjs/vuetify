@@ -38,7 +38,7 @@ module.exports = {
       {
         test: /\.styl$/,
         loaders: ExtractTextPlugin.extract({
-          use: ['eslint-loader', 'css-loader', 'postcss-loader', 'stylus-loader']
+          use: ['css-loader', 'postcss-loader', 'stylus-loader']
         }),
         include: projectRoot,
         exclude: /node_modules/

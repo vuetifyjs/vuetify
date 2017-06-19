@@ -99,7 +99,7 @@ export default {
       }
 
       children.length < 6 && children.push(this.genTR([
-        this.$createElement('td', { domProps: { innerHTML: '&nbsp;' }})
+        this.$createElement('td', { domProps: { innerHTML: '&nbsp;' } })
       ]))
 
       return this.$createElement('tbody', children)

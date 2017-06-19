@@ -180,7 +180,7 @@ export default {
 
     if (this.thumbLabel) {
       thumbChildren.push(
-        h('v-scale-transition', { props: { origin: 'bottom center' }}, [
+        h('v-scale-transition', { props: { origin: 'bottom center' } }, [
           h('div', {
             'class': 'slider__thumb--label__container',
             directives: [

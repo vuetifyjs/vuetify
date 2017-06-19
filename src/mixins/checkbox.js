@@ -40,7 +40,7 @@ export default {
 
   methods: {
     genLabel () {
-      return this.$createElement('label', { on: { click: this.toggle }}, this.label)
+      return this.$createElement('label', { on: { click: this.toggle } }, this.label)
     },
     toggle () {
       if (this.disabled) {

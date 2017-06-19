@@ -55,7 +55,7 @@ export default {
         'class': 'alert__dismissible',
         domProps: { href: 'javascript:;' },
         on: { click: () => (this.$emit('input', false)) }
-      }, [h('v-icon', { props: { right: true, large: true }}, 'cancel')]))
+      }, [h('v-icon', { props: { right: true, large: true } }, 'cancel')]))
     }
 
     return h('div', {
