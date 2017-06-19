@@ -60,10 +60,9 @@ export default {
       if (this.nudgeLeft) left += this.nudgeLeft
       if (this.nudgeRight) left -= this.nudgeRight
 
-      const totalWidth = left + this.minWidth - this.window.innerWidth
+      const totalWidth = left + this.calculatedMinWidth - this.window.innerWidth
 
       if (totalWidth > 0) left -= (totalWidth + 24) // give a little extra space
-
       return left
     },
     calcTop (force) {

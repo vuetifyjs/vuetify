@@ -127,20 +127,22 @@ export default {
       type: Boolean,
       default: false
     },
-    disableContentMinWidth: {
-      type: Boolean,
-      default: false
+    minWidth: {
+      type: Number,
+      default: null
     }
   },
 
   computed: {
-    minWidth () {
-      return this.dimensions.activator.width + this.nudgeWidth + (this.auto ? 16 : 0)
+    calculatedMinWidth () {
+      return this.minWidth !== null
+        ? this.minWidth
+        : this.dimensions.activator.width + this.nudgeWidth + (this.auto ? 16 : 0)
     },
     styles () {
       return {
         maxHeight: this.auto ? '200px' : isNaN(this.maxHeight) ? this.maxHeight : `${this.maxHeight}px`,
-        minWidth: this.disableContentMinWidth ? 0 : `${this.minWidth}px`,
+        minWidth: `${this.calculatedMinWidth}px`,
         top: `${this.calcTop()}px`,
         left: `${this.calcLeft()}px`
       }
