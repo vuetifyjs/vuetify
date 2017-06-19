@@ -13,6 +13,10 @@ export default {
     overflow: Boolean
   },
 
+  beforeDestroy () {
+    this.removeOverlay()
+  },
+
   methods: {
     genOverlay () {
       if (!this.isActive || this.hideOverlay) return
