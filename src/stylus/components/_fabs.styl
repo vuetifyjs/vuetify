@@ -1,49 +1,44 @@
 .fab
-  @extend .btn, .btn--floating, .btn--raised
   position: fixed
   
   &--absolute
     position: absolute
   
   &--hidden
-    transform: scale(0) rotate(-45deg)
-    
-  &--lateral
-    .fab__content
-      transform: none !important
-  
-  @keyframes is-changing
-    0%
-      transform: scale(1)
-    
-    50%
-      transform: scale(0)
+    .fab__activator
+      transform: scale(0) rotate(-45deg)
       
-    100%
-      transform: scale(1)
-  
-  @keyframes lateral
-    0%
-      opacity: 0
-      
-    60%
-      opacity: 0
+  &--top
+    &:not(.fab--absolute)
+      top: $grid-gutters.sm
 
-    100%
-      opacity: 1
+    &.fab--absolute
+      bottom: 100%
+      transform: translateY(50%)
+  
+  &--bottom
+    &:not(.fab--absolute)
+      bottom: $grid-gutters.sm
+      
+    &.fab--absolute
+      top: 100%
+      transform: translateY(-50%)
+    
+  &--left
+    left: $grid-gutters.sm
+    
+  &--right
+    right: $grid-gutters.sm
 
   &--is-changing
-    animation-duration: .6s
-    animation-name: is-changing
-    animation-delay: 50ms
+    .fab__activator
+      animation-duration: .6s
+      animation-name: is-changing
+      animation-delay: 50ms
     
-    .fab__content
+    .fab__activator .icon
       animation-name: lateral
       animation-duration: .6s
-      
-  &:focus
-    .fab__content
-      transform: rotate(45deg)
 
   &.fab--small
     height: $button-floating-small-width
@@ -64,6 +59,38 @@
       height: $button-floating-large-icon-width
       width: $button-floating-large-icon-width
       
+
+/** Elements */
+.fab__activator
+  transition: $primary-transition
+
+  > *:focus
+    transform: rotate(45deg)
+
+
+/** Animations */
+.fab
+  @keyframes is-changing
+    0%
+      transform: scale(1)
+    
+    50%
+      transform: scale(0)
+      
+    100%
+      transform: scale(1)
+  
+  @keyframes lateral
+    0%
+      opacity: 0
+      
+    60%
+      opacity: 0
+      transform: rotate(45deg)
+
+    100%
+      opacity: 1
+      transform: rotate(0)
 
 /** Themes */
 .fab

@@ -19,17 +19,16 @@
 
 /** Psuedo */
 .btn
-  &__content
-    &:before
-      border-radius: inherit
-      color: inherit
-      content: ''
-      position: absolute
-      left: 0
-      top: 0
-      height: 100%
-      transition: $primary-transition
-      width: 100%
+  &__content:before
+    border-radius: inherit
+    color: inherit
+    content: ''
+    position: absolute
+    left: 0
+    top: 0
+    height: 100%
+    transition: $primary-transition
+    width: 100%
 
 /** Content */
 .btn
@@ -46,6 +45,9 @@
     overflow: hidden
     padding: $button-padding
     text-overflow: ellipsis
+    
+    .icon
+      color: inherit
 
 
 /** Types */
@@ -101,6 +103,7 @@
     height: $button-floating-width
     width: $button-floating-width
     padding: 0
+    elevation(4)
 
     &:after
       border-radius: 50%
@@ -181,9 +184,6 @@
     border: 1px solid currentColor
     background: transparent !important
     box-shadow: none
-    
-    .icon
-      color: inherit !important
 
     &:hover
       box-shadow: none

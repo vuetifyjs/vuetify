@@ -72,7 +72,7 @@ export default {
   methods: {
     // Prevent focus to match md spec
     click () {
-      this.$el.blur()
+      !this.floating && this.$el.blur()
     },
     genContent (h) {
       return h('div', { 'class': 'btn__content' }, [this.$slots.default])
