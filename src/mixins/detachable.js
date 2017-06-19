@@ -19,7 +19,7 @@ export default {
   },
 
   beforeDestroy () {
-    this.app
+    this.app &&
       this.app.contains(this.$refs.content) &&
       this.app.removeChild(this.$refs.content)
   }
