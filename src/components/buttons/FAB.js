@@ -51,9 +51,24 @@ export default {
 
   methods: {
     genContent () {
-      return this.$createElement('div', {
-        'class': 'fab__activator'
-      }, this.$slots.activator
+      const data = {
+        'class': 'fab__activator',
+        directives: [{
+          name: 'click-outside'
+        }]
+      }
+
+      if (this.hover) {
+        data.on = {
+          mouseover: () => (this.isActive = true)
+        }
+      } else {
+        data.on = {
+          click: this.toggle
+        }
+      }
+
+      return this.$createElement('div', data, this.$slots.activator
         ? this.$slots.activator
         : this.$slots.default
       )
@@ -73,21 +88,6 @@ export default {
   render (h) {
     const data = {
       'class': this.classes
-    }
-
-    if (this.hover) {
-      data.on = {
-        mouseover: () => (this.isActive = true),
-        mouseout: () => (this.isActive = false)
-      }
-    } else {
-      data.on = {
-        click: this.toggle
-      }
-
-      data.directives = [{
-        name: 'click-outside'
-      }]
     }
 
     return h('div', data, [
