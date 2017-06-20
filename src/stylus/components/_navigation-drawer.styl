@@ -19,7 +19,7 @@
 
     + .toolbar, ~ main, ~ .footer
       transition: none !important
-      
+
       @media $display-breakpoints.sm-and-down
         padding-left: 0 !important
 
@@ -46,6 +46,11 @@
         padding-left: 0
         z-index: 3
 
+    @media screen and (max-width: $grid-breakpoints.lg) and (orientation: landscape)
+      &.navigation-drawer--clipped, &.navigation-drawer--floating
+        margin-top: $toolbar-mobile-landscape-height
+        max-height: "calc(100vh - %s)" % $toolbar-mobile-landscape-height
+
   &--persistent, &--permanent
     &.navigation-drawer--open:not(.navigation-drawer--is-mobile):not(.navigation-drawer--right)
       &:not(.navigation-drawer--clipped)
@@ -70,6 +75,10 @@
     max-height: "calc(100vh - %s)" % $toolbar-height
     overflow: hidden
     width: $navigation-drawer-mini-variant-width
+
+    @media screen and (max-width: $grid-breakpoints.lg) and (orientation: landscape)
+      margin-top: $toolbar-mobile-landscape-height
+      max-height: "calc(100vh - %s)" % $toolbar-mobile-landscape-height
 
     .list__tile__action, .list__tile__avatar
       justify-content: center
