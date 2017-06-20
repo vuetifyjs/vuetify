@@ -1,4 +1,3 @@
-import Contextualable from '../../mixins/contextualable'
 import GenerateRouteLink from '../../mixins/route-link'
 import Schemable from '../../mixins/schemable'
 import Toggleable from '../../mixins/toggleable'
@@ -6,7 +5,9 @@ import Toggleable from '../../mixins/toggleable'
 export default {
   name: 'fab',
 
-  mixins: [Contextualable, GenerateRouteLink, Schemable, Toggleable],
+  mixins: [GenerateRouteLink, Schemable, Toggleable],
+
+  provide: { isFab: true },
 
   data: () => ({
     changeTimeout: {},
@@ -16,9 +17,14 @@ export default {
   props: {
     absolute: Boolean,
     lateral: Boolean,
+    listDirection: {
+      type: String,
+      default: 'top'
+    },
     positionX: [Number, String],
     positionY: [Number, String],
     hidden: Boolean,
+    hover: Boolean,
     top: Boolean,
     right: Boolean,
     bottom: Boolean,
@@ -31,31 +37,62 @@ export default {
         'fab': true,
         'fab--absolute': this.absolute,
         'fab--hidden': this.hidden,
+        'fab--hover': this.hover,
+        'fab--is-active': this.isActive,
         'fab--is-changing': this.isChanging,
         'fab--top': this.top,
         'fab--right': this.right,
         'fab--bottom': this.bottom,
-        'fab--left': this.left
+        'fab--left': this.left,
+        [`fab--list-${this.listDirection}`]: this.listDirection
       }
     }
   },
 
   methods: {
-    changeAction () {
-      this.isChanging = true
-      clearTimeout(this.changeTimeout)
-      this.changeTimeout = setTimeout(() => {
-        requestAnimationFrame(() => (this.isChanging = false))
-      }, 600)
+    genContent () {
+      return this.$createElement('div', {
+        'class': 'fab__activator'
+      }, this.$slots.activator
+        ? this.$slots.activator
+        : this.$slots.default
+      )
     },
-    genContent (h) {
-      return h('div', { 'class': 'fab__activator' }, this.$slots.default)
+    genDial () {
+      if (!this.$slots.activator) return
+
+      return this.$createElement('div', {
+        'class': 'fab__speed-dial'
+      }, this.$slots.default)
+    },
+    toggle () {
+      this.isActive = !this.isActive
     }
   },
 
   render (h) {
-    return h('div', {
+    const data = {
       'class': this.classes
-    }, [this.genContent(h)])
+    }
+
+    if (this.hover) {
+      data.on = {
+        mouseover: () => (this.isActive = true),
+        mouseout: () => (this.isActive = false)
+      }
+    } else {
+      data.on = {
+        click: this.toggle
+      }
+
+      data.directives = [{
+        name: 'click-outside'
+      }]
+    }
+
+    return h('div', data, [
+      this.genDial(),
+      this.genContent()
+    ])
   }
 }

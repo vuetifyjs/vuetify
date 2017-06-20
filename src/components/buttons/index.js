@@ -1,3 +1,6 @@
+import {
+  createSimpleFunctional
+} from '../../util/helpers'
 import Btn from './Button'
 import BtnToggle from './ButtonToggle.vue'
 import Fab from './FAB'

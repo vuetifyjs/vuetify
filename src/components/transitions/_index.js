@@ -12,6 +12,7 @@ const CarouselReverseTransition = createSimpleTransition('carousel-reverse-trans
 const DialogTransition = createSimpleTransition('dialog-transition')
 const DialogBottomTransition = createSimpleTransition('dialog-bottom-transition')
 const FadeTransition = createSimpleTransition('fade-transition')
+const FabTransition = createSimpleTransition('fab-transition')
 const MenuTransition = createSimpleTransition('menu-transition')
 
 export default {
@@ -20,6 +21,7 @@ export default {
   SlideYTransition,
   SlideYReverseTransition,
   ScaleTransition,
+  FabTransition,
   FadeTransition,
   TabTransition,
   TabReverseTransition,

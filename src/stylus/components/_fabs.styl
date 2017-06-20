@@ -1,6 +1,9 @@
 .fab
   position: fixed
-  
+
+
+/** Variations */
+.fab
   &--absolute
     position: absolute
   
@@ -40,36 +43,77 @@
       animation-name: lateral
       animation-duration: .6s
 
-  &.fab--small
-    height: $button-floating-small-width
-    width: $button-floating-small-width
+  .btn
+    @extend .btn--floating
 
-    .icon
-      font-size: $button-floating-small-icon-width
-      height: $button-floating-small-icon-width
-      width: $button-floating-small-icon-width
+/** Actions */      
+.fab--list
+  &-top
+    .fab__speed-dial .btn
+      transform: translateY(20px) scale(.25)
+  
+  &-right
+    .fab__speed-dial .btn
+      transform: translateX(-20px) scale(.25)
+  
+  &-bottom
+    .fab__speed-dial .btn
+      transform: translateY(-20px) scale(.25)
+  
+  &-left
+    .fab__speed-dial .btn
+      transform: translateX(20px) scale(.25)
 
+.fab
+  .fab__speed-dial .btn
+    opacity: 0
+    
+  &--is-active
+    .fab__speed-dial .btn
+      transform: none
+      opacity: 1
 
-  &.fab--large
-    height: $button-floating-large-width
-    width: $button-floating-large-width
-
-    .icon
-      font-size: $button-floating-large-icon-width
-      height: $button-floating-large-icon-width
-      width: $button-floating-large-icon-width
-      
 
 /** Elements */
 .fab__activator
   transition: $primary-transition
 
-  > *:focus
-    transform: rotate(45deg)
-
+.fab__speed-dial
+  align-items: center
+  display: flex
+  justify-content: center
+  flex-direction: column-reverse
+  
+  .btn
+    for n in (1..7)
+      &:nth-child({n})
+        transition-delay: "%ss" % (n * .05)
 
 /** Animations */
 .fab
+  &-transition
+    &-enter-active, &-leave-active
+      transition: transform .1s linear, opacity .1s $transition.swing
+
+    &-enter, &-leave-to
+      opacity: .5
+      
+  &--is-active
+    .fab-transition
+      &-enter
+        transform: rotate(-45deg)
+        
+      &-leave-to
+        transform: rotate(45deg)
+
+  &:not(.fab--is-active)
+    .fab-transition
+      &-enter
+        transform: rotate(45deg)
+        
+      &-leave-to
+        transform: rotate(-45deg)
+
   @keyframes is-changing
     0%
       transform: scale(1)

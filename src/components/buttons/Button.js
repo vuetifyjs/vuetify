@@ -6,6 +6,8 @@ import GenerateRouteLink from '../../mixins/route-link'
 export default {
   name: 'btn',
 
+  inject: ['isFab'],
+
   mixins: [Contextualable, GenerateRouteLink, Schemable, Toggleable],
 
   props: {
@@ -72,7 +74,7 @@ export default {
   methods: {
     // Prevent focus to match md spec
     click () {
-      !this.floating && this.$el.blur()
+      !this.isFab && this.$el.blur()
     },
     genContent (h) {
       return h('div', { 'class': 'btn__content' }, [this.$slots.default])
@@ -102,6 +104,8 @@ export default {
     if (tag === 'button') {
       data.attrs.type = this.type
     }
+
+    this.isFab && (data.attrs.tabindex = -1)
 
     children.push(this.genContent(h))
 
