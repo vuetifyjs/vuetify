@@ -45,7 +45,7 @@
     overflow: hidden
     padding: $button-padding
     text-overflow: ellipsis
-    
+
     .icon
       color: inherit
 
@@ -75,7 +75,7 @@
     height: $button-height
     width: $button-height
     min-width: 0
-    
+
     .btn__content
       height: $button-height
       padding: 0
@@ -90,12 +90,18 @@
       &:after
         background-color: currentColor
         opacity: .12
-      
+
     &.btn--small
       width: $button-small-height
 
+      .btn__content
+        height: $button-small-height
+
     &.btn--large
       width: $button-large-height
+
+      .btn__content
+        height: $button-large-height
 
   &--floating
     border-radius: 50%
@@ -130,11 +136,11 @@
         font-size: $button-floating-large-icon-width
         height: $button-floating-large-icon-width
         width: $button-floating-large-icon-width
-    
+
   &--reverse
     .btn__content
       flex-direction: row-reverse
-    
+
     &.btn--column
       .btn__content
         flex-direction: column-reverse
