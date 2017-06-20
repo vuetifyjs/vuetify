@@ -40,7 +40,7 @@ export default {
       const text = children.pop().text
 
       if (text.indexOf(' ') === -1) data.staticClass += ` ${comparison}-${text}`
-      else data.staticClass += ` ${text.split(' ').join(`${comparison}- `)}`
+      else data.staticClass += ` ${comparison}-${text.split(' ').join('-')}`
     }
 
     if (props.disabled) {
