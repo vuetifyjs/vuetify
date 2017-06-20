@@ -78,20 +78,21 @@ export default {
       type: Function,
       default: (items, index, descending) => {
         return items.sort((a, b) => {
-          const sortA = getObjectValueByPath(a, index)
-          const sortB = getObjectValueByPath(b, index)
+          let sortA = getObjectValueByPath(a, index)
+          let sortB = getObjectValueByPath(b, index)
 
-          if (descending) {
-            if (!isNaN(sortA) && !isNaN(sortB)) return sortB - sortA
-            if (sortA < sortB) return 1
-            if (sortA > sortB) return -1
-            return 0
-          } else {
-            if (!isNaN(sortA) && !isNaN(sortB)) return sortA - sortB
-            if (sortA < sortB) return -1
-            if (sortA > sortB) return 1
-            return 0
+          if (descending){
+            [sortA, sortB] = [sortB, sortA]
           }
+
+          if (!isNaN(sortA) && !isNaN(sortB)) return (sortA - sortB)
+          else if (sortA == null && sortB == null) return 0;
+
+          [sortA, sortB] = [sortA, sortB].map(s => s.toLocaleLowerCase())
+          if (sortA > sortB) return 1
+          if (sortA < sortB) return -1
+
+          return 0
         })
       }
     },
