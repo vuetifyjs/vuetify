@@ -1,4 +1,4 @@
-import Menu from './Menu.vue'
+import Menu from './Menu.js'
 
 export default {
   Menu

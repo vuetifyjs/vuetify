@@ -3,27 +3,18 @@ require('./stylus/main.styl')
 import Components from './components/_index'
 import Directives from './directives/_index'
 import Load from './util/load'
-import Toast from './functions/toast'
 
-const defaults = {
-  componentPrefix: 'V',
-  directivePrefix: ''
-}
-
-function plugin (Vue, options) {
-  options = Object.assign(defaults, (options || {}))
-
-  Object.keys(Directives).forEach(key => {
-    Vue.directive(`${options.directivePrefix}${key}`, Directives[key])
+function plugin (Vue) {
+  Object.keys(Components).forEach(key => {
+    Vue.component(`V${key}`, Components[key])
   })
 
-  Object.keys(Components).forEach(key => {
-    Vue.component(`${options.componentPrefix}${key}`, Components[key])
+  Object.keys(Directives).forEach(key => {
+    Vue.directive(key, Directives[key])
   })
 
   Vue.prototype.$vuetify = {
-    load: Load,
-    toast: Toast
+    load: Load
   }
 }
 

@@ -1,59 +1,61 @@
 .menu
   display: inline-block
-  
+  position: relative
+  vertical-align: middle
+
+  &--disabled
+    cursor: not-allowed
+
+    .menu__activator
+      cursor: not-allowed
+
   &__activator
-    display: inline-flex
     align-items: center
     cursor: pointer
     position: relative
-  
+
   &__content
-    background-color: #fff
+    background: $material-theme.bg-color
     position: absolute
     display: inline-block
     border-radius: 2px
     overflow-y: auto
     overflow-x: hidden
-    z-index: 3
-    @extend .z-depth-2
-    
+    z-index: 6
+    elevation(8)
+
   &-transition
     &-enter
-      max-width: 50px !important
-      min-width: 0
-      
       .list__tile
         min-width: 0
-        transition-delay: .1s
+        transition-delay: .4s
         opacity: 0
         transform: translateY(-15px)
-        
+        pointer-events: none
+
       .list__tile--active
-        opacity: 1 !important
-        transform: translateY(0) !important
-      
+        opacity: 1
+        transform: none !important
+        pointer-events: auto
     &-enter-to
-      margin-top: initial
-      max-height: initial
-      pointer-events: auto
-      max-width: 300px
-        
       .list__tile
         pointer-events: auto
         opacity: 1
-      
+        
       .list__tile--active
-        opacity: 1 !important
+        transform: none !important
       
     &-leave-to
       transform: translateY(-10px)
+    
+    &-leave-active, &-leave-to
+      pointer-events: none
         
     &-enter, &-leave-to
       opacity: 0
-      
+
     &-enter-to, &-leave
       opacity: 1
-      
+
     &-enter-active, &-leave-active
-      transition: all .3s $transition.ease-in-out, top 1ms, left 1ms
-      
+      transition: all .5s $transition.swing

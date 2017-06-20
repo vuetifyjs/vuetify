@@ -1,0 +1,63 @@
+.input-group--select
+  .input-group--select__autocomplete
+    display: block
+    opacity: 0
+    height: 0
+
+  .input-group__append-icon
+    transition: .3s $transition.linear-out-slow-in
+
+  &.input-group--focused
+    .input-group--select__autocomplete
+      flex: 1 0 100%
+      opacity: 1
+      height: 30px
+
+    .input-group__append-icon
+      transform: rotate(-180deg)
+
+  .input-group__input, input
+    cursor: pointer
+
+  &.input-group--disabled
+    cursor: not-allowed
+    pointer-events: none
+
+.input-group--select
+  .input-group__selections
+    display: flex
+    flex-wrap: wrap
+    width: 100%
+    position: relative
+
+    > div
+      display: flex
+      flex-wrap: wrap
+      flex: 1
+
+    &__comma
+      display: inline-block
+      font-size: 16px
+      height: 30px
+      padding-top: 4px
+      padding-right: 4px
+
+.input-group--select
+  &.input-group--light
+    .input-group__selections__comma
+      color: $color-light
+
+    .input-group__selections__comma--active
+      color: $theme.primary
+
+  &.input-group--dark
+    .input-group__selections__comma
+      color: $color-dark
+
+.input-group--select
+  .menu
+    display: inline
+
+  .fade-transition-leave-active
+    position: absolute
+    left: 0

@@ -1,18 +1,18 @@
 <template lang="pug">
-  div(class="slider")
-    div(class="slider__left")
+  div(class="carousel")
+    div(class="carousel__left")
       v-btn(icon v-on:click.native.stop="prev")
         v-icon chevron_left
 
-    div(class="slider__right")
+    div(class="carousel__right")
       v-btn(icon v-on:click.native.stop="next")
         v-icon chevron_right
 
-    div(class="slider__controls")
+    div(class="carousel__controls")
       v-btn(
-        class="slider__controls__item"
+        class="carousel__controls__item"
         icon
-        v-bind:class="{ 'slider__controls__item--active': index === current }"
+        v-bind:class="{ 'carousel__controls__item--active': index === current }"
         v-for="(item, index) in items"
         v-on:click.native.stop="select(index)"
       )
@@ -21,8 +21,12 @@
 </template>
 
 <script>
+  import Bootable from '../../mixins/bootable'
+
   export default {
     name: 'carousel',
+
+    mixins: [Bootable],
 
     data () {
       return {
@@ -64,15 +68,16 @@
         // Evaluate items when current changes to account for
         // dynamic changing of children
         this.items = this.$children.filter(i => {
-          return i.$el.classList && i.$el.classList.contains('slider__item')
+          return i.$el.classList && i.$el.classList.contains('carousel__item')
         })
 
         this.items.forEach(i => i.open(this.items[this.current]._uid, this.reverse))
 
-        if (this.cycle) {
-          clearInterval(this.slideInterval)
-          this.startInterval()
-        }
+        !this.isBooted && this.cycle && this.restartInterval()
+        this.isBooted = true
+      },
+      cycle (val) {
+        val && this.restartInterval() || clearInterval(this.slideInterval)
       }
     },
 
@@ -81,10 +86,13 @@
     },
 
     methods: {
+      restartInterval () {
+        clearInterval(this.slideInterval)
+        this.$nextTick(this.startInterval)
+      },
       init () {
         this.current = 0
       },
-
       next () {
         this.reverse = false
 
@@ -94,7 +102,6 @@
 
         this.current++
       },
-
       prev () {
         this.reverse = true
 
@@ -104,12 +111,10 @@
 
         this.current--
       },
-
       select (index) {
         this.reverse = index < this.current
         this.current = index
       },
-
       startInterval () {
         this.slideInterval = setInterval(this.next, this.interval)
       }

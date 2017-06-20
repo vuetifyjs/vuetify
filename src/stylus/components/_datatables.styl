@@ -1,0 +1,81 @@
+.datatable
+  thead
+    th.column.sortable
+      cursor: pointer
+
+      i
+        color: rgba($material-theme.fg-color, $material-theme.disabledORhints-text-percent)
+        font-size: 16px
+        vertical-align: sub
+        display: inline-block
+        opacity: 0
+        transition: .3s $transition.swing
+
+      &:hover
+        color: rgba($material-theme.fg-color, $material-theme.primary-text-percent)
+
+        i
+          opacity: .6
+
+      &.active
+        transform: none
+        color: rgba($material-theme.fg-color, $material-theme.primary-text-percent)
+
+        i
+          color: rgba($material-theme.fg-color, $material-theme.primary-text-percent)
+          opacity: 1
+
+        &.desc
+          i
+            transform: rotate(-180deg)
+
+.datatable
+  tfoot
+    .input-group__details
+      display: none
+
+/** Actions */
+.datatable__actions
+  color: rgba($material-theme.fg-color, $material-theme.secondary-text-percent)
+  display: flex
+  justify-content: flex-end
+  align-items: center
+  font-size: 12px
+
+  .btn
+    color: inherit
+
+    &:last-of-type
+      margin-left: 18px
+
+  &__pagination
+    text-align: center
+    margin: 0 26px 0 32px
+
+  &__select
+    display: flex
+    align-items: center
+    justify-content: center
+
+    .input-group--select
+      margin: 13px 0 13px 34px
+      position: initial
+
+      .input-group__selections__comma
+        color: rgba($material-theme.fg-color, $material-theme.secondary-text-percent) !important
+        font-size: 12px
+        padding-top: 6px
+
+      .input-group__append-icon
+        color: rgba($material-theme.fg-color, $material-theme.secondary-text-percent) !important
+
+.datatable__progress
+  tr
+    height: auto !important
+
+  th
+    padding: 0 !important
+
+    .progress-linear
+      top: -3px
+      margin: 0 0 -3px

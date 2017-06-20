@@ -1,8 +1,33 @@
 .footer
-  color: #fff
-  height: $footer-height
-  line-height: $footer-height
-  position: relative
-  z-index: 4
+  align-items: center
   background: $theme.primary
-  padding: 0 $spacers.three.x
+  color: #fff
+  display: flex
+  height: $footer-height
+  transition: .3s $transition.swing
+  
+  &--absolute, &--fixed
+    bottom: 0
+    left: 0
+    width: 100%
+    z-index: 3
+
+  &--absolute
+    position: absolute
+    
+  &--fixed
+    position: fixed
+  
+  > *:first-child
+    margin-left: $grid-gutter
+    
+  > *:last-child
+    margin-right: $grid-gutter
+    
+  @media $display-breakpoints.xs-only
+    > *:first-child
+      margin-left: $grid-gutter-mobile
+      
+    > *:last-child
+      margin-right: $grid-gutter-mobile
+  

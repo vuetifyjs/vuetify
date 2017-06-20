@@ -1,12 +1,27 @@
 import { createSimpleFunctional } from '../../util/helpers'
 
-const Col = {
+const Flex = {
   functional: true,
 
   render: (h, { data, children }) => {
-    data.staticClass = data.staticClass ? `col ${data.staticClass}` : 'col'
+    data.staticClass = data.staticClass ? `flex ${data.staticClass}` : 'flex'
     data.staticClass += ` ${Object.keys(data.attrs).join(' ')}`
     delete data.attrs
+
+    return h('div', data, children)
+  }
+}
+
+const Layout = {
+  functional: true,
+
+  render: (h, { data, children }) => {
+    data.staticClass = data.staticClass ? `layout ${data.staticClass}` : 'layout'
+
+    if (data.attrs) {
+      data.staticClass += ` ${Object.keys(data.attrs).join(' ')}`
+      delete data.attrs
+    }
 
     return h('div', data, children)
   }
@@ -15,30 +30,24 @@ const Col = {
 const Container = {
   functional: true,
 
-  render (h, { data, children }) {
-    let staticClass = data.staticClass ? `container ${data.staticClass}` : 'container'
+  props: {
+    fluid: Boolean
+  },
 
-    if (data.attrs && typeof data.attrs.fluid !== 'undefined') {
-      staticClass += ' container--fluid'
-      data.attrs.fluid = undefined
-    }
+  render (h, { props, data, children }) {
+    data.staticClass = data.staticClass ? `container ${data.staticClass}` : 'container'
 
-    data.staticClass = staticClass
+    if (props.fluid) data.staticClass += ' container--fluid'
 
     return h('div', data, children)
   }
 }
 
-const Content = createSimpleFunctional('content')
-const Row = createSimpleFunctional('row')
-const ColSpacer = createSimpleFunctional('col--spacer')
 const Spacer = createSimpleFunctional('spacer')
 
 export default {
-  Col,
-  ColSpacer,
+  Flex,
   Container,
-  Content,
   Spacer,
-  Row
+  Layout
 }

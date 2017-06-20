@@ -8,9 +8,31 @@
 <p align="center">
   <strong>Vuetify.js is proudly sponsored by:</strong>
   <br><br>
-  <a href="http://www.thedifferenceengine.io/">
-    <img width="300px" src="https://vuetifyjs.com/public/doc-images/browser-stack.svg">
+  <a href="https://www.browserstack.com" target="_blank">
+    <img width="300px" src="https://vuetifyjs.com/static/doc-images/browser-stack.svg">
   </a>
+  <br><br>
+  <a href="https://www.cloudflare.com" target="_blank">
+    <img height="60px" src="https://vuetifyjs.com/static/doc-images/cloudflare.svg">
+  </a>
+  <br><br>
+</p>
+<p align="center">
+  <strong>Looking for Vue.js jobs? Check out <a href="https://vuejobs.com/?ref=vuetify" target="_blank">vuejobs.com</a></strong>
+</p>
+<hr>
+<p align="center">
+  <strong>Support Vuetify.js's development with:</strong>
+  <br>
+  
+  <a href="https://patreon.com/vuetify" target="_blank">
+    Patreon
+  </a>
+  &nbsp;or&nbsp;
+  <a href="https://www.paypal.me/vuetify" target="_blank">
+    Paypal
+  </a>
+  
 </p>
 
 ## Install
@@ -35,6 +57,9 @@ Vue.use(Vuetify)
 ```
 
 ## Support
-Ask your support questions on the vuetifyjs [gitter](https://gitter.im/vuetifyjs/Lobby/~chat#share).
+Ask your support questions on the vuetifyjs [gitter](https://gitter.im/vuetifyjs/Lobby/).
 
 For additional information, please visit the [Official Documentation](https://vuetifyjs.com).
+
+## Info
+Codepen starter [Vuetify Template](http://codepen.io/johnjleider/pen/bgJOrX)

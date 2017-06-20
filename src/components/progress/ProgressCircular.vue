@@ -44,7 +44,7 @@
       button: Boolean,
 
       fill: {
-        type: [Boolean, String],
+        type: String,
         default: () => this.indeterminate ? 'none' : 'transparent'
       },
 

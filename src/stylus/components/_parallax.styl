@@ -1,6 +1,7 @@
 .parallax
   position: relative
   overflow: hidden
+  z-index: 0
   
   &__image-container
     position: absolute
@@ -17,6 +18,7 @@
     min-width: 100%
     min-height: 100%
     display: none
+    transform: translate3d(-50%, 0, 0)
     z-index: 1
       
   &__content

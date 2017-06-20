@@ -1,22 +1,21 @@
 .icon
-  display: inline-flex
   align-items: center
+  display: inline-flex
+  font-size: 24px
   justify-content: center
-  
+  vertical-align: middle
+
+  &--dark
+    icon(rgba($material-light.fg-color, $material-light.active-icon-percent), rgba($material-light.fg-color, $material-light.inactive-icon-percent))
+
+  &--light
+    icon(rgba($material-dark.fg-color, $material-dark.active-icon-percent), rgba($material-dark.fg-color, $material-dark.inactive-icon-percent))
+
   &--large
     font-size: 2.5rem
-    min-width: 3.5rem // needed for safari
-    width: 3.5rem // needed for safari
-    height: 3.5rem // needed for safari
-    
+
   &--medium
     font-size: 2rem
-    min-width: 3rem // needed for safari
-    width: 3rem // needed for safari
-    height: 3rem // needed for safari
-    
+
   &--x-large
     font-size: 3rem
-    min-width: 4rem // needed for safari
-    width: 4rem // needed for safari
-    height: 4rem // needed for safari

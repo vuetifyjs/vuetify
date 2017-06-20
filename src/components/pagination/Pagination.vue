@@ -15,7 +15,7 @@
       a(
         href="#!"
         class="pagination__item"
-        v-bind:class="{ 'pagination__item--active': n === isActive }"
+        v-bind:class="{ 'pagination__item--active': n === value }"
         v-if="!isNaN(n)"
         v-on:click.prevent="$emit('input', n)"
         v-text="n"
@@ -36,12 +36,8 @@
 </template>
 
 <script>
-  import Toggleable from '../../mixins/toggleable'
-
   export default {
     name: 'pagination',
-
-    mixins: [Toggleable],
 
     props: {
       circle: Boolean,
