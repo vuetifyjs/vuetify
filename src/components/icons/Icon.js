@@ -1,9 +1,10 @@
 import Schemable from '../../mixins/schemable'
+import Contextualable from '../../mixins/contextualable'
 
 export default {
   functional: true,
 
-  mixins: [Schemable],
+  mixins: [Schemable, Contextualable],
 
   props: {
     disabled: Boolean,
@@ -29,7 +30,13 @@ export default {
       'icon--left': props.left,
       'icon--medium': props.medium,
       'icon--right': props.right,
-      'icon--x-large': props.xLarge
+      'icon--x-large': props.xLarge,
+      'primary--text': props.primary,
+      'secondary--text': props.secondary,
+      'success--text': props.success,
+      'info--text': props.info,
+      'warning--text': props.warning,
+      'error--text': props.error
     }
 
     const iconClasses = Object.keys(classes).filter(k => classes[k]).join(' ')
