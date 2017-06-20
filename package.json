@@ -69,7 +69,7 @@
     "vue-loader": "^10.1.0",
     "vue-server-renderer": "^2.3.3",
     "vue-template-compiler": "^2.3.3",
-    "webpack": "^2.6.1",
+    "webpack": "3.0.0",
     "webpack-bundle-size-analyzer": "^2.7.0",
     "webpack-merge": "^0.17.0"
   },
