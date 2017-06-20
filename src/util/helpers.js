@@ -53,7 +53,7 @@ export function getObjectValueByPath (obj, path) {
   if (!path || path.constructor !== String) return
   path = path.replace(/\[(\w+)\]/g, '.$1') // convert indexes to properties
   path = path.replace(/^\./, '')           // strip a leading dot
-  let a = path.split('.')
+  const a = path.split('.')
   for (var i = 0, n = a.length; i < n; ++i) {
     var k = a[i]
     if (obj.constructor === Object && k in obj) {

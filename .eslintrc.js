@@ -9,6 +9,7 @@ module.exports = {
   // required to lint *.vue files
   plugins: [
     'vue',
+    'pug',
     'html'
   ],
   env: {
@@ -22,10 +23,11 @@ module.exports = {
     'generator-star-spacing': 0,
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
-    'no-return-assign': 2,
+    'no-return-assign': 0,
     // disallow indentation using both tabs and spaces
     'no-mixed-spaces-and-tabs': 2,
     // ensure consistent 2 space indentation and indent cases under switch
-    'indent': [2, 2, {'SwitchCase': 1}]
+    'indent': [2, 2, {'SwitchCase': 1}],
+    'object-curly-spacing': [2, 'always']
   }
 }

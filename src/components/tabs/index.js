@@ -12,7 +12,7 @@ const TabsItems = {
   name: 'tabs-items',
 
   render (h) {
-    return h('div', { 'class': { 'tabs__items': true }}, [this.$slots.default])
+    return h('div', { 'class': { 'tabs__items': true } }, [this.$slots.default])
   }
 }
 

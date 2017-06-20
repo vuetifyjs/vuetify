@@ -168,7 +168,7 @@ export default {
     },
     selected () {
       const selected = {}
-      this.value.forEach(i => selected[i[this.selectedKey]] = true)
+      this.value.forEach(i => (selected[i[this.selectedKey]] = true))
       return selected
     }
   },

@@ -17,7 +17,7 @@ export default {
       type: Boolean,
       default: true
     },
-    dark: Boolean,
+    dark: Boolean
   },
 
   methods: {

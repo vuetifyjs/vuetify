@@ -59,7 +59,7 @@ export default {
 
     return this.genInputGroup([
       container,
-      h('label', { on: { click: this.toggle }}, this.label)
+      h('label', { on: { click: this.toggle } }, this.label)
     ])
   }
 }
