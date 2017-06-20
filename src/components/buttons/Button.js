@@ -105,8 +105,6 @@ export default {
       data.attrs.type = this.type
     }
 
-    this.isFab && (data.attrs.tabindex = -1)
-
     children.push(this.genContent(h))
 
     if (this.loading) {
