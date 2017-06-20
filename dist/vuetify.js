@@ -1210,8 +1210,10 @@ function load (cb, i) {
     if (footer) {
       data.staticClass += ' application--footer'
 
-      if (footer.data && footer.data.staticClass.indexOf('--fixed') !== -1 ||
-        footer.data.staticClass.indexOf('--absolute') !== -1
+      if (footer.data && (
+          footer.data.staticClass.indexOf('--fixed') !== -1 ||
+          footer.data.staticClass.indexOf('--absolute') !== -1
+        )
       ) { data.staticClass += ' application--footer-fixed' }
     }
 
