@@ -1,20 +1,3 @@
-<template lang="pug">
-  div(
-    class="progress-linear"
-    v-bind:class="classes"
-    v-bind:style="{ height: height + 'px' }"
-  )
-    div(class="progress-linear__bar" v-bind:style="styles")
-      v-fade-transition
-        div(v-bind:class="['progress-linear__bar__indeterminate', { 'progress-linear__bar__indeterminate--active': active }]" v-if="indeterminate")
-      v-slide-x-transition
-        div(
-          class="progress-linear__bar__determinate"
-          v-bind:style="{ width: value + '%' }"
-          v-if="!indeterminate"
-        )
-</template>
-
 <script>
   export default {
     name: 'progress',
@@ -51,6 +34,16 @@
       value: {
         type: [Number, String],
         default: 0
+      },
+
+      colorFront: {
+        type: String,
+        default: null
+      },
+
+      colorBack: {
+        type: String,
+        default: null
       }
     },
 
@@ -89,6 +82,25 @@
 
         return styles
       }
+    },
+
+    render (h) {
+      const fade = h('v-fade-transition', [
+        this.indeterminate && h('div', {
+          class: [
+            'progress-linear__bar__indeterminate',
+            this.active && 'progress-linear__bar__indeterminate--active',
+            this.colorFront]
+          })
+      ])
+
+      const slide = h('v-slide-x-transition', [
+        !this.indeterminate && h('div', { class: ['progress-linear__bar__determinate', this.colorFront], style: { width: `${this.value}%` } })
+      ])
+
+      const bar = h('div', { class: ['progress-linear__bar', this.colorBack], style: this.styles }, [fade, slide])
+
+      return h('div', { class: ['progress-linear', this.classes], style: { height: `${this.height}px` } }, [bar])
     }
   }
 </script>
