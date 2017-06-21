@@ -89,7 +89,7 @@ export default {
       const children = []
 
       if (!this.$slots.loader) {
-        children.push(h('v-progress-circular', {
+        children.push(this.$createElement('v-progress-circular', {
           props: {
             indeterminate: true,
             size: 26

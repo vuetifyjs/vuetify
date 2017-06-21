@@ -19,7 +19,7 @@ export default {
     listDirection: {
       type: String,
       default: 'top'
-    },
+    }
   },
 
   computed: {

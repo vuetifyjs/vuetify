@@ -81,7 +81,7 @@ export default {
           let sortA = getObjectValueByPath(a, index)
           let sortB = getObjectValueByPath(b, index)
 
-          if (descending){
+          if (descending) {
             [sortA, sortB] = [sortB, sortA]
           }
 
