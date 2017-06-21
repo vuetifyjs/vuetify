@@ -15,8 +15,7 @@ function directive (el, binding) {
   )
 
   if (!config.visible || (binding.expression && !binding.value)) {
-    el.classList.remove('badge', 'badge--left', 'badge--icon', 'badge--bottom', 'badge--overlap')
-    el.removeAttribute('data-badge')
+    el.classList.remove('badge')
 
     return
   }
