@@ -15,20 +15,11 @@ export default {
   }),
 
   props: {
-    absolute: Boolean,
     lateral: Boolean,
     listDirection: {
       type: String,
       default: 'top'
     },
-    positionX: [Number, String],
-    positionY: [Number, String],
-    hidden: Boolean,
-    hover: Boolean,
-    top: Boolean,
-    right: Boolean,
-    bottom: Boolean,
-    left: Boolean
   },
 
   computed: {
@@ -59,13 +50,9 @@ export default {
       }
 
       if (this.hover) {
-        data.on = {
-          mouseover: () => (this.isActive = true)
-        }
+        data.on = { mouseover: () => (this.isActive = true) }
       } else {
-        data.on = {
-          click: this.toggle
-        }
+        data.on = { click: this.toggle }
       }
 
       return this.$createElement('div', data, this.$slots.activator

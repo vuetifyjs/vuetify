@@ -1,14 +1,13 @@
 import Contextualable from '../../mixins/contextualable'
-import Toggleable from '../../mixins/toggleable'
-import Schemable from '../../mixins/schemable'
+import FAB from './mixins/fab'
 import GenerateRouteLink from '../../mixins/route-link'
+import Schemable from '../../mixins/schemable'
+import Toggleable from '../../mixins/toggleable'
 
 export default {
   name: 'btn',
 
-  inject: ['isFab'],
-
-  mixins: [Contextualable, GenerateRouteLink, Schemable, Toggleable],
+  mixins: [Contextualable, FAB, GenerateRouteLink, Schemable, Toggleable],
 
   props: {
     activeClass: {
@@ -17,7 +16,6 @@ export default {
     },
     block: Boolean,
     flat: Boolean,
-    floating: Boolean,
     icon: Boolean,
     large: Boolean,
     loading: Boolean,
@@ -42,17 +40,25 @@ export default {
     classes () {
       return {
         'btn': true,
+        'btn--absolute': this.absolute,
         'btn--active': this.isActive,
         'btn--block': this.block,
+        'btn--bottom': this.bottom,
         'btn--flat': this.flat,
-        'btn--floating': this.floating,
+        'btn--floating': this.fab,
+        'btn--fixed': this.fixed,
+        'btn--hidden': this.hidden,
+        'btn--hover': this.hover,
         'btn--icon': this.icon,
         'btn--large': this.large,
+        'btn--left': this.left,
         'btn--loader': this.loading,
         'btn--outline': this.outline,
         'btn--raised': !this.flat,
+        'btn--right': this.right,
         'btn--round': this.round,
         'btn--small': this.small,
+        'btn--top': this.top,
         'dark--text dark--bg': this.dark,
         'light--text light--bg': this.light,
         'primary': this.primary && !this.outline,
@@ -74,12 +80,12 @@ export default {
   methods: {
     // Prevent focus to match md spec
     click () {
-      !this.isFab && this.$el.blur()
+      !this.fab && this.$el.blur()
     },
-    genContent (h) {
-      return h('div', { 'class': 'btn__content' }, [this.$slots.default])
+    genContent () {
+      return this.$createElement('div', { 'class': 'btn__content' }, [this.$slots.default])
     },
-    genLoader (h) {
+    genLoader () {
       const children = []
 
       if (!this.$slots.loader) {
@@ -93,23 +99,16 @@ export default {
         children.push(this.$slots.loader)
       }
 
-      return h('span', { 'class': 'btn__loading' }, children)
+      return this.$createElement('span', { 'class': 'btn__loading' }, children)
     }
   },
 
   render (h) {
     const { tag, data } = this.generateRouteLink()
-    const children = []
+    const children = [this.genContent()]
 
-    if (tag === 'button') {
-      data.attrs.type = this.type
-    }
-
-    children.push(this.genContent(h))
-
-    if (this.loading) {
-      children.push(this.genLoader(h))
-    }
+    tag === 'button' && (data.attrs.type = this.type)
+    this.loading && children.push(this.genLoader())
 
     return h(tag, data, children)
   }

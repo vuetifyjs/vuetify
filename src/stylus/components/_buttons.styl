@@ -145,6 +145,50 @@
       .btn__content
         flex-direction: column-reverse
 
+  &--fixed, &--absolute
+    margin: 0
+
+  &--absolute
+    position: absolute
+      
+  &--fixed
+    position: fixed
+    
+  &--hidden
+    transform: scale(0) rotate(-45deg)
+      
+  &--top
+    &:not(.btn--absolute)
+      top: $grid-gutters.sm
+
+    &.btn--absolute
+      top: -($button-floating-width / 2)
+      
+      &.btn--small
+        top: -($button-floating-small-width / 2)
+
+      &.btn--large
+        top: -($button-floating-large-width / 2)
+  
+  &--bottom
+    &:not(.btn--absolute)
+      bottom: $grid-gutters.sm
+      
+    &.btn--absolute
+      bottom: -($button-floating-width / 2)
+      
+      &.btn--small
+        bottom: -($button-floating-small-width / 2)
+
+      &.btn--large
+        bottom: -($button-floating-large-width / 2)
+    
+  &--left
+    left: $grid-gutters.md
+    
+  &--right
+    right: $grid-gutters.md
+
 /** Sizes */
 .btn
   &--small

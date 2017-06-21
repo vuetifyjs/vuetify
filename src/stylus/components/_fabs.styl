@@ -4,34 +4,7 @@
 
 /** Variations */
 .fab
-  &--absolute
-    position: absolute
   
-  &--hidden
-    .fab__activator
-      transform: scale(0) rotate(-45deg)
-      
-  &--top
-    &:not(.fab--absolute)
-      top: $grid-gutters.sm
-
-    &.fab--absolute
-      bottom: 100%
-      transform: translateY(50%)
-  
-  &--bottom
-    &:not(.fab--absolute)
-      bottom: $grid-gutters.sm
-      
-    &.fab--absolute
-      top: 100%
-      transform: translateY(-50%)
-    
-  &--left
-    left: $grid-gutters.sm
-    
-  &--right
-    right: $grid-gutters.sm
 
   &--is-changing
     .fab__activator
