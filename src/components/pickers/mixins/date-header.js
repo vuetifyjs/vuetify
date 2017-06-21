@@ -31,7 +31,7 @@ export default {
           this.$createElement(this.computedTransition, [
             this.$createElement('strong', {
               key: this.tableMonth
-            }, `${this.months[this.tableMonth]} ${this.tableYear}`)
+            }, this.headerDateFormat({ month: this.tableMonth, monthName: this.months[this.tableMonth], year: this.tableYear }))
           ])
         ]),
         this.$createElement('v-btn', {

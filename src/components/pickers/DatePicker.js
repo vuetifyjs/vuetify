@@ -28,9 +28,23 @@ export default {
       type: Function,
       default: defaultDateFormat
     },
+    titleDateFormat: {
+      type: Function,
+      default: ({ day, dayName, month, monthName, landscape }) => {
+        return `${dayName.substr(0, 3)},${landscape ? '<br>' : ''} ${monthName.substr(0, 3)} ${day}`
+      }
+    },
+    headerDateFormat: {
+      type: Function,
+      default: ({ month, monthName, year }) => `${monthName} ${year}`
+    },
     days: {
       type: Array,
       default: () => ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    },
+    shortDays: {
+      type: [Function, Array],
+      default: (day) => day && day.substr(0, 1)
     },
     formattedValue: {
       required: false
