@@ -130,17 +130,17 @@ export default {
       this.isActive = true
 
       if ('touches' in e) {
-        this.app.addEventListener('touchmove', this.onMouseMove, false)
+        this.app.addEventListener('touchmove', this.onMouseMove, { passive: true })
         addOnceEventListener(this.app, 'touchend', this.onMouseUp)
       } else {
-        this.app.addEventListener('mousemove', this.onMouseMove, false)
+        this.app.addEventListener('mousemove', this.onMouseMove, { passive: true })
         addOnceEventListener(this.app, 'mouseup', this.onMouseUp)
       }
     },
     onMouseUp () {
       this.isActive = false
-      this.app.removeEventListener('touchmove', this.onMouseMove, false)
-      this.app.removeEventListener('mousemove', this.onMouseMove, false)
+      this.app.removeEventListener('touchmove', this.onMouseMove, { passive: true })
+      this.app.removeEventListener('mousemove', this.onMouseMove, { passive: true })
     },
     onMouseMove (e) {
       const { left: offsetLeft, width: trackWidth } = this.$refs.track.getBoundingClientRect()
@@ -238,11 +238,9 @@ export default {
         mouseup: this.sliderMove,
         keydown: this.onKeyDown
       },
-      directives: [
-        {
-          name: 'click-outside'
-        }
-      ]
+      directives: [{
+        name: 'click-outside'
+      }]
     })
   }
 }
