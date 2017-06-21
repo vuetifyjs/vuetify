@@ -60,7 +60,7 @@ export default {
         beingSorted && this.computedPagination.descending && classes.push('desc') || classes.push('asc')
       }
 
-      header.left && classes.push('text-xs-left') || classes.push('text-xs-right')
+      header.align && classes.push(`text-xs-${header.align}`) || classes.push('text-xs-right')
 
       data.class = classes
 
