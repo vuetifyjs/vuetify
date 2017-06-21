@@ -64,3 +64,7 @@ export function getObjectValueByPath (obj, path) {
   }
   return obj
 }
+
+export function createRange (length) {
+  return [...Array.from({ length }, (v, k) => k)]
+}

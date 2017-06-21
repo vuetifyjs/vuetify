@@ -12,22 +12,11 @@ slider($material)
 
   .slider__track__container
     &:after
-      border: 0 solid $material.text.primary
-      border-left-width: 2px
-    
-  .slider__ticks
-    background: repeating-linear-gradient(
-      90deg,
-      $material.text.primary,
-      $material.text.primary 2px,
-      transparent 0,
-      transparent
-    )
+      border: 1px solid $material.text.primary
 
-  &.input-group--dirty
-    .slider__track-fill
-      background: $material.slider.inactive
-  
+  .slider__tick
+    border: 1px solid $material.text.primary
+
   &:not(.input-group--dirty)
     .slider__thumb--label
       background: $material.slider.inactive
@@ -36,7 +25,7 @@ slider($material)
       .slider__thumb-container--label
         .slider__thumb
           background: $material.slider.discrete
-    
+
     &:not(.input-group--ticks)
       .slider__thumb
         border: 4px solid $material.slider.inactive
@@ -53,4 +42,4 @@ slider($material)
   &:focus
     .slider__track
       background: $material.slider.active
-  
+
