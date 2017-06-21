@@ -164,7 +164,7 @@ export default {
       if (!val) return
 
       clearTimeout(this.focusedTimeout)
-      this.focusedTimeout = setTimeout(() => (this.hasJustFocused = false), 600)
+      this.focusedTimeout = setTimeout(() => (this.hasJustFocused = false), 100)
     },
     isActive (val) {
       if (this.disabled) return
