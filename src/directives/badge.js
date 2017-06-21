@@ -9,9 +9,16 @@ function directive (el, binding) {
       icon: false,
       left: false,
       bottom: false,
-      overlap: false
+      overlap: false,
+      visible: true
     }
   )
+
+  if (!config.visible || (binding.expression && !binding.value)) {
+    el.classList.remove('badge')
+
+    return
+  }
 
   if (config.overlap) el.classList.add('badge--overlap')
   if (config.icon) el.classList.add('badge--icon')
