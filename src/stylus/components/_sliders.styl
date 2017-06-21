@@ -19,12 +19,6 @@
     .slider__track-fill
       background: $theme.primary
 
-  &.input-group--active, &:hover
-    &.input-group--ticks
-      .slider
-        &__track__container:after, &__tick
-          opacity: 1
-
   &.input-group--active
     .slider__thumb
       transform: translateY(-50%) scale(1.2)
@@ -42,6 +36,11 @@
 
     .slider__thumb-container, .slider__track-fill
       transition: none
+
+    &.input-group--ticks
+      .slider
+        &__track__container:after, &__tick
+          opacity: 1
 
   &.input-group--dirty
     .slider__thumb
