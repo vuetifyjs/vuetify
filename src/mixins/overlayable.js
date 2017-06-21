@@ -57,8 +57,6 @@ export default {
         this.isTransitioning = false
       })
 
-      if (this.isTransitioning) return
-
       this.overlay.className = this.overlay.className.replace('overlay--active', '')
     },
     hideScroll () {
