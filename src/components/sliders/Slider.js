@@ -1,5 +1,5 @@
 import Input from '../../mixins/input'
-import { addOnceEventListener } from '../../util/helpers'
+import { addOnceEventListener, createRange } from '../../util/helpers'
 
 export default {
   name: 'slider',
@@ -26,11 +26,12 @@ export default {
     },
     step: {
       type: [Number, String],
-      default: 1
+      default: null
     },
     thumbLabel: Boolean,
     value: [Number, String],
-    vertical: Boolean
+    vertical: Boolean,
+    snap: Boolean
   },
 
   computed: {
@@ -40,7 +41,7 @@ export default {
         'input-group--active': this.isActive,
         'input-group--dirty': this.inputValue > this.min,
         'input-group--disabled': this.disabled,
-        'input-group--ticks': this.thumbLabel
+        'input-group--ticks': !this.disabled && this.step
       }
     },
     inputValue: {
@@ -53,7 +54,7 @@ export default {
           this.inputWidth = this.calculateWidth(val)
         }
 
-        const value = parseInt(val)
+        const value = this.snap ? Math.round(val / this.step) * this.step : parseInt(val)
         this.lazyValue = value
 
         if (value !== this.value) {
@@ -77,18 +78,12 @@ export default {
     },
     tickContainerStyles () {
       return {
-        transform: `translate3d(-${this.interval}%, -50%, 0)`
-      }
-    },
-    tickStyles () {
-      return {
-        backgroundSize: `${this.interval}% 2px`,
-        transform: `translate3d(${this.interval}%, 0, 0)`
+        transform: `translate3d(0, -50%, 0)`
       }
     },
     trackStyles () {
       const scaleX = this.calculateScale(1 - (this.inputWidth / 100))
-      const translateX = this.inputWidth < 1 && !this.thumbLabel ? `${8}px` : 0
+      const translateX = this.inputWidth < 1 && !this.isActive ? `${8}px` : 0
       return {
         transform: `scaleX(${scaleX}) translateX(${translateX})`
       }
@@ -99,6 +94,9 @@ export default {
       return {
         transform: `scaleX(${scaleX}) translateX(${translateX})`
       }
+    },
+    numTicks () {
+      return parseInt((this.max - this.min) / this.step)
     }
   },
 
@@ -110,12 +108,15 @@ export default {
 
   mounted () {
     this.inputValue = this.value
-    this.inputWidth = this.calculateWidth(this.inputValue)
     this.app = document.querySelector('[data-app]')
   },
 
   methods: {
     calculateWidth (val) {
+      if (this.snap) {
+        val = Math.round(val / this.step) * this.step
+      }
+
       return (val - this.min) / (this.max - this.min) * 100
     },
     calculateScale (scale) {
@@ -129,17 +130,17 @@ export default {
       this.isActive = true
 
       if ('touches' in e) {
-        this.app.addEventListener('touchmove', this.onMouseMove, false)
+        this.app.addEventListener('touchmove', this.onMouseMove, { passive: true })
         addOnceEventListener(this.app, 'touchend', this.onMouseUp)
       } else {
-        this.app.addEventListener('mousemove', this.onMouseMove, false)
+        this.app.addEventListener('mousemove', this.onMouseMove, { passive: true })
         addOnceEventListener(this.app, 'mouseup', this.onMouseUp)
       }
     },
     onMouseUp () {
       this.isActive = false
-      this.app.removeEventListener('touchmove', this.onMouseMove, false)
-      this.app.removeEventListener('mousemove', this.onMouseMove, false)
+      this.app.removeEventListener('touchmove', this.onMouseMove, { passive: true })
+      this.app.removeEventListener('mousemove', this.onMouseMove, { passive: true })
     },
     onMouseMove (e) {
       const { left: offsetLeft, width: trackWidth } = this.$refs.track.getBoundingClientRect()
@@ -151,6 +152,15 @@ export default {
       left = left < 0 ? 0 : left > 100 ? 100 : left
 
       this.inputValue = this.min + ((left / 100) * (this.max - this.min))
+    },
+    onKeyDown (e) {
+      if (!e.keyCode === 37 && !e.keyCode === 39) return
+
+      const direction = e.keyCode === 37 && -1 || e.keyCode === 39 && 1 || 0
+      const multiplier = e.shiftKey && 3 || e.ctrlKey && 2 || 1
+      const amount = this.snap && this.step || 1
+
+      this.inputValue = this.inputValue + (direction * amount * multiplier)
     },
     sliderMove (e) {
       if (!this.isActive) {
@@ -169,11 +179,18 @@ export default {
     children.push(h('div', { 'class': 'slider__track__container', ref: 'track' }, trackChildren))
 
     if (this.step) {
-      children.push(
-        h('div', { 'class': 'slider__ticks-container', style: this.tickContainerStyles }, [
-          h('div', { 'class': 'slider__ticks', style: this.tickStyles })
-        ])
-      )
+      const ticks = createRange(this.numTicks + 1).map((i) => {
+        const span = h('span', {
+          class: 'slider__tick',
+          style: {
+            left: `${i * (100 / this.numTicks)}%`
+          }
+        })
+
+        return span
+      })
+
+      children.push(h('div', { 'class': 'slider__ticks-container', style: this.tickContainerStyles }, ticks))
     }
 
     thumbChildren.push(h('div', { 'class': 'slider__thumb' }))
@@ -218,13 +235,12 @@ export default {
         tabindex: this.tabindex
       },
       on: {
-        mouseup: this.sliderMove
+        mouseup: this.sliderMove,
+        keydown: this.onKeyDown
       },
-      directives: [
-        {
-          name: 'click-outside'
-        }
-      ]
+      directives: [{
+        name: 'click-outside'
+      }]
     })
   }
 }
