@@ -56,10 +56,6 @@
     background-color: transparent !important
     box-shadow: none !important
 
-    &.btn--light
-      &:hover:after
-        background-color: $button-light-overlay
-
   &--raised
     will-change: box-shadow
     elevation(2)
@@ -113,6 +109,23 @@
 
     &:after
       border-radius: 50%
+
+    .icon
+      &:not(:only-of-type):last-of-type
+        opacity: 0
+        position: absolute
+        transform: rotate(-45deg)
+
+    &.btn--active
+      .icon
+        &:not(:only-of-type)
+          &:first-of-type
+            opacity: 0
+            transform: rotate(45deg)
+          
+          &:last-of-type
+            opacity: 1
+            transform: none
 
     .icon
       height: $button-floating-icon-width
