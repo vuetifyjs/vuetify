@@ -2,12 +2,12 @@
   overflow: hidden
   position: relative
   width: 100%
-  
+
   &--grow
     .tabs__li
       flex: 1
 
-  &--fixed    
+  &--fixed
     .tabs__li
       min-width: 160px
       max-width: 264px
@@ -23,7 +23,7 @@
   &--icons
     .tabs__bar
       height: 72px
-      
+
     .tabs__item
       flex-direction: column
 
@@ -47,15 +47,14 @@
     width: 100%
     position: relative
     height: 48px
-    
+
     @media $display-breakpoints.sm-and-down
       padding-left: 0
 
     .icon--left, .icon--right
       position: absolute
       top: 0
-      width: 35px
-      display: none
+      width: 32px
       align-items: center
       height: 100%
       cursor: pointer
@@ -68,8 +67,6 @@
       right: 0
 
   &__container
-    overflow-x: auto
-    overflow-y: hidden
     display: flex
     height: 100%
     width: 100%
@@ -78,6 +75,8 @@
     top: 0
     align-items: center
     list-style: none
+    will-change: transform
+    transition: transform 0.3s;
 
     > li:not(.tabs__slider)
       height: 100%
@@ -87,9 +86,15 @@
       left: 0
       top: 0
       height: 100%
-      width: 35px
+      width: 32px
       display: flex
       align-items: center
+
+  &__wrapper
+    position: relative
+    overflow: hidden
+    height: 48px
+    margin: 0 32px
 
   &__item
     align-items: center

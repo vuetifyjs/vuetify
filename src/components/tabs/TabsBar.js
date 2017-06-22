@@ -1,6 +1,14 @@
 export default {
   name: 'tabs-bar',
 
+  data () {
+    return {
+      resizeDebounce: null,
+      isOverflowing: false,
+      scrollOffset: 0
+    }
+  },
+
   props: {
     mobile: Boolean
   },
@@ -11,21 +19,51 @@ export default {
         'tabs__bar': true,
         'tabs__bar--mobile': this.mobile
       }
+    },
+    containerClasses () {
+      return {
+        'tabs__container': true,
+        'tabs__container--overflow': this.isOverflowing
+      }
+    },
+    containerStyles () {
+      // fix min/max values
+      return {
+        'transform': `translateX(-${this.scrollOffset}px)`
+      }
     }
   },
 
   methods: {
     scrollLeft () {
-      this.$refs.container.scrollLeft -= 75
+      this.scrollOffset -= 150
     },
     scrollRight () {
-      this.$refs.container.scrollLeft += 75
+      this.scrollOffset += 150
+    },
+    resize () {
+      clearTimeout(this.resizeDebounce)
+
+      this.resizeDebounce = setTimeout(() => {
+        this.isOverflowing = this.$refs.container.clientWidth < this.$refs.container.scrollWidth
+      }, 50)
     }
+  },
+
+  mounted () {
+    this.$vuetify.load(() => {
+      window.addEventListener('resize', this.resize, { passive: true })
+    })
+  },
+
+  beforeDestroy () {
+    window.removeEventListener('resize', this.resize, { passive: true })
   },
 
   render (h) {
     const container = h('ul', {
-      'class': 'tabs__container',
+      'class': this.containerClasses,
+      'style': this.containerStyles,
       ref: 'container'
     }, this.$slots.default)
 
@@ -55,8 +93,10 @@ export default {
       }
     }, 'chevron_right')
 
+    const wrapper = h('div', { class: 'tabs__wrapper' }, [container])
+
     return h('div', {
       'class': this.classes
-    }, [container, left, right])
+    }, [this.isOverflowing && left, wrapper, this.isOverflowing && right])
   }
 }
