@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import Input from '../../mixins/input'
 import { addOnceEventListener, createRange } from '../../util/helpers'
 
@@ -39,7 +40,7 @@ export default {
       return {
         'input-group input-group--slider': true,
         'input-group--active': this.isActive,
-        'input-group--dirty': this.inputValue > this.min,
+        'input-group--dirty': this.inputWidth > 0,
         'input-group--disabled': this.disabled,
         'input-group--ticks': !this.disabled && this.step
       }
@@ -108,6 +109,7 @@ export default {
 
   mounted () {
     this.inputValue = this.value
+    Vue.nextTick(() => this.inputWidth = this.calculateWidth(this.inputValue))
     this.app = document.querySelector('[data-app]')
   },
 
@@ -117,7 +119,9 @@ export default {
         val = Math.round(val / this.step) * this.step
       }
 
-      return (val - this.min) / (this.max - this.min) * 100
+      val = (val - this.min) / (this.max - this.min) * 100
+
+      return val < 0.15 ? 0 : val
     },
     calculateScale (scale) {
       if (scale < 0.02 && !this.thumbLabel) {
