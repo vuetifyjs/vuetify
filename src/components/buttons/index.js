@@ -56,10 +56,8 @@ const SpeedDial = {
     }
 
     if (this.hover) {
-      data.on = {
-        mouseenter: () => (this.isActive = true),
-        mouseleave: () => (this.isActive = false)
-      }
+      data.on.mouseenter = () => (this.isActive = true)
+      data.on.mouseleave = () => (this.isActive = false)
     }
 
     if (this.isActive) {
