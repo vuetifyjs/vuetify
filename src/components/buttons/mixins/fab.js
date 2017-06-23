@@ -4,7 +4,6 @@ export default {
     bottom: Boolean,
     fab: Boolean,
     fixed: Boolean,
-    hidden: Boolean,
     hover: Boolean,
     left: Boolean,
     positionX: [Number, String],
