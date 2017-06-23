@@ -27,20 +27,30 @@
     .tabs__item
       flex-direction: column
 
-  &--scroll-bars
-    &.tabs--mobile
-      .tabs__bar
-        padding: 0 35px
-
-        .icon--left, .icon--right
-          display: flex
-
-        .tabs__container
-          width: calc(100% - 70px)
-
-  &:not(.tabs--centered):not(.tabs--grow):not(.tabs--scroll-bars)
+  &.tabs--mobile
     .tabs__bar
-      padding-left: 64px
+      .icon--left, .icon--right
+        display: flex
+
+      .icon--left
+        left: 0
+
+      .icon--right
+        right: 0
+
+      .tabs__wrapper
+        &--scrollable.tabs__wrapper--overflow
+          margin: 0 32px
+        //width: calc(100% - 64px)
+
+  &:not(.tabs--grow):not(.tabs--mobile)
+    .tabs__item
+      padding: 0 24px
+
+  &:not(.tabs--centered):not(.tabs--grow):not(.tabs--mobile)
+    .tabs__wrapper
+      &--scrollable
+        margin: 0 60px
 
   &__bar
     background-color: $theme.primary
@@ -61,10 +71,10 @@
       user-select: none
 
     .icon--left
-      left: 0
+      left: 28px
 
     .icon--right
-      right: 0
+      right: 28px
 
   &__container
     display: flex
@@ -76,7 +86,7 @@
     align-items: center
     list-style: none
     will-change: transform
-    transition: transform 0.3s;
+    transition: transform 0.6s cubic-bezier(0.86, 0, 0.07, 1)
 
     > li:not(.tabs__slider)
       height: 100%
@@ -93,8 +103,7 @@
   &__wrapper
     position: relative
     overflow: hidden
-    height: 48px
-    margin: 0 32px
+    height: inherit
 
   &__item
     align-items: center
@@ -108,7 +117,6 @@
     text-decoration: none
     text-transform: uppercase
     text-overflow: ellipsis
-    transition: $primary-transition
     white-space: nowrap
 
     .icon
@@ -128,6 +136,9 @@
   &__content
     transition: $primary-transition
     width: 100%
+
+    .card
+      border-radius: 0 0 2px 2px
 
   &__slider
     position: absolute
