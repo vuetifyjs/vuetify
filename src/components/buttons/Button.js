@@ -47,7 +47,6 @@ export default {
         'btn--flat': this.flat,
         'btn--floating': this.fab,
         'btn--fixed': this.fixed,
-        'btn--hidden': this.hidden,
         'btn--hover': this.hover,
         'btn--icon': this.icon,
         'btn--large': this.large,

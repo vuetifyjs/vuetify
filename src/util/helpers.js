@@ -10,15 +10,21 @@ export function createSimpleFunctional (c, el = 'div') {
   }
 }
 
-export function createSimpleTransition (name) {
+export function createSimpleTransition (name, origin = 'top center 0', mode) {
   return {
     functional: true,
 
+    props: {
+      origin: String,
+      default: origin
+    },
+
     render (h, context) {
-      const origin = (context.data.attrs || context.data.props || {}).origin || 'top center 0'
       context.data = context.data || {}
       context.data.props = { name }
       context.data.on = context.data.on || {}
+
+      if (mode) context.data.props.mode = mode
 
       context.data.on.beforeEnter = el => {
         el.style.transformOrigin = origin
