@@ -26,7 +26,7 @@ export default {
     wrapperClasses () {
       return {
         'tabs__wrapper': true,
-        'tabs__wrapper--scrollable': this.isScrollable,
+        'tabs__wrapper--scrollable': this.isScrollable(),
         'tabs__wrapper--overflow': this.isOverflowing
       }
     },
@@ -36,10 +36,10 @@ export default {
       }
     },
     leftIconVisible () {
-      return this.isScrollable && this.isOverflowing && this.scrollOffset > 0
+      return this.isScrollable() && this.isOverflowing && this.scrollOffset > 0
     },
     rightIconVisible () {
-      if (!this.isScrollable || !this.isOverflowing) return
+      if (!this.isScrollable() || !this.isOverflowing) return
 
       const remaining = this.$refs.container.scrollWidth - (this.scrollOffset + this.$refs.container.clientWidth)
       return remaining > (this.$refs.container.children[this.itemOffset].clientWidth * 0.25)
