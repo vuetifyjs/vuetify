@@ -1,10 +1,10 @@
 import Toggleable from '../../mixins/toggleable'
-import Fab from './mixins/fab'
+import Positionable from '../../mixins/positionable'
 
 export default {
   name: 'speed-dial',
 
-  mixins: [Fab, Toggleable],
+  mixins: [Positionable, Toggleable],
 
   props: {
     direction: {
@@ -14,6 +14,7 @@ export default {
         return ['top', 'right', 'bottom', 'left'].includes(val)
       }
     },
+    hover: Boolean,
     transition: {
       type: String,
       default: 'scale-transition'

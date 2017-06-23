@@ -1,5 +1,5 @@
 import Contextualable from '../../mixins/contextualable'
-import FAB from './mixins/fab'
+import Positionable from '../../mixins/positionable'
 import GenerateRouteLink from '../../mixins/route-link'
 import Schemable from '../../mixins/schemable'
 import Toggleable from '../../mixins/toggleable'
@@ -7,7 +7,7 @@ import Toggleable from '../../mixins/toggleable'
 export default {
   name: 'btn',
 
-  mixins: [Contextualable, FAB, GenerateRouteLink, Schemable, Toggleable],
+  mixins: [Contextualable, GenerateRouteLink, Positionable, Schemable, Toggleable],
 
   props: {
     activeClass: {
@@ -15,6 +15,7 @@ export default {
       default: 'btn--active'
     },
     block: Boolean,
+    fab: Boolean,
     flat: Boolean,
     icon: Boolean,
     large: Boolean,
