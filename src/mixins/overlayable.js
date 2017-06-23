@@ -34,10 +34,11 @@ export default {
       this.hideScroll()
 
       let app
+      // #820 Instead of requiring polyfill, do conditional
       if (window.Element && !Element.prototype.closest) {
         app = document.querySelector('[data-app]')
       } else {
-        app = this.$el.closest(['data-app'])
+        app = this.$el.closest('[data-app]')
       }
 
       app &&
@@ -64,7 +65,9 @@ export default {
         this.isTransitioning = false
       })
 
+      this.isTransitioning = true
       this.overlay.className = this.overlay.className.replace('overlay--active', '')
+
     },
     hideScroll () {
       if (this.overflow) return
