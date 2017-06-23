@@ -106,6 +106,10 @@
     width: $button-floating-width
     padding: 0
     elevation(4)
+    
+    .btn__content
+      flex: 0 0 auto
+      padding: 0
 
     &:after
       border-radius: 50%
@@ -115,6 +119,8 @@
         opacity: 0
         position: absolute
         transform: rotate(-45deg)
+        left: calc(50% - 12px)
+        top: calc(50% - 12px)
 
     &.btn--active
       .icon
