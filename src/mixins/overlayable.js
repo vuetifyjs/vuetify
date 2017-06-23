@@ -32,7 +32,14 @@ export default {
       if (this.absolute) overlay.className += ' overlay--absolute'
 
       this.hideScroll()
-      const app = this.$el.closest('[data-app]')
+
+      let app
+      if (window.Element && !Element.prototype.closest) {
+        app = document.querySelector('[data-app]')
+      } else {
+        app = this.$el.closest(['data-app'])
+      }
+
       app &&
         app.appendChild(overlay) ||
         console.warn('Application is missing <v-app> component')
