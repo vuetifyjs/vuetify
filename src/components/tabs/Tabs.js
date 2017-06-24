@@ -8,7 +8,8 @@ export default {
   provide () {
     return {
       slider: this.slider,
-      tabClick: this.tabClick
+      tabClick: this.tabClick,
+      isScrollable: this.isScrollable
     }
   },
 
@@ -21,7 +22,8 @@ export default {
       target: null,
       resizeDebounce: {},
       tabsSlider: null,
-      targetEl: null
+      targetEl: null,
+      tabsContainer: null
     }
   },
 
@@ -34,8 +36,11 @@ export default {
       type: [Number, String],
       default: 1024
     },
-    scrollable: Boolean,
-    value: String
+    value: String,
+    scrollable: {
+      type: Boolean,
+      default: true
+    }
   },
 
   computed: {
@@ -47,7 +52,6 @@ export default {
         'tabs--grow': this.grow,
         'tabs--icons': this.icons,
         'tabs--mobile': this.isMobile,
-        'tabs--scroll-bars': this.scrollable,
         'dark--text': this.dark,
         'light--text': this.light
       }
@@ -79,6 +83,7 @@ export default {
   mounted () {
     this.$vuetify.load(() => {
       window.addEventListener('resize', this.resize, { passive: true })
+      this.resize()
 
       const activators = this.$slots.activators
 
@@ -102,6 +107,9 @@ export default {
   },
 
   methods: {
+    isScrollable () {
+      return this.scrollable
+    },
     resize () {
       clearTimeout(this.resizeDebounce)
 
@@ -112,8 +120,9 @@ export default {
     },
     slider (el) {
       this.tabsSlider = this.tabsSlider || this.$el.querySelector('.tabs__slider')
+      this.tabsContainer = this.tabsContainer || this.$el.querySelector('.tabs__container')
 
-      if (!this.tabsSlider) return
+      if (!this.tabsSlider || !this.tabsContainer) return
 
       this.targetEl = el || this.targetEl
 
@@ -124,7 +133,7 @@ export default {
       // dynamic tabs
       this.$nextTick(() => {
         // #684 Calculate width as %
-        const width = this.targetEl.scrollWidth / this.$el.clientWidth * 100
+        const width = this.targetEl.scrollWidth / this.tabsContainer.clientWidth * 100
 
         this.tabsSlider.style.width = `${width}%`
         this.tabsSlider.style.left = `${this.targetEl.offsetLeft}px`
