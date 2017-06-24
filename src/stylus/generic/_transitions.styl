@@ -121,6 +121,10 @@
 */
 
 .morph-transition
+  &-enter-active, &-leave-active
+    .btn__content
+      //opacity: 0
+
   &-enter-active
     animation: morph 1s
 
@@ -152,6 +156,10 @@
     transform: translateX(30%)
   }
 
+  60% {
+    clip-path: circle(30%)
+  }
+
   70% {
     transform: translateX(0px)
   }
@@ -167,7 +175,7 @@
     transform: translateX(0%)
   }
 
-  90% {
+  80% {
     opacity: 1
   }
 
@@ -181,6 +189,9 @@
 .activator-morph-transition
   &-enter-active, &-leave-active
     transform-origin: -25px -50px
+
+    .btn__content
+      opacity: 0
 
   &-enter-active
     animation: activator-morph-reverse 1s
@@ -205,13 +216,16 @@
 }
 
 @keyframes activator-morph-reverse {
-  0%, 60% {
+  0%, 70% {
     opacity: 0
     transform: rotate(30deg)
   }
 
-  100% {
+  80% {
     opacity: 1
+  }
+
+  100% {
     transform: rotate(0deg)
   }
 }
