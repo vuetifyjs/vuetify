@@ -16,6 +16,10 @@ export default {
     transition: {
       type: String,
       default: 'morph-transition'
+    },
+    activatorTransition: {
+      type: String,
+      default: 'activator-morph-transition'
     }
   },
 
@@ -71,6 +75,19 @@ export default {
       }
     }, [transition])
 
-    return h('div', data, [this.$slots.activator, content])
+    const activatorTransition = h('transition', {
+      props: {
+        name: this.activatorTransition,
+        tag: 'div'
+      }
+    }, [!this.isActive && this.$slots.activator.map((e, i) => { e.key = i; return e })])
+
+    const activator = h('div', {
+      class: {
+        'morph--activator': true
+      }
+    }, [activatorTransition])
+
+    return h('div', data, [activator, content])
   }
 }
