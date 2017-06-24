@@ -8,7 +8,7 @@ export default {
           auto: this.auto,
           closeOnClick: false,
           closeOnContentClick: !this.multiple,
-          contentClass: this.isDropdown ? 'menu__content--dropdown' : '',
+          contentClass: this.computedContentClass,
           disabled: this.disabled,
           maxHeight: this.maxHeight,
           nudgeTop: this.isDropdown ? 22 : 0,
