@@ -103,28 +103,115 @@
   &-enter, &-leave-to
     transform: scale(0) rotate(-45deg)
 
+/*
 .morph-transition
   &-enter, &-leave-to
     //transform: scaleX(0.15)
-    transform: scale(0.1) translateZ(0)
+    //transform: scale(0.1) translateZ(0)
+    clip-path: circle(10%)
+    transform: translateX(75px)
 
-  &-enter-active
-    shape-inside: circle(210px at 250px 250px);
+  &-enter-active, &-leave-active
+    transition: $primary-transition
+    //clip-path: circle(50%)
 
-  &-enter-to
-    transform: scale(5)
+  &-enter-to, &-leave
+    clip-path: circle(100%)
+    //transform: scale(5)
+*/
 
-/*
 .morph-transition
   &-enter-active
-    animation: bounce-in 2s
+    animation: morph 1s
+
+    .btn
+      animation: morph-text 1s
 
   &-leave-active
-    animation: bounce-in 2s reverse
+    animation: morph-reverse 1s
 
-@keyframes bounce-in {
-  5% {
-    transform: translateY(-10px)
+@keyframes morph-text {
+  0%, 70% {
+    //opacity: 0
+    color: rgba(0, 0, 0, 0)
+  }
+
+  100% {
+    //opacity: 1
   }
 }
-*/
+
+@keyframes morph {
+  0%, 27% {
+    opacity: 0
+  }
+
+  28% {
+    opacity: 1
+    clip-path: circle(10%)
+    transform: translateX(30%)
+  }
+
+  70% {
+    transform: translateX(0px)
+  }
+
+  100% {
+    clip-path: circle(100%)
+  }
+}
+
+@keyframes morph-reverse {
+  30% {
+    clip-path: circle(100%)
+    transform: translateX(0%)
+  }
+
+  90% {
+    opacity: 1
+  }
+
+  100% {
+    clip-path: circle(10%)
+    transform: translateX(30%)
+    opacity: 0
+  }
+}
+
+.activator-morph-transition
+  &-enter-active, &-leave-active
+    transform-origin: -25px -50px
+
+  &-enter-active
+    animation: activator-morph-reverse 1s
+
+  &-leave-active
+    animation: activator-morph 1s
+
+@keyframes activator-morph {
+  0% {
+    transform: rotate(0deg)
+  }
+
+  40% {
+    transform: rotate(30deg)
+    opacity: 1
+  }
+
+  45%, 100% {
+    opacity: 0
+    transform: rotate(30deg)
+  }
+}
+
+@keyframes activator-morph-reverse {
+  0%, 60% {
+    opacity: 0
+    transform: rotate(30deg)
+  }
+
+  100% {
+    opacity: 1
+    transform: rotate(0deg)
+  }
+}
