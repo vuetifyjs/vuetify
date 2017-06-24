@@ -7,6 +7,7 @@ const TabTransition = createSimpleTransition('tab-transition')
 const TabReverseTransition = createSimpleTransition('tab-reverse-transition')
 const MenuTransition = createSimpleTransition('menu-transition')
 const FabTransition = createSimpleTransition('fab-transition', 'center center', 'out-in')
+const MorphTransition = createSimpleTransition('morph-transition', 'center center')
 
 // Generic transitions
 const DialogTransition = createSimpleTransition('dialog-transition')

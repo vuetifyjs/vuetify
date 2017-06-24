@@ -99,6 +99,32 @@
   &-enter, &-leave-to
     opacity: 0
 
-.fab-transition  
+.fab-transition
   &-enter, &-leave-to
     transform: scale(0) rotate(-45deg)
+
+.morph-transition
+  &-enter, &-leave-to
+    //transform: scaleX(0.15)
+    transform: scale(0.1) translateZ(0)
+
+  &-enter-active
+    shape-inside: circle(210px at 250px 250px);
+
+  &-enter-to
+    transform: scale(5)
+
+/*
+.morph-transition
+  &-enter-active
+    animation: bounce-in 2s
+
+  &-leave-active
+    animation: bounce-in 2s reverse
+
+@keyframes bounce-in {
+  5% {
+    transform: translateY(-10px)
+  }
+}
+*/
