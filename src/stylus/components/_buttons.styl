@@ -122,7 +122,7 @@
           &:first-of-type
             opacity: 0
             transform: rotate(45deg)
-          
+
           &:last-of-type
             opacity: 1
             transform: none
@@ -163,39 +163,39 @@
 
   &--absolute
     position: absolute
-      
+
   &--fixed
     position: fixed
-      
+
   &--top
     &:not(.btn--absolute)
-      top: $grid-gutters.sm
+      top: $grid-gutters.md
 
     &.btn--absolute
       top: -($button-floating-width / 2)
-      
+
       &.btn--small
         top: -($button-floating-small-width / 2)
 
       &.btn--large
         top: -($button-floating-large-width / 2)
-  
+
   &--bottom
     &:not(.btn--absolute)
-      bottom: $grid-gutters.sm
-      
+      bottom: $grid-gutters.md
+
     &.btn--absolute
       bottom: -($button-floating-width / 2)
-      
+
       &.btn--small
         bottom: -($button-floating-small-width / 2)
 
       &.btn--large
         bottom: -($button-floating-large-width / 2)
-    
+
   &--left
     left: $grid-gutters.md
-    
+
   &--right
     right: $grid-gutters.md
 

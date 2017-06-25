@@ -1,6 +1,7 @@
 import BezierEasing from 'bezier-easing'
 import Toggleable from '../../mixins/toggleable'
 import Fab from './mixins/fab'
+import Animations from './mixins/animations'
 
 // const easeInOutCubic = BezierEasing(0.645, 0.045, 0.355, 1)
 const easeInCubic = BezierEasing(0.55, 0.055, 0.675, 0.19)
@@ -11,17 +12,21 @@ const easeOutQuart = BezierEasing(0.165, 0.84, 0.44, 1)
 export default {
   name: 'morph',
 
-  mixins: [Fab, Toggleable],
+  mixins: [Fab, Toggleable, Animations],
 
   data () {
     return {
       containerWidth: 0,
       activatorWidth: 0,
-      resizeDebounce: null
+      resizeDebounce: null,
+      clipPathSize: 0,
+      clipPathX: 50,
+      clipPathY: 50
     }
   },
 
   props: {
+    dialog: Boolean,
     toolbar: Boolean,
     sheet: Boolean,
     sheetHeight: Number,
@@ -37,6 +42,7 @@ export default {
         'morph': true,
         'morph--toolbar': this.toolbar,
         'morph--sheet': this.sheet,
+        'morph--dialog': this.dialog,
         'speed-dial--top': this.top,
         'speed-dial--right': this.right,
         'speed-dial--bottom': this.bottom,
@@ -44,6 +50,9 @@ export default {
         'speed-dial--absolute': this.absolute,
         'speed-dial--fixed': this.fixed
       }
+    },
+    computedClipPath () {
+      return `circle(${this.clipPathSize}px at ${this.clipPathX}% ${this.clipPathY}%)`
     }
   },
 
@@ -85,6 +94,7 @@ export default {
       el.querySelector('.btn__content').style.opacity = 0
       el.style.transition = 'none'
       el.style.boxShadow = 'none'
+      el.style.opacity = 0
       this.addTransform(el, `translateX(-${target}px)`)
       this.addTransform(el, `translateY(${this.toolbar ? 16 : this.sheetHeight / 2}px)`)
     },
@@ -157,32 +167,40 @@ export default {
         })
       })
     },
+    rotate (el, start, end, delta) {
+      const value = this.interpolate(start, end, delta)
+
+      this.addTransform(el, `rotate(${value}deg)`)
+    },
     height (el, start, end, delta) {
-      const value = start + (delta * (end - start))
+      const value = this.interpolate(start, end, delta)
       el.style.height = `${value}px`
     },
     opacity (el, start, end, delta) {
-      const value = start + (delta * (end - start))
+      const value = this.interpolate(start, end, delta)
       el.style.opacity = `${value}`
     },
     scale (el, start, end, delta) {
-      const value = start + (delta * (end - start))
+      const value = this.interpolate(start, end, delta)
 
       this.addTransform(el, `scale(${value})`)
     },
     vertical (el, start, end, delta) {
-      const value = start + (delta * (end - start))
+      const value = this.interpolate(start, end, delta)
 
       this.addTransform(el, `translateY(${value}px`)
     },
     horizontal (el, start, end, delta) {
-      const value = start + (delta * (end - start))
+      const value = this.interpolate(start, end, delta)
 
       this.addTransform(el, `translateX(${value}px`)
     },
     clipPath (el, start, end, delta) {
       const value = this.interpolate(start, end, delta)
-      el.style.clipPath = `circle(${value}px)`
+
+      this.clipPathSize = value
+
+      el.style.clipPath = this.computedClipPath
     },
     addTransform (el, transform) {
       let transforms = el.style.transform.split(' ')
@@ -217,53 +235,23 @@ export default {
       })
     }
 
-    const transition = h('transition-group', {
+    const content = h('transition-group', {
       ref: 'content',
       class: {
         'morph--content': true
       },
       style: {
-        width: `${this.containerWidth}px`
+        width: !this.dialog ? `${this.containerWidth}px` : ''
       },
       props: {
         tag: 'div',
         css: false
       },
       on: {
-        beforeLeave: (el) => {
-          el.style.opacity = 1
-          el.style.clipPath = `circle(100%)`
-        },
-        leave: (el, done) => {
-          Promise.all([
-            this.timeout(() => {
-              el.querySelectorAll('.btn__content').forEach(e => e.style.opacity = 0)
-            }, 150),
-            this.animate(d => this.opacity(el, 1, 0, d), 100, 300),
-            this.animate(d => this.horizontal(el, 0, (this.containerWidth / 2) - this.activatorWidth, d), 300, 150, easeOutCubic),
-            this.animate(d => this.clipPath(el, this.containerWidth * 0.6, this.activatorWidth / 2, d), 300, easeOutQuart),
-            this.sheet && this.animate(d => this.height(el, this.sheetHeight, 0, d), 300, 200, easeInCubic)
-          ]).then(() => done())
-        },
-        beforeEnter: (el) => {
-          el.style.transition = 'none'
-          el.style.opacity = 0
-          el.style.clipPath = 'circle(1%)'
-          el.querySelectorAll('.btn__content').forEach(e => e.style.opacity = 0)
-          this.addTransform(el, `translateX(${(this.containerWidth / 2) - this.activatorWidth}px)`)
-          this.sheet && (el.style.height = '0px')
-        },
-        enter: (el, done) => {
-          Promise.all([
-            this.animate(d => this.opacity(el, 0, 1, d), 300, 0, easeInCubic),
-            this.animate(d => this.horizontal(el, (this.containerWidth / 2) - this.activatorWidth, 0, d), 300, 200, easeOutCubic),
-            this.animate(d => this.clipPath(el, this.activatorWidth / 2, this.containerWidth * 0.6, d), 400, 100, easeInQuart),
-            this.timeout(() => {
-              el.querySelectorAll('.btn__content').forEach(e => e.style.opacity = 1)
-            }, 450),
-            this.sheet && this.animate(d => this.height(el, 0, this.sheetHeight, d), 350, 50, easeOutCubic)
-          ]).then(() => done())
-        }
+        beforeEnter: this.dialog && this.dialogContentBeforeEnter || this.contentBeforeEnter,
+        enter: this.dialog && this.dialogContentEnter || this.contentEnter,
+        beforeLeave: this.dialog && this.dialogContentBeforeLeave || this.contentBeforeLeave,
+        leave: this.dialog && this.dialogContentLeave || this.contentLeave
       }
     }, children)
 
@@ -274,11 +262,11 @@ export default {
         css: false
       },
       on: {
-        beforeEnter: this.beforeEnterTransition,
-        enter: this.enterTransition,
+        beforeEnter: this.dialog && this.dialogActivatorBeforeEnter || this.beforeEnterTransition,
+        enter: this.dialog && this.dialogActivatorEnter || this.enterTransition,
         afterEnter: this.afterEnterTransition,
-        beforeLeave: this.beforeLeaveTransition,
-        leave: this.leaveTransition,
+        beforeLeave: this.dialog && this.dialogActivatorBeforeLeave || this.beforeLeaveTransition,
+        leave: this.dialog && this.dialogActivatorLeave || this.leaveTransition,
         afterLeave: this.afterLeaveTransition
       },
       class: {
@@ -286,6 +274,6 @@ export default {
       }
     }, [!this.isActive && this.$slots.activator.map((e, i) => { e.key = i; return e })])
 
-    return h('div', data, [activator, transition])
+    return h('div', data, [activator, content])
   }
 }
