@@ -3,6 +3,7 @@ const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const projectRoot = path.resolve(__dirname, '../')
 const version = process.env.VERSION || require('../package.json').version
+const resolve = (file) => path.resolve(__dirname, file)
 
 module.exports = {
   devtool: '#source-map',
@@ -10,12 +11,19 @@ module.exports = {
     app: './src/index.js'
   },
   output: {
-    path: path.resolve(__dirname, '../dist'),
+    path: resolve('../dist'),
     publicPath: '/dist/',
     library: 'Vuetify'
   },
   resolve: {
-    extensions: ['*', '.js', '.json', '.vue']
+    extensions: ['*', '.js', '.json', '.vue'],
+    alias: {
+      '~components': resolve('../src/components'),
+      '~directives': resolve('../src/directives'),
+      '~mixins': resolve('../src/mixins'),
+      '~stylus': resolve('../src/stylus'),
+      '~util': resolve('../src/util')
+    }
   },
   node: {
     fs: 'empty'

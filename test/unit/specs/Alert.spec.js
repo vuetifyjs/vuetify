@@ -37,7 +37,7 @@ describe('Alert.vue', () => {
     const icon = wrapper.find('.alert__dismissible')[0]
     const input = jest.fn()
     wrapper.instance().$on('input', input)
-    icon.dispatch('click')
+    icon.trigger('click')
 
     expect(input).toBeCalledWith(false)
   })
@@ -63,7 +63,7 @@ describe('Alert.vue', () => {
     })
 
     const icon = wrapper.find('.alert__dismissible')[0]
-    icon.dispatch('click')
+    icon.trigger('click')
   })
 
   it('should have a custom icon', () => {
