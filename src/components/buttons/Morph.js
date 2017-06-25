@@ -16,6 +16,7 @@ export default {
   data () {
     return {
       containerWidth: 0,
+      activatorWidth: 0,
       resizeDebounce: null
     }
   },
@@ -51,6 +52,8 @@ export default {
       window.addEventListener('resize', this.resize, { passive: true })
       this.resize()
 
+      this.activatorWidth = this.$refs.activator.$el.querySelector('.btn').clientWidth
+
       // Move content to parent element, if sheet
       if (this.sheet) {
         this.$el.parentNode.insertBefore(this.$refs.content.$el, this.$el.parentNode.firstChild)
@@ -60,6 +63,10 @@ export default {
 
   beforeDestroy () {
     window.removeEventListener('resize', this.resize, { passive: true })
+
+    if (this.sheet) {
+      this.$el.parentNode.removeChild(this.$refs.content.$el)
+    }
   },
 
   methods: {
@@ -92,7 +99,7 @@ export default {
           el.style.boxShadow = ''
           el.querySelector('.btn__content').style.opacity = 1
         }, 500),
-        this.animate(d => this.opacity(el, 0, 1, d), 300, 100),
+        this.animate(d => this.opacity(el, 0, 1, d), 350, 50),
         this.animate(p => this.horizontal(el, -targetHorizontal, 0, p), 300, 200, easeOutCubic),
         this.animate(p => this.vertical(el, targetVertical, 0, p), 300, 200, easeInCubic)
       ]).then(() => done())
@@ -110,7 +117,7 @@ export default {
       const targetVertical = this.toolbar ? 16 : this.sheetHeight / 2
 
       Promise.all([
-        this.animate(d => this.opacity(el, 1, 0, d), 200, 150),
+        this.animate(d => this.opacity(el, 1, 0, d), 200, 100),
         this.animate(p => this.horizontal(el, 0, -targetHorizontal, p), 300, 0, easeInCubic),
         this.animate(p => this.vertical(el, 0, targetVertical, p), 300, 0, easeOutCubic)
       ]).then(() => done())
@@ -126,24 +133,25 @@ export default {
         }, delay)
       })
     },
+    frame () {
+      return new Promise(resolve => requestAnimationFrame(resolve))
+    },
     animate (fn, duration, delay = 0, curve = null) {
-      const frame = () => new Promise(resolve => requestAnimationFrame(resolve))
-
       let start = null
 
-      function animateFrame (timestamp) {
+      const animateFrame = (timestamp) => {
         const runtime = timestamp - start
         const progress = Math.min(runtime / duration, 1)
 
         fn(curve && curve(progress) || progress)
 
         if (runtime < duration) {
-          return frame().then(animateFrame)
+          return this.frame().then(animateFrame)
         }
       }
 
       return this.timeout(() => {}, delay).then(() => {
-        return frame().then(timestamp => {
+        return this.frame().then(timestamp => {
           start = timestamp
           return animateFrame(timestamp)
         })
@@ -171,6 +179,10 @@ export default {
       const value = start + (delta * (end - start))
 
       this.addTransform(el, `translateX(${value}px`)
+    },
+    clipPath (el, start, end, delta) {
+      const value = this.interpolate(start, end, delta)
+      el.style.clipPath = `circle(${value}px)`
     },
     addTransform (el, transform) {
       let transforms = el.style.transform.split(' ')
@@ -228,48 +240,38 @@ export default {
               el.querySelectorAll('.btn__content').forEach(e => e.style.opacity = 0)
             }, 150),
             this.animate(d => this.opacity(el, 1, 0, d), 100, 300),
-            this.animate(d => this.horizontal(el, 0, (this.containerWidth / 2) - 56, d), 300, 150, easeOutCubic),
-            this.animate(d => {
-              const value = this.interpolate(this.containerWidth / 2, 28, d)
-              el.style.clipPath = `circle(${value}px)`
-            }, 400, easeOutQuart),
+            this.animate(d => this.horizontal(el, 0, (this.containerWidth / 2) - this.activatorWidth, d), 300, 150, easeOutCubic),
+            this.animate(d => this.clipPath(el, this.containerWidth * 0.6, this.activatorWidth / 2, d), 300, easeOutQuart),
             this.sheet && this.animate(d => this.height(el, this.sheetHeight, 0, d), 300, 200, easeInCubic)
           ]).then(() => done())
-        },
-        afterLeave: (el) => {
         },
         beforeEnter: (el) => {
           el.style.transition = 'none'
           el.style.opacity = 0
           el.style.clipPath = 'circle(1%)'
           el.querySelectorAll('.btn__content').forEach(e => e.style.opacity = 0)
-          this.addTransform(el, `translateX(${(this.containerWidth / 2) - 56}px)`)
+          this.addTransform(el, `translateX(${(this.containerWidth / 2) - this.activatorWidth}px)`)
           this.sheet && (el.style.height = '0px')
         },
         enter: (el, done) => {
           Promise.all([
-            this.animate(d => this.opacity(el, 0, 1, d), 400, 0, easeInCubic),
-            this.animate(d => this.horizontal(el, (this.containerWidth / 2) - 56, 0, d), 300, 200, easeOutCubic),
-            this.animate(d => {
-              const value = this.interpolate(28, this.containerWidth / 2, d)
-              el.style.clipPath = `circle(${value}%)`
-            }, 400, 150, easeInQuart),
+            this.animate(d => this.opacity(el, 0, 1, d), 300, 0, easeInCubic),
+            this.animate(d => this.horizontal(el, (this.containerWidth / 2) - this.activatorWidth, 0, d), 300, 200, easeOutCubic),
+            this.animate(d => this.clipPath(el, this.activatorWidth / 2, this.containerWidth * 0.6, d), 400, 100, easeInQuart),
             this.timeout(() => {
               el.querySelectorAll('.btn__content').forEach(e => e.style.opacity = 1)
             }, 450),
             this.sheet && this.animate(d => this.height(el, 0, this.sheetHeight, d), 350, 50, easeOutCubic)
           ]).then(() => done())
-        },
-        afterEnter: (el) => {
         }
       }
     }, children)
 
-    const activator = h('transition', {
+    const activator = h('transition-group', {
       ref: 'activator',
       props: {
-        css: false,
-        tag: 'div'
+        tag: 'div',
+        css: false
       },
       on: {
         beforeEnter: this.beforeEnterTransition,
