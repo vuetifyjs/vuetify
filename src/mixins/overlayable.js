@@ -48,10 +48,10 @@ export default {
       this.isTransitioning = true
       addOnceEventListener(overlay, 'transitionend', () => (this.isTransitioning = false))
 
-      requestAnimationFrame(() => {
+      setTimeout(() => {
         overlay.className += ' overlay--active'
         this.overlay = overlay
-      })
+      }, 0)
 
       return true
     },
@@ -67,7 +67,6 @@ export default {
 
       this.isTransitioning = true
       this.overlay.className = this.overlay.className.replace('overlay--active', '')
-
     },
     hideScroll () {
       if (this.overflow) return

@@ -1,3 +1,4 @@
+// Component specific transitions
 .carousel-transition
   &-enter
     transform: translate3d(100%, 0, 0)
@@ -52,6 +53,7 @@
     position: absolute
     transform: translate(100%, 0)
 
+// Generic transitions
 .scale-transition
   &-enter-active, &-leave-active
     transition: $primary-transition
@@ -99,6 +101,9 @@
   &-enter, &-leave-to
     opacity: 0
 
-.fab-transition  
+.fab-transition
+  &-enter-active, &-leave-active
+    transition: $primary-transition
+
   &-enter, &-leave-to
     transform: scale(0) rotate(-45deg)

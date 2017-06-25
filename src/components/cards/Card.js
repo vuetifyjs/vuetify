@@ -11,7 +11,6 @@ export default {
       type: String,
       default: 'auto'
     },
-    horizontal: Boolean,
     img: String,
     hover: Boolean,
     raised: Boolean,

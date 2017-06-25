@@ -38,7 +38,8 @@
     position: absolute
 
   &--permanent, &--persistent
-    &.navigation-drawer--clipped, &.navigation-drawer--floating
+    &.navigation-drawer--clipped,
+    &.navigation-drawer--floating
       margin-top: $toolbar-height
       max-height: "calc(100vh - %s)" % $toolbar-height
 
@@ -47,13 +48,14 @@
         z-index: 3
 
     @media screen and (max-width: $grid-breakpoints.lg) and (orientation: landscape)
-      &.navigation-drawer--clipped, &.navigation-drawer--floating
+      &.navigation-drawer--clipped,
+      &.navigation-drawer--floating
         margin-top: $toolbar-mobile-landscape-height
         max-height: "calc(100vh - %s)" % $toolbar-mobile-landscape-height
 
   &--persistent, &--permanent
     &.navigation-drawer--open:not(.navigation-drawer--is-mobile):not(.navigation-drawer--right)
-      &:not(.navigation-drawer--clipped)
+      &:not(.navigation-drawer--clipped):not(.navigation-drawer--floating)
         ~ .toolbar
           padding-left: $navigation-drawer-width
 
@@ -62,13 +64,16 @@
         padding-left: $navigation-drawer-width
 
     &.navigation-drawer--open:not(.navigation-drawer--is-mobile).navigation-drawer--right
-      &:not(.navigation-drawer--clipped)
+      &:not(.navigation-drawer--clipped):not(.navigation-drawer--floating)
         + .toolbar
           padding-right: $navigation-drawer-width
 
       ~ main,
       ~ .footer:not(.footer--fixed):not(.footer--absolute)
         padding-right: $navigation-drawer-width
+
+  &--floating:after
+    display: none
 
   &--mini-variant
     margin-top: $toolbar-height

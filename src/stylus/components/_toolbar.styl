@@ -25,11 +25,17 @@
     display: flex
     flex-wrap: wrap
 
-    > *:first-child
+    > .btn:first-child
       margin-left: 10px
 
-    > *:last-child
+    > .btn:last-child
       margin-right: 10px
+      
+    > *:not(.btn):first-child
+      margin-left: $grid-gutters.lg
+
+    > *:not(.btn):last-child
+      margin-right: $grid-gutters.lg
   
   &__content
     height: $toolbar-height
@@ -54,11 +60,17 @@
     &__content, &__extension
       height: $toolbar-mobile-portrait-height
 
-      > *:first-child
+      > .btn:first-child
         margin-left: 17px
 
-      > *:last-child
+      > .btn:last-child
         margin-right: 17px
+      
+      > *:not(.btn):first-child
+        margin-left: $grid-gutters.xl
+
+      > *:not(.btn):last-child
+        margin-right: $grid-gutters.xl
 
   @media screen and (max-width: $grid-breakpoints.sm) and (orientation: portrait)
     toolbar-content(7px)
