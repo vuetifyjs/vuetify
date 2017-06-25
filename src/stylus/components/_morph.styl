@@ -1,16 +1,17 @@
 .morph
-  z-index: 10
-  position: fixed
-  bottom: 16px
-  right: 16px
-
   .btn
     margin: 0
 
-  &--content
+  &--toolbar &--activator
+    z-index: 10
+
+  &--toolbar &--content
     position: fixed
     left: 0
     bottom: 0
 
     .toolbar
       box-shadow: none
+
+  &--sheet &--content
+    position: relative
