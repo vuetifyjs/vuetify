@@ -254,11 +254,11 @@ autoprefixer@^6.3.1, autoprefixer@^6.6.0:
     postcss "^5.2.16"
     postcss-value-parser "^3.2.3"
 
-avoriaz@^1.15.0:
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/avoriaz/-/avoriaz-1.15.0.tgz#a86a988a9063b4d651a72c04ed2429b4cce237f0"
+avoriaz@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/avoriaz/-/avoriaz-2.3.0.tgz#421ebb7d15a0a8e3e72f9a1fc00b3ac08b64ec1f"
   dependencies:
-    sizzle "^2.3.3"
+    lodash "^4.17.4"
     vue-add-globals "^1.0.1"
 
 aws-sign2@~0.6.0:
@@ -3759,7 +3759,7 @@ lodash.words@^3.0.0:
   dependencies:
     lodash._root "^3.0.0"
 
-lodash@^4.0.0, lodash@^4.14.0, lodash@^4.2.0, lodash@^4.3.0:
+lodash@^4.0.0, lodash@^4.14.0, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.3.0:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -5418,10 +5418,6 @@ simple-fmt@~0.1.0:
 simple-is@~0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/simple-is/-/simple-is-0.2.0.tgz#2abb75aade39deb5cc815ce10e6191164850baf0"
-
-sizzle@^2.3.3:
-  version "2.3.3"
-  resolved "https://registry.yarnpkg.com/sizzle/-/sizzle-2.3.3.tgz#4eb078c37231a56b52e4193f701e7ef8937e606b"
 
 slash@^1.0.0:
   version "1.0.0"
