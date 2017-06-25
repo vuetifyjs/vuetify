@@ -1,13 +1,13 @@
-.speed-dial  
+.speed-dial
   &--absolute
     position: absolute
-    
+
   &--fixed
     position: fixed
-    
+
   &--top
     &:not(.speed-dial--absolute)
-      top: $grid-gutters.sm
+      top: $grid-gutters.md
 
     &.speed-dial--absolute
       top: 50%
@@ -15,25 +15,25 @@
 
   &--bottom
     &:not(.speed-dial--absolute)
-      bottom: $grid-gutters.sm
+      bottom: $grid-gutters.md
 
     &.speed-dial--absolute
       bottom: 50%
       transform: translateY(50%)
-      
+
   &--left
-    left: $grid-gutters.sm
-    
+    left: $grid-gutters.md
+
   &--right
-    right: $grid-gutters.sm
-    
+    right: $grid-gutters.md
+
   &--direction
     &-left,
     &-right
       .speed-dial__list
         height: 100%
         top: 0
-    
+
     &-top,
     &-bottom
       .speed-dial__list
@@ -44,7 +44,7 @@
       .speed-dial__list
         flex-direction: column-reverse
         bottom: 100%
-        
+
     &-right
       .speed-dial__list
         flex-direction: row
@@ -54,7 +54,7 @@
       .speed-dial__list
         flex-direction: column
         top: 100%
-        
+
     &-left
       .speed-dial__list
         flex-direction: row-reverse
@@ -71,4 +71,4 @@
     for n in (1..7)
       &:nth-child({n})
         transition-delay: "%ss" % (n * .05)
-  
+

@@ -2,6 +2,10 @@ import BezierEasing from 'bezier-easing'
 import Toggleable from '../../mixins/toggleable'
 import Fab from './mixins/fab'
 
+const easeInCubic = BezierEasing(0.55, 0.055, 0.675, 0.19)
+const easeOutCubic = BezierEasing(0.215, 0.61, 0.355, 1)
+const easeInOutCubic = BezierEasing(0.645, 0.045, 0.355, 1)
+
 export default {
   name: 'morph',
 
@@ -9,7 +13,8 @@ export default {
 
   data () {
     return {
-      containerWidth: 0
+      containerWidth: 0,
+      resizeDebounce: null
     }
   },
 
@@ -21,53 +26,82 @@ export default {
     activatorTransition: {
       type: String,
       default: 'activator-morph-transition'
-    }
+    },
+    toolbar: Boolean,
+    sheet: Boolean,
+    sheetHeight: Number
   },
 
   computed: {
     classes () {
       return {
         'morph': true,
-        'morph--fixed': true
+        'morph--toolbar': this.toolbar,
+        'morph--sheet': this.sheet,
+        'speed-dial--top': this.top,
+        'speed-dial--right': this.right,
+        'speed-dial--bottom': this.bottom,
+        'speed-dial--left': this.left,
+        'speed-dial--absolute': this.absolute,
+        'speed-dial--fixed': this.fixed
       }
     }
   },
 
   mounted () {
     this.$vuetify.load(() => {
-      this.containerWidth = this.$parent.$el.clientWidth
-      console.log(this.containerWidth)
+      window.addEventListener('resize', this.resize, { passive: true })
+      this.resize()
+
+      // Move content to parent element, if sheet
+      if (this.sheet) {
+        console.log(this.$refs.content)
+        this.$el.parentNode.insertBefore(this.$refs.content.$el, this.$el.parentNode.firstChild)
+      }
     })
   },
 
+  beforeDestroy () {
+    window.removeEventListener('resize', this.resize, { passive: true })
+  },
+
   methods: {
+    resize () {
+      clearTimeout(this.resizeDebounce)
+
+      this.resizeDebounce = setTimeout(() => {
+        console.log(this)
+        this.containerWidth = this.$el.parentNode.clientWidth
+      }, 50)
+    },
     beforeEnterTransition (el) {
       console.log('before enter')
       const left = this.containerWidth - ((el.clientWidth / 2) + 16)
       const target = left - this.containerWidth / 2
 
-      const right = this.containerWidth
-      const bottom = 56 + 16
-      const top = 16
       el.querySelector('.btn__content').style.transition = 'none'
       el.querySelector('.btn__content').style.opacity = 0
       el.style.transition = 'none'
-      this.$el.style.transition = 'none'
+      el.style.zIndex = 0
+      el.style.boxShadow = 'none'
       this.addTransform(el, `translateX(-${target}px)`)
-      this.addTransform(el, `translateY(${16}px)`)
+      this.addTransform(el, `translateY(${this.toolbar ? 16 : this.sheetHeight / 2}px)`)
     },
     enterTransition (el, done) {
       console.log('enter')
       const left = this.containerWidth - ((el.clientWidth / 2) + 16)
-      const target = left - this.containerWidth / 2
+      const targetHorizontal = left - this.containerWidth / 2
+      const targetVertical = this.toolbar ? 16 : this.sheetHeight / 2
 
       Promise.all([
         this.timeout(() => {
+          el.querySelector('.btn__content').style.transition = ''
+          el.style.boxShadow = ''
           el.querySelector('.btn__content').style.opacity = 1
         }, 500),
-        this.animate(d => this.opacity(el, 0, 1, d), 400, 0),
-        this.animate(p => this.horizontal(el, -target, 0, p), 400, 400, BezierEasing(0.215, 0.61, 0.355, 1)),
-        this.animate(p => this.vertical(el, 16, 0, p), 400, 400, BezierEasing(0.55, 0.055, 0.675, 0.19)),
+        this.animate(d => this.opacity(el, 0, 1, d), 300, 100),
+        this.animate(p => this.horizontal(el, -targetHorizontal, 0, p), 300, 200, easeOutCubic),
+        this.animate(p => this.vertical(el, targetVertical, 0, p), 300, 200, easeInCubic),
       ]).then(() => done())
     },
     afterEnterTransition (el) {
@@ -78,18 +112,18 @@ export default {
     beforeLeaveTransition (el) {
       el.style.transition = 'none'
       el.querySelector('.btn__content').style.opacity = 0
-      this.$el.style.transition = 'none'
+
     },
     leaveTransition (el, done) {
       console.log('leave')
       const left = this.containerWidth - ((el.clientWidth / 2) + 16)
-      const target = left - this.containerWidth / 2
+      const targetHorizontal = left - this.containerWidth / 2
+      const targetVertical = this.toolbar ? 16 : this.sheetHeight / 2
 
       Promise.all([
-        this.animate(d => this.opacity(el, 1, 0, d), 200, 150),
-        this.animate(p => this.horizontal(el, 0, -target, p), 400, 0, BezierEasing(0.55, 0.055, 0.675, 0.19)),
-        this.animate(p => this.vertical(el, 0, 16, p), 400, 0, BezierEasing(0.215, 0.61, 0.355, 1)),
-        //this.animate(p => this.scale(el, 1, 8, p), 500, 150, BezierEasing(0.55, 0.055, 0.675, 0.19)),
+        this.animate(d => this.opacity(el, 1, 0, d), 200, 100),
+        this.animate(p => this.horizontal(el, 0, -targetHorizontal, p), 300, 0, easeInCubic),
+        this.animate(p => this.vertical(el, 0, targetVertical, p), 300, 0, easeOutCubic),
       ]).then(() => done())
     },
     afterLeaveTransition (el) {
@@ -127,6 +161,11 @@ export default {
         })
       })
     },
+    height (el, start, end, delta) {
+      const value = start + (delta * (end - start))
+
+      el.style.height = `${value}px`
+    },
     opacity (el, start, end, delta) {
       const value = start + (delta * (end - start))
       //el.style.opacity = `${target > 0 ? target * delta : 1 * (1 - delta)})}`
@@ -155,6 +194,9 @@ export default {
       transforms.push(transform)
 
       el.style.transform = transforms.join(' ')
+    },
+    interpolate (start, end, delta) {
+      return start + (delta * (end - start))
     }
   },
 
@@ -179,6 +221,7 @@ export default {
     }
 
     const transition = h('transition-group', {
+      ref: 'content',
       class: {
         'morph--content': true
       },
@@ -194,7 +237,6 @@ export default {
           console.log('before leave')
           el.style.opacity = 1
           el.style.clipPath = `circle(100%)`
-
         },
         leave: (el, done) => {
           console.log('leave group')
@@ -202,36 +244,41 @@ export default {
           Promise.all([
             this.timeout(() => {
               el.querySelectorAll('.btn__content').forEach(e => e.style.opacity = 0)
-            }, 250),
-            this.animate(d => this.horizontal(el, 0, 100, d), 200, 300, BezierEasing(0.55, 0.055, 0.675, 0.19)),
+            }, 150),
+            this.animate(d => this.opacity(el, 1, 0, d), 100, 300),
+            this.animate(d => this.horizontal(el, 0, (this.containerWidth / 2) - 56, d), 300, 150, easeOutCubic),
             this.animate(d => {
-              const value = 100 + (d * (10 - 100))
-              el.style.clipPath = `circle(${value}%)`
-            }, 500, BezierEasing(0.55, 0.055, 0.675, 0.19))
+              const value = this.interpolate(this.containerWidth / 2, 28, d)
+              el.style.clipPath = `circle(${value}px)`
+            }, 400, easeOutCubic),
+            this.sheet && this.animate(d => this.height(el, this.sheetHeight, 0, d), 300, 200, easeInCubic)
           ]).then(() => done())
         },
         afterLeave: (el) => {
           console.log('after leave')
         },
         beforeEnter: (el) => {
+          el.style.zIndex = 5
           el.style.transition = 'none'
           el.style.opacity = 0
           el.style.clipPath = 'circle(10%)'
           el.querySelectorAll('.btn__content').forEach(e => e.style.opacity = 0)
+          this.sheet && (el.style.height = '0px')
         },
         enter: (el, done) => {
           console.log('enter group')
 
           Promise.all([
             this.timeout(() => el.style.opacity = 1, 300),
-            this.animate(d => this.horizontal(el, 100, 0, d), 200, 300, BezierEasing(0.215, 0.61, 0.355, 1)),
+            this.animate(d => this.horizontal(el, this.containerWidth / 4, 0, d), 200, 300, easeOutCubic),
             this.animate(d => {
               const value = 10 + (d * (100 - 10))
               el.style.clipPath = `circle(${value}%)`
-            }, 500, 300, BezierEasing(0.55, 0.055, 0.675, 0.19)),
+            }, 300, 200, easeInCubic),
             this.timeout(() => {
               el.querySelectorAll('.btn__content').forEach(e => e.style.opacity = 1)
-            }, 700)
+            }, 450),
+            this.sheet && this.animate(d => this.height(el, 0, this.sheetHeight, d), 300, 100, easeOutCubic)
           ]).then(() => done())
         },
         afterEnter: (el) => {
@@ -239,16 +286,6 @@ export default {
         }
       }
     }, children)
-
-    const content = h('div', {
-      ref: 'content',
-      class: {
-        'morph--content': true
-      },
-      style: {
-        width: `${this.containerWidth}px`
-      }
-    }, transition)
 
     const activatorTransition = h('transition', {
       props: {
