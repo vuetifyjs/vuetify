@@ -1,4 +1,4 @@
-import { createSimpleFunctional } from '../../util/helpers'
+import { createSimpleFunctional } from '~util/helpers'
 import Stepper from './Stepper'
 import StepperStep from './StepperStep'
 import StepperContent from './StepperContent'

@@ -1,9 +1,9 @@
 import Activator from './mixins/activator'
-import Detachable from '../../mixins/detachable'
+import Detachable from '~mixins/detachable'
 import Generators from './mixins/generators'
 import Position from './mixins/position'
 import Utils from './mixins/utils'
-import Toggleable from '../../mixins/toggleable'
+import Toggleable from '~mixins/toggleable'
 import Keyable from './mixins/keyable'
 
 export default {

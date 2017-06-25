@@ -1,4 +1,4 @@
-import Checkbox from '../../mixins/checkbox'
+import Checkbox from '~mixins/checkbox'
 
 export default {
   name: 'checkbox',

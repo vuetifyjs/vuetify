@@ -50,9 +50,15 @@
       height: 100%
       margin: 0
 
-  @media $display-breakpoints.xs-only
+  @media $display-breakpoints.xs-only    
     &__content, &__extension
       height: $toolbar-mobile-portrait-height
+
+      > *:first-child
+        margin-left: 17px
+
+      > *:last-child
+        margin-right: 17px
 
   @media screen and (max-width: $grid-breakpoints.sm) and (orientation: portrait)
     toolbar-content(7px)

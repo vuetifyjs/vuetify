@@ -1,4 +1,4 @@
-import { createSimpleTransition } from '../../util/helpers'
+import { createSimpleTransition } from '~util/helpers'
 
 // Component specific transitions
 const CarouselTransition = createSimpleTransition('carousel-transition')

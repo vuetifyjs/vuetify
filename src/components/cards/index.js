@@ -1,7 +1,7 @@
 import Card from './Card'
 import {
   createSimpleFunctional
-} from '../../util/helpers'
+} from '~util/helpers'
 
 const CardActions = createSimpleFunctional('card__actions')
 const CardText = createSimpleFunctional('card__text')

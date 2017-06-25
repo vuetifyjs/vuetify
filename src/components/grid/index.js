@@ -1,4 +1,4 @@
-import { createSimpleFunctional } from '../../util/helpers'
+import { createSimpleFunctional } from '~util/helpers'
 
 const Grid = (name) => ({
   functional: true,

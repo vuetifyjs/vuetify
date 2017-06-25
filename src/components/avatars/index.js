@@ -1,4 +1,4 @@
-import { createSimpleFunctional } from '../../util/helpers'
+import { createSimpleFunctional } from '~util/helpers'
 
 const Avatar = createSimpleFunctional('avatar')
 

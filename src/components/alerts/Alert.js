@@ -1,10 +1,11 @@
-import Toggleable from '../../mixins/toggleable'
-import Contextualable from '../../mixins/contextualable'
+import Contextualable from '~mixins/contextualable'
+import Toggleable from '~mixins/toggleable'
+import Transitionable from '~mixins/transitionable'
 
 export default {
   name: 'alert',
 
-  mixins: [Contextualable, Toggleable],
+  mixins: [Contextualable, Toggleable, Transitionable],
 
   props: {
     dismissible: Boolean,
@@ -28,16 +29,11 @@ export default {
 
     mdIcon () {
       switch (true) {
-        case Boolean(this.icon):
-          return this.icon
-        case this.error:
-          return 'warning'
-        case this.info:
-          return 'info'
-        case this.success:
-          return 'check_circle'
-        case this.warning:
-          return 'priority_high'
+        case Boolean(this.icon): return this.icon
+        case this.error: return 'warning'
+        case this.info: return 'info'
+        case this.success: return 'check_circle'
+        case this.warning: return 'priority_high'
       }
     }
   },
@@ -58,12 +54,22 @@ export default {
       }, [h('v-icon', { props: { right: true, large: true } }, 'cancel')]))
     }
 
-    return h('div', {
+    const alert = h('div', {
       'class': this.classes,
       directives: [{
         name: 'show',
         value: this.isActive
       }]
     }, children)
+
+    if (!this.transition) return alert
+
+    return h('transition', {
+      props: {
+        name: this.transition,
+        origin: this.origin,
+        mode: this.mode
+      }
+    }, [alert])
   }
 }

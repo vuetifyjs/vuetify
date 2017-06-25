@@ -1,7 +1,7 @@
-import Schemable from './schemable'
+import Themeable from './themeable'
 
 export default {
-  mixins: [Schemable],
+  mixins: [Themeable],
 
   data () {
     return {
@@ -58,8 +58,8 @@ export default {
         'input-group--required': this.required,
         'input-group--hide-details': this.hideDetails,
         'input-group--placeholder': !!this.placeholder,
-        'dark--text': this.dark,
-        'light--text': this.light
+        'theme--dark': this.dark,
+        'theme--light': this.light
       }, this.classes)
     },
     isDirty () {

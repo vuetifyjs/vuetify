@@ -1,4 +1,4 @@
-import GenerateRouteLink from '../../mixins/route-link'
+import GenerateRouteLink from '~mixins/route-link'
 
 export default {
   name: 'toolbar-item',

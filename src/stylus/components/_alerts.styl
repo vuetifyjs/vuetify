@@ -6,11 +6,13 @@
   color: #fff
   display: flex
   font-size: $alert-font-size
+  margin: $alert-margin
   padding: $alert-padding
   position: relative
-  margin: $alert-margin
+  transition: $primary-transition
   
-  &__icon.icon, &__dismissible .icon
+  &__icon.icon,
+  &__dismissible .icon
     align-self: center
     color: $alert-icon-color
     font-size: $alert-icon-font-size
@@ -19,11 +21,11 @@
     margin-right: $alert-padding
     
   &__dismissible
-    margin-right: 0
-    margin-left: $alert-padding
-    transition: $primary-transition
     align-self: flex-start
+    margin-left: $alert-padding
+    margin-right: 0
     text-decoration: none
+    transition: $primary-transition
     
     &:hover
       color: lighten($alert-icon-color, 10%)

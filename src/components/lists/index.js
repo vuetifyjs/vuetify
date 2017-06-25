@@ -1,4 +1,4 @@
-import { createSimpleFunctional } from '../../util/helpers'
+import { createSimpleFunctional } from '~util/helpers'
 
 import List from './List'
 import ListGroup from './ListGroup'

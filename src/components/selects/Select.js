@@ -1,4 +1,4 @@
-import Input from '../../mixins/input'
+import Input from '~mixins/input'
 import Generators from './mixins/generators'
 import Autocomplete from './mixins/autocomplete'
 

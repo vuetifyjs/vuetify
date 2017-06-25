@@ -1,10 +1,10 @@
-import Schemable from '../../mixins/schemable'
-import Contextualable from '../../mixins/contextualable'
+import Themeable from '~mixins/themeable'
+import Contextualable from '~mixins/contextualable'
 
 export default {
   functional: true,
 
-  mixins: [Schemable, Contextualable],
+  mixins: [Themeable, Contextualable],
 
   props: {
     disabled: Boolean,
@@ -22,8 +22,8 @@ export default {
     data.staticClass = data.staticClass ? `${icon} icon ${data.staticClass} ` : `${icon} icon`
     data.attrs = data.attrs || {}
 
-    if (props.dark) data.staticClass += ' dark--text'
-    if (props.light) data.staticClass += ' light--text'
+    if (props.dark) data.staticClass += ' theme--dark'
+    if (props.light) data.staticClass += ' theme--light'
 
     const classes = {
       'icon--large': props.large,

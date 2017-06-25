@@ -1,7 +1,7 @@
-import Bootable from '../../mixins/bootable'
-import Detachable from '../../mixins/detachable'
-import Overlayable from '../../mixins/overlayable'
-import Toggleable from '../../mixins/toggleable'
+import Bootable from '~mixins/bootable'
+import Detachable from '~mixins/detachable'
+import Overlayable from '~mixins/overlayable'
+import Toggleable from '~mixins/toggleable'
 
 export default {
   name: 'dialog',

@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import Input from '../../mixins/input'
-import { addOnceEventListener, createRange } from '../../util/helpers'
+import Input from '~mixins/input'
+import { addOnceEventListener, createRange } from '~util/helpers'
 
 export default {
   name: 'slider',

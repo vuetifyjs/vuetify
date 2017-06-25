@@ -1,5 +1,5 @@
-import GenerateRouteLink from '../../mixins/route-link'
-import Toggleable from '../../mixins/toggleable'
+import GenerateRouteLink from '~mixins/route-link'
+import Toggleable from '~mixins/toggleable'
 
 export default {
   name: 'list-tile',

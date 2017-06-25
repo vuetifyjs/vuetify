@@ -1,10 +1,10 @@
-import Overlayable from '../../mixins/overlayable'
-import Schemable from '../../mixins/schemable'
+import Overlayable from '~mixins/overlayable'
+import Themeable from '~mixins/themeable'
 
 export default {
   name: 'navigation-drawer',
 
-  mixins: [Overlayable, Schemable],
+  mixins: [Overlayable, Themeable],
 
   data () {
     return {
@@ -49,8 +49,8 @@ export default {
         'navigation-drawer--persistent': this.persistent,
         'navigation-drawer--right': this.right,
         'navigation-drawer--temporary': this.temporary,
-        'dark--text': this.dark,
-        'light--text': this.light
+        'theme--dark': this.dark,
+        'theme--light': this.light
       }
     },
     showOverlay () {

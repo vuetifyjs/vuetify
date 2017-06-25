@@ -1,7 +1,7 @@
-import Schemable from '../../mixins/schemable'
+import Themeable from '~mixins/themeable'
 
 export default {
-  mixins: [Schemable],
+  mixins: [Themeable],
 
   props: {
     card: Boolean,
@@ -23,8 +23,8 @@ export default {
         'toolbar--floating': this.floating,
         'toolbar--dense': this.dense,
         'toolbar--prominent': this.prominent,
-        'dark--text': this.dark,
-        'light--text': this.light
+        'theme--dark': this.dark,
+        'theme--light': this.light
       }
     }
   },

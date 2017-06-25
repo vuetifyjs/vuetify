@@ -11,8 +11,8 @@ const Divider = {
     data.staticClass = data.staticClass ? `divider ${data.staticClass}` : 'divider'
 
     if (props.inset) data.staticClass += ' divider--inset'
-    if (props.light) data.staticClass += ' light--text'
-    if (props.dark) data.staticClass += ' dark--text'
+    if (props.light) data.staticClass += ' theme--light'
+    if (props.dark) data.staticClass += ' theme--dark'
 
     return h('hr', data)
   }

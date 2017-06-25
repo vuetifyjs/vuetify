@@ -2,14 +2,14 @@
   margin-right: auto
   margin-left: auto
   flex-basis: 100%
-  padding: $grid-gutters.md
+  padding: $grid-gutters.lg
 
   for size, width in $container-max-widths
     @media only screen and (min-width: width)
       max-width: width
   
   @media $display-breakpoints.xs-only
-    padding: $grid-gutters.md-mobile
+    padding: $grid-gutters.xl
 
   &.fluid
     max-width: 100%

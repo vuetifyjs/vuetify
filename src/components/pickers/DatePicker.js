@@ -2,7 +2,7 @@ import DateTitle from './mixins/date-title'
 import DateHeader from './mixins/date-header'
 import DateTable from './mixins/date-table'
 import DateYears from './mixins/date-years'
-import Picker from '../../mixins/picker'
+import Picker from '~mixins/picker'
 
 const defaultDateFormat = val => new Date(val).toISOString().substr(0, 10)
 

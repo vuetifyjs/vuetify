@@ -1,5 +1,5 @@
-import Contextualable from '../../mixins/contextualable'
-import Input from '../../mixins/input'
+import Contextualable from '~mixins/contextualable'
+import Input from '~mixins/input'
 
 export default {
   name: 'radio',

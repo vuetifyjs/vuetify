@@ -2,7 +2,7 @@ import Toolbar from './Toolbar'
 
 import {
   createSimpleFunctional
-} from '../../util/helpers'
+} from '~util/helpers'
 
 const ToolbarTitle = createSimpleFunctional('toolbar__title')
 const ToolbarItems = createSimpleFunctional('toolbar__items')
@@ -37,8 +37,8 @@ const SystemBar = {
   render (h, { data, props, children }) {
     data.staticClass = (`system-bar ${data.staticClass || ''}`).trim()
 
-    if (props.dark) data.staticClass += ' dark--text'
-    if (props.light) data.staticClass += ' light--text'
+    if (props.dark) data.staticClass += ' theme--dark'
+    if (props.light) data.staticClass += ' theme--light'
     if (props.status) data.staticClass += ' system-bar--status'
     if (props.window) data.staticClass += ' system-bar--window'
     if (props.lightsOut) data.staticClass += ' system-bar--lights-out'

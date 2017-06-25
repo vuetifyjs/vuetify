@@ -1,5 +1,5 @@
-import Toggleable from '../../mixins/toggleable'
-import Positionable from '../../mixins/positionable'
+import Toggleable from '~mixins/toggleable'
+import Positionable from '~mixins/positionable'
 
 export default {
   name: 'speed-dial',

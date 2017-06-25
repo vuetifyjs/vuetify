@@ -1,4 +1,4 @@
-import Schemable from '../../mixins/schemable'
+import Themeable from '~mixins/themeable'
 
 export default {
   name: 'list',
@@ -10,7 +10,7 @@ export default {
     }
   },
 
-  mixins: [Schemable],
+  mixins: [Themeable],
 
   data () {
     return {
@@ -34,8 +34,8 @@ export default {
         'list--dense': this.dense,
         'list--three-line': this.threeLine,
         'list--subheader': this.subheader,
-        'dark--text dark--bg': this.dark,
-        'light--text light--bg': this.light
+        'theme--dark dark--bg': this.dark,
+        'theme--light light--bg': this.light
       }
     }
   },

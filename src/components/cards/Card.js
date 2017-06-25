@@ -1,9 +1,9 @@
-import Schemable from '../../mixins/schemable'
+import Themeable from '~mixins/themeable'
 
 export default {
   functional: true,
 
-  mixins: [Schemable],
+  mixins: [Themeable],
 
   props: {
     flat: Boolean,
@@ -28,8 +28,8 @@ export default {
     if (props.raised) data.staticClass += ' card--raised'
     if (props.tile) data.staticClass += ' card--tile'
     if (props.flat) data.staticClass += ' card--flat'
-    if (props.light) data.staticClass += ' light--text'
-    if (props.dark) data.staticClass += ' dark--text'
+    if (props.light) data.staticClass += ' theme--light'
+    if (props.dark) data.staticClass += ' theme--dark'
 
     if (props.img) {
       data.style.background = `url(${props.img}) center center / cover no-repeat`

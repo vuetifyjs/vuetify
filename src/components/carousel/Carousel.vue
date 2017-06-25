@@ -22,7 +22,7 @@
 </template>
 
 <script>
-  import Bootable from '../../mixins/bootable'
+  import Bootable from '~mixins/bootable'
 
   export default {
     name: 'carousel',

@@ -1,9 +1,9 @@
-import Schemable from '../../mixins/schemable'
+import Themeable from '~mixins/themeable'
 
 export default {
   name: 'tabs',
 
-  mixins: [Schemable],
+  mixins: [Themeable],
 
   provide () {
     return {
@@ -48,8 +48,8 @@ export default {
         'tabs--icons': this.icons,
         'tabs--mobile': this.isMobile,
         'tabs--scroll-bars': this.scrollable,
-        'dark--text': this.dark,
-        'light--text': this.light
+        'theme--dark': this.dark,
+        'theme--light': this.light
       }
     }
   },

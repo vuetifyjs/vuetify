@@ -24,8 +24,8 @@
 </template>
 
 <script>
-  import Expand from '../../mixins/expand-transition'
-  import Toggleable from '../../mixins/toggleable'
+  import Expand from '~mixins/expand-transition'
+  import Toggleable from '~mixins/toggleable'
 
   export default {
     name: 'expansion-panel-content',

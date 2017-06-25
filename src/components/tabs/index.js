@@ -1,6 +1,6 @@
 import {
   createSimpleFunctional
-} from '../../util/helpers'
+} from '~util/helpers'
 
 import Tabs from './Tabs'
 import TabsItem from './TabsItem'

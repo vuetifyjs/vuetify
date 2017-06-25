@@ -1,4 +1,4 @@
-import Picker from '../../mixins/picker'
+import Picker from '~mixins/picker'
 import TimeTitle from './mixins/time-title'
 import TimeBody from './mixins/time-body'
 
