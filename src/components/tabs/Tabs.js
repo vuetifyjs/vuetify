@@ -64,18 +64,7 @@ export default {
       this.tabClick(this.value)
     },
     activeIndex () {
-      const activators = this.$slots.activators
-
-      if (!activators ||
-        !activators.length ||
-        (activators.length &&
-          !activators[0].componentInstance.$children)) return
-
-      activators[0].componentInstance.$children
-        .filter(i => i.$options._componentTag === 'v-tabs-item')
-        .forEach(i => i.toggle(this.target))
-
-      this.$refs.content && this.$refs.content.$children.forEach(i => i.toggle(this.target, this.reverse, this.isBooted))
+      this.updateTabs()
       this.$emit('input', this.target)
       this.isBooted = true
     }
@@ -141,18 +130,42 @@ export default {
       })
     },
     tabClick (target) {
+      const setActiveIndex = index => {
+        if (this.activeIndex === index) {
+          // #762 update tabs display
+          // In case tabs count got changed but activeIndex didn't
+          this.updateTabs()
+        } else {
+          this.activeIndex = index;
+        }
+      }
+
       this.target = target
 
       if (!this.$refs.content) {
-        this.activeIndex = target
+        setActiveIndex(target)
         return
       }
 
       this.$nextTick(() => {
         const nextIndex = this.$refs.content.$children.findIndex(i => i.id === this.target)
         this.reverse = nextIndex < this.activeIndex
-        this.activeIndex = nextIndex
+        setActiveIndex(nextIndex)
       })
+    },
+    updateTabs () {
+      const activators = this.$slots.activators
+
+      if (!activators ||
+        !activators.length ||
+        (activators.length &&
+          !activators[0].componentInstance.$children)) return
+
+      activators[0].componentInstance.$children
+        .filter(i => i.$options._componentTag === 'v-tabs-item')
+        .forEach(i => i.toggle(this.target))
+
+      this.$refs.content && this.$refs.content.$children.forEach(i => i.toggle(this.target, this.reverse, this.isBooted))
     }
   },
 
