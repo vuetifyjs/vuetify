@@ -136,7 +136,7 @@ export default {
           // In case tabs count got changed but activeIndex didn't
           this.updateTabs()
         } else {
-          this.activeIndex = index;
+          this.activeIndex = index
         }
       }
 
