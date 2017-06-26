@@ -187,6 +187,8 @@ export default {
           this.$refs.input.focus()
         })
       }
+
+      this.$emit('change', this.inputValue)
     }
   },
 
