@@ -10,9 +10,9 @@ export default {
   },
 
   props: {
-    inputValue: [Array, Boolean, String],
-    falseValue: String,
-    trueValue: String
+    inputValue: null,
+    falseValue: null,
+    trueValue: null
   },
 
   computed: {
