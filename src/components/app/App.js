@@ -16,12 +16,9 @@ export default {
   render (h, { props, data, children }) {
     data.staticClass = data.staticClass ? `application ${data.staticClass} ` : 'application '
 
-    const classes = {
-      'application--dark': props.dark,
-      'application--light': props.light && !props.dark
-    }
-
-    data.staticClass += Object.keys(classes).filter(k => classes[k]).join(' ')
+    document.body.classList.remove('application--dark')
+    document.body.classList.remove('application--light')
+    document.body.classList.add(`application--${props.dark ? 'dark' : 'light'}`)
 
     const toolbar = children.find(c => c.tag === 'nav')
     const footer = children.find(c => c.tag === 'footer')
