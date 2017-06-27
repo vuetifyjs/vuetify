@@ -33,17 +33,7 @@ export default {
 
       this.hideScroll()
 
-      let app
-      // #820 Instead of requiring polyfill, do conditional
-      if (window.Element && !Element.prototype.closest) {
-        app = document.querySelector('[data-app]')
-      } else {
-        app = this.$el.closest('[data-app]')
-      }
-
-      app &&
-        app.appendChild(overlay) ||
-        console.warn('Application is missing <v-app> component')
+      document.body.prepend(overlay)
 
       this.isTransitioning = true
       addOnceEventListener(overlay, 'transitionend', () => (this.isTransitioning = false))
