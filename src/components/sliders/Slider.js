@@ -110,7 +110,10 @@ export default {
   mounted () {
     this.inputValue = this.value
     Vue.nextTick(() => this.inputWidth = this.calculateWidth(this.inputValue))
-    this.app = document.querySelector('[data-app]')
+
+    // Without a v-app, iOS does not work with body selectors
+    this.app = document.querySelector('[data-app]') ||
+      console.warn('The v-slider component requires the present of v-app or a non-body wrapping element with the [data-app] attribute.')
   },
 
   methods: {
