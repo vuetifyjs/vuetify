@@ -27,15 +27,7 @@ export default {
         input = [this.$createElement('input', {
           'class': 'input-group--select__autocomplete',
           domProps: { value: this.searchValue },
-          on: {
-            input: e => (this.searchValue = e.target.value),
-            keyup: e => {
-              if (e.keyCode === 27) {
-                this.isActive = false
-                e.target.blur()
-              }
-            }
-          },
+          on: { input: e => (this.searchValue = e.target.value) },
           ref: 'input',
           key: 'input'
         })]

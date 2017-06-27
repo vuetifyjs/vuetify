@@ -10,15 +10,16 @@ export default {
       if (!val) this.listIndex = -1
     },
     listIndex (next, prev) {
-      // For infinite scroll, re-evaluate children
-      next === this.tiles.length - 1 && this.getTiles()
+      // For infinite scroll and autocomplete, re-evaluate children
+      this.getTiles()
 
-      if (next !== -1) {
+      if (next in this.tiles) {
         this.tiles[next].classList.add('list__tile--highlighted')
         this.$refs.content.scrollTop = next * 48
       }
 
-      prev !== -1 && this.tiles[prev].classList.remove('list__tile--highlighted')
+      prev in this.tiles &&
+        this.tiles[prev].classList.remove('list__tile--highlighted')
     }
   },
 
@@ -27,11 +28,12 @@ export default {
       [40, 38, 13, 32].includes(e.keyCode) && e.preventDefault()
 
       if (this.listIndex === -1) this.setActiveListIndex()
-      if ([27, 9].includes(e.keyCode)) this.isActive = false
-      else if (e.keyCode === 40 && this.listIndex < this.tiles.length - 1) this.listIndex++
+      if ([27, 9].includes(e.keyCode)) return this.isActive = false
+      else if (!this.isActive && [13, 32].includes(e.keyCode)) return this.isActive = true
+
+      if (e.keyCode === 40 && this.listIndex < this.tiles.length - 1) this.listIndex++
       else if (e.keyCode === 38 && this.listIndex > 0) this.listIndex--
       else if (e.keyCode === 13 && this.listIndex !== -1) this.tiles[this.listIndex].click()
-      else if ([13, 32].includes(e.keyCode)) this.isActive = true
     },
     getTiles () {
       this.tiles = this.$refs.content.querySelectorAll('.list__tile')

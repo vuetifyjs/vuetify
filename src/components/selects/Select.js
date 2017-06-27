@@ -128,6 +128,9 @@ export default {
       this.$nextTick(() => {
         this.content && this.content.addEventListener('scroll', this.onScroll, false)
       })
+    },
+    searchValue () {
+      this.$refs.menu.listIndex = -1
     }
   },
 
@@ -143,7 +146,10 @@ export default {
 
   methods: {
     blur () {
-      this.$nextTick(() => (this.focused = false))
+      this.$nextTick(() => {
+        this.focused = false
+        this.$el.blur()
+      })
     },
     focus () {
       this.focused = true
