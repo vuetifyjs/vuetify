@@ -33,7 +33,11 @@ export default {
 
       this.hideScroll()
 
-      document.body.prepend(overlay)
+      if (this.absolute) {
+        this.$el.parentNode.prepend(overlay)
+      } else {
+        document.body.prepend(overlay)
+      }
 
       this.isTransitioning = true
       addOnceEventListener(overlay, 'transitionend', () => (this.isTransitioning = false))
