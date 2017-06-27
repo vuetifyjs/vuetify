@@ -8,10 +8,6 @@ export default {
 
   mixins: [Bootable, Detachable, Overlayable, Toggleable],
 
-  data: () => ({
-    app: null
-  }),
-
   props: {
     disabled: Boolean,
     persistent: Boolean,
