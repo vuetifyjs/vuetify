@@ -7,7 +7,7 @@ export default {
 
   mounted () {
     this.$vuetify.load(() => {
-      document.body.prepend(this.$refs.content)
+      document.body.insertBefore(this.$refs.content, document.body.firstChild)
     })
   },
 

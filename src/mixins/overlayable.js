@@ -3,14 +3,13 @@ import { addOnceEventListener } from '../util/helpers'
 export default {
   data () {
     return {
+      overlayOffset: 0,
       overlay: null,
-      isTransitioning: false
     }
   },
 
   props: {
-    hideOverlay: Boolean,
-    overflow: Boolean
+    hideOverlay: Boolean
   },
 
   beforeDestroy () {
@@ -36,11 +35,8 @@ export default {
       if (this.absolute) {
         this.$el.parentNode.prepend(overlay)
       } else {
-        document.body.prepend(overlay)
+        document.body.appendChild(overlay)
       }
-
-      this.isTransitioning = true
-      addOnceEventListener(overlay, 'transitionend', () => (this.isTransitioning = false))
 
       setTimeout(() => {
         overlay.className += ' overlay--active'
@@ -50,24 +46,29 @@ export default {
       return true
     },
     removeOverlay () {
+      this.showScroll()
       if (!this.overlay) return
 
       addOnceEventListener(this.overlay, 'transitionend', () => {
         this.overlay && this.overlay.remove()
         this.overlay = null
-        this.showScroll()
-        this.isTransitioning = false
       })
 
-      this.isTransitioning = true
       this.overlay.className = this.overlay.className.replace('overlay--active', '')
     },
     hideScroll () {
-      if (this.overflow) return
-      document.documentElement.style.overflowY = 'hidden'
+      // Check documentElement first for IE11
+      this.overlayOffset = document.documentElement &&
+        document.documentElement.scrollTop ||
+        document.body.scrollTop
+
+      document.body.style.top = `-${this.overlayOffset}px`
+      document.body.style.position = 'fixed'
     },
     showScroll () {
-      document.documentElement.style.overflowY = null
+      document.body.removeAttribute('style')
+      document.body.scrollTop = this.overlayOffset
+      document.documentElement.scrollTop = this.overlayOffset
     }
   }
 }
