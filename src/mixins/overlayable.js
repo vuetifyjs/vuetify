@@ -4,7 +4,7 @@ export default {
   data () {
     return {
       overlayOffset: 0,
-      overlay: null,
+      overlay: null
     }
   },
 
