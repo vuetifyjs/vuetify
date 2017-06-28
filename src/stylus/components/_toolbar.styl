@@ -19,11 +19,13 @@
     letter-spacing: $headings.h6.letter-spacing
     line-height: $headings.h6.line-height
     margin-left: 16px
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
 
   &__content, &__extension
     align-items: center
     display: flex
-    flex-wrap: wrap
 
     > .btn:last-child
       margin-right: 10px
