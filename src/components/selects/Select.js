@@ -153,7 +153,9 @@ export default {
     },
     focus () {
       this.focused = true
-      this.autocomplete && this.$refs.input.focus()
+      this.autocomplete &&
+        this.$refs.input &&
+        this.$refs.input.focus()
     },
     getText (item) {
       return item === Object(item) ? item[this.itemText] : item
@@ -190,7 +192,8 @@ export default {
       if (this.autocomplete) {
         this.$nextTick(() => {
           this.searchValue = null
-          this.$refs.input.focus()
+          this.$refs.input &&
+            this.$refs.input.focus()
         })
       }
 
