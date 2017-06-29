@@ -33,10 +33,10 @@
     > .btn:first-child
       margin-left: 10px
 
-    > *:not(.btn):last-child
+    > *:not(.btn):not(.toolbar__title):last-child
       margin-right: $grid-gutters.lg
       
-    > *:not(.btn):first-child
+    > *:not(.btn):not(.toolbar__title):first-child
       margin-left: $grid-gutters.lg
   
   &__content
@@ -74,10 +74,10 @@
       > *:not(.btn):first-child
         margin-left: $grid-gutters.xl
 
-  @media screen and (max-width: $grid-breakpoints.sm) and (orientation: portrait)
+  @media all and (max-width: $grid-breakpoints.sm) and (orientation: portrait)
     toolbar-content(7px)
   
-  @media screen and (max-width: $grid-breakpoints.lg) and (orientation: landscape)
+  @media all and (max-width: $grid-breakpoints.lg) and (orientation: landscape)
     &__content, &__extension
       height: $toolbar-mobile-landscape-height
 
@@ -132,70 +132,3 @@ toolbar-content(left)
 
     > *:last-child
       margin-right: left
-
-
-
-  // &--absolute
-  //   position: absolute
-
-  // &__sub
-  //   flex: 1 0 100%
-  //   padding: 24px 0 24px 72px
-
-  // &__side-icon
-  //   align-items: center
-  //   display: inline-flex
-  //   margin-left: 10px
-  //   position: relative
-
-  // &__logo
-  //   align-items: center
-  //   display: flex
-  //   font-size: 3rem
-  //   flex: 1;
-  //   padding: 0
-  //   text-decoration: none
-
-  // &__title
-  //   font-size: $headings.h6.size
-  //   flex: 1;
-  //   overflow: hidden
-  //   text-overflow: ellipsis
-  //   white-space: nowrap
-
-  //   &:not(:first-child)
-  //     padding: 0 16px
-
-  // &__items
-  //   align-items: center
-  //   display: flex
-  //   height: 100%
-  //   list-style-type: none
-  //   max-width: 100%
-  //   padding: 0
-
-  //   > li
-  //     align-items: center
-  //     display: flex
-  //     height: 100%
-
-  // &__item
-  //   align-items: center
-  //   display: flex
-  //   height: 100%
-  //   padding: $toolbar-item-padding
-  //   position: relative
-  //   text-decoration: none
-  //   transition: all 0.3s ease-out
-  //   white-space: nowrap
-
-  //   i
-  //     font-size: 2rem
-
-  //   &--disabled
-  //     opacity: .5
-  //     pointer-events: none
-
-  // .input-group
-  //   margin: 0 0 0 16px
-  //   flex: 1
