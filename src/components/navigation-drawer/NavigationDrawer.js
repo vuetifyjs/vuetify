@@ -69,7 +69,7 @@ export default {
       }
     },
     permanent (val) {
-      val && this.$emit('input', val)
+      this.$emit('input', val)
     },
     value (val) {
       if (this.permanent) return
