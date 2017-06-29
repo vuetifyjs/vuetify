@@ -4,6 +4,7 @@ export default {
   mixins: [Themeable],
 
   props: {
+    absolute: Boolean,
     card: Boolean,
     dense: Boolean,
     extended: Boolean,
@@ -17,11 +18,12 @@ export default {
     classes () {
       return {
         'toolbar': true,
-        'toolbar--card': this.card,
-        'toolbar--fixed': this.fixed,
         'elevation-0': this.flat,
-        'toolbar--floating': this.floating,
+        'toolbar--absolute': this.absolute,
+        'toolbar--card': this.card,
         'toolbar--dense': this.dense,
+        'toolbar--fixed': this.fixed,
+        'toolbar--floating': this.floating,
         'toolbar--prominent': this.prominent,
         'theme--dark': this.dark,
         'theme--light': this.light
@@ -39,9 +41,13 @@ export default {
       'class': 'toolbar__content'
     }, this.$slots.default))
 
-    this.extended && children.push(h('div', {
-      'class': 'toolbar__extension'
-    }, this.$slots.extension))
+    if (this.$slots.extension ||
+      this.extended
+    ) {
+      children.push(h('div', {
+        'class': 'toolbar__extension'
+      }, this.$slots.extension))
+    }
 
     return h('nav', data, children)
   }
