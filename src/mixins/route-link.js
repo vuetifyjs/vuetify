@@ -10,8 +10,7 @@ export default {
     ripple: Boolean,
     router: Boolean,
     tag: String,
-    target: String,
-    download: String
+    target: String
   },
 
   methods: {
@@ -53,10 +52,10 @@ export default {
           data.attrs.href = options || 'javascript:;'
           if (this.target) data.attrs.target = this.target
 
-          if (this.download === 'true') {
+          if (this.$vnode.data.attrs.download === 'true') {
             data.attrs.download = ''
-          } else if (this.download) {
-            data.attrs.download = this.download
+          } else if (this.$vnode.data.attrs.download) {
+            data.attrs.download = this.$vnode.data.attrs.download
           }
         }
 
