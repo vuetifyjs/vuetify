@@ -12,6 +12,7 @@ export default {
     disabled: Boolean,
     persistent: Boolean,
     fullscreen: Boolean,
+    fullWidth: Boolean,
     lazy: Boolean,
     origin: {
       type: String,
@@ -111,7 +112,10 @@ export default {
     }, [dialog]))
 
     return h('div', {
-      'class': 'dialog__container'
+      'class': 'dialog__container',
+      style: {
+        display: this.fullWidth ? 'block' : 'inline-block'
+      }
     }, children)
   }
 }

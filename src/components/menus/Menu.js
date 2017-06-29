@@ -60,6 +60,7 @@ export default {
     left: Boolean,
     bottom: Boolean,
     right: Boolean,
+    fullWidth: Boolean,
     auto: Boolean,
     offsetX: Boolean,
     offsetY: Boolean,
@@ -127,22 +128,26 @@ export default {
       type: Boolean,
       default: false
     },
-    minWidth: {
-      type: Number,
-      default: null
-    }
+    maxWidth: [Number, String],
+    minWidth: [Number, String]
   },
 
   computed: {
     calculatedMinWidth () {
-      return this.minWidth !== null
-        ? this.minWidth
-        : this.dimensions.activator.width + this.nudgeWidth + (this.auto ? 16 : 0)
+      const minWidth = parseInt(this.minWidth) ||
+        this.dimensions.activator.width + this.nudgeWidth + (this.auto ? 16 : 0)
+
+      if (!this.maxWidth) return minWidth
+
+      const maxWidth = parseInt(this.maxWidth)
+
+      return maxWidth < minWidth ? maxWidth : minWidth
     },
     styles () {
       return {
         maxHeight: this.auto ? '200px' : isNaN(this.maxHeight) ? this.maxHeight : `${this.maxHeight}px`,
         minWidth: `${this.calculatedMinWidth}px`,
+        maxWidth: `${parseInt(this.maxWidth)}px`,
         top: `${this.calcTop()}px`,
         left: `${this.calcLeft()}px`
       }
@@ -215,6 +220,9 @@ export default {
 
     const data = {
       'class': 'menu',
+      style: {
+        display: this.fullWidth ? 'block' : 'inline-block'
+      },
       directives,
       on: {
         keydown: e => {
