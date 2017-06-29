@@ -1,10 +1,10 @@
-import Contextualable from '~mixins/contextualable'
 import Input from '~mixins/input'
+import Colorable from '~mixins/colorable'
 
 export default {
   name: 'radio',
 
-  mixins: [Contextualable, Input],
+  mixins: [Input, Colorable],
 
   model: {
     prop: 'inputValue',
@@ -20,17 +20,11 @@ export default {
       return this.inputValue === this.value
     },
     classes () {
-      return {
+      return this.addColorClassChecks({
         'radio': true,
         'input-group--selection-controls': true,
-        'input-group--active': this.isActive,
-        'primary--text': this.primary,
-        'secondary--text': this.secondary,
-        'error--text': this.error,
-        'success--text': this.success,
-        'info--text': this.info,
-        'warning--text': this.warning
-      }
+        'input-group--active': this.isActive
+      })
     },
 
     icon () {
