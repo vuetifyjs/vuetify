@@ -1,8 +1,8 @@
-import Contextualable from './contextualable'
+import Colorable from '~mixins/colorable'
 import Input from './input'
 
 export default {
-  mixins: [Contextualable, Input],
+  mixins: [Input, Colorable],
 
   model: {
     prop: 'inputValue',

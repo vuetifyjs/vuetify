@@ -5,12 +5,7 @@
     .input-group--selection-controls__container
       position: relative
 
-      &.primary--text
-      &.secondary--text
-      &.success--text
-      &.info--text
-      &.warning--text
-      &.error--text
+      &[class*="--text"]
         .input-group--selection-controls__ripple--active:after
           background-color: currentColor
 

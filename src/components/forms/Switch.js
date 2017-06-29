@@ -18,17 +18,11 @@ export default {
       }
     },
     containerClasses () {
-      return {
+      return this.addColorClassChecks({
         'input-group--selection-controls__container': true,
         'input-group--selection-controls__container--light': this.light,
-        'input-group--selection-controls__container--disabled': this.disabled,
-        'primary--text': this.primary,
-        'secondary--text': this.secondary,
-        'error--text': this.error,
-        'success--text': this.success,
-        'info--text': this.info,
-        'warning--text': this.warning
-      }
+        'input-group--selection-controls__container--disabled': this.disabled
+      })
     },
     toggleClasses () {
       return {
