@@ -139,7 +139,7 @@ export default {
     },
     onMouseUp () {
       this.isDragging = false
-      !this.selectingHour && !this.actions && this.save()
+      !this.selectingHour && this.autosave && this.save()
       if (this.hasChanged) {
         this.selectingHour = false
         this.hasChanged = false

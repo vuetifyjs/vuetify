@@ -7,6 +7,7 @@ export default {
 
   props: {
     actions: Boolean,
+    autosave: Boolean,
     landscape: Boolean,
     noTitle: Boolean,
     scrollable: Boolean,
