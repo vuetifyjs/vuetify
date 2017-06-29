@@ -67,6 +67,8 @@ export default {
     },
     showScroll () {
       document.body.removeAttribute('style')
+
+      if (!this.overlayOffset) return
       document.body.scrollTop = this.overlayOffset
       document.documentElement.scrollTop = this.overlayOffset
     }
