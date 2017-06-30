@@ -12,6 +12,7 @@ export default {
   },
 
   beforeDestroy () {
-    document.body.removeChild(this.$refs.content)
+    this.$refs.content &&
+      this.$refs.content.remove()
   }
 }
