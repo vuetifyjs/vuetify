@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import Input from '~mixins/input'
 import { addOnceEventListener, createRange } from '~util/helpers'
 
@@ -109,7 +108,7 @@ export default {
 
   mounted () {
     this.inputValue = this.value
-    Vue.nextTick(() => this.inputWidth = this.calculateWidth(this.inputValue))
+    this.$nextTick(() => this.inputWidth = this.calculateWidth(this.inputValue))
 
     // Without a v-app, iOS does not work with body selectors
     this.app = document.querySelector('[data-app]') ||
