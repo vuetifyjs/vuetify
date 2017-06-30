@@ -46,9 +46,6 @@
     padding: $button-padding
     text-overflow: ellipsis
 
-    .icon
-      color: inherit
-
 
 /** Types */
 .btn
@@ -63,7 +60,7 @@
     &:active
       elevation(8)
 
-  &--icon
+  &.btn--icon
     background: transparent
     box-shadow: none !important
     border-radius: 50%
@@ -75,17 +72,18 @@
     .btn__content
       height: $button-height
       padding: 0
+      
+      .icon
+        color: inherit
 
-    &:after
-      border-radius: 50%
-      opacity: .12
+      &:before
+        border-radius: 50%
+        opacity: .2
 
-    &:hover
-      border-radius: 50%
-
-      &:after
+    &:hover,
+    &:focus
+      .btn__content:before
         background-color: currentColor
-        opacity: .12
 
     &.btn--small
       width: $button-small-height

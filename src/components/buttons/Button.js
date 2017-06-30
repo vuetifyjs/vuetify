@@ -79,8 +79,10 @@ export default {
 
   methods: {
     // Prevent focus to match md spec
-    click () {
-      !this.fab && this.$el.blur()
+    click (e) {
+      !this.fab &&
+        e.detail &&
+        this.$el.blur()
     },
     genContent () {
       return this.$createElement('div', { 'class': 'btn__content' }, [this.$slots.default])
