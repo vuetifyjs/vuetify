@@ -1,6 +1,8 @@
 const base = require('./webpack.base.config')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const OptimizeJsPlugin = require('optimize-js-plugin')
 
 const builds = {
   'dev': {
@@ -33,7 +35,12 @@ function genConfig (opts) {
         compress: {
           warnings: false
         }
-      })
+      }),
+      new OptimizeCssAssetsPlugin(),
+      new OptimizeJsPlugin({
+        sourceMap: false
+      }),
+      new webpack.optimize.ModuleConcatenationPlugin()
     ])
   }
 
