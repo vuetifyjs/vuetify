@@ -10,20 +10,13 @@ export default {
     id: {
       type: String,
       default: 'app'
-    },
-    standalone: Boolean
+    }
   },
 
   render (h, { props, data, children }) {
     data.staticClass = data.staticClass ? `application ${data.staticClass} ` : 'application '
 
-    if (typeof document !== 'undefined' && !props.standalone) {
-      document.body.classList.remove('application--dark')
-      document.body.classList.remove('application--light')
-      document.body.classList.add(`application--${props.dark ? 'dark' : 'light'}`)
-    } else {
-      data.staticClass += `application--${props.dark ? 'dark' : 'light'}`
-    }
+    data.staticClass += `application--${props.dark ? 'dark' : 'light'}`
 
     const toolbar = children.find(c => c.tag === 'nav')
     const footer = children.find(c => c.tag === 'footer')

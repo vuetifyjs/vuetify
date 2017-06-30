@@ -7,7 +7,11 @@ export default {
 
   mounted () {
     this.$vuetify.load(() => {
-      document.body.insertBefore(this.$refs.content, document.body.firstChild)
+      const app = document.querySelector('[data-app]')
+      app.insertBefore(
+        this.$refs.content,
+        app.firstChild
+      )
     })
   },
 

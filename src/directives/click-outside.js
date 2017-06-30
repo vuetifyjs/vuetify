@@ -15,7 +15,7 @@ function directive (e, el, binding, v) {
 export default {
   bind (el, binding, v) {
     v.context.$vuetify.load(() => {
-      const outside = document.querySelector('[data-app]') || document.body
+      const outside = document.querySelector('[data-app]')
       const click = e => directive(e, el, binding, v)
       outside.addEventListener('click', click, false)
       el._clickOutside = click
@@ -23,7 +23,7 @@ export default {
   },
 
   unbind (el) {
-    const outside = document.querySelector('[data-app]') || document.body
+    const outside = document.querySelector('[data-app]')
     outside.removeEventListener('click', el._clickOutside, false)
   }
 }

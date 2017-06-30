@@ -35,7 +35,7 @@ export default {
       if (this.absolute) {
         this.$el.parentNode.prepend(overlay)
       } else {
-        document.body.appendChild(overlay)
+        document.querySelector('[data-app]').appendChild(overlay)
       }
 
       setTimeout(() => {
