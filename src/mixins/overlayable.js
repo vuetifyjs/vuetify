@@ -46,12 +46,14 @@ export default {
       return true
     },
     removeOverlay () {
-      this.showScroll()
-      if (!this.overlay) return
+      if (!this.overlay) {
+        return this.showScroll()
+      }
 
       addOnceEventListener(this.overlay, 'transitionend', () => {
         this.overlay && this.overlay.remove()
         this.overlay = null
+        this.showScroll()
       })
 
       this.overlay.className = this.overlay.className.replace('overlay--active', '')
