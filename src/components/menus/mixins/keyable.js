@@ -25,7 +25,8 @@ export default {
 
   methods: {
     changeListIndex (e) {
-      [40, 38, 13, 32].includes(e.keyCode) && e.preventDefault()
+      [40, 38, 13].includes(e.keyCode) && e.preventDefault()
+      e.keyCode === 32 && !this.isActive && e.preventDefault()
 
       if (this.listIndex === -1) this.setActiveListIndex()
       if ([27, 9].includes(e.keyCode)) return this.isActive = false
