@@ -48,7 +48,8 @@
       background-repeat: repeat-x
           
   // Focused
-  &.input-group--focused
+  &.input-group--focused,
+  &:focus
     label
       color: $theme.primary
 
@@ -57,10 +58,12 @@
         &:after
           transform: scaleX(1)
 
-  &.input-group--focused:not(.input-group--single-line)
-    label
-      opacity: 1
-      transform: translate3d(0, -18px, 0) scale(.75)
+  &:not(.input-group--single-line)
+    &.input-group--focused,
+    &:focus
+      label
+        opacity: 1
+        transform: translate3d(0, -18px, 0) scale(.75)
 
   &.input-group--dirty
     label
