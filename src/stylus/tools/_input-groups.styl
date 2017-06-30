@@ -12,10 +12,9 @@ input-group($material)
   &.input-group--dirty
     .input-group__selections__comma
       color: $material.text.primary
-    
-  &.input-group--prepend-icon,
-  &.input-group--append-icon
-    .icon
+  
+  &:not(.input-group--focused)
+    .input-group__input .icon
       color: $material.text.secondary
   
   .input-group__counter

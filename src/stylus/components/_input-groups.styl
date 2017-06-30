@@ -28,6 +28,15 @@
     min-width: 0
     min-height: $input-height
 
+/** Icons */
+.input-group
+  &__icon-cb
+    cursor: pointer
+    
+.input-group
+  &.input-group--focused
+    .input-group__input .icon
+      color: $theme.primary
 
 /** States */
 .input-group
@@ -37,31 +46,45 @@
       background-position: bottom
       background-size: 3px 1px
       background-repeat: repeat-x
+          
+  // Focused
+  &.input-group--focused
+    label
+      color: $theme.primary
 
-  &--focused, &:focus
     &:not(.input-group--disabled)
       .input-group__details
         &:after
           transform: scaleX(1)
 
-  &--active
-    //
+  &.input-group--focused:not(.input-group--single-line)
+    label
+      opacity: 1
+      transform: translate3d(0, -18px, 0) scale(.75)
 
-  &--error
-    .input-group__details:after
-      background-color: $theme.error
+  &.input-group--dirty
+    label
+      transform: translate3d(0, -18px, 0) scale(.75)
 
-/** Icons */
-.input-group
-  &__icon-cb
-    cursor: pointer
-    
-.input-group
-  &.input-group--prepend-icon,
-  &.input-group--append-icon
+  // Required
+  &--required
+    label:after
+      content: '*'
+
     &.input-group--focused
-      .input-group__input .icon
-        color: $theme.primary
+      label:after
+        color: $theme.error
+
+  // Error
+  &.input-group--error
+    label,
+    .input-group__input .icon
+      color: $theme.error
+
+    .input-group__details
+      &:after,
+      &:before
+        background-color: $theme.error
 
 /** Details */
 .input-group
@@ -75,6 +98,7 @@
     flex: 1 0 100%
     font-size: 12px
     min-height: 22px
+    overflow: hidden
     position: relative
     width: 100%
 
@@ -85,7 +109,7 @@
 
     &:after
       background-color: $theme.primary
-      top: -1px
+      top: 0
       height: 2px
       transition: .3s $transition.fast-out-slow-in
       transform: scaleX(0)

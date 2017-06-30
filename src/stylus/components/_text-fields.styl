@@ -56,16 +56,6 @@
 
 /** Input States */
 .input-group--text-field
-  &.input-group--focused:not(.input-group--single-line)
-    label
-      opacity: 1
-      color: $theme.primary
-      transform: translate3d(0, -18px, 0) scale(.75)
-
-  &.input-group--dirty
-    label
-      transform: translate3d(0, -18px, 0) scale(.75)
-
   &.input-group--placeholder:not(.input-group--focused):not(.input-group--dirty)
     label
       opacity: 0
@@ -73,15 +63,6 @@
 
 /** Types */
 .input-group--text-field
-  // Errors
-  &.input-group--error
-    label
-      color: $theme.error
-
-    .input-group__details:before,
-    .input-group__details:after
-      background-color: $theme.error
-
   // Icons
   &.input-group--prepend-icon
     .input-group__prepend-icon
@@ -112,15 +93,6 @@
     &.input-group--dirty
       label
         display: none
-
-  // Required
-  &.input-group--required
-    label:after
-      content: '*'
-
-    &.input-group--focused
-      label:after
-        color: $theme.error
 
   // Full Width
   &.input-group--full-width

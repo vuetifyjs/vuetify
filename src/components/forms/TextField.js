@@ -51,7 +51,8 @@ export default {
       }
     },
     hasError () {
-      return this.errorMessages.length > 0 ||
+      return this.validations.length ||
+        this.errorMessages.length > 0 ||
         !this.counterIsValid() ||
         !this.validateIsValid() ||
         this.error
