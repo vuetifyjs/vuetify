@@ -10,7 +10,8 @@ export default {
     ripple: Boolean,
     router: Boolean,
     tag: String,
-    target: String
+    target: String,
+    download: String
   },
 
   methods: {
@@ -51,6 +52,8 @@ export default {
         if (tag === 'a') {
           data.attrs.href = options || 'javascript:;'
           if (this.target) data.attrs.target = this.target
+
+          data.attrs.download = this.download
         }
 
         data.on = { click: this.click }
