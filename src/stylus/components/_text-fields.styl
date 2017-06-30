@@ -85,6 +85,17 @@
     input
       flex: auto
 
+  &:not(.input-group--single-line)
+    &.input-group--focused,
+    &:focus
+      label
+        opacity: 1
+        transform: translate3d(0, -18px, 0) scale(.75)
+
+  &.input-group--dirty
+    label
+      transform: translate3d(0, -18px, 0) scale(.75)
+
   // Single Line
   &.input-group--single-line
     label
