@@ -58,19 +58,20 @@ export default {
     },
     hideScroll () {
       // Check documentElement first for IE11
-      this.overlayOffset = document.documentElement &&
-        document.documentElement.scrollTop ||
-        document.body.scrollTop
+      // this.overlayOffset = document.documentElement &&
+      //   document.documentElement.scrollTop ||
+      //   document.body.scrollTop
 
-      document.body.style.top = `-${this.overlayOffset}px`
-      document.body.style.position = 'fixed'
+      // document.body.style.top = `-${this.overlayOffset}px`
+      // document.body.style.position = 'fixed'
+      document.documentElement.style.overflow = 'hidden'
     },
     showScroll () {
-      document.body.removeAttribute('style')
+      document.documentElement.removeAttribute('style')
 
-      if (!this.overlayOffset) return
-      document.body.scrollTop = this.overlayOffset
-      document.documentElement.scrollTop = this.overlayOffset
+      // if (!this.overlayOffset) return
+      // document.body.scrollTop = this.overlayOffset
+      // document.documentElement.scrollTop = this.overlayOffset
     }
   }
 }
