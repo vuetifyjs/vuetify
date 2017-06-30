@@ -1,6 +1,8 @@
 const webpack = require('webpack')
 const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const OptimizeJsPlugin = require('optimize-js-plugin')
 const projectRoot = path.resolve(__dirname, '../')
 const version = process.env.VERSION || require('../package.json').version
 const resolve = (file) => path.resolve(__dirname, file)
@@ -72,8 +74,13 @@ module.exports = {
       entryOnly: true
     }),
     new ExtractTextPlugin('vuetify.min.css'),
+    new OptimizeCssAssetsPlugin(),
+    new OptimizeJsPlugin({
+      sourceMap: false
+    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
-    })
+    }),
+    new webpack.optimize.ModuleConcatenationPlugin()
   ]
 }
