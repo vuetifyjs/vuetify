@@ -51,6 +51,12 @@ export default {
         if (tag === 'a') {
           data.attrs.href = options || 'javascript:;'
           if (this.target) data.attrs.target = this.target
+
+          if (this.$vnode.data.attrs.download === 'true') {
+            data.attrs.download = ''
+          } else if (this.$vnode.data.attrs.download) {
+            data.attrs.download = this.$vnode.data.attrs.download
+          }
         }
 
         data.on = { click: this.click }
