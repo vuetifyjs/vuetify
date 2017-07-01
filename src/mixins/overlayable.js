@@ -50,13 +50,13 @@ export default {
         return this.showScroll()
       }
 
-      addOnceEventListener(this.overlay, 'transitionend', () => {
+      this.overlay.className = this.overlay.className.replace('overlay--active', '')
+
+      requestAnimationFrame(() => {
         this.overlay && this.overlay.remove()
         this.overlay = null
         this.showScroll()
       })
-
-      this.overlay.className = this.overlay.className.replace('overlay--active', '')
     },
     hideScroll () {
       // Check documentElement first for IE11
