@@ -1,5 +1,3 @@
-import { addOnceEventListener } from '../util/helpers'
-
 export default {
   data () {
     return {
