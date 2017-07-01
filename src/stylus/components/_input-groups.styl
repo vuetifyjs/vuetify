@@ -48,15 +48,16 @@
       background-repeat: repeat-x
           
   // Focused
-  &.input-group--focused,
-  &:focus
-    label
-      color: $theme.primary
+  &.input-group--text-field
+    &.input-group--focused,
+    &:focus
+      label
+        color: $theme.primary
 
-    &:not(.input-group--disabled)
-      .input-group__details
-        &:after
-          transform: scaleX(1)
+      &:not(.input-group--disabled)
+        .input-group__details
+          &:after
+            transform: scaleX(1)
 
   // Required
   &--required
