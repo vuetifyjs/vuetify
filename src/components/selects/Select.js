@@ -10,7 +10,7 @@ export default {
   data () {
     return {
       content: {},
-      inputValue: this.value,
+      inputValue: this.multiple && !this.value ? [] : this.value,
       isBooted: false,
       lastItem: 20,
       isActive: false
@@ -102,7 +102,8 @@ export default {
         if (!this.multiple) {
           return this.getValue(i) === this.getValue(this.inputValue)
         } else {
-          return this.inputValue.find(j => this.getValue(j) === this.getValue(i))
+          // Always return Boolean
+          return this.inputValue.find(j => this.getValue(j) === this.getValue(i)) !== undefined
         }
       })
     }
