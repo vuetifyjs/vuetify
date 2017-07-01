@@ -49,11 +49,14 @@
           
   // Focused
   &.input-group--text-field
+    &:not(.input-group--single-line)
+      &.input-group--focused,
+      &:focus
+        label
+          color: $theme.primary
+
     &.input-group--focused,
     &:focus
-      label
-        color: $theme.primary
-
       &:not(.input-group--disabled)
         .input-group__details
           &:after
