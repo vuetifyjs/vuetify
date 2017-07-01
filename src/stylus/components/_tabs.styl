@@ -40,8 +40,8 @@
 
       .tabs__wrapper
         &--scrollable.tabs__wrapper--overflow
+          overflow: hidden !important
           margin: 0 32px
-        //width: calc(100% - 64px)
 
   &:not(.tabs--grow):not(.tabs--mobile)
     .tabs__item
@@ -51,6 +51,7 @@
     .tabs__wrapper
       &--scrollable
         margin: 0 60px
+        overflow: hidden !important
 
   &__bar
     background-color: $theme.primary
@@ -102,7 +103,7 @@
 
   &__wrapper
     position: relative
-    overflow: hidden
+    overflow-x: auto
     height: inherit
 
   &__item
