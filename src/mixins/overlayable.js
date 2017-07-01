@@ -33,7 +33,8 @@ export default {
       this.hideScroll()
 
       if (this.absolute) {
-        this.$el.parentNode.prepend(overlay)
+        // Required for IE11
+        this.$el.parentNode.insertBefore(overlay, this.$el.parentNode.firstChild)
       } else {
         document.querySelector('[data-app]').appendChild(overlay)
       }
@@ -53,9 +54,12 @@ export default {
       this.overlay.className = this.overlay.className.replace('overlay--active', '')
 
       requestAnimationFrame(() => {
-        this.overlay && this.overlay.remove()
-        this.overlay = null
-        this.showScroll()
+        // IE11 Fix
+        try {
+          this.overlay.parentNode.removeChild(this.overlay)
+          this.overlay = null
+          this.showScroll()
+        } catch (e) {}
       })
     },
     hideScroll () {

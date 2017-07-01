@@ -16,7 +16,11 @@ export default {
   },
 
   beforeDestroy () {
-    this.$refs.content &&
-      this.$refs.content.remove()
+    if (!this.$refs.content) return
+
+    // IE11 Fix
+    try {
+      this.$refs.content.parentNode.removeChild(this.$refs.content)
+    } catch (e) {}
   }
 }
