@@ -25,6 +25,13 @@
   &__content, &__extension
     align-items: center
     display: flex
+    
+    > .list
+      align-items: center
+      display: flex
+      flex: 1 1 auto
+      margin: 0 !important // come back to this
+      max-height: 100%
 
     > .btn:last-child
       margin-right: 10px
@@ -58,9 +65,8 @@
       margin: 0
 
   @media $display-breakpoints.xs-only    
-    &__content, &__extension
-      height: $toolbar-mobile-portrait-height
-
+    &__content,
+    &__extension
       > .btn:last-child
         margin-right: 17px
 
@@ -77,7 +83,8 @@
     toolbar-content(7px)
   
   @media all and (max-width: $grid-breakpoints.lg) and (orientation: landscape)
-    &__content, &__extension
+    &__content,
+    &__extension
       height: $toolbar-mobile-landscape-height
 
 
