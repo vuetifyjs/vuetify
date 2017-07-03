@@ -10,7 +10,12 @@
 <p>Build <i>amazing</i> applications with the power of Vue and Material Design. Vuetify gives you a massive library of beautifully crafted components. Built for speed, Vuetify components feature an easy-to-remember semantic design that shifts remembering complex classes and markup, to type as you speak properties and simple and clear property names.</p
 <p>Vuetify.js supports all <strong>modern browsers</strong>, including IE11 and Safari 9+. From mobile to laptop to desktop, you can rest assured that your application will work as expected. Interested in the bleeding edge? Try the vue-cli Webpack SSR (Server side rendered) template and build the ultimate UI.</p>
 <p align="center">
+  <br><br>
   <strong>Vuetify.js is proudly sponsored by:</strong>
+  <br><br>
+  <a href="https://www.cloudflare.com" target="_blank">
+    <img height="60px" src="https://vuetifyjs.com/static/doc-images/cloudflare.svg">
+  </a>
   <br><br>
   <a href="https://www.browserstack.com" target="_blank">
     <img width="300px" src="https://vuetifyjs.com/static/doc-images/browser-stack.svg">
@@ -23,7 +28,6 @@
 <p align="center">
   <strong>Support Vuetify.js's development with:</strong>
   <br>
-  
   <a href="https://patreon.com/vuetify" target="_blank">
     Patreon
   </a>
