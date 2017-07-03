@@ -182,9 +182,6 @@ export default {
     },
     everyItem (val) {
       if (val) this.all = true
-    },
-    itemsLength () {
-      this.updatePagination({ totalItems: this.itemsLength })
     }
   },
 
@@ -222,7 +219,7 @@ export default {
     const firstSortable = this.headers.find(h => !('sortable' in h) || h.sortable)
     this.defaultPagination.sortBy = firstSortable ? firstSortable.value : null
 
-    this.updatePagination(Object.assign({}, this.defaultPagination, this.pagination, { totalItems: this.itemsLength }))
+    this.updatePagination(Object.assign({}, this.defaultPagination, this.pagination))
   },
 
   render (h) {
