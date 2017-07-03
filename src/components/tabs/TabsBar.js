@@ -41,17 +41,24 @@ export default {
     rightIconVisible () {
       if (!this.isScrollable() || !this.isOverflowing) return
 
-      const remaining = this.$refs.container.scrollWidth - (this.scrollOffset + this.$refs.container.clientWidth)
-      return remaining > (this.$refs.container.children[this.itemOffset].clientWidth * 0.25)
+      // Check one scroll ahead to know the width of right-most item
+      const item = this.newOffsetRight(this.scrollOffset, this.itemOffset)
+      const lastItemWidth = item && this.$refs.container.children[item.index].clientWidth || 0
+
+      return this.$refs.container.scrollWidth - (this.scrollOffset + this.$refs.container.clientWidth) > lastItemWidth * 0.30
     }
   },
 
   methods: {
     scrollLeft () {
-      this.scrollOffset = this.newOffsetLeft()
+      var { offset, index } = this.newOffsetLeft(this.scrollOffset, this.itemOffset)
+      this.scrollOffset = offset
+      this.itemOffset = index
     },
     scrollRight () {
-      this.scrollOffset = this.newOffsetRight()
+      var { offset, index } = this.newOffsetRight(this.scrollOffset, this.itemOffset)
+      this.scrollOffset = offset
+      this.itemOffset = index
     },
     resize () {
       clearTimeout(this.resizeDebounce)
@@ -60,38 +67,35 @@ export default {
         this.isOverflowing = this.$refs.container.clientWidth < this.$refs.container.scrollWidth
       }, 50)
     },
-    newOffsetLeft () {
+    newOffsetLeft (currentOffset, currentIndex) {
       const items = this.$refs.container.children
       let offset = 0
 
-      for (let i = this.itemOffset - 1; i >= 0; i--) {
-        if (!items[i].classList.contains('tabs__slider')) {
-          if (offset + items[i].clientWidth >= this.$refs.container.clientWidth) {
-            this.itemOffset = i
-            return this.scrollOffset - offset
+      for (let index = currentIndex - 1; index >= 0; index--) {
+        if (!items[index].classList.contains('tabs__slider')) {
+          if (offset + items[index].clientWidth >= this.$refs.container.clientWidth) {
+            return { offset: currentOffset - offset, index: index + 1 }
           }
-          offset += items[i].clientWidth
+          offset += items[index].clientWidth
         }
       }
 
-      this.itemOffset = 0
-      return 0
+      return { offset: 0, index: 0 }
     },
-    newOffsetRight () {
+    newOffsetRight (currentOffset, currentIndex) {
       const items = this.$refs.container.children
-      let offset = this.scrollOffset
+      let offset = currentOffset
 
-      for (let i = this.itemOffset; i < items.length; i++) {
-        if (!items[i].classList.contains('tabs__slider')) {
-          if (offset + items[i].clientWidth > this.scrollOffset + this.$refs.container.clientWidth) {
-            this.itemOffset = i
-            return offset
+      for (let index = currentIndex; index < items.length; index++) {
+        if (!items[index].classList.contains('tabs__slider')) {
+          if (offset + items[index].clientWidth > currentOffset + this.$refs.container.clientWidth) {
+            return { offset, index }
           }
-          offset += items[i].clientWidth
+          offset += items[index].clientWidth
         }
       }
 
-      return 0
+      return null
     }
   },
 
