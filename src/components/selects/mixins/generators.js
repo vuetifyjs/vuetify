@@ -82,14 +82,20 @@ export default {
       }, `${this.getText(item)}${comma ? ', ' : ''}`)
     },
     genList () {
+      const children = this.filteredItems.map(o => {
+        if (o.header) return this.genHeader(o)
+        if (o.divider) return this.genDivider(o)
+        else return this.genTile(o)
+      })
+
+      if (!children.length) {
+        children.push(this.genTile(this.noDataText))
+      }
+
       return this.$createElement('v-card', [
         this.$createElement('v-list', {
           ref: 'list'
-        }, this.filteredItems.map(o => {
-          if (o.header) return this.genHeader(o)
-          if (o.divider) return this.genDivider(o)
-          else return this.genTile(o)
-        }))
+        }, children)
       ])
     },
     genHeader (item) {

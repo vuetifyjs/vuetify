@@ -2,12 +2,13 @@ import Head from './mixins/head'
 import Body from './mixins/body'
 import Foot from './mixins/foot'
 import Progress from './mixins/progress'
+import Filterable from '~mixins/filterable'
 import { getObjectValueByPath } from '~util/helpers'
 
 export default {
   name: 'datatable',
 
-  mixins: [Head, Body, Foot, Progress],
+  mixins: [Head, Body, Filterable, Foot, Progress],
 
   data () {
     return {
@@ -32,10 +33,6 @@ export default {
       default: 'text'
     },
     hideActions: Boolean,
-    noDataText: {
-      type: String,
-      default: 'No data available in table'
-    },
     noResultsText: {
       type: String,
       default: 'No matching records found'

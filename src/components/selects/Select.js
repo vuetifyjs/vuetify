@@ -1,11 +1,12 @@
-import Input from '~mixins/input'
-import Generators from './mixins/generators'
 import Autocomplete from './mixins/autocomplete'
+import Filterable from '~mixins/filterable'
+import Generators from './mixins/generators'
+import Input from '~mixins/input'
 
 export default {
   name: 'select',
 
-  mixins: [Autocomplete, Input, Generators],
+  mixins: [Autocomplete, Input, Filterable, Generators],
 
   data () {
     return {
