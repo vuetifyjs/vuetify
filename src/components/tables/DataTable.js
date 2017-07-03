@@ -124,11 +124,14 @@ export default {
     computedPagination () {
       return this.pagination || this.defaultPagination
     },
+    hasSelectAll () {
+      return this.selectAll !== undefined && this.selectAll !== false
+    },
     itemsLength () {
       return this.totalItems || this.search && this.searchLength || this.items.length
     },
     indeterminate () {
-      return this.selectAll !== false && this.someItems && !this.everyItem
+      return this.hasSelectAll && this.someItems && !this.everyItem
     },
     everyItem () {
       return this.filteredItems.length && this.filteredItems.every(i => this.isSelected(i))

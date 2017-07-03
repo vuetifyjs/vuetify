@@ -4,7 +4,11 @@ export default {
       let children = []
 
       if (this.$scopedSlots.headers) {
-        const row = this.$scopedSlots.headers({ headers: this.headers })
+        const row = this.$scopedSlots.headers({
+          headers: this.headers,
+          indeterminate: this.indeterminate,
+          all: this.all
+        })
 
         children = row.length && row[0].tag === 'tr' ? row : this.genTR(row)
       } else {
@@ -13,12 +17,7 @@ export default {
           props: {
             dark: this.dark,
             light: this.light,
-            primary: this.selectAll === 'primary' || this.selectAll === true,
-            secondary: this.selectAll === 'secondary',
-            success: this.selectAll === 'success',
-            info: this.selectAll === 'info',
-            warning: this.selectAll === 'warning',
-            error: this.selectAll === 'error',
+            color: this.hasSelectAll ? this.selectAll : '',
             hideDetails: true,
             inputValue: this.all,
             indeterminate: this.indeterminate
@@ -26,7 +25,7 @@ export default {
           on: { change: this.toggle }
         })
 
-        this.selectAll && row.unshift(this.$createElement('th', [checkbox]))
+        this.hasSelectAll && row.unshift(this.$createElement('th', [checkbox]))
 
         children = this.genTR(row)
       }
