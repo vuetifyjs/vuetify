@@ -79,7 +79,7 @@ export default {
       const maxWidth = Math.max(
         this.dimensions.content.width,
         this.calculatedMinWidth,
-        parseInt(this.maxWidth)
+        parseInt(this.maxWidth) || 0
       )
       const totalWidth = left + maxWidth
       const availableWidth = totalWidth - this.window.innerWidth
