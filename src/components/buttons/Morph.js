@@ -1,18 +1,16 @@
-import BezierEasing from 'bezier-easing'
-import Toggleable from '../../mixins/toggleable'
-import Fab from './mixins/fab'
+import BezierEasing from '~util/bezier-easing'
+import Positionable from '~mixins/positionable'
+import Toggleable from '~mixins/toggleable'
 import Animations from './mixins/animations'
 
 // const easeInOutCubic = BezierEasing(0.645, 0.045, 0.355, 1)
 const easeInCubic = BezierEasing(0.55, 0.055, 0.675, 0.19)
 const easeOutCubic = BezierEasing(0.215, 0.61, 0.355, 1)
-const easeInQuart = BezierEasing(0.895, 0.03, 0.685, 0.22)
-const easeOutQuart = BezierEasing(0.165, 0.84, 0.44, 1)
 
 export default {
   name: 'morph',
 
-  mixins: [Fab, Toggleable, Animations],
+  mixins: [Positionable, Toggleable, Animations],
 
   data () {
     return {

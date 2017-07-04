@@ -1,9 +1,9 @@
-import BezierEasing from 'bezier-easing'
+import BezierEasing from '~util/bezier-easing'
 
 const easeInCubic = BezierEasing(0.55, 0.055, 0.675, 0.19)
 const easeOutCubic = BezierEasing(0.215, 0.61, 0.355, 1)
-// const easeInQuart = BezierEasing(0.895, 0.03, 0.685, 0.22)
-// const easeOutQuart = BezierEasing(0.165, 0.84, 0.44, 1)
+const easeInQuart = BezierEasing(0.895, 0.03, 0.685, 0.22)
+const easeOutQuart = BezierEasing(0.165, 0.84, 0.44, 1)
 const easeInQuad = BezierEasing(0.55, 0.085, 0.68, 0.53)
 const easeOutQuad = BezierEasing(0.25, 0.46, 0.45, 0.94)
 
