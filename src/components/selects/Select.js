@@ -150,6 +150,7 @@ export default {
     blur () {
       this.$nextTick(() => {
         this.focused = false
+        this.searchValue = null
         this.$el.blur()
       })
     },
@@ -167,7 +168,7 @@ export default {
       }
     },
     genLabel () {
-      if (this.editable && this.focused) return null
+      if (this.searchValue) return null
 
       const data = {}
 
