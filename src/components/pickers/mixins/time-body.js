@@ -164,6 +164,9 @@ export default {
 
       if (this.selectingHour && this.is24hr) {
         value = this.euclidean(center, coords) / this.radius < 0.65 ? value + 12 : value
+
+        // Necessary to fix edge case when selecting left part of 0 and 12
+        value = this.angle(center, coords) >= 345 ? (value + 12) % 24 : value
       }
 
       if (this.isAllowed(selecting, value)) {
