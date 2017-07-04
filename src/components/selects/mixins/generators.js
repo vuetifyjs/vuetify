@@ -24,20 +24,18 @@ export default {
       let input
 
       if (this.autocomplete || this.editable) {
-        input = [this.$createElement('input', {
+        input = this.$createElement('input', {
           'class': 'input-group--select__autocomplete',
           domProps: { value: this.searchValue },
           on: { input: e => (this.searchValue = e.target.value) },
           ref: 'input',
           key: 'input'
-        })]
+        })
       }
 
       const selections = this.isDirty && (!this.editable || this.editable && !this.focused) ? this.genSelections() : []
-      selections.push(input)
-      const group = this.$createElement('transition-group', {
-        props: { name: 'fade-transition' }
-      }, selections)
+      input && selections.push(input)
+      const group = this.$createElement('div', selections)
 
       return this.$createElement('div', {
         'class': 'input-group__selections',
