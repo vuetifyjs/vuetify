@@ -37,7 +37,7 @@ export default {
       ])
     },
     genPagination () {
-      let pagination = '&mdash;'
+      let pagination = '–'
 
       if (this.itemsLength) {
         const stop = this.itemsLength < this.pageStop || this.pageStop < 0
@@ -46,8 +46,9 @@ export default {
 
         pagination = this.$scopedSlots.pageText
           ? this.$scopedSlots.pageText({
-            pageStart: this.pageStart,
-            pageStop: this.itemsLength
+            pageStart: this.pageStart + 1,
+            pageStop: stop,
+            itemsLength: this.itemsLength
           })
           : `${this.pageStart + 1}-${stop} of ${this.itemsLength}`
       }
