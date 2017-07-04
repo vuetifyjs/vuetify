@@ -97,7 +97,7 @@ export default {
       return this.segmented || this.overflow || this.editable
     },
     selectedItems () {
-      if (this.inputValue === null) return []
+      if (this.inputValue === null || typeof this.inputValue === 'undefined') return []
 
       return this.items.filter(i => {
         if (!this.multiple) {
@@ -117,7 +117,7 @@ export default {
     value (val) {
       this.inputValue = val
       this.validate()
-      this.autocomplete && this.$nextTick(this.$refs.menu.updateDimensions)
+      if (this.autocomplete || this.editable) this.$nextTick(this.$refs.menu.updateDimensions)
     },
     isActive (val) {
       this.isBooted = true
@@ -155,9 +155,25 @@ export default {
     },
     focus () {
       this.focused = true
-      this.autocomplete &&
-        this.$refs.input &&
+      this.$refs.input &&
+        (this.autocomplete || this.editable) &&
         this.$refs.input.focus()
+
+      if (this.editable &&
+          this.inputValue !== null &&
+          typeof this.inputValue !== 'undefined'
+        ) {
+        this.$nextTick(() => (this.$refs.input.value = this.getValue(this.inputValue)))
+      }
+    },
+    genLabel () {
+      if (this.editable && this.focused) return null
+
+      const data = {}
+
+      if (this.id) data.attrs = { for: this.id }
+
+      return this.$createElement('label', data, this.label)
     },
     getText (item) {
       return item === Object(item) ? item[this.itemText] : item

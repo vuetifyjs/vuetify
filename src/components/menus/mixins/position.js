@@ -98,9 +98,9 @@ export default {
       const totalHeight = top + this.dimensions.content.height
 
       if (this.top && top < 0) top = 12
-      else if ((!this.top || this.bottom) && window.innerHeight < totalHeight) {
+      else if ((!this.top || this.bottom) && this.window.innerHeight < totalHeight) {
         top = (
-          window.innerHeight -
+          this.window.innerHeight -
           this.dimensions.content.height -
           12
         )

@@ -23,7 +23,7 @@ export default {
     genSelectionsAndSearch () {
       let input
 
-      if (this.autocomplete) {
+      if (this.autocomplete || this.editable) {
         input = [this.$createElement('input', {
           'class': 'input-group--select__autocomplete',
           domProps: { value: this.searchValue },
@@ -33,17 +33,17 @@ export default {
         })]
       }
 
+      const selections = this.isDirty && (!this.editable || this.editable && !this.focused) ? this.genSelections() : []
+      selections.push(input)
       const group = this.$createElement('transition-group', {
-        props: {
-          name: 'fade-transition'
-        }
-      }, this.isDirty ? this.genSelections() : [])
+        props: { name: 'fade-transition' }
+      }, selections)
 
       return this.$createElement('div', {
         'class': 'input-group__selections',
         style: { 'overflow': 'hidden' },
         ref: 'activator'
-      }, [group, input])
+      }, [group])
     },
     genSelections () {
       const children = []
@@ -76,6 +76,9 @@ export default {
       }, this.getText(item))
     },
     genCommaSelection (item, comma) {
+      if (!item) {
+        console.log(this.selectedItems)
+      }
       return this.$createElement('div', {
         'class': 'input-group__selections__comma',
         key: item
