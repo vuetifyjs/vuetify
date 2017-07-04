@@ -21,10 +21,6 @@
     <img width="300px" src="https://vuetifyjs.com/static/doc-images/browser-stack.svg">
   </a>
   <br><br>
-  <a href="https://www.cloudflare.com" target="_blank">
-    <img height="60px" src="https://vuetifyjs.com/static/doc-images/cloudflare.svg">
-  </a>
-  <br><br>
 </p>
 <p align="center">
   <strong>Looking for Vue.js jobs? Check out <a href="https://vuejobs.com/?ref=vuetify" target="_blank">vuejobs.com</a></strong>
