@@ -1,6 +1,7 @@
 import Picker from '~mixins/picker'
 import TimeTitle from './mixins/time-title'
 import TimeBody from './mixins/time-body'
+import { createRange } from '~util/helpers'
 
 export default {
   name: 'time-picker',
@@ -15,8 +16,8 @@ export default {
       period: 'am',
       selectingHour: true,
       ranges: {
-        hours: [...Array.from({ length: 24 }, (v, k) => k)],
-        minutes: [...Array.from({ length: 60 }, (v, k) => k)]
+        hours: createRange(24),
+        minutes: createRange(60)
       }
     }
   },
@@ -44,8 +45,7 @@ export default {
       return this.format !== 'ampm'
     },
     divider () {
-      if (!this.selectingHour) return 60
-      return this.is24hr ? 24 : 12
+      return this.selectingHour ? 12 : 60
     },
     degrees () {
       return this.degreesPerUnit * Math.PI / 180

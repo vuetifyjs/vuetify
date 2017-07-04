@@ -53,7 +53,7 @@ export default {
       return [this.$createElement('div', {
         'class': `picker--time__clock-hand ${type}`,
         style: {
-          transform: `rotate(${this.clockHand}deg)`
+          transform: `rotate(${this.clockHand}deg) ${this.selectingHour && this.is24hr && this.hour >= 12 ? 'scaleY(0.6)' : ''}`
         }
       })]
     },
@@ -107,9 +107,11 @@ export default {
       return { transform: `translate(${x}px, ${y}px)` }
     },
     getPosition (i) {
+      const radiusPercentage = this.selectingHour && this.is24hr && i >= 12 ? 0.5 : 0.8
+      i = this.selectingHour && this.is24hr ? i % 12 : i
       return {
-        x: Math.round(Math.sin(i * this.degrees) * this.radius * 0.8),
-        y: Math.round(-Math.cos(i * this.degrees) * this.radius * 0.8)
+        x: Math.round(Math.sin(i * this.degrees) * this.radius * radiusPercentage),
+        y: Math.round(-Math.cos(i * this.degrees) * this.radius * radiusPercentage)
       }
     },
     changeHour (time) {
@@ -158,12 +160,25 @@ export default {
       }
 
       const selecting = this.selectingHour ? 'hour' : 'minute'
-      const value = Math.round(this.angle(center, coords) / this.degreesPerUnit)
+      let value = Math.round(this.angle(center, coords) / this.degreesPerUnit)
+
+      if (this.selectingHour && this.is24hr) {
+        value = this.euclidean(center, coords) / this.radius < 0.65 ? value + 12 : value
+
+        // Necessary to fix edge case when selecting left part of 0 and 12
+        value = this.angle(center, coords) >= 345 ? (value + 12) % 24 : value
+      }
 
       if (this.isAllowed(selecting, value)) {
         this[selecting] = value
         this.hasChanged = true
       }
+    },
+    euclidean (p0, p1) {
+      const dx = Math.abs(p1.x - p0.x)
+      const dy = Math.abs(p1.y - p0.y)
+
+      return Math.sqrt(dx * dx + dy * dy)
     },
     angle (center, p1) {
       var p0 = {
@@ -172,6 +187,7 @@ export default {
           Math.abs(p1.x - center.x) * Math.abs(p1.x - center.x) +
           Math.abs(p1.y - center.y) * Math.abs(p1.y - center.y))
       }
+
       return Math.abs((2 * Math.atan2(p1.y - p0.y, p1.x - p0.x)) * 180 / Math.PI)
     }
   }
