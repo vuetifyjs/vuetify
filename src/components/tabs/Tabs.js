@@ -1,10 +1,17 @@
-import Bootable from '../../mixins/bootable'
-import Themeable from '../../mixins/themeable'
+import Themeable from '~mixins/themeable'
 
 export default {
   name: 'tabs',
 
-  mixins: [Bootable, Themeable],
+  mixins: [Themeable],
+
+  provide () {
+    return {
+      slider: this.slider,
+      tabClick: this.tabClick,
+      isScrollable: this.isScrollable
+    }
+  },
 
   data () {
     return {
@@ -15,20 +22,25 @@ export default {
       target: null,
       resizeDebounce: {},
       tabsSlider: null,
-      targetEl: null
+      targetEl: null,
+      tabsContainer: null
     }
   },
 
   props: {
     centered: Boolean,
+    fixed: Boolean,
     grow: Boolean,
     icons: Boolean,
     mobileBreakPoint: {
       type: [Number, String],
       default: 1024
     },
-    scrollBars: Boolean,
-    value: String
+    value: String,
+    scrollable: {
+      type: Boolean,
+      default: true
+    }
   },
 
   computed: {
@@ -36,11 +48,13 @@ export default {
       return {
         'tabs': true,
         'tabs--centered': this.centered,
+        'tabs--fixed': this.fixed,
         'tabs--grow': this.grow,
         'tabs--icons': this.icons,
-        'tabs--scroll-bars': this.scrollBars,
-        'tabs--dark': !this.light && this.dark,
-        'tabs--light': this.light || !this.dark
+        'tabs--mobile': this.isMobile,
+        'tabs--scroll-bars': this.scrollable,
+        'theme--dark': this.dark,
+        'theme--light': this.light
       }
     }
   },
@@ -50,17 +64,7 @@ export default {
       this.tabClick(this.value)
     },
     activeIndex () {
-      if (this.isBooted) this.overflow = true
-
-      const activators = this.$slots.activators
-
-      if (!activators || !activators.length || !activators[0].componentInstance.$children) return
-
-      activators[0].componentInstance.$children
-        .filter(i => i.$options._componentTag === 'v-tabs-item')
-        .forEach(i => i.toggle(this.target))
-
-      this.$refs.content && this.$refs.content.$children.forEach(i => i.toggle(this.target, this.reverse, this.isBooted))
+      this.updateTabs()
       this.$emit('input', this.target)
       this.isBooted = true
     }
@@ -68,11 +72,12 @@ export default {
 
   mounted () {
     this.$vuetify.load(() => {
-      window.addEventListener('resize', this.resize, false)
+      window.addEventListener('resize', this.resize, { passive: true })
+      this.resize()
 
       const activators = this.$slots.activators
 
-      if (!activators || !activators.length || !activators[0].componentInstance.$children) return
+      if (!activators || !activators.length || !activators[0].componentInstance) return
 
       const bar = activators[0].componentInstance.$children
       // // This is a workaround to detect if link is active
@@ -88,21 +93,26 @@ export default {
   },
 
   beforeDestroy () {
-    window.removeEventListener('resize', this.resize, false)
+    window.removeEventListener('resize', this.resize, { passive: true })
   },
 
   methods: {
+    isScrollable () {
+      return this.scrollable
+    },
     resize () {
       clearTimeout(this.resizeDebounce)
 
       this.resizeDebounce = setTimeout(() => {
         this.isMobile = window.innerWidth < this.mobileBreakPoint
-      }, 0)
+        this.slider()
+      }, 50)
     },
     slider (el) {
       this.tabsSlider = this.tabsSlider || this.$el.querySelector('.tabs__slider')
+      this.tabsContainer = this.tabsContainer || this.$el.querySelector('.tabs__container')
 
-      if (!this.tabsSlider) return
+      if (!this.tabsSlider || !this.tabsContainer) return
 
       this.targetEl = el || this.targetEl
 
@@ -112,23 +122,50 @@ export default {
       // processing slider for
       // dynamic tabs
       this.$nextTick(() => {
-        this.tabsSlider.style.width = `${this.targetEl.scrollWidth}px`
+        // #684 Calculate width as %
+        const width = this.targetEl.scrollWidth / this.tabsContainer.clientWidth * 100
+
+        this.tabsSlider.style.width = `${width}%`
         this.tabsSlider.style.left = `${this.targetEl.offsetLeft}px`
       })
     },
     tabClick (target) {
+      const setActiveIndex = index => {
+        if (this.activeIndex === index) {
+          // #762 update tabs display
+          // In case tabs count got changed but activeIndex didn't
+          this.updateTabs()
+        } else {
+          this.activeIndex = index
+        }
+      }
+
       this.target = target
 
       if (!this.$refs.content) {
-        this.activeIndex = target
+        setActiveIndex(target)
         return
       }
 
       this.$nextTick(() => {
         const nextIndex = this.$refs.content.$children.findIndex(i => i.id === this.target)
         this.reverse = nextIndex < this.activeIndex
-        this.activeIndex = nextIndex
+        setActiveIndex(nextIndex)
       })
+    },
+    updateTabs () {
+      const activators = this.$slots.activators
+
+      if (!activators ||
+        !activators.length ||
+        (activators.length &&
+          !activators[0].componentInstance)) return
+
+      activators[0].componentInstance.$children
+        .filter(i => i.$options._componentTag === 'v-tabs-item')
+        .forEach(i => i.toggle(this.target))
+
+      this.$refs.content && this.$refs.content.$children.forEach(i => i.toggle(this.target, this.reverse, this.isBooted))
     }
   },
 

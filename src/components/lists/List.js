@@ -1,5 +1,16 @@
+import Themeable from '~mixins/themeable'
+
 export default {
   name: 'list',
+
+  provide () {
+    return {
+      listClick: this.listClick,
+      listClose: this.listClose
+    }
+  },
+
+  mixins: [Themeable],
 
   data () {
     return {
@@ -22,7 +33,9 @@ export default {
         'list--two-line': this.twoLine,
         'list--dense': this.dense,
         'list--three-line': this.threeLine,
-        'list--subheader': this.subheader
+        'list--subheader': this.subheader,
+        'theme--dark dark--bg': this.dark,
+        'theme--light light--bg': this.light
       }
     }
   },

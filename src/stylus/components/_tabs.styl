@@ -3,67 +3,81 @@
   position: relative
   width: 100%
 
-  > .card
-    border-radius: 0
-
   &--grow
-    .tabs__container
-      > li
-        flex-grow: 1
+    .tabs__li
+      flex: 1
+
+  &--fixed
+    .tabs__li
+      min-width: 160px
+      max-width: 264px
+      flex: 0 1 160px
+
+      @media $display-breakpoints.xs-only
+        min-width: 72px
 
   &--centered
     .tabs__container
-      > li:first-of-type
-        margin-left: auto
-      > li:last-of-type
-        margin-right: auto
+      justify-content: center
 
   &--icons
     .tabs__bar
-      height: 90px
+      height: 72px
 
-  &--scroll-bars
-    .tabs__bar--mobile
-      padding: 0 35px
+    .tabs__item
+      flex-direction: column
 
+  &.tabs--mobile
+    .tabs__bar
       .icon--left, .icon--right
         display: flex
 
-      .tabs__container
-        width: calc(100% - 70px)
+      .icon--left
+        left: 0
 
+      .icon--right
+        right: 0
+
+      .tabs__wrapper
+        &--scrollable.tabs__wrapper--overflow
+          overflow: hidden !important
+          margin: 0 32px
+
+  &:not(.tabs--grow):not(.tabs--mobile)
+    .tabs__item
+      padding: 0 24px
+
+  &:not(.tabs--centered):not(.tabs--grow):not(.tabs--mobile)
+    .tabs__wrapper
+      &--scrollable
+        margin: 0 60px
+        overflow: hidden !important
 
   &__bar
     background-color: $theme.primary
     width: 100%
     position: relative
-    height: 60px
+    height: 48px
+
+    @media $display-breakpoints.sm-and-down
+      padding-left: 0
 
     .icon--left, .icon--right
       position: absolute
       top: 0
-      width: 35px
-      display: none
+      width: 32px
       align-items: center
       height: 100%
       cursor: pointer
       user-select: none
 
-      ^[0]--dark &
-        color: $color-dark
-
-      ^[0]--light &
-        color: $color-light
-
     .icon--left
-      left: 0
+      left: 28px
 
     .icon--right
-      right: 0
+      right: 28px
 
   &__container
-    overflow-x: auto
-    overflow-y: hidden
     display: flex
     height: 100%
     width: 100%
@@ -72,6 +86,8 @@
     top: 0
     align-items: center
     list-style: none
+    will-change: transform
+    transition: transform 0.6s cubic-bezier(0.86, 0, 0.07, 1)
 
     > li:not(.tabs__slider)
       height: 100%
@@ -81,45 +97,32 @@
       left: 0
       top: 0
       height: 100%
-      width: 35px
+      width: 32px
       display: flex
       align-items: center
 
+  &__wrapper
+    position: relative
+    overflow-x: auto
+    height: inherit
+
   &__item
+    align-items: center
     display: flex
     flex-shrink: 0
-    flex-direction: column
-    align-items: center
     justify-content: center
-    min-width: 0
     height: 100%
-    padding: 1rem
+    padding: 0 12px
     position: relative
     text-align: center
     text-decoration: none
     text-transform: uppercase
     text-overflow: ellipsis
-    transition: $primary-transition
     white-space: nowrap
-
-    ^[0]--dark ^[-2..-1]
-      color: rgba($material-light.fg-color, $material-light.inactive-icon-percent)
-
-      &--active
-        color: rgba($material-light.fg-color, $material-light.active-icon-percent)
-
-    ^[0]--light ^[-2..-1]
-      color: rgba($material-dark.fg-color, $material-dark.inactive-icon-percent)
-
-      &--active
-        color: rgba($material-dark.fg-color, $material-dark.active-icon-percent)
 
     .icon
       color: inherit
-      flex: 1
-      flex-basis: 100%
-      font-size: 32px
-      margin: .5rem 0
+      margin: 0 0 5px
 
     &--disabled
       pointer-events: none
@@ -129,14 +132,18 @@
     border-width: 0 1px 1px 1px
     border-style: solid
     border-color: rgba($material-theme.fg-color, .1)
+    overflow: hidden
 
   &__content
     transition: $primary-transition
     width: 100%
 
+    .card
+      border-radius: 0 0 2px 2px
+
   &__slider
     position: absolute
     bottom: 0
-    height: 4px
+    height: 2px
     background: $theme.accent
     transition: $primary-transition

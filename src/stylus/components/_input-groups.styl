@@ -7,6 +7,7 @@
   position: relative
   width: 100%
   outline: none
+  transition: box-shadow $primary-transition
 
 
 /** Label */
@@ -27,6 +28,15 @@
     min-width: 0
     min-height: $input-height
 
+/** Icons */
+.input-group
+  &__icon-cb
+    cursor: pointer
+    
+.input-group
+  &.input-group--focused
+    .input-group__input .icon
+      color: $theme.primary
 
 /** States */
 .input-group
@@ -36,52 +46,41 @@
       background-position: bottom
       background-size: 3px 1px
       background-repeat: repeat-x
+          
+  // Focused
+  &.input-group--text-field
+    &:not(.input-group--single-line):not(.input-group--error)
+      &.input-group--focused,
+      &:focus
+        label
+          color: $theme.primary
 
-    &.input-group--light
-      .input-group__details:before
-        background-image: linear-gradient(to right, rgba(255, 255, 255, .38) 0, rgba(255, 255, 255, .38) 33%, transparent 0)
+    &.input-group--focused,
+    &:focus
+      &:not(.input-group--disabled)
+        .input-group__details
+          &:after
+            transform: scaleX(1)
 
-    &.input-group--dark
-      .input-group__details:before
-        background-image: linear-gradient(to right, rgba(0, 0, 0, .38) 0, rgba(0, 0, 0, .38) 33%, transparent 0)
+  // Required
+  &--required
+    label:after
+      content: '*'
 
-  &--focused, &:focus
-    &:not(.input-group--disabled)
-      .input-group__details
-        &:after
-          width: 100%
+    &.input-group--focused
+      label:after
+        color: $theme.error
 
-  &--active
-    //
+  // Error
+  &.input-group--error
+    label,
+    .input-group__input .icon
+      color: $theme.error
 
-  &--error
-    .input-group__details:after
-      background-color: $theme.error
-
-  &--light
-    .input-group__hint
-      color: rgba($material-dark.fg-color, .54)
-
-    .input-group__details:before
-      background-color: $material-twelve-percent-light
-
-    .icon
-      color: rgba($material-dark.fg-color, .6)
-
-  &--dark
-    .input-group__hint
-      color: rgba($material-light.fg-color, .7)
-
-    .input-group__details:before
-      background-color: $material-twelve-percent-dark
-
-    .icon
-      color: rgba($material-light.fg-color, .6)
-
-/** Icons */
-.input-group
-  &__icon-cb
-    cursor: pointer
+    .input-group__details
+      &:after,
+      &:before
+        background-color: $theme.error
 
 /** Details */
 .input-group
@@ -95,6 +94,7 @@
     flex: 1 0 100%
     font-size: 12px
     min-height: 22px
+    overflow: hidden
     position: relative
     width: 100%
 
@@ -105,10 +105,12 @@
 
     &:after
       background-color: $theme.primary
-      top: -1px
+      top: 0
       height: 2px
       transition: .3s $transition.fast-out-slow-in
-      width: 0%
+      transform: scaleX(0)
+      transform-origin: center center 0
+      width: 100%
       z-index: 1
 
     &:before
@@ -119,7 +121,7 @@
 
   &--hide-details
     .input-group__details
-      min-height: 0
+      min-height: 2px
       padding: 0
 
 /** Hint */
@@ -134,3 +136,10 @@
     flex: 1 0
     transition: .3s $transition.fast-in-fast-out
     color: $theme.error
+    
+
+/** Types */
+.input-group
+  &--overflow, &--segmented, &--editable
+    &.input-group--active
+      background-color: #fff

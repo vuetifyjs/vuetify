@@ -22,15 +22,18 @@
   &--overlap
     &:after
       top: -8px
-
+      right: -8px
+      
     &.badge--left
       &:after
         left: -8px
         right: initial
         
-    &:after
-      right: -8px
-      
+    &.badge--bottom
+      &:after
+        bottom: -8px
+        top: initial
+  
   &--icon
     &:after
       font-family: 'Material Icons'
@@ -38,3 +41,8 @@
   &--left
     &:after
       left: -($badge-width)
+
+  &--bottom
+    &:after
+      bottom: -($badge-height / 2)
+      top: initial;

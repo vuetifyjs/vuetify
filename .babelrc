@@ -1,0 +1,26 @@
+{
+  "env": {
+    "test": {
+      "presets": [
+        ["env", {
+          "targets": {
+            "node": "current"
+          }
+        }]
+      ]
+    },
+    "development": {
+      "presets": [
+        ["es2015",  {"modules": false}],
+        ["stage-2"]
+      ],
+      "plugins": ["add-filehash"]
+    },
+    "production": {
+      "presets": [
+        ["es2015",  {"modules": false}],
+        ["stage-2"]
+      ]
+    }
+  }
+}

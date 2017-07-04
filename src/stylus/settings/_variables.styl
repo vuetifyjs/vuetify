@@ -11,19 +11,6 @@ $color-pack := true
 $material-left-padding := 16px
 $material-right-padding := 16px
 
-$material-twelve-percent-light := rgba($material-dark.fg-color, $material-dark.divider-percent)
-$material-twelve-percent-dark := rgba($material-light.fg-color, $material-light.divider-percent)
-
-
-// Theme
-// ============================================================
-$body-bg-light := $material-light.bg-color
-$body-bg-dark := $material-dark.bg-color
-$color-light := rgba($material-dark.text-color, $material-dark.primary-text-percent)
-$color-dark := rgba($material-light.text-color, $material-light.primary-text-percent)
-$color-theme := rgba($material-theme.text-color, $material-theme.primary-text-percent)
-
-
 // Grid
 // ============================================================
 $grid-breakpoints := {
@@ -34,16 +21,22 @@ $grid-breakpoints := {
   xl: (1920px - 16px) // https://material.io/guidelines/layout/responsive-ui.html#responsive-ui-breakpoints
 }
 
-$container-max-widths := {
-  sm: $grid-breakpoints.sm * .9
-  md: $grid-breakpoints.md * .9
-  lg: $grid-breakpoints.lg * .9
-  xl: $grid-breakpoints.xl * .9
+$grid-gutter = 8px
+$grid-columns := 12
+$grid-gutters := {
+  xs: ($grid-gutter / 4)
+  sm: ($grid-gutter / 2)
+  md: $grid-gutter
+  lg: ($grid-gutter * 2)
+  xl: ($grid-gutter * 3)
 }
 
-$grid-gutter := 24px
-$grid-gutter-mobile := 16px
-$grid-columns := 12
+$container-max-widths := {
+  sm: $grid-breakpoints.sm
+  md: $grid-breakpoints.md
+  lg: $grid-breakpoints.lg
+  xl: $grid-breakpoints.xl
+}
 
 
 // Display
@@ -94,6 +87,14 @@ $spacers := {
   }
 }
 
+$font-weights := {
+  thin: 100,
+  light: 300,
+  regular: 400,
+  medium: 500,
+  bold: 700,
+  black: 900
+}
 
 // Headings
 // ============================================================
@@ -165,7 +166,7 @@ $button-background-color := #999999
 $button-height := 36px
 $button-font-size := 14px
 $button-font-weight := 500
-$button-margin := 6px
+$button-margin := 6px 8px
 $button-min-width := 88px
 $button-padding := 0 16px
 $button-text-transform := uppercase
@@ -235,6 +236,21 @@ $collapsible-transition-height := 0.23s
 $footer-height := 36px
 
 /** Lists */
+//  list fonts and weights */
+$list-tile-font-size := $headings.subheading.size //16px - the mdc scss uses subheading to configure like this
+$list-tile-font-weight := $headings.subheading.weight //400
+$list-tile-active-color := $theme.primary
+
+$list-action-text-font-size := 12px //this is for the stacked actions
+$list-action-text-font-color := $grey.base
+
+$list-sub-title-font-size := ($list-tile-font-size - 2px) //14px
+
+$subheader-height-font-size := ($list-tile-font-size - 2px) //14px
+$subheader-font-weight := $font-weights.medium //500
+
+
+//   list spacing*/
 $list-left-padding := 16px
 $list-right-padding := 16px
 $list-top-padding := 8px
@@ -242,40 +258,30 @@ $list-bottom-padding := 8px
 
 $list-item-right-margin := 56px
 $list-item-left-padding := 72px
-$list-item-dense-top-padding := 4px
-
-$list-item-font-size := 16px
-$list-item-dense-font-size := 13px
-$list-item-font-weight := 500
 
 $list-item-single-height := 48px
-$list-item-dense-single-height := 40px
-$list-item-avatar-single-height := 56px
-$list-item-dense-avatar-single-height := 48px
-
 $list-item-double-height := 72px
-$list-item-dense-double-height := 60px
-
 $list-item-triple-height := 88px
-$list-item-dense-triple-height := 76px
+$list-item-avatar-single-height := 56px
 
 $subheader-inset-margin := $list-item-right-margin
-$subheader-font-weight := 500
-$subheader-height-font-size := 14px
 
-$list-title-font-size := 16px
-$list-title-font-weight := 400
-$list-title-dense-font-weight := 400
+//   list dense overrides */
+$list-item-dense-font-size := ($list-tile-font-size - 3px) //13px
+$subheader-dense-font-size := $list-item-dense-font-size
+$list-item-dense-icon-font-size := 21px //weird rendering issue
 
-$list-sub-title-font-size := 14px
-$list-sub-title-font-weight := 400
+$list-item-dense-top-padding := $list-top-padding / 2
+$list-item-dense-single-height := $list-item-single-height - 8px //40px
+$list-item-dense-double-height := $list-item-double-height - 12px //60px
+$list-item-dense-triple-height := $list-item-triple-height - 12px //76px
 
-$list-content-font-size := 15px
+$list-item-dense-avatar-single-height := $list-item-single-height //48px the dense concept was to take avatars to a normal single item height
+$list-item-dense-avatar-height := 38px
 
-$list-group-tile-title-font-weight := 400
-$list-group-tile-title-active-font-weight := 400
+$list-dense-subheader-height := $list-item-dense-single-height
+$list-dense-subheader-group-height := $list-dense-subheader-height //the subheader under a group menu
 
-$list-action-text-font-size := 12px
 
 /** Pickers */
 $picker-width := 315px
@@ -284,7 +290,11 @@ $time-picker-number-font-size := 16px
 $time-picker-number-margin := 10px
 
 // Toolbar
-$toolbar-height := 56px
+$toolbar-height := 64px
+$toolbar-extension-height := 72px
+$toolbar-mobile-portrait-height := 56px
+$toolbar-mobile-landscape-height := 48px
+$toolbar-extended-height := 128px
 $toolbar-item-padding := 0 16px
 $toolbar-padding-y := 0
 $toolbar-padding-x := 16px
@@ -322,24 +332,33 @@ $selection-controls-dark-disabled-color := rgba($material-light.fg-color, .30)
 $selection-controls-dark-label-color := $material-light.text-color
 
 
-/* Sidebar */
-
+/* Navigation drawer */
 $navigation-drawer-height := 100vh
 $navigation-drawer-width := 300px
 $navigation-drawer-mini-variant-width := 80px
+$navigation-drawer-background-dark := $theme.secondary
+$navigation-drawer-background-light := $material-light.bg-color
 
 // Sidebar Item
+$navigation-drawer-item-font-size := 14px
+$navigation-drawer-item-font-weight := $font-weights.medium
+$navigation-drawer-item-active-color := $theme.primary
+
+// Sidebar Group
+$navigation-drawer-group-item-font-weight := $font-weights.regular
+
+/* none of these seem to be used yet
 $navigation-drawer-item-color := $material-dark.fg-color
 $navigation-drawer-item-height := 50px
 $navigation-drawer-item-active-color := $material-dark.fg-color
 $navigation-drawer-item-active-background-color := $theme.primary
 $navigation-drawer-item-hover-background-color := rgba($theme.primary, .4)
 
-// Sidebar Group
 $navigation-drawer-group-items-background-color := darken($theme.secondary, 15%)
 $navigation-drawer-group-header-active-navigation-drawer-items-border := 1px solid rgba($material-dark.fg-color, .1)
 $navigation-drawer-group-header-active-navigation-drawer-item-active-background-color := rgba($theme.primary, .4)
 
+*/
 
 /* Slider */
 $slider-light-off := rgba($material-dark.fg-color, .26)

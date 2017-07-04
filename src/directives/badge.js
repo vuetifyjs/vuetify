@@ -8,13 +8,22 @@ function directive (el, binding) {
     {
       icon: false,
       left: false,
-      overlap: false
+      bottom: false,
+      overlap: false,
+      visible: true
     }
   )
+
+  if (!config.visible || (binding.expression && !binding.value)) {
+    el.classList.remove('badge')
+
+    return
+  }
 
   if (config.overlap) el.classList.add('badge--overlap')
   if (config.icon) el.classList.add('badge--icon')
   if (config.left) el.classList.add('badge--left')
+  if (config.bottom) el.classList.add('badge--bottom')
 
   el.dataset.badge = config.value
   el.classList.add('badge')

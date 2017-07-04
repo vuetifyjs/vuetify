@@ -1,5 +1,3 @@
-import { closestParentTag } from '../../util/helpers'
-
 export default {
   name: 'tabs-content',
 
@@ -28,10 +26,6 @@ export default {
   computed: {
     computedTransition () {
       return this.reverse ? this.reverseTransition : this.transition
-    },
-
-    tabs () {
-      return closestParentTag.call(this, 'v-tabs')
     }
   },
 

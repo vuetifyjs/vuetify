@@ -13,13 +13,14 @@
     display: none
 
   .input-group__input
+    color: inherit
     width: 100%
     position: relative
 
     // Needed for safari
     .icon
       align-self: center
-      height: 24px
+      height: 30px
       margin: auto
 
 /** Label */
@@ -54,107 +55,3 @@
     opacity: 0
     transition: $ripple-animation-transition
     transform-origin: center center
-
-
-/** Switch */
-.input-group.input-group--selection-controls
-  z-index: 0
-
-  &.switch
-    .input-group--selection-controls__container
-      position: relative
-
-      &.primary--text
-      &.secondary--text
-      &.success--text
-      &.info--text
-      &.warning--text
-      &.error--text
-        .input-group--selection-controls__ripple--active:after
-          background: currentColor !important
-
-    .input-group--selection-controls__toggle
-      color: inherit
-      position: absolute
-      height: 14px
-      top: 50%
-      left: 0
-      width: 34px
-      border-radius: 8px
-      transform: translateY(-50%)
-
-    .input-group--selection-controls__ripple
-      transform: translate3d(-15px, -24px, 0)
-      transition: .3s $transition.fast-in-fast-out
-      z-index: 1
-
-      &:after
-        content: ''
-        position: absolute
-        display: inline-block
-        cursor: pointer
-        width: 20px
-        border-radius: 50%
-        top: 50%
-        left: 50%
-        transform: translate3d(-50%, -50%, 0)
-        height: 20px
-        elevation(1)
-        transition: all 100ms linear
-
-      &--active
-        transform: translate3d(2px, -24px, 0)
-
-    label
-      margin-left: 44px
-
-/** Radio */
-.input-group--selection-controls
-  &.input-group--tab-focused
-    .input-group--selection-controls__ripple
-      &:before
-        transform: translate3d(-50%, -50%, 0) scale(1)
-        opacity: $ripple-animation-visible-opacity
-
-/* Theme */
-.input-group--selection-controls
-  &.switch
-    &.input-group
-      &--light
-        selection-controls-switch-theme($selection-switch-light-color,
-          $selection-switch-light-background,
-          $selection-switch-light-label-color,
-          $selection-switch-light-enabled-color,
-          $selection-switch-light-disabled-color,
-          $selection-switch-light-disabled-background)
-      &--dark
-        selection-controls-switch-theme($selection-switch-dark-color,
-          $selection-switch-dark-background,
-          $selection-switch-dark-label-color,
-          $selection-switch-dark-enabled-color,
-          $selection-switch-dark-disabled-color,
-          $selection-switch-dark-disabled-background)
-
-  &.checkbox, &.radio
-    &.input-group
-      &--light
-        selection-controls-checkbox-theme($selection-controls-light-color,
-          $selection-controls-light-label-color,
-          $selection-controls-light-disabled-color,
-          $selection-controls-active-color)
-
-      &--dark
-        selection-controls-checkbox-theme($selection-controls-dark-color,
-          $selection-controls-dark-label-color,
-          $selection-controls-dark-disabled-color,
-          $selection-controls-active-color)
-
-      &.input-group--active
-        &.primary--text
-        &.secondary--text
-        &.success--text
-        &.info--text
-        &.warning--text
-        &.error--text
-          .icon, .input-group--selection-controls__ripple
-            color: currentColor !important

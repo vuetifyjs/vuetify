@@ -1,14 +1,17 @@
-import { addOnceEventListener } from '../util/helpers'
-
 export default {
   data () {
     return {
+      overlayOffset: 0,
       overlay: null
     }
   },
 
   props: {
     hideOverlay: Boolean
+  },
+
+  beforeDestroy () {
+    this.removeOverlay()
   },
 
   methods: {
@@ -27,34 +30,52 @@ export default {
 
       this.hideScroll()
 
-      const app = this.$el.closest('[data-app]')
-      app &&
-        app.appendChild(overlay) ||
-        document.body.appendChild(overlay)
+      if (this.absolute) {
+        // Required for IE11
+        this.$el.parentNode.insertBefore(overlay, this.$el.parentNode.firstChild)
+      } else {
+        document.querySelector('[data-app]').appendChild(overlay)
+      }
 
       setTimeout(() => {
         overlay.className += ' overlay--active'
         this.overlay = overlay
       }, 0)
+
+      return true
     },
     removeOverlay () {
-      if (!this.overlay) return
-
-      addOnceEventListener(this.overlay, 'transitionend', () => {
-        this.overlay && this.overlay.remove()
-        this.overlay = null
-        this.showScroll()
-      })
+      if (!this.overlay) {
+        return this.showScroll()
+      }
 
       this.overlay.className = this.overlay.className.replace('overlay--active', '')
+
+      requestAnimationFrame(() => {
+        // IE11 Fix
+        try {
+          this.overlay.parentNode.removeChild(this.overlay)
+          this.overlay = null
+          this.showScroll()
+        } catch (e) {}
+      })
     },
     hideScroll () {
-      document.documentElement.style.overflowY = 'hidden'
-      document.documentElement.style.paddingRight = '17px'
+      // Check documentElement first for IE11
+      // this.overlayOffset = document.documentElement &&
+      //   document.documentElement.scrollTop ||
+      //   document.body.scrollTop
+
+      // document.body.style.top = `-${this.overlayOffset}px`
+      // document.body.style.position = 'fixed'
+      document.documentElement.style.overflow = 'hidden'
     },
     showScroll () {
-      document.documentElement.style.overflowY = null
-      document.documentElement.style.paddingRight = null
+      document.documentElement.removeAttribute('style')
+
+      // if (!this.overlayOffset) return
+      // document.body.scrollTop = this.overlayOffset
+      // document.documentElement.scrollTop = this.overlayOffset
     }
   }
 }

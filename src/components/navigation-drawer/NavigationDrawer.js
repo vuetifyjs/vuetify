@@ -1,5 +1,5 @@
-import Overlayable from '../../mixins/overlayable'
-import Themeable from '../../mixins/themeable'
+import Overlayable from '~mixins/overlayable'
+import Themeable from '~mixins/themeable'
 
 export default {
   name: 'navigation-drawer',
@@ -22,7 +22,6 @@ export default {
     enableResizeWatcher: Boolean,
     height: String,
     floating: Boolean,
-    fullHeight: Boolean,
     miniVariant: Boolean,
     permanent: Boolean,
     persistent: Boolean,
@@ -42,17 +41,16 @@ export default {
         'navigation-drawer--is-booted': this.isBooted,
         'navigation-drawer--clipped': this.clipped,
         'navigation-drawer--close': !this.isActive,
-        'navigation-drawer--dark': this.dark,
         'navigation-drawer--floating': this.floating,
-        'navigation-drawer--full-height': this.fullHeight,
         'navigation-drawer--is-mobile': this.isMobile,
-        'navigation-drawer--light': this.light,
         'navigation-drawer--mini-variant': this.miniVariant,
         'navigation-drawer--open': this.isActive,
         'navigation-drawer--permanent': this.permanent,
         'navigation-drawer--persistent': this.persistent,
         'navigation-drawer--right': this.right,
-        'navigation-drawer--temporary': this.temporary
+        'navigation-drawer--temporary': this.temporary,
+        'theme--dark': this.dark,
+        'theme--light': this.light
       }
     },
     showOverlay () {
@@ -63,14 +61,15 @@ export default {
   watch: {
     isActive (val) {
       this.$emit('input', val)
-    },
-    showOverlay (val) {
-      val && this.genOverlay() || this.removeOverlay()
+      this.showOverlay && val && this.genOverlay() || this.removeOverlay()
     },
     '$route' () {
       if (!this.disableRouteWatcher) {
         this.isActive = !this.closeConditional()
       }
+    },
+    permanent (val) {
+      this.$emit('input', val)
     },
     value (val) {
       if (this.permanent) return

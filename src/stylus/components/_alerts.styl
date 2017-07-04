@@ -2,16 +2,17 @@
   border-radius: $alert-border-radius
   border-width: $alert-border-width
   border-style: solid
-  border-color: rgba(#000, .8)
-  color: $alert-color
+  border-color: $material-light.dividers !important
+  color: #fff
   display: flex
   font-size: $alert-font-size
-  text-align: left
+  margin: $alert-margin
   padding: $alert-padding
   position: relative
-  margin: $alert-margin
+  transition: $primary-transition
   
-  &__icon.icon, &__dismissible .icon
+  &__icon.icon,
+  &__dismissible .icon
     align-self: center
     color: $alert-icon-color
     font-size: $alert-icon-font-size
@@ -20,41 +21,21 @@
     margin-right: $alert-padding
     
   &__dismissible
-    margin-right: 0
-    margin-left: $alert-padding
-    transition: $primary-transition
     align-self: flex-start
+    margin-left: $alert-padding
+    margin-right: 0
     text-decoration: none
+    transition: $primary-transition
     
     &:hover
       color: lighten($alert-icon-color, 10%)
     
-  > div
-    display: flex
-    align-items: center
-    width: 100%
-  
-  &--primary
-    alert($theme.primary)
-
-  &--secondary
-    alert($theme.primary)
-
-  &--info
-    alert($theme.info)
-        
-  &--error
-    alert($theme.error)
-
-  &--success
-    alert($theme.success)
-    
-  &--warning
-    alert($theme.warning)
-    
   &--no-icon
     .alert__icon
       display: none
+      
+  > div
+    flex: 1
     
   @media screen and (max-width: $grid-breakpoints.sm)
     &__icon

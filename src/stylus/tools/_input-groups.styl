@@ -1,0 +1,50 @@
+input-group($material)
+  input, textarea
+    color: $material.text.primary
+
+    &:disabled
+      color: $material.text.disabled
+    
+  label
+    color: $material.text.secondary
+  
+  // This is specific for selects
+  &.input-group--dirty
+    .input-group__selections__comma
+      color: $material.text.primary
+  
+  &:not(.input-group--focused)
+    .input-group__input .icon
+      color: $material.text.secondary
+  
+  .input-group__counter
+    color: $material.text.secondary
+    
+  .input-group__details
+    color: $material.text.secondary
+    
+    &:before
+      background-color: $material.dividers
+
+  &.input-group
+    &--overflow, &--segmented, &--editable
+      .input-group__input
+        &:before
+          background-color: $material.dividers
+
+  &.input-group--disabled
+    input, textarea
+      color: $material.text.secondary
+    
+    .input-group__details:before
+      background-color: transparent
+      background-image: linear-gradient(
+        to right,
+        $material.text.disabled 0,
+        $material.text.disabled 33%,
+        transparent 0
+      )
+  
+  .input-group--text-field
+    &__prefix, &__suffix
+      color: $material.text.secondary

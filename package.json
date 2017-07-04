@@ -9,26 +9,32 @@
   "homepage": "http://vuetifyjs.com",
   "main": "dist/vuetify.js",
   "scripts": {
-    "dev": "cross-env TARGET=dev webpack --config build/config.js --progress --hide-modules",
+    "dev": "cross-env TARGET=dev webpack --config build/config.js --progress --hide-modules --watch",
     "build": "rimraf dist && cross-env NODE_ENV=production node build/build.js --progress --hide-modules",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
-    "test": "npm run unit && npm run e2e",
+    "test": "cross-env NODE_ENV=test ./node_modules/.bin/jest --no-cache",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "description": "Vue.js 2 Semantic Component Framework",
   "devDependencies": {
     "autoprefixer": "^6.6.0",
+    "avoriaz": "^2.3.0",
+    "babel": "^6.23.0",
+    "babel-core": "^6.24.1",
     "babel-eslint": "^7.1.1",
+    "babel-jest": "^20.0.3",
     "babel-loader": "^6.2.10",
-    "buble": "^0.15.1",
-    "buble-loader": "^0.4.0",
-    "chai": "^3.5.0",
+    "babel-plugin-add-filehash": "^6.9.4",
+    "babel-preset-env": "^1.5.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
     "chalk": "^1.1.3",
     "chromedriver": "^2.21.2",
     "cross-env": "^3.1.3",
     "cross-spawn": "^4.0.2",
     "css-loader": "^0.23.1",
+    "css-mqpacker": "^6.0.1",
     "eslint": "^3.7.1",
     "eslint-config-standard": "^6.1.0",
     "eslint-config-vue": "^2.0.2",
@@ -37,22 +43,18 @@
     "eslint-plugin-html": "^1.3.0",
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-pug": "^1.0.0",
-    "eslint-plugin-vue": "^1.0.0",
+    "eslint-plugin-vue": "^2.1.0",
     "eventsource-polyfill": "^0.9.6",
     "extract-text-webpack-plugin": "^2.0.0-beta.3",
     "function-bind": "^1.0.2",
-    "karma": "^1.3.0",
-    "karma-coverage": "^1.1.1",
-    "karma-mocha": "^1.2.0",
-    "karma-phantomjs-launcher": "^1.0.0",
-    "karma-sinon-chai": "^1.2.0",
-    "karma-sourcemap-loader": "^0.3.7",
-    "karma-spec-reporter": "0.0.26",
-    "karma-webpack": "^1.7.0",
+    "jest": "^20.0.4",
+    "jest-css-modules": "^1.1.0",
+    "jest-vue-preprocessor": "^0.2.0",
     "lolex": "^1.4.0",
-    "mocha": "^3.1.0",
     "nightwatch": "^0.9.8",
     "opn": "^4.0.2",
+    "optimize-css-assets-webpack-plugin": "^2.0.0",
+    "optimize-js-plugin": "^0.0.4",
     "ora": "^0.3.0",
     "phantomjs-prebuilt": "^2.1.3",
     "postcss-loader": "^1.2.1",
@@ -65,22 +67,39 @@
     "semver": "^5.3.0",
     "serialize-javascript": "^1.3.0",
     "shelljs": "^0.7.4",
-    "sinon": "^1.17.3",
-    "sinon-chai": "^2.8.0",
     "style-loader": "^0.13.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^2.1.1",
     "vue-loader": "^10.1.0",
+    "vue-server-renderer": "^2.3.3",
     "vue-template-compiler": "^2.3.3",
-    "webpack": "2.2.0-rc.2",
+    "webpack": "3.0.0",
+    "webpack-bundle-size-analyzer": "^2.7.0",
     "webpack-merge": "^0.17.0"
   },
   "dependencies": {
-    "vue": "^2.3.3",
-    "vue-server-renderer": "^2.3.3"
+    "vue": "^2.3.3"
   },
   "engines": {
     "node": ">= 4.0.0",
     "npm": ">= 3.0.0"
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/src",
+      "<rootDir>/test"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "vue"
+    ],
+    "moduleNameMapper": {
+      "src/(.*)": "<rootDir>/src/$1"
+    },
+    "transform": {
+      ".*\\.(vue)$": "<rootDir>/node_modules/jest-vue-preprocessor",
+      "\\.(styl)$": "<rootDir>/node_modules/jest-css-modules",
+      ".*\\.(vue|js)": "<rootDir>/node_modules/babel-jest"
+    }
   }
 }

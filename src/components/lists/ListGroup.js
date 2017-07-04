@@ -1,16 +1,16 @@
-import { closestParentTag } from '../../util/helpers'
-import Expand from '../../mixins/expand-transition'
-import Toggleable from '../../mixins/toggleable'
+import Expand from '~mixins/expand-transition'
+import Toggleable from '~mixins/toggleable'
 
 export default {
   name: 'list-group',
+
+  inject: ['listClick', 'listClose'],
 
   mixins: [Expand, Toggleable],
 
   data () {
     return {
-      isBooted: this.value,
-      height: 0
+      isBooted: this.value
     }
   },
 
@@ -27,14 +27,6 @@ export default {
         'list--group__header--active': this.isActive,
         'list--group__header--no-action': this.noAction
       }
-    },
-    list () {
-      return closestParentTag.call(this, 'v-list')
-    },
-    styles () {
-      return {
-        height: `${this.height}px`
-      }
     }
   },
 
@@ -43,7 +35,7 @@ export default {
       this.isBooted = true
 
       if (!this.isActive) {
-        this.list.listClose(this._uid)
+        this.listClose(this._uid)
       }
     },
     '$route' (to) {
@@ -51,7 +43,7 @@ export default {
 
       if (this.group) {
         if (isActive && this.isActive !== isActive) {
-          this.list.listClick(this._uid)
+          this.listClick(this._uid)
         }
         this.isActive = isActive
       }
@@ -64,16 +56,14 @@ export default {
     }
 
     if (this.isActive) {
-      this.list.listClick(this._uid)
+      this.listClick(this._uid)
     }
-
-    this.height = this.$refs.group.scrollHeight
   },
 
   methods: {
     click () {
       if (!this.$refs.item.querySelector('.list__tile--disabled')) {
-        this.list.listClick(this._uid)
+        this.listClick(this._uid)
       }
     },
     toggle (uid) {
@@ -88,7 +78,6 @@ export default {
   render (h) {
     const group = h('ul', {
       'class': 'list list--group',
-      style: this.styles,
       directives: [{
         name: 'show',
         value: this.isActive

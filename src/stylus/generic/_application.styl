@@ -1,14 +1,6 @@
 .application
   -webkit-backface-visibility: hidden
-  position: relative
-
-  &--dark
-    background: $body-bg-dark
-    color: $color-light
-
-  &--light
-    background: $body-bg-light
-    color: $color-dark
+  min-height: 100vh
 
   &--toolbar
     > main > .container
@@ -29,3 +21,17 @@
     &.application--toolbar
       > aside.navigation-drawer.navigation-drawer--clipped
         max-height: 'calc(100vh - %s - %s)' % ($toolbar-height $footer-height)
+
+// Main theme
+.application
+  &--light
+    application($material-light)
+
+  &--dark
+    application($material-dark)
+
+  .theme--light
+    text($material-light, $material-dark)
+
+  .theme--dark
+    text($material-dark, $material-light)

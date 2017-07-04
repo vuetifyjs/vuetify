@@ -9,9 +9,10 @@
 
   &.input-group--focused
     .input-group--select__autocomplete
-      flex: 1 0 100%
-      opacity: 1
+      display: inline-block
       height: 30px
+      opacity: 1
+      padding-bottom: 1px
 
     .input-group__append-icon
       transform: rotate(-180deg)
@@ -25,34 +26,15 @@
 
 .input-group--select
   .input-group__selections
+    align-items: center
     display: flex
-    flex-wrap: wrap
-    width: 100%
     position: relative
-
-    > div
-      display: flex
-      flex-wrap: wrap
-      flex: 1
+    width: 100%
 
     &__comma
-      display: inline-block
+      display: inline-flex
       font-size: 16px
-      height: 30px
-      padding-top: 4px
       padding-right: 4px
-
-.input-group--select
-  &.input-group--light
-    .input-group__selections__comma
-      color: $color-light
-
-    .input-group__selections__comma--active
-      color: $theme.primary
-
-  &.input-group--dark
-    .input-group__selections__comma
-      color: $color-dark
 
 .input-group--select
   .menu
@@ -61,3 +43,61 @@
   .fade-transition-leave-active
     position: absolute
     left: 0
+
+
+.input-group
+  &--overflow,
+  &--editable,
+  &--segmented
+    .input-group__selections,
+    input
+      height: 24px
+      
+    // Handle weird transition issue
+    .input-group__selections__comma
+      top: 0
+      left: 0
+
+    .input-group__input
+      transition: .3s $transition.swing
+
+    .input-group__input:hover
+      background: #fff
+
+    &.input-group--focused
+      .input-group__input
+        background: #fff
+        elevation(8)
+    
+    label
+      left: 16px !important
+      top: 8px !important
+
+    .input-group__details      
+      &:after
+        display: none
+
+    .input-group__input
+      padding: 12px 16px
+
+      &:before
+        content: ''
+        position: absolute
+        left: 0
+        width: 100%
+        height: 1px
+        top: 0
+        transition: .3s $transition.swing
+      
+  &--segmented .input-group__input,
+  &--editable .input-group__input:hover,
+  &.input-group--focused.input-group--editable .input-group__input
+    &:after
+      background-color: rgba(0,0,0,0.12)
+      content: ''
+      position: absolute
+      right: 55px
+      height: 48px
+      top: 0
+      width: 1px
+    

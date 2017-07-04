@@ -1,7 +1,5 @@
 .footer
   align-items: center
-  background: $theme.primary
-  color: #fff
   display: flex
   height: $footer-height
   transition: .3s $transition.swing
@@ -19,15 +17,15 @@
     position: fixed
   
   > *:first-child
-    margin-left: $grid-gutter
+    margin-left: $grid-gutters.md
     
   > *:last-child
-    margin-right: $grid-gutter
+    margin-right: $grid-gutters.md
     
   @media $display-breakpoints.xs-only
     > *:first-child
-      margin-left: $grid-gutter-mobile
+      margin-left: $grid-gutters.lg
       
     > *:last-child
-      margin-right: $grid-gutter-mobile
+      margin-right: $grid-gutters.lg
   

@@ -1,13 +1,14 @@
 .btn-toggle
   display: inline-flex
   border-radius: 2px
+  padding: 0 16px
   transition: $primary-transition
   will-change: background, box-shadow
 
   .btn
-    color: $color-theme
     justify-content: center
     min-width: auto
+    width: auto
     padding: 0 8px
     margin: 0
     opacity: .4
@@ -21,18 +22,13 @@
 
     &[data-selected]
       opacity: 1
-      background: rgba($material-theme.fg-color, $material-theme.divider-percent)
-
-      &:not(:last-child):not([data-only-child])
-        border-right-color: rgba($material-theme.fg-color, $material-theme.divider-percent)
-
-    .icon
-      font-size: 30px
+      
+    &__content
+      padding: 0
 
     span + .icon
       font-size: initial
       margin-left: 10px
 
   &--selected
-    background: $material-theme.bg-color
-    elevation(2)
+    // elevation(2)

@@ -7,6 +7,7 @@ export default {
 
   props: {
     actions: Boolean,
+    autosave: Boolean,
     landscape: Boolean,
     noTitle: Boolean,
     scrollable: Boolean,
@@ -17,7 +18,7 @@ export default {
       type: Boolean,
       default: true
     },
-    dark: Boolean,
+    dark: Boolean
   },
 
   methods: {

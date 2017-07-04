@@ -1,20 +1,18 @@
-import Bootable from '../../mixins/bootable'
-import Overlayable from '../../mixins/overlayable'
-import Toggleable from '../../mixins/toggleable'
+import Bootable from '~mixins/bootable'
+import Detachable from '~mixins/detachable'
+import Overlayable from '~mixins/overlayable'
+import Toggleable from '~mixins/toggleable'
 
 export default {
   name: 'dialog',
 
-  mixins: [Bootable, Overlayable, Toggleable],
-
-  data: () => ({
-    app: null
-  }),
+  mixins: [Bootable, Detachable, Overlayable, Toggleable],
 
   props: {
     disabled: Boolean,
     persistent: Boolean,
     fullscreen: Boolean,
+    fullWidth: Boolean,
     lazy: Boolean,
     origin: {
       type: String,
@@ -34,7 +32,7 @@ export default {
   computed: {
     classes () {
       return {
-        'dialog': true,
+        [(`dialog ${this.contentClass}`).trim()]: true,
         'dialog--active': this.isActive,
         'dialog--persistent': this.persistent,
         'dialog--fullscreen': this.fullscreen,
@@ -55,23 +53,16 @@ export default {
         !this.fullscreen && !this.hideOverlay && this.genOverlay()
         this.fullscreen && this.hideScroll()
       } else {
-        this.removeOverlay()
+        if (!this.fullscreen) this.removeOverlay()
+        else this.showScroll()
       }
     }
   },
 
   mounted () {
-    this.app = document.querySelector('[data-app]')
-    this.$nextTick(() => {
-      this.app && this.app.appendChild(this.$refs.content)
-    })
+    this.isBooted = this.isActive
+    this.$vuetify.load(() => (this.isActive && this.genOverlay()))
   },
-
-  beforeDestroy () {
-    this.app &&
-      this.app.contains(this.$refs.content) &&
-      this.app.removeChild(this.$refs.content)
-    },
 
   methods: {
     closeConditional (e) {
@@ -111,7 +102,9 @@ export default {
 
     const dialog = h(this.computedTransition, {
       props: { origin: this.origin }
-    }, [h('div', data, [this.$slots.default])])
+    }, [h('div', data,
+      this.lazy && this.isBooted || !this.lazy ? this.$slots.default : null
+    )])
 
     children.push(h('div', {
       'class': 'dialog__content',
@@ -119,7 +112,10 @@ export default {
     }, [dialog]))
 
     return h('div', {
-      'class': 'dialog__container'
+      'class': 'dialog__container',
+      style: {
+        display: this.fullWidth ? 'block' : 'inline-block'
+      }
     }, children)
   }
 }

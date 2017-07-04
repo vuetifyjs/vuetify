@@ -1,7 +1,9 @@
+import Themeable from '~mixins/themeable'
+
 export default {
   functional: true,
 
-  name: 'card',
+  mixins: [Themeable],
 
   props: {
     flat: Boolean,
@@ -9,10 +11,10 @@ export default {
       type: String,
       default: 'auto'
     },
-    horizontal: Boolean,
     img: String,
     hover: Boolean,
-    raised: Boolean
+    raised: Boolean,
+    tile: Boolean
   },
 
   render (h, { data, props, children, style }) {
@@ -23,7 +25,10 @@ export default {
     if (props.horizontal) data.staticClass += ' card--horizontal'
     if (props.hover) data.staticClass += ' card--hover'
     if (props.raised) data.staticClass += ' card--raised'
+    if (props.tile) data.staticClass += ' card--tile'
     if (props.flat) data.staticClass += ' card--flat'
+    if (props.light) data.staticClass += ' theme--light'
+    if (props.dark) data.staticClass += ' theme--dark'
 
     if (props.img) {
       data.style.background = `url(${props.img}) center center / cover no-repeat`

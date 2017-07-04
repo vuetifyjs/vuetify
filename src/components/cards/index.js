@@ -1,17 +1,17 @@
 import Card from './Card'
-import CardRow from './CardRow'
+import CardMedia from './CardMedia'
+import CardTitle from './CardTitle'
 import {
   createSimpleFunctional
-} from '../../util/helpers'
+} from '~util/helpers'
 
-const CardColumn = createSimpleFunctional('card__column')
+const CardActions = createSimpleFunctional('card__actions')
 const CardText = createSimpleFunctional('card__text')
-const CardTitle = createSimpleFunctional('card__title')
 
 export default {
   Card,
-  CardRow,
-  CardColumn,
+  CardActions,
+  CardMedia,
   CardText,
   CardTitle
 }

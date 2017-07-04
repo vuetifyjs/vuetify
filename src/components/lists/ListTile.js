@@ -1,5 +1,5 @@
-import GenerateRouteLink from '../../mixins/route-link'
-import Toggleable from '../../mixins/toggleable'
+import GenerateRouteLink from '~mixins/route-link'
+import Toggleable from '~mixins/toggleable'
 
 export default {
   name: 'list-tile',
@@ -28,6 +28,6 @@ export default {
   render (h) {
     const { tag, data } = this.generateRouteLink()
 
-    return h(tag, data, [this.$slots.default])
+    return h('li', [h(tag, data, [this.$slots.default])])
   }
 }

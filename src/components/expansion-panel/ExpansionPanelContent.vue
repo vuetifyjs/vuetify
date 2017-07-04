@@ -24,8 +24,8 @@
 </template>
 
 <script>
-  import Expand from '../../mixins/expand-transition'
-  import Toggleable from '../../mixins/toggleable'
+  import Expand from '~mixins/expand-transition'
+  import Toggleable from '~mixins/toggleable'
 
   export default {
     name: 'expansion-panel-content',
@@ -47,17 +47,6 @@
         return {
           'expansion-panel__header--active': this.isActive
         }
-      }
-    },
-
-    mounted () {
-      // TODO: This is temporary, replace
-      if (this.value) {
-        this.$vuetify.load(() => {
-          setTimeout(() => {
-            this.$refs.body.style.height = `${this.$refs.body.clientHeight}px`
-          }, 1000)
-        })
       }
     },
 

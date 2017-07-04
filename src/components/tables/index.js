@@ -1,6 +1,6 @@
 import {
   createSimpleFunctional
-} from '../../util/helpers'
+} from '~util/helpers'
 
 import DataTable from './DataTable'
 import EditDialog from './EditDialog'

@@ -4,42 +4,41 @@
     v-bind:class="classes"
   )
     v-btn(
-      v-bind:dark="dark"
-      v-bind:light="light"
-      v-for="(option, index) in options"
-      v-on:click.native.stop="updateValue(option)"
-      v-bind:data-selected="isSelected(option)"
+      v-for="(item, index) in items"
+      v-bind:key="index"
+      v-on:click.native.stop="updateValue(item)"
+      v-bind:data-selected="isSelected(item)"
       v-bind:data-index="index"
-      v-bind:data-only-child="isSelected(option) && (!multiple || inputValue.length === 1)"
+      v-bind:data-only-child="isSelected(item) && (!multiple || inputValue.length === 1)"
       flat
     )
-      span(v-if="option.text" v-text="option.text")
-      v-icon(v-if="option.icon" v-bind:dark="dark" v-bind:light="light") {{ option.icon }}
+      span(v-if="item.text" v-text="item.text")
+      v-icon(v-if="item.icon") {{ item.icon }}
 </template>
 
 <script>
-  import Themeable from '../../mixins/themeable'
-
   export default {
     name: 'button-toggle',
 
-    mixins: [Themeable],
-
-    data () {
-      return {
-        inputValue: this.value
-      }
+    model: {
+      prop: 'inputValue',
+      event: 'change'
     },
 
     props: {
-      options: {
+      items: {
         type: Array,
         default: () => []
       },
 
       multiple: Boolean,
 
-      value: {
+      mandatory: {
+        type: Boolean,
+        value: false
+      },
+
+      inputValue: {
         required: false
       }
     },
@@ -49,12 +48,6 @@
         return {
           'btn-toggle--selected': this.inputValue && !this.multiple || this.inputValue && this.inputValue.length > 0
         }
-      }
-    },
-
-    watch: {
-      value () {
-        this.inputValue = this.value
       }
     },
 
@@ -69,19 +62,20 @@
 
       updateValue (item) {
         if (!this.multiple) {
-          return this.$emit('input', this.inputValue === item.value ? null : item.value)
+          if (this.mandatory && this.inputValue === item.value) return
+          return this.$emit('change', this.inputValue === item.value ? null : item.value)
         }
 
         const items = this.inputValue.slice()
 
         const i = items.indexOf(item.value)
         if (i !== -1) {
-          items.splice(i, 1)
+          items.length > 1 && !this.mandatory && items.splice(i, 1)
         } else {
           items.push(item.value)
         }
 
-        this.$emit('input', items)
+        this.$emit('change', items)
       }
     }
   }

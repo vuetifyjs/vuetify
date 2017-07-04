@@ -10,7 +10,8 @@ export default {
     ripple: Boolean,
     router: Boolean,
     tag: String,
-    target: String
+    target: String,
+    download: String
   },
 
   methods: {
@@ -21,7 +22,7 @@ export default {
       const options = this.to || this.href
 
       const data = {
-        attrs: {},
+        attrs: { disabled: this.disabled },
         class: this.classes,
         props: {},
         directives: [{
@@ -51,6 +52,8 @@ export default {
         if (tag === 'a') {
           data.attrs.href = options || 'javascript:;'
           if (this.target) data.attrs.target = this.target
+
+          data.attrs.download = this.download
         }
 
         data.on = { click: this.click }

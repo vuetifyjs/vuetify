@@ -19,6 +19,7 @@
 
 /** Input */
 .input-group--text-field input
+  box-shadow: none
   font-size: $input-font-size
   flex: 1
   margin: 0
@@ -54,34 +55,8 @@
     &--error
       color: $theme.error !important
 
-/** Themes */
-.input-group--text-field
-  &.input-group--light
-    input-group-theme(
-      $input-group-light-normal,
-      #000,
-      $input-group-light-focus
-    )
-
-  &.input-group--dark
-    input-group-theme(
-      $input-group-dark-normal,
-      #fff,
-      $input-group-dark-focus
-    )
-
 /** Input States */
 .input-group--text-field
-  &.input-group--focused
-    label
-      opacity: 1
-      color: $theme.primary
-      transform: translate3d(0, -18px, 0) scale(.75)
-
-  &.input-group--dirty
-    label
-      transform: translate3d(0, -18px, 0) scale(.75)
-
   &.input-group--placeholder:not(.input-group--focused):not(.input-group--dirty)
     label
       opacity: 0
@@ -89,10 +64,7 @@
 
 /** Types */
 .input-group--text-field
-  &.input-group--error
-    .input-group__details:after
-      background-color: $theme.error
-
+  // Icons
   &.input-group--prepend-icon
     .input-group__prepend-icon
       align-items: center
@@ -102,10 +74,11 @@
       transition: .3s $transition.fast-in-fast-out
 
     .input-group__details
-      margin-left: 40px
+      margin-left: auto
 
       &:before, &:after
-        max-width: calc(100% - 56px)
+        margin-left: 40px
+        max-width: calc(100% - 40px)
 
     label
       margin-left: 40px
@@ -113,10 +86,18 @@
     input
       flex: auto
 
-    &.input-group--focused
-      .icon
-        color: $theme.primary
+  &:not(.input-group--single-line)
+    &.input-group--focused,
+    &:focus
+      label
+        opacity: 1
+        transform: translate3d(0, -18px, 0) scale(.75)
 
+  &.input-group--dirty
+    label
+      transform: translate3d(0, -18px, 0) scale(.75)
+
+  // Single Line
   &.input-group--single-line
     label
       transform: translate3d(0,0,0)
@@ -125,38 +106,47 @@
       label
         display: none
 
-  &.input-group--required
-    label:after
-      content: '*'
-
-    &.input-group--focused
-      label:after
-        color: $theme.error
-
-  &.input-group--error
-    label
-      color: $theme.error
-
-    .input-group__details:before, .input-group__details:after
-      background-color: $theme.error
-
+  // Full Width
   &.input-group--full-width
     padding: 0 16px
 
     .input-group__details:before, .input-group__details:after
       display: none
+      
+  // Solo
+  &.input-group--solo
+    background: #fff
+    height: 46px
+    border-radius: $card-border-radius
+    padding: 0 16px
+    elevation(2)
+    
+    input
+      margin-top: 8px
 
+    label
+      top: 8px
+      left: 16px
+      transform: none !important
+    
+    &:hover
+      elevation(4)
 
 /** Prefix/Suffix */
-.input-group--text-field
-  &__prefix, &__suffix
+.input-group--prefix
+  &:not(.input-group--focused):not(.input-group--dirty)
+    label
+      left: 16px
+
+  .input-group--text-field__prefix,
+  .input-group--text-field__suffix
     align-items: center
     display: inline-flex
     font-size: 16px
     margin-top: 1px
 
-  &__prefix
+  .input-group--text-field__prefix
     margin-right: 3px
 
-  &__suffix
+  .input-group--text-field__suffix
     margin-left: 3px

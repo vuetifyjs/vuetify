@@ -1,13 +1,33 @@
-navigation-drawer(color)
-  > .list
-    .list__tile
-      color: color
-      
-    .list--group__header--active
-      .list__tile
-        &:after
-          background: rgba(color, .12)
-        
-      + .list--group
-        &:after
-          background: rgba(color, .12)
+navigation-drawer($material)
+  background-color: $material.cards
+
+  &:after
+    background-color: $material.dividers
+    content: ''
+    right: 0
+    top: 0
+    position: absolute
+    height: 100%
+    width: 1px    
+  
+  &.navigation-drawer--right
+    &:after
+      left: 0
+      right: initial
+
+  a, .subheader, .list
+    color: $material.text.primary
+    
+  .divider
+    background-color: $material.dividers
+
+  .list
+    background: $material.cards
+    
+    &__tile
+      color: $material.text.primary
+
+  .list--group__header--active
+    .list__tile, + .list--group
+      &:after
+        background: $material.dividers

@@ -1,11 +1,9 @@
 import Btn from './Button'
-import BtnDropdown from './ButtonDropdown.vue'
 import BtnToggle from './ButtonToggle.vue'
-import Fab from './FAB'
+import SpeedDial from './SpeedDial'
 
 export default {
   Btn,
-  BtnDropdown,
   BtnToggle,
-  Fab
+  SpeedDial
 }

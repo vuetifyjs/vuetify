@@ -11,13 +11,17 @@
   left: 0
   will-change: transform
   z-index: 3
-  
+
   // Remove animation when booting up
   &:not(.navigation-drawer--is-booted)
     transition: none !important
+    z-index: -1
 
     + .toolbar, ~ main, ~ .footer
       transition: none !important
+
+      @media $display-breakpoints.sm-and-down
+        padding-left: 0 !important
 
   &--close:not(.navigation--permanent)
     &.navigation-drawer:not(.navigation-drawer--right)
@@ -27,34 +31,15 @@
       transform: "translate3d(%s, 0, 0)" % ($navigation-drawer-width)
 
   &--right
-    left: initial
+    left: auto
     right: 0
 
   &--absolute
     position: absolute
 
-  &--dark
-    background: $theme.secondary
-    navigation-drawer($material-dark.fg-color)
-
-    .divider
-      background: $material-twelve-percent-light
-
-  &--light
-    background: $material-light.bg-color
-    navigation-drawer(rgba($material-light.fg-color, .87))
-
-    .divider
-      background: $material-twelve-percent-dark
-      
-    &:not(.navigation-drawer--right)
-      border-right: 1px solid rgba($material-light.fg-color, $material-light.divider-percent)
-    
-    &.navigation-drawer--right
-      border-left: 1px solid rgba($material-light.fg-color, $material-light.divider-percent)
-
   &--permanent, &--persistent
-    &.navigation-drawer--clipped, &.navigation-drawer--floating
+    &.navigation-drawer--clipped,
+    &.navigation-drawer--floating
       margin-top: $toolbar-height
       max-height: "calc(100vh - %s)" % $toolbar-height
 
@@ -62,38 +47,43 @@
         padding-left: 0
         z-index: 3
 
-    &.navigation-drawer--floating
-      border-color: transparent
+    @media all and (max-width: $grid-breakpoints.lg) and (orientation : landscape)
+      &.navigation-drawer--clipped,
+      &.navigation-drawer--floating
+        margin-top: $toolbar-mobile-landscape-height
+        max-height: "calc(100vh - %s)" % $toolbar-mobile-landscape-height
 
-  &--permanent
-    &:not(.navigation-drawer--clipped):not(.navigation-drawer--floating)
-      ~ main,
-      ~ .toolbar,
-      ~ .footer
-        padding-left: $navigation-drawer-width
-
-  &--persistent
+  &--persistent, &--permanent
     &.navigation-drawer--open:not(.navigation-drawer--is-mobile):not(.navigation-drawer--right)
-      &:not(.navigation-drawer--clipped)
+      &:not(.navigation-drawer--clipped):not(.navigation-drawer--floating)
         ~ .toolbar
           padding-left: $navigation-drawer-width
 
-      ~ main, ~ .footer:not(.footer--fixed):not(.footer--absolute)
+      ~ main,
+      ~ .footer:not(.footer--fixed):not(.footer--absolute)
         padding-left: $navigation-drawer-width
 
-    &.navigation-drawer--open.navigation-drawer--right:not(.navigation-drawer--is-mobile)
-      &:not(.navigation-drawer--clipped)
+    &.navigation-drawer--open:not(.navigation-drawer--is-mobile).navigation-drawer--right
+      &:not(.navigation-drawer--clipped):not(.navigation-drawer--floating)
         + .toolbar
           padding-right: $navigation-drawer-width
 
-      ~ main, ~ .footer:not(.footer--fixed):not(.footer--absolute)
+      ~ main,
+      ~ .footer:not(.footer--fixed):not(.footer--absolute)
         padding-right: $navigation-drawer-width
+
+  &--floating:after
+    display: none
 
   &--mini-variant
     margin-top: $toolbar-height
     max-height: "calc(100vh - %s)" % $toolbar-height
     overflow: hidden
     width: $navigation-drawer-mini-variant-width
+
+    @media all and (max-width: $grid-breakpoints.lg) and (orientation : landscape)
+      margin-top: $toolbar-mobile-landscape-height
+      max-height: "calc(100vh - %s)" % $toolbar-mobile-landscape-height
 
     .list__tile__action, .list__tile__avatar
       justify-content: center
@@ -128,6 +118,7 @@
   > .list
     .list__tile
       transition: none
+      font-weight: $navigation-drawer-item-font-weight
 
       &--active
         .list__tile__title
@@ -135,18 +126,25 @@
 
         > *:first-child
           .icon
-            color: $theme.primary
+            color: $navigation-drawer-item-active-color
 
     .list--group
+      .list__tile
+        font-weight: $navigation-drawer-group-item-font-weight
+
       &__header--active
         &:after
           background: transparent
 
         .list__tile__action:first-of-type
           .icon
-            color: $theme.primary
+            color: $navigation-drawer-item-active-color
 
     .list--group__container
       .list__tile--active
         .list__tile__title
-          color: $theme.primary
+          color: $navigation-drawer-item-active-color
+
+  > .list:not(.list--dense)
+    .list__tile
+      font-size: $navigation-drawer-item-font-size

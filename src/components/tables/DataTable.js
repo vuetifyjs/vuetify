@@ -2,16 +2,18 @@ import Head from './mixins/head'
 import Body from './mixins/body'
 import Foot from './mixins/foot'
 import Progress from './mixins/progress'
-import { getObjectValueByPath } from '../../util/helpers'
+import Filterable from '~mixins/filterable'
+import { getObjectValueByPath } from '~util/helpers'
 
 export default {
   name: 'datatable',
 
-  mixins: [Head, Body, Foot, Progress],
+  mixins: [Head, Body, Filterable, Foot, Progress],
 
   data () {
     return {
       all: false,
+      searchLength: 0,
       defaultPagination: {
         page: 1,
         rowsPerPage: 5,
@@ -31,10 +33,6 @@ export default {
       default: 'text'
     },
     hideActions: Boolean,
-    noDataText: {
-      type: String,
-      default: 'No data available in table'
-    },
     noResultsText: {
       type: String,
       default: 'No matching records found'
@@ -77,20 +75,21 @@ export default {
       type: Function,
       default: (items, index, descending) => {
         return items.sort((a, b) => {
-          const sortA = getObjectValueByPath(a, index)
-          const sortB = getObjectValueByPath(b, index)
+          let sortA = getObjectValueByPath(a, index)
+          let sortB = getObjectValueByPath(b, index)
 
           if (descending) {
-            if (!isNaN(sortA) && !isNaN(sortB)) return sortB - sortA
-            if (sortA < sortB) return 1
-            if (sortA > sortB) return -1
-            return 0
-          } else {
-            if (!isNaN(sortA) && !isNaN(sortB)) return sortA - sortB
-            if (sortA < sortB) return -1
-            if (sortA > sortB) return 1
-            return 0
+            [sortA, sortB] = [sortB, sortA]
           }
+
+          if (!isNaN(sortA) && !isNaN(sortB)) return (sortA - sortB)
+          else if (sortA == null && sortB == null) return 0;
+
+          [sortA, sortB] = [sortA, sortB].map(s => s.toLocaleLowerCase())
+          if (sortA > sortB) return 1
+          if (sortA < sortB) return -1
+
+          return 0
         })
       }
     },
@@ -125,11 +124,14 @@ export default {
     computedPagination () {
       return this.pagination || this.defaultPagination
     },
+    hasSelectAll () {
+      return this.selectAll !== undefined && this.selectAll !== false
+    },
     itemsLength () {
-      return this.totalItems || this.items.length
+      return this.totalItems || this.search && this.searchLength || this.items.length
     },
     indeterminate () {
-      return this.selectAll !== false && this.someItems && !this.everyItem
+      return this.hasSelectAll && this.someItems && !this.everyItem
     },
     everyItem () {
       return this.filteredItems.length && this.filteredItems.every(i => this.isSelected(i))
@@ -157,6 +159,7 @@ export default {
 
       if (hasSearch) {
         items = this.customFilter(items, this.search, this.filter)
+        this.searchLength = items.length
       }
 
       items = this.customSort(items, this.computedPagination.sortBy, this.computedPagination.descending)
@@ -165,7 +168,7 @@ export default {
     },
     selected () {
       const selected = {}
-      this.value.forEach(i => selected[i[this.selectedKey]] = true)
+      this.value.forEach(i => (selected[i[this.selectedKey]] = true))
       return selected
     }
   },
@@ -178,13 +181,10 @@ export default {
       if (!val) this.all = false
     },
     search () {
-      this.page = 1
+      this.updatePagination({ page: 1 })
     },
     everyItem (val) {
       if (val) this.all = true
-    },
-    itemsLength () {
-      this.updatePagination({ totalItems: this.itemsLength })
     }
   },
 
@@ -222,7 +222,7 @@ export default {
     const firstSortable = this.headers.find(h => !('sortable' in h) || h.sortable)
     this.defaultPagination.sortBy = firstSortable ? firstSortable.value : null
 
-    this.updatePagination(Object.assign({}, this.defaultPagination, this.pagination, { totalItems: this.itemsLength }))
+    this.updatePagination(Object.assign({}, this.defaultPagination, this.pagination))
   },
 
   render (h) {

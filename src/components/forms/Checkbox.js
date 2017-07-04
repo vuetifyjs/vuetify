@@ -1,4 +1,4 @@
-import Checkbox from '../../mixins/checkbox'
+import Checkbox from '~mixins/checkbox'
 
 export default {
   name: 'checkbox',
@@ -17,17 +17,11 @@ export default {
 
   computed: {
     classes () {
-      return {
+      return this.addColorClassChecks({
         'checkbox': true,
         'input-group--selection-controls': true,
-        'input-group--active': this.isActive,
-        'primary--text': this.primary,
-        'secondary--text': this.secondary,
-        'error--text': this.error,
-        'success--text': this.success,
-        'info--text': this.info,
-        'warning--text': this.warning
-      }
+        'input-group--active': this.isActive
+      })
     },
     icon () {
       if (this.inputDeterminate) {

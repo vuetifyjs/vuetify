@@ -20,7 +20,7 @@ export default {
       return parseInt(a.left - 16)
     },
     calcTopAuto () {
-      if (!this.$refs.content) return this.calcTop(true)
+      if (!this.hasActivator) return this.calcTop(true)
 
       const selectedIndex = Array.from(this.tiles).findIndex(n => n.classList.contains('list__tile--active'))
 
@@ -34,7 +34,11 @@ export default {
       let actingIndex = selectedIndex
 
       let offsetPadding = -16
-      this.stopIndex = this.tiles.length - 4
+      // #708 Stop index should vary by tile length
+      this.stopIndex = this.tiles.length > 4
+        ? this.tiles.length - 4
+        : this.tiles.length
+
       if (selectedIndex > this.startIndex && selectedIndex < this.stopIndex) {
         actingIndex = 2
         offsetPadding = 24
@@ -56,11 +60,7 @@ export default {
       if (this.nudgeLeft) left += this.nudgeLeft
       if (this.nudgeRight) left -= this.nudgeRight
 
-      const totalWidth = left + this.minWidth - this.window.innerWidth
-
-      if (totalWidth > 0) left -= (totalWidth + 24) // give a little extra space
-
-      return left
+      return this.calcXOverflow(left)
     },
     calcTop (force) {
       if (this.auto && !force) return this.calcTopAuto()
@@ -73,20 +73,68 @@ export default {
       if (this.nudgeTop) top -= this.nudgeTop
       if (this.nudgeBottom) top += this.nudgeBottom
 
-      return top + this.window.pageYOffset
+      return this.calcYOverflow(top) + this.window.pageYOffset
+    },
+    calcXOverflow (left) {
+      const maxWidth = Math.max(
+        this.dimensions.content.width,
+        this.calculatedMinWidth,
+        parseInt(this.maxWidth) || 0
+      )
+      const totalWidth = left + maxWidth
+      const availableWidth = totalWidth - this.window.innerWidth
+
+      if ((!this.left || this.right) && availableWidth > 0) {
+        left = (
+          this.window.innerWidth -
+          maxWidth -
+          (this.window.innerWidth > 1024 ? 30 : 12) // Account for scrollbar
+        )
+      } else if (this.left && left < 0) left = 12
+
+      return left
+    },
+    calcYOverflow (top) {
+      const totalHeight = top + this.dimensions.content.height
+
+      if (this.top && top < 0) top = 12
+      else if ((!this.top || this.bottom) && this.window.innerHeight < totalHeight) {
+        top = (
+          this.window.innerHeight -
+          this.dimensions.content.height -
+          12
+        )
+      }
+
+      return top
     },
     sneakPeek (cb) {
-      const el = this.$refs.content
-      const currentDisplay = el.style.display
+      requestAnimationFrame(() => {
+        const el = this.$refs.content
+        const currentDisplay = el.style.display
 
-      el.style.display = 'inline-block'
-      cb()
-      el.style.display = currentDisplay
+        el.style.display = 'inline-block'
+        cb()
+        el.style.display = currentDisplay
+      })
+    },
+    absolutePosition () {
+      return {
+        offsetTop: 0,
+        scrollHeight: 0,
+        top: this.positionY || this.absoluteY,
+        bottom: this.positionY || this.absoluteY,
+        left: this.positionX || this.absoluteX,
+        right: this.positionX || this.absoluteX,
+        height: 0,
+        width: 0
+      }
     },
     updateDimensions () {
       this.sneakPeek(() => {
         this.dimensions = {
-          activator: this.measure(this.getActivator()),
+          activator: !this.hasActivator || this.positionAbsolutely
+            ? this.absolutePosition() : this.measure(this.getActivator()),
           content: this.measure(this.$refs.content)
         }
       })

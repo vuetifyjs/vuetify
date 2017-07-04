@@ -2,7 +2,13 @@
 export default {
   methods: {
     genTitle () {
-      const date = `${this.dayName.substr(0, 3)},${this.landscape ? '<br>' : ''} ${this.monthName.substr(0, 3)} ${this.day}`
+      const date = this.titleDateFormat({
+        day: this.day,
+        dayName: this.dayName,
+        month: this.month,
+        monthName: this.monthName,
+        landscape: this.landscape
+      })
 
       const text = this.$createElement('transition', {
         props: {

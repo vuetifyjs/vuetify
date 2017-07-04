@@ -2,7 +2,7 @@ import DateTitle from './mixins/date-title'
 import DateHeader from './mixins/date-header'
 import DateTable from './mixins/date-table'
 import DateYears from './mixins/date-years'
-import Picker from '../../mixins/picker'
+import Picker from '~mixins/picker'
 
 const defaultDateFormat = val => new Date(val).toISOString().substr(0, 10)
 
@@ -28,9 +28,23 @@ export default {
       type: Function,
       default: defaultDateFormat
     },
+    titleDateFormat: {
+      type: Function,
+      default: ({ day, dayName, month, monthName, landscape }) => {
+        return `${dayName.substr(0, 3)},${landscape ? '<br>' : ''} ${monthName.substr(0, 3)} ${day}`
+      }
+    },
+    headerDateFormat: {
+      type: Function,
+      default: ({ month, monthName, year }) => `${monthName} ${year}`
+    },
     days: {
       type: Array,
       default: () => ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    },
+    shortDays: {
+      type: [Function, Array],
+      default: (day) => day && day.substr(0, 1)
     },
     formattedValue: {
       required: false
@@ -55,6 +69,10 @@ export default {
     allowedDates: {
       type: [Array, Object, Function],
       default: () => (null)
+    },
+    firstDayOfWeek: {
+      type: String,
+      default: 'Sunday'
     }
   },
 
@@ -106,13 +124,24 @@ export default {
       return this.tableDate.getFullYear()
     },
     dayName () {
-      return this.inputDate ? this.days[this.inputDate.getDay()] : ''
+      return this.inputDate ? this.week[this.inputDate.getDay()] : ''
     },
     monthName () {
       return this.inputDate ? this.months[this.month] : ''
     },
     computedTransition () {
       return this.isReversing ? 'v-tab-reverse-transition' : 'v-tab-transition'
+    },
+    week () {
+      const week = []
+      let index = this.days.indexOf(this.firstDayOfWeek)
+
+      while (week.length < 7) {
+        week.push(this.days[index % 7])
+        index += 1
+      }
+
+      return week
     }
   },
 
@@ -152,7 +181,7 @@ export default {
           const d = new Date(allowedDate)
           d.setHours(12, 0, 0, 0)
 
-          return d - date == 0
+          return d - date === 0
         })
       } else if (this.allowedDates instanceof Function) {
         return this.allowedDates(date)

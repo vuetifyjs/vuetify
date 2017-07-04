@@ -1,158 +1,140 @@
-.application--dark
-  .toolbar
-    background: $grey.darken-4
-
 .toolbar
-  align-items: center
-  background-color: $theme.primary
-  display: flex
-  flex-wrap: wrap
-  height: $toolbar-height
   position: relative
-  padding: $toolbar-padding-y 0
   transition: .3s $transition.swing
   width: 100%
   will-change: padding-left
-  elevation(4)
   z-index: 2
+  elevation(4)
+    
+  .input-group--solo
+    .input-group__details
+      display: none
 
-  > *:first-child
-    margin-left: $grid-gutter
 
-  > *:last-child
-    margin-right: $grid-gutter
-
-  @media $display-breakpoints.xs-only
-    > *:first-child
-      margin-left: $grid-gutter-mobile
-
-    > *:last-child
-      margin-right: $grid-gutter-mobile
-
-  ul
-    list-style: none
-
-  li
-    height: 100%
-
-  i
-    font-size: 24px
-
-  .menu__activator
-    height: 100%
-
-  &--fixed, &--absolute
-    + main
-      padding-top: $toolbar-height
-
-  &--fixed
-    position: fixed
-
-  &--absolute
-    position: absolute
-
-  &__sub
-    flex: 1 0 100%
-    padding: 24px 0 24px 72px
-
-  &__side-icon
-    display: inline-flex
-    align-items: center
-    position: relative
-    margin-left: 10px
-
-  &__logo
-    font-size: 3rem
-    flex: 1;
-    text-decoration: none
-    padding: 0
-    display: flex
-    align-items: center
-
-    ^[0]--dark &
-      color: $color-dark
-
-    ^[0]--light &
-      color: $color-light
-
+/** Children */
+.toolbar
   &__title
     font-size: $headings.h6.size
-    flex: 1;
+    font-weight: $headings.h6.weight
+    letter-spacing: $headings.h6.letter-spacing
+    margin-left: 16px
     white-space: nowrap
     overflow: hidden
     text-overflow: ellipsis
 
-    ^[0]--dark &
-      color: $color-dark
-
-    ^[0]--light &
-      color: $color-light
-
-    &:not(:first-child)
-      padding: 0 16px
-
-  &__items
-    list-style-type: none
-    padding: 0
-    display: flex
+  &__content, &__extension
     align-items: center
+    display: flex
+    
+    > .list
+      align-items: center
+      display: flex
+      flex: 1 1 auto
+      margin: 0 !important // come back to this
+      max-height: 100%
+
+    > .btn:last-child
+      margin-right: 10px
+      
+    > .btn:first-child
+      margin-left: 10px
+
+    > *:not(.btn):not(.toolbar__title):last-child
+      margin-right: $grid-gutters.lg
+      
+    > *:not(.btn):not(.toolbar__title):first-child
+      margin-left: $grid-gutters.lg
+  
+  &__content
+    height: $toolbar-height
+
+  &__extension
+    height: $toolbar-extension-height
+    
+  &__items
+    display: flex
     height: 100%
     max-width: 100%
+    padding: 0
+    
+    > .btn
+      height: 100%
+      margin: 0
 
-    > li
-      display: flex
-      align-items: center
+  @media $display-breakpoints.xs-only    
+    &__content,
+    &__extension
+      > .btn:last-child
+        margin-right: 17px
 
-  &__item
-    align-items: center
-    display: flex
-    padding: $toolbar-item-padding
-    text-decoration: none
-    transition: all 0.3s ease-out
-    position: relative
-    height: 100%
-    white-space: nowrap
+      > .btn:first-child
+        margin-left: 17px
 
-    ^[0]--dark &
-      color: $color-dark
+      > *:not(.btn):last-child
+        margin-right: $grid-gutters.xl
+      
+      > *:not(.btn):first-child
+        margin-left: $grid-gutters.xl
 
-    ^[0]--light &
-      color: $color-light
+  @media all and (max-width: $grid-breakpoints.sm) and (orientation: portrait)
+    toolbar-content(7px)
+  
+  @media all and (max-width: $grid-breakpoints.lg) and (orientation: landscape)
+    &__content,
+    &__extension
+      height: $toolbar-mobile-landscape-height
 
-    i
-      font-size: 2rem
 
-    &:hover, &--active
-      background: rgba(#000,0.1)
+/** Types */
+.toolbar
+  &--card
+    border-radius: $card-border-radius $card-border-radius 0 0
+    elevation(0)
+    
+  &--fixed
+    position: fixed
 
-      ^[0]--dark &
-        background: rgba($material-dark.fg-color, 0.1)
+  &--fixed, &--absolute
+    top: 0
+    left: 0
 
-      ^[0]--light &
-        background: rgba($material-light.fg-color, 0.1)
+    + main
+      padding-top: $toolbar-height
+      
+  &--floating
+    display: inline-flex
+    margin: 16px
+    width: auto
 
-    &--disabled
-      opacity: .5
-      pointer-events: none
+  &--prominent
+    .toolbar__content
+      height: $toolbar-height
 
-  .input-group
-    margin: 0 0 0 16px
-    flex: 1
+    .toolbar__extension
+      height: $toolbar-height
 
-    &--dark
-      .icon
-        color: rgba($material-light.fg-color, $material-light.active-icon-percent)
+    toolbar-content(15px)
 
-    &--light
-      .icon
-        color: rgba($material-dark.fg-color, $material-dark.active-icon-percent)
+  &--dense
+    .toolbar__content,
+    .toolbar__extension
+      height: $toolbar-mobile-landscape-height
 
-    &--dark.input-group--focused.input-group--prepend-icon,
-    &--dark.input-group--focused.input-group--append-icon
-      .icon
-        color: rgba($material-light.fg-color, $material-light.active-icon-percent)
+    toolbar-content(7px)
 
-    &--light.input-group--focused.input-group--prepend-icon,
-    &--light.input-group--focused.input-group--append-icon
-      .icon
-        color: rgba($material-dark.fg-color, $material-dark.active-icon-percent)
+.toolbar__extension
+  .toolbar__title
+    margin-left: 72px !important
+
+  .tabs__bar
+    align-self: flex-end
+    margin: 0
+
+toolbar-content(left)
+  .toolbar__content,
+  .toolbar__extension
+    > *:first-child
+      margin-left: left
+
+    > *:last-child
+      margin-right: left

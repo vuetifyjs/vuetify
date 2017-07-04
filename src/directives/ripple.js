@@ -8,7 +8,7 @@ function style (el, value) {
 }
 
 const ripple = {
-  show: (e, el, { value = {}}) => {
+  show: (e, el, { value = {} }) => {
     var container = document.createElement('span')
     var animation = document.createElement('span')
 

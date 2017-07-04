@@ -13,8 +13,7 @@
     position: absolute
     pointer-events: none
     text-transform: initial
-    transition: $secondary-transition
-    visibility: hidden
+    transition: .15s $transition.swing
     width: auto
     white-space: pre
     z-index: 99
@@ -22,50 +21,49 @@
 
   &:hover
     &:before
-      opacity: 1
-      visibility: visible
+      opacity: 0.9
     
   &[data-tooltip-location='bottom']
     &:before
       top: 100%
       left: 50%
-      transform: translate(-50%, -14px) scale(0.1)
+      transform: translate3d(-50%, -14px, 0) scale(0)
       transform-origin: center top
       
     &:hover
       &:before
-        transform: translate(-50%, 14px) scale(1.01)
+        transform: translate3d(-50%, 14px, 0) scale(1)
       
   &[data-tooltip-location='top']
     &:before
       bottom: 100%
       left: 50%
-      transform: translate(-50%, 14px) scale(0.1)
+      transform: translate3d(-50%, 14px, 0) scale(0)
       transform-origin: center bottom
       
     &:hover
       &:before
-        transform: translate(-50%, -14px) scale(1.01)
+        transform: translate3d(-50%, -14px, 0) scale(1)
 
   &[data-tooltip-location='left']
     &:before
       right: 100%
-      transform: translate(14px, 0%) scale(0.1)
+      transform: translate3d(14px, 0, 0) scale(0)
       transform-origin: center right
       
     &:hover
       &:before
-        transform: translate(-14px, 0) scale(1.01)
+        transform: translate3d(-14px, 0, 0) scale(1)
       
   &[data-tooltip-location='right']
     &:before
       left: 100%
-      transform: translate(-14px, 0%) scale(0.1)
+      transform: translate3d(-14px, 0, 0) scale(0)
       transform-origin: center left
       
     &:hover
       &:before
-        transform: translate(14px, 0) scale(1.01)
+        transform: translate3d(14px, 0, 0) scale(1)
     
   @media $display-breakpoints.sm-and-down
     &:before
@@ -74,19 +72,19 @@
     &[data-tooltip-location='bottom']
       &:hover
         &:before
-          transform: translate(-50%, 24px) scale(1.01)
+          transform: translate3d(-50%, 24px, 0) scale(1)
       
     &[data-tooltip-location='top']
       &:hover
         &:before
-          transform: translate(-50%, -24px) scale(1.01)
+          transform: translate3d(-50%, -24px, 0) scale(1)
       
     &[data-tooltip-location='left']
       &:hover
         &:before
-          transform: translate(-24px, 0%) scale(1.01)
+          transform: translate3d(-24px, 0, 0) scale(1)
       
     &[data-tooltip-location='right']
       &:hover
         &:before
-          transform: translate(24px, 0%) scale(1.01)
+          transform: translate3d(24px, 0, 0) scale(1)

@@ -19,6 +19,52 @@ $theme := {
 // Material Design - https://material.io/guidelines/style/color.html#color-usability
 // ============================================================
 $material-light := {
+  status-bar: {
+    regular: #E0E0E0,
+    lights-out: rgba(#fff, .7)
+  },
+  app-bar: #F5F5F5,
+  background: #FAFAFA,
+  cards: #FFFFFF,
+  dividers: rgba(#000, .12),
+  text: {
+    primary: rgba(#000, .87),
+    secondary: rgba(#000, .54),
+    disabled: rgba(#000, .38)
+  },
+  icons: {
+    active: rgba(#000, .54),
+    inactive: rgba(#000, .38)
+  },
+  buttons: {
+    disabled: rgba(#000, .26),
+    focused: rgba(#000, .12),
+    focused-alt: rgba(#fff, .6),
+    pressed: rgba(#999, .4)
+  },
+  selection-controls: {
+    active: $teal.base,
+    thumb: {
+      inactive: $grey.lighten-5,
+      disabled: $grey.lighten-1
+    },
+    track: {
+      inactive: rgba(#000, .38),
+      disabled: rgba(#000, .12)
+    }
+  },
+  slider: {
+    active: rgba(#000, .38),
+    inactive: rgba(#000, .26),
+    disabled: rgba(#000, .26),
+    discrete: #000
+  },
+  tabs: {
+    active: $theme.primary,
+    inactive: rgba(#000, .70)
+  },
+
+
   bg-color: #fff
   fg-color: #000
   text-color: #000
@@ -30,6 +76,52 @@ $material-light := {
   inactive-icon-percent: .38
 }
 $material-dark := {
+  status-bar: {
+    regular: #000000,
+    lights-out: rgba(#000, .2)
+  },
+  app-bar: #212121,
+  background: #303030,
+  cards: #424242,
+  dividers: rgba(#fff, .12),
+  text: {
+    primary: #fff,
+    secondary: rgba(#fff, .70),
+    disabled: rgba(#fff, .50)
+  },
+  icons: {
+    active: #fff,
+    inactive: rgba(#fff, .5)
+  },
+  buttons: {
+    disabled: rgba(#fff, .3),
+    focused: rgba(#fff, .12),
+    focused-alt: rgba(#fff, .1),
+    pressed: rgba(#ccc, .25)
+  },
+  selection-controls: {
+    active: $teal.lighten-3,
+    thumb: {
+      inactive: $grey.lighten-1,
+      disabled: $grey.darken-3
+    },
+    track: {
+      inactive: rgba(#fff, .3),
+      disabled: rgba(#fff, .1)
+    }
+  },
+  slider: {
+    active: rgba(#fff, .3),
+    inactive: rgba(#fff, .2),
+    disabled: rgba(#fff, .2),
+    discrete: #fff
+  },
+  tabs: {
+    active: #fff,
+    inactive: rgba(#fff, .7)
+  },
+
+
   bg-color: #303030
   fg-color: #fff
   text-color: #fff
@@ -44,3 +136,14 @@ $material-dark := {
 // Default Material Theme
 // ============================================================
 $material-theme := $material-light
+$material-twelve-percent-light := rgba($material-dark.fg-color, $material-dark.divider-percent)
+$material-twelve-percent-dark := rgba($material-light.fg-color, $material-light.divider-percent)
+
+
+// Theme
+// ============================================================
+$body-bg-light := $material-light.background
+$body-bg-dark := $material-dark.background
+$body-color-light := rgba($material-dark.text-color, $material-dark.primary-text-percent)
+$body-color-dark := rgba($material-light.text-color, $material-light.primary-text-percent)
+$color-theme := rgba($material-theme.text-color, $material-theme.primary-text-percent)

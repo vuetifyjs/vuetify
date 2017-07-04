@@ -1,0 +1,48 @@
+.input-group.input-group--selection-controls
+  z-index: 0
+
+  &.switch
+    .input-group--selection-controls__container
+      position: relative
+
+      &[class*="--text"]
+        .input-group--selection-controls__ripple--active:after
+          background-color: currentColor
+
+    .input-group--selection-controls__toggle
+      background-color: currentColor
+      color: inherit
+      position: absolute
+      height: 14px
+      top: 50%
+      left: 0
+      width: 34px
+      border-radius: 8px
+      transform: translateY(-50%)
+
+      &.input-group--selection-controls__toggle--active
+        opacity: .5
+
+    .input-group--selection-controls__ripple
+      transform: translate3d(-15px, -24px, 0)
+      transition: .3s $transition.fast-in-fast-out
+      z-index: 1
+
+      &:after
+        content: ''
+        position: absolute
+        display: inline-block
+        cursor: pointer
+        width: 20px
+        border-radius: 50%
+        top: 50%
+        left: 50%
+        transform: translate3d(-50%, -50%, 0)
+        height: 20px
+        elevation(4)
+
+      &--active
+        transform: translate3d(2px, -24px, 0)
+
+    label
+      margin-left: 44px

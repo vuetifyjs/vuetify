@@ -1,8 +1,8 @@
-import Contextualable from './contextualable'
+import Colorable from '~mixins/colorable'
 import Input from './input'
 
 export default {
-  mixins: [Contextualable, Input],
+  mixins: [Input, Colorable],
 
   model: {
     prop: 'inputValue',
@@ -10,9 +10,9 @@ export default {
   },
 
   props: {
-    inputValue: [Array, Boolean, String],
-    falseValue: String,
-    trueValue: String
+    inputValue: null,
+    falseValue: null,
+    trueValue: null
   },
 
   computed: {
@@ -40,7 +40,7 @@ export default {
 
   methods: {
     genLabel () {
-      return this.$createElement('label', { on: { click: this.toggle }}, this.label)
+      return this.$createElement('label', { on: { click: this.toggle } }, this.label)
     },
     toggle () {
       if (this.disabled) {

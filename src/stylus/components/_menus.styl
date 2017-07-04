@@ -23,6 +23,11 @@
     overflow-x: hidden
     z-index: 6
     elevation(8)
+    
+    &--dropdown
+      border-top-left-radius: 0
+      border-top-right-radius: 0
+      border-top: 1px solid $material-light.dividers
 
   &-transition
     &-enter
@@ -33,10 +38,6 @@
         transform: translateY(-15px)
         pointer-events: none
 
-      .list__tile--active
-        opacity: 1
-        transform: none !important
-        pointer-events: auto
     &-enter-to
       .list__tile
         pointer-events: auto
@@ -59,3 +60,10 @@
 
     &-enter-active, &-leave-active
       transition: all .5s $transition.swing
+
+.menu-transition-enter
+  &.menu__content--auto
+    .list__tile--active
+      opacity: 1
+      transform: none !important
+      pointer-events: auto

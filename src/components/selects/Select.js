@@ -1,16 +1,17 @@
-import Input from '../../mixins/input'
-import Generators from './mixins/generators'
 import Autocomplete from './mixins/autocomplete'
+import Filterable from '~mixins/filterable'
+import Generators from './mixins/generators'
+import Input from '~mixins/input'
 
 export default {
   name: 'select',
 
-  mixins: [Autocomplete, Input, Generators],
+  mixins: [Autocomplete, Input, Filterable, Generators],
 
   data () {
     return {
       content: {},
-      inputValue: this.value,
+      inputValue: this.multiple && !this.value ? [] : this.value,
       isBooted: false,
       lastItem: 20,
       isActive: false
@@ -53,19 +54,34 @@ export default {
     offset: Boolean,
     singleLine: Boolean,
     top: Boolean,
-    returnObject: Boolean
+    returnObject: Boolean,
+    overflow: Boolean,
+    segmented: Boolean,
+    editable: Boolean
   },
 
   computed: {
     classes () {
       return {
         'input-group--text-field input-group--select': true,
+        'input-group--auto': this.auto,
+        'input-group--overflow': this.overflow,
+        'input-group--segmented': this.segmented,
+        'input-group--editable': this.editable,
         'input-group--autocomplete': this.autocomplete,
-        'input-group--single-line': this.singleLine,
+        'input-group--single-line': this.singleLine || this.isDropdown,
         'input-group--multi-line': this.multiLine,
         'input-group--chips': this.chips,
         'input-group--multiple': this.multiple
       }
+    },
+    computedContentClass () {
+      const children = [
+        this.auto ? 'menu__content--auto' : '',
+        this.isDropdown ? 'menu__content--dropdown' : ''
+      ]
+
+      return children.join(' ')
     },
     filteredItems () {
       const items = this.autocomplete && this.searchValue
@@ -77,14 +93,18 @@ export default {
     isDirty () {
       return this.selectedItems.length
     },
+    isDropdown () {
+      return this.segmented || this.overflow || this.editable
+    },
     selectedItems () {
-      if (this.inputValue === null) return []
+      if (this.inputValue === null || typeof this.inputValue === 'undefined') return []
 
       return this.items.filter(i => {
         if (!this.multiple) {
           return this.getValue(i) === this.getValue(this.inputValue)
         } else {
-          return this.inputValue.find(j => this.getValue(j) === this.getValue(i))
+          // Always return Boolean
+          return this.inputValue.find(j => this.getValue(j) === this.getValue(i)) !== undefined
         }
       })
     }
@@ -97,7 +117,7 @@ export default {
     value (val) {
       this.inputValue = val
       this.validate()
-      this.autocomplete && this.$nextTick(this.$refs.menu.updateDimensions)
+      if (this.autocomplete || this.editable) this.$nextTick(this.$refs.menu.updateDimensions)
     },
     isActive (val) {
       this.isBooted = true
@@ -110,6 +130,9 @@ export default {
       this.$nextTick(() => {
         this.content && this.content.addEventListener('scroll', this.onScroll, false)
       })
+    },
+    searchValue () {
+      this.$refs.menu.listIndex = -1
     }
   },
 
@@ -125,11 +148,32 @@ export default {
 
   methods: {
     blur () {
-      this.$nextTick(() => (this.focused = false))
+      this.$nextTick(() => {
+        this.focused = false
+        this.$el.blur()
+      })
     },
     focus () {
       this.focused = true
-      this.autocomplete && this.$refs.input.focus()
+      this.$refs.input &&
+        (this.autocomplete || this.editable) &&
+        this.$refs.input.focus()
+
+      if (this.editable &&
+          this.inputValue !== null &&
+          typeof this.inputValue !== 'undefined'
+        ) {
+        this.$nextTick(() => (this.$refs.input.value = this.getValue(this.inputValue)))
+      }
+    },
+    genLabel () {
+      if (this.editable && this.focused) return null
+
+      const data = {}
+
+      if (this.id) data.attrs = { for: this.id }
+
+      return this.$createElement('label', data, this.label)
     },
     getText (item) {
       return item === Object(item) ? item[this.itemText] : item
@@ -139,7 +183,7 @@ export default {
     },
     onScroll () {
       if (!this.isActive) {
-        setTimeout(() => (this.content.scrollTop = 0), 50)
+        requestAnimationFrame(() => (this.content.scrollTop = 0))
       } else {
         const showMoreItems = (
           this.content.scrollHeight -
@@ -166,9 +210,12 @@ export default {
       if (this.autocomplete) {
         this.$nextTick(() => {
           this.searchValue = null
-          this.$refs.input.focus()
+          this.$refs.input &&
+            this.$refs.input.focus()
         })
       }
+
+      this.$emit('change', this.inputValue)
     }
   },
 

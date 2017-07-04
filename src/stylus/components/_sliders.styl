@@ -1,77 +1,72 @@
-/** Theme */
-.input-group--slider
-  &.input-group--light
-    slider-theme($slider-light-off,
-      $slider-light-focus-off,
-      $input-group-light-focus,
-      $slider-light-label,
-      $slider-light-ticks
-    )
-    
-  &.input-group--dark
-    slider-theme($slider-dark-off,
-      $slider-dark-focus-off,
-      $input-group-dark-focus,
-      $slider-dark-label,
-      $slider-dark-ticks
-    )
-
 /** Input Group */
 .input-group--slider
   flex-direction: row
   flex-wrap: wrap
-  
+
   .input-group__details:before, .input-group__details:after
     display: none
-    
+
   .input-group__input
     flex: 1 1 100%
-    
+
 
   label
     + .input-group__input
       margin-left: 16px
       flex: 1 1 auto
 
+  &:not(.input-group--disabled).input-group--dirty
+    .slider__track-fill
+      background: $theme.primary
+
   &.input-group--active
     .slider__thumb
-      transform: translateY(-50%) scale(1)
-      
+      transform: translateY(-50%) scale(1.2)
+
     .slider__track
       transition: none
-      
+
     .slider__thumb-container
       &--label
         .slider__thumb
           transform: translateY(-50%) scale(0)
-          
+
           &:hover
             transform: translateY(-50%) scale(0)
 
     .slider__thumb-container, .slider__track-fill
       transition: none
 
+    &.input-group--ticks
+      .slider
+        &__track__container:after, &__tick
+          opacity: 1
+
   &.input-group--dirty
     .slider__thumb
       background: $theme.primary
       border-color: $theme.primary
-      
+
     .slider__thumb--label
       background: $theme.primary
-      
+
   &.input-group--disabled
     pointer-events: none
-    
+
     .slider__thumb
       transform: translateY(-50%) scale(.5)
       background: transparent
-      
+
     &.input-group--dirty
       border-color: transparent
-      
+
   &.input-group--prepend-icon
     .slider
-      margin-left: 56px
+      margin-left: 40px
+
+  &.input-group--append-icon
+    .slider
+      margin-right: 40px
 
 
 /** Slider */
@@ -85,13 +80,6 @@
   user-select: none
 
 
-/** Types */
-.input-group
-  &--ticks:hover
-    .slider__track__container:after, .slider__ticks
-      opacity: 1
-
-
 /** Thumb/Track/Ticks */
 .slider
   &__track__container
@@ -101,7 +89,7 @@
     height: 2px
     width: 100%
     overflow: hidden
-    
+
     &:after
       content: ''
       position: absolute
@@ -111,11 +99,11 @@
       transition: .3s ease-in-out
       width: 2px
       opacity: 0
-    
-  &__track, &__thumb, &__ticks
+
+  &__track, &__thumb, &__tick
     position: absolute
     top: 0
-    
+
   &__track
     height: 2px
     left: 0
@@ -123,36 +111,34 @@
     transform-origin: right
     overflow: hidden
     width: 100%
-    
+
     &-fill
       position: absolute
       left: 0
       height: 2px
-      background: $theme.primary
       transform-origin: left
       width: 100%
       transition: .3s ease-in-out
-    
-  &__ticks, 
+
   &__ticks-container
     position: absolute
     left: 0
     height: 2px
     width: 100%
-    
+
   &__ticks-container
     top: 50%
     overflow: hidden
-    
-  &__ticks
+
+  &__tick
     transition: .3s ease-in-out
     opacity: 0
-    
+
   &__thumb-container
     position: absolute
     top: 50%
     transition: .3s ease-in-out
-    
+
   &__thumb
     width: 20px
     height: 20px
@@ -163,9 +149,6 @@
     transition: .3s ease-in-out
     transform: translateY(-50%) scale(.8)
     user-select: none
-    
-    &:hover
-      transform: translateY(-50%) scale(1)
 
 
 /** Thumb Label */
@@ -174,8 +157,8 @@
     position: absolute
     left: 0
     top: 0
-    transition: .3s ease-in-out      
-    
+    transition: .3s ease-in-out
+
   &__thumb--label
     display: flex
     align-items: center
@@ -191,6 +174,6 @@
     transform: rotate(45deg)
     user-select: none
     transition: .3s ease-in-out
-    
+
     span
       transform: rotate(-45deg) translateZ(0)
