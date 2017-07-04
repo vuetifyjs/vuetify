@@ -128,7 +128,8 @@ export default {
       return this.selectAll !== undefined && this.selectAll !== false
     },
     itemsLength () {
-      return this.totalItems || this.search && this.searchLength || this.items.length
+      if (this.search) return this.searchLength
+      return this.totalItems || this.items.length
     },
     indeterminate () {
       return this.hasSelectAll && this.someItems && !this.everyItem
