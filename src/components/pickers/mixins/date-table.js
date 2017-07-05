@@ -53,7 +53,7 @@ export default {
       const day = new Date(
         this.tableYear,
         this.tableMonth
-      ).getDay() - this.firstDayOffset
+      ).getDay() - this.firstDayOfWeek
 
       for (let i = 0; i < day; i++) {
         rows.push(this.$createElement('td'))

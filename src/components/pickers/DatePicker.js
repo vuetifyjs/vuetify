@@ -21,8 +21,7 @@ export default {
       currentYear: null,
       isSelected: false,
       isReversing: false,
-      narrowDays: [],
-      firstDayOffset: 0
+      narrowDays: []
     }
   },
 
@@ -51,8 +50,8 @@ export default {
       default: () => (null)
     },
     firstDayOfWeek: {
-      type: String,
-      default: 'Sunday'
+      type: Number,
+      default: 0
     }
   },
 
@@ -162,22 +161,15 @@ export default {
   },
 
   created () {
-    const days = []
-    let date = new Date()
+    const date = new Date()
+    date.setDate(date.getDate() - date.getDay() + this.firstDayOfWeek)
 
     createRange(7).forEach(() => {
-      const long = date.toLocaleString(this.locale, { weekday: 'long' })
       const narrow = date.toLocaleString(this.locale, { weekday: 'narrow' })
-      if (long === this.firstDayOfWeek) this.firstDayOffset = date.getDay()
-
-      days.push(long)
       this.narrowDays.push(narrow)
 
-      date = new Date(date.getTime() + (24 * 60 * 60 * 1000))
+      date.setDate(date.getDate() + 1)
     })
-    const firstDayIndex = days.indexOf(this.firstDayOfWeek)
-
-    this.narrowDays = [...this.narrowDays.slice(firstDayIndex), ...this.narrowDays.slice(0, firstDayIndex)]
   },
 
   mounted () {
