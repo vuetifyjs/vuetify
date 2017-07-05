@@ -37,8 +37,8 @@ export default {
     genTHead () {
       return this.$createElement('thead', {
 
-      }, this.genTR(this.week.map((o, i) => {
-        return this.$createElement('th', Array.isArray(this.shortDays) && this.shortDays[i] || this.shortDays(o))
+      }, this.genTR(this.narrowDays.map((day) => {
+        return this.$createElement('th', day)
       })))
     },
     genTBody () {
@@ -53,7 +53,7 @@ export default {
       const day = new Date(
         this.tableYear,
         this.tableMonth
-      ).getDay() - this.days.indexOf(this.firstDayOfWeek)
+      ).getDay() - this.firstDayOffset
 
       for (let i = 0; i < day; i++) {
         rows.push(this.$createElement('td'))

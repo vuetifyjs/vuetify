@@ -2,13 +2,11 @@
 export default {
   methods: {
     genTitle () {
-      const date = this.titleDateFormat({
-        day: this.day,
-        dayName: this.dayName,
-        month: this.month,
-        monthName: this.monthName,
-        landscape: this.landscape
-      })
+      let date = new Date(this.year, this.month, this.day).toLocaleString(this.locale, this.titleDateFormat)
+      if (this.landscape) {
+        if (date.indexOf(',') > -1) date = date.replace(',', ',<br>')
+        else if (date.indexOf(' ') > -1) date = date.replace(' ', '<br>')
+      }
 
       const text = this.$createElement('transition', {
         props: {
@@ -18,7 +16,7 @@ export default {
       }, [
         this.$createElement('div', {
           domProps: { innerHTML: date },
-          key: date
+          key: this.landscape
         })
       ])
 
