@@ -169,10 +169,14 @@
   &--fixed, &--absolute
     margin: 0
 
-  &--absolute
+  // Position must have prepended .btn
+  // to account for tooltip
+  // TODO: Remove this once tooltips are
+  // converted to elements
+  &.btn--absolute
     position: absolute
       
-  &--fixed
+  &.btn--fixed
     position: fixed
       
   &--top
