@@ -28,6 +28,7 @@ export default {
           'class': 'input-group--select__autocomplete',
           domProps: { value: this.searchValue },
           on: { input: e => (this.searchValue = e.target.value) },
+          attrs: { tabindex: -1 },
           ref: 'input',
           key: 'input'
         })
