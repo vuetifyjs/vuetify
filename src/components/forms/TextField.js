@@ -182,8 +182,8 @@ export default {
       if (this.id) data.domProps.id = this.id
       if (this.step) data.attrs.step = this.step
       if (!this.counter) {
-        if (this.max) data.attrs.max = this.max
-        if (this.min) data.attrs.min = this.min
+        if (![undefined, null].includes(this.max)) data.attrs.max = this.max
+        if (![undefined, null].includes(this.min)) data.attrs.min = this.min
       }
 
       if (this.multiLine) {
