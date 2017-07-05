@@ -114,7 +114,7 @@ export default {
     return h('div', {
       'class': 'dialog__container',
       style: {
-        display: this.fullWidth ? 'block' : 'inline-block'
+        display: !this.$slots.activator && 'none' || this.fullWidth ? 'block' : 'inline-block'
       }
     }, children)
   }
