@@ -21,8 +21,11 @@ export default {
     },
 
     genTransition () {
-      return this.$createElement(this.transition, {
-        props: { origin: this.origin }
+      return this.$createElement('transition', {
+        props: {
+          name: this.transition,
+          origin: this.origin
+        }
       }, [this.genContent()])
     },
 

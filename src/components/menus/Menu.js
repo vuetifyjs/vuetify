@@ -114,7 +114,7 @@ export default {
     },
     transition: {
       type: String,
-      default: 'v-menu-transition'
+      default: 'menu-transition'
     },
     positionX: {
       type: Number,
