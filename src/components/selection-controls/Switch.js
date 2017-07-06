@@ -1,9 +1,9 @@
-import Checkbox from '~mixins/checkbox'
+import Selectable from '~mixins/selectable'
 
 export default {
   name: 'switch',
 
-  mixins: [Checkbox],
+  mixins: [Selectable],
 
   computed: {
     classes () {

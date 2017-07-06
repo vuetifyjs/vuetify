@@ -11,7 +11,6 @@ import Dialogs from './dialogs/index'
 import Dividers from './dividers/index'
 import ExpansionPanel from './expansion-panel/index'
 import Footer from './footer/index'
-import Forms from './forms/index'
 import Grid from './grid/index'
 import Icons from './icons/index'
 import Lists from './lists/index'
@@ -22,11 +21,13 @@ import Pagination from './pagination/index'
 import Parallax from './parallax/index'
 import Progress from './progress/index'
 import Select from './selects/index'
+import SelectionControls from './selection-controls/index'
 import Slider from './sliders/index'
 import Subheader from './subheaders/index'
 import Stepper from './steppers/index'
 import Tables from './tables/index'
 import Tabs from './tabs/index'
+import TextFields from './text-fields/index'
 import Transitions from './transitions/_index'
 import Snackbar from './snackbars/index'
 import BottomNav from './bottom-nav/index'
@@ -45,7 +46,6 @@ export default Object.assign({},
   Dividers,
   ExpansionPanel,
   Footer,
-  Forms,
   Grid,
   Icons,
   Lists,
@@ -56,11 +56,13 @@ export default Object.assign({},
   Parallax,
   Progress,
   Select,
+  SelectionControls,
   Slider,
   Subheader,
   Stepper,
   Tables,
   Tabs,
+  TextFields,
   Transitions,
   Snackbar,
   BottomNav
