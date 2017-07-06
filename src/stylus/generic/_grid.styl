@@ -62,6 +62,15 @@
 
   for size, width in $grid-breakpoints
     @media all and (min-width: width)
+      &.row-{size} 
+        flex-direction: row   
+
+      &.column-{size}
+        flex-direction: column
+
+      &.child-flex-{size} > *   
+        flex: 1
+
       for n in (1..$grid-columns)
         .flex.{size}{n}
           flex-basis: (n / $grid-columns * 100)%
