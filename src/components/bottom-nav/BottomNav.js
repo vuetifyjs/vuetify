@@ -14,6 +14,6 @@
       if (props.shift) data.staticClass += ' bottom-nav--shift'
       if (props.value) data.staticClass += ' bottom-nav--active'
 
-      return h('div', data, [h('div', children)])
+      return h('div', data, children)
     }
   }

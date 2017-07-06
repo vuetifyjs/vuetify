@@ -16,24 +16,17 @@
 
   &--active
     transform: translate3d(0, 0, 0)
-    
-  > div
-    width: 100%
-    text-align: center
 
-  .btn
+  > .btn
     background: transparent !important
     border-radius: 0
     box-shadow: none !important
-    flex: 1 1 32px
     height: 100%
     margin: 0
     max-width: 168px
     min-width: 80px
     padding: 0px
     opacity: .5
-    text-transform: capitalize
-    transform-origin: 50% 50%
     width: 100%
 
     .icon
@@ -41,7 +34,7 @@
       transition: all .4s cubic-bezier(.25, .8, .50, 1)
 
     .btn__content
-      height: 56px
+      height: 100%
       flex-direction: column-reverse
       height: 56px
       font-size: 12px
@@ -56,7 +49,7 @@
         font-size: 14px
         
         .icon
-          transform: scale3d(1, 1, 1) translate3d(0, 0, 0)
+          transform: none
 
     &:not(.btn--active)
       filter: grayscale(100%)
@@ -76,10 +69,6 @@
       &--active
         min-width: 96px
         max-width: 168px
-        flex: 1 1 72px
-
-        .btn__content .icon
-          transform: scale3d(1, 1, 1) translate3d(0, 2px, 0)
 
 .bottom-nav--shift
   .btn:not(.btn--active) .btn__content
