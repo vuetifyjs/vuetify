@@ -138,8 +138,9 @@ export default {
     genHint () {
       return this.$createElement('div', {
         'class': 'input-group__hint',
-        key: this.hint
-      }, this.hint)
+        key: this.hint,
+        domProps: { innerHTML: this.hint }
+      })
     },
     genError (error) {
       return this.$createElement(
