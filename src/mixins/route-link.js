@@ -8,7 +8,6 @@ export default {
     nuxt: Boolean,
     replace: Boolean,
     ripple: Boolean,
-    router: Boolean,
     tag: String,
     target: String,
     download: String
@@ -19,7 +18,6 @@ export default {
     generateRouteLink () {
       let exact = this.exact
       let tag
-      const options = this.to || this.href
 
       const data = {
         attrs: { disabled: this.disabled },
@@ -38,9 +36,9 @@ export default {
           (this.to === Object(this.to) && this.to.path === '/')
       }
 
-      if (options && this.router) {
+      if (this.to) {
         tag = this.nuxt ? 'nuxt-link' : 'router-link'
-        data.props.to = options
+        data.props.to = this.to
         data.props.exact = exact
         data.props.activeClass = this.activeClass
         data.props.append = this.append
@@ -50,7 +48,7 @@ export default {
         tag = this.tag || 'a'
 
         if (tag === 'a') {
-          data.attrs.href = options || 'javascript:;'
+          data.attrs.href = this.href || 'javascript:;'
           if (this.target) data.attrs.target = this.target
 
           data.attrs.download = this.download
