@@ -50,7 +50,6 @@
 
       .stepper__step__step
         background: $theme.primary
-        // font-size: 12px
 
     &--editable
       cursor: pointer
@@ -60,19 +59,6 @@
         text-shadow: 0px 0px 0px black
 
     &--inactive
-      .stepper__label
-        color: rgba($material-theme.fg-color, $material-theme.disabledORhints-text-percent)
-
-        small
-          color: rgba($material-theme.fg-color, $material-theme.disabledORhints-text-percent)
-
-      .stepper__step__step:not(&.stepper__step--error)
-        color: $material-theme.bg-color
-        background: rgba($material-theme.fg-color, $material-theme.disabledORhints-text-percent)
-
-        &:hover
-          background: rgba(#000, .50)
-
       &.stepper__step--editable
         &:hover
           .stepper__step__step
