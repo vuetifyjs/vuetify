@@ -38,9 +38,9 @@ export default {
           (this.to === Object(this.to) && this.to.path === '/')
       }
 
-      if (options || this.router) {
+      if (options && (this.to || this.router)) {
         this.router && console.warn('The <router> prop is deprecated, use <to> for router-links (with <nuxt> if applicable) and <href> for regular links.')
-        
+
         tag = this.nuxt ? 'nuxt-link' : 'router-link'
         data.props.to = options
         data.props.exact = exact
