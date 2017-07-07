@@ -11,7 +11,8 @@ export default {
           contentClass: this.computedContentClass,
           disabled: this.disabled,
           maxHeight: this.maxHeight,
-          nudgeTop: this.isDropdown ? 22 : 0,
+          nudgeTop: this.isDropdown 
+          22 : 0,
           offsetY: this.autocomplete || this.offset || this.isDropdown,
           value: this.isActive
         },
@@ -91,7 +92,7 @@ export default {
       })
 
       if (!children.length) {
-        children.push(this.genTile(this.noDataText,true))
+        children.push(this.genTile(this.noDataText, true))
       }
 
       return this.$createElement('v-card', [
@@ -110,10 +111,10 @@ export default {
         props: item
       })
     },
-    genTile (item,disabled) {
+    genTile (item, disabled) {
       const active = this.selectedItems.indexOf(item) !== -1
       const data = {
-        nativeOn: { click: () => this.selectItem(disabled?'':item) },
+        nativeOn: { click: () => this.selectItem(disabled ? '' : item) },
         props: {
           avatar: item === Object(item) && 'avatar' in item,
           ripple: true,
