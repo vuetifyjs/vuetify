@@ -91,7 +91,7 @@ export default {
       })
 
       if (!children.length) {
-        children.push(this.genTile(this.noDataText))
+        children.push(this.genTile(this.noDataText, true))
       }
 
       return this.$createElement('v-card', [
@@ -110,10 +110,10 @@ export default {
         props: item
       })
     },
-    genTile (item) {
+    genTile (item, disabled) {
       const active = this.selectedItems.indexOf(item) !== -1
       const data = {
-        nativeOn: { click: () => this.selectItem(item) },
+        nativeOn: { click: () => this.selectItem(disabled ? '' : item) },
         props: {
           avatar: item === Object(item) && 'avatar' in item,
           ripple: true,
