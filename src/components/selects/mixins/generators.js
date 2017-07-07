@@ -11,8 +11,7 @@ export default {
           contentClass: this.computedContentClass,
           disabled: this.disabled,
           maxHeight: this.maxHeight,
-          nudgeTop: this.isDropdown 
-          22 : 0,
+          nudgeTop: this.isDropdown ? 22 : 0,
           offsetY: this.autocomplete || this.offset || this.isDropdown,
           value: this.isActive
         },
