@@ -49,7 +49,7 @@ export default {
         domProps: { href: 'javascript:;' },
         on: {
           click: e => {
-            e.preventDefault()
+            e.stopPropagation()
 
             this.$emit('input', false)
           }
