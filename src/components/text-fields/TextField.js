@@ -68,12 +68,12 @@ export default {
       return `${min} / ${this.counterMax}`
     },
     counterMin () {
-      const parsedMin = Number.parseInt(this.min, 10)
-      return Number.isNaN(parsedMin) ? 0 : parsedMin
+      const parsedMin = parseInt(this.min, 10)
+      return isNaN(parsedMin) ? 0 : parsedMin
     },
     counterMax () {
-      const parsedMax = Number.parseInt(this.max, 10)
-      return Number.isNaN(parsedMax) ? 25 : parsedMax
+      const parsedMax = parseInt(this.max, 10)
+      return isNaN(parsedMax) ? 25 : parsedMax
     },
     inputValue: {
       get () {
