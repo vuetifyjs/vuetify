@@ -13,6 +13,8 @@ export default {
   },
 
   props: {
+    autocapitalize: Boolean,
+    autocomplete: Boolean,
     autofocus: Boolean,
     autoGrow: Boolean,
     counter: Boolean,
@@ -31,6 +33,7 @@ export default {
     },
     singleLine: Boolean,
     solo: Boolean,
+    spellCheck: Boolean,
     suffix: String,
     type: {
       type: String,
@@ -176,10 +179,12 @@ export default {
       }
 
       if (this.placeholder) data.domProps.placeholder = this.placeholder
-      if (this.autocomplete) data.domProps.autocomplete = true
+      if (this.autocomplete) data.domProps.autocomplete = this.autocomplete
+      if (this.autocapitalize) data.attrs.autocapitalize = true
       if (this.name) data.attrs.name = this.name
       if (this.maxlength) data.attrs.maxlength = this.maxlength
       if (this.id) data.domProps.id = this.id
+      if (this.spellCheck) data.attrs.spellCheck = true
       if (this.step) data.attrs.step = this.step
       if (!this.counter) {
         if (![undefined, null].includes(this.max)) data.attrs.max = this.max
