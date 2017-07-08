@@ -6,11 +6,14 @@ export default {
   mixins: [Themeable],
 
   provide () {
-    return {
+    const obj = {
       slider: this.slider,
       tabClick: this.tabClick,
-      isScrollable: this.isScrollable
+      isScrollable: () => this.scrollable,
+      isMobile: () => this.isMobile
     }
+
+    return obj
   },
 
   data () {
@@ -97,9 +100,6 @@ export default {
   },
 
   methods: {
-    isScrollable () {
-      return this.scrollable
-    },
     resize () {
       clearTimeout(this.resizeDebounce)
 
