@@ -7,6 +7,18 @@
             "node": "current"
           }
         }]
+      ],
+      "plugins": [
+        ["module-resolver", {
+          "root": ["./src"],
+          "alias": {
+            "~components": "components",
+            "~directives": "directives",
+            "~mixins": "mixins",
+            "~stylus": "stylus",
+            "~util": "util"
+          }
+        }]
       ]
     },
     "development": {
