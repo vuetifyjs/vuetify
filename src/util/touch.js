@@ -3,7 +3,12 @@ const touchstart = (event, wrapper) => {
   wrapper.touchstartX = touch.screenX
   wrapper.touchstartY = touch.screenY
 
-  wrapper.startCb && wrapper.startCb({ touchstartX: touch.screenX, touchstartY: touch.screenY })
+  const e = {
+    touchstartX: touch.screenX,
+    touchstartY: touch.screenY
+  }
+
+  wrapper.startCb && wrapper.startCb(Object.assign(event, e))
 }
 
 const touchend = (event, wrapper) => {
@@ -11,14 +16,28 @@ const touchend = (event, wrapper) => {
   wrapper.touchendX = touch.screenX
   wrapper.touchendY = touch.screenY
 
-  wrapper.endCb && wrapper.endCb({ touchendX: touch.screenX, touchendY: touch.screenY })
+  const e = {
+    touchendX: touch.screenX,
+    touchendY: touch.screenY,
+    offsetX: touch.screenX - wrapper.touchstartX,
+    offsetY: touch.screenY - wrapper.touchstartY
+  }
+
+  wrapper.endCb && wrapper.endCb(Object.assign(event, e))
   handleGesture(wrapper)
 }
 
 const touchmove = (event, wrapper) => {
   const touch = event.changedTouches[0]
 
-  wrapper.moveCb && wrapper.moveCb({ touchmoveX: touch.screenX, touchmoveY: touch.screenY })
+  const e = {
+    touchmoveX: touch.screenX,
+    touchmoveY: touch.screenY,
+    offsetX: touch.screenX - wrapper.touchstartX,
+    offsetY: touch.screenY - wrapper.touchstartY
+  }
+
+  wrapper.moveCb && wrapper.moveCb(Object.assign(event, e))
 }
 
 const handleGesture = (wrapper) => {
