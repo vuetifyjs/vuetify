@@ -27,11 +27,17 @@
     left: 0
     top: 0
     height: 100%
+    opacity: .12
     transition: $primary-transition
     width: 100%
 
 /** Content */
 .btn
+  &:hover,
+  &:focus
+    .btn__content:before
+      background-color: currentColor
+
   &__content
     align-items: center
     border-radius: inherit
@@ -69,7 +75,6 @@
     min-width: 0
 
     .btn__content
-      height: $button-height
       padding: 0
       
       .icon
@@ -77,12 +82,6 @@
 
       &:before
         border-radius: 50%
-        opacity: .2
-
-    &:hover,
-    &:focus
-      .btn__content:before
-        background-color: currentColor
 
     &.btn--small
       width: $button-small-height
