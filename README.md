@@ -1,4 +1,4 @@
-<p align="center"><a href="https://vuetifyjs.com" target="_blank"><img width="100"src="https://vuetifyjs.com/public/v.png"></a></p>
+<p align="center"><a href="https://vuetifyjs.com" target="_blank"><img width="100"src="https://image.ibb.co/cZg23Q/v.png"></a></p>
 <p align="center">Vuetify for Vue.js</p>
 <p align="center">
   <a href="https://www.npmjs.com/package/vuetify"><img src="https://img.shields.io/npm/dt/vuetify.svg" alt="Downloads"></a>
@@ -19,10 +19,6 @@
   <br><br>
   <a href="https://www.browserstack.com" target="_blank">
     <img width="300px" src="https://vuetifyjs.com/static/doc-images/browser-stack.svg">
-  </a>
-  <br><br>
-  <a href="https://www.cloudflare.com" target="_blank">
-    <img height="60px" src="https://vuetifyjs.com/static/doc-images/cloudflare.svg">
   </a>
   <br><br>
 </p>
