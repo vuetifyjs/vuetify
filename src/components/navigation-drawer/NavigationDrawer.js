@@ -59,14 +59,14 @@ export default {
   },
 
   watch: {
-    isActive (val) {
-      this.$emit('input', val)
-      this.showOverlay && val && this.genOverlay() || this.removeOverlay()
-    },
-    '$route' () {
+    $route () {
       if (!this.disableRouteWatcher) {
         this.isActive = !this.closeConditional()
       }
+    },
+    isActive (val) {
+      this.$emit('input', val)
+      this.showOverlay && val && this.genOverlay() || this.removeOverlay()
     },
     permanent (val) {
       this.$emit('input', val)
@@ -97,7 +97,7 @@ export default {
       } else if (this.isMobile) this.isActive = false
       else if (!this.value && (this.persistent || this.temporary)) this.isActive = false
 
-      window.addEventListener('resize', this.onResize, { passive: false })
+      window.addEventListener('resize', this.onResize, { passive: true })
     },
     checkIfMobile () {
       this.isMobile = window.innerWidth <= parseInt(this.mobileBreakPoint)
@@ -127,6 +127,6 @@ export default {
       }
     }
 
-    return h('aside', data, [this.$slots.default])
+    return h('aside', data, this.$slots.default)
   }
 }
