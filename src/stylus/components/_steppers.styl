@@ -64,6 +64,13 @@
           .stepper__step__step
             background: rgba(#000, .5)
 
+    &--complete
+      .stepper__label
+        color: rgba($material-theme.fg-color, $material-theme.primary-text-percent)
+
+      .stepper__step__step
+        background: $theme.primary
+
     &--error
       .stepper__step__step
         background: transparent
@@ -80,13 +87,6 @@
 
         small
           color: $theme.error
-
-    &--complete
-      .stepper__label
-        color: rgba($material-theme.fg-color, $material-theme.primary-text-percent)
-
-      .stepper__step__step
-        background: $theme.primary
 
 .stepper
   &__label
