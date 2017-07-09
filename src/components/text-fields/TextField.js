@@ -14,7 +14,7 @@ export default {
 
   props: {
     autocapitalize: Boolean,
-    autocomplete: Boolean,
+    autocomplete: String,
     autofocus: Boolean,
     autoGrow: Boolean,
     counter: Boolean,
