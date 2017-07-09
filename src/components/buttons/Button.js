@@ -30,10 +30,6 @@ export default {
     tag: {
       type: String,
       default: 'button'
-    },
-    type: {
-      type: String,
-      default: 'button'
     }
   },
 
@@ -111,7 +107,6 @@ export default {
     const { tag, data } = this.generateRouteLink()
     const children = [this.genContent()]
 
-    tag === 'button' && (data.attrs.type = this.type)
     this.loading && children.push(this.genLoader())
 
     return h(tag, data, children)
