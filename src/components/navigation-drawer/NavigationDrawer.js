@@ -86,8 +86,8 @@ export default {
   beforeDestroy () {
     if (this.permanent) return
     window.removeEventListener('resize', this.onResize, { passive: false })
-    touch.uninstall(this.$el)
-    this.swipeArea && touch.uninstall(this.swipeArea)
+    touch.unbind(this.$el)
+    this.swipeArea && touch.unbind(this.swipeArea)
   },
 
   methods: {
@@ -105,7 +105,7 @@ export default {
 
       this.genSwipeArea()
 
-      touch.install(this.$el, true)
+      touch.bind(this.$el, true)
         .move(({ offsetX }) => {
           if (offsetX > 0) return
 
@@ -139,7 +139,7 @@ export default {
       const overlay = document.createElement('div')
       overlay.className = 'navigation-drawer--swipe-area'
 
-      touch.install(overlay, true)
+      touch.bind(overlay, true)
         .move(({ offsetX }) => {
           this.$el.style.transform = `translate3d(${Math.min(0, offsetX - 300)}px, 0, 0)`
         })

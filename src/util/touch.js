@@ -57,13 +57,13 @@ const handleGesture = (wrapper) => {
   }
 }
 
-export function uninstall (el) {
+export function unbind (el) {
   el.removeEventListener('touchstart', touchstart, { passive: true })
   el.removeEventListener('touchend', touchend, { passive: true })
   el.removeEventListener('touchmove', touchmove, { passive: true })
 }
 
-export function install (el, move) {
+export function bind (el, move) {
   const wrapper = {
     touchstartX: 0,
     touchstartY: 0,
@@ -121,6 +121,6 @@ export function install (el, move) {
 }
 
 export default {
-  install,
-  uninstall
+  bind,
+  unbind
 }

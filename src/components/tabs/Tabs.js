@@ -6,14 +6,12 @@ export default {
   mixins: [Themeable],
 
   provide () {
-    const obj = {
+    return {
       slider: this.slider,
       tabClick: this.tabClick,
       isScrollable: () => this.scrollable,
       isMobile: () => this.isMobile
     }
-
-    return obj
   },
 
   data () {

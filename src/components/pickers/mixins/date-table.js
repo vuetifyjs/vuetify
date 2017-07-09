@@ -122,11 +122,11 @@ export default {
     }
   },
   mounted () {
-    touch.install(this.$refs.table)
+    touch.bind(this.$refs.table)
       .left(() => this.tableDate = new Date(this.tableYear, this.tableMonth + 1))
       .right(() => this.tableDate = new Date(this.tableYear, this.tableMonth - 1))
   },
   beforeDestroy () {
-    touch.uninstall(this.$refs.table)
+    touch.unbind(this.$refs.table)
   }
 }

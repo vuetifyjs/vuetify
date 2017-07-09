@@ -84,7 +84,7 @@
     },
 
     mounted () {
-      touch.install(this.$el)
+      touch.bind(this.$el)
         .right(this.prev)
         .left(this.next)
 
@@ -92,7 +92,7 @@
     },
 
     beforeDestroy () {
-      touch.uninstall(this.$el)
+      touch.unbind(this.$el)
     },
 
     methods: {

@@ -108,7 +108,7 @@ export default {
 
       let startX = 0
 
-      touch.install(this.$refs.wrapper, true)
+      touch.bind(this.$refs.wrapper, true)
         .start((e) => {
           startX = this.scrollOffset + e.touchstartX
           this.$refs.container.style.transition = 'none'
@@ -131,7 +131,7 @@ export default {
 
   beforeDestroy () {
     window.removeEventListener('resize', this.resize, { passive: true })
-    touch.uninstall(this.$refs.wrapper)
+    touch.unbind(this.$refs.wrapper)
   },
 
   render (h) {
