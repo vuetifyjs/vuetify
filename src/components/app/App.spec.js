@@ -10,13 +10,13 @@ describe('App.js', () => {
   })
 
   it('should have a toolbar and footer class', () => {
-    const context = functionalContext()
-    context.context.props = {
-      toolbar: true,
-      footer: true,
-      fixedFooter: true
-    }
-    const wrapper = mount(App, context)
+    const wrapper = mount(App, functionalContext({
+      props: {
+        toolbar: true,
+        footer: true,
+        fixedFooter: true
+      }
+    }))
 
     expect(wrapper.hasClass('application--toolbar')).toBe(true)
     expect(wrapper.hasClass('application--footer')).toBe(true)
@@ -30,9 +30,11 @@ describe('App.js', () => {
   })
 
   it('should allow a custom id', () => {
-    const context = functionalContext()
-    context.context.props.id = 'inspire'
-    const wrapper = mount(App, context)
+    const wrapper = mount(App, functionalContext({
+      props: {
+        id: 'inspire'
+      }
+    }))
 
     expect(wrapper.hasAttribute('id', 'inspire')).toBe(true)
   })

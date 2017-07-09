@@ -1,8 +1,8 @@
-export function functionalContext() {
+export function functionalContext(context = {}) {
   return {
-    context: {
+    context: Object.assign({
       data: {},
       props: {}
-    }
+    }, context)
   }
 }
