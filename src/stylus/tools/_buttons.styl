@@ -1,13 +1,6 @@
 button($material)
   color: $material.text.primary
 
-  &:not(.btn--icon)
-    &:focus,
-    &:hover
-      .btn__content
-        &:before
-          background-color: $material.buttons.focused
-
   &:disabled
     box-shadow: none !important
     color: $material.buttons.disabled

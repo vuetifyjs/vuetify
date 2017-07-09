@@ -15,9 +15,7 @@ function directive (el, binding) {
   )
 
   if (!config.visible || (binding.expression && !binding.value)) {
-    el.classList.remove('badge')
-
-    return
+    return unbind(el)
   }
 
   if (config.overlap) el.classList.add('badge--overlap')
@@ -29,12 +27,14 @@ function directive (el, binding) {
   el.classList.add('badge')
 }
 
+function unbind (el) {
+  el.removeAttribute('data-badge')
+  el.classList.remove('badge')
+}
+
 export default {
   bind: directive,
   updated: directive,
   componentUpdated: directive,
-  unbind: (el) => {
-    el.removeAttribute('data-badge')
-    el.classList.remove('badge')
-  }
+  unbind: unbind
 }

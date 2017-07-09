@@ -85,15 +85,19 @@
       margin-top: $toolbar-mobile-landscape-height
       max-height: "calc(100vh - %s)" % $toolbar-mobile-landscape-height
 
-    .list__tile__action, .list__tile__avatar
+    .list__tile__action,
+    .list__tile__avatar
       justify-content: center
       min-width: 48px
 
-    .list__tile__content
+    .list__tile__content,
+    .list__tile:after
       opacity: 0
 
-    .subheader, .divider
-      display: none
+    .subheader,
+    .divider,
+    .list--group
+      display: none !important
 
     ~ .toolbar
       padding-left: 0 !important

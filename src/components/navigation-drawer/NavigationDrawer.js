@@ -61,14 +61,14 @@ export default {
   },
 
   watch: {
-    isActive (val) {
-      this.$emit('input', val)
-      this.showOverlay && val && this.genOverlay() || this.removeOverlay()
-    },
-    '$route' () {
+    $route () {
       if (!this.disableRouteWatcher) {
         this.isActive = !this.closeConditional()
       }
+    },
+    isActive (val) {
+      this.$emit('input', val)
+      this.showOverlay && val && this.genOverlay() || this.removeOverlay()
     },
     permanent (val) {
       this.$emit('input', val)
@@ -169,6 +169,6 @@ export default {
       }
     }
 
-    return h('aside', data, [this.$slots.default])
+    return h('aside', data, this.$slots.default)
   }
 }

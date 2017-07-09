@@ -5,8 +5,15 @@ import {
 function directive (el, binding) {
   const config = directiveConfig(
     binding,
-    { top: true }
+    {
+      top: true,
+      visible: true
+    }
   )
+
+  if (!config.visible || (binding.expression && !binding.value)) {
+    return unbind(el)
+  }
 
   unbind(el, binding, config)
 

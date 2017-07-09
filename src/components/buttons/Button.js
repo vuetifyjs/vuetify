@@ -83,6 +83,8 @@ export default {
       !this.fab &&
         e.detail &&
         this.$el.blur()
+
+      this.$emit('click', e)
     },
     genContent () {
       return this.$createElement('div', { 'class': 'btn__content' }, [this.$slots.default])

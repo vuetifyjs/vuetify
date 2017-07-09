@@ -1,6 +1,6 @@
 <template lang="pug">
-  component(
-    v-bind:is="computedTransition"
+  transition(
+    v-bind:name="computedTransition"
   )
     div(
       class="carousel__item"
@@ -30,12 +30,12 @@
 
       transition: {
         type: String,
-        default: 'v-tab-transition'
+        default: 'tab-transition'
       },
 
       reverseTransition: {
         type: String,
-        default: 'v-tab-reverse-transition'
+        default: 'tab-reverse-transition'
       }
     },
 

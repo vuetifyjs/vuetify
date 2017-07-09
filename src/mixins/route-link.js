@@ -38,7 +38,7 @@ export default {
           (this.to === Object(this.to) && this.to.path === '/')
       }
 
-      if (options && (this.to || this.router)) {
+      if (this.to) {
         this.router && console.warn('The <router> prop is deprecated, use <to> for router-links (with <nuxt> if applicable) and <href> for regular links.')
 
         tag = this.nuxt ? 'nuxt-link' : 'router-link'
@@ -48,8 +48,9 @@ export default {
         data.props.append = this.append
         data.props.replace = this.replace
         data.nativeOn = { click: this.click }
+        data.attrs.tag = this.tag
       } else {
-        tag = this.tag || 'a'
+        tag = this.href && 'a' || this.tag || 'a'
 
         if (tag === 'a') {
           data.attrs.href = this.href || 'javascript:;'
