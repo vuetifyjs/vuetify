@@ -53,8 +53,9 @@
         margin-top: $toolbar-mobile-landscape-height
         max-height: "calc(100vh - %s)" % $toolbar-mobile-landscape-height
 
-  &--persistent, &--permanent
-    &.navigation-drawer--open:not(.navigation-drawer--is-mobile):not(.navigation-drawer--right)
+  &--persistent:not(.navigation-drawer--is-mobile),
+  &--permanent
+    &.navigation-drawer--open:not(.navigation-drawer--right)
       &:not(.navigation-drawer--clipped):not(.navigation-drawer--floating)
         ~ .toolbar
           padding-left: $navigation-drawer-width
@@ -63,7 +64,7 @@
       ~ .footer:not(.footer--fixed):not(.footer--absolute)
         padding-left: $navigation-drawer-width
 
-    &.navigation-drawer--open:not(.navigation-drawer--is-mobile).navigation-drawer--right
+    &.navigation-drawer--open.navigation-drawer--right
       &:not(.navigation-drawer--clipped):not(.navigation-drawer--floating)
         + .toolbar
           padding-right: $navigation-drawer-width
