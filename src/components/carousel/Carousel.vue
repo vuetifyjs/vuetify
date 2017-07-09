@@ -23,6 +23,7 @@
 
 <script>
   import Bootable from '~mixins/bootable'
+  import touch from '~util/touch'
 
   export default {
     name: 'carousel',
@@ -83,7 +84,15 @@
     },
 
     mounted () {
+      touch.bind(this.$el)
+        .right(this.prev)
+        .left(this.next)
+
       this.init()
+    },
+
+    beforeDestroy () {
+      touch.unbind(this.$el)
     },
 
     methods: {

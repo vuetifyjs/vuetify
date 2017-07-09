@@ -1,7 +1,9 @@
+import touch from '~util/touch'
+
 export default {
   name: 'tabs-bar',
 
-  inject: ['isScrollable'],
+  inject: ['isScrollable', 'isMobile'],
 
   data () {
     return {
@@ -32,14 +34,14 @@ export default {
     },
     containerStyles () {
       return {
-        'transform': `translateX(-${this.scrollOffset}px)`
+        'transform': `translateX(${-this.scrollOffset}px)`
       }
     },
     leftIconVisible () {
-      return this.isScrollable() && this.isOverflowing && this.scrollOffset > 0
+      return !this.isMobile() && this.isScrollable() && this.isOverflowing && this.scrollOffset > 0
     },
     rightIconVisible () {
-      if (!this.isScrollable() || !this.isOverflowing) return
+      if (this.isMobile() || !this.isScrollable() || !this.isOverflowing) return
 
       // Check one scroll ahead to know the width of right-most item
       const item = this.newOffsetRight(this.scrollOffset, this.itemOffset)
@@ -103,11 +105,33 @@ export default {
     this.$vuetify.load(() => {
       window.addEventListener('resize', this.resize, { passive: true })
       this.resize()
+
+      let startX = 0
+
+      touch.bind(this.$refs.wrapper, true)
+        .start((e) => {
+          startX = this.scrollOffset + e.touchstartX
+          this.$refs.container.style.transition = 'none'
+        })
+        .move((e) => {
+          const offset = startX - e.touchmoveX
+          this.scrollOffset = offset
+        })
+        .end((e) => {
+          this.$refs.container.style.transition = null
+          if (this.scrollOffset < 0) {
+            this.scrollOffset = 0
+          } else if (this.scrollOffset >= this.$refs.container.scrollWidth) {
+            const lastItem = this.$refs.container.children[this.$refs.container.children.length - 1]
+            this.scrollOffset = this.$refs.container.scrollWidth - lastItem.clientWidth
+          }
+        })
     })
   },
 
   beforeDestroy () {
     window.removeEventListener('resize', this.resize, { passive: true })
+    touch.unbind(this.$refs.wrapper)
   },
 
   render (h) {
@@ -141,7 +165,7 @@ export default {
       }
     }, 'chevron_right')
 
-    const wrapper = h('div', { class: this.wrapperClasses }, [container])
+    const wrapper = h('div', { ref: 'wrapper', class: this.wrapperClasses }, [container])
 
     return h('div', {
       'class': this.classes
