@@ -1,9 +1,8 @@
 import { mount } from 'avoriaz'
-import { Avatar } from 'src/components/avatars'
+import { Avatar } from '~components/avatars'
 import { functionalContext } from '~util/testing'
 
 describe('Avatar.vue', () => {
-
   it('should have an avatar class', () => {
     const wrapper = mount(Avatar, functionalContext())
 

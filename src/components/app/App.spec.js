@@ -1,6 +1,6 @@
 import { mount } from 'avoriaz'
 import { functionalContext } from '~util/testing'
-import App from 'src/components/app/App'
+import App from '~components/app/App'
 
 describe('App.js', () => {
   it('should have an application class', () => {
