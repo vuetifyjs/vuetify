@@ -50,7 +50,7 @@ export default {
         data.nativeOn = { click: this.click }
         data.attrs.tag = this.tag
       } else {
-        tag = this.href && 'a' || this.tag
+        tag = this.href && 'a' || this.tag || 'a'
 
         if (tag === 'a') {
           data.attrs.href = this.href || 'javascript:;'
