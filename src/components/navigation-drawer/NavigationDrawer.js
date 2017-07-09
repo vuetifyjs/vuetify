@@ -69,6 +69,7 @@ export default {
     isActive (val) {
       this.$emit('input', val)
       this.showOverlay && val && this.genOverlay() || this.removeOverlay()
+      this.$el.scrollTop = 0
     },
     permanent (val) {
       this.$emit('input', val)
@@ -105,17 +106,42 @@ export default {
 
       this.genSwipeArea()
 
-      touch.bind(this.$el, true)
-        .move(({ offsetX }) => {
-          if (offsetX > 0) return
+      const prevent = (e) => { e.preventDefault() }
 
-          this.$el.style.transform = `translate3d(${offsetX}px, 0, 0)`
+      touch.bind(this.$el, true, false)
+        .start((e) => {
+          document.addEventListener('touchmove', prevent, { passive: false })
+
+          const top = this.$el.scrollTop
+          const totalScroll = this.$el.scrollHeight
+          const currentScroll = top + this.$el.offsetHeight
+
+          if (top === 0) {
+            this.$el.scrollTop = 1
+          } else if (currentScroll === totalScroll) {
+            this.$el.scrollTop = top - 1
+          }
+
+          this.$el.style.transition = 'none'
+        })
+        .move((e) => {
+          e.stopPropagation()
+
+          if (e.offsetX > 0 || Math.abs(e.offsetX) < 15) return
+
+          this.$el.style['overflow-y'] = 'hidden'
+          this.$el.style.transform = `translate3d(${e.offsetX}px, 0, 0)`
+          this.$el.style['-webkit-transform'] = `translate3d(${e.offsetX}px, 0, 0)`
         })
         .end(({ offsetX }) => {
-          this.isActive = offsetX !== 0 ? offsetX > 0 : this.isActive
+          document.removeEventListener('touchmove', prevent)
+          this.$el.style['overflow-y'] = null
+          this.$el.style.transition = null
+          this.isActive = offsetX !== 0 && Math.abs(offsetX) > 15 ? offsetX > 15 : this.isActive
 
           if (!this.isActive) {
             this.$el.style.transform = 'translate3d(-300px, 0, 0)'
+            this.$el.style['-webkit-transform'] = 'translate3d(-300px, 0, 0)'
             setTimeout(() => {
               this.$el.style.transform = null
             }, 75)

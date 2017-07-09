@@ -58,12 +58,12 @@ const handleGesture = (wrapper) => {
 }
 
 export function unbind (el) {
-  el.removeEventListener('touchstart', touchstart, { passive: true })
-  el.removeEventListener('touchend', touchend, { passive: true })
-  el.removeEventListener('touchmove', touchmove, { passive: true })
+  el.removeEventListener('touchstart', touchstart)
+  el.removeEventListener('touchend', touchend)
+  el.removeEventListener('touchmove', touchmove)
 }
 
-export function bind (el, move) {
+export function bind (el, move, passive = true) {
   const wrapper = {
     touchstartX: 0,
     touchstartY: 0,
@@ -113,9 +113,9 @@ export function bind (el, move) {
     }
   }
 
-  el.addEventListener('touchstart', e => touchstart(e, wrapper), { passive: true })
-  el.addEventListener('touchend', e => touchend(e, wrapper), { passive: true })
-  if (move) el.addEventListener('touchmove', e => touchmove(e, wrapper), { passive: true })
+  el.addEventListener('touchstart', e => touchstart(e, wrapper), { passive })
+  el.addEventListener('touchend', e => touchend(e, wrapper), { passive })
+  if (move) el.addEventListener('touchmove', e => touchmove(e, wrapper), { passive })
 
   return wrapper
 }
