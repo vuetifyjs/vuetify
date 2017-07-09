@@ -2,11 +2,7 @@
   "env": {
     "test": {
       "presets": [
-        ["env", {
-          "targets": {
-            "node": "current"
-          }
-        }]
+        ["es2015"]
       ],
       "plugins": [
         ["module-resolver", {
