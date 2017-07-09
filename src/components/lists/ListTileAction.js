@@ -3,14 +3,10 @@ export default {
 
   name: 'list-tile-action',
 
-  render (h, context) {
-    const data = {
-      'class': {
-        'list__tile__action': true,
-        'list__tile__action--stack': (context.children || []).length > 1
-      }
-    }
+  render (h, { data, children }) {
+    data.staticClass = data.staticClass ? `list__tile__action ${data.staticClass || ''}` : 'list__tile__action'
+    if ((children || []).length > 1) data.staticClass += ' list__tile__action--stack'
 
-    return h('div', data, context.children)
+    return h('div', data, children)
   }
 }
