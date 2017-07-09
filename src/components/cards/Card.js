@@ -17,9 +17,9 @@ export default {
     tile: Boolean
   },
 
-  render (h, { data, props, children, style }) {
+  render (h, { data, props, children }) {
     data.staticClass = data.staticClass ? `card ${data.staticClass}` : 'card'
-    data.style = style || {}
+    data.style = data.style || {}
     data.style.height = props.height
 
     if (props.horizontal) data.staticClass += ' card--horizontal'
