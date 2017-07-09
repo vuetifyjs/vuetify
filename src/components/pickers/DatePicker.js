@@ -50,7 +50,7 @@ export default {
       default: () => (null)
     },
     firstDayOfWeek: {
-      type: Number,
+      type: [String, Number],
       default: 0
     }
   },
@@ -162,7 +162,7 @@ export default {
 
   created () {
     const date = new Date()
-    date.setDate(date.getDate() - date.getDay() + this.firstDayOfWeek)
+    date.setDate(date.getDate() - date.getDay() + parseInt(this.firstDayOfWeek))
 
     createRange(7).forEach(() => {
       const narrow = date.toLocaleString(this.locale, { weekday: 'narrow' })
