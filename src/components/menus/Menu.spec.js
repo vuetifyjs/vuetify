@@ -5,7 +5,10 @@ import Card from '~components/cards/Card'
 import Menu from '~components/menus/Menu'
 import clickOutside from '~directives/click-outside'
 import load from '~util/load'
+import { rafPolyfill } from '~util/testing'
 import { ripple } from '~directives/ripple'
+
+rafPolyfill(window)
 
 Vue.prototype.$vuetify = {
   load: load
@@ -20,7 +23,7 @@ Menu.directives = {
 }
 
 describe('Menu.js', () => {
-  it('should work', () => {
+  it('should work', (done) => {
     const wrapper = mount(Menu, {
       propsData: {
         value: false
@@ -31,11 +34,17 @@ describe('Menu.js', () => {
       }
     })
 
+    const activator = wrapper.find('.menu__activator')[0]
     const input = jest.fn()
     wrapper.instance().$on('input', input)
-    const activator = wrapper.find('.menu__activator')[0]
     activator.trigger('click')
 
-    expect(input).toBeCalledWith(true)
+    wrapper.vm.$nextTick(() => {
+      try {
+        expect(input).toBeCalledWith(true)
+      } finally {
+        done()
+      }
+    })
   })
 })

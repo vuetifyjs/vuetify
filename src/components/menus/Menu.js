@@ -193,8 +193,8 @@ export default {
   methods: {
     activate () {
       if (typeof window === 'undefined') return
+      this.isBooted = true
       this.insideContent = true
-      this.initWindow()
       this.getTiles()
       this.updateDimensions()
       requestAnimationFrame(this.startTransition)

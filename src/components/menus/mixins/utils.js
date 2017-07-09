@@ -12,14 +12,6 @@ export default {
         scrollHeight: el.scrollHeight,
         top, bottom, left, right, height, width
       }
-    },
-    initWindow () {
-      this.isBooted = true
-
-      if (this.window === window) return
-
-      this.window = window
-      this.window.addEventListener('resize', this.windowResizeHandler)
     }
   }
 }
