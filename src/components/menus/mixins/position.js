@@ -100,6 +100,7 @@ export default {
       if (this.top && top < 0) top = 12
       else if ((!this.top || this.bottom) && this.window.innerHeight < totalHeight) {
         top = (
+          this.$el.parentNode.scrollTop -
           this.window.innerHeight -
           this.dimensions.content.height -
           12

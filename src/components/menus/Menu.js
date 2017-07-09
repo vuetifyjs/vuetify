@@ -175,19 +175,17 @@ export default {
       if (this.disabled) return
 
       val && this.activate() || this.deactivate()
-    },
-    windowResizeHandler () {
-      this.isBooted = false
     }
   },
 
   mounted () {
     window.addEventListener('resize', this.onResize, { passive: true })
+    this.$el.parentNode.addEventListener('scroll', this.onScroll, { passive: true })
   },
 
   beforeDestroy () {
     window.removeEventListener('resize', this.onResize, { passive: true })
-    window.removeEventListener('resize', this.windowResizeHandler)
+    this.$el.parentNode.removeEventListener('scroll', this.onScroll, { passive: true })
   },
 
   methods: {
@@ -203,6 +201,7 @@ export default {
       this.isContentActive = false
     },
     onResize () {
+      this.isBooted = false
       clearTimeout(this.resizeTimeout)
       if (!this.isActive) return
       this.resizeTimeout = setTimeout(this.updateDimensions, 200)
@@ -210,6 +209,9 @@ export default {
     startTransition () {
       this.isContentActive = true
       requestAnimationFrame(this.calculateScroll)
+    },
+    onScroll (e) {
+      this.updateDimensions()
     }
   },
 
