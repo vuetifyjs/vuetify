@@ -1,5 +1,6 @@
 import Overlayable from '~mixins/overlayable'
 import Themeable from '~mixins/themeable'
+import touch from '~util/touch'
 
 export default {
   name: 'navigation-drawer',
@@ -11,7 +12,8 @@ export default {
       isActive: this.value,
       isBooted: false,
       isMobile: false,
-      mobileBreakPoint: 1024
+      mobileBreakPoint: 1024,
+      swipeArea: null
     }
   },
 
@@ -84,6 +86,8 @@ export default {
   beforeDestroy () {
     if (this.permanent) return
     window.removeEventListener('resize', this.onResize, { passive: false })
+    touch.unbind(this.$el)
+    this.swipeArea && touch.unbind(this.swipeArea)
   },
 
   methods: {
@@ -97,7 +101,28 @@ export default {
       } else if (this.isMobile) this.isActive = false
       else if (!this.value && (this.persistent || this.temporary)) this.isActive = false
 
-      window.addEventListener('resize', this.onResize, { passive: true })
+      window.addEventListener('resize', this.onResize, { passive: false })
+
+      this.genSwipeArea()
+
+      touch.bind(this.$el, true)
+        .move(({ offsetX }) => {
+          if (offsetX > 0) return
+
+          this.$el.style.transform = `translate3d(${offsetX}px, 0, 0)`
+        })
+        .end(({ offsetX }) => {
+          this.isActive = offsetX !== 0 ? offsetX > 0 : this.isActive
+
+          if (!this.isActive) {
+            this.$el.style.transform = 'translate3d(-300px, 0, 0)'
+            setTimeout(() => {
+              this.$el.style.transform = null
+            }, 75)
+          } else {
+            this.$el.style.transform = null
+          }
+        })
     },
     checkIfMobile () {
       this.isMobile = window.innerWidth <= parseInt(this.mobileBreakPoint)
@@ -109,6 +134,23 @@ export default {
       if (!this.enableResizeWatcher || this.permanent || this.temporary) return
       this.checkIfMobile()
       this.isActive = !this.isMobile
+    },
+    genSwipeArea () {
+      const overlay = document.createElement('div')
+      overlay.className = 'navigation-drawer--swipe-area'
+
+      touch.bind(overlay, true)
+        .move(({ offsetX }) => {
+          this.$el.style.transform = `translate3d(${Math.min(0, offsetX - 300)}px, 0, 0)`
+        })
+        .end(({ offsetX }) => {
+          this.isActive = offsetX > 0
+          this.$el.style.transform = null
+        })
+
+      this.$el.parentNode.insertBefore(overlay, this.$el.parentNode.firstChild)
+
+      return overlay
     }
   },
 

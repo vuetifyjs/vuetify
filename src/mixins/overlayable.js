@@ -23,7 +23,7 @@ export default {
       const overlay = document.createElement('div')
       overlay.className = 'overlay'
       overlay.onclick = () => {
-        if (this.permanet) return
+        if (this.permanent) return
         else if (!this.persistent) this.isActive = false
         else if (this.isMobile) this.isActive = false
       }
