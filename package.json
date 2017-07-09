@@ -19,7 +19,7 @@
   "description": "Vue.js 2 Semantic Component Framework",
   "devDependencies": {
     "autoprefixer": "^6.6.0",
-    "avoriaz": "^2.3.0",
+    "avoriaz": "^2.4.2",
     "babel": "^6.23.0",
     "babel-core": "^6.24.1",
     "babel-eslint": "^7.1.1",
@@ -72,6 +72,7 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^2.1.1",
     "vue-loader": "^10.1.0",
+    "vue-router": "^2.7.0",
     "vue-server-renderer": "^2.3.3",
     "vue-template-compiler": "^2.3.3",
     "webpack": "3.0.0",
@@ -86,13 +87,16 @@
     "npm": ">= 3.0.0"
   },
   "jest": {
+    "verbose": false,
     "roots": [
-      "<rootDir>/src",
-      "<rootDir>/test"
+      "<rootDir>/src"
     ],
     "moduleFileExtensions": [
       "js",
       "vue"
+    ],
+    "moduleDirectories": [
+      "node_modules"
     ],
     "moduleNameMapper": {
       "src/(.*)": "<rootDir>/src/$1"
@@ -100,7 +104,10 @@
     "transform": {
       ".*\\.(vue)$": "<rootDir>/node_modules/jest-vue-preprocessor",
       "\\.(styl)$": "<rootDir>/node_modules/jest-css-modules",
-      ".*\\.(vue|js)": "<rootDir>/node_modules/babel-jest"
-    }
+      ".*\\.(vue|js)$": "<rootDir>/node_modules/babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!vue-router)"
+    ]
   }
 }
