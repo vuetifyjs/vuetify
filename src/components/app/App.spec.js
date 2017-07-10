@@ -1,8 +1,7 @@
-import { mount } from 'avoriaz'
-import { functionalContext } from '~util/testing'
 import App from '~components/app/App'
+import { test } from '~util/testing'
 
-describe('App.js', () => {
+test('App.js', ({ mount, functionalContext }) => {
   it('should have an application class', () => {
     const wrapper = mount(App, functionalContext())
 

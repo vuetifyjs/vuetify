@@ -3,15 +3,13 @@ import load from '~util/load'
 import { mount } from 'avoriaz'
 
 export function test(name, cb) {
-  Vue.prototype.$vuetify = {
-    load
-  }
+  Vue.prototype.$vuetify = { load }
 
   beforeEach(() => {
     rafPolyfill(window)
   })
 
-  describe(name, () => cb({ mount }))
+  describe(name, () => cb({ mount, functionalContext }))
 }
 
 export function functionalContext(context = {}) {
