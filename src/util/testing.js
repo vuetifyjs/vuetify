@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import load from '~util/load'
-import { mount } from 'avoriaz'
+import { mount, shallow } from 'avoriaz'
 
 export function test(name, cb) {
   Vue.prototype.$vuetify = { load }
@@ -9,7 +9,11 @@ export function test(name, cb) {
     rafPolyfill(window)
   })
 
-  describe(name, () => cb({ mount, functionalContext }))
+  describe(name, () => cb({
+    functionalContext,
+    mount,
+    shallow
+  }))
 }
 
 export function functionalContext(context = {}) {

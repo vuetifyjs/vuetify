@@ -1,8 +1,7 @@
-import { mount } from 'avoriaz'
 import BottomNav from '~components/bottom-nav/BottomNav'
-import { functionalContext } from '~util/testing'
+import { test } from '~util/testing'
 
-describe('BottomNav.js', () => {
+test('BottomNav.js', ({ mount, functionalContext }) => {
   it('should have a bottom-nav class', () => {
     const wrapper = mount(BottomNav, functionalContext())
 

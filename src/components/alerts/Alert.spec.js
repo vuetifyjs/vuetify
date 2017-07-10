@@ -1,4 +1,4 @@
-import { mount } from 'avoriaz'
+import { test } from '~util/testing'
 import { createRenderer } from 'vue-server-renderer'
 import Vue from 'vue/dist/vue.common'
 import Vuetify from 'src/index'
@@ -7,7 +7,7 @@ import Icon from 'src/components/icons/Icon'
 
 Alert.components = { 'v-icon': Icon }
 
-describe('Alert.vue', () => {
+test('Alert.vue', ({ mount }) => {
   it('should have an alert class', () => {
     const wrapper = mount(Alert)
 

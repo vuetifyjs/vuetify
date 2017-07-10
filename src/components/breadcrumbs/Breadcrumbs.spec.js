@@ -1,4 +1,4 @@
-import { mount, shallow } from 'avoriaz'
+import { test } from '~util/testing'
 import Breadcrumbs from '~components/breadcrumbs/Breadcrumbs'
 import BreadcrumbsItem from '~components/breadcrumbs/BreadcrumbsItem'
 import { ripple } from '~directives/ripple'
@@ -7,7 +7,7 @@ BreadcrumbsItem.directives = {
   ripple
 }
 
-describe('Breadcrumbs.js', () => {
+test('Breadcrumbs.js', ({ mount }) => {
   it('should have a breadcrumbs classes', () => {
     const wrapper = mount(Breadcrumbs, {
       propsData: { icons: true }
