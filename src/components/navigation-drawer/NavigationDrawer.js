@@ -151,7 +151,7 @@ export default {
         })
     },
     checkIfMobile () {
-      this.isMobile = window.innerWidth <= parseInt(this.mobileBreakPoint)
+      this.isMobile = window.innerWidth < parseInt(this.mobileBreakPoint)
     },
     closeConditional () {
       return !this.permanent && (this.temporary || this.isMobile)
