@@ -1,3 +1,19 @@
+import Vue from 'vue'
+import load from '~util/load'
+import { mount } from 'avoriaz'
+
+export function test(name, cb) {
+  Vue.prototype.$vuetify = {
+    load
+  }
+
+  beforeEach(() => {
+    rafPolyfill(window)
+  })
+
+  describe(name, () => cb({ mount }))
+}
+
 export function functionalContext(context = {}) {
   return {
     context: Object.assign({
