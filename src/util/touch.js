@@ -1,11 +1,11 @@
 const touchstart = (event, wrapper) => {
   const touch = event.changedTouches[0]
-  wrapper.touchstartX = touch.screenX
-  wrapper.touchstartY = touch.screenY
+  wrapper.touchstartX = touch.clientX
+  wrapper.touchstartY = touch.clientY
 
   const e = {
-    touchstartX: touch.screenX,
-    touchstartY: touch.screenY
+    touchstartX: touch.clientX,
+    touchstartY: touch.clientY
   }
 
   wrapper.startCb && wrapper.startCb(Object.assign(event, e))
@@ -13,14 +13,14 @@ const touchstart = (event, wrapper) => {
 
 const touchend = (event, wrapper) => {
   const touch = event.changedTouches[0]
-  wrapper.touchendX = touch.screenX
-  wrapper.touchendY = touch.screenY
+  wrapper.touchendX = touch.clientX
+  wrapper.touchendY = touch.clientY
 
   const e = {
-    touchendX: touch.screenX,
-    touchendY: touch.screenY,
-    offsetX: touch.screenX - wrapper.touchstartX,
-    offsetY: touch.screenY - wrapper.touchstartY
+    touchendX: touch.clientX,
+    touchendY: touch.clientY,
+    offsetX: touch.clientX - wrapper.touchstartX,
+    offsetY: touch.clientY - wrapper.touchstartY
   }
 
   wrapper.endCb && wrapper.endCb(Object.assign(event, e))
@@ -31,10 +31,10 @@ const touchmove = (event, wrapper) => {
   const touch = event.changedTouches[0]
 
   const e = {
-    touchmoveX: touch.screenX,
-    touchmoveY: touch.screenY,
-    offsetX: touch.screenX - wrapper.touchstartX,
-    offsetY: touch.screenY - wrapper.touchstartY
+    touchmoveX: touch.clientX,
+    touchmoveY: touch.clientY,
+    offsetX: touch.clientX - wrapper.touchstartX,
+    offsetY: touch.clientY - wrapper.touchstartY
   }
 
   wrapper.moveCb && wrapper.moveCb(Object.assign(event, e))
@@ -58,6 +58,7 @@ const handleGesture = (wrapper) => {
 }
 
 export function unbind (el) {
+  if (!el) return
   el.removeEventListener('touchstart', touchstart)
   el.removeEventListener('touchend', touchend)
   el.removeEventListener('touchmove', touchmove)
