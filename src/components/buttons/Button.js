@@ -45,6 +45,7 @@ export default {
         'btn--active': this.isActive,
         'btn--block': this.block,
         'btn--bottom': this.bottom,
+        'btn--disabled': this.disabled,
         'btn--flat': this.flat,
         'btn--floating': this.fab,
         'btn--fixed': this.fixed,

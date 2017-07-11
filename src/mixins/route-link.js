@@ -48,7 +48,6 @@ export default {
         data.props.append = this.append
         data.props.replace = this.replace
         data.nativeOn = { click: this.click }
-        data.attrs.tag = this.tag
       } else {
         tag = this.href && 'a' || this.tag || 'a'
 
