@@ -1,8 +1,9 @@
 export default {
   data () {
     return {
+      overlay: null,
       overlayOffset: 0,
-      overlay: null
+      overlayTransitionDuration: 500
     }
   },
 
@@ -20,15 +21,15 @@ export default {
         (this.isActive && this.overlay)
       ) return
 
-      const overlay = document.createElement('div')
-      overlay.className = 'overlay'
-      overlay.onclick = () => {
+      this.overlay = document.createElement('div')
+      this.overlay.className = 'overlay'
+      this.overlay.onclick = () => {
         if (this.permanent) return
         else if (!this.persistent) this.isActive = false
         else if (this.isMobile) this.isActive = false
       }
 
-      if (this.absolute) overlay.className += ' overlay--absolute'
+      if (this.absolute) this.overlay.className += ' overlay--absolute'
 
       this.hideScroll()
 
@@ -36,13 +37,13 @@ export default {
         // Required for IE11
         this.$el.parentNode.insertBefore(overlay, this.$el.parentNode.firstChild)
       } else {
-        document.querySelector('[data-app]').appendChild(overlay)
+        document.querySelector('[data-app]').appendChild(this.overlay)
       }
-
-      setTimeout(() => {
-        overlay.className += ' overlay--active'
-        this.overlay = overlay
-      }, 0)
+        
+      this.overlay.clientHeight // Force repaint
+      requestAnimationFrame(() => {
+        this.overlay.className += ' overlay--active'
+      })
 
       return true
     },
@@ -53,14 +54,14 @@ export default {
 
       this.overlay.className = this.overlay.className.replace('overlay--active', '')
 
-      requestAnimationFrame(() => {
+      setTimeout(() => {
         // IE11 Fix
         try {
           this.overlay.parentNode.removeChild(this.overlay)
           this.overlay = null
           this.showScroll()
         } catch (e) {}
-      })
+      }, this.overlayTransitionDuration)
     },
     hideScroll () {
       // Check documentElement first for IE11
