@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - "8"
+script:
+  - yarn
+  - npm run test
+cache:
+  yarn: true
+branches:
+  only:
+    - master
+    - dev
