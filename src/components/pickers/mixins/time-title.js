@@ -37,15 +37,15 @@ export default {
     },
     genAMPM () {
       return this.$createElement('div', [
-        this.$createElement('span', {
-          'class': { active: this.period === 'am' },
-          on: { click: () => (this.period = 'am') }
-        }, 'AM'),
-        this.$createElement('span', {
-          'class': { active: this.period === 'pm' },
-          on: { click: () => (this.period = 'pm') }
-        }, 'PM')
+        this.genPeriod('am'),
+        this.genPeriod('pm')
       ])
+    },
+    genPeriod (period) {
+      return this.$createElement('span', {
+        'class': { active: this.period === period },
+        on: { click: () => (this.period = period) }
+      }, period.toUpperCase())
     }
   }
 }

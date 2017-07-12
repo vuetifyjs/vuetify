@@ -1,7 +1,10 @@
+import Resizable from '~mixins/resizable'
 import touch from '~util/touch'
 
 export default {
   name: 'tabs-bar',
+
+  mixins: [Resizable],
 
   inject: ['isScrollable', 'isMobile'],
 
@@ -51,23 +54,57 @@ export default {
     }
   },
 
+  mounted () {
+    this.$vuetify.load(() => {
+      this.onResize()
+
+      let startX = 0
+
+      touch.bind(this.$refs.wrapper, true)
+        .start((e) => {
+          startX = this.scrollOffset + e.touchstartX
+          this.$refs.container.style.transition = 'none'
+        })
+        .move((e) => {
+          const offset = startX - e.touchmoveX
+          this.scrollOffset = offset
+        })
+        .end((e) => {
+          this.$refs.container.style.transition = null
+          if (this.scrollOffset < 0) {
+            this.scrollOffset = 0
+          } else if (this.scrollOffset >= this.$refs.container.scrollWidth) {
+            const lastItem = this.$refs.container.children[this.$refs.container.children.length - 1]
+            this.scrollOffset = this.$refs.container.scrollWidth - lastItem.clientWidth
+          }
+        })
+    })
+  },
+
+  beforeDestroy () {
+    touch.unbind(this.$refs.wrapper)
+  },
+
   methods: {
     scrollLeft () {
-      var { offset, index } = this.newOffsetLeft(this.scrollOffset, this.itemOffset)
+      const { offset, index } = this.newOffset('Left')
       this.scrollOffset = offset
       this.itemOffset = index
     },
     scrollRight () {
-      var { offset, index } = this.newOffsetRight(this.scrollOffset, this.itemOffset)
+      const { offset, index } = this.newOffset('Right')
       this.scrollOffset = offset
       this.itemOffset = index
     },
-    resize () {
+    onResize () {
       clearTimeout(this.resizeDebounce)
 
       this.resizeDebounce = setTimeout(() => {
         this.isOverflowing = this.$refs.container.clientWidth < this.$refs.container.scrollWidth
       }, 50)
+    },
+    newOffset (direction) {
+      return this[`newOffset${direction}`](this.scrollOffset, this.itemOffset)
     },
     newOffsetLeft (currentOffset, currentIndex) {
       const items = this.$refs.container.children
@@ -101,74 +138,35 @@ export default {
     }
   },
 
-  mounted () {
-    this.$vuetify.load(() => {
-      window.addEventListener('resize', this.resize, { passive: true })
-      this.resize()
-
-      let startX = 0
-
-      touch.bind(this.$refs.wrapper, true)
-        .start((e) => {
-          startX = this.scrollOffset + e.touchstartX
-          this.$refs.container.style.transition = 'none'
-        })
-        .move((e) => {
-          const offset = startX - e.touchmoveX
-          this.scrollOffset = offset
-        })
-        .end((e) => {
-          this.$refs.container.style.transition = null
-          if (this.scrollOffset < 0) {
-            this.scrollOffset = 0
-          } else if (this.scrollOffset >= this.$refs.container.scrollWidth) {
-            const lastItem = this.$refs.container.children[this.$refs.container.children.length - 1]
-            this.scrollOffset = this.$refs.container.scrollWidth - lastItem.clientWidth
-          }
-        })
-    })
-  },
-
-  beforeDestroy () {
-    window.removeEventListener('resize', this.resize, { passive: true })
-    touch.unbind(this.$refs.wrapper)
-  },
-
   render (h) {
+    const children = []
     const container = h('ul', {
       'class': this.containerClasses,
       'style': this.containerStyles,
       ref: 'container'
     }, this.$slots.default)
 
-    const left = h('v-icon', {
-      props: {
-        left: true
-      },
-      style: {
-        display: this.leftIconVisible ? 'inline-flex' : 'none'
-      },
-      on: {
-        click: this.scrollLeft
-      }
-    }, 'chevron_left')
+    children.push(h('div', { ref: 'wrapper', class: this.wrapperClasses }, [container]))
 
-    const right = h('v-icon', {
-      props: {
-        right: true
-      },
-      style: {
-        display: this.rightIconVisible ? 'inline-flex' : 'none'
-      },
-      on: {
-        click: this.scrollRight
-      }
-    }, 'chevron_right')
+    const genIcon = direction => {
+      return h('v-icon', {
+        props: {
+          [`${direction}`]: true
+        },
+        style: {
+          display: 'inline-flex'
+        },
+        on: {
+          click: this[`scroll${direction.charAt(0).toUpperCase() + direction.slice(1)}`]
+        }
+      }, `chevron_${direction}`)
+    }
 
-    const wrapper = h('div', { ref: 'wrapper', class: this.wrapperClasses }, [container])
+    this.leftIconVisible && children.push(genIcon('left'))
+    this.rightIconVisible && children.push(genIcon('right'))
 
     return h('div', {
       'class': this.classes
-    }, [wrapper, left, right])
+    }, children)
   }
 }

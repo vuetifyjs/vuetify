@@ -44,12 +44,10 @@
         type: Boolean,
         default: true
       },
-
       icon: {
         type: String,
         default: 'fiber_manual_record'
       },
-
       interval: {
         type: Number,
         default: 6000

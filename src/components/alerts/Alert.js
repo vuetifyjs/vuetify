@@ -20,16 +20,16 @@ export default {
         'alert--dismissible': this.dismissible,
         'error': this.error,
         'info': this.info,
-        'success': this.success,
-        'warning': this.warning,
         'primary': this.primary,
-        'secondary': this.secondary
+        'secondary': this.secondary,
+        'success': this.success,
+        'warning': this.warning
       }
     },
 
     mdIcon () {
       switch (true) {
-        case Boolean(this.icon): return this.icon
+        case !!this.icon: return this.icon
         case this.error: return 'warning'
         case this.info: return 'info'
         case this.success: return 'check_circle'
@@ -41,17 +41,28 @@ export default {
   render (h) {
     const children = [h('div', this.$slots.default)]
 
-    !this.hideIcon && this.mdIcon && children.unshift(h('v-icon', {
-      'class': 'alert__icon',
-      props: { large: true }
-    }, this.mdIcon))
+    if (!this.hideIcon && this.mdIcon) {
+      children.unshift(h('v-icon', {
+        'class': 'alert__icon',
+        props: { large: true }
+      }, this.mdIcon))
+    }
 
     if (this.dismissible) {
-      children.push(h('a', {
+      const close = h('a', {
         'class': 'alert__dismissible',
         domProps: { href: 'javascript:;' },
-        on: { click: () => (this.$emit('input', false)) }
-      }, [h('v-icon', { props: { right: true, large: true } }, 'cancel')]))
+        on: { click: () => this.$emit('input', false) }
+      }, [
+        h('v-icon', {
+          props: {
+            right: true,
+            large: true
+          }
+        }, 'cancel')
+      ])
+
+      children.push(close)
     }
 
     const alert = h('div', {
