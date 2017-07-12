@@ -35,11 +35,11 @@ export default {
 
       if (this.absolute) {
         // Required for IE11
-        this.$el.parentNode.insertBefore(overlay, this.$el.parentNode.firstChild)
+        this.$el.parentNode.insertBefore(this.overlay, this.$el.parentNode.firstChild)
       } else {
         document.querySelector('[data-app]').appendChild(this.overlay)
       }
-        
+
       this.overlay.clientHeight // Force repaint
       requestAnimationFrame(() => {
         this.overlay.className += ' overlay--active'
