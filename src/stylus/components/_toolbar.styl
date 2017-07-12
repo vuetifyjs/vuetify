@@ -98,9 +98,45 @@
     top: 0
     left: 0
 
+  &--absolute
+    z-index 2
+
+    + main
+      padding-top: 0
+
+  &--fixed
     + main
       padding-top: $toolbar-height
-      
+
+    @media all and (max-width: $grid-breakpoints.lg) and (orientation: landscape)
+      + main
+        padding-top: $toolbar-mobile-landscape-height
+
+    &.toolbar--extended
+      + main
+          padding-top: $toolbar-height + $toolbar-extension-height
+
+      &.toolbar--dense
+        + main
+          padding-top: $toolbar-mobile-landscape-height * 2
+
+      &.toolbar--prominent
+        + main
+          padding-top: $toolbar-height * 2
+
+      @media all and (max-width: $grid-breakpoints.lg) and (orientation: landscape)
+        + main
+            padding-top: $toolbar-mobile-landscape-height * 2
+
+    &.toolbar--dense
+      + main
+        padding-top: $toolbar-mobile-landscape-height
+
+    &.toolbar--prominent
+      + main
+        padding-top: $toolbar-height
+
+
   &--floating
     display: inline-flex
     margin: 16px

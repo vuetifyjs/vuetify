@@ -25,9 +25,16 @@ export default {
         'toolbar--fixed': this.fixed,
         'toolbar--floating': this.floating,
         'toolbar--prominent': this.prominent,
+        'toolbar--extended': this.isExtended(),
         'theme--dark': this.dark,
         'theme--light': this.light
       }
+    }
+  },
+
+  methods: {
+    isExtended () {
+      return this.$slots.extension || this.extended
     }
   },
 
@@ -41,9 +48,7 @@ export default {
       'class': 'toolbar__content'
     }, this.$slots.default))
 
-    if (this.$slots.extension ||
-      this.extended
-    ) {
+    if (this.isExtended()) {
       children.push(h('div', {
         'class': 'toolbar__extension'
       }, this.$slots.extension))
