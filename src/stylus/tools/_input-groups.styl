@@ -5,26 +5,39 @@ input-group($material)
     &:disabled
       color: $material.text.disabled
     
-  label
+  .input-group__details
     color: $material.text.secondary
+  
+  &:not(.input-group--full-width)
+    textarea
+      border: 2px solid $material.text.secondary
   
   // This is specific for selects
   &.input-group--dirty
     .input-group__selections__comma
       color: $material.text.primary
   
-  &:not(.input-group--focused):not(.input-group--error)
-    .input-group__input .icon
+  &:not(.input-group--error)
+    label
       color: $material.text.secondary
+
+    .input-group__details:before
+      background-color: $material.input-bottom-line
+
+    &:not(.input-group--focused)
+      .input-group__input .icon
+        color: $material.text.secondary
+
+      &:not(.input-group--disabled):hover
+        .input-group__details:before
+          background-color: $material.text.primary
+
+        &:not(.input-group--full-width)
+          textarea
+            border-color: $material.text.primary
   
   .input-group__counter
     color: $material.text.secondary
-    
-  .input-group__details
-    color: $material.text.secondary
-    
-    &:before
-      background-color: $material.dividers
 
   &.input-group
     &--overflow, &--segmented, &--editable
