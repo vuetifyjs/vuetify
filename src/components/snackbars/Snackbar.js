@@ -1,5 +1,5 @@
-import Toggleable from '~mixins/toggleable'
 import Contextualable from '~mixins/contextualable'
+import Toggleable from '~mixins/toggleable'
 
 export default {
   name: 'snackbar',
@@ -34,9 +34,9 @@ export default {
         'snack--absolute': this.absolute,
         'snack--bottom': this.bottom || !this.top,
         'snack--left': this.left,
+        'snack--multi-line': this.multiLine && !this.vertical,
         'snack--right': this.right,
         'snack--top': this.top,
-        'snack--multi-line': this.multiLine && !this.vertical,
         'snack--vertical': this.vertical,
         'primary': this.primary,
         'secondary': this.secondary,
@@ -67,11 +67,11 @@ export default {
     if (this.isActive) {
       children.push(h('div', {
         'class': 'snack__content'
-      }, [this.$slots.default]))
+      }, this.$slots.default))
     }
 
     return h('div', {
       'class': this.classes
-    }, [h(this.computedTransition, {}, children)])
+    }, [h(this.computedTransition, children)])
   }
 }

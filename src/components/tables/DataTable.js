@@ -140,17 +140,16 @@ export default {
     someItems () {
       return this.filteredItems.some(i => this.isSelected(i))
     },
-    pageStart () {
-      const page = this.computedPagination.rowsPerPage === Object(this.computedPagination.rowsPerPage)
+    getPage () {
+      return this.computedPagination.rowsPerPage === Object(this.computedPagination.rowsPerPage)
         ? this.computedPagination.rowsPerPage.value
         : this.computedPagination.rowsPerPage
-      return page === -1 ? 0 : (this.computedPagination.page - 1) * page
+    },
+    pageStart () {
+      return this.getPage === -1 ? 0 : (this.computedPagination.page - 1) * this.getPage
     },
     pageStop () {
-      const page = this.computedPagination.rowsPerPage === Object(this.computedPagination.rowsPerPage)
-        ? this.computedPagination.rowsPerPage.value
-        : this.computedPagination.rowsPerPage
-      return page === -1 ? this.itemsLength : this.computedPagination.page * page
+      return this.getPage === -1 ? this.itemsLength : this.computedPagination.page * this.getPage
     },
     filteredItems () {
       if (this.totalItems) return this.items

@@ -1,14 +1,13 @@
+import Themeable from '~mixins/themeable'
+
 export default {
   functional: true,
 
+  mixins: [Themeable],
+
   props: {
-    light: {
-      type: Boolean,
-      default: true
-    },
-    dark: Boolean,
-    footer: Boolean,
     fixedFooter: Boolean,
+    footer: Boolean,
     id: {
       type: String,
       default: 'app'
@@ -17,9 +16,9 @@ export default {
   },
 
   render (h, { props, data, children }) {
-    data.staticClass = data.staticClass ? `application ${data.staticClass} ` : 'application '
+    data.staticClass = (`application ${data.staticClass || ''}`).trim()
+    data.staticClass += ` application--${props.dark ? 'dark' : 'light'}`
 
-    data.staticClass += `application--${props.dark ? 'dark' : 'light'}`
     props.footer && (data.staticClass += ' application--footer')
     props.fixedFooter && (data.staticClass += ' application--footer-fixed')
     props.toolbar && (data.staticClass += ' application--toolbar')
