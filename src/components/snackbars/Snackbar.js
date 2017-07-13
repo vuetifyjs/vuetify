@@ -71,7 +71,8 @@ export default {
     }
 
     return h('div', {
-      'class': this.classes
+      'class': this.classes,
+      on: this.$listeners
     }, [h(this.computedTransition, children)])
   }
 }

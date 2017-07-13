@@ -7,6 +7,7 @@
       v-bind:class="{ 'reverse': reverse }"
       v-bind:style="styles"
       v-show="active"
+      v-on="$listeners"
     )
       slot
 </template>

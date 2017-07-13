@@ -67,7 +67,8 @@ export default {
       staticClass: 'parallax',
       style: {
         height: `${parseInt(this.normalizedHeight)}px`
-      }
+      },
+      on: this.$listeners
     }, [container, content])
   }
 }

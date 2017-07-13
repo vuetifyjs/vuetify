@@ -35,7 +35,9 @@ export default {
   render (h) {
     const ripple = h('div', {
       'class': this.rippleClasses,
-      on: { click: this.toggle },
+      on: Object.assign({}, {
+        click: this.toggle
+      }, this.$listeners),
       directives: [
         {
           name: 'ripple',

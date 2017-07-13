@@ -9,9 +9,7 @@ export default {
     replace: Boolean,
     router: Boolean,
     ripple: Boolean,
-    tag: String,
-    target: String,
-    download: String
+    tag: String
   },
 
   methods: {
@@ -28,7 +26,10 @@ export default {
         directives: [{
           name: 'ripple',
           value: this.ripple || false
-        }]
+        }],
+        on: Object.assign({
+          click: this.click
+        }, (this.$listeners || {}))
       }
 
       if (!this.exact) {
@@ -47,18 +48,12 @@ export default {
         data.props.activeClass = this.activeClass
         data.props.append = this.append
         data.props.replace = this.replace
-        data.nativeOn = { click: this.click }
       } else {
         tag = this.href && 'a' || this.tag || 'a'
 
         if (tag === 'a') {
           data.attrs.href = this.href || 'javascript:;'
-          if (this.target) data.attrs.target = this.target
-
-          data.attrs.download = this.download
         }
-
-        data.on = { click: this.click }
       }
 
       return { tag, data }

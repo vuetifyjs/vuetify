@@ -240,10 +240,10 @@ export default {
         role: 'slider',
         tabindex: this.tabindex
       },
-      on: {
+      on: Object.assign({}, {
         mouseup: this.sliderMove,
         keydown: this.onKeyDown
-      },
+      }, this.$listeners),
       directives: [{
         name: 'click-outside'
       }]

@@ -36,7 +36,8 @@ export default {
       directives: [{
         name: 'show',
         value: this.isActive
-      }]
+      }],
+      on: this.$listeners
     }
 
     if (this.close) {

@@ -1,8 +1,7 @@
-import { mount } from 'avoriaz'
-import Vue from 'vue/dist/vue.common'
+import { test } from '~util/testing'
 import ListTile from 'src/components/lists/ListTile'
 import ripple from 'src/directives/ripple'
-import VueRouter from 'vue-router'
+import Vue from 'vue/dist/vue.common'
 
 ListTile.directives = {
   ripple
@@ -13,10 +12,9 @@ const stub = {
   render: h => h('button'),
 }
 
-describe('ListTile.vue', () => {
+test('ListTile.vue', ({ mount }) => {
   it('should render correctly', () => {
-    const wrapper = mount(ListTile, {
-    })
+    const wrapper = mount(ListTile)
 
     expect(wrapper.is('li')).toBe(true)
     expect(wrapper.find('a').length).toBe(1)

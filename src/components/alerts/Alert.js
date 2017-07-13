@@ -70,7 +70,8 @@ export default {
       directives: [{
         name: 'show',
         value: this.isActive
-      }]
+      }],
+      on: this.$listeners
     }, children)
 
     if (!this.transition) return alert

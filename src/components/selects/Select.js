@@ -231,9 +231,9 @@ export default {
         name: 'click-outside',
         value: () => (this.isActive = false)
       }],
-      on: {
+      on: Object.assign({}, {
         keydown: e => this.$refs.menu.changeListIndex(e)
-      }
+      }, this.$listeners)
     })
   }
 }

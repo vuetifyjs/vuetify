@@ -154,11 +154,11 @@ export default {
         name: 'click-outside',
         value: this.closeConditional
       }],
-      on: {
+      on: Object.assign({}, {
         click: () => {
           this.$emit('update:miniVariant', false)
         }
-      }
+      }, this.$listeners)
     }
 
     return h('aside', data, this.$slots.default)
