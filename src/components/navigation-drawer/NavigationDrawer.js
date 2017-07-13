@@ -101,7 +101,7 @@ export default {
 
       if (this.touchless) return
 
-      touch.bind(this.$el.parentNode, true, false)
+      touch.bind(this.$el.parentNode, true)
         .left(this.swipeLeft)
         .right(this.swipeRight)
     },

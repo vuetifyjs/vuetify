@@ -71,16 +71,13 @@ export default {
         props: { close: true },
         on: { input: () => this.selectItem(item) },
         nativeOn: { click: e => e.stopPropagation() },
-        key: item
+        key: this.getValue(item)
       }, this.getText(item))
     },
     genCommaSelection (item, comma) {
-      if (!item) {
-        console.log(this.selectedItems)
-      }
       return this.$createElement('div', {
         'class': 'input-group__selections__comma',
-        key: item
+        key: this.getValue(item)
       }, `${this.getText(item)}${comma ? ', ' : ''}`)
     },
     genList () {

@@ -114,9 +114,9 @@ export function bind (el, move, passive = true) {
     }
   }
 
-  el.addEventListener('touchstart', e => touchstart(e, wrapper), { passive })
-  el.addEventListener('touchend', e => touchend(e, wrapper), { passive })
-  if (move) el.addEventListener('touchmove', e => touchmove(e, wrapper), { passive })
+  el.addEventListener('touchstart', e => touchstart(e, wrapper), { passive: passive })
+  el.addEventListener('touchend', e => touchend(e, wrapper), { passive: passive })
+  if (move) el.addEventListener('touchmove', e => touchmove(e, wrapper), { passive: passive })
 
   return wrapper
 }
