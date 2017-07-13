@@ -19,13 +19,13 @@ test('TimePicker.js', ({ mount }) => {
     expect(wrapper.vm.inputTime).toBe('09:00:00')
   })
 
-  it('should convert current time to 24hr', () => {
+  it('should accept a date object for a value', () => {
+    const now = new Date()
     const wrapper = mount(TimePicker, {
       propsData: {
-        value: new Date()
+        value: now
       }
     })
-    const now = new Date()
     let hour = now.getHours()
     let period = 'am'
     const minutes = now.getMinutes()
@@ -35,5 +35,18 @@ test('TimePicker.js', ({ mount }) => {
     }
 
     expect(wrapper.vm.inputTime).toBe(`${hour}:${minutes}${period}`)
+  })
+
+  it('should change am/pm when updated from model', () => {
+    let value = '9:00am'
+    const wrapper = mount(TimePicker, {
+      propsData: {
+        value: value
+      }
+    })
+    
+    wrapper.setProps({ value: '9:00pm' })
+
+    expect(wrapper.data().period).toBe('pm')
   })
 })
