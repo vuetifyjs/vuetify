@@ -74,6 +74,8 @@ export default {
     customSort: {
       type: Function,
       default: (items, index, descending) => {
+        if (index === null) return items
+        
         return items.sort((a, b) => {
           let sortA = getObjectValueByPath(a, index)
           let sortB = getObjectValueByPath(b, index)
