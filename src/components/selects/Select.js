@@ -2,6 +2,7 @@ import Autocomplete from './mixins/autocomplete'
 import Filterable from '~mixins/filterable'
 import Generators from './mixins/generators'
 import Input from '~mixins/input'
+import { getObjectValueByPath } from '~util/helpers'
 
 export default {
   name: 'select',
@@ -177,10 +178,10 @@ export default {
       return this.$createElement('label', data, this.label)
     },
     getText (item) {
-      return item === Object(item) ? item[this.itemText] : item
+      return item === Object(item) ? getObjectValueByPath(item, this.itemText) : item
     },
     getValue (item) {
-      return item === Object(item) && (this.itemValue in item) ? item[this.itemValue] : item
+      return item === Object(item) ? getObjectValueByPath(item, this.itemValue) : item
     },
     onScroll () {
       if (!this.isActive) {
