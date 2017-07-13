@@ -57,7 +57,7 @@ export default {
       get () {
         if (this.value && !(this.value instanceof Date)) {
           if (!this.is24hr) {
-            this.period = !this.value.match(/am/)
+            this.period = this.value.match(/pm/)
               ? 'pm'
               : 'am'
           }
@@ -72,11 +72,10 @@ export default {
 
         let hour = value.getHours()
         let minute = value.getMinutes()
-        this.period = 'am'
+        this.period = hour > 12 ? 'pm' : 'am'
 
         if (!this.is24hr) {
           hour = hour > 12 ? hour - 12 : hour
-          this.period = 'pm'
         }
 
         hour = this.firstAllowed('hour', hour)

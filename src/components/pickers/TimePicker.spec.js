@@ -38,10 +38,9 @@ test('TimePicker.js', ({ mount }) => {
   })
 
   it('should change am/pm when updated from model', () => {
-    let value = '9:00am'
     const wrapper = mount(TimePicker, {
       propsData: {
-        value: value
+        value: '9:00am'
       }
     })
     
