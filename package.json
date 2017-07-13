@@ -77,7 +77,7 @@
     "vue-loader": "^10.1.0",
     "vue-router": "^2.7.0",
     "vue-server-renderer": "^2.3.3",
-    "vue-template-compiler": "^2.3.3",
+    "vue-template-compiler": "2.3.4",
     "webpack": "^3.2.0",
     "webpack-bundle-size-analyzer": "^2.7.0",
     "webpack-merge": "^0.17.0"
