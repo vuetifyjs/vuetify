@@ -1,4 +1,5 @@
 import Translatable from '~mixins/translatable'
+
 export default {
   name: 'parallax',
 
