@@ -165,7 +165,11 @@ export default {
           this.inputValue !== null &&
           typeof this.inputValue !== 'undefined'
         ) {
-        this.$nextTick(() => (this.$refs.input.value = this.getValue(this.inputValue)))
+        this.$nextTick(() => {
+          this.$refs.input.value = this.returnObject
+            ? this.getText(this.inputValue)
+            : this.getValue(this.inputValue)
+        })
       }
     },
     genLabel () {
