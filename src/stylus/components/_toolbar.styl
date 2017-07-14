@@ -99,6 +99,9 @@
     + main
       padding-top: $toolbar-height
       
+      @media all and (max-width: $grid-breakpoints.lg) and (orientation: landscape)
+        padding-top: $toolbar-mobile-landscape-height
+      
   &--floating
     display: inline-flex
     margin: 16px
