@@ -18,8 +18,17 @@ export default {
   },
 
   render (h, { props, data, children }) {
-    const icon = props.fa ? 'fa' : props.mdi ? 'mdi' : 'material-icons'
-    data.staticClass = (`${icon} icon ${data.staticClass || ''}`).trim()
+    if (props.fa) console.warn('The v-icon prop \'fa\' will be deprecated in the next release. Use \'fa-\' prefix in icon name instead.')
+    if (props.mdi) console.warn('The v-icon prop \'mdi\' will be deprecated in the next release. Use \'mdi-\' prefix in icon name instead.')
+
+    const iconName = children.pop().text
+    const thirdPartyIcon = iconName.indexOf('-') > -1
+    let iconType = thirdPartyIcon ? iconName.slice(0, iconName.indexOf('-')) : 'material-icons'
+
+    // To keep things backwards compatible for now
+    iconType = props.fa ? 'fa' : props.mdi ? 'mdi' : iconType
+
+    data.staticClass = (`${iconType} icon ${data.staticClass || ''}`).trim()
     data.attrs = data.attrs || {}
 
     if (props.dark) data.staticClass += ' theme--dark'
@@ -42,13 +51,19 @@ export default {
     const iconClasses = Object.keys(classes).filter(k => classes[k]).join(' ')
     iconClasses && (data.staticClass += ` ${iconClasses}`)
 
+    // To keep things backwards compatible for now
     if (props.fa || props.mdi) {
       const comparison = props.fa ? 'fa' : 'mdi'
-      const text = children.pop().text
 
-      if (text.indexOf(' ') > -1) data.staticClass += ` ${comparison}-${text}`
-      else data.staticClass += ` ${comparison}-${text.split(' ').join('-')}`
+      if (iconName.indexOf(' ') > -1) data.staticClass += ` ${comparison}-${iconName}`
+      else data.staticClass += ` ${comparison}-${iconName.split(' ').join('-')}`
     }
+
+    if (thirdPartyIcon) {
+      data.staticClass += ` ${iconName}`
+    }
+
+    !(thirdPartyIcon || props.fa || props.mdi) && children.push(iconName)
 
     if (props.disabled) data.attrs.disabled = props.disabled
 
