@@ -2,7 +2,7 @@
 <p align="center">Vuetify for Vue.js</p>
 <p align="center">
   <a href="https://travis-ci.org/vuetifyjs/vuetify">
-    <img src="https://travis-ci.org/vuetifyjs/vuetify.svg?branch=master" alt="travis ci badge">
+    <img src="https://travis-ci.org/vuetifyjs/vuetify.svg" alt="travis ci badge">
   </a>
   <a href="https://codebeat.co/projects/github-com-vuetifyjs-vuetify-dev"><img alt="codebeat badge" src="https://codebeat.co/badges/bb74198a-c321-4cb7-b878-a32f46633d65" /></a>
   <a href="https://www.npmjs.com/package/vuetify"><img src="https://img.shields.io/npm/dt/vuetify.svg" alt="Downloads"></a>
