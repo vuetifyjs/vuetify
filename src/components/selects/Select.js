@@ -103,10 +103,9 @@ export default {
       return this.items.filter(i => {
         if (!this.multiple) {
           return this.getValue(i) === this.getValue(this.inputValue)
-        } else {
-          // Always return Boolean
-          return this.inputValue.find(j => this.getValue(j) === this.getValue(i)) !== undefined
         }
+        // Always return Boolean
+        return this.inputValue.find(j => this.getValue(j) === this.getValue(i)) !== undefined
       })
     }
   },
