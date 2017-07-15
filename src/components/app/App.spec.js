@@ -6,6 +6,7 @@ test('App.js', ({ mount, functionalContext }) => {
     const wrapper = mount(App, functionalContext())
 
     expect(wrapper.hasClass('application')).toBe(true)
+    expect(wrapper).toMatchSnapshot()
   })
 
   it('should have a toolbar and footer class', () => {
@@ -20,6 +21,7 @@ test('App.js', ({ mount, functionalContext }) => {
     expect(wrapper.hasClass('application--toolbar')).toBe(true)
     expect(wrapper.hasClass('application--footer')).toBe(true)
     expect(wrapper.hasClass('application--footer-fixed')).toBe(true)
+    expect(wrapper).toMatchSnapshot()
   })
 
   it('should have data-app attribute', () => {
@@ -36,5 +38,6 @@ test('App.js', ({ mount, functionalContext }) => {
     }))
 
     expect(wrapper.hasAttribute('id', 'inspire')).toBe(true)
+    expect(wrapper).toMatchSnapshot()
   })
 })

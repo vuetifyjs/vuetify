@@ -12,6 +12,7 @@ test('Alert.vue', ({ mount }) => {
     const wrapper = mount(Alert)
 
     expect(wrapper.hasClass('alert')).toBe(true)
+    expect(wrapper).toMatchSnapshot()
   })
 
   it('should have a close icon', () => {
@@ -40,6 +41,7 @@ test('Alert.vue', ({ mount }) => {
     icon.trigger('click')
 
     expect(input).toBeCalledWith(false)
+    expect(wrapper).toMatchSnapshot()
   })
 
   it('should not be visible after being dismissed', done => {
@@ -77,6 +79,7 @@ test('Alert.vue', ({ mount }) => {
     const icon = wrapper.find('.alert__icon')[0]
 
     expect(icon.text()).toBe('list')
+    expect(wrapper).toMatchSnapshot()
   })
 
   it('should have no icon', () => {
@@ -88,5 +91,6 @@ test('Alert.vue', ({ mount }) => {
     })
 
     expect(wrapper.contains('.icon')).toBe(false)
+    expect(wrapper).toMatchSnapshot()
   })
 })
