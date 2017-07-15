@@ -12,7 +12,7 @@ test('Alert.vue', ({ mount }) => {
     const wrapper = mount(Alert)
 
     expect(wrapper.hasClass('alert')).toBe(true)
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should have a close icon', () => {
@@ -20,12 +20,14 @@ test('Alert.vue', ({ mount }) => {
     wrapper.setProps({ dismissible: true })
 
     expect(wrapper.contains('.alert__dismissible')).toBe(true)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should be closed by default', () => {
     const wrapper = mount(Alert)
 
     expect(wrapper.data().isActive).toBe(false)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should emit input:false when close icon is clicked', () => {
@@ -41,7 +43,7 @@ test('Alert.vue', ({ mount }) => {
     icon.trigger('click')
 
     expect(input).toBeCalledWith(false)
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should not be visible after being dismissed', done => {
@@ -66,6 +68,7 @@ test('Alert.vue', ({ mount }) => {
 
     const icon = wrapper.find('.alert__dismissible')[0]
     icon.trigger('click')
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should have a custom icon', () => {
@@ -79,7 +82,7 @@ test('Alert.vue', ({ mount }) => {
     const icon = wrapper.find('.alert__icon')[0]
 
     expect(icon.text()).toBe('list')
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should have no icon', () => {
@@ -91,6 +94,6 @@ test('Alert.vue', ({ mount }) => {
     })
 
     expect(wrapper.contains('.icon')).toBe(false)
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

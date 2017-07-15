@@ -37,6 +37,6 @@ test('Menu.js', ({ mount }) => {
         done()
       }
     })
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

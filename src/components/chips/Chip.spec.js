@@ -6,6 +6,6 @@ test('Chip.js', ({ mount }) => {
     const wrapper = mount(Chip)
 
     expect(wrapper.hasClass('chip')).toBe(true)
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

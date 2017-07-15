@@ -6,7 +6,7 @@ test('BottomNav.js', ({ mount, functionalContext }) => {
     const wrapper = mount(BottomNav, functionalContext())
 
     expect(wrapper.hasClass('bottom-nav')).toBe(true)
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should have prop classes', () => {
@@ -19,7 +19,7 @@ test('BottomNav.js', ({ mount, functionalContext }) => {
 
     expect(wrapper.hasClass('bottom-nav--absolute')).toBe(true)
     expect(wrapper.hasClass('bottom-nav--shift')).toBe(true)
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should be hidden with a false value', () => {
@@ -28,7 +28,7 @@ test('BottomNav.js', ({ mount, functionalContext }) => {
     }))
 
     expect(wrapper.hasClass('bottom-nav--active')).toBe(false)
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should be visible with a true value', () => {
@@ -37,6 +37,6 @@ test('BottomNav.js', ({ mount, functionalContext }) => {
     }))
 
     expect(wrapper.hasClass('bottom-nav--active')).toBe(true)
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

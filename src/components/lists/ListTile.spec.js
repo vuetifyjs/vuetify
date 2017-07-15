@@ -18,7 +18,7 @@ test('ListTile.vue', ({ mount }) => {
 
     expect(wrapper.is('li')).toBe(true)
     expect(wrapper.find('a').length).toBe(1)
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render <li> with <a> when using href prop', () => {
@@ -32,7 +32,7 @@ test('ListTile.vue', ({ mount }) => {
 
     expect(wrapper.is('li')).toBe(true)
     expect(a.hasAttribute('href', 'http://www.google.com')).toBe(true)
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render <li> with <button> when using to prop', () => {
@@ -48,6 +48,6 @@ test('ListTile.vue', ({ mount }) => {
 
     expect(wrapper.is('li')).toBe(true)
     expect(wrapper.find('button').length).toBe(1)
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

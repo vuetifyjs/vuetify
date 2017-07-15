@@ -17,7 +17,7 @@ test('TimePicker.js', ({ mount }) => {
     })
 
     expect(wrapper.vm.inputTime).toBe('09:00:00')
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should accept a date object for a value', () => {
@@ -36,7 +36,7 @@ test('TimePicker.js', ({ mount }) => {
     }
 
     expect(wrapper.vm.inputTime).toBe(`${hour}:${minutes}${period}`)
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should change am/pm when updated from model', () => {
@@ -49,6 +49,6 @@ test('TimePicker.js', ({ mount }) => {
     wrapper.setProps({ value: '9:00pm' })
 
     expect(wrapper.data().period).toBe('pm')
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

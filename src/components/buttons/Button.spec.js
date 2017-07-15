@@ -18,7 +18,7 @@ describe('Button.vue', () => {
   it('should render component and match snapshot', () => {
     const wrapper = mount(Button)
 
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render an <a> tag when using href prop', () => {
@@ -30,7 +30,7 @@ describe('Button.vue', () => {
 
     expect(wrapper.is('a')).toBe(true)
     expect(wrapper.hasAttribute('href', 'http://www.google.com')).toBe(true)
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render a <button> tag when using to prop', () => {
@@ -46,7 +46,7 @@ describe('Button.vue', () => {
 
     expect(wrapper.is('button')).toBe(true)
     expect(wrapper.vm.$props.to).toBe('/home')
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render specified tag when using tag prop', () => {
@@ -57,7 +57,7 @@ describe('Button.vue', () => {
     })
 
     expect(wrapper.is('a')).toBe(true)
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should throw warning when using deprecated router prop', () => {
@@ -75,6 +75,6 @@ describe('Button.vue', () => {
     })
 
     expect(console.warn).toBeCalled()
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })
