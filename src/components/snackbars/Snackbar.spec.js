@@ -14,6 +14,7 @@ describe('Snackbar.vue', () => {
     const wrapper = mount(Snackbar)
 
     expect(wrapper.hasClass('snack')).toBe(true)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should have a snack__content class only when active', async () => {
@@ -32,5 +33,6 @@ describe('Snackbar.vue', () => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.find('div .snack__content').length).toEqual(1)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

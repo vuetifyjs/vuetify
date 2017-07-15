@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App.js should allow a custom id 1`] = `"<div data-app=\\"true\\" class=\\"application application--light\\" id=\\"inspire\\"></div>"`;
+
+exports[`App.js should have a toolbar and footer class 1`] = `"<div data-app=\\"true\\" class=\\"application application--light application--footer application--footer-fixed application--toolbar\\" id=\\"app\\"></div>"`;
+
+exports[`App.js should have an application class 1`] = `"<div data-app=\\"true\\" class=\\"application application--light\\" id=\\"app\\"></div>"`;
+
+exports[`App.js should have data-app attribute 1`] = `"<div data-app=\\"true\\" class=\\"application application--light\\" id=\\"app\\"></div>"`;

@@ -38,6 +38,7 @@ describe('ButtonToggle.vue', () => {
     wrapper.instance().updateValue(toggle_text[0])
 
     expect(change).not.toBeCalled()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should allow new value when mandatory prop is used', () => {
@@ -55,6 +56,7 @@ describe('ButtonToggle.vue', () => {
     wrapper.instance().updateValue(toggle_text[1])
 
     expect(change).toBeCalledWith(2)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should not allow empty value when mandatory prop is used with multiple prop', () => {
@@ -73,6 +75,7 @@ describe('ButtonToggle.vue', () => {
     wrapper.instance().updateValue(toggle_text[0])
 
     expect(change).toBeCalledWith([1])
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should allow new value when mandatory prop is used with multiple prop', () => {
@@ -91,5 +94,6 @@ describe('ButtonToggle.vue', () => {
     wrapper.instance().updateValue(toggle_text[1])
 
     expect(change).toBeCalledWith([1, 2])
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })
