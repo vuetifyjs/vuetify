@@ -1,9 +1,11 @@
 {
-  "presets": ["es2015"],
-  "plugins": ["transform-runtime"],
   "env": {
     "test": {
+      "presets": [
+        ["es2015"]
+      ],
       "plugins": [
+        "transform-runtime",
         ["module-resolver", {
           "root": ["./src"],
           "alias": {
@@ -18,13 +20,15 @@
     },
     "development": {
       "presets": [
-        ["es2015",  { "modules": false }]
+        ["es2015",  {"modules": false}],
+        ["stage-2"]
       ],
       "plugins": ["add-filehash"]
     },
     "production": {
       "presets": [
-        ["es2015",  { "modules": false }]
+        ["es2015",  {"modules": false}],
+        ["stage-2"]
       ]
     }
   }
