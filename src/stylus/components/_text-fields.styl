@@ -110,6 +110,9 @@
   // Full Width
   &.input-group--full-width
     padding: 0 16px
+    
+    label
+      margin-left: $grid-gutters.lg
 
     .input-group__details:before, .input-group__details:after
       display: none
@@ -134,7 +137,8 @@
       elevation(4)
 
 /** Prefix/Suffix */
-.input-group--prefix
+.input-group--prefix,
+.input-group--suffix
   &:not(.input-group--focused):not(.input-group--dirty)
     label
       left: 16px

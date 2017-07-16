@@ -13,6 +13,9 @@ export default {
 
         return text.toLowerCase().indexOf(this.searchValue.toLowerCase()) !== -1
       })
+    },
+    onKeyDown (e) {
+      this.$refs.menu.changeListIndex(e)
     }
   }
 }

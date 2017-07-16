@@ -1,4 +1,6 @@
-import { createSimpleFunctional } from '~util/helpers'
+import {
+  createSimpleFunctional
+} from '~util/helpers'
 
 const Grid = (name) => ({
   functional: true,
@@ -16,14 +18,13 @@ const Grid = (name) => ({
 })
 
 const Container = Grid('container')
-const Layout = Grid('layout')
 const Flex = Grid('flex')
-
+const Layout = Grid('layout')
 const Spacer = createSimpleFunctional('spacer')
 
 export default {
-  Flex,
   Container,
-  Spacer,
-  Layout
+  Flex,
+  Layout,
+  Spacer
 }

@@ -1,12 +1,13 @@
 <template lang="pug">
-  component(
-    v-bind:is="computedTransition"
+  transition(
+    v-bind:name="computedTransition"
   )
     div(
       class="carousel__item"
       v-bind:class="{ 'reverse': reverse }"
       v-bind:style="styles"
       v-show="active"
+      v-on="$listeners"
     )
       slot
 </template>
@@ -30,12 +31,12 @@
 
       transition: {
         type: String,
-        default: 'v-tab-transition'
+        default: 'tab-transition'
       },
 
       reverseTransition: {
         type: String,
-        default: 'v-tab-reverse-transition'
+        default: 'tab-reverse-transition'
       }
     },
 

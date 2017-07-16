@@ -1,25 +1,30 @@
 {
+  "presets": ["es2015"],
+  "plugins": ["transform-runtime"],
   "env": {
     "test": {
-      "presets": [
-        ["env", {
-          "targets": {
-            "node": "current"
+      "plugins": [
+        ["module-resolver", {
+          "root": ["./src"],
+          "alias": {
+            "~components": "components",
+            "~directives": "directives",
+            "~mixins": "mixins",
+            "~stylus": "stylus",
+            "~util": "util"
           }
         }]
       ]
     },
     "development": {
       "presets": [
-        ["es2015",  {"modules": false}],
-        ["stage-2"]
+        ["es2015",  { "modules": false }]
       ],
       "plugins": ["add-filehash"]
     },
     "production": {
       "presets": [
-        ["es2015",  {"modules": false}],
-        ["stage-2"]
+        ["es2015",  { "modules": false }]
       ]
     }
   }

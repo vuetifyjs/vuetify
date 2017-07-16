@@ -25,7 +25,7 @@ export default {
     scrollable: Boolean,
     transition: {
       type: [String, Boolean],
-      default: 'v-dialog-transition'
+      default: 'dialog-transition'
     }
   },
 
@@ -39,11 +39,6 @@ export default {
         'dialog--stacked-actions': this.stackedActions && !this.fullscreen,
         'dialog--scrollable': this.scrollable
       }
-    },
-    computedTransition () {
-      return !this.transition
-        ? 'transition'
-        : this.transition
     }
   },
 
@@ -100,8 +95,11 @@ export default {
       }, [this.$slots.activator]))
     }
 
-    const dialog = h(this.computedTransition, {
-      props: { origin: this.origin }
+    const dialog = h('transition', {
+      props: {
+        name: this.transition,
+        origin: this.origin
+      }
     }, [h('div', data,
       this.lazy && this.isBooted || !this.lazy ? this.$slots.default : null
     )])

@@ -17,7 +17,8 @@ export default {
       'class': 'card__media',
       style: {
         height: !isNaN(this.height) ? `${this.height}px` : this.height
-      }
+      },
+      on: this.$listeners
     }
 
     const children = []

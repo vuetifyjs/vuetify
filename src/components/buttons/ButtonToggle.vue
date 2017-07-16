@@ -30,14 +30,8 @@
         type: Array,
         default: () => []
       },
-
       multiple: Boolean,
-
-      mandatory: {
-        type: Boolean,
-        value: false
-      },
-
+      mandatory: Boolean,
       inputValue: {
         required: false
       }
@@ -69,8 +63,8 @@
         const items = this.inputValue.slice()
 
         const i = items.indexOf(item.value)
-        if (i !== -1) {
-          items.length > 1 && !this.mandatory && items.splice(i, 1)
+        if (i > -1) {
+          items.length >= 1 && !this.mandatory && items.splice(i, 1)
         } else {
           items.push(item.value)
         }

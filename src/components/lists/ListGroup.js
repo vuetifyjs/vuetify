@@ -38,7 +38,7 @@ export default {
         this.listClose(this._uid)
       }
     },
-    '$route' (to) {
+    $route (to) {
       const isActive = this.matchRoute(to.path)
 
       if (this.group) {
@@ -87,7 +87,7 @@ export default {
 
     const item = h('div', {
       'class': this.classes,
-      on: { click: this.click },
+      on: Object.assign({}, { click: this.click }, this.$listeners),
       ref: 'item'
     }, [this.$slots.item])
 

@@ -73,7 +73,9 @@ export default {
       if (this.nudgeTop) top -= this.nudgeTop
       if (this.nudgeBottom) top += this.nudgeBottom
 
-      return this.calcYOverflow(top) + this.window.pageYOffset
+      const pageYOffset = typeof window !== 'undefined' ? window.pageYOffset : 0
+
+      return this.calcYOverflow(top) + pageYOffset
     },
     calcXOverflow (left) {
       const maxWidth = Math.max(
@@ -83,12 +85,13 @@ export default {
       )
       const totalWidth = left + maxWidth
       const availableWidth = totalWidth - this.window.innerWidth
+      const innerWidth = typeof window !== 'undefined' ? window.innerWidth : 0
 
       if ((!this.left || this.right) && availableWidth > 0) {
         left = (
-          this.window.innerWidth -
+          innerWidth -
           maxWidth -
-          (this.window.innerWidth > 1024 ? 30 : 12) // Account for scrollbar
+          (innerWidth > 1024 ? 30 : 12) // Account for scrollbar
         )
       } else if (this.left && left < 0) left = 12
 
@@ -96,11 +99,12 @@ export default {
     },
     calcYOverflow (top) {
       const totalHeight = top + this.dimensions.content.height
+      const innerHeight = typeof window !== 'undefined' ? window.innerHeight : 0
 
       if (this.top && top < 0) top = 12
-      else if ((!this.top || this.bottom) && this.window.innerHeight < totalHeight) {
+      else if ((!this.top || this.bottom) && innerHeight < totalHeight) {
         top = (
-          this.window.innerHeight -
+          innerHeight -
           this.dimensions.content.height -
           12
         )

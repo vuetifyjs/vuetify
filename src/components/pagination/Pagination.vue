@@ -6,9 +6,9 @@
     li
       a(
         href="#!"
-        class="pagination__navigation"
+        class="pagination__navigation pagination__navigation--previous"
         v-bind:class="{ 'pagination__navigation--disabled': value === 1 }"
-        v-on:click.prevent="$emit('input', value - 1)"
+        v-on:click.prevent="previous"
       )
         v-icon chevron_left
     li(v-for="n in items")
@@ -30,7 +30,7 @@
         href="#!"
         class="pagination__navigation"
         v-bind:class="{ 'pagination__navigation--disabled': value === length }"
-        v-on:click.prevent="$emit('input', value + 1)"
+        v-on:click.prevent="next"
       )
         v-icon chevron_right
 </template>
@@ -41,14 +41,11 @@
 
     props: {
       circle: Boolean,
-
       disabled: Boolean,
-
       length: {
         type: Number,
         default: 0
       },
-
       value: {
         type: Number,
         default: 0
@@ -109,7 +106,14 @@
         // Change this
         setTimeout(() => (this.selected = this.value), 100)
       },
-
+      next () {
+        this.$emit('input', this.value + 1)
+        this.$emit('next')
+      },
+      previous () {
+        this.$emit('input', this.value - 1)
+        this.$emit('previous')
+      },
       range (from, to) {
         const range = []
 

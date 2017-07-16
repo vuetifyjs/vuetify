@@ -81,6 +81,6 @@ export default {
 
     return h('li', {
       'class': 'tabs__li'
-    }, [h(tag, data, [this.$slots.default])])
+    }, [h(tag, data, this.$slots.default)])
   }
 }

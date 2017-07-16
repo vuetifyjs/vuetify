@@ -114,7 +114,7 @@ export default {
     },
     transition: {
       type: String,
-      default: 'v-menu-transition'
+      default: 'menu-transition'
     },
     positionX: {
       type: Number,
@@ -193,8 +193,8 @@ export default {
   methods: {
     activate () {
       if (typeof window === 'undefined') return
+      this.isBooted = true
       this.insideContent = true
-      this.initWindow()
       this.getTiles()
       this.updateDimensions()
       requestAnimationFrame(this.startTransition)
@@ -207,8 +207,8 @@ export default {
       if (!this.isActive) return
       this.resizeTimeout = setTimeout(this.updateDimensions, 200)
     },
-    startTransition () {
-      this.isContentActive = true
+    async startTransition () {
+      requestAnimationFrame(() => (this.isContentActive = true))
       requestAnimationFrame(this.calculateScroll)
     }
   },

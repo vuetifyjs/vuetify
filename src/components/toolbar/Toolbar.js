@@ -34,7 +34,8 @@ export default {
   render (h) {
     const children = []
     const data = {
-      'class': this.classes
+      'class': this.classes,
+      on: this.$listeners
     }
 
     children.push(h('div', {

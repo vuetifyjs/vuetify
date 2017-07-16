@@ -3,6 +3,7 @@
     class="progress-circular"
     v-bind:class="classes"
     v-bind:style="styles"
+    v-on="$listeners"
   )
     svg(
       xmlns="http://www.w3.org/2000/svg"

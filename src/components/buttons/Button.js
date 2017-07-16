@@ -45,6 +45,7 @@ export default {
         'btn--active': this.isActive,
         'btn--block': this.block,
         'btn--bottom': this.bottom,
+        'btn--disabled': this.disabled,
         'btn--flat': this.flat,
         'btn--floating': this.fab,
         'btn--fixed': this.fixed,
@@ -83,6 +84,8 @@ export default {
       !this.fab &&
         e.detail &&
         this.$el.blur()
+
+      this.$emit('click', e)
     },
     genContent () {
       return this.$createElement('div', { 'class': 'btn__content' }, [this.$slots.default])

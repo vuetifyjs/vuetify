@@ -43,12 +43,13 @@ $container-max-widths := {
 // ============================================================
 $display-breakpoints := {
   xs-only: "only screen and (max-width: %s)" % ($grid-breakpoints.sm - 1)
+  sm-only: "only screen and (min-width: %s) and (max-width: %s)" % ($grid-breakpoints.sm ($grid-breakpoints.md  - 1))
   sm-and-down: "only screen and (max-width: %s)" % ($grid-breakpoints.md - 1)
   sm-and-up: "only screen and (min-width: (%s))" % $grid-breakpoints.sm
-  md-only: "only screen and (min-width: %s) and (max-width: %s)" % $grid-breakpoints.md ($grid-breakpoints.lg  - 1)
+  md-only: "only screen and (min-width: %s) and (max-width: %s)" % ($grid-breakpoints.md ($grid-breakpoints.lg  - 1))
   md-and-down: "only screen and (max-width: %s )" % ($grid-breakpoints.lg - 1)
   md-and-up: "only screen and (min-width: %s)" % $grid-breakpoints.md
-  lg-only: "only screen and (min-width: %s) and (max-width: %s)" % $grid-breakpoints.lg ($grid-breakpoints.xl - 1)
+  lg-only: "only screen and (min-width: %s) and (max-width: %s)" % ($grid-breakpoints.lg ($grid-breakpoints.xl - 1))
   lg-and-down: "only screen and (max-width: (%s - 1))" % $grid-breakpoints.xl
   lg-and-up: "only screen and (min-width: %s)" % $grid-breakpoints.lg
   xl-only: "only screen and (min-width: %s)" % $grid-breakpoints.xl
@@ -166,7 +167,9 @@ $button-background-color := #999999
 $button-height := 36px
 $button-font-size := 14px
 $button-font-weight := 500
-$button-margin := 6px 8px
+$button-margin-y := 6px
+$button-margin-x := 8px
+$button-margin := $button-margin-y $button-margin-x
 $button-min-width := 88px
 $button-padding := 0 16px
 $button-text-transform := uppercase
@@ -346,19 +349,6 @@ $navigation-drawer-item-active-color := $theme.primary
 
 // Sidebar Group
 $navigation-drawer-group-item-font-weight := $font-weights.regular
-
-/* none of these seem to be used yet
-$navigation-drawer-item-color := $material-dark.fg-color
-$navigation-drawer-item-height := 50px
-$navigation-drawer-item-active-color := $material-dark.fg-color
-$navigation-drawer-item-active-background-color := $theme.primary
-$navigation-drawer-item-hover-background-color := rgba($theme.primary, .4)
-
-$navigation-drawer-group-items-background-color := darken($theme.secondary, 15%)
-$navigation-drawer-group-header-active-navigation-drawer-items-border := 1px solid rgba($material-dark.fg-color, .1)
-$navigation-drawer-group-header-active-navigation-drawer-item-active-background-color := rgba($theme.primary, .4)
-
-*/
 
 /* Slider */
 $slider-light-off := rgba($material-dark.fg-color, .26)

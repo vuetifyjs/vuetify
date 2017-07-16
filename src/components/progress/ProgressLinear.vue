@@ -7,40 +7,27 @@
         type: Boolean,
         default: true
       },
-
       buffer: Boolean,
-
       bufferValue: Number,
-
       error: Boolean,
-
       height: {
         type: [Number, String],
         default: 7
       },
-
       indeterminate: Boolean,
-
       info: Boolean,
-
       secondary: Boolean,
-
       success: Boolean,
-
       query: Boolean,
-
       warning: Boolean,
-
       value: {
         type: [Number, String],
         default: 0
       },
-
       colorFront: {
         type: String,
         default: null
       },
-
       colorBack: {
         type: String,
         default: null
@@ -58,7 +45,6 @@
           'progress-linear--error': this.error
         }
       },
-
       styles () {
         const styles = {}
 
@@ -72,7 +58,6 @@
 
         return styles
       },
-
       bufferStyles () {
         const styles = {}
 
@@ -100,7 +85,13 @@
 
       const bar = h('div', { class: ['progress-linear__bar', this.colorBack], style: this.styles }, [fade, slide])
 
-      return h('div', { class: ['progress-linear', this.classes], style: { height: `${this.height}px` } }, [bar])
+      return h('div', {
+        class: ['progress-linear', this.classes],
+        style: {
+          height: `${this.height}px`
+        },
+        on: this.$listeners
+      }, [bar])
     }
   }
 </script>
