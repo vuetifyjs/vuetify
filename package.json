@@ -114,8 +114,6 @@
     },
     "transformIgnorePatterns": [
       "node_modules/(?!vue-router)"
-    ],
-    "coverageDirectory": "./coverage/",
-    "collectCoverage": true
+    ]
   }
 }
