@@ -129,7 +129,8 @@ export default {
       default: false
     },
     maxWidth: [Number, String],
-    minWidth: [Number, String]
+    minWidth: [Number, String],
+    relative: Boolean
   },
 
   computed: {
