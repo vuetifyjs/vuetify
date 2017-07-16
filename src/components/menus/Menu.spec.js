@@ -14,7 +14,7 @@ Menu.directives = {
 }
 
 test('Menu.js', ({ mount }) => {
-  it('should work', (done) => {
+  it('should work', async () => {
     const wrapper = mount(Menu, {
       propsData: {
         value: false
@@ -30,13 +30,9 @@ test('Menu.js', ({ mount }) => {
     wrapper.instance().$on('input', input)
     activator.trigger('click')
 
-    wrapper.vm.$nextTick(() => {
-      try {
-        expect(input).toBeCalledWith(true)
-      } finally {
-        done()
-      }
-    })
+    await wrapper.vm.$nextTick()
+
+    expect(input).toBeCalledWith(true)
     expect(wrapper.html()).toMatchSnapshot()
   })
 })
