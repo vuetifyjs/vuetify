@@ -150,9 +150,9 @@ function addOnceEventListener(el, event, cb) {
 function getObjectValueByPath(obj, path) {
   // credit: http://stackoverflow.com/questions/6491463/accessing-nested-javascript-objects-with-string-key#comment55278413_6491621
   if (!path || path.constructor !== String) return;
-  path = path.replace(/\[(\w+)\]/g, '.$1' // convert indexes to properties
-  );path = path.replace(/^\./, '' // strip a leading dot
-  );var a = path.split('.');
+  path = path.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
+  path = path.replace(/^\./, ''); // strip a leading dot
+  var a = path.split('.');
   for (var i = 0, n = a.length; i < n; ++i) {
     var k = a[i];
     if (obj.constructor === Object && k in obj) {
@@ -939,12 +939,11 @@ function bind(el, move) {
       document.documentElement.style.overflow = 'hidden';
     },
     showScroll: function showScroll() {
-      document.documentElement.removeAttribute('style'
+      document.documentElement.removeAttribute('style');
 
       // if (!this.overlayOffset) return
       // document.body.scrollTop = this.overlayOffset
       // document.documentElement.scrollTop = this.overlayOffset
-      );
     }
   }
 });
@@ -962,10 +961,10 @@ function bind(el, move) {
     enter: function enter(el, done) {
       // Remove initial transition
       el.style.transition = 'none';
-      Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* addOnceEventListener */])(el, 'transitionend', done
+      Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* addOnceEventListener */])(el, 'transitionend', done);
 
       // Get height that is to be scrolled
-      );el.style.overflow = 'hidden';
+      el.style.overflow = 'hidden';
       el.style.height = null;
       el.style.display = 'block';
       var height = el.clientHeight + 'px';
@@ -983,10 +982,10 @@ function bind(el, move) {
     leave: function leave(el, done) {
       // Remove initial transition
       el.style.transition = 'none';
-      Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* addOnceEventListener */])(el, 'transitionend', done
+      Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* addOnceEventListener */])(el, 'transitionend', done);
 
       // Set height before we transition to 0
-      );el.style.overflow = 'hidden';
+      el.style.overflow = 'hidden';
       el.style.height = el.clientHeight + 'px';
       el.style.transition = null;
 
@@ -4458,8 +4457,6 @@ var ListTileSubTitle = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["c" /*
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mixins_utils__ = __webpack_require__(85);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mixins_toggleable__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__mixins_keyable__ = __webpack_require__(86);
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
 
 
 
@@ -4668,23 +4665,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     startTransition: function startTransition() {
       var _this2 = this;
 
-      return _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                requestAnimationFrame(function () {
-                  return _this2.isContentActive = true;
-                });
-                requestAnimationFrame(_this2.calculateScroll);
-
-              case 2:
-              case 'end':
-                return _context.stop();
-            }
-          }
-        }, _callee, _this2);
-      }))();
+      requestAnimationFrame(function () {
+        return _this2.isContentActive = true;
+      });
+      requestAnimationFrame(this.calculateScroll);
     }
   },
 
@@ -6884,10 +6868,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     this.inputValue = this.value;
     this.$nextTick(function () {
       return _this.inputWidth = _this.calculateWidth(_this.inputValue);
-    }
+    });
 
     // Without a v-app, iOS does not work with body selectors
-    );this.app = document.querySelector('[data-app]') || console.warn('The v-slider component requires the present of v-app or a non-body wrapping element with the [data-app] attribute.');
+    this.app = document.querySelector('[data-app]') || console.warn('The v-slider component requires the present of v-app or a non-body wrapping element with the [data-app] attribute.');
   },
 
 
@@ -8943,10 +8927,10 @@ var CarouselReverseTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers
 var TabTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleTransition */])('tab-transition');
 var TabReverseTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleTransition */])('tab-reverse-transition');
 var MenuTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleTransition */])('menu-transition');
-var FabTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleTransition */])('fab-transition', 'center center', 'out-in'
+var FabTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleTransition */])('fab-transition', 'center center', 'out-in');
 
 // Generic transitions
-);var DialogTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleTransition */])('dialog-transition');
+var DialogTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleTransition */])('dialog-transition');
 var DialogBottomTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleTransition */])('dialog-bottom-transition');
 var FadeTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleTransition */])('fade-transition');
 var ScaleTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleTransition */])('scale-transition');
