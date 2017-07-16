@@ -1,7 +1,21 @@
 import Selectable from '~mixins/selectable'
+import Ripple from '~directives/ripple'
+import Transitions from '~components/transitions/_index'
+import VIcon from '~components/icons/Icon'
+
+const { FadeTransition: VFadeTransition } = Transitions
 
 export default {
   name: 'checkbox',
+
+  components: {
+    VFadeTransition,
+    VIcon
+  },
+
+  directives: {
+    Ripple
+  },
 
   mixins: [Selectable],
 
