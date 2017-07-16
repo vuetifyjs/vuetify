@@ -207,7 +207,7 @@ export default {
       if (!this.isActive) return
       this.resizeTimeout = setTimeout(this.updateDimensions, 200)
     },
-    async startTransition () {
+    startTransition () {
       requestAnimationFrame(() => (this.isContentActive = true))
       requestAnimationFrame(this.calculateScroll)
     }
