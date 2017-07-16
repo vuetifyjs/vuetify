@@ -74,7 +74,8 @@ export default {
 
   render (h) {
     return h('div', {
-      'class': this.classes
+      'class': this.classes,
+      on: this.$listeners
     }, this.$slots.default)
   }
 }

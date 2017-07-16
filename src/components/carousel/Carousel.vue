@@ -15,6 +15,7 @@
         dark
         v-bind:class="{ 'carousel__controls__item--active': index === current }"
         v-for="(item, index) in items"
+        v-bind:key="index"
         v-on:click.native.stop="select(index)"
       )
         v-icon {{ icon }}
@@ -23,6 +24,7 @@
 
 <script>
   import Bootable from '~mixins/bootable'
+  import touch from '~util/touch'
 
   export default {
     name: 'carousel',
@@ -43,12 +45,10 @@
         type: Boolean,
         default: true
       },
-
       icon: {
         type: String,
         default: 'fiber_manual_record'
       },
-
       interval: {
         type: Number,
         default: 6000
@@ -83,7 +83,15 @@
     },
 
     mounted () {
+      touch.bind(this.$el)
+        .right(this.prev)
+        .left(this.next)
+
       this.init()
+    },
+
+    beforeDestroy () {
+      touch.unbind(this.$el)
     },
 
     methods: {

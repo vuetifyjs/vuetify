@@ -19,7 +19,7 @@ export default {
 
   render (h, { props, data, children }) {
     const icon = props.fa ? 'fa' : props.mdi ? 'mdi' : 'material-icons'
-    data.staticClass = data.staticClass ? `${icon} icon ${data.staticClass} ` : `${icon} icon`
+    data.staticClass = (`${icon} icon ${data.staticClass || ''}`).trim()
     data.attrs = data.attrs || {}
 
     if (props.dark) data.staticClass += ' theme--dark'
@@ -46,13 +46,11 @@ export default {
       const comparison = props.fa ? 'fa' : 'mdi'
       const text = children.pop().text
 
-      if (text.indexOf(' ') === -1) data.staticClass += ` ${comparison}-${text}`
+      if (text.indexOf(' ') > -1) data.staticClass += ` ${comparison}-${text}`
       else data.staticClass += ` ${comparison}-${text.split(' ').join('-')}`
     }
 
-    if (props.disabled) {
-      data.attrs.disabled = props.disabled
-    }
+    if (props.disabled) data.attrs.disabled = props.disabled
 
     return h('i', data, children)
   }

@@ -1,4 +1,4 @@
-import { mount } from 'avoriaz'
+import { test } from '~util/testing'
 import { createRenderer } from 'vue-server-renderer'
 import Vue from 'vue/dist/vue.common'
 import Vuetify from 'src/index'
@@ -7,11 +7,12 @@ import Icon from 'src/components/icons/Icon'
 
 Alert.components = { 'v-icon': Icon }
 
-describe('Alert.vue', () => {
+test('Alert.vue', ({ mount }) => {
   it('should have an alert class', () => {
     const wrapper = mount(Alert)
 
     expect(wrapper.hasClass('alert')).toBe(true)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should have a close icon', () => {
@@ -19,12 +20,14 @@ describe('Alert.vue', () => {
     wrapper.setProps({ dismissible: true })
 
     expect(wrapper.contains('.alert__dismissible')).toBe(true)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should be closed by default', () => {
     const wrapper = mount(Alert)
 
     expect(wrapper.data().isActive).toBe(false)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should emit input:false when close icon is clicked', () => {
@@ -40,6 +43,7 @@ describe('Alert.vue', () => {
     icon.trigger('click')
 
     expect(input).toBeCalledWith(false)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should not be visible after being dismissed', done => {
@@ -64,6 +68,7 @@ describe('Alert.vue', () => {
 
     const icon = wrapper.find('.alert__dismissible')[0]
     icon.trigger('click')
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should have a custom icon', () => {
@@ -77,6 +82,7 @@ describe('Alert.vue', () => {
     const icon = wrapper.find('.alert__icon')[0]
 
     expect(icon.text()).toBe('list')
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should have no icon', () => {
@@ -88,5 +94,6 @@ describe('Alert.vue', () => {
     })
 
     expect(wrapper.contains('.icon')).toBe(false)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

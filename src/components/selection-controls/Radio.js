@@ -55,7 +55,9 @@ export default {
 
     const ripple = h('div', {
       'class': 'input-group--selection-controls__ripple',
-      on: { click: this.toggle },
+      on: Object.assign({}, {
+        click: this.toggle
+      }, this.$listeners),
       directives: [
         {
           name: 'ripple',

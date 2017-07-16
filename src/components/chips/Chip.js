@@ -32,18 +32,15 @@ export default {
     const children = [this.$slots.default]
     const data = {
       'class': this.classes,
-      attrs: {
-        tabindex: -1
-      },
+      attrs: { tabindex: -1 },
       directives: [{
         name: 'show',
         value: this.isActive
-      }]
+      }],
+      on: this.$listeners
     }
 
     if (this.close) {
-      const icon = h('v-icon', { props: { right: true } }, 'cancel')
-
       children.push(h('a', {
         'class': 'chip__close',
         domProps: { href: 'javascript:;' },
@@ -54,7 +51,9 @@ export default {
             this.$emit('input', false)
           }
         }
-      }, [icon]))
+      }, [
+        h('v-icon', { props: { right: true } }, 'cancel')
+      ]))
     }
 
     return h('span', data, children)

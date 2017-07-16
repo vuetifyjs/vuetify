@@ -2,6 +2,7 @@ import Autocomplete from './mixins/autocomplete'
 import Filterable from '~mixins/filterable'
 import Generators from './mixins/generators'
 import Input from '~mixins/input'
+import { getObjectValueByPath } from '~util/helpers'
 
 export default {
   name: 'select',
@@ -102,10 +103,9 @@ export default {
       return this.items.filter(i => {
         if (!this.multiple) {
           return this.getValue(i) === this.getValue(this.inputValue)
-        } else {
-          // Always return Boolean
-          return this.inputValue.find(j => this.getValue(j) === this.getValue(i)) !== undefined
         }
+        // Always return Boolean
+        return this.inputValue.find(j => this.getValue(j) === this.getValue(i)) !== undefined
       })
     }
   },
@@ -164,7 +164,11 @@ export default {
           this.inputValue !== null &&
           typeof this.inputValue !== 'undefined'
         ) {
-        this.$nextTick(() => (this.$refs.input.value = this.getValue(this.inputValue)))
+        this.$nextTick(() => {
+          this.$refs.input.value = this.returnObject
+            ? this.getText(this.inputValue)
+            : this.getValue(this.inputValue)
+        })
       }
     },
     genLabel () {
@@ -177,10 +181,10 @@ export default {
       return this.$createElement('label', data, this.label)
     },
     getText (item) {
-      return item === Object(item) ? item[this.itemText] : item
+      return item === Object(item) ? getObjectValueByPath(item, this.itemText) : item
     },
     getValue (item) {
-      return item === Object(item) && (this.itemValue in item) ? item[this.itemValue] : item
+      return item === Object(item) ? getObjectValueByPath(item, this.itemValue) : item
     },
     onScroll () {
       if (!this.isActive) {
@@ -231,7 +235,9 @@ export default {
         value: () => (this.isActive = false)
       }],
       on: {
-        keydown: e => this.$refs.menu.changeListIndex(e)
+        keydown: e => {
+          this.$refs.menu.changeListIndex(e)
+        }
       }
     })
   }

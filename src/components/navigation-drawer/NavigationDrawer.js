@@ -1,10 +1,12 @@
 import Overlayable from '~mixins/overlayable'
+import Resizable from '~mixins/resizable'
 import Themeable from '~mixins/themeable'
+import touch from '~util/touch'
 
 export default {
   name: 'navigation-drawer',
 
-  mixins: [Overlayable, Themeable],
+  mixins: [Overlayable, Resizable, Themeable],
 
   data () {
     return {
@@ -27,6 +29,7 @@ export default {
     persistent: Boolean,
     right: Boolean,
     temporary: Boolean,
+    touchless: Boolean,
     value: { required: false }
   },
 
@@ -38,10 +41,10 @@ export default {
       return {
         'navigation-drawer': true,
         'navigation-drawer--absolute': this.absolute,
-        'navigation-drawer--is-booted': this.isBooted,
         'navigation-drawer--clipped': this.clipped,
         'navigation-drawer--close': !this.isActive,
         'navigation-drawer--floating': this.floating,
+        'navigation-drawer--is-booted': this.isBooted,
         'navigation-drawer--is-mobile': this.isMobile,
         'navigation-drawer--mini-variant': this.miniVariant,
         'navigation-drawer--open': this.isActive,
@@ -67,6 +70,7 @@ export default {
     isActive (val) {
       this.$emit('input', val)
       this.showOverlay && val && this.genOverlay() || this.removeOverlay()
+      this.$el.scrollTop = 0
     },
     permanent (val) {
       this.$emit('input', val)
@@ -83,7 +87,7 @@ export default {
 
   beforeDestroy () {
     if (this.permanent) return
-    window.removeEventListener('resize', this.onResize, { passive: false })
+    touch.unbind(this.$el.parentNode)
   },
 
   methods: {
@@ -91,16 +95,18 @@ export default {
       this.checkIfMobile()
       setTimeout(() => (this.isBooted = true), 0)
 
-      if (this.permanent) {
-        this.isActive = true
-        return
-      } else if (this.isMobile) this.isActive = false
+      if (this.permanent) return (this.isActive = true)
+      else if (this.isMobile) this.isActive = false
       else if (!this.value && (this.persistent || this.temporary)) this.isActive = false
 
-      window.addEventListener('resize', this.onResize, { passive: true })
+      if (this.touchless) return
+
+      touch.bind(this.$el.parentNode, true)
+        .left(this.swipeLeft)
+        .right(this.swipeRight)
     },
     checkIfMobile () {
-      this.isMobile = window.innerWidth <= parseInt(this.mobileBreakPoint)
+      this.isMobile = window.innerWidth < parseInt(this.mobileBreakPoint)
     },
     closeConditional () {
       return !this.permanent && (this.temporary || this.isMobile)
@@ -109,6 +115,34 @@ export default {
       if (!this.enableResizeWatcher || this.permanent || this.temporary) return
       this.checkIfMobile()
       this.isActive = !this.isMobile
+    },
+    swipeRight (e) {
+      // TODO handle closing
+      if (this.right) return
+      this.calculateTouchArea()
+
+      if (e.touchendX - e.touchstartX < 100) return
+      if (e.touchstartX > this.touchArea.left) return
+
+      this.isActive = true
+    },
+    swipeLeft (e) {
+      // TODO handle closing
+      if (!this.right) return
+      this.calculateTouchArea()
+
+      if (e.touchendX - e.touchstartX > -100) return
+      if (e.touchstartX < this.touchArea.right) return
+
+      this.isActive = true
+    },
+    calculateTouchArea () {
+      const parentRect = this.$el.parentNode.getBoundingClientRect()
+
+      this.touchArea = {
+        left: parentRect.left + 50,
+        right: parentRect.right - 50
+      }
     }
   },
 
@@ -120,11 +154,11 @@ export default {
         name: 'click-outside',
         value: this.closeConditional
       }],
-      on: {
+      on: Object.assign({}, {
         click: () => {
           this.$emit('update:miniVariant', false)
         }
-      }
+      }, this.$listeners)
     }
 
     return h('aside', data, this.$slots.default)

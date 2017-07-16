@@ -3,7 +3,6 @@ export default {
     return {
       parallax: null,
       parallaxDist: null,
-      elOffsetTop: null,
       percentScrolled: null,
       scrollTop: null,
       windowHeight: null,

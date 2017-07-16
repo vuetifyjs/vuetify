@@ -8,10 +8,8 @@ export default {
       ])
     },
     genSelector () {
-      return this.$createElement('div', {
-        'class': 'picker--date__header-selector'
-      }, [
-        this.$createElement('v-btn', {
+      const genBtn = (change, children) => {
+        return this.$createElement('v-btn', {
           props: {
             dark: this.dark,
             icon: true
@@ -19,10 +17,16 @@ export default {
           nativeOn: {
             click: e => {
               e.stopPropagation()
-              this.tableDate = new Date(this.tableYear, this.tableMonth - 1)
+              this.tableDate = new Date(this.tableYear, change)
             }
           }
-        }, [
+        }, children)
+      }
+
+      return this.$createElement('div', {
+        'class': 'picker--date__header-selector'
+      }, [
+        genBtn(this.tableMonth - 1, [
           this.$createElement('v-icon', 'chevron_left')
         ]),
         this.$createElement('div', {
@@ -34,18 +38,7 @@ export default {
             }, this.headerDateFormat({ month: this.tableMonth, monthName: this.months[this.tableMonth], year: this.tableYear }))
           ])
         ]),
-        this.$createElement('v-btn', {
-          props: {
-            dark: this.dark,
-            icon: true
-          },
-          nativeOn: {
-            click: e => {
-              e.stopPropagation()
-              this.tableDate = new Date(this.tableYear, this.tableMonth + 1)
-            }
-          }
-        }, [
+        genBtn(this.tableMonth + 1, [
           this.$createElement('v-icon', 'chevron_right')
         ])
       ])

@@ -36,14 +36,17 @@
       font-size: 16px
       padding-right: 4px
 
-.input-group--select
   .menu
     display: inline
 
   .fade-transition-leave-active
     position: absolute
     left: 0
-
+  
+  &.input-group--autocomplete.input-group--focused:not(.input-group--multiple)
+    .input-group__selections__comma
+      display: none
+  
 
 .input-group
   &--overflow,

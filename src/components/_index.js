@@ -1,6 +1,7 @@
 import Alerts from './alerts/index'
 import App from './app/index'
 import Avatars from './avatars/index'
+import BottomNav from './bottom-nav/index'
 import Breadcrumbs from './breadcrumbs/index'
 import Buttons from './buttons/index'
 import Cards from './cards/index'
@@ -30,12 +31,12 @@ import Tabs from './tabs/index'
 import TextFields from './text-fields/index'
 import Transitions from './transitions/_index'
 import Snackbar from './snackbars/index'
-import BottomNav from './bottom-nav/index'
 
 export default Object.assign({},
   Alerts,
   App,
   Avatars,
+  BottomNav,
   Breadcrumbs,
   Buttons,
   Cards,
@@ -64,6 +65,5 @@ export default Object.assign({},
   Tabs,
   TextFields,
   Transitions,
-  Snackbar,
-  BottomNav
+  Snackbar
 )
