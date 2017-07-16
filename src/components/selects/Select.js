@@ -212,7 +212,7 @@ export default {
         this.inputValue = inputValue.map(i => this.returnObject ? i : this.getValue(i))
       }
 
-      if (this.autocomplete) {
+      if (this.autocomplete || this.editable) {
         this.$nextTick(() => {
           this.searchValue = null
           this.$refs.input &&
@@ -235,9 +235,7 @@ export default {
         value: () => (this.isActive = false)
       }],
       on: {
-        keydown: e => {
-          this.$refs.menu.changeListIndex(e)
-        }
+        keydown: this.onKeyDown // Located in mixins/autocomplete.js
       }
     })
   }
