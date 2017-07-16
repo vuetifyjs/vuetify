@@ -16,7 +16,7 @@ export default {
       }, [
         this.$createElement('div', {
           domProps: { innerHTML: date },
-          key: this.landscape
+          key: date
         })
       ])
 

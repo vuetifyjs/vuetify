@@ -59,22 +59,4 @@ describe('Button.vue', () => {
     expect(wrapper.is('a')).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
   })
-
-  it('should throw warning when using deprecated router prop', () => {
-    global.console = { warn: jest.fn() }
-
-    const instance = Vue.extend()
-    instance.component('router-link', stub)
-
-    const wrapper = mount(Button, {
-      propsData: {
-        to: '/home',
-        router: true
-      },
-      instance
-    })
-
-    expect(console.warn).toBeCalled()
-    expect(wrapper.html()).toMatchSnapshot()
-  })
 })
