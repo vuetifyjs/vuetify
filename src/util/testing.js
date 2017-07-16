@@ -3,6 +3,7 @@ import load from '~util/load'
 import { mount, shallow } from 'avoriaz'
 
 export function test(name, cb) {
+  global.console.warn = jest.fn()
   Vue.prototype.$vuetify = { load }
 
   beforeEach(() => {
@@ -16,12 +17,14 @@ export function test(name, cb) {
   }))
 }
 
-export function functionalContext(context = {}) {
+export function functionalContext(context = {}, children = []) {
+  if (!Array.isArray(children)) children = [children]
   return {
     context: Object.assign({
       data: {},
       props: {}
-    }, context)
+    }, context),
+    children
   }
 }
 
