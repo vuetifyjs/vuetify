@@ -61,7 +61,7 @@ export default {
         input = input === this.trueValue ? this.falseValue : this.trueValue
       } else if (this.value) {
         input = this.value === this.inputValue
-          ? null
+          ? typeof this.inputValue === 'boolean' ? false : null
           : this.value
       } else {
         input = !input
