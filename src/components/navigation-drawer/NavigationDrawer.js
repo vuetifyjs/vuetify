@@ -28,10 +28,7 @@ export default {
     persistent: Boolean,
     right: Boolean,
     temporary: Boolean,
-    touchless: {
-      type: Boolean,
-      default: false
-    },
+    touchless: Boolean,
     value: { required: false }
   },
 

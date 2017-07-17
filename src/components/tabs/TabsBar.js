@@ -1,4 +1,5 @@
 import Resizable from '~mixins/resizable'
+import Icon from '~components/icons/Icon'
 
 export default {
   name: 'tabs-bar',
@@ -155,7 +156,7 @@ export default {
     children.push(wrapper)
 
     const genIcon = direction => {
-      return h('v-icon', {
+      return h(Icon, {
         props: {
           [`${direction}`]: true
         },

@@ -1,5 +1,5 @@
-import Carousel from './Carousel.vue'
-import CarouselItem from './CarouselItem.vue'
+import Carousel from './Carousel'
+import CarouselItem from './CarouselItem'
 
 export default {
   Carousel,
