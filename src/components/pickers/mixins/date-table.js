@@ -1,12 +1,18 @@
-import touch from '~util/touch'
-
 export default {
   methods: {
     genTable () {
       const children = []
       const data = {
-        ref: 'table',
-        'class': 'picker--date__table'
+        'class': 'picker--date__table',
+        directives: [
+          {
+            name: 'touch',
+            value: {
+              left: () => this.tableDate = new Date(this.tableYear, this.tableMonth + 1),
+              right: () => this.tableDate = new Date(this.tableYear, this.tableMonth - 1)
+            }
+          }
+        ]
       }
 
       if (this.scrollable) {
@@ -118,13 +124,5 @@ export default {
         this.currentMonth === this.tableMonth &&
         this.currentDay === i
     }
-  },
-  mounted () {
-    touch.bind(this.$refs.table)
-      .left(() => this.tableDate = new Date(this.tableYear, this.tableMonth + 1))
-      .right(() => this.tableDate = new Date(this.tableYear, this.tableMonth - 1))
-  },
-  beforeDestroy () {
-    touch.unbind(this.$refs.table)
   }
 }

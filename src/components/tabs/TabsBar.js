@@ -1,5 +1,4 @@
 import Resizable from '~mixins/resizable'
-import touch from '~util/touch'
 
 export default {
   name: 'tabs-bar',
@@ -13,7 +12,8 @@ export default {
       resizeDebounce: null,
       isOverflowing: false,
       scrollOffset: 0,
-      itemOffset: 0
+      itemOffset: 0,
+      startX: 0
     }
   },
 
@@ -57,35 +57,27 @@ export default {
   mounted () {
     this.$vuetify.load(() => {
       this.onResize()
-
-      let startX = 0
-
-      touch.bind(this.$refs.wrapper, true)
-        .start((e) => {
-          startX = this.scrollOffset + e.touchstartX
-          this.$refs.container.style.transition = 'none'
-        })
-        .move((e) => {
-          const offset = startX - e.touchmoveX
-          this.scrollOffset = offset
-        })
-        .end((e) => {
-          this.$refs.container.style.transition = null
-          if (this.scrollOffset < 0) {
-            this.scrollOffset = 0
-          } else if (this.scrollOffset >= this.$refs.container.scrollWidth) {
-            const lastItem = this.$refs.container.children[this.$refs.container.children.length - 1]
-            this.scrollOffset = this.$refs.container.scrollWidth - lastItem.clientWidth
-          }
-        })
     })
   },
 
-  beforeDestroy () {
-    touch.unbind(this.$refs.wrapper)
-  },
-
   methods: {
+    start (e) {
+      this.startX = this.scrollOffset + e.touchstartX
+      this.$refs.container.style.transition = 'none'
+    },
+    move (e) {
+      const offset = this.startX - e.touchmoveX
+      this.scrollOffset = offset
+    },
+    end (e) {
+      this.$refs.container.style.transition = null
+      if (this.scrollOffset < 0) {
+        this.scrollOffset = 0
+      } else if (this.scrollOffset >= this.$refs.container.scrollWidth) {
+        const lastItem = this.$refs.container.children[this.$refs.container.children.length - 1]
+        this.scrollOffset = this.$refs.container.scrollWidth - lastItem.clientWidth
+      }
+    },
     scrollLeft () {
       const { offset, index } = this.newOffset('Left')
       this.scrollOffset = offset
@@ -146,7 +138,21 @@ export default {
       ref: 'container'
     }, this.$slots.default)
 
-    children.push(h('div', { ref: 'wrapper', class: this.wrapperClasses }, [container]))
+    const wrapper = h('div', {
+      class: this.wrapperClasses,
+      directives: [
+        {
+          name: 'touch',
+          value: {
+            start: this.start,
+            move: this.move,
+            end: this.end
+          }
+        }
+      ]
+    }, [container])
+
+    children.push(wrapper)
 
     const genIcon = direction => {
       return h('v-icon', {

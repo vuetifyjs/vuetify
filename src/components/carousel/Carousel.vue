@@ -1,30 +1,5 @@
-<template lang="pug">
-  div(class="carousel")
-    div(class="carousel__left")
-      v-btn(icon v-on:click.native.stop="prev" dark)
-        v-icon chevron_left
-
-    div(class="carousel__right")
-      v-btn(icon v-on:click.native.stop="next" dark)
-        v-icon chevron_right
-
-    div(class="carousel__controls")
-      v-btn(
-        class="carousel__controls__item"
-        icon
-        dark
-        v-bind:class="{ 'carousel__controls__item--active': index === current }"
-        v-for="(item, index) in items"
-        v-bind:key="index"
-        v-on:click.native.stop="select(index)"
-      )
-        v-icon {{ icon }}
-    slot
-</template>
-
 <script>
   import Bootable from '~mixins/bootable'
-  import touch from '~util/touch'
 
   export default {
     name: 'carousel',
@@ -83,15 +58,7 @@
     },
 
     mounted () {
-      touch.bind(this.$el)
-        .right(this.prev)
-        .left(this.next)
-
       this.init()
-    },
-
-    beforeDestroy () {
-      touch.unbind(this.$el)
     },
 
     methods: {
@@ -127,6 +94,53 @@
       startInterval () {
         this.slideInterval = setInterval(this.next, this.interval)
       }
+    },
+
+    render (h) {
+      const genIcon = (name, fn) => {
+        return h('v-btn', {
+          props: {
+            icon: true,
+            dark: true
+          },
+          on: {
+            click: fn
+          }
+        }, [h('v-icon', name)])
+      }
+
+      const prev = h('div', { class: 'carousel__left' }, [genIcon('chevron_left', this.prev)])
+      const next = h('div', { class: 'carousel__right' }, [genIcon('chevron_right', this.next)])
+
+      const items = this.items.map((item, index) => {
+        return h('v-btn', {
+          class: {
+            'carousel__controls__item': true,
+            'carousel__controls__item--active': index === this.current
+          },
+          props: {
+            icon: true,
+            dark: true
+          },
+          key: index,
+          on: {
+            click: this.select.bind(this, index)
+          }
+        }, [h('v-icon', this.icon)])
+      })
+
+      const controls = h('div', { class: 'carousel__controls' }, items)
+      const directives = [
+        {
+          name: 'touch',
+          value: {
+            left: this.next,
+            right: this.prev
+          }
+        }
+      ]
+
+      return h('div', { class: 'carousel', directives }, [prev, next, controls, this.$slots.default])
     }
   }
 </script>
