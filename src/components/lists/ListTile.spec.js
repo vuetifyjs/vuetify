@@ -9,7 +9,7 @@ ListTile.directives = {
 
 const stub = {
   name: 'router-link',
-  render: h => h('button'),
+  render: h => h('button')
 }
 
 test('ListTile.vue', ({ mount }) => {

@@ -1,9 +1,7 @@
-import { mount, shallow } from 'avoriaz'
-import { createRenderer } from 'vue-server-renderer'
+import { mount } from 'avoriaz'
 import Vue from 'vue/dist/vue.common'
 import Button from 'src/components/buttons/Button'
 import ripple from 'src/directives/ripple'
-import VueRouter from 'vue-router'
 
 Button.directives = {
   ripple
@@ -11,7 +9,7 @@ Button.directives = {
 
 const stub = {
   name: 'router-link',
-  render: h => h('button'),
+  render: h => h('button')
 }
 
 describe('Button.vue', () => {

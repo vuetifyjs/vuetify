@@ -17,7 +17,7 @@ module.exports = {
   },
   globals: {
     'expect': true,
-    'sinon': true,
+    'describe': true,
     'it': true,
     'jest': true
   },

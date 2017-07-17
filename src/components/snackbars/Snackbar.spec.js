@@ -1,6 +1,4 @@
 import { mount } from 'avoriaz'
-import { createRenderer } from 'vue-server-renderer'
-import Vue from 'vue/dist/vue.common'
 import Snackbar from 'src/components/snackbars/Snackbar'
 import Transitions from 'src/components/transitions/_index'
 
