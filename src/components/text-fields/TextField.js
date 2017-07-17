@@ -5,6 +5,8 @@ export default {
 
   mixins: [Input],
 
+  inheritAttrs: false,
+
   data () {
     return {
       hasFocused: false,
@@ -159,10 +161,12 @@ export default {
           required: this.required,
           value: this.lazyValue
         },
-        attrs: Object.assign({}, {
+        attrs: {
+          ...this.$attrs,
           tabindex: this.tabindex
-        }, this.$attrs),
+        },
         on: {
+          ...this.$listeners,
           blur: this.blur,
           input: this.onInput,
           focus: this.focus
