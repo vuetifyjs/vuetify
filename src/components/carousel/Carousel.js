@@ -64,7 +64,7 @@ export default {
 
   methods: {
     genControls () {
-      return this.$createElement('div',{
+      return this.$createElement('div', {
         staticClass: 'carousel__controls'
       }, this.genItems())
     },
@@ -72,7 +72,7 @@ export default {
       return this.$createElement('div', {
         staticClass: `carousel__${direction}`
       }, [
-         this.$createElement(Button, {
+        this.$createElement(Button, {
           props: {
             icon: true,
             dark: true
@@ -142,7 +142,7 @@ export default {
         }
       }]
     }, [
-      this.genIcon('left', this.prev), 
+      this.genIcon('left', this.prev),
       this.genIcon('right', this.next),
       this.genControls(),
       this.$slots.default
