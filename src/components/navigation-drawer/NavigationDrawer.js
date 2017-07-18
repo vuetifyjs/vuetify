@@ -127,34 +127,33 @@ export default {
         left: parentRect.left + 50,
         right: parentRect.right - 50
       }
+    },
+    genDirectives () {
+      const directives = [{
+        name: 'click-outside',
+        value: this.closeConditional
+      }]
+
+      !this.touchless && directives.push({
+        name: 'touch',
+        value: {
+          parent: true,
+          left: this.swipeLeft,
+          right: this.swipeRight
+        }
+      })
+
+      return directives
     }
   },
 
   render (h) {
-    const directives = [
-      {
-        name: 'click-outside',
-        value: this.closeConditional
-      }
-    ]
-
-    !this.touchless && directives.push({
-      name: 'touch',
-      value: {
-        parent: true,
-        left: this.swipeLeft,
-        right: this.swipeRight
-      }
-    })
-
     const data = {
       'class': this.classes,
       style: { height: this.calculatedHeight },
-      directives,
+      directives: this.genDirectives(),
       on: Object.assign({}, {
-        click: () => {
-          this.$emit('update:miniVariant', false)
-        }
+        click: () => this.$emit('update:miniVariant', false)
       }, this.$listeners)
     }
 
