@@ -14,6 +14,10 @@ export default {
 
   mounted () {
     window.addEventListener('resize', this.debouncedOnResize, { passive: true })
+
+    this.$vuetify.load(() => {
+      this.onResize()
+    })
   },
 
   beforeDestroy () {

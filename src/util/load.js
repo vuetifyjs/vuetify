@@ -10,6 +10,7 @@ function load (cb, i = 0) {
   }
 
   document.addEventListener('DOMContentLoaded', cb)
+  window.addEventListener('load', cb)
 }
 
 export default load

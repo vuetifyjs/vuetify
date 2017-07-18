@@ -54,12 +54,6 @@ export default {
     }
   },
 
-  mounted () {
-    this.$vuetify.load(() => {
-      this.onResize()
-    })
-  },
-
   methods: {
     genContainer () {
       return this.$createElement('ul', {
