@@ -77,12 +77,12 @@
 
 ``` bash
 # npm
-npm install vuetify --save-dev
+npm install vuetify
 ```
 
 ``` bash
 # yarn
-yarn add vuetify --dev
+yarn add vuetify
 ```
 
 ## Use
