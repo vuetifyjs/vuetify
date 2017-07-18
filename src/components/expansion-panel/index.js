@@ -1,5 +1,5 @@
 import ExpansionPanel from './ExpansionPanel'
-import ExpansionPanelContent from './ExpansionPanelContent.vue'
+import ExpansionPanelContent from './ExpansionPanelContent'
 
 export default {
   ExpansionPanel,

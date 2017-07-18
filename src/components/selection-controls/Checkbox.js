@@ -1,6 +1,6 @@
 import Selectable from '~mixins/selectable'
 import Ripple from '~directives/ripple'
-import Transitions from '~components/transitions/_index'
+import Transitions from '~components/transitions'
 import VIcon from '~components/icons/Icon'
 
 const { FadeTransition: VFadeTransition } = Transitions
