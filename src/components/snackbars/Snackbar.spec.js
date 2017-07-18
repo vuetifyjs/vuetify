@@ -1,10 +1,13 @@
 import { mount } from 'avoriaz'
-import Snackbar from 'src/components/snackbars/Snackbar'
-import Transitions from 'src/components/transitions/_index'
+import Snackbar from '~components/snackbars/Snackbar'
+import {
+  SlideYTransition,
+  SlideYReverseTransition
+} from '~components/transitions'
 
 Snackbar.components = {
-  'v-slide-y-reverse-transition': Transitions.SlideYReverseTransition,
-  'v-slide-y-transition': Transitions.SlideYTransition
+  'v-slide-y-reverse-transition': SlideYReverseTransition,
+  'v-slide-y-transition': SlideYTransition
 }
 
 describe('Snackbar.vue', () => {

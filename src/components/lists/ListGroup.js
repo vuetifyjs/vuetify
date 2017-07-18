@@ -1,4 +1,4 @@
-import Expand from '~mixins/expand-transition'
+import { ExpandTransition } from '~components/transitions'
 import Toggleable from '~mixins/toggleable'
 
 export default {
@@ -6,7 +6,7 @@ export default {
 
   inject: ['listClick', 'listClose'],
 
-  mixins: [Expand, Toggleable],
+  mixins: [Toggleable],
 
   data () {
     return {
@@ -91,13 +91,7 @@ export default {
       ref: 'item'
     }, [this.$slots.item])
 
-    const transition = h('transition', {
-      on: {
-        enter: this.enter,
-        afterEnter: this.afterEnter,
-        leave: this.leave
-      }
-    }, [group])
+    const transition = h(ExpandTransition, [group])
 
     return h('div', { 'class': 'list--group__container' }, [item, transition])
   }

@@ -10,7 +10,6 @@ export default {
 
   data () {
     return {
-      resizeDebounce: null,
       isOverflowing: false,
       scrollOffset: 0,
       itemOffset: 0,
@@ -119,11 +118,7 @@ export default {
       this.itemOffset = index
     },
     onResize () {
-      clearTimeout(this.resizeDebounce)
-
-      this.resizeDebounce = setTimeout(() => {
-        this.isOverflowing = this.$refs.container.clientWidth < this.$refs.container.scrollWidth
-      }, 50)
+      this.isOverflowing = this.$refs.container.clientWidth < this.$refs.container.scrollWidth
     },
     newOffset (direction) {
       return this[`newOffset${direction}`](this.scrollOffset, this.itemOffset)
