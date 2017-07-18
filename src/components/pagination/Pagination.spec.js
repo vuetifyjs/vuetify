@@ -27,5 +27,6 @@ test('Pagination.vue', ({ mount }) => {
 
     expect(next).toBeCalled()
     expect(previous).toBeCalled()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

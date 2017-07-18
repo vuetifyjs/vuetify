@@ -11,9 +11,13 @@ export default {
       }, [this.$createElement('v-icon', 'chevron_left')])
     },
     genNextIcon () {
+      const disabled = this.computedPagination.rowsPerPage < 0 ||
+        this.computedPagination.page * this.computedPagination.rowsPerPage >= this.itemsLength ||
+        this.pageStop < 0
+
       return this.$createElement('v-btn', {
         props: {
-          disabled: this.computedPagination.page * this.computedPagination.rowsPerPage >= this.itemsLength || this.pageStop < 0,
+          disabled,
           icon: true,
           flat: true
         },

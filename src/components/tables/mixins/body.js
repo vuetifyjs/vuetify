@@ -22,10 +22,10 @@ export default {
 
           const row = this.$scopedSlots.items(props)
 
-          if (row.length && row[0].tag === 'tr') {
-            return row
-          } else {
+          if (row.length && row[0].tag === 'td') {
             return this.genTR(row, { attrs: { active: this.isSelected(item) } })
+          } else {
+            return row
           }
         })
       }

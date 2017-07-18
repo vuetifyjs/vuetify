@@ -1,11 +1,11 @@
 import Card from '~components/cards/Card'
-import Transitions from '~components/transitions/_index'
+import { FadeTransition } from '~components/transitions'
 import TimePicker from '~components/pickers/TimePicker'
 import { test } from '~util/testing'
 
 TimePicker.components = {
   'v-card': Card,
-  'v-fade-transition': Transitions.FadeTransition
+  'v-fade-transition': FadeTransition
 }
 
 test('TimePicker.js', ({ mount }) => {
@@ -17,10 +17,11 @@ test('TimePicker.js', ({ mount }) => {
     })
 
     expect(wrapper.vm.inputTime).toBe('09:00:00')
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should accept a date object for a value', () => {
-    const now = new Date()
+    const now = new Date(2017, 7, 1, 0, 0, 0, 0)
     const wrapper = mount(TimePicker, {
       propsData: {
         value: now
@@ -35,6 +36,7 @@ test('TimePicker.js', ({ mount }) => {
     }
 
     expect(wrapper.vm.inputTime).toBe(`${hour}:${minutes}${period}`)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should change am/pm when updated from model', () => {
@@ -43,9 +45,10 @@ test('TimePicker.js', ({ mount }) => {
         value: '9:00am'
       }
     })
-    
+
     wrapper.setProps({ value: '9:00pm' })
 
     expect(wrapper.data().period).toBe('pm')
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

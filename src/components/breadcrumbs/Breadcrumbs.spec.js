@@ -15,6 +15,7 @@ test('Breadcrumbs.js', ({ mount }) => {
 
     expect(wrapper.hasClass('breadcrumbs')).toBe(true)
     expect(wrapper.hasClass('breadcrumbs--with-icons')).toBe(true)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should inject divider to children', () => {
@@ -26,5 +27,6 @@ test('Breadcrumbs.js', ({ mount }) => {
 
     const item = wrapper.find(BreadcrumbsItem)[0]
     expect(item.hasAttribute('data-divider', '/')).toBe(true)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

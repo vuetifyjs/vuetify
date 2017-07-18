@@ -15,6 +15,12 @@ module.exports = {
   env: {
     browser: true
   },
+  globals: {
+    'expect': true,
+    'describe': true,
+    'it': true,
+    'jest': true
+  },
   // add your custom rules here
   'rules': {
     // allow paren-less arrow functions

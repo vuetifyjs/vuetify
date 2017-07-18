@@ -25,6 +25,8 @@ const ripple = {
     animation.style.height = animation.style.width
 
     el.appendChild(container)
+    const computed = window.getComputedStyle(el)
+    if (computed.position !== 'absolute') el.style.position = 'relative'
 
     const offset = el.getBoundingClientRect()
     const x = value.center ? '50%' : `${e.clientX - offset.left}px`
@@ -57,6 +59,7 @@ const ripple = {
       setTimeout(() => {
         // Need to figure out a new way to do this
         try {
+          if (ripples.length < 1) el.style.position = null
           animation.parentNode && el.removeChild(animation.parentNode)
         } catch (e) {}
       }, 300)

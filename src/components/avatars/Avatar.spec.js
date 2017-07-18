@@ -6,5 +6,6 @@ test('Avatar.vue', ({ mount, functionalContext }) => {
     const wrapper = mount(Avatar, functionalContext())
 
     expect(wrapper.hasClass('avatar')).toBe(true)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

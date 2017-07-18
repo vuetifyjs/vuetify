@@ -17,7 +17,6 @@ export default {
     generateRouteLink () {
       let exact = this.exact
       let tag
-      const options = this.to || this.href
 
       const data = {
         attrs: { disabled: this.disabled },
@@ -40,10 +39,8 @@ export default {
       }
 
       if (this.to) {
-        this.router && console.warn('The <router> prop is deprecated, use <to> for router-links (with <nuxt> if applicable) and <href> for regular links.')
-
         tag = this.nuxt ? 'nuxt-link' : 'router-link'
-        data.props.to = options
+        data.props.to = this.to
         data.props.exact = exact
         data.props.activeClass = this.activeClass
         data.props.append = this.append

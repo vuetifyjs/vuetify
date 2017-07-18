@@ -2,9 +2,11 @@
   "env": {
     "test": {
       "presets": [
-        ["es2015"]
+        ["es2015"],
+        ["stage-2"]
       ],
       "plugins": [
+        "transform-runtime",
         ["module-resolver", {
           "root": ["./src"],
           "alias": {

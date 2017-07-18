@@ -103,10 +103,9 @@ export default {
       return this.items.filter(i => {
         if (!this.multiple) {
           return this.getValue(i) === this.getValue(this.inputValue)
-        } else {
-          // Always return Boolean
-          return this.inputValue.find(j => this.getValue(j) === this.getValue(i)) !== undefined
         }
+        // Always return Boolean
+        return this.inputValue.find(j => this.getValue(j) === this.getValue(i)) !== undefined
       })
     }
   },
@@ -165,7 +164,11 @@ export default {
           this.inputValue !== null &&
           typeof this.inputValue !== 'undefined'
         ) {
-        this.$nextTick(() => (this.$refs.input.value = this.getValue(this.inputValue)))
+        this.$nextTick(() => {
+          this.$refs.input.value = this.returnObject
+            ? this.getText(this.inputValue)
+            : this.getValue(this.inputValue)
+        })
       }
     },
     genLabel () {
@@ -209,7 +212,7 @@ export default {
         this.inputValue = inputValue.map(i => this.returnObject ? i : this.getValue(i))
       }
 
-      if (this.autocomplete) {
+      if (this.autocomplete || this.editable) {
         this.$nextTick(() => {
           this.searchValue = null
           this.$refs.input &&
@@ -231,9 +234,9 @@ export default {
         name: 'click-outside',
         value: () => (this.isActive = false)
       }],
-      on: Object.assign({}, {
-        keydown: e => this.$refs.menu.changeListIndex(e)
-      }, this.$listeners)
+      on: {
+        keydown: this.onKeyDown // Located in mixins/autocomplete.js
+      }
     })
   }
 }

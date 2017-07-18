@@ -17,3 +17,6 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Ivan Vedernikov
 - Jérôme Pott
 - Sebastian Mares
+- Chava Sobreyra
+- Dima Shmakov
+- Costa Huang

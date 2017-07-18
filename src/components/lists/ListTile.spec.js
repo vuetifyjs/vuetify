@@ -9,7 +9,7 @@ ListTile.directives = {
 
 const stub = {
   name: 'router-link',
-  render: h => h('button'),
+  render: h => h('button')
 }
 
 test('ListTile.vue', ({ mount }) => {
@@ -18,6 +18,7 @@ test('ListTile.vue', ({ mount }) => {
 
     expect(wrapper.is('li')).toBe(true)
     expect(wrapper.find('a').length).toBe(1)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render <li> with <a> when using href prop', () => {
@@ -31,6 +32,7 @@ test('ListTile.vue', ({ mount }) => {
 
     expect(wrapper.is('li')).toBe(true)
     expect(a.hasAttribute('href', 'http://www.google.com')).toBe(true)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render <li> with <button> when using to prop', () => {
@@ -46,5 +48,6 @@ test('ListTile.vue', ({ mount }) => {
 
     expect(wrapper.is('li')).toBe(true)
     expect(wrapper.find('button').length).toBe(1)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

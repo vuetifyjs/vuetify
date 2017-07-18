@@ -1,7 +1,7 @@
 require('./stylus/main.styl')
 
-import Components from './components/_index'
-import Directives from './directives/_index'
+import Components from './components'
+import Directives from './directives'
 import Load from './util/load'
 
 function plugin (Vue) {

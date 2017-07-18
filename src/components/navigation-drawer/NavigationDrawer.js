@@ -1,7 +1,6 @@
 import Overlayable from '~mixins/overlayable'
 import Resizable from '~mixins/resizable'
 import Themeable from '~mixins/themeable'
-import touch from '~util/touch'
 
 export default {
   name: 'navigation-drawer',
@@ -85,11 +84,6 @@ export default {
     this.$vuetify.load(this.init)
   },
 
-  beforeDestroy () {
-    if (this.permanent) return
-    touch.unbind(this.$el.parentNode)
-  },
-
   methods: {
     init () {
       this.checkIfMobile()
@@ -98,12 +92,6 @@ export default {
       if (this.permanent) return (this.isActive = true)
       else if (this.isMobile) this.isActive = false
       else if (!this.value && (this.persistent || this.temporary)) this.isActive = false
-
-      if (this.touchless) return
-
-      touch.bind(this.$el.parentNode, true)
-        .left(this.swipeLeft)
-        .right(this.swipeRight)
     },
     checkIfMobile () {
       this.isMobile = window.innerWidth < parseInt(this.mobileBreakPoint)
@@ -117,24 +105,20 @@ export default {
       this.isActive = !this.isMobile
     },
     swipeRight (e) {
-      // TODO handle closing
-      if (this.right) return
+      if (this.isActive && !this.right) return
       this.calculateTouchArea()
 
-      if (e.touchendX - e.touchstartX < 100) return
-      if (e.touchstartX > this.touchArea.left) return
-
-      this.isActive = true
+      if (Math.abs(e.touchendX - e.touchstartX) < 100) return
+      else if (!this.right && e.touchstartX <= this.touchArea.left) this.isActive = true
+      else if (this.right && this.isActive) this.isActive = false
     },
     swipeLeft (e) {
-      // TODO handle closing
-      if (!this.right) return
+      if (this.isActive && this.right) return
       this.calculateTouchArea()
 
-      if (e.touchendX - e.touchstartX > -100) return
-      if (e.touchstartX < this.touchArea.right) return
-
-      this.isActive = true
+      if (Math.abs(e.touchendX - e.touchstartX) < 100) return
+      else if (this.right && e.touchstartX >= this.touchArea.right) this.isActive = true
+      else if (!this.right && this.isActive) this.isActive = false
     },
     calculateTouchArea () {
       const parentRect = this.$el.parentNode.getBoundingClientRect()
@@ -143,6 +127,23 @@ export default {
         left: parentRect.left + 50,
         right: parentRect.right - 50
       }
+    },
+    genDirectives () {
+      const directives = [{
+        name: 'click-outside',
+        value: this.closeConditional
+      }]
+
+      !this.touchless && directives.push({
+        name: 'touch',
+        value: {
+          parent: true,
+          left: this.swipeLeft,
+          right: this.swipeRight
+        }
+      })
+
+      return directives
     }
   },
 
@@ -150,14 +151,9 @@ export default {
     const data = {
       'class': this.classes,
       style: { height: this.calculatedHeight },
-      directives: [{
-        name: 'click-outside',
-        value: this.closeConditional
-      }],
+      directives: this.genDirectives(),
       on: Object.assign({}, {
-        click: () => {
-          this.$emit('update:miniVariant', false)
-        }
+        click: () => this.$emit('update:miniVariant', false)
       }, this.$listeners)
     }
 

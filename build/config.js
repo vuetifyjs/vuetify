@@ -39,15 +39,6 @@ function genConfig (opts) {
         hide_modules: true
       }),
       new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          warnings: false,
-          screw_ie8: true,
-          unused: true,
-          dead_code: true
-        },
-        output: {
-          comments: false
-        },
         sourceMap: false
       }),
       new webpack.BannerPlugin({

@@ -1,12 +1,13 @@
 import { mount } from 'avoriaz'
-import { createRenderer } from 'vue-server-renderer'
-import Vue from 'vue/dist/vue.common'
-import Snackbar from 'src/components/snackbars/Snackbar'
-import Transitions from 'src/components/transitions/_index'
+import Snackbar from '~components/snackbars/Snackbar'
+import {
+  SlideYTransition,
+  SlideYReverseTransition
+} from '~components/transitions'
 
 Snackbar.components = {
-  'v-slide-y-reverse-transition': Transitions.SlideYReverseTransition,
-  'v-slide-y-transition': Transitions.SlideYTransition
+  'v-slide-y-reverse-transition': SlideYReverseTransition,
+  'v-slide-y-transition': SlideYTransition
 }
 
 describe('Snackbar.vue', () => {
@@ -14,6 +15,7 @@ describe('Snackbar.vue', () => {
     const wrapper = mount(Snackbar)
 
     expect(wrapper.hasClass('snack')).toBe(true)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should have a snack__content class only when active', async () => {
@@ -32,5 +34,6 @@ describe('Snackbar.vue', () => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.find('div .snack__content').length).toEqual(1)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })
