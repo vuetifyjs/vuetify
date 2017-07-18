@@ -1772,6 +1772,12 @@ diff@^3.2.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/diff/-/diff-3.3.0.tgz#056695150d7aa93237ca7e378ac3b1682b7963b9"
 
+diffable-html@^2.0.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/diffable-html/-/diffable-html-2.1.0.tgz#0d4c2de115ac58f904aab1b72e6649cefca5f025"
+  dependencies:
+    htmlparser2 "^3.9.2"
+
 diffie-hellman@^5.0.0:
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/diffie-hellman/-/diffie-hellman-5.0.2.tgz#b5835739270cfe26acf632099fded2a07f209e5e"
@@ -2699,7 +2705,7 @@ html-encoding-sniffer@^1.0.1:
   dependencies:
     whatwg-encoding "^1.0.1"
 
-htmlparser2@^3.8.2:
+htmlparser2@^3.8.2, htmlparser2@^3.9.2:
   version "3.9.2"
   resolved "https://registry.yarnpkg.com/htmlparser2/-/htmlparser2-3.9.2.tgz#1bdf87acca0f3f9e53fa4fcceb0f4b4cbb00b338"
   dependencies:
@@ -3275,6 +3281,12 @@ jest-runtime@^20.0.4:
     micromatch "^2.3.11"
     strip-bom "3.0.0"
     yargs "^7.0.2"
+
+jest-serializer-html@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/jest-serializer-html/-/jest-serializer-html-4.0.0.tgz#befc40d2b366900f4a7877e064413e86069a1e16"
+  dependencies:
+    diffable-html "^2.0.0"
 
 jest-snapshot@^20.0.3:
   version "20.0.3"
@@ -3962,17 +3974,13 @@ minimatch@3.0.3:
   dependencies:
     brace-expansion "^1.0.0"
 
-minimist@0.0.8:
+minimist@0.0.8, minimist@~0.0.1:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-0.0.8.tgz#857fcabfc3397d2625b8228262e86aa7a011b05d"
 
 minimist@^1.1.1, minimist@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
-
-minimist@~0.0.1:
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/minimist/-/minimist-0.0.10.tgz#de3f98543dbf96082be48ad1a0c7cda836301dcf"
 
 mkdirp@0.5.0:
   version "0.5.0"
@@ -5068,13 +5076,9 @@ punycode@^1.2.4, punycode@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.4.1.tgz#c0d5a63b2718800ad8e1eb0fa5269c84dd41845e"
 
-q@1.4.1:
+q@1.4.1, q@^1.1.2:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/q/-/q-1.4.1.tgz#55705bcd93c5f3673530c2c2cbc0c2b3addc286e"
-
-q@^1.1.2:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/q/-/q-1.5.0.tgz#dd01bac9d06d30e6f219aecb8253ee9ebdc308f1"
 
 qs@~6.3.0:
   version "6.3.2"

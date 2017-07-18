@@ -54,6 +54,7 @@
     "jest": "^20.0.4",
     "jest-cli": "^20.0.4",
     "jest-css-modules": "^1.1.0",
+    "jest-serializer-html": "^4.0.0",
     "jest-vue-preprocessor": "^0.2.0",
     "lolex": "^1.4.0",
     "nightwatch": "^0.9.8",
@@ -113,6 +114,7 @@
     },
     "transformIgnorePatterns": [
       "node_modules/(?!vue-router)"
-    ]
+    ],
+    "snapshotSerializers": ["jest-serializer-html"]
   }
 }

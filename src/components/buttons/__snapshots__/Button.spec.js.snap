@@ -1,9 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Button.vue should render a <button> tag when using to prop 1`] = `"<button class=\\"btn btn--raised\\"></button>"`;
+exports[`Button.vue should render a <button> tag when using to prop 1`] = `
 
-exports[`Button.vue should render an <a> tag when using href prop 1`] = `"<a href=\\"http://www.google.com\\" class=\\"btn btn--raised\\"><div class=\\"btn__content\\"></div></a>"`;
+<button class="btn btn--raised">
+</button>
 
-exports[`Button.vue should render component and match snapshot 1`] = `"<button type=\\"button\\" class=\\"btn btn--raised\\"><div class=\\"btn__content\\"></div></button>"`;
+`;
 
-exports[`Button.vue should render specified tag when using tag prop 1`] = `"<a href=\\"javascript:;\\" class=\\"btn btn--raised\\"><div class=\\"btn__content\\"></div></a>"`;
+exports[`Button.vue should render an <a> tag when using href prop 1`] = `
+
+<a href="http://www.google.com"
+   class="btn btn--raised"
+>
+  <div class="btn__content">
+  </div>
+</a>
+
+`;
+
+exports[`Button.vue should render component and match snapshot 1`] = `
+
+<button type="button"
+        class="btn btn--raised"
+>
+  <div class="btn__content">
+  </div>
+</button>
+
+`;
+
+exports[`Button.vue should render specified tag when using tag prop 1`] = `
+
+<a href="javascript:;"
+   class="btn btn--raised"
+>
+  <div class="btn__content">
+  </div>
+</a>
+
+`;
