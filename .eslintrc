@@ -1,5 +1,0 @@
-env:
-  node: true
-  mocha: true
-  chai: true
-  sinon: true

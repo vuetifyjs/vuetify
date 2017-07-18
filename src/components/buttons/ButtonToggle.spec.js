@@ -1,6 +1,4 @@
 import { mount } from 'avoriaz'
-import { createRenderer } from 'vue-server-renderer'
-import Vue from 'vue/dist/vue.common'
 import ButtonToggle from 'src/components/buttons/ButtonToggle'
 import Button from 'src/components/buttons/Button'
 import Icon from 'src/components/icons/Icon'
@@ -15,11 +13,11 @@ Button.directives = {
   ripple
 }
 
-const toggle_text = [
+const TOGGLE_TEST = [
   { text: 'Left', value: 1 },
   { text: 'Center', value: 2 },
   { text: 'Right', value: 3 },
-  { text: 'Justify', value: 4 },
+  { text: 'Justify', value: 4 }
 ]
 
 describe('ButtonToggle.vue', () => {
@@ -27,7 +25,7 @@ describe('ButtonToggle.vue', () => {
     const wrapper = mount(ButtonToggle, {
       propsData: {
         inputValue: 1,
-        items: toggle_text,
+        items: TOGGLE_TEST,
         mandatory: true
       }
     })
@@ -35,7 +33,7 @@ describe('ButtonToggle.vue', () => {
     const change = jest.fn()
     wrapper.instance().$on('change', change)
 
-    wrapper.instance().updateValue(toggle_text[0])
+    wrapper.instance().updateValue(TOGGLE_TEST[0])
 
     expect(change).not.toBeCalled()
     expect(wrapper.html()).toMatchSnapshot()
@@ -45,7 +43,7 @@ describe('ButtonToggle.vue', () => {
     const wrapper = mount(ButtonToggle, {
       propsData: {
         inputValue: 1,
-        items: toggle_text,
+        items: TOGGLE_TEST,
         mandatory: true
       }
     })
@@ -53,7 +51,7 @@ describe('ButtonToggle.vue', () => {
     const change = jest.fn()
     wrapper.instance().$on('change', change)
 
-    wrapper.instance().updateValue(toggle_text[1])
+    wrapper.instance().updateValue(TOGGLE_TEST[1])
 
     expect(change).toBeCalledWith(2)
     expect(wrapper.html()).toMatchSnapshot()
@@ -63,7 +61,7 @@ describe('ButtonToggle.vue', () => {
     const wrapper = mount(ButtonToggle, {
       propsData: {
         inputValue: [1],
-        items: toggle_text,
+        items: TOGGLE_TEST,
         mandatory: true,
         multiple: true
       }
@@ -72,7 +70,7 @@ describe('ButtonToggle.vue', () => {
     const change = jest.fn()
     wrapper.instance().$on('change', change)
 
-    wrapper.instance().updateValue(toggle_text[0])
+    wrapper.instance().updateValue(TOGGLE_TEST[0])
 
     expect(change).toBeCalledWith([1])
     expect(wrapper.html()).toMatchSnapshot()
@@ -82,7 +80,7 @@ describe('ButtonToggle.vue', () => {
     const wrapper = mount(ButtonToggle, {
       propsData: {
         inputValue: [1],
-        items: toggle_text,
+        items: TOGGLE_TEST,
         mandatory: true,
         multiple: true
       }
@@ -91,7 +89,7 @@ describe('ButtonToggle.vue', () => {
     const change = jest.fn()
     wrapper.instance().$on('change', change)
 
-    wrapper.instance().updateValue(toggle_text[1])
+    wrapper.instance().updateValue(TOGGLE_TEST[1])
 
     expect(change).toBeCalledWith([1, 2])
     expect(wrapper.html()).toMatchSnapshot()

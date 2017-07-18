@@ -1,7 +1,4 @@
 import { test } from '~util/testing'
-import { createRenderer } from 'vue-server-renderer'
-import Vue from 'vue/dist/vue.common'
-import Vuetify from 'src/index'
 import Alert from 'src/components/alerts/Alert'
 import Icon from 'src/components/icons/Icon'
 

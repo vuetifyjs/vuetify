@@ -21,7 +21,7 @@ test('TimePicker.js', ({ mount }) => {
   })
 
   it('should accept a date object for a value', () => {
-    const now = new Date(2017,7,1,0,0,0,0)
+    const now = new Date(2017, 7, 1, 0, 0, 0, 0)
     const wrapper = mount(TimePicker, {
       propsData: {
         value: now

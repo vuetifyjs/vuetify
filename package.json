@@ -11,10 +11,8 @@
   "scripts": {
     "dev": "cross-env TARGET=dev webpack --config build/config.js --progress --hide-modules --watch",
     "build": "rimraf dist && cross-env NODE_ENV=production node build/build.js --progress --hide-modules",
-    "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
-    "e2e": "node test/e2e/runner.js",
     "test": "cross-env NODE_ENV=test jest --no-cache",
-    "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
+    "lint": "eslint --ext .js,.vue src --ignore-pattern=*/util/testing.js"
   },
   "description": "Vue.js 2 Semantic Component Framework",
   "devDependencies": {
@@ -54,6 +52,7 @@
     "friendly-errors-webpack-plugin": "^1.6.1",
     "function-bind": "^1.0.2",
     "jest": "^20.0.4",
+    "jest-cli": "^20.0.4",
     "jest-css-modules": "^1.1.0",
     "jest-vue-preprocessor": "^0.2.0",
     "lolex": "^1.4.0",
