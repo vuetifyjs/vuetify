@@ -1,3 +1,12 @@
+const touchevent = (touch, wrapper) => {
+  return {
+    touchendX: touch.clientX,
+    touchendY: touch.clientY,
+    offsetX: touch.clientX - wrapper.touchstartX,
+    offsetY: touch.clientY - wrapper.touchstartY
+  }
+}
+
 const touchstart = (event, wrapper) => {
   const touch = event.changedTouches[0]
   wrapper.touchstartX = touch.clientX
@@ -8,7 +17,8 @@ const touchstart = (event, wrapper) => {
     touchstartY: touch.clientY
   }
 
-  wrapper.start && wrapper.start(Object.assign(event, e))
+  wrapper.start &&
+    wrapper.start(Object.assign(event, touchevent(touch, wrapper)))
 }
 
 const touchend = (event, wrapper) => {
@@ -16,14 +26,9 @@ const touchend = (event, wrapper) => {
   wrapper.touchendX = touch.clientX
   wrapper.touchendY = touch.clientY
 
-  const e = {
-    touchendX: touch.clientX,
-    touchendY: touch.clientY,
-    offsetX: touch.clientX - wrapper.touchstartX,
-    offsetY: touch.clientY - wrapper.touchstartY
-  }
+  wrapper.end &&
+    wrapper.end(Object.assign(event, touchevent(touch, wrapper)))
 
-  wrapper.end && wrapper.end(Object.assign(event, e))
   handleGesture(wrapper)
 }
 
