@@ -63,6 +63,40 @@ export default {
   },
 
   methods: {
+    genControls () {
+      return this.$createElement('div',{
+        staticClass: 'carousel__controls'
+      }, this.genItems())
+    },
+    genIcon (direction, fn) {
+      return this.$createElement('div', {
+        staticClass: `carousel__${direction}`
+      }, [
+         this.$createElement(Button, {
+          props: {
+            icon: true,
+            dark: true
+          },
+          on: { click: fn }
+        }, [this.$createElement(Icon, `chevron_${direction}`)])
+      ])
+    },
+    genItems () {
+      return this.items.map((item, index) => {
+        return this.$createElement(Button, {
+          class: {
+            'carousel__controls__item': true,
+            'carousel__controls__item--active': index === this.current
+          },
+          props: {
+            icon: true,
+            dark: true
+          },
+          key: index,
+          on: { click: this.select.bind(this, index) }
+        }, [this.$createElement(Icon, this.icon)])
+      })
+    },
     restartInterval () {
       clearInterval(this.slideInterval)
       this.$nextTick(this.startInterval)
@@ -98,49 +132,20 @@ export default {
   },
 
   render (h) {
-    const genIcon = (name, fn) => {
-      return h(Button, {
-        props: {
-          icon: true,
-          dark: true
-        },
-        on: {
-          click: fn
-        }
-      }, [h(Icon, name)])
-    }
-
-    const prev = h('div', { class: 'carousel__left' }, [genIcon('chevron_left', this.prev)])
-    const next = h('div', { class: 'carousel__right' }, [genIcon('chevron_right', this.next)])
-
-    const items = this.items.map((item, index) => {
-      return h(Button, {
-        class: {
-          'carousel__controls__item': true,
-          'carousel__controls__item--active': index === this.current
-        },
-        props: {
-          icon: true,
-          dark: true
-        },
-        key: index,
-        on: {
-          click: this.select.bind(this, index)
-        }
-      }, [h(Icon, this.icon)])
-    })
-
-    const controls = h('div', { class: 'carousel__controls' }, items)
-    const directives = [
-      {
+    return h('div', {
+      staticClass: 'carousel',
+      directives: [{
         name: 'touch',
         value: {
           left: this.next,
           right: this.prev
         }
-      }
-    ]
-
-    return h('div', { class: 'carousel', directives }, [prev, next, controls, this.$slots.default])
+      }]
+    }, [
+      this.genIcon('left', this.prev), 
+      this.genIcon('right', this.next),
+      this.genControls(),
+      this.$slots.default
+    ])
   }
 }
