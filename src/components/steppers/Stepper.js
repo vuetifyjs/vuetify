@@ -1,5 +1,9 @@
+import Themeable from '~mixins/themeable'
+
 export default {
   name: 'stepper',
+
+  mixins: [Themeable],
 
   provide () {
     return {
@@ -31,7 +35,9 @@ export default {
         'stepper--is-booted': this.isBooted,
         'stepper--vertical': this.vertical,
         'stepper--alt-labels': this.altLabels,
-        'stepper--non-linear': this.nonLinear
+        'stepper--non-linear': this.nonLinear,
+        'theme--dark': this.dark,
+        'theme--light': this.light
       }
     }
   },
