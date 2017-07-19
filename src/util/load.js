@@ -7,7 +7,7 @@ function load (cb, i = 0) {
     return setTimeout(() => load(cb, i + 1), 200)
   }
 
-  document.addEventListener('load', cb)
+  window.addEventListener('load', cb)
 }
 
 export default load
