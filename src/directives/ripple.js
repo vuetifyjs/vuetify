@@ -26,7 +26,7 @@ const ripple = {
 
     el.appendChild(container)
     const computed = window.getComputedStyle(el)
-    if (computed.position !== 'absolute') el.style.position = 'relative'
+    if (computed.position !== 'absolute' && computed.position !== 'fixed') el.style.position = 'relative'
 
     const offset = el.getBoundingClientRect()
     const x = value.center ? '50%' : `${e.clientX - offset.left}px`
