@@ -4,7 +4,7 @@ import Overlayable from '~mixins/overlayable'
 import Toggleable from '~mixins/toggleable'
 
 export default {
-  name: 'dialog',
+  name: 'v-dialog',
 
   mixins: [Bootable, Detachable, Overlayable, Toggleable],
 
