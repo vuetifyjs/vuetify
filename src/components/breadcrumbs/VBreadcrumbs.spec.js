@@ -1,15 +1,15 @@
 import { test } from '~util/testing'
-import Breadcrumbs from '~components/breadcrumbs/Breadcrumbs'
-import BreadcrumbsItem from '~components/breadcrumbs/BreadcrumbsItem'
+import VBreadcrumbs from '~components/breadcrumbs/VBreadcrumbs'
+import VBreadcrumbsItem from '~components/breadcrumbs/VBreadcrumbsItem'
 import { ripple } from '~directives/ripple'
 
-BreadcrumbsItem.directives = {
+VBreadcrumbsItem.directives = {
   ripple
 }
 
-test('Breadcrumbs.js', ({ mount }) => {
+test('VBreadcrumbs.js', ({ mount }) => {
   it('should have a breadcrumbs classes', () => {
-    const wrapper = mount(Breadcrumbs, {
+    const wrapper = mount(VBreadcrumbs, {
       propsData: { icons: true }
     })
 
@@ -19,13 +19,13 @@ test('Breadcrumbs.js', ({ mount }) => {
   })
 
   it('should inject divider to children', () => {
-    const wrapper = mount(Breadcrumbs, {
+    const wrapper = mount(VBreadcrumbs, {
       slots: {
-        default: [BreadcrumbsItem]
+        default: [VBreadcrumbsItem]
       }
     })
 
-    const item = wrapper.find(BreadcrumbsItem)[0]
+    const item = wrapper.find(VBreadcrumbsItem)[0]
     expect(item.hasAttribute('data-divider', '/')).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
   })

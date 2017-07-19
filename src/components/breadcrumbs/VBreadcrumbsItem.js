@@ -1,7 +1,7 @@
 import GenerateRouteLink from '~mixins/route-link'
 
 export default {
-  name: 'breadcrumbs-item',
+  name: 'v-breadcrumbs-item',
 
   mixins: [GenerateRouteLink],
 

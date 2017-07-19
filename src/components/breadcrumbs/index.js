@@ -1,7 +1,7 @@
-import Breadcrumbs from './Breadcrumbs'
-import BreadcrumbsItem from './BreadcrumbsItem'
+import VBreadcrumbs from './VBreadcrumbs'
+import VBreadcrumbsItem from './VBreadcrumbsItem'
 
 export default {
-  Breadcrumbs,
-  BreadcrumbsItem
+  VBreadcrumbs,
+  VBreadcrumbsItem
 }
