@@ -1,7 +1,7 @@
 import Toggleable from '~mixins/toggleable'
 
 export default {
-  name: 'chip',
+  name: 'v-chip',
 
   mixins: [Toggleable],
 

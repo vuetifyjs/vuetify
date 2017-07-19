@@ -1,9 +1,9 @@
-import Chip from '~components/chips/Chip'
+import VChip from '~components/chips/VChip'
 import { test } from '~util/testing'
 
-test('Chip.js', ({ mount }) => {
+test('VChip.js', ({ mount }) => {
   it('should have a chip class', () => {
-    const wrapper = mount(Chip)
+    const wrapper = mount(VChip)
 
     expect(wrapper.hasClass('chip')).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
