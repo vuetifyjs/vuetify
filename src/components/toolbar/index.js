@@ -2,7 +2,7 @@ import {
   createSimpleFunctional
 } from '~util/helpers'
 
-import SystemBar from './ToolbarSideIcon'
+import SystemBar from './SystemBar'
 import Toolbar from './Toolbar'
 import ToolbarSideIcon from './ToolbarSideIcon'
 
