@@ -68,28 +68,46 @@ export default {
     }
   },
 
-  render (h) {
-    const fade = h('v-fade-transition', [
-      this.indeterminate && h('div', {
+  methods: {
+    genDeterminate (h) {
+      return h('div', {
+        ref: 'front',
+        class: ['progress-linear__bar__determinate', this.colorFront],
+        style: { width: `${this.value}%` }
+      })
+    },
+    genBar (h, name) {
+      return h('div', {
         class: [
           'progress-linear__bar__indeterminate',
-          this.active && 'progress-linear__bar__indeterminate--active',
+          name,
           this.colorFront
         ]
       })
-    ])
+    },
+    genIndeterminate (h) {
+      return h('div', {
+        ref: 'front',
+        class: {
+          'progress-linear__bar__indeterminate': true,
+          'progress-linear__bar__indeterminate--active': this.active
+        }
+      }, [
+        this.genBar(h, 'long'),
+        this.genBar(h, 'short')
+      ])
+    }
+  },
 
-    const slide = h('v-slide-x-transition', [
-      !this.indeterminate && h('div', { class: ['progress-linear__bar__determinate', this.colorFront], style: { width: `${this.value}%` } })
-    ])
+  render (h) {
+    const fade = h('v-fade-transition', [this.indeterminate && this.genIndeterminate(h)])
+    const slide = h('v-slide-x-transition', [!this.indeterminate && this.genDeterminate(h)])
 
     const bar = h('div', { class: ['progress-linear__bar', this.colorBack], style: this.styles }, [fade, slide])
 
     return h('div', {
       class: ['progress-linear', this.classes],
-      style: {
-        height: `${this.height}px`
-      },
+      style: { height: `${this.height}px` },
       on: this.$listeners
     }, [bar])
   }

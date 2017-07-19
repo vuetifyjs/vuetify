@@ -18,8 +18,7 @@
       transition: .3s ease-in
 
     &__indeterminate
-      &:before, &:after
-        content: ''
+      .long, .short
         height: inherit
         position: absolute
         left: 0
@@ -27,25 +26,26 @@
         bottom: 0
         will-change: left, right
         width: auto
+        background-color: inherit
 
-      &--active:before
+      &--active .long
         animation: indeterminate
         animation-duration: 2.2s
         animation-iteration-count: infinite
 
-      &--active:after
+      &--active .short
         animation: indeterminate-short
         animation-duration: 2.2s
         animation-iteration-count: infinite
 
   &--query
     .progress-linear__bar__indeterminate
-      &--active:before
+      &--active .long
         animation: query
         animation-duration: 2s
         animation-iteration-count: infinite
 
-      &--active:after
+      &--active .short
         animation: query-short
         animation-duration: 2s
         animation-iteration-count: infinite

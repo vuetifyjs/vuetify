@@ -2,10 +2,21 @@ import Autocomplete from './mixins/autocomplete'
 import Filterable from '~mixins/filterable'
 import Generators from './mixins/generators'
 import Input from '~mixins/input'
+import VCard from '~components/cards/Card'
+import VList from '~components/lists/List'
+import VListTile from '~components/lists/ListTile'
+import VMenu from '~components/menus/Menu'
 import { getObjectValueByPath } from '~util/helpers'
 
 export default {
   name: 'select',
+
+  componets: {
+    VCard,
+    VList,
+    VListTile,
+    VMenu
+  },
 
   mixins: [Autocomplete, Input, Filterable, Generators],
 
@@ -103,9 +114,10 @@ export default {
       return this.items.filter(i => {
         if (!this.multiple) {
           return this.getValue(i) === this.getValue(this.inputValue)
+        } else {
+          // Always return Boolean
+          return this.inputValue.find(j => this.getValue(j) === this.getValue(i)) !== undefined
         }
-        // Always return Boolean
-        return this.inputValue.find(j => this.getValue(j) === this.getValue(i)) !== undefined
       })
     }
   },
@@ -164,11 +176,7 @@ export default {
           this.inputValue !== null &&
           typeof this.inputValue !== 'undefined'
         ) {
-        this.$nextTick(() => {
-          this.$refs.input.value = this.returnObject
-            ? this.getText(this.inputValue)
-            : this.getValue(this.inputValue)
-        })
+        this.$nextTick(() => (this.$refs.input.value = this.getValue(this.inputValue)))
       }
     },
     genLabel () {
@@ -181,10 +189,10 @@ export default {
       return this.$createElement('label', data, this.label)
     },
     getText (item) {
-      return item === Object(item) ? getObjectValueByPath(item, this.itemText) : item
+      return item === Object(item) ? (getObjectValueByPath(item, this.itemText) || item) : item
     },
     getValue (item) {
-      return item === Object(item) ? getObjectValueByPath(item, this.itemValue) : item
+      return item === Object(item) ? (getObjectValueByPath(item, this.itemValue) || item) : item
     },
     onScroll () {
       if (!this.isActive) {
