@@ -6218,8 +6218,6 @@ var _this = this;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 /* harmony default export */ __webpack_exports__["a"] = ({
   methods: {
     genMenu: function genMenu() {
@@ -6298,18 +6296,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.$scopedSlots.selection({ parent: this, item: item });
     },
     genChipSelection: function genChipSelection(item) {
-      var _this4 = this,
-          _$createElement;
+      var _this4 = this;
 
-      return this.$createElement('v-chip', (_$createElement = {
+      return this.$createElement('v-chip', {
         'class': 'chip--select-multi',
         props: { close: true },
-        on: { input: function input() {
+        on: {
+          input: function input() {
             return _this4.selectItem(item);
-          } }
-      }, _defineProperty(_$createElement, 'on', { click: function click(e) {
-          return e.stopPropagation();
-        } }), _defineProperty(_$createElement, 'key', this.getValue(item)), _$createElement), this.getText(item));
+          },
+          click: function click(e) {
+            return e.stopPropagation();
+          }
+        },
+        key: this.getValue(item)
+      }, this.getText(item));
     },
     genCommaSelection: function genCommaSelection(item, comma) {
       return this.$createElement('div', {
@@ -6348,12 +6349,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       var active = this.selectedItems.indexOf(item) !== -1;
       var data = {
-        on: {
-          click: function click(e) {
-            e.stopPropagation();
-            _this6.selectItem(item);
-          }
-        },
+        on: { click: function click(e) {
+            return _this6.selectItem(item);
+          } },
         props: {
           avatar: item === Object(item) && 'avatar' in item,
           ripple: true,
