@@ -1,9 +1,9 @@
-import { Avatar } from '~components/avatars'
+import { VAvatar } from '~components/avatars'
 import { test } from '~util/testing'
 
-test('Avatar.vue', ({ mount, functionalContext }) => {
+test('VAvatar.vue', ({ mount, functionalContext }) => {
   it('should have an avatar class', () => {
-    const wrapper = mount(Avatar, functionalContext())
+    const wrapper = mount(VAvatar, functionalContext())
 
     expect(wrapper.hasClass('avatar')).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
