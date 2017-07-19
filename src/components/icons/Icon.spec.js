@@ -1,6 +1,5 @@
 import Icon from '~components/icons/Icon'
 import { test } from '~util/testing'
-import { compileToFunctions } from 'vue-template-compiler'
 
 test('Icon.js', ({ mount, functionalContext }) => {
   it('should render correctly', () => {

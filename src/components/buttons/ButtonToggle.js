@@ -1,3 +1,6 @@
+import Button from '~components/buttons/Button'
+import Icon from '~components/icons/Icon'
+
 export default {
   name: 'button-toggle',
 
@@ -7,22 +10,22 @@ export default {
   },
 
   props: {
+    inputValue: {
+      required: false
+    },
     items: {
       type: Array,
       default: () => []
     },
-    multiple: Boolean,
     mandatory: Boolean,
-    inputValue: {
-      required: false
-    }
+    multiple: Boolean
   },
 
   computed: {
     classes () {
       return {
         'btn-toggle': true,
-        'btn-toggle--selected': this.inputValue && !this.multiple || this.inputValue && this.inputValue.length > 0
+        'btn-toggle--selected': this.inputValue && (!this.multiple || this.inputValue.length)
       }
     }
   },
@@ -60,14 +63,14 @@ export default {
       const children = []
 
       item.text && children.push(h('span', item.text))
-      item.icon && children.push(h('v-icon', item.icon))
+      item.icon && children.push(h(Icon, item.icon))
 
-      return h('v-btn', {
+      return h(Button, {
         key: index,
         props: {
           flat: true
         },
-        nativeOn: {
+        on: {
           click: (e) => {
             e.stopPropagation()
             this.updateValue(item)
