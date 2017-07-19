@@ -12,7 +12,11 @@ export default {
       isActive: this.value,
       isBooted: false,
       isMobile: false,
-      mobileBreakPoint: 1024
+      mobileBreakPoint: 1024,
+      touchArea: {
+        left: 0,
+        right: 0
+      }
     }
   },
 
@@ -121,6 +125,7 @@ export default {
       else if (!this.right && this.isActive) this.isActive = false
     },
     calculateTouchArea () {
+      if (!this.$el.parentNode) return
       const parentRect = this.$el.parentNode.getBoundingClientRect()
 
       this.touchArea = {

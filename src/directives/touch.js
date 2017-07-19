@@ -84,6 +84,8 @@ function inserted (el, { value }) {
 function unbind (el, { value }) {
   const target = value.parent ? el.parentNode : el
 
+  if (!target) return
+
   target.removeEventListener('touchstart', touchstart)
   target.removeEventListener('touchend', touchend)
   target.removeEventListener('touchmove', touchmove)
