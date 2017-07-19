@@ -1,7 +1,7 @@
-import Carousel from './Carousel'
-import CarouselItem from './CarouselItem'
+import VCarousel from './VCarousel'
+import VCarouselItem from './VCarouselItem'
 
 export default {
-  Carousel,
-  CarouselItem
+  VCarousel,
+  VCarouselItem
 }

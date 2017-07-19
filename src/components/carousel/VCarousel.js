@@ -1,9 +1,9 @@
 import Bootable from '~mixins/bootable'
-import Button from '~components/buttons/Button'
-import Icon from '~components/icons/Icon'
+import VBtn from '~components/buttons/VBtn'
+import VIcon from '~components/icons/VIcon'
 
 export default {
-  name: 'carousel',
+  name: 'v-carousel',
 
   mixins: [Bootable],
 
@@ -72,18 +72,18 @@ export default {
       return this.$createElement('div', {
         staticClass: `carousel__${direction}`
       }, [
-        this.$createElement(Button, {
+        this.$createElement(VBtn, {
           props: {
             icon: true,
             dark: true
           },
           on: { click: fn }
-        }, [this.$createElement(Icon, `chevron_${direction}`)])
+        }, [this.$createElement(VIcon, `chevron_${direction}`)])
       ])
     },
     genItems () {
       return this.items.map((item, index) => {
-        return this.$createElement(Button, {
+        return this.$createElement(VBtn, {
           class: {
             'carousel__controls__item': true,
             'carousel__controls__item--active': index === this.current
@@ -94,7 +94,7 @@ export default {
           },
           key: index,
           on: { click: this.select.bind(this, index) }
-        }, [this.$createElement(Icon, this.icon)])
+        }, [this.$createElement(VIcon, this.icon)])
       })
     },
     restartInterval () {

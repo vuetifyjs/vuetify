@@ -1,5 +1,5 @@
 export default {
-  name: 'carousel-item',
+  name: 'v-carousel-item',
 
   data () {
     return {
