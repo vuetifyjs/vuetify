@@ -1,5 +1,5 @@
-import BottomNav from './BottomNav'
+import VBottomNav from './VBottomNav'
 
 export default {
-  BottomNav
+  VBottomNav
 }
