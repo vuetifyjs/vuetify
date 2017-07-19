@@ -1,5 +1,5 @@
 export default {
-  name: 'card-media',
+  name: 'v-card-media',
 
   props: {
     contain: Boolean,
