@@ -2,7 +2,7 @@ import Toggleable from '~mixins/toggleable'
 import Positionable from '~mixins/positionable'
 
 export default {
-  name: 'speed-dial',
+  name: 'v-speed-dial',
 
   mixins: [Positionable, Toggleable],
 

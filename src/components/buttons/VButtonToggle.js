@@ -1,8 +1,8 @@
-import Button from '~components/buttons/Button'
-import Icon from '~components/icons/Icon'
+import VButton from '~components/buttons/VButton'
+import VIcon from '~components/icons/VIcon'
 
 export default {
-  name: 'button-toggle',
+  name: 'v-btn-toggle',
 
   model: {
     prop: 'inputValue',
@@ -63,9 +63,9 @@ export default {
       const children = []
 
       item.text && children.push(h('span', item.text))
-      item.icon && children.push(h(Icon, item.icon))
+      item.icon && children.push(h(VIcon, item.icon))
 
-      return h(Button, {
+      return h(VButton, {
         key: index,
         props: {
           flat: true

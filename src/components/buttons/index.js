@@ -1,9 +1,9 @@
-import Btn from './Button'
-import BtnToggle from './ButtonToggle'
-import SpeedDial from './SpeedDial'
+import VBtn from './Button'
+import VBtnToggle from './ButtonToggle'
+import VSpeedDial from './VSpeedDial'
 
 export default {
-  Btn,
-  BtnToggle,
-  SpeedDial
+  VBtn,
+  VBtnToggle,
+  VSpeedDial
 }
