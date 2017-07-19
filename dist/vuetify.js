@@ -78,13 +78,14 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["d"] = createSimpleFunctional;
-/* harmony export (immutable) */ __webpack_exports__["e"] = createSimpleTransition;
-/* harmony export (immutable) */ __webpack_exports__["b"] = createJavaScriptTransition;
-/* harmony export (immutable) */ __webpack_exports__["f"] = directiveConfig;
-/* harmony export (immutable) */ __webpack_exports__["a"] = addOnceEventListener;
-/* harmony export (immutable) */ __webpack_exports__["g"] = getObjectValueByPath;
-/* harmony export (immutable) */ __webpack_exports__["c"] = createRange;
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (immutable) */ __webpack_exports__["createSimpleFunctional"] = createSimpleFunctional;
+/* harmony export (immutable) */ __webpack_exports__["createSimpleTransition"] = createSimpleTransition;
+/* harmony export (immutable) */ __webpack_exports__["createJavaScriptTransition"] = createJavaScriptTransition;
+/* harmony export (immutable) */ __webpack_exports__["directiveConfig"] = directiveConfig;
+/* harmony export (immutable) */ __webpack_exports__["addOnceEventListener"] = addOnceEventListener;
+/* harmony export (immutable) */ __webpack_exports__["getObjectValueByPath"] = getObjectValueByPath;
+/* harmony export (immutable) */ __webpack_exports__["createRange"] = createRange;
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -677,25 +678,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 // Component specific transitions
-var CarouselTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleTransition */])('carousel-transition');
-var CarouselReverseTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleTransition */])('carousel-reverse-transition');
-var TabTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleTransition */])('tab-transition');
-var TabReverseTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleTransition */])('tab-reverse-transition');
-var MenuTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleTransition */])('menu-transition');
-var FabTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleTransition */])('fab-transition', 'center center', 'out-in');
+var CarouselTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["createSimpleTransition"])('carousel-transition');
+var CarouselReverseTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["createSimpleTransition"])('carousel-reverse-transition');
+var TabTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["createSimpleTransition"])('tab-transition');
+var TabReverseTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["createSimpleTransition"])('tab-reverse-transition');
+var MenuTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["createSimpleTransition"])('menu-transition');
+var FabTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["createSimpleTransition"])('fab-transition', 'center center', 'out-in');
 
 // Generic transitions
-var DialogTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleTransition */])('dialog-transition');
-var DialogBottomTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleTransition */])('dialog-bottom-transition');
-var FadeTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleTransition */])('fade-transition');
-var ScaleTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleTransition */])('scale-transition');
-var SlideXTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleTransition */])('slide-x-transition');
-var SlideXReverseTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleTransition */])('slide-x-reverse-transition');
-var SlideYTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleTransition */])('slide-y-transition');
-var SlideYReverseTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["e" /* createSimpleTransition */])('slide-y-reverse-transition');
+var DialogTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["createSimpleTransition"])('dialog-transition');
+var DialogBottomTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["createSimpleTransition"])('dialog-bottom-transition');
+var FadeTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["createSimpleTransition"])('fade-transition');
+var ScaleTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["createSimpleTransition"])('scale-transition');
+var SlideXTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["createSimpleTransition"])('slide-x-transition');
+var SlideXReverseTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["createSimpleTransition"])('slide-x-reverse-transition');
+var SlideYTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["createSimpleTransition"])('slide-y-transition');
+var SlideYReverseTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["createSimpleTransition"])('slide-y-reverse-transition');
 
 // JavaScript transitions
-var ExpandTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["b" /* createJavaScriptTransition */])('expand-transition', __WEBPACK_IMPORTED_MODULE_1__expand_transition__["a" /* default */]);
+var ExpandTransition = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["createJavaScriptTransition"])('expand-transition', __WEBPACK_IMPORTED_MODULE_1__expand_transition__["a" /* default */]);
 
 /* harmony default export */ __webpack_exports__["b"] = ({
   CarouselTransition: CarouselTransition,
@@ -1758,10 +1759,15 @@ function unbind(el, binding) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return plugin; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__directives__ = __webpack_require__(127);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__util_load__ = __webpack_require__(132);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__util_helpers__ = __webpack_require__(0);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Components", function() { return __WEBPACK_IMPORTED_MODULE_0__components__["a"]; });
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "Helpers", function() { return __WEBPACK_IMPORTED_MODULE_3__util_helpers__; });
 __webpack_require__(24);
+
 
 
 
@@ -1785,7 +1791,7 @@ if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(plugin);
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (plugin);
+
 
 /***/ }),
 /* 24 */
@@ -2057,7 +2063,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(0);
 
 
-var Avatar = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleFunctional */])('avatar');
+var Avatar = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["createSimpleFunctional"])('avatar');
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   Avatar: Avatar
@@ -2510,8 +2516,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var CardActions = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleFunctional */])('card__actions');
-var CardText = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleFunctional */])('card__text');
+var CardActions = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["createSimpleFunctional"])('card__actions');
+var CardText = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["createSimpleFunctional"])('card__text');
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   Card: __WEBPACK_IMPORTED_MODULE_1__Card__["a" /* default */],
@@ -3122,7 +3128,7 @@ var defaultDateFormat = function defaultDateFormat(val) {
     var date = new Date();
     date.setDate(date.getDate() - date.getDay() + parseInt(this.firstDayOfWeek));
 
-    Object(__WEBPACK_IMPORTED_MODULE_5__util_helpers__["c" /* createRange */])(7).forEach(function () {
+    Object(__WEBPACK_IMPORTED_MODULE_5__util_helpers__["createRange"])(7).forEach(function () {
       var narrow = date.toLocaleString(_this2.locale, { weekday: 'narrow' });
       _this2.narrowDays.push(narrow);
 
@@ -3466,8 +3472,8 @@ var defaultDateFormat = function defaultDateFormat(val) {
       period: 'am',
       selectingHour: true,
       ranges: {
-        hours: Object(__WEBPACK_IMPORTED_MODULE_3__util_helpers__["c" /* createRange */])(24),
-        minutes: Object(__WEBPACK_IMPORTED_MODULE_3__util_helpers__["c" /* createRange */])(60)
+        hours: Object(__WEBPACK_IMPORTED_MODULE_3__util_helpers__["createRange"])(24),
+        minutes: Object(__WEBPACK_IMPORTED_MODULE_3__util_helpers__["createRange"])(60)
       }
     };
   },
@@ -4301,7 +4307,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   enter: function enter(el, done) {
     // Remove initial transition
     el.style.transition = 'none';
-    Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* addOnceEventListener */])(el, 'transitionend', done);
+    Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["addOnceEventListener"])(el, 'transitionend', done);
 
     // Get height that is to be scrolled
     el.style.overflow = 'hidden';
@@ -4322,7 +4328,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   leave: function leave(el, done) {
     // Remove initial transition
     el.style.transition = 'none';
-    Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["a" /* addOnceEventListener */])(el, 'transitionend', done);
+    Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["addOnceEventListener"])(el, 'transitionend', done);
 
     // Set height before we transition to 0
     el.style.overflow = 'hidden';
@@ -4405,7 +4411,7 @@ var Grid = function Grid(name) {
 var Container = Grid('container');
 var Flex = Grid('flex');
 var Layout = Grid('layout');
-var Spacer = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleFunctional */])('spacer');
+var Spacer = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["createSimpleFunctional"])('spacer');
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   Container: Container,
@@ -4443,11 +4449,11 @@ var Spacer = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSim
 
 
 
-var ListTileActionText = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleFunctional */])('list__tile__action-text', 'span');
-var ListTileAvatar = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleFunctional */])('list__tile__avatar', 'v-avatar');
-var ListTileContent = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleFunctional */])('list__tile__content', 'div');
-var ListTileTitle = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleFunctional */])('list__tile__title', 'div');
-var ListTileSubTitle = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleFunctional */])('list__tile__sub-title', 'div');
+var ListTileActionText = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["createSimpleFunctional"])('list__tile__action-text', 'span');
+var ListTileAvatar = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["createSimpleFunctional"])('list__tile__avatar', 'v-avatar');
+var ListTileContent = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["createSimpleFunctional"])('list__tile__content', 'div');
+var ListTileTitle = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["createSimpleFunctional"])('list__tile__title', 'div');
+var ListTileSubTitle = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["createSimpleFunctional"])('list__tile__sub-title', 'div');
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   List: __WEBPACK_IMPORTED_MODULE_1__List__["a" /* default */],
@@ -5141,8 +5147,8 @@ var ListTileSubTitle = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /*
 
 
 
-var ToolbarTitle = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleFunctional */])('toolbar__title');
-var ToolbarItems = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleFunctional */])('toolbar__items');
+var ToolbarTitle = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["createSimpleFunctional"])('toolbar__title');
+var ToolbarItems = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["createSimpleFunctional"])('toolbar__items');
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   SystemBar: __WEBPACK_IMPORTED_MODULE_1__SystemBar__["a" /* default */],
@@ -5689,20 +5695,39 @@ var ToolbarItems = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* cre
     }
   },
 
-  render: function render(h) {
-    var fade = h('v-fade-transition', [this.indeterminate && h('div', {
-      class: ['progress-linear__bar__indeterminate', this.active && 'progress-linear__bar__indeterminate--active', this.colorFront]
-    })]);
+  methods: {
+    genDeterminate: function genDeterminate(h) {
+      return h('div', {
+        ref: 'front',
+        class: ['progress-linear__bar__determinate', this.colorFront],
+        style: { width: this.value + '%' }
+      });
+    },
+    genBar: function genBar(h, name) {
+      return h('div', {
+        class: ['progress-linear__bar__indeterminate', name, this.colorFront]
+      });
+    },
+    genIndeterminate: function genIndeterminate(h) {
+      return h('div', {
+        ref: 'front',
+        class: {
+          'progress-linear__bar__indeterminate': true,
+          'progress-linear__bar__indeterminate--active': this.active
+        }
+      }, [this.genBar(h, 'long'), this.genBar(h, 'short')]);
+    }
+  },
 
-    var slide = h('v-slide-x-transition', [!this.indeterminate && h('div', { class: ['progress-linear__bar__determinate', this.colorFront], style: { width: this.value + '%' } })]);
+  render: function render(h) {
+    var fade = h('v-fade-transition', [this.indeterminate && this.genIndeterminate(h)]);
+    var slide = h('v-slide-x-transition', [!this.indeterminate && this.genDeterminate(h)]);
 
     var bar = h('div', { class: ['progress-linear__bar', this.colorBack], style: this.styles }, [fade, slide]);
 
     return h('div', {
       class: ['progress-linear', this.classes],
-      style: {
-        height: this.height + 'px'
-      },
+      style: { height: this.height + 'px' },
       on: this.$listeners
     }, [bar]);
   }
@@ -6117,10 +6142,10 @@ var _this = this;
       return this.$createElement('label', data, this.label);
     },
     getText: function getText(item) {
-      return item === Object(item) ? Object(__WEBPACK_IMPORTED_MODULE_8__util_helpers__["g" /* getObjectValueByPath */])(item, this.itemText) || item : item;
+      return item === Object(item) ? Object(__WEBPACK_IMPORTED_MODULE_8__util_helpers__["getObjectValueByPath"])(item, this.itemText) || item : item;
     },
     getValue: function getValue(item) {
-      return item === Object(item) ? Object(__WEBPACK_IMPORTED_MODULE_8__util_helpers__["g" /* getObjectValueByPath */])(item, this.itemValue) || item : item;
+      return item === Object(item) ? Object(__WEBPACK_IMPORTED_MODULE_8__util_helpers__["getObjectValueByPath"])(item, this.itemValue) || item : item;
     },
     onScroll: function onScroll() {
       var _this5 = this;
@@ -6790,10 +6815,10 @@ var VFadeTransition = __WEBPACK_IMPORTED_MODULE_2__components_transitions__["b" 
 
       if ('touches' in e) {
         this.app.addEventListener('touchmove', this.onMouseMove, { passive: true });
-        Object(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["a" /* addOnceEventListener */])(this.app, 'touchend', this.onMouseUp);
+        Object(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["addOnceEventListener"])(this.app, 'touchend', this.onMouseUp);
       } else {
         this.app.addEventListener('mousemove', this.onMouseMove, { passive: true });
-        Object(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["a" /* addOnceEventListener */])(this.app, 'mouseup', this.onMouseUp);
+        Object(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["addOnceEventListener"])(this.app, 'mouseup', this.onMouseUp);
       }
     },
     onMouseUp: function onMouseUp() {
@@ -6841,7 +6866,7 @@ var VFadeTransition = __WEBPACK_IMPORTED_MODULE_2__components_transitions__["b" 
     children.push(h('div', { 'class': 'slider__track__container', ref: 'track' }, trackChildren));
 
     if (this.step) {
-      var ticks = Object(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["c" /* createRange */])(this.numTicks + 1).map(function (i) {
+      var ticks = Object(__WEBPACK_IMPORTED_MODULE_1__util_helpers__["createRange"])(this.numTicks + 1).map(function (i) {
         var span = h('span', {
           class: 'slider__tick',
           style: {
@@ -6948,7 +6973,7 @@ var VFadeTransition = __WEBPACK_IMPORTED_MODULE_2__components_transitions__["b" 
 
 
 
-var StepperHeader = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleFunctional */])('stepper__header');
+var StepperHeader = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["createSimpleFunctional"])('stepper__header');
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   Stepper: __WEBPACK_IMPORTED_MODULE_1__Stepper__["a" /* default */],
@@ -7301,7 +7326,7 @@ var StepperHeader = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* cr
 
 
 
-var TableOverflow = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleFunctional */])('table__overflow');
+var TableOverflow = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["createSimpleFunctional"])('table__overflow');
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   DataTable: __WEBPACK_IMPORTED_MODULE_1__DataTable__["a" /* default */],
@@ -7403,8 +7428,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         if (index === null) return items;
 
         return items.sort(function (a, b) {
-          var sortA = Object(__WEBPACK_IMPORTED_MODULE_5__util_helpers__["g" /* getObjectValueByPath */])(a, index);
-          var sortB = Object(__WEBPACK_IMPORTED_MODULE_5__util_helpers__["g" /* getObjectValueByPath */])(b, index);
+          var sortA = Object(__WEBPACK_IMPORTED_MODULE_5__util_helpers__["getObjectValueByPath"])(a, index);
+          var sortB = Object(__WEBPACK_IMPORTED_MODULE_5__util_helpers__["getObjectValueByPath"])(b, index);
 
           if (descending) {
             var _ref = [sortB, sortA];
@@ -7992,7 +8017,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 
 
-var TabsSlider = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSimpleFunctional */])('tabs__slider', 'li');
+var TabsSlider = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["createSimpleFunctional"])('tabs__slider', 'li');
 
 var TabsItems = {
   name: 'tabs-items',
@@ -8258,7 +8283,7 @@ var TabsItems = {
     classes: function classes() {
       return {
         'tabs__item': true,
-        'tabs__item--active': !this.router && this.isActive,
+        'tabs__item--active': !this.to && this.isActive,
         'tabs__item--disabled': this.disabled
       };
     },
@@ -8272,8 +8297,8 @@ var TabsItems = {
   },
 
   watch: {
-    '$route': function $route() {
-      this.router && this.callSlider();
+    $route: function $route() {
+      this.to && this.callSlider();
     }
   },
 
@@ -8295,7 +8320,7 @@ var TabsItems = {
 
       if (!this.to && !this.href) return;
 
-      if (!this.router) {
+      if (!this.to) {
         this.tabClick(this.action);
       }
 
@@ -8938,7 +8963,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 function directive(el, binding) {
-  var config = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* directiveConfig */])(binding, {
+  var config = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["directiveConfig"])(binding, {
     icon: false,
     left: false,
     bottom: false,
@@ -9014,7 +9039,7 @@ function directive(e, el, binding, v) {
 
 
 function directive(el, binding) {
-  var config = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* directiveConfig */])(binding, {
+  var config = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["directiveConfig"])(binding, {
     top: true,
     visible: true
   });

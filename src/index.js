@@ -3,6 +3,7 @@ require('./stylus/main.styl')
 import Components from './components'
 import Directives from './directives'
 import Load from './util/load'
+import * as Helpers from './util/helpers'
 
 function plugin (Vue) {
   Object.keys(Components).forEach(key => {
@@ -22,4 +23,9 @@ if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(plugin)
 }
 
-export default plugin
+export {
+  Components,
+  Helpers,
+  plugin as default
+}
+
