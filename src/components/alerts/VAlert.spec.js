@@ -1,19 +1,19 @@
 import { test } from '~util/testing'
-import Alert from 'src/components/alerts/Alert'
+import VAlert from 'src/components/alerts/VAlert'
 import Icon from 'src/components/icons/Icon'
 
-Alert.components = { 'v-icon': Icon }
+VAlert.components = { 'v-icon': Icon }
 
-test('Alert.vue', ({ mount }) => {
+test('VAlert.vue', ({ mount }) => {
   it('should have an alert class', () => {
-    const wrapper = mount(Alert)
+    const wrapper = mount(VAlert)
 
     expect(wrapper.hasClass('alert')).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should have a close icon', () => {
-    const wrapper = mount(Alert)
+    const wrapper = mount(VAlert)
     wrapper.setProps({ dismissible: true })
 
     expect(wrapper.contains('.alert__dismissible')).toBe(true)
@@ -21,14 +21,14 @@ test('Alert.vue', ({ mount }) => {
   })
 
   it('should be closed by default', () => {
-    const wrapper = mount(Alert)
+    const wrapper = mount(VAlert)
 
     expect(wrapper.data().isActive).toBe(false)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should emit input:false when close icon is clicked', () => {
-    const wrapper = mount(Alert, {
+    const wrapper = mount(VAlert, {
       propsData: {
         value: true,
         dismissible: true
@@ -44,7 +44,7 @@ test('Alert.vue', ({ mount }) => {
   })
 
   it('should not be visible after being dismissed', done => {
-    const wrapper = mount(Alert, {
+    const wrapper = mount(VAlert, {
       propsData: {
         value: true,
         dismissible: true
@@ -69,7 +69,7 @@ test('Alert.vue', ({ mount }) => {
   })
 
   it('should have a custom icon', () => {
-    const wrapper = mount(Alert, {
+    const wrapper = mount(VAlert, {
       propsData: {
         value: true,
         icon: 'list'
@@ -83,7 +83,7 @@ test('Alert.vue', ({ mount }) => {
   })
 
   it('should have no icon', () => {
-    const wrapper = mount(Alert, {
+    const wrapper = mount(VAlert, {
       propsData: {
         success: true,
         hideIcon: true

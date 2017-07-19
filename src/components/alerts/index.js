@@ -1,5 +1,5 @@
-import Alert from './Alert'
+import VAlert from './VAlert'
 
 export default {
-  Alert
+  VAlert
 }

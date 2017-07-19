@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Alert.vue should be closed by default 1`] = `
+exports[`VAlert.vue should be closed by default 1`] = `
 
 <div class="alert"
      style="display: none;"
@@ -11,7 +11,7 @@ exports[`Alert.vue should be closed by default 1`] = `
 
 `;
 
-exports[`Alert.vue should emit input:false when close icon is clicked 1`] = `
+exports[`VAlert.vue should emit input:false when close icon is clicked 1`] = `
 
 <div class="alert alert--dismissible">
   <div>
@@ -27,7 +27,7 @@ exports[`Alert.vue should emit input:false when close icon is clicked 1`] = `
 
 `;
 
-exports[`Alert.vue should have a close icon 1`] = `
+exports[`VAlert.vue should have a close icon 1`] = `
 
 <div class="alert alert--dismissible"
      style="display: none;"
@@ -45,7 +45,7 @@ exports[`Alert.vue should have a close icon 1`] = `
 
 `;
 
-exports[`Alert.vue should have a custom icon 1`] = `
+exports[`VAlert.vue should have a custom icon 1`] = `
 
 <div class="alert">
   <i class="material-icons icon icon--large alert__icon">
@@ -57,7 +57,7 @@ exports[`Alert.vue should have a custom icon 1`] = `
 
 `;
 
-exports[`Alert.vue should have an alert class 1`] = `
+exports[`VAlert.vue should have an alert class 1`] = `
 
 <div class="alert"
      style="display: none;"
@@ -68,7 +68,7 @@ exports[`Alert.vue should have an alert class 1`] = `
 
 `;
 
-exports[`Alert.vue should have no icon 1`] = `
+exports[`VAlert.vue should have no icon 1`] = `
 
 <div class="alert success"
      style="display: none;"
@@ -79,7 +79,7 @@ exports[`Alert.vue should have no icon 1`] = `
 
 `;
 
-exports[`Alert.vue should not be visible after being dismissed 1`] = `
+exports[`VAlert.vue should not be visible after being dismissed 1`] = `
 
 <div class="alert alert--dismissible"
      style="display: none;"
