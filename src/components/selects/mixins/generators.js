@@ -69,8 +69,10 @@ export default {
       return this.$createElement('v-chip', {
         'class': 'chip--select-multi',
         props: { close: true },
-        on: { input: () => this.selectItem(item) },
-        on: { click: e => e.stopPropagation() },
+        on: {
+          input: () => this.selectItem(item),
+          click: e => e.stopPropagation()
+        },
         key: this.getValue(item)
       }, this.getText(item))
     },
@@ -110,12 +112,7 @@ export default {
     genTile (item, disabled) {
       const active = this.selectedItems.indexOf(item) !== -1
       const data = {
-        on: {
-          click: e => {
-            e.stopPropagation()
-            this.selectItem(item)
-          }
-        },
+        on: { click: e => this.selectItem(item) },
         props: {
           avatar: item === Object(item) && 'avatar' in item,
           ripple: true,
