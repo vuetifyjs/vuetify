@@ -5689,20 +5689,39 @@ var ToolbarItems = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* cre
     }
   },
 
-  render: function render(h) {
-    var fade = h('v-fade-transition', [this.indeterminate && h('div', {
-      class: ['progress-linear__bar__indeterminate', this.active && 'progress-linear__bar__indeterminate--active', this.colorFront]
-    })]);
+  methods: {
+    genDeterminate: function genDeterminate(h) {
+      return h('div', {
+        ref: 'front',
+        class: ['progress-linear__bar__determinate', this.colorFront],
+        style: { width: this.value + '%' }
+      });
+    },
+    genBar: function genBar(h, name) {
+      return h('div', {
+        class: ['progress-linear__bar__indeterminate', name, this.colorFront]
+      });
+    },
+    genIndeterminate: function genIndeterminate(h) {
+      return h('div', {
+        ref: 'front',
+        class: {
+          'progress-linear__bar__indeterminate': true,
+          'progress-linear__bar__indeterminate--active': this.active
+        }
+      }, [this.genBar(h, 'long'), this.genBar(h, 'short')]);
+    }
+  },
 
-    var slide = h('v-slide-x-transition', [!this.indeterminate && h('div', { class: ['progress-linear__bar__determinate', this.colorFront], style: { width: this.value + '%' } })]);
+  render: function render(h) {
+    var fade = h('v-fade-transition', [this.indeterminate && this.genIndeterminate(h)]);
+    var slide = h('v-slide-x-transition', [!this.indeterminate && this.genDeterminate(h)]);
 
     var bar = h('div', { class: ['progress-linear__bar', this.colorBack], style: this.styles }, [fade, slide]);
 
     return h('div', {
       class: ['progress-linear', this.classes],
-      style: {
-        height: this.height + 'px'
-      },
+      style: { height: this.height + 'px' },
       on: this.$listeners
     }, [bar]);
   }
@@ -8258,7 +8277,7 @@ var TabsItems = {
     classes: function classes() {
       return {
         'tabs__item': true,
-        'tabs__item--active': !this.router && this.isActive,
+        'tabs__item--active': !this.to && this.isActive,
         'tabs__item--disabled': this.disabled
       };
     },
@@ -8272,8 +8291,8 @@ var TabsItems = {
   },
 
   watch: {
-    '$route': function $route() {
-      this.router && this.callSlider();
+    $route: function $route() {
+      this.to && this.callSlider();
     }
   },
 
@@ -8295,7 +8314,7 @@ var TabsItems = {
 
       if (!this.to && !this.href) return;
 
-      if (!this.router) {
+      if (!this.to) {
         this.tabClick(this.action);
       }
 
@@ -9172,7 +9191,7 @@ function load(cb) {
     }, 200);
   }
 
-  document.addEventListener('load', cb);
+  window.addEventListener('load', cb);
 }
 
 /* harmony default export */ __webpack_exports__["a"] = (load);
