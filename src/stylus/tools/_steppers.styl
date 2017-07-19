@@ -1,12 +1,20 @@
 stepper($material)
   background: $material.bg-color
 
-  .stepper__step__step
-    background: rgba($material.fg-color, $material.disabledORhints-text-percent)
-    color: $material.stepper.active
+  .stepper__step
+    &:not(.stepper__step--active):not(.stepper__step--complete)
+      .stepper__step__step
+        background: rgba($material.fg-color, $material.disabledORhints-text-percent)
 
-    .icon
+    &__step
       color: $material.stepper.active
+
+      .icon
+        color: $material.stepper.active
+
+  .stepper__header
+    .divider
+      background: rgba($material.fg-color, $material.divider-percent)
 
   .stepper__step
     &--active
