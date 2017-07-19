@@ -25,7 +25,7 @@ export default {
     classes () {
       return {
         'tabs__item': true,
-        'tabs__item--active': !this.router && this.isActive,
+        'tabs__item--active': !this.to && this.isActive,
         'tabs__item--disabled': this.disabled
       }
     },
@@ -39,8 +39,8 @@ export default {
   },
 
   watch: {
-    '$route' () {
-      this.router && this.callSlider()
+    $route () {
+      this.to && this.callSlider()
     }
   },
 
@@ -60,7 +60,7 @@ export default {
 
       if (!this.to && !this.href) return
 
-      if (!this.router) {
+      if (!this.to) {
         this.tabClick(this.action)
       }
 
