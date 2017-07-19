@@ -36,8 +36,8 @@ export default {
         'stepper--vertical': this.vertical,
         'stepper--alt-labels': this.altLabels,
         'stepper--non-linear': this.nonLinear,
-        'theme--dark dark--bg': this.dark,
-        'theme--light light--bg': this.light
+        'theme--dark': this.dark,
+        'theme--light': this.light
       }
     }
   },
