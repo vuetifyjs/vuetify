@@ -1,12 +1,14 @@
 stepper($material)
-  &__step__step
+  background: $material.bg-color
+
+  .stepper__step__step
     background: rgba($material.fg-color, $material.disabledORhints-text-percent)
     color: $material.stepper.active
 
     .icon
       color: $material.stepper.active
 
-  &__step
+  .stepper__step
     &--active
       .stepper__label
         text-shadow: 0px 0px 0px rgba($material.fg-color, 1)
@@ -27,7 +29,7 @@ stepper($material)
           .stepper__step__step
             background: $material.stepper.hover
 
-  &__label
+  .stepper__label
     color: rgba($material.fg-color, $material.disabledORhints-text-percent)
 
     small
@@ -41,17 +43,3 @@ stepper($material)
   &--vertical
     .stepper__content:not(:last-child)
       border-left: 1px solid rgba($material.fg-color, $material.divider-percent)
-
-/*
-  .stepper__step
-    .stepper__label
-      color: $material.text.primary
-
-      small
-        color: $material.text.secondary
-
-  &--vertical
-    .stepper__content:not(:last-child)
-      border-color: $material.text.secondary
-*/
-
