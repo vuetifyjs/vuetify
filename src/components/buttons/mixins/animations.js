@@ -77,40 +77,6 @@ export default {
         this.animate(d => this.scale(el, 1, 2.5, d), 200, 0, easeInQuad),
         this.animate(d => this.rotate(el, 0, -30, d), 200, 0, easeOutQuad)
       ]).then(() => done())
-    },
-    contentBeforeLeave (el) {
-      el.style.opacity = 1
-      el.style.clipPath = `circle(100%)`
-    },
-    contentLeave (el, done) {
-      Promise.all([
-        this.timeout(() => {
-          el.querySelectorAll('.btn__content').forEach(e => e.style.opacity = 0)
-        }, 150),
-        this.animate(d => this.opacity(el, 1, 0, d), 100, 300),
-        this.animate(d => this.horizontal(el, 0, (this.containerWidth / 2) - this.activatorWidth, d), 300, 150, easeOutCubic),
-        this.animate(d => this.clipPath(el, this.containerWidth * 0.6, this.activatorWidth / 2, d), 300, easeOutQuart),
-        this.sheet && this.animate(d => this.height(el, this.sheetHeight, 0, d), 300, 200, easeInCubic)
-      ]).then(() => done())
-    },
-    contentBeforeEnter (el) {
-      el.style.transition = 'none'
-      el.style.opacity = 0
-      el.style.clipPath = 'circle(1%)'
-      el.querySelectorAll('.btn__content').forEach(e => e.style.opacity = 0)
-      this.addTransform(el, `translateX(${(this.containerWidth / 2) - this.activatorWidth}px)`)
-      this.sheet && (el.style.height = '0px')
-    },
-    contentEnter (el, done) {
-      Promise.all([
-        this.animate(d => this.opacity(el, 0, 1, d), 300, 0, easeInCubic),
-        this.animate(d => this.horizontal(el, (this.containerWidth / 2) - this.activatorWidth, 0, d), 300, 200, easeOutCubic),
-        this.animate(d => this.clipPath(el, this.activatorWidth / 2, this.containerWidth * 0.6, d), 400, 100, easeInQuart),
-        this.timeout(() => {
-          el.querySelectorAll('.btn__content').forEach(e => e.style.opacity = 1)
-        }, 450),
-        this.sheet && this.animate(d => this.height(el, 0, this.sheetHeight, d), 350, 50, easeOutCubic)
-      ]).then(() => done())
     }
   }
 }
