@@ -98,9 +98,22 @@
 
     + main
       padding-top: $toolbar-height
+
+  &--fixed&, &--absolute&
+    &--extended
+      + main
+        padding-top: "calc(%s + %s)" % ($toolbar-height $toolbar-extension-height)
+        z-index: 2
       
-      @media all and (max-width: $grid-breakpoints.lg) and (orientation: landscape)
-        padding-top: $toolbar-mobile-landscape-height
+        @media all and (max-width: $grid-breakpoints.lg) and (orientation: landscape)
+          padding-top: "calc(%s + %s)" % ($toolbar-mobile-landscape-height $toolbar-mobile-landscape-height)
+
+        .card--flex-toolbar
+          z-index: 2
+          margin-top: "-%s" % $toolbar-height
+      
+          @media all and (max-width: $grid-breakpoints.lg) and (orientation: landscape)
+            margin-top: "-%s" % $toolbar-mobile-landscape-height
       
   &--floating
     display: inline-flex
@@ -110,6 +123,9 @@
   &--prominent
     .toolbar__content
       height: $toolbar-height
+  
+      @media all and (max-width: $grid-breakpoints.lg) and (orientation: landscape)
+        height: $toolbar-mobile-landscape-height
 
     .toolbar__extension
       height: $toolbar-height

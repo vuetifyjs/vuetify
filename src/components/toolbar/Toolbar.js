@@ -23,6 +23,7 @@ export default {
         'toolbar--card': this.card,
         'toolbar--dense': this.dense,
         'toolbar--fixed': this.fixed,
+        'toolbar--extended': this.extended,
         'toolbar--floating': this.floating,
         'toolbar--prominent': this.prominent,
         'theme--dark': this.dark,
