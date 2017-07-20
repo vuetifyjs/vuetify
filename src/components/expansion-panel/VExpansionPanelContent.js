@@ -1,4 +1,4 @@
-import { ExpandTransition } from '~components/transitions'
+import { VExpandTransition } from '~components/transitions'
 import Toggleable from '~mixins/toggleable'
 
 export default {
@@ -73,7 +73,7 @@ export default {
     const children = []
 
     this.$slots.header && children.push(this.genHeader(h))
-    children.push(h(ExpandTransition, [this.genBody(h)]))
+    children.push(h(VExpandTransition, [this.genBody(h)]))
 
     return h('li', children)
   }

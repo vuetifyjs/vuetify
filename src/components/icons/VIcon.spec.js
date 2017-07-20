@@ -11,7 +11,7 @@ test('VIcon.js', ({ mount, functionalContext }) => {
 
   it('should throw warning when using deprecated prop mdi', () => {
     const context = functionalContext({ props: { mdi: true } }, 'add')
-    const wrapper = mount(VIcon, context)
+    mount(VIcon, context)
 
     expect(console.warn).toBeCalled()
   })
@@ -27,7 +27,7 @@ test('VIcon.js', ({ mount, functionalContext }) => {
 
   it('should throw warning when using deprecated prop fa', () => {
     const context = functionalContext({ props: { fa: true } }, 'add')
-    const wrapper = mount(VIcon, context)
+    mount(VIcon, context)
 
     expect(console.warn).toBeCalled()
   })

@@ -10,7 +10,7 @@ export default {
   },
 
   beforeDestroy () {
-    this.$el && 
+    this.$el &&
       this.$el.removeEventListener('click', this.onClick, false)
   },
 
