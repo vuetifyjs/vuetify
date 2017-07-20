@@ -97,10 +97,30 @@ export const horizontal = (el, start, end, delta) => {
   addTransform(el, `translateX(${value}px`)
 }
 
-export const clipPath = (el, start, end, delta, x = 50, y = 50) => {
+export const clipPath = (el, start, end, delta) => {
   const value = interpolate(start, end, delta)
 
-  el.style.clipPath = `circle(${value}px at ${x}% ${y}%)`
+  el.dataset.clipPathSize = value
+  const x = el.dataset.clipPathX && `${el.dataset.clipPathX}px` || '50%'
+  const y = el.dataset.clipPathY && `${el.dataset.clipPathY}px` || '50%'
+
+  el.style.clipPath = `circle(${value}px at ${x} ${y})`
+}
+
+export const clipPathX = (el, start, end, delta) => {
+  const value = interpolate(start, end, delta)
+
+  el.dataset.clipPathX = value
+  const y = el.dataset.clipPathY && `${el.dataset.clipPathY}px` || '50%'
+  const size = el.dataset.clipPathSize || 0
+
+  el.style.clipPath = `circle(${size}px at ${value}px ${y})`
+}
+
+export const clipPathY = (el, start, end, delta) => {
+  const value = interpolate(start, end, delta)
+
+  el.dataset.clipPathX = value
 }
 
 export const easings = {
@@ -109,7 +129,8 @@ export const easings = {
   easeInCubic: BezierEasing(0.55, 0.055, 0.675, 0.19),
   easeOutCubic: BezierEasing(0.215, 0.61, 0.355, 1),
   easeInQuart: BezierEasing(0.895, 0.03, 0.685, 0.22),
-  easeOutQuart: BezierEasing(0.165, 0.84, 0.44, 1)
+  easeOutQuart: BezierEasing(0.165, 0.84, 0.44, 1),
+  linear: BezierEasing(1, 1, 1, 1)
 }
 
 export default {
@@ -125,5 +146,7 @@ export default {
   vertical,
   horizontal,
   clipPath,
+  clipPathX,
+  clipPathY,
   easings
 }

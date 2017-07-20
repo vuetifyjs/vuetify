@@ -1,9 +1,24 @@
 .morph
+  position: relative
+
+  &--absolute
+    position: absolute
+
+  &--fixed
+    position: fixed
+
   .btn
     margin: 0
 
+  &--top
+    &.morph--absolute
+      transform: translateY(-50%)
+
+  &--right
+    right: $grid-gutters.md
+
   &--content
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%)
+    //clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%)
 
   &--toolbar &--activator
     z-index: 10

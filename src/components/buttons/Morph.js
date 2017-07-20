@@ -1,15 +1,18 @@
 import Toggleable from '~mixins/toggleable'
 import Resizable from '~mixins/resizable'
+import Positionable from '~mixins/positionable'
 import MorphToolbarTransition from '~components/transitions/morph-toolbar-transition'
+import MorphSheetTransition from '~components/transitions/morph-sheet-transition'
 
 export default {
   name: 'morph',
 
-  mixins: [Toggleable, Resizable],
+  mixins: [Positionable, Toggleable, Resizable],
 
   data () {
     return {
       containerWidth: 0,
+      contentHeight: 0,
       activatorWidth: 0,
       clipPathSize: 0,
       clipPathX: 50,
@@ -36,23 +39,24 @@ export default {
         'morph--toolbar': this.toolbar,
         'morph--sheet': this.sheet,
         'morph--dialog': this.dialog,
-        'speed-dial--top': this.top,
-        'speed-dial--right': this.right,
+        'morph--top': this.top,
+        'morph--right': this.right,
         'speed-dial--bottom': this.bottom,
         'speed-dial--left': this.left,
-        'speed-dial--absolute': this.absolute,
+        'morph--absolute': this.absolute,
         'speed-dial--fixed': this.fixed
       }
     },
     transitions () {
-      console.log('transitions')
-      const transitions = this.toolbar ? MorphToolbarTransition(
-        this.$attrs.left && 'left' || this.$attrs.right && 'right',
-        this.containerWidth,
-        16,
-        this.activatorWidth) : {}
+      const transitions = this.toolbar && MorphToolbarTransition ||
+        this.sheet && MorphSheetTransition
 
-      return transitions
+      return transitions(
+        this.left && 'left' || this.right && 'right',
+        this.containerWidth,
+        this.sheet ? this.contentHeight : 16,
+        this.activatorWidth
+      )
     }
   },
 
@@ -62,7 +66,16 @@ export default {
 
       // Move content to parent element, if sheet
       if (this.sheet) {
-        this.$el.parentNode.insertBefore(this.$refs.content.$el, this.$el.parentNode.firstChild)
+        // First calculate real height
+        const clone = this.$refs.wrapper.cloneNode(true)
+        clone.style.display = 'block'
+        document.body.appendChild(clone)
+        this.$nextTick(() => {
+          this.contentHeight = clone.scrollHeight
+          clone.remove()
+        })
+
+        this.$el.parentNode.insertBefore(this.$refs.content.$el, this.$el.nextSibling)
       }
     })
   },
@@ -76,7 +89,7 @@ export default {
   methods: {
     onResize () {
       console.log('resize')
-      this.containerWidth = window.innerWidth // this.$el.parentNode.clientWidth
+      this.containerWidth = this.sheet ? this.$el.parentNode.clientWidth : window.innerWidth
     }
   },
 
@@ -84,7 +97,12 @@ export default {
     let children = []
     const directives = []
 
-    this.closeOnOutsideClick && directives.push({ name: 'click-outside' })
+    this.closeOnOutsideClick && directives.push({
+      name: 'click-outside',
+      value: (e) => {
+        return !this.$refs.content.$el.contains(e.target)
+      }
+    })
 
     const data = {
       'class': this.classes,
@@ -96,13 +114,14 @@ export default {
       }
     }
 
-    if (this.isActive) {
-      children = this.$slots.default.map((b, i) => {
-        b.key = i
-
-        return b
-      })
-    }
+    const wrapper = h('div', {
+      key: 0,
+      ref: 'wrapper',
+      directives: [{
+        name: 'show',
+        value: this.isActive
+      }]
+    }, this.$slots.default)
 
     const content = h('transition-group', {
       ref: 'content',
@@ -116,17 +135,8 @@ export default {
         tag: 'div',
         css: false
       },
-      attrs: {
-        'data-origin': this.$attrs.left && 'left' || this.$attrs.right && 'right',
-        'data-content-width': this.containerWidth,
-        'data-content-height': 16,
-        'data-activator-width': this.activatorWidth,
-        'data-sheet': this.sheet,
-        'data-clip-path-x': this.clipPathX,
-        'data-clip-path-y': this.clipPathY
-      },
       on: this.transitions.content
-    }, children)
+    }, [wrapper])
 
     const activator = h('transition-group', {
       ref: 'activator',
@@ -135,23 +145,10 @@ export default {
         css: false
       },
       on: this.transitions.activator,
-      attrs: {
-        'data-origin': this.$attrs.left && 'left' || this.$attrs.right && 'right',
-        'data-content-width': this.containerWidth,
-        'data-content-height': 16,
-        'data-toolbar': this.toolbar
-      },
       class: {
         'morph--activator': true
       }
-    }, [!this.isActive && this.$slots.activator.map((e, i) => {
-      e.key = i
-      e.componentOptions.propsData = {
-        ...e.componentOptions.propsData,
-        ...this.$attrs
-      }
-      return e
-    })])
+    }, [!this.isActive && this.$slots.activator.map((e, i) => { e.key = i; return e })])
 
     return h('div', data, [activator, content])
   }
