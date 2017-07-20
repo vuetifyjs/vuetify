@@ -2,14 +2,15 @@ export default {
   props: {
     contentClass: {
       default: ''
-    }
+    },
+    relative: Boolean
   },
 
   mounted () {
     this.$vuetify.load(() => {
-      const app = document.querySelector('[data-app]')
+      const app = this.relative ? this.$el.parentNode : document.querySelector('[data-app]')
 
-      if (!app) {
+      if (!app && !this.relative) {
         return console.warn('Application is missing <v-app> component.')
       }
 
