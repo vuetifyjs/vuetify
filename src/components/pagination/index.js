@@ -1,5 +1,5 @@
-import Pagination from './Pagination'
+import VPagination from './VPagination'
 
 export default {
-  Pagination
+  VPagination
 }

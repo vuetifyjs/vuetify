@@ -1,8 +1,8 @@
 import { test } from '~util/testing'
 import VAlert from 'src/components/alerts/VAlert'
-import Icon from 'src/components/icons/Icon'
+import VIcon from 'src/components/icons/VIcon'
 
-VAlert.components = { 'v-icon': Icon }
+VAlert.components = { VIcon }
 
 test('VAlert.vue', ({ mount }) => {
   it('should have an alert class', () => {

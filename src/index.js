@@ -6,7 +6,7 @@ import Load from './util/load'
 
 function plugin (Vue) {
   Object.keys(Components).forEach(key => {
-    Vue.component(`V${key}`, Components[key])
+    Vue.component(key, Components[key])
   })
 
   Object.keys(Directives).forEach(key => {

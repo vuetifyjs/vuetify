@@ -1,5 +1,5 @@
-import TextField from './TextField'
+import VTextField from './VTextField'
 
 export default {
-  TextField
+  VTextField
 }

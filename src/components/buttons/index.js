@@ -1,5 +1,5 @@
-import VBtn from './Button'
-import VBtnToggle from './ButtonToggle'
+import VBtn from './VBtn'
+import VBtnToggle from './VBtnToggle'
 import VSpeedDial from './VSpeedDial'
 
 export default {
