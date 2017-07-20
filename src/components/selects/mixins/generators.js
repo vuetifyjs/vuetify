@@ -28,6 +28,7 @@ export default {
           'class': 'input-group--select__autocomplete',
           domProps: { value: this.searchValue },
           on: { input: e => (this.searchValue = e.target.value) },
+          attrs: { tabindex: -1 },
           ref: 'input',
           key: 'input'
         })
@@ -68,18 +69,17 @@ export default {
       return this.$createElement('v-chip', {
         'class': 'chip--select-multi',
         props: { close: true },
-        on: { input: () => this.selectItem(item) },
-        nativeOn: { click: e => e.stopPropagation() },
-        key: item
+        on: {
+          input: () => this.selectItem(item),
+          click: e => e.stopPropagation()
+        },
+        key: this.getValue(item)
       }, this.getText(item))
     },
     genCommaSelection (item, comma) {
-      if (!item) {
-        console.log(this.selectedItems)
-      }
       return this.$createElement('div', {
         'class': 'input-group__selections__comma',
-        key: item
+        key: JSON.stringify(this.getValue(item)) // Item may be an object
       }, `${this.getText(item)}${comma ? ', ' : ''}`)
     },
     genList () {
@@ -90,7 +90,7 @@ export default {
       })
 
       if (!children.length) {
-        children.push(this.genTile(this.noDataText))
+        children.push(this.genTile(this.noDataText, true))
       }
 
       return this.$createElement('v-card', [
@@ -109,10 +109,10 @@ export default {
         props: item
       })
     },
-    genTile (item) {
+    genTile (item, disabled) {
       const active = this.selectedItems.indexOf(item) !== -1
       const data = {
-        nativeOn: { click: () => this.selectItem(item) },
+        on: { click: e => this.selectItem(item) },
         props: {
           avatar: item === Object(item) && 'avatar' in item,
           ripple: true,
@@ -137,7 +137,12 @@ export default {
         'class': {
           'list__tile__action--select-multi': this.multiple
         },
-        nativeOn: { click: () => this.selectItem(item) }
+        on: {
+          click: e => {
+            e.stopPropagation()
+            this.selectItem(item)
+          }
+        }
       }
 
       return this.$createElement('v-list-tile-action', data, [

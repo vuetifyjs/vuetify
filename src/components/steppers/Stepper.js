@@ -1,5 +1,9 @@
+import Themeable from '~mixins/themeable'
+
 export default {
   name: 'stepper',
+
+  mixins: [Themeable],
 
   provide () {
     return {
@@ -31,7 +35,9 @@ export default {
         'stepper--is-booted': this.isBooted,
         'stepper--vertical': this.vertical,
         'stepper--alt-labels': this.altLabels,
-        'stepper--non-linear': this.nonLinear
+        'stepper--non-linear': this.nonLinear,
+        'theme--dark': this.dark,
+        'theme--light': this.light
       }
     }
   },
@@ -43,6 +49,7 @@ export default {
       this.content.forEach(i => i.toggle(this.inputValue, this.isReverse))
 
       this.$emit('input', this.inputValue)
+      prev && (this.isBooted = true)
     },
     value () {
       this.inputValue = this.value
@@ -65,10 +72,6 @@ export default {
       })
 
       this.inputValue = this.value || this.steps[0].step || 1
-
-      // TODO: Figure out a way to fix this hack
-      // No transition before booted
-      setTimeout(() => (this.isBooted = true), 25)
     },
     stepClick (step) {
       this.inputValue = step

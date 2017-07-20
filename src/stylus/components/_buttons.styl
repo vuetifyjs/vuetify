@@ -4,6 +4,7 @@
   border-radius: $button-border-radius
   display: inline-flex
   height: $button-height
+  flex: 0 1 auto
   font-size: $button-font-size
   font-weight: $button-font-weight
   justify-content: center
@@ -27,11 +28,18 @@
     left: 0
     top: 0
     height: 100%
+    opacity: .12
     transition: $primary-transition
     width: 100%
 
 /** Content */
 .btn
+  &--active,
+  &:hover,
+  &:focus
+    .btn__content:before
+      background-color: currentColor
+
   &__content
     align-items: center
     border-radius: inherit
@@ -41,9 +49,7 @@
     flex: 1 0 auto
     justify-content: center
     margin: 0 auto
-    overflow: hidden
     padding: $button-padding
-    text-overflow: ellipsis
     transition: $primary-transition
     white-space: nowrap
 
@@ -71,7 +77,6 @@
     min-width: 0
 
     .btn__content
-      height: $button-height
       padding: 0
 
       .icon
@@ -79,12 +84,6 @@
 
       &:before
         border-radius: 50%
-        opacity: .2
-
-    &:hover,
-    &:focus
-      .btn__content:before
-        background-color: currentColor
 
     &.btn--small
       width: $button-small-height
@@ -169,10 +168,14 @@
   &--fixed, &--absolute
     margin: 0
 
-  &--absolute
+  // Position must have prepended .btn
+  // to account for tooltip
+  // TODO: Remove this once tooltips are
+  // converted to elements
+  &.btn--absolute
     position: absolute
 
-  &--fixed
+  &.btn--fixed
     position: fixed
 
   &--top
@@ -259,7 +262,7 @@
   &--block
     display: flex
     flex: 1
-    margin: $button-margin 0
+    margin: $button-margin-y 0
     width: 100%
 
   &--round

@@ -3,7 +3,7 @@ export function createSimpleFunctional (c, el = 'div') {
     functional: true,
 
     render: (h, { data, children }) => {
-      data.staticClass = data.staticClass ? `${c} ${data.staticClass || ''}` : c
+      data.staticClass = (`${c} ${data.staticClass || ''}`).trim()
 
       return h(el, data, children)
     }
@@ -15,8 +15,10 @@ export function createSimpleTransition (name, origin = 'top center 0', mode) {
     functional: true,
 
     props: {
-      origin: String,
-      default: origin
+      origin: {
+        type: String,
+        default: origin
+      }
     },
 
     render (h, context) {
@@ -32,6 +34,35 @@ export function createSimpleTransition (name, origin = 'top center 0', mode) {
       }
 
       return h('transition', context.data, context.children)
+    }
+  }
+}
+
+export function createJavaScriptTransition (name, functions, css = true, mode = 'in-out') {
+  return {
+    functional: true,
+
+    props: {
+      css: {
+        type: Boolean,
+        default: css
+      },
+      mode: {
+        type: String,
+        default: mode
+      }
+    },
+
+    render (h, context) {
+      const data = {
+        props: {
+          ...context.props,
+          name
+        },
+        on: functions
+      }
+
+      return h('transition', data, context.children)
     }
   }
 }

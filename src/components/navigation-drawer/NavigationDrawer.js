@@ -1,17 +1,22 @@
 import Overlayable from '~mixins/overlayable'
+import Resizable from '~mixins/resizable'
 import Themeable from '~mixins/themeable'
 
 export default {
   name: 'navigation-drawer',
 
-  mixins: [Overlayable, Themeable],
+  mixins: [Overlayable, Resizable, Themeable],
 
   data () {
     return {
       isActive: this.value,
       isBooted: false,
       isMobile: false,
-      mobileBreakPoint: 1024
+      mobileBreakPoint: 1024,
+      touchArea: {
+        left: 0,
+        right: 0
+      }
     }
   },
 
@@ -27,6 +32,7 @@ export default {
     persistent: Boolean,
     right: Boolean,
     temporary: Boolean,
+    touchless: Boolean,
     value: { required: false }
   },
 
@@ -38,10 +44,10 @@ export default {
       return {
         'navigation-drawer': true,
         'navigation-drawer--absolute': this.absolute,
-        'navigation-drawer--is-booted': this.isBooted,
         'navigation-drawer--clipped': this.clipped,
         'navigation-drawer--close': !this.isActive,
         'navigation-drawer--floating': this.floating,
+        'navigation-drawer--is-booted': this.isBooted,
         'navigation-drawer--is-mobile': this.isMobile,
         'navigation-drawer--mini-variant': this.miniVariant,
         'navigation-drawer--open': this.isActive,
@@ -59,14 +65,15 @@ export default {
   },
 
   watch: {
-    isActive (val) {
-      this.$emit('input', val)
-      this.showOverlay && val && this.genOverlay() || this.removeOverlay()
-    },
-    '$route' () {
+    $route () {
       if (!this.disableRouteWatcher) {
         this.isActive = !this.closeConditional()
       }
+    },
+    isActive (val) {
+      this.$emit('input', val)
+      this.showOverlay && val && this.genOverlay() || this.removeOverlay()
+      this.$el.scrollTop = 0
     },
     permanent (val) {
       this.$emit('input', val)
@@ -81,26 +88,17 @@ export default {
     this.$vuetify.load(this.init)
   },
 
-  beforeDestroy () {
-    if (this.permanent) return
-    window.removeEventListener('resize', this.onResize, { passive: false })
-  },
-
   methods: {
     init () {
       this.checkIfMobile()
       setTimeout(() => (this.isBooted = true), 0)
 
-      if (this.permanent) {
-        this.isActive = true
-        return
-      } else if (this.isMobile) this.isActive = false
+      if (this.permanent) return (this.isActive = true)
+      else if (this.isMobile) this.isActive = false
       else if (!this.value && (this.persistent || this.temporary)) this.isActive = false
-
-      window.addEventListener('resize', this.onResize, { passive: false })
     },
     checkIfMobile () {
-      this.isMobile = window.innerWidth <= parseInt(this.mobileBreakPoint)
+      this.isMobile = window.innerWidth < parseInt(this.mobileBreakPoint)
     },
     closeConditional () {
       return !this.permanent && (this.temporary || this.isMobile)
@@ -109,6 +107,48 @@ export default {
       if (!this.enableResizeWatcher || this.permanent || this.temporary) return
       this.checkIfMobile()
       this.isActive = !this.isMobile
+    },
+    swipeRight (e) {
+      if (this.isActive && !this.right) return
+      this.calculateTouchArea()
+
+      if (Math.abs(e.touchendX - e.touchstartX) < 100) return
+      else if (!this.right && e.touchstartX <= this.touchArea.left) this.isActive = true
+      else if (this.right && this.isActive) this.isActive = false
+    },
+    swipeLeft (e) {
+      if (this.isActive && this.right) return
+      this.calculateTouchArea()
+
+      if (Math.abs(e.touchendX - e.touchstartX) < 100) return
+      else if (this.right && e.touchstartX >= this.touchArea.right) this.isActive = true
+      else if (!this.right && this.isActive) this.isActive = false
+    },
+    calculateTouchArea () {
+      if (!this.$el.parentNode) return
+      const parentRect = this.$el.parentNode.getBoundingClientRect()
+
+      this.touchArea = {
+        left: parentRect.left + 50,
+        right: parentRect.right - 50
+      }
+    },
+    genDirectives () {
+      const directives = [{
+        name: 'click-outside',
+        value: this.closeConditional
+      }]
+
+      !this.touchless && directives.push({
+        name: 'touch',
+        value: {
+          parent: true,
+          left: this.swipeLeft,
+          right: this.swipeRight
+        }
+      })
+
+      return directives
     }
   },
 
@@ -116,17 +156,12 @@ export default {
     const data = {
       'class': this.classes,
       style: { height: this.calculatedHeight },
-      directives: [{
-        name: 'click-outside',
-        value: this.closeConditional
-      }],
-      on: {
-        click: () => {
-          this.$emit('update:miniVariant', false)
-        }
-      }
+      directives: this.genDirectives(),
+      on: Object.assign({}, {
+        click: () => this.$emit('update:miniVariant', false)
+      }, this.$listeners)
     }
 
-    return h('aside', data, [this.$slots.default])
+    return h('aside', data, this.$slots.default)
   }
 }

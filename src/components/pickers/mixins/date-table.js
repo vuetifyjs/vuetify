@@ -3,7 +3,16 @@ export default {
     genTable () {
       const children = []
       const data = {
-        'class': 'picker--date__table'
+        'class': 'picker--date__table',
+        directives: [
+          {
+            name: 'touch',
+            value: {
+              left: () => this.tableDate = new Date(this.tableYear, this.tableMonth + 1),
+              right: () => this.tableDate = new Date(this.tableYear, this.tableMonth - 1)
+            }
+          }
+        ]
       }
 
       if (this.scrollable) {
@@ -37,9 +46,7 @@ export default {
     genTHead () {
       return this.$createElement('thead', {
 
-      }, this.genTR(this.week.map((o, i) => {
-        return this.$createElement('th', Array.isArray(this.shortDays) && this.shortDays[i] || this.shortDays(o))
-      })))
+      }, this.genTR(this.narrowDays.map(day => this.$createElement('th', day))))
     },
     genTBody () {
       const children = []
@@ -53,7 +60,7 @@ export default {
       const day = new Date(
         this.tableYear,
         this.tableMonth
-      ).getDay() - this.days.indexOf(this.firstDayOfWeek)
+      ).getDay() - parseInt(this.firstDayOfWeek)
 
       for (let i = 0; i < day; i++) {
         rows.push(this.$createElement('td'))
@@ -66,10 +73,10 @@ export default {
               'btn btn--floating btn--small btn--flat': true,
               'btn--active': this.isActive(i),
               'btn--current': this.isCurrent(i),
-              'btn--light': this.dark
+              'btn--light': this.dark,
+              'btn--disabled': !this.isAllowed(new Date(this.tableYear, this.tableMonth, i, 12, 0, 0, 0))
             },
             attrs: {
-              disabled: !this.isAllowed(new Date(this.tableYear, this.tableMonth, i, 12, 0, 0, 0)),
               type: 'button'
             },
             domProps: {

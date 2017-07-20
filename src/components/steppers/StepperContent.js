@@ -121,6 +121,8 @@ export default {
     const wrapper = h('div', wrapperData, [this.$slots.default])
     const content = h('div', contentData, [wrapper])
 
-    return h(this.computedTransition, {}, [content])
+    return h(this.computedTransition, {
+      on: this.$listeners
+    }, [content])
   }
 }

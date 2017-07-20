@@ -1,12 +1,19 @@
-const webpack = require('webpack')
+// Config and utils
 const path = require('path')
+const webpack = require('webpack')
+
+// Plugins
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const projectRoot = path.resolve(__dirname, '../')
-const version = process.env.VERSION || require('../package.json').version
-const resolve = (file) => path.resolve(__dirname, file)
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+
+// Helpers
+const isProd = process.env.NODE_ENV === 'production'
+const resolve = file => path.resolve(__dirname, file)
 
 module.exports = {
-  devtool: '#source-map',
+  devtool: isProd
+    ? '#source-map'
+    : '#cheap-module-eval-source-map',
   entry: {
     app: './src/index.js'
   },
@@ -34,46 +41,26 @@ module.exports = {
       {
         test: /\.vue$/,
         loaders: ['vue-loader', 'eslint-loader'],
-        include: projectRoot,
         exclude: /node_modules/
       },
       {
         test: /\.js$/,
         loaders: ['babel-loader', 'eslint-loader'],
-        include: projectRoot,
         exclude: /node_modules/
       },
       {
         test: /\.styl$/,
-        loaders: ExtractTextPlugin.extract({
+        use: ExtractTextPlugin.extract({
           use: ['css-loader', 'postcss-loader', 'stylus-loader']
         }),
-        include: projectRoot,
         exclude: /node_modules/
       }
     ]
   },
   performance: {
-    hints: process.env.NODE_ENV === 'production' ? 'warning' : false
+    hints: isProd ? 'warning' : false
   },
   plugins: [
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      progress: true,
-      hide_modules: true
-    }),
-    new webpack.BannerPlugin({
-      banner: `/*!
-* Vuetify v${version}
-* Forged by John Leider
-* Released under the MIT License.
-*/   `,
-      raw: true,
-      entryOnly: true
-    }),
-    new ExtractTextPlugin('vuetify.min.css'),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
-    })
+    new ExtractTextPlugin('vuetify.min.css')
   ]
 }

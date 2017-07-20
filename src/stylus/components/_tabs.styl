@@ -30,18 +30,11 @@
   &.tabs--mobile
     .tabs__bar
       .icon--left, .icon--right
-        display: flex
-
-      .icon--left
-        left: 0
-
-      .icon--right
-        right: 0
+        display: none
 
       .tabs__wrapper
         &--scrollable.tabs__wrapper--overflow
           overflow: hidden !important
-          margin: 0 32px
 
   &:not(.tabs--grow):not(.tabs--mobile)
     .tabs__item

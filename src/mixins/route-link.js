@@ -7,11 +7,9 @@ export default {
     to: [String, Object],
     nuxt: Boolean,
     replace: Boolean,
-    ripple: Boolean,
     router: Boolean,
-    tag: String,
-    target: String,
-    download: String
+    ripple: Boolean,
+    tag: String
   },
 
   methods: {
@@ -19,7 +17,6 @@ export default {
     generateRouteLink () {
       let exact = this.exact
       let tag
-      const options = this.to || this.href
 
       const data = {
         attrs: { disabled: this.disabled },
@@ -28,7 +25,10 @@ export default {
         directives: [{
           name: 'ripple',
           value: this.ripple || false
-        }]
+        }],
+        on: Object.assign({
+          click: this.click
+        }, (this.$listeners || {}))
       }
 
       if (!this.exact) {
@@ -38,25 +38,19 @@ export default {
           (this.to === Object(this.to) && this.to.path === '/')
       }
 
-      if (options && this.router) {
+      if (this.to) {
         tag = this.nuxt ? 'nuxt-link' : 'router-link'
-        data.props.to = options
+        data.props.to = this.to
         data.props.exact = exact
         data.props.activeClass = this.activeClass
         data.props.append = this.append
         data.props.replace = this.replace
-        data.nativeOn = { click: this.click }
       } else {
-        tag = this.tag || 'a'
+        tag = this.href && 'a' || this.tag || 'a'
 
         if (tag === 'a') {
-          data.attrs.href = options || 'javascript:;'
-          if (this.target) data.attrs.target = this.target
-
-          data.attrs.download = this.download
+          data.attrs.href = this.href || 'javascript:;'
         }
-
-        data.on = { click: this.click }
       }
 
       return { tag, data }

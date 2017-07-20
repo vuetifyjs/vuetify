@@ -15,9 +15,9 @@ export default {
           mouseleave: () => {
             this.isDragging && this.onMouseUp()
           },
-          mousemove: this.onDragMove,
           touchstart: this.onMouseDown,
-          touchcancel: this.onMouseUp,
+          touchend: this.onMouseUp,
+          mousemove: this.onDragMove,
           touchmove: this.onDragMove
         },
         key: this.selectingHour ? 'hour' : 'minute',
@@ -148,6 +148,7 @@ export default {
       }
     },
     onDragMove (e) {
+      e.preventDefault()
       if (!this.isDragging && e.type !== 'click') return
 
       const rect = this.$refs.clock.getBoundingClientRect()

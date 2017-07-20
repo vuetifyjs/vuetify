@@ -1,4 +1,4 @@
-import Parallax from './Parallax.vue'
+import Parallax from './Parallax'
 
 export default {
   Parallax

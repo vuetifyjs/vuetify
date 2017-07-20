@@ -6,6 +6,8 @@ export default {
 
   mixins: [GenerateRouteLink, Toggleable],
 
+  inheritAttrs: false,
+
   props: {
     activeClass: {
       type: String,
@@ -27,6 +29,8 @@ export default {
 
   render (h) {
     const { tag, data } = this.generateRouteLink()
+
+    data.attrs = Object.assign({}, data.attrs, this.$attrs)
 
     return h('li', [h(tag, data, [this.$slots.default])])
   }

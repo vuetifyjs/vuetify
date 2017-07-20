@@ -8,6 +8,11 @@ export default {
   mounted () {
     this.$vuetify.load(() => {
       const app = document.querySelector('[data-app]')
+
+      if (!app) {
+        return console.warn('Application is missing <v-app> component.')
+      }
+
       app.insertBefore(
         this.$refs.content,
         app.firstChild

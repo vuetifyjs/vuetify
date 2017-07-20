@@ -55,7 +55,15 @@ export default {
     },
     inputTime: {
       get () {
-        if (this.value && !(this.value instanceof Date)) return this.value
+        if (this.value && !(this.value instanceof Date)) {
+          if (!this.is24hr) {
+            this.period = this.value.match(/pm/)
+              ? 'pm'
+              : 'am'
+          }
+
+          return this.value
+        }
         let value = new Date()
 
         if (this.value instanceof Date) {
@@ -64,17 +72,16 @@ export default {
 
         let hour = value.getHours()
         let minute = value.getMinutes()
-        let period = ''
+        this.period = hour > 12 ? 'pm' : 'am'
 
         if (!this.is24hr) {
           hour = hour > 12 ? hour - 12 : hour
-          period = this.period
         }
 
         hour = this.firstAllowed('hour', hour)
         minute = this.firstAllowed('minute', minute)
 
-        return `${hour}:${minute}${period}`
+        return `${hour}:${minute}${this.period}`
       },
       set (val) {
         return this.$emit('input', val)

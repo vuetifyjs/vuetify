@@ -3,6 +3,7 @@ import DateHeader from './mixins/date-header'
 import DateTable from './mixins/date-table'
 import DateYears from './mixins/date-years'
 import Picker from '~mixins/picker'
+import { createRange } from '~util/helpers'
 
 const defaultDateFormat = val => new Date(val).toISOString().substr(0, 10)
 
@@ -19,60 +20,38 @@ export default {
       currentMonth: null,
       currentYear: null,
       isSelected: false,
-      isReversing: false
+      isReversing: false,
+      narrowDays: []
     }
   },
 
   props: {
+    locale: {
+      type: String,
+      default: 'en-us'
+    },
     dateFormat: {
       type: Function,
       default: defaultDateFormat
     },
     titleDateFormat: {
-      type: Function,
-      default: ({ day, dayName, month, monthName, landscape }) => {
-        return `${dayName.substr(0, 3)},${landscape ? '<br>' : ''} ${monthName.substr(0, 3)} ${day}`
-      }
+      type: Object,
+      default: () => ({ weekday: 'short', month: 'short', day: 'numeric' })
     },
     headerDateFormat: {
-      type: Function,
-      default: ({ month, monthName, year }) => `${monthName} ${year}`
-    },
-    days: {
-      type: Array,
-      default: () => ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-    },
-    shortDays: {
-      type: [Function, Array],
-      default: (day) => day && day.substr(0, 1)
+      type: Object,
+      default: () => ({ month: 'long', year: 'numeric' })
     },
     formattedValue: {
       required: false
-    },
-    months: {
-      type: Array,
-      default: () => [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December'
-      ]
     },
     allowedDates: {
       type: [Array, Object, Function],
       default: () => (null)
     },
     firstDayOfWeek: {
-      type: String,
-      default: 'Sunday'
+      type: [String, Number],
+      default: 0
     }
   },
 
@@ -123,25 +102,8 @@ export default {
     tableYear () {
       return this.tableDate.getFullYear()
     },
-    dayName () {
-      return this.inputDate ? this.week[this.inputDate.getDay()] : ''
-    },
-    monthName () {
-      return this.inputDate ? this.months[this.month] : ''
-    },
     computedTransition () {
       return this.isReversing ? 'v-tab-reverse-transition' : 'v-tab-transition'
-    },
-    week () {
-      const week = []
-      let index = this.days.indexOf(this.firstDayOfWeek)
-
-      while (week.length < 7) {
-        week.push(this.days[index % 7])
-        index += 1
-      }
-
-      return week
     }
   },
 
@@ -196,6 +158,18 @@ export default {
 
       return true
     }
+  },
+
+  created () {
+    const date = new Date()
+    date.setDate(date.getDate() - date.getDay() + parseInt(this.firstDayOfWeek))
+
+    createRange(7).forEach(() => {
+      const narrow = date.toLocaleString(this.locale, { weekday: 'narrow' })
+      this.narrowDays.push(narrow)
+
+      date.setDate(date.getDate() + 1)
+    })
   },
 
   mounted () {

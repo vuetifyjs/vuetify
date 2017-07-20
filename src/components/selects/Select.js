@@ -2,9 +2,21 @@ import Autocomplete from './mixins/autocomplete'
 import Filterable from '~mixins/filterable'
 import Generators from './mixins/generators'
 import Input from '~mixins/input'
+import VCard from '~components/cards/Card'
+import VList from '~components/lists/List'
+import VListTile from '~components/lists/ListTile'
+import VMenu from '~components/menus/Menu'
+import { getObjectValueByPath } from '~util/helpers'
 
 export default {
   name: 'select',
+
+  componets: {
+    VCard,
+    VList,
+    VListTile,
+    VMenu
+  },
 
   mixins: [Autocomplete, Input, Filterable, Generators],
 
@@ -150,6 +162,7 @@ export default {
     blur () {
       this.$nextTick(() => {
         this.focused = false
+        this.searchValue = null
         this.$el.blur()
       })
     },
@@ -167,7 +180,7 @@ export default {
       }
     },
     genLabel () {
-      if (this.editable && this.focused) return null
+      if (this.searchValue) return null
 
       const data = {}
 
@@ -176,10 +189,10 @@ export default {
       return this.$createElement('label', data, this.label)
     },
     getText (item) {
-      return item === Object(item) ? item[this.itemText] : item
+      return item === Object(item) ? (getObjectValueByPath(item, this.itemText) || item) : item
     },
     getValue (item) {
-      return item === Object(item) && (this.itemValue in item) ? item[this.itemValue] : item
+      return item === Object(item) ? (getObjectValueByPath(item, this.itemValue) || item) : item
     },
     onScroll () {
       if (!this.isActive) {
@@ -207,7 +220,7 @@ export default {
         this.inputValue = inputValue.map(i => this.returnObject ? i : this.getValue(i))
       }
 
-      if (this.autocomplete) {
+      if (this.autocomplete || this.editable) {
         this.$nextTick(() => {
           this.searchValue = null
           this.$refs.input &&
@@ -230,7 +243,7 @@ export default {
         value: () => (this.isActive = false)
       }],
       on: {
-        keydown: e => this.$refs.menu.changeListIndex(e)
+        keydown: this.onKeyDown // Located in mixins/autocomplete.js
       }
     })
   }

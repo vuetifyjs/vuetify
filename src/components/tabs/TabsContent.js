@@ -45,7 +45,8 @@ export default {
         directives: [{
           name: 'show',
           value: this.isActive
-        }]
+        }],
+        on: this.$listeners
       }, [this.$slots.default])])
   }
 }
