@@ -1,9 +1,9 @@
-import Checkbox from './Checkbox'
-import Radio from './Radio'
-import Switch from './Switch'
+import VCheckbox from './VCheckbox'
+import VRadio from './VRadio'
+import VSwitch from './VSwitch'
 
 export default {
-  Checkbox,
-  Radio,
-  Switch
+  VCheckbox,
+  VRadio,
+  VSwitch
 }

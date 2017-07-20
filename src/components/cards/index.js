@@ -1,17 +1,17 @@
 import {
   createSimpleFunctional
 } from '~util/helpers'
-import Card from './Card'
-import CardMedia from './CardMedia'
-import CardTitle from './CardTitle'
+import VCard from './VCard'
+import VCardMedia from './VCardMedia'
+import VCardTitle from './VCardTitle'
 
-const CardActions = createSimpleFunctional('card__actions')
-const CardText = createSimpleFunctional('card__text')
+const VCardActions = createSimpleFunctional('card__actions')
+const VCardText = createSimpleFunctional('card__text')
 
 export default {
-  Card,
-  CardActions,
-  CardMedia,
-  CardText,
-  CardTitle
+  VCard,
+  VCardActions,
+  VCardMedia,
+  VCardText,
+  VCardTitle
 }

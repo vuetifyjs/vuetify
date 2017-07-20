@@ -1,5 +1,5 @@
-import Chip from './Chip'
+import VChip from './VChip'
 
 export default {
-  Chip
+  VChip
 }

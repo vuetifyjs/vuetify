@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VIcon.js should render correctly 1`] = `
+
+<i class="material-icons icon">
+  add
+</i>
+
+`;
