@@ -17,7 +17,7 @@
   "description": "Vue.js 2 Semantic Component Framework",
   "devDependencies": {
     "autoprefixer": "^6.6.0",
-    "avoriaz": "^2.4.2",
+    "avoriaz": "^2.5.0",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
     "babel-eslint": "^7.1.1",

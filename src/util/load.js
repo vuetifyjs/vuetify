@@ -7,7 +7,6 @@ function load (cb, i = 0) {
     return setTimeout(() => load(cb, i + 1), 200)
   }
 
-  document.addEventListener('DOMContentLoaded', cb)
   window.addEventListener('load', cb)
 }
 
