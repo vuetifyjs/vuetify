@@ -8,8 +8,14 @@ export default {
           {
             name: 'touch',
             value: {
-              left: () => this.tableDate = new Date(this.tableYear, this.tableMonth + 1),
-              right: () => this.tableDate = new Date(this.tableYear, this.tableMonth - 1)
+              left: ({ offsetX }) => {
+                if (offsetX > -15) return
+                this.tableDate = new Date(this.tableYear, this.tableMonth + 1)
+              },
+              right: ({ offsetX }) => {
+                if (offsetX < 15) return
+                this.tableDate = new Date(this.tableYear, this.tableMonth - 1)
+              }
             }
           }
         ]
