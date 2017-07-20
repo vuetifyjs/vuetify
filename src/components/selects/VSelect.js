@@ -2,20 +2,30 @@ import Autocomplete from './mixins/autocomplete'
 import Filterable from '~mixins/filterable'
 import Generators from './mixins/generators'
 import Input from '~mixins/input'
+
 import VCard from '~components/cards/VCard'
+import VIcon from '~components/icons/VIcon'
 import VList from '~components/lists/VList'
 import VListTile from '~components/lists/VListTile'
 import VMenu from '~components/menus/VMenu'
+
+import clickOutside from '~directives/click-outside'
+
 import { getObjectValueByPath } from '~util/helpers'
 
 export default {
   name: 'v-select',
 
-  componets: {
+  components: {
     VCard,
+    VIcon,
     VList,
     VListTile,
     VMenu
+  },
+
+  directives: {
+    clickOutside
   },
 
   mixins: [Autocomplete, Input, Filterable, Generators],
@@ -23,6 +33,7 @@ export default {
   data () {
     return {
       content: {},
+      hasFocused: false,
       inputValue: this.multiple && !this.value ? [] : this.value,
       isBooted: false,
       lastItem: 20,
@@ -102,6 +113,14 @@ export default {
 
       return !this.auto ? items.slice(0, this.lastItem) : items
     },
+    hasError () {
+      return this.validations.length ||
+        this.error ||
+        (this.hasFocused &&
+          !this.focused &&
+          !this.isDirty &&
+          this.required)
+    },
     isDirty () {
       return this.selectedItems.length
     },
@@ -149,7 +168,9 @@ export default {
   },
 
   mounted () {
-    this.content = this.$refs.menu.$refs.content
+    this.$vuetify.load(() => {
+      this.content = this.$refs.menu.$refs.content
+    })
   },
 
   beforeDestroy () {
@@ -162,6 +183,7 @@ export default {
     blur () {
       this.$nextTick(() => {
         this.focused = false
+        this.hasFocused = true
         this.searchValue = null
         this.$el.blur()
       })
