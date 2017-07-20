@@ -14,16 +14,32 @@ export const interpolate = (start, end, delta) => {
   return start + (delta * (end - start))
 }
 
-export const timeout = (fn, delay) => {
+export const timeout = (fn, delay, el) => {
   return new Promise(resolve => {
     setTimeout(() => {
-      fn()
+      fn(el)
       resolve()
     }, delay)
   })
 }
 
 export const frame = () => new Promise(resolve => requestAnimationFrame(resolve))
+
+export const run = (el, transitions, length, reverse) => {
+  return Promise.all(transitions.map(([transition, args, timings, easings]) => {
+    if (typeof args === 'function') {
+      return transition(args, reverse ? length - timings : timings, el)
+    }
+
+    if (reverse) {
+      args = args.slice().reverse()
+      timings = [timings[0], length - (timings[0] + timings[1])]
+      easings = easings.slice().reverse()
+    }
+
+    return animate(d => transition(el, ...args, d), timings[0], timings[1], easings[0])
+  }))
+}
 
 export const animate = (fn, duration, delay = 0, curve = null) => {
   let start = null
@@ -81,19 +97,19 @@ export const horizontal = (el, start, end, delta) => {
   addTransform(el, `translateX(${value}px`)
 }
 
-export const clipPath = (el, start, end, x, y, delta) => {
+export const clipPath = (el, start, end, delta, x = 50, y = 50) => {
   const value = interpolate(start, end, delta)
 
   el.style.clipPath = `circle(${value}px at ${x}% ${y}%)`
 }
 
 export const easings = {
+  easeInQuad: BezierEasing(0.55, 0.085, 0.68, 0.53),
+  easeOutQuad: BezierEasing(0.25, 0.46, 0.45, 0.94),
   easeInCubic: BezierEasing(0.55, 0.055, 0.675, 0.19),
   easeOutCubic: BezierEasing(0.215, 0.61, 0.355, 1),
   easeInQuart: BezierEasing(0.895, 0.03, 0.685, 0.22),
-  easeOutQuart: BezierEasing(0.165, 0.84, 0.44, 1),
-  easeInQuad: BezierEasing(0.55, 0.085, 0.68, 0.53),
-  easeOutQuad: BezierEasing(0.25, 0.46, 0.45, 0.94)
+  easeOutQuart: BezierEasing(0.165, 0.84, 0.44, 1)
 }
 
 export default {

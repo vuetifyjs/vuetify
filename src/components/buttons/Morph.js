@@ -45,7 +45,12 @@ export default {
       }
     },
     transitions () {
-      const transitions = this.toolbar ? MorphToolbarTransition : {}
+      console.log('transitions')
+      const transitions = this.toolbar ? MorphToolbarTransition(
+        this.$attrs.left && 'left' || this.$attrs.right && 'right',
+        this.containerWidth,
+        16,
+        this.activatorWidth) : {}
 
       return transitions
     }
