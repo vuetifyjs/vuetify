@@ -1,24 +1,24 @@
 import { createSimpleFunctional } from '~util/helpers'
 
-import List from './List'
-import ListGroup from './ListGroup'
-import ListTile from './ListTile'
-import ListTileAction from './ListTileAction'
+import VList from './VList'
+import VListGroup from './VListGroup'
+import VListTile from './VListTile'
+import VListTileAction from './VListTileAction'
 
-const ListTileActionText = createSimpleFunctional('list__tile__action-text', 'span')
-const ListTileAvatar = createSimpleFunctional('list__tile__avatar', 'v-avatar')
-const ListTileContent = createSimpleFunctional('list__tile__content', 'div')
-const ListTileTitle = createSimpleFunctional('list__tile__title', 'div')
-const ListTileSubTitle = createSimpleFunctional('list__tile__sub-title', 'div')
+const VListTileActionText = createSimpleFunctional('list__tile__action-text', 'span')
+const VListTileAvatar = createSimpleFunctional('list__tile__avatar', 'v-avatar')
+const VListTileContent = createSimpleFunctional('list__tile__content', 'div')
+const VListTileTitle = createSimpleFunctional('list__tile__title', 'div')
+const VListTileSubTitle = createSimpleFunctional('list__tile__sub-title', 'div')
 
 export default {
-  List,
-  ListTile,
-  ListGroup,
-  ListTileAction,
-  ListTileActionText,
-  ListTileAvatar,
-  ListTileContent,
-  ListTileTitle,
-  ListTileSubTitle
+  VList,
+  VListTile,
+  VListGroup,
+  VListTileAction,
+  VListTileActionText,
+  VListTileAvatar,
+  VListTileContent,
+  VListTileTitle,
+  VListTileSubTitle
 }

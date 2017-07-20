@@ -1,5 +1,5 @@
-import Slider from './Slider'
+import VSlider from './VSlider'
 
 export default {
-  Slider
+  VSlider
 }

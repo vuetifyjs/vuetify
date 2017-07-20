@@ -1,7 +1,7 @@
-import ExpansionPanel from './ExpansionPanel'
-import ExpansionPanelContent from './ExpansionPanelContent'
+import VExpansionPanel from './VExpansionPanel'
+import VExpansionPanelContent from './VExpansionPanelContent'
 
 export default {
-  ExpansionPanel,
-  ExpansionPanelContent
+  VExpansionPanel,
+  VExpansionPanelContent
 }

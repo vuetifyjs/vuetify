@@ -1,5 +1,5 @@
-import Subheader from './Subheader'
+import VSubheader from './VSubheader'
 
 export default {
-  Subheader
+  VSubheader
 }

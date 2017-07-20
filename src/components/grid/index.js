@@ -17,14 +17,14 @@ const Grid = (name) => ({
   }
 })
 
-const Container = Grid('container')
-const Flex = Grid('flex')
-const Layout = Grid('layout')
-const Spacer = createSimpleFunctional('spacer')
+const VContainer = Grid('container')
+const VFlex = Grid('flex')
+const VLayout = Grid('layout')
+const VSpacer = createSimpleFunctional('spacer')
 
 export default {
-  Container,
-  Flex,
-  Layout,
-  Spacer
+  VContainer,
+  VFlex,
+  VLayout,
+  VSpacer
 }

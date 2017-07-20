@@ -1,7 +1,7 @@
-import ProgressLinear from './ProgressLinear'
-import ProgressCircular from './ProgressCircular'
+import VProgressLinear from './VProgressLinear'
+import VProgressCircular from './VProgressCircular'
 
 export default {
-  ProgressLinear,
-  ProgressCircular
+  VProgressLinear,
+  VProgressCircular
 }
