@@ -22,7 +22,8 @@ export default {
     calcTopAuto () {
       if (!this.hasActivator) return this.calcTop(true)
 
-      const selectedIndex = Array.from(this.tiles).findIndex(n => n.classList.contains('list__tile--active'))
+      const selectedIndex = Array.from(this.tiles)
+        .findIndex(n => n.classList.contains('list__tile--active'))
 
       if (selectedIndex === -1) {
         this.selectedIndex = null
@@ -73,7 +74,8 @@ export default {
       if (this.nudgeTop) top -= this.nudgeTop
       if (this.nudgeBottom) top += this.nudgeBottom
 
-      const pageYOffset = typeof window !== 'undefined' ? window.pageYOffset : 0
+      const defined = typeof window !== 'undefined'
+      const pageYOffset = defined ? window.pageYOffset : 0
 
       return this.calcYOverflow(top) + pageYOffset
     },
@@ -99,7 +101,8 @@ export default {
     },
     calcYOverflow (top) {
       const totalHeight = top + this.dimensions.content.height
-      const innerHeight = typeof window !== 'undefined' ? window.innerHeight : 0
+      const defined = typeof window !== 'undefined'
+      const innerHeight = defined ? window.innerHeight : 0
 
       if (this.top && top < 0) top = 12
       else if ((!this.top || this.bottom) && innerHeight < totalHeight) {

@@ -1,5 +1,5 @@
-import Menu from './Menu.js'
+import VMenu from './VMenu.js'
 
 export default {
-  Menu
+  VMenu
 }

@@ -78,7 +78,7 @@
 
     .btn__content
       padding: 0
-      
+
       .icon
         color: inherit
 
@@ -103,12 +103,15 @@
     height: $button-floating-width
     width: $button-floating-width
     padding: 0
-    elevation(4)
-    
+    elevation(6)
+
+    &:active
+      elevation(12)
+
     .btn__content
       flex: 0 0 auto
       padding: 0
-      
+
       .icon
         color: inherit
 
@@ -129,7 +132,7 @@
           &:first-of-type
             opacity: 0
             transform: rotate(45deg)
-          
+
           &:last-of-type
             opacity: 1
             transform: none
@@ -174,39 +177,39 @@
   // converted to elements
   &.btn--absolute
     position: absolute
-      
+
   &.btn--fixed
     position: fixed
-      
+
   &--top
     &:not(.btn--absolute)
       top: $grid-gutters.lg
 
     &.btn--absolute
       top: -($button-floating-width / 2)
-      
+
       &.btn--small
         top: -($button-floating-small-width / 2)
 
       &.btn--large
         top: -($button-floating-large-width / 2)
-  
+
   &--bottom
     &:not(.btn--absolute)
       bottom: $grid-gutters.lg
-      
+
     &.btn--absolute
       bottom: -($button-floating-width / 2)
-      
+
       &.btn--small
         bottom: -($button-floating-small-width / 2)
 
       &.btn--large
         bottom: -($button-floating-large-width / 2)
-    
+
   &--left
     left: $grid-gutters.lg
-    
+
   &--right
     right: $grid-gutters.lg
 

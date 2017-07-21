@@ -10,12 +10,17 @@ export default {
       } else {
         children = this.filteredItems.map((item, index) => {
           const props = { item, index }
+          const key = this.selectedKey
 
           Object.defineProperty(props, 'selected', {
             get: () => this.selected[item[this.selectedKey]],
             set: (value) => {
               let selected = this.value.slice()
-              value && selected.push(item) || (selected = selected.filter(i => i[this.selectedKey] !== item[this.selectedKey]))
+              if (value) {
+                selected.push(item)
+              } else {
+                selected = selected.filter(i => i[key] !== item[key])
+              }
               this.$emit('input', selected)
             }
           })

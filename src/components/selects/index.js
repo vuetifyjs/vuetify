@@ -1,5 +1,5 @@
-import Select from './Select'
+import VSelect from './VSelect'
 
 export default {
-  Select
+  VSelect
 }

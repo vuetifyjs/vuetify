@@ -2,17 +2,17 @@ import {
   createSimpleFunctional
 } from '~util/helpers'
 
-import SystemBar from './ToolbarSideIcon'
-import Toolbar from './Toolbar'
-import ToolbarSideIcon from './ToolbarSideIcon'
+import VSystemBar from './VSystemBar'
+import VToolbar from './VToolbar'
+import VToolbarSideIcon from './VToolbarSideIcon'
 
-const ToolbarTitle = createSimpleFunctional('toolbar__title')
-const ToolbarItems = createSimpleFunctional('toolbar__items')
+const VToolbarTitle = createSimpleFunctional('toolbar__title')
+const VToolbarItems = createSimpleFunctional('toolbar__items')
 
 export default {
-  SystemBar,
-  Toolbar,
-  ToolbarItems,
-  ToolbarTitle,
-  ToolbarSideIcon
+  VSystemBar,
+  VToolbar,
+  VToolbarItems,
+  VToolbarTitle,
+  VToolbarSideIcon
 }

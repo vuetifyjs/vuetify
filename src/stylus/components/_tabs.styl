@@ -3,11 +3,11 @@
   position: relative
   width: 100%
 
-  &--grow
+  &--grow > .tabs__bar
     .tabs__li
       flex: 1
 
-  &--fixed
+  &--fixed > .tabs__bar
     .tabs__li
       min-width: 160px
       max-width: 264px
@@ -16,7 +16,7 @@
       @media $display-breakpoints.xs-only
         min-width: 72px
 
-  &--centered
+  &--centered > .tabs__bar
     .tabs__container
       justify-content: center
 
@@ -27,14 +27,13 @@
     .tabs__item
       flex-direction: column
 
-  &.tabs--mobile
-    .tabs__bar
-      .icon--left, .icon--right
-        display: none
+  &.tabs--mobile > .tabs__bar
+    .icon--left, .icon--right
+      display: none
 
-      .tabs__wrapper
-        &--scrollable.tabs__wrapper--overflow
-          overflow: hidden !important
+    .tabs__wrapper
+      &--scrollable.tabs__wrapper--overflow
+        overflow: hidden !important
 
   &:not(.tabs--grow):not(.tabs--mobile)
     .tabs__item

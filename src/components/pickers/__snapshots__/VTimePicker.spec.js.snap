@@ -1,0 +1,280 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VTimePicker.js should accept a date object for a value 1`] = `
+
+<div class="card picker picker--time picker--light picker--time--hours"
+     style="height: auto;"
+>
+  <div class="picker__title">
+    <div class="picker--time__title">
+      <span class="active">
+        0
+      </span>
+      <span class>
+        :00
+      </span>
+    </div>
+    <div>
+      <span class="active">
+        AM
+      </span>
+      <span class>
+        PM
+      </span>
+    </div>
+  </div>
+  <div class="picker__body">
+    <div class="picker--time__clock">
+      <div class="picker--time__clock-hand hour">
+      </div>
+      <span class>
+        <span>
+          1
+        </span>
+      </span>
+      <span class>
+        <span>
+          2
+        </span>
+      </span>
+      <span class>
+        <span>
+          3
+        </span>
+      </span>
+      <span class>
+        <span>
+          4
+        </span>
+      </span>
+      <span class>
+        <span>
+          5
+        </span>
+      </span>
+      <span class>
+        <span>
+          6
+        </span>
+      </span>
+      <span class>
+        <span>
+          7
+        </span>
+      </span>
+      <span class>
+        <span>
+          8
+        </span>
+      </span>
+      <span class>
+        <span>
+          9
+        </span>
+      </span>
+      <span class>
+        <span>
+          10
+        </span>
+      </span>
+      <span class>
+        <span>
+          11
+        </span>
+      </span>
+      <span class>
+        <span>
+          12
+        </span>
+      </span>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTimePicker.js should accept a value 1`] = `
+
+<div class="card picker picker--time picker--light picker--time--hours"
+     style="height: auto;"
+>
+  <div class="picker__title">
+    <div class="picker--time__title">
+      <span class="active">
+        9
+      </span>
+      <span class>
+        :00
+      </span>
+    </div>
+    <div>
+      <span class="active">
+        AM
+      </span>
+      <span class>
+        PM
+      </span>
+    </div>
+  </div>
+  <div class="picker__body">
+    <div class="picker--time__clock">
+      <div class="picker--time__clock-hand hour">
+      </div>
+      <span class>
+        <span>
+          1
+        </span>
+      </span>
+      <span class>
+        <span>
+          2
+        </span>
+      </span>
+      <span class>
+        <span>
+          3
+        </span>
+      </span>
+      <span class>
+        <span>
+          4
+        </span>
+      </span>
+      <span class>
+        <span>
+          5
+        </span>
+      </span>
+      <span class>
+        <span>
+          6
+        </span>
+      </span>
+      <span class>
+        <span>
+          7
+        </span>
+      </span>
+      <span class>
+        <span>
+          8
+        </span>
+      </span>
+      <span class="active">
+        <span>
+          9
+        </span>
+      </span>
+      <span class>
+        <span>
+          10
+        </span>
+      </span>
+      <span class>
+        <span>
+          11
+        </span>
+      </span>
+      <span class>
+        <span>
+          12
+        </span>
+      </span>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTimePicker.js should change am/pm when updated from model 1`] = `
+
+<div class="card picker picker--time picker--light picker--time--hours"
+     style="height: auto;"
+>
+  <div class="picker__title">
+    <div class="picker--time__title">
+      <span class="active">
+        9
+      </span>
+      <span class>
+        :00
+      </span>
+    </div>
+    <div>
+      <span class>
+        AM
+      </span>
+      <span class="active">
+        PM
+      </span>
+    </div>
+  </div>
+  <div class="picker__body">
+    <div class="picker--time__clock">
+      <div class="picker--time__clock-hand hour">
+      </div>
+      <span class>
+        <span>
+          1
+        </span>
+      </span>
+      <span class>
+        <span>
+          2
+        </span>
+      </span>
+      <span class>
+        <span>
+          3
+        </span>
+      </span>
+      <span class>
+        <span>
+          4
+        </span>
+      </span>
+      <span class>
+        <span>
+          5
+        </span>
+      </span>
+      <span class>
+        <span>
+          6
+        </span>
+      </span>
+      <span class>
+        <span>
+          7
+        </span>
+      </span>
+      <span class>
+        <span>
+          8
+        </span>
+      </span>
+      <span class="active">
+        <span>
+          9
+        </span>
+      </span>
+      <span class>
+        <span>
+          10
+        </span>
+      </span>
+      <span class>
+        <span>
+          11
+        </span>
+      </span>
+      <span class>
+        <span>
+          12
+        </span>
+      </span>
+    </div>
+  </div>
+</div>
+
+`;
