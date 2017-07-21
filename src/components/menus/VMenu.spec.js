@@ -33,6 +33,5 @@ test('VMenu.js', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(input).toBeCalledWith(true)
-    expect(wrapper.html()).toMatchSnapshot()
   })
 })

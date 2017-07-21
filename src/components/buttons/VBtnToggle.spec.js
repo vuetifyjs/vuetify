@@ -3,37 +3,46 @@ import VBtnToggle from 'src/components/buttons/VBtnToggle'
 import VBtn from 'src/components/buttons/VBtn'
 import VIcon from 'src/components/icons/VIcon'
 import ripple from 'src/directives/ripple'
+import { test } from '~util/testing'
+import Vue from 'vue'
 
-VBtnToggle.components = {
-  VIcon,
-  VBtn
+function createBtn (val = null) {
+  const options = {
+    props: { flat: true }
+  }
+  if (val) options.attrs = { value: val }
+
+  return Vue.component('test', {
+    components: {
+      VBtn,
+      VIcon
+    },
+    render (h) {
+      return h('v-btn', options, [h('v-icon', 'add')])
+    }
+  })
 }
 
-VBtn.directives = {
-  ripple
-}
-
-const TOGGLE_TEST = [
-  { text: 'Left', value: 1 },
-  { text: 'Center', value: 2 },
-  { text: 'Right', value: 3 },
-  { text: 'Justify', value: 4 }
-]
-
-describe('VBtnToggle.vue', () => {
+test('VBtnToggle.vue', () => {
   it('should not allow empty value when mandatory prop is used', () => {
     const wrapper = mount(VBtnToggle, {
       propsData: {
-        inputValue: 1,
-        items: TOGGLE_TEST,
+        inputValue: 0,
         mandatory: true
+      },
+      slots: {
+        default: [
+          createBtn(),
+          createBtn(),
+          createBtn()
+        ]
       }
     })
 
     const change = jest.fn()
     wrapper.instance().$on('change', change)
 
-    wrapper.instance().updateValue(TOGGLE_TEST[0])
+    wrapper.instance().updateValue(0)
 
     expect(change).not.toBeCalled()
     expect(wrapper.html()).toMatchSnapshot()
@@ -43,17 +52,23 @@ describe('VBtnToggle.vue', () => {
     const wrapper = mount(VBtnToggle, {
       propsData: {
         inputValue: 1,
-        items: TOGGLE_TEST,
         mandatory: true
+      },
+      slots: {
+        default: [
+          createBtn(),
+          createBtn(),
+          createBtn()
+        ]
       }
     })
 
     const change = jest.fn()
     wrapper.instance().$on('change', change)
 
-    wrapper.instance().updateValue(TOGGLE_TEST[1])
+    wrapper.instance().updateValue(0)
 
-    expect(change).toBeCalledWith(2)
+    expect(change).toBeCalledWith(0)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -61,16 +76,22 @@ describe('VBtnToggle.vue', () => {
     const wrapper = mount(VBtnToggle, {
       propsData: {
         inputValue: [1],
-        items: TOGGLE_TEST,
         mandatory: true,
         multiple: true
+      },
+      slots: {
+        default: [
+          createBtn(),
+          createBtn(),
+          createBtn()
+        ]
       }
     })
 
     const change = jest.fn()
     wrapper.instance().$on('change', change)
 
-    wrapper.instance().updateValue(TOGGLE_TEST[0])
+    wrapper.instance().updateValue(1)
 
     expect(change).toBeCalledWith([1])
     expect(wrapper.html()).toMatchSnapshot()
@@ -80,18 +101,47 @@ describe('VBtnToggle.vue', () => {
     const wrapper = mount(VBtnToggle, {
       propsData: {
         inputValue: [1],
-        items: TOGGLE_TEST,
         mandatory: true,
         multiple: true
+      },
+      slots: {
+        default: [
+          createBtn(),
+          createBtn(),
+          createBtn()
+        ]
       }
     })
 
     const change = jest.fn()
     wrapper.instance().$on('change', change)
 
-    wrapper.instance().updateValue(TOGGLE_TEST[1])
+    wrapper.instance().updateValue(2)
 
     expect(change).toBeCalledWith([1, 2])
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should use button value attribute if available', () => {
+    const wrapper = mount(VBtnToggle, {
+      propsData: {
+        inputValue: 'center'
+      },
+      slots: {
+        default: [
+          createBtn('left'),
+          createBtn('center'),
+          createBtn('right')
+        ]
+      }
+    })
+
+    const change = jest.fn()
+    wrapper.instance().$on('change', change)
+
+    wrapper.instance().updateValue(2)
+
+    expect(change).toBeCalledWith('right')
     expect(wrapper.html()).toMatchSnapshot()
   })
 })
