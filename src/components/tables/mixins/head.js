@@ -42,25 +42,32 @@ export default {
       return this.$createElement('th', ...this.genHeaderData(header, array))
     },
     genHeaderData (header, children) {
-      let beingSorted = false
       const classes = ['column']
       const data = {}
+      const pagination = this.computedPagination
 
       if ('sortable' in header && header.sortable || !('sortable' in header)) {
         data.on = { click: () => this.sort(header.value) }
-        !('value' in header) && console.warn('Data table headers must have a value property that corresponds to a value in the v-model array')
+        if (!('value' in header)) {
+          console.warn('Data table headers must have a value property that corresponds to a value in the v-model array')
+        }
 
         classes.push('sortable')
         const icon = this.$createElement('v-icon', 'arrow_upward')
-        header.align && header.align === 'left' && children.push(icon) || children.unshift(icon)
+        if (header.align && header.align === 'left') {
+          children.push(icon)
+        } else {
+          children.unshift(icon)
+        }
 
-        beingSorted = this.computedPagination.sortBy === header.value
-        beingSorted && classes.push('active')
-        beingSorted && this.computedPagination.descending && classes.push('desc') || classes.push('asc')
+        const beingSorted = pagination.sortBy === header.value
+        if (beingSorted) {
+          classes.push('active')
+          classes.push(pagination.descending ? 'desc' : 'asc')
+        }
       }
 
-      header.align && classes.push(`text-xs-${header.align}`) || classes.push('text-xs-right')
-
+      classes.push(`text-xs-${header.align || 'right'}`)
       data.class = classes
 
       return [data, children]

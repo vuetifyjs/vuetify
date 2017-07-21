@@ -44,6 +44,9 @@ export default {
     is24hr () {
       return this.format !== 'ampm'
     },
+    is24hrAfter12 () {
+      return this.selectingHour && this.is24hr && this.hour >= 12
+    },
     divider () {
       return this.selectingHour ? 12 : 60
     },

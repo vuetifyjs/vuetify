@@ -56,7 +56,9 @@ export default {
         this.error
     },
     count () {
-      const inputLength = (this.inputValue && this.inputValue.toString() || '').length
+      let inputLength
+      if (this.inputValue) inputLength = this.inputValue.toString().length
+      else inputLength = 0
       let min = inputLength
 
       if (this.counterMin !== 0 && inputLength < this.counterMin) {

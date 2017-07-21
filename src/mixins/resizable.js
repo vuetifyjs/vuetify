@@ -6,14 +6,14 @@ export default {
   },
 
   methods: {
-    debouncedOnResize () {
+    debounced () {
       clearTimeout(this.debounceTimeout)
       this.debounceTimeout = setTimeout(this.onResize, 50)
     }
   },
 
   mounted () {
-    window.addEventListener('resize', this.debouncedOnResize, { passive: true })
+    window.addEventListener('resize', this.debounced, { passive: true })
 
     this.$vuetify.load(this.onResize)
   },
@@ -21,6 +21,6 @@ export default {
   beforeDestroy () {
     if (typeof window === 'undefined') return
 
-    window.removeEventListener('resize', this.debouncedOnResize, { passive: true })
+    window.removeEventListener('resize', this.debounced, { passive: true })
   }
 }
