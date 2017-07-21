@@ -49,12 +49,13 @@ export default {
         return this.value
       },
       set (val) {
-        val = val < this.min ? this.min : val > this.max ? this.max : val
+        const { min, max, step, snap } = this
+        val = val < min ? min : val > max ? max : val
         if (Math.ceil(val) !== Math.ceil(this.lazyValue)) {
           this.inputWidth = this.calculateWidth(val)
         }
 
-        const value = this.snap ? Math.round(val / this.step) * this.step : parseInt(val)
+        const value = snap ? Math.round(val / step) * step : parseInt(val)
         this.lazyValue = value
 
         if (value !== this.value) {
@@ -89,8 +90,9 @@ export default {
       }
     },
     trackFillStyles () {
-      const scaleX = this.calculateScale(this.inputWidth / 100)
-      const translateX = this.inputWidth > 99 && !this.thumbLabel ? `${-8}px` : 0
+      const inputWidth = this.inputWidth
+      const scaleX = this.calculateScale(inputWidth / 100)
+      const translateX = inputWidth > 99 && !this.thumbLabel ? `${-8}px` : 0
       return {
         transform: `scaleX(${scaleX}) translateX(${translateX})`
       }
@@ -108,7 +110,9 @@ export default {
 
   mounted () {
     this.inputValue = this.value
-    this.$nextTick(() => this.inputWidth = this.calculateWidth(this.inputValue))
+    this.$nextTick(() => {
+      this.inputWidth = this.calculateWidth(this.inputValue)
+    })
 
     // Without a v-app, iOS does not work with body selectors
     this.app = document.querySelector('[data-app]') ||
@@ -133,23 +137,28 @@ export default {
       return this.disabled ? scale - 0.015 : scale
     },
     onMouseDown (e) {
+      const options = { passive: true }
       this.isActive = true
 
       if ('touches' in e) {
-        this.app.addEventListener('touchmove', this.onMouseMove, { passive: true })
+        this.app.addEventListener('touchmove', this.onMouseMove, options)
         addOnceEventListener(this.app, 'touchend', this.onMouseUp)
       } else {
-        this.app.addEventListener('mousemove', this.onMouseMove, { passive: true })
+        this.app.addEventListener('mousemove', this.onMouseMove, options)
         addOnceEventListener(this.app, 'mouseup', this.onMouseUp)
       }
     },
     onMouseUp () {
+      const options = { passive: true }
       this.isActive = false
-      this.app.removeEventListener('touchmove', this.onMouseMove, { passive: true })
-      this.app.removeEventListener('mousemove', this.onMouseMove, { passive: true })
+      this.app.removeEventListener('touchmove', this.onMouseMove, options)
+      this.app.removeEventListener('mousemove', this.onMouseMove, options)
     },
     onMouseMove (e) {
-      const { left: offsetLeft, width: trackWidth } = this.$refs.track.getBoundingClientRect()
+      const {
+        left: offsetLeft,
+        width: trackWidth
+      } = this.$refs.track.getBoundingClientRect()
       const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
       let left = (
         ((clientX - offsetLeft) / trackWidth) * 100
@@ -172,19 +181,43 @@ export default {
       if (!this.isActive) {
         this.onMouseMove(e)
       }
-    }
-  },
+    },
+    genThumbLabel (h) {
+      return h('v-scale-transition', {
+        props: { origin: 'bottom center' }
+      }, [
+        h('div', {
+          'class': 'slider__thumb--label__container',
+          directives: [
+            {
+              name: 'show',
+              value: this.isActive
+            }
+          ]
+        }, [
+          h('div', { 'class': 'slider__thumb--label' }, [
+            h('span', {}, parseInt(this.inputValue))
+          ])
+        ])
+      ])
+    },
+    genThumbContainer (h) {
+      const children = []
+      children.push(h('div', { 'class': 'slider__thumb' }))
 
-  render (h) {
-    const children = []
-    const trackChildren = []
-    const thumbChildren = []
+      this.thumbLabel && children.push(this.genThumbLabel(h))
 
-    trackChildren.push(h('div', { 'class': 'slider__track', style: this.trackStyles }))
-    trackChildren.push(h('div', { 'class': 'slider__track-fill', style: this.trackFillStyles }))
-    children.push(h('div', { 'class': 'slider__track__container', ref: 'track' }, trackChildren))
-
-    if (this.step) {
+      return h('div', {
+        'class': this.thumbContainerClasses,
+        style: this.thumbStyles,
+        on: {
+          touchstart: this.onMouseDown,
+          mousedown: this.onMouseDown
+        },
+        ref: 'thumb'
+      }, children)
+    },
+    genSteps (h) {
       const ticks = createRange(this.numTicks + 1).map((i) => {
         const span = h('span', {
           class: 'slider__tick',
@@ -196,42 +229,36 @@ export default {
         return span
       })
 
-      children.push(h('div', { 'class': 'slider__ticks-container', style: this.tickContainerStyles }, ticks))
+      return h('div', {
+        'class': 'slider__ticks-container',
+        style: this.tickContainerStyles
+      }, ticks)
+    },
+    genTrackContainer (h) {
+      const children = [
+        h('div', {
+          'class': 'slider__track',
+          style: this.trackStyles
+        }),
+        h('div', {
+          'class': 'slider__track-fill',
+          style: this.trackFillStyles
+        })
+      ]
+
+      return h('div', {
+        'class': 'slider__track__container',
+        ref: 'track'
+      }, children)
     }
+  },
 
-    thumbChildren.push(h('div', { 'class': 'slider__thumb' }))
+  render (h) {
+    const children = []
 
-    if (this.thumbLabel) {
-      thumbChildren.push(
-        h('v-scale-transition', { props: { origin: 'bottom center' } }, [
-          h('div', {
-            'class': 'slider__thumb--label__container',
-            directives: [
-              {
-                name: 'show',
-                value: this.isActive
-              }
-            ]
-          }, [
-            h('div', { 'class': 'slider__thumb--label' }, [
-              h('span', {}, parseInt(this.inputValue))
-            ])
-          ])
-        ])
-      )
-    }
-
-    const thumbContainer = h('div', {
-      'class': this.thumbContainerClasses,
-      style: this.thumbStyles,
-      on: {
-        touchstart: this.onMouseDown,
-        mousedown: this.onMouseDown
-      },
-      ref: 'thumb'
-    }, thumbChildren)
-
-    children.push(thumbContainer)
+    children.push(this.genTrackContainer(h))
+    this.step && children.push(this.genSteps(h))
+    children.push(this.genThumbContainer(h))
 
     const slider = h('div', { 'class': 'slider' }, children)
 

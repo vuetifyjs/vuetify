@@ -5,7 +5,14 @@ export default {
 
       if (!el) return null
 
-      const { top, bottom, left, right, height, width } = el.getBoundingClientRect()
+      const {
+        top,
+        bottom,
+        left,
+        right,
+        height,
+        width
+      } = el.getBoundingClientRect()
 
       return {
         offsetTop: el.offsetTop,

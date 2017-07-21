@@ -128,14 +128,17 @@ export default {
       return this.segmented || this.overflow || this.editable
     },
     selectedItems () {
-      if (this.inputValue === null || typeof this.inputValue === 'undefined') return []
+      if (this.inputValue === null ||
+        typeof this.inputValue === 'undefined') return []
 
       return this.items.filter(i => {
         if (!this.multiple) {
           return this.getValue(i) === this.getValue(this.inputValue)
         } else {
           // Always return Boolean
-          return this.inputValue.find(j => this.getValue(j) === this.getValue(i)) !== undefined
+          return this.inputValue.find((j) => {
+            return this.getValue(j) === this.getValue(i)
+          }) !== undefined
         }
       })
     }
@@ -148,7 +151,9 @@ export default {
     value (val) {
       this.inputValue = val
       this.validate()
-      if (this.autocomplete || this.editable) this.$nextTick(this.$refs.menu.updateDimensions)
+      if (this.autocomplete || this.editable) {
+        this.$nextTick(this.$refs.menu.updateDimensions)
+      }
     },
     isActive (val) {
       this.isBooted = true
@@ -159,7 +164,9 @@ export default {
     },
     isBooted () {
       this.$nextTick(() => {
-        this.content && this.content.addEventListener('scroll', this.onScroll, false)
+        if (this.content) {
+          this.content.addEventListener('scroll', this.onScroll, false)
+        }
       })
     },
     searchValue () {
@@ -175,7 +182,9 @@ export default {
 
   beforeDestroy () {
     if (this.isBooted) {
-      this.content && this.content.removeEventListener('scroll', this.onScroll, false)
+      if (this.content) {
+        this.content.removeEventListener('scroll', this.onScroll, false)
+      }
     }
   },
 
@@ -198,7 +207,9 @@ export default {
           this.inputValue !== null &&
           typeof this.inputValue !== 'undefined'
         ) {
-        this.$nextTick(() => (this.$refs.input.value = this.getValue(this.inputValue)))
+        this.$nextTick(() => {
+          this.$refs.input.value = this.getValue(this.inputValue)
+        })
       }
     },
     genLabel () {
@@ -211,10 +222,14 @@ export default {
       return this.$createElement('label', data, this.label)
     },
     getText (item) {
-      return item === Object(item) ? (getObjectValueByPath(item, this.itemText) || item) : item
+      return item === Object(item)
+        ? (getObjectValueByPath(item, this.itemText) || item)
+        : item
     },
     getValue (item) {
-      return item === Object(item) ? (getObjectValueByPath(item, this.itemValue) || item) : item
+      return item === Object(item)
+        ? (getObjectValueByPath(item, this.itemValue) || item)
+        : item
     },
     onScroll () {
       if (!this.isActive) {
@@ -236,10 +251,14 @@ export default {
         this.inputValue = this.returnObject ? item : this.getValue(item)
       } else {
         const inputValue = this.inputValue.slice()
-        const i = this.inputValue.findIndex(i => this.getValue(i) === this.getValue(item))
+        const i = this.inputValue.findIndex((i) => {
+          return this.getValue(i) === this.getValue(item)
+        })
 
         i !== -1 && inputValue.splice(i, 1) || inputValue.push(item)
-        this.inputValue = inputValue.map(i => this.returnObject ? i : this.getValue(i))
+        this.inputValue = inputValue.map((i) => {
+          return this.returnObject ? i : this.getValue(i)
+        })
       }
 
       if (this.autocomplete || this.editable) {
