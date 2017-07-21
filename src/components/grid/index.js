@@ -12,7 +12,7 @@ const Grid = (name) => ({
       const prop = data.attrs[attr]
 
       if (!prop) {
-        data.staticClass += ` ${prop}`
+        data.staticClass += ` ${attr}`
         delete data.attrs[attr]
       }
     })
