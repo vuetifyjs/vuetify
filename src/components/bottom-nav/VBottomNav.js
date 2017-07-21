@@ -39,7 +39,7 @@
       },
       updateValue (i) {
         const item = this.getValue(i)
-        return this.$emit('update:active', item)
+        this.$emit('update:active', item)
       }
     },
 
