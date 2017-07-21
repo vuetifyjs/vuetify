@@ -4,9 +4,13 @@ import Generators from './mixins/generators'
 import Input from '~mixins/input'
 
 import VCard from '~components/cards/VCard'
+import VCheckbox from '~components/selection-controls/VCheckbox'
 import VIcon from '~components/icons/VIcon'
 import VList from '~components/lists/VList'
 import VListTile from '~components/lists/VListTile'
+import VListTileAction from '~components/lists/VListTileAction'
+import { VListTileContent } from '~components/lists'
+import { VListTileTitle } from '~components/lists'
 import VMenu from '~components/menus/VMenu'
 
 import clickOutside from '~directives/click-outside'
@@ -18,9 +22,13 @@ export default {
 
   components: {
     VCard,
+    VCheckbox,
     VIcon,
     VList,
     VListTile,
+    VListTileAction,
+    VListTileContent,
+    VListTileTitle,
     VMenu
   },
 
