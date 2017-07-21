@@ -11,7 +11,7 @@ const Grid = (name) => ({
     data.attrs && Object.keys(data.attrs).forEach(attr => {
       const prop = data.attrs[attr]
 
-      if (!prop) {
+      if (prop === attr) {
         data.staticClass += ` ${attr}`
         delete data.attrs[attr]
       }
