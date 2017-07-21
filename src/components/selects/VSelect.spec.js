@@ -18,4 +18,20 @@ test('VSelect.js', ({ mount }) => {
 
     expect(change).toBeCalledWith([0])
   })
+
+  it('should be in an error state', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        value: null,
+        items: [0, 1, 2],
+        required: true
+      }
+    })
+
+    wrapper.instance().focus()
+    wrapper.instance().blur()
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.hasError).toBe(true)
+  })
 })
