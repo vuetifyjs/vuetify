@@ -2,18 +2,17 @@ import Contextualable from '~mixins/contextualable'
 import Positionable from '~mixins/positionable'
 import GenerateRouteLink from '~mixins/route-link'
 import Themeable from '~mixins/themeable'
-import Toggleable from '~mixins/toggleable'
+import Ripple from '~directives/ripple'
 
 export default {
   name: 'v-btn',
 
-  mixins: [Contextualable, GenerateRouteLink, Positionable, Themeable, Toggleable],
+  mixins: [Contextualable, GenerateRouteLink, Positionable, Themeable],
+
+  directives: { Ripple },
 
   props: {
-    activeClass: {
-      type: String,
-      default: 'btn--active'
-    },
+    active: Boolean,
     block: Boolean,
     fab: Boolean,
     flat: Boolean,
@@ -42,7 +41,7 @@ export default {
       return {
         'btn': true,
         'btn--absolute': this.absolute,
-        'btn--active': this.isActive,
+        'btn--active': this.active,
         'btn--block': this.block,
         'btn--bottom': this.bottom,
         'btn--disabled': this.disabled,

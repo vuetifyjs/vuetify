@@ -42,7 +42,6 @@ export default {
         tag = this.nuxt ? 'nuxt-link' : 'router-link'
         data.props.to = this.to
         data.props.exact = exact
-        data.props.activeClass = this.activeClass
         data.props.append = this.append
         data.props.replace = this.replace
       } else {

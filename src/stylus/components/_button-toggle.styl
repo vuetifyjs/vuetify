@@ -12,7 +12,6 @@
     padding: 0 8px
     margin: 0
     opacity: .4
-    border-radius: 0
 
     &:not(:last-child)
       border-right: 1px solid transparent
@@ -20,15 +19,20 @@
     &:after
       display: none
 
-    &[data-selected]
+    &[data-selected='true']
       opacity: 1
-      
+
     &__content
       padding: 0
 
     span + .icon
       font-size: initial
       margin-left: 10px
+
+    &--icon
+      .btn__content
+        &:before
+          border-radius: 0
 
   &--selected
     // elevation(2)
