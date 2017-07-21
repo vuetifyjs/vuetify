@@ -210,11 +210,18 @@ export default {
 
       return this.$createElement('label', data, this.label)
     },
+    getPropertyFromItem (item, field) {
+      if (item !== Object(item)) return item
+
+      const value = getObjectValueByPath(item, field)
+
+      return typeof value === 'undefined' ? item : value
+    },
     getText (item) {
-      return item === Object(item) ? (getObjectValueByPath(item, this.itemText) || item) : item
+      return this.getPropertyFromItem(item, this.itemText)
     },
     getValue (item) {
-      return item === Object(item) ? (getObjectValueByPath(item, this.itemValue) || item) : item
+      return this.getPropertyFromItem(item, this.itemValue)
     },
     onScroll () {
       if (!this.isActive) {
