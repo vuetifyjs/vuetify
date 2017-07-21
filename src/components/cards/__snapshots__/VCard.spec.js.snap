@@ -1,31 +1,52 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VCard.vue should render a card with custom height 1`] = `
+exports[`VCard.js should render a card with custom height 1`] = `
+
+<div class="card"
+     style="height: auto;"
+>
+</div>
+
+`;
+
+exports[`VCard.js should render a flat card 1`] = `
+
+<div class="card"
+     style="height: auto;"
+>
+</div>
+
+`;
+
+exports[`VCard.js should render a raised card 1`] = `
+
+<div class="card"
+     style="height: auto;"
+>
+</div>
+
+`;
+
+exports[`VCard.js should render a tile card 1`] = `
+
+<div class="card"
+     style="height: auto;"
+>
+</div>
+
+`;
+
+exports[`VCard.js should render a tile card 2`] = `
 
 <!---->
 
 `;
 
-exports[`VCard.vue should render a flat card 1`] = `
+exports[`VCard.js should render component and match snapshot 1`] = `
 
-<!---->
-
-`;
-
-exports[`VCard.vue should render a raised card 1`] = `
-
-<!---->
-
-`;
-
-exports[`VCard.vue should render a tile card 1`] = `
-
-<!---->
-
-`;
-
-exports[`VCard.vue should render component and match snapshot 1`] = `
-
-<!---->
+<div class="card"
+     style="height: auto;"
+>
+</div>
 
 `;
