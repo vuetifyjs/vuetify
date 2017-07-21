@@ -8,7 +8,7 @@ export {
   Badge as badge,
   ClickOutside as clickOutside,
   Ripple as ripple,
-  Tooltip as topple,
+  Tooltip as tooltip,
   Touch as touch
 }
 
