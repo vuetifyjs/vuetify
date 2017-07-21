@@ -97,7 +97,7 @@ export default {
 
     const dialog = h('transition', {
       props: {
-        name: this.transition,
+        name: this.transition || '', // If false, show nothing
         origin: this.origin
       }
     }, [h('div', data,
