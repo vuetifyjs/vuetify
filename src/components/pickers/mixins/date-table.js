@@ -10,15 +10,20 @@ export default {
 
       this.tableDate = new Date(this.tableYear, month)
     },
+    touch (value) {
+      this.tableDate = new Date(this.tableYear, this.tableMonth + value)
+    },
     genTable () {
       const children = []
       const data = {
         'class': 'picker--date__table',
-        directives: [{
-          name: 'touch',
-          value: {
-            left: (e) => if (e.offsetX < -15) this.tableDate = new Date(this.tableYear, this.tableMonth + 1),
-            right: (e) => if (e.offsetX > 15) this.tableDate = new Date(this.tableYear, this.tableMonth - 1)
+        directives: [
+          {
+            name: 'touch',
+            value: {
+              left: (e) => if (e.offsetX < -15) this.touch(1),
+              right: (e) => if (e.offsetX > 15) this.touch(-1)
+            }
           }
         }]
       }
@@ -36,9 +41,8 @@ export default {
       ])
     },
     genTHead () {
-      return this.$createElement('thead', {
-
-      }, this.genTR(this.narrowDays.map(day => this.$createElement('th', day))))
+      const days = this.narrowDays.map(day => this.$createElement('th', day))
+      return this.$createElement('thead', this.genTR(days))
     },
     genTBody () {
       const children = []
@@ -59,6 +63,7 @@ export default {
       }
 
       for (let i = 1; i <= length; i++) {
+        const date = new Date(this.tableYear, this.tableMonth, i, 12, 0, 0, 0)
         rows.push(this.$createElement('td', [
           this.$createElement('button', {
             'class': {
@@ -66,7 +71,7 @@ export default {
               'btn--active': this.isActive(i),
               'btn--current': this.isCurrent(i),
               'btn--light': this.dark,
-              'btn--disabled': !this.isAllowed(new Date(this.tableYear, this.tableMonth, i, 12, 0, 0, 0))
+              'btn--disabled': !this.isAllowed(date)
             },
             attrs: {
               type: 'button'
@@ -77,10 +82,11 @@ export default {
             on: {
               click: () => {
                 const day = i < 10 ? `0${i}` : i
+                const tableYear = this.tableYear
                 let tableMonth = this.tableMonth + 1
                 tableMonth = tableMonth < 10 ? `0${tableMonth}` : tableMonth
 
-                this.inputDate = `${this.tableYear}-${tableMonth}-${day}T12:00:00`
+                this.inputDate = `${tableYear}-${tableMonth}-${day}T12:00:00`
                 this.$nextTick(() => (this.autosave && this.save()))
               }
             }

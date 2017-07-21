@@ -1,5 +1,5 @@
-import Snackbar from './Snackbar'
+import VSnackbar from './VSnackbar'
 
 export default {
-  Snackbar
+  VSnackbar
 }

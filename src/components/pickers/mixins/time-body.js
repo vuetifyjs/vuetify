@@ -50,10 +50,11 @@ export default {
       ])
     },
     genHand (type) {
+      const scale = this.is24hrAfter12 ? 'scaleY(0.6)' : ''
       return [this.$createElement('div', {
         'class': `picker--time__clock-hand ${type}`,
         style: {
-          transform: `rotate(${this.clockHand}deg) ${this.selectingHour && this.is24hr && this.hour >= 12 ? 'scaleY(0.6)' : ''}`
+          transform: `rotate(${this.clockHand}deg) ${scale}`
         }
       })]
     },
@@ -107,18 +108,21 @@ export default {
       return { transform: `translate(${x}px, ${y}px)` }
     },
     getPosition (i) {
-      const radiusPercentage = this.selectingHour && this.is24hr && i >= 12 ? 0.5 : 0.8
+      const radiusPercentage = this.is24hrAfter12 ? 0.5 : 0.8
+      const r = this.radius * radiusPercentage
       i = this.selectingHour && this.is24hr ? i % 12 : i
       return {
-        x: Math.round(Math.sin(i * this.degrees) * this.radius * radiusPercentage),
-        y: Math.round(-Math.cos(i * this.degrees) * this.radius * radiusPercentage)
+        x: Math.round(Math.sin(i * this.degrees) * r),
+        y: Math.round(-Math.cos(i * this.degrees) * r)
       }
     },
     changeHour (time) {
       let range = this.generateRange('hour', this.hour)
 
       time < 0 && (range = range.reverse().slice(1))
-      this.hour = range.find(h => this.allowedHours ? this.isAllowed('hour', h) : true)
+      this.hour = range.find((h) => {
+        return this.allowedHours ? this.isAllowed('hour', h) : true
+      })
 
       return true
     },
@@ -127,7 +131,9 @@ export default {
       let range = this.generateRange('minute', current)
 
       time < 0 && (range = range.reverse().slice(1))
-      const minute = range.find(m => this.allowedMinutes ? this.isAllowed('minute', m) : true)
+      const minute = range.find((m) => {
+        return this.allowedMinutes ? this.isAllowed('minute', m) : true
+      })
 
       this.minute = minute < 10 ? `0${minute}` : minute
 
@@ -164,7 +170,8 @@ export default {
       let value = Math.round(this.angle(center, coords) / this.degreesPerUnit)
 
       if (this.selectingHour && this.is24hr) {
-        value = this.euclidean(center, coords) / this.radius < 0.65 ? value + 12 : value
+        const insideClick = this.euclidean(center, coords) / this.radius < 0.65
+        value = insideClick ? value + 12 : value
 
         // Necessary to fix edge case when selecting left part of 0 and 12
         value = this.angle(center, coords) >= 345 ? (value + 12) % 24 : value
@@ -189,7 +196,8 @@ export default {
           Math.abs(p1.y - center.y) * Math.abs(p1.y - center.y))
       }
 
-      return Math.abs((2 * Math.atan2(p1.y - p0.y, p1.x - p0.x)) * 180 / Math.PI)
+      const value = 2 * Math.atan2(p1.y - p0.y, p1.x - p0.x)
+      return Math.abs(value * 180 / Math.PI)
     }
   }
 }

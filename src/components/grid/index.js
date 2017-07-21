@@ -8,23 +8,27 @@ const Grid = (name) => ({
   render: (h, { data, children }) => {
     data.staticClass = (`${name} ${data.staticClass || ''}`).trim()
 
-    if (data.attrs) {
-      data.staticClass += ` ${Object.keys(data.attrs).join(' ')}`
-      delete data.attrs
-    }
+    data.attrs && Object.keys(data.attrs).forEach(attr => {
+      const prop = data.attrs[attr]
+
+      if (!prop) {
+        data.staticClass += ` ${attr}`
+        delete data.attrs[attr]
+      }
+    })
 
     return h('div', data, children)
   }
 })
 
-const Container = Grid('container')
-const Flex = Grid('flex')
-const Layout = Grid('layout')
-const Spacer = createSimpleFunctional('spacer')
+const VContainer = Grid('container')
+const VFlex = Grid('flex')
+const VLayout = Grid('layout')
+const VSpacer = createSimpleFunctional('spacer')
 
 export default {
-  Container,
-  Flex,
-  Layout,
-  Spacer
+  VContainer,
+  VFlex,
+  VLayout,
+  VSpacer
 }

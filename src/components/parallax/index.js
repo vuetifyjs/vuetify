@@ -1,5 +1,5 @@
-import Parallax from './Parallax'
+import VParallax from './VParallax'
 
 export default {
-  Parallax
+  VParallax
 }

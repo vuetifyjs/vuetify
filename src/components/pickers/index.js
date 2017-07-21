@@ -1,7 +1,7 @@
-import DatePicker from './DatePicker'
-import TimePicker from './TimePicker'
+import VDatePicker from './VDatePicker'
+import VTimePicker from './VTimePicker'
 
 export default {
-  DatePicker,
-  TimePicker
+  VDatePicker,
+  VTimePicker
 }

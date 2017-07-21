@@ -1,5 +1,5 @@
-import Dialog from './Dialog'
+import VDialog from './VDialog'
 
 export default {
-  Dialog
+  VDialog
 }

@@ -1,5 +1,5 @@
-import Divider from './Divider'
+import VDivider from './VDivider'
 
 export default {
-  Divider
+  VDivider
 }

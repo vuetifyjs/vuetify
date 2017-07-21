@@ -1,5 +1,5 @@
-import App from './App'
+import VApp from './VApp'
 
 export default {
-  App
+  VApp
 }

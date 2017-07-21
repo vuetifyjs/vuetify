@@ -1,5 +1,5 @@
-import Icon from './Icon'
+import VIcon from './VIcon'
 
 export default {
-  Icon
+  VIcon
 }

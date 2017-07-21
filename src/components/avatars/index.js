@@ -1,7 +1,7 @@
 import { createSimpleFunctional } from '~util/helpers'
 
-export const Avatar = createSimpleFunctional('avatar')
+export const VAvatar = createSimpleFunctional('avatar')
 
 export default {
-  Avatar
+  VAvatar
 }

@@ -1,5 +1,5 @@
-import Footer from './Footer'
+import VFooter from './VFooter'
 
 export default {
-  Footer
+  VFooter
 }

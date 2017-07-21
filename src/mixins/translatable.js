@@ -39,7 +39,8 @@ export default {
       this.calcDimensions()
 
       this.percentScrolled = (
-        (this.windowBottom - this.elOffsetTop) / (this.normalizedHeight + this.windowHeight)
+        (this.windowBottom - this.elOffsetTop) /
+        (this.normalizedHeight + this.windowHeight)
       )
 
       this.parallax = Math.round(this.parallaxDist * this.percentScrolled)

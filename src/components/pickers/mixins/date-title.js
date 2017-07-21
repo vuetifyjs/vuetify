@@ -2,7 +2,9 @@
 export default {
   methods: {
     genTitle () {
-      let date = new Date(this.year, this.month, this.day).toLocaleString(this.locale, this.titleDateFormat)
+      let date = new Date(this.year, this.month, this.day)
+      date = date.toLocaleString(this.locale, this.titleDateFormat)
+
       if (this.landscape) {
         if (date.indexOf(',') > -1) date = date.replace(',', ',<br>')
         else if (date.indexOf(' ') > -1) date = date.replace(' ', '<br>')
