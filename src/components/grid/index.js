@@ -8,10 +8,15 @@ const Grid = (name) => ({
   render: (h, { data, children }) => {
     data.staticClass = (`${name} ${data.staticClass || ''}`).trim()
 
-    if (data.attrs) {
-      data.staticClass += ` ${Object.keys(data.attrs).join(' ')}`
-      delete data.attrs
-    }
+
+    Object.keys(data.attrs).forEach(attr => {
+      const prop = data.attrs[attr]
+
+      if (!prop) {
+        data.staticClass += ` ${prop}`
+        delete data.attrs[attr]
+      }
+    })
 
     return h('div', data, children)
   }
