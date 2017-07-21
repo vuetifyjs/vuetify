@@ -223,6 +223,7 @@ export default {
   created () {
     const firstSortable = this.headers.find(h => !('sortable' in h) || h.sortable)
     this.defaultPagination.sortBy = firstSortable ? firstSortable.value : null
+    this.defaultPagination.rowsPerPage = this.rowsPerPageItems[0]
 
     this.updatePagination(Object.assign({}, this.defaultPagination, this.pagination))
   },
