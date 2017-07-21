@@ -31,7 +31,6 @@ export default {
 
     genContent () {
       const booted = (this.lazy && this.isBooted) || !this.lazy
-
       return this.$createElement('div', {
         'class': (`menu__content ${this.contentClass}`).trim(),
         ref: 'content',

@@ -42,7 +42,6 @@ export default {
       return this.$createElement('th', ...this.genHeaderData(header, array))
     },
     genHeaderData (header, children) {
-      let beingSorted = false
       const classes = ['column']
       const data = {}
       const pagination = this.computedPagination
@@ -61,7 +60,7 @@ export default {
           children.unshift(icon)
         }
 
-        beingSorted = pagination.sortBy === header.value
+        const beingSorted = pagination.sortBy === header.value
         if (beingSorted) {
           classes.push('active')
           classes.push(pagination.descending ? 'desc' : 'asc')
@@ -69,7 +68,6 @@ export default {
       }
 
       classes.push(`text-xs-${header.align || 'right'}`)
-
       data.class = classes
 
       return [data, children]
