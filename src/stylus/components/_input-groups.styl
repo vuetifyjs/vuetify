@@ -3,7 +3,7 @@
   flex: 1
   flex-wrap: wrap
   min-width: 24px
-  margin: $input-group-margin
+  padding: $input-group-padding
   position: relative
   width: 100%
   outline: none
@@ -54,6 +54,9 @@
       &:focus
         label
           color: $theme.primary
+        
+        textarea
+          border-color: $theme.primary
 
     &.input-group--focused,
     &:focus
@@ -73,6 +76,16 @@
 
   // Error
   &.input-group--error
+    input,
+    textarea
+      caret-color: $theme.error
+      
+    textarea
+      border-color: $theme.error
+    
+    label
+      animation: shake 0.82s $transition.swing
+
     label,
     .input-group__input .icon
       color: $theme.error
@@ -102,12 +115,12 @@
       content: ''
       position: absolute
       left: 0
+      transition: .3s $transition.fast-out-slow-in
 
     &:after
       background-color: $theme.primary
       top: 0
       height: 2px
-      transition: .3s $transition.fast-out-slow-in
       transform: scaleX(0)
       transform-origin: center center 0
       width: 100%
