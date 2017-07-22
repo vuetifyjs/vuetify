@@ -21,11 +21,11 @@ export default {
           {
             name: 'touch',
             value: {
-              left: (e) => if (e.offsetX < -15) this.touch(1),
-              right: (e) => if (e.offsetX > 15) this.touch(-1)
+              left: (e) => (e.offsetX < -15) && this.touch(1),
+              right: (e) => (e.offsetX > 15) && this.touch(-1)
             }
           }
-        }]
+        ]
       }
 
       if (this.scrollable) {
