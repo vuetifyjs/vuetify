@@ -223,6 +223,11 @@ export default {
   created () {
     const firstSortable = this.headers.find(h => !('sortable' in h) || h.sortable)
     this.defaultPagination.sortBy = firstSortable ? firstSortable.value : null
+    if (!this.rowsPerPageItems.length) {
+      console.warn('The prop \'rows-per-page-items\' in v-data-table can not be empty.')
+    } else {
+      this.defaultPagination.rowsPerPage = this.rowsPerPageItems[0]
+    }
 
     this.updatePagination(Object.assign({}, this.defaultPagination, this.pagination))
   },

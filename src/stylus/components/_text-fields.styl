@@ -2,7 +2,7 @@
 .input-group--text-field label
   pointer-events: none
   position: absolute
-  top: 0
+  top: $input-group-text-field-label-top
   left: 0
   min-width: 0
   white-space: nowrap
@@ -18,16 +18,24 @@
 
 
 /** Input */
+.input-group--text-field
+  input,
+  textarea
+    caret-color: $theme.primary
+
 .input-group--text-field input
   box-shadow: none
   font-size: $input-font-size
   flex: 1
-  margin: 0
-  white-space: nowrap
-  text-overflow: ellipsis
-  overflow: hidden
-  min-width: 0
   height: $input-height
+  margin: 0
+  min-width: 0
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+  
+  &::placeholder
+    transition: .3s $transition.swing
 
   + .icon
     padding: 0 6px
@@ -40,13 +48,32 @@
     pointer-events: none
 
 /** Textarea */
-.input-group--text-field textarea
-  font-size: $input-font-size
-  flex: 1 1
+.input-group--text-field.input-group--multi-line
+  label
+    top: 13px
 
-  &:focus
-    outline: none
+  textarea
+    border-radius: 2px
+    font-size: $input-font-size
+    flex: 1 1
+    transition: .3s $transition.swing
 
+    &:focus
+      outline: none
+      
+  &:not(.input-group--full-width)
+    label
+      top: 30px
+      left: 15px
+      
+    textarea
+      padding: 30px 13px 0
+
+  .input-group__details
+    &:before,
+    &:after
+      opacity: 0
+      
 /** Counter */
 .input-group--text-field
   .input-group__counter
@@ -58,7 +85,7 @@
 /** Input States */
 .input-group--text-field
   &.input-group--placeholder:not(.input-group--focused):not(.input-group--dirty)
-    label
+    input::placeholder
       opacity: 0
 
 
@@ -92,11 +119,23 @@
     &:focus
       label
         opacity: 1
-        transform: translate3d(0, -18px, 0) scale(.75)
+
+      &:not(.input-group--multi-line)
+        label
+          transform: translate3d(0, -18px, 0) scale(.75)
+
+      &:not(.input-group--full-width).input-group--multi-line
+        label
+          transform: translate3d(0, -8px, 0) scale(.75)
 
   &.input-group--dirty
-    label
-      transform: translate3d(0, -18px, 0) scale(.75)
+    &:not(.input-group--multi-line)
+      label
+        transform: translate3d(0, -18px, 0) scale(.75)
+
+    &:not(.input-group--full-width).input-group--multi-line
+      label
+        transform: translate3d(0, -8px, 0) scale(.75)
 
   // Single Line
   &.input-group--single-line
@@ -109,7 +148,7 @@
 
   // Full Width
   &.input-group--full-width
-    padding: 0 16px
+    padding: 16px
     
     label
       margin-left: $grid-gutters.lg

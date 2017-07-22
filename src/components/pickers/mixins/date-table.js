@@ -1,5 +1,15 @@
 export default {
   methods: {
+    wheelScroll (e) {
+      e.preventDefault()
+
+      let month = this.tableMonth
+
+      if (e.deltaY < 0) month++
+      else month--
+
+      this.tableDate = new Date(this.tableYear, month)
+    },
     touch (value) {
       this.tableDate = new Date(this.tableYear, this.tableMonth + value)
     },
@@ -11,36 +21,20 @@ export default {
           {
             name: 'touch',
             value: {
-              left: () => this.touch.bind(this, 1),
-              right: () => this.touch.bind(this, -1)
+              left: (e) => if (e.offsetX < -15) this.touch(1),
+              right: (e) => if (e.offsetX > 15) this.touch(-1)
             }
           }
-        ]
+        }]
       }
 
       if (this.scrollable) {
-        data.on = {
-          wheel: (e) => {
-            e.preventDefault()
-
-            let month = this.tableMonth
-            const year = this.tableYear
-            const next = e.deltaY < 0
-
-            if (next) month++
-            else month--
-
-            this.tableDate = new Date(year, month)
-          }
-        }
+        data.on = { wheel: this.wheelScroll }
       }
 
       children.push(this.$createElement('table', {
         key: this.tableMonth
-      }, [
-        this.genTHead(),
-        this.genTBody()
-      ]))
+      }, [this.genTHead(), this.genTBody()]))
 
       return this.$createElement('div', data, [
         this.$createElement(this.computedTransition, children)
