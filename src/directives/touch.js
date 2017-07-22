@@ -3,13 +3,8 @@ const touchstart = (event, wrapper) => {
   wrapper.touchstartX = touch.clientX
   wrapper.touchstartY = touch.clientY
 
-  const e = {
-    touchstartX: touch.clientX,
-    touchstartY: touch.clientY
-  }
-
   wrapper.start &&
-    wrapper.start(Object.assign(event, e))
+    wrapper.start(Object.assign(event, wrapper))
 }
 
 const touchend = (event, wrapper) => {
@@ -17,32 +12,24 @@ const touchend = (event, wrapper) => {
   wrapper.touchendX = touch.clientX
   wrapper.touchendY = touch.clientY
 
-  const e = {
-    touchendX: touch.clientX,
-    touchendY: touch.clientY
-  }
-
   wrapper.end &&
-    wrapper.end(Object.assign(event, e))
+    wrapper.end(Object.assign(event, wrapper))
 
   handleGesture(wrapper)
 }
 
 const touchmove = (event, wrapper) => {
   const touch = event.changedTouches[0]
+  wrapper.touchmoveX = touch.clientX
+  wrapper.touchmoveY = touch.clientY
 
-  const e = {
-    touchmoveX: touch.clientX,
-    touchmoveY: touch.clientY,
-    offsetX: touch.clientX - wrapper.touchstartX,
-    offsetY: touch.clientY - wrapper.touchstartY
-  }
-
-  wrapper.move && wrapper.move(Object.assign(event, e))
+  wrapper.move && wrapper.move(Object.assign(event, wrapper))
 }
 
 const handleGesture = (wrapper) => {
   const { touchstartX, touchendX, touchstartY, touchendY } = wrapper
+  wrapper.offsetX = touchendX - touchstartX
+  wrapper.offsetY = touchendY - touchstartY
 
   if (touchendX < touchstartX) {
     wrapper.left && wrapper.left(wrapper)
@@ -64,6 +51,10 @@ function inserted (el, { value }) {
     touchstartY: 0,
     touchendX: 0,
     touchendY: 0,
+    touchmoveX: 0,
+    touchmoveY: 0,
+    offsetX: 0,
+    offsetY: 0,
     left: value.left,
     right: value.right,
     up: value.up,
