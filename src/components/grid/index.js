@@ -15,7 +15,9 @@ const Grid = (name) => ({
     data.staticClass += ` ${Object.keys(data.attrs).join(' ')}`
     delete data.attrs
     data.domProps = data.domProps || {}
-    data.domProps.id = props.id
+    if (props.id) {
+      data.domProps.id = props.id
+    }
 
     return h('div', data, children)
   }
