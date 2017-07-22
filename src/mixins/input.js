@@ -1,11 +1,11 @@
 import Themeable from './themeable'
+import Validatable from './validatable'
 
 export default {
-  mixins: [Themeable],
+  mixins: [Themeable, Validatable],
 
   data () {
     return {
-      errorBucket: [],
       focused: false,
       tabFocused: false,
       lazyValue: this.value
@@ -16,11 +16,6 @@ export default {
     appendIcon: String,
     appendIconCb: Function,
     disabled: Boolean,
-    error: Boolean,
-    errorMessages: {
-      type: [String, Array],
-      default: () => []
-    },
     hint: String,
     hideDetails: Boolean,
     label: String,
@@ -29,10 +24,6 @@ export default {
     prependIcon: String,
     prependIconCb: Function,
     required: Boolean,
-    rules: {
-      type: Array,
-      default: () => []
-    },
     tabindex: {
       default: 0
     },
@@ -42,9 +33,6 @@ export default {
   },
 
   computed: {
-    hasError () {
-      return this.validations.length || this.error
-    },
     inputGroupClasses () {
       return Object.assign({
         'input-group': true,
@@ -64,41 +52,7 @@ export default {
     },
     isDirty () {
       return this.inputValue
-    },
-    modifiers () {
-      const modifiers = {
-        lazy: false,
-        number: false,
-        trim: false
-      }
-
-      if (!this.$vnode.data.directives) {
-        return modifiers
-      }
-
-      const model = this.$vnode.data.directives.find(i => i.name === 'model')
-
-      if (!model) {
-        return modifiers
-      }
-
-      return Object.assign(modifiers, model.modifiers)
-    },
-    validations () {
-      return (!Array.isArray(this.errorMessages)
-        ? [this.errorMessages]
-        : this.errorMessages).concat(this.errorBucket)
     }
-  },
-
-  watch: {
-    rules () {
-      this.validate()
-    }
-  },
-
-  mounted () {
-    this.validate()
   },
 
   methods: {
@@ -123,17 +77,13 @@ export default {
         messages = this.validations.map(i => this.genError(i))
       }
 
-      return this.$createElement(
-        'transition-group',
-        {
-          'class': 'input-group__messages',
-          props: {
-            tag: 'div',
-            name: 'slide-y-transition'
-          }
-        },
-        messages
-      )
+      return this.$createElement('transition-group', {
+        'class': 'input-group__messages',
+        props: {
+          tag: 'div',
+          name: 'slide-y-transition'
+        }
+      }, messages)
     },
     genHint () {
       return this.$createElement('div', {
@@ -232,19 +182,6 @@ export default {
       )
 
       return this.$createElement('div', data, children)
-    },
-    validate () {
-      this.errorBucket = []
-
-      this.rules.forEach(rule => {
-        const valid = typeof rule === 'function'
-          ? rule(this.value)
-          : rule
-
-        if (valid !== true) {
-          this.errorBucket.push(valid)
-        }
-      })
     }
   }
 }

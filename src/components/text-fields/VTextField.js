@@ -9,7 +9,7 @@ export default {
 
   data () {
     return {
-      hasFocused: false,
+
       inputHeight: null
     }
   },
@@ -49,11 +49,10 @@ export default {
       }
     },
     hasError () {
-      return this.validations.length ||
+      return this.validations.length > 0 ||
         this.errorMessages.length > 0 ||
         !this.counterIsValid() ||
-        !this.validateIsValid() ||
-        this.error
+        !this.validateIsValid()
     },
     count () {
       let inputLength
@@ -80,17 +79,7 @@ export default {
         return this.value
       },
       set (val) {
-        if (this.modifiers.trim) {
-          val = val.trim()
-        }
-
-        if (this.modifiers.number) {
-          val = Number(val)
-        }
-
-        if (!this.modifiers.lazy) {
-          this.$emit('input', val)
-        }
+        this.$emit('input', val)
 
         this.lazyValue = val
       }
@@ -104,8 +93,6 @@ export default {
 
   watch: {
     focused (val) {
-      this.hasFocused = true
-
       !val && this.$emit('change', this.lazyValue)
     },
     value () {
@@ -158,7 +145,7 @@ export default {
           'height': this.inputHeight && `${this.inputHeight}px`
         },
         domProps: {
-          autofucus: this.autofocus,
+          autofocus: this.autofocus,
           disabled: this.disabled,
           required: this.required,
           value: this.lazyValue

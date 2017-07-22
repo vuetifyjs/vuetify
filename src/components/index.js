@@ -31,6 +31,7 @@ import Tabs from './tabs'
 import TextFields from './text-fields'
 import Transitions from './transitions'
 import Snackbar from './snackbars'
+import Form from './form'
 
 export default Object.assign({},
   Alerts,
@@ -65,5 +66,6 @@ export default Object.assign({},
   Tabs,
   TextFields,
   Transitions,
-  Snackbar
+  Snackbar,
+  Form
 )

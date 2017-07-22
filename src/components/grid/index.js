@@ -12,8 +12,10 @@ const Grid = (name) => ({
   render: (h, { props, data, children }) => {
     data.staticClass = (`${name} ${data.staticClass || ''}`).trim()
 
-    data.staticClass += ` ${Object.keys(data.attrs).join(' ')}`
-    delete data.attrs
+    if (data.attrs) {
+      data.staticClass += ` ${Object.keys(data.attrs).join(' ')}`
+      delete data.attrs
+    }
     data.domProps = data.domProps || {}
     data.domProps.id = props.id
 
