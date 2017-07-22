@@ -66,7 +66,7 @@ export default {
 
   watch: {
     $route () {
-      if (!this.disableRouteWatcher) {
+      if (!this.disableRouteWatcher || this.isMobile) {
         this.isActive = !this.closeConditional()
       }
     },
