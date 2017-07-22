@@ -1,5 +1,5 @@
-import Pagination from './Pagination.vue'
+import VPagination from './VPagination'
 
 export default {
-  Pagination
+  VPagination
 }

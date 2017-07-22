@@ -1,4 +1,6 @@
-import { createSimpleFunctional } from '~util/helpers'
+import {
+  createSimpleFunctional
+} from '~util/helpers'
 
 const Grid = (name) => ({
   functional: true,
@@ -6,24 +8,27 @@ const Grid = (name) => ({
   render: (h, { data, children }) => {
     data.staticClass = (`${name} ${data.staticClass || ''}`).trim()
 
-    if (data.attrs) {
-      data.staticClass += ` ${Object.keys(data.attrs).join(' ')}`
-      delete data.attrs
-    }
+    data.attrs && Object.keys(data.attrs).forEach(attr => {
+      const prop = data.attrs[attr]
+
+      if (prop === attr) {
+        data.staticClass += ` ${attr}`
+        delete data.attrs[attr]
+      }
+    })
 
     return h('div', data, children)
   }
 })
 
-const Container = Grid('container')
-const Layout = Grid('layout')
-const Flex = Grid('flex')
-
-const Spacer = createSimpleFunctional('spacer')
+const VContainer = Grid('container')
+const VFlex = Grid('flex')
+const VLayout = Grid('layout')
+const VSpacer = createSimpleFunctional('spacer')
 
 export default {
-  Flex,
-  Container,
-  Spacer,
-  Layout
+  VContainer,
+  VFlex,
+  VLayout,
+  VSpacer
 }

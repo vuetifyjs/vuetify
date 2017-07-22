@@ -1,5 +1,5 @@
-import NavigationDrawer from './NavigationDrawer'
+import VNavigationDrawer from './VNavigationDrawer'
 
 export default {
-  NavigationDrawer
+  VNavigationDrawer
 }

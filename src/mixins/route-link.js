@@ -9,9 +9,7 @@ export default {
     replace: Boolean,
     router: Boolean,
     ripple: Boolean,
-    tag: String,
-    target: String,
-    download: String
+    tag: String
   },
 
   methods: {
@@ -19,7 +17,6 @@ export default {
     generateRouteLink () {
       let exact = this.exact
       let tag
-      const options = this.to || this.href
 
       const data = {
         attrs: { disabled: this.disabled },
@@ -28,7 +25,10 @@ export default {
         directives: [{
           name: 'ripple',
           value: this.ripple || false
-        }]
+        }],
+        on: Object.assign({
+          click: this.click
+        }, (this.$listeners || {}))
       }
 
       if (!this.exact) {
@@ -39,26 +39,18 @@ export default {
       }
 
       if (this.to) {
-        this.router && console.warn('The <router> prop is deprecated, use <to> for router-links (with <nuxt> if applicable) and <href> for regular links.')
-
         tag = this.nuxt ? 'nuxt-link' : 'router-link'
-        data.props.to = options
+        data.props.to = this.to
         data.props.exact = exact
         data.props.activeClass = this.activeClass
         data.props.append = this.append
         data.props.replace = this.replace
-        data.nativeOn = { click: this.click }
       } else {
         tag = this.href && 'a' || this.tag || 'a'
 
         if (tag === 'a') {
           data.attrs.href = this.href || 'javascript:;'
-          if (this.target) data.attrs.target = this.target
-
-          data.attrs.download = this.download
         }
-
-        data.on = { click: this.click }
       }
 
       return { tag, data }

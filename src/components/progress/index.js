@@ -1,7 +1,7 @@
-import ProgressLinear from './ProgressLinear.vue'
-import ProgressCircular from './ProgressCircular.vue'
+import VProgressLinear from './VProgressLinear'
+import VProgressCircular from './VProgressCircular'
 
 export default {
-  ProgressLinear,
-  ProgressCircular
+  VProgressLinear,
+  VProgressCircular
 }

@@ -11,9 +11,14 @@ export default {
       }, [this.$createElement('v-icon', 'chevron_left')])
     },
     genNextIcon () {
+      const pagination = this.computedPagination
+      const disabled = pagination.rowsPerPage < 0 ||
+        pagination.page * pagination.rowsPerPage >= this.itemsLength ||
+        this.pageStop < 0
+
       return this.$createElement('v-btn', {
         props: {
-          disabled: this.computedPagination.page * this.computedPagination.rowsPerPage >= this.itemsLength || this.pageStop < 0,
+          disabled,
           icon: true,
           flat: true
         },
@@ -32,7 +37,12 @@ export default {
             hideDetails: true,
             auto: true
           },
-          on: { input: val => { this.computedPagination.rowsPerPage = val; this.computedPagination.page = 1 } }
+          on: {
+            input: (val) => {
+              this.computedPagination.rowsPerPage = val
+              this.computedPagination.page = 1
+            }
+          }
         })
       ])
     },

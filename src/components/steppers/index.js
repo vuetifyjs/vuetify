@@ -1,13 +1,13 @@
 import { createSimpleFunctional } from '~util/helpers'
-import Stepper from './Stepper'
-import StepperStep from './StepperStep'
-import StepperContent from './StepperContent'
+import VStepper from './VStepper'
+import VStepperStep from './VStepperStep'
+import VStepperContent from './VStepperContent'
 
-const StepperHeader = createSimpleFunctional('stepper__header')
+const VStepperHeader = createSimpleFunctional('stepper__header')
 
 export default {
-  Stepper,
-  StepperContent,
-  StepperHeader,
-  StepperStep
+  VStepper,
+  VStepperContent,
+  VStepperHeader,
+  VStepperStep
 }

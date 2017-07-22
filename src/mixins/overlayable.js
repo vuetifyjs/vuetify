@@ -35,11 +35,12 @@ export default {
 
       if (this.absolute) {
         // Required for IE11
-        this.$el.parentNode.insertBefore(overlay, this.$el.parentNode.firstChild)
+        const parent = this.$el.parentNode
+        parent.insertBefore(this.overlay, parent.firstChild)
       } else {
         document.querySelector('[data-app]').appendChild(this.overlay)
       }
-        
+
       this.overlay.clientHeight // Force repaint
       requestAnimationFrame(() => {
         this.overlay.className += ' overlay--active'
@@ -52,7 +53,7 @@ export default {
         return this.showScroll()
       }
 
-      this.overlay.className = this.overlay.className.replace('overlay--active', '')
+      this.overlay.classList.remove('overlay--active')
 
       setTimeout(() => {
         // IE11 Fix

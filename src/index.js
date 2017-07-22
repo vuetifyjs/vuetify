@@ -1,12 +1,12 @@
 require('./stylus/main.styl')
 
-import Components from './components/_index'
-import Directives from './directives/_index'
+import Components from './components'
+import Directives from './directives'
 import Load from './util/load'
 
 function plugin (Vue) {
   Object.keys(Components).forEach(key => {
-    Vue.component(`V${key}`, Components[key])
+    Vue.component(key, Components[key])
   })
 
   Object.keys(Directives).forEach(key => {

@@ -34,7 +34,9 @@ export default {
         }
       }, [loader])
 
-      return this.$createElement('thead', { class: 'datatable__progress' }, [this.genTR([col])])
+      return this.$createElement('thead', {
+        class: 'datatable__progress'
+      }, [this.genTR([col])])
     }
   }
 }
