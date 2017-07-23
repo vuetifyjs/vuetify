@@ -1,5 +1,9 @@
+import Themeable from '~mixins/themeable'
+
 export default {
   functional: true,
+
+  mixins: [Themeable],
 
   props: {
     inset: Boolean
@@ -9,6 +13,8 @@ export default {
     data.staticClass = (`subheader ${data.staticClass || ''}`).trim()
 
     if (props.inset) data.staticClass += ' subheader--inset'
+    if (!props.dark) data.staticClass += ' theme--light'
+    if (props.dark) data.staticClass += ' theme--dark'
 
     return h('li', data, children)
   }
