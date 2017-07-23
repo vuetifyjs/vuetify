@@ -21,10 +21,6 @@ export default {
     Toggleable
   ],
 
-  directives: {
-    clickOutside
-  },
-
   data () {
     return {
       autoIndex: null,
