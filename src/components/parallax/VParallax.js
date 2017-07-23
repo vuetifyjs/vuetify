@@ -27,7 +27,9 @@ export default {
 
   methods: {
     init () {
-      if (this.$refs.img.complete) {
+      if (!this.$refs.img) {
+        return
+      } else if (this.$refs.img.complete) {
         this.translate()
         this.listeners()
       } else {
