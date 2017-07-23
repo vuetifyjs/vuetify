@@ -1,31 +1,18 @@
 /** Label */
 .input-group--text-field label
-  pointer-events: none
   position: absolute
   top: $input-group-text-field-label-top
   left: 0
-  min-width: 0
-  white-space: nowrap
-  text-overflow: ellipsis
-  overflow: hidden
-  text-align: left
-  transform: translate3d(0, 0, 0)
-  transform-origin: top left
-  width: 100%
-
-.input-group--text-field.input-group--multi-line:not(.input-group--focused):not(.input-group--dirty) label
-  transform: translate3d(0,0,0)
-
 
 /** Input */
 .input-group--text-field
   input,
   textarea
     caret-color: $theme.primary
+    font-size: $input-font-size
 
 .input-group--text-field input
   box-shadow: none
-  font-size: $input-font-size
   flex: 1
   height: $input-height
   margin: 0
@@ -48,19 +35,22 @@
     pointer-events: none
 
 /** Textarea */
-.input-group--text-field.input-group--multi-line
+.input-group--text-field
+  textarea
+    flex: 1 1
+
+    &:focus
+      outline: none
+
+.input-group--text-field.input-group--textarea
   label
     top: 13px
 
   textarea
     border-radius: 2px
     font-size: $input-font-size
-    flex: 1 1
     transition: .3s $transition.swing
 
-    &:focus
-      outline: none
-      
   &:not(.input-group--full-width)
     label
       top: 30px
@@ -120,20 +110,20 @@
       label
         opacity: 1
 
-      &:not(.input-group--multi-line)
+      &:not(.input-group--textarea)
         label
           transform: translate3d(0, -18px, 0) scale(.75)
 
-      &:not(.input-group--full-width).input-group--multi-line
+      &:not(.input-group--full-width).input-group--textarea
         label
           transform: translate3d(0, -8px, 0) scale(.75)
 
   &.input-group--dirty
-    &:not(.input-group--multi-line)
+    &:not(.input-group--textarea)
       label
         transform: translate3d(0, -18px, 0) scale(.75)
 
-    &:not(.input-group--full-width).input-group--multi-line
+    &:not(.input-group--full-width).input-group--textarea
       label
         transform: translate3d(0, -8px, 0) scale(.75)
 
@@ -145,6 +135,11 @@
     &.input-group--dirty
       label
         display: none
+  
+  // Multi Line
+  &.input-group--multi-line
+    textarea
+      padding-top: 4px
 
   // Full Width
   &.input-group--full-width
@@ -183,7 +178,6 @@
 
 .input-group--prefix,
 .input-group--suffix
-
   .input-group--text-field__prefix,
   .input-group--text-field__suffix
     align-items: center

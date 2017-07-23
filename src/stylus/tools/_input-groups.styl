@@ -1,5 +1,6 @@
 input-group($material)
-  input, textarea
+  input,
+  textarea
     color: $material.text.primary
 
     &:disabled
@@ -8,7 +9,7 @@ input-group($material)
   .input-group__details
     color: $material.text.secondary
   
-  &:not(.input-group--full-width)
+  &.input-group--textarea:not(.input-group--full-width)
     textarea
       border: 2px solid $material.text.secondary
   
@@ -32,7 +33,7 @@ input-group($material)
         .input-group__details:before
           background-color: $material.text.primary
 
-        &:not(.input-group--full-width)
+        &.input-group--textarea:not(.input-group--full-width)
           textarea
             border-color: $material.text.primary
   
@@ -46,7 +47,8 @@ input-group($material)
           background-color: $material.dividers
 
   &.input-group--disabled
-    input, textarea
+    input,
+    // textarea
       color: $material.text.secondary
     
     .input-group__details:before
