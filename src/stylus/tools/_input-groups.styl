@@ -26,8 +26,10 @@ input-group($material)
       background-color: $material.input-bottom-line
 
     &:not(.input-group--focused)
-      .input-group__input .icon
-        color: $material.text.secondary
+      .input-group__input
+        .input-group__append-icon,
+        .input-group__prepend-icon
+          color: $material.text.secondary
 
       &:not(.input-group--disabled):hover
         .input-group__details:before
