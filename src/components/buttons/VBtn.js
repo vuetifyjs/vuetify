@@ -7,7 +7,13 @@ import Toggleable from '~mixins/toggleable'
 export default {
   name: 'v-btn',
 
-  mixins: [Contextualable, GenerateRouteLink, Positionable, Themeable, Toggleable],
+  mixins: [
+    Contextualable,
+    GenerateRouteLink,
+    Positionable,
+    Themeable,
+    Toggleable
+  ],
 
   props: {
     activeClass: {
@@ -88,7 +94,11 @@ export default {
       this.$emit('click', e)
     },
     genContent () {
-      return this.$createElement('div', { 'class': 'btn__content' }, [this.$slots.default])
+      return this.$createElement(
+        'div',
+        { 'class': 'btn__content' },
+        [this.$slots.default]
+      )
     },
     genLoader () {
       const children = []
