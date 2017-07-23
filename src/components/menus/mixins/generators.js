@@ -42,6 +42,7 @@ export default {
         on: {
           click: e => {
             e.stopPropagation()
+            if (e.target.getAttribute('disabled')) return
             if (this.closeOnContentClick) this.isActive = false
           },
           mouseenter: e => {

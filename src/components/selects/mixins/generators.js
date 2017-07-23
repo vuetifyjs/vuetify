@@ -1,3 +1,5 @@
+import { getObjectValueByPath } from '~util/helpers'
+
 export default {
   methods: {
     genMenu () {
@@ -113,6 +115,11 @@ export default {
     },
     genTile (item, disabled) {
       const active = this.selectedItems.indexOf(item) !== -1
+
+      if (typeof disabled === 'undefined') {
+        disabled = getObjectValueByPath(item, this.itemDisabled)
+      }
+
       const data = {
         on: { click: e => this.selectItem(item) },
         props: {
@@ -120,6 +127,10 @@ export default {
           ripple: true,
           value: active
         }
+      }
+
+      if (disabled) {
+        data.props.disabled = disabled
       }
 
       if (this.$scopedSlots.item) {

@@ -37,6 +37,10 @@ export default {
 
     data.attrs = Object.assign({}, data.attrs, this.$attrs)
 
-    return h('li', [h(tag, data, [this.$slots.default])])
+    return h('li', {
+      attrs: {
+        disabled: this.disabled
+      }
+    }, [h(tag, data, [this.$slots.default])])
   }
 }

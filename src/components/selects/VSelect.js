@@ -76,6 +76,10 @@ export default {
       type: String,
       default: 'value'
     },
+    itemDisabled: {
+      type: String,
+      default: 'disabled'
+    },
     maxHeight: {
       type: [Number, String],
       default: 300
