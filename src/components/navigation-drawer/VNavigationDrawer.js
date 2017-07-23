@@ -75,6 +75,9 @@ export default {
       this.showOverlay && val && this.genOverlay() || this.removeOverlay()
       this.$el.scrollTop = 0
     },
+    isMobile (val) {
+      !val && this.removeOverlay()
+    },
     permanent (val) {
       this.$emit('input', val)
     },
@@ -104,9 +107,13 @@ export default {
       return !this.permanent && (this.temporary || this.isMobile)
     },
     onResize () {
-      if (!this.enableResizeWatcher || this.permanent || this.temporary) return
-      this.checkIfMobile()
-      this.isActive = !this.isMobile
+      clearTimeout(this.resizeTimeout)
+      
+      this.resizeTimeout = setTimeout(() => {
+        if (!this.enableResizeWatcher || this.permanent || this.temporary) return
+        this.checkIfMobile()
+        this.isActive = !this.isMobile
+      }, 200)
     },
     swipeRight (e) {
       if (this.isActive && !this.right) return
