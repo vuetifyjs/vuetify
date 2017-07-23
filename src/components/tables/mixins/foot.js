@@ -35,7 +35,8 @@ export default {
             items: this.rowsPerPageItems,
             value: this.computedPagination.rowsPerPage,
             hideDetails: true,
-            auto: true
+            auto: true,
+            minWidth: '75px'
           },
           on: {
             input: (val) => {

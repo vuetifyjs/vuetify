@@ -18,6 +18,8 @@ export default {
         on: { input: val => (this.isActive = val) }
       }
 
+      this.minWidth && (data.props.minWidth = this.minWidth)
+
       return this.$createElement('v-menu', data, [this.genList()])
     },
     genSelectionsAndSearch () {

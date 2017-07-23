@@ -80,6 +80,10 @@ export default {
       type: [Number, String],
       default: 300
     },
+    minWidth: {
+      type: [Boolean, Number, String],
+      default: false
+    },
     multiple: Boolean,
     multiLine: Boolean,
     offset: Boolean,
