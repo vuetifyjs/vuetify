@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import load from '~util/load'
-import Directives from '~directives'
+import * as Directives from '~directives'
 import { mount, shallow } from 'avoriaz'
 
 export function test(name, cb) {
