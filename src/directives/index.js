@@ -1,13 +1,13 @@
-import Badge from './badge'
-import ClickOutside from './click-outside'
-import Ripple from './ripple'
-import Tooltip from './tooltip'
-import Touch from './touch'
+import badge from './badge'
+import clickOutside from './click-outside'
+import ripple from './ripple'
+import tooltip from './tooltip'
+import touch from './touch'
 
-export default {
-  Badge,
-  ClickOutside,
-  Ripple,
-  Tooltip,
-  Touch
+export {
+  badge,
+  clickOutside,
+  ripple,
+  tooltip,
+  touch
 }
