@@ -17,8 +17,6 @@ export default {
       return this.filteredItems.map((item, index) => {
         const props = { item, index }
         const key = this.selectedKey
-        const row = this.$scopedSlots.items(props)
-        const needsTableRow = row.length && row[0].tag === 'td'
 
         Object.defineProperty(props, 'selected', {
           get: () => this.selected[item[this.selectedKey]],
@@ -30,6 +28,9 @@ export default {
             this.$emit('input', selected)
           }
         })
+
+        const row = this.$scopedSlots.items(props)
+        const needsTableRow = row.length && row[0].tag === 'td'
 
         return needsTableRow
           ? this.genTR(row, {
