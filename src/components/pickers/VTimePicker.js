@@ -222,7 +222,8 @@ export default {
         offset = 0
       }
 
-      return range.slice(start + offset, range.length).concat(range.slice(0, start + offset))
+      return range.slice(start + offset, range.length)
+        .concat(range.slice(0, start + offset))
     },
     firstAllowed (type, value) {
       const allowed = this[`allowed${type.charAt(0).toUpperCase() + type.slice(1)}s`]
