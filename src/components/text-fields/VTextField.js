@@ -128,7 +128,7 @@ export default {
   methods: {
     calculateInputHeight () {
       this.inputHeight = null
-      
+
       this.$nextTick(() => {
         const height = this.$refs.input.scrollHeight
         const minHeight = this.rows * 24
@@ -190,7 +190,7 @@ export default {
         if (![undefined, null].includes(this.max)) data.attrs.max = this.max
         if (![undefined, null].includes(this.min)) data.attrs.min = this.min
       }
-        
+
       if (!this.textarea && !this.multiLine) {
         data.domProps.type = this.type
       } else {

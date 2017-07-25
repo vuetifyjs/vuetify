@@ -37,7 +37,7 @@ export default {
     rightControlIcon: {
       type: [Boolean, String],
       default: 'chevron_right'
-    },
+    }
   },
 
   computed: {
@@ -57,7 +57,11 @@ export default {
         return i.$el.classList && i.$el.classList.contains('carousel__item')
       })
 
-      this.items.forEach(i => i.open(this.items[this.current]._uid, this.reverse))
+      this.items.forEach(i => i.open(
+          this.items[this.current]._uid,
+          this.reverse
+        )
+      )
 
       !this.isBooted && this.cycle && this.restartInterval()
       this.isBooted = true
