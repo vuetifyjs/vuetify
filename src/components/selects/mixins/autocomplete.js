@@ -9,7 +9,7 @@ export default {
     filterSearch () {
       return this.items.filter(i => {
         const text = this.getText(i)
-        if (typeof text === 'undefined') return false
+        if (typeof text !== 'string') return false
 
         return text.toLowerCase().indexOf(this.searchValue.toLowerCase()) !== -1
       })
