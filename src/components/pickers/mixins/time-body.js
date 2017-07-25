@@ -108,7 +108,7 @@ export default {
       return { transform: `translate(${x}px, ${y}px)` }
     },
     getPosition (i) {
-      const radiusPercentage = this.selectingHour && 
+      const radiusPercentage = this.selectingHour &&
         this.is24hr &&
         i >= 12 ? 0.5 : 0.8
       const r = this.radius * radiusPercentage
