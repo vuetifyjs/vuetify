@@ -11,7 +11,7 @@ test('VCard.js', ({ mount, functionalContext }) => {
 
   it('should render a flat card', () => {
     const wrapper = mount(VCard, functionalContext({
-      propsData: {
+      props: {
         flat: true
       }
     }))
@@ -21,7 +21,7 @@ test('VCard.js', ({ mount, functionalContext }) => {
 
   it('should render a raised card', () => {
     const wrapper = mount(VCard, functionalContext({
-      propsData: {
+      props: {
         raised: true
       }
     }))
@@ -31,7 +31,7 @@ test('VCard.js', ({ mount, functionalContext }) => {
 
   it('should render a tile card', () => {
     const wrapper = mount(VCard, functionalContext({
-      propsData: {
+      props: {
         tile: true
       }
     }))
@@ -40,24 +40,23 @@ test('VCard.js', ({ mount, functionalContext }) => {
   })
 
   it('should render a card with custom height', () => {
+    const heightpx = '400px'
     const wrapper = mount(VCard, functionalContext({
-      propsData: {
-        height: '400px'
+      props: {
+        height: heightpx
       }
     }))
 
-    console.log(wrapper.hasStyle('height', '400px'))
-
-    expect(wrapper.hasStyle('height', '400px')).toBe(true)
+    expect(wrapper.hasStyle('height', heightpx)).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render a tile card', () => {
-    const wrapper = mount(VCard, {
-      propsData: {
+    const wrapper = mount(VCard, functionalContext({
+      props: {
         tile: true
       }
-    })
+    }))
 
     expect(wrapper.hasClass('card--tile')).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
