@@ -100,7 +100,8 @@ export default {
     isDirty () {
       return this.lazyValue !== null &&
         typeof this.lazyValue !== 'undefined' &&
-        this.lazyValue.toString().length > 0
+        this.lazyValue.toString().length > 0 ||
+        this.placeholder
     }
   },
 
