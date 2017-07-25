@@ -11,7 +11,7 @@
   "scripts": {
     "dev": "cross-env TARGET=dev webpack --config build/config.js --progress --hide-modules --watch",
     "build": "rimraf dist && cross-env NODE_ENV=production node build/build.js --progress --hide-modules",
-    "test": "cross-env NODE_ENV=test jest --no-cache",
+    "test": "cross-env NODE_ENV=test jest --no-cache --coverage --verbose",
     "lint": "eslint --ext .js,.vue src --ignore-pattern=*/util/testing.js"
   },
   "description": "Vue.js 2 Semantic Component Framework",
