@@ -17,11 +17,23 @@ export default {
     xLarge: Boolean
   },
 
-  render (h, { props, data, children }) {
+  render (h, { props, data, children = [] }) {
     if (props.fa) console.warn('The v-icon prop \'fa\' will be deprecated in the next release. Use \'fa-\' prefix in icon name instead.')
     if (props.mdi) console.warn('The v-icon prop \'mdi\' will be deprecated in the next release. Use \'mdi-\' prefix in icon name instead.')
+    const hasText = data.domProps && data.domProps.textContent
+    const hasHTML = data.domProps && data.domProps.innerHTML
+    let iconName = ''
 
-    const iconName = children.pop().text
+    if (children.length) {
+      iconName = children.pop().text
+    } else if (hasText) {
+      iconName = data.domProps.textContent
+      delete data.domProps.textContent
+    } else if (hasHTML) {
+      iconName = data.domProps.innerHTML
+      delete data.domProps.innerHTML
+    }
+
     const thirdPartyIcon = iconName.indexOf('-') > -1
     let iconType = thirdPartyIcon ? iconName.slice(0, iconName.indexOf('-')) : 'material-icons'
 
