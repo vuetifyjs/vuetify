@@ -11,7 +11,7 @@
   "scripts": {
     "dev": "cross-env TARGET=dev webpack --config build/config.js --progress --hide-modules --watch",
     "build": "rimraf dist && cross-env NODE_ENV=production node build/build.js --progress --hide-modules",
-    "test": "cross-env NODE_ENV=test jest --no-cache",
+    "test": "cross-env NODE_ENV=test jest --no-cache --coverage --verbose",
     "lint": "eslint --ext .js,.vue src --ignore-pattern=*/util/testing.js"
   },
   "description": "Vue.js 2 Semantic Component Framework",
@@ -77,9 +77,9 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^2.1.1",
     "uglifyjs-webpack-plugin": "^0.4.6",
+    "vue": "^2.4.1",
     "vue-loader": "^10.1.0",
     "vue-router": "^2.7.0",
-    "vue": "^2.4.1",
     "vue-server-renderer": "^2.4.1",
     "vue-template-compiler": "^2.4.1",
     "webpack": "^3.2.0",
