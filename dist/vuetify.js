@@ -258,78 +258,91 @@ function createRange(length) {
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-    functional: true,
+  functional: true,
 
-    mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_themeable__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__mixins_contextualable__["a" /* default */]],
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_themeable__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__mixins_contextualable__["a" /* default */]],
 
-    props: {
-        disabled: Boolean,
-        fa: Boolean,
-        mdi: Boolean,
-        large: Boolean,
-        left: Boolean,
-        medium: Boolean,
-        right: Boolean,
-        xLarge: Boolean
-    },
+  props: {
+    disabled: Boolean,
+    fa: Boolean,
+    mdi: Boolean,
+    large: Boolean,
+    left: Boolean,
+    medium: Boolean,
+    right: Boolean,
+    xLarge: Boolean
+  },
 
-    render: function render(h, _ref) {
-        var props = _ref.props,
-            data = _ref.data,
-            children = _ref.children;
+  render: function render(h, _ref) {
+    var props = _ref.props,
+        data = _ref.data,
+        _ref$children = _ref.children,
+        children = _ref$children === undefined ? [] : _ref$children;
 
-        if (props.fa) console.warn('The v-icon prop \'fa\' will be deprecated in the next release. Use \'fa-\' prefix in icon name instead.');
-        if (props.mdi) console.warn('The v-icon prop \'mdi\' will be deprecated in the next release. Use \'mdi-\' prefix in icon name instead.');
+    if (props.fa) console.warn('The v-icon prop \'fa\' will be deprecated in the next release. Use \'fa-\' prefix in icon name instead.');
+    if (props.mdi) console.warn('The v-icon prop \'mdi\' will be deprecated in the next release. Use \'mdi-\' prefix in icon name instead.');
+    var hasText = data.domProps && data.domProps.textContent;
+    var hasHTML = data.domProps && data.domProps.innerHTML;
+    var iconName = '';
 
-        var iconName = children.pop().text;
-        var thirdPartyIcon = iconName.indexOf('-') > -1;
-        var iconType = thirdPartyIcon ? iconName.slice(0, iconName.indexOf('-')) : 'material-icons';
-
-        // To keep things backwards compatible for now
-        iconType = props.fa ? 'fa' : props.mdi ? 'mdi' : iconType;
-
-        data.staticClass = (iconType + ' icon ' + (data.staticClass || '')).trim();
-        data.attrs = data.attrs || {};
-
-        if (props.dark) data.staticClass += ' theme--dark';
-        if (props.light) data.staticClass += ' theme--light';
-
-        var classes = {
-            'icon--large': props.large,
-            'icon--left': props.left,
-            'icon--medium': props.medium,
-            'icon--right': props.right,
-            'icon--x-large': props.xLarge,
-            'primary--text': props.primary,
-            'secondary--text': props.secondary,
-            'success--text': props.success,
-            'info--text': props.info,
-            'warning--text': props.warning,
-            'error--text': props.error
-        };
-
-        var iconClasses = Object.keys(classes).filter(function (k) {
-            return classes[k];
-        }).join(' ');
-        iconClasses && (data.staticClass += ' ' + iconClasses);
-
-        // To keep things backwards compatible for now
-        if (props.fa || props.mdi) {
-            var comparison = props.fa ? 'fa' : 'mdi';
-
-            if (iconName.indexOf(' ') > -1) data.staticClass += ' ' + comparison + '-' + iconName;else data.staticClass += ' ' + comparison + '-' + iconName.split(' ').join('-');
-        }
-
-        if (thirdPartyIcon) {
-            data.staticClass += ' ' + iconName;
-        }
-
-        !(thirdPartyIcon || props.fa || props.mdi) && children.push(iconName);
-
-        if (props.disabled) data.attrs.disabled = props.disabled;
-
-        return h('i', data, children);
+    if (children.length) {
+      iconName = children.pop().text;
+    } else if (hasText) {
+      iconName = data.domProps.textContent;
+      delete data.domProps.textContent;
+    } else if (hasHTML) {
+      iconName = data.domProps.innerHTML;
+      delete data.domProps.innerHTML;
     }
+
+    var thirdPartyIcon = iconName.indexOf('-') > -1;
+    var iconType = thirdPartyIcon ? iconName.slice(0, iconName.indexOf('-')) : 'material-icons';
+
+    // To keep things backwards compatible for now
+    iconType = props.fa ? 'fa' : props.mdi ? 'mdi' : iconType;
+
+    data.staticClass = (iconType + ' icon ' + (data.staticClass || '')).trim();
+    data.attrs = data.attrs || {};
+
+    if (props.dark) data.staticClass += ' theme--dark';
+    if (props.light) data.staticClass += ' theme--light';
+
+    var classes = {
+      'icon--large': props.large,
+      'icon--left': props.left,
+      'icon--medium': props.medium,
+      'icon--right': props.right,
+      'icon--x-large': props.xLarge,
+      'primary--text': props.primary,
+      'secondary--text': props.secondary,
+      'success--text': props.success,
+      'info--text': props.info,
+      'warning--text': props.warning,
+      'error--text': props.error
+    };
+
+    var iconClasses = Object.keys(classes).filter(function (k) {
+      return classes[k];
+    }).join(' ');
+    iconClasses && (data.staticClass += ' ' + iconClasses);
+
+    // To keep things backwards compatible for now
+    if (props.fa || props.mdi) {
+      var comparison = props.fa ? 'fa' : 'mdi';
+
+      if (iconName.indexOf(' ') > -1) data.staticClass += ' ' + comparison + '-' + iconName;else data.staticClass += ' ' + comparison + '-' + iconName.split(' ').join('-');
+    }
+
+    if (thirdPartyIcon) {
+      data.staticClass += ' ' + iconName;
+    }
+
+    !(thirdPartyIcon || props.fa || props.mdi) && children.push(iconName);
+
+    if (props.disabled) data.attrs.disabled = props.disabled;
+
+    return h('i', data, children);
+  }
 });
 
 /***/ }),
@@ -4692,8 +4705,12 @@ var VSpacer = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSi
 
   methods: {
     click: function click() {
+      var _this = this;
+
       if (!this.$refs.item.querySelector('.list__tile--disabled')) {
-        this.listClick(this._uid);
+        requestAnimationFrame(function () {
+          return _this.listClick(_this._uid);
+        });
       }
     },
     toggle: function toggle(uid) {
@@ -6640,7 +6657,7 @@ var _this = this;
 
       return this.items.filter(function (i) {
         var text = _this.getText(i);
-        if (typeof text === 'undefined') return false;
+        if (typeof text !== 'string') return false;
 
         return text.toLowerCase().indexOf(_this.searchValue.toLowerCase()) !== -1;
       });
@@ -8122,8 +8139,6 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       return this.filteredItems.map(function (item, index) {
         var props = { item: item, index: index };
         var key = _this.selectedKey;
-        var row = _this.$scopedSlots.items(props);
-        var needsTableRow = row.length && row[0].tag === 'td';
 
         Object.defineProperty(props, 'selected', {
           get: function get() {
@@ -8138,6 +8153,9 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
             _this.$emit('input', selected);
           }
         });
+
+        var row = _this.$scopedSlots.items(props);
+        var needsTableRow = row.length && row[0].tag === 'td';
 
         return needsTableRow ? _this.genTR(row, {
           attrs: { active: _this.isSelected(item) }
@@ -9107,7 +9125,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       }
     },
     isDirty: function isDirty() {
-      return this.lazyValue !== null && typeof this.lazyValue !== 'undefined' && this.lazyValue.toString().length > 0;
+      return this.lazyValue !== null && typeof this.lazyValue !== 'undefined' && this.lazyValue.toString().length > 0 || this.placeholder;
     }
   },
 
