@@ -1,5 +1,15 @@
+import {
+  VFadeTransition,
+  VSlideXTransition
+} from '~components/transitions'
+
 export default {
   name: 'v-progress-linear',
+
+  components: {
+    VFadeTransition,
+    VSlideXTransition
+  },
 
   props: {
     active: {

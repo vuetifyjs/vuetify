@@ -3,12 +3,27 @@ import Body from './mixins/body'
 import Foot from './mixins/foot'
 import Progress from './mixins/progress'
 import Filterable from '~mixins/filterable'
+
+import VBtn from '~components/buttons/VBtn'
+import VIcon from '~components/icons/VIcon'
+import VProgressLinear from '~components/progress/VProgressLinear'
+import VSelect from '~components/selects/VSelect'
+import { VTableOverflow } from '~components/tables'
+
 import { getObjectValueByPath } from '~util/helpers'
 
 export default {
   name: 'v-datatable',
 
   mixins: [Head, Body, Filterable, Foot, Progress],
+
+  components: {
+    VBtn,
+    VIcon,
+    VProgressLinear,
+    VSelect,
+    VTableOverflow
+  },
 
   data () {
     return {
@@ -87,7 +102,7 @@ export default {
           if (!isNaN(sortA) && !isNaN(sortB)) return (sortA - sortB)
           else if (sortA == null && sortB == null) return 0;
 
-          [sortA, sortB] = [sortA, sortB].map(s => s.toLocaleLowerCase())
+          [sortA, sortB] = [sortA, sortB].map(s => (s || '').toLocaleLowerCase())
           if (sortA > sortB) return 1
           if (sortA < sortB) return -1
 
