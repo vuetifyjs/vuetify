@@ -8,9 +8,11 @@ import VBtn from '~components/buttons/VBtn'
 import VIcon from '~components/icons/VIcon'
 import VProgressLinear from '~components/progress/VProgressLinear'
 import VSelect from '~components/selects/VSelect'
-import { VTableOverflow } from '~components/tables'
 
-import { getObjectValueByPath } from '~util/helpers'
+import {
+  createSimpleFunctional,
+  getObjectValueByPath
+} from '~util/helpers'
 
 export default {
   name: 'v-datatable',
@@ -22,7 +24,8 @@ export default {
     VIcon,
     VProgressLinear,
     VSelect,
-    VTableOverflow
+    // Importing does not work properly
+    'v-table-overflow': createSimpleFunctional('table__overflow')
   },
 
   data () {
