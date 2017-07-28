@@ -4,7 +4,7 @@ import Ripple from './ripple'
 import Tooltip from './tooltip'
 import Touch from './touch'
 
-export default {
+export {
   Badge,
   ClickOutside,
   Ripple,
