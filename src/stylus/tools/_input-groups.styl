@@ -31,16 +31,13 @@ input-group($material)
         .input-group__prepend-icon
           color: $material.text.secondary
 
-      &:not(.input-group--disabled)
-        :not(.input-group--overflow)
-        :not(.input-group--segmented)
-        :not(.input-group-editable):hover
-          .input-group__details:before
-            background-color: $material.text.primary
+      &:not(.input-group--disabled):not(.input-group--overflow):not(.input-group--segmented):not(.input-group-editable):hover
+        .input-group__details:before
+          background-color: $material.text.primary
 
-          &.input-group--textarea:not(.input-group--full-width)
-            textarea
-              border-color: $material.text.primary
+        &.input-group--textarea:not(.input-group--full-width)
+          textarea
+            border-color: $material.text.primary
   
   .input-group__counter
     color: $material.text.secondary
