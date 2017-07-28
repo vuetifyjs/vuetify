@@ -31,7 +31,7 @@
 </p>
 <hr>
 <p align="center">
-  <strong>Support Vuetify.js's development with:</strong>
+  <strong>Support Vuetify.js' development with:</strong>
   <br>
   <a href="https://patreon.com/vuetify" target="_blank">
     Patreon
