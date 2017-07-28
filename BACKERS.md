@@ -9,6 +9,7 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Tibor Nagy
 - [Jaime Olmo](https://www.jaimeolmo.com)
 - Maxim Bogdanov
+- Michael Marti
 
 ### $10+
 
@@ -20,3 +21,4 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Chava Sobreyra
 - Dima Shmakov
 - Costa Huang
+- Jay Blanchard
