@@ -1,6 +1,6 @@
 import GenerateRouteLink from '~mixins/route-link'
 import Toggleable from '~mixins/toggleable'
-import { ripple } from '~directives'
+import { Ripple } from '~directives'
 
 export default {
   name: 'v-list-tile',
@@ -8,7 +8,7 @@ export default {
   mixins: [GenerateRouteLink, Toggleable],
 
   directives: {
-    ripple
+    Ripple
   },
 
   inheritAttrs: false,
