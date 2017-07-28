@@ -101,13 +101,16 @@ export default {
       this.scrollOffset = offset
     },
     end (e) {
+      this.onResize()
       const container = this.$refs.container
+      const scrollWidth = container.scrollWidth - this.$el.clientWidth / 2
       container.style.transition = null
-      if (this.scrollOffset < 0) {
+
+      if (this.scrollOffset < 0 || !this.isOverflowing) {
         this.scrollOffset = 0
-      } else if (this.scrollOffset >= container.scrollWidth) {
+      } else if (this.scrollOffset >= scrollWidth) {
         const lastItem = container.children[container.children.length - 1]
-        this.scrollOffset = container.scrollWidth - lastItem.clientWidth
+        this.scrollOffset = scrollWidth - lastItem.clientWidth
       }
     },
     scrollLeft () {
