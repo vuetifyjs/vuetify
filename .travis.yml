@@ -5,6 +5,7 @@ script:
   - yarn
   - npm run build
   - npm run test
+  - npm run lint
 cache:
   yarn: true
 branches:

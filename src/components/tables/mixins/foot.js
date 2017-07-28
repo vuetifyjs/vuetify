@@ -40,8 +40,10 @@ export default {
           },
           on: {
             input: (val) => {
-              this.computedPagination.rowsPerPage = val
-              this.computedPagination.page = 1
+              this.updatePagination({
+                page: 1,
+                rowsPerPage: val
+              })
             }
           }
         })

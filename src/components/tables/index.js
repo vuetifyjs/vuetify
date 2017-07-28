@@ -4,7 +4,7 @@ import {
 
 import VDataTable from './VDataTable'
 import VEditDialog from './VEditDialog'
-const VTableOverflow = createSimpleFunctional('table__overflow')
+export const VTableOverflow = createSimpleFunctional('table__overflow')
 
 export default {
   VDataTable,

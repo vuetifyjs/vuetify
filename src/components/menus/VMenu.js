@@ -6,7 +6,7 @@ import Utils from './mixins/utils'
 import Toggleable from '~mixins/toggleable'
 import Keyable from './mixins/keyable'
 
-import { clickOutside } from '~directives'
+import { ClickOutside } from '~directives'
 
 export default {
   name: 'v-menu',
@@ -20,6 +20,10 @@ export default {
     Utils,
     Toggleable
   ],
+
+  directives: {
+    ClickOutside
+  },
 
   data () {
     return {
