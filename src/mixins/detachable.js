@@ -7,6 +7,8 @@ export default {
 
   mounted () {
     this.$vuetify.load(() => {
+      if (this._isDestroyed) return
+
       const app = document.querySelector('[data-app]')
 
       if (!app) {

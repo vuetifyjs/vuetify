@@ -192,6 +192,8 @@ export default {
 
   mounted () {
     this.$vuetify.load(() => {
+      if (this._isDestroyed) return
+
       this.content = this.$refs.menu.$refs.content
     })
   },

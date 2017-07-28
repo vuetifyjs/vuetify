@@ -121,6 +121,8 @@ export default {
       this.itemOffset = index
     },
     onResize () {
+      if (this._isDestroyed) return
+
       const container = this.$refs.container
       this.isOverflowing = container.clientWidth < container.scrollWidth
     },
