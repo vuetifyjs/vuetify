@@ -22,6 +22,12 @@ export default {
         'expansion-panel__header': true,
         'expansion-panel__header--active': this.isActive
       }
+    },
+    containerClasses() {
+      return {
+        'expansion-panel__container': true,
+        'expansion-panel__container--active': this.isActive
+      }
     }
   },
 
@@ -75,6 +81,8 @@ export default {
     this.$slots.header && children.push(this.genHeader(h))
     children.push(h(VExpandTransition, [this.genBody(h)]))
 
-    return h('li', children)
+    return h('li', {
+      class: this.containerClasses
+    }, children)
   }
 }
