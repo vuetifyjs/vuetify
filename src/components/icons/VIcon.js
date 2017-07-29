@@ -18,33 +18,28 @@ export default {
   },
 
   render (h, { props, data, children = [] }) {
-    if (props.fa) console.warn('The v-icon prop \'fa\' will be deprecated in the next release. Use \'fa-\' prefix in icon name instead.')
-    if (props.mdi) console.warn('The v-icon prop \'mdi\' will be deprecated in the next release. Use \'mdi-\' prefix in icon name instead.')
-    const hasText = data.domProps && data.domProps.textContent
-    const hasHTML = data.domProps && data.domProps.innerHTML
+    if (props.fa || props.mdi) console.warn(`The v-icon prop 'fa' and 'mdi' will be deprecated in the next release. Use 'fa' or 'mdi' prefix in icon name instead.`)
     let iconName = ''
+    let iconType = 'material-icons'
 
     if (children.length) {
       iconName = children.pop().text
-    } else if (hasText) {
+    } else if (data.domProps && data.domProps.textContent) {
       iconName = data.domProps.textContent
       delete data.domProps.textContent
-    } else if (hasHTML) {
+    } else if (data.domProps && data.domProps.innerHTML) {
       iconName = data.domProps.innerHTML
       delete data.domProps.innerHTML
     }
 
     const thirdPartyIcon = iconName.indexOf('-') > -1
-    let iconType = thirdPartyIcon ? iconName.slice(0, iconName.indexOf('-')) : 'material-icons'
+    if (thirdPartyIcon) iconType = iconName.slice(0, iconName.indexOf('-'))
 
     // To keep things backwards compatible for now
     iconType = props.fa ? 'fa' : props.mdi ? 'mdi' : iconType
 
     data.staticClass = (`${iconType} icon ${data.staticClass || ''}`).trim()
     data.attrs = data.attrs || {}
-
-    if (props.dark) data.staticClass += ' theme--dark'
-    if (props.light) data.staticClass += ' theme--light'
 
     const classes = {
       'icon--large': props.large,
@@ -57,7 +52,9 @@ export default {
       'success--text': props.success,
       'info--text': props.info,
       'warning--text': props.warning,
-      'error--text': props.error
+      'error--text': props.error,
+      'theme--dark': props.dark,
+      'theme--light': props.light
     }
 
     const iconClasses = Object.keys(classes).filter(k => classes[k]).join(' ')
@@ -71,13 +68,9 @@ export default {
       else data.staticClass += ` ${comparison}-${iconName.split(' ').join('-')}`
     }
 
-    if (thirdPartyIcon) {
-      data.staticClass += ` ${iconName}`
-    }
-
-    !(thirdPartyIcon || props.fa || props.mdi) && children.push(iconName)
-
+    if (thirdPartyIcon) data.staticClass += ` ${iconName}`
     if (props.disabled) data.attrs.disabled = props.disabled
+    !(thirdPartyIcon || props.fa || props.mdi) && children.push(iconName)
 
     return h('i', data, children)
   }

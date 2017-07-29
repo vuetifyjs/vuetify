@@ -72,7 +72,10 @@ export default {
     },
 
     radius () {
-      return this.indeterminate && !this.button ? 20 : (this.calculatedSize - this.width) / 2
+      return this.indeterminate &&
+        !this.button
+          ? 20
+          : (this.calculatedSize - this.width) / 2
     },
 
     strokeDashArray () {

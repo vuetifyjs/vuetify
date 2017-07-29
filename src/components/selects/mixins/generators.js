@@ -38,7 +38,10 @@ export default {
         })
       }
 
-      const selections = this.isDirty && (!this.editable || this.editable && !this.focused) ? this.genSelections() : []
+      const selections = this.isDirty &&
+        (!this.editable || this.editable && !this.focused)
+          ? this.genSelections()
+          : []
       input && selections.push(input)
       const group = this.$createElement('div', selections)
 

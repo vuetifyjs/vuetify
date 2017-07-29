@@ -60,7 +60,9 @@ export default {
       }
     },
     showOverlay () {
-      return !this.permanent && this.isActive && (this.temporary || this.isMobile)
+      return !this.permanent &&
+        this.isActive &&
+        (this.temporary || this.isMobile)
     }
   },
 
@@ -96,9 +98,11 @@ export default {
       this.checkIfMobile()
       setTimeout(() => (this.isBooted = true), 0)
 
-      if (this.permanent) return (this.isActive = true)
+      if (this.permanent) this.isActive = true
       else if (this.isMobile) this.isActive = false
-      else if (!this.value && (this.persistent || this.temporary)) this.isActive = false
+      else if (!this.value &&
+        (this.persistent || this.temporary)
+      ) this.isActive = false
     },
     checkIfMobile () {
       this.isMobile = window.innerWidth < parseInt(this.mobileBreakPoint)
@@ -108,9 +112,13 @@ export default {
     },
     onResize () {
       clearTimeout(this.resizeTimeout)
-      
+
+      if (!this.enableResizeWatcher ||
+        this.permanent ||
+        this.temporary
+      ) return
+
       this.resizeTimeout = setTimeout(() => {
-        if (!this.enableResizeWatcher || this.permanent || this.temporary) return
         this.checkIfMobile()
         this.isActive = !this.isMobile
       }, 200)
@@ -120,7 +128,9 @@ export default {
       this.calculateTouchArea()
 
       if (Math.abs(e.touchendX - e.touchstartX) < 100) return
-      else if (!this.right && e.touchstartX <= this.touchArea.left) this.isActive = true
+      else if (!this.right &&
+        e.touchstartX <= this.touchArea.left
+      ) this.isActive = true
       else if (this.right && this.isActive) this.isActive = false
     },
     swipeLeft (e) {
@@ -128,7 +138,9 @@ export default {
       this.calculateTouchArea()
 
       if (Math.abs(e.touchendX - e.touchstartX) < 100) return
-      else if (this.right && e.touchstartX >= this.touchArea.right) this.isActive = true
+      else if (this.right &&
+        e.touchstartX >= this.touchArea.right
+      ) this.isActive = true
       else if (!this.right && this.isActive) this.isActive = false
     },
     calculateTouchArea () {

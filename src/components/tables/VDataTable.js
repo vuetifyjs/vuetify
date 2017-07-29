@@ -86,7 +86,9 @@ export default {
       type: Function,
       default: (items, search, filter) => {
         search = search.toString().toLowerCase()
-        return items.filter(i => Object.keys(i).some(j => filter(i[j], search)))
+        return items.filter(i => (
+          Object.keys(i).some(j => filter(i[j], search))
+        ))
       }
     },
     customSort: {
@@ -105,7 +107,8 @@ export default {
           if (!isNaN(sortA) && !isNaN(sortB)) return (sortA - sortB)
           else if (sortA == null && sortB == null) return 0;
 
-          [sortA, sortB] = [sortA, sortB].map(s => (s || '').toLocaleLowerCase())
+          [sortA, sortB] =
+            [sortA, sortB].map(s => (s || '').toLocaleLowerCase())
           if (sortA > sortB) return 1
           if (sortA < sortB) return -1
 
@@ -155,36 +158,51 @@ export default {
       return this.hasSelectAll && this.someItems && !this.everyItem
     },
     everyItem () {
-      return this.filteredItems.length && this.filteredItems.every(i => this.isSelected(i))
+      return this.filteredItems.length &&
+        this.filteredItems.every(i => this.isSelected(i))
     },
     someItems () {
       return this.filteredItems.some(i => this.isSelected(i))
     },
     getPage () {
-      return this.computedPagination.rowsPerPage === Object(this.computedPagination.rowsPerPage)
-        ? this.computedPagination.rowsPerPage.value
-        : this.computedPagination.rowsPerPage
+      const { rowsPerPage } = this.computedPagination
+
+      return rowsPerPage === Object(rowsPerPage)
+        ? rowsPerPage.value
+        : rowsPerPage
     },
     pageStart () {
-      return this.getPage === -1 ? 0 : (this.computedPagination.page - 1) * this.getPage
+      return this.getPage === -1
+        ? 0
+        : (this.computedPagination.page - 1) * this.getPage
     },
     pageStop () {
-      return this.getPage === -1 ? this.itemsLength : this.computedPagination.page * this.getPage
+      return this.getPage === -1
+        ? this.itemsLength
+        : this.computedPagination.page * this.getPage
     },
     filteredItems () {
       if (this.totalItems) return this.items
 
       let items = this.items.slice()
-      const hasSearch = typeof this.search !== 'undefined' && this.search !== null
+      const hasSearch = typeof this.search !== 'undefined' &&
+        this.search !== null
 
       if (hasSearch) {
         items = this.customFilter(items, this.search, this.filter)
         this.searchLength = items.length
       }
 
-      items = this.customSort(items, this.computedPagination.sortBy, this.computedPagination.descending)
+      items = this.customSort(
+        items,
+        this.computedPagination.sortBy,
+        this.computedPagination.descending
+      )
 
-      return this.hideActions && !this.pagination ? items : items.slice(this.pageStart, this.pageStop)
+      return this.hideActions &&
+        !this.pagination
+          ? items
+          : items.slice(this.pageStart, this.pageStop)
     },
     selected () {
       const selected = {}
@@ -210,18 +228,25 @@ export default {
 
   methods: {
     updatePagination (val) {
-      if (this.pagination) return this.$emit('update:pagination', Object.assign({}, this.pagination, val))
-      else (this.defaultPagination = Object.assign({}, this.defaultPagination, val))
+      const pagination = this.pagination || this.defaultPagination
+      const updatedPagination = Object.assign({}, pagination, val)
+
+      if (this.pagination) {
+        this.$emit('update:pagination', updatedPagination)
+      } else {
+        this.defaultPagination = updatedPagination
+      }
     },
     isSelected (item) {
       return this.selected[item[this.selectedKey]]
     },
     sort (index) {
-      if (this.computedPagination.sortBy === null) {
+      const { sortBy, descending } = this.computedPagination
+      if (sortBy === null) {
         this.updatePagination({ sortBy: index, descending: false })
-      } else if (this.computedPagination.sortBy === index && !this.computedPagination.descending) {
+      } else if (sortBy === index && !descending) {
         this.updatePagination({ descending: true })
-      } else if (this.computedPagination.sortBy !== index) {
+      } else if (sortBy !== index) {
         this.updatePagination({ sortBy: index, descending: false })
       } else {
         this.updatePagination({ sortBy: null, descending: null })
@@ -232,22 +257,34 @@ export default {
     },
     toggle (value) {
       const selected = Object.assign({}, this.selected)
-      this.filteredItems.forEach(i => selected[i[this.selectedKey]] = value)
+      this.filteredItems.forEach(i => (
+        selected[i[this.selectedKey]] = value)
+      )
 
-      this.$emit('input', this.items.filter(i => selected[i[this.selectedKey]]))
+      this.$emit('input', this.items.filter(i => (
+        selected[i[this.selectedKey]]))
+      )
     }
   },
 
   created () {
-    const firstSortable = this.headers.find(h => !('sortable' in h) || h.sortable)
-    this.defaultPagination.sortBy = firstSortable ? firstSortable.value : null
+    const firstSortable = this.headers.find(h => (
+      !('sortable' in h) || h.sortable)
+    )
+
+    this.defaultPagination.sortBy = firstSortable
+      ? firstSortable.value
+      : null
+
     if (!this.rowsPerPageItems.length) {
       console.warn('The prop \'rows-per-page-items\' in v-data-table can not be empty.')
     } else {
       this.defaultPagination.rowsPerPage = this.rowsPerPageItems[0]
     }
 
-    this.updatePagination(Object.assign({}, this.defaultPagination, this.pagination))
+    this.updatePagination(
+      Object.assign({}, this.defaultPagination, this.pagination)
+    )
   },
 
   render (h) {
