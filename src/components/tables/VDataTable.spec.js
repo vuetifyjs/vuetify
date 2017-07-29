@@ -10,9 +10,9 @@ test('VDataTable.js', ({ mount }) => {
     const wrapper = mount(VDataTable, {
       propsData: {
         pagination,
-        headers:[
-          { text: 'Other', value:'other' },
-          { text: 'Column', value:'column' }
+        headers: [
+          { text: 'Other', value: 'other' },
+          { text: 'Column', value: 'column' }
         ],
         items: [
           { other: 1, column: 'foo' },
