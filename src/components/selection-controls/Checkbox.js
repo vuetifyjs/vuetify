@@ -12,7 +12,11 @@ export default {
   },
 
   props: {
-    indeterminate: Boolean
+    indeterminate: Boolean,
+    ripple: {
+      type: [Boolean, Object],
+      default: true
+    }
   },
 
   computed: {
@@ -51,7 +55,7 @@ export default {
       }, this.$listeners),
       directives: [{
         name: 'ripple',
-        value: { center: true }
+        value: this.ripple
       }]
     })
 
