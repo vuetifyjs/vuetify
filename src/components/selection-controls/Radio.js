@@ -12,7 +12,11 @@ export default {
   },
 
   props: {
-    inputValue: [String, Number]
+    inputValue: [String, Number],
+    ripple: {
+      type: [Boolean, Object],
+      default: {center: true}
+    }
   },
 
   computed: {
@@ -61,7 +65,7 @@ export default {
       directives: [
         {
           name: 'ripple',
-          value: { center: true }
+          value: this.ripple
         }
       ]
     })
