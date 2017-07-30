@@ -27,7 +27,7 @@ export default {
     indeterminate: Boolean,
     ripple: {
       type: [Boolean, Object],
-      default: true
+      default: () => ({ center: true })
     }
   },
 
@@ -60,17 +60,17 @@ export default {
       }, this.icon)
     ])
 
-    const rippleEl = h('div', {
+    const ripple = h('div', {
       'class': 'input-group--selection-controls__ripple',
       on: Object.assign({}, {
         click: this.toggle
       }, this.$listeners),
       directives: [{
         name: 'ripple',
-        value: this.ripple ? { center: true } : false
+        value: this.ripple
       }]
     })
 
-    return this.genInputGroup([transition, rippleEl])
+    return this.genInputGroup([transition, ripple])
   }
 }
