@@ -10,7 +10,10 @@ export default {
   },
 
   props: {
-    error: Boolean,
+    error: {
+      type: Boolean,
+      default: true
+    },
     errorMessages: {
       type: [String, Array],
       default: () => []
@@ -18,17 +21,20 @@ export default {
     rules: {
       type: Array,
       default: () => []
-    }
+    },
+    validateOnBlur: Boolean
   },
 
   computed: {
     validations () {
-      if (!this.shouldValidate) {
-        return []
-      } else if (!Array.isArray(this.errorMessages)) {
+      if (!Array.isArray(this.errorMessages)) {
         return [this.errorMessages]
+      } else if (this.errorMessages.length > 0) {
+        return this.errorMessages
+      } else if (this.shouldValidate) {
+        return this.errorBucket
       } else {
-        return this.errorMessages.concat(this.errorBucket)
+        return []
       }
     },
     hasError () {
@@ -45,7 +51,7 @@ export default {
       // mark it with hasInput
       if (!!val && !this.hasInput) this.hasInput = true
 
-      if (this.hasInput) this.shouldValidate = true
+      if (this.hasInput && !this.validateOnBlur) this.shouldValidate = true
     },
     focused (val) {
       // If we're not focused, and it's the first time
@@ -53,6 +59,8 @@ export default {
       if (!val && !this.hasFocused) {
         this.hasFocused = true
         this.shouldValidate = true
+
+        this.$emit('update:error', this.errorBucket.length > 0)
       }
     },
     hasError (val) {

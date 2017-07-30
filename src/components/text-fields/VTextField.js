@@ -17,10 +17,8 @@ export default {
   props: {
     autofocus: Boolean,
     autoGrow: Boolean,
-    counter: Boolean,
+    counter: [Number, String],
     fullWidth: Boolean,
-    max: [Number, String],
-    min: [Number, String],
     multiLine: Boolean,
     placeholder: String,
     prefix: String,
@@ -50,29 +48,18 @@ export default {
     },
     hasError () {
       return this.validations.length > 0 ||
-        this.errorMessages.length > 0 ||
-        !this.counterIsValid() ||
-        !this.validateIsValid()
+        this.errorMessages.length > 0
     },
     count () {
       let inputLength
       if (this.inputValue) inputLength = this.inputValue.toString().length
       else inputLength = 0
-      let min = inputLength
 
-      if (this.counterMin !== 0 && inputLength < this.counterMin) {
-        min = this.counterMin
-      }
-
-      return `${min} / ${this.counterMax}`
+      return `${inputLength} / ${this.counterLength}`
     },
-    counterMin () {
-      const parsedMin = parseInt(this.min, 10)
-      return isNaN(parsedMin) ? 0 : parsedMin
-    },
-    counterMax () {
-      const parsedMax = parseInt(this.max, 10)
-      return isNaN(parsedMax) ? 25 : parsedMax
+    counterLength () {
+      const parsedLength = parseInt(this.counter, 10)
+      return isNaN(parsedLength) ? 25 : parsedLength
     },
     inputValue: {
       get () {
@@ -97,7 +84,7 @@ export default {
     },
     value () {
       this.lazyValue = this.value
-      this.validate()
+      !this.validateOnBlur && this.validate()
       this.multiLine && this.autoGrow && this.calculateInputHeight()
     }
   },
@@ -120,8 +107,10 @@ export default {
       this.multiLine && this.autoGrow && this.calculateInputHeight()
     },
     blur (e) {
-      this.validate()
-      this.$nextTick(() => (this.focused = false))
+      this.$nextTick(() => {
+        this.focused = false
+        this.validate()
+      })
       this.$emit('blur', e)
     },
     focus (e) {
@@ -133,7 +122,7 @@ export default {
       return this.$createElement('div', {
         'class': {
           'input-group__counter': true,
-          'input-group__counter--error': !this.counterIsValid()
+          'input-group__counter--error': this.hasError
         }
       }, this.count)
     },
@@ -165,11 +154,6 @@ export default {
 
       if (this.placeholder) data.domProps.placeholder = this.placeholder
 
-      if (!this.counter) {
-        if (![undefined, null].includes(this.max)) data.attrs.max = this.max
-        if (![undefined, null].includes(this.min)) data.attrs.min = this.min
-      }
-
       if (this.multiLine) {
         data.domProps.rows = this.rows
       } else {
@@ -187,20 +171,6 @@ export default {
       return this.$createElement('span', {
         'class': `input-group--text-field__${type}`
       }, this[type])
-    },
-    counterIsValid: function counterIsValid () {
-      const val = (this.inputValue && this.inputValue.toString() || '')
-
-      return (!this.counter ||
-        (val.length >= this.counterMin && val.length <= this.counterMax)
-      )
-    },
-    validateIsValid () {
-      return (!this.required ||
-        (this.required &&
-          this.isDirty) ||
-        !this.hasFocused ||
-        (this.hasFocused && this.focused))
     }
   },
 

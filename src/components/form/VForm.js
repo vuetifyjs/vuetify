@@ -6,7 +6,7 @@ export default {
   data () {
     return {
       inputs: 0,
-      errors: {}
+      errorBag: {}
     }
   },
 
@@ -18,13 +18,13 @@ export default {
   },
 
   watch: {
-    errors: {
+    errorBag: {
       handler () {
-        const keys = Object.keys(this.errors)
+        const keys = Object.keys(this.errorBag)
         if (keys.length < this.inputs) return false
 
         const errors = keys.reduce((errors, key) => {
-          errors = errors || this.errors[key]
+          errors = errors || this.errorBag[key]
           return errors
         }, false)
 
@@ -57,8 +57,11 @@ export default {
         child.$watch('shouldValidate', (val) => {
           if (!val) return
 
+          // Only watch if we're not already doing it
+          if (this.errorBag.hasOwnProperty(child._uid)) return
+
           child.$watch('valid', (val) => {
-            this.$set(this.errors, child._uid, !val)
+            this.$set(this.errorBag, child._uid, !val)
           }, { immediate: true })
         })
       })

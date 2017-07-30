@@ -74,7 +74,7 @@ export default {
       ) {
         messages = [this.genHint()]
       } else if (this.validations.length) {
-        messages = this.validations.map(i => this.genError(i))
+        messages = [this.genError(this.validations[0])]
       }
 
       return this.$createElement('transition-group', {
@@ -173,7 +173,10 @@ export default {
       )
 
       detailsChildren.push(this.genMessages())
-      this.counter && detailsChildren.push(this.genCounter())
+
+      if (typeof this.counter !== 'undefined') {
+        detailsChildren.push(this.genCounter())
+      }
 
       children.push(
         this.$createElement('div', {
