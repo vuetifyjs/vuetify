@@ -31,6 +31,12 @@ export default {
       }
     }
   },
+  props: {
+    ripple: {
+      type: [Boolean, Object],
+      default: {center: true}
+    }
+  },
 
   render (h) {
     const ripple = h('div', {
@@ -41,7 +47,7 @@ export default {
       directives: [
         {
           name: 'ripple',
-          value: { center: true }
+          value: this.ripple
         }
       ]
     })
