@@ -9,7 +9,7 @@
   "homepage": "http://vuetifyjs.com",
   "main": "dist/vuetify.js",
   "scripts": {
-    "dev": "cross-env TARGET=dev webpack --config build/config.js --progress --hide-modules --watch",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.config.js --open --hot",
     "build": "rimraf dist && cross-env NODE_ENV=production node build/build.js --progress --hide-modules",
     "test": "cross-env NODE_ENV=test jest --no-cache --coverage --verbose",
     "test-no-coverage": "cross-env NODE_ENV=test jest --no-cache --verbose",
@@ -85,6 +85,7 @@
     "vue-template-compiler": "^2.4.1",
     "webpack": "^3.2.0",
     "webpack-bundle-size-analyzer": "^2.7.0",
+    "webpack-dev-server": "^2.6.1",
     "webpack-merge": "^0.17.0"
   },
   "dependencies": {},
