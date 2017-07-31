@@ -81,13 +81,25 @@ export default {
       ])]
     },
     genTFoot () {
-      return this.$createElement('tfoot', [
-        this.genTR([
+      const children = []
+
+      if (this.$slots.footer) {
+        const footer = this.$slots.footer
+        const needsTableRow = footer.length && footer[0].tag === 'td'
+        const row = !needsTableRow ? footer : this.genTR(this.$slots.footer)
+
+        children.push(row)
+      }
+
+      if (!this.hideActions) {
+        children.push(this.genTR([
           this.$createElement('td', {
             attrs: { colspan: '100%' }
           }, this.genActions())
-        ])
-      ])
+        ]))
+      }
+
+      return this.$createElement('tfoot', [children])
     }
   }
 }
