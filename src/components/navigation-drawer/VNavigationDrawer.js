@@ -12,7 +12,6 @@ export default {
       isActive: this.value,
       isBooted: false,
       isMobile: false,
-      mobileBreakPoint: 1024,
       touchArea: {
         left: 0,
         right: 0
@@ -28,6 +27,10 @@ export default {
     height: String,
     floating: Boolean,
     miniVariant: Boolean,
+    mobileBreakPoint: {
+      type: Number,
+      default: 1024
+    },
     permanent: Boolean,
     persistent: Boolean,
     right: Boolean,
