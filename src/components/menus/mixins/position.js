@@ -82,13 +82,13 @@ export default {
     calcXOverflow (left) {
       const hasWindow = typeof window !== 'undefined'
       const innerWidth = hasWindow ? window.innerWidth : 0
-      const totalWidth = left + maxWidth
-      const availableWidth = totalWidth - innerWidth
       const maxWidth = Math.max(
         this.dimensions.content.width,
         this.calculatedMinWidth,
         parseInt(this.maxWidth) || 0
       )
+      const totalWidth = left + maxWidth
+      const availableWidth = totalWidth - innerWidth
 
       if ((!this.left || this.right) && availableWidth > 0) {
         left = (

@@ -1,5 +1,6 @@
 ﻿require('./stylus/main.styl')
 
+import { devDependencies } from '../package.json'
 import Components from './components'
 import * as Directives from './directives'
 import Load from './util/load'
@@ -20,8 +21,9 @@ function plugin (Vue) {
 }
 
 function checkVueVersion () {
-  if (!semver.satisfies(window.Vue.version, '>=2.4.0')) {
-    console.error('Vuetify requires Vue version >= 2.4.0')
+  const vueDep = devDependencies.vue.replace('^', '')
+  if (!semver.satisfies(window.Vue.version, `>=${vueDep}`)) {
+    console.warn(`Vuetify requires Vue version >= ${vueDep}`)
   }
 }
 
