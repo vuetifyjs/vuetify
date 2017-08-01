@@ -99,7 +99,7 @@ export default {
         ]))
       }
 
-      if (!children.length) return null     
+      if (!children.length) return null
       return this.$createElement('tfoot', children)
     }
   }
