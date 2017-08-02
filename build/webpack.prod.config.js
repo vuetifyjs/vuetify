@@ -2,6 +2,9 @@ const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
+// Helpers
+const resolve = file => require('path').resolve(__dirname, file)
+
 module.exports = merge(baseWebpackConfig, {
   devtool: '#source-map',
   entry: {
