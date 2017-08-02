@@ -1,6 +1,15 @@
 
 export default {
   methods: {
+    genYearIcon () {
+      return this.yearIcon
+        ? this.$createElement('v-icon', {
+          props: {
+            dark: true
+          }
+        }, this.yearIcon)
+        : null
+    },
     genTitle () {
       let date = new Date(this.year, this.month, this.day)
       date = date.toLocaleString(this.locale, this.titleDateFormat)
@@ -36,7 +45,10 @@ export default {
               this.isSelected = true
             }
           }
-        }, this.year),
+        }, [
+          this.year,
+          this.genYearIcon()
+        ]),
         this.$createElement('div', {
           'class': {
             'picker--date__title-date': true,

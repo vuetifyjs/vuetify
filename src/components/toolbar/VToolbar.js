@@ -5,6 +5,10 @@ export default {
 
   mixins: [Themeable],
 
+  data: () => ({
+    isExtended: false
+  }),
+
   props: {
     absolute: Boolean,
     card: Boolean,
@@ -31,13 +35,11 @@ export default {
         'theme--dark': this.dark,
         'theme--light': this.light
       }
-    },
-    isExtended () {
-      return this.$slots.extension || this.extended
     }
   },
 
   render (h) {
+    this.isExtended = this.extended || !!this.$slots.extension
     const children = []
     const data = {
       'class': this.classes,

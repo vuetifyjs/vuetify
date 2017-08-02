@@ -49,7 +49,9 @@ export default {
   },
 
   methods: {
-    click () {
+    click (e) {
+      e.stopPropagation()
+
       if (this.editable) {
         this.stepClick(this.step)
       }
@@ -67,9 +69,7 @@ export default {
         name: 'ripple',
         value: this.editable
       }],
-      on: {
-        click: this.click
-      }
+      on: { click: this.click }
     }
     let stepContent
 
@@ -86,7 +86,7 @@ export default {
     }
 
     const step = h('span', { 'class': 'stepper__step__step' }, stepContent)
-    const label = h('div', { 'class': 'stepper__label' }, [this.$slots.default])
+    const label = h('div', { 'class': 'stepper__label' }, this.$slots.default)
 
     return h('div', data, [step, label])
   }

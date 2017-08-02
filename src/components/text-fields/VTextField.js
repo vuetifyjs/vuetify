@@ -9,7 +9,6 @@ export default {
 
   data () {
     return {
-
       inputHeight: null
     }
   },
@@ -28,6 +27,7 @@ export default {
     singleLine: Boolean,
     solo: Boolean,
     suffix: String,
+    textarea: Boolean,
     type: {
       type: String,
       default: 'text'
@@ -43,7 +43,8 @@ export default {
         'input-group--multi-line': this.multiLine,
         'input-group--full-width': this.fullWidth,
         'input-group--prefix': this.prefix,
-        'input-group--suffix': this.suffix
+        'input-group--suffix': this.suffix,
+        'input-group--textarea': this.textarea
       }
     },
     hasError () {
@@ -74,7 +75,8 @@ export default {
     isDirty () {
       return this.lazyValue !== null &&
         typeof this.lazyValue !== 'undefined' &&
-        this.lazyValue.toString().length > 0
+        this.lazyValue.toString().length > 0 ||
+        this.placeholder
     }
   },
 
@@ -98,9 +100,14 @@ export default {
 
   methods: {
     calculateInputHeight () {
-      const height = this.$refs.input.scrollHeight
-      const minHeight = this.rows * 24
-      this.inputHeight = height < minHeight ? minHeight : height
+      this.inputHeight = null
+
+      this.$nextTick(() => {
+        const height = this.$refs.input.scrollHeight
+        const minHeight = this.rows * 24
+        const inputHeight = height < minHeight ? minHeight : height
+        this.inputHeight = inputHeight
+      })
     },
     onInput (e) {
       this.inputValue = e.target.value
@@ -127,7 +134,7 @@ export default {
       }, this.count)
     },
     genInput () {
-      const tag = this.multiLine ? 'textarea' : 'input'
+      const tag = this.multiLine || this.textarea ? 'textarea' : 'input'
 
       const data = {
         style: {
@@ -154,10 +161,10 @@ export default {
 
       if (this.placeholder) data.domProps.placeholder = this.placeholder
 
-      if (this.multiLine) {
-        data.domProps.rows = this.rows
-      } else {
+      if (!this.textarea && !this.multiLine) {
         data.domProps.type = this.type
+      } else {
+        data.domProps.rows = this.rows
       }
 
       const children = [this.$createElement(tag, data)]

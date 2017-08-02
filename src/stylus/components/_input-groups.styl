@@ -16,8 +16,17 @@
     font-size $input-font-size
     line-height: $input-font-size * 2
     height: $input-height
-    max-width: 80%
+    max-width: 90%
+    min-width: 0
+    overflow: hidden
+    pointer-events: none
+    text-align: left
+    text-overflow: ellipsis
+    transform: translate3d(0, 0, 0)
+    transform-origin: top left
     transition: .4s $transition.fast-in-fast-out
+    white-space: nowrap
+    width: 100%
     z-index: 0
 
 /** Blocks */
@@ -84,7 +93,7 @@
       border-color: $theme.error
     
     label
-      animation: shake 0.82s $transition.swing
+      animation: shake .6s $transition.swing
 
     label,
     .input-group__input .icon
@@ -153,6 +162,8 @@
 
 /** Types */
 .input-group
-  &--overflow, &--segmented, &--editable
+  &--overflow,
+  &--segmented,
+  &--editable
     &.input-group--active
       background-color: #fff

@@ -76,9 +76,17 @@ export default {
       type: String,
       default: 'value'
     },
+    itemDisabled: {
+      type: String,
+      default: 'disabled'
+    },
     maxHeight: {
       type: [Number, String],
       default: 300
+    },
+    minWidth: {
+      type: [Boolean, Number, String],
+      default: false
     },
     multiple: Boolean,
     multiLine: Boolean,
@@ -184,6 +192,8 @@ export default {
 
   mounted () {
     this.$vuetify.load(() => {
+      if (this._isDestroyed) return
+
       this.content = this.$refs.menu.$refs.content
     })
   },

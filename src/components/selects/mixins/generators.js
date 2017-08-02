@@ -1,3 +1,5 @@
+import { getObjectValueByPath } from '~util/helpers'
+
 export default {
   methods: {
     genMenu () {
@@ -18,6 +20,8 @@ export default {
         on: { input: val => (this.isActive = val) }
       }
 
+      this.minWidth && (data.props.minWidth = this.minWidth)
+
       return this.$createElement('v-menu', data, [this.genList()])
     },
     genSelectionsAndSearch () {
@@ -34,7 +38,10 @@ export default {
         })
       }
 
-      const selections = this.isDirty && (!this.editable || this.editable && !this.focused) ? this.genSelections() : []
+      const selections = this.isDirty &&
+        (!this.editable || this.editable && !this.focused)
+          ? this.genSelections()
+          : []
       input && selections.push(input)
       const group = this.$createElement('div', selections)
 
@@ -111,6 +118,11 @@ export default {
     },
     genTile (item, disabled) {
       const active = this.selectedItems.indexOf(item) !== -1
+
+      if (typeof disabled === 'undefined') {
+        disabled = getObjectValueByPath(item, this.itemDisabled)
+      }
+
       const data = {
         on: { click: e => this.selectItem(item) },
         props: {
@@ -118,6 +130,10 @@ export default {
           ripple: true,
           value: active
         }
+      }
+
+      if (disabled) {
+        data.props.disabled = disabled
       }
 
       if (this.$scopedSlots.item) {

@@ -25,7 +25,9 @@ export default {
     classes () {
       return {
         'btn-toggle': true,
-        'btn-toggle--selected': this.inputValue && (!this.multiple || this.inputValue.length)
+        'btn-toggle--selected': this.inputValue && (
+          !this.multiple || this.inputValue.length
+        )
       }
     }
   },
@@ -42,7 +44,10 @@ export default {
     updateValue (item) {
       if (!this.multiple) {
         if (this.mandatory && this.inputValue === item.value) return
-        return this.$emit('change', this.inputValue === item.value ? null : item.value)
+        return this.$emit(
+          'change',
+          this.inputValue === item.value ? null : item.value
+        )
       }
 
       const items = this.inputValue.slice()
@@ -79,7 +84,9 @@ export default {
         attrs: {
           'data-selected': this.isSelected(item),
           'data-index': index,
-          'data-only-child': this.isSelected(item) && (!this.multiple || this.inputValue.length === 1)
+          'data-only-child': this.isSelected(item) && (
+            !this.multiple || this.inputValue.length === 1
+          )
         }
       }, children)
     })

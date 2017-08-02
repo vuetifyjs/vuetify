@@ -10,10 +10,7 @@ export default {
       type: [String, Number],
       default: 500
     },
-    src: {
-      type: String,
-      required: true
-    }
+    src: String
   },
 
   computed: {
@@ -27,6 +24,8 @@ export default {
 
   methods: {
     init () {
+      if (!this.$refs.img) return
+
       if (this.$refs.img.complete) {
         this.translate()
         this.listeners()

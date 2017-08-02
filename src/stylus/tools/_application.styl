@@ -13,6 +13,9 @@ application($material)
 
   .btn
     button($material)
+    
+  .btn-toggle .btn
+    button-toggle($material)
 
   .footer
     background-color: $material.app-bar
@@ -47,6 +50,9 @@ application($material)
 
   .stepper
     stepper($material)
+    
+  .subheader
+    subheader($material)
 
 text($main, $alt)
   &.card
@@ -63,6 +69,9 @@ text($main, $alt)
 
   &.btn
     button($main)
+    
+  &.btn-toggle .btn
+    button-toggle($main)
 
   &.icon
     icon($main)
@@ -91,3 +100,6 @@ text($main, $alt)
 
   &.stepper
     stepper($main)
+
+  &.subheader
+    subheader($main)

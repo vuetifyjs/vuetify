@@ -35,12 +35,15 @@ export default {
             items: this.rowsPerPageItems,
             value: this.computedPagination.rowsPerPage,
             hideDetails: true,
-            auto: true
+            auto: true,
+            minWidth: '75px'
           },
           on: {
             input: (val) => {
-              this.computedPagination.rowsPerPage = val
-              this.computedPagination.page = 1
+              this.updatePagination({
+                page: 1,
+                rowsPerPage: val
+              })
             }
           }
         })

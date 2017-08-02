@@ -8,7 +8,7 @@
   <a href="https://www.npmjs.com/package/vuetify"><img src="https://img.shields.io/npm/dm/vuetify.svg" alt="Downloads"></a>
   <a href="https://www.npmjs.com/package/vuetify"><img src="https://img.shields.io/npm/v/vuetify.svg" alt="Version"></a>
   <a href="https://www.npmjs.com/package/vuetify"><img src="https://img.shields.io/npm/l/vuetify.svg" alt="License"></a>
-  <a href="https://gitter.im/vuetifyjs"><img src="https://img.shields.io/gitter/room/vuetifyjs/home.svg" alt="Gitter Chat"></a>
+  <a href="https://chat.vuetifyjs.com"><img src="https://img.shields.io/badge/chat-on%20discord-7289da.svg" alt="Chat"></a>
 </p>
 <p>Vuetify.js is a semantic component framework for Vue.js 2. It aims to provide clean, semantic and reusable components that make building your application a breeze. Vuetify.js uses Google's <strong><a href="https://material.io/" target="_blank">Material Design</a></strong> design pattern, taking cues from other popular frameworks such as <a href="http://materializecss.com/" target="_blank">Materialize.css</a>, <a href="https://getmdl.io/" target="_blank">Material Design Lite</a>, <a href="http://semantic-ui.com/" target="_blank">Semantic UI</a> and <a href="https://v4-alpha.getbootstrap.com/" target="_blank">Bootstrap 4</a></p>
 <p>Build <i>amazing</i> applications with the power of Vue and Material Design with a massive library of beautifully crafted components. Built for speed, Vuetify components feature an easy-to-remember semantic design that shifts remembering complex classes and markup, to type-as-you speak properties that have simple and clear names.</p
@@ -109,7 +109,7 @@ Keep in mind, you will need to ensure your webpack config contains a css-loader.
 <a href="https://vuetifyjs.com/vuetify/frequently-asked-questions" target="_blank">Frequently asked questions</a>
 
 ## Support and Questions
-Ask your support questions on the vuetifyjs [gitter](https://gitter.im/vuetifyjs/Lobby/).
+Ask your support questions on the vuetifyjs [discord](https://chat.vuetifyjs.com).
 
 ## Info
 Codepen starter [Vuetify Template](http://codepen.io/johnjleider/pen/bgJOrX)

@@ -52,7 +52,8 @@ export default {
     firstDayOfWeek: {
       type: [String, Number],
       default: 0
-    }
+    },
+    yearIcon: String
   },
 
   computed: {
