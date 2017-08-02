@@ -3,6 +3,7 @@ import Body from './mixins/body'
 import Foot from './mixins/foot'
 import Progress from './mixins/progress'
 import Filterable from '~mixins/filterable'
+import Themeable from '~mixins/themeable'
 
 import VBtn from '~components/buttons/VBtn'
 import VIcon from '~components/icons/VIcon'
@@ -17,7 +18,7 @@ import {
 export default {
   name: 'v-datatable',
 
-  mixins: [Head, Body, Filterable, Foot, Progress],
+  mixins: [Head, Body, Filterable, Foot, Progress, Themeable],
 
   components: {
     VBtn,
@@ -144,6 +145,14 @@ export default {
   },
 
   computed: {
+    classes () {
+      return {
+        'datatable table': true,
+        'datatable--select-all': this.selectAll !== false,
+        'theme--dark': this.dark,
+        'theme--light': this.light
+      }
+    },
     computedPagination () {
       return this.pagination || this.defaultPagination
     },
@@ -290,10 +299,7 @@ export default {
   render (h) {
     return h('v-table-overflow', {}, [
       h('table', {
-        'class': {
-          'datatable table': true,
-          'datatable--select-all': this.selectAll !== false
-        }
+        'class': this.classes
       }, [
         this.genTHead(),
         this.genTProgress(),
