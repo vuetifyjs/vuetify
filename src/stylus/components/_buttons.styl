@@ -134,6 +134,8 @@
           &:first-of-type
             opacity: 0
             transform: rotate(45deg)
+            left: 'calc(50% - %s)' % (24 / 2)
+            top: 'calc(50% - %s)' % (24 / 2)
 
           &:last-of-type
             opacity: 1
@@ -151,6 +153,10 @@
         font-size: $button-floating-small-icon-width
         height: $button-floating-small-icon-width
         width: $button-floating-small-icon-width
+        
+      &.btn--floating .icon
+        left: 'calc(50% - %s)' % ($button-floating-small-icon-width / 2)
+        top: 'calc(50% - %s)' % ($button-floating-small-icon-width / 2)
 
 
     &.btn--large
@@ -161,6 +167,10 @@
         font-size: $button-floating-large-icon-width
         height: $button-floating-large-icon-width
         width: $button-floating-large-icon-width
+        
+      &.btn--floating .icon
+        left: 'calc(50% - %s)' % ($button-floating-large-icon-width / 2)
+        top: 'calc(50% - %s)' % ($button-floating-large-icon-width / 2)
 
   &--reverse
     .btn__content
