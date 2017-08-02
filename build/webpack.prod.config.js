@@ -1,18 +1,15 @@
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.config')
-const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
-
-// Helpers
-const resolve = file => require('path').resolve(__dirname, file)
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = merge(baseWebpackConfig, {
-  devtool: '#cheap-module-eval-source-map',
+  devtool: '#source-map',
   entry: {
-    app: './dev/index.js'
+    app: './src/index.js'
   },
   output: {
-    path: resolve('../dev'),
-    publicPath: '/dev/',
+    path: resolve('../dist'),
+    publicPath: '/dist/',
     library: 'Vuetify'
   },
   module: {
@@ -30,15 +27,17 @@ module.exports = merge(baseWebpackConfig, {
       },
       {
         test: /\.styl$/,
-        loaders: ['css-loader', 'postcss-loader', 'stylus-loader'],
+        use: ExtractTextPlugin.extract({
+          use: ['css-loader', 'postcss-loader', 'stylus-loader']
+        }),
         exclude: /node_modules/
       }
     ]
   },
   performance: {
-    hints: 'warning'
+    hints: false
   },
-  devServer: {
-    contentBase: resolve('../dev')
-  }
+  plugins: [
+    new ExtractTextPlugin('vuetify.min.css')
+  ]
 })
