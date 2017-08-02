@@ -8,7 +8,10 @@ export default {
     nuxt: Boolean,
     replace: Boolean,
     router: Boolean,
-    ripple: Boolean,
+    ripple: {
+      type: Boolean,
+      default: true
+    },
     tag: String
   },
 

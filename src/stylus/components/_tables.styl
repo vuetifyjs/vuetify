@@ -36,7 +36,7 @@ table.table
 
       > div
         width: 100%
-        
+
     &:last-of-type
       border-bottom: 1px solid rgba($material-theme.fg-color, $material-theme.divider-percent)
 
@@ -73,6 +73,13 @@ table.table
         left: 50%
         transform: translate3d(-50%, -50%, 0)
   tfoot
+    tr:not(:last-child)
+      height: 48px
+
+      &:not(:only-child)
+        td
+          padding: 0 24px
+
     tr
       height: 56px
       border-top: 1px solid rgba($material-theme.fg-color, $material-theme.divider-percent)

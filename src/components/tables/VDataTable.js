@@ -298,7 +298,7 @@ export default {
         this.genTHead(),
         this.genTProgress(),
         this.genTBody(),
-        this.hideActions ? null : this.genTFoot()
+        this.genTFoot()
       ])
     ])
   }
