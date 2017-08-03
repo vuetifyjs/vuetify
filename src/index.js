@@ -21,9 +21,9 @@ function plugin (Vue) {
 }
 
 function checkVueVersion () {
-  const vueDep = devDependencies.vue.replace('^', '')
-  if (!semver.satisfies(window.Vue.version, `>=${vueDep}`)) {
-    console.warn(`Vuetify requires Vue version >= ${vueDep}`)
+  const vueDep = devDependencies.vue
+  if (!semver.satisfies(window.Vue.version, vueDep)) {
+    console.warn(`Vuetify requires Vue version ${vueDep}`)
   }
 }
 
