@@ -1,0 +1,25 @@
+table($material)
+  background-color: $material.cards
+  color: $material.text.primary
+
+  tr:not(:last-child)
+    border-bottom: 1px solid rgba($material.fg-color, $material.divider-percent)
+
+  thead
+    th
+      color: rgba($material.text-color, $material.secondary-text-percent)
+
+    &:last-of-type
+      border-bottom: 1px solid rgba($material.fg-color, $material.divider-percent)
+
+  tbody
+    tr
+      &[active]
+        background: $material.table.active
+
+      &:hover
+        background: $material.table.hover
+
+  tfoot
+    tr
+      border-top: 1px solid rgba($material.fg-color, $material.divider-percent)
