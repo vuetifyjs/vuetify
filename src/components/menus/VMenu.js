@@ -204,9 +204,11 @@ export default {
       this.getTiles()
       this.updateDimensions()
       requestAnimationFrame(this.startTransition)
+      this.$emit('activate')
     },
     deactivate () {
       this.isContentActive = false
+      this.$emit('deactivate')
     },
     onResize () {
       clearTimeout(this.resizeTimeout)
