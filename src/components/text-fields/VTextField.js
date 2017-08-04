@@ -142,9 +142,9 @@ export default {
       this.inputValue = e.target.value
       this.multiLine && this.autoGrow && this.calculateInputHeight()
     },
-    onChange (e) {
+    onChange () {
       if (this.originalValue !== this.inputValue) {
-        this.$emit('change', e)
+        this.$emit('change', this.inputValue)
       }
     },
     blur (e) {
