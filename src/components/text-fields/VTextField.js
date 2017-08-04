@@ -106,10 +106,8 @@ export default {
   },
 
   watch: {
-    focused (val) {
+    focused () {
       this.hasFocused = true
-
-      !val && this.$emit('change', this.lazyValue)
     },
     value () {
       this.lazyValue = this.value
