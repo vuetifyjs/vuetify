@@ -109,7 +109,9 @@ export default {
     focused (val) {
       this.hasFocused = true
 
-      !val && this.$emit('change', this.lazyValue)
+      !val &&
+        this.value !== this.lazyValue &&
+        this.$emit('change', this.lazyValue)
     },
     value () {
       this.lazyValue = this.value
