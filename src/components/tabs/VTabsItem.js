@@ -9,8 +9,7 @@ export default {
 
   data () {
     return {
-      isActive: false,
-      defaultActiveClass: 'tabs__item--active'
+      isActive: false
     }
   },
 
@@ -23,11 +22,14 @@ export default {
 
   computed: {
     classes () {
-      return {
+      const classes = {
         'tabs__item': true,
-        'tabs__item--active': !this.to && this.isActive,
         'tabs__item--disabled': this.disabled
       }
+
+      classes[this.activeClass] = !this.to && this.isActive
+
+      return classes
     },
     action () {
       const to = this.to || this.href
