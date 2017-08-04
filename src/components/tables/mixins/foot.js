@@ -5,7 +5,9 @@ export default {
         props: {
           disabled: this.computedPagination.page === 1,
           icon: true,
-          flat: true
+          flat: true,
+          dark: this.dark,
+          light: this.light
         },
         nativeOn: { click: () => (this.computedPagination.page--) }
       }, [this.$createElement('v-icon', 'chevron_left')])
@@ -20,7 +22,9 @@ export default {
         props: {
           disabled,
           icon: true,
-          flat: true
+          flat: true,
+          dark: this.dark,
+          light: this.light
         },
         nativeOn: { click: () => (this.computedPagination.page++) }
       }, [this.$createElement('v-icon', 'chevron_right')])

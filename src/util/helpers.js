@@ -93,7 +93,7 @@ export function getObjectValueByPath (obj, path) {
   const a = path.split('.')
   for (var i = 0, n = a.length; i < n; ++i) {
     var k = a[i]
-    if (obj.constructor === Object && k in obj) {
+    if (obj instanceof Object && k in obj) {
       obj = obj[k]
     } else {
       return
