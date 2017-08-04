@@ -51,4 +51,17 @@ test('VTimePicker.js', ({ mount }) => {
     expect(wrapper.data().period).toBe('pm')
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should not change period with 24hr prop', () => {
+    const wrapper = mount(VTimePicker, {
+      propsData: {
+        format: '24hr',
+        value: null
+      }
+    })
+
+    const ampm = wrapper.instance().inputTime.match(/(am|pm)/)
+
+    expect(ampm).toBe(null)
+  })
 })

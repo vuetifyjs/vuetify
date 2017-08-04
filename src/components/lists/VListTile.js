@@ -23,12 +23,15 @@ export default {
 
   computed: {
     classes () {
-      return {
+      const classes = {
         'list__tile': true,
-        'list__tile--active': this.isActive,
         'list__tile--avatar': this.avatar,
         'list__tile--disabled': this.disabled
       }
+
+      classes[this.activeClass] = this.isActive
+
+      return classes
     }
   },
 

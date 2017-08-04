@@ -184,6 +184,9 @@ export default {
       }, this.$listeners)
     }
 
-    return h('aside', data, this.$slots.default)
+    return h('aside', data, [
+      this.$slots.default,
+      h('div', { 'class': 'navigation-drawer__border' })
+    ])
   }
 }
