@@ -9,7 +9,12 @@ export default {
           dark: this.dark,
           light: this.light
         },
-        nativeOn: { click: () => (this.computedPagination.page--) }
+        on: {
+          click: () => {
+            const page = this.computedPagination.page
+            this.updatePagination({ page: page - 1 })
+          }
+        }
       }, [this.$createElement('v-icon', 'chevron_left')])
     },
     genNextIcon () {
@@ -26,7 +31,12 @@ export default {
           dark: this.dark,
           light: this.light
         },
-        nativeOn: { click: () => (this.computedPagination.page++) }
+        on: {
+          click: () => {
+            const page = this.computedPagination.page
+            this.updatePagination({ page: page + 1 })
+          }
+        }
       }, [this.$createElement('v-icon', 'chevron_right')])
     },
     genSelect () {
