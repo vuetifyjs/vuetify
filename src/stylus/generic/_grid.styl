@@ -84,11 +84,12 @@
           flex-basis: (n / $grid-columns * 100)%
           max-width: (n / $grid-columns * 100)%
 
-        .flex.offset-{size}{n}
-          margin-left: (n / $grid-columns * 100)%
-
         .flex.order-{size}{n}
           order: n
+
+      for n in (0..$grid-columns)
+        .flex.offset-{size}{n}
+          margin-left: (n / $grid-columns * 100)%
 
 .align
   &-start
