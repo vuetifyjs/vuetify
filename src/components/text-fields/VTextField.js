@@ -10,6 +10,7 @@ export default {
   data () {
     return {
       hasFocused: false,
+      originalValue: null,
       inputHeight: null
     }
   },
@@ -108,8 +109,9 @@ export default {
   watch: {
     focused (val) {
       this.hasFocused = true
-
-      !val && this.$emit('change', this.lazyValue)
+      if (val) {
+        this.originalValue = this.inputValue
+      }
     },
     value () {
       this.lazyValue = this.value
@@ -139,6 +141,11 @@ export default {
     onInput (e) {
       this.inputValue = e.target.value
       this.multiLine && this.autoGrow && this.calculateInputHeight()
+    },
+    onChange () {
+      if (this.originalValue !== this.inputValue) {
+        this.$emit('change', this.inputValue)
+      }
     },
     blur (e) {
       this.validate()
@@ -179,6 +186,7 @@ export default {
           ...this.$listeners,
           blur: this.blur,
           input: this.onInput,
+          change: this.onChange,
           focus: this.focus
         },
         ref: 'input'
