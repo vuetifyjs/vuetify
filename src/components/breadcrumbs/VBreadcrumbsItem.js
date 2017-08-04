@@ -16,13 +16,13 @@ export default {
 
   computed: {
     classes () {
-      const classes =  {
+      const classes = {
         'breadcrumbs__item': true
       }
 
       classes[this.activeClass] = this.disabled
 
-      return classes;
+      return classes
     }
   },
 
