@@ -13,6 +13,13 @@
   will-change: transform
   z-index: 3
 
+  &__border
+    position: absolute
+    right: 0
+    top: 0
+    height: 100%
+    width: 1px
+
   // Remove animation when booting up
   &:not(.navigation-drawer--is-booted)
     transition: none !important
@@ -117,6 +124,7 @@
     &:not(.navigation-drawer--close)
       elevation(16)
 
+/** Changed nested components */
   ~ toolbar
     + main
       min-height: "calc(100vh - %s)" % $toolbar-height
