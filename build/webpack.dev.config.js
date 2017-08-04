@@ -1,6 +1,7 @@
-const merge = require('webpack-merge')
+﻿const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.config')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 // Helpers
 const resolve = file => require('path').resolve(__dirname, file)
@@ -30,7 +31,9 @@ module.exports = merge(baseWebpackConfig, {
       },
       {
         test: /\.styl$/,
-        loaders: ['css-loader', 'postcss-loader', 'stylus-loader'],
+        use: ExtractTextPlugin.extract({
+          use: ['css-loader', 'postcss-loader', 'stylus-loader']
+        }),
         exclude: /node_modules/
       }
     ]
@@ -40,5 +43,8 @@ module.exports = merge(baseWebpackConfig, {
   },
   devServer: {
     contentBase: resolve('../dev')
-  }
+  },
+  plugins: [
+    new ExtractTextPlugin('vuetify.css')
+  ]
 })
