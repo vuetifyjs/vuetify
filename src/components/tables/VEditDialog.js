@@ -19,13 +19,16 @@ export default {
     },
     transition: {
       type: String,
-      default: 'v-slide-x-reverse-transition'
+      default: 'slide-x-reverse-transition'
     }
   },
 
   watch: {
     isActive (val) {
-      val && this.$emit('open') && this.$nextTick(this.focus)
+      val &&
+        this.$emit('open') &&
+        setTimeout(this.focus, 50) // Give DOM time to paint
+
       if (!val) {
         !this.isSaving && this.$emit('cancel')
         this.isSaving && this.$emit('close')
@@ -39,8 +42,8 @@ export default {
       this.isActive = false
     },
     focus () {
-      const input = this.$el.querySelector('input')
-      input && setTimeout(() => (input.focus()), 0)
+      const input = this.$refs.content.querySelector('input')
+      input && input.focus()
     },
     save () {
       this.isSaving = true
@@ -54,7 +57,7 @@ export default {
           primary: true,
           light: true
         },
-        nativeOn: { click: fn }
+        on: { click: fn }
       }, text)
     },
     genActions () {
@@ -77,7 +80,8 @@ export default {
             e.keyCode === 27 && this.cancel()
             e.keyCode === 13 && this.save()
           }
-        }
+        },
+        ref: 'content'
       }, [this.$slots.input])
     }
   },
@@ -100,7 +104,7 @@ export default {
       h('a', {
         domProps: { href: 'javascript:;' },
         slot: 'activator'
-      }, [this.$slots.default]),
+      }, this.$slots.default),
       this.genContent(),
       this.genActions()
     ])
