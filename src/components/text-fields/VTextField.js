@@ -169,7 +169,7 @@ export default {
           'height': this.inputHeight && `${this.inputHeight}px`
         },
         domProps: {
-          autofucus: this.autofocus,
+          autofocus: this.autofocus,
           disabled: this.disabled,
           required: this.required,
           value: this.lazyValue
