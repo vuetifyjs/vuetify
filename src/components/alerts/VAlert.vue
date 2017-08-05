@@ -94,5 +94,5 @@
   }
 </script>
 
+<style lang="stylus" src="./styles.styl"></style>
 <style lang="stylus" src="./theme.styl"></style>
-<style lang="stylus" src="./style.styl"></style>

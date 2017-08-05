@@ -1,3 +1,5 @@
+import component from './VIcon'
+
 export function VIcon (Vue) {
-  Vue.component('v-icon', require('./VIcon').default)
+  Vue.component('v-icon', component)
 }

@@ -1,5 +1,5 @@
 import component from './VAvatar'
 
-export function VApp (Vue) {
+export function VAvatar (Vue) {
   Vue.component('v-avatar', component)
 }

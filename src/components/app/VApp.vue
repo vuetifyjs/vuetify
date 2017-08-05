@@ -19,6 +19,7 @@
     },
 
     render (h, { props, data, children }) {
+
       data.staticClass = (`application ${data.staticClass || ''}`).trim()
       data.staticClass += ` application--${props.dark ? 'dark' : 'light'}`
 
@@ -36,5 +37,5 @@
 
 <style lang="stylus" src="../../stylus/main.styl"></style>
 
+<style lang="stylus" src="./styles.styl"></style>
 <style lang="stylus" src="./theme.styl"></style>
-<style lang="stylus" src="./style.styl"></style>
