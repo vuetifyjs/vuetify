@@ -39,6 +39,7 @@ export default {
         'snack--top': this.top,
         'snack--vertical': this.vertical,
         'primary': this.primary,
+        'accent': this.accent,
         'secondary': this.secondary,
         'success': this.success,
         'info': this.info,
