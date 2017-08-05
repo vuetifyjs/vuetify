@@ -96,7 +96,7 @@
       right: 0
       top: 0
       height: 2px
-      transition: .3s ease-in-out
+      transition: .3s $transition.swing
       width: 2px
       opacity: 0
 
@@ -107,7 +107,7 @@
   &__track
     height: 2px
     left: 0
-    transition: .3s ease-in-out
+    transition: .3s $transition.swing
     transform-origin: right
     overflow: hidden
     width: 100%
@@ -118,7 +118,7 @@
       height: 2px
       transform-origin: left
       width: 100%
-      transition: .3s ease-in-out
+      transition: .3s $transition.swing
 
   &__ticks-container
     position: absolute
@@ -131,13 +131,13 @@
     overflow: hidden
 
   &__tick
-    transition: .3s ease-in-out
+    transition: .3s $transition.swing
     opacity: 0
 
   &__thumb-container
     position: absolute
     top: 50%
-    transition: .3s ease-in-out
+    transition: .3s $transition.swing
 
   &__thumb
     width: 20px
@@ -146,7 +146,7 @@
     top: 50%
     border-radius: 50%
     background: transparent
-    transition: .3s ease-in-out
+    transition: .3s $transition.swing
     transform: translateY(-50%) scale(.8)
     user-select: none
 
