@@ -17,18 +17,4 @@ test('VTextField.js', () => {
 
     expect(keyup).toBeCalled()
   })
-
-  it('should only emit change on blur if value changed', async () => {
-    const change = jest.fn()
-    const wrapper = mount(VTextField, {
-      propsData: { value: null },
-    })
-
-    wrapper.instance().$on('change', change)
-    wrapper.instance().focus()
-    await wrapper.instance().$nextTick()
-    wrapper.instance().blur()
-
-    expect(change).not.toBeCalled()
-  })
 })
