@@ -94,6 +94,11 @@ export default {
 
   mounted () {
     this.$vuetify.load(this.init)
+    this.$el.addEventListener('transitionend', this.onTransitionend)
+  },
+
+  destroyed () {
+    this.$el.removeEventListener('transitionend', this.onTransitionend)
   },
 
   methods: {
@@ -125,6 +130,13 @@ export default {
         this.checkIfMobile()
         this.isActive = !this.isMobile
       }, 200)
+    },
+    onTransitionend (e) {
+      if (e.target === this.$el &&
+        (e.propertyName === 'width' ||
+          (e.propertyName === 'transform' && this.persistent))) {
+        this.$emit('toggle')
+      }
     },
     swipeRight (e) {
       if (this.isActive && !this.right) return
