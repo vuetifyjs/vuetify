@@ -139,7 +139,6 @@ export default {
       this.$emit('change', this.lazyValue)
     },
     onInput (e) {
-      console.log('here')
       this.inputValue = e.target.value
       this.multiLine && this.autoGrow && this.calculateInputHeight()
     },
