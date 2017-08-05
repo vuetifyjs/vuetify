@@ -10,6 +10,7 @@ export default {
   data () {
     return {
       hasFocused: false,
+      badInput: false,
       inputHeight: null
     }
   },
@@ -101,6 +102,7 @@ export default {
       return this.lazyValue !== null &&
         typeof this.lazyValue !== 'undefined' &&
         this.lazyValue.toString().length > 0 ||
+        this.badInput ||
         this.placeholder
     }
   },
@@ -134,12 +136,17 @@ export default {
         this.inputHeight = inputHeight
       })
     },
+    isBadInput () {
+      const input = this.$refs.input
+      return input && input.validity && input.validity.badInput
+    },
     onChange (e) {
       this.lazyValue = e.target.value
       this.$emit('change', this.lazyValue)
     },
     onInput (e) {
       this.inputValue = e.target.value
+      this.badInput = this.isBadInput()
       this.multiLine && this.autoGrow && this.calculateInputHeight()
     },
     blur (e) {
