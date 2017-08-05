@@ -136,17 +136,13 @@ export default {
         this.inputHeight = inputHeight
       })
     },
-    isBadInput () {
-      const input = this.$refs.input
-      return input && input.validity && input.validity.badInput
-    },
     onChange (e) {
       this.lazyValue = e.target.value
       this.$emit('change', this.lazyValue)
     },
     onInput (e) {
       this.inputValue = e.target.value
-      this.badInput = this.isBadInput()
+      this.badInput = e.target.validity && e.target.validity.badInput
       this.multiLine && this.autoGrow && this.calculateInputHeight()
     },
     blur (e) {
