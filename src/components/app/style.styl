@@ -27,17 +27,3 @@
     &.application--toolbar
       > aside.navigation-drawer.navigation-drawer--clipped
         max-height: 'calc(100vh - %s - %s)' % ($toolbar-height $footer-height)
-
-// Main theme
-.application
-  &--light
-    application($material-light)
-
-  &--dark
-    application($material-dark)
-
-  .theme--light
-    text($material-light, $material-dark)
-
-  .theme--dark
-    text($material-dark, $material-light)

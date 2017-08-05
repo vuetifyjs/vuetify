@@ -11,7 +11,3 @@
     }
   }
 </script>
-
-<style lang="stylus">
-  @import '../src/stylus/main.styl'
-</style>

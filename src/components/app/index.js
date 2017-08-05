@@ -1,3 +1,5 @@
+import component from './VApp'
+
 export function VApp (Vue) {
-  Vue.component('v-app', require('./VApp').default)
+  Vue.component('v-app', component)
 }

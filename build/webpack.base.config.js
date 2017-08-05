@@ -7,8 +7,8 @@ module.exports = {
       '~components': resolve('../src/components'),
       '~directives': resolve('../src/directives'),
       '~mixins': resolve('../src/mixins'),
-      '~stylus': resolve('../src/stylus'),
-      '~util': resolve('../src/util')
+      '~util': resolve('../src/util'),
+      'stylus': resolve('../src/stylus')
     }
   },
   node: {

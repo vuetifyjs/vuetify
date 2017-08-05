@@ -5,3 +5,4 @@ npm-debug.log
 .idea/
 coverage/
 Playground.vue
+report.html

@@ -17,7 +17,7 @@ const builds = {
   },
   esm: {
     filename: 'vuetify.esm.js',
-    libraryTarget: 'es',
+    libraryTarget: 'esm',
     env: 'production'
   },
   commonjs: {

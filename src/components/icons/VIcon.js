@@ -1,5 +1,5 @@
-import Themeable from '~mixins/themeable'
-import Contextualable from '~mixins/contextualable'
+import Themeable from '../../mixins/themeable'
+import Contextualable from '../../mixins/contextualable'
 
 export default {
   functional: true,
