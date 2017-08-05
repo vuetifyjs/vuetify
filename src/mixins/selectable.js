@@ -49,6 +49,8 @@ export default {
         return
       }
 
+      this.shouldValidate = true
+
       let input = this.inputValue
       if (Array.isArray(input)) {
         input = input.slice()

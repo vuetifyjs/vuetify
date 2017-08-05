@@ -38,7 +38,8 @@ export default {
       }
     },
     hasError () {
-      return this.validations.length > 0 || this.error
+      return this.validations.length > 0 ||
+        this.errorMessages.length > 0
     }
   },
 
@@ -81,7 +82,7 @@ export default {
 
       this.rules.forEach(rule => {
         const valid = typeof rule === 'function'
-          ? rule(this.value)
+          ? rule(this.inputValue)
           : rule
 
         if (valid !== true) {

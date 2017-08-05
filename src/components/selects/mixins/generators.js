@@ -30,9 +30,12 @@ export default {
       if (this.autocomplete || this.editable) {
         input = this.$createElement('input', {
           'class': 'input-group--select__autocomplete',
+          attrs: {
+            ...this.$attrs,
+            tabindex: -1
+          },
           domProps: { value: this.searchValue },
           on: { input: e => (this.searchValue = e.target.value) },
-          attrs: { tabindex: -1 },
           ref: 'input',
           key: 'input'
         })
@@ -42,14 +45,14 @@ export default {
         (!this.editable || this.editable && !this.focused)
           ? this.genSelections()
           : []
+
       input && selections.push(input)
-      const group = this.$createElement('div', selections)
 
       return this.$createElement('div', {
         'class': 'input-group__selections',
         style: { 'overflow': 'hidden' },
         ref: 'activator'
-      }, [group])
+      }, [selections])
     },
     genSelections () {
       const children = []

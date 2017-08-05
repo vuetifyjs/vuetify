@@ -47,10 +47,6 @@ export default {
         'input-group--textarea': this.textarea
       }
     },
-    hasError () {
-      return this.validations.length > 0 ||
-        this.errorMessages.length > 0
-    },
     count () {
       let inputLength
       if (this.inputValue) inputLength = this.inputValue.toString().length

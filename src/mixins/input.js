@@ -56,6 +56,10 @@ export default {
   },
 
   methods: {
+    groupFocus (e) {},
+    groupBlur (e) {
+      this.tabFocused = false
+    },
     genLabel () {
       const data = {}
 
@@ -134,7 +138,8 @@ export default {
           tabindex: this.tabindex
         },
         on: {
-          blur: () => (this.tabFocused = false),
+          focus: this.groupFocus,
+          blur: this.groupBlur,
           click: () => (this.tabFocused = false),
           keyup: e => {
             if ([9, 16].includes(e.keyCode)) {
@@ -171,7 +176,6 @@ export default {
           'class': 'input-group__input'
         }, wrapperChildren)
       )
-
       detailsChildren.push(this.genMessages())
 
       if (typeof this.counter !== 'undefined') {
