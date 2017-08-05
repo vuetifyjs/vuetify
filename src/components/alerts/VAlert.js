@@ -1,9 +1,15 @@
+import VIcon from '~components/icons/VIcon'
+
 import Contextualable from '~mixins/contextualable'
 import Toggleable from '~mixins/toggleable'
 import Transitionable from '~mixins/transitionable'
 
 export default {
   name: 'v-alert',
+
+  components: {
+    VIcon
+  },
 
   mixins: [Contextualable, Toggleable, Transitionable],
 

@@ -7,7 +7,9 @@
   },
   "license": "MIT",
   "homepage": "http://vuetifyjs.com",
-  "main": "dist/vuetify.js",
+  "main": "dist/vuetify.common.js",
+  "module": "dist/vuetify.esm.js",
+  "unpkg": "dist/vuetify.js",
   "types": "index.d.ts",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.config.js --open --hot",

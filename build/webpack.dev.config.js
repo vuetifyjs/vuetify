@@ -16,6 +16,11 @@ module.exports = merge(baseWebpackConfig, {
     publicPath: '/dev/',
     library: 'Vuetify'
   },
+  resolve: {
+    alias: {
+      vuetify: resolve('../src'),
+    }
+  },
   module: {
     noParse: /es6-promise\.js$/, // avoid webpack shimming process
     rules: [
@@ -39,7 +44,7 @@ module.exports = merge(baseWebpackConfig, {
     ]
   },
   performance: {
-    hints: 'warning'
+    hints: false
   },
   devServer: {
     contentBase: resolve('../dev')

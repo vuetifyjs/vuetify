@@ -6,13 +6,23 @@ const OptimizeJsPlugin = require('optimize-js-plugin')
 const version = process.env.VERSION || require('../package.json').version
 
 const builds = {
-  'dev': {
+  development: {
     filename: 'vuetify.js',
     libraryTarget: 'umd'
   },
-  'prod': {
+  production: {
     filename: 'vuetify.min.js',
     libraryTarget: 'umd',
+    env: 'production'
+  },
+  esm: {
+    filename: 'vuetify.esm.js',
+    libraryTarget: 'es',
+    env: 'production'
+  },
+  commonjs: {
+    filename: 'vuetify.common.js',
+    libraryTarget: 'cjs',
     env: 'production'
   }
 }

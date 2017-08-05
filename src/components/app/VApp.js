@@ -1,6 +1,8 @@
 import Themeable from '~mixins/themeable'
 
 export default {
+  name: 'v-app',
+
   functional: true,
 
   mixins: [Themeable],
