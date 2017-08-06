@@ -25,7 +25,7 @@ export default {
     },
     timeoutFn: {
       type: Function,
-      default : () => {}
+      default: () => {}
     },
     vertical: Boolean
   },
