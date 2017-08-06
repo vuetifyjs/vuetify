@@ -13,8 +13,8 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.config.js --open --hot",
     "build": "rimraf dist && cross-env NODE_ENV=production node build/build.js --progress --hide-modules",
     "debug-build": "node --inspect --debug-brk build/build.js",
-    "test": "cross-env NODE_ENV=test jest --no-cache --coverage --verbose",
-    "test-no-coverage": "cross-env NODE_ENV=test jest --no-cache --verbose",
+    "test": "cross-env NODE_ENV=test jest --no-cache --verbose",
+    "test-coverage": "cross-env NODE_ENV=test jest --no-cache --coverage --verbose",
     "lint": "eslint --ext .js,.vue src --ignore-pattern=*/util/testing.js"
   },
   "description": "Vue.js 2 Semantic Component Framework",
