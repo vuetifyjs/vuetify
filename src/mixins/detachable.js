@@ -18,7 +18,7 @@ export default {
 
   mounted () {
     this.$vuetify.load(() => {
-      this.tryToContentToRoot(0)
+      this.tryToMoveContentToRoot(0)
     })
   },
 
@@ -31,14 +31,13 @@ export default {
     } catch (e) {}
   },
   methods: {
-    tryToContentToRoot (numTried = 0) {
+    tryToMoveContentToRoot (numTried = 0) {
       if (this._isDestroyed) return
 
       const app = this.detachableRoot(this.$el)
 
       if (!app) {
         if (numTried >= 10) {
-          debugger
           return console.warn('Application is missing <v-app> component.')
         } else {
           window.setTimeout(() => this.tryToContentToRoot(numTried + 1), 100)
