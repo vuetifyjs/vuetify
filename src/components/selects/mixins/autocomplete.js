@@ -2,7 +2,10 @@ export default {
   props: {
     filter: {
       type: Function,
-      default: () => (item, query, itemText) => typeof itemText === 'string' && itemText.toLowerCase().indexOf(query.toLowerCase()) !== -1
+      default: () => (item, query, itemText) => (
+        typeof itemText === 'string' &&
+        itemText.toLowerCase().indexOf(query.toLowerCase()) !== -1
+      )
     }
   },
   data () {
@@ -13,7 +16,9 @@ export default {
 
   methods: {
     filterSearch () {
-      return this.items.filter(i => this.filter(i, this.searchValue, this.getText(i)))
+      return this.items.filter(i => this.filter(
+        i, this.searchValue, this.getText(i))
+      )
     },
     onKeyDown (e) {
       this.$refs.menu.changeListIndex(e)
