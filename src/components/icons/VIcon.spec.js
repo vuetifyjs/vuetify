@@ -2,8 +2,96 @@ import VIcon from '~components/icons/VIcon'
 import { test } from '~util/testing'
 
 test('VIcon.js', ({ mount, functionalContext }) => {
-  it('should render correctly', () => {
+  it('should render component and match snapshot', () => {
     const context = functionalContext({}, 'add')
+    const wrapper = mount(VIcon, context)
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render a disabled component and match snapshot', () => {
+    const context = functionalContext({
+      propsData: {
+        disabled: true
+      }
+    }, 'add')
+    const wrapper = mount(VIcon, context)
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render a large size component and match snapshot', () => {
+    const context = functionalContext({
+      propsData: {
+        large: true
+      }
+    }, 'add')
+    const wrapper = mount(VIcon, context)
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render a medium size component and match snapshot', () => {
+    const context = functionalContext({
+      propsData: {
+        medium: true
+      }
+    }, 'add')
+    const wrapper = mount(VIcon, context)
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render a xLarge size component and match snapshot', () => {
+    const context = functionalContext({
+      propsData: {
+        xLarge: true
+      }
+    }, 'add')
+    const wrapper = mount(VIcon, context)
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render a left aligned component and match snapshot', () => {
+    const context = functionalContext({
+      propsData: {
+        left: true
+      }
+    }, 'add')
+    const wrapper = mount(VIcon, context)
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render a right aligned component and match snapshot', () => {
+    const context = functionalContext({
+      propsData: {
+        right: true
+      }
+    }, 'add')
+    const wrapper = mount(VIcon, context)
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render component with FontAwesome and match snapshot', () => {
+    const context = functionalContext({
+      propsData: {
+        fa: true
+      }
+    }, 'add')
+    const wrapper = mount(VIcon, context)
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render component with Material Design and match snapshot', () => {
+    const context = functionalContext({
+      propsData: {
+        mdi: true
+      }
+    }, 'add')
     const wrapper = mount(VIcon, context)
 
     expect(wrapper.html()).toMatchSnapshot()
