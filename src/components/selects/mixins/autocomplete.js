@@ -1,4 +1,10 @@
 export default {
+  props: {
+    filter: {
+      type: Function,
+      default: () => (item, query, itemText) => typeof itemText === 'string' && itemText.toLowerCase().indexOf(query) !== -1
+    }
+  },
   data () {
     return {
       searchValue: null
@@ -7,12 +13,8 @@ export default {
 
   methods: {
     filterSearch () {
-      return this.items.filter(i => {
-        const text = this.getText(i)
-        if (typeof text !== 'string') return false
-
-        return text.toLowerCase().indexOf(this.searchValue.toLowerCase()) !== -1
-      })
+      const query = this.searchValue.toLowerCase()
+      return this.items.filter(i => this.filter(i, query, this.getText(i)))
     },
     onKeyDown (e) {
       this.$refs.menu.changeListIndex(e)
