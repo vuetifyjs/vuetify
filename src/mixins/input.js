@@ -1,4 +1,4 @@
-import Themeable from './themeable'
+﻿import Themeable from './themeable'
 
 export default {
   mixins: [Themeable],
@@ -105,7 +105,7 @@ export default {
     genLabel () {
       const data = {}
 
-      if (this.id) data.attrs = { for: this.id }
+      if (this.$attrs.id) data.attrs = { for: this.$attrs.id }
 
       return this.$createElement('label', data, this.label)
     },
