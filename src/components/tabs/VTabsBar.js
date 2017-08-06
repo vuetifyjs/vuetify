@@ -1,10 +1,12 @@
-import Resizable from '~mixins/resizable'
 import VIcon from '~components/icons/VIcon'
+import { Resize } from '~directives'
 
 export default {
   name: 'v-tabs-bar',
 
-  mixins: [Resizable],
+  directives: {
+    Resize
+  },
 
   inject: ['isScrollable', 'isMobile'],
 
@@ -170,7 +172,11 @@ export default {
 
   render (h) {
     return h('div', {
-      'class': this.classes
+      'class': this.classes,
+      directives: [{
+        name: 'resize',
+        value: this.onResize
+      }]
     }, [
       this.genWrapper(),
       this.leftIconVisible ? this.genIcon('left') : null,

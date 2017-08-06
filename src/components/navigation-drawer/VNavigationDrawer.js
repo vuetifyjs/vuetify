@@ -1,11 +1,15 @@
 import Overlayable from '~mixins/overlayable'
-import Resizable from '~mixins/resizable'
 import Themeable from '~mixins/themeable'
+import { Resize } from '~directives'
 
 export default {
   name: 'v-navigation-drawer',
 
-  mixins: [Overlayable, Resizable, Themeable],
+  directives: {
+    Resize
+  },
+
+  mixins: [Overlayable, Themeable],
 
   data () {
     return {
@@ -156,10 +160,16 @@ export default {
       }
     },
     genDirectives () {
-      const directives = [{
-        name: 'click-outside',
-        value: this.closeConditional
-      }]
+      const directives = [
+        {
+          name: 'click-outside',
+          value: this.closeConditional
+        },
+        {
+          name: 'resize',
+          value: this.onResize
+        }
+      ]
 
       !this.touchless && directives.push({
         name: 'touch',
