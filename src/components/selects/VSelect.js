@@ -88,6 +88,10 @@ export default {
       type: [Boolean, Number, String],
       default: false
     },
+    menuZIndex: {
+      type: [Number, String],
+      default: null
+    },
     multiple: Boolean,
     multiLine: Boolean,
     offset: Boolean,

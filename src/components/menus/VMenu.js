@@ -135,7 +135,11 @@ export default {
       default: false
     },
     maxWidth: [Number, String],
-    minWidth: [Number, String]
+    minWidth: [Number, String],
+    zIndex: {
+      type: [Number, String],
+      default: null
+    }
   },
 
   computed: {
@@ -150,13 +154,19 @@ export default {
       return maxWidth < minWidth ? maxWidth : minWidth
     },
     styles () {
-      return {
+      const styles = {
         maxHeight: this.auto ? '200px' : isNaN(this.maxHeight) ? this.maxHeight : `${this.maxHeight}px`,
         minWidth: `${this.calculatedMinWidth}px`,
         maxWidth: `${parseInt(this.maxWidth)}px`,
         top: `${this.calcTop()}px`,
         left: `${this.calcLeft()}px`
       }
+
+      if (this.zIndex !== null) {
+        styles.zIndex = this.zIndex
+      }
+
+      return styles
     },
     hasActivator () {
       return !!this.$slots.activator || this.activator

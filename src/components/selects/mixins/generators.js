@@ -15,7 +15,8 @@ export default {
           maxHeight: this.maxHeight,
           nudgeTop: this.isDropdown ? 22 : 0,
           offsetY: this.autocomplete || this.offset || this.isDropdown,
-          value: this.isActive
+          value: this.isActive,
+          zIndex: this.menuZIndex
         },
         on: { input: val => (this.isActive = val) }
       }
