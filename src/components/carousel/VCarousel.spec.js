@@ -1,7 +1,13 @@
 import { mount } from 'avoriaz'
 import VCarousel from '~components/carousel/VCarousel'
+import touch from '~directives/touch'
+import { test } from '~util/testing'
 
-describe('VCarousel.js', () => {
+VCarousel.directives = {
+  touch
+}
+
+test('VCarousel.js', ({ mount }) => {
   it('should render component and match snapshot', () => {
     const wrapper = mount(VCarousel)
 
