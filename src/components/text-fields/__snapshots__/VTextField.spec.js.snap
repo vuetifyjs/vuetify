@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VTextField.js should render component and match snapshot 1`] = `
+
+<div class="input-group input-group--text-field">
+  <div class="input-group__input">
+    <input tabindex="0"
+           type="text"
+    >
+  </div>
+  <div class="input-group__details">
+    <div class="input-group__messages">
+    </div>
+  </div>
+</div>
+
+`;

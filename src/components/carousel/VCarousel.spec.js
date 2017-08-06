@@ -1,4 +1,3 @@
-import { mount } from 'avoriaz'
 import VCarousel from '~components/carousel/VCarousel'
 import touch from '~directives/touch'
 import { test } from '~util/testing'
