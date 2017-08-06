@@ -13,6 +13,14 @@
       > main > .container
         min-height: 'calc(100vh - %s - %s)' % ($toolbar-height $footer-height)
 
+  &--toolbar-dense
+    > main > .container
+      min-height: 'calc(100vh - %s)' % $toolbar-mobile-landscape-height
+
+    &.application--footer
+      > main > .container
+        min-height: 'calc(100vh - %s - %s)' % ($toolbar-mobile-landscape-height $footer-height)
+
   &--footer
     > main > .container
       min-height: 'calc(100vh - %s)' % $footer-height
