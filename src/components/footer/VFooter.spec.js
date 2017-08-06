@@ -1,17 +1,38 @@
 import { test } from '~util/testing'
-import VDivider from '~components/dividers/VDivider'
+import VFooter from '~components/footer/VFooter'
 
-test('VDivider.js', ({ mount, functionalContext }) => {
+test('VFooter.js', ({ mount, functionalContext }) => {
   it('should render component and match snapshot', () => {
-    const wrapper = mount(VDivider, functionalContext())
+    const wrapper = mount(VFooter, functionalContext())
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render an inset component and match snapshot', () => {
-    const wrapper = mount(VDivider, functionalContext({
+  it('should render an absolute positioned component and match snapshot', () => {
+    const wrapper = mount(VFooter, functionalContext({
       propsData: {
-        inset: true
+        absolute: true
+      }
+    }))
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render a fixed positioned component and match snapshot', () => {
+    const wrapper = mount(VFooter, functionalContext({
+      propsData: {
+        fixed: true
+      }
+    }))
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render a fixed and absolute positioned and match snapshot', () => {
+    const wrapper = mount(VFooter, functionalContext({
+      propsData: {
+        absolute: true,
+        fixed: true
       }
     }))
 

@@ -1,13 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VDivider.js should render an inset component and match snapshot 1`] = `
+exports[`VFooter.js should render a fixed and absolute positioned and match snapshot 1`] = `
 
-<hr class="divider">
+<footer class="footer">
+</footer>
 
 `;
 
-exports[`VDivider.js should render component and match snapshot 1`] = `
+exports[`VFooter.js should render a fixed positioned component and match snapshot 1`] = `
 
-<hr class="divider">
+<footer class="footer">
+</footer>
+
+`;
+
+exports[`VFooter.js should render an absolute positioned component and match snapshot 1`] = `
+
+<footer class="footer">
+</footer>
+
+`;
+
+exports[`VFooter.js should render component and match snapshot 1`] = `
+
+<footer class="footer">
+</footer>
 
 `;
