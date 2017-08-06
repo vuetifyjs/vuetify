@@ -7,7 +7,7 @@ export default {
       default: () =>
         (elem) => {
           for (let p = elem; p instanceof HTMLElement; p = p.parentNode) {
-            if (p.hasAttribute('data-app')) {
+            if (p.hasAttribute('data-popup-context')) {
               return p
             }
           }
