@@ -23,6 +23,10 @@ export default {
     },
     hint: String,
     hideDetails: Boolean,
+    id: {
+      type: [String, Number],
+      default: this._uid
+    },
     label: String,
     persistentHint: Boolean,
     placeholder: String,
