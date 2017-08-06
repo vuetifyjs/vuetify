@@ -1,4 +1,4 @@
-import Colorable from '~mixins/colorable'
+import Colorable from './colorable'
 import Input from './input'
 
 export default {
