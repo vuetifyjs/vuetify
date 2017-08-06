@@ -23,10 +23,6 @@ export default {
       type: Number,
       default: 6000
     },
-    timeoutFn: {
-      type: Function,
-      default: () => {}
-    },
     vertical: Boolean
   },
 
@@ -62,7 +58,7 @@ export default {
       if (this.isActive && this.timeout) {
         this.activeTimeout = setTimeout(() => {
           this.isActive = false
-          this.timeoutFn()
+          this.$emit('timeout')
         }, this.timeout)
       }
     }
