@@ -34,4 +34,15 @@ test('VToolbarSideIcon.js', ({ mount, functionalContext }) => {
 
     expect(fn).toBeCalled()
   })
+
+  it('should pass through props to button component', () => {
+    const context = functionalContext({
+      props: {
+        dark: true
+      }
+    })
+    const wrapper = mount(VToolbarSideIcon, context)
+
+    expect(wrapper.hasClass('theme--dark')).toBe(true)
+  })
 })

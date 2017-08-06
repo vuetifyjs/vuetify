@@ -6,12 +6,12 @@ export default {
 
   functional: true,
 
-  render (h, { slots, listeners }) {
+  render (h, { slots, listeners, props }) {
     const data = {
       staticClass: 'toolbar__side-icon',
-      props: {
+      props: Object.assign(props, {
         icon: true
-      },
+      }),
       on: listeners
     }
 
