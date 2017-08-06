@@ -12,13 +12,9 @@ export default {
       if (relativeToRoot) {
         const root = this.detachableRoot(el)
         if (root) {
-          console.log(el, root)
-          window.el = el
-          window.root = root
           const rootBoundingRect = root.getBoundingClientRect()
           top -= rootBoundingRect.top
           left -= rootBoundingRect.left
-          console.log('top is ' + top + ', left is ' + left)
         }
       }
 
