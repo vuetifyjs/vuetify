@@ -3,6 +3,7 @@ const baseWebpackConfig = require('./webpack.base.config')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const webpack = require('webpack')
 
 // Helpers
 const resolve = file => require('path').resolve(__dirname, file)
@@ -54,7 +55,10 @@ module.exports = merge(baseWebpackConfig, {
     new ExtractTextPlugin('vuetify.css'),
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
-      reportFilename: resolve('../dev/report.html'),
+      reportFilename: resolve('../dev/report.html')
+    }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': "'development'"
     })
   ]
 })

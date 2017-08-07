@@ -14,8 +14,10 @@
     cursor: pointer
     position: relative
 
+    .toolbar__side-icon
+      margin: 0
+
   &__content
-    background: $material-theme.bg-color
     position: absolute
     display: inline-block
     border-radius: 2px
@@ -24,7 +26,7 @@
     overflow-x: hidden
     z-index: 6
     elevation(8)
-    
+
     &--dropdown
       border-top-left-radius: 0
       border-top-right-radius: 0
@@ -43,16 +45,16 @@
       .list__tile
         pointer-events: auto
         opacity: 1
-        
+
       .list__tile--active
         transform: none !important
-      
+
     &-leave-to
       transform: translateY(-10px)
-    
+
     &-leave-active, &-leave-to
       pointer-events: none
-        
+
     &-enter, &-leave-to
       opacity: 0
 

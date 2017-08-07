@@ -4,7 +4,7 @@
   width: 100%
   will-change: padding-left
   elevation(4)
-    
+
   .input-group--solo
     .input-group__details
       display: none
@@ -24,41 +24,41 @@
   &__content, &__extension
     align-items: center
     display: flex
-    
+
     > .list
       flex: 1 1 auto
       margin: 0 !important // come back to this
       max-height: 100%
 
-    > .btn:last-child
+    > .btn:last-child, > .menu:first-child
       margin-right: 10px
-      
-    > .btn:first-child
+
+    > .btn:first-child, > .menu:first-child
       margin-left: 10px
 
-    > *:not(.btn):not(.toolbar__title):last-child
+    > *:not(.btn):not(.toolbar__title):not(.menu):last-child
       margin-right: $grid-gutters.lg
-      
-    > *:not(.btn):not(.toolbar__title):first-child
+
+    > *:not(.btn):not(.toolbar__title):not(.menu):first-child
       margin-left: $grid-gutters.lg
-  
+
   &__content
     height: $toolbar-height
 
   &__extension
     height: $toolbar-extension-height
-    
+
   &__items
     display: flex
     height: 100%
     max-width: 100%
     padding: 0
-    
+
     > .btn
       height: 100%
       margin: 0
 
-  @media $display-breakpoints.xs-only    
+  @media $display-breakpoints.xs-only
     &__content,
     &__extension
       > .btn:last-child
@@ -69,13 +69,13 @@
 
       > *:not(.btn):last-child
         margin-right: $grid-gutters.xl
-      
+
       > *:not(.btn):first-child
         margin-left: $grid-gutters.xl
 
   @media all and (max-width: $grid-breakpoints.sm) and (orientation: portrait)
     toolbar-content(7px)
-  
+
   @media all and (max-width: $grid-breakpoints.sm) and (orientation: landscape)
     &__content,
     &__extension
@@ -87,7 +87,7 @@
   &--card
     border-radius: $card-border-radius $card-border-radius 0 0
     elevation(0)
-    
+
   &--fixed
     position: fixed
     z-index: 2

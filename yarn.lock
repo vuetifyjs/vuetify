@@ -265,12 +265,12 @@ autoprefixer@^6.3.1, autoprefixer@^6.6.0:
     postcss "^5.2.16"
     postcss-value-parser "^3.2.3"
 
-avoriaz@^2.5.0:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/avoriaz/-/avoriaz-2.5.0.tgz#ef9ebba161a1ec60beb578a7ce906062808752d3"
+avoriaz@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/avoriaz/-/avoriaz-3.2.0.tgz#446f3788e1ddbe1e4c04260f79855c7209277f3b"
   dependencies:
     lodash "^4.17.4"
-    vue-add-globals "^1.0.1"
+    vue-add-globals "^2.0.0"
 
 aws-sign2@~0.6.0:
   version "0.6.0"
@@ -6584,9 +6584,9 @@ void-elements@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
 
-vue-add-globals@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/vue-add-globals/-/vue-add-globals-1.0.1.tgz#151f241426e70cbc790a1f31bb0f4435d7575efc"
+vue-add-globals@^2.0.0:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/vue-add-globals/-/vue-add-globals-2.0.1.tgz#c9fba6faac44f679ec15d5a9637f518b181fc44d"
 
 vue-hot-reload-api@^2.0.1:
   version "2.1.0"

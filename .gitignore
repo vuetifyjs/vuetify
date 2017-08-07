@@ -1,4 +1,4 @@
-.DS_Store
+﻿.DS_Store
 node_modules/
 .vscode/
 npm-debug.log
@@ -6,3 +6,4 @@ npm-debug.log
 coverage/
 Playground.vue
 report.html
+.vs/

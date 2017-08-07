@@ -1,10 +1,14 @@
 import Themeable from '~mixins/themeable'
-import Resizable from '~mixins/resizable'
+import { Resize } from '~directives'
 
 export default {
   name: 'v-tabs',
 
-  mixins: [Themeable, Resizable],
+  directives: {
+    Resize
+  },
+
+  mixins: [Themeable],
 
   provide () {
     return {
@@ -190,7 +194,11 @@ export default {
     }, content) : null
 
     return h('div', {
-      'class': this.classes
+      'class': this.classes,
+      directives: [{
+        name: 'resize',
+        value: this.onResize
+      }]
     }, [slot, this.$slots.activators, tabs])
   }
 }

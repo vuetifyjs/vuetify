@@ -45,4 +45,20 @@ test('VCheckbox.js', ({ mount }) => {
 
     expect(change).toBeCalledWith(null)
   })
+
+  it('should toggle when label is clicked', () => {
+    const change = jest.fn()
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        label: 'Label',
+        value: null
+      }
+    })
+
+    const label = wrapper.find('label')[0]
+    wrapper.instance().$on('change', change)
+    label.trigger('click')
+
+    expect(change).toBeCalled()
+  })
 })
