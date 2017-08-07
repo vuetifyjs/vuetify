@@ -4,7 +4,7 @@ export default {
       type: Function,
       default: () => (item, query, itemText) => (
         typeof itemText === 'string' &&
-        itemText.toLowerCase().indexOf(query.toLowerCase()) !== -1
+          itemText.toLowerCase().indexOf(query.toLowerCase()) > -1
       )
     }
   },
