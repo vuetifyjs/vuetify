@@ -154,19 +154,14 @@ export default {
       return maxWidth < minWidth ? maxWidth : minWidth
     },
     styles () {
-      const styles = {
+      return {
         maxHeight: this.auto ? '200px' : isNaN(this.maxHeight) ? this.maxHeight : `${this.maxHeight}px`,
         minWidth: `${this.calculatedMinWidth}px`,
         maxWidth: `${parseInt(this.maxWidth)}px`,
         top: `${this.calcTop()}px`,
-        left: `${this.calcLeft()}px`
+        left: `${this.calcLeft()}px`,
+        zIndex: this.zIndex
       }
-
-      if (this.zIndex !== null) {
-        styles.zIndex = this.zIndex
-      }
-
-      return styles
     },
     hasActivator () {
       return !!this.$slots.activator || this.activator
