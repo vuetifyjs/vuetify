@@ -1,6 +1,5 @@
 import VBottomNav from '~components/bottom-nav/VBottomNav'
 import VBtn from '~components/buttons/VBtn'
-import Ripple from '~directives/ripple'
 import { test } from '~util/testing'
 
 test('VBottomNav.js', ({ mount, functionalContext }) => {

@@ -2,7 +2,6 @@ import { mount } from 'avoriaz'
 import VBtnToggle from 'src/components/buttons/VBtnToggle'
 import VBtn from 'src/components/buttons/VBtn'
 import VIcon from 'src/components/icons/VIcon'
-import ripple from 'src/directives/ripple'
 import { test } from '~util/testing'
 import Vue from 'vue'
 
