@@ -94,11 +94,12 @@ export default {
 
   mounted () {
     this.$vuetify.load(this.init)
-    this.$el.addEventListener('transitionend', this.onTransitionend)
+    this.$el.addEventListener('transitionend', this.onTransitionend, false)
   },
 
-  destroyed () {
-    this.$el.removeEventListener('transitionend', this.onTransitionend)
+  beforeDestroy () {
+    this.$el &&
+      this.$el.removeEventListener('transitionend', this.onTransitionend, false)
   },
 
   methods: {
