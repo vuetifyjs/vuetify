@@ -1,7 +1,8 @@
-.DS_Store
+﻿.DS_Store
 node_modules/
 .vscode/
 npm-debug.log
 .idea/
 coverage/
 Playground.vue
+.vs/

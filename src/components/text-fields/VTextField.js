@@ -108,10 +108,6 @@ export default {
   watch: {
     focused (val) {
       this.hasFocused = true
-
-      !val &&
-        this.value !== this.lazyValue &&
-        this.$emit('change', this.lazyValue)
     },
     value () {
       this.lazyValue = this.value
@@ -137,6 +133,10 @@ export default {
         const inputHeight = height < minHeight ? minHeight : height
         this.inputHeight = inputHeight
       })
+    },
+    onChange (e) {
+      this.lazyValue = e.target.value
+      this.$emit('change', this.lazyValue)
     },
     onInput (e) {
       this.inputValue = e.target.value
@@ -168,7 +168,7 @@ export default {
           'height': this.inputHeight && `${this.inputHeight}px`
         },
         domProps: {
-          autofucus: this.autofocus,
+          autofocus: this.autofocus,
           disabled: this.disabled,
           required: this.required,
           value: this.lazyValue
@@ -180,6 +180,7 @@ export default {
         on: {
           ...this.$listeners,
           blur: this.blur,
+          change: this.onChange,
           input: this.onInput,
           focus: this.focus
         },

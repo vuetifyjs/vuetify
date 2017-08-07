@@ -1,4 +1,4 @@
-import Themeable from './themeable'
+﻿import Themeable from './themeable'
 
 export default {
   mixins: [Themeable],
@@ -105,9 +105,9 @@ export default {
     genLabel () {
       const data = {}
 
-      if (this.id) data.attrs = { for: this.id }
+      if (this.$attrs.id) data.attrs = { for: this.$attrs.id }
 
-      return this.$createElement('label', data, this.label)
+      return this.$createElement('label', data, this.$slots.label || this.label)
     },
     genMessages () {
       let messages = []
@@ -202,7 +202,7 @@ export default {
         }
       }, data)
 
-      if (this.label) {
+      if (this.$slots.label || this.label) {
         children.push(this.genLabel())
       }
 
