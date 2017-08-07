@@ -94,5 +94,4 @@
   }
 </script>
 
-<style lang="stylus" src="./styles.styl"></style>
-<style lang="stylus" src="./theme.styl"></style>
+<style lang="stylus" src="../../stylus/components/_alerts.styl"></style>
