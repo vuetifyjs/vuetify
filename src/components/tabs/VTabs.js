@@ -1,7 +1,12 @@
 import Themeable from '~mixins/themeable'
+import { Resize } from '~directives'
 
 export default {
   name: 'v-tabs',
+
+  directives: {
+    Resize
+  },
 
   mixins: [Themeable],
 
@@ -21,7 +26,6 @@ export default {
       isMobile: false,
       reverse: false,
       target: null,
-      resizeDebounce: {},
       tabsSlider: null,
       targetEl: null,
       tabsContainer: null
@@ -73,12 +77,12 @@ export default {
 
   mounted () {
     this.$vuetify.load(() => {
-      window.addEventListener('resize', this.resize, { passive: true })
-      this.resize()
-
       const activators = this.$slots.activators
 
-      if (!activators || !activators.length || !activators[0].componentInstance) return
+      if (!activators ||
+        !activators.length ||
+        !activators[0].componentInstance
+      ) return
 
       const bar = activators[0].componentInstance.$children
       // // This is a workaround to detect if link is active
@@ -89,7 +93,7 @@ export default {
 
       const tab = this.value || (bar[i !== -1 ? i : 0] || {}).action
 
-      tab && this.tabClick(tab) && this.resize()
+      tab && this.tabClick(tab) && this.onResize()
     })
   },
 
@@ -98,17 +102,16 @@ export default {
   },
 
   methods: {
-    resize () {
-      clearTimeout(this.resizeDebounce)
-
-      this.resizeDebounce = setTimeout(() => {
-        this.isMobile = window.innerWidth < this.mobileBreakPoint
-        this.slider()
-      }, 50)
+    onResize () {
+      this.isMobile = window.innerWidth < this.mobileBreakPoint
+      this.slider()
     },
     slider (el) {
-      this.tabsSlider = this.tabsSlider || this.$el.querySelector('.tabs__slider')
-      this.tabsContainer = this.tabsContainer || this.$el.querySelector('.tabs__container')
+      this.tabsSlider = this.tabsSlider ||
+        this.$el.querySelector('.tabs__slider')
+
+      this.tabsContainer = this.tabsContainer ||
+        this.$el.querySelector('.tabs__container')
 
       if (!this.tabsSlider || !this.tabsContainer) return
 
@@ -121,7 +124,11 @@ export default {
       // dynamic tabs
       this.$nextTick(() => {
         // #684 Calculate width as %
-        const width = this.targetEl.scrollWidth / this.tabsContainer.clientWidth * 100
+        const width = (
+          this.targetEl.scrollWidth /
+          this.tabsContainer.clientWidth *
+          100
+        )
 
         this.tabsSlider.style.width = `${width}%`
         this.tabsSlider.style.left = `${this.targetEl.offsetLeft}px`
@@ -140,19 +147,21 @@ export default {
 
       this.target = target
 
-      if (!this.$refs.content) {
+      const content = this.$refs.content
+      if (!content) {
         setActiveIndex(target)
         return
       }
 
       this.$nextTick(() => {
-        const nextIndex = this.$refs.content.$children.findIndex(i => i.id === this.target)
+        const nextIndex = content.$children.findIndex(i => i.id === target)
         this.reverse = nextIndex < this.activeIndex
         setActiveIndex(nextIndex)
       })
     },
     updateTabs () {
       const activators = this.$slots.activators
+      const content = this.$refs.content
 
       if (!activators ||
         !activators.length ||
@@ -163,7 +172,9 @@ export default {
         .filter(i => i.$options._componentTag === 'v-tabs-item')
         .forEach(i => i.toggle(this.target))
 
-      this.$refs.content && this.$refs.content.$children.forEach(i => i.toggle(this.target, this.reverse, this.isBooted))
+      content && content.$children.forEach((i) => {
+        return i.toggle(this.target, this.reverse, this.isBooted)
+      })
     }
   },
 
@@ -183,7 +194,11 @@ export default {
     }, content) : null
 
     return h('div', {
-      'class': this.classes
+      'class': this.classes,
+      directives: [{
+        name: 'resize',
+        value: this.onResize
+      }]
     }, [slot, this.$slots.activators, tabs])
   }
 }

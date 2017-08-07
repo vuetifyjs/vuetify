@@ -49,4 +49,24 @@ test('VIcon.js', ({ mount, functionalContext }) => {
     expect(wrapper.hasClass('fa-add')).toBe(true)
     expect(wrapper.text()).toBe('')
   })
+
+  it('should allow the use of v-text', () => {
+    const wrapper = mount(VIcon, functionalContext({
+      domProps: { textContent: 'fa-home' }
+    }))
+
+    expect(wrapper.hasClass('fa')).toBe(true)
+    expect(wrapper.hasClass('fa-home')).toBe(true)
+    expect(wrapper.text()).toBe('')
+  })
+
+  it('should allow the use of v-html', () => {
+    const wrapper = mount(VIcon, functionalContext({
+      domProps: { innerHTML: 'fa-home' }
+    }))
+
+    expect(wrapper.hasClass('fa')).toBe(true)
+    expect(wrapper.hasClass('fa-home')).toBe(true)
+    expect(wrapper.text()).toBe('')
+  })
 })

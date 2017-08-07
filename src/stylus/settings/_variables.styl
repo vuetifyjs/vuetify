@@ -45,7 +45,7 @@ $display-breakpoints := {
   xs-only: "only screen and (max-width: %s)" % ($grid-breakpoints.sm - 1)
   sm-only: "only screen and (min-width: %s) and (max-width: %s)" % ($grid-breakpoints.sm ($grid-breakpoints.md  - 1))
   sm-and-down: "only screen and (max-width: %s)" % ($grid-breakpoints.md - 1)
-  sm-and-up: "only screen and (min-width: (%s))" % $grid-breakpoints.sm
+  sm-and-up: "only screen and (min-width: %s)" % $grid-breakpoints.sm
   md-only: "only screen and (min-width: %s) and (max-width: %s)" % ($grid-breakpoints.md ($grid-breakpoints.lg  - 1))
   md-and-down: "only screen and (max-width: %s )" % ($grid-breakpoints.lg - 1)
   md-and-up: "only screen and (min-width: %s)" % $grid-breakpoints.md
@@ -370,10 +370,11 @@ $snackbar-background-color := #323232
 
 /* Text Input */
 $input-group-height := 58px
-$input-group-margin := 18px 0
+$input-group-padding := 18px 0
 $input-font-size := 16px
 $label-font-size := 12px
 $input-height := 30px
+$input-group-text-field-label-top := 18px
 
 $input-group-light-normal := rgba($material-dark.fg-color, $material-dark.disabledORhints-text-percent)
 $input-group-light-focus := rgba($material-dark.fg-color, .87)

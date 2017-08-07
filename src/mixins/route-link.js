@@ -8,7 +8,10 @@ export default {
     nuxt: Boolean,
     replace: Boolean,
     router: Boolean,
-    ripple: Boolean,
+    ripple: {
+      type: Boolean,
+      default: true
+    },
     tag: String
   },
 
@@ -31,10 +34,8 @@ export default {
         }, (this.$listeners || {}))
       }
 
-      if (!this.exact) {
-        exact = this.href === '/' ||
-          this.to === '/' ||
-          (this.href === Object(this.href) && this.href.path === '/') ||
+      if (typeof this.exact === 'undefined') {
+        exact = this.to === '/' ||
           (this.to === Object(this.to) && this.to.path === '/')
       }
 

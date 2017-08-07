@@ -1,10 +1,15 @@
 import GenerateRouteLink from '~mixins/route-link'
 import Toggleable from '~mixins/toggleable'
+import { Ripple } from '~directives'
 
 export default {
   name: 'v-list-tile',
 
   mixins: [GenerateRouteLink, Toggleable],
+
+  directives: {
+    Ripple
+  },
 
   inheritAttrs: false,
 
@@ -20,7 +25,6 @@ export default {
     classes () {
       return {
         'list__tile': true,
-        'list__tile--active': this.isActive,
         'list__tile--avatar': this.avatar,
         'list__tile--disabled': this.disabled
       }
@@ -32,6 +36,10 @@ export default {
 
     data.attrs = Object.assign({}, data.attrs, this.$attrs)
 
-    return h('li', [h(tag, data, [this.$slots.default])])
+    return h('li', {
+      attrs: {
+        disabled: this.disabled
+      }
+    }, [h(tag, data, [this.$slots.default])])
   }
 }

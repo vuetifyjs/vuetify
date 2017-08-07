@@ -56,7 +56,9 @@ export default {
       clearTimeout(this.activeTimeout)
 
       if (this.isActive && this.timeout) {
-        this.activeTimeout = setTimeout(() => (this.isActive = false), this.timeout)
+        this.activeTimeout = setTimeout(() => {
+          this.isActive = false
+        }, this.timeout)
       }
     }
   },

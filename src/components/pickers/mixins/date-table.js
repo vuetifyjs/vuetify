@@ -1,5 +1,18 @@
 export default {
   methods: {
+    wheelScroll (e) {
+      e.preventDefault()
+
+      let month = this.tableMonth
+
+      if (e.deltaY < 0) month++
+      else month--
+
+      this.tableDate = new Date(this.tableYear, month)
+    },
+    touch (value) {
+      this.tableDate = new Date(this.tableYear, this.tableMonth + value)
+    },
     genTable () {
       const children = []
       const data = {
@@ -8,45 +21,28 @@ export default {
           {
             name: 'touch',
             value: {
-              left: () => this.tableDate = new Date(this.tableYear, this.tableMonth + 1),
-              right: () => this.tableDate = new Date(this.tableYear, this.tableMonth - 1)
+              left: (e) => (e.offsetX < -15) && this.touch(1),
+              right: (e) => (e.offsetX > 15) && this.touch(-1)
             }
           }
         ]
       }
 
       if (this.scrollable) {
-        data.on = {
-          wheel: (e) => {
-            e.preventDefault()
-
-            let month = this.tableMonth
-            const year = this.tableYear
-            const next = e.deltaY < 0
-
-            if (next) month++
-            else month--
-
-            this.tableDate = new Date(year, month)
-          }
-        }
+        data.on = { wheel: this.wheelScroll }
       }
 
       children.push(this.$createElement('table', {
         key: this.tableMonth
-      }, [
-        this.genTHead(),
-        this.genTBody()
-      ]))
+      }, [this.genTHead(), this.genTBody()]))
 
       return this.$createElement('div', data, [
         this.$createElement(this.computedTransition, children)
       ])
     },
     genTHead () {
-      return this.$createElement('thead', {
-
-      }, this.genTR(this.narrowDays.map(day => this.$createElement('th', day))))
+      const days = this.narrowDays.map(day => this.$createElement('th', day))
+      return this.$createElement('thead', this.genTR(days))
     },
     genTBody () {
       const children = []
@@ -67,6 +63,7 @@ export default {
       }
 
       for (let i = 1; i <= length; i++) {
+        const date = new Date(this.tableYear, this.tableMonth, i, 12, 0, 0, 0)
         rows.push(this.$createElement('td', [
           this.$createElement('button', {
             'class': {
@@ -74,7 +71,7 @@ export default {
               'btn--active': this.isActive(i),
               'btn--current': this.isCurrent(i),
               'btn--light': this.dark,
-              'btn--disabled': !this.isAllowed(new Date(this.tableYear, this.tableMonth, i, 12, 0, 0, 0))
+              'btn--disabled': !this.isAllowed(date)
             },
             attrs: {
               type: 'button'
@@ -85,10 +82,11 @@ export default {
             on: {
               click: () => {
                 const day = i < 10 ? `0${i}` : i
+                const tableYear = this.tableYear
                 let tableMonth = this.tableMonth + 1
                 tableMonth = tableMonth < 10 ? `0${tableMonth}` : tableMonth
 
-                this.inputDate = `${this.tableYear}-${tableMonth}-${day}T12:00:00`
+                this.inputDate = `${tableYear}-${tableMonth}-${day}T12:00:00`
                 this.$nextTick(() => (this.autosave && this.save()))
               }
             }

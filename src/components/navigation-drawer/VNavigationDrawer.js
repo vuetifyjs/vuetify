@@ -1,18 +1,21 @@
 import Overlayable from '~mixins/overlayable'
-import Resizable from '~mixins/resizable'
 import Themeable from '~mixins/themeable'
+import { Resize } from '~directives'
 
 export default {
   name: 'v-navigation-drawer',
 
-  mixins: [Overlayable, Resizable, Themeable],
+  directives: {
+    Resize
+  },
+
+  mixins: [Overlayable, Themeable],
 
   data () {
     return {
       isActive: this.value,
       isBooted: false,
       isMobile: false,
-      mobileBreakPoint: 1024,
       touchArea: {
         left: 0,
         right: 0
@@ -28,6 +31,10 @@ export default {
     height: String,
     floating: Boolean,
     miniVariant: Boolean,
+    mobileBreakPoint: {
+      type: Number,
+      default: 1024
+    },
     permanent: Boolean,
     persistent: Boolean,
     right: Boolean,
@@ -60,7 +67,9 @@ export default {
       }
     },
     showOverlay () {
-      return !this.permanent && this.isActive && (this.temporary || this.isMobile)
+      return !this.permanent &&
+        this.isActive &&
+        (this.temporary || this.isMobile)
     }
   },
 
@@ -74,6 +83,9 @@ export default {
       this.$emit('input', val)
       this.showOverlay && val && this.genOverlay() || this.removeOverlay()
       this.$el.scrollTop = 0
+    },
+    isMobile (val) {
+      !val && this.removeOverlay()
     },
     permanent (val) {
       this.$emit('input', val)
@@ -93,9 +105,11 @@ export default {
       this.checkIfMobile()
       setTimeout(() => (this.isBooted = true), 0)
 
-      if (this.permanent) return (this.isActive = true)
+      if (this.permanent) this.isActive = true
       else if (this.isMobile) this.isActive = false
-      else if (!this.value && (this.persistent || this.temporary)) this.isActive = false
+      else if (!this.value &&
+        (this.persistent || this.temporary)
+      ) this.isActive = false
     },
     checkIfMobile () {
       this.isMobile = window.innerWidth < parseInt(this.mobileBreakPoint)
@@ -104,16 +118,26 @@ export default {
       return !this.permanent && (this.temporary || this.isMobile)
     },
     onResize () {
-      if (!this.enableResizeWatcher || this.permanent || this.temporary) return
-      this.checkIfMobile()
-      this.isActive = !this.isMobile
+      clearTimeout(this.resizeTimeout)
+
+      if (!this.enableResizeWatcher ||
+        this.permanent ||
+        this.temporary
+      ) return
+
+      this.resizeTimeout = setTimeout(() => {
+        this.checkIfMobile()
+        this.isActive = !this.isMobile
+      }, 200)
     },
     swipeRight (e) {
       if (this.isActive && !this.right) return
       this.calculateTouchArea()
 
       if (Math.abs(e.touchendX - e.touchstartX) < 100) return
-      else if (!this.right && e.touchstartX <= this.touchArea.left) this.isActive = true
+      else if (!this.right &&
+        e.touchstartX <= this.touchArea.left
+      ) this.isActive = true
       else if (this.right && this.isActive) this.isActive = false
     },
     swipeLeft (e) {
@@ -121,7 +145,9 @@ export default {
       this.calculateTouchArea()
 
       if (Math.abs(e.touchendX - e.touchstartX) < 100) return
-      else if (this.right && e.touchstartX >= this.touchArea.right) this.isActive = true
+      else if (this.right &&
+        e.touchstartX >= this.touchArea.right
+      ) this.isActive = true
       else if (!this.right && this.isActive) this.isActive = false
     },
     calculateTouchArea () {
@@ -134,10 +160,16 @@ export default {
       }
     },
     genDirectives () {
-      const directives = [{
-        name: 'click-outside',
-        value: this.closeConditional
-      }]
+      const directives = [
+        {
+          name: 'click-outside',
+          value: this.closeConditional
+        },
+        {
+          name: 'resize',
+          value: this.onResize
+        }
+      ]
 
       !this.touchless && directives.push({
         name: 'touch',
@@ -162,6 +194,9 @@ export default {
       }, this.$listeners)
     }
 
-    return h('aside', data, this.$slots.default)
+    return h('aside', data, [
+      this.$slots.default,
+      h('div', { 'class': 'navigation-drawer__border' })
+    ])
   }
 }

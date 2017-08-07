@@ -30,6 +30,7 @@ export default {
     singleLine: Boolean,
     solo: Boolean,
     suffix: String,
+    textarea: Boolean,
     type: {
       type: String,
       default: 'text'
@@ -45,7 +46,8 @@ export default {
         'input-group--multi-line': this.multiLine,
         'input-group--full-width': this.fullWidth,
         'input-group--prefix': this.prefix,
-        'input-group--suffix': this.suffix
+        'input-group--suffix': this.suffix,
+        'input-group--textarea': this.textarea
       }
     },
     hasError () {
@@ -56,7 +58,9 @@ export default {
         this.error
     },
     count () {
-      const inputLength = (this.inputValue && this.inputValue.toString() || '').length
+      let inputLength
+      if (this.inputValue) inputLength = this.inputValue.toString().length
+      else inputLength = 0
       let min = inputLength
 
       if (this.counterMin !== 0 && inputLength < this.counterMin) {
@@ -96,15 +100,14 @@ export default {
     isDirty () {
       return this.lazyValue !== null &&
         typeof this.lazyValue !== 'undefined' &&
-        this.lazyValue.toString().length > 0
+        this.lazyValue.toString().length > 0 ||
+        this.placeholder
     }
   },
 
   watch: {
     focused (val) {
       this.hasFocused = true
-
-      !val && this.$emit('change', this.lazyValue)
     },
     value () {
       this.lazyValue = this.value
@@ -122,9 +125,18 @@ export default {
 
   methods: {
     calculateInputHeight () {
-      const height = this.$refs.input.scrollHeight
-      const minHeight = this.rows * 24
-      this.inputHeight = height < minHeight ? minHeight : height
+      this.inputHeight = null
+
+      this.$nextTick(() => {
+        const height = this.$refs.input.scrollHeight
+        const minHeight = this.rows * 24
+        const inputHeight = height < minHeight ? minHeight : height
+        this.inputHeight = inputHeight
+      })
+    },
+    onChange (e) {
+      this.lazyValue = e.target.value
+      this.$emit('change', this.lazyValue)
     },
     onInput (e) {
       this.inputValue = e.target.value
@@ -149,14 +161,14 @@ export default {
       }, this.count)
     },
     genInput () {
-      const tag = this.multiLine ? 'textarea' : 'input'
+      const tag = this.multiLine || this.textarea ? 'textarea' : 'input'
 
       const data = {
         style: {
           'height': this.inputHeight && `${this.inputHeight}px`
         },
         domProps: {
-          autofucus: this.autofocus,
+          autofocus: this.autofocus,
           disabled: this.disabled,
           required: this.required,
           value: this.lazyValue
@@ -168,6 +180,7 @@ export default {
         on: {
           ...this.$listeners,
           blur: this.blur,
+          change: this.onChange,
           input: this.onInput,
           focus: this.focus
         },
@@ -181,10 +194,10 @@ export default {
         if (![undefined, null].includes(this.min)) data.attrs.min = this.min
       }
 
-      if (this.multiLine) {
-        data.domProps.rows = this.rows
-      } else {
+      if (!this.textarea && !this.multiLine) {
         data.domProps.type = this.type
+      } else {
+        data.domProps.rows = this.rows
       }
 
       const children = [this.$createElement(tag, data)]

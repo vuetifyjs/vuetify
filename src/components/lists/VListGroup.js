@@ -63,7 +63,7 @@ export default {
   methods: {
     click () {
       if (!this.$refs.item.querySelector('.list__tile--disabled')) {
-        this.listClick(this._uid)
+        requestAnimationFrame(() => this.listClick(this._uid))
       }
     },
     toggle (uid) {

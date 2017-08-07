@@ -5,17 +5,22 @@ import {
 const Grid = (name) => ({
   functional: true,
 
-  render: (h, { data, children }) => {
+  props: {
+    id: String
+  },
+
+  render: (h, { props, data, children }) => {
     data.staticClass = (`${name} ${data.staticClass || ''}`).trim()
 
-    data.attrs && Object.keys(data.attrs).forEach(attr => {
-      const prop = data.attrs[attr]
+    if (data.attrs) {
+      data.staticClass += ` ${Object.keys(data.attrs).join(' ')}`
+      delete data.attrs
+    }
 
-      if (!prop) {
-        data.staticClass += ` ${prop}`
-        delete data.attrs[attr]
-      }
-    })
+    if (props.id) {
+      data.domProps = data.domProps || {}
+      data.domProps.id = props.id
+    }
 
     return h('div', data, children)
   }

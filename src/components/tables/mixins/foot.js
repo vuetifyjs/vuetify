@@ -5,23 +5,38 @@ export default {
         props: {
           disabled: this.computedPagination.page === 1,
           icon: true,
-          flat: true
+          flat: true,
+          dark: this.dark,
+          light: this.light
         },
-        nativeOn: { click: () => (this.computedPagination.page--) }
+        on: {
+          click: () => {
+            const page = this.computedPagination.page
+            this.updatePagination({ page: page - 1 })
+          }
+        }
       }, [this.$createElement('v-icon', 'chevron_left')])
     },
     genNextIcon () {
-      const disabled = this.computedPagination.rowsPerPage < 0 ||
-        this.computedPagination.page * this.computedPagination.rowsPerPage >= this.itemsLength ||
+      const pagination = this.computedPagination
+      const disabled = pagination.rowsPerPage < 0 ||
+        pagination.page * pagination.rowsPerPage >= this.itemsLength ||
         this.pageStop < 0
 
       return this.$createElement('v-btn', {
         props: {
           disabled,
           icon: true,
-          flat: true
+          flat: true,
+          dark: this.dark,
+          light: this.light
         },
-        nativeOn: { click: () => (this.computedPagination.page++) }
+        on: {
+          click: () => {
+            const page = this.computedPagination.page
+            this.updatePagination({ page: page + 1 })
+          }
+        }
       }, [this.$createElement('v-icon', 'chevron_right')])
     },
     genSelect () {
@@ -34,9 +49,17 @@ export default {
             items: this.rowsPerPageItems,
             value: this.computedPagination.rowsPerPage,
             hideDetails: true,
-            auto: true
+            auto: true,
+            minWidth: '75px'
           },
-          on: { input: val => { this.computedPagination.rowsPerPage = val; this.computedPagination.page = 1 } }
+          on: {
+            input: (val) => {
+              this.updatePagination({
+                page: 1,
+                rowsPerPage: val
+              })
+            }
+          }
         })
       ])
     },
@@ -72,13 +95,26 @@ export default {
       ])]
     },
     genTFoot () {
-      return this.$createElement('tfoot', [
-        this.genTR([
+      const children = []
+
+      if (this.$slots.footer) {
+        const footer = this.$slots.footer
+        const needsTableRow = footer.length && footer[0].tag === 'td'
+        const row = !needsTableRow ? footer : this.genTR(this.$slots.footer)
+
+        children.push(row)
+      }
+
+      if (!this.hideActions) {
+        children.push(this.genTR([
           this.$createElement('td', {
             attrs: { colspan: '100%' }
           }, this.genActions())
-        ])
-      ])
+        ]))
+      }
+
+      if (!children.length) return null
+      return this.$createElement('tfoot', children)
     }
   }
 }

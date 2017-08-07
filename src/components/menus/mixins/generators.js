@@ -30,6 +30,7 @@ export default {
     },
 
     genContent () {
+      const booted = (this.lazy && this.isBooted) || !this.lazy
       return this.$createElement('div', {
         'class': (`menu__content ${this.contentClass}`).trim(),
         ref: 'content',
@@ -41,6 +42,7 @@ export default {
         on: {
           click: e => {
             e.stopPropagation()
+            if (e.target.getAttribute('disabled')) return
             if (this.closeOnContentClick) this.isActive = false
           },
           mouseenter: e => {
@@ -51,7 +53,7 @@ export default {
             this.openOnHover && this.mouseLeaveHandler()
           }
         }
-      }, [this.lazy && this.isBooted || !this.lazy ? this.$slots.default : null])
+      }, [booted ? this.$slots.default : null])
     }
   }
 }

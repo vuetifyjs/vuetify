@@ -2,17 +2,24 @@ import Contextualable from '~mixins/contextualable'
 import Positionable from '~mixins/positionable'
 import GenerateRouteLink from '~mixins/route-link'
 import Themeable from '~mixins/themeable'
-import Ripple from '~directives/ripple'
+import Toggleable from '~mixins/toggleable'
 
 export default {
   name: 'v-btn',
 
-  mixins: [Contextualable, GenerateRouteLink, Positionable, Themeable],
-
-  directives: { Ripple },
+  mixins: [
+    Contextualable,
+    GenerateRouteLink,
+    Positionable,
+    Themeable,
+    Toggleable
+  ],
 
   props: {
-    active: Boolean,
+    activeClass: {
+      type: String,
+      default: 'btn--active'
+    },
     block: Boolean,
     fab: Boolean,
     flat: Boolean,
@@ -41,7 +48,7 @@ export default {
       return {
         'btn': true,
         'btn--absolute': this.absolute,
-        'btn--active': this.active,
+        'btn--active': this.isActive,
         'btn--block': this.block,
         'btn--bottom': this.bottom,
         'btn--disabled': this.disabled,
@@ -87,7 +94,11 @@ export default {
       this.$emit('click', e)
     },
     genContent () {
-      return this.$createElement('div', { 'class': 'btn__content' }, [this.$slots.default])
+      return this.$createElement(
+        'div',
+        { 'class': 'btn__content' },
+        [this.$slots.default]
+      )
     },
     genLoader () {
       const children = []

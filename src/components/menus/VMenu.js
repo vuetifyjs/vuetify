@@ -6,6 +6,8 @@ import Utils from './mixins/utils'
 import Toggleable from '~mixins/toggleable'
 import Keyable from './mixins/keyable'
 
+import { ClickOutside } from '~directives'
+
 export default {
   name: 'v-menu',
 
@@ -18,6 +20,10 @@ export default {
     Utils,
     Toggleable
   ],
+
+  directives: {
+    ClickOutside
+  },
 
   data () {
     return {
@@ -198,9 +204,11 @@ export default {
       this.getTiles()
       this.updateDimensions()
       requestAnimationFrame(this.startTransition)
+      this.$emit('activate')
     },
     deactivate () {
       this.isContentActive = false
+      this.$emit('deactivate')
     },
     onResize () {
       clearTimeout(this.resizeTimeout)

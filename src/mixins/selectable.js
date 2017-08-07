@@ -1,4 +1,4 @@
-import Colorable from '~mixins/colorable'
+import Colorable from './colorable'
 import Input from './input'
 
 export default {
@@ -40,7 +40,9 @@ export default {
 
   methods: {
     genLabel () {
-      return this.$createElement('label', { on: { click: this.toggle } }, this.label)
+      return this.$createElement('label', {
+        on: { click: this.toggle }
+      }, this.$slots.label || this.label)
     },
     toggle () {
       if (this.disabled) {

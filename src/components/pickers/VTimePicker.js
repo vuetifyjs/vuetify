@@ -44,6 +44,9 @@ export default {
     is24hr () {
       return this.format !== 'ampm'
     },
+    is24hrAfter12 () {
+      return this.selectingHour && this.is24hr && this.hour >= 12
+    },
     divider () {
       return this.selectingHour ? 12 : 60
     },
@@ -72,16 +75,19 @@ export default {
 
         let hour = value.getHours()
         let minute = value.getMinutes()
-        this.period = hour > 12 ? 'pm' : 'am'
+        let period = ''
 
         if (!this.is24hr) {
           hour = hour > 12 ? hour - 12 : hour
+          period = hour > 12 ? 'pm' : 'am'
         }
+
+        period && (this.period = period)
 
         hour = this.firstAllowed('hour', hour)
         minute = this.firstAllowed('minute', minute)
 
-        return `${hour}:${minute}${this.period}`
+        return `${hour}:${minute}${period}`
       },
       set (val) {
         return this.$emit('input', val)
@@ -219,7 +225,8 @@ export default {
         offset = 0
       }
 
-      return range.slice(start + offset, range.length).concat(range.slice(0, start + offset))
+      return range.slice(start + offset, range.length)
+        .concat(range.slice(0, start + offset))
     },
     firstAllowed (type, value) {
       const allowed = this[`allowed${type.charAt(0).toUpperCase() + type.slice(1)}s`]

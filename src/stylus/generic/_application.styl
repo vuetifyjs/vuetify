@@ -2,6 +2,9 @@
   -webkit-backface-visibility: hidden
   min-height: 100vh
 
+  > main > .container
+    min-height: 100vh
+
   &--toolbar
     > main > .container
       min-height: 'calc(100vh - %s)' % $toolbar-height
@@ -17,6 +20,9 @@
   &--footer-fixed
     > aside.navigation-drawer
       max-height: 'calc(100vh - %s)' % $footer-height
+
+    > main
+      padding-bottom: $footer-height
 
     &.application--toolbar
       > aside.navigation-drawer.navigation-drawer--clipped

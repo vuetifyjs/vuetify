@@ -1,11 +1,12 @@
 import Bootable from '~mixins/bootable'
 import VBtn from '~components/buttons/VBtn'
 import VIcon from '~components/icons/VIcon'
+import Themeable from '~mixins/themeable'
 
 export default {
   name: 'v-carousel',
 
-  mixins: [Bootable],
+  mixins: [Bootable, Themeable],
 
   data () {
     return {
@@ -28,6 +29,14 @@ export default {
     interval: {
       type: Number,
       default: 6000
+    },
+    leftControlIcon: {
+      type: [Boolean, String],
+      default: 'chevron_left'
+    },
+    rightControlIcon: {
+      type: [Boolean, String],
+      default: 'chevron_right'
     }
   },
 
@@ -48,7 +57,11 @@ export default {
         return i.$el.classList && i.$el.classList.contains('carousel__item')
       })
 
-      this.items.forEach(i => i.open(this.items[this.current]._uid, this.reverse))
+      this.items.forEach(i => i.open(
+          this.items[this.current]._uid,
+          this.reverse
+        )
+      )
 
       !this.isBooted && this.cycle && this.restartInterval()
       this.isBooted = true
@@ -68,17 +81,20 @@ export default {
         staticClass: 'carousel__controls'
       }, this.genItems())
     },
-    genIcon (direction, fn) {
+    genIcon (direction, icon, fn) {
+      if (!icon) return null
+
       return this.$createElement('div', {
         staticClass: `carousel__${direction}`
       }, [
         this.$createElement(VBtn, {
           props: {
             icon: true,
-            dark: true
+            dark: this.dark || !this.light,
+            light: this.light
           },
           on: { click: fn }
-        }, [this.$createElement(VIcon, `chevron_${direction}`)])
+        }, [this.$createElement(VIcon, icon)])
       ])
     },
     genItems () {
@@ -90,7 +106,8 @@ export default {
           },
           props: {
             icon: true,
-            dark: true
+            dark: this.dark || !this.light,
+            light: this.light
           },
           key: index,
           on: { click: this.select.bind(this, index) }
@@ -142,8 +159,8 @@ export default {
         }
       }]
     }, [
-      this.genIcon('left', this.prev),
-      this.genIcon('right', this.next),
+      this.genIcon('left', this.leftControlIcon, this.prev),
+      this.genIcon('right', this.rightControlIcon, this.next),
       this.genControls(),
       this.$slots.default
     ])

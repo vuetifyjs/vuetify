@@ -8,7 +8,8 @@ export default {
     disabled: Boolean,
     length: {
       type: Number,
-      default: 0
+      default: 0,
+      validator: val => val % 1 === 0
     },
     value: {
       type: Number,

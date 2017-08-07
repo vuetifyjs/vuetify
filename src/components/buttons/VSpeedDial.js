@@ -54,7 +54,7 @@ export default {
     }
 
     if (this.isActive) {
-      children = this.$slots.default.map((b, i) => {
+      children = (this.$slots.default || []).map((b, i) => {
         b.key = i
 
         return b

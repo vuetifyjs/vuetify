@@ -30,11 +30,17 @@ export default {
 
       if (this.listIndex === -1) this.setActiveListIndex()
       if ([27, 9].includes(e.keyCode)) return this.isActive = false
-      else if (!this.isActive && [13, 32].includes(e.keyCode)) return this.isActive = true
+      else if (!this.isActive && [13, 32].includes(e.keyCode)) {
+        return this.isActive = true
+      }
 
-      if (e.keyCode === 40 && this.listIndex < this.tiles.length - 1) this.listIndex++
-      else if (e.keyCode === 38 && this.listIndex > 0) this.listIndex--
-      else if (e.keyCode === 13 && this.listIndex !== -1) this.tiles[this.listIndex].click()
+      if (e.keyCode === 40 && this.listIndex < this.tiles.length - 1) {
+        this.listIndex++
+      } else if (e.keyCode === 38 && this.listIndex > 0) {
+        this.listIndex--
+      } else if (e.keyCode === 13 && this.listIndex !== -1) {
+        this.tiles[this.listIndex].click()
+      }
     },
     getTiles () {
       this.tiles = this.$refs.content.querySelectorAll('.list__tile')

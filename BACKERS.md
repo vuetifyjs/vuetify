@@ -4,11 +4,13 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 
 ### $50+
 - [Xavier Escoté](http://www.deister.net/)
+- [Steve Gehrman](https://cocoatech.com/)
 
 ### $20+
 - Tibor Nagy
 - [Jaime Olmo](https://www.jaimeolmo.com)
 - Maxim Bogdanov
+- Michael Marti
 
 ### $10+
 
@@ -20,3 +22,4 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Chava Sobreyra
 - Dima Shmakov
 - Costa Huang
+- Jay Blanchard

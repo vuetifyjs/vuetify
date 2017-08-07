@@ -4,9 +4,13 @@ import Generators from './mixins/generators'
 import Input from '~mixins/input'
 
 import VCard from '~components/cards/VCard'
+import VCheckbox from '~components/selection-controls/VCheckbox'
 import VIcon from '~components/icons/VIcon'
 import VList from '~components/lists/VList'
 import VListTile from '~components/lists/VListTile'
+import VListTileAction from '~components/lists/VListTileAction'
+import { VListTileContent } from '~components/lists'
+import { VListTileTitle } from '~components/lists'
 import VMenu from '~components/menus/VMenu'
 
 import clickOutside from '~directives/click-outside'
@@ -18,9 +22,13 @@ export default {
 
   components: {
     VCard,
+    VCheckbox,
     VIcon,
     VList,
     VListTile,
+    VListTileAction,
+    VListTileContent,
+    VListTileTitle,
     VMenu
   },
 
@@ -68,9 +76,17 @@ export default {
       type: String,
       default: 'value'
     },
+    itemDisabled: {
+      type: String,
+      default: 'disabled'
+    },
     maxHeight: {
       type: [Number, String],
       default: 300
+    },
+    minWidth: {
+      type: [Boolean, Number, String],
+      default: false
     },
     multiple: Boolean,
     multiLine: Boolean,
@@ -128,14 +144,17 @@ export default {
       return this.segmented || this.overflow || this.editable
     },
     selectedItems () {
-      if (this.inputValue === null || typeof this.inputValue === 'undefined') return []
+      if (this.inputValue === null ||
+        typeof this.inputValue === 'undefined') return []
 
       return this.items.filter(i => {
         if (!this.multiple) {
           return this.getValue(i) === this.getValue(this.inputValue)
         } else {
           // Always return Boolean
-          return this.inputValue.find(j => this.getValue(j) === this.getValue(i)) !== undefined
+          return this.inputValue.find((j) => {
+            return this.getValue(j) === this.getValue(i)
+          }) !== undefined
         }
       })
     }
@@ -148,7 +167,9 @@ export default {
     value (val) {
       this.inputValue = val
       this.validate()
-      if (this.autocomplete || this.editable) this.$nextTick(this.$refs.menu.updateDimensions)
+      if (this.autocomplete || this.editable) {
+        this.$nextTick(this.$refs.menu.updateDimensions)
+      }
     },
     isActive (val) {
       this.isBooted = true
@@ -159,7 +180,9 @@ export default {
     },
     isBooted () {
       this.$nextTick(() => {
-        this.content && this.content.addEventListener('scroll', this.onScroll, false)
+        if (this.content) {
+          this.content.addEventListener('scroll', this.onScroll, false)
+        }
       })
     },
     searchValue () {
@@ -169,13 +192,17 @@ export default {
 
   mounted () {
     this.$vuetify.load(() => {
+      if (this._isDestroyed) return
+
       this.content = this.$refs.menu.$refs.content
     })
   },
 
   beforeDestroy () {
     if (this.isBooted) {
-      this.content && this.content.removeEventListener('scroll', this.onScroll, false)
+      if (this.content) {
+        this.content.removeEventListener('scroll', this.onScroll, false)
+      }
     }
   },
 
@@ -198,7 +225,9 @@ export default {
           this.inputValue !== null &&
           typeof this.inputValue !== 'undefined'
         ) {
-        this.$nextTick(() => (this.$refs.input.value = this.getValue(this.inputValue)))
+        this.$nextTick(() => {
+          this.$refs.input.value = this.getValue(this.inputValue)
+        })
       }
     },
     genLabel () {
@@ -210,11 +239,18 @@ export default {
 
       return this.$createElement('label', data, this.label)
     },
+    getPropertyFromItem (item, field) {
+      if (item !== Object(item)) return item
+
+      const value = getObjectValueByPath(item, field)
+
+      return typeof value === 'undefined' ? item : value
+    },
     getText (item) {
-      return item === Object(item) ? (getObjectValueByPath(item, this.itemText) || item) : item
+      return this.getPropertyFromItem(item, this.itemText)
     },
     getValue (item) {
-      return item === Object(item) ? (getObjectValueByPath(item, this.itemValue) || item) : item
+      return this.getPropertyFromItem(item, this.itemValue)
     },
     onScroll () {
       if (!this.isActive) {
@@ -236,10 +272,14 @@ export default {
         this.inputValue = this.returnObject ? item : this.getValue(item)
       } else {
         const inputValue = this.inputValue.slice()
-        const i = this.inputValue.findIndex(i => this.getValue(i) === this.getValue(item))
+        const i = this.inputValue.findIndex((i) => {
+          return this.getValue(i) === this.getValue(item)
+        })
 
         i !== -1 && inputValue.splice(i, 1) || inputValue.push(item)
-        this.inputValue = inputValue.map(i => this.returnObject ? i : this.getValue(i))
+        this.inputValue = inputValue.map((i) => {
+          return this.returnObject ? i : this.getValue(i)
+        })
       }
 
       if (this.autocomplete || this.editable) {

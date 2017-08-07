@@ -22,7 +22,8 @@ export default {
     calcTopAuto () {
       if (!this.hasActivator) return this.calcTop(true)
 
-      const selectedIndex = Array.from(this.tiles).findIndex(n => n.classList.contains('list__tile--active'))
+      const selectedIndex = Array.from(this.tiles)
+        .findIndex(n => n.classList.contains('list__tile--active'))
 
       if (selectedIndex === -1) {
         this.selectedIndex = null
@@ -33,7 +34,7 @@ export default {
       this.selectedIndex = selectedIndex
       let actingIndex = selectedIndex
 
-      let offsetPadding = -16
+      let offsetPadding = 1
       // #708 Stop index should vary by tile length
       this.stopIndex = this.tiles.length > 4
         ? this.tiles.length - 4
@@ -41,9 +42,9 @@ export default {
 
       if (selectedIndex > this.startIndex && selectedIndex < this.stopIndex) {
         actingIndex = 2
-        offsetPadding = 24
+        offsetPadding = 41
       } else if (selectedIndex >= this.stopIndex) {
-        offsetPadding = -8
+        offsetPadding = 9
         actingIndex = selectedIndex - this.stopIndex
       }
 
@@ -73,19 +74,21 @@ export default {
       if (this.nudgeTop) top -= this.nudgeTop
       if (this.nudgeBottom) top += this.nudgeBottom
 
-      const pageYOffset = typeof window !== 'undefined' ? window.pageYOffset : 0
+      const defined = typeof window !== 'undefined'
+      const pageYOffset = defined ? window.pageYOffset : 0
 
       return this.calcYOverflow(top) + pageYOffset
     },
     calcXOverflow (left) {
+      const hasWindow = typeof window !== 'undefined'
+      const innerWidth = hasWindow ? window.innerWidth : 0
       const maxWidth = Math.max(
         this.dimensions.content.width,
         this.calculatedMinWidth,
         parseInt(this.maxWidth) || 0
       )
       const totalWidth = left + maxWidth
-      const availableWidth = totalWidth - this.window.innerWidth
-      const innerWidth = typeof window !== 'undefined' ? window.innerWidth : 0
+      const availableWidth = totalWidth - innerWidth
 
       if ((!this.left || this.right) && availableWidth > 0) {
         left = (
@@ -99,7 +102,8 @@ export default {
     },
     calcYOverflow (top) {
       const totalHeight = top + this.dimensions.content.height
-      const innerHeight = typeof window !== 'undefined' ? window.innerHeight : 0
+      const defined = typeof window !== 'undefined'
+      const innerHeight = defined ? window.innerHeight : 0
 
       if (this.top && top < 0) top = 12
       else if ((!this.top || this.bottom) && innerHeight < totalHeight) {
