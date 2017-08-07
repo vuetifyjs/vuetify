@@ -26,9 +26,13 @@ export default {
     classes () {
       return {
         'btn-toggle': true,
-        'btn-toggle--selected': this.inputValue &&
-          (!this.multiple || this.inputValue.length)
+        'btn-toggle--selected': this.hasValue
       }
+    },
+    hasValue () {
+      return (this.multiple && this.inputValue.length) ||
+        (!this.multiple && this.inputValue !== null &&
+          typeof this.inputValue !== 'undefined')
     }
   },
 
