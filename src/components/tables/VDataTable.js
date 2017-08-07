@@ -94,22 +94,32 @@ export default {
     },
     customSort: {
       type: Function,
-      default: (items, index, descending) => {
+      default: (items, index, isDescending) => {
         if (index === null) return items
 
         return items.sort((a, b) => {
           let sortA = getObjectValueByPath(a, index)
           let sortB = getObjectValueByPath(b, index)
 
-          if (descending) {
+          if (isDescending) {
             [sortA, sortB] = [sortB, sortA]
           }
 
-          if (!isNaN(sortA) && !isNaN(sortB)) return (sortA - sortB)
-          else if (sortA == null && sortB == null) return 0;
+          // Check if both are numbers
+          if (!isNaN(sortA) && !isNaN(sortB)) {
+            return sortA - sortB
+          }
 
-          [sortA, sortB] =
-            [sortA, sortB].map(s => (s || '').toLocaleLowerCase())
+          // Check if both cannot be evaluated
+          if (sortA === null && sortB === null) {
+            return 0
+          }
+
+          [sortA, sortB] = [sortA, sortB]
+            .map(s => (
+              (s || '').toString().toLocaleLowerCase()
+            ))
+
           if (sortA > sortB) return 1
           if (sortA < sortB) return -1
 
