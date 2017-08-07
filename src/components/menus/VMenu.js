@@ -138,7 +138,7 @@ export default {
     minWidth: [Number, String],
     zIndex: {
       type: [Number, String],
-      default: null
+      default: 6
     }
   },
 
