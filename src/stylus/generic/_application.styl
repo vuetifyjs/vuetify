@@ -21,6 +21,11 @@
       > main > .container
         min-height: 'calc(100vh - %s - %s)' % ($toolbar-mobile-landscape-height $footer-height)
 
+    > aside.navigation-drawer.navigation-drawer--clipped
+      &.navigation-drawer--permanent, &.navigation-drawer--persistent
+        margin-top: $toolbar-mobile-landscape-height
+        max-height: "calc(100vh - %s)" % $toolbar-mobile-landscape-height
+
   &--footer
     > main > .container
       min-height: 'calc(100vh - %s)' % $footer-height
@@ -35,6 +40,11 @@
     &.application--toolbar
       > aside.navigation-drawer.navigation-drawer--clipped
         max-height: 'calc(100vh - %s - %s)' % ($toolbar-height $footer-height)
+
+    &.application--toolbar-dense
+      > aside.navigation-drawer.navigation-drawer--clipped
+        margin-top: $toolbar-mobile-landscape-height
+        max-height: 'calc(100vh - %s - %s)' % ($toolbar-mobile-landscape-height $footer-height)
 
 // Main theme
 .application
