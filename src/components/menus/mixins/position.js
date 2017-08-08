@@ -90,7 +90,11 @@ export default {
       const totalWidth = left + maxWidth
       const availableWidth = totalWidth - innerWidth
 
-      if (!this.fixedOffsetX && (!this.left || this.right) && availableWidth > 0) {
+      if (
+        !this.fixedOffsetX 
+        && (!this.left || this.right) 
+        && availableWidth > 0
+      ) {
         left = (
           innerWidth -
           maxWidth -
@@ -105,7 +109,11 @@ export default {
       const defined = typeof window !== 'undefined'
       const innerHeight = defined ? window.innerHeight : 0
       if (this.top && top < 0) top = 12
-      else if (!this.fixedOffsetY && (!this.top || this.bottom) && innerHeight < totalHeight) {
+      else if (
+        !this.fixedOffsetY 
+        && (!this.top || this.bottom) 
+        && innerHeight < totalHeight
+      ) {
         top = (
           innerHeight -
           this.dimensions.content.height -
