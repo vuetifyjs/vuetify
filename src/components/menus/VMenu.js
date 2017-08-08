@@ -70,6 +70,8 @@ export default {
     auto: Boolean,
     offsetX: Boolean,
     offsetY: Boolean,
+    fixedOffsetX: Boolean,
+    fixedOffsetY: Boolean,
     disabled: Boolean,
     maxHeight: {
       default: 'auto'
