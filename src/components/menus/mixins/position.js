@@ -104,14 +104,14 @@ export default {
       const totalHeight = top + this.dimensions.content.height
       const defined = typeof window !== 'undefined'
       const innerHeight = defined ? window.innerHeight : 0
-
+      console.log(this)
       if (this.top && top < 0) top = 12
       else if ((!this.top || this.bottom) && innerHeight < totalHeight) {
-        top = (
-          innerHeight -
-          this.dimensions.content.height -
-          12
-        )
+//         top = (
+//           innerHeight -
+//           this.dimensions.content.height -
+//           12
+//         )
       }
 
       return top
