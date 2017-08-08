@@ -1,32 +1,22 @@
-import Themeable from '~mixins/themeable'
+import VBtn from '~components/buttons/VBtn'
+import VIcon from '~components/icons/VIcon'
 
 export default {
   name: 'v-toolbar-side-icon',
 
-  mixins: [Themeable],
+  functional: true,
 
-  mounted () {
-    this.$el.addEventListener('click', this.onClick, false)
-  },
-
-  beforeDestroy () {
-    this.$el &&
-      this.$el.removeEventListener('click', this.onClick, false)
-  },
-
-  methods: {
-    onClick: e => e.stopPropagation()
-  },
-
-  render (h) {
+  render (h, { slots, listeners, props }) {
     const data = {
       staticClass: 'toolbar__side-icon',
-      props: Object.assign({}, {
+      props: Object.assign(props, {
         icon: true
-      }, this.$props),
-      on: this.$listeners
+      }),
+      on: listeners
     }
 
-    return h('v-btn', data, [h('v-icon', 'menu')])
+    const defaultSlot = slots().default
+
+    return h(VBtn, data, defaultSlot || [h(VIcon, 'menu')])
   }
 }
