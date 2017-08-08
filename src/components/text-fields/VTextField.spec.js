@@ -26,7 +26,7 @@ test('VTextField.js', () => {
       attrs: {}
     })
 
-    let inputGroup = wrapper.find('input')[0]
+    const inputGroup = wrapper.find('input')[0]
     expect(inputGroup.hasAttribute('aria-label', 'Test')).toBe(true)
     expect(`$attrs is readonly`).toHaveBeenWarned()
   })
@@ -39,7 +39,7 @@ test('VTextField.js', () => {
       attrs: {}
     })
 
-    let inputGroup = wrapper.find('input')[0]
+    const inputGroup = wrapper.find('input')[0]
     expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
     expect(`$attrs is readonly`).toHaveBeenWarned()
   })
@@ -54,7 +54,7 @@ test('VTextField.js', () => {
       }
     })
 
-    let inputGroup = wrapper.find('input')[0]
+    const inputGroup = wrapper.find('input')[0]
     expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
     expect(`$attrs is readonly`).toHaveBeenWarned()
   })

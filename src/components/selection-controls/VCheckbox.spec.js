@@ -92,7 +92,7 @@ test('VCheckbox.js', ({ mount }) => {
       attrs: {}
     })
 
-    let inputGroup = wrapper.find('.input-group')[0]
+    const inputGroup = wrapper.find('.input-group')[0]
     expect(inputGroup.hasAttribute('aria-label', 'Test')).toBe(true)
     expect(`$attrs is readonly`).toHaveBeenWarned()
   })
@@ -104,7 +104,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    let inputGroup = wrapper.find('.input-group')[0]
+    const inputGroup = wrapper.find('.input-group')[0]
     expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
   })
 })
