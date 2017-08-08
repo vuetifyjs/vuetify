@@ -35,7 +35,4 @@
   }
 </script>
 
-<style lang="stylus" src="../../stylus/main.styl"></style>
-
-<style lang="stylus" src="./styles.styl"></style>
-<style lang="stylus" src="./theme.styl"></style>
+<style lang="stylus" src="../../stylus/components/_app.styl"></style>

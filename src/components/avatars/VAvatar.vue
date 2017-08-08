@@ -4,4 +4,4 @@
   export default createSimpleFunctional('avatar')
 </script>
 
-<style lang="stylus" src="./styles.styl"></style>
+<style lang="stylus" src="../../stylus/components/_avatars.styl"></style>

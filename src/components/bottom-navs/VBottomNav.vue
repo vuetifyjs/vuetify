@@ -1,3 +1,4 @@
+<script>
   export default {
     functional: true,
 
@@ -17,3 +18,6 @@
       return h('div', data, children)
     }
   }
+</script>
+
+<style lang="stylus" src="../../stylus/components/_bottom-navs.styl"></style>

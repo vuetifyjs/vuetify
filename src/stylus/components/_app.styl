@@ -1,3 +1,6 @@
+@import '../main'
+@import '../theme.styl'
+
 .application
   -webkit-backface-visibility: hidden
   min-height: 100vh
@@ -27,3 +30,9 @@
     &.application--toolbar
       > aside.navigation-drawer.navigation-drawer--clipped
         max-height: 'calc(100vh - %s - %s)' % ($toolbar-height $footer-height)
+
+application($material)
+  background: $material.background
+  color: $material.text.primary
+
+theme(application)
