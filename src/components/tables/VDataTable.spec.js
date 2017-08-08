@@ -1,4 +1,4 @@
-import { test } from '~util/testing'
+﻿import { test } from '~util/testing'
 import VDataTable from './VDataTable'
 
 test('VDataTable.js', ({ mount }) => {
@@ -26,7 +26,7 @@ test('VDataTable.js', ({ mount }) => {
 
     pagination.descending = true
 
-    expect(wrapper.propsData().pagination.descending).toBe(true)
+    expect(wrapper.vm.$props.pagination.descending).toBe(true)
     // Also expect tests to not crash :)
   })
 })

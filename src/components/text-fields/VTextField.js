@@ -1,4 +1,4 @@
-import Input from '~mixins/input'
+﻿import Input from '~mixins/input'
 
 export default {
   name: 'v-text-field',
@@ -175,7 +175,8 @@ export default {
         },
         attrs: {
           ...this.$attrs,
-          tabindex: this.tabindex
+          tabindex: this.tabindex,
+          'aria-label': !this.$attrs.id && this.label // Label `for` will be set if we have an id
         },
         on: {
           ...this.$listeners,
