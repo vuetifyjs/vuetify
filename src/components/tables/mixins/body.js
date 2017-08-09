@@ -34,8 +34,7 @@ export default {
 
         return needsTableRow
           ? this.genTR(row, {
-            attrs: { active: this.isSelected(item) },
-            key: JSON.stringify(item)
+            attrs: { active: this.isSelected(item) }
           })
           : row
       })
