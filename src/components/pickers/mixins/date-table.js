@@ -37,7 +37,9 @@ export default {
       }, [this.genTHead(), this.genTBody()]))
 
       return this.$createElement('div', data, [
-        this.$createElement(this.computedTransition, children)
+        this.$createElement('transition', {
+          props: { name: this.computedTransition }
+        }, children)
       ])
     },
     genTHead () {

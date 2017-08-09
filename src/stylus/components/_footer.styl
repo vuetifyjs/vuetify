@@ -1,9 +1,11 @@
+@import '../bootstrap'
+
 .footer
   align-items: center
   display: flex
   height: $footer-height
   transition: .3s $transition.swing
-  
+
   &--absolute, &--fixed
     bottom: 0
     left: 0
@@ -12,20 +14,20 @@
 
   &--absolute
     position: absolute
-    
+
   &--fixed
     position: fixed
-  
+
   > *:first-child
     margin-left: $grid-gutters.md
-    
+
   > *:last-child
     margin-right: $grid-gutters.md
-    
+
   @media $display-breakpoints.xs-only
     > *:first-child
       margin-left: $grid-gutters.lg
-      
+
     > *:last-child
       margin-right: $grid-gutters.lg
-  
+

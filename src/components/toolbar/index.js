@@ -1,6 +1,6 @@
 import {
   createSimpleFunctional
-} from '~util/helpers'
+} from '../../util/helpers'
 
 import VSystemBar from './VSystemBar'
 import VToolbar from './VToolbar'

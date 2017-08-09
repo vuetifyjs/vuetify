@@ -1,5 +1,5 @@
-import component from './VAlert'
+import VAlert from './VAlert'
 
-export function VAlert (Vue) {
-  Vue.component('v-alert', component)
+export default function install (Vue) {
+  Vue.component('v-alert', VAlert)
 }

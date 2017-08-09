@@ -1,6 +1,6 @@
 import {
   createSimpleFunctional
-} from '~util/helpers'
+} from '../../util/helpers'
 
 import VDataTable from './VDataTable'
 import VEditDialog from './VEditDialog'

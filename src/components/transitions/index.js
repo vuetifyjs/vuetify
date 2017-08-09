@@ -1,7 +1,7 @@
 import {
   createSimpleTransition,
   createJavaScriptTransition
-} from '~util/helpers'
+} from '../../util/helpers'
 
 import ExpandTransitionFunctions from './expand-transition'
 

@@ -1,5 +1,5 @@
-import component from './VAvatar'
+import VAvatar from './VAvatar'
 
-export function VAvatar (Vue) {
-  Vue.component('v-avatar', component)
+export default function install (Vue) {
+  Vue.component('v-avatar', VAvatar)
 }

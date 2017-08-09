@@ -1,9 +1,9 @@
 <script>
-  import Contextualable from '~mixins/contextualable'
-  import Positionable from '~mixins/positionable'
-  import GenerateRouteLink from '~mixins/route-link'
-  import Themeable from '~mixins/themeable'
-  import Toggleable from '~mixins/toggleable'
+  import Contextualable from '../../mixins/contextualable'
+  import Positionable from '../../mixins/positionable'
+  import GenerateRouteLink from '../../mixins/route-link'
+  import Themeable from '../../mixins/themeable'
+  import Toggleable from '../../mixins/toggleable'
 
   export default {
     name: 'v-btn',
@@ -67,8 +67,6 @@
           'btn--round': this.round,
           'btn--small': this.small,
           'btn--top': this.top,
-          'theme--dark': this.dark,
-          'theme--light': this.light,
           'primary': this.primary && !this.outline,
           'secondary': this.secondary && !this.outline,
           'success': this.success && !this.outline,
@@ -80,7 +78,8 @@
           'success--text': this.success && (this.outline || this.flat),
           'info--text': this.info && (this.outline || this.flat),
           'warning--text': this.warning && (this.outline || this.flat),
-          'error--text': this.error && (this.outline || this.flat)
+          'error--text': this.error && (this.outline || this.flat),
+          ...this.themeClasses
         }
       }
     },

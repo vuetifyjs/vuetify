@@ -1,3 +1,16 @@
+@import '../bootstrap'
+
+progress-linear(progress)
+  .progress-linear__bar
+    background: lighten(progress, 50%)
+
+  .progress-linear__bar__determinate
+    background: progress
+
+  .progress-linear__bar__indeterminate
+    .long, .short
+      background: progress
+
 .progress-linear
   background: transparent
   margin: 1rem 0
@@ -108,3 +121,4 @@
     100%
       right: 107%
       left: -8%
+

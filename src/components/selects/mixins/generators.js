@@ -1,4 +1,4 @@
-import { getObjectValueByPath } from '~util/helpers'
+import { getObjectValueByPath } from '../../../util/helpers'
 
 export default {
   methods: {

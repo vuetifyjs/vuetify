@@ -1,4 +1,4 @@
-import Themeable from '~mixins/themeable'
+import Themeable from '../../mixins/themeable'
 
 export default {
   name: 'v-toolbar',

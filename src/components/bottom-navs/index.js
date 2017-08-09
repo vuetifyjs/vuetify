@@ -1,5 +1,5 @@
-import component from './VBottomNav'
+import VBottomNav from './VBottomNav'
 
-export function VBottomNav (Vue) {
-  Vue.component('v-bottom-nav', component)
+export default function install (Vue) {
+  Vue.component('v-bottom-nav', VBottomNav)
 }

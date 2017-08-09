@@ -1,5 +1,11 @@
-import component from './VApp'
+import load from '../../util/load'
+import VApp from './VApp'
 
-export function VApp (Vue) {
-  Vue.component('v-app', component)
+export default function install (Vue) {
+  Vue.component('v-app', VApp)
+
+  // Putting this here for now
+  Vue.prototype.$vuetify = {
+    load
+  }
 }

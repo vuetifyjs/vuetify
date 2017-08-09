@@ -1,10 +1,21 @@
-import { VExpandTransition } from '~components/transitions'
-import Toggleable from '~mixins/toggleable'
+import { VExpandTransition } from '../transitions'
+
+import Toggleable from '../../mixins/toggleable'
+
+import Ripple from '../../directives/ripple'
+import ClickOutside from '../../directives/click-outside'
 
 export default {
   name: 'v-expansion-panel-content',
 
   mixins: [Toggleable],
+
+  directives: {
+    Ripple,
+    ClickOutside
+  },
+
+  inject: ['expand'],
 
   data () {
     return {
@@ -28,7 +39,7 @@ export default {
   methods: {
     closeConditional (e) {
       return this.$parent.$el.contains(e.target) &&
-        !this.$parent.expand &&
+        !this.expand() &&
         !this.$el.contains(e.target)
     },
 

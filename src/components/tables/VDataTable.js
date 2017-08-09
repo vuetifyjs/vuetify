@@ -1,19 +1,19 @@
+import Filterable from '../../mixins/filterable'
+import Themeable from '../../mixins/themeable'
 import Head from './mixins/head'
 import Body from './mixins/body'
 import Foot from './mixins/foot'
 import Progress from './mixins/progress'
-import Filterable from '~mixins/filterable'
-import Themeable from '~mixins/themeable'
 
-import VBtn from '~components/buttons/VBtn'
-import VIcon from '~components/icons/VIcon'
-import VProgressLinear from '~components/progress/VProgressLinear'
-import VSelect from '~components/selects/VSelect'
+import VBtn from '../buttons/VBtn'
+import VIcon from '../icons/VIcon'
+import VProgressLinear from '../progress/VProgressLinear'
+import VSelect from '../selects/VSelect'
 
 import {
   createSimpleFunctional,
   getObjectValueByPath
-} from '~util/helpers'
+} from '../../util/helpers'
 
 export default {
   name: 'v-datatable',

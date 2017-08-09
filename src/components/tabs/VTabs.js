@@ -1,5 +1,5 @@
-import Themeable from '~mixins/themeable'
-import { Resize } from '~directives'
+import Themeable from '../../mixins/themeable'
+import { Resize } from '../../directives'
 
 export default {
   name: 'v-tabs',

@@ -1,5 +1,5 @@
-import VIcon from '~components/icons/VIcon'
-import { Resize } from '~directives'
+import VIcon from '../icons/VIcon'
+import { Resize } from '../../directives'
 
 export default {
   name: 'v-tabs-bar',

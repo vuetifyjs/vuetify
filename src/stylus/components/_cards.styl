@@ -1,23 +1,26 @@
+@import '../bootstrap'
+@import '../theme'
+
 .card
   elevation(2)
   position: relative
   border-radius: $card-border-radius
   min-width: 0
-      
+
   > *:first-child
     border-top-left-radius: inherit
     border-top-right-radius: inherit
-    
+
   > *:last-child
     border-bottom-left-radius: inherit
     border-bottom-right-radius: inherit
 
   &--raised
     elevation(3)
-    
+
   &--tile
     border-radius: 0
-  
+
   &--flat
     elevation(0)
 
@@ -34,14 +37,14 @@
     display: flex
     flex-wrap: wrap
     padding: 16px
-    
+
     &--primary
       padding-top: 24px
 
   &__text
     padding: 16px
     width: 100%
-    
+
   &__media
     display: flex
     overflow: hidden
@@ -49,7 +52,7 @@
 
     img
       width: 100%
-    
+
     &__background
       border-radius: inherit
       position: absolute
@@ -57,15 +60,22 @@
       top: 0
       width: 100%
       height: 100%
-      
+
     &__content
       flex: 1
       position: relative
-    
+
   &__actions
     align-items: center
     display: flex
     padding: 8px 4px
-    
+
     > *
       margin: 0 4px
+
+/* Themes */
+card($material)
+  background-color: $material.cards
+  color: $material.text.primary
+
+theme(card, "card")
