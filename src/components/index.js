@@ -38,6 +38,12 @@ import {
 import VSelect from './selects'
 import VSlider from './sliders'
 import VSnackbar from './snackbars'
+import VStepper from './steppers'
+import VSubheader from './subheaders'
+import VDataTable from './tables'
+import VTabs from './tabs'
+import VTextField from './text-fields'
+import VToolbar from './toolbar'
 
 export {
   VAlert,
@@ -71,5 +77,11 @@ export {
   VSwitch,
   VSelect,
   VSlider,
-  VSnackbar
+  VSnackbar,
+  VStepper,
+  VSubheader,
+  VDataTable,
+  VTabs,
+  VTextField,
+  VToolbar
 }

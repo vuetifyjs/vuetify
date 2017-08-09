@@ -1,11 +1,14 @@
 import VIcon from '../icons/VIcon'
-import { Resize } from '../../directives'
+
+import Resize from '../../directives/resize'
+import Touch from '../../directives/touch'
 
 export default {
   name: 'v-tabs-bar',
 
   directives: {
-    Resize
+    Resize,
+    Touch
   },
 
   inject: ['isScrollable', 'isMobile'],

@@ -7,7 +7,7 @@
   import Utils from './mixins/utils'
   import Keyable from './mixins/keyable'
 
-  import { ClickOutside } from '../../directives'
+  import ClickOutside from '../../directives/click-outside'
 
   export default {
     name: 'v-menu',

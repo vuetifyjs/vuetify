@@ -2,11 +2,9 @@
   import Overlayable from '../../mixins/overlayable'
   import Themeable from '../../mixins/themeable'
 
-  import {
-    ClickOutside,
-    Resize,
-    Touch
-  } from '../../directives'
+  import ClickOutside from '../../directives/click-outside'
+  import Resize from '../../directives/resize'
+  import Touch from '../../directives/touch'
 
   export default {
     name: 'v-navigation-drawer',

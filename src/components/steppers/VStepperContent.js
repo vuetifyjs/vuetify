@@ -1,5 +1,15 @@
+import {
+  VTabTransition,
+  VTabReverseTransition
+} from '../transitions'
+
 export default {
   name: 'v-stepper-content',
+
+  components: {
+    VTabTransition,
+    VTabReverseTransition
+  },
 
   data () {
     return {

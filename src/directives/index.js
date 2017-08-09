@@ -5,11 +5,11 @@ import Ripple from './ripple'
 import Tooltip from './tooltip'
 import Touch from './touch'
 
-export {
-  Badge,
-  ClickOutside,
-  Ripple,
-  Resize,
-  Tooltip,
-  Touch
+export default function install (Vue) {
+  Vue.directive('badge', Badge)
+  Vue.directive('click-outside', ClickOutside)
+  Vue.directive('ripple', Ripple)
+  Vue.directive('resize', Resize)
+  Vue.directive('tooltip', Tooltip)
+  Vue.directive('touch', Touch)
 }

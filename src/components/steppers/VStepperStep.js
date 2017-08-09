@@ -1,5 +1,12 @@
+import VIcon from '../icons/VIcon'
+import Ripple from '../../directives/ripple'
+
 export default {
   name: 'v-stepper-step',
+
+  components: { VIcon },
+
+  directives: { Ripple },
 
   inject: ['stepClick'],
 
