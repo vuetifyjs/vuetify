@@ -13,7 +13,7 @@ const Grid = (name) => ({
     data.staticClass = (`${name} ${data.staticClass || ''}`).trim()
 
     if (data.attrs) {
-      data.staticClass += ` ${Object.keys(data.attrs).join(' ')}`
+      data.staticClass += ` ${Object.keys(data.attrs).filter(k => data.attrs[k]).join(' ')}`
       delete data.attrs
     }
 
