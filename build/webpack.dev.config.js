@@ -8,7 +8,7 @@ const webpack = require('webpack')
 // Helpers
 const resolve = file => require('path').resolve(__dirname, file)
 
-module.exports = merge(baseWebpackConfig, {
+module.exports = {
   devtool: '#cheap-module-eval-source-map',
   entry: {
     app: './dev/index.js'
@@ -19,6 +19,7 @@ module.exports = merge(baseWebpackConfig, {
     library: 'Vuetify'
   },
   resolve: {
+    extensions: ['*', '.js', '.json', '.vue'],
     alias: {
       vuetify: resolve('../src'),
     }
@@ -38,9 +39,7 @@ module.exports = merge(baseWebpackConfig, {
       },
       {
         test: /\.styl$/,
-        use: ExtractTextPlugin.extract({
-          use: ['css-loader', 'postcss-loader', 'stylus-loader']
-        }),
+        loaders: ['style-loader', 'css-loader', 'postcss-loader', 'stylus-loader'],
         exclude: /node_modules/
       }
     ]
@@ -52,9 +51,8 @@ module.exports = merge(baseWebpackConfig, {
     contentBase: resolve('../dev')
   },
   plugins: [
-    new ExtractTextPlugin('vuetify.css'),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': "'development'"
     })
   ]
-})
+}
