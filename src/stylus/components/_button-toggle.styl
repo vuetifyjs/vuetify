@@ -21,13 +21,18 @@
 
     &[data-selected]
       opacity: 1
-      
+
     &__content
       padding: 0
 
     span + .icon
       font-size: initial
       margin-left: 10px
+
+    &--icon
+      .btn__content
+        &:before
+          border-radius: 0
 
   &--selected
     elevation(2)

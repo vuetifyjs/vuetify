@@ -5,7 +5,7 @@ import { mount, shallow } from 'avoriaz'
 
 export function test(name, cb) {
   global.console.warn = jest.fn()
-  Vue.prototype.$vuetify = { load }
+  Vue.prototype.$vuetify = { load: (fn) => fn() }
 
   Object.keys(Directives).forEach(key => {
     Vue.directive(key, Directives[key])
@@ -14,6 +14,11 @@ export function test(name, cb) {
   beforeEach(() => {
     rafPolyfill(window)
   })
+
+  // Add a root element that simulates v-app
+  const app = document.createElement('div')
+  app.setAttribute('data-app', true)
+  document.body.appendChild(app)
 
   describe(name, () => cb({
     functionalContext,

@@ -42,19 +42,19 @@
       white-space: nowrap
       will-change: font-size
 
-    &--active
+    &[data-selected='true']
       opacity: 1
 
       .btn__content
         font-size: 14px
-        
+
         &:before
           opacity: 0
-        
+
         .icon
           transform: none
 
-    &:not(.btn--active)
+    &[data-selected='false']
       filter: grayscale(100%)
 
   &--shift
@@ -74,7 +74,7 @@
         max-width: 168px
 
 .bottom-nav--shift
-  .btn:not(.btn--active) .btn__content
+  .btn[data-selected='false'] .btn__content
     .icon
       transform: scale3d(1, 1, 1) translate3d(0, 10px, 0)
 

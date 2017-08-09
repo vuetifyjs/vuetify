@@ -1,5 +1,4 @@
-import VBtn from '~components/buttons/VBtn'
-import VIcon from '~components/icons/VIcon'
+import ButtonGroup from '~mixins/button-group'
 
 export default {
   name: 'v-btn-toggle',
@@ -9,13 +8,15 @@ export default {
     event: 'change'
   },
 
+  mixins: [ButtonGroup],
+
   props: {
     inputValue: {
       required: false
     },
     items: {
       type: Array,
-      default: () => []
+      default: null
     },
     mandatory: Boolean,
     multiple: Boolean
@@ -25,72 +26,62 @@ export default {
     classes () {
       return {
         'btn-toggle': true,
-        'btn-toggle--selected': this.inputValue && (
-          !this.multiple || this.inputValue.length
-        )
+        'btn-toggle--selected': this.hasValue
       }
+    },
+    hasValue () {
+      return (this.multiple && this.inputValue.length) ||
+        (!this.multiple && this.inputValue !== null &&
+          typeof this.inputValue !== 'undefined')
+    }
+  },
+
+  watch: {
+    inputValue: {
+      handler () {
+        this.update()
+      },
+      deep: true
     }
   },
 
   methods: {
-    isSelected (item) {
+    isSelected (i) {
+      const item = this.getValue(i)
       if (!this.multiple) {
-        return this.inputValue === item.value
+        return this.inputValue === item
       }
 
-      return this.inputValue.includes(item.value)
+      return this.inputValue.includes(item)
     },
-
-    updateValue (item) {
+    updateValue (i) {
+      const item = this.getValue(i)
       if (!this.multiple) {
-        if (this.mandatory && this.inputValue === item.value) return
-        return this.$emit(
-          'change',
-          this.inputValue === item.value ? null : item.value
-        )
+        if (this.mandatory && this.inputValue === item) return
+        return this.$emit('change', this.inputValue === item ? null : item)
       }
 
       const items = this.inputValue.slice()
 
-      const i = items.indexOf(item.value)
-      if (i > -1) {
-        items.length >= 1 && !this.mandatory && items.splice(i, 1)
+      const index = items.indexOf(item)
+      if (index > -1) {
+        items.length >= 1 && !this.mandatory && items.splice(index, 1)
       } else {
-        items.push(item.value)
+        items.push(item)
       }
 
       this.$emit('change', items)
     }
   },
 
+  mounted () {
+    if (this.items) {
+      console.warn('The \'items\' props has been deprecated. v-btn-toggle now has a default slot where you can place buttons.')
+      return
+    }
+  },
+
   render (h) {
-    const buttons = this.items.map((item, index) => {
-      const children = []
-
-      item.text && children.push(h('span', item.text))
-      item.icon && children.push(h(VIcon, item.icon))
-
-      return h(VBtn, {
-        key: index,
-        props: {
-          flat: true
-        },
-        on: {
-          click: (e) => {
-            e.stopPropagation()
-            this.updateValue(item)
-          }
-        },
-        attrs: {
-          'data-selected': this.isSelected(item),
-          'data-index': index,
-          'data-only-child': this.isSelected(item) && (
-            !this.multiple || this.inputValue.length === 1
-          )
-        }
-      }, children)
-    })
-
-    return h('div', { class: this.classes }, buttons)
+    return h('div', { class: this.classes }, this.$slots.default)
   }
 }
