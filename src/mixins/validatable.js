@@ -44,10 +44,17 @@ export default {
   },
 
   watch: {
-    rules () {
-      this.validate()
+    rules: {
+      handler (newVal, oldVal) {
+        // TODO: This handler seems to trigger when input changes, even though
+        // rules array stays the same? Solved it like this for now
+        if (newVal.length === oldVal.length) return
+
+        this.validate()
+      },
+      deep: true
     },
-    lazyValue (val) {
+    inputValue (val) {
       // If it's the first time we're setting input,
       // mark it with hasInput
       if (!!val && !this.hasInput) this.hasInput = true
@@ -65,8 +72,10 @@ export default {
       }
     },
     hasError (val) {
-      this.valid = !val
-      this.$emit('update:error', val)
+      if (this.shouldValidate) {
+        this.valid = !val
+        this.$emit('update:error', val)
+      }
     }
   },
 
@@ -75,6 +84,17 @@ export default {
   },
 
   methods: {
+    reset () {
+      // TODO: Do this another way!
+      // This is so that we can reset all types of inputs
+      this.$emit('input', null)
+      this.$emit('change', null)
+
+      this.$nextTick(() => {
+        this.shouldValidate = false
+        this.hasFocused = false
+      })
+    },
     validate (force) {
       if (force) this.shouldValidate = true
 

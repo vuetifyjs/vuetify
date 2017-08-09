@@ -11,10 +11,7 @@ export default {
   },
 
   props: {
-    value: {
-      type: Boolean,
-      required: true
-    }
+    value: Boolean
   },
 
   watch: {
@@ -37,18 +34,22 @@ export default {
   },
 
   methods: {
-    validate () {
-      this.$children.forEach((child) => {
-        if (!child.$el.querySelector('input')) return
-
-        child.validate(true)
+    getInputs () {
+      return this.$children.filter(child => {
+        return !!child.$el.querySelector('.input-group__input')
       })
+    },
+    validate () {
+      this.getInputs().forEach(child => child.validate(true))
+    },
+    reset () {
+      this.getInputs().forEach((input) => input.reset())
     }
   },
 
   mounted () {
     this.$vuetify.load(() => {
-      this.$children.forEach((child) => {
+      this.getInputs().forEach((child) => {
         if (!child.$el.querySelector('input')) return
 
         this.inputs += 1

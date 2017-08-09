@@ -8,6 +8,7 @@ export default {
     return {
       focused: false,
       tabFocused: false,
+      internalTabIndex: null,
       lazyValue: this.value
     }
   },
@@ -135,7 +136,7 @@ export default {
       data = Object.assign({}, {
         'class': this.inputGroupClasses,
         attrs: {
-          tabindex: this.tabindex
+          tabindex: this.internalTabIndex || this.tabindex
         },
         on: {
           focus: this.groupFocus,
