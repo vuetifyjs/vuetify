@@ -136,7 +136,7 @@ export default {
     },
     onChange (e) {
       this.lazyValue = e.target.value
-      this.$emit('change', this.lazyValue)
+      this.$emit('change', this.lazyValue || null)
     },
     onInput (e) {
       this.inputValue = e.target.value
@@ -180,7 +180,6 @@ export default {
         on: {
           ...this.$listeners,
           blur: this.blur,
-          change: this.onChange,
           input: this.onInput,
           focus: this.focus
         },
