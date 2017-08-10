@@ -109,12 +109,11 @@ export default {
       else if ((!this.top || this.bottom) && innerHeight < totalHeight) {
         top = (
           innerHeight -
-          this.dimensions.content.height -
-          12
+          this.dimensions.content.height
         )
       }
 
-      return top
+      return top < 12 ? 12 : top
     },
     sneakPeek (cb) {
       requestAnimationFrame(() => {

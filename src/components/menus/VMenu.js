@@ -151,7 +151,11 @@ export default {
     },
     styles () {
       return {
-        maxHeight: this.auto ? '200px' : isNaN(this.maxHeight) ? this.maxHeight : `${this.maxHeight}px`,
+        maxHeight: this.auto
+          ? '200px'
+          : isNaN(this.maxHeight)
+          ? this.maxHeight
+          : `${this.maxHeight}px`,
         minWidth: `${this.calculatedMinWidth}px`,
         maxWidth: `${parseInt(this.maxWidth)}px`,
         top: `${this.calcTop()}px`,
