@@ -1,8 +1,8 @@
-﻿require('./stylus/main.styl')
+require('./stylus/main.styl')
 
 import { devDependencies, version } from '../package.json'
 import * as Components from './components'
-import * as Directives from './directives'
+import Directives from './directives'
 import Load from './util/load'
 import Semver from 'semver'
 
@@ -11,7 +11,7 @@ const Vuetify = Vue => {
     Vue.use(Component)
   })
 
-  Array.prototype.every.call(Directives, Vue.directive)
+  Vue.use(Directives)
 
   Vue.prototype.$vuetify = {
     load: Load
