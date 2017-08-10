@@ -1,4 +1,6 @@
-const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
+
 const resolve = file => require('path').resolve(__dirname, file)
 
 module.exports = {
@@ -16,6 +18,9 @@ module.exports = {
     fs: 'empty'
   },
   plugins: [
-    new ProgressBarPlugin()
+    new ProgressBarPlugin(),
+    new FriendlyErrorsWebpackPlugin({
+      clearConsole: false
+    })
   ]
 }
