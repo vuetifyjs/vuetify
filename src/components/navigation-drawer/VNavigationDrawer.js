@@ -93,7 +93,12 @@ export default {
     value (val) {
       if (this.permanent) return
       if (val !== this.isActive) this.isActive = val
-    }
+    },
+    miniVariant () {
+      setTimeout(() => {
+        window.dispatchEvent(new CustomEvent('resize'));
+      }, 200)
+    }    
   },
 
   mounted () {
