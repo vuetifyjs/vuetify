@@ -101,7 +101,7 @@ export default {
         origin: this.origin
       }
     }, [h('div', data,
-      this.lazy && this.isBooted || !this.lazy ? this.$slots.default : null
+      this.showLazyContent(this.$slots.default)
     )])
 
     children.push(h('div', {
