@@ -15,14 +15,16 @@ const builds = {
     libraryTarget: 'umd',
     env: 'production'
   },
+  /*
   esm: {
     filename: 'vuetify.esm.js',
     libraryTarget: 'esm',
     env: 'production'
   },
+  */
   commonjs: {
     filename: 'vuetify.common.js',
-    libraryTarget: 'cjs',
+    libraryTarget: 'commonjs',
     env: 'production'
   }
 }
@@ -43,11 +45,6 @@ function genConfig (opts) {
 
   if (opts.env) {
     config.plugins = config.plugins.concat([
-      new webpack.LoaderOptionsPlugin({
-        minimize: true,
-        progress: true,
-        hide_modules: true
-      }),
       new webpack.optimize.UglifyJsPlugin({
         sourceMap: false
       }),

@@ -1,3 +1,4 @@
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const resolve = file => require('path').resolve(__dirname, file)
 
 module.exports = {
@@ -14,5 +15,7 @@ module.exports = {
   node: {
     fs: 'empty'
   },
-  plugins: []
+  plugins: [
+    new ProgressBarPlugin()
+  ]
 }
