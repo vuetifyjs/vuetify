@@ -27,6 +27,7 @@ export const VSlideYReverseTransition = createSimpleTransition('slide-y-reverse-
 export const VExpandTransition = createJavaScriptTransition('expand-transition', ExpandTransitionFunctions)
 
 export default function install (Vue) {
+  console.log('installing transitions')
   Vue.component('v-carousel-transition', VCarouselTransition)
   Vue.component('v-carousel-reverse-transition', VCarouselReverseTransition)
   Vue.component('v-dialog-transition', VDialogTransition)

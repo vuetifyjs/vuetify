@@ -1,5 +1,3 @@
-require('./stylus/main.styl')
-
 import { devDependencies, version } from '../package.json'
 import * as Components from './components'
 import Directives from './directives'

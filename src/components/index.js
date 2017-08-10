@@ -1,5 +1,5 @@
-import VAlert from './alerts'
 import VApp from './app'
+import VAlert from './alerts'
 import VAvatar from './avatars'
 import VBottomNav from './bottom-navs'
 import VBreadcrumbs from './breadcrumbs'
@@ -44,10 +44,11 @@ import VDataTable from './tables'
 import VTabs from './tabs'
 import VTextField from './text-fields'
 import VToolbar from './toolbar'
+import Transitions from './transitions'
 
 export {
-  VAlert,
   VApp,
+  VAlert,
   VAvatar,
   VBottomNav,
   VBreadcrumbs,
@@ -83,5 +84,6 @@ export {
   VDataTable,
   VTabs,
   VTextField,
-  VToolbar
+  VToolbar,
+  Transitions
 }
