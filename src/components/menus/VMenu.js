@@ -55,7 +55,6 @@ export default {
       window: {},
       absoluteX: 0,
       absoluteY: 0,
-      insideContent: false,
       hasJustFocused: false,
       focusedTimeout: {}
     }
@@ -204,7 +203,6 @@ export default {
     activate () {
       if (typeof window === 'undefined') return
       this.isBooted = true
-      this.insideContent = true
       this.getTiles()
       this.updateDimensions()
       requestAnimationFrame(this.startTransition)
