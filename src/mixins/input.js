@@ -103,11 +103,11 @@ export default {
 
   methods: {
     genLabel () {
-      const data = {}
-
-      if (this.$attrs.id) data.attrs = { for: this.$attrs.id }
-
-      return this.$createElement('label', data, this.$slots.label || this.label)
+      return this.$createElement('label', {
+        attrs: {
+          for: this.$attrs.id
+        }
+      }, this.$slots.label || this.label)
     },
     genMessages () {
       let messages = []

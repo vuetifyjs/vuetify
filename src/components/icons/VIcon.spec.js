@@ -1,4 +1,4 @@
-import VIcon from '~components/icons/VIcon'
+﻿import VIcon from '~components/icons/VIcon'
 import { test } from '~util/testing'
 
 test('VIcon.js', ({ mount, functionalContext }) => {
@@ -13,7 +13,7 @@ test('VIcon.js', ({ mount, functionalContext }) => {
     const context = functionalContext({ props: { mdi: true } }, 'add')
     mount(VIcon, context)
 
-    expect(console.warn).toBeCalled()
+    expect("'fa' and 'mdi' will be deprecated").toHaveBeenTipped()
   })
 
   it('should still render correctly when using deprecated prop mdi', () => {
@@ -23,13 +23,15 @@ test('VIcon.js', ({ mount, functionalContext }) => {
     expect(wrapper.hasClass('mdi')).toBe(true)
     expect(wrapper.hasClass('mdi-add')).toBe(true)
     expect(wrapper.text()).toBe('')
+
+    expect("'fa' and 'mdi' will be deprecated").toHaveBeenTipped()
   })
 
   it('should throw warning when using deprecated prop fa', () => {
     const context = functionalContext({ props: { fa: true } }, 'add')
     mount(VIcon, context)
 
-    expect(console.warn).toBeCalled()
+    expect("'fa' and 'mdi' will be deprecated").toHaveBeenTipped()
   })
 
   it('should still render correctly when using deprecated prop fa', () => {
@@ -39,6 +41,8 @@ test('VIcon.js', ({ mount, functionalContext }) => {
     expect(wrapper.hasClass('fa')).toBe(true)
     expect(wrapper.hasClass('fa-add')).toBe(true)
     expect(wrapper.text()).toBe('')
+
+    expect("'fa' and 'mdi' will be deprecated").toHaveBeenTipped()
   })
 
   it('should allow third-party icons when using <icon>- prefix', () => {
