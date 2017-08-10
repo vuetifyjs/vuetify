@@ -1,5 +1,9 @@
+import Bootable from '../../mixins/bootable'
+
 export default {
   name: 'v-tabs-content',
+
+  mixins: [Bootable],
 
   data () {
     return {
@@ -13,6 +17,7 @@ export default {
       type: String,
       required: true
     },
+    lazy: Boolean,
     transition: {
       type: String,
       default: 'v-tab-transition'
@@ -47,6 +52,7 @@ export default {
           value: this.isActive
         }],
         on: this.$listeners
-      }, [this.$slots.default])])
+      }, this.lazy && this.isBooted || !this.lazy
+        ? this.$slots.default : null)])
   }
 }

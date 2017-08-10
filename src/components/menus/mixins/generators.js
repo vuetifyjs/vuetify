@@ -45,12 +45,8 @@ export default {
             if (e.target.getAttribute('disabled')) return
             if (this.closeOnContentClick) this.isActive = false
           },
-          mouseenter: e => {
-            this.insideContent = true
-          },
           mouseleave: e => {
-            this.insideContent = false
-            this.openOnHover && this.mouseLeaveHandler()
+            this.openOnHover && (this.isActive = false)
           }
         }
       }, [booted ? this.$slots.default : null])

@@ -55,7 +55,6 @@ export default {
       window: {},
       absoluteX: 0,
       absoluteY: 0,
-      insideContent: false,
       hasJustFocused: false,
       focusedTimeout: {}
     }
@@ -151,7 +150,11 @@ export default {
     },
     styles () {
       return {
-        maxHeight: this.auto ? '200px' : isNaN(this.maxHeight) ? this.maxHeight : `${this.maxHeight}px`,
+        maxHeight: this.auto
+          ? '200px'
+          : isNaN(this.maxHeight)
+          ? this.maxHeight
+          : `${this.maxHeight}px`,
         minWidth: `${this.calculatedMinWidth}px`,
         maxWidth: `${parseInt(this.maxWidth)}px`,
         top: `${this.calcTop()}px`,
@@ -200,7 +203,6 @@ export default {
     activate () {
       if (typeof window === 'undefined') return
       this.isBooted = true
-      this.insideContent = true
       this.getTiles()
       this.updateDimensions()
       requestAnimationFrame(this.startTransition)

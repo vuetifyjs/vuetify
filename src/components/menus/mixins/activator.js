@@ -19,7 +19,7 @@ export default {
       this.isActive = true
     },
     mouseLeaveHandler (e) {
-      if (this.insideContent) return
+      if (this.isContentActive) return
       this.isActive = false
       this.hasJustFocused = true
     },

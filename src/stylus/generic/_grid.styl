@@ -60,11 +60,12 @@
   &.wrap
     flex-wrap: wrap
 
-  &.flex, &.child-flex > *
-    flex: 1
+  &.flex,
+  &.child-flex > *
+    flex: 1 1 auto
 
   .flex
-    flex: 1 1
+    flex: 1 1 auto
     padding-right: ($grid-gutters.md / 2)
     padding-left: ($grid-gutters.md / 2)
 

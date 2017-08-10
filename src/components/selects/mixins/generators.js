@@ -3,6 +3,7 @@ import { getObjectValueByPath } from '~util/helpers'
 export default {
   methods: {
     genMenu () {
+      const offsetY = this.autocomplete || this.offset || this.isDropdown
       const data = {
         ref: 'menu',
         props: {
@@ -13,8 +14,8 @@ export default {
           contentClass: this.computedContentClass,
           disabled: this.disabled,
           maxHeight: this.maxHeight,
-          nudgeTop: this.isDropdown ? 22 : 0,
-          offsetY: this.autocomplete || this.offset || this.isDropdown,
+          nudgeTop: this.isDropdown ? 22 : offsetY ? 38 : 0,
+          offsetY,
           value: this.isActive
         },
         on: { input: val => (this.isActive = val) }

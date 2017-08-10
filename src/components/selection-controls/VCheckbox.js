@@ -1,4 +1,4 @@
-import Selectable from '~mixins/selectable'
+﻿import Selectable from '~mixins/selectable'
 import Ripple from '~directives/ripple'
 import { VFadeTransition } from '~components/transitions'
 import VIcon from '~components/icons/VIcon'
@@ -19,7 +19,7 @@ export default {
 
   data () {
     return {
-      inputDeterminate: this.indeterminate
+      inputIndeterminate: this.indeterminate
     }
   },
 
@@ -36,7 +36,7 @@ export default {
       })
     },
     icon () {
-      if (this.inputDeterminate) {
+      if (this.inputIndeterminate) {
         return 'indeterminate_check_box'
       } else if (this.isActive) {
         return 'check_box'
@@ -67,6 +67,14 @@ export default {
       }]
     })
 
-    return this.genInputGroup([transition, ripple])
+    const data = {
+      attrs: {
+        role: 'checkbox',
+        'aria-checked': this.inputIndeterminate && 'mixed' || this.isActive && 'true' || 'false',
+        'aria-label': this.label
+      }
+    }
+
+    return this.genInputGroup([transition, ripple], data)
   }
 }
