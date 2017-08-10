@@ -14,7 +14,7 @@ exports[`VMenu.js should work 1`] = `
     </button>
   </div>
   <div class="menu__content"
-       style="max-height: auto; min-width: 0px; max-width: NaNpx; top: 0px; left: 0px; display: none;"
+       style="max-height: auto; min-width: 0px; max-width: NaNpx; top: 12px; left: 0px; display: none;"
   >
     <div class="card"
          style="height: auto;"
