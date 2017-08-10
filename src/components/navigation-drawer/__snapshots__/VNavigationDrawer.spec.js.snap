@@ -68,7 +68,9 @@ exports[`VNavigationDrawer.js should render component with custom floating and m
 
 exports[`VNavigationDrawer.js should render component with custom height and match snapshot 1`] = `
 
-<aside class="navigation-drawer navigation-drawer--close">
+<aside class="navigation-drawer navigation-drawer--close"
+       style="height: 100px;"
+>
   <div class="navigation-drawer__border">
   </div>
 </aside>

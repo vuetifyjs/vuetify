@@ -1,5 +1,14 @@
 import VNavigationDrawer from '~components/navigation-drawer/VNavigationDrawer'
 import { test } from '~util/testing'
+import clickOutside from '~directives/click-outside'
+import touch from '~directives/click-outside'
+import resize from '~directives/click-outside'
+
+VNavigationDrawer.directives = {
+  clickOutside,
+  touch,
+  resize
+}
 
 test('VNavigationDrawer.js', ({ mount }) => {
   it('should render component and match snapshot', () => {
@@ -51,7 +60,7 @@ test('VNavigationDrawer.js', ({ mount }) => {
   it('should render component with custom height and match snapshot', () => {
     const wrapper = mount(VNavigationDrawer, {
       propsData: {
-        height: 100
+        height: '100px'
       }
     })
 
@@ -101,7 +110,7 @@ test('VNavigationDrawer.js', ({ mount }) => {
   it('should render component with custom persistent and match snapshot', () => {
     const wrapper = mount(VNavigationDrawer, {
       propsData: {
-        persistent: 100
+        persistent: true
       }
     })
 
@@ -111,7 +120,7 @@ test('VNavigationDrawer.js', ({ mount }) => {
   it('should render component with custom right and match snapshot', () => {
     const wrapper = mount(VNavigationDrawer, {
       propsData: {
-        right: 100
+        right: true
       }
     })
 
@@ -121,7 +130,7 @@ test('VNavigationDrawer.js', ({ mount }) => {
   it('should render component with custom temporary and match snapshot', () => {
     const wrapper = mount(VNavigationDrawer, {
       propsData: {
-        temporary: 100
+        temporary: true
       }
     })
 
@@ -131,7 +140,7 @@ test('VNavigationDrawer.js', ({ mount }) => {
   it('should render component with custom touchless and match snapshot', () => {
     const wrapper = mount(VNavigationDrawer, {
       propsData: {
-        touchless: 100
+        touchless: true
       }
     })
 
