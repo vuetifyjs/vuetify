@@ -32,7 +32,7 @@ export default {
   computed: {
     classes () {
       return {
-        [(`dialog ${this.contentClass}`).trim()]: true,
+        'dialog': true,
         'dialog--active': this.isActive,
         'dialog--persistent': this.persistent,
         'dialog--fullscreen': this.fullscreen,
@@ -105,7 +105,7 @@ export default {
     )])
 
     children.push(h('div', {
-      'class': 'dialog__content',
+      'class': (`dialog__content ${this.contentClass}`).trim(),
       ref: 'content'
     }, [dialog]))
 
