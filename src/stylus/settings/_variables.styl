@@ -12,15 +12,23 @@ $material-left-padding := 16px
 $material-right-padding := 16px
 
 // Grid
+// For optimal user experience, material design user interfaces should adapt layouts for the following breakpoint widths: 480, 600, 840, 960, 1280, 1440, and 1600dp.
+// https://material.io/guidelines/layout/responsive-ui.html#responsive-ui-breakpoints
 // ============================================================
 $grid-breakpoints := {
   xs: 0
+  // xs 480
   sm: 600px
+  // sm 840
+  // sm 960
   md: 1024px
+  // md 1280
   lg: (1440px - 16px) // Desktop gets a 16dp reduction
-  xl: (1920px - 16px) // https://material.io/guidelines/layout/responsive-ui.html#responsive-ui-breakpoints
+  // lg 1600
+  xl: (1920px - 16px)
 }
 
+// Margins and gutters can be 8, 16, 24, or 40dp wide.
 $grid-gutter = 8px
 $grid-columns := 12
 $grid-gutters := {
