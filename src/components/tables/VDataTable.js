@@ -271,6 +271,9 @@ export default {
         this.updatePagination({ sortBy: null, descending: null })
       }
     },
+    needsTR (row) {
+      return row.length && row.find(c => c.tag === 'td')
+    },
     genTR (children, data = {}) {
       return this.$createElement('tr', data, children)
     },

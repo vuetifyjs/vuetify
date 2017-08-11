@@ -30,9 +30,8 @@ export default {
         })
 
         const row = this.$scopedSlots.items(props)
-        const needsTableRow = row.length && row[0].tag === 'td'
 
-        return needsTableRow
+        return this.needsTR(row)
           ? this.genTR(row, {
             attrs: { active: this.isSelected(item) }
           })

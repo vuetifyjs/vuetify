@@ -99,8 +99,7 @@ export default {
 
       if (this.$slots.footer) {
         const footer = this.$slots.footer
-        const needsTableRow = footer.length && footer[0].tag === 'td'
-        const row = !needsTableRow ? footer : this.genTR(this.$slots.footer)
+        const row = this.needsTR(footer) ? this.genTR(footer) : footer
 
         children.push(row)
       }
