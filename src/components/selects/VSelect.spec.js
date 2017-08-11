@@ -50,4 +50,19 @@ test('VSelect.js', ({ mount, shallow }) => {
 
     expect(item.element.__vue__.$options.propsData.disabled).toBe(true)
   })
+
+  it('should emit search input changes', () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        autocomplete: true
+      }
+    })
+
+    const update = jest.fn()
+
+    wrapper.vm.$on('update:searchInput', update)
+    wrapper.vm.searchValue = 'test'
+
+    expect(update).toBeCalledWith('test')
+  })
 })

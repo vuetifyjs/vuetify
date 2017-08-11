@@ -1,10 +1,4 @@
 export default {
-  data () {
-    return {
-      searchValue: null
-    }
-  },
-
   methods: {
     filterSearch () {
       return this.items.filter(i => {
