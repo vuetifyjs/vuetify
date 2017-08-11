@@ -38,7 +38,7 @@ describe('VSnackbar.vue', () => {
   })
 
   it('should timeout correctly', async () => {
-    jest.useFakeTimers();
+    jest.useFakeTimers()
     const wrapper = mount(VSnackbar, {
       propsData: {
         value: false,
