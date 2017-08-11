@@ -1,5 +1,5 @@
-import VApp from './app'
-import VAlert from './alerts'
+import VApp from './VApp'
+import VAlert from './VAlert'
 import VAvatar from './avatars'
 import VBottomNav from './bottom-navs'
 import VBreadcrumbs from './breadcrumbs'
