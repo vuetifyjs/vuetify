@@ -10,7 +10,7 @@ export default {
           all: this.all
         })
 
-        children = row.length && row[0].tag === 'tr' ? row : this.genTR(row)
+        children = this.needsTR(row) ? this.genTR(row) : row
       } else {
         const row = this.headers.map(o => this.genHeader(o))
         const checkbox = this.$createElement('v-checkbox', {
