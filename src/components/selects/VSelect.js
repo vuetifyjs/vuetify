@@ -309,10 +309,10 @@ export default {
       this.genMenu()
     ], {
       ref: 'activator',
-      directives: [{
-        name: 'click-outside',
-        value: () => (this.isActive = false)
-      }],
+      directives: [
+        { name: 'click-outside', value: () => (this.isActive = false) },
+        { name: 'esc' }
+      ],
       on: {
         keydown: this.onKeyDown // Located in mixins/autocomplete.js
       }
