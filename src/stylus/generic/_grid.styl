@@ -2,46 +2,68 @@
   margin-right: auto
   margin-left: auto
   flex-basis: 100%
-  padding: $grid-gutters.lg
+
+  @media $display-breakpoints.xs-only
+    padding: $grid-gutters.xs
+  @media $display-breakpoints.sm-only
+    padding: $grid-gutters.sm
+  @media $display-breakpoints.md-only
+    padding: $grid-gutters.md
+  @media $display-breakpoints.lg-only
+    padding: $grid-gutters.lg
+  @media $display-breakpoints.xl-only
+    padding: $grid-gutters.xl
+
 
   for size, width in $container-max-widths
     @media only screen and (min-width: width)
       max-width: width
-  
-  @media $display-breakpoints.xs-only
-    padding: $grid-gutters.xl
 
   &.fluid
     max-width: 100%
     width: 100%
-  
+
   &.fill-height
     align-items: center
     display: flex
-    
+
     .layout
       height: 100%
       flex: 1 1 auto
-  
+
   &.grid-list
     for $size, $gutter in $grid-gutters
       &-{$size}
         padding: $gutter
-        
+
         > .layout
           margin: -($gutter / 2)
-          
+
           > .flex
             padding: ($gutter / 2)
 
 .layout
   display: flex
-  margin-right: -($grid-gutters.md / 2)
-  margin-left: -($grid-gutters.md / 2)
+
+  @media $display-breakpoints.xs-only
+    margin-right: -($grid-gutters.xs / 2)
+    margin-left: -($grid-gutters.xs / 2)
+  @media $display-breakpoints.sm-only
+    margin-right: -($grid-gutters.sm / 2)
+    margin-left: -($grid-gutters.sm / 2)
+  @media $display-breakpoints.md-only
+    margin-right: -($grid-gutters.md / 2)
+    margin-left: -($grid-gutters.md / 2)
+  @media $display-breakpoints.lg-only
+    margin-right: -($grid-gutters.lg / 2)
+    margin-left: -($grid-gutters.lg / 2)
+  @media $display-breakpoints.xl-only
+    margin-right: -($grid-gutters.xl / 2)
+    margin-left: -($grid-gutters.xl / 2)
 
   &.row, &.column
     flex: 0 1 auto
-    
+
     &.grow
       flex-grow: 1
 
@@ -53,7 +75,7 @@
 
   &.column
     flex-direction: column
-    
+
     &.reverse
       flex-direction: column-reverse
 
@@ -66,18 +88,32 @@
 
   .flex
     flex: 1 1 auto
-    padding-right: ($grid-gutters.md / 2)
-    padding-left: ($grid-gutters.md / 2)
+
+    @media $display-breakpoints.xs-only
+      padding-left: ($grid-gutters.xs / 2)
+      padding-right: ($grid-gutters.xs / 2)
+    @media $display-breakpoints.sm-only
+      padding-left: ($grid-gutters.sm / 2)
+      padding-right: ($grid-gutters.sm / 2)
+    @media $display-breakpoints.md-only
+      padding-left: ($grid-gutters.md / 2)
+      padding-right: ($grid-gutters.md / 2)
+    @media $display-breakpoints.lg-only
+      padding-left: ($grid-gutters.lg / 2)
+      padding-right: ($grid-gutters.lg / 2)
+    @media $display-breakpoints.xl-only
+      padding-left: ($grid-gutters.xl / 2)
+      padding-right: ($grid-gutters.xl / 2)
 
   for size, width in $grid-breakpoints
     @media all and (min-width: width)
-      &.row-{size} 
-        flex-direction: row   
+      &.row-{size}
+        flex-direction: row
 
       &.column-{size}
         flex-direction: column
 
-      &.child-flex-{size} > *   
+      &.child-flex-{size} > *
         flex: 1
 
       for n in (1..$grid-columns)
@@ -95,29 +131,29 @@
 .align
   &-start
     align-items: flex-start
-  
+
   &-end
     align-items: flex-end
-    
+
   &-center
     align-items: center
-    
+
   &-baseline
     align-items: baseline
-    
+
 .justify
   &-start
     justify-content: flex-start
-    
+
   &-end
     justify-content: flex-end
-    
+
   &-center
     justify-content: center
-    
+
   &-space-around
     justify-content: space-around
-  
+
   &-space-between
     justify-content: space-between
 
@@ -129,9 +165,9 @@
 
 .fill-height
   height: 100%
-  
+
 .show-overflow
   overflow: visible !important
-  
+
 .flexbox
   display: flex
