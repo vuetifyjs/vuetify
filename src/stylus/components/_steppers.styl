@@ -56,17 +56,19 @@
       .stepper__step__step
         background: $theme.primary
 
-    &--error
+    &.stepper__step--error
+      color: $theme.error
+
       .stepper__step__step
         background: transparent
-        color: $theme.error
+        color: inherit
 
         .icon
           font-size: 24px
-          color: $theme.error
+          color: inherit
 
       .stepper__label
-        color: $theme.error
+        color: inherit
         text-shadow: none
         font-weight: 500
 
