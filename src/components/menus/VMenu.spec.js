@@ -13,6 +13,7 @@ VMenu.directives = {
   clickOutside
 }
 
+// eslint-disable-next-line
 test('VMenu.js', ({ mount }) => {
   it('should work', async () => {
     const wrapper = mount(VMenu, {
@@ -46,20 +47,20 @@ test('VMenu.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render component with custom left and match snapshot', () => {
+  it('should render component with custom bottom and match snapshot', () => {
     const wrapper = mount(VMenu, {
       propsData: {
-        left: true
+        bottom: true
       }
     })
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render component with custom bottom and match snapshot', () => {
+  it('should render component with custom left and match snapshot', () => {
     const wrapper = mount(VMenu, {
       propsData: {
-        bottom: true
+        left: true
       }
     })
 
@@ -315,5 +316,4 @@ test('VMenu.js', ({ mount }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
-
 })
