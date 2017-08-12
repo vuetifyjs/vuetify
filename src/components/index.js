@@ -1,5 +1,6 @@
-import VApp from './VApp'
-import VAlert from './VAlert'
+export { default as VApp } from './VApp'
+export { default as VAlert } from './VAlert'
+
 import VAvatar from './avatars'
 import VBottomNav from './bottom-navs'
 import VBreadcrumbs from './breadcrumbs'
@@ -47,8 +48,6 @@ import VToolbar from './toolbar'
 import Transitions from './transitions'
 
 export {
-  VApp,
-  VAlert,
   VAvatar,
   VBottomNav,
   VBreadcrumbs,
