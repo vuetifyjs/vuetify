@@ -1,5 +1,6 @@
 import Bootable from '../../mixins/bootable'
 
+// @vue/component
 export default {
   name: 'v-tabs-content',
 

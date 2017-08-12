@@ -1,6 +1,7 @@
 import Themeable from '~mixins/themeable'
 import Contextualable from '~mixins/contextualable'
 
+// @vue/component
 export default {
   functional: true,
 

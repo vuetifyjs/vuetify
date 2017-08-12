@@ -1,5 +1,6 @@
 import Selectable from '~mixins/selectable'
 
+// @vue/component
 export default {
   name: 'switch',
 

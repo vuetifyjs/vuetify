@@ -1,5 +1,6 @@
 import GenerateRouteLink from '~mixins/route-link'
 
+// @vue/component
 export default {
   name: 'v-tabs-item',
 

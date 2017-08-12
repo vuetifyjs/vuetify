@@ -4,6 +4,7 @@ import GenerateRouteLink from '~mixins/route-link'
 import Themeable from '~mixins/themeable'
 import Toggleable from '~mixins/toggleable'
 
+// @vue/component
 export default {
   name: 'v-btn',
 

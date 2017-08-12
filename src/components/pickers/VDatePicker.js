@@ -7,6 +7,7 @@ import { createRange } from '~util/helpers'
 
 const defaultDateFormat = val => new Date(val).toISOString().substr(0, 10)
 
+// @vue/component
 export default {
   name: 'v-date-picker',
 

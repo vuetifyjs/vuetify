@@ -1,5 +1,6 @@
 import Toggleable from '~mixins/toggleable'
 
+// @vue/component
 export default {
   name: 'v-chip',
 

@@ -3,6 +3,7 @@ import VBtn from '~components/buttons/VBtn'
 import VIcon from '~components/icons/VIcon'
 import Themeable from '~mixins/themeable'
 
+// @vue/component
 export default {
   name: 'v-carousel',
 

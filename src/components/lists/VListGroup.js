@@ -1,6 +1,7 @@
 import { VExpandTransition } from '~components/transitions'
 import Toggleable from '~mixins/toggleable'
 
+// @vue/component
 export default {
   name: 'v-list-group',
 

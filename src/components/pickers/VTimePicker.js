@@ -3,6 +3,7 @@ import TimeTitle from './mixins/time-title'
 import TimeBody from './mixins/time-body'
 import { createRange } from '~util/helpers'
 
+// @vue/component
 export default {
   name: 'v-time-picker',
 

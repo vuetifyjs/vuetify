@@ -1,5 +1,6 @@
 ﻿import Themeable from './themeable'
 
+// @vue/component
 export default {
   mixins: [Themeable],
 

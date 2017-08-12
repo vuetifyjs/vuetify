@@ -17,6 +17,7 @@ import clickOutside from '~directives/click-outside'
 
 import { getObjectValueByPath } from '~util/helpers'
 
+// @vue/component
 export default {
   name: 'v-select',
 

@@ -1,6 +1,7 @@
 import Input from '~mixins/input'
 import { addOnceEventListener, createRange } from '~util/helpers'
 
+// @vue/component
 export default {
   name: 'v-slider',
 

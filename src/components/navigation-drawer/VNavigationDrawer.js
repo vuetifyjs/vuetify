@@ -2,6 +2,7 @@ import Overlayable from '~mixins/overlayable'
 import Themeable from '~mixins/themeable'
 import { Resize } from '~directives'
 
+// @vue/component
 export default {
   name: 'v-navigation-drawer',
 

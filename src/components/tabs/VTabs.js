@@ -1,6 +1,7 @@
 import Themeable from '~mixins/themeable'
 import { Resize } from '~directives'
 
+// @vue/component
 export default {
   name: 'v-tabs',
 

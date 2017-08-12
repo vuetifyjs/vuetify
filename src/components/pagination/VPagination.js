@@ -1,5 +1,6 @@
 import VIcon from '~components/icons/VIcon'
 
+// @vue/component
 export default {
   name: 'v-pagination',
 

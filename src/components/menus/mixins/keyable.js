@@ -1,3 +1,4 @@
+// @vue/component
 export default {
   data: () => ({
     listIndex: -1,

@@ -1,6 +1,7 @@
 import Toggleable from '~mixins/toggleable'
 import Positionable from '~mixins/positionable'
 
+// @vue/component
 export default {
   name: 'v-speed-dial',
 

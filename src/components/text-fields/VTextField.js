@@ -1,5 +1,6 @@
 ﻿import Input from '~mixins/input'
 
+// @vue/component
 export default {
   name: 'v-text-field',
 

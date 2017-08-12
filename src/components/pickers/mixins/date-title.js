@@ -1,4 +1,5 @@
 
+// @vue/component
 export default {
   methods: {
     genYearIcon () {
