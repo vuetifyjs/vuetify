@@ -45,7 +45,8 @@ export default {
       inputValue: this.multiple && !this.value ? [] : this.value,
       isBooted: false,
       lastItem: 20,
-      isActive: false
+      isActive: false,
+      searchInputValue: this.searchInput
     }
   },
 
@@ -146,9 +147,10 @@ export default {
     },
     searchValue: {
       get () {
-        return this.searchInput
+        return this.searchInput || this.searchInputValue
       },
       set (val) {
+        this.searchInputValue = val
         this.$emit('update:searchInput', val)
       }
     },
