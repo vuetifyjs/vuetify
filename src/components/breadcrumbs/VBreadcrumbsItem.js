@@ -10,17 +10,16 @@ export default {
   props: {
     activeClass: {
       type: String,
-      default: 'breadcrumbs__item--disabled'
+      default: 'breadcrumbs__item--active'
     }
   },
 
   computed: {
     classes () {
       const classes = {
-        'breadcrumbs__item': true
+        'breadcrumbs__item': true,
+        [this.activeClass]: !this.disabled
       }
-
-      classes[this.activeClass] = this.disabled
 
       return classes
     }
