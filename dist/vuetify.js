@@ -1710,7 +1710,7 @@ function unbind(el, binding) {
       clearTimeout(this.focusedTimeout);
       this.focusedTimeout = setTimeout(function () {
         return _this.hasJustFocused = false;
-      }, 100);
+      }, 550);
     },
     isActive: function isActive(val) {
       if (this.disabled) return;
@@ -1762,19 +1762,17 @@ function unbind(el, binding) {
   render: function render(h) {
     var _this3 = this;
 
-    var directives = !this.openOnHover ? [{
-      name: 'click-outside',
-      value: function value() {
-        return _this3.closeOnClick;
-      }
-    }] : [];
-
     var data = {
       'class': 'menu',
       style: {
         display: this.fullWidth ? 'block' : 'inline-block'
       },
-      directives: directives,
+      directives: [{
+        name: 'click-outside',
+        value: function value() {
+          return _this3.closeOnClick;
+        }
+      }],
       on: {
         keydown: function keydown(e) {
           if (e.keyCode === 27) _this3.isActive = false;else _this3.changeListIndex(e);
@@ -1973,7 +1971,8 @@ function unbind(el, binding) {
       inputValue: this.multiple && !this.value ? [] : this.value,
       isBooted: false,
       lastItem: 20,
-      isActive: false
+      isActive: false,
+      searchInputValue: this.searchInput
     };
   },
 
@@ -2068,9 +2067,10 @@ function unbind(el, binding) {
 
     searchValue: {
       get: function get() {
-        return this.searchInput;
+        return this.searchInput || this.searchInputValue;
       },
       set: function set(val) {
+        this.searchInputValue = val;
         this.$emit('update:searchInput', val);
       }
     },
@@ -2514,7 +2514,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 module.exports = {
 	"name": "vuetify",
-	"version": "0.14.8",
+	"version": "0.14.9",
 	"author": {
 		"name": "John Leider",
 		"email": "john.j.leider@gmail.com"
@@ -3007,6 +3007,8 @@ var VAvatar = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSi
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_route_link__ = __webpack_require__(9);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -3019,17 +3021,15 @@ var VAvatar = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["d" /* createSi
   props: {
     activeClass: {
       type: String,
-      default: 'breadcrumbs__item--disabled'
+      default: 'breadcrumbs__item--active'
     }
   },
 
   computed: {
     classes: function classes() {
-      var classes = {
+      var classes = _defineProperty({
         'breadcrumbs__item': true
-      };
-
-      classes[this.activeClass] = this.disabled;
+      }, this.activeClass, !this.disabled);
 
       return classes;
     }
@@ -5629,12 +5629,12 @@ function unbind(el, _ref2) {
     },
     mouseEnterHandler: function mouseEnterHandler(e) {
       if (this.disabled || this.hasJustFocused) return;
+      this.hasJustFocused = true;
       this.isActive = true;
     },
     mouseLeaveHandler: function mouseLeaveHandler(e) {
       if (this.isContentActive) return;
       this.isActive = false;
-      this.hasJustFocused = true;
     },
     addActivatorEvents: function addActivatorEvents() {
       var activator = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
@@ -5662,7 +5662,10 @@ function unbind(el, _ref2) {
       if (!this.$slots.activator) return null;
 
       var options = {
-        'class': 'menu__activator',
+        'class': {
+          'menu__activator--active': this.hasJustFocused || this.isActive
+        },
+        staticClass: 'menu__activator',
         ref: 'activator',
         slot: 'activator',
         on: {}
