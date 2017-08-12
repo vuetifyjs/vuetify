@@ -178,7 +178,7 @@ export default {
       if (!val) return
 
       clearTimeout(this.focusedTimeout)
-      this.focusedTimeout = setTimeout(() => (this.hasJustFocused = false), 100)
+      this.focusedTimeout = setTimeout(() => (this.hasJustFocused = false), 550)
     },
     isActive (val) {
       if (this.disabled) return
@@ -224,17 +224,15 @@ export default {
   },
 
   render (h) {
-    const directives = !this.openOnHover ? [{
-      name: 'click-outside',
-      value: () => this.closeOnClick
-    }] : []
-
     const data = {
       'class': 'menu',
       style: {
         display: this.fullWidth ? 'block' : 'inline-block'
       },
-      directives,
+      directives: [{
+        name: 'click-outside',
+        value: () => this.closeOnClick
+      }],
       on: {
         keydown: e => {
           if (e.keyCode === 27) this.isActive = false

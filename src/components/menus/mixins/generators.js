@@ -4,7 +4,10 @@ export default {
       if (!this.$slots.activator) return null
 
       const options = {
-        'class': 'menu__activator',
+        'class': {
+          'menu__activator--active': this.hasJustFocused || this.isActive
+        },
+        staticClass: 'menu__activator',
         ref: 'activator',
         slot: 'activator',
         on: {}

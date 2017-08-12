@@ -16,12 +16,12 @@ export default {
     },
     mouseEnterHandler (e) {
       if (this.disabled || this.hasJustFocused) return
+      this.hasJustFocused = true
       this.isActive = true
     },
     mouseLeaveHandler (e) {
       if (this.isContentActive) return
       this.isActive = false
-      this.hasJustFocused = true
     },
     addActivatorEvents (activator = null) {
       if (!activator) return
