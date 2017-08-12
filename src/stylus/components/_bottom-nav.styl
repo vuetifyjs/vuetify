@@ -29,10 +29,6 @@
     opacity: .5
     width: 100%
 
-    .icon
-      color: inherit
-      transition: all .4s cubic-bezier(.25, .8, .50, 1)
-
     .btn__content
       height: 100%
       flex-direction: column-reverse
@@ -41,6 +37,10 @@
       transform: scale3d(1, 1, 1) translate3d(0, 0, 0)
       white-space: nowrap
       will-change: font-size
+
+      .icon
+        color: inherit
+        transition: all .4s cubic-bezier(.25, .8, .50, 1)
 
     &--active
       opacity: 1
