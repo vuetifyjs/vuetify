@@ -1,4 +1,7 @@
 function inserted (el, binding) {
+  const callback = typeof binding.value === 'function'
+    ? binding.value
+    : binding.value.callback
   const options = binding.value.options || { passive: true }
   let target = binding.value.target || window
   if (target === 'undefined') return
@@ -7,7 +10,7 @@ function inserted (el, binding) {
     target = document.querySelector(target)
   }
 
-  target.addEventListener('scroll', binding.value.callback, options)
+  target.addEventListener('scroll', callback, options)
 
   el._onScroll = {
     target,
