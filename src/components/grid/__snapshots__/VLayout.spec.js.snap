@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VLayout should render component and match snapshot 1`] = `
+
+<div class="layout">
+</div>
+
+`;
+
+exports[`VLayout should render component with custom id and match snapshot 1`] = `
+
+<div class="layout">
+</div>
+
+`;

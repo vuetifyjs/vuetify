@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VExpansionPanelContent.js should render an expanded component and match snapshot 1`] = `
+
+<li>
+  <div class="expansion-panel__body"
+       style="display: none;"
+  >
+  </div>
+</li>
+
+`;
+
+exports[`VExpansionPanelContent.js should render component and match snapshot 1`] = `
+
+<li>
+  <div class="expansion-panel__body"
+       style="display: none;"
+  >
+  </div>
+</li>
+
+`;

@@ -12,7 +12,7 @@ const stub = {
   render: h => h('button')
 }
 
-describe('VBtn.vue', () => {
+describe('VBtn.js', () => {
   it('should render component and match snapshot', () => {
     const wrapper = mount(VBtn)
 

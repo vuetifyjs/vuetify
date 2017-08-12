@@ -2,7 +2,6 @@ import { test } from '~util/testing'
 import VCard from '~components/cards/VCard'
 
 test('VCard.js', ({ mount, functionalContext }) => {
-// describe('VCard.vue', () => {
   it('should render component and match snapshot', () => {
     const wrapper = mount(VCard, functionalContext())
 

@@ -1,8 +1,13 @@
-﻿import { mount } from 'avoriaz'
 import { test } from '~util/testing'
 import VTextField from '~components/text-fields/VTextField'
 
-test('VTextField.js', () => {
+test('VTextField.js', ({ mount }) => {
+  it('should render component and match snapshot', () => {
+    const wrapper = mount(VTextField)
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should pass events to internal input field', () => {
     const keyup = jest.fn()
     const component = {
