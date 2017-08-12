@@ -36,4 +36,32 @@ describe('VSnackbar.vue', () => {
     expect(wrapper.find('div .snack__content').length).toEqual(1)
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should timeout correctly', async () => {
+    jest.useFakeTimers()
+    const wrapper = mount(VSnackbar, {
+      propsData: {
+        value: false,
+        timeout: 3141
+      }
+    })
+
+    const value = jest.fn()
+
+    wrapper.instance().$on('input', value)
+    wrapper.setProps({ 'value': true })
+    wrapper.update()
+
+    await wrapper.vm.$nextTick()
+
+    expect(setTimeout.mock.calls.length).toBe(1)
+    expect(setTimeout.mock.calls[0][1]).toBe(3141)
+
+    jest.runAllTimers()
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.data().isActive).toBe(false)
+    expect(value).toBeCalledWith(false)
+  })
 })

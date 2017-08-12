@@ -9,7 +9,8 @@ export default {
     isExtended: false,
     isScrolling: false,
     marginTop: 0,
-    previousScroll: null
+    previousScroll: null,
+    target: null
   }),
 
   props: {
@@ -21,7 +22,12 @@ export default {
     flat: Boolean,
     floating: Boolean,
     prominent: Boolean,
-    scrollOffScreen: Boolean
+    scrollOffScreen: Boolean,
+    scrollTarget: String,
+    scrollThreshHold: {
+      type: Number,
+      default: 100
+    }
   },
 
   computed: {
@@ -57,8 +63,18 @@ export default {
   methods: {
     onScroll () {
       if (typeof window === 'undefined') return
-      const currentScroll = window.pageYOffset ||
-        document.documentElement.scrollTop
+
+      if (!this.target) {
+        this.target = this.scrollTarget
+          ? document.querySelector(this.scrollTarget)
+          : window
+      }
+
+      const currentScroll = this.scrollTarget
+        ? this.target.scrollTop
+        : this.target.pageYOffset || document.documentElement.scrollTop
+
+      if (currentScroll < this.scrollThreshHold) return
 
       if (this.previousScroll === null) {
         this.previousScroll = currentScroll
@@ -83,7 +99,8 @@ export default {
       data.directives = [{
         name: 'scroll',
         value: {
-          callback: this.onScroll
+          callback: this.onScroll,
+          target: this.scrollTarget
         }
       }]
     }
