@@ -63,10 +63,10 @@ export default {
     genActions () {
       return this.$createElement('div', {
         'class': 'small-dialog__actions',
-        directives: [{
-          name: 'show',
-          value: this.large
-        }]
+        directives: [
+          { name: 'show', value: this.large },
+          { name: 'esc' }
+        ]
       }, [
         this.genButton(this.cancel, this.cancelText),
         this.genButton(this.save, this.saveText)

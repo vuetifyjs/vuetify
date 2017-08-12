@@ -11,6 +11,7 @@ export default {
   props: {
     disabled: Boolean,
     persistent: Boolean,
+    disableEsc: Boolean,
     fullscreen: Boolean,
     fullWidth: Boolean,
     lazy: Boolean,
@@ -63,6 +64,9 @@ export default {
     closeConditional (e) {
       // close dialog if !persistent and clicked outside
       return !this.persistent
+    },
+    closeOnEsc (e) {
+      return !this.disableEsc
     }
   },
 
@@ -73,6 +77,7 @@ export default {
       ref: 'dialog',
       directives: [
         { name: 'click-outside', value: this.closeConditional },
+        { name: 'esc', value: this.closeOnEsc },
         { name: 'show', value: this.isActive }
       ]
     }

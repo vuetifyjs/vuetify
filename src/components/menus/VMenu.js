@@ -224,10 +224,10 @@ export default {
   },
 
   render (h) {
-    const directives = !this.openOnHover ? [{
-      name: 'click-outside',
-      value: () => this.closeOnClick
-    }] : []
+    const directives = !this.openOnHover ? [
+      { name: 'click-outside', value: () => this.closeOnClick },
+      { name: 'esc' }
+    ] : []
 
     const data = {
       'class': 'menu',
