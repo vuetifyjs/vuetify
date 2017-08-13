@@ -6,9 +6,13 @@ export default {
 
   functional: true,
 
-  render (h, { slots, listeners, props }) {
-    const data = {
-      staticClass: 'toolbar__side-icon',
+  render (h, { slots, listeners, props, data }) {
+    const classes = data.staticClass
+     ? `${data.staticClass} toolbar__side-icon`
+     : 'toolbar__side-icon'
+
+    const d = {
+      staticClass: classes,
       props: Object.assign(props, {
         icon: true
       }),
@@ -17,6 +21,6 @@ export default {
 
     const defaultSlot = slots().default
 
-    return h(VBtn, data, defaultSlot || [h(VIcon, 'menu')])
+    return h(VBtn, d, defaultSlot || [h(VIcon, 'menu')])
   }
 }
