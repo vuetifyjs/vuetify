@@ -1,39 +1,44 @@
 <script>
   import { VFadeTransition } from '../transitions'
-  import Input from '../../mixins/input'
+
   import Colorable from '../../mixins/colorable'
+  import TabFocusable from '../../mixins/tab-focusable'
 
   import Ripple from '../../directives/ripple'
 
   export default {
-    name: 'radio',
+    name: 'v-radio',
 
-    components: {
-      VFadeTransition
-    },
+    inheritAttrs: false,
 
-    mixins: [Input, Colorable],
+    inject: ['isMandatory'],
+
+    components: { VFadeTransition },
+
+    mixins: [Colorable, TabFocusable],
 
     directives: { Ripple },
 
-    model: {
-      prop: 'inputValue',
-      event: 'change'
+    props: {
+      disabled: Boolean,
+      value: [String, Number],
+      label: String
     },
 
-    props: {
-      inputValue: [String, Number]
+    data () {
+      return {
+        isActive: false
+      }
     },
 
     computed: {
-      isActive () {
-        return this.inputValue === this.value
-      },
       classes () {
         return this.addColorClassChecks({
-          'radio': true,
+          'input-group': true,
+          'input-group--active': this.isActive,
           'input-group--selection-controls': true,
-          'input-group--active': this.isActive
+          'input-group--tab-focused': this.tabFocused,
+          'radio': true
         })
       },
 
@@ -43,13 +48,62 @@
     },
 
     methods: {
+      genInput (radio) {
+        const input = this.$createElement('input', {
+          ref: 'input',
+          style: {
+            display: 'none'
+          },
+          attrs: Object.assign({
+            name: 'test', // from parent?
+            id: this.id,
+            type: 'radio',
+            value: this.value
+          }, this.$attrs)
+        }, [this.value])
+
+        radio.push(input)
+
+        return this.$createElement('div', {
+          class: 'input-group__input'
+        }, radio)
+      },
+      genWrapper (radio) {
+        const children = []
+
+        children.push(this.genLabel())
+        children.push(this.genInput(radio))
+
+        return this.$createElement('div', {
+          class: this.classes,
+          on: {
+            keydown: e => {
+              if ([13, 32].includes(e.keyCode)) {
+                e.preventDefault()
+                this.click()
+              }
+            },
+            blur: e => {
+              this.$emit('blur', e)
+              this.tabFocused = false
+            }
+          }
+        }, children)
+      },
       genLabel () {
         return this.$createElement('label', {
-          on: { click: this.toggle }
+          on: {
+            click: this.click
+          }
         }, this.label)
       },
-      toggle () {
-        if (!this.disabled) {
+      click () {
+        const mandatory = this.isMandatory &&
+          this.isMandatory() || false
+
+        if (!this.disabled && (!this.isActive || !mandatory)) {
+          this.$refs.input.checked = !this.$refs.input.checked
+          this.isActive = !this.isActive
           this.$emit('change', this.value)
         }
       }
@@ -68,7 +122,7 @@
       const ripple = h('div', {
         'class': 'input-group--selection-controls__ripple',
         on: Object.assign({}, {
-          click: this.toggle
+          click: this.click
         }, this.$listeners),
         directives: [
           {
@@ -78,7 +132,7 @@
         ]
       })
 
-      return this.genInputGroup([transition, ripple])
+      return this.genWrapper([transition, ripple])
     }
   }
 </script>

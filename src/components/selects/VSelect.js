@@ -20,6 +20,8 @@ import { getObjectValueByPath } from '~util/helpers'
 export default {
   name: 'v-select',
 
+  inheritAttrs: false,
+
   components: {
     VCard,
     VCheckbox,
@@ -130,14 +132,6 @@ export default {
 
       return !this.auto ? items.slice(0, this.lastItem) : items
     },
-    hasError () {
-      return this.validations.length ||
-        this.error ||
-        (this.hasFocused &&
-          !this.focused &&
-          !this.isDirty &&
-          this.required)
-    },
     isDirty () {
       return this.selectedItems.length
     },
@@ -216,15 +210,14 @@ export default {
   },
 
   methods: {
-    blur () {
+    blur (e) {
       this.$nextTick(() => {
         this.focused = false
-        this.hasFocused = true
         this.searchValue = null
-        this.$el.blur()
+        this.$emit('blur', this.inputValue)
       })
     },
-    focus () {
+    focus (e) {
       this.focused = true
       this.$refs.input &&
         (this.autocomplete || this.editable) &&
@@ -238,6 +231,7 @@ export default {
           this.$refs.input.value = this.getValue(this.inputValue)
         })
       }
+      this.$emit('focus', e)
     },
     genLabel () {
       if (this.searchValue && !this.focused && this.isDirty) return null
@@ -308,12 +302,17 @@ export default {
       this.genSelectionsAndSearch(),
       this.genMenu()
     ], {
-      ref: 'activator',
       directives: [{
         name: 'click-outside',
-        value: () => (this.isActive = false)
+        value: () => {
+          this.isActive = false
+          this.$emit('change', this.inputValue)
+        }
       }],
       on: {
+        focus: this.focus,
+        blur: this.blur,
+        click: () => { if (!this.isActive) this.isActive = true },
         keydown: this.onKeyDown // Located in mixins/autocomplete.js
       }
     })

@@ -46,6 +46,18 @@ export default {
     }
   },
 
+  methods: {
+    groupFocus (e) {
+      this.focused = true
+      this.$emit('focus', e)
+    },
+    groupBlur (e) {
+      this.focused = false
+      this.tabFocused = false
+      this.$emit('blur', this.inputValue)
+    }
+  },
+
   render (h) {
     const transition = h('v-fade-transition', [
       h('v-icon', {

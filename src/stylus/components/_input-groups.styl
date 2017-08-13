@@ -94,9 +94,10 @@
 
     textarea
       border-color: $theme.error
-
+/*
     label
       animation: shake .6s $transition.swing
+*/
 
     label,
     .input-group__input .icon
@@ -106,6 +107,9 @@
       &:after,
       &:before
         background-color: $theme.error
+
+    > label
+      animation: shake .6s $transition.swing
 
 /** Details */
 .input-group

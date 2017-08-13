@@ -16,6 +16,7 @@ import VDialog from './dialogs'
 import VDivider from './dividers'
 import VExpansionPanel from './expansion-panel'
 import VFooter from './footer'
+import VForm from './form'
 import VGrid from './grid'
 import VIcon from './icons'
 import VList from './lists'
@@ -61,6 +62,7 @@ export {
   VDivider,
   VExpansionPanel,
   VFooter,
+  VForm,
   VGrid,
   VIcon,
   VList,
