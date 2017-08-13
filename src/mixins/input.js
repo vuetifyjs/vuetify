@@ -52,7 +52,7 @@ export default {
       }, this.classes)
     },
     isDirty () {
-      return this.inputValue
+      return !!this.inputValue
     }
   },
 

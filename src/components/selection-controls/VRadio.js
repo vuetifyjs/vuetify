@@ -26,6 +26,7 @@ export default {
     classes () {
       return this.addColorClassChecks({
         'input-group': true,
+        'input-group--active': this.isActive,
         'input-group--selection-controls': true,
         'input-group--tab-focused': this.tabFocused,
         'radio': true
@@ -67,13 +68,6 @@ export default {
       return this.$createElement('div', {
         class: this.classes,
         on: {
-          keyup: e => {
-            if (e.keyCode === 9) {
-              e.shiftKey && this.$emit('blur:prev', e) ||
-                this.$emit('blur:next', e)
-              this.tabFocused = true
-            }
-          },
           keydown: e => {
             if ([13, 32].includes(e.keyCode)) {
               e.preventDefault()
@@ -102,8 +96,6 @@ export default {
         this.$refs.input.checked = !this.$refs.input.checked
         this.isActive = !this.isActive
         this.$emit('change', this.value)
-
-        // if (this.radioGroup) this.radioGroup.toggle(this.value)
       }
     }
   },

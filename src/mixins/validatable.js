@@ -95,14 +95,14 @@ export default {
         this.hasFocused = false
       })
     },
-    validate (force) {
+    validate (force = false, value) {
       if (force) this.shouldValidate = true
 
       this.errorBucket = []
 
       this.rules.forEach(rule => {
         const valid = typeof rule === 'function'
-          ? rule(this.inputValue)
+          ? rule(typeof value !== 'undefined' ? value : this.inputValue)
           : rule
 
         if (valid !== true) {

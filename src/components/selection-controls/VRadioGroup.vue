@@ -1,10 +1,11 @@
 <script>
   import Input from '~mixins/input'
+  import Themeable from '~mixins/themeable'
 
   export default {
     name: 'v-radio-group',
 
-    mixins: [Input],
+    mixins: [Input, Themeable],
 
     model: {
       prop: 'inputValue',
@@ -18,9 +19,16 @@
     },
 
     props: {
+      column: {
+        type: Boolean,
+        default: true
+      },
       inputValue: [String, Number],
-      mandatory: Boolean,
-      column: Boolean
+      mandatory: {
+        type: Boolean,
+        default: true
+      },
+      row: Boolean
     },
 
     data () {
@@ -41,7 +49,10 @@
       classes () {
         return {
           'radio-group': true,
-          'radio-group--column': this.column
+          'radio-group--column': this.column,
+          'radio-group--row': this.row,
+          'theme--dark': this.dark,
+          'theme--light': this.light
         }
       }
     },
@@ -76,6 +87,7 @@
 
     mounted () {
       this.getRadios().forEach((radio) => {
+        radio.isActive = this.inputValue === radio.value
         radio.$el.tabIndex = radio.$el.tabIndex > 0 ? radio.$el.tabIndex : 0
         radio.$on('change', this.toggle)
         radio.$on('blur', this.radioBlur)
@@ -96,17 +108,3 @@
     }
   }
 </script>
-
-<style lang="stylus">
-  .radio-group
-    .input-group__details:before, .input-group__details:after
-      display: none
-
-    .input-group
-      padding: 0
-
-    &--column
-      .input-group__input
-        flex-direction: column
-
-</style>

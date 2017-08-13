@@ -49,8 +49,6 @@ export default {
         return
       }
 
-      this.shouldValidate = true
-
       let input = this.inputValue
       if (Array.isArray(input)) {
         input = input.slice()
@@ -70,6 +68,8 @@ export default {
       } else {
         input = !input
       }
+
+      this.validate(false, input)
 
       this.$emit('change', input)
     }
