@@ -10,6 +10,7 @@ export default {
   data () {
     return {
       hasFocused: false,
+      badInput: false,
       inputHeight: null
     }
   },
@@ -101,6 +102,7 @@ export default {
       return this.lazyValue !== null &&
         typeof this.lazyValue !== 'undefined' &&
         this.lazyValue.toString().length > 0 ||
+        this.badInput ||
         this.placeholder
     }
   },
@@ -140,6 +142,7 @@ export default {
     },
     onInput (e) {
       this.inputValue = e.target.value
+      this.badInput = e.target.validity && e.target.validity.badInput
       this.multiLine && this.autoGrow && this.calculateInputHeight()
     },
     blur (e) {
