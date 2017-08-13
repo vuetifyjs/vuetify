@@ -1,9 +1,11 @@
 export default {
-  data: () => ({
-    listIndex: -1,
-    isUsingKeys: false,
-    tiles: []
-  }),
+  data () {
+    return {
+      listIndex: -1,
+      isUsingKeys: false,
+      tiles: []
+    }
+  },
 
   watch: {
     isActive (val) {

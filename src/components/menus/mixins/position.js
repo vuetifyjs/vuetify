@@ -17,7 +17,7 @@ export default {
     calcLeftAuto () {
       const a = this.dimensions.activator
 
-      return parseInt(a.left - 16)
+      return parseInt(a.left) - 16
     },
     calcTopAuto () {
       if (!this.hasActivator) return this.calcTop(true)

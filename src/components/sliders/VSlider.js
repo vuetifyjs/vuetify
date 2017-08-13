@@ -98,7 +98,7 @@ export default {
       }
     },
     numTicks () {
-      return parseInt((this.max - this.min) / this.step)
+      return (parseInt(this.max) - parseInt(this.min)) / parseInt(this.step)
     }
   },
 
@@ -169,7 +169,7 @@ export default {
       this.inputValue = this.min + ((left / 100) * (this.max - this.min))
     },
     onKeyDown (e) {
-      if (!e.keyCode === 37 && !e.keyCode === 39) return
+      if (e.keyCode !== 37 && e.keyCode !== 39) return
 
       const direction = e.keyCode === 37 && -1 || e.keyCode === 39 && 1 || 0
       const multiplier = e.shiftKey && 3 || e.ctrlKey && 2 || 1
