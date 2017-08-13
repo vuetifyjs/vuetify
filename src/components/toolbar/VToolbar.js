@@ -5,13 +5,15 @@ export default {
 
   mixins: [Themeable],
 
-  data: () => ({
-    isExtended: false,
-    isScrolling: false,
-    marginTop: 0,
-    previousScroll: null,
-    target: null
-  }),
+  data () {
+    return {
+      isExtended: false,
+      isScrolling: false,
+      marginTop: 0,
+      previousScroll: null,
+      target: null
+    }
+  },
 
   props: {
     absolute: Boolean,
