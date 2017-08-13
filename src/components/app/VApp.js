@@ -12,7 +12,8 @@ export default {
       type: String,
       default: 'app'
     },
-    toolbar: Boolean
+    toolbar: Boolean,
+    toolbarDense: Boolean
   },
 
   render (h, { props, data, children }) {
@@ -22,6 +23,7 @@ export default {
     props.footer && (data.staticClass += ' application--footer')
     props.fixedFooter && (data.staticClass += ' application--footer-fixed')
     props.toolbar && (data.staticClass += ' application--toolbar')
+    props.toolbarDense && (data.staticClass += ' application--toolbar-dense')
 
     data.attrs = { 'data-app': true }
     data.domProps = { id: props.id }
