@@ -21,6 +21,7 @@ export default {
         'error': this.error,
         'info': this.info,
         'primary': this.primary,
+        'accent': this.accent,
         'secondary': this.secondary,
         'success': this.success,
         'warning': this.warning

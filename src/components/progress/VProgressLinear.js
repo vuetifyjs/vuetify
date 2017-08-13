@@ -25,7 +25,9 @@ export default {
     },
     indeterminate: Boolean,
     info: Boolean,
+    primary: Boolean,
     secondary: Boolean,
+    accent: Boolean,
     success: Boolean,
     query: Boolean,
     warning: Boolean,
@@ -47,7 +49,9 @@ export default {
     classes () {
       return {
         'progress-linear--query': this.query,
+        'progress-linear--primary': this.primary,
         'progress-linear--secondary': this.secondary,
+        'progress-linear--accent': this.accent,
         'progress-linear--success': this.success,
         'progress-linear--info': this.info,
         'progress-linear--warning': this.warning,

@@ -48,6 +48,7 @@ export default {
       'icon--right': props.right,
       'icon--x-large': props.xLarge,
       'primary--text': props.primary,
+      'accent--text': props.accent,
       'secondary--text': props.secondary,
       'success--text': props.success,
       'info--text': props.info,

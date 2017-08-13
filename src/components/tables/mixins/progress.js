@@ -16,6 +16,7 @@ export default {
       const loader = this.$createElement('v-progress-linear', {
         props: {
           primary: this.color === 'primary',
+          accent: this.color === 'accent',
           secondary: this.color === 'secondary',
           success: this.color === 'success',
           info: this.color === 'info',
