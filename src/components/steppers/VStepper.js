@@ -1,5 +1,6 @@
 import Themeable from '~mixins/themeable'
 
+// @vue/component
 export default {
   name: 'v-stepper',
 

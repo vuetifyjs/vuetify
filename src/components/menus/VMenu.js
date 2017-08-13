@@ -8,6 +8,7 @@ import Keyable from './mixins/keyable'
 
 import { ClickOutside } from '~directives'
 
+// @vue/component
 export default {
   name: 'v-menu',
 

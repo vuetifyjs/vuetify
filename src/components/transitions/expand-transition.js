@@ -1,5 +1,6 @@
 import { addOnceEventListener } from '~util/helpers'
 
+// @vue/component
 export default {
   enter (el, done) {
     // Remove initial transition

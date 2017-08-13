@@ -1,6 +1,7 @@
 import Contextualable from '~mixins/contextualable'
 import Toggleable from '~mixins/toggleable'
 
+// @vue/component
 export default {
   name: 'v-snackbar',
 

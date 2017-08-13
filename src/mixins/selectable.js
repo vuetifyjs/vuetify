@@ -1,6 +1,7 @@
 ﻿import Colorable from './colorable'
 import Input from './input'
 
+// @vue/component
 export default {
   mixins: [Input, Colorable],
 

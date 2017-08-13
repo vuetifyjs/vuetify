@@ -1,3 +1,4 @@
+// @vue/component
 export default {
   props: {
     absolute: Boolean,

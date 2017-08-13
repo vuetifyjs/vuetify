@@ -1,6 +1,7 @@
 import Input from '~mixins/input'
 import Colorable from '~mixins/colorable'
 
+// @vue/component
 export default {
   name: 'radio',
 

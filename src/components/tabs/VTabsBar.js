@@ -1,6 +1,7 @@
 import VIcon from '~components/icons/VIcon'
 import { Resize } from '~directives'
 
+// @vue/component
 export default {
   name: 'v-tabs-bar',
 

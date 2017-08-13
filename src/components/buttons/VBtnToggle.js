@@ -1,6 +1,7 @@
 import VBtn from '~components/buttons/VBtn'
 import VIcon from '~components/icons/VIcon'
 
+// @vue/component
 export default {
   name: 'v-btn-toggle',
 

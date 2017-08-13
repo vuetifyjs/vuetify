@@ -1,5 +1,6 @@
 import Translatable from '~mixins/translatable'
 
+// @vue/component
 export default {
   name: 'v-parallax',
 

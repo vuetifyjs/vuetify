@@ -3,6 +3,7 @@ import Detachable from '~mixins/detachable'
 import Overlayable from '~mixins/overlayable'
 import Toggleable from '~mixins/toggleable'
 
+// @vue/component
 export default {
   name: 'v-dialog',
 

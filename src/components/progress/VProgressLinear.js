@@ -3,6 +3,7 @@ import {
   VSlideXTransition
 } from '~components/transitions'
 
+// @vue/component
 export default {
   name: 'v-progress-linear',
 

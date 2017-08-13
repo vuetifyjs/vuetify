@@ -3,6 +3,7 @@ import Ripple from '~directives/ripple'
 import { VFadeTransition } from '~components/transitions'
 import VIcon from '~components/icons/VIcon'
 
+// @vue/component
 export default {
   name: 'v-checkbox',
 

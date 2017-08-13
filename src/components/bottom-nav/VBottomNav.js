@@ -1,4 +1,5 @@
-  export default {
+// @vue/component
+export default {
     functional: true,
 
     props: {

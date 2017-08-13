@@ -2,6 +2,7 @@ import Contextualable from '~mixins/contextualable'
 import Toggleable from '~mixins/toggleable'
 import Transitionable from '~mixins/transitionable'
 
+// @vue/component
 export default {
   name: 'v-alert',
 

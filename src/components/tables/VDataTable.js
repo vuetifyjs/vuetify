@@ -15,6 +15,7 @@ import {
   getObjectValueByPath
 } from '~util/helpers'
 
+// @vue/component
 export default {
   name: 'v-datatable',
 

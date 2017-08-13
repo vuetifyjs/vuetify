@@ -2,6 +2,7 @@ import GenerateRouteLink from '~mixins/route-link'
 import Toggleable from '~mixins/toggleable'
 import { Ripple } from '~directives'
 
+// @vue/component
 export default {
   name: 'v-list-tile',
 
