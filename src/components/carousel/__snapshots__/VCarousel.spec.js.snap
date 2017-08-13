@@ -1,0 +1,227 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VCarousel.js should render component and match snapshot 1`] = `
+
+<div class="carousel">
+  <div class="carousel__left">
+    <button type="button"
+            class="btn btn--icon btn--raised theme--dark"
+    >
+      <div class="btn__content">
+        <i class="material-icons icon">
+          chevron_left
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__right">
+    <button type="button"
+            class="btn btn--icon btn--raised theme--dark"
+    >
+      <div class="btn__content">
+        <i class="material-icons icon">
+          chevron_right
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__controls">
+  </div>
+</div>
+
+`;
+
+exports[`VCarousel.js should render component with custom duration between image cycles and match snapshot 1`] = `
+
+<div class="carousel">
+  <div class="carousel__left">
+    <button type="button"
+            class="btn btn--icon btn--raised theme--dark"
+    >
+      <div class="btn__content">
+        <i class="material-icons icon">
+          chevron_left
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__right">
+    <button type="button"
+            class="btn btn--icon btn--raised theme--dark"
+    >
+      <div class="btn__content">
+        <i class="material-icons icon">
+          chevron_right
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__controls">
+  </div>
+</div>
+
+`;
+
+exports[`VCarousel.js should render component with custom icon and match snapshot 1`] = `
+
+<div class="carousel">
+  <div class="carousel__left">
+    <button type="button"
+            class="btn btn--icon btn--raised theme--dark"
+    >
+      <div class="btn__content">
+        <i class="material-icons icon">
+          chevron_left
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__right">
+    <button type="button"
+            class="btn btn--icon btn--raised theme--dark"
+    >
+      <div class="btn__content">
+        <i class="material-icons icon">
+          chevron_right
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__controls">
+  </div>
+</div>
+
+`;
+
+exports[`VCarousel.js should render component with custom left control icon and match snapshot 1`] = `
+
+<div class="carousel">
+  <div class="carousel__left">
+    <button type="button"
+            class="btn btn--icon btn--raised theme--dark"
+    >
+      <div class="btn__content">
+        <i class="material-icons icon">
+          stop
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__right">
+    <button type="button"
+            class="btn btn--icon btn--raised theme--dark"
+    >
+      <div class="btn__content">
+        <i class="material-icons icon">
+          chevron_right
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__controls">
+  </div>
+</div>
+
+`;
+
+exports[`VCarousel.js should render component with custom right control icon and match snapshot 1`] = `
+
+<div class="carousel">
+  <div class="carousel__left">
+    <button type="button"
+            class="btn btn--icon btn--raised theme--dark"
+    >
+      <div class="btn__content">
+        <i class="material-icons icon">
+          chevron_left
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__right">
+    <button type="button"
+            class="btn btn--icon btn--raised theme--dark"
+    >
+      <div class="btn__content">
+        <i class="material-icons icon">
+          stop
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__controls">
+  </div>
+</div>
+
+`;
+
+exports[`VCarousel.js should render component with image cycling off and match snapshot 1`] = `
+
+<div class="carousel">
+  <div class="carousel__left">
+    <button type="button"
+            class="btn btn--icon btn--raised theme--dark"
+    >
+      <div class="btn__content">
+        <i class="material-icons icon">
+          chevron_left
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__right">
+    <button type="button"
+            class="btn btn--icon btn--raised theme--dark"
+    >
+      <div class="btn__content">
+        <i class="material-icons icon">
+          chevron_right
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__controls">
+  </div>
+</div>
+
+`;
+
+exports[`VCarousel.js should render component without left control icon and match snapshot 1`] = `
+
+<div class="carousel">
+  <div class="carousel__right">
+    <button type="button"
+            class="btn btn--icon btn--raised theme--dark"
+    >
+      <div class="btn__content">
+        <i class="material-icons icon">
+          chevron_right
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__controls">
+  </div>
+</div>
+
+`;
+
+exports[`VCarousel.js should render component without right control icon and match snapshot 1`] = `
+
+<div class="carousel">
+  <div class="carousel__left">
+    <button type="button"
+            class="btn btn--icon btn--raised theme--dark"
+    >
+      <div class="btn__content">
+        <i class="material-icons icon">
+          chevron_left
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__controls">
+  </div>
+</div>
+
+`;

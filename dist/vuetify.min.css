@@ -5188,6 +5188,26 @@ p {
       -ms-flex-align: baseline;
           align-items: baseline;
 }
+.align-content-start {
+  -ms-flex-line-pack: start;
+      align-content: flex-start;
+}
+.align-content-end {
+  -ms-flex-line-pack: end;
+      align-content: flex-end;
+}
+.align-content-center {
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+.align-content-space-between {
+  -ms-flex-line-pack: justify;
+      align-content: space-between;
+}
+.align-content-space-around {
+  -ms-flex-line-pack: distribute;
+      align-content: space-around;
+}
 .justify-start {
   -webkit-box-pack: start;
       -ms-flex-pack: start;

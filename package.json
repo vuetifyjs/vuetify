@@ -18,7 +18,9 @@
     "debug-build": "node --inspect --debug-brk build/build.js",
     "test": "cross-env NODE_ENV=test jest --no-cache --verbose",
     "test-coverage": "cross-env NODE_ENV=test jest --no-cache --coverage --verbose",
-    "lint": "eslint --ext .js,.vue src"
+    "lint": "eslint --ext .js,.vue src",
+    "precommit": "yarn run lint && yarn test",
+    "prepush": "yarn run lint && yarn test"
   },
   "description": "Vue.js 2 Semantic Component Framework",
   "devDependencies": {
@@ -57,6 +59,7 @@
     "extract-text-webpack-plugin": "^3.0.0",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "function-bind": "^1.0.2",
+    "husky": "^0.14.3",
     "jest": "^20.0.4",
     "jest-cli": "^20.0.4",
     "jest-css-modules": "^1.1.0",

@@ -2504,7 +2504,9 @@ module.exports = {
 		"debug-build": "node --inspect --debug-brk build/build.js",
 		"test": "cross-env NODE_ENV=test jest --no-cache --verbose",
 		"test-coverage": "cross-env NODE_ENV=test jest --no-cache --coverage --verbose",
-		"lint": "eslint --ext .js,.vue src"
+		"lint": "eslint --ext .js,.vue src",
+		"precommit": "yarn run lint && yarn test",
+		"prepush": "yarn run lint && yarn test"
 	},
 	"description": "Vue.js 2 Semantic Component Framework",
 	"devDependencies": {
@@ -2543,6 +2545,7 @@ module.exports = {
 		"extract-text-webpack-plugin": "^3.0.0",
 		"friendly-errors-webpack-plugin": "^1.6.1",
 		"function-bind": "^1.0.2",
+		"husky": "^0.14.3",
 		"jest": "^20.0.4",
 		"jest-cli": "^20.0.4",
 		"jest-css-modules": "^1.1.0",
@@ -7059,7 +7062,8 @@ var defaultDateFormat = function defaultDateFormat(val) {
       var rows = [];
       var length = new Date(this.tableYear, this.tableMonth + 1, 0).getDate();
 
-      var day = new Date(this.tableYear, this.tableMonth).getDay() - parseInt(this.firstDayOfWeek);
+      var day = new Date(this.tableYear, this.tableMonth).getDay();
+      day = day < 1 ? 6 : day - parseInt(this.firstDayOfWeek);
 
       for (var i = 0; i < day; i++) {
         rows.push(this.$createElement('td'));
@@ -7128,7 +7132,7 @@ var defaultDateFormat = function defaultDateFormat(val) {
     }
   }
 });
-'filehash 1TOm3RjgMOuMmOuas4u2ek44xo4=';
+'filehash zvBHWDrQPAT2XCizyVSS6P0DtTE=';
 
 /***/ }),
 /* 137 */
@@ -11330,7 +11334,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         },
         attrs: _extends({}, this.$attrs, {
           tabindex: this.tabindex,
-          'aria-label': !this.$attrs.id && this.label // Label `for` will be set if we have an id
+          'aria-label': this.$attrs && !this.$attrs.id && this.label // Label `for` will be set if we have an id
         }),
         on: _extends({}, this.$listeners, {
           blur: this.blur,
@@ -11380,7 +11384,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     return this.genInputGroup(this.genInput(), { attrs: { tabindex: false } });
   }
 });
-'filehash RIZvpmVz3E/+HuPzxraY//0cCcQ=';
+'filehash 5uFMAMkRmCLUmC17AwZbnvhRglQ=';
 
 /***/ }),
 /* 194 */
@@ -11639,10 +11643,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   render: function render(h, _ref) {
     var slots = _ref.slots,
         listeners = _ref.listeners,
-        props = _ref.props;
+        props = _ref.props,
+        data = _ref.data;
 
-    var data = {
-      staticClass: 'toolbar__side-icon',
+    var classes = data.staticClass ? data.staticClass + ' toolbar__side-icon' : 'toolbar__side-icon';
+
+    var d = {
+      staticClass: classes,
       props: Object.assign(props, {
         icon: true
       }),
@@ -11651,10 +11658,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     var defaultSlot = slots().default;
 
-    return h(__WEBPACK_IMPORTED_MODULE_0__buttons_VBtn___default.a, data, defaultSlot || [h(__WEBPACK_IMPORTED_MODULE_1__icons_VIcon___default.a, 'menu')]);
+    return h(__WEBPACK_IMPORTED_MODULE_0__buttons_VBtn___default.a, d, defaultSlot || [h(__WEBPACK_IMPORTED_MODULE_1__icons_VIcon___default.a, 'menu')]);
   }
 });
-'filehash NUjjm2XE9+nttJkMmPIAv/5NQws=';
+'filehash fzeI07CosjiITcGBGVCOTvsnQWw=';
 
 /***/ }),
 /* 200 */
