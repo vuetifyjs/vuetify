@@ -40,7 +40,7 @@ module.exports = merge(baseWebpackConfig, {
     ]
   },
   performance: {
-    hints: false
+    hints: 'warning'
   },
   devServer: {
     contentBase: resolve('../dev')
