@@ -8,7 +8,7 @@ exports[`VTimePicker.js should accept a date object for a value 1`] = `
   <div class="picker__title">
     <div class="picker--time__title">
       <span class="active">
-        0
+        12
       </span>
       <span class>
         :00
@@ -82,7 +82,7 @@ exports[`VTimePicker.js should accept a date object for a value 1`] = `
           11
         </span>
       </span>
-      <span class>
+      <span class="active">
         <span>
           12
         </span>
