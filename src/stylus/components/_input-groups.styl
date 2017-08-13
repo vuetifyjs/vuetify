@@ -1,3 +1,6 @@
+@import '../bootstrap'
+@import '../theme'
+
 .input-group
   display: flex
   flex: 1
@@ -41,7 +44,7 @@
 .input-group
   &__icon-cb
     cursor: pointer
-    
+
 .input-group
   &.input-group--focused
     .input-group__input .icon
@@ -55,7 +58,7 @@
       background-position: bottom
       background-size: 3px 1px
       background-repeat: repeat-x
-          
+
   // Focused
   &.input-group--text-field
     &:not(.input-group--single-line):not(.input-group--error)
@@ -63,7 +66,7 @@
       &:focus
         label
           color: $theme.primary
-        
+
         textarea
           border-color: $theme.primary
 
@@ -88,10 +91,10 @@
     input,
     textarea
       caret-color: $theme.error
-      
+
     textarea
       border-color: $theme.error
-    
+
     label
       animation: shake .6s $transition.swing
 
@@ -158,7 +161,7 @@
     flex: 1 0
     transition: .3s $transition.fast-in-fast-out
     color: $theme.error
-    
+
 
 /** Types */
 .input-group
@@ -167,3 +170,75 @@
   &--editable
     &.input-group--active
       background-color: #fff
+
+/* Theme */
+input-group($material)
+  input,
+  textarea
+    color: $material.text.primary
+
+    &:disabled
+      color: $material.text.disabled
+
+  .input-group__details
+    color: $material.text.secondary
+
+  &.input-group--textarea:not(.input-group--full-width)
+    textarea
+      border: 2px solid $material.text.secondary
+
+  // This is specific for selects
+  &.input-group--dirty
+    .input-group__selections__comma
+      color: $material.text.primary
+
+  &:not(.input-group--error)
+    label
+      color: $material.text.secondary
+
+    .input-group__details:before
+      background-color: $material.input-bottom-line
+
+    &:not(.input-group--focused)
+      .input-group__input
+        .input-group__append-icon,
+        .input-group__prepend-icon
+          color: $material.text.secondary
+
+      &:not(.input-group--disabled):not(.input-group--overflow):not(.input-group--segmented):not(.input-group--editable):hover
+        .input-group__details:before
+          background-color: $material.text.primary
+
+        &.input-group--textarea:not(.input-group--full-width)
+          textarea
+            border-color: $material.text.primary
+
+  .input-group__counter
+    color: $material.text.secondary
+
+  &.input-group
+    &--overflow, &--segmented, &--editable
+      .input-group__input,
+      .input-group__details
+        &:before
+          background-color: $material.dividers
+
+  &.input-group--disabled
+    input,
+    // textarea
+      color: $material.text.secondary
+
+    .input-group__details:before
+      background-color: transparent
+      background-image: linear-gradient(
+        to right,
+        $material.text.disabled 0,
+        $material.text.disabled 33%,
+        transparent 0
+      )
+
+  .input-group--text-field
+    &__prefix, &__suffix
+      color: $material.text.secondary
+
+theme(input-group, "input-group")

@@ -1,4 +1,4 @@
-import { createSimpleFunctional } from '~util/helpers'
+import { createSimpleFunctional } from '../../util/helpers'
 
 import VList from './VList'
 import VListGroup from './VListGroup'
@@ -11,14 +11,15 @@ export const VListTileContent = createSimpleFunctional('list__tile__content', 'd
 export const VListTileTitle = createSimpleFunctional('list__tile__title', 'div')
 export const VListTileSubTitle = createSimpleFunctional('list__tile__sub-title', 'div')
 
-export default {
-  VList,
-  VListTile,
-  VListGroup,
-  VListTileAction,
-  VListTileActionText,
-  VListTileAvatar,
-  VListTileContent,
-  VListTileTitle,
-  VListTileSubTitle
+export default function install (Vue) {
+  Vue.component('v-list', VList)
+  Vue.component('v-list-group', VListGroup)
+  Vue.component('v-list-tile', VListTile)
+  Vue.component('v-list-tile-action', VListTileAction)
+  Vue.component('v-list-tile-action-text', VListTileActionText)
+  Vue.component('v-list-tile-avatar', VListTileAvatar)
+  Vue.component('v-list-tile-content', VListTileContent)
+  Vue.component('v-list-tile-sub-title', VListTileSubTitle)
+  Vue.component('v-list-tile-title', VListTileTitle)
 }
+

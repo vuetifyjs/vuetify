@@ -1,18 +1,18 @@
 import {
   createSimpleFunctional
-} from '~util/helpers'
+} from '../../util/helpers'
 
 import VSystemBar from './VSystemBar'
 import VToolbar from './VToolbar'
 import VToolbarSideIcon from './VToolbarSideIcon'
 
-const VToolbarTitle = createSimpleFunctional('toolbar__title')
-const VToolbarItems = createSimpleFunctional('toolbar__items')
+export default function install (Vue) {
+  const VToolbarTitle = createSimpleFunctional('toolbar__title')
+  const VToolbarItems = createSimpleFunctional('toolbar__items')
 
-export default {
-  VSystemBar,
-  VToolbar,
-  VToolbarItems,
-  VToolbarTitle,
-  VToolbarSideIcon
+  Vue.component('v-system-bar', VSystemBar)
+  Vue.component('v-toolbar', VToolbar)
+  Vue.component('v-toolbar-items', VToolbarItems)
+  Vue.component('v-toolbar-title', VToolbarTitle)
+  Vue.component('v-toolbar-side-icon', VToolbarSideIcon)
 }

@@ -1,13 +1,13 @@
-import { createSimpleFunctional } from '~util/helpers'
+import { createSimpleFunctional } from '../../util/helpers'
 import VStepper from './VStepper'
 import VStepperStep from './VStepperStep'
 import VStepperContent from './VStepperContent'
 
-const VStepperHeader = createSimpleFunctional('stepper__header')
+export default function install (Vue) {
+  const VStepperHeader = createSimpleFunctional('stepper__header')
 
-export default {
-  VStepper,
-  VStepperContent,
-  VStepperHeader,
-  VStepperStep
+  Vue.component('v-stepper', VStepper)
+  Vue.component('v-stepper-content', VStepperContent)
+  Vue.component('v-stepper-header', VStepperHeader)
+  Vue.component('v-stepper-step', VStepperStep)
 }

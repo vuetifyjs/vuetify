@@ -1,4 +1,10 @@
+import Ripple from '../directives/ripple'
+
 export default {
+  directives: {
+    Ripple
+  },
+
   props: {
     append: Boolean,
     disabled: Boolean,

@@ -2,6 +2,10 @@ const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
+var extractPlugin = ExtractTextPlugin.extract({
+  use: ['css-loader', 'postcss-loader', 'stylus-loader']
+})
+
 // Helpers
 const resolve = file => require('path').resolve(__dirname, file)
 
@@ -20,7 +24,17 @@ module.exports = merge(baseWebpackConfig, {
     rules: [
       {
         test: /\.vue$/,
-        loaders: ['vue-loader', 'eslint-loader'],
+        use: [
+          {
+            loader: 'vue-loader',
+            options: {
+              loaders: {
+                stylus: extractPlugin
+              }
+            }
+          },
+          'eslint-loader'
+        ],
         exclude: /node_modules/
       },
       {
@@ -30,9 +44,7 @@ module.exports = merge(baseWebpackConfig, {
       },
       {
         test: /\.styl$/,
-        use: ExtractTextPlugin.extract({
-          use: ['css-loader', 'postcss-loader', 'stylus-loader']
-        }),
+        use: extractPlugin,
         exclude: /node_modules/
       }
     ]

@@ -1,69 +1,88 @@
-import Alerts from './alerts'
-import App from './app'
-import Avatars from './avatars'
-import BottomNav from './bottom-nav'
-import Breadcrumbs from './breadcrumbs'
-import Buttons from './buttons'
-import Cards from './cards'
-import Carousel from './carousel'
-import Chips from './chips'
-import DateTime from './pickers'
-import Dialogs from './dialogs'
-import Dividers from './dividers'
-import ExpansionPanel from './expansion-panel'
-import Footer from './footer'
-import Grid from './grid'
-import Icons from './icons'
-import Lists from './lists'
-import Menu from './menus'
-import NavigationDrawer from './navigation-drawer'
-import Toolbar from './toolbar'
-import Pagination from './pagination'
-import Parallax from './parallax'
-import Progress from './progress'
-import Select from './selects'
-import SelectionControls from './selection-controls'
-import Slider from './sliders'
-import Subheader from './subheaders'
-import Stepper from './steppers'
-import Tables from './tables'
-import Tabs from './tabs'
-import TextFields from './text-fields'
-import Transitions from './transitions'
-import Snackbar from './snackbars'
+export { default as VApp } from './VApp'
+export { default as VAlert } from './VAlert'
 
-export default Object.assign({},
-  Alerts,
-  App,
-  Avatars,
-  BottomNav,
-  Breadcrumbs,
-  Buttons,
-  Cards,
-  Carousel,
-  Chips,
-  DateTime,
-  Dialogs,
-  Dividers,
-  ExpansionPanel,
-  Footer,
-  Grid,
-  Icons,
-  Lists,
-  Menu,
-  NavigationDrawer,
-  Toolbar,
-  Pagination,
-  Parallax,
-  Progress,
-  Select,
-  SelectionControls,
-  Slider,
-  Subheader,
-  Stepper,
-  Tables,
-  Tabs,
-  TextFields,
-  Transitions,
-  Snackbar
-)
+import VAvatar from './avatars'
+import VBottomNav from './bottom-navs'
+import VBreadcrumbs from './breadcrumbs'
+import {
+  VBtn,
+  VBtnToggle,
+  VSpeedDial
+} from './buttons'
+import VCard from './cards'
+import VCarousel from './carousel'
+import VChip from './chips'
+import VDialog from './dialogs'
+import VDivider from './dividers'
+import VExpansionPanel from './expansion-panel'
+import VFooter from './footer'
+import VGrid from './grid'
+import VIcon from './icons'
+import VList from './lists'
+import VMenu from './menus'
+import VNavigationDrawer from './navigation-drawer'
+import VPagination from './pagination'
+import VParallax from './parallax'
+import {
+  VDatePicker,
+  VTimePicker
+} from './pickers'
+import {
+  VProgressCircular,
+  VProgressLinear
+} from './progress'
+import {
+  VCheckbox,
+  VRadio,
+  VSwitch
+} from './selection-controls'
+import VSelect from './selects'
+import VSlider from './sliders'
+import VSnackbar from './snackbars'
+import VStepper from './steppers'
+import VSubheader from './subheaders'
+import VDataTable from './tables'
+import VTabs from './tabs'
+import VTextField from './text-fields'
+import VToolbar from './toolbar'
+import Transitions from './transitions'
+
+export {
+  VAvatar,
+  VBottomNav,
+  VBreadcrumbs,
+  VBtn,
+  VBtnToggle,
+  VSpeedDial,
+  VCard,
+  VCarousel,
+  VChip,
+  VDialog,
+  VDivider,
+  VExpansionPanel,
+  VFooter,
+  VGrid,
+  VIcon,
+  VList,
+  VMenu,
+  VNavigationDrawer,
+  VPagination,
+  VParallax,
+  VDatePicker,
+  VTimePicker,
+  VProgressCircular,
+  VProgressLinear,
+  VCheckbox,
+  VRadio,
+  VSwitch,
+  VSelect,
+  VSlider,
+  VSnackbar,
+  VStepper,
+  VSubheader,
+  VDataTable,
+  VTabs,
+  VTextField,
+  VToolbar,
+  Transitions
+}

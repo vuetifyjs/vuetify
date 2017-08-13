@@ -1,9 +1,19 @@
 import Bootable from '../../mixins/bootable'
 
+import {
+  VTabTransition,
+  VTabReverseTransition
+} from '../transitions'
+
 export default {
   name: 'v-tabs-content',
 
   mixins: [Bootable],
+
+  components: {
+    VTabTransition,
+    VTabReverseTransition
+  },
 
   data () {
     return {

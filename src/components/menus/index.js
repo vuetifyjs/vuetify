@@ -1,5 +1,5 @@
-import VMenu from './VMenu.js'
+import VMenu from './VMenu'
 
-export default {
-  VMenu
+export default function install (Vue) {
+  Vue.component('v-menu', VMenu)
 }

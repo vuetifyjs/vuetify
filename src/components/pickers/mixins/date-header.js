@@ -26,7 +26,9 @@ export default {
       const header = this.$createElement('div', {
         'class': 'picker--date__header-selector-date'
       }, [
-        this.$createElement(this.computedTransition, [
+        this.$createElement('transition', {
+          props: { name: this.computedTransition }
+        }, [
           this.$createElement('strong', {
             key: this.tableMonth
           }, date.toLocaleString(this.locale, this.headerDateFormat))

@@ -1,4 +1,4 @@
-import { addOnceEventListener } from '~util/helpers'
+import { addOnceEventListener } from '../../util/helpers'
 
 export default {
   enter (el, done) {

@@ -42,8 +42,11 @@ export default {
       return this.$createElement('div', {
         'class': 'picker__body'
       }, [
-        this.$createElement('v-fade-transition', {
-          props: { mode: 'out-in' }
+        this.$createElement('transition', {
+          props: {
+            name: 'fade-transition',
+            mode: 'out-in'
+          }
         }, [
           this.$createElement('div', data, children)
         ])

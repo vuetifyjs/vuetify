@@ -1,5 +1,5 @@
-import { VExpandTransition } from '~components/transitions'
-import Toggleable from '~mixins/toggleable'
+import { VExpandTransition } from '../transitions'
+import Toggleable from '../../mixins/toggleable'
 
 export default {
   name: 'v-list-group',

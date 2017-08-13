@@ -1,7 +1,5 @@
-import { createSimpleFunctional } from '~util/helpers'
+import VAvatar from './VAvatar'
 
-export const VAvatar = createSimpleFunctional('avatar')
-
-export default {
-  VAvatar
+export default function install (Vue) {
+  Vue.component('v-avatar', VAvatar)
 }

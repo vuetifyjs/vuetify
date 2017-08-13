@@ -1,7 +1,7 @@
 import {
   createSimpleTransition,
   createJavaScriptTransition
-} from '~util/helpers'
+} from '../../util/helpers'
 
 import ExpandTransitionFunctions from './expand-transition'
 
@@ -26,20 +26,21 @@ export const VSlideYReverseTransition = createSimpleTransition('slide-y-reverse-
 // JavaScript transitions
 export const VExpandTransition = createJavaScriptTransition('expand-transition', ExpandTransitionFunctions)
 
-export default {
-  VCarouselTransition,
-  VCarouselReverseTransition,
-  VDialogTransition,
-  VDialogBottomTransition,
-  VFabTransition,
-  VFadeTransition,
-  VMenuTransition,
-  VScaleTransition,
-  VSlideXTransition,
-  VSlideXReverseTransition,
-  VSlideYTransition,
-  VSlideYReverseTransition,
-  VTabReverseTransition,
-  VTabTransition,
-  VExpandTransition
+export default function install (Vue) {
+  console.log('installing transitions')
+  Vue.component('v-carousel-transition', VCarouselTransition)
+  Vue.component('v-carousel-reverse-transition', VCarouselReverseTransition)
+  Vue.component('v-dialog-transition', VDialogTransition)
+  Vue.component('v-dialog-bottom-transition', VDialogBottomTransition)
+  Vue.component('v-fab-transition', VFabTransition)
+  Vue.component('v-fade-transition', VFadeTransition)
+  Vue.component('v-menu-transition', VMenuTransition)
+  Vue.component('v-scale-transition', VScaleTransition)
+  Vue.component('v-slide-x-transition', VSlideXTransition)
+  Vue.component('v-slide-x-reverse-transition', VSlideXReverseTransition)
+  Vue.component('v-slide-y-transition', VSlideYTransition)
+  Vue.component('v-slide-y-reverse-transition', VSlideYReverseTransition)
+  Vue.component('v-tab-reverse-transition', VTabReverseTransition)
+  Vue.component('v-tab-transition', VTabTransition)
+  Vue.component('v-expand-transition', VExpandTransition)
 }
