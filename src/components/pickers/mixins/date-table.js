@@ -53,10 +53,8 @@ export default {
         0
       ).getDate()
 
-      const day = new Date(
-        this.tableYear,
-        this.tableMonth
-      ).getDay() - parseInt(this.firstDayOfWeek)
+      let day = new Date(this.tableYear, this.tableMonth).getDay()
+      day = day < 1 ? 6 : day - parseInt(this.firstDayOfWeek)
 
       for (let i = 0; i < day; i++) {
         rows.push(this.$createElement('td'))
