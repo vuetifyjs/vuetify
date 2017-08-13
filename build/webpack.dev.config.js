@@ -1,4 +1,4 @@
-﻿const merge = require('webpack-merge')
+const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.config')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -40,7 +40,7 @@ module.exports = merge(baseWebpackConfig, {
     ]
   },
   performance: {
-    hints: 'warning'
+    hints: false
   },
   devServer: {
     contentBase: resolve('../dev')

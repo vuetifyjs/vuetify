@@ -45,4 +45,13 @@ test('VToolbarSideIcon.js', ({ mount, functionalContext }) => {
 
     expect(wrapper.hasClass('theme--dark')).toBe(true)
   })
+
+  it('should pass through css classes to button component', () => {
+    const context = functionalContext({
+      staticClass: 'hidden-sm-and-up'
+    })
+    const wrapper = mount(VToolbarSideIcon, context)
+
+    expect(wrapper.hasClass('hidden-sm-and-up')).toBe(true)
+  })
 })
