@@ -36,7 +36,7 @@ export default {
   methods: {
     getInputs () {
       return this.$children.filter(child => {
-        return !!child.$el.querySelector('.input-group__input')
+        return typeof child.errorBucket !== 'undefined'
       })
     },
     validate () {
