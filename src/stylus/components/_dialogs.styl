@@ -1,3 +1,5 @@
+@import '../bootstrap'
+
 .dialog
   elevation(24)
   border-radius: $card-border-radius
@@ -5,7 +7,7 @@
   overflow-y: auto
   pointer-events: auto
   transition: .3s ease-in-out
-  
+
   &__content
     align-items: center
     display: flex
@@ -18,11 +20,11 @@
     transition: .3s ease-in-out
     width: 100%
     z-index 5
-  
+
   &:not(.dialog--fullscreen)
     max-width: 90%
     max-height: 90%
-  
+
   &__container
     display: inline-block
     vertical-align: middle
@@ -42,9 +44,9 @@
         min-width 100%
         margin 0 !important
         padding 0 !important
-        
+
   &--scrollable
     overflow: hidden
-    
+
     .card__text
       overflow-y: auto

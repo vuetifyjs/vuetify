@@ -15,31 +15,31 @@
     background-size: cover
     background-position: center center
     transition: .2s ease-out
-  
+
   &__left
     position: absolute
     top: 50%
     z-index: 1
     left: 5px
     transform: translateY(-50%)
-    
+
     .btn
       color: #FFFFFF
       margin: 0 !important
       height: auto
       width: auto
-      
+
       i
         font-size: 48px
-        
+
       &:hover
         background: none
-      
+
   &__right
     @extend .carousel__left
     left: auto
     right: 5px
-  
+
   &__controls
     background: rgba(0, 0, 0, .5)
     align-items: center
@@ -52,23 +52,23 @@
     list-style-type: none
     width: 100%
     z-index: 1
-    
+
     &__item
       color: #FFFFFF
       margin: 0 1rem !important
-      
+
       i
         opacity: .5
         transition: $primary-transition
-      
+
       &--active
         i
           opacity: 1
           vertical-align: middle
           font-size: 2rem !important
-      
+
       &:hover
         background: none
-        
+
         i
           opacity: .8

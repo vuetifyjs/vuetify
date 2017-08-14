@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VIcon.js should render a disabled component and match snapshot 1`] = `
+
+<i class="material-icons icon">
+  add
+</i>
+
+`;
+
+exports[`VIcon.js should render a large size component and match snapshot 1`] = `
+
+<i class="material-icons icon">
+  add
+</i>
+
+`;
+
+exports[`VIcon.js should render a left aligned component and match snapshot 1`] = `
+
+<i class="material-icons icon">
+  add
+</i>
+
+`;
+
+exports[`VIcon.js should render a medium size component and match snapshot 1`] = `
+
+<i class="material-icons icon">
+  add
+</i>
+
+`;
+
+exports[`VIcon.js should render a right aligned component and match snapshot 1`] = `
+
+<i class="material-icons icon">
+  add
+</i>
+
+`;
+
+exports[`VIcon.js should render a xLarge size component and match snapshot 1`] = `
+
+<i class="material-icons icon">
+  add
+</i>
+
+`;
+
+exports[`VIcon.js should render component and match snapshot 1`] = `
+
+<i class="material-icons icon">
+  add
+</i>
+
+`;
+
+exports[`VIcon.js should render component with FontAwesome and match snapshot 1`] = `
+
+<i class="material-icons icon">
+  add
+</i>
+
+`;
+
+exports[`VIcon.js should render component with Material Design and match snapshot 1`] = `
+
+<i class="material-icons icon">
+  add
+</i>
+
+`;

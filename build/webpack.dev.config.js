@@ -1,13 +1,14 @@
-﻿const merge = require('webpack-merge')
+const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.config')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const webpack = require('webpack')
 
 // Helpers
 const resolve = file => require('path').resolve(__dirname, file)
 
-module.exports = merge(baseWebpackConfig, {
+module.exports = {
   devtool: '#cheap-module-eval-source-map',
   entry: {
     app: './dev/index.js'
@@ -16,6 +17,12 @@ module.exports = merge(baseWebpackConfig, {
     path: resolve('../dev'),
     publicPath: '/dev/',
     library: 'Vuetify'
+  },
+  resolve: {
+    extensions: ['*', '.js', '.json', '.vue'],
+    alias: {
+      vuetify: resolve('../src'),
+    }
   },
   module: {
     noParse: /es6-promise\.js$/, // avoid webpack shimming process
@@ -32,23 +39,21 @@ module.exports = merge(baseWebpackConfig, {
       },
       {
         test: /\.styl$/,
-        use: ExtractTextPlugin.extract({
-          use: ['css-loader', 'postcss-loader', 'stylus-loader']
-        }),
+        loaders: ['style-loader', 'css-loader', 'postcss-loader', 'stylus-loader'],
         exclude: /node_modules/
       }
     ]
   },
   performance: {
-    hints: 'warning'
+    hints: false
   },
   devServer: {
     contentBase: resolve('../dev')
   },
   plugins: [
-    new ExtractTextPlugin('vuetify.css'),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': "'development'"
-    })
+    }),
+    new BundleAnalyzerPlugin()
   ]
-})
+}

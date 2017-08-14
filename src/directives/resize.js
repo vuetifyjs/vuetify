@@ -7,6 +7,8 @@ function inserted (el, binding) {
 
   window.addEventListener('resize', onResize, { passive: true })
   el._onResize = onResize
+
+  onResize()
 }
 
 function unbind (el, binding) {
