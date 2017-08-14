@@ -61,4 +61,57 @@ test('VCheckbox.js', ({ mount }) => {
 
     expect(change).toBeCalled()
   })
+
+  it('should toggle on space and enter with default toggleKeys', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        inputValue: false
+      }
+    })
+
+    const change = jest.fn()
+    wrapper.instance().$on('change', change)
+
+    wrapper.vm.$el.dispatchEvent(new KeyboardEvent('keydown', { keyCode: 13 }))
+    expect(change).toBeCalled()
+
+    wrapper.vm.$el.dispatchEvent(new KeyboardEvent('keydown', { keyCode: 32 }))
+    expect(change).toBeCalled()
+  })
+
+  it('should not toggle on space or enter with blank toggleKeys', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        inputValue: false,
+        toggleKeys: []
+      }
+    })
+
+    const change = jest.fn()
+    wrapper.instance().$on('change', change)
+
+    wrapper.vm.$el.dispatchEvent(new KeyboardEvent('keydown', { keyCode: 13 }))
+    expect(change).not.toBeCalled()
+
+    wrapper.vm.$el.dispatchEvent(new KeyboardEvent('keydown', { keyCode: 32 }))
+    expect(change).not.toBeCalled()
+  })
+
+  it('should toggle on just space with custom toggleKeys', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        inputValue: false,
+        toggleKeys: [32]
+      }
+    })
+
+    const change = jest.fn()
+    wrapper.instance().$on('change', change)
+
+    wrapper.vm.$el.dispatchEvent(new KeyboardEvent('keydown', { keyCode: 13 }))
+    expect(change).not.toBeCalled()
+
+    wrapper.vm.$el.dispatchEvent(new KeyboardEvent('keydown', { keyCode: 32 }))
+    expect(change).toBeCalled()
+  })
 })
