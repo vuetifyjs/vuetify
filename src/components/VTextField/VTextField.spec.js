@@ -73,7 +73,6 @@ test('VTextField.js', ({ mount }) => {
   it('should start validating on input', async () => {
     const wrapper = mount(VTextField, {})
 
-    const input = wrapper.find('input')[0]
     expect(wrapper.data().shouldValidate).toEqual(false)
     wrapper.setProps({ value: 'asd' })
     await wrapper.vm.$nextTick()
@@ -99,7 +98,6 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const input = wrapper.find('input')[0]
     expect(wrapper.data().shouldValidate).toEqual(false)
     wrapper.setProps({ value: 'asd' })
     await wrapper.vm.$nextTick()

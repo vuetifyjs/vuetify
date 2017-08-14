@@ -3,7 +3,6 @@ import VCard from '~components/VCard'
 import VMenu from '~components/VMenu'
 import { test } from '~util/testing'
 
-
 // eslint-disable-next-line
 test('VMenu.js', ({ mount }) => {
   it('should work', async () => {
