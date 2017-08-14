@@ -27,7 +27,7 @@
       props.fixedFooter && (data.staticClass += ' application--footer-fixed')
       props.toolbar && (data.staticClass += ' application--toolbar')
 
-      data.attrs = { 'data-app': true }
+      data.attrs = { 'data-app': true, 'data-popup-context': true }
       data.domProps = { id: props.id }
 
       return h('div', data, children)
