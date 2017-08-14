@@ -2,6 +2,8 @@
   import Themeable from '../../mixins/themeable'
 
   export default {
+    name: 'v-system-bar',
+
     functional: true,
 
     mixins: [Themeable],

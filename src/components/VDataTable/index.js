@@ -5,10 +5,12 @@ import {
 import VDataTable from './VDataTable'
 import VEditDialog from './VEditDialog'
 
-export default function install (Vue) {
+VDataTable.install = install (Vue) {
   const VTableOverflow = createSimpleFunctional('table__overflow')
 
-  Vue.component('v-data-table', VDataTable)
-  Vue.component('v-edit-dialog', VEditDialog)
+  Vue.component(VDataTable.name, VDataTable)
+  Vue.component(VEditDialog.name, VEditDialog)
   Vue.component('v-table-overflow', VTableOverflow)
 }
+
+export default VDataTable

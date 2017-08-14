@@ -1,5 +1,5 @@
 import { test } from '~util/testing'
-import VTextField from '~components/text-fields/VTextField'
+import VTextField from '~components/VTextField'
 
 test('VTextField.js', ({ mount }) => {
   it('should render component and match snapshot', () => {

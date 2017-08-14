@@ -2,6 +2,8 @@
   import Themeable from '../../mixins/themeable'
 
   export default {
+    name: 'v-subheader',
+
     functional: true,
 
     mixins: [Themeable],

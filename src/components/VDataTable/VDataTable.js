@@ -5,10 +5,10 @@ import Progress from './mixins/progress'
 import Filterable from '~mixins/filterable'
 import Themeable from '~mixins/themeable'
 
-import VBtn from '~components/buttons/VBtn'
-import VIcon from '~components/icons/VIcon'
-import VProgressLinear from '~components/progress/VProgressLinear'
-import VSelect from '~components/selects/VSelect'
+import VBtn from '~components/VBtn'
+import VIcon from '~components/VIcon'
+import VProgressLinear from '~components/VProgressLinear'
+import VSelect from '~components/VSelect'
 
 import {
   createSimpleFunctional,

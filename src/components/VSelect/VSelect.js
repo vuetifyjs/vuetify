@@ -3,19 +3,17 @@ import Filterable from '~mixins/filterable'
 import Generators from './mixins/generators'
 import Input from '~mixins/input'
 
-import VCard from '~components/cards/VCard'
-import VCheckbox from '~components/selection-controls/VCheckbox'
-import VIcon from '~components/icons/VIcon'
-import VList from '~components/lists/VList'
-import VListTile from '~components/lists/VListTile'
-import VListTileAction from '~components/lists/VListTileAction'
-import { VListTileContent } from '~components/lists'
-import { VListTileTitle } from '~components/lists'
-import VMenu from '~components/menus/VMenu'
+import VCard from '~components/VCard'
+import VCheckbox from '~components/VCheckbox'
+import VIcon from '~components/VIcon'
+import VList from '~components/VList'
+import VListTile from '~components/VList/VListTile'
+import VListTileAction from '~components/VList/VListTileAction'
+import VMenu from '~components/VMenu'
 
 import clickOutside from '~directives/click-outside'
 
-import { getObjectValueByPath } from '~util/helpers'
+import { createSimpleFunctional, getObjectValueByPath } from '~util/helpers'
 
 export default {
   name: 'v-select',
@@ -29,8 +27,8 @@ export default {
     VList,
     VListTile,
     VListTileAction,
-    VListTileContent,
-    VListTileTitle,
+    'v-list-tile-content': createSimpleFunctional('list__tile__content'),
+    'v-list-tile-title': createSimpleFunctional('list__tile__title'),
     VMenu
   },
 

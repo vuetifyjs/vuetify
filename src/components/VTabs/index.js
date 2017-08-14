@@ -7,7 +7,7 @@ import VTabsItem from './VTabsItem'
 import VTabsContent from './VTabsContent'
 import VTabsBar from './VTabsBar'
 
-export default function install (Vue) {
+VTabs.install = function install (Vue) {
   const VTabsSlider = createSimpleFunctional('tabs__slider', 'li')
   const VTabsItems = {
     name: 'v-tabs-items',
@@ -19,10 +19,12 @@ export default function install (Vue) {
     }
   }
 
-  Vue.component('v-tabs', VTabs)
-  Vue.component('v-tabs-bar', VTabsBar)
-  Vue.component('v-tabs-content', VTabsContent)
-  Vue.component('v-tabs-item', VTabsItem)
+  Vue.component(VTabs.name, VTabs)
+  Vue.component(VTabsBar.name, VTabsBar)
+  Vue.component(VTabsContent.name, VTabsContent)
+  Vue.component(VTabsItem.name, VTabsItem)
   Vue.component('v-tabs-slider', VTabsSlider)
-  Vue.component('v-tabs-items', VTabsItems)
+  Vue.component(VTabsItems.name, VTabsItems)
 }
+
+export default VTabs
