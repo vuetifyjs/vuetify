@@ -10,6 +10,8 @@ export default {
 
   mixins: [Bootable],
 
+  inject: ['registerContent', 'unregisterContent'],
+
   components: {
     VTabTransition,
     VTabReverseTransition
@@ -50,6 +52,14 @@ export default {
       this.reverse = reverse
       this.isActive = this.id === target
     }
+  },
+
+  mounted () {
+    this.registerContent(this.id, this.toggle)
+  },
+
+  beforeDestroy () {
+    this.unregisterContent(this.id)
   },
 
   render (h) {

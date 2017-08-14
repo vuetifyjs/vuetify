@@ -13,6 +13,10 @@
 
     provide () {
       return {
+        registerContent: this.registerContent,
+        unregisterContent: this.unregisterContent,
+        registerTabItem: this.registerTabItem,
+        unregisterTabItem: this.unregisterTabItem,
         slider: this.slider,
         tabClick: this.tabClick,
         isScrollable: () => this.scrollable,
@@ -22,7 +26,8 @@
 
     data () {
       return {
-        activators: [],
+        content: [],
+        tabItems: [],
         activeIndex: null,
         isMobile: false,
         reverse: false,
@@ -73,36 +78,50 @@
         this.updateTabs()
         this.$emit('input', this.target)
         this.isBooted = true
+      },
+      tabItems (newItems, oldItems) {
+        // Tab item got removed
+        if (oldItems.length > newItems.length) {
+          if (!newItems.find(o => o.id === this.target)) {
+            const i = oldItems.findIndex(o => o.id === this.target)
+
+            this.$nextTick(() => {
+              this.activeIndex = this.tabItems[i > 0 ? i - 1 : 0].id
+              this.target = this.activeIndex
+            })
+          }
+        }
+
       }
     },
 
     mounted () {
       this.$vuetify.load(() => {
-        const activators = this.$slots.activators
-
-        if (!activators ||
-          !activators.length ||
-          !activators[0].componentInstance
-        ) return
-
-        const bar = activators[0].componentInstance.$children
         // // This is a workaround to detect if link is active
         // // when being used as a router or nuxt link
-        const i = bar.findIndex(t => {
-          return t.$el.firstChild.classList.contains('tabs__item--active')
+        const i = this.tabItems.findIndex(({ el }) => {
+          return el.firstChild.classList.contains('tabs__item--active')
         })
 
-        const tab = this.value || (bar[i !== -1 ? i : 0] || {}).action
+        const tab = this.value || (this.tabItems[i !== -1 ? i : 0] || {}).id
 
         tab && this.tabClick(tab) && this.onResize()
       })
     },
 
-    beforeDestroy () {
-      window.removeEventListener('resize', this.resize, { passive: true })
-    },
-
     methods: {
+      registerContent (id, toggle) {
+        this.content.push({ id, toggle })
+      },
+      registerTabItem (id, toggle, el) {
+        this.tabItems.push({ id, toggle, el })
+      },
+      unregisterContent (id) {
+        this.content = this.content.filter(o => o.id !== id)
+      },
+      unregisterTabItem (id) {
+        this.tabItems = this.tabItems.filter(o => o.id !== id)
+      },
       onResize () {
         this.isMobile = window.innerWidth < this.mobileBreakPoint
         this.slider()
@@ -148,51 +167,27 @@
 
         this.target = target
 
-        const content = this.$refs.content
-        if (!content) {
-          setActiveIndex(target)
-          return
-        }
-
         this.$nextTick(() => {
-          const nextIndex = content.$children.findIndex(i => i.id === target)
+          const nextIndex = this.content.findIndex(o => o.id === target)
           this.reverse = nextIndex < this.activeIndex
           setActiveIndex(nextIndex)
         })
       },
       updateTabs () {
-        const activators = this.$slots.activators
-        const content = this.$refs.content
+        this.content.forEach(({ toggle }) => {
+          toggle(this.target, this.reverse, this.isBooted)
+        })
 
-        if (!activators ||
-          !activators.length ||
-          (activators.length &&
-            !activators[0].componentInstance)) return
-
-        activators[0].componentInstance.$children
-          .filter(i => i.$options._componentTag === 'v-tabs-item')
-          .forEach(i => i.toggle(this.target))
-
-        content && content.$children.forEach((i) => {
-          return i.toggle(this.target, this.reverse, this.isBooted)
+        this.tabItems.forEach(({ toggle }) => {
+          toggle(this.target)
         })
       }
     },
 
     render (h) {
-      const content = []
-      const slot = []
-      const iter = (this.$slots.default || [])
-
-      iter.forEach(c => {
-        if (!c.componentOptions) slot.push(c)
-        else if (c.componentOptions.tag === 'v-tabs-content') content.push(c)
-        else slot.push(c)
-      })
-
-      const tabs = content.length ? h('v-tabs-items', {
+      const tabs = h('v-tabs-items', {
         ref: 'content'
-      }, content) : null
+      }, this.$slots.content)
 
       return h('div', {
         'class': this.classes,
@@ -200,7 +195,7 @@
           name: 'resize',
           value: this.onResize
         }]
-      }, [slot, this.$slots.activators, tabs])
+      }, [this.$slots.default, this.$slots.activators, tabs])
     }
   }
 </script>
