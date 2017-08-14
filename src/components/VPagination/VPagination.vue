@@ -1,5 +1,5 @@
 <script>
-  import VIcon from '../icons/VIcon'
+  import VIcon from '../VIcon'
 
   export default {
     name: 'v-pagination',

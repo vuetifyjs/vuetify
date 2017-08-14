@@ -1,5 +1,5 @@
 <script>
-  import VIcon from '../../components/icons/VIcon'
+  import VIcon from '../VIcon'
 
   import Contextualable from '../../mixins/contextualable'
   import Toggleable from '../../mixins/toggleable'

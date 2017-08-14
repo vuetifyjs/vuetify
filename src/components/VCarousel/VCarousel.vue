@@ -1,6 +1,6 @@
 <script>
-  import VBtn from '../buttons/VBtn'
-  import VIcon from '../icons/VIcon'
+  import VBtn from '../VBtn'
+  import VIcon from '../VIcon'
 
   import Bootable from '../../mixins/bootable'
   import Themeable from '../../mixins/themeable'

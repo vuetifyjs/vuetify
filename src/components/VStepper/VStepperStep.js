@@ -1,4 +1,4 @@
-import VIcon from '../icons/VIcon'
+import VIcon from '../VIcon'
 import Ripple from '../../directives/ripple'
 
 export default {

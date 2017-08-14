@@ -1,90 +1,40 @@
 export { default as VApp } from './VApp'
 export { default as VAlert } from './VAlert'
-
-import VAvatar from './avatars'
-import VBottomNav from './bottom-navs'
-import VBreadcrumbs from './breadcrumbs'
-import {
-  VBtn,
-  VBtnToggle,
-  VSpeedDial
-} from './buttons'
-import VCard from './cards'
-import VCarousel from './carousel'
-import VChip from './chips'
-import VDialog from './dialogs'
-import VDivider from './dividers'
-import VExpansionPanel from './expansion-panel'
-import VFooter from './footer'
-import VForm from './form'
-import VGrid from './grid'
-import VIcon from './icons'
-import VList from './lists'
-import VMenu from './menus'
-import VNavigationDrawer from './navigation-drawer'
-import VPagination from './pagination'
-import VParallax from './parallax'
-import {
-  VDatePicker,
-  VTimePicker
-} from './pickers'
-import {
-  VProgressCircular,
-  VProgressLinear
-} from './progress'
-import {
-  VCheckbox,
-  VRadio,
-  VSwitch
-} from './selection-controls'
-import VSelect from './selects'
-import VSlider from './sliders'
-import VSnackbar from './snackbars'
-import VStepper from './steppers'
-import VSubheader from './subheaders'
-import VDataTable from './tables'
-import VTabs from './tabs'
-import VTextField from './text-fields'
-import VToolbar from './toolbar'
-import Transitions from './transitions'
-
-export {
-  VAvatar,
-  VBottomNav,
-  VBreadcrumbs,
-  VBtn,
-  VBtnToggle,
-  VSpeedDial,
-  VCard,
-  VCarousel,
-  VChip,
-  VDialog,
-  VDivider,
-  VExpansionPanel,
-  VFooter,
-  VForm,
-  VGrid,
-  VIcon,
-  VList,
-  VMenu,
-  VNavigationDrawer,
-  VPagination,
-  VParallax,
-  VDatePicker,
-  VTimePicker,
-  VProgressCircular,
-  VProgressLinear,
-  VCheckbox,
-  VRadio,
-  VSwitch,
-  VSelect,
-  VSlider,
-  VSnackbar,
-  VStepper,
-  VSubheader,
-  VDataTable,
-  VTabs,
-  VTextField,
-  VToolbar,
-  Transitions
-}
+export { default as VAvatar } from './VAvatar'
+export { default as VBottomNav } from './VBottomNav'
+export { default as VBtn } from './VBtn'
+export { default as VBtnToggle } from './VBtnToggle'
+export { default as VSpeedDial } from './VSpeedDial'
+export { default as VBreadcrumbs } from './VBreadcrumbs'
+export { default as VCard } from './VCard'
+export { default as VCarousel } from './VCarousel'
+export { default as VChip } from './VChip'
+export { default as VDialog } from './VDialog'
+export { default as VDivider } from './VDivider'
+export { default as VExpansionPanel } from './VExpansionPanel'
+export { default as VFooter } from './VFooter'
+export { default as VForm } from './VForm'
+export { default as VGrid } from './VGrid'
+export { default as VIcon } from './VIcon'
+export { default as VList } from './VList'
+export { default as VMenu } from './VMenu'
+export { default as VNavigationDrawer } from './VNavigationDrawer'
+export { default as VPagination } from './VPagination'
+export { default as VParallax } from './VParallax'
+export { default as VDatePicker } from './VDatePicker'
+export { default as VTimePicker } from './VTimePicker'
+export { default as VProgressCircular } from './VProgressCircular'
+export { default as VProgressLinear } from './VProgressLinear'
+export { default as VCheckbox } from './VCheckbox'
+export { default as VRadio } from './VRadio'
+export { default as VSwitch } from './VSwitch'
+export { default as VSelect } from './VSelect'
+export { default as VSlider } from './VSlider'
+export { default as VSnackbar } from './VSnackbar'
+export { default as VStepper } from './VStepper'
+export { default as VSubheader } from './VSubheader'
+export { default as VDataTable } from './VDataTable'
+export { default as VTabs } from './VTabs'
+export { default as VTextField } from './VTextField'
+export { default as VToolbar } from './VToolbar'
+export { default as Transitions } from './transitions'

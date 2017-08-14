@@ -1,6 +1,6 @@
 <script>
-  import VBtn from '../VBtn/VBtn'
-  import VIcon from '../icons/VIcon'
+  import VBtn from '../VBtn'
+  import VIcon from '../VIcon'
 
   import Themeable from '../../mixins/themeable'
 

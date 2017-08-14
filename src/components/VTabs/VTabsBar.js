@@ -1,4 +1,4 @@
-import VIcon from '../icons/VIcon'
+import VIcon from '../VIcon'
 
 import Resize from '../../directives/resize'
 import Touch from '../../directives/touch'
