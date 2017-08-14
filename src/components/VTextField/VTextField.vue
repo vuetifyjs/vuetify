@@ -10,7 +10,6 @@
 
     data () {
       return {
-        hasFocused: false,
         inputHeight: null
       }
     },
@@ -18,10 +17,8 @@
     props: {
       autofocus: Boolean,
       autoGrow: Boolean,
-      counter: Boolean,
+      counter: [Number, String],
       fullWidth: Boolean,
-      max: [Number, String],
-      min: [Number, String],
       multiLine: Boolean,
       placeholder: String,
       prefix: String,
@@ -51,49 +48,23 @@
           'input-group--textarea': this.textarea
         }
       },
-      hasError () {
-        return this.validations.length ||
-          this.errorMessages.length > 0 ||
-          !this.counterIsValid() ||
-          !this.validateIsValid() ||
-          this.error
-      },
       count () {
         let inputLength
         if (this.inputValue) inputLength = this.inputValue.toString().length
         else inputLength = 0
-        let min = inputLength
 
-        if (this.counterMin !== 0 && inputLength < this.counterMin) {
-          min = this.counterMin
-        }
-
-        return `${min} / ${this.counterMax}`
+        return `${inputLength} / ${this.counterLength}`
       },
-      counterMin () {
-        const parsedMin = parseInt(this.min, 10)
-        return isNaN(parsedMin) ? 0 : parsedMin
-      },
-      counterMax () {
-        const parsedMax = parseInt(this.max, 10)
-        return isNaN(parsedMax) ? 25 : parsedMax
+      counterLength () {
+        const parsedLength = parseInt(this.counter, 10)
+        return isNaN(parsedLength) ? 25 : parsedLength
       },
       inputValue: {
         get () {
           return this.value
         },
         set (val) {
-          if (this.modifiers.trim) {
-            val = val.trim()
-          }
-
-          if (this.modifiers.number) {
-            val = Number(val)
-          }
-
-          if (!this.modifiers.lazy) {
-            this.$emit('input', val)
-          }
+          this.$emit('input', val)
 
           this.lazyValue = val
         }
@@ -108,11 +79,11 @@
 
     watch: {
       focused (val) {
-        this.hasFocused = true
+        !val && this.$emit('change', this.lazyValue)
       },
       value () {
         this.lazyValue = this.value
-        this.validate()
+        !this.validateOnBlur && this.validate()
         this.multiLine && this.autoGrow && this.calculateInputHeight()
       }
     },
@@ -135,17 +106,15 @@
           this.inputHeight = inputHeight
         })
       },
-      onChange (e) {
-        this.lazyValue = e.target.value
-        this.$emit('change', this.lazyValue)
-      },
       onInput (e) {
         this.inputValue = e.target.value
         this.multiLine && this.autoGrow && this.calculateInputHeight()
       },
       blur (e) {
-        this.validate()
-        this.$nextTick(() => (this.focused = false))
+        this.$nextTick(() => {
+          this.focused = false
+          this.validate()
+        })
         this.$emit('blur', e)
       },
       focus (e) {
@@ -157,7 +126,7 @@
         return this.$createElement('div', {
           'class': {
             'input-group__counter': true,
-            'input-group__counter--error': !this.counterIsValid()
+            'input-group__counter--error': this.hasError
           }
         }, this.count)
       },
@@ -181,7 +150,6 @@
           on: {
             ...this.$listeners,
             blur: this.blur,
-            change: this.onChange,
             input: this.onInput,
             focus: this.focus
           },
@@ -189,11 +157,6 @@
         }
 
         if (this.placeholder) data.domProps.placeholder = this.placeholder
-
-        if (!this.counter) {
-          if (![undefined, null].includes(this.max)) data.attrs.max = this.max
-          if (![undefined, null].includes(this.min)) data.attrs.min = this.min
-        }
 
         if (!this.textarea && !this.multiLine) {
           data.domProps.type = this.type
@@ -212,20 +175,6 @@
         return this.$createElement('span', {
           'class': `input-group--text-field__${type}`
         }, this[type])
-      },
-      counterIsValid: function counterIsValid () {
-        const val = (this.inputValue && this.inputValue.toString() || '')
-
-        return (!this.counter ||
-          (val.length >= this.counterMin && val.length <= this.counterMax)
-        )
-      },
-      validateIsValid () {
-        return (!this.required ||
-          (this.required &&
-            this.isDirty) ||
-          !this.hasFocused ||
-          (this.hasFocused && this.focused))
       }
     },
 
