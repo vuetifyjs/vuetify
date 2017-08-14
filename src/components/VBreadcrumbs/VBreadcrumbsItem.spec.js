@@ -1,5 +1,5 @@
 import { test } from '~util/testing'
-import VBreadcrumbsItem from '~components/breadcrumbs/VBreadcrumbsItem'
+import { VBreadcrumbsItem } from '~components/VBreadcrumbs'
 
 test('VBreadcrumbsItem.js', ({ mount }) => {
   it('should render component and match snapshot', () => {

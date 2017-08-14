@@ -1,11 +1,6 @@
 import { test } from '~util/testing'
-import VListTile from 'src/components/lists/VListTile'
-import ripple from 'src/directives/ripple'
+import { VListTile } from '~components/VList'
 import Vue from 'vue/dist/vue.common'
-
-VListTile.directives = {
-  ripple
-}
 
 const stub = {
   name: 'router-link',

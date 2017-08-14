@@ -1,5 +1,5 @@
 import { mount } from 'avoriaz'
-import VCardMedia from '~components/cards/VCardMedia'
+import { VCardMedia } from '~components/VCard'
 
 describe('VCardMedia.js', () => {
   it('should render component and match snapshot', () => {

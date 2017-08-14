@@ -185,17 +185,13 @@
     },
 
     render (h) {
-      const tabs = h('v-tabs-items', {
-        ref: 'content'
-      }, this.$slots.content)
-
       return h('div', {
         'class': this.classes,
         directives: [{
           name: 'resize',
           value: this.onResize
         }]
-      }, [this.$slots.default, this.$slots.activators, tabs])
+      }, [this.$slots.default])
     }
   }
 </script>

@@ -1,12 +1,5 @@
-import VCard from '~components/cards/VCard'
-import { VFadeTransition } from '~components/transitions'
-import VTimePicker from '~components/pickers/VTimePicker'
+import VTimePicker from '~components/VTimePicker'
 import { test } from '~util/testing'
-
-VTimePicker.components = {
-  VCard,
-  VFadeTransition
-}
 
 test('VTimePicker.js', ({ mount }) => {
   it('should accept a value', () => {

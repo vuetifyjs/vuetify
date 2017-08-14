@@ -1,17 +1,5 @@
 import { mount } from 'avoriaz'
-import VBtnToggle from 'src/components/buttons/VBtnToggle'
-import VBtn from 'src/components/buttons/VBtn'
-import VIcon from 'src/components/icons/VIcon'
-import ripple from 'src/directives/ripple'
-
-VBtnToggle.components = {
-  VIcon,
-  VBtn
-}
-
-VBtn.directives = {
-  ripple
-}
+import VBtnToggle from 'src/components/VBtnToggle'
 
 const TOGGLE_TEST = [
   { text: 'Left', value: 1 },

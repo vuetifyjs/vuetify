@@ -1,10 +1,5 @@
-import VSpeedDial from '~components/buttons/VSpeedDial'
-import clickOutside from '~directives/click-outside'
+import VSpeedDial from '~components/VSpeedDial'
 import { test } from '~util/testing'
-
-VSpeedDial.directives = {
-  clickOutside
-}
 
 test('VSpeedDial.js', ({ mount }) => {
   it('should render component and match snapshot', () => {

@@ -1,4 +1,4 @@
-import VBottomNav from '~components/bottom-nav/VBottomNav'
+import VBottomNav from '~components/VBottomNav'
 import { test } from '~util/testing'
 
 test('VBottomNav.js', ({ mount, functionalContext }) => {

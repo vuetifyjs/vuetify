@@ -96,6 +96,7 @@
       multiple: Boolean,
       multiLine: Boolean,
       offset: Boolean,
+      searchInput: null,
       singleLine: Boolean,
       top: Boolean,
       returnObject: Boolean,
@@ -139,6 +140,14 @@
       },
       isDropdown () {
         return this.segmented || this.overflow || this.editable
+      },
+      searchValue: {
+        get () {
+          return this.searchInput
+        },
+        set (val) {
+          this.$emit('update:searchInput', val)
+        }
       },
       selectedItems () {
         if (this.inputValue === null ||
@@ -228,7 +237,7 @@
         this.$emit('focus', e)
       },
       genLabel () {
-        if (this.searchValue) return null
+        if (this.searchValue && !this.focused && this.isDirty) return null
 
         const data = {}
 

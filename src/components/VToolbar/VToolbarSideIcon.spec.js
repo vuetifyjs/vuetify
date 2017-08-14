@@ -1,6 +1,6 @@
 import { test } from '~util/testing'
 import VIcon from '~components/VIcon'
-import VToolbarSideIcon from '~components/VToolbar/VToolbarSideIcon'
+import { VToolbarSideIcon } from '~components/VToolbar'
 
 test('VToolbarSideIcon.js', ({ mount, functionalContext }) => {
   it('should create default icon when no slot used', () => {

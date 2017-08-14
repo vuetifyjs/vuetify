@@ -1,12 +1,18 @@
 <script>
   import { createRange } from '../../util/helpers'
 
+  import VCard from '../VCard'
+
   import Picker from '../../mixins/picker'
   import TimeTitle from './mixins/time-title'
   import TimeBody from './mixins/time-body'
 
   export default {
     name: 'v-time-picker',
+
+    components: {
+      VCard
+    },
 
     mixins: [Picker, TimeBody, TimeTitle],
 
@@ -62,7 +68,7 @@
         get () {
           if (this.value && !(this.value instanceof Date)) {
             if (!this.is24hr) {
-              this.period = this.value.match(/pm/)
+              this.period = this.value.match(/pm/i)
                 ? 'pm'
                 : 'am'
             }
@@ -80,14 +86,17 @@
           let period = ''
 
           if (!this.is24hr) {
+            period = hour >= 12 ? 'pm' : 'am'
             hour = hour > 12 ? hour - 12 : hour
-            period = hour > 12 ? 'pm' : 'am'
+            hour = hour === 0 ? 12 : hour
           }
 
           period && (this.period = period)
 
           hour = this.firstAllowed('hour', hour)
           minute = this.firstAllowed('minute', minute)
+
+          minute = minute < 10 ? `0${minute}` : minute > 59 ? '00' : minute
 
           return `${hour}:${minute}${period}`
         },

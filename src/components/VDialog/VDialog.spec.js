@@ -1,10 +1,5 @@
-import VDialog from '~components/dialogs/VDialog'
-import clickOutside from '~directives/click-outside'
+import VDialog from '~components/VDialog'
 import { test } from '~util/testing'
-
-VDialog.directives = {
-  clickOutside
-}
 
 test('VSpeedDial.js', ({ mount }) => {
   it('should render component and match snapshot', () => {

@@ -1,10 +1,5 @@
-import VCarousel from '~components/carousel/VCarousel'
-import touch from '~directives/touch'
+import VCarousel from '~components/VCarousel'
 import { test } from '~util/testing'
-
-VCarousel.directives = {
-  touch
-}
 
 test('VCarousel.js', ({ mount }) => {
   it('should render component and match snapshot', () => {

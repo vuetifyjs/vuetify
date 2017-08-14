@@ -1,12 +1,5 @@
 import { test } from '~util/testing'
-import VExpansionPanelContent from '~components/expansion-panel/VExpansionPanelContent'
-import { ripple } from '~directives/ripple'
-import clickOutside from '~directives/click-outside'
-
-VExpansionPanelContent.directives = {
-  ripple,
-  clickOutside
-}
+import VExpansionPanelContent from './VExpansionPanelContent'
 
 test('VExpansionPanelContent.js', ({ mount }) => {
   it('should render component and match snapshot', () => {

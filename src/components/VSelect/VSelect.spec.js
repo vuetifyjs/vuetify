@@ -1,5 +1,5 @@
 import { test } from '~util/testing'
-import VSelect from '~components/selects/VSelect'
+import VSelect from '~components/VSelect'
 
 test('VSelect.js', ({ mount, shallow }) => {
   it('should return numeric 0', () => {
@@ -24,11 +24,12 @@ test('VSelect.js', ({ mount, shallow }) => {
       propsData: {
         value: null,
         items: [0, 1, 2],
-        required: true
+        rules: [(v) => !!v || 'Required']
       }
     })
 
     wrapper.instance().focus()
+    await wrapper.vm.$nextTick()
     wrapper.instance().blur()
     await wrapper.vm.$nextTick()
 

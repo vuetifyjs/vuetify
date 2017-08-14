@@ -1,4 +1,4 @@
-import VListGroup from '~components/lists/VListGroup'
+import { VListGroup } from '~components/VList'
 import { test } from '~util/testing'
 
 test('VListGroup.js', ({ mount }) => {

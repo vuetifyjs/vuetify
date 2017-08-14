@@ -1,11 +1,8 @@
 import { test } from '~util/testing'
-import VBreadcrumbs from '~components/breadcrumbs/VBreadcrumbs'
-import VBreadcrumbsItem from '~components/breadcrumbs/VBreadcrumbsItem'
-import { ripple } from '~directives/ripple'
-
-VBreadcrumbsItem.directives = {
-  ripple
-}
+import {
+  VBreadcrumbs,
+  VBreadcrumbsItem
+} from '~components/VBreadcrumbs'
 
 test('VBreadcrumbs.js', ({ mount }) => {
   it('should have a breadcrumbs classes', () => {

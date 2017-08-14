@@ -1,5 +1,5 @@
 import { test } from '~util/testing'
-import VExpansionPanel from '~components/expansion-panel/VExpansionPanel'
+import VExpansionPanel from '~components/VExpansionPanel'
 
 test('VExpansionPanel.js', ({ mount }) => {
   it('should render component and match snapshot', () => {

@@ -1,5 +1,5 @@
 import { test } from '~util/testing'
-import VFooter from '~components/footer/VFooter'
+import VFooter from './VFooter'
 
 test('VFooter.js', ({ mount, functionalContext }) => {
   it('should render component and match snapshot', () => {

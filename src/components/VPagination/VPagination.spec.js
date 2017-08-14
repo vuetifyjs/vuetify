@@ -1,10 +1,5 @@
 import { test } from '~util/testing'
 import VPagination from './VPagination'
-import VIcon from '~components/icons/VIcon'
-
-VPagination.components = {
-  VIcon
-}
 
 test('VPagination.vue', ({ mount }) => {
   it('emits an event when next or previous is clicked', () => {

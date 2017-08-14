@@ -1,4 +1,4 @@
-import VList from '~components/lists/VList'
+import VList from '~components/VList'
 import { test } from '~util/testing'
 
 test('VList.js', ({ mount }) => {

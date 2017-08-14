@@ -1,17 +1,8 @@
-import VBtn from '~components/buttons/VBtn'
-import VCard from '~components/cards/VCard'
-import VMenu from '~components/menus/VMenu'
-import clickOutside from '~directives/click-outside'
-import { ripple } from '~directives/ripple'
+import VBtn from '~components/VBtn'
+import VCard from '~components/VCard'
+import VMenu from '~components/VMenu'
 import { test } from '~util/testing'
 
-VBtn.directives = {
-  ripple
-}
-
-VMenu.directives = {
-  clickOutside
-}
 
 // eslint-disable-next-line
 test('VMenu.js', ({ mount }) => {

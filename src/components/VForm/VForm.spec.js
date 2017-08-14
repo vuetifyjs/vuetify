@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import { mount } from 'avoriaz'
 import { test } from '~util/testing'
-import VTextField from '~components/text-fields/VTextField'
-import VForm from '~components/form/VForm'
+import VTextField from '~components/VTextField'
+import VForm from './VForm'
 
 const inputOne = Vue.component('input-one', {
   render (h) {
@@ -12,7 +12,8 @@ const inputOne = Vue.component('input-one', {
   }
 })
 
-/*
 test('VForm.js', () => {
+  it('test', () => {
+
+  })
 })
-*/

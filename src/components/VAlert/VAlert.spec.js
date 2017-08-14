@@ -1,6 +1,6 @@
 import { test } from '~util/testing'
-import VAlert from 'src/components/alerts/VAlert'
-import VIcon from 'src/components/icons/VIcon'
+import VAlert from '~components/VAlert'
+import VIcon from '~components/VIcon'
 
 VAlert.components = { VIcon }
 

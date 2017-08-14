@@ -1,14 +1,5 @@
-import VNavigationDrawer from '~components/navigation-drawer/VNavigationDrawer'
+import VNavigationDrawer from '~components/VNavigationDrawer'
 import { test } from '~util/testing'
-import clickOutside from '~directives/click-outside'
-import touch from '~directives/click-outside'
-import resize from '~directives/click-outside'
-
-VNavigationDrawer.directives = {
-  clickOutside,
-  touch,
-  resize
-}
 
 test('VNavigationDrawer.js', ({ mount }) => {
   it('should render component and match snapshot', () => {
