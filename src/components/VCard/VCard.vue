@@ -2,6 +2,8 @@
   import Themeable from '../../mixins/themeable'
 
   export default {
+    name: 'v-card',
+
     functional: true,
 
     mixins: [Themeable],

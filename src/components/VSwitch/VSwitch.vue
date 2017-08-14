@@ -4,7 +4,7 @@
   import Ripple from '../../directives/ripple'
 
   export default {
-    name: 'switch',
+    name: 'v-switch',
 
     mixins: [Selectable],
 

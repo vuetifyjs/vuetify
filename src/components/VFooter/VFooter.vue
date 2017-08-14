@@ -1,5 +1,7 @@
 <script>
   export default {
+    name: 'v-footer',
+
     functional: true,
 
     props: {

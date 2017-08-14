@@ -1,7 +1,7 @@
 export default {
   functional: true,
 
-  name: 'list-tile-action',
+  name: 'v-list-tile-action',
 
   render (h, { data, children }) {
     data.staticClass = data.staticClass ? `list__tile__action ${data.staticClass || ''}` : 'list__tile__action'

@@ -1,5 +1,6 @@
 <script>
   export default {
+    name: 'v-bottom-nav',
     functional: true,
 
     props: {

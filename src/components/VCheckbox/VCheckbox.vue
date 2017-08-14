@@ -1,5 +1,5 @@
 <script>
-  import VIcon from '../icons/VIcon'
+  import VIcon from '../VIcon'
   import { VFadeTransition } from '../transitions'
   import Selectable from '../../mixins/selectable'
   import Ripple from '../../directives/ripple'

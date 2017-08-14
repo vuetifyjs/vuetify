@@ -1,22 +1,24 @@
 <script>
+  import { getObjectValueByPath } from '../../util/helpers'
+
+  import VCard from '../VCard'
+  import VCheckbox from '../VCheckbox'
+  import VIcon from '../VIcon'
+  import {
+    VList,
+    VListTile,
+    VListTileAction,
+    VListTileContent,
+    VListTileTitle
+  } from '../VList'
+  import VMenu from '../VMenu'
+
   import Filterable from '../../mixins/filterable'
   import Input from '../../mixins/input'
   import Autocomplete from './mixins/autocomplete'
   import Generators from './mixins/generators'
 
-  import VCard from '../cards/VCard'
-  import VCheckbox from '../selection-controls/VCheckbox'
-  import VIcon from '../icons/VIcon'
-  import VList from '../lists/VList'
-  import VListTile from '../lists/VListTile'
-  import VListTileAction from '../lists/VListTileAction'
-  import { VListTileContent } from '../lists'
-  import { VListTileTitle } from '../lists'
-  import VMenu from '../menus/VMenu'
-
   import clickOutside from '../../directives/click-outside'
-
-  import { getObjectValueByPath } from '../../util/helpers'
 
   export default {
     name: 'v-select',

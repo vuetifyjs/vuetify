@@ -3,6 +3,8 @@
   import Contextualable from '../../mixins/contextualable'
 
   export default {
+    name: 'v-icon',
+
     functional: true,
 
     mixins: [Themeable, Contextualable],

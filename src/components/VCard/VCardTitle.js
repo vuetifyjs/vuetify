@@ -1,4 +1,6 @@
 export default {
+  name: 'v-card-title',
+
   functional: true,
 
   props: {

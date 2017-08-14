@@ -2,6 +2,8 @@
   import Themeable from '../../mixins/themeable'
 
   export default {
+    name: 'v-divider',
+
     functional: true,
 
     mixins: [Themeable],

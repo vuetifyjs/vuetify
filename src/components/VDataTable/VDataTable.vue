@@ -1,8 +1,8 @@
 <script>
-  import VBtn from '../buttons/VBtn'
-  import VIcon from '../icons/VIcon'
-  import VProgressLinear from '../progress/VProgressLinear'
-  import VSelect from '../selects/VSelect'
+  import VBtn from '../VBtn'
+  import VIcon from '../VIcon'
+  import VProgressLinear from '../VProgressLinear'
+  import VSelect from '../VSelect'
 
   import Filterable from '../../mixins/filterable'
   import Themeable from '../../mixins/themeable'
@@ -17,7 +17,7 @@
   } from '../../util/helpers'
 
   export default {
-    name: 'v-datatable',
+    name: 'v-data-table',
 
     components: {
       VBtn,
@@ -271,6 +271,9 @@
         } else {
           this.updatePagination({ sortBy: null, descending: null })
         }
+      },
+      needsTR (row) {
+        return row.length && row.find(c => c.tag === 'td')
       },
       genTR (children, data = {}) {
         return this.$createElement('tr', data, children)
