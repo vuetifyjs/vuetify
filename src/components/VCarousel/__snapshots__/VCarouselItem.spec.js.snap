@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VCarouselItem.js should render component and match snapshot 1`] = `
+
+<div class="carousel__item"
+     style="background-image: url(https://vuetifyjs.com/static/doc-images/cards/sunshine.jpg); display: none;"
+>
+</div>
+
+`;
+
+exports[`VCarouselItem.js should render component with custom reverse transition and match snapshot 1`] = `
+
+<div class="carousel__item"
+     style="background-image: url(https://vuetifyjs.com/static/doc-images/cards/sunshine.jpg); display: none;"
+>
+</div>
+
+`;
+
+exports[`VCarouselItem.js should render component with custom transition and match snapshot 1`] = `
+
+<div class="carousel__item"
+     style="background-image: url(https://vuetifyjs.com/static/doc-images/cards/sunshine.jpg); display: none;"
+>
+</div>
+
+`;

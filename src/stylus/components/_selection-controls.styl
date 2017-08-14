@@ -1,3 +1,5 @@
+@import '../bootstrap'
+
 /** Input */
 .input-group.input-group--selection-controls
   display: flex
@@ -25,6 +27,7 @@
 
 /** Label */
 .input-group--selection-controls label
+  pointer-events: inherit
   cursor: pointer
   margin-left: 32px
   pointer-events: auto
@@ -32,6 +35,7 @@
   left: 0
   user-select: none
   z-index: 1
+  pointer-events: all
 
 .input-group--selection-controls__ripple
   border-radius: 50%

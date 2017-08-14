@@ -1,3 +1,5 @@
+@import '../bootstrap'
+
 /** Label */
 .input-group--text-field label
   position: absolute
@@ -20,7 +22,7 @@
   overflow: hidden
   text-overflow: ellipsis
   white-space: nowrap
-  
+
   &::placeholder
     transition: .3s $transition.swing
 
@@ -55,7 +57,7 @@
     label
       top: 30px
       left: 15px
-      
+
     textarea
       padding: 30px 13px 0
 
@@ -63,7 +65,7 @@
     &:before,
     &:after
       opacity: 0
-      
+
 /** Counter */
 .input-group--text-field
   .input-group__counter
@@ -135,7 +137,7 @@
     &.input-group--dirty
       label
         display: none
-  
+
   // Multi Line
   &.input-group--multi-line
     textarea
@@ -144,13 +146,13 @@
   // Full Width
   &.input-group--full-width
     padding: 16px
-    
+
     label
       margin-left: $grid-gutters.lg
 
     .input-group__details:before, .input-group__details:after
       display: none
-      
+
   // Solo
   &.input-group--solo
     background: #fff
@@ -158,7 +160,7 @@
     border-radius: $card-border-radius
     padding: 0 16px
     elevation(2)
-    
+
     input
       margin-top: 8px
 
@@ -166,7 +168,7 @@
       top: 8px
       left: 16px
       transform: none !important
-    
+
     &:hover
       elevation(4)
 

@@ -6,15 +6,27 @@ const OptimizeJsPlugin = require('optimize-js-plugin')
 const version = process.env.VERSION || require('../package.json').version
 
 const builds = {
-  'dev': {
+  development: {
     filename: 'vuetify.js',
     libraryTarget: 'umd'
   },
-  'prod': {
+  production: {
     filename: 'vuetify.min.js',
     libraryTarget: 'umd',
     env: 'production'
+  },
+  /*
+  esm: {
+    filename: 'vuetify.esm.js',
+    libraryTarget: 'esm',
+    env: 'production'
+  },
+  commonjs: {
+    filename: 'vuetify.common.js',
+    libraryTarget: 'commonjs',
+    env: 'production'
   }
+  */
 }
 
 function genConfig (opts) {
@@ -33,28 +45,23 @@ function genConfig (opts) {
 
   if (opts.env) {
     config.plugins = config.plugins.concat([
-      new webpack.LoaderOptionsPlugin({
-        minimize: true,
-        progress: true,
-        hide_modules: true
-      }),
       new webpack.optimize.UglifyJsPlugin({
         sourceMap: false
+      }),
+      new OptimizeCssAssetsPlugin({
+        assetNameRegExp: /\.css$/g,
+        cssProcessor: require('cssnano'),
+        cssProcessorOptions: { discardComments: { removeAll: true }},
+        canPrint: true
       }),
       new webpack.BannerPlugin({
         banner: `/*!
 * Vuetify v${version}
 * Forged by John Leider
 * Released under the MIT License.
-*/   `,
-      raw: true,
-      entryOnly: true
-      }),
-      new OptimizeCssAssetsPlugin({
-        assetNameRegExp: /\.optimize\.css$/g,
-        cssProcessor: require('cssnano'),
-        cssProcessorOptions: { discardComments: { removeAll: true }},
-        canPrint: true
+*/     `,
+        raw: true,
+        entryOnly: true
       }),
       new OptimizeJsPlugin({
         sourceMap: false

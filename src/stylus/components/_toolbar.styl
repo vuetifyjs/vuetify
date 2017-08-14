@@ -1,3 +1,6 @@
+@import '../bootstrap'
+@import '../theme'
+
 .toolbar
   position: relative
   transition: .3s $transition.swing
@@ -97,6 +100,7 @@
     left: 0
 
   &--absolute
+    position: absolute
     z-index 2
 
     + main
@@ -172,3 +176,13 @@ toolbar-content(left)
 
     > *:last-child
       margin-right: left
+
+/* Theme */
+toolbar($material)
+  background-color: $material.app-bar
+  color: $material.text.primary
+
+  .btn
+    button($material)
+
+theme(toolbar, "toolbar")

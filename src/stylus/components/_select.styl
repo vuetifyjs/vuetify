@@ -1,3 +1,5 @@
+@import '../bootstrap'
+
 .input-group--select
   .input-group--select__autocomplete
     display: block
@@ -42,11 +44,11 @@
   .fade-transition-leave-active
     position: absolute
     left: 0
-  
+
   &.input-group--autocomplete.input-group--focused:not(.input-group--multiple)
     .input-group__selections__comma
       display: none
-  
+
 
 .input-group
   &--overflow,
@@ -57,7 +59,7 @@
     .input-group__selections,
     input
       height: 24px
-      
+
     // Handle weird transition issue
     .input-group__selections__comma
       top: 0
@@ -73,12 +75,12 @@
       .input-group__input
         background: #fff
         elevation(8)
-    
+
     label
       left: 16px !important
       top: 10px !important
 
-    .input-group__details      
+    .input-group__details
       &:after
         display: none
 
@@ -93,7 +95,7 @@
         height: 1px
         top: 0
         transition: .3s $transition.swing
-      
+
   &--segmented .input-group__input,
   &--editable .input-group__input:hover,
   &.input-group--focused.input-group--editable .input-group__input
@@ -105,4 +107,4 @@
       height: 48px
       top: 0
       width: 1px
-    
+

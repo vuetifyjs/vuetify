@@ -1,22 +1,25 @@
+@import '../bootstrap'
+@import '../theme'
+
 .system-bar
   align-items: center
   display: flex
   padding: 0 8px
   font-size: $headings.body-2.size
   font-weight: $headings.body-2.weight
-  
+
   .icon
     font-size: $headings.subheading.size
 
   &--status
     height: 24px
-    
+
     .icon
       margin-right: 4px
-  
+
   &--window
     height: 32px
-  
+
     .icon
       font-size: $headings.h6.size
       margin-right: 8px
@@ -30,3 +33,16 @@
     + .navigation-drawer
       margin-top: 32px
       max-height: "calc(100vh - %s)" % 32px
+
+/* Theme */
+system-bar($material)
+  background-color: $material.status-bar.regular
+  color: $material.text.secondary
+
+  .icon
+    color: $material.text.secondary
+
+  &--lights-out
+    background-color: $material.status-bar.lights-out !important
+
+theme(system-bar, "system-bar")
