@@ -39,7 +39,7 @@
       miniVariant: Boolean,
       mobileBreakPoint: {
         type: Number,
-        default: 1024
+        default: 1280
       },
       permanent: Boolean,
       persistent: Boolean,
