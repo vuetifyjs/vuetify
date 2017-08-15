@@ -72,6 +72,8 @@ export default {
         input = !input
       }
 
+      this.validate(false, input)
+
       this.$emit('change', input)
     }
   }

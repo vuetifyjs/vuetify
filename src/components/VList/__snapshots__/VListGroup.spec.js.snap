@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VListGroup.js should render a component with no padding for action icon and match snapshot 1`] = `
+
+<ul data-uid="6"
+    class="list"
+>
+  <div class="list--group__container">
+    <div class="list--group__header">
+    </div>
+    <ul class="list list--group"
+        style="display: none;"
+    >
+    </ul>
+  </div>
+</ul>
+
+`;
+
+exports[`VListGroup.js should render a component with route namespace and match snapshot 1`] = `
+
+<ul data-uid="9"
+    class="list"
+>
+  <div class="list--group__container">
+    <div class="list--group__header">
+    </div>
+    <ul class="list list--group"
+        style="display: none;"
+    >
+    </ul>
+  </div>
+</ul>
+
+`;
+
+exports[`VListGroup.js should render a lazy component and match snapshot 1`] = `
+
+<ul data-uid="3"
+    class="list"
+>
+  <div class="list--group__container">
+    <div class="list--group__header">
+    </div>
+    <ul class="list list--group"
+        style="display: none;"
+    >
+    </ul>
+  </div>
+</ul>
+
+`;
+
+exports[`VListGroup.js should render component and match snapshot 1`] = `
+
+<ul data-uid="0"
+    class="list"
+>
+  <div class="list--group__container">
+    <div class="list--group__header">
+    </div>
+    <ul class="list list--group"
+        style="display: none;"
+    >
+    </ul>
+  </div>
+</ul>
+
+`;

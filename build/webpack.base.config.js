@@ -1,3 +1,6 @@
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
+
 const resolve = file => require('path').resolve(__dirname, file)
 
 module.exports = {
@@ -7,12 +10,17 @@ module.exports = {
       '~components': resolve('../src/components'),
       '~directives': resolve('../src/directives'),
       '~mixins': resolve('../src/mixins'),
-      '~stylus': resolve('../src/stylus'),
-      '~util': resolve('../src/util')
+      '~util': resolve('../src/util'),
+      'stylus': resolve('../src/stylus')
     }
   },
   node: {
     fs: 'empty'
   },
-  plugins: []
+  plugins: [
+    new ProgressBarPlugin(),
+    new FriendlyErrorsWebpackPlugin({
+      clearConsole: false
+    })
+  ]
 }

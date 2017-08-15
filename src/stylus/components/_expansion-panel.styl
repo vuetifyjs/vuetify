@@ -1,3 +1,6 @@
+@import '../bootstrap'
+@import '../theme'
+
 .expansion-panel
   text-align: left
   list-style-type: none
@@ -5,10 +8,8 @@
   width: 100%
   elevation(2)
 
-  > li
-    border: 1px solid rgba($material-theme.fg-color, $material-theme.divider-percent)
-    &:not(:first-child)
-      border-top: none
+  > li:not(:first-child)
+    border-top: none !important
 
   &__header
     display: flex
@@ -36,9 +37,17 @@
         transform: rotate(-180deg)
 
   &__body
-    background-color: rgba($material-theme.fg-color, 0.03)
     transition: $primary-transition
 
     .card
       border-radius: 0
       elevation(0)
+
+expansion-panel($material)
+  > li
+    border: 1px solid rgba($material.fg-color, $material.divider-percent)
+
+  &__body
+    background-color: rgba($material.fg-color, 0.03)
+
+theme(expansion-panel, "expansion-panel")

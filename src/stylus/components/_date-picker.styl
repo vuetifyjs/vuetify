@@ -1,3 +1,6 @@
+@import '../bootstrap'
+@import '../theme'
+
 .picker--date
   color: #fff
   width: 100%
@@ -13,12 +16,12 @@
   overflow: auto
   padding: 0
   text-align: center
-  
+
   li
     cursor: pointer
     margin: 16px 0
     transition: .3s $transition.swing
-    
+
     &:hover
       color: $theme.primary
 
@@ -27,37 +30,37 @@
       font-size: 24px
       font-weight: 500
       margin: 20px 0
-  
+
 
 /** Title */
 .picker--date__title
   justify-content: space-between
   flex-direction: column
   flex-wrap: wrap
-  
+
   &-year
     align-items: center
     display: inline-flex
     font-size: 14px
-    
+
   &-date
     font-size: 34px
-    
+
     > div
       position: relative
-  
+
   &-year, &-date
     font-weight: 500
     transition: .3s $transition.swing
     width: 100%
-    
+
     &:not(.active)
       cursor: pointer
       opacity: .6
-      
+
     &:hover
       opacity: 1
-    
+
 
 /** Header */
 .picker--date__header
@@ -69,21 +72,21 @@
     display: flex
     justify-content: space-between
     position: relative
-    
+
     .btn
       color: #000
       margin: 0
-    
+
     .icon
       cursor: pointer
       user-select: none
-      
+
     &-date
       flex: 1
       text-align: center
       position: relative
       overflow: hidden
-      
+
       strong
         transition: .3s $transition.swing
         display: block
@@ -110,13 +113,13 @@
     th, td
       text-align: center
       width: 45px
-      
+
     .btn
       margin: 0
-      
+
       &:hover, .btn__content:before
         background-color: transparent !important
-      
+
       &:after
         position: absolute
         content: ''
@@ -124,15 +127,15 @@
         top: 0
         height: 100%
         width: 100%
-      
+
       &__content
         overflow: visible
         transition: none
         z-index: 1
-      
+
     .btn.btn--current:not(.btn--active)
       color: $theme.primary
-      
+
     .btn.btn--floating
       height: 32px
       width: 32px
@@ -141,7 +144,7 @@
         background: $theme.primary !important
         opacity: 0
         transform: scale(0)
-        
+
       &:not(.btn--active):hover
         color: #fff
 
@@ -151,49 +154,47 @@
 
     .btn.btn--floating.btn--active
       color: #fff
-      
+
       &:after
         background: $theme.primary !important
         opacity: 1
         transform: none
-          
+
 .picker--landscape
   .picker--date__years
     margin-left: 170px
     width: 330px
-    
-/** Theme */
-.picker--date
-  &.picker--dark
-    .picker--date__years
-      background: $material-dark.cards
 
-      li
-        color: $material-dark.text.primary
+/** Themes */
+date-picker($material)
+  .picker--date__years
+    background: $material.cards
 
-        &.active
+    li
+      color: $material.text.primary
+
+      &.active
+        color: $theme.accent
+
+  .picker--date__header
+    color: $material.text.primary
+
+  .picker--date__table
+    table
+      th
+        color: $material.text.primary
+
+      .btn
+        color: $material.text.primary
+
+        &--current
           color: $theme.accent
 
-    .picker--date__header
-      color: $material-dark.text.primary
+        &--active
+          color: $material.bg-color
 
-    .picker__title
-      color: $material-dark.text.primary
+        &--floating
+          &:after
+            background: $theme.accent !important
 
-    .picker--date__table
-      table
-        th
-          color: $material-dark.text.primary
-
-        .btn
-          color: $material-dark.text.primary
-
-          &--current
-            color: $theme.accent
-
-          &--active
-            color: #000
-
-          &--floating
-            &:after
-              background: $theme.accent !important
+theme(date-picker, "picker--date")

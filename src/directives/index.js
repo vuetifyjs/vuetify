@@ -17,3 +17,14 @@ export {
   Tooltip,
   Touch
 }
+
+export default function install (Vue) {
+  Vue.directive('badge', Badge)
+  Vue.directive('click-outside', ClickOutside)
+  Vue.directive('esc', Esc)
+  Vue.directive('ripple', Ripple)
+  Vue.directive('resize', Resize)
+  Vue.directive('scroll', Scroll)
+  Vue.directive('tooltip', Tooltip)
+  Vue.directive('touch', Touch)
+}
