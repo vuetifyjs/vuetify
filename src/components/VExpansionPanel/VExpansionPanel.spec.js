@@ -1,5 +1,7 @@
 import { test } from '~util/testing'
+/*
 import VExpansionPanel from '~components/VExpansionPanel'
+*/
 
 test('VExpansionPanel.js', ({ mount }) => {
   // Fix when next Vue release is out
@@ -9,7 +11,7 @@ test('VExpansionPanel.js', ({ mount }) => {
     // expect(wrapper.html()).toMatchSnapshot()
   })
 
-  // it('should render an expanded component and match snapshot', () => {
+  it('should render an expanded component and match snapshot', () => {
   //   const wrapper = mount(VExpansionPanel, {
   //     propsData: {
   //       expand: true
@@ -17,5 +19,5 @@ test('VExpansionPanel.js', ({ mount }) => {
   //   })
 
   //   expect(wrapper.html()).toMatchSnapshot()
-  // })
+  })
 })

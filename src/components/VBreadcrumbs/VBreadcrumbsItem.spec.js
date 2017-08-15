@@ -1,5 +1,7 @@
 import { test } from '~util/testing'
+/*
 import { VBreadcrumbsItem } from '~components/VBreadcrumbs'
+*/
 
 test('VBreadcrumbsItem.js', ({ mount }) => {
   // Fix when next Vue release is out
@@ -9,7 +11,7 @@ test('VBreadcrumbsItem.js', ({ mount }) => {
   //   expect(wrapper.html()).toMatchSnapshot()
   })
 
-  // it('should render component with custom activeClass and match snapshot', () => {
+  it('should render component with custom activeClass and match snapshot', () => {
   //   const wrapper = mount(VBreadcrumbsItem, {
   //     propsData: {
   //       activeClass: 'breadcrumbs-item--active'
@@ -17,5 +19,5 @@ test('VBreadcrumbsItem.js', ({ mount }) => {
   //   })
 
   //   expect(wrapper.html()).toMatchSnapshot()
-  // })
+  })
 })
