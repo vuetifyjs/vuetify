@@ -45,4 +45,22 @@ test('VListTile.vue', ({ mount }) => {
     expect(wrapper.find('button').length).toBe(1)
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should not have activeClass when not toggled', () => {
+    const wrapper = mount(VListTile)
+
+    const link = wrapper.find('a')[0]
+    expect(link.hasClass(wrapper.instance().activeClass)).toBe(false)
+  })
+
+  it('should have activeClass when toggled', () => {
+    const wrapper = mount(VListTile, {
+      propsData: {
+        value: true
+      }
+    })
+
+    const link = wrapper.find('a')[0]
+    expect(link.hasClass(wrapper.instance().activeClass)).toBe(true)
+  })
 })
