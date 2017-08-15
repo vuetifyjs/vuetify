@@ -1,7 +1,10 @@
 <script>
+  import ButtonGroup from '../../mixins/button-group'
+
   export default {
     name: 'v-bottom-nav',
-    functional: true,
+
+    mixins: [ButtonGroup],
 
     props: {
       absolute: Boolean,
@@ -9,14 +12,38 @@
       value: { required: false }
     },
 
-    render (h, { data, props, children }) {
-      data.staticClass = (`bottom-nav ${data.staticClass || ''}`).trim()
+    watch: {
+      active () {
+        this.update()
+      }
+    },
 
-      if (props.absolute) data.staticClass += ' bottom-nav--absolute'
-      if (props.shift) data.staticClass += ' bottom-nav--shift'
-      if (props.value) data.staticClass += ' bottom-nav--active'
+    computed: {
+      classes () {
+        return {
+          'bottom-nav': true,
+          'bottom-nav--absolute': this.absolute,
+          'bottom-nav--shift': this.shift,
+          'bottom-nav--active': this.value
+        }
+      }
+    },
 
-      return h('div', data, children)
+    methods: {
+      isSelected (i) {
+        const item = this.getValue(i)
+        return this.active === item
+      },
+      updateValue (i) {
+        const item = this.getValue(i)
+        this.$emit('update:active', item)
+      }
+    },
+
+    render (h) {
+      return h('div', {
+        class: this.classes
+      }, this.$slots.default)
     }
   }
 </script>
