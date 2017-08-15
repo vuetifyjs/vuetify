@@ -65,7 +65,7 @@ function inserted (el, { value }) {
   }
 
   const target = value.parent ? el.parentNode : el
-  const options = value.options || {}
+  const options = value.options || { passive: true }
 
   // Needed to pass unit tests
   if (!target) return
