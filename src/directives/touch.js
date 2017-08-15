@@ -67,6 +67,8 @@ function inserted (el, { value }) {
   const target = value.parent ? el.parentNode : el
   const options = value.options || {}
 
+  // Needed to pass unit tests
+  if (!target) return
   target.addEventListener('touchstart', e => touchstart(e, wrapper), options)
   target.addEventListener('touchend', e => touchend(e, wrapper), options)
   target.addEventListener('touchmove', e => touchmove(e, wrapper), options)
