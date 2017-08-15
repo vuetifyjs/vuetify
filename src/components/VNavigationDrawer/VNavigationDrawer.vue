@@ -87,7 +87,10 @@
       },
       isActive (val) {
         this.$emit('input', val)
-        this.showOverlay && val && this.genOverlay() || this.removeOverlay()
+        this.showOverlay &&
+          val &&
+          this.genOverlay() ||
+          this.removeOverlay()
         this.$el.scrollTop = 0
       },
       isMobile (val) {
@@ -116,8 +119,7 @@
         else if (!this.value &&
           (this.persistent || this.temporary)
         ) this.isActive = false
-
-        this.isActive && this.genOverlay()
+        else this.isActive = true
       },
       checkIfMobile () {
         this.isMobile = window.innerWidth < parseInt(this.mobileBreakPoint)
