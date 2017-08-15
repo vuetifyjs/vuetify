@@ -1,17 +1,17 @@
 import { test } from '~util/testing'
-import Grid from '~components/grid'
+import { VLayout } from '~components/VGrid'
 
 const id = 'layout'
 
 test('VLayout', ({ mount, functionalContext }) => {
   it('should render component and match snapshot', () => {
-    const wrapper = mount(Grid.VLayout, functionalContext())
+    const wrapper = mount(VLayout, functionalContext())
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render component with custom id and match snapshot', () => {
-    const wrapper = mount(Grid.VLayout, functionalContext({
+    const wrapper = mount(VLayout, functionalContext({
       propsData: {
         id
       }

@@ -23,6 +23,8 @@
   export default {
     name: 'v-select',
 
+    inheritAttrs: false,
+
     components: {
       VCard,
       VCheckbox,
@@ -94,6 +96,7 @@
       multiple: Boolean,
       multiLine: Boolean,
       offset: Boolean,
+      searchInput: null,
       singleLine: Boolean,
       top: Boolean,
       returnObject: Boolean,
@@ -132,19 +135,19 @@
 
         return !this.auto ? items.slice(0, this.lastItem) : items
       },
-      hasError () {
-        return this.validations.length ||
-          this.error ||
-          (this.hasFocused &&
-            !this.focused &&
-            !this.isDirty &&
-            this.required)
-      },
       isDirty () {
         return this.selectedItems.length
       },
       isDropdown () {
         return this.segmented || this.overflow || this.editable
+      },
+      searchValue: {
+        get () {
+          return this.searchInput
+        },
+        set (val) {
+          this.$emit('update:searchInput', val)
+        }
       },
       selectedItems () {
         if (this.inputValue === null ||
@@ -210,15 +213,14 @@
     },
 
     methods: {
-      blur () {
+      blur (e) {
         this.$nextTick(() => {
           this.focused = false
-          this.hasFocused = true
           this.searchValue = null
-          this.$el.blur()
+          this.$emit('blur', this.inputValue)
         })
       },
-      focus () {
+      focus (e) {
         this.focused = true
         this.$refs.input &&
           (this.autocomplete || this.editable) &&
@@ -232,9 +234,10 @@
             this.$refs.input.value = this.getValue(this.inputValue)
           })
         }
+        this.$emit('focus', e)
       },
       genLabel () {
-        if (this.searchValue) return null
+        if (this.searchValue && !this.focused && this.isDirty) return null
 
         const data = {}
 
@@ -302,12 +305,17 @@
         this.genSelectionsAndSearch(),
         this.genMenu()
       ], {
-        ref: 'activator',
         directives: [{
           name: 'click-outside',
-          value: () => (this.isActive = false)
+          value: () => {
+            this.isActive = false
+            this.$emit('change', this.inputValue)
+          }
         }],
         on: {
+          focus: this.focus,
+          blur: this.blur,
+          click: () => { if (!this.isActive) this.isActive = true },
           keydown: this.onKeyDown // Located in mixins/autocomplete.js
         }
       })

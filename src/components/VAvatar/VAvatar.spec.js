@@ -1,4 +1,4 @@
-import { VAvatar } from '~components/avatars'
+import VAvatar from '~components/VAvatar'
 import { test } from '~util/testing'
 
 test('VAvatar.vue', ({ mount, functionalContext }) => {

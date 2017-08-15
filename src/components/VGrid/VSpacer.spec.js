@@ -1,17 +1,17 @@
 import { test } from '~util/testing'
-import Grid from '~components/grid'
+import { VSpacer } from '~components/VGrid'
 
 const id = 'spacer'
 
 test('VSpacer', ({ mount, functionalContext }) => {
   it('should render component and match snapshot', () => {
-    const wrapper = mount(Grid.VSpacer, functionalContext())
+    const wrapper = mount(VSpacer, functionalContext())
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render component with custom id and match snapshot', () => {
-    const wrapper = mount(Grid.VSpacer, functionalContext({
+    const wrapper = mount(VSpacer, functionalContext({
       propsData: {
         id
       }

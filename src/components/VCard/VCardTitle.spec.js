@@ -1,5 +1,5 @@
 import { test } from '~util/testing'
-import VCardTitle from '~components/cards/VCardTitle'
+import { VCardTitle } from '~components/VCard'
 
 test('VCardTitle.js', ({ mount, functionalContext }) => {
   it('should render component and match snapshot', () => {

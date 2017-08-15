@@ -5,10 +5,11 @@ import {
 import VToolbar from './VToolbar'
 import VToolbarSideIcon from './VToolbarSideIcon'
 
-VToolbar.install = function install (Vue) {
-  const VToolbarTitle = createSimpleFunctional('toolbar__title')
-  const VToolbarItems = createSimpleFunctional('toolbar__items')
+export { VToolbar, VToolbarSideIcon }
+export const VToolbarTitle = createSimpleFunctional('toolbar__title')
+export const VToolbarItems = createSimpleFunctional('toolbar__items')
 
+VToolbar.install = function install (Vue) {
   Vue.component('v-toolbar', VToolbar)
   Vue.component('v-toolbar-items', VToolbarItems)
   Vue.component('v-toolbar-title', VToolbarTitle)

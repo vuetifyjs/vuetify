@@ -1,11 +1,6 @@
 import { mount } from 'avoriaz'
 import Vue from 'vue/dist/vue.common'
-import VBtn from 'src/components/buttons/VBtn'
-import ripple from 'src/directives/ripple'
-
-VBtn.directives = {
-  ripple
-}
+import VBtn from 'src/components/VBtn'
 
 const stub = {
   name: 'router-link',

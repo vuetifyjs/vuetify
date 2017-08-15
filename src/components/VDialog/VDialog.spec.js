@@ -1,16 +1,12 @@
-import VDialog from '~components/dialogs/VDialog'
-import clickOutside from '~directives/click-outside'
+import VDialog from '~components/VDialog'
 import { test } from '~util/testing'
 
-VDialog.directives = {
-  clickOutside
-}
-
-test('VSpeedDial.js', ({ mount }) => {
+test('VDialog.js', ({ mount }) => {
   it('should render component and match snapshot', () => {
     const wrapper = mount(VDialog)
 
     expect(wrapper.html()).toMatchSnapshot()
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
   it('should render a disabled component and match snapshot', () => {
@@ -21,6 +17,7 @@ test('VSpeedDial.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
   it('should render a persistent component and match snapshot', () => {
@@ -31,6 +28,7 @@ test('VSpeedDial.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
   it('should render a fullscreen component and match snapshot', () => {
@@ -41,6 +39,7 @@ test('VSpeedDial.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
   it('should render a lazy component and match snapshot', () => {
@@ -51,6 +50,7 @@ test('VSpeedDial.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
   it('should render a scrollable component and match snapshot', () => {
@@ -61,6 +61,7 @@ test('VSpeedDial.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
   it('should render component with custom origin and match snapshot', () => {
@@ -71,6 +72,7 @@ test('VSpeedDial.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
   it('should render component with custom width and match snapshot', () => {
@@ -81,6 +83,7 @@ test('VSpeedDial.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
   it('should render component with custom transition and match snapshot', () => {
@@ -91,5 +94,6 @@ test('VSpeedDial.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 })

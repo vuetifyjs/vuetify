@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VSpeedDial.js should render a disabled component and match snapshot 1`] = `
+exports[`VDialog.js should render a disabled component and match snapshot 1`] = `
 
 <div class="dialog__container"
      style="display: block;"
@@ -15,7 +15,7 @@ exports[`VSpeedDial.js should render a disabled component and match snapshot 1`]
 
 `;
 
-exports[`VSpeedDial.js should render a fullscreen component and match snapshot 1`] = `
+exports[`VDialog.js should render a fullscreen component and match snapshot 1`] = `
 
 <div class="dialog__container"
      style="display: block;"
@@ -30,7 +30,7 @@ exports[`VSpeedDial.js should render a fullscreen component and match snapshot 1
 
 `;
 
-exports[`VSpeedDial.js should render a lazy component and match snapshot 1`] = `
+exports[`VDialog.js should render a lazy component and match snapshot 1`] = `
 
 <div class="dialog__container"
      style="display: block;"
@@ -45,7 +45,7 @@ exports[`VSpeedDial.js should render a lazy component and match snapshot 1`] = `
 
 `;
 
-exports[`VSpeedDial.js should render a persistent component and match snapshot 1`] = `
+exports[`VDialog.js should render a persistent component and match snapshot 1`] = `
 
 <div class="dialog__container"
      style="display: block;"
@@ -60,7 +60,7 @@ exports[`VSpeedDial.js should render a persistent component and match snapshot 1
 
 `;
 
-exports[`VSpeedDial.js should render a scrollable component and match snapshot 1`] = `
+exports[`VDialog.js should render a scrollable component and match snapshot 1`] = `
 
 <div class="dialog__container"
      style="display: block;"
@@ -75,7 +75,7 @@ exports[`VSpeedDial.js should render a scrollable component and match snapshot 1
 
 `;
 
-exports[`VSpeedDial.js should render component and match snapshot 1`] = `
+exports[`VDialog.js should render component and match snapshot 1`] = `
 
 <div class="dialog__container"
      style="display: block;"
@@ -90,7 +90,7 @@ exports[`VSpeedDial.js should render component and match snapshot 1`] = `
 
 `;
 
-exports[`VSpeedDial.js should render component with custom origin and match snapshot 1`] = `
+exports[`VDialog.js should render component with custom origin and match snapshot 1`] = `
 
 <div class="dialog__container"
      style="display: block;"
@@ -105,7 +105,7 @@ exports[`VSpeedDial.js should render component with custom origin and match snap
 
 `;
 
-exports[`VSpeedDial.js should render component with custom transition and match snapshot 1`] = `
+exports[`VDialog.js should render component with custom transition and match snapshot 1`] = `
 
 <div class="dialog__container"
      style="display: block;"
@@ -120,7 +120,7 @@ exports[`VSpeedDial.js should render component with custom transition and match 
 
 `;
 
-exports[`VSpeedDial.js should render component with custom width and match snapshot 1`] = `
+exports[`VDialog.js should render component with custom width and match snapshot 1`] = `
 
 <div class="dialog__container"
      style="display: block;"

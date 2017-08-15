@@ -1,5 +1,5 @@
-import VBtn from '~components/VBtn'
-import VIcon from '~components/VIcon'
+import VBtn from '../../components/VBtn'
+import VIcon from '../../components/VIcon'
 
 export default {
   name: 'v-toolbar-side-icon',

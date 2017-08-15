@@ -1,4 +1,4 @@
-import VChip from '~components/chips/VChip'
+import VChip from '~components/VChip'
 import { test } from '~util/testing'
 
 test('VChip.js', ({ mount }) => {

@@ -23,7 +23,7 @@ VTabs.install = function install (Vue) {
   Vue.component(VTabsBar.name, VTabsBar)
   Vue.component(VTabsContent.name, VTabsContent)
   Vue.component(VTabsItem.name, VTabsItem)
-  Vue.component('v-tabs-slider', VTabsSlider)
+  Vue.component(VTabsSlider.name, VTabsSlider)
   Vue.component(VTabsItems.name, VTabsItems)
 }
 

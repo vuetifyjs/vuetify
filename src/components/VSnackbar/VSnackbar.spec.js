@@ -1,14 +1,5 @@
 import { mount } from 'avoriaz'
-import VSnackbar from '~components/snackbars/VSnackbar'
-import {
-  VSlideYTransition,
-  VSlideYReverseTransition
-} from '~components/transitions'
-
-VSnackbar.components = {
-  VSlideYReverseTransition,
-  VSlideYTransition
-}
+import VSnackbar from '~components/VSnackbar'
 
 describe('VSnackbar.vue', () => {
   it('should have a snack class', () => {

@@ -1,5 +1,5 @@
 import { mount } from 'avoriaz'
-import VCarouselItem from '~components/carousel/VCarouselItem'
+import { VCarouselItem } from '~components/VCarousel'
 
 const imageSrc = 'https://vuetifyjs.com/static/doc-images/cards/sunshine.jpg'
 

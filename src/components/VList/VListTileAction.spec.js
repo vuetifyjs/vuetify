@@ -1,4 +1,4 @@
-import VListTileAction from '~components/lists/VListTileAction'
+import { VListTileAction } from '~components/VList'
 import { test } from '~util/testing'
 
 test('VListTileAction.js', ({ mount, functionalContext }) => {

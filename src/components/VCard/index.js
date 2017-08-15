@@ -3,6 +3,8 @@ import VCard from './VCard'
 import VCardMedia from './VCardMedia'
 import VCardTitle from './VCardTitle'
 
+export { VCard, VCardMedia, VCardTitle }
+
 VCard.install = function install (Vue) {
   const VCardActions = createSimpleFunctional('card__actions')
   const VCardText = createSimpleFunctional('card__text')

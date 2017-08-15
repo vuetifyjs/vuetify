@@ -1,4 +1,4 @@
-﻿import VIcon from '~components/icons/VIcon'
+import VIcon from '~components/VIcon'
 import { test } from '~util/testing'
 
 test('VIcon.js', ({ mount, functionalContext }) => {

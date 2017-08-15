@@ -1,6 +1,6 @@
 <script>
-  import Input from '~mixins/input'
-  import Themeable from '~mixins/themeable'
+  import Input from '../../mixins/input'
+  import Themeable from '../../mixins/themeable'
 
   export default {
     name: 'v-radio-group',

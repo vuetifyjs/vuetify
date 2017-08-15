@@ -1,4 +1,4 @@
-import VApp from '~components/app/VApp'
+import VApp from '~components/VApp'
 import { test } from '~util/testing'
 
 test('VApp.js', ({ mount, functionalContext }) => {

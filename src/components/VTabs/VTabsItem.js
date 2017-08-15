@@ -3,7 +3,7 @@ import GenerateRouteLink from '../../mixins/route-link'
 export default {
   name: 'v-tabs-item',
 
-  inject: ['slider', 'tabClick'],
+  inject: ['slider', 'tabClick', 'registerTabItem', 'unregisterTabItem'],
 
   mixins: [GenerateRouteLink],
 
@@ -47,7 +47,12 @@ export default {
   },
 
   mounted () {
+    this.registerTabItem(this.action, this.toggle, this.$el)
     this.callSlider()
+  },
+
+  beforeDestroy () {
+    this.unregisterTabItem(this.action)
   },
 
   methods: {

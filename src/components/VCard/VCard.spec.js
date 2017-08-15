@@ -1,5 +1,5 @@
 import { test } from '~util/testing'
-import VCard from '~components/cards/VCard'
+import VCard from '~components/VCard'
 
 test('VCard.js', ({ mount, functionalContext }) => {
   it('should render component and match snapshot', () => {

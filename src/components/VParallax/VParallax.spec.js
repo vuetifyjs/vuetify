@@ -1,5 +1,5 @@
 import { test } from '~util/testing'
-import VParallax from '~components/parallax/VParallax'
+import VParallax from '~components/VParallax'
 
 test('VParallax.js', ({ mount }) => {
   it('should abandon init if already destroyed', async () => {

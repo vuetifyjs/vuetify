@@ -1,4 +1,4 @@
-﻿import { test } from '~util/testing'
+import { test } from '~util/testing'
 import VDataTable from './VDataTable'
 
 test('VDataTable.js', ({ mount }) => {
@@ -27,6 +27,7 @@ test('VDataTable.js', ({ mount }) => {
     pagination.descending = true
 
     expect(wrapper.vm.$props.pagination.descending).toBe(true)
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
     // Also expect tests to not crash :)
   })
 })
