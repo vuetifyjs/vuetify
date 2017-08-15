@@ -6,11 +6,15 @@ import toHaveBeenWarnedInit from '~util/to-have-been-warned'
 export function test(name, cb) {
   toHaveBeenWarnedInit()
 
-  Vue.prototype.$vuetify = { load }
+  Vue.prototype.$vuetify = { load: (fn) => fn() }
 
-  beforeEach(() => {
-    rafPolyfill(window)
-  })
+/*
+  const app = document.createElement('div')
+  app.setAttribute('data-app', true)
+  document.body.appendChild(app)
+*/
+
+  rafPolyfill(window)
 
   describe(name, () => cb({
     functionalContext,

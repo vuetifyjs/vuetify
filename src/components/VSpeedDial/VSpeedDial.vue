@@ -2,10 +2,14 @@
   import Toggleable from '../../mixins/toggleable'
   import Positionable from '../../mixins/positionable'
 
+  import ClickOutside from '../../directives/click-outside'
+
   export default {
     name: 'v-speed-dial',
 
     mixins: [Positionable, Toggleable],
+
+    directives: { ClickOutside },
 
     props: {
       direction: {

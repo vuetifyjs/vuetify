@@ -5,44 +5,30 @@ exports[`VBtnToggle.vue should allow new value when mandatory prop is used 1`] =
 <div class="btn-toggle btn-toggle--selected">
   <button type="button"
           class="btn btn--flat"
+  >
+    <div class="btn__content">
+      <i class="material-icons icon">
+        add
+      </i>
+    </div>
+  </button>
+  <button type="button"
+          class="btn btn--flat"
           data-selected="true"
-          data-index="0"
-          data-only-child="true"
   >
     <div class="btn__content">
-      <span>
-        Left
-      </span>
+      <i class="material-icons icon">
+        add
+      </i>
     </div>
   </button>
   <button type="button"
           class="btn btn--flat"
-          data-index="1"
   >
     <div class="btn__content">
-      <span>
-        Center
-      </span>
-    </div>
-  </button>
-  <button type="button"
-          class="btn btn--flat"
-          data-index="2"
-  >
-    <div class="btn__content">
-      <span>
-        Right
-      </span>
-    </div>
-  </button>
-  <button type="button"
-          class="btn btn--flat"
-          data-index="3"
-  >
-    <div class="btn__content">
-      <span>
-        Justify
-      </span>
+      <i class="material-icons icon">
+        add
+      </i>
     </div>
   </button>
 </div>
@@ -54,44 +40,30 @@ exports[`VBtnToggle.vue should allow new value when mandatory prop is used with 
 <div class="btn-toggle btn-toggle--selected">
   <button type="button"
           class="btn btn--flat"
+  >
+    <div class="btn__content">
+      <i class="material-icons icon">
+        add
+      </i>
+    </div>
+  </button>
+  <button type="button"
+          class="btn btn--flat"
           data-selected="true"
-          data-index="0"
-          data-only-child="true"
   >
     <div class="btn__content">
-      <span>
-        Left
-      </span>
+      <i class="material-icons icon">
+        add
+      </i>
     </div>
   </button>
   <button type="button"
           class="btn btn--flat"
-          data-index="1"
   >
     <div class="btn__content">
-      <span>
-        Center
-      </span>
-    </div>
-  </button>
-  <button type="button"
-          class="btn btn--flat"
-          data-index="2"
-  >
-    <div class="btn__content">
-      <span>
-        Right
-      </span>
-    </div>
-  </button>
-  <button type="button"
-          class="btn btn--flat"
-          data-index="3"
-  >
-    <div class="btn__content">
-      <span>
-        Justify
-      </span>
+      <i class="material-icons icon">
+        add
+      </i>
     </div>
   </button>
 </div>
@@ -104,43 +76,29 @@ exports[`VBtnToggle.vue should not allow empty value when mandatory prop is used
   <button type="button"
           class="btn btn--flat"
           data-selected="true"
-          data-index="0"
-          data-only-child="true"
   >
     <div class="btn__content">
-      <span>
-        Left
-      </span>
+      <i class="material-icons icon">
+        add
+      </i>
     </div>
   </button>
   <button type="button"
           class="btn btn--flat"
-          data-index="1"
   >
     <div class="btn__content">
-      <span>
-        Center
-      </span>
+      <i class="material-icons icon">
+        add
+      </i>
     </div>
   </button>
   <button type="button"
           class="btn btn--flat"
-          data-index="2"
   >
     <div class="btn__content">
-      <span>
-        Right
-      </span>
-    </div>
-  </button>
-  <button type="button"
-          class="btn btn--flat"
-          data-index="3"
-  >
-    <div class="btn__content">
-      <span>
-        Justify
-      </span>
+      <i class="material-icons icon">
+        add
+      </i>
     </div>
   </button>
 </div>
@@ -152,44 +110,68 @@ exports[`VBtnToggle.vue should not allow empty value when mandatory prop is used
 <div class="btn-toggle btn-toggle--selected">
   <button type="button"
           class="btn btn--flat"
+  >
+    <div class="btn__content">
+      <i class="material-icons icon">
+        add
+      </i>
+    </div>
+  </button>
+  <button type="button"
+          class="btn btn--flat"
           data-selected="true"
-          data-index="0"
-          data-only-child="true"
   >
     <div class="btn__content">
-      <span>
-        Left
-      </span>
+      <i class="material-icons icon">
+        add
+      </i>
     </div>
   </button>
   <button type="button"
           class="btn btn--flat"
-          data-index="1"
   >
     <div class="btn__content">
-      <span>
-        Center
-      </span>
+      <i class="material-icons icon">
+        add
+      </i>
+    </div>
+  </button>
+</div>
+
+`;
+
+exports[`VBtnToggle.vue should use button value attribute if available 1`] = `
+
+<div class="btn-toggle btn-toggle--selected">
+  <button type="button"
+          class="btn btn--flat"
+          value="left"
+  >
+    <div class="btn__content">
+      <i class="material-icons icon">
+        add
+      </i>
     </div>
   </button>
   <button type="button"
           class="btn btn--flat"
-          data-index="2"
+          value="center"
+          data-selected="true"
   >
     <div class="btn__content">
-      <span>
-        Right
-      </span>
+      <i class="material-icons icon">
+        add
+      </i>
     </div>
   </button>
   <button type="button"
           class="btn btn--flat"
-          data-index="3"
+          value="right"
   >
     <div class="btn__content">
-      <span>
-        Justify
-      </span>
+      <i class="material-icons icon">
+        add
+      </i>
     </div>
   </button>
 </div>
