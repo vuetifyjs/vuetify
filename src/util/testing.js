@@ -1,6 +1,5 @@
-﻿import Vue from 'vue'
+import Vue from 'vue'
 import load from '~util/load'
-import * as Directives from '~directives'
 import { mount, shallow } from 'avoriaz'
 import toHaveBeenWarnedInit from '~util/to-have-been-warned'
 
@@ -8,10 +7,6 @@ export function test(name, cb) {
   toHaveBeenWarnedInit()
 
   Vue.prototype.$vuetify = { load }
-
-  Object.keys(Directives).forEach(key => {
-    Vue.directive(key, Directives[key])
-  })
 
   beforeEach(() => {
     rafPolyfill(window)

@@ -26,7 +26,8 @@ export default {
       return {
         'list__tile': true,
         'list__tile--avatar': this.avatar,
-        'list__tile--disabled': this.disabled
+        'list__tile--disabled': this.disabled,
+        [this.activeClass]: this.isActive
       }
     }
   },

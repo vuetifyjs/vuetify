@@ -191,7 +191,7 @@
           name: 'resize',
           value: this.onResize
         }]
-      }, [this.$slots.default])
+      }, this.$slots.default)
     }
   }
 </script>

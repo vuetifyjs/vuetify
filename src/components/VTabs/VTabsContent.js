@@ -31,12 +31,12 @@ export default {
     },
     lazy: Boolean,
     transition: {
-      type: String,
-      default: 'v-tab-transition'
+      type: [Boolean, String],
+      default: 'tab-transition'
     },
     reverseTransition: {
-      type: String,
-      default: 'v-tab-reverse-transition'
+      type: [Boolean, String],
+      default: 'tab-reverse-transition'
     }
   },
 
@@ -63,16 +63,24 @@ export default {
   },
 
   render (h) {
-    return h(this.computedTransition, {}, [
-      h('div', {
-        'class': 'tabs__content',
-        domProps: { id: this.id },
-        directives: [{
-          name: 'show',
-          value: this.isActive
-        }],
-        on: this.$listeners
-      }, this.lazy && this.isBooted || !this.lazy
-        ? this.$slots.default : null)])
+    const div = h('div', {
+      'class': 'tabs__content',
+      domProps: { id: this.id },
+      directives: [{
+        name: 'show',
+        value: this.isActive
+      }],
+      on: this.$listeners
+    }, this.showLazyContent(this.$slots.default))
+
+    if (!this.computedTransition) {
+      return div
+    }
+
+    return h('transition', {
+      props: {
+        name: this.computedTransition
+      }
+    }, [div])
   }
 }
