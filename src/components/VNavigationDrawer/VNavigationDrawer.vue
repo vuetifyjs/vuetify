@@ -116,6 +116,8 @@
         else if (!this.value &&
           (this.persistent || this.temporary)
         ) this.isActive = false
+
+        this.isActive && this.genOverlay()
       },
       checkIfMobile () {
         this.isMobile = window.innerWidth < parseInt(this.mobileBreakPoint)
