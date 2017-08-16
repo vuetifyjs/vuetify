@@ -11,13 +11,13 @@ export default {
      ? `${data.staticClass} toolbar__side-icon`
      : 'toolbar__side-icon'
 
-    const d = {
+    const d = Object.assign(data, {
       staticClass: classes,
       props: Object.assign(props, {
         icon: true
       }),
       on: listeners
-    }
+    })
 
     const defaultSlot = slots().default
 

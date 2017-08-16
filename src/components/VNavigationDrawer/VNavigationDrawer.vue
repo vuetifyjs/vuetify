@@ -201,7 +201,7 @@
         directives: this.genDirectives(),
         on: Object.assign({}, {
           click: () => this.$emit('update:miniVariant', false)
-        }, this.$listeners)
+        })
       }
 
       return h('aside', data, [
