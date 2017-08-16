@@ -54,4 +54,18 @@ test('VToolbarSideIcon.js', ({ mount, functionalContext }) => {
 
     expect(wrapper.hasClass('hidden-sm-and-up')).toBe(true)
   })
+
+  it('should pass through directives to button component', () => {
+    const context = functionalContext({
+      directives: [
+        {
+          name: 'show',
+          value: false
+        }
+      ]
+    })
+    const wrapper = mount(VToolbarSideIcon, context)
+
+    expect(wrapper.hasStyle('display', 'none')).toBe(true)
+  })
 })
