@@ -193,18 +193,13 @@
     },
 
     render (h) {
-      const listeners = {
-        ...this.$listeners
-      }
-      listeners.input && delete listeners.input
-
       const data = {
         'class': this.classes,
         style: { height: this.calculatedHeight },
         directives: this.genDirectives(),
         on: Object.assign({}, {
           click: () => this.$emit('update:miniVariant', false)
-        }, listeners)
+        })
       }
 
       return h('aside', data, [
