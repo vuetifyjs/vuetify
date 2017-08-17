@@ -24,6 +24,7 @@
     },
 
     props: {
+      value: Number,
       cycle: {
         type: Boolean,
         default: true
@@ -121,7 +122,7 @@
         this.$nextTick(this.startInterval)
       },
       init () {
-        this.current = this.value >>> 0
+        this.current = this.value || 0
       },
       next () {
         this.reverse = false
