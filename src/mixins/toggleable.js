@@ -1,27 +1,28 @@
-export default {
-  model: {
-    prop: 'inputValue',
-    event: 'input'
-  },
+export function factory (prop = 'value', event = 'input') {
+  return {
+    model: { prop, event },
 
-  props: {
-    inputValue: {
-      required: false
-    }
-  },
-
-  data () {
-    return {
-      isActive: !!this.inputValue
-    }
-  },
-
-  watch: {
-    inputValue (val) {
-      this.isActive = !!val
+    props: {
+      [prop]: { required: false }
     },
-    isActive (val) {
-      !!val !== this.inputValue && this.$emit('input', val)
+
+    data () {
+      return {
+        isActive: !!this[prop]
+      }
+    },
+
+    watch: {
+      [prop] (val) {
+        this.isActive = !!val
+      },
+      isActive (val) {
+        !!val !== this[prop] && this.$emit(event, val)
+      }
     }
   }
 }
+
+const Toggleable = factory()
+
+export default Toggleable
