@@ -120,27 +120,4 @@ test('VBtnToggle.vue', () => {
     expect(change).toBeCalledWith([1, 2])
     expect(wrapper.html()).toMatchSnapshot()
   })
-
-  it('should use button value attribute if available', () => {
-    const wrapper = mount(VBtnToggle, {
-      propsData: {
-        inputValue: 'center'
-      },
-      slots: {
-        default: [
-          createBtn('left'),
-          createBtn('center'),
-          createBtn('right')
-        ]
-      }
-    })
-
-    const change = jest.fn()
-    wrapper.instance().$on('change', change)
-
-    wrapper.instance().updateValue(2)
-
-    expect(change).toBeCalledWith('right')
-    expect(wrapper.html()).toMatchSnapshot()
-  })
 })

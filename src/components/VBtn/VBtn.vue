@@ -3,6 +3,7 @@
   import Positionable from '../../mixins/positionable'
   import GenerateRouteLink from '../../mixins/route-link'
   import Themeable from '../../mixins/themeable'
+  import Toggleable from '../../mixins/toggleable'
 
   export default {
     name: 'v-btn',
@@ -11,7 +12,8 @@
       Contextualable,
       GenerateRouteLink,
       Positionable,
-      Themeable
+      Themeable,
+      Toggleable
     ],
 
     props: {
@@ -46,6 +48,7 @@
       classes () {
         return {
           'btn': true,
+          'btn--active': this.isActive,
           'btn--absolute': this.absolute,
           'btn--block': this.block,
           'btn--bottom': this.bottom,
