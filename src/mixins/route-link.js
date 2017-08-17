@@ -14,10 +14,7 @@ export default {
     nuxt: Boolean,
     replace: Boolean,
     router: Boolean,
-    ripple: {
-      type: Boolean,
-      default: true
-    },
+    ripple: Boolean,
     tag: String
   },
 

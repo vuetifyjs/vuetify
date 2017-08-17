@@ -6,6 +6,7 @@ import {
 import ExpandTransitionFunctions from './expand-transition'
 
 // Component specific transitions
+export const VBottomSheetTranstion = createSimpleTransition('bottom-sheet-transition')
 export const VCarouselTransition = createSimpleTransition('carousel-transition')
 export const VCarouselReverseTransition = createSimpleTransition('carousel-reverse-transition')
 export const VTabTransition = createSimpleTransition('tab-transition')
@@ -27,6 +28,7 @@ export const VSlideYReverseTransition = createSimpleTransition('slide-y-reverse-
 export const VExpandTransition = createJavaScriptTransition('expand-transition', ExpandTransitionFunctions)
 
 export default function install (Vue) {
+  Vue.component('v-bottom-sheet-transition', VBottomSheetTranstion)
   Vue.component('v-carousel-transition', VCarouselTransition)
   Vue.component('v-carousel-reverse-transition', VCarouselReverseTransition)
   Vue.component('v-dialog-transition', VDialogTransition)
