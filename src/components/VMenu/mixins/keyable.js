@@ -29,7 +29,7 @@ export default {
       e.keyCode === 32 && !this.isActive && e.preventDefault()
 
       if (this.listIndex === -1) this.setActiveListIndex()
-      if ([27, 9].includes(e.keyCode)) return this.isActive = false
+      if (e.keyCode === 9) return this.isActive = false
       else if (!this.isActive && [13, 32].includes(e.keyCode)) {
         return this.isActive = true
       }

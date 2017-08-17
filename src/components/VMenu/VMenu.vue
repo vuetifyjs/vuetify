@@ -8,6 +8,7 @@
   import Keyable from './mixins/keyable'
 
   import ClickOutside from '../../directives/click-outside'
+  import Esc from '../../directives/esc'
 
   export default {
     name: 'v-menu',
@@ -23,7 +24,8 @@
     ],
 
     directives: {
-      ClickOutside
+      ClickOutside,
+      Esc
     },
 
     data () {
@@ -223,10 +225,10 @@
     },
 
     render (h) {
-      const directives = !this.openOnHover ? [{
-        name: 'click-outside',
-        value: () => this.closeOnClick
-      }] : []
+      const directives = !this.openOnHover ? [
+        { name: 'click-outside', value: () => this.closeOnClick },
+        { name: 'esc' }
+      ] : []
 
       const data = {
         'class': 'menu',
@@ -236,8 +238,7 @@
         directives,
         on: {
           keydown: e => {
-            if (e.keyCode === 27) this.isActive = false
-            else this.changeListIndex(e)
+            if (e.keyCode !== 27) this.changeListIndex(e)
           }
         }
       }

@@ -64,10 +64,10 @@
       genActions () {
         return this.$createElement('div', {
           'class': 'small-dialog__actions',
-          directives: [{
-            name: 'show',
-            value: this.large
-          }]
+          directives: [
+            { name: 'show', value: this.large },
+            { name: 'esc', value: () => this.cancel() }
+          ]
         }, [
           this.genButton(this.cancel, this.cancelText),
           this.genButton(this.save, this.saveText)
@@ -77,7 +77,6 @@
         return this.$createElement('div', {
           on: {
             keydown: e => {
-              e.keyCode === 27 && this.cancel()
               e.keyCode === 13 && this.save()
             }
           },
