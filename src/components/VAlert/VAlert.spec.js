@@ -30,7 +30,7 @@ test('VAlert.vue', ({ mount }) => {
   it('should emit input:false when close icon is clicked', () => {
     const wrapper = mount(VAlert, {
       propsData: {
-        value: true,
+        inputValue: true,
         dismissible: true
       }
     })
@@ -46,14 +46,14 @@ test('VAlert.vue', ({ mount }) => {
   it('should not be visible after being dismissed', done => {
     const wrapper = mount(VAlert, {
       propsData: {
-        value: true,
+        inputValue: true,
         dismissible: true
       }
     })
 
     wrapper.vm.$on('input', (val) => {
       wrapper.setProps({
-        'value': false
+        inputValue: false
       })
       wrapper.update()
 
@@ -71,7 +71,7 @@ test('VAlert.vue', ({ mount }) => {
   it('should have a custom icon', () => {
     const wrapper = mount(VAlert, {
       propsData: {
-        value: true,
+        inputValue: true,
         icon: 'list'
       }
     })

@@ -18,8 +18,13 @@ export default {
           // Fix for testing, dataset does not exist on elm?
           if (!elm.dataset) elm.dataset = {}
 
-          if (this.isSelected(i)) elm.setAttribute('data-selected', true)
-          else elm.removeAttribute('data-selected')
+          if (this.isSelected(i)) {
+            elm.setAttribute('data-selected', true)
+            elm.classList.add('btn--active')
+          } else {
+            elm.removeAttribute('data-selected')
+            elm.classList.remove('btn--active')
+          }
 
           elm.dataset.index = i
         })
