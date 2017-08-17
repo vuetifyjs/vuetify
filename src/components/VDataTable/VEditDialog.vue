@@ -66,7 +66,7 @@
           'class': 'small-dialog__actions',
           directives: [
             { name: 'show', value: this.large },
-            { name: 'esc', value: () => this.cancel() }
+            { name: 'esc' }
           ]
         }, [
           this.genButton(this.cancel, this.cancelText),

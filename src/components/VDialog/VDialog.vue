@@ -83,12 +83,7 @@
         ref: 'dialog',
         directives: [
           { name: 'click-outside', value: this.closeConditional },
-          { name: 'esc', value: () => {
-            if (this.disableEsc) {
-                return false
-            }
-            this.isActive = false
-          } },
+          { name: 'esc', value: () => !this.disableEsc },
           { name: 'show', value: this.isActive }
         ]
       }

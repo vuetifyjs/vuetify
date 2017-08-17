@@ -1,9 +1,6 @@
 function directive (e, binding, v) {
-  const cb = binding.value || (() => {
+  if (e.keyCode === 27 && v.context.isActive && (!binding.value || binding.value())) {
     v.context.isActive = false
-  })
-
-  if (e.keyCode === 27 && v.context.isActive && cb(e) !== false) {
     e.stopImmediatePropagation()
   }
 }
