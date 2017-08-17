@@ -3,6 +3,7 @@
   import Positionable from '../../mixins/positionable'
   import GenerateRouteLink from '../../mixins/route-link'
   import Themeable from '../../mixins/themeable'
+  import Toggleable from '../../mixins/toggleable'
 
   export default {
     name: 'v-btn',
@@ -11,7 +12,8 @@
       Contextualable,
       GenerateRouteLink,
       Positionable,
-      Themeable
+      Themeable,
+      Toggleable
     ],
 
     props: {
@@ -46,6 +48,7 @@
       classes () {
         return {
           'btn': true,
+          'btn--active': this.isActive,
           'btn--absolute': this.absolute,
           'btn--block': this.block,
           'btn--bottom': this.bottom,
@@ -64,12 +67,12 @@
           'btn--round': this.round,
           'btn--small': this.small,
           'btn--top': this.top,
-          'primary': this.primary && !this.outline,
-          'secondary': this.secondary && !this.outline,
-          'success': this.success && !this.outline,
-          'info': this.info && !this.outline,
-          'warning': this.warning && !this.outline,
-          'error': this.error && !this.outline,
+          'primary': this.primary && !this.outline && !this.flat,
+          'secondary': this.secondary && !this.outline && !this.flat,
+          'success': this.success && !this.outline && !this.flat,
+          'info': this.info && !this.outline && !this.flat,
+          'warning': this.warning && !this.outline && !this.flat,
+          'error': this.error && !this.outline && !this.flat,
           'primary--text': this.primary && (this.outline || this.flat),
           'secondary--text': this.secondary && (this.outline || this.flat),
           'success--text': this.success && (this.outline || this.flat),

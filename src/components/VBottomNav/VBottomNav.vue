@@ -8,12 +8,13 @@
 
     props: {
       absolute: Boolean,
+      index: [Number, String],
       shift: Boolean,
       value: { required: false }
     },
 
     watch: {
-      active () {
+      index () {
         this.update()
       }
     },
@@ -31,12 +32,18 @@
 
     methods: {
       isSelected (i) {
-        const item = this.getValue(i)
-        return this.active === item
+        return this.index == i
       },
       updateValue (i) {
-        const item = this.getValue(i)
-        this.$emit('update:active', item)
+        this.buttons.forEach((b, index) => {
+          if (i === index) {
+            b.classList.add('btn--active')
+          } else {
+            b.classList.remove('btn--active')
+          }
+        })
+
+        this.$emit('update:active', i)
       }
     },
 

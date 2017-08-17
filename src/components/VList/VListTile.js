@@ -18,7 +18,8 @@ export default {
       type: String,
       default: 'list__tile--active'
     },
-    avatar: Boolean
+    avatar: Boolean,
+    tag: String
   },
 
   computed: {
@@ -41,6 +42,6 @@ export default {
       attrs: {
         disabled: this.disabled
       }
-    }, [h(tag, data, [this.$slots.default])])
+    }, [h(tag, data, this.$slots.default)])
   }
 }
