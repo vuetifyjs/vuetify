@@ -46,15 +46,6 @@
       }
     },
 
-    computed: {
-      defaultState () {
-        return {
-          current: null,
-          reverse: false
-        }
-      }
-    },
-
     watch: {
       current () {
         // Evaluate items when current changes to account for
