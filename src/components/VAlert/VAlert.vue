@@ -50,8 +50,7 @@
 
       if (!this.hideIcon && this.mdIcon) {
         children.unshift(h('v-icon', {
-          'class': 'alert__icon',
-          props: { large: true }
+          'class': 'alert__icon'
         }, this.mdIcon))
       }
 
@@ -63,8 +62,7 @@
         }, [
           h('v-icon', {
             props: {
-              right: true,
-              large: true
+              right: true
             }
           }, 'cancel')
         ])
