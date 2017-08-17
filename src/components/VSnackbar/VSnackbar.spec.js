@@ -12,14 +12,14 @@ describe('VSnackbar.vue', () => {
   it('should have a snack__content class only when active', async () => {
     const wrapper = mount(VSnackbar, {
       propsData: {
-        inputValue: false,
+        value: false,
         timeout: 1000
       }
     })
 
     expect(wrapper.find('div .snack__content').length).toEqual(0)
 
-    wrapper.setProps({ inputValue: true })
+    wrapper.setProps({ value: true })
     wrapper.update()
 
     await wrapper.vm.$nextTick()
@@ -32,7 +32,7 @@ describe('VSnackbar.vue', () => {
     jest.useFakeTimers()
     const wrapper = mount(VSnackbar, {
       propsData: {
-        inputValue: false,
+        value: false,
         timeout: 3141
       }
     })
@@ -40,7 +40,7 @@ describe('VSnackbar.vue', () => {
     const value = jest.fn()
 
     wrapper.instance().$on('input', value)
-    wrapper.setProps({ inputValue: true })
+    wrapper.setProps({ value: true })
     wrapper.update()
 
     await wrapper.vm.$nextTick()
