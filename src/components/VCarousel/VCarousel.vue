@@ -62,6 +62,11 @@
 
         !this.isBooted && this.cycle && this.restartInterval()
         this.isBooted = true
+
+        this.$emit('input', this.current)
+      },
+      value () {
+        this.init()
       },
       cycle (val) {
         val && this.restartInterval() || clearInterval(this.slideInterval)
@@ -116,7 +121,7 @@
         this.$nextTick(this.startInterval)
       },
       init () {
-        this.current = 0
+        this.current = this.value >>> 0
       },
       next () {
         this.reverse = false
