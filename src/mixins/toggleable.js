@@ -1,14 +1,9 @@
 export function factory (prop = 'value', event = 'input') {
   return {
-    model: {
-      prop,
-      event
-    },
+    model: { prop, event },
 
     props: {
-      [prop]: {
-        required: false
-      }
+      [prop]: { required: false }
     },
 
     data () {
