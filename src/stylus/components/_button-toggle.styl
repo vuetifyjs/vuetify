@@ -1,6 +1,21 @@
 @import '../bootstrap'
 @import '../theme'
 
+/** Themes */
+
+btn-toggle($material)
+  background: $material.background
+
+  .btn
+    &[data-selected]
+      opacity: 1
+      background-color: $material.dividers !important
+
+      &:not(:last-child):not([data-only-child])
+        border-right-color: $material.dividers
+
+theme(btn-toggle, "btn-toggle")
+
 .btn-toggle
   display: inline-flex
   border-radius: 2px
@@ -40,18 +55,3 @@
 
   &--selected
     elevation(2)
-
-/** Themes */
-
-btn-toggle($material)
-  background: $material.background
-
-  .btn
-    &[data-selected]
-      opacity: 1
-      background-color: $material.dividers !important
-
-      &:not(:last-child):not([data-only-child])
-        border-right-color: $material.dividers
-
-theme(btn-toggle, "btn-toggle")

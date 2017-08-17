@@ -1,6 +1,11 @@
 @import '../bootstrap'
 @import '../theme'
 
+subheader($material)
+  color: $material.text.primary
+
+theme(subheader, "subheader")
+
 .subheader
   height: $list-item-single-height
   display: flex
@@ -11,8 +16,3 @@
 
   &--inset
     margin-left: $subheader-inset-margin
-
-subheader($material)
-  color: $material.text.primary
-
-theme(subheader, "subheader")

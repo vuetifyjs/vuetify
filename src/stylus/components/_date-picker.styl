@@ -1,6 +1,40 @@
 @import '../bootstrap'
 @import '../theme'
 
+/** Themes */
+date-picker($material)
+  .picker--date__years
+    background: $material.cards
+
+    li
+      color: $material.text.primary
+
+      &.active
+        color: $theme.accent
+
+  .picker--date__header
+    color: $material.text.primary
+
+  .picker--date__table
+    table
+      th
+        color: $material.text.primary
+
+      .btn
+        color: $material.text.primary
+
+        &--current
+          color: $theme.accent
+
+        &--active
+          color: $material.bg-color
+
+        &--floating
+          &:after
+            background: $theme.accent !important
+
+theme(date-picker, "picker--date")
+
 .picker--date
   color: #fff
   width: 100%
@@ -164,37 +198,3 @@
   .picker--date__years
     margin-left: 170px
     width: 330px
-
-/** Themes */
-date-picker($material)
-  .picker--date__years
-    background: $material.cards
-
-    li
-      color: $material.text.primary
-
-      &.active
-        color: $theme.accent
-
-  .picker--date__header
-    color: $material.text.primary
-
-  .picker--date__table
-    table
-      th
-        color: $material.text.primary
-
-      .btn
-        color: $material.text.primary
-
-        &--current
-          color: $theme.accent
-
-        &--active
-          color: $material.bg-color
-
-        &--floating
-          &:after
-            background: $theme.accent !important
-
-theme(date-picker, "picker--date")

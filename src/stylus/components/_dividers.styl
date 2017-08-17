@@ -1,6 +1,11 @@
 @import '../bootstrap'
 @import '../theme'
 
+divider($material)
+  background-color: $material.dividers
+
+theme(divider, "divider")
+
 .divider
   border: none
   display: block
@@ -11,8 +16,3 @@
   &--inset
     margin-left: 72px
     width: calc(100% - 72px)
-
-divider($material)
-  background-color: $material.dividers
-
-theme(divider, "divider")

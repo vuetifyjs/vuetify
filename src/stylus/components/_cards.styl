@@ -1,6 +1,13 @@
 @import '../bootstrap'
 @import '../theme'
 
+/* Themes */
+card($material)
+  background-color: $material.cards
+  color: $material.text.primary
+
+theme(card, "card")
+
 .card
   elevation(2)
   position: relative
@@ -72,10 +79,3 @@
 
     > *
       margin: 0 4px
-
-/* Themes */
-card($material)
-  background-color: $material.cards
-  color: $material.text.primary
-
-theme(card, "card")
