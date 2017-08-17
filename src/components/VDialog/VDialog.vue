@@ -5,6 +5,7 @@
   import Toggleable from '../../mixins/toggleable'
 
   import ClickOutside from '../../directives/click-outside'
+  import Esc from '../../directives/esc'
 
   export default {
     name: 'v-dialog',
@@ -12,12 +13,14 @@
     mixins: [Bootable, Detachable, Overlayable, Toggleable],
 
     directives: {
-      ClickOutside
+      ClickOutside,
+      Esc
     },
 
     props: {
       disabled: Boolean,
       persistent: Boolean,
+      disableEsc: Boolean,
       fullscreen: Boolean,
       fullWidth: Boolean,
       lazy: Boolean,
@@ -80,6 +83,12 @@
         ref: 'dialog',
         directives: [
           { name: 'click-outside', value: this.closeConditional },
+          { name: 'esc', value: () => {
+            if (this.disableEsc) {
+                return false
+            }
+            this.isActive = false
+          } },
           { name: 'show', value: this.isActive }
         ]
       }
