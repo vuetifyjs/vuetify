@@ -56,7 +56,7 @@ test('VListTile.vue', ({ mount }) => {
   it('should have activeClass when toggled', () => {
     const wrapper = mount(VListTile, {
       propsData: {
-        value: true
+        inputValue: true
       }
     })
 

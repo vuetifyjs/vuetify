@@ -1,22 +1,27 @@
 export default {
-  data () {
-    return {
-      isActive: !!this.value
-    }
+  model: {
+    prop: 'inputValue',
+    event: 'input'
   },
 
   props: {
-    value: {
+    inputValue: {
       required: false
     }
   },
 
+  data () {
+    return {
+      isActive: !!this.inputValue
+    }
+  },
+
   watch: {
-    value (val) {
+    inputValue (val) {
       this.isActive = !!val
     },
     isActive (val) {
-      !!val !== this.value && this.$emit('input', val)
+      !!val !== this.inputValue && this.$emit('input', val)
     }
   }
 }

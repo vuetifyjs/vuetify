@@ -11,7 +11,7 @@
       label: Boolean,
       outline: Boolean,
       small: Boolean,
-      value: {
+      inputValue: {
         type: Boolean,
         default: true
       }
