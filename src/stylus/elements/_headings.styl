@@ -1,6 +1,10 @@
+heading($material)
+  color: $material.text.primary
+
+theme(heading, "heading")
+
 for heading, options in $headings
   {heading}
-    color: $heading-color
     font-size: options.size
     font-weight: options.weight
     line-height: options.line-height
