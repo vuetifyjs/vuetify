@@ -8,6 +8,7 @@
   import Keyable from './mixins/keyable'
 
   import ClickOutside from '../../directives/click-outside'
+  import Resize from '../../directives/resize'
 
   export default {
     name: 'v-menu',
@@ -23,7 +24,8 @@
     ],
 
     directives: {
-      ClickOutside
+      ClickOutside,
+      Resize
     },
 
     data () {
