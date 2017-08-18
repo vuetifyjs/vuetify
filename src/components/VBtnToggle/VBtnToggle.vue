@@ -70,7 +70,8 @@
 
         const index = items.indexOf(item)
         if (index > -1) {
-          items.length >= 1 && !this.mandatory && items.splice(index, 1)
+          if (this.mandatory && items.length === 1) return
+          items.length >= 1 && items.splice(index, 1)
         } else {
           items.push(item)
         }
