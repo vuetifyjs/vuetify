@@ -6,7 +6,6 @@ export default {
       const options = {
         'class': 'menu__activator',
         ref: 'activator',
-        slot: 'activator',
         on: {}
       }
 

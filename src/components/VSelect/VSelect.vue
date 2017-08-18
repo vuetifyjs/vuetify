@@ -96,7 +96,9 @@
       multiple: Boolean,
       multiLine: Boolean,
       offset: Boolean,
-      searchInput: null,
+      searchInput: {
+        default: null
+      },
       singleLine: Boolean,
       top: Boolean,
       returnObject: Boolean,
@@ -146,7 +148,7 @@
           return this.searchInput
         },
         set (val) {
-          this.$emit('update:searchInput', val)
+          val !== this.searchInput && this.$emit('update:searchInput', val)
         }
       },
       selectedItems () {
@@ -180,9 +182,6 @@
       isActive (val) {
         this.isBooted = true
         this.lastItem += !val ? 20 : 0
-
-        if (!val) this.blur()
-        else this.focus()
       },
       isBooted () {
         this.$nextTick(() => {
@@ -234,6 +233,7 @@
             this.$refs.input.value = this.getValue(this.inputValue)
           })
         }
+
         this.$emit('focus', e)
       },
       genLabel () {
