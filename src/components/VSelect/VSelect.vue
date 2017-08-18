@@ -18,7 +18,7 @@
   import Autocomplete from './mixins/autocomplete'
   import Generators from './mixins/generators'
 
-  import clickOutside from '../../directives/click-outside'
+  import ClickOutside from '../../directives/click-outside'
 
   export default {
     name: 'v-select',
@@ -38,7 +38,7 @@
     },
 
     directives: {
-      clickOutside
+      ClickOutside
     },
 
     mixins: [Autocomplete, Input, Filterable, Generators],

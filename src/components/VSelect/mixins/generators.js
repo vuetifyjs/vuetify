@@ -14,7 +14,8 @@ export default {
           contentClass: this.computedContentClass,
           disabled: this.disabled,
           maxHeight: this.maxHeight,
-          nudgeTop: this.isDropdown ? 22 : offsetY ? 38 : 0,
+          nudgeTop: this.isDropdown ? 22 : offsetY ? -1 : 0,
+          nudgeWidth: 24,
           offsetY,
           value: this.isActive
         },
