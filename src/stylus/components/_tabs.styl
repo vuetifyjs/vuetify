@@ -1,6 +1,23 @@
 @import '../bootstrap'
 @import '../theme'
 
+/* Theme */
+tabs($material)
+  .tabs__item
+    color: $material.tabs.inactive
+
+    &.tabs__item--active
+      color: $material.tabs.active
+
+    &.tabs__item--disabled
+      color: $material.buttons.disabled
+
+  .icon--left,
+  .icon--right
+    color: $material.icons.active
+
+theme(tabs, "tabs")
+
 .tabs
   overflow: hidden
   position: relative
@@ -142,20 +159,3 @@
     height: 2px
     background: $theme.accent
     transition: $primary-transition
-
-/* Theme */
-tabs($material)
-  .tabs__item
-    color: $material.tabs.inactive
-
-    &.tabs__item--active
-      color: $material.tabs.active
-
-    &.tabs__item--disabled
-      color: $material.buttons.disabled
-
-  .icon--left,
-  .icon--right
-    color: $material.icons.active
-
-theme(tabs, "tabs")

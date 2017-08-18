@@ -1,6 +1,15 @@
 @import '../bootstrap'
 @import '../theme'
 
+/* Themes */
+icon($material)
+  color: $material.icons.active
+
+  &:disabled
+    color: $material.icons.inactive
+
+theme(icon, "icon")
+
 .icon
   align-items: center
   display: inline-flex
@@ -17,12 +26,3 @@
 
   &.icon--x-large
     font-size: 3rem
-
-/* Themes */
-icon($material)
-  color: $material.icons.active
-
-  &:disabled
-    color: $material.icons.inactive
-
-theme(icon, "icon")

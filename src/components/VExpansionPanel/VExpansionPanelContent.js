@@ -42,7 +42,6 @@ export default {
         !this.expand() &&
         !this.$el.contains(e.target)
     },
-
     toggle () {
       this.isActive = !this.isActive
     },

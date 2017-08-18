@@ -1,6 +1,24 @@
 @import '../bootstrap'
 @import '../theme'
 
+/* Themes */
+list($material)
+  background: $material.cards
+
+  .list__tile:not(.list__tile--active)
+    color: $material.text.primary
+
+  .list__tile__sub-title
+    color: $material.text.secondary
+
+  .subheader
+    color: $material.text.secondary
+
+  .divider
+    background-color: $material.dividers
+
+theme(list, "list")
+
 .list
   list-style-type: none
   padding: $list-top-padding 0 $list-bottom-padding
@@ -217,21 +235,3 @@
 
   &--subheader
     padding-top: 0
-
-/* Themes */
-list($material)
-  background: $material.cards
-
-  .list__tile:not(.list__tile--active)
-    color: $material.text.primary
-
-  .list__tile__sub-title
-    color: $material.text.secondary
-
-  .subheader
-    color: $material.text.secondary
-
-  .divider
-    background-color: $material.dividers
-
-theme(list, "list")

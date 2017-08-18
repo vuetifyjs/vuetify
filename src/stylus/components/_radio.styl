@@ -1,13 +1,7 @@
 @import '../bootstrap'
 @import '../theme'
 
-.input-group--selection-controls
-  &.input-group--tab-focused
-    .input-group--selection-controls__ripple
-      &:before
-        transform: translate3d(-50%, -50%, 0) scale(1)
-        opacity: $ripple-animation-visible-opacity
-
+/** Theme */
 radio($material)
   label
     color: $material.text.primary
@@ -29,3 +23,10 @@ radio($material)
         color: inherit
 
 theme(radio, "radio")
+
+.input-group--selection-controls
+  &.input-group--tab-focused
+    .input-group--selection-controls__ripple
+      &:before
+        transform: translate3d(-50%, -50%, 0) scale(1)
+        opacity: $ripple-animation-visible-opacity
