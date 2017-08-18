@@ -189,15 +189,6 @@
       }
     },
 
-    mounted () {
-      window.addEventListener('resize', this.onResize, { passive: true })
-    },
-
-    beforeDestroy () {
-      window.removeEventListener('resize', this.onResize, { passive: true })
-      window.removeEventListener('resize', this.windowResizeHandler)
-    },
-
     methods: {
       activate () {
         if (typeof window === 'undefined') return
@@ -226,6 +217,11 @@
         name: 'click-outside',
         value: () => this.closeOnClick
       }] : []
+
+      directives.push({
+        name: 'resize',
+        value: this.onResize
+      })
 
       const data = {
         'class': 'menu',
