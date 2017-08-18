@@ -179,6 +179,9 @@
           this.$nextTick(this.$refs.menu.updateDimensions)
         }
       },
+      multiple (val) {
+        this.inputValue = val ? [] : null
+      },
       isActive (val) {
         this.isBooted = true
         this.lastItem += !val ? 20 : 0
