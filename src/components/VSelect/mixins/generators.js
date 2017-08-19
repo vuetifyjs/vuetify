@@ -36,8 +36,12 @@ export default {
             ...this.$attrs,
             tabindex: -1
           },
-          domProps: { value: this.searchValue },
-          on: { input: e => (this.searchValue = e.target.value) },
+          domProps: { value: this.lazySearch },
+          on: {
+            blur: this.blur,
+            focus: this.focus,
+            input: e => (this.lazySearch = e.target.value)
+          },
           ref: 'input',
           key: 'input'
         })

@@ -50,6 +50,7 @@
         inputValue: this.multiple && !this.value ? [] : this.value,
         isBooted: false,
         lastItem: 20,
+        lazySearch: null,
         isActive: false
       }
     },
@@ -145,9 +146,10 @@
       },
       searchValue: {
         get () {
-          return this.searchInput
+          return this.lazySearch
         },
         set (val) {
+          this.lazySearch = val
           val !== this.searchInput && this.$emit('update:searchInput', val)
         }
       },
@@ -193,7 +195,8 @@
           }
         })
       },
-      searchValue () {
+      searchValue (val) {
+        if (val && !this.isActive) this.isActive = true
         this.$refs.menu.listIndex = -1
       }
     },
@@ -227,6 +230,7 @@
         this.$refs.input &&
           (this.autocomplete || this.editable) &&
           this.$refs.input.focus()
+          
 
         if (this.editable &&
             this.inputValue !== null &&
@@ -261,6 +265,9 @@
       getValue (item) {
         return this.getPropertyFromItem(item, this.itemValue)
       },
+      onAutocompleteFocus () {
+        this.focus()
+      },
       onScroll () {
         if (!this.isActive) {
           requestAnimationFrame(() => (this.content.scrollTop = 0))
@@ -291,7 +298,7 @@
           })
         }
 
-        if (this.autocomplete || this.editable) {
+        if ((this.autocomplete && this.multiple) || this.editable) {
           this.$nextTick(() => {
             this.searchValue = null
             this.$refs.input &&
@@ -316,9 +323,11 @@
           }
         }],
         on: {
-          focus: this.focus,
-          blur: this.blur,
-          click: () => { if (!this.isActive) this.isActive = true },
+          focus: !this.autocomplete ? this.focus : this.onAutocompleteFocus,
+          blur: !this.autocomplete ? this.blur : () => {},
+          click: () => {
+            if (!this.isActive) this.isActive = true
+          },
           keydown: this.onKeyDown // Located in mixins/autocomplete.js
         }
       })

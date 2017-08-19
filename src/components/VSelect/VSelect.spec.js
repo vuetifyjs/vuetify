@@ -70,4 +70,19 @@ test('VSelect.js', ({ mount, shallow }) => {
     expect(update).toBeCalledWith('test')
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
+
+  it('should filter autocomplete search results', () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        autocomplete: true,
+        items: ['foo', 'bar']
+      }
+    })
+
+    wrapper.vm.searchValue = 'foo'
+
+    expect(wrapper.vm.filteredItems.length).toBe(1)
+    expect(wrapper.vm.filteredItems[0]).toBe('foo')
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 })
