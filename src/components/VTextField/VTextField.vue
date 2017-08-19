@@ -74,7 +74,7 @@
           typeof this.lazyValue !== 'undefined' &&
           this.lazyValue.toString().length > 0 ||
           this.placeholder ||
-          ['time', 'date'].includes(this.type)
+          ['time', 'date', 'datetime-local', 'week', 'month'].includes(this.type)
       }
     },
 
