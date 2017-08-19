@@ -58,4 +58,22 @@ test('VPagination.vue', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
     expect(wrapper.find('.pagination__more').length).toEqual(2)
   })
+
+  it('should use totalVisible prop if defined', async () => {
+    jest.useFakeTimers()
+    const wrapper = mount(VPagination, {
+      propsData: {
+        length: 100,
+        value: 50,
+        totalVisible: 10
+      }
+    })
+    jest.runAllTimers()
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.find('.pagination__more').length).toEqual(2)
+    expect(wrapper.find('.pagination__item').length).toEqual(8)
+  })
 })

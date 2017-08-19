@@ -411,3 +411,94 @@ exports[`VPagination.vue should only render start and end of range if length is 
 </ul>
 
 `;
+
+exports[`VPagination.vue should use totalVisible prop if defined 1`] = `
+
+<ul class="pagination">
+  <li>
+    <a href="#!"
+       class="pagination__navigation"
+    >
+      <i class="material-icons icon">
+        chevron_left
+      </i>
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      1
+    </a>
+  </li>
+  <li>
+    <span class="pagination__more">
+      ...
+    </span>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      47
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      48
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      49
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item pagination__item--active"
+    >
+      50
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      51
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      52
+    </a>
+  </li>
+  <li>
+    <span class="pagination__more">
+      ...
+    </span>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      100
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__navigation"
+    >
+      <i class="material-icons icon">
+        chevron_right
+      </i>
+    </a>
+  </li>
+</ul>
+
+`;
