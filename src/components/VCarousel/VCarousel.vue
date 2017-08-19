@@ -18,7 +18,7 @@
       return {
         inputValue: null,
         items: [],
-        slideInterval: {},
+        slideTimeout: null,
         reverse: false
       }
     },
@@ -62,19 +62,22 @@
           )
         )
 
-        !this.isBooted && this.cycle && this.restartInterval()
-        this.isBooted = true
-
         this.$emit('input', this.inputValue)
+        this.restartTimeout()
       },
       value () {
         this.init()
       },
       interval () {
-        this.cycle && this.restartInterval()
+        this.restartTimeout()
       },
       cycle (val) {
-        val && this.restartInterval() || clearInterval(this.slideInterval)
+        if (val) {
+          this.restartTimeout()
+        } else {
+          clearTimeout(this.slideTimeout)
+          this.slideTimeout = null
+        }
       }
     },
 
@@ -121,37 +124,30 @@
           }, [this.$createElement(VIcon, this.icon)])
         })
       },
-      restartInterval () {
-        clearInterval(this.slideInterval)
-        this.$nextTick(this.startInterval)
+      restartTimeout () {
+        this.slideTimeout && clearTimeout(this.slideTimeout)
+        this.slideTimeout = null
+
+        const raf = requestAnimationFrame || setTimeout
+        raf(this.startTimeout)
       },
       init () {
         this.inputValue = this.value || 0
       },
-      next (restartInterval = true) {
+      next () {
         this.reverse = false
         this.inputValue = (this.inputValue + 1) % this.items.length
-
-        if (restartInterval && this.cycle) {
-          this.restartInterval()
-        }
       },
       prev () {
         this.reverse = true
         this.inputValue = (this.inputValue + this.items.length - 1) % this.items.length
-        if (this.cycle) {
-          this.restartInterval()
-        }
       },
       select (index) {
         this.reverse = index < this.inputValue
         this.inputValue = index
-        if (this.cycle) {
-          this.restartInterval()
-        }
       },
-      startInterval () {
-        this.slideInterval = setInterval(() => this.next(false), this.interval > 0 ? this.interval : 6000)
+      startTimeout () {
+        this.slideTimeout = setTimeout(() => this.next(), this.interval > 0 ? this.interval : 6000)
       }
     },
 
