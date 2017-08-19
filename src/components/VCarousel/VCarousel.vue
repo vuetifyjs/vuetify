@@ -124,20 +124,30 @@
       init () {
         this.inputValue = this.value || 0
       },
-      next () {
+      next (restartInterval = true) {
         this.reverse = false
         this.inputValue = (this.inputValue + 1) % this.items.length
+
+        if (restartInterval && this.cycle) {
+          this.restartInterval()
+        }
       },
       prev () {
         this.reverse = true
         this.inputValue = (this.inputValue + this.items.length - 1) % this.items.length
+        if (this.cycle) {
+          this.restartInterval()
+        }
       },
       select (index) {
         this.reverse = index < this.inputValue
         this.inputValue = index
+        if (this.cycle) {
+          this.restartInterval()
+        }
       },
       startInterval () {
-        this.slideInterval = setInterval(this.next, this.interval)
+        this.slideInterval = setInterval(() => this.next(false), this.interval)
       }
     },
 
