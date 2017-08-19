@@ -4,12 +4,7 @@
 /* Theme */
 slider($material)
   label
-    transform: none
-    flex-basis: 56px
     color: $material.text.secondary
-    display: flex
-    font-size: 18px
-    align-items: center
 
   .slider__track, .slider__track-fill
     background: $material.slider.inactive
@@ -62,6 +57,12 @@ theme(slider, "slider")
 
 
   label
+    transform: none
+    flex-basis: 56px
+    display: flex
+    font-size: 18px
+    align-items: center
+
     + .input-group__input
       margin-left: 16px
       flex: 1 1 auto
