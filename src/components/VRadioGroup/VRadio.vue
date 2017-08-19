@@ -95,7 +95,7 @@
           on: {
             click: this.click
           }
-        }, this.label)
+        }, this.$slots.label || this.label)
       },
       click () {
         const mandatory = this.isMandatory &&

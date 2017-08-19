@@ -250,7 +250,7 @@
 
         if (this.id) data.attrs = { for: this.id }
 
-        return this.$createElement('label', data, this.label)
+        return this.$createElement('label', data, this.$slots.label || this.label)
       },
       getPropertyFromItem (item, field) {
         if (item !== Object(item)) return item
