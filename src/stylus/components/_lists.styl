@@ -137,6 +137,12 @@ theme(list, "list")
 
     &--avatar
       height: $list-item-avatar-single-height
+      
+      .avatar
+        img,
+        .icon
+          height: 40px
+          width: 40px
 
   &--dense
     padding-top: $list-item-dense-top-padding
@@ -152,11 +158,6 @@ theme(list, "list")
 
       &--avatar
         height: $list-item-dense-avatar-single-height
-
-        .avatar
-          .icon, img
-            height: $list-item-dense-avatar-height
-            width: $list-item-dense-avatar-height
 
       &:not(.list__tile--avatar)
         height: $list-item-dense-single-height
@@ -235,3 +236,9 @@ theme(list, "list")
 
   &--subheader
     padding-top: 0
+    
+  &.list--two-line,
+  &.list--three-line
+    .list__tile__avatar
+      align-items: flex-start
+      padding-top: 16px
