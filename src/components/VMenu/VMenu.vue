@@ -175,11 +175,8 @@
       disabled (val) {
         val && this.deactivate()
       },
-      hasJustFocused (val) {
-        if (!val) return
-
-        clearTimeout(this.focusedTimeout)
-        this.focusedTimeout = setTimeout(() => (this.hasJustFocused = false), 100)
+      isContentActive (val) {
+        this.hasJustFocused = val
       },
       isActive (val) {
         if (this.disabled) return
