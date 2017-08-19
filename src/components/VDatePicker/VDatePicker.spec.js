@@ -11,7 +11,7 @@ test('VDatePicker.js', ({ mount }) => {
 
     const title = wrapper.find('.picker--date__title-date div')[0]
     const header = wrapper.find('.picker--date__header-selector-date strong')[0]
-    
+
     expect(title.text()).toBe('Tue, Nov 1')
     expect(header.text()).toBe('November 2005')
   })
