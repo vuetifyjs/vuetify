@@ -323,6 +323,7 @@
           }
         }],
         on: {
+          ...this.$listeners,
           focus: !this.autocomplete ? this.focus : this.onAutocompleteFocus,
           blur: !this.autocomplete ? this.blur : () => {},
           click: () => {
