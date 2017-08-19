@@ -137,4 +137,5 @@
   }
 </script>
 
-<style lang="stylus" src="../../stylus/components/_radio.styl"></style>
+<style lang="stylus" src="../../stylus/components/_input-groups.styl"></style>
+<style lang="stylus" src="../../stylus/components/_selection-controls.styl"></style>

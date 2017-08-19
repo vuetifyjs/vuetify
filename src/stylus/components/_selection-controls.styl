@@ -1,4 +1,35 @@
 @import '../bootstrap'
+@import '../theme'
+
+/** Theme */
+selection-control($material)
+  label
+    color: $material.text.primary
+
+  color: $material.selection-controls.active
+
+  .icon, &:not(.input-group--active) .input-group__input
+    color: $material.text.secondary
+
+  &.input-group--active
+    .icon
+      color: inherit
+
+  &.input-group--disabled
+    .input-group__input
+      color: $material.text.disabled
+
+      .icon
+        color: inherit
+
+theme(selection-control, "input-group--selection-controls")
+
+.input-group--selection-controls
+  &.input-group--tab-focused
+    .input-group--selection-controls__ripple
+      &:before
+        transform: translate3d(-50%, -50%, 0) scale(1)
+        opacity: $ripple-animation-visible-opacity
 
 /** Input */
 .input-group.input-group--selection-controls
@@ -22,6 +53,7 @@
     // Needed for safari
     .icon
       align-self: center
+      color: inherit
       height: 30px
       margin: auto
 
