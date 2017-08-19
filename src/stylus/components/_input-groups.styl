@@ -172,15 +172,12 @@ theme(input-group, "input-group")
 
     label,
     .input-group__input .icon
-      color: $theme.error
+      color: $theme.error !important
 
     .input-group__details
       &:after,
       &:before
         background-color: $theme.error
-
-    > label
-      animation: shake .6s $transition.swing
 
 /** Details */
 .input-group
