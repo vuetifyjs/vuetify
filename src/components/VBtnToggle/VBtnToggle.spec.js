@@ -92,7 +92,7 @@ test('VBtnToggle.vue', () => {
 
     wrapper.instance().updateValue(1)
 
-    expect(change).toBeCalledWith([1])
+    expect(change).not.toBeCalled()
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -118,6 +118,54 @@ test('VBtnToggle.vue', () => {
     wrapper.instance().updateValue(2)
 
     expect(change).toBeCalledWith([1, 2])
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should use button value attribute if available', () => {
+    const wrapper = mount(VBtnToggle, {
+      propsData: {
+        inputValue: 'center'
+      },
+      slots: {
+        default: [
+          createBtn('left'),
+          createBtn('center'),
+          createBtn('right')
+        ]
+      }
+    })
+
+    const change = jest.fn()
+    wrapper.instance().$on('change', change)
+
+    wrapper.instance().updateValue(2)
+
+    expect(change).toBeCalledWith('right')
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should allow deselecting a value when mandatory prop is used with multiple prop', () => {
+    const wrapper = mount(VBtnToggle, {
+      propsData: {
+        inputValue: [1, 2],
+        mandatory: true,
+        multiple: true
+      },
+      slots: {
+        default: [
+          createBtn(),
+          createBtn(),
+          createBtn()
+        ]
+      }
+    })
+
+    const change = jest.fn()
+    wrapper.instance().$on('change', change)
+
+    wrapper.instance().updateValue(2)
+
+    expect(change).toBeCalledWith([1])
     expect(wrapper.html()).toMatchSnapshot()
   })
 })

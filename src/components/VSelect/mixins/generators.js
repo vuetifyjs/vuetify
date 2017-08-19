@@ -14,7 +14,8 @@ export default {
           contentClass: this.computedContentClass,
           disabled: this.disabled,
           maxHeight: this.maxHeight,
-          nudgeTop: this.isDropdown ? 22 : offsetY ? 38 : 0,
+          nudgeTop: this.isDropdown ? 22 : offsetY ? -1 : 0,
+          nudgeWidth: 24,
           offsetY,
           value: this.isActive
         },
@@ -35,8 +36,12 @@ export default {
             ...this.$attrs,
             tabindex: -1
           },
-          domProps: { value: this.searchValue },
-          on: { input: e => (this.searchValue = e.target.value) },
+          domProps: { value: this.lazySearch },
+          on: {
+            blur: this.blur,
+            focus: this.focus,
+            input: e => (this.lazySearch = e.target.value)
+          },
           ref: 'input',
           key: 'input'
         })

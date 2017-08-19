@@ -1,6 +1,36 @@
 @import '../bootstrap'
 @import '../theme'
 
+/** Themes */
+date-picker($material)
+  .picker--time__clock
+    background: $grey.darken-2
+
+    &-hand:before
+      border-color: $theme.accent
+
+    &-hand, &:after
+      background: $theme.accent
+
+    > span
+      color: $material.text.primary
+
+      &.active
+        color: $material.text.primary
+
+        &:before
+          background: $theme.accent
+
+  .picker__title
+    div:first-child
+      span
+        color: $material.text.primary
+
+    div:last-child
+      color: $material.text.primary
+
+dark(date-picker, "picker--time")
+
 .picker--time
   .card__row--actions
     margin-top: -10px
@@ -167,34 +197,3 @@
 
 .picker--time .card__row--actions
   border: none
-
-/** Themes */
-
-date-picker($material)
-  .picker--time__clock
-    background: $grey.darken-2
-
-    &-hand:before
-      border-color: $theme.accent
-
-    &-hand, &:after
-      background: $theme.accent
-
-    > span
-      color: $material.text.primary
-
-      &.active
-        color: $material.text.primary
-
-        &:before
-          background: $theme.accent
-
-  .picker__title
-    div:first-child
-      span
-        color: $material.text.primary
-
-    div:last-child
-      color: $material.text.primary
-
-dark(date-picker, "picker--time")

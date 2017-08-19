@@ -73,7 +73,8 @@
         return this.lazyValue !== null &&
           typeof this.lazyValue !== 'undefined' &&
           this.lazyValue.toString().length > 0 ||
-          this.placeholder
+          this.placeholder ||
+          ['time', 'date', 'datetime-local', 'week', 'month'].includes(this.type)
       }
     },
 
@@ -100,7 +101,9 @@
         this.inputHeight = null
 
         this.$nextTick(() => {
-          const height = this.$refs.input.scrollHeight
+          const height = this.$refs.input
+            ? this.$refs.input.scrollHeight
+            : 0
           const minHeight = this.rows * 24
           const inputHeight = height < minHeight ? minHeight : height
           this.inputHeight = inputHeight

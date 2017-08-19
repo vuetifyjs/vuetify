@@ -1,6 +1,16 @@
 @import '../bootstrap'
 @import '../theme'
 
+/** Theme */
+expansion-panel($material)
+  > li
+    border: 1px solid rgba($material.fg-color, $material.divider-percent)
+
+  &__body
+    background-color: rgba($material.fg-color, 0.03)
+
+theme(expansion-panel, "expansion-panel")
+
 .expansion-panel
   text-align: left
   list-style-type: none
@@ -42,12 +52,3 @@
     .card
       border-radius: 0
       elevation(0)
-
-expansion-panel($material)
-  > li
-    border: 1px solid rgba($material.fg-color, $material.divider-percent)
-
-  &__body
-    background-color: rgba($material.fg-color, 0.03)
-
-theme(expansion-panel, "expansion-panel")

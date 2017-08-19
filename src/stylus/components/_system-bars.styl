@@ -1,6 +1,19 @@
 @import '../bootstrap'
 @import '../theme'
 
+/* Theme */
+system-bar($material)
+  background-color: $material.status-bar.regular
+  color: $material.text.secondary
+
+  .icon
+    color: $material.text.secondary
+
+  &--lights-out
+    background-color: $material.status-bar.lights-out !important
+
+theme(system-bar, "system-bar")
+
 .system-bar
   align-items: center
   display: flex
@@ -33,16 +46,3 @@
     + .navigation-drawer
       margin-top: 32px
       max-height: "calc(100vh - %s)" % 32px
-
-/* Theme */
-system-bar($material)
-  background-color: $material.status-bar.regular
-  color: $material.text.secondary
-
-  .icon
-    color: $material.text.secondary
-
-  &--lights-out
-    background-color: $material.status-bar.lights-out !important
-
-theme(system-bar, "system-bar")

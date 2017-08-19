@@ -1,6 +1,24 @@
 @import '../bootstrap'
 @import '../theme'
 
+/* Themes */
+list($material)
+  background: $material.cards
+
+  .list__tile:not(.list__tile--active)
+    color: $material.text.primary
+
+  .list__tile__sub-title
+    color: $material.text.secondary
+
+  .subheader
+    color: $material.text.secondary
+
+  .divider
+    background-color: $material.dividers
+
+theme(list, "list")
+
 .list
   list-style-type: none
   padding: $list-top-padding 0 $list-bottom-padding
@@ -104,10 +122,10 @@
       justify-content: center
       flex-direction: column
 
-      + .avatar
+      ~ .avatar
         justify-content: flex-end
 
-      + .list__tile__action:not(.list__tile__action--stack)
+      ~ .list__tile__action:not(.list__tile__action--stack)
         justify-content: flex-end
 
     &--active
@@ -217,21 +235,3 @@
 
   &--subheader
     padding-top: 0
-
-/* Themes */
-list($material)
-  background: $material.cards
-
-  .list__tile:not(.list__tile--active)
-    color: $material.text.primary
-
-  .list__tile__sub-title
-    color: $material.text.secondary
-
-  .subheader
-    color: $material.text.secondary
-
-  .divider
-    background-color: $material.dividers
-
-theme(list, "list")

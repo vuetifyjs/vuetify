@@ -5,6 +5,7 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 ### $50+
 - [Xavier Escoté](http://www.deister.net/)
 - [Steve Gehrman](https://cocoatech.com/)
+- [Cycloid](https://www.cycloid.io/)
 
 ### $20+
 - Tibor Nagy
@@ -27,3 +28,5 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Jay Blanchard
 - Ryan Mortier
 - Roger Vilaseca
+- Paul
+- Asif Mehedi

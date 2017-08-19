@@ -1,6 +1,13 @@
 @import '../bootstrap'
 @import '../theme'
 
+/* Theme */
+toolbar($material)
+  background-color: $material.app-bar
+  color: $material.text.primary
+
+theme(toolbar, "toolbar")
+
 .toolbar
   position: relative
   transition: .3s $transition.swing
@@ -34,10 +41,10 @@
       max-height: 100%
 
     > .btn:last-child, > .menu:first-child
-      margin-right: 10px
+      margin-right: 8px
 
     > .btn:first-child, > .menu:first-child
-      margin-left: 10px
+      margin-left: 8px
 
     > *:not(.btn):not(.toolbar__title):not(.menu):last-child
       margin-right: $grid-gutters.lg
@@ -176,13 +183,3 @@ toolbar-content(left)
 
     > *:last-child
       margin-right: left
-
-/* Theme */
-toolbar($material)
-  background-color: $material.app-bar
-  color: $material.text.primary
-
-  .btn
-    button($material)
-
-theme(toolbar, "toolbar")

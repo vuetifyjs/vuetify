@@ -9,7 +9,10 @@ export default {
       if (this.selectedIndex >= this.stopIndex) {
         scrollTop = this.$refs.content.scrollHeight
       } else if (this.selectedIndex > this.startIndex) {
-        scrollTop = (this.selectedIndex * 48) - 56
+        scrollTop = (
+          (this.selectedIndex * (this.defaultOffset * 6)) -
+          (this.defaultOffset * 7)
+        )
       }
 
       this.$refs.content.scrollTop = scrollTop
@@ -17,7 +20,8 @@ export default {
     calcLeftAuto () {
       const a = this.dimensions.activator
 
-      return parseInt(a.left - 16)
+      // Off by 1 px here as well, (┛ಠ_ಠ)┛彡┻━┻
+      return parseInt(a.left - this.defaultOffset * 2) + 1
     },
     calcTopAuto () {
       if (!this.hasActivator) return this.calcTop(true)
@@ -34,7 +38,7 @@ export default {
       this.selectedIndex = selectedIndex
       let actingIndex = selectedIndex
 
-      let offsetPadding = 1
+      let offsetPadding = -(this.defaultOffset * 2)
       // #708 Stop index should vary by tile length
       this.stopIndex = this.tiles.length > 4
         ? this.tiles.length - 4
@@ -42,13 +46,20 @@ export default {
 
       if (selectedIndex > this.startIndex && selectedIndex < this.stopIndex) {
         actingIndex = 2
-        offsetPadding = 41
+        offsetPadding = (this.defaultOffset * 3)
       } else if (selectedIndex >= this.stopIndex) {
-        offsetPadding = 9
+        offsetPadding = -(this.defaultOffset)
         actingIndex = selectedIndex - this.stopIndex
       }
 
-      return this.calcTop(true) + offsetPadding - (actingIndex * 48)
+      // Is always off by 1 pixel, send help
+      offsetPadding--
+
+      return (
+        this.calcTop(true) +
+        offsetPadding -
+        (actingIndex * (this.defaultOffset * 6))
+      )
     },
     calcLeft () {
       if (this.auto) return this.calcLeftAuto()
@@ -61,7 +72,7 @@ export default {
       if (this.nudgeLeft) left += this.nudgeLeft
       if (this.nudgeRight) left -= this.nudgeRight
 
-      return this.calcXOverflow(left)
+      return left
     },
     calcTop (force) {
       if (this.auto && !force) return this.calcTopAuto()
@@ -77,7 +88,7 @@ export default {
       const defined = typeof window !== 'undefined'
       const pageYOffset = defined ? window.pageYOffset : 0
 
-      return this.calcYOverflow(top) + pageYOffset
+      return top + pageYOffset
     },
     calcXOverflow (left) {
       const hasWindow = typeof window !== 'undefined'
@@ -101,16 +112,14 @@ export default {
       return left
     },
     calcYOverflow (top) {
-      const totalHeight = top + this.dimensions.content.height
+      const contentHeight = this.dimensions.content.height
+      const totalHeight = top + contentHeight
       const defined = typeof window !== 'undefined'
       const innerHeight = defined ? window.innerHeight : 0
 
       if (this.top && top < 0) top = 12
       else if ((!this.top || this.bottom) && innerHeight < totalHeight) {
-        top = (
-          innerHeight -
-          this.dimensions.content.height
-        )
+        top = innerHeight - contentHeight
       }
 
       return top < 12 ? 12 : top
