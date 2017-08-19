@@ -73,7 +73,8 @@
         return this.lazyValue !== null &&
           typeof this.lazyValue !== 'undefined' &&
           this.lazyValue.toString().length > 0 ||
-          this.placeholder
+          this.placeholder ||
+          ['time', 'date'].includes(this.type)
       }
     },
 
