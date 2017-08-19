@@ -34,8 +34,9 @@
         default: 'fiber_manual_record'
       },
       interval: {
-        type: Number,
-        default: 6000
+        type: [Number, String],
+        default: 6000,
+        validator: value => value > 0
       },
       leftControlIcon: {
         type: [Boolean, String],
@@ -68,6 +69,9 @@
       },
       value () {
         this.init()
+      },
+      interval () {
+        this.cycle && this.restartInterval()
       },
       cycle (val) {
         val && this.restartInterval() || clearInterval(this.slideInterval)
@@ -147,7 +151,7 @@
         }
       },
       startInterval () {
-        this.slideInterval = setInterval(() => this.next(false), this.interval)
+        this.slideInterval = setInterval(() => this.next(false), this.interval > 0 ? this.interval : 6000)
       }
     },
 
