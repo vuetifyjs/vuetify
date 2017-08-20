@@ -112,9 +112,6 @@ export default {
       return left
     },
     calcYOverflow (top) {
-      const contentHeight = this.dimensions.content.height
-      const defined = typeof window !== 'undefined'
-
       if (this.top && top < 0) top = 12
 
       return top < 12 ? 12 : top
