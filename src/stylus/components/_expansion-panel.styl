@@ -3,48 +3,53 @@
 
 /** Theme */
 expansion-panel($material)
-  > li
-    border: 1px solid rgba($material.fg-color, $material.divider-percent)
+  .expansion-panel__container
+    border-top: 1px solid rgba($material.fg-color, $material.divider-percent)
+    background-color: $material.cards
+    color: $material.text.primary
+    
+  .icon
+    color: $material.icons.active
 
-  &__body
-    background-color: rgba($material.fg-color, 0.03)
+  &--focusable
+    .expansion-panel__container
+      &:focus
+        background-color: $material.expansion-panels.focus
 
 theme(expansion-panel, "expansion-panel")
 
 .expansion-panel
-  text-align: left
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
   list-style-type: none
   padding: 0
+  text-align: left
   width: 100%
   elevation(2)
 
-  > li:not(:first-child)
-    border-top: none !important
+  &__container
+    flex: 1 0 100%
+    outline: none
+    transition: .3s $transition.swing
+
+    &:first-child
+      border-top: none !important
+
+    &--active
+      .header__icon .icon
+        transform: rotate(-180deg)
 
   &__header
     display: flex
     cursor: pointer
     align-items: center
-    height: $expansion-panel-collapse-height
+    min-height: $expansion-panel-collapse-height
     position: relative
-    padding-left: 1rem
-
-    i
-      margin-right: 1rem
-
-    &:after
-      content: '\E313'
-      font-family: 'Material Icons'
-      font-size: 1.5rem
-      position: absolute
-      right: 15px
-      top: calc(50% - 16px)
-      color: inherit
-      transition: transform 0.3s cubic-bezier(0, 0, .2, 1)
-
-    &--active
-      &:after
-        transform: rotate(-180deg)
+    padding: 0 24px
+    
+    > *:not(.header__icon)
+      flex: 1 1 auto
 
   &__body
     transition: $primary-transition
@@ -52,3 +57,19 @@ theme(expansion-panel, "expansion-panel")
     .card
       border-radius: 0
       elevation(0)
+      
+  &--popout
+    elevation(0)
+    
+    &:not(.expansion-panel--inset)
+      .expansion-panel__container--active
+        flex-basis: 105%
+    
+    &.expansion-panel--inset
+      .expansion-panel__container--active
+        flex-basis: 95%
+        
+
+    .expansion-panel__container--active
+      margin: $spacers.three.x
+      elevation(3)

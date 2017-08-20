@@ -2,6 +2,8 @@ import { VExpandTransition } from '../transitions'
 
 import Toggleable from '../../mixins/toggleable'
 
+import VIcon from '../VIcon'
+
 import Ripple from '../../directives/ripple'
 import ClickOutside from '../../directives/click-outside'
 
@@ -10,12 +12,16 @@ export default {
 
   mixins: [Toggleable],
 
+  components: {
+    VIcon
+  },
+
   directives: {
     Ripple,
     ClickOutside
   },
 
-  inject: ['expand'],
+  inject: ['panelClick'],
 
   data () {
     return {
@@ -27,46 +33,9 @@ export default {
     ripple: Boolean
   },
 
-  computed: {
-    classes () {
-      return {
-        'expansion-panel__header': true,
-        'expansion-panel__header--active': this.isActive
-      }
-    }
-  },
-
   methods: {
-    closeConditional (e) {
-      return this.$parent.$el.contains(e.target) &&
-        !this.expand() &&
-        !this.$el.contains(e.target)
-    },
-    toggle () {
-      this.isActive = !this.isActive
-    },
-    genHeader (h) {
-      return h('div', {
-        class: this.classes,
-        directives: [
-          {
-            name: 'click-outside',
-            value: this.closeConditional
-          },
-          {
-            name: 'ripple',
-            value: this.ripple
-          }
-        ],
-        on: {
-          click: () => {
-            this.isActive = !this.isActive
-          }
-        }
-      }, [this.$slots.header])
-    },
-    genBody (h) {
-      return h('div', {
+    genBody () {
+      return this.$createElement('div', {
         ref: 'body',
         class: 'expansion-panel__body',
         directives: [
@@ -75,16 +44,55 @@ export default {
             value: this.isActive
           }
         ]
-      }, [this.$slots.default])
+      }, this.$slots.default)
+    },
+    genHeader () {
+      return this.$createElement('div', {
+        staticClass: 'expansion-panel__header',
+        directives: [{
+          name: 'ripple',
+          value: this.ripple
+        }],
+        on: {
+          click: () => this.panelClick(this._uid)
+        }
+      }, [
+        this.$slots.header,
+        this.genIcon()
+      ])
+    },
+    genIcon (h) {
+      const icon = this.$slots.actions ||
+        this.$createElement('v-icon', 'keyboard_arrow_down')
+
+      return this.$createElement('div', {
+        staticClass: 'header__icon'
+      }, [icon])
+    },
+    toggle (uid) {
+      this.isActive = this._uid === uid && !this.isActive
     }
   },
 
   render (h) {
     const children = []
 
-    this.$slots.header && children.push(this.genHeader(h))
-    children.push(h(VExpandTransition, [this.genBody(h)]))
+    this.$slots.header && children.push(this.genHeader())
+    children.push(h(VExpandTransition, [this.genBody()]))
 
-    return h('li', children)
+    return h('li', {
+      staticClass: 'expansion-panel__container',
+      'class': {
+        'expansion-panel__container--active': this.isActive
+      },
+      attrs: {
+        tabindex: 0
+      },
+      on: {
+        keydown: e => {
+          if (e.keyCode === 13) this.panelClick(this._uid)
+        }
+      }
+    }, children)
   }
 }
