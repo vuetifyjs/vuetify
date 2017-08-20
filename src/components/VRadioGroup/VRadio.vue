@@ -106,8 +106,8 @@
           this.isMandatory() || false
 
         if (!this.disabled && (!this.isActive || !mandatory)) {
-          this.$refs.input.checked = !this.$refs.input.checked
-          this.isActive = !this.isActive
+          this.$refs.input.checked = true
+          this.isActive = true
           this.$emit('change', this.value)
         }
       }
