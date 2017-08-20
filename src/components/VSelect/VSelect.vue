@@ -235,7 +235,7 @@
       },
       genLabel () {
         if (this.searchValue && !this.focused && this.isDirty) return null
-        if (this.focused && !this.isDirty) return null
+        if (this.focused && !this.isDirty && this.editable) return null
 
         const data = {}
 
