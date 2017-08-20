@@ -2,15 +2,10 @@ export default {
   props: {
     filter: {
       type: Function,
-      default: () => (item, query, itemText) => (
+      default: (item, query, itemText) => (
         typeof itemText === 'string' &&
           itemText.toLowerCase().indexOf(query.toLowerCase()) > -1
       )
-    }
-  },
-  data () {
-    return {
-      searchValue: null
     }
   },
 
