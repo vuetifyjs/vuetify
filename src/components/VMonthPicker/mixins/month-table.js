@@ -11,7 +11,7 @@ export default {
       this.tableDate = new Date(year, 0)
     },
     touch (value) {
-      this.tableDate = new Date(this.tableYear, 0)
+      this.tableDate = new Date(this.tableYear + value, 0)
     },
     genTable () {
       const children = []
