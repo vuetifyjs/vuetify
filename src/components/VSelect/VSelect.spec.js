@@ -85,4 +85,48 @@ test('VSelect.js', ({ mount, shallow }) => {
     expect(wrapper.vm.filteredItems[0]).toBe('foo')
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
+
+  const down = document.createEvent('HTMLEvents')
+  down.initEvent('keydown', true, true)
+  down.keyCode = 40
+
+  const up = new Event('keydown')
+  up.initEvent('keydown', true, true)
+  up.keyCode = 38
+
+  it('should handle keydown up/down arrow', () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        value: null,
+        items: [0, 1, 2]
+      }
+    })
+
+    const change = jest.fn()
+    wrapper.instance().$on('change', change)
+
+    wrapper.instance().$el.dispatchEvent(up)
+    expect(change).not.toHaveBeenCalled()
+    wrapper.instance().$el.dispatchEvent(down)
+    expect(change).toHaveBeenLastCalledWith(0)
+    wrapper.instance().$el.dispatchEvent(down)
+    expect(change).toHaveBeenLastCalledWith(1)
+    wrapper.instance().$el.dispatchEvent(down)
+    expect(change).toHaveBeenLastCalledWith(2)
+
+    change.mockReset()
+    wrapper.instance().$el.dispatchEvent(down)
+    expect(change).not.toHaveBeenCalled()
+    wrapper.instance().$el.dispatchEvent(up)
+    expect(change).toHaveBeenLastCalledWith(1)
+    wrapper.instance().$el.dispatchEvent(up)
+    expect(change).toHaveBeenLastCalledWith(0)
+
+    change.mockReset()
+    wrapper.instance().$el.dispatchEvent(up)
+    expect(change).not.toHaveBeenCalled()
+
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 })
