@@ -311,6 +311,9 @@
     },
 
     render (h) {
+      const listeners = Object.assign({}, this.$listeners)
+      delete listeners.input
+
       return this.genInputGroup([
         this.genSelectionsAndSearch(),
         this.genMenu()
@@ -326,7 +329,7 @@
           }
         }],
         on: {
-          ...this.$listeners,
+          ...listeners,
           focus: !this.autocomplete ? this.focus : this.onAutocompleteFocus,
           blur: !this.autocomplete ? this.blur : () => {},
           click: () => {
