@@ -28,6 +28,10 @@ export default {
     tabindex: {
       default: 0
     },
+    toggleKeys: {
+      type: Array,
+      default: () => [13, 32]
+    },
     value: {
       required: false
     }
@@ -152,7 +156,7 @@ export default {
           keydown: e => {
             if (!this.toggle) return
 
-            if ([13, 32].includes(e.keyCode)) {
+            if (this.toggleKeys.includes(e.keyCode)) {
               e.preventDefault()
               this.toggle()
             }
