@@ -1,12 +1,17 @@
 <script>
+  import Breakpoint from '../../util/breakpoint'
   import Themeable from '../../mixins/themeable'
+
+  import Resize from '../../directives/resize'
 
   export default {
     name: 'v-app',
 
-    functional: true,
+    mixins: [Breakpoint, Themeable],
 
-    mixins: [Themeable],
+    directives: {
+      Resize
+    },
 
     props: {
       fixedFooter: Boolean,
@@ -18,19 +23,25 @@
       toolbar: Boolean
     },
 
-    render (h, { props, data, children }) {
+    render (h) {
+      const data = {
+        staticClass: 'application',
+        'class': {
+          'application--dark': this.dark,
+          'application--light': !this.dark,
+          'application--footer': this.footer || this.fixedFooter,
+          'application--footer-fixed': this.fixedFooter,
+          'application--toolbar': this.toolbar
+        },
+        attrs: { 'data-app': true },
+        domProps: { id: this.id },
+        directives: [{
+          name: 'resize',
+          value: this.onResize
+        }]
+      }
 
-      data.staticClass = (`application ${data.staticClass || ''}`).trim()
-      data.staticClass += ` application--${props.dark ? 'dark' : 'light'}`
-
-      props.footer && (data.staticClass += ' application--footer')
-      props.fixedFooter && (data.staticClass += ' application--footer-fixed')
-      props.toolbar && (data.staticClass += ' application--toolbar')
-
-      data.attrs = { 'data-app': true }
-      data.domProps = { id: props.id }
-
-      return h('div', data, children)
+      return h('div', data, this.$slots.default)
     }
   }
 </script>
