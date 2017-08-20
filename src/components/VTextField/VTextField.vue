@@ -17,6 +17,7 @@
     props: {
       autofocus: Boolean,
       autoGrow: Boolean,
+      box: Boolean,
       counter: [Number, String],
       fullWidth: Boolean,
       multiLine: Boolean,
@@ -39,6 +40,7 @@
       classes () {
         return {
           'input-group--text-field': true,
+          'input-group--text-field-box': this.box,
           'input-group--single-line': this.singleLine,
           'input-group--solo': this.solo,
           'input-group--multi-line': this.multiLine,

@@ -180,7 +180,15 @@ export default {
 
       children.push(
         this.$createElement('div', {
-          'class': 'input-group__input'
+          'class': 'input-group__input',
+          on: {
+            click: () => {
+              // Proprietary for v-text-field with box prop
+              if (!this.box) return
+
+              this.focus()
+            }
+          }
         }, wrapperChildren)
       )
       detailsChildren.push(this.genMessages())
