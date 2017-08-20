@@ -202,5 +202,13 @@ theme(date-picker, "picker--date")
 .picker--date.picker--month
   table
     width: 100%
-    th, td
+    td
       width: 33.333333%
+      height: 56px
+      vertical-align: middle
+      .btn
+        height: 40px
+      .btn.btn--active
+        background-color: $theme.primary
+        &:hover
+          background-color: $theme.primary !important

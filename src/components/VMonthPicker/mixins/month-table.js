@@ -55,10 +55,12 @@ export default {
           rows.push(this.$createElement('td', [
             this.$createElement('button', {
               'class': {
-                'btn btn--small btn--flat': true,
+                'btn': true,
+                'btn--raised': this.isActive(i),
+                'btn--flat': !this.isActive(i),
                 'btn--active': this.isActive(i),
                 'btn--current': this.isCurrent(i),
-                'btn--light': this.dark,
+                'btn--light': !this.dark,
                 'btn--disabled': !this.isAllowed(date)
               },
               attrs: {
