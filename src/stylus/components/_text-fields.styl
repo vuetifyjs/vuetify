@@ -2,8 +2,9 @@
 @import '../theme'
 
 textfield($material)
-  .input-group__input
-    background: $material.buttons.focused-alt
+  &.input-group--text-field-box
+    .input-group__input
+      background: $material.buttons.focused-alt
     
 theme(textfield, "input-group--text-field")
 
