@@ -159,7 +159,8 @@
           minWidth: `${this.calculatedMinWidth}px`,
           maxWidth: `${parseInt(this.maxWidth)}px`,
           top: `${this.calcYOverflow(this.calcTop())}px`,
-          left: `${this.calcXOverflow(this.calcLeft())}px`
+          left: `${this.calcXOverflow(this.calcLeft())}px`,
+          transformOrigin: this.origin
         }
       },
       hasActivator () {
