@@ -196,7 +196,8 @@
       },
       searchValue (val) {
         if (val && !this.isActive) this.isActive = true
-        this.$refs.menu.listIndex = -1
+        
+        this.$nextTick(() => (this.$refs.menu.listIndex = -1))
       }
     },
 
@@ -299,12 +300,12 @@
 
         if ((this.autocomplete && this.multiple) || this.editable) {
           this.$nextTick(() => {
-            this.searchValue = null
             this.$refs.input &&
               this.$refs.input.focus()
           })
         }
 
+        this.searchValue = null
         this.$emit('change', this.inputValue)
       }
     },
@@ -314,6 +315,9 @@
         this.genSelectionsAndSearch(),
         this.genMenu()
       ], {
+        attrs: {
+          tabindex: this.autocomplete ? -1 : 0
+        },
         directives: [{
           name: 'click-outside',
           value: () => {

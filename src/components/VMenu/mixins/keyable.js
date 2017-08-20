@@ -28,7 +28,6 @@ export default {
       [40, 38, 13].includes(e.keyCode) && e.preventDefault()
       e.keyCode === 32 && !this.isActive && e.preventDefault()
 
-      if (this.listIndex === -1) this.setActiveListIndex()
       if ([27, 9].includes(e.keyCode)) return this.isActive = false
       else if (!this.isActive && [13, 32].includes(e.keyCode)) {
         return this.isActive = true
@@ -41,6 +40,8 @@ export default {
       } else if (e.keyCode === 13 && this.listIndex !== -1) {
         this.tiles[this.listIndex].click()
       }
+
+      if (this.listIndex === -1) this.setActiveListIndex()
     },
     getTiles () {
       this.tiles = this.$refs.content.querySelectorAll('.list__tile')

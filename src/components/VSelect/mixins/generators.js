@@ -14,7 +14,7 @@ export default {
           contentClass: this.computedContentClass,
           disabled: this.disabled,
           maxHeight: this.maxHeight,
-          nudgeTop: this.isDropdown ? 22 : offsetY ? -1 : 0,
+          nudgeTop: this.isDropdown ? 22 : offsetY ? -2 : 0,
           nudgeWidth: 24,
           offsetY,
           value: this.isActive
@@ -34,7 +34,7 @@ export default {
           'class': 'input-group--select__autocomplete',
           attrs: {
             ...this.$attrs,
-            tabindex: -1
+            tabindex: 0
           },
           domProps: { value: this.lazySearch },
           on: {
