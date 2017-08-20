@@ -10,7 +10,8 @@
 
     data () {
       return {
-        inputHeight: null
+        inputHeight: null,
+        badInput: false
       }
     },
 
@@ -76,6 +77,7 @@
           typeof this.lazyValue !== 'undefined' &&
           this.lazyValue.toString().length > 0 ||
           this.placeholder ||
+          this.badInput ||
           ['time', 'date', 'datetime-local', 'week', 'month'].includes(this.type)
       }
     },
@@ -113,6 +115,7 @@
       },
       onInput (e) {
         this.inputValue = e.target.value
+        this.badInput = e.target.validity && e.target.validity.badInput
         this.multiLine && this.autoGrow && this.calculateInputHeight()
       },
       blur (e) {
