@@ -30,6 +30,7 @@ export default {
   },
 
   props: {
+    hideActions: Boolean,
     ripple: Boolean
   },
 
@@ -62,6 +63,8 @@ export default {
       ])
     },
     genIcon (h) {
+      if (this.hideActions) return null
+
       const icon = this.$slots.actions ||
         this.$createElement('v-icon', 'keyboard_arrow_down')
 
