@@ -67,8 +67,6 @@
           return
         }
 
-        value = value === this.inputValue ? null : value
-
         this.shouldValidate = true
         this.$emit('change', value)
         this.$nextTick(() => this.validate())
