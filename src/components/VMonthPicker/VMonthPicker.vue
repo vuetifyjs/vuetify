@@ -12,7 +12,7 @@
 
   import Touch from '../../directives/touch'
 
-  const defaultDateFormat = val => new Date(val).toISOString().substr(0, 10)
+  const defaultDateFormat = val => new Date(val).toISOString().substr(0, 7)
 
   export default {
     name: 'v-month-picker',
