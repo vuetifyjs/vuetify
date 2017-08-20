@@ -329,7 +329,21 @@
           click: () => {
             if (!this.isActive) this.isActive = true
           },
-          keydown: this.onKeyDown // Located in mixins/autocomplete.js
+          keydown: (e) => {
+            if (!this.isActive &&
+                !this.multiple &&
+                !this.autocomplete &&
+                [38, 40].includes(e.keyCode)) {
+              const i = this.items.findIndex((i) => {
+                return this.getValue(i) === this.getValue(this.inputValue)
+              }) + e.keyCode - 39
+              if (i >= 0 && i < this.items.length) {
+                this.$emit('change', this.inputValue = this.items[i])
+              }
+            } else {
+              this.onKeyDown(e) // Located in mixins/autocomplete.js
+            }
+          }
         }
       })
     }
