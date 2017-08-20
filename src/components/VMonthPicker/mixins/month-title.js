@@ -16,12 +16,7 @@ export default {
       // Workaround for #1409
       date.setHours(1)
 
-      date = date.toLocaleString(this.locale, this.titleDateFormat)
-
-      if (this.landscape) {
-        if (date.indexOf(',') > -1) date = date.replace(',', ',<br>')
-        else if (date.indexOf(' ') > -1) date = date.replace(' ', '<br>')
-      }
+      date = date.toLocaleString(this.locale, { month: 'long' }).trim()
 
       const text = this.$createElement('transition', {
         props: {
@@ -30,7 +25,7 @@ export default {
         }
       }, [
         this.$createElement('div', {
-          domProps: { innerHTML: date },
+          domProps: { innerText: date },
           key: date
         })
       ])
