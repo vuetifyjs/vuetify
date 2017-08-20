@@ -1,13 +1,17 @@
 @import '../bootstrap'
 
 .avatar
-  display: flex
+  display: inline-flex
   justify-content: center
   align-items: center
   text-align: center
+  vertical-align: middle
 
   img,
   .icon
-    height: 40px
-    width: 40px
     border-radius: 50%
+    height: inherit
+    width: inherit
+    
+  &--tile
+    border-radius: 0

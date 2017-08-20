@@ -1,4 +1,22 @@
 @import '../bootstrap'
+@import '../theme'
+
+pagination($material)
+  &__item
+    background: $material.cards
+    color: $material.fg-color
+
+    &--active
+      color: $material.text.theme
+      background: $theme.primary
+
+  &__navigation
+    background: $material.cards
+
+    .icon
+      color: rgba($material.fg-color, $material.active-icon-percent)
+
+theme(pagination, "pagination")
 
 .pagination
   align-items: center
@@ -35,7 +53,6 @@
   &__item
     elevation(2)
     border-radius: 4px
-    color: $color-theme
     display: inline-flex
     justify-content: center
     align-items: center
@@ -47,8 +64,6 @@
 
     &--active
       elevation(4)
-      background: $theme.primary
-      color: $material-dark.text.primary
 
   &__navigation
     elevation(2)
@@ -56,18 +71,16 @@
     justify-content: center
     align-items: center
     text-decoration: none
-    color: $color-theme
     height: 2rem
 
     border-radius: 4px
     width: 2rem
-    margin: .3rem 15px
+    margin: .3rem 10px
 
     .icon
       font-size: 2rem
       transition: $secondary-transition
       vertical-align: middle
-      color: rgba($material-theme.fg-color, $material-theme.active-icon-percent)
 
     &--disabled
       opacity: .6

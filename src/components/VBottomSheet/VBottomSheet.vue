@@ -19,7 +19,7 @@
         attrs: {
           ...this.$attrs
         },
-        listeners: {
+        on: {
           ...this.$listeners
         },
         props: {

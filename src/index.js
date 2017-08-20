@@ -13,7 +13,8 @@ const Vuetify = Vue => {
   Vue.use(Directives)
 
   Vue.prototype.$vuetify = {
-    load: Load
+    load: Load,
+    breakpoint: {}
   }
 }
 

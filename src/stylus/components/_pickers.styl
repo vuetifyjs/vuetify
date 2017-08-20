@@ -1,6 +1,22 @@
 @import '../bootstrap'
 @import '../theme'
 
+/* Themes */
+
+picker($material)
+  color: $material.text.primary
+
+  .btn
+    color: $material.text.primary
+
+  .picker__body
+    background: $material.cards
+
+  .picker__title
+    background: $grey.darken-2
+
+dark(picker, "picker")
+
 .picker
   border-radius: $card-border-radius
   display: flex
@@ -49,19 +65,3 @@
     .card__row--actions
       margin-left: 170px
       width: 330px
-
-/* Themes */
-
-picker($material)
-  color: $material.text.primary
-
-  .btn
-    color: $material.text.primary
-
-  .picker__body
-    background: $material.cards
-
-  .picker__title
-    background: $grey.darken-2
-
-dark(picker, "picker")

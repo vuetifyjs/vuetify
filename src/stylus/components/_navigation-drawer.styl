@@ -1,6 +1,41 @@
 @import '../bootstrap'
 @import '../theme'
 
+navigation-drawer($material)
+  background-color: $material.cards
+
+  &__border
+    background-color: $material.dividers
+
+  &.navigation-drawer--right
+    &:after
+      left: 0
+      right: initial
+
+  a:not(.list__tile--active),
+  .subheader,
+  .list
+    color: $material.text.primary
+
+  .divider
+    background-color: $material.dividers
+
+  .list
+    background: $material.cards
+
+    &__tile:not(.list__tile--active)
+      color: $material.text.primary
+
+    &__tile__sub-title
+      color: $material.text.secondary
+
+  .list--group__header--active
+    .list__tile, + .list--group
+      &:after
+        background: $material.dividers
+
+theme(navigation-drawer, "navigation-drawer")
+
 .navigation-drawer
   max-width: 100%
   overflow-y: auto
@@ -169,38 +204,3 @@
   > .list:not(.list--dense)
     .list__tile
       font-size: $navigation-drawer-item-font-size
-
-navigation-drawer($material)
-  background-color: $material.cards
-
-  &__border
-    background-color: $material.dividers
-
-  &.navigation-drawer--right
-    &:after
-      left: 0
-      right: initial
-
-  a:not(.list__tile--active),
-  .subheader,
-  .list
-    color: $material.text.primary
-
-  .divider
-    background-color: $material.dividers
-
-  .list
-    background: $material.cards
-
-    &__tile:not(.list__tile--active)
-      color: $material.text.primary
-
-    &__tile__sub-title
-      color: $material.text.secondary
-
-  .list--group__header--active
-    .list__tile, + .list--group
-      &:after
-        background: $material.dividers
-
-theme(navigation-drawer, "navigation-drawer")
