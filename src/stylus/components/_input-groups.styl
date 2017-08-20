@@ -117,10 +117,11 @@ theme(input-group, "input-group")
   &__icon-cb
     cursor: pointer
 
-// .input-group
-//   &.input-group--focused
-//     .input-group__input .icon
-//       color: $theme.primary
+.input-group
+  &.input-group--focused
+    .input-group__append-icon,
+    .input-group__prepend-icon
+      color: $theme.primary
 
 /** States */
 .input-group
