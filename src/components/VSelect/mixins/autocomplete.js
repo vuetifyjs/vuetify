@@ -2,10 +2,13 @@ export default {
   props: {
     filter: {
       type: Function,
-      default: (item, query, itemText) => (
-        typeof itemText === 'string' &&
-          itemText.toLowerCase().indexOf(query.toLowerCase()) > -1
-      )
+      default: (item, query, itemText) => {
+        const text = [undefined, null].includes(itemText) ? '' : itemText
+
+        return text.toString()
+          .toLowerCase()
+          .indexOf(query.toString().toLowerCase()) > -1
+      }
     }
   },
 

@@ -41,6 +41,9 @@ export default {
     return h('li', {
       attrs: {
         disabled: this.disabled
+      },
+      on: {
+        ...this.$listeners
       }
     }, [h(tag, data, this.$slots.default)])
   }
