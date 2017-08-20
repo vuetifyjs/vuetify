@@ -5,6 +5,10 @@
 switch($material)
   .input-group--selection-controls__container
     color: $material.selection-controls.active
+      
+  &:not(.input-group--dirty)
+    .input-group--selection-controls__container
+      color: $material.selection-controls.track.inactive
 
   .input-group--selection-controls__ripple
     &:after

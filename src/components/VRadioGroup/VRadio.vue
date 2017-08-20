@@ -4,6 +4,7 @@
 
   import Colorable from '../../mixins/colorable'
   import TabFocusable from '../../mixins/tab-focusable'
+  import Themeable from '../../mixins/themeable'
 
   import Ripple from '../../directives/ripple'
 
@@ -19,7 +20,7 @@
       VIcon
     },
 
-    mixins: [Colorable, TabFocusable],
+    mixins: [Colorable, TabFocusable, Themeable],
 
     directives: { Ripple },
 
@@ -42,7 +43,9 @@
           'input-group--active': this.isActive,
           'input-group--selection-controls': true,
           'input-group--tab-focused': this.tabFocused,
-          'radio': true
+          'radio': true,
+          'theme--dark': this.dark,
+          'theme--light': this.light
         })
       },
 
