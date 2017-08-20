@@ -51,11 +51,11 @@
       },
       titleDateFormat: {
         type: Object,
-        default: () => ({ weekday: 'short', month: 'short', day: 'numeric' })
+        default: () => ({ month: 'long', year: "numeric" })
       },
       headerDateFormat: {
         type: Object,
-        default: () => ({ month: 'long', year: 'numeric' })
+        default: () => ({ year: 'numeric' })
       },
       formattedValue: {
         required: false
@@ -177,16 +177,6 @@
     },
 
     created () {
-      const date = new Date()
-      date.setDate(date.getDate() - date.getDay() + parseInt(this.firstDayOfWeek))
-
-      createRange(7).forEach(() => {
-        const narrow = date.toLocaleString(this.locale, { weekday: 'narrow' })
-        this.narrowDays.push(narrow)
-
-        date.setDate(date.getDate() + 1)
-      })
-
       this.tableDate = this.inputDate
     },
 
@@ -219,7 +209,7 @@
 
       return h('v-card', {
         'class': {
-          'picker picker--date': true,
+          'picker picker--date picker--month': true,
           'picker--landscape': this.landscape,
           ...this.themeClasses
         }

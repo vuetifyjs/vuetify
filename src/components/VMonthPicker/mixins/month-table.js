@@ -3,15 +3,15 @@ export default {
     wheelScroll (e) {
       e.preventDefault()
 
-      let month = this.tableMonth
+      let year = this.tableYear
 
-      if (e.deltaY < 0) month++
-      else month--
+      if (e.deltaY < 0) year++
+      else year--
 
-      this.tableDate = new Date(this.tableYear, month)
+      this.tableDate = new Date(year, 0)
     },
     touch (value) {
-      this.tableDate = new Date(this.tableYear, this.tableMonth + value)
+      this.tableDate = new Date(this.tableYear, 0)
     },
     genTable () {
       const children = []
@@ -33,8 +33,8 @@ export default {
       }
 
       children.push(this.$createElement('table', {
-        key: this.tableMonth
-      }, [this.genTHead(), this.genTBody()]))
+        key: this.tableYear
+      }, [this.genTBody()]))
 
       return this.$createElement('div', data, [
         this.$createElement('transition', {
@@ -42,70 +42,46 @@ export default {
         }, children)
       ])
     },
-    genTHead () {
-      const days = this.narrowDays.map(day => this.$createElement('th', day))
-      return this.$createElement('thead', this.genTR(days))
-    },
     genTBody () {
       const children = []
-      let rows = []
-      const length = new Date(
-        this.tableYear,
-        this.tableMonth + 1,
-        0
-      ).getDate()
+      const cols = 3
 
-      let day = new Date(this.tableYear, this.tableMonth).getDay()
-      day = day < 1 ? 6 : day - parseInt(this.firstDayOfWeek)
+      for (let row = 0; row < 12 / cols; row++) {
+        const rows = []
+        for (let col = 0; col < cols; col++) {
+          const i = row * cols + col
+          const date = new Date(this.tableYear, i, 1, 12, 0, 0, 0)
+          const month = date.toLocaleString(this.locale, { month: 'short' })
+          rows.push(this.$createElement('td', [
+            this.$createElement('button', {
+              'class': {
+                'btn btn--small btn--flat': true,
+                'btn--active': this.isActive(i),
+                'btn--current': this.isCurrent(i),
+                'btn--light': this.dark,
+                'btn--disabled': !this.isAllowed(date)
+              },
+              attrs: {
+                type: 'button'
+              },
+              domProps: {
+                innerHTML: `<span class="btn__content">${month}</span>`
+              },
+              on: {
+                click: () => {
+                  const tableYear = this.tableYear
+                  let month = i + 1
+                  month = month < 10 ? `0${month}` : (month)
 
-      for (let i = 0; i < day; i++) {
-        rows.push(this.$createElement('td'))
-      }
-
-      for (let i = 1; i <= length; i++) {
-        const date = new Date(this.tableYear, this.tableMonth, i, 12, 0, 0, 0)
-        rows.push(this.$createElement('td', [
-          this.$createElement('button', {
-            'class': {
-              'btn btn--floating btn--small btn--flat': true,
-              'btn--active': this.isActive(i),
-              'btn--current': this.isCurrent(i),
-              'btn--light': this.dark,
-              'btn--disabled': !this.isAllowed(date)
-            },
-            attrs: {
-              type: 'button'
-            },
-            domProps: {
-              innerHTML: `<span class="btn__content">${i}</span>`
-            },
-            on: {
-              click: () => {
-                const day = i < 10 ? `0${i}` : i
-                const tableYear = this.tableYear
-                let tableMonth = this.tableMonth + 1
-                tableMonth = tableMonth < 10 ? `0${tableMonth}` : tableMonth
-
-                this.inputDate = `${tableYear}-${tableMonth}-${day}T12:00:00`
-                this.$nextTick(() => (this.autosave && this.save()))
+                  this.inputDate = `${tableYear}-${month}-01T12:00:00`
+                  this.$nextTick(() => (this.autosave && this.save()))
+                }
               }
-            }
-          })
-        ]))
-
-        if (rows.length % 7 === 0) {
-          children.push(this.genTR(rows))
-          rows = []
+            })
+          ]))
         }
-      }
-
-      if (rows.length) {
         children.push(this.genTR(rows))
       }
-
-      children.length < 6 && children.push(this.genTR([
-        this.$createElement('td', { domProps: { innerHTML: '&nbsp;' } })
-      ]))
 
       return this.$createElement('tbody', children)
     },
@@ -114,13 +90,11 @@ export default {
     },
     isActive (i) {
       return this.tableYear === this.year &&
-        this.tableMonth === this.month &&
-        this.day === i
+        this.month === i
     },
     isCurrent (i) {
       return this.currentYear === this.tableYear &&
-        this.currentMonth === this.tableMonth &&
-        this.currentDay === i
+        this.currentMonth === i
     }
   }
 }

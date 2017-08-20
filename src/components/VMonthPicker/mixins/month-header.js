@@ -16,13 +16,13 @@ export default {
         nativeOn: {
           click: e => {
             e.stopPropagation()
-            this.tableDate = new Date(this.tableYear, change)
+            this.tableDate = new Date(change, 0)
           }
         }
       }, children)
     },
     genSelector () {
-      const date = new Date(this.tableYear, this.tableMonth)
+      const date = new Date(this.tableYear, 0)
 
       // Workaround for #1409
       date.setHours(1)
@@ -34,7 +34,7 @@ export default {
           props: { name: this.computedTransition }
         }, [
           this.$createElement('strong', {
-            key: this.tableMonth
+            key: this.tableYear
           }, date.toLocaleString(this.locale, this.headerDateFormat))
         ])
       ])
@@ -42,11 +42,11 @@ export default {
       return this.$createElement('div', {
         'class': 'picker--date__header-selector'
       }, [
-        this.genBtn(this.tableMonth - 1, [
+        this.genBtn(this.tableYear - 1, [
           this.$createElement('v-icon', 'chevron_left')
         ]),
         header,
-        this.genBtn(this.tableMonth + 1, [
+        this.genBtn(this.tableYear + 1, [
           this.$createElement('v-icon', 'chevron_right')
         ])
       ])
