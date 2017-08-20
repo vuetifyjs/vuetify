@@ -230,21 +230,12 @@
         this.$refs.input &&
           (this.autocomplete || this.editable) &&
           this.$refs.input.focus()
-          
-
-        if (this.editable &&
-            this.inputValue !== null &&
-            typeof this.inputValue !== 'undefined'
-          ) {
-          this.$nextTick(() => {
-            this.$refs.input.value = this.getValue(this.inputValue)
-          })
-        }
 
         this.$emit('focus', e)
       },
       genLabel () {
         if (this.searchValue && !this.focused && this.isDirty) return null
+        if (this.focused && !this.isDirty) return null
 
         const data = {}
 

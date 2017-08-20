@@ -14,8 +14,9 @@ export default {
           contentClass: this.computedContentClass,
           disabled: this.disabled,
           maxHeight: this.maxHeight,
-          nudgeTop: this.isDropdown ? 22 : offsetY ? -2 : 0,
-          nudgeWidth: 24,
+          nudgeTop: this.isDropdown ? -12 : offsetY ? -2 : 0,
+          nudgeRight: this.isDropdown ? 16 : 0,
+          nudgeWidth: this.isDropdown ? 56 : 24,
           offsetY,
           value: this.isActive
         },
@@ -47,10 +48,7 @@ export default {
         })
       }
 
-      const selections = this.isDirty &&
-        (!this.editable || this.editable && !this.focused)
-          ? this.genSelections()
-          : []
+      const selections = this.genSelections()
 
       input && selections.push(input)
 
