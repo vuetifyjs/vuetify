@@ -49,24 +49,12 @@
         type: Function,
         default: defaultDateFormat
       },
-      titleDateFormat: {
-        type: Object,
-        default: () => ({ month: 'long', year: "numeric" })
-      },
-      headerDateFormat: {
-        type: Object,
-        default: () => ({ year: 'numeric' })
-      },
       formattedValue: {
         required: false
       },
       allowedDates: {
         type: [Array, Object, Function],
         default: () => (null)
-      },
-      firstDayOfWeek: {
-        type: [String, Number],
-        default: 0
       },
       yearIcon: String
     },

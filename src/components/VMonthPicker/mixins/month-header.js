@@ -35,7 +35,7 @@ export default {
         }, [
           this.$createElement('strong', {
             key: this.tableYear
-          }, date.toLocaleString(this.locale, this.headerDateFormat))
+          }, date.toLocaleString(this.locale, { year: 'numeric' }))
         ])
       ])
 
