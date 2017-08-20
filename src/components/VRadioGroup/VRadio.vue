@@ -1,5 +1,6 @@
 <script>
   import { VFadeTransition } from '../transitions'
+  import VIcon from '../VIcon'
 
   import Colorable from '../../mixins/colorable'
   import TabFocusable from '../../mixins/tab-focusable'
@@ -13,7 +14,10 @@
 
     inject: ['isMandatory'],
 
-    components: { VFadeTransition },
+    components: {
+      VFadeTransition,
+      VIcon
+    },
 
     mixins: [Colorable, TabFocusable],
 
@@ -106,6 +110,14 @@
           this.isActive = !this.isActive
           this.$emit('change', this.value)
         }
+      }
+    },
+
+    created() {
+      // Semantic check to help people identify the reason for the inject error above it.
+      if (!this.$parent || !this.$parent.$vnode || !this.$parent.$vnode.tag ||
+        !this.$parent.$vnode.tag.endsWith("v-radio-group")) {
+        console.warn("[Vuetify] Warn: The v-radio component must have an immediate parent of v-radio-group.")
       }
     },
 
