@@ -16,7 +16,7 @@
 
     data () {
       return {
-        current: null,
+        inputValue: null,
         items: [],
         slideInterval: {},
         reverse: false
@@ -24,6 +24,7 @@
     },
 
     props: {
+      value: Number,
       cycle: {
         type: Boolean,
         default: true
@@ -46,31 +47,27 @@
       }
     },
 
-    computed: {
-      defaultState () {
-        return {
-          current: null,
-          reverse: false
-        }
-      }
-    },
-
     watch: {
-      current () {
-        // Evaluate items when current changes to account for
+      inputValue () {
+        // Evaluate items when inputValue changes to account for
         // dynamic changing of children
         this.items = this.$children.filter(i => {
           return i.$el.classList && i.$el.classList.contains('carousel__item')
         })
 
         this.items.forEach(i => i.open(
-            this.items[this.current]._uid,
+            this.items[this.inputValue]._uid,
             this.reverse
           )
         )
 
         !this.isBooted && this.cycle && this.restartInterval()
         this.isBooted = true
+
+        this.$emit('input', this.inputValue)
+      },
+      value () {
+        this.init()
       },
       cycle (val) {
         val && this.restartInterval() || clearInterval(this.slideInterval)
@@ -108,7 +105,7 @@
           return this.$createElement(VBtn, {
             class: {
               'carousel__controls__item': true,
-              'carousel__controls__item--active': index === this.current
+              'carousel__controls__item--active': index === this.inputValue
             },
             props: {
               icon: true,
@@ -125,29 +122,19 @@
         this.$nextTick(this.startInterval)
       },
       init () {
-        this.current = 0
+        this.inputValue = this.value || 0
       },
       next () {
         this.reverse = false
-
-        if (this.current + 1 === this.items.length) {
-          return (this.current = 0)
-        }
-
-        this.current++
+        this.inputValue = (this.inputValue + 1) % this.items.length
       },
       prev () {
         this.reverse = true
-
-        if (this.current - 1 < 0) {
-          return (this.current = this.items.length - 1)
-        }
-
-        this.current--
+        this.inputValue = (this.inputValue + this.items.length - 1) % this.items.length
       },
       select (index) {
-        this.reverse = index < this.current
-        this.current = index
+        this.reverse = index < this.inputValue
+        this.inputValue = index
       },
       startInterval () {
         this.slideInterval = setInterval(this.next, this.interval)
