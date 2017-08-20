@@ -136,7 +136,9 @@ export default {
       data = Object.assign({}, {
         'class': this.inputGroupClasses,
         attrs: {
-          tabindex: this.internalTabIndex || this.tabindex
+          tabindex: this.disabled
+            ? -1
+            : this.internalTabIndex || this.tabindex
         },
         on: {
           focus: this.groupFocus,
