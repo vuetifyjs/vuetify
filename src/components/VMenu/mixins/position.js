@@ -113,9 +113,7 @@ export default {
     },
     calcYOverflow (top) {
       const contentHeight = this.dimensions.content.height
-      const totalHeight = top + contentHeight
       const defined = typeof window !== 'undefined'
-      const innerHeight = defined ? window.innerHeight : 0
 
       if (this.top && top < 0) top = 12
 
