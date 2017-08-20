@@ -18,7 +18,7 @@
       return {
         inputValue: null,
         items: [],
-        slideInterval: {},
+        slideTimeout: null,
         reverse: false
       }
     },
@@ -34,8 +34,9 @@
         default: 'fiber_manual_record'
       },
       interval: {
-        type: Number,
-        default: 6000
+        type: [Number, String],
+        default: 6000,
+        validator: value => value > 0
       },
       leftControlIcon: {
         type: [Boolean, String],
@@ -61,16 +62,22 @@
           )
         )
 
-        !this.isBooted && this.cycle && this.restartInterval()
-        this.isBooted = true
-
         this.$emit('input', this.inputValue)
+        this.restartTimeout()
       },
       value () {
         this.init()
       },
+      interval () {
+        this.restartTimeout()
+      },
       cycle (val) {
-        val && this.restartInterval() || clearInterval(this.slideInterval)
+        if (val) {
+          this.restartTimeout()
+        } else {
+          clearTimeout(this.slideTimeout)
+          this.slideTimeout = null
+        }
       }
     },
 
@@ -117,9 +124,12 @@
           }, [this.$createElement(VIcon, this.icon)])
         })
       },
-      restartInterval () {
-        clearInterval(this.slideInterval)
-        this.$nextTick(this.startInterval)
+      restartTimeout () {
+        this.slideTimeout && clearTimeout(this.slideTimeout)
+        this.slideTimeout = null
+
+        const raf = requestAnimationFrame || setTimeout
+        raf(this.startTimeout)
       },
       init () {
         this.inputValue = this.value || 0
@@ -136,8 +146,8 @@
         this.reverse = index < this.inputValue
         this.inputValue = index
       },
-      startInterval () {
-        this.slideInterval = setInterval(this.next, this.interval)
+      startTimeout () {
+        this.slideTimeout = setTimeout(() => this.next(), this.interval > 0 ? this.interval : 6000)
       }
     },
 
