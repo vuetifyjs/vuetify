@@ -11,10 +11,7 @@ export default {
         : null
     },
     genTitle () {
-      let date = new Date(this.year, this.month, this.day)
-
-      // Workaround for #1409
-      date.setHours(1)
+      let date = new Date(this.year, this.month, 1, 12 /* Workaround for #1409 */)
 
       date = date.toLocaleString(this.locale, { month: 'long' }).trim()
 

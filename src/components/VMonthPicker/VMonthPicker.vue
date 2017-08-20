@@ -103,9 +103,6 @@
           this.$emit('update:formattedValue', val ? this.dateFormat(val) : this.dateFormat(this.originalDate))
         }
       },
-      day () {
-        return this.inputDate.getDate()
-      },
       month () {
         return this.inputDate.getMonth()
       },
