@@ -69,6 +69,7 @@
         type: Number,
         default: 200
       },
+      disabled: Boolean,
       items: {
         type: Array,
         default: () => []
@@ -198,6 +199,10 @@
       searchValue (val) {
         if (val && !this.isActive) this.isActive = true
         this.$refs.menu.listIndex = -1
+      },
+      disabled (val) {
+        val && this.blur()
+        this.internalTabIndex = -val
       }
     },
 
