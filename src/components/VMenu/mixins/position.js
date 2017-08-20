@@ -118,9 +118,6 @@ export default {
       const innerHeight = defined ? window.innerHeight : 0
 
       if (this.top && top < 0) top = 12
-      else if ((!this.top || this.bottom) && innerHeight < totalHeight) {
-        top = innerHeight - contentHeight
-      }
 
       return top < 12 ? 12 : top
     },
