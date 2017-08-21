@@ -163,6 +163,12 @@
         }
 
         return true
+      },
+      getInputDateForYear (year) {
+        let month = this.month + 1
+        month = month < 10 ? `0${month}` : month
+
+        return `${year}-${month}`
       }
     },
 
@@ -192,7 +198,7 @@
           'class': 'picker__body'
         }, bodyChildren))
       } else {
-        children.push(this.genYears())
+        children.push(this.genYears(year => this.getInputDateForYear(year)))
       }
 
       this.$scopedSlots.default && children.push(this.genSlot())

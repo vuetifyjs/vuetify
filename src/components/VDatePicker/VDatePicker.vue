@@ -185,6 +185,14 @@
         }
 
         return true
+      },
+      getInputDateForYear (year) {
+        let tableMonth = this.tableMonth + 1
+        let day = this.day
+        tableMonth = tableMonth < 10 ? `0${tableMonth}` : tableMonth
+        day = day < 10 ? `0${day}` : day
+
+        return `${year}-${tableMonth}-${day}`
       }
     },
 
@@ -224,7 +232,7 @@
           'class': 'picker__body'
         }, bodyChildren))
       } else {
-        children.push(this.genYears())
+        children.push(this.genYears(year => this.getInputDateForYear(year)))
       }
 
       this.$scopedSlots.default && children.push(this.genSlot())

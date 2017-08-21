@@ -1,12 +1,12 @@
 export default {
   methods: {
-    genYears () {
+    genYears (inputDateForYearCallback) {
       return this.$createElement('ul', {
         'class': 'picker--date__years',
         ref: 'years'
-      }, this.genYearItems())
+      }, this.genYearItems(inputDateForYearCallback))
     },
-    genYearItems () {
+    genYearItems (inputDateForYearCallback) {
       const children = []
       for (let i = this.year + 100, length = this.year - 100; i > length; i--) {
         children.push(this.$createElement('li', {
@@ -16,13 +16,7 @@ export default {
           on: {
             click: e => {
               e.stopPropagation()
-
-              let tableMonth = this.tableMonth + 1
-              let day = this.day
-              tableMonth = tableMonth < 10 ? `0${tableMonth}` : tableMonth
-              day = day < 10 ? `0${day}` : day
-
-              this.inputDate = `${i}-${tableMonth}-${day}`
+              this.inputDate = inputDateForYearCallback(i)
               this.isSelected = false
             }
           }
