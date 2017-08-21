@@ -79,18 +79,40 @@ export default {
         }
       }
 
-      if (e.target === this.overlay || e.target === document.body || this.checkPath(e)) e.preventDefault()
+      if (e.target === this.overlay ||
+        e.target === document.body ||
+        this.checkPath(e)) e.preventDefault()
+    },
+    composedPath (el) {
+      const path = []
+
+      while (el) {
+        path.push(el)
+
+        if (el.tagName === 'HTML') {
+          path.push(document)
+          path.push(window)
+
+          return path
+        }
+
+        el = el.parentElement
+      }
     },
     hasScrollbar (el) {
-      return ['auto', 'scroll'].includes(window.getComputedStyle(el)['overflow-y'])
+      const style = window.getComputedStyle(el)
+      return ['auto', 'scroll'].includes(style['overflow-y'])
     },
     checkPath (e) {
-      for (let i = 0; i < e.path.length; i++) {
-        const el = e.path[i]
+      const path = e.path || this.composedPath(e.target)
+      const delta = e.deltaY || -e.wheelDelta
+
+      for (let i = 0; i < path.length; i++) {
+        const el = path[i]
 
         if (this.hasScrollbar(el)) {
-          if (el.scrollTop === 0 && e.deltaY < 0) return true
-          else if (el.scrollTop + el.clientHeight === el.scrollHeight && e.deltaY > 0) return true
+          if (el.scrollTop === 0 && delta < 0) return true
+          else if (el.scrollTop + el.clientHeight === el.scrollHeight && delta > 0) return true
           else return false
         }
 
