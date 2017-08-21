@@ -14,8 +14,9 @@ export default {
         }
       }, children)
     },
-    genSelector (keyValue, selectorText, inputDateForSelectorBtn) {
-      const header = this.$createElement('div', {
+
+    genHeader (keyValue, selectorText) {
+      return this.$createElement('div', {
         'class': 'picker--date__header-selector-date'
       }, [
         this.$createElement('transition', {
@@ -26,14 +27,16 @@ export default {
           }, selectorText)
         ])
       ])
+    },
 
+    genSelector (keyValue, selectorText, inputDateForSelectorBtn) {
       return this.$createElement('div', {
         'class': 'picker--date__header-selector'
       }, [
         this.genBtn(keyValue - 1, [
           this.$createElement('v-icon', 'chevron_left')
         ], inputDateForSelectorBtn),
-        header,
+        this.genHeader(keyValue, selectorText),
         this.genBtn(keyValue + 1, [
           this.$createElement('v-icon', 'chevron_right')
         ], inputDateForSelectorBtn)
