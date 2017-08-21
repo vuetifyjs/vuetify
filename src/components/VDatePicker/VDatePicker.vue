@@ -2,6 +2,7 @@
   import { createRange } from '../../util/helpers'
 
   import Picker from '../../mixins/picker'
+  import CalendarPicker from './mixins/calendar-picker'
   import CalendarYears from './mixins/calendar-years'
   import CalendarTitle from './mixins/calendar-title'
   import CalendarHeader from './mixins/calendar-header'
@@ -23,7 +24,7 @@
       VIcon
     },
 
-    mixins: [CalendarYears, CalendarTitle, CalendarHeader, DateTable, Picker],
+    mixins: [Picker, CalendarPicker, CalendarYears, CalendarTitle, CalendarHeader, DateTable],
 
     directives: { Touch },
 
@@ -103,24 +104,6 @@
           this.$emit('update:formattedValue', val ? this.dateFormat(val) : this.dateFormat(this.originalDate))
         }
       },
-      day () {
-        return this.inputDate.getDate()
-      },
-      month () {
-        return this.inputDate.getMonth()
-      },
-      year () {
-        return this.inputDate.getFullYear()
-      },
-      tableMonth () {
-        return this.tableDate.getMonth()
-      },
-      tableYear () {
-        return this.tableDate.getFullYear()
-      },
-      computedTransition () {
-        return this.isReversing ? 'tab-reverse-transition' : 'tab-transition'
-      },
       titleText () {
         let date = new Date(this.year, this.month, this.day, 1 /* Workaround for #1409 */)
 
@@ -135,34 +118,7 @@
       }
     },
 
-    watch: {
-      isSelected (val) {
-        val && this.$nextTick(() => {
-          this.$refs.years.scrollTop = this.$refs.years.scrollHeight / 2 - 125
-        })
-      },
-      tableDate (val, prev) {
-        this.isReversing = val < prev
-      },
-      value (val) {
-        if (val) this.tableDate = this.inputDate
-      }
-    },
-
     methods: {
-      save () {
-        if (this.originalDate) {
-          this.originalDate = this.value
-        } else {
-          this.originalDate = this.inputDate
-        }
-
-        if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
-      },
-      cancel () {
-        this.inputDate = this.originalDate
-        if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
-      },
       isAllowed (date) {
         if (!this.allowedDates) return true
 
@@ -210,44 +166,12 @@
       this.tableDate = this.inputDate
     },
 
-    mounted () {
-      const date = new Date()
-      this.currentDay = date.getDate()
-      this.currentMonth = date.getMonth()
-      this.currentYear = date.getFullYear()
-    },
-
     render (h) {
-      const children = []
-
-      !this.noTitle && children.push(this.genTitle(this.titleText))
-
-      if (!this.isSelected) {
-        const bodyChildren = []
-        const headerSelector = this.genSelector(this.tableMonth,
-          new Date(this.tableYear, this.tableMonth, 1, 1 /* Workaround for #1409 */)
-          .toLocaleString(this.locale, this.headerDateFormat),
-          change => new Date(this.tableYear, change))
-
-        bodyChildren.push(this.$createElement('div', { 'class': 'picker--date__header' }, [headerSelector]))
-        bodyChildren.push(this.genTable())
-
-        children.push(h('div', {
-          'class': 'picker__body'
-        }, bodyChildren))
-      } else {
-        children.push(this.genYears(year => this.getInputDateForYear(year)))
-      }
-
-      this.$scopedSlots.default && children.push(this.genSlot())
-
-      return h('v-card', {
-        'class': {
-          'picker picker--date': true,
-          'picker--landscape': this.landscape,
-          ...this.themeClasses
-        }
-      }, children)
+      const headerSelector = this.selected ? null : this.genSelector(this.tableMonth,
+        new Date(this.tableYear, this.tableMonth, 1, 1 /* Workaround for #1409 */)
+        .toLocaleString(this.locale, this.headerDateFormat),
+        change => new Date(this.tableYear, change))
+      return this.renderPicker(h, 'picker picker--date', headerSelector)
     }
   }
 </script>
