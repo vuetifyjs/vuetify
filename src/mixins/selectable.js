@@ -29,6 +29,9 @@ export default {
       }
 
       return this.inputValue === this.trueValue
+    },
+    isDirty () {
+      return this.isActive
     }
   },
 
