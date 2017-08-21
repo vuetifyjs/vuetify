@@ -1,11 +1,10 @@
 <script>
   import Input from '../../mixins/input'
-  import Themeable from '../../mixins/themeable'
 
   export default {
     name: 'v-radio-group',
 
-    mixins: [Input, Themeable],
+    mixins: [Input],
 
     model: {
       prop: 'inputValue',
@@ -50,9 +49,7 @@
         return {
           'radio-group': true,
           'radio-group--column': this.column,
-          'radio-group--row': this.row,
-          'theme--dark': this.dark,
-          'theme--light': this.light
+          'radio-group--row': this.row
         }
       }
     },

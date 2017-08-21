@@ -8,7 +8,8 @@ selection-control($material)
 
   color: $material.selection-controls.active
 
-  .icon, &:not(.input-group--active) .input-group__input
+  .icon,
+  &:not(.input-group--active) .input-group__input
     color: $material.text.secondary
 
   &.input-group--active
@@ -61,10 +62,9 @@ theme(selection-control, "input-group--selection-controls")
 .input-group--selection-controls label
   pointer-events: inherit
   cursor: pointer
-  margin: 0 0 0 32px
   pointer-events: auto
   position: absolute
-  left: 0
+  left: 32px
   user-select: none
   z-index: 1
   pointer-events: all
