@@ -1,3 +1,24 @@
+@import '../bootstrap'
+@import '../theme'
+
+/* Themes */
+list($material)
+  background: $material.cards
+
+  .list__tile:not(.list__tile--active)
+    color: $material.text.primary
+
+  .list__tile__sub-title
+    color: $material.text.secondary
+
+  .subheader
+    color: $material.text.secondary
+
+  .divider
+    background-color: $material.dividers
+
+theme(list, "list")
+
 .list
   list-style-type: none
   padding: $list-top-padding 0 $list-bottom-padding
@@ -101,10 +122,10 @@
       justify-content: center
       flex-direction: column
 
-      + .avatar
+      ~ .avatar
         justify-content: flex-end
 
-      + .list__tile__action:not(.list__tile__action--stack)
+      ~ .list__tile__action:not(.list__tile__action--stack)
         justify-content: flex-end
 
     &--active
@@ -116,9 +137,16 @@
 
     &--avatar
       height: $list-item-avatar-single-height
+      
+      .avatar
+        img,
+        .icon
+          height: 40px
+          width: 40px
 
   &--dense
     padding-top: $list-item-dense-top-padding
+    padding-bottom: $list-item-dense-top-padding
 
     .subheader
       font-size: $subheader-dense-font-size
@@ -131,11 +159,6 @@
 
       &--avatar
         height: $list-item-dense-avatar-single-height
-
-        .avatar
-          .icon, img
-            height: $list-item-dense-avatar-height
-            width: $list-item-dense-avatar-height
 
       &:not(.list__tile--avatar)
         height: $list-item-dense-single-height
@@ -214,3 +237,9 @@
 
   &--subheader
     padding-top: 0
+    
+  &.list--two-line,
+  &.list--three-line
+    .list__tile__avatar
+      align-items: flex-start
+      padding-top: 6px

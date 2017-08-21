@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VAvatar.vue should have an avatar class 1`] = `
+
+<div class="avatar"
+     style="height: 48px; width: 48px;"
+>
+</div>
+
+`;

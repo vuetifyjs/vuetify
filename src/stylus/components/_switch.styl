@@ -1,6 +1,42 @@
+@import '../bootstrap'
+@import '../theme'
+
+/** Theme */
+switch($material)
+  .input-group--selection-controls__container
+    color: $material.selection-controls.active
+      
+  &:not(.input-group--dirty)
+    .input-group--selection-controls__container
+      color: $material.selection-controls.track.inactive
+
+  .input-group--selection-controls__ripple
+    &:after
+      background-color: $material.selection-controls.thumb.inactive
+
+    &:not(.input-group--selection-controls__ripple--active)
+      color: $material.selection-controls.track.inactive
+
+    &--active:after
+      background-color: $material.selection-controls.active
+
+  .input-group--selection-controls__toggle
+    color: $material.selection-controls.track.inactive
+
+    &--active
+      color: inherit
+
+  &.input-group--disabled
+    .input-group--selection-controls__ripple
+      &:after
+        background-color: $material.selection-controls.thumb.disabled !important
+
+    .input-group--selection-controls__toggle
+      color: $material.selection-controls.track.disabled !important
+
+theme(switch, "switch")
+
 .input-group.input-group--selection-controls
-  flex: none
-  width: auto
   z-index: 0
 
   &.switch
@@ -49,4 +85,4 @@
         transform: translate3d(2px, -24px, 0)
 
     label
-      margin-left: 44px
+      padding-left: 44px

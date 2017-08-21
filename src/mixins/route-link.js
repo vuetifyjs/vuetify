@@ -1,4 +1,10 @@
+import Ripple from '../directives/ripple'
+
 export default {
+  directives: {
+    Ripple
+  },
+
   props: {
     append: Boolean,
     disabled: Boolean,
@@ -8,10 +14,7 @@ export default {
     nuxt: Boolean,
     replace: Boolean,
     router: Boolean,
-    ripple: {
-      type: Boolean,
-      default: true
-    },
+    ripple: Boolean,
     tag: String
   },
 
@@ -29,9 +32,10 @@ export default {
           name: 'ripple',
           value: this.ripple || false
         }],
-        on: Object.assign({
+        on: {
+          ...(this.$listeners || {}),
           click: this.click
-        }, (this.$listeners || {}))
+        }
       }
 
       if (typeof this.exact === 'undefined') {

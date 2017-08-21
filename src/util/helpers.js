@@ -1,5 +1,7 @@
 export function createSimpleFunctional (c, el = 'div') {
+  const name = c.replace(/__/g, '-')
   return {
+    name: `v-${name}`,
     functional: true,
 
     render: (h, { data, children }) => {

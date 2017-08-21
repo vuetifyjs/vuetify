@@ -1,10 +1,16 @@
+heading($material)
+  color: $material.text.primary
+
+theme(heading, "heading")
+
 for heading, options in $headings
   {heading}
-    color: $heading-color
     font-size: options.size
     font-weight: options.weight
-    line-height: options.line-height
-    letter-spacing: options.letter-spacing
+    if options.line-height
+      line-height: options.line-height
+    if options.letter-spacing
+      letter-spacing: options.letter-spacing
     margin-bottom: $spacers.three.y
     
     @media screen and (max-width: $grid-breakpoints.sm)

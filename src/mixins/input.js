@@ -1,13 +1,14 @@
-﻿import Themeable from './themeable'
+import Themeable from './themeable'
+import Validatable from './validatable'
 
 export default {
-  mixins: [Themeable],
+  mixins: [Themeable, Validatable],
 
   data () {
     return {
-      errorBucket: [],
       focused: false,
       tabFocused: false,
+      internalTabIndex: null,
       lazyValue: this.value
     }
   },
@@ -16,11 +17,6 @@ export default {
     appendIcon: String,
     appendIconCb: Function,
     disabled: Boolean,
-    error: Boolean,
-    errorMessages: {
-      type: [String, Array],
-      default: () => []
-    },
     hint: String,
     hideDetails: Boolean,
     label: String,
@@ -29,12 +25,12 @@ export default {
     prependIcon: String,
     prependIconCb: Function,
     required: Boolean,
-    rules: {
-      type: Array,
-      default: () => []
-    },
     tabindex: {
       default: 0
+    },
+    toggleKeys: {
+      type: Array,
+      default: () => [13, 32]
     },
     value: {
       required: false
@@ -42,9 +38,6 @@ export default {
   },
 
   computed: {
-    hasError () {
-      return this.validations.length || this.error
-    },
     inputGroupClasses () {
       return Object.assign({
         'input-group': true,
@@ -63,51 +56,21 @@ export default {
       }, this.classes)
     },
     isDirty () {
-      return this.inputValue
-    },
-    modifiers () {
-      const modifiers = {
-        lazy: false,
-        number: false,
-        trim: false
-      }
-
-      if (!this.$vnode.data.directives) {
-        return modifiers
-      }
-
-      const model = this.$vnode.data.directives.find(i => i.name === 'model')
-
-      if (!model) {
-        return modifiers
-      }
-
-      return Object.assign(modifiers, model.modifiers)
-    },
-    validations () {
-      return (!Array.isArray(this.errorMessages)
-        ? [this.errorMessages]
-        : this.errorMessages).concat(this.errorBucket)
+      return !!this.inputValue
     }
-  },
-
-  watch: {
-    rules () {
-      this.validate()
-    }
-  },
-
-  mounted () {
-    this.validate()
   },
 
   methods: {
+    groupFocus (e) {},
+    groupBlur (e) {
+      this.tabFocused = false
+    },
     genLabel () {
-      const data = {}
-
-      if (this.$attrs.id) data.attrs = { for: this.$attrs.id }
-
-      return this.$createElement('label', data, this.$slots.label || this.label)
+      return this.$createElement('label', {
+        attrs: {
+          for: this.$attrs.id
+        }
+      }, this.$slots.label || this.label)
     },
     genMessages () {
       let messages = []
@@ -120,20 +83,16 @@ export default {
       ) {
         messages = [this.genHint()]
       } else if (this.validations.length) {
-        messages = this.validations.map(i => this.genError(i))
+        messages = [this.genError(this.validations[0])]
       }
 
-      return this.$createElement(
-        'transition-group',
-        {
-          'class': 'input-group__messages',
-          props: {
-            tag: 'div',
-            name: 'slide-y-transition'
-          }
-        },
-        messages
-      )
+      return this.$createElement('transition-group', {
+        'class': 'input-group__messages',
+        props: {
+          tag: 'div',
+          name: 'slide-y-transition'
+        }
+      }, messages)
     },
     genHint () {
       return this.$createElement('div', {
@@ -181,10 +140,13 @@ export default {
       data = Object.assign({}, {
         'class': this.inputGroupClasses,
         attrs: {
-          tabindex: this.tabindex
+          tabindex: this.disabled
+            ? -1
+            : this.internalTabIndex || this.tabindex
         },
         on: {
-          blur: () => (this.tabFocused = false),
+          focus: this.groupFocus,
+          blur: this.groupBlur,
           click: () => (this.tabFocused = false),
           keyup: e => {
             if ([9, 16].includes(e.keyCode)) {
@@ -194,7 +156,7 @@ export default {
           keydown: e => {
             if (!this.toggle) return
 
-            if ([13, 32].includes(e.keyCode)) {
+            if (this.toggleKeys.includes(e.keyCode)) {
               e.preventDefault()
               this.toggle()
             }
@@ -218,12 +180,22 @@ export default {
 
       children.push(
         this.$createElement('div', {
-          'class': 'input-group__input'
+          'class': 'input-group__input',
+          on: {
+            click: () => {
+              // Proprietary for v-text-field with box prop
+              if (!this.box) return
+
+              this.focus()
+            }
+          }
         }, wrapperChildren)
       )
-
       detailsChildren.push(this.genMessages())
-      this.counter && detailsChildren.push(this.genCounter())
+
+      if (typeof this.counter !== 'undefined') {
+        detailsChildren.push(this.genCounter())
+      }
 
       children.push(
         this.$createElement('div', {
@@ -232,19 +204,6 @@ export default {
       )
 
       return this.$createElement('div', data, children)
-    },
-    validate () {
-      this.errorBucket = []
-
-      this.rules.forEach(rule => {
-        const valid = typeof rule === 'function'
-          ? rule(this.value)
-          : rule
-
-        if (valid !== true) {
-          this.errorBucket.push(valid)
-        }
-      })
     }
   }
 }

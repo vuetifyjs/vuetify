@@ -67,7 +67,6 @@ export default {
       type: Array,
       default: () => []
     },
-    filter: Function,
     itemText: {
       type: String,
       default: 'text'

@@ -1,19 +1,20 @@
 import Vue from 'vue'
 import load from '~util/load'
-import * as Directives from '~directives'
 import { mount, shallow } from 'avoriaz'
+import toHaveBeenWarnedInit from '~util/to-have-been-warned'
 
 export function test(name, cb) {
-  global.console.warn = jest.fn()
-  Vue.prototype.$vuetify = { load }
+  toHaveBeenWarnedInit()
 
-  Object.keys(Directives).forEach(key => {
-    Vue.directive(key, Directives[key])
-  })
+  Vue.prototype.$vuetify = { load: (fn) => fn() }
 
-  beforeEach(() => {
-    rafPolyfill(window)
-  })
+/*
+  const app = document.createElement('div')
+  app.setAttribute('data-app', true)
+  document.body.appendChild(app)
+*/
+
+  rafPolyfill(window)
 
   describe(name, () => cb({
     functionalContext,
@@ -32,7 +33,6 @@ export function functionalContext(context = {}, children = []) {
     children
   }
 }
-
 
 //requestAnimationFrame polyfill | Milos Djakonovic ( @Miloshio ) | MIT | https://github.com/milosdjakonovic/requestAnimationFrame-polyfill
 export function rafPolyfill(w) {
