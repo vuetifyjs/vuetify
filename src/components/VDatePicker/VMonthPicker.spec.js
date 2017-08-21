@@ -1,4 +1,4 @@
-import VMonthPicker from '~components/VMonthPicker'
+import { VMonthPicker } from '~components/VDatePicker'
 import { test } from '~util/testing'
 
 test('VMonthPicker.js', ({ mount }) => {

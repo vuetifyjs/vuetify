@@ -2,10 +2,10 @@
   import { createRange } from '../../util/helpers'
 
   import Picker from '../../mixins/picker'
-  import MonthTitle from './mixins/month-title'
-  import MonthHeader from './mixins/month-header'
+  import CalendarYears from './mixins/calendar-years'
+  import CalendarTitle from './mixins/calendar-title'
+  import CalendarHeader from './mixins/calendar-header'
   import MonthTable from './mixins/month-table'
-  import MonthYears from './mixins/month-years'
   import VBtn from '../VBtn'
   import VCard from '../VCard'
   import VIcon from '../VIcon'
@@ -23,7 +23,7 @@
       VIcon
     },
 
-    mixins: [MonthTitle, MonthHeader, MonthTable, MonthYears, Picker],
+    mixins: [CalendarYears, CalendarTitle, CalendarHeader, MonthTable, Picker],
 
     directives: { Touch },
 
