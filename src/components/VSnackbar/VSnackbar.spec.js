@@ -19,7 +19,7 @@ describe('VSnackbar.vue', () => {
 
     expect(wrapper.find('div .snack__content').length).toEqual(0)
 
-    wrapper.setProps({ 'value': true })
+    wrapper.setProps({ value: true })
     wrapper.update()
 
     await wrapper.vm.$nextTick()
@@ -40,7 +40,7 @@ describe('VSnackbar.vue', () => {
     const value = jest.fn()
 
     wrapper.instance().$on('input', value)
-    wrapper.setProps({ 'value': true })
+    wrapper.setProps({ value: true })
     wrapper.update()
 
     await wrapper.vm.$nextTick()

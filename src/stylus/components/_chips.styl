@@ -19,8 +19,9 @@
 
   .avatar
     border-radius: 50%
-    height: $chip-height
-    width: $chip-height
+    // Important is needed to account for new avatar structure
+    height: $chip-height !important
+    width: $chip-height !important
     min-width: $chip-height
     margin-left: -14px
     margin-right: 8px

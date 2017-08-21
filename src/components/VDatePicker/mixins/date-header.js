@@ -23,6 +23,10 @@ export default {
     },
     genSelector () {
       const date = new Date(this.tableYear, this.tableMonth)
+
+      // Workaround for #1409
+      date.setHours(1)
+
       const header = this.$createElement('div', {
         'class': 'picker--date__header-selector-date'
       }, [

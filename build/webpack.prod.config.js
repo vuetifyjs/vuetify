@@ -51,8 +51,5 @@ module.exports = merge(baseWebpackConfig, {
   },
   performance: {
     hints: false
-  },
-  plugins: [
-    new ExtractTextPlugin('vuetify.min.css')
-  ]
+  }
 })

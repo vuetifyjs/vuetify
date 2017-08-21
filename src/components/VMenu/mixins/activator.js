@@ -15,13 +15,19 @@ export default {
       } else if (this.closeOnClick && this.isActive) this.isActive = false
     },
     mouseEnterHandler (e) {
+      clearTimeout(this.focusedTimeout)
+
       if (this.disabled || this.hasJustFocused) return
       this.isActive = true
     },
     mouseLeaveHandler (e) {
-      if (this.isContentActive) return
-      this.isActive = false
-      this.hasJustFocused = true
+      clearTimeout(this.focusedTimeout)
+
+      if (this.disabled ||
+        this.$refs.content.contains(e.relatedTarget)
+      ) return
+
+      this.focusedTimeout = setTimeout(() => (this.isActive = false), 500)
     },
     addActivatorEvents (activator = null) {
       if (!activator) return

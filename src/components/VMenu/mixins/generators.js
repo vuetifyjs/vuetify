@@ -6,7 +6,6 @@ export default {
       const options = {
         'class': 'menu__activator',
         ref: 'activator',
-        slot: 'activator',
         on: {}
       }
 
@@ -23,8 +22,7 @@ export default {
     genTransition () {
       return this.$createElement('transition', {
         props: {
-          name: this.transition,
-          origin: this.origin
+          name: this.transition
         }
       }, [this.genContent()])
     },
@@ -45,8 +43,9 @@ export default {
             if (e.target.getAttribute('disabled')) return
             if (this.closeOnContentClick) this.isActive = false
           },
+          mouseenter: this.mouseEnterHandler,
           mouseleave: e => {
-            this.openOnHover && (this.isActive = false)
+            this.openOnHover && this.mouseLeaveHandler(e)
           }
         }
       }, [booted ? this.$slots.default : null])

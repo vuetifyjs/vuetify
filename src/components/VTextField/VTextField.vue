@@ -10,13 +10,15 @@
 
     data () {
       return {
-        inputHeight: null
+        inputHeight: null,
+        badInput: false
       }
     },
 
     props: {
       autofocus: Boolean,
       autoGrow: Boolean,
+      box: Boolean,
       counter: [Number, String],
       fullWidth: Boolean,
       multiLine: Boolean,
@@ -39,6 +41,7 @@
       classes () {
         return {
           'input-group--text-field': true,
+          'input-group--text-field-box': this.box,
           'input-group--single-line': this.singleLine,
           'input-group--solo': this.solo,
           'input-group--multi-line': this.multiLine,
@@ -73,7 +76,9 @@
         return this.lazyValue !== null &&
           typeof this.lazyValue !== 'undefined' &&
           this.lazyValue.toString().length > 0 ||
-          this.placeholder
+          this.placeholder ||
+          this.badInput ||
+          ['time', 'date', 'datetime-local', 'week', 'month'].includes(this.type)
       }
     },
 
@@ -100,7 +105,9 @@
         this.inputHeight = null
 
         this.$nextTick(() => {
-          const height = this.$refs.input.scrollHeight
+          const height = this.$refs.input
+            ? this.$refs.input.scrollHeight
+            : 0
           const minHeight = this.rows * 24
           const inputHeight = height < minHeight ? minHeight : height
           this.inputHeight = inputHeight
@@ -108,6 +115,7 @@
       },
       onInput (e) {
         this.inputValue = e.target.value
+        this.badInput = e.target.validity && e.target.validity.badInput
         this.multiLine && this.autoGrow && this.calculateInputHeight()
       },
       blur (e) {

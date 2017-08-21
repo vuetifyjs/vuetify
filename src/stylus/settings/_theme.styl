@@ -28,6 +28,7 @@ $material-light := {
   cards: #FFFFFF,
   dividers: rgba(#000, .12),
   text: {
+    theme: #fff,
     primary: rgba(#000, .87),
     secondary: rgba(#000, .54),
     disabled: rgba(#000, .38)
@@ -41,6 +42,9 @@ $material-light := {
     focused: rgba(#000, .12),
     focused-alt: rgba(#fff, .6),
     pressed: rgba(#999, .4)
+  },
+  expansion-panels: {
+    focus: #EEEEEE
   },
   selection-controls: {
     active: $teal.base,
@@ -96,6 +100,7 @@ $material-dark := {
   cards: #424242,
   dividers: rgba(#fff, .12),
   text: {
+    theme: #fff,
     primary: #fff,
     secondary: rgba(#fff, .70),
     disabled: rgba(#fff, .50)
@@ -109,6 +114,9 @@ $material-dark := {
     focused: rgba(#fff, .12),
     focused-alt: rgba(#fff, .1),
     pressed: rgba(#ccc, .25)
+  },
+  expansion-panels: {
+    focus: rgba(#000, .70)
   },
   selection-controls: {
     active: $teal.lighten-3,

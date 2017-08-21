@@ -10,9 +10,7 @@ const resolve = file => require('path').resolve(__dirname, file)
 
 module.exports = {
   devtool: '#cheap-module-eval-source-map',
-  entry: {
-    app: './dev/index.js'
-  },
+  entry: ['babel-polyfill', './dev/index.js'],
   output: {
     path: resolve('../dev'),
     publicPath: '/dev/',

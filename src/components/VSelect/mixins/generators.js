@@ -14,7 +14,9 @@ export default {
           contentClass: this.computedContentClass,
           disabled: this.disabled,
           maxHeight: this.maxHeight,
-          nudgeTop: this.isDropdown ? 22 : offsetY ? 38 : 0,
+          nudgeTop: this.isDropdown ? -12 : offsetY ? -2 : 0,
+          nudgeRight: this.isDropdown ? 16 : 0,
+          nudgeWidth: this.isDropdown ? 56 : 24,
           offsetY,
           value: this.isActive
         },
@@ -33,19 +35,20 @@ export default {
           'class': 'input-group--select__autocomplete',
           attrs: {
             ...this.$attrs,
-            tabindex: -1
+            tabindex: 0
           },
-          domProps: { value: this.searchValue },
-          on: { input: e => (this.searchValue = e.target.value) },
+          domProps: { value: this.lazySearch },
+          on: {
+            blur: this.blur,
+            focus: this.focus,
+            input: e => (this.lazySearch = e.target.value)
+          },
           ref: 'input',
           key: 'input'
         })
       }
 
-      const selections = this.isDirty &&
-        (!this.editable || this.editable && !this.focused)
-          ? this.genSelections()
-          : []
+      const selections = this.genSelections()
 
       input && selections.push(input)
 

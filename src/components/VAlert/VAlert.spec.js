@@ -53,7 +53,7 @@ test('VAlert.vue', ({ mount }) => {
 
     wrapper.vm.$on('input', (val) => {
       wrapper.setProps({
-        'value': false
+        value: false
       })
       wrapper.update()
 

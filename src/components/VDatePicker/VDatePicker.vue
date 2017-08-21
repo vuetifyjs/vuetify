@@ -6,6 +6,9 @@
   import DateHeader from './mixins/date-header'
   import DateTable from './mixins/date-table'
   import DateYears from './mixins/date-years'
+  import VBtn from '../VBtn'
+  import VCard from '../VCard'
+  import VIcon from '../VIcon'
 
   import Touch from '../../directives/touch'
 
@@ -13,6 +16,12 @@
 
   export default {
     name: 'v-date-picker',
+
+    components: {
+      VBtn,
+      VCard,
+      VIcon
+    },
 
     mixins: [DateTitle, DateHeader, DateTable, DateYears, Picker],
 
@@ -177,13 +186,15 @@
 
         date.setDate(date.getDate() + 1)
       })
+
+      this.tableDate = this.inputDate
     },
 
     mounted () {
-      this.currentDay = this.tableDate.getDate()
-      this.currentMonth = this.tableDate.getMonth()
-      this.currentYear = this.tableDate.getFullYear()
-      this.tableDate = this.inputDate
+      const date = new Date()
+      this.currentDay = date.getDate()
+      this.currentMonth = date.getMonth()
+      this.currentYear = date.getFullYear()
     },
 
     render (h) {

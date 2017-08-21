@@ -28,6 +28,10 @@ export default {
     tabindex: {
       default: 0
     },
+    toggleKeys: {
+      type: Array,
+      default: () => [13, 32]
+    },
     value: {
       required: false
     }
@@ -136,7 +140,9 @@ export default {
       data = Object.assign({}, {
         'class': this.inputGroupClasses,
         attrs: {
-          tabindex: this.internalTabIndex || this.tabindex
+          tabindex: this.disabled
+            ? -1
+            : this.internalTabIndex || this.tabindex
         },
         on: {
           focus: this.groupFocus,
@@ -150,7 +156,7 @@ export default {
           keydown: e => {
             if (!this.toggle) return
 
-            if ([13, 32].includes(e.keyCode)) {
+            if (this.toggleKeys.includes(e.keyCode)) {
               e.preventDefault()
               this.toggle()
             }
@@ -174,7 +180,15 @@ export default {
 
       children.push(
         this.$createElement('div', {
-          'class': 'input-group__input'
+          'class': 'input-group__input',
+          on: {
+            click: () => {
+              // Proprietary for v-text-field with box prop
+              if (!this.box) return
+
+              this.focus()
+            }
+          }
         }, wrapperChildren)
       )
       detailsChildren.push(this.genMessages())

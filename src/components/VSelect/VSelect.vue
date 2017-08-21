@@ -18,7 +18,7 @@
   import Autocomplete from './mixins/autocomplete'
   import Generators from './mixins/generators'
 
-  import clickOutside from '../../directives/click-outside'
+  import ClickOutside from '../../directives/click-outside'
 
   export default {
     name: 'v-select',
@@ -38,7 +38,7 @@
     },
 
     directives: {
-      clickOutside
+      ClickOutside
     },
 
     mixins: [Autocomplete, Input, Filterable, Generators],
@@ -50,6 +50,7 @@
         inputValue: this.multiple && !this.value ? [] : this.value,
         isBooted: false,
         lastItem: 20,
+        lazySearch: null,
         isActive: false
       }
     },
@@ -72,7 +73,6 @@
         type: Array,
         default: () => []
       },
-      filter: Function,
       itemText: {
         type: String,
         default: 'text'
@@ -96,7 +96,9 @@
       multiple: Boolean,
       multiLine: Boolean,
       offset: Boolean,
-      searchInput: null,
+      searchInput: {
+        default: null
+      },
       singleLine: Boolean,
       top: Boolean,
       returnObject: Boolean,
@@ -143,10 +145,11 @@
       },
       searchValue: {
         get () {
-          return this.searchInput
+          return this.lazySearch
         },
         set (val) {
-          this.$emit('update:searchInput', val)
+          this.lazySearch = val
+          val !== this.searchInput && this.$emit('update:searchInput', val)
         }
       },
       selectedItems () {
@@ -177,12 +180,12 @@
           this.$nextTick(this.$refs.menu.updateDimensions)
         }
       },
+      multiple (val) {
+        this.inputValue = val ? [] : null
+      },
       isActive (val) {
         this.isBooted = true
         this.lastItem += !val ? 20 : 0
-
-        if (!val) this.blur()
-        else this.focus()
       },
       isBooted () {
         this.$nextTick(() => {
@@ -191,8 +194,10 @@
           }
         })
       },
-      searchValue () {
-        this.$refs.menu.listIndex = -1
+      searchValue (val) {
+        if (val && !this.isActive) this.isActive = true
+        
+        this.$nextTick(() => (this.$refs.menu.listIndex = -1))
       }
     },
 
@@ -226,24 +231,17 @@
           (this.autocomplete || this.editable) &&
           this.$refs.input.focus()
 
-        if (this.editable &&
-            this.inputValue !== null &&
-            typeof this.inputValue !== 'undefined'
-          ) {
-          this.$nextTick(() => {
-            this.$refs.input.value = this.getValue(this.inputValue)
-          })
-        }
         this.$emit('focus', e)
       },
       genLabel () {
         if (this.searchValue && !this.focused && this.isDirty) return null
+        if (this.focused && !this.isDirty && this.editable) return null
 
         const data = {}
 
         if (this.id) data.attrs = { for: this.id }
 
-        return this.$createElement('label', data, this.label)
+        return this.$createElement('label', data, this.$slots.label || this.label)
       },
       getPropertyFromItem (item, field) {
         if (item !== Object(item)) return item
@@ -257,6 +255,9 @@
       },
       getValue (item) {
         return this.getPropertyFromItem(item, this.itemValue)
+      },
+      onAutocompleteFocus () {
+        this.focus()
       },
       onScroll () {
         if (!this.isActive) {
@@ -288,23 +289,29 @@
           })
         }
 
-        if (this.autocomplete || this.editable) {
+        if ((this.autocomplete && this.multiple) || this.editable) {
           this.$nextTick(() => {
-            this.searchValue = null
             this.$refs.input &&
               this.$refs.input.focus()
           })
         }
 
+        this.searchValue = null
         this.$emit('change', this.inputValue)
       }
     },
 
     render (h) {
+      const listeners = Object.assign({}, this.$listeners)
+      delete listeners.input
+
       return this.genInputGroup([
         this.genSelectionsAndSearch(),
         this.genMenu()
       ], {
+        attrs: {
+          tabindex: this.autocomplete ? -1 : 0
+        },
         directives: [{
           name: 'click-outside',
           value: () => {
@@ -313,9 +320,12 @@
           }
         }],
         on: {
-          focus: this.focus,
-          blur: this.blur,
-          click: () => { if (!this.isActive) this.isActive = true },
+          ...listeners,
+          focus: !this.autocomplete ? this.focus : this.onAutocompleteFocus,
+          blur: !this.autocomplete ? this.blur : () => {},
+          click: () => {
+            if (!this.isActive) this.isActive = true
+          },
           keydown: this.onKeyDown // Located in mixins/autocomplete.js
         }
       })

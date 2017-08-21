@@ -8,6 +8,7 @@
 
     props: {
       absolute: Boolean,
+      active: [Number, String],
       shift: Boolean,
       value: { required: false }
     },

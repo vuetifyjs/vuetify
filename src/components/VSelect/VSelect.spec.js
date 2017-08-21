@@ -17,6 +17,7 @@ test('VSelect.js', ({ mount, shallow }) => {
     wrapper.instance().selectItem(item)
 
     expect(change).toBeCalledWith([0])
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
   it('should be in an error state', async () => {
@@ -34,6 +35,7 @@ test('VSelect.js', ({ mount, shallow }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.hasError).toBe(true)
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
   it('should disable list items', () => {
@@ -50,6 +52,7 @@ test('VSelect.js', ({ mount, shallow }) => {
     const item = wrapper.find('li')[0]
 
     expect(item.element.__vue__.$options.propsData.disabled).toBe(true)
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
   it('should emit search input changes', () => {
@@ -65,5 +68,36 @@ test('VSelect.js', ({ mount, shallow }) => {
     wrapper.vm.searchValue = 'test'
 
     expect(update).toBeCalledWith('test')
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should filter autocomplete search results', () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        autocomplete: true,
+        items: ['foo', 'bar']
+      }
+    })
+
+    wrapper.vm.searchValue = 'foo'
+
+    expect(wrapper.vm.filteredItems.length).toBe(1)
+    expect(wrapper.vm.filteredItems[0]).toBe('foo')
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should filter numeric primitives', () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        autocomplete: true,
+        items: [1, 2]
+      }
+    })
+
+    wrapper.vm.searchValue = 1
+
+    expect(wrapper.vm.filteredItems.length).toBe(1)
+    expect(wrapper.vm.filteredItems[0]).toBe(1)
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 })

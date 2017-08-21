@@ -172,7 +172,7 @@
 
         left = left < 0 ? 0 : left > 100 ? 100 : left
 
-        this.inputValue = this.min + ((left / 100) * (this.max - this.min))
+        this.inputValue = parseInt(this.min, 10) + ((left / 100) * (this.max - this.min))
       },
       onKeyDown (e) {
         if (!e.keyCode === 37 && !e.keyCode === 39) return

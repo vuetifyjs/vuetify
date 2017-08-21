@@ -16,14 +16,15 @@
 
     data () {
       return {
-        current: null,
+        inputValue: null,
         items: [],
-        slideInterval: {},
+        slideTimeout: null,
         reverse: false
       }
     },
 
     props: {
+      value: Number,
       cycle: {
         type: Boolean,
         default: true
@@ -33,8 +34,9 @@
         default: 'fiber_manual_record'
       },
       interval: {
-        type: Number,
-        default: 6000
+        type: [Number, String],
+        default: 6000,
+        validator: value => value > 0
       },
       leftControlIcon: {
         type: [Boolean, String],
@@ -46,34 +48,36 @@
       }
     },
 
-    computed: {
-      defaultState () {
-        return {
-          current: null,
-          reverse: false
-        }
-      }
-    },
-
     watch: {
-      current () {
-        // Evaluate items when current changes to account for
+      inputValue () {
+        // Evaluate items when inputValue changes to account for
         // dynamic changing of children
         this.items = this.$children.filter(i => {
           return i.$el.classList && i.$el.classList.contains('carousel__item')
         })
 
         this.items.forEach(i => i.open(
-            this.items[this.current]._uid,
+            this.items[this.inputValue]._uid,
             this.reverse
           )
         )
 
-        !this.isBooted && this.cycle && this.restartInterval()
-        this.isBooted = true
+        this.$emit('input', this.inputValue)
+        this.restartTimeout()
+      },
+      value () {
+        this.init()
+      },
+      interval () {
+        this.restartTimeout()
       },
       cycle (val) {
-        val && this.restartInterval() || clearInterval(this.slideInterval)
+        if (val) {
+          this.restartTimeout()
+        } else {
+          clearTimeout(this.slideTimeout)
+          this.slideTimeout = null
+        }
       }
     },
 
@@ -108,7 +112,7 @@
           return this.$createElement(VBtn, {
             class: {
               'carousel__controls__item': true,
-              'carousel__controls__item--active': index === this.current
+              'carousel__controls__item--active': index === this.inputValue
             },
             props: {
               icon: true,
@@ -120,37 +124,30 @@
           }, [this.$createElement(VIcon, this.icon)])
         })
       },
-      restartInterval () {
-        clearInterval(this.slideInterval)
-        this.$nextTick(this.startInterval)
+      restartTimeout () {
+        this.slideTimeout && clearTimeout(this.slideTimeout)
+        this.slideTimeout = null
+
+        const raf = requestAnimationFrame || setTimeout
+        raf(this.startTimeout)
       },
       init () {
-        this.current = 0
+        this.inputValue = this.value || 0
       },
       next () {
         this.reverse = false
-
-        if (this.current + 1 === this.items.length) {
-          return (this.current = 0)
-        }
-
-        this.current++
+        this.inputValue = (this.inputValue + 1) % this.items.length
       },
       prev () {
         this.reverse = true
-
-        if (this.current - 1 < 0) {
-          return (this.current = this.items.length - 1)
-        }
-
-        this.current--
+        this.inputValue = (this.inputValue + this.items.length - 1) % this.items.length
       },
       select (index) {
-        this.reverse = index < this.current
-        this.current = index
+        this.reverse = index < this.inputValue
+        this.inputValue = index
       },
-      startInterval () {
-        this.slideInterval = setInterval(this.next, this.interval)
+      startTimeout () {
+        this.slideTimeout = setTimeout(() => this.next(), this.interval > 0 ? this.interval : 6000)
       }
     },
 

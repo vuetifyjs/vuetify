@@ -1,179 +1,6 @@
 @import '../bootstrap'
 @import '../theme'
 
-.input-group
-  display: flex
-  flex: 1
-  flex-wrap: wrap
-  min-width: 24px
-  padding: $input-group-padding
-  position: relative
-  width: 100%
-  outline: none
-  transition: box-shadow $primary-transition
-
-
-/** Label */
-.input-group
-  label
-    font-size $input-font-size
-    line-height: $input-font-size * 2
-    height: $input-height
-    max-width: 90%
-    min-width: 0
-    overflow: hidden
-    pointer-events: none
-    text-align: left
-    text-overflow: ellipsis
-    transform: translate3d(0, 0, 0)
-    transform-origin: top left
-    transition: .4s $transition.fast-in-fast-out
-    white-space: nowrap
-    width: 100%
-    z-index: 0
-
-/** Blocks */
-.input-group
-  &__input
-    display: flex
-    flex: 1 0 100%
-    min-width: 0
-    min-height: $input-height
-
-/** Icons */
-.input-group
-  &__icon-cb
-    cursor: pointer
-
-.input-group
-  &.input-group--focused
-    .input-group__input .icon
-      color: $theme.primary
-
-/** States */
-.input-group
-  &--disabled
-    .input-group__details:before
-      background-color: transparent
-      background-position: bottom
-      background-size: 3px 1px
-      background-repeat: repeat-x
-
-  // Focused
-  &.input-group--text-field
-    &:not(.input-group--single-line):not(.input-group--error)
-      &.input-group--focused,
-      &:focus
-        label
-          color: $theme.primary
-
-        textarea
-          border-color: $theme.primary
-
-    &.input-group--focused,
-    &:focus
-      &:not(.input-group--disabled)
-        .input-group__details
-          &:after
-            transform: scaleX(1)
-
-  // Required
-  &--required
-    label:after
-      content: '*'
-
-    &.input-group--focused
-      label:after
-        color: $theme.error
-
-  // Error
-  &.input-group--error
-    input,
-    textarea
-      caret-color: $theme.error
-
-    textarea
-      border-color: $theme.error
-
-    label
-      animation: shake .6s $transition.swing
-
-    label,
-    .input-group__input .icon
-      color: $theme.error
-
-    .input-group__details
-      &:after,
-      &:before
-        background-color: $theme.error
-
-    > label
-      animation: shake .6s $transition.swing
-
-/** Details */
-.input-group
-  .slide-y-transition-leave,
-  .slide-y-transition-leave-to
-    position: absolute
-
-  &__details
-    display: flex
-    padding-top: 4px
-    flex: 1 0 100%
-    font-size: 12px
-    min-height: 22px
-    overflow: hidden
-    position: relative
-    width: 100%
-
-    &:after, &:before
-      content: ''
-      position: absolute
-      left: 0
-      transition: .3s $transition.fast-out-slow-in
-
-    &:after
-      background-color: $theme.primary
-      top: 0
-      height: 2px
-      transform: scaleX(0)
-      transform-origin: center center 0
-      width: 100%
-      z-index: 1
-
-    &:before
-      top: 0
-      height: 1px
-      width: 100%
-      z-index: 0
-
-  &--hide-details
-    .input-group__details
-      min-height: 2px
-      padding: 0
-
-/** Hint */
-.input-group
-  &__hint
-    // flex: 1 0
-    transition: .3s $transition.fast-in-fast-out
-
-/** Error */
-.input-group
-  .input-group__error
-    flex: 1 0
-    transition: .3s $transition.fast-in-fast-out
-    color: $theme.error
-
-
-/** Types */
-.input-group
-  &--overflow,
-  &--segmented,
-  &--editable
-    &.input-group--active
-      background-color: #fff
-
 /* Theme */
 input-group($material)
   input,
@@ -245,3 +72,174 @@ input-group($material)
       color: $material.text.secondary
 
 theme(input-group, "input-group")
+
+.input-group
+  display: flex
+  flex: 1
+  flex-wrap: wrap
+  min-width: 24px
+  padding: $input-group-padding
+  position: relative
+  width: 100%
+  outline: none
+  transition: box-shadow $primary-transition
+
+
+/** Label */
+.input-group
+  label
+    font-size $input-font-size
+    line-height: $input-font-size * 2
+    height: $input-height
+    max-width: 90%
+    min-width: 0
+    overflow: hidden
+    pointer-events: none
+    text-align: left
+    text-overflow: ellipsis
+    transform: translate3d(0, 0, 0)
+    transform-origin: top left
+    transition: .4s $transition.fast-in-fast-out
+    white-space: nowrap
+    width: 100%
+    z-index: 0
+
+/** Blocks */
+.input-group
+  &__input
+    display: flex
+    flex: 1 0 100%
+    min-width: 0
+    min-height: $input-height
+
+/** Icons */
+.input-group
+  &__icon-cb
+    cursor: pointer
+
+.input-group
+  &.input-group--focused
+    .input-group__append-icon,
+    .input-group__prepend-icon
+      color: $theme.primary
+
+/** States */
+.input-group
+  &--disabled
+    .input-group__details:before
+      background-color: transparent
+      background-position: bottom
+      background-size: 3px 1px
+      background-repeat: repeat-x
+
+  // Focused
+  &.input-group--text-field
+    &:not(.input-group--single-line):not(.input-group--error)
+      &.input-group--focused,
+      &:focus
+        label
+          color: $theme.primary
+
+        textarea
+          border-color: $theme.primary
+
+    &.input-group--focused,
+    &:focus
+      &:not(.input-group--disabled)
+        .input-group__details
+          &:after
+            transform: scaleX(1)
+
+  // Required
+  &--required
+    label:after
+      content: '*'
+
+    &.input-group--focused
+      label:after
+        color: $theme.error
+
+  // Error
+  &.input-group--error
+    input,
+    textarea
+      caret-color: $theme.error
+
+    textarea
+      border-color: $theme.error
+
+    label
+      animation: shake .6s $transition.swing
+
+    label,
+    .input-group__input .icon
+      color: $theme.error !important
+
+    .input-group__details
+      &:after,
+      &:before
+        background-color: $theme.error
+
+/** Details */
+.input-group
+  .slide-y-transition-leave,
+  .slide-y-transition-leave-to
+    position: absolute
+
+  &__details
+    display: flex
+    padding-top: 4px
+    flex: 1 0 100%
+    font-size: 12px
+    min-height: 22px
+    overflow: hidden
+    position: relative
+    width: 100%
+
+    &:after, &:before
+      content: ''
+      position: absolute
+      left: 0
+      transition: .3s $transition.fast-out-slow-in
+
+    &:after
+      background-color: $theme.primary
+      top: 0
+      height: 2px
+      transform: scaleX(0)
+      transform-origin: center center 0
+      width: 100%
+      z-index: 1
+
+    &:before
+      top: 0
+      height: 1px
+      width: 100%
+      z-index: 0
+
+  &--hide-details
+    .input-group__details
+      min-height: 2px
+      padding: 0
+
+/** Hint */
+.input-group
+  &__hint
+    // flex: 1 0
+    transition: .3s $transition.fast-in-fast-out
+
+/** Error */
+.input-group
+  .input-group__error
+    flex: 1 0
+    transition: .3s $transition.fast-in-fast-out
+    color: $theme.error
+
+
+/** Types */
+.input-group
+  &--overflow,
+  &--segmented,
+  &--editable
+    &.input-group--active
+      background-color: #fff

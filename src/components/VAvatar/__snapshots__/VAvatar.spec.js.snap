@@ -2,7 +2,9 @@
 
 exports[`VAvatar.vue should have an avatar class 1`] = `
 
-<div class="avatar">
+<div class="avatar"
+     style="height: 48px; width: 48px;"
+>
 </div>
 
 `;

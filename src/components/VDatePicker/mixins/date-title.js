@@ -12,6 +12,10 @@ export default {
     },
     genTitle () {
       let date = new Date(this.year, this.month, this.day)
+
+      // Workaround for #1409
+      date.setHours(1)
+
       date = date.toLocaleString(this.locale, this.titleDateFormat)
 
       if (this.landscape) {

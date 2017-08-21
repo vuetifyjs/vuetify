@@ -8,6 +8,7 @@
   import Keyable from './mixins/keyable'
 
   import ClickOutside from '../../directives/click-outside'
+  import Resize from '../../directives/resize'
 
   export default {
     name: 'v-menu',
@@ -23,12 +24,14 @@
     ],
 
     directives: {
-      ClickOutside
+      ClickOutside,
+      Resize
     },
 
     data () {
       return {
         autoIndex: null,
+        defaultOffset: 8,
         dimensions: {
           activator: {
             top: 0, left: 0,
@@ -155,8 +158,9 @@
           maxHeight: this.auto ? '200px' : isNaN(this.maxHeight) ? this.maxHeight : `${this.maxHeight}px`,
           minWidth: `${this.calculatedMinWidth}px`,
           maxWidth: `${parseInt(this.maxWidth)}px`,
-          top: `${this.calcTop()}px`,
-          left: `${this.calcLeft()}px`
+          top: `${this.calcYOverflow(this.calcTop())}px`,
+          left: `${this.calcXOverflow(this.calcLeft())}px`,
+          transformOrigin: this.origin
         }
       },
       hasActivator () {
@@ -172,11 +176,8 @@
       disabled (val) {
         val && this.deactivate()
       },
-      hasJustFocused (val) {
-        if (!val) return
-
-        clearTimeout(this.focusedTimeout)
-        this.focusedTimeout = setTimeout(() => (this.hasJustFocused = false), 100)
+      isContentActive (val) {
+        this.hasJustFocused = val
       },
       isActive (val) {
         if (this.disabled) return
@@ -188,15 +189,6 @@
       }
     },
 
-    mounted () {
-      window.addEventListener('resize', this.onResize, { passive: true })
-    },
-
-    beforeDestroy () {
-      window.removeEventListener('resize', this.onResize, { passive: true })
-      window.removeEventListener('resize', this.windowResizeHandler)
-    },
-
     methods: {
       activate () {
         if (typeof window === 'undefined') return
@@ -205,11 +197,9 @@
         this.getTiles()
         this.updateDimensions()
         requestAnimationFrame(this.startTransition)
-        this.$emit('activate')
       },
       deactivate () {
         this.isContentActive = false
-        this.$emit('deactivate')
       },
       onResize () {
         clearTimeout(this.resizeTimeout)
@@ -227,6 +217,11 @@
         name: 'click-outside',
         value: () => this.closeOnClick
       }] : []
+
+      directives.push({
+        name: 'resize',
+        value: this.onResize
+      })
 
       const data = {
         'class': 'menu',

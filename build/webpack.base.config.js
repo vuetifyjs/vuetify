@@ -18,9 +18,8 @@ module.exports = {
     fs: 'empty'
   },
   plugins: [
-    new ProgressBarPlugin(),
     new FriendlyErrorsWebpackPlugin({
-      clearConsole: false
+      clearConsole: true
     })
   ]
 }

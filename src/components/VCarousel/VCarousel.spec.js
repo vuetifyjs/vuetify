@@ -1,4 +1,5 @@
 import VCarousel from '~components/VCarousel'
+import VCarouselItem from './VCarouselItem'
 import { test } from '~util/testing'
 
 test('VCarousel.js', ({ mount }) => {
@@ -76,5 +77,52 @@ test('VCarousel.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render component with selected active item', async () => {
+    const vm = mount(VCarousel).vm
+    const wrapper = mount(VCarousel, {
+      propsData: {
+        value: 1
+      },
+      slots: {
+        default: [1, 2, 3].map(i => {
+          return {
+            vNode: vm.$createElement(VCarouselItem, { attrs: { src: i.toString() } })
+          }
+        })
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should emit input event after interval', async () => {
+    const vm = mount(VCarousel).vm
+    const wrapper = mount(VCarousel, {
+      propsData: {
+        value: 1,
+        interval: 3
+      },
+      slots: {
+        default: [1, 2, 3].map(i => {
+          return {
+            vNode: vm.$createElement(VCarouselItem, { attrs: { src: i.toString() } })
+          }
+        })
+      }
+    })
+
+    const values = []
+    await new Promise(resolve => {
+      wrapper.instance().$on('input', value => {
+        values.push(value)
+        if (values.length === 3) {
+          resolve()
+        }
+      })
+    })
+    expect(values).toEqual([1, 2, 0])
   })
 })

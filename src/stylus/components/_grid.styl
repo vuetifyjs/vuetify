@@ -35,11 +35,13 @@
 
           > .flex
             padding: ($gutter / 2)
+  
+  > .layout
+    margin-right: -($grid-gutters.md / 2)
+    margin-left: -($grid-gutters.md / 2)
 
 .layout
   display: flex
-  margin-right: -($grid-gutters.md / 2)
-  margin-left: -($grid-gutters.md / 2)
 
   &.row, &.column
     flex: 0 1 auto
@@ -140,7 +142,7 @@
     justify-content: space-between
 
 .spacer
-  flex-grow: 1
+  flex-grow: 1 !important
 
 .scroll-y
   overflow-y: auto
@@ -153,3 +155,11 @@
 
 .flexbox
   display: flex
+
+.no-wrap
+  white-space: nowrap
+  
+.ellipsis
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis

@@ -1,8 +1,10 @@
 <script>
   import { VFadeTransition } from '../transitions'
+  import VIcon from '../VIcon'
 
   import Colorable from '../../mixins/colorable'
   import TabFocusable from '../../mixins/tab-focusable'
+  import Themeable from '../../mixins/themeable'
 
   import Ripple from '../../directives/ripple'
 
@@ -13,9 +15,12 @@
 
     inject: ['isMandatory'],
 
-    components: { VFadeTransition },
+    components: {
+      VFadeTransition,
+      VIcon
+    },
 
-    mixins: [Colorable, TabFocusable],
+    mixins: [Colorable, TabFocusable, Themeable],
 
     directives: { Ripple },
 
@@ -38,7 +43,9 @@
           'input-group--active': this.isActive,
           'input-group--selection-controls': true,
           'input-group--tab-focused': this.tabFocused,
-          'radio': true
+          'radio': true,
+          'theme--dark': this.dark,
+          'theme--light': this.light
         })
       },
 
@@ -95,17 +102,25 @@
           on: {
             click: this.click
           }
-        }, this.label)
+        }, this.$slots.label || this.label)
       },
       click () {
         const mandatory = this.isMandatory &&
           this.isMandatory() || false
 
         if (!this.disabled && (!this.isActive || !mandatory)) {
-          this.$refs.input.checked = !this.$refs.input.checked
-          this.isActive = !this.isActive
+          this.$refs.input.checked = true
+          this.isActive = true
           this.$emit('change', this.value)
         }
+      }
+    },
+
+    created() {
+      // Semantic check to help people identify the reason for the inject error above it.
+      if (!this.$parent || !this.$parent.$vnode || !this.$parent.$vnode.tag ||
+        !this.$parent.$vnode.tag.endsWith("v-radio-group")) {
+        console.warn("[Vuetify] Warn: The v-radio component must have an immediate parent of v-radio-group.")
       }
     },
 
@@ -136,5 +151,3 @@
     }
   }
 </script>
-
-<style lang="stylus" src="../../stylus/components/_radio.styl"></style>

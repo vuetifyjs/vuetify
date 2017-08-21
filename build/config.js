@@ -3,16 +3,31 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const OptimizeJsPlugin = require('optimize-js-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const version = process.env.VERSION || require('../package.json').version
 
 const builds = {
   development: {
-    filename: 'vuetify.js',
-    libraryTarget: 'umd'
+    config: {
+      output: {
+        filename: 'vuetify.js',
+        libraryTarget: 'umd'
+      },
+      plugins: [
+        new ExtractTextPlugin('vuetify.css')
+      ]
+    }
   },
   production: {
-    filename: 'vuetify.min.js',
-    libraryTarget: 'umd',
+    config: {
+      output: {
+        filename: 'vuetify.min.js',
+        libraryTarget: 'umd'
+      },
+      plugins: [
+        new ExtractTextPlugin('vuetify.min.css')
+      ]
+    },
     env: 'production'
   },
   /*
@@ -30,12 +45,7 @@ const builds = {
 }
 
 function genConfig (opts) {
-  const config = merge({}, base, {
-    output: {
-      filename: opts.filename,
-      libraryTarget: opts.libraryTarget
-    }
-  })
+  const config = merge({}, base, opts.config)
 
   config.plugins = config.plugins.concat([
     new webpack.DefinePlugin({
@@ -52,7 +62,7 @@ function genConfig (opts) {
         assetNameRegExp: /\.css$/g,
         cssProcessor: require('cssnano'),
         cssProcessorOptions: { discardComments: { removeAll: true }},
-        canPrint: true
+        canPrint: false
       }),
       new webpack.BannerPlugin({
         banner: `/*!
@@ -76,6 +86,5 @@ function genConfig (opts) {
 if (process.env.TARGET) {
   module.exports = genConfig(builds[process.env.TARGET])
 } else {
-  exports.getBuild = name => genConfig(builds[name])
-  exports.getAllBuilds = () => Object.keys(builds).map(name => genConfig(builds[name]))
+  module.exports = Object.keys(builds).map(name => genConfig(builds[name]))
 }

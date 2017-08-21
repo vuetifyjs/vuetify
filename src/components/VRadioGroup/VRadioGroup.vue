@@ -1,11 +1,10 @@
 <script>
   import Input from '../../mixins/input'
-  import Themeable from '../../mixins/themeable'
 
   export default {
     name: 'v-radio-group',
 
-    mixins: [Input, Themeable],
+    mixins: [Input],
 
     model: {
       prop: 'inputValue',
@@ -50,9 +49,7 @@
         return {
           'radio-group': true,
           'radio-group--column': this.column,
-          'radio-group--row': this.row,
-          'theme--dark': this.dark,
-          'theme--light': this.light
+          'radio-group--row': this.row
         }
       }
     },
@@ -66,8 +63,6 @@
         if (this.disabled) {
           return
         }
-
-        value = value === this.inputValue ? null : value
 
         this.shouldValidate = true
         this.$emit('change', value)
@@ -111,3 +106,5 @@
 
 <style lang="stylus" src="../../stylus/components/_input-groups.styl"></style>
 <style lang="stylus" src="../../stylus/components/_selection-controls.styl"></style>
+
+<style lang="stylus" src="../../stylus/components/_radio-group.styl"></style>

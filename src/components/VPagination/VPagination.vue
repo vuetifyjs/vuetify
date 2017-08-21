@@ -1,8 +1,12 @@
 <script>
   import VIcon from '../VIcon'
 
+  import Resize from '../../directives/resize'
+
   export default {
     name: 'v-pagination',
+
+    directives: { Resize },
 
     props: {
       circle: Boolean,
@@ -12,17 +16,24 @@
         default: 0,
         validator: val => val % 1 === 0
       },
-      value: {
-        type: Number,
-        default: 0
+      totalVisible: Number,
+      nextIcon: {
+        type: String,
+        default: 'chevron_right'
       },
       prevIcon: {
         type: String,
         default: 'chevron_left'
       },
-      nextIcon: {
-        type: String,
-        default: 'chevron_right'
+      value: {
+        type: Number,
+        default: 0
+      }
+    },
+
+    data () {
+      return {
+        maxButtons: 0
       }
     },
 
@@ -42,31 +53,27 @@
       },
 
       items () {
-        if (this.length <= 5) {
+        const maxLength = this.totalVisible || this.maxButtons
+        if (this.length <= maxLength) {
           return this.range(1, this.length)
         }
 
-        let min = this.value - 3
-        min = min > 0 ? min : 1
+        const even = maxLength % 2 === 0 ? 1 : 0
+        const left = Math.floor(maxLength / 2)
+        const right = this.length - left + 1 + even
 
-        let max = min + 6
-        max = max <= this.length ? max : this.length
+        if (this.value >= left && this.value <= right) {
+          const start = this.value - left + 2
+          const end = this.value + left - 2 - even
 
-        if (max === this.length) {
-          min = this.length - 6
+          return [1, '...', ...this.range(start, end), '...', this.length]
+        } else {
+          return [
+            ...this.range(1, left),
+            '...',
+            ...this.range(this.length - left + 1 + even, this.length)
+          ]
         }
-
-        const range = this.range(min, max)
-
-        if (this.value >= 4 && this.length > 6) {
-          range.splice(0, 2, 1, '...')
-        }
-
-        if (this.value + 3 < this.length && this.length > 6) {
-          range.splice(range.length - 2, 2, '...', this.length)
-        }
-
-        return range
       }
     },
 
@@ -75,6 +82,13 @@
     },
 
     methods: {
+      onResize () {
+        const width = this.$el && this.$el.parentNode
+          ? this.$el.parentNode.clientWidth
+          : window.innerWidth
+
+        this.maxButtons = Math.floor((width - 96) / 42)
+      },
       init () {
         this.selected = null
 
@@ -145,7 +159,10 @@
         this.genIcon(h, this.nextIcon, this.value === this.length, this.next)
       ]
 
-      return h('ul', { class: this.classes }, children)
+      return h('ul', {
+        directives: [{ name: 'resize', value: this.onResize }],
+        class: this.classes
+      }, children)
     }
   }
 </script>
