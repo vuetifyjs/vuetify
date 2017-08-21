@@ -10,19 +10,7 @@ export default {
         }, this.yearIcon)
         : null
     },
-    genTitle () {
-      let date = new Date(this.year, this.month, this.day)
-
-      // Workaround for #1409
-      date.setHours(1)
-
-      date = date.toLocaleString(this.locale, this.titleDateFormat)
-
-      if (this.landscape) {
-        if (date.indexOf(',') > -1) date = date.replace(',', ',<br>')
-        else if (date.indexOf(' ') > -1) date = date.replace(' ', '<br>')
-      }
-
+    genTitle (title) {
       const text = this.$createElement('transition', {
         props: {
           name: 'slide-x-transition',
@@ -30,8 +18,8 @@ export default {
         }
       }, [
         this.$createElement('div', {
-          domProps: { innerHTML: date },
-          key: date
+          domProps: { innerHTML: title },
+          key: title
         })
       ])
 

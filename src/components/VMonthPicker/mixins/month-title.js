@@ -10,11 +10,7 @@ export default {
         }, this.yearIcon)
         : null
     },
-    genTitle () {
-      let date = new Date(this.year, this.month, 1, 12 /* Workaround for #1409 */)
-
-      date = date.toLocaleString(this.locale, { month: 'long' }).trim()
-
+    genTitle (title) {
       const text = this.$createElement('transition', {
         props: {
           name: 'slide-x-transition',
@@ -22,8 +18,8 @@ export default {
         }
       }, [
         this.$createElement('div', {
-          domProps: { innerHTML: date },
-          key: date
+          domProps: { innerHTML: title },
+          key: title
         })
       ])
 

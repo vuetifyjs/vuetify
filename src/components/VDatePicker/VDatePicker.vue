@@ -120,6 +120,18 @@
       },
       computedTransition () {
         return this.isReversing ? 'tab-reverse-transition' : 'tab-transition'
+      },
+      titleText () {
+        let date = new Date(this.year, this.month, this.day, 1 /* Workaround for #1409 */)
+
+        date = date.toLocaleString(this.locale, this.titleDateFormat)
+
+        if (this.landscape) {
+          if (date.indexOf(',') > -1) date = date.replace(',', ',<br>')
+          else if (date.indexOf(' ') > -1) date = date.replace(' ', '<br>')
+        }
+
+        return date
       }
     },
 
@@ -200,7 +212,7 @@
     render (h) {
       const children = []
 
-      !this.noTitle && children.push(this.genTitle())
+      !this.noTitle && children.push(this.genTitle(this.titleText))
 
       if (!this.isSelected) {
         const bodyChildren = []

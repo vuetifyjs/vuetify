@@ -105,6 +105,11 @@
       },
       computedTransition () {
         return this.isReversing ? 'tab-reverse-transition' : 'tab-transition'
+      },
+      titleText () {
+        let date = new Date(this.year, this.month, 1, 12 /* Workaround for #1409 */)
+
+        return date.toLocaleString(this.locale, { month: 'long' }).trim()
       }
     },
 
@@ -175,7 +180,7 @@
     render (h) {
       const children = []
 
-      !this.noTitle && children.push(this.genTitle())
+      !this.noTitle && children.push(this.genTitle(this.titleText))
 
       if (!this.isSelected) {
         const bodyChildren = []
