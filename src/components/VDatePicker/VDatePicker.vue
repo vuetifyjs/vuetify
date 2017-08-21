@@ -224,8 +224,12 @@
 
       if (!this.isSelected) {
         const bodyChildren = []
+        const headerSelector = this.genSelector(this.tableMonth,
+          new Date(this.tableYear, this.tableMonth, 1, 1 /* Workaround for #1409 */)
+          .toLocaleString(this.locale, this.headerDateFormat),
+          change => new Date(this.tableYear, change))
 
-        bodyChildren.push(this.genHeader())
+        bodyChildren.push(this.$createElement('div', { 'class': 'picker--date__header' }, [headerSelector]))
         bodyChildren.push(this.genTable())
 
         children.push(h('div', {
