@@ -22,7 +22,7 @@ export default {
         }
       }, [
         this.$createElement('div', {
-          domProps: { innerText: date },
+          domProps: { innerHTML: date },
           key: date
         })
       ])
