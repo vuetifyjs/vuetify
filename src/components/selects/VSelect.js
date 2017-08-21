@@ -45,7 +45,8 @@ export default {
       inputValue: this.multiple && !this.value ? [] : this.value,
       isBooted: false,
       lastItem: 20,
-      isActive: false
+      isActive: false,
+      searchInputValue: this.searchInput
     }
   },
 
@@ -142,6 +143,18 @@ export default {
     isDropdown () {
       return this.segmented || this.overflow || this.editable
     },
+<<<<<<< HEAD
+=======
+    searchValue: {
+      get () {
+        return this.searchInput || this.searchInputValue
+      },
+      set (val) {
+        this.searchInputValue = val
+        this.$emit('update:searchInput', val)
+      }
+    },
+>>>>>>> master
     selectedItems () {
       if (this.inputValue === null ||
         typeof this.inputValue === 'undefined') return []
