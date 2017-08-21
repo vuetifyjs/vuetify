@@ -66,6 +66,39 @@ export default {
         } catch (e) {}
       }, this.overlayTransitionDuration)
     },
+    scrollListener (e) {
+      const up = [38, 33, 36]
+      const down = [40, 34, 35]
+      if (e.type === 'keydown') {
+        if (up.includes(e.keyCode)) {
+          e.deltaY = -1
+        } else if (e.type === 'keydown' && down.includes(e.keyCode)) {
+          e.deltaY = 1
+        } else {
+          return
+        }
+      }
+
+      if (e.target === this.overlay || e.target === document.body || this.checkPath(e)) e.preventDefault()
+    },
+    hasScrollbar (el) {
+      return ['auto', 'scroll'].includes(window.getComputedStyle(el)['overflow-y'])
+    },
+    checkPath (e) {
+      for (let i = 0; i < e.path.length; i++) {
+        const el = e.path[i]
+
+        if (this.hasScrollbar(el)) {
+          if (el.scrollTop === 0 && e.deltaY < 0) return true
+          else if (el.scrollTop + el.clientHeight === el.scrollHeight && e.deltaY > 0) return true
+          else return false
+        }
+
+        if (el === this.$refs.content) return true
+      }
+
+      return true
+    },
     hideScroll () {
       // Check documentElement first for IE11
       // this.overlayOffset = document.documentElement &&
@@ -74,10 +107,16 @@ export default {
 
       // document.body.style.top = `-${this.overlayOffset}px`
       // document.body.style.position = 'fixed'
-      document.documentElement.style.overflow = 'hidden'
+      // document.documentElement.style.overflow = 'hidden'
+      window.addEventListener('mousewheel', this.scrollListener)
+      window.addEventListener('keydown', this.scrollListener)
+      window.addEventListener('touchmove', this.scrollListener)
     },
     showScroll () {
-      document.documentElement.removeAttribute('style')
+      window.removeEventListener('mousewheel', this.scrollListener)
+      window.removeEventListener('keydown', this.scrollListener)
+      window.removeEventListener('touchmove', this.scrollListener)
+      // document.documentElement.removeAttribute('style')
 
       // if (!this.overlayOffset) return
       // document.body.scrollTop = this.overlayOffset
