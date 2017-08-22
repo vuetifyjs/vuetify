@@ -62,9 +62,9 @@ export default {
           on: {
             click: () => {
               const tableYear = this.tableYear
-              month = month < 9 ? `0${month + 1}` : (month + 1)
+              const monthStr = month < 9 ? `0${month + 1}` : (month + 1)
 
-              this.inputDate = `${tableYear}-${month}-01T12:00:00`
+              this.inputDate = `${tableYear}-${monthStr}-01T12:00:00`
               this.$nextTick(() => (this.autosave && this.save()))
             }
           }
