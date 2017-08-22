@@ -12,10 +12,14 @@ const Vuetify = Vue => {
 
   Vue.use(Directives)
 
-  Vue.prototype.$vuetify = {
+  const $vuetify = {
     load: Load,
     breakpoint: {}
   }
+
+  Vue.util.defineReactive($vuetify, 'breakpoint')
+
+  Vue.prototype.$vuetify = $vuetify
 }
 
 Vuetify.version = version
