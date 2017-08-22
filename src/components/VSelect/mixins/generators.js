@@ -41,7 +41,7 @@ export default {
           on: {
             blur: this.blur,
             focus: this.focus,
-            input: e => (this.lazySearch = e.target.value)
+            input: e => (this.searchValue = e.target.value)
           },
           ref: 'input',
           key: 'input'
