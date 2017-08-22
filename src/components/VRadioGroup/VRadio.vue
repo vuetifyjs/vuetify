@@ -83,6 +83,11 @@
 
         return this.$createElement('div', {
           class: this.classes,
+          attrs: {
+            role: 'radio',
+            'aria-checked': this.isActive && 'true' || 'false',
+            'aria-label': this.label
+          },
           on: {
             keydown: e => {
               if ([13, 32].includes(e.keyCode)) {
