@@ -15,4 +15,47 @@ test('VMonthPicker.js', ({ mount }) => {
     expect(title.text()).toBe('October')
     expect(header.text()).toBe('2014')
   })
+
+  it('should match snapshot with default settings', () => {
+    const wrapper = mount(VMonthPicker, {
+      propsData: {
+        value: '2013-05'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should match snapshot with dark theme', () => {
+    const wrapper = mount(VMonthPicker, {
+      propsData: {
+        value: '2013-05',
+        dark: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should match snapshot with allowed dates', () => {
+    const wrapper = mount(VMonthPicker, {
+      propsData: {
+        value: '2013-05',
+        allowedDates: { min: '2013-03', max: '2013-10' }
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should match snapshot with no title', () => {
+    const wrapper = mount(VMonthPicker, {
+      propsData: {
+        value: '2013-05',
+        noTitle: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
