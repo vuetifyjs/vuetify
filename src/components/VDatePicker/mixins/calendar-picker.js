@@ -48,6 +48,23 @@ export default {
       this.inputDate = this.originalDate
       if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
     },
+    isAllowed (date) {
+      if (!this.allowedDates) return true
+
+      if (Array.isArray(this.allowedDates)) {
+        date = this.intifyDate(date)
+        return !!this.allowedDates.find(allowedDate => this.intifyDate(allowedDate) === date)
+      } else if (this.allowedDates instanceof Function) {
+        return this.allowedDates(date)
+      } else if (this.allowedDates instanceof Object) {
+        date = this.intifyDate(date)
+        const min = this.intifyDate(this.allowedDates.min)
+        const max = this.intifyDate(this.allowedDates.max)
+        return (!min || min <= date) && (!max || max >= date)
+      }
+
+      return true
+    },
     renderPicker (h, staticClass, headerSelector) {
       const children = []
 

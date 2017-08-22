@@ -119,28 +119,10 @@
     },
 
     methods: {
-      isAllowed (date) {
-        if (!this.allowedDates) return true
-
-        if (Array.isArray(this.allowedDates)) {
-          return !!this.allowedDates.find(allowedDate => {
-            const d = new Date(allowedDate)
-            d.setHours(12, 0, 0, 0)
-
-            return d - date === 0
-          })
-        } else if (this.allowedDates instanceof Function) {
-          return this.allowedDates(date)
-        } else if (this.allowedDates instanceof Object) {
-          const min = new Date(this.allowedDates.min)
-          min.setHours(12, 0, 0, 0)
-          const max = new Date(this.allowedDates.max)
-          max.setHours(12, 0, 0, 0)
-
-          return date >= min && date <= max
-        }
-
-        return true
+      intifyDate(date) {
+        if (!date) return null
+        date = new Date(date)
+        return (date.getFullYear() * 12 + date.getMonth()) * 32 + date.getDate()
       },
       getInputDateForYear (year) {
         let tableMonth = this.tableMonth + 1
