@@ -33,6 +33,14 @@ date-picker($material)
           &:after
             background: $theme.accent !important
 
+  &.picker--month table td
+    .btn.btn--active
+      background-color: $theme.primary
+
+    .btn:not(.btn--active):hover
+      background-color: alpha($theme.primary, 0.6) !important
+      color: #fff
+
 theme(date-picker, "picker--date")
 
 .picker--date
@@ -203,24 +211,13 @@ theme(date-picker, "picker--date")
 .picker--date.picker--month
   table
     width: 100%
+
     td
       width: 33.333333%
       height: 56px
       vertical-align: middle
-      .btn
-        height: 40px
-      .btn.btn--active
-        background-color: $theme.primary
-        &:hover
-          background-color: $theme.primary !important
-      .btn:not(.btn--active):hover
-        background-color: $theme.primary !important
-        opacity: .6
-        color: #fff
-  .picker--date__title-date
-    & > div
-      white-space: pre
-      overflow: hidden
-      text-overflow: ellipsis
-      display: inline-block
-      width: 100%
+
+  .picker--date__title-date > div
+    white-space: pre
+    overflow: hidden
+    text-overflow: ellipsis
