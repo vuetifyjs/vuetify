@@ -62,12 +62,13 @@
 
     computed: {
       firstAllowedDate () {
-        const date = new Date().setDate(1).setHours(12, 0, 0, 0)
+        const date = new Date()
+        date.setDate(1)
+        date.setHours(12, 0, 0, 0)
 
         if (this.allowedDates) {
           for (let month = 0; month < 12; month++) {
             const valid = date.setMonth(month)
-            console.log('valid', valid)
             if (this.isAllowed(valid)) return valid
           }
         }
