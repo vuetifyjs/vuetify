@@ -196,8 +196,11 @@
       },
       searchValue (val) {
         if (val && !this.isActive) this.isActive = true
-        
-        this.$nextTick(() => (this.$refs.menu.listIndex = -1))
+        this.$refs.menu.listIndex = null
+
+        this.$nextTick(() => {
+          this.$refs.menu.listIndex = val ? 0 : -1
+        })
       }
     },
 
