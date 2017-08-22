@@ -115,7 +115,7 @@
           'input-group--overflow': this.overflow,
           'input-group--segmented': this.segmented,
           'input-group--editable': this.editable,
-          'input-group--autocomplete': this.autocomplete,
+          'input-group--autocomplete': this.isAutocomplete,
           'input-group--single-line': this.singleLine || this.isDropdown,
           'input-group--multi-line': this.multiLine,
           'input-group--chips': this.chips,
@@ -131,11 +131,14 @@
         return children.join(' ')
       },
       filteredItems () {
-        const items = this.autocomplete && this.searchValue
+        const items = this.isAutocomplete && this.searchValue
           ? this.filterSearch()
           : this.items
 
         return !this.auto ? items.slice(0, this.lastItem) : items
+      },
+      isAutocomplete () {
+        return this.autocomplete || this.editable
       },
       isDirty () {
         return this.selectedItems.length
@@ -176,7 +179,7 @@
       value (val) {
         this.inputValue = val
         this.validate()
-        if (this.autocomplete || this.editable) {
+        if (this.isAutocomplete) {
           this.$nextTick(this.$refs.menu.updateDimensions)
         }
       },
@@ -231,14 +234,16 @@
       focus (e) {
         this.focused = true
         this.$refs.input &&
-          (this.autocomplete || this.editable) &&
+          (this.isAutocomplete) &&
           this.$refs.input.focus()
 
         this.$emit('focus', e)
       },
       genLabel () {
-        if (this.searchValue && !this.focused && this.isDirty) return null
-        if (this.focused && !this.isDirty && this.editable) return null
+        const singleLine = this.singleLine || this.isDropdown
+        if (singleLine && this.isDirty ||
+          singleLine && this.focused && this.searchValue
+        ) return null
 
         const data = {}
 
@@ -292,7 +297,7 @@
           })
         }
 
-        if ((this.autocomplete && this.multiple) || this.editable) {
+        if ((this.isAutocomplete && this.multiple)) {
           this.$nextTick(() => {
             this.$refs.input &&
               this.$refs.input.focus()
@@ -313,7 +318,7 @@
         this.genMenu()
       ], {
         attrs: {
-          tabindex: this.autocomplete ? -1 : 0
+          tabindex: this.isAutocomplete ? -1 : 0
         },
         directives: [{
           name: 'click-outside',
@@ -324,8 +329,8 @@
         }],
         on: {
           ...listeners,
-          focus: !this.autocomplete ? this.focus : this.onAutocompleteFocus,
-          blur: !this.autocomplete ? this.blur : () => {},
+          focus: !this.isAutocomplete ? this.focus : this.onAutocompleteFocus,
+          blur: !this.isAutocomplete ? this.blur : () => {},
           click: () => {
             if (!this.isActive) this.isActive = true
           },

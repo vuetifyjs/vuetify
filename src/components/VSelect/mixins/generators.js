@@ -3,7 +3,7 @@ import { getObjectValueByPath } from '../../../util/helpers'
 export default {
   methods: {
     genMenu () {
-      const offsetY = this.autocomplete || this.offset || this.isDropdown
+      const offsetY = this.isAutocomplete || this.offset || this.isDropdown
       const data = {
         ref: 'menu',
         props: {
@@ -30,7 +30,7 @@ export default {
     genSelectionsAndSearch () {
       let input
 
-      if (this.autocomplete || this.editable) {
+      if (this.isAutocomplete) {
         input = this.$createElement('input', {
           'class': 'input-group--select__autocomplete',
           attrs: {
@@ -41,7 +41,7 @@ export default {
           on: {
             blur: this.blur,
             focus: this.focus,
-            input: e => (this.lazySearch = e.target.value)
+            input: e => (this.searchValue = e.target.value)
           },
           ref: 'input',
           key: 'input'
