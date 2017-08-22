@@ -20,7 +20,7 @@ date-picker($material)
       th
         color: $material.text.primary
 
-      .btn
+      .btn:not(.btn--disabled)
         color: $material.text.primary
 
         &--current
@@ -33,13 +33,15 @@ date-picker($material)
           &:after
             background: $theme.accent !important
 
-  &.picker--month table td
-    .btn.btn--active
-      background-color: $theme.primary !important
+  &.picker--month
+    table
+      .btn
+        &--active
+          background-color: $theme.primary !important
 
-    .btn:not(.btn--active):hover
-      background-color: alpha($theme.primary, 0.6) !important
-      color: #fff
+        &:not(.btn--active):hover
+          background-color: alpha($theme.primary, 0.6) !important
+          color: #fff
 
 theme(date-picker, "picker--date")
 
