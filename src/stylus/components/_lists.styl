@@ -42,7 +42,6 @@ theme(list, "list")
     transition: $primary-transition
     position: relative
     user-select: none
-    cursor: pointer
 
     &:after
       content: ''
@@ -55,7 +54,10 @@ theme(list, "list")
       transition: $primary-transition
       background-color: $material-twelve-percent-dark
 
-    &:hover, &--highlighted
+    &--link
+      cursor: pointer
+
+    &--link:hover, &--highlighted
       background: $material-twelve-percent-dark
 
     &__content,
