@@ -54,6 +54,7 @@
         if (val) {
           !this.fullscreen && !this.hideOverlay && this.genOverlay()
           this.fullscreen && this.hideScroll()
+          this.$refs.content.focus()
         } else {
           if (!this.fullscreen) this.removeOverlay()
           else this.showScroll()
