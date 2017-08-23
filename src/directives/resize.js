@@ -1,8 +1,16 @@
 function inserted (el, binding) {
-  const debounce = cb => setTimeout(cb, 50)
+  let cb = binding.value
+  let debounce = 200
+
+  if (typeof binding.value !== 'function') {
+    cb = binding.value.value
+    debounce = binding.value.debounce
+  }
+
+  const fn = cb => setTimeout(cb, debounce)
   const onResize = () => {
-    clearTimeout(debounce)
-    debounce(binding.value)
+    clearTimeout(fn)
+    fn(cb)
   }
 
   window.addEventListener('resize', onResize, { passive: true })
