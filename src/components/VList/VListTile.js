@@ -35,8 +35,14 @@ export default {
 
   render (h) {
     const { tag, data } = this.generateRouteLink()
+    let newTag = tag
 
     data.attrs = Object.assign({}, data.attrs, this.$attrs)
+
+    if (!this.href &&
+      !this.to &&
+      !this.tag
+    ) newTag = 'div'
 
     return h('li', {
       attrs: {
@@ -45,6 +51,6 @@ export default {
       on: {
         ...this.$listeners
       }
-    }, [h(tag, data, this.$slots.default)])
+    }, [h(newTag, data, this.$slots.default)])
   }
 }

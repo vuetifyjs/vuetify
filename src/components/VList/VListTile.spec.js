@@ -8,11 +8,11 @@ const stub = {
 }
 
 test('VListTile.vue', ({ mount }) => {
-  it('should render correctly', () => {
+  it('should render with a div when href and to are not used', () => {
     const wrapper = mount(VListTile)
 
     expect(wrapper.is('li')).toBe(true)
-    expect(wrapper.find('a').length).toBe(1)
+    expect(wrapper.find('div').length).toBe(1)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -47,7 +47,11 @@ test('VListTile.vue', ({ mount }) => {
   })
 
   it('should not have activeClass when not toggled', () => {
-    const wrapper = mount(VListTile)
+    const wrapper = mount(VListTile, {
+      propsData: {
+        href: 'http://www.google.com'
+      }
+    })
 
     const link = wrapper.find('a')[0]
     expect(link.hasClass(wrapper.instance().activeClass)).toBe(false)
@@ -56,6 +60,7 @@ test('VListTile.vue', ({ mount }) => {
   it('should have activeClass when toggled', () => {
     const wrapper = mount(VListTile, {
       propsData: {
+        href: 'http://www.google.com',
         value: true
       }
     })

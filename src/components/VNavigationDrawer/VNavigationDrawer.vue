@@ -22,6 +22,7 @@
         isActive: this.value,
         isBooted: false,
         isMobile: false,
+        justTransitioned: false,
         touchArea: {
           left: 0,
           right: 0
@@ -128,17 +129,14 @@
         return !this.permanent && (this.temporary || this.isMobile)
       },
       onResize () {
-        clearTimeout(this.resizeTimeout)
-
         if (!this.enableResizeWatcher ||
           this.permanent ||
-          this.temporary
-        ) return
+          this.temporary ||
+          this.justTransitioned
+        ) return (this.justTransitioned = false)
 
-        this.resizeTimeout = setTimeout(() => {
-          this.checkIfMobile()
-          this.isActive = !this.isMobile
-        }, 200)
+        this.checkIfMobile()
+        this.isActive = !this.isMobile
       },
       swipeRight (e) {
         if (this.isActive && !this.right) return
@@ -199,9 +197,17 @@
         'class': this.classes,
         style: { height: this.calculatedHeight },
         directives: this.genDirectives(),
-        on: Object.assign({}, {
-          click: () => this.$emit('update:miniVariant', false)
-        })
+        on: {
+          click: () => this.$emit('update:miniVariant', false),
+          transitionend: () => {
+            const event = window.document.createEvent('HTMLEvents')
+            event.initEvent('resize', true, false)
+
+            this.justTransitioned = true
+
+            window.dispatchEvent(event)
+          }
+        }
       }
 
       return h('aside', data, [
