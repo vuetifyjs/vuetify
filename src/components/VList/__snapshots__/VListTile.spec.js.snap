@@ -4,7 +4,7 @@ exports[`VListTile.vue should render <li> with <a> when using href prop 1`] = `
 
 <li>
   <a href="http://www.google.com"
-     class="list__tile"
+     class="list__tile list__tile--link"
   >
   </a>
 </li>
@@ -14,7 +14,7 @@ exports[`VListTile.vue should render <li> with <a> when using href prop 1`] = `
 exports[`VListTile.vue should render <li> with <button> when using to prop 1`] = `
 
 <li>
-  <button class="list__tile">
+  <button class="list__tile list__tile--link">
   </button>
 </li>
 
