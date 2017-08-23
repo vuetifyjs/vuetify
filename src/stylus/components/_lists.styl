@@ -41,6 +41,8 @@ theme(list, "list")
     margin: 0
     transition: $primary-transition
     position: relative
+    user-select: none
+    cursor: pointer
 
     &:after
       content: ''
@@ -53,7 +55,7 @@ theme(list, "list")
       transition: $primary-transition
       background-color: $material-twelve-percent-dark
 
-    a&:hover, &--highlighted
+    &:hover, &--highlighted
       background: $material-twelve-percent-dark
 
     &__content,
@@ -137,7 +139,7 @@ theme(list, "list")
 
     &--avatar
       height: $list-item-avatar-single-height
-      
+
       .avatar
         img,
         .icon
@@ -215,7 +217,7 @@ theme(list, "list")
     &__header
       > li:first-child
         cursor: pointer
-        
+
         &:hover
           background: $material-twelve-percent-dark
 
@@ -243,7 +245,7 @@ theme(list, "list")
 
   &--subheader
     padding-top: 0
-    
+
   &.list--two-line,
   &.list--three-line
     .list__tile__avatar
