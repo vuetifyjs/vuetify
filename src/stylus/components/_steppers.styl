@@ -5,7 +5,7 @@ stepper($material)
   background: $material.bg-color
 
   .stepper__step
-    &:not(.stepper__step--active):not(.stepper__step--complete)
+    &:not(.stepper__step--active):not(.stepper__step--complete):not(.stepper__step--error)
       .stepper__step__step
         background: rgba($material.fg-color, $material.disabledORhints-text-percent)
 

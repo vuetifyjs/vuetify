@@ -213,6 +213,12 @@ theme(list, "list")
         color: $theme.primary
 
     &__header
+      > li:first-child
+        cursor: pointer
+        
+        &:hover
+          background: $material-twelve-percent-dark
+
       + .list--group
         &:after
           opacity: 1
