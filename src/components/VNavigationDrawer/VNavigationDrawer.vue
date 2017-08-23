@@ -22,7 +22,6 @@
         isActive: this.value,
         isBooted: false,
         isMobile: false,
-        justTransitioned: false,
         touchArea: {
           left: 0,
           right: 0
@@ -131,9 +130,8 @@
       onResize () {
         if (!this.enableResizeWatcher ||
           this.permanent ||
-          this.temporary ||
-          this.justTransitioned
-        ) return (this.justTransitioned = false)
+          this.temporary
+        ) return
 
         this.checkIfMobile()
         this.isActive = !this.isMobile
@@ -198,15 +196,7 @@
         style: { height: this.calculatedHeight },
         directives: this.genDirectives(),
         on: {
-          click: () => this.$emit('update:miniVariant', false),
-          transitionend: () => {
-            const event = window.document.createEvent('HTMLEvents')
-            event.initEvent('resize', true, false)
-
-            this.justTransitioned = true
-
-            window.dispatchEvent(event)
-          }
+          click: () => this.$emit('update:miniVariant', false)
         }
       }
 
