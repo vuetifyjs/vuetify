@@ -67,12 +67,13 @@ export default {
       }, this.overlayTransitionDuration)
     },
     scrollListener (e) {
-      const up = [38, 33, 36]
-      const down = [40, 34, 35]
       if (e.type === 'keydown') {
+        const up = [38, 33, 36]
+        const down = [40, 34, 35]
+
         if (up.includes(e.keyCode)) {
           e.deltaY = -1
-        } else if (e.type === 'keydown' && down.includes(e.keyCode)) {
+        } else if (down.includes(e.keyCode)) {
           e.deltaY = 1
         } else {
           return
@@ -80,11 +81,14 @@ export default {
       }
 
       if (e.target === this.overlay ||
-        e.target === document.body ||
+        (e.type !== 'keydown' && e.target === document.body) ||
         this.checkPath(e)) e.preventDefault()
     },
-    composedPath (el) {
+    composedPath (e) {
       const path = []
+      //const dialog = this.$refs.content.querySelector('.dialog')
+      //let el = e.type === 'keydown' ? dialog : e.target
+      let el = e.target
 
       while (el) {
         path.push(el)
@@ -103,20 +107,40 @@ export default {
       const style = window.getComputedStyle(el)
       return ['auto', 'scroll'].includes(style['overflow-y'])
     },
+    shouldScroll(el, delta) {
+      if (el.scrollTop === 0 && delta < 0) return true
+      else if (el.scrollTop + el.clientHeight === el.scrollHeight && delta > 0) return true
+      else return false
+    },
+    isInside (el, parent) {
+      if (el === parent) {
+        return true
+      } else if (el === null || el === document.body) {
+        return false
+      } else {
+        return this.isInside(el.parentNode, parent)
+      }
+    },
     checkPath (e) {
-      const path = e.path || this.composedPath(e.target)
+      const path = e.path || this.composedPath(e)
       const delta = e.deltaY || -e.wheelDelta
+
+      if (e.type === 'keydown' && path[0] === document.body) {
+        const dialog = this.$refs.content.querySelector('.dialog')
+        const selected = window.getSelection().anchorNode
+        if (this.hasScrollbar(dialog) && this.isInside(selected, dialog)) {
+          return this.shouldScroll(dialog, delta)
+        }
+        return true
+      }
 
       for (let i = 0; i < path.length; i++) {
         const el = path[i]
 
-        if (this.hasScrollbar(el)) {
-          if (el.scrollTop === 0 && delta < 0) return true
-          else if (el.scrollTop + el.clientHeight === el.scrollHeight && delta > 0) return true
-          else return false
-        }
-
-        if (el === this.$refs.content) return true
+        if (el === document) return true
+        else if (this.hasScrollbar(el)) {
+          return this.shouldScroll(el, delta)
+        } else if (el === this.$refs.content) return true
       }
 
       return true
@@ -129,16 +153,21 @@ export default {
 
       // document.body.style.top = `-${this.overlayOffset}px`
       // document.body.style.position = 'fixed'
-      // document.documentElement.style.overflow = 'hidden'
-      window.addEventListener('mousewheel', this.scrollListener)
-      window.addEventListener('keydown', this.scrollListener)
-      window.addEventListener('touchmove', this.scrollListener)
+
+      if (this.$vuetify.breakpoint.mdAndDown) {
+        document.documentElement.style.overflow = 'hidden'
+      } else {
+        window.addEventListener('mousewheel', this.scrollListener)
+        window.addEventListener('keydown', this.scrollListener)
+      }
     },
     showScroll () {
-      window.removeEventListener('mousewheel', this.scrollListener)
-      window.removeEventListener('keydown', this.scrollListener)
-      window.removeEventListener('touchmove', this.scrollListener)
-      // document.documentElement.removeAttribute('style')
+      if (this.$vuetify.breakpoint.mdAndDown) {
+        document.documentElement.removeAttribute('style')
+      } else {
+        window.removeEventListener('mousewheel', this.scrollListener)
+        window.removeEventListener('keydown', this.scrollListener)
+      }
 
       // if (!this.overlayOffset) return
       // document.body.scrollTop = this.overlayOffset
