@@ -86,8 +86,6 @@ export default {
     },
     composedPath (e) {
       const path = []
-      //const dialog = this.$refs.content.querySelector('.dialog')
-      //let el = e.type === 'keydown' ? dialog : e.target
       let el = e.target
 
       while (el) {
@@ -107,7 +105,7 @@ export default {
       const style = window.getComputedStyle(el)
       return ['auto', 'scroll'].includes(style['overflow-y'])
     },
-    shouldScroll(el, delta) {
+    shouldScroll (el, delta) {
       if (el.scrollTop === 0 && delta < 0) return true
       else if (el.scrollTop + el.clientHeight === el.scrollHeight && delta > 0) return true
       else return false
