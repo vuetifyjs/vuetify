@@ -123,6 +123,18 @@ theme(input-group, "input-group")
     .input-group__prepend-icon
       color: $theme.primary
 
+  &.input-group--append-icon, &.input-group--selection-controls
+    label
+      max-width: 75%
+
+  &.input-group--prepend-icon
+    label
+      max-width: 75%
+
+  &.input-group--append-icon.input-group--prepend-icon
+    label
+      max-width: 65%
+
 /** States */
 .input-group
   &--disabled
