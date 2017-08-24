@@ -7,7 +7,7 @@ expansion-panel($material)
     border-top: 1px solid rgba($material.fg-color, $material.divider-percent)
     background-color: $material.cards
     color: $material.text.primary
-    
+
   .icon
     color: $material.icons.active
 
@@ -35,7 +35,7 @@ theme(expansion-panel, "expansion-panel")
 
     &:first-child
       border-top: none !important
-      
+
     .header__icon
       margin-left: auto
 
@@ -50,7 +50,7 @@ theme(expansion-panel, "expansion-panel")
     min-height: $expansion-panel-collapse-height
     position: relative
     padding: 0 24px
-    
+
     > *:not(.header__icon)
       flex: 1 1 auto
 
@@ -60,19 +60,16 @@ theme(expansion-panel, "expansion-panel")
     .card
       border-radius: 0
       elevation(0)
-      
-  &--popout
+
+  &--popout, &--inset
     elevation(0)
-    
-    &:not(.expansion-panel--inset)
-      .expansion-panel__container--active
-        flex-basis: 105%
-    
-    &.expansion-panel--inset
-      .expansion-panel__container--active
-        flex-basis: 95%
-        
 
     .expansion-panel__container--active
       margin: $spacers.three.x
       elevation(3)
+
+  &--popout &__container--active
+    flex-basis: 105%
+
+  &--inset &__container--active
+    flex-basis: 95%
