@@ -92,7 +92,8 @@
       },
       trackStyles () {
         const scaleX = this.calculateScale(1 - (this.inputWidth / 100))
-        const translateX = !this.isActive ? `${8}px` : `${12}px`
+        const offsetX = this.thumbLabel ? 0 : !this.isActive ? 8 : 12
+        const translateX = `${offsetX}px`
         return {
           transition: this.keyPressed >= 2 ? 'none' : '',
           transform: `scaleX(${scaleX}) translateX(${translateX})`
