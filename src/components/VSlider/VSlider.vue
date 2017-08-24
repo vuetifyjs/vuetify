@@ -16,7 +16,8 @@
       return {
         app: {},
         isActive: false,
-        inputWidth: 0
+        inputWidth: 0,
+        keyPressed: 0
       }
     },
 
@@ -43,7 +44,7 @@
     computed: {
       classes () {
         return {
-          'input-group input-group--slider': true,
+          'input-group--slider': true,
           'input-group--active': this.isActive,
           'input-group--dirty': this.inputWidth > 0,
           'input-group--disabled': this.disabled,
@@ -80,6 +81,7 @@
       },
       thumbStyles () {
         return {
+          transition: this.keyPressed >= 2 ? 'none' : '',
           left: `${this.inputWidth}%`
         }
       },
@@ -90,8 +92,10 @@
       },
       trackStyles () {
         const scaleX = this.calculateScale(1 - (this.inputWidth / 100))
-        const translateX = this.inputWidth < 1 && !this.isActive ? `${8}px` : 0
+        const offsetX = this.thumbLabel ? 0 : !this.isActive ? 8 : 12
+        const translateX = `${offsetX}px`
         return {
+          transition: this.keyPressed >= 2 ? 'none' : '',
           transform: `scaleX(${scaleX}) translateX(${translateX})`
         }
       },
@@ -100,6 +104,7 @@
         const scaleX = this.calculateScale(inputWidth / 100)
         const translateX = inputWidth > 99 && !this.thumbLabel ? `${-8}px` : 0
         return {
+          transition: this.keyPressed >= 2 ? 'none' : '',
           transform: `scaleX(${scaleX}) translateX(${translateX})`
         }
       },
@@ -136,13 +141,10 @@
         return val < 0.15 ? 0 : val
       },
       calculateScale (scale) {
-        if (scale < 0.02 && !this.thumbLabel) {
-          return 0
-        }
-
         return this.disabled ? scale - 0.015 : scale
       },
       onMouseDown (e) {
+        this.keyPressed = 2
         const options = { passive: true }
         this.isActive = true
 
@@ -155,6 +157,7 @@
         }
       },
       onMouseUp () {
+        this.keyPressed = 0
         const options = { passive: true }
         this.isActive = false
         this.app.removeEventListener('touchmove', this.onMouseMove, options)
@@ -175,13 +178,19 @@
         this.inputValue = parseInt(this.min, 10) + ((left / 100) * (this.max - this.min))
       },
       onKeyDown (e) {
-        if (!e.keyCode === 37 && !e.keyCode === 39) return
+        if (e.keyCode === 37 || e.keyCode === 39) {
 
-        const direction = e.keyCode === 37 && -1 || e.keyCode === 39 && 1 || 0
-        const multiplier = e.shiftKey && 3 || e.ctrlKey && 2 || 1
-        const amount = this.snap && this.step || 1
+          this.keyPressed += 1
 
-        this.inputValue = this.inputValue + (direction * amount * multiplier)
+          const direction = e.keyCode === 37 && -1 || e.keyCode === 39 && 1 || 0
+          const multiplier = e.shiftKey && 3 || e.ctrlKey && 2 || 1
+          const amount = this.snap && this.step || 1
+
+          this.inputValue = this.inputValue + (direction * amount * multiplier)
+        }
+      },
+      onKeyUp (e) {
+        this.keyPressed = 0
       },
       sliderMove (e) {
         if (!this.isActive) {
@@ -275,7 +284,8 @@
         },
         on: Object.assign({}, {
           mouseup: this.sliderMove,
-          keydown: this.onKeyDown
+          keydown: this.onKeyDown,
+          keyup: this.onKeyUp
         }, this.$listeners),
         directives: [{
           name: 'click-outside'
