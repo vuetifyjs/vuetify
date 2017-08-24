@@ -5,7 +5,7 @@ textfield($material)
   &.input-group--text-field-box
     .input-group__input
       background: $material.buttons.focused-alt
-    
+
 theme(textfield, "input-group--text-field")
 
 /** Label */
@@ -118,6 +118,7 @@ theme(textfield, "input-group--text-field")
     &:focus
       label
         opacity: 1
+        max-width: 100%
 
       &:not(.input-group--textarea)
         label
@@ -216,18 +217,18 @@ theme(textfield, "input-group--text-field")
 
   .input-group__details
     padding: 8px 24px 0
-    
+
     &:before,
     &:after
       height: 2px
       border-bottom-left-radius: 4px
       border-bottom-right-radius: 4px
-  
+
   &.input-group--multi-line
     textarea
       padding-left: 24px
       padding-right: 24px
-  
+
   &:not(.input-group--textarea)
     &.input-group--multi-line
       .input-group__input
@@ -235,7 +236,7 @@ theme(textfield, "input-group--text-field")
 
       label
         top: 26px
-      
+
     &:not(.input-group--multi-line)
       .input-group__input
         padding-left: 24px
