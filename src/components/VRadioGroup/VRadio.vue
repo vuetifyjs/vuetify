@@ -26,7 +26,7 @@
 
     props: {
       disabled: Boolean,
-      value: [String, Number],
+      value: null,
       label: String
     },
 
