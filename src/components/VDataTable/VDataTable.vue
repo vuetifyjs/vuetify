@@ -37,13 +37,17 @@
           rowsPerPage: 5,
           descending: false,
           totalItems: 0
-        }
+        },
+        expanded: {}
       }
     },
 
     mixins: [Head, Body, Filterable, Foot, Progress, Themeable],
 
     props: {
+      expand: {
+        type: Boolean
+      },
       headers: {
         type: Array,
         default: () => []
