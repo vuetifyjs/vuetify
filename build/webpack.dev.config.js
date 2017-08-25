@@ -3,6 +3,8 @@ const baseWebpackConfig = require('./webpack.base.config')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const WriteFilePlugin = require('write-file-webpack-plugin')
 const webpack = require('webpack')
 
 // Helpers
@@ -12,6 +14,7 @@ module.exports = {
   devtool: '#cheap-module-eval-source-map',
   entry: ['babel-polyfill', './dev/index.js'],
   output: {
+    filename: '[name].js',
     path: resolve('../dev'),
     publicPath: '/dev/',
     library: 'Vuetify'
@@ -37,7 +40,9 @@ module.exports = {
       },
       {
         test: /\.styl$/,
-        loaders: ['style-loader', 'css-loader', 'postcss-loader', 'stylus-loader'],
+        loaders: ExtractTextPlugin.extract({
+          use: ['css-loader', 'postcss-loader', 'stylus-loader']
+        }),
         exclude: /node_modules/
       }
     ]
@@ -46,12 +51,20 @@ module.exports = {
     hints: false
   },
   devServer: {
-    contentBase: resolve('../dev')
+    contentBase: resolve('../dev'),
+    publicPath: '/dev/'
   },
   plugins: [
+    new ExtractTextPlugin('[name].css'),
+    new OptimizeCssAssetsPlugin({
+      assetNameRegExp: /\.css$/
+    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': "'development'"
     }),
-    new BundleAnalyzerPlugin()
+    new BundleAnalyzerPlugin(),
+    new WriteFilePlugin({
+      test: /\.css$/
+    })
   ]
 }
