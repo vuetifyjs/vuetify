@@ -5,6 +5,7 @@ export default {
     return {
       overlay: null,
       overlayOffset: 0,
+      overlayTimeout: null,
       overlayTransitionDuration: 500
     }
   },
@@ -19,9 +20,16 @@ export default {
 
   methods: {
     genOverlay () {
+      // If fn is called and timeout is active
+      // cancel removal of overlay and re-add active
       if ((!this.isActive || this.hideOverlay) ||
-        (this.isActive && this.overlay)
-      ) return
+        (this.isActive && this.overlayTimeout)
+      ) {
+        clearTimeout(this.overlayTimeout)
+
+        return this.overlay &&
+          this.overlay.classList.add('overlay--active')
+      }
 
       this.overlay = document.createElement('div')
       this.overlay.className = 'overlay'
@@ -57,13 +65,16 @@ export default {
 
       this.overlay.classList.remove('overlay--active')
 
-      setTimeout(() => {
+      this.overlayTimeout = setTimeout(() => {
         // IE11 Fix
         try {
           this.overlay.parentNode.removeChild(this.overlay)
           this.overlay = null
           this.showScroll()
         } catch (e) {}
+
+        clearTimeout(this.overlayTimeout)
+        this.overlayTimeout = null
       }, this.overlayTransitionDuration)
     },
     scrollListener (e) {
@@ -144,14 +155,6 @@ export default {
       return true
     },
     hideScroll () {
-      // Check documentElement first for IE11
-      // this.overlayOffset = document.documentElement &&
-      //   document.documentElement.scrollTop ||
-      //   document.body.scrollTop
-
-      // document.body.style.top = `-${this.overlayOffset}px`
-      // document.body.style.position = 'fixed'
-
       if (this.$vuetify.breakpoint.mdAndDown) {
         document.documentElement.style.overflow = 'hidden'
       } else {
@@ -166,10 +169,6 @@ export default {
         window.removeEventListener('mousewheel', this.scrollListener)
         window.removeEventListener('keydown', this.scrollListener)
       }
-
-      // if (!this.overlayOffset) return
-      // document.body.scrollTop = this.overlayOffset
-      // document.documentElement.scrollTop = this.overlayOffset
     }
   }
 }
