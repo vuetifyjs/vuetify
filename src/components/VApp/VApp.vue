@@ -36,6 +36,8 @@
     },
 
     mounted () {
+      console.log(this)
+      console.log(this.$vuetify)
       this.onResize()
     },
 
