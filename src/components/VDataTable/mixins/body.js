@@ -19,12 +19,10 @@ export default {
       const expand = this.$createElement('div', {
         class: 'datatable__expand-content',
         key: props.item[this.itemKey],
-        directives: [
-          {
-            name: 'show',
-            value: this.expanded[props.item[this.itemKey]]
-          }
-        ]
+        directives: [{
+          name: 'show',
+          value: this.expanded[props.item[this.itemKey]]
+        }]
       }, [this.$scopedSlots.expand(props)])
 
       const transition = this.$createElement('transition-group', {
@@ -38,39 +36,40 @@ export default {
         on: RowExpandTransitionFunctions
       }, [expand])
 
-      return this.genTR([transition], {
-        class: 'datatable__expand-row'
+      return this.genTR([transition], { class: 'datatable__expand-row' })
+    },
+    createProps (item, index) {
+      const props = { item, index }
+      const key = this.itemKey
+
+      Object.defineProperty(props, 'selected', {
+        get: () => this.selected[item[this.itemKey]],
+        set: (value) => {
+          let selected = this.value.slice()
+          if (value) selected.push(item)
+          else selected = selected.filter(i => i[key] !== item[key])
+          this.$emit('input', selected)
+        }
       })
+
+      Object.defineProperty(props, 'expanded', {
+        get: () => this.expanded[item[this.itemKey]],
+        set: (value) => {
+          if (!this.expand) {
+            Object.keys(this.expanded).forEach((key) => {
+              this.$set(this.expanded, key, false)
+            })
+          }
+          this.$set(this.expanded, item[this.itemKey], value)
+        }
+      })
+
+      return props
     },
     genFilteredItems () {
       const rows = []
       this.filteredItems.forEach((item, index) => {
-        const props = { item, index }
-        const key = this.itemKey
-
-        Object.defineProperty(props, 'selected', {
-          get: () => this.selected[item[this.itemKey]],
-          set: (value) => {
-            let selected = this.value.slice()
-            if (value) selected.push(item)
-            else selected = selected.filter(i => i[key] !== item[key])
-
-            this.$emit('input', selected)
-          }
-        })
-
-        Object.defineProperty(props, 'expanded', {
-          get: () => this.expanded[item[this.itemKey]],
-          set: (value) => {
-            if (!this.expand) {
-              Object.keys(this.expanded).forEach((key) => {
-                this.$set(this.expanded, key, false)
-              })
-            }
-            this.$set(this.expanded, item[this.itemKey], value)
-          }
-        })
-
+        const props = this.createProps(item, index)
         const row = this.$scopedSlots.items(props)
 
         rows.push(this.needsTR(row)
