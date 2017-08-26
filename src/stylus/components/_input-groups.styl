@@ -69,7 +69,11 @@ input-group($material)
 
   .input-group--text-field
     &__prefix, &__suffix
-      color: $material.text.disabled
+      color: $material.text.secondary
+
+    &.input-group--disabled
+      &__prefix, &__suffix
+        color: $material.text.disabled
 
 theme(input-group, "input-group")
 
