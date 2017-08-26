@@ -92,6 +92,7 @@ function unbind (el, binding) {
 }
 
 export default {
+  name: 'ripple',
   bind: directive,
   unbind: unbind
 }

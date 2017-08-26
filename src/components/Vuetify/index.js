@@ -13,21 +13,26 @@ const Vuetify = {
 
     Vue.prototype.$vuetify = $vuetify
 
+    if (opts.transitions) {
+      Object.keys(opts.transitions).forEach(key => {
+        const t = opts.transitions[key]
+        if (t.name !== undefined && t.name.startsWith('v-')) {
+          Vue.component(t.name, t)
+        }
+      })
+    }
+
     if (opts.directives) {
       Object.keys(opts.directives).forEach(key => {
         const d = opts.directives[key]
-        if (d.name !== undefined && d.name.startsWith('v-')) {
-          Vue.use(d)
-        }
+        Vue.directive(d.name, d)
       })
     }
 
     if (opts.components) {
       Object.keys(opts.components).forEach(key => {
         const c = opts.components[key]
-        if (c.name !== undefined && c.name.startsWith('v-')) {
-          Vue.use(c)
-        }
+        Vue.use(c)
       })
     }
   },

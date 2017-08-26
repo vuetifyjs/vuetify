@@ -13,6 +13,8 @@ function directive (e, el, binding, v) {
 }
 
 export default {
+  name: 'click-outside',
+
   bind (el, binding, v) {
     v.context.$vuetify.load(() => {
       const outside = document.querySelector('[data-app]')

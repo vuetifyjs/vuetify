@@ -33,6 +33,7 @@ function unbind (el) {
 }
 
 export default {
+  name: 'badge',
   bind: directive,
   updated: directive,
   componentUpdated: directive,
