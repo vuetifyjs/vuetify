@@ -2,7 +2,6 @@ require('./stylus/app.styl')
 import { devDependencies, version } from '../package.json'
 import * as Components from './components'
 import Directives from './directives'
-import Load from './util/load'
 import Semver from 'semver'
 
 const Vuetify = Vue => {
@@ -11,15 +10,6 @@ const Vuetify = Vue => {
   })
 
   Vue.use(Directives)
-
-  const $vuetify = {
-    load: Load,
-    breakpoint: {}
-  }
-
-  Vue.util.defineReactive($vuetify, 'breakpoint')
-
-  Vue.prototype.$vuetify = $vuetify
 }
 
 Vuetify.version = version

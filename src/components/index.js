@@ -1,3 +1,4 @@
+export { default as Vuetify } from './Vuetify'
 export { default as VApp } from './VApp'
 export { default as VAlert } from './VAlert'
 export { default as VAvatar } from './VAvatar'
