@@ -3,7 +3,7 @@ import VBtnToggle from './VBtnToggle'
 import VBtn from '../VBtn'
 import VIcon from '../VIcon'
 import { test } from '~util/testing'
-import Vue from 'vue'
+import Vue from 'vue/dist/vue.common'
 
 function createBtn (val = null) {
   const options = {

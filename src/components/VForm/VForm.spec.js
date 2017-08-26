@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import Vue from 'vue/dist/vue.common'
 import { mount } from 'avoriaz'
 import { test } from '~util/testing'
 import VTextField from '~components/VTextField'
