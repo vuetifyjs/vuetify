@@ -1,4 +1,4 @@
-import Vue from 'vue/dist/vue.common'
+import Vue from 'vue'
 import load from '~util/load'
 import { mount, shallow } from 'avoriaz'
 import toHaveBeenWarnedInit from '~util/to-have-been-warned'
