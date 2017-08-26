@@ -18,7 +18,8 @@ export default {
           nudgeRight: this.isDropdown ? 16 : 0,
           nudgeWidth: this.isDropdown ? 56 : 24,
           offsetY,
-          value: this.isActive
+          value: this.isActive,
+          zIndex: this.menuZIndex
         },
         on: { input: val => (this.isActive = val) }
       }

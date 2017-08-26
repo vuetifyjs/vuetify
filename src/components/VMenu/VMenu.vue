@@ -139,7 +139,11 @@
         default: false
       },
       maxWidth: [Number, String],
-      minWidth: [Number, String]
+      minWidth: [Number, String],
+      zIndex: {
+        type: [Number, String],
+        default: 6
+      }
     },
 
     computed: {
@@ -160,7 +164,8 @@
           maxWidth: `${parseInt(this.maxWidth)}px`,
           top: `${this.calcYOverflow(this.calcTop())}px`,
           left: `${this.calcXOverflow(this.calcLeft())}px`,
-          transformOrigin: this.origin
+          transformOrigin: this.origin,
+          zIndex: this.zIndex
         }
       },
       hasActivator () {

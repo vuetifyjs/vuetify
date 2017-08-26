@@ -128,17 +128,13 @@
         return !this.permanent && (this.temporary || this.isMobile)
       },
       onResize () {
-        clearTimeout(this.resizeTimeout)
-
         if (!this.enableResizeWatcher ||
           this.permanent ||
           this.temporary
         ) return
 
-        this.resizeTimeout = setTimeout(() => {
-          this.checkIfMobile()
-          this.isActive = !this.isMobile
-        }, 200)
+        this.checkIfMobile()
+        this.isActive = !this.isMobile
       },
       swipeRight (e) {
         if (this.isActive && !this.right) return
@@ -199,9 +195,9 @@
         'class': this.classes,
         style: { height: this.calculatedHeight },
         directives: this.genDirectives(),
-        on: Object.assign({}, {
+        on: {
           click: () => this.$emit('update:miniVariant', false)
-        })
+        }
       }
 
       return h('aside', data, [
