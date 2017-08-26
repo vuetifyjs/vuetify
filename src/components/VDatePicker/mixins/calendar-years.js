@@ -2,7 +2,8 @@ export default {
   methods: {
     genYears (inputDateForYearCallback) {
       return this.$createElement('ul', {
-        'class': 'picker--date__years',
+        staticClass: 'picker--date__years',
+        key: 'year',
         ref: 'years'
       }, this.genYearItems(inputDateForYearCallback))
     },
@@ -17,7 +18,7 @@ export default {
             click: e => {
               e.stopPropagation()
               this.inputDate = inputDateForYearCallback(i)
-              this.isSelected = false
+              this.activePicker = 'MONTH'
             }
           }
         }, i))

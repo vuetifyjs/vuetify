@@ -1,6 +1,6 @@
 export default {
   methods: {
-    genBtn (change, children, inputDateForSelectorBtn) {
+    genBtn (change, children) {
       return this.$createElement('v-btn', {
         props: {
           dark: this.dark,
@@ -9,37 +9,52 @@ export default {
         nativeOn: {
           click: e => {
             e.stopPropagation()
-            this.tableDate = inputDateForSelectorBtn(change)
+            if (this.activePicker === 'DATE') {
+              this.tableDate = new Date(this.tableYear, change)
+            } else if (this.activePicker === 'MONTH') {
+              this.tableDate = new Date(change, this.tableMonth)
+            }
           }
         }
       }, children)
     },
 
     genHeader (keyValue, selectorText) {
+      const header = this.$createElement('v-btn', {
+        key: keyValue,
+        attrs: {
+          flat: true,
+          block: true
+        },
+        on: {
+          click: () => this.activePicker = this.activePicker === 'DATE' ? 'MONTH' : 'YEAR'
+        }
+      }, selectorText)
+
+      const transition = this.$createElement('transition', {
+        props: { name: this.computedTransition }
+      }, [header])
+
       return this.$createElement('div', {
         'class': 'picker--date__header-selector-date'
-      }, [
-        this.$createElement('transition', {
-          props: { name: this.computedTransition }
-        }, [
-          this.$createElement('strong', {
-            key: keyValue
-          }, selectorText)
-        ])
-      ])
+      }, [transition])
     },
 
-    genSelector (keyValue, selectorText, inputDateForSelectorBtn) {
+    genSelector () {
+      const keyValue = this.activePicker === 'DATE' ? this.tableMonth : this.tableYear
+      const selectorText = this.activePicker === 'DATE' ? new Date(this.tableYear, this.tableMonth, 1, 1 /* Workaround for #1409 */)
+        .toLocaleString(this.locale, this.headerDateFormat) : this.tableYear
+
       return this.$createElement('div', {
         'class': 'picker--date__header-selector'
       }, [
         this.genBtn(keyValue - 1, [
           this.$createElement('v-icon', 'chevron_left')
-        ], inputDateForSelectorBtn),
+        ]),
         this.genHeader(keyValue, selectorText),
         this.genBtn(keyValue + 1, [
           this.$createElement('v-icon', 'chevron_right')
-        ], inputDateForSelectorBtn)
+        ])
       ])
     }
   }

@@ -1,19 +1,18 @@
 <script>
-  import { createRange } from '../../util/helpers'
-
   import Picker from '../../mixins/picker'
   import CalendarPicker from './mixins/calendar-picker'
   import CalendarYears from './mixins/calendar-years'
   import CalendarTitle from './mixins/calendar-title'
   import CalendarHeader from './mixins/calendar-header'
   import DateTable from './mixins/date-table'
+  import MonthTable from './mixins/month-table'
   import VBtn from '../VBtn'
   import VCard from '../VCard'
   import VIcon from '../VIcon'
 
   import Touch from '../../directives/touch'
 
-  const defaultDateFormat = val => new Date(val).toISOString().substr(0, 10)
+  const createDefaultDateFormat = pickMonth => val => new Date(val).toISOString().substr(0, pickMonth ? 7 : 10)
 
   export default {
     name: 'v-date-picker',
@@ -24,7 +23,7 @@
       VIcon
     },
 
-    mixins: [Picker, CalendarPicker, CalendarYears, CalendarTitle, CalendarHeader, DateTable],
+    mixins: [Picker, CalendarPicker, CalendarYears, CalendarTitle, CalendarHeader, DateTable, MonthTable],
 
     directives: { Touch },
 
@@ -35,9 +34,9 @@
         currentDay: null,
         currentMonth: null,
         currentYear: null,
-        isSelected: false,
         isReversing: false,
-        narrowDays: []
+        narrowDays: [],
+        activePicker: this.pickMonth ? 'MONTH' : 'DATE'
       }
     },
 
@@ -48,7 +47,7 @@
       },
       dateFormat: {
         type: Function,
-        default: defaultDateFormat
+        default: null
       },
       titleDateFormat: {
         type: Object,
@@ -69,11 +68,24 @@
         type: [String, Number],
         default: 0
       },
+      pickMonth: Boolean,
       yearIcon: String
     },
 
     computed: {
       firstAllowedDate () {
+        // const date = new Date()
+        // date.setDate(1)
+        // date.setHours(12, 0, 0, 0)
+
+        // if (this.allowedDates) {
+        //   for (let month = 0; month < 12; month++) {
+        //     const valid = date.setMonth(month)
+        //     if (this.isAllowed(valid)) return valid
+        //   }
+        // }
+
+        // return date
         const date = new Date()
         date.setHours(12, 0, 0, 0)
 
@@ -100,8 +112,9 @@
           return new Date(`${this.value}T12:00:00`)
         },
         set (val) {
-          this.$emit('input', val ? defaultDateFormat(val) : this.originalDate)
-          this.$emit('update:formattedValue', val ? this.dateFormat(val) : this.dateFormat(this.originalDate))
+          const pickerDateFormat = createDefaultDateFormat(this.pickMonth)
+          this.$emit('input', val ? pickerDateFormat(val) : this.originalDate)
+          this.$emit('update:formattedValue', (this.dateFormat || pickerDateFormat)(val || this.originalDate))
         }
       },
       titleText () {
@@ -120,10 +133,14 @@
 
     methods: {
       intifyDate(date) {
+          // if (!date) return null
+          // date = new Date(date)
+          // return (date.getFullYear() * 12 + date.getMonth()) * 32 + 1
         if (!date) return null
         date = new Date(date)
         return (date.getFullYear() * 12 + date.getMonth()) * 32 + date.getDate()
       },
+
       getInputDateForYear (year) {
         let tableMonth = this.tableMonth + 1
         let day = this.day
@@ -134,26 +151,8 @@
       }
     },
 
-    created () {
-      const date = new Date()
-      date.setDate(date.getDate() - date.getDay() + parseInt(this.firstDayOfWeek))
-
-      createRange(7).forEach(() => {
-        const narrow = date.toLocaleString(this.locale, { weekday: 'narrow' })
-        this.narrowDays.push(narrow)
-
-        date.setDate(date.getDate() + 1)
-      })
-
-      this.tableDate = this.inputDate
-    },
-
     render (h) {
-      const headerSelector = this.selected ? null : this.genSelector(this.tableMonth,
-        new Date(this.tableYear, this.tableMonth, 1, 1 /* Workaround for #1409 */)
-        .toLocaleString(this.locale, this.headerDateFormat),
-        change => new Date(this.tableYear, change))
-      return this.renderPicker(h, 'picker picker--date', headerSelector)
+      return this.renderPicker(h)
     }
   }
 </script>

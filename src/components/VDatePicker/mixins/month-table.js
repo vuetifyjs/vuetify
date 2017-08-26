@@ -1,6 +1,6 @@
 export default {
   methods: {
-    wheelScroll (e) {
+    monthWheelScroll (e) {
       e.preventDefault()
 
       let year = this.tableYear
@@ -10,46 +10,17 @@ export default {
 
       this.tableDate = new Date(year, 0)
     },
-    touch (value) {
-      this.tableDate = new Date(this.tableYear + value, 0)
-    },
-    genTouch () {
-      return {
-        name: 'touch',
-        value: {
-          left: e => (e.offsetX < -15) && this.touch(1),
-          right: e => (e.offsetX > 15) && this.touch(-1)
-        }
-      }
-    },
-    genTable () {
-      return this.$createElement('div', {
-        staticClass: 'picker--date__table',
-        on: this.scrollable ? { wheel: this.wheelScroll } : undefined,
-        directives: [this.genTouch()]
-      }, [
-        this.$createElement('transition', {
-          props: { name: this.computedTransition }
-        }, [
-          this.$createElement('table', {
-            key: this.tableYear
-          }, [
-            this.genTBody()
-          ])
-        ])
-      ])
-    },
-    genTD (month) {
+    monthGenTD (month) {
       const date = new Date(this.tableYear, month, 1, 12, 0, 0, 0)
       const monthName = date.toLocaleString(this.locale, { month: 'short' })
       return this.$createElement('td', [
         this.$createElement('button', {
           'class': {
             'btn': true,
-            'btn--raised': this.isActive(month),
-            'btn--flat': !this.isActive(month),
-            'btn--active': this.isActive(month),
-            'btn--current': this.isCurrent(month),
+            'btn--raised': this.monthIsActive(month),
+            'btn--flat': !this.monthIsActive(month),
+            'btn--active': this.monthIsActive(month),
+            'btn--current': this.monthIsCurrent(month),
             'btn--light': this.dark,
             'btn--disabled': !this.isAllowed(date)
           },
@@ -63,32 +34,37 @@ export default {
             click: () => {
               const tableYear = this.tableYear
               const monthStr = month < 9 ? `0${month + 1}` : (month + 1)
+              const day = this.day < 10 ? `0${this.day}` : this.day
 
-              this.inputDate = `${tableYear}-${monthStr}-01T12:00:00`
-              this.$nextTick(() => (this.autosave && this.save()))
+              this.inputDate = `${tableYear}-${monthStr}-${day}T12:00:00`
+              if (this.pickMonth) {
+                this.$nextTick(() => (this.autosave && this.save()))
+              } else {
+                this.activePicker = 'DATE'
+              }
             }
           }
         })
       ])
     },
-    genTBody () {
+    monthGenTBody () {
       const children = []
       const cols = Array(3).fill(null)
       const rows = 12 / cols.length
 
       for (let row = 0; row < rows; row++) {
         children.push(this.$createElement('tr', cols.map((_, col) => {
-          return this.genTD(row * cols.length + col)
+          return this.monthGenTD(row * cols.length + col)
         })))
       }
 
       return this.$createElement('tbody', children)
     },
-    isActive (i) {
+    monthIsActive (i) {
       return this.tableYear === this.year &&
         this.month === i
     },
-    isCurrent (i) {
+    monthIsCurrent (i) {
       return this.currentYear === this.tableYear &&
         this.currentMonth === i
     }

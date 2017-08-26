@@ -1,6 +1,6 @@
 export default {
   methods: {
-    wheelScroll (e) {
+    dateWheelScroll (e) {
       e.preventDefault()
 
       let month = this.tableMonth
@@ -10,43 +10,11 @@ export default {
 
       this.tableDate = new Date(this.tableYear, month)
     },
-    touch (value) {
-      this.tableDate = new Date(this.tableYear, this.tableMonth + value)
-    },
-    genTable () {
-      const children = []
-      const data = {
-        'class': 'picker--date__table',
-        directives: [
-          {
-            name: 'touch',
-            value: {
-              left: (e) => (e.offsetX < -15) && this.touch(1),
-              right: (e) => (e.offsetX > 15) && this.touch(-1)
-            }
-          }
-        ]
-      }
-
-      if (this.scrollable) {
-        data.on = { wheel: this.wheelScroll }
-      }
-
-      children.push(this.$createElement('table', {
-        key: this.tableMonth
-      }, [this.genTHead(), this.genTBody()]))
-
-      return this.$createElement('div', data, [
-        this.$createElement('transition', {
-          props: { name: this.computedTransition }
-        }, children)
-      ])
-    },
-    genTHead () {
+    dateGenTHead () {
       const days = this.narrowDays.map(day => this.$createElement('th', day))
-      return this.$createElement('thead', this.genTR(days))
+      return this.$createElement('thead', this.dateGenTR(days))
     },
-    genTBody () {
+    dateGenTBody () {
       const children = []
       let rows = []
       const length = new Date(
@@ -68,8 +36,8 @@ export default {
           this.$createElement('button', {
             'class': {
               'btn btn--floating btn--small btn--flat': true,
-              'btn--active': this.isActive(i),
-              'btn--current': this.isCurrent(i),
+              'btn--active': this.dateIsActive(i),
+              'btn--current': this.dateIsCurrent(i),
               'btn--light': this.dark,
               'btn--disabled': !this.isAllowed(date)
             },
@@ -94,30 +62,30 @@ export default {
         ]))
 
         if (rows.length % 7 === 0) {
-          children.push(this.genTR(rows))
+          children.push(this.dateGenTR(rows))
           rows = []
         }
       }
 
       if (rows.length) {
-        children.push(this.genTR(rows))
+        children.push(this.dateGenTR(rows))
       }
 
-      children.length < 6 && children.push(this.genTR([
+      children.length < 6 && children.push(this.dateGenTR([
         this.$createElement('td', { domProps: { innerHTML: '&nbsp;' } })
       ]))
 
       return this.$createElement('tbody', children)
     },
-    genTR (children = [], data = {}) {
+    dateGenTR (children = [], data = {}) {
       return [this.$createElement('tr', data, children)]
     },
-    isActive (i) {
+    dateIsActive (i) {
       return this.tableYear === this.year &&
         this.tableMonth === this.month &&
         this.day === i
     },
-    isCurrent (i) {
+    dateIsCurrent (i) {
       return this.currentYear === this.tableYear &&
         this.currentMonth === this.tableMonth &&
         this.currentDay === i

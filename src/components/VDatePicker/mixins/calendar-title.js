@@ -15,12 +15,12 @@ export default {
       return this.$createElement('div', {
         'class': {
           'picker--date__title-year': true,
-          'active': this.isSelected
+          'active': this.activePicker === 'YEAR'
         },
         on: {
           click: e => {
             e.stopPropagation()
-            this.isSelected = true
+            this.activePicker = 'YEAR'
           }
         }
       }, [
@@ -47,12 +47,12 @@ export default {
       return this.$createElement('div', {
         'class': {
           'picker--date__title-date': true,
-          'active': !this.isSelected
+          'active': this.activePicker !== this.pickMonth ? 'MONTH' : 'DATE'
         },
         on: {
           click: e => {
             e.stopPropagation()
-            this.isSelected = false
+            this.activePicker = this.pickMonth ? 'MONTH' : 'DATE'
           }
         }
       }, [this.genTitleText(title)])

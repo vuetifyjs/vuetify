@@ -10,7 +10,7 @@ test('VDatePicker.js', ({ mount }) => {
     })
 
     const title = wrapper.find('.picker--date__title-date div')[0]
-    const header = wrapper.find('.picker--date__header-selector-date strong')[0]
+    const header = wrapper.find('.picker--date__header-selector-date .btn__content')[0]
 
     expect(title.text()).toBe('Tue, Nov 1')
     expect(header.text()).toBe('November 2005')
@@ -20,6 +20,17 @@ test('VDatePicker.js', ({ mount }) => {
     const wrapper = mount(VDatePicker, {
       propsData: {
         value: '2013-05-07'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should match snapshot with pick-month prop', () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: '2013-05-07',
+        pickMonth: true
       }
     })
 

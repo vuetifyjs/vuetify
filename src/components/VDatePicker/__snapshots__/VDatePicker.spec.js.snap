@@ -28,9 +28,13 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
           </div>
         </button>
         <div class="picker--date__header-selector-date">
-          <strong>
-            May 2013
-          </strong>
+          <button type="button"
+                  class="btn btn--block btn--flat"
+          >
+            <div class="btn__content">
+              May 2013
+            </div>
+          </button>
         </div>
         <button type="button"
                 class="btn btn--icon btn--raised"
@@ -407,9 +411,13 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
           </div>
         </button>
         <div class="picker--date__header-selector-date">
-          <strong>
-            May 2013
-          </strong>
+          <button type="button"
+                  class="btn btn--block btn--flat"
+          >
+            <div class="btn__content">
+              May 2013
+            </div>
+          </button>
         </div>
         <button type="button"
                 class="btn btn--icon btn--raised theme--dark"
@@ -786,9 +794,13 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
           </div>
         </button>
         <div class="picker--date__header-selector-date">
-          <strong>
-            May 2013
-          </strong>
+          <button type="button"
+                  class="btn btn--block btn--flat"
+          >
+            <div class="btn__content">
+              May 2013
+            </div>
+          </button>
         </div>
         <button type="button"
                 class="btn btn--icon btn--raised"
@@ -1155,9 +1167,13 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
           </div>
         </button>
         <div class="picker--date__header-selector-date">
-          <strong>
-            May 2013
-          </strong>
+          <button type="button"
+                  class="btn btn--block btn--flat"
+          >
+            <div class="btn__content">
+              May 2013
+            </div>
+          </button>
         </div>
         <button type="button"
                 class="btn btn--icon btn--raised"
@@ -1496,6 +1512,180 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
           <tr>
             <td>
               &nbsp;
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VDatePicker.js should match snapshot with pick-month prop 1`] = `
+
+<div class="card picker picker--date theme--light"
+     style="height: auto;"
+>
+  <div class="picker__title">
+    <div class="picker--date__title-year">
+      2013
+    </div>
+    <div class="picker--date__title-date active">
+      <div>
+        Tue, May 7
+      </div>
+    </div>
+  </div>
+  <div class="picker__body">
+    <div class="picker--date__header">
+      <div class="picker--date__header-selector">
+        <button type="button"
+                class="btn btn--icon btn--raised"
+        >
+          <div class="btn__content">
+            <i class="material-icons icon">
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div class="picker--date__header-selector-date">
+          <button type="button"
+                  class="btn btn--block btn--flat"
+          >
+            <div class="btn__content">
+              2013
+            </div>
+          </button>
+        </div>
+        <button type="button"
+                class="btn btn--icon btn--raised"
+        >
+          <div class="btn__content">
+            <i class="material-icons icon">
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div class="picker--date__table picker--month__table">
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Jan
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Feb
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Mar
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Apr
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--active"
+              >
+                <span class="btn__content">
+                  May
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Jun
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Jul
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Aug
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Sep
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Oct
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Nov
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Dec
+                </span>
+              </button>
             </td>
           </tr>
         </tbody>
