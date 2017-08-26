@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import { test } from '~util/testing'
 import VSelect from '~components/VSelect'
-import VBtn from '~components/VBtn'
-import { compileToFunctions } from 'vue-template-compiler'
 
 test('VSelect.js', ({ mount, shallow }) => {
   it('should return numeric 0', () => {
@@ -164,7 +162,7 @@ test('VSelect.js', ({ mount, shallow }) => {
           },
           scopedSlots: {
             selection
-          },
+          }
         })
       }
     })

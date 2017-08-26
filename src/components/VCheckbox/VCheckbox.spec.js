@@ -1,4 +1,4 @@
-﻿import { test } from '~util/testing'
+import { test } from '~util/testing'
 import VCheckbox from '~components/VCheckbox'
 
 test('VCheckbox.js', ({ mount }) => {
@@ -61,7 +61,6 @@ test('VCheckbox.js', ({ mount }) => {
     label.trigger('click')
 
     expect(change).toBeCalled()
-    expect('$attrs is readonly').toHaveBeenWarned()
   })
 
   it('should render role and aria-checked attributes on input group', () => {
@@ -94,7 +93,6 @@ test('VCheckbox.js', ({ mount }) => {
 
     const inputGroup = wrapper.find('.input-group')[0]
     expect(inputGroup.hasAttribute('aria-label', 'Test')).toBe(true)
-    expect(`$attrs is readonly`).toHaveBeenWarned()
   })
 
   it('should not render aria-label attribute with no label value on input group', () => {
