@@ -15,19 +15,23 @@ date-picker($material)
   .picker--date__header
     color: $material.text.primary
 
+  .picker--date__header-selector-date
+    strong:hover
+      color: $theme.accent
+
   .picker--date__table
     table
       th
         color: $material.text.primary
 
-      .btn:not(.btn--disabled)
+      :not(.btn--disabled).btn
         color: $material.text.primary
 
         &--current
           color: $theme.accent
 
         &--active
-          color: $material.bg-color
+          color: $material.text.theme
 
         &--floating
           &:after
@@ -132,10 +136,10 @@ theme(date-picker, "picker--date")
       overflow: hidden
 
       strong
+        cursor: pointer
         transition: .3s $transition.swing
         display: block
         width: 100%
-
 
 .picker--date
   &__table

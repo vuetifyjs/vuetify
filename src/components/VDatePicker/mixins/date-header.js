@@ -20,12 +20,8 @@ export default {
     },
 
     genHeader (keyValue, selectorText) {
-      const header = this.$createElement('v-btn', {
+      const header = this.$createElement('strong', {
         key: keyValue,
-        attrs: {
-          flat: true,
-          block: true
-        },
         on: {
           click: () => this.activePicker = this.activePicker === 'DATE' ? 'MONTH' : 'YEAR'
         }
@@ -42,8 +38,9 @@ export default {
 
     genSelector () {
       const keyValue = this.activePicker === 'DATE' ? this.tableMonth : this.tableYear
-      const selectorText = this.activePicker === 'DATE' ? new Date(this.tableYear, this.tableMonth, 1, 1 /* Workaround for #1409 */)
-        .toLocaleString(this.locale, this.headerDateFormat) : this.tableYear
+      const selectorText = this.activePicker === 'DATE'
+        ? new Date(this.tableYear, this.tableMonth, 1, 1 /* Workaround for #1409 */).toLocaleString(this.locale, this.headerDateFormat)
+        : this.tableYear
 
       return this.$createElement('div', {
         'class': 'picker--date__header-selector'
