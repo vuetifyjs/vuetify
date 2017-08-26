@@ -12,6 +12,7 @@
     VListTileTitle
   } from '../VList'
   import VMenu from '../VMenu'
+  import VBtn from '../VBtn'
 
   import Filterable from '../../mixins/filterable'
   import Input from '../../mixins/input'
@@ -34,7 +35,8 @@
       VListTileAction,
       VListTileContent,
       VListTileTitle,
-      VMenu
+      VMenu,
+      VBtn
     },
 
     directives: {
@@ -138,7 +140,7 @@
         return !this.auto ? items.slice(0, this.lastItem) : items
       },
       isAutocomplete () {
-        return this.autocomplete || this.editable
+        return this.autocomplete
       },
       isDirty () {
         return this.selectedItems.length

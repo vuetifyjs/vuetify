@@ -14,9 +14,8 @@ export default {
           contentClass: this.computedContentClass,
           disabled: this.disabled,
           maxHeight: this.maxHeight,
-          nudgeTop: this.isDropdown ? -12 : offsetY ? -2 : 0,
-          nudgeRight: this.isDropdown ? 16 : 0,
-          nudgeWidth: this.isDropdown ? 56 : 24,
+          nudgeTop: this.isDropdown ? 1 : offsetY ? -2 : 0,
+          nudgeWidth: this.isDropdown ? 55 : 24,
           offsetY,
           value: this.isActive,
           zIndex: this.menuZIndex
@@ -31,7 +30,7 @@ export default {
     genSelectionsAndSearch () {
       let input
 
-      if (this.isAutocomplete) {
+      if (this.autocomplete || this.editable) {
         input = this.$createElement('input', {
           'class': 'input-group--select__autocomplete',
           attrs: {
@@ -70,12 +69,32 @@ export default {
           children.push(this.genSlotSelection(item))
         } else if (chips) {
           children.push(this.genChipSelection(item))
+        } else if (this.segmented) {
+          children.push(this.genSegmentedBtn(item))
         } else {
           children.push(this.genCommaSelection(item, i < length - 1))
         }
       })
 
       return children
+    },
+    genSegmentedBtn (item) {
+      if (!item.text || !item.callback) {
+        console.warn('[Vuetify] Warn: When using the v-select component with \'dropdown\' prop without a selection slot, items must contain both a text and callback property')
+        return null
+      }
+
+      return this.$createElement('v-btn', {
+        props: {
+          flat: true
+        },
+        on: {
+          click (e) {
+            e.stopPropagation()
+            item.callback(e)
+          }
+        }
+      }, [item.text])
     },
     genSlotSelection (item) {
       return this.$scopedSlots.selection({ parent: this, item })
