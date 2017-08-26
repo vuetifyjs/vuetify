@@ -18,11 +18,11 @@ export default {
     genExpandedRow (props) {
       const expand = this.$createElement('div', {
         class: 'datatable__expand-content',
-        key: props.item[this.selectedKey],
+        key: props.item[this.itemKey],
         directives: [
           {
             name: 'show',
-            value: this.expanded[props.item[this.selectedKey]]
+            value: this.expanded[props.item[this.itemKey]]
           }
         ]
       }, [this.$scopedSlots.expand(props)])
@@ -46,10 +46,10 @@ export default {
       const rows = []
       this.filteredItems.forEach((item, index) => {
         const props = { item, index }
-        const key = this.selectedKey
+        const key = this.itemKey
 
         Object.defineProperty(props, 'selected', {
-          get: () => this.selected[item[this.selectedKey]],
+          get: () => this.selected[item[this.itemKey]],
           set: (value) => {
             let selected = this.value.slice()
             if (value) selected.push(item)
@@ -60,14 +60,14 @@ export default {
         })
 
         Object.defineProperty(props, 'expanded', {
-          get: () => this.expanded[item[this.selectedKey]],
+          get: () => this.expanded[item[this.itemKey]],
           set: (value) => {
             if (!this.expand) {
               Object.keys(this.expanded).forEach((key) => {
                 this.$set(this.expanded, key, false)
               })
             }
-            this.$set(this.expanded, item[this.selectedKey], value)
+            this.$set(this.expanded, item[this.itemKey], value)
           }
         })
 
