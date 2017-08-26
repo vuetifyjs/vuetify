@@ -2,6 +2,7 @@ import Vue from 'vue'
 import { test } from '~util/testing'
 import VSelect from '~components/VSelect'
 import VBtn from '~components/VBtn'
+import { compileToFunctions } from 'vue-template-compiler'
 
 test('VSelect.js', ({ mount, shallow }) => {
   it('should return numeric 0', () => {
@@ -144,33 +145,37 @@ test('VSelect.js', ({ mount, shallow }) => {
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
-/*
- * Scoped slots not supported in avoriaz?
- *
   it('should render buttons correctly when using slot with segmented prop', async () => {
     const items = [
       { text: 'Hello' }
     ]
 
     const vm = new Vue()
-    const wrapper = mount(VSelect, {
-      propsData: {
-        segmented: true,
-        items
+    const selection = props => vm.$createElement('div', [props.item])
+    const component = Vue.component('test', {
+      components: {
+        VSelect
       },
-      slots: {
-        selection: [
-          { VNode: vm.$createElement(VBtn, { props: { flat: true } }, ['Hello'])}
-        ]
+      render (h) {
+        return h('v-select', {
+          props: {
+            segmented: true,
+            items
+          },
+          scopedSlots: {
+            selection
+          },
+        })
       }
     })
 
-    wrapper.vm.inputValue = items[0]
+    const wrapper = mount(component)
+
+    wrapper.vm.$children[0].inputValue = items[0]
 
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
-*/
 })
