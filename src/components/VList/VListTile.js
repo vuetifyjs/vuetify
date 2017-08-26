@@ -34,7 +34,7 @@ export default {
     },
     isLink () {
       return this.href || this.to ||
-        (this.$listeners && this.$listeners.click)
+        (this.$listeners && (this.$listeners.click || this.$listeners['!click']))
     }
   },
 

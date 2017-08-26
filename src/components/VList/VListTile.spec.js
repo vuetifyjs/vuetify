@@ -1,5 +1,6 @@
 import { test } from '~util/testing'
 import { VListTile } from '~components/VList'
+import { compileToFunctions } from 'vue-template-compiler'
 import Vue from 'vue/dist/vue.common'
 
 const stub = {
@@ -67,5 +68,63 @@ test('VListTile.vue', ({ mount }) => {
 
     const link = wrapper.find('a')[0]
     expect(link.hasClass(wrapper.instance().activeClass)).toBe(true)
+  })
+
+  it('should have --link class when href prop present', () => {
+    const wrapper = mount(VListTile, {
+      propsData: {
+        href: '/home'
+      }
+    })
+
+    expect(wrapper.contains('.list__tile--link')).toBe(true)
+  })
+
+  it('should have --link class when to prop present', () => {
+    const instance = Vue.extend()
+    instance.component('router-link', stub)
+
+    const wrapper = mount(VListTile, {
+      propsData: {
+        to: '/home'
+      },
+      instance
+    })
+
+    expect(wrapper.contains('.list__tile--link')).toBe(true)
+  })
+
+  it('should have --link class when click handler present', () => {
+    const { render } = compileToFunctions(`
+      <v-list-tile @click="">Test</v-list-tile>
+    `)
+
+    const component = Vue.component('test', {
+      components: {
+        VListTile
+      },
+      render
+    })
+
+    const wrapper = mount(component)
+
+    expect(wrapper.contains('div.list__tile--link')).toBe(true)
+  })
+
+  it('should have --link class when click.prevent.stop handler present', () => {
+    const { render } = compileToFunctions(`
+      <v-list-tile @click.prevent.stop="">Test</v-list-tile>
+    `)
+
+    const component = Vue.component('test', {
+      components: {
+        VListTile
+      },
+      render
+    })
+
+    const wrapper = mount(component)
+
+    expect(wrapper.contains('div.list__tile--link')).toBe(true)
   })
 })
