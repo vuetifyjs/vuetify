@@ -179,6 +179,11 @@
 
     watch: {
       inputValue (val) {
+        // Async calls may not have data ready at boot
+        if (!this.multiple &&
+          this.isAutocomplete
+        ) this.searchValue = this.getText(val)
+
         this.$emit('input', val)
       },
       value (val) {
@@ -186,9 +191,6 @@
         this.validate()
 
         if (this.isAutocomplete) {
-          // Async calls may not have data ready at boot
-          if (!this.multiple) this.searchValue = this.getText(val)
-
           this.$nextTick(this.$refs.menu.updateDimensions)
         }
       },
