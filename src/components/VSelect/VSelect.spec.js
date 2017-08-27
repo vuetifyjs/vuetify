@@ -179,4 +179,38 @@ test('VSelect.js', ({ mount, shallow }) => {
     expect(wrapper.vm.isActive).toBe(true)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
+
+  it('should not fill input on blur when using multiple prop', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        items: [1, 2, 3, 4],
+        multiple: true
+      }
+    })
+
+    wrapper.vm.searchValue = 2
+    wrapper.trigger('blur')
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.searchValue).toBe(null)
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should fill input on blur when a value is selected', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        items: ['foo', 'bar'],
+        value: 'foo'
+      }
+    })
+
+    wrapper.vm.searchValue = 'bar'
+    wrapper.trigger('blur')
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.searchValue).toBe('foo')
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 })

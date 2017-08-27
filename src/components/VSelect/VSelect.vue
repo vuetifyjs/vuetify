@@ -203,7 +203,7 @@
         this.focused = val
         this.isBooted = true
         this.lastItem += !val ? 20 : 0
-        !val && (this.searchValue = this.getText(this.inputValue))
+        this.resetSearch()
       },
       isBooted () {
         this.$nextTick(() => {
@@ -226,6 +226,7 @@
         // when dealing with async items
         if (!this.isActive &&
           this.computedItems.length &&
+          val !== null &&
           val !== this.getText(this.inputValue)
         ) {
           this.isActive = true
@@ -269,9 +270,7 @@
           this.isActive = false
           this.focused = false
 
-          // Ensure searchValue is properly set
-          if (this.multiple || !this.isDirty) this.searchValue = null
-          else this.searchValue = this.getText(this.inputValue)
+          this.resetSearch()
 
           this.$emit('blur', this.inputValue)
         })
@@ -332,6 +331,11 @@
           }
         }
       },
+      resetSearch () {
+        // Ensure searchValue is properly set
+        if (this.multiple || !this.isDirty) this.searchValue = null
+        else this.searchValue = this.getText(this.inputValue)
+        },
       selectItem (item) {
         if (!this.multiple) {
           this.inputValue = this.returnObject ? item : this.getValue(item)
