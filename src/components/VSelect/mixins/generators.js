@@ -8,6 +8,7 @@ export default {
         ref: 'menu',
         props: {
           activator: this.$refs.activator,
+          openOnClick: false,
           auto: this.auto,
           closeOnClick: false,
           closeOnContentClick: !this.multiple,
@@ -18,10 +19,9 @@ export default {
           nudgeRight: this.isDropdown ? 16 : 0,
           nudgeWidth: this.isDropdown ? 56 : 24,
           offsetY,
-          value: this.isActive,
+          value: this.isActive && this.computedItems.length,
           zIndex: this.menuZIndex
-        },
-        on: { input: val => (this.isActive = val) }
+        }
       }
 
       this.minWidth && (data.props.minWidth = this.minWidth)
@@ -41,6 +41,11 @@ export default {
           domProps: { value: this.lazySearch },
           on: {
             focus: this.focus,
+            blur: () => {
+              if (this.isActive) return
+
+              this.blur()
+            },
             input: e => (this.searchValue = e.target.value)
           },
           ref: 'input',
@@ -133,7 +138,13 @@ export default {
       }
 
       const data = {
-        on: { click: e => this.selectItem(item) },
+        on: {
+          click: e => {
+            if (disabled) return
+
+            this.selectItem(item)
+          }
+        },
         props: {
           avatar: item === Object(item) && 'avatar' in item,
           ripple: true,
@@ -152,7 +163,7 @@ export default {
       }
 
       return this.$createElement('v-list-tile', data,
-        [this.genAction(item, active), this.genContent(item)]
+        [this.genAction(item, active && !disabled), this.genContent(item)]
       )
     },
     genAction (item, active) {

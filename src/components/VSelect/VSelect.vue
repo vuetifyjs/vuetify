@@ -131,10 +131,11 @@
 
         return children.join(' ')
       },
+      computedItems () {
+        return this.items
+      },
       filteredItems () {
-        const items = this.isAutocomplete && this.searchValue
-          ? this.filterSearch()
-          : this.items
+        const items = this.filterSearch()
 
         return !this.auto ? items.slice(0, this.lastItem) : items
       },
@@ -161,8 +162,9 @@
         }
       },
       selectedItems () {
-        if (this.inputValue === null ||
-          typeof this.inputValue === 'undefined') return []
+        if (!this.multiple &&
+          (this.inputValue === null ||
+          typeof this.inputValue === 'undefined')) return []
 
         return this.items.filter(i => {
           if (!this.multiple) {
@@ -198,8 +200,10 @@
         this.inputValue = val ? [] : null
       },
       isActive (val) {
+        this.focused = val
         this.isBooted = true
         this.lastItem += !val ? 20 : 0
+        !val && (this.searchValue = this.getText(this.inputValue))
       },
       isBooted () {
         this.$nextTick(() => {
@@ -208,12 +212,27 @@
           }
         })
       },
+      items () {
+        if (this.focused && !this.isActive) this.isActive = true
+        this.$refs.menu.listIndex = -1
+
+        this.searchValue && this.$nextTick(() => {
+          this.$refs.menu.listIndex = 0
+        })
+      },
       searchValue (val) {
         // Search value could change from async data
         // don't open menu if not booted
         if (!this.isBooted) return
 
-        if (!this.isActive) {
+        // This could change externally
+        // avoid accidental re-activation
+        // when dealing with async items
+        if (!this.isActive &&
+          !this.multiple &&
+          this.computedItems.length &&
+          val !== this.getText(this.inputValue)
+        ) {
           this.isActive = true
           this.focused = true
         }
@@ -252,6 +271,7 @@
     methods: {
       blur (e) {
         this.$nextTick(() => {
+          this.isActive = false
           this.focused = false
 
           // Ensure searchValue is properly set
@@ -369,7 +389,7 @@
           ...listeners,
           focus: !this.isAutocomplete ? this.focus : this.onAutocompleteFocus,
           blur: !this.isAutocomplete ? this.blur : () => {},
-          click: () => {
+          click: (e) => {
             if (!this.isActive) this.isActive = true
           },
           keydown: this.onKeyDown // Located in mixins/autocomplete.js

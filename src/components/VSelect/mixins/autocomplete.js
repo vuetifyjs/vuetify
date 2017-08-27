@@ -2,8 +2,11 @@ export default {
   props: {
     filter: {
       type: Function,
-      default: (item, query, itemText) => {
-        const text = [undefined, null].includes(itemText) ? '' : itemText
+      default: (item, queryText, itemText) => {
+        const hasValue = val => [undefined, null].includes(val)
+
+        const text = hasValue(itemText) ? '' : itemText
+        const query = hasValue(queryText) ? '' : queryText
 
         return text.toString()
           .toLowerCase()
@@ -14,7 +17,7 @@ export default {
 
   methods: {
     filterSearch () {
-      return this.items.filter(i => this.filter(
+      return this.computedItems.filter(i => this.filter(
         i, this.searchValue, this.getText(i))
       )
     },
