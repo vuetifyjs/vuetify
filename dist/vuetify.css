@@ -4227,22 +4227,22 @@ p {
 .application--light .btn .icon {
   color: rgba(0,0,0,0.87);
 }
-.application--light .btn--disabled {
+.application--light .btn.btn--disabled {
   box-shadow: none !important;
   color: rgba(0,0,0,0.26);
   pointer-events: none;
 }
-.application--light .btn--disabled .icon {
+.application--light .btn.btn--disabled .icon {
   color: rgba(0,0,0,0.26);
 }
-.application--light .btn--disabled:not(.btn--icon):not(.btn--flat) {
+.application--light .btn.btn--disabled:not(.btn--icon):not(.btn--flat) {
   background-color: rgba(0,0,0,0.12) !important;
 }
 .application--light .btn:not(.btn--icon):not(.btn--flat) {
   background-color: #f5f5f5;
 }
-.application--light .btn.btn--icon,
-.application--light .btn.btn--floating {
+.application--light .btn:not(.btn--disabled).btn--icon,
+.application--light .btn:not(.btn--disabled).btn--floating {
   color: rgba(0,0,0,0.54);
 }
 .application .theme--light.btn {
@@ -4251,22 +4251,22 @@ p {
 .application .theme--light.btn .icon {
   color: rgba(0,0,0,0.87);
 }
-.application .theme--light.btn--disabled {
+.application .theme--light.btn.btn--disabled {
   box-shadow: none !important;
   color: rgba(0,0,0,0.26);
   pointer-events: none;
 }
-.application .theme--light.btn--disabled .icon {
+.application .theme--light.btn.btn--disabled .icon {
   color: rgba(0,0,0,0.26);
 }
-.application .theme--light.btn--disabled:not(.btn--icon):not(.btn--flat) {
+.application .theme--light.btn.btn--disabled:not(.btn--icon):not(.btn--flat) {
   background-color: rgba(0,0,0,0.12) !important;
 }
 .application .theme--light.btn:not(.btn--icon):not(.btn--flat) {
   background-color: #f5f5f5;
 }
-.application .theme--light.btn.btn--icon,
-.application .theme--light.btn.btn--floating {
+.application .theme--light.btn:not(.btn--disabled).btn--icon,
+.application .theme--light.btn:not(.btn--disabled).btn--floating {
   color: rgba(0,0,0,0.54);
 }
 .application--dark .btn {
@@ -4275,22 +4275,22 @@ p {
 .application--dark .btn .icon {
   color: #fff;
 }
-.application--dark .btn--disabled {
+.application--dark .btn.btn--disabled {
   box-shadow: none !important;
   color: rgba(255,255,255,0.3);
   pointer-events: none;
 }
-.application--dark .btn--disabled .icon {
+.application--dark .btn.btn--disabled .icon {
   color: rgba(255,255,255,0.3);
 }
-.application--dark .btn--disabled:not(.btn--icon):not(.btn--flat) {
+.application--dark .btn.btn--disabled:not(.btn--icon):not(.btn--flat) {
   background-color: rgba(255,255,255,0.12) !important;
 }
 .application--dark .btn:not(.btn--icon):not(.btn--flat) {
   background-color: #212121;
 }
-.application--dark .btn.btn--icon,
-.application--dark .btn.btn--floating {
+.application--dark .btn:not(.btn--disabled).btn--icon,
+.application--dark .btn:not(.btn--disabled).btn--floating {
   color: #fff;
 }
 .application .theme--dark.btn {
@@ -4299,22 +4299,22 @@ p {
 .application .theme--dark.btn .icon {
   color: #fff;
 }
-.application .theme--dark.btn--disabled {
+.application .theme--dark.btn.btn--disabled {
   box-shadow: none !important;
   color: rgba(255,255,255,0.3);
   pointer-events: none;
 }
-.application .theme--dark.btn--disabled .icon {
+.application .theme--dark.btn.btn--disabled .icon {
   color: rgba(255,255,255,0.3);
 }
-.application .theme--dark.btn--disabled:not(.btn--icon):not(.btn--flat) {
+.application .theme--dark.btn.btn--disabled:not(.btn--icon):not(.btn--flat) {
   background-color: rgba(255,255,255,0.12) !important;
 }
 .application .theme--dark.btn:not(.btn--icon):not(.btn--flat) {
   background-color: #212121;
 }
-.application .theme--dark.btn.btn--icon,
-.application .theme--dark.btn.btn--floating {
+.application .theme--dark.btn:not(.btn--disabled).btn--icon,
+.application .theme--dark.btn:not(.btn--disabled).btn--floating {
   color: #fff;
 }
 /** Base Spec */
@@ -4939,6 +4939,9 @@ p {
 .application--light .input-group:not(.input-group--error) label {
   color: rgba(0,0,0,0.54);
 }
+.application--light .input-group:not(.input-group--error).input-group--disabled label {
+  color: rgba(0,0,0,0.38);
+}
 .application--light .input-group:not(.input-group--error) .input-group__details:before {
   background-color: rgba(0,0,0,0.42);
 }
@@ -4963,9 +4966,6 @@ p {
 .application--light .input-group.input-group--editable .input-group__details:before {
   background-color: rgba(0,0,0,0.12);
 }
-.application--light .input-group.input-group--disabled input {
-  color: rgba(0,0,0,0.54);
-}
 .application--light .input-group.input-group--disabled .input-group__details:before {
   background-color: transparent;
   background-image: linear-gradient(to right, rgba(0,0,0,0.38) 0, rgba(0,0,0,0.38) 33%, transparent 0);
@@ -4973,6 +4973,10 @@ p {
 .application--light .input-group .input-group--text-field__prefix,
 .application--light .input-group .input-group--text-field__suffix {
   color: rgba(0,0,0,0.54);
+}
+.application--light .input-group .input-group--text-field.input-group--disabled__prefix,
+.application--light .input-group .input-group--text-field.input-group--disabled__suffix {
+  color: rgba(0,0,0,0.38);
 }
 .application .theme--light.input-group input,
 .application .theme--light.input-group textarea {
@@ -4993,6 +4997,9 @@ p {
 }
 .application .theme--light.input-group:not(.input-group--error) label {
   color: rgba(0,0,0,0.54);
+}
+.application .theme--light.input-group:not(.input-group--error).input-group--disabled label {
+  color: rgba(0,0,0,0.38);
 }
 .application .theme--light.input-group:not(.input-group--error) .input-group__details:before {
   background-color: rgba(0,0,0,0.42);
@@ -5018,9 +5025,6 @@ p {
 .application .theme--light.input-group.input-group--editable .input-group__details:before {
   background-color: rgba(0,0,0,0.12);
 }
-.application .theme--light.input-group.input-group--disabled input {
-  color: rgba(0,0,0,0.54);
-}
 .application .theme--light.input-group.input-group--disabled .input-group__details:before {
   background-color: transparent;
   background-image: linear-gradient(to right, rgba(0,0,0,0.38) 0, rgba(0,0,0,0.38) 33%, transparent 0);
@@ -5028,6 +5032,10 @@ p {
 .application .theme--light.input-group .input-group--text-field__prefix,
 .application .theme--light.input-group .input-group--text-field__suffix {
   color: rgba(0,0,0,0.54);
+}
+.application .theme--light.input-group .input-group--text-field.input-group--disabled__prefix,
+.application .theme--light.input-group .input-group--text-field.input-group--disabled__suffix {
+  color: rgba(0,0,0,0.38);
 }
 .application--dark .input-group input,
 .application--dark .input-group textarea {
@@ -5048,6 +5056,9 @@ p {
 }
 .application--dark .input-group:not(.input-group--error) label {
   color: rgba(255,255,255,0.7);
+}
+.application--dark .input-group:not(.input-group--error).input-group--disabled label {
+  color: rgba(255,255,255,0.5);
 }
 .application--dark .input-group:not(.input-group--error) .input-group__details:before {
   background-color: rgba(255,255,255,0.7);
@@ -5073,9 +5084,6 @@ p {
 .application--dark .input-group.input-group--editable .input-group__details:before {
   background-color: rgba(255,255,255,0.12);
 }
-.application--dark .input-group.input-group--disabled input {
-  color: rgba(255,255,255,0.7);
-}
 .application--dark .input-group.input-group--disabled .input-group__details:before {
   background-color: transparent;
   background-image: linear-gradient(to right, rgba(255,255,255,0.5) 0, rgba(255,255,255,0.5) 33%, transparent 0);
@@ -5083,6 +5091,10 @@ p {
 .application--dark .input-group .input-group--text-field__prefix,
 .application--dark .input-group .input-group--text-field__suffix {
   color: rgba(255,255,255,0.7);
+}
+.application--dark .input-group .input-group--text-field.input-group--disabled__prefix,
+.application--dark .input-group .input-group--text-field.input-group--disabled__suffix {
+  color: rgba(255,255,255,0.5);
 }
 .application .theme--dark.input-group input,
 .application .theme--dark.input-group textarea {
@@ -5103,6 +5115,9 @@ p {
 }
 .application .theme--dark.input-group:not(.input-group--error) label {
   color: rgba(255,255,255,0.7);
+}
+.application .theme--dark.input-group:not(.input-group--error).input-group--disabled label {
+  color: rgba(255,255,255,0.5);
 }
 .application .theme--dark.input-group:not(.input-group--error) .input-group__details:before {
   background-color: rgba(255,255,255,0.7);
@@ -5128,9 +5143,6 @@ p {
 .application .theme--dark.input-group.input-group--editable .input-group__details:before {
   background-color: rgba(255,255,255,0.12);
 }
-.application .theme--dark.input-group.input-group--disabled input {
-  color: rgba(255,255,255,0.7);
-}
 .application .theme--dark.input-group.input-group--disabled .input-group__details:before {
   background-color: transparent;
   background-image: linear-gradient(to right, rgba(255,255,255,0.5) 0, rgba(255,255,255,0.5) 33%, transparent 0);
@@ -5138,6 +5150,10 @@ p {
 .application .theme--dark.input-group .input-group--text-field__prefix,
 .application .theme--dark.input-group .input-group--text-field__suffix {
   color: rgba(255,255,255,0.7);
+}
+.application .theme--dark.input-group .input-group--text-field.input-group--disabled__prefix,
+.application .theme--dark.input-group .input-group--text-field.input-group--disabled__suffix {
+  color: rgba(255,255,255,0.5);
 }
 .input-group {
   display: -webkit-box;
@@ -6262,7 +6278,6 @@ table.table tfoot tr {
 .input-group--text-field:not(.input-group--single-line).input-group--focused label,
 .input-group--text-field:not(.input-group--single-line):focus label {
   opacity: 1;
-  max-width: 100%;
 }
 .input-group--text-field:not(.input-group--single-line).input-group--focused:not(.input-group--textarea) label,
 .input-group--text-field:not(.input-group--single-line):focus:not(.input-group--textarea) label {
@@ -6314,7 +6329,7 @@ table.table tfoot tr {
 }
 .input-group--text-field.input-group--solo label {
   top: 8px;
-  left: 50px;
+  left: 56px;
   -webkit-transform: none !important;
           transform: none !important;
 }
@@ -6415,6 +6430,9 @@ table.table tfoot tr {
 .application--light .input-group:not(.input-group--error) label {
   color: rgba(0,0,0,0.54);
 }
+.application--light .input-group:not(.input-group--error).input-group--disabled label {
+  color: rgba(0,0,0,0.38);
+}
 .application--light .input-group:not(.input-group--error) .input-group__details:before {
   background-color: rgba(0,0,0,0.42);
 }
@@ -6439,9 +6457,6 @@ table.table tfoot tr {
 .application--light .input-group.input-group--editable .input-group__details:before {
   background-color: rgba(0,0,0,0.12);
 }
-.application--light .input-group.input-group--disabled input {
-  color: rgba(0,0,0,0.54);
-}
 .application--light .input-group.input-group--disabled .input-group__details:before {
   background-color: transparent;
   background-image: linear-gradient(to right, rgba(0,0,0,0.38) 0, rgba(0,0,0,0.38) 33%, transparent 0);
@@ -6449,6 +6464,10 @@ table.table tfoot tr {
 .application--light .input-group .input-group--text-field__prefix,
 .application--light .input-group .input-group--text-field__suffix {
   color: rgba(0,0,0,0.54);
+}
+.application--light .input-group .input-group--text-field.input-group--disabled__prefix,
+.application--light .input-group .input-group--text-field.input-group--disabled__suffix {
+  color: rgba(0,0,0,0.38);
 }
 .application .theme--light.input-group input,
 .application .theme--light.input-group textarea {
@@ -6469,6 +6488,9 @@ table.table tfoot tr {
 }
 .application .theme--light.input-group:not(.input-group--error) label {
   color: rgba(0,0,0,0.54);
+}
+.application .theme--light.input-group:not(.input-group--error).input-group--disabled label {
+  color: rgba(0,0,0,0.38);
 }
 .application .theme--light.input-group:not(.input-group--error) .input-group__details:before {
   background-color: rgba(0,0,0,0.42);
@@ -6494,9 +6516,6 @@ table.table tfoot tr {
 .application .theme--light.input-group.input-group--editable .input-group__details:before {
   background-color: rgba(0,0,0,0.12);
 }
-.application .theme--light.input-group.input-group--disabled input {
-  color: rgba(0,0,0,0.54);
-}
 .application .theme--light.input-group.input-group--disabled .input-group__details:before {
   background-color: transparent;
   background-image: linear-gradient(to right, rgba(0,0,0,0.38) 0, rgba(0,0,0,0.38) 33%, transparent 0);
@@ -6504,6 +6523,10 @@ table.table tfoot tr {
 .application .theme--light.input-group .input-group--text-field__prefix,
 .application .theme--light.input-group .input-group--text-field__suffix {
   color: rgba(0,0,0,0.54);
+}
+.application .theme--light.input-group .input-group--text-field.input-group--disabled__prefix,
+.application .theme--light.input-group .input-group--text-field.input-group--disabled__suffix {
+  color: rgba(0,0,0,0.38);
 }
 .application--dark .input-group input,
 .application--dark .input-group textarea {
@@ -6524,6 +6547,9 @@ table.table tfoot tr {
 }
 .application--dark .input-group:not(.input-group--error) label {
   color: rgba(255,255,255,0.7);
+}
+.application--dark .input-group:not(.input-group--error).input-group--disabled label {
+  color: rgba(255,255,255,0.5);
 }
 .application--dark .input-group:not(.input-group--error) .input-group__details:before {
   background-color: rgba(255,255,255,0.7);
@@ -6549,9 +6575,6 @@ table.table tfoot tr {
 .application--dark .input-group.input-group--editable .input-group__details:before {
   background-color: rgba(255,255,255,0.12);
 }
-.application--dark .input-group.input-group--disabled input {
-  color: rgba(255,255,255,0.7);
-}
 .application--dark .input-group.input-group--disabled .input-group__details:before {
   background-color: transparent;
   background-image: linear-gradient(to right, rgba(255,255,255,0.5) 0, rgba(255,255,255,0.5) 33%, transparent 0);
@@ -6559,6 +6582,10 @@ table.table tfoot tr {
 .application--dark .input-group .input-group--text-field__prefix,
 .application--dark .input-group .input-group--text-field__suffix {
   color: rgba(255,255,255,0.7);
+}
+.application--dark .input-group .input-group--text-field.input-group--disabled__prefix,
+.application--dark .input-group .input-group--text-field.input-group--disabled__suffix {
+  color: rgba(255,255,255,0.5);
 }
 .application .theme--dark.input-group input,
 .application .theme--dark.input-group textarea {
@@ -6579,6 +6606,9 @@ table.table tfoot tr {
 }
 .application .theme--dark.input-group:not(.input-group--error) label {
   color: rgba(255,255,255,0.7);
+}
+.application .theme--dark.input-group:not(.input-group--error).input-group--disabled label {
+  color: rgba(255,255,255,0.5);
 }
 .application .theme--dark.input-group:not(.input-group--error) .input-group__details:before {
   background-color: rgba(255,255,255,0.7);
@@ -6604,9 +6634,6 @@ table.table tfoot tr {
 .application .theme--dark.input-group.input-group--editable .input-group__details:before {
   background-color: rgba(255,255,255,0.12);
 }
-.application .theme--dark.input-group.input-group--disabled input {
-  color: rgba(255,255,255,0.7);
-}
 .application .theme--dark.input-group.input-group--disabled .input-group__details:before {
   background-color: transparent;
   background-image: linear-gradient(to right, rgba(255,255,255,0.5) 0, rgba(255,255,255,0.5) 33%, transparent 0);
@@ -6614,6 +6641,10 @@ table.table tfoot tr {
 .application .theme--dark.input-group .input-group--text-field__prefix,
 .application .theme--dark.input-group .input-group--text-field__suffix {
   color: rgba(255,255,255,0.7);
+}
+.application .theme--dark.input-group .input-group--text-field.input-group--disabled__prefix,
+.application .theme--dark.input-group .input-group--text-field.input-group--disabled__suffix {
+  color: rgba(255,255,255,0.5);
 }
 .input-group {
   display: -webkit-box;
@@ -6793,6 +6824,7 @@ table.table tfoot tr {
 
 .input-group--select .input-group--select__autocomplete {
   display: block;
+  padding-bottom: 1px;
 }
 .input-group--select .input-group__append-icon {
   transition: 0.3s cubic-bezier(0, 0, 0.2, 1);
@@ -6801,7 +6833,6 @@ table.table tfoot tr {
   display: inline-block;
   height: 30px;
   opacity: 1;
-  padding-bottom: 1px;
 }
 .input-group--select.input-group--focused .input-group__append-icon {
   -webkit-transform: rotate(-180deg);
@@ -6916,6 +6947,9 @@ table.table tfoot tr {
   height: 48px;
   top: 0;
   width: 1px;
+}
+.menu__content--select .input-group--selection-controls__ripple {
+  display: none;
 }
 /* Themes */
 .application--light .list {
@@ -7247,9 +7281,6 @@ table.table tfoot tr {
           align-items: flex-start;
   padding-top: 6px;
 }
-.list .input-group--selection-controls__ripple {
-  display: none;
-}
 
 .menu {
   display: inline-block;
@@ -7259,8 +7290,10 @@ table.table tfoot tr {
 .menu--disabled {
   cursor: not-allowed;
 }
-.menu--disabled .menu__activator {
+.menu--disabled .menu__activator,
+.menu--disabled .menu__activator > * {
   cursor: not-allowed;
+  pointer-events: none;
 }
 .menu__activator {
   -webkit-box-align: center;
@@ -7878,6 +7911,9 @@ table.table tfoot tr {
 .expansion-panel__container .header__icon {
   margin-left: auto;
 }
+.expansion-panel__container .header__icon .icon {
+  transition: none;
+}
 .expansion-panel__container--active .header__icon .icon {
   -webkit-transform: rotate(-180deg);
           transform: rotate(-180deg);
@@ -7924,6 +7960,18 @@ table.table tfoot tr {
       flex-basis: 95%;
 }
 
+.application--light .footer {
+  background: #f5f5f5;
+}
+.application .theme--light.footer {
+  background: #f5f5f5;
+}
+.application--dark .footer {
+  background: #212121;
+}
+.application .theme--dark.footer {
+  background: #212121;
+}
 .footer {
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -9103,7 +9151,7 @@ table.table tfoot tr {
 .application--light .navigation-drawer {
   background-color: #fff;
 }
-.application--light .navigation-drawer__border {
+.application--light .navigation-drawer:not(.navigation-drawer--floating) .navigation-drawer__border {
   background-color: rgba(0,0,0,0.12);
 }
 .application--light .navigation-drawer.navigation-drawer--right:after {
@@ -9134,7 +9182,7 @@ table.table tfoot tr {
 .application .theme--light.navigation-drawer {
   background-color: #fff;
 }
-.application .theme--light.navigation-drawer__border {
+.application .theme--light.navigation-drawer:not(.navigation-drawer--floating) .navigation-drawer__border {
   background-color: rgba(0,0,0,0.12);
 }
 .application .theme--light.navigation-drawer.navigation-drawer--right:after {
@@ -9165,7 +9213,7 @@ table.table tfoot tr {
 .application--dark .navigation-drawer {
   background-color: #424242;
 }
-.application--dark .navigation-drawer__border {
+.application--dark .navigation-drawer:not(.navigation-drawer--floating) .navigation-drawer__border {
   background-color: rgba(255,255,255,0.12);
 }
 .application--dark .navigation-drawer.navigation-drawer--right:after {
@@ -9196,7 +9244,7 @@ table.table tfoot tr {
 .application .theme--dark.navigation-drawer {
   background-color: #424242;
 }
-.application .theme--dark.navigation-drawer__border {
+.application .theme--dark.navigation-drawer:not(.navigation-drawer--floating) .navigation-drawer__border {
   background-color: rgba(255,255,255,0.12);
 }
 .application .theme--dark.navigation-drawer.navigation-drawer--right:after {
@@ -9713,6 +9761,9 @@ table.table tfoot tr {
 .application--light .input-group:not(.input-group--error) label {
   color: rgba(0,0,0,0.54);
 }
+.application--light .input-group:not(.input-group--error).input-group--disabled label {
+  color: rgba(0,0,0,0.38);
+}
 .application--light .input-group:not(.input-group--error) .input-group__details:before {
   background-color: rgba(0,0,0,0.42);
 }
@@ -9737,9 +9788,6 @@ table.table tfoot tr {
 .application--light .input-group.input-group--editable .input-group__details:before {
   background-color: rgba(0,0,0,0.12);
 }
-.application--light .input-group.input-group--disabled input {
-  color: rgba(0,0,0,0.54);
-}
 .application--light .input-group.input-group--disabled .input-group__details:before {
   background-color: transparent;
   background-image: linear-gradient(to right, rgba(0,0,0,0.38) 0, rgba(0,0,0,0.38) 33%, transparent 0);
@@ -9747,6 +9795,10 @@ table.table tfoot tr {
 .application--light .input-group .input-group--text-field__prefix,
 .application--light .input-group .input-group--text-field__suffix {
   color: rgba(0,0,0,0.54);
+}
+.application--light .input-group .input-group--text-field.input-group--disabled__prefix,
+.application--light .input-group .input-group--text-field.input-group--disabled__suffix {
+  color: rgba(0,0,0,0.38);
 }
 .application .theme--light.input-group input,
 .application .theme--light.input-group textarea {
@@ -9767,6 +9819,9 @@ table.table tfoot tr {
 }
 .application .theme--light.input-group:not(.input-group--error) label {
   color: rgba(0,0,0,0.54);
+}
+.application .theme--light.input-group:not(.input-group--error).input-group--disabled label {
+  color: rgba(0,0,0,0.38);
 }
 .application .theme--light.input-group:not(.input-group--error) .input-group__details:before {
   background-color: rgba(0,0,0,0.42);
@@ -9792,9 +9847,6 @@ table.table tfoot tr {
 .application .theme--light.input-group.input-group--editable .input-group__details:before {
   background-color: rgba(0,0,0,0.12);
 }
-.application .theme--light.input-group.input-group--disabled input {
-  color: rgba(0,0,0,0.54);
-}
 .application .theme--light.input-group.input-group--disabled .input-group__details:before {
   background-color: transparent;
   background-image: linear-gradient(to right, rgba(0,0,0,0.38) 0, rgba(0,0,0,0.38) 33%, transparent 0);
@@ -9802,6 +9854,10 @@ table.table tfoot tr {
 .application .theme--light.input-group .input-group--text-field__prefix,
 .application .theme--light.input-group .input-group--text-field__suffix {
   color: rgba(0,0,0,0.54);
+}
+.application .theme--light.input-group .input-group--text-field.input-group--disabled__prefix,
+.application .theme--light.input-group .input-group--text-field.input-group--disabled__suffix {
+  color: rgba(0,0,0,0.38);
 }
 .application--dark .input-group input,
 .application--dark .input-group textarea {
@@ -9822,6 +9878,9 @@ table.table tfoot tr {
 }
 .application--dark .input-group:not(.input-group--error) label {
   color: rgba(255,255,255,0.7);
+}
+.application--dark .input-group:not(.input-group--error).input-group--disabled label {
+  color: rgba(255,255,255,0.5);
 }
 .application--dark .input-group:not(.input-group--error) .input-group__details:before {
   background-color: rgba(255,255,255,0.7);
@@ -9847,9 +9906,6 @@ table.table tfoot tr {
 .application--dark .input-group.input-group--editable .input-group__details:before {
   background-color: rgba(255,255,255,0.12);
 }
-.application--dark .input-group.input-group--disabled input {
-  color: rgba(255,255,255,0.7);
-}
 .application--dark .input-group.input-group--disabled .input-group__details:before {
   background-color: transparent;
   background-image: linear-gradient(to right, rgba(255,255,255,0.5) 0, rgba(255,255,255,0.5) 33%, transparent 0);
@@ -9857,6 +9913,10 @@ table.table tfoot tr {
 .application--dark .input-group .input-group--text-field__prefix,
 .application--dark .input-group .input-group--text-field__suffix {
   color: rgba(255,255,255,0.7);
+}
+.application--dark .input-group .input-group--text-field.input-group--disabled__prefix,
+.application--dark .input-group .input-group--text-field.input-group--disabled__suffix {
+  color: rgba(255,255,255,0.5);
 }
 .application .theme--dark.input-group input,
 .application .theme--dark.input-group textarea {
@@ -9877,6 +9937,9 @@ table.table tfoot tr {
 }
 .application .theme--dark.input-group:not(.input-group--error) label {
   color: rgba(255,255,255,0.7);
+}
+.application .theme--dark.input-group:not(.input-group--error).input-group--disabled label {
+  color: rgba(255,255,255,0.5);
 }
 .application .theme--dark.input-group:not(.input-group--error) .input-group__details:before {
   background-color: rgba(255,255,255,0.7);
@@ -9902,9 +9965,6 @@ table.table tfoot tr {
 .application .theme--dark.input-group.input-group--editable .input-group__details:before {
   background-color: rgba(255,255,255,0.12);
 }
-.application .theme--dark.input-group.input-group--disabled input {
-  color: rgba(255,255,255,0.7);
-}
 .application .theme--dark.input-group.input-group--disabled .input-group__details:before {
   background-color: transparent;
   background-image: linear-gradient(to right, rgba(255,255,255,0.5) 0, rgba(255,255,255,0.5) 33%, transparent 0);
@@ -9912,6 +9972,10 @@ table.table tfoot tr {
 .application .theme--dark.input-group .input-group--text-field__prefix,
 .application .theme--dark.input-group .input-group--text-field__suffix {
   color: rgba(255,255,255,0.7);
+}
+.application .theme--dark.input-group .input-group--text-field.input-group--disabled__prefix,
+.application .theme--dark.input-group .input-group--text-field.input-group--disabled__suffix {
+  color: rgba(255,255,255,0.5);
 }
 .input-group {
   display: -webkit-box;
@@ -11248,6 +11312,9 @@ table.table tfoot tr {
 .application--light .input-group:not(.input-group--error) label {
   color: rgba(0,0,0,0.54);
 }
+.application--light .input-group:not(.input-group--error).input-group--disabled label {
+  color: rgba(0,0,0,0.38);
+}
 .application--light .input-group:not(.input-group--error) .input-group__details:before {
   background-color: rgba(0,0,0,0.42);
 }
@@ -11272,9 +11339,6 @@ table.table tfoot tr {
 .application--light .input-group.input-group--editable .input-group__details:before {
   background-color: rgba(0,0,0,0.12);
 }
-.application--light .input-group.input-group--disabled input {
-  color: rgba(0,0,0,0.54);
-}
 .application--light .input-group.input-group--disabled .input-group__details:before {
   background-color: transparent;
   background-image: linear-gradient(to right, rgba(0,0,0,0.38) 0, rgba(0,0,0,0.38) 33%, transparent 0);
@@ -11282,6 +11346,10 @@ table.table tfoot tr {
 .application--light .input-group .input-group--text-field__prefix,
 .application--light .input-group .input-group--text-field__suffix {
   color: rgba(0,0,0,0.54);
+}
+.application--light .input-group .input-group--text-field.input-group--disabled__prefix,
+.application--light .input-group .input-group--text-field.input-group--disabled__suffix {
+  color: rgba(0,0,0,0.38);
 }
 .application .theme--light.input-group input,
 .application .theme--light.input-group textarea {
@@ -11302,6 +11370,9 @@ table.table tfoot tr {
 }
 .application .theme--light.input-group:not(.input-group--error) label {
   color: rgba(0,0,0,0.54);
+}
+.application .theme--light.input-group:not(.input-group--error).input-group--disabled label {
+  color: rgba(0,0,0,0.38);
 }
 .application .theme--light.input-group:not(.input-group--error) .input-group__details:before {
   background-color: rgba(0,0,0,0.42);
@@ -11327,9 +11398,6 @@ table.table tfoot tr {
 .application .theme--light.input-group.input-group--editable .input-group__details:before {
   background-color: rgba(0,0,0,0.12);
 }
-.application .theme--light.input-group.input-group--disabled input {
-  color: rgba(0,0,0,0.54);
-}
 .application .theme--light.input-group.input-group--disabled .input-group__details:before {
   background-color: transparent;
   background-image: linear-gradient(to right, rgba(0,0,0,0.38) 0, rgba(0,0,0,0.38) 33%, transparent 0);
@@ -11337,6 +11405,10 @@ table.table tfoot tr {
 .application .theme--light.input-group .input-group--text-field__prefix,
 .application .theme--light.input-group .input-group--text-field__suffix {
   color: rgba(0,0,0,0.54);
+}
+.application .theme--light.input-group .input-group--text-field.input-group--disabled__prefix,
+.application .theme--light.input-group .input-group--text-field.input-group--disabled__suffix {
+  color: rgba(0,0,0,0.38);
 }
 .application--dark .input-group input,
 .application--dark .input-group textarea {
@@ -11357,6 +11429,9 @@ table.table tfoot tr {
 }
 .application--dark .input-group:not(.input-group--error) label {
   color: rgba(255,255,255,0.7);
+}
+.application--dark .input-group:not(.input-group--error).input-group--disabled label {
+  color: rgba(255,255,255,0.5);
 }
 .application--dark .input-group:not(.input-group--error) .input-group__details:before {
   background-color: rgba(255,255,255,0.7);
@@ -11382,9 +11457,6 @@ table.table tfoot tr {
 .application--dark .input-group.input-group--editable .input-group__details:before {
   background-color: rgba(255,255,255,0.12);
 }
-.application--dark .input-group.input-group--disabled input {
-  color: rgba(255,255,255,0.7);
-}
 .application--dark .input-group.input-group--disabled .input-group__details:before {
   background-color: transparent;
   background-image: linear-gradient(to right, rgba(255,255,255,0.5) 0, rgba(255,255,255,0.5) 33%, transparent 0);
@@ -11392,6 +11464,10 @@ table.table tfoot tr {
 .application--dark .input-group .input-group--text-field__prefix,
 .application--dark .input-group .input-group--text-field__suffix {
   color: rgba(255,255,255,0.7);
+}
+.application--dark .input-group .input-group--text-field.input-group--disabled__prefix,
+.application--dark .input-group .input-group--text-field.input-group--disabled__suffix {
+  color: rgba(255,255,255,0.5);
 }
 .application .theme--dark.input-group input,
 .application .theme--dark.input-group textarea {
@@ -11412,6 +11488,9 @@ table.table tfoot tr {
 }
 .application .theme--dark.input-group:not(.input-group--error) label {
   color: rgba(255,255,255,0.7);
+}
+.application .theme--dark.input-group:not(.input-group--error).input-group--disabled label {
+  color: rgba(255,255,255,0.5);
 }
 .application .theme--dark.input-group:not(.input-group--error) .input-group__details:before {
   background-color: rgba(255,255,255,0.7);
@@ -11437,9 +11516,6 @@ table.table tfoot tr {
 .application .theme--dark.input-group.input-group--editable .input-group__details:before {
   background-color: rgba(255,255,255,0.12);
 }
-.application .theme--dark.input-group.input-group--disabled input {
-  color: rgba(255,255,255,0.7);
-}
 .application .theme--dark.input-group.input-group--disabled .input-group__details:before {
   background-color: transparent;
   background-image: linear-gradient(to right, rgba(255,255,255,0.5) 0, rgba(255,255,255,0.5) 33%, transparent 0);
@@ -11447,6 +11523,10 @@ table.table tfoot tr {
 .application .theme--dark.input-group .input-group--text-field__prefix,
 .application .theme--dark.input-group .input-group--text-field__suffix {
   color: rgba(255,255,255,0.7);
+}
+.application .theme--dark.input-group .input-group--text-field.input-group--disabled__prefix,
+.application .theme--dark.input-group .input-group--text-field.input-group--disabled__suffix {
+  color: rgba(255,255,255,0.5);
 }
 .input-group {
   display: -webkit-box;
@@ -12078,7 +12158,7 @@ table.table tfoot tr {
   position: relative;
   width: 100%;
 }
-.tabs--grow > .tabs__bar .tabs__li {
+.tabs--grow .tabs__bar .tabs__li {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
@@ -12090,7 +12170,7 @@ table.table tfoot tr {
       -ms-flex: 0 1 160px;
           flex: 0 1 160px;
 }
-.tabs--centered > .tabs__bar .tabs__container {
+.tabs--centered .tabs__bar .tabs__container {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -12104,11 +12184,11 @@ table.table tfoot tr {
       -ms-flex-direction: column;
           flex-direction: column;
 }
-.tabs.tabs--mobile > .tabs__bar .icon--left,
-.tabs.tabs--mobile > .tabs__bar .icon--right {
+.tabs.tabs--mobile .tabs__bar .icon--left,
+.tabs.tabs--mobile .tabs__bar .icon--right {
   display: none;
 }
-.tabs.tabs--mobile > .tabs__bar .tabs__wrapper--scrollable.tabs__wrapper--overflow {
+.tabs.tabs--mobile .tabs__bar .tabs__wrapper--scrollable.tabs__wrapper--overflow {
   overflow: hidden !important;
 }
 .tabs:not(.tabs--grow):not(.tabs--mobile) .tabs__item {
@@ -12264,6 +12344,9 @@ table.table tfoot tr {
 .application--light .input-group:not(.input-group--error) label {
   color: rgba(0,0,0,0.54);
 }
+.application--light .input-group:not(.input-group--error).input-group--disabled label {
+  color: rgba(0,0,0,0.38);
+}
 .application--light .input-group:not(.input-group--error) .input-group__details:before {
   background-color: rgba(0,0,0,0.42);
 }
@@ -12288,9 +12371,6 @@ table.table tfoot tr {
 .application--light .input-group.input-group--editable .input-group__details:before {
   background-color: rgba(0,0,0,0.12);
 }
-.application--light .input-group.input-group--disabled input {
-  color: rgba(0,0,0,0.54);
-}
 .application--light .input-group.input-group--disabled .input-group__details:before {
   background-color: transparent;
   background-image: linear-gradient(to right, rgba(0,0,0,0.38) 0, rgba(0,0,0,0.38) 33%, transparent 0);
@@ -12298,6 +12378,10 @@ table.table tfoot tr {
 .application--light .input-group .input-group--text-field__prefix,
 .application--light .input-group .input-group--text-field__suffix {
   color: rgba(0,0,0,0.54);
+}
+.application--light .input-group .input-group--text-field.input-group--disabled__prefix,
+.application--light .input-group .input-group--text-field.input-group--disabled__suffix {
+  color: rgba(0,0,0,0.38);
 }
 .application .theme--light.input-group input,
 .application .theme--light.input-group textarea {
@@ -12318,6 +12402,9 @@ table.table tfoot tr {
 }
 .application .theme--light.input-group:not(.input-group--error) label {
   color: rgba(0,0,0,0.54);
+}
+.application .theme--light.input-group:not(.input-group--error).input-group--disabled label {
+  color: rgba(0,0,0,0.38);
 }
 .application .theme--light.input-group:not(.input-group--error) .input-group__details:before {
   background-color: rgba(0,0,0,0.42);
@@ -12343,9 +12430,6 @@ table.table tfoot tr {
 .application .theme--light.input-group.input-group--editable .input-group__details:before {
   background-color: rgba(0,0,0,0.12);
 }
-.application .theme--light.input-group.input-group--disabled input {
-  color: rgba(0,0,0,0.54);
-}
 .application .theme--light.input-group.input-group--disabled .input-group__details:before {
   background-color: transparent;
   background-image: linear-gradient(to right, rgba(0,0,0,0.38) 0, rgba(0,0,0,0.38) 33%, transparent 0);
@@ -12353,6 +12437,10 @@ table.table tfoot tr {
 .application .theme--light.input-group .input-group--text-field__prefix,
 .application .theme--light.input-group .input-group--text-field__suffix {
   color: rgba(0,0,0,0.54);
+}
+.application .theme--light.input-group .input-group--text-field.input-group--disabled__prefix,
+.application .theme--light.input-group .input-group--text-field.input-group--disabled__suffix {
+  color: rgba(0,0,0,0.38);
 }
 .application--dark .input-group input,
 .application--dark .input-group textarea {
@@ -12373,6 +12461,9 @@ table.table tfoot tr {
 }
 .application--dark .input-group:not(.input-group--error) label {
   color: rgba(255,255,255,0.7);
+}
+.application--dark .input-group:not(.input-group--error).input-group--disabled label {
+  color: rgba(255,255,255,0.5);
 }
 .application--dark .input-group:not(.input-group--error) .input-group__details:before {
   background-color: rgba(255,255,255,0.7);
@@ -12398,9 +12489,6 @@ table.table tfoot tr {
 .application--dark .input-group.input-group--editable .input-group__details:before {
   background-color: rgba(255,255,255,0.12);
 }
-.application--dark .input-group.input-group--disabled input {
-  color: rgba(255,255,255,0.7);
-}
 .application--dark .input-group.input-group--disabled .input-group__details:before {
   background-color: transparent;
   background-image: linear-gradient(to right, rgba(255,255,255,0.5) 0, rgba(255,255,255,0.5) 33%, transparent 0);
@@ -12408,6 +12496,10 @@ table.table tfoot tr {
 .application--dark .input-group .input-group--text-field__prefix,
 .application--dark .input-group .input-group--text-field__suffix {
   color: rgba(255,255,255,0.7);
+}
+.application--dark .input-group .input-group--text-field.input-group--disabled__prefix,
+.application--dark .input-group .input-group--text-field.input-group--disabled__suffix {
+  color: rgba(255,255,255,0.5);
 }
 .application .theme--dark.input-group input,
 .application .theme--dark.input-group textarea {
@@ -12428,6 +12520,9 @@ table.table tfoot tr {
 }
 .application .theme--dark.input-group:not(.input-group--error) label {
   color: rgba(255,255,255,0.7);
+}
+.application .theme--dark.input-group:not(.input-group--error).input-group--disabled label {
+  color: rgba(255,255,255,0.5);
 }
 .application .theme--dark.input-group:not(.input-group--error) .input-group__details:before {
   background-color: rgba(255,255,255,0.7);
@@ -12453,9 +12548,6 @@ table.table tfoot tr {
 .application .theme--dark.input-group.input-group--editable .input-group__details:before {
   background-color: rgba(255,255,255,0.12);
 }
-.application .theme--dark.input-group.input-group--disabled input {
-  color: rgba(255,255,255,0.7);
-}
 .application .theme--dark.input-group.input-group--disabled .input-group__details:before {
   background-color: transparent;
   background-image: linear-gradient(to right, rgba(255,255,255,0.5) 0, rgba(255,255,255,0.5) 33%, transparent 0);
@@ -12463,6 +12555,10 @@ table.table tfoot tr {
 .application .theme--dark.input-group .input-group--text-field__prefix,
 .application .theme--dark.input-group .input-group--text-field__suffix {
   color: rgba(255,255,255,0.7);
+}
+.application .theme--dark.input-group .input-group--text-field.input-group--disabled__prefix,
+.application .theme--dark.input-group .input-group--text-field.input-group--disabled__suffix {
+  color: rgba(255,255,255,0.5);
 }
 .input-group {
   display: -webkit-box;
@@ -12774,7 +12870,6 @@ table.table tfoot tr {
 .input-group--text-field:not(.input-group--single-line).input-group--focused label,
 .input-group--text-field:not(.input-group--single-line):focus label {
   opacity: 1;
-  max-width: 100%;
 }
 .input-group--text-field:not(.input-group--single-line).input-group--focused:not(.input-group--textarea) label,
 .input-group--text-field:not(.input-group--single-line):focus:not(.input-group--textarea) label {
@@ -12826,7 +12921,7 @@ table.table tfoot tr {
 }
 .input-group--text-field.input-group--solo label {
   top: 8px;
-  left: 50px;
+  left: 56px;
   -webkit-transform: none !important;
           transform: none !important;
 }
@@ -13257,28 +13352,28 @@ table.table tfoot tr {
   background-color: #f5f5f5;
   color: rgba(0,0,0,0.87);
 }
-.application--light .toolbar .btn {
+.application--light .toolbar .btn:not(.btn--disabled) {
   color: rgba(0,0,0,0.87);
 }
 .application .theme--light.toolbar {
   background-color: #f5f5f5;
   color: rgba(0,0,0,0.87);
 }
-.application .theme--light.toolbar .btn {
+.application .theme--light.toolbar .btn:not(.btn--disabled) {
   color: rgba(0,0,0,0.87);
 }
 .application--dark .toolbar {
   background-color: #212121;
   color: #fff;
 }
-.application--dark .toolbar .btn {
+.application--dark .toolbar .btn:not(.btn--disabled) {
   color: #fff;
 }
 .application .theme--dark.toolbar {
   background-color: #212121;
   color: #fff;
 }
-.application .theme--dark.toolbar .btn {
+.application .theme--dark.toolbar .btn:not(.btn--disabled) {
   color: #fff;
 }
 .toolbar {
@@ -13421,20 +13516,20 @@ table.table tfoot tr {
   margin: 0;
 }
 @media only screen and (max-width: 599px) {
-.toolbar__content > .btn:last-child,
-  .toolbar__extension > .btn:last-child {
+.toolbar .toolbar__content > .btn:last-child,
+  .toolbar .toolbar__extension > .btn:last-child {
     margin-right: 17px;
 }
-.toolbar__content > .btn:first-child,
-  .toolbar__extension > .btn:first-child {
+.toolbar .toolbar__content > .btn:first-child,
+  .toolbar .toolbar__extension > .btn:first-child {
     margin-left: 17px;
 }
-.toolbar__content > *:not(.btn):last-child,
-  .toolbar__extension > *:not(.btn):last-child {
+.toolbar .toolbar__content > *:not(.btn):last-child,
+  .toolbar .toolbar__extension > *:not(.btn):last-child {
     margin-right: 24px;
 }
-.toolbar__content > *:not(.btn):first-child,
-  .toolbar__extension > *:not(.btn):first-child {
+.toolbar .toolbar__content > *:not(.btn):first-child,
+  .toolbar .toolbar__extension > *:not(.btn):first-child {
     margin-left: 24px;
 }
 }
@@ -13460,6 +13555,97 @@ table.table tfoot tr {
 .toolbar--fixed.toolbar--extended + main {
     padding-top: 96px;
 }
+}
+[data-tooltip] {
+  position: relative;
+}
+[data-tooltip]:before {
+  background: #616161;
+  border-radius: 2px;
+  color: #fff;
+  content: attr(data-tooltip);
+  font-size: 12px;
+  display: inline-block;
+  opacity: 0;
+  padding: 5px 8px;
+  position: absolute;
+  pointer-events: none;
+  text-transform: initial;
+  transition: 0.15s cubic-bezier(0.25, 0.8, 0.5, 1);
+  width: auto;
+  white-space: pre;
+  z-index: 99;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.2), 0 2px 2px rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12);
+}
+[data-tooltip]:hover:before {
+  opacity: 0.9;
+}
+[data-tooltip][data-tooltip-location='bottom']:before {
+  top: 100%;
+  left: 50%;
+  -webkit-transform: translate3d(-50%, -14px, 0) scale(0);
+          transform: translate3d(-50%, -14px, 0) scale(0);
+  -webkit-transform-origin: center top;
+          transform-origin: center top;
+}
+[data-tooltip][data-tooltip-location='bottom']:hover:before {
+  -webkit-transform: translate3d(-50%, 14px, 0) scale(1);
+          transform: translate3d(-50%, 14px, 0) scale(1);
+}
+[data-tooltip][data-tooltip-location='top']:before {
+  bottom: 100%;
+  left: 50%;
+  -webkit-transform: translate3d(-50%, 14px, 0) scale(0);
+          transform: translate3d(-50%, 14px, 0) scale(0);
+  -webkit-transform-origin: center bottom;
+          transform-origin: center bottom;
+}
+[data-tooltip][data-tooltip-location='top']:hover:before {
+  -webkit-transform: translate3d(-50%, -14px, 0) scale(1);
+          transform: translate3d(-50%, -14px, 0) scale(1);
+}
+[data-tooltip][data-tooltip-location='left']:before {
+  right: 100%;
+  -webkit-transform: translate3d(14px, 0, 0) scale(0);
+          transform: translate3d(14px, 0, 0) scale(0);
+  -webkit-transform-origin: center right;
+          transform-origin: center right;
+}
+[data-tooltip][data-tooltip-location='left']:hover:before {
+  -webkit-transform: translate3d(-14px, 0, 0) scale(1);
+          transform: translate3d(-14px, 0, 0) scale(1);
+}
+[data-tooltip][data-tooltip-location='right']:before {
+  left: 100%;
+  -webkit-transform: translate3d(-14px, 0, 0) scale(0);
+          transform: translate3d(-14px, 0, 0) scale(0);
+  -webkit-transform-origin: center left;
+          transform-origin: center left;
+}
+[data-tooltip][data-tooltip-location='right']:hover:before {
+  -webkit-transform: translate3d(14px, 0, 0) scale(1);
+          transform: translate3d(14px, 0, 0) scale(1);
+}
+@media only screen and (max-width: 959px) {
+  [data-tooltip]:before {
+    padding: 10px 16px;
+  }
+  [data-tooltip][data-tooltip-location='bottom']:hover:before {
+    -webkit-transform: translate3d(-50%, 24px, 0) scale(1);
+    transform: translate3d(-50%, 24px, 0) scale(1);
+  }
+  [data-tooltip][data-tooltip-location='top']:hover:before {
+    -webkit-transform: translate3d(-50%, -24px, 0) scale(1);
+    transform: translate3d(-50%, -24px, 0) scale(1);
+  }
+  [data-tooltip][data-tooltip-location='left']:hover:before {
+    -webkit-transform: translate3d(-24px, 0, 0) scale(1);
+    transform: translate3d(-24px, 0, 0) scale(1);
+  }
+  [data-tooltip][data-tooltip-location='right']:hover:before {
+    -webkit-transform: translate3d(24px, 0, 0) scale(1);
+    transform: translate3d(24px, 0, 0) scale(1);
+  }
 }
 
 /*# sourceMappingURL=vuetify.css.map*/

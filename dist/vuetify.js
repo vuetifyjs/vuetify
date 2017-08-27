@@ -3220,7 +3220,7 @@ process.umask = function() { return 0; };
 /* 34 */
 /***/ (function(module, exports) {
 
-module.exports = {"name":"vuetify","version":"0.15.0-beta.1","author":{"name":"John Leider","email":"john.j.leider@gmail.com"},"license":"MIT","homepage":"http://vuetifyjs.com","main":"dist/vuetify.js","unpkg":"dist/vuetify.js","types":"index.d.ts","scripts":{"watch":"cross-env TARGET=development webpack --config build/config.js --progress --hide-modules --watch","dev":"cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.config.js --open --hot","build:dev":"cross-env NODE_ENV=production node build/webpack.dev.config.js","build":"rimraf dist && cross-env NODE_ENV=production webpack --config build/config.js --progress --hide-modules","debug-build":"node --inspect --debug-brk build/config.js","test":"cross-env NODE_ENV=test jest --no-cache --verbose","test-coverage":"cross-env NODE_ENV=test jest --no-cache --coverage --verbose","lint":"eslint --ext .js,.vue src","precommit":"yarn run lint && yarn test","prepush":"yarn run lint && yarn test"},"description":"Vue.js 2 Semantic Component Framework","devDependencies":{"autoprefixer":"^6.6.0","avoriaz":"^3.2.0","babel-cli":"^6.24.1","babel-core":"^6.24.1","babel-eslint":"^7.1.1","babel-jest":"^20.0.3","babel-loader":"^7.1.1","babel-plugin-add-filehash":"^6.9.4","babel-plugin-module-resolver":"^2.7.1","babel-plugin-transform-async-to-generator":"^6.24.1","babel-plugin-transform-runtime":"^6.23.0","babel-polyfill":"^6.26.0","babel-preset-env":"^1.5.1","babel-preset-es2015":"^6.24.1","babel-preset-stage-2":"^6.24.1","chalk":"^1.1.3","chromedriver":"^2.21.2","cross-env":"^3.1.3","cross-spawn":"^4.0.2","css-loader":"^0.23.1","css-mqpacker":"^6.0.1","cssnano":"^3.10.0","eslint":"^3.7.1","eslint-config-standard":"^6.1.0","eslint-config-vue":"^2.0.2","eslint-friendly-formatter":"^2.0.5","eslint-loader":"^1.6.1","eslint-plugin-html":"^1.3.0","eslint-plugin-promise":"^3.4.0","eslint-plugin-pug":"^1.0.0","eslint-plugin-standard":"^3.0.1","eslint-plugin-vue":"^2.1.0","eventsource-polyfill":"^0.9.6","extract-text-webpack-plugin":"^3.0.0","friendly-errors-webpack-plugin":"^1.6.1","function-bind":"^1.0.2","husky":"^0.14.3","jest":"^20.0.4","jest-cli":"^20.0.4","jest-css-modules":"^1.1.0","jest-serializer-html":"^4.0.0","jest-vue-preprocessor":"^0.2.0","lolex":"^1.4.0","nightwatch":"^0.9.8","opn":"^4.0.2","optimize-css-assets-webpack-plugin":"^2.0.0","optimize-js-plugin":"^0.0.4","ora":"^0.3.0","phantomjs-prebuilt":"^2.1.3","postcss-loader":"^1.2.1","precss":"^1.4.0","progress-bar-webpack-plugin":"^1.10.0","pug":"^2.0.0-beta3","pug-loader":"^2.3.0","ress":"^1.1.1","rimraf":"^2.5.4","selenium-server":"2.53.1","semver":"^5.3.0","serialize-javascript":"^1.3.0","shelljs":"^0.7.4","style-loader":"^0.13.1","stylus":"^0.54.5","stylus-loader":"^2.1.1","uglifyjs-webpack-plugin":"^0.4.6","vue":"^2.4.1","vue-loader":"^10.1.0","vue-router":"^2.7.0","vue-server-renderer":"^2.4.1","vue-template-compiler":"^2.4.1","webpack":"^3.2.0","webpack-bundle-analyzer":"^2.9.0","webpack-bundle-size-analyzer":"^2.7.0","webpack-dev-server":"^2.7.1","webpack-merge":"^4.1.0","write-file-webpack-plugin":"^4.1.0"},"dependencies":{},"engines":{"node":">= 4.0.0","npm":">= 3.0.0"},"jest":{"verbose":false,"roots":["<rootDir>/src"],"moduleFileExtensions":["js","vue"],"moduleDirectories":["node_modules"],"moduleNameMapper":{"src/(.*)":"<rootDir>/src/$1"},"transform":{".*\\.(vue)$":"<rootDir>/node_modules/jest-vue-preprocessor","\\.(styl)$":"<rootDir>/node_modules/jest-css-modules",".*\\.(vue|js)$":"<rootDir>/node_modules/babel-jest"},"transformIgnorePatterns":["node_modules/(?!vue-router)"],"snapshotSerializers":["jest-serializer-html"]}}
+module.exports = {"name":"vuetify","version":"0.15.0-beta.2","author":{"name":"John Leider","email":"john.j.leider@gmail.com"},"license":"MIT","homepage":"http://vuetifyjs.com","main":"dist/vuetify.js","unpkg":"dist/vuetify.js","types":"index.d.ts","scripts":{"watch":"cross-env TARGET=development webpack --config build/config.js --progress --hide-modules --watch","dev":"cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.config.js --open --hot","build:dev":"cross-env NODE_ENV=production node build/webpack.dev.config.js","build":"rimraf dist && cross-env NODE_ENV=production webpack --config build/config.js --progress --hide-modules","debug-build":"node --inspect --debug-brk build/config.js","test":"cross-env NODE_ENV=test jest --no-cache --verbose","test-coverage":"cross-env NODE_ENV=test jest --no-cache --coverage --verbose","lint":"eslint --ext .js,.vue src","precommit":"yarn run lint && yarn test","prepush":"yarn run lint && yarn test"},"description":"Vue.js 2 Semantic Component Framework","devDependencies":{"autoprefixer":"^6.6.0","avoriaz":"^3.2.0","babel-cli":"^6.24.1","babel-core":"^6.24.1","babel-eslint":"^7.1.1","babel-jest":"^20.0.3","babel-loader":"^7.1.1","babel-plugin-add-filehash":"^6.9.4","babel-plugin-module-resolver":"^2.7.1","babel-plugin-transform-async-to-generator":"^6.24.1","babel-plugin-transform-runtime":"^6.23.0","babel-polyfill":"^6.26.0","babel-preset-env":"^1.5.1","babel-preset-es2015":"^6.24.1","babel-preset-stage-2":"^6.24.1","chalk":"^1.1.3","chromedriver":"^2.21.2","cross-env":"^3.1.3","cross-spawn":"^4.0.2","css-loader":"^0.23.1","css-mqpacker":"^6.0.1","cssnano":"^3.10.0","eslint":"^3.7.1","eslint-config-standard":"^6.1.0","eslint-config-vue":"^2.0.2","eslint-friendly-formatter":"^2.0.5","eslint-loader":"^1.6.1","eslint-plugin-html":"^1.3.0","eslint-plugin-promise":"^3.4.0","eslint-plugin-pug":"^1.0.0","eslint-plugin-standard":"^3.0.1","eslint-plugin-vue":"^2.1.0","eventsource-polyfill":"^0.9.6","extract-text-webpack-plugin":"^3.0.0","friendly-errors-webpack-plugin":"^1.6.1","function-bind":"^1.0.2","husky":"^0.14.3","jest":"^20.0.4","jest-cli":"^20.0.4","jest-css-modules":"^1.1.0","jest-serializer-html":"^4.0.0","jest-vue-preprocessor":"^0.2.0","lolex":"^1.4.0","nightwatch":"^0.9.8","opn":"^4.0.2","optimize-css-assets-webpack-plugin":"^2.0.0","optimize-js-plugin":"^0.0.4","ora":"^0.3.0","phantomjs-prebuilt":"^2.1.3","postcss-loader":"^1.2.1","precss":"^1.4.0","progress-bar-webpack-plugin":"^1.10.0","pug":"^2.0.0-beta3","pug-loader":"^2.3.0","ress":"^1.1.1","rimraf":"^2.5.4","selenium-server":"2.53.1","semver":"^5.3.0","serialize-javascript":"^1.3.0","shelljs":"^0.7.4","style-loader":"^0.13.1","stylus":"^0.54.5","stylus-loader":"^2.1.1","uglifyjs-webpack-plugin":"^0.4.6","vue":"^2.4.1","vue-loader":"^10.1.0","vue-router":"^2.7.0","vue-server-renderer":"^2.4.1","vue-template-compiler":"^2.4.1","webpack":"^3.2.0","webpack-bundle-analyzer":"^2.9.0","webpack-bundle-size-analyzer":"^2.7.0","webpack-dev-server":"^2.7.1","webpack-merge":"^4.1.0","write-file-webpack-plugin":"^4.1.0"},"dependencies":{},"engines":{"node":">= 4.0.0","npm":">= 3.0.0"},"jest":{"verbose":false,"roots":["<rootDir>/src"],"moduleFileExtensions":["js","vue"],"moduleDirectories":["node_modules"],"moduleNameMapper":{"src/(.*)":"<rootDir>/src/$1"},"transform":{".*\\.(vue)$":"<rootDir>/node_modules/jest-vue-preprocessor","\\.(styl)$":"<rootDir>/node_modules/jest-css-modules",".*\\.(vue|js)$":"<rootDir>/node_modules/babel-jest"},"transformIgnorePatterns":["node_modules/(?!vue-router)"],"snapshotSerializers":["jest-serializer-html"]}}
 
 /***/ }),
 /* 35 */
@@ -3375,7 +3375,7 @@ var Vuetify = {
       breakpoint: {}
     };
 
-    Vue.util.defineReactive($vuetify, 'breakpoint');
+    Vue.util.defineReactive({}, 'breakpoint', $vuetify);
 
     Vue.prototype.$vuetify = $vuetify;
 
@@ -6468,12 +6468,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       };
     },
     computedContentClass: function computedContentClass() {
-      var children = [this.auto ? 'menu__content--auto' : '', this.isDropdown ? 'menu__content--dropdown' : ''];
+      var children = ['menu__content--select', this.auto ? 'menu__content--auto' : '', this.isDropdown ? 'menu__content--dropdown' : ''];
 
       return children.join(' ');
     },
+    computedItems: function computedItems() {
+      return this.items;
+    },
     filteredItems: function filteredItems() {
-      var items = this.isAutocomplete && this.searchValue ? this.filterSearch() : this.items;
+      var items = this.filterSearch();
 
       return !this.auto ? items.slice(0, this.lastItem) : items;
     },
@@ -6493,13 +6496,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       },
       set: function set(val) {
         this.lazySearch = val;
-        val !== this.searchInput && this.$emit('update:searchInput', val);
+
+        // Do not emit input changes if not booted
+        val !== this.searchInput && this.isBooted && this.$emit('update:searchInput', val);
       }
     },
     selectedItems: function selectedItems() {
       var _this = this;
 
-      if (this.inputValue === null || typeof this.inputValue === 'undefined') return [];
+      if (!this.multiple && (this.inputValue === null || typeof this.inputValue === 'undefined')) return [];
 
       return this.items.filter(function (i) {
         if (!_this.multiple) {
@@ -6516,11 +6521,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
   watch: {
     inputValue: function inputValue(val) {
+      // Async calls may not have data ready at boot
+      if (!this.multiple && this.isAutocomplete) this.searchValue = this.getText(val);
+
       this.$emit('input', val);
     },
     value: function value(val) {
       this.inputValue = val;
       this.validate();
+
       if (this.isAutocomplete) {
         this.$nextTick(this.$refs.menu.updateDimensions);
       }
@@ -6529,8 +6538,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       this.inputValue = val ? [] : null;
     },
     isActive: function isActive(val) {
+      this.focused = val;
       this.isBooted = true;
       this.lastItem += !val ? 20 : 0;
+      this.resetSearch();
     },
     isBooted: function isBooted() {
       var _this2 = this;
@@ -6541,25 +6552,46 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         }
       });
     },
-    searchValue: function searchValue(val) {
+    items: function items() {
       var _this3 = this;
 
-      if (val && !this.isActive) this.isActive = true;
+      if (this.focused && !this.isActive) this.isActive = true;
+      this.$refs.menu.listIndex = -1;
+
+      this.searchValue && this.$nextTick(function () {
+        _this3.$refs.menu.listIndex = 0;
+      });
+    },
+    searchValue: function searchValue(val) {
+      var _this4 = this;
+
+      // This could change externally
+      // avoid accidental re-activation
+      // when dealing with async items
+      if (!this.isActive && this.computedItems.length && val !== null && val !== this.getText(this.inputValue)) {
+        this.isActive = true;
+        this.focused = true;
+      }
       this.$refs.menu.listIndex = null;
 
       this.$nextTick(function () {
-        _this3.$refs.menu.listIndex = val ? 0 : -1;
+        _this4.$refs.menu.listIndex = val ? 0 : -1;
       });
     }
   },
 
   mounted: function mounted() {
-    var _this4 = this;
+    var _this5 = this;
 
     this.$vuetify.load(function () {
-      if (_this4._isDestroyed) return;
+      if (_this5._isDestroyed) return;
 
-      _this4.content = _this4.$refs.menu.$refs.content;
+      _this5.content = _this5.$refs.menu.$refs.content;
+
+      // Set input text
+      if (_this5.isAutocomplete && !_this5.multiple && _this5.isDirty) {
+        _this5.searchValue = _this5.getText(_this5.inputValue);
+      }
     });
   },
   beforeDestroy: function beforeDestroy() {
@@ -6573,17 +6605,22 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
   methods: {
     blur: function blur(e) {
-      var _this5 = this;
+      var _this6 = this;
 
       this.$nextTick(function () {
-        _this5.focused = false;
-        _this5.searchValue = null;
-        _this5.$emit('blur', _this5.inputValue);
+        _this6.isActive = false;
+        _this6.focused = false;
+
+        _this6.resetSearch();
+
+        _this6.$emit('blur', _this6.inputValue);
       });
     },
     focus: function focus(e) {
       this.focused = true;
-      this.$refs.input && this.isAutocomplete && this.$refs.input.focus();
+      if (this.$refs.input && this.isAutocomplete) {
+        this.multiple && this.$refs.input.focus() || this.$refs.input.setSelectionRange(0, (this.searchValue || '').toString().length);
+      }
 
       this.$emit('focus', e);
     },
@@ -6614,11 +6651,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       this.focus();
     },
     onScroll: function onScroll() {
-      var _this6 = this;
+      var _this7 = this;
 
       if (!this.isActive) {
         requestAnimationFrame(function () {
-          return _this6.content.scrollTop = 0;
+          return _this7.content.scrollTop = 0;
         });
       } else {
         var showMoreItems = this.content.scrollHeight - (this.content.scrollTop + this.content.clientHeight) < 200;
@@ -6628,36 +6665,43 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         }
       }
     },
+    resetSearch: function resetSearch() {
+      // Ensure searchValue is properly set
+      if (this.multiple || !this.isDirty) this.searchValue = null;else this.searchValue = this.getText(this.inputValue);
+    },
     selectItem: function selectItem(item) {
-      var _this7 = this;
+      var _this8 = this;
 
       if (!this.multiple) {
         this.inputValue = this.returnObject ? item : this.getValue(item);
       } else {
         var inputValue = this.inputValue.slice();
         var i = this.inputValue.findIndex(function (i) {
-          return _this7.getValue(i) === _this7.getValue(item);
+          return _this8.getValue(i) === _this8.getValue(item);
         });
 
         i !== -1 && inputValue.splice(i, 1) || inputValue.push(item);
         this.inputValue = inputValue.map(function (i) {
-          return _this7.returnObject ? i : _this7.getValue(i);
+          return _this8.returnObject ? i : _this8.getValue(i);
         });
       }
 
       if (this.isAutocomplete && this.multiple) {
         this.$nextTick(function () {
-          _this7.$refs.input && _this7.$refs.input.focus();
+          _this8.$refs.input && _this8.$refs.input.focus();
         });
+      } else if (!this.multiple) {
+        this.blur();
       }
 
-      this.searchValue = null;
+      if (this.multiple) this.searchValue = null;
+
       this.$emit('change', this.inputValue);
     }
   },
 
   render: function render(h) {
-    var _this8 = this;
+    var _this9 = this;
 
     var listeners = Object.assign({}, this.$listeners);
     delete listeners.input;
@@ -6669,15 +6713,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       directives: [{
         name: 'click-outside',
         value: function value() {
-          _this8.isActive = false;
-          _this8.$emit('change', _this8.inputValue);
+          _this9.isActive = false;
+          _this9.$emit('change', _this9.inputValue);
         }
       }],
       on: _extends({}, listeners, {
         focus: !this.isAutocomplete ? this.focus : this.onAutocompleteFocus,
-        blur: !this.isAutocomplete ? this.blur : function () {},
-        click: function click() {
-          if (!_this8.isActive) _this8.isActive = true;
+        blur: !this.isAutocomplete && !this.multiple ? this.blur : function () {},
+        click: function click(e) {
+          if (!_this9.isActive) _this9.isActive = true;
         },
         keydown: this.onKeyDown // Located in mixins/autocomplete.js
       })
@@ -7279,7 +7323,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     });
 
     var data = {
-      'class': 'menu',
+      staticClass: 'menu',
+      class: {
+        'menu--disabled': this.disabled
+      },
       style: {
         display: this.fullWidth ? 'block' : 'inline-block'
       },
@@ -7641,7 +7688,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     setActiveListIndex: function setActiveListIndex() {
       var _this = this;
 
-      this.tiles.forEach(function (t, i) {
+      var tiles = Array.from(this.tiles || []);
+      tiles.forEach(function (t, i) {
         if (t.classList.contains('list__tile--active')) {
           _this.listIndex = i;
           return;
@@ -7660,8 +7708,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   props: {
     filter: {
       type: Function,
-      default: function _default(item, query, itemText) {
-        var text = [undefined, null].includes(itemText) ? '' : itemText;
+      default: function _default(item, queryText, itemText) {
+        var hasValue = function hasValue(val) {
+          return [undefined, null].includes(val);
+        };
+
+        var text = hasValue(itemText) ? '' : itemText;
+        var query = hasValue(queryText) ? '' : queryText;
 
         return text.toString().toLowerCase().indexOf(query.toString().toLowerCase()) > -1;
       }
@@ -7672,7 +7725,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     filterSearch: function filterSearch() {
       var _this = this;
 
-      return this.items.filter(function (i) {
+      if (!this.isAutocomplete) return this.computedItems;
+
+      return this.computedItems.filter(function (i) {
         return _this.filter(i, _this.searchValue, _this.getText(i));
       });
     },
@@ -7702,6 +7757,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         ref: 'menu',
         props: {
           activator: this.$refs.activator,
+          openOnClick: false,
           auto: this.auto,
           closeOnClick: false,
           closeOnContentClick: !this.multiple,
@@ -7712,7 +7768,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
           nudgeRight: this.isDropdown ? 16 : 0,
           nudgeWidth: this.isDropdown ? 56 : 24,
           offsetY: offsetY,
-          value: this.isActive,
+          value: this.isActive && this.computedItems.length,
           zIndex: this.menuZIndex
         },
         on: { input: function input(val) {
@@ -7737,8 +7793,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
           }),
           domProps: { value: this.lazySearch },
           on: {
-            blur: this.blur,
             focus: this.focus,
+            blur: function blur() {
+              if (_this2.isActive) return;
+
+              _this2.blur();
+            },
             input: function input(e) {
               return _this2.searchValue = e.target.value;
             }
@@ -7760,6 +7820,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     },
     genSelections: function genSelections() {
       var _this3 = this;
+
+      if (this.isAutocomplete && !this.multiple) return [];
 
       var children = [];
       var chips = this.chips;
@@ -7840,9 +7902,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       }
 
       var data = {
-        on: { click: function click(e) {
-            return _this6.selectItem(item);
-          } },
+        on: {
+          click: function click(e) {
+            if (disabled) return;
+
+            _this6.selectItem(item);
+          }
+        },
         props: {
           avatar: item === Object(item) && 'avatar' in item,
           ripple: true,
@@ -7858,7 +7924,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         return this.$createElement('v-list-tile', data, [this.$scopedSlots.item({ parent: this, item: item })]);
       }
 
-      return this.$createElement('v-list-tile', data, [this.genAction(item, active), this.genContent(item)]);
+      return this.$createElement('v-list-tile', data, [this.genAction(item, active && !disabled), this.genContent(item)]);
     },
     genAction: function genAction(item, active) {
       var _this7 = this;
@@ -10458,7 +10524,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       type: Boolean,
       default: true
     },
-    inputValue: [String, Number],
+    inputValue: null,
     mandatory: {
       type: Boolean,
       default: true
@@ -10612,7 +10678,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   props: {
     disabled: Boolean,
-    value: [String, Number],
+    value: null,
     label: String
   },
 
@@ -10642,6 +10708,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   methods: {
     genInput: function genInput(radio) {
+      var value = JSON.stringify(this.value);
       var input = this.$createElement('input', {
         ref: 'input',
         style: {
@@ -10651,9 +10718,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           name: 'test', // from parent?
           id: this.id,
           type: 'radio',
-          value: this.value
+          value: value
         }, this.$attrs)
-      }, [this.value]);
+      }, [value]);
 
       radio.push(input);
 
@@ -10868,7 +10935,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             snap = this.snap;
 
         val = val < min ? min : val > max ? max : val;
-        if (Math.ceil(val) !== Math.ceil(this.lazyValue)) {
+        if (Math.ceil(val) % Math.ceil(this.lazyValue) < 2) {
           this.inputWidth = this.calculateWidth(val);
         }
 
@@ -12875,7 +12942,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       return {
         'input-group--text-field': true,
         'input-group--text-field-box': this.box,
-        'input-group--single-line': this.singleLine,
+        'input-group--single-line': this.singleLine || this.solo,
         'input-group--solo': this.solo,
         'input-group--multi-line': this.multiLine,
         'input-group--full-width': this.fullWidth,
@@ -13938,6 +14005,8 @@ function unbind(el, binding) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_helpers__ = __webpack_require__(2);
 
 
+__webpack_require__(248);
+
 function directive(el, binding) {
   var config = Object(__WEBPACK_IMPORTED_MODULE_0__util_helpers__["f" /* directiveConfig */])(binding, {
     top: true,
@@ -13966,6 +14035,12 @@ function unbind(el) {
   componentUpdated: directive,
   unbind: unbind
 });
+
+/***/ }),
+/* 248 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
