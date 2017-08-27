@@ -140,7 +140,7 @@ test('VSelect.js', ({ mount, shallow }) => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,
       propsData: {
-        items: [1,2,3,4,5],
+        items: [1, 2, 3, 4],
         multiple: true
       }
     })
