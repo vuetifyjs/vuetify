@@ -115,7 +115,7 @@ test('VSelect.js', ({ mount, shallow }) => {
     const tile = wrapper.find('li')[0]
     tile.trigger('click')
     await wrapper.vm.$nextTick()
-    
+
     expect(wrapper.vm.focused).toBe(false)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
