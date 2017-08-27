@@ -314,15 +314,15 @@
       this.tableDate = this.inputDate
     },
 
-    render (h) {
-      return this.renderPicker(h)
-    },
-
     mounted () {
       const date = new Date()
       this.currentDay = date.getDate()
       this.currentMonth = date.getMonth()
       this.currentYear = date.getFullYear()
+    },
+
+    render (h) {
+      return this.renderPicker(h)
     }
 
   }
