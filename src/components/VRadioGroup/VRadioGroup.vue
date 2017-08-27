@@ -22,7 +22,7 @@
         type: Boolean,
         default: true
       },
-      inputValue: [String, Number],
+      inputValue: null,
       mandatory: {
         type: Boolean,
         default: true
