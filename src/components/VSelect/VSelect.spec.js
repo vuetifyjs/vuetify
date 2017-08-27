@@ -55,6 +55,21 @@ test('VSelect.js', ({ mount, shallow }) => {
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
+  it('should have -1 tabindex when disabled', () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        autocomplete: true,
+        disabled: true
+      }
+    })
+
+    expect(wrapper.vm.$refs.input.tabIndex).toBe(-1)
+    expect(wrapper.vm.$el.tabIndex).toBe(-1)
+    expect(wrapper.html()).toMatchSnapshot()
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
   it('should emit search input changes', () => {
     const wrapper = mount(VSelect, {
       propsData: {

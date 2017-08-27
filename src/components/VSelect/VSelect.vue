@@ -375,7 +375,7 @@
         this.genMenu()
       ], {
         attrs: {
-          tabindex: this.isAutocomplete ? -1 : 0
+          tabindex: this.isAutocomplete || this.disabled ? -1 : 0
         },
         directives: [{
           name: 'click-outside',

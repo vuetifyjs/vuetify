@@ -37,7 +37,7 @@ export default {
           'class': 'input-group--select__autocomplete',
           attrs: {
             ...this.$attrs,
-            tabindex: 0
+            tabindex: this.disabled ? -1 : 0
           },
           domProps: { value: this.lazySearch },
           on: {
