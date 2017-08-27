@@ -60,6 +60,8 @@ export default {
       }, [selections])
     },
     genSelections () {
+      if (this.isAutocomplete && !this.multiple) return []
+
       const children = []
       const chips = this.chips
       const slots = this.$scopedSlots.selection

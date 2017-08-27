@@ -65,6 +65,7 @@ test('VSelect.js', ({ mount, shallow }) => {
     const update = jest.fn()
 
     wrapper.vm.$on('update:searchInput', update)
+    wrapper.vm.isBooted = true
     wrapper.vm.searchValue = 'test'
 
     expect(update).toBeCalledWith('test')

@@ -152,7 +152,11 @@
         },
         set (val) {
           this.lazySearch = val
-          val !== this.searchInput && this.$emit('update:searchInput', val)
+
+          // Do not emit input changes if not booted
+          val !== this.searchInput &&
+            this.isBooted &&
+            this.$emit('update:searchInput', val)
         }
       },
       selectedItems () {
@@ -179,7 +183,11 @@
       value (val) {
         this.inputValue = val
         this.validate()
+
         if (this.isAutocomplete) {
+          // Async calls may not have data ready at boot
+          if (!this.multiple) this.searchValue = this.getText(val)
+
           this.$nextTick(this.$refs.menu.updateDimensions)
         }
       },
@@ -198,7 +206,11 @@
         })
       },
       searchValue (val) {
-        if (val && !this.isActive) this.isActive = true
+        // Search value could change from async data
+        // don't open menu if not booted
+        if (!this.isBooted) return
+
+        if (!this.isActive) this.isActive = true
         this.$refs.menu.listIndex = null
 
         this.$nextTick(() => {
@@ -212,6 +224,14 @@
         if (this._isDestroyed) return
 
         this.content = this.$refs.menu.$refs.content
+
+        // Set input text
+        if (this.isAutocomplete &&
+          !this.multiple &&
+          this.isDirty
+        ) {
+          this.searchValue = this.getText(this.inputValue)
+        }
       })
     },
 
@@ -227,15 +247,21 @@
       blur (e) {
         this.$nextTick(() => {
           this.focused = false
-          this.searchValue = null
+          if (this.multiple) this.searchValue = null
+
           this.$emit('blur', this.inputValue)
         })
       },
       focus (e) {
         this.focused = true
-        this.$refs.input &&
-          (this.isAutocomplete) &&
-          this.$refs.input.focus()
+        if (this.$refs.input && this.isAutocomplete) {
+          this.multiple &&
+            this.$refs.input.focus() ||
+            this.$refs.input.setSelectionRange(
+              0,
+              (this.searchValue || '').toString().length
+            )
+        }
 
         this.$emit('focus', e)
       },
@@ -304,7 +330,8 @@
           })
         }
 
-        this.searchValue = null
+        if (this.multiple) this.searchValue = null
+
         this.$emit('change', this.inputValue)
       }
     },
