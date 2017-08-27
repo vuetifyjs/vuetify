@@ -221,15 +221,10 @@
         })
       },
       searchValue (val) {
-        // Search value could change from async data
-        // don't open menu if not booted
-        if (!this.isBooted) return
-
         // This could change externally
         // avoid accidental re-activation
         // when dealing with async items
         if (!this.isActive &&
-          !this.multiple &&
           this.computedItems.length &&
           val !== this.getText(this.inputValue)
         ) {

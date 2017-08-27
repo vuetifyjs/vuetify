@@ -162,4 +162,21 @@ test('VSelect.js', ({ mount, shallow }) => {
     expect(wrapper.vm.isActive).toBe(true)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
+
+  it('should activate when search changes and not active', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        items: [1, 2, 3, 4],
+        multiple: true
+      }
+    })
+
+    wrapper.vm.searchValue = 2
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isActive).toBe(true)
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 })
