@@ -213,7 +213,10 @@
         // don't open menu if not booted
         if (!this.isBooted) return
 
-        if (!this.isActive) this.isActive = true
+        if (!this.isActive) {
+          this.isActive = true
+          this.focused = true
+        }
         this.$refs.menu.listIndex = null
 
         this.$nextTick(() => {
@@ -250,7 +253,10 @@
       blur (e) {
         this.$nextTick(() => {
           this.focused = false
+
+          // Ensure searchValue is properly set
           if (this.multiple || !this.isDirty) this.searchValue = null
+          else this.searchValue = this.getText(this.inputValue)
 
           this.$emit('blur', this.inputValue)
         })
@@ -331,6 +337,8 @@
             this.$refs.input &&
               this.$refs.input.focus()
           })
+        } else {
+          this.blur()
         }
 
         if (this.multiple) this.searchValue = null

@@ -40,7 +40,6 @@ export default {
           },
           domProps: { value: this.lazySearch },
           on: {
-            blur: this.blur,
             focus: this.focus,
             input: e => (this.searchValue = e.target.value)
           },
