@@ -250,7 +250,7 @@
       blur (e) {
         this.$nextTick(() => {
           this.focused = false
-          if (this.multiple) this.searchValue = null
+          if (this.multiple || !this.isDirty) this.searchValue = null
 
           this.$emit('blur', this.inputValue)
         })
