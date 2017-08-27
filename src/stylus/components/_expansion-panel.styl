@@ -38,6 +38,10 @@ theme(expansion-panel, "expansion-panel")
 
     .header__icon
       margin-left: auto
+      
+      .icon
+        // Edge rendering issue TODO: revisit later
+        transition: none
 
     &--active
       .header__icon .icon
