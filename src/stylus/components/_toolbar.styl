@@ -6,7 +6,7 @@ toolbar($material)
   background-color: $material.app-bar
   color: $material.text.primary
 
-  .btn
+  .btn:not(.btn--disabled)
     color: $material.text.primary
 
 theme(toolbar, "toolbar")
@@ -21,7 +21,6 @@ theme(toolbar, "toolbar")
   .input-group--solo
     .input-group__details
       display: none
-
 
 /** Children */
 .toolbar
