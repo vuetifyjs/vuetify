@@ -2,6 +2,8 @@ import {
   directiveConfig
 } from '../util/helpers'
 
+require('../stylus/components/_tooltips.styl')
+
 function directive (el, binding) {
   const config = directiveConfig(
     binding,
