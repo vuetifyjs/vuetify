@@ -135,4 +135,31 @@ test('VSelect.js', ({ mount, shallow }) => {
     expect(wrapper.vm.$refs.menu.isActive).toBe(false)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
+
+  it('should not close menu when using multiple prop', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        items: [1,2,3,4,5],
+        multiple: true
+      }
+    })
+
+    const blur = jest.fn()
+    wrapper.vm.$on('blur', blur)
+
+    wrapper.trigger('click')
+    wrapper.trigger('blur')
+
+    await wrapper.vm.$nextTick()
+
+    const item = wrapper.find('li')[0]
+    item.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(blur).not.toBeCalled()
+    expect(wrapper.vm.isActive).toBe(true)
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 })

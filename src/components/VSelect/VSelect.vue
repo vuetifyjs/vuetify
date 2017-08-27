@@ -357,7 +357,7 @@
             this.$refs.input &&
               this.$refs.input.focus()
           })
-        } else {
+        } else if (!this.multiple) {
           this.blur()
         }
 
@@ -388,7 +388,7 @@
         on: {
           ...listeners,
           focus: !this.isAutocomplete ? this.focus : this.onAutocompleteFocus,
-          blur: !this.isAutocomplete ? this.blur : () => {},
+          blur: !this.isAutocomplete && !this.multiple ? this.blur : () => {},
           click: (e) => {
             if (!this.isActive) this.isActive = true
           },

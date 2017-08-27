@@ -17,6 +17,8 @@ export default {
 
   methods: {
     filterSearch () {
+      if (!this.isAutocomplete) return this.computedItems
+
       return this.computedItems.filter(i => this.filter(
         i, this.searchValue, this.getText(i))
       )
