@@ -158,10 +158,10 @@
     },
 
     watch: {
-      activePicker (val) {
-        val === 'YEAR' && this.$nextTick(() => {
+      activePicker (val, prev) {
+        val === 'YEAR' && setTimeout(() => {
           this.$refs.years.scrollTop = this.$refs.years.scrollHeight / 2 - 125
-        })
+        }, 350)
       },
       tableDate (val, prev) {
         this.isReversing = val < prev
@@ -300,10 +300,6 @@
       }
     },
 
-    render (h) {
-      return this.renderPicker(h)
-    },
-
     created () {
       const date = new Date()
       date.setDate(date.getDate() - date.getDay() + parseInt(this.firstDayOfWeek))
@@ -316,6 +312,10 @@
       })
 
       this.tableDate = this.inputDate
+    },
+
+    render (h) {
+      return this.renderPicker(h)
     },
 
     mounted () {
