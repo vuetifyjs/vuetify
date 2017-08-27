@@ -8,8 +8,10 @@
   &--disabled
     cursor: not-allowed
 
-    .menu__activator
+    .menu__activator,
+    .menu__activator > *
       cursor: not-allowed
+      pointer-events: none
 
   &__activator
     align-items: center
