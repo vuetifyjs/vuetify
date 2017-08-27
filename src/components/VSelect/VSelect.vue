@@ -124,6 +124,7 @@
       },
       computedContentClass () {
         const children = [
+          'menu__content--select',
           this.auto ? 'menu__content--auto' : '',
           this.isDropdown ? 'menu__content--dropdown' : ''
         ]
