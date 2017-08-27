@@ -21,7 +21,8 @@ export default {
           offsetY,
           value: this.isActive && this.computedItems.length,
           zIndex: this.menuZIndex
-        }
+        },
+        on: { input: val => (this.isActive = val) }
       }
 
       this.minWidth && (data.props.minWidth = this.minWidth)
