@@ -229,7 +229,10 @@
       })
 
       const data = {
-        'class': 'menu',
+        staticClass: 'menu',
+        class: {
+          'menu--disabled': this.disabled,
+        },
         style: {
           display: this.fullWidth ? 'block' : 'inline-block'
         },
