@@ -7,7 +7,7 @@ const Vuetify = {
       breakpoint: {}
     }
 
-    Vue.util.defineReactive($vuetify, 'breakpoint')
+    Vue.util.defineReactive({}, 'breakpoint', $vuetify)
 
     Vue.prototype.$vuetify = $vuetify
 
