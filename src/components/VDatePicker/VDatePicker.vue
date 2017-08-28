@@ -192,14 +192,6 @@
     },
 
     methods: {
-      getInputDateForYear (year) {
-        let tableMonth = this.tableMonth + 1
-        let day = this.day
-        tableMonth = tableMonth < 10 ? `0${tableMonth}` : tableMonth
-        day = day < 10 ? `0${day}` : day
-
-        return `${year}-${tableMonth}-${day}`
-      },
       save () {
         if (this.originalDate) {
           this.originalDate = this.value
@@ -286,36 +278,10 @@
             this.monthGenTBody()
           ], value => this.tableDate = new Date(this.tableYear + value, 0)))
         } else if (this.activePicker === 'YEAR') {
-          pickerBodyChildren.push(this.genYears(year => this.getInputDateForYear(year)))
+          pickerBodyChildren.push(this.genYears())
         }
 
         return pickerBodyChildren
-      },
-      renderPicker (h) {
-        const children = []
-
-        !this.noTitle && children.push(this.genTitle(this.titleText))
-
-        children.push(h('transition', {
-          props: {
-            origin: 'center center',
-            mode: 'out-in',
-            name: 'scale-transition'
-          }
-        }, [h('div', {
-          staticClass: 'picker__body',
-          key: this.activePicker
-        }, this.genPickerBody(h))]))
-
-        this.$scopedSlots.default && children.push(this.genSlot())
-
-        return h('v-card', {
-          staticClass: 'picker picker--date',
-          'class': {
-            'picker--landscape': this.landscape,
-            ...this.themeClasses
-          }
-        }, children)
       }
     },
 
@@ -332,7 +298,30 @@
     },
 
     render (h) {
-      return this.renderPicker(h)
+      const children = []
+
+      !this.noTitle && children.push(this.genTitle(this.titleText))
+
+      children.push(h('transition', {
+        props: {
+          origin: 'center center',
+          mode: 'out-in',
+          name: 'scale-transition'
+        }
+      }, [h('div', {
+        staticClass: 'picker__body',
+        key: this.activePicker
+      }, this.genPickerBody(h))]))
+
+      this.$scopedSlots.default && children.push(this.genSlot())
+
+      return h('v-card', {
+        staticClass: 'picker picker--date',
+        'class': {
+          'picker--landscape': this.landscape,
+          ...this.themeClasses
+        }
+      }, children)
     }
 
   }
