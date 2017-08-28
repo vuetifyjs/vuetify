@@ -136,15 +136,6 @@ theme(textfield, "input-group--text-field")
       label
         transform: translate3d(0, -8px, 0) scale(.75)
 
-  // Single Line
-  &.input-group--single-line
-    label
-      transform: translate3d(0,0,0)
-
-    &.input-group--dirty
-      label
-        display: none
-
   // Multi Line
   &.input-group--multi-line
     textarea
@@ -159,25 +150,6 @@ theme(textfield, "input-group--text-field")
 
     .input-group__details:before, .input-group__details:after
       display: none
-
-  // Solo
-  &.input-group--solo
-    background: #fff
-    height: 46px
-    border-radius: $card-border-radius
-    padding: 0 16px
-    elevation(2)
-
-    input
-      margin-top: 8px
-
-    label
-      top: 8px
-      left: 56px
-      transform: none !important
-
-    &:hover
-      elevation(4)
 
 /** Prefix/Suffix */
 .input-group--prefix

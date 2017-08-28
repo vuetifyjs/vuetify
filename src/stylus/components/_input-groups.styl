@@ -141,6 +141,39 @@ theme(input-group, "input-group")
 
 /** States */
 .input-group
+  // Single Line
+  &.input-group--single-line,
+  &.input-group--solo
+    label
+      transform: translate3d(0,0,0)
+
+    &.input-group--dirty
+      label
+        display: none
+
+  // Solo
+  &.input-group--solo
+    background: #fff
+    min-height: 46px
+    border-radius: $card-border-radius
+    padding: 0
+    elevation(2)
+
+    label
+      top: 7px
+      padding-left: 16px
+      transform: none !important
+
+    &:hover
+      elevation(4)
+      
+    .input-group__input
+      align-items: center
+      padding: 8px 16px
+    
+    .input-group__details
+      display: none
+
   &--disabled
     .input-group__details:before
       background-color: transparent

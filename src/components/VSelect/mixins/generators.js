@@ -35,6 +35,9 @@ export default {
       if (this.isAutocomplete) {
         input = this.$createElement('input', {
           'class': 'input-group--select__autocomplete',
+          style: {
+            flex: this.shouldBreak ? '1 0 100%' : null
+          },
           attrs: {
             ...this.$attrs,
             tabindex: this.disabled ? -1 : 0

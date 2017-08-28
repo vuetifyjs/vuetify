@@ -51,7 +51,8 @@
         isBooted: false,
         lastItem: 20,
         lazySearch: null,
-        isActive: false
+        isActive: false,
+        shouldBreak: false
       }
     },
 
@@ -96,6 +97,7 @@
       multiple: Boolean,
       multiLine: Boolean,
       offset: Boolean,
+      solo: Boolean,
       searchInput: {
         default: null
       },
@@ -119,6 +121,7 @@
           'input-group--single-line': this.singleLine || this.isDropdown,
           'input-group--multi-line': this.multiLine,
           'input-group--chips': this.chips,
+          'input-group--solo': this.solo,
           'input-group--multiple': this.multiple
         }
       },
@@ -146,7 +149,7 @@
         return this.selectedItems.length
       },
       isDropdown () {
-        return this.segmented || this.overflow || this.editable
+        return this.segmented || this.overflow || this.editable || this.solo
       },
       searchValue: {
         get () {
@@ -160,6 +163,13 @@
             this.isBooted &&
             this.$emit('update:searchInput', val)
         }
+      },
+      selectedItem () {
+        if (this.multiple) return null
+
+        return this.selectedItems.find(i => (
+          this.getValue(i) === this.getValue(this.inputValue)
+        ))
       },
       selectedItems () {
         if (!this.multiple &&
@@ -183,8 +193,9 @@
       inputValue (val) {
         // Async calls may not have data ready at boot
         if (!this.multiple &&
-          this.isAutocomplete
-        ) this.searchValue = this.getText(val)
+          this.isAutocomplete &&
+          this.selectedItems.length
+        ) this.searchValue = this.getText(this.selectedItems[0])
 
         this.$emit('input', val)
       },
@@ -200,10 +211,10 @@
         this.inputValue = val ? [] : null
       },
       isActive (val) {
+        !val && (this.searchValue = this.getText(this.selectedItem))
         this.focused = val
         this.isBooted = true
         this.lastItem += !val ? 20 : 0
-        this.resetSearch()
       },
       isBooted () {
         this.$nextTick(() => {
@@ -221,13 +232,21 @@
         })
       },
       searchValue (val) {
+        // Wrap input to next line if overflowing
+        if (this.$refs.input.scrollWidth > this.$refs.input.clientWidth) {
+          this.shouldBreak = true
+          this.$nextTick(this.$refs.menu.updateDimensions)
+        } else if (val === null) {
+          this.shouldBreak = false
+        }
+
         // This could change externally
         // avoid accidental re-activation
         // when dealing with async items
         if (!this.isActive &&
           this.computedItems.length &&
           val !== null &&
-          val !== this.getText(this.inputValue)
+          val !== this.getText(this.selectedItem)
         ) {
           this.isActive = true
           this.focused = true
@@ -245,14 +264,6 @@
         if (this._isDestroyed) return
 
         this.content = this.$refs.menu.$refs.content
-
-        // Set input text
-        if (this.isAutocomplete &&
-          !this.multiple &&
-          this.isDirty
-        ) {
-          this.searchValue = this.getText(this.inputValue)
-        }
       })
     },
 
@@ -269,9 +280,6 @@
         this.$nextTick(() => {
           this.isActive = false
           this.focused = false
-
-          this.resetSearch()
-
           this.$emit('blur', this.inputValue)
         })
       },
@@ -331,11 +339,6 @@
           }
         }
       },
-      resetSearch () {
-        // Ensure searchValue is properly set
-        if (this.multiple || !this.isDirty) this.searchValue = null
-        else this.searchValue = this.getText(this.inputValue)
-        },
       selectItem (item) {
         if (!this.multiple) {
           this.inputValue = this.returnObject ? item : this.getValue(item)

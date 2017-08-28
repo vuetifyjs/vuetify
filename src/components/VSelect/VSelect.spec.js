@@ -182,6 +182,7 @@ test('VSelect.js', ({ mount, shallow }) => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,
       propsData: {
+        autocomplete: true,
         items: [1, 2, 3, 4],
         multiple: true
       }
@@ -199,13 +200,14 @@ test('VSelect.js', ({ mount, shallow }) => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,
       propsData: {
+        autocomplete: true,
         items: [1, 2, 3, 4],
         multiple: true
       }
     })
 
     wrapper.vm.searchValue = 2
-    wrapper.trigger('blur')
+    wrapper.vm.blur()
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.searchValue).toBe(null)
@@ -216,13 +218,14 @@ test('VSelect.js', ({ mount, shallow }) => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,
       propsData: {
+        autocomplete: true,
         items: ['foo', 'bar'],
         value: 'foo'
       }
     })
 
     wrapper.vm.searchValue = 'bar'
-    wrapper.trigger('blur')
+    wrapper.vm.blur()
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.searchValue).toBe('foo')
