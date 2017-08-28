@@ -211,7 +211,9 @@
         this.inputValue = val ? [] : null
       },
       isActive (val) {
-        !val && (this.searchValue = this.getText(this.selectedItem))
+        !val &&
+          this.isAutocomplete &&
+          (this.searchValue = this.getText(this.selectedItem))
         this.focused = val
         this.isBooted = true
         this.lastItem += !val ? 20 : 0
@@ -390,7 +392,6 @@
         on: {
           ...listeners,
           focus: !this.isAutocomplete ? this.focus : this.onAutocompleteFocus,
-          blur: !this.isAutocomplete && !this.multiple ? this.blur : () => {},
           click: (e) => {
             if (!this.isActive) this.isActive = true
           },
