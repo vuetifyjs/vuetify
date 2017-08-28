@@ -4,7 +4,7 @@
   <a href="https://travis-ci.org/vuetifyjs/vuetify">
     <img src="https://travis-ci.org/vuetifyjs/vuetify.svg" alt="travis ci badge">
   </a>
-  <a href="https://codebeat.co/projects/github-com-vuetifyjs-vuetify-dev"><img alt="codebeat badge" src="https://codebeat.co/badges/bb74198a-c321-4cb7-b878-a32f46633d65" /></a>
+  <a href="https://codebeat.co/projects/github-com-vuetifyjs-vuetify-dev"><img alt="codebeat badge" src="https://codebeat.co/badges/b2d1ce87-848b-440e-9d7e-df9883c0cd93" /></a>
   <a href="https://www.npmjs.com/package/vuetify"><img src="https://img.shields.io/npm/dm/vuetify.svg" alt="Downloads"></a>
   <a href="https://www.npmjs.com/package/vuetify"><img src="https://img.shields.io/npm/v/vuetify.svg" alt="Version"></a>
   <a href="https://www.npmjs.com/package/vuetify"><img src="https://img.shields.io/npm/l/vuetify.svg" alt="License"></a>
