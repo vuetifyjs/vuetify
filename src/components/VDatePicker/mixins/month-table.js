@@ -16,10 +16,10 @@ export default {
       const day = this.day < 10 ? `0${this.day}` : this.day
 
       this.inputDate = `${tableYear}-${monthStr}-${day}T12:00:00`
-      if (this.pickMonth) {
-        this.$nextTick(() => (this.autosave && this.save()))
-      } else {
+      if (this.type === 'date') {
         this.activePicker = 'DATE'
+      } else {
+        this.$nextTick(() => (this.autosave && this.save()))
       }
     },
     monthGenTD (month) {

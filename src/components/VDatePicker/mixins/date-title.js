@@ -45,14 +45,14 @@ export default {
 
     genTitleDate (title) {
       return this.$createElement('div', {
+        staticClass: 'picker--date__title-date',
         'class': {
-          'picker--date__title-date': true,
-          'active': this.activePicker !== this.pickMonth ? 'MONTH' : 'DATE'
+          'active': this.activePicker === this.type.toUpperCase()
         },
         on: {
           click: e => {
             e.stopPropagation()
-            this.activePicker = this.pickMonth ? 'MONTH' : 'DATE'
+            this.activePicker = this.type.toUpperCase()
           }
         }
       }, [this.genTitleText(title)])

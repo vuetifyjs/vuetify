@@ -30,7 +30,7 @@ test('VDatePicker.js', ({ mount }) => {
     const wrapper = mount(VDatePicker, {
       propsData: {
         value: '2013-05-07',
-        pickMonth: true
+        type: 'month'
       }
     })
 
@@ -63,7 +63,7 @@ test('VDatePicker.js', ({ mount }) => {
     const wrapper = mount(VDatePicker, {
       propsData: {
         value: '2013-05',
-        pickMonth: true,
+        type: 'month',
         allowedDates: ['2013-01', '2013-03', '2013-05', '2013-07', '2013-09']
       }
     })

@@ -18,7 +18,11 @@ export default {
             click: e => {
               e.stopPropagation()
               this.inputDate = inputDateForYearCallback(i)
-              this.activePicker = 'MONTH'
+              if (this.type === 'year') {
+                this.$nextTick(() => (this.autosave && this.save()))
+              } else {
+                this.activePicker = 'MONTH'
+              }
             }
           }
         }, i))

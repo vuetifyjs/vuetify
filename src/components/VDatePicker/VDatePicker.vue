@@ -13,7 +13,7 @@
 
   import Touch from '../../directives/touch'
 
-  const createDefaultDateFormat = pickMonth => val => new Date(val).toISOString().substr(0, pickMonth ? 7 : 10)
+  const createDefaultDateFormat = type => val => new Date(val).toISOString().substr(0, { date: 10, month: 7, year: 4}[type])
 
   export default {
     name: 'v-date-picker',
@@ -37,7 +37,7 @@
         currentYear: null,
         isReversing: false,
         narrowDays: [],
-        activePicker: this.pickMonth ? 'MONTH' : 'DATE'
+        activePicker: this.type.toUpperCase()
       }
     },
 
@@ -45,6 +45,11 @@
       locale: {
         type: String,
         default: 'en-us'
+      },
+      type: {
+        type: String,
+        default: 'date',
+        validator: type => ['date', 'month'/*, 'year'*/].includes(type)
       },
       dateFormat: {
         type: Function,
@@ -69,7 +74,6 @@
         type: [String, Number],
         default: 0
       },
-      pickMonth: Boolean,
       yearIcon: String
     },
 
@@ -77,7 +81,7 @@
       firstAllowedDate () {
         const date = new Date()
 
-        if (this.pickMonth) {
+        if (this.type === 'month') {
           date.setDate(1)
           date.setHours(12, 0, 0, 0)
 
@@ -90,7 +94,7 @@
               }
             }
           }
-        } else {
+        } else if (this.type === 'date') {
           date.setHours(12, 0, 0, 0)
 
           if (this.allowedDates) {
@@ -117,7 +121,7 @@
           return new Date(`${this.value}T12:00:00`)
         },
         set (val) {
-          const pickerDateFormat = createDefaultDateFormat(this.pickMonth)
+          const pickerDateFormat = createDefaultDateFormat(this.type)
           this.$emit('input', val ? pickerDateFormat(val) : this.originalDate)
           this.$emit('update:formattedValue', (this.dateFormat || pickerDateFormat)(val || this.originalDate))
         }
@@ -143,13 +147,15 @@
       titleText () {
         let date = new Date(this.year, this.month, this.day, 1 /* Workaround for #1409 */)
 
-        const defaultTitleDateFormat = this.pickMonth ? {
+        const defaultTitleDateFormat = this.type === 'year' ? {
+          year: 'numeric'
+        } : (this.type === 'month' ? {
           month: 'long'
         } : {
           weekday: 'short',
           month: 'short',
           day: 'numeric'
-        }
+        })
         date = date.toLocaleString(this.locale, this.titleDateFormat || defaultTitleDateFormat)
 
         if (this.landscape) {
@@ -173,9 +179,11 @@
       value (val) {
         if (val) this.tableDate = this.inputDate
       },
-      pickMonth (val) {
-        if (val && this.activePicker === 'DATE') {
+      type (val) {
+        if (val === 'month' && this.activePicker === 'DATE') {
           this.activePicker = 'MONTH'
+        } else if (val === 'year') {
+          this.activePicker = 'YEAR'
         }
       },
       firstDayOfWeek() {
@@ -220,13 +228,13 @@
         if (!this.allowedDates) return true
 
         if (Array.isArray(this.allowedDates)) {
-          const format = createDefaultDateFormat(this.activePicker === 'MONTH')
+          const format = createDefaultDateFormat(this.activePicker === 'MONTH' ? 'month' : 'date')
           date = format(date)
           return !!this.allowedDates.find(allowedDate => format(allowedDate) === date)
         } else if (this.allowedDates instanceof Function) {
           return this.allowedDates(date)
         } else if (this.allowedDates instanceof Object) {
-          const format = createDefaultDateFormat(this.activePicker === 'MONTH')
+          const format = createDefaultDateFormat(this.activePicker === 'MONTH' ? 'month' : 'date')
           const min = format(this.allowedDates.min)
           const max = format(this.allowedDates.max)
           date = format(date)
