@@ -75,28 +75,32 @@
 
     computed: {
       firstAllowedDate () {
-        // const date = new Date()
-        // date.setDate(1)
-        // date.setHours(12, 0, 0, 0)
-
-        // if (this.allowedDates) {
-        //   for (let month = 0; month < 12; month++) {
-        //     const valid = date.setMonth(month)
-        //     if (this.isAllowed(valid)) return valid
-        //   }
-        // }
-
-        // return date
         const date = new Date()
-        date.setHours(12, 0, 0, 0)
 
-        if (this.allowedDates) {
-          const millisecondOffset = 1 * 24 * 60 * 60 * 1000
-          const valid = new Date(date)
-          for (let i = 0; i < 31; i++) {
-            if (this.isAllowed(valid)) return valid
+        if (this.pickMonth) {
+          date.setDate(1)
+          date.setHours(12, 0, 0, 0)
 
-            valid.setTime(valid.getTime() + millisecondOffset)
+          if (this.allowedDates) {
+            const valid = new Date(date)
+            for (let month = 0; month < 12; month++) {
+              valid.setMonth(month)
+              if (this.isAllowed(valid)) {
+                return valid
+              }
+            }
+          }
+        } else {
+          date.setHours(12, 0, 0, 0)
+
+          if (this.allowedDates) {
+            const millisecondOffset = 1 * 24 * 60 * 60 * 1000
+            const valid = new Date(date)
+            for (let i = 0; i < 31; i++) {
+              if (this.isAllowed(valid)) return valid
+
+              valid.setTime(valid.getTime() + millisecondOffset)
+            }
           }
         }
 
@@ -177,15 +181,6 @@
     },
 
     methods: {
-      intifyDate(date) {
-          // if (!date) return null
-          // date = new Date(date)
-          // return (date.getFullYear() * 12 + date.getMonth()) * 32 + 1
-        if (!date) return null
-        date = new Date(date)
-        return (date.getFullYear() * 12 + date.getMonth()) * 32 + date.getDate()
-      },
-
       getInputDateForYear (year) {
         let tableMonth = this.tableMonth + 1
         let day = this.day
@@ -211,14 +206,16 @@
         if (!this.allowedDates) return true
 
         if (Array.isArray(this.allowedDates)) {
-          date = this.intifyDate(date)
-          return !!this.allowedDates.find(allowedDate => this.intifyDate(allowedDate) === date)
+          const format = createDefaultDateFormat(this.pickMonth)
+          date = format(date)
+          return !!this.allowedDates.find(allowedDate => format(allowedDate) === date)
         } else if (this.allowedDates instanceof Function) {
           return this.allowedDates(date)
         } else if (this.allowedDates instanceof Object) {
-          date = this.intifyDate(date)
-          const min = this.intifyDate(this.allowedDates.min)
-          const max = this.intifyDate(this.allowedDates.max)
+          const format = createDefaultDateFormat(this.pickMonth)
+          const min = format(this.allowedDates.min)
+          const max = format(this.allowedDates.max)
+          date = format(date)
           return (!min || min <= date) && (!max || max >= date)
         }
 
