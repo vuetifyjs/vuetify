@@ -39,8 +39,9 @@ export default {
             flex: this.shouldBreak ? '1 0 100%' : null
           },
           attrs: {
+            tabindex: this.disabled ? -1 : 0,
             ...this.$attrs,
-            tabindex: this.disabled ? -1 : 0
+            role: 'combobox'
           },
           domProps: { value: this.lazySearch },
           on: {

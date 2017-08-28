@@ -231,4 +231,54 @@ test('VSelect.js', ({ mount, shallow }) => {
     expect(wrapper.vm.searchValue).toBe('foo')
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
+
+  it('should render role=combobox correctly when autocomplete', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        autocomplete: true,
+        items: []
+      }
+    })
+
+    let ele = wrapper.find('.input-group--select')
+    expect(ele.length).toBe(1)
+    expect(ele[0].element.getAttribute('role')).toBeFalsy()
+
+    ele = wrapper.find('.input-group--select input')
+    expect(ele.length).toBe(1)
+    expect(ele[0].hasAttribute('role', 'combobox')).toBe(true)
+
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should render role=combobox correctly when not autocomplete)', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: []
+      }
+    })
+
+    let ele = wrapper.find('.input-group--select')
+    expect(ele.length).toBe(1)
+    expect(ele[0].hasAttribute('role', 'combobox')).toBe(true)
+
+    ele = wrapper.find('.input-group--select input')
+    expect(ele.length).toBe(0)
+
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should render aria-hidden=true on arrow icon', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: []
+      }
+    })
+
+    const icon = wrapper.find('i.input-group__append-icon')
+    expect(icon.length).toBe(1)
+    expect(icon[0].hasAttribute('aria-hidden', 'true')).toBe(true)
+
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 })
