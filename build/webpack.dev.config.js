@@ -10,6 +10,10 @@ const webpack = require('webpack')
 // Helpers
 const resolve = file => require('path').resolve(__dirname, file)
 
+const extractPlugin = ExtractTextPlugin.extract({
+  use: ['css-loader', 'postcss-loader', 'stylus-loader']
+})
+
 module.exports = {
   devtool: '#cheap-module-eval-source-map',
   entry: ['babel-polyfill', './dev/index.js'],
@@ -30,7 +34,14 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        loaders: ['vue-loader', 'eslint-loader'],
+        loaders: [{
+          loader: 'vue-loader',
+          options: {
+            loaders: {
+              stylus: extractPlugin
+            }
+          }
+        }, 'eslint-loader'],
         exclude: /node_modules/
       },
       {
@@ -40,9 +51,7 @@ module.exports = {
       },
       {
         test: /\.styl$/,
-        loaders: ExtractTextPlugin.extract({
-          use: ['css-loader', 'postcss-loader', 'stylus-loader']
-        }),
+        loaders: extractPlugin,
         exclude: /node_modules/
       }
     ]
@@ -55,7 +64,10 @@ module.exports = {
     publicPath: '/dev/'
   },
   plugins: [
-    new ExtractTextPlugin('[name].css'),
+    new ExtractTextPlugin({
+      filename: '[name].css',
+      allChunks: true
+    }),
     new OptimizeCssAssetsPlugin({
       assetNameRegExp: /\.css$/
     }),

@@ -2,6 +2,8 @@ import {
   directiveConfig
 } from '../util/helpers'
 
+require('../stylus/components/_badges.styl')
+
 function directive (el, binding) {
   const config = directiveConfig(
     binding,
@@ -33,6 +35,7 @@ function unbind (el) {
 }
 
 export default {
+  name: 'badge',
   bind: directive,
   updated: directive,
   componentUpdated: directive,

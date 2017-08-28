@@ -23,7 +23,7 @@ theme(tabs, "tabs")
   position: relative
   width: 100%
 
-  &--grow > .tabs__bar
+  &--grow .tabs__bar
     .tabs__li
       flex: 1
 
@@ -36,7 +36,7 @@ theme(tabs, "tabs")
       @media $display-breakpoints.xs-only
         min-width: 72px
 
-  &--centered > .tabs__bar
+  &--centered .tabs__bar
     .tabs__container
       justify-content: center
 
@@ -47,7 +47,7 @@ theme(tabs, "tabs")
     .tabs__item
       flex-direction: column
 
-  &.tabs--mobile > .tabs__bar
+  &.tabs--mobile .tabs__bar
     .icon--left, .icon--right
       display: none
 

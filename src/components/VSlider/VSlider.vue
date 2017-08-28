@@ -58,7 +58,7 @@
         set (val) {
           const { min, max, step, snap } = this
           val = val < min ? min : val > max ? max : val
-          if (Math.ceil(val) !== Math.ceil(this.lazyValue)) {
+          if (Math.ceil(val) % Math.ceil(this.lazyValue) < 2) {
             this.inputWidth = this.calculateWidth(val)
           }
 

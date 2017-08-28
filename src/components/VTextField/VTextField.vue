@@ -42,7 +42,7 @@
         return {
           'input-group--text-field': true,
           'input-group--text-field-box': this.box,
-          'input-group--single-line': this.singleLine,
+          'input-group--single-line': this.singleLine || this.solo,
           'input-group--solo': this.solo,
           'input-group--multi-line': this.multiLine,
           'input-group--full-width': this.fullWidth,

@@ -8,6 +8,7 @@ export default {
         ref: 'menu',
         props: {
           activator: this.$refs.activator,
+          openOnClick: false,
           auto: this.auto,
           closeOnClick: false,
           closeOnContentClick: !this.multiple,
@@ -18,7 +19,7 @@ export default {
           nudgeRight: this.isDropdown ? 16 : 0,
           nudgeWidth: this.isDropdown ? 56 : 24,
           offsetY,
-          value: this.isActive,
+          value: this.isActive && this.computedItems.length,
           zIndex: this.menuZIndex
         },
         on: { input: val => (this.isActive = val) }
@@ -34,14 +35,21 @@ export default {
       if (this.isAutocomplete) {
         input = this.$createElement('input', {
           'class': 'input-group--select__autocomplete',
+          style: {
+            flex: this.shouldBreak ? '1 0 100%' : null
+          },
           attrs: {
             ...this.$attrs,
-            tabindex: 0
+            tabindex: this.disabled ? -1 : 0
           },
           domProps: { value: this.lazySearch },
           on: {
-            blur: this.blur,
             focus: this.focus,
+            blur: () => {
+              if (this.isActive) return
+
+              this.blur()
+            },
             input: e => (this.searchValue = e.target.value)
           },
           ref: 'input',
@@ -60,6 +68,8 @@ export default {
       }, [selections])
     },
     genSelections () {
+      if (this.isAutocomplete && !this.multiple) return []
+
       const children = []
       const chips = this.chips
       const slots = this.$scopedSlots.selection
@@ -132,7 +142,13 @@ export default {
       }
 
       const data = {
-        on: { click: e => this.selectItem(item) },
+        on: {
+          click: e => {
+            if (disabled) return
+
+            this.selectItem(item)
+          }
+        },
         props: {
           avatar: item === Object(item) && 'avatar' in item,
           ripple: true,
@@ -151,7 +167,7 @@ export default {
       }
 
       return this.$createElement('v-list-tile', data,
-        [this.genAction(item, active), this.genContent(item)]
+        [this.genAction(item, active && !disabled), this.genContent(item)]
       )
     },
     genAction (item, active) {
