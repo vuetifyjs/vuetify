@@ -72,8 +72,14 @@ theme(expansion-panel, "expansion-panel")
       margin: $spacers.three.x
       elevation(3)
 
-  &--popout &__container--active
-    flex-basis: 105%
+  &--popout, &--inset
+    .expansion-panel__container
+      max-width: 95%
+  
+  &--popout
+    .expansion-panel__container--active
+      max-width: 100%
 
-  &--inset &__container--active
-    flex-basis: 95%
+  &--inset
+    .expansion-panel__container--active
+      max-width: 85%
