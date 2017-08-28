@@ -14,52 +14,50 @@ export default {
       const days = this.narrowDays.map(day => this.$createElement('th', day))
       return this.$createElement('thead', this.dateGenTR(days))
     },
+    dateClick (day) {
+      day = day < 10 ? `0${day}` : day
+      const tableYear = this.tableYear
+      let tableMonth = this.tableMonth + 1
+      tableMonth = tableMonth < 10 ? `0${tableMonth}` : tableMonth
+
+      this.inputDate = `${tableYear}-${tableMonth}-${day}T12:00:00`
+      this.$nextTick(() => (this.autosave && this.save()))
+    },
+    dateGenTD (day) {
+      const date = new Date(this.tableYear, this.tableMonth, day, 12)
+      const button = this.$createElement('button', {
+        'class': {
+          'btn btn--floating btn--small btn--flat': true,
+          'btn--active': this.dateIsActive(day),
+          'btn--current': this.dateIsCurrent(day),
+          'btn--light': this.dark,
+          'btn--disabled': !this.isAllowed(date)
+        },
+        attrs: {
+          type: 'button'
+        },
+        domProps: {
+          innerHTML: `<span class="btn__content">${day}</span>`
+        },
+        on: {
+          click: () => this.dateClick(day)
+        }
+      })
+
+      return this.$createElement('td', [button])
+    },
     dateGenTBody () {
       const children = []
+      const daysInMonth = new Date(this.tableYear, this.tableMonth + 1, 0, 12).getDate()
       let rows = []
-      const length = new Date(
-        this.tableYear,
-        this.tableMonth + 1,
-        0
-      ).getDate()
-
-      let day = new Date(this.tableYear, this.tableMonth).getDay()
-      day = day < 1 ? 6 : day - parseInt(this.firstDayOfWeek)
+      const day = (new Date(this.tableYear, this.tableMonth, 1, 12).getDay() - parseInt(this.firstDayOfWeek) + 7) % 7
 
       for (let i = 0; i < day; i++) {
         rows.push(this.$createElement('td'))
       }
 
-      for (let i = 1; i <= length; i++) {
-        const date = new Date(this.tableYear, this.tableMonth, i, 12, 0, 0, 0)
-        rows.push(this.$createElement('td', [
-          this.$createElement('button', {
-            'class': {
-              'btn btn--floating btn--small btn--flat': true,
-              'btn--active': this.dateIsActive(i),
-              'btn--current': this.dateIsCurrent(i),
-              'btn--light': this.dark,
-              'btn--disabled': !this.isAllowed(date)
-            },
-            attrs: {
-              type: 'button'
-            },
-            domProps: {
-              innerHTML: `<span class="btn__content">${i}</span>`
-            },
-            on: {
-              click: () => {
-                const day = i < 10 ? `0${i}` : i
-                const tableYear = this.tableYear
-                let tableMonth = this.tableMonth + 1
-                tableMonth = tableMonth < 10 ? `0${tableMonth}` : tableMonth
-
-                this.inputDate = `${tableYear}-${tableMonth}-${day}T12:00:00`
-                this.$nextTick(() => (this.autosave && this.save()))
-              }
-            }
-          })
-        ]))
+      for (let i = 1; i <= daysInMonth; i++) {
+        rows.push(this.dateGenTD(i))
 
         if (rows.length % 7 === 0) {
           children.push(this.dateGenTR(rows))

@@ -10,6 +10,18 @@ export default {
 
       this.tableDate = new Date(year, 0)
     },
+    monthClick (month) {
+      const tableYear = this.tableYear
+      const monthStr = month < 9 ? `0${month + 1}` : (month + 1)
+      const day = this.day < 10 ? `0${this.day}` : this.day
+
+      this.inputDate = `${tableYear}-${monthStr}-${day}T12:00:00`
+      if (this.pickMonth) {
+        this.$nextTick(() => (this.autosave && this.save()))
+      } else {
+        this.activePicker = 'DATE'
+      }
+    },
     monthGenTD (month) {
       const date = new Date(this.tableYear, month, 1, 12, 0, 0, 0)
       const monthName = date.toLocaleString(this.locale, { month: 'short' })
@@ -31,18 +43,7 @@ export default {
             innerHTML: `<span class="btn__content">${monthName}</span>`
           },
           on: {
-            click: () => {
-              const tableYear = this.tableYear
-              const monthStr = month < 9 ? `0${month + 1}` : (month + 1)
-              const day = this.day < 10 ? `0${this.day}` : this.day
-
-              this.inputDate = `${tableYear}-${monthStr}-${day}T12:00:00`
-              if (this.pickMonth) {
-                this.$nextTick(() => (this.autosave && this.save()))
-              } else {
-                this.activePicker = 'DATE'
-              }
-            }
+            click: () => this.monthClick(month)
           }
         })
       ])

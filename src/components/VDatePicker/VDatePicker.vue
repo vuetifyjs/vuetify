@@ -177,6 +177,9 @@
         if (val && this.activePicker === 'DATE') {
           this.activePicker = 'MONTH'
         }
+      },
+      firstDayOfWeek() {
+        this.getWeekDays()
       }
     },
 
@@ -202,17 +205,28 @@
         this.inputDate = this.originalDate
         if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
       },
+      getWeekDays() {
+        const date = new Date(2000, 1, 7)
+        const day = date.getDate() - date.getDay() + parseInt(this.firstDayOfWeek)
+
+        this.narrowDays = []
+        createRange(7).forEach(i => {
+          date.setDate(day + i)
+          const narrow = date.toLocaleString(this.locale, { weekday: 'narrow' })
+          this.narrowDays.push(narrow)
+        })
+      },
       isAllowed (date) {
         if (!this.allowedDates) return true
 
         if (Array.isArray(this.allowedDates)) {
-          const format = createDefaultDateFormat(this.pickMonth)
+          const format = createDefaultDateFormat(this.activePicker === 'MONTH')
           date = format(date)
           return !!this.allowedDates.find(allowedDate => format(allowedDate) === date)
         } else if (this.allowedDates instanceof Function) {
           return this.allowedDates(date)
         } else if (this.allowedDates instanceof Object) {
-          const format = createDefaultDateFormat(this.pickMonth)
+          const format = createDefaultDateFormat(this.activePicker === 'MONTH')
           const min = format(this.allowedDates.min)
           const max = format(this.allowedDates.max)
           date = format(date)
@@ -298,16 +312,7 @@
     },
 
     created () {
-      const date = new Date()
-      date.setDate(date.getDate() - date.getDay() + parseInt(this.firstDayOfWeek))
-
-      createRange(7).forEach(() => {
-        const narrow = date.toLocaleString(this.locale, { weekday: 'narrow' })
-        this.narrowDays.push(narrow)
-
-        date.setDate(date.getDate() + 1)
-      })
-
+      this.getWeekDays()
       this.tableDate = this.inputDate
     },
 

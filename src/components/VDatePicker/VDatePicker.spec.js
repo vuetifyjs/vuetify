@@ -81,4 +81,15 @@ test('VDatePicker.js', ({ mount }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should match snapshot with first day of week', () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: '2013-05-07',
+        firstDayOfWeek: 2
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
