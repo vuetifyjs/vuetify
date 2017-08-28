@@ -73,7 +73,6 @@ export default {
     },
     hasError (val) {
       if (this.shouldValidate) {
-        this.valid = !val
         this.$emit('update:error', val)
       }
     }
@@ -109,6 +108,10 @@ export default {
           this.errorBucket.push(valid)
         }
       })
+
+      this.valid = this.errorBucket.length === 0
+
+      return this.valid
     }
   }
 }

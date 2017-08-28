@@ -65,7 +65,11 @@ test('VTextField.js', ({ mount }) => {
   })
 
   it('should start out as invalid', () => {
-    const wrapper = mount(VTextField, {})
+    const wrapper = mount(VTextField, {
+      propsData: {
+        rules: [(v) => !!v || 'Required']
+      }
+    })
 
     expect(wrapper.data().valid).toEqual(false)
   })

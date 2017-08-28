@@ -50,8 +50,6 @@ export default {
   mounted () {
     this.$vuetify.load(() => {
       this.getInputs().forEach((child) => {
-        if (!child.$el.querySelector('input')) return
-
         this.inputs += 1
 
         // Only start watching inputs if we need to
