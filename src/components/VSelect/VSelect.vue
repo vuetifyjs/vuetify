@@ -392,6 +392,11 @@
         on: {
           ...listeners,
           focus: !this.isAutocomplete ? this.focus : this.onAutocompleteFocus,
+          blur: () => {
+            if (this.isActive) return
+
+            this.blur()
+          },
           click: (e) => {
             if (!this.isActive) this.isActive = true
           },
