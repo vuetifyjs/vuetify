@@ -40,7 +40,12 @@ export default {
       })
     },
     validate () {
-      this.getInputs().forEach(child => child.validate(true))
+      const errors = this.getInputs().reduce((errors, child) => {
+        const error = !child.validate(true)
+        return errors || error
+      }, false)
+
+      return !errors
     },
     reset () {
       this.getInputs().forEach((input) => input.reset())

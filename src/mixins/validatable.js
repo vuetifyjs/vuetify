@@ -86,7 +86,7 @@ export default {
     reset () {
       // TODO: Do this another way!
       // This is so that we can reset all types of inputs
-      this.$emit('input', null)
+      this.$emit('input', this.multiple ? [] : null)
       this.$emit('change', null)
 
       this.$nextTick(() => {
