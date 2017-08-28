@@ -24,7 +24,7 @@ test('VDataTable.js', ({ mount }) => {
   }
 
   it('should be able to filter null and undefined values', async () => {
-    const data = Object.assign({}, dataTableTestData())
+    const data = dataTableTestData()
     const pagination = data.propsData.pagination
     const wrapper = mount(VDataTable, data)
 
@@ -38,7 +38,7 @@ test('VDataTable.js', ({ mount }) => {
   })
 
   it('should render role attribute on column headers', async () => {
-    const data = Object.assign({}, dataTableTestData())
+    const data = dataTableTestData()
     const wrapper = mount(VDataTable, data)
 
     const headerEles = wrapper.find('thead:first-of-type > tr:first-of-type > th')
@@ -51,7 +51,7 @@ test('VDataTable.js', ({ mount }) => {
   })
 
   it('should render scope attribute on column headers', async () => {
-    const data = Object.assign({}, dataTableTestData())
+    const data = dataTableTestData()
     const wrapper = mount(VDataTable, data)
 
     const headerEles = wrapper.find('thead:first-of-type > tr:first-of-type > th')
@@ -64,7 +64,7 @@ test('VDataTable.js', ({ mount }) => {
   })
 
   it('should render aria-hidden attribute on column header sort icon', async () => {
-    const data = Object.assign({}, dataTableTestData())
+    const data = dataTableTestData()
     const wrapper = mount(VDataTable, data)
 
     const icons = wrapper.find('thead:first-of-type > tr:first-of-type > th > i')
@@ -76,7 +76,7 @@ test('VDataTable.js', ({ mount }) => {
   })
 
   it('should render aria-label attribute on column headers', async () => {
-    const data = Object.assign({}, dataTableTestData())
+    const data = dataTableTestData()
     const wrapper = mount(VDataTable, data)
 
     const headerEles = wrapper.find('thead:first-of-type > tr:first-of-type > th')
@@ -92,7 +92,7 @@ test('VDataTable.js', ({ mount }) => {
   })
 
   it('should render aria-sort attribute on column headers', async () => {
-    const data = Object.assign({}, dataTableTestData())
+    const data = dataTableTestData()
     const wrapper = mount(VDataTable, data)
 
     let headerEles = wrapper.find('thead:first-of-type > tr:first-of-type > th')
@@ -116,7 +116,7 @@ test('VDataTable.js', ({ mount }) => {
   })
 
   it('should render tabindex on sortable column headers', async () => {
-    const data = Object.assign({}, dataTableTestData())
+    const data = dataTableTestData()
     const wrapper = mount(VDataTable, data)
 
     const headerEles = wrapper.find('thead:first-of-type > tr:first-of-type > th')
@@ -129,7 +129,7 @@ test('VDataTable.js', ({ mount }) => {
   })
 
   it('should render aria-label attribute on pagination arrow buttons', async () => {
-    const data = Object.assign({}, dataTableTestData())
+    const data = dataTableTestData()
     const wrapper = mount(VDataTable, data)
 
     const buttons = wrapper.find('.datatable__actions > button')
@@ -141,7 +141,7 @@ test('VDataTable.js', ({ mount }) => {
   })
 
   it('should render aria-label attribute on pagination select', async () => {
-    const data = Object.assign({}, dataTableTestData())
+    const data = dataTableTestData()
     const wrapper = mount(VDataTable, data)
 
     const select = wrapper.find('.datatable__actions .input-group--select')

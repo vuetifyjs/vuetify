@@ -52,7 +52,6 @@ export default {
         this.rowsPerPageText,
         this.$createElement('v-select', {
           attrs: {
-            role: 'combobox',
             'aria-label': this.rowsPerPageText
           },
           props: {
