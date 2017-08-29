@@ -10,8 +10,6 @@ function inserted (el, binding) {
     target = document.querySelector(target)
   }
 
-  console.log('here')
-
   target.addEventListener('scroll', () => {
     callback()
   }, options)
