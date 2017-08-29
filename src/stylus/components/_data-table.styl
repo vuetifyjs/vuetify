@@ -103,7 +103,12 @@ theme(datatable, "datatable")
     border: none !important
 
   &-col
+    padding: 0 !important
     height: 0px !important
 
   &-content
     transition: height $primary-transition
+
+    > .card
+      border-radius: 0
+      box-shadow: none
