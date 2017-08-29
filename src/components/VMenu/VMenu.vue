@@ -67,6 +67,7 @@
     },
 
     props: {
+      allowOverflow: Boolean,
       top: Boolean,
       left: Boolean,
       bottom: Boolean,

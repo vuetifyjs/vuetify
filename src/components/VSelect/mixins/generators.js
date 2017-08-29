@@ -8,6 +8,7 @@ export default {
         ref: 'menu',
         props: {
           activator: this.$refs.activator,
+          allowOverflow: this.isAutocomplete,
           openOnClick: false,
           auto: this.auto,
           closeOnClick: false,

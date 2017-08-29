@@ -117,9 +117,9 @@ export default {
       const totalHeight = top + contentHeight
 
       // If overflowing bottom
-      if (toTop < totalHeight) top = toTop - contentHeight - 12
+      if (toTop < totalHeight && !this.allowOverflow) top = toTop - contentHeight - 12
       // If overflowing top
-      else if (top < this.pageYOffset) top = this.pageYOffset + 12
+      else if (top < this.pageYOffset && !this.allowOverflow) top = this.pageYOffset + 12
 
       return top < 12 ? 12 : top
     },
