@@ -85,10 +85,7 @@ export default {
       if (this.nudgeTop) top -= this.nudgeTop
       if (this.nudgeBottom) top += this.nudgeBottom
 
-      const defined = typeof window !== 'undefined'
-      const pageYOffset = defined ? window.pageYOffset : 0
-
-      return top + pageYOffset
+      return top + this.pageYOffset
     },
     calcXOverflow (left) {
       const hasWindow = typeof window !== 'undefined'
@@ -112,7 +109,17 @@ export default {
       return left
     },
     calcYOverflow (top) {
-      if (this.top && top < 0) top = 12
+      const documentHeight = typeof window !== 'undefined'
+        ? window.innerHeight || document.documentElement.clientHeight
+        : 0
+      const toTop = this.pageYOffset + documentHeight
+      const contentHeight = this.dimensions.content.height
+      const totalHeight = top + contentHeight
+
+      // If overflowing bottom
+      if (toTop < totalHeight) top = toTop - contentHeight - 12
+      // If overflowing top
+      else if (top < this.pageYOffset) top = this.pageYOffset + 12
 
       return top < 12 ? 12 : top
     },
