@@ -10,7 +10,11 @@ function inserted (el, binding) {
     target = document.querySelector(target)
   }
 
-  target.addEventListener('scroll', callback, options)
+  console.log('here')
+
+  target.addEventListener('scroll', () => {
+    callback()
+  }, options)
 
   el._onScroll = {
     target,
