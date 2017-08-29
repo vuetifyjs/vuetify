@@ -21,7 +21,8 @@ date-picker($material)
         color: $material.text.primary
 
       .btn
-        color: $material.text.primary
+        &:not(.btn--disabled)
+          color: $material.text.primary
 
         &--current
           color: $theme.accent
