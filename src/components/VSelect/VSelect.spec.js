@@ -231,4 +231,35 @@ test('VSelect.js', ({ mount, shallow }) => {
     expect(wrapper.vm.searchValue).toBe('foo')
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
+
+  it('should render a disabled input with placeholder', () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        placeholder: 'Placeholder'
+      }
+    })
+
+    const input = wrapper.find('input')[0]
+
+    expect(input.hasAttribute('disabled', 'disabled')).toBe(true)
+    expect(input.hasAttribute('placeholder', 'Placeholder')).toBe(true)
+    expect(input.html()).toMatchSnapshot()
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should not display when not autocomplete with placeholder and dirty', () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        placeholder: 'Placeholder',
+        items: ['foo'],
+        value: 'foo'
+      }
+    })
+
+    const input = wrapper.find('input')[0]
+
+    expect(input.hasAttribute('style', 'display: none;')).toBe(true)
+    expect(input.html()).toMatchSnapshot()
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 })

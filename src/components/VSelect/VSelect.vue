@@ -146,7 +146,8 @@
         return this.autocomplete || this.editable
       },
       isDirty () {
-        return this.selectedItems.length
+        return this.selectedItems.length ||
+          this.placeholder
       },
       isDropdown () {
         return this.segmented || this.overflow || this.editable || this.solo
