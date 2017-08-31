@@ -75,11 +75,7 @@ for size, width in $grid-breakpoints
         margin-left: (n / $grid-columns * 100)%
 
 .flex
-  display: flex
   flex: 1 1 auto
-  
-  > *
-    flex: 1 1 auto
 
 .align
   &-start
@@ -145,3 +141,21 @@ for size, width in $grid-breakpoints
   white-space: nowrap
   overflow: hidden
   text-overflow: ellipsis
+  
+// Display helpers
+.d-flex
+  display: flex
+    
+.d-inline-flex
+  display: inline-flex
+  
+.d-flex,
+.d-inline-flex
+  > *
+    flex: 1 1 auto
+    
+.d-block
+  display: block
+  
+.d-inline-block
+  display: inline-block
