@@ -7,6 +7,7 @@ export default {
         : this.$refs.activator
     },
     activatorClickHandler (e) {
+      e.stopPropagation()
       if (this.disabled) return
       else if (this.openOnClick && !this.isActive) {
         this.isActive = true
