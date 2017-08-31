@@ -3220,7 +3220,7 @@ process.umask = function() { return 0; };
 /* 34 */
 /***/ (function(module, exports) {
 
-module.exports = {"name":"vuetify","version":"0.15.0-beta.3","author":{"name":"John Leider","email":"john.j.leider@gmail.com"},"license":"MIT","homepage":"http://vuetifyjs.com","main":"dist/vuetify.js","unpkg":"dist/vuetify.js","types":"index.d.ts","scripts":{"watch":"cross-env TARGET=development webpack --config build/config.js --progress --hide-modules --watch","dev":"cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.config.js --open --hot","build:dev":"cross-env NODE_ENV=production node build/webpack.dev.config.js","build":"rimraf dist && cross-env NODE_ENV=production webpack --config build/config.js --progress --hide-modules","debug-build":"node --inspect --debug-brk build/config.js","test":"cross-env NODE_ENV=test jest --no-cache --verbose","test-coverage":"cross-env NODE_ENV=test jest --no-cache --coverage --verbose","lint":"eslint --ext .js,.vue src","precommit":"yarn run lint && yarn test","prepush":"yarn run lint && yarn test"},"description":"Vue.js 2 Semantic Component Framework","devDependencies":{"autoprefixer":"^6.6.0","avoriaz":"^3.2.0","babel-cli":"^6.24.1","babel-core":"^6.24.1","babel-eslint":"^7.1.1","babel-jest":"^20.0.3","babel-loader":"^7.1.1","babel-plugin-add-filehash":"^6.9.4","babel-plugin-module-resolver":"^2.7.1","babel-plugin-transform-async-to-generator":"^6.24.1","babel-plugin-transform-runtime":"^6.23.0","babel-polyfill":"^6.26.0","babel-preset-env":"^1.5.1","babel-preset-es2015":"^6.24.1","babel-preset-stage-2":"^6.24.1","chalk":"^1.1.3","chromedriver":"^2.21.2","cross-env":"^3.1.3","cross-spawn":"^4.0.2","css-loader":"^0.23.1","css-mqpacker":"^6.0.1","cssnano":"^3.10.0","eslint":"^3.7.1","eslint-config-standard":"^6.1.0","eslint-config-vue":"^2.0.2","eslint-friendly-formatter":"^2.0.5","eslint-loader":"^1.6.1","eslint-plugin-html":"^1.3.0","eslint-plugin-promise":"^3.4.0","eslint-plugin-pug":"^1.0.0","eslint-plugin-standard":"^3.0.1","eslint-plugin-vue":"^2.1.0","eventsource-polyfill":"^0.9.6","extract-text-webpack-plugin":"^3.0.0","friendly-errors-webpack-plugin":"^1.6.1","function-bind":"^1.0.2","husky":"^0.14.3","jest":"^20.0.4","jest-cli":"^20.0.4","jest-css-modules":"^1.1.0","jest-serializer-html":"^4.0.0","jest-vue-preprocessor":"^0.2.0","lolex":"^1.4.0","nightwatch":"^0.9.8","opn":"^4.0.2","optimize-css-assets-webpack-plugin":"^2.0.0","optimize-js-plugin":"^0.0.4","ora":"^0.3.0","phantomjs-prebuilt":"^2.1.3","postcss-loader":"^1.2.1","precss":"^1.4.0","progress-bar-webpack-plugin":"^1.10.0","pug":"^2.0.0-beta3","pug-loader":"^2.3.0","ress":"^1.1.1","rimraf":"^2.5.4","selenium-server":"2.53.1","semver":"^5.3.0","serialize-javascript":"^1.3.0","shelljs":"^0.7.4","style-loader":"^0.13.1","stylus":"^0.54.5","stylus-loader":"^2.1.1","uglifyjs-webpack-plugin":"^0.4.6","vue":"^2.4.1","vue-loader":"^10.1.0","vue-router":"^2.7.0","vue-server-renderer":"^2.4.1","vue-template-compiler":"^2.4.1","webpack":"^3.2.0","webpack-bundle-analyzer":"^2.9.0","webpack-bundle-size-analyzer":"^2.7.0","webpack-dev-server":"^2.7.1","webpack-merge":"^4.1.0","write-file-webpack-plugin":"^4.1.0"},"dependencies":{},"engines":{"node":">= 4.0.0","npm":">= 3.0.0"},"jest":{"verbose":false,"roots":["<rootDir>/src"],"moduleFileExtensions":["js","vue"],"moduleDirectories":["node_modules"],"moduleNameMapper":{"src/(.*)":"<rootDir>/src/$1"},"transform":{".*\\.(vue)$":"<rootDir>/node_modules/jest-vue-preprocessor","\\.(styl)$":"<rootDir>/node_modules/jest-css-modules",".*\\.(vue|js)$":"<rootDir>/node_modules/babel-jest"},"transformIgnorePatterns":["node_modules/(?!vue-router)"],"snapshotSerializers":["jest-serializer-html"]}}
+module.exports = {"name":"vuetify","version":"0.15.0-beta.4","author":{"name":"John Leider","email":"john.j.leider@gmail.com"},"license":"MIT","homepage":"http://vuetifyjs.com","main":"dist/vuetify.js","unpkg":"dist/vuetify.js","types":"index.d.ts","scripts":{"watch":"cross-env TARGET=development webpack --config build/config.js --progress --hide-modules --watch","dev":"cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.config.js --open --hot","build:dev":"cross-env NODE_ENV=production node build/webpack.dev.config.js","build":"rimraf dist && cross-env NODE_ENV=production webpack --config build/config.js --progress --hide-modules","debug-build":"node --inspect --debug-brk build/config.js","test":"cross-env NODE_ENV=test jest --no-cache --verbose","test-coverage":"cross-env NODE_ENV=test jest --no-cache --coverage --verbose","lint":"eslint --ext .js,.vue src","precommit":"yarn run lint && yarn test","prepush":"yarn run lint && yarn test"},"description":"Vue.js 2 Semantic Component Framework","devDependencies":{"autoprefixer":"^6.6.0","avoriaz":"^3.2.0","babel-cli":"^6.24.1","babel-core":"^6.24.1","babel-eslint":"^7.1.1","babel-jest":"^20.0.3","babel-loader":"^7.1.1","babel-plugin-add-filehash":"^6.9.4","babel-plugin-module-resolver":"^2.7.1","babel-plugin-transform-async-to-generator":"^6.24.1","babel-plugin-transform-runtime":"^6.23.0","babel-polyfill":"^6.26.0","babel-preset-env":"^1.5.1","babel-preset-es2015":"^6.24.1","babel-preset-stage-2":"^6.24.1","chalk":"^1.1.3","chromedriver":"^2.21.2","cross-env":"^3.1.3","cross-spawn":"^4.0.2","css-loader":"^0.23.1","css-mqpacker":"^6.0.1","cssnano":"^3.10.0","eslint":"^3.7.1","eslint-config-standard":"^6.1.0","eslint-config-vue":"^2.0.2","eslint-friendly-formatter":"^2.0.5","eslint-loader":"^1.6.1","eslint-plugin-html":"^1.3.0","eslint-plugin-promise":"^3.4.0","eslint-plugin-pug":"^1.0.0","eslint-plugin-standard":"^3.0.1","eslint-plugin-vue":"^2.1.0","eventsource-polyfill":"^0.9.6","extract-text-webpack-plugin":"^3.0.0","friendly-errors-webpack-plugin":"^1.6.1","function-bind":"^1.0.2","husky":"^0.14.3","jest":"^20.0.4","jest-cli":"^20.0.4","jest-css-modules":"^1.1.0","jest-serializer-html":"^4.0.0","jest-vue-preprocessor":"^0.2.0","lolex":"^1.4.0","nightwatch":"^0.9.8","opn":"^4.0.2","optimize-css-assets-webpack-plugin":"^2.0.0","optimize-js-plugin":"^0.0.4","ora":"^0.3.0","phantomjs-prebuilt":"^2.1.3","postcss-loader":"^1.2.1","precss":"^1.4.0","progress-bar-webpack-plugin":"^1.10.0","pug":"^2.0.0-beta3","pug-loader":"^2.3.0","ress":"^1.1.1","rimraf":"^2.5.4","selenium-server":"2.53.1","semver":"^5.3.0","serialize-javascript":"^1.3.0","shelljs":"^0.7.4","style-loader":"^0.13.1","stylus":"^0.54.5","stylus-loader":"^2.1.1","uglifyjs-webpack-plugin":"^0.4.6","vue":"^2.4.1","vue-loader":"^10.1.0","vue-router":"^2.7.0","vue-server-renderer":"^2.4.1","vue-template-compiler":"^2.4.1","webpack":"^3.2.0","webpack-bundle-analyzer":"^2.9.0","webpack-bundle-size-analyzer":"^2.7.0","webpack-dev-server":"^2.7.1","webpack-merge":"^4.1.0","write-file-webpack-plugin":"^4.1.0"},"dependencies":{},"engines":{"node":">= 4.0.0","npm":">= 3.0.0"},"jest":{"verbose":false,"roots":["<rootDir>/src"],"moduleFileExtensions":["js","vue"],"moduleDirectories":["node_modules"],"moduleNameMapper":{"src/(.*)":"<rootDir>/src/$1"},"transform":{".*\\.(vue)$":"<rootDir>/node_modules/jest-vue-preprocessor","\\.(styl)$":"<rootDir>/node_modules/jest-css-modules",".*\\.(vue|js)$":"<rootDir>/node_modules/babel-jest"},"transformIgnorePatterns":["node_modules/(?!vue-router)"],"snapshotSerializers":["jest-serializer-html"]}}
 
 /***/ }),
 /* 35 */
@@ -4642,12 +4642,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         'info': this.info && !this.outline && !this.flat,
         'warning': this.warning && !this.outline && !this.flat,
         'error': this.error && !this.outline && !this.flat,
-        'primary--text': this.primary && (this.outline || this.flat),
-        'secondary--text': this.secondary && (this.outline || this.flat),
-        'success--text': this.success && (this.outline || this.flat),
-        'info--text': this.info && (this.outline || this.flat),
-        'warning--text': this.warning && (this.outline || this.flat),
-        'error--text': this.error && (this.outline || this.flat)
+        'primary--text': !this.disabled && this.primary && (this.outline || this.flat),
+        'secondary--text': !this.disabled && this.secondary && (this.outline || this.flat),
+        'success--text': !this.disabled && this.success && (this.outline || this.flat),
+        'info--text': !this.disabled && this.info && (this.outline || this.flat),
+        'warning--text': !this.disabled && this.warning && (this.outline || this.flat),
+        'error--text': !this.disabled && this.error && (this.outline || this.flat)
       }, this.themeClasses);
     }
   },
@@ -6491,7 +6491,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       return this.autocomplete || this.editable;
     },
     isDirty: function isDirty() {
-      return this.selectedItems.length;
+      return this.selectedItems.length || this.placeholder;
     },
     isDropdown: function isDropdown() {
       return this.segmented || this.overflow || this.editable || this.solo;
@@ -7813,43 +7813,44 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     genSelectionsAndSearch: function genSelectionsAndSearch() {
       var _this2 = this;
 
-      var input = void 0;
+      var data = {
+        'class': 'input-group--select__autocomplete',
+        style: {
+          flex: this.shouldBreak ? '1 0 100%' : null
+        },
+        attrs: _extends({}, this.$attrs, {
+          disabled: !this.isAutocomplete,
+          tabindex: this.disabled ? -1 : 0
+        }),
+        domProps: {
+          value: this.lazySearch
+        },
+        on: {
+          focus: this.focus,
+          blur: function blur() {
+            if (_this2.isActive) return;
 
-      if (this.isAutocomplete) {
-        input = this.$createElement('input', {
-          'class': 'input-group--select__autocomplete',
-          style: {
-            flex: this.shouldBreak ? '1 0 100%' : null
+            _this2.blur();
           },
-          attrs: _extends({}, this.$attrs, {
-            tabindex: this.disabled ? -1 : 0
-          }),
-          domProps: { value: this.lazySearch },
-          on: {
-            focus: this.focus,
-            blur: function blur() {
-              if (_this2.isActive) return;
+          input: function input(e) {
+            return _this2.searchValue = e.target.value;
+          }
+        },
+        directives: [{
+          name: 'show',
+          value: this.isAutocomplete || this.placeholder && !this.selectedItems.length
+        }],
+        ref: 'input',
+        key: 'input'
+      };
 
-              _this2.blur();
-            },
-            input: function input(e) {
-              return _this2.searchValue = e.target.value;
-            }
-          },
-          ref: 'input',
-          key: 'input'
-        });
-      }
-
-      var selections = this.genSelections();
-
-      input && selections.push(input);
+      if (this.placeholder) data.domProps.placeholder = this.placeholder;
 
       return this.$createElement('div', {
         'class': 'input-group__selections',
         style: { 'overflow': 'hidden' },
         ref: 'activator'
-      }, [selections]);
+      }, [this.genSelections(), this.$createElement('input', data)]);
     },
     genSelections: function genSelections() {
       var _this3 = this;
@@ -13817,7 +13818,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   data: function data() {
     return {
-      isExtended: false
+      isExtended: false,
+      isScrolling: false,
+      marginTop: 0,
+      previousScroll: null,
+      target: null
     };
   },
 
@@ -13829,7 +13834,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     fixed: Boolean,
     flat: Boolean,
     floating: Boolean,
-    prominent: Boolean
+    prominent: Boolean,
+    scrollOffScreen: Boolean,
+    scrollTarget: String,
+    scrollThreshHold: {
+      type: Number,
+      default: 100
+    }
   },
 
   computed: {
@@ -13847,6 +13858,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         'theme--dark': this.dark,
         'theme--light': this.light
       };
+    },
+    styles: function styles() {
+      return {
+        marginTop: this.marginTop
+      };
+    }
+  },
+
+  watch: {
+    isScrolling: function isScrolling(val) {
+      if (!val) this.marginTop = 0;else this.marginTop = -this.$refs.content.clientHeight - 6 + 'px';
+    }
+  },
+
+  methods: {
+    onScroll: function onScroll() {
+      if (typeof window === 'undefined') return;
+
+      if (!this.target) {
+        this.target = this.scrollTarget ? document.querySelector(this.scrollTarget) : window;
+      }
+
+      var currentScroll = this.scrollTarget ? this.target.scrollTop : this.target.pageYOffset || document.documentElement.scrollTop;
+
+      if (currentScroll < this.scrollThreshHold) return;
+
+      if (this.previousScroll === null) {
+        this.previousScroll = currentScroll;
+      }
+
+      this.isScrolling = this.previousScroll < currentScroll;
+
+      this.previousScroll = currentScroll;
     }
   },
 
@@ -13855,11 +13899,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     var children = [];
     var data = {
       'class': this.classes,
+      style: this.styles,
       on: this.$listeners
     };
 
+    if (this.scrollOffScreen) {
+      data.directives = [{
+        name: 'scroll',
+        value: {
+          callback: this.onScroll,
+          target: this.scrollTarget
+        }
+      }];
+    }
+
     children.push(h('div', {
-      'class': 'toolbar__content'
+      'class': 'toolbar__content',
+      ref: 'content'
     }, this.$slots.default));
 
     if (this.isExtended) {
@@ -14016,7 +14072,9 @@ function inserted(el, binding) {
     target = document.querySelector(target);
   }
 
-  target.addEventListener('scroll', callback, options);
+  target.addEventListener('scroll', function () {
+    callback();
+  }, options);
 
   el._onScroll = {
     target: target,
