@@ -16,7 +16,6 @@
       return {
         app: {},
         isActive: false,
-        inputWidth: 0,
         keyPressed: 0
       }
     },
@@ -57,10 +56,12 @@
         },
         set (val) {
           const { min, max, step, snap } = this
-          val = val < min ? min : val > max ? max : val
+          val = val < min && min || val > max && max || val
+          /*
           if (Math.ceil(val) % Math.ceil(this.lazyValue) < 2) {
             this.inputWidth = this.calculateWidth(val)
           }
+          */
 
           const value = snap ? Math.round(val / step) * step : parseInt(val)
           this.lazyValue = value
@@ -110,28 +111,9 @@
       },
       numTicks () {
         return parseInt((this.max - this.min) / this.step)
-      }
-    },
-
-    watch: {
-      value () {
-        this.inputValue = this.value
-      }
-    },
-
-    mounted () {
-      this.inputValue = this.value
-      this.$nextTick(() => {
-        this.inputWidth = this.calculateWidth(this.inputValue)
-      })
-
-      // Without a v-app, iOS does not work with body selectors
-      this.app = document.querySelector('[data-app]') ||
-        console.warn('The v-slider component requires the present of v-app or a non-body wrapping element with the [data-app] attribute.')
-    },
-
-    methods: {
-      calculateWidth (val) {
+      },
+      inputWidth () {
+        let val = this.inputValue
         if (this.snap) {
           val = Math.round(val / this.step) * this.step
         }
@@ -139,7 +121,30 @@
         val = (val - this.min) / (this.max - this.min) * 100
 
         return val < 0.15 ? 0 : val
+      }
+    },
+
+    watch: {
+      value (val) {
+        this.inputValue = val
       },
+      min (val) {
+        val > this.inputValue && this.$emit('input', val)
+      },
+      max (val) {
+        val < this.inputValue && this.$emit('input', val)
+      }
+    },
+
+    mounted () {
+      this.inputValue = this.value
+
+      // Without a v-app, iOS does not work with body selectors
+      this.app = document.querySelector('[data-app]') ||
+        console.warn('The v-slider component requires the present of v-app or a non-body wrapping element with the [data-app] attribute.')
+    },
+
+    methods: {
       calculateScale (scale) {
         return this.disabled ? scale - 0.015 : scale
       },
