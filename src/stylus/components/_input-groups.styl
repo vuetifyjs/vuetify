@@ -14,7 +14,7 @@ input-group($material)
     color: $material.text.secondary
 
   &.input-group--textarea:not(.input-group--full-width)
-    textarea
+    .input-group__input
       border: 2px solid $material.text.secondary
 
   // This is specific for selects
@@ -44,7 +44,7 @@ input-group($material)
           background-color: $material.text.primary
 
         &.input-group--textarea:not(.input-group--full-width)
-          textarea
+          .input-group__input
             border-color: $material.text.primary
 
   .input-group__counter
@@ -166,11 +166,11 @@ theme(input-group, "input-group")
 
     &:hover
       elevation(4)
-      
+
     .input-group__input
       align-items: center
       padding: 8px 16px
-    
+
     .input-group__details
       display: none
 
@@ -189,7 +189,7 @@ theme(input-group, "input-group")
         label
           color: $theme.primary
 
-        textarea
+        .input-group__input
           border-color: $theme.primary
 
     &.input-group--focused,
@@ -214,8 +214,8 @@ theme(input-group, "input-group")
     textarea
       caret-color: $theme.error
 
-    textarea
-      border-color: $theme.error
+    .input-group__input
+      border-color: $theme.error !important
 
     label
       animation: shake .6s $transition.swing
