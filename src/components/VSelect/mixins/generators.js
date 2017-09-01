@@ -7,9 +7,9 @@ export default {
       const data = {
         ref: 'menu',
         props: {
+          // Never disable openOnClick
           activator: this.$refs.activator,
           allowOverflow: this.isAutocomplete,
-          openOnClick: false,
           auto: this.auto,
           closeOnClick: false,
           closeOnContentClick: !this.multiple,
@@ -38,8 +38,7 @@ export default {
         },
         attrs: {
           ...this.$attrs,
-          disabled: !this.isAutocomplete,
-          tabindex: this.disabled ? -1 : 0
+          disabled: this.disabled || !this.isAutocomplete
         },
         domProps: {
           value: this.lazySearch

@@ -196,7 +196,7 @@
         if (!this.multiple &&
           this.isAutocomplete &&
           this.selectedItems.length
-        ) this.searchValue = this.getText(this.selectedItems[0])
+        ) this.searchValue = this.getText(this.selectedItem)
 
         this.$emit('input', val)
       },
@@ -267,6 +267,7 @@
         if (this._isDestroyed) return
 
         this.content = this.$refs.menu.$refs.content
+        this.searchValue = this.getText(this.selectedItem)
       })
     },
 
