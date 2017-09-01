@@ -289,12 +289,11 @@
       focus (e) {
         this.focused = true
         if (this.$refs.input && this.isAutocomplete) {
-          this.multiple &&
-            this.$refs.input.focus() ||
-            this.$refs.input.setSelectionRange(
-              0,
-              (this.searchValue || '').toString().length
-            )
+          this.$refs.input.focus() ||
+          this.$refs.input.setSelectionRange(
+            0,
+            (this.searchValue || '').toString().length
+          )
         }
 
         this.$emit('focus', e)
