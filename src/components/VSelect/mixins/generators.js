@@ -9,7 +9,6 @@ export default {
         props: {
           activator: this.$refs.activator,
           allowOverflow: this.isAutocomplete,
-          openOnClick: false,
           auto: this.auto,
           closeOnClick: false,
           closeOnContentClick: !this.multiple,
@@ -20,6 +19,7 @@ export default {
           nudgeRight: this.isDropdown ? 16 : 0,
           nudgeWidth: this.isDropdown ? 56 : 24,
           offsetY,
+          openOnClick: false,
           value: this.isActive && this.computedItems.length,
           zIndex: this.menuZIndex
         },
@@ -38,8 +38,7 @@ export default {
         },
         attrs: {
           ...this.$attrs,
-          disabled: !this.isAutocomplete,
-          tabindex: this.disabled ? -1 : 0
+          disabled: this.disabled || !this.isAutocomplete
         },
         domProps: {
           value: this.lazySearch
