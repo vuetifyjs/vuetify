@@ -33,7 +33,7 @@ date-picker($material)
         &--active
           color: $material.bg-color !important
 
-        &--floating
+        &--date-picker
           &:after
             background: $material.picker.background !important
 
@@ -176,7 +176,7 @@ theme(date-picker, "picker--date")
     .btn.btn--current:not(.btn--active)
       color: $theme.primary
 
-    .btn.btn--floating
+    .btn.btn--date-picker
       height: 32px
       width: 32px
 
@@ -192,7 +192,7 @@ theme(date-picker, "picker--date")
           opacity: .6
           transform: scale(1)
 
-    .btn.btn--floating.btn--active
+    .btn.btn--date-picker.btn--active
       color: #fff
 
       &:after

@@ -67,7 +67,7 @@ export default {
         rows.push(this.$createElement('td', [
           this.$createElement('button', {
             'class': {
-              'btn btn--floating btn--small btn--flat': true,
+              'btn btn--date-picker btn--floating btn--small btn--flat': true,
               'btn--active': this.isActive(i),
               'btn--current': this.isCurrent(i),
               'btn--light': this.dark,

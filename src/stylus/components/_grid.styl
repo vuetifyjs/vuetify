@@ -62,15 +62,15 @@ for size, width in $grid-breakpoints
   @media all and (min-width: width)
     for n in (1..$grid-columns)
       .flex.{size}{n}
-        flex-basis: (floor(n / $grid-columns * 100, 2))%
-        max-width: (floor(n / $grid-columns * 100, 2))%
+        flex-basis: (n / $grid-columns * 100)%
+        max-width: (n / $grid-columns * 100)%
 
       .flex.order-{size}{n}
         order: n
 
     for n in (0..$grid-columns)
       .flex.offset-{size}{n}
-        margin-left: (floor(n / $grid-columns * 100, 2))%
+        margin-left: (n / $grid-columns * 100)%
 
 .flex
   flex: 1 1 auto
