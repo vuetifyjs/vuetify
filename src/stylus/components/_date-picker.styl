@@ -21,18 +21,21 @@ date-picker($material)
         color: $material.text.primary
 
       .btn
-        &:not(.btn--disabled)
+        &:not(.btn--disabled)\
+        :not(.btn--active)\
+        :not(.btn--current)\
+        :not(:hover)
           color: $material.text.primary
 
         &--current
-          color: $theme.accent
+          color: $material.picker.background
 
         &--active
-          color: $material.bg-color
+          color: $material.bg-color !important
 
         &--floating
           &:after
-            background: $theme.accent !important
+            background: $material.picker.background !important
 
 theme(date-picker, "picker--date")
 
@@ -152,6 +155,7 @@ theme(date-picker, "picker--date")
 
     .btn
       margin: 0
+      transition: none
 
       &:hover, .btn__content:before
         background-color: transparent !important
@@ -181,7 +185,7 @@ theme(date-picker, "picker--date")
         opacity: 0
         transform: scale(0)
 
-      &:not(.btn--active):hover
+      &:not(.btn--active):not(.btn--current):not(.btn--disabled):hover
         color: #fff
 
         &:after
