@@ -7,7 +7,6 @@ export default {
       const data = {
         ref: 'menu',
         props: {
-          // Never disable openOnClick
           activator: this.$refs.activator,
           allowOverflow: this.isAutocomplete,
           auto: this.auto,
@@ -20,6 +19,7 @@ export default {
           nudgeRight: this.isDropdown ? 16 : 0,
           nudgeWidth: this.isDropdown ? 56 : 24,
           offsetY,
+          openOnClick: false,
           value: this.isActive && this.computedItems.length,
           zIndex: this.menuZIndex
         },
