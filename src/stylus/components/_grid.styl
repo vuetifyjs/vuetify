@@ -31,14 +31,12 @@
         padding: $gutter
 
         .layout
-          margin: -($gutter / 2)
-
           .flex
             padding: ($gutter / 2)
-  
-  > .layout
-    margin-right: -($grid-gutters.md)
-    margin-left: -($grid-gutters.md)
+            
+        > .layout,
+        .flex > .layout
+          margin: -($gutter / 2)
 
 .layout
   display: flex
@@ -130,6 +128,9 @@ for size, width in $grid-breakpoints
 
 .fill-height
   height: 100%
+
+.hide-overflow
+  overflow: hidden !important
 
 .show-overflow
   overflow: visible !important
