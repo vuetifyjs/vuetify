@@ -1,6 +1,7 @@
 import {
   createSimpleFunctional
 } from '../../util/helpers'
+import VGrid from './VGrid'
 
 const Grid = (name) => ({
   name: `v-${name}`,
@@ -28,15 +29,10 @@ const Grid = (name) => ({
   }
 })
 
-// TODO: Do this another way?
-import styles from '../../stylus/components/_grid.styl' // eslint-disable-line no-unused-vars
-
 export const VContainer = Grid('container')
 export const VFlex = Grid('flex')
 export const VLayout = Grid('layout')
 export const VSpacer = createSimpleFunctional('spacer')
-
-const VGrid = {}
 
 VGrid.install = function install (Vue) {
   Vue.component(VContainer.name, VContainer)
