@@ -194,8 +194,7 @@
       inputValue (val) {
         // Async calls may not have data ready at boot
         if (!this.multiple &&
-          this.isAutocomplete &&
-          this.selectedItems.length
+          this.isAutocomplete
         ) this.searchValue = this.getText(this.selectedItem)
 
         this.$emit('input', val)
@@ -205,7 +204,7 @@
         this.validate()
 
         if (this.isAutocomplete) {
-          this.$nextTick(this.$refs.menu.updateDimensions)
+          this.$nextTick(() => this.$refs.menu.updateDimensions)
         }
       },
       multiple (val) {

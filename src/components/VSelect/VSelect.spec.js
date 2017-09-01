@@ -262,4 +262,26 @@ test('VSelect.js', ({ mount, shallow }) => {
     expect(input.html()).toMatchSnapshot()
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
+
+  it('should change search input text when value changes', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        autocomplete: true,
+        placeholder: 'Placeholder',
+        items: ['foo', 'bar'],
+        value: 'foo'
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.searchValue).toBe('foo')
+    wrapper.setProps({ value: null })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.searchValue).toBe(undefined)
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 })
