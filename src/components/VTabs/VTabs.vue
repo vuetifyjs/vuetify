@@ -76,7 +76,6 @@
       },
       activeIndex () {
         this.updateTabs()
-        this.$emit('input', this.target)
         this.isBooted = true
       },
       tabItems (newItems, oldItems) {
@@ -171,6 +170,8 @@
           const nextIndex = this.content.findIndex(o => o.id === target)
           this.reverse = nextIndex < this.activeIndex
           setActiveIndex(nextIndex)
+
+          this.$emit('input', this.target)
         })
       },
       updateTabs () {
