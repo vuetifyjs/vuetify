@@ -96,7 +96,7 @@ export default {
     },
     genSegmentedBtn (item) {
       if (!item.text || !item.callback) {
-        console.warn('[Vuetify] Warn: When using the v-select component with \'dropdown\' prop without a selection slot, items must contain both a text and callback property')
+        console.warn('[Vuetify] Warn: When using the v-select component with \'segmented\' prop without a selection slot, items must contain both a text and callback property')
         return null
       }
 
