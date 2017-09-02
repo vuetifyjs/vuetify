@@ -8,11 +8,7 @@ btn-toggle($material)
 
   .btn
     .btn__content:before
-      background-color: $focused-alt
-
-    &[data-selected]
-      // opacity: 1
-      // background-color: $focused-alt !important
+      background-color: $material.buttons.focused-alt
 
       &:not(:last-child):not([data-only-child])
         border-right-color: $material.buttons.disabled
