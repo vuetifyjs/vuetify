@@ -239,7 +239,7 @@
         if (!val) this.all = false
       },
       search () {
-        this.updatePagination({ page: 1 })
+        this.updatePagination({ page: 1, totalItems: this.itemsLength })
       },
       everyItem (val) {
         if (val) this.all = true
@@ -304,6 +304,8 @@
       } else {
         this.defaultPagination.rowsPerPage = this.rowsPerPageItems[0]
       }
+
+      this.defaultPagination.totalItems = this.itemsLength
 
       this.updatePagination(
         Object.assign({}, this.defaultPagination, this.pagination)

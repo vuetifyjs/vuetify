@@ -22,7 +22,8 @@ button($material)
   &:not(.btn--icon):not(.btn--flat)
     background-color: $material.app-bar
 
-  &:not(.btn--disabled)
+  // Specific styles for styling on date-picker
+  &:not(.btn--disabled):not(.btn--date-picker)
     &.btn--icon,
     &.btn--floating
       color: $material.icons.active
@@ -85,6 +86,9 @@ theme(button, "btn")
     transition: $primary-transition
     white-space: nowrap
 
+/** Icons */
+.btn .btn__content .icon
+  color: inherit
 
 /** Types */
 .btn
@@ -98,11 +102,6 @@ theme(button, "btn")
 
     &:active
       elevation(8)
-
-  &.btn--icon
-    .btn__content
-      .icon
-        color: inherit
 
   &--icon
     background: transparent
@@ -146,9 +145,6 @@ theme(button, "btn")
       flex: 1 1 auto
       margin: 0
       padding: 0
-
-      .icon
-        color: inherit
 
     &:after
       border-radius: 50%

@@ -8,7 +8,7 @@ $line-height-root := 1.5
 
 $theme := {
   primary: $blue.darken-2
-  accent: $blue.accent-2
+  accent: $blue.accent-1
   secondary: $grey.darken-3
   info: $blue.base
   warning: $amber.base
@@ -76,6 +76,9 @@ $material-light := {
   table: {
     active: $grey.lighten-4
     hover: $grey.lighten-3
+  },
+  picker: {
+    background: $theme.primary
   },
 
 
@@ -149,6 +152,9 @@ $material-dark := {
   table: {
     active: #505050
     hover: $grey.darken-2
+  },
+  picker: {
+    background: $theme.accent
   },
 
   bg-color: #303030

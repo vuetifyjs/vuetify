@@ -1,4 +1,3 @@
-
 <script>
   import VBtn from '../VBtn'
   import VIcon from '../VIcon'

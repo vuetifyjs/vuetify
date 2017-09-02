@@ -24,6 +24,10 @@ export default {
       )
     },
     onKeyDown (e) {
+      if (!this.isActive &&
+        [38, 40].includes(e.keyCode)
+      ) return this.isActive = true
+
       this.$refs.menu.changeListIndex(e)
     }
   }

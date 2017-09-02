@@ -80,7 +80,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--disabled"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--disabled"
               >
                 <span class="btn__content">
                   1
@@ -89,7 +89,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--disabled"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--disabled"
               >
                 <span class="btn__content">
                   2
@@ -98,7 +98,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   3
@@ -107,7 +107,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   4
@@ -118,7 +118,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
           <tr>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   5
@@ -127,7 +127,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   6
@@ -136,7 +136,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--active"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--active"
               >
                 <span class="btn__content">
                   7
@@ -145,7 +145,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   8
@@ -154,7 +154,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   9
@@ -163,7 +163,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   10
@@ -172,7 +172,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   11
@@ -183,7 +183,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
           <tr>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   12
@@ -192,7 +192,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   13
@@ -201,7 +201,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   14
@@ -210,7 +210,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   15
@@ -219,7 +219,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   16
@@ -228,7 +228,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   17
@@ -237,7 +237,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   18
@@ -248,7 +248,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
           <tr>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   19
@@ -257,7 +257,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--disabled"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--disabled"
               >
                 <span class="btn__content">
                   20
@@ -266,7 +266,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--disabled"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--disabled"
               >
                 <span class="btn__content">
                   21
@@ -275,7 +275,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--disabled"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--disabled"
               >
                 <span class="btn__content">
                   22
@@ -284,7 +284,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--disabled"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--disabled"
               >
                 <span class="btn__content">
                   23
@@ -293,7 +293,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--disabled"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--disabled"
               >
                 <span class="btn__content">
                   24
@@ -302,7 +302,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--disabled"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--disabled"
               >
                 <span class="btn__content">
                   25
@@ -313,7 +313,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
           <tr>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--disabled"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--disabled"
               >
                 <span class="btn__content">
                   26
@@ -322,7 +322,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--disabled"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--disabled"
               >
                 <span class="btn__content">
                   27
@@ -331,7 +331,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--disabled"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--disabled"
               >
                 <span class="btn__content">
                   28
@@ -340,7 +340,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--disabled"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--disabled"
               >
                 <span class="btn__content">
                   29
@@ -349,7 +349,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--disabled"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--disabled"
               >
                 <span class="btn__content">
                   30
@@ -358,7 +358,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--disabled"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--disabled"
               >
                 <span class="btn__content">
                   31
@@ -629,7 +629,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--light"
               >
                 <span class="btn__content">
                   1
@@ -638,7 +638,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--light"
               >
                 <span class="btn__content">
                   2
@@ -647,7 +647,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--light"
               >
                 <span class="btn__content">
                   3
@@ -656,7 +656,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--light"
               >
                 <span class="btn__content">
                   4
@@ -667,7 +667,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
           <tr>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--light"
               >
                 <span class="btn__content">
                   5
@@ -676,7 +676,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--light"
               >
                 <span class="btn__content">
                   6
@@ -685,7 +685,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--active btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--active btn--light"
               >
                 <span class="btn__content">
                   7
@@ -694,7 +694,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--light"
               >
                 <span class="btn__content">
                   8
@@ -703,7 +703,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--light"
               >
                 <span class="btn__content">
                   9
@@ -712,7 +712,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--light"
               >
                 <span class="btn__content">
                   10
@@ -721,7 +721,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--light"
               >
                 <span class="btn__content">
                   11
@@ -732,7 +732,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
           <tr>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--light"
               >
                 <span class="btn__content">
                   12
@@ -741,7 +741,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--light"
               >
                 <span class="btn__content">
                   13
@@ -750,7 +750,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--light"
               >
                 <span class="btn__content">
                   14
@@ -759,7 +759,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--light"
               >
                 <span class="btn__content">
                   15
@@ -768,7 +768,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--light"
               >
                 <span class="btn__content">
                   16
@@ -777,7 +777,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--light"
               >
                 <span class="btn__content">
                   17
@@ -786,7 +786,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--light"
               >
                 <span class="btn__content">
                   18
@@ -797,7 +797,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
           <tr>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--light"
               >
                 <span class="btn__content">
                   19
@@ -806,7 +806,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--light"
               >
                 <span class="btn__content">
                   20
@@ -815,7 +815,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--light"
               >
                 <span class="btn__content">
                   21
@@ -824,7 +824,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--light"
               >
                 <span class="btn__content">
                   22
@@ -833,7 +833,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--light"
               >
                 <span class="btn__content">
                   23
@@ -842,7 +842,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--light"
               >
                 <span class="btn__content">
                   24
@@ -851,7 +851,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--light"
               >
                 <span class="btn__content">
                   25
@@ -862,7 +862,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
           <tr>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--light"
               >
                 <span class="btn__content">
                   26
@@ -871,7 +871,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--light"
               >
                 <span class="btn__content">
                   27
@@ -880,7 +880,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--light"
               >
                 <span class="btn__content">
                   28
@@ -889,7 +889,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--light"
               >
                 <span class="btn__content">
                   29
@@ -898,7 +898,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--light"
               >
                 <span class="btn__content">
                   30
@@ -907,7 +907,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--light"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--light"
               >
                 <span class="btn__content">
                   31
@@ -1008,7 +1008,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   1
@@ -1017,7 +1017,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   2
@@ -1026,7 +1026,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   3
@@ -1035,7 +1035,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   4
@@ -1046,7 +1046,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
           <tr>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   5
@@ -1055,7 +1055,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   6
@@ -1064,7 +1064,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--active"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--active"
               >
                 <span class="btn__content">
                   7
@@ -1073,7 +1073,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   8
@@ -1082,7 +1082,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   9
@@ -1091,7 +1091,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   10
@@ -1100,7 +1100,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   11
@@ -1111,7 +1111,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
           <tr>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   12
@@ -1120,7 +1120,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   13
@@ -1129,7 +1129,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   14
@@ -1138,7 +1138,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   15
@@ -1147,7 +1147,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   16
@@ -1156,7 +1156,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   17
@@ -1165,7 +1165,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   18
@@ -1176,7 +1176,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
           <tr>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   19
@@ -1185,7 +1185,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   20
@@ -1194,7 +1194,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   21
@@ -1203,7 +1203,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   22
@@ -1212,7 +1212,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   23
@@ -1221,7 +1221,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   24
@@ -1230,7 +1230,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   25
@@ -1241,7 +1241,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
           <tr>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   26
@@ -1250,7 +1250,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   27
@@ -1259,7 +1259,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   28
@@ -1268,7 +1268,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   29
@@ -1277,7 +1277,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   30
@@ -1286,7 +1286,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   31
@@ -1383,7 +1383,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   1
@@ -1392,7 +1392,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   2
@@ -1401,7 +1401,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   3
@@ -1410,7 +1410,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   4
@@ -1419,7 +1419,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   5
@@ -1428,7 +1428,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   6
@@ -1439,7 +1439,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
           <tr>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--active"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--active"
               >
                 <span class="btn__content">
                   7
@@ -1448,7 +1448,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   8
@@ -1457,7 +1457,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   9
@@ -1466,7 +1466,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   10
@@ -1475,7 +1475,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   11
@@ -1484,7 +1484,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   12
@@ -1493,7 +1493,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   13
@@ -1504,7 +1504,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
           <tr>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   14
@@ -1513,7 +1513,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   15
@@ -1522,7 +1522,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   16
@@ -1531,7 +1531,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   17
@@ -1540,7 +1540,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   18
@@ -1549,7 +1549,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   19
@@ -1558,7 +1558,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   20
@@ -1569,7 +1569,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
           <tr>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   21
@@ -1578,7 +1578,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   22
@@ -1587,7 +1587,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   23
@@ -1596,7 +1596,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   24
@@ -1605,7 +1605,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   25
@@ -1614,7 +1614,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   26
@@ -1623,7 +1623,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   27
@@ -1634,7 +1634,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
           <tr>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   28
@@ -1643,7 +1643,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   29
@@ -1652,7 +1652,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   30
@@ -1661,7 +1661,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   31
@@ -1752,7 +1752,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   1
@@ -1761,7 +1761,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   2
@@ -1770,7 +1770,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   3
@@ -1779,7 +1779,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   4
@@ -1790,7 +1790,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
           <tr>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   5
@@ -1799,7 +1799,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   6
@@ -1808,7 +1808,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat btn--active"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--active"
               >
                 <span class="btn__content">
                   7
@@ -1817,7 +1817,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   8
@@ -1826,7 +1826,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   9
@@ -1835,7 +1835,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   10
@@ -1844,7 +1844,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   11
@@ -1855,7 +1855,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
           <tr>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   12
@@ -1864,7 +1864,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   13
@@ -1873,7 +1873,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   14
@@ -1882,7 +1882,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   15
@@ -1891,7 +1891,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   16
@@ -1900,7 +1900,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   17
@@ -1909,7 +1909,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   18
@@ -1920,7 +1920,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
           <tr>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   19
@@ -1929,7 +1929,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   20
@@ -1938,7 +1938,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   21
@@ -1947,7 +1947,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   22
@@ -1956,7 +1956,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   23
@@ -1965,7 +1965,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   24
@@ -1974,7 +1974,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   25
@@ -1985,7 +1985,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
           <tr>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   26
@@ -1994,7 +1994,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   27
@@ -2003,7 +2003,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   28
@@ -2012,7 +2012,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   29
@@ -2021,7 +2021,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   30
@@ -2030,7 +2030,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--floating btn--small btn--flat"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
               >
                 <span class="btn__content">
                   31

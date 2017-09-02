@@ -231,4 +231,103 @@ test('VSelect.js', ({ mount, shallow }) => {
     expect(wrapper.vm.searchValue).toBe('foo')
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
+
+  it('should render role=combobox correctly when autocomplete', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        autocomplete: true,
+        items: []
+      }
+    })
+
+    let ele = wrapper.find('.input-group--select')
+    expect(ele.length).toBe(1)
+    expect(ele[0].element.getAttribute('role')).toBeFalsy()
+
+    ele = wrapper.find('.input-group--select input')
+    expect(ele.length).toBe(1)
+    expect(ele[0].hasAttribute('role', 'combobox')).toBe(true)
+
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should render role=combobox correctly when not autocomplete)', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: []
+      }
+    })
+
+    const ele = wrapper.find('.input-group--select')
+    expect(ele.length).toBe(1)
+    expect(ele[0].hasAttribute('role', 'combobox')).toBe(true)
+
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should render aria-hidden=true on arrow icon', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: []
+      }
+    })
+
+    const icon = wrapper.find('i.input-group__append-icon')
+    expect(icon.length).toBe(1)
+    expect(icon[0].hasAttribute('aria-hidden', 'true')).toBe(true)
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should render a disabled input with placeholder', () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        placeholder: 'Placeholder'
+      }
+    })
+
+    const input = wrapper.find('input')[0]
+
+    expect(input.hasAttribute('disabled', 'disabled')).toBe(true)
+    expect(input.hasAttribute('placeholder', 'Placeholder')).toBe(true)
+    expect(input.html()).toMatchSnapshot()
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should not display when not autocomplete with placeholder and dirty', () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        placeholder: 'Placeholder',
+        items: ['foo'],
+        value: 'foo'
+      }
+    })
+
+    const input = wrapper.find('input')[0]
+
+    expect(input.hasAttribute('style', 'display: none;')).toBe(true)
+    expect(input.html()).toMatchSnapshot()
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should change search input text when value changes', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        autocomplete: true,
+        placeholder: 'Placeholder',
+        items: ['foo', 'bar'],
+        value: 'foo'
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.searchValue).toBe('foo')
+    wrapper.setProps({ value: null })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.searchValue).toBe(undefined)
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 })

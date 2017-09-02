@@ -18,6 +18,9 @@
     cursor: pointer
     position: relative
 
+    input[readonly]
+      cursor: pointer
+
     .toolbar__side-icon
       margin: 0
 
@@ -30,7 +33,7 @@
     overflow-x: hidden
     transition: .3s $transition.swing
     elevation(8)
-    
+
     &--active
       pointer-events: none
 

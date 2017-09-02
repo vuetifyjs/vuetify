@@ -59,6 +59,7 @@
         window: {},
         absoluteX: 0,
         absoluteY: 0,
+        pageYOffset: 0,
         insideContent: false,
         hasJustFocused: false,
         focusedTimeout: {}
@@ -66,6 +67,7 @@
     },
 
     props: {
+      allowOverflow: Boolean,
       top: Boolean,
       left: Boolean,
       bottom: Boolean,
@@ -197,6 +199,7 @@
     methods: {
       activate () {
         if (typeof window === 'undefined') return
+        this.pageYOffset = this.getOffsetTop()
         this.isBooted = true
         this.insideContent = true
         this.getTiles()
@@ -210,6 +213,12 @@
         clearTimeout(this.resizeTimeout)
         if (!this.isActive) return
         this.resizeTimeout = setTimeout(this.updateDimensions, 200)
+      },
+      getOffsetTop () {
+        if (typeof window === 'undefined') return 0
+
+        return window.pageYOffset ||
+          document.documentElement.scrollTop
       },
       startTransition () {
         requestAnimationFrame(() => (this.isContentActive = true))

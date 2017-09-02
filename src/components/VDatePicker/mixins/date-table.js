@@ -27,7 +27,7 @@ export default {
       const date = new Date(this.tableYear, this.tableMonth, day, 12)
       const button = this.$createElement('button', {
         'class': {
-          'btn btn--floating btn--small btn--flat': true,
+          'btn btn--date-picker btn--floating btn--small btn--flat': true,
           'btn--active': this.dateIsActive(day),
           'btn--current': this.dateIsCurrent(day),
           'btn--light': this.dark,
