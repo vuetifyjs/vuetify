@@ -4643,36 +4643,36 @@ p {
   background: #fff;
 }
 .application--light .btn-toggle .btn .btn__content:before {
-  background-color: $focused-alt;
+  background-color: rgba(255,255,255,0.6);
 }
-.application--light .btn-toggle .btn[data-selected]:not(:last-child):not([data-only-child]) {
+.application--light .btn-toggle .btn .btn__content:before:not(:last-child):not([data-only-child]) {
   border-right-color: rgba(0,0,0,0.26);
 }
 .application .theme--light.btn-toggle {
   background: #fff;
 }
 .application .theme--light.btn-toggle .btn .btn__content:before {
-  background-color: $focused-alt;
+  background-color: rgba(255,255,255,0.6);
 }
-.application .theme--light.btn-toggle .btn[data-selected]:not(:last-child):not([data-only-child]) {
+.application .theme--light.btn-toggle .btn .btn__content:before:not(:last-child):not([data-only-child]) {
   border-right-color: rgba(0,0,0,0.26);
 }
 .application--dark .btn-toggle {
   background: #424242;
 }
 .application--dark .btn-toggle .btn .btn__content:before {
-  background-color: $focused-alt;
+  background-color: rgba(255,255,255,0.1);
 }
-.application--dark .btn-toggle .btn[data-selected]:not(:last-child):not([data-only-child]) {
+.application--dark .btn-toggle .btn .btn__content:before:not(:last-child):not([data-only-child]) {
   border-right-color: rgba(255,255,255,0.3);
 }
 .application .theme--dark.btn-toggle {
   background: #424242;
 }
 .application .theme--dark.btn-toggle .btn .btn__content:before {
-  background-color: $focused-alt;
+  background-color: rgba(255,255,255,0.1);
 }
-.application .theme--dark.btn-toggle .btn[data-selected]:not(:last-child):not([data-only-child]) {
+.application .theme--dark.btn-toggle .btn .btn__content:before:not(:last-child):not([data-only-child]) {
   border-right-color: rgba(255,255,255,0.3);
 }
 .btn-toggle {
@@ -4827,6 +4827,7 @@ p {
   width: 100%;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.2), 0 2px 2px rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12);
 }
 .carousel__item {
   display: -webkit-box;
@@ -4900,7 +4901,7 @@ p {
 }
 .carousel__controls__item i {
   opacity: 0.5;
-  transition: $primary-transition;
+  transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
 }
 .carousel__controls__item--active i {
   opacity: 1;
