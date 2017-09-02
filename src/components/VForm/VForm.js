@@ -73,6 +73,7 @@ export default {
   },
 
   render (h) {
+    this.$listeners && delete this.$listeners.input
     return h('form', {
       attrs: this.$attrs,
       on: this.$listeners
