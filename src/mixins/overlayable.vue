@@ -78,8 +78,8 @@
       },
       scrollListener (e) {
         if (e.type === 'keydown') {
-          const up = [38, 33, 36]
-          const down = [40, 34, 35]
+          const up = [38, 33]
+          const down = [40, 34]
 
           if (up.includes(e.keyCode)) {
             e.deltaY = -1
