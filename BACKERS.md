@@ -2,6 +2,9 @@
 
 You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.patreon.com/vuetify)
 
+### $100+
+- [Anthony Gherghetta](https://gorilladash.com/)
+
 ### $50+
 - [Xavier Escoté](http://www.deister.net/)
 - [Steve Gehrman](https://cocoatech.com/)
