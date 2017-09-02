@@ -1,6 +1,9 @@
 <script>
   export default {
-
+    name: 'v-grid',
+    render (h) {
+      return h('div')
+    }
   }
 </script>
 

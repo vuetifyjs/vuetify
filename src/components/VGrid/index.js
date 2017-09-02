@@ -35,6 +35,7 @@ export const VLayout = Grid('layout')
 export const VSpacer = createSimpleFunctional('spacer')
 
 VGrid.install = function install (Vue) {
+  Vue.component(VGrid.name, VGrid)
   Vue.component(VContainer.name, VContainer)
   Vue.component(VFlex.name, VFlex)
   Vue.component(VLayout.name, VLayout)
