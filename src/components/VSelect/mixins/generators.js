@@ -38,7 +38,8 @@ export default {
         },
         attrs: {
           ...this.$attrs,
-          disabled: this.disabled || !this.isAutocomplete
+          disabled: this.disabled || !this.isAutocomplete,
+          tabindex: this.disabled || !this.isAutocomplete ? -1 : 0
         },
         domProps: {
           value: this.lazySearch
@@ -48,26 +49,7 @@ export default {
           blur: () => {
             if (this.isActive) return
 
-      if (this.isAutocomplete) {
-        input = this.$createElement('input', {
-          'class': 'input-group--select__autocomplete',
-          style: {
-            flex: this.shouldBreak ? '1 0 100%' : null
-          },
-          attrs: {
-            tabindex: this.disabled ? -1 : 0,
-            ...this.$attrs,
-            role: 'combobox'
-          },
-          domProps: { value: this.lazySearch },
-          on: {
-            focus: this.focus,
-            blur: () => {
-              if (this.isActive) return
-
-              this.blur()
-            },
-            input: e => (this.searchValue = e.target.value)
+            this.blur()
           },
           input: e => (this.searchValue = e.target.value)
         },
@@ -79,6 +61,7 @@ export default {
         key: 'input'
       }
 
+      if (this.isAutocomplete) data.attrs.role = 'combobox'
       if (this.placeholder) data.domProps.placeholder = this.placeholder
 
       return this.$createElement('div', {

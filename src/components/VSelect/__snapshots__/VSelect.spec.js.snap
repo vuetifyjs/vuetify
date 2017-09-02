@@ -9,9 +9,9 @@ exports[`VSelect.js should have -1 tabindex when disabled 1`] = `
     <div class="input-group__selections"
          style="overflow: hidden;"
     >
-      <input tabindex="-1"
+      <input disabled="disabled"
+             tabindex="-1"
              role="combobox"
-             disabled="disabled"
              class="input-group--select__autocomplete"
       >
     </div>
@@ -60,6 +60,7 @@ exports[`VSelect.js should have -1 tabindex when disabled 1`] = `
 exports[`VSelect.js should not display when not autocomplete with placeholder and dirty 1`] = `
 
 <input disabled="disabled"
+       tabindex="-1"
        class="input-group--select__autocomplete"
        placeholder="Placeholder"
        style="display: none;"
@@ -70,6 +71,7 @@ exports[`VSelect.js should not display when not autocomplete with placeholder an
 exports[`VSelect.js should render a disabled input with placeholder 1`] = `
 
 <input disabled="disabled"
+       tabindex="-1"
        class="input-group--select__autocomplete"
        placeholder="Placeholder"
 >
