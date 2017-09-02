@@ -75,7 +75,9 @@ export default {
   render (h) {
     return h('form', {
       attrs: this.$attrs,
-      on: this.$listeners
+      on: {
+        submit: e => this.$emit('submit', e)
+      }
     }, this.$slots.default)
   }
 }
