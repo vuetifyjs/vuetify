@@ -11,8 +11,7 @@ export default {
 
   props: {
     error: {
-      type: Boolean,
-      default: true
+      type: Boolean
     },
     errorMessages: {
       type: [String, Array],
@@ -39,7 +38,8 @@ export default {
     },
     hasError () {
       return this.validations.length > 0 ||
-        this.errorMessages.length > 0
+        this.errorMessages.length > 0 ||
+        this.error
     }
   },
 
@@ -75,10 +75,14 @@ export default {
       if (this.shouldValidate) {
         this.$emit('update:error', val)
       }
+    },
+    error (val) {
+      this.shouldValidate = !!val
     }
   },
 
   mounted () {
+    this.shouldValidate = !!this.error
     this.validate()
   },
 

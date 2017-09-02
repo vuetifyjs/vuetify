@@ -14,9 +14,7 @@ exports[`Vslider.vue shoud work 1`] = `
         <div class="slider__track-fill">
         </div>
       </div>
-      <div class="slider__thumb-container"
-           style="left: 0%;"
-      >
+      <div class="slider__thumb-container">
         <div class="slider__thumb">
         </div>
       </div>

@@ -1,3 +1,4 @@
+// import Vue from 'vue'
 import { test } from '~util/testing'
 import VDataTable from './VDataTable'
 

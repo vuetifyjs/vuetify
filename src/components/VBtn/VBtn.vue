@@ -71,14 +71,14 @@
           'secondary': this.secondary && !this.outline && !this.flat,
           'success': this.success && !this.outline && !this.flat,
           'info': this.info && !this.outline && !this.flat,
-          'warning': this.warning && !this.outline && !this.flat,
-          'error': this.error && !this.outline && !this.flat,
-          'primary--text': this.primary && (this.outline || this.flat),
-          'secondary--text': this.secondary && (this.outline || this.flat),
-          'success--text': this.success && (this.outline || this.flat),
-          'info--text': this.info && (this.outline || this.flat),
-          'warning--text': this.warning && (this.outline || this.flat),
-          'error--text': this.error && (this.outline || this.flat),
+          'warning':this.warning && !this.outline && !this.flat,
+          'error':this.error && !this.outline && !this.flat,
+          'primary--text': !this.disabled && this.primary && (this.outline || this.flat),
+          'secondary--text': !this.disabled && this.secondary && (this.outline || this.flat),
+          'success--text': !this.disabled && this.success && (this.outline || this.flat),
+          'info--text': !this.disabled && this.info && (this.outline || this.flat),
+          'warning--text': !this.disabled && this.warning && (this.outline || this.flat),
+          'error--text': !this.disabled && this.error && (this.outline || this.flat),
           ...this.themeClasses
         }
       }

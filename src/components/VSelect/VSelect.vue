@@ -146,7 +146,8 @@
         return this.autocomplete || this.editable
       },
       isDirty () {
-        return this.selectedItems.length
+        return this.selectedItems.length ||
+          this.placeholder
       },
       isDropdown () {
         return this.segmented || this.overflow || this.editable || this.solo
@@ -193,9 +194,8 @@
       inputValue (val) {
         // Async calls may not have data ready at boot
         if (!this.multiple &&
-          this.isAutocomplete &&
-          this.selectedItems.length
-        ) this.searchValue = this.getText(this.selectedItems[0])
+          this.isAutocomplete
+        ) this.searchValue = this.getText(this.selectedItem)
 
         this.$emit('input', val)
       },
@@ -204,7 +204,7 @@
         this.validate()
 
         if (this.isAutocomplete) {
-          this.$nextTick(this.$refs.menu.updateDimensions)
+          this.$nextTick(() => this.$refs.menu.updateDimensions)
         }
       },
       multiple (val) {
@@ -266,6 +266,7 @@
         if (this._isDestroyed) return
 
         this.content = this.$refs.menu.$refs.content
+        this.searchValue = this.getText(this.selectedItem)
       })
     },
 
@@ -288,12 +289,11 @@
       focus (e) {
         this.focused = true
         if (this.$refs.input && this.isAutocomplete) {
-          this.multiple &&
-            this.$refs.input.focus() ||
-            this.$refs.input.setSelectionRange(
-              0,
-              (this.searchValue || '').toString().length
-            )
+          this.$refs.input.focus() ||
+          this.$refs.input.setSelectionRange(
+            0,
+            (this.searchValue || '').toString().length
+          )
         }
 
         this.$emit('focus', e)

@@ -56,8 +56,10 @@ theme(textfield, "input-group--text-field")
   label
     top: 13px
 
-  textarea
+  .input-group__input
     border-radius: 2px
+
+  textarea
     font-size: $input-font-size
     transition: .3s $transition.swing
 
@@ -66,8 +68,8 @@ theme(textfield, "input-group--text-field")
       top: 30px
       left: 15px
 
-    textarea
-      padding: 30px 13px 0
+    .input-group__input
+      padding: 30px 0 0 13px
 
   .input-group__details
     &:before,
@@ -128,6 +130,7 @@ theme(textfield, "input-group--text-field")
           transform: translate3d(0, -8px, 0) scale(.75)
 
   &.input-group--dirty
+    &.input-group--select,
     &:not(.input-group--textarea)
       label
         transform: translate3d(0, -18px, 0) scale(.75)

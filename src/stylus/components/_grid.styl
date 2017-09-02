@@ -30,24 +30,18 @@
       &-{$size}
         padding: $gutter
 
-        > .layout
-          margin: -($gutter / 2)
-
-          > .flex
+        .layout
+          .flex
             padding: ($gutter / 2)
-  
-  > .layout
-    margin-right: -($grid-gutters.md / 2)
-    margin-left: -($grid-gutters.md / 2)
+            
+        > .layout,
+        .flex > .layout
+          margin: -($gutter / 2)
 
 .layout
   display: flex
-
-  &.row, &.column
-    flex: 0 1 auto
-
-    &.grow
-      flex-grow: 1
+  flex: 1 1 auto
+  flex-wrap: nowrap
 
   &.row
     flex-direction: row
@@ -64,37 +58,22 @@
   &.wrap
     flex-wrap: wrap
 
-  &.flex,
-  &.child-flex > *
-    flex: 1 1 auto
+for size, width in $grid-breakpoints
+  @media all and (min-width: width)
+    for n in (1..$grid-columns)
+      .flex.{size}{n}
+        flex-basis: (n / $grid-columns * 100)%
+        max-width: (n / $grid-columns * 100)%
 
-  .flex
-    flex: 1 1 auto
-    padding-right: ($grid-gutters.md / 2)
-    padding-left: ($grid-gutters.md / 2)
+      .flex.order-{size}{n}
+        order: n
 
-  for size, width in $grid-breakpoints
-    @media all and (min-width: width)
-      &.row-{size}
-        flex-direction: row
+    for n in (0..$grid-columns)
+      .flex.offset-{size}{n}
+        margin-left: (n / $grid-columns * 100)%
 
-      &.column-{size}
-        flex-direction: column
-
-      &.child-flex-{size} > *
-        flex: 1
-
-      for n in (1..$grid-columns)
-        .flex.{size}{n}
-          flex-basis: (n / $grid-columns * 100)%
-          max-width: (n / $grid-columns * 100)%
-
-        .flex.order-{size}{n}
-          order: n
-
-      for n in (0..$grid-columns)
-        .flex.offset-{size}{n}
-          margin-left: (n / $grid-columns * 100)%
+.flex
+  flex: 1 1 auto
 
 .align
   &-start
@@ -150,11 +129,11 @@
 .fill-height
   height: 100%
 
+.hide-overflow
+  overflow: hidden !important
+
 .show-overflow
   overflow: visible !important
-
-.flexbox
-  display: flex
 
 .no-wrap
   white-space: nowrap
@@ -163,3 +142,21 @@
   white-space: nowrap
   overflow: hidden
   text-overflow: ellipsis
+  
+// Display helpers
+.d-flex
+  display: flex
+    
+.d-inline-flex
+  display: inline-flex
+  
+.d-flex,
+.d-inline-flex
+  > *
+    flex: 1 1 auto
+    
+.d-block
+  display: block
+  
+.d-inline-block
+  display: inline-block

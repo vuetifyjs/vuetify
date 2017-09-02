@@ -79,6 +79,9 @@
           this.placeholder ||
           this.badInput ||
           ['time', 'date', 'datetime-local', 'week', 'month'].includes(this.type)
+      },
+      shouldAutoGrow () {
+        return (this.multiLine || this.textarea) && this.autoGrow
       }
     },
 
@@ -89,13 +92,13 @@
       value () {
         this.lazyValue = this.value
         !this.validateOnBlur && this.validate()
-        this.multiLine && this.autoGrow && this.calculateInputHeight()
+        this.shouldAutoGrow && this.calculateInputHeight()
       }
     },
 
     mounted () {
       this.$vuetify.load(() => {
-        this.multiLine && this.autoGrow && this.calculateInputHeight()
+        this.shouldAutoGrow && this.calculateInputHeight()
         this.autofocus && this.focus()
       })
     },
@@ -110,13 +113,13 @@
             : 0
           const minHeight = this.rows * 24
           const inputHeight = height < minHeight ? minHeight : height
-          this.inputHeight = inputHeight
+          this.inputHeight = inputHeight + (this.textarea ? 4 : 0)
         })
       },
       onInput (e) {
         this.inputValue = e.target.value
         this.badInput = e.target.validity && e.target.validity.badInput
-        this.multiLine && this.autoGrow && this.calculateInputHeight()
+        this.shouldAutoGrow && this.calculateInputHeight()
       },
       blur (e) {
         this.$nextTick(() => {
@@ -142,9 +145,7 @@
         const tag = this.multiLine || this.textarea ? 'textarea' : 'input'
 
         const data = {
-          style: {
-            'height': this.inputHeight && `${this.inputHeight}px`
-          },
+          style: {},
           domProps: {
             autofocus: this.autofocus,
             disabled: this.disabled,
@@ -163,6 +164,10 @@
             focus: this.focus
           },
           ref: 'input'
+        }
+
+        if (this.shouldAutoGrow) {
+          data.style.height = this.inputHeight && `${this.inputHeight}px`
         }
 
         if (this.placeholder) data.domProps.placeholder = this.placeholder

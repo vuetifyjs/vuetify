@@ -8,7 +8,7 @@ export default {
         ref: 'menu',
         props: {
           activator: this.$refs.activator,
-          openOnClick: false,
+          allowOverflow: this.isAutocomplete,
           auto: this.auto,
           closeOnClick: false,
           closeOnContentClick: !this.multiple,
@@ -19,6 +19,7 @@ export default {
           nudgeRight: this.isDropdown ? 16 : 0,
           nudgeWidth: this.isDropdown ? 56 : 24,
           offsetY,
+          openOnClick: false,
           value: this.isActive && this.computedItems.length,
           zIndex: this.menuZIndex
         },
@@ -30,7 +31,22 @@ export default {
       return this.$createElement('v-menu', data, [this.genList()])
     },
     genSelectionsAndSearch () {
-      let input
+      const data = {
+        'class': 'input-group--select__autocomplete',
+        style: {
+          flex: this.shouldBreak ? '1 0 100%' : null
+        },
+        attrs: {
+          ...this.$attrs,
+          disabled: this.disabled || !this.isAutocomplete
+        },
+        domProps: {
+          value: this.lazySearch
+        },
+        on: {
+          focus: this.focus,
+          blur: () => {
+            if (this.isActive) return
 
       if (this.isAutocomplete) {
         input = this.$createElement('input', {
@@ -53,20 +69,26 @@ export default {
             },
             input: e => (this.searchValue = e.target.value)
           },
-          ref: 'input',
-          key: 'input'
-        })
+          input: e => (this.searchValue = e.target.value)
+        },
+        directives: [{
+          name: 'show',
+          value: this.isAutocomplete || (this.placeholder && !this.selectedItems.length)
+        }],
+        ref: 'input',
+        key: 'input'
       }
 
-      const selections = this.genSelections()
-
-      input && selections.push(input)
+      if (this.placeholder) data.domProps.placeholder = this.placeholder
 
       return this.$createElement('div', {
         'class': 'input-group__selections',
         style: { 'overflow': 'hidden' },
         ref: 'activator'
-      }, [selections])
+      }, [
+        this.genSelections(),
+        this.$createElement('input', data)
+      ])
     },
     genSelections () {
       if (this.isAutocomplete && !this.multiple) return []
