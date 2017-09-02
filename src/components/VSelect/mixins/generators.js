@@ -38,7 +38,8 @@ export default {
         },
         attrs: {
           ...this.$attrs,
-          disabled: this.disabled || !this.isAutocomplete
+          disabled: this.disabled || !this.isAutocomplete,
+          tabindex: this.disabled || !this.isAutocomplete ? -1 : 0
         },
         domProps: {
           value: this.lazySearch
@@ -60,6 +61,7 @@ export default {
         key: 'input'
       }
 
+      if (this.isAutocomplete) data.attrs.role = 'combobox'
       if (this.placeholder) data.domProps.placeholder = this.placeholder
 
       return this.$createElement('div', {
