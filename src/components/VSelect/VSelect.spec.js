@@ -246,7 +246,7 @@ test('VSelect.js', ({ mount, shallow }) => {
 
     ele = wrapper.find('.input-group--select input')
     expect(ele.length).toBe(1)
-    // expect(ele[0].hasAttribute('role', 'combobox')).toBe(true)
+    expect(ele[0].hasAttribute('role', 'combobox')).toBe(true)
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
@@ -258,7 +258,7 @@ test('VSelect.js', ({ mount, shallow }) => {
       }
     })
 
-    let ele = wrapper.find('.input-group--select')
+    const ele = wrapper.find('.input-group--select')
     expect(ele.length).toBe(1)
     expect(ele[0].hasAttribute('role', 'combobox')).toBe(true)
 
