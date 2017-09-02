@@ -4,8 +4,9 @@
 navigation-drawer($material)
   background-color: $material.cards
 
-  &__border
-    background-color: $material.dividers
+  &:not(.navigation-drawer--floating)
+    .navigation-drawer__border
+      background-color: $material.dividers
 
   &.navigation-drawer--right
     &:after

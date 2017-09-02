@@ -14,6 +14,9 @@ export default {
             const page = this.computedPagination.page
             this.updatePagination({ page: page - 1 })
           }
+        },
+        attrs: {
+          'aria-label': 'Previous page' // TODO: Localization
         }
       }, [this.$createElement('v-icon', 'chevron_left')])
     },
@@ -36,6 +39,9 @@ export default {
             const page = this.computedPagination.page
             this.updatePagination({ page: page + 1 })
           }
+        },
+        attrs: {
+          'aria-label': 'Next page' // TODO: Localization
         }
       }, [this.$createElement('v-icon', 'chevron_right')])
     },
@@ -45,6 +51,9 @@ export default {
       }, [
         this.rowsPerPageText,
         this.$createElement('v-select', {
+          attrs: {
+            'aria-label': this.rowsPerPageText
+          },
           props: {
             items: this.rowsPerPageItems,
             value: this.computedPagination.rowsPerPage,

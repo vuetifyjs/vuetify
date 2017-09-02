@@ -6,7 +6,7 @@ toolbar($material)
   background-color: $material.app-bar
   color: $material.text.primary
 
-  .btn
+  .btn:not(.btn--disabled)
     color: $material.text.primary
 
 theme(toolbar, "toolbar")
@@ -21,7 +21,6 @@ theme(toolbar, "toolbar")
   .input-group--solo
     .input-group__details
       display: none
-
 
 /** Children */
 .toolbar
@@ -67,13 +66,20 @@ theme(toolbar, "toolbar")
     max-width: 100%
     padding: 0
 
+    > .menu .menu__activator
+      height: 100%
+
+      .btn
+        height: 100%
+        margin: 0
+
     > .btn
       height: 100%
       margin: 0
 
   @media $display-breakpoints.xs-only
-    &__content,
-    &__extension
+    .toolbar__content,
+    .toolbar__extension
       > .btn:last-child
         margin-right: 17px
 

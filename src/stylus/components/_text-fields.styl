@@ -56,8 +56,10 @@ theme(textfield, "input-group--text-field")
   label
     top: 13px
 
-  textarea
+  .input-group__input
     border-radius: 2px
+
+  textarea
     font-size: $input-font-size
     transition: .3s $transition.swing
 
@@ -66,8 +68,8 @@ theme(textfield, "input-group--text-field")
       top: 30px
       left: 15px
 
-    textarea
-      padding: 30px 13px 0
+    .input-group__input
+      padding: 30px 0 0 13px
 
   .input-group__details
     &:before,
@@ -118,7 +120,6 @@ theme(textfield, "input-group--text-field")
     &:focus
       label
         opacity: 1
-        max-width: 100%
 
       &:not(.input-group--textarea)
         label
@@ -129,6 +130,7 @@ theme(textfield, "input-group--text-field")
           transform: translate3d(0, -8px, 0) scale(.75)
 
   &.input-group--dirty
+    &.input-group--select,
     &:not(.input-group--textarea)
       label
         transform: translate3d(0, -18px, 0) scale(.75)
@@ -136,15 +138,6 @@ theme(textfield, "input-group--text-field")
     &:not(.input-group--full-width).input-group--textarea
       label
         transform: translate3d(0, -8px, 0) scale(.75)
-
-  // Single Line
-  &.input-group--single-line
-    label
-      transform: translate3d(0,0,0)
-
-    &.input-group--dirty
-      label
-        display: none
 
   // Multi Line
   &.input-group--multi-line
@@ -160,25 +153,6 @@ theme(textfield, "input-group--text-field")
 
     .input-group__details:before, .input-group__details:after
       display: none
-
-  // Solo
-  &.input-group--solo
-    background: #fff
-    height: 46px
-    border-radius: $card-border-radius
-    padding: 0 16px
-    elevation(2)
-
-    input
-      margin-top: 8px
-
-    label
-      top: 8px
-      left: 50px
-      transform: none !important
-
-    &:hover
-      elevation(4)
 
 /** Prefix/Suffix */
 .input-group--prefix

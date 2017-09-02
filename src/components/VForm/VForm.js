@@ -40,7 +40,12 @@ export default {
       })
     },
     validate () {
-      this.getInputs().forEach(child => child.validate(true))
+      const errors = this.getInputs().reduce((errors, child) => {
+        const error = !child.validate(true)
+        return errors || error
+      }, false)
+
+      return !errors
     },
     reset () {
       this.getInputs().forEach((input) => input.reset())
@@ -50,8 +55,6 @@ export default {
   mounted () {
     this.$vuetify.load(() => {
       this.getInputs().forEach((child) => {
-        if (!child.$el.querySelector('input')) return
-
         this.inputs += 1
 
         // Only start watching inputs if we need to
@@ -71,7 +74,8 @@ export default {
 
   render (h) {
     return h('form', {
-      attrs: this.$attrs
+      attrs: this.$attrs,
+      on: this.$listeners
     }, this.$slots.default)
   }
 }

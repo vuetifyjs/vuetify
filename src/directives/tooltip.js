@@ -2,6 +2,8 @@ import {
   directiveConfig
 } from '../util/helpers'
 
+require('../stylus/components/_tooltips.styl')
+
 function directive (el, binding) {
   const config = directiveConfig(
     binding,
@@ -27,6 +29,7 @@ function unbind (el) {
 }
 
 export default {
+  name: 'tooltip',
   bind: directive,
   updated: directive,
   componentUpdated: directive,

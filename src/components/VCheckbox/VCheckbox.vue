@@ -82,6 +82,9 @@
 
       const data = {
         attrs: {
+          tabindex: this.disabled
+            ? -1
+            : this.internalTabIndex || this.tabindex,
           role: 'checkbox',
           'aria-checked': this.inputIndeterminate && 'mixed' || this.isActive && 'true' || 'false',
           'aria-label': this.label

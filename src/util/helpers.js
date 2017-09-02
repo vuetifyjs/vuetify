@@ -14,6 +14,8 @@ export function createSimpleFunctional (c, el = 'div') {
 
 export function createSimpleTransition (name, origin = 'top center 0', mode) {
   return {
+    name,
+
     functional: true,
 
     props: {
@@ -42,6 +44,8 @@ export function createSimpleTransition (name, origin = 'top center 0', mode) {
 
 export function createJavaScriptTransition (name, functions, css = true, mode = 'in-out') {
   return {
+    name,
+
     functional: true,
 
     props: {

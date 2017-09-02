@@ -24,6 +24,7 @@ function unbind (el, binding) {
 }
 
 export default {
+  name: 'resize',
   inserted,
   unbind
 }
