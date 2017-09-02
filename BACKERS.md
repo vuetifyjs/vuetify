@@ -30,3 +30,7 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Roger Vilaseca
 - Paul
 - Asif Mehedi
+- Jussi Pesonen
+- Jordan Wood
+- Alexey Toroshchin
+- Phillippe Genois
