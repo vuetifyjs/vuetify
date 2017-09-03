@@ -80,6 +80,8 @@ function directive (el, binding, v) {
   el.addEventListener('mousedown', e => ripple.show(e, el, binding), false)
   el.addEventListener('mouseup', () => ripple.hide(el), false)
   el.addEventListener('mouseleave', () => ripple.hide(el), false)
+  // Anchor tags can be dragged, causes other hides to fail - #1537
+  el.addEventListener('dragstart', () => ripple.hide(el), false)
 }
 
 function unbind (el, binding) {
@@ -89,6 +91,7 @@ function unbind (el, binding) {
   el.removeEventListener('touchcancel', () => ripple.hide(el), false)
   el.removeEventListener('mouseup', () => ripple.hide(el), false)
   el.removeEventListener('mouseleave', () => ripple.hide(el), false)
+  el.removeEventListener('dragstart', () => ripple.hide(el), false)
 }
 
 export default {
