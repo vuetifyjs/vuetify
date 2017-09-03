@@ -17,13 +17,7 @@ export default {
   watch: {
     errorBag: {
       handler () {
-        const keys = Object.keys(this.errorBag)
-        if (keys.length < this.inputs.length) return false
-
-        const errors = keys.reduce((errors, key) => {
-          errors = errors || this.errorBag[key]
-          return errors
-        }, false)
+        const errors = Object.values(this.errorBag).includes(true)
 
         this.$emit('input', !errors)
 
