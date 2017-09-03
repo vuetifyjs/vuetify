@@ -84,7 +84,7 @@ export default {
     },
     reset () {
       this.getInputs().forEach((input) => input.reset())
-      this.errorBag = {}
+      Object.keys(this.errorBag).forEach(key => this.$delete(this.errorBag, key))
     }
   },
 
