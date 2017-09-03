@@ -6,11 +6,18 @@
 
     mixins: [Translatable],
 
+    data () {
+      return {
+        isBooted: false
+      }
+    },
+
     props: {
       height: {
         type: [String, Number],
         default: 500
       },
+      jumbotron: Boolean,
       src: String
     },
 
@@ -18,25 +25,19 @@
       styles () {
         return {
           display: 'block',
+          opacity: this.isBooted ? 1 : 0,
           transform: `translate3d(-50%, ${this.parallax}px, 0)`
         }
       }
     },
 
-    methods: {
-      init () {
-        if (!this.$refs.img) return
+    watch: {
+      parallax () {
+        this.isBooted = true
+      }
+    },
 
-        if (this.$refs.img.complete) {
-          this.translate()
-          this.listeners()
-        } else {
-          this.$refs.img.addEventListener('load', () => {
-            this.translate()
-            this.listeners()
-          }, false)
-        }
-      },
+    methods: {
       objHeight () {
         return this.$refs.img.naturalHeight
       },
@@ -63,13 +64,23 @@
         staticClass: 'parallax__content'
       }, this.$slots.default)
 
+      let directives = this.directives()
+
+      if (this.jumbotron) {
+        directives = directives.filter(d => d.name !== 'scroll')
+      }
+
       return h('div', {
         staticClass: 'parallax',
         style: {
-          height: `${parseInt(this.normalizedHeight)}px`
+          minHeight: isNaN(this.height) ? this.height : `${this.height}px`
         },
+        directives,
         on: this.$listeners
-      }, [container, content])
+      }, [
+        container,
+        content
+      ])
     }
   }
 </script>

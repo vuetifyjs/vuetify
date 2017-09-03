@@ -1,6 +1,15 @@
+import Resize from '../directives/resize'
+import Scroll from '../directives/scroll'
+
 export default {
+  directives: {
+    Resize,
+    Scroll
+  },
+
   data () {
     return {
+      normalizedHeight: null,
       parallax: null,
       parallaxDist: null,
       percentScrolled: null,
@@ -11,28 +20,29 @@ export default {
   },
 
   computed: {
-    normalizedHeight () {
-      return Number(this.height.toString().replace(/(^[0-9]*$)/, '$1'))
-    },
-
     imgHeight () {
       return this.objHeight()
     }
   },
 
-  mounted () {
-    this.$vuetify.load(this.init)
-  },
-
-  beforeDestroy () {
-    window.removeEventListener('scroll', this.translate, false)
-    window.removeEventListener('resize', this.translate, false)
+  watch: {
+    height () {
+      this.$nextTick(this.translate)
+    }
   },
 
   methods: {
-    listeners () {
-      window.addEventListener('scroll', this.translate, false)
-      window.addEventListener('resize', this.translate, false)
+    directives () {
+      return [
+        {
+          name: 'scroll',
+          value: this.translate
+        },
+        {
+          name: 'resize',
+          value: this.translate
+        }
+      ]
     },
 
     translate () {
@@ -53,6 +63,7 @@ export default {
     calcDimensions () {
       const offset = this.$el.getBoundingClientRect()
 
+      this.normalizedHeight = offset.height
       this.scrollTop = window.pageYOffset
       this.parallaxDist = this.imgHeight - this.normalizedHeight
       this.elOffsetTop = offset.top + this.scrollTop
