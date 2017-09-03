@@ -35,9 +35,19 @@ export default {
 
   methods: {
     getInputs () {
-      return this.$children.filter(child => {
-        return typeof child.errorBucket !== 'undefined'
-      })
+      const results = []
+
+      const filter = el => typeof el.errorBucket !== 'undefined'
+
+      const search = (children) => {
+        for (const child of children) {
+          filter(child) ? results.push(child) : search(child.$children)
+        }
+      }
+
+      search(this.$children)
+
+      return results
     },
     validate () {
       const errors = this.getInputs().reduce((errors, child) => {
