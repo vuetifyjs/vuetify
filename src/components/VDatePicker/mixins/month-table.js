@@ -28,7 +28,7 @@ export default {
       return this.$createElement('td', [
         this.$createElement('button', {
           'class': {
-            'btn': true,
+            'btn btn--date-picker': true,
             'btn--raised': this.monthIsActive(month),
             'btn--flat': !this.monthIsActive(month),
             'btn--active': this.monthIsActive(month),
