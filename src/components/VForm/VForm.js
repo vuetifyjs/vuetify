@@ -80,15 +80,11 @@ export default {
       }
     },
     validate () {
-      const errors = this.getInputs().reduce((errors, child) => {
-        const error = !child.validate(true)
-        return errors || error
-      }, false)
-
-      return !errors
+      return this.getInputs().every(i => i.validate(true))
     },
     reset () {
       this.getInputs().forEach((input) => input.reset())
+      this.errorBag = {}
     }
   },
 
