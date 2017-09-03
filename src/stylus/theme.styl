@@ -22,3 +22,19 @@ dark($component, $name)
     $component($material-dark)
   .application .theme--dark.{$name}
     $component($material-dark)
+
+theme-inheritable($component, $name)
+  light-inheritable($component, $name)
+  dark-inheritable($component, $name)
+
+light-inheritable($component, $name)
+  .application--light .{$name}:not(.theme--light):not(.theme--dark)
+    $component($material-light)
+  .application .theme--light.{$name}
+    $component($material-light)
+
+dark-inheritable($component, $name)
+  .application--dark .{$name}:not(.theme--light):not(.theme--dark)
+    $component($material-dark)
+  .application .theme--dark.{$name}
+    $component($material-dark)

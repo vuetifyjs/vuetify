@@ -32,9 +32,8 @@ export default {
             'btn--raised': this.monthIsActive(month),
             'btn--flat': !this.monthIsActive(month),
             'btn--active': this.monthIsActive(month),
-            'btn--current': this.monthIsCurrent(month),
-            'btn--light': this.dark,
-            'btn--disabled': !this.isAllowed(date)
+            'btn--outline': this.monthIsCurrent(month) && !this.monthIsActive(month),
+            'btn--disabled': this.type === 'month' && !this.isAllowed(date)
           },
           attrs: {
             type: 'button'
