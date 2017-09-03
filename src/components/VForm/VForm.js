@@ -5,7 +5,7 @@ export default {
 
   data () {
     return {
-      inputs: 0,
+      inputs: [],
       errorBag: {}
     }
   },
@@ -18,7 +18,7 @@ export default {
     errorBag: {
       handler () {
         const keys = Object.keys(this.errorBag)
-        if (keys.length < this.inputs) return false
+        if (keys.length < this.inputs.length) return false
 
         const errors = keys.reduce((errors, key) => {
           errors = errors || this.errorBag[key]
@@ -49,7 +49,41 @@ export default {
       }
 
       return search(this.$children)
+    },
+    watchInputs () {
+      const inputs = this.getInputs()
 
+      if (inputs.length < this.inputs.length) {
+        // Something was removed, we don't want it in the errorBag any more
+        const newUids = inputs.map(i => i._uid)
+
+        const removed = this.inputs.filter(i => !newUids.includes(i))
+
+        for (const input of removed) {
+          this.$delete(this.errorBag, input)
+          this.$delete(this.inputs, this.inputs.indexOf(input))
+        }
+      }
+
+      for (const child of inputs) {
+        if (this.inputs.includes(child._uid)) {
+          continue // We already know about this input
+        }
+
+        this.inputs.push(child._uid)
+
+        // Only start watching inputs if we need to
+        child.$watch('shouldValidate', (val) => {
+          if (!val) return
+
+          // Only watch if we're not already doing it
+          if (this.errorBag.hasOwnProperty(child._uid)) return
+
+          child.$watch('valid', (val) => {
+            this.$set(this.errorBag, child._uid, !val)
+          }, { immediate: true })
+        })
+      }
     },
     validate () {
       const errors = this.getInputs().reduce((errors, child) => {
@@ -65,23 +99,11 @@ export default {
   },
 
   mounted () {
-    this.$vuetify.load(() => {
-      this.getInputs().forEach((child) => {
-        this.inputs += 1
+    this.$vuetify.load(this.watchInputs)
+  },
 
-        // Only start watching inputs if we need to
-        child.$watch('shouldValidate', (val) => {
-          if (!val) return
-
-          // Only watch if we're not already doing it
-          if (this.errorBag.hasOwnProperty(child._uid)) return
-
-          child.$watch('valid', (val) => {
-            this.$set(this.errorBag, child._uid, !val)
-          }, { immediate: true })
-        })
-      })
-    })
+  updated () {
+    this.watchInputs()
   },
 
   render (h) {
