@@ -37,17 +37,19 @@ export default {
     getInputs () {
       const results = []
 
-      const filter = el => typeof el.errorBucket !== 'undefined'
-
-      const search = (children) => {
+      const search = (children, depth = 0) => {
         for (const child of children) {
-          filter(child) ? results.push(child) : search(child.$children)
+          if (child.errorBucket !== undefined) {
+            results.push(child)
+          } else {
+            search(child.$children, depth + 1)
+          }
         }
+        if (depth === 0) return results
       }
 
-      search(this.$children)
+      return search(this.$children)
 
-      return results
     },
     validate () {
       const errors = this.getInputs().reduce((errors, child) => {
