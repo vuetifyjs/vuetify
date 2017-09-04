@@ -19,6 +19,7 @@
       autofocus: Boolean,
       autoGrow: Boolean,
       box: Boolean,
+      clearable: Boolean,
       counter: [Number, String],
       fullWidth: Boolean,
       multiLine: Boolean,

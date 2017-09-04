@@ -1,7 +1,12 @@
 import Themeable from './themeable'
 import Validatable from './validatable'
+import VIcon from '../components/VIcon'
 
 export default {
+  components: {
+    VIcon
+  },
+
   mixins: [Themeable, Validatable],
 
   data () {
@@ -111,29 +116,34 @@ export default {
         error
       )
     },
-    genIcon (type) {
-      const icon = this[`${type}Icon`]
-      const cb = this[`${type}IconCb`]
-      const hasCallback = typeof cb === 'function'
+    genIcon (type, clearable) {
+      const shouldClear = clearable && this.isDirty
+      const icon = shouldClear ? 'clear' : this[`${type}Icon`]
+      let cb = this[`${type}IconCb`]
+      let hasCallback = typeof cb === 'function'
 
-      return this.$createElement(
-        'v-icon',
-        {
-          attrs: {
-            'aria-hidden': true
-          },
-          'class': {
-            [`input-group__${type}-icon`]: true,
-            'input-group__icon-cb': hasCallback
-          },
-          on: {
-            click: e => {
-              hasCallback && cb(e)
-            }
-          }
+      if (!hasCallback && shouldClear) {
+        cb = e => {
+          e.stopPropagation()
+          this.inputValue = null
+        }
+        hasCallback = true
+      }
+
+      return this.$createElement('v-icon', {
+        attrs: {
+          'aria-hidden': true
         },
-        icon
-      )
+        'class': {
+          [`input-group__${type}-icon`]: true,
+          'input-group__icon-cb': hasCallback
+        },
+        on: {
+          click: e => {
+            hasCallback && cb(e)
+          }
+        }
+      }, icon)
     },
     genInputGroup (input, data = {}) {
       const children = []
@@ -177,14 +187,15 @@ export default {
         wrapperChildren.unshift(this.genIcon('prepend'))
       }
 
-      if (this.appendIcon) {
-        wrapperChildren.push(this.genIcon('append'))
+      if (this.appendIcon || this.clearable) {
+        wrapperChildren.push(this.genIcon('append', this.clearable))
       }
 
       children.push(
         this.$createElement('div', {
           'class': 'input-group__input',
           on: {
+            // TODO: This probably could be removed
             click: () => {
               // Proprietary for v-text-field with box prop
               if (!this.box) return

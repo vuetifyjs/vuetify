@@ -108,4 +108,25 @@ test('VTextField.js', ({ mount }) => {
     await wrapper.vm.$nextTick()
     expect(wrapper.data().shouldValidate).toEqual(false)
   })
+
+  it('should clear input value', async () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        clearable: true,
+        value: 'foo'
+      }
+    })
+
+    const clear = wrapper.find('.input-group__append-icon')[0]
+    const input = jest.fn()
+    wrapper.vm.$on('input', input)
+
+    expect(wrapper.vm.inputValue).toBe('foo')
+
+    clear.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(input).toHaveBeenCalledWith(null)
+  })
 })

@@ -39,4 +39,30 @@ test('VSelect.vue', ({ mount }) => {
     expect(wrapper.data().isActive).toBe(true)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
+
+  it('should clear input value', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        clearable: true,
+        items: ['foo', 'bar'],
+        value: 'foo'
+      }
+    })
+
+    const clear = wrapper.find('.input-group__append-icon')[0]
+    const input = jest.fn()
+
+    wrapper.vm.$on('input', input)
+
+    expect(wrapper.vm.inputValue).toBe('foo')
+
+    clear.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.inputValue).toBe(null)
+    expect(input).toHaveBeenCalledWith(null)
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 })

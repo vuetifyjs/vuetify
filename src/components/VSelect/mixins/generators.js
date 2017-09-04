@@ -17,7 +17,7 @@ export default {
           maxHeight: this.maxHeight,
           nudgeTop: this.isDropdown ? -12 : offsetY ? -2 : 0,
           nudgeRight: this.isDropdown ? 16 : 0,
-          nudgeWidth: this.isDropdown ? 56 : 24,
+          nudgeWidth: this.isDropdown ? 56 : 36,
           offsetY,
           openOnClick: false,
           value: this.isActive && this.computedItems.length,

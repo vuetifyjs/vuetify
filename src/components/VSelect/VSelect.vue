@@ -3,7 +3,6 @@
 
   import VCard from '../VCard'
   import VCheckbox from '../VCheckbox'
-  import VIcon from '../VIcon'
   import {
     VList,
     VListTile,
@@ -28,7 +27,6 @@
     components: {
       VCard,
       VCheckbox,
-      VIcon,
       VList,
       VListTile,
       VListTileAction,
@@ -65,6 +63,7 @@
       autocomplete: Boolean,
       bottom: Boolean,
       chips: Boolean,
+      clearable: Boolean,
       close: Boolean,
       debounce: {
         type: Number,
@@ -226,7 +225,6 @@
         })
       },
       items () {
-        if (this.focused && !this.isActive) this.isActive = true
         this.$refs.menu.listIndex = -1
 
         this.searchValue && this.$nextTick(() => {
