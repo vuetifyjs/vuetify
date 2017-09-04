@@ -1,4 +1,5 @@
 <script>
+  import Applicationable from '../../mixins/applicationable'
   import Overlayable from '../../mixins/overlayable'
   import Themeable from '../../mixins/themeable'
 
@@ -9,7 +10,7 @@
   export default {
     name: 'v-navigation-drawer',
 
-    mixins: [Overlayable, Themeable],
+    mixins: [Applicationable, Overlayable, Themeable],
 
     directives: {
       ClickOutside,
@@ -37,6 +38,10 @@
       height: String,
       floating: Boolean,
       miniVariant: Boolean,
+      miniVariantWidth: {
+        type: [Number, String],
+        default: 80
+      },
       mobileBreakPoint: {
         type: Number,
         default: 1280
@@ -46,12 +51,21 @@
       right: Boolean,
       temporary: Boolean,
       touchless: Boolean,
+      width: {
+        type: [Number, String],
+        default: 300
+      },
       value: { required: false }
     },
 
     computed: {
       calculatedHeight () {
         return this.height || '100%'
+      },
+      calculatedWidth () {
+        return this.miniVariant
+          ? this.miniVariantWidth
+          : this.width
       },
       classes () {
         return {
@@ -72,10 +86,32 @@
           'theme--light': this.light
         }
       },
+      marginTop () {
+        if (!this.app) return 0
+
+        return this.clipped
+          ? this.$vuetify.application.top
+          : 0
+      },
+      maxHeight () {
+        if (!this.app) return '100%'
+
+        return this.clipped
+          ? this.$vuetify.application.top + this.$vuetify.application.bottom
+          : this.$vuetify.application.bottom
+      },
       showOverlay () {
         return !this.permanent &&
           this.isActive &&
           (this.temporary || this.isMobile)
+      },
+      styles () {
+        return {
+          height: this.calculatedHeight,
+          marginTop: `${this.marginTop}px`,
+          maxHeight: `calc(100% - ${this.maxHeight}px)`,
+          width: `${this.calculatedWidth}px`
+        }
       }
     },
 
@@ -121,11 +157,43 @@
         ) this.isActive = false
         else this.isActive = true
       },
+      calculateTouchArea () {
+        if (!this.$el.parentNode) return
+        const parentRect = this.$el.parentNode.getBoundingClientRect()
+
+        this.touchArea = {
+          left: parentRect.left + 50,
+          right: parentRect.right - 50
+        }
+      },
       checkIfMobile () {
         this.isMobile = window.innerWidth < parseInt(this.mobileBreakPoint)
       },
       closeConditional () {
         return !this.permanent && (this.temporary || this.isMobile)
+      },
+      genDirectives () {
+        const directives = [
+          {
+            name: 'click-outside',
+            value: this.closeConditional
+          },
+          {
+            name: 'resize',
+            value: this.onResize
+          }
+        ]
+
+        !this.touchless && directives.push({
+          name: 'touch',
+          value: {
+            parent: true,
+            left: this.swipeLeft,
+            right: this.swipeRight
+          }
+        })
+
+        return directives
       },
       onResize () {
         if (!this.enableResizeWatcher ||
@@ -156,44 +224,25 @@
         ) this.isActive = true
         else if (!this.right && this.isActive) this.isActive = false
       },
-      calculateTouchArea () {
-        if (!this.$el.parentNode) return
-        const parentRect = this.$el.parentNode.getBoundingClientRect()
+      updateApplication () {
+        if (!this.app) return
 
-        this.touchArea = {
-          left: parentRect.left + 50,
-          right: parentRect.right - 50
+        const width = !this.isActive ? 0 : this.calculatedWidth
+
+        if (this.right) {
+          this.$vuetify.application.right = width
+        } else {
+          this.$vuetify.application.left = width
         }
-      },
-      genDirectives () {
-        const directives = [
-          {
-            name: 'click-outside',
-            value: this.closeConditional
-          },
-          {
-            name: 'resize',
-            value: this.onResize
-          }
-        ]
-
-        !this.touchless && directives.push({
-          name: 'touch',
-          value: {
-            parent: true,
-            left: this.swipeLeft,
-            right: this.swipeRight
-          }
-        })
-
-        return directives
       }
     },
 
     render (h) {
+      this.updateApplication()
+
       const data = {
         'class': this.classes,
-        style: { height: this.calculatedHeight },
+        style: this.styles,
         directives: this.genDirectives(),
         on: {
           click: () => this.$emit('update:miniVariant', false)

@@ -7,10 +7,10 @@ function inserted (el, binding) {
     debounce = binding.value.debounce
   }
 
-  const fn = cb => setTimeout(cb, debounce)
+  let debounceTimeout = setTimeout(cb, debounce)
   const onResize = () => {
-    clearTimeout(fn)
-    fn(cb)
+    clearTimeout(debounceTimeout)
+    debounceTimeout = setTimeout(cb, debounce)
   }
 
   window.addEventListener('resize', onResize, { passive: true })

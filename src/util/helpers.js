@@ -1,5 +1,6 @@
-export function createSimpleFunctional (c, el = 'div') {
-  const name = c.replace(/__/g, '-')
+export function createSimpleFunctional (c, el = 'div', name) {
+  name = name || c.replace(/__/g, '-')
+
   return {
     name: `v-${name}`,
     functional: true,

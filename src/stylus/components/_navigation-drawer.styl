@@ -72,10 +72,10 @@ theme(navigation-drawer, "navigation-drawer")
 
   &--close:not(.navigation--permanent)
     &.navigation-drawer:not(.navigation-drawer--right)
-      transform: "translate3d(-%s, 0, 0)" % ($navigation-drawer-width)
+      transform: translate3d(-100%, 0, 0)
 
     &.navigation-drawer--right
-      transform: "translate3d(%s, 0, 0)" % ($navigation-drawer-width)
+      transform: translate3d(100%, 0, 0)
 
   &--right
     left: auto
@@ -88,54 +88,11 @@ theme(navigation-drawer, "navigation-drawer")
   &--absolute
     position: absolute
 
-  &--permanent, &--persistent
-    &.navigation-drawer--clipped,
-    &.navigation-drawer--floating
-      margin-top: $toolbar-height
-      max-height: "calc(100vh - %s)" % $toolbar-height
-
-      ~ .toolbar, ~ .footer.footer--fixed, ~ .footer.footer--absolute
-        padding-left: 0
-        z-index: 3
-
-    @media all and (max-width: $grid-breakpoints.sm) and (orientation : landscape)
-      &.navigation-drawer--clipped,
-      &.navigation-drawer--floating
-        margin-top: $toolbar-mobile-landscape-height
-        max-height: "calc(100vh - %s)" % $toolbar-mobile-landscape-height
-
-  &--persistent:not(.navigation-drawer--is-mobile),
-  &--permanent
-    &.navigation-drawer--open:not(.navigation-drawer--right)
-      &:not(.navigation-drawer--clipped):not(.navigation-drawer--floating)
-        ~ .toolbar
-          padding-left: $navigation-drawer-width
-
-      ~ main,
-      ~ .footer:not(.footer--fixed):not(.footer--absolute)
-        padding-left: $navigation-drawer-width
-
-    &.navigation-drawer--open.navigation-drawer--right
-      &:not(.navigation-drawer--clipped):not(.navigation-drawer--floating)
-        + .toolbar
-          padding-right: $navigation-drawer-width
-
-      ~ main,
-      ~ .footer:not(.footer--fixed):not(.footer--absolute)
-        padding-right: $navigation-drawer-width
-
   &--floating:after
     display: none
 
   &--mini-variant
-    margin-top: $toolbar-height
-    max-height: "calc(100vh - %s)" % $toolbar-height
     overflow: hidden
-    width: $navigation-drawer-mini-variant-width
-
-    @media all and (max-width: $grid-breakpoints.sm) and (orientation : landscape)
-      margin-top: $toolbar-mobile-landscape-height
-      max-height: "calc(100vh - %s)" % $toolbar-mobile-landscape-height
 
     .list__tile__action,
     .list__tile__avatar
@@ -150,16 +107,6 @@ theme(navigation-drawer, "navigation-drawer")
     .divider,
     .list--group
       display: none !important
-
-    ~ .toolbar
-      padding-left: 0 !important
-
-    &:not(.navigation-drawer--close)
-      ~ main
-        padding-left: $navigation-drawer-mini-variant-width !important
-
-      ~ .footer:not(.footer--fixed):not(.footer--absolute)
-        padding-left: $navigation-drawer-mini-variant-width !important
 
   &--temporary, &--is-mobile:not(.navigation-drawer--permanent)
     z-index: 5

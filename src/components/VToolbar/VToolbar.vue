@@ -1,10 +1,11 @@
 <script>
+  import Applicationable from '../../mixins/applicationable'
   import Themeable from '../../mixins/themeable'
 
   export default {
     name: 'v-toolbar',
 
-    mixins: [Themeable],
+    mixins: [Applicationable, Themeable],
 
     data: () => ({
       isExtended: false,
@@ -17,12 +18,25 @@
     props: {
       absolute: Boolean,
       card: Boolean,
+      clipped: Boolean,
       dense: Boolean,
+      denseHeight: {
+        type: [Number, String],
+        default: 48
+      },
       extended: Boolean,
       fixed: Boolean,
       flat: Boolean,
       floating: Boolean,
+      height: {
+        type: [Number, String],
+        default: 56
+      },
       prominent: Boolean,
+      prominentHeight: {
+        type: [Number, String],
+        default: 64
+      },
       scrollOffScreen: Boolean,
       scrollTarget: String,
       scrollThreshHold: {
@@ -32,12 +46,20 @@
     },
 
     computed: {
+      computedHeight () {
+        return this.dense
+          ? this.denseHeight
+          : this.prominent
+          ? this.prominentHeight
+          : this.height
+      },
       classes () {
         return {
           'toolbar': true,
           'elevation-0': this.flat,
           'toolbar--absolute': this.absolute,
           'toolbar--card': this.card,
+          'toolbar--clipped': this.clipped,
           'toolbar--dense': this.dense,
           'toolbar--fixed': this.fixed,
           'toolbar--floating': this.floating,
@@ -47,9 +69,21 @@
           'theme--light': this.light
         }
       },
+      paddingLeft () {
+        if (!this.app || this.clipped) return 0
+
+        return this.$vuetify.application.left
+      },
+      paddingRight () {
+        if (!this.app || this.clipped) return 0
+
+        return this.$vuetify.application.right
+      },
       styles () {
         return {
-          marginTop: this.marginTop
+          marginTop: this.marginTop,
+          paddingLeft: `${this.paddingLeft}px`,
+          paddingRight: `${this.paddingRight}px`
         }
       }
     },
@@ -58,7 +92,12 @@
       isScrolling (val) {
         if (!val) this.marginTop = 0
         else (this.marginTop = `${-this.$refs.content.clientHeight - 6}px`)
+        this.updateApplication()
       }
+    },
+
+    destroyed () {
+      if (this.app) this.$vuetify.application.top = 0
     },
 
     methods: {
@@ -84,11 +123,22 @@
         this.isScrolling = this.previousScroll < currentScroll
 
         this.previousScroll = currentScroll
+      },
+      updateApplication () {
+        if (!this.app) return
+
+        this.$vuetify.application.top = !this.fixed && !this.absolute
+          ? 0
+          : this.isExtended && !this.isScrolling
+          ? this.computedHeight * 2
+          : this.computedHeight
       }
     },
 
     render (h) {
       this.isExtended = this.extended || !!this.$slots.extension
+      this.updateApplication()
+
       const children = []
       const data = {
         'class': this.classes,
@@ -107,13 +157,15 @@
       }
 
       children.push(h('div', {
-        'class': 'toolbar__content',
+        staticClass: 'toolbar__content',
+        style: { height: `${this.computedHeight}px` },
         ref: 'content'
       }, this.$slots.default))
 
       if (this.isExtended) {
         children.push(h('div', {
-          'class': 'toolbar__extension'
+          staticClass: 'toolbar__extension',
+          style: { height: `${this.computedHeight}px` }
         }, this.$slots.extension))
       }
 

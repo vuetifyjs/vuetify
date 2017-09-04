@@ -60,12 +60,6 @@ theme(toolbar, "toolbar")
     > *:not(.btn):not(.toolbar__title):not(.menu):first-child
       margin-left: $grid-gutters.lg
 
-  &__content
-    height: $toolbar-height
-
-  &__extension
-    height: $toolbar-extension-height
-
   &__items
     display: flex
     height: 100%
@@ -101,16 +95,6 @@ theme(toolbar, "toolbar")
   @media all and (max-width: $grid-breakpoints.sm) and (orientation: portrait)
     toolbar-content(7px)
 
-    &__content,
-    &__extension
-      height: $toolbar-mobile-portrait-height
-
-  @media all and (max-width: $grid-breakpoints.sm) and (orientation: landscape)
-    &__content,
-    &__extension
-      height: $toolbar-mobile-landscape-height
-
-
 /** Types */
 .toolbar
   &--card
@@ -129,65 +113,18 @@ theme(toolbar, "toolbar")
     position: absolute
     z-index 2
 
-    + main
-      padding-top: 0
-
-  &--fixed
-    + main
-      padding-top: $toolbar-height
-
-    @media all and (max-width: $grid-breakpoints.sm) and (orientation: portrait)
-      + main
-        padding-top: $toolbar-mobile-portrait-height
-
-    @media all and (max-width: $grid-breakpoints.sm) and (orientation: landscape)
-      + main
-        padding-top: $toolbar-mobile-landscape-height
-
-    &.toolbar--extended
-      + main
-        padding-top: $toolbar-height + $toolbar-extension-height
-
-      &.toolbar--dense
-        + main
-          padding-top: $toolbar-mobile-landscape-height * 2
-
-      &.toolbar--prominent
-        + main
-          padding-top: $toolbar-height * 2
-
-      @media all and (max-width: $grid-breakpoints.lg) and (orientation: landscape)
-        + main
-          padding-top: $toolbar-mobile-landscape-height * 2
-
-    &.toolbar--dense
-      + main
-        padding-top: $toolbar-mobile-landscape-height
-
-    &.toolbar--prominent
-      + main
-        padding-top: $toolbar-height
-
-
   &--floating
     display: inline-flex
     margin: 16px
     width: auto
+  
+  &--clipped
+    z-index: 3
 
   &--prominent
-    .toolbar__content
-      height: $toolbar-height
-
-    .toolbar__extension
-      height: $toolbar-height
-
     toolbar-content(15px)
 
   &--dense
-    .toolbar__content,
-    .toolbar__extension
-      height: $toolbar-mobile-landscape-height
-
     toolbar-content(7px)
 
 .toolbar__extension

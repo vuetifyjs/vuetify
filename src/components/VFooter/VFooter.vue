@@ -1,21 +1,63 @@
 <script>
+  import Applicationable from '../../mixins/applicationable'
+
   export default {
     name: 'v-footer',
 
-    functional: true,
+    mixins: [Applicationable],
 
     props: {
       absolute: Boolean,
       fixed: Boolean
     },
 
-    render (h, { data, props, children }) {
-      data.staticClass = (`footer ${data.staticClass || ''}`).trim()
+    computed: {
+      paddingLeft () {
+        return this.fixed
+          ? 0
+          : this.$vuetify.application.left
+      },
+      paddingRight () {
+        return this.fixed
+          ? 0
+          : this.$vuetify.application.right
+      }
+    },
 
-      if (props.absolute) data.staticClass += ' footer--absolute'
-      if (props.fixed) data.staticClass += ' footer--fixed'
+    destroyed () {
+      if (this.app) this.$vuetify.application.bottom = 0
+    },
 
-      return h('footer', data, children)
+    methods: {
+      updateApplication () {
+        if (!this.app) return
+
+        this.$vuetify.application.bottom = this.fixed
+          ? this.$el && this.$el.clientHeight
+          : 0
+      }
+    },
+
+    mounted () {
+      this.updateApplication()
+    },
+
+    render (h) {
+      this.updateApplication()
+
+      const data = {
+        staticClass: 'footer',
+        'class': {
+          'footer--absolute': this.absolute,
+          'footer--fixed': this.fixed
+        },
+        style: {
+          paddingLeft: `${this.paddingLeft}px`,
+          paddingRight: `${this.paddingRight}px`
+        }
+      }
+
+      return h('footer', data, this.$slots.default)
     }
   }
 </script>

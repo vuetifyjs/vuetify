@@ -3,33 +3,14 @@
 
 .application
   -webkit-backface-visibility: hidden
+  display: flex
   min-height: 100vh
-
-  > main > .container
-    min-height: 100vh
-
-  &--toolbar
-    > main > .container
-      min-height: 'calc(100vh - %s)' % $toolbar-height
-
-    &.application--footer
-      > main > .container
-        min-height: 'calc(100vh - %s - %s)' % ($toolbar-height $footer-height)
-
-  &--footer
-    > main > .container
-      min-height: 'calc(100vh - %s)' % $footer-height
-
-  &--footer-fixed
-    > aside.navigation-drawer
-      max-height: 'calc(100vh - %s)' % $footer-height
-
-    > main
-      padding-bottom: $footer-height
-
-    &.application--toolbar
-      > aside.navigation-drawer.navigation-drawer--clipped
-        max-height: 'calc(100vh - %s - %s)' % ($toolbar-height $footer-height)
+  flex-wrap: wrap
+  flex-direction: column
+  
+  > main
+    display: flex
+    flex: 1 0 auto
 
 application($material)
   background: $material.background
