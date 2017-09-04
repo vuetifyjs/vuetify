@@ -33,8 +33,8 @@ export function createSimpleTransition (name, origin = 'top center 0', mode) {
       if (mode) context.data.props.mode = mode
 
       context.data.on.beforeEnter = el => {
-        el.style.transformOrigin = origin
-        el.style.webkitTransformOrigin = origin
+        el.style.transformOrigin = context.props.origin
+        el.style.webkitTransformOrigin = context.props.origin
       }
 
       return h('transition', context.data, context.children)
