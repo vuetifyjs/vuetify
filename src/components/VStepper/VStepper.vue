@@ -53,7 +53,8 @@
         prev && (this.isBooted = true)
       },
       value () {
-        this.inputValue = this.value
+        this.getSteps()
+        this.$nextTick(() => (this.inputValue = this.value))
       }
     },
 
@@ -63,6 +64,13 @@
 
     methods: {
       init () {
+        this.getSteps()
+
+        this.inputValue = this.value || this.steps[0].step || 1
+      },
+      getSteps () {
+        this.steps = []
+        this.content = []
         this.$children.forEach(i => {
           if (i.$options._componentTag === 'v-stepper-step') {
             this.steps.push(i)
@@ -71,11 +79,10 @@
             this.content.push(i)
           }
         })
-
-        this.inputValue = this.value || this.steps[0].step || 1
       },
       stepClick (step) {
-        this.inputValue = step
+        this.getSteps()
+        this.$nextTick(() => (this.inputValue = step))
       }
     },
 
