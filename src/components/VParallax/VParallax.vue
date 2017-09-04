@@ -26,7 +26,7 @@
         return {
           display: 'block',
           opacity: this.isBooted ? 1 : 0,
-          transform: `translate3d(-50%, ${this.parallax}px, 0)`
+          transform: `translate3d(-50%, ${this.jumbotron ? 0 : this.parallax + 'px'}, 0)`
         }
       }
     },
@@ -61,7 +61,10 @@
       ])
 
       const content = h('div', {
-        staticClass: 'parallax__content'
+        staticClass: 'parallax__content',
+        style: {
+          minHeight: isNaN(this.height) ? this.height : `${this.height}px`
+        }
       }, this.$slots.default)
 
       let directives = this.directives()
