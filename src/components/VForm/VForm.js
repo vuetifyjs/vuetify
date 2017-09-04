@@ -49,22 +49,20 @@ export default {
 
       if (inputs.length < this.inputs.length) {
         // Something was removed, we don't want it in the errorBag any more
-        const newUids = inputs.map(i => i._uid)
-
-        const removed = this.inputs.filter(i => !newUids.includes(i))
+        const removed = this.inputs.filter(i => !inputs.includes(i))
 
         for (const input of removed) {
-          this.$delete(this.errorBag, input)
+          this.$delete(this.errorBag, input._uid)
           this.$delete(this.inputs, this.inputs.indexOf(input))
         }
       }
 
       for (const child of inputs) {
-        if (this.inputs.includes(child._uid)) {
+        if (this.inputs.includes(child)) {
           continue // We already know about this input
         }
 
-        this.inputs.push(child._uid)
+        this.inputs.push(child)
 
         // Only start watching inputs if we need to
         child.$watch('shouldValidate', (val) => {
@@ -80,10 +78,10 @@ export default {
       }
     },
     validate () {
-      return this.getInputs().every(i => i.validate(true))
+      return !this.inputs.filter(input => input.validate(true)).length
     },
     reset () {
-      this.getInputs().forEach((input) => input.reset())
+      this.inputs.forEach((input) => input.reset())
       Object.keys(this.errorBag).forEach(key => this.$delete(this.errorBag, key))
     }
   },
