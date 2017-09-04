@@ -380,7 +380,7 @@
         this.genMenu()
       ], {
         attrs: {
-          tabindex: this.isAutocomplete || this.disabled ? -1 : 0,
+          tabindex: this.isAutocomplete || this.disabled ? -1 : this.tabindex,
           ...(this.isAutocomplete ? null : this.$attrs),
           role: this.isAutocomplete ? null : 'combobox'
         },

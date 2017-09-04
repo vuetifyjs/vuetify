@@ -39,7 +39,7 @@ export default {
         attrs: {
           ...this.$attrs,
           disabled: this.disabled || !this.isAutocomplete,
-          tabindex: this.disabled || !this.isAutocomplete ? -1 : 0
+          tabindex: this.disabled || !this.isAutocomplete ? -1 : this.tabindex
         },
         domProps: {
           value: this.lazySearch
