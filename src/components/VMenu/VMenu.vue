@@ -59,6 +59,7 @@
         window: {},
         absoluteX: 0,
         absoluteY: 0,
+        pageYOffset: 0,
         insideContent: false,
         hasJustFocused: false,
         focusedTimeout: {}
@@ -66,6 +67,7 @@
     },
 
     props: {
+      allowOverflow: Boolean,
       top: Boolean,
       left: Boolean,
       bottom: Boolean,
@@ -139,7 +141,11 @@
         default: false
       },
       maxWidth: [Number, String],
-      minWidth: [Number, String]
+      minWidth: [Number, String],
+      zIndex: {
+        type: [Number, String],
+        default: 6
+      }
     },
 
     computed: {
@@ -160,7 +166,8 @@
           maxWidth: `${parseInt(this.maxWidth)}px`,
           top: `${this.calcYOverflow(this.calcTop())}px`,
           left: `${this.calcXOverflow(this.calcLeft())}px`,
-          transformOrigin: this.origin
+          transformOrigin: this.origin,
+          zIndex: this.zIndex
         }
       },
       hasActivator () {
@@ -192,6 +199,7 @@
     methods: {
       activate () {
         if (typeof window === 'undefined') return
+        this.pageYOffset = this.getOffsetTop()
         this.isBooted = true
         this.insideContent = true
         this.getTiles()
@@ -205,6 +213,12 @@
         clearTimeout(this.resizeTimeout)
         if (!this.isActive) return
         this.resizeTimeout = setTimeout(this.updateDimensions, 200)
+      },
+      getOffsetTop () {
+        if (typeof window === 'undefined') return 0
+
+        return window.pageYOffset ||
+          document.documentElement.scrollTop
       },
       startTransition () {
         requestAnimationFrame(() => (this.isContentActive = true))
@@ -224,7 +238,10 @@
       })
 
       const data = {
-        'class': 'menu',
+        staticClass: 'menu',
+        class: {
+          'menu--disabled': this.disabled,
+        },
         style: {
           display: this.fullWidth ? 'block' : 'inline-block'
         },

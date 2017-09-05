@@ -13,6 +13,10 @@
       Resize
     },
 
+    data: () => ({
+      resizeTimeout: {}
+    }),
+
     props: {
       fixedFooter: Boolean,
       footer: Boolean,
@@ -22,6 +26,19 @@
       },
       toolbar: Boolean
     },
+
+    methods: {
+      resizeDebounce () {
+        clearTimeout(this.resizeTimeout)
+
+        this.resizeTimeout = setTimeout(this.onResize, 200)
+      }
+    },
+
+    mounted () {
+      this.onResize()
+    },
+
     render (h) {
       const data = {
         staticClass: 'application',
@@ -36,7 +53,7 @@
         domProps: { id: this.id },
         directives: [{
           name: 'resize',
-          value: this.onResize
+          value: this.resizeDebounce
         }]
       }
 

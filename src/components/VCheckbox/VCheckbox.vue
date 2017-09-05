@@ -20,7 +20,7 @@
 
     data () {
       return {
-        inputDeterminate: this.indeterminate
+        inputIndeterminate: this.indeterminate
       }
     },
 
@@ -37,7 +37,7 @@
         })
       },
       icon () {
-        if (this.inputDeterminate) {
+        if (this.inputIndeterminate) {
           return 'indeterminate_check_box'
         } else if (this.isActive) {
           return 'check_box'
@@ -80,7 +80,18 @@
         }]
       })
 
-      return this.genInputGroup([transition, ripple])
+      const data = {
+        attrs: {
+          tabindex: this.disabled
+            ? -1
+            : this.internalTabIndex || this.tabindex,
+          role: 'checkbox',
+          'aria-checked': this.inputIndeterminate && 'mixed' || this.isActive && 'true' || 'false',
+          'aria-label': this.label
+        }
+      }
+
+      return this.genInputGroup([transition, ripple], data)
     }
   }
 </script>

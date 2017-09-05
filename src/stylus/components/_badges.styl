@@ -1,6 +1,8 @@
+@import '../bootstrap'
+
 .badge
   position: relative
-  
+
   &:after
     color: $badge-color
     content: attr(data-badge)
@@ -19,26 +21,26 @@
     align-items: center
     flex-direction: row
     flex-wrap: wrap
-  
+
   &--overlap
     &:after
       top: -8px
       right: -8px
-      
+
     &.badge--left
       &:after
         left: -8px
         right: initial
-        
+
     &.badge--bottom
       &:after
         bottom: -8px
         top: initial
-  
+
   &--icon
     &:after
       font-family: 'Material Icons'
-      
+
   &--left
     &:after
       left: -($badge-width)

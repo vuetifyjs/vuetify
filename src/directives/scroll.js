@@ -25,6 +25,7 @@ function unbind (el, binding) {
 }
 
 export default {
+  name: 'scroll',
   inserted,
   unbind
 }

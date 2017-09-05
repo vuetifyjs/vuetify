@@ -1,4 +1,4 @@
-﻿import Colorable from './colorable'
+import Colorable from './colorable'
 import Input from './input'
 
 export default {
@@ -29,6 +29,9 @@ export default {
       }
 
       return this.inputValue === this.trueValue
+    },
+    isDirty () {
+      return this.isActive
     }
   },
 
@@ -72,7 +75,7 @@ export default {
         input = !input
       }
 
-      this.validate(false, input)
+      this.validate(true, input)
 
       this.$emit('change', input)
     }

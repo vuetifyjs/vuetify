@@ -16,7 +16,7 @@
       return {
         app: {},
         isActive: false,
-        inputWidth: 0
+        keyPressed: 0
       }
     },
 
@@ -43,7 +43,7 @@
     computed: {
       classes () {
         return {
-          'input-group input-group--slider': true,
+          'input-group--slider': true,
           'input-group--active': this.isActive,
           'input-group--dirty': this.inputWidth > 0,
           'input-group--disabled': this.disabled,
@@ -56,10 +56,12 @@
         },
         set (val) {
           const { min, max, step, snap } = this
-          val = val < min ? min : val > max ? max : val
-          if (Math.ceil(val) !== Math.ceil(this.lazyValue)) {
+          val = val < min && min || val > max && max || val
+          /*
+          if (Math.ceil(val) % Math.ceil(this.lazyValue) < 2) {
             this.inputWidth = this.calculateWidth(val)
           }
+          */
 
           const value = snap ? Math.round(val / step) * step : parseInt(val)
           this.lazyValue = value
@@ -80,6 +82,7 @@
       },
       thumbStyles () {
         return {
+          transition: this.keyPressed >= 2 ? 'none' : '',
           left: `${this.inputWidth}%`
         }
       },
@@ -90,8 +93,10 @@
       },
       trackStyles () {
         const scaleX = this.calculateScale(1 - (this.inputWidth / 100))
-        const translateX = this.inputWidth < 1 && !this.isActive ? `${8}px` : 0
+        const offsetX = this.thumbLabel ? 0 : !this.isActive ? 8 : 12
+        const translateX = `${offsetX}px`
         return {
+          transition: this.keyPressed >= 2 ? 'none' : '',
           transform: `scaleX(${scaleX}) translateX(${translateX})`
         }
       },
@@ -100,33 +105,15 @@
         const scaleX = this.calculateScale(inputWidth / 100)
         const translateX = inputWidth > 99 && !this.thumbLabel ? `${-8}px` : 0
         return {
+          transition: this.keyPressed >= 2 ? 'none' : '',
           transform: `scaleX(${scaleX}) translateX(${translateX})`
         }
       },
       numTicks () {
         return parseInt((this.max - this.min) / this.step)
-      }
-    },
-
-    watch: {
-      value () {
-        this.inputValue = this.value
-      }
-    },
-
-    mounted () {
-      this.inputValue = this.value
-      this.$nextTick(() => {
-        this.inputWidth = this.calculateWidth(this.inputValue)
-      })
-
-      // Without a v-app, iOS does not work with body selectors
-      this.app = document.querySelector('[data-app]') ||
-        console.warn('The v-slider component requires the present of v-app or a non-body wrapping element with the [data-app] attribute.')
-    },
-
-    methods: {
-      calculateWidth (val) {
+      },
+      inputWidth () {
+        let val = this.inputValue
         if (this.snap) {
           val = Math.round(val / this.step) * this.step
         }
@@ -134,15 +121,35 @@
         val = (val - this.min) / (this.max - this.min) * 100
 
         return val < 0.15 ? 0 : val
-      },
-      calculateScale (scale) {
-        if (scale < 0.02 && !this.thumbLabel) {
-          return 0
-        }
+      }
+    },
 
+    watch: {
+      value (val) {
+        this.inputValue = val
+      },
+      min (val) {
+        val > this.inputValue && this.$emit('input', val)
+      },
+      max (val) {
+        val < this.inputValue && this.$emit('input', val)
+      }
+    },
+
+    mounted () {
+      this.inputValue = this.value
+
+      // Without a v-app, iOS does not work with body selectors
+      this.app = document.querySelector('[data-app]') ||
+        console.warn('The v-slider component requires the present of v-app or a non-body wrapping element with the [data-app] attribute.')
+    },
+
+    methods: {
+      calculateScale (scale) {
         return this.disabled ? scale - 0.015 : scale
       },
       onMouseDown (e) {
+        this.keyPressed = 2
         const options = { passive: true }
         this.isActive = true
 
@@ -155,6 +162,7 @@
         }
       },
       onMouseUp () {
+        this.keyPressed = 0
         const options = { passive: true }
         this.isActive = false
         this.app.removeEventListener('touchmove', this.onMouseMove, options)
@@ -175,13 +183,19 @@
         this.inputValue = parseInt(this.min, 10) + ((left / 100) * (this.max - this.min))
       },
       onKeyDown (e) {
-        if (!e.keyCode === 37 && !e.keyCode === 39) return
+        if (e.keyCode === 37 || e.keyCode === 39) {
 
-        const direction = e.keyCode === 37 && -1 || e.keyCode === 39 && 1 || 0
-        const multiplier = e.shiftKey && 3 || e.ctrlKey && 2 || 1
-        const amount = this.snap && this.step || 1
+          this.keyPressed += 1
 
-        this.inputValue = this.inputValue + (direction * amount * multiplier)
+          const direction = e.keyCode === 37 && -1 || e.keyCode === 39 && 1 || 0
+          const multiplier = e.shiftKey && 3 || e.ctrlKey && 2 || 1
+          const amount = this.snap && this.step || 1
+
+          this.inputValue = this.inputValue + (direction * amount * multiplier)
+        }
+      },
+      onKeyUp (e) {
+        this.keyPressed = 0
       },
       sliderMove (e) {
         if (!this.isActive) {
@@ -275,7 +289,8 @@
         },
         on: Object.assign({}, {
           mouseup: this.sliderMove,
-          keydown: this.onKeyDown
+          keydown: this.onKeyDown,
+          keyup: this.onKeyUp
         }, this.$listeners),
         directives: [{
           name: 'click-outside'

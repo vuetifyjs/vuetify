@@ -18,4 +18,53 @@ test('VRadio.vue', ({ mount }) => {
   //   })
   //   // no expectation other than a lack of tip
   // })
+
+  it('should render role and aria-checked attributes on input group', () => {
+    const wrapper = mount(VRadio, {
+      data: {
+        isActive: false
+      }
+    })
+
+    let inputGroup = wrapper.find('.input-group')[0]
+    expect(inputGroup.hasAttribute('role', 'radio')).toBe(true)
+    expect(inputGroup.hasAttribute('aria-checked', 'false')).toBe(true)
+
+    wrapper.setData({ 'isActive': true })
+    inputGroup = wrapper.find('.input-group')[0]
+    expect(inputGroup.hasAttribute('aria-checked', 'true')).toBe(true)
+
+    expect('immediate parent of v-radio-group').toHaveBeenTipped()
+    expect('Injection').toHaveBeenWarned() // TODO: testing library needs injection mock support
+  })
+
+  it('should render aria-label attribute with label value on input group', () => {
+    const wrapper = mount(VRadio, {
+      propsData: {
+        label: 'Test'
+      },
+      attrs: {}
+    })
+
+    const inputGroup = wrapper.find('.input-group')[0]
+    expect(inputGroup.hasAttribute('aria-label', 'Test')).toBe(true)
+    expect(`$attrs is readonly`).toHaveBeenWarned()
+
+    expect('immediate parent of v-radio-group').toHaveBeenTipped()
+    expect('Injection').toHaveBeenWarned() // TODO: testing library needs injection mock support
+  })
+
+  it('should not render aria-label attribute with no label value on input group', () => {
+    const wrapper = mount(VRadio, {
+      propsData: {
+        label: null
+      }
+    })
+
+    const inputGroup = wrapper.find('.input-group')[0]
+    expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
+
+    expect('immediate parent of v-radio-group').toHaveBeenTipped()
+    expect('Injection').toHaveBeenWarned() // TODO: testing library needs injection mock support
+  })
 })

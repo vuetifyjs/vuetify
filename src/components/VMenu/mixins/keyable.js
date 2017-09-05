@@ -47,7 +47,8 @@ export default {
       this.tiles = this.$refs.content.querySelectorAll('.list__tile')
     },
     setActiveListIndex () {
-      this.tiles.forEach((t, i) => {
+      const tiles = Array.from(this.tiles || [])
+      tiles.forEach((t, i) => {
         if (t.classList.contains('list__tile--active')) {
           this.listIndex = i
           return

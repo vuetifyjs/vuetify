@@ -26,7 +26,7 @@
 
     props: {
       disabled: Boolean,
-      value: [String, Number],
+      value: null,
       label: String
     },
 
@@ -56,6 +56,7 @@
 
     methods: {
       genInput (radio) {
+        const value = JSON.stringify(this.value)
         const input = this.$createElement('input', {
           ref: 'input',
           style: {
@@ -65,9 +66,9 @@
             name: 'test', // from parent?
             id: this.id,
             type: 'radio',
-            value: this.value
+            value
           }, this.$attrs)
-        }, [this.value])
+        }, [value])
 
         radio.push(input)
 
@@ -83,6 +84,11 @@
 
         return this.$createElement('div', {
           class: this.classes,
+          attrs: {
+            role: 'radio',
+            'aria-checked': this.isActive && 'true' || 'false',
+            'aria-label': this.label
+          },
           on: {
             keydown: e => {
               if ([13, 32].includes(e.keyCode)) {

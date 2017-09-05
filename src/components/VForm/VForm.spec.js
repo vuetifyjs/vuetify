@@ -2,6 +2,7 @@ import Vue from 'vue'
 import { mount } from 'avoriaz'
 import { test } from '~util/testing'
 import VTextField from '~components/VTextField'
+import VBtn from '~components/VBtn'
 import VForm from './VForm'
 
 const inputOne = Vue.component('input-one', {
@@ -20,5 +21,33 @@ test('VForm.js', () => {
         default: [inputOne]
       }
     })
+  })
+
+  it('should pass on listeners to form element', async () => {
+    const submit = jest.fn()
+    const component = Vue.component('test', {
+      render (h) {
+        return h(VForm, {
+          on: {
+            submit
+          }
+        }, [
+          h(VBtn, {
+            props: {
+              type: 'submit'
+            },
+            slot: 'default'
+          }, ['Submit'])
+        ])
+      }
+    })
+
+    const wrapper = mount(component)
+
+    const btn = wrapper.find('button')[0]
+
+    btn.trigger('click')
+
+    expect(submit).toBeCalled()
   })
 })

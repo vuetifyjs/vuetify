@@ -19,6 +19,7 @@
       autofocus: Boolean,
       autoGrow: Boolean,
       box: Boolean,
+      clearable: Boolean,
       counter: [Number, String],
       fullWidth: Boolean,
       multiLine: Boolean,
@@ -42,7 +43,7 @@
         return {
           'input-group--text-field': true,
           'input-group--text-field-box': this.box,
-          'input-group--single-line': this.singleLine,
+          'input-group--single-line': this.singleLine || this.solo,
           'input-group--solo': this.solo,
           'input-group--multi-line': this.multiLine,
           'input-group--full-width': this.fullWidth,
@@ -79,6 +80,9 @@
           this.placeholder ||
           this.badInput ||
           ['time', 'date', 'datetime-local', 'week', 'month'].includes(this.type)
+      },
+      shouldAutoGrow () {
+        return (this.multiLine || this.textarea) && this.autoGrow
       }
     },
 
@@ -89,13 +93,13 @@
       value () {
         this.lazyValue = this.value
         !this.validateOnBlur && this.validate()
-        this.multiLine && this.autoGrow && this.calculateInputHeight()
+        this.shouldAutoGrow && this.calculateInputHeight()
       }
     },
 
     mounted () {
       this.$vuetify.load(() => {
-        this.multiLine && this.autoGrow && this.calculateInputHeight()
+        this.shouldAutoGrow && this.calculateInputHeight()
         this.autofocus && this.focus()
       })
     },
@@ -110,13 +114,13 @@
             : 0
           const minHeight = this.rows * 24
           const inputHeight = height < minHeight ? minHeight : height
-          this.inputHeight = inputHeight
+          this.inputHeight = inputHeight + (this.textarea ? 4 : 0)
         })
       },
       onInput (e) {
         this.inputValue = e.target.value
         this.badInput = e.target.validity && e.target.validity.badInput
-        this.multiLine && this.autoGrow && this.calculateInputHeight()
+        this.shouldAutoGrow && this.calculateInputHeight()
       },
       blur (e) {
         this.$nextTick(() => {
@@ -142,9 +146,7 @@
         const tag = this.multiLine || this.textarea ? 'textarea' : 'input'
 
         const data = {
-          style: {
-            'height': this.inputHeight && `${this.inputHeight}px`
-          },
+          style: {},
           domProps: {
             autofocus: this.autofocus,
             disabled: this.disabled,
@@ -163,6 +165,10 @@
             focus: this.focus
           },
           ref: 'input'
+        }
+
+        if (this.shouldAutoGrow) {
+          data.style.height = this.inputHeight && `${this.inputHeight}px`
         }
 
         if (this.placeholder) data.domProps.placeholder = this.placeholder

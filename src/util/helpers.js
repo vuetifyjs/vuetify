@@ -14,6 +14,8 @@ export function createSimpleFunctional (c, el = 'div') {
 
 export function createSimpleTransition (name, origin = 'top center 0', mode) {
   return {
+    name,
+
     functional: true,
 
     props: {
@@ -31,8 +33,8 @@ export function createSimpleTransition (name, origin = 'top center 0', mode) {
       if (mode) context.data.props.mode = mode
 
       context.data.on.beforeEnter = el => {
-        el.style.transformOrigin = origin
-        el.style.webkitTransformOrigin = origin
+        el.style.transformOrigin = context.props.origin
+        el.style.webkitTransformOrigin = context.props.origin
       }
 
       return h('transition', context.data, context.children)
@@ -42,6 +44,8 @@ export function createSimpleTransition (name, origin = 'top center 0', mode) {
 
 export function createJavaScriptTransition (name, functions, css = true, mode = 'in-out') {
   return {
+    name,
+
     functional: true,
 
     props: {

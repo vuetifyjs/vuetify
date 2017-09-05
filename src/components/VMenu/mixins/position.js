@@ -109,7 +109,17 @@ export default {
       return left
     },
     calcYOverflow (top) {
-      if (this.top && top < 0) top = 12
+      const documentHeight = typeof window !== 'undefined'
+        ? window.innerHeight || document.documentElement.clientHeight
+        : 0
+      const toTop = this.pageYOffset + documentHeight
+      const contentHeight = this.dimensions.content.height
+      const totalHeight = top + contentHeight
+
+      // If overflowing bottom
+      if (toTop < totalHeight && !this.allowOverflow) top = toTop - contentHeight - 12
+      // If overflowing top
+      else if (top < this.pageYOffset && !this.allowOverflow) top = this.pageYOffset + 12
 
       return top < 12 ? 12 : top
     },

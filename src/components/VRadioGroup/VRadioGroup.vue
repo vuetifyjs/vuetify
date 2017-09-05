@@ -22,7 +22,7 @@
         type: Boolean,
         default: true
       },
-      inputValue: [String, Number],
+      inputValue: null,
       mandatory: {
         type: Boolean,
         default: true
@@ -99,7 +99,12 @@
     },
 
     render (h) {
-      return this.genInputGroup(this.$slots.default, { on: {} })
+      const data = {
+        attrs: {
+          role: 'radiogroup'
+        }
+      }
+      return this.genInputGroup(this.$slots.default, data)
     }
   }
 </script>

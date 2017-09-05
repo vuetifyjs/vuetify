@@ -26,17 +26,28 @@ export default {
     classes () {
       return {
         'list__tile': true,
+        'list__tile--link': this.isLink,
         'list__tile--avatar': this.avatar,
         'list__tile--disabled': this.disabled,
         [this.activeClass]: this.isActive
       }
+    },
+    isLink () {
+      return this.href || this.to ||
+        (this.$listeners && (this.$listeners.click || this.$listeners['!click']))
     }
   },
 
   render (h) {
     const { tag, data } = this.generateRouteLink()
+    let newTag = tag
 
     data.attrs = Object.assign({}, data.attrs, this.$attrs)
+
+    if (!this.href &&
+      !this.to &&
+      !this.tag
+    ) newTag = 'div'
 
     return h('li', {
       attrs: {
@@ -45,6 +56,6 @@ export default {
       on: {
         ...this.$listeners
       }
-    }, [h(tag, data, this.$slots.default)])
+    }, [h(newTag, data, this.$slots.default)])
   }
 }

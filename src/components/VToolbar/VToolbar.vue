@@ -7,7 +7,11 @@
     mixins: [Themeable],
 
     data: () => ({
-      isExtended: false
+      isExtended: false,
+      isScrolling: false,
+      marginTop: 0,
+      previousScroll: null,
+      target: null
     }),
 
     props: {
@@ -18,7 +22,13 @@
       fixed: Boolean,
       flat: Boolean,
       floating: Boolean,
-      prominent: Boolean
+      prominent: Boolean,
+      scrollOffScreen: Boolean,
+      scrollTarget: String,
+      scrollThreshHold: {
+        type: Number,
+        default: 100
+      }
     },
 
     computed: {
@@ -36,6 +46,44 @@
           'theme--dark': this.dark,
           'theme--light': this.light
         }
+      },
+      styles () {
+        return {
+          marginTop: this.marginTop
+        }
+      }
+    },
+
+    watch: {
+      isScrolling (val) {
+        if (!val) this.marginTop = 0
+        else (this.marginTop = `${-this.$refs.content.clientHeight - 6}px`)
+      }
+    },
+
+    methods: {
+      onScroll () {
+        if (typeof window === 'undefined') return
+
+        if (!this.target) {
+          this.target = this.scrollTarget
+            ? document.querySelector(this.scrollTarget)
+            : window
+        }
+
+        const currentScroll = this.scrollTarget
+          ? this.target.scrollTop
+          : this.target.pageYOffset || document.documentElement.scrollTop
+
+        if (currentScroll < this.scrollThreshHold) return
+
+        if (this.previousScroll === null) {
+          this.previousScroll = currentScroll
+        }
+
+        this.isScrolling = this.previousScroll < currentScroll
+
+        this.previousScroll = currentScroll
       }
     },
 
@@ -44,11 +92,23 @@
       const children = []
       const data = {
         'class': this.classes,
+        style: this.styles,
         on: this.$listeners
       }
 
+      if (this.scrollOffScreen) {
+        data.directives = [{
+          name: 'scroll',
+          value: {
+            callback: this.onScroll,
+            target: this.scrollTarget
+          }
+        }]
+      }
+
       children.push(h('div', {
-        'class': 'toolbar__content'
+        'class': 'toolbar__content',
+        ref: 'content'
       }, this.$slots.default))
 
       if (this.isExtended) {
