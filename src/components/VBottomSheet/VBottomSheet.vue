@@ -8,12 +8,20 @@
       VDialog
     },
 
-    props: ['value'],
+    props: {
+      inset: Boolean,
+      value: null
+    },
 
     render (h) {
       const activator = h('template', {
         slot: 'activator'
       }, this.$slots.activator)
+
+      const contentClass = [
+        'bottom-sheet',
+        this.inset ? 'bottom-sheet--inset' : ''
+      ].join(' ')
 
       return h(VDialog, {
         attrs: {
@@ -23,7 +31,7 @@
           ...this.$listeners
         },
         props: {
-          contentClass: 'bottom-sheet',
+          contentClass: contentClass,
           transition: 'bottom-sheet-transition',
           value: this.value
         }

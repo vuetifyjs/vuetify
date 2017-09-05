@@ -65,7 +65,11 @@ test('VTextField.js', ({ mount }) => {
   })
 
   it('should start out as invalid', () => {
-    const wrapper = mount(VTextField, {})
+    const wrapper = mount(VTextField, {
+      propsData: {
+        rules: [(v) => !!v || 'Required']
+      }
+    })
 
     expect(wrapper.data().valid).toEqual(false)
   })
@@ -103,5 +107,26 @@ test('VTextField.js', ({ mount }) => {
     wrapper.setProps({ value: 'asd' })
     await wrapper.vm.$nextTick()
     expect(wrapper.data().shouldValidate).toEqual(false)
+  })
+
+  it('should clear input value', async () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        clearable: true,
+        value: 'foo'
+      }
+    })
+
+    const clear = wrapper.find('.input-group__append-icon')[0]
+    const input = jest.fn()
+    wrapper.vm.$on('input', input)
+
+    expect(wrapper.vm.inputValue).toBe('foo')
+
+    clear.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(input).toHaveBeenCalledWith(null)
   })
 })

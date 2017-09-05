@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Vslider.vue shoud work 1`] = `
+
+<div role="slider"
+     tabindex="0"
+     class="input-group input-group--slider"
+>
+  <div class="input-group__input">
+    <div class="slider">
+      <div class="slider__track__container">
+        <div class="slider__track">
+        </div>
+        <div class="slider__track-fill">
+        </div>
+      </div>
+      <div class="slider__thumb-container">
+        <div class="slider__thumb">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="input-group__details">
+    <div class="input-group__messages">
+    </div>
+  </div>
+</div>
+
+`;

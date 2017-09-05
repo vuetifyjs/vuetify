@@ -3,11 +3,12 @@ import { getObjectValueByPath } from '../../../util/helpers'
 export default {
   methods: {
     genMenu () {
-      const offsetY = this.autocomplete || this.offset || this.isDropdown
+      const offsetY = this.isAutocomplete || this.offset || this.isDropdown
       const data = {
         ref: 'menu',
         props: {
           activator: this.$refs.activator,
+          allowOverflow: this.isAutocomplete,
           auto: this.auto,
           closeOnClick: false,
           closeOnContentClick: !this.multiple,
@@ -16,9 +17,11 @@ export default {
           maxHeight: this.maxHeight,
           nudgeTop: this.isDropdown ? -12 : offsetY ? -2 : 0,
           nudgeRight: this.isDropdown ? 16 : 0,
-          nudgeWidth: this.isDropdown ? 56 : 24,
+          nudgeWidth: this.isDropdown ? 56 : 36,
           offsetY,
-          value: this.isActive
+          openOnClick: false,
+          value: this.isActive && this.computedItems.length,
+          zIndex: this.menuZIndex
         },
         on: { input: val => (this.isActive = val) }
       }
@@ -28,37 +31,51 @@ export default {
       return this.$createElement('v-menu', data, [this.genList()])
     },
     genSelectionsAndSearch () {
-      let input
+      const data = {
+        'class': 'input-group--select__autocomplete',
+        style: {
+          flex: this.shouldBreak ? '1 0 100%' : null
+        },
+        attrs: {
+          ...this.$attrs,
+          disabled: this.disabled || !this.isAutocomplete,
+          tabindex: this.disabled || !this.isAutocomplete ? -1 : this.tabindex
+        },
+        domProps: {
+          value: this.lazySearch
+        },
+        on: {
+          focus: this.focus,
+          blur: () => {
+            if (this.isActive) return
 
-      if (this.autocomplete || this.editable) {
-        input = this.$createElement('input', {
-          'class': 'input-group--select__autocomplete',
-          attrs: {
-            ...this.$attrs,
-            tabindex: 0
+            this.blur()
           },
-          domProps: { value: this.lazySearch },
-          on: {
-            blur: this.blur,
-            focus: this.focus,
-            input: e => (this.lazySearch = e.target.value)
-          },
-          ref: 'input',
-          key: 'input'
-        })
+          input: e => (this.searchValue = e.target.value)
+        },
+        directives: [{
+          name: 'show',
+          value: this.isAutocomplete || (this.placeholder && !this.selectedItems.length)
+        }],
+        ref: 'input',
+        key: 'input'
       }
 
-      const selections = this.genSelections()
-
-      input && selections.push(input)
+      if (this.isAutocomplete) data.attrs.role = 'combobox'
+      if (this.placeholder) data.domProps.placeholder = this.placeholder
 
       return this.$createElement('div', {
         'class': 'input-group__selections',
         style: { 'overflow': 'hidden' },
         ref: 'activator'
-      }, [selections])
+      }, [
+        this.genSelections(),
+        this.$createElement('input', data)
+      ])
     },
     genSelections () {
+      if (this.isAutocomplete && !this.multiple) return []
+
       const children = []
       const chips = this.chips
       const slots = this.$scopedSlots.selection
@@ -131,7 +148,13 @@ export default {
       }
 
       const data = {
-        on: { click: e => this.selectItem(item) },
+        on: {
+          click: e => {
+            if (disabled) return
+
+            this.selectItem(item)
+          }
+        },
         props: {
           avatar: item === Object(item) && 'avatar' in item,
           ripple: true,
@@ -150,7 +173,7 @@ export default {
       }
 
       return this.$createElement('v-list-tile', data,
-        [this.genAction(item, active), this.genContent(item)]
+        [this.genAction(item, active && !disabled), this.genContent(item)]
       )
     },
     genAction (item, active) {

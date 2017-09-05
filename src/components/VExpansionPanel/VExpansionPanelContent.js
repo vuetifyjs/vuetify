@@ -21,7 +21,7 @@ export default {
     ClickOutside
   },
 
-  inject: ['panelClick'],
+  inject: ['focusable', 'panelClick'],
 
   data () {
     return {
@@ -93,7 +93,11 @@ export default {
       },
       on: {
         keydown: e => {
-          if (e.keyCode === 13) this.panelClick(this._uid)
+          // Ensure element is focusable and the activeElement
+          if (this.focusable &&
+            this.$el === document.activeElement &&
+            e.keyCode === 13
+          ) this.panelClick(this._uid)
         }
       }
     }, children)

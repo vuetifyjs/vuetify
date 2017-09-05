@@ -18,6 +18,7 @@ export default {
       clearTimeout(this.focusedTimeout)
 
       if (this.disabled || this.hasJustFocused) return
+      this.hasJustFocused = true
       this.isActive = true
     },
     mouseLeaveHandler (e) {

@@ -1,4 +1,8 @@
+import Themeable from './themeable'
+
 export default {
+  mixins: [Themeable],
+
   data () {
     return {
       isSaving: false

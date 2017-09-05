@@ -3,7 +3,7 @@ import VBtnToggle from './VBtnToggle'
 import VBtn from '../VBtn'
 import VIcon from '../VIcon'
 import { test } from '~util/testing'
-import Vue from 'vue'
+import Vue from 'vue/dist/vue.common'
 
 function createBtn (val = null) {
   const options = {
@@ -167,5 +167,23 @@ test('VBtnToggle.vue', () => {
 
     expect(change).toBeCalledWith([1])
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should have btn with data-only-child if only one selected', () => {
+    const wrapper = mount(VBtnToggle, {
+      propsData: {
+        inputValue: 0
+      },
+      slots: {
+        default: [
+          createBtn(),
+          createBtn()
+        ]
+      }
+    })
+
+    const btn = wrapper.find('.btn')[0]
+
+    expect(btn.hasAttribute('data-only-child', 'true')).toBe(true)
   })
 })

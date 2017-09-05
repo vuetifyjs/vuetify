@@ -6,7 +6,10 @@ import toHaveBeenWarnedInit from '~util/to-have-been-warned'
 export function test(name, cb) {
   toHaveBeenWarnedInit()
 
-  Vue.prototype.$vuetify = { load: (fn) => fn() }
+  Vue.prototype.$vuetify = {
+    load: (fn) => fn(),
+    breakpoint: {}
+  }
 
 /*
   const app = document.createElement('div')

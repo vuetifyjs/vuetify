@@ -14,8 +14,12 @@ input-group($material)
     color: $material.text.secondary
 
   &.input-group--textarea:not(.input-group--full-width)
-    textarea
+    .input-group__input
       border: 2px solid $material.text.secondary
+      
+  .input-group__append-icon
+    padding: 0 6px
+    transition: .3s $transition.ease-in-out
 
   // This is specific for selects
   &.input-group--dirty
@@ -25,6 +29,10 @@ input-group($material)
   &:not(.input-group--error)
     label
       color: $material.text.secondary
+
+    &.input-group--disabled
+      label
+        color: $material.text.disabled
 
     .input-group__details:before
       background-color: $material.input-bottom-line
@@ -40,7 +48,7 @@ input-group($material)
           background-color: $material.text.primary
 
         &.input-group--textarea:not(.input-group--full-width)
-          textarea
+          .input-group__input
             border-color: $material.text.primary
 
   .input-group__counter
@@ -54,10 +62,6 @@ input-group($material)
           background-color: $material.dividers
 
   &.input-group--disabled
-    input,
-    // textarea
-      color: $material.text.secondary
-
     .input-group__details:before
       background-color: transparent
       background-image: linear-gradient(
@@ -71,11 +75,15 @@ input-group($material)
     &__prefix, &__suffix
       color: $material.text.secondary
 
+    &.input-group--disabled
+      &__prefix, &__suffix
+        color: $material.text.disabled
+
 theme(input-group, "input-group")
 
 .input-group
   display: flex
-  flex: 1
+  flex: 1 1 auto
   flex-wrap: wrap
   min-width: 24px
   padding: $input-group-padding
@@ -123,8 +131,53 @@ theme(input-group, "input-group")
     .input-group__prepend-icon
       color: $theme.primary
 
+  &.input-group--append-icon, &.input-group--selection-controls
+    label
+      max-width: 75%
+
+  &.input-group--prepend-icon
+    label
+      max-width: 75%
+
+  &.input-group--append-icon.input-group--prepend-icon
+    label
+      max-width: 65%
+
 /** States */
 .input-group
+  // Single Line
+  &.input-group--single-line,
+  &.input-group--solo
+    label
+      transform: translate3d(0,0,0)
+
+    &.input-group--dirty
+      label
+        display: none
+
+  // Solo
+  &.input-group--solo
+    background: #fff
+    min-height: 46px
+    border-radius: $card-border-radius
+    padding: 0
+    elevation(2)
+
+    label
+      top: 7px
+      padding-left: 16px
+      transform: none !important
+
+    &:hover
+      elevation(4)
+
+    .input-group__input
+      align-items: center
+      padding: 8px 16px
+
+    .input-group__details
+      display: none
+
   &--disabled
     .input-group__details:before
       background-color: transparent
@@ -140,7 +193,7 @@ theme(input-group, "input-group")
         label
           color: $theme.primary
 
-        textarea
+        .input-group__input
           border-color: $theme.primary
 
     &.input-group--focused,
@@ -165,8 +218,8 @@ theme(input-group, "input-group")
     textarea
       caret-color: $theme.error
 
-    textarea
-      border-color: $theme.error
+    .input-group__input
+      border-color: $theme.error !important
 
     label
       animation: shake .6s $transition.swing
@@ -191,7 +244,7 @@ theme(input-group, "input-group")
     padding-top: 4px
     flex: 1 0 100%
     font-size: 12px
-    min-height: 22px
+    min-height: 26px
     overflow: hidden
     position: relative
     width: 100%
