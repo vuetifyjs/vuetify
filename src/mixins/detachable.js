@@ -37,7 +37,7 @@ export default {
       const app = this.detachableRoot(this.$el)
 
       if (!app) {
-        if (numTried >= 10) {
+        if (numTried >= 10 || process.env.NODE_ENV === 'test') {
           return console.warn('Application is missing <v-app> component.')
         } else {
           window.setTimeout(() => this.tryToContentToRoot(numTried + 1), 100)
