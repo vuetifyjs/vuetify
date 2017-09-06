@@ -207,7 +207,7 @@ export default {
       )
       detailsChildren.push(this.genMessages())
 
-      if (typeof this.counter !== 'undefined') {
+      if (parseInt(this.counter) > 0) {
         detailsChildren.push(this.genCounter())
       }
 
