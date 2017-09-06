@@ -11,7 +11,8 @@ export default {
   },
 
   props: {
-    value: Boolean
+    value: Boolean,
+    lazyValidation: Boolean
   },
 
   watch: {
@@ -44,18 +45,8 @@ export default {
 
       return search(this.$children)
     },
-    watchInputs () {
-      const inputs = this.getInputs()
-
-      if (inputs.length < this.inputs.length) {
-        // Something was removed, we don't want it in the errorBag any more
-        const removed = this.inputs.filter(i => !inputs.includes(i))
-
-        for (const input of removed) {
-          this.$delete(this.errorBag, input._uid)
-          this.$delete(this.inputs, this.inputs.indexOf(input))
-        }
-      }
+    watchInputs (inputs) {
+      inputs === undefined && (inputs = this.getInputs())
 
       for (const child of inputs) {
         if (this.inputs.includes(child)) {
@@ -64,18 +55,27 @@ export default {
 
         this.inputs.push(child)
 
-        // Only start watching inputs if we need to
-        child.$watch('shouldValidate', (val) => {
-          if (!val) return
-
-          // Only watch if we're not already doing it
-          if (this.errorBag.hasOwnProperty(child._uid)) return
-
-          child.$watch('valid', (val) => {
-            this.$set(this.errorBag, child._uid, !val)
-          }, { immediate: true })
-        })
+        this.watchChild(child)
       }
+    },
+    watchChild (child) {
+      const watcher = (child) => {
+        child.$watch('valid', (val) => {
+          this.$set(this.errorBag, child._uid, !val)
+        }, { immediate: true })
+      }
+
+      if (!this.lazyValidation) return watcher(child)
+
+      // Only start watching inputs if we need to
+      child.$watch('shouldValidate', (val) => {
+        if (!val) return
+
+        // Only watch if we're not already doing it
+        if (this.errorBag.hasOwnProperty(child._uid)) return
+
+        watcher(child)
+      })
     },
     validate () {
       return !this.inputs.filter(input => input.validate(true)).length
@@ -87,11 +87,23 @@ export default {
   },
 
   mounted () {
-    this.$vuetify.load(this.watchInputs)
+    this.$vuetify.load(() => this.watchInputs())
   },
 
   updated () {
-    this.watchInputs()
+    const inputs = this.getInputs()
+
+    if (inputs.length < this.inputs.length) {
+      // Something was removed, we don't want it in the errorBag any more
+      const removed = this.inputs.filter(i => !inputs.includes(i))
+
+      for (const input of removed) {
+        this.$delete(this.errorBag, input._uid)
+        this.$delete(this.inputs, this.inputs.indexOf(input))
+      }
+    }
+
+    this.watchInputs(inputs)
   },
 
   render (h) {
