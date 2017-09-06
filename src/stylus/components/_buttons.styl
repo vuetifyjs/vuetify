@@ -67,9 +67,9 @@ theme(button, "btn")
 
 /** Content */
 .btn
-  &--active,
-  &:hover,
-  &:focus
+  &&&&--active, // Increase specificity, see #1597
+  &&&:hover,
+  &&&:focus
     .btn__content:before
       background-color: currentColor
 
