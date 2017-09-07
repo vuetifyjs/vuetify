@@ -1,5 +1,6 @@
 import { VExpandTransition } from '../transitions'
 
+import Bootable from '../../mixins/bootable'
 import Toggleable from '../../mixins/toggleable'
 
 import VIcon from '../VIcon'
@@ -10,7 +11,7 @@ import ClickOutside from '../../directives/click-outside'
 export default {
   name: 'v-expansion-panel-content',
 
-  mixins: [Toggleable],
+  mixins: [Bootable, Toggleable],
 
   components: {
     VIcon
@@ -31,6 +32,7 @@ export default {
 
   props: {
     hideActions: Boolean,
+    lazy: Boolean,
     ripple: Boolean
   },
 
@@ -45,7 +47,7 @@ export default {
             value: this.isActive
           }
         ]
-      }, this.$slots.default)
+      }, this.showLazyContent(this.$slots.default))
     },
     genHeader () {
       return this.$createElement('div', {
