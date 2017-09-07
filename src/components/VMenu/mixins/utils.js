@@ -1,18 +1,22 @@
 export default {
   methods: {
-    measure (el, selector, getParent = false) {
+    measure (el, selector, relativeToRoot = true) {
       el = selector ? el.querySelector(selector) : el
-
       if (!el) return null
 
-      const {
-        top,
-        bottom,
-        left,
-        right,
-        height,
-        width
-      } = el.getBoundingClientRect()
+      const boundingRect = el.getBoundingClientRect()
+
+      let { top, left } = boundingRect
+      const { bottom, right, height, width } = boundingRect
+
+      if (relativeToRoot) {
+        const root = this.detachableRoot(el)
+        if (root) {
+          const rootBoundingRect = root.getBoundingClientRect()
+          top -= rootBoundingRect.top
+          left -= rootBoundingRect.left
+        }
+      }
 
       return {
         offsetTop: el.offsetTop,

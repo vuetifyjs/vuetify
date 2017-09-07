@@ -3,6 +3,7 @@
 exports[`VApp.js should allow a custom id 1`] = `
 
 <div data-app="true"
+     data-popup-context="true"
      class="application application--light"
      id="inspire"
 >
@@ -13,6 +14,7 @@ exports[`VApp.js should allow a custom id 1`] = `
 exports[`VApp.js should have a toolbar and footer class 1`] = `
 
 <div data-app="true"
+     data-popup-context="true"
      class="application application--light application--footer application--footer-fixed application--toolbar"
      id="app"
 >
@@ -23,6 +25,7 @@ exports[`VApp.js should have a toolbar and footer class 1`] = `
 exports[`VApp.js should have an application class 1`] = `
 
 <div data-app="true"
+     data-popup-context="true"
      class="application application--light"
      id="app"
 >
@@ -33,6 +36,7 @@ exports[`VApp.js should have an application class 1`] = `
 exports[`VApp.js should have data-app attribute 1`] = `
 
 <div data-app="true"
+     data-popup-context="true"
      class="application application--light"
      id="app"
 >

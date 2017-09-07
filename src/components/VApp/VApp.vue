@@ -49,7 +49,7 @@
           'application--footer-fixed': this.fixedFooter,
           'application--toolbar': this.toolbar
         },
-        attrs: { 'data-app': true },
+        attrs: { 'data-app': true, 'data-popup-context': true },
         domProps: { id: this.id },
         directives: [{
           name: 'resize',

@@ -85,7 +85,7 @@ export default {
       if (this.nudgeTop) top -= this.nudgeTop
       if (this.nudgeBottom) top += this.nudgeBottom
 
-      return top + this.pageYOffset
+      return this.calcYOverflow(top)
     },
     calcXOverflow (left) {
       const hasWindow = typeof window !== 'undefined'
