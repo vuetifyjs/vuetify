@@ -1,10 +1,12 @@
 @import '../bootstrap'
 
 .container
+  display: flex
   margin-right: auto
   margin-left: auto
-  flex-basis: 100%
+  flex: 1 1 100%
   padding: $grid-gutters.lg
+  width: 100%
 
   for size, width in $container-max-widths
     @media only screen and (min-width: width)
@@ -42,6 +44,7 @@
   display: flex
   flex: 1 1 auto
   flex-wrap: nowrap
+  width: 100%
 
   &.row
     flex-direction: row
