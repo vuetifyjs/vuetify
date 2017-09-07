@@ -45,16 +45,13 @@ export default {
 
       return search(this.$children)
     },
-    watchInputs (inputs) {
-      inputs === undefined && (inputs = this.getInputs())
-
+    watchInputs (inputs = this.getInputs()) {
       for (const child of inputs) {
         if (this.inputs.includes(child)) {
           continue // We already know about this input
         }
 
         this.inputs.push(child)
-
         this.watchChild(child)
       }
     },
@@ -78,11 +75,14 @@ export default {
       })
     },
     validate () {
-      return !this.inputs.filter(input => input.validate(true)).length
+      const errors = this.inputs.filter(input => !input.validate(true)).length
+      return !errors
     },
     reset () {
       this.inputs.forEach((input) => input.reset())
-      Object.keys(this.errorBag).forEach(key => this.$delete(this.errorBag, key))
+      if (this.lazyValidation) {
+        Object.keys(this.errorBag).forEach(key => this.$delete(this.errorBag, key))
+      }
     }
   },
 
