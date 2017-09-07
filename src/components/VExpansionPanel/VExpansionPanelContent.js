@@ -11,7 +11,7 @@ import ClickOutside from '../../directives/click-outside'
 export default {
   name: 'v-expansion-panel-content',
 
-  mixins: [Toggleable, Bootable],
+  mixins: [Bootable, Toggleable],
 
   components: {
     VIcon
@@ -32,8 +32,8 @@ export default {
 
   props: {
     hideActions: Boolean,
-    ripple: Boolean,
-    lazy: Boolean
+    lazy: Boolean,
+    ripple: Boolean
   },
 
   methods: {
