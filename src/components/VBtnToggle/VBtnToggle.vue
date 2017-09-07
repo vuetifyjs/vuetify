@@ -3,6 +3,7 @@
   import VIcon from '../VIcon'
 
   import ButtonGroup from '../../mixins/button-group'
+  import Themeable from '../../mixins/themeable'
 
   export default {
     name: 'v-btn-toggle',
@@ -12,7 +13,7 @@
       event: 'change'
     },
 
-    mixins: [ButtonGroup],
+    mixins: [ButtonGroup, Themeable],
 
     props: {
       inputValue: {
@@ -30,7 +31,9 @@
       classes () {
         return {
           'btn-toggle': true,
-          'btn-toggle--selected': this.hasValue
+          'btn-toggle--selected': this.hasValue,
+          'theme--light': this.light,
+          'theme--dark': this.dark
         }
       },
       hasValue () {

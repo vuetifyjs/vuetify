@@ -7,11 +7,10 @@ btn-toggle($material)
   background: $material.cards
 
   .btn
-    .btn__content:before
-      background-color: $material.buttons.focused-alt
+    color: $material.text.primary
 
-      &:not(:last-child):not([data-only-child])
-        border-right-color: $material.buttons.disabled
+    &[data-selected]:not(:last-child):not([data-only-child])
+      border-right-color: $material.buttons.disabled
 
 theme(btn-toggle, "btn-toggle")
 
