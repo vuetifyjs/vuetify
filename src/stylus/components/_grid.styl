@@ -1,10 +1,8 @@
 @import '../bootstrap'
 
 .container
-  display: flex
-  margin-right: auto
-  margin-left: auto
   flex: 1 1 100%
+  margin: auto
   padding: $grid-gutters.lg
   width: 100%
 
@@ -17,15 +15,6 @@
 
   &.fluid
     max-width: 100%
-    width: 100%
-
-  &.fill-height
-    align-items: center
-    display: flex
-
-    .layout
-      height: 100%
-      flex: 1 1 auto
 
   &.grid-list
     for $size, $gutter in $grid-gutters
@@ -36,15 +25,23 @@
           .flex
             padding: ($gutter / 2)
             
-        > .layout,
-        .flex > .layout
+        .layout:only-child
           margin: -($gutter / 2)
+
+        .layout:not(:only-child)
+          margin: auto -($gutter / 2)
+        
+        *:not(:only-child)
+          .layout:first-child
+            margin-top: -($gutter / 2)
+
+          .layout:last-child
+            margin-bottom: -($gutter / 2)
 
 .layout
   display: flex
   flex: 1 1 auto
   flex-wrap: nowrap
-  width: 100%
 
   &.row
     flex-direction: row
@@ -75,7 +72,8 @@ for size, width in $grid-breakpoints
       .flex.offset-{size}{n}
         margin-left: (n / $grid-columns * 100)%
 
-.flex
+.flex,
+.child-flex > *
   flex: 1 1 auto
 
 .align
