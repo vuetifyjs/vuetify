@@ -96,6 +96,7 @@ export default {
       this.$nextTick(() => {
         this.shouldValidate = false
         this.hasFocused = false
+        this.validate()
       })
     },
     validate (force = false, value) {
