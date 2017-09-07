@@ -65,4 +65,65 @@ test('VSelect.vue', ({ mount }) => {
     expect(input).toHaveBeenCalledWith(null)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
+
+  it('should not display list with no items and autocomplete', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        autocomplete: true,
+        items: []
+      }
+    })
+
+    const input = wrapper.find('.input-group__input')[0]
+    input.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.$refs.menu.isActive).toBe(false)
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should cache items', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        autocomplete: true,
+        cacheItems: true,
+        items: []
+      }
+    })
+
+    wrapper.setProps({ items: ['bar', 'baz'] })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.computedItems.length).toBe(2)
+    wrapper.setProps({ items: ['foo'] })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.computedItems.length).toBe(3)
+    wrapper.setProps({ items: ['bar'] })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.computedItems.length).toBe(3)
+
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should be clearable with prop and dirty', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        clearable: true,
+        items: [1, 2],
+        value: 1
+      }
+    })
+
+    const clear = wrapper.find('.input-group__append-icon')[0]
+    expect(wrapper.vm.inputValue).toBe(1)
+    expect(wrapper.html()).toMatchSnapshot()
+    clear.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.inputValue).toBe(null)
+    expect(wrapper.html()).toMatchSnapshot()
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 })

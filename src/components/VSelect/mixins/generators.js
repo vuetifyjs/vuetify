@@ -23,7 +23,12 @@ export default {
           value: this.isActive && this.computedItems.length,
           zIndex: this.menuZIndex
         },
-        on: { input: val => (this.isActive = val) }
+        on: {
+          input: val => {
+            if (this.isAutocomplete && !this.computedItems.length) return
+            this.isActive = val
+          }
+        }
       }
 
       this.minWidth && (data.props.minWidth = this.minWidth)
@@ -44,15 +49,6 @@ export default {
         domProps: {
           value: this.lazySearch
         },
-        on: {
-          focus: this.focus,
-          blur: () => {
-            if (this.isActive) return
-
-            this.blur()
-          },
-          input: e => (this.searchValue = e.target.value)
-        },
         directives: [{
           name: 'show',
           value: this.isAutocomplete || (this.placeholder && !this.selectedItems.length)
@@ -61,7 +57,15 @@ export default {
         key: 'input'
       }
 
-      if (this.isAutocomplete) data.attrs.role = 'combobox'
+      if (this.isAutocomplete) {
+        data.attrs.role = 'combobox'
+
+        data.on = {
+          focus: this.focus,
+          blur: this.blur,
+          input: e => (this.searchValue = e.target.value)
+        }
+      }
       if (this.placeholder) data.domProps.placeholder = this.placeholder
 
       return this.$createElement('div', {

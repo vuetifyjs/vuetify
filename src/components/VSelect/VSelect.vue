@@ -43,8 +43,10 @@
 
     data () {
       return {
+        cachedItems: [],
         content: {},
         hasFocused: false,
+        hasSearched: false,
         inputValue: this.multiple && !this.value ? [] : this.value,
         isBooted: false,
         lastItem: 20,
@@ -62,6 +64,7 @@
       auto: Boolean,
       autocomplete: Boolean,
       bottom: Boolean,
+      cacheItems: Boolean,
       chips: Boolean,
       clearable: Boolean,
       close: Boolean,
@@ -134,7 +137,7 @@
         return children.join(' ')
       },
       computedItems () {
-        return this.items
+        return this.filterDuplicates(this.items.concat(this.cachedItems))
       },
       filteredItems () {
         const items = this.filterSearch()
@@ -156,12 +159,15 @@
           return this.lazySearch
         },
         set (val) {
-          this.lazySearch = val
-
           // Do not emit input changes if not booted
-          val !== this.searchInput &&
-            this.isBooted &&
+          if(val !== this.lazySearch &&
+            this.isBooted
+          ) {
             this.$emit('update:searchInput', val)
+            this.hasSearched = true  
+          }
+
+          this.lazySearch = val
         }
       },
       selectedItem () {
@@ -224,7 +230,11 @@
           }
         })
       },
-      items () {
+      items (val) {
+        if (this.cacheItems) {
+          this.cachedItems = this.filterDuplicates(this.cachedItems.concat(val))
+        }
+
         this.$refs.menu.listIndex = -1
 
         this.searchValue && this.$nextTick(() => {
@@ -281,8 +291,11 @@
         this.$nextTick(() => {
           this.isActive = false
           this.focused = false
-          this.$emit('blur', this.inputValue)
+          this.$emit('blur', e)
         })
+      },
+      filterDuplicates (arr) {
+        return arr.filter((el, i, self) => i === self.indexOf(el))
       },
       focus (e) {
         this.focused = true
@@ -386,7 +399,6 @@
           name: 'click-outside',
           value: () => {
             this.isActive = false
-            this.$emit('change', this.inputValue)
           }
         }],
         on: {
@@ -398,7 +410,12 @@
             this.blur()
           },
           click: (e) => {
-            if (!this.isActive) this.isActive = true
+            if (!this.isActive) {
+              this.isActive = true
+              if (this.isAutocomplete) {
+                this.$refs.input && this.$refs.input.focus()
+              }
+            }
           },
           keydown: this.onKeyDown // Located in mixins/autocomplete.js
         }
