@@ -129,4 +129,22 @@ test('VTextField.js', ({ mount }) => {
 
     expect(input).toHaveBeenCalledWith(null)
   })
+
+  it('should not display counter when set to false', async () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        counter: true,
+        max: 50
+      }
+    })
+
+    expect(wrapper.find('.input-group__counter')[0]).not.toBe(undefined)
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ counter: false })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.find('.input-group__counter')[0]).toBe(undefined)
+  })
 })

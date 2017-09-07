@@ -20,7 +20,7 @@
       autoGrow: Boolean,
       box: Boolean,
       clearable: Boolean,
-      counter: [Number, String],
+      counter: [Boolean, Number, String],
       fullWidth: Boolean,
       multiLine: Boolean,
       placeholder: String,
