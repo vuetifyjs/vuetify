@@ -11,7 +11,7 @@ export default {
 
   data () {
     return {
-      focused: false,
+      isFocused: false,
       tabFocused: false,
       internalTabIndex: null,
       lazyValue: this.value
@@ -46,7 +46,7 @@ export default {
     inputGroupClasses () {
       return Object.assign({
         'input-group': true,
-        'input-group--focused': this.focused,
+        'input-group--focused': this.isFocused,
         'input-group--dirty': this.isDirty,
         'input-group--tab-focused': this.tabFocused,
         'input-group--disabled': this.disabled,
@@ -81,7 +81,7 @@ export default {
       let messages = []
 
       if ((this.hint &&
-            this.focused ||
+            this.isFocused ||
             this.hint &&
             this.persistentHint) &&
           this.validations.length === 0
@@ -117,18 +117,18 @@ export default {
       )
     },
     genIcon (type, clearable) {
+      const callbacks = []
       const shouldClear = clearable && this.isDirty
       const icon = shouldClear ? 'clear' : this[`${type}Icon`]
-      let cb = this[`${type}IconCb`]
-      let hasCallback = typeof cb === 'function'
 
-      if (!hasCallback && shouldClear) {
-        cb = e => {
-          e.stopPropagation()
-          this.inputValue = null
-        }
-        hasCallback = true
+      if (type === 'append' && this.inputAppendCallback) {
+        callbacks.push(this.inputAppendCallback)
+      } else if (type === 'prepend' && this.inputPrependCallback) {
+        callbacks.push(this.inputPrependCallback)
       }
+
+      if (shouldClear) callbacks.push(() => (this.inputValue = null))
+      if (this[`${type}IconCb`]) callbacks.push(this[`${type}IconCb`])
 
       return this.$createElement('v-icon', {
         attrs: {
@@ -136,11 +136,14 @@ export default {
         },
         'class': {
           [`input-group__${type}-icon`]: true,
-          'input-group__icon-cb': hasCallback
+          'input-group__icon-cb': callbacks.length
         },
         on: {
           click: e => {
-            hasCallback && cb(e)
+            if (!callbacks.length) return
+
+            e.stopPropagation()
+            callbacks.every(cb => cb())
           }
         }
       }, icon)
@@ -200,7 +203,7 @@ export default {
               // Proprietary for v-text-field with box prop
               if (!this.box) return
 
-              this.focus()
+              // this.focus()
             }
           }
         }, wrapperChildren)

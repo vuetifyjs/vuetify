@@ -24,7 +24,7 @@ exports[`VSelect.js should have -1 tabindex when disabled 1`] = `
         <div class="card"
              style="height: auto;"
         >
-          <ul data-uid="26"
+          <ul data-uid="17"
               class="list"
           >
             <li disabled="disabled">
@@ -44,7 +44,7 @@ exports[`VSelect.js should have -1 tabindex when disabled 1`] = `
       </div>
     </div>
     <i aria-hidden="true"
-       class="material-icons icon input-group__append-icon"
+       class="material-icons icon input-group__append-icon input-group__icon-cb"
     >
       arrow_drop_down
     </i>
@@ -80,7 +80,7 @@ exports[`VSelect.js should have explicit tabindex passed through when autocomple
         <div class="card"
              style="height: auto;"
         >
-          <ul data-uid="32"
+          <ul data-uid="22"
               class="list"
           >
             <li disabled="disabled">
@@ -100,7 +100,7 @@ exports[`VSelect.js should have explicit tabindex passed through when autocomple
       </div>
     </div>
     <i aria-hidden="true"
-       class="material-icons icon input-group__append-icon"
+       class="material-icons icon input-group__append-icon input-group__icon-cb"
     >
       arrow_drop_down
     </i>
@@ -138,7 +138,7 @@ exports[`VSelect.js should have explicit tabindex passed through when not autoco
         <div class="card"
              style="height: auto;"
         >
-          <ul data-uid="38"
+          <ul data-uid="28"
               class="list"
           >
             <li disabled="disabled">
@@ -158,7 +158,7 @@ exports[`VSelect.js should have explicit tabindex passed through when not autoco
       </div>
     </div>
     <i aria-hidden="true"
-       class="material-icons icon input-group__append-icon"
+       class="material-icons icon input-group__append-icon input-group__icon-cb"
     >
       arrow_drop_down
     </i>
@@ -168,26 +168,5 @@ exports[`VSelect.js should have explicit tabindex passed through when not autoco
     </div>
   </div>
 </div>
-
-`;
-
-exports[`VSelect.js should not display when not autocomplete with placeholder and dirty 1`] = `
-
-<input disabled="disabled"
-       tabindex="-1"
-       class="input-group--select__autocomplete"
-       placeholder="Placeholder"
-       style="display: none;"
->
-
-`;
-
-exports[`VSelect.js should render a disabled input with placeholder 1`] = `
-
-<input disabled="disabled"
-       tabindex="-1"
-       class="input-group--select__autocomplete"
-       placeholder="Placeholder"
->
 
 `;

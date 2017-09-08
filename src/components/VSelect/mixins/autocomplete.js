@@ -24,9 +24,15 @@ export default {
       )
     },
     onKeyDown (e) {
-      if (!this.isActive &&
-        [38, 40].includes(e.keyCode)
-      ) return this.isActive = true
+      // If enter or space is pressed, open menu
+      if (!this.menuIsActive &&
+        [13, 32, 38, 40].includes(e.keyCode)
+      ) {
+        return this.showMenuItems()
+      } else if ([9, 27].includes(e.keyCode)) {
+        // If select is being tabbed, blur
+        return this.blur()
+      }
 
       this.$refs.menu.changeListIndex(e)
     }

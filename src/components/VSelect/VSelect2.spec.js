@@ -26,9 +26,11 @@ test('VSelect.vue', ({ mount }) => {
     wrapper.vm.$el.dispatchEvent(up)
     expect(wrapper.data().isActive).toBe(true)
     wrapper.vm.isActive = false
+    await wrapper.vm.$nextTick()
     wrapper.vm.$el.dispatchEvent(down)
     expect(wrapper.data().isActive).toBe(true)
     wrapper.vm.isActive = false
+    await wrapper.vm.$nextTick()
     wrapper.vm.$el.dispatchEvent(space)
     await wrapper.vm.$nextTick()
     expect(wrapper.data().isActive).toBe(true)

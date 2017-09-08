@@ -23,6 +23,8 @@ export default {
     },
 
     genTransition () {
+      if (!this.transition) return this.genContent()
+
       return this.$createElement('transition', {
         props: {
           name: this.transition

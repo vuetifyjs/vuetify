@@ -59,7 +59,7 @@
         return this.$children
           .filter((child) => child.$el.classList.contains('radio'))
       },
-      toggle (value) {
+      toggleRadio (value) {
         if (this.disabled) {
           return
         }
@@ -84,7 +84,7 @@
       this.getRadios().forEach((radio) => {
         radio.isActive = this.inputValue === radio.value
         radio.$el.tabIndex = radio.$el.tabIndex > 0 ? radio.$el.tabIndex : 0
-        radio.$on('change', this.toggle)
+        radio.$on('change', this.toggleRadio)
         radio.$on('blur', this.radioBlur)
         radio.$on('focus', this.radioFocus)
       })
@@ -92,7 +92,7 @@
 
     beforeDestroy () {
       this.getRadios().forEach((radio) => {
-        radio.$off('change', this.toggle)
+        radio.$off('change', this.toggleRadio)
         radio.$off('blur', this.radioBlur)
         radio.$off('focus', this.radioFocus)
       })

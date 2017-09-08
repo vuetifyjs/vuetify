@@ -20,6 +20,10 @@ input-group($material)
   .input-group__append-icon
     padding: 0 6px
     transition: .3s $transition.ease-in-out
+    
+  .input-group__append-icon,
+  .input-group__prepend-icon
+    user-select: none
 
   // This is specific for selects
   &.input-group--dirty
@@ -96,7 +100,9 @@ theme(input-group, "input-group")
 /** Label */
 .input-group
   label
-    font-size $input-font-size
+    align-items: center
+    display: inline-flex
+    font-size: $input-font-size
     line-height: $input-font-size * 2
     height: $input-height
     max-width: 90%
@@ -188,16 +194,14 @@ theme(input-group, "input-group")
   // Focused
   &.input-group--text-field
     &:not(.input-group--single-line):not(.input-group--error)
-      &.input-group--focused,
-      &:focus
+      &.input-group--focused
         label
           color: $theme.primary
 
         .input-group__input
           border-color: $theme.primary
 
-    &.input-group--focused,
-    &:focus
+    &.input-group--focused
       &:not(.input-group--disabled)
         .input-group__details
           &:after

@@ -45,13 +45,12 @@
       return {
         cachedItems: [],
         content: {},
-        hasFocused: false,
-        hasSearched: false,
         inputValue: this.multiple && !this.value ? [] : this.value,
         isBooted: false,
         lastItem: 20,
         lazySearch: null,
         isActive: false,
+        menuIsActive: false,
         shouldBreak: false
       }
     },
@@ -140,7 +139,13 @@
         return this.filterDuplicates(this.items.concat(this.cachedItems))
       },
       filteredItems () {
-        const items = this.filterSearch()
+        // If we are not actively filtering
+        // Show all available items
+        const items = (this.isAutocomplete &&
+          this.isDirty &&
+          this.searchValue === this.selectedItem)
+          ? this.computedItems
+          : this.filterSearch()
 
         return !this.auto ? items.slice(0, this.lastItem) : items
       },
@@ -159,13 +164,10 @@
           return this.lazySearch
         },
         set (val) {
-          // Do not emit input changes if not booted
-          if(val !== this.lazySearch &&
-            this.isBooted
-          ) {
-            this.$emit('update:searchInput', val)
-            this.hasSearched = true  
-          }
+          if (!this.isAutocomplete) return
+
+          // Do not emit input changes if not booted - why?
+          this.$emit('update:searchInput', val)
 
           this.lazySearch = val
         }
@@ -182,7 +184,7 @@
           (this.inputValue === null ||
           typeof this.inputValue === 'undefined')) return []
 
-        return this.items.filter(i => {
+        return this.computedItems.filter(i => {
           if (!this.multiple) {
             return this.getValue(i) === this.getValue(this.inputValue)
           } else {
@@ -197,7 +199,7 @@
 
     watch: {
       inputValue (val) {
-        // Async calls may not have data ready at boot
+        // Set searchValue text
         if (!this.multiple &&
           this.isAutocomplete
         ) this.searchValue = this.getText(this.selectedItem)
@@ -216,11 +218,12 @@
         this.inputValue = val ? [] : null
       },
       isActive (val) {
-        !val &&
+        if (!val) {
           this.isAutocomplete &&
-          (this.searchValue = this.getText(this.selectedItem))
-        this.focused = val
-        this.isBooted = true
+            (this.searchValue = this.getText(this.selectedItem))
+          this.menuIsActive = false
+        }
+
         this.lastItem += !val ? 20 : 0
       },
       isBooted () {
@@ -229,6 +232,11 @@
             this.content.addEventListener('scroll', this.onScroll, false)
           }
         })
+      },
+      isFocused (val) {
+        if (val) return
+
+        this.menuIsActive = false
       },
       items (val) {
         if (this.cacheItems) {
@@ -241,26 +249,26 @@
           this.$refs.menu.listIndex = 0
         })
       },
+      menuIsActive (val) {
+        if (!val) return
+
+        this.isBooted = true
+        this.isActive = true
+      },
       searchValue (val) {
         // Wrap input to next line if overflowing
         if (this.$refs.input.scrollWidth > this.$refs.input.clientWidth) {
           this.shouldBreak = true
-          this.$nextTick(this.$refs.menu.updateDimensions)
+          // this.$nextTick(this.$refs.menu.updateDimensions)
         } else if (val === null) {
           this.shouldBreak = false
         }
 
-        // This could change externally
-        // avoid accidental re-activation
-        // when dealing with async items
-        if (!this.isActive &&
-          this.computedItems.length &&
-          val !== null &&
-          val !== this.getText(this.selectedItem)
-        ) {
-          this.isActive = true
-          this.focused = true
+        // Activate menu if inactive and searching
+        if (this.isActive && !this.menuIsActive) {
+          this.showMenuItems(true)
         }
+
         this.$refs.menu.listIndex = null
 
         this.$nextTick(() => {
@@ -287,32 +295,47 @@
     },
 
     methods: {
-      blur (e) {
-        this.$nextTick(() => {
-          this.isActive = false
-          this.focused = false
-          this.$emit('blur', e)
-        })
+      blur () {
+        this.$emit('blur')
+        if (this.isAutocomplete && this.$refs.input) this.$refs.input.blur()
+        this.$nextTick(this.unFocus)
       },
       filterDuplicates (arr) {
         return arr.filter((el, i, self) => i === self.indexOf(el))
       },
-      focus (e) {
-        this.focused = true
+      focus () {
+        this.isActive = true
+        this.isFocused = true
+
         if (this.$refs.input && this.isAutocomplete) {
-          this.$refs.input.focus() ||
-          this.$refs.input.setSelectionRange(
-            0,
-            (this.searchValue || '').toString().length
-          )
+          this.$refs.input.focus()
         }
 
-        this.$emit('focus', e)
+        this.$emit('focus')
+      },
+      genDirectives () {
+        return [{
+          name: 'click-outside',
+          value: this.unFocus
+        }]
+      },
+      genListeners () {
+        const listeners = Object.assign({}, this.$listeners)
+        delete listeners.input
+
+        return {
+          ...listeners,
+          click: () => {
+            this.showMenuItems()
+          },
+          focus: this.focus,
+          keydown: this.onKeyDown // Located in mixins/autocomplete.js
+        }
       },
       genLabel () {
         const singleLine = this.singleLine || this.isDropdown
         if (singleLine && this.isDirty ||
-          singleLine && this.focused && this.searchValue
+          singleLine && this.isFocused && this.searchValue
         ) return null
 
         const data = {}
@@ -334,8 +357,13 @@
       getValue (item) {
         return this.getPropertyFromItem(item, this.itemValue)
       },
-      onAutocompleteFocus () {
+      inputAppendCallback () {
+        if (this.clearable && this.isDirty) {
+          this.inputValue = this.multiple ? [] : null
+        }
+
         this.focus()
+        this.showMenuItems()
       },
       onScroll () {
         if (!this.isActive) {
@@ -367,59 +395,45 @@
           })
         }
 
-        if ((this.isAutocomplete && this.multiple)) {
-          this.$nextTick(() => {
-            this.$refs.input &&
-              this.$refs.input.focus()
-          })
-        } else if (!this.multiple) {
-          this.blur()
-        }
-
-        if (this.multiple) this.searchValue = null
+        this.searchValue = this.multiple ? '' : this.inputValue
 
         this.$emit('change', this.inputValue)
+
+        this.$nextTick(() => {
+          if (this.isAutocomplete &&
+            this.$refs.input
+          ) this.$refs.input.focus()
+          else this.$el.focus()
+        })
+      },
+      showMenuItems () {
+        this.isActive = true
+        this.menuIsActive = true
+      },
+      unFocus () {
+        this.isActive = false
+        this.isFocused = false
       }
     },
 
     render (h) {
-      const listeners = Object.assign({}, this.$listeners)
-      delete listeners.input
-
-      return this.genInputGroup([
-        this.genSelectionsAndSearch(),
-        this.genMenu()
-      ], {
+      const data = {
         attrs: {
           tabindex: this.isAutocomplete || this.disabled ? -1 : this.tabindex,
           ...(this.isAutocomplete ? null : this.$attrs),
           role: this.isAutocomplete ? null : 'combobox'
-        },
-        directives: [{
-          name: 'click-outside',
-          value: () => {
-            this.isActive = false
-          }
-        }],
-        on: {
-          ...listeners,
-          focus: !this.isAutocomplete ? this.focus : this.onAutocompleteFocus,
-          blur: () => {
-            if (this.isActive) return
-
-            this.blur()
-          },
-          click: (e) => {
-            if (!this.isActive) {
-              this.isActive = true
-              if (this.isAutocomplete) {
-                this.$refs.input && this.$refs.input.focus()
-              }
-            }
-          },
-          keydown: this.onKeyDown // Located in mixins/autocomplete.js
         }
-      })
+      }
+
+      if (!this.isAutocomplete) {
+        data.on = this.genListeners()
+        data.directives = this.genDirectives()
+      }
+
+      return this.genInputGroup([
+        this.genSelectionsAndSearch(),
+        this.genMenu()
+      ], data)
     }
   }
 </script>

@@ -28,7 +28,7 @@ exports[`VSelect.vue should be clearable with prop and dirty 1`] = `
         <div class="card"
              style="height: auto;"
         >
-          <ul data-uid="31"
+          <ul data-uid="29"
               class="list"
           >
             <li>
@@ -96,7 +96,7 @@ exports[`VSelect.vue should be clearable with prop and dirty 2`] = `
         <div class="card"
              style="height: auto;"
         >
-          <ul data-uid="31"
+          <ul data-uid="29"
               class="list"
           >
             <li>
@@ -126,7 +126,7 @@ exports[`VSelect.vue should be clearable with prop and dirty 2`] = `
       </div>
     </div>
     <i aria-hidden="true"
-       class="material-icons icon input-group__append-icon"
+       class="material-icons icon input-group__append-icon input-group__icon-cb"
     >
       arrow_drop_down
     </i>

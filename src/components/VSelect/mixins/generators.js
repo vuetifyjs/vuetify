@@ -20,16 +20,23 @@ export default {
           nudgeWidth: this.isDropdown ? 56 : 36,
           offsetY,
           openOnClick: false,
-          value: this.isActive && this.computedItems.length,
+          value: this.menuIsActive &&
+            this.computedItems.length &&
+            (!this.isAutocomplete ||
+              (this.searchValue !== null || this.multiple) ||
+              !this.isDirty),
           zIndex: this.menuZIndex
         },
         on: {
           input: val => {
-            if (this.isAutocomplete && !this.computedItems.length) return
-            this.isActive = val
+            if (!val) {
+              this.menuIsActive = false
+            }
           }
         }
       }
+
+      if (this.isAutocomplete) data.props.transition = ''
 
       this.minWidth && (data.props.minWidth = this.minWidth)
 
@@ -61,10 +68,11 @@ export default {
         data.attrs.role = 'combobox'
 
         data.on = {
-          focus: this.focus,
-          blur: this.blur,
+          ...this.genListeners(),
           input: e => (this.searchValue = e.target.value)
         }
+
+        data.directives = data.directives.concat(this.genDirectives())
       }
       if (this.placeholder) data.domProps.placeholder = this.placeholder
 
