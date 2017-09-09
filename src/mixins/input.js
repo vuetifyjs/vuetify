@@ -21,6 +21,7 @@ export default {
   props: {
     appendIcon: String,
     appendIconCb: Function,
+    asyncLoading: Boolean,
     disabled: Boolean,
     hint: String,
     hideDetails: Boolean,
@@ -47,6 +48,7 @@ export default {
     inputGroupClasses () {
       return Object.assign({
         'input-group': true,
+        'input-group--async-loading': this.asyncLoading,
         'input-group--focused': this.isFocused,
         'input-group--dirty': this.isDirty,
         'input-group--tab-focused': this.tabFocused,
@@ -195,18 +197,18 @@ export default {
         wrapperChildren.push(this.genIcon('append', this.clearable))
       }
 
+      if (this.asyncLoading) {
+        detailsChildren.push(this.$createElement('v-progress-linear', {
+          props: {
+            indeterminate: true,
+            height: 2
+          }
+        }))
+      }
+
       children.push(
         this.$createElement('div', {
-          'class': 'input-group__input',
-          on: {
-            // TODO: This probably could be removed
-            click: () => {
-              // Proprietary for v-text-field with box prop
-              if (!this.box) return
-
-              // this.focus()
-            }
-          }
+          'class': 'input-group__input'
         }, wrapperChildren)
       )
       detailsChildren.push(this.genMessages())

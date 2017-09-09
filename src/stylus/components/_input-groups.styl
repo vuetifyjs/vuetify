@@ -279,6 +279,12 @@ theme(input-group, "input-group")
     .input-group__details
       min-height: 2px
       padding: 0
+      
+  &--async-loading
+    .input-group__details
+      &:before,
+      &:after
+        display: none
 
 /** Hint */
 .input-group

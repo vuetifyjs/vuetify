@@ -11,7 +11,7 @@ export default {
           allowOverflow: this.isAutocomplete,
           auto: this.auto,
           closeOnClick: false,
-          closeOnContentClick: !this.multiple,
+          closeOnContentClick: !this.isMultiple,
           contentClass: this.computedContentClass,
           disabled: this.disabled,
           maxHeight: this.maxHeight,
@@ -25,7 +25,7 @@ export default {
             (!this.tags || this.tags && this.filteredItems.length > 0) &&
             (!this.isAutocomplete ||
               this.searchValue !== this.selectedItem ||
-              this.multiple ||
+              this.isMultiple ||
               !this.isDirty),
           zIndex: this.menuZIndex
         },
@@ -80,6 +80,7 @@ export default {
 
         data.directives = data.directives.concat(this.genDirectives())
       }
+
       if (this.placeholder) data.domProps.placeholder = this.placeholder
 
       return this.$createElement('div', {
@@ -93,8 +94,10 @@ export default {
     },
     genSelections () {
       if (this.isAutocomplete &&
-        !this.multiple &&
-        !this.tags
+        !this.isMultiple &&
+        this.isFocused &&
+        this.isDirty &&
+        !this.chips
       ) return []
 
       const children = []
@@ -219,12 +222,10 @@ export default {
       )
     },
     genAction (item, active) {
-      if (!this.multiple) return null
+      if (!this.isMultiple) return null
 
       const data = {
-        'class': {
-          'list__tile__action--select-multi': this.multiple
-        },
+        staticClass: 'list__tile__action--select-multi',
         on: {
           click: e => {
             e.stopPropagation()

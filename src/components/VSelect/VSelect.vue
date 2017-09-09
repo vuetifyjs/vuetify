@@ -156,23 +156,27 @@
         return this.autocomplete || this.editable || this.tags
       },
       isDirty () {
-        return this.selectedItems.length > 0 ||
-          this.placeholder
+        return this.selectedItems.length > 0
       },
       isDropdown () {
         return this.segmented || this.overflow || this.editable || this.solo
       },
+      isMultiple () {
+        return this.multiple || this.tags
+      },
       searchValue: {
         get () { return this.lazySearch },
         set (val) {
-          if (!this.isAutocomplete) return
+          if (!this.isAutocomplete || 
+            this.selectedIndex > -1
+          ) return
 
           this.lazySearch = val
           this.$emit('update:searchInput', val)
         }
       },
       selectedItem () {
-        if (this.multiple) return null
+        if (this.isMultiple) return null
 
         return this.selectedItems.find(i => (
           this.getValue(i) === this.getValue(this.inputValue)
@@ -189,11 +193,12 @@
       },
       isActive (val) {
         if (!val) {
-          this.isAutocomplete &&
-            (this.searchValue = this.getText(this.selectedItem))
+          this.searchValue = null
           this.menuIsActive = false
           this.isFocused = false
           this.selectedIndex = -1
+        } else {
+          this.searchValue = this.getText(this.selectedItem)
         }
 
         this.lastItem += !val ? 20 : 0
@@ -222,7 +227,7 @@
         this.isBooted = true
         this.isActive = true
       },
-      multiple (val) {
+      isMultiple (val) {
         this.inputValue = val ? [] : null
       },
       searchValue (val) {
@@ -372,11 +377,11 @@
       genSelectedItems (val) {
         val = val || this.inputValue || []
 
-        if (this.tags) {
-          this.selectedItems = val
+        if (this.isAutocomplete && !this.isMultiple) {
+          this.selectedItems = [val]
         } else {
           this.selectedItems = this.computedItems.filter(i => {
-            if (!this.multiple && !this.tags) {
+            if (!this.isMultiple) {
               return this.getValue(i) === this.getValue(val)
             } else {
               // Always return Boolean
@@ -387,11 +392,8 @@
           })
         }
 
-        // Set searchValue text
-        if (!this.multiple) {
-          this.$nextTick(() => {
-            this.searchValue = this.getText(this.selectedItem)
-          })
+        if (!this.selectedItems.length) {
+          this.selectedItems = Array.isArray(val) ? val : []
         }
       },
       getText (item) {
@@ -402,7 +404,7 @@
       },
       inputAppendCallback () {
         if (this.clearable && this.isDirty) {
-          const inputValue = this.multiple ? [] : null
+          const inputValue = this.isMultiple ? [] : null
 
           this.inputValue = inputValue
           this.$emit('change', inputValue)
@@ -428,7 +430,7 @@
         }
       },
       selectItem (item) {
-        if (!this.multiple && !this.tags) {
+        if (!this.isMultiple) {
           this.inputValue = this.returnObject ? item : this.getValue(item)
           this.selectedItems = [item]
         } else {
@@ -446,7 +448,9 @@
           this.selectedItems = selectedItems
         }
 
-        this.searchValue = this.multiple ? '' : this.inputValue
+        this.searchValue = !this.isMultiple || this.chips
+          ? ''
+          : this.getText(this.selectedItem)
 
         this.$emit('change', this.inputValue)
 

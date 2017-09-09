@@ -215,8 +215,10 @@ test('VSelect.vue', ({ mount }) => {
         value: ['foo', 'bar']
       }
     })
+
     const change = jest.fn()
     wrapper.vm.$on('change', change)
+
     wrapper.vm.isActive = true
     await wrapper.vm.$nextTick()
     wrapper.vm.onKeyDown(left)
