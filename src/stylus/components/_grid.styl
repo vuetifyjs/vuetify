@@ -15,6 +15,14 @@
 
   &.fluid
     max-width: 100%
+    
+  &.fill-height
+    align-items: center
+    display: flex
+    
+    .layout
+      height: 100%
+      flex: 1 1 auto
 
   &.grid-list
     for $size, $gutter in $grid-gutters
