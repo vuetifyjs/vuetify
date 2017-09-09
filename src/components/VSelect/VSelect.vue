@@ -375,12 +375,11 @@
         return typeof value === 'undefined' ? item : value
       },
       genSelectedItems (val) {
-        val = val || this.inputValue || []
+        val = val || this.inputValue
+        let selectedItems = []
 
-        if (this.isAutocomplete && !this.isMultiple) {
-          this.selectedItems = [val]
-        } else {
-          this.selectedItems = this.computedItems.filter(i => {
+        if (this.isMultiple) {
+          selectedItems = this.computedItems.filter(i => {
             if (!this.isMultiple) {
               return this.getValue(i) === this.getValue(val)
             } else {
@@ -392,9 +391,11 @@
           })
         }
 
-        if (!this.selectedItems.length) {
-          this.selectedItems = Array.isArray(val) ? val : []
+        if (!selectedItems.length && val != null) {
+          selectedItems = Array.isArray(val) ? val : [val]
         }
+
+        this.selectedItems = selectedItems
       },
       getText (item) {
         return this.getPropertyFromItem(item, this.itemText)
@@ -449,8 +450,8 @@
         }
 
         this.searchValue = !this.isMultiple || this.chips
-          ? ''
-          : this.getText(this.selectedItem)
+          ? this.getText(this.selectedItem)
+          : ''
 
         this.$emit('change', this.inputValue)
 

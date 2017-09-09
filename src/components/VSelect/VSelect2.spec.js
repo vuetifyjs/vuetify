@@ -234,4 +234,29 @@ test('VSelect.vue', ({ mount }) => {
     expect(wrapper.vm.selectedIndex).toBe(-1)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
+
+  it('should prepropulate selectedItems', () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        value: 'foo'
+      }
+    })
+
+    const wrapper2 = mount(VSelect, {
+      propsData: {
+        value: ['foo', 'bar']
+      }
+    })
+
+    const wrapper3 = mount(VSelect, {
+      propsData: {
+        value: null
+      }
+    })
+
+    expect(wrapper.vm.selectedItems.length).toBe(1)
+    expect(wrapper2.vm.selectedItems.length).toBe(2)
+    expect(wrapper3.vm.selectedItems.length).toBe(0)
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 })
