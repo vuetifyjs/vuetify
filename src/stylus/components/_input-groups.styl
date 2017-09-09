@@ -28,7 +28,8 @@ input-group($material)
   // This is specific for selects
   &.input-group--dirty
     .input-group__selections__comma
-      color: $material.text.primary
+      &:not(.input-group__selections__comma--active)
+        color: $material.text.primary
 
   &:not(.input-group--error)
     label

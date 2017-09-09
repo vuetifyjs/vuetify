@@ -1,30 +1,37 @@
 <script>
+  import Themeable from '../../mixins/themeable'
   import Toggleable from '../../mixins/toggleable'
 
   export default {
     name: 'v-chip',
 
-    mixins: [Toggleable],
+    mixins: [Themeable, Toggleable],
 
     props: {
       close: Boolean,
+      disabled: Boolean,
       label: Boolean,
       outline: Boolean,
+      // Used for selects/tagging
+      selected: Boolean,
       small: Boolean,
       value: {
         type: Boolean,
         default: true
       }
     },
-
     computed: {
       classes () {
         return {
           'chip': true,
+          'chip--disabled': this.disabled,
+          'chip--selected': this.selected,
           'chip--label': this.label,
           'chip--outline': this.outline,
           'chip--small': this.small,
-          'chip--removable': this.close
+          'chip--removable': this.close,
+          'theme--light': this.light,
+          'theme--dark': this.dark
         }
       }
     },

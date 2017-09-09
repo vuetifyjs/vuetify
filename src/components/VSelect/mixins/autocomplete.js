@@ -32,9 +32,17 @@ export default {
       } else if ([9, 27].includes(e.keyCode)) {
         // If select is being tabbed, blur
         return this.blur()
+      } else if (e.keyCode === 13 && this.searchValue) {
+        this.selectedItems.push(this.searchValue)
+
+        this.$nextTick(() => {
+          this.searchValue = null
+          this.$emit('change', this.selectedItems)
+        })
       }
 
-      this.$refs.menu.changeListIndex(e)
+      if (!this.tags) return this.$refs.menu.changeListIndex(e)
+      if (!this.searchValue) this.changeSelectedIndex(e.keyCode)
     }
   }
 }

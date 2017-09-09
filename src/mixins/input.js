@@ -29,6 +29,7 @@ export default {
     placeholder: String,
     prependIcon: String,
     prependIconCb: Function,
+    readonly: Boolean,
     required: Boolean,
     tabindex: {
       default: 0

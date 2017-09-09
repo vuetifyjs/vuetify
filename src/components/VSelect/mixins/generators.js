@@ -22,8 +22,10 @@ export default {
           openOnClick: false,
           value: this.menuIsActive &&
             this.computedItems.length &&
+            (!this.tags || this.tags && this.filteredItems.length > 0) &&
             (!this.isAutocomplete ||
-              (this.searchValue !== null || this.multiple) ||
+              this.searchValue !== this.selectedItem ||
+              this.multiple ||
               !this.isDirty),
           zIndex: this.menuZIndex
         },
@@ -44,13 +46,17 @@ export default {
     },
     genSelectionsAndSearch () {
       const data = {
-        'class': 'input-group--select__autocomplete',
+        staticClass: 'input-group--select__autocomplete',
+        'class': {
+          'input-group--select__autocomplete--index': this.selectedIndex > -1
+        },
         style: {
           flex: this.shouldBreak ? '1 0 100%' : null
         },
         attrs: {
           ...this.$attrs,
           disabled: this.disabled || !this.isAutocomplete,
+          readonly: this.readonly,
           tabindex: this.disabled || !this.isAutocomplete ? -1 : this.tabindex
         },
         domProps: {
@@ -86,7 +92,10 @@ export default {
       ])
     },
     genSelections () {
-      if (this.isAutocomplete && !this.multiple) return []
+      if (this.isAutocomplete &&
+        !this.multiple &&
+        !this.tags
+      ) return []
 
       const children = []
       const chips = this.chips
@@ -95,33 +104,51 @@ export default {
 
       this.selectedItems.forEach((item, i) => {
         if (slots) {
-          children.push(this.genSlotSelection(item))
+          children.push(this.genSlotSelection(item, i))
         } else if (chips) {
-          children.push(this.genChipSelection(item))
+          children.push(this.genChipSelection(item, i))
         } else {
-          children.push(this.genCommaSelection(item, i < length - 1))
+          children.push(this.genCommaSelection(item, i < length - 1, i))
         }
       })
 
       return children
     },
-    genSlotSelection (item) {
-      return this.$scopedSlots.selection({ parent: this, item })
+    genSlotSelection (item, index) {
+      return this.$scopedSlots.selection({
+        parent: this,
+        item,
+        index
+      })
     },
-    genChipSelection (item) {
+    genChipSelection (item, index) {
+      const isDisabled = this.disabled || this.readonly
+
       return this.$createElement('v-chip', {
-        'class': 'chip--select-multi',
-        props: { close: true },
+        staticClass: 'chip--select-multi',
+        props: {
+          close: !isDisabled,
+          dark: this.dark,
+          disabled: isDisabled,
+          selected: index === this.selectedIndex
+        },
         on: {
           input: () => this.selectItem(item),
-          click: e => e.stopPropagation()
+          click: e => {
+            e.stopPropagation()
+            this.focus()
+            this.selectedIndex = index
+          }
         },
         key: this.getValue(item)
       }, this.getText(item))
     },
-    genCommaSelection (item, comma) {
+    genCommaSelection (item, comma, index) {
       return this.$createElement('div', {
-        'class': 'input-group__selections__comma',
+        staticClass: 'input-group__selections__comma',
+        'class': {
+          'input-group__selections__comma--active': index === this.selectedIndex
+        },
         key: JSON.stringify(this.getValue(item)) // Item may be an object
       }, `${this.getText(item)}${comma ? ', ' : ''}`)
     },

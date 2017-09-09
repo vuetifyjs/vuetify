@@ -1,21 +1,38 @@
 @import '../bootstrap'
+@import '../theme'
+
+chip($material)
+  background: $material.chips
+  color: $material.text.primary
+      
+  &__close
+    color: $material.icons.active
+
+  &.chip--select-multi
+    &.chip--selected
+      background: $theme.accent
+      color: $material.text.theme
+    
+      .chip__close
+        color: $material.text.theme
+
+theme(chip, "chip")
 
 .chip
   align-items: center
-  background: $chip-background
-  border: $chip-border
   border-radius: $chip-border-radius
+  color: $chip-label-color
   cursor: default
   display: inline-flex
+  height: $chip-height
   justify-content: space-between
   font-size: $chip-font-size
-  padding: $chip-padding
   margin: $chip-margin
-  height: $chip-height
-  transition: .3s $transition.ease-in-out
+  outline: none
+  padding: $chip-padding
+  transition: $primary-transition
   vertical-align: middle
   white-space: nowrap
-  color: $chip-label-color
 
   .avatar
     border-radius: 50%
@@ -31,9 +48,11 @@
       width: 100%
       height: 100%
 
-  &:focus
-    elevation(2)
-    outline: none
+  &:not(.chip--disabled)
+    &:focus,
+    &--active
+      elevation(2)
+      outline: none
 
   &--label
     border-radius: $chip-label-border-radius
@@ -51,14 +70,13 @@
       min-width: $chip-small-height
 
   &__close
-    color: inherit
     display: flex
     align-items: center
     text-decoration: none
     font-size: $chip-icon-font-size
     margin-left: 4px
     margin-right: -2px
-    transition: .3s $transition.ease-in-out
+    transition: none !important
 
     &:hover
       opacity: .8

@@ -45,12 +45,14 @@
       return {
         cachedItems: [],
         content: {},
-        inputValue: this.multiple && !this.value ? [] : this.value,
+        inputValue: (this.multiple || this.tags) && !this.value ? [] : this.value,
         isBooted: false,
         lastItem: 20,
         lazySearch: null,
         isActive: false,
         menuIsActive: false,
+        selectedIndex: -1,
+        selectedItems: [],
         shouldBreak: false
       }
     },
@@ -103,6 +105,7 @@
         default: null
       },
       singleLine: Boolean,
+      tags: Boolean,
       top: Boolean,
       returnObject: Boolean,
       overflow: Boolean,
@@ -150,26 +153,22 @@
         return !this.auto ? items.slice(0, this.lastItem) : items
       },
       isAutocomplete () {
-        return this.autocomplete || this.editable
+        return this.autocomplete || this.editable || this.tags
       },
       isDirty () {
-        return this.selectedItems.length ||
+        return this.selectedItems.length > 0 ||
           this.placeholder
       },
       isDropdown () {
         return this.segmented || this.overflow || this.editable || this.solo
       },
       searchValue: {
-        get () {
-          return this.lazySearch
-        },
+        get () { return this.lazySearch },
         set (val) {
           if (!this.isAutocomplete) return
 
-          // Do not emit input changes if not booted - why?
-          this.$emit('update:searchInput', val)
-
           this.lazySearch = val
+          this.$emit('update:searchInput', val)
         }
       },
       selectedItem () {
@@ -178,50 +177,22 @@
         return this.selectedItems.find(i => (
           this.getValue(i) === this.getValue(this.inputValue)
         ))
-      },
-      selectedItems () {
-        if (!this.multiple &&
-          (this.inputValue === null ||
-          typeof this.inputValue === 'undefined')) return []
-
-        return this.computedItems.filter(i => {
-          if (!this.multiple) {
-            return this.getValue(i) === this.getValue(this.inputValue)
-          } else {
-            // Always return Boolean
-            return this.inputValue.find((j) => {
-              return this.getValue(j) === this.getValue(i)
-            }) !== undefined
-          }
-        })
       }
     },
 
     watch: {
       inputValue (val) {
-        // Set searchValue text
-        if (!this.multiple &&
-          this.isAutocomplete
-        ) this.searchValue = this.getText(this.selectedItem)
+        // Populate selected items
+        this.genSelectedItems(val)
 
         this.$emit('input', val)
-      },
-      value (val) {
-        this.inputValue = val
-        this.validate()
-
-        if (this.isAutocomplete) {
-          this.$nextTick(() => this.$refs.menu.updateDimensions)
-        }
-      },
-      multiple (val) {
-        this.inputValue = val ? [] : null
       },
       isActive (val) {
         if (!val) {
           this.isAutocomplete &&
             (this.searchValue = this.getText(this.selectedItem))
           this.menuIsActive = false
+          this.isFocused = false
         }
 
         this.lastItem += !val ? 20 : 0
@@ -232,11 +203,6 @@
             this.content.addEventListener('scroll', this.onScroll, false)
           }
         })
-      },
-      isFocused (val) {
-        if (val) return
-
-        this.menuIsActive = false
       },
       items (val) {
         if (this.cacheItems) {
@@ -255,18 +221,21 @@
         this.isBooted = true
         this.isActive = true
       },
+      multiple (val) {
+        this.inputValue = val ? [] : null
+      },
       searchValue (val) {
         // Wrap input to next line if overflowing
         if (this.$refs.input.scrollWidth > this.$refs.input.clientWidth) {
           this.shouldBreak = true
-          // this.$nextTick(this.$refs.menu.updateDimensions)
+          this.$nextTick(this.$refs.menu.updateDimensions)
         } else if (val === null) {
           this.shouldBreak = false
         }
 
         // Activate menu if inactive and searching
         if (this.isActive && !this.menuIsActive) {
-          this.showMenuItems(true)
+          this.menuIsActive = true
         }
 
         this.$refs.menu.listIndex = null
@@ -274,7 +243,19 @@
         this.$nextTick(() => {
           this.$refs.menu.listIndex = val ? 0 : -1
         })
+      },
+      value (val) {
+        this.inputValue = val
+        this.validate()
+
+        if (this.isAutocomplete) {
+          this.$nextTick(this.$refs.menu.updateDimensions)
+        }
       }
+    },
+
+    created () {
+      if (this.tags) this.selectedItems = this.inputValue
     },
 
     mounted () {
@@ -282,7 +263,7 @@
         if (this._isDestroyed) return
 
         this.content = this.$refs.menu.$refs.content
-        this.searchValue = this.getText(this.selectedItem)
+        this.genSelectedItems()
       })
     },
 
@@ -298,7 +279,38 @@
       blur () {
         this.$emit('blur')
         if (this.isAutocomplete && this.$refs.input) this.$refs.input.blur()
-        this.$nextTick(this.unFocus)
+        this.$nextTick(() => (this.isActive = false))
+      },
+      changeSelectedIndex (keyCode) {
+        if (keyCode === 32 ||
+          ![8, 37, 39, 46].includes(keyCode)
+        ) return
+
+        const indexes = this.selectedItems.length - 1
+
+        if (keyCode === 37) {
+          this.selectedIndex = this.selectedIndex === -1
+            ? indexes
+            : this.selectedIndex - 1
+        } else if (keyCode === 39) {
+          this.selectedIndex = this.selectedIndex >= indexes
+            ? -1
+            : this.selectedIndex + 1
+        } else if (this.selectedIndex === -1) {
+          this.selectedIndex = indexes
+          return
+        }
+
+        if (![8, 46].includes(keyCode)) return
+        const newIndex = this.selectedIndex === indexes
+          ? this.selectedIndex - 1
+          : this.selectedItems[this.selectedIndex + 1]
+          ? this.selectedIndex
+          : -1
+
+        this.selectedItems.splice(this.selectedIndex, 1)
+        this.selectedIndex = newIndex
+        this.$emit('change', this.selectedItems)
       },
       filterDuplicates (arr) {
         return arr.filter((el, i, self) => i === self.indexOf(el))
@@ -316,7 +328,7 @@
       genDirectives () {
         return [{
           name: 'click-outside',
-          value: this.unFocus
+          value: () => (this.isActive = false)
         }]
       },
       genListeners () {
@@ -326,9 +338,14 @@
         return {
           ...listeners,
           click: () => {
+            if (this.disabled || this.readonly) return
             this.showMenuItems()
+            this.selectedIndex = -1
           },
-          focus: this.focus,
+          focus: () => {
+            if (this.disabled || this.readonly) return
+            this.focus()
+          },
           keydown: this.onKeyDown // Located in mixins/autocomplete.js
         }
       },
@@ -351,6 +368,31 @@
 
         return typeof value === 'undefined' ? item : value
       },
+      genSelectedItems (val) {
+        val = val || this.inputValue 
+
+        if (this.tags) {
+          this.selectedItems = val
+        } else {
+          this.selectedItems = this.computedItems.filter(i => {
+            if (!this.multiple && !this.tags) {
+              return this.getValue(i) === this.getValue(val)
+            } else {
+              // Always return Boolean
+              return val.find((j) => {
+                return this.getValue(j) === this.getValue(i)
+              }) !== undefined
+            }
+          })
+        }
+
+        // Set searchValue text
+        if (!this.multiple) {
+          this.$nextTick(() => {
+            this.searchValue = this.getText(this.selectedItem)
+          })
+        }
+      },
       getText (item) {
         return this.getPropertyFromItem(item, this.itemText)
       },
@@ -360,6 +402,7 @@
       inputAppendCallback () {
         if (this.clearable && this.isDirty) {
           this.inputValue = this.multiple ? [] : null
+          this.selectedItems = []
         }
 
         this.focus()
@@ -381,9 +424,11 @@
         }
       },
       selectItem (item) {
-        if (!this.multiple) {
+        if (!this.multiple && !this.tags) {
           this.inputValue = this.returnObject ? item : this.getValue(item)
+          this.selectedItems = [item]
         } else {
+          const selectedItems = []
           const inputValue = this.inputValue.slice()
           const i = this.inputValue.findIndex((i) => {
             return this.getValue(i) === this.getValue(item)
@@ -391,8 +436,10 @@
 
           i !== -1 && inputValue.splice(i, 1) || inputValue.push(item)
           this.inputValue = inputValue.map((i) => {
+            selectedItems.push(i)
             return this.returnObject ? i : this.getValue(i)
           })
+          this.selectedItems = selectedItems
         }
 
         this.searchValue = this.multiple ? '' : this.inputValue
@@ -409,10 +456,6 @@
       showMenuItems () {
         this.isActive = true
         this.menuIsActive = true
-      },
-      unFocus () {
-        this.isActive = false
-        this.isFocused = false
       }
     },
 

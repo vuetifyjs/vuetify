@@ -3,14 +3,22 @@ import VSelect from '~components/VSelect'
 
 test('VSelect.vue', ({ mount }) => {
   const up = new Event('keydown')
+  const right = new Event('keydown')
   const down = new Event('keydown')
+  const left = new Event('keydown')
   const space = new Event('keydown')
   const enter = new Event('keydown')
+  const backspace = new Event('keydown')
+  const del = new Event('keydown')
 
   up.keyCode = 38
+  right.keyCode = 39
   down.keyCode = 40
+  left.keyCode = 37
   space.keyCode = 32
   enter.keyCode = 13
+  backspace.keyCode = 8
+  del.keyCode = 46
 
   // Inspired by https://github.com/vuetifyjs/vuetify/pull/1425 - Thanks @kevmo314
   it('should open the select when focused and enter, space, up or down are pressed', async () => {
@@ -126,6 +134,80 @@ test('VSelect.vue', ({ mount }) => {
 
     expect(wrapper.vm.inputValue).toBe(null)
     expect(wrapper.html()).toMatchSnapshot()
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should create new values when tagging', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        tags: true,
+        value: []
+      }
+    })
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+    wrapper.vm.isActive = true
+    await wrapper.vm.$nextTick()
+    wrapper.vm.searchValue = 'foo'
+    await wrapper.vm.$nextTick()
+    wrapper.vm.onKeyDown(enter)
+    await wrapper.vm.$nextTick()
+
+    expect(change).toHaveBeenCalledWith(['foo'])
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should change selectedIndex with keyboard', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        tags: true,
+        value: ['foo', 'bar']
+      }
+    })
+
+    wrapper.vm.isActive = true
+    await wrapper.vm.$nextTick()
+    wrapper.vm.onKeyDown(left)
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.selectedIndex).toBe(1)
+    wrapper.vm.onKeyDown(left)
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.selectedIndex).toBe(0)
+    wrapper.vm.onKeyDown(left)
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.selectedIndex).toBe(-1)
+
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should delete a tagged item when selected and backspace/delete is pressed', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        tags: true,
+        value: ['foo', 'bar']
+      }
+    })
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+    wrapper.vm.isActive = true
+    await wrapper.vm.$nextTick()
+    wrapper.vm.onKeyDown(left)
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.selectedIndex).toBe(1)
+    wrapper.vm.onKeyDown(del)
+    await wrapper.vm.$nextTick()
+    expect(change).toHaveBeenCalledWith(['foo'])
+    expect(wrapper.vm.selectedIndex).toBe(0)
+    wrapper.vm.onKeyDown(backspace)
+    await wrapper.vm.$nextTick()
+    expect(change).toHaveBeenCalledWith([])
+    expect(wrapper.vm.selectedIndex).toBe(-1)
+
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 })
