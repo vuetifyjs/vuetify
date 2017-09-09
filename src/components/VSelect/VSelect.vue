@@ -51,6 +51,7 @@
         lazySearch: null,
         isActive: false,
         menuIsActive: false,
+        searchTimeout: null,
         selectedIndex: -1,
         selectedItems: [],
         shouldBreak: false
@@ -69,8 +70,8 @@
       chips: Boolean,
       clearable: Boolean,
       close: Boolean,
-      debounce: {
-        type: Number,
+      debounceSearch: {
+        type: [Number, String],
         default: 200
       },
       items: {
@@ -180,7 +181,12 @@
           ) return
 
           this.lazySearch = val
-          this.$emit('update:searchInput', val)
+
+          clearTimeout(this.searchTimeout)
+
+          this.searchTimeout = setTimeout(() => {
+            this.$emit('update:searchInput', val)
+          }, this.debounceSearch)
         }
       },
       selectedItem () {
@@ -257,6 +263,9 @@
         this.$nextTick(() => {
           this.$refs.menu.listIndex = val ? 0 : -1
         })
+      },
+      selectedItems () {
+        clearTimeout(this.searchTimeout)
       },
       value (val) {
         this.inputValue = val
