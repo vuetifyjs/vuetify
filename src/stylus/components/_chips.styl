@@ -35,12 +35,11 @@ theme(chip, "chip")
   white-space: nowrap
 
   .avatar
-    border-radius: 50%
     // Important is needed to account for new avatar structure
     height: $chip-height !important
     width: $chip-height !important
     min-width: $chip-height
-    margin-left: -14px
+    margin-left: -12px
     margin-right: 8px
     color: #fff
 
@@ -87,7 +86,7 @@ theme(chip, "chip")
   &--select-multi
     margin: $chip-margin $chip-margin $chip-margin 0
 
-  .icon
+  .chip__close > .icon
     color: inherit
     opacity: .54
 

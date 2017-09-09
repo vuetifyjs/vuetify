@@ -118,7 +118,8 @@ export default {
       return this.$scopedSlots.selection({
         parent: this,
         item,
-        index
+        index,
+        selected: index === this.selectedIndex
       })
     },
     genChipSelection (item, index) {
@@ -135,6 +136,8 @@ export default {
         on: {
           input: () => this.selectItem(item),
           click: e => {
+            if (isDisabled) return
+
             e.stopPropagation()
             this.focus()
             this.selectedIndex = index

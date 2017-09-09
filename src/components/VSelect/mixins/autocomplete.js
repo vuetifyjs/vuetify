@@ -32,7 +32,11 @@ export default {
       } else if ([9, 27].includes(e.keyCode)) {
         // If select is being tabbed, blur
         return this.blur()
-      } else if (e.keyCode === 13 && this.searchValue) {
+      } else if (e.keyCode === 13 &&
+        this.searchValue &&
+        this.tags &&
+        !this.filteredItems.length
+      ) {
         this.selectedItems.push(this.searchValue)
 
         this.$nextTick(() => {
