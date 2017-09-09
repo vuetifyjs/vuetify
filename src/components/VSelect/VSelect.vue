@@ -193,6 +193,7 @@
             (this.searchValue = this.getText(this.selectedItem))
           this.menuIsActive = false
           this.isFocused = false
+          this.selectedIndex = -1
         }
 
         this.lastItem += !val ? 20 : 0
