@@ -55,4 +55,30 @@ describe('VSnackbar.vue', () => {
     expect(wrapper.data().isActive).toBe(false)
     expect(value).toBeCalledWith(false)
   })
+
+  it('should timeout correctly when initial value is true', async () => {
+    jest.useFakeTimers()
+    const wrapper = mount(VSnackbar, {
+      propsData: {
+        value: true,
+        timeout: 3141
+      }
+    })
+
+    const value = jest.fn()
+
+    wrapper.instance().$on('input', value)
+
+    await wrapper.vm.$nextTick()
+
+    expect(setTimeout.mock.calls.length).toBe(1)
+    expect(setTimeout.mock.calls[0][1]).toBe(3141)
+
+    jest.runAllTimers()
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.data().isActive).toBe(false)
+    expect(value).toBeCalledWith(false)
+  })
 })
