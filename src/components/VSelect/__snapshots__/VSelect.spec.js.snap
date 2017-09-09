@@ -18,7 +18,7 @@ exports[`VSelect.js should have -1 tabindex when disabled 1`] = `
     <div class="menu menu--disabled"
          style="display: inline-block;"
     >
-      <div class="menu__content menu__content--select"
+      <div class="menu__content menu__content--select   menu__content--autocomplete"
            style="max-height: 300px; min-width: 36px; max-width: NaNpx; top: 12px; left: 0px; z-index: 6; display: none;"
       >
         <div class="card"
@@ -74,7 +74,7 @@ exports[`VSelect.js should have explicit tabindex passed through when autocomple
     <div class="menu"
          style="display: inline-block;"
     >
-      <div class="menu__content menu__content--select"
+      <div class="menu__content menu__content--select   menu__content--autocomplete"
            style="max-height: 300px; min-width: 36px; max-width: NaNpx; top: 12px; left: 0px; z-index: 6; display: none;"
       >
         <div class="card"

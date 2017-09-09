@@ -93,12 +93,7 @@ export default {
       ])
     },
     genSelections () {
-      if (this.isAutocomplete &&
-        !this.isMultiple &&
-        this.isFocused &&
-        this.isDirty &&
-        !this.chips
-      ) return []
+      if (this.hideSelections) return []
 
       const children = []
       const chips = this.chips

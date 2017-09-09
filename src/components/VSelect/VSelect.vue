@@ -133,7 +133,8 @@
         const children = [
           'menu__content--select',
           this.auto ? 'menu__content--auto' : '',
-          this.isDropdown ? 'menu__content--dropdown' : ''
+          this.isDropdown ? 'menu__content--dropdown' : '',
+          this.isAutocomplete ? 'menu__content--autocomplete' : ''
         ]
 
         return children.join(' ')
@@ -151,6 +152,13 @@
           : this.filterSearch()
 
         return !this.auto ? items.slice(0, this.lastItem) : items
+      },
+      hideSelections () {
+        return this.isAutocomplete &&
+          !this.isMultiple &&
+          this.isFocused &&
+          this.isDirty &&
+          !this.chips
       },
       isAutocomplete () {
         return this.autocomplete || this.editable || this.tags
