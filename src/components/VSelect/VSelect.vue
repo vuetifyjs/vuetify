@@ -376,22 +376,22 @@
       },
       genSelectedItems (val) {
         val = val || this.inputValue
-        let selectedItems = []
 
-        if (this.isMultiple) {
-          selectedItems = this.computedItems.filter(i => {
-            if (!this.isMultiple) {
-              return this.getValue(i) === this.getValue(val)
-            } else {
-              // Always return Boolean
-              return val.find((j) => {
-                return this.getValue(j) === this.getValue(i)
-              }) !== undefined
-            }
-          })
-        }
+        let selectedItems = this.computedItems.filter(i => {
+          if (!this.isMultiple) {
+            return this.getValue(i) === this.getValue(val)
+          } else {
+            // Always return Boolean
+            return val.find((j) => {
+              return this.getValue(j) === this.getValue(i)
+            }) !== undefined
+          }
+        })
 
-        if (!selectedItems.length && val != null) {
+        if (!selectedItems.length &&
+          val != null &&
+          this.tags
+        ) {
           selectedItems = Array.isArray(val) ? val : [val]
         }
 

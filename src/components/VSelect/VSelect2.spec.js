@@ -236,20 +236,26 @@ test('VSelect.vue', ({ mount }) => {
   })
 
   it('should prepropulate selectedItems', () => {
+    const items = ['foo', 'bar', 'baz']
+
     const wrapper = mount(VSelect, {
       propsData: {
+        items,
         value: 'foo'
       }
     })
 
     const wrapper2 = mount(VSelect, {
       propsData: {
+        items,
+        multiple: true,
         value: ['foo', 'bar']
       }
     })
 
     const wrapper3 = mount(VSelect, {
       propsData: {
+        items,
         value: null
       }
     })
