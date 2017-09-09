@@ -127,7 +127,7 @@
       this.loading && children.push(this.genLoader())
 
       if (typeof this.value !== 'undefined') {
-        data.attrs.value = (typeof this.value === 'object') ? JSON.stringify(this.value) : this.value
+        data.attrs.value = this.value
       }
 
       return h(tag, data, children)
