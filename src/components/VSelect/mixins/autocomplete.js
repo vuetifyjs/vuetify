@@ -41,7 +41,9 @@ export default {
         })
       }
 
-      if (!this.tags) return this.$refs.menu.changeListIndex(e)
+      if (!this.tags ||
+        ![32].includes(e.keyCode)
+      ) this.$refs.menu.changeListIndex(e)
       if (!this.searchValue) this.changeSelectedIndex(e.keyCode)
     }
   }
