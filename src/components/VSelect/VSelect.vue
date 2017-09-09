@@ -344,7 +344,7 @@
           },
           focus: () => {
             if (this.disabled || this.readonly) return
-            this.focus()
+            !this.isFocused && this.focus()
           },
           keydown: this.onKeyDown // Located in mixins/autocomplete.js
         }
@@ -369,7 +369,7 @@
         return typeof value === 'undefined' ? item : value
       },
       genSelectedItems (val) {
-        val = val || this.inputValue 
+        val = val || this.inputValue || []
 
         if (this.tags) {
           this.selectedItems = val
@@ -401,12 +401,15 @@
       },
       inputAppendCallback () {
         if (this.clearable && this.isDirty) {
-          this.inputValue = this.multiple ? [] : null
-          this.selectedItems = []
+          const inputValue = this.multiple ? [] : null
+
+          this.inputValue = inputValue
+          this.$emit('change', inputValue)
+          this.genSelectedItems()
         }
 
-        this.focus()
         this.showMenuItems()
+        this.isAutocomplete && this.focus()
       },
       onScroll () {
         if (!this.isActive) {

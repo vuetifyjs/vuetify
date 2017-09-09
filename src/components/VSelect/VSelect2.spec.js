@@ -116,7 +116,7 @@ test('VSelect.vue', ({ mount }) => {
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
-  it('should be clearable with prop and dirty', async () => {
+  it('should be clearable with prop, dirty and single select', async () => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,
       propsData: {
@@ -133,6 +133,30 @@ test('VSelect.vue', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.inputValue).toBe(null)
+    expect(wrapper.html()).toMatchSnapshot()
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should be clearable with prop, dirty and multi select', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        clearable: true,
+        items: [1, 2],
+        multiple: true,
+        value: [1]
+      }
+    })
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+    await wrapper.vm.$nextTick()
+    const clear = wrapper.find('.input-group__append-icon')[0]
+    expect(wrapper.html()).toMatchSnapshot()
+    clear.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(change).toHaveBeenCalledWith([])
     expect(wrapper.html()).toMatchSnapshot()
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
@@ -191,7 +215,6 @@ test('VSelect.vue', ({ mount }) => {
         value: ['foo', 'bar']
       }
     })
-
     const change = jest.fn()
     wrapper.vm.$on('change', change)
     wrapper.vm.isActive = true
@@ -207,7 +230,6 @@ test('VSelect.vue', ({ mount }) => {
     await wrapper.vm.$nextTick()
     expect(change).toHaveBeenCalledWith([])
     expect(wrapper.vm.selectedIndex).toBe(-1)
-
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 })
