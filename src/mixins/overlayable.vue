@@ -20,9 +20,11 @@
     methods: {
       genOverlay () {
         // If fn is called and timeout is active
+        // or overlay already exists
         // cancel removal of overlay and re-add active
         if ((!this.isActive || this.hideOverlay) ||
-          (this.isActive && this.overlayTimeout)
+          (this.isActive && this.overlayTimeout) ||
+          this.overlay
         ) {
           clearTimeout(this.overlayTimeout)
 
