@@ -41,7 +41,8 @@
       type: {
         type: String,
         default: 'button'
-      }
+      },
+      value: null
     },
 
     computed: {
@@ -124,6 +125,10 @@
 
       tag === 'button' && (data.attrs.type = this.type)
       this.loading && children.push(this.genLoader())
+
+      if (typeof this.value !== 'undefined') {
+        data.attrs.value = (typeof this.value === 'object') ? JSON.stringify(this.value) : this.value
+      }
 
       return h(tag, data, children)
     }
