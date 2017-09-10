@@ -23,14 +23,11 @@ export default {
   },
 
   leave (el, done) {
-    // Remove initial transition
-    el.style.transition = 'none'
     addOnceEventListener(el, 'transitionend', done)
 
     // Set height before we transition to 0
     el.style.overflow = 'hidden'
     el.style.height = `${el.clientHeight}px`
-    el.style.transition = null
 
     setTimeout(() => (el.style.height = 0), 100)
   }
