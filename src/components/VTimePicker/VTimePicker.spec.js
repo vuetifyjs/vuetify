@@ -90,4 +90,40 @@ test('VTimePicker.js', ({ mount }) => {
 
     expect(wrapper.data().period).toEqual('am')
   })
+
+  it('should return proper value for isAllowed method (max)', () => {
+    const wrapper = mount(VTimePicker, {
+      propsData: {
+        allowedMinutes: [50, 55, 0, 5, 10],
+        value: null
+      }
+    })
+
+    expect([0, 5, 10, 15, 20, 45, 50, 55].map(minute => wrapper.vm.isAllowed('minute', minute)))
+      .toEqual([true, true, true, false, false, false, true, true])
+  })
+
+  it('should return proper value for isAllowed method (min/max)', () => {
+    const wrapper = mount(VTimePicker, {
+      propsData: {
+        allowedMinutes: { min: 33, max: 55 },
+        value: null
+      }
+    })
+
+    expect([0, 20, 30, 35, 45, 50, 55].map(minute => wrapper.vm.isAllowed('minute', minute)))
+      .toEqual([false, false, false, true, true, true, true])
+  })
+
+  it('should return proper value for isAllowed method (function)', () => {
+    const wrapper = mount(VTimePicker, {
+      propsData: {
+        allowedMinutes: minute => [55, 0, 5].includes(minute),
+        value: null
+      }
+    })
+
+    expect([0, 5, 45, 50, 55].map(minute => wrapper.vm.isAllowed('minute', minute)))
+      .toEqual([true, true, false, false, true])
+  })
 })
