@@ -215,7 +215,7 @@
           this.searchValue = this.getText(this.selectedItem)
         }
 
-        this.lastItem += !val ? 20 : 0
+        // this.lastItem += !val ? 20 : 0
       },
       isBooted () {
         this.$nextTick(() => {
@@ -499,7 +499,17 @@
         data.directives = this.genDirectives()
       } else {
         data.on = {
-          click: () => this.$refs.input.click()
+          click: () => {
+            if (this.disabled || this.readonly) return
+            
+            // Workaround for clicking select
+            // when using autocomplete
+            // and click doesn't target the input
+            setTimeout(() => {
+              this.focus()
+              this.menuIsActive = true
+            }, 0)
+          }
         }
       }
 
