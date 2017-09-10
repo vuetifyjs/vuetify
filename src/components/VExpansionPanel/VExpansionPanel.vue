@@ -8,7 +8,8 @@
 
     provide () {
       return {
-        panelClick: this.panelClick
+        panelClick: this.panelClick,
+        focusable: this.focusable
       }
     },
 

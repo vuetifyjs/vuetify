@@ -108,4 +108,43 @@ test('VTextField.js', ({ mount }) => {
     await wrapper.vm.$nextTick()
     expect(wrapper.data().shouldValidate).toEqual(false)
   })
+
+  it('should clear input value', async () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        clearable: true,
+        value: 'foo'
+      }
+    })
+
+    const clear = wrapper.find('.input-group__append-icon')[0]
+    const input = jest.fn()
+    wrapper.vm.$on('input', input)
+
+    expect(wrapper.vm.inputValue).toBe('foo')
+
+    clear.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(input).toHaveBeenCalledWith(null)
+  })
+
+  it('should not display counter when set to false', async () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        counter: true,
+        max: 50
+      }
+    })
+
+    expect(wrapper.find('.input-group__counter')[0]).not.toBe(undefined)
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ counter: false })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.find('.input-group__counter')[0]).toBe(undefined)
+  })
 })

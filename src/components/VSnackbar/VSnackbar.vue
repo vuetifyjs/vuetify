@@ -64,6 +64,12 @@
 
     watch: {
       isActive () {
+        this.setTimeout()
+      }
+    },
+
+    methods: {
+      setTimeout() {
         clearTimeout(this.activeTimeout)
 
         if (this.isActive && this.timeout) {
@@ -72,6 +78,10 @@
           }, this.timeout)
         }
       }
+    },
+
+    mounted () {
+      this.setTimeout()
     },
 
     render (h) {

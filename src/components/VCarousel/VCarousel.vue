@@ -24,11 +24,11 @@
     },
 
     props: {
-      value: Number,
       cycle: {
         type: Boolean,
         default: true
       },
+      hideControls: Boolean,
       icon: {
         type: String,
         default: 'fiber_manual_record'
@@ -45,7 +45,8 @@
       rightControlIcon: {
         type: [Boolean, String],
         default: 'chevron_right'
-      }
+      },
+      value: Number
     },
 
     watch: {
@@ -164,7 +165,7 @@
       }, [
         this.genIcon('left', this.leftControlIcon, this.prev),
         this.genIcon('right', this.rightControlIcon, this.next),
-        this.genControls(),
+        this.hideControls ? null : this.genControls(),
         this.$slots.default
       ])
     }

@@ -15,6 +15,9 @@ export default {
         return console.warn('Application is missing <v-app> component.')
       }
 
+      // If child has already been removed, bail
+      if (!this.$refs.content) return
+
       app.insertBefore(
         this.$refs.content,
         app.firstChild

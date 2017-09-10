@@ -2,6 +2,9 @@
 
 You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.patreon.com/vuetify)
 
+### $500+
+- [LMAX Exchange](https://www.lmax.com/)
+
 ### $100+
 - [Anthony Gherghetta](https://gorilladash.com/)
 

@@ -27,6 +27,7 @@ module.exports = {
     extensions: ['*', '.js', '.json', '.vue'],
     alias: {
       vuetify: resolve('../src'),
+      'vue$': 'vue/dist/vue.esm.js'
     }
   },
   module: {

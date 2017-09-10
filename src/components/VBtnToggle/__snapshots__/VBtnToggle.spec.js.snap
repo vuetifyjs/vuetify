@@ -184,8 +184,8 @@ exports[`VBtnToggle.vue should use button value attribute if available 1`] = `
 
 <div class="btn-toggle btn-toggle--selected">
   <button type="button"
-          class="btn btn--flat"
           value="left"
+          class="btn btn--flat"
   >
     <div class="btn__content">
       <i class="material-icons icon">
@@ -194,8 +194,8 @@ exports[`VBtnToggle.vue should use button value attribute if available 1`] = `
     </div>
   </button>
   <button type="button"
-          class="btn btn--flat btn--active"
           value="center"
+          class="btn btn--flat btn--active"
           data-selected="true"
           data-only-child="true"
   >
@@ -206,8 +206,8 @@ exports[`VBtnToggle.vue should use button value attribute if available 1`] = `
     </div>
   </button>
   <button type="button"
-          class="btn btn--flat"
           value="right"
+          class="btn btn--flat"
   >
     <div class="btn__content">
       <i class="material-icons icon">

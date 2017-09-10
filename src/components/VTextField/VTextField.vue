@@ -19,7 +19,8 @@
       autofocus: Boolean,
       autoGrow: Boolean,
       box: Boolean,
-      counter: [Number, String],
+      clearable: Boolean,
+      counter: [Boolean, Number, String],
       fullWidth: Boolean,
       multiLine: Boolean,
       placeholder: String,
@@ -86,7 +87,7 @@
     },
 
     watch: {
-      focused (val) {
+      isFocused (val) {
         !val && this.$emit('change', this.lazyValue)
       },
       value () {
@@ -123,13 +124,13 @@
       },
       blur (e) {
         this.$nextTick(() => {
-          this.focused = false
+          this.isFocused = false
           this.validate()
         })
         this.$emit('blur', e)
       },
       focus (e) {
-        this.focused = true
+        this.isFocused = true
         this.$refs.input.focus()
         this.$emit('focus', e)
       },
@@ -161,7 +162,8 @@
             ...this.$listeners,
             blur: this.blur,
             input: this.onInput,
-            focus: this.focus
+            focus: this.focus,
+            click: this.focus
           },
           ref: 'input'
         }

@@ -21,6 +21,12 @@ theme(toolbar, "toolbar")
   .input-group--solo
     .input-group__details
       display: none
+      
+  .input-group--single-line:not(.input-group--solo)
+    padding: 0
+
+    label
+      top: auto
 
 /** Children */
 .toolbar
@@ -65,6 +71,9 @@ theme(toolbar, "toolbar")
     height: 100%
     max-width: 100%
     padding: 0
+    
+    .menu
+      height: 100%
 
     > .menu .menu__activator
       height: 100%

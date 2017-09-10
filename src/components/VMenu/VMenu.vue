@@ -125,7 +125,7 @@
         default: 'top left'
       },
       transition: {
-        type: String,
+        type: [Boolean, String],
         default: 'menu-transition'
       },
       positionX: {
