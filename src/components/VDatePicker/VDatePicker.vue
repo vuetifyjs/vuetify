@@ -13,8 +13,6 @@
   import Touch from '../../directives/touch'
 
   const defaultDateFormat = val => new Date(val).toISOString().substr(0, 10)
-  const supportsLocaleFormat = ('toLocaleDateString' in Date.prototype)
-    && new Date(2000, 0, 15).toLocaleDateString('en', { day: 'numeric' }) == '15'
 
   export default {
     name: 'v-date-picker',
@@ -74,7 +72,10 @@
     },
 
     computed: {
-      supportsLocaleFormat: () => supportsLocaleFormat,
+      supportsLocaleFormat() {
+        return ('toLocaleDateString' in Date.prototype)
+          && new Date(2000, 0, 15).toLocaleDateString('en', { day: 'numeric' }) == '15'
+      },
       firstAllowedDate () {
         const date = new Date()
         date.setHours(12, 0, 0, 0)
