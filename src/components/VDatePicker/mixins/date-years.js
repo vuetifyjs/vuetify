@@ -26,7 +26,7 @@ export default {
               this.isSelected = false
             }
           }
-        }, i))
+        }, new Date(i, this.month, this.day, 12).toLocaleString(this.locale, { year: 'numeric' })))
       }
       return children
     }
