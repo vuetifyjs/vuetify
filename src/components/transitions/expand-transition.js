@@ -14,7 +14,7 @@ export default {
     el.style.height = 0
     el.style.transition = null
 
-    setTimeout(() => (el.style.height = height), 50)
+    setTimeout(() => (el.style.height = height), 100)
   },
 
   afterEnter (el) {
@@ -32,6 +32,6 @@ export default {
     el.style.height = `${el.clientHeight}px`
     el.style.transition = null
 
-    setTimeout(() => (el.style.height = 0), 50)
+    setTimeout(() => (el.style.height = 0), 100)
   }
 }

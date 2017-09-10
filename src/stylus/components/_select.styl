@@ -1,6 +1,9 @@
 @import '../bootstrap'
 
 .input-group--select
+  // TODO: revisit this
+  overflow: hidden
+
   .input-group--select__autocomplete
     display: block
     padding-bottom: 1px
@@ -60,6 +63,9 @@
   &.input-group--editable,
   &.input-group--segmented
     padding: 0
+    
+    .input-group__append-icon
+      padding: 0
 
     .input-group__selections,
     input

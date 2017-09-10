@@ -266,14 +266,14 @@
       },
       selectedItems () {
         clearTimeout(this.searchTimeout)
-      },
-      value (val) {
-        this.inputValue = val
-        this.validate()
 
         if (this.isAutocomplete) {
           this.$nextTick(this.$refs.menu.updateDimensions)
         }
+      },
+      value (val) {
+        this.inputValue = val
+        this.validate()
       }
     },
 
@@ -497,6 +497,10 @@
       if (!this.isAutocomplete) {
         data.on = this.genListeners()
         data.directives = this.genDirectives()
+      } else {
+        data.on = {
+          click: () => this.$refs.input.click()
+        }
       }
 
       return this.genInputGroup([

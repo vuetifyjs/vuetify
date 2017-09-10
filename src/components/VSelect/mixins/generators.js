@@ -117,29 +117,32 @@ export default {
         parent: this,
         item,
         index,
-        selected: index === this.selectedIndex
+        selected: index === this.selectedIndex,
+        disabled: this.disabled || this.readonly
       })
     },
     genChipSelection (item, index) {
       const isDisabled = this.disabled || this.readonly
+      const click = e => {
+        if (isDisabled) return
+
+        e.stopPropagation()
+        this.focus()
+        this.selectedIndex = index
+      }
 
       return this.$createElement('v-chip', {
         staticClass: 'chip--select-multi',
         props: {
           close: !isDisabled,
           dark: this.dark,
-          disabled: isDisabled,
+          disabled: isDisabled || !this.isFocused,
           selected: index === this.selectedIndex
         },
         on: {
-          input: () => this.selectItem(item),
-          click: e => {
-            if (isDisabled) return
-
-            e.stopPropagation()
-            this.focus()
-            this.selectedIndex = index
-          }
+          click: click,
+          focus: click,
+          input: () => this.selectItem(item)
         },
         key: this.getValue(item)
       }, this.getText(item))
