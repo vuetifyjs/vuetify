@@ -26,6 +26,18 @@ export default {
 
       // Workaround for #1409
       date.setHours(1)
+
+      let buttonText
+      if (typeof this.headerDateFormat === 'function') {
+        buttonText = this.headerDateFormat(date)
+      } else if (this.supportsLocaleFormat) {
+        buttonText = date.toLocaleDateString(this.locale, this.headerDateFormat)
+      } else {
+        buttonText = date.getFullYear() + '/'
+        if (date.getMonth() < 9) buttonText += '0'
+        buttonText += (1 + date.getMonth())
+      }
+
       const header = this.$createElement('div', {
         'class': 'picker--date__header-selector-date'
       }, [
@@ -34,8 +46,7 @@ export default {
         }, [
           this.$createElement('strong', {
             key: this.tableMonth
-          }, typeof this.headerDateFormat === 'function' ? this.headerDateFormat(date) : date.toLocaleString(this.locale, this.headerDateFormat))
-        ])
+          }, buttonText)])
       ])
 
       return this.$createElement('div', {
