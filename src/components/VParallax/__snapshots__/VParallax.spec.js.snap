@@ -3,16 +3,14 @@
 exports[`VParallax.js should render 1`] = `
 
 <div class="parallax"
-     style="min-height: 500px;"
+     style="height: 500px;"
 >
   <div class="parallax__image-container">
     <img class="parallax__image"
          style="display: block; opacity: 0;"
     >
   </div>
-  <div class="parallax__content"
-       style="min-height: 500px;"
-  >
+  <div class="parallax__content">
   </div>
 </div>
 
