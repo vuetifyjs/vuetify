@@ -8,13 +8,12 @@ chip($material)
   &__close
     color: $material.icons.active
 
-  &.chip--select-multi
-    &.chip--selected
-      background: $theme.accent
+  &.chip--selected
+    background: $theme.accent
+    color: $material.text.theme
+
+    .chip__close
       color: $material.text.theme
-    
-      .chip__close
-        color: $material.text.theme
 
 theme(chip, "chip")
 
@@ -87,9 +86,13 @@ theme(chip, "chip")
   &--select-multi
     margin: $chip-margin $chip-margin $chip-margin 0
 
-  .icon
+  .icon,
+  .chip__close
     color: inherit !important // I don't like this
+
+  .icon
     opacity: .54
+    transition: none
 
     &--right
       margin-left: 4px
