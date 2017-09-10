@@ -50,7 +50,7 @@ export default {
             }
           }
         }, [
-          this.year,
+          new Date(this.year, this.month, this.day, 12).toLocaleDateString(this.locale, { year: 'numeric' }),
           this.genYearIcon()
         ]),
         this.$createElement('div', {
