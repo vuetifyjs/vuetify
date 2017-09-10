@@ -16,7 +16,15 @@ export default {
       // Workaround for #1409
       date.setHours(1)
 
-      date = typeof this.titleDateFormat === 'function' ? this.titleDateFormat(date) : date.toLocaleString(this.locale, this.titleDateFormat)
+      if (typeof this.titleDateFormat === 'function') {
+        date = this.titleDateFormat(date)
+      } else if (this.supportsLocaleFormat) {
+        date = date.toLocaleDateString(this.locale, this.titleDateFormat)
+      } else if ('toLocaleDateString' in Date.prototype) {
+        date = date.toLocaleDateString(this.locale)
+      } else {
+        date = date.toISOString().substr(0, 10)
+      }
 
       if (this.landscape) {
         if (date.indexOf(',') > -1) date = date.replace(',', ',<br>')
@@ -35,6 +43,7 @@ export default {
         })
       ])
 
+      const titleDate = new Date(this.year, this.month, this.day, 12)
       return this.$createElement('div', {
         'class': 'picker__title'
       }, [
@@ -50,7 +59,9 @@ export default {
             }
           }
         }, [
-          new Date(this.year, this.month, this.day, 12).toLocaleDateString(this.locale, { year: 'numeric' }),
+          this.supportsLocaleFormat
+            ? titleDate.toLocaleDateString(this.locale, { year: 'numeric' })
+            : this.year,
           this.genYearIcon()
         ]),
         this.$createElement('div', {
