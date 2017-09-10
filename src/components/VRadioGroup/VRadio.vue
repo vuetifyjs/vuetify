@@ -41,6 +41,7 @@
         return this.addColorClassChecks({
           'input-group': true,
           'input-group--active': this.isActive,
+          'input-group--disabled': this.disabled,
           'input-group--selection-controls': true,
           'input-group--tab-focused': this.tabFocused,
           'radio': true,
