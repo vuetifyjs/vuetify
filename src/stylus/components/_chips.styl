@@ -58,6 +58,7 @@ theme(chip, "chip")
 
   &--outline
     background: $chip-outline-background
+    border: 1px solid transparent
     color: $chip-outline-color
 
   &--small
@@ -86,8 +87,8 @@ theme(chip, "chip")
   &--select-multi
     margin: $chip-margin $chip-margin $chip-margin 0
 
-  .chip__close > .icon
-    color: inherit
+  .icon
+    color: inherit !important // I don't like this
     opacity: .54
 
   .icon--right
