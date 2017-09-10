@@ -47,9 +47,9 @@ theme(chip, "chip")
       width: 100%
       height: 100%
 
-  &:not(.chip--disabled)
-    &:focus,
-    &--active
+  &:focus,
+  &--active
+    &:not(.chip--disabled)
       elevation(2)
       outline: none
 
@@ -91,8 +91,8 @@ theme(chip, "chip")
     color: inherit !important // I don't like this
     opacity: .54
 
-  .icon--right
-    margin-left: 4px
+    &--right
+      margin-left: 4px
 
-  .icon--left
-    margin-right: 4px
+    &--left
+      margin-right: 4px

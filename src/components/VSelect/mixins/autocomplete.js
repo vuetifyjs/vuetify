@@ -50,7 +50,8 @@ export default {
       ) this.$refs.menu.changeListIndex(e)
 
       if (this.isAutocomplete &&
-        !this.hideSelections
+        !this.hideSelections &&
+        !this.searchValue
       ) this.changeSelectedIndex(e.keyCode)
     }
   }

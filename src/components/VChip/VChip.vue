@@ -40,7 +40,7 @@
       const children = [this.$slots.default]
       const data = {
         'class': this.classes,
-        attrs: { tabindex: -1 },
+        attrs: { tabindex: this.disabled ? -1 : 0 },
         directives: [{
           name: 'show',
           value: this.isActive
