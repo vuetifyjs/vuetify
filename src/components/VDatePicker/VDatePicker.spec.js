@@ -15,4 +15,19 @@ test('VDatePicker.js', ({ mount }) => {
     expect(title.text()).toBe('Tue, Nov 1')
     expect(header.text()).toBe('November 2005')
   })
+
+  it('should match snapshot with formatting functions', () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: new Date('November 1 2005'),
+        headerDateFormat: date => {
+          return (date.getFullYear() * 2).toString() + ' ' + ['حمل', 'ثور', 'جوزا', 'سرطان',' اسد', 'سنبله' ,'میزان' ,'عقرب' ,'قوس', 'جدی' ,'دلو', 'حوت'][11-date.getMonth()]
+        },
+        titleDateFormat: date => {
+          return (date.getFullYear() * 2).toString() + ' ' + ['حمل', 'ثور', 'جوزا', 'سرطان',' اسد', 'سنبله' ,'میزان' ,'عقرب' ,'قوس', 'جدی' ,'دلو', 'حوت'][11-date.getMonth()]
+        }
+      }
+    })
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

@@ -50,11 +50,11 @@
         default: defaultDateFormat
       },
       titleDateFormat: {
-        type: Object,
+        type: [Object, Function],
         default: () => ({ weekday: 'short', month: 'short', day: 'numeric' })
       },
       headerDateFormat: {
-        type: Object,
+        type: [Object, Function],
         default: () => ({ month: 'long', year: 'numeric' })
       },
       formattedValue: {
