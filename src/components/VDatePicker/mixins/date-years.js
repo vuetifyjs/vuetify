@@ -30,7 +30,7 @@ export default {
           on: {
             click: () => this.yearClick(year)
           }
-        }, year))
+        }, new Date(year, this.month, this.day, 12).toLocaleString(this.locale, { year: 'numeric' })))
       }
       return children
     }

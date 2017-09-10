@@ -169,9 +169,16 @@
 
     watch: {
       activePicker (val, prev) {
-        val === 'YEAR' && setTimeout(() => {
-          this.$refs.years.scrollTop = this.$refs.years.scrollHeight / 2 - 125
-        }, 350)
+        if (val !== 'YEAR') return
+
+        // That's a quirk, setting timeout stopped working after fixing #1649
+        // It worked but for timeouts significantly longer than the transition duration
+        const interval = setInterval(() => {
+          if (this.$refs.years) {
+            this.$refs.years.scrollTop = this.$refs.years.scrollHeight / 2 - 125
+            clearInterval(interval)
+          }
+        }, 100)
       },
       tableDate (val, prev) {
         this.isReversing = val < prev

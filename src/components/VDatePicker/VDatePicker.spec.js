@@ -92,4 +92,17 @@ test('VDatePicker.js', ({ mount }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  // Avoriaz/Jsdom (?) doesn't fully support date formatting using locale
+  // This should be tested in browser env
+  it('should match snapshot with locale', () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: '2013-05-07',
+        locale: 'fa-AF'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

@@ -38,9 +38,9 @@ export default {
 
     genSelector () {
       const keyValue = this.activePicker === 'DATE' ? this.tableMonth : this.tableYear
-      const selectorText = this.activePicker === 'DATE'
-        ? new Date(this.tableYear, this.tableMonth, 1, 1 /* Workaround for #1409 */).toLocaleString(this.locale, this.headerDateFormat)
-        : this.tableYear
+      const format = this.activePicker === 'DATE' ? this.headerDateFormat : { year: 'numeric' }
+      const selectorDate = new Date(this.tableYear, this.tableMonth, 1, 1 /* Workaround for #1409 */)
+      const selectorText = selectorDate.toLocaleString(this.locale, format)
 
       return this.$createElement('div', {
         'class': 'picker--date__header-selector'

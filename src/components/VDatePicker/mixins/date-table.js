@@ -36,7 +36,7 @@ export default {
           type: 'button'
         },
         domProps: {
-          innerHTML: `<span class="btn__content">${day}</span>`
+          innerHTML: `<span class="btn__content">${date.toLocaleDateString(this.locale, { day: 'numeric' })}</span>`
         },
         on: {
           click: () => this.dateClick(day)
