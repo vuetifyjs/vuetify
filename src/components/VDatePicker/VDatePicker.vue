@@ -56,12 +56,16 @@
         default: null
       },
       titleDateFormat: {
-        type: Object,
+        type: [Object, Function],
         default: null
       },
       headerDateFormat: {
-        type: Object,
+        type: [Object, Function],
         default: () => ({ month: 'long', year: 'numeric' })
+      },
+      monthFormat: {
+        type: [Object, Function],
+        default: () => ({ month: 'short' })
       },
       formattedValue: {
         required: false
@@ -156,14 +160,20 @@
           month: 'short',
           day: 'numeric'
         })
-        date = date.toLocaleString(this.locale, this.titleDateFormat || defaultTitleDateFormat)
 
-        if (this.landscape) {
-          if (date.indexOf(',') > -1) date = date.replace(',', ',<br>')
-          else if (date.indexOf(' ') > -1) date = date.replace(' ', '<br>')
+        let titleText
+        if (typeof this.titleDateFormat === 'function') {
+          titleText = this.titleDateFormat(date)
+        } else {
+          titleText = date.toLocaleString(this.locale, this.titleDateFormat || defaultTitleDateFormat)
         }
 
-        return date
+        if (this.landscape) {
+          if (titleText.indexOf(',') > -1) titleText = titleText.replace(',', ',<br>')
+          else if (titleText.indexOf(' ') > -1) titleText = titleText.replace(' ', '<br>')
+        }
+
+        return titleText
       }
     },
 

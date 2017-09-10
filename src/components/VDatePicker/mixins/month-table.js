@@ -24,7 +24,7 @@ export default {
     },
     monthGenTD (month) {
       const date = new Date(this.tableYear, month, 1, 12, 0, 0, 0)
-      const monthName = date.toLocaleString(this.locale, { month: 'short' })
+      const monthName = typeof this.monthFormat === 'function' ? this.monthFormat(date) : date.toLocaleString(this.locale, this.monthFormat)
       return this.$createElement('td', [
         this.$createElement('button', {
           'class': {

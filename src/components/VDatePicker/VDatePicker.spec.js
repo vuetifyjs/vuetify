@@ -105,4 +105,34 @@ test('VDatePicker.js', ({ mount }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should match snapshot with title/header formatting functions', () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: new Date('November 1 2005'),
+        headerDateFormat: date => {
+          return (date.getFullYear() * 2).toString() + ' ' + ['حمل', 'ثور', 'جوزا', 'سرطان',' اسد', 'سنبله' ,'میزان' ,'عقرب' ,'قوس', 'جدی' ,'دلو', 'حوت'][11-date.getMonth()]
+        },
+        titleDateFormat: date => {
+          return (date.getFullYear() * 2).toString() + ' ' + ['حمل', 'ثور', 'جوزا', 'سرطان',' اسد', 'سنبله' ,'میزان' ,'عقرب' ,'قوس', 'جدی' ,'دلو', 'حوت'][11-date.getMonth()]
+        }
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should match snapshot with month formatting functions', () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: new Date('November 1 2005'),
+        type: 'month',
+        monthFormat: date => {
+          return ['حمل', 'ثور', 'جوزا', 'سرطان',' اسد', 'سنبله' ,'میزان' ,'عقرب' ,'قوس', 'جدی' ,'دلو', 'حوت'][11-date.getMonth()]
+        }
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
