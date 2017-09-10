@@ -43,6 +43,7 @@ export default {
         })
       ])
 
+      const titleDate = new Date(this.year, this.month, this.day, 12)
       return this.$createElement('div', {
         'class': 'picker__title'
       }, [
@@ -58,7 +59,9 @@ export default {
             }
           }
         }, [
-          this.supportsLocaleFormat ? new Date(this.year, this.month, this.day, 12).toLocaleDateString(this.locale, { year: 'numeric' }) : this.year,
+          this.supportsLocaleFormat
+            ? titleDate.toLocaleDateString(this.locale, { year: 'numeric' })
+            : this.year,
           this.genYearIcon()
         ]),
         this.$createElement('div', {

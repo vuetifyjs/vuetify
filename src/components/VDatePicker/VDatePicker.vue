@@ -13,7 +13,8 @@
   import Touch from '../../directives/touch'
 
   const defaultDateFormat = val => new Date(val).toISOString().substr(0, 10)
-  const supportsLocaleFormat = ('toLocaleString' in Date.prototype) && new Date(2000, 0, 15).toLocaleDateString('en', { day: 'numeric' }) == '15'
+  const supportsLocaleFormat = ('toLocaleDateString' in Date.prototype)
+    && new Date(2000, 0, 15).toLocaleDateString('en', { day: 'numeric' }) == '15'
 
   export default {
     name: 'v-date-picker',
@@ -183,7 +184,12 @@
       date.setDate(date.getDate() - date.getDay() + parseInt(this.firstDayOfWeek))
 
       createRange(7).forEach(index => {
-        const narrow = this.supportsLocaleFormat ? date.toLocaleDateString(this.locale, { weekday: 'narrow' }) : ['S', 'M', 'T', 'W', 'T', 'F', 'S'][(index + parseInt(this.firstDayOfWeek)) % 7]
+        let narrow
+        if (this.supportsLocaleFormat) {
+          narrow = date.toLocaleDateString(this.locale, { weekday: 'narrow' })
+        } else {
+          narrow = ['S', 'M', 'T', 'W', 'T', 'F', 'S'][(index + parseInt(this.firstDayOfWeek)) % 7]
+        }
         this.narrowDays.push(narrow)
 
         date.setDate(date.getDate() + 1)
