@@ -331,9 +331,8 @@
           ? this.selectedIndex
           : -1
 
-        this.selectedItems.splice(this.selectedIndex, 1)
+        this.selectItem(this.selectedItems[this.selectedIndex])
         this.selectedIndex = newIndex
-        this.$emit('change', this.selectedItems)
       },
       filterDuplicates (arr) {
         return arr.filter((el, i, self) => i === self.indexOf(el))
