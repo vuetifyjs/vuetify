@@ -16,7 +16,7 @@ export default {
       // Workaround for #1409
       date.setHours(1)
 
-      date = date.toLocaleString(this.locale, this.titleDateFormat)
+      date = typeof this.titleDateFormat === 'function' ? this.titleDateFormat(date) : date.toLocaleString(this.locale, this.titleDateFormat)
 
       if (this.landscape) {
         if (date.indexOf(',') > -1) date = date.replace(',', ',<br>')

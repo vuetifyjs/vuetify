@@ -26,7 +26,6 @@ export default {
 
       // Workaround for #1409
       date.setHours(1)
-
       const header = this.$createElement('div', {
         'class': 'picker--date__header-selector-date'
       }, [
@@ -35,7 +34,7 @@ export default {
         }, [
           this.$createElement('strong', {
             key: this.tableMonth
-          }, date.toLocaleString(this.locale, this.headerDateFormat))
+          }, typeof this.headerDateFormat === 'function' ? this.headerDateFormat(date) : date.toLocaleString(this.locale, this.headerDateFormat))
         ])
       ])
 
