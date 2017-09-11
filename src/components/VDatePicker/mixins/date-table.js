@@ -31,7 +31,7 @@ export default {
       const button = this.$createElement('button', {
         'class': {
           'btn btn--date-picker btn--floating btn--small btn--flat': true,
-          'btn--active': !this.dateIsCurrent(day) && this.dateIsActive(day),
+          'btn--active': this.dateIsActive(day),
           'btn--outline': this.dateIsCurrent(day) && !this.dateIsActive(day),
           'btn--disabled': !this.isAllowed(date)
         },
