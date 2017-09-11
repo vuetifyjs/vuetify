@@ -143,17 +143,16 @@
         }, this.icon)
       ])
 
-      const ripple = !this.disabled && h('div', {
+      const rippleDirectives = !this.disabled && [{
+        name: 'ripple',
+        value: { center: true }
+      }]
+      const ripple = h('div', {
         'class': 'input-group--selection-controls__ripple',
         on: Object.assign({}, {
           click: this.click
         }, this.$listeners),
-        directives: [
-          {
-            name: 'ripple',
-            value: { center: true }
-          }
-        ]
+        directives: rippleDirectives
       })
 
       return this.genWrapper([transition, ripple])

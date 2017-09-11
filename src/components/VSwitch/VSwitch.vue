@@ -38,12 +38,10 @@
     },
 
     render (h) {
-      const rippleDirectives = !this.disabled && [
-        {
-          name: 'ripple',
-          value: { center: true }
-        }
-      ]
+      const rippleDirectives = !this.disabled && [{
+        name: 'ripple',
+        value: { center: true }
+      }]
       const ripple = h('div', {
         'class': this.rippleClasses,
         on: Object.assign({}, {
