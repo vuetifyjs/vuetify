@@ -38,17 +38,18 @@
     },
 
     render (h) {
+      const rippleDirectives = !this.disabled && [
+        {
+          name: 'ripple',
+          value: { center: true }
+        }
+      ]
       const ripple = h('div', {
         'class': this.rippleClasses,
         on: Object.assign({}, {
           click: this.toggle
         }, this.$listeners),
-        directives: [
-          {
-            name: 'ripple',
-            value: { center: true }
-          }
-        ]
+        directives: rippleDirectives
       })
 
       const container = h('div', {

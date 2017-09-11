@@ -69,7 +69,7 @@
         }, this.icon)
       ])
 
-      const ripple = h('div', {
+      const ripple = !this.disabled && h('div', {
         'class': 'input-group--selection-controls__ripple',
         on: Object.assign({}, {
           click: this.toggle
