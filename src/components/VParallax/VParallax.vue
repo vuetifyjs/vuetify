@@ -65,6 +65,9 @@
       }, [
         h('img', {
           staticClass: 'parallax__image',
+          'class': {
+            'parallax__image--jumbotron': this.jumbotron
+          },
           style: this.styles,
           attrs: {
             src: this.src
@@ -80,7 +83,9 @@
       return h('div', {
         staticClass: 'parallax',
         style: {
-          height: `${parseInt(this.normalizedHeight)}px`
+          height: this.jumbotron
+            ? this.normalizedHeight
+            : `${this.normalizedHeight}px`
         },
         on: this.$listeners
       }, [container, content])
