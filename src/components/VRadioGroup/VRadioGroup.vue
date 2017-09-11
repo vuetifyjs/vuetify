@@ -13,7 +13,8 @@
 
     provide () {
       return {
-        isMandatory: () => this.mandatory
+        isMandatory: () => this.mandatory,
+        name: () => this.name
       }
     },
 
@@ -27,6 +28,7 @@
         type: Boolean,
         default: true
       },
+      name: String,
       row: Boolean
     },
 
@@ -48,7 +50,7 @@
       classes () {
         return {
           'radio-group': true,
-          'radio-group--column': this.column,
+          'radio-group--column': this.column && !this.row,
           'radio-group--row': this.row
         }
       }
