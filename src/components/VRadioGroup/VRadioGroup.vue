@@ -50,7 +50,7 @@
       classes () {
         return {
           'radio-group': true,
-          'radio-group--column': this.column,
+          'radio-group--column': this.column && !this.row,
           'radio-group--row': this.row
         }
       }
