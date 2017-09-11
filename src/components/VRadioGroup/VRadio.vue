@@ -13,7 +13,7 @@
 
     inheritAttrs: false,
 
-    inject: ['isMandatory'],
+    inject: ['isMandatory', 'name'],
 
     components: {
       VFadeTransition,
@@ -57,14 +57,16 @@
 
     methods: {
       genInput (radio) {
-        const value = JSON.stringify(this.value)
+        const value = ['string', 'number'].includes(typeof this.value)
+          ? this.value
+          : JSON.stringify(this.value)
         const input = this.$createElement('input', {
           ref: 'input',
           style: {
             display: 'none'
           },
           attrs: Object.assign({
-            name: 'test', // from parent?
+            name: this.name && this.name(),
             id: this.id,
             type: 'radio',
             value

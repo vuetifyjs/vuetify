@@ -126,9 +126,9 @@
       tag === 'button' && (data.attrs.type = this.type)
       this.loading && children.push(this.genLoader())
 
-      if (typeof this.value !== 'undefined') {
-        data.attrs.value = this.value
-      }
+      data.attrs.value = ['string', 'number'].includes(typeof this.value)
+        ? this.value
+        : JSON.stringify(this.value)
 
       return h(tag, data, children)
     }
