@@ -162,6 +162,7 @@
           },
           attrs: {
             ...this.$attrs,
+            readonly: this.readonly,
             tabindex: this.tabindex,
             'aria-label': (!this.$attrs || !this.$attrs.id) && this.label // Label `for` will be set if we have an id
           },
