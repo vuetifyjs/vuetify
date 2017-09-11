@@ -68,8 +68,6 @@
           return this.value
         },
         set (val) {
-          if (this.type === 'number') val = parseInt(val)
-
           this.$emit('input', val)
 
           this.lazyValue = val
@@ -170,8 +168,7 @@
             ...this.$listeners,
             blur: this.blur,
             input: this.onInput,
-            focus: this.focus,
-            click: this.focus
+            focus: this.focus
           },
           ref: 'input'
         }
