@@ -57,7 +57,9 @@
 
     methods: {
       genInput (radio) {
-        const value = this.value !== undefined && this.value.toString && this.value.toString()
+        const value = ['string', 'number'].includes(typeof this.value)
+          ? this.value
+          : JSON.stringify(this.value)
         const input = this.$createElement('input', {
           ref: 'input',
           style: {
