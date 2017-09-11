@@ -87,13 +87,7 @@
 
     watch: {
       isFocused (val) {
-        if (!val) {
-          const lazyValue = this.type === 'number'
-            ? parseInt(this.lazyValue)
-            : this.lazyValue
-
-          this.$emit('change', lazyValue)
-        }
+        !val && this.$emit('change', this.lazyValue)
       },
       value () {
         this.lazyValue = this.value
