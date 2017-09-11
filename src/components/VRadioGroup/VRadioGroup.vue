@@ -13,7 +13,8 @@
 
     provide () {
       return {
-        isMandatory: () => this.mandatory
+        isMandatory: () => this.mandatory,
+        name: () => this.name
       }
     },
 
@@ -27,6 +28,7 @@
         type: Boolean,
         default: true
       },
+      name: String,
       row: Boolean
     },
 

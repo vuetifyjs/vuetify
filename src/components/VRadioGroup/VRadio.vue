@@ -13,7 +13,7 @@
 
     inheritAttrs: false,
 
-    inject: ['isMandatory'],
+    inject: ['isMandatory', 'name'],
 
     components: {
       VFadeTransition,
@@ -64,7 +64,7 @@
             display: 'none'
           },
           attrs: Object.assign({
-            name: 'test', // from parent?
+            name: this.name && this.name(),
             id: this.id,
             type: 'radio',
             value
