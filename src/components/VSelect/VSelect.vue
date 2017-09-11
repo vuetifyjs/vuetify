@@ -368,10 +368,6 @@
             this.showMenuItems()
             this.selectedIndex = -1
           },
-          focus: () => {
-            if (this.disabled || this.readonly) return
-            !this.isFocused && this.focus()
-          },
           keydown: this.onKeyDown // Located in mixins/autocomplete.js
         }
       },
@@ -396,6 +392,9 @@
       },
       genSelectedItems (val) {
         val = val || this.inputValue
+
+        // If we are using tags, don't filter results
+        if (this.tags) return (this.selectedItems = val)
 
         let selectedItems = this.computedItems.filter(i => {
           if (!this.isMultiple) {
@@ -467,6 +466,7 @@
             selectedItems.push(i)
             return this.returnObject ? i : this.getValue(i)
           })
+
           this.selectedItems = selectedItems
         }
 
@@ -476,11 +476,17 @@
 
         this.$emit('change', this.inputValue)
 
+        // List tile will re-render, reset index to
+        // maintain highlighting
+        const savedIndex = this.$refs.menu.listIndex
+        this.$refs.menu.listIndex = -1
+
         this.$nextTick(() => {
           if (this.isAutocomplete &&
             this.$refs.input
           ) this.$refs.input.focus()
           else this.$el.focus()
+          this.$refs.menu.listIndex = savedIndex
         })
       },
       showMenuItems () {
@@ -501,6 +507,10 @@
       if (!this.isAutocomplete) {
         data.on = this.genListeners()
         data.directives = this.genDirectives()
+        data.on.focus = () => {
+          if (this.disabled || this.readonly) return
+          !this.isFocused && this.focus()
+        }
       } else {
         data.on = {
           click: () => {
