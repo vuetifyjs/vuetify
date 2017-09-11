@@ -428,6 +428,7 @@
           const inputValue = this.isMultiple ? [] : null
 
           this.inputValue = inputValue
+          this.searchValue = null
           this.$emit('change', inputValue)
           this.genSelectedItems()
         }
