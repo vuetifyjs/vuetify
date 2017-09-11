@@ -215,7 +215,7 @@
           this.searchValue = this.getText(this.selectedItem)
         }
 
-        this.lastItem += !val ? 20 : 0
+        // this.lastItem += !val ? 20 : 0
       },
       isBooted () {
         this.$nextTick(() => {
@@ -266,14 +266,14 @@
       },
       selectedItems () {
         clearTimeout(this.searchTimeout)
-      },
-      value (val) {
-        this.inputValue = val
-        this.validate()
 
         if (this.isAutocomplete) {
           this.$nextTick(this.$refs.menu.updateDimensions)
         }
+      },
+      value (val) {
+        this.inputValue = val
+        this.validate()
       }
     },
 
@@ -331,9 +331,8 @@
           ? this.selectedIndex
           : -1
 
-        this.selectedItems.splice(this.selectedIndex, 1)
+        this.selectItem(this.selectedItems[this.selectedIndex])
         this.selectedIndex = newIndex
-        this.$emit('change', this.selectedItems)
       },
       filterDuplicates (arr) {
         return arr.filter((el, i, self) => i === self.indexOf(el))
@@ -497,6 +496,20 @@
       if (!this.isAutocomplete) {
         data.on = this.genListeners()
         data.directives = this.genDirectives()
+      } else {
+        data.on = {
+          click: () => {
+            if (this.disabled || this.readonly) return
+            
+            // Workaround for clicking select
+            // when using autocomplete
+            // and click doesn't target the input
+            setTimeout(() => {
+              this.focus()
+              this.menuIsActive = true
+            }, 0)
+          }
+        }
       }
 
       return this.genInputGroup([

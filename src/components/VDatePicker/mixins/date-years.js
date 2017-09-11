@@ -23,6 +23,11 @@ export default {
     genYearItems () {
       const children = []
       for (let year = this.year + 100, length = this.year - 100; year > length; year--) {
+        const date = new Date(year, this.month, this.day, 12)
+        const buttonText = this.supportsLocaleFormat
+          ? date.toLocaleDateString(this.locale, { year: 'numeric' })
+          : year
+
         children.push(this.$createElement('li', {
           'class': {
             active: this.year === year
@@ -30,7 +35,7 @@ export default {
           on: {
             click: () => this.yearClick(year)
           }
-        }, new Date(year, this.month, this.day, 12).toLocaleString(this.locale, { year: 'numeric' })))
+        }, buttonText))
       }
       return children
     }

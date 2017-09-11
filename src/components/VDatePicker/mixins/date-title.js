@@ -12,6 +12,7 @@ export default {
     },
 
     getYearBtn () {
+      const titleDate = new Date(this.year, this.month, this.day, 12)
       return this.$createElement('div', {
         'class': {
           'picker--date__title-year': true,
@@ -24,7 +25,9 @@ export default {
           }
         }
       }, [
-        new Date(this.year, this.month, this.day, 12).toLocaleDateString(this.locale, { year: 'numeric' }),
+        this.supportsLocaleFormat
+          ? titleDate.toLocaleDateString(this.locale, { year: 'numeric' })
+          : this.year,
         this.genYearIcon()
       ])
     },

@@ -68,6 +68,8 @@
           return this.value
         },
         set (val) {
+          if (this.type === 'number') val = parseInt(val)
+
           this.$emit('input', val)
 
           this.lazyValue = val
@@ -77,7 +79,6 @@
         return this.lazyValue !== null &&
           typeof this.lazyValue !== 'undefined' &&
           this.lazyValue.toString().length > 0 ||
-          this.placeholder ||
           this.badInput ||
           ['time', 'date', 'datetime-local', 'week', 'month'].includes(this.type)
       },
@@ -88,7 +89,13 @@
 
     watch: {
       isFocused (val) {
-        !val && this.$emit('change', this.lazyValue)
+        if (!val) {
+          const lazyValue = this.type === 'number'
+            ? parseInt(this.lazyValue)
+            : this.lazyValue
+
+          this.$emit('change', lazyValue)
+        }
       },
       value () {
         this.lazyValue = this.value
@@ -191,6 +198,10 @@
         return this.$createElement('span', {
           'class': `input-group--text-field__${type}`
         }, this[type])
+      },
+      inputAppendCallback () {
+        this.inputValue = null
+        this.$nextTick(() => this.$refs.input.focus())
       }
     },
 

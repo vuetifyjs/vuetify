@@ -45,7 +45,7 @@
       icons: Boolean,
       mobileBreakPoint: {
         type: [Number, String],
-        default: 1024
+        default: 1280
       },
       value: String,
       scrollable: {

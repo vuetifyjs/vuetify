@@ -39,11 +39,21 @@ export default {
     genSelector () {
       const keyValue = this.activePicker === 'DATE' ? this.tableMonth : this.tableYear
       const selectorDate = new Date(this.tableYear, this.tableMonth, 1, 1 /* Workaround for #1409 */)
-      let selectorText
-      if (this.activePicker === 'DATE') {
-        selectorText = typeof this.headerDateFormat === 'function' ? this.headerDateFormat(selectorDate) : selectorDate.toLocaleString(this.locale, this.headerDateFormat)
-      } else {
-        selectorText = selectorDate.toLocaleString(this.locale, { year: 'numeric' })
+
+      let selectorText = ''
+      if (typeof this.headerDateFormat === 'function' && this.activePicker === 'DATE') {
+        selectorText = this.headerDateFormat(selectorDate, this.activePicker)
+      } else if (this.supportsLocaleFormat) {
+        const format = this.activePicker === 'DATE'
+          ? this.headerDateFormat
+          : { year: 'numeric' }
+        selectorText = selectorDate.toLocaleDateString(this.locale, format)
+      } else if (this.activePicker === 'DATE') {
+        selectorText = selectorDate.getFullYear() + '/'
+        if (selectorDate.getMonth() < 9) selectorText += '0'
+        selectorText += (1 + selectorDate.getMonth())
+      } else if (this.activePicker === 'MONTH') {
+        selectorText = selectorDate.getFullYear()
       }
 
       return this.$createElement('div', {

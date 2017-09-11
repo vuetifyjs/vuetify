@@ -13,7 +13,7 @@
 
   import Touch from '../../directives/touch'
 
-  const createDefaultDateFormat = type => val => new Date(val).toISOString().substr(0, { date: 10, month: 7, year: 4}[type])
+  const createDefaultDateFormat = type => date => new Date(date).toISOString().substr(0, { date: 10, month: 7, year: 4 }[type])
 
   export default {
     name: 'v-date-picker',
@@ -82,6 +82,10 @@
     },
 
     computed: {
+      supportsLocaleFormat() {
+        return ('toLocaleDateString' in Date.prototype)
+          && new Date(2000, 0, 15).toLocaleDateString('en', { day: 'numeric' }) == '15'
+      },
       firstAllowedDate () {
         const date = new Date()
 
@@ -164,8 +168,10 @@
         let titleText
         if (typeof this.titleDateFormat === 'function') {
           titleText = this.titleDateFormat(date)
-        } else {
-          titleText = date.toLocaleString(this.locale, this.titleDateFormat || defaultTitleDateFormat)
+        } else if (this.supportsLocaleFormat) {
+          titleText = date.toLocaleDateString(this.locale, this.titleDateFormat || defaultTitleDateFormat)
+        } else if ('toLocaleDateString' in Date.prototype) {
+          titleText = createDefaultDateFormat(this.type)(date)
         }
 
         if (this.landscape) {
@@ -223,15 +229,15 @@
         if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
       },
       getWeekDays() {
-        const date = new Date(2000, 1, 7)
-        const day = date.getDate() - date.getDay() + parseInt(this.firstDayOfWeek)
-
-        this.narrowDays = []
-        createRange(7).forEach(i => {
-          date.setDate(day + i)
-          const narrow = date.toLocaleString(this.locale, { weekday: 'narrow' })
-          this.narrowDays.push(narrow)
-        })
+        const first = parseInt(this.firstDayOfWeek, 10)
+        if (this.supportsLocaleFormat) {
+          const date = new Date(2000, 1, 7)
+          const day = date.getDate() - date.getDay() + first
+          const format = { weekday: 'narrow' }
+          this.narrowDays = createRange(7).map(i => new Date(2000, 1, day + i).toLocaleDateString(this.locale, format))
+        } else {
+          this.narrowDays = createRange(7).map(i => ['S', 'M', 'T', 'W', 'T', 'F', 'S'][(i + first) % 7])
+        }
       },
       isAllowed (date) {
         if (!this.allowedDates) return true

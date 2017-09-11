@@ -49,6 +49,8 @@ export default {
         ![32].includes(e.keyCode)
       ) this.$refs.menu.changeListIndex(e)
 
+      if ([38, 40].includes(e.keyCode)) this.selectedIndex = -1
+
       if (this.isAutocomplete &&
         !this.hideSelections &&
         !this.searchValue

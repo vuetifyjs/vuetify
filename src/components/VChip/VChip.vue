@@ -49,9 +49,8 @@
       }
 
       if (this.close) {
-        children.push(h('a', {
-          'class': 'chip__close',
-          domProps: { href: 'javascript:;' },
+        const data = {
+          staticClass: 'chip__close',
           on: {
             click: e => {
               e.stopPropagation()
@@ -59,7 +58,15 @@
               this.$emit('input', false)
             }
           }
-        }, [
+        }
+
+        if (!this.disabled) {
+          data.domProps = { href: 'javascript:;' }
+        }
+
+        const tag = this.disabled ? 'div' : 'a'
+
+        children.push(h(tag, data, [
           h('v-icon', { props: { right: true } }, 'cancel')
         ]))
       }

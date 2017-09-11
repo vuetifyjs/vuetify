@@ -25,6 +25,9 @@ export default {
     },
     dateGenTD (day) {
       const date = new Date(this.tableYear, this.tableMonth, day, 12)
+      const buttonText = this.supportsLocaleFormat
+        ? date.toLocaleDateString(this.locale, { day: 'numeric' })
+        : day
       const button = this.$createElement('button', {
         'class': {
           'btn btn--date-picker btn--floating btn--small btn--flat': true,
@@ -36,7 +39,7 @@ export default {
           type: 'button'
         },
         domProps: {
-          innerHTML: `<span class="btn__content">${date.toLocaleDateString(this.locale, { day: 'numeric' })}</span>`
+          innerHTML: `<span class="btn__content">${buttonText}</span>`
         },
         on: {
           click: () => this.dateClick(day)

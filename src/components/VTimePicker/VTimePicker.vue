@@ -194,7 +194,7 @@
         if (!allowed) return true
 
         if (Array.isArray(allowed)) {
-          return !!allowed.find(v => v === value)
+          return !!allowed.some(v => v === value)
         } else if (allowed instanceof Function) {
           return allowed(value)
         } else if (allowed === Object(allowed)) {

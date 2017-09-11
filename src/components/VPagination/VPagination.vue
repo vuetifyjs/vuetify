@@ -16,7 +16,7 @@
         default: 0,
         validator: val => val % 1 === 0
       },
-      totalVisible: Number,
+      totalVisible: [Number, String],
       nextIcon: {
         type: String,
         default: 'chevron_right'
