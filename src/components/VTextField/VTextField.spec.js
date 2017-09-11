@@ -148,4 +148,17 @@ test('VTextField.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
     expect(wrapper.find('.input-group__counter')[0]).toBe(undefined)
   })
+
+  it('should have readonly attribute', () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        readonly: true
+      }
+    })
+
+    const input = wrapper.find('input')[0]
+
+    expect(input.hasAttribute('readonly', 'readonly')).toBe(true)
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
