@@ -69,14 +69,11 @@
         },
         set (val) {
           this.$emit('input', val)
-
-          this.lazyValue = val
         }
       },
       isDirty () {
-        return this.lazyValue !== null &&
-          typeof this.lazyValue !== 'undefined' &&
-          this.lazyValue.toString().length > 0 ||
+        return this.inputValue != null &&
+          this.inputValue.toString().length > 0 ||
           this.badInput ||
           ['time', 'date', 'datetime-local', 'week', 'month'].includes(this.type)
       },
@@ -87,10 +84,16 @@
 
     watch: {
       isFocused (val) {
-        !val && this.$emit('change', this.lazyValue)
+        if (!val &&
+          this.inputValue !== this.lazyValue
+        ) {
+          this.lazyValue = this.inputValue
+          this.$emit('change', this.inputValue)
+        }
       },
-      value () {
-        this.lazyValue = this.value
+      value (val) {
+        // Value was changed externally, update lazy
+        if (!this.isFocused) this.lazyValue = val
         !this.validateOnBlur && this.validate()
         this.shouldAutoGrow && this.calculateInputHeight()
       }
@@ -122,8 +125,9 @@
         this.shouldAutoGrow && this.calculateInputHeight()
       },
       blur (e) {
+        this.isFocused = false
+
         this.$nextTick(() => {
-          this.isFocused = false
           this.validate()
         })
         this.$emit('blur', e)
@@ -143,6 +147,8 @@
       },
       genInput () {
         const tag = this.multiLine || this.textarea ? 'textarea' : 'input'
+        const listeners = this.$listeners || {}
+        delete listeners['change'] // Change should not be bound externally
 
         const data = {
           style: {},
@@ -150,7 +156,7 @@
             autofocus: this.autofocus,
             disabled: this.disabled,
             required: this.required,
-            value: this.lazyValue
+            value: this.inputValue
           },
           attrs: {
             ...this.$attrs,
@@ -158,12 +164,11 @@
             tabindex: this.tabindex,
             'aria-label': (!this.$attrs || !this.$attrs.id) && this.label // Label `for` will be set if we have an id
           },
-          on: {
-            ...this.$listeners,
+          on: Object.assign(listeners, {
             blur: this.blur,
             input: this.onInput,
             focus: this.focus
-          },
+          }),
           ref: 'input'
         }
 
