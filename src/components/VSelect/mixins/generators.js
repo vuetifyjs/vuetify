@@ -72,6 +72,7 @@ export default {
 
       if (this.isAutocomplete) {
         data.attrs.role = 'combobox'
+        data.domProps.autocomplete = this.browserAutocomplete
 
         data.on = {
           ...this.genListeners(),

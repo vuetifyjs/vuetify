@@ -74,6 +74,10 @@
         type: [Number, String],
         default: 200
       },
+      browserAutocomplete: {
+        type: String,
+        default: 'on'
+      },
       items: {
         type: Array,
         default: () => []

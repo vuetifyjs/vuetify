@@ -265,4 +265,19 @@ test('VSelect.vue', ({ mount }) => {
     expect(wrapper3.vm.selectedItems.length).toBe(0)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
+
+  it('should allow changing of browser autocomplete', () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        autocomplete: true,
+        browserAutocomplete: 'off'
+      }
+    })
+
+    const input = wrapper.find('input')[0]
+
+    expect(input.hasAttribute('autocomplete', 'off')).toBe(true)
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 })
