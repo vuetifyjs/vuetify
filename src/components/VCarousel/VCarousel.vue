@@ -148,6 +148,8 @@
         this.inputValue = index
       },
       startTimeout () {
+        if (!this.cycle) return
+
         this.slideTimeout = setTimeout(() => this.next(), this.interval > 0 ? this.interval : 6000)
       }
     },
