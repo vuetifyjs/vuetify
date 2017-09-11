@@ -141,6 +141,9 @@ export default {
           [`input-group__${type}-icon`]: true,
           'input-group__icon-cb': callbacks.length
         },
+        props: {
+          disabled: this.disabled
+        },
         on: {
           click: e => {
             if (!callbacks.length) return
