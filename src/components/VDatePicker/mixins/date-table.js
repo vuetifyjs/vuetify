@@ -56,7 +56,7 @@ export default {
       ).getDate()
 
       let day = new Date(this.tableYear, this.tableMonth).getDay()
-      day = day < 1 ? 6 : day - parseInt(this.firstDayOfWeek)
+      day = (day + 7 - parseInt(this.firstDayOfWeek)) % 7
 
       for (let i = 0; i < day; i++) {
         rows.push(this.$createElement('td'))
