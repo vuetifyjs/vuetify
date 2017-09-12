@@ -236,7 +236,7 @@
       },
       items (val) {
         if (this.cacheItems) {
-          this.cachedItems = this.filterDuplicates(this.cachedItems.concat(val))
+          this.cachedItems = this.returnObject ? [...val] : this.filterDuplicates(this.cachedItems.concat(val))
         }
 
         this.$refs.menu.listIndex = -1
