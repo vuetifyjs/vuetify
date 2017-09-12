@@ -258,4 +258,21 @@ test('VSelect.js', ({ mount, shallow }) => {
     expect(icon[0].hasAttribute('aria-hidden', 'true')).toBe(true)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
+
+  it('should not duplicate items after items update when caching is turned on', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+       autocomplete: true,
+       cacheItems: true,
+       returnObject: true,
+       items: [],
+      }
+    })
+
+    wrapper.setProps({items: [{id: 1, text: 'A'}]})
+    expect(wrapper.vm.cachedItems.length).toBe(1)
+    wrapper.setProps({items: [{id: 1, text: 'A'}]})
+    expect(wrapper.vm.cachedItems.length).toBe(1)
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 })
