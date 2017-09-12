@@ -198,7 +198,7 @@
 
         return this.selectedItems.find(i => (
           this.getValue(i) === this.getValue(this.inputValue)
-        ))
+        )) || null
       }
     },
 
@@ -368,6 +368,11 @@
             this.showMenuItems()
             this.selectedIndex = -1
           },
+          focus: () => {
+            if (this.disabled || this.readonly) return
+
+            !this.isFocused && this.focus()
+          },
           keydown: this.onKeyDown // Located in mixins/autocomplete.js
         }
       },
@@ -507,10 +512,6 @@
       if (!this.isAutocomplete) {
         data.on = this.genListeners()
         data.directives = this.genDirectives()
-        data.on.focus = () => {
-          if (this.disabled || this.readonly) return
-          !this.isFocused && this.focus()
-        }
       } else {
         data.on = {
           click: () => {
@@ -520,9 +521,11 @@
             // when using autocomplete
             // and click doesn't target the input
             setTimeout(() => {
+              if (this.menuIsActive) return
+
               this.focus()
               this.menuIsActive = true
-            }, 0)
+            }, 100)
           }
         }
       }
