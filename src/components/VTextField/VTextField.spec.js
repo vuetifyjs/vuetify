@@ -148,6 +148,39 @@ test('VTextField.js', ({ mount }) => {
     expect(input).toHaveBeenCalledWith(null)
   })
 
+  it('should not clear input if not clearble and has appended icon (with callback)', async () => {
+    let called = 0
+    const wrapper = mount(VTextField, {
+      propsData: {
+        value: 'foo',
+        appendIcon: 'block',
+        appendIconCb: () => called++
+      }
+    })
+
+    const icon = wrapper.find('.input-group__append-icon')[0]
+    icon.trigger('click')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.inputValue).toBe('foo')
+    expect(called).toBe(1)
+  })
+
+  it('should not clear input if not clearble and has appended icon (without callback)', async () => {
+    let called = 0
+    const wrapper = mount(VTextField, {
+      propsData: {
+        value: 'foo',
+        appendIcon: 'block',
+      }
+    })
+
+    const icon = wrapper.find('.input-group__append-icon')[0]
+    icon.trigger('click')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.inputValue).toBe('foo')
+    expect(called).toBe(0)
+  })
+
   it('should start validating on blur', async () => {
     const wrapper = mount(VTextField, {})
 
