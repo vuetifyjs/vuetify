@@ -886,6 +886,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           'aria-hidden': true
         },
         'class': (_class = {}, _defineProperty(_class, 'input-group__' + type + '-icon', true), _defineProperty(_class, 'input-group__icon-cb', callbacks.length), _class),
+        props: {
+          disabled: this.disabled
+        },
         on: {
           click: function click(e) {
             if (!callbacks.length) return;
@@ -3160,7 +3163,7 @@ process.umask = function() { return 0; };
 /* 35 */
 /***/ (function(module, exports) {
 
-module.exports = {"name":"vuetify","version":"0.15.2","author":{"name":"John Leider","email":"john@vuetifyjs.com"},"license":"MIT","homepage":"http://vuetifyjs.com","main":"dist/vuetify.js","unpkg":"dist/vuetify.js","types":"index.d.ts","scripts":{"watch":"cross-env TARGET=development webpack --config build/config.js --progress --hide-modules --watch","dev":"cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.config.js --open --hot","build:dev":"cross-env NODE_ENV=production node build/webpack.dev.config.js","build":"rimraf dist && cross-env NODE_ENV=production webpack --config build/config.js --progress --hide-modules","debug-build":"node --inspect --debug-brk build/config.js","test":"cross-env NODE_ENV=test jest --no-cache --verbose","test-coverage":"cross-env NODE_ENV=test jest --no-cache --coverage --verbose","lint":"eslint --ext .js,.vue src","precommit":"yarn run lint && yarn test","prepush":"yarn run lint && yarn test"},"description":"Vue.js 2 Semantic Component Framework","devDependencies":{"autoprefixer":"^6.6.0","avoriaz":"^3.2.0","babel-cli":"^6.24.1","babel-core":"^6.24.1","babel-eslint":"^7.1.1","babel-jest":"^20.0.3","babel-loader":"^7.1.1","babel-plugin-add-filehash":"^6.9.4","babel-plugin-module-resolver":"^2.7.1","babel-plugin-transform-async-to-generator":"^6.24.1","babel-plugin-transform-runtime":"^6.23.0","babel-polyfill":"^6.26.0","babel-preset-env":"^1.5.1","babel-preset-es2015":"^6.24.1","babel-preset-stage-2":"^6.24.1","chalk":"^1.1.3","chromedriver":"^2.21.2","cross-env":"^3.1.3","cross-spawn":"^4.0.2","css-loader":"^0.23.1","css-mqpacker":"^6.0.1","cssnano":"^3.10.0","eslint":"^3.7.1","eslint-config-standard":"^6.1.0","eslint-config-vue":"^2.0.2","eslint-friendly-formatter":"^2.0.5","eslint-loader":"^1.6.1","eslint-plugin-html":"^1.3.0","eslint-plugin-promise":"^3.4.0","eslint-plugin-pug":"^1.0.0","eslint-plugin-standard":"^3.0.1","eslint-plugin-vue":"^2.1.0","eventsource-polyfill":"^0.9.6","extract-text-webpack-plugin":"^3.0.0","friendly-errors-webpack-plugin":"^1.6.1","function-bind":"^1.0.2","husky":"^0.14.3","jest":"^20.0.4","jest-cli":"^20.0.4","jest-css-modules":"^1.1.0","jest-serializer-html":"^4.0.0","jest-vue-preprocessor":"^0.2.0","lolex":"^1.4.0","nightwatch":"^0.9.8","opn":"^4.0.2","optimize-css-assets-webpack-plugin":"^2.0.0","optimize-js-plugin":"^0.0.4","ora":"^0.3.0","phantomjs-prebuilt":"^2.1.3","postcss-loader":"^1.2.1","precss":"^1.4.0","progress-bar-webpack-plugin":"^1.10.0","pug":"^2.0.0-beta3","pug-loader":"^2.3.0","ress":"^1.1.1","rimraf":"^2.5.4","selenium-server":"2.53.1","semver":"^5.3.0","serialize-javascript":"^1.3.0","shelljs":"^0.7.4","style-loader":"^0.13.1","stylus":"^0.54.5","stylus-loader":"^2.1.1","uglifyjs-webpack-plugin":"^0.4.6","vue":"^2.4.1","vue-loader":"^10.1.0","vue-router":"^2.7.0","vue-server-renderer":"^2.4.1","vue-template-compiler":"^2.4.1","webpack":"^3.2.0","webpack-bundle-analyzer":"^2.9.0","webpack-bundle-size-analyzer":"^2.7.0","webpack-dev-server":"^2.7.1","webpack-merge":"^4.1.0","write-file-webpack-plugin":"^4.1.0"},"dependencies":{},"engines":{"node":">= 4.0.0","npm":">= 3.0.0"},"jest":{"verbose":false,"roots":["<rootDir>/src"],"moduleFileExtensions":["js","vue"],"moduleDirectories":["node_modules"],"moduleNameMapper":{"src/(.*)":"<rootDir>/src/$1"},"transform":{".*\\.(vue)$":"<rootDir>/node_modules/jest-vue-preprocessor","\\.(styl)$":"<rootDir>/node_modules/jest-css-modules",".*\\.(vue|js)$":"<rootDir>/node_modules/babel-jest"},"transformIgnorePatterns":["node_modules/(?!vue-router)"],"snapshotSerializers":["jest-serializer-html"]}}
+module.exports = {"name":"vuetify","version":"0.15.3","author":{"name":"John Leider","email":"john@vuetifyjs.com"},"license":"MIT","homepage":"http://vuetifyjs.com","main":"dist/vuetify.js","unpkg":"dist/vuetify.js","types":"index.d.ts","scripts":{"watch":"cross-env TARGET=development webpack --config build/config.js --progress --hide-modules --watch","dev":"cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.config.js --open --hot","build:dev":"cross-env NODE_ENV=production node build/webpack.dev.config.js","build":"rimraf dist && cross-env NODE_ENV=production webpack --config build/config.js --progress --hide-modules","debug-build":"node --inspect --debug-brk build/config.js","test":"cross-env NODE_ENV=test jest --no-cache --verbose","test-coverage":"cross-env NODE_ENV=test jest --no-cache --coverage --verbose","lint":"eslint --ext .js,.vue src","precommit":"yarn run lint && yarn test","prepush":"yarn run lint && yarn test"},"description":"Vue.js 2 Semantic Component Framework","devDependencies":{"autoprefixer":"^6.6.0","avoriaz":"^3.2.0","babel-cli":"^6.24.1","babel-core":"^6.24.1","babel-eslint":"^7.1.1","babel-jest":"^20.0.3","babel-loader":"^7.1.1","babel-plugin-add-filehash":"^6.9.4","babel-plugin-module-resolver":"^2.7.1","babel-plugin-transform-async-to-generator":"^6.24.1","babel-plugin-transform-runtime":"^6.23.0","babel-polyfill":"^6.26.0","babel-preset-env":"^1.5.1","babel-preset-es2015":"^6.24.1","babel-preset-stage-2":"^6.24.1","chalk":"^1.1.3","chromedriver":"^2.21.2","cross-env":"^3.1.3","cross-spawn":"^4.0.2","css-loader":"^0.23.1","css-mqpacker":"^6.0.1","cssnano":"^3.10.0","eslint":"^3.7.1","eslint-config-standard":"^6.1.0","eslint-config-vue":"^2.0.2","eslint-friendly-formatter":"^2.0.5","eslint-loader":"^1.6.1","eslint-plugin-html":"^1.3.0","eslint-plugin-promise":"^3.4.0","eslint-plugin-pug":"^1.0.0","eslint-plugin-standard":"^3.0.1","eslint-plugin-vue":"^2.1.0","eventsource-polyfill":"^0.9.6","extract-text-webpack-plugin":"^3.0.0","friendly-errors-webpack-plugin":"^1.6.1","function-bind":"^1.0.2","husky":"^0.14.3","jest":"^20.0.4","jest-cli":"^20.0.4","jest-css-modules":"^1.1.0","jest-serializer-html":"^4.0.0","jest-vue-preprocessor":"^0.2.0","lolex":"^1.4.0","nightwatch":"^0.9.8","opn":"^4.0.2","optimize-css-assets-webpack-plugin":"^2.0.0","optimize-js-plugin":"^0.0.4","ora":"^0.3.0","phantomjs-prebuilt":"^2.1.3","postcss-loader":"^1.2.1","precss":"^1.4.0","progress-bar-webpack-plugin":"^1.10.0","pug":"^2.0.0-beta3","pug-loader":"^2.3.0","ress":"^1.1.1","rimraf":"^2.5.4","selenium-server":"2.53.1","semver":"^5.3.0","serialize-javascript":"^1.3.0","shelljs":"^0.7.4","style-loader":"^0.13.1","stylus":"^0.54.5","stylus-loader":"^2.1.1","uglifyjs-webpack-plugin":"^0.4.6","vue":"^2.4.1","vue-loader":"^10.1.0","vue-router":"^2.7.0","vue-server-renderer":"^2.4.1","vue-template-compiler":"^2.4.1","webpack":"^3.2.0","webpack-bundle-analyzer":"^2.9.0","webpack-bundle-size-analyzer":"^2.7.0","webpack-dev-server":"^2.7.1","webpack-merge":"^4.1.0","write-file-webpack-plugin":"^4.1.0"},"dependencies":{},"engines":{"node":">= 4.0.0","npm":">= 3.0.0"},"jest":{"verbose":false,"roots":["<rootDir>/src"],"moduleFileExtensions":["js","vue"],"moduleDirectories":["node_modules"],"moduleNameMapper":{"src/(.*)":"<rootDir>/src/$1"},"transform":{".*\\.(vue)$":"<rootDir>/node_modules/jest-vue-preprocessor","\\.(styl)$":"<rootDir>/node_modules/jest-css-modules",".*\\.(vue|js)$":"<rootDir>/node_modules/babel-jest"},"transformIgnorePatterns":["node_modules/(?!vue-router)"],"snapshotSerializers":["jest-serializer-html"]}}
 
 /***/ }),
 /* 36 */
@@ -3853,6 +3856,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data.attrs = data.attrs || {};
 
     var classes = {
+      'icon--disabled': props.disabled,
       'icon--large': props.large,
       'icon--left': props.left,
       'icon--medium': props.medium,
@@ -3881,7 +3885,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
 
     if (thirdPartyIcon) data.staticClass += ' ' + iconName;
-    if (props.disabled) data.attrs.disabled = props.disabled;
     !(thirdPartyIcon || props.fa || props.mdi) && children.push(iconName);
 
     return h('i', data, children);
@@ -4690,6 +4693,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_route_link__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_themeable__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mixins_toggleable__ = __webpack_require__(4);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 
@@ -4809,9 +4814,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     tag === 'button' && (data.attrs.type = this.type);
     this.loading && children.push(this.genLoader());
 
-    if (typeof this.value !== 'undefined') {
-      data.attrs.value = this.value;
-    }
+    data.attrs.value = ['string', 'number'].includes(_typeof(this.value)) ? this.value : JSON.stringify(this.value);
 
     return h(tag, data, children);
   }
@@ -5337,6 +5340,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     startTimeout: function startTimeout() {
       var _this3 = this;
+
+      if (!this.cycle) return;
 
       this.slideTimeout = setTimeout(function () {
         return _this3.next();
@@ -6565,6 +6570,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       type: [Number, String],
       default: 200
     },
+    browserAutocomplete: {
+      type: String,
+      default: 'on'
+    },
     items: {
       type: Array,
       default: function _default() {
@@ -6857,10 +6866,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
           _this9.showMenuItems();
           _this9.selectedIndex = -1;
         },
-        focus: function focus() {
-          if (_this9.disabled || _this9.readonly) return;
-          !_this9.isFocused && _this9.focus();
-        },
         keydown: this.onKeyDown // Located in mixins/autocomplete.js
       });
     },
@@ -6885,6 +6890,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       var _this10 = this;
 
       val = val || this.inputValue;
+
+      // If we are using tags, don't filter results
+      if (this.tags) return this.selectedItems = val;
 
       var selectedItems = this.computedItems.filter(function (i) {
         if (!_this10.isMultiple) {
@@ -6914,6 +6922,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         var inputValue = this.isMultiple ? [] : null;
 
         this.inputValue = inputValue;
+        this.searchValue = null;
         this.$emit('change', inputValue);
         this.genSelectedItems();
       }
@@ -6954,6 +6963,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
           selectedItems.push(i);
           return _this12.returnObject ? i : _this12.getValue(i);
         });
+
         this.selectedItems = selectedItems;
       }
 
@@ -6961,8 +6971,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
       this.$emit('change', this.inputValue);
 
+      // List tile will re-render, reset index to
+      // maintain highlighting
+      var savedIndex = this.$refs.menu.listIndex;
+      this.$refs.menu.listIndex = -1;
+
       this.$nextTick(function () {
         if (_this12.isAutocomplete && _this12.$refs.input) _this12.$refs.input.focus();else _this12.$el.focus();
+        _this12.$refs.menu.listIndex = savedIndex;
       });
     },
     showMenuItems: function showMenuItems() {
@@ -6985,6 +7001,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     if (!this.isAutocomplete) {
       data.on = this.genListeners();
       data.directives = this.genDirectives();
+      data.on.focus = function () {
+        if (_this13.disabled || _this13.readonly) return;
+        !_this13.isFocused && _this13.focus();
+      };
     } else {
       data.on = {
         click: function click() {
@@ -7414,7 +7434,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       isContentActive: false,
       isBooted: false,
       maxHeightAutoDefault: '200px',
-      resizeTimeout: {},
       startIndex: 3,
       stopIndex: 0,
       tileLength: 0,
@@ -7552,9 +7571,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (this.disabled) return;
 
       val && this.activate() || this.deactivate();
-    },
-    windowResizeHandler: function windowResizeHandler() {
-      this.isBooted = false;
     }
   },
 
@@ -7572,9 +7588,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.isContentActive = false;
     },
     onResize: function onResize() {
-      clearTimeout(this.resizeTimeout);
       if (!this.isActive) return;
-      this.resizeTimeout = setTimeout(this.updateDimensions, 200);
+
+      this.updateDimensions();
     },
     getOffsetTop: function getOffsetTop() {
       if (typeof window === 'undefined') return 0;
@@ -7603,7 +7619,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     directives.push({
       name: 'resize',
-      value: this.onResize
+      value: {
+        debounce: 500,
+        value: this.onResize
+      }
     });
 
     var data = {
@@ -7732,7 +7751,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (e.target.getAttribute('disabled')) return;
             if (_this.closeOnContentClick) _this.isActive = false;
           },
-          mouseenter: this.mouseEnterHandler,
+          mouseenter: function mouseenter(e) {
+            _this.openOnHover && _this.mouseEnterHandler;
+          },
           mouseleave: function mouseleave(e) {
             _this.openOnHover && _this.mouseLeaveHandler(e);
           }
@@ -8127,6 +8148,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
       if (this.isAutocomplete) {
         data.attrs.role = 'combobox';
+        data.domProps.autocomplete = this.browserAutocomplete;
 
         data.on = _extends({}, this.genListeners(), {
           input: function input(e) {
@@ -9311,7 +9333,7 @@ var defaultDateFormat = function defaultDateFormat(val) {
       var length = new Date(this.tableYear, this.tableMonth + 1, 0).getDate();
 
       var day = new Date(this.tableYear, this.tableMonth).getDay();
-      day = day < 1 ? 6 : day - parseInt(this.firstDayOfWeek);
+      day = (day + 7 - parseInt(this.firstDayOfWeek)) % 7;
 
       for (var i = 0; i < day; i++) {
         rows.push(this.$createElement('td'));
@@ -9725,12 +9747,22 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       }, [icon]);
     },
     toggle: function toggle(uid) {
-      this.isActive = this._uid === uid && !this.isActive;
+      var _this2 = this;
+
+      var isActive = this._uid === uid && !this.isActive;
+
+      if (isActive) this.isBooted = true;
+
+      // We treat bootable differently
+      // Needs time to calc height
+      this.$nextTick(function () {
+        return _this2.isActive = isActive;
+      });
     }
   },
 
   render: function render(h) {
-    var _this2 = this;
+    var _this3 = this;
 
     var children = [];
 
@@ -9748,7 +9780,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       on: {
         keydown: function keydown(e) {
           // Ensure element is focusable and the activeElement
-          if (_this2.focusable && _this2.$el === document.activeElement && e.keyCode === 13) _this2.panelClick(_this2._uid);
+          if (_this3.focusable && _this3.$el === document.activeElement && e.keyCode === 13) _this3.panelClick(_this3._uid);
         }
       }
     }, children);
@@ -10790,6 +10822,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       staticClass: 'parallax__image-container'
     }, [h('img', {
       staticClass: 'parallax__image',
+      'class': {
+        'parallax__image--jumbotron': this.jumbotron
+      },
       style: this.styles,
       attrs: {
         src: this.src
@@ -10804,7 +10839,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return h('div', {
       staticClass: 'parallax',
       style: {
-        height: parseInt(this.normalizedHeight) + 'px'
+        height: this.jumbotron ? this.normalizedHeight : this.normalizedHeight + 'px'
       },
       on: this.$listeners
     }, [container, content]);
@@ -10831,6 +10866,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   computed: {
     normalizedHeight: function normalizedHeight() {
+      if (this.jumbotron) {
+        return isNaN(this.height) ? this.height : this.height + 'px';
+      }
+
       return Number(this.height.toString().replace(/(^[0-9]*$)/, '$1'));
     },
     imgHeight: function imgHeight() {
@@ -11157,6 +11196,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       isMandatory: function isMandatory() {
         return _this.mandatory;
+      },
+      name: function name() {
+        return _this.name;
       }
     };
   },
@@ -11172,6 +11214,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       type: Boolean,
       default: true
     },
+    name: String,
     row: Boolean
   },
 
@@ -11194,7 +11237,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     classes: function classes() {
       return {
         'radio-group': true,
-        'radio-group--column': this.column,
+        'radio-group--column': this.column && !this.row,
         'radio-group--row': this.row
       };
     }
@@ -11293,6 +11336,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_tab_focusable__ = __webpack_require__(197);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mixins_themeable__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__directives_ripple__ = __webpack_require__(7);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 
 
@@ -11308,7 +11352,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   inheritAttrs: false,
 
-  inject: ['isMandatory'],
+  inject: ['isMandatory', 'name'],
 
   components: {
     VFadeTransition: __WEBPACK_IMPORTED_MODULE_0__transitions__["b" /* VFadeTransition */],
@@ -11352,14 +11396,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   methods: {
     genInput: function genInput(radio) {
-      var value = JSON.stringify(this.value);
+      var value = ['string', 'number'].includes(_typeof(this.value)) ? this.value : JSON.stringify(this.value);
       var input = this.$createElement('input', {
         ref: 'input',
         style: {
           display: 'none'
         },
         attrs: Object.assign({
-          name: 'test', // from parent?
+          name: this.name && this.name(),
           id: this.id,
           type: 'radio',
           value: value
@@ -13654,15 +13698,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         return this.value;
       },
       set: function set(val) {
-        if (this.type === 'number') val = parseInt(val);
-
         this.$emit('input', val);
-
-        this.lazyValue = val;
       }
     },
     isDirty: function isDirty() {
-      return this.lazyValue !== null && typeof this.lazyValue !== 'undefined' && this.lazyValue.toString().length > 0 || this.badInput || ['time', 'date', 'datetime-local', 'week', 'month'].includes(this.type);
+      return this.inputValue != null && this.inputValue.toString().length > 0 || this.badInput || ['time', 'date', 'datetime-local', 'week', 'month'].includes(this.type);
     },
     shouldAutoGrow: function shouldAutoGrow() {
       return (this.multiLine || this.textarea) && this.autoGrow;
@@ -13671,14 +13711,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
   watch: {
     isFocused: function isFocused(val) {
-      if (!val) {
-        var lazyValue = this.type === 'number' ? parseInt(this.lazyValue) : this.lazyValue;
-
-        this.$emit('change', lazyValue);
+      if (!val && this.inputValue !== this.lazyValue) {
+        this.lazyValue = this.inputValue;
+        this.$emit('change', this.inputValue);
       }
     },
-    value: function value() {
-      this.lazyValue = this.value;
+    value: function value(val) {
+      // Value was changed externally, update lazy
+      if (!this.isFocused) this.lazyValue = val;
       !this.validateOnBlur && this.validate();
       this.shouldAutoGrow && this.calculateInputHeight();
     }
@@ -13715,8 +13755,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     blur: function blur(e) {
       var _this3 = this;
 
+      this.isFocused = false;
+
       this.$nextTick(function () {
-        _this3.isFocused = false;
         _this3.validate();
       });
       this.$emit('blur', e);
@@ -13736,6 +13777,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     },
     genInput: function genInput() {
       var tag = this.multiLine || this.textarea ? 'textarea' : 'input';
+      var listeners = this.$listeners || {};
+      delete listeners['change']; // Change should not be bound externally
 
       var data = {
         style: {},
@@ -13743,17 +13786,17 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
           autofocus: this.autofocus,
           disabled: this.disabled,
           required: this.required,
-          value: this.lazyValue
+          value: this.inputValue
         },
         attrs: _extends({}, this.$attrs, {
+          readonly: this.readonly,
           tabindex: this.tabindex,
           'aria-label': (!this.$attrs || !this.$attrs.id) && this.label // Label `for` will be set if we have an id
         }),
-        on: _extends({}, this.$listeners, {
+        on: Object.assign(listeners, {
           blur: this.blur,
           input: this.onInput,
-          focus: this.focus,
-          click: this.focus
+          focus: this.focus
         }),
         ref: 'input'
       };
@@ -14511,7 +14554,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     prominent: Boolean,
     scrollOffScreen: Boolean,
     scrollTarget: String,
-    scrollThreshHold: {
+    scrollThreshold: {
       type: Number,
       default: 100
     }
@@ -14556,7 +14599,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       var currentScroll = this.scrollTarget ? this.target.scrollTop : this.target.pageYOffset || document.documentElement.scrollTop;
 
-      if (currentScroll < this.scrollThreshHold) return;
+      if (currentScroll < this.scrollThreshold) return;
 
       if (this.previousScroll === null) {
         this.previousScroll = currentScroll;
