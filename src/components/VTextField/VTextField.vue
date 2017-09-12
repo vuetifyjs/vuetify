@@ -134,7 +134,9 @@
       },
       focus (e) {
         this.isFocused = true
-        this.$refs.input.focus()
+        if (document.activeElement !== this.$refs.input) {
+          this.$refs.input.focus()
+        }
         this.$emit('focus', e)
       },
       genCounter () {

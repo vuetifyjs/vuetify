@@ -127,38 +127,36 @@ test('VTextField.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  // This works in reality, but JSDOM failing again...
-  // it('should clear input value', async () => {
-  //   const wrapper = mount(VTextField, {
-  //     propsData: {
-  //       clearable: true,
-  //       value: 'foo'
-  //     }
-  //   })
+  it('should clear input value', async () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        clearable: true,
+        value: 'foo'
+      }
+    })
 
-  //   const clear = wrapper.find('.input-group__append-icon')[0]
-  //   const input = jest.fn()
-  //   wrapper.vm.$on('input', input)
+    const clear = wrapper.find('.input-group__append-icon')[0]
+    const input = jest.fn()
+    wrapper.vm.$on('input', input)
 
-  //   expect(wrapper.vm.inputValue).toBe('foo')
+    expect(wrapper.vm.inputValue).toBe('foo')
 
-  //   clear.trigger('click')
+    clear.trigger('click')
 
-  //   await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick()
 
-  //   expect(input).toHaveBeenCalledWith(null)
-  // })
+    expect(input).toHaveBeenCalledWith(null)
+  })
 
-  // This test breaks everything
-  // it('should start validating on blur', async () => {
-  //   const wrapper = mount(VTextField, {})
+  it('should start validating on blur', async () => {
+    const wrapper = mount(VTextField, {})
 
-  //   const input = wrapper.find('input')[0]
-  //   expect(wrapper.data().shouldValidate).toEqual(false)
-  //   input.trigger('focus')
-  //   await wrapper.vm.$nextTick()
-  //   input.trigger('blur')
-  //   await wrapper.vm.$nextTick()
-  //   expect(wrapper.data().shouldValidate).toEqual(true)
-  // })
+    const input = wrapper.find('input')[0]
+    expect(wrapper.data().shouldValidate).toEqual(false)
+    input.trigger('focus')
+    await wrapper.vm.$nextTick()
+    input.trigger('blur')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.data().shouldValidate).toEqual(true)
+  })
 })
