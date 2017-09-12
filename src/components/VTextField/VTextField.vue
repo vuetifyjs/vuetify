@@ -69,11 +69,14 @@
         },
         set (val) {
           this.$emit('input', val)
+
+          this.lazyValue = val
         }
       },
       isDirty () {
-        return this.inputValue != null &&
-          this.inputValue.toString().length > 0 ||
+        return this.lazyValue !== null &&
+          typeof this.lazyValue !== 'undefined' &&
+          this.lazyValue.toString().length > 0 ||
           this.badInput ||
           ['time', 'date', 'datetime-local', 'week', 'month'].includes(this.type)
       },
@@ -84,16 +87,10 @@
 
     watch: {
       isFocused (val) {
-        if (!val &&
-          this.inputValue !== this.lazyValue
-        ) {
-          this.lazyValue = this.inputValue
-          this.$emit('change', this.inputValue)
-        }
+        !val && this.$emit('change', this.lazyValue)
       },
-      value (val) {
-        // Value was changed externally, update lazy
-        if (!this.isFocused) this.lazyValue = val
+      value () {
+        this.lazyValue = this.value
         !this.validateOnBlur && this.validate()
         this.shouldAutoGrow && this.calculateInputHeight()
       }
@@ -125,9 +122,8 @@
         this.shouldAutoGrow && this.calculateInputHeight()
       },
       blur (e) {
-        this.isFocused = false
-
         this.$nextTick(() => {
+          this.isFocused = false
           this.validate()
         })
         this.$emit('blur', e)
@@ -158,7 +154,7 @@
             autofocus: this.autofocus,
             disabled: this.disabled,
             required: this.required,
-            value: this.inputValue
+            value: this.lazyValue
           },
           attrs: {
             ...this.$attrs,
