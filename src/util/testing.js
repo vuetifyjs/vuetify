@@ -26,6 +26,8 @@ export function test(name, cb) {
   }))
 }
 
+test.skip = describe.skip
+
 export function functionalContext(context = {}, children = []) {
   if (!Array.isArray(children)) children = [children]
   return {

@@ -15,7 +15,6 @@ const inputOne = Vue.component('input-one', {
 
 test('VForm.js', () => {
   it('test', () => {
-    // eslint-disable-next-line
     const wrapper = mount(VForm, {
       slots: {
         default: [inputOne]
