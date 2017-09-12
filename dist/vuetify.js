@@ -862,47 +862,33 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         key: error
       }, error);
     },
-    genIcon: function genIcon(type, clearable) {
-      var _this = this,
-          _class;
+    genIcon: function genIcon(type) {
+      var _class;
 
-      var callbacks = [];
-      var shouldClear = clearable && this.isDirty;
+      var shouldClear = this.clearable && this.isDirty;
       var icon = shouldClear ? 'clear' : this[type + 'Icon'];
-
-      if (type === 'append' && this.inputAppendCallback) {
-        callbacks.push(this.inputAppendCallback);
-      } else if (type === 'prepend' && this.inputPrependCallback) {
-        callbacks.push(this.inputPrependCallback);
-      }
-
-      if (shouldClear) callbacks.push(function () {
-        return _this.inputValue = null;
-      });
-      if (this[type + 'IconCb']) callbacks.push(this[type + 'IconCb']);
+      var callback = shouldClear ? this.clearableCallback : this[type + 'IconCb'];
 
       return this.$createElement('v-icon', {
         attrs: {
           'aria-hidden': true
         },
-        'class': (_class = {}, _defineProperty(_class, 'input-group__' + type + '-icon', true), _defineProperty(_class, 'input-group__icon-cb', callbacks.length), _class),
+        'class': (_class = {}, _defineProperty(_class, 'input-group__' + type + '-icon', true), _defineProperty(_class, 'input-group__icon-cb', !!callback), _class),
         props: {
           disabled: this.disabled
         },
         on: {
           click: function click(e) {
-            if (!callbacks.length) return;
+            if (!callback) return;
 
             e.stopPropagation();
-            callbacks.every(function (cb) {
-              return cb();
-            });
+            callback();
           }
         }
       }, icon);
     },
     genInputGroup: function genInputGroup(input) {
-      var _this2 = this;
+      var _this = this;
 
       var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
@@ -919,19 +905,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           focus: this.groupFocus,
           blur: this.groupBlur,
           click: function click() {
-            return _this2.tabFocused = false;
+            return _this.tabFocused = false;
           },
           keyup: function keyup(e) {
             if ([9, 16].includes(e.keyCode)) {
-              _this2.tabFocused = true;
+              _this.tabFocused = true;
             }
           },
           keydown: function keydown(e) {
-            if (!_this2.toggle) return;
+            if (!_this.toggle) return;
 
-            if (_this2.toggleKeys.includes(e.keyCode)) {
+            if (_this.toggleKeys.includes(e.keyCode)) {
               e.preventDefault();
-              _this2.toggle();
+              _this.toggle();
             }
           }
         }
@@ -948,7 +934,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       if (this.appendIcon || this.clearable) {
-        wrapperChildren.push(this.genIcon('append', this.clearable));
+        wrapperChildren.push(this.genIcon('append'));
       }
 
       if (this.asyncLoading) {
@@ -3163,7 +3149,7 @@ process.umask = function() { return 0; };
 /* 35 */
 /***/ (function(module, exports) {
 
-module.exports = {"name":"vuetify","version":"0.15.4","author":{"name":"John Leider","email":"john@vuetifyjs.com"},"license":"MIT","homepage":"http://vuetifyjs.com","main":"dist/vuetify.js","unpkg":"dist/vuetify.js","types":"index.d.ts","scripts":{"watch":"cross-env TARGET=development webpack --config build/config.js --progress --hide-modules --watch","dev":"cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.config.js --open --hot","build:dev":"cross-env NODE_ENV=production node build/webpack.dev.config.js","build":"rimraf dist && cross-env NODE_ENV=production webpack --config build/config.js --progress --hide-modules","debug-build":"node --inspect --debug-brk build/config.js","test":"cross-env NODE_ENV=test jest --no-cache --verbose","test-coverage":"cross-env NODE_ENV=test jest --no-cache --coverage --verbose","lint":"eslint --ext .js,.vue src","precommit":"yarn run lint && yarn test","prepush":"yarn run lint && yarn test"},"description":"Vue.js 2 Semantic Component Framework","devDependencies":{"autoprefixer":"^6.6.0","avoriaz":"^3.2.0","babel-cli":"^6.24.1","babel-core":"^6.24.1","babel-eslint":"^7.1.1","babel-jest":"^20.0.3","babel-loader":"^7.1.1","babel-plugin-add-filehash":"^6.9.4","babel-plugin-module-resolver":"^2.7.1","babel-plugin-transform-async-to-generator":"^6.24.1","babel-plugin-transform-runtime":"^6.23.0","babel-polyfill":"^6.26.0","babel-preset-env":"^1.5.1","babel-preset-es2015":"^6.24.1","babel-preset-stage-2":"^6.24.1","chalk":"^1.1.3","chromedriver":"^2.21.2","cross-env":"^3.1.3","cross-spawn":"^4.0.2","css-loader":"^0.23.1","css-mqpacker":"^6.0.1","cssnano":"^3.10.0","eslint":"^3.7.1","eslint-config-standard":"^6.1.0","eslint-config-vue":"^2.0.2","eslint-friendly-formatter":"^2.0.5","eslint-loader":"^1.6.1","eslint-plugin-html":"^1.3.0","eslint-plugin-promise":"^3.4.0","eslint-plugin-pug":"^1.0.0","eslint-plugin-standard":"^3.0.1","eslint-plugin-vue":"^2.1.0","eventsource-polyfill":"^0.9.6","extract-text-webpack-plugin":"^3.0.0","friendly-errors-webpack-plugin":"^1.6.1","function-bind":"^1.0.2","husky":"^0.14.3","jest":"^20.0.4","jest-cli":"^20.0.4","jest-css-modules":"^1.1.0","jest-serializer-html":"^4.0.0","jest-vue-preprocessor":"^0.2.0","lolex":"^1.4.0","nightwatch":"^0.9.8","opn":"^4.0.2","optimize-css-assets-webpack-plugin":"^2.0.0","optimize-js-plugin":"^0.0.4","ora":"^0.3.0","phantomjs-prebuilt":"^2.1.3","postcss-loader":"^1.2.1","precss":"^1.4.0","progress-bar-webpack-plugin":"^1.10.0","pug":"^2.0.0-beta3","pug-loader":"^2.3.0","ress":"^1.1.1","rimraf":"^2.5.4","selenium-server":"2.53.1","semver":"^5.3.0","serialize-javascript":"^1.3.0","shelljs":"^0.7.4","style-loader":"^0.13.1","stylus":"^0.54.5","stylus-loader":"^2.1.1","uglifyjs-webpack-plugin":"^0.4.6","vue":"^2.4.1","vue-loader":"^10.1.0","vue-router":"^2.7.0","vue-server-renderer":"^2.4.1","vue-template-compiler":"^2.4.1","webpack":"^3.2.0","webpack-bundle-analyzer":"^2.9.0","webpack-bundle-size-analyzer":"^2.7.0","webpack-dev-server":"^2.7.1","webpack-merge":"^4.1.0","write-file-webpack-plugin":"^4.1.0"},"dependencies":{},"engines":{"node":">= 4.0.0","npm":">= 3.0.0"},"jest":{"verbose":false,"roots":["<rootDir>/src"],"moduleFileExtensions":["js","vue"],"moduleDirectories":["node_modules"],"moduleNameMapper":{"src/(.*)":"<rootDir>/src/$1"},"transform":{".*\\.(vue)$":"<rootDir>/node_modules/jest-vue-preprocessor","\\.(styl)$":"<rootDir>/node_modules/jest-css-modules",".*\\.(vue|js)$":"<rootDir>/node_modules/babel-jest"},"transformIgnorePatterns":["node_modules/(?!vue-router)"],"snapshotSerializers":["jest-serializer-html"]}}
+module.exports = {"name":"vuetify","version":"0.15.5","author":{"name":"John Leider","email":"john@vuetifyjs.com"},"license":"MIT","homepage":"http://vuetifyjs.com","main":"dist/vuetify.js","unpkg":"dist/vuetify.js","types":"index.d.ts","scripts":{"watch":"cross-env TARGET=development webpack --config build/config.js --progress --hide-modules --watch","dev":"cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.config.js --open --hot","build:dev":"cross-env NODE_ENV=production node build/webpack.dev.config.js","build":"rimraf dist && cross-env NODE_ENV=production webpack --config build/config.js --progress --hide-modules","debug-build":"node --inspect --debug-brk build/config.js","test":"cross-env NODE_ENV=test jest --no-cache --verbose","test-coverage":"cross-env NODE_ENV=test jest --no-cache --coverage --verbose","lint":"eslint --ext .js,.vue src","precommit":"yarn run lint && yarn test","prepush":"yarn run lint && yarn test"},"description":"Vue.js 2 Semantic Component Framework","devDependencies":{"autoprefixer":"^6.6.0","avoriaz":"^3.2.0","babel-cli":"^6.24.1","babel-core":"^6.24.1","babel-eslint":"^7.1.1","babel-jest":"^20.0.3","babel-loader":"^7.1.1","babel-plugin-add-filehash":"^6.9.4","babel-plugin-module-resolver":"^2.7.1","babel-plugin-transform-async-to-generator":"^6.24.1","babel-plugin-transform-runtime":"^6.23.0","babel-polyfill":"^6.26.0","babel-preset-env":"^1.5.1","babel-preset-es2015":"^6.24.1","babel-preset-stage-2":"^6.24.1","chalk":"^1.1.3","chromedriver":"^2.21.2","cross-env":"^3.1.3","cross-spawn":"^4.0.2","css-loader":"^0.23.1","css-mqpacker":"^6.0.1","cssnano":"^3.10.0","eslint":"^3.7.1","eslint-config-standard":"^6.1.0","eslint-config-vue":"^2.0.2","eslint-friendly-formatter":"^2.0.5","eslint-loader":"^1.6.1","eslint-plugin-html":"^1.3.0","eslint-plugin-promise":"^3.4.0","eslint-plugin-pug":"^1.0.0","eslint-plugin-standard":"^3.0.1","eslint-plugin-vue":"^2.1.0","eventsource-polyfill":"^0.9.6","extract-text-webpack-plugin":"^3.0.0","friendly-errors-webpack-plugin":"^1.6.1","function-bind":"^1.0.2","husky":"^0.14.3","jest":"^20.0.4","jest-cli":"^20.0.4","jest-css-modules":"^1.1.0","jest-serializer-html":"^4.0.0","jest-vue-preprocessor":"^0.2.0","lolex":"^1.4.0","nightwatch":"^0.9.8","opn":"^4.0.2","optimize-css-assets-webpack-plugin":"^2.0.0","optimize-js-plugin":"^0.0.4","ora":"^0.3.0","phantomjs-prebuilt":"^2.1.3","postcss-loader":"^1.2.1","precss":"^1.4.0","progress-bar-webpack-plugin":"^1.10.0","pug":"^2.0.0-beta3","pug-loader":"^2.3.0","ress":"^1.1.1","rimraf":"^2.5.4","selenium-server":"2.53.1","semver":"^5.3.0","serialize-javascript":"^1.3.0","shelljs":"^0.7.4","style-loader":"^0.13.1","stylus":"^0.54.5","stylus-loader":"^2.1.1","uglifyjs-webpack-plugin":"^0.4.6","vue":"^2.4.1","vue-loader":"^10.1.0","vue-router":"^2.7.0","vue-server-renderer":"^2.4.1","vue-template-compiler":"^2.4.1","webpack":"^3.2.0","webpack-bundle-analyzer":"^2.9.0","webpack-bundle-size-analyzer":"^2.7.0","webpack-dev-server":"^2.7.1","webpack-merge":"^4.1.0","write-file-webpack-plugin":"^4.1.0"},"dependencies":{},"engines":{"node":">= 4.0.0","npm":">= 3.0.0"},"jest":{"verbose":false,"roots":["<rootDir>/src"],"moduleFileExtensions":["js","vue"],"moduleDirectories":["node_modules"],"moduleNameMapper":{"src/(.*)":"<rootDir>/src/$1"},"transform":{".*\\.(vue)$":"<rootDir>/node_modules/jest-vue-preprocessor","\\.(styl)$":"<rootDir>/node_modules/jest-css-modules",".*\\.(vue|js)$":"<rootDir>/node_modules/babel-jest"},"transformIgnorePatterns":["node_modules/(?!vue-router)"],"snapshotSerializers":["jest-serializer-html"]}}
 
 /***/ }),
 /* 36 */
@@ -6559,6 +6545,16 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       type: String,
       default: 'arrow_drop_down'
     },
+    appendIconCb: {
+      type: Function,
+      default: function _default() {
+        var _this = this;
+
+        return function () {
+          return _this.showMenu();
+        };
+      }
+    },
     auto: Boolean,
     autocomplete: Boolean,
     bottom: Boolean,
@@ -6668,7 +6664,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         return this.lazySearch;
       },
       set: function set(val) {
-        var _this = this;
+        var _this2 = this;
 
         if (!this.isAutocomplete || this.selectedIndex > -1) return;
 
@@ -6677,17 +6673,17 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         clearTimeout(this.searchTimeout);
 
         this.searchTimeout = setTimeout(function () {
-          _this.$emit('update:searchInput', val);
+          _this2.$emit('update:searchInput', val);
         }, this.debounceSearch);
       }
     },
     selectedItem: function selectedItem() {
-      var _this2 = this;
+      var _this3 = this;
 
       if (this.isMultiple) return null;
 
       return this.selectedItems.find(function (i) {
-        return _this2.getValue(i) === _this2.getValue(_this2.inputValue);
+        return _this3.getValue(i) === _this3.getValue(_this3.inputValue);
       }) || null;
     }
   },
@@ -6712,16 +6708,16 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       // this.lastItem += !val ? 20 : 0
     },
     isBooted: function isBooted() {
-      var _this3 = this;
+      var _this4 = this;
 
       this.$nextTick(function () {
-        if (_this3.content) {
-          _this3.content.addEventListener('scroll', _this3.onScroll, false);
+        if (_this4.content) {
+          _this4.content.addEventListener('scroll', _this4.onScroll, false);
         }
       });
     },
     items: function items(val) {
-      var _this4 = this;
+      var _this5 = this;
 
       if (this.cacheItems) {
         this.cachedItems = this.filterDuplicates(this.cachedItems.concat(val));
@@ -6730,7 +6726,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       this.$refs.menu.listIndex = -1;
 
       this.searchValue && this.$nextTick(function () {
-        _this4.$refs.menu.listIndex = 0;
+        _this5.$refs.menu.listIndex = 0;
       });
     },
     menuIsActive: function menuIsActive(val) {
@@ -6743,7 +6739,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       this.inputValue = val ? [] : null;
     },
     searchValue: function searchValue(val) {
-      var _this5 = this;
+      var _this6 = this;
 
       // Wrap input to next line if overflowing
       if (this.$refs.input.scrollWidth > this.$refs.input.clientWidth) {
@@ -6761,7 +6757,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       this.$refs.menu.listIndex = null;
 
       this.$nextTick(function () {
-        _this5.$refs.menu.listIndex = val ? 0 : -1;
+        _this6.$refs.menu.listIndex = val ? 0 : -1;
       });
     },
     selectedItems: function selectedItems() {
@@ -6781,13 +6777,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     if (this.tags) this.selectedItems = this.inputValue;
   },
   mounted: function mounted() {
-    var _this6 = this;
+    var _this7 = this;
 
     this.$vuetify.load(function () {
-      if (_this6._isDestroyed) return;
+      if (_this7._isDestroyed) return;
 
-      _this6.content = _this6.$refs.menu.$refs.content;
-      _this6.genSelectedItems();
+      _this7.content = _this7.$refs.menu.$refs.content;
+      _this7.genSelectedItems();
     });
   },
   beforeDestroy: function beforeDestroy() {
@@ -6801,12 +6797,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
   methods: {
     blur: function blur() {
-      var _this7 = this;
+      var _this8 = this;
 
       this.$emit('blur');
       if (this.isAutocomplete && this.$refs.input) this.$refs.input.blur();
       this.$nextTick(function () {
-        return _this7.isActive = false;
+        return _this8.isActive = false;
       });
     },
     changeSelectedIndex: function changeSelectedIndex(keyCode) {
@@ -6845,31 +6841,31 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       this.$emit('focus');
     },
     genDirectives: function genDirectives() {
-      var _this8 = this;
+      var _this9 = this;
 
       return [{
         name: 'click-outside',
         value: function value() {
-          return _this8.isActive = false;
+          return _this9.isActive = false;
         }
       }];
     },
     genListeners: function genListeners() {
-      var _this9 = this;
+      var _this10 = this;
 
       var listeners = Object.assign({}, this.$listeners);
       delete listeners.input;
 
       return _extends({}, listeners, {
         click: function click() {
-          if (_this9.disabled || _this9.readonly) return;
-          _this9.showMenuItems();
-          _this9.selectedIndex = -1;
+          if (_this10.disabled || _this10.readonly) return;
+          _this10.showMenuItems();
+          _this10.selectedIndex = -1;
         },
         focus: function focus() {
-          if (_this9.disabled || _this9.readonly) return;
+          if (_this10.disabled || _this10.readonly) return;
 
-          !_this9.isFocused && _this9.focus();
+          !_this10.isFocused && _this10.focus();
         },
         keydown: this.onKeyDown // Located in mixins/autocomplete.js
       });
@@ -6892,7 +6888,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       return typeof value === 'undefined' ? item : value;
     },
     genSelectedItems: function genSelectedItems(val) {
-      var _this10 = this;
+      var _this11 = this;
 
       val = val || this.inputValue;
 
@@ -6900,12 +6896,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       if (this.tags) return this.selectedItems = val;
 
       var selectedItems = this.computedItems.filter(function (i) {
-        if (!_this10.isMultiple) {
-          return _this10.getValue(i) === _this10.getValue(val);
+        if (!_this11.isMultiple) {
+          return _this11.getValue(i) === _this11.getValue(val);
         } else {
           // Always return Boolean
           return val.find(function (j) {
-            return _this10.getValue(j) === _this10.getValue(i);
+            return _this11.getValue(j) === _this11.getValue(i);
           }) !== undefined;
         }
       });
@@ -6922,25 +6918,25 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     getValue: function getValue(item) {
       return this.getPropertyFromItem(item, this.itemValue);
     },
-    inputAppendCallback: function inputAppendCallback() {
-      if (this.clearable && this.isDirty) {
-        var inputValue = this.isMultiple ? [] : null;
+    clearableCallback: function clearableCallback() {
+      var inputValue = this.isMultiple ? [] : null;
 
-        this.inputValue = inputValue;
-        this.searchValue = null;
-        this.$emit('change', inputValue);
-        this.genSelectedItems();
-      }
-
+      this.inputValue = inputValue;
+      this.searchValue = null;
+      this.$emit('change', inputValue);
+      this.genSelectedItems();
+      this.showMenu();
+    },
+    showMenu: function showMenu() {
       this.showMenuItems();
       this.isAutocomplete && this.focus();
     },
     onScroll: function onScroll() {
-      var _this11 = this;
+      var _this12 = this;
 
       if (!this.isActive) {
         requestAnimationFrame(function () {
-          return _this11.content.scrollTop = 0;
+          return _this12.content.scrollTop = 0;
         });
       } else {
         var showMoreItems = this.content.scrollHeight - (this.content.scrollTop + this.content.clientHeight) < 200;
@@ -6951,7 +6947,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       }
     },
     selectItem: function selectItem(item) {
-      var _this12 = this;
+      var _this13 = this;
 
       if (!this.isMultiple) {
         this.inputValue = this.returnObject ? item : this.getValue(item);
@@ -6960,13 +6956,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         var selectedItems = [];
         var inputValue = this.inputValue.slice();
         var i = this.inputValue.findIndex(function (i) {
-          return _this12.getValue(i) === _this12.getValue(item);
+          return _this13.getValue(i) === _this13.getValue(item);
         });
 
         i !== -1 && inputValue.splice(i, 1) || inputValue.push(item);
         this.inputValue = inputValue.map(function (i) {
           selectedItems.push(i);
-          return _this12.returnObject ? i : _this12.getValue(i);
+          return _this13.returnObject ? i : _this13.getValue(i);
         });
 
         this.selectedItems = selectedItems;
@@ -6982,8 +6978,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       this.$refs.menu.listIndex = -1;
 
       this.$nextTick(function () {
-        if (_this12.isAutocomplete && _this12.$refs.input) _this12.$refs.input.focus();else _this12.$el.focus();
-        _this12.$refs.menu.listIndex = savedIndex;
+        if (_this13.isAutocomplete && _this13.$refs.input) _this13.$refs.input.focus();else _this13.$el.focus();
+        _this13.$refs.menu.listIndex = savedIndex;
       });
     },
     showMenuItems: function showMenuItems() {
@@ -6993,7 +6989,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   },
 
   render: function render(h) {
-    var _this13 = this;
+    var _this14 = this;
 
     var data = {
       attrs: _extends({
@@ -7009,16 +7005,16 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     } else {
       data.on = {
         click: function click() {
-          if (_this13.disabled || _this13.readonly) return;
+          if (_this14.disabled || _this14.readonly) return;
 
           // Workaround for clicking select
           // when using autocomplete
           // and click doesn't target the input
           setTimeout(function () {
-            if (_this13.menuIsActive) return;
+            if (_this14.menuIsActive) return;
 
-            _this13.focus();
-            _this13.menuIsActive = true;
+            _this14.focus();
+            _this14.menuIsActive = true;
           }, 100);
         }
       };
@@ -13701,11 +13697,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         return this.value;
       },
       set: function set(val) {
+        this.lazyValue = val;
         this.$emit('input', val);
       }
     },
     isDirty: function isDirty() {
-      return this.inputValue != null && this.inputValue.toString().length > 0 || this.badInput || ['time', 'date', 'datetime-local', 'week', 'month'].includes(this.type);
+      return this.lazyValue != null && this.lazyValue.toString().length > 0 || this.badInput || ['time', 'date', 'datetime-local', 'week', 'month'].includes(this.type);
     },
     shouldAutoGrow: function shouldAutoGrow() {
       return (this.multiLine || this.textarea) && this.autoGrow;
@@ -13714,9 +13711,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
   watch: {
     isFocused: function isFocused(val) {
-      if (!val && this.inputValue !== this.lazyValue) {
-        this.lazyValue = this.inputValue;
-        this.$emit('change', this.inputValue);
+      if (!val) {
+        this.$emit('change', this.lazyValue);
       }
     },
     value: function value(val) {
@@ -13767,7 +13763,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     },
     focus: function focus(e) {
       this.isFocused = true;
-      this.$refs.input.focus();
+      if (document.activeElement !== this.$refs.input) {
+        this.$refs.input.focus();
+      }
       this.$emit('focus', e);
     },
     genCounter: function genCounter() {
@@ -13789,7 +13787,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
           autofocus: this.autofocus,
           disabled: this.disabled,
           required: this.required,
-          value: this.inputValue
+          value: this.lazyValue
         },
         attrs: _extends({}, this.$attrs, {
           readonly: this.readonly,
@@ -13828,7 +13826,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         'class': 'input-group--text-field__' + type
       }, this[type]);
     },
-    inputAppendCallback: function inputAppendCallback() {
+    clearableCallback: function clearableCallback() {
       var _this4 = this;
 
       this.inputValue = null;
