@@ -63,6 +63,12 @@
         type: String,
         default: 'arrow_drop_down'
       },
+      appendIconCb: {
+        type: Function,
+        default: function () {
+          return () => this.showMenu()
+        }
+      },
       auto: Boolean,
       autocomplete: Boolean,
       bottom: Boolean,
@@ -180,7 +186,7 @@
       searchValue: {
         get () { return this.lazySearch },
         set (val) {
-          if (!this.isAutocomplete || 
+          if (!this.isAutocomplete ||
             this.selectedIndex > -1
           ) return
 
@@ -427,16 +433,16 @@
       getValue (item) {
         return this.getPropertyFromItem(item, this.itemValue)
       },
-      inputAppendCallback () {
-        if (this.clearable && this.isDirty) {
-          const inputValue = this.isMultiple ? [] : null
+      clearableCallback () {
+        const inputValue = this.isMultiple ? [] : null
 
-          this.inputValue = inputValue
-          this.searchValue = null
-          this.$emit('change', inputValue)
-          this.genSelectedItems()
-        }
-
+        this.inputValue = inputValue
+        this.searchValue = null
+        this.$emit('change', inputValue)
+        this.genSelectedItems()
+        this.showMenu()
+      },
+      showMenu() {
         this.showMenuItems()
         this.isAutocomplete && this.focus()
       },
@@ -516,7 +522,7 @@
         data.on = {
           click: () => {
             if (this.disabled || this.readonly) return
-            
+
             // Workaround for clicking select
             // when using autocomplete
             // and click doesn't target the input

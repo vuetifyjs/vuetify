@@ -65,6 +65,7 @@ test('VSelect.vue', ({ mount }) => {
 
     wrapper.vm.$on('input', input)
 
+    await wrapper.vm.$nextTick()
     expect(wrapper.vm.inputValue).toBe('foo')
 
     clear.trigger('click')
@@ -127,6 +128,7 @@ test('VSelect.vue', ({ mount }) => {
     })
 
     const clear = wrapper.find('.input-group__append-icon')[0]
+    await wrapper.vm.$nextTick()
     expect(wrapper.vm.inputValue).toBe(1)
     expect(wrapper.html()).toMatchSnapshot()
     clear.trigger('click')

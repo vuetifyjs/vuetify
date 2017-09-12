@@ -198,7 +198,7 @@
           'class': `input-group--text-field__${type}`
         }, this[type])
       },
-      inputAppendCallback () {
+      clearableCallback () {
         this.inputValue = null
         this.$nextTick(() => this.$refs.input.focus())
       }
