@@ -68,12 +68,13 @@
           return this.value
         },
         set (val) {
+          this.lazyValue = val
           this.$emit('input', val)
         }
       },
       isDirty () {
-        return this.inputValue != null &&
-          this.inputValue.toString().length > 0 ||
+        return this.lazyValue != null &&
+          this.lazyValue.toString().length > 0 ||
           this.badInput ||
           ['time', 'date', 'datetime-local', 'week', 'month'].includes(this.type)
       },
@@ -84,11 +85,8 @@
 
     watch: {
       isFocused (val) {
-        if (!val &&
-          this.inputValue !== this.lazyValue
-        ) {
-          this.lazyValue = this.inputValue
-          this.$emit('change', this.inputValue)
+        if (!val) {
+          this.$emit('change', this.lazyValue)
         }
       },
       value (val) {
@@ -158,7 +156,7 @@
             autofocus: this.autofocus,
             disabled: this.disabled,
             required: this.required,
-            value: this.inputValue
+            value: this.lazyValue
           },
           attrs: {
             ...this.$attrs,
