@@ -145,13 +145,13 @@ test('VTextField.js', ({ mount }) => {
     expect(input).toHaveBeenCalledWith(null)
   })
 
-  it('should not clear input if not clearble and has appended icon (with callback)', async () => {
-    let called = 0
+  it('should not clear input if not clearable and has appended icon (with callback)', async () => {
+    const appendIconCb = jest.fn()
     const wrapper = mount(VTextField, {
       propsData: {
         value: 'foo',
         appendIcon: 'block',
-        appendIconCb: () => called++
+        appendIconCb
       }
     })
 
@@ -159,11 +159,10 @@ test('VTextField.js', ({ mount }) => {
     icon.trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.inputValue).toBe('foo')
-    expect(called).toBe(1)
+    expect(appendIconCb.mock.calls.length).toBe(1)
   })
 
-  it('should not clear input if not clearble and has appended icon (without callback)', async () => {
-    let called = 0
+  it('should not clear input if not clearable and has appended icon (without callback)', async () => {
     const wrapper = mount(VTextField, {
       propsData: {
         value: 'foo',
@@ -175,7 +174,6 @@ test('VTextField.js', ({ mount }) => {
     icon.trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.inputValue).toBe('foo')
-    expect(called).toBe(0)
   })
 
   it('should start validating on blur', async () => {
