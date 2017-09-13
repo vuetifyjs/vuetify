@@ -77,8 +77,8 @@ export default {
 
       if (this.itemsLength) {
         const stop = this.itemsLength < this.pageStop || this.pageStop < 0
-                ? this.itemsLength
-                : this.pageStop
+          ? this.itemsLength
+          : this.pageStop
 
         pagination = this.$scopedSlots.pageText
           ? this.$scopedSlots.pageText({
