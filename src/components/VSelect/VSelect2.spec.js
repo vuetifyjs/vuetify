@@ -373,4 +373,22 @@ test('VSelect.vue', ({ mount }) => {
     expect(wrapper.vm.selectedItems.length === 0).toBe(true)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
+
+  it('should open menu when clicked on arrow', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        items: ['foo', 'bar']
+      }
+    })
+
+    expect(wrapper.vm.menuIsActive).toBe(false)
+
+    const arrow = wrapper.find('.input-group__append-icon')[0]
+    arrow.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.menuIsActive).toBe(true)
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 })
