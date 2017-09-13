@@ -29,6 +29,9 @@ export function createSimpleTransition (name, origin = 'top center 0', mode) {
       context.data = context.data || {}
       context.data.props = { name }
       context.data.on = context.data.on || {}
+      if (!Object.isExtensible(context.data.on)) {
+        context.data.on = { ...context.data.on }
+      }
 
       if (mode) context.data.props.mode = mode
 
