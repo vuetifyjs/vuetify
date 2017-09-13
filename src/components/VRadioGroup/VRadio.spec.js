@@ -48,7 +48,6 @@ test('VRadio.vue', ({ mount }) => {
 
     const inputGroup = wrapper.find('.input-group')[0]
     expect(inputGroup.getAttribute('aria-label')).toBe('Test')
-    expect(`$attrs is readonly`).toHaveBeenWarned()
 
     expect('immediate parent of v-radio-group').toHaveBeenTipped()
     expect('Injection').toHaveBeenWarned() // TODO: testing library needs injection mock support
