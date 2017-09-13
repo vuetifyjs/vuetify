@@ -75,8 +75,8 @@
       radius () {
         return this.indeterminate &&
           !this.button
-            ? 20
-            : (this.calculatedSize - this.width) / 2
+          ? 20
+          : (this.calculatedSize - this.width) / 2
       },
 
       strokeDashArray () {

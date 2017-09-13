@@ -60,13 +60,7 @@
           }
         }
 
-        if (!this.disabled) {
-          data.domProps = { href: 'javascript:;' }
-        }
-
-        const tag = this.disabled ? 'div' : 'a'
-
-        children.push(h(tag, data, [
+        children.push(h('div', data, [
           h('v-icon', { props: { right: true } }, 'cancel')
         ]))
       }

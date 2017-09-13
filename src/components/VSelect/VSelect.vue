@@ -63,12 +63,7 @@
         type: String,
         default: 'arrow_drop_down'
       },
-      appendIconCb: {
-        type: Function,
-        default: function () {
-          return () => this.showMenu()
-        }
-      },
+      appendIconCb: Function,
       auto: Boolean,
       autocomplete: Boolean,
       bottom: Boolean,
@@ -236,7 +231,7 @@
       },
       items (val) {
         if (this.cacheItems) {
-          this.cachedItems = this.filterDuplicates(this.cachedItems.concat(val))
+          this.cachedItems = this.returnObject ? [...val] : this.filterDuplicates(this.cachedItems.concat(val))
         }
 
         this.$refs.menu.listIndex = -1
@@ -264,7 +259,10 @@
         }
 
         // Activate menu if inactive and searching
-        if (this.isActive && !this.menuIsActive) {
+        if (this.isActive &&
+          !this.menuIsActive &&
+          val !== this.getValue(this.selectedItem)
+        ) {
           this.menuIsActive = true
         }
 
@@ -338,11 +336,25 @@
         const newIndex = this.selectedIndex === indexes
           ? this.selectedIndex - 1
           : this.selectedItems[this.selectedIndex + 1]
-          ? this.selectedIndex
-          : -1
+            ? this.selectedIndex
+            : -1
 
         this.selectItem(this.selectedItems[this.selectedIndex])
         this.selectedIndex = newIndex
+      },
+      compareObjects (a, b) {
+        const aProps = Object.keys(a)
+        const bProps = Object.keys(b)
+
+        if (aProps.length !== bProps.length) return false
+
+        for (let i = 0, length = aProps.length; i < length; i++) {
+          const propName = aProps[i]
+
+          if (a[propName] !== b[propName]) return false
+        }
+
+        return true
       },
       filterDuplicates (arr) {
         return arr.filter((el, i, self) => i === self.indexOf(el))
@@ -352,7 +364,9 @@
         this.isFocused = true
 
         if (this.$refs.input && this.isAutocomplete) {
-          this.$refs.input.focus()
+          this.$nextTick(() => {
+            // this.$refs.input.focus()
+          })
         }
 
         this.$emit('focus')
@@ -413,7 +427,12 @@
           } else {
             // Always return Boolean
             return val.find((j) => {
-              return this.getValue(j) === this.getValue(i)
+              const a = this.getValue(j)
+              const b = this.getValue(i)
+
+              if (a !== Object(a)) return a === b
+
+              return this.compareObjects(a, b)
             }) !== undefined
           }
         })
@@ -442,7 +461,7 @@
         this.genSelectedItems()
         this.showMenu()
       },
-      showMenu() {
+      showMenu () {
         this.showMenuItems()
         this.isAutocomplete && this.focus()
       },
@@ -469,7 +488,12 @@
           const selectedItems = []
           const inputValue = this.inputValue.slice()
           const i = this.inputValue.findIndex((i) => {
-            return this.getValue(i) === this.getValue(item)
+            const a = this.getValue(i)
+            const b = this.getValue(item)
+
+            if (a !== Object(a)) return a === b
+
+            return this.compareObjects(a, b)
           })
 
           i !== -1 && inputValue.splice(i, 1) || inputValue.push(item)
@@ -539,7 +563,7 @@
       return this.genInputGroup([
         this.genSelectionsAndSearch(),
         this.genMenu()
-      ], data)
+      ], data, () => this.showMenu())
     }
   }
 </script>

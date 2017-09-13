@@ -1,7 +1,4 @@
 <script>
-  import VBtn from '../VBtn'
-  import VIcon from '../VIcon'
-
   import ButtonGroup from '../../mixins/button-group'
   import Themeable from '../../mixins/themeable'
 

@@ -184,6 +184,6 @@ test('VBtnToggle.vue', () => {
 
     const btn = wrapper.find('.btn')[0]
 
-    expect(btn.hasAttribute('data-only-child', 'true')).toBe(true)
+    expect(btn.getAttribute('data-only-child')).toBe('true')
   })
 })

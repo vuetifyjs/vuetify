@@ -207,7 +207,7 @@
       },
       onResize () {
         if (!this.isActive) return
-        
+
         this.updateDimensions()
       },
       getOffsetTop () {
@@ -239,7 +239,7 @@
       const data = {
         staticClass: 'menu',
         class: {
-          'menu--disabled': this.disabled,
+          'menu--disabled': this.disabled
         },
         style: {
           display: this.fullWidth ? 'block' : 'inline-block'
