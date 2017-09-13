@@ -125,11 +125,11 @@
       }
     },
 
-    created() {
+    created () {
       // Semantic check to help people identify the reason for the inject error above it.
       if (!this.$parent || !this.$parent.$vnode || !this.$parent.$vnode.tag ||
-        !this.$parent.$vnode.tag.endsWith("v-radio-group")) {
-        console.warn("[Vuetify] Warn: The v-radio component must have an immediate parent of v-radio-group.")
+        !this.$parent.$vnode.tag.endsWith('v-radio-group')) {
+        console.warn('[Vuetify] Warn: The v-radio component must have an immediate parent of v-radio-group.')
       }
     },
 

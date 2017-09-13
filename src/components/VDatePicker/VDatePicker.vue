@@ -72,9 +72,9 @@
     },
 
     computed: {
-      supportsLocaleFormat() {
-        return ('toLocaleDateString' in Date.prototype)
-          && new Date(2000, 0, 15).toLocaleDateString('en', { day: 'numeric' }) == '15'
+      supportsLocaleFormat () {
+        return ('toLocaleDateString' in Date.prototype) &&
+          new Date(2000, 0, 15).toLocaleDateString('en', { day: 'numeric' }) === '15'
       },
       firstAllowedDate () {
         const date = new Date()
