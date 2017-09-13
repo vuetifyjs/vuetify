@@ -63,12 +63,7 @@
         type: String,
         default: 'arrow_drop_down'
       },
-      appendIconCb: {
-        type: Function,
-        default: function () {
-          return () => this.showMenu()
-        }
-      },
+      appendIconCb: Function,
       auto: Boolean,
       autocomplete: Boolean,
       bottom: Boolean,
@@ -568,7 +563,7 @@
       return this.genInputGroup([
         this.genSelectionsAndSearch(),
         this.genMenu()
-      ], data)
+      ], data, () => this.showMenu())
     }
   }
 </script>

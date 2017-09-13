@@ -119,10 +119,12 @@ export default {
         error
       )
     },
-    genIcon (type) {
+    genIcon (type, defaultCallback = null) {
       const shouldClear = this.clearable && this.isDirty
       const icon = shouldClear ? 'clear' : this[`${type}Icon`]
-      const callback = shouldClear ? this.clearableCallback : this[`${type}IconCb`]
+      const callback = shouldClear
+        ? this.clearableCallback
+        : (this[`${type}IconCb`] || defaultCallback)
 
       return this.$createElement('v-icon', {
         attrs: {
@@ -145,7 +147,7 @@ export default {
         }
       }, icon)
     },
-    genInputGroup (input, data = {}) {
+    genInputGroup (input, data = {}, defaultAppendCallback = null) {
       const children = []
       const wrapperChildren = []
       const detailsChildren = []
@@ -188,7 +190,7 @@ export default {
       }
 
       if (this.appendIcon || this.clearable) {
-        wrapperChildren.push(this.genIcon('append'))
+        wrapperChildren.push(this.genIcon('append', defaultAppendCallback))
       }
 
       if (this.asyncLoading) {
