@@ -282,4 +282,95 @@ test('VSelect.vue', ({ mount }) => {
     expect(input.hasAttribute('autocomplete', 'off')).toBe(true)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
+
+  it('should show input when focused and autocomplete', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        autocomplete: true
+      }
+    })
+
+    expect(wrapper.find('input')[0].hasStyle('display', 'none'))
+
+    wrapper.trigger('focus')
+    await wrapper.vm.$nextTick()
+    
+    expect(wrapper.find('input')[0].hasStyle('display', 'block'))
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should show input with placeholder and not dirty', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        placeholder: 'foo'
+      }
+    })
+
+    expect(wrapper.find('input')[0].hasStyle('display', 'block'))
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should now show input with placeholder and dirty', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        items: ['bar'],
+        placeholder: 'foo',
+        value: 'bar'
+      }
+    })
+
+    expect(wrapper.find('input')[0].hasStyle('display', 'none'))
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  // #1704
+  it('should populate select when using value as an object', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        items: [
+          { text: 'foo', value: { id: 1 } },
+          { text: 'foo', value: { id: 2 } }
+        ],
+        multiple: true,
+        value: [{ id: 1 }]
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+
+    const selections = wrapper.find('.input-group__selections__comma')
+
+    expect(selections.length > 0).toBe(true)
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  // Discovered when working on #1704
+  it('should remove item when re-selecting it', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        items: [
+          { text: 'bar', value: { id: 1 } },
+          { text: 'foo', value: { id: 2 } }
+        ],
+        multiple: true,
+        value: [{ id: 1 }]
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+    wrapper.trigger('click')
+    const item = wrapper.find('li')[0]
+    item.trigger('click')
+    await wrapper.vm.$nextTick()
+    wrapper.update()
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.selectedItems.length === 0).toBe(true)
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 })

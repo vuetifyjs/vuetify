@@ -344,6 +344,20 @@
         this.selectItem(this.selectedItems[this.selectedIndex])
         this.selectedIndex = newIndex
       },
+      compareObjects (a, b) {
+        const aProps = Object.keys(a)
+        const bProps = Object.keys(b)
+
+        if (aProps.length !== bProps.length) return false
+
+        for (let i = 0, length = aProps.length; i < length; i++) {
+          const propName = aProps[i]
+
+          if (a[propName] !== b[propName]) return false
+        }
+
+        return true
+      },
       filterDuplicates (arr) {
         return arr.filter((el, i, self) => i === self.indexOf(el))
       },
@@ -352,7 +366,9 @@
         this.isFocused = true
 
         if (this.$refs.input && this.isAutocomplete) {
-          this.$refs.input.focus()
+          this.$nextTick(() => {
+            this.$refs.input.focus()
+          })
         }
 
         this.$emit('focus')
@@ -413,7 +429,12 @@
           } else {
             // Always return Boolean
             return val.find((j) => {
-              return this.getValue(j) === this.getValue(i)
+              const a = this.getValue(j)
+              const b = this.getValue(i)
+
+              if (a !== Object(a)) return a === b
+
+              return this.compareObjects(a, b)
             }) !== undefined
           }
         })
@@ -469,7 +490,12 @@
           const selectedItems = []
           const inputValue = this.inputValue.slice()
           const i = this.inputValue.findIndex((i) => {
-            return this.getValue(i) === this.getValue(item)
+            const a = this.getValue(i)
+            const b = this.getValue(item)
+
+            if (a !== Object(a)) return a === b
+
+            return this.compareObjects(a, b)
           })
 
           i !== -1 && inputValue.splice(i, 1) || inputValue.push(item)

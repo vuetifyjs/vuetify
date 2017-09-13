@@ -14,6 +14,7 @@ exports[`VSelect.js should have -1 tabindex when disabled 1`] = `
              role="combobox"
              class="input-group--select__autocomplete"
              autocomplete="on"
+             style="display: none;"
       >
     </div>
     <div class="menu menu--disabled"
@@ -71,6 +72,7 @@ exports[`VSelect.js should have explicit tabindex passed through when autocomple
              role="combobox"
              class="input-group--select__autocomplete"
              autocomplete="on"
+             style="display: none;"
       >
     </div>
     <div class="menu"

@@ -64,7 +64,8 @@ export default {
         },
         directives: [{
           name: 'show',
-          value: this.isAutocomplete || (this.placeholder && !this.selectedItems.length)
+          value: (this.isAutocomplete && this.isFocused) ||
+            (this.placeholder && !this.selectedItems.length)
         }],
         ref: 'input',
         key: 'input'
