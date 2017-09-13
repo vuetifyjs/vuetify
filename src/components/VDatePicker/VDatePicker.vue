@@ -153,7 +153,7 @@
         return this.isReversing ? 'tab-reverse-transition' : 'tab-transition'
       },
       titleText () {
-        let date = new Date(this.year, this.month, this.day, 1 /* Workaround for #1409 */)
+        const date = new Date(this.year, this.month, this.day, 1 /* Workaround for #1409 */)
 
         const defaultTitleDateFormat = this.type === 'year' ? {
           year: 'numeric'
@@ -209,7 +209,7 @@
           this.activePicker = 'YEAR'
         }
       },
-      firstDayOfWeek() {
+      firstDayOfWeek () {
         this.getWeekDays()
       }
     },
@@ -228,7 +228,7 @@
         this.inputDate = this.originalDate
         if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
       },
-      getWeekDays() {
+      getWeekDays () {
         const first = parseInt(this.firstDayOfWeek, 10)
         if (this.supportsLocaleFormat) {
           const date = new Date(2000, 1, 7)
