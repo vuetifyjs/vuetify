@@ -148,7 +148,7 @@ test('VTextField.js', ({ mount }) => {
     expect(input).toHaveBeenCalledWith(null)
   })
 
-  it('should not clear input if not clearble and has appended icon (with callback)', async () => {
+  it('should not clear input if not clearable and has appended icon (with callback)', async () => {
     let called = 0
     const wrapper = mount(VTextField, {
       propsData: {
@@ -165,7 +165,7 @@ test('VTextField.js', ({ mount }) => {
     expect(called).toBe(1)
   })
 
-  it('should not clear input if not clearble and has appended icon (without callback)', async () => {
+  it('should not clear input if not clearable and has appended icon (without callback)', async () => {
     const wrapper = mount(VTextField, {
       propsData: {
         value: 'foo',
