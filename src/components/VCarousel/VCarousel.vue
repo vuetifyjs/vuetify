@@ -66,8 +66,8 @@
         this.$emit('input', this.inputValue)
         this.restartTimeout()
       },
-      value () {
-        this.init()
+      value (val) {
+        this.inputValue = val
       },
       interval () {
         this.restartTimeout()
