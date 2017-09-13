@@ -189,4 +189,20 @@ test('VTextField.js', ({ mount }) => {
     await wrapper.vm.$nextTick()
     expect(wrapper.data().shouldValidate).toEqual(true)
   })
+
+  it('should keep its value on blur', async () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        value: 'asd'
+      }
+    })
+
+    const input = wrapper.find('input')[0]
+
+    input.element.value = 'fgh'
+    input.trigger('input')
+    input.trigger('blur')
+
+    expect(input.element.value).toEqual('fgh')
+  })
 })
