@@ -61,7 +61,6 @@ test('VCheckbox.js', ({ mount }) => {
     label.trigger('click')
 
     expect(change).toBeCalled()
-    expect('$attrs is readonly').toHaveBeenWarned()
   })
 
   it('should render role and aria-checked attributes on input group', () => {
@@ -72,16 +71,16 @@ test('VCheckbox.js', ({ mount }) => {
     })
 
     let inputGroup = wrapper.find('.input-group')[0]
-    expect(inputGroup.hasAttribute('role', 'checkbox')).toBe(true)
-    expect(inputGroup.hasAttribute('aria-checked', 'false')).toBe(true)
+    expect(inputGroup.getAttribute('role')).toBe('checkbox')
+    expect(inputGroup.getAttribute('aria-checked')).toBe('false')
 
     wrapper.setProps({ 'inputValue': true })
     inputGroup = wrapper.find('.input-group')[0]
-    expect(inputGroup.hasAttribute('aria-checked', 'true')).toBe(true)
+    expect(inputGroup.getAttribute('aria-checked')).toBe('true')
 
     wrapper.setProps({ 'indeterminate': true })
     inputGroup = wrapper.find('.input-group')[0]
-    expect(inputGroup.hasAttribute('aria-checked', 'mixed')).toBe(true)
+    expect(inputGroup.getAttribute('aria-checked')).toBe('mixed')
   })
 
   it('should render aria-label attribute with label value on input group', () => {
@@ -93,8 +92,7 @@ test('VCheckbox.js', ({ mount }) => {
     })
 
     const inputGroup = wrapper.find('.input-group')[0]
-    expect(inputGroup.hasAttribute('aria-label', 'Test')).toBe(true)
-    expect(`$attrs is readonly`).toHaveBeenWarned()
+    expect(inputGroup.getAttribute('aria-label')).toBe('Test')
   })
 
   it('should not render aria-label attribute with no label value on input group', () => {

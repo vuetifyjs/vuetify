@@ -58,10 +58,9 @@
         })
 
         this.items.forEach(i => i.open(
-            this.items[this.inputValue]._uid,
-            this.reverse
-          )
-        )
+          this.items[this.inputValue]._uid,
+          this.reverse
+        ))
 
         this.$emit('input', this.inputValue)
         this.restartTimeout()

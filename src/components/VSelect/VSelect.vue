@@ -341,8 +341,8 @@
         const newIndex = this.selectedIndex === indexes
           ? this.selectedIndex - 1
           : this.selectedItems[this.selectedIndex + 1]
-          ? this.selectedIndex
-          : -1
+            ? this.selectedIndex
+            : -1
 
         this.selectItem(this.selectedItems[this.selectedIndex])
         this.selectedIndex = newIndex
@@ -466,7 +466,7 @@
         this.genSelectedItems()
         this.showMenu()
       },
-      showMenu() {
+      showMenu () {
         this.showMenuItems()
         this.isAutocomplete && this.focus()
       },

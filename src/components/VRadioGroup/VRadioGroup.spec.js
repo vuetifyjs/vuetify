@@ -6,6 +6,6 @@ test('VRadioGroup.vue', ({ mount }) => {
     const wrapper = mount(VRadioGroup)
 
     const radioGroup = wrapper.find('.radio-group')[0]
-    expect(radioGroup.hasAttribute('role', 'radiogroup')).toBe(true)
+    expect(radioGroup.getAttribute('role')).toBe('radiogroup')
   })
 })

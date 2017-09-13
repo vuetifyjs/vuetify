@@ -69,7 +69,7 @@
     },
 
     methods: {
-      setTimeout() {
+      setTimeout () {
         clearTimeout(this.activeTimeout)
 
         if (this.isActive && this.timeout) {

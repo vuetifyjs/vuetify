@@ -164,7 +164,7 @@
             tabindex: this.tabindex,
             'aria-label': (!this.$attrs || !this.$attrs.id) && this.label // Label `for` will be set if we have an id
           },
-          on: Object.assign(listeners, {
+          on: Object.assign({}, listeners, {
             blur: this.blur,
             input: this.onInput,
             focus: this.focus

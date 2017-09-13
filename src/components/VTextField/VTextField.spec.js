@@ -32,8 +32,7 @@ test('VTextField.js', ({ mount }) => {
     })
 
     const inputGroup = wrapper.find('input')[0]
-    expect(inputGroup.hasAttribute('aria-label', 'Test')).toBe(true)
-    expect(`$attrs is readonly`).toHaveBeenWarned()
+    expect(inputGroup.getAttribute('aria-label')).toBe('Test')
   })
 
   it('should not render aria-label attribute on text field element with no label value or id', () => {
@@ -46,7 +45,6 @@ test('VTextField.js', ({ mount }) => {
 
     const inputGroup = wrapper.find('input')[0]
     expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
-    expect(`$attrs is readonly`).toHaveBeenWarned()
   })
 
   it('should not render aria-label attribute on text field element with id', () => {
@@ -61,7 +59,6 @@ test('VTextField.js', ({ mount }) => {
 
     const inputGroup = wrapper.find('input')[0]
     expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
-    expect(`$attrs is readonly`).toHaveBeenWarned()
   })
 
   it('should start out as invalid', () => {
@@ -123,7 +120,7 @@ test('VTextField.js', ({ mount }) => {
 
     const input = wrapper.find('input')[0]
 
-    expect(input.hasAttribute('readonly', 'readonly')).toBe(true)
+    expect(input.getAttribute('readonly')).toBe('readonly')
     expect(wrapper.html()).toMatchSnapshot()
   })
 

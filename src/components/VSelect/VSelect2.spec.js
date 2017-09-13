@@ -279,7 +279,7 @@ test('VSelect.vue', ({ mount }) => {
 
     const input = wrapper.find('input')[0]
 
-    expect(input.hasAttribute('autocomplete', 'off')).toBe(true)
+    expect(input.getAttribute('autocomplete')).toBe('off')
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
@@ -295,7 +295,7 @@ test('VSelect.vue', ({ mount }) => {
 
     wrapper.trigger('focus')
     await wrapper.vm.$nextTick()
-    
+
     expect(wrapper.find('input')[0].hasStyle('display', 'block'))
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })

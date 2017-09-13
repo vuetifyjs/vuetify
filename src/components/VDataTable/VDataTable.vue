@@ -221,8 +221,8 @@
 
         return this.hideActions &&
           !this.pagination
-            ? items
-            : items.slice(this.pageStart, this.pageStop)
+          ? items
+          : items.slice(this.pageStart, this.pageStop)
       },
       selected () {
         const selected = {}
