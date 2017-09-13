@@ -29,6 +29,7 @@
         content: [],
         tabItems: [],
         activeIndex: null,
+        isBooted: false,
         isMobile: false,
         reverse: false,
         target: null,
@@ -76,7 +77,7 @@
       },
       activeIndex () {
         this.updateTabs()
-        this.isBooted = true
+        this.$nextTick(() => (this.isBooted = true))
       },
       tabItems (newItems, oldItems) {
         // Tab item got removed
