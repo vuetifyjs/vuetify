@@ -65,6 +65,28 @@
     .btn
       margin: 0 0 0 48px
 
+.snack
+  &--multi-line &__content
+    height: 80px
+    padding: 24px
+
+  &--bottom, &--right
+    &.snack--multi-line
+      bottom: 80px
+
+  &--vertical &__content
+    height: 112px
+    padding: 24px 24px 14px
+    flex-direction: column
+    align-items: initial
+
+    .btn
+      align-self: flex-end
+
+  &--bottom, &--right
+    &.snack--vertical
+      bottom: 112px
+
 @media $display-breakpoints.xs-only
   .snack
     width: 100%
@@ -86,24 +108,3 @@
 
       .btn
         margin: 0 0 0 24px
-
-    &--multi-line &__content
-      height: 80px
-      padding: 24px
-
-    &--bottom, &--right
-      &.snack--multi-line
-        bottom: 80px
-
-    &--vertical &__content
-      height: 112px
-      padding: 24px 24px 14px
-      flex-direction: column
-      align-items: initial
-
-      .btn
-        align-self: flex-end
-
-    &--bottom, &--right
-      &.snack--vertical
-        bottom: 112px

@@ -79,7 +79,7 @@
           this.shouldValidate = true
           this.$emit('blur', this.inputValue)
         }
-      },
+      }
     },
 
     mounted () {

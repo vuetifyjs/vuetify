@@ -231,12 +231,15 @@ exports[`VSelect.vue should be clearable with prop, dirty and single select 1`] 
 
 <div tabindex="0"
      role="combobox"
-     class="input-group input-group--append-icon input-group--text-field input-group--select"
+     class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select"
 >
   <div class="input-group__input">
     <div class="input-group__selections"
          style="overflow: hidden;"
     >
+      <div class="input-group__selections__comma">
+        1
+      </div>
       <input disabled="disabled"
              tabindex="-1"
              class="input-group--select__autocomplete"
@@ -257,7 +260,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and single select 1`] 
           >
             <li>
               <div href="javascript:;"
-                   class="list__tile list__tile--link"
+                   class="list__tile list__tile--link list__tile--active"
               >
                 <div class="list__tile__content">
                   <div class="list__tile__title">
@@ -284,7 +287,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and single select 1`] 
     <i aria-hidden="true"
        class="material-icons icon input-group__append-icon input-group__icon-cb"
     >
-      arrow_drop_down
+      clear
     </i>
   </div>
   <div class="input-group__details">

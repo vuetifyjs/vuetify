@@ -227,7 +227,7 @@ test('VSelect.js', ({ mount, shallow }) => {
 
     ele = wrapper.find('.input-group--select input')
     expect(ele.length).toBe(1)
-    expect(ele[0].hasAttribute('role', 'combobox')).toBe(true)
+    expect(ele[0].getAttribute('role')).toBe('combobox')
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
@@ -241,7 +241,7 @@ test('VSelect.js', ({ mount, shallow }) => {
 
     const ele = wrapper.find('.input-group--select')
     expect(ele.length).toBe(1)
-    expect(ele[0].hasAttribute('role', 'combobox')).toBe(true)
+    expect(ele[0].getAttribute('role')).toBe('combobox')
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
@@ -255,7 +255,24 @@ test('VSelect.js', ({ mount, shallow }) => {
 
     const icon = wrapper.find('i.input-group__append-icon')
     expect(icon.length).toBe(1)
-    expect(icon[0].hasAttribute('aria-hidden', 'true')).toBe(true)
+    expect(icon[0].getAttribute('aria-hidden')).toBe('true')
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should not duplicate items after items update when caching is turned on', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+       autocomplete: true,
+       cacheItems: true,
+       returnObject: true,
+       items: [],
+      }
+    })
+
+    wrapper.setProps({items: [{id: 1, text: 'A'}]})
+    expect(wrapper.vm.cachedItems.length).toBe(1)
+    wrapper.setProps({items: [{id: 1, text: 'A'}]})
+    expect(wrapper.vm.cachedItems.length).toBe(1)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 })

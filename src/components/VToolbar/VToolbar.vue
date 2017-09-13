@@ -25,7 +25,7 @@
       prominent: Boolean,
       scrollOffScreen: Boolean,
       scrollTarget: String,
-      scrollThreshHold: {
+      scrollThreshold: {
         type: Number,
         default: 100
       }
@@ -75,7 +75,7 @@
           ? this.target.scrollTop
           : this.target.pageYOffset || document.documentElement.scrollTop
 
-        if (currentScroll < this.scrollThreshHold) return
+        if (currentScroll < this.scrollThreshold) return
 
         if (this.previousScroll === null) {
           this.previousScroll = currentScroll

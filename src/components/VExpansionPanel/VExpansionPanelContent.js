@@ -75,7 +75,13 @@ export default {
       }, [icon])
     },
     toggle (uid) {
-      this.isActive = this._uid === uid && !this.isActive
+      const isActive = this._uid === uid && !this.isActive
+
+      if (isActive) this.isBooted = true
+
+      // We treat bootable differently
+      // Needs time to calc height
+      this.$nextTick(() => (this.isActive = isActive))
     }
   },
 

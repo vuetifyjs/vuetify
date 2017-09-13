@@ -181,12 +181,12 @@
         }
 
         if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
-        this.selectingHour = true;
+        this.selectingHour = true
       },
       cancel () {
         this.inputTime = this.originalTime
         if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
-        this.selectingHour = true;
+        this.selectingHour = true
       },
       isAllowed (type, value) {
         const allowed = this[`allowed${type.charAt(0).toUpperCase() + type.slice(1)}s`]

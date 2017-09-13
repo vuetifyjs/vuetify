@@ -65,6 +65,7 @@ test('VSelect.vue', ({ mount }) => {
 
     wrapper.vm.$on('input', input)
 
+    await wrapper.vm.$nextTick()
     expect(wrapper.vm.inputValue).toBe('foo')
 
     clear.trigger('click')
@@ -127,6 +128,7 @@ test('VSelect.vue', ({ mount }) => {
     })
 
     const clear = wrapper.find('.input-group__append-icon')[0]
+    await wrapper.vm.$nextTick()
     expect(wrapper.vm.inputValue).toBe(1)
     expect(wrapper.html()).toMatchSnapshot()
     clear.trigger('click')
@@ -263,6 +265,130 @@ test('VSelect.vue', ({ mount }) => {
     expect(wrapper.vm.selectedItems.length).toBe(1)
     expect(wrapper2.vm.selectedItems.length).toBe(2)
     expect(wrapper3.vm.selectedItems.length).toBe(0)
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should allow changing of browser autocomplete', () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        autocomplete: true,
+        browserAutocomplete: 'off'
+      }
+    })
+
+    const input = wrapper.find('input')[0]
+
+    expect(input.getAttribute('autocomplete')).toBe('off')
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should show input when focused and autocomplete', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        autocomplete: true
+      }
+    })
+
+    expect(wrapper.find('input')[0].hasStyle('display', 'none'))
+
+    wrapper.trigger('focus')
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.find('input')[0].hasStyle('display', 'block'))
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should show input with placeholder and not dirty', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        placeholder: 'foo'
+      }
+    })
+
+    expect(wrapper.find('input')[0].hasStyle('display', 'block'))
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should now show input with placeholder and dirty', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        items: ['bar'],
+        placeholder: 'foo',
+        value: 'bar'
+      }
+    })
+
+    expect(wrapper.find('input')[0].hasStyle('display', 'none'))
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  // #1704
+  it('should populate select when using value as an object', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        items: [
+          { text: 'foo', value: { id: 1 } },
+          { text: 'foo', value: { id: 2 } }
+        ],
+        multiple: true,
+        value: [{ id: 1 }]
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+
+    const selections = wrapper.find('.input-group__selections__comma')
+
+    expect(selections.length > 0).toBe(true)
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  // Discovered when working on #1704
+  it('should remove item when re-selecting it', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        items: [
+          { text: 'bar', value: { id: 1 } },
+          { text: 'foo', value: { id: 2 } }
+        ],
+        multiple: true,
+        value: [{ id: 1 }]
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+    wrapper.trigger('click')
+    const item = wrapper.find('li')[0]
+    item.trigger('click')
+    await wrapper.vm.$nextTick()
+    wrapper.update()
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.selectedItems.length === 0).toBe(true)
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should open menu when clicked on arrow', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        items: ['foo', 'bar']
+      }
+    })
+
+    expect(wrapper.vm.menuIsActive).toBe(false)
+
+    const arrow = wrapper.find('.input-group__append-icon')[0]
+    arrow.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.menuIsActive).toBe(true)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 })

@@ -119,19 +119,12 @@ export default {
         error
       )
     },
-    genIcon (type, clearable) {
-      const callbacks = []
-      const shouldClear = clearable && this.isDirty
+    genIcon (type, defaultCallback = null) {
+      const shouldClear = this.clearable && this.isDirty
       const icon = shouldClear ? 'clear' : this[`${type}Icon`]
-
-      if (type === 'append' && this.inputAppendCallback) {
-        callbacks.push(this.inputAppendCallback)
-      } else if (type === 'prepend' && this.inputPrependCallback) {
-        callbacks.push(this.inputPrependCallback)
-      }
-
-      if (shouldClear) callbacks.push(() => (this.inputValue = null))
-      if (this[`${type}IconCb`]) callbacks.push(this[`${type}IconCb`])
+      const callback = shouldClear
+        ? this.clearableCallback
+        : (this[`${type}IconCb`] || defaultCallback)
 
       return this.$createElement('v-icon', {
         attrs: {
@@ -139,19 +132,22 @@ export default {
         },
         'class': {
           [`input-group__${type}-icon`]: true,
-          'input-group__icon-cb': callbacks.length
+          'input-group__icon-cb': !!callback
+        },
+        props: {
+          disabled: this.disabled
         },
         on: {
           click: e => {
-            if (!callbacks.length) return
+            if (!callback) return
 
             e.stopPropagation()
-            callbacks.every(cb => cb())
+            callback()
           }
         }
       }, icon)
     },
-    genInputGroup (input, data = {}) {
+    genInputGroup (input, data = {}, defaultAppendCallback = null) {
       const children = []
       const wrapperChildren = []
       const detailsChildren = []
@@ -194,7 +190,7 @@ export default {
       }
 
       if (this.appendIcon || this.clearable) {
-        wrapperChildren.push(this.genIcon('append', this.clearable))
+        wrapperChildren.push(this.genIcon('append', defaultAppendCallback))
       }
 
       if (this.asyncLoading) {

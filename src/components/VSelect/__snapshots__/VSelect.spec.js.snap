@@ -13,6 +13,7 @@ exports[`VSelect.js should have -1 tabindex when disabled 1`] = `
              tabindex="-1"
              role="combobox"
              class="input-group--select__autocomplete"
+             autocomplete="on"
       >
     </div>
     <div class="menu menu--disabled"
@@ -44,7 +45,7 @@ exports[`VSelect.js should have -1 tabindex when disabled 1`] = `
       </div>
     </div>
     <i aria-hidden="true"
-       class="material-icons icon input-group__append-icon input-group__icon-cb"
+       class="material-icons icon icon--disabled input-group__append-icon input-group__icon-cb"
     >
       arrow_drop_down
     </i>
@@ -69,6 +70,7 @@ exports[`VSelect.js should have explicit tabindex passed through when autocomple
       <input tabindex="10"
              role="combobox"
              class="input-group--select__autocomplete"
+             autocomplete="on"
       >
     </div>
     <div class="menu"

@@ -63,6 +63,7 @@
         type: String,
         default: 'arrow_drop_down'
       },
+      appendIconCb: Function,
       auto: Boolean,
       autocomplete: Boolean,
       bottom: Boolean,
@@ -73,6 +74,10 @@
       debounceSearch: {
         type: [Number, String],
         default: 200
+      },
+      browserAutocomplete: {
+        type: String,
+        default: 'on'
       },
       items: {
         type: Array,
@@ -176,7 +181,7 @@
       searchValue: {
         get () { return this.lazySearch },
         set (val) {
-          if (!this.isAutocomplete || 
+          if (!this.isAutocomplete ||
             this.selectedIndex > -1
           ) return
 
@@ -194,7 +199,7 @@
 
         return this.selectedItems.find(i => (
           this.getValue(i) === this.getValue(this.inputValue)
-        ))
+        )) || null
       }
     },
 
@@ -226,7 +231,7 @@
       },
       items (val) {
         if (this.cacheItems) {
-          this.cachedItems = this.filterDuplicates(this.cachedItems.concat(val))
+          this.cachedItems = this.returnObject ? [...val] : this.filterDuplicates(this.cachedItems.concat(val))
         }
 
         this.$refs.menu.listIndex = -1
@@ -254,7 +259,10 @@
         }
 
         // Activate menu if inactive and searching
-        if (this.isActive && !this.menuIsActive) {
+        if (this.isActive &&
+          !this.menuIsActive &&
+          val !== this.getValue(this.selectedItem)
+        ) {
           this.menuIsActive = true
         }
 
@@ -328,11 +336,25 @@
         const newIndex = this.selectedIndex === indexes
           ? this.selectedIndex - 1
           : this.selectedItems[this.selectedIndex + 1]
-          ? this.selectedIndex
-          : -1
+            ? this.selectedIndex
+            : -1
 
         this.selectItem(this.selectedItems[this.selectedIndex])
         this.selectedIndex = newIndex
+      },
+      compareObjects (a, b) {
+        const aProps = Object.keys(a)
+        const bProps = Object.keys(b)
+
+        if (aProps.length !== bProps.length) return false
+
+        for (let i = 0, length = aProps.length; i < length; i++) {
+          const propName = aProps[i]
+
+          if (a[propName] !== b[propName]) return false
+        }
+
+        return true
       },
       filterDuplicates (arr) {
         return arr.filter((el, i, self) => i === self.indexOf(el))
@@ -342,7 +364,9 @@
         this.isFocused = true
 
         if (this.$refs.input && this.isAutocomplete) {
-          this.$refs.input.focus()
+          this.$nextTick(() => {
+            // this.$refs.input.focus()
+          })
         }
 
         this.$emit('focus')
@@ -366,6 +390,7 @@
           },
           focus: () => {
             if (this.disabled || this.readonly) return
+
             !this.isFocused && this.focus()
           },
           keydown: this.onKeyDown // Located in mixins/autocomplete.js
@@ -393,13 +418,21 @@
       genSelectedItems (val) {
         val = val || this.inputValue
 
+        // If we are using tags, don't filter results
+        if (this.tags) return (this.selectedItems = val)
+
         let selectedItems = this.computedItems.filter(i => {
           if (!this.isMultiple) {
             return this.getValue(i) === this.getValue(val)
           } else {
             // Always return Boolean
             return val.find((j) => {
-              return this.getValue(j) === this.getValue(i)
+              const a = this.getValue(j)
+              const b = this.getValue(i)
+
+              if (a !== Object(a)) return a === b
+
+              return this.compareObjects(a, b)
             }) !== undefined
           }
         })
@@ -419,15 +452,16 @@
       getValue (item) {
         return this.getPropertyFromItem(item, this.itemValue)
       },
-      inputAppendCallback () {
-        if (this.clearable && this.isDirty) {
-          const inputValue = this.isMultiple ? [] : null
+      clearableCallback () {
+        const inputValue = this.isMultiple ? [] : null
 
-          this.inputValue = inputValue
-          this.$emit('change', inputValue)
-          this.genSelectedItems()
-        }
-
+        this.inputValue = inputValue
+        this.searchValue = null
+        this.$emit('change', inputValue)
+        this.genSelectedItems()
+        this.showMenu()
+      },
+      showMenu () {
         this.showMenuItems()
         this.isAutocomplete && this.focus()
       },
@@ -454,7 +488,12 @@
           const selectedItems = []
           const inputValue = this.inputValue.slice()
           const i = this.inputValue.findIndex((i) => {
-            return this.getValue(i) === this.getValue(item)
+            const a = this.getValue(i)
+            const b = this.getValue(item)
+
+            if (a !== Object(a)) return a === b
+
+            return this.compareObjects(a, b)
           })
 
           i !== -1 && inputValue.splice(i, 1) || inputValue.push(item)
@@ -462,6 +501,7 @@
             selectedItems.push(i)
             return this.returnObject ? i : this.getValue(i)
           })
+
           this.selectedItems = selectedItems
         }
 
@@ -471,11 +511,17 @@
 
         this.$emit('change', this.inputValue)
 
+        // List tile will re-render, reset index to
+        // maintain highlighting
+        const savedIndex = this.$refs.menu.listIndex
+        this.$refs.menu.listIndex = -1
+
         this.$nextTick(() => {
           if (this.isAutocomplete &&
             this.$refs.input
           ) this.$refs.input.focus()
           else this.$el.focus()
+          this.$refs.menu.listIndex = savedIndex
         })
       },
       showMenuItems () {
@@ -500,14 +546,16 @@
         data.on = {
           click: () => {
             if (this.disabled || this.readonly) return
-            
+
             // Workaround for clicking select
             // when using autocomplete
             // and click doesn't target the input
             setTimeout(() => {
+              if (this.menuIsActive) return
+
               this.focus()
               this.menuIsActive = true
-            }, 0)
+            }, 100)
           }
         }
       }
@@ -515,7 +563,7 @@
       return this.genInputGroup([
         this.genSelectionsAndSearch(),
         this.genMenu()
-      ], data)
+      ], data, () => this.showMenu())
     }
   }
 </script>

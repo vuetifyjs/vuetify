@@ -69,7 +69,7 @@
     },
 
     methods: {
-      setTimeout() {
+      setTimeout () {
         clearTimeout(this.activeTimeout)
 
         if (this.isActive && this.timeout) {
@@ -102,5 +102,3 @@
 </script>
 
 <style lang="stylus" src="../../stylus/components/_snackbars.styl"></style>
-
-

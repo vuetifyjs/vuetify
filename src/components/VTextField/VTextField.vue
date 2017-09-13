@@ -68,16 +68,12 @@
           return this.value
         },
         set (val) {
-          if (this.type === 'number') val = parseInt(val)
-
-          this.$emit('input', val)
-
           this.lazyValue = val
+          this.$emit('input', val)
         }
       },
       isDirty () {
-        return this.lazyValue !== null &&
-          typeof this.lazyValue !== 'undefined' &&
+        return this.lazyValue != null &&
           this.lazyValue.toString().length > 0 ||
           this.badInput ||
           ['time', 'date', 'datetime-local', 'week', 'month'].includes(this.type)
@@ -90,15 +86,12 @@
     watch: {
       isFocused (val) {
         if (!val) {
-          const lazyValue = this.type === 'number'
-            ? parseInt(this.lazyValue)
-            : this.lazyValue
-
-          this.$emit('change', lazyValue)
+          this.$emit('change', this.lazyValue)
         }
       },
-      value () {
-        this.lazyValue = this.value
+      value (val) {
+        // Value was changed externally, update lazy
+        if (!this.isFocused) this.lazyValue = val
         !this.validateOnBlur && this.validate()
         this.shouldAutoGrow && this.calculateInputHeight()
       }
@@ -130,15 +123,18 @@
         this.shouldAutoGrow && this.calculateInputHeight()
       },
       blur (e) {
+        this.isFocused = false
+
         this.$nextTick(() => {
-          this.isFocused = false
           this.validate()
         })
         this.$emit('blur', e)
       },
       focus (e) {
         this.isFocused = true
-        this.$refs.input.focus()
+        if (document.activeElement !== this.$refs.input) {
+          this.$refs.input.focus()
+        }
         this.$emit('focus', e)
       },
       genCounter () {
@@ -151,6 +147,8 @@
       },
       genInput () {
         const tag = this.multiLine || this.textarea ? 'textarea' : 'input'
+        const listeners = this.$listeners || {}
+        delete listeners['change'] // Change should not be bound externally
 
         const data = {
           style: {},
@@ -166,13 +164,11 @@
             tabindex: this.tabindex,
             'aria-label': (!this.$attrs || !this.$attrs.id) && this.label // Label `for` will be set if we have an id
           },
-          on: {
-            ...this.$listeners,
+          on: Object.assign({}, listeners, {
             blur: this.blur,
             input: this.onInput,
-            focus: this.focus,
-            click: this.focus
-          },
+            focus: this.focus
+          }),
           ref: 'input'
         }
 
@@ -200,7 +196,7 @@
           'class': `input-group--text-field__${type}`
         }, this[type])
       },
-      inputAppendCallback () {
+      clearableCallback () {
         this.inputValue = null
         this.$nextTick(() => this.$refs.input.focus())
       }
