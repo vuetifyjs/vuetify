@@ -69,4 +69,24 @@ test('VTabs.vue', ({ mount }) => {
     await wrapper.vm.$nextTick()
     expect(input).toBeCalledWith('foo')
   })
+
+  it('should mount with booted false then activate to remove transition', async () => {
+    const wrapper = mount(VTabs, {
+      propsData: {
+        value: 'bar'
+      },
+      slots: {
+        default: [
+          createBar()
+        ]
+      }
+    })
+
+    expect(wrapper.vm.isBooted).toBe(false)
+
+    wrapper.vm.activeIndex = 0
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isBooted).toBe(true)
+  })
 })
