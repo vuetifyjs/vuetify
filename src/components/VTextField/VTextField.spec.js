@@ -32,7 +32,7 @@ test('VTextField.js', ({ mount }) => {
     })
 
     const inputGroup = wrapper.find('input')[0]
-    expect(inputGroup.hasAttribute('aria-label', 'Test')).toBe(true)
+    expect(inputGroup.getAttribute('aria-label')).toBe('Test')
     expect(`$attrs is readonly`).toHaveBeenWarned()
   })
 
@@ -123,7 +123,7 @@ test('VTextField.js', ({ mount }) => {
 
     const input = wrapper.find('input')[0]
 
-    expect(input.hasAttribute('readonly', 'readonly')).toBe(true)
+    expect(input.getAttribute('readonly')).toBe('readonly')
     expect(wrapper.html()).toMatchSnapshot()
   })
 

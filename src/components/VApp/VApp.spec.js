@@ -27,7 +27,7 @@ test('VApp.js', ({ mount }) => {
   it('should have data-app attribute', () => {
     const wrapper = mount(VApp)
 
-    expect(wrapper.hasAttribute('data-app', 'true')).toBe(true)
+    expect(wrapper.getAttribute('data-app')).toBe('true')
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -38,7 +38,7 @@ test('VApp.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.hasAttribute('id', 'inspire')).toBe(true)
+    expect(wrapper.getAttribute('id')).toBe('inspire')
     expect(wrapper.html()).toMatchSnapshot()
   })
 })

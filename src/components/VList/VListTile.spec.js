@@ -27,7 +27,7 @@ test('VListTile.vue', ({ mount }) => {
     const a = wrapper.find('a')[0]
 
     expect(wrapper.is('li')).toBe(true)
-    expect(a.hasAttribute('href', 'http://www.google.com')).toBe(true)
+    expect(a.getAttribute('href')).toBe('http://www.google.com')
     expect(wrapper.html()).toMatchSnapshot()
   })
 
