@@ -22,11 +22,7 @@ export default {
           openOnClick: false,
           value: this.menuIsActive &&
             this.computedItems.length &&
-            (!this.tags || this.tags && this.filteredItems.length > 0) &&
-            (!this.isAutocomplete ||
-              this.searchValue !== this.selectedItem ||
-              this.isMultiple ||
-              !this.isDirty),
+            (!this.tags || this.tags && this.filteredItems.length > 0),
           zIndex: this.menuZIndex
         },
         on: {
@@ -64,7 +60,7 @@ export default {
         },
         directives: [{
           name: 'show',
-          value: (this.isAutocomplete && this.isFocused) ||
+          value: (this.isAutocomplete) ||
             (this.placeholder && !this.selectedItems.length)
         }],
         ref: 'input',
@@ -138,7 +134,7 @@ export default {
         props: {
           close: !isDisabled,
           dark: this.dark,
-          disabled: isDisabled || !this.isFocused,
+          disabled: isDisabled,
           selected: index === this.selectedIndex
         },
         on: {

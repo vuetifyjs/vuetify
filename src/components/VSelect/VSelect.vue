@@ -264,7 +264,10 @@
         }
 
         // Activate menu if inactive and searching
-        if (this.isActive && !this.menuIsActive) {
+        if (this.isActive &&
+          !this.menuIsActive &&
+          val !== this.getValue(this.selectedItem)
+        ) {
           this.menuIsActive = true
         }
 
@@ -367,7 +370,7 @@
 
         if (this.$refs.input && this.isAutocomplete) {
           this.$nextTick(() => {
-            this.$refs.input.focus()
+            // this.$refs.input.focus()
           })
         }
 
