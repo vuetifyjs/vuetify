@@ -50,11 +50,11 @@
         default: defaultDateFormat
       },
       titleDateFormat: {
-        type: Object,
+        type: [Object, Function],
         default: () => ({ weekday: 'short', month: 'short', day: 'numeric' })
       },
       headerDateFormat: {
-        type: Object,
+        type: [Object, Function],
         default: () => ({ month: 'long', year: 'numeric' })
       },
       formattedValue: {
@@ -72,6 +72,10 @@
     },
 
     computed: {
+      supportsLocaleFormat () {
+        return ('toLocaleDateString' in Date.prototype) &&
+          new Date(2000, 0, 15).toLocaleDateString('en', { day: 'numeric' }) === '15'
+      },
       firstAllowedDate () {
         const date = new Date()
         date.setHours(12, 0, 0, 0)
@@ -180,8 +184,13 @@
       const date = new Date()
       date.setDate(date.getDate() - date.getDay() + parseInt(this.firstDayOfWeek))
 
-      createRange(7).forEach(() => {
-        const narrow = date.toLocaleString(this.locale, { weekday: 'narrow' })
+      createRange(7).forEach(index => {
+        let narrow
+        if (this.supportsLocaleFormat) {
+          narrow = date.toLocaleDateString(this.locale, { weekday: 'narrow' })
+        } else {
+          narrow = ['S', 'M', 'T', 'W', 'T', 'F', 'S'][(index + parseInt(this.firstDayOfWeek)) % 7]
+        }
         this.narrowDays.push(narrow)
 
         date.setDate(date.getDate() + 1)

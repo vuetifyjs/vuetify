@@ -6,11 +6,18 @@
 
     mixins: [Translatable],
 
+    data () {
+      return {
+        isBooted: false
+      }
+    },
+
     props: {
       height: {
         type: [String, Number],
         default: 500
       },
+      jumbotron: Boolean,
       src: String
     },
 
@@ -18,8 +25,15 @@
       styles () {
         return {
           display: 'block',
-          transform: `translate3d(-50%, ${this.parallax}px, 0)`
+          opacity: this.isBooted ? 1 : 0,
+          transform: `translate3d(-50%, ${this.jumbotron ? 0 : this.parallax + 'px'}, 0)`
         }
+      }
+    },
+
+    watch: {
+      parallax () {
+        this.isBooted = true
       }
     },
 
@@ -51,6 +65,9 @@
       }, [
         h('img', {
           staticClass: 'parallax__image',
+          'class': {
+            'parallax__image--jumbotron': this.jumbotron
+          },
           style: this.styles,
           attrs: {
             src: this.src
@@ -66,7 +83,9 @@
       return h('div', {
         staticClass: 'parallax',
         style: {
-          height: `${parseInt(this.normalizedHeight)}px`
+          height: this.jumbotron
+            ? this.normalizedHeight
+            : `${this.normalizedHeight}px`
         },
         on: this.$listeners
       }, [container, content])

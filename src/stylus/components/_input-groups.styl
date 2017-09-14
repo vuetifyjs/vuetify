@@ -17,10 +17,19 @@ input-group($material)
     .input-group__input
       border: 2px solid $material.text.secondary
 
+  .input-group__append-icon
+    padding: 0 6px
+    transition: .3s $transition.ease-in-out
+
+  .input-group__append-icon,
+  .input-group__prepend-icon
+    user-select: none
+
   // This is specific for selects
   &.input-group--dirty
     .input-group__selections__comma
-      color: $material.text.primary
+      &:not(.input-group__selections__comma--active)
+        color: $material.text.primary
 
   &:not(.input-group--error)
     label
@@ -33,7 +42,7 @@ input-group($material)
     .input-group__details:before
       background-color: $material.input-bottom-line
 
-    &:not(.input-group--focused)
+    &:not(.input-group--focused):not(.input-group--disabled)
       .input-group__input
         .input-group__append-icon,
         .input-group__prepend-icon
@@ -79,7 +88,7 @@ theme(input-group, "input-group")
 
 .input-group
   display: flex
-  flex: 1
+  flex: 1 1
   flex-wrap: wrap
   min-width: 24px
   padding: $input-group-padding
@@ -92,7 +101,8 @@ theme(input-group, "input-group")
 /** Label */
 .input-group
   label
-    font-size $input-font-size
+    display: inline-block
+    font-size: $input-font-size
     line-height: $input-font-size * 2
     height: $input-height
     max-width: 90%
@@ -160,12 +170,9 @@ theme(input-group, "input-group")
     elevation(2)
 
     label
-      top: 7px
+      top: 8px
       padding-left: 16px
       transform: none !important
-
-    &:hover
-      elevation(4)
 
     .input-group__input
       align-items: center
@@ -184,16 +191,14 @@ theme(input-group, "input-group")
   // Focused
   &.input-group--text-field
     &:not(.input-group--single-line):not(.input-group--error)
-      &.input-group--focused,
-      &:focus
+      &.input-group--focused
         label
           color: $theme.primary
 
         .input-group__input
           border-color: $theme.primary
 
-    &.input-group--focused,
-    &:focus
+    &.input-group--focused
       &:not(.input-group--disabled)
         .input-group__details
           &:after
@@ -270,6 +275,19 @@ theme(input-group, "input-group")
     .input-group__details
       min-height: 2px
       padding: 0
+
+  &--async-loading
+    .input-group__details
+      &:before,
+      &:after
+        display: none
+
+  /** Async loading indicator */
+  .progress-linear
+    position: absolute
+    top: 0
+    left: 0
+    margin: 0
 
 /** Hint */
 .input-group

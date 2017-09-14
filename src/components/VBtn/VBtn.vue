@@ -41,7 +41,8 @@
       type: {
         type: String,
         default: 'button'
-      }
+      },
+      value: null
     },
 
     computed: {
@@ -71,8 +72,8 @@
           'secondary': this.secondary && !this.outline && !this.flat,
           'success': this.success && !this.outline && !this.flat,
           'info': this.info && !this.outline && !this.flat,
-          'warning':this.warning && !this.outline && !this.flat,
-          'error':this.error && !this.outline && !this.flat,
+          'warning': this.warning && !this.outline && !this.flat,
+          'error': this.error && !this.outline && !this.flat,
           'primary--text': !this.disabled && this.primary && (this.outline || this.flat),
           'secondary--text': !this.disabled && this.secondary && (this.outline || this.flat),
           'success--text': !this.disabled && this.success && (this.outline || this.flat),
@@ -124,6 +125,10 @@
 
       tag === 'button' && (data.attrs.type = this.type)
       this.loading && children.push(this.genLoader())
+
+      data.attrs.value = ['string', 'number'].includes(typeof this.value)
+        ? this.value
+        : JSON.stringify(this.value)
 
       return h(tag, data, children)
     }

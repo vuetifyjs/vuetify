@@ -49,11 +49,11 @@
 
     methods: {
       groupFocus (e) {
-        this.focused = true
+        this.isFocused = true
         this.$emit('focus', e)
       },
       groupBlur (e) {
-        this.focused = false
+        this.isFocused = false
         this.tabFocused = false
         this.$emit('blur', this.inputValue)
       }
@@ -76,7 +76,7 @@
         }, this.$listeners),
         directives: [{
           name: 'ripple',
-          value: { center: true }
+          value: this.disabled ? false : { center: true }
         }]
       })
 

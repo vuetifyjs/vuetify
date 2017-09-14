@@ -2,28 +2,36 @@
 
 exports[`VFooter.js should render a fixed and absolute positioned and match snapshot 1`] = `
 
-<footer class="footer">
+<footer class="footer footer--absolute footer--fixed"
+        style="padding-left: 0px; padding-right: 0px;"
+>
 </footer>
 
 `;
 
 exports[`VFooter.js should render a fixed positioned component and match snapshot 1`] = `
 
-<footer class="footer">
+<footer class="footer footer--fixed"
+        style="padding-left: 0px; padding-right: 0px;"
+>
 </footer>
 
 `;
 
 exports[`VFooter.js should render an absolute positioned component and match snapshot 1`] = `
 
-<footer class="footer">
+<footer class="footer footer--absolute"
+        style="padding-left: 0px; padding-right: 0px;"
+>
 </footer>
 
 `;
 
 exports[`VFooter.js should render component and match snapshot 1`] = `
 
-<footer class="footer">
+<footer class="footer"
+        style="padding-left: 0px; padding-right: 0px;"
+>
 </footer>
 
 `;

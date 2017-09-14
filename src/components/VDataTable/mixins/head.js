@@ -17,7 +17,7 @@ export default {
           props: {
             dark: this.dark,
             light: this.light,
-            color: this.selectAll === true && '' || this.selectAll,
+            color: this.selectAll === true ? '' : this.selectAll,
             hideDetails: true,
             inputValue: this.all,
             indeterminate: this.indeterminate

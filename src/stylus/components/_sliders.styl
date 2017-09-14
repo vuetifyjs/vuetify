@@ -45,9 +45,11 @@ slider($material)
 theme(slider, "input-group--slider")
 
 /** Input Group */
-.input-group--slider
+.input-group.input-group--slider
   flex-direction: row
   flex-wrap: wrap
+  // Allow for right space if inline with other inputs
+  padding-right: 16px
 
   .input-group__details:before, .input-group__details:after
     display: none
@@ -57,15 +59,16 @@ theme(slider, "input-group--slider")
 
 
   label
-    transform: none
-    flex-basis: 56px
-    display: flex
-    font-size: 18px
+    flex: 0 1 auto
+    width: auto
     align-items: center
+    display: inline-flex
+    font-size: 18px
+    transform: none
 
     + .input-group__input
       margin-left: 16px
-      flex: 1 1 auto
+      flex: 1 0 auto
 
   &:not(.input-group--disabled).input-group--dirty
     .slider__track-fill

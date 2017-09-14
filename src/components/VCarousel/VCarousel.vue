@@ -24,11 +24,11 @@
     },
 
     props: {
-      value: Number,
       cycle: {
         type: Boolean,
         default: true
       },
+      hideControls: Boolean,
       icon: {
         type: String,
         default: 'fiber_manual_record'
@@ -45,7 +45,8 @@
       rightControlIcon: {
         type: [Boolean, String],
         default: 'chevron_right'
-      }
+      },
+      value: Number
     },
 
     watch: {
@@ -57,16 +58,15 @@
         })
 
         this.items.forEach(i => i.open(
-            this.items[this.inputValue]._uid,
-            this.reverse
-          )
-        )
+          this.items[this.inputValue]._uid,
+          this.reverse
+        ))
 
         this.$emit('input', this.inputValue)
         this.restartTimeout()
       },
-      value () {
-        this.init()
+      value (val) {
+        this.inputValue = val
       },
       interval () {
         this.restartTimeout()
@@ -147,6 +147,8 @@
         this.inputValue = index
       },
       startTimeout () {
+        if (!this.cycle) return
+
         this.slideTimeout = setTimeout(() => this.next(), this.interval > 0 ? this.interval : 6000)
       }
     },
@@ -164,7 +166,7 @@
       }, [
         this.genIcon('left', this.leftControlIcon, this.prev),
         this.genIcon('right', this.rightControlIcon, this.next),
-        this.genControls(),
+        this.hideControls ? null : this.genControls(),
         this.$slots.default
       ])
     }

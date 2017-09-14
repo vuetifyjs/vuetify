@@ -19,7 +19,8 @@
       autofocus: Boolean,
       autoGrow: Boolean,
       box: Boolean,
-      counter: [Number, String],
+      clearable: Boolean,
+      counter: [Boolean, Number, String],
       fullWidth: Boolean,
       multiLine: Boolean,
       placeholder: String,
@@ -67,16 +68,13 @@
           return this.value
         },
         set (val) {
-          this.$emit('input', val)
-
           this.lazyValue = val
+          this.$emit('input', val)
         }
       },
       isDirty () {
-        return this.lazyValue !== null &&
-          typeof this.lazyValue !== 'undefined' &&
+        return this.lazyValue != null &&
           this.lazyValue.toString().length > 0 ||
-          this.placeholder ||
           this.badInput ||
           ['time', 'date', 'datetime-local', 'week', 'month'].includes(this.type)
       },
@@ -86,11 +84,14 @@
     },
 
     watch: {
-      focused (val) {
-        !val && this.$emit('change', this.lazyValue)
+      isFocused (val) {
+        if (!val) {
+          this.$emit('change', this.lazyValue)
+        }
       },
-      value () {
-        this.lazyValue = this.value
+      value (val) {
+        // Value was changed externally, update lazy
+        if (!this.isFocused) this.lazyValue = val
         !this.validateOnBlur && this.validate()
         this.shouldAutoGrow && this.calculateInputHeight()
       }
@@ -122,15 +123,18 @@
         this.shouldAutoGrow && this.calculateInputHeight()
       },
       blur (e) {
+        this.isFocused = false
+
         this.$nextTick(() => {
-          this.focused = false
           this.validate()
         })
         this.$emit('blur', e)
       },
       focus (e) {
-        this.focused = true
-        this.$refs.input.focus()
+        this.isFocused = true
+        if (document.activeElement !== this.$refs.input) {
+          this.$refs.input.focus()
+        }
         this.$emit('focus', e)
       },
       genCounter () {
@@ -143,6 +147,8 @@
       },
       genInput () {
         const tag = this.multiLine || this.textarea ? 'textarea' : 'input'
+        const listeners = this.$listeners || {}
+        delete listeners['change'] // Change should not be bound externally
 
         const data = {
           style: {},
@@ -154,15 +160,15 @@
           },
           attrs: {
             ...this.$attrs,
+            readonly: this.readonly,
             tabindex: this.tabindex,
             'aria-label': (!this.$attrs || !this.$attrs.id) && this.label // Label `for` will be set if we have an id
           },
-          on: {
-            ...this.$listeners,
+          on: Object.assign({}, listeners, {
             blur: this.blur,
             input: this.onInput,
             focus: this.focus
-          },
+          }),
           ref: 'input'
         }
 
@@ -189,6 +195,10 @@
         return this.$createElement('span', {
           'class': `input-group--text-field__${type}`
         }, this[type])
+      },
+      clearableCallback () {
+        this.inputValue = null
+        this.$nextTick(() => this.$refs.input.focus())
       }
     },
 

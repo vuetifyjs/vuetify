@@ -61,7 +61,7 @@ export default {
 
       if (this.hasInput && !this.validateOnBlur) this.shouldValidate = true
     },
-    focused (val) {
+    isFocused (val) {
       // If we're not focused, and it's the first time
       // we're defocusing, set shouldValidate to true
       if (!val && !this.hasFocused) {
@@ -96,6 +96,7 @@ export default {
       this.$nextTick(() => {
         this.shouldValidate = false
         this.hasFocused = false
+        this.validate()
       })
     },
     validate (force = false, value) {

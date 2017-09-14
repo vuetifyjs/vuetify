@@ -27,14 +27,6 @@
       toolbar: Boolean
     },
 
-    methods: {
-      resizeDebounce () {
-        clearTimeout(this.resizeTimeout)
-
-        this.resizeTimeout = setTimeout(this.onResize, 200)
-      }
-    },
-
     mounted () {
       this.onResize()
     },
@@ -53,7 +45,7 @@
         domProps: { id: this.id },
         directives: [{
           name: 'resize',
-          value: this.resizeDebounce
+          value: this.onResize
         }]
       }
 

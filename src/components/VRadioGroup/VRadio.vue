@@ -13,7 +13,7 @@
 
     inheritAttrs: false,
 
-    inject: ['isMandatory'],
+    inject: ['isMandatory', 'name'],
 
     components: {
       VFadeTransition,
@@ -41,6 +41,7 @@
         return this.addColorClassChecks({
           'input-group': true,
           'input-group--active': this.isActive,
+          'input-group--disabled': this.disabled,
           'input-group--selection-controls': true,
           'input-group--tab-focused': this.tabFocused,
           'radio': true,
@@ -56,14 +57,16 @@
 
     methods: {
       genInput (radio) {
-        const value = JSON.stringify(this.value)
+        const value = ['string', 'number'].includes(typeof this.value)
+          ? this.value
+          : JSON.stringify(this.value)
         const input = this.$createElement('input', {
           ref: 'input',
           style: {
             display: 'none'
           },
           attrs: Object.assign({
-            name: 'test', // from parent?
+            name: this.name && this.name(),
             id: this.id,
             type: 'radio',
             value
@@ -122,11 +125,11 @@
       }
     },
 
-    created() {
+    created () {
       // Semantic check to help people identify the reason for the inject error above it.
       if (!this.$parent || !this.$parent.$vnode || !this.$parent.$vnode.tag ||
-        !this.$parent.$vnode.tag.endsWith("v-radio-group")) {
-        console.warn("[Vuetify] Warn: The v-radio component must have an immediate parent of v-radio-group.")
+        !this.$parent.$vnode.tag.endsWith('v-radio-group')) {
+        console.warn('[Vuetify] Warn: The v-radio component must have an immediate parent of v-radio-group.')
       }
     },
 
@@ -148,7 +151,7 @@
         directives: [
           {
             name: 'ripple',
-            value: { center: true }
+            value: this.disabled ? false : { center: true }
           }
         ]
       })

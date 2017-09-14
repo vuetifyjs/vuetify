@@ -7,6 +7,7 @@
   <a href="https://codebeat.co/projects/github-com-vuetifyjs-vuetify-dev"><img alt="codebeat badge" src="https://codebeat.co/badges/b2d1ce87-848b-440e-9d7e-df9883c0cd93" /></a>
   <a href="https://www.npmjs.com/package/vuetify"><img src="https://img.shields.io/npm/dm/vuetify.svg" alt="Downloads"></a>
   <a href="https://www.npmjs.com/package/vuetify"><img src="https://img.shields.io/npm/v/vuetify.svg" alt="Version"></a>
+  <a href="https://cdnjs.com/libraries/vuetify"><img src="https://img.shields.io/cdnjs/v/vuetify.svg" alt="CDN"></a>
   <a href="https://www.npmjs.com/package/vuetify"><img src="https://img.shields.io/npm/l/vuetify.svg" alt="License"></a>
   <a href="https://chat.vuetifyjs.com"><img src="https://img.shields.io/badge/chat-on%20discord-7289da.svg" alt="Chat"></a>
 </p>
@@ -54,6 +55,7 @@
 <head>
   <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
   <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 </head>
 <body>
   <div id="app">
@@ -67,7 +69,9 @@
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
   <script>
-    new Vue({ el: '#app' })
+    new Vue({
+      el: '#app'
+    })
   </script>
 </body>
 </html>

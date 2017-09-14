@@ -11,7 +11,7 @@ export default {
           allowOverflow: this.isAutocomplete,
           auto: this.auto,
           closeOnClick: false,
-          closeOnContentClick: !this.multiple,
+          closeOnContentClick: !this.isMultiple,
           contentClass: this.computedContentClass,
           disabled: this.disabled,
           maxHeight: this.maxHeight,
@@ -19,11 +19,21 @@ export default {
           nudgeWidth: this.isDropdown ? 55 : 24,
           offsetY,
           openOnClick: false,
-          value: this.isActive && this.computedItems.length,
+          value: this.menuIsActive &&
+            this.computedItems.length &&
+            (!this.tags || this.tags && this.filteredItems.length > 0),
           zIndex: this.menuZIndex
         },
-        on: { input: val => (this.isActive = val) }
+        on: {
+          input: val => {
+            if (!val) {
+              this.menuIsActive = false
+            }
+          }
+        }
       }
+
+      if (this.isAutocomplete) data.props.transition = ''
 
       this.minWidth && (data.props.minWidth = this.minWidth)
 
@@ -31,36 +41,43 @@ export default {
     },
     genSelectionsAndSearch () {
       const data = {
-        'class': 'input-group--select__autocomplete',
+        staticClass: 'input-group--select__autocomplete',
+        'class': {
+          'input-group--select__autocomplete--index': this.selectedIndex > -1
+        },
         style: {
           flex: this.shouldBreak ? '1 0 100%' : null
         },
         attrs: {
           ...this.$attrs,
           disabled: this.disabled || !this.isAutocomplete,
-          tabindex: this.disabled || !this.isAutocomplete ? -1 : 0
+          readonly: this.readonly,
+          tabindex: this.disabled || !this.isAutocomplete ? -1 : this.tabindex
         },
         domProps: {
           value: this.lazySearch
         },
-        on: {
-          focus: this.focus,
-          blur: () => {
-            if (this.isActive) return
-
-            this.blur()
-          },
-          input: e => (this.searchValue = e.target.value)
-        },
         directives: [{
           name: 'show',
-          value: this.isAutocomplete || (this.placeholder && !this.selectedItems.length)
+          value: (this.isAutocomplete) ||
+            (this.placeholder && !this.selectedItems.length)
         }],
         ref: 'input',
         key: 'input'
       }
 
-      if (this.isAutocomplete) data.attrs.role = 'combobox'
+      if (this.isAutocomplete) {
+        data.attrs.role = 'combobox'
+        data.domProps.autocomplete = this.browserAutocomplete
+
+        data.on = {
+          ...this.genListeners(),
+          input: e => (this.searchValue = e.target.value)
+        }
+
+        data.directives = data.directives.concat(this.genDirectives())
+      }
+
       if (this.placeholder) data.domProps.placeholder = this.placeholder
 
       return this.$createElement('div', {
@@ -73,28 +90,28 @@ export default {
       ])
     },
     genSelections () {
-      if (this.isAutocomplete && !this.multiple) return []
+      if (this.hideSelections) return []
 
       const children = []
       const chips = this.chips
       const slots = this.$scopedSlots.selection
       const length = this.selectedItems.length
-
       this.selectedItems.forEach((item, i) => {
         if (slots) {
-          children.push(this.genSlotSelection(item))
+          children.push(this.genSlotSelection(item, i))
         } else if (chips) {
           children.push(this.genChipSelection(item))
         } else if (this.segmented) {
           children.push(this.genSegmentedBtn(item))
         } else {
-          children.push(this.genCommaSelection(item, i < length - 1))
+          children.push(this.genCommaSelection(item, i < length - 1, i))
         }
       })
 
       return children
     },
     genSegmentedBtn (item) {
+      console.log('asd')
       if (!item.text || !item.callback) {
         console.warn('[Vuetify] Warn: When using the v-select component with \'segmented\' prop without a selection slot, items must contain both a text and callback property')
         return null
@@ -112,23 +129,47 @@ export default {
         }
       }, [item.text])
     },
-    genSlotSelection (item) {
-      return this.$scopedSlots.selection({ parent: this, item })
+    genSlotSelection (item, index) {
+      return this.$scopedSlots.selection({
+        parent: this,
+        item,
+        index,
+        selected: index === this.selectedIndex,
+        disabled: this.disabled || this.readonly
+      })
     },
-    genChipSelection (item) {
+    genChipSelection (item, index) {
+      const isDisabled = this.disabled || this.readonly
+      const click = e => {
+        if (isDisabled) return
+
+        e.stopPropagation()
+        this.focus()
+        this.selectedIndex = index
+      }
+
       return this.$createElement('v-chip', {
-        'class': 'chip--select-multi',
-        props: { close: true },
+        staticClass: 'chip--select-multi',
+        props: {
+          close: !isDisabled,
+          dark: this.dark,
+          disabled: isDisabled,
+          selected: index === this.selectedIndex
+        },
         on: {
-          input: () => this.selectItem(item),
-          click: e => e.stopPropagation()
+          click: click,
+          focus: click,
+          input: () => this.selectItem(item)
         },
         key: this.getValue(item)
       }, this.getText(item))
     },
-    genCommaSelection (item, comma) {
+    genCommaSelection (item, comma, index) {
       return this.$createElement('div', {
-        'class': 'input-group__selections__comma',
+        staticClass: 'input-group__selections__comma',
+        'class': {
+          'input-group__selections__comma--active': index === this.selectedIndex
+        },
         key: JSON.stringify(this.getValue(item)) // Item may be an object
       }, `${this.getText(item)}${comma ? ', ' : ''}`)
     },
@@ -196,12 +237,10 @@ export default {
       )
     },
     genAction (item, active) {
-      if (!this.multiple) return null
+      if (!this.isMultiple) return null
 
       const data = {
-        'class': {
-          'list__tile__action--select-multi': this.multiple
-        },
+        staticClass: 'list__tile__action--select-multi',
         on: {
           click: e => {
             e.stopPropagation()

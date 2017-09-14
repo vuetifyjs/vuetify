@@ -147,4 +147,18 @@ test('VNavigationDrawer.js', ({ mount }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should match value if resize-watcher is not enabled', async () => {
+    const wrapper = mount(VNavigationDrawer, {
+      attachToDocument: true,
+      propsData: {
+        permanent: true,
+        value: false
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isActive).toBe(false)
+  })
 })

@@ -24,11 +24,37 @@ export default {
       )
     },
     onKeyDown (e) {
-      if (!this.isActive &&
-        [38, 40].includes(e.keyCode)
-      ) return this.isActive = true
+      // If enter or space is pressed, open menu
+      if (!this.menuIsActive &&
+        [13, 32, 38, 40].includes(e.keyCode)
+      ) {
+        return this.showMenuItems()
+      } else if ([9, 27].includes(e.keyCode)) {
+        // If select is being tabbed, blur
+        return this.blur()
+      } else if (e.keyCode === 13 &&
+        this.searchValue &&
+        this.tags &&
+        !this.filteredItems.length
+      ) {
+        this.selectedItems.push(this.searchValue)
 
-      this.$refs.menu.changeListIndex(e)
+        this.$nextTick(() => {
+          this.searchValue = null
+          this.$emit('change', this.selectedItems)
+        })
+      }
+
+      if (!this.tags ||
+        ![32].includes(e.keyCode)
+      ) this.$refs.menu.changeListIndex(e)
+
+      if ([38, 40].includes(e.keyCode)) this.selectedIndex = -1
+
+      if (this.isAutocomplete &&
+        !this.hideSelections &&
+        !this.searchValue
+      ) this.changeSelectedIndex(e.keyCode)
     }
   }
 }

@@ -20,9 +20,11 @@
     methods: {
       genOverlay () {
         // If fn is called and timeout is active
+        // or overlay already exists
         // cancel removal of overlay and re-add active
         if ((!this.isActive || this.hideOverlay) ||
-          (this.isActive && this.overlayTimeout)
+          (this.isActive && this.overlayTimeout) ||
+          this.overlay
         ) {
           clearTimeout(this.overlayTimeout)
 
@@ -78,8 +80,8 @@
       },
       scrollListener (e) {
         if (e.type === 'keydown') {
-          const up = [38, 33, 36]
-          const down = [40, 34, 35]
+          const up = [38, 33]
+          const down = [40, 34]
 
           if (up.includes(e.keyCode)) {
             e.deltaY = -1

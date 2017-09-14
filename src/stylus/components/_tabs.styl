@@ -12,9 +12,10 @@ tabs($material)
     &.tabs__item--disabled
       color: $material.buttons.disabled
 
-  .icon--left,
-  .icon--right
-    color: $material.icons.active
+  .tabs__bar
+    .icon--left,
+    .icon--right
+      color: $material.icons.inactive
 
 theme(tabs, "tabs")
 
@@ -141,9 +142,6 @@ theme(tabs, "tabs")
 
   &__items
     position: relative
-    border-width: 0 1px 1px 1px
-    border-style: solid
-    border-color: rgba($material-theme.fg-color, .1)
     overflow: hidden
 
   &__content

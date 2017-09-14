@@ -84,7 +84,12 @@ export default {
   },
 
   render (h) {
-    const { tag, data } = this.generateRouteLink()
+    const link = this.generateRouteLink()
+    const { data } = link
+
+    // If disabled, use div as anchor tags do not support
+    // being disabled
+    const tag = this.disabled ? 'div' : link.tag
 
     return h('li', {
       'class': 'tabs__li'
