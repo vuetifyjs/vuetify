@@ -70,12 +70,12 @@
         }
       },
       paddingLeft () {
-        if (!this.app || this.clipped) return 0
+        if (!this.app || this.clippedLeft) return 0
 
         return this.$vuetify.application.left
       },
       paddingRight () {
-        if (!this.app || this.clipped) return 0
+        if (!this.app || this.clippedRight) return 0
 
         return this.$vuetify.application.right
       },

@@ -54,11 +54,11 @@ theme(toolbar, "toolbar")
     > .btn:first-child, > .menu:first-child
       margin-left: 8px
 
-    > *:not(.btn):not(.toolbar__title):not(.menu):last-child
-      margin-right: $grid-gutters.lg
-
-    > *:not(.btn):not(.toolbar__title):not(.menu):first-child
+    > *:not(.btn):not(.menu):first-child
       margin-left: $grid-gutters.lg
+
+    > *:not(.btn):not(.menu):last-child
+      margin-right: $grid-gutters.lg
 
   &__items
     display: flex
@@ -86,11 +86,11 @@ theme(toolbar, "toolbar")
       > .btn:first-child
         margin-left: 17px
 
-      > *:not(.btn):last-child
-        margin-right: $grid-gutters.xl
-
-      > *:not(.btn):first-child
+      > *:not(.btn):not(.menu):first-child
         margin-left: $grid-gutters.xl
+
+      > *:not(.btn):not(.menu):last-child
+        margin-right: $grid-gutters.xl
 
   @media all and (max-width: $grid-breakpoints.sm) and (orientation: portrait)
     toolbar-content(7px)
