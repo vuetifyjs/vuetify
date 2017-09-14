@@ -111,7 +111,6 @@ export default {
       return children
     },
     genSegmentedBtn (item) {
-      console.log('asd')
       if (!item.text || !item.callback) {
         console.warn('[Vuetify] Warn: When using the v-select component with \'segmented\' prop without a selection slot, items must contain both a text and callback property')
         return null
