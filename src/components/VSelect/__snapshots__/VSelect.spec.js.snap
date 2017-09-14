@@ -25,7 +25,7 @@ exports[`VSelect.js should have -1 tabindex when disabled 1`] = `
         <div class="card"
              style="height: auto;"
         >
-          <ul data-uid="17"
+          <ul data-uid="20"
               class="list"
           >
             <li disabled="disabled">
@@ -82,7 +82,7 @@ exports[`VSelect.js should have explicit tabindex passed through when autocomple
         <div class="card"
              style="height: auto;"
         >
-          <ul data-uid="22"
+          <ul data-uid="26"
               class="list"
           >
             <li disabled="disabled">
@@ -140,7 +140,7 @@ exports[`VSelect.js should have explicit tabindex passed through when not autoco
         <div class="card"
              style="height: auto;"
         >
-          <ul data-uid="28"
+          <ul data-uid="33"
               class="list"
           >
             <li disabled="disabled">

@@ -1,11 +1,11 @@
-import GenerateRouteLink from '../../mixins/route-link'
+import Routable from '../../mixins/routable'
 
 export default {
   name: 'v-tabs-item',
 
   inject: ['slider', 'tabClick', 'registerTabItem', 'unregisterTabItem'],
 
-  mixins: [GenerateRouteLink],
+  mixins: [Routable],
 
   data () {
     return {

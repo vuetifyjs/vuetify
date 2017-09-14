@@ -1,10 +1,10 @@
 <script>
-  import GenerateRouteLink from '../../mixins/route-link'
+  import Routable from '../../mixins/routable'
 
   export default {
     name: 'v-breadcrumbs-item',
 
-    mixins: [GenerateRouteLink],
+    mixins: [Routable],
 
     inject: ['divider'],
 

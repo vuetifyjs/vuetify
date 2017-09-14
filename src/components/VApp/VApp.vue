@@ -18,13 +18,10 @@
     }),
 
     props: {
-      fixedFooter: Boolean,
-      footer: Boolean,
       id: {
         type: String,
         default: 'app'
-      },
-      toolbar: Boolean
+      }
     },
 
     mounted () {
@@ -36,10 +33,7 @@
         staticClass: 'application',
         'class': {
           'application--dark': this.dark,
-          'application--light': !this.dark,
-          'application--footer': this.footer || this.fixedFooter,
-          'application--footer-fixed': this.fixedFooter,
-          'application--toolbar': this.toolbar
+          'application--light': !this.dark
         },
         attrs: { 'data-app': true },
         domProps: { id: this.id },

@@ -28,7 +28,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and multi select 1`] =
         <div class="card"
              style="height: auto;"
         >
-          <ul data-uid="36"
+          <ul data-uid="42"
               class="list"
           >
             <li>
@@ -139,7 +139,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and multi select 2`] =
         <div class="card"
              style="height: auto;"
         >
-          <ul data-uid="36"
+          <ul data-uid="42"
               class="list"
           >
             <li>
@@ -255,7 +255,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and single select 1`] 
         <div class="card"
              style="height: auto;"
         >
-          <ul data-uid="29"
+          <ul data-uid="34"
               class="list"
           >
             <li>
@@ -323,7 +323,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and single select 2`] 
         <div class="card"
              style="height: auto;"
         >
-          <ul data-uid="29"
+          <ul data-uid="34"
               class="list"
           >
             <li>

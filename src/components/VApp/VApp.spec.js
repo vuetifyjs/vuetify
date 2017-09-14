@@ -9,21 +9,6 @@ test('VApp.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should have a toolbar and footer class', () => {
-    const wrapper = mount(VApp, {
-      propsData: {
-        toolbar: true,
-        footer: true,
-        fixedFooter: true
-      }
-    })
-
-    expect(wrapper.hasClass('application--toolbar')).toBe(true)
-    expect(wrapper.hasClass('application--footer')).toBe(true)
-    expect(wrapper.hasClass('application--footer-fixed')).toBe(true)
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
   it('should have data-app attribute', () => {
     const wrapper = mount(VApp)
 
