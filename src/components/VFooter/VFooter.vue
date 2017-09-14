@@ -13,12 +13,12 @@
 
     computed: {
       paddingLeft () {
-        return this.fixed
+        return this.fixed || !this.app
           ? 0
           : this.$vuetify.application.left
       },
       paddingRight () {
-        return this.fixed
+        return this.fixed || !this.app
           ? 0
           : this.$vuetify.application.right
       }
