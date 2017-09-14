@@ -76,7 +76,7 @@
         }, this.$listeners),
         directives: [{
           name: 'ripple',
-          value: { center: true }
+          value: this.disabled ? false : { center: true }
         }]
       })
 
