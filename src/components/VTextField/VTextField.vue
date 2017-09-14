@@ -147,7 +147,7 @@
       },
       genInput () {
         const tag = this.multiLine || this.textarea ? 'textarea' : 'input'
-        const listeners = this.$listeners || {}
+        const listeners = Object.assign({}, this.$listeners)
         delete listeners['change'] // Change should not be bound externally
 
         const data = {
@@ -164,7 +164,7 @@
             tabindex: this.tabindex,
             'aria-label': (!this.$attrs || !this.$attrs.id) && this.label // Label `for` will be set if we have an id
           },
-          on: Object.assign({}, listeners, {
+          on: Object.assign(listeners, {
             blur: this.blur,
             input: this.onInput,
             focus: this.focus
