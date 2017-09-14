@@ -11,7 +11,20 @@ export default {
     Touch
   },
 
-  inject: ['isScrollable', 'isMobile'],
+  provide () {
+    return {
+      addTabItem: (action, toggle, el) => {
+        this.registerTabItem(action, toggle, el)
+        this.onResize()
+      },
+      removeTabItem: (action) => {
+        this.unregisterTabItem(action)
+        this.onResize()
+      }
+    }
+  },
+
+  inject: ['isScrollable', 'isMobile', 'registerTabItem', 'unregisterTabItem'],
 
   data () {
     return {
