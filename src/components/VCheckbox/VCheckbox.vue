@@ -69,15 +69,16 @@
         }, this.icon)
       ])
 
+      const rippleDirectives = !this.disabled && [{
+        name: 'ripple',
+        value: { center: true }
+      }]
       const ripple = h('div', {
         'class': 'input-group--selection-controls__ripple',
         on: Object.assign({}, {
           click: this.toggle
         }, this.$listeners),
-        directives: [{
-          name: 'ripple',
-          value: { center: true }
-        }]
+        directives: rippleDirectives
       })
 
       const data = {

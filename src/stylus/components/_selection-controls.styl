@@ -93,3 +93,9 @@ theme(selection-control, "input-group--selection-controls")
     opacity: 0
     transition: $ripple-animation-transition
     transform-origin: center center
+
+.input-group--disabled.input-group--selection-controls
+  label,
+  .icon,
+  .input-group--selection-controls__ripple
+    cursor: not-allowed
