@@ -44,9 +44,9 @@ test('VDataTable.js', ({ mount }) => {
 
     const headerEles = wrapper.find('thead:first-of-type > tr:first-of-type > th')
     expect(headerEles.length).toBe(3)
-    expect(headerEles[0].hasAttribute('role', 'columnheader')).toBe(true)
-    expect(headerEles[1].hasAttribute('role', 'columnheader')).toBe(true)
-    expect(headerEles[2].hasAttribute('role', 'columnheader')).toBe(true)
+    expect(headerEles[0].getAttribute('role')).toBe('columnheader')
+    expect(headerEles[1].getAttribute('role')).toBe('columnheader')
+    expect(headerEles[2].getAttribute('role')).toBe('columnheader')
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
@@ -57,9 +57,9 @@ test('VDataTable.js', ({ mount }) => {
 
     const headerEles = wrapper.find('thead:first-of-type > tr:first-of-type > th')
     expect(headerEles.length).toBe(3)
-    expect(headerEles[0].hasAttribute('scope', 'col')).toBe(true)
-    expect(headerEles[1].hasAttribute('scope', 'col')).toBe(true)
-    expect(headerEles[2].hasAttribute('scope', 'col')).toBe(true)
+    expect(headerEles[0].getAttribute('scope')).toBe('col')
+    expect(headerEles[1].getAttribute('scope')).toBe('col')
+    expect(headerEles[2].getAttribute('scope')).toBe('col')
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
@@ -70,8 +70,8 @@ test('VDataTable.js', ({ mount }) => {
 
     const icons = wrapper.find('thead:first-of-type > tr:first-of-type > th > i')
     expect(icons.length).toBe(2)
-    expect(icons[0].hasAttribute('aria-hidden', 'true')).toBe(true)
-    expect(icons[1].hasAttribute('aria-hidden', 'true')).toBe(true)
+    expect(icons[0].getAttribute('aria-hidden')).toBe('true')
+    expect(icons[1].getAttribute('aria-hidden')).toBe('true')
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
@@ -98,9 +98,9 @@ test('VDataTable.js', ({ mount }) => {
 
     let headerEles = wrapper.find('thead:first-of-type > tr:first-of-type > th')
     expect(headerEles.length).toBe(3)
-    expect(headerEles[0].hasAttribute('aria-sort', 'ascending')).toBe(true)
-    expect(headerEles[1].hasAttribute('aria-sort', 'none')).toBe(true)
-    expect(headerEles[2].hasAttribute('aria-sort', 'none')).toBe(true)
+    expect(headerEles[0].getAttribute('aria-sort')).toBe('ascending')
+    expect(headerEles[1].getAttribute('aria-sort')).toBe('none')
+    expect(headerEles[2].getAttribute('aria-sort')).toBe('none')
 
     const pagination = data.propsData.pagination
     pagination.sortBy = 'col3'
@@ -109,9 +109,9 @@ test('VDataTable.js', ({ mount }) => {
 
     headerEles = wrapper.find('thead:first-of-type > tr:first-of-type > th')
     expect(headerEles.length).toBe(3)
-    expect(headerEles[0].hasAttribute('aria-sort', 'none')).toBe(true)
-    expect(headerEles[1].hasAttribute('aria-sort', 'none')).toBe(true)
-    expect(headerEles[2].hasAttribute('aria-sort', 'ascending')).toBe(true)
+    expect(headerEles[0].getAttribute('aria-sort')).toBe('none')
+    expect(headerEles[1].getAttribute('aria-sort')).toBe('none')
+    expect(headerEles[2].getAttribute('aria-sort')).toBe('ascending')
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
@@ -122,9 +122,9 @@ test('VDataTable.js', ({ mount }) => {
 
     const headerEles = wrapper.find('thead:first-of-type > tr:first-of-type > th')
     expect(headerEles.length).toBe(3)
-    expect(headerEles[0].hasAttribute('tabindex', '0')).toBe(true)
+    expect(headerEles[0].getAttribute('tabindex')).toBe('0')
     expect(headerEles[1].element.getAttribute('tabindex')).toBeFalsy()
-    expect(headerEles[2].hasAttribute('tabindex', '0')).toBe(true)
+    expect(headerEles[2].getAttribute('tabindex')).toBe('0')
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })

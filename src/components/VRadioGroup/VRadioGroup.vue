@@ -13,7 +13,8 @@
 
     provide () {
       return {
-        isMandatory: () => this.mandatory
+        isMandatory: () => this.mandatory,
+        name: () => this.name
       }
     },
 
@@ -27,6 +28,7 @@
         type: Boolean,
         default: true
       },
+      name: String,
       row: Boolean
     },
 
@@ -48,7 +50,7 @@
       classes () {
         return {
           'radio-group': true,
-          'radio-group--column': this.column,
+          'radio-group--column': this.column && !this.row,
           'radio-group--row': this.row
         }
       }
@@ -59,7 +61,7 @@
         return this.$children
           .filter((child) => child.$el.classList.contains('radio'))
       },
-      toggle (value) {
+      toggleRadio (value) {
         if (this.disabled) {
           return
         }
@@ -77,14 +79,14 @@
           this.shouldValidate = true
           this.$emit('blur', this.inputValue)
         }
-      },
+      }
     },
 
     mounted () {
       this.getRadios().forEach((radio) => {
         radio.isActive = this.inputValue === radio.value
         radio.$el.tabIndex = radio.$el.tabIndex > 0 ? radio.$el.tabIndex : 0
-        radio.$on('change', this.toggle)
+        radio.$on('change', this.toggleRadio)
         radio.$on('blur', this.radioBlur)
         radio.$on('focus', this.radioFocus)
       })
@@ -92,7 +94,7 @@
 
     beforeDestroy () {
       this.getRadios().forEach((radio) => {
-        radio.$off('change', this.toggle)
+        radio.$off('change', this.toggleRadio)
         radio.$off('blur', this.radioBlur)
         radio.$off('focus', this.radioFocus)
       })

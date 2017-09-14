@@ -147,15 +147,15 @@
 
     methods: {
       init () {
-        this.checkIfMobile()
-        setTimeout(() => (this.isBooted = true), 0)
-
-        if (this.permanent) this.isActive = true
+        if (this.value != null) this.isActive = this.value
+        else if (this.permanent) this.isActive = true
         else if (this.isMobile) this.isActive = false
         else if (!this.value &&
           (this.persistent || this.temporary)
         ) this.isActive = false
         else this.isActive = true
+
+        setTimeout(() => (this.isBooted = true), 0)
       },
       calculateTouchArea () {
         if (!this.$el.parentNode) return
@@ -202,6 +202,7 @@
         ) return
 
         this.checkIfMobile()
+
         this.isActive = !this.isMobile
       },
       swipeRight (e) {

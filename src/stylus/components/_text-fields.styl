@@ -34,10 +34,6 @@ theme(textfield, "input-group--text-field")
   &::placeholder
     transition: .3s $transition.swing
 
-  + .icon
-    padding: 0 6px
-    transition: .3s $transition.ease-in-out
-
   &:focus
     outline: none
 
@@ -86,7 +82,7 @@ theme(textfield, "input-group--text-field")
 
 /** Input States */
 .input-group--text-field
-  &.input-group--placeholder:not(.input-group--focused):not(.input-group--dirty)
+  &.input-group--placeholder.input-group--dirty
     input::placeholder
       opacity: 0
 
@@ -118,7 +114,7 @@ theme(textfield, "input-group--text-field")
 
   &:not(.input-group--single-line)
     &.input-group--focused,
-    &:focus
+    &.input-group--placeholder
       label
         opacity: 1
 
@@ -182,7 +178,7 @@ theme(textfield, "input-group--text-field")
     cursor: pointer
 
   label
-    left: 24px
+    left: 16px
 
   .input-group__input
     align-items: flex-end
@@ -191,7 +187,7 @@ theme(textfield, "input-group--text-field")
     min-height: 56px
 
   .input-group__details
-    padding: 8px 24px 0
+    padding: 8px 16px 0
 
     &:before,
     &:after
@@ -214,15 +210,23 @@ theme(textfield, "input-group--text-field")
 
     &:not(.input-group--multi-line)
       .input-group__input
-        padding-left: 24px
-        padding-right: 24px
+        padding-left: 16px
+        padding-right: 16px
 
       label
         top: calc(50% - 16px)
 
     &:not(.input-group--single-line)
       &.input-group--focused,
-      &:focus,
       &.input-group--dirty
         label
           transform: translate3d(0, -10px, 0) scale(0.75)
+  // Icons
+  &.input-group--prepend-icon
+    .input-group__details
+      &:before, &:after
+        margin-left: 56px
+        max-width: calc(100% - 56px)
+
+    label
+      left: 56px

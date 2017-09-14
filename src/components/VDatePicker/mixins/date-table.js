@@ -56,7 +56,7 @@ export default {
       ).getDate()
 
       let day = new Date(this.tableYear, this.tableMonth).getDay()
-      day = day < 1 ? 6 : day - parseInt(this.firstDayOfWeek)
+      day = (day + 7 - parseInt(this.firstDayOfWeek)) % 7
 
       for (let i = 0; i < day; i++) {
         rows.push(this.$createElement('td'))
@@ -64,6 +64,9 @@ export default {
 
       for (let i = 1; i <= length; i++) {
         const date = new Date(this.tableYear, this.tableMonth, i, 12, 0, 0, 0)
+        const buttonText = this.supportsLocaleFormat
+          ? date.toLocaleDateString(this.locale, { day: 'numeric' })
+          : i
         rows.push(this.$createElement('td', [
           this.$createElement('button', {
             'class': {
@@ -77,7 +80,7 @@ export default {
               type: 'button'
             },
             domProps: {
-              innerHTML: `<span class="btn__content">${i}</span>`
+              innerHTML: `<span class="btn__content">${buttonText}</span>`
             },
             on: {
               click: () => {

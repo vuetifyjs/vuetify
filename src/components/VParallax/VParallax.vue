@@ -38,6 +38,19 @@
     },
 
     methods: {
+      init () {
+        if (!this.$refs.img) return
+
+        if (this.$refs.img.complete) {
+          this.translate()
+          this.listeners()
+        } else {
+          this.$refs.img.addEventListener('load', () => {
+            this.translate()
+            this.listeners()
+          }, false)
+        }
+      },
       objHeight () {
         return this.$refs.img.naturalHeight
       },
@@ -52,6 +65,9 @@
       }, [
         h('img', {
           staticClass: 'parallax__image',
+          'class': {
+            'parallax__image--jumbotron': this.jumbotron
+          },
           style: this.styles,
           attrs: {
             src: this.src
@@ -61,29 +77,18 @@
       ])
 
       const content = h('div', {
-        staticClass: 'parallax__content',
-        style: {
-          minHeight: isNaN(this.height) ? this.height : `${this.height}px`
-        }
+        staticClass: 'parallax__content'
       }, this.$slots.default)
-
-      let directives = this.directives()
-
-      if (this.jumbotron) {
-        directives = directives.filter(d => d.name !== 'scroll')
-      }
 
       return h('div', {
         staticClass: 'parallax',
         style: {
-          minHeight: isNaN(this.height) ? this.height : `${this.height}px`
+          height: this.jumbotron
+            ? this.normalizedHeight
+            : `${this.normalizedHeight}px`
         },
-        directives,
         on: this.$listeners
-      }, [
-        container,
-        content
-      ])
+      }, [container, content])
     }
   }
 </script>

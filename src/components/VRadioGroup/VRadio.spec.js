@@ -27,12 +27,12 @@ test('VRadio.vue', ({ mount }) => {
     })
 
     let inputGroup = wrapper.find('.input-group')[0]
-    expect(inputGroup.hasAttribute('role', 'radio')).toBe(true)
-    expect(inputGroup.hasAttribute('aria-checked', 'false')).toBe(true)
+    expect(inputGroup.getAttribute('role')).toBe('radio')
+    expect(inputGroup.getAttribute('aria-checked')).toBe('false')
 
     wrapper.setData({ 'isActive': true })
     inputGroup = wrapper.find('.input-group')[0]
-    expect(inputGroup.hasAttribute('aria-checked', 'true')).toBe(true)
+    expect(inputGroup.getAttribute('aria-checked')).toBe('true')
 
     expect('immediate parent of v-radio-group').toHaveBeenTipped()
     expect('Injection').toHaveBeenWarned() // TODO: testing library needs injection mock support
@@ -47,8 +47,7 @@ test('VRadio.vue', ({ mount }) => {
     })
 
     const inputGroup = wrapper.find('.input-group')[0]
-    expect(inputGroup.hasAttribute('aria-label', 'Test')).toBe(true)
-    expect(`$attrs is readonly`).toHaveBeenWarned()
+    expect(inputGroup.getAttribute('aria-label')).toBe('Test')
 
     expect('immediate parent of v-radio-group').toHaveBeenTipped()
     expect('Injection').toHaveBeenWarned() // TODO: testing library needs injection mock support

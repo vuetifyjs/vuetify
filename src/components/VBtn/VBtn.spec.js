@@ -22,7 +22,7 @@ describe('VBtn.js', () => {
     })
 
     expect(wrapper.is('a')).toBe(true)
-    expect(wrapper.hasAttribute('href', 'http://www.google.com')).toBe(true)
+    expect(wrapper.getAttribute('href')).toBe('http://www.google.com')
     expect(wrapper.html()).toMatchSnapshot()
   })
 

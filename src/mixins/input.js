@@ -1,12 +1,17 @@
 import Themeable from './themeable'
 import Validatable from './validatable'
+import VIcon from '../components/VIcon'
 
 export default {
+  components: {
+    VIcon
+  },
+
   mixins: [Themeable, Validatable],
 
   data () {
     return {
-      focused: false,
+      isFocused: false,
       tabFocused: false,
       internalTabIndex: null,
       lazyValue: this.value
@@ -16,6 +21,7 @@ export default {
   props: {
     appendIcon: String,
     appendIconCb: Function,
+    asyncLoading: Boolean,
     disabled: Boolean,
     hint: String,
     hideDetails: Boolean,
@@ -24,6 +30,7 @@ export default {
     placeholder: String,
     prependIcon: String,
     prependIconCb: Function,
+    readonly: Boolean,
     required: Boolean,
     tabindex: {
       default: 0
@@ -41,7 +48,8 @@ export default {
     inputGroupClasses () {
       return Object.assign({
         'input-group': true,
-        'input-group--focused': this.focused,
+        'input-group--async-loading': this.asyncLoading,
+        'input-group--focused': this.isFocused,
         'input-group--dirty': this.isDirty,
         'input-group--tab-focused': this.tabFocused,
         'input-group--disabled': this.disabled,
@@ -76,7 +84,7 @@ export default {
       let messages = []
 
       if ((this.hint &&
-            this.focused ||
+            this.isFocused ||
             this.hint &&
             this.persistentHint) &&
           this.validations.length === 0
@@ -111,31 +119,35 @@ export default {
         error
       )
     },
-    genIcon (type) {
-      const icon = this[`${type}Icon`]
-      const cb = this[`${type}IconCb`]
-      const hasCallback = typeof cb === 'function'
+    genIcon (type, defaultCallback = null) {
+      const shouldClear = this.clearable && this.isDirty
+      const icon = shouldClear ? 'clear' : this[`${type}Icon`]
+      const callback = shouldClear
+        ? this.clearableCallback
+        : (this[`${type}IconCb`] || defaultCallback)
 
-      return this.$createElement(
-        'v-icon',
-        {
-          attrs: {
-            'aria-hidden': true
-          },
-          'class': {
-            [`input-group__${type}-icon`]: true,
-            'input-group__icon-cb': hasCallback
-          },
-          on: {
-            click: e => {
-              hasCallback && cb(e)
-            }
-          }
+      return this.$createElement('v-icon', {
+        attrs: {
+          'aria-hidden': true
         },
-        icon
-      )
+        'class': {
+          [`input-group__${type}-icon`]: true,
+          'input-group__icon-cb': !!callback
+        },
+        props: {
+          disabled: this.disabled
+        },
+        on: {
+          click: e => {
+            if (!callback) return
+
+            e.stopPropagation()
+            callback()
+          }
+        }
+      }, icon)
     },
-    genInputGroup (input, data = {}) {
+    genInputGroup (input, data = {}, defaultAppendCallback = null) {
       const children = []
       const wrapperChildren = []
       const detailsChildren = []
@@ -177,26 +189,27 @@ export default {
         wrapperChildren.unshift(this.genIcon('prepend'))
       }
 
-      if (this.appendIcon) {
-        wrapperChildren.push(this.genIcon('append'))
+      if (this.appendIcon || this.clearable) {
+        wrapperChildren.push(this.genIcon('append', defaultAppendCallback))
+      }
+
+      if (this.asyncLoading) {
+        detailsChildren.push(this.$createElement('v-progress-linear', {
+          props: {
+            indeterminate: true,
+            height: 2
+          }
+        }))
       }
 
       children.push(
         this.$createElement('div', {
-          'class': 'input-group__input',
-          on: {
-            click: () => {
-              // Proprietary for v-text-field with box prop
-              if (!this.box) return
-
-              this.focus()
-            }
-          }
+          'class': 'input-group__input'
         }, wrapperChildren)
       )
       detailsChildren.push(this.genMessages())
 
-      if (typeof this.counter !== 'undefined') {
+      if (this.counter) {
         detailsChildren.push(this.genCounter())
       }
 

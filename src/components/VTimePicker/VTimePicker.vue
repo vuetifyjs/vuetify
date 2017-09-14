@@ -181,12 +181,12 @@
         }
 
         if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
-        this.selectingHour = true;
+        this.selectingHour = true
       },
       cancel () {
         this.inputTime = this.originalTime
         if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
-        this.selectingHour = true;
+        this.selectingHour = true
       },
       isAllowed (type, value) {
         const allowed = this[`allowed${type.charAt(0).toUpperCase() + type.slice(1)}s`]
@@ -194,7 +194,7 @@
         if (!allowed) return true
 
         if (Array.isArray(allowed)) {
-          return !!allowed.find(v => v === value)
+          return !!allowed.some(v => v === value)
         } else if (allowed instanceof Function) {
           return allowed(value)
         } else if (allowed === Object(allowed)) {

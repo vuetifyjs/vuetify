@@ -20,8 +20,7 @@ export default {
     calcLeftAuto () {
       const a = this.dimensions.activator
 
-      // Off by 1 px here as well, (┛ಠ_ಠ)┛彡┻━┻
-      return parseInt(a.left - this.defaultOffset * 2) + 1
+      return parseInt(a.left - this.defaultOffset * 2)
     },
     calcTopAuto () {
       if (!this.hasActivator) return this.calcTop(true)
@@ -52,7 +51,7 @@ export default {
         actingIndex = selectedIndex - this.stopIndex
       }
 
-      // Is always off by 1 pixel, send help
+      // Is always off by 1 pixel, send help (┛ಠ_ಠ)┛彡┻━┻
       offsetPadding--
 
       return (

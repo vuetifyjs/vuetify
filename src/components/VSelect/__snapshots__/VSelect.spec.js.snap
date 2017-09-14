@@ -13,18 +13,19 @@ exports[`VSelect.js should have -1 tabindex when disabled 1`] = `
              tabindex="-1"
              role="combobox"
              class="input-group--select__autocomplete"
+             autocomplete="on"
       >
     </div>
     <div class="menu menu--disabled"
          style="display: inline-block;"
     >
-      <div class="menu__content menu__content--select"
-           style="max-height: 300px; min-width: 24px; max-width: NaNpx; top: 12px; left: 0px; z-index: 6; display: none;"
+      <div class="menu__content menu__content--select   menu__content--autocomplete"
+           style="max-height: 300px; min-width: 36px; max-width: NaNpx; top: 12px; left: 0px; z-index: 6; display: none;"
       >
         <div class="card"
              style="height: auto;"
         >
-          <ul data-uid="26"
+          <ul data-uid="17"
               class="list"
           >
             <li disabled="disabled">
@@ -44,7 +45,7 @@ exports[`VSelect.js should have -1 tabindex when disabled 1`] = `
       </div>
     </div>
     <i aria-hidden="true"
-       class="material-icons icon input-group__append-icon"
+       class="material-icons icon icon--disabled input-group__append-icon input-group__icon-cb"
     >
       arrow_drop_down
     </i>
@@ -57,23 +58,117 @@ exports[`VSelect.js should have -1 tabindex when disabled 1`] = `
 
 `;
 
-exports[`VSelect.js should not display when not autocomplete with placeholder and dirty 1`] = `
+exports[`VSelect.js should have explicit tabindex passed through when autocomplete 1`] = `
 
-<input disabled="disabled"
-       tabindex="-1"
-       class="input-group--select__autocomplete"
-       placeholder="Placeholder"
-       style="display: none;"
+<div tabindex="-1"
+     class="input-group input-group--append-icon input-group--text-field input-group--select input-group--autocomplete"
 >
+  <div class="input-group__input">
+    <div class="input-group__selections"
+         style="overflow: hidden;"
+    >
+      <input tabindex="10"
+             role="combobox"
+             class="input-group--select__autocomplete"
+             autocomplete="on"
+      >
+    </div>
+    <div class="menu"
+         style="display: inline-block;"
+    >
+      <div class="menu__content menu__content--select   menu__content--autocomplete"
+           style="max-height: 300px; min-width: 36px; max-width: NaNpx; top: 12px; left: 0px; z-index: 6; display: none;"
+      >
+        <div class="card"
+             style="height: auto;"
+        >
+          <ul data-uid="22"
+              class="list"
+          >
+            <li disabled="disabled">
+              <div disabled="disabled"
+                   href="javascript:;"
+                   class="list__tile list__tile--link list__tile--disabled"
+              >
+                <div class="list__tile__content">
+                  <div class="list__tile__title">
+                    No data available
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <i aria-hidden="true"
+       class="material-icons icon input-group__append-icon input-group__icon-cb"
+    >
+      arrow_drop_down
+    </i>
+  </div>
+  <div class="input-group__details">
+    <div class="input-group__messages">
+    </div>
+  </div>
+</div>
 
 `;
 
-exports[`VSelect.js should render a disabled input with placeholder 1`] = `
+exports[`VSelect.js should have explicit tabindex passed through when not autocomplete 1`] = `
 
-<input disabled="disabled"
-       tabindex="-1"
-       class="input-group--select__autocomplete"
-       placeholder="Placeholder"
+<div tabindex="10"
+     role="combobox"
+     class="input-group input-group--append-icon input-group--text-field input-group--select"
 >
+  <div class="input-group__input">
+    <div class="input-group__selections"
+         style="overflow: hidden;"
+    >
+      <input disabled="disabled"
+             tabindex="-1"
+             class="input-group--select__autocomplete"
+             style="display: none;"
+      >
+    </div>
+    <div class="menu"
+         style="display: inline-block;"
+    >
+      <div class="menu__content menu__content--select"
+           style="max-height: 300px; min-width: 36px; max-width: NaNpx; top: 12px; left: 0px; z-index: 6; display: none;"
+      >
+        <div class="card"
+             style="height: auto;"
+        >
+          <ul data-uid="28"
+              class="list"
+          >
+            <li disabled="disabled">
+              <div disabled="disabled"
+                   href="javascript:;"
+                   class="list__tile list__tile--link list__tile--disabled"
+              >
+                <div class="list__tile__content">
+                  <div class="list__tile__title">
+                    No data available
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <i aria-hidden="true"
+       class="material-icons icon input-group__append-icon input-group__icon-cb"
+    >
+      arrow_drop_down
+    </i>
+  </div>
+  <div class="input-group__details">
+    <div class="input-group__messages">
+    </div>
+  </div>
+</div>
 
 `;

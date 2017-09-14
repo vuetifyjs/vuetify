@@ -1,29 +1,44 @@
 @import '../bootstrap'
+@import '../theme'
+
+chip($material)
+  background: $material.chips.background
+  color: $material.chips.color
+      
+  &__close
+    color: $material.icons.active
+
+  &.chip--selected
+    background: $theme.accent
+    color: $material.text.theme
+
+    .chip__close
+      color: $material.text.theme
+
+theme(chip, "chip")
 
 .chip
   align-items: center
-  background: $chip-background
-  border: $chip-border
   border-radius: $chip-border-radius
+  color: $chip-label-color
   cursor: default
   display: inline-flex
+  height: $chip-height
   justify-content: space-between
   font-size: $chip-font-size
-  padding: $chip-padding
   margin: $chip-margin
-  height: $chip-height
-  transition: .3s $transition.ease-in-out
+  outline: none
+  padding: $chip-padding
+  transition: $primary-transition
   vertical-align: middle
   white-space: nowrap
-  color: $chip-label-color
 
   .avatar
-    border-radius: 50%
     // Important is needed to account for new avatar structure
     height: $chip-height !important
     width: $chip-height !important
     min-width: $chip-height
-    margin-left: -14px
+    margin-left: -12px
     margin-right: 8px
     color: #fff
 
@@ -31,15 +46,18 @@
       width: 100%
       height: 100%
 
-  &:focus
-    elevation(2)
-    outline: none
+  &:focus,
+  &--active
+    &:not(.chip--disabled)
+      elevation(2)
+      outline: none
 
   &--label
     border-radius: $chip-label-border-radius
 
   &--outline
     background: $chip-outline-background
+    border: 1px solid transparent
     color: $chip-outline-color
 
   &--small
@@ -51,14 +69,14 @@
       min-width: $chip-small-height
 
   &__close
-    color: inherit
-    display: flex
     align-items: center
+    cursor: pointer
+    display: flex
     text-decoration: none
     font-size: $chip-icon-font-size
     margin-left: 4px
     margin-right: -2px
-    transition: .3s $transition.ease-in-out
+    transition: none !important
 
     &:hover
       opacity: .8
@@ -69,12 +87,16 @@
   &--select-multi
     margin: $chip-margin $chip-margin $chip-margin 0
 
+  .icon,
+  .chip__close
+    color: inherit !important // I don't like this
+
   .icon
-    color: inherit
     opacity: .54
+    transition: none
 
-  .icon--right
-    margin-left: 4px
+    &--right
+      margin-left: 4px
 
-  .icon--left
-    margin-right: 4px
+    &--left
+      margin-right: 4px

@@ -23,6 +23,8 @@ export default {
     },
 
     genTransition () {
+      if (!this.transition) return this.genContent()
+
       return this.$createElement('transition', {
         props: {
           name: this.transition
@@ -46,7 +48,9 @@ export default {
             if (e.target.getAttribute('disabled')) return
             if (this.closeOnContentClick) this.isActive = false
           },
-          mouseenter: this.mouseEnterHandler,
+          mouseenter: e => {
+            this.openOnHover && this.mouseEnterHandler
+          },
           mouseleave: e => {
             this.openOnHover && this.mouseLeaveHandler(e)
           }

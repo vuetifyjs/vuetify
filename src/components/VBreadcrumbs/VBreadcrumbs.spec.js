@@ -26,7 +26,7 @@ test('VBreadcrumbs.js', ({ mount }) => {
   //   })
 
   //   const item = wrapper.find(VBreadcrumbsItem)[0]
-  //   expect(item.hasAttribute('data-divider', '/')).toBe(true)
+  //   expect(item.getAttribute('data-divider')).toBe('/')
   //   expect(wrapper.html()).toMatchSnapshot()
   })
 })

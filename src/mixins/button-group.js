@@ -8,15 +8,24 @@ export default {
 
   methods: {
     getValue (i) {
-      return ('value' in this.buttons[i]) && !!this.buttons[i].value
-        ? this.buttons[i].value
-        : i
+      if (this.buttons[i].value != null) {
+        return this.buttons[i].value
+      }
+
+      // Fix for testing, this should always be false in the browser
+      if (this.buttons[i].$el.value != null && this.buttons[i].$el.value !== '') {
+        return this.buttons[i].$el.value
+      }
+
+      return i
     },
     update () {
       const selected = []
 
       this.buttons
-        .forEach((elm, i) => {
+        .forEach((button, i) => {
+          const elm = button.$el
+
           // Fix for testing, dataset does not exist on elm?
           if (!elm.dataset) elm.dataset = {}
 
@@ -35,29 +44,27 @@ export default {
         })
 
       if (selected.length === 1) {
-        this.buttons[selected[0]].setAttribute('data-only-child', true)
+        this.buttons[selected[0]].$el.setAttribute('data-only-child', true)
       }
     }
   },
 
   mounted () {
-    const options = { passive: true }
     this.$vuetify.load(() => {
-      this.buttons = this.$slots.default
-        .filter(vnode => vnode.tag !== undefined)
-        .map((vnode, i) => {
-          this.listeners.push(this.updateValue.bind(this, i))
-          vnode.elm.addEventListener('click', this.listeners[i], options)
-          return vnode.elm
-        })
+      this.buttons = this.$children
+
+      this.buttons.forEach((button, i) => {
+        this.listeners.push(this.updateValue.bind(this, i))
+        button.$on('click', this.listeners[i])
+      })
 
       this.update()
     })
   },
 
   beforeDestroy () {
-    this.buttons.forEach((elm, i) => {
-      elm.removeEventListener('click', this.listeners[i])
+    this.buttons.forEach((button, i) => {
+      button.$off('click', this.listeners[i])
     })
   }
 }

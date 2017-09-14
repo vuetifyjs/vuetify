@@ -58,16 +58,15 @@
         })
 
         this.items.forEach(i => i.open(
-            this.items[this.inputValue]._uid,
-            this.reverse
-          )
-        )
+          this.items[this.inputValue]._uid,
+          this.reverse
+        ))
 
         this.$emit('input', this.inputValue)
         this.restartTimeout()
       },
-      value () {
-        this.init()
+      value (val) {
+        this.inputValue = val
       },
       interval () {
         this.restartTimeout()
@@ -148,6 +147,8 @@
         this.inputValue = index
       },
       startTimeout () {
+        if (!this.cycle) return
+
         this.slideTimeout = setTimeout(() => this.next(), this.interval > 0 ? this.interval : 6000)
       }
     },

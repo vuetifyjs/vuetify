@@ -184,7 +184,6 @@
       },
       onKeyDown (e) {
         if (e.keyCode === 37 || e.keyCode === 39) {
-
           this.keyPressed += 1
 
           const direction = e.keyCode === 37 && -1 || e.keyCode === 39 && 1 || 0

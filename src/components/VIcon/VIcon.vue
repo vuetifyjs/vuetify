@@ -45,6 +45,7 @@
       data.attrs = data.attrs || {}
 
       const classes = {
+        'icon--disabled': props.disabled,
         'icon--large': props.large,
         'icon--left': props.left,
         'icon--medium': props.medium,
@@ -72,7 +73,6 @@
       }
 
       if (thirdPartyIcon) data.staticClass += ` ${iconName}`
-      if (props.disabled) data.attrs.disabled = props.disabled
       !(thirdPartyIcon || props.fa || props.mdi) && children.push(iconName)
 
       return h('i', data, children)

@@ -29,6 +29,7 @@
         content: [],
         tabItems: [],
         activeIndex: null,
+        isBooted: false,
         isMobile: false,
         reverse: false,
         target: null,
@@ -45,7 +46,7 @@
       icons: Boolean,
       mobileBreakPoint: {
         type: [Number, String],
-        default: 1024
+        default: 1280
       },
       value: String,
       scrollable: {
@@ -76,7 +77,7 @@
       },
       activeIndex () {
         this.updateTabs()
-        this.isBooted = true
+        this.$nextTick(() => (this.isBooted = true))
       },
       tabItems (newItems, oldItems) {
         // Tab item got removed

@@ -52,7 +52,6 @@
         isContentActive: false,
         isBooted: false,
         maxHeightAutoDefault: '200px',
-        resizeTimeout: {},
         startIndex: 3,
         stopIndex: 0,
         tileLength: 0,
@@ -125,7 +124,7 @@
         default: 'top left'
       },
       transition: {
-        type: String,
+        type: [Boolean, String],
         default: 'menu-transition'
       },
       positionX: {
@@ -190,9 +189,6 @@
         if (this.disabled) return
 
         val && this.activate() || this.deactivate()
-      },
-      windowResizeHandler () {
-        this.isBooted = false
       }
     },
 
@@ -210,9 +206,9 @@
         this.isContentActive = false
       },
       onResize () {
-        clearTimeout(this.resizeTimeout)
         if (!this.isActive) return
-        this.resizeTimeout = setTimeout(this.updateDimensions, 200)
+
+        this.updateDimensions()
       },
       getOffsetTop () {
         if (typeof window === 'undefined') return 0
@@ -234,13 +230,16 @@
 
       directives.push({
         name: 'resize',
-        value: this.onResize
+        value: {
+          debounce: 500,
+          value: this.onResize
+        }
       })
 
       const data = {
         staticClass: 'menu',
         class: {
-          'menu--disabled': this.disabled,
+          'menu--disabled': this.disabled
         },
         style: {
           display: this.fullWidth ? 'block' : 'inline-block'

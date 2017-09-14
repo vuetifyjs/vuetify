@@ -1,26 +1,25 @@
 @import '../bootstrap'
 
 .container
-  margin-right: auto
-  margin-left: auto
-  flex-basis: 100%
+  flex: 1 1 100%
+  margin: auto
   padding: $grid-gutters.lg
+  width: 100%
 
   for size, width in $container-max-widths
     @media only screen and (min-width: width)
-      max-width: width
+      max-width: (width * 0.9375) // Credit to bootstrap
 
   @media $display-breakpoints.xs-only
     padding: $grid-gutters.xl
 
   &.fluid
     max-width: 100%
-    width: 100%
-
+    
   &.fill-height
     align-items: center
     display: flex
-
+    
     .layout
       height: 100%
       flex: 1 1 auto
@@ -34,9 +33,18 @@
           .flex
             padding: ($gutter / 2)
             
-        > .layout,
-        .flex > .layout
+        .layout:only-child
           margin: -($gutter / 2)
+
+        .layout:not(:only-child)
+          margin: auto -($gutter / 2)
+        
+        *:not(:only-child)
+          .layout:first-child
+            margin-top: -($gutter / 2)
+
+          .layout:last-child
+            margin-bottom: -($gutter / 2)
 
 .layout
   display: flex
@@ -72,7 +80,8 @@ for size, width in $grid-breakpoints
       .flex.offset-{size}{n}
         margin-left: (n / $grid-columns * 100)%
 
-.flex
+.flex,
+.child-flex > *
   flex: 1 1 auto
 
 .align
