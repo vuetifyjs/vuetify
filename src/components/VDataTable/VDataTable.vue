@@ -33,9 +33,10 @@
         all: false,
         searchLength: 0,
         defaultPagination: {
+          descending: false,
           page: 1,
           rowsPerPage: 5,
-          descending: false,
+          sortBy: null,
           totalItems: 0
         }
       }
