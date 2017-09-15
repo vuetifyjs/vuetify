@@ -11,6 +11,7 @@
     VListTileTitle
   } from '../VList'
   import VMenu from '../VMenu'
+  import VBtn from '../VBtn'
 
   import Filterable from '../../mixins/filterable'
   import Input from '../../mixins/input'
@@ -32,7 +33,8 @@
       VListTileAction,
       VListTileContent,
       VListTileTitle,
-      VMenu
+      VMenu,
+      VBtn
     },
 
     directives: {

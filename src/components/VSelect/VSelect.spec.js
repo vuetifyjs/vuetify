@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import { test } from '~util/testing'
 import VSelect from '~components/VSelect'
 
@@ -144,6 +145,81 @@ test('VSelect.js', ({ mount, shallow }) => {
 
     expect(wrapper.vm.filteredItems.length).toBe(1)
     expect(wrapper.vm.filteredItems[0]).toBe(1)
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should warn when using incorrect item together with segmented prop', async () => {
+    const items = [
+      { text: 'Hello', callback: () => {} },
+      { text: 'Hello' }
+    ]
+
+    const wrapper = mount(VSelect, {
+      propsData: {
+        segmented: true,
+        items
+      }
+    })
+
+    wrapper.vm.inputValue = items[1]
+
+    await wrapper.vm.$nextTick()
+
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('items must contain both a text and callback property').toHaveBeenTipped()
+  })
+
+  it('should render buttons correctly when using items array with segmented prop', async () => {
+    const items = [
+      { text: 'Hello', callback: () => {} }
+    ]
+
+    const wrapper = mount(VSelect, {
+      propsData: {
+        segmented: true,
+        items
+      }
+    })
+
+    wrapper.vm.inputValue = items[0]
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should render buttons correctly when using slot with segmented prop', async () => {
+    const items = [
+      { text: 'Hello' }
+    ]
+
+    const vm = new Vue()
+    const selection = props => vm.$createElement('div', [props.item])
+    const component = Vue.component('test', {
+      components: {
+        VSelect
+      },
+      render (h) {
+        return h('v-select', {
+          props: {
+            segmented: true,
+            items
+          },
+          scopedSlots: {
+            selection
+          }
+        })
+      }
+    })
+
+    const wrapper = mount(component)
+
+    wrapper.vm.$children[0].inputValue = items[0]
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 

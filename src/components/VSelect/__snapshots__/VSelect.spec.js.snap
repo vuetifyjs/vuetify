@@ -20,7 +20,7 @@ exports[`VSelect.js should have -1 tabindex when disabled 1`] = `
          style="display: inline-block;"
     >
       <div class="menu__content menu__content--select   menu__content--autocomplete"
-           style="max-height: 300px; min-width: 36px; max-width: NaNpx; top: 12px; left: 0px; z-index: 6; display: none;"
+           style="max-height: 300px; min-width: 24px; max-width: NaNpx; top: 12px; left: 0px; z-index: 6; display: none;"
       >
         <div class="card"
              style="height: auto;"
@@ -77,7 +77,7 @@ exports[`VSelect.js should have explicit tabindex passed through when autocomple
          style="display: inline-block;"
     >
       <div class="menu__content menu__content--select   menu__content--autocomplete"
-           style="max-height: 300px; min-width: 36px; max-width: NaNpx; top: 12px; left: 0px; z-index: 6; display: none;"
+           style="max-height: 300px; min-width: 24px; max-width: NaNpx; top: 12px; left: 0px; z-index: 6; display: none;"
       >
         <div class="card"
              style="height: auto;"
@@ -135,7 +135,7 @@ exports[`VSelect.js should have explicit tabindex passed through when not autoco
          style="display: inline-block;"
     >
       <div class="menu__content menu__content--select"
-           style="max-height: 300px; min-width: 36px; max-width: NaNpx; top: 12px; left: 0px; z-index: 6; display: none;"
+           style="max-height: 300px; min-width: 24px; max-width: NaNpx; top: 12px; left: 0px; z-index: 6; display: none;"
       >
         <div class="card"
              style="height: auto;"
@@ -151,6 +151,130 @@ exports[`VSelect.js should have explicit tabindex passed through when not autoco
                 <div class="list__tile__content">
                   <div class="list__tile__title">
                     No data available
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <i aria-hidden="true"
+       class="material-icons icon input-group__append-icon input-group__icon-cb"
+    >
+      arrow_drop_down
+    </i>
+  </div>
+  <div class="input-group__details">
+    <div class="input-group__messages">
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VSelect.js should render buttons correctly when using items array with segmented prop 1`] = `
+
+<div tabindex="0"
+     role="combobox"
+     class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select input-group--segmented input-group--single-line"
+>
+  <div class="input-group__input">
+    <div class="input-group__selections"
+         style="overflow: hidden;"
+    >
+      <button type="button"
+              class="btn btn--flat"
+      >
+        <div class="btn__content">
+          Hello
+        </div>
+      </button>
+      <input disabled="disabled"
+             tabindex="-1"
+             class="input-group--select__autocomplete"
+             style="display: none;"
+      >
+    </div>
+    <div class="menu"
+         style="display: inline-block;"
+    >
+      <div class="menu__content menu__content--select  menu__content--dropdown"
+           style="max-height: 300px; min-width: 55px; max-width: NaNpx; top: 12px; left: 0px; z-index: 6; display: none;"
+      >
+        <div class="card"
+             style="height: auto;"
+        >
+          <ul data-uid="53"
+              class="list"
+          >
+            <li>
+              <div href="javascript:;"
+                   class="list__tile list__tile--link list__tile--active"
+              >
+                <div class="list__tile__content">
+                  <div class="list__tile__title">
+                    Hello
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <i aria-hidden="true"
+       class="material-icons icon input-group__append-icon input-group__icon-cb"
+    >
+      arrow_drop_down
+    </i>
+  </div>
+  <div class="input-group__details">
+    <div class="input-group__messages">
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VSelect.js should render buttons correctly when using slot with segmented prop 1`] = `
+
+<div tabindex="0"
+     role="combobox"
+     class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select input-group--segmented input-group--single-line"
+>
+  <div class="input-group__input">
+    <div class="input-group__selections"
+         style="overflow: hidden;"
+    >
+      <div>
+        Hello
+      </div>
+      <input disabled="disabled"
+             tabindex="-1"
+             class="input-group--select__autocomplete"
+             style="display: none;"
+      >
+    </div>
+    <div class="menu"
+         style="display: inline-block;"
+    >
+      <div class="menu__content menu__content--select  menu__content--dropdown"
+           style="max-height: 300px; min-width: 55px; max-width: NaNpx; top: 12px; left: 0px; z-index: 6; display: none;"
+      >
+        <div class="card"
+             style="height: auto;"
+        >
+          <ul data-uid="62"
+              class="list"
+          >
+            <li>
+              <div href="javascript:;"
+                   class="list__tile list__tile--link list__tile--active"
+              >
+                <div class="list__tile__content">
+                  <div class="list__tile__title">
+                    Hello
                   </div>
                 </div>
               </div>

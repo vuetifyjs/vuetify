@@ -69,12 +69,25 @@
 
     .input-group__selections,
     input
-      height: 24px
+      height: 48px
 
     // Handle weird transition issue
-    .input-group__selections__comma
+    .input-group__selections__comma, input
       top: 0
       left: 0
+      padding-left: 16px
+
+    .input-group__selections
+      width: calc(100% - 55px)
+
+      .btn
+        border-radius: 0
+        margin: 0
+        height: 48px
+        width: 100%
+
+        .btn__content
+          justify-content: start
 
     .input-group__input
       transition: .3s $transition.swing
@@ -96,7 +109,7 @@
         display: none
 
     .input-group__input
-      padding: 12px 16px
+      padding: 0
 
       &:before
         content: ''
@@ -106,6 +119,9 @@
         height: 1px
         top: 0
         transition: .3s $transition.swing
+
+    .input-group__append-icon
+      width: 55px
 
   &--segmented .input-group__input,
   &--editable .input-group__input:hover,
