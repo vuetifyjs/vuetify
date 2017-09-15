@@ -201,7 +201,20 @@ test('VTextField.js', ({ mount }) => {
     input.trigger('input')
     input.trigger('blur')
 
-    expect(input.element.value).toEqual('fgh')
+    expect(input.element.value).toBe('fgh')
+  })
+
+  it('should update if value is changed externally', async () => {
+    const wrapper = mount(VTextField, {})
+
+    const input = wrapper.find('input')[0]
+
+    wrapper.setProps({ value: 'fgh' })
+    expect(input.element.value).toBe('fgh')
+
+    input.trigger('focus')
+    wrapper.setProps({ value: 'jkl' })
+    expect(input.element.value).toBe('jkl')
   })
 
   it('should fire a single change event on blur', async () => {

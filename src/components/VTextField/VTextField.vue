@@ -91,7 +91,8 @@
       },
       value (val) {
         // Value was changed externally, update lazy
-        if (!this.isFocused) this.lazyValue = val
+        this.lazyValue = val
+
         !this.validateOnBlur && this.validate()
         this.shouldAutoGrow && this.calculateInputHeight()
       }
