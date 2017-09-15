@@ -29,6 +29,17 @@ exports[`VBtn.js should render component and match snapshot 1`] = `
 
 `;
 
+exports[`VBtn.js should render component with active prop and match snapshot 1`] = `
+
+<button type="button"
+        class="btn btn--active btn--raised"
+>
+  <div class="btn__content">
+  </div>
+</button>
+
+`;
+
 exports[`VBtn.js should render specified tag when using tag prop 1`] = `
 
 <a href="javascript:;"

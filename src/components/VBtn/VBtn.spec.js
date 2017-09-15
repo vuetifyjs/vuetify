@@ -14,6 +14,16 @@ describe('VBtn.js', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render component with active prop and match snapshot', () => {
+    const wrapper = mount(VBtn, {
+      propsData: {
+        active: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should render an <a> tag when using href prop', () => {
     const wrapper = mount(VBtn, {
       propsData: {
