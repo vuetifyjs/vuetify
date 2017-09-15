@@ -203,4 +203,35 @@ test('VTextField.js', ({ mount }) => {
 
     expect(input.element.value).toEqual('fgh')
   })
+
+  it('should fire a single change event on blur', async () => {
+    let value = 'asd'
+    const change = jest.fn()
+
+    const component = {
+      render (h) {
+        return h(VTextField, {
+          on: {
+            input: (i) => value = i,
+            change
+          },
+          props: { value }
+        })
+      }
+    }
+    const wrapper = mount(component)
+
+    const input = wrapper.find('input')[0]
+
+    input.trigger('focus')
+    input.element.value = 'fgh'
+    input.trigger('input')
+
+    await wrapper.vm.$nextTick()
+    input.trigger('blur')
+    await wrapper.vm.$nextTick()
+
+    expect(change).toBeCalledWith('fgh')
+    expect(change.mock.calls.length).toBe(1)
+  })
 })
