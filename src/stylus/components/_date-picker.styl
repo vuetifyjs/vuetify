@@ -4,50 +4,62 @@
 /** Themes */
 date-picker($material)
   .picker--date__years
-    background: $material.cards
-
     li
       color: $material.text.primary
 
-      &.active
-        color: $theme.accent
+      &.active, &:hover
+        color: $theme.primary
 
   .picker--date__header
     color: $material.text.primary
 
-  .picker--date__table
-    table
-      th
+    &-selector-date
+      strong:hover
+        color: $theme.primary
+
+    &-selector
+      .btn
         color: $material.text.primary
 
-      .btn
-        &:not(.btn--disabled)\
-        :not(.btn--active)\
-        :not(.btn--current)\
-        :not(:hover)
-          color: $material.text.primary
+  .picker--date__title-year, .picker--date__title-date
+    &:not(.active)
+      opacity: 0.6
 
-        &--current
-          color: $material.picker.background
+  .picker--date__table
+    th
+      color: $material.text.primary
 
-        &--active
-          color: $material.bg-color !important
+    .btn.btn--date-picker
+      &:not(.btn--disabled)
+        &:hover
+          color: #fff
 
-        &--date-picker
-          &:after
-            background: $material.picker.background !important
+        &.btn--active
+          color: #fff
+
+      &:not(.btn--disabled):not(.btn--active)
+        color: $material.text.primary
+
+      &.btn--disabled
+        color: $material.buttons.disabled
+
+      &.btn--outline
+        border-color: $theme.primary
+
+      &.btn--active:after
+        background-color: $theme.primary
+
+      &:not(.btn--active):hover:after
+        background-color: alpha($theme.primary, 0.6)
 
 theme(date-picker, "picker--date")
 
 .picker--date
-  color: #fff
   width: 100%
 
 /** Years */
 .picker--date__years
-  background: #fff
-  color: #000
-  font-size: 18px
+  font-size: 16px
   font-weight: 400
   list-style-type: none
   max-height: 290px
@@ -58,13 +70,9 @@ theme(date-picker, "picker--date")
   li
     cursor: pointer
     margin: 16px 0
-    transition: .3s $transition.swing
-
-    &:hover
-      color: $theme.primary
+    transition: none
 
     &.active
-      color: $theme.primary
       font-size: 24px
       font-weight: 500
       margin: 20px 0
@@ -95,15 +103,9 @@ theme(date-picker, "picker--date")
 
     &:not(.active)
       cursor: pointer
-      opacity: .6
-
-    &:hover
-      opacity: 1
-
 
 /** Header */
 .picker--date__header
-  color: #000
   padding: 4px 16px
 
   &-selector
@@ -113,7 +115,6 @@ theme(date-picker, "picker--date")
     position: relative
 
     .btn
-      color: #000
       margin: 0
 
     .icon
@@ -127,10 +128,10 @@ theme(date-picker, "picker--date")
       overflow: hidden
 
       strong
+        cursor: pointer
         transition: .3s $transition.swing
         display: block
         width: 100%
-
 
 .picker--date
   &__table
@@ -145,7 +146,6 @@ theme(date-picker, "picker--date")
         padding: 8px 0
 
     th
-      color: rgba(#000, .54)
       font-weight: 600
       font-size: 12px
 
@@ -173,34 +173,35 @@ theme(date-picker, "picker--date")
         transition: none
         z-index: 1
 
-    .btn.btn--current:not(.btn--active)
-      color: $theme.primary
-
     .btn.btn--date-picker
       height: 32px
       width: 32px
 
       &:after
-        background: $theme.primary !important
-        opacity: 0
         transform: scale(0)
 
       &:not(.btn--active):not(.btn--current):not(.btn--disabled):hover
-        color: #fff
-
         &:after
-          opacity: .6
           transform: scale(1)
 
     .btn.btn--date-picker.btn--active
-      color: #fff
-
       &:after
-        background: $theme.primary !important
-        opacity: 1
         transform: none
 
 .picker--landscape
   .picker--date__years
-    margin-left: 170px
     width: 330px
+
+.picker--month__table
+  table
+    width: 100%
+
+    td
+      width: 33.333333%
+      height: 56px
+      vertical-align: middle
+
+  // .picker--date__title-date > div
+  //   white-space: pre
+  //   overflow: hidden
+  //   text-overflow: ellipsis
