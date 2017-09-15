@@ -3,18 +3,18 @@ import VTabs from './VTabs'
 import VTabsBar from './VTabsBar'
 import VTabsItem from './VTabsItem'
 import Vue from 'vue/dist/vue.common'
+import { createRange } from '~util/helpers'
 
-function createBar (options = {}) {
+function createBar (items = ['foo', 'bar']) {
   return Vue.component('test', {
     components: {
       VTabsBar,
       VTabsItem
     },
     render (h) {
-      return h('v-tabs-bar', {}, [
-        h('v-tabs-item', { props: { href: 'foo' } }),
-        h('v-tabs-item', { props: { href: 'bar' } })
-      ])
+      return h('v-tabs-bar', {}, items.map(i => {
+        return h('v-tabs-item', { props: { href: `${i}` } })
+      }))
     }
   })
 }
@@ -89,4 +89,17 @@ test('VTabs.vue', ({ mount }) => {
 
     expect(wrapper.vm.isBooted).toBe(true)
   })
+
+  /* TODO: Don't know how to dynamically change slots after wrapper created??
+  it('should add navigation if dynamically added tabs result in overflow', async () => {
+    const wrapper = mount(VTabs, {
+      slots: {
+        default: [createBar(createRange(2))]
+      },
+      attachToDocument: true
+    })
+
+    console.log(wrapper.html())
+  })
+  */
 })
