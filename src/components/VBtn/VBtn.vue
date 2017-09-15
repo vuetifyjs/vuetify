@@ -21,6 +21,7 @@
         type: String,
         default: 'btn--active'
       },
+      active: Boolean,
       block: Boolean,
       fab: Boolean,
       flat: Boolean,
@@ -49,7 +50,7 @@
       classes () {
         return {
           'btn': true,
-          'btn--active': this.isActive,
+          'btn--active': this.isActive || this.active,
           'btn--absolute': this.absolute,
           'btn--block': this.block,
           'btn--bottom': this.bottom,
