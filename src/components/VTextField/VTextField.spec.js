@@ -121,7 +121,6 @@ test('VTextField.js', ({ mount }) => {
     const input = wrapper.find('input')[0]
 
     expect(input.getAttribute('readonly')).toBe('readonly')
-    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should clear input value', async () => {
