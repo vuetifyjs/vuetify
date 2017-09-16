@@ -133,7 +133,7 @@ test('VSelect.js', ({ mount, shallow }) => {
 
     wrapper.vm.searchValue = 'foo'
 
-    expect(wrapper.vm.filteredItems.length).toBe(1)
+    expect(wrapper.vm.filteredItems).toHaveLength(1)
     expect(wrapper.vm.filteredItems[0]).toBe('foo')
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
@@ -148,7 +148,7 @@ test('VSelect.js', ({ mount, shallow }) => {
 
     wrapper.vm.searchValue = 1
 
-    expect(wrapper.vm.filteredItems.length).toBe(1)
+    expect(wrapper.vm.filteredItems).toHaveLength(1)
     expect(wrapper.vm.filteredItems[0]).toBe(1)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
@@ -338,9 +338,9 @@ test('VSelect.js', ({ mount, shallow }) => {
     })
 
     wrapper.setProps({items: [{id: 1, text: 'A'}]})
-    expect(wrapper.vm.cachedItems.length).toBe(1)
+    expect(wrapper.vm.cachedItems).toHaveLength(1)
     wrapper.setProps({items: [{id: 1, text: 'A'}]})
-    expect(wrapper.vm.cachedItems.length).toBe(1)
+    expect(wrapper.vm.cachedItems).toHaveLength(1)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 })

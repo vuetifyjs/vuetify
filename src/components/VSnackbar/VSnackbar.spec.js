@@ -45,7 +45,7 @@ describe('VSnackbar.vue', () => {
 
     await wrapper.vm.$nextTick()
 
-    expect(setTimeout.mock.calls.length).toBe(1)
+    expect(setTimeout.mock.calls).toHaveLength(1)
     expect(setTimeout.mock.calls[0][1]).toBe(3141)
 
     jest.runAllTimers()
@@ -71,7 +71,7 @@ describe('VSnackbar.vue', () => {
 
     await wrapper.vm.$nextTick()
 
-    expect(setTimeout.mock.calls.length).toBe(1)
+    expect(setTimeout.mock.calls).toHaveLength(1)
     expect(setTimeout.mock.calls[0][1]).toBe(3141)
 
     jest.runAllTimers()

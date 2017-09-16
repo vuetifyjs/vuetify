@@ -126,7 +126,7 @@ test('VCheckbox.js', () => {
     wrapper.trigger('keydown.enter')
     wrapper.trigger('keydown.space')
 
-    expect(change.mock.calls.length).toBe(2)
+    expect(change.mock.calls).toHaveLength(2)
   })
 
   it('should not toggle on space or enter with blank toggleKeys', () => {

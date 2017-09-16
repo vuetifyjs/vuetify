@@ -82,13 +82,13 @@ test('VSelect.vue', ({ mount }) => {
     })
 
     wrapper.setProps({ items: ['bar', 'baz'] })
-    expect(wrapper.vm.computedItems.length).toBe(2)
+    expect(wrapper.vm.computedItems).toHaveLength(2)
 
     wrapper.setProps({ items: ['foo'] })
-    expect(wrapper.vm.computedItems.length).toBe(3)
+    expect(wrapper.vm.computedItems).toHaveLength(3)
 
     wrapper.setProps({ items: ['bar'] })
-    expect(wrapper.vm.computedItems.length).toBe(3)
+    expect(wrapper.vm.computedItems).toHaveLength(3)
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
@@ -254,9 +254,9 @@ test('VSelect.vue', ({ mount }) => {
       }
     })
 
-    expect(wrapper.vm.selectedItems.length).toBe(1)
-    expect(wrapper2.vm.selectedItems.length).toBe(2)
-    expect(wrapper3.vm.selectedItems.length).toBe(0)
+    expect(wrapper.vm.selectedItems).toHaveLength(1)
+    expect(wrapper2.vm.selectedItems).toHaveLength(2)
+    expect(wrapper3.vm.selectedItems).toHaveLength(0)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
