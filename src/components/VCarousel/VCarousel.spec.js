@@ -103,7 +103,7 @@ test('VCarousel.js', ({ mount }) => {
     const wrapper = mount(VCarousel, {
       propsData: {
         value: 1,
-        interval: 3
+        interval: 1
       },
       slots: {
         default: [1, 2, 3].map(i => {
@@ -114,15 +114,14 @@ test('VCarousel.js', ({ mount }) => {
       }
     })
 
-    const values = []
+    const input = jest.fn()
     await new Promise(resolve => {
-      wrapper.instance().$on('input', value => {
-        values.push(value)
-        if (values.length === 3) {
-          resolve()
-        }
+      wrapper.vm.$on('input', value => {
+        input(value)
+        input.mock.calls.length === 3 && resolve()
       })
     })
-    expect(values).toEqual([1, 2, 0])
+
+    expect([].concat(...input.mock.calls)).toEqual([1, 2, 0])
   })
 })
