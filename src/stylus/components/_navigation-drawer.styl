@@ -8,11 +8,6 @@ navigation-drawer($material)
     .navigation-drawer__border
       background-color: $material.dividers
 
-  &.navigation-drawer--right
-    &:after
-      left: 0
-      right: initial
-
   a:not(.list__tile--active),
   .subheader,
   .list
@@ -58,6 +53,11 @@ theme(navigation-drawer, "navigation-drawer")
     top: 0
     height: 100%
     width: 1px
+
+  &.navigation-drawer--right
+    &:after
+      left: 0
+      right: initial
 
   // Remove animation when booting up
   &:not(.navigation-drawer--is-booted)
