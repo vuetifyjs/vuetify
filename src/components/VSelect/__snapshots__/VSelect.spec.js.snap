@@ -25,7 +25,7 @@ exports[`VSelect.js should have -1 tabindex when disabled 1`] = `
         <div class="card"
              style="height: auto;"
         >
-          <ul data-uid="20"
+          <ul data-uid="29"
               class="list"
           >
             <li disabled="disabled">
@@ -82,7 +82,7 @@ exports[`VSelect.js should have explicit tabindex passed through when autocomple
         <div class="card"
              style="height: auto;"
         >
-          <ul data-uid="26"
+          <ul data-uid="35"
               class="list"
           >
             <li disabled="disabled">
@@ -140,7 +140,7 @@ exports[`VSelect.js should have explicit tabindex passed through when not autoco
         <div class="card"
              style="height: auto;"
         >
-          <ul data-uid="33"
+          <ul data-uid="42"
               class="list"
           >
             <li disabled="disabled">
@@ -205,7 +205,7 @@ exports[`VSelect.js should render buttons correctly when using items array with 
         <div class="card"
              style="height: auto;"
         >
-          <ul data-uid="62"
+          <ul data-uid="77"
               class="list"
           >
             <li>
@@ -265,7 +265,7 @@ exports[`VSelect.js should render buttons correctly when using slot with segment
         <div class="card"
              style="height: auto;"
         >
-          <ul data-uid="72"
+          <ul data-uid="87"
               class="list"
           >
             <li>

@@ -107,7 +107,7 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
                       <div class="card"
                            style="height: auto;"
                       >
-                        <ul data-uid="7"
+                        <ul data-uid="8"
                             class="list"
                         >
                           <li>
