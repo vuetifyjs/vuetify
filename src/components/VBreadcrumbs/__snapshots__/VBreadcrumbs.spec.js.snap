@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VBreadcrumbs.js should have breadcrumbs classes 1`] = `
+
+<ul class="breadcrumbs breadcrumbs--with-icons">
+</ul>
+
+`;
+
+exports[`VBreadcrumbs.js should inject divider to children 1`] = `
+
+<ul class="breadcrumbs">
+  <li data-divider="/">
+    <a href="javascript:;"
+       class="breadcrumbs__item"
+    >
+    </a>
+  </li>
+</ul>
+
+`;

@@ -4,9 +4,8 @@ import {
   VBreadcrumbsItem
 } from '~components/VBreadcrumbs'
 
-// TODO: Fix when next Vue release goes live
-test.skip('VBreadcrumbs.js', ({ mount }) => {
-  it('should have a breadcrumbs classes', () => {
+test('VBreadcrumbs.js', ({ mount }) => {
+  it('should have breadcrumbs classes', () => {
     const wrapper = mount(VBreadcrumbs, {
       propsData: { icons: true }
    })
