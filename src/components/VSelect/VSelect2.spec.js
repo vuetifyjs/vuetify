@@ -210,19 +210,15 @@ test('VSelect.vue', ({ mount }) => {
     wrapper.vm.$on('change', change)
 
     wrapper.vm.focus()
-    // await wrapper.vm.$nextTick()
 
     input.trigger('keydown.left')
-    // await wrapper.vm.$nextTick()
     expect(wrapper.vm.selectedIndex).toBe(1)
 
     input.trigger('keydown.delete')
-    // await wrapper.vm.$nextTick()
     expect(change).toHaveBeenCalledWith(['foo'])
     expect(wrapper.vm.selectedIndex).toBe(0)
 
     input.element.dispatchEvent(backspace) // Avoriaz doesn't wrap keydown.backspace
-    // await wrapper.vm.$nextTick()
     expect(change).toHaveBeenCalledWith([])
     expect(wrapper.vm.selectedIndex).toBe(-1)
 
