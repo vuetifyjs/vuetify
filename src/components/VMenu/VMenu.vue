@@ -168,7 +168,7 @@
         // and its activator
         this.updateDimensions()
         // Start the transition
-        this.startTransition()
+        requestAnimationFrame(this.startTransition)
         // Once transitioning, calculate scroll position
         requestAnimationFrame(this.calculateScroll)
       },
