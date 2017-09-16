@@ -2,17 +2,18 @@
   import { createRange } from '../../util/helpers'
 
   import Picker from '../../mixins/picker'
+  import DateYears from './mixins/date-years'
   import DateTitle from './mixins/date-title'
   import DateHeader from './mixins/date-header'
   import DateTable from './mixins/date-table'
-  import DateYears from './mixins/date-years'
+  import MonthTable from './mixins/month-table'
   import VBtn from '../VBtn'
   import VCard from '../VCard'
   import VIcon from '../VIcon'
 
   import Touch from '../../directives/touch'
 
-  const defaultDateFormat = val => new Date(val).toISOString().substr(0, 10)
+  const createDefaultDateFormat = type => date => new Date(date).toISOString().substr(0, { date: 10, month: 7, year: 4 }[type])
 
   export default {
     name: 'v-date-picker',
@@ -23,7 +24,7 @@
       VIcon
     },
 
-    mixins: [DateTitle, DateHeader, DateTable, DateYears, Picker],
+    mixins: [Picker, DateYears, DateTitle, DateHeader, DateTable, MonthTable],
 
     directives: { Touch },
 
@@ -34,9 +35,9 @@
         currentDay: null,
         currentMonth: null,
         currentYear: null,
-        isSelected: false,
         isReversing: false,
-        narrowDays: []
+        narrowDays: [],
+        activePicker: this.type.toUpperCase()
       }
     },
 
@@ -45,17 +46,26 @@
         type: String,
         default: 'en-us'
       },
+      type: {
+        type: String,
+        default: 'date',
+        validator: type => ['date', 'month'/*, 'year'*/].includes(type)
+      },
       dateFormat: {
         type: Function,
-        default: defaultDateFormat
+        default: null
       },
       titleDateFormat: {
         type: [Object, Function],
-        default: () => ({ weekday: 'short', month: 'short', day: 'numeric' })
+        default: null
       },
       headerDateFormat: {
         type: [Object, Function],
         default: () => ({ month: 'long', year: 'numeric' })
+      },
+      monthFormat: {
+        type: [Object, Function],
+        default: () => ({ month: 'short' })
       },
       formattedValue: {
         required: false
@@ -78,15 +88,31 @@
       },
       firstAllowedDate () {
         const date = new Date()
-        date.setHours(12, 0, 0, 0)
 
-        if (this.allowedDates) {
-          const millisecondOffset = 1 * 24 * 60 * 60 * 1000
-          const valid = new Date(date)
-          for (let i = 0; i < 31; i++) {
-            if (this.isAllowed(valid)) return valid
+        if (this.type === 'month') {
+          date.setDate(1)
+          date.setHours(12, 0, 0, 0)
 
-            valid.setTime(valid.getTime() + millisecondOffset)
+          if (this.allowedDates) {
+            const valid = new Date(date)
+            for (let month = 0; month < 12; month++) {
+              valid.setMonth(month)
+              if (this.isAllowed(valid)) {
+                return valid
+              }
+            }
+          }
+        } else if (this.type === 'date') {
+          date.setHours(12, 0, 0, 0)
+
+          if (this.allowedDates) {
+            const millisecondOffset = 1 * 24 * 60 * 60 * 1000
+            const valid = new Date(date)
+            for (let i = 0; i < 31; i++) {
+              if (this.isAllowed(valid)) return valid
+
+              valid.setTime(valid.getTime() + millisecondOffset)
+            }
           }
         }
 
@@ -103,8 +129,9 @@
           return new Date(`${this.value}T12:00:00`)
         },
         set (val) {
-          this.$emit('input', val ? defaultDateFormat(val) : this.originalDate)
-          this.$emit('update:formattedValue', val ? this.dateFormat(val) : this.dateFormat(this.originalDate))
+          const pickerDateFormat = createDefaultDateFormat(this.type)
+          this.$emit('input', val ? pickerDateFormat(val) : this.originalDate)
+          this.$emit('update:formattedValue', (this.dateFormat || pickerDateFormat)(val || this.originalDate))
         }
       },
       day () {
@@ -124,20 +151,66 @@
       },
       computedTransition () {
         return this.isReversing ? 'tab-reverse-transition' : 'tab-transition'
+      },
+      titleText () {
+        const date = new Date(this.year, this.month, this.day, 1 /* Workaround for #1409 */)
+
+        const defaultTitleDateFormat = this.type === 'year' ? {
+          year: 'numeric'
+        } : (this.type === 'month' ? {
+          month: 'long'
+        } : {
+          weekday: 'short',
+          month: 'short',
+          day: 'numeric'
+        })
+
+        let titleText
+        if (typeof this.titleDateFormat === 'function') {
+          titleText = this.titleDateFormat(date)
+        } else if (this.supportsLocaleFormat) {
+          titleText = date.toLocaleDateString(this.locale, this.titleDateFormat || defaultTitleDateFormat)
+        } else if ('toLocaleDateString' in Date.prototype) {
+          titleText = createDefaultDateFormat(this.type)(date)
+        }
+
+        if (this.landscape) {
+          if (titleText.indexOf(',') > -1) titleText = titleText.replace(',', ',<br>')
+          else if (titleText.indexOf(' ') > -1) titleText = titleText.replace(' ', '<br>')
+        }
+
+        return titleText
       }
     },
 
     watch: {
-      isSelected (val) {
-        val && this.$nextTick(() => {
-          this.$refs.years.scrollTop = this.$refs.years.scrollHeight / 2 - 125
-        })
+      activePicker (val, prev) {
+        if (val !== 'YEAR') return
+
+        // That's a quirk, setting timeout stopped working after fixing #1649
+        // It worked but for timeouts significantly longer than the transition duration
+        const interval = setInterval(() => {
+          if (this.$refs.years) {
+            this.$refs.years.scrollTop = this.$refs.years.scrollHeight / 2 - 125
+            clearInterval(interval)
+          }
+        }, 100)
       },
       tableDate (val, prev) {
         this.isReversing = val < prev
       },
       value (val) {
         if (val) this.tableDate = this.inputDate
+      },
+      type (val) {
+        if (val === 'month' && this.activePicker === 'DATE') {
+          this.activePicker = 'MONTH'
+        } else if (val === 'year') {
+          this.activePicker = 'YEAR'
+        }
+      },
+      firstDayOfWeek () {
+        this.getWeekDays()
       }
     },
 
@@ -155,47 +228,88 @@
         this.inputDate = this.originalDate
         if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
       },
+      getWeekDays () {
+        const first = parseInt(this.firstDayOfWeek, 10)
+        if (this.supportsLocaleFormat) {
+          const date = new Date(2000, 1, 7)
+          const day = date.getDate() - date.getDay() + first
+          const format = { weekday: 'narrow' }
+          this.narrowDays = createRange(7).map(i => new Date(2000, 1, day + i).toLocaleDateString(this.locale, format))
+        } else {
+          this.narrowDays = createRange(7).map(i => ['S', 'M', 'T', 'W', 'T', 'F', 'S'][(i + first) % 7])
+        }
+      },
       isAllowed (date) {
         if (!this.allowedDates) return true
 
         if (Array.isArray(this.allowedDates)) {
-          return !!this.allowedDates.find(allowedDate => {
-            const d = new Date(allowedDate)
-            d.setHours(12, 0, 0, 0)
-
-            return d - date === 0
-          })
+          const format = createDefaultDateFormat(this.activePicker === 'MONTH' ? 'month' : 'date')
+          date = format(date)
+          return !!this.allowedDates.find(allowedDate => format(allowedDate) === date)
         } else if (this.allowedDates instanceof Function) {
           return this.allowedDates(date)
         } else if (this.allowedDates instanceof Object) {
-          const min = new Date(this.allowedDates.min)
-          min.setHours(12, 0, 0, 0)
-          const max = new Date(this.allowedDates.max)
-          max.setHours(12, 0, 0, 0)
-
-          return date >= min && date <= max
+          const format = createDefaultDateFormat(this.activePicker === 'MONTH' ? 'month' : 'date')
+          const min = format(this.allowedDates.min)
+          const max = format(this.allowedDates.max)
+          date = format(date)
+          return (!min || min <= date) && (!max || max >= date)
         }
 
         return true
+      },
+      genTableTouch (touchCallback) {
+        return {
+          name: 'touch',
+          value: {
+            left: e => (e.offsetX < -15) && touchCallback(1),
+            right: e => (e.offsetX > 15) && touchCallback(-1)
+          }
+        }
+      },
+      genTable (tableChildren, touchCallback) {
+        const options = {
+          staticClass: 'picker--date__table',
+          'class': {
+            'picker--month__table': this.activePicker === 'MONTH'
+          },
+          on: this.scrollable ? { wheel: this.monthWheelScroll } : undefined,
+          directives: [this.genTableTouch(touchCallback)]
+        }
+
+        const table = this.$createElement('table', {
+          key: this.activePicker === 'MONTH' ? this.tableYear : this.tableMonth
+        }, tableChildren)
+
+        return this.$createElement('div', options, [
+          this.$createElement('transition', {
+            props: { name: this.computedTransition }
+          }, [table])
+        ])
+      },
+      genPickerBody (h) {
+        const pickerBodyChildren = []
+        if (this.activePicker === 'DATE') {
+          pickerBodyChildren.push(h('div', { staticClass: 'picker--date__header' }, [this.genSelector()]))
+          pickerBodyChildren.push(this.genTable([
+            this.dateGenTHead(),
+            this.dateGenTBody()
+          ], value => this.tableDate = new Date(this.tableYear, this.tableMonth + value)))
+        } else if (this.activePicker === 'MONTH') {
+          pickerBodyChildren.push(h('div', { staticClass: 'picker--date__header' }, [this.genSelector()]))
+          pickerBodyChildren.push(this.genTable([
+            this.monthGenTBody()
+          ], value => this.tableDate = new Date(this.tableYear + value, 0)))
+        } else if (this.activePicker === 'YEAR') {
+          pickerBodyChildren.push(this.genYears())
+        }
+
+        return pickerBodyChildren
       }
     },
 
     created () {
-      const date = new Date()
-      date.setDate(date.getDate() - date.getDay() + parseInt(this.firstDayOfWeek))
-
-      createRange(7).forEach(index => {
-        let narrow
-        if (this.supportsLocaleFormat) {
-          narrow = date.toLocaleDateString(this.locale, { weekday: 'narrow' })
-        } else {
-          narrow = ['S', 'M', 'T', 'W', 'T', 'F', 'S'][(index + parseInt(this.firstDayOfWeek)) % 7]
-        }
-        this.narrowDays.push(narrow)
-
-        date.setDate(date.getDate() + 1)
-      })
-
+      this.getWeekDays()
       this.tableDate = this.inputDate
     },
 
@@ -209,31 +323,30 @@
     render (h) {
       const children = []
 
-      !this.noTitle && children.push(this.genTitle())
+      !this.noTitle && children.push(this.genTitle(this.titleText))
 
-      if (!this.isSelected) {
-        const bodyChildren = []
-
-        bodyChildren.push(this.genHeader())
-        bodyChildren.push(this.genTable())
-
-        children.push(h('div', {
-          'class': 'picker__body'
-        }, bodyChildren))
-      } else {
-        children.push(this.genYears())
-      }
+      children.push(h('transition', {
+        props: {
+          origin: 'center center',
+          mode: 'out-in',
+          name: 'scale-transition'
+        }
+      }, [h('div', {
+        staticClass: 'picker__body',
+        key: this.activePicker
+      }, this.genPickerBody(h))]))
 
       this.$scopedSlots.default && children.push(this.genSlot())
 
       return h('v-card', {
+        staticClass: 'picker picker--date',
         'class': {
-          'picker picker--date': true,
           'picker--landscape': this.landscape,
           ...this.themeClasses
         }
       }, children)
     }
+
   }
 </script>
 

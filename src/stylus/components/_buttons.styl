@@ -9,10 +9,8 @@ button($material)
     color: $material.text.primary
 
   &.btn--disabled
-    box-shadow: none !important
     color: $material.buttons.disabled
-    pointer-events: none
-    
+
     .icon
       color: $material.buttons.disabled
 
@@ -253,6 +251,12 @@ theme(button, "btn")
 
   &--right
     right: $grid-gutters.lg
+
+/** Disabled */
+.btn
+  &.btn--disabled
+    box-shadow: none !important
+    pointer-events: none
 
 /** Sizes */
 .btn

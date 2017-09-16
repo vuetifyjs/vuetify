@@ -1,3 +1,9 @@
+/**
+ * Select autocomplete
+ * @mixin
+ *
+ * Handles logic when using the "autocomplete" prop
+ */
 export default {
   props: {
     filter: {

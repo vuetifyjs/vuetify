@@ -33,17 +33,22 @@
         all: false,
         searchLength: 0,
         defaultPagination: {
+          descending: false,
           page: 1,
           rowsPerPage: 5,
-          descending: false,
+          sortBy: null,
           totalItems: 0
-        }
+        },
+        expanded: {}
       }
     },
 
     mixins: [Head, Body, Filterable, Foot, Progress, Themeable],
 
     props: {
+      expand: {
+        type: Boolean
+      },
       headers: {
         type: Array,
         default: () => []
@@ -145,7 +150,7 @@
         type: [Boolean, String],
         default: false
       },
-      selectedKey: {
+      itemKey: {
         type: String,
         default: 'id'
       },
@@ -226,7 +231,7 @@
       },
       selected () {
         const selected = {}
-        this.value.forEach(i => (selected[i[this.selectedKey]] = true))
+        this.value.forEach(i => (selected[i[this.itemKey]] = true))
         return selected
       }
     },
@@ -258,7 +263,7 @@
         }
       },
       isSelected (item) {
-        return this.selected[item[this.selectedKey]]
+        return this.selected[item[this.itemKey]]
       },
       sort (index) {
         const { sortBy, descending } = this.computedPagination
@@ -281,11 +286,11 @@
       toggle (value) {
         const selected = Object.assign({}, this.selected)
         this.filteredItems.forEach(i => (
-          selected[i[this.selectedKey]] = value)
+          selected[i[this.itemKey]] = value)
         )
 
         this.$emit('input', this.items.filter(i => (
-          selected[i[this.selectedKey]]))
+          selected[i[this.itemKey]]))
         )
       }
     },

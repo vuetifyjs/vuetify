@@ -65,7 +65,6 @@ export default {
   render (h) {
     const div = h('div', {
       'class': 'tabs__content',
-      domProps: { id: this.id },
       directives: [{
         name: 'show',
         value: this.isActive

@@ -4,7 +4,7 @@
 /** Themes */
 date-picker($material)
   .picker--time__clock
-    background: $grey.darken-2
+    background: $material.picker.clock
 
     &-hand:before
       border-color: $theme.accent
@@ -24,12 +24,12 @@ date-picker($material)
   .picker__title
     div:first-child
       span
-        color: $material.text.primary
+        color: #fff
 
     div:last-child
-      color: $material.text.primary
+      color: #fff
 
-dark(date-picker, "picker--time")
+theme(date-picker, "picker--time")
 
 .picker--time
   .card__row--actions
@@ -112,7 +112,6 @@ dark(date-picker, "picker--time")
   height: 270px
   width: 270px
   border-radius: 100%
-  background: $grey.lighten-2
   position: absolute
   user-select: none
   top: 50%

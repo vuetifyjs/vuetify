@@ -1,12 +1,17 @@
 <script>
+  // Mixins
+  import Bootable from '../../mixins/bootable'
   import Detachable from '../../mixins/detachable'
+  import Menuable from '../../mixins/menuable.js'
   import Toggleable from '../../mixins/toggleable'
-  import Activator from './mixins/activator'
-  import Generators from './mixins/generators'
-  import Position from './mixins/position'
-  import Utils from './mixins/utils'
-  import Keyable from './mixins/keyable'
 
+  // Component level mixins
+  import Activator from './mixins/menu-activator'
+  import Generators from './mixins/menu-generators'
+  import Keyable from './mixins/menu-keyable'
+  import Position from './mixins/menu-position'
+
+  // Directives
   import ClickOutside from '../../directives/click-outside'
   import Resize from '../../directives/resize'
 
@@ -15,11 +20,12 @@
 
     mixins: [
       Activator,
+      Bootable,
       Detachable,
       Generators,
       Keyable,
+      Menuable,
       Position,
-      Utils,
       Toggleable
     ],
 
@@ -30,36 +36,10 @@
 
     data () {
       return {
-        autoIndex: null,
         defaultOffset: 8,
-        dimensions: {
-          activator: {
-            top: 0, left: 0,
-            bottom: 0, right: 0,
-            width: 0, height: 0,
-            offsetTop: 0, scrollHeight: 0
-          },
-          content: {
-            top: 0, left: 0,
-            bottom: 0, right: 0,
-            width: 0, height: 0,
-            offsetTop: 0, scrollHeight: 0
-          },
-          list: null,
-          selected: null
-        },
-        direction: { vert: 'bottom', horiz: 'right' },
-        isContentActive: false,
-        isBooted: false,
         maxHeightAutoDefault: '200px',
         startIndex: 3,
         stopIndex: 0,
-        tileLength: 0,
-        window: {},
-        absoluteX: 0,
-        absoluteY: 0,
-        pageYOffset: 0,
-        insideContent: false,
         hasJustFocused: false,
         focusedTimeout: {}
       }
@@ -67,22 +47,20 @@
 
     props: {
       allowOverflow: Boolean,
-      top: Boolean,
-      left: Boolean,
-      bottom: Boolean,
-      right: Boolean,
-      fullWidth: Boolean,
       auto: Boolean,
-      offsetX: Boolean,
-      offsetY: Boolean,
+      closeOnClick: {
+        type: Boolean,
+        default: true
+      },
+      closeOnContentClick: {
+        type: Boolean,
+        default: true
+      },
       disabled: Boolean,
-      maxHeight: {
-        default: 'auto'
-      },
-      nudgeTop: {
-        type: Number,
-        default: 0
-      },
+      fullWidth: Boolean,
+      maxHeight: { default: 'auto' },
+      maxWidth: { default: 'auto' },
+      minWidth: [Number, String],
       nudgeBottom: {
         type: Number,
         default: 0
@@ -95,30 +73,21 @@
         type: Number,
         default: 0
       },
+      nudgeTop: {
+        type: Number,
+        default: 0
+      },
       nudgeWidth: {
         type: Number,
         default: 0
       },
+      offsetX: Boolean,
+      offsetY: Boolean,
       openOnClick: {
         type: Boolean,
         default: true
       },
-      openOnHover: {
-        type: Boolean,
-        default: false
-      },
-      lazy: Boolean,
-      closeOnClick: {
-        type: Boolean,
-        default: true
-      },
-      closeOnContentClick: {
-        type: Boolean,
-        default: true
-      },
-      activator: {
-        default: null
-      },
+      openOnHover: Boolean,
       origin: {
         type: String,
         default: 'top left'
@@ -126,51 +95,57 @@
       transition: {
         type: [Boolean, String],
         default: 'menu-transition'
-      },
-      positionX: {
-        type: Number,
-        default: null
-      },
-      positionY: {
-        type: Number,
-        default: null
-      },
-      positionAbsolutely: {
-        type: Boolean,
-        default: false
-      },
-      maxWidth: [Number, String],
-      minWidth: [Number, String],
-      zIndex: {
-        type: [Number, String],
-        default: 6
       }
     },
 
     computed: {
+      calculatedLeft () {
+        let left = this.calcLeft
+        if (this.auto) left = this.calcLeftAuto
+
+        return `${this.calcXOverflow(left())}px`
+      },
+      calculatedMaxHeight () {
+        return this.auto
+          ? '200px'
+          : isNaN(this.maxHeight)
+          ? this.maxHeight
+          : `${this.maxHeight}px`
+      },
+      calculatedMaxWidth () {
+        return isNaN(this.maxWidth)
+          ? this.maxWidth
+          : `${this.maxWidth}px`
+      },
       calculatedMinWidth () {
-        const minWidth = parseInt(this.minWidth) ||
-          this.dimensions.activator.width + this.nudgeWidth + (this.auto ? 16 : 0)
+        if (this.minWidth) {
+          return isNaN(this.minWidth)
+            ? this.minWidth
+            : `${this.minWidth}px`
+        }
 
-        if (!this.maxWidth) return minWidth
+        return `${(
+          this.dimensions.activator.width +
+          this.nudgeWidth +
+          (this.auto ? 16 : 0)
+        )}px`
+      },
+      calculatedTop () {
+        let top = this.calcTop
+        if (this.auto) top = this.calcTopAuto
 
-        const maxWidth = parseInt(this.maxWidth)
-
-        return maxWidth < minWidth ? maxWidth : minWidth
+        return `${this.calcYOverflow(top())}px`
       },
       styles () {
         return {
-          maxHeight: this.auto ? '200px' : isNaN(this.maxHeight) ? this.maxHeight : `${this.maxHeight}px`,
-          minWidth: `${this.calculatedMinWidth}px`,
-          maxWidth: `${parseInt(this.maxWidth)}px`,
-          top: `${this.calcYOverflow(this.calcTop())}px`,
-          left: `${this.calcXOverflow(this.calcLeft())}px`,
+          maxHeight: this.calculatedMaxHeight,
+          minWidth: this.calculatedMinWidth,
+          maxWidth: this.calculatedMaxWidth,
+          top: this.calculatedTop,
+          left: this.calculatedLeft,
           transformOrigin: this.origin,
           zIndex: this.zIndex
         }
-      },
-      hasActivator () {
-        return !!this.$slots.activator || this.activator
       }
     },
 
@@ -179,50 +154,35 @@
         this.removeActivatorEvents(oldActivator)
         this.addActivatorEvents(newActivator)
       },
-      disabled (val) {
-        val && this.deactivate()
-      },
       isContentActive (val) {
         this.hasJustFocused = val
-      },
-      isActive (val) {
-        if (this.disabled) return
-
-        val && this.activate() || this.deactivate()
       }
     },
 
     methods: {
       activate () {
-        if (typeof window === 'undefined') return
-        this.pageYOffset = this.getOffsetTop()
-        this.isBooted = true
-        this.insideContent = true
+        // This exists primarily for v-select
+        // helps determine which tiles to activate
         this.getTiles()
+        // Update coordinates and dimensions of menu
+        // and its activator
         this.updateDimensions()
+        // Start the transition
         requestAnimationFrame(this.startTransition)
-      },
-      deactivate () {
-        this.isContentActive = false
+        // Once transitioning, calculate scroll position
+        requestAnimationFrame(this.calculateScroll)
       },
       onResize () {
         if (!this.isActive) return
 
+        // Account for screen resize
+        // and orientation change
         this.updateDimensions()
-      },
-      getOffsetTop () {
-        if (typeof window === 'undefined') return 0
-
-        return window.pageYOffset ||
-          document.documentElement.scrollTop
-      },
-      startTransition () {
-        requestAnimationFrame(() => (this.isContentActive = true))
-        requestAnimationFrame(this.calculateScroll)
       }
     },
 
     render (h) {
+      // Do not add click outside for hover menu
       const directives = !this.openOnHover ? [{
         name: 'click-outside',
         value: () => this.closeOnClick
@@ -246,10 +206,7 @@
         },
         directives,
         on: {
-          keydown: e => {
-            if (e.keyCode === 27) this.isActive = false
-            else this.changeListIndex(e)
-          }
+          keydown: this.changeListIndex
         }
       }
 

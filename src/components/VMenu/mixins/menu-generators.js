@@ -1,13 +1,19 @@
+/**
+ * Menu generators
+ * @mixin
+ *
+ * Used for creating the DOM elements for VMenu
+ */
 export default {
   methods: {
     genActivator () {
       if (!this.$slots.activator) return null
 
       const options = {
+        staticClass: 'menu__activator',
         'class': {
           'menu__activator--active': this.hasJustFocused || this.isActive
         },
-        staticClass: 'menu__activator',
         ref: 'activator',
         on: {}
       }
@@ -33,15 +39,14 @@ export default {
     },
 
     genContent () {
-      const booted = (this.lazy && this.isBooted) || !this.lazy
       return this.$createElement('div', {
         'class': (`menu__content ${this.contentClass}`).trim(),
-        ref: 'content',
         style: this.styles,
         directives: [{
           name: 'show',
           value: this.isContentActive
         }],
+        ref: 'content',
         on: {
           click: e => {
             e.stopPropagation()
@@ -55,7 +60,7 @@ export default {
             this.openOnHover && this.mouseLeaveHandler(e)
           }
         }
-      }, [booted ? this.$slots.default : null])
+      }, this.showLazyContent(this.$slots.default))
     }
   }
 }

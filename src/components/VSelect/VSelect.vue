@@ -1,6 +1,5 @@
 <script>
-  import { getObjectValueByPath } from '../../util/helpers'
-
+  // Components
   import VCard from '../VCard'
   import VCheckbox from '../VCheckbox'
   import {
@@ -11,13 +10,21 @@
     VListTileTitle
   } from '../VList'
   import VMenu from '../VMenu'
+  import VBtn from '../VBtn'
 
+  // Mixins
   import Filterable from '../../mixins/filterable'
   import Input from '../../mixins/input'
-  import Autocomplete from './mixins/autocomplete'
-  import Generators from './mixins/generators'
 
+  // Component level mixins
+  import Autocomplete from './mixins/select-autocomplete'
+  import Generators from './mixins/select-generators'
+
+  // Directives
   import ClickOutside from '../../directives/click-outside'
+
+  // Helpers
+  import { getObjectValueByPath } from '../../util/helpers'
 
   export default {
     name: 'v-select',
@@ -32,7 +39,8 @@
       VListTileAction,
       VListTileContent,
       VListTileTitle,
-      VMenu
+      VMenu,
+      VBtn
     },
 
     directives: {

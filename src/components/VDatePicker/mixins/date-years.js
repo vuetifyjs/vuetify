@@ -2,34 +2,38 @@ export default {
   methods: {
     genYears () {
       return this.$createElement('ul', {
-        'class': 'picker--date__years',
+        staticClass: 'picker--date__years',
+        key: 'year',
         ref: 'years'
       }, this.genYearItems())
     },
+    yearClick (year) {
+      let tableMonth = this.tableMonth + 1
+      let day = this.day
+      tableMonth = tableMonth < 10 ? `0${tableMonth}` : tableMonth
+      day = day < 10 ? `0${day}` : day
+      this.inputDate = `${year}-${tableMonth}-${day}`
+
+      if (this.type === 'year') {
+        this.$nextTick(() => (this.autosave && this.save()))
+      } else {
+        this.activePicker = 'MONTH'
+      }
+    },
     genYearItems () {
       const children = []
-      for (let i = this.year + 100, length = this.year - 100; i > length; i--) {
-        const date = new Date(i, this.month, this.day, 12)
+      for (let year = this.year + 100, length = this.year - 100; year > length; year--) {
+        const date = new Date(year, this.month, this.day, 12)
         const buttonText = this.supportsLocaleFormat
           ? date.toLocaleDateString(this.locale, { year: 'numeric' })
-          : i
+          : year
 
         children.push(this.$createElement('li', {
           'class': {
-            active: this.year === i
+            active: this.year === year
           },
           on: {
-            click: e => {
-              e.stopPropagation()
-
-              let tableMonth = this.tableMonth + 1
-              let day = this.day
-              tableMonth = tableMonth < 10 ? `0${tableMonth}` : tableMonth
-              day = day < 10 ? `0${day}` : day
-
-              this.inputDate = `${i}-${tableMonth}-${day}`
-              this.isSelected = false
-            }
+            click: () => this.yearClick(year)
           }
         }, buttonText))
       }
