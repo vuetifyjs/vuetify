@@ -1,5 +1,11 @@
 import { getObjectValueByPath } from '../../../util/helpers'
 
+/**
+ * Select generators
+ * @mixin
+ * 
+ * Used for creating the DOM elements for VSelect
+ */
 export default {
   methods: {
     genMenu () {
