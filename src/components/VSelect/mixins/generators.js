@@ -180,7 +180,12 @@ export default {
       })
 
       if (!children.length) {
-        children.push(this.genTile(this.noDataText, true))
+        const noDataItem = {
+          text: this.noDataText,
+          value: this.noDataValue
+        }
+
+        children.push(this.genTile(noDataItem, !this.noDataClickable))
       }
 
       return this.$createElement('v-card', [
