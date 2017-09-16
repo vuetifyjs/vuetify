@@ -2,7 +2,7 @@
 
 exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
 
-<div class="card picker picker--date"
+<div class="picker picker--date card"
      style="height: auto;"
 >
   <div class="picker__title">
@@ -381,7 +381,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
 
 exports[`VDatePicker.js should match snapshot with allowed dates and pick-month prop 1`] = `
 
-<div class="card picker picker--date"
+<div class="picker picker--date card"
      style="height: auto;"
 >
   <div class="picker__title">
@@ -551,7 +551,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates and pick-month 
 
 exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
 
-<div class="card picker picker--date theme--dark"
+<div class="picker picker--date card theme--dark"
      style="height: auto;"
 >
   <div class="picker__title">
@@ -930,7 +930,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
 
 exports[`VDatePicker.js should match snapshot with default settings 1`] = `
 
-<div class="card picker picker--date"
+<div class="picker picker--date card"
      style="height: auto;"
 >
   <div class="picker__title">
@@ -1309,7 +1309,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
 
 exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
 
-<div class="card picker picker--date"
+<div class="picker picker--date card"
      style="height: auto;"
 >
   <div class="picker__title">
@@ -1684,7 +1684,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
 
 exports[`VDatePicker.js should match snapshot with locale 1`] = `
 
-<div class="card picker picker--date"
+<div class="picker picker--date card"
      style="height: auto;"
 >
   <div class="picker__title">
@@ -2063,7 +2063,7 @@ exports[`VDatePicker.js should match snapshot with locale 1`] = `
 
 exports[`VDatePicker.js should match snapshot with month formatting functions 1`] = `
 
-<div class="card picker picker--date"
+<div class="picker picker--date card"
      style="height: auto;"
 >
   <div class="picker__title">
@@ -2233,7 +2233,7 @@ exports[`VDatePicker.js should match snapshot with month formatting functions 1`
 
 exports[`VDatePicker.js should match snapshot with no title 1`] = `
 
-<div class="card picker picker--date"
+<div class="picker picker--date card"
      style="height: auto;"
 >
   <div class="picker__body">
@@ -2602,7 +2602,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
 
 exports[`VDatePicker.js should match snapshot with pick-month prop 1`] = `
 
-<div class="card picker picker--date"
+<div class="picker picker--date card"
      style="height: auto;"
 >
   <div class="picker__title">
@@ -2772,7 +2772,7 @@ exports[`VDatePicker.js should match snapshot with pick-month prop 1`] = `
 
 exports[`VDatePicker.js should match snapshot with title/header formatting functions 1`] = `
 
-<div class="card picker picker--date"
+<div class="picker picker--date card"
      style="height: auto;"
 >
   <div class="picker__title">
