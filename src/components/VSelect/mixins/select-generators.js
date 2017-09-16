@@ -106,9 +106,9 @@ export default {
         if (slots) {
           children.push(this.genSlotSelection(item, i))
         } else if (chips) {
-          children.push(this.genChipSelection(item))
+          children.push(this.genChipSelection(item, i))
         } else if (this.segmented) {
-          children.push(this.genSegmentedBtn(item))
+          children.push(this.genSegmentedBtn(item, i))
         } else {
           children.push(this.genCommaSelection(item, i < length - 1, i))
         }
