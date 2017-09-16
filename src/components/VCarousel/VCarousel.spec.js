@@ -98,6 +98,7 @@ test('VCarousel.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  // TODO: Use jest's fake timers
   it('should emit input event after interval', async () => {
     const vm = mount(VCarousel).vm
     const wrapper = mount(VCarousel, {

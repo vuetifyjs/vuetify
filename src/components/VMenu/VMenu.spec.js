@@ -3,6 +3,7 @@ import VCard from '~components/VCard'
 import VMenu from '~components/VMenu'
 import { test } from '~util/testing'
 
+// TODO: Most of these have exactly the same snapshots
 test('VMenu.js', ({ mount }) => {
   it('should work', async () => {
     const wrapper = mount(VMenu, {

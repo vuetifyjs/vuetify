@@ -1,6 +1,7 @@
 import VNavigationDrawer from '~components/VNavigationDrawer'
 import { test } from '~util/testing'
 
+// TODO: Test behaviour instead of styles
 test('VNavigationDrawer.js', ({ mount }) => {
   it('should render component and match snapshot', () => {
     const wrapper = mount(VNavigationDrawer)

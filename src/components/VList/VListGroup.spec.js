@@ -1,6 +1,7 @@
 import { VList, VListGroup } from '~components/VList'
 import { test } from '~util/testing'
 
+// TODO: Test actual behaviour instead of classes
 test('VListGroup.js', ({ mount }) => {
   it('should render component and match snapshot', () => {
     const wrapper = mount(VList, {
