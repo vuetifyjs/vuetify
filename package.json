@@ -16,8 +16,7 @@
     "build:dev": "cross-env NODE_ENV=production node build/webpack.dev.config.js",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --config build/config.js --progress --hide-modules",
     "debug-build": "node --inspect --debug-brk build/config.js",
-    "test": "cross-env NODE_ENV=test jest --no-cache --verbose",
-    "test-coverage": "cross-env NODE_ENV=test jest --no-cache --coverage --verbose",
+    "test": "cross-env NODE_ENV=test jest",
     "lint": "eslint --ext .js,.vue src",
     "precommit": "yarn run lint && yarn test",
     "prepush": "yarn run lint && yarn test"
