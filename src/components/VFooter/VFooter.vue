@@ -5,7 +5,7 @@
   export default {
     name: 'v-footer',
 
-    mixins: [Applicationable],
+    mixins: [Applicationable, Themeable],
 
     props: {
       absolute: Boolean,
