@@ -1,4 +1,4 @@
-require("../stylus/components/_overlay.styl")
+require('../stylus/components/_overlay.styl')
 
 export default {
   data () {
