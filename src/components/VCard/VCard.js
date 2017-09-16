@@ -34,7 +34,7 @@ export default {
         'card--raised': this.raised,
         'card--tile': this.tile,
         'theme--light': this.light,
-        'theme--dark': this.dark,
+        'theme--dark': this.dark
       }
     },
     styles () {
