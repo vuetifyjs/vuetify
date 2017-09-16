@@ -1,8 +1,9 @@
 import { test } from '~util/testing'
+import { mount } from 'avoriaz'
 import VExpansionPanel from '~components/VExpansionPanel'
 
-// TODO: Fix when next Vue release goes live
-test.skip('VExpansionPanel.js', ({ mount }) => {
+// TODO: Fix when Vue has optional injects
+test.skip('VExpansionPanel.js', () => {
   it('should render component and match snapshot', () => {
     const wrapper = mount(VExpansionPanel)
 
