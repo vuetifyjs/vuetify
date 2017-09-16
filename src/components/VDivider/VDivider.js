@@ -1,27 +1,25 @@
-<script>
-  import Themeable from '../../mixins/themeable'
+require("../../stylus/components/_dividers.styl")
 
-  export default {
-    name: 'v-divider',
+import Themeable from '../../mixins/themeable'
 
-    functional: true,
+export default {
+  name: 'v-divider',
 
-    mixins: [Themeable],
+  functional: true,
 
-    props: {
-      inset: Boolean
-    },
+  mixins: [Themeable],
 
-    render (h, { props, data, children }) {
-      data.staticClass = (`divider ${data.staticClass || ''}`).trim()
+  props: {
+    inset: Boolean
+  },
 
-      if (props.inset) data.staticClass += ' divider--inset'
-      if (props.light) data.staticClass += ' theme--light'
-      if (props.dark) data.staticClass += ' theme--dark'
+  render (h, { props, data, children }) {
+    data.staticClass = (`divider ${data.staticClass || ''}`).trim()
 
-      return h('hr', data)
-    }
+    if (props.inset) data.staticClass += ' divider--inset'
+    if (props.light) data.staticClass += ' theme--light'
+    if (props.dark) data.staticClass += ' theme--dark'
+
+    return h('hr', data)
   }
-</script>
-
-<style lang="stylus" src="../../stylus/components/_dividers.styl"></style>
+}
