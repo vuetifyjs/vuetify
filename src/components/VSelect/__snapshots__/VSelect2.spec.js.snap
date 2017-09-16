@@ -23,7 +23,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and multi select 1`] =
          style="display: inline-block;"
     >
       <div class="menu__content menu__content--select"
-           style="max-height: 300px; min-width: 24px; max-width: NaNpx; top: 12px; left: 0px; z-index: 6; display: none;"
+           style="max-height: 300px; min-width: 24px; max-width: auto; top: 12px; left: 0px; z-index: 6; display: none;"
       >
         <div class="card"
              style="height: auto;"
@@ -134,7 +134,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and multi select 2`] =
          style="display: inline-block;"
     >
       <div class="menu__content menu__content--select"
-           style="max-height: 300px; min-width: 24px; max-width: NaNpx; top: 12px; left: 0px; z-index: 6; display: none;"
+           style="max-height: 300px; min-width: 24px; max-width: auto; top: 12px; left: 0px; z-index: 6; display: none;"
       >
         <div class="card"
              style="height: auto;"
@@ -250,7 +250,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and single select 1`] 
          style="display: inline-block;"
     >
       <div class="menu__content menu__content--select"
-           style="max-height: 300px; min-width: 24px; max-width: NaNpx; top: 12px; left: 0px; z-index: 6; display: none;"
+           style="max-height: 300px; min-width: 24px; max-width: auto; top: 12px; left: 0px; z-index: 6; display: none;"
       >
         <div class="card"
              style="height: auto;"
@@ -318,7 +318,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and single select 2`] 
          style="display: inline-block;"
     >
       <div class="menu__content menu__content--select"
-           style="max-height: 300px; min-width: 24px; max-width: NaNpx; top: 12px; left: 0px; z-index: 6; display: none;"
+           style="max-height: 300px; min-width: 24px; max-width: auto; top: 12px; left: 0px; z-index: 6; display: none;"
       >
         <div class="card"
              style="height: auto;"

@@ -1,7 +1,15 @@
+/**
+ * Menu activator
+ * @mixin
+ *
+ * Handles the click and hover activation
+ * Supports slotted and detached activators
+ */
 export default {
   methods: {
     getActivator () {
       if (this.activator) return this.activator
+
       return this.$refs.activator.children
         ? this.$refs.activator.children[0]
         : this.$refs.activator
@@ -28,6 +36,7 @@ export default {
         this.$refs.content.contains(e.relatedTarget)
       ) return
 
+      // Prevent accidental re-activation
       this.focusedTimeout = setTimeout(() => (this.isActive = false), 500)
     },
     addActivatorEvents (activator = null) {
