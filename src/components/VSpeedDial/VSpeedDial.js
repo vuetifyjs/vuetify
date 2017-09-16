@@ -1,4 +1,4 @@
-require("../../stylus/components/_speed-dial.styl")
+require('../../stylus/components/_speed-dial.styl')
 
 import Toggleable from '../../mixins/toggleable'
 import Positionable from '../../mixins/positionable'

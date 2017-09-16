@@ -1,4 +1,4 @@
-require("../../stylus/components/_small-dialog.styl")
+require('../../stylus/components/_small-dialog.styl')
 
 export default {
   name: 'v-edit-dialog',

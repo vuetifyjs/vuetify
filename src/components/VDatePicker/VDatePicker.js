@@ -1,5 +1,5 @@
-require("../../stylus/components/_pickers.styl")
-require("../../stylus/components/_date-picker.styl")
+require('../../stylus/components/_pickers.styl')
+require('../../stylus/components/_date-picker.styl')
 
 import { createRange } from '../../util/helpers'
 

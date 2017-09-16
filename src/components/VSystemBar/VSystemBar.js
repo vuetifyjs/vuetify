@@ -1,4 +1,4 @@
-require("../../stylus/components/_system-bars.styl")
+require('../../stylus/components/_system-bars.styl')
 
 import Themeable from '../../mixins/themeable'
 

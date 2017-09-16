@@ -1,4 +1,4 @@
-require("../../stylus/components/_chips.styl")
+require('../../stylus/components/_chips.styl')
 
 import Themeable from '../../mixins/themeable'
 import Toggleable from '../../mixins/toggleable'

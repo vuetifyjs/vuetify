@@ -1,4 +1,4 @@
-require("../../stylus/components/_app.styl")
+require('../../stylus/components/_app.styl')
 
 import Breakpoint from '../../util/breakpoint'
 import Themeable from '../../mixins/themeable'

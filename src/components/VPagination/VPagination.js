@@ -1,4 +1,4 @@
-require("../../stylus/components/_pagination.styl")
+require('../../stylus/components/_pagination.styl')
 
 import VIcon from '../VIcon'
 

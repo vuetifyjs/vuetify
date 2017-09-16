@@ -1,4 +1,4 @@
-require("../../stylus/components/_icons.styl")
+require('../../stylus/components/_icons.styl')
 
 import Themeable from '../../mixins/themeable'
 import Contextualable from '../../mixins/contextualable'

@@ -1,4 +1,4 @@
-require("../../stylus/components/_badges.styl")
+require('../../stylus/components/_badges.styl')
 
 // Mixins
 import Colorable from '../../mixins/colorable'

@@ -1,4 +1,4 @@
-require("../../stylus/components/_avatars.styl")
+require('../../stylus/components/_avatars.styl')
 
 export default {
   name: 'v-avatar',

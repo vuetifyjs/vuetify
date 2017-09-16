@@ -1,4 +1,4 @@
-require("../../stylus/components/_toolbar.styl")
+require('../../stylus/components/_toolbar.styl')
 
 import Applicationable from '../../mixins/applicationable'
 import Themeable from '../../mixins/themeable'
@@ -51,8 +51,8 @@ export default {
       return this.dense
         ? this.denseHeight
         : this.prominent
-        ? this.prominentHeight
-        : this.height
+          ? this.prominentHeight
+          : this.height
     },
     classes () {
       return {
@@ -131,8 +131,8 @@ export default {
       this.$vuetify.application.top = !this.fixed && !this.absolute
         ? 0
         : this.isExtended && !this.isScrolling
-        ? this.computedHeight * 2
-        : this.computedHeight
+          ? this.computedHeight * 2
+          : this.computedHeight
     }
   },
 

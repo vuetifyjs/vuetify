@@ -1,4 +1,4 @@
-require("../../stylus/components/_bottom-sheets.styl")
+require('../../stylus/components/_bottom-sheets.styl')
 
 import VDialog from '../VDialog/VDialog'
 

@@ -1,4 +1,4 @@
-require("../../stylus/components/_lists.styl")
+require('../../stylus/components/_lists.styl')
 
 import Themeable from '../../mixins/themeable'
 

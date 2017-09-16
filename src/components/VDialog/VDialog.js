@@ -1,4 +1,4 @@
-require("../../stylus/components/_dialogs.styl")
+require('../../stylus/components/_dialogs.styl')
 
 import Bootable from '../../mixins/bootable'
 import Detachable from '../../mixins/detachable'

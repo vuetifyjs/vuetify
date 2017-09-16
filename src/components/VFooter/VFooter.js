@@ -1,4 +1,4 @@
-require("../../stylus/components/_footer.styl")
+require('../../stylus/components/_footer.styl')
 
 import Applicationable from '../../mixins/applicationable'
 

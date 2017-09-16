@@ -1,6 +1,6 @@
-require("../../stylus/components/_input-groups.styl")
-require("../../stylus/components/_selection-controls.styl")
-require("../../stylus/components/_switch.styl")
+require('../../stylus/components/_input-groups.styl')
+require('../../stylus/components/_selection-controls.styl')
+require('../../stylus/components/_switch.styl')
 
 import Selectable from '../../mixins/selectable'
 

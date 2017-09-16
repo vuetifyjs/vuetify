@@ -1,4 +1,4 @@
-require("../../stylus/components/_content.styl")
+require('../../stylus/components/_content.styl')
 
 export default {
   name: 'v-content',

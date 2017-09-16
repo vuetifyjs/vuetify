@@ -1,4 +1,4 @@
-require("../../stylus/components/_tabs.styl")
+require('../../stylus/components/_tabs.styl')
 
 import Themeable from '../../mixins/themeable'
 import Resize from '../../directives/resize'

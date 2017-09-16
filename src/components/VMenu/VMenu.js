@@ -1,4 +1,4 @@
-require("../../stylus/components/_menus.styl")
+require('../../stylus/components/_menus.styl')
 
 // Mixins
 import Bootable from '../../mixins/bootable'
@@ -110,8 +110,8 @@ export default {
       return this.auto
         ? '200px'
         : isNaN(this.maxHeight)
-        ? this.maxHeight
-        : `${this.maxHeight}px`
+          ? this.maxHeight
+          : `${this.maxHeight}px`
     },
     calculatedMaxWidth () {
       return isNaN(this.maxWidth)

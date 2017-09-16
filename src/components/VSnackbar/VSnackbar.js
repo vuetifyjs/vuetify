@@ -1,4 +1,4 @@
-require("../../stylus/components/_snackbars.styl")
+require('../../stylus/components/_snackbars.styl')
 
 import {
   VSlideYTransition,

@@ -1,5 +1,5 @@
-require("../../stylus/components/_tables.styl")
-require("../../stylus/components/_data-table.styl")
+require('../../stylus/components/_tables.styl')
+require('../../stylus/components/_data-table.styl')
 
 import VBtn from '../VBtn'
 import VIcon from '../VIcon'

@@ -1,4 +1,4 @@
-require("../../stylus/components/_buttons.styl")
+require('../../stylus/components/_buttons.styl')
 
 import Contextualable from '../../mixins/contextualable'
 import Positionable from '../../mixins/positionable'

@@ -1,4 +1,4 @@
-require("../../stylus/components/_navigation-drawer.styl")
+require('../../stylus/components/_navigation-drawer.styl')
 
 import Applicationable from '../../mixins/applicationable'
 import Overlayable from '../../mixins/overlayable'

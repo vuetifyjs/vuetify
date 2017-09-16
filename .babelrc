@@ -19,6 +19,13 @@
         }]
       ]
     },
+    "es5": {
+      "presets": [
+        ["es2015",  {"modules": false}],
+        ["stage-2"]
+      ],
+      "plugins": ["./build/babel-transform-stylus-paths.js"]
+    },
     "development": {
       "presets": [
         ["es2015",  {"modules": false}],

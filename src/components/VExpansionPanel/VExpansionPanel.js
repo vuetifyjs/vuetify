@@ -1,4 +1,4 @@
-require("../../stylus/components/_expansion-panel.styl")
+require('../../stylus/components/_expansion-panel.styl')
 
 import Themeable from '../../mixins/themeable'
 

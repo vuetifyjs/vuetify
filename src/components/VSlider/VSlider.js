@@ -1,4 +1,4 @@
-require("../../stylus/components/_sliders.styl")
+require('../../stylus/components/_sliders.styl')
 
 import { addOnceEventListener, createRange } from '../../util/helpers'
 

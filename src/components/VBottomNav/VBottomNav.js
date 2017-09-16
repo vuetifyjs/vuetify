@@ -1,4 +1,4 @@
-require("../../stylus/components/_bottom-navs.styl")
+require('../../stylus/components/_bottom-navs.styl')
 
 import ButtonGroup from '../../mixins/button-group'
 

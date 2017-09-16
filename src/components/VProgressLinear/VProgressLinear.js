@@ -1,4 +1,4 @@
-require("../../stylus/components/_progress-linear.styl")
+require('../../stylus/components/_progress-linear.styl')
 
 import {
   VFadeTransition,

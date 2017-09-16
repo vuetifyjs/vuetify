@@ -1,4 +1,4 @@
-require("../../stylus/components/_cards.styl")
+require('../../stylus/components/_cards.styl')
 
 import Themeable from '../../mixins/themeable'
 

@@ -1,4 +1,4 @@
-require("../../stylus/components/_progress-circular.styl")
+require('../../stylus/components/_progress-circular.styl')
 
 export default {
   name: 'v-progress-circular',
