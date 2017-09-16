@@ -67,7 +67,6 @@ test('VSelect.js', ({ mount, shallow }) => {
 
     expect(wrapper.vm.$refs.input.tabIndex).toBe(-1)
     expect(wrapper.vm.$el.tabIndex).toBe(-1)
-    expect(wrapper.html()).toMatchSnapshot()
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
@@ -82,7 +81,6 @@ test('VSelect.js', ({ mount, shallow }) => {
 
     expect(wrapper.vm.$refs.input.tabIndex).toBe(10)
     expect(wrapper.vm.$el.tabIndex).toBe(-1)
-    expect(wrapper.html()).toMatchSnapshot()
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
@@ -96,7 +94,6 @@ test('VSelect.js', ({ mount, shallow }) => {
 
     expect(wrapper.vm.$refs.input.tabIndex).toBe(-1)
     expect(wrapper.vm.$el.tabIndex).toBe(10)
-    expect(wrapper.html()).toMatchSnapshot()
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
