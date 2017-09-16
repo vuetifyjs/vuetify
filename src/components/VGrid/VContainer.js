@@ -1,7 +1,5 @@
-<script>
-  import Grid from './grid'
+require("../../stylus/components/_grid.styl")
 
-  export default Grid('container')
-</script>
+import Grid from './grid'
 
-<style lang="stylus" src="../../stylus/components/_grid.styl"></style>
+export default Grid('container')

@@ -1,73 +1,71 @@
-<script>
-  import Themeable from '../../mixins/themeable'
-  import Toggleable from '../../mixins/toggleable'
+require("../../stylus/components/_chips.styl")
 
-  export default {
-    name: 'v-chip',
+import Themeable from '../../mixins/themeable'
+import Toggleable from '../../mixins/toggleable'
 
-    mixins: [Themeable, Toggleable],
+export default {
+  name: 'v-chip',
 
-    props: {
-      close: Boolean,
-      disabled: Boolean,
-      label: Boolean,
-      outline: Boolean,
-      // Used for selects/tagging
-      selected: Boolean,
-      small: Boolean,
-      value: {
-        type: Boolean,
-        default: true
+  mixins: [Themeable, Toggleable],
+
+  props: {
+    close: Boolean,
+    disabled: Boolean,
+    label: Boolean,
+    outline: Boolean,
+    // Used for selects/tagging
+    selected: Boolean,
+    small: Boolean,
+    value: {
+      type: Boolean,
+      default: true
+    }
+  },
+  computed: {
+    classes () {
+      return {
+        'chip': true,
+        'chip--disabled': this.disabled,
+        'chip--selected': this.selected,
+        'chip--label': this.label,
+        'chip--outline': this.outline,
+        'chip--small': this.small,
+        'chip--removable': this.close,
+        'theme--light': this.light,
+        'theme--dark': this.dark
       }
-    },
-    computed: {
-      classes () {
-        return {
-          'chip': true,
-          'chip--disabled': this.disabled,
-          'chip--selected': this.selected,
-          'chip--label': this.label,
-          'chip--outline': this.outline,
-          'chip--small': this.small,
-          'chip--removable': this.close,
-          'theme--light': this.light,
-          'theme--dark': this.dark
-        }
-      }
-    },
+    }
+  },
 
-    render (h) {
-      const children = [this.$slots.default]
+  render (h) {
+    const children = [this.$slots.default]
+    const data = {
+      'class': this.classes,
+      attrs: { tabindex: this.disabled ? -1 : 0 },
+      directives: [{
+        name: 'show',
+        value: this.isActive
+      }],
+      on: this.$listeners
+    }
+
+    if (this.close) {
       const data = {
-        'class': this.classes,
-        attrs: { tabindex: this.disabled ? -1 : 0 },
-        directives: [{
-          name: 'show',
-          value: this.isActive
-        }],
-        on: this.$listeners
-      }
+        staticClass: 'chip__close',
+        on: {
+          click: e => {
+            e.stopPropagation()
 
-      if (this.close) {
-        const data = {
-          staticClass: 'chip__close',
-          on: {
-            click: e => {
-              e.stopPropagation()
-
-              this.$emit('input', false)
-            }
+            this.$emit('input', false)
           }
         }
-
-        children.push(h('div', data, [
-          h('v-icon', { props: { right: true } }, 'cancel')
-        ]))
       }
 
-      return h('span', data, children)
+      children.push(h('div', data, [
+        h('v-icon', { props: { right: true } }, 'cancel')
+      ]))
     }
-  }
-</script>
 
-<style lang="stylus" src="../../stylus/components/_chips.styl"></style>
+    return h('span', data, children)
+  }
+}

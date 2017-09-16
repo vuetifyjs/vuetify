@@ -1,43 +1,41 @@
-<script>
-  import VDialog from '../VDialog/VDialog'
+require("../../stylus/components/_bottom-sheets.styl")
 
-  export default {
-    name: 'v-bottom-sheet',
+import VDialog from '../VDialog/VDialog'
 
-    components: {
-      VDialog
-    },
+export default {
+  name: 'v-bottom-sheet',
 
-    props: {
-      inset: Boolean,
-      value: null
-    },
+  components: {
+    VDialog
+  },
 
-    render (h) {
-      const activator = h('template', {
-        slot: 'activator'
-      }, this.$slots.activator)
+  props: {
+    inset: Boolean,
+    value: null
+  },
 
-      const contentClass = [
-        'bottom-sheet',
-        this.inset ? 'bottom-sheet--inset' : ''
-      ].join(' ')
+  render (h) {
+    const activator = h('template', {
+      slot: 'activator'
+    }, this.$slots.activator)
 
-      return h(VDialog, {
-        attrs: {
-          ...this.$attrs
-        },
-        on: {
-          ...this.$listeners
-        },
-        props: {
-          contentClass: contentClass,
-          transition: 'bottom-sheet-transition',
-          value: this.value
-        }
-      }, [activator, this.$slots.default])
-    }
+    const contentClass = [
+      'bottom-sheet',
+      this.inset ? 'bottom-sheet--inset' : ''
+    ].join(' ')
+
+    return h(VDialog, {
+      attrs: {
+        ...this.$attrs
+      },
+      on: {
+        ...this.$listeners
+      },
+      props: {
+        contentClass: contentClass,
+        transition: 'bottom-sheet-transition',
+        value: this.value
+      }
+    }, [activator, this.$slots.default])
   }
-</script>
-
-<style lang="stylus" src="../../stylus/components/_bottom-sheets.styl"></style>
+}

@@ -1,52 +1,50 @@
-<script>
-  import ButtonGroup from '../../mixins/button-group'
+require("../../stylus/components/_bottom-navs.styl")
 
-  export default {
-    name: 'v-bottom-nav',
+import ButtonGroup from '../../mixins/button-group'
 
-    mixins: [ButtonGroup],
+export default {
+  name: 'v-bottom-nav',
 
-    props: {
-      absolute: Boolean,
-      active: [Number, String],
-      shift: Boolean,
-      value: { required: false }
-    },
+  mixins: [ButtonGroup],
 
-    watch: {
-      active () {
-        this.update()
-      }
-    },
+  props: {
+    absolute: Boolean,
+    active: [Number, String],
+    shift: Boolean,
+    value: { required: false }
+  },
 
-    computed: {
-      classes () {
-        return {
-          'bottom-nav': true,
-          'bottom-nav--absolute': this.absolute,
-          'bottom-nav--shift': this.shift,
-          'bottom-nav--active': this.value
-        }
-      }
-    },
-
-    methods: {
-      isSelected (i) {
-        const item = this.getValue(i)
-        return this.active === item
-      },
-      updateValue (i) {
-        const item = this.getValue(i)
-        this.$emit('update:active', item)
-      }
-    },
-
-    render (h) {
-      return h('div', {
-        class: this.classes
-      }, this.$slots.default)
+  watch: {
+    active () {
+      this.update()
     }
-  }
-</script>
+  },
 
-<style lang="stylus" src="../../stylus/components/_bottom-navs.styl"></style>
+  computed: {
+    classes () {
+      return {
+        'bottom-nav': true,
+        'bottom-nav--absolute': this.absolute,
+        'bottom-nav--shift': this.shift,
+        'bottom-nav--active': this.value
+      }
+    }
+  },
+
+  methods: {
+    isSelected (i) {
+      const item = this.getValue(i)
+      return this.active === item
+    },
+    updateValue (i) {
+      const item = this.getValue(i)
+      this.$emit('update:active', item)
+    }
+  },
+
+  render (h) {
+    return h('div', {
+      class: this.classes
+    }, this.$slots.default)
+  }
+}

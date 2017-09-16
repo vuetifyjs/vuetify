@@ -1,57 +1,55 @@
-<script>
-  import Breakpoint from '../../util/breakpoint'
-  import Themeable from '../../mixins/themeable'
+require("../../stylus/components/_app.styl")
 
-  import Resize from '../../directives/resize'
+import Breakpoint from '../../util/breakpoint'
+import Themeable from '../../mixins/themeable'
 
-  export default {
-    name: 'v-app',
+import Resize from '../../directives/resize'
 
-    mixins: [Breakpoint, Themeable],
+export default {
+  name: 'v-app',
 
-    directives: {
-      Resize
+  mixins: [Breakpoint, Themeable],
+
+  directives: {
+    Resize
+  },
+
+  data: () => ({
+    resizeTimeout: {}
+  }),
+
+  props: {
+    fixedFooter: Boolean,
+    footer: Boolean,
+    id: {
+      type: String,
+      default: 'app'
     },
+    toolbar: Boolean
+  },
 
-    data: () => ({
-      resizeTimeout: {}
-    }),
+  mounted () {
+    this.onResize()
+  },
 
-    props: {
-      fixedFooter: Boolean,
-      footer: Boolean,
-      id: {
-        type: String,
-        default: 'app'
+  render (h) {
+    const data = {
+      staticClass: 'application',
+      'class': {
+        'application--dark': this.dark,
+        'application--light': !this.dark,
+        'application--footer': this.footer || this.fixedFooter,
+        'application--footer-fixed': this.fixedFooter,
+        'application--toolbar': this.toolbar
       },
-      toolbar: Boolean
-    },
-
-    mounted () {
-      this.onResize()
-    },
-
-    render (h) {
-      const data = {
-        staticClass: 'application',
-        'class': {
-          'application--dark': this.dark,
-          'application--light': !this.dark,
-          'application--footer': this.footer || this.fixedFooter,
-          'application--footer-fixed': this.fixedFooter,
-          'application--toolbar': this.toolbar
-        },
-        attrs: { 'data-app': true },
-        domProps: { id: this.id },
-        directives: [{
-          name: 'resize',
-          value: this.onResize
-        }]
-      }
-
-      return h('div', data, this.$slots.default)
+      attrs: { 'data-app': true },
+      domProps: { id: this.id },
+      directives: [{
+        name: 'resize',
+        value: this.onResize
+      }]
     }
-  }
-</script>
 
-<style lang="stylus" src="../../stylus/components/_app.styl"></style>
+    return h('div', data, this.$slots.default)
+  }
+}

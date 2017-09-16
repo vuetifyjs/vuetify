@@ -1,37 +1,35 @@
-<script>
-  export default {
-    name: 'v-breadcrumbs',
+require("../../stylus/components/_breadcrumbs.styl")
 
-    provide () {
-      return {
-        divider: this.divider
-      }
-    },
+export default {
+  name: 'v-breadcrumbs',
 
-    props: {
-      divider: {
-        type: String,
-        default: '/'
-      },
-      icons: Boolean
-    },
-
-    computed: {
-      classes () {
-        return {
-          'breadcrumbs': true,
-          'breadcrumbs--with-icons': this.icons
-        }
-      }
-    },
-
-    render (h) {
-      return h('ul', {
-        'class': this.classes,
-        props: { items: this.items }
-      }, this.$slots.default)
+  provide () {
+    return {
+      divider: this.divider
     }
-  }
-</script>
+  },
 
-<style lang="stylus" src="../../stylus/components/_breadcrumbs.styl"></style>
+  props: {
+    divider: {
+      type: String,
+      default: '/'
+    },
+    icons: Boolean
+  },
+
+  computed: {
+    classes () {
+      return {
+        'breadcrumbs': true,
+        'breadcrumbs--with-icons': this.icons
+      }
+    }
+  },
+
+  render (h) {
+    return h('ul', {
+      'class': this.classes,
+      props: { items: this.items }
+    }, this.$slots.default)
+  }
+}

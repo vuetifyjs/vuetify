@@ -1,27 +1,25 @@
-<script>
-  import Themeable from '../../mixins/themeable'
+require("../../stylus/components/_subheaders.styl")
 
-  export default {
-    name: 'v-subheader',
+import Themeable from '../../mixins/themeable'
 
-    functional: true,
+export default {
+  name: 'v-subheader',
 
-    mixins: [Themeable],
+  functional: true,
 
-    props: {
-      inset: Boolean
-    },
+  mixins: [Themeable],
 
-    render (h, { data, children, props }) {
-      data.staticClass = (`subheader ${data.staticClass || ''}`).trim()
+  props: {
+    inset: Boolean
+  },
 
-      if (props.inset) data.staticClass += ' subheader--inset'
-      if (props.light) data.staticClass += ' theme--light'
-      if (props.dark) data.staticClass += ' theme--dark'
+  render (h, { data, children, props }) {
+    data.staticClass = (`subheader ${data.staticClass || ''}`).trim()
 
-      return h('li', data, children)
-    }
+    if (props.inset) data.staticClass += ' subheader--inset'
+    if (props.light) data.staticClass += ' theme--light'
+    if (props.dark) data.staticClass += ' theme--dark'
+
+    return h('li', data, children)
   }
-</script>
-
-<style lang="stylus" src="../../stylus/components/_subheaders.styl"></style>
+}
