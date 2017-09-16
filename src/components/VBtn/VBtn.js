@@ -2,7 +2,7 @@ require('../../stylus/components/_buttons.styl')
 
 import Contextualable from '../../mixins/contextualable'
 import Positionable from '../../mixins/positionable'
-import GenerateRouteLink from '../../mixins/route-link'
+import Routable from '../../mixins/routable'
 import Themeable from '../../mixins/themeable'
 import { factory as ToggleableFactory } from '../../mixins/toggleable'
 
@@ -11,7 +11,7 @@ export default {
 
   mixins: [
     Contextualable,
-    GenerateRouteLink,
+    Routable,
     Positionable,
     Themeable,
     ToggleableFactory('inputValue')

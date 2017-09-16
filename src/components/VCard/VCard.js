@@ -1,13 +1,12 @@
 require('../../stylus/components/_cards.styl')
 
 import Themeable from '../../mixins/themeable'
+import Routable from '../../mixins/routable'
 
 export default {
   name: 'v-card',
 
-  functional: true,
-
-  mixins: [Themeable],
+  mixins: [Routable, Themeable],
 
   props: {
     flat: Boolean,
@@ -18,26 +17,44 @@ export default {
     hover: Boolean,
     img: String,
     raised: Boolean,
+    tag: {
+      type: String,
+      default: 'div'
+    },
     tile: Boolean
   },
 
-  render (h, { data, props, children }) {
-    data.staticClass = (`card ${data.staticClass || ''}`).trim()
-    data.style = data.style || {}
-    data.style.height = props.height
+  computed: {
+    classes () {
+      return {
+        'card': true,
+        'card--flat': this.flat,
+        'card--horizontal': this.horizontal,
+        'card--hover': this.hover,
+        'card--raised': this.raised,
+        'card--tile': this.tile,
+        'theme--light': this.light,
+        'theme--dark': this.dark,
+      }
+    },
+    styles () {
+      const style = {
+        height: isNaN(this.height) ? this.height : `${this.height}px`
+      }
 
-    if (props.flat) data.staticClass += ' card--flat'
-    if (props.horizontal) data.staticClass += ' card--horizontal'
-    if (props.hover) data.staticClass += ' card--hover'
-    if (props.raised) data.staticClass += ' card--raised'
-    if (props.tile) data.staticClass += ' card--tile'
-    if (props.light) data.staticClass += ' theme--light'
-    if (props.dark) data.staticClass += ' theme--dark'
+      if (this.img) {
+        style.background = `url(${this.img}) center center / cover no-repeat`
+      }
 
-    if (props.img) {
-      data.style.background = `url(${props.img}) center center / cover no-repeat`
+      return style
     }
+  },
 
-    return h('div', data, children)
+  render (h) {
+    const { tag, data } = this.generateRouteLink()
+
+    data.style = this.styles
+
+    return h(tag, data, this.$slots.default)
   }
 }

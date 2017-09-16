@@ -201,10 +201,10 @@ exports[`VTimePicker.js should change am/pm when updated from model 1`] = `
       </span>
     </div>
     <div>
-      <span class>
+      <span class="active">
         AM
       </span>
-      <span class="active">
+      <span class>
         PM
       </span>
     </div>

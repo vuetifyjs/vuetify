@@ -20,12 +20,12 @@ exports[`VSelect.js should have -1 tabindex when disabled 1`] = `
          style="display: inline-block;"
     >
       <div class="menu__content menu__content--select   menu__content--autocomplete"
-           style="max-height: 300px; min-width: 24px; max-width: auto; top: 12px; left: 0px; z-index: 6; display: none;"
+           style="max-height: 300px; min-width: 36px; max-width: auto; top: 12px; left: 0px; z-index: 6; display: none;"
       >
         <div class="card"
              style="height: auto;"
         >
-          <ul data-uid="17"
+          <ul data-uid="20"
               class="list"
           >
             <li disabled="disabled">
@@ -77,12 +77,12 @@ exports[`VSelect.js should have explicit tabindex passed through when autocomple
          style="display: inline-block;"
     >
       <div class="menu__content menu__content--select   menu__content--autocomplete"
-           style="max-height: 300px; min-width: 24px; max-width: auto; top: 12px; left: 0px; z-index: 6; display: none;"
+           style="max-height: 300px; min-width: 36px; max-width: auto; top: 12px; left: 0px; z-index: 6; display: none;"
       >
         <div class="card"
              style="height: auto;"
         >
-          <ul data-uid="22"
+          <ul data-uid="26"
               class="list"
           >
             <li disabled="disabled">
@@ -135,12 +135,12 @@ exports[`VSelect.js should have explicit tabindex passed through when not autoco
          style="display: inline-block;"
     >
       <div class="menu__content menu__content--select"
-           style="max-height: 300px; min-width: 24px; max-width: auto; top: 12px; left: 0px; z-index: 6; display: none;"
+           style="max-height: 300px; min-width: 36px; max-width: auto; top: 12px; left: 0px; z-index: 6; display: none;"
       >
         <div class="card"
              style="height: auto;"
         >
-          <ul data-uid="28"
+          <ul data-uid="33"
               class="list"
           >
             <li disabled="disabled">
@@ -200,12 +200,12 @@ exports[`VSelect.js should render buttons correctly when using items array with 
          style="display: inline-block;"
     >
       <div class="menu__content menu__content--select  menu__content--dropdown"
-           style="max-height: 300px; min-width: 55px; max-width: auto; top: 12px; left: 0px; z-index: 6; display: none;"
+           style="max-height: 300px; min-width: 68px; max-width: auto; top: 12px; left: -16px; z-index: 6; display: none;"
       >
         <div class="card"
              style="height: auto;"
         >
-          <ul data-uid="53"
+          <ul data-uid="62"
               class="list"
           >
             <li>
@@ -260,12 +260,12 @@ exports[`VSelect.js should render buttons correctly when using slot with segment
          style="display: inline-block;"
     >
       <div class="menu__content menu__content--select  menu__content--dropdown"
-           style="max-height: 300px; min-width: 55px; max-width: auto; top: 12px; left: 0px; z-index: 6; display: none;"
+           style="max-height: 300px; min-width: 68px; max-width: auto; top: 12px; left: -16px; z-index: 6; display: none;"
       >
         <div class="card"
              style="height: auto;"
         >
-          <ul data-uid="62"
+          <ul data-uid="72"
               class="list"
           >
             <li>

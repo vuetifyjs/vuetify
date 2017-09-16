@@ -9,7 +9,8 @@ theme(footer, "footer")
 .footer
   align-items: center
   display: flex
-  height: $footer-height
+  flex: 0 1 auto !important // Don't let devs break their code
+  min-height: $footer-height
   transition: .3s $transition.swing
 
   &--absolute, &--fixed
