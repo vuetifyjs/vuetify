@@ -2,50 +2,48 @@
 
 .badge
   position: relative
-
-  &:after
+  
+  &__badge
     color: $badge-color
-    content: attr(data-badge)
     display: flex
     position: absolute
     font-family: $badge-font-family
     font-feature-settings: 'liga'
+    font-size: $badge-font-size
     top: -($badge-height / 2)
     right: -($badge-width)
-    background-color: $theme.primary
     border-radius: $badge-border-radius
     height: $badge-height
     width: $badge-width
-    font-size: $badge-font-size
     justify-content: center
     align-items: center
     flex-direction: row
     flex-wrap: wrap
+    transition: $primary-transition
+    
+    .icon
+      font-size: $badge-font-size
 
   &--overlap
-    &:after
+    .badge__badge
       top: -8px
       right: -8px
 
     &.badge--left
-      &:after
+      .badge__badge
         left: -8px
         right: initial
 
     &.badge--bottom
-      &:after
+      .badge__badge
         bottom: -8px
         top: initial
 
-  &--icon
-    &:after
-      font-family: 'Material Icons'
-
   &--left
-    &:after
+    .badge__badge
       left: -($badge-width)
 
   &--bottom
-    &:after
+    .badge__badge
       bottom: -($badge-height / 2)
       top: initial;
