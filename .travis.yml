@@ -3,9 +3,9 @@ node_js:
   - "8"
 script:
   - yarn
-  - npm run build
-  - npm run test
   - npm run lint
+  - npm run test
+  - npm run build
 cache:
   yarn: true
 branches:
