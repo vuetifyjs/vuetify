@@ -38,7 +38,10 @@ export default {
   props: {
     activator: { default: null },
     allowOverflow: Boolean,
-    maxWidth: { default: 'auto' },
+    maxWidth: {
+      type: [Number, String],
+      default: 'auto'
+    },
     minWidth: [Number, String],
     nudgeBottom: {
       type: Number,
@@ -115,8 +118,8 @@ export default {
       let left = this.left ? a.right - c.width : a.left
 
       if (this.offsetX) left += this.left ? -a.width : a.width
-      if (this.nudgeLeft) left += this.nudgeLeft
-      if (this.nudgeRight) left -= this.nudgeRight
+      if (this.nudgeLeft) left -= this.nudgeLeft
+      if (this.nudgeRight) left += this.nudgeRight
 
       return left
     },
@@ -132,11 +135,13 @@ export default {
       return top + this.pageYOffset
     },
     calcXOverflow (left) {
+      const parsedMaxWidth = isNaN(parseInt(this.maxWidth))
+        ? 0
+        : parseInt(this.maxWidth)
       const innerWidth = this.getInnerWidth()
       const maxWidth = Math.max(
         this.dimensions.content.width,
-        this.calculatedMinWidth,
-        parseInt(this.maxWidth) || 0
+        parsedMaxWidth
       )
       const totalWidth = left + maxWidth
       const availableWidth = totalWidth - innerWidth

@@ -29,7 +29,6 @@ export default {
       type: String,
       required: true
     },
-    lazy: Boolean,
     transition: {
       type: [Boolean, String],
       default: 'tab-transition'
