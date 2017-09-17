@@ -154,7 +154,7 @@
         return children.join(' ')
       },
       computedItems () {
-        return this.filterDuplicates(this.items.concat(this.cachedItems))
+        return this.filterDuplicates(this.cachedItems.concat(this.items))
       },
       filteredItems () {
         // If we are not actively filtering
