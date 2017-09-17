@@ -132,7 +132,8 @@ export default {
         },
         'class': {
           [`input-group__${type}-icon`]: true,
-          'input-group__icon-cb': !!callback
+          'input-group__icon-cb': !!callback,
+          'input-group__icon-clearable': shouldClear
         },
         props: {
           disabled: this.disabled

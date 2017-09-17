@@ -14,13 +14,16 @@
   .input-group__append-icon
     transition: .3s $transition.linear-out-slow-in
 
+    &.input-group__icon-clearable
+      transition: none
+
   &.input-group--focused
     .input-group--select__autocomplete
       display: inline-block
       height: 30px
       opacity: 1
 
-    .input-group__append-icon
+    .input-group__append-icon:not(.input-group__icon-clearable)
       transform: rotate(-180deg)
 
   .input-group__input

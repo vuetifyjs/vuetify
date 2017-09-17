@@ -106,6 +106,7 @@ test('VSelect.vue', ({ mount }) => {
     const clear = wrapper.find('.input-group__append-icon')[0]
 
     await wrapper.vm.$nextTick()
+    expect(clear.element.classList).toContain('input-group__icon-clearable')
     expect(wrapper.vm.inputValue).toBe(1)
     expect(wrapper.html()).toMatchSnapshot()
 

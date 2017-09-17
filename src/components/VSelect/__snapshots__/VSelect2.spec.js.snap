@@ -101,7 +101,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and multi select 1`] =
       </div>
     </div>
     <i aria-hidden="true"
-       class="material-icons icon input-group__append-icon input-group__icon-cb"
+       class="material-icons icon input-group__append-icon input-group__icon-cb input-group__icon-clearable"
     >
       clear
     </i>
@@ -285,7 +285,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and single select 1`] 
       </div>
     </div>
     <i aria-hidden="true"
-       class="material-icons icon input-group__append-icon input-group__icon-cb"
+       class="material-icons icon input-group__append-icon input-group__icon-cb input-group__icon-clearable"
     >
       clear
     </i>
