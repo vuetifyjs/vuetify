@@ -1,5 +1,6 @@
 /**
  * Menu keyable
+ * 
  * @mixin
  *
  * Primarily used to support VSelect

@@ -2,6 +2,7 @@ import Positionable from './positionable'
 
 /**
  * Menuable
+ * 
  * @mixin
  *
  * Used for fixed or absolutely positioning
@@ -36,6 +37,29 @@ export default {
 
   props: {
     activator: { default: null },
+    allowOverflow: Boolean,
+    maxWidth: { default: 'auto' },
+    minWidth: [Number, String],
+    nudgeBottom: {
+      type: Number,
+      default: 0
+    },
+    nudgeLeft: {
+      type: Number,
+      default: 0
+    },
+    nudgeRight: {
+      type: Number,
+      default: 0
+    },
+    nudgeTop: {
+      type: Number,
+      default: 0
+    },
+    nudgeWidth: {
+      type: Number,
+      default: 0
+    },
     positionX: {
       type: Number,
       default: null
@@ -121,7 +145,7 @@ export default {
         left = (
           innerWidth -
           maxWidth -
-          (innerWidth > 1024 ? 30 : 12) // Account for scrollbar
+          (innerWidth > 1280 ? 30 : 12) // Account for scrollbar
         )
       } else if (this.left && left < 0) left = 12
 
@@ -159,6 +183,13 @@ export default {
       }
     },
     deactivate () {},
+    getActivator () {
+      if (this.activator) return this.activator
+
+      return this.$refs.activator.children
+        ? this.$refs.activator.children[0]
+        : this.$refs.activator
+    },
     getInnerHeight () {
       if (!this.hasWindow) return 0
 

@@ -1,92 +1,23 @@
 @import '../bootstrap'
 
-[data-tooltip]
+.tooltip
   position: relative
   
-  &:before
+  &__content
     background: $grey.darken-2
     border-radius: 2px
     color: #FFFFFF
     content: attr(data-tooltip)
     font-size: 12px
     display: inline-block
-    opacity: 0
     padding: 5px 8px
     position: absolute
     pointer-events: none
     text-transform: initial
     transition: .15s $transition.swing
     width: auto
-    white-space: pre
-    z-index: 99
     elevation(2)
-
-  &:hover
-    &:before
-      opacity: 0.9
-    
-  &[data-tooltip-location='bottom']
-    &:before
-      top: 100%
-      left: 50%
-      transform: translate3d(-50%, -14px, 0) scale(0)
-      transform-origin: center top
-      
-    &:hover
-      &:before
-        transform: translate3d(-50%, 14px, 0) scale(1)
-      
-  &[data-tooltip-location='top']
-    &:before
-      bottom: 100%
-      left: 50%
-      transform: translate3d(-50%, 14px, 0) scale(0)
-      transform-origin: center bottom
-      
-    &:hover
-      &:before
-        transform: translate3d(-50%, -14px, 0) scale(1)
-
-  &[data-tooltip-location='left']
-    &:before
-      right: 100%
-      transform: translate3d(14px, 0, 0) scale(0)
-      transform-origin: center right
-      
-    &:hover
-      &:before
-        transform: translate3d(-14px, 0, 0) scale(1)
-      
-  &[data-tooltip-location='right']
-    &:before
-      left: 100%
-      transform: translate3d(-14px, 0, 0) scale(0)
-      transform-origin: center left
-      
-    &:hover
-      &:before
-        transform: translate3d(14px, 0, 0) scale(1)
     
   @media $display-breakpoints.sm-and-down
-    &:before
+    .tooltip__content
       padding: 10px 16px
-      
-    &[data-tooltip-location='bottom']
-      &:hover
-        &:before
-          transform: translate3d(-50%, 24px, 0) scale(1)
-      
-    &[data-tooltip-location='top']
-      &:hover
-        &:before
-          transform: translate3d(-50%, -24px, 0) scale(1)
-      
-    &[data-tooltip-location='left']
-      &:hover
-        &:before
-          transform: translate3d(-24px, 0, 0) scale(1)
-      
-    &[data-tooltip-location='right']
-      &:hover
-        &:before
-          transform: translate3d(24px, 0, 0) scale(1)

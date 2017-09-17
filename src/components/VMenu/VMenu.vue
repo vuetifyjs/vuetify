@@ -46,7 +46,6 @@
     },
 
     props: {
-      allowOverflow: Boolean,
       auto: Boolean,
       closeOnClick: {
         type: Boolean,
@@ -59,28 +58,6 @@
       disabled: Boolean,
       fullWidth: Boolean,
       maxHeight: { default: 'auto' },
-      maxWidth: { default: 'auto' },
-      minWidth: [Number, String],
-      nudgeBottom: {
-        type: Number,
-        default: 0
-      },
-      nudgeLeft: {
-        type: Number,
-        default: 0
-      },
-      nudgeRight: {
-        type: Number,
-        default: 0
-      },
-      nudgeTop: {
-        type: Number,
-        default: 0
-      },
-      nudgeWidth: {
-        type: Number,
-        default: 0
-      },
       offsetX: Boolean,
       offsetY: Boolean,
       openOnClick: {
