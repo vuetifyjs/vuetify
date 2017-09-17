@@ -1,4 +1,6 @@
 import { VExpandTransition } from '../transitions'
+
+import Bootable from '../../mixins/bootable'
 import Toggleable from '../../mixins/toggleable'
 
 export default {
@@ -6,13 +8,7 @@ export default {
 
   inject: ['listClick', 'listClose'],
 
-  mixins: [Toggleable],
-
-  data () {
-    return {
-      isBooted: this.value
-    }
-  },
+  mixins: [Bootable, Toggleable],
 
   props: {
     group: String,
@@ -51,6 +47,8 @@ export default {
   },
 
   mounted () {
+    this.isBooted = this.isActive
+
     if (this.group) {
       this.isActive = this.matchRoute(this.$route.path)
     }
@@ -83,7 +81,7 @@ export default {
         value: this.isActive
       }],
       ref: 'group'
-    }, [this.lazy && !this.isBooted ? null : this.$slots.default])
+    }, this.showLazyContent(this.$slots.default))
 
     const item = h('div', {
       'class': this.classes,
