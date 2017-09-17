@@ -33,11 +33,18 @@ export default {
 
           if (this.isSelected(i)) {
             elm.setAttribute('data-selected', true)
-            elm.classList.add('btn--active')
+
+            if (!elm.classList.contains('btn--router')) {
+              elm.classList.add('btn--active')
+            }
+
             selected.push(i)
           } else {
             elm.removeAttribute('data-selected')
-            elm.classList.remove('btn--active')
+
+            if (!elm.classList.contains('btn--router')) {
+              elm.classList.remove('btn--active')
+            }
           }
 
           elm.dataset.index = i

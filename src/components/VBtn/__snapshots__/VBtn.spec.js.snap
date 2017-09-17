@@ -2,7 +2,7 @@
 
 exports[`VBtn.js should render a <button> tag when using to prop 1`] = `
 
-<button class="btn btn--raised">
+<button class="btn btn--raised btn--router">
 </button>
 
 `;

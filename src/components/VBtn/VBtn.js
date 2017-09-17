@@ -67,6 +67,7 @@ export default {
         'btn--raised': !this.flat,
         'btn--right': this.right,
         'btn--round': this.round,
+        'btn--router': this.to,
         'btn--small': this.small,
         'btn--top': this.top,
         'primary': this.primary && !this.outline && !this.flat,
