@@ -45,7 +45,7 @@ export default {
     },
     mobileBreakPoint: {
       type: Number,
-      default: 1280
+      default: 1264
     },
     permanent: Boolean,
     persistent: Boolean,
