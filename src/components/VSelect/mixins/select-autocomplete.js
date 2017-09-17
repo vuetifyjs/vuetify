@@ -1,5 +1,6 @@
 /**
  * Select autocomplete
+ * 
  * @mixin
  *
  * Handles logic when using the "autocomplete" prop

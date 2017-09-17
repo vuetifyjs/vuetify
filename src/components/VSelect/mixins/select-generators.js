@@ -2,6 +2,7 @@ import { getObjectValueByPath } from '../../../util/helpers'
 
 /**
  * Select generators
+ * 
  * @mixin
  * 
  * Used for creating the DOM elements for VSelect
@@ -187,7 +188,12 @@ export default {
       })
 
       if (!children.length) {
-        children.push(this.genTile(this.noDataText, true))
+        const noData = this.$slots['no-data']
+        if (noData) {
+          children.push(noData)
+        } else {
+          children.push(this.genTile(this.noDataText, true))
+        }
       }
 
       return this.$createElement('v-card', [

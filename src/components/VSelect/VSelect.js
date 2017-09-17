@@ -260,6 +260,9 @@ export default {
     isMultiple (val) {
       this.inputValue = val ? [] : null
     },
+    searchInput (val) {
+      this.searchValue = val
+    },
     searchValue (val) {
       // Wrap input to next line if overflowing
       if (this.$refs.input.scrollWidth > this.$refs.input.clientWidth) {
