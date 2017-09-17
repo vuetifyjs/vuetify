@@ -11,6 +11,10 @@ export default {
     isBooted: false
   }),
 
+  props: {
+    lazy: Boolean
+  },
+
   watch: {
     isActive () {
       this.isBooted = true

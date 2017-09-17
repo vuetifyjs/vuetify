@@ -246,4 +246,19 @@ test('VTextField.js', ({ mount }) => {
     expect(change).toBeCalledWith('fgh')
     expect(change.mock.calls).toHaveLength(1)
   })
+
+  it('should not make prepend icon clearable', () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        prependIcon: 'check',
+        appendIcon: 'check',
+        value: 'test',
+        clearable: true
+      }
+    })
+
+    const prepend = wrapper.find('.input-group__prepend-icon')[0]
+    expect(prepend.text()).toBe('check')
+    expect(prepend.element.classList).not.toContain('input-group__icon-cb')
+  })
 })

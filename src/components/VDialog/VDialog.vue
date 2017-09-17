@@ -20,7 +20,6 @@
       persistent: Boolean,
       fullscreen: Boolean,
       fullWidth: Boolean,
-      lazy: Boolean,
       origin: {
         type: String,
         default: 'center center'
@@ -108,9 +107,7 @@
           name: this.transition || '', // If false, show nothing
           origin: this.origin
         }
-      }, [h('div', data,
-        this.lazy && this.isBooted || !this.lazy ? this.$slots.default : null
-      )])
+      }, [h('div', data, this.showLazyContent(this.$slots.default))])
 
       children.push(h('div', {
         'class': 'dialog__content',
