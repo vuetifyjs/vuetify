@@ -1,6 +1,6 @@
 /**
  * Select autocomplete
- * 
+ *
  * @mixin
  *
  * Handles logic when using the "autocomplete" prop
@@ -19,6 +19,10 @@ export default {
           .toLowerCase()
           .indexOf(query.toString().toLowerCase()) > -1
       }
+    },
+    selectionKeys: {
+      type: Array,
+      default: () => [9, 13] // Tab and enter
     }
   },
 
@@ -31,15 +35,19 @@ export default {
       )
     },
     onKeyDown (e) {
-      // If enter or space is pressed, open menu
-      if (!this.menuIsActive &&
-        [13, 32, 38, 40].includes(e.keyCode)
-      ) {
+      // If enter, space, up, or down is pressed, open menu
+      if (!this.menuIsActive && [13, 32, 38, 40].includes(e.keyCode)) {
         return this.showMenuItems()
-      } else if ([9, 27].includes(e.keyCode)) {
-        // If select is being tabbed, blur
+      }
+
+      // If escape or tab with no search, blur
+      if (e.keyCode === 27 || e.keyCode === 9 && !this.searchValue) {
         return this.blur()
-      } else if (e.keyCode === 13 &&
+      }
+
+      if (e.keyCode === 9) e.preventDefault()
+
+      if (this.selectionKeys.includes(e.keyCode) &&
         this.searchValue &&
         this.tags &&
         !this.filteredItems.length
