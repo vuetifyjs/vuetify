@@ -330,14 +330,16 @@ test('VSelect.js', ({ mount, shallow }) => {
        autocomplete: true,
        cacheItems: true,
        returnObject: true,
+       itemText: 'text',
+       itemValue: 'id',
        items: [],
       }
     })
 
     wrapper.setProps({items: [{id: 1, text: 'A'}]})
-    expect(wrapper.vm.cachedItems).toHaveLength(1)
+    expect(wrapper.vm.computedItems).toHaveLength(1)
     wrapper.setProps({items: [{id: 1, text: 'A'}]})
-    expect(wrapper.vm.cachedItems).toHaveLength(1)
+    expect(wrapper.vm.computedItems).toHaveLength(1)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 })

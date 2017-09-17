@@ -157,7 +157,7 @@ export default {
       return children.join(' ')
     },
     computedItems () {
-      return this.filterDuplicates(this.items.concat(this.cachedItems))
+      return this.filterDuplicates(this.cachedItems.concat(this.items))
     },
     filteredItems () {
       // If we are not actively filtering
@@ -242,7 +242,7 @@ export default {
     },
     items (val) {
       if (this.cacheItems) {
-        this.cachedItems = this.returnObject ? [...val] : this.filterDuplicates(this.cachedItems.concat(val))
+        this.cachedItems = this.filterDuplicates(this.cachedItems.concat(val))
       }
 
       this.$refs.menu.listIndex = -1
@@ -368,7 +368,8 @@ export default {
       return true
     },
     filterDuplicates (arr) {
-      return arr.filter((el, i, self) => i === self.indexOf(el))
+      const val = this.returnObject ? this.getValue : el => el
+      return arr.filter((el, i, self) => i === self.findIndex(e => val(e) === val(el)))
     },
     focus () {
       this.isActive = true
