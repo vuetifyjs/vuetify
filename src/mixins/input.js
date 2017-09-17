@@ -120,7 +120,7 @@ export default {
       )
     },
     genIcon (type, defaultCallback = null) {
-      const shouldClear = this.clearable && this.isDirty
+      const shouldClear = type === 'append' && this.clearable && this.isDirty
       const icon = shouldClear ? 'clear' : this[`${type}Icon`]
       const callback = shouldClear
         ? this.clearableCallback
