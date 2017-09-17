@@ -17,12 +17,3 @@ exports[`VSpeedDial.js should render component with custom direction and match s
 </div>
 
 `;
-
-exports[`VSpeedDial.js should render component with custom transition and match snapshot 1`] = `
-
-<div class="speed-dial speed-dial--direction-top">
-  <div class="speed-dial__list">
-  </div>
-</div>
-
-`;

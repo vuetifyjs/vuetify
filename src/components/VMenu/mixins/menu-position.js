@@ -1,5 +1,6 @@
 /**
  * Menu position
+ * 
  * @mixin
  *
  * Used for calculating an automatic position (used for VSelect)

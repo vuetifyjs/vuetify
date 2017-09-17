@@ -61,7 +61,7 @@ export default {
         domProps: { href: 'javascript:;' },
         on: { click: () => this.$emit('input', false) }
       }, [
-        h('v-icon', {
+        h(VIcon, {
           props: {
             right: true
           }

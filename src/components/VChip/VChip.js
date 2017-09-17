@@ -1,10 +1,15 @@
 require('../../stylus/components/_chips.styl')
 
+import VIcon from '../VIcon'
 import Themeable from '../../mixins/themeable'
 import Toggleable from '../../mixins/toggleable'
 
 export default {
   name: 'v-chip',
+
+  components: {
+    VIcon
+  },
 
   mixins: [Themeable, Toggleable],
 
@@ -21,6 +26,7 @@ export default {
       default: true
     }
   },
+
   computed: {
     classes () {
       return {
@@ -62,7 +68,7 @@ export default {
       }
 
       children.push(h('div', data, [
-        h('v-icon', { props: { right: true } }, 'cancel')
+        h(VIcon, { props: { right: true } }, 'cancel')
       ]))
     }
 

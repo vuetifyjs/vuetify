@@ -1,5 +1,6 @@
 /**
  * Menu generators
+ * 
  * @mixin
  *
  * Used for creating the DOM elements for VMenu

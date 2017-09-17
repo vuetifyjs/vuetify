@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Vslider.vue shoud work 1`] = `
+exports[`Vslider.vue should match a snapshot 1`] = `
 
 <div role="slider"
      tabindex="0"

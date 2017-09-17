@@ -45,7 +45,7 @@ export default {
         name: 'show',
         value: this.isActive
       }]
-    }, this.$slots.badge)
+    }, this.$slots.activator)
 
     return h('span', {
       staticClass: 'badge',

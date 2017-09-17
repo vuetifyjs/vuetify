@@ -1,7 +1,8 @@
 ﻿import { test } from '~util/testing'
+import { mount } from 'avoriaz'
 import VCheckbox from '~components/VCheckbox'
 
-test('VCheckbox.js', ({ mount }) => {
+test('VCheckbox.js', () => {
   it('should return true when clicked', () => {
     const wrapper = mount(VCheckbox, {
       propsData: {
@@ -9,14 +10,16 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const change = jest.fn()
-    wrapper.instance().$on('change', change)
-    wrapper.find('.input-group--selection-controls__ripple')[0].trigger('click')
+    const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
 
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    ripple.trigger('click')
     expect(change).toBeCalledWith(true)
   })
 
-  it('should return a value when clicked with a specified value', () => {
+  it('should return a value when toggled on with a specified value', () => {
     const wrapper = mount(VCheckbox, {
       propsData: {
         value: 'John',
@@ -24,14 +27,16 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const change = jest.fn()
-    wrapper.instance().$on('change', change)
-    wrapper.find('.input-group--selection-controls__ripple')[0].trigger('click')
+    const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
 
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    ripple.trigger('click')
     expect(change).toBeCalledWith('John')
   })
 
-  it('should return null when clicked with a specified value', () => {
+  it('should return null when toggled off with a specified value', () => {
     const wrapper = mount(VCheckbox, {
       propsData: {
         value: 'John',
@@ -39,15 +44,16 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const change = jest.fn()
-    wrapper.instance().$on('change', change)
-    wrapper.find('.input-group--selection-controls__ripple')[0].trigger('click')
+    const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
 
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    ripple.trigger('click')
     expect(change).toBeCalledWith(null)
   })
 
   it('should toggle when label is clicked', () => {
-    const change = jest.fn()
     const wrapper = mount(VCheckbox, {
       propsData: {
         label: 'Label',
@@ -57,9 +63,11 @@ test('VCheckbox.js', ({ mount }) => {
     })
 
     const label = wrapper.find('label')[0]
-    wrapper.instance().$on('change', change)
-    label.trigger('click')
 
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    label.trigger('click')
     expect(change).toBeCalled()
   })
 
@@ -70,16 +78,15 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    let inputGroup = wrapper.find('.input-group')[0]
+    const inputGroup = wrapper.find('.input-group')[0]
+
     expect(inputGroup.getAttribute('role')).toBe('checkbox')
     expect(inputGroup.getAttribute('aria-checked')).toBe('false')
 
     wrapper.setProps({ 'inputValue': true })
-    inputGroup = wrapper.find('.input-group')[0]
     expect(inputGroup.getAttribute('aria-checked')).toBe('true')
 
     wrapper.setProps({ 'indeterminate': true })
-    inputGroup = wrapper.find('.input-group')[0]
     expect(inputGroup.getAttribute('aria-checked')).toBe('mixed')
   })
 
@@ -114,13 +121,12 @@ test('VCheckbox.js', ({ mount }) => {
     })
 
     const change = jest.fn()
-    wrapper.instance().$on('change', change)
+    wrapper.vm.$on('change', change)
 
-    wrapper.vm.$el.dispatchEvent(new KeyboardEvent('keydown', { keyCode: 13 }))
-    expect(change).toBeCalled()
+    wrapper.trigger('keydown.enter')
+    wrapper.trigger('keydown.space')
 
-    wrapper.vm.$el.dispatchEvent(new KeyboardEvent('keydown', { keyCode: 32 }))
-    expect(change).toBeCalled()
+    expect(change.mock.calls).toHaveLength(2)
   })
 
   it('should not toggle on space or enter with blank toggleKeys', () => {
@@ -132,30 +138,29 @@ test('VCheckbox.js', ({ mount }) => {
     })
 
     const change = jest.fn()
-    wrapper.instance().$on('change', change)
+    wrapper.vm.$on('change', change)
 
-    wrapper.vm.$el.dispatchEvent(new KeyboardEvent('keydown', { keyCode: 13 }))
-    expect(change).not.toBeCalled()
+    wrapper.trigger('keydown.enter')
+    wrapper.trigger('keydown.space')
 
-    wrapper.vm.$el.dispatchEvent(new KeyboardEvent('keydown', { keyCode: 32 }))
     expect(change).not.toBeCalled()
   })
 
-  it('should toggle on just space with custom toggleKeys', () => {
+  it('should toggle only on custom toggleKeys', () => {
     const wrapper = mount(VCheckbox, {
       propsData: {
         inputValue: false,
-        toggleKeys: [32]
+        toggleKeys: [32] // space
       }
     })
 
     const change = jest.fn()
-    wrapper.instance().$on('change', change)
+    wrapper.vm.$on('change', change)
 
-    wrapper.vm.$el.dispatchEvent(new KeyboardEvent('keydown', { keyCode: 13 }))
+    wrapper.trigger('keydown.enter')
     expect(change).not.toBeCalled()
 
-    wrapper.vm.$el.dispatchEvent(new KeyboardEvent('keydown', { keyCode: 32 }))
+    wrapper.trigger('keydown.space')
     expect(change).toBeCalled()
   })
 })

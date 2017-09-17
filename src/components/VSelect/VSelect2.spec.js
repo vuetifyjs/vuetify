@@ -2,23 +2,8 @@ import { test } from '~util/testing'
 import VSelect from '~components/VSelect'
 
 test('VSelect.vue', ({ mount }) => {
-  const up = new Event('keydown')
-  const right = new Event('keydown')
-  const down = new Event('keydown')
-  const left = new Event('keydown')
-  const space = new Event('keydown')
-  const enter = new Event('keydown')
   const backspace = new Event('keydown')
-  const del = new Event('keydown')
-
-  up.keyCode = 38
-  right.keyCode = 39
-  down.keyCode = 40
-  left.keyCode = 37
-  space.keyCode = 32
-  enter.keyCode = 13
   backspace.keyCode = 8
-  del.keyCode = 46
 
   // Inspired by https://github.com/vuetifyjs/vuetify/pull/1425 - Thanks @kevmo314
   it('should open the select when focused and enter, space, up or down are pressed', async () => {
@@ -29,24 +14,15 @@ test('VSelect.vue', ({ mount }) => {
       }
     })
 
-    wrapper.vm.focus()
+    for (const key of ['up', 'down', 'space', 'enter']) {
+      wrapper.vm.focus()
+      expect(wrapper.vm.menuIsActive).toBe(false)
+      wrapper.trigger(`keydown.${key}`)
+      expect(wrapper.vm.menuIsActive).toBe(true)
+      wrapper.vm.blur()
+      await wrapper.vm.$nextTick()
+    }
 
-    wrapper.vm.$el.dispatchEvent(up)
-    expect(wrapper.data().isActive).toBe(true)
-    wrapper.vm.isActive = false
-    await wrapper.vm.$nextTick()
-    wrapper.vm.$el.dispatchEvent(down)
-    expect(wrapper.data().isActive).toBe(true)
-    wrapper.vm.isActive = false
-    await wrapper.vm.$nextTick()
-    wrapper.vm.$el.dispatchEvent(space)
-    await wrapper.vm.$nextTick()
-    expect(wrapper.data().isActive).toBe(true)
-    wrapper.vm.isActive = false
-    await wrapper.vm.$nextTick()
-    wrapper.vm.$el.dispatchEvent(enter)
-    await wrapper.vm.$nextTick()
-    expect(wrapper.data().isActive).toBe(true)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
@@ -61,8 +37,8 @@ test('VSelect.vue', ({ mount }) => {
     })
 
     const clear = wrapper.find('.input-group__append-icon')[0]
-    const input = jest.fn()
 
+    const input = jest.fn()
     wrapper.vm.$on('input', input)
 
     await wrapper.vm.$nextTick()
@@ -87,10 +63,11 @@ test('VSelect.vue', ({ mount }) => {
     })
 
     const input = wrapper.find('.input-group__input')[0]
+
     input.trigger('click')
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.$refs.menu.isActive).toBe(false)
+    expect(wrapper.vm.menuIsActive).toBe(false)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
@@ -105,14 +82,13 @@ test('VSelect.vue', ({ mount }) => {
     })
 
     wrapper.setProps({ items: ['bar', 'baz'] })
-    await wrapper.vm.$nextTick()
-    expect(wrapper.vm.computedItems.length).toBe(2)
+    expect(wrapper.vm.computedItems).toHaveLength(2)
+
     wrapper.setProps({ items: ['foo'] })
-    await wrapper.vm.$nextTick()
-    expect(wrapper.vm.computedItems.length).toBe(3)
+    expect(wrapper.vm.computedItems).toHaveLength(3)
+
     wrapper.setProps({ items: ['bar'] })
-    await wrapper.vm.$nextTick()
-    expect(wrapper.vm.computedItems.length).toBe(3)
+    expect(wrapper.vm.computedItems).toHaveLength(3)
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
@@ -128,14 +104,16 @@ test('VSelect.vue', ({ mount }) => {
     })
 
     const clear = wrapper.find('.input-group__append-icon')[0]
+
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.inputValue).toBe(1)
     expect(wrapper.html()).toMatchSnapshot()
+
     clear.trigger('click')
     await wrapper.vm.$nextTick()
-
     expect(wrapper.vm.inputValue).toBe(null)
     expect(wrapper.html()).toMatchSnapshot()
+
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
@@ -150,16 +128,19 @@ test('VSelect.vue', ({ mount }) => {
       }
     })
 
+    const clear = wrapper.find('.input-group__append-icon')[0]
+
     const change = jest.fn()
     wrapper.vm.$on('change', change)
+
     await wrapper.vm.$nextTick()
-    const clear = wrapper.find('.input-group__append-icon')[0]
     expect(wrapper.html()).toMatchSnapshot()
+
     clear.trigger('click')
     await wrapper.vm.$nextTick()
-
     expect(change).toHaveBeenCalledWith([])
     expect(wrapper.html()).toMatchSnapshot()
+
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
@@ -172,13 +153,19 @@ test('VSelect.vue', ({ mount }) => {
       }
     })
 
+    const input = wrapper.find('input')[0]
+
     const change = jest.fn()
     wrapper.vm.$on('change', change)
-    wrapper.vm.isActive = true
+
+    wrapper.vm.focus()
     await wrapper.vm.$nextTick()
-    wrapper.vm.searchValue = 'foo'
+
+    input.element.value = 'foo'
+    input.trigger('input')
     await wrapper.vm.$nextTick()
-    wrapper.vm.onKeyDown(enter)
+
+    input.trigger('keydown.enter')
     await wrapper.vm.$nextTick()
 
     expect(change).toHaveBeenCalledWith(['foo'])
@@ -194,17 +181,16 @@ test('VSelect.vue', ({ mount }) => {
       }
     })
 
-    wrapper.vm.isActive = true
+    const input = wrapper.find('input')[0]
+
+    wrapper.vm.focus()
     await wrapper.vm.$nextTick()
-    wrapper.vm.onKeyDown(left)
-    await wrapper.vm.$nextTick()
-    expect(wrapper.vm.selectedIndex).toBe(1)
-    wrapper.vm.onKeyDown(left)
-    await wrapper.vm.$nextTick()
-    expect(wrapper.vm.selectedIndex).toBe(0)
-    wrapper.vm.onKeyDown(left)
-    await wrapper.vm.$nextTick()
-    expect(wrapper.vm.selectedIndex).toBe(-1)
+
+    for (const index of [1, 0, -1]) {
+      input.trigger('keydown.left')
+      await wrapper.vm.$nextTick()
+      expect(wrapper.vm.selectedIndex).toBe(index)
+    }
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
@@ -218,22 +204,24 @@ test('VSelect.vue', ({ mount }) => {
       }
     })
 
+    const input = wrapper.find('input')[0]
+
     const change = jest.fn()
     wrapper.vm.$on('change', change)
 
-    wrapper.vm.isActive = true
-    await wrapper.vm.$nextTick()
-    wrapper.vm.onKeyDown(left)
-    await wrapper.vm.$nextTick()
+    wrapper.vm.focus()
+
+    input.trigger('keydown.left')
     expect(wrapper.vm.selectedIndex).toBe(1)
-    wrapper.vm.onKeyDown(del)
-    await wrapper.vm.$nextTick()
+
+    input.trigger('keydown.delete')
     expect(change).toHaveBeenCalledWith(['foo'])
     expect(wrapper.vm.selectedIndex).toBe(0)
-    wrapper.vm.onKeyDown(backspace)
-    await wrapper.vm.$nextTick()
+
+    input.element.dispatchEvent(backspace) // Avoriaz doesn't wrap keydown.backspace
     expect(change).toHaveBeenCalledWith([])
     expect(wrapper.vm.selectedIndex).toBe(-1)
+
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
@@ -262,9 +250,9 @@ test('VSelect.vue', ({ mount }) => {
       }
     })
 
-    expect(wrapper.vm.selectedItems.length).toBe(1)
-    expect(wrapper2.vm.selectedItems.length).toBe(2)
-    expect(wrapper3.vm.selectedItems.length).toBe(0)
+    expect(wrapper.vm.selectedItems).toHaveLength(1)
+    expect(wrapper2.vm.selectedItems).toHaveLength(2)
+    expect(wrapper3.vm.selectedItems).toHaveLength(0)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
@@ -291,12 +279,14 @@ test('VSelect.vue', ({ mount }) => {
       }
     })
 
-    expect(wrapper.find('input')[0].hasStyle('display', 'none'))
+    const input = wrapper.find('input')[0]
+
+    expect(input.hasStyle('display', 'none'))
 
     wrapper.trigger('focus')
     await wrapper.vm.$nextTick()
+    expect(input.hasStyle('display', 'block'))
 
-    expect(wrapper.find('input')[0].hasStyle('display', 'block'))
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
@@ -344,7 +334,7 @@ test('VSelect.vue', ({ mount }) => {
 
     const selections = wrapper.find('.input-group__selections__comma')
 
-    expect(selections.length > 0).toBe(true)
+    expect(selections.length).toBeGreaterThan(0)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
@@ -362,19 +352,17 @@ test('VSelect.vue', ({ mount }) => {
       }
     })
 
-    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.selectedItems).toHaveLength(1)
+
     wrapper.trigger('click')
     const item = wrapper.find('li')[0]
     item.trigger('click')
-    await wrapper.vm.$nextTick()
-    wrapper.update()
-    await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.selectedItems.length === 0).toBe(true)
+    expect(wrapper.vm.selectedItems).toHaveLength(0)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
-  it('should open menu when clicked on arrow', async () => {
+  it('should open menu when arrow is clicked', async () => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,
       propsData: {
@@ -382,13 +370,13 @@ test('VSelect.vue', ({ mount }) => {
       }
     })
 
+    const arrow = wrapper.find('.input-group__append-icon')[0]
+
     expect(wrapper.vm.menuIsActive).toBe(false)
 
-    const arrow = wrapper.find('.input-group__append-icon')[0]
     arrow.trigger('click')
-    await wrapper.vm.$nextTick()
-
     expect(wrapper.vm.menuIsActive).toBe(true)
+
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 })

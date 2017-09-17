@@ -1,11 +1,12 @@
 require('../../stylus/components/_footer.styl')
 
 import Applicationable from '../../mixins/applicationable'
+import Themeable from '../../mixins/themeable'
 
 export default {
   name: 'v-footer',
 
-  mixins: [Applicationable],
+  mixins: [Applicationable, Themeable],
 
   props: {
     absolute: Boolean,
@@ -50,7 +51,9 @@ export default {
       staticClass: 'footer',
       'class': {
         'footer--absolute': this.absolute,
-        'footer--fixed': this.fixed
+        'footer--fixed': this.fixed,
+        'theme--dark': this.dark,
+        'theme--light': this.light
       },
       style: {
         paddingLeft: `${this.paddingLeft}px`,

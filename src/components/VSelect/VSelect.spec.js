@@ -14,30 +14,30 @@ test('VSelect.js', ({ mount, shallow }) => {
     })
 
     const change = jest.fn()
-    wrapper.instance().$on('change', change)
-    wrapper.instance().selectItem(item)
+    wrapper.vm.$on('change', change)
+    wrapper.vm.selectItem(item)
 
     expect(change).toBeCalledWith([0])
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
-  // it('should be in an error state', async () => {
-  //   const wrapper = mount(VSelect, {
-  //     propsData: {
-  //       value: null,
-  //       items: [0, 1, 2],
-  //       rules: [(v) => !!v || 'Required']
-  //     }
-  //   })
+  it('should be in an error state', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        value: null,
+        items: [0, 1, 2],
+        rules: [(v) => !!v || 'Required']
+      }
+    })
 
-  //   wrapper.instance().focus()
-  //   await wrapper.vm.$nextTick()
-  //   wrapper.instance().blur()
-  //   await wrapper.vm.$nextTick()
+    wrapper.vm.focus()
+    wrapper.vm.blur()
+    await wrapper.vm.$nextTick()
 
-  //   expect(wrapper.vm.hasError).toBe(true)
-  //   expect('Application is missing <v-app> component.').toHaveBeenTipped()
-  // })
+    expect(wrapper.vm.hasError).toBe(true)
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 
   it('should disable list items', () => {
     const wrapper = mount(VSelect, {
@@ -52,7 +52,7 @@ test('VSelect.js', ({ mount, shallow }) => {
 
     const item = wrapper.find('li')[0]
 
-    expect(item.element.__vue__.$options.propsData.disabled).toBe(true)
+    expect(item.element.getAttribute('disabled')).toBe('disabled')
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
@@ -67,7 +67,6 @@ test('VSelect.js', ({ mount, shallow }) => {
 
     expect(wrapper.vm.$refs.input.tabIndex).toBe(-1)
     expect(wrapper.vm.$el.tabIndex).toBe(-1)
-    expect(wrapper.html()).toMatchSnapshot()
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
@@ -82,7 +81,6 @@ test('VSelect.js', ({ mount, shallow }) => {
 
     expect(wrapper.vm.$refs.input.tabIndex).toBe(10)
     expect(wrapper.vm.$el.tabIndex).toBe(-1)
-    expect(wrapper.html()).toMatchSnapshot()
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
@@ -96,27 +94,31 @@ test('VSelect.js', ({ mount, shallow }) => {
 
     expect(wrapper.vm.$refs.input.tabIndex).toBe(-1)
     expect(wrapper.vm.$el.tabIndex).toBe(10)
-    expect(wrapper.html()).toMatchSnapshot()
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
-  // Need to fix this
-  // it('should emit search input changes', async () => {
-  //   const wrapper = mount(VSelect, {
-  //     propsData: {
-  //       autocomplete: true
-  //     }
-  //   })
+  it('should emit search input changes', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        autocomplete: true,
+        debounceSearch: 0
+      }
+    })
 
-  //   const update = jest.fn()
+    const input = wrapper.find('input')[0]
 
-  //   wrapper.vm.$on('update:searchInput', update)
-  //   wrapper.vm.isBooted = true
-  //   wrapper.vm.searchValue = 'test'
+    const update = jest.fn()
+    wrapper.vm.$on('update:searchInput', update)
 
-  //   expect(update).toBeCalledWith('test')
-  //   expect('Application is missing <v-app> component.').toHaveBeenTipped()
-  // })
+    await wrapper.vm.$nextTick()
+
+    input.element.value = 'test'
+    input.trigger('input')
+    await new Promise(resolve => setTimeout(resolve, 1))
+
+    expect(update).toBeCalledWith('test')
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 
   it('should filter autocomplete search results', () => {
     const wrapper = mount(VSelect, {
@@ -128,7 +130,7 @@ test('VSelect.js', ({ mount, shallow }) => {
 
     wrapper.vm.searchValue = 'foo'
 
-    expect(wrapper.vm.filteredItems.length).toBe(1)
+    expect(wrapper.vm.filteredItems).toHaveLength(1)
     expect(wrapper.vm.filteredItems[0]).toBe('foo')
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
@@ -143,7 +145,7 @@ test('VSelect.js', ({ mount, shallow }) => {
 
     wrapper.vm.searchValue = 1
 
-    expect(wrapper.vm.filteredItems.length).toBe(1)
+    expect(wrapper.vm.filteredItems).toHaveLength(1)
     expect(wrapper.vm.filteredItems[0]).toBe(1)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
@@ -292,46 +294,33 @@ test('VSelect.js', ({ mount, shallow }) => {
   it('should render role=combobox correctly when autocomplete', async () => {
     const wrapper = mount(VSelect, {
       propsData: {
-        autocomplete: true,
-        items: []
+        autocomplete: true
       }
     })
 
-    let ele = wrapper.find('.input-group--select')
-    expect(ele.length).toBe(1)
-    expect(ele[0].element.getAttribute('role')).toBeFalsy()
+    const inputGroup = wrapper.find('.input-group--select')[0]
+    expect(inputGroup.element.getAttribute('role')).toBeFalsy()
 
-    ele = wrapper.find('.input-group--select input')
-    expect(ele.length).toBe(1)
-    expect(ele[0].getAttribute('role')).toBe('combobox')
+    const input = wrapper.find('input')[0]
+    expect(input.getAttribute('role')).toBe('combobox')
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
   it('should render role=combobox correctly when not autocomplete)', async () => {
-    const wrapper = mount(VSelect, {
-      propsData: {
-        items: []
-      }
-    })
+    const wrapper = mount(VSelect)
 
-    const ele = wrapper.find('.input-group--select')
-    expect(ele.length).toBe(1)
-    expect(ele[0].getAttribute('role')).toBe('combobox')
+    const inputGroup = wrapper.find('.input-group--select')[0]
+    expect(inputGroup.element.getAttribute('role')).toBe('combobox')
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
   it('should render aria-hidden=true on arrow icon', async () => {
-    const wrapper = mount(VSelect, {
-      propsData: {
-        items: []
-      }
-    })
+    const wrapper = mount(VSelect)
 
-    const icon = wrapper.find('i.input-group__append-icon')
-    expect(icon.length).toBe(1)
-    expect(icon[0].getAttribute('aria-hidden')).toBe('true')
+    const icon = wrapper.find('.input-group__append-icon')[0]
+    expect(icon.hasAttribute('aria-hidden')).toBe(true)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
@@ -346,9 +335,9 @@ test('VSelect.js', ({ mount, shallow }) => {
     })
 
     wrapper.setProps({items: [{id: 1, text: 'A'}]})
-    expect(wrapper.vm.cachedItems.length).toBe(1)
+    expect(wrapper.vm.cachedItems).toHaveLength(1)
     wrapper.setProps({items: [{id: 1, text: 'A'}]})
-    expect(wrapper.vm.cachedItems.length).toBe(1)
+    expect(wrapper.vm.cachedItems).toHaveLength(1)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 })

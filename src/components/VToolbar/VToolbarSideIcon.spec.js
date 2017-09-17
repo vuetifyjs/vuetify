@@ -22,17 +22,15 @@ test('VToolbarSideIcon.js', ({ mount, functionalContext }) => {
   })
 
   it('should pass through events properly', () => {
-    const fn = jest.fn()
+    const click = jest.fn()
     const context = functionalContext({
-      on: {
-        click: fn
-      }
+      on: { click }
     })
     const wrapper = mount(VToolbarSideIcon, context)
 
     wrapper.trigger('click')
 
-    expect(fn).toBeCalled()
+    expect(click).toBeCalled()
   })
 
   it('should pass through props to button component', () => {

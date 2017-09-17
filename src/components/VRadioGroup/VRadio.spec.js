@@ -1,5 +1,5 @@
 import { test } from '~util/testing'
-import { /* VRadioGroup, */ VRadio } from '~components/VRadioGroup'
+import { VRadioGroup, VRadio } from '~components/VRadioGroup'
 
 test('VRadio.vue', ({ mount }) => {
   it('should advise about v-radio-group being necessary', () => {
@@ -14,14 +14,14 @@ test('VRadio.vue', ({ mount }) => {
   })
 
   // TODO: Enable test when there's a way to test $parent.$vnode.tag
-  // it('should not advise about v-radio-group being necessary in VRadioGroup', () => {
-  //   const wrapper = mount(VRadioGroup, {
-  //     slots: {
-  //       default: [VRadio]
-  //     }
-  //   })
-  //   // no expectation other than a lack of tip
-  // })
+  it.skip('should not advise about v-radio-group being necessary in VRadioGroup', () => {
+    const wrapper = mount(VRadioGroup, {
+      slots: {
+        default: [VRadio]
+      }
+    })
+    // no expectation other than a lack of tip
+  })
 
   it('should render role and aria-checked attributes on input group', () => {
     const wrapper = mount(VRadio, {
