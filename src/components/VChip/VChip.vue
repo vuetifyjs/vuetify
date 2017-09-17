@@ -1,10 +1,14 @@
 <script>
-  import VIcon from '~components/VIcon'
+  import VIcon from '../VIcon'
   import Themeable from '../../mixins/themeable'
   import Toggleable from '../../mixins/toggleable'
 
   export default {
     name: 'v-chip',
+
+    components: {
+      VIcon
+    },
 
     mixins: [Themeable, Toggleable],
 
@@ -21,6 +25,7 @@
         default: true
       }
     },
+
     computed: {
       classes () {
         return {
