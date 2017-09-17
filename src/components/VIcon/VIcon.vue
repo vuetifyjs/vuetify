@@ -44,6 +44,10 @@
       data.staticClass = (`${iconType} icon ${data.staticClass || ''}`).trim()
       data.attrs = data.attrs || {}
 
+      if(!('aria-hidden' in data.attrs)) {
+        data.attrs['aria-hidden'] = true
+      }
+
       const classes = {
         'icon--disabled': props.disabled,
         'icon--large': props.large,

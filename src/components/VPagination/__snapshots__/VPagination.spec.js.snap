@@ -7,7 +7,9 @@ exports[`VPagination.vue emits an event when next or previous is clicked 1`] = `
     <a href="#!"
        class="pagination__navigation"
     >
-      <i class="material-icons icon">
+      <i aria-hidden="true"
+         class="material-icons icon"
+      >
         chevron_left
       </i>
     </a>
@@ -51,7 +53,9 @@ exports[`VPagination.vue emits an event when next or previous is clicked 1`] = `
     <a href="#!"
        class="pagination__navigation"
     >
-      <i class="material-icons icon">
+      <i aria-hidden="true"
+         class="material-icons icon"
+      >
         chevron_right
       </i>
     </a>
@@ -67,7 +71,9 @@ exports[`VPagination.vue should only render middle of range if length is big and
     <a href="#!"
        class="pagination__navigation"
     >
-      <i class="material-icons icon">
+      <i aria-hidden="true"
+         class="material-icons icon"
+      >
         chevron_left
       </i>
     </a>
@@ -226,7 +232,9 @@ exports[`VPagination.vue should only render middle of range if length is big and
     <a href="#!"
        class="pagination__navigation"
     >
-      <i class="material-icons icon">
+      <i aria-hidden="true"
+         class="material-icons icon"
+      >
         chevron_right
       </i>
     </a>
@@ -242,7 +250,9 @@ exports[`VPagination.vue should only render start and end of range if length is 
     <a href="#!"
        class="pagination__navigation"
     >
-      <i class="material-icons icon">
+      <i aria-hidden="true"
+         class="material-icons icon"
+      >
         chevron_left
       </i>
     </a>
@@ -403,7 +413,9 @@ exports[`VPagination.vue should only render start and end of range if length is 
     <a href="#!"
        class="pagination__navigation"
     >
-      <i class="material-icons icon">
+      <i aria-hidden="true"
+         class="material-icons icon"
+      >
         chevron_right
       </i>
     </a>
@@ -419,7 +431,9 @@ exports[`VPagination.vue should use totalVisible prop if defined 1`] = `
     <a href="#!"
        class="pagination__navigation"
     >
-      <i class="material-icons icon">
+      <i aria-hidden="true"
+         class="material-icons icon"
+      >
         chevron_left
       </i>
     </a>
@@ -494,7 +508,9 @@ exports[`VPagination.vue should use totalVisible prop if defined 1`] = `
     <a href="#!"
        class="pagination__navigation"
     >
-      <i class="material-icons icon">
+      <i aria-hidden="true"
+         class="material-icons icon"
+      >
         chevron_right
       </i>
     </a>
