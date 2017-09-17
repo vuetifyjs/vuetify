@@ -32,7 +32,6 @@ export default {
 
   props: {
     hideActions: Boolean,
-    lazy: Boolean,
     ripple: Boolean
   },
 
