@@ -12,7 +12,6 @@ export default {
 
   props: {
     group: String,
-    lazy: Boolean,
     noAction: Boolean
   },
 
