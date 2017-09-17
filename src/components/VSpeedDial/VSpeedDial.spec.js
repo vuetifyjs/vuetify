@@ -8,16 +8,6 @@ test('VSpeedDial.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render component with custom transition and match snapshot', () => {
-    const wrapper = mount(VSpeedDial, {
-      propsData: {
-        transition: 'dialog-transition'
-      }
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
   it('should render component with custom direction and match snapshot', () => {
     const wrapper = mount(VSpeedDial, {
       propsData: {

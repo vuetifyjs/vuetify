@@ -121,7 +121,6 @@ test('VTextField.js', ({ mount }) => {
     const input = wrapper.find('input')[0]
 
     expect(input.getAttribute('readonly')).toBe('readonly')
-    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should clear input value', async () => {
@@ -159,7 +158,7 @@ test('VTextField.js', ({ mount }) => {
     icon.trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.inputValue).toBe('foo')
-    expect(appendIconCb.mock.calls.length).toBe(1)
+    expect(appendIconCb.mock.calls).toHaveLength(1)
   })
 
   it('should not clear input if not clearable and has appended icon (without callback)', async () => {
@@ -245,6 +244,6 @@ test('VTextField.js', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(change).toBeCalledWith('fgh')
-    expect(change.mock.calls.length).toBe(1)
+    expect(change.mock.calls).toHaveLength(1)
   })
 })

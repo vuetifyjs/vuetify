@@ -1,7 +1,8 @@
 import { test } from '~util/testing'
+import { mount } from 'avoriaz'
 import VCard from '~components/VCard'
 
-test('VCard.js', ({ mount, functionalContext }) => {
+test('VCard.vue', () => {
   it('should render component and match snapshot', () => {
     const wrapper = mount(VCard)
 
@@ -45,7 +46,6 @@ test('VCard.js', ({ mount, functionalContext }) => {
         height: heightpx
       }
     })
-    console.log(wrapper.vm.style)
 
     expect(wrapper.hasStyle('height', heightpx)).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()

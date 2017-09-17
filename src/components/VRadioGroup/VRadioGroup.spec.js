@@ -10,4 +10,6 @@ test('VRadioGroup.vue', ({ mount }) => {
     const radioGroup = wrapper.find('.radio-group')[0]
     expect(radioGroup.getAttribute('role')).toBe('radiogroup')
   })
+
+  // TODO: Test ability to toggle multiple data types
 })

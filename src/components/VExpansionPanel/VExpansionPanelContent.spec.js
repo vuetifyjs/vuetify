@@ -1,33 +1,32 @@
 import { test } from '~util/testing'
-/*
+import { mount } from 'avoriaz'
 import VExpansionPanelContent from './VExpansionPanelContent'
-*/
 
-test('VExpansionPanelContent.js', ({ mount }) => {
-  // Fix when next Vue release is out
+// TODO: Fix when Vue has optional injects
+test.skip('VExpansionPanelContent.js', () => {
   it('should render component and match snapshot', () => {
-  //   const wrapper = mount(VExpansionPanelContent)
+    const wrapper = mount(VExpansionPanelContent)
 
-  //   expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render an expanded component and match snapshot', () => {
-  //   const wrapper = mount(VExpansionPanelContent, {
-  //     propsData: {
-  //       ripple: true
-  //     }
-  //   })
+    const wrapper = mount(VExpansionPanelContent, {
+      propsData: {
+        ripple: true
+      }
+    })
 
-  //   expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render an expanded component with lazy prop and match snapshot', () => {
-    //   const wrapper = mount(VExpansionPanelContent, {
-    //     propsData: {
-    //       lazy: true
-    //     }
-    //   })
+    const wrapper = mount(VExpansionPanelContent, {
+      propsData: {
+        lazy: true
+      }
+    })
 
-    //   expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

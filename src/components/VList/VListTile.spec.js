@@ -13,7 +13,7 @@ test('VListTile.vue', ({ mount }) => {
     const wrapper = mount(VListTile)
 
     expect(wrapper.is('li')).toBe(true)
-    expect(wrapper.find('div').length).toBe(1)
+    expect(wrapper.find('div')).toHaveLength(1)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -43,7 +43,7 @@ test('VListTile.vue', ({ mount }) => {
     })
 
     expect(wrapper.is('li')).toBe(true)
-    expect(wrapper.find('button').length).toBe(1)
+    expect(wrapper.find('button')).toHaveLength(1)
     expect(wrapper.html()).toMatchSnapshot()
   })
 

@@ -1,4 +1,5 @@
 <script>
+  import VIcon from '~components/VIcon'
   import Themeable from '../../mixins/themeable'
   import Toggleable from '../../mixins/toggleable'
 
@@ -61,7 +62,7 @@
         }
 
         children.push(h('div', data, [
-          h('v-icon', { props: { right: true } }, 'cancel')
+          h(VIcon, { props: { right: true } }, 'cancel')
         ]))
       }
 
