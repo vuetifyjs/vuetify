@@ -87,8 +87,8 @@ export default {
       return this.auto
         ? '200px'
         : isNaN(this.maxHeight)
-        ? this.maxHeight
-        : `${this.maxHeight}px`
+          ? this.maxHeight
+          : `${this.maxHeight}px`
     },
     calculatedMaxWidth () {
       return isNaN(this.maxWidth)
