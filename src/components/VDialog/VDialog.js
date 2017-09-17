@@ -21,7 +21,6 @@ export default {
     persistent: Boolean,
     fullscreen: Boolean,
     fullWidth: Boolean,
-    lazy: Boolean,
     origin: {
       type: String,
       default: 'center center'
