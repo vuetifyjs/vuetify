@@ -9,6 +9,31 @@ const stub = {
 }
 
 test('VListTile.vue', ({ mount }) => {
+  it('should render with a div when active is false and href is used', () => {
+    const wrapper = mount(VListTile, {
+      propsData: {
+        href: 'http://www.google.com',
+        active: false
+      }
+    })
+
+    expect(wrapper.is('li')).toBe(true)
+    expect(wrapper.find('div')).toHaveLength(1)
+    expect(wrapper.find('a')).toHaveLength(0)
+    expect(wrapper.find('.list__tile--link')).toHaveLength(0)
+  })
+
+  it('should render with a tag when tag is specified', () => {
+    const wrapper = mount(VListTile, {
+      propsData: {
+        tag: 'code'
+      }
+    })
+
+    expect(wrapper.is('li')).toBe(true)
+    expect(wrapper.find('code')).toHaveLength(1)
+  })
+
   it('should render with a div when href and to are not used', () => {
     const wrapper = mount(VListTile)
 

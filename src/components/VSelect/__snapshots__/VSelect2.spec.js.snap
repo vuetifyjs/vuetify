@@ -32,9 +32,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and multi select 1`] =
               class="list"
           >
             <li>
-              <div href="javascript:;"
-                   class="list__tile list__tile--link list__tile--active"
-              >
+              <div class="list__tile list__tile--link list__tile--active">
                 <div class="list__tile__action list__tile__action--select-multi">
                   <div tabindex="0"
                        role="checkbox"
@@ -67,9 +65,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and multi select 1`] =
               </div>
             </li>
             <li>
-              <div href="javascript:;"
-                   class="list__tile list__tile--link"
-              >
+              <div class="list__tile list__tile--link">
                 <div class="list__tile__action list__tile__action--select-multi">
                   <div tabindex="0"
                        role="checkbox"
@@ -143,9 +139,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and multi select 2`] =
               class="list"
           >
             <li>
-              <div href="javascript:;"
-                   class="list__tile list__tile--link"
-              >
+              <div class="list__tile list__tile--link">
                 <div class="list__tile__action list__tile__action--select-multi">
                   <div tabindex="0"
                        role="checkbox"
@@ -180,9 +174,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and multi select 2`] =
               </div>
             </li>
             <li>
-              <div href="javascript:;"
-                   class="list__tile list__tile--link"
-              >
+              <div class="list__tile list__tile--link">
                 <div class="list__tile__action list__tile__action--select-multi">
                   <div tabindex="0"
                        role="checkbox"
@@ -259,9 +251,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and single select 1`] 
               class="list"
           >
             <li>
-              <div href="javascript:;"
-                   class="list__tile list__tile--link list__tile--active"
-              >
+              <div class="list__tile list__tile--link list__tile--active">
                 <div class="list__tile__content">
                   <div class="list__tile__title">
                     1
@@ -270,9 +260,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and single select 1`] 
               </div>
             </li>
             <li>
-              <div href="javascript:;"
-                   class="list__tile list__tile--link"
-              >
+              <div class="list__tile list__tile--link">
                 <div class="list__tile__content">
                   <div class="list__tile__title">
                     2
@@ -327,9 +315,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and single select 2`] 
               class="list"
           >
             <li>
-              <div href="javascript:;"
-                   class="list__tile list__tile--link"
-              >
+              <div class="list__tile list__tile--link">
                 <div class="list__tile__content">
                   <div class="list__tile__title">
                     1
@@ -338,9 +324,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and single select 2`] 
               </div>
             </li>
             <li>
-              <div href="javascript:;"
-                   class="list__tile list__tile--link"
-              >
+              <div class="list__tile list__tile--link">
                 <div class="list__tile__content">
                   <div class="list__tile__title">
                     2
