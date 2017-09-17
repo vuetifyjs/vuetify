@@ -239,7 +239,7 @@
       },
       items (val) {
         if (this.cacheItems) {
-          this.cachedItems = this.returnObject ? [...val] : this.filterDuplicates(this.cachedItems.concat(val))
+          this.cachedItems = this.filterDuplicates(this.cachedItems.concat(val))
         }
 
         this.$refs.menu.listIndex = -1
@@ -365,7 +365,8 @@
         return true
       },
       filterDuplicates (arr) {
-        return arr.filter((el, i, self) => i === self.indexOf(el))
+        const val = this.returnObject ? (el => el[this.itemValue]) : (el => el)
+        return arr.filter((el, i, self) => i === self.findIndex(e => val(e) === val(el)))
       },
       focus () {
         this.isActive = true
