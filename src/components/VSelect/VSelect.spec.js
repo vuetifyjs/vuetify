@@ -330,6 +330,8 @@ test('VSelect.js', ({ mount, shallow }) => {
        autocomplete: true,
        cacheItems: true,
        returnObject: true,
+       itemText: 'text',
+       itemValue: 'id',
        items: [],
       }
     })
