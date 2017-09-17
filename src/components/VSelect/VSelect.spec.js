@@ -342,4 +342,42 @@ test('VSelect.js', ({ mount, shallow }) => {
     expect(wrapper.vm.computedItems).toHaveLength(1)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
+
+  it('should display a default value', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        value: 'foo',
+        items: ['foo']
+      }
+    })
+
+    expect(wrapper.vm.selectedItems).toEqual(['foo'])
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should not display a default value that is not in items', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        value: 'foo',
+        items: ['bar']
+      }
+    })
+
+    expect(wrapper.vm.selectedItems).toHaveLength(0)
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should update the displayed value when items changes', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        value: 1,
+        items: []
+      }
+    })
+
+    wrapper.setProps({ items: [{ text: 'foo', value: 1 }] })
+    expect(wrapper.vm.selectedItems).toContainEqual({ text: 'foo', value: 1 })
+
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 })
