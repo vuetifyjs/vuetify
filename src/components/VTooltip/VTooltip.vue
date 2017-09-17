@@ -10,10 +10,14 @@
 
     mixins: [Colorable, Detachable, Menuable, Toggleable],
 
+    data: () => ({
+      calculatedMinWidth: 0
+    }),
+
     props: {
       debounce: {
         type: [Number, String],
-        default: 200
+        default: 100
       },
       fixed: {
         type: Boolean,
@@ -43,7 +47,7 @@
         } else if (this.left || this.right) {
           left = (
             activator.left +
-            (this.right ? activator.width : -activator.width) +
+            (this.right ? activator.width : -content.width) +
             (this.right ? 20 : -20)
           )
         }
@@ -57,7 +61,8 @@
         if (this.top || this.bottom) {
           top = (
             activator.top -
-            (this.top ? content.height : -content.height)
+            (this.top ? content.height : -content.height) -
+            (this.top ? 20 : -20)
           )
         } else if (this.left || this.right) {
           top = (
@@ -67,7 +72,7 @@
           )
         }
 
-        return `${this.calcYOverflow(top)}px`
+        return `${this.calcYOverflow(top + this.pageYOffset)}px`
       },
       classes () {
         return {

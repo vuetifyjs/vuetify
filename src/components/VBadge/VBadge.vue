@@ -44,7 +44,7 @@
           name: 'show',
           value: this.isActive
         }]
-      }, this.$slots.activator)
+      }, this.$slots.badge)
 
       return h('span', {
         staticClass: 'badge',
