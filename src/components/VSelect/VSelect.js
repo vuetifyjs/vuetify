@@ -342,17 +342,16 @@ export default {
       this.$nextTick(() => (this.isActive = false))
     },
     changeSelectedIndex (keyCode) {
-      if (keyCode === 32 ||
-        ![8, 37, 39, 46].includes(keyCode)
-      ) return
+      // backspace, left, right, delete
+      if (![8, 37, 39, 46].includes(keyCode)) return
 
       const indexes = this.selectedItems.length - 1
 
-      if (keyCode === 37) {
+      if (keyCode === 37) { // Left arrow
         this.selectedIndex = this.selectedIndex === -1
           ? indexes
           : this.selectedIndex - 1
-      } else if (keyCode === 39) {
+      } else if (keyCode === 39) { // Right arrow
         this.selectedIndex = this.selectedIndex >= indexes
           ? -1
           : this.selectedIndex + 1
@@ -361,7 +360,8 @@ export default {
         return
       }
 
-      if (![8, 46].includes(keyCode)) return
+      // TODO: We already returned up there though?
+      if (![8, 46].includes(keyCode)) return // backspace/delete
       const newIndex = this.selectedIndex === indexes
         ? this.selectedIndex - 1
         : this.selectedItems[this.selectedIndex + 1]

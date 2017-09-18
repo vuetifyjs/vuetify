@@ -34,7 +34,7 @@ export default {
         i, this.searchValue, this.getText(i))
       )
     },
-    onKeyDown (e) {
+    async onKeyDown (e) {
       // If enter, space, up, or down is pressed, open menu
       if (!this.menuIsActive && [13, 32, 38, 40].includes(e.keyCode)) {
         return this.showMenuItems()
@@ -45,25 +45,30 @@ export default {
         return this.blur()
       }
 
-      if (e.keyCode === 9) e.preventDefault()
+      // Tab shouldn't switch inputs
+      if (e.keyCode === 9 && this.selectionKeys.includes(9)) {
+        e.preventDefault()
+      }
 
-      if (this.selectionKeys.includes(e.keyCode) &&
-        this.searchValue &&
+      if (
         this.tags &&
+        this.selectionKeys.includes(e.keyCode) &&
+        this.searchValue &&
         !this.filteredItems.length
       ) {
         this.selectedItems.push(this.searchValue)
 
-        this.$nextTick(() => {
-          this.searchValue = null
-          this.$emit('change', this.selectedItems)
-        })
+        await this.$nextTick()
+
+        this.searchValue = null
+        this.$emit('change', this.selectedItems)
       }
 
       if (!this.tags ||
-        ![32].includes(e.keyCode)
+        ![32].includes(e.keyCode) // space
       ) this.$refs.menu.changeListIndex(e)
 
+      // Up or down
       if ([38, 40].includes(e.keyCode)) this.selectedIndex = -1
 
       if (this.isAutocomplete &&
