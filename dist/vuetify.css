@@ -3086,6 +3086,9 @@ html {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   overflow-x: hidden;
 }
+html.ovf-hidden{
+  overflow: hidden;
+}
 body {
   font-family: 'Roboto', sans-serif;
   line-height: 1.5;
@@ -4326,6 +4329,7 @@ p {
   width: 100%;
 }
 .overlay--active {
+  touch-action: none;
   pointer-events: auto;
 }
 .overlay--active:before {

@@ -158,7 +158,7 @@ export default {
     },
     hideScroll () {
       if (this.$vuetify.breakpoint.mdAndDown) {
-        document.documentElement.style.overflow = 'hidden'
+        document.documentElement.classList.add('ovf-hidden')
       } else {
         window.addEventListener('mousewheel', this.scrollListener)
         window.addEventListener('keydown', this.scrollListener)
@@ -166,7 +166,7 @@ export default {
     },
     showScroll () {
       if (this.$vuetify.breakpoint.mdAndDown) {
-        document.documentElement.removeAttribute('style')
+        document.documentElement.classList.remove('ovf-hidden')
       } else {
         window.removeEventListener('mousewheel', this.scrollListener)
         window.removeEventListener('keydown', this.scrollListener)
