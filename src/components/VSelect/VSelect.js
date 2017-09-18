@@ -18,6 +18,7 @@ import VBtn from '../VBtn'
 // Mixins
 import Filterable from '../../mixins/filterable'
 import Input from '../../mixins/input'
+import Maskable from '../../mixins/maskable'
 
 // Component level mixins
 import Autocomplete from './mixins/select-autocomplete'
@@ -50,7 +51,7 @@ export default {
     ClickOutside
   },
 
-  mixins: [Autocomplete, Input, Filterable, Generators],
+  mixins: [Autocomplete, Input, Filterable, Generators, Maskable],
 
   data () {
     return {

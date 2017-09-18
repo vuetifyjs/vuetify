@@ -2,11 +2,12 @@ require('../../stylus/components/_input-groups.styl')
 require('../../stylus/components/_text-fields.styl')
 
 import Input from '../../mixins/input'
+import Maskable from '../../mixins/maskable'
 
 export default {
   name: 'v-text-field',
 
-  mixins: [Input],
+  mixins: [Input, Maskable],
 
   inheritAttrs: false,
 
@@ -121,9 +122,16 @@ export default {
       })
     },
     onInput (e) {
-      this.inputValue = e.target.value
+      this.inputValue = this.unmaskText(e.target.value)
       this.badInput = e.target.validity && e.target.validity.badInput
       this.shouldAutoGrow && this.calculateInputHeight()
+
+      this.$nextTick(() => {
+        this.$refs.input.setSelectionRange(
+          this.selection,
+          this.selection
+        )
+      })
     },
     blur (e) {
       this.isFocused = false
@@ -159,7 +167,7 @@ export default {
           autofocus: this.autofocus,
           disabled: this.disabled,
           required: this.required,
-          value: this.lazyValue
+          value: this.maskText(this.lazyValue)
         },
         attrs: {
           ...this.$attrs,
@@ -185,6 +193,10 @@ export default {
         data.domProps.type = this.type
       } else {
         data.domProps.rows = this.rows
+      }
+
+      if (this.mask) {
+        // data.attrs.maxlength = this.delimiterLength
       }
 
       const children = [this.$createElement(tag, data)]
