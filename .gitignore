@@ -10,3 +10,5 @@ report.html
 dev/*.js
 dev/*css
 !dev/index.js
+!dev/router.js
+/es5

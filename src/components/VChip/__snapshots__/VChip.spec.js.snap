@@ -1,6 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VChip.js should have a chip class 1`] = `
+exports[`VChip.vue should be removable 1`] = `
+
+<span tabindex="0"
+      class="chip chip--removable"
+>
+  <div class="chip__close">
+    <i class="material-icons icon icon--right">
+      cancel
+    </i>
+  </div>
+</span>
+
+`;
+
+exports[`VChip.vue should be removable 2`] = `
+
+<span tabindex="0"
+      class="chip chip--removable"
+      style="display: none;"
+>
+  <div class="chip__close">
+    <i class="material-icons icon icon--right">
+      cancel
+    </i>
+  </div>
+</span>
+
+`;
+
+exports[`VChip.vue should have a chip class 1`] = `
 
 <span tabindex="0"
       class="chip"

@@ -1,23 +1,23 @@
 import { test } from '~util/testing'
-/*
 import { VBreadcrumbsItem } from '~components/VBreadcrumbs'
-*/
 
-test('VBreadcrumbsItem.js', ({ mount }) => {
-  // Fix when next Vue release is out
+// TODO: Enable when Vue has optional injects
+test.skip('VBreadcrumbsItem.js', ({ mount }) => {
   it('should render component and match snapshot', () => {
-  //   const wrapper = mount(VBreadcrumbsItem)
+    const wrapper = mount(VBreadcrumbsItem)
 
-  //   expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render component with custom activeClass and match snapshot', () => {
-  //   const wrapper = mount(VBreadcrumbsItem, {
-  //     propsData: {
-  //       activeClass: 'breadcrumbs-item--active'
-  //     }
-  //   })
+  // TODO: Use vue-router or nuxt in tests
+  it.skip('should have a custom active class', () => {
+    const wrapper = mount(VBreadcrumbsItem, {
+      propsData: {
+        activeClass: 'breadcrumbs-item--active',
+        to: '/'
+      }
+    })
 
-  //   expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

@@ -12,7 +12,16 @@ export default function Grid (name) {
       data.staticClass = (`${name} ${data.staticClass || ''}`).trim()
 
       if (data.attrs) {
-        data.staticClass += ` ${Object.keys(data.attrs).join(' ')}`
+        const classes = []
+
+        Object.keys(data.attrs).forEach(key => {
+          const value = data.attrs[key]
+
+          if (typeof value === 'string') classes.push(key)
+          else if (value) classes.push(key)
+        })
+
+        data.staticClass += ` ${classes.join(' ')}`
         delete data.attrs
       }
 

@@ -6,7 +6,6 @@ describe('VSnackbar.vue', () => {
     const wrapper = mount(VSnackbar)
 
     expect(wrapper.hasClass('snack')).toBe(true)
-    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should have a snack__content class only when active', async () => {
@@ -17,15 +16,13 @@ describe('VSnackbar.vue', () => {
       }
     })
 
-    expect(wrapper.find('div .snack__content').length).toEqual(0)
+    expect(wrapper.find('div .snack__content')).toHaveLength(0)
 
     wrapper.setProps({ value: true })
-    wrapper.update()
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.find('div .snack__content').length).toEqual(1)
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.find('div .snack__content')).toHaveLength(1)
   })
 
   it('should timeout correctly', async () => {
@@ -45,7 +42,7 @@ describe('VSnackbar.vue', () => {
 
     await wrapper.vm.$nextTick()
 
-    expect(setTimeout.mock.calls.length).toBe(1)
+    expect(setTimeout.mock.calls).toHaveLength(1)
     expect(setTimeout.mock.calls[0][1]).toBe(3141)
 
     jest.runAllTimers()
@@ -71,7 +68,7 @@ describe('VSnackbar.vue', () => {
 
     await wrapper.vm.$nextTick()
 
-    expect(setTimeout.mock.calls.length).toBe(1)
+    expect(setTimeout.mock.calls).toHaveLength(1)
     expect(setTimeout.mock.calls[0][1]).toBe(3141)
 
     jest.runAllTimers()

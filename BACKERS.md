@@ -18,7 +18,7 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - [Jaime Olmo](https://www.jaimeolmo.com)
 - Maxim Bogdanov
 - Michael Marti
-- Adrian Belovic
+- [Aeroden](www.aeroden.com)
 - Sam Mitchell
 
 ### $10+

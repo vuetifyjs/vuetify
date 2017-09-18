@@ -1,12 +1,5 @@
 export default {
   methods: {
-    genHeader () {
-      return this.$createElement('div', {
-        'class': 'picker--date__header'
-      }, [
-        this.genSelector()
-      ])
-    },
     genBtn (change, children) {
       return this.$createElement('v-btn', {
         props: {
@@ -16,47 +9,61 @@ export default {
         nativeOn: {
           click: e => {
             e.stopPropagation()
-            this.tableDate = new Date(this.tableYear, change)
+            if (this.activePicker === 'DATE') {
+              this.tableDate = new Date(this.tableYear, change)
+            } else if (this.activePicker === 'MONTH') {
+              this.tableDate = new Date(change, this.tableMonth)
+            }
           }
         }
       }, children)
     },
-    genSelector () {
-      const date = new Date(this.tableYear, this.tableMonth)
 
-      // Workaround for #1409
-      date.setHours(1)
+    genHeader (keyValue, selectorText) {
+      const header = this.$createElement('strong', {
+        key: keyValue,
+        on: {
+          click: () => this.activePicker = this.activePicker === 'DATE' ? 'MONTH' : 'YEAR'
+        }
+      }, selectorText)
 
-      let buttonText
-      if (typeof this.headerDateFormat === 'function') {
-        buttonText = this.headerDateFormat(date)
-      } else if (this.supportsLocaleFormat) {
-        buttonText = date.toLocaleDateString(this.locale, this.headerDateFormat)
-      } else {
-        buttonText = date.getFullYear() + '/'
-        if (date.getMonth() < 9) buttonText += '0'
-        buttonText += (1 + date.getMonth())
-      }
+      const transition = this.$createElement('transition', {
+        props: { name: this.computedTransition }
+      }, [header])
 
-      const header = this.$createElement('div', {
+      return this.$createElement('div', {
         'class': 'picker--date__header-selector-date'
-      }, [
-        this.$createElement('transition', {
-          props: { name: this.computedTransition }
-        }, [
-          this.$createElement('strong', {
-            key: this.tableMonth
-          }, buttonText)])
-      ])
+      }, [transition])
+    },
+
+    genSelector () {
+      const keyValue = this.activePicker === 'DATE' ? this.tableMonth : this.tableYear
+      const selectorDate = new Date(this.tableYear, this.tableMonth, 1, 1 /* Workaround for #1409 */)
+
+      let selectorText = ''
+      if (typeof this.headerDateFormat === 'function' && this.activePicker === 'DATE') {
+        selectorText = this.headerDateFormat(selectorDate, this.activePicker)
+      } else if (this.supportsLocaleFormat) {
+        const format = this.activePicker === 'DATE'
+          ? this.headerDateFormat
+          : { year: 'numeric' }
+        selectorText = selectorDate.toLocaleDateString(this.locale, format)
+      } else if (this.activePicker === 'DATE') {
+        selectorText = selectorDate.getFullYear() + '/'
+        if (selectorDate.getMonth() < 9) selectorText += '0'
+        selectorText += (1 + selectorDate.getMonth())
+      } else if (this.activePicker === 'MONTH') {
+        selectorText = selectorDate.getFullYear()
+      }
 
       return this.$createElement('div', {
         'class': 'picker--date__header-selector'
       }, [
-        this.genBtn(this.tableMonth - 1, [
+        this.genBtn(keyValue - 1, [
           this.$createElement('v-icon', 'chevron_left')
         ]),
-        header,
-        this.genBtn(this.tableMonth + 1, [
+        this.genHeader(keyValue, selectorText),
+        this.genBtn(keyValue + 1, [
           this.$createElement('v-icon', 'chevron_right')
         ])
       ])

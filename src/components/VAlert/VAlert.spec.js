@@ -2,73 +2,41 @@ import { test } from '~util/testing'
 import VAlert from '~components/VAlert'
 import VIcon from '~components/VIcon'
 
-VAlert.components = { VIcon }
-
 test('VAlert.vue', ({ mount }) => {
-  it('should have an alert class', () => {
+  it('should be closed by default', async () => {
     const wrapper = mount(VAlert)
 
-    expect(wrapper.hasClass('alert')).toBe(true)
+    expect(wrapper.vm.isActive).toBe(false)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should have a close icon', () => {
-    const wrapper = mount(VAlert)
-    wrapper.setProps({ dismissible: true })
+  it('should have a close icon', async () => {
+    const wrapper = mount(VAlert, {
+      propsData: { dismissible: true }
+    })
 
-    expect(wrapper.contains('.alert__dismissible')).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should be closed by default', () => {
-    const wrapper = mount(VAlert)
-
-    expect(wrapper.data().isActive).toBe(false)
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('should emit input:false when close icon is clicked', () => {
+  it('should be dismissible', async () => {
     const wrapper = mount(VAlert, {
       propsData: {
         value: true,
         dismissible: true
       }
     })
-    const icon = wrapper.find('.alert__dismissible')[0]
-    const input = jest.fn()
-    wrapper.instance().$on('input', input)
-    icon.trigger('click')
 
+    const icon = wrapper.find('.alert__dismissible')[0]
+
+    const input = jest.fn(value => wrapper.setProps({ value }))
+    wrapper.vm.$on('input', input)
+
+    icon.trigger('click')
     expect(input).toBeCalledWith(false)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should not be visible after being dismissed', done => {
-    const wrapper = mount(VAlert, {
-      propsData: {
-        value: true,
-        dismissible: true
-      }
-    })
-
-    wrapper.vm.$on('input', (val) => {
-      wrapper.setProps({
-        value: false
-      })
-      wrapper.update()
-
-      wrapper.vm.$nextTick(() => {
-        expect(wrapper.hasStyle('display', 'none')).toBe(true)
-        done()
-      })
-    })
-
-    const icon = wrapper.find('.alert__dismissible')[0]
-    icon.trigger('click')
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('should have a custom icon', () => {
+  it('should have a custom icon', async () => {
     const wrapper = mount(VAlert, {
       propsData: {
         value: true,
@@ -79,18 +47,15 @@ test('VAlert.vue', ({ mount }) => {
     const icon = wrapper.find('.alert__icon')[0]
 
     expect(icon.text()).toBe('list')
-    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should have no icon', () => {
     const wrapper = mount(VAlert, {
       propsData: {
-        success: true,
         hideIcon: true
       }
     })
 
     expect(wrapper.contains('.icon')).toBe(false)
-    expect(wrapper.html()).toMatchSnapshot()
   })
 })

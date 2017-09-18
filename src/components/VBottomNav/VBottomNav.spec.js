@@ -2,7 +2,7 @@ import VBottomNav from './VBottomNav'
 import VBtn from '../VBtn'
 import { test } from '~util/testing'
 
-test('VBottomNav.js', ({ mount, functionalContext }) => {
+test('VBottomNav.js', ({ mount }) => {
   it('should have a bottom-nav class', () => {
     const wrapper = mount(VBottomNav, {
       slots: {
@@ -62,12 +62,12 @@ test('VBottomNav.js', ({ mount, functionalContext }) => {
       }
     })
 
+    const btn = wrapper.find('.btn')[0]
+
     const change = jest.fn()
     wrapper.instance().$on('update:active', change)
 
-    const btn = wrapper.find('.btn')[0]
     btn.trigger('click')
-
     expect(change).toBeCalledWith(0)
   })
 })

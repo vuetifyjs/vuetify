@@ -121,7 +121,6 @@ test('VTextField.js', ({ mount }) => {
     const input = wrapper.find('input')[0]
 
     expect(input.getAttribute('readonly')).toBe('readonly')
-    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should clear input value', async () => {
@@ -159,7 +158,7 @@ test('VTextField.js', ({ mount }) => {
     icon.trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.inputValue).toBe('foo')
-    expect(appendIconCb.mock.calls.length).toBe(1)
+    expect(appendIconCb.mock.calls).toHaveLength(1)
   })
 
   it('should not clear input if not clearable and has appended icon (without callback)', async () => {
@@ -201,6 +200,65 @@ test('VTextField.js', ({ mount }) => {
     input.trigger('input')
     input.trigger('blur')
 
-    expect(input.element.value).toEqual('fgh')
+    expect(input.element.value).toBe('fgh')
+  })
+
+  it('should update if value is changed externally', async () => {
+    const wrapper = mount(VTextField, {})
+
+    const input = wrapper.find('input')[0]
+
+    wrapper.setProps({ value: 'fgh' })
+    expect(input.element.value).toBe('fgh')
+
+    input.trigger('focus')
+    wrapper.setProps({ value: 'jkl' })
+    expect(input.element.value).toBe('jkl')
+  })
+
+  it('should fire a single change event on blur', async () => {
+    let value = 'asd'
+    const change = jest.fn()
+
+    const component = {
+      render (h) {
+        return h(VTextField, {
+          on: {
+            input: (i) => value = i,
+            change
+          },
+          props: { value }
+        })
+      }
+    }
+    const wrapper = mount(component)
+
+    const input = wrapper.find('input')[0]
+
+    input.trigger('focus')
+    input.element.value = 'fgh'
+    input.trigger('input')
+
+    await wrapper.vm.$nextTick()
+    input.trigger('blur')
+    await wrapper.vm.$nextTick()
+
+    expect(change).toBeCalledWith('fgh')
+    expect(change.mock.calls).toHaveLength(1)
+  })
+
+  it('should not make prepend icon clearable', () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        prependIcon: 'check',
+        appendIcon: 'check',
+        value: 'test',
+        clearable: true
+      }
+    })
+
+    const prepend = wrapper.find('.input-group__prepend-icon')[0]
+    expect(prepend.text()).toBe('check')
+    expect(prepend.element.classList).not.toContain('input-group__icon-cb')
   })
 })

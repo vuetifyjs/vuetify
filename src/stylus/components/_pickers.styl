@@ -10,12 +10,12 @@ picker($material)
     color: $material.text.primary
 
   .picker__body
-    background: $material.cards
+    background: $material.picker.body
 
   .picker__title
-    background: $grey.darken-2
+    background: $material.picker.title
 
-dark(picker, "picker")
+theme(picker, "picker")
 
 .picker
   border-radius: $card-border-radius
@@ -28,7 +28,6 @@ dark(picker, "picker")
     margin-top: -20px
 
   &__title
-    background: $theme.primary
     color: #fff
     border-top-left-radius: $card-border-radius
     border-top-right-radius: $card-border-radius

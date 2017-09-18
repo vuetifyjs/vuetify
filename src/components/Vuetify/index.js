@@ -4,10 +4,17 @@ const Vuetify = {
   install (Vue, opts = {}) {
     const $vuetify = {
       load,
+      application: {
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0
+      },
       breakpoint: {}
     }
 
     Vue.util.defineReactive({}, 'breakpoint', $vuetify)
+    Vue.util.defineReactive({}, 'application', $vuetify)
 
     Vue.prototype.$vuetify = $vuetify
 
