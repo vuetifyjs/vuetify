@@ -3,7 +3,7 @@ import VBtnToggle from './VBtnToggle'
 import VBtn from '../VBtn'
 import VIcon from '../VIcon'
 import { test } from '~util/testing'
-import Vue from 'vue'
+import Vue from 'vue/dist/vue.common'
 
 function createBtn (val = null) {
   const options = {
@@ -166,6 +166,48 @@ test('VBtnToggle.vue', () => {
     wrapper.instance().updateValue(2)
 
     expect(change).toBeCalledWith([1])
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should have btn with data-only-child if only one selected', () => {
+    const wrapper = mount(VBtnToggle, {
+      propsData: {
+        inputValue: 0
+      },
+      slots: {
+        default: [
+          createBtn(),
+          createBtn()
+        ]
+      }
+    })
+
+    const btn = wrapper.find('.btn')[0]
+
+    expect(btn.getAttribute('data-only-child')).toBe('true')
+  })
+
+  // TODO: change never fires
+  it.skip('should toggle values of any type', async () => {
+    const values = [true, false, null, 6, 'foo', { key: 'value' }, ['arrayyy']]
+    const buttons = values.map(v => createBtn(v))
+    const wrapper = mount(VBtnToggle, {
+      propsData: {
+        inputValue: null
+      },
+      slots: { default: buttons }
+    })
+
+    const change = jest.fn(value => {
+      wrapper.setProps({ inputValue: value })
+    })
+    wrapper.vm.$on('change', change)
+
+    for (const button of wrapper.find(VBtn)) {
+      button.trigger('click')
+      expect(change).toBeCalledWith(button.vm.value)
+    }
+
     expect(wrapper.html()).toMatchSnapshot()
   })
 })

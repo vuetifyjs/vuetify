@@ -32,8 +32,7 @@ test('VTextField.js', ({ mount }) => {
     })
 
     const inputGroup = wrapper.find('input')[0]
-    expect(inputGroup.hasAttribute('aria-label', 'Test')).toBe(true)
-    expect(`$attrs is readonly`).toHaveBeenWarned()
+    expect(inputGroup.getAttribute('aria-label')).toBe('Test')
   })
 
   it('should not render aria-label attribute on text field element with no label value or id', () => {
@@ -46,7 +45,6 @@ test('VTextField.js', ({ mount }) => {
 
     const inputGroup = wrapper.find('input')[0]
     expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
-    expect(`$attrs is readonly`).toHaveBeenWarned()
   })
 
   it('should not render aria-label attribute on text field element with id', () => {
@@ -61,11 +59,14 @@ test('VTextField.js', ({ mount }) => {
 
     const inputGroup = wrapper.find('input')[0]
     expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
-    expect(`$attrs is readonly`).toHaveBeenWarned()
   })
 
   it('should start out as invalid', () => {
-    const wrapper = mount(VTextField, {})
+    const wrapper = mount(VTextField, {
+      propsData: {
+        rules: [(v) => !!v || 'Required']
+      }
+    })
 
     expect(wrapper.data().valid).toEqual(false)
   })
@@ -79,19 +80,6 @@ test('VTextField.js', ({ mount }) => {
     expect(wrapper.data().shouldValidate).toEqual(true)
   })
 
-  // This test breaks everything
-  // it('should start validating on blur', async () => {
-  //   const wrapper = mount(VTextField, {})
-
-  //   const input = wrapper.find('input')[0]
-  //   expect(wrapper.data().shouldValidate).toEqual(false)
-  //   input.trigger('focus')
-  //   await wrapper.vm.$nextTick()
-  //   input.trigger('blur')
-  //   await wrapper.vm.$nextTick()
-  //   expect(wrapper.data().shouldValidate).toEqual(true)
-  // })
-
   it('should not start validating on input if validate-on-blur prop is set', async () => {
     const wrapper = mount(VTextField, {
       propsData: {
@@ -103,5 +91,174 @@ test('VTextField.js', ({ mount }) => {
     wrapper.setProps({ value: 'asd' })
     await wrapper.vm.$nextTick()
     expect(wrapper.data().shouldValidate).toEqual(false)
+  })
+
+  it('should not display counter when set to false', async () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        counter: true,
+        max: 50
+      }
+    })
+
+    expect(wrapper.find('.input-group__counter')[0]).not.toBe(undefined)
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ counter: false })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.find('.input-group__counter')[0]).toBe(undefined)
+  })
+
+  it('should have readonly attribute', () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        readonly: true
+      }
+    })
+
+    const input = wrapper.find('input')[0]
+
+    expect(input.getAttribute('readonly')).toBe('readonly')
+  })
+
+  it('should clear input value', async () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        clearable: true,
+        value: 'foo'
+      }
+    })
+
+    const clear = wrapper.find('.input-group__append-icon')[0]
+    const input = jest.fn()
+    wrapper.vm.$on('input', input)
+
+    expect(wrapper.vm.inputValue).toBe('foo')
+
+    clear.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(input).toHaveBeenCalledWith(null)
+  })
+
+  it('should not clear input if not clearable and has appended icon (with callback)', async () => {
+    const appendIconCb = jest.fn()
+    const wrapper = mount(VTextField, {
+      propsData: {
+        value: 'foo',
+        appendIcon: 'block',
+        appendIconCb
+      }
+    })
+
+    const icon = wrapper.find('.input-group__append-icon')[0]
+    icon.trigger('click')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.inputValue).toBe('foo')
+    expect(appendIconCb.mock.calls).toHaveLength(1)
+  })
+
+  it('should not clear input if not clearable and has appended icon (without callback)', async () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        value: 'foo',
+        appendIcon: 'block',
+      }
+    })
+
+    const icon = wrapper.find('.input-group__append-icon')[0]
+    icon.trigger('click')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.inputValue).toBe('foo')
+  })
+
+  it('should start validating on blur', async () => {
+    const wrapper = mount(VTextField, {})
+
+    const input = wrapper.find('input')[0]
+    expect(wrapper.data().shouldValidate).toEqual(false)
+    input.trigger('focus')
+    await wrapper.vm.$nextTick()
+    input.trigger('blur')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.data().shouldValidate).toEqual(true)
+  })
+
+  it('should keep its value on blur', async () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        value: 'asd'
+      }
+    })
+
+    const input = wrapper.find('input')[0]
+
+    input.element.value = 'fgh'
+    input.trigger('input')
+    input.trigger('blur')
+
+    expect(input.element.value).toBe('fgh')
+  })
+
+  it('should update if value is changed externally', async () => {
+    const wrapper = mount(VTextField, {})
+
+    const input = wrapper.find('input')[0]
+
+    wrapper.setProps({ value: 'fgh' })
+    expect(input.element.value).toBe('fgh')
+
+    input.trigger('focus')
+    wrapper.setProps({ value: 'jkl' })
+    expect(input.element.value).toBe('jkl')
+  })
+
+  it('should fire a single change event on blur', async () => {
+    let value = 'asd'
+    const change = jest.fn()
+
+    const component = {
+      render (h) {
+        return h(VTextField, {
+          on: {
+            input: (i) => value = i,
+            change
+          },
+          props: { value }
+        })
+      }
+    }
+    const wrapper = mount(component)
+
+    const input = wrapper.find('input')[0]
+
+    input.trigger('focus')
+    input.element.value = 'fgh'
+    input.trigger('input')
+
+    await wrapper.vm.$nextTick()
+    input.trigger('blur')
+    await wrapper.vm.$nextTick()
+
+    expect(change).toBeCalledWith('fgh')
+    expect(change.mock.calls).toHaveLength(1)
+  })
+
+  it('should not make prepend icon clearable', () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        prependIcon: 'check',
+        appendIcon: 'check',
+        value: 'test',
+        clearable: true
+      }
+    })
+
+    const prepend = wrapper.find('.input-group__prepend-icon')[0]
+    expect(prepend.text()).toBe('check')
+    expect(prepend.element.classList).not.toContain('input-group__icon-cb')
   })
 })

@@ -5,7 +5,7 @@ stepper($material)
   background: $material.bg-color
 
   .stepper__step
-    &:not(.stepper__step--active):not(.stepper__step--complete)
+    &:not(.stepper__step--active):not(.stepper__step--complete):not(.stepper__step--error)
       .stepper__step__step
         background: rgba($material.fg-color, $material.disabledORhints-text-percent)
 
@@ -74,16 +74,21 @@ theme(stepper, "stepper")
       align-self: center
       margin: 0 -16px
 
+.stepper
+  &__items
+    position: relative
+    overflow: hidden
 
 .stepper
   &__step__step
     align-items: center
     border-radius: 50%
-    display: flex
+    display: inline-flex
     font-size: 12px
     justify-content: center
     height: 24px
     margin-right: 8px
+    min-width: 24px
     width: 24px
     transition: .3s $transition.fast-in-fast-out
 
@@ -95,7 +100,6 @@ theme(stepper, "stepper")
     align-items: center
     display: flex
     flex-direction: row
-    flex-wrap: wrap
     padding: 24px
     position: relative
 
@@ -108,8 +112,6 @@ theme(stepper, "stepper")
 
     &--editable
       cursor: pointer
-
-
 
     &--complete
       .stepper__step__step

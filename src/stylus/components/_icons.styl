@@ -5,7 +5,7 @@
 icon($material)
   color: $material.icons.active
 
-  &:disabled
+  &.icon--disabled
     color: $material.icons.inactive
 
 theme(icon, "icon")
@@ -26,3 +26,6 @@ theme(icon, "icon")
 
   &.icon--x-large
     font-size: 3rem
+
+  &.icon--disabled
+    cursor: default

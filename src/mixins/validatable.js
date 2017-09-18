@@ -11,8 +11,7 @@ export default {
 
   props: {
     error: {
-      type: Boolean,
-      default: true
+      type: Boolean
     },
     errorMessages: {
       type: [String, Array],
@@ -39,7 +38,8 @@ export default {
     },
     hasError () {
       return this.validations.length > 0 ||
-        this.errorMessages.length > 0
+        this.errorMessages.length > 0 ||
+        this.error
     }
   },
 
@@ -61,7 +61,7 @@ export default {
 
       if (this.hasInput && !this.validateOnBlur) this.shouldValidate = true
     },
-    focused (val) {
+    isFocused (val) {
       // If we're not focused, and it's the first time
       // we're defocusing, set shouldValidate to true
       if (!val && !this.hasFocused) {
@@ -73,13 +73,16 @@ export default {
     },
     hasError (val) {
       if (this.shouldValidate) {
-        this.valid = !val
         this.$emit('update:error', val)
       }
+    },
+    error (val) {
+      this.shouldValidate = !!val
     }
   },
 
   mounted () {
+    this.shouldValidate = !!this.error
     this.validate()
   },
 
@@ -87,12 +90,13 @@ export default {
     reset () {
       // TODO: Do this another way!
       // This is so that we can reset all types of inputs
-      this.$emit('input', null)
+      this.$emit('input', this.multiple ? [] : null)
       this.$emit('change', null)
 
       this.$nextTick(() => {
         this.shouldValidate = false
         this.hasFocused = false
+        this.validate()
       })
     },
     validate (force = false, value) {
@@ -109,6 +113,10 @@ export default {
           this.errorBucket.push(valid)
         }
       })
+
+      this.valid = this.errorBucket.length === 0
+
+      return this.valid
     }
   }
 }

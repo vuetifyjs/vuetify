@@ -1,33 +1,68 @@
 import { test } from '~util/testing'
+import { mount } from 'avoriaz'
 import VDataTable from './VDataTable'
 
-test('VDataTable.js', ({ mount }) => {
-  it('should be able to filter null and undefined values', async () => {
-    const pagination = {
-      descending: false,
-      sortBy: 'column'
-    }
-    const wrapper = mount(VDataTable, {
+test('VDataTable.vue', () => {
+  function dataTableTestData () {
+    return {
       propsData: {
-        pagination,
+        pagination: {
+          descending: false,
+          sortBy: 'col1'
+        },
         headers: [
-          { text: 'Other', value: 'other' },
-          { text: 'Column', value: 'column' }
+          { text: 'First Column', value: 'col1' },
+          { text: 'Second Column', value: 'col2', sortable: false },
+          { text: 'Third Column', value: 'col3' }
         ],
         items: [
-          { other: 1, column: 'foo' },
-          { other: 2, column: null },
-          { other: 3, column: undefined }
+          { other: 1, col1: 'foo', col2: 'a', col3: 1 },
+          { other: 2, col1: null, col2: 'b', col3: 2 },
+          { other: 3, col1: undefined, col2: 'c', col3: 3 }
         ]
       }
-    })
+    }
+  }
 
-    await wrapper.vm.$nextTick()
+  // TODO: This doesn't actually test anything
+  it.skip('should be able to filter null and undefined values', async () => {
+    const data = dataTableTestData()
+    const pagination = data.propsData.pagination
+    const wrapper = mount(VDataTable, data)
 
     pagination.descending = true
 
     expect(wrapper.vm.$props.pagination.descending).toBe(true)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
-    // Also expect tests to not crash :)
+  })
+
+  it('should match a snapshot', () => {
+    const data = dataTableTestData()
+    const wrapper = mount(VDataTable, data)
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should render aria-sort attribute on column headers', async () => {
+    const data = dataTableTestData()
+    const wrapper = mount(VDataTable, data)
+
+    let headers = wrapper.find('thead:first-of-type > tr:first-of-type > th')
+
+    expect(
+      headers.map(h => h.getAttribute('aria-sort'))
+    ).toEqual(['ascending', 'none', 'none'])
+
+    wrapper.setProps({ pagination: {
+      sortBy: 'col3',
+      descending: false
+    }})
+
+    expect(
+      headers.map(h => h.getAttribute('aria-sort'))
+    ).toEqual(['none', 'none', 'ascending'])
+
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 })

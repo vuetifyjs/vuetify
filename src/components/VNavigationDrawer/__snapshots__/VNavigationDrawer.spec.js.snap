@@ -3,7 +3,7 @@
 exports[`VNavigationDrawer.js should render component and match snapshot 1`] = `
 
 <aside class="navigation-drawer navigation-drawer--close"
-       style="height: 100%;"
+       style="height: 100%; margin-top: 0px; max-height: calc(100% - 100%px); width: 300px;"
 >
   <div class="navigation-drawer__border">
   </div>
@@ -14,7 +14,7 @@ exports[`VNavigationDrawer.js should render component and match snapshot 1`] = `
 exports[`VNavigationDrawer.js should render component with custom absolute and match snapshot 1`] = `
 
 <aside class="navigation-drawer navigation-drawer--absolute navigation-drawer--close"
-       style="height: 100%;"
+       style="height: 100%; margin-top: 0px; max-height: calc(100% - 100%px); width: 300px;"
 >
   <div class="navigation-drawer__border">
   </div>
@@ -25,7 +25,7 @@ exports[`VNavigationDrawer.js should render component with custom absolute and m
 exports[`VNavigationDrawer.js should render component with custom clipped and match snapshot 1`] = `
 
 <aside class="navigation-drawer navigation-drawer--clipped navigation-drawer--close"
-       style="height: 100%;"
+       style="height: 100%; margin-top: 0px; max-height: calc(100% - 100%px); width: 300px;"
 >
   <div class="navigation-drawer__border">
   </div>
@@ -36,7 +36,7 @@ exports[`VNavigationDrawer.js should render component with custom clipped and ma
 exports[`VNavigationDrawer.js should render component with custom disableRouteWatcher and match snapshot 1`] = `
 
 <aside class="navigation-drawer navigation-drawer--close"
-       style="height: 100%;"
+       style="height: 100%; margin-top: 0px; max-height: calc(100% - 100%px); width: 300px;"
 >
   <div class="navigation-drawer__border">
   </div>
@@ -47,7 +47,7 @@ exports[`VNavigationDrawer.js should render component with custom disableRouteWa
 exports[`VNavigationDrawer.js should render component with custom enableResizeWatcher and match snapshot 1`] = `
 
 <aside class="navigation-drawer navigation-drawer--close"
-       style="height: 100%;"
+       style="height: 100%; margin-top: 0px; max-height: calc(100% - 100%px); width: 300px;"
 >
   <div class="navigation-drawer__border">
   </div>
@@ -58,7 +58,7 @@ exports[`VNavigationDrawer.js should render component with custom enableResizeWa
 exports[`VNavigationDrawer.js should render component with custom floating and match snapshot 1`] = `
 
 <aside class="navigation-drawer navigation-drawer--close navigation-drawer--floating"
-       style="height: 100%;"
+       style="height: 100%; margin-top: 0px; max-height: calc(100% - 100%px); width: 300px;"
 >
   <div class="navigation-drawer__border">
   </div>
@@ -69,7 +69,7 @@ exports[`VNavigationDrawer.js should render component with custom floating and m
 exports[`VNavigationDrawer.js should render component with custom height and match snapshot 1`] = `
 
 <aside class="navigation-drawer navigation-drawer--close"
-       style="height: 100px;"
+       style="height: 100px; margin-top: 0px; max-height: calc(100% - 100%px); width: 300px;"
 >
   <div class="navigation-drawer__border">
   </div>
@@ -80,7 +80,7 @@ exports[`VNavigationDrawer.js should render component with custom height and mat
 exports[`VNavigationDrawer.js should render component with custom miniVariant and match snapshot 1`] = `
 
 <aside class="navigation-drawer navigation-drawer--close navigation-drawer--mini-variant"
-       style="height: 100%;"
+       style="height: 100%; margin-top: 0px; max-height: calc(100% - 100%px); width: 80px;"
 >
   <div class="navigation-drawer__border">
   </div>
@@ -91,7 +91,7 @@ exports[`VNavigationDrawer.js should render component with custom miniVariant an
 exports[`VNavigationDrawer.js should render component with custom mobileBreakPoint and match snapshot 1`] = `
 
 <aside class="navigation-drawer navigation-drawer--close"
-       style="height: 100%;"
+       style="height: 100%; margin-top: 0px; max-height: calc(100% - 100%px); width: 300px;"
 >
   <div class="navigation-drawer__border">
   </div>
@@ -102,7 +102,7 @@ exports[`VNavigationDrawer.js should render component with custom mobileBreakPoi
 exports[`VNavigationDrawer.js should render component with custom permanent and match snapshot 1`] = `
 
 <aside class="navigation-drawer navigation-drawer--close navigation-drawer--permanent"
-       style="height: 100%;"
+       style="height: 100%; margin-top: 0px; max-height: calc(100% - 100%px); width: 300px;"
 >
   <div class="navigation-drawer__border">
   </div>
@@ -113,7 +113,7 @@ exports[`VNavigationDrawer.js should render component with custom permanent and 
 exports[`VNavigationDrawer.js should render component with custom persistent and match snapshot 1`] = `
 
 <aside class="navigation-drawer navigation-drawer--close navigation-drawer--persistent"
-       style="height: 100%;"
+       style="height: 100%; margin-top: 0px; max-height: calc(100% - 100%px); width: 300px;"
 >
   <div class="navigation-drawer__border">
   </div>
@@ -124,7 +124,7 @@ exports[`VNavigationDrawer.js should render component with custom persistent and
 exports[`VNavigationDrawer.js should render component with custom right and match snapshot 1`] = `
 
 <aside class="navigation-drawer navigation-drawer--close navigation-drawer--right"
-       style="height: 100%;"
+       style="height: 100%; margin-top: 0px; max-height: calc(100% - 100%px); width: 300px;"
 >
   <div class="navigation-drawer__border">
   </div>
@@ -135,7 +135,7 @@ exports[`VNavigationDrawer.js should render component with custom right and matc
 exports[`VNavigationDrawer.js should render component with custom temporary and match snapshot 1`] = `
 
 <aside class="navigation-drawer navigation-drawer--close navigation-drawer--temporary"
-       style="height: 100%;"
+       style="height: 100%; margin-top: 0px; max-height: calc(100% - 100%px); width: 300px;"
 >
   <div class="navigation-drawer__border">
   </div>
@@ -146,7 +146,7 @@ exports[`VNavigationDrawer.js should render component with custom temporary and 
 exports[`VNavigationDrawer.js should render component with custom touchless and match snapshot 1`] = `
 
 <aside class="navigation-drawer navigation-drawer--close"
-       style="height: 100%;"
+       style="height: 100%; margin-top: 0px; max-height: calc(100% - 100%px); width: 300px;"
 >
   <div class="navigation-drawer__border">
   </div>
@@ -157,7 +157,7 @@ exports[`VNavigationDrawer.js should render component with custom touchless and 
 exports[`VNavigationDrawer.js should render component with custom value and match snapshot 1`] = `
 
 <aside class="navigation-drawer navigation-drawer--open"
-       style="height: 100%;"
+       style="height: 100%; margin-top: 0px; max-height: calc(100% - 100%px); width: 300px;"
 >
   <div class="navigation-drawer__border">
   </div>

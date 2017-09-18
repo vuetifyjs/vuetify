@@ -1,7 +1,8 @@
-import { test } from '~util/testing'
+﻿import { test } from '~util/testing'
+import { mount } from 'avoriaz'
 import VCheckbox from '~components/VCheckbox'
 
-test('VCheckbox.js', ({ mount }) => {
+test('VCheckbox.js', () => {
   it('should return true when clicked', () => {
     const wrapper = mount(VCheckbox, {
       propsData: {
@@ -9,14 +10,16 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const change = jest.fn()
-    wrapper.instance().$on('change', change)
-    wrapper.find('.input-group--selection-controls__ripple')[0].trigger('click')
+    const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
 
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    ripple.trigger('click')
     expect(change).toBeCalledWith(true)
   })
 
-  it('should return a value when clicked with a specified value', () => {
+  it('should return a value when toggled on with a specified value', () => {
     const wrapper = mount(VCheckbox, {
       propsData: {
         value: 'John',
@@ -24,14 +27,16 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const change = jest.fn()
-    wrapper.instance().$on('change', change)
-    wrapper.find('.input-group--selection-controls__ripple')[0].trigger('click')
+    const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
 
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    ripple.trigger('click')
     expect(change).toBeCalledWith('John')
   })
 
-  it('should return null when clicked with a specified value', () => {
+  it('should return null when toggled off with a specified value', () => {
     const wrapper = mount(VCheckbox, {
       propsData: {
         value: 'John',
@@ -39,15 +44,16 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const change = jest.fn()
-    wrapper.instance().$on('change', change)
-    wrapper.find('.input-group--selection-controls__ripple')[0].trigger('click')
+    const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
 
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    ripple.trigger('click')
     expect(change).toBeCalledWith(null)
   })
 
   it('should toggle when label is clicked', () => {
-    const change = jest.fn()
     const wrapper = mount(VCheckbox, {
       propsData: {
         label: 'Label',
@@ -57,55 +63,104 @@ test('VCheckbox.js', ({ mount }) => {
     })
 
     const label = wrapper.find('label')[0]
-    wrapper.instance().$on('change', change)
-    label.trigger('click')
 
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    label.trigger('click')
     expect(change).toBeCalled()
-    expect('$attrs is readonly').toHaveBeenWarned()
   })
 
-  // Potentially lost during a merge, find working version and fix
-  // it('should render role and aria-checked attributes on input group', () => {
-  //   const wrapper = mount(VCheckbox, {
-  //     propsData: {
-  //       inputValue: false
-  //     }
-  //   })
+  it('should render role and aria-checked attributes on input group', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        inputValue: false
+      }
+    })
 
-  //   let inputGroup = wrapper.find('.input-group')[0]
-  //   expect(inputGroup.hasAttribute('role', 'checkbox')).toBe(true)
-  //   expect(inputGroup.hasAttribute('aria-checked', 'false')).toBe(true)
+    const inputGroup = wrapper.find('.input-group')[0]
 
-  //   wrapper.setProps({ 'inputValue': true })
-  //   inputGroup = wrapper.find('.input-group')[0]
-    // expect(inputGroup.hasAttribute('aria-checked', 'true')).toBe(true)
+    expect(inputGroup.getAttribute('role')).toBe('checkbox')
+    expect(inputGroup.getAttribute('aria-checked')).toBe('false')
 
-    // wrapper.setProps({ 'indeterminate': true })
-    // inputGroup = wrapper.find('.input-group')[0]
-    // expect(inputGroup.hasAttribute('aria-checked', 'mixed')).toBe(true)
-  // })
+    wrapper.setProps({ 'inputValue': true })
+    expect(inputGroup.getAttribute('aria-checked')).toBe('true')
 
-  // it('should render aria-label attribute with label value on input group', () => {
-  //   const wrapper = mount(VCheckbox, {
-  //     propsData: {
-  //       label: 'Test'
-  //     },
-  //     attrs: {}
-  //   })
+    wrapper.setProps({ 'indeterminate': true })
+    expect(inputGroup.getAttribute('aria-checked')).toBe('mixed')
+  })
 
-  //   const inputGroup = wrapper.find('.input-group')[0]
-  //   expect(inputGroup.hasAttribute('aria-label', 'Test')).toBe(true)
-  //   expect(`$attrs is readonly`).toHaveBeenWarned()
-  // })
+  it('should render aria-label attribute with label value on input group', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        label: 'Test'
+      },
+      attrs: {}
+    })
 
-  // it('should not render aria-label attribute with no label value on input group', () => {
-  //   const wrapper = mount(VCheckbox, {
-  //     propsData: {
-  //       label: null
-  //     }
-  //   })
+    const inputGroup = wrapper.find('.input-group')[0]
+    expect(inputGroup.getAttribute('aria-label')).toBe('Test')
+  })
 
-  //   const inputGroup = wrapper.find('.input-group')[0]
-  //   expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
-  // })
+  it('should not render aria-label attribute with no label value on input group', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        label: null
+      }
+    })
+
+    const inputGroup = wrapper.find('.input-group')[0]
+    expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
+  })
+
+  it('should toggle on space and enter with default toggleKeys', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        inputValue: false
+      }
+    })
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    wrapper.trigger('keydown.enter')
+    wrapper.trigger('keydown.space')
+
+    expect(change.mock.calls).toHaveLength(2)
+  })
+
+  it('should not toggle on space or enter with blank toggleKeys', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        inputValue: false,
+        toggleKeys: []
+      }
+    })
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    wrapper.trigger('keydown.enter')
+    wrapper.trigger('keydown.space')
+
+    expect(change).not.toBeCalled()
+  })
+
+  it('should toggle only on custom toggleKeys', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        inputValue: false,
+        toggleKeys: [32] // space
+      }
+    })
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    wrapper.trigger('keydown.enter')
+    expect(change).not.toBeCalled()
+
+    wrapper.trigger('keydown.space')
+    expect(change).toBeCalled()
+  })
 })

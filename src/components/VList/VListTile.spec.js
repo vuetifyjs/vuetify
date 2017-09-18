@@ -1,5 +1,6 @@
 import { test } from '~util/testing'
 import { VListTile } from '~components/VList'
+import { compileToFunctions } from 'vue-template-compiler'
 import Vue from 'vue/dist/vue.common'
 
 const stub = {
@@ -8,11 +9,11 @@ const stub = {
 }
 
 test('VListTile.vue', ({ mount }) => {
-  it('should render correctly', () => {
+  it('should render with a div when href and to are not used', () => {
     const wrapper = mount(VListTile)
 
     expect(wrapper.is('li')).toBe(true)
-    expect(wrapper.find('a').length).toBe(1)
+    expect(wrapper.find('div')).toHaveLength(1)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -26,7 +27,7 @@ test('VListTile.vue', ({ mount }) => {
     const a = wrapper.find('a')[0]
 
     expect(wrapper.is('li')).toBe(true)
-    expect(a.hasAttribute('href', 'http://www.google.com')).toBe(true)
+    expect(a.getAttribute('href')).toBe('http://www.google.com')
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -42,12 +43,16 @@ test('VListTile.vue', ({ mount }) => {
     })
 
     expect(wrapper.is('li')).toBe(true)
-    expect(wrapper.find('button').length).toBe(1)
+    expect(wrapper.find('button')).toHaveLength(1)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should not have activeClass when not toggled', () => {
-    const wrapper = mount(VListTile)
+    const wrapper = mount(VListTile, {
+      propsData: {
+        href: 'http://www.google.com'
+      }
+    })
 
     const link = wrapper.find('a')[0]
     expect(link.hasClass(wrapper.instance().activeClass)).toBe(false)
@@ -56,11 +61,70 @@ test('VListTile.vue', ({ mount }) => {
   it('should have activeClass when toggled', () => {
     const wrapper = mount(VListTile, {
       propsData: {
+        href: 'http://www.google.com',
         value: true
       }
     })
 
     const link = wrapper.find('a')[0]
     expect(link.hasClass(wrapper.instance().activeClass)).toBe(true)
+  })
+
+  it('should have --link class when href prop present', () => {
+    const wrapper = mount(VListTile, {
+      propsData: {
+        href: '/home'
+      }
+    })
+
+    expect(wrapper.contains('.list__tile--link')).toBe(true)
+  })
+
+  it('should have --link class when to prop present', () => {
+    const instance = Vue.extend()
+    instance.component('router-link', stub)
+
+    const wrapper = mount(VListTile, {
+      propsData: {
+        to: '/home'
+      },
+      instance
+    })
+
+    expect(wrapper.contains('.list__tile--link')).toBe(true)
+  })
+
+  it('should have --link class when click handler present', () => {
+    const { render } = compileToFunctions(`
+      <v-list-tile @click="">Test</v-list-tile>
+    `)
+
+    const component = Vue.component('test', {
+      components: {
+        VListTile
+      },
+      render
+    })
+
+    const wrapper = mount(component)
+
+    expect(wrapper.contains('div.list__tile--link')).toBe(true)
+  })
+
+  it('should have --link class when click.prevent.stop handler present', () => {
+    const { render } = compileToFunctions(`
+      <v-list-tile @click.prevent.stop="">Test</v-list-tile>
+    `)
+
+    const component = Vue.component('test', {
+      components: {
+        VListTile
+      },
+      render
+    })
+
+    const wrapper = mount(component)
+
+    expect(wrapper.contains('div.list__tile--link')).toBe(true)
   })
 })

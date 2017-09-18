@@ -12,6 +12,10 @@ export default {
 
   computed: {
     normalizedHeight () {
+      if (this.jumbotron) {
+        return isNaN(this.height) ? this.height : `${this.height}px`
+      }
+
       return Number(this.height.toString().replace(/(^[0-9]*$)/, '$1'))
     },
 

@@ -3,48 +3,59 @@
 
 /** Theme */
 expansion-panel($material)
-  > li
-    border: 1px solid rgba($material.fg-color, $material.divider-percent)
+  .expansion-panel__container
+    border-top: 1px solid rgba($material.fg-color, $material.divider-percent)
+    background-color: $material.cards
+    color: $material.text.primary
 
-  &__body
-    background-color: rgba($material.fg-color, 0.03)
+  .icon
+    color: $material.icons.active
+
+  &--focusable
+    .expansion-panel__container
+      &:focus
+        background-color: $material.expansion-panels.focus
 
 theme(expansion-panel, "expansion-panel")
 
 .expansion-panel
-  text-align: left
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
   list-style-type: none
   padding: 0
+  text-align: left
   width: 100%
   elevation(2)
 
-  > li:not(:first-child)
-    border-top: none !important
+  &__container
+    flex: 1 0 100%
+    outline: none
+    transition: .3s $transition.swing
+
+    &:first-child
+      border-top: none !important
+
+    .header__icon
+      margin-left: auto
+      
+      .icon
+        // Edge rendering issue TODO: revisit later
+        transition: none
+
+    &--active
+      .header__icon .icon
+        transform: rotate(-180deg)
 
   &__header
     display: flex
     cursor: pointer
     align-items: center
-    height: $expansion-panel-collapse-height
     position: relative
-    padding-left: 1rem
+    padding: 12px 24px
 
-    i
-      margin-right: 1rem
-
-    &:after
-      content: '\E313'
-      font-family: 'Material Icons'
-      font-size: 1.5rem
-      position: absolute
-      right: 15px
-      top: calc(50% - 16px)
-      color: inherit
-      transition: transform 0.3s cubic-bezier(0, 0, .2, 1)
-
-    &--active
-      &:after
-        transform: rotate(-180deg)
+    > *:not(.header__icon)
+      flex: 1 1 auto
 
   &__body
     transition: $primary-transition
@@ -52,3 +63,22 @@ theme(expansion-panel, "expansion-panel")
     .card
       border-radius: 0
       elevation(0)
+
+  &--popout, &--inset
+    elevation(0)
+
+    .expansion-panel__container--active
+      margin: $spacers.three.x
+      elevation(3)
+
+  &--popout, &--inset
+    .expansion-panel__container
+      max-width: 95%
+  
+  &--popout
+    .expansion-panel__container--active
+      max-width: 100%
+
+  &--inset
+    .expansion-panel__container--active
+      max-width: 85%

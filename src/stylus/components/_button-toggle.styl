@@ -4,15 +4,13 @@
 /** Themes */
 
 btn-toggle($material)
-  background: $material.background
+  background: $material.cards
 
   .btn
-    &[data-selected]
-      opacity: 1
-      background-color: $material.dividers !important
+    color: $material.text.primary
 
-      &:not(:last-child):not([data-only-child])
-        border-right-color: $material.dividers
+    &[data-selected]:not(:last-child):not([data-only-child])
+      border-right-color: $material.buttons.disabled
 
 theme(btn-toggle, "btn-toggle")
 

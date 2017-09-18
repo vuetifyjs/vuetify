@@ -85,6 +85,7 @@ function unbind (el, { value }) {
 }
 
 export default {
+  name: 'touch',
   inserted,
   unbind
 }

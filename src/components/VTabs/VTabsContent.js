@@ -29,7 +29,6 @@ export default {
       type: String,
       required: true
     },
-    lazy: Boolean,
     transition: {
       type: [Boolean, String],
       default: 'tab-transition'
@@ -65,7 +64,6 @@ export default {
   render (h) {
     const div = h('div', {
       'class': 'tabs__content',
-      domProps: { id: this.id },
       directives: [{
         name: 'show',
         value: this.isActive

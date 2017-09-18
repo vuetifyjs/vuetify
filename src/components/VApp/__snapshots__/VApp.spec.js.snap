@@ -10,16 +10,6 @@ exports[`VApp.js should allow a custom id 1`] = `
 
 `;
 
-exports[`VApp.js should have a toolbar and footer class 1`] = `
-
-<div data-app="true"
-     class="application application--light application--footer application--footer-fixed application--toolbar"
-     id="app"
->
-</div>
-
-`;
-
 exports[`VApp.js should have an application class 1`] = `
 
 <div data-app="true"

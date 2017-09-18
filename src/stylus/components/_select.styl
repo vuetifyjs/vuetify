@@ -1,8 +1,15 @@
 @import '../bootstrap'
 
 .input-group--select
+  // TODO: revisit this
+  overflow: hidden
+
   .input-group--select__autocomplete
     display: block
+    padding-bottom: 1px
+
+    &--index
+      opacity: 0 !important
 
   .input-group__append-icon
     transition: .3s $transition.linear-out-slow-in
@@ -12,22 +19,22 @@
       display: inline-block
       height: 30px
       opacity: 1
-      padding-bottom: 1px
 
     .input-group__append-icon
       transform: rotate(-180deg)
 
-  .input-group__input, input
+  .input-group__input
     cursor: pointer
 
   &.input-group--disabled
-    cursor: not-allowed
+    cursor: default
     pointer-events: none
 
 .input-group--select
   .input-group__selections
     align-items: center
     display: flex
+    flex-wrap: wrap
     position: relative
     width: 100%
 
@@ -35,6 +42,9 @@
       display: inline-flex
       font-size: 16px
       padding-right: 4px
+
+      &--active
+        color: $theme.primary
 
   .menu
     display: inline
@@ -49,19 +59,35 @@
 
 
 .input-group
-  &--overflow,
-  &--editable,
-  &--segmented
+  &.input-group--overflow,
+  &.input-group--editable,
+  &.input-group--segmented
     padding: 0
+
+    .input-group__append-icon
+      padding: 0
 
     .input-group__selections,
     input
-      height: 24px
+      height: 48px
 
     // Handle weird transition issue
-    .input-group__selections__comma
+    .input-group__selections__comma, input
       top: 0
       left: 0
+      padding-left: 16px
+
+    .input-group__selections
+      width: calc(100% - 55px)
+
+      .btn
+        border-radius: 0
+        margin: 0
+        height: 48px
+        width: 100%
+
+        .btn__content
+          justify-content: start
 
     .input-group__input
       transition: .3s $transition.swing
@@ -76,14 +102,14 @@
 
     label
       left: 16px !important
-      top: 10px !important
+      top: 8px !important
 
     .input-group__details
       &:after
         display: none
 
     .input-group__input
-      padding: 12px 16px
+      padding: 0
 
       &:before
         content: ''
@@ -93,6 +119,9 @@
         height: 1px
         top: 0
         transition: .3s $transition.swing
+
+    .input-group__append-icon
+      width: 55px
 
   &--segmented .input-group__input,
   &--editable .input-group__input:hover,
@@ -106,3 +135,13 @@
       top: 0
       width: 1px
 
+.menu__content--select
+  // // IE11 Fix for overflow
+  .input-group--selection-controls__ripple
+    display: none
+
+.menu__content--autocomplete
+    border-radius: 0
+
+    > .card
+      border-radius: 0

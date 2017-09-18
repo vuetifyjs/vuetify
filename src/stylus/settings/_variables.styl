@@ -17,7 +17,7 @@ $grid-breakpoints := {
   xs: 0
   sm: 600px
   md: 960px
-  lg: (1280 - 16px) // Desktop gets a 16dp reduction
+  lg: (1280px - 16px) // Desktop gets a 16dp reduction
   xl: (1920px - 16px) // https://material.io/guidelines/layout/responsive-ui.html#responsive-ui-breakpoints
 }
 
@@ -122,7 +122,7 @@ $transition := {
   fast-out-linear-in: cubic-bezier(0.4, 0.0, 1, 1),
   ease-in-out: cubic-bezier(0.4, 0.0, 0.6, 1),
   fast-in-fast-out: cubic-bezier(.25,.8,.25,1),
-  swing: cubic-bezier(.25,.8,.25,1)
+  swing: cubic-bezier(.25,.8,.50,1)
 }
 
 $primary-transition := 0.3s $transition.swing
@@ -218,7 +218,7 @@ $card-row-min-height := 36px
 $chip-background := $grey.lighten-2
 $chip-border := 1px solid $grey.lighten-2
 $chip-border-radius := 28px
-$chip-font-size := 14px
+$chip-font-size := 13px
 $chip-label-border-radius := $card-border-radius
 $chip-label-color := rgba($material-light.fg-color, .87)
 $chip-icon-font-size := 24px
@@ -228,7 +228,7 @@ $chip-removeable-padding := 0 4px 0 12px
 $chip-outline-background := transparent !important
 $chip-outline-color := $grey.base
 $chip-height := 32px
-$chip-margin := 8px
+$chip-margin := 4px
 $chip-small-height := 26px
 
 // Collapsible
@@ -293,7 +293,8 @@ $time-picker-number-font-size := 16px
 $time-picker-number-margin := 10px
 
 // Toolbar
-$toolbar-height := 64px
+$toolbar-height := 56px
+$toolbar-prominent-height := 64px
 $toolbar-extension-height := 72px
 $toolbar-mobile-portrait-height := 56px
 $toolbar-mobile-landscape-height := 48px
@@ -337,8 +338,6 @@ $selection-controls-dark-label-color := $material-light.text-color
 
 /* Navigation drawer */
 $navigation-drawer-height := 100vh
-$navigation-drawer-width := 300px
-$navigation-drawer-mini-variant-width := 80px
 $navigation-drawer-background-dark := $theme.secondary
 $navigation-drawer-background-light := $material-light.bg-color
 
@@ -370,7 +369,7 @@ $snackbar-background-color := #323232
 
 /* Text Input */
 $input-group-height := 58px
-$input-group-padding := 18px 0
+$input-group-padding := 18px 0 0
 $input-font-size := 16px
 $label-font-size := 12px
 $input-height := 30px

@@ -1,8 +1,18 @@
+/**
+ * Bootable
+ * @mixin
+ *
+ * Used to add lazy content functionality to components
+ * Looks for change in "isActive" to automatically boot
+ * Otherwise can be set manually
+ */
 export default {
-  data () {
-    return {
-      isBooted: false
-    }
+  data: () => ({
+    isBooted: false
+  }),
+
+  props: {
+    lazy: Boolean
   },
 
   watch: {
@@ -13,7 +23,11 @@ export default {
 
   methods: {
     showLazyContent (content) {
-      return this.lazy && this.isBooted || !this.lazy ? content : null
+      return this.lazy &&
+        this.isBooted ||
+        !this.lazy
+        ? content
+        : null
     }
   }
 }

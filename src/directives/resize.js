@@ -1,8 +1,16 @@
 function inserted (el, binding) {
-  const debounce = cb => setTimeout(cb, 50)
+  let cb = binding.value
+  let debounce = 200
+
+  if (typeof binding.value !== 'function') {
+    cb = binding.value.value
+    debounce = binding.value.debounce
+  }
+
+  let debounceTimeout = setTimeout(cb, debounce)
   const onResize = () => {
-    clearTimeout(debounce)
-    debounce(binding.value)
+    clearTimeout(debounceTimeout)
+    debounceTimeout = setTimeout(cb, debounce)
   }
 
   window.addEventListener('resize', onResize, { passive: true })
@@ -16,6 +24,7 @@ function unbind (el, binding) {
 }
 
 export default {
+  name: 'resize',
   inserted,
   unbind
 }

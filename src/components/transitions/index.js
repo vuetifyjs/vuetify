@@ -4,6 +4,7 @@ import {
 } from '../../util/helpers'
 
 import ExpandTransitionFunctions from './expand-transition'
+import RowExpandTransitionFunctions from './row-expand-transition'
 
 // Component specific transitions
 export const VBottomSheetTranstion = createSimpleTransition('bottom-sheet-transition')
@@ -26,6 +27,7 @@ export const VSlideYReverseTransition = createSimpleTransition('slide-y-reverse-
 
 // JavaScript transitions
 export const VExpandTransition = createJavaScriptTransition('expand-transition', ExpandTransitionFunctions)
+export const VRowExpandTransition = createJavaScriptTransition('row-expand-transition', RowExpandTransitionFunctions)
 
 export default function install (Vue) {
   Vue.component('v-bottom-sheet-transition', VBottomSheetTranstion)
@@ -44,4 +46,5 @@ export default function install (Vue) {
   Vue.component('v-tab-reverse-transition', VTabReverseTransition)
   Vue.component('v-tab-transition', VTabTransition)
   Vue.component('v-expand-transition', VExpandTransition)
+  Vue.component('v-row-expand-transition', VRowExpandTransition)
 }

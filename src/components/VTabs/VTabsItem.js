@@ -1,11 +1,11 @@
-import GenerateRouteLink from '../../mixins/route-link'
+import Routable from '../../mixins/routable'
 
 export default {
   name: 'v-tabs-item',
 
-  inject: ['slider', 'tabClick', 'registerTabItem', 'unregisterTabItem'],
+  inject: ['slider', 'tabClick', 'addTabItem', 'removeTabItem'],
 
-  mixins: [GenerateRouteLink],
+  mixins: [Routable],
 
   data () {
     return {
@@ -47,12 +47,12 @@ export default {
   },
 
   mounted () {
-    this.registerTabItem(this.action, this.toggle, this.$el)
+    this.addTabItem(this.action, this.toggle, this.$el)
     this.callSlider()
   },
 
   beforeDestroy () {
-    this.unregisterTabItem(this.action)
+    this.removeTabItem(this.action)
   },
 
   methods: {
@@ -84,7 +84,12 @@ export default {
   },
 
   render (h) {
-    const { tag, data } = this.generateRouteLink()
+    const link = this.generateRouteLink()
+    const { data } = link
+
+    // If disabled, use div as anchor tags do not support
+    // being disabled
+    const tag = this.disabled ? 'div' : link.tag
 
     return h('li', {
       'class': 'tabs__li'

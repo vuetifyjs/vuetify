@@ -1,7 +1,8 @@
 import VDialog from '~components/VDialog'
 import { test } from '~util/testing'
+import { mount } from 'avoriaz'
 
-test('VDialog.js', ({ mount }) => {
+test('VDialog.js', () => {
   it('should render component and match snapshot', () => {
     const wrapper = mount(VDialog)
 

@@ -1,6 +1,7 @@
 import VNavigationDrawer from '~components/VNavigationDrawer'
 import { test } from '~util/testing'
 
+// TODO: Test behaviour instead of styles
 test('VNavigationDrawer.js', ({ mount }) => {
   it('should render component and match snapshot', () => {
     const wrapper = mount(VNavigationDrawer)
@@ -146,5 +147,19 @@ test('VNavigationDrawer.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should match value if resize-watcher is not enabled', async () => {
+    const wrapper = mount(VNavigationDrawer, {
+      attachToDocument: true,
+      propsData: {
+        permanent: true,
+        value: false
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isActive).toBe(false)
   })
 })

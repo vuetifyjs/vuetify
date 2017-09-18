@@ -41,6 +41,7 @@ theme(list, "list")
     margin: 0
     transition: $primary-transition
     position: relative
+    user-select: none
 
     &:after
       content: ''
@@ -53,7 +54,10 @@ theme(list, "list")
       transition: $primary-transition
       background-color: $material-twelve-percent-dark
 
-    a&:hover, &--highlighted
+    &--link
+      cursor: pointer
+
+    &--link:hover, &--highlighted
       background: $material-twelve-percent-dark
 
     &__content,
@@ -63,12 +67,14 @@ theme(list, "list")
 
     &__title, &__sub-title
       white-space: nowrap
-      overflow-x: hidden
+      overflow: hidden
       text-overflow: ellipsis
       width: 100%
 
     &__title
       transition: $primary-transition
+      height: 24px
+      line-height: 24px
       position: relative
       text-align: left
 
@@ -115,7 +121,7 @@ theme(list, "list")
 
     &__content
       text-align: left
-      flex: 0 1 100%
+      flex: 1 1 auto
       overflow: hidden
       display: flex
       align-items: flex-start
@@ -137,7 +143,7 @@ theme(list, "list")
 
     &--avatar
       height: $list-item-avatar-single-height
-      
+
       .avatar
         img,
         .icon
@@ -213,6 +219,12 @@ theme(list, "list")
         color: $theme.primary
 
     &__header
+      > li:first-child
+        cursor: pointer
+
+        &:hover
+          background: $material-twelve-percent-dark
+
       + .list--group
         &:after
           opacity: 1
@@ -237,9 +249,9 @@ theme(list, "list")
 
   &--subheader
     padding-top: 0
-    
+
   &.list--two-line,
   &.list--three-line
     .list__tile__avatar
       align-items: flex-start
-      padding-top: 16px
+      padding-top: 6px

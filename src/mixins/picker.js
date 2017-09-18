@@ -1,4 +1,8 @@
+import Themeable from './themeable'
+
 export default {
+  mixins: [Themeable],
+
   data () {
     return {
       isSaving: false
@@ -14,10 +18,7 @@ export default {
     value: {
       required: true
     },
-    light: {
-      type: Boolean,
-      default: true
-    },
+    light: Boolean,
     dark: Boolean
   },
 

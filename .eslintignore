@@ -1,4 +1,6 @@
 ﻿build/*.js
+dev/*
 src/stylus/*.styl
 src/util/testing.js
 src/util/to-have-been-warned.js
+*.spec.js
