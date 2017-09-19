@@ -1,12 +1,13 @@
 require('../../stylus/components/_input-groups.styl')
 require('../../stylus/components/_text-fields.styl')
 
+import Formatter from '../../mixins/formatter'
 import Input from '../../mixins/input'
 
 export default {
   name: 'v-text-field',
 
-  mixins: [Input],
+  mixins: [Input, Formatter],
 
   inheritAttrs: false,
 
@@ -23,6 +24,7 @@ export default {
     box: Boolean,
     clearable: Boolean,
     counter: [Boolean, Number, String],
+    format: [Function, Object],
     fullWidth: Boolean,
     multiLine: Boolean,
     placeholder: String,
@@ -65,12 +67,32 @@ export default {
       const parsedLength = parseInt(this.counter, 10)
       return isNaN(parsedLength) ? 25 : parsedLength
     },
+    formatter () {
+      const _formatter = this.format != null && this.format
+
+      if (!_formatter) {
+        return this.mask == null ? () => {} : this.formatInput
+      } else if (typeof _formatter === 'function') {
+        return _formatter
+      } else {
+        return _formatter.formatValue == null ? () => {} : _formatter
+      }
+    },
     inputValue: {
       get () {
         return this.value
       },
       set (val) {
-        this.lazyValue = val
+        let formated
+
+        if (typeof this.formatter === 'function') {
+          formated = this.formatter(val)
+        } else {
+          formated = this.formatter.formatValue(val)
+        }
+
+        val = formated == null ? val : formated
+        this.$refs.input.value = this.lazyValue = val
         this.$emit('input', val)
       }
     },

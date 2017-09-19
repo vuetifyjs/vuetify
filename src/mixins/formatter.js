@@ -16,13 +16,13 @@ export default {
 
   computed: {
     properties () {
-      return DefaultProperties.assign({}, this.options)
+      return DefaultProperties.assign({}, this.mask)
     }
   },
 
   // Example: http://nosir.github.io/cleave.js/
   props: {
-    options: {
+    mask: {
       type: Object,
       required: false
     }
