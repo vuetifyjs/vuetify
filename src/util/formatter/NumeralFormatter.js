@@ -23,10 +23,16 @@ NumeralFormatter.prototype = {
   },
 
   format: function (value) {
-    let partDecimal = ''
-    let parts
-    let partInteger
+    value = this.formatMarks(value)
 
+    // strip any leading zeros
+    if (this.stripLeadingZeroes) {
+      value = value.replace(/^(-)?0+(?=\d)/, '$1')
+    }
+
+    return this.formatParts(value)
+  },
+  formatMarks: function (value) {
     // strip alphabet letters
     value = value.replace(/[A-Za-z]/g, '')
     // replace the first decimal mark with reserved placeholder
@@ -46,12 +52,12 @@ NumeralFormatter.prototype = {
     value = value.replace('N', this.numeralPositiveOnly ? '' : '-')
 
     // replace decimal mark
-    value = value.replace('M', this.numeralDecimalMark)
-
-    // strip any leading zeros
-    if (this.stripLeadingZeroes) {
-      value = value.replace(/^(-)?0+(?=\d)/, '$1')
-    }
+    return value.replace('M', this.numeralDecimalMark)
+  },
+  formatParts: function (value) {
+    let partDecimal = ''
+    let parts
+    let partInteger
 
     partInteger = value
 
