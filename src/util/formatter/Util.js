@@ -78,10 +78,14 @@ const Util = {
     return index
   },
 
-  getFormattedValue: function (value, blocks, blocksLength, delimiter, delimiters) {
-    let result = ''
+  getFormattedValue: function (value, block, delim) {
+    const blocks = block.blocks
+    const blocksLength = block.blocksLength
+    const delimiter = delim.delimiter
+    const delimiters = delim.delimiters
     const multipleDelimiters = delimiters.length > 0
     let currentDelimiter
+    let result = ''
 
     // no options, normal input
     if (blocksLength === 0) {

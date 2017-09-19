@@ -31,40 +31,40 @@ DateFormatter.prototype = {
     value = value.replace(/[^\d]/g, '')
 
     owner.blocks.forEach(function (length, index) {
-      if (value.length > 0) {
-        var sub = value.slice(0, length)
-        const sub0 = sub.slice(0, 1)
-        const rest = value.slice(length)
+      if (value.length <= 0) return
 
-        switch (owner.datePattern[index]) {
-          case 'd':
-            if (sub === '00') {
-              sub = '01'
-            } else if (parseInt(sub0, 10) > 3) {
-              sub = '0' + sub0
-            } else if (parseInt(sub, 10) > 31) {
-              sub = '31'
-            }
+      var sub = value.slice(0, length)
+      const sub0 = sub.slice(0, 1)
+      const rest = value.slice(length)
 
-            break
+      switch (owner.datePattern[index]) {
+        case 'd':
+          if (sub === '00') {
+            sub = '01'
+          } else if (parseInt(sub0, 10) > 3) {
+            sub = '0' + sub0
+          } else if (parseInt(sub, 10) > 31) {
+            sub = '31'
+          }
 
-          case 'm':
-            if (sub === '00') {
-              sub = '01'
-            } else if (parseInt(sub0, 10) > 1) {
-              sub = '0' + sub0
-            } else if (parseInt(sub, 10) > 12) {
-              sub = '12'
-            }
+          break
 
-            break
-        }
+        case 'm':
+          if (sub === '00') {
+            sub = '01'
+          } else if (parseInt(sub0, 10) > 1) {
+            sub = '0' + sub0
+          } else if (parseInt(sub, 10) > 12) {
+            sub = '12'
+          }
 
-        result += sub
-
-        // update remaining string
-        value = rest
+          break
       }
+
+      result += sub
+
+      // update remaining string
+      value = rest
     })
 
     return this.getFixedDateString(result)

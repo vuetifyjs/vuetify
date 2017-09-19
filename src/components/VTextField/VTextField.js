@@ -3,6 +3,7 @@ require('../../stylus/components/_text-fields.styl')
 
 import Formatter from '../../mixins/formatter'
 import Input from '../../mixins/input'
+import Util from '../../util/formatter/Util'
 
 export default {
   name: 'v-text-field',
@@ -14,7 +15,8 @@ export default {
   data () {
     return {
       inputHeight: null,
-      badInput: false
+      badInput: false,
+      lastInputValue: ''
     }
   },
 
@@ -92,7 +94,8 @@ export default {
         }
 
         val = formated == null ? val : formated
-        this.$refs.input.value = this.lazyValue = val
+        this.updateValueState()
+        this.lazyValue = val
         this.$emit('input', val)
       }
     },
@@ -141,6 +144,43 @@ export default {
         const inputHeight = height < minHeight ? minHeight : height
         this.inputHeight = inputHeight + (this.textarea ? 4 : 0)
       })
+    },
+    keyDown (e) {
+      const charCode = e.which || e.keyCode
+      const currentValue = this.$refs.input.value
+
+      this.lastInputValue = currentValue
+      // hit backspace when last character is delimiter
+      if (charCode === 8 &&
+        Util.isDelimiter(currentValue.slice(-this.properties.delimiterLength),
+          this.properties.delimiter, this.properties.delimiters)) {
+        this.properties.backspace = true
+
+        return
+      }
+
+      this.properties.backspace = false
+    },
+    updateValueState () {
+      const endPos = this.$refs.input.selectionEnd
+      const oldValue = this.$refs.input.value
+
+      this.$refs.input.value = this.properties.result
+
+      // If cursor was at the end of value, just place it back.
+      // Because new value could contain additional chars.
+      if (oldValue.length === endPos) {
+        return
+      }
+
+      if (this.$refs.input.createTextRange) {
+        const range = this.$refs.input.createTextRange()
+
+        range.move('character', endPos)
+        range.select()
+      } else {
+        this.$refs.input.setSelectionRange(endPos, endPos)
+      }
     },
     onInput (e) {
       this.inputValue = e.target.value
@@ -192,7 +232,8 @@ export default {
         on: Object.assign(listeners, {
           blur: this.blur,
           input: this.onInput,
-          focus: this.focus
+          focus: this.focus,
+          keydown: this.keyDown
         }),
         ref: 'input'
       }

@@ -29,14 +29,13 @@ export default {
   },
 
   created () {
-    const pps = this.properties
+    this.properties.maxLength = Util.getMaxLength(this.properties.blocks)
 
-    pps.maxLength = Util.getMaxLength(pps.blocks)
-    if (pps.numeral) {
+    if (this.properties.numeral) {
       this.initNumeralFormatter()
-    } else if (pps.date) {
+    } else if (this.properties.date) {
       this.initDateFormatter()
-    } else if (pps.blocksLength === 0 && !pps.prefix) {
+    } else if (this.properties.blocksLength === 0 && !this.properties.prefix) {
       return
     }
 
@@ -45,111 +44,104 @@ export default {
 
   methods: {
     initNumeralFormatter () {
-      const pps = this.properties
+      const numeralProps = {
+        numeralDecimalMark: this.properties.numeralDecimalMark,
+        numeralIntegerScale: this.properties.numeralIntegerScale,
+        numeralDecimalScale: this.properties.numeralDecimalScale,
+        numeralThousandsGroupStyle: this.properties.numeralThousandsGroupStyle,
+        numeralPositiveOnly: this.properties.numeralPositiveOnly,
+        stripLeadingZeroes: this.properties.stripLeadingZeroes,
+        delimiter: this.properties.delimiter
+      }
 
-      pps.numeralFormatter = new NumeralFormatter(
-        pps.numeralDecimalMark,
-        pps.numeralIntegerScale,
-        pps.numeralDecimalScale,
-        pps.numeralThousandsGroupStyle,
-        pps.numeralPositiveOnly,
-        pps.stripLeadingZeroes,
-        pps.delimiter
-      )
+      this.properties.numeralFormatter = new NumeralFormatter(numeralProps)
     },
     initDateFormatter () {
-      const pps = this.properties
-
-      pps.dateFormatter = new DateFormatter(pps.datePattern)
-      pps.blocks = pps.dateFormatter.getBlocks()
-      pps.blocksLength = pps.blocks.length
-      pps.maxLength = Util.getMaxLength(pps.blocks)
+      this.properties.dateFormatter = new DateFormatter(this.properties.datePattern)
+      this.properties.blocks = this.properties.dateFormatter.getBlocks()
+      this.properties.blocksLength = this.properties.blocks.length
+      this.properties.maxLength = Util.getMaxLength(this.properties.blocks)
     },
     formatInput (value) {
-      const pps = this.properties
-      const prev = pps.result
-
-      if (pps.backspace && value.slice(-1) !== pps.delimiter) {
-        value = Util.headStr(value, value.length - 1)
+      if (!this.properties.numeral && this.properties.backspace &&
+        !Util.isDelimiter(value.slice(-this.properties.delimiterLength),
+          this.properties.delimiter, this.properties.delimiters)) {
+        value = Util.headStr(value, value.length - this.properties.delimiterLength)
       }
 
       // numeral formatter
-      if (pps.numeral) {
+      if (this.properties.numeral) {
         return this.formatNumeral(value)
       }
       // date
-      if (pps.date) {
-        value = pps.dateFormatter.getValidatedDate(value)
+      if (this.properties.date) {
+        value = this.properties.dateFormatter.getValidatedDate(value)
       }
 
       value = this.formatCommon(value)
       // prefix
-      if (pps.prefix) {
-        value = pps.prefix + value
+      if (this.properties.prefix) {
+        value = this.properties.prefix + value
         // no blocks specified, no need to do formatting
-        if (pps.blocksLength === 0) {
-          pps.result = value
-          return this.updateValueState()
+        if (this.properties.blocksLength === 0) {
+          this.properties.result = value
+          return this.updateValue()
         }
       }
-      // update credit card props
-      if (pps.creditCard) {
-        this.updateCreditCardPropsByValue(value)
-      }
-      // strip over length characters
-      value = Util.headStr(value, pps.maxLength)
-      // apply blocks
-      pps.result = Util.getFormattedValue(value, pps.blocks, pps.blocksLength, pps.delimiter, pps.delimiters)
-      // nothing changed
-      // prevent update value to avoid caret position change
-      if (prev === pps.result && prev !== pps.prefix) {
-        return this.initValue
-      }
-      return this.updateValueState()
+
+      return this.formatBlocks(value)
     },
     updateCreditCardPropsByValue (value) {
-      const pps = this.properties
-
       // At least one of the first 4 characters has changed
-      if (Util.headStr(pps.result, 4) === Util.headStr(value, 4)) {
+      if (Util.headStr(this.properties.result, 4) === Util.headStr(value, 4)) {
         return
       }
 
-      const creditCardInfo = CreditCardDetector.getInfo(value, pps.creditCardStrictMode)
+      const creditCardInfo = CreditCardDetector.getInfo(value, this.properties.creditCardStrictMode)
 
-      pps.blocks = creditCardInfo.blocks
-      pps.blocksLength = pps.blocks.length
-      pps.maxLength = Util.getMaxLength(pps.blocks)
+      this.properties.blocks = creditCardInfo.blocks
+      this.properties.blocksLength = this.properties.blocks.length
+      this.properties.maxLength = Util.getMaxLength(this.properties.blocks)
 
       // credit card type changed
-      if (pps.creditCardType !== creditCardInfo.type) {
-        pps.creditCardType = creditCardInfo.type
-        pps.onCreditCardTypeChanged.call(this, pps.creditCardType)
+      if (this.properties.creditCardType !== creditCardInfo.type) {
+        this.properties.creditCardType = creditCardInfo.type
+        this.properties.onCreditCardTypeChanged.call(this, this.properties.creditCardType)
       }
     },
-    updateValueState () {
+    updateValue () {
       return this.initValue = this.properties.result
     },
     formatNumeral (value) {
-      const pps = this.properties
-
-      pps.result = pps.prefix + pps.numeralFormatter.format(value)
-      return this.updateValueState()
+      this.properties.result = this.properties.prefix + this.properties.numeralFormatter.format(value)
+      return this.updateValue()
     },
     formatCommon (value) {
-      const pps = this.properties
-
       // strip delimiters
-      value = Util.stripDelimiters(value, pps.delimiter, pps.delimiters)
+      value = Util.stripDelimiters(value, this.properties.delimiter, this.properties.delimiters)
       // strip prefix
-      value = Util.getPrefixStrippedValue(value, pps.prefix, pps.prefixLength)
+      value = Util.getPrefixStrippedValue(value, this.properties.prefix, this.properties.prefixLength)
       // strip non-numeric characters
-      value = pps.numericOnly ? Util.strip(value, /[^\d]/g) : value
+      value = this.properties.numericOnly ? Util.strip(value, /[^\d]/g) : value
       // convert case
-      value = pps.uppercase ? value.toUpperCase() : value
-      value = pps.lowercase ? value.toLowerCase() : value
+      value = this.properties.uppercase ? value.toUpperCase() : value
+      value = this.properties.lowercase ? value.toLowerCase() : value
 
       return value
+    },
+    formatBlocks (value) {
+      // update credit card props
+      if (this.properties.creditCard) {
+        this.updateCreditCardPropsByValue(value)
+      }
+      // strip over length characters
+      value = Util.headStr(value, this.properties.maxLength)
+      // apply blocks
+      this.properties.result = Util.getFormattedValue(value,
+        { blocks: this.properties.blocks, blocksLength: this.properties.blocksLength },
+        { delimiter: this.properties.delimiter, delimiters: this.properties.delimiters })
+
+      return this.updateValue()
     }
   }
 }
