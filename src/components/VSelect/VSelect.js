@@ -16,6 +16,7 @@ import VMenu from '../VMenu'
 import VBtn from '../VBtn'
 
 // Mixins
+import Colorable from '../../mixins/colorable'
 import Filterable from '../../mixins/filterable'
 import Input from '../../mixins/input'
 
@@ -50,7 +51,7 @@ export default {
     ClickOutside
   },
 
-  mixins: [Autocomplete, Input, Filterable, Generators],
+  mixins: [Autocomplete, Colorable, Input, Filterable, Generators],
 
   data () {
     return {
@@ -82,6 +83,10 @@ export default {
     chips: Boolean,
     clearable: Boolean,
     close: Boolean,
+    color: {
+      type: String,
+      default: 'primary'
+    },
     debounceSearch: {
       type: [Number, String],
       default: 200
@@ -132,7 +137,7 @@ export default {
 
   computed: {
     classes () {
-      return {
+      const classes = {
         'input-group--text-field input-group--select': true,
         'input-group--auto': this.auto,
         'input-group--overflow': this.overflow,
@@ -145,6 +150,14 @@ export default {
         'input-group--solo': this.solo,
         'input-group--multiple': this.multiple
       }
+
+      if (this.hasError) {
+        classes['error--text'] = true
+      } else {
+        return this.addColorClassChecks(classes)
+      }
+
+      return classes
     },
     computedContentClass () {
       const children = [

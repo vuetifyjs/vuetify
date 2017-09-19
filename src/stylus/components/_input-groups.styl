@@ -57,9 +57,6 @@ input-group($material)
           .input-group__input
             border-color: $material.text.primary
 
-  .input-group__counter
-    color: $material.text.secondary
-
   &.input-group
     &--overflow, &--segmented, &--editable
       .input-group__input,
@@ -136,7 +133,7 @@ theme(input-group, "input-group")
   &.input-group--focused
     .input-group__append-icon,
     .input-group__prepend-icon
-      color: $theme.primary
+      color: inherit
 
   &.input-group--append-icon, &.input-group--selection-controls
     label
@@ -212,28 +209,16 @@ theme(input-group, "input-group")
 
     &.input-group--focused
       label:after
-        color: $theme.error
+        color: inherit
 
   // Error
   &.input-group--error
-    input,
-    textarea
-      caret-color: currentColor
-
-    .input-group__input
-      border-color: $theme.error !important
-
     label
       animation: shake .6s $transition.swing
 
-    label,
-    .input-group__input .icon
-      color: $theme.error !important
-
     .input-group__details
-      &:after,
       &:before
-        background-color: $theme.error
+        background-color: currentColor
 
 /** Details */
 .input-group
@@ -303,8 +288,6 @@ theme(input-group, "input-group")
   .input-group__error
     flex: 1 0
     transition: .3s $transition.fast-in-fast-out
-    color: $theme.error
-
 
 /** Types */
 .input-group

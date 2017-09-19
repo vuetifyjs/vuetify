@@ -23,6 +23,10 @@ export default {
     autoGrow: Boolean,
     box: Boolean,
     clearable: Boolean,
+    color: {
+      type: String,
+      default: 'primary'
+    },
     counter: [Boolean, Number, String],
     fullWidth: Boolean,
     multiLine: Boolean,
@@ -43,7 +47,7 @@ export default {
 
   computed: {
     classes () {
-      return this.addColorClassChecks({
+      const classes = {
         'input-group--text-field': true,
         'input-group--text-field-box': this.box,
         'input-group--single-line': this.singleLine || this.solo,
@@ -53,7 +57,15 @@ export default {
         'input-group--prefix': this.prefix,
         'input-group--suffix': this.suffix,
         'input-group--textarea': this.textarea
-      })
+      }
+
+      if (this.hasError) {
+        classes['error--text'] = true
+      } else {
+        return this.addColorClassChecks(classes)
+      }
+
+      return classes
     },
     count () {
       let inputLength

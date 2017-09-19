@@ -4,7 +4,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and multi select 1`] =
 
 <div tabindex="0"
      role="combobox"
-     class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select input-group--multiple"
+     class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select input-group--multiple primary--text"
 >
   <div class="input-group__input">
     <div class="input-group__selections"
@@ -114,7 +114,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and multi select 2`] =
 
 <div tabindex="0"
      role="combobox"
-     class="input-group input-group--append-icon input-group--text-field input-group--select input-group--multiple"
+     class="input-group input-group--append-icon input-group--text-field input-group--select input-group--multiple primary--text"
 >
   <div class="input-group__input">
     <div class="input-group__selections"
@@ -223,7 +223,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and single select 1`] 
 
 <div tabindex="0"
      role="combobox"
-     class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select"
+     class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select primary--text"
 >
   <div class="input-group__input">
     <div class="input-group__selections"
@@ -290,7 +290,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and single select 2`] 
 
 <div tabindex="0"
      role="combobox"
-     class="input-group input-group--append-icon input-group--text-field input-group--select"
+     class="input-group input-group--append-icon input-group--text-field input-group--select primary--text"
 >
   <div class="input-group__input">
     <div class="input-group__selections"
