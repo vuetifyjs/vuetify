@@ -2,7 +2,7 @@ import Positionable from './positionable'
 
 /**
  * Menuable
- * 
+ *
  * @mixin
  *
  * Used for fixed or absolutely positioning
