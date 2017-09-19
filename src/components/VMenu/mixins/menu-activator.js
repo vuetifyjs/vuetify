@@ -31,7 +31,7 @@ export default {
       clearTimeout(this.openTimeout)
       clearTimeout(this.closeTimeout)
 
-      if (this.disabled || this.hasJustFocused) return
+      if (this.hasJustFocused) return
 
       this.openTimeout = setTimeout(() => {
         this.hasJustFocused = true
@@ -42,9 +42,7 @@ export default {
       clearTimeout(this.openTimeout)
       clearTimeout(this.closeTimeout)
 
-      if (this.disabled ||
-        this.$refs.content.contains(e.relatedTarget)
-      ) return
+      if (this.$refs.content.contains(e.relatedTarget)) return
 
       // Prevent accidental re-activation
       this.closeTimeout = setTimeout(() => {
