@@ -18,6 +18,10 @@ export default {
       type: String,
       default: 'list__tile--active'
     },
+    active: {
+      type: Boolean,
+      default: true
+    },
     avatar: Boolean,
     tag: String
   },
@@ -26,7 +30,7 @@ export default {
     classes () {
       return {
         'list__tile': true,
-        'list__tile--link': this.isLink,
+        'list__tile--link': this.isLink && this.active,
         'list__tile--avatar': this.avatar,
         'list__tile--disabled': this.disabled,
         [this.activeClass]: this.isActive
@@ -39,15 +43,15 @@ export default {
   },
 
   render (h) {
-    const { tag, data } = this.generateRouteLink()
-    let newTag = tag
+    const isRouteLink = this.active && (this.href || this.to)
+    const { tag, data } = isRouteLink ? this.generateRouteLink() : {
+      tag: this.tag || 'div',
+      data: {
+        class: this.classes
+      }
+    }
 
     data.attrs = Object.assign({}, data.attrs, this.$attrs)
-
-    if (!this.href &&
-      !this.to &&
-      !this.tag
-    ) newTag = 'div'
 
     return h('li', {
       attrs: {
@@ -56,6 +60,6 @@ export default {
       on: {
         ...this.$listeners
       }
-    }, [h(newTag, data, this.$slots.default)])
+    }, [h(tag, data, this.$slots.default)])
   }
 }
