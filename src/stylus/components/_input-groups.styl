@@ -10,7 +10,7 @@ input-group($material)
     &:disabled
       color: $material.text.disabled
 
-  .input-group__details
+  .input-group__messages
     color: $material.text.secondary
 
   &.input-group--textarea:not(.input-group--full-width)
@@ -194,7 +194,7 @@ theme(input-group, "input-group")
     &:not(.input-group--single-line):not(.input-group--error)
       &.input-group--focused
         label
-          color: $theme.primary
+          color: inherit
 
         .input-group__input
           border-color: $theme.primary
@@ -218,7 +218,7 @@ theme(input-group, "input-group")
   &.input-group--error
     input,
     textarea
-      caret-color: $theme.error
+      caret-color: currentColor
 
     .input-group__input
       border-color: $theme.error !important
@@ -242,6 +242,7 @@ theme(input-group, "input-group")
     position: absolute
 
   &__details
+    color: inherit
     display: flex
     padding-top: 4px
     flex: 1 0 100%
@@ -258,7 +259,8 @@ theme(input-group, "input-group")
       transition: .3s $transition.fast-out-slow-in
 
     &:after
-      background-color: $theme.primary
+      background-color: currentColor
+      color: inherit
       top: 0
       height: 2px
       transform: scaleX(0)

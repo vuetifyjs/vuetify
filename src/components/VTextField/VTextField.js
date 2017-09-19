@@ -1,12 +1,13 @@
 require('../../stylus/components/_input-groups.styl')
 require('../../stylus/components/_text-fields.styl')
 
+import Colorable from '../../mixins/colorable'
 import Input from '../../mixins/input'
 
 export default {
   name: 'v-text-field',
 
-  mixins: [Input],
+  mixins: [Colorable, Input],
 
   inheritAttrs: false,
 
@@ -42,7 +43,7 @@ export default {
 
   computed: {
     classes () {
-      return {
+      return this.addColorClassChecks({
         'input-group--text-field': true,
         'input-group--text-field-box': this.box,
         'input-group--single-line': this.singleLine || this.solo,
@@ -52,7 +53,7 @@ export default {
         'input-group--prefix': this.prefix,
         'input-group--suffix': this.suffix,
         'input-group--textarea': this.textarea
-      }
+      })
     },
     count () {
       let inputLength
