@@ -10,7 +10,7 @@ input-group($material)
     &:disabled
       color: $material.text.disabled
 
-  .input-group__details
+  .input-group__messages
     color: $material.text.secondary
 
   &.input-group--textarea:not(.input-group--full-width)
@@ -48,9 +48,6 @@ input-group($material)
         &.input-group--textarea:not(.input-group--full-width)
           .input-group__input
             border-color: $material.text.primary
-
-  .input-group__counter
-    color: $material.text.secondary
 
   &.input-group
     &--overflow, &--segmented, &--editable
@@ -128,7 +125,7 @@ theme(input-group, "input-group")
   &.input-group--focused
     .input-group__append-icon,
     .input-group__prepend-icon
-      color: $theme.primary
+      color: inherit
 
   &.input-group--append-icon, &.input-group--selection-controls
     label
@@ -194,7 +191,7 @@ theme(input-group, "input-group")
     &:not(.input-group--single-line):not(.input-group--error)
       &.input-group--focused
         label
-          color: $theme.primary
+          color: inherit
 
         .input-group__input
           border-color: $theme.primary
@@ -212,28 +209,16 @@ theme(input-group, "input-group")
 
     &.input-group--focused
       label:after
-        color: $theme.error
+        color: inherit
 
   // Error
   &.input-group--error
-    input,
-    textarea
-      caret-color: $theme.error
-
-    .input-group__input
-      border-color: $theme.error !important
-
     label
       animation: shake .6s $transition.swing
 
-    label,
-    .input-group__input .icon
-      color: $theme.error !important
-
     .input-group__details
-      &:after,
       &:before
-        background-color: $theme.error
+        background-color: currentColor
 
 /** Details */
 .input-group
@@ -242,6 +227,7 @@ theme(input-group, "input-group")
     position: absolute
 
   &__details
+    color: inherit
     display: flex
     padding-top: 4px
     flex: 1 0 100%
@@ -258,7 +244,8 @@ theme(input-group, "input-group")
       transition: .3s $transition.fast-out-slow-in
 
     &:after
-      background-color: $theme.primary
+      background-color: currentColor
+      color: inherit
       top: 0
       height: 2px
       transform: scaleX(0)
@@ -301,8 +288,6 @@ theme(input-group, "input-group")
   .input-group__error
     flex: 1 0
     transition: .3s $transition.fast-in-fast-out
-    color: $theme.error
-
 
 /** Types */
 .input-group

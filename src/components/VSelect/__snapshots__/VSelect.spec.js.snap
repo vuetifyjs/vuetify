@@ -4,7 +4,7 @@ exports[`VSelect.js should render buttons correctly when using items array with 
 
 <div tabindex="0"
      role="combobox"
-     class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select input-group--segmented input-group--single-line"
+     class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select input-group--segmented input-group--single-line primary--text"
 >
   <div class="input-group__input">
     <div class="input-group__selections"
@@ -66,7 +66,7 @@ exports[`VSelect.js should render buttons correctly when using slot with segment
 
 <div tabindex="0"
      role="combobox"
-     class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select input-group--segmented input-group--single-line"
+     class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select input-group--segmented input-group--single-line primary--text"
 >
   <div class="input-group__input">
     <div class="input-group__selections"

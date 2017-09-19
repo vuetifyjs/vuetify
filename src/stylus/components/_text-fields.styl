@@ -9,6 +9,10 @@ textfield($material)
   input::placeholder
     color: $material.text.disabled
 
+  &:not(.input-group--error)
+    .input-group__counter
+      color: $material.text.secondary
+
 theme(textfield, "input-group--text-field")
 
 /** Label */
@@ -21,8 +25,10 @@ theme(textfield, "input-group--text-field")
 .input-group--text-field
   input,
   textarea
-    caret-color: $theme.primary
     font-size: $input-font-size
+    
+    &::placeholder
+      color: inherit
 
 .input-group--text-field input
   box-shadow: none
@@ -81,7 +87,7 @@ theme(textfield, "input-group--text-field")
     margin-left: auto
 
     &--error
-      color: $theme.error !important
+      color: inherit
 
 /** Input States */
 .input-group--text-field
