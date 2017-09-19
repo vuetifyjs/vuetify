@@ -17,14 +17,6 @@ input-group($material)
     .input-group__input
       border: 2px solid $material.text.secondary
 
-  .input-group__append-icon
-    padding: 0 6px
-    transition: .3s $transition.ease-in-out
-
-  .input-group__append-icon,
-  .input-group__prepend-icon
-    user-select: none
-
   // This is specific for selects
   &.input-group--dirty
     .input-group__selections__comma
@@ -149,6 +141,14 @@ theme(input-group, "input-group")
   &.input-group--append-icon.input-group--prepend-icon
     label
       max-width: 65%
+
+  .input-group__append-icon
+    padding: 0 6px
+    transition: .3s $transition.ease-in-out
+
+  .input-group__append-icon,
+  .input-group__prepend-icon
+    user-select: none
 
 /** States */
 .input-group
