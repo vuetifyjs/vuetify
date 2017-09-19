@@ -250,6 +250,8 @@ export default {
       this.searchValue && this.$nextTick(() => {
         this.$refs.menu.listIndex = 0
       })
+
+      this.genSelectedItems()
     },
     menuIsActive (val) {
       if (!val) return
@@ -430,9 +432,7 @@ export default {
 
       return typeof value === 'undefined' ? item : value
     },
-    genSelectedItems (val) {
-      val = val || this.inputValue
-
+    genSelectedItems (val = this.inputValue) {
       // If we are using tags, don't filter results
       if (this.tags) return (this.selectedItems = val)
 
