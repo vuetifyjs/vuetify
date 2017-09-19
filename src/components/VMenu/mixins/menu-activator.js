@@ -46,7 +46,10 @@ export default {
 
       // Prevent accidental re-activation
       this.closeTimeout = setTimeout(() => {
-        this.isActive = false
+        requestAnimationFrame(() => {
+          this.isActive = false
+          this.callDeactivate()
+        })
       }, parseInt(this.closeDelay, 10))
     },
     addActivatorEvents (activator = null) {
