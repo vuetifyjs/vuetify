@@ -12,6 +12,7 @@ export default {
 
   data () {
     return {
+      initialValue: null,
       inputHeight: null,
       badInput: false
     }
@@ -87,7 +88,9 @@ export default {
 
   watch: {
     isFocused (val) {
-      if (!val) {
+      if (val) {
+        this.initialValue = this.lazyValue
+      } else if (this.initialValue !== this.lazyValue) {
         this.$emit('change', this.lazyValue)
       }
     },

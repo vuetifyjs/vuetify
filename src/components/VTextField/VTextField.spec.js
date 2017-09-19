@@ -236,6 +236,7 @@ test('VTextField.js', ({ mount }) => {
     const input = wrapper.find('input')[0]
 
     input.trigger('focus')
+    await wrapper.vm.$nextTick()
     input.element.value = 'fgh'
     input.trigger('input')
 
@@ -260,5 +261,31 @@ test('VTextField.js', ({ mount }) => {
     const prepend = wrapper.find('.input-group__prepend-icon')[0]
     expect(prepend.text()).toBe('check')
     expect(prepend.element.classList).not.toContain('input-group__icon-cb')
+  })
+
+  it('should not emit change event if value has not changed', async () => {
+    const change = jest.fn()
+    let value = 'test'
+    const component = {
+      render (h) {
+        return h(VTextField, {
+          on: {
+            input: i => value = i,
+            change
+          },
+          props: { value }
+        })
+      }
+    }
+    const wrapper = mount(component)
+
+    const input = wrapper.find('input')[0]
+
+    input.trigger('focus')
+    await wrapper.vm.$nextTick()
+    input.trigger('blur')
+    await wrapper.vm.$nextTick()
+
+    expect(change.mock.calls.length).toBe(0)
   })
 })
