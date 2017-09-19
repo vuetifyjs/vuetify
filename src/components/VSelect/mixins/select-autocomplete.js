@@ -34,7 +34,7 @@ export default {
         i, this.searchValue, this.getText(i))
       )
     },
-    async onKeyDown (e) {
+    onKeyDown (e) {
       // If enter, space, up, or down is pressed, open menu
       if (!this.menuIsActive && [13, 32, 38, 40].includes(e.keyCode)) {
         return this.showMenuItems()
@@ -58,10 +58,10 @@ export default {
       ) {
         this.selectedItems.push(this.searchValue)
 
-        await this.$nextTick()
-
-        this.searchValue = null
-        this.$emit('change', this.selectedItems)
+        this.$nextTick(() => {
+          this.searchValue = null
+          this.$emit('change', this.selectedItems)
+        })
       }
 
       if (!this.tags ||

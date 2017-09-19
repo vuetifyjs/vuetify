@@ -360,16 +360,17 @@ export default {
         return
       }
 
-      // TODO: We already returned up there though?
-      if (![8, 46].includes(keyCode)) return // backspace/delete
-      const newIndex = this.selectedIndex === indexes
-        ? this.selectedIndex - 1
-        : this.selectedItems[this.selectedIndex + 1]
-          ? this.selectedIndex
-          : -1
+      // backspace/delete
+      if ([8, 46].includes(keyCode)) {
+        const newIndex = this.selectedIndex === indexes
+          ? this.selectedIndex - 1
+          : this.selectedItems[this.selectedIndex + 1]
+            ? this.selectedIndex
+            : -1
 
-      this.selectItem(this.selectedItems[this.selectedIndex])
-      this.selectedIndex = newIndex
+        this.selectItem(this.selectedItems[this.selectedIndex])
+        this.selectedIndex = newIndex
+      }
     },
     compareObjects (a, b) {
       const aProps = Object.keys(a)
