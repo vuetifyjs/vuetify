@@ -1,17 +1,9 @@
 export default {
   data: () => ({
-    creditCardMask: [
-      [4, 4, 4, 4],
-      [' - ', ' - ', ' - ']
-    ],
-    phoneMask: [
-      [0, 3, 3, 4],
-      ['(', ') ', ' - ']
-    ],
-    socialMask: [
-      [3, 2, 4],
-      ['-', '-', '-']
-    ],
+    allowedMaskChars: ['#'],
+    creditCardMask: '####-####-####-####',
+    phoneMask: '(###) ###-####',
+    socialMask: '###-##-####',
     selection: 0
   }),
 
@@ -28,6 +20,28 @@ export default {
     blockLength () {
       return this.maskBlocks.reduce((acc = 0, cur) => (acc + cur))
     },
+    stringMask () {
+      let val = this.mask
+
+      if (val === Object(val)) return val
+
+      switch (val) {
+        case 'phone':
+          val = this.phoneMask
+          break
+        case 'social':
+          val = this.socialMask
+          break
+        case 'credit-card':
+          val = this.creditCardMask
+          break
+      }
+
+      return val
+    },
+    currentMask () {
+      return this.genMask(this.stringMask)
+    },
     delimiterLength () {
       let length = 0
 
@@ -38,32 +52,14 @@ export default {
       return length + this.blockLength
     },
     maskBlocks () {
-      if (typeof this.mask === 'string') {
-        return this.premadeMask(this.mask)[0]
-      }
-
-      return this.mask.blocks
+      return this.currentMask.blocks
     },
     maskDelimiters () {
-      if (typeof this.mask === 'string') {
-        return this.premadeMask(this.mask)[1]
-      }
-
-      return this.mask.blocks
+      return this.currentMask.delimiters
     }
   },
 
   methods: {
-    premadeMask (name) {
-      switch (name) {
-        case 'phone':
-          return this.phoneMask
-        case 'social':
-          return this.socialMask
-        case 'credit-card':
-          return this.creditCardMask
-      }
-    },
     maskText (text) {
       if (!this.mask) return text
       if (this.returnMaskedValue) {
@@ -96,9 +92,26 @@ export default {
         }
       }
 
+      console.log(newText)
+
+      const index = this.getLastIndex(newText)
+
+      this.clearBack(newText)
+
       text = newText.join('')
 
+      this.selectText(index)
+
       return text
+    },
+    clearBack (newText) {
+      const newTextIndex = newText.length - 1
+      const lastChar = newText[newTextIndex]
+      if (newTextIndex === this.delimiterLength - 1 &&
+        !this.validateMask(lastChar, newTextIndex)
+      ) {
+        newText.pop()
+      }
     },
     unmaskText (text, force) {
       if (!force &&
@@ -111,10 +124,6 @@ export default {
       })
 
       text = text.slice(0, this.blockLength)
-
-      this.selection = this.$refs.input
-        ? this.$refs.input.selectionEnd
-        : 0
 
       return text
     },
@@ -139,11 +148,62 @@ export default {
 
       return delimiter
     },
+    getLastIndex (newText) {
+      let index = -1
+
+      newText.some((char, i) => {
+        if (!this.validateMask(char, i) &&
+          !this.currentMask.delimiters.includes(char)
+        ) {
+          index = i
+
+          return true
+        }
+      })
+
+      return index
+    },
+    genMask (val) {
+      const split = val.split('')
+      const mask = {
+        blocks: [],
+        delimiters: []
+      }
+
+      let index = 0
+      split.forEach((char, i) => {
+        if (this.allowedMaskChars.includes(char)) {
+          index++
+        } else {
+          mask.blocks.push(index)
+          mask.delimiters.push(char)
+          index = 0
+        }
+      })
+
+      if (index) mask.blocks.push(index)
+
+      return mask
+    },
     findDelimiter (i) {
       return this.maskDelimiters &&
         this.maskDelimiters[i]
         ? this.maskDelimiters[i]
         : ' '
+    },
+    selectText (index) {
+      if (index > -1) {
+        this.$nextTick(() => {
+          this.$refs.input.setSelectionRange(index, index)
+        })
+      }
+    },
+    validateMask (val, i) {
+      const mask = this.stringMask[i]
+
+      switch (mask) {
+        case '#': return !isNaN(parseInt(val))
+      }
     }
   }
 }

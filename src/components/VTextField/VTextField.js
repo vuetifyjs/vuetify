@@ -125,13 +125,6 @@ export default {
       this.inputValue = this.unmaskText(e.target.value)
       this.badInput = e.target.validity && e.target.validity.badInput
       this.shouldAutoGrow && this.calculateInputHeight()
-
-      this.$nextTick(() => {
-        this.$refs.input.setSelectionRange(
-          this.selection,
-          this.selection
-        )
-      })
     },
     blur (e) {
       this.isFocused = false
@@ -196,7 +189,7 @@ export default {
       }
 
       if (this.mask) {
-        // data.attrs.maxlength = this.delimiterLength
+        data.attrs.maxlength = this.delimiterLength
       }
 
       const children = [this.$createElement(tag, data)]
