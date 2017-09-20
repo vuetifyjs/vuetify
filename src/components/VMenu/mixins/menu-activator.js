@@ -21,11 +21,15 @@ export default {
   methods: {
     activatorClickHandler (e) {
       if (this.disabled) return
-      else if (this.openOnClick && !this.isActive) {
+      if (this.openOnClick && !this.isActive) {
+        this.getActivator().focus()
         this.isActive = true
         this.absoluteX = e.clientX
         this.absoluteY = e.clientY
-      } else if (this.closeOnClick && this.isActive) this.isActive = false
+      } else if (this.closeOnClick && this.isActive) {
+        this.getActivator().blur()
+        this.isActive = false
+      }
     },
     mouseEnterHandler (e) {
       clearTimeout(this.openTimeout)
