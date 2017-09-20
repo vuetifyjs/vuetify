@@ -392,12 +392,11 @@ export default {
     focus () {
       this.isActive = true
       this.isFocused = true
-      this.$el.focus()
 
       if (this.$refs.input && this.isAutocomplete) {
-        this.$nextTick(() => {
-          this.$refs.input.focus()
-        })
+        this.$refs.input.focus()
+      } else {
+        this.$el.focus()
       }
 
       this.$emit('focus')
