@@ -62,8 +62,7 @@ export default {
       if (this.top || this.bottom) {
         top = (
           activator.top -
-          (this.top ? content.height : -content.height) -
-          (this.top ? 20 : -20)
+          (this.top ? content.height : -content.height)
         )
       } else if (this.left || this.right) {
         top = (

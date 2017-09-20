@@ -6,6 +6,10 @@ global-color(color_name, color_value)
   .{color_name}--text
     color color_value !important
 
+    input,
+    textarea
+      caret-color: color_value !important
+
   .{color_name}--after
     &:after
       background: color_value !important
@@ -23,6 +27,10 @@ global-color-accent(color_name, color_value)
   .{color_name}--text
     &.text--{color_type}
       color: color_value !important
+
+      input,
+      textarea
+        caret-color: color_value !important
 
 
 for color_name, color_value in $theme

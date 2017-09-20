@@ -2,13 +2,14 @@ require('../../stylus/components/_input-groups.styl')
 require('../../stylus/components/_text-fields.styl')
 
 import Formatter from '../../mixins/formatter'
+import Colorable from '../../mixins/colorable'
 import Input from '../../mixins/input'
 import Util from '../../util/formatter/Util'
 
 export default {
   name: 'v-text-field',
 
-  mixins: [Input, Formatter],
+  mixins: [Colorable, Input, Formatter],
 
   inheritAttrs: false,
 
@@ -26,6 +27,10 @@ export default {
     autoGrow: Boolean,
     box: Boolean,
     clearable: Boolean,
+    color: {
+      type: String,
+      default: 'primary'
+    },
     counter: [Boolean, Number, String],
     format: [Function, Object],
     fullWidth: Boolean,
@@ -47,7 +52,7 @@ export default {
 
   computed: {
     classes () {
-      return {
+      const classes = {
         'input-group--text-field': true,
         'input-group--text-field-box': this.box,
         'input-group--single-line': this.singleLine || this.solo,
@@ -58,6 +63,14 @@ export default {
         'input-group--suffix': this.suffix,
         'input-group--textarea': this.textarea
       }
+
+      if (this.hasError) {
+        classes['error--text'] = true
+      } else {
+        return this.addColorClassChecks(classes)
+      }
+
+      return classes
     },
     count () {
       let inputLength

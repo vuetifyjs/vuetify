@@ -60,6 +60,7 @@ export default {
       default: 'text'
     },
     hideActions: Boolean,
+    mustSort: Boolean,
     noResultsText: {
       type: String,
       default: 'No matching records found'
@@ -275,8 +276,10 @@ export default {
         this.updatePagination({ descending: true })
       } else if (sortBy !== index) {
         this.updatePagination({ sortBy: index, descending: false })
-      } else {
+      } else if (!this.mustSort) {
         this.updatePagination({ sortBy: null, descending: null })
+      } else {
+        this.updatePagination({ sortBy: index, descending: false })
       }
     },
     needsTR (row) {

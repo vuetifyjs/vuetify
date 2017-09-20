@@ -2,7 +2,7 @@
 
 exports[`VTextField.js should not display counter when set to false 1`] = `
 
-<div class="input-group input-group--text-field">
+<div class="input-group input-group--text-field primary--text">
   <div class="input-group__input">
     <input tabindex="0"
            type="text"
@@ -21,7 +21,7 @@ exports[`VTextField.js should not display counter when set to false 1`] = `
 
 exports[`VTextField.js should not display counter when set to false 2`] = `
 
-<div class="input-group input-group--text-field">
+<div class="input-group input-group--text-field primary--text">
   <div class="input-group__input">
     <input tabindex="0"
            type="text"
@@ -37,7 +37,7 @@ exports[`VTextField.js should not display counter when set to false 2`] = `
 
 exports[`VTextField.js should render component and match snapshot 1`] = `
 
-<div class="input-group input-group--text-field">
+<div class="input-group input-group--text-field primary--text">
   <div class="input-group__input">
     <input tabindex="0"
            type="text"
