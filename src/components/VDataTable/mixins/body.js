@@ -70,7 +70,9 @@ export default {
       const rows = []
       this.filteredItems.forEach((item, index) => {
         const props = this.createProps(item, index)
-        const row = this.$scopedSlots.items(props)
+        const row = this.$scopedSlots.items
+          ? this.$scopedSlots.items(props)
+          : []
 
         rows.push(this.needsTR(row)
           ? this.genTR(row, {
