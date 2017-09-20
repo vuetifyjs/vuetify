@@ -216,6 +216,9 @@ theme(input-group, "input-group")
     label
       animation: shake .6s $transition.swing
 
+    .input-group__messages
+      color: inherit
+
     .input-group__details
       &:before
         background-color: currentColor
@@ -286,6 +289,7 @@ theme(input-group, "input-group")
 /** Error */
 .input-group
   .input-group__error
+    color: inherit
     flex: 1 0
     transition: .3s $transition.fast-in-fast-out
 
