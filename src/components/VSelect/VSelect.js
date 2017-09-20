@@ -248,7 +248,7 @@ export default {
     },
     isBooted () {
       this.$nextTick(() => {
-        if (this.content) {
+        if (this.content instanceof EventTarget) {
           this.content.addEventListener('scroll', this.onScroll, false)
         }
       })
@@ -394,9 +394,9 @@ export default {
       this.isFocused = true
 
       if (this.$refs.input && this.isAutocomplete) {
-        this.$nextTick(() => {
-          // this.$refs.input.focus()
-        })
+        this.$refs.input.focus()
+      } else {
+        this.$el.focus()
       }
 
       this.$emit('focus')
@@ -423,7 +423,7 @@ export default {
 
           !this.isFocused && this.focus()
         },
-        keydown: this.onKeyDown // Located in mixins/autocomplete.js
+        keydown: this.onKeyDown // Located in mixins/select-autocomplete.js
       }
     },
     genLabel () {
