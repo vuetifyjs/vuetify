@@ -22,12 +22,12 @@ export default {
     activatorClickHandler (e) {
       if (this.disabled) return
       if (this.openOnClick && !this.isActive) {
-        this.$slots.activator[0].elm.focus()
+        this.getActivator().focus()
         this.isActive = true
         this.absoluteX = e.clientX
         this.absoluteY = e.clientY
       } else if (this.closeOnClick && this.isActive) {
-        this.$slots.activator[0].elm.blur()
+        this.getActivator().blur()
         this.isActive = false
       }
     },
