@@ -12,7 +12,7 @@ export default {
 
   inheritAttrs: false,
 
-  inject: ['isMandatory', 'name'],
+  inject: ['isMandatory', 'name', 'registerChild', 'unregisterChild'],
 
   components: {
     VFadeTransition,
@@ -130,6 +130,14 @@ export default {
       !this.$parent.$vnode.tag.endsWith('v-radio-group')) {
       console.warn('[Vuetify] Warn: The v-radio component must have an immediate parent of v-radio-group.')
     }
+  },
+
+  mounted () {
+    this.registerChild(this)
+  },
+
+  beforeDestroy () {
+    this.unregisterChild(this)
   },
 
   render (h) {

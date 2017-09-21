@@ -6,7 +6,9 @@ test('VRadio.vue', ({ mount }) => {
     mount(VRadio, {
       provide: {
         name: () => 'name',
-        isMandatory: () => false
+        registerChild: () => {},
+        unregisterChild: () => {},
+        isMandatory: () => false,
       }
     })
 
@@ -30,6 +32,8 @@ test('VRadio.vue', ({ mount }) => {
       },
       provide: {
         name: () => 'name',
+        registerChild: () => {},
+        unregisterChild: () => {},
         isMandatory: () => false
       }
     })
@@ -54,6 +58,8 @@ test('VRadio.vue', ({ mount }) => {
       attrs: {},
       provide: {
         name: () => 'name',
+        registerChild: () => {},
+        unregisterChild: () => {},
         isMandatory: () => false
       }
     })
@@ -72,6 +78,8 @@ test('VRadio.vue', ({ mount }) => {
       },
       provide: {
         name: () => 'name',
+        registerChild: () => {},
+        unregisterChild: () => {},
         isMandatory: () => false
       }
     })
@@ -87,6 +95,8 @@ test('VRadio.vue', ({ mount }) => {
     const wrapper = mount(VRadio, {
       provide: {
         name: () => 'name',
+        registerChild: () => {},
+        unregisterChild: () => {},
         isMandatory: () => false
       }
     })
@@ -94,6 +104,26 @@ test('VRadio.vue', ({ mount }) => {
     const input = wrapper.find('input')[0]
     expect(input.getAttribute('name')).toBe('name')
     expect(wrapper.html()).toMatchSnapshot()
+
+    expect('immediate parent of v-radio-group').toHaveBeenTipped()
+  })
+
+  it('should register and unregister', () => {
+    const register = jest.fn()
+    const unregister = jest.fn()
+
+    const wrapper = mount(VRadio, {
+      provide: {
+        name: () => 'name',
+        registerChild: register,
+        unregisterChild: unregister,
+        isMandatory: () => false
+      }
+    })
+
+    expect(register).toHaveBeenCalled()
+    wrapper.destroy()
+    expect(unregister).toHaveBeenCalled()
 
     expect('immediate parent of v-radio-group').toHaveBeenTipped()
   })
