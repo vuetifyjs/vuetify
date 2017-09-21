@@ -90,6 +90,8 @@ export default {
     isFocused (val) {
       if (!val) {
         this.$emit('change', this.lazyValue)
+      } else {
+        setTimeout(this.setSelectionRange, 0)
       }
     },
     value (val) {
@@ -189,7 +191,7 @@ export default {
       }
 
       if (this.mask) {
-        data.attrs.maxlength = this.delimiterLength
+        data.attrs.maxlength = this.masked.length
       }
 
       const children = [this.$createElement(tag, data)]

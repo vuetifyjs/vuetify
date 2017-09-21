@@ -1,9 +1,6 @@
 export default {
   data: () => ({
-    allowedMaskChars: ['#'],
-    creditCardMask: '####-####-####-####',
-    phoneMask: '(###) ###-####',
-    socialMask: '###-##-####',
+    allowedMasks: ['#', 'A'],
     selection: 0
   }),
 
@@ -17,193 +14,83 @@ export default {
   },
 
   computed: {
-    blockLength () {
-      return this.maskBlocks.reduce((acc = 0, cur) => (acc + cur))
-    },
-    stringMask () {
-      let val = this.mask
-
-      if (val === Object(val)) return val
-
-      switch (val) {
-        case 'phone':
-          val = this.phoneMask
-          break
-        case 'social':
-          val = this.socialMask
-          break
-        case 'credit-card':
-          val = this.creditCardMask
-          break
-      }
-
-      return val
-    },
-    currentMask () {
-      return this.genMask(this.stringMask)
-    },
-    delimiterLength () {
-      let length = 0
-
-      this.maskDelimiters.forEach(str => {
-        length += str.length
-      })
-
-      return length + this.blockLength
-    },
-    maskBlocks () {
-      return this.currentMask.blocks
-    },
-    maskDelimiters () {
-      return this.currentMask.delimiters
+    masked () {
+      return this.mask ? this.mask.split('') : []
     }
   },
 
   methods: {
-    maskText (text) {
-      if (!this.mask) return text
-      if (this.returnMaskedValue) {
-        text = this.unmaskText(text, true)
-      }
+    maskText (text, newText = []) {
+      text = text || ''
 
-      const split = text.split('')
-      const newText = []
+      if (!this.mask || !text || !text.length) return text
 
-      split.forEach((c, i, arr) => {
-        const delimiter = this.getDelimiter(i)
+      let textIndex = 0
+      this.masked.forEach((mask, i, arr) => {
+        if (textIndex >= text.length &&
+          !this.fillMaskBlanks
+        ) return
 
-        if (delimiter &&
-          c !== delimiter
-        ) newText.push(delimiter)
+        const letter = text[textIndex]
 
-        newText.push(c)
-      })
-
-      if (!this.isDirty) return newText.join('')
-
-      const textLength = newText.length
-      if (textLength < this.delimiterLength) {
-        const length = this.delimiterLength - textLength
-
-        for (let i = 0; i < length; i++) {
-          const delimiter = this.getDelimiter(i) || ' '
-
-          newText.push(delimiter)
-        }
-      }
-
-      console.log(newText)
-
-      const index = this.getLastIndex(newText)
-
-      this.clearBack(newText)
-
-      text = newText.join('')
-
-      this.selectText(index)
-
-      return text
-    },
-    clearBack (newText) {
-      const newTextIndex = newText.length - 1
-      const lastChar = newText[newTextIndex]
-      if (newTextIndex === this.delimiterLength - 1 &&
-        !this.validateMask(lastChar, newTextIndex)
-      ) {
-        newText.pop()
-      }
-    },
-    unmaskText (text, force) {
-      if (!force &&
-        (!this.mask ||
-        this.returnMaskedValue)
-      ) return text
-
-      this.maskDelimiters.forEach(val => {
-        text = text.replace(val, '')
-      })
-
-      text = text.slice(0, this.blockLength)
-
-      return text
-    },
-    getDelimiter (i) {
-      let delimiter = false
-
-      if (i === 0 &&
-        this.maskBlocks.includes(0)
-      ) return this.findDelimiter(i)
-
-      let index = 0
-      this.maskBlocks.reduce((acc = 0, val) => {
-        if (acc === i) {
-          delimiter = this.findDelimiter(index)
-          return
-        }
-
-        index++
-
-        return acc + val
-      })
-
-      return delimiter
-    },
-    getLastIndex (newText) {
-      let index = -1
-
-      newText.some((char, i) => {
-        if (!this.validateMask(char, i) &&
-          !this.currentMask.delimiters.includes(char)
+        if (!this.isMask(mask)) {
+          newText.push(mask)
+        } else if (this.isMask(mask) &&
+          this.maskValidates(mask, letter)
         ) {
-          index = i
-
-          return true
+          newText.push(letter)
+          textIndex++
+          this.selection = i + 1
         }
       })
 
-      return index
-    },
-    genMask (val) {
-      const split = val.split('')
-      const mask = {
-        blocks: [],
-        delimiters: []
-      }
+      this.setSelectionRange()
 
-      let index = 0
-      split.forEach((char, i) => {
-        if (this.allowedMaskChars.includes(char)) {
-          index++
-        } else {
-          mask.blocks.push(index)
-          mask.delimiters.push(char)
-          index = 0
+      return newText.join('')
+    },
+    unmaskText (text, newText = []) {
+      if (!this.mask) return text
+
+      text = text || ''
+
+      let letter
+      this.masked.forEach((mask, i) => {
+        letter = letter || text[i]
+
+        if (!letter) return
+
+        if (!this.isMask(letter) &&
+          letter === mask
+        ) {
+          letter = null
+        } else if (this.isMask(mask) &&
+          this.maskValidates(mask, letter)
+        ) {
+          newText.push(letter)
+          letter = null
         }
       })
 
-      if (index) mask.blocks.push(index)
-
-      return mask
+      return newText.join('')
     },
-    findDelimiter (i) {
-      return this.maskDelimiters &&
-        this.maskDelimiters[i]
-        ? this.maskDelimiters[i]
-        : ' '
+    // Helper functions
+    findFirstMask () {
+      this.selection = this.masked.findIndex(m => this.isMask(m))
     },
-    selectText (index) {
-      if (index > -1) {
-        this.$nextTick(() => {
-          this.$refs.input.setSelectionRange(index, index)
-        })
-      }
+    isMask (char) {
+      return this.allowedMasks.includes(char)
     },
-    validateMask (val, i) {
-      const mask = this.stringMask[i]
-
+    maskValidates (mask, letter) {
       switch (mask) {
-        case '#': return !isNaN(parseInt(val))
+        case 'A': return letter.match(/[a-z]/i)
+        case '#': return !isNaN(parseInt(letter))
       }
+    },
+    setSelectionRange () {
+      this.$nextTick(() => {
+        this.$refs.input &&
+          this.$refs.input.setSelectionRange(this.selection, this.selection)
+      })
     }
   }
 }

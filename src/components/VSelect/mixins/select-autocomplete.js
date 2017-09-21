@@ -28,13 +28,16 @@ export default {
         !this.searchValue
       ) return text
 
-      const searchValue = this.searchValue.toLowerCase()
+      text = text.toString()
+
+      const searchValue = (this.searchValue || '').toString().toLowerCase()
       const index = text.toLowerCase().indexOf(searchValue)
       let start
       let middle
       let end
 
       if (index !== 0) {
+        text = text.toString()
         start = text.slice(0, index)
         middle = text.slice(index, index + searchValue.length)
         end = text.slice(index + searchValue.length)
