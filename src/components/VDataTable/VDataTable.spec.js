@@ -65,4 +65,37 @@ test('VDataTable.vue', () => {
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
+
+  it('should match not allow a null sort', async () => {
+    const data = {
+      propsData: {
+        mustSort: true,
+        headers: [
+          { text: 'First Column', value: 'col1' },
+          { text: 'Second Column', value: 'col2', sortable: false },
+          { text: 'Third Column', value: 'col3' }
+        ],
+        items: [
+          { other: 1, col1: 'foo', col2: 'a', col3: 1 },
+          { other: 2, col1: null, col2: 'b', col3: 2 },
+          { other: 3, col1: undefined, col2: 'c', col3: 3 }
+        ]
+      }
+    }
+
+    const wrapper = mount(VDataTable, data)
+
+    expect(wrapper.vm.defaultPagination.descending).toBe(false)
+    wrapper.vm.sort(0)
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.defaultPagination.descending).toBe(false)
+    wrapper.vm.sort(0)
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.defaultPagination.descending).toBe(true)
+    wrapper.vm.sort(0)
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.defaultPagination.descending).toBe(false)
+
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 })

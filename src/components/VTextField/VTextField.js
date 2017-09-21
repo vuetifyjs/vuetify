@@ -1,18 +1,20 @@
 require('../../stylus/components/_input-groups.styl')
 require('../../stylus/components/_text-fields.styl')
 
+import Colorable from '../../mixins/colorable'
 import Input from '../../mixins/input'
 import Maskable from '../../mixins/maskable'
 
 export default {
   name: 'v-text-field',
 
-  mixins: [Input, Maskable],
+  mixins: [Colorable, Input, Maskable],
 
   inheritAttrs: false,
 
   data () {
     return {
+      initialValue: null,
       inputHeight: null,
       badInput: false
     }
@@ -23,6 +25,10 @@ export default {
     autoGrow: Boolean,
     box: Boolean,
     clearable: Boolean,
+    color: {
+      type: String,
+      default: 'primary'
+    },
     counter: [Boolean, Number, String],
     fullWidth: Boolean,
     multiLine: Boolean,
@@ -43,7 +49,7 @@ export default {
 
   computed: {
     classes () {
-      return {
+      const classes = {
         'input-group--text-field': true,
         'input-group--text-field-box': this.box,
         'input-group--single-line': this.singleLine || this.solo,
@@ -54,6 +60,14 @@ export default {
         'input-group--suffix': this.suffix,
         'input-group--textarea': this.textarea
       }
+
+      if (this.hasError) {
+        classes['error--text'] = true
+      } else {
+        return this.addColorClassChecks(classes)
+      }
+
+      return classes
     },
     count () {
       let inputLength
@@ -88,7 +102,9 @@ export default {
 
   watch: {
     isFocused (val) {
-      if (!val) {
+      if (val) {
+        this.initialValue = this.lazyValue
+      } else if (this.initialValue !== this.lazyValue) {
         this.$emit('change', this.lazyValue)
       } else {
         setTimeout(this.setSelectionRange, 0)

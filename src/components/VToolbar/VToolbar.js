@@ -9,6 +9,15 @@ export default {
   mixins: [Applicationable, Themeable],
 
   data: () => ({
+    heights: {
+      mobileLandscape: 48,
+      mobile: 56,
+      desktop: 64,
+      dense: 48
+    },
+    denseHeight: 48,
+    defaultHeight: 56,
+    prominentHeight: 64,
     isExtended: false,
     isScrolling: false,
     marginTop: 0,
@@ -19,25 +28,15 @@ export default {
   props: {
     absolute: Boolean,
     card: Boolean,
-    clipped: Boolean,
+    clippedLeft: Boolean,
+    clippedRight: Boolean,
     dense: Boolean,
-    denseHeight: {
-      type: [Number, String],
-      default: 48
-    },
     extended: Boolean,
     fixed: Boolean,
     flat: Boolean,
     floating: Boolean,
-    height: {
-      type: [Number, String],
-      default: 56
-    },
+    height: [Number, String],
     prominent: Boolean,
-    prominentHeight: {
-      type: [Number, String],
-      default: 64
-    },
     scrollOffScreen: Boolean,
     scrollTarget: String,
     scrollThreshold: {
@@ -48,11 +47,16 @@ export default {
 
   computed: {
     computedHeight () {
-      return this.dense
-        ? this.denseHeight
-        : this.prominent
-          ? this.prominentHeight
-          : this.height
+      if (this.height) return this.height
+      if (this.dense) return this.dense
+      if (this.prominent ||
+        this.$vuetify.breakpoint.mdAndUp
+      ) return this.heights.desktop
+      if (this.$vuetify.breakpoint.clientWidth >
+        this.$vuetify.breakpoint.clientHeight
+      ) return this.mobileLandscape
+
+      return this.heights.mobile
     },
     classes () {
       return {
@@ -60,7 +64,7 @@ export default {
         'elevation-0': this.flat,
         'toolbar--absolute': this.absolute,
         'toolbar--card': this.card,
-        'toolbar--clipped': this.clipped,
+        'toolbar--clipped': this.clippedLeft || this.clippedRight,
         'toolbar--dense': this.dense,
         'toolbar--fixed': this.fixed,
         'toolbar--floating': this.floating,

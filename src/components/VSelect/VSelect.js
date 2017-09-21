@@ -16,6 +16,7 @@ import VMenu from '../VMenu'
 import VBtn from '../VBtn'
 
 // Mixins
+import Colorable from '../../mixins/colorable'
 import Filterable from '../../mixins/filterable'
 import Input from '../../mixins/input'
 import Maskable from '../../mixins/maskable'
@@ -51,7 +52,7 @@ export default {
     ClickOutside
   },
 
-  mixins: [Autocomplete, Input, Filterable, Generators, Maskable],
+  mixins: [Autocomplete, Colorable, Filterable, Generators, Input, Maskable],
 
   data () {
     return {
@@ -83,6 +84,10 @@ export default {
     chips: Boolean,
     clearable: Boolean,
     close: Boolean,
+    color: {
+      type: String,
+      default: 'primary'
+    },
     debounceSearch: {
       type: [Number, String],
       default: 200
@@ -133,7 +138,7 @@ export default {
 
   computed: {
     classes () {
-      return {
+      const classes = {
         'input-group--text-field input-group--select': true,
         'input-group--auto': this.auto,
         'input-group--overflow': this.overflow,
@@ -146,6 +151,14 @@ export default {
         'input-group--solo': this.solo,
         'input-group--multiple': this.multiple
       }
+
+      if (this.hasError) {
+        classes['error--text'] = true
+      } else {
+        return this.addColorClassChecks(classes)
+      }
+
+      return classes
     },
     computedContentClass () {
       const children = [
@@ -236,7 +249,7 @@ export default {
     },
     isBooted () {
       this.$nextTick(() => {
-        if (this.content) {
+        if (this.content instanceof EventTarget) {
           this.content.addEventListener('scroll', this.onScroll, false)
         }
       })
@@ -251,6 +264,8 @@ export default {
       this.searchValue && this.$nextTick(() => {
         this.$refs.menu.listIndex = 0
       })
+
+      this.genSelectedItems()
     },
     menuIsActive (val) {
       if (!val) return
@@ -380,9 +395,9 @@ export default {
       this.isFocused = true
 
       if (this.$refs.input && this.isAutocomplete) {
-        this.$nextTick(() => {
-          // this.$refs.input.focus()
-        })
+        this.$refs.input.focus()
+      } else {
+        this.$el.focus()
       }
 
       this.$emit('focus')
@@ -409,7 +424,7 @@ export default {
 
           !this.isFocused && this.focus()
         },
-        keydown: this.onKeyDown // Located in mixins/autocomplete.js
+        keydown: this.onKeyDown // Located in mixins/select-autocomplete.js
       }
     },
     genLabel () {
@@ -431,9 +446,7 @@ export default {
 
       return typeof value === 'undefined' ? item : value
     },
-    genSelectedItems (val) {
-      val = val || this.inputValue
-
+    genSelectedItems (val = this.inputValue) {
       // If we are using tags, don't filter results
       if (this.tags) return (this.selectedItems = val)
 
