@@ -24,31 +24,36 @@ export default {
 
   methods: {
     genFiltered (text) {
-      if (!this.isAutocomplete || !this.searchValue) return text
+      if (!this.isAutocomplete ||
+        !this.searchValue
+      ) return text
 
-      text = text.toString()
+      text = (text || '').toString()
 
-      const searchValue = (this.searchValue || '').toString().toLowerCase()
-      const index = text.toLowerCase().indexOf(searchValue)
-      let start = ''
-      let middle
-      let end
-
-      if (index < 0) return text
-
-      if (index !== 0) {
-        start = text.slice(0, index)
-        middle = text.slice(index, index + searchValue.length)
-        end = text.slice(index + searchValue.length)
-      } else {
-        middle = text.slice(index, searchValue.length)
-        end = text.slice(searchValue.length)
-      }
+      const { start, middle, end } = this.getMaskedCharacters(text)
 
       return `${start}${this.genHighlight(middle)}${end}`
     },
     genHighlight (text) {
       return `<span class="list__tile__mask">${text}</span>`
+    },
+    getMaskedCharacters (text) {
+      const searchValue = (this.searchValue || '').toString().toLowerCase()
+      const index = text.toLowerCase().indexOf(searchValue)
+
+      if (index < 0) return text
+
+      let start = ''
+      let middle = text.slice(index, searchValue.length)
+      let end = text.slice(searchValue.length)
+
+      if (index !== 0) {
+        start = text.slice(0, index)
+        middle = text.slice(index, index + searchValue.length)
+        end = text.slice(index + searchValue.length)
+      }
+
+      return { start, middle, end }
     },
     filterSearch () {
       if (!this.isAutocomplete) return this.computedItems
