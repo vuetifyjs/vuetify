@@ -74,9 +74,6 @@ export default {
       return newText.join('')
     },
     // Helper functions
-    findFirstMask () {
-      this.selection = this.masked.findIndex(m => this.isMask(m))
-    },
     isMask (char) {
       return this.allowedMasks.includes(char)
     },
