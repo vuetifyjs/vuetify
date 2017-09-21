@@ -48,7 +48,7 @@ export default {
         if (!this.isMask(mask)) {
           newText.push(mask)
         } else if (this.maskValidates(mask, char)) {
-          // If the mask is validatable, push
+          // If the mask is validated, push
           // next char into the new array
           newText.push(char)
           textIndex++
