@@ -1,6 +1,6 @@
 /**
  * Menu generators
- * 
+ *
  * @mixin
  *
  * Used for creating the DOM elements for VMenu
@@ -40,7 +40,7 @@ export default {
     },
 
     genContent () {
-      return this.$createElement('div', {
+      const options = {
         'class': (`menu__content ${this.contentClass}`).trim(),
         style: this.styles,
         directives: [{
@@ -53,15 +53,14 @@ export default {
             e.stopPropagation()
             if (e.target.getAttribute('disabled')) return
             if (this.closeOnContentClick) this.isActive = false
-          },
-          mouseenter: e => {
-            this.openOnHover && this.mouseEnterHandler
-          },
-          mouseleave: e => {
-            this.openOnHover && this.mouseLeaveHandler(e)
           }
         }
-      }, this.showLazyContent(this.$slots.default))
+      }
+
+      !this.disabled && this.openOnHover && (options.on.mouseenter = this.mouseEnterHandler)
+      this.openOnHover && (options.on.mouseleave = this.mouseLeaveHandler)
+
+      return this.$createElement('div', options, this.showLazyContent(this.$slots.default))
     }
   }
 }

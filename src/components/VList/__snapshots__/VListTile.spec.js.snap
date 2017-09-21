@@ -23,9 +23,7 @@ exports[`VListTile.vue should render <li> with <button> when using to prop 1`] =
 exports[`VListTile.vue should render with a div when href and to are not used 1`] = `
 
 <li>
-  <div href="javascript:;"
-       class="list__tile"
-  >
+  <div class="list__tile">
   </div>
 </li>
 

@@ -1,7 +1,11 @@
 require('../../stylus/components/_progress-circular.styl')
 
+import Colorable from '../../mixins/colorable'
+
 export default {
   name: 'v-progress-circular',
+
+  mixins: [Colorable],
 
   props: {
     button: Boolean,
@@ -50,11 +54,11 @@ export default {
     },
 
     classes () {
-      return {
+      return this.addColorClassChecks({
         'progress-circular': true,
         'progress-circular--indeterminate': this.indeterminate,
         'progress-circular--button': this.button
-      }
+      })
     },
 
     cxy () {

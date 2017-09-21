@@ -4,7 +4,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and multi select 1`] =
 
 <div tabindex="0"
      role="combobox"
-     class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select input-group--multiple"
+     class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select input-group--multiple primary--text"
 >
   <div class="input-group__input">
     <div class="input-group__selections"
@@ -32,9 +32,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and multi select 1`] =
               class="list"
           >
             <li>
-              <div href="javascript:;"
-                   class="list__tile list__tile--link list__tile--active"
-              >
+              <div class="list__tile list__tile--link list__tile--active">
                 <div class="list__tile__action list__tile__action--select-multi">
                   <div tabindex="0"
                        role="checkbox"
@@ -67,9 +65,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and multi select 1`] =
               </div>
             </li>
             <li>
-              <div href="javascript:;"
-                   class="list__tile list__tile--link"
-              >
+              <div class="list__tile list__tile--link">
                 <div class="list__tile__action list__tile__action--select-multi">
                   <div tabindex="0"
                        role="checkbox"
@@ -101,7 +97,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and multi select 1`] =
       </div>
     </div>
     <i aria-hidden="true"
-       class="material-icons icon input-group__append-icon input-group__icon-cb"
+       class="material-icons icon input-group__append-icon input-group__icon-cb input-group__icon-clearable"
     >
       clear
     </i>
@@ -118,7 +114,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and multi select 2`] =
 
 <div tabindex="0"
      role="combobox"
-     class="input-group input-group--append-icon input-group--text-field input-group--select input-group--multiple"
+     class="input-group input-group--append-icon input-group--text-field input-group--select input-group--multiple primary--text"
 >
   <div class="input-group__input">
     <div class="input-group__selections"
@@ -143,9 +139,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and multi select 2`] =
               class="list"
           >
             <li>
-              <div href="javascript:;"
-                   class="list__tile list__tile--link"
-              >
+              <div class="list__tile list__tile--link">
                 <div class="list__tile__action list__tile__action--select-multi">
                   <div tabindex="0"
                        role="checkbox"
@@ -180,9 +174,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and multi select 2`] =
               </div>
             </li>
             <li>
-              <div href="javascript:;"
-                   class="list__tile list__tile--link"
-              >
+              <div class="list__tile list__tile--link">
                 <div class="list__tile__action list__tile__action--select-multi">
                   <div tabindex="0"
                        role="checkbox"
@@ -231,7 +223,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and single select 1`] 
 
 <div tabindex="0"
      role="combobox"
-     class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select"
+     class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select primary--text"
 >
   <div class="input-group__input">
     <div class="input-group__selections"
@@ -259,9 +251,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and single select 1`] 
               class="list"
           >
             <li>
-              <div href="javascript:;"
-                   class="list__tile list__tile--link list__tile--active"
-              >
+              <div class="list__tile list__tile--link list__tile--active">
                 <div class="list__tile__content">
                   <div class="list__tile__title">
                     1
@@ -270,9 +260,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and single select 1`] 
               </div>
             </li>
             <li>
-              <div href="javascript:;"
-                   class="list__tile list__tile--link"
-              >
+              <div class="list__tile list__tile--link">
                 <div class="list__tile__content">
                   <div class="list__tile__title">
                     2
@@ -285,7 +273,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and single select 1`] 
       </div>
     </div>
     <i aria-hidden="true"
-       class="material-icons icon input-group__append-icon input-group__icon-cb"
+       class="material-icons icon input-group__append-icon input-group__icon-cb input-group__icon-clearable"
     >
       clear
     </i>
@@ -302,7 +290,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and single select 2`] 
 
 <div tabindex="0"
      role="combobox"
-     class="input-group input-group--append-icon input-group--text-field input-group--select"
+     class="input-group input-group--append-icon input-group--text-field input-group--select primary--text"
 >
   <div class="input-group__input">
     <div class="input-group__selections"
@@ -327,9 +315,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and single select 2`] 
               class="list"
           >
             <li>
-              <div href="javascript:;"
-                   class="list__tile list__tile--link"
-              >
+              <div class="list__tile list__tile--link">
                 <div class="list__tile__content">
                   <div class="list__tile__title">
                     1
@@ -338,9 +324,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and single select 2`] 
               </div>
             </li>
             <li>
-              <div href="javascript:;"
-                   class="list__tile list__tile--link"
-              >
+              <div class="list__tile list__tile--link">
                 <div class="list__tile__content">
                   <div class="list__tile__title">
                     2

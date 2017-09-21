@@ -42,7 +42,8 @@ export default {
       startIndex: 3,
       stopIndex: 0,
       hasJustFocused: false,
-      focusedTimeout: {}
+      openTimeout: null,
+      closeTimeout: null
     }
   },
 
