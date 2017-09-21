@@ -1,5 +1,6 @@
 import { test } from '~util/testing'
 import VSelect from '~components/VSelect'
+import VMenu from '~components/VMenu'
 
 test('VSelect.vue', ({ mount }) => {
   const backspace = new Event('keydown')
@@ -378,6 +379,68 @@ test('VSelect.vue', ({ mount }) => {
     arrow.trigger('click')
     expect(wrapper.vm.menuIsActive).toBe(true)
 
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  // TODO: Don't pre-select the first search result
+  it.skip('should add a tag with tab using an existing value', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        tags: true,
+        value: [],
+        items: ['foo']
+      }
+    })
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    const input = wrapper.find('input')[0]
+    const menu = wrapper.find(VMenu)[0]
+
+    wrapper.vm.focus()
+    await wrapper.vm.$nextTick()
+    input.element.value = 'f'
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
+
+    expect(menu.vm.listIndex).toBe(-1)
+
+    input.trigger('keydown.down')
+    await wrapper.vm.$nextTick()
+
+    expect(menu.vm.listIndex).toBe(0)
+
+    input.trigger('keydown.tab')
+    await wrapper.vm.$nextTick()
+
+    expect(change).toBeCalledWith(['foo'])
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should add a tag with tab using a new value', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        tags: true,
+        value: [],
+        items: ['foo']
+      }
+    })
+
+    const input = wrapper.find('input')[0]
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    wrapper.vm.focus()
+    await wrapper.vm.$nextTick()
+    input.element.value = 'bar'
+    input.trigger('input')
+    input.trigger('keydown.tab')
+    await wrapper.vm.$nextTick()
+
+    expect(change).toBeCalledWith(['bar'])
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 })
