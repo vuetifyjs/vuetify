@@ -1,0 +1,369 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VDatePicker.js should match snapshot with formatting functions 1`] = `
+
+<div class="card picker picker--date theme--light"
+     style="height: auto;"
+>
+  <div class="picker__title">
+    <div class="picker--date__title-year">
+      2005
+    </div>
+    <div class="picker--date__title-date active">
+      <div>
+        4010 ثور
+      </div>
+    </div>
+  </div>
+  <div class="picker__body">
+    <div class="picker--date__header">
+      <div class="picker--date__header-selector">
+        <button type="button"
+                class="btn btn--icon btn--raised"
+        >
+          <div class="btn__content">
+            <i class="material-icons icon">
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div class="picker--date__header-selector-date">
+          <strong>
+            4010 ثور
+          </strong>
+        </div>
+        <button type="button"
+                class="btn btn--icon btn--raised"
+        >
+          <div class="btn__content">
+            <i class="material-icons icon">
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div class="picker--date__table">
+      <table>
+        <thead>
+          <tr>
+            <th>
+              S
+            </th>
+            <th>
+              M
+            </th>
+            <th>
+              T
+            </th>
+            <th>
+              W
+            </th>
+            <th>
+              T
+            </th>
+            <th>
+              F
+            </th>
+            <th>
+              S
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--active"
+              >
+                <span class="btn__content">
+                  1
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  2
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  3
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  4
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  5
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  6
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  7
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  8
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  9
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  10
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  11
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  12
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  13
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  14
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  15
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  16
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  17
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  18
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  19
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  20
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  21
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  22
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  23
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  24
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  25
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  26
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  27
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  28
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  29
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  30
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              &nbsp;
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+`;

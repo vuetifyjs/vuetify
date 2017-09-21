@@ -1,3 +1,5 @@
+@import '../bootstrap'
+
 .menu
   display: inline-block
   position: relative
@@ -6,13 +8,18 @@
   &--disabled
     cursor: not-allowed
 
-    .menu__activator
+    .menu__activator,
+    .menu__activator > *
       cursor: not-allowed
+      pointer-events: none
 
   &__activator
     align-items: center
     cursor: pointer
     position: relative
+
+    input[readonly]
+      cursor: pointer
 
     .toolbar__side-icon
       margin: 0
@@ -24,9 +31,9 @@
     max-width: 80%
     overflow-y: auto
     overflow-x: hidden
-    z-index: 6
+    transition: .3s $transition.swing
     elevation(8)
-    
+
     &--active
       pointer-events: none
 

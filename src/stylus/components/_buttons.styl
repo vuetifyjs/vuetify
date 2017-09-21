@@ -1,3 +1,35 @@
+@import '../bootstrap'
+@import '../components/_ripples'
+@import '../theme'
+
+button($material)
+  color: $material.text.primary
+
+  .icon
+    color: $material.text.primary
+
+  &.btn--disabled
+    box-shadow: none !important
+    color: $material.buttons.disabled
+    pointer-events: none
+    
+    .icon
+      color: $material.buttons.disabled
+
+    &:not(.btn--icon):not(.btn--flat)
+      background-color: $material.buttons.focused !important
+
+  &:not(.btn--icon):not(.btn--flat)
+    background-color: $material.app-bar
+
+  // Specific styles for styling on date-picker
+  &:not(.btn--disabled):not(.btn--date-picker)
+    &.btn--icon,
+    &.btn--floating
+      color: $material.icons.active
+
+theme(button, "btn")
+
 /** Base Spec */
 .btn
   align-items: center
@@ -54,6 +86,9 @@
     transition: $primary-transition
     white-space: nowrap
 
+/** Icons */
+.btn .btn__content .icon
+  color: inherit
 
 /** Types */
 .btn
@@ -67,11 +102,6 @@
 
     &:active
       elevation(8)
-
-  &.btn--icon
-    .btn__content
-      .icon
-        color: inherit
 
   &--icon
     background: transparent
@@ -116,9 +146,6 @@
       margin: 0
       padding: 0
 
-      .icon
-        color: inherit
-
     &:after
       border-radius: 50%
 
@@ -155,7 +182,7 @@
         font-size: $button-floating-small-icon-width
         height: $button-floating-small-icon-width
         width: $button-floating-small-icon-width
-        
+
       &.btn--floating .icon
         left: 'calc(50% - %s)' % ($button-floating-small-icon-width / 2)
         top: 'calc(50% - %s)' % ($button-floating-small-icon-width / 2)
@@ -169,7 +196,7 @@
         font-size: $button-floating-large-icon-width
         height: $button-floating-large-icon-width
         width: $button-floating-large-icon-width
-        
+
       &.btn--floating .icon
         left: 'calc(50% - %s)' % ($button-floating-large-icon-width / 2)
         top: 'calc(50% - %s)' % ($button-floating-large-icon-width / 2)

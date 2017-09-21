@@ -1,6 +1,94 @@
+@import '../bootstrap'
+@import '../theme'
+
+/* Theme */
+input-group($material)
+  input,
+  textarea
+    color: $material.text.primary
+
+    &:disabled
+      color: $material.text.disabled
+
+  .input-group__details
+    color: $material.text.secondary
+
+  &.input-group--textarea:not(.input-group--full-width)
+    .input-group__input
+      border: 2px solid $material.text.secondary
+
+  .input-group__append-icon
+    padding: 0 6px
+    transition: .3s $transition.ease-in-out
+
+  .input-group__append-icon,
+  .input-group__prepend-icon
+    user-select: none
+
+  // This is specific for selects
+  &.input-group--dirty
+    .input-group__selections__comma
+      &:not(.input-group__selections__comma--active)
+        color: $material.text.primary
+
+  &:not(.input-group--error)
+    label
+      color: $material.text.secondary
+
+    &.input-group--disabled
+      label
+        color: $material.text.disabled
+
+    .input-group__details:before
+      background-color: $material.input-bottom-line
+
+    &:not(.input-group--focused):not(.input-group--disabled)
+      .input-group__input
+        .input-group__append-icon,
+        .input-group__prepend-icon
+          color: $material.text.secondary
+
+      &:not(.input-group--disabled):not(.input-group--overflow):not(.input-group--segmented):not(.input-group--editable):hover
+        .input-group__details:before
+          background-color: $material.text.primary
+
+        &.input-group--textarea:not(.input-group--full-width)
+          .input-group__input
+            border-color: $material.text.primary
+
+  .input-group__counter
+    color: $material.text.secondary
+
+  &.input-group
+    &--overflow, &--segmented, &--editable
+      .input-group__input,
+      .input-group__details
+        &:before
+          background-color: $material.dividers
+
+  &.input-group--disabled
+    .input-group__details:before
+      background-color: transparent
+      background-image: linear-gradient(
+        to right,
+        $material.text.disabled 0,
+        $material.text.disabled 33%,
+        transparent 0
+      )
+
+  .input-group--text-field
+    &__prefix, &__suffix
+      color: $material.text.secondary
+
+    &.input-group--disabled
+      &__prefix, &__suffix
+        color: $material.text.disabled
+
+theme(input-group, "input-group")
+
 .input-group
   display: flex
-  flex: 1
+  flex: 1 1
   flex-wrap: wrap
   min-width: 24px
   padding: $input-group-padding
@@ -13,7 +101,8 @@
 /** Label */
 .input-group
   label
-    font-size $input-font-size
+    display: inline-block
+    font-size: $input-font-size
     line-height: $input-font-size * 2
     height: $input-height
     max-width: 90%
@@ -41,34 +130,75 @@
 .input-group
   &__icon-cb
     cursor: pointer
-    
+
 .input-group
   &.input-group--focused
-    .input-group__input .icon
+    .input-group__append-icon,
+    .input-group__prepend-icon
       color: $theme.primary
+
+  &.input-group--append-icon, &.input-group--selection-controls
+    label
+      max-width: 75%
+
+  &.input-group--prepend-icon
+    label
+      max-width: 75%
+
+  &.input-group--append-icon.input-group--prepend-icon
+    label
+      max-width: 65%
 
 /** States */
 .input-group
+  // Single Line
+  &.input-group--single-line,
+  &.input-group--solo
+    label
+      transform: translate3d(0,0,0)
+
+    &.input-group--dirty
+      label
+        display: none
+
+  // Solo
+  &.input-group--solo
+    background: #fff
+    min-height: 46px
+    border-radius: $card-border-radius
+    padding: 0
+    elevation(2)
+
+    label
+      top: 8px
+      padding-left: 16px
+      transform: none !important
+
+    .input-group__input
+      align-items: center
+      padding: 8px 16px
+
+    .input-group__details
+      display: none
+
   &--disabled
     .input-group__details:before
       background-color: transparent
       background-position: bottom
       background-size: 3px 1px
       background-repeat: repeat-x
-          
+
   // Focused
   &.input-group--text-field
     &:not(.input-group--single-line):not(.input-group--error)
-      &.input-group--focused,
-      &:focus
+      &.input-group--focused
         label
           color: $theme.primary
-        
-        textarea
+
+        .input-group__input
           border-color: $theme.primary
 
-    &.input-group--focused,
-    &:focus
+    &.input-group--focused
       &:not(.input-group--disabled)
         .input-group__details
           &:after
@@ -88,16 +218,16 @@
     input,
     textarea
       caret-color: $theme.error
-      
-    textarea
-      border-color: $theme.error
-    
+
+    .input-group__input
+      border-color: $theme.error !important
+
     label
       animation: shake .6s $transition.swing
 
     label,
     .input-group__input .icon
-      color: $theme.error
+      color: $theme.error !important
 
     .input-group__details
       &:after,
@@ -115,7 +245,7 @@
     padding-top: 4px
     flex: 1 0 100%
     font-size: 12px
-    min-height: 22px
+    min-height: 26px
     overflow: hidden
     position: relative
     width: 100%
@@ -146,6 +276,19 @@
       min-height: 2px
       padding: 0
 
+  &--async-loading
+    .input-group__details
+      &:before,
+      &:after
+        display: none
+
+  /** Async loading indicator */
+  .progress-linear
+    position: absolute
+    top: 0
+    left: 0
+    margin: 0
+
 /** Hint */
 .input-group
   &__hint
@@ -158,7 +301,7 @@
     flex: 1 0
     transition: .3s $transition.fast-in-fast-out
     color: $theme.error
-    
+
 
 /** Types */
 .input-group

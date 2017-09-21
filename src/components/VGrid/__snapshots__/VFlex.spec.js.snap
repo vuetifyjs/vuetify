@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VFlex should render component and match snapshot 1`] = `
+
+<div class="flex">
+</div>
+
+`;
+
+exports[`VFlex should render component with custom id and match snapshot 1`] = `
+
+<div class="flex">
+</div>
+
+`;

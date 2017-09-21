@@ -1,0 +1,24 @@
+@import './settings/_theme.styl'
+
+app($component)
+  .application
+    &--light
+      $component($material-light)
+    &--dark
+      $component($material-dark)
+
+theme($component, $name)
+  light($component, $name)
+  dark($component, $name)
+
+light($component, $name)
+  .application--light .{$name}
+    $component($material-light)
+  .application .theme--light.{$name}
+    $component($material-light)
+
+dark($component, $name)
+  .application--dark .{$name}
+    $component($material-dark)
+  .application .theme--dark.{$name}
+    $component($material-dark)

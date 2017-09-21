@@ -27,6 +27,7 @@ function unbind (el) {
 }
 
 export default {
+  name: 'tooltip',
   bind: directive,
   updated: directive,
   componentUpdated: directive,

@@ -1,12 +1,15 @@
+@import '../bootstrap'
+
 .badge
   position: relative
-  
+
   &:after
     color: $badge-color
     content: attr(data-badge)
     display: flex
     position: absolute
     font-family: $badge-font-family
+    font-feature-settings: 'liga'
     top: -($badge-height / 2)
     right: -($badge-width)
     background-color: $theme.primary
@@ -18,26 +21,26 @@
     align-items: center
     flex-direction: row
     flex-wrap: wrap
-  
+
   &--overlap
     &:after
       top: -8px
       right: -8px
-      
+
     &.badge--left
       &:after
         left: -8px
         right: initial
-        
+
     &.badge--bottom
       &:after
         bottom: -8px
         top: initial
-  
+
   &--icon
     &:after
       font-family: 'Material Icons'
-      
+
   &--left
     &:after
       left: -($badge-width)

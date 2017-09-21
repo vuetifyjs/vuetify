@@ -1,8 +1,12 @@
-﻿.DS_Store
+.DS_Store
 node_modules/
 .vscode/
 npm-debug.log
 .idea/
 coverage/
 Playground.vue
+report.html
 .vs/
+dev/*.js
+dev/*css
+!dev/index.js

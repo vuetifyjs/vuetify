@@ -1,9 +1,29 @@
+@import '../bootstrap'
+@import '../theme'
+
+/* Theme */
+tabs($material)
+  .tabs__item
+    color: $material.tabs.inactive
+
+    &.tabs__item--active
+      color: $material.tabs.active
+
+    &.tabs__item--disabled
+      color: $material.buttons.disabled
+
+    .icon--left,
+    .icon--right
+      color: $material.icons.active
+
+theme(tabs, "tabs")
+
 .tabs
   overflow: hidden
   position: relative
   width: 100%
 
-  &--grow > .tabs__bar
+  &--grow .tabs__bar
     .tabs__li
       flex: 1
 
@@ -16,7 +36,7 @@
       @media $display-breakpoints.xs-only
         min-width: 72px
 
-  &--centered > .tabs__bar
+  &--centered .tabs__bar
     .tabs__container
       justify-content: center
 
@@ -27,7 +47,7 @@
     .tabs__item
       flex-direction: column
 
-  &.tabs--mobile > .tabs__bar
+  &.tabs--mobile .tabs__bar
     .icon--left, .icon--right
       display: none
 
@@ -121,9 +141,6 @@
 
   &__items
     position: relative
-    border-width: 0 1px 1px 1px
-    border-style: solid
-    border-color: rgba($material-theme.fg-color, .1)
     overflow: hidden
 
   &__content

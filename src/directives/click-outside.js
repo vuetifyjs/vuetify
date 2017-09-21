@@ -13,11 +13,13 @@ function directive (e, el, binding, v) {
 }
 
 export default {
+  name: 'click-outside',
+
   bind (el, binding, v) {
     v.context.$vuetify.load(() => {
       const outside = document.querySelector('[data-app]')
       const click = e => directive(e, el, binding, v)
-      outside.addEventListener('click', click, false)
+      outside && outside.addEventListener('click', click, false)
       el._clickOutside = click
     })
   },

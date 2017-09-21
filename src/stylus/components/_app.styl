@@ -1,0 +1,38 @@
+@import '../bootstrap'
+@import '../theme'
+
+.application
+  -webkit-backface-visibility: hidden
+  min-height: 100vh
+
+  > main > .container
+    min-height: 100vh
+
+  &--toolbar
+    > main > .container
+      min-height: 'calc(100vh - %s)' % $toolbar-height
+
+    &.application--footer
+      > main > .container
+        min-height: 'calc(100vh - %s - %s)' % ($toolbar-height $footer-height)
+
+  &--footer
+    > main > .container
+      min-height: 'calc(100vh - %s)' % $footer-height
+
+  &--footer-fixed
+    > aside.navigation-drawer
+      max-height: 'calc(100vh - %s)' % $footer-height
+
+    > main
+      padding-bottom: $footer-height
+
+    &.application--toolbar
+      > aside.navigation-drawer.navigation-drawer--clipped
+        max-height: 'calc(100vh - %s - %s)' % ($toolbar-height $footer-height)
+
+application($material)
+  background: $material.background
+  color: $material.text.primary
+
+app(application)

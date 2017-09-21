@@ -1,3 +1,16 @@
+@import '../bootstrap'
+@import '../theme'
+
+/* Themes */
+icon($material)
+  color: $material.icons.active
+
+  &.icon--disabled
+    color: $material.icons.inactive
+    cursor: default
+
+theme(icon, "icon")
+
 .icon
   align-items: center
   display: inline-flex

@@ -1,0 +1,18 @@
+@import '../bootstrap'
+@import '../theme'
+
+.bottom-sheet.dialog
+  align-self: flex-end
+  border-radius: 0
+  flex: 1 0 100%
+  margin: 0
+  min-width: 100%
+  overflow: visible
+  transition: .4s $transition.swing
+  
+  &.bottom-sheet--inset
+    max-width: 70%
+    min-width: 0
+    
+    @media $display-breakpoints.xs-only
+      max-width: none

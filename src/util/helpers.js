@@ -1,5 +1,7 @@
 export function createSimpleFunctional (c, el = 'div') {
+  const name = c.replace(/__/g, '-')
   return {
+    name: `v-${name}`,
     functional: true,
 
     render: (h, { data, children }) => {
@@ -12,6 +14,8 @@ export function createSimpleFunctional (c, el = 'div') {
 
 export function createSimpleTransition (name, origin = 'top center 0', mode) {
   return {
+    name,
+
     functional: true,
 
     props: {
@@ -25,12 +29,15 @@ export function createSimpleTransition (name, origin = 'top center 0', mode) {
       context.data = context.data || {}
       context.data.props = { name }
       context.data.on = context.data.on || {}
+      if (!Object.isExtensible(context.data.on)) {
+        context.data.on = { ...context.data.on }
+      }
 
       if (mode) context.data.props.mode = mode
 
       context.data.on.beforeEnter = el => {
-        el.style.transformOrigin = origin
-        el.style.webkitTransformOrigin = origin
+        el.style.transformOrigin = context.props.origin
+        el.style.webkitTransformOrigin = context.props.origin
       }
 
       return h('transition', context.data, context.children)
@@ -40,6 +47,8 @@ export function createSimpleTransition (name, origin = 'top center 0', mode) {
 
 export function createJavaScriptTransition (name, functions, css = true, mode = 'in-out') {
   return {
+    name,
+
     functional: true,
 
     props: {
@@ -89,7 +98,7 @@ export function getObjectValueByPath (obj, path) {
   // credit: http://stackoverflow.com/questions/6491463/accessing-nested-javascript-objects-with-string-key#comment55278413_6491621
   if (!path || path.constructor !== String) return
   path = path.replace(/\[(\w+)\]/g, '.$1') // convert indexes to properties
-  path = path.replace(/^\./, '')           // strip a leading dot
+  path = path.replace(/^\./, '') // strip a leading dot
   const a = path.split('.')
   for (var i = 0, n = a.length; i < n; ++i) {
     var k = a[i]

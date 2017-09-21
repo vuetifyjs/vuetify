@@ -1,3 +1,24 @@
+@import '../bootstrap'
+@import '../theme'
+
+/* Themes */
+list($material)
+  background: $material.cards
+
+  .list__tile:not(.list__tile--active)
+    color: $material.text.primary
+
+  .list__tile__sub-title
+    color: $material.text.secondary
+
+  .subheader
+    color: $material.text.secondary
+
+  .divider
+    background-color: $material.dividers
+
+theme(list, "list")
+
 .list
   list-style-type: none
   padding: $list-top-padding 0 $list-bottom-padding
@@ -20,6 +41,7 @@
     margin: 0
     transition: $primary-transition
     position: relative
+    user-select: none
 
     &:after
       content: ''
@@ -32,7 +54,10 @@
       transition: $primary-transition
       background-color: $material-twelve-percent-dark
 
-    a&:hover, &--highlighted
+    &--link
+      cursor: pointer
+
+    &--link:hover, &--highlighted
       background: $material-twelve-percent-dark
 
     &__content,
@@ -42,12 +67,14 @@
 
     &__title, &__sub-title
       white-space: nowrap
-      overflow-x: hidden
+      overflow: hidden
       text-overflow: ellipsis
       width: 100%
 
     &__title
       transition: $primary-transition
+      height: 24px
+      line-height: 24px
       position: relative
       text-align: left
 
@@ -94,17 +121,17 @@
 
     &__content
       text-align: left
-      flex: 0 1 100%
+      flex: 1 1 auto
       overflow: hidden
       display: flex
       align-items: flex-start
       justify-content: center
       flex-direction: column
 
-      + .avatar
+      ~ .avatar
         justify-content: flex-end
 
-      + .list__tile__action:not(.list__tile__action--stack)
+      ~ .list__tile__action:not(.list__tile__action--stack)
         justify-content: flex-end
 
     &--active
@@ -117,8 +144,15 @@
     &--avatar
       height: $list-item-avatar-single-height
 
+      .avatar
+        img,
+        .icon
+          height: 40px
+          width: 40px
+
   &--dense
     padding-top: $list-item-dense-top-padding
+    padding-bottom: $list-item-dense-top-padding
 
     .subheader
       font-size: $subheader-dense-font-size
@@ -131,11 +165,6 @@
 
       &--avatar
         height: $list-item-dense-avatar-single-height
-
-        .avatar
-          .icon, img
-            height: $list-item-dense-avatar-height
-            width: $list-item-dense-avatar-height
 
       &:not(.list__tile--avatar)
         height: $list-item-dense-single-height
@@ -190,6 +219,12 @@
         color: $theme.primary
 
     &__header
+      > li:first-child
+        cursor: pointer
+
+        &:hover
+          background: $material-twelve-percent-dark
+
       + .list--group
         &:after
           opacity: 1
@@ -214,3 +249,9 @@
 
   &--subheader
     padding-top: 0
+
+  &.list--two-line,
+  &.list--three-line
+    .list__tile__avatar
+      align-items: flex-start
+      padding-top: 6px

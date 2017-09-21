@@ -1,0 +1,504 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VPagination.vue emits an event when next or previous is clicked 1`] = `
+
+<ul class="pagination">
+  <li>
+    <a href="#!"
+       class="pagination__navigation"
+    >
+      <i class="material-icons icon">
+        chevron_left
+      </i>
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      1
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      2
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      3
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      4
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      5
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__navigation"
+    >
+      <i class="material-icons icon">
+        chevron_right
+      </i>
+    </a>
+  </li>
+</ul>
+
+`;
+
+exports[`VPagination.vue should only render middle of range if length is big and value is somewhere in the middle 1`] = `
+
+<ul class="pagination">
+  <li>
+    <a href="#!"
+       class="pagination__navigation"
+    >
+      <i class="material-icons icon">
+        chevron_left
+      </i>
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      1
+    </a>
+  </li>
+  <li>
+    <span class="pagination__more">
+      ...
+    </span>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      41
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      42
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      43
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      44
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      45
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      46
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      47
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      48
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      49
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item pagination__item--active"
+    >
+      50
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      51
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      52
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      53
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      54
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      55
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      56
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      57
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      58
+    </a>
+  </li>
+  <li>
+    <span class="pagination__more">
+      ...
+    </span>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      100
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__navigation"
+    >
+      <i class="material-icons icon">
+        chevron_right
+      </i>
+    </a>
+  </li>
+</ul>
+
+`;
+
+exports[`VPagination.vue should only render start and end of range if length is big 1`] = `
+
+<ul class="pagination">
+  <li>
+    <a href="#!"
+       class="pagination__navigation"
+    >
+      <i class="material-icons icon">
+        chevron_left
+      </i>
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      1
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      2
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      3
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      4
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      5
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      6
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      7
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      8
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      9
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      10
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      11
+    </a>
+  </li>
+  <li>
+    <span class="pagination__more">
+      ...
+    </span>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      91
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      92
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      93
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      94
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      95
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      96
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      97
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      98
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      99
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      100
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__navigation"
+    >
+      <i class="material-icons icon">
+        chevron_right
+      </i>
+    </a>
+  </li>
+</ul>
+
+`;
+
+exports[`VPagination.vue should use totalVisible prop if defined 1`] = `
+
+<ul class="pagination">
+  <li>
+    <a href="#!"
+       class="pagination__navigation"
+    >
+      <i class="material-icons icon">
+        chevron_left
+      </i>
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      1
+    </a>
+  </li>
+  <li>
+    <span class="pagination__more">
+      ...
+    </span>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      47
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      48
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      49
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item pagination__item--active"
+    >
+      50
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      51
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      52
+    </a>
+  </li>
+  <li>
+    <span class="pagination__more">
+      ...
+    </span>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__item"
+    >
+      100
+    </a>
+  </li>
+  <li>
+    <a href="#!"
+       class="pagination__navigation"
+    >
+      <i class="material-icons icon">
+        chevron_right
+      </i>
+    </a>
+  </li>
+</ul>
+
+`;

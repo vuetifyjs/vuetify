@@ -1,37 +1,30 @@
-﻿require('./stylus/main.styl')
+require('./stylus/app.styl')
+import Semver from 'semver'
+import { devDependencies, version } from '../package.json'
+import * as components from './components'
+import * as directives from './directives'
 
-import { devDependencies } from '../package.json'
-import Components from './components'
-import * as Directives from './directives'
-import Load from './util/load'
-import semver from 'semver'
+function Vuetify (Vue) {
+  const Vuetify = components.Vuetify
 
-function plugin (Vue) {
-  Object.keys(Components).forEach(key => {
-    Vue.component(key, Components[key])
+  Vue.use(Vuetify, {
+    components,
+    directives
   })
-
-  Object.keys(Directives).forEach(key => {
-    Vue.directive(key, Directives[key])
-  })
-
-  Vue.prototype.$vuetify = {
-    load: Load
-  }
 }
+
+Vuetify.version = version
 
 function checkVueVersion () {
   const vueDep = devDependencies.vue
-  if (!semver.satisfies(window.Vue.version, vueDep)) {
+  if (!Semver.satisfies(window.Vue.version, vueDep)) {
     console.warn(`Vuetify requires Vue version ${vueDep}`)
   }
 }
 
 if (typeof window !== 'undefined' && window.Vue) {
-  if (window.Vue.version) {
-    checkVueVersion()
-  }
-  window.Vue.use(plugin)
+  window.Vue.version && checkVueVersion()
+  window.Vue.use(Vuetify)
 }
 
-export default plugin
+export default Vuetify
