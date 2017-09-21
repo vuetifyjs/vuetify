@@ -23,7 +23,7 @@ export default {
     maskText (text, newText = []) {
       text = text || ''
 
-      if (!this.mask || !text || !text.length) return text
+      if (!this.mask || !text.length) return text
 
       let textIndex = 0
       this.masked.forEach((mask, i, arr) => {
