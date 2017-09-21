@@ -24,34 +24,28 @@ export default {
 
   methods: {
     genFiltered (text) {
-      if (!this.isAutocomplete ||
-        !this.searchValue
-      ) return text
+      if (!this.isAutocomplete || !this.searchValue) return text
 
       text = text.toString()
 
       const searchValue = (this.searchValue || '').toString().toLowerCase()
       const index = text.toLowerCase().indexOf(searchValue)
-      let start
+      let start = ''
       let middle
       let end
 
+      if (index < 0) return text
+
       if (index !== 0) {
-        text = text.toString()
         start = text.slice(0, index)
         middle = text.slice(index, index + searchValue.length)
         end = text.slice(index + searchValue.length)
       } else {
-        start = ''
         middle = text.slice(index, searchValue.length)
         end = text.slice(searchValue.length)
       }
 
-      if (index > -1 && this.isAutocomplete) {
-        text = `${start}${this.genHighlight(middle)}${end}`
-      }
-
-      return text
+      return `${start}${this.genHighlight(middle)}${end}`
     },
     genHighlight (text) {
       return `<span class="list__tile__mask">${text}</span>`
