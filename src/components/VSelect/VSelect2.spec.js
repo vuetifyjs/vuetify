@@ -443,4 +443,33 @@ test('VSelect.vue', ({ mount }) => {
     expect(change).toBeCalledWith(['bar'])
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
+
+  // TODO: Search masking
+  it.skip('should pre-select the currently highlighted suggestion', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: ['foo', 'bar'],
+        autocomplete: true
+      }
+    })
+
+    const input = wrapper.find('input')[0]
+    const menu = wrapper.vm.$refs.menu
+
+    input.value = 'fo'
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
+    expect(input.value).toBe('foo')
+    expect(input.selectionStart).toBe(2)
+    expect(input.selectionEnd).toBe(3)
+
+    input.value = 'ar'
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
+    expect(input.value).toBe('bar')
+    expect(input.selectionStart).toBe(0)
+    expect(input.selectionEnd).toBe(1)
+
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 })
