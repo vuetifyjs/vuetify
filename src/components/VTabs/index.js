@@ -4,7 +4,7 @@ import {
 
 import VTabs from './VTabs'
 import VTabsItem from './VTabsItem'
-import VTabsItems from './VTabsItemS'
+import VTabsItems from './VTabsItems'
 import VTabsContent from './VTabsContent'
 import VTabsBar from './VTabsBar'
 
