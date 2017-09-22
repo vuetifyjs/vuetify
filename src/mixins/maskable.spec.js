@@ -104,4 +104,16 @@ test('Maskable.js', ({ mount }) => {
 
     expect(wrapper.vm.unmaskText('A31 - 4444')).toBe('A314444')
   })
+
+  it('should return the masked string', () => {
+    const wrapper = mount(VTextField, {
+      propsData: { 
+        mask: '##/##/###',
+        returnMaskedValue: true
+      }
+    })
+
+    expect(wrapper.vm.unmaskText('09/21/2017')).toBe('09/21/2017')
+    expect(wrapper.vm.unmaskText('09 / 21 / 2017')).toBe('09 / 21 / 2017')
+  })
 })

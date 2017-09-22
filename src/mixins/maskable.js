@@ -10,9 +10,17 @@
  */
 export default {
   data: () => ({
-    allowedMasks: ['#', 'A'],
-    selection: 0
-    // TODO: Add some built in masks
+    allowedMasks: ['#', 'A', 'a', 'X'],
+    selection: 0,
+    preDefined: {
+      'credit-card': '#### - #### - #### - ####',
+      'date': '##/##/####',
+      'date-with-time': '##/##/#### ##:##',
+      'phone': '(###) ### - ####',
+      'social': '###-##-####',
+      'time': '##:##',
+      'time-with-seconds': '##:##:##'
+    }
   }),
 
   props: {
@@ -26,7 +34,10 @@ export default {
 
   computed: {
     masked () {
-      return this.mask ? this.mask.split('') : []
+      const preDefined = this.preDefined[this.mask]
+      const mask = preDefined || this.mask || ''
+
+      return mask.split('')
     }
   },
 
@@ -34,9 +45,13 @@ export default {
     maskText (text, newText = []) {
       text = text || ''
 
-      if (!this.mask || !text.length) return text
+      if (!this.mask ||
+        !text.length ||
+        this.returnMaskedValue
+      ) return text
 
       let textIndex = 0
+      let selection = 0
       this.masked.forEach((mask, i) => {
         if (textIndex >= text.length &&
           !this.fillMaskBlanks
@@ -47,21 +62,28 @@ export default {
 
         if (!this.isMask(mask)) {
           newText.push(mask)
+
+          if (selection === i) {
+            selection = i + 1
+          }
         } else if (this.maskValidates(mask, char)) {
           // If the mask is validated, push
           // next char into the new array
           newText.push(char)
           textIndex++
-          this.selection = i + 1
+          selection = i + 1
         }
       })
 
+      this.selection = selection
       this.setSelectionRange()
 
       return newText.join('')
     },
     unmaskText (text, newText = []) {
-      if (!this.mask) return text
+      if (!this.mask ||
+        this.returnMaskedValue
+      ) return text
 
       text = text || ''
 
@@ -91,8 +113,10 @@ export default {
       if (!this.isMask(mask)) return false
 
       switch (mask) {
-        case 'A': return char.match(/[a-z]/i)
+        case 'a': return char.match(/[a-z]/)
+        case 'A': return char.match(/[A-Z]/)
         case '#': return !isNaN(parseInt(char))
+        case 'X': return char.match(/[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/]/)
       }
     },
     // When the input changes and is
