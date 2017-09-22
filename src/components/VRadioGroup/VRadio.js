@@ -143,6 +143,7 @@ export default {
   render (h) {
     const transition = h('v-fade-transition', {}, [
       h('v-icon', {
+        staticClass: 'icon--selection-control',
         'class': {
           'icon--radio': this.isActive
         },
