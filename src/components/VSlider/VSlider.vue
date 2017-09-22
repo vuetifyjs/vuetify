@@ -34,10 +34,22 @@
         type: [Number, String],
         default: null
       },
+      thumbColor: {
+        type: String,
+        default: null
+      },
       thumbLabel: Boolean,
       value: [Number, String],
       vertical: Boolean,
-      snap: Boolean
+      snap: Boolean,
+      trackColor: {
+        type: String,
+        default: null
+      },
+      trackFillColor: {
+        type: String,
+        default: null
+      }
     },
 
     computed: {
@@ -214,7 +226,7 @@
               }
             ]
           }, [
-            h('div', { 'class': 'slider__thumb--label' }, [
+            h('div', { 'class': ['slider__thumb--label', this.thumbColor] }, [
               h('span', {}, parseInt(this.inputValue))
             ])
           ])
@@ -222,7 +234,7 @@
       },
       genThumbContainer (h) {
         const children = []
-        children.push(h('div', { 'class': 'slider__thumb' }))
+        children.push(h('div', { 'class': ['slider__thumb', this.thumbColor] }))
 
         this.thumbLabel && children.push(this.genThumbLabel(h))
 
@@ -256,11 +268,11 @@
       genTrackContainer (h) {
         const children = [
           h('div', {
-            'class': 'slider__track',
+            'class': ['slider__track', this.trackColor],
             style: this.trackStyles
           }),
           h('div', {
-            'class': 'slider__track-fill',
+            'class': ['slider__track-fill', this.trackFillColor],
             style: this.trackFillStyles
           })
         ]
