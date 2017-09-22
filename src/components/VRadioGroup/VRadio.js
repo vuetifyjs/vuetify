@@ -12,7 +12,7 @@ export default {
 
   inheritAttrs: false,
 
-  inject: ['isMandatory', 'name'],
+  inject: ['isMandatory', 'name', 'registerChild', 'unregisterChild'],
 
   components: {
     VFadeTransition,
@@ -132,9 +132,18 @@ export default {
     }
   },
 
+  mounted () {
+    this.registerChild(this)
+  },
+
+  beforeDestroy () {
+    this.unregisterChild(this)
+  },
+
   render (h) {
     const transition = h('v-fade-transition', {}, [
       h('v-icon', {
+        staticClass: 'icon--selection-control',
         'class': {
           'icon--radio': this.isActive
         },

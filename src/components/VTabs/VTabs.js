@@ -18,6 +18,8 @@ export default {
       unregisterContent: this.unregisterContent,
       registerTabItem: this.registerTabItem,
       unregisterTabItem: this.unregisterTabItem,
+      next: this.next,
+      prev: this.prev,
       slider: this.slider,
       tabClick: this.tabClick,
       isScrollable: () => this.scrollable,
@@ -122,6 +124,20 @@ export default {
     },
     unregisterTabItem (id) {
       this.tabItems = this.tabItems.filter(o => o.id !== id)
+    },
+    next () {
+      let nextIndex = this.activeIndex + 1
+
+      if (!this.content[nextIndex]) nextIndex = 0
+
+      this.tabClick(this.tabItems[nextIndex].id)
+    },
+    prev () {
+      let prevIndex = this.activeIndex - 1
+
+      if (!this.content[prevIndex]) prevIndex = this.content.length - 1
+
+      this.tabClick(this.tabItems[prevIndex].id)
     },
     onResize () {
       this.isMobile = window.innerWidth < this.mobileBreakPoint

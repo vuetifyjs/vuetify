@@ -64,6 +64,7 @@ export default {
   render (h) {
     const transition = h('v-fade-transition', [
       h('v-icon', {
+        staticClass: 'icon--selection-control',
         'class': {
           'icon--checkbox': this.icon === 'check_box'
         },

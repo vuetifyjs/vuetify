@@ -14,6 +14,7 @@ export default {
   },
 
   props: {
+    alt: String,
     height: {
       type: [String, Number],
       default: 500
@@ -61,20 +62,24 @@ export default {
   },
 
   render (h) {
+    const imgData = {
+      staticClass: 'parallax__image',
+      'class': {
+        'parallax__image--jumbotron': this.jumbotron
+      },
+      style: this.styles,
+      attrs: {
+        src: this.src
+      },
+      ref: 'img'
+    }
+
+    if (this.alt) imgData.attrs.alt = this.alt
+
     const container = h('div', {
       staticClass: 'parallax__image-container'
     }, [
-      h('img', {
-        staticClass: 'parallax__image',
-        'class': {
-          'parallax__image--jumbotron': this.jumbotron
-        },
-        style: this.styles,
-        attrs: {
-          src: this.src
-        },
-        ref: 'img'
-      })
+      h('img', imgData)
     ])
 
     const content = h('div', {

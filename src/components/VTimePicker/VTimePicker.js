@@ -183,12 +183,20 @@ export default {
       }
 
       if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
-      this.selectingHour = true
+
+      // Fix for #1818
+      // Wait for data to persist
+      // then set selectingHour
+      this.$nextTick(() => (this.selectingHour = true))
     },
     cancel () {
       this.inputTime = this.originalTime
       if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
-      this.selectingHour = true
+
+      // Fix for #1818
+      // Wait for data to persist
+      // then set selectingHour
+      this.$nextTick(() => (this.selectingHour = true))
     },
     isAllowed (type, value) {
       const allowed = this[`allowed${type.charAt(0).toUpperCase() + type.slice(1)}s`]

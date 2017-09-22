@@ -5,6 +5,8 @@ import {
   VTabReverseTransition
 } from '../transitions'
 
+import Touch from '../../directives/touch'
+
 export default {
   name: 'v-tabs-content',
 
@@ -15,6 +17,10 @@ export default {
   components: {
     VTabTransition,
     VTabReverseTransition
+  },
+
+  directives: {
+    Touch
   },
 
   data () {
@@ -62,14 +68,16 @@ export default {
   },
 
   render (h) {
-    const div = h('div', {
+    const data = {
       'class': 'tabs__content',
       directives: [{
         name: 'show',
         value: this.isActive
       }],
       on: this.$listeners
-    }, this.showLazyContent(this.$slots.default))
+    }
+
+    const div = h('div', data, this.showLazyContent(this.$slots.default))
 
     if (!this.computedTransition) {
       return div
