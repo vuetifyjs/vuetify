@@ -69,6 +69,15 @@ export default {
 
       return styles
     },
+    effectiveWidth () {
+      if (!this.buffer) {
+        return this.value
+      } else if (this.bufferValue) {
+        return Math.min(this.bufferValue, this.value) * 100 / this.bufferValue
+      } else {
+        return 0
+      }
+    },
     bufferStyles () {
       const styles = {}
 
@@ -85,7 +94,7 @@ export default {
       return h('div', {
         ref: 'front',
         class: ['progress-linear__bar__determinate', this.colorFront],
-        style: { width: `${this.value}%` }
+        style: { width: `${this.effectiveWidth}%` }
       })
     },
     genBar (h, name) {
