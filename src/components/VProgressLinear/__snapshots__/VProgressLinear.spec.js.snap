@@ -5,9 +5,13 @@ exports[`VProgressLinear.js should render component and match snapshot 1`] = `
 <div class="progress-linear"
      style="height: 7px;"
 >
+  <div class="primary"
+       style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; opacity: 0.3;"
+  >
+  </div>
   <div class="progress-linear__bar">
     <!---->
-    <div class="progress-linear__bar__determinate"
+    <div class="progress-linear__bar__determinate primary"
          style="width: 33%;"
     >
     </div>
@@ -21,11 +25,15 @@ exports[`VProgressLinear.js should render component with buffer value and match 
 <div class="progress-linear"
      style="height: 7px;"
 >
+  <div class="primary"
+       style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; opacity: 0.3;"
+  >
+  </div>
   <div class="progress-linear__bar"
        style="width: 80%;"
   >
     <!---->
-    <div class="progress-linear__bar__determinate"
+    <div class="progress-linear__bar__determinate primary"
          style="width: 41.25%;"
     >
     </div>
@@ -39,11 +47,15 @@ exports[`VProgressLinear.js should render component with buffer value and value 
 <div class="progress-linear"
      style="height: 7px;"
 >
+  <div class="primary"
+       style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; opacity: 0.3;"
+  >
+  </div>
   <div class="progress-linear__bar"
        style="width: 80%;"
   >
     <!---->
-    <div class="progress-linear__bar__determinate"
+    <div class="progress-linear__bar__determinate primary"
          style="width: 100%;"
     >
     </div>
@@ -57,11 +69,15 @@ exports[`VProgressLinear.js should render indeterminate progress and match snaps
 <div class="progress-linear"
      style="height: 7px;"
 >
+  <div class="primary"
+       style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; opacity: 0.3;"
+  >
+  </div>
   <div class="progress-linear__bar">
     <div class="progress-linear__bar__indeterminate progress-linear__bar__indeterminate--active">
-      <div class="progress-linear__bar__indeterminate long">
+      <div class="progress-linear__bar__indeterminate long primary">
       </div>
-      <div class="progress-linear__bar__indeterminate short">
+      <div class="progress-linear__bar__indeterminate short primary">
       </div>
     </div>
     <!---->
@@ -75,11 +91,15 @@ exports[`VProgressLinear.js should render indeterminate progress with query prop
 <div class="progress-linear"
      style="height: 7px;"
 >
+  <div class="primary"
+       style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; opacity: 0.3;"
+  >
+  </div>
   <div class="progress-linear__bar">
     <div class="progress-linear__bar__indeterminate progress-linear__bar__indeterminate--active">
-      <div class="progress-linear__bar__indeterminate long">
+      <div class="progress-linear__bar__indeterminate long primary">
       </div>
-      <div class="progress-linear__bar__indeterminate short">
+      <div class="progress-linear__bar__indeterminate short primary">
       </div>
     </div>
     <!---->
