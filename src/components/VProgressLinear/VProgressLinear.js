@@ -26,8 +26,10 @@ export default {
       type: [Number, String],
       default: 0.3
     },
-    buffer: Boolean,
-    bufferValue: Number,
+    bufferValue: {
+      type: [Number, String],
+      default: 100
+    },
     color: {
       type: String,
       default: 'primary'
@@ -57,20 +59,16 @@ export default {
         styles.height = 0
       }
 
-      if (this.buffer) {
-        styles.width = `${this.bufferValue}%`
-      }
+      styles.width = `${this.bufferValue}%`
 
       return styles
     },
     effectiveWidth () {
-      if (!this.buffer) {
-        return this.value
-      } else if (this.bufferValue) {
-        return Math.min(this.bufferValue, this.value) * 100 / this.bufferValue
-      } else {
+      if (!this.bufferValue) {
         return 0
       }
+
+      return Math.min(this.bufferValue, this.value) * 100 / this.bufferValue
     },
     bufferStyles () {
       const styles = {}
@@ -125,15 +123,11 @@ export default {
 
     const bar = h('div', { class: ['progress-linear__bar'], style: this.styles }, [fade, slide])
     const background = h('div', {
+      staticClass: `progress-linear__background ${this.color}`,
       style: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        opacity: this.backgroundOpacity
-      },
-      class: this.color
+        opacity: this.backgroundOpacity,
+        width: `${this.bufferValue}%`
+      }
     })
 
     return h('div', {
