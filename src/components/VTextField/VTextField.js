@@ -106,8 +106,6 @@ export default {
         this.initialValue = this.lazyValue
       } else if (this.initialValue !== this.lazyValue) {
         this.$emit('change', this.lazyValue)
-      } else {
-        setTimeout(this.setSelectionRange, 0)
       }
     },
     value (val) {

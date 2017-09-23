@@ -51,7 +51,7 @@ export default {
       ) return text
 
       let textIndex = 0
-      let selection = 0
+      // let selection = 0
       this.masked.forEach((mask, i) => {
         if (textIndex >= text.length &&
           !this.fillMaskBlanks
@@ -62,21 +62,13 @@ export default {
 
         if (!this.isMask(mask)) {
           newText.push(mask)
-
-          if (selection === i) {
-            selection = i + 1
-          }
         } else if (this.maskValidates(mask, char)) {
           // If the mask is validated, push
           // next char into the new array
           newText.push(char)
           textIndex++
-          selection = i + 1
         }
       })
-
-      this.selection = selection
-      this.setSelectionRange()
 
       return newText.join('')
     },
@@ -88,19 +80,25 @@ export default {
       text = text || ''
 
       let char
+      let textIndex = 0
       this.masked.forEach((mask, i) => {
         // The goal is to ensure that
         // every character makes it 
         // into the newText array     
-        char = char || text[i]
+        char = char || text[textIndex]
 
-        if (!char) return
-
-        if (!this.isMask(char) && char === mask) {
+        // Could cause potential issues
+        if (char === mask && !['A', 'a'].includes(mask)) {
           char = null
-        } else if (this.maskValidates(mask, char)) {
+          textIndex++
+        }
+
+        if (char == null) return
+
+        if (this.maskValidates(mask, char)) {
           newText.push(char)
           char = null
+          textIndex++
         }
       })
 

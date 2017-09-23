@@ -116,4 +116,14 @@ test('Maskable.js', ({ mount }) => {
     expect(wrapper.vm.unmaskText('09/21/2017')).toBe('09/21/2017')
     expect(wrapper.vm.unmaskText('09 / 21 / 2017')).toBe('09 / 21 / 2017')
   })
+
+  it('should include all possible matching values', () => {
+    const wrapper = mount(mask(), {
+      propsData: { 
+        mask: '(##) #### ####'
+      }
+    })
+
+    expect(wrapper.vm.unmaskText('555')).toBe('555')
+  })
 })
