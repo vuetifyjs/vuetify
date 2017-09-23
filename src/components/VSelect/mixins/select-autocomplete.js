@@ -43,7 +43,7 @@ export default {
 
       // Tab shouldn't switch inputs
       if (e.keyCode === 9) {
-        e.preventDefault()
+        this.tags ? e.preventDefault() : this.blur()
       }
 
       if (!this.tags ||
