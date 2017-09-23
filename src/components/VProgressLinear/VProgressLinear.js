@@ -59,7 +59,7 @@ export default {
         styles.height = 0
       }
 
-      if (!this.indeterminate && this.bufferValue != 100) {
+      if (!this.indeterminate && parseInt(this.bufferValue, 10) !== 100) {
         styles.width = `${this.bufferValue}%`
       }
 
