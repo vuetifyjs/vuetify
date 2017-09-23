@@ -2,16 +2,13 @@ require('../../stylus/components/_input-groups.styl')
 require('../../stylus/components/_selection-controls.styl')
 require('../../stylus/components/_switch.styl')
 
+import Rippleable from '../../mixins/rippleable'
 import Selectable from '../../mixins/selectable'
-
-import Ripple from '../../directives/ripple'
 
 export default {
   name: 'v-switch',
 
-  mixins: [Selectable],
-
-  directives: { Ripple },
+  mixins: [Rippleable, Selectable],
 
   computed: {
     classes () {
@@ -41,24 +38,11 @@ export default {
   },
 
   render (h) {
-    const ripple = h('div', {
-      'class': this.rippleClasses,
-      on: Object.assign({}, {
-        click: this.toggle
-      }, this.$listeners),
-      directives: [
-        {
-          name: 'ripple',
-          value: this.disabled ? false : { center: true }
-        }
-      ]
-    })
-
     const container = h('div', {
       'class': this.containerClasses
     }, [
       h('div', { 'class': this.toggleClasses }),
-      ripple
+      this.genRipple()
     ])
 
     return this.genInputGroup([container])

@@ -12,35 +12,28 @@ if (typeof console === 'undefined') {
 // avoid info messages during test
 console.info = noop
 
-let asserted
+const asserted = []
 
 function createCompareFn (spy) {
   const hasWarned = msg => {
-    var count = spy.calls.count()
-    var args
-    while (count--) {
-      args = spy.calls.argsFor(count)
-      if (args.some(containsMsg)) {
-        return true
-      }
-    }
-
-    function containsMsg (arg) {
-      return arg.toString().indexOf(msg) > -1
+    for (const args of spy.calls.allArgs()) {
+      if (args.some(arg => (
+        arg.toString().includes(msg)
+      ))) return true
     }
   }
 
   return {
     compare: msg => {
-      asserted = asserted.concat(msg)
-      var warned = Array.isArray(msg)
+      asserted.push(msg)
+      const warned = Array.isArray(msg)
         ? msg.some(hasWarned)
         : hasWarned(msg)
       return {
         pass: warned,
         message: warned
-          ? 'Expected message "' + msg + '" not to have been warned'
-          : 'Expected message "' + msg + '" to have been warned'
+          ? `Expected message "${msg}" not to have been warned`
+          : `Expected message "${msg}" to have been warned`
       }
     }
   }
@@ -49,7 +42,7 @@ function createCompareFn (spy) {
 function toHaveBeenWarnedInit() {
   // define custom matcher for warnings
   beforeEach(() => {
-    asserted = []
+    asserted.length = 0
     spyOn(console, 'warn')
     spyOn(console, 'error')
     jasmine.addMatchers({
@@ -59,24 +52,13 @@ function toHaveBeenWarnedInit() {
   })
 
   afterEach(done => {
-    const warned = msg => asserted.some(assertedMsg => msg.toString().indexOf(assertedMsg) > -1)
-    let count = console.error.calls.count()
-    let args
-    while (count--) {
-      args = console.error.calls.argsFor(count)
-      if (!warned(args[0])) {
-        done.fail(`Unexpected console.error message: ${args[0]}`)
-        return
-      }
-    }
-
-    const tipped = msg => asserted.some(assertedMsg => msg.toString().indexOf(assertedMsg) > -1)
-    count = console.warn.calls.count()
-    while (count--) {
-      args = console.warn.calls.argsFor(count)
-      if (!tipped(args[0])) {
-        done.fail(`Unexpected console.warn message: ${args[0]}`)
-        return
+    for (const type of ['error', 'warn']) {
+      const warned = msg => asserted.some(assertedMsg => msg.toString().includes(assertedMsg))
+      for (const args of console[type].calls.allArgs()) {
+        if (!warned(args[0])) {
+          done.fail(`Unexpected console.${type} message: ${args[0]}`)
+          return
+        }
       }
     }
     done()
