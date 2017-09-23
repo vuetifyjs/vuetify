@@ -144,6 +144,37 @@ test('VSelect - tags', () => {
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
+  it('should add a tag on enter using the current searchValue', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        tags: true,
+        value: [],
+        items: ['bar']
+      }
+    })
+
+    const input = wrapper.find('input')[0]
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    wrapper.vm.focus()
+    await wrapper.vm.$nextTick()
+
+    input.element.value = 'ba'
+    input.trigger('input')
+    input.element.setSelectionRange(2, 2)
+    await wrapper.vm.$nextTick()
+    input.trigger('keydown.right')
+    await wrapper.vm.$nextTick()
+    input.trigger('keydown.enter')
+    await wrapper.vm.$nextTick()
+
+    expect(change).toBeCalledWith(['ba'])
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
   it('should add a tag on left arrow and select the previous tag', async () => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,
