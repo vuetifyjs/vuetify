@@ -52,13 +52,17 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
           <div class="progress-linear"
                style="height: 3px;"
           >
+            <div class="progress-linear__background primary"
+                 style="opacity: 0.3; width: 100%;"
+            >
+            </div>
             <div class="progress-linear__bar"
                  style="height: 0px;"
             >
               <div class="progress-linear__bar__indeterminate">
-                <div class="progress-linear__bar__indeterminate long">
+                <div class="progress-linear__bar__indeterminate long primary">
                 </div>
-                <div class="progress-linear__bar__indeterminate short">
+                <div class="progress-linear__bar__indeterminate short primary">
                 </div>
               </div>
               <!---->

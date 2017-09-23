@@ -59,7 +59,9 @@ export default {
         styles.height = 0
       }
 
-      styles.width = `${this.bufferValue}%`
+      if (!this.indeterminate && this.bufferValue != 100) {
+        styles.width = `${this.bufferValue}%`
+      }
 
       return styles
     },

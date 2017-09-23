@@ -211,12 +211,7 @@ export default {
             indeterminate: this.asyncLoading === true,
             value: Number(this.asyncLoading),
             height: this.asyncLoadingHeight,
-            primary: this.asyncLoadingColor === 'primary',
-            secondary: this.asyncLoadingColor === 'secondary',
-            success: this.asyncLoadingColor === 'success',
-            info: this.asyncLoadingColor === 'info',
-            warning: this.asyncLoadingColor === 'warning',
-            error: this.asyncLoadingColor === 'error'
+            color: this.asyncLoadingColor
           }
         }))
       }
