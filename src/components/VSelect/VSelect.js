@@ -260,6 +260,10 @@ export default {
 
       this.$refs.menu.listIndex = -1
 
+      this.searchValue && this.$nextTick(() => {
+        this.$refs.menu.listIndex = 0
+      })
+
       this.genSelectedItems()
     },
     menuIsActive (val) {
@@ -291,7 +295,11 @@ export default {
         this.menuIsActive = true
       }
 
-      this.$refs.menu.listIndex = -1
+      this.$refs.menu.listIndex = null
+
+      this.$nextTick(() => {
+        this.$refs.menu.listIndex = val ? 0 : -1
+      })
     },
     selectedItems () {
       clearTimeout(this.searchTimeout)

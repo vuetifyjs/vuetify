@@ -47,33 +47,37 @@ export default {
       }
 
       if (this.tags && this.searchValue) {
-        if (this.filteredItems.length && [37, 39].includes(e.keyCode)) {
-          // Left or right at the ends of the text should select the highlighted suggestion
-          if (
-            e.keyCode === 37 && this.$refs.input.selectionStart === 0 ||
-            e.keyCode === 39 && this.$refs.input.selectionEnd === this.searchValue.length
-          ) {
-            this.selectedItems.push(this.filteredItems[this.$refs.menu.listIndex])
+        let newItem
+        // Tab, enter
+        if ([9, 13].includes(e.keyCode)) {
+          newItem = this.filteredItems.length && this.$refs.menu.listIndex >= 0
+            ? this.filteredItems[this.$refs.menu.listIndex]
+            : this.searchValue
+        }
 
-            this.$nextTick(() => {
-              this.searchValue = null
-              this.$emit('change', this.selectedItems)
-              if (e.keyCode === 37) {
-                this.selectedIndex = this.selectedItems.length > 1
-                  ? this.selectedItems.length - 2
-                  : 0
-              }
-            })
-          }
-        } else if (
-          e.keyCode === 9 ||
-          e.keyCode === 13 && !this.filteredItems.length
-        ) {
-          this.selectedItems.push(this.searchValue)
+        // Left arrow
+        if (e.keyCode === 37 && this.$refs.input.selectionStart === 0) {
+          newItem = this.searchValue
+          this.$nextTick(() => {
+            this.searchValue = null
+            this.selectedIndex = this.selectedItems.length > 1
+              ? this.selectedItems.length - 2
+              : 0
+          })
+        }
 
+        if (newItem != null) {
+          this.selectedItems.push(newItem)
           this.$nextTick(() => {
             this.searchValue = null
             this.$emit('change', this.selectedItems)
+          })
+        }
+
+        // Right arrow
+        if (e.keyCode === 39 && this.$refs.input.selectionEnd === this.searchValue.length) {
+          this.$nextTick(() => {
+            this.$refs.menu.listIndex = -1
           })
         }
       }

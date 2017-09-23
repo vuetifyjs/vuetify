@@ -88,6 +88,34 @@ test('VSelect - tags', () => {
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
+  it('should add a tag on tab using the first suggestion', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        tags: true,
+        value: [],
+        items: ['bar']
+      }
+    })
+
+    const input = wrapper.find('input')[0]
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    wrapper.vm.focus()
+    await wrapper.vm.$nextTick()
+
+    input.element.value = 'b'
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
+    input.trigger('keydown.tab')
+    await wrapper.vm.$nextTick()
+
+    expect(change).toBeCalledWith(['bar'])
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
   it('should add a tag on tab using the current searchValue', async () => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,
@@ -105,8 +133,10 @@ test('VSelect - tags', () => {
 
     wrapper.vm.focus()
     await wrapper.vm.$nextTick()
+
     input.element.value = 'ba'
     input.trigger('input')
+    input.trigger('keydown.right')
     input.trigger('keydown.tab')
     await wrapper.vm.$nextTick()
 
@@ -114,45 +144,31 @@ test('VSelect - tags', () => {
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
-  // TODO
-  it.skip('should add a tag on tab using the currently highlighted suggestion', async () => {
+  it('should add a tag on left arrow and select the previous tag', async () => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,
       propsData: {
         tags: true,
-        value: [],
-        items: ['foo']
+        value: ['foo'],
+        items: ['foo', 'bar']
       }
     })
+
+    const input = wrapper.find('input')[0]
+
     const change = jest.fn()
     wrapper.vm.$on('change', change)
 
-    const input = wrapper.find('input')[0]
-    const menu = wrapper.find(VMenu)[0]
-
     wrapper.vm.focus()
     await wrapper.vm.$nextTick()
-    input.element.value = 'f'
+
+    input.element.value = 'b'
     input.trigger('input')
+    input.trigger('keydown.left')
     await wrapper.vm.$nextTick()
 
-    expect(menu.vm.listIndex).toBe(-1)
-
-    input.trigger('keydown.down')
-    await wrapper.vm.$nextTick()
-
-    expect(menu.vm.listIndex).toBe(0)
-
-    input.trigger('keydown.tab')
-    await wrapper.vm.$nextTick()
-
-    expect(change).toBeCalledWith(['foo'])
+    expect(change).toBeCalledWith(['foo', 'b'])
+    expect(wrapper.vm.selectedIndex).toBe(0)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
-
-  it.skip('should add a tag on right arrow using the current searchValue', async () => {})
-
-  it.skip('should add a tag on right arrow using the currently highlighted suggestion', async () => {})
-
-  it.skip('should add a tag on left arrow and select the previous tag', async () => {})
 })
