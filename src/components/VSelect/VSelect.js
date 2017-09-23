@@ -99,6 +99,10 @@ export default {
       type: Array,
       default: () => []
     },
+    itemAvatar: {
+      type: String,
+      default: 'avatar'
+    },
     itemText: {
       type: String,
       default: 'text'

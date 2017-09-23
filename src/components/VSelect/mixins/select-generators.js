@@ -228,7 +228,7 @@ export default {
           }
         },
         props: {
-          avatar: item === Object(item) && 'avatar' in item,
+          avatar: item === Object(item) && this.itemAvatar in item,
           ripple: true,
           value: active
         }
