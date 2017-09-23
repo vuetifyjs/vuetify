@@ -46,42 +46,6 @@ export default {
         e.preventDefault()
       }
 
-      if (this.tags && this.searchValue) {
-        let newItem
-        // Tab, enter
-        if ([9, 13].includes(e.keyCode)) {
-          newItem = this.filteredItems.length && this.$refs.menu.listIndex >= 0
-            ? this.filteredItems[this.$refs.menu.listIndex]
-            : this.searchValue
-        }
-
-        // Left arrow
-        if (e.keyCode === 37 && this.$refs.input.selectionStart === 0) {
-          newItem = this.searchValue
-          this.$nextTick(() => {
-            this.searchValue = null
-            this.selectedIndex = this.selectedItems.length > 1
-              ? this.selectedItems.length - 2
-              : 0
-          })
-        }
-
-        if (newItem != null) {
-          this.selectedItems.push(newItem)
-          this.$nextTick(() => {
-            this.searchValue = null
-            this.$emit('change', this.selectedItems)
-          })
-        }
-
-        // Right arrow
-        if (e.keyCode === 39 && this.$refs.input.selectionEnd === this.searchValue.length) {
-          this.$nextTick(() => {
-            this.$refs.menu.listIndex = -1
-          })
-        }
-      }
-
       if (!this.tags ||
         ![32].includes(e.keyCode) // space
       ) this.$refs.menu.changeListIndex(e)
@@ -93,6 +57,42 @@ export default {
         !this.hideSelections &&
         !this.searchValue
       ) this.changeSelectedIndex(e.keyCode)
+
+      if (!this.tags || !this.searchValue) return
+
+      let newItem
+      // Tab, enter
+      if ([9, 13].includes(e.keyCode)) {
+        newItem = this.filteredItems.length && this.$refs.menu.listIndex >= 0
+          ? this.filteredItems[this.$refs.menu.listIndex]
+          : this.searchValue
+      }
+
+      // Left arrow
+      if (e.keyCode === 37 && this.$refs.input.selectionStart === 0) {
+        newItem = this.searchValue
+        this.$nextTick(() => {
+          this.searchValue = null
+          this.selectedIndex = this.selectedItems.length > 1
+            ? this.selectedItems.length - 2
+            : 0
+        })
+      }
+
+      if (newItem != null) {
+        this.selectedItems.push(newItem)
+        this.$nextTick(() => {
+          this.searchValue = null
+          this.$emit('change', this.selectedItems)
+        })
+      }
+
+      // Right arrow
+      if (e.keyCode === 39 && this.$refs.input.selectionEnd === this.searchValue.length) {
+        this.$nextTick(() => {
+          this.$refs.menu.listIndex = -1
+        })
+      }
     }
   }
 }
