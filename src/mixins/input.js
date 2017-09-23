@@ -21,7 +21,18 @@ export default {
   props: {
     appendIcon: String,
     appendIconCb: Function,
-    asyncLoading: Boolean,
+    asyncLoading: {
+      type: [Boolean, Number],
+      default: false
+    },
+    asyncLoadingHeight: {
+      type: [String, Number],
+      default: 2
+    },
+    asyncLoadingColor: {
+      type: String,
+      default: 'primary'
+    },
     disabled: Boolean,
     hint: String,
     hideDetails: Boolean,
@@ -48,7 +59,7 @@ export default {
     inputGroupClasses () {
       return Object.assign({
         'input-group': true,
-        'input-group--async-loading': this.asyncLoading,
+        'input-group--async-loading': this.asyncLoading !== false,
         'input-group--focused': this.isFocused,
         'input-group--dirty': this.isDirty,
         'input-group--tab-focused': this.tabFocused,
@@ -194,11 +205,18 @@ export default {
         wrapperChildren.push(this.genIcon('append', defaultAppendCallback))
       }
 
-      if (this.asyncLoading) {
+      if (this.asyncLoading !== false) {
         detailsChildren.push(this.$createElement('v-progress-linear', {
           props: {
-            indeterminate: true,
-            height: 2
+            indeterminate: this.asyncLoading === true,
+            value: Number(this.asyncLoading),
+            height: this.asyncLoadingHeight,
+            primary: this.asyncLoadingColor === 'primary',
+            secondary: this.asyncLoadingColor === 'secondary',
+            success: this.asyncLoadingColor === 'success',
+            info: this.asyncLoadingColor === 'info',
+            warning: this.asyncLoadingColor === 'warning',
+            error: this.asyncLoadingColor === 'error'
           }
         }))
       }
