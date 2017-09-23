@@ -160,17 +160,14 @@ export default {
       if (this.$vuetify.breakpoint.mdAndDown) {
         document.documentElement.classList.add('overflow-y-hidden')
       } else {
-        window.addEventListener('mousewheel', this.scrollListener)
+        window.addEventListener('wheel', this.scrollListener)
         window.addEventListener('keydown', this.scrollListener)
       }
     },
     showScroll () {
-      if (this.$vuetify.breakpoint.mdAndDown) {
-        document.documentElement.classList.remove('overflow-y-hidden')
-      } else {
-        window.removeEventListener('mousewheel', this.scrollListener)
-        window.removeEventListener('keydown', this.scrollListener)
-      }
+      document.documentElement.classList.remove('overflow-y-hidden')
+      window.removeEventListener('wheel', this.scrollListener)
+      window.removeEventListener('keydown', this.scrollListener)
     }
   }
 }
