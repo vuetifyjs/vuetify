@@ -1,11 +1,8 @@
 import { test } from '~util/testing'
+import { mount } from 'avoriaz'
 import VSelect from '~components/VSelect'
-import VMenu from '~components/VMenu'
 
-test('VSelect.vue', ({ mount }) => {
-  const backspace = new Event('keydown')
-  backspace.keyCode = 8
-
+test('VSelect', () => {
   // Inspired by https://github.com/vuetifyjs/vuetify/pull/1425 - Thanks @kevmo314
   it('should open the select when focused and enter, space, up or down are pressed', async () => {
     const wrapper = mount(VSelect, {
@@ -51,46 +48,6 @@ test('VSelect.vue', ({ mount }) => {
 
     expect(wrapper.vm.inputValue).toBe(null)
     expect(input).toHaveBeenCalledWith(null)
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
-  })
-
-  it('should not display list with no items and autocomplete', async () => {
-    const wrapper = mount(VSelect, {
-      attachToDocument: true,
-      propsData: {
-        autocomplete: true,
-        items: []
-      }
-    })
-
-    const input = wrapper.find('.input-group__input')[0]
-
-    input.trigger('click')
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.menuIsActive).toBe(false)
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
-  })
-
-  it('should cache items', async () => {
-    const wrapper = mount(VSelect, {
-      attachToDocument: true,
-      propsData: {
-        autocomplete: true,
-        cacheItems: true,
-        items: []
-      }
-    })
-
-    wrapper.setProps({ items: ['bar', 'baz'] })
-    expect(wrapper.vm.computedItems).toHaveLength(2)
-
-    wrapper.setProps({ items: ['foo'] })
-    expect(wrapper.vm.computedItems).toHaveLength(3)
-
-    wrapper.setProps({ items: ['bar'] })
-    expect(wrapper.vm.computedItems).toHaveLength(3)
-
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
@@ -146,87 +103,6 @@ test('VSelect.vue', ({ mount }) => {
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
-  it('should create new values when tagging', async () => {
-    const wrapper = mount(VSelect, {
-      attachToDocument: true,
-      propsData: {
-        tags: true,
-        value: []
-      }
-    })
-
-    const input = wrapper.find('input')[0]
-
-    const change = jest.fn()
-    wrapper.vm.$on('change', change)
-
-    wrapper.vm.focus()
-    await wrapper.vm.$nextTick()
-
-    input.element.value = 'foo'
-    input.trigger('input')
-    await wrapper.vm.$nextTick()
-
-    input.trigger('keydown.enter')
-    await wrapper.vm.$nextTick()
-
-    expect(change).toHaveBeenCalledWith(['foo'])
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
-  })
-
-  it('should change selectedIndex with keyboard', async () => {
-    const wrapper = mount(VSelect, {
-      attachToDocument: true,
-      propsData: {
-        tags: true,
-        value: ['foo', 'bar']
-      }
-    })
-
-    const input = wrapper.find('input')[0]
-
-    wrapper.vm.focus()
-    await wrapper.vm.$nextTick()
-
-    for (const index of [1, 0, -1]) {
-      input.trigger('keydown.left')
-      await wrapper.vm.$nextTick()
-      expect(wrapper.vm.selectedIndex).toBe(index)
-    }
-
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
-  })
-
-  it('should delete a tagged item when selected and backspace/delete is pressed', async () => {
-    const wrapper = mount(VSelect, {
-      attachToDocument: true,
-      propsData: {
-        tags: true,
-        value: ['foo', 'bar']
-      }
-    })
-
-    const input = wrapper.find('input')[0]
-
-    const change = jest.fn()
-    wrapper.vm.$on('change', change)
-
-    wrapper.vm.focus()
-
-    input.trigger('keydown.left')
-    expect(wrapper.vm.selectedIndex).toBe(1)
-
-    input.trigger('keydown.delete')
-    expect(change).toHaveBeenCalledWith(['foo'])
-    expect(wrapper.vm.selectedIndex).toBe(0)
-
-    input.element.dispatchEvent(backspace) // Avoriaz doesn't wrap keydown.backspace
-    expect(change).toHaveBeenCalledWith([])
-    expect(wrapper.vm.selectedIndex).toBe(-1)
-
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
-  })
-
   it('should prepropulate selectedItems', () => {
     const items = ['foo', 'bar', 'baz']
 
@@ -258,40 +134,6 @@ test('VSelect.vue', ({ mount }) => {
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
-  it('should allow changing of browser autocomplete', () => {
-    const wrapper = mount(VSelect, {
-      attachToDocument: true,
-      propsData: {
-        autocomplete: true,
-        browserAutocomplete: 'off'
-      }
-    })
-
-    const input = wrapper.find('input')[0]
-
-    expect(input.getAttribute('autocomplete')).toBe('off')
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
-  })
-
-  it('should show input when focused and autocomplete', async () => {
-    const wrapper = mount(VSelect, {
-      attachToDocument: true,
-      propsData: {
-        autocomplete: true
-      }
-    })
-
-    const input = wrapper.find('input')[0]
-
-    expect(input.hasStyle('display', 'none'))
-
-    wrapper.trigger('focus')
-    await wrapper.vm.$nextTick()
-    expect(input.hasStyle('display', 'block'))
-
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
-  })
-
   it('should show input with placeholder and not dirty', async () => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,
@@ -304,7 +146,7 @@ test('VSelect.vue', ({ mount }) => {
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
-  it('should now show input with placeholder and dirty', async () => {
+  it('should not show input with placeholder and dirty', async () => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,
       propsData: {
@@ -378,97 +220,6 @@ test('VSelect.vue', ({ mount }) => {
 
     arrow.trigger('click')
     expect(wrapper.vm.menuIsActive).toBe(true)
-
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
-  })
-
-  // TODO: Don't pre-select the first search result
-  it.skip('should add a tag with tab using an existing value', async () => {
-    const wrapper = mount(VSelect, {
-      attachToDocument: true,
-      propsData: {
-        tags: true,
-        value: [],
-        items: ['foo']
-      }
-    })
-    const change = jest.fn()
-    wrapper.vm.$on('change', change)
-
-    const input = wrapper.find('input')[0]
-    const menu = wrapper.find(VMenu)[0]
-
-    wrapper.vm.focus()
-    await wrapper.vm.$nextTick()
-    input.element.value = 'f'
-    input.trigger('input')
-    await wrapper.vm.$nextTick()
-
-    expect(menu.vm.listIndex).toBe(-1)
-
-    input.trigger('keydown.down')
-    await wrapper.vm.$nextTick()
-
-    expect(menu.vm.listIndex).toBe(0)
-
-    input.trigger('keydown.tab')
-    await wrapper.vm.$nextTick()
-
-    expect(change).toBeCalledWith(['foo'])
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
-  })
-
-  it('should add a tag with tab using a new value', async () => {
-    const wrapper = mount(VSelect, {
-      attachToDocument: true,
-      propsData: {
-        tags: true,
-        value: [],
-        items: ['foo']
-      }
-    })
-
-    const input = wrapper.find('input')[0]
-
-    const change = jest.fn()
-    wrapper.vm.$on('change', change)
-
-    wrapper.vm.focus()
-    await wrapper.vm.$nextTick()
-    input.element.value = 'bar'
-    input.trigger('input')
-    input.trigger('keydown.tab')
-    await wrapper.vm.$nextTick()
-
-    expect(change).toBeCalledWith(['bar'])
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
-  })
-
-  // TODO: Search masking
-  it.skip('should pre-select the currently highlighted suggestion', async () => {
-    const wrapper = mount(VSelect, {
-      propsData: {
-        items: ['foo', 'bar'],
-        autocomplete: true
-      }
-    })
-
-    const input = wrapper.find('input')[0]
-    const menu = wrapper.vm.$refs.menu
-
-    input.value = 'fo'
-    input.trigger('input')
-    await wrapper.vm.$nextTick()
-    expect(input.value).toBe('foo')
-    expect(input.selectionStart).toBe(2)
-    expect(input.selectionEnd).toBe(3)
-
-    input.value = 'ar'
-    input.trigger('input')
-    await wrapper.vm.$nextTick()
-    expect(input.value).toBe('bar')
-    expect(input.selectionStart).toBe(0)
-    expect(input.selectionEnd).toBe(1)
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })

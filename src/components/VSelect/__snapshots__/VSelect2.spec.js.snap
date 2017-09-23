@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VSelect.vue should be clearable with prop, dirty and multi select 1`] = `
+exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
 
 <div tabindex="0"
      role="combobox"
@@ -28,7 +28,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and multi select 1`] =
         <div class="card"
              style="height: auto;"
         >
-          <ul data-uid="42"
+          <ul data-uid="28"
               class="list"
           >
             <li>
@@ -110,7 +110,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and multi select 1`] =
 
 `;
 
-exports[`VSelect.vue should be clearable with prop, dirty and multi select 2`] = `
+exports[`VSelect should be clearable with prop, dirty and multi select 2`] = `
 
 <div tabindex="0"
      role="combobox"
@@ -135,7 +135,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and multi select 2`] =
         <div class="card"
              style="height: auto;"
         >
-          <ul data-uid="42"
+          <ul data-uid="28"
               class="list"
           >
             <li>
@@ -219,7 +219,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and multi select 2`] =
 
 `;
 
-exports[`VSelect.vue should be clearable with prop, dirty and single select 1`] = `
+exports[`VSelect should be clearable with prop, dirty and single select 1`] = `
 
 <div tabindex="0"
      role="combobox"
@@ -247,7 +247,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and single select 1`] 
         <div class="card"
              style="height: auto;"
         >
-          <ul data-uid="34"
+          <ul data-uid="20"
               class="list"
           >
             <li>
@@ -286,7 +286,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and single select 1`] 
 
 `;
 
-exports[`VSelect.vue should be clearable with prop, dirty and single select 2`] = `
+exports[`VSelect should be clearable with prop, dirty and single select 2`] = `
 
 <div tabindex="0"
      role="combobox"
@@ -311,7 +311,7 @@ exports[`VSelect.vue should be clearable with prop, dirty and single select 2`] 
         <div class="card"
              style="height: auto;"
         >
-          <ul data-uid="34"
+          <ul data-uid="20"
               class="list"
           >
             <li>
