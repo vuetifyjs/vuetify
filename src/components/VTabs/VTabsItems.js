@@ -4,15 +4,16 @@ export default {
   inject: ['next', 'prev'],
 
   props: {
+    cycle: Boolean,
     touchless: Boolean
   },
 
   methods: {
     swipeLeft () {
-      this.next()
+      this.next(this.cycle)
     },
     swipeRight () {
-      this.prev()
+      this.prev(this.cycle)
     }
   },
 
