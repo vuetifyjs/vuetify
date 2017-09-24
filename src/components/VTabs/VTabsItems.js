@@ -25,7 +25,6 @@ export default {
     !this.touchless && data.directives.push({
       name: 'touch',
       value: {
-        parent: true,
         left: this.swipeLeft,
         right: this.swipeRight
       }
