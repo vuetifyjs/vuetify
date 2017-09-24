@@ -229,7 +229,10 @@ export default {
     updateApplication () {
       if (!this.app) return
 
-      const width = !this.isActive ? 0 : this.calculatedWidth
+      const width = !this.isActive ||
+        this.$vuetify.breakpoint.width <= this.mobileBreakPoint
+          ? 0
+          : this.calculatedWidth
 
       if (this.right) {
         this.$vuetify.application.right = width
