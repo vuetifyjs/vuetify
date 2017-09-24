@@ -556,6 +556,7 @@ export default {
     showMenuItems () {
       this.isActive = true
       this.menuIsActive = true
+      this.chips && (this.$refs.menu.listIndex = -1)
     }
   },
 
