@@ -3,8 +3,8 @@ require('../../stylus/components/_selection-controls.styl')
 
 import VIcon from '../VIcon'
 import { VFadeTransition } from '../transitions'
+import Rippleable from '../../mixins/rippleable'
 import Selectable from '../../mixins/selectable'
-import Ripple from '../../directives/ripple'
 
 export default {
   name: 'v-checkbox',
@@ -14,11 +14,7 @@ export default {
     VIcon
   },
 
-  directives: {
-    Ripple
-  },
-
-  mixins: [Selectable],
+  mixins: [Rippleable, Selectable],
 
   data () {
     return {
@@ -72,17 +68,6 @@ export default {
       }, this.icon)
     ])
 
-    const ripple = h('div', {
-      'class': 'input-group--selection-controls__ripple',
-      on: Object.assign({}, {
-        click: this.toggle
-      }, this.$listeners),
-      directives: [{
-        name: 'ripple',
-        value: this.disabled ? false : { center: true }
-      }]
-    })
-
     const data = {
       attrs: {
         tabindex: this.disabled
@@ -94,6 +79,6 @@ export default {
       }
     }
 
-    return this.genInputGroup([transition, ripple], data)
+    return this.genInputGroup([transition, this.genRipple()], data)
   }
 }
