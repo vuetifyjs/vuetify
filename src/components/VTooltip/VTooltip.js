@@ -49,7 +49,7 @@ export default {
         left = (
           activator.left +
           (this.right ? activator.width : -content.width) +
-          (this.right ? 20 : -20)
+          (this.right ? 10 : -10)
         )
       }
 
@@ -62,7 +62,8 @@ export default {
       if (this.top || this.bottom) {
         top = (
           activator.top -
-          (this.top ? content.height : -content.height)
+          (this.top ? content.height : -content.height) -
+          (this.top ? 10 : -20)
         )
       } else if (this.left || this.right) {
         top = (
