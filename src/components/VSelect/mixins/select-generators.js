@@ -22,9 +22,9 @@ export default {
           contentClass: this.computedContentClass,
           disabled: this.disabled,
           maxHeight: this.maxHeight,
-          nudgeTop: this.isDropdown ? -12 : offsetY ? -2 : 0,
-          nudgeRight: this.isDropdown ? 16 : 0,
-          nudgeWidth: this.isDropdown ? 68 : 36,
+          nudgeTop: this.isDropdown ? 0 : offsetY ? -2 : 0,
+          nudgeRight: this.isDropdown ? 0 : 0,
+          nudgeWidth: this.isDropdown ? 55 : 36,
           offsetY,
           openOnClick: false,
           value: this.menuIsActive &&
