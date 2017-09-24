@@ -80,7 +80,11 @@ export default {
       }
 
       if (newItem != null) {
-        this.selectedItems.push(newItem)
+        if (this.selectedItems.includes(newItem)) {
+          this.$delete(this.selectedItems, this.selectedItems.indexOf(newItem))
+        } else {
+          this.selectedItems.push(newItem)
+        }
         this.$nextTick(() => {
           this.searchValue = null
           this.$emit('change', this.selectedItems)
