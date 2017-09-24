@@ -159,7 +159,7 @@ export default {
     },
     pagination: {
       type: Object,
-      default: null
+      default: () => {}
     }
   },
 
@@ -173,7 +173,14 @@ export default {
       }
     },
     computedPagination () {
-      return this.pagination || this.defaultPagination
+      return this.hasPagination
+        ? this.pagination
+        : this.defaultPagination
+    },
+    hasPagination () {
+      const pagination = this.pagination || {}
+
+      return Object.keys(pagination).length > 0
     },
     hasSelectAll () {
       return this.selectAll !== undefined && this.selectAll !== false
@@ -228,7 +235,7 @@ export default {
       )
 
       return this.hideActions &&
-        !this.pagination
+        !this.hasPagination
         ? items
         : items.slice(this.pageStart, this.pageStop)
     },
@@ -256,12 +263,13 @@ export default {
 
   methods: {
     updatePagination (val) {
-      const pagination = this.pagination || this.defaultPagination
+      const pagination = this.hasPagination
+        ? this.pagination
+        : this.defaultPagination
       const updatedPagination = Object.assign({}, pagination, val)
+      this.$emit('update:pagination', updatedPagination)
 
-      if (this.pagination) {
-        this.$emit('update:pagination', updatedPagination)
-      } else {
+      if (!this.hasPagination) {
         this.defaultPagination = updatedPagination
       }
     },

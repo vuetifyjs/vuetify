@@ -125,17 +125,23 @@ export default {
     unregisterTabItem (id) {
       this.tabItems = this.tabItems.filter(o => o.id !== id)
     },
-    next () {
+    next (cycle) {
       let nextIndex = this.activeIndex + 1
 
-      if (!this.content[nextIndex]) nextIndex = 0
+      if (!this.content[nextIndex]) {
+        if (!cycle) return
+        nextIndex = 0
+      }
 
       this.tabClick(this.tabItems[nextIndex].id)
     },
-    prev () {
+    prev (cycle) {
       let prevIndex = this.activeIndex - 1
 
-      if (!this.content[prevIndex]) prevIndex = this.content.length - 1
+      if (!this.content[prevIndex]) {
+        if (!cycle) return
+        prevIndex = this.content.length - 1
+      }
 
       this.tabClick(this.tabItems[prevIndex].id)
     },
