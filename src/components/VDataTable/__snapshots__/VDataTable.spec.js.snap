@@ -11,7 +11,7 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
             aria-label="First Column: Sorted ascending. Activate to sort descending."
             aria-sort="ascending"
             tabindex="0"
-            class="column sortable active asc text-xs-right"
+            class="column sortable active asc text-xs-right a-string"
         >
           <i aria-hidden="true"
              class="material-icons icon"
@@ -33,7 +33,7 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
             aria-label="Third Column: Not sorted. Activate to sort ascending."
             aria-sort="none"
             tabindex="0"
-            class="column sortable text-xs-right"
+            class="column sortable text-xs-right an array"
         >
           <i aria-hidden="true"
              class="material-icons icon"
