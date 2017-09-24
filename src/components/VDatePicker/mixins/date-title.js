@@ -35,7 +35,7 @@ export default {
     genTitleText (title) {
       return this.$createElement('transition', {
         props: {
-          name: 'slide-x-transition',
+          name: 'slide-y-reverse-transition',
           mode: 'out-in'
         }
       }, [
