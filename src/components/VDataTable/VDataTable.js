@@ -260,7 +260,9 @@ export default {
       const updatedPagination = Object.assign({}, pagination, val)
 
       if (this.pagination) {
-        this.$emit('update:pagination', updatedPagination)
+        if (JSON.stringify(updatedPagination) !== JSON.stringify(pagination)) {
+          this.$emit('update:pagination', updatedPagination)
+        }
       } else {
         this.defaultPagination = updatedPagination
       }
