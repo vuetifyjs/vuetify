@@ -22,9 +22,13 @@ export default {
       type: Boolean,
       default: true
     },
+    backgroundColor: {
+      type: String,
+      default: null
+    },
     backgroundOpacity: {
       type: [Number, String],
-      default: 0.3
+      default: ''
     },
     bufferValue: {
       type: [Number, String],
@@ -80,6 +84,16 @@ export default {
       }
 
       return styles
+    },
+    backgroundStyle () {
+      const backgroundOpacity = (this.backgroundOpacity === '' || this.backgroundOpacity == null)
+        ? (this.backgroundColor ? 1 : 0.3)
+        : Number(this.backgroundOpacity)
+
+      return {
+        opacity: backgroundOpacity,
+        width: `${this.bufferValue}%`
+      }
     }
   },
 
@@ -125,11 +139,8 @@ export default {
 
     const bar = h('div', { class: ['progress-linear__bar'], style: this.styles }, [fade, slide])
     const background = h('div', {
-      staticClass: `progress-linear__background ${this.color}`,
-      style: {
-        opacity: this.backgroundOpacity,
-        width: `${this.bufferValue}%`
-      }
+      staticClass: `progress-linear__background ${this.backgroundColor || this.color}`,
+      style: this.backgroundStyle
     })
 
     return h('div', {
