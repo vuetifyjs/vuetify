@@ -83,8 +83,8 @@ export default {
       let textIndex = 0
       this.masked.forEach((mask, i) => {
         // The goal is to ensure that
-        // every character makes it 
-        // into the newText array     
+        // every character makes it
+        // into the newText array
         char = char || text[textIndex]
 
         // Could cause potential issues
@@ -122,8 +122,27 @@ export default {
     // caret location is correct
     setSelectionRange () {
       this.$nextTick(() => {
-        this.$refs.input &&
+        if (this.$refs.input == null) return
+
+        const maskedText = this.maskText(this.lazyValue)
+        if (maskedText !== this.$refs.input.value) {
+          this.$refs.input.value = maskedText
+        }
+
+        if (this.oldValue.length === this.selection) return
+
+        const newValue = this.$refs.input.value
+        if (!this.deleting) {
+          while (newValue.slice(this.selection - 1, this.selection).match(this.delimiters)) ++this.selection
+        }
+
+        if (this.$refs.input.setSelectionRange) {
           this.$refs.input.setSelectionRange(this.selection, this.selection)
+        } else if (this.$refs.input.createTextRange) {
+          var range = this.$refs.input.createTextRange()
+          range.move('character', this.selection)
+          range.select()
+        }
       })
     }
   }

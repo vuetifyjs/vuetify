@@ -16,7 +16,10 @@ export default {
     return {
       initialValue: null,
       inputHeight: null,
-      badInput: false
+      badInput: false,
+      oldValue: null,
+      deleting: false,
+      delimiters: /[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/ ]/
     }
   },
 
@@ -85,7 +88,10 @@ export default {
         return this.value
       },
       set (val) {
+        this.oldValue = this.$refs.input ? this.$refs.input.value : ''
+        this.selection = this.$refs.input ? this.$refs.input.selectionEnd : 0
         this.lazyValue = val
+        this.setSelectionRange()
         this.$emit('input', val)
       }
     },
@@ -138,9 +144,13 @@ export default {
       })
     },
     onInput (e) {
-      this.inputValue = this.unmaskText(e.target.value)
+      this.inputValue = e.target.value.replace(new RegExp(this.delimiters, 'g'), '')
       this.badInput = e.target.validity && e.target.validity.badInput
       this.shouldAutoGrow && this.calculateInputHeight()
+    },
+    keyDown (e) {
+      const key = e.code || e.key
+      this.deleting = key === 'Backspace' || key === 'Delete'
     },
     blur (e) {
       this.isFocused = false
@@ -187,7 +197,8 @@ export default {
         on: Object.assign(listeners, {
           blur: this.blur,
           input: this.onInput,
-          focus: this.focus
+          focus: this.focus,
+          keydown: this.keyDown
         }),
         ref: 'input'
       }
