@@ -8,9 +8,14 @@
  *
  * Example: mask="#### #### #### ####"
  */
+
+import {
+  maskText,
+  unmaskText
+} from '../util/mask'
+
 export default {
   data: () => ({
-    allowedMasks: ['#', 'A', 'a', 'X'],
     selection: 0,
     preDefined: {
       'credit-card': '#### - #### - #### - ####',
@@ -42,80 +47,11 @@ export default {
   },
 
   methods: {
-    maskText (text, newText = []) {
-      text = text || ''
-
-      if (!this.mask ||
-        !text.length ||
-        this.returnMaskedValue
-      ) return text
-
-      let textIndex = 0
-      // let selection = 0
-      this.masked.forEach((mask, i) => {
-        if (textIndex >= text.length &&
-          !this.fillMaskBlanks
-        ) return
-
-        // Assign the next character
-        const char = text[textIndex]
-
-        if (!this.isMask(mask)) {
-          newText.push(mask)
-        } else if (this.maskValidates(mask, char)) {
-          // If the mask is validated, push
-          // next char into the new array
-          newText.push(char)
-          textIndex++
-        }
-      })
-
-      return newText.join('')
+    maskText (text) {
+      return maskText(text, this.masked, this.returnMaskedValue, this.fillMaskBlanks)
     },
-    unmaskText (text, newText = []) {
-      if (!this.mask ||
-        this.returnMaskedValue
-      ) return text
-
-      text = text || ''
-
-      let char
-      let textIndex = 0
-      this.masked.forEach((mask, i) => {
-        // The goal is to ensure that
-        // every character makes it
-        // into the newText array
-        char = char || text[textIndex]
-
-        // Could cause potential issues
-        if (char === mask && !['A', 'a'].includes(mask)) {
-          char = null
-          textIndex++
-        }
-
-        if (char == null) return
-
-        if (this.maskValidates(mask, char)) {
-          newText.push(char)
-          char = null
-          textIndex++
-        }
-      })
-
-      return newText.join('')
-    },
-    isMask (char) {
-      return this.allowedMasks.includes(char)
-    },
-    maskValidates (mask, char) {
-      if (!this.isMask(mask)) return false
-
-      switch (mask) {
-        case 'a': return char.match(/[a-z]/)
-        case 'A': return char.match(/[A-Z]/)
-        case '#': return !isNaN(parseInt(char))
-        case 'X': return char.match(/[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/]/)
-      }
+    unmaskText (text) {
+      return unmaskText(text, this.masked, this.returnMaskedValue)
     },
     // When the input changes and is
     // re-created, ensure that the

@@ -1,6 +1,6 @@
 /**
  * Select autocomplete
- * 
+ *
  * @mixin
  *
  * Handles logic when using the "autocomplete" prop
@@ -43,16 +43,9 @@ export default {
 
       if (index < 0) return text
 
-      let start = ''
-      let middle = text.slice(index, searchValue.length)
-      let end = text.slice(searchValue.length)
-
-      if (index !== 0) {
-        start = text.slice(0, index)
-        middle = text.slice(index, index + searchValue.length)
-        end = text.slice(index + searchValue.length)
-      }
-
+      const start = text.slice(0, index)
+      const middle = text.slice(index, index + searchValue.length)
+      const end = text.slice(index + searchValue.length)
       return { start, middle, end }
     },
     filterSearch () {
