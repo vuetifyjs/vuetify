@@ -36,7 +36,6 @@ test('VProgressLinear.js', ({ mount }) => {
     const wrapper = mount(VProgressLinear, {
       propsData: {
         value: 33,
-        buffer: true,
         bufferValue: 80
       }
     })
@@ -48,7 +47,6 @@ test('VProgressLinear.js', ({ mount }) => {
     const wrapper = mount(VProgressLinear, {
       propsData: {
         value: 90,
-        buffer: true,
         bufferValue: 80
       }
     })

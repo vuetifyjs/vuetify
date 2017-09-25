@@ -56,7 +56,7 @@ exports[`VProgressLinear.js should render component with buffer value and value 
   >
     <!---->
     <div class="progress-linear__bar__determinate primary"
-         style="width: 100%;"
+         style="width: 112.5%;"
     >
     </div>
   </div>

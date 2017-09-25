@@ -74,7 +74,7 @@ export default {
         return 0
       }
 
-      return Math.min(this.bufferValue, this.value) * 100 / this.bufferValue
+      return this.value * 100 / this.bufferValue
     },
     bufferStyles () {
       const styles = {}
