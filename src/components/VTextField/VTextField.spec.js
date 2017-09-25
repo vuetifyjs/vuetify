@@ -1,5 +1,6 @@
 import { test } from '~util/testing'
 import VTextField from '~components/VTextField'
+import VProgressLinear from '~components/VProgressLinear'
 
 test('VTextField.js', ({ mount }) => {
   it('should render component and match snapshot', () => {
@@ -287,5 +288,20 @@ test('VTextField.js', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(change.mock.calls.length).toBe(0)
+  })
+
+  it('should render component with async loading and match snapshot', () => {
+    const wrapper = mount(VTextField, {
+      components: {
+        VProgressLinear
+      },
+      propsData: {
+        asyncLoading: true,
+        asyncLoadingHeight: 7,
+        asyncLoadingColor: 'orange'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })
