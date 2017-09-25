@@ -2,9 +2,9 @@ import { getObjectValueByPath } from '../../../util/helpers'
 
 /**
  * Select generators
- * 
+ *
  * @mixin
- * 
+ *
  * Used for creating the DOM elements for VSelect
  */
 export default {
@@ -63,7 +63,7 @@ export default {
           tabindex: this.disabled || !this.isAutocomplete ? -1 : this.tabindex
         },
         domProps: {
-          value: this.maskText(this.lazySearch)
+          value: this.maskText(this.lazySearch || '')
         },
         directives: [{
           name: 'show',
