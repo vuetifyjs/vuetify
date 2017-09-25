@@ -107,7 +107,7 @@ test('Maskable.js', ({ mount }) => {
 
   it('should return the masked string', () => {
     const wrapper = mount(VTextField, {
-      propsData: { 
+      propsData: {
         mask: '##/##/###',
         returnMaskedValue: true
       }
@@ -119,7 +119,7 @@ test('Maskable.js', ({ mount }) => {
 
   it('should include all possible matching values', () => {
     const wrapper = mount(mask(), {
-      propsData: { 
+      propsData: {
         mask: '(##) #### ####'
       }
     })
