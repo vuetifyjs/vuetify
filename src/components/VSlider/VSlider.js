@@ -22,6 +22,10 @@ export default {
   },
 
   props: {
+    color: {
+      type: String,
+      default: null
+    },
     inverted: Boolean,
     min: {
       type: [Number, String],
@@ -44,10 +48,6 @@ export default {
     vertical: Boolean,
     snap: Boolean,
     trackColor: {
-      type: String,
-      default: null
-    },
-    trackFillColor: {
       type: String,
       default: null
     }
@@ -227,7 +227,7 @@ export default {
             }
           ]
         }, [
-          h('div', { 'class': ['slider__thumb--label', this.thumbColor] }, [
+          h('div', { 'class': ['slider__thumb--label', this.thumbColor || this.color] }, [
             h('span', {}, parseInt(this.inputValue))
           ])
         ])
@@ -235,7 +235,7 @@ export default {
     },
     genThumbContainer (h) {
       const children = []
-      children.push(h('div', { 'class': ['slider__thumb', this.thumbColor] }))
+      children.push(h('div', { 'class': ['slider__thumb', this.thumbColor || this.color] }))
 
       this.thumbLabel && children.push(this.genThumbLabel(h))
 
@@ -273,7 +273,7 @@ export default {
           style: this.trackStyles
         }),
         h('div', {
-          'class': ['slider__track-fill', this.trackFillColor],
+          'class': ['slider__track-fill', this.color],
           style: this.trackFillStyles
         })
       ]
