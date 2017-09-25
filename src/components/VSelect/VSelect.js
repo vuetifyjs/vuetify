@@ -76,6 +76,10 @@ export default {
       default: 'arrow_drop_down'
     },
     appendIconCb: Function,
+    asyncLoadingColor: {
+      type: String,
+      default: ''
+    },
     auto: Boolean,
     autocomplete: Boolean,
     bottom: Boolean,

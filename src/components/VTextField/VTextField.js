@@ -20,6 +20,10 @@ export default {
   },
 
   props: {
+    asyncLoadingColor: {
+      type: String,
+      default: ''
+    },
     autofocus: Boolean,
     autoGrow: Boolean,
     box: Boolean,
