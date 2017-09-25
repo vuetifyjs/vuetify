@@ -64,6 +64,86 @@ exports[`VProgressLinear.js should render component with buffer value and value 
 
 `;
 
+exports[`VProgressLinear.js should render component with color and background color and match snapshot 1`] = `
+
+<div class="progress-linear"
+     style="height: 7px;"
+>
+  <div class="progress-linear__background blue"
+       style="opacity: 1; width: 100%;"
+  >
+  </div>
+  <div class="progress-linear__bar">
+    <!---->
+    <div class="progress-linear__bar__determinate orange"
+         style="width: 33%;"
+    >
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VProgressLinear.js should render component with color and background color and opacity and match snapshot 1`] = `
+
+<div class="progress-linear"
+     style="height: 7px;"
+>
+  <div class="progress-linear__background blue"
+       style="opacity: 0.5; width: 100%;"
+  >
+  </div>
+  <div class="progress-linear__bar">
+    <!---->
+    <div class="progress-linear__bar__determinate orange"
+         style="width: 33%;"
+    >
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VProgressLinear.js should render component with color and background opacity and match snapshot 1`] = `
+
+<div class="progress-linear"
+     style="height: 7px;"
+>
+  <div class="progress-linear__background orange"
+       style="opacity: 0.5; width: 100%;"
+  >
+  </div>
+  <div class="progress-linear__bar">
+    <!---->
+    <div class="progress-linear__bar__determinate orange"
+         style="width: 33%;"
+    >
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VProgressLinear.js should render component with color and match snapshot 1`] = `
+
+<div class="progress-linear"
+     style="height: 7px;"
+>
+  <div class="progress-linear__background orange"
+       style="opacity: 0.3; width: 100%;"
+  >
+  </div>
+  <div class="progress-linear__bar">
+    <!---->
+    <div class="progress-linear__bar__determinate orange"
+         style="width: 33%;"
+    >
+    </div>
+  </div>
+</div>
+
+`;
+
 exports[`VProgressLinear.js should render indeterminate progress and match snapshot 1`] = `
 
 <div class="progress-linear"
