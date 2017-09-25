@@ -10,7 +10,7 @@ input-group($material)
     &:disabled
       color: $material.text.disabled
 
-  .input-group__messages
+  &:not(.input-group--error) .input-group__messages
     color: $material.text.secondary
 
   &.input-group--textarea:not(.input-group--full-width)
@@ -122,7 +122,8 @@ theme(input-group, "input-group")
     cursor: pointer
 
 .input-group
-  &.input-group--focused
+  &.input-group--focused,
+  &.input-group--error
     .input-group__append-icon,
     .input-group__prepend-icon
       color: inherit

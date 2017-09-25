@@ -18,7 +18,7 @@ export default {
   props: {
     debounce: {
       type: [Number, String],
-      default: 100
+      default: 0
     },
     fixed: {
       type: Boolean,
