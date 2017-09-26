@@ -47,6 +47,33 @@ export default {
     }
   },
 
+  watch: {
+    /**
+     * Make sure the cursor is in the correct
+     * location when the mask changes
+     */
+    mask () {
+      if (!this.$refs.input) return
+
+      const oldText = this.$refs.input.value || ''
+      const newText = this.maskText(this.lazyValue) || ''
+      let position = 0
+
+      for (let i = 0; i < this.selection; i++) {
+        isMaskDelimiter(oldText[i]) || position++
+      }
+
+      this.selection = 0
+      for (const char of newText) {
+        isMaskDelimiter(char) || position--
+        this.selection++
+        if (position <= 0) break
+      }
+
+      this.$refs.input.setSelectionRange(this.selection, this.selection)
+    }
+  },
+
   methods: {
     maskText (text) {
       return maskText(text, this.masked, this.fillMaskBlanks)
@@ -69,10 +96,6 @@ export default {
         if (!this.deleting) {
           while (isMaskDelimiter(newValue.substr(this.selection - 1, 1))) {
             this.selection++
-          }
-          // TODO: This only helps sometimes
-          if (this.$refs.input.selectionStart - this.selection === 1) {
-            this.selection = this.$refs.input.selectionStart
           }
         }
 
