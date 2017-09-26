@@ -17,7 +17,6 @@ export default {
       initialValue: null,
       inputHeight: null,
       badInput: false,
-      oldValue: null,
       deleting: false
     }
   },
@@ -87,7 +86,6 @@ export default {
         return this.value
       },
       set (val) {
-        this.oldValue = this.$refs.input ? this.$refs.input.value : ''
         this.selection = this.$refs.input ? this.$refs.input.selectionEnd : 0
         this.lazyValue = val
         this.setSelectionRange()
