@@ -1,41 +1,25 @@
 export default {
-  data () {
-    return {
-      color: ''
-    }
-  },
-
-  watch: {
-    loading (val) {
-      if (val) this.color = val
-    }
-  },
-
   methods: {
-    genTProgress () {
-      const loader = this.$createElement('v-progress-linear', {
+    genDefaultProgress () {
+      return this.$createElement('v-progress-linear', {
         props: {
-          primary: this.color === 'primary',
-          secondary: this.color === 'secondary',
-          success: this.color === 'success',
-          info: this.color === 'info',
-          warning: this.color === 'warning',
-          error: this.color === 'error',
-          indeterminate: true,
+          color: (typeof this.loading === 'string' && this.loading) ? this.loading : 'primary',
           height: 3,
-          active: !!this.loading
+          indeterminate: true
         }
       })
-
+    },
+    genTProgress () {
+      const progress = this.$slots.progress || this.genDefaultProgress()
       const col = this.$createElement('th', {
-        class: 'column',
+        staticClass: 'column',
         attrs: {
           colspan: '100%'
         }
-      }, [loader])
+      }, this.loading !== false ? [progress] : null)
 
       return this.$createElement('thead', {
-        class: 'datatable__progress'
+        staticClass: 'datatable__progress'
       }, [this.genTR([col])])
     }
   }

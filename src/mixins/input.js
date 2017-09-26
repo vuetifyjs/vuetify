@@ -84,7 +84,7 @@ export default {
       return this.$createElement('v-progress-linear', {
         props: {
           color: this.color || 'primary',
-          height: 3,
+          height: 2,
           indeterminate: true
         }
       })

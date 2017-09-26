@@ -94,7 +94,7 @@ exports[`VTextField.js should render component with async loading and match snap
   </div>
   <div class="input-group__details">
     <div class="progress-linear"
-         style="height: 3px;"
+         style="height: 2px;"
     >
       <div class="progress-linear__background primary"
            style="opacity: 0.3; width: 100%;"
