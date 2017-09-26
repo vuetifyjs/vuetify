@@ -1,3 +1,8 @@
+/**
+ * Mask keys
+ *
+ * @type {Object}
+ */
 const allowedMasks = {
   '#': {
     test: char => char.match(/[0-9]/)
@@ -9,26 +14,54 @@ const allowedMasks = {
     test: char => char.match(/[a-z]/)
   },
   'X': {
-    test: char => char.match(/[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/]/)
+    test: char => char.match(defaultDelimiters)
   }
 }
 
+/**
+ * Default delimiter regexp
+ *
+ * @type {RegExp}
+ */
+export const defaultDelimiters = /[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/ ]/
+
+/**
+ * Is Character mask
+ *
+ * @param  {String} char
+ *
+ * @return {Boolean}
+ */
 const isMask = char => allowedMasks.hasOwnProperty(char)
 
+/**
+ * Mask Validation
+ *
+ * @param  {String} mask
+ * @param  {String} char
+ *
+ * @return {Boolean}
+ */
 const maskValidates = (mask, char) => {
   if (char == null || !isMask(mask)) return false
   return allowedMasks[mask].test(char)
 }
 
 /**
+ * Mask Text
+ *
+ * Takes an array of characters
+ * and returns a compiled str
  *
  * @param {String} text
- * @param {Array} masked
- * @param {Boolean} returnMaskedValue
+ * @param {Array|String} masked
  * @param {Boolean} fillMaskBlanks
+ *
+ * @return {String}
  */
-export const maskText = (text, masked, returnMaskedValue = false, fillMaskBlanks = false) => {
-  if (!masked.length || !text.length || returnMaskedValue) return text
+export const maskText = (text, masked, fillMaskBlanks = false) => {
+  if (!Array.isArray(masked)) masked = masked.split('')
+  if (!masked.length || !text.length) return text
 
   let textIndex = 0
   const newText = []
@@ -42,6 +75,10 @@ export const maskText = (text, masked, returnMaskedValue = false, fillMaskBlanks
 
     if (!isMask(mask)) {
       newText.push(mask)
+
+      if (char === mask) {
+        textIndex++
+      }
     } else if (maskValidates(mask, char)) {
       // If the mask is validated, push
       // next char into the new array
@@ -54,37 +91,13 @@ export const maskText = (text, masked, returnMaskedValue = false, fillMaskBlanks
 }
 
 /**
+ * Unmask Text
  *
  * @param {String} text
- * @param {Array} masked
- * @param {Boolean} returnMaskedValue
+ * @param {RegExp} delimiters
+ *
+ * @return {String}
  */
-export const unmaskText = (text, masked, returnMaskedValue = false) => {
-  if (!masked.length || returnMaskedValue) return text
-
-  let char
-  let textIndex = 0
-  const newText = []
-  masked.forEach((mask, i) => {
-    // The goal is to ensure that
-    // every character makes it
-    // into the newText array
-    char = char || text[textIndex]
-
-    // Could cause potential issues
-    if (char === mask && !['A', 'a'].includes(mask)) {
-      char = null
-      textIndex++
-    }
-
-    if (char == null) return
-
-    if (maskValidates(mask, char)) {
-      newText.push(char)
-      char = null
-      textIndex++
-    }
-  })
-
-  return newText.join('')
+export const unmaskText = (text, delimiters = defaultDelimiters) => {
+  return text.replace(new RegExp(delimiters, 'g'), '')
 }

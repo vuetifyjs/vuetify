@@ -18,8 +18,7 @@ export default {
       inputHeight: null,
       badInput: false,
       oldValue: null,
-      deleting: false,
-      delimiters: /[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/ ]/
+      deleting: false
     }
   },
 
@@ -144,7 +143,7 @@ export default {
       })
     },
     onInput (e) {
-      this.inputValue = e.target.value.replace(new RegExp(this.delimiters, 'g'), '')
+      this.inputValue = this.unmaskText(e.target.value)
       this.badInput = e.target.validity && e.target.validity.badInput
       this.shouldAutoGrow && this.calculateInputHeight()
     },

@@ -10,12 +10,14 @@
  */
 
 import {
+  defaultDelimiters,
   maskText,
   unmaskText
 } from '../util/mask'
 
 export default {
   data: () => ({
+    delimiters: defaultDelimiters,
     selection: 0,
     preDefined: {
       'credit-card': '#### - #### - #### - ####',
@@ -48,10 +50,12 @@ export default {
 
   methods: {
     maskText (text) {
-      return maskText(text, this.masked, this.returnMaskedValue, this.fillMaskBlanks)
+      return maskText(text, this.masked, this.fillMaskBlanks)
     },
     unmaskText (text) {
-      return unmaskText(text, this.masked, this.returnMaskedValue)
+      if (this.returnMaskedValue) return text
+
+      return unmaskText(text, this.delimiters)
     },
     // When the input changes and is
     // re-created, ensure that the
@@ -65,17 +69,20 @@ export default {
           this.$refs.input.value = maskedText
         }
 
-        if (this.oldValue.length === this.selection) return
+        // May not be needed
+        // if (this.oldValue.length === this.selection) return
 
         const newValue = this.$refs.input.value
         if (!this.deleting) {
-          while (newValue.slice(this.selection - 1, this.selection).match(this.delimiters)) ++this.selection
+          while (newValue.slice(this.selection - 1, this.selection).match(this.delimiters)) {
+            this.selection++
+          }
         }
 
         if (this.$refs.input.setSelectionRange) {
           this.$refs.input.setSelectionRange(this.selection, this.selection)
         } else if (this.$refs.input.createTextRange) {
-          var range = this.$refs.input.createTextRange()
+          const range = this.$refs.input.createTextRange()
           range.move('character', this.selection)
           range.select()
         }
