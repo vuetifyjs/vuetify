@@ -100,7 +100,7 @@ export default {
         if (!this.$refs.input) return
 
         this.$refs.input.value = this.maskText(this.lazyValue)
-        
+
         if (!this.deleting) this.findRange()
 
         this.$refs.input.setSelectionRange(this.selection, this.selection)
