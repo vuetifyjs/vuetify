@@ -1,4 +1,5 @@
 import { test } from '~util/testing'
+import Vue from 'vue/dist/vue.common'
 import VTextField from '~components/VTextField'
 import VProgressLinear from '~components/VProgressLinear'
 
@@ -291,29 +292,24 @@ test('VTextField.js', ({ mount }) => {
   })
 
   it('should render component with async loading and match snapshot', () => {
-    const wrapper = mount(VTextField, {
+    const progress = Vue.component('test', {
       components: {
         VProgressLinear
       },
-      propsData: {
-        asyncLoading: true,
-        asyncLoadingHeight: 7,
-        asyncLoadingColor: 'orange'
+      render (h) {
+        return h('v-progress-linear', {
+          props: {
+            indeterminate: true,
+            height: 7,
+            color: 'orange'
+          }
+        })
       }
     })
 
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('should render component with async loading and color and match snapshot', () => {
     const wrapper = mount(VTextField, {
-      components: {
-        VProgressLinear
-      },
-      propsData: {
-        asyncLoading: true,
-        asyncLoadingHeight: 7,
-        color: 'orange'
+      slots: {
+        progress: [progress]
       }
     })
 
