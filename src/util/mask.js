@@ -19,7 +19,7 @@ const allowedMasks = {
 }
 
 /**
- * Default delimiter regexp
+ * Default delimiter RegExp
  *
  * @type {RegExp}
  */
@@ -72,7 +72,7 @@ export const maskText = (text, masked, fillMaskBlanks = false) => {
   if (!Array.isArray(masked)) masked = masked.split('')
 
   let textIndex = 0
-  const newText = []
+  let newText = ''
   masked.forEach((mask, i) => {
     if (textIndex >= text.length &&
       !fillMaskBlanks
@@ -81,21 +81,22 @@ export const maskText = (text, masked, fillMaskBlanks = false) => {
     // Assign the next character
     const char = text[textIndex]
 
-    if (!isMask(mask)) {
-      newText.push(mask)
-
-      if (char === mask) {
-        textIndex++
-      }
+    // Check if mask is delimiter
+    // and current char matches
+    if (!isMask(mask) && char === mask) {
+      newText += mask
+      textIndex++
+    // Check if not mask
+    } else if (!isMask(mask)) {
+      newText += mask
+    // Check if is mask and validates
     } else if (maskValidates(mask, char)) {
-      // If the mask is validated, push
-      // next char into the new array
-      newText.push(char)
+      newText += char
       textIndex++
     }
   })
 
-  return newText.join('')
+  return newText
 }
 
 /**

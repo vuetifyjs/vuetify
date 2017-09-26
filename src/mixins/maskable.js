@@ -75,11 +75,20 @@ export default {
   },
 
   methods: {
+    findRange () {
+      const newValue = this.$refs.input.value
+
+      while (isMaskDelimiter(newValue.substr(this.selection - 1, 1))) {
+        this.selection++
+      }
+    },
     maskText (text) {
+      if (!this.mask) return text
+
       return maskText(text, this.masked, this.fillMaskBlanks)
     },
     unmaskText (text) {
-      if (this.returnMaskedValue) return text
+      if (this.returnMaskedValue || !this.mask) return text
 
       return unmaskText(text)
     },
@@ -91,13 +100,8 @@ export default {
         if (!this.$refs.input) return
 
         this.$refs.input.value = this.maskText(this.lazyValue)
-
-        const newValue = this.$refs.input.value
-        if (!this.deleting) {
-          while (isMaskDelimiter(newValue.substr(this.selection - 1, 1))) {
-            this.selection++
-          }
-        }
+        
+        if (!this.deleting) this.findRange()
 
         this.$refs.input.setSelectionRange(this.selection, this.selection)
       })
