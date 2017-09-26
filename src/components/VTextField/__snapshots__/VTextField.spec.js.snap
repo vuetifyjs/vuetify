@@ -53,7 +53,7 @@ exports[`VTextField.js should render component and match snapshot 1`] = `
 
 exports[`VTextField.js should render component with async loading and color and match snapshot 1`] = `
 
-<div class="input-group input-group--async-loading input-group--text-field orange--text">
+<div class="input-group input-group--text-field orange--text">
   <div class="input-group__input">
     <input tabindex="0"
            type="text"
@@ -86,7 +86,7 @@ exports[`VTextField.js should render component with async loading and color and 
 
 exports[`VTextField.js should render component with async loading and match snapshot 1`] = `
 
-<div class="input-group input-group--async-loading input-group--text-field primary--text">
+<div class="input-group input-group--text-field primary--text">
   <div class="input-group__input">
     <input tabindex="0"
            type="text"
