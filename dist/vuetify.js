@@ -7273,7 +7273,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     filteredItems: function filteredItems() {
       // If we are not actively filtering
       // Show all available items
-      var items = this.isAutocomplete && this.isDirty && this.searchValue === this.getText(this.selectedItem) ? this.computedItems : this.filterSearch();
+      var items = this.isAutocomplete && this.isDirty && this.searchValue === this.selectedItem ? this.computedItems : this.filterSearch();
 
       return !this.auto ? items.slice(0, this.lastItem) : items;
     },
