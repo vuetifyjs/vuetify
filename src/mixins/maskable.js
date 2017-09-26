@@ -61,30 +61,22 @@ export default {
     // caret location is correct
     setSelectionRange () {
       this.$nextTick(() => {
-        if (this.$refs.input == null) return
+        if (!this.$refs.input) return
 
-        const maskedText = this.maskText(this.lazyValue)
-        if (maskedText !== this.$refs.input.value) {
-          this.$refs.input.value = maskedText
-        }
-
-        // May not be needed
-        // if (this.oldValue.length === this.selection) return
+        this.$refs.input.value = this.maskText(this.lazyValue)
 
         const newValue = this.$refs.input.value
         if (!this.deleting) {
-          while (isMaskDelimiter(newValue.slice(this.selection - 1, this.selection))) {
+          while (isMaskDelimiter(newValue.substr(this.selection - 1, 1))) {
             this.selection++
+          }
+          // TODO: This only helps sometimes
+          if (this.$refs.input.selectionStart - this.selection === 1) {
+            this.selection = this.$refs.input.selectionStart
           }
         }
 
-        if (this.$refs.input.setSelectionRange) {
-          this.$refs.input.setSelectionRange(this.selection, this.selection)
-        } else if (this.$refs.input.createTextRange) {
-          const range = this.$refs.input.createTextRange()
-          range.move('character', this.selection)
-          range.select()
-        }
+        this.$refs.input.setSelectionRange(this.selection, this.selection)
       })
     }
   }
