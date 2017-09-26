@@ -28,7 +28,7 @@ export default {
     },
     backgroundOpacity: {
       type: [Number, String],
-      default: ''
+      default: null
     },
     bufferValue: {
       type: [Number, String],
@@ -51,11 +51,6 @@ export default {
   },
 
   computed: {
-    classes () {
-      return {
-        'progress-linear--query': this.query
-      }
-    },
     styles () {
       const styles = {}
 
@@ -86,9 +81,9 @@ export default {
       return styles
     },
     backgroundStyle () {
-      const backgroundOpacity = (this.backgroundOpacity === '' || this.backgroundOpacity == null)
+      const backgroundOpacity = this.backgroundOpacity == null
         ? (this.backgroundColor ? 1 : 0.3)
-        : Number(this.backgroundOpacity)
+        : parseFloat(this.backgroundOpacity)
 
       return {
         opacity: backgroundOpacity,
@@ -101,8 +96,8 @@ export default {
     genDeterminate (h) {
       return h('div', {
         ref: 'front',
+        staticClass: `progress-linear__bar__determinate`,
         class: {
-          'progress-linear__bar__determinate': true,
           [this.color]: true
         },
         style: {
@@ -112,8 +107,8 @@ export default {
     },
     genBar (h, name) {
       return h('div', {
+        staticClass: 'progress-linear__bar__indeterminate',
         class: {
-          'progress-linear__bar__indeterminate': true,
           [name]: true,
           [this.color]: true
         }
@@ -122,8 +117,8 @@ export default {
     genIndeterminate (h) {
       return h('div', {
         ref: 'front',
+        staticClass: 'progress-linear__bar__indeterminate',
         class: {
-          'progress-linear__bar__indeterminate': true,
           'progress-linear__bar__indeterminate--active': this.active
         }
       }, [
@@ -137,15 +132,24 @@ export default {
     const fade = h('v-fade-transition', [this.indeterminate && this.genIndeterminate(h)])
     const slide = h('v-slide-x-transition', [!this.indeterminate && this.genDeterminate(h)])
 
-    const bar = h('div', { class: ['progress-linear__bar'], style: this.styles }, [fade, slide])
+    const bar = h('div', {
+      staticClass: 'progress-linear__bar',
+      style: this.styles
+    }, [fade, slide])
     const background = h('div', {
-      staticClass: `progress-linear__background ${this.backgroundColor || this.color}`,
+      staticClass: 'progress-linear__background',
+      class: [this.backgroundColor || this.color],
       style: this.backgroundStyle
     })
 
     return h('div', {
-      class: ['progress-linear', this.classes],
-      style: { height: `${this.height}px` },
+      staticClass: 'progress-linear',
+      class: {
+        'progress-linear--query': this.query
+      },
+      style: {
+        height: `${this.height}px`
+      },
       on: this.$listeners
     }, [
       background,
