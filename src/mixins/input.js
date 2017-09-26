@@ -21,6 +21,7 @@ export default {
   props: {
     appendIcon: String,
     appendIconCb: Function,
+    asyncLoading: Boolean,
     disabled: Boolean,
     hint: String,
     hideDetails: Boolean,
@@ -47,7 +48,7 @@ export default {
     inputGroupClasses () {
       return Object.assign({
         'input-group': true,
-        'input-group--async-loading': this.$slots.progress,
+        'input-group--async-loading': this.asyncLoading,
         'input-group--focused': this.isFocused,
         'input-group--dirty': this.isDirty,
         'input-group--tab-focused': this.tabFocused,
@@ -78,6 +79,15 @@ export default {
           for: this.$attrs.id
         }
       }, this.$slots.label || this.label)
+    },
+    genDefaultProgress () {
+      return this.$createElement('v-progress-linear', {
+        props: {
+          color: this.color || 'primary',
+          height: 3,
+          indeterminate: true
+        }
+      })
     },
     genMessages () {
       let messages = []
@@ -193,8 +203,8 @@ export default {
         wrapperChildren.push(this.genIcon('append', defaultAppendCallback))
       }
 
-      if (this.$slots.progress) {
-        detailsChildren.push(this.$slots.progress)
+      if (this.asyncLoading) {
+        detailsChildren.push(this.$slots.progress || this.genDefaultProgress())
       }
 
       children.push(
