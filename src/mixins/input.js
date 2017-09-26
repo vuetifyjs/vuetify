@@ -47,6 +47,7 @@ export default {
     inputGroupClasses () {
       return Object.assign({
         'input-group': true,
+        'input-group--async-loading': this.$slots.progress,
         'input-group--focused': this.isFocused,
         'input-group--dirty': this.isDirty,
         'input-group--tab-focused': this.tabFocused,
