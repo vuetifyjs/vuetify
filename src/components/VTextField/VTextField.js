@@ -50,6 +50,7 @@ export default {
     classes () {
       const classes = {
         'input-group--text-field': true,
+        'input-group--async-loading': this.$slots.progress,
         'input-group--text-field-box': this.box,
         'input-group--single-line': this.singleLine || this.solo,
         'input-group--solo': this.solo,
