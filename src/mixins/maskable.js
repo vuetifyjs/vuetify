@@ -10,13 +10,14 @@
  */
 
 import {
+  defaultDelimiters,
   maskText,
   unmaskText
 } from '../util/mask'
 
 export default {
   data: () => ({
-    delimiters: /[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/ ]/,
+    delimiters: defaultDelimiters,
     selection: 0,
     preDefined: {
       'credit-card': '#### - #### - #### - ####',
@@ -81,7 +82,7 @@ export default {
         if (this.$refs.input.setSelectionRange) {
           this.$refs.input.setSelectionRange(this.selection, this.selection)
         } else if (this.$refs.input.createTextRange) {
-          var range = this.$refs.input.createTextRange()
+          const range = this.$refs.input.createTextRange()
           range.move('character', this.selection)
           range.select()
         }

@@ -1,6 +1,6 @@
 /**
  * Mask keys
- * 
+ *
  * @type {Object}
  */
 const allowedMasks = {
@@ -14,32 +14,32 @@ const allowedMasks = {
     test: char => char.match(/[a-z]/)
   },
   'X': {
-    test: char => char.match(/[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/]/)
+    test: char => char.match(defaultDelimiters)
   }
 }
 
 /**
  * Default delimiter regexp
- * 
+ *
  * @type {RegExp}
  */
-const defaultDelimiter = /[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/ ]/
+export const defaultDelimiters = /[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/ ]/
 
 /**
  * Is Character mask
- * 
+ *
  * @param  {String} char
- * 
+ *
  * @return {Boolean}
  */
 const isMask = char => allowedMasks.hasOwnProperty(char)
 
 /**
  * Mask Validation
- * 
+ *
  * @param  {String} mask
  * @param  {String} char
- * 
+ *
  * @return {Boolean}
  */
 const maskValidates = (mask, char) => {
@@ -52,7 +52,7 @@ const maskValidates = (mask, char) => {
  *
  * Takes an array of characters
  * and returns a compiled str
- * 
+ *
  * @param {String} text
  * @param {Array|String} masked
  * @param {Boolean} fillMaskBlanks
@@ -92,14 +92,12 @@ export const maskText = (text, masked, fillMaskBlanks = false) => {
 
 /**
  * Unmask Text
- * 
+ *
  * @param {String} text
- * @param {RegExp} masked
+ * @param {RegExp} delimiters
  *
  * @return {String}
  */
-export const unmaskText = (text, delimiters) => {
-  delimiters = delimiters || defaultDelimiter
-
+export const unmaskText = (text, delimiters = defaultDelimiters) => {
   return text.replace(new RegExp(delimiters, 'g'), '')
 }
