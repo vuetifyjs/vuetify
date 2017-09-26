@@ -3,11 +3,12 @@ require('../../stylus/components/_text-fields.styl')
 
 import Colorable from '../../mixins/colorable'
 import Input from '../../mixins/input'
+import Maskable from '../../mixins/maskable'
 
 export default {
   name: 'v-text-field',
 
-  mixins: [Colorable, Input],
+  mixins: [Colorable, Input, Maskable],
 
   inheritAttrs: false,
 
@@ -15,7 +16,8 @@ export default {
     return {
       initialValue: null,
       inputHeight: null,
-      badInput: false
+      badInput: false,
+      deleting: false
     }
   },
 
@@ -84,7 +86,9 @@ export default {
         return this.value
       },
       set (val) {
+        this.selection = this.$refs.input ? this.$refs.input.selectionStart : 0
         this.lazyValue = val
+        this.mask && this.setSelectionRange()
         this.$emit('input', val)
       }
     },
@@ -137,9 +141,13 @@ export default {
       })
     },
     onInput (e) {
-      this.inputValue = e.target.value
+      this.inputValue = this.unmaskText(e.target.value)
       this.badInput = e.target.validity && e.target.validity.badInput
       this.shouldAutoGrow && this.calculateInputHeight()
+    },
+    keyDown (e) {
+      const key = e.code || e.key
+      this.deleting = key === 'Backspace' || key === 'Delete'
     },
     blur (e) {
       this.isFocused = false
@@ -175,7 +183,7 @@ export default {
           autofocus: this.autofocus,
           disabled: this.disabled,
           required: this.required,
-          value: this.lazyValue
+          value: this.maskText(this.lazyValue || '')
         },
         attrs: {
           ...this.$attrs,
@@ -186,7 +194,8 @@ export default {
         on: Object.assign(listeners, {
           blur: this.blur,
           input: this.onInput,
-          focus: this.focus
+          focus: this.focus,
+          keydown: this.keyDown
         }),
         ref: 'input'
       }
@@ -201,6 +210,10 @@ export default {
         data.domProps.type = this.type
       } else {
         data.domProps.rows = this.rows
+      }
+
+      if (this.mask) {
+        data.attrs.maxlength = this.masked.length
       }
 
       const children = [this.$createElement(tag, data)]

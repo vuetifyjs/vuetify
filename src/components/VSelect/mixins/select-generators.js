@@ -2,9 +2,9 @@ import { getObjectValueByPath } from '../../../util/helpers'
 
 /**
  * Select generators
- * 
+ *
  * @mixin
- * 
+ *
  * Used for creating the DOM elements for VSelect
  */
 export default {
@@ -63,7 +63,7 @@ export default {
           tabindex: this.disabled || !this.isAutocomplete ? -1 : this.tabindex
         },
         domProps: {
-          value: this.lazySearch
+          value: this.maskText(this.lazySearch || '')
         },
         directives: [{
           name: 'show',
@@ -80,7 +80,9 @@ export default {
 
         data.on = {
           ...this.genListeners(),
-          input: e => (this.searchValue = e.target.value)
+          input: e => {
+            this.searchValue = this.unmaskText(e.target.value)
+          }
         }
 
         data.directives = data.directives.concat(this.genDirectives())
@@ -266,8 +268,14 @@ export default {
       ])
     },
     genContent (item) {
+      const text = this.getText(item)
+
       return this.$createElement('v-list-tile-content',
-        [this.$createElement('v-list-tile-title', this.getText(item))]
+        [this.$createElement('v-list-tile-title', {
+          domProps: {
+            innerHTML: this.genFiltered(text)
+          }
+        })]
       )
     }
   }
