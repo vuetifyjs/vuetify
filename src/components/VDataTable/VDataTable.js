@@ -8,6 +8,7 @@ import VSelect from '../VSelect'
 
 import Filterable from '../../mixins/filterable'
 import Themeable from '../../mixins/themeable'
+import Loadable from '../../mixins/loadable'
 import Head from './mixins/head'
 import Body from './mixins/body'
 import Foot from './mixins/foot'
@@ -45,7 +46,7 @@ export default {
     }
   },
 
-  mixins: [Head, Body, Filterable, Foot, Progress, Themeable],
+  mixins: [Head, Body, Filterable, Foot, Loadable, Progress, Themeable],
 
   props: {
     expand: {
@@ -148,10 +149,6 @@ export default {
     totalItems: {
       type: Number,
       default: null
-    },
-    loading: {
-      type: [Boolean, String],
-      default: false
     },
     itemKey: {
       type: String,

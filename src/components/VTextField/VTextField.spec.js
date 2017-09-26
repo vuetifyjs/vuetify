@@ -297,7 +297,7 @@ test('VTextField.js', ({ mount }) => {
         VProgressLinear
       },
       propsData: {
-        asyncLoading: true
+        loading: true
       }
     })
 
@@ -322,7 +322,7 @@ test('VTextField.js', ({ mount }) => {
 
     const wrapper = mount(VTextField, {
       propsData: {
-        asyncLoading: true
+        loading: true
       },
       slots: {
         progress: [progress]
