@@ -138,14 +138,17 @@ export default {
   },
 
   watch: {
-    value (val) {
-      this.inputValue = val
+    isActive (val) {
+      this.isFocused = val
     },
     min (val) {
       val > this.inputValue && this.$emit('input', val)
     },
     max (val) {
       val < this.inputValue && this.$emit('input', val)
+    },
+    value (val) {
+      this.inputValue = val
     }
   },
 
