@@ -10,14 +10,13 @@
  */
 
 import {
-  defaultDelimiters,
+  isMaskDelimiter,
   maskText,
   unmaskText
 } from '../util/mask'
 
 export default {
   data: () => ({
-    delimiters: defaultDelimiters,
     selection: 0,
     preDefined: {
       'credit-card': '#### - #### - #### - ####',
@@ -55,7 +54,7 @@ export default {
     unmaskText (text) {
       if (this.returnMaskedValue) return text
 
-      return unmaskText(text, this.delimiters)
+      return unmaskText(text)
     },
     // When the input changes and is
     // re-created, ensure that the
@@ -74,7 +73,7 @@ export default {
 
         const newValue = this.$refs.input.value
         if (!this.deleting) {
-          while (newValue.slice(this.selection - 1, this.selection).match(this.delimiters)) {
+          while (isMaskDelimiter(newValue.slice(this.selection - 1, this.selection))) {
             this.selection++
           }
         }
