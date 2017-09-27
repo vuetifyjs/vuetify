@@ -73,8 +73,8 @@ export default {
       this.selection = selection
     },
 
-    selection () {
-      this.$refs.input.setSelectionRange(this.selection, this.selection)
+    selection (val) {
+      this.$refs.input.setSelectionRange(val, val)
     }
   },
 
