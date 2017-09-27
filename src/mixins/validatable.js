@@ -110,7 +110,7 @@ export default {
           : rule
 
         if (valid !== true && !['string', 'boolean'].includes(typeof valid)) {
-          throw new TypeError(`Rules should return a string or boolean, recieved '${typeof valid}' instead`)
+          throw new TypeError(`Rules should return a string or boolean, received '${typeof valid}' instead`)
         }
 
         if (valid !== true) {
