@@ -12,9 +12,17 @@ export default {
 
   computed: {
     classes () {
-      return {
+      const classes = {
         'input-group--selection-controls switch': true
       }
+
+      if (this.hasError) {
+        classes['error--text'] = true
+      } else {
+        return this.addColorClassChecks(classes)
+      }
+
+      return classes
     },
     rippleClasses () {
       return {
@@ -23,11 +31,11 @@ export default {
       }
     },
     containerClasses () {
-      return this.addColorClassChecks({
+      return {
         'input-group--selection-controls__container': true,
         'input-group--selection-controls__container--light': this.light,
         'input-group--selection-controls__container--disabled': this.disabled
-      })
+      }
     },
     toggleClasses () {
       return {

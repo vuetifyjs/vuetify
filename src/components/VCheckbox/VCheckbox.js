@@ -28,11 +28,19 @@ export default {
 
   computed: {
     classes () {
-      return this.addColorClassChecks({
+      const classes = {
         'checkbox': true,
         'input-group--selection-controls': true,
         'input-group--active': this.isActive
-      })
+      }
+
+      if (this.hasError) {
+        classes['error--text'] = true
+      } else {
+        return this.addColorClassChecks(classes)
+      }
+
+      return classes
     },
     icon () {
       if (this.inputIndeterminate) {

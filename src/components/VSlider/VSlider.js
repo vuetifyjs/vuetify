@@ -22,6 +22,10 @@ export default {
   },
 
   props: {
+    color: {
+      type: String,
+      default: null
+    },
     inverted: Boolean,
     min: {
       type: [Number, String],
@@ -35,10 +39,18 @@ export default {
       type: [Number, String],
       default: null
     },
+    thumbColor: {
+      type: String,
+      default: null
+    },
     thumbLabel: Boolean,
     value: [Number, String],
     vertical: Boolean,
-    snap: Boolean
+    snap: Boolean,
+    trackColor: {
+      type: String,
+      default: null
+    }
   },
 
   computed: {
@@ -126,14 +138,17 @@ export default {
   },
 
   watch: {
-    value (val) {
-      this.inputValue = val
+    isActive (val) {
+      this.isFocused = val
     },
     min (val) {
       val > this.inputValue && this.$emit('input', val)
     },
     max (val) {
       val < this.inputValue && this.$emit('input', val)
+    },
+    value (val) {
+      this.inputValue = val
     }
   },
 
@@ -215,7 +230,7 @@ export default {
             }
           ]
         }, [
-          h('div', { 'class': 'slider__thumb--label' }, [
+          h('div', { 'class': ['slider__thumb--label', this.thumbColor || this.color] }, [
             h('span', {}, parseInt(this.inputValue))
           ])
         ])
@@ -223,7 +238,7 @@ export default {
     },
     genThumbContainer (h) {
       const children = []
-      children.push(h('div', { 'class': 'slider__thumb' }))
+      children.push(h('div', { 'class': ['slider__thumb', this.thumbColor || this.color] }))
 
       this.thumbLabel && children.push(this.genThumbLabel(h))
 
@@ -257,11 +272,11 @@ export default {
     genTrackContainer (h) {
       const children = [
         h('div', {
-          'class': 'slider__track',
+          'class': ['slider__track', this.trackColor],
           style: this.trackStyles
         }),
         h('div', {
-          'class': 'slider__track-fill',
+          'class': ['slider__track-fill', this.color],
           style: this.trackFillStyles
         })
       ]

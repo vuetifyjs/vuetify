@@ -51,12 +51,12 @@ export default {
       staticClass: 'badge',
       'class': this.classes
     }, [
+      this.$slots.default,
       h('transition', {
         props: {
           name: this.transition
         }
-      }, [badge]),
-      this.$slots.default
+      }, [badge])
     ])
   }
 }

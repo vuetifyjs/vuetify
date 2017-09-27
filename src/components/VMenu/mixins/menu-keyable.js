@@ -33,10 +33,8 @@ export default {
 
   methods: {
     changeListIndex (e) {
-      // Up, Down, Enter, Space
-      if ([40, 38, 13].includes(e.keyCode) ||
-        e.keyCode === 32 && !this.isActive
-      ) {
+      // Up, Down, Enter
+      if ([40, 38, 13].includes(e.keyCode)) {
         e.preventDefault()
       }
 

@@ -3,8 +3,7 @@
 
 /** Theme */
 switch($material)
-  .input-group--selection-controls__container
-    color: $material.selection-controls.active
+  color: $material.selection-controls.active
       
   &:not(.input-group--dirty)
     .input-group--selection-controls__container
@@ -19,7 +18,7 @@ switch($material)
       color: $material.selection-controls.track.inactive
 
     &--active:after
-      background-color: $material.selection-controls.active
+      background-color: currentColor
 
   .input-group--selection-controls__toggle
     color: $material.selection-controls.track.inactive
@@ -44,6 +43,7 @@ theme(switch, "switch")
     min-width: 36px
 
     .input-group--selection-controls__container
+      color: inherit
       position: relative
 
       &[class*="--text"]

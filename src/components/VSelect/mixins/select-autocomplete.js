@@ -1,6 +1,6 @@
 /**
  * Select autocomplete
- * 
+ *
  * @mixin
  *
  * Handles logic when using the "autocomplete" prop
@@ -23,6 +23,31 @@ export default {
   },
 
   methods: {
+    genFiltered (text) {
+      if (!this.isAutocomplete ||
+        !this.searchValue
+      ) return text
+
+      text = (text || '').toString()
+
+      const { start, middle, end } = this.getMaskedCharacters(text)
+
+      return `${start}${this.genHighlight(middle)}${end}`
+    },
+    genHighlight (text) {
+      return `<span class="list__tile__mask">${text}</span>`
+    },
+    getMaskedCharacters (text) {
+      const searchValue = (this.searchValue || '').toString().toLowerCase()
+      const index = text.toLowerCase().indexOf(searchValue)
+
+      if (index < 0) return text
+
+      const start = text.slice(0, index)
+      const middle = text.slice(index, index + searchValue.length)
+      const end = text.slice(index + searchValue.length)
+      return { start, middle, end }
+    },
     filterSearch () {
       if (!this.isAutocomplete) return this.computedItems
 

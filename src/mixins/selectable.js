@@ -10,6 +10,7 @@ export default {
   },
 
   props: {
+    id: String,
     inputValue: null,
     falseValue: null,
     trueValue: null
@@ -46,7 +47,7 @@ export default {
       return this.$createElement('label', {
         on: { click: this.toggle },
         attrs: {
-          for: this.$attrs.id
+          for: this.id
         }
       }, this.$slots.label || this.label)
     },
