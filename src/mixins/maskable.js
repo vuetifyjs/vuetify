@@ -63,24 +63,30 @@ export default {
         isMaskDelimiter(char) || position++
       }
 
-      this.selection = 0
+      let selection = 0
       for (const char of newText) {
         isMaskDelimiter(char) || position--
-        this.selection++
+        selection++
         if (position <= 0) break
       }
 
-      this.$refs.input.setSelectionRange(this.selection, this.selection)
+      this.selection = selection
+    },
+
+    selection (val) {
+      this.$refs.input.setSelectionRange(val, val)
     }
   },
 
   methods: {
-    findRange () {
+    updateRange () {
       const newValue = this.$refs.input.value
+      let selection = this.selection
 
-      while (isMaskDelimiter(newValue.substr(this.selection - 1, 1))) {
-        this.selection++
+      while (isMaskDelimiter(newValue.substr(selection - 1, 1))) {
+        selection++
       }
+      this.selection = selection
     },
     maskText (text) {
       if (!this.mask) return text
@@ -101,9 +107,7 @@ export default {
 
         this.$refs.input.value = this.maskText(this.lazyValue)
 
-        if (!this.deleting) this.findRange()
-
-        this.$refs.input.setSelectionRange(this.selection, this.selection)
+        if (!this.deleting) this.updateRange()
       })
     }
   }
