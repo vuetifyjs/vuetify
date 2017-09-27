@@ -8,10 +8,20 @@ const allowedMasks = {
     test: char => char.match(/[0-9]/)
   },
   'A': {
-    test: char => char.match(/[A-Z]/i)
+    test: char => char.match(/[A-Z]/i),
+    convert: char => char.toUpperCase()
   },
   'a': {
-    test: char => char.match(/[a-z]/i)
+    test: char => char.match(/[a-z]/i),
+    convert: char => char.toLowerCase()
+  },
+  'N': {
+    test: char => char.match(/[0-9A-Z]/i),
+    convert: char => char.toUpperCase()
+  },
+  'n': {
+    test: char => char.match(/[0-9a-z]/i),
+    convert: char => char.toLowerCase()
   },
   'X': {
     test: isMaskDelimiter
@@ -23,7 +33,7 @@ const allowedMasks = {
  *
  * @type {RegExp}
  */
-export const defaultDelimiters = /[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/ ]/
+export const defaultDelimiters = /[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/\\ ]/
 
 /**
  * Is Character mask
@@ -39,13 +49,11 @@ const isMask = char => allowedMasks.hasOwnProperty(char)
  *
  * @param  {String} mask
  * @param  {String} char
- * 
+ *
  * @return {String}
  */
-const convertMaskCase = (mask, char) => {
-  if (mask === 'A') return char.toUpperCase()
-  if (mask === 'a') return char.toLowerCase()
-  return char
+const convert = (mask, char) => {
+  return allowedMasks[mask].convert ? allowedMasks[mask].convert(char) : char
 }
 
 /**
@@ -105,7 +113,7 @@ export const maskText = (text, masked, fillMaskBlanks = false) => {
       newText += mask
     // Check if is mask and validates
     } else if (maskValidates(mask, char)) {
-      newText += convertMaskCase(mask, char)
+      newText += convert(mask, char)
       textIndex++
     }
   })

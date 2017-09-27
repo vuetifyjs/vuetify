@@ -25,6 +25,7 @@ test('mask.js', ({ mount }) => {
     expect(maskText('aa', 'Aa')).toBe('Aa')
     expect(maskText('AA', 'aa')).toBe('aa')
     expect(maskText('A1', 'Aa')).toBe('A')
+    expect(maskText('12abAB', 'NnNnNn')).toBe('12AbAb')
   })
 
   // Unmasks
