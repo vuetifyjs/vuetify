@@ -182,7 +182,7 @@ export default {
       // Show all available items
       const items = (this.isAutocomplete &&
         this.isDirty &&
-        this.searchValue === this.selectedItem)
+        this.searchValue === this.getText(this.selectedItem))
         ? this.computedItems
         : this.filterSearch()
 
