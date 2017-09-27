@@ -16,5 +16,5 @@ then
   npm version $VERSION --message "[release] $VERSION"
 
   git push
-  npm publish
+  npm publish "$@"
 fi
