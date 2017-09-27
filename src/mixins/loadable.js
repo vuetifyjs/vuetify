@@ -1,6 +1,6 @@
 /**
  * Loadable
- * 
+ *
  * @mixin
  *
  * Used to add linear progress bar to components
@@ -17,7 +17,7 @@ export default {
 
   methods: {
     genProgress () {
-      if (!this.loading) return null
+      if (this.loading === false) return null
 
       return this.$slots.progress || this.$createElement('v-progress-linear', {
         props: {
