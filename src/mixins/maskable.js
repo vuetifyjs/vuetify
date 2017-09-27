@@ -59,8 +59,8 @@ export default {
       const newText = this.maskText(this.lazyValue || '')
       let position = 0
 
-      for (let i = 0; i < this.selection; i++) {
-        isMaskDelimiter(oldText[i]) || position++
+      for (const char of oldText.substr(0, this.selection)) {
+        isMaskDelimiter(char) || position++
       }
 
       this.selection = 0
