@@ -1,10 +1,11 @@
 /**
  * Loadable
+ * 
  * @mixin
  *
  * Used to add linear progress bar to components
- * Can use default bar with provided or primary color
- * Alternatively can use the progress from "progress" slot
+ * Can use a default bar with a specific color
+ * or designate a custom progress linear bar
  */
 export default {
   props: {
@@ -16,7 +17,7 @@ export default {
 
   methods: {
     genProgress () {
-      if (this.loading === false) return null
+      if (!this.loading) return null
 
       return this.$slots.progress || this.$createElement('v-progress-linear', {
         props: {
