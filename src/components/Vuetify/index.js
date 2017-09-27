@@ -10,7 +10,8 @@ const Vuetify = {
         left: 0,
         right: 0
       },
-      breakpoint: {}
+      breakpoint: {},
+      touchSupport: false
     }
 
     Vue.util.defineReactive({}, 'breakpoint', $vuetify)
