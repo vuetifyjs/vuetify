@@ -21,6 +21,12 @@ test('mask.js', ({ mount }) => {
     expect(maskText('', '## - ##', true)).toBe('')
   })
 
+  it('should convert alphanumeric to the proper case', () => {
+    expect(maskText('aa', 'Aa')).toBe('Aa')
+    expect(maskText('AA', 'aa')).toBe('aa')
+    expect(maskText('A1', 'Aa')).toBe('A')
+  })
+
   // Unmasks
   it('should remove delimiter', () => {
     expect(unmaskText('(5')).toBe('5')
