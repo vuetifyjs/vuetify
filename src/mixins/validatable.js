@@ -109,6 +109,10 @@ export default {
           ? rule(typeof value !== 'undefined' ? value : this.inputValue)
           : rule
 
+        if (valid !== true && !['string', 'boolean'].includes(typeof valid)) {
+          throw new TypeError(`Rules should return a string or boolean, received '${typeof valid}' instead`)
+        }
+
         if (valid !== true) {
           this.errorBucket.push(valid)
         }
