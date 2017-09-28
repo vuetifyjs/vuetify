@@ -55,4 +55,22 @@ test('Vslider.vue', ({ mount }) => {
 
     expect(warning).toHaveBeenTipped()
   })
+
+  it('should be focused when active', async () => {
+    const wrapper = mount(VSlider, {
+      propsData: {
+        value: 5,
+        min: 0,
+        max: 10
+      }
+    })
+
+    wrapper.setData({ isActive: true })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isFocused).toBe(true)
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(warning).toHaveBeenTipped()
+  })
 })

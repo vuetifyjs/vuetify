@@ -3,8 +3,8 @@ require('../../stylus/components/_selection-controls.styl')
 
 import VIcon from '../VIcon'
 import { VFadeTransition } from '../transitions'
+import Rippleable from '../../mixins/rippleable'
 import Selectable from '../../mixins/selectable'
-import Ripple from '../../directives/ripple'
 
 export default {
   name: 'v-checkbox',
@@ -14,11 +14,7 @@ export default {
     VIcon
   },
 
-  directives: {
-    Ripple
-  },
-
-  mixins: [Selectable],
+  mixins: [Rippleable, Selectable],
 
   data () {
     return {
@@ -32,11 +28,19 @@ export default {
 
   computed: {
     classes () {
-      return this.addColorClassChecks({
+      const classes = {
         'checkbox': true,
         'input-group--selection-controls': true,
         'input-group--active': this.isActive
-      })
+      }
+
+      if (this.hasError) {
+        classes['error--text'] = true
+      } else {
+        return this.addColorClassChecks(classes)
+      }
+
+      return classes
     },
     icon () {
       if (this.inputIndeterminate) {
@@ -64,23 +68,13 @@ export default {
   render (h) {
     const transition = h('v-fade-transition', [
       h('v-icon', {
+        staticClass: 'icon--selection-control',
         'class': {
           'icon--checkbox': this.icon === 'check_box'
         },
         key: this.icon
       }, this.icon)
     ])
-
-    const ripple = h('div', {
-      'class': 'input-group--selection-controls__ripple',
-      on: Object.assign({}, {
-        click: this.toggle
-      }, this.$listeners),
-      directives: [{
-        name: 'ripple',
-        value: this.disabled ? false : { center: true }
-      }]
-    })
 
     const data = {
       attrs: {
@@ -93,6 +87,6 @@ export default {
       }
     }
 
-    return this.genInputGroup([transition, ripple], data)
+    return this.genInputGroup([transition, this.genRipple()], data)
   }
 }

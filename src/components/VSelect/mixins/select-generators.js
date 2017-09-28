@@ -2,9 +2,9 @@ import { getObjectValueByPath } from '../../../util/helpers'
 
 /**
  * Select generators
- * 
+ *
  * @mixin
- * 
+ *
  * Used for creating the DOM elements for VSelect
  */
 export default {
@@ -22,9 +22,9 @@ export default {
           contentClass: this.computedContentClass,
           disabled: this.disabled,
           maxHeight: this.maxHeight,
-          nudgeTop: this.isDropdown ? -12 : offsetY ? -2 : 0,
-          nudgeRight: this.isDropdown ? 16 : 0,
-          nudgeWidth: this.isDropdown ? 68 : 36,
+          nudgeTop: this.isDropdown ? 0 : offsetY ? -2 : 0,
+          nudgeRight: this.isDropdown ? 0 : 0,
+          nudgeWidth: this.isDropdown ? 55 : 36,
           offsetY,
           openOnClick: false,
           value: this.menuIsActive &&
@@ -63,7 +63,7 @@ export default {
           tabindex: this.disabled || !this.isAutocomplete ? -1 : this.tabindex
         },
         domProps: {
-          value: this.lazySearch
+          value: this.maskText(this.lazySearch || '')
         },
         directives: [{
           name: 'show',
@@ -80,7 +80,9 @@ export default {
 
         data.on = {
           ...this.genListeners(),
-          input: e => (this.searchValue = e.target.value)
+          input: e => {
+            this.searchValue = this.unmaskText(e.target.value)
+          }
         }
 
         data.directives = data.directives.concat(this.genDirectives())
@@ -228,7 +230,7 @@ export default {
           }
         },
         props: {
-          avatar: item === Object(item) && 'avatar' in item,
+          avatar: item === Object(item) && this.itemAvatar in item,
           ripple: true,
           value: active
         }
@@ -266,8 +268,14 @@ export default {
       ])
     },
     genContent (item) {
+      const text = this.getText(item)
+
       return this.$createElement('v-list-tile-content',
-        [this.$createElement('v-list-tile-title', this.getText(item))]
+        [this.$createElement('v-list-tile-title', {
+          domProps: {
+            innerHTML: this.genFiltered(text)
+          }
+        })]
       )
     }
   }

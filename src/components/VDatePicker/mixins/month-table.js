@@ -42,7 +42,7 @@ export default {
           'class': {
             'btn btn--date-picker': true,
             'btn--raised': this.monthIsActive(month),
-            'btn--flat': !this.monthIsActive(month),
+            'btn--flat': true,
             'btn--active': this.monthIsActive(month),
             'btn--outline': this.monthIsCurrent(month) && !this.monthIsActive(month),
             'btn--disabled': this.type === 'month' && !this.isAllowed(date)

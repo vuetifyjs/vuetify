@@ -11,9 +11,9 @@ test('VDataTable.vue', () => {
           sortBy: 'col1'
         },
         headers: [
-          { text: 'First Column', value: 'col1' },
+          { text: 'First Column', value: 'col1', class: 'a-string' },
           { text: 'Second Column', value: 'col2', sortable: false },
-          { text: 'Third Column', value: 'col3' }
+          { text: 'Third Column', value: 'col3', class: ['an', 'array'] }
         ],
         items: [
           { other: 1, col1: 'foo', col2: 'a', col3: 1 },

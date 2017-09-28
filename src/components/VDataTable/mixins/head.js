@@ -59,6 +59,11 @@ export default {
       }
 
       classes.push(`text-xs-${header.align || 'right'}`)
+      if (Array.isArray(header.class)) {
+        classes.push(...header.class)
+      } else if (header.class) {
+        classes.push(header.class)
+      }
       data.class = classes
 
       return [data, children]

@@ -5,11 +5,15 @@ export default {
 
   computed: {
     styles () {
+      const {
+        bar, top, right, bottom, left
+      } = this.$vuetify.application
+
       return {
-        paddingTop: `${this.$vuetify.application.top}px`,
-        paddingRight: `${this.$vuetify.application.right}px`,
-        paddingBottom: `${this.$vuetify.application.bottom}px`,
-        paddingLeft: `${this.$vuetify.application.left}px`
+        paddingTop: `${top + bar}px`,
+        paddingRight: `${right}px`,
+        paddingBottom: `${bottom}px`,
+        paddingLeft: `${left}px`
       }
     }
   },

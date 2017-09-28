@@ -17,7 +17,9 @@ export default {
   provide () {
     return {
       isMandatory: () => this.mandatory,
-      name: () => this.name
+      name: () => this.name,
+      registerChild: this.registerChild,
+      unregisterChild: this.unregisterChild
     }
   },
 
@@ -82,25 +84,27 @@ export default {
         this.shouldValidate = true
         this.$emit('blur', this.inputValue)
       }
-    }
-  },
-
-  mounted () {
-    this.getRadios().forEach((radio) => {
+    },
+    registerChild (radio) {
       radio.isActive = this.inputValue === radio.value
       radio.$el.tabIndex = radio.$el.tabIndex > 0 ? radio.$el.tabIndex : 0
       radio.$on('change', this.toggleRadio)
       radio.$on('blur', this.radioBlur)
       radio.$on('focus', this.radioFocus)
-    })
-  },
-
-  beforeDestroy () {
-    this.getRadios().forEach((radio) => {
+    },
+    unregisterChild (radio) {
       radio.$off('change', this.toggleRadio)
       radio.$off('blur', this.radioBlur)
       radio.$off('focus', this.radioFocus)
-    })
+    }
+  },
+
+  mounted () {
+    this.getRadios().forEach(radio => this.registerChild(radio))
+  },
+
+  beforeDestroy () {
+    this.getRadios().forEach(radio => this.unregisterChild(radio))
   },
 
   render (h) {

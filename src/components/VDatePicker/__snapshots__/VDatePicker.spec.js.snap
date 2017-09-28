@@ -466,7 +466,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates and pick-month 
             </td>
             <td>
               <button type="button"
-                      class="btn btn--date-picker btn--raised btn--active"
+                      class="btn btn--date-picker btn--raised btn--flat btn--active"
               >
                 <span class="btn__content">
                   May
@@ -2206,7 +2206,7 @@ exports[`VDatePicker.js should match snapshot with month formatting functions 1`
             </td>
             <td>
               <button type="button"
-                      class="btn btn--date-picker btn--raised btn--active"
+                      class="btn btn--date-picker btn--raised btn--flat btn--active"
               >
                 <span class="btn__content">
                   ثور
@@ -2687,7 +2687,7 @@ exports[`VDatePicker.js should match snapshot with pick-month prop 1`] = `
             </td>
             <td>
               <button type="button"
-                      class="btn btn--date-picker btn--raised btn--active"
+                      class="btn btn--date-picker btn--raised btn--flat btn--active"
               >
                 <span class="btn__content">
                   May

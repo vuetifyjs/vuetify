@@ -8,19 +8,19 @@ selection-control($material)
 
   color: $material.selection-controls.active
 
-  .icon,
-  &:not(.input-group--active) .input-group__input
+  .icon--selection-control
     color: $material.text.secondary
 
   &.input-group--active
-    .icon
+    .icon--selection-control
       color: inherit
 
   &.input-group--disabled
     .input-group__input
       color: $material.text.disabled
 
-      .icon
+      .icon--radio,
+      .icon--checkbox
         color: inherit
 
 theme(selection-control, "input-group--selection-controls")
@@ -35,8 +35,9 @@ theme(selection-control, "input-group--selection-controls")
 /** Input */
 .input-group.input-group--selection-controls
   display: flex
+  padding: 0
 
-  .icon
+  .icon--selection-control
     cursor: pointer
     position: absolute
     left: 0
@@ -52,11 +53,18 @@ theme(selection-control, "input-group--selection-controls")
     position: relative
 
     // Needed for safari
-    .icon
+    .icon--selection-control
       align-self: center
-      color: inherit
       height: 30px
       margin: auto
+  
+  &.input-group--error
+    label
+      color: inherit
+
+    .input-group__input
+      .icon--selection-control
+        color: inherit
 
 /** Label */
 .input-group.input-group--selection-controls label
@@ -93,3 +101,22 @@ theme(selection-control, "input-group--selection-controls")
     opacity: 0
     transition: $ripple-animation-transition
     transform-origin: center center
+
+/** Appended and prepended icons */
+.input-group--prepend-icon
+  &.input-group--selection-controls
+    .icon--selection-control,
+    .input-group--selection-controls__ripple
+      left: 38px
+      
+    label
+      left: 76px
+      
+.input-group--prepend-icon
+  &.radio-group--row
+    .icon--selection-control,
+    .input-group--selection-controls__ripple
+      left: 14px
+    
+    label
+      left: 52px

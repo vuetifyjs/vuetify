@@ -19,6 +19,7 @@ import VBtn from '../VBtn'
 import Colorable from '../../mixins/colorable'
 import Filterable from '../../mixins/filterable'
 import Input from '../../mixins/input'
+import Maskable from '../../mixins/maskable'
 
 // Component level mixins
 import Autocomplete from './mixins/select-autocomplete'
@@ -51,7 +52,7 @@ export default {
     ClickOutside
   },
 
-  mixins: [Autocomplete, Colorable, Input, Filterable, Generators],
+  mixins: [Autocomplete, Colorable, Filterable, Generators, Input, Maskable],
 
   data () {
     return {
@@ -98,6 +99,10 @@ export default {
     items: {
       type: Array,
       default: () => []
+    },
+    itemAvatar: {
+      type: String,
+      default: 'avatar'
     },
     itemText: {
       type: String,
@@ -177,7 +182,7 @@ export default {
       // Show all available items
       const items = (this.isAutocomplete &&
         this.isDirty &&
-        this.searchValue === this.selectedItem)
+        this.searchValue === this.getText(this.selectedItem))
         ? this.computedItems
         : this.filterSearch()
 

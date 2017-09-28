@@ -1,19 +1,19 @@
 @import '../bootstrap'
 
 .badge
+  display: inline-block
   position: relative
   
   &__badge
     color: $badge-color
     display: flex
     position: absolute
-    font-family: $badge-font-family
-    font-feature-settings: 'liga'
     font-size: $badge-font-size
     top: -($badge-height / 2)
     right: -($badge-width)
     border-radius: $badge-border-radius
     height: $badge-height
+    line-height: $badge-height
     width: $badge-width
     justify-content: center
     align-items: center
@@ -26,17 +26,17 @@
 
   &--overlap
     .badge__badge
-      top: -12px
-      right: -12px
+      top: -8px
+      right: -8px
 
     &.badge--left
       .badge__badge
-        left: -12px
+        left: -8px
         right: initial
 
     &.badge--bottom
       .badge__badge
-        bottom: -12px
+        bottom: -8px
         top: initial
 
   &--left

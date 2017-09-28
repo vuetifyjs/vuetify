@@ -2,26 +2,23 @@ import { VFadeTransition } from '../transitions'
 import VIcon from '../VIcon'
 
 import Colorable from '../../mixins/colorable'
+import Rippleable from '../../mixins/rippleable'
 import TabFocusable from '../../mixins/tab-focusable'
 import Themeable from '../../mixins/themeable'
-
-import Ripple from '../../directives/ripple'
 
 export default {
   name: 'v-radio',
 
   inheritAttrs: false,
 
-  inject: ['isMandatory', 'name'],
+  inject: ['isMandatory', 'name', 'registerChild', 'unregisterChild'],
 
   components: {
     VFadeTransition,
     VIcon
   },
 
-  mixins: [Colorable, TabFocusable, Themeable],
-
-  directives: { Ripple },
+  mixins: [Colorable, Rippleable, TabFocusable, Themeable],
 
   props: {
     disabled: Boolean,
@@ -95,7 +92,7 @@ export default {
           keydown: e => {
             if ([13, 32].includes(e.keyCode)) {
               e.preventDefault()
-              this.click()
+              this.toggle()
             }
           },
           blur: e => {
@@ -108,11 +105,11 @@ export default {
     genLabel () {
       return this.$createElement('label', {
         on: {
-          click: this.click
+          click: this.toggle
         }
       }, this.$slots.label || this.label)
     },
-    click () {
+    toggle () {
       const mandatory = this.isMandatory &&
         this.isMandatory() || false
 
@@ -132,9 +129,18 @@ export default {
     }
   },
 
+  mounted () {
+    this.registerChild(this)
+  },
+
+  beforeDestroy () {
+    this.unregisterChild(this)
+  },
+
   render (h) {
     const transition = h('v-fade-transition', {}, [
       h('v-icon', {
+        staticClass: 'icon--selection-control',
         'class': {
           'icon--radio': this.isActive
         },
@@ -142,19 +148,6 @@ export default {
       }, this.icon)
     ])
 
-    const ripple = h('div', {
-      'class': 'input-group--selection-controls__ripple',
-      on: Object.assign({}, {
-        click: this.click
-      }, this.$listeners),
-      directives: [
-        {
-          name: 'ripple',
-          value: this.disabled ? false : { center: true }
-        }
-      ]
-    })
-
-    return this.genWrapper([transition, ripple])
+    return this.genWrapper([transition, this.genRipple()])
   }
 }

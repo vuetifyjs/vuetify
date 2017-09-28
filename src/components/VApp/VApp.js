@@ -2,13 +2,14 @@ require('../../stylus/components/_app.styl')
 
 import Breakpoint from '../../util/breakpoint'
 import Themeable from '../../mixins/themeable'
+import TouchSupport from '../../util/touchSupport'
 
 import Resize from '../../directives/resize'
 
 export default {
   name: 'v-app',
 
-  mixins: [Breakpoint, Themeable],
+  mixins: [Breakpoint, Themeable, TouchSupport],
 
   directives: {
     Resize

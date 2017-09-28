@@ -17,6 +17,9 @@ list($material)
   .divider
     background-color: $material.dividers
 
+  .list__tile__mask
+    color: $material.text.disabled
+
 theme(list, "list")
 
 .list
@@ -91,7 +94,7 @@ theme(list, "list")
       min-width: 56px
       align-items: center
 
-      .input-group
+      .input-group--selection-controls
         align-items: center
         padding: 0
 
@@ -254,4 +257,3 @@ theme(list, "list")
   &.list--three-line
     .list__tile__avatar
       align-items: flex-start
-      padding-top: 6px

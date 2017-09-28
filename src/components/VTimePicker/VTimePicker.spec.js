@@ -126,4 +126,21 @@ test('VTimePicker.js', ({ mount }) => {
     expect([0, 5, 45, 50, 55].map(minute => wrapper.vm.isAllowed('minute', minute)))
       .toEqual([true, true, false, false, true])
   })
+
+  it('should reset selectingHour when saved/canceled', async () => {
+    const wrapper = mount(VTimePicker, {
+      propsData: {
+        value: null
+      }
+    })
+
+    wrapper.vm.selectingHour = false
+    wrapper.vm.save()
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.selectingHour).toBe(true)
+    wrapper.vm.selectingHour = false
+    wrapper.vm.cancel()
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.selectingHour).toBe(true)
+  })
 })

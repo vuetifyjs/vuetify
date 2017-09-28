@@ -8,6 +8,7 @@ import VSelect from '../VSelect'
 
 import Filterable from '../../mixins/filterable'
 import Themeable from '../../mixins/themeable'
+import Loadable from '../../mixins/loadable'
 import Head from './mixins/head'
 import Body from './mixins/body'
 import Foot from './mixins/foot'
@@ -45,7 +46,7 @@ export default {
     }
   },
 
-  mixins: [Head, Body, Filterable, Foot, Progress, Themeable],
+  mixins: [Head, Body, Filterable, Foot, Loadable, Progress, Themeable],
 
   props: {
     expand: {
@@ -149,17 +150,13 @@ export default {
       type: Number,
       default: null
     },
-    loading: {
-      type: [Boolean, String],
-      default: false
-    },
     itemKey: {
       type: String,
       default: 'id'
     },
     pagination: {
       type: Object,
-      default: null
+      default: () => {}
     }
   },
 
@@ -173,7 +170,14 @@ export default {
       }
     },
     computedPagination () {
-      return this.pagination || this.defaultPagination
+      return this.hasPagination
+        ? this.pagination
+        : this.defaultPagination
+    },
+    hasPagination () {
+      const pagination = this.pagination || {}
+
+      return Object.keys(pagination).length > 0
     },
     hasSelectAll () {
       return this.selectAll !== undefined && this.selectAll !== false
@@ -228,7 +232,7 @@ export default {
       )
 
       return this.hideActions &&
-        !this.pagination
+        !this.hasPagination
         ? items
         : items.slice(this.pageStart, this.pageStop)
     },
@@ -256,12 +260,13 @@ export default {
 
   methods: {
     updatePagination (val) {
-      const pagination = this.pagination || this.defaultPagination
+      const pagination = this.hasPagination
+        ? this.pagination
+        : this.defaultPagination
       const updatedPagination = Object.assign({}, pagination, val)
+      this.$emit('update:pagination', updatedPagination)
 
-      if (this.pagination) {
-        this.$emit('update:pagination', updatedPagination)
-      } else {
+      if (!this.hasPagination) {
         this.defaultPagination = updatedPagination
       }
     },
