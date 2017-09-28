@@ -18,6 +18,7 @@
     "build:dist": "rimraf dist && cross-env NODE_ENV=production webpack --config build/config.js --progress --hide-modules",
     "build:es5": "rimraf es5 && cross-env NODE_ENV=es5 babel src --out-dir es5",
     "debug-build": "node --inspect --debug-brk build/config.js",
+    "version": "npm run build",
     "test": "cross-env NODE_ENV=test jest",
     "lint": "eslint --ext .js,.vue src",
     "precommit": "yarn run lint && yarn test",
