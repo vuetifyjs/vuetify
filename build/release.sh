@@ -11,7 +11,6 @@ then
   echo "Releasing $VERSION ..."
 
   VERSION=$VERSION npm run build
-  VERSION=$VERSION npm run build:es5
   git add -A
   git commit -m "[build] $VERSION"
   npm version $VERSION --message "[release] $VERSION"

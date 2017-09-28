@@ -1,0 +1,15 @@
+.github/
+.vscode/
+npm-debug.log
+.idea/
+coverage/
+report.html
+.vs/
+dev/
+build/
+**/*.spec.js
+/.travis.yml
+/.babelrc
+/package-lock.json
+/postcss.config.js
+/yarn.lock
