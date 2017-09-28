@@ -7,6 +7,8 @@ import Toggleable from '../../mixins/toggleable'
 
 import ClickOutside from '../../directives/click-outside'
 
+import { getZIndex } from '../../util/helpers'
+
 export default {
   name: 'v-dialog',
 
@@ -46,6 +48,27 @@ export default {
         'dialog--stacked-actions': this.stackedActions && !this.fullscreen,
         'dialog--scrollable': this.scrollable
       }
+    },
+    contentClasses () {
+      return {
+        'dialog__content': true,
+        'dialog--content--active': this.isActive
+      }
+    },
+    activeZIndex () {
+      if (!this.isActive) return 0
+      var excludeEl = this.$refs.content
+      // start with lowest allowed z-index (5)
+      var zis = [5]
+      // get z-index for all active dialogs
+      var activeDialogs = document.getElementsByClassName('dialog--content--active')
+      for (let i = 0, l = activeDialogs.length; i < l; i += 1) {
+        if (excludeEl !== activeDialogs[i]) {
+          zis.push(getZIndex(activeDialogs[i]))
+        }
+      }
+      // Return max current z-index + 2 (overlay will be this z-index - 1)
+      return Math.max(...zis) + 2
     }
   },
 
@@ -113,7 +136,10 @@ export default {
     )])
 
     children.push(h('div', {
-      'class': 'dialog__content',
+      'class': this.contentClasses,
+      style: {
+        zIndex: this.activeZIndex
+      },
       ref: 'content'
     }, [dialog]))
 
