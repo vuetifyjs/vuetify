@@ -25,7 +25,7 @@ export default {
     },
     dateGenTD (day) {
       const date = new Date(this.tableYear, this.tableMonth, day, 12)
-      const buttonText = this.supportsLocaleFormat
+      const buttonText = this.localeDays && this.supportsLocaleFormat
         ? date.toLocaleDateString(this.locale, { day: 'numeric' })
         : day
       const button = this.$createElement('button', {
