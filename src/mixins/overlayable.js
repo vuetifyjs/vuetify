@@ -35,13 +35,15 @@ export default {
 
       this.overlay = document.createElement('div')
       this.overlay.className = 'overlay'
-      this.overlay.onclick = () => {
+      this.overlay.onclick = (e) => {
         if (this.permanent) return
         else if (!this.persistent) this.isActive = false
         else if (this.isMobile) this.isActive = false
+        if (this.overlayZIndex !== undefined) e.stopPropagation()
       }
 
       if (this.absolute) this.overlay.className += ' overlay--absolute'
+      if (this.overlayZIndex !== undefined) this.overlay.style.zIndex = this.overlayZIndex - 1
 
       this.hideScroll()
 

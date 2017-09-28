@@ -115,3 +115,9 @@ export function getObjectValueByPath (obj, path) {
 export function createRange (length) {
   return [...Array.from({ length }, (v, k) => k)]
 }
+
+export function getZIndex (el) {
+  var zi = document.defaultView.getComputedStyle(el).getPropertyValue('z-index')
+  if (isNaN(zi)) return getZIndex(el.parentNode)
+  return zi
+}
