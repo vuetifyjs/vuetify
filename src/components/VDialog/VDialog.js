@@ -105,7 +105,12 @@ export default {
       directives: [
         { name: 'click-outside', value: this.closeConditional },
         { name: 'show', value: this.isActive }
-      ]
+      ],
+      on: {
+        click: e => {
+          e.stopPropagation()
+        }
+      }
     }
 
     if (!this.fullscreen) {
