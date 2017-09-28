@@ -8,8 +8,11 @@ report.html
 dev/
 build/
 **/*.spec.js
-/.travis.yml
 /.babelrc
+/.editorconfig
+/.eslintignore
+/.eslintrc.js
+/.travis.yml
 /package-lock.json
 /postcss.config.js
 /yarn.lock
