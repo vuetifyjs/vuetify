@@ -59,6 +59,7 @@ export default {
       if (!this.menuIsActive &&
         [13, 32, 38, 40].includes(e.keyCode)
       ) {
+        e.preventDefault()
         return this.showMenuItems()
       } else if ([9, 27].includes(e.keyCode)) {
         // If select is being tabbed, blur
@@ -76,7 +77,7 @@ export default {
         })
       }
 
-      if (!this.tags ||
+      if (!this.isAutocomplete ||
         ![32].includes(e.keyCode)
       ) this.$refs.menu.changeListIndex(e)
 
