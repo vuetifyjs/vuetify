@@ -25,7 +25,8 @@ export default {
   methods: {
     genFiltered (text) {
       if (!this.isAutocomplete ||
-        !this.searchValue
+        !this.searchValue ||
+        this.filteredItems.length < 1
       ) return text
 
       text = (text || '').toString()
@@ -40,8 +41,6 @@ export default {
     getMaskedCharacters (text) {
       const searchValue = (this.searchValue || '').toString().toLowerCase()
       const index = text.toLowerCase().indexOf(searchValue)
-
-      if (index < 0) return text
 
       const start = text.slice(0, index)
       const middle = text.slice(index, index + searchValue.length)

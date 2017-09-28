@@ -380,4 +380,22 @@ test('VSelect.vue', ({ mount }) => {
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
+
+  it('should not filter text with no items', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        autocomplete: true,
+        items: ['foo', 'bar']
+      }
+    })
+
+    wrapper.setProps({ searchInput: 'asdf' })
+    wrapper.update()
+    await wrapper.vm.$nextTick()
+    const tile = wrapper.find('.list__tile__title')[0]
+
+    expect(tile.text()).toBe('No data available')
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 })
