@@ -5,6 +5,7 @@ const Vuetify = {
     const $vuetify = {
       load,
       application: {
+        bar: 0,
         top: 0,
         bottom: 0,
         left: 0,

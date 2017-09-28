@@ -58,6 +58,9 @@ export default {
 
       return this.heights.mobile
     },
+    computedMarginTop () {
+      return this.marginTop + this.$vuetify.application.bar
+    },
     classes () {
       return {
         'toolbar': true,
@@ -86,7 +89,7 @@ export default {
     },
     styles () {
       return {
-        marginTop: this.marginTop,
+        marginTop: `${this.computedMarginTop}px`,
         paddingLeft: `${this.paddingLeft}px`,
         paddingRight: `${this.paddingRight}px`
       }
@@ -95,8 +98,10 @@ export default {
 
   watch: {
     isScrolling (val) {
-      if (!val) this.marginTop = 0
-      else (this.marginTop = `${-this.$refs.content.clientHeight - 6}px`)
+      this.marginTop = val
+        ? -this.$refs.content.clientHeight - 6
+        : 0
+
       this.updateApplication()
     }
   },
