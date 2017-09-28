@@ -55,9 +55,6 @@ export default {
         'dialog--content--active': this.isActive
       }
     },
-    overlayZIndex () {
-      return this.activeZIndex - 1
-    },
     activeZIndex () {
       if (!this.isActive) return 0
       var excludeEl = this.$refs.content

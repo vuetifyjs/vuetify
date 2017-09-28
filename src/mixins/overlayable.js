@@ -39,11 +39,11 @@ export default {
         if (this.permanent) return
         else if (!this.persistent) this.isActive = false
         else if (this.isMobile) this.isActive = false
-        if (this.overlayZIndex !== undefined) e.stopPropagation()
+        if (this.activeZIndex !== undefined) e.stopPropagation()
       }
 
       if (this.absolute) this.overlay.className += ' overlay--absolute'
-      if (this.overlayZIndex !== undefined) this.overlay.style.zIndex = this.overlayZIndex - 1
+      if (this.activeZIndex !== undefined) this.overlay.style.zIndex = this.activeZIndex - 1
 
       this.hideScroll()
 
