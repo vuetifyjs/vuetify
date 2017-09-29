@@ -56,14 +56,17 @@ export default {
       }
     },
     activeZIndex () {
-      if (!this.isActive) return 0
-      var excludeEl = this.$refs.content
+      var thisContent = this.$refs.content
+      if (!this.isActive) {
+        // Return zero if we've not yet been created, else return our last z-index so close transition dont look funky
+        return thisContent ? getZIndex(thisContent) : 0
+      }
       // start with lowest allowed z-index (5)
       var zis = [5]
       // get z-index for all active dialogs
       var activeDialogs = document.getElementsByClassName('dialog--content--active')
       for (let i = 0, l = activeDialogs.length; i < l; i += 1) {
-        if (excludeEl !== activeDialogs[i]) {
+        if (thisContent !== activeDialogs[i]) {
           zis.push(getZIndex(activeDialogs[i]))
         }
       }
