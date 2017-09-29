@@ -158,6 +158,9 @@ export default {
       this.$emit('blur', e)
     },
     focus (e) {
+      if (!this.$refs.input) {
+        return
+      }
       this.isFocused = true
       if (document.activeElement !== this.$refs.input) {
         this.$refs.input.focus()
