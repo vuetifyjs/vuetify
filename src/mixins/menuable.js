@@ -1,5 +1,21 @@
 import Positionable from './positionable'
 
+const dimensions = {
+  activator: {
+    top: 0, left: 0,
+    bottom: 0, right: 0,
+    width: 0, height: 0,
+    offsetTop: 0, scrollHeight: 0
+  },
+  content: {
+    top: 0, left: 0,
+    bottom: 0, right: 0,
+    width: 0, height: 0,
+    offsetTop: 0, scrollHeight: 0
+  },
+  hasWindow: false
+}
+
 /**
  * Menuable
  *
@@ -16,21 +32,7 @@ export default {
   data: () => ({
     absoluteX: 0,
     absoluteY: 0,
-    dimensions: {
-      activator: {
-        top: 0, left: 0,
-        bottom: 0, right: 0,
-        width: 0, height: 0,
-        offsetTop: 0, scrollHeight: 0
-      },
-      content: {
-        top: 0, left: 0,
-        bottom: 0, right: 0,
-        width: 0, height: 0,
-        offsetTop: 0, scrollHeight: 0
-      },
-      hasWindow: false
-    },
+    dimensions: Object.assign({}, dimensions),
     isContentActive: false,
     pageYOffset: 0
   }),
@@ -63,6 +65,7 @@ export default {
       type: Number,
       default: 0
     },
+    offsetOverflow: Boolean,
     positionX: {
       type: Number,
       default: null
@@ -150,22 +153,32 @@ export default {
         left = (
           innerWidth -
           maxWidth -
-          (innerWidth > 1280 ? 30 : 12) // Account for scrollbar
+          (innerWidth > (1280 - 16) ? 30 : 12) // Account for scrollbar
         )
-      } else if (this.left && left < 0) left = 12
+      }
+
+      if (left < 0) left = 12
 
       return left
     },
     calcYOverflow (top) {
       const documentHeight = this.getInnerHeight()
       const toTop = this.pageYOffset + documentHeight
+      const activator = this.dimensions.activator
       const contentHeight = this.dimensions.content.height
       const totalHeight = top + contentHeight
+      const isOverflowing = toTop < totalHeight
 
+      // If overflowing bottom and offset
+      if (isOverflowing && this.offsetOverflow) {
+        top = activator.offsetTop - contentHeight
       // If overflowing bottom
-      if (toTop < totalHeight && !this.allowOverflow) top = toTop - contentHeight - 12
+      } else if (isOverflowing && !this.allowOverflow) {
+        top = toTop - contentHeight - 12
       // If overflowing top
-      else if (top < this.pageYOffset && !this.allowOverflow) top = this.pageYOffset + 12
+      } else if (top < this.pageYOffset && !this.allowOverflow) {
+        top = this.pageYOffset + 12
+      }
 
       return top < 12 ? 12 : top
     },
@@ -235,23 +248,30 @@ export default {
     sneakPeek (cb) {
       requestAnimationFrame(() => {
         const el = this.$refs.content
-        const currentDisplay = el.style.display
-
         el.style.display = 'inline-block'
         cb()
-        el.style.display = currentDisplay
+        el.style.display = 'none'
       })
     },
     startTransition () {
       requestAnimationFrame(() => (this.isContentActive = true))
     },
+    resetDimensions () {
+      this.dimensions = Object.assign({}, dimensions)
+    },
     updateDimensions () {
+      // Ensure that overflow calculation
+      // can work properly every update
+      this.resetDimensions()
+
+      // Activate should already be shown
+      this.dimensions.activator = !this.hasActivator || this.absolute
+        ? this.absolutePosition()
+        : this.measure(this.getActivator())
+
+      // Display and hide to get dimensions
       this.sneakPeek(() => {
-        this.dimensions = {
-          activator: !this.hasActivator || this.absolute
-            ? this.absolutePosition() : this.measure(this.getActivator()),
-          content: this.measure(this.$refs.content)
-        }
+        this.dimensions.content = this.measure(this.$refs.content)
       })
     }
   }
