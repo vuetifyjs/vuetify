@@ -212,7 +212,7 @@ export default {
         data.domProps.rows = this.rows
       }
 
-      if (this.mask) {
+      if (this.mask && typeof this.mask === 'string') {
         data.attrs.maxlength = this.masked.length
       }
 
