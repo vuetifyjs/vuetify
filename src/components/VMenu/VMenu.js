@@ -43,7 +43,8 @@ export default {
       stopIndex: 0,
       hasJustFocused: false,
       openTimeout: null,
-      closeTimeout: null
+      closeTimeout: null,
+      resizeTimeout: null
     }
   },
 
@@ -156,7 +157,16 @@ export default {
 
       // Account for screen resize
       // and orientation change
+      this.$refs.content.offsetWidth
       this.updateDimensions()
+
+      // When resizing to a smaller width
+      // content width is evaluated before
+      // the new activator width has been
+      // set, causing it to not size properly
+      // hacky but will revisit in the future
+      clearTimeout(this.resizeTimeout)
+      this.resizeTimeout = setTimeout(this.updateDimensions, 100)
     }
   },
 

@@ -248,6 +248,9 @@ export default {
     sneakPeek (cb) {
       requestAnimationFrame(() => {
         const el = this.$refs.content
+
+        if (this.isShown(el)) return cb()
+
         el.style.display = 'inline-block'
         cb()
         el.style.display = 'none'
@@ -255,6 +258,9 @@ export default {
     },
     startTransition () {
       requestAnimationFrame(() => (this.isContentActive = true))
+    },
+    isShown (el) {
+      return el.style.display !== 'none'
     },
     resetDimensions () {
       this.dimensions = Object.assign({}, dimensions)
