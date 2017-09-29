@@ -87,7 +87,7 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
                        style="display: inline-block;"
                   >
                     <div class="menu__content menu__content--select menu__content--auto"
-                         style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: -16px; z-index: 6; display: none;"
+                         style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 6; display: none;"
                     >
                       <div class="card"
                            style="height: auto;"

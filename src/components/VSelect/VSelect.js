@@ -258,6 +258,20 @@ export default {
         }
       })
     },
+    isFocused (val) {
+      // Always ensure caret is
+      // in correct position
+      if (this.isAutocomplete &&
+        !this.mask &&
+        !this.isMultiple
+      ) {
+        const len = (this.selectedItem || '').length
+
+        requestAnimationFrame(() => {
+          this.$refs.input.setSelectionRange(len, len)
+        })
+      }
+    },
     items (val) {
       if (this.cacheItems) {
         this.cachedItems = this.filterDuplicates(this.cachedItems.concat(val))
