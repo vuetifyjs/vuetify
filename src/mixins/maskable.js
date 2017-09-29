@@ -30,7 +30,10 @@ export default {
   }),
 
   props: {
-    fillMaskBlanks: Boolean,
+    fillMaskBlanks: {
+      type: Boolean,
+      default: true
+    },
     mask: {
       type: [Object, String],
       default: null

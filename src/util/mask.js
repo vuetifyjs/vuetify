@@ -62,7 +62,7 @@ const convert = (mask, char) => {
  *
  * @return {Boolean}
  */
-export const isMaskDelimiter = char => char.match(defaultDelimiters)
+export const isMaskDelimiter = char => char && char.match(defaultDelimiters)
 
 /**
  * Mask Validation
@@ -89,16 +89,15 @@ const maskValidates = (mask, char) => {
  *
  * @return {String}
  */
-export const maskText = (text, masked, fillMaskBlanks = false) => {
+export const maskText = (text, masked, fillMaskBlanks = true) => {
   if (!masked.length || !text.length) return text
   if (!Array.isArray(masked)) masked = masked.split('')
 
   let textIndex = 0
+  let maskIndex = 0
   let newText = ''
-  masked.forEach((mask, i) => {
-    if (textIndex >= text.length &&
-      !fillMaskBlanks
-    ) return
+  while (maskIndex < masked.length) {
+    const mask = masked[maskIndex]
 
     // Assign the next character
     const char = text[textIndex]
@@ -109,14 +108,18 @@ export const maskText = (text, masked, fillMaskBlanks = false) => {
       newText += mask
       textIndex++
     // Check if not mask
-    } else if (!isMask(mask)) {
+    } else if (!isMask(mask) && fillMaskBlanks) {
       newText += mask
     // Check if is mask and validates
     } else if (maskValidates(mask, char)) {
       newText += convert(mask, char)
       textIndex++
+    } else {
+      return newText
     }
-  })
+
+    maskIndex++
+  }
 
   return newText
 }
