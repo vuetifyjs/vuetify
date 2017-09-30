@@ -1,6 +1,5 @@
 require('../../stylus/components/_dialogs.styl')
 
-import Bootable from '../../mixins/bootable'
 import Detachable from '../../mixins/detachable'
 import Overlayable from '../../mixins/overlayable'
 import Toggleable from '../../mixins/toggleable'
@@ -10,7 +9,7 @@ import ClickOutside from '../../directives/click-outside'
 export default {
   name: 'v-dialog',
 
-  mixins: [Bootable, Detachable, Overlayable, Toggleable],
+  mixins: [Detachable, Overlayable, Toggleable],
 
   directives: {
     ClickOutside

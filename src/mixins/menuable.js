@@ -97,10 +97,6 @@ export default {
     }
   },
 
-  mounted () {
-    this.checkForWindow()
-  },
-
   methods: {
     absolutePosition () {
       return {

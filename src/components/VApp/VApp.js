@@ -26,10 +26,6 @@ export default {
     }
   },
 
-  mounted () {
-    this.onResize()
-  },
-
   render (h) {
     const data = {
       staticClass: 'application',

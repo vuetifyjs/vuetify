@@ -1,7 +1,6 @@
 require('../../stylus/components/_menus.styl')
 
 // Mixins
-import Bootable from '../../mixins/bootable'
 import Detachable from '../../mixins/detachable'
 import Menuable from '../../mixins/menuable.js'
 import Toggleable from '../../mixins/toggleable'
@@ -21,7 +20,6 @@ export default {
 
   mixins: [
     Activator,
-    Bootable,
     Detachable,
     Generators,
     Keyable,
