@@ -17,7 +17,6 @@ export default {
 
   props: {
     dismissible: Boolean,
-    hideIcon: Boolean,
     icon: String
   },
 
@@ -27,22 +26,16 @@ export default {
         'alert--dismissible': this.dismissible,
         [this.color || 'error']: true
       }
-    },
-
-    mdIcon () {
-      switch (true) {
-        case !!this.icon: return this.icon
-      }
     }
   },
 
   render (h) {
     const children = [h('div', this.$slots.default)]
 
-    if (!this.hideIcon && this.mdIcon) {
+    if (this.icon) {
       children.unshift(h('v-icon', {
         'class': 'alert__icon'
-      }, this.mdIcon))
+      }, this.icon))
     }
 
     if (this.dismissible) {
