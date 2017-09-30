@@ -86,6 +86,7 @@ export default {
         : parseFloat(this.backgroundOpacity)
 
       return {
+        height: this.active ? 'auto' : 0,
         opacity: backgroundOpacity,
         width: `${this.bufferValue}%`
       }
