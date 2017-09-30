@@ -22,16 +22,16 @@ test('mask.js', ({ mount }) => {
   })
 
   it('should not fill mask blanks if told not to', () => {
-    expect(maskText('55', '## - ##', false)).toBe('55')
+    expect(maskText('55', '## - ##', true)).toBe('55')
   })
 
   it('should not fill if no value is provided', () => {
     expect(maskText('', '## - ##')).toBe('')
   })
 
-  it('should only allow exact input if fillMaskBlanks is false', () => {
-    expect(maskText('4567', '(###) #', false)).toBe('')
-    expect(maskText('(456)', '(###) #', false)).toBe('(456)')
+  it('should only allow exact input if dontFillMaskBlanks is true', () => {
+    expect(maskText('4567', '(###) #', true)).toBe('')
+    expect(maskText('(456)', '(###) #', true)).toBe('(456)')
   })
 
   it('should convert alphanumeric to the proper case', () => {

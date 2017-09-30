@@ -85,11 +85,11 @@ const maskValidates = (mask, char) => {
  *
  * @param {String} text
  * @param {Array|String} masked
- * @param {Boolean} fillMaskBlanks
+ * @param {Boolean} dontFillMaskBlanks
  *
  * @return {String}
  */
-export const maskText = (text, masked, fillMaskBlanks = true) => {
+export const maskText = (text, masked, dontFillMaskBlanks) => {
   if (!masked.length || !text.length) return text
   if (!Array.isArray(masked)) masked = masked.split('')
 
@@ -108,7 +108,7 @@ export const maskText = (text, masked, fillMaskBlanks = true) => {
       newText += mask
       textIndex++
     // Check if not mask
-    } else if (!isMask(mask) && fillMaskBlanks) {
+    } else if (!isMask(mask) && !dontFillMaskBlanks) {
       newText += mask
     // Check if is mask and validates
     } else if (maskValidates(mask, char)) {
