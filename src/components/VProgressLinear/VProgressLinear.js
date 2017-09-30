@@ -85,14 +85,11 @@ export default {
         ? (this.backgroundColor ? 1 : 0.3)
         : parseFloat(this.backgroundOpacity)
 
-      const styles = {
+      return {
+        height: this.active ? 'auto' : 0,
         opacity: backgroundOpacity,
         width: `${this.bufferValue}%`
       }
-      if (!this.active) {
-        styles.height = 0
-      }
-      return styles
     }
   },
 
