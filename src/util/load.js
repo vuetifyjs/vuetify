@@ -1,3 +1,15 @@
+const callbacks = []
+
+window.addEventListener('load', handler)
+
+function handler () {
+  for (const cb of callbacks) {
+    cb()
+  }
+  callbacks.length = 0
+  window.removeEventListener('load', handler)
+}
+
 function load (cb, i = 0) {
   if (document.readyState === 'complete') {
     return setTimeout(cb, 0)
@@ -7,12 +19,7 @@ function load (cb, i = 0) {
     return setTimeout(() => load(cb, i + 1), 200)
   }
 
-  const handler = () => {
-    cb()
-    window.removeEventListener('load', handler)
-  }
-
-  window.addEventListener('load', handler)
+  callbacks.push(cb)
 }
 
 export default load
