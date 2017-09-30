@@ -3,6 +3,10 @@ function load (cb, i = 0) {
     document._loadCallbacks = []
   }
 
+  if (document.readyState === 'complete') {
+    return cb()
+  }
+
   document._loadCallbacks.push(cb)
 }
 
