@@ -190,7 +190,7 @@ export default {
       this.deactivate()
     },
     checkForWindow () {
-      this.hasWindow = window !== 'undefined'
+      this.hasWindow = typeof window !== 'undefined'
 
       if (this.hasWindow) {
         this.pageYOffset = this.getOffsetTop()
