@@ -280,7 +280,7 @@ export default {
       this.$refs.menu.listIndex = -1
 
       this.searchValue && this.$nextTick(() => {
-        this.$refs.menu.listIndex = 0
+        this.$refs.menu && (this.$refs.menu.listIndex = 0)
       })
 
       this.genSelectedItems()
@@ -317,7 +317,7 @@ export default {
       this.$refs.menu.listIndex = null
 
       this.$nextTick(() => {
-        this.$refs.menu.listIndex = val ? 0 : -1
+        this.$refs.menu && (this.$refs.menu.listIndex = val ? 0 : -1)
       })
     },
     selectedItems () {
@@ -568,7 +568,7 @@ export default {
           this.$refs.input
         ) this.$refs.input.focus()
         else this.$el.focus()
-        this.$refs.menu.listIndex = savedIndex
+        this.$refs.menu && (this.$refs.menu.listIndex = savedIndex)
       })
     },
     showMenuItems () {
