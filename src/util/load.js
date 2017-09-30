@@ -7,7 +7,12 @@ function load (cb, i = 0) {
     return setTimeout(() => load(cb, i + 1), 200)
   }
 
-  window.addEventListener('load', cb)
+  const handler = () => {
+    cb()
+    window.removeEventListener('load', handler)
+  }
+
+  window.addEventListener('load', handler)
 }
 
 export default load
