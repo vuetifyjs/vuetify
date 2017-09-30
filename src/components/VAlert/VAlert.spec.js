@@ -50,11 +50,7 @@ test('VAlert.vue', ({ mount }) => {
   })
 
   it('should have no icon', () => {
-    const wrapper = mount(VAlert, {
-      propsData: {
-        hideIcon: true
-      }
-    })
+    const wrapper = mount(VAlert)
 
     expect(wrapper.contains('.icon')).toBe(false)
   })
