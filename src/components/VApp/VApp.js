@@ -26,6 +26,23 @@ export default {
     }
   },
 
+  mounted () {
+    this.runCallbacks()
+  },
+
+  methods: {
+    // Run all load callbacks created
+    // from the load helper utility
+    runCallbacks () {
+      // For unit tests
+      if (!document._loadCallbacks) return
+
+      while (document._loadCallbacks.length) {
+        document._loadCallbacks.pop()()
+      }
+    }
+  },
+
   render (h) {
     const data = {
       staticClass: 'application',
