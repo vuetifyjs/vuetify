@@ -2,7 +2,7 @@ require('../../stylus/components/_alerts.styl')
 
 import VIcon from '../VIcon'
 
-import Contextualable from '../../mixins/contextualable'
+import Colorable from '../../mixins/colorable'
 import Toggleable from '../../mixins/toggleable'
 import Transitionable from '../../mixins/transitionable'
 
@@ -13,7 +13,7 @@ export default {
     VIcon
   },
 
-  mixins: [Contextualable, Toggleable, Transitionable],
+  mixins: [Colorable, Toggleable, Transitionable],
 
   props: {
     dismissible: Boolean,
@@ -24,24 +24,14 @@ export default {
   computed: {
     classes () {
       return {
-        'alert': true,
         'alert--dismissible': this.dismissible,
-        'error': this.error,
-        'info': this.info,
-        'primary': this.primary,
-        'secondary': this.secondary,
-        'success': this.success,
-        'warning': this.warning
+        [this.color || 'error']: true
       }
     },
 
     mdIcon () {
       switch (true) {
         case !!this.icon: return this.icon
-        case this.error: return 'warning'
-        case this.info: return 'info'
-        case this.success: return 'check_circle'
-        case this.warning: return 'priority_high'
       }
     }
   },
@@ -72,6 +62,7 @@ export default {
     }
 
     const alert = h('div', {
+      staticClass: 'alert',
       'class': this.classes,
       directives: [{
         name: 'show',
