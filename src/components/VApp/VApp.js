@@ -27,7 +27,7 @@ export default {
   },
 
   mounted () {
-    this.runCallbacks()
+    window.addEventListener('load', this.runCallbacks)
   },
 
   methods: {
