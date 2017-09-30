@@ -25,7 +25,8 @@ export default {
   methods: {
     genFiltered (text) {
       if (!this.isAutocomplete ||
-        !this.searchValue
+        !this.searchValue ||
+        this.filteredItems.length < 1
       ) return text
 
       text = (text || '').toString()
@@ -40,8 +41,6 @@ export default {
     getMaskedCharacters (text) {
       const searchValue = (this.searchValue || '').toString().toLowerCase()
       const index = text.toLowerCase().indexOf(searchValue)
-
-      if (index < 0) return text
 
       const start = text.slice(0, index)
       const middle = text.slice(index, index + searchValue.length)
@@ -60,6 +59,7 @@ export default {
       if (!this.menuIsActive &&
         [13, 32, 38, 40].includes(e.keyCode)
       ) {
+        e.preventDefault()
         return this.showMenuItems()
       } else if ([9, 27].includes(e.keyCode)) {
         // If select is being tabbed, blur
@@ -77,7 +77,7 @@ export default {
         })
       }
 
-      if (!this.tags ||
+      if (!this.isAutocomplete ||
         ![32].includes(e.keyCode)
       ) this.$refs.menu.changeListIndex(e)
 

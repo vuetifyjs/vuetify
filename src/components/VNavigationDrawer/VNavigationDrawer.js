@@ -89,10 +89,13 @@ export default {
     },
     marginTop () {
       if (!this.app) return 0
+      let marginTop = this.$vuetify.application.bar
 
-      return this.clipped
+      marginTop += this.clipped
         ? this.$vuetify.application.top
         : 0
+
+      return marginTop
     },
     maxHeight () {
       if (!this.app) return '100%'
@@ -230,7 +233,8 @@ export default {
       if (!this.app) return
 
       const width = !this.isActive ||
-        this.$vuetify.breakpoint.width <= this.mobileBreakPoint
+        !this.permanent &&
+        this.$vuetify.breakpoint.width < this.mobileBreakPoint
         ? 0
         : this.calculatedWidth
 

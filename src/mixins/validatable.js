@@ -90,7 +90,7 @@ export default {
     reset () {
       // TODO: Do this another way!
       // This is so that we can reset all types of inputs
-      this.$emit('input', this.multiple ? [] : null)
+      this.$emit('input', this.isMultiple ? [] : null)
       this.$emit('change', null)
 
       this.$nextTick(() => {
@@ -108,6 +108,10 @@ export default {
         const valid = typeof rule === 'function'
           ? rule(typeof value !== 'undefined' ? value : this.inputValue)
           : rule
+
+        if (valid !== true && !['string', 'boolean'].includes(typeof valid)) {
+          throw new TypeError(`Rules should return a string or boolean, received '${typeof valid}' instead`)
+        }
 
         if (valid !== true) {
           this.errorBucket.push(valid)

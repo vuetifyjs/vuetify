@@ -58,29 +58,36 @@ export default {
       const oldText = this.$refs.input.value || ''
       const newText = this.maskText(this.lazyValue || '')
       let position = 0
+      let selection = this.selection
 
-      for (let i = 0; i < this.selection; i++) {
-        isMaskDelimiter(oldText[i]) || position++
+      for (const char of oldText.substr(0, selection)) {
+        isMaskDelimiter(char) || position++
       }
 
-      this.selection = 0
+      selection = 0
       for (const char of newText) {
         isMaskDelimiter(char) || position--
-        this.selection++
+        selection++
         if (position <= 0) break
       }
 
-      this.$refs.input.setSelectionRange(this.selection, this.selection)
+      this.setCaretPosition(selection)
     }
   },
 
   methods: {
-    findRange () {
+    setCaretPosition (selection) {
+      this.selection = selection
+      this.$refs.input.setSelectionRange(selection, selection)
+    },
+    updateRange () {
       const newValue = this.$refs.input.value
+      let selection = this.selection
 
-      while (isMaskDelimiter(newValue.substr(this.selection - 1, 1))) {
-        this.selection++
+      while (isMaskDelimiter(newValue.substr(selection - 1, 1))) {
+        selection++
       }
+      this.setCaretPosition(selection)
     },
     maskText (text) {
       if (!this.mask) return text
@@ -101,9 +108,7 @@ export default {
 
         this.$refs.input.value = this.maskText(this.lazyValue)
 
-        if (!this.deleting) this.findRange()
-
-        this.$refs.input.setSelectionRange(this.selection, this.selection)
+        this.deleting ? this.setCaretPosition(this.selection) : this.updateRange()
       })
     }
   }

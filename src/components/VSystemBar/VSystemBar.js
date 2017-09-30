@@ -1,13 +1,12 @@
 require('../../stylus/components/_system-bars.styl')
 
+import Applicationable from '../../mixins/applicationable'
 import Themeable from '../../mixins/themeable'
 
 export default {
   name: 'v-system-bar',
 
-  functional: true,
-
-  mixins: [Themeable],
+  mixins: [Applicationable, Themeable],
 
   props: {
     lightsOut: Boolean,
@@ -15,15 +14,40 @@ export default {
     window: Boolean
   },
 
-  render (h, { data, props, children }) {
-    data.staticClass = (`system-bar ${data.staticClass || ''}`).trim()
+  computed: {
+    classes () {
+      return {
+        'system-bar': true,
+        'system-bar--lights-out': this.lightsOut,
+        'system-bar--status': this.status,
+        'system-bar--window': this.window,
+        'theme--dark': this.dark,
+        'theme--light': this.light
+      }
+    },
+    computedHeight () {
+      if (this.window) return 32
 
-    if (props.dark) data.staticClass += ' theme--dark'
-    if (props.light) data.staticClass += ' theme--light'
-    if (props.status) data.staticClass += ' system-bar--status'
-    if (props.window) data.staticClass += ' system-bar--window'
-    if (props.lightsOut) data.staticClass += ' system-bar--lights-out'
+      return 24
+    }
+  },
 
-    return h('div', data, children)
+  methods: {
+    updateApplication () {
+      if (!this.app) return
+
+      this.$vuetify.application.bar = this.computedHeight
+    }
+  },
+
+  render (h) {
+    const data = {
+      'class': this.classes,
+      style: {
+        height: `${this.computedHeight}px`
+      }
+    }
+
+    return h('div', data, this.$slots.default)
   }
 }
