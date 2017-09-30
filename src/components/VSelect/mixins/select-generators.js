@@ -13,7 +13,8 @@ export default {
       const offsetY = this.isAutocomplete || this.offset || this.isDropdown
       let nudgeTop = 0
 
-      if (this.solo) nudgeTop = 0
+      if (this.auto) nudgeTop = -18
+      else if (this.solo) nudgeTop = 0
       else if (this.isDropdown) nudgeTop = 26
       else if (offsetY) nudgeTop = 24
 
