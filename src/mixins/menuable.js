@@ -149,7 +149,7 @@ export default {
         left = (
           innerWidth -
           maxWidth -
-          (innerWidth > (1280 - 16) ? 30 : 12) // Account for scrollbar
+          (innerWidth > 600 ? 30 : 12) // Account for scrollbar
         )
       }
 
@@ -266,14 +266,18 @@ export default {
       // can work properly every update
       this.resetDimensions()
 
+      const dimensions = {}
+
       // Activate should already be shown
-      this.dimensions.activator = !this.hasActivator || this.absolute
+      dimensions.activator = !this.hasActivator || this.absolute
         ? this.absolutePosition()
         : this.measure(this.getActivator())
 
       // Display and hide to get dimensions
       this.sneakPeek(() => {
-        this.dimensions.content = this.measure(this.$refs.content)
+        dimensions.content = this.measure(this.$refs.content)
+
+        this.dimensions = dimensions
       })
     }
   }
