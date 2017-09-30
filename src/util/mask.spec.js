@@ -21,6 +21,10 @@ test('mask.js', ({ mount }) => {
     expect(maskText('55', '## - ##')).toBe('55 - ')
   })
 
+  it('should not fill mask blanks if told not to', () => {
+    expect(maskText('55', '## - ##', false)).toBe('55')
+  })
+
   it('should not fill if no value is provided', () => {
     expect(maskText('', '## - ##')).toBe('')
   })

@@ -109,7 +109,7 @@ export default {
       this.$nextTick(() => {
         if (!this.$refs.input) return
 
-        this.$refs.input.value = this.maskText(this.$refs.input.value)
+        this.$refs.input.value = this.maskText(this.lazyValue)
 
         this.deleting ? this.setCaretPosition(this.selection) : this.updateRange()
       })
