@@ -15,7 +15,7 @@ date-picker($material)
 
     &-selector-date
       strong:hover
-        color: $theme.primary
+        color: $material.picker.date
 
     &-selector
       .btn
@@ -47,10 +47,13 @@ date-picker($material)
         border-color: $theme.primary
 
       &.btn--active:after
-        background-color: $theme.primary
+        background-color: $material.picker.date
 
-      &:not(.btn--active):hover:after
-        background-color: alpha($theme.primary, 0.6)
+      &:not(.btn--active):hover
+        color: #fff
+
+        &:after
+          background-color: alpha($material.picker.date, 0.6)
 
 theme(date-picker, "picker--date")
 
