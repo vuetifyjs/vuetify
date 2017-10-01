@@ -19,7 +19,7 @@ export default {
     defaultHeight: 56,
     prominentHeight: 64,
     isExtended: false,
-    isScrolling: false,
+    isScrollingProxy: false,
     marginTop: 0,
     previousScroll: null,
     target: null
@@ -36,6 +36,7 @@ export default {
     flat: Boolean,
     floating: Boolean,
     height: [Number, String],
+    manualScroll: Boolean,
     prominent: Boolean,
     scrollOffScreen: Boolean,
     scrollTarget: String,
@@ -77,6 +78,16 @@ export default {
         'theme--light': this.light
       }
     },
+    isScrolling: {
+      get () {
+        return this.manualScroll != null
+          ? this.manualScroll
+          : this.isScrollingProxy
+      },
+      set (val) {
+        this.isScrollingProxy = val
+      }
+    },
     paddingLeft () {
       if (!this.app || this.clippedLeft) return 0
 
@@ -98,12 +109,12 @@ export default {
 
   watch: {
     isScrolling (val) {
-      this.marginTop = val
-        ? -this.$refs.content.clientHeight - 6
-        : 0
-
-      this.updateApplication()
+      this.whenScrolled(val)
     }
+  },
+
+  mounted () {
+    this.whenScrolled(this.isScrolling)
   },
 
   destroyed () {
@@ -130,7 +141,7 @@ export default {
         this.previousScroll = currentScroll
       }
 
-      this.isScrolling = this.previousScroll < currentScroll
+      this.isScrollingProxy = this.previousScroll < currentScroll
 
       this.previousScroll = currentScroll
     },
@@ -142,6 +153,13 @@ export default {
         : this.isExtended && !this.isScrolling
           ? this.computedHeight * 2
           : this.computedHeight
+    },
+    whenScrolled (val) {
+      this.marginTop = val
+        ? -this.$refs.content.clientHeight - 6
+        : 0
+
+      this.updateApplication()
     }
   },
 

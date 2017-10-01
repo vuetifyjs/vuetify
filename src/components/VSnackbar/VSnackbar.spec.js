@@ -8,6 +8,17 @@ describe('VSnackbar.vue', () => {
     expect(wrapper.hasClass('snack')).toBe(true)
   })
 
+  it('should have a color class', () => {
+    const wrapper = mount(VSnackbar, {
+      propsData: {
+        color: 'orange lighten-2'
+      }
+    })
+
+    expect(wrapper.hasClass('orange')).toBe(true)
+    expect(wrapper.hasClass('lighten-2')).toBe(true)
+  })
+
   it('should have a snack__content class only when active', async () => {
     const wrapper = mount(VSnackbar, {
       propsData: {

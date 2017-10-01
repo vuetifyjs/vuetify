@@ -43,7 +43,7 @@ export default {
   },
 
   render (h) {
-    const isRouteLink = this.active && (this.href || this.to)
+    const isRouteLink = this.active && (this.href || this.to || this.$listeners.click)
     const { tag, data } = isRouteLink ? this.generateRouteLink() : {
       tag: this.tag || 'div',
       data: {

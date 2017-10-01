@@ -23,9 +23,7 @@ export default {
 
   methods: {
     showLazyContent (content) {
-      return this.lazy &&
-        this.isBooted ||
-        !this.lazy
+      return (this.isBooted || !this.lazy)
         ? content
         : null
     }

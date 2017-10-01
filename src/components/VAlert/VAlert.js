@@ -2,7 +2,7 @@ require('../../stylus/components/_alerts.styl')
 
 import VIcon from '../VIcon'
 
-import Contextualable from '../../mixins/contextualable'
+import Colorable from '../../mixins/colorable'
 import Toggleable from '../../mixins/toggleable'
 import Transitionable from '../../mixins/transitionable'
 
@@ -13,35 +13,18 @@ export default {
     VIcon
   },
 
-  mixins: [Contextualable, Toggleable, Transitionable],
+  mixins: [Colorable, Toggleable, Transitionable],
 
   props: {
     dismissible: Boolean,
-    hideIcon: Boolean,
     icon: String
   },
 
   computed: {
     classes () {
       return {
-        'alert': true,
         'alert--dismissible': this.dismissible,
-        'error': this.error,
-        'info': this.info,
-        'primary': this.primary,
-        'secondary': this.secondary,
-        'success': this.success,
-        'warning': this.warning
-      }
-    },
-
-    mdIcon () {
-      switch (true) {
-        case !!this.icon: return this.icon
-        case this.error: return 'warning'
-        case this.info: return 'info'
-        case this.success: return 'check_circle'
-        case this.warning: return 'priority_high'
+        [this.color || 'error']: true
       }
     }
   },
@@ -49,10 +32,10 @@ export default {
   render (h) {
     const children = [h('div', this.$slots.default)]
 
-    if (!this.hideIcon && this.mdIcon) {
+    if (this.icon) {
       children.unshift(h('v-icon', {
         'class': 'alert__icon'
-      }, this.mdIcon))
+      }, this.icon))
     }
 
     if (this.dismissible) {
@@ -72,6 +55,7 @@ export default {
     }
 
     const alert = h('div', {
+      staticClass: 'alert',
       'class': this.classes,
       directives: [{
         name: 'show',

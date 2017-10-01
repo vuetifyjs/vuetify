@@ -1,7 +1,6 @@
 require('../../stylus/components/_menus.styl')
 
 // Mixins
-import Bootable from '../../mixins/bootable'
 import Detachable from '../../mixins/detachable'
 import Menuable from '../../mixins/menuable.js'
 import Toggleable from '../../mixins/toggleable'
@@ -21,7 +20,6 @@ export default {
 
   mixins: [
     Activator,
-    Bootable,
     Detachable,
     Generators,
     Keyable,
@@ -43,7 +41,8 @@ export default {
       stopIndex: 0,
       hasJustFocused: false,
       openTimeout: null,
-      closeTimeout: null
+      closeTimeout: null,
+      resizeTimeout: null
     }
   },
 
@@ -103,10 +102,19 @@ export default {
           : `${this.minWidth}px`
       }
 
-      return `${(
+      const minWidth = (
         this.dimensions.activator.width +
         this.nudgeWidth +
         (this.auto ? 16 : 0)
+      )
+
+      const calculatedMaxWidth = isNaN(parseInt(this.calculatedMaxWidth))
+        ? minWidth
+        : parseInt(this.calculatedMaxWidth)
+
+      return `${Math.min(
+        calculatedMaxWidth,
+        minWidth
       )}px`
     },
     calculatedTop () {
@@ -156,7 +164,16 @@ export default {
 
       // Account for screen resize
       // and orientation change
+      this.$refs.content.offsetWidth
       this.updateDimensions()
+
+      // When resizing to a smaller width
+      // content width is evaluated before
+      // the new activator width has been
+      // set, causing it to not size properly
+      // hacky but will revisit in the future
+      clearTimeout(this.resizeTimeout)
+      this.resizeTimeout = setTimeout(this.updateDimensions, 100)
     }
   },
 
