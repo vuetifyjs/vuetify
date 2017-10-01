@@ -56,8 +56,8 @@ export default {
       if (this.prominent ||
         this.$vuetify.breakpoint.mdAndUp
       ) return this.heights.desktop
-      if (this.$vuetify.breakpoint.clientWidth >
-        this.$vuetify.breakpoint.clientHeight
+      if (this.$vuetify.breakpoint.width >
+        this.$vuetify.breakpoint.height
       ) return this.mobileLandscape
 
       return this.heights.mobile
