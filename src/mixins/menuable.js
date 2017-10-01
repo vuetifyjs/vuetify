@@ -167,7 +167,7 @@ export default {
 
       // If overflowing bottom and offset
       if (isOverflowing && this.offsetOverflow) {
-        top = activator.offsetTop - contentHeight
+        top = this.pageYOffset + (activator.top - contentHeight)
       // If overflowing bottom
       } else if (isOverflowing && !this.allowOverflow) {
         top = toTop - contentHeight - 12
