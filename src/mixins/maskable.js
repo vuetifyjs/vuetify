@@ -30,7 +30,7 @@ export default {
   }),
 
   props: {
-    fillMaskBlanks: Boolean,
+    dontFillMaskBlanks: Boolean,
     mask: {
       type: [Object, String],
       default: null
@@ -92,7 +92,7 @@ export default {
     maskText (text) {
       if (!this.mask) return text
 
-      return maskText(text, this.masked, this.fillMaskBlanks)
+      return maskText(text, this.masked, this.dontFillMaskBlanks)
     },
     unmaskText (text) {
       if (this.returnMaskedValue || !this.mask) return text

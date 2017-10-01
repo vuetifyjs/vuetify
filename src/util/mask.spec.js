@@ -7,6 +7,10 @@ test('mask.js', ({ mount }) => {
     expect(maskText('5', '(#')).toBe('(5')
   })
 
+  it('should add delimiter if explicity typed', () => {
+    expect(maskText('(', '(#')).toBe('(')
+  })
+
   it('should add delimiters and masks', () => {
     expect(maskText('4567', '(###) #')).toBe('(456) 7')
     expect(maskText('444444444', '#### - #### - #### - ####')).toBe('4444 - 4444 - 4')
@@ -14,11 +18,20 @@ test('mask.js', ({ mount }) => {
   })
 
   it('should fill mask blanks', () => {
-    expect(maskText('55', '## - ##', true)).toBe('55 - ')
+    expect(maskText('55', '## - ##')).toBe('55 - ')
+  })
+
+  it('should not fill mask blanks if told not to', () => {
+    expect(maskText('55', '## - ##', true)).toBe('55')
   })
 
   it('should not fill if no value is provided', () => {
-    expect(maskText('', '## - ##', true)).toBe('')
+    expect(maskText('', '## - ##')).toBe('')
+  })
+
+  it('should only allow exact input if dontFillMaskBlanks is true', () => {
+    expect(maskText('4567', '(###) #', true)).toBe('')
+    expect(maskText('(456)', '(###) #', true)).toBe('(456)')
   })
 
   it('should convert alphanumeric to the proper case', () => {
@@ -26,6 +39,21 @@ test('mask.js', ({ mount }) => {
     expect(maskText('AA', 'aa')).toBe('aa')
     expect(maskText('A1', 'Aa')).toBe('A')
     expect(maskText('12abAB', 'NnNnNn')).toBe('12AbAb')
+  })
+
+  it('should not fill if wrong value is provided even if it is correct later in mask', () => {
+    expect(maskText('a', '#a')).toBe('')
+  })
+
+  /* Not sure how to implement this
+  it('should not fill in delimiter value if it does not match', () => {
+    expect(maskText('a', '(')).toBe('')
+  })
+  */
+
+  it('should fill last characters if they are all delimiters', () => {
+    expect(maskText('1', '#)')).toBe('1)')
+    expect(maskText('123', '(###)!!')).toBe('(123)!!')
   })
 
   // Unmasks
