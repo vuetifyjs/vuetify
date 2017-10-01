@@ -36,7 +36,10 @@ export default {
     flat: Boolean,
     floating: Boolean,
     height: [Number, String],
-    manualScroll: Boolean,
+    manualScroll: {
+      type: Boolean,
+      default: null
+    },
     prominent: Boolean,
     scrollOffScreen: Boolean,
     scrollTarget: String,
