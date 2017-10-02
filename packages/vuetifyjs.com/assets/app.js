@@ -5,7 +5,7 @@ import Vuetify from 'vuetify'
 // Bootstrap
 import { createStore } from 'store/index'
 import { createRouter } from 'router/index'
-import { createLanguage } from 'i18n/index'
+import { createI18n } from 'i18n/index'
 import { sync } from 'vuex-router-sync'
 
 // Application
@@ -24,7 +24,7 @@ export function createApp (ssrContext) {
   // create store and router instances
   const store = createStore()
   const router = createRouter()
-  const language = createLanguage()
+  const i18n = createI18n()
 
   // sync the router with the vuex store.
   // this registers `store.state.route`
@@ -37,7 +37,7 @@ export function createApp (ssrContext) {
     router,
     store,
     ssrContext,
-    language,
+    i18n,
     render: h => h(App)
   })
 

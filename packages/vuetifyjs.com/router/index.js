@@ -25,6 +25,7 @@ export function createRouter () {
         route('/', 'Home'),
         // Getting Started
         route('/getting-started/quick-start', 'QuickStart'),
+        route('/playground', 'Playground'),
         // Global redirect for 404
         { path: '*', redirect: '/' }
       ]
