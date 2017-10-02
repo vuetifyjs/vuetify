@@ -39,7 +39,8 @@ input-group($material)
       .input-group__input
         .input-group__append-icon,
         .input-group__prepend-icon
-          color: $material.text.secondary
+          &:not(:hover)
+            color: $material.text.secondary
 
       &:not(.input-group--disabled):not(.input-group--overflow):not(.input-group--segmented):not(.input-group--editable):hover
         .input-group__details:before
