@@ -16,9 +16,9 @@ import VIcon from '../VIcon'
 import Touch from '../../directives/touch'
 
 const createDefaultDateFormat = type => date => {
-  date = new Date(date)
-  const tzOffset = date.getTimezoneOffset() * 60000
-  const localDate = new Date(date.getTime() - tzOffset)
+  const localDate = typeof date === 'string'
+    ? new Date(date)
+    : new Date(date.getTime() - date.getTimezoneOffset() * 60000)
   return localDate.toISOString().substr(0, { date: 10, month: 7, year: 4 }[type])
 }
 
@@ -91,13 +91,14 @@ export default {
   computed: {
     timeZone () {
       try {
-        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone
-        if (typeof tz === 'undefined' || tz.toLowerCase() === 'etc/unknown') {
-          return 'UTC'
-        } else {
-          return tz
-        }
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+        new Date('2000-01-15T12:00:00+00:00').toLocaleDateString('en', {
+          day: 'numeric',
+          timeZone
+        })
+        return timeZone
       } catch (e) {
+        console.warn('Unsupported time zone')
         return 'UTC'
       }
     },
@@ -105,7 +106,7 @@ export default {
       return ('toLocaleDateString' in Date.prototype) &&
         new Date('2000-01-15T12:00:00+00:00').toLocaleDateString('en', {
           day: 'numeric',
-          timeZone: this.timeZone
+          timeZone: 'UTC'
         }) === '15'
     },
     firstAllowedDate () {
