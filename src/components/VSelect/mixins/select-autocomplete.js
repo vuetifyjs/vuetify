@@ -36,6 +36,8 @@ export default {
       return `${start}${this.genHighlight(middle)}${end}`
     },
     genHighlight (text) {
+      if (this.isNotFiltering) return text
+
       return `<span class="list__tile__mask">${text}</span>`
     },
     getMaskedCharacters (text) {
@@ -59,6 +61,7 @@ export default {
       if (!this.menuIsActive &&
         [13, 32, 38, 40].includes(e.keyCode)
       ) {
+        e.preventDefault()
         return this.showMenuItems()
       } else if ([9, 27].includes(e.keyCode)) {
         // If select is being tabbed, blur
@@ -76,7 +79,7 @@ export default {
         })
       }
 
-      if (!this.tags ||
+      if (!this.isAutocomplete ||
         ![32].includes(e.keyCode)
       ) this.$refs.menu.changeListIndex(e)
 

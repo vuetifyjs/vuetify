@@ -15,7 +15,12 @@ import VIcon from '../VIcon'
 
 import Touch from '../../directives/touch'
 
-const createDefaultDateFormat = type => date => new Date(date).toISOString().substr(0, { date: 10, month: 7, year: 4 }[type])
+const createDefaultDateFormat = type => date => {
+  date = new Date(date)
+  const tzOffset = date.getTimezoneOffset() * 60000
+  const localDate = new Date(date.getTime() - tzOffset)
+  return localDate.toISOString().substr(0, { date: 10, month: 7, year: 4 }[type])
+}
 
 export default {
   name: 'v-date-picker',

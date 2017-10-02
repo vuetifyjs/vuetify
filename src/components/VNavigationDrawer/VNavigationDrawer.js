@@ -233,7 +233,8 @@ export default {
       if (!this.app) return
 
       const width = !this.isActive ||
-        this.$vuetify.breakpoint.width <= this.mobileBreakPoint
+        !this.permanent &&
+        this.$vuetify.breakpoint.width < this.mobileBreakPoint
         ? 0
         : this.calculatedWidth
 

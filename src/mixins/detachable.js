@@ -1,4 +1,8 @@
+import Bootable from './bootable'
+
 export default {
+  mixins: [Bootable],
+
   props: {
     contentClass: {
       default: ''
@@ -6,7 +10,20 @@ export default {
   },
 
   mounted () {
-    this.$vuetify.load(() => {
+    this.$vuetify.load(this.initDetach)
+  },
+
+  beforeDestroy () {
+    if (!this.$refs.content) return
+
+    // IE11 Fix
+    try {
+      this.$refs.content.parentNode.removeChild(this.$refs.content)
+    } catch (e) {}
+  },
+
+  methods: {
+    initDetach () {
       if (this._isDestroyed) return
 
       const app = document.querySelector('[data-app]')
@@ -22,15 +39,6 @@ export default {
         this.$refs.content,
         app.firstChild
       )
-    })
-  },
-
-  beforeDestroy () {
-    if (!this.$refs.content) return
-
-    // IE11 Fix
-    try {
-      this.$refs.content.parentNode.removeChild(this.$refs.content)
-    } catch (e) {}
+    }
   }
 }

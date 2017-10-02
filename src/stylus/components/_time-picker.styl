@@ -13,10 +13,11 @@ date-picker($material)
       background: $theme.accent
 
     > span
-      color: $material.text.primary
+      &:not(.disabled)
+        color: $material.text.primary
 
       &.active
-        color: $material.text.primary
+        color: $material.picker.buttons
 
         &:before
           background: $theme.accent

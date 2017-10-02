@@ -11,21 +11,26 @@ export default {
   methods: {
     genMenu () {
       const offsetY = this.isAutocomplete || this.offset || this.isDropdown
+      let nudgeTop = 0
+
+      if (this.auto) nudgeTop = -18
+      else if (this.solo) nudgeTop = 0
+      else if (this.isDropdown) nudgeTop = 26
+      else if (offsetY) nudgeTop = 24
+
       const data = {
         ref: 'menu',
         props: {
-          activator: this.$refs.activator,
-          allowOverflow: this.isAutocomplete,
+          activator: this.$el,
           auto: this.auto,
           closeOnClick: false,
           closeOnContentClick: !this.isMultiple,
           contentClass: this.computedContentClass,
           disabled: this.disabled,
           maxHeight: this.maxHeight,
-          nudgeTop: this.isDropdown ? 0 : offsetY ? -2 : 0,
-          nudgeRight: this.isDropdown ? 0 : 0,
-          nudgeWidth: this.isDropdown ? 55 : 36,
+          nudgeTop,
           offsetY,
+          offsetOverflow: this.isAutocomplete,
           openOnClick: false,
           value: this.menuIsActive &&
             this.computedItems.length &&
@@ -159,6 +164,7 @@ export default {
 
       return this.$createElement('v-chip', {
         staticClass: 'chip--select-multi',
+        attrs: { tabindex: '-1' },
         props: {
           close: !isDisabled,
           dark: this.dark,

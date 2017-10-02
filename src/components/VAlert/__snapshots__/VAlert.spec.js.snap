@@ -2,7 +2,7 @@
 
 exports[`VAlert.vue should be closed by default 1`] = `
 
-<div class="alert"
+<div class="alert error"
      style="display: none;"
 >
   <div>
@@ -13,7 +13,7 @@ exports[`VAlert.vue should be closed by default 1`] = `
 
 exports[`VAlert.vue should be dismissible 1`] = `
 
-<div class="alert alert--dismissible"
+<div class="alert alert--dismissible error"
      style="display: none;"
 >
   <div>
@@ -31,7 +31,7 @@ exports[`VAlert.vue should be dismissible 1`] = `
 
 exports[`VAlert.vue should have a close icon 1`] = `
 
-<div class="alert alert--dismissible"
+<div class="alert alert--dismissible error"
      style="display: none;"
 >
   <div>
