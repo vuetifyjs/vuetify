@@ -19,7 +19,7 @@ export default {
     defaultHeight: 56,
     prominentHeight: 64,
     isExtended: false,
-    isScrolling: false,
+    isScrollingProxy: false,
     marginTop: 0,
     previousScroll: null,
     target: null
@@ -36,6 +36,10 @@ export default {
     flat: Boolean,
     floating: Boolean,
     height: [Number, String],
+    manualScroll: {
+      type: Boolean,
+      default: null
+    },
     prominent: Boolean,
     scrollOffScreen: Boolean,
     scrollTarget: String,
@@ -48,12 +52,12 @@ export default {
   computed: {
     computedHeight () {
       if (this.height) return this.height
-      if (this.dense) return this.dense
+      if (this.dense) return this.heights.dense
       if (this.prominent ||
         this.$vuetify.breakpoint.mdAndUp
       ) return this.heights.desktop
-      if (this.$vuetify.breakpoint.clientWidth >
-        this.$vuetify.breakpoint.clientHeight
+      if (this.$vuetify.breakpoint.width >
+        this.$vuetify.breakpoint.height
       ) return this.mobileLandscape
 
       return this.heights.mobile
@@ -77,6 +81,16 @@ export default {
         'theme--light': this.light
       }
     },
+    isScrolling: {
+      get () {
+        return this.manualScroll != null
+          ? this.manualScroll
+          : this.isScrollingProxy
+      },
+      set (val) {
+        this.isScrollingProxy = val
+      }
+    },
     paddingLeft () {
       if (!this.app || this.clippedLeft) return 0
 
@@ -98,12 +112,12 @@ export default {
 
   watch: {
     isScrolling (val) {
-      this.marginTop = val
-        ? -this.$refs.content.clientHeight - 6
-        : 0
-
-      this.updateApplication()
+      this.whenScrolled(val)
     }
+  },
+
+  mounted () {
+    this.whenScrolled(this.isScrolling)
   },
 
   destroyed () {
@@ -130,7 +144,7 @@ export default {
         this.previousScroll = currentScroll
       }
 
-      this.isScrolling = this.previousScroll < currentScroll
+      this.isScrollingProxy = this.previousScroll < currentScroll
 
       this.previousScroll = currentScroll
     },
@@ -142,6 +156,13 @@ export default {
         : this.isExtended && !this.isScrolling
           ? this.computedHeight * 2
           : this.computedHeight
+    },
+    whenScrolled (val) {
+      this.marginTop = val
+        ? -this.$refs.content.clientHeight - 6
+        : 0
+
+      this.updateApplication()
     }
   },
 

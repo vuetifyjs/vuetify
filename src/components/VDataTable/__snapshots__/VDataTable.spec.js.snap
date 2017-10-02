@@ -96,40 +96,48 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
                             class="list"
                         >
                           <li>
-                            <div class="list__tile list__tile--link">
+                            <a href="javascript:;"
+                               class="list__tile list__tile--link"
+                            >
                               <div class="list__tile__content">
                                 <div class="list__tile__title">
                                   5
                                 </div>
                               </div>
-                            </div>
+                            </a>
                           </li>
                           <li>
-                            <div class="list__tile list__tile--link">
+                            <a href="javascript:;"
+                               class="list__tile list__tile--link"
+                            >
                               <div class="list__tile__content">
                                 <div class="list__tile__title">
                                   10
                                 </div>
                               </div>
-                            </div>
+                            </a>
                           </li>
                           <li>
-                            <div class="list__tile list__tile--link">
+                            <a href="javascript:;"
+                               class="list__tile list__tile--link"
+                            >
                               <div class="list__tile__content">
                                 <div class="list__tile__title">
                                   25
                                 </div>
                               </div>
-                            </div>
+                            </a>
                           </li>
                           <li>
-                            <div class="list__tile list__tile--link">
+                            <a href="javascript:;"
+                               class="list__tile list__tile--link"
+                            >
                               <div class="list__tile__content">
                                 <div class="list__tile__title">
                                   All
                                 </div>
                               </div>
-                            </div>
+                            </a>
                           </li>
                         </ul>
                       </div>

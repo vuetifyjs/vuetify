@@ -97,10 +97,6 @@ export default {
     }
   },
 
-  mounted () {
-    this.checkForWindow()
-  },
-
   methods: {
     absolutePosition () {
       return {
@@ -153,7 +149,7 @@ export default {
         left = (
           innerWidth -
           maxWidth -
-          (innerWidth > (1280 - 16) ? 30 : 12) // Account for scrollbar
+          (innerWidth > 600 ? 30 : 12) // Account for scrollbar
         )
       }
 
@@ -171,7 +167,7 @@ export default {
 
       // If overflowing bottom and offset
       if (isOverflowing && this.offsetOverflow) {
-        top = activator.offsetTop - contentHeight
+        top = this.pageYOffset + (activator.top - contentHeight)
       // If overflowing bottom
       } else if (isOverflowing && !this.allowOverflow) {
         top = toTop - contentHeight - 12
@@ -194,7 +190,7 @@ export default {
       this.deactivate()
     },
     checkForWindow () {
-      this.hasWindow = window !== 'undefined'
+      this.hasWindow = typeof window !== 'undefined'
 
       if (this.hasWindow) {
         this.pageYOffset = this.getOffsetTop()
@@ -270,14 +266,18 @@ export default {
       // can work properly every update
       this.resetDimensions()
 
+      const dimensions = {}
+
       // Activate should already be shown
-      this.dimensions.activator = !this.hasActivator || this.absolute
+      dimensions.activator = !this.hasActivator || this.absolute
         ? this.absolutePosition()
         : this.measure(this.getActivator())
 
       // Display and hide to get dimensions
       this.sneakPeek(() => {
-        this.dimensions.content = this.measure(this.$refs.content)
+        dimensions.content = this.measure(this.$refs.content)
+
+        this.dimensions = dimensions
       })
     }
   }

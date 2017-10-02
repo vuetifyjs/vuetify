@@ -36,6 +36,8 @@ export default {
       return `${start}${this.genHighlight(middle)}${end}`
     },
     genHighlight (text) {
+      if (this.isNotFiltering) return text
+
       return `<span class="list__tile__mask">${text}</span>`
     },
     getMaskedCharacters (text) {

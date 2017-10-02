@@ -133,7 +133,7 @@ test('VListTile.vue', ({ mount }) => {
 
     const wrapper = mount(component)
 
-    expect(wrapper.contains('div.list__tile--link')).toBe(true)
+    expect(wrapper.contains('.list__tile--link')).toBe(true)
   })
 
   it('should have --link class when click.prevent.stop handler present', () => {
@@ -150,6 +150,6 @@ test('VListTile.vue', ({ mount }) => {
 
     const wrapper = mount(component)
 
-    expect(wrapper.contains('div.list__tile--link')).toBe(true)
+    expect(wrapper.contains('.list__tile--link')).toBe(true)
   })
 })

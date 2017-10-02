@@ -180,9 +180,7 @@ export default {
     filteredItems () {
       // If we are not actively filtering
       // Show all available items
-      const items = (this.isAutocomplete &&
-        this.isDirty &&
-        this.searchValue === this.getText(this.selectedItem))
+      const items = this.isNotFiltering
         ? this.computedItems
         : this.filterSearch()
 
@@ -194,6 +192,11 @@ export default {
         this.isFocused &&
         this.isDirty &&
         !this.chips
+    },
+    isNotFiltering () {
+      return this.isAutocomplete &&
+        this.isDirty &&
+        this.searchValue === this.getText(this.selectedItem)
     },
     isAutocomplete () {
       return this.autocomplete || this.editable || this.tags
@@ -280,7 +283,7 @@ export default {
       this.$refs.menu.listIndex = -1
 
       this.searchValue && this.$nextTick(() => {
-        this.$refs.menu.listIndex = 0
+        this.$refs.menu && (this.$refs.menu.listIndex = 0)
       })
 
       this.genSelectedItems()
@@ -317,7 +320,7 @@ export default {
       this.$refs.menu.listIndex = null
 
       this.$nextTick(() => {
-        this.$refs.menu.listIndex = val ? 0 : -1
+        this.$refs.menu && (this.$refs.menu.listIndex = val ? 0 : -1)
       })
     },
     selectedItems () {
@@ -568,7 +571,7 @@ export default {
           this.$refs.input
         ) this.$refs.input.focus()
         else this.$el.focus()
-        this.$refs.menu.listIndex = savedIndex
+        this.$refs.menu && (this.$refs.menu.listIndex = savedIndex)
       })
     },
     showMenuItems () {

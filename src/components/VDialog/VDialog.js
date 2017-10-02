@@ -1,6 +1,5 @@
 require('../../stylus/components/_dialogs.styl')
 
-import Bootable from '../../mixins/bootable'
 import Detachable from '../../mixins/detachable'
 import Overlayable from '../../mixins/overlayable'
 import Toggleable from '../../mixins/toggleable'
@@ -12,7 +11,7 @@ import { getZIndex } from '../../util/helpers'
 export default {
   name: 'v-dialog',
 
-  mixins: [Bootable, Detachable, Overlayable, Toggleable],
+  mixins: [Detachable, Overlayable, Toggleable],
 
   directives: {
     ClickOutside
@@ -140,7 +139,7 @@ export default {
         origin: this.origin
       }
     }, [h('div', data,
-      this.lazy && this.isBooted || !this.lazy ? this.$slots.default : null
+      this.showLazyContent(this.$slots.default)
     )])
 
     children.push(h('div', {

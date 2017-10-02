@@ -1,7 +1,6 @@
 require('../../stylus/components/_menus.styl')
 
 // Mixins
-import Bootable from '../../mixins/bootable'
 import Detachable from '../../mixins/detachable'
 import Menuable from '../../mixins/menuable.js'
 import Toggleable from '../../mixins/toggleable'
@@ -21,7 +20,6 @@ export default {
 
   mixins: [
     Activator,
-    Bootable,
     Detachable,
     Generators,
     Keyable,
@@ -104,10 +102,19 @@ export default {
           : `${this.minWidth}px`
       }
 
-      return `${(
+      const minWidth = (
         this.dimensions.activator.width +
         this.nudgeWidth +
         (this.auto ? 16 : 0)
+      )
+
+      const calculatedMaxWidth = isNaN(parseInt(this.calculatedMaxWidth))
+        ? minWidth
+        : parseInt(this.calculatedMaxWidth)
+
+      return `${Math.min(
+        calculatedMaxWidth,
+        minWidth
       )}px`
     },
     calculatedTop () {
