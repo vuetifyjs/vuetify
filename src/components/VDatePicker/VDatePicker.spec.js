@@ -51,7 +51,7 @@ test('VDatePicker.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should match snapshot with allowed dates', () => {
+  it.skip('should match snapshot with allowed dates', () => {
     const wrapper = mount(VDatePicker, {
       propsData: {
         value: '2013-05-07',
