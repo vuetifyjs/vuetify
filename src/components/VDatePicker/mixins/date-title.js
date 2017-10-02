@@ -26,7 +26,10 @@ export default {
         }
       }, [
         this.supportsLocaleFormat
-          ? titleDate.toLocaleDateString(this.locale, { year: 'numeric' })
+          ? titleDate.toLocaleDateString(this.locale, {
+            year: 'numeric',
+            timeZone: this.timeZone
+          })
           : this.year,
         this.genYearIcon()
       ])

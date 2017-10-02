@@ -47,7 +47,9 @@ export default {
         const format = this.activePicker === 'DATE'
           ? this.headerDateFormat
           : { year: 'numeric' }
-        selectorText = selectorDate.toLocaleDateString(this.locale, format)
+        selectorText = selectorDate.toLocaleDateString(this.locale, Object.assign(format, {
+          timeZone: this.timeZone
+        }))
       } else if (this.activePicker === 'DATE') {
         selectorText = selectorDate.getFullYear() + '/'
         if (selectorDate.getMonth() < 9) selectorText += '0'

@@ -29,7 +29,9 @@ export default {
       if (typeof this.monthFormat === 'function') {
         monthName = this.monthFormat(date)
       } else if (this.supportsLocaleFormat) {
-        monthName = date.toLocaleDateString(this.locale, this.monthFormat)
+        monthName = date.toLocaleDateString(this.locale, Object.assign(this.monthFormat, {
+          timeZone: this.timeZone
+        }))
       } else {
         monthName = date.getMonth() + 1
         if (monthName < 10) {

@@ -26,7 +26,10 @@ export default {
     dateGenTD (day) {
       const date = new Date(this.tableYear, this.tableMonth, day, 12)
       const buttonText = this.supportsLocaleFormat
-        ? date.toLocaleDateString(this.locale, { day: 'numeric' })
+        ? date.toLocaleDateString(this.locale, {
+          day: 'numeric',
+          timeZone: this.timeZone
+        })
         : day
       const button = this.$createElement('button', {
         'class': {

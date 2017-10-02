@@ -25,7 +25,10 @@ export default {
       for (let year = this.year + 100, length = this.year - 100; year > length; year--) {
         const date = new Date(year, this.month, this.day, 12)
         const buttonText = this.supportsLocaleFormat
-          ? date.toLocaleDateString(this.locale, { year: 'numeric' })
+          ? date.toLocaleDateString(this.locale, {
+            year: 'numeric',
+            timeZone: this.timeZone
+          })
           : year
 
         children.push(this.$createElement('li', {

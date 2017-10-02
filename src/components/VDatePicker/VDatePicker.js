@@ -89,9 +89,24 @@ export default {
   },
 
   computed: {
+    timeZone () {
+      try {
+        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone
+        if (typeof tz === 'undefined' || tz.toLowerCase() === 'etc/unknown') {
+          return 'UTC'
+        } else {
+          return tz
+        }
+      } catch (e) {
+        return 'UTC'
+      }
+    },
     supportsLocaleFormat () {
       return ('toLocaleDateString' in Date.prototype) &&
-        new Date(2000, 0, 15).toLocaleDateString('en', { day: 'numeric' }) === '15'
+        new Date('2000-01-15T12:00:00+00:00').toLocaleDateString('en', {
+          day: 'numeric',
+          timeZone: this.timeZone
+        }) === '15'
     },
     firstAllowedDate () {
       const date = new Date()
@@ -176,7 +191,9 @@ export default {
       if (typeof this.titleDateFormat === 'function') {
         titleText = this.titleDateFormat(date)
       } else if (this.supportsLocaleFormat) {
-        titleText = date.toLocaleDateString(this.locale, this.titleDateFormat || defaultTitleDateFormat)
+        titleText = date.toLocaleDateString(this.locale, Object.assign(this.titleDateFormat || defaultTitleDateFormat, {
+          timeZone: this.timeZone
+        }))
       } else if ('toLocaleDateString' in Date.prototype) {
         titleText = createDefaultDateFormat(this.type)(date)
       }
@@ -240,7 +257,7 @@ export default {
       if (this.supportsLocaleFormat) {
         const date = new Date(2000, 1, 7)
         const day = date.getDate() - date.getDay() + first
-        const format = { weekday: 'narrow' }
+        const format = { weekday: 'narrow', timeZone: this.timeZone }
         this.narrowDays = createRange(7).map(i => new Date(2000, 1, day + i).toLocaleDateString(this.locale, format))
       } else {
         this.narrowDays = createRange(7).map(i => ['S', 'M', 'T', 'W', 'T', 'F', 'S'][(i + first) % 7])
