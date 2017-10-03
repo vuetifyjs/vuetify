@@ -1,5 +1,6 @@
 require('../../stylus/components/_buttons.styl')
 
+import Colorable from '../../mixins/colorable'
 import Contextualable from '../../mixins/contextualable'
 import Positionable from '../../mixins/positionable'
 import Routable from '../../mixins/routable'
@@ -10,6 +11,7 @@ export default {
   name: 'v-btn',
 
   mixins: [
+    Colorable,
     Contextualable,
     Routable,
     Positionable,
@@ -48,7 +50,10 @@ export default {
 
   computed: {
     classes () {
-      return {
+      const colorBackground = !this.outline && !this.flat
+      const colorText = !this.disabled && !colorBackground
+
+      const classes = {
         'btn': true,
         'btn--active': this.isActive,
         'btn--absolute': this.absolute,
@@ -70,20 +75,29 @@ export default {
         'btn--router': this.to,
         'btn--small': this.small,
         'btn--top': this.top,
-        'primary': this.primary && !this.outline && !this.flat,
-        'secondary': this.secondary && !this.outline && !this.flat,
-        'success': this.success && !this.outline && !this.flat,
-        'info': this.info && !this.outline && !this.flat,
-        'warning': this.warning && !this.outline && !this.flat,
-        'error': this.error && !this.outline && !this.flat,
-        'primary--text': !this.disabled && this.primary && (this.outline || this.flat),
-        'secondary--text': !this.disabled && this.secondary && (this.outline || this.flat),
-        'success--text': !this.disabled && this.success && (this.outline || this.flat),
-        'info--text': !this.disabled && this.info && (this.outline || this.flat),
-        'warning--text': !this.disabled && this.warning && (this.outline || this.flat),
-        'error--text': !this.disabled && this.error && (this.outline || this.flat),
         ...this.themeClasses
       }
+
+      if (!this.color) {
+        return Object.assign(classes, {
+          'primary': this.primary && colorBackground,
+          'secondary': this.secondary && colorBackground,
+          'success': this.success && colorBackground,
+          'info': this.info && colorBackground,
+          'warning': this.warning && colorBackground,
+          'error': this.error && colorBackground,
+          'primary--text': this.primary && colorText,
+          'secondary--text': this.secondary && colorText,
+          'success--text': this.success && colorText,
+          'info--text': this.info && colorText,
+          'warning--text': this.warning && colorText,
+          'error--text': this.error && colorText
+        })
+      }
+
+      return colorBackground ? Object.assign(classes, {
+        [this.color]: true
+      }) : this.addColorClassChecks(classes)
     }
   },
 
@@ -119,6 +133,14 @@ export default {
 
       return this.$createElement('span', { 'class': 'btn__loading' }, children)
     }
+  },
+
+  mounted () {
+    Object.keys(Contextualable.props).forEach(prop => {
+      if (this[prop]) {
+        console.warn(`Context prop '${prop}' for VBtn component has been deprecated. Use 'color' prop instead.`)
+      }
+    })
   },
 
   render (h) {
