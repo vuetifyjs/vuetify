@@ -157,7 +157,7 @@ export default {
       // Start the transition
       requestAnimationFrame(this.startTransition)
       // Once transitioning, calculate scroll position
-      requestAnimationFrame(this.calculateScroll)
+      setTimeout(this.calculateScroll, 50)
     },
     onResize () {
       if (!this.isActive) return
