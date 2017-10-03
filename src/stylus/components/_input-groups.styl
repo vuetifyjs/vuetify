@@ -35,7 +35,7 @@ input-group($material)
     .input-group__details:before
       background-color: $material.input-bottom-line
 
-    &:not(.input-group--focused)
+    &:not(.input-group--focused):not(.input-group--disabled)
       .input-group__input
         .input-group__append-icon,
         .input-group__prepend-icon
