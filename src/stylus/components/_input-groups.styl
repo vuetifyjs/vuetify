@@ -35,7 +35,7 @@ input-group($material)
     .input-group__details:before
       background-color: $material.input-bottom-line
 
-    &:not(.input-group--focused):not(.input-group--disabled)
+    &:not(.input-group--focused)
       .input-group__input
         .input-group__append-icon,
         .input-group__prepend-icon
@@ -58,6 +58,11 @@ input-group($material)
           background-color: $material.dividers
 
   &.input-group--disabled
+    .input-group__input
+      .input-group__append-icon,
+      .input-group__prepend-icon
+        color: $material.text.disabled
+
     .input-group__details:before
       background-color: transparent
       background-image: linear-gradient(
