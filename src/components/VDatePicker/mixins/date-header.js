@@ -10,9 +10,9 @@ export default {
           click: e => {
             e.stopPropagation()
             if (this.activePicker === 'DATE') {
-              this.tableDate = new Date(this.tableYear, change)
+              this.tableDate = this.normalizeDate(this.tableYear, change)
             } else if (this.activePicker === 'MONTH') {
-              this.tableDate = new Date(change, this.tableMonth)
+              this.tableDate = this.normalizeDate(change, this.tableMonth)
             }
           }
         }
@@ -38,7 +38,7 @@ export default {
 
     genSelector () {
       const keyValue = this.activePicker === 'DATE' ? this.tableMonth : this.tableYear
-      const selectorDate = new Date(this.tableYear, this.tableMonth, 1, 1 /* Workaround for #1409 */)
+      const selectorDate = this.normalizeDate(this.tableYear, this.tableMonth)
 
       let selectorText = ''
       if (typeof this.headerDateFormat === 'function' && this.activePicker === 'DATE') {
