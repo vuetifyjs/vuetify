@@ -4,6 +4,7 @@ require('../../stylus/components/_text-fields.styl')
 import Colorable from '../../mixins/colorable'
 import Input from '../../mixins/input'
 import Maskable from '../../mixins/maskable'
+import { isMaskDelimiter } from '../../util/mask'
 
 export default {
   name: 'v-text-field',
@@ -17,7 +18,8 @@ export default {
       initialValue: null,
       inputHeight: null,
       badInput: false,
-      deleting: false
+      deleting: false,
+      lazySelection: 0
     }
   },
 
@@ -141,6 +143,7 @@ export default {
       })
     },
     onInput (e) {
+      this.setLazySelection(e.target.value)
       this.inputValue = this.unmaskText(e.target.value)
       this.badInput = e.target.validity && e.target.validity.badInput
       this.shouldAutoGrow && this.calculateInputHeight()
@@ -233,6 +236,13 @@ export default {
     clearableCallback () {
       this.inputValue = null
       this.$nextTick(() => this.$refs.input.focus())
+    },
+    setLazySelection (oldValue) {
+      this.lazySelection = 0
+
+      for (const char of oldValue.substr(0, this.$refs.input.selectionStart)) {
+        isMaskDelimiter(char) || this.lazySelection++
+      }
     }
   },
 
