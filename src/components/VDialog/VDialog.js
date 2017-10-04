@@ -98,7 +98,9 @@ export default {
   methods: {
     closeConditional (e) {
       // close dialog if !persistent and doesn't have an overlay (clicked overlay will close dialog), and clicked outside
-      return !this.persistent && !this.hideOverlay
+      const result = !this.persistent && this.hideOverlay
+      if (result) e.stopPropagation() // If we're going to close this dialog, stop propagaton so we don't close others below us as well.
+      return result
     }
   },
 
