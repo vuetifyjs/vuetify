@@ -18,17 +18,20 @@ export default {
       this.inputDate = this.normalizeDate(this.tableYear, this.tableMonth, day)
       this.$nextTick(() => (this.autosave && this.save()))
     },
-    dateGenTD (day) {
-      const date = this.normalizeDate(this.tableYear, this.tableMonth, day)
-      const buttonText = this.supportsLocaleFormat
+    dateGenButtonText (date) {
+      return this.supportsLocaleFormat
         ? date.toLocaleDateString(this.locale, {
           day: 'numeric',
           timeZone: this.timeZone
         })
         : day
+    },
+    dateGenTD (day) {
+      const date = this.normalizeDate(this.tableYear, this.tableMonth, day)
+      const buttonText = this.dateGenButtonText(date)
       const button = this.$createElement('button', {
+        staticClass: 'btn btn--date-picker btn--floating btn--small btn--flat',
         'class': {
-          'btn btn--date-picker btn--floating btn--small btn--flat': true,
           'btn--active': this.dateIsActive(day),
           'btn--outline': this.dateIsCurrent(day) && !this.dateIsActive(day),
           'btn--disabled': !this.isAllowed(date)
