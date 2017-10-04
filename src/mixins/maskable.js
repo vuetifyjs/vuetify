@@ -114,7 +114,7 @@ export default {
     // re-created, ensure that the
     // caret location is correct
     setSelectionRange () {
-      this.$nextTick(() => this.updateRange())
+      this.$nextTick(this.updateRange)
     }
   }
 }
