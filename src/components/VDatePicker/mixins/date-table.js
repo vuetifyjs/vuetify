@@ -18,7 +18,7 @@ export default {
       this.inputDate = this.normalizeDate(this.tableYear, this.tableMonth, day)
       this.$nextTick(() => (this.autosave && this.save()))
     },
-    dateGenButtonText (date) {
+    dateGenButtonText (date, day) {
       return this.supportsLocaleFormat
         ? date.toLocaleDateString(this.locale, {
           day: 'numeric',
@@ -28,7 +28,7 @@ export default {
     },
     dateGenTD (day) {
       const date = this.normalizeDate(this.tableYear, this.tableMonth, day)
-      const buttonText = this.dateGenButtonText(date)
+      const buttonText = this.dateGenButtonText(date, day)
       const button = this.$createElement('button', {
         staticClass: 'btn btn--date-picker btn--floating btn--small btn--flat',
         'class': {
