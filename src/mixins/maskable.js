@@ -81,12 +81,18 @@ export default {
       this.$refs.input.setSelectionRange(selection, selection)
     },
     updateRange () {
-      const newValue = this.$refs.input.value
-      let selection = this.selection
+      if (!this.$refs.input) return
 
-      while (isMaskDelimiter(newValue.substr(selection - 1, 1))) {
+      const newValue = this.maskText(this.lazyValue)
+      let selection = 0
+
+      this.$refs.input.value = newValue
+      for (const char of newValue) {
+        if (this.lazySelection <= 0) break
+        isMaskDelimiter(char) || this.lazySelection--
         selection++
       }
+
       this.setCaretPosition(selection)
     },
     maskText (text) {
@@ -103,13 +109,7 @@ export default {
     // re-created, ensure that the
     // caret location is correct
     setSelectionRange () {
-      this.$nextTick(() => {
-        if (!this.$refs.input) return
-
-        this.$refs.input.value = this.maskText(this.lazyValue)
-
-        this.deleting ? this.setCaretPosition(this.selection) : this.updateRange()
-      })
+      this.$nextTick(this.updateRange)
     }
   }
 }

@@ -4,6 +4,7 @@ require('../../stylus/components/_text-fields.styl')
 import Colorable from '../../mixins/colorable'
 import Input from '../../mixins/input'
 import Maskable from '../../mixins/maskable'
+import { isMaskDelimiter } from '../../util/mask'
 
 export default {
   name: 'v-text-field',
@@ -17,7 +18,7 @@ export default {
       initialValue: null,
       inputHeight: null,
       badInput: false,
-      deleting: false
+      lazySelection: 0
     }
   },
 
@@ -86,7 +87,6 @@ export default {
         return this.value
       },
       set (val) {
-        this.selection = this.$refs.input ? this.$refs.input.selectionStart : 0
         this.lazyValue = val
         this.mask && this.setSelectionRange()
         this.$emit('input', val)
@@ -141,13 +141,10 @@ export default {
       })
     },
     onInput (e) {
+      this.resetSelections(e.target)
       this.inputValue = this.unmaskText(e.target.value)
       this.badInput = e.target.validity && e.target.validity.badInput
       this.shouldAutoGrow && this.calculateInputHeight()
-    },
-    keyDown (e) {
-      const key = e.code || e.key
-      this.deleting = key === 'Backspace' || key === 'Delete'
     },
     blur (e) {
       this.isFocused = false
@@ -196,8 +193,7 @@ export default {
         on: Object.assign(listeners, {
           blur: this.blur,
           input: this.onInput,
-          focus: this.focus,
-          keydown: this.keyDown
+          focus: this.focus
         }),
         ref: 'input'
       }
@@ -233,6 +229,14 @@ export default {
     clearableCallback () {
       this.inputValue = null
       this.$nextTick(() => this.$refs.input.focus())
+    },
+    resetSelections (input) {
+      this.selection = input.selectionStart
+      this.lazySelection = 0
+
+      for (const char of input.value.substr(0, this.selection)) {
+        isMaskDelimiter(char) || this.lazySelection++
+      }
     }
   },
 
