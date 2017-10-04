@@ -1,18 +1,33 @@
 #!/bin/bash
 
 set -e
-echo "Enter release version: "
-read VERSION
 
-read -p "Releasing $VERSION - are you sure (y/n)" -n 1 -r
+BRANCH=$(git symbolic-ref --short HEAD)
+echo #
+echo "Current branch is $BRANCH"
+echo "Last version was $(git describe)"
+echo #
+
+read -e -p "Enter release version: " VERSION
+
+read -e -p "Enter release tag (latest): " TAG
+TAG=${TAG:-"latest"}
+
+echo #
+
+echo "Releasing $VERSION on $BRANCH"
+echo "Tag: $TAG"
+read -p "Are you sure? [Y/n]" -n 1 -r
 echo #
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
   echo "Releasing $VERSION ..."
 
+  npm run lint
+  npm run test
+
   npm version $VERSION --message "[release] $VERSION"
 
-  git push
-  git push --tags --no-verify
-  npm publish "$@"
+  git push --follow-tags --no-verify
+  npm publish --tag "$TAG"
 fi
