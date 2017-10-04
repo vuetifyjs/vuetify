@@ -16,6 +16,10 @@
     width: auto
     elevation(2)
 
+    &[class*="-active"] {
+      pointer-events: none
+    }
+
   @media $display-breakpoints.sm-and-down
     .tooltip__content
       padding: 10px 16px
