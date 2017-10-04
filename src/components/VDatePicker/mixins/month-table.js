@@ -8,14 +8,10 @@ export default {
       if (e.deltaY < 0) year++
       else year--
 
-      this.tableDate = new Date(year, 0)
+      this.tableDate = this.normalizeDate(year)
     },
     monthClick (month) {
-      const tableYear = this.tableYear
-      const monthStr = month < 9 ? `0${month + 1}` : (month + 1)
-      const day = this.day < 10 ? `0${this.day}` : this.day
-
-      this.inputDate = `${tableYear}-${monthStr}-${day}T12:00:00`
+      this.inputDate = this.normalizeDate(this.tableYear, month, this.day)
       if (this.type === 'date') {
         this.activePicker = 'DATE'
       } else {
@@ -23,13 +19,15 @@ export default {
       }
     },
     monthGenTD (month) {
-      const date = new Date(this.tableYear, month, 1, 12, 0, 0, 0)
+      const date = this.normalizeDate(this.tableYear, month)
       let monthName
 
       if (typeof this.monthFormat === 'function') {
         monthName = this.monthFormat(date)
       } else if (this.supportsLocaleFormat) {
-        monthName = date.toLocaleDateString(this.locale, this.monthFormat)
+        monthName = date.toLocaleDateString(this.locale, Object.assign(this.monthFormat, {
+          timeZone: this.timeZone
+        }))
       } else {
         monthName = date.getMonth() + 1
         if (monthName < 10) {
