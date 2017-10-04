@@ -247,9 +247,10 @@ export default {
       if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
     },
     getWeekDays () {
+      const first = parseInt(this.firstDayOfWeek, 10)
       if (this.supportsLocaleFormat) {
         const date = this.normalizeDate(2000, 1, 7)
-        const day = date.getDate() - date.getDay() + parseInt(this.firstDayOfWeek, 10)
+        const day = date.getDate() - date.getDay() + first
         const format = { weekday: 'narrow' }
         this.narrowDays = createRange(7).map(i => this.normalizeDate(2000, 1, day + i).toLocaleDateString(this.locale, format))
       } else {
