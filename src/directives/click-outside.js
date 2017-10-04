@@ -3,13 +3,26 @@ function directive (e, el, binding, v) {
 
   if (binding.value) cb = binding.value
 
-  if (v.context.isActive &&
-    (e && e.target) &&
-    (e.target !== el && !el.contains(e.target)) &&
-    cb(e)
-  ) {
+  if (v.context.isActive && !clickedInEl(e, el, binding.include) && cb(e)) {
     v.context.isActive = false
   }
+}
+
+function clickedInEl (e, el, include) {
+  e = e || {}
+  const b = el.getBoundingClientRect()
+  const x = e.clientX
+  const y = e.clientY
+  var inEl = x >= b.left && x <= b.right && y >= b.top && y <= b.bottom
+  if (!inEl && include) {
+    for (const v of include) {
+      if (v.$el) {
+        inEl = clickedInEl(e, v.$el)
+        if (inEl) return inEl
+      }
+    }
+  }
+  return inEl
 }
 
 export default {
@@ -17,15 +30,13 @@ export default {
 
   bind (el, binding, v) {
     v.context.$vuetify.load(() => {
-      const outside = document.querySelector('[data-app]')
       const click = e => directive(e, el, binding, v)
-      outside && outside.addEventListener('click', click, false)
+      document.addEventListener('click', click, true)
       el._clickOutside = click
     })
   },
 
   unbind (el) {
-    const outside = document.querySelector('[data-app]')
-    outside && outside.removeEventListener('click', el._clickOutside, false)
+    document.removeEventListener('click', el._clickOutside, true)
   }
 }
