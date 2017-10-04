@@ -273,6 +273,9 @@ export default {
     isSelected (item) {
       return this.selected[item[this.itemKey]]
     },
+    isExpanded (item) {
+      return this.expanded[item[this.itemKey]]
+    },
     sort (index) {
       const { sortBy, descending } = this.computedPagination
       if (sortBy === null) {
