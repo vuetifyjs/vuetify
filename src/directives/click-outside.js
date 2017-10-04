@@ -5,7 +5,6 @@ function directive (e, el, binding, v) {
 
   if (v.context.isActive && !clickedInEl(e, el, binding.include) && cb(e)) {
     setTimeout(() => v.context.isActive = false, 0)
-    // v.context.isActive = false
   }
 }
 
