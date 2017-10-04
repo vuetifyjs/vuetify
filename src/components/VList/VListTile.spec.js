@@ -9,11 +9,11 @@ const stub = {
 }
 
 test('VListTile.vue', ({ mount }) => {
-  it('should render with a div when disableLink is true and href is used', () => {
+  it('should render with a div when inactive is true and href is used', () => {
     const wrapper = mount(VListTile, {
       propsData: {
         href: 'http://www.google.com',
-        disableLink: true
+        inactive: true
       }
     })
 
