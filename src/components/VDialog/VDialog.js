@@ -3,6 +3,9 @@ require('../../stylus/components/_dialogs.styl')
 import Detachable from '../../mixins/detachable'
 import Overlayable from '../../mixins/overlayable'
 import Toggleable from '../../mixins/toggleable'
+import { factory as DependentFactory } from '../../mixins/dependent'
+
+const Dependent = DependentFactory({ findDependents: true, dependent: false })
 
 import ClickOutside from '../../directives/click-outside'
 
@@ -11,7 +14,7 @@ import { getZIndex } from '../../util/helpers'
 export default {
   name: 'v-dialog',
 
-  mixins: [Detachable, Overlayable, Toggleable],
+  mixins: [Detachable, Overlayable, Toggleable, Dependent],
 
   directives: {
     ClickOutside
@@ -51,7 +54,7 @@ export default {
     contentClasses () {
       return {
         'dialog__content': true,
-        'dialog--content--active': this.isActive
+        'dialog__content__active': this.isActive
       }
     },
     activeZIndex () {
@@ -60,13 +63,13 @@ export default {
         // Return zero if we've not yet been created, else return our last z-index so close transition dont look funky
         return thisContent ? getZIndex(thisContent) : 0
       }
-      // start with lowest allowed z-index (5)
-      var zis = [5]
+      // start with lowest allowed z-index (For now, dialogs start at 200)
+      var zis = [200]
       // get z-index for all active dialogs
-      var activeDialogs = document.getElementsByClassName('dialog--content--active')
-      for (let i = 0, l = activeDialogs.length; i < l; i += 1) {
-        if (thisContent !== activeDialogs[i]) {
-          zis.push(getZIndex(activeDialogs[i]))
+      var activeDialogs = document.getElementsByClassName('dialog__content__active')
+      for (const activeDialog of activeDialogs) {
+        if (thisContent !== activeDialog) {
+          zis.push(getZIndex(activeDialog))
         }
       }
       // Return max current z-index + 2 (overlay will be this z-index - 1)
@@ -94,8 +97,8 @@ export default {
 
   methods: {
     closeConditional (e) {
-      // close dialog if !persistent and clicked outside
-      return !this.persistent
+      // close dialog if !persistent and doesn't have an overlay (clicked overlay will close dialog), and clicked outside
+      return !this.persistent && !this.hideOverlay
     }
   },
 

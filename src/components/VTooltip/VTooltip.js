@@ -5,11 +5,14 @@ import Colorable from '../../mixins/colorable'
 import Detachable from '../../mixins/detachable'
 import Menuable from '../../mixins/menuable'
 import Toggleable from '../../mixins/toggleable'
+import { factory as DependentFactory } from '../../mixins/dependent'
+
+const Dependent = DependentFactory({ dependent: true })
 
 export default {
   name: 'v-tooltip',
 
-  mixins: [Colorable, Detachable, Menuable, Toggleable],
+  mixins: [Colorable, Detachable, Menuable, Toggleable, Dependent],
 
   data: () => ({
     calculatedMinWidth: 0
@@ -30,7 +33,7 @@ export default {
     },
     transition: String,
     zIndex: {
-      default: '99'
+      default: null
     }
   },
 
@@ -103,7 +106,7 @@ export default {
         left: this.calculatedLeft,
         opacity: this.isActive ? 0.9 : 0,
         top: this.calculatedTop,
-        zIndex: this.zIndex
+        zIndex: this.zIndex || this.activeZIndex
       }
     }
   },
@@ -123,7 +126,8 @@ export default {
       staticClass: 'tooltip__content',
       'class': {
         [this.color]: this.color,
-        [this.contentClass]: true
+        [this.contentClass]: true,
+        'menuable__content__active': this.isActive
       },
       style: this.styles,
       attrs: this.attrs,

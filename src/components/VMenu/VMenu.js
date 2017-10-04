@@ -4,6 +4,7 @@ require('../../stylus/components/_menus.styl')
 import Detachable from '../../mixins/detachable'
 import Menuable from '../../mixins/menuable.js'
 import Toggleable from '../../mixins/toggleable'
+import Dependent from '../../mixins/dependent'
 
 // Component level mixins
 import Activator from './mixins/menu-activator'
@@ -25,7 +26,8 @@ export default {
     Keyable,
     Menuable,
     Position,
-    Toggleable
+    Toggleable,
+    Dependent
   ],
 
   directives: {
@@ -131,7 +133,7 @@ export default {
         top: this.calculatedTop,
         left: this.calculatedLeft,
         transformOrigin: this.origin,
-        zIndex: this.zIndex
+        zIndex: this.zIndex || this.activeZIndex
       }
     }
   },
@@ -179,18 +181,13 @@ export default {
 
   render (h) {
     // Do not add click outside for hover menu
-    const directives = !this.openOnHover ? [{
-      name: 'click-outside',
-      value: () => this.closeOnClick
-    }] : []
-
-    directives.push({
+    const directives = [{
       name: 'resize',
       value: {
         debounce: 500,
         value: this.onResize
       }
-    })
+    }]
 
     const data = {
       staticClass: 'menu',
