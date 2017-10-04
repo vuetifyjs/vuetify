@@ -16,10 +16,9 @@ import VIcon from '../VIcon'
 import Touch from '../../directives/touch'
 
 const createDefaultDateFormat = type => date => {
-  date = new Date(date)
-  const tzOffset = date.getTimezoneOffset() * 60000
-  const localDate = new Date(date.getTime() - tzOffset)
-  return localDate.toISOString().substr(0, { date: 10, month: 7, year: 4 }[type])
+  const pad = n => n < 10 ? `0${n}` : `${n}`
+  const isoString = `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`
+  return isoString.substr(0, { date: 10, month: 7, year: 4 }[type])
 }
 
 export default {
@@ -89,16 +88,31 @@ export default {
   },
 
   computed: {
+    timeZone () {
+      try {
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+        new Date('2000-01-15').toLocaleDateString('en', {
+          day: 'numeric',
+          timeZone
+        })
+        return timeZone
+      } catch (e) {
+        return 'UTC'
+      }
+    },
     supportsLocaleFormat () {
       return ('toLocaleDateString' in Date.prototype) &&
-        new Date(2000, 0, 15).toLocaleDateString('en', { day: 'numeric' }) === '15'
+        new Date('2000-01-15').toLocaleDateString('en', {
+          day: 'numeric',
+          timeZone: 'UTC'
+        }) === '15'
     },
     firstAllowedDate () {
       const date = new Date()
 
       if (this.type === 'month') {
         date.setDate(1)
-        date.setHours(12, 0, 0, 0)
+        date.setHours(1)
 
         if (this.allowedDates) {
           const valid = new Date(date)
@@ -110,15 +124,14 @@ export default {
           }
         }
       } else if (this.type === 'date') {
-        date.setHours(12, 0, 0, 0)
+        date.setHours(1)
+        const month = date.getMonth()
 
         if (this.allowedDates) {
-          const millisecondOffset = 1 * 24 * 60 * 60 * 1000
           const valid = new Date(date)
           for (let i = 0; i < 31; i++) {
-            if (this.isAllowed(valid)) return valid
-
-            valid.setTime(valid.getTime() + millisecondOffset)
+            if (date.getMonth() === month && this.isAllowed(valid)) return valid
+            valid.setDate(i)
           }
         }
       }
@@ -127,18 +140,14 @@ export default {
     },
     inputDate: {
       get () {
-        if (!this.value) return this.firstAllowedDate
-        if (this.value instanceof Date) return this.value
-        if (!isNaN(this.value) ||
-            typeof this.value === 'string' && this.value.indexOf(':') !== -1
-        ) return new Date(this.value)
-
-        return new Date(`${this.value}T12:00:00`)
+        const date = this.makeDate(this.value)
+        return date == null ? this.firstAllowedDate : date
       },
-      set (val) {
+      set (value) {
+        const date = this.makeDate(value)
         const pickerDateFormat = createDefaultDateFormat(this.type)
-        this.$emit('input', val ? pickerDateFormat(val) : this.originalDate)
-        this.$emit('update:formattedValue', (this.dateFormat || pickerDateFormat)(val || this.originalDate))
+        this.$emit('input', date == null ? this.originalDate : pickerDateFormat(date))
+        this.$emit('update:formattedValue', (this.dateFormat || pickerDateFormat)(date == null ? (this.makeDate(this.originalDate) || this.firstAllowedDate) : date))
       }
     },
     day () {
@@ -160,7 +169,7 @@ export default {
       return this.isReversing ? 'tab-reverse-transition' : 'tab-transition'
     },
     titleText () {
-      const date = new Date(this.year, this.month, this.day, 1 /* Workaround for #1409 */)
+      const date = this.normalizeDate(this.year, this.month, this.day)
 
       const defaultTitleDateFormat = this.type === 'year' ? {
         year: 'numeric'
@@ -176,7 +185,9 @@ export default {
       if (typeof this.titleDateFormat === 'function') {
         titleText = this.titleDateFormat(date)
       } else if (this.supportsLocaleFormat) {
-        titleText = date.toLocaleDateString(this.locale, this.titleDateFormat || defaultTitleDateFormat)
+        titleText = date.toLocaleDateString(this.locale, Object.assign(this.titleDateFormat || defaultTitleDateFormat, {
+          timeZone: this.timeZone
+        }))
       } else if ('toLocaleDateString' in Date.prototype) {
         titleText = createDefaultDateFormat(this.type)(date)
       }
@@ -238,10 +249,10 @@ export default {
     getWeekDays () {
       const first = parseInt(this.firstDayOfWeek, 10)
       if (this.supportsLocaleFormat) {
-        const date = new Date(2000, 1, 7)
+        const date = this.normalizeDate(2000, 1, 7)
         const day = date.getDate() - date.getDay() + first
         const format = { weekday: 'narrow' }
-        this.narrowDays = createRange(7).map(i => new Date(2000, 1, day + i).toLocaleDateString(this.locale, format))
+        this.narrowDays = createRange(7).map(i => this.normalizeDate(2000, 1, day + i).toLocaleDateString(this.locale, format))
       } else {
         this.narrowDays = createRange(7).map(i => ['S', 'M', 'T', 'W', 'T', 'F', 'S'][(i + first) % 7])
       }
@@ -251,14 +262,17 @@ export default {
 
       if (Array.isArray(this.allowedDates)) {
         const format = createDefaultDateFormat(this.activePicker === 'MONTH' ? 'month' : 'date')
-        date = format(date)
-        return !!this.allowedDates.find(allowedDate => format(allowedDate) === date)
+        date = format(this.makeDate(date))
+        return !!this.allowedDates.find(allowedDate => {
+          allowedDate = this.makeDate(allowedDate)
+          return allowedDate && format(allowedDate) === date
+        })
       } else if (this.allowedDates instanceof Function) {
         return this.allowedDates(date)
       } else if (this.allowedDates instanceof Object) {
         const format = createDefaultDateFormat(this.activePicker === 'MONTH' ? 'month' : 'date')
-        const min = format(this.allowedDates.min)
-        const max = format(this.allowedDates.max)
+        const min = format(this.makeDate(this.allowedDates.min))
+        const max = format(this.makeDate(this.allowedDates.max))
         date = format(date)
         return (!min || min <= date) && (!max || max >= date)
       }
@@ -301,17 +315,27 @@ export default {
         pickerBodyChildren.push(this.genTable([
           this.dateGenTHead(),
           this.dateGenTBody()
-        ], value => this.tableDate = new Date(this.tableYear, this.tableMonth + value)))
+        ], value => this.tableDate = this.normalizeDate(this.tableYear, this.tableMonth + value)))
       } else if (this.activePicker === 'MONTH') {
         pickerBodyChildren.push(h('div', { staticClass: 'picker--date__header' }, [this.genSelector()]))
         pickerBodyChildren.push(this.genTable([
           this.monthGenTBody()
-        ], value => this.tableDate = new Date(this.tableYear + value, 0)))
+        ], value => this.tableDate = this.normalizeDate(this.tableYear + value)))
       } else if (this.activePicker === 'YEAR') {
         pickerBodyChildren.push(this.genYears())
       }
 
       return pickerBodyChildren
+    },
+    makeDate (val) {
+      if (val == null) return val
+      if (val instanceof Date) return val
+      if (!isNaN(val)) return new Date(val)
+      const [year, month, date] = val.trim().split(' ')[0].split('-')
+      return this.normalizeDate(year, month ? (month - 1) : 0, date ? (date * 1) : 1)
+    },
+    normalizeDate (year, month = 0, date = 1) {
+      return new Date(year, month, date, 1 /* Workaround for #1409 */)
     }
   },
 
