@@ -45,6 +45,16 @@ export default {
 
       return search(this.$children)
     },
+    getValues () {
+      const results = {}
+
+      this.getInputs().forEach((input) => {
+        const name = input.$attrs.name
+        if (name) results[name] = input.value
+      })
+
+      return results
+    },
     watchInputs (inputs = this.getInputs()) {
       for (const child of inputs) {
         if (this.inputs.includes(child)) {
