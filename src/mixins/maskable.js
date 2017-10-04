@@ -87,15 +87,10 @@ export default {
       let selection = 0
 
       this.$refs.input.value = newValue
-      if (this.deleting) {
-        for (const char of newValue) {
-          if (this.lazySelection <= 0) break
-          isMaskDelimiter(char) || this.lazySelection--
-          selection++
-        }
-      } else {
-        selection = this.selection
-        while (isMaskDelimiter(newValue.substr(selection - 1, 1))) selection++
+      for (const char of newValue) {
+        if (this.lazySelection <= 0) break
+        isMaskDelimiter(char) || this.lazySelection--
+        selection++
       }
 
       this.setCaretPosition(selection)
