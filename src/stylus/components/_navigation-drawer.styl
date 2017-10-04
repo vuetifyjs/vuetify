@@ -17,13 +17,14 @@ navigation-drawer($material)
     background-color: $material.dividers
 
   .list
-    background: $material.cards
-
     &__tile:not(.list__tile--active)
       color: $material.text.primary
 
     &__tile__sub-title
       color: $material.text.secondary
+      
+    .icon
+      color: $material.icons.active
 
   .list--group__header--active
     .list__tile, + .list--group
@@ -117,6 +118,9 @@ theme(navigation-drawer, "navigation-drawer")
   ~ toolbar
     + main
       min-height: "calc(100vh - %s)" % $toolbar-height
+
+  .list
+    background: inherit
 
   > .list
     .list__tile

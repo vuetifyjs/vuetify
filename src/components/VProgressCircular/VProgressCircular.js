@@ -12,7 +12,7 @@ export default {
 
     fill: {
       type: String,
-      default: () => this.indeterminate ? 'none' : 'transparent'
+      default () { return this.indeterminate ? 'none' : 'transparent' }
     },
 
     indeterminate: Boolean,
