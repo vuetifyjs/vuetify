@@ -31,8 +31,8 @@ export function factory (opts = { closeDependents: true }) {
     },
 
     watch: {
-      isActive (val, oldVal) {
-        if (!val && val !== oldVal) {
+      isActive (val) {
+        if (!val) {
           for (const dependent of this.getCloseableDependents()) {
             dependent.isActive = false
           }
