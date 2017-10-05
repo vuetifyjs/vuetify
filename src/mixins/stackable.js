@@ -1,6 +1,6 @@
 import { getZIndex } from '../util/helpers'
 
-export function factory (opts = { minZIndex: 5, stackClass: 'unspecified' }) {
+export function factory (opts = { stackClass: 'unspecified' }) {
   return {
     computed: {
       activeZIndex () {
@@ -15,8 +15,9 @@ export function factory (opts = { minZIndex: 5, stackClass: 'unspecified' }) {
     },
     methods: {
       getMaxZIndex (exclude = []) {
-        // start with lowest allowed z-index or z-index of component, whichever is greater
-        const zis = [opts.minZIndex, this.$el ? getZIndex(this.$el) : 0]
+        const base = opts.base || this.$el
+        // start with lowest allowed z-index or z-index of base component's element, whichever is greater
+        const zis = [opts.minZIndex, getZIndex(base)]
         // get z-index for all active dialogs
         const activeElements = document.getElementsByClassName(opts.stackClass)
         for (const activeElement of activeElements) {
