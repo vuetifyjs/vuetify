@@ -35,12 +35,15 @@ export default {
 
       this.overlay = document.createElement('div')
       this.overlay.className = 'overlay'
+      /*
+      // click-outide directive should handle this
       this.overlay.onclick = (e) => {
         if (this.permanent) return
         else if (!this.persistent) this.isActive = false
         else if (this.isMobile) this.isActive = false
         if (this.activeZIndex !== undefined) e.stopPropagation()
       }
+      */
 
       if (this.absolute) this.overlay.className += ' overlay--absolute'
       if (this.activeZIndex !== undefined) this.overlay.style.zIndex = this.activeZIndex - 1
