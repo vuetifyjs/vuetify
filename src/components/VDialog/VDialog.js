@@ -95,7 +95,7 @@ export default {
       'class': this.classes,
       ref: 'dialog',
       directives: [
-        { name: 'click-outside', value: this.closeConditional },
+        { name: 'click-outside', value: this.closeConditional, include: () => this.getOpenDependentElements() },
         { name: 'show', value: this.isActive }
       ],
       on: {

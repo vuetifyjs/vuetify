@@ -5,9 +5,7 @@ import Colorable from '../../mixins/colorable'
 import Detachable from '../../mixins/detachable'
 import Menuable from '../../mixins/menuable'
 import Toggleable from '../../mixins/toggleable'
-import { factory as DependentFactory } from '../../mixins/dependent'
-
-const Dependent = DependentFactory({ isDependent: true })
+import Dependent from '../../mixins/dependent'
 
 export default {
   name: 'v-tooltip',

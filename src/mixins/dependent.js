@@ -12,7 +12,7 @@ export function factory (opts = { closeDependents: true }) {
     },
 
     methods: {
-      getCloseableDependents () {
+      getOpenDependents () {
         const results = []
         if (this.closeDependents) {
           const search = (children) => {
@@ -27,13 +27,26 @@ export function factory (opts = { closeDependents: true }) {
           search(this.$children)
         }
         return results
+      },
+      getOpenDependentElements () {
+        const result = []
+        for (const dependent of this.getOpenDependents()) {
+          result.push(...(dependent.getClicableDependentElements()))
+        }
+        return result
+      },
+      getClicableDependentElements () {
+        const result = [this.$el]
+        if (this.$refs.content) result.push(this.$refs.content)
+        result.push(...(this.getOpenDependentElements()))
+        return result
       }
     },
 
     watch: {
       isActive (val) {
         if (!val) {
-          for (const dependent of this.getCloseableDependents()) {
+          for (const dependent of this.getOpenDependents()) {
             dependent.isActive = false
           }
         }
