@@ -3,9 +3,11 @@
 set -e
 
 BRANCH=$(git symbolic-ref --short HEAD)
+LATEST=$(npm view vuetify version)
 echo #
 echo "Current branch is $BRANCH"
-echo "Last version was $(git describe)"
+echo "Last git version was $(git describe --abbrev=0 --tags)"
+echo "Last npm version was $LATEST"
 echo #
 
 read -e -p "Enter release version: " VERSION
@@ -22,9 +24,6 @@ echo #
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
   echo "Releasing $VERSION ..."
-
-  npm run lint
-  npm run test
 
   npm version $VERSION --message "[release] $VERSION"
 
