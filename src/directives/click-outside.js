@@ -3,26 +3,27 @@ function directive (e, el, binding, v) {
 
   if (binding.value) cb = binding.value
 
-  if (v.context.isActive && !clickedInEl(e, el, binding.include) && cb(e)) {
+  const elements = (binding.include || (() => []))()
+  elements.push(el)
+
+  if (v.context.isActive && !clickedInEls(e, elements) && cb(e)) {
     setTimeout(() => v.context.isActive = false, 0)
   }
 }
 
-function clickedInEl (e, el, include) {
+function clickedInEls (e, elements) {
+  for (const el of elements) {
+    if (clickedInEl(e, el)) return true
+  }
+  return false
+}
+
+function clickedInEl (e, el) {
   e = e || {}
   const b = el.getBoundingClientRect()
   const x = e.clientX
   const y = e.clientY
-  var inEl = x >= b.left && x <= b.right && y >= b.top && y <= b.bottom
-  if (!inEl && include) {
-    for (const v of include) {
-      if (v.$el) {
-        inEl = clickedInEl(e, v.$el)
-        if (inEl) return inEl
-      }
-    }
-  }
-  return inEl
+  return x >= b.left && x <= b.right && y >= b.top && y <= b.bottom
 }
 
 export default {

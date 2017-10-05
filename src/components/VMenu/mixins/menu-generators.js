@@ -44,7 +44,7 @@ export default {
       const directives = !this.openOnHover ? [{
         name: 'click-outside',
         value: () => this.closeOnClick,
-        include: [this]
+        include: () => [this.$el] // Include activator element in click-ouside check
       }] : []
 
       directives.push({
