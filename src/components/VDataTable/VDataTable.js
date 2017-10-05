@@ -61,6 +61,7 @@ export default {
       default: 'text'
     },
     hideActions: Boolean,
+    hideHeaders: Boolean,
     mustSort: Boolean,
     noResultsText: {
       type: String,
