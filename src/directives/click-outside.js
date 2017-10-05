@@ -1,4 +1,5 @@
 function directive (e, el, binding, v) {
+  if (!v.context.isActive) return
   let cb = () => true
 
   if (binding.value) cb = binding.value
@@ -6,7 +7,7 @@ function directive (e, el, binding, v) {
   const elements = (binding.include || (() => []))()
   elements.push(el)
 
-  if (v.context.isActive && !clickedInEls(e, elements) && cb(e)) {
+  if (!clickedInEls(e, elements) && cb(e)) {
     setTimeout(() => v.context.isActive = false, 0)
   }
 }
