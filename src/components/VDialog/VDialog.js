@@ -7,6 +7,10 @@ import { factory as DependentFactory } from '../../mixins/dependent'
 
 const Dependent = DependentFactory({ closeDependents: true, isDependent: false })
 
+import { factory as StackableFactory } from '../../mixins/stackable'
+
+const Stackable = StackableFactory({ minZIndex: 200, stackClass: 'dialog__content__active' })
+
 import ClickOutside from '../../directives/click-outside'
 
 import { getZIndex } from '../../util/helpers'
@@ -14,7 +18,7 @@ import { getZIndex } from '../../util/helpers'
 export default {
   name: 'v-dialog',
 
-  mixins: [Detachable, Overlayable, Toggleable, Dependent],
+  mixins: [Detachable, Overlayable, Toggleable, Dependent, Stackable],
 
   directives: {
     ClickOutside
@@ -56,24 +60,6 @@ export default {
         'dialog__content': true,
         'dialog__content__active': this.isActive
       }
-    },
-    activeZIndex () {
-      var thisContent = this.$refs.content
-      if (!this.isActive) {
-        // Return zero if we've not yet been created, else return our last z-index so close transition dont look funky
-        return thisContent ? getZIndex(thisContent) : 0
-      }
-      // start with lowest allowed z-index (For now, dialogs start at 200)
-      var zis = [200]
-      // get z-index for all active dialogs
-      var activeDialogs = document.getElementsByClassName('dialog__content__active')
-      for (const activeDialog of activeDialogs) {
-        if (thisContent !== activeDialog) {
-          zis.push(getZIndex(activeDialog))
-        }
-      }
-      // Return max current z-index + 2 (overlay will be this z-index - 1)
-      return Math.max(...zis) + 2
     }
   },
 
@@ -97,10 +83,9 @@ export default {
 
   methods: {
     closeConditional (e) {
-      // close dialog if !persistent and doesn't have an overlay (clicked overlay will close dialog), and clicked outside
-      const result = !this.persistent && this.hideOverlay
-      if (result) e.stopPropagation() // If we're going to close this dialog, stop propagaton so we don't close others below us as well.
-      return result
+      // close dialog if !persistent, clicked outside and we're the topmost dialog.
+      // Since this should only be called in a capture event (bottom up), we shouldn't need to stop propagation
+      return !this.persistent && getZIndex(this.$refs.content) >= this.getMaxZIndex()
     }
   },
 
@@ -131,7 +116,6 @@ export default {
         'class': 'dialog__activator',
         on: {
           click: e => {
-            e.stopPropagation()
             if (!this.disabled) this.isActive = !this.isActive
           }
         }

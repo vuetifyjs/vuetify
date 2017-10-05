@@ -1,6 +1,8 @@
 import Positionable from './positionable'
 
-import { getZIndex } from '../util/helpers'
+import { factory as StackableFactory } from './stackable'
+
+const Stackable = StackableFactory({ minZIndex: 6, stackClass: 'menuable__content__active' })
 
 const dimensions = {
   activator: {
@@ -29,7 +31,7 @@ const dimensions = {
  * As well as be manually positioned
  */
 export default {
-  mixins: [Positionable],
+  mixins: [Positionable, Stackable],
 
   data: () => ({
     absoluteX: 0,
@@ -85,25 +87,6 @@ export default {
   computed: {
     hasActivator () {
       return !!this.$slots.activator || this.activator
-    },
-    activeZIndex () {
-      var thisContent = this.$refs.content
-      // Get where we start our zIndex from.
-      if (!this.isActive) {
-        // Return zero if we've not yet been created, else return our last z-index so close transition dont look funky
-        return thisContent ? getZIndex(thisContent) : 0
-      }
-      // start with lowest allowed z-index of menu's parent container
-      var zis = [6, this.$el ? getZIndex(this.$el) : 0]
-      // get z-index for all active dialogs
-      var menus = document.getElementsByClassName('menuable__content__active')
-      for (const menu of menus) {
-        if (thisContent !== menu) {
-          zis.push(getZIndex(menu))
-        }
-      }
-      // Return max current z-index + 2 (overlay will be this z-index - 1)
-      return Math.max(...zis) + 2
     }
   },
 
