@@ -1,30 +1,23 @@
-export function factory (opts = { findDependents: true }) {
+export function factory (opts = { closeDependents: true }) {
   return {
-
-    data () {
-      return {
-        dependents: []
-      }
-    },
-
     props: {
-      findDependents: {
+      closeDependents: {
         type: Boolean,
-        default: opts.findDependents
+        default: opts.closeDependents
       },
-      dependent: {
+      isDependent: {
         type: Boolean,
-        default: opts.dependent
+        default: opts.isDependent
       }
     },
 
     methods: {
-      setDependents () {
+      getCloseableDependents () {
         const results = []
-        if (this.findDependents) {
+        if (this.closeDependents) {
           const search = (children) => {
             for (const child of children) {
-              if (child.dependent || (child.findDependents && child.dependent !== false)) {
+              if (child.isActive && (child.isDependent || (child.closeDependents && child.isDependent !== false))) {
                 results.push(child)
               } else {
                 search(child.$children)
@@ -33,30 +26,18 @@ export function factory (opts = { findDependents: true }) {
           }
           search(this.$children)
         }
-
-        this.dependents = results
+        return results
       }
     },
 
     watch: {
-      findDependents (val) {
-        this.setDependents()
-      },
-      isActive (val) {
-        if (!val) {
-          for (const dependent of this.dependents) {
-            if (dependent.isActive) dependent.isActive = false
+      isActive (val, oldVal) {
+        if (!val && val !== oldVal) {
+          for (const dependent of this.getCloseableDependents()) {
+            dependent.isActive = false
           }
         }
       }
-    },
-
-    mounted () {
-      this.$vuetify.load(() => this.setDependents())
-    },
-
-    updated () {
-      this.setDependents()
     }
   }
 }

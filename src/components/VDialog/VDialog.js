@@ -5,7 +5,7 @@ import Overlayable from '../../mixins/overlayable'
 import Toggleable from '../../mixins/toggleable'
 import { factory as DependentFactory } from '../../mixins/dependent'
 
-const Dependent = DependentFactory({ findDependents: true, dependent: false })
+const Dependent = DependentFactory({ closeDependents: true, isDependent: false })
 
 import ClickOutside from '../../directives/click-outside'
 
