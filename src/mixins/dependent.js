@@ -39,7 +39,7 @@ export function factory (opts = { findDependents: true }) {
     },
 
     watch: {
-      hasDependents (val) {
+      findDependents (val) {
         this.setDependents()
       },
       isActive (val) {
