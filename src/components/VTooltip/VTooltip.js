@@ -2,20 +2,16 @@ require('../../stylus/components/_tooltips.styl')
 
 // Mixins
 import Delayable from '../../mixins/delayable'
+import Dependent from '../../mixins/dependent'
 import Colorable from '../../mixins/colorable'
 import Detachable from '../../mixins/detachable'
 import Menuable from '../../mixins/menuable'
 import Toggleable from '../../mixins/toggleable'
-import Dependent from '../../mixins/dependent'
 
 export default {
   name: 'v-tooltip',
 
-<<<<<<< HEAD
-  mixins: [Colorable, Detachable, Menuable, Toggleable, Dependent],
-=======
-  mixins: [Colorable, Delayable, Detachable, Menuable, Toggleable],
->>>>>>> pr/9
+  mixins: [Colorable, Dependent, Delayable, Detachable, Menuable, Toggleable],
 
   data: () => ({
     calculatedMinWidth: 0
