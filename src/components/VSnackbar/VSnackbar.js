@@ -31,6 +31,7 @@ export default {
     multiLine: Boolean,
     right: Boolean,
     top: Boolean,
+    // TODO: change this to closeDelay to match other API in delayable.js
     timeout: {
       type: Number,
       default: 6000

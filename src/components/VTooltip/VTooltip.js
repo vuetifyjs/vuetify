@@ -1,6 +1,7 @@
 require('../../stylus/components/_tooltips.styl')
 
 // Mixins
+import Delayable from '../../mixins/delayable'
 import Colorable from '../../mixins/colorable'
 import Detachable from '../../mixins/detachable'
 import Menuable from '../../mixins/menuable'
@@ -9,7 +10,7 @@ import Toggleable from '../../mixins/toggleable'
 export default {
   name: 'v-tooltip',
 
-  mixins: [Colorable, Detachable, Menuable, Toggleable],
+  mixins: [Colorable, Delayable, Detachable, Menuable, Toggleable],
 
   data: () => ({
     calculatedMinWidth: 0
@@ -146,17 +147,10 @@ export default {
       h('span', {
         on: {
           mouseenter: () => {
-            clearTimeout(this.leaveTimeout)
-
-            this.isActive = true
+            this.runDelay('open', () => (this.isActive = true))
           },
           mouseleave: () => {
-            clearTimeout(this.leaveTimeout)
-
-            this.leaveTimeout = setTimeout(
-              () => (this.isActive = false),
-              this.debounce
-            )
+            this.runDelay('close', () => (this.isActive = false))
           }
         },
         ref: 'activator'
