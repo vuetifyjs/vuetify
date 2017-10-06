@@ -7,6 +7,7 @@ function searchChildren (children) {
       results.push(...searchChildren(child.$children))
     }
   }
+
   return results
 }
 
