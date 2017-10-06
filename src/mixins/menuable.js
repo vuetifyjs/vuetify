@@ -1,8 +1,6 @@
 import Positionable from './positionable'
 
-import { factory as StackableFactory } from './stackable'
-
-const Stackable = StackableFactory({ minZIndex: 6, stackClass: 'menuable__content__active' })
+import Stackable from './stackable'
 
 const dimensions = {
   activator: {
@@ -38,7 +36,9 @@ export default {
     absoluteY: 0,
     dimensions: Object.assign({}, dimensions),
     isContentActive: false,
-    pageYOffset: 0
+    pageYOffset: 0,
+    stackClass: 'menuable__content__active',
+    stackMinZIndex: 6
   }),
 
   props: {

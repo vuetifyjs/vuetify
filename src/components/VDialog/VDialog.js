@@ -4,7 +4,7 @@ require('../../stylus/components/_dialogs.styl')
 import { factory as DependentFactory } from '../../mixins/dependent'
 import Detachable from '../../mixins/detachable'
 import Overlayable from '../../mixins/overlayable'
-import { factory as StackableFactory } from '../../mixins/stackable'
+import Stackable from '../../mixins/stackable'
 import Toggleable from '../../mixins/toggleable'
 
 // Directives
@@ -14,7 +14,6 @@ import ClickOutside from '../../directives/click-outside'
 import { getZIndex } from '../../util/helpers'
 
 const Dependent = DependentFactory({ closeDependents: true, isDependent: false })
-const Stackable = StackableFactory({ minZIndex: 200, stackClass: 'dialog__content__active' })
 
 export default {
   name: 'v-dialog',
@@ -23,6 +22,13 @@ export default {
 
   directives: {
     ClickOutside
+  },
+
+  data () {
+    return {
+      stackClass: 'dialog__content__active',
+      stackMinZIndex: 200
+    }
   },
 
   props: {
