@@ -198,7 +198,11 @@ export default {
     },
     deactivate () {},
     getActivator () {
-      if (this.activator) return this.activator
+      if (this.activator) {
+        return typeof this.activator === 'string'
+          ? document.querySelector(this.activator)
+          : this.activator
+      }
 
       return this.$refs.activator.children
         ? this.$refs.activator.children[0]
