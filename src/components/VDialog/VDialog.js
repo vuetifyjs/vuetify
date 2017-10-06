@@ -1,7 +1,7 @@
 require('../../stylus/components/_dialogs.styl')
 
 // Mixins
-import { factory as DependentFactory } from '../../mixins/dependent'
+import Dependent from '../../mixins/dependent'
 import Detachable from '../../mixins/detachable'
 import Overlayable from '../../mixins/overlayable'
 import Stackable from '../../mixins/stackable'
@@ -12,8 +12,6 @@ import ClickOutside from '../../directives/click-outside'
 
 // Helpers
 import { getZIndex } from '../../util/helpers'
-
-const Dependent = DependentFactory({ closeDependents: true, isDependent: false })
 
 export default {
   name: 'v-dialog',
@@ -26,6 +24,7 @@ export default {
 
   data () {
     return {
+      isDependent: false,
       stackClass: 'dialog__content__active',
       stackMinZIndex: 200
     }

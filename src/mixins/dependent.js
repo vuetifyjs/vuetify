@@ -10,51 +10,41 @@ function searchChildren (children) {
   return results
 }
 
-export function factory (opts = { closeDependents: true }) {
-  return {
-    props: {
-      closeDependents: {
-        type: Boolean,
-        default: opts.closeDependents
-      },
-      isDependent: {
-        type: Boolean,
-        default: opts.isDependent
-      }
-    },
+export default {
+  data () {
+    return {
+      closeDependents: true,
+      isDependent: null
+    }
+  },
 
-    methods: {
-      getOpenDependents () {
-        if (this.closeDependents) return searchChildren(this.$children)
-        return []
-      },
-      getOpenDependentElements () {
-        const result = []
+  methods: {
+    getOpenDependents () {
+      if (this.closeDependents) return searchChildren(this.$children)
+      return []
+    },
+    getOpenDependentElements () {
+      const result = []
+      for (const dependent of this.getOpenDependents()) {
+        result.push(...dependent.getClickableDependentElements())
+      }
+      return result
+    },
+    getClickableDependentElements () {
+      const result = [this.$el]
+      if (this.$refs.content) result.push(this.$refs.content)
+      result.push(...this.getOpenDependentElements())
+      return result
+    }
+  },
+
+  watch: {
+    isActive (val) {
+      if (!val) {
         for (const dependent of this.getOpenDependents()) {
-          result.push(...dependent.getClickableDependentElements())
-        }
-        return result
-      },
-      getClickableDependentElements () {
-        const result = [this.$el]
-        if (this.$refs.content) result.push(this.$refs.content)
-        result.push(...this.getOpenDependentElements())
-        return result
-      }
-    },
-
-    watch: {
-      isActive (val) {
-        if (!val) {
-          for (const dependent of this.getOpenDependents()) {
-            dependent.isActive = false
-          }
+          dependent.isActive = false
         }
       }
     }
   }
 }
-
-const Dependent = factory()
-
-export default Dependent
