@@ -1,7 +1,7 @@
 function searchChildren (children) {
   const results = []
   for (const child of children) {
-    if (child.isActive && (child.isDependent || (child.closeDependents && child.isDependent !== false))) {
+    if (child.isActive && child.isDependent) {
       results.push(child)
     } else {
       results.push(...searchChildren(child.$children))
@@ -14,13 +14,14 @@ export default {
   data () {
     return {
       closeDependents: true,
-      isDependent: null
+      isDependent: true
     }
   },
 
   methods: {
     getOpenDependents () {
       if (this.closeDependents) return searchChildren(this.$children)
+
       return []
     },
     getOpenDependentElements () {
@@ -28,22 +29,24 @@ export default {
       for (const dependent of this.getOpenDependents()) {
         result.push(...dependent.getClickableDependentElements())
       }
+
       return result
     },
     getClickableDependentElements () {
       const result = [this.$el]
       if (this.$refs.content) result.push(this.$refs.content)
       result.push(...this.getOpenDependentElements())
+
       return result
     }
   },
 
   watch: {
     isActive (val) {
-      if (!val) {
-        for (const dependent of this.getOpenDependents()) {
-          dependent.isActive = false
-        }
+      if (val) return
+
+      for (const dependent of this.getOpenDependents()) {
+        dependent.isActive = false
       }
     }
   }

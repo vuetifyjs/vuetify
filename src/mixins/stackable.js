@@ -15,9 +15,11 @@ export default {
       const content = this.stackElement || this.$refs.content
       if (!this.isActive) {
         // Return current zindex if not active
+
         return getZIndex(content)
       }
       // Return max current z-index (excluding self) + 2 (2 to leave room for an overlay below, if needed)
+
       return this.getMaxZIndex((this.stackExclude || (() => [content]))()) + 2
     }
   },
@@ -33,6 +35,7 @@ export default {
           zis.push(getZIndex(activeElement))
         }
       }
+
       return Math.max(...zis)
     }
   }

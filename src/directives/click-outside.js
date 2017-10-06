@@ -34,6 +34,7 @@ function clickedInEls (e, elements) {
   for (const el of elements) {
     if (clickedInEl(el, x, y)) return true
   }
+
   return false
 }
 
@@ -43,6 +44,7 @@ function clickedInEl (el, x, y) {
   //  so can't use target.)
   const b = el.getBoundingClientRect()
   // Check if the click was in the element's bounding rect
+
   return x >= b.left && x <= b.right && y >= b.top && y <= b.bottom
 }
 

@@ -105,7 +105,7 @@ export default {
           name: 'click-outside',
           value: {
             callback: this.closeConditional,
-            include: () => this.getOpenDependentElements()
+            include: this.getOpenDependentElements
           }
         },
         { name: 'show', value: this.isActive }
