@@ -27,10 +27,20 @@ main
   will-change: padding-left
 
 .application--light a
-  color: $theme.primary
+  color: $material-light.text.link
+
+  &:hover,
+  &:focus,
+  &:active
+    color: $material-light.text.link-hover
 
 .application--dark a
-  color: $theme.accent
+  color: $material-dark.text.link
+
+  &:hover,
+  &:focus,
+  &:active
+    color: $material-dark.text.link-hover
 
 ::-ms-clear
 ::-ms-reveal
