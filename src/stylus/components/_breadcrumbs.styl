@@ -1,4 +1,21 @@
 ﻿@import '../bootstrap'
+@import '../theme'
+
+breadcrumbs($material)
+  .breadcrumbs__item
+    color: $material.text.link
+
+    &:hover,
+    &:focus,
+    &:active
+      color: $material.text.link-hover
+
+  li:not(:last-child):after,
+  li:last-child a,
+  li .breadcrumbs__item--disabled
+    color: $material.text.disabled
+
+theme(breadcrumbs, "breadcrumbs")
 
 .breadcrumbs
   display: flex
@@ -7,27 +24,24 @@
   flex: $breadcrumbs-flex
   margin: $breadcrumbs-margin
   list-style-type: none
-  
+
   li
     &:not(:last-child):after
-      color: $grey.lighten-1
       content: attr(data-divider)
       vertical-align: middle
-      
+
     &:last-child a
-      color: $grey.lighten-1
       pointer-events: none
       cursor: default
-      
+
   &--with-icons
     li
       &:not(:last-child):after
         font-family: 'Material Icons'
         font-feature-settings: 'liga'
-        
+
   &__item
     align-items: center
-    color: $theme.primary
     display: inline-flex
     font-size: $breadcrumbs-item-font-size
     padding: $breadcrumbs-padding
@@ -35,10 +49,6 @@
     text-decoration: none
     line-height: $breadcrumbs-height
     transition: $primary-transition
-    
-    &:hover
-      color: $grey.darken-1
-      
+
     &--disabled
-      color: $grey.lighten-2
       pointer-events: none
