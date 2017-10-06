@@ -180,15 +180,6 @@ export default {
   },
 
   render (h) {
-    // Do not add click outside for hover menu
-    const directives = [{
-      name: 'resize',
-      value: {
-        debounce: 500,
-        value: this.onResize
-      }
-    }]
-
     const data = {
       staticClass: 'menu',
       class: {
@@ -197,7 +188,13 @@ export default {
       style: {
         display: this.fullWidth ? 'block' : 'inline-block'
       },
-      directives,
+      directives: [{
+        name: 'resize',
+        value: {
+          debounce: 500,
+          value: this.onResize
+        }
+      }],
       on: {
         keydown: this.changeListIndex
       }
