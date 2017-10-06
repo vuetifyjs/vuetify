@@ -105,8 +105,7 @@ export default {
         },
         { name: 'show', value: this.isActive }
       ],
-      on: { click: e => e.stopPropagation()
-      }
+      on: { click: e => e.stopPropagation() }
     }
 
     if (!this.fullscreen) {
