@@ -1,6 +1,7 @@
 require('../../stylus/components/_menus.styl')
 
 // Mixins
+import Delayable from '../../mixins/delayable'
 import Detachable from '../../mixins/detachable'
 import Menuable from '../../mixins/menuable.js'
 import Toggleable from '../../mixins/toggleable'
@@ -21,6 +22,7 @@ export default {
 
   mixins: [
     Activator,
+    Delayable,
     Detachable,
     Generators,
     Keyable,
@@ -42,8 +44,6 @@ export default {
       startIndex: 3,
       stopIndex: 0,
       hasJustFocused: false,
-      openTimeout: null,
-      closeTimeout: null,
       resizeTimeout: null
     }
   },
