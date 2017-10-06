@@ -427,10 +427,7 @@ export default {
     genDirectives () {
       return [{
         name: 'click-outside',
-        value: {
-          callback: () => (this.isActive = false),
-          include: () => this.closeDependents ? this.getOpenDependentElements() : []
-        }
+        value: () => (this.isActive = false)
       }]
     },
     genListeners () {

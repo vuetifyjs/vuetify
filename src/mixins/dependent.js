@@ -29,7 +29,11 @@ export function factory (opts = { closeDependents: true }) {
         return []
       },
       getOpenDependentElements () {
-        return this.getOpenDependents().map(d => d.getClickableDependentElements())
+        const result = []
+        for (const dependent of this.getOpenDependents()) {
+          result.push(...dependent.getClickableDependentElements())
+        }
+        return result
       },
       getClickableDependentElements () {
         const result = [this.$el]
