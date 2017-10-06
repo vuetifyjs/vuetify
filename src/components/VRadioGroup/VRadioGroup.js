@@ -67,7 +67,7 @@ export default {
         .filter((child) => child.$el.classList.contains('radio'))
     },
     toggleRadio (value) {
-      if (this.disabled) {
+      if (this.isDisabled) {
         return
       }
 

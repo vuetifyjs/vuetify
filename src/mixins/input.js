@@ -12,6 +12,7 @@ export default {
 
   data () {
     return {
+      formDisabled: false,
       isFocused: false,
       tabFocused: false,
       internalTabIndex: null,
@@ -45,6 +46,9 @@ export default {
   },
 
   computed: {
+    isDisabled () {
+      return this.disabled || this.formDisabled
+    },
     inputGroupClasses () {
       return Object.assign({
         'input-group': true,
@@ -52,7 +56,7 @@ export default {
         'input-group--focused': this.isFocused,
         'input-group--dirty': this.isDirty,
         'input-group--tab-focused': this.tabFocused,
-        'input-group--disabled': this.disabled,
+        'input-group--disabled': this.isDisabled,
         'input-group--error': this.hasError,
         'input-group--append-icon': this.appendIcon,
         'input-group--prepend-icon': this.prependIcon,
@@ -136,7 +140,7 @@ export default {
           'input-group__icon-clearable': shouldClear
         },
         props: {
-          disabled: this.disabled
+          disabled: this.isDisabled
         },
         on: {
           click: e => {
@@ -156,7 +160,7 @@ export default {
       data = Object.assign({}, {
         'class': this.inputGroupClasses,
         attrs: {
-          tabindex: this.disabled
+          tabindex: this.isDisabled
             ? -1
             : this.internalTabIndex || this.tabindex
         },

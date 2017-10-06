@@ -78,7 +78,7 @@ export default {
 
     const data = {
       attrs: {
-        tabindex: this.disabled
+        tabindex: this.isDisabled
           ? -1
           : this.internalTabIndex || this.tabindex,
         role: 'checkbox',
