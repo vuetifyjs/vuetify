@@ -2,6 +2,7 @@ require('../../stylus/components/_menus.styl')
 
 // Mixins
 import Delayable from '../../mixins/delayable'
+import Dependent from '../../mixins/dependent'
 import Detachable from '../../mixins/detachable'
 import Menuable from '../../mixins/menuable.js'
 import Toggleable from '../../mixins/toggleable'
@@ -21,6 +22,7 @@ export default {
 
   mixins: [
     Activator,
+    Dependent,
     Delayable,
     Detachable,
     Generators,
@@ -131,7 +133,7 @@ export default {
         top: this.calculatedTop,
         left: this.calculatedLeft,
         transformOrigin: this.origin,
-        zIndex: this.zIndex
+        zIndex: this.zIndex || this.activeZIndex
       }
     }
   },
@@ -178,20 +180,6 @@ export default {
   },
 
   render (h) {
-    // Do not add click outside for hover menu
-    const directives = !this.openOnHover ? [{
-      name: 'click-outside',
-      value: () => this.closeOnClick
-    }] : []
-
-    directives.push({
-      name: 'resize',
-      value: {
-        debounce: 500,
-        value: this.onResize
-      }
-    })
-
     const data = {
       staticClass: 'menu',
       class: {
@@ -200,7 +188,13 @@ export default {
       style: {
         display: this.fullWidth ? 'block' : 'inline-block'
       },
-      directives,
+      directives: [{
+        name: 'resize',
+        value: {
+          debounce: 500,
+          value: this.onResize
+        }
+      }],
       on: {
         keydown: this.changeListIndex
       }

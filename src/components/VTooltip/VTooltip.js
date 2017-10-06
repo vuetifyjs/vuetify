@@ -1,8 +1,9 @@
 require('../../stylus/components/_tooltips.styl')
 
 // Mixins
-import Delayable from '../../mixins/delayable'
 import Colorable from '../../mixins/colorable'
+import Delayable from '../../mixins/delayable'
+import Dependent from '../../mixins/dependent'
 import Detachable from '../../mixins/detachable'
 import Menuable from '../../mixins/menuable'
 import Toggleable from '../../mixins/toggleable'
@@ -10,7 +11,7 @@ import Toggleable from '../../mixins/toggleable'
 export default {
   name: 'v-tooltip',
 
-  mixins: [Colorable, Delayable, Detachable, Menuable, Toggleable],
+  mixins: [Colorable, Delayable, Dependent, Detachable, Menuable, Toggleable],
 
   data: () => ({
     calculatedMinWidth: 0
@@ -31,7 +32,7 @@ export default {
     },
     transition: String,
     zIndex: {
-      default: '99'
+      default: null
     }
   },
 
@@ -104,7 +105,7 @@ export default {
         left: this.calculatedLeft,
         opacity: this.isActive ? 0.9 : 0,
         top: this.calculatedTop,
-        zIndex: this.zIndex
+        zIndex: this.zIndex || this.activeZIndex
       }
     }
   },
@@ -124,7 +125,8 @@ export default {
       staticClass: 'tooltip__content',
       'class': {
         [this.color]: this.color,
-        [this.contentClass]: true
+        [this.contentClass]: true,
+        'menuable__content__active': this.isActive
       },
       style: this.styles,
       attrs: this.attrs,

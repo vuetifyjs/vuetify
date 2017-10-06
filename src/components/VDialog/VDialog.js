@@ -1,18 +1,33 @@
 require('../../stylus/components/_dialogs.styl')
 
+// Mixins
+import Dependent from '../../mixins/dependent'
 import Detachable from '../../mixins/detachable'
 import Overlayable from '../../mixins/overlayable'
+import Stackable from '../../mixins/stackable'
 import Toggleable from '../../mixins/toggleable'
 
+// Directives
 import ClickOutside from '../../directives/click-outside'
+
+// Helpers
+import { getZIndex } from '../../util/helpers'
 
 export default {
   name: 'v-dialog',
 
-  mixins: [Detachable, Overlayable, Toggleable],
+  mixins: [Dependent, Detachable, Overlayable, Stackable, Toggleable],
 
   directives: {
     ClickOutside
+  },
+
+  data () {
+    return {
+      isDependent: false,
+      stackClass: 'dialog__content__active',
+      stackMinZIndex: 200
+    }
   },
 
   props: {
@@ -45,6 +60,12 @@ export default {
         'dialog--stacked-actions': this.stackedActions && !this.fullscreen,
         'dialog--scrollable': this.scrollable
       }
+    },
+    contentClasses () {
+      return {
+        'dialog__content': true,
+        'dialog__content__active': this.isActive
+      }
     }
   },
 
@@ -68,8 +89,9 @@ export default {
 
   methods: {
     closeConditional (e) {
-      // close dialog if !persistent and clicked outside
-      return !this.persistent
+      // close dialog if !persistent, clicked outside and we're the topmost dialog.
+      // Since this should only be called in a capture event (bottom up), we shouldn't need to stop propagation
+      return !this.persistent && getZIndex(this.$refs.content) >= this.getMaxZIndex()
     }
   },
 
@@ -79,9 +101,16 @@ export default {
       'class': this.classes,
       ref: 'dialog',
       directives: [
-        { name: 'click-outside', value: this.closeConditional },
+        {
+          name: 'click-outside',
+          value: {
+            callback: this.closeConditional,
+            include: this.getOpenDependentElements
+          }
+        },
         { name: 'show', value: this.isActive }
-      ]
+      ],
+      on: { click: e => e.stopPropagation() }
     }
 
     if (!this.fullscreen) {
@@ -95,7 +124,6 @@ export default {
         'class': 'dialog__activator',
         on: {
           click: e => {
-            e.stopPropagation()
             if (!this.disabled) this.isActive = !this.isActive
           }
         }
@@ -112,7 +140,8 @@ export default {
     )])
 
     children.push(h('div', {
-      'class': 'dialog__content',
+      'class': this.contentClasses,
+      style: { zIndex: this.activeZIndex },
       ref: 'content'
     }, [dialog]))
 

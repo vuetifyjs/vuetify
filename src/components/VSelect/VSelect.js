@@ -17,6 +17,7 @@ import VBtn from '../VBtn'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
+import Dependent from '../../mixins/dependent'
 import Filterable from '../../mixins/filterable'
 import Input from '../../mixins/input'
 import Maskable from '../../mixins/maskable'
@@ -52,7 +53,7 @@ export default {
     ClickOutside
   },
 
-  mixins: [Autocomplete, Colorable, Filterable, Generators, Input, Maskable],
+  mixins: [Autocomplete, Colorable, Dependent, Filterable, Generators, Input, Maskable],
 
   data () {
     return {
