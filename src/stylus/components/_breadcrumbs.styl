@@ -2,16 +2,8 @@
 @import '../theme'
 
 breadcrumbs($material)
-  .breadcrumbs__item
-    color: $material.text.link
-
-    &:hover,
-    &:focus,
-    &:active
-      color: $material.text.link-hover
-
   li:not(:last-child):after,
-  li:last-child a,
+  li:last-child .breadcrumbs__item,
   li .breadcrumbs__item--disabled
     color: $material.text.disabled
 
