@@ -1,24 +1,25 @@
 require('../../stylus/components/_dialogs.styl')
 
+// Mixins
+import { factory as DependentFactory } from '../../mixins/dependent'
 import Detachable from '../../mixins/detachable'
 import Overlayable from '../../mixins/overlayable'
-import Toggleable from '../../mixins/toggleable'
-import { factory as DependentFactory } from '../../mixins/dependent'
-
-const Dependent = DependentFactory({ closeDependents: true, isDependent: false })
-
 import { factory as StackableFactory } from '../../mixins/stackable'
+import Toggleable from '../../mixins/toggleable'
 
-const Stackable = StackableFactory({ minZIndex: 200, stackClass: 'dialog__content__active' })
-
+// Directives
 import ClickOutside from '../../directives/click-outside'
 
+// Helpers
 import { getZIndex } from '../../util/helpers'
+
+const Dependent = DependentFactory({ closeDependents: true, isDependent: false })
+const Stackable = StackableFactory({ minZIndex: 200, stackClass: 'dialog__content__active' })
 
 export default {
   name: 'v-dialog',
 
-  mixins: [Detachable, Overlayable, Toggleable, Dependent, Stackable],
+  mixins: [Dependent, Detachable, Overlayable, Stackable, Toggleable],
 
   directives: {
     ClickOutside
@@ -95,13 +96,16 @@ export default {
       'class': this.classes,
       ref: 'dialog',
       directives: [
-        { name: 'click-outside', value: this.closeConditional, include: () => this.getOpenDependentElements() },
+        {
+          name: 'click-outside',
+          value: {
+            callback: this.closeConditional,
+            include: () => this.getOpenDependentElements()
+          }
+        },
         { name: 'show', value: this.isActive }
       ],
-      on: {
-        click: e => {
-          e.stopPropagation()
-        }
+      on: { click: e => e.stopPropagation()
       }
     }
 
@@ -133,9 +137,7 @@ export default {
 
     children.push(h('div', {
       'class': this.contentClasses,
-      style: {
-        zIndex: this.activeZIndex
-      },
+      style: { zIndex: this.activeZIndex },
       ref: 'content'
     }, [dialog]))
 

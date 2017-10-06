@@ -2,10 +2,10 @@ require('../../stylus/components/_menus.styl')
 
 // Mixins
 import Delayable from '../../mixins/delayable'
+import Dependent from '../../mixins/dependent'
 import Detachable from '../../mixins/detachable'
 import Menuable from '../../mixins/menuable.js'
 import Toggleable from '../../mixins/toggleable'
-import Dependent from '../../mixins/dependent'
 
 // Component level mixins
 import Activator from './mixins/menu-activator'
@@ -22,14 +22,14 @@ export default {
 
   mixins: [
     Activator,
+    Dependent,
     Delayable,
     Detachable,
     Generators,
     Keyable,
     Menuable,
     Position,
-    Toggleable,
-    Dependent
+    Toggleable
   ],
 
   directives: {

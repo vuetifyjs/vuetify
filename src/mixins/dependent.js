@@ -1,3 +1,15 @@
+function searchChildren (children) {
+  const results = []
+  for (const child of children) {
+    if (child.isActive && (child.isDependent || (child.closeDependents && child.isDependent !== false))) {
+      results.push(child)
+    } else {
+      results.push(...searchChildren(child.$children))
+    }
+  }
+  return results
+}
+
 export function factory (opts = { closeDependents: true }) {
   return {
     props: {
@@ -13,32 +25,16 @@ export function factory (opts = { closeDependents: true }) {
 
     methods: {
       getOpenDependents () {
-        const results = []
-        if (this.closeDependents) {
-          const search = (children) => {
-            for (const child of children) {
-              if (child.isActive && (child.isDependent || (child.closeDependents && child.isDependent !== false))) {
-                results.push(child)
-              } else {
-                search(child.$children)
-              }
-            }
-          }
-          search(this.$children)
-        }
-        return results
+        if (this.closeDependents) return searchChildren(this.$children)
+        return []
       },
       getOpenDependentElements () {
-        const result = []
-        for (const dependent of this.getOpenDependents()) {
-          result.push(...(dependent.getClicableDependentElements()))
-        }
-        return result
+        return this.getOpenDependents().map(d => d.getClickableDependentElements())
       },
-      getClicableDependentElements () {
+      getClickableDependentElements () {
         const result = [this.$el]
         if (this.$refs.content) result.push(this.$refs.content)
-        result.push(...(this.getOpenDependentElements()))
+        result.push(...this.getOpenDependentElements())
         return result
       }
     },

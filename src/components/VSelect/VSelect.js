@@ -17,10 +17,10 @@ import VBtn from '../VBtn'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
+import Dependent from '../../mixins/dependent'
 import Filterable from '../../mixins/filterable'
 import Input from '../../mixins/input'
 import Maskable from '../../mixins/maskable'
-import Dependent from '../../mixins/dependent'
 
 // Component level mixins
 import Autocomplete from './mixins/select-autocomplete'
@@ -46,15 +46,14 @@ export default {
     VListTileContent,
     VListTileTitle,
     VMenu,
-    VBtn,
-    Dependent
+    VBtn
   },
 
   directives: {
     ClickOutside
   },
 
-  mixins: [Autocomplete, Colorable, Filterable, Generators, Input, Maskable],
+  mixins: [Autocomplete, Colorable, Dependent, Filterable, Generators, Input, Maskable],
 
   data () {
     return {
@@ -428,8 +427,10 @@ export default {
     genDirectives () {
       return [{
         name: 'click-outside',
-        value: () => (this.isActive = false),
-        include: () => this.closeDependents ? this.getOpenDependentElements() : []
+        value: {
+          callback: () => (this.isActive = false),
+          include: () => this.closeDependents ? this.getOpenDependentElements() : []
+        }
       }]
     },
     genListeners () {
