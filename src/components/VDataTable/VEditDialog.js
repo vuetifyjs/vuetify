@@ -56,7 +56,7 @@ export default {
       return this.$createElement('v-btn', {
         props: {
           flat: true,
-          primary: true,
+          color: 'primary',
           light: true
         },
         on: { click: fn }
