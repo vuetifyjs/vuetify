@@ -423,7 +423,16 @@ export default {
     genDirectives () {
       return [{
         name: 'click-outside',
-        value: () => (this.isActive = false)
+        value: e => {
+          if (!this.$refs.menu ||
+            !this.isMultiple
+          ) return true
+
+          return (
+            this.$refs.menu &&
+            !this.$refs.menu.$refs.content.contains(e.target)
+          )
+        }
       }]
     },
     genListeners () {
