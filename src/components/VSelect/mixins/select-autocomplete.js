@@ -87,43 +87,37 @@ export default {
 
       if (!this.tags || !this.searchValue) return
 
-      let newItem
       // Tab, enter
       if ([9, 13].includes(e.keyCode)) {
-        newItem = this.filteredItems.length && this.$refs.menu.listIndex >= 0
+        const newItem = this.filteredItems.length && this.$refs.menu.listIndex >= 0
           ? this.filteredItems[this.$refs.menu.listIndex]
           : this.searchValue
+        this.addTag(newItem)
       }
 
       // Left arrow
-      if (e.keyCode === 37 && this.$refs.input.selectionStart === 0) {
-        newItem = this.searchValue
+      if (e.keyCode === 37 && this.$refs.input.selectionStart === 0 && this.selectedItems.length) {
+        this.addTag(this.searchValue)
         this.$nextTick(() => {
-          this.searchValue = null
-          this.selectedIndex = this.selectedItems.length > 1
-            ? this.selectedItems.length - 2
-            : 0
-        })
-      }
-
-      if (newItem != null) {
-        if (this.selectedItems.includes(newItem)) {
-          this.$delete(this.selectedItems, this.selectedItems.indexOf(newItem))
-        } else {
-          this.selectedItems.push(newItem)
-        }
-        this.$nextTick(() => {
-          this.searchValue = null
-          this.$emit('change', this.selectedItems)
+          this.selectedIndex = Math.max(this.selectedItems.length - 2, 0)
         })
       }
 
       // Right arrow
       if (e.keyCode === 39 && this.$refs.input.selectionEnd === this.searchValue.length) {
-        this.$nextTick(() => {
-          this.$refs.menu.listIndex = -1
-        })
+        this.$refs.menu.listIndex = -1
       }
+    },
+    addTag (content) {
+      if (this.selectedItems.includes(content)) {
+        this.$delete(this.selectedItems, this.selectedItems.indexOf(content))
+      } else {
+        this.selectedItems.push(content)
+      }
+      this.$nextTick(() => {
+        this.searchValue = null
+        this.$emit('change', this.selectedItems)
+      })
     }
   }
 }
