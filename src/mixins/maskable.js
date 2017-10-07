@@ -83,7 +83,7 @@ export default {
       this.selection = selection
       if (this.isAndroid) {
         // Android overrides the selection after nextTick().
-        // So defer the call to setSelectionRange().
+        // So delay the call to setSelectionRange().
         window.setTimeout(() => {
           this.$refs.input.setSelectionRange(selection, selection)
         }, 1)
