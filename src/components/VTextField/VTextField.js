@@ -231,7 +231,7 @@ export default {
       this.$nextTick(() => this.$refs.input.focus())
     },
     resetSelections (input) {
-      this.selection = input.selectionStart
+      this.selection = input.selectionEnd
       this.lazySelection = 0
 
       for (const char of input.value.substr(0, this.selection)) {
