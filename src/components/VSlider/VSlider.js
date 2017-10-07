@@ -74,7 +74,7 @@ export default {
         }
         */
 
-        const value = snap ? Math.round(val / step) * step : parseInt(val)
+        const value = snap ? Math.round(val / step) * step : Math.round(val)
         this.lazyValue = value
 
         if (value !== this.value) {
