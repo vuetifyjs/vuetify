@@ -1,7 +1,7 @@
 export default {
   methods: {
     genTHead () {
-      if (this.hideHeaders === true) { return } // Exit Early since no headers are needed. Do we also need to set this.headers = [] ?
+      if (this.hideHeaders) return // Exit Early since no headers are needed.
 
       let children = []
 
