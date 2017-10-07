@@ -79,8 +79,6 @@ export default {
     },
     classes () {
       return {
-        'tooltip--absolute': this.absolute,
-        'tooltip--fixed': this.fixed && !this.absolute,
         'tooltip--top': this.top,
         'tooltip--right': this.right,
         'tooltip--bottom': this.bottom,

@@ -42,7 +42,12 @@ export default {
   }),
 
   props: {
-    activator: { default: null },
+    activator: {
+      default: null,
+      validate: val => {
+        return ['string', 'object'].includes(typeof val)
+      }
+    },
     allowOverflow: Boolean,
     maxWidth: {
       type: [Number, String],

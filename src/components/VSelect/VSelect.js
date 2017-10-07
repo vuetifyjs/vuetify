@@ -80,11 +80,9 @@ export default {
     appendIconCb: Function,
     auto: Boolean,
     autocomplete: Boolean,
-    bottom: Boolean,
     cacheItems: Boolean,
     chips: Boolean,
     clearable: Boolean,
-    close: Boolean,
     color: {
       type: String,
       default: 'primary'
@@ -127,14 +125,12 @@ export default {
     },
     multiple: Boolean,
     multiLine: Boolean,
-    offset: Boolean,
     solo: Boolean,
     searchInput: {
       default: null
     },
     singleLine: Boolean,
     tags: Boolean,
-    top: Boolean,
     returnObject: Boolean,
     overflow: Boolean,
     segmented: Boolean,

@@ -11,7 +11,7 @@ exports[`VSelect.js should render buttons correctly when using items array with 
          style="overflow: hidden;"
     >
       <button type="button"
-              class="btn btn--flat"
+              class="btn btn--flat btn--raised"
       >
         <div class="btn__content">
           Hello

@@ -13,8 +13,6 @@ export default {
 
   props: {
     disabled: Boolean,
-    fa: Boolean,
-    mdi: Boolean,
     large: Boolean,
     left: Boolean,
     medium: Boolean,

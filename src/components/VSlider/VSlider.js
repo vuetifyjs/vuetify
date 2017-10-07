@@ -26,7 +26,6 @@ export default {
       type: String,
       default: null
     },
-    inverted: Boolean,
     min: {
       type: [Number, String],
       default: 0
@@ -45,7 +44,6 @@ export default {
     },
     thumbLabel: Boolean,
     value: [Number, String],
-    vertical: Boolean,
     snap: Boolean,
     trackColor: {
       type: String,

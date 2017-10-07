@@ -31,6 +31,10 @@ export default {
     large: Boolean,
     loading: Boolean,
     outline: Boolean,
+    raised: {
+      type: Boolean,
+      default: true
+    },
     ripple: {
       type: [Boolean, Object],
       default: true
@@ -69,7 +73,7 @@ export default {
         'btn--left': this.left,
         'btn--loader': this.loading,
         'btn--outline': this.outline,
-        'btn--raised': !this.flat,
+        'btn--raised': !this.flat || this.raised,
         'btn--right': this.right,
         'btn--round': this.round,
         'btn--router': this.to,
