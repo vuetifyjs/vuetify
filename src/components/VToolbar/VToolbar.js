@@ -36,7 +36,10 @@ export default {
     flat: Boolean,
     floating: Boolean,
     height: [Number, String],
-    manualScroll: Boolean,
+    manualScroll: {
+      type: Boolean,
+      default: null
+    },
     prominent: Boolean,
     scrollOffScreen: Boolean,
     scrollTarget: String,
@@ -49,12 +52,12 @@ export default {
   computed: {
     computedHeight () {
       if (this.height) return this.height
-      if (this.dense) return this.dense
+      if (this.dense) return this.heights.dense
       if (this.prominent ||
         this.$vuetify.breakpoint.mdAndUp
       ) return this.heights.desktop
-      if (this.$vuetify.breakpoint.clientWidth >
-        this.$vuetify.breakpoint.clientHeight
+      if (this.$vuetify.breakpoint.width >
+        this.$vuetify.breakpoint.height
       ) return this.mobileLandscape
 
       return this.heights.mobile

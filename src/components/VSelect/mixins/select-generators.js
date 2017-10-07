@@ -164,6 +164,7 @@ export default {
 
       return this.$createElement('v-chip', {
         staticClass: 'chip--select-multi',
+        attrs: { tabindex: '-1' },
         props: {
           close: !isDisabled,
           dark: this.dark,

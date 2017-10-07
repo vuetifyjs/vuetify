@@ -2,6 +2,8 @@ require('../../stylus/components/_tooltips.styl')
 
 // Mixins
 import Colorable from '../../mixins/colorable'
+import Delayable from '../../mixins/delayable'
+import Dependent from '../../mixins/dependent'
 import Detachable from '../../mixins/detachable'
 import Menuable from '../../mixins/menuable'
 import Toggleable from '../../mixins/toggleable'
@@ -9,7 +11,7 @@ import Toggleable from '../../mixins/toggleable'
 export default {
   name: 'v-tooltip',
 
-  mixins: [Colorable, Detachable, Menuable, Toggleable],
+  mixins: [Colorable, Delayable, Dependent, Detachable, Menuable, Toggleable],
 
   data: () => ({
     calculatedMinWidth: 0
@@ -30,7 +32,7 @@ export default {
     },
     transition: String,
     zIndex: {
-      default: '99'
+      default: null
     }
   },
 
@@ -77,8 +79,6 @@ export default {
     },
     classes () {
       return {
-        'tooltip--absolute': this.absolute,
-        'tooltip--fixed': this.fixed && !this.absolute,
         'tooltip--top': this.top,
         'tooltip--right': this.right,
         'tooltip--bottom': this.bottom,
@@ -103,7 +103,7 @@ export default {
         left: this.calculatedLeft,
         opacity: this.isActive ? 0.9 : 0,
         top: this.calculatedTop,
-        zIndex: this.zIndex
+        zIndex: this.zIndex || this.activeZIndex
       }
     }
   },
@@ -123,7 +123,8 @@ export default {
       staticClass: 'tooltip__content',
       'class': {
         [this.color]: this.color,
-        [this.contentClass]: true
+        [this.contentClass]: true,
+        'menuable__content__active': this.isActive
       },
       style: this.styles,
       attrs: this.attrs,
@@ -146,17 +147,10 @@ export default {
       h('span', {
         on: {
           mouseenter: () => {
-            clearTimeout(this.leaveTimeout)
-
-            this.isActive = true
+            this.runDelay('open', () => (this.isActive = true))
           },
           mouseleave: () => {
-            clearTimeout(this.leaveTimeout)
-
-            this.leaveTimeout = setTimeout(
-              () => (this.isActive = false),
-              this.debounce
-            )
+            this.runDelay('close', () => (this.isActive = false))
           }
         },
         ref: 'activator'

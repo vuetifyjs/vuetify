@@ -53,24 +53,6 @@ test('VIcon.js', () => {
     expect(wrapper.element.classList).toContain('icon--right')
   })
 
-  it('should render correctly with deprecated prop fa', () => {
-    const context = functionalContext({ props: { fa: true } }, 'add')
-    const wrapper = mount(VIcon, context)
-
-    expect(wrapper.text()).toBe('')
-    expect(wrapper.element.className).toBe('fa icon fa-add')
-    expect("'fa' and 'mdi' will be deprecated").toHaveBeenTipped()
-  })
-
-  it('should render correctly with deprecated prop mdi', () => {
-    const context = functionalContext({ props: { mdi: true } }, 'add')
-    const wrapper = mount(VIcon, context)
-
-    expect(wrapper.text()).toBe('')
-    expect(wrapper.element.className).toBe('mdi icon mdi-add')
-    expect("'fa' and 'mdi' will be deprecated").toHaveBeenTipped()
-  })
-
   it('should allow third-party icons when using <icon>- prefix', () => {
     const context = functionalContext({ props: {} }, 'fa-add')
     const wrapper = mount(VIcon, context)

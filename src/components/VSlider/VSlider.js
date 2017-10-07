@@ -26,7 +26,6 @@ export default {
       type: String,
       default: null
     },
-    inverted: Boolean,
     min: {
       type: [Number, String],
       default: 0
@@ -45,7 +44,6 @@ export default {
     },
     thumbLabel: Boolean,
     value: [Number, String],
-    vertical: Boolean,
     snap: Boolean,
     trackColor: {
       type: String,
@@ -190,13 +188,13 @@ export default {
         width: trackWidth
       } = this.$refs.track.getBoundingClientRect()
       const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
-      let left = (
+      const left = (
         ((clientX - offsetLeft) / trackWidth) * 100
       )
 
-      left = left < 0 ? 0 : left > 100 ? 100 : left
-
-      this.inputValue = parseInt(this.min, 10) + ((left / 100) * (this.max - this.min))
+      if (left >= 0 && left <= 100) {
+        this.inputValue = parseInt(this.min, 10) + ((left / 100) * (this.max - this.min))
+      }
     },
     onKeyDown (e) {
       if (e.keyCode === 37 || e.keyCode === 39) {

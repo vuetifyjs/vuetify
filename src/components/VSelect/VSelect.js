@@ -17,6 +17,7 @@ import VBtn from '../VBtn'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
+import Dependent from '../../mixins/dependent'
 import Filterable from '../../mixins/filterable'
 import Input from '../../mixins/input'
 import Maskable from '../../mixins/maskable'
@@ -52,7 +53,7 @@ export default {
     ClickOutside
   },
 
-  mixins: [Autocomplete, Colorable, Filterable, Generators, Input, Maskable],
+  mixins: [Autocomplete, Colorable, Dependent, Filterable, Generators, Input, Maskable],
 
   data () {
     return {
@@ -79,11 +80,9 @@ export default {
     appendIconCb: Function,
     auto: Boolean,
     autocomplete: Boolean,
-    bottom: Boolean,
     cacheItems: Boolean,
     chips: Boolean,
     clearable: Boolean,
-    close: Boolean,
     color: {
       type: String,
       default: 'primary'
@@ -126,14 +125,12 @@ export default {
     },
     multiple: Boolean,
     multiLine: Boolean,
-    offset: Boolean,
     solo: Boolean,
     searchInput: {
       default: null
     },
     singleLine: Boolean,
     tags: Boolean,
-    top: Boolean,
     returnObject: Boolean,
     overflow: Boolean,
     segmented: Boolean,
@@ -427,7 +424,16 @@ export default {
     genDirectives () {
       return [{
         name: 'click-outside',
-        value: () => (this.isActive = false)
+        value: e => {
+          if (!this.$refs.menu ||
+            !this.isMultiple
+          ) return true
+
+          return (
+            this.$refs.menu &&
+            !this.$refs.menu.$refs.content.contains(e.target)
+          )
+        }
       }]
     },
     genListeners () {

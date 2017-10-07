@@ -4,7 +4,7 @@ exports[`VBtnToggle.vue should allow deselecting a value when mandatory prop is 
 
 <div class="btn-toggle btn-toggle--selected">
   <button type="button"
-          class="btn btn--flat"
+          class="btn btn--flat btn--raised"
   >
     <div class="btn__content">
       <i class="material-icons icon">
@@ -13,7 +13,7 @@ exports[`VBtnToggle.vue should allow deselecting a value when mandatory prop is 
     </div>
   </button>
   <button type="button"
-          class="btn btn--flat btn--active"
+          class="btn btn--flat btn--raised btn--active"
           data-selected="true"
   >
     <div class="btn__content">
@@ -23,7 +23,7 @@ exports[`VBtnToggle.vue should allow deselecting a value when mandatory prop is 
     </div>
   </button>
   <button type="button"
-          class="btn btn--flat btn--active"
+          class="btn btn--flat btn--raised btn--active"
           data-selected="true"
   >
     <div class="btn__content">
@@ -40,7 +40,7 @@ exports[`VBtnToggle.vue should allow new value when mandatory prop is used 1`] =
 
 <div class="btn-toggle btn-toggle--selected">
   <button type="button"
-          class="btn btn--flat"
+          class="btn btn--flat btn--raised"
   >
     <div class="btn__content">
       <i class="material-icons icon">
@@ -49,7 +49,7 @@ exports[`VBtnToggle.vue should allow new value when mandatory prop is used 1`] =
     </div>
   </button>
   <button type="button"
-          class="btn btn--flat btn--active"
+          class="btn btn--flat btn--raised btn--active"
           data-selected="true"
           data-only-child="true"
   >
@@ -60,7 +60,7 @@ exports[`VBtnToggle.vue should allow new value when mandatory prop is used 1`] =
     </div>
   </button>
   <button type="button"
-          class="btn btn--flat"
+          class="btn btn--flat btn--raised"
   >
     <div class="btn__content">
       <i class="material-icons icon">
@@ -76,7 +76,7 @@ exports[`VBtnToggle.vue should allow new value when mandatory prop is used with 
 
 <div class="btn-toggle btn-toggle--selected">
   <button type="button"
-          class="btn btn--flat"
+          class="btn btn--flat btn--raised"
   >
     <div class="btn__content">
       <i class="material-icons icon">
@@ -85,7 +85,7 @@ exports[`VBtnToggle.vue should allow new value when mandatory prop is used with 
     </div>
   </button>
   <button type="button"
-          class="btn btn--flat btn--active"
+          class="btn btn--flat btn--raised btn--active"
           data-selected="true"
           data-only-child="true"
   >
@@ -96,7 +96,7 @@ exports[`VBtnToggle.vue should allow new value when mandatory prop is used with 
     </div>
   </button>
   <button type="button"
-          class="btn btn--flat"
+          class="btn btn--flat btn--raised"
   >
     <div class="btn__content">
       <i class="material-icons icon">
@@ -112,7 +112,7 @@ exports[`VBtnToggle.vue should not allow empty value when mandatory prop is used
 
 <div class="btn-toggle btn-toggle--selected">
   <button type="button"
-          class="btn btn--flat btn--active"
+          class="btn btn--flat btn--raised btn--active"
           data-selected="true"
           data-only-child="true"
   >
@@ -123,7 +123,7 @@ exports[`VBtnToggle.vue should not allow empty value when mandatory prop is used
     </div>
   </button>
   <button type="button"
-          class="btn btn--flat"
+          class="btn btn--flat btn--raised"
   >
     <div class="btn__content">
       <i class="material-icons icon">
@@ -132,7 +132,7 @@ exports[`VBtnToggle.vue should not allow empty value when mandatory prop is used
     </div>
   </button>
   <button type="button"
-          class="btn btn--flat"
+          class="btn btn--flat btn--raised"
   >
     <div class="btn__content">
       <i class="material-icons icon">
@@ -148,7 +148,7 @@ exports[`VBtnToggle.vue should not allow empty value when mandatory prop is used
 
 <div class="btn-toggle btn-toggle--selected">
   <button type="button"
-          class="btn btn--flat"
+          class="btn btn--flat btn--raised"
   >
     <div class="btn__content">
       <i class="material-icons icon">
@@ -157,7 +157,7 @@ exports[`VBtnToggle.vue should not allow empty value when mandatory prop is used
     </div>
   </button>
   <button type="button"
-          class="btn btn--flat btn--active"
+          class="btn btn--flat btn--raised btn--active"
           data-selected="true"
           data-only-child="true"
   >
@@ -168,7 +168,7 @@ exports[`VBtnToggle.vue should not allow empty value when mandatory prop is used
     </div>
   </button>
   <button type="button"
-          class="btn btn--flat"
+          class="btn btn--flat btn--raised"
   >
     <div class="btn__content">
       <i class="material-icons icon">
@@ -185,7 +185,7 @@ exports[`VBtnToggle.vue should use button value attribute if available 1`] = `
 <div class="btn-toggle btn-toggle--selected">
   <button type="button"
           value="left"
-          class="btn btn--flat"
+          class="btn btn--flat btn--raised"
   >
     <div class="btn__content">
       <i class="material-icons icon">
@@ -195,7 +195,7 @@ exports[`VBtnToggle.vue should use button value attribute if available 1`] = `
   </button>
   <button type="button"
           value="center"
-          class="btn btn--flat btn--active"
+          class="btn btn--flat btn--raised btn--active"
           data-selected="true"
           data-only-child="true"
   >
@@ -207,7 +207,7 @@ exports[`VBtnToggle.vue should use button value attribute if available 1`] = `
   </button>
   <button type="button"
           value="right"
-          class="btn btn--flat"
+          class="btn btn--flat btn--raised"
   >
     <div class="btn__content">
       <i class="material-icons icon">
