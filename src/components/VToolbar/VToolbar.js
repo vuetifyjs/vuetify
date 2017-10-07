@@ -102,7 +102,7 @@ export default {
       return this.$vuetify.application.right
     },
     styles () {
-      return {
+      return this.app && {
         marginTop: `${this.computedMarginTop}px`,
         paddingLeft: `${this.paddingLeft}px`,
         paddingRight: `${this.paddingRight}px`
