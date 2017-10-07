@@ -78,7 +78,9 @@ export default {
   methods: {
     setCaretPosition (selection) {
       this.selection = selection
-      this.$refs.input.setSelectionRange(selection, selection)
+      window.setTimeout(() => {
+        this.$refs.input.setSelectionRange(selection, selection)
+      }, 0)
     },
     updateRange () {
       if (!this.$refs.input) return
