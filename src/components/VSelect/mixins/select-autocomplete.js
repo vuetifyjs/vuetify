@@ -44,6 +44,8 @@ export default {
       const searchValue = (this.searchValue || '').toString().toLowerCase()
       const index = text.toLowerCase().indexOf(searchValue)
 
+      if (index < 0) return { start: '', middle: text, end: '' }
+
       const start = text.slice(0, index)
       const middle = text.slice(index, index + searchValue.length)
       const end = text.slice(index + searchValue.length)
