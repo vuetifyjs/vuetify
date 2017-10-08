@@ -289,12 +289,13 @@ export default {
       }
     },
     genTable (tableChildren, touchCallback) {
+      const wheel = this.activePicker === 'MONTH' ? this.monthWheelScroll : this.dateWheelScroll
       const options = {
         staticClass: 'picker--date__table',
         'class': {
           'picker--month__table': this.activePicker === 'MONTH'
         },
-        on: this.scrollable ? { wheel: this.monthWheelScroll } : undefined,
+        on: this.scrollable ? { wheel } : undefined,
         directives: [this.genTableTouch(touchCallback)]
       }
 

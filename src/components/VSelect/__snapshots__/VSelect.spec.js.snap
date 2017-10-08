@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VSelect.js should render buttons correctly when using items array with segmented prop 1`] = `
+exports[`VSelect should render buttons correctly when using items array with segmented prop 1`] = `
 
 <div tabindex="0"
      role="combobox"
@@ -32,7 +32,7 @@ exports[`VSelect.js should render buttons correctly when using items array with 
         <div class="card"
              style="height: auto;"
         >
-          <ul data-uid="77"
+          <ul data-uid="38"
               class="list"
           >
             <li>
@@ -64,7 +64,7 @@ exports[`VSelect.js should render buttons correctly when using items array with 
 
 `;
 
-exports[`VSelect.js should render buttons correctly when using slot with segmented prop 1`] = `
+exports[`VSelect should render buttons correctly when using slot with segmented prop 1`] = `
 
 <div tabindex="0"
      role="combobox"
@@ -92,7 +92,7 @@ exports[`VSelect.js should render buttons correctly when using slot with segment
         <div class="card"
              style="height: auto;"
         >
-          <ul data-uid="87"
+          <ul data-uid="48"
               class="list"
           >
             <li>

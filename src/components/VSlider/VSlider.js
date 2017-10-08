@@ -68,13 +68,11 @@ export default {
       set (val) {
         const { min, max, step, snap } = this
         val = val < min && min || val > max && max || val
-        /*
-        if (Math.ceil(val) % Math.ceil(this.lazyValue) < 2) {
-          this.inputWidth = this.calculateWidth(val)
-        }
-        */
 
-        const value = snap ? Math.round(val / step) * step : parseInt(val)
+        // Round value to ensure the
+        // entire slider range can
+        // be selected with step
+        const value = snap ? Math.round(val / step) * step : Math.round(val)
         this.lazyValue = value
 
         if (value !== this.value) {
@@ -155,7 +153,7 @@ export default {
 
     // Without a v-app, iOS does not work with body selectors
     this.app = document.querySelector('[data-app]') ||
-      console.warn('The v-slider component requires the present of v-app or a non-body wrapping element with the [data-app] attribute.')
+      console.warn('The v-slider component requires the presence of v-app or a non-body wrapping element with the [data-app] attribute.')
   },
 
   methods: {

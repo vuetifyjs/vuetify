@@ -5,9 +5,6 @@
 button($material)
   color: $material.text.primary
 
-  .icon
-    color: $material.text.primary
-
   &.btn--disabled
     color: $material.buttons.disabled !important
 
@@ -340,3 +337,8 @@ theme(button, "btn")
   &.warning,
   &.info
     color: $material-dark.text.primary
+
+    &:hover,
+    &:focus,
+    &:active
+      color: $material-dark.text.primary

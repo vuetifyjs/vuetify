@@ -187,7 +187,6 @@ export default {
       return this.isAutocomplete &&
         !this.isMultiple &&
         this.isFocused &&
-        this.isDirty &&
         !this.chips
     },
     isNotFiltering () {
@@ -361,17 +360,16 @@ export default {
       this.$nextTick(() => (this.isActive = false))
     },
     changeSelectedIndex (keyCode) {
-      if (keyCode === 32 ||
-        ![8, 37, 39, 46].includes(keyCode)
-      ) return
+      // backspace, left, right, delete
+      if (![8, 37, 39, 46].includes(keyCode)) return
 
       const indexes = this.selectedItems.length - 1
 
-      if (keyCode === 37) {
+      if (keyCode === 37) { // Left arrow
         this.selectedIndex = this.selectedIndex === -1
           ? indexes
           : this.selectedIndex - 1
-      } else if (keyCode === 39) {
+      } else if (keyCode === 39) { // Right arrow
         this.selectedIndex = this.selectedIndex >= indexes
           ? -1
           : this.selectedIndex + 1
@@ -380,15 +378,17 @@ export default {
         return
       }
 
-      if (![8, 46].includes(keyCode)) return
-      const newIndex = this.selectedIndex === indexes
-        ? this.selectedIndex - 1
-        : this.selectedItems[this.selectedIndex + 1]
-          ? this.selectedIndex
-          : -1
+      // backspace/delete
+      if ([8, 46].includes(keyCode)) {
+        const newIndex = this.selectedIndex === indexes
+          ? this.selectedIndex - 1
+          : this.selectedItems[this.selectedIndex + 1]
+            ? this.selectedIndex
+            : -1
 
-      this.selectItem(this.selectedItems[this.selectedIndex])
-      this.selectedIndex = newIndex
+        this.selectItem(this.selectedItems[this.selectedIndex])
+        this.selectedIndex = newIndex
+      }
     },
     compareObjects (a, b) {
       const aProps = Object.keys(a)
@@ -424,10 +424,6 @@ export default {
       return [{
         name: 'click-outside',
         value: e => {
-          if (!this.$refs.menu ||
-            !this.isMultiple
-          ) return true
-
           return (
             this.$refs.menu &&
             !this.$refs.menu.$refs.content.contains(e.target)
@@ -573,16 +569,14 @@ export default {
       this.$refs.menu.listIndex = -1
 
       this.$nextTick(() => {
-        if (this.isAutocomplete &&
-          this.$refs.input
-        ) this.$refs.input.focus()
-        else this.$el.focus()
+        this.focus()
         this.$refs.menu && (this.$refs.menu.listIndex = savedIndex)
       })
     },
     showMenuItems () {
       this.isActive = true
       this.menuIsActive = true
+      this.chips && (this.$refs.menu.listIndex = -1)
     }
   },
 
