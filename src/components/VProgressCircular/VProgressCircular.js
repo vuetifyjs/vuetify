@@ -54,7 +54,7 @@ export default {
     },
 
     classes () {
-      return this.addColorClassChecks({
+      return this.addTextColorClassChecks({
         'progress-circular': true,
         'progress-circular--indeterminate': this.indeterminate,
         'progress-circular--button': this.button
