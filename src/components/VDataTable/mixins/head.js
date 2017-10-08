@@ -1,6 +1,8 @@
 export default {
   methods: {
     genTHead () {
+      if (this.hideHeaders) return // Exit Early since no headers are needed.
+
       let children = []
 
       if (this.$scopedSlots.headers) {
