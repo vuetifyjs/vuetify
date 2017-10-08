@@ -9,7 +9,9 @@ exports[`VCarousel.js should render component and match snapshot 1`] = `
             data-ripple="true"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           chevron_left
         </i>
       </div>
@@ -21,7 +23,9 @@ exports[`VCarousel.js should render component and match snapshot 1`] = `
             data-ripple="true"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           chevron_right
         </i>
       </div>
@@ -42,7 +46,9 @@ exports[`VCarousel.js should render component with custom duration between image
             data-ripple="true"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           chevron_left
         </i>
       </div>
@@ -54,7 +60,9 @@ exports[`VCarousel.js should render component with custom duration between image
             data-ripple="true"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           chevron_right
         </i>
       </div>
@@ -75,7 +83,9 @@ exports[`VCarousel.js should render component with custom icon and match snapsho
             data-ripple="true"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           chevron_left
         </i>
       </div>
@@ -87,7 +97,9 @@ exports[`VCarousel.js should render component with custom icon and match snapsho
             data-ripple="true"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           chevron_right
         </i>
       </div>
@@ -99,7 +111,9 @@ exports[`VCarousel.js should render component with custom icon and match snapsho
             data-ripple="true"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           stop
         </i>
       </div>
@@ -109,7 +123,9 @@ exports[`VCarousel.js should render component with custom icon and match snapsho
             data-ripple="true"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           stop
         </i>
       </div>
@@ -119,7 +135,9 @@ exports[`VCarousel.js should render component with custom icon and match snapsho
             data-ripple="true"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           stop
         </i>
       </div>
@@ -150,7 +168,9 @@ exports[`VCarousel.js should render component with custom left control icon and 
             data-ripple="true"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           stop
         </i>
       </div>
@@ -162,7 +182,9 @@ exports[`VCarousel.js should render component with custom left control icon and 
             data-ripple="true"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           chevron_right
         </i>
       </div>
@@ -183,7 +205,9 @@ exports[`VCarousel.js should render component with custom right control icon and
             data-ripple="true"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           chevron_left
         </i>
       </div>
@@ -195,7 +219,9 @@ exports[`VCarousel.js should render component with custom right control icon and
             data-ripple="true"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           stop
         </i>
       </div>
@@ -216,7 +242,9 @@ exports[`VCarousel.js should render component with image cycling off and match s
             data-ripple="true"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           chevron_left
         </i>
       </div>
@@ -228,7 +256,9 @@ exports[`VCarousel.js should render component with image cycling off and match s
             data-ripple="true"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           chevron_right
         </i>
       </div>
@@ -249,7 +279,9 @@ exports[`VCarousel.js should render component with selected active item 1`] = `
             data-ripple="true"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           chevron_left
         </i>
       </div>
@@ -261,7 +293,9 @@ exports[`VCarousel.js should render component with selected active item 1`] = `
             data-ripple="true"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           chevron_right
         </i>
       </div>
@@ -273,7 +307,9 @@ exports[`VCarousel.js should render component with selected active item 1`] = `
             data-ripple="true"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           fiber_manual_record
         </i>
       </div>
@@ -283,7 +319,9 @@ exports[`VCarousel.js should render component with selected active item 1`] = `
             data-ripple="true"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           fiber_manual_record
         </i>
       </div>
@@ -293,7 +331,9 @@ exports[`VCarousel.js should render component with selected active item 1`] = `
             data-ripple="true"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           fiber_manual_record
         </i>
       </div>
@@ -324,7 +364,9 @@ exports[`VCarousel.js should render component without delimiters 1`] = `
             data-ripple="true"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           chevron_left
         </i>
       </div>
@@ -336,7 +378,9 @@ exports[`VCarousel.js should render component without delimiters 1`] = `
             data-ripple="true"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           chevron_right
         </i>
       </div>
@@ -367,7 +411,9 @@ exports[`VCarousel.js should render component without left control icon and matc
             data-ripple="true"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           chevron_right
         </i>
       </div>
@@ -388,7 +434,9 @@ exports[`VCarousel.js should render component without right control icon and mat
             data-ripple="true"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           chevron_left
         </i>
       </div>
