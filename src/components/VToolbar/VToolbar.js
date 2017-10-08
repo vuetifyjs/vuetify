@@ -51,7 +51,7 @@ export default {
 
   computed: {
     computedHeight () {
-      if (this.height) return this.height
+      if (this.height) return parseInt(this.height)
       if (this.dense) return this.heights.dense
       if (this.prominent ||
         this.$vuetify.breakpoint.mdAndUp
