@@ -138,6 +138,15 @@ export default {
     permanent (val) {
       this.$emit('input', val)
     },
+    right (val) {
+      this.updateApplication()
+
+      if (val) {
+        this.$vuetify.application.left = 0
+      } else {
+        this.$vuetify.application.right = 0
+      }
+    },
     value (val) {
       if (this.permanent) return
       if (val !== this.isActive) this.isActive = val
