@@ -33,7 +33,6 @@ export default {
           offsetOverflow: this.isAutocomplete,
           openOnClick: false,
           value: this.menuIsActive &&
-            this.computedItems.length &&
             (!this.tags || this.tags && this.filteredItems.length > 0),
           zIndex: this.menuZIndex
         },
