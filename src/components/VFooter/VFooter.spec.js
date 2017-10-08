@@ -9,6 +9,17 @@ test('VFooter.js', () => {
     expect(wrapper.element.classList).toContain('footer')
   })
 
+  it('should render a colored footer', () => {
+    const wrapper = mount(VFooter, {
+      propsData: {
+        color: 'blue lighten-1'
+      }
+    })
+
+    expect(wrapper.element.classList).toContain('blue')
+    expect(wrapper.element.classList).toContain('lighten-1')
+  })
+
   it('should render an absolute positioned component and match snapshot', () => {
     const wrapper = mount(VFooter, {
       propsData: {
