@@ -1,12 +1,13 @@
 require('../../stylus/components/_system-bars.styl')
 
 import Applicationable from '../../mixins/applicationable'
+import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 
 export default {
   name: 'v-system-bar',
 
-  mixins: [Applicationable, Themeable],
+  mixins: [Applicationable, Colorable, Themeable],
 
   props: {
     lightsOut: Boolean,
@@ -16,14 +17,14 @@ export default {
 
   computed: {
     classes () {
-      return {
+      return this.addBackgroundColorClassChecks({
         'system-bar': true,
         'system-bar--lights-out': this.lightsOut,
         'system-bar--status': this.status,
         'system-bar--window': this.window,
         'theme--dark': this.dark,
         'theme--light': this.light
-      }
+      })
     },
     computedHeight () {
       if (this.window) return 32
