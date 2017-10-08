@@ -9,15 +9,6 @@ exports[`VCard.vue should render a card with custom height 1`] = `
 
 `;
 
-exports[`VCard.vue should render a colored card 1`] = `
-
-<div class="card blue lighten-1"
-     style="height: auto;"
->
-</div>
-
-`;
-
 exports[`VCard.vue should render a flat card 1`] = `
 
 <div class="card card--flat"

@@ -36,7 +36,8 @@ test('VCard.vue', () => {
       }
     })
 
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.element.classList).toContain('blue')
+    expect(wrapper.element.classList).toContain('lighten-1')
   })
 
   it('should render a tile card', () => {
