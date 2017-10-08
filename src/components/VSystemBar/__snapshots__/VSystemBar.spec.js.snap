@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VSystemBar.vue should render a colored toolbar 1`] = `
+
+<div class="system-bar blue lighten-1"
+     style="height: 24px;"
+>
+</div>
+
+`;
