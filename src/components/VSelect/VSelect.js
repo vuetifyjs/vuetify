@@ -187,7 +187,6 @@ export default {
       return this.isAutocomplete &&
         !this.isMultiple &&
         this.isFocused &&
-        this.isDirty &&
         !this.chips
     },
     isNotFiltering () {
@@ -424,10 +423,6 @@ export default {
       return [{
         name: 'click-outside',
         value: e => {
-          if (!this.$refs.menu ||
-            !this.isMultiple
-          ) return true
-
           return (
             this.$refs.menu &&
             !this.$refs.menu.$refs.content.contains(e.target)
@@ -573,10 +568,7 @@ export default {
       this.$refs.menu.listIndex = -1
 
       this.$nextTick(() => {
-        if (this.isAutocomplete &&
-          this.$refs.input
-        ) this.$refs.input.focus()
-        else this.$el.focus()
+        this.focus()
         this.$refs.menu && (this.$refs.menu.listIndex = savedIndex)
       })
     },
