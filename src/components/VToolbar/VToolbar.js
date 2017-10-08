@@ -1,7 +1,7 @@
 require('../../stylus/components/_toolbar.styl')
 
 import Applicationable from '../../mixins/applicationable'
-import Colorable from '../../mixins/Colorable'
+import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 
 export default {
