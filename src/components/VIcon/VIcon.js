@@ -59,7 +59,7 @@ export default {
       'icon--x-large': props.xLarge,
       'theme--dark': props.dark,
       'theme--light': props.light
-    }, props.color ? Colorable.methods.addColorClassChecks.call(props, {}) : {
+    }, props.color ? Colorable.methods.addTextColorClassChecks.call(props, {}) : {
       'primary--text': props.primary,
       'secondary--text': props.secondary,
       'success--text': props.success,

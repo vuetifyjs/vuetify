@@ -99,9 +99,9 @@ export default {
         })
       }
 
-      return colorBackground ? Object.assign(classes, {
-        [this.color]: true
-      }) : this.addColorClassChecks(classes)
+      return colorBackground
+        ? this.addBackgroundColorClassChecks(classes)
+        : this.addTextColorClassChecks(classes)
     }
   },
 
