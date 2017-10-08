@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VToolbar.vue should render a colored toolbar 1`] = `
+
+<nav class="toolbar blue lighten-1">
+  <div class="toolbar__content"
+       style="height: 56px;"
+  >
+  </div>
+</nav>
+
+`;
