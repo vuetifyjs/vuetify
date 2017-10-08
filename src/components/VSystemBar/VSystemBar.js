@@ -57,6 +57,8 @@ export default {
   },
 
   render (h) {
+    this.updateApplication()
+
     const data = {
       staticClass: 'system-bar',
       'class': this.classes,
