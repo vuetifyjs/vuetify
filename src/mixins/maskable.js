@@ -44,9 +44,6 @@ export default {
       const mask = preDefined || this.mask || ''
 
       return mask.split('')
-    },
-    isAndroid () {
-      return navigator && /android/i.test(navigator.userAgent)
     }
   },
 
@@ -81,15 +78,9 @@ export default {
   methods: {
     setCaretPosition (selection) {
       this.selection = selection
-      if (this.isAndroid) {
-        // Android overrides the selection after nextTick().
-        // So delay the call to setSelectionRange().
-        window.setTimeout(() => {
-          this.$refs.input.setSelectionRange(selection, selection)
-        }, 1)
-      } else {
+      window.setTimeout(() => {
         this.$refs.input.setSelectionRange(selection, selection)
-      }
+      }, 0)
     },
     updateRange () {
       if (!this.$refs.input) return
