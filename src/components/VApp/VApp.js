@@ -15,10 +15,6 @@ export default {
     Resize
   },
 
-  data: () => ({
-    resizeTimeout: {}
-  }),
-
   props: {
     id: {
       type: String,

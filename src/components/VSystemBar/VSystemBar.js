@@ -36,11 +36,17 @@ export default {
     updateApplication () {
       if (!this.app) return
 
-      this.$vuetify.application.bar = this.computedHeight
+      const bar = this._isDestroyed
+        ? 0
+        : this.computedHeight
+
+      this.$vuetify.application.bar = bar
     }
   },
 
   render (h) {
+    this.updateApplication()
+
     const data = {
       'class': this.classes,
       style: {

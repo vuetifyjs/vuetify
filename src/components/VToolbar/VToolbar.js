@@ -151,7 +151,8 @@ export default {
     updateApplication () {
       if (!this.app) return
 
-      this.$vuetify.application.top = !this.fixed && !this.absolute
+      this.$vuetify.application.top = this._isDestroyed ||
+        !this.fixed && !this.absolute
         ? 0
         : this.isExtended && !this.isScrolling
           ? this.computedHeight * 2

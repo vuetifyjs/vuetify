@@ -34,7 +34,6 @@ export default {
   props: {
     absolute: Boolean,
     clipped: Boolean,
-    disableRouteWatcher: Boolean,
     enableResizeWatcher: Boolean,
     height: String,
     floating: Boolean,
@@ -145,8 +144,14 @@ export default {
     }
   },
 
+  created () {
+    this.init()
+  },
+
   mounted () {
-    this.$vuetify.load(this.init)
+    this.onResize()
+
+    setTimeout(() => (this.isBooted = true), 0)
   },
 
   methods: {
@@ -158,8 +163,6 @@ export default {
         (this.persistent || this.temporary)
       ) this.isActive = false
       else this.isActive = true
-
-      setTimeout(() => (this.isBooted = true), 0)
     },
     calculateTouchArea () {
       if (!this.$el.parentNode) return
@@ -172,6 +175,7 @@ export default {
     },
     checkIfMobile () {
       this.isMobile = window.innerWidth < parseInt(this.mobileBreakPoint)
+      this.isActive = !this.isMobile
     },
     closeConditional () {
       return !this.permanent && (this.temporary || this.isMobile)
@@ -206,8 +210,6 @@ export default {
       ) return
 
       this.checkIfMobile()
-
-      this.isActive = !this.isMobile
     },
     swipeRight (e) {
       if (this.isActive && !this.right) return
@@ -232,7 +234,8 @@ export default {
     updateApplication () {
       if (!this.app) return
 
-      const width = !this.isActive ||
+      const width = this._isDestroyed ||
+        !this.isActive ||
         !this.permanent &&
         this.$vuetify.breakpoint.width < this.mobileBreakPoint
         ? 0

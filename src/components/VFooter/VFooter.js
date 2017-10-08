@@ -34,14 +34,11 @@ export default {
     updateApplication () {
       if (!this.app) return
 
-      this.$vuetify.application.bottom = this.fixed
-        ? this.$el && this.$el.clientHeight
-        : 0
+      this.$vuetify.application.bottom = !this.fixed ||
+        this._isDestroyed
+        ? 0
+        : this.$el && this.$el.clientHeight
     }
-  },
-
-  mounted () {
-    this.updateApplication()
   },
 
   render (h) {

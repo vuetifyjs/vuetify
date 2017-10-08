@@ -3,7 +3,7 @@ export default {
     app: Boolean
   },
 
-  created () {
+  destroyed () {
     this.updateApplication()
   }
 }
