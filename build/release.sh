@@ -27,6 +27,5 @@ then
 
   npm version $VERSION --message "[release] $VERSION"
 
-  git push --follow-tags --no-verify
   npm publish --tag "$TAG"
 fi
