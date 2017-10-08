@@ -84,7 +84,11 @@ export default {
 
   mounted () {
     this.isBooted = this.isActive
-    this.$vuetify.load(() => (this.isActive && this.genOverlay()))
+    this.$vuetify.load(this.init)
+  },
+
+  beforeDestroy () {
+    if (typeof window !== 'undefined') this.unbind()
   },
 
   methods: {
@@ -92,6 +96,20 @@ export default {
       // close dialog if !persistent, clicked outside and we're the topmost dialog.
       // Since this should only be called in a capture event (bottom up), we shouldn't need to stop propagation
       return !this.persistent && getZIndex(this.$refs.content) >= this.getMaxZIndex()
+    },
+    init () {
+      this.isActive && this.genOverlay()
+
+      if (this.$listeners.keydown) this.bind()
+    },
+    bind () {
+      window.addEventListener('keydown', this.onKeydown)
+    },
+    unbind () {
+      window.removeEventListener('keydown', this.onKeydown)
+    },
+    onKeydown (e) {
+      this.$emit('keydown', e)
     }
   },
 
