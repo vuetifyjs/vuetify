@@ -66,7 +66,7 @@ export default {
       if (this.hasError) {
         classes['error--text'] = true
       } else {
-        return this.addColorClassChecks(classes)
+        return this.addTextColorClassChecks(classes)
       }
 
       return classes

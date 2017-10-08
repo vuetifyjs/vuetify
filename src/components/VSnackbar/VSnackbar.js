@@ -41,7 +41,7 @@ export default {
 
   computed: {
     classes () {
-      const classes = {
+      return this.addBackgroundColorClassChecks({
         'snack--active': this.isActive,
         'snack--absolute': this.absolute,
         'snack--bottom': this.bottom || !this.top,
@@ -50,11 +50,7 @@ export default {
         'snack--right': this.right,
         'snack--top': this.top,
         'snack--vertical': this.vertical
-      }
-      if (this.color) {
-        classes[this.color] = true
-      }
-      return classes
+      })
     },
     computedTransition () {
       return this.top ? 'v-slide-y-transition' : 'v-slide-y-reverse-transition'
