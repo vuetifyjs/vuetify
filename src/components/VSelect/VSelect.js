@@ -521,6 +521,8 @@ export default {
       if (!this.isActive) {
         requestAnimationFrame(() => (this.content.scrollTop = 0))
       } else {
+        if (this.lastItem >= this.computedItems.length) return
+
         const showMoreItems = (
           this.content.scrollHeight -
           (this.content.scrollTop +
