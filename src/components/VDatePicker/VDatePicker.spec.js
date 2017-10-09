@@ -8,7 +8,7 @@ test('VDatePicker.js', ({ mount }) => {
   it('should display the correct date in title and header', () => {
     const wrapper = mount(VDatePicker, {
       propsData: {
-        value: new Date('November 1 2005')
+        value: '2005-11-01',
       }
     })
 
@@ -114,7 +114,7 @@ test('VDatePicker.js', ({ mount }) => {
     const dateFormat = date => `${date.getFullYear() * 2} ${persianMonths[11 - date.getMonth()]}`
     const wrapper = mount(VDatePicker, {
       propsData: {
-        value: new Date('November 1 2005'),
+        value: '2005-11-01',
         headerDateFormat: dateFormat,
         titleDateFormat: dateFormat
       }
@@ -126,7 +126,7 @@ test('VDatePicker.js', ({ mount }) => {
   it('should match snapshot with month formatting functions', () => {
     const wrapper = mount(VDatePicker, {
       propsData: {
-        value: new Date('November 1 2005'),
+        value: '2005-11-01',
         type: 'month',
         monthFormat: date => {
           return persianMonths[11 - date.getMonth()]

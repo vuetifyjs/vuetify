@@ -3,12 +3,12 @@ require('../../stylus/components/_date-picker.styl')
 
 import { createRange } from '../../util/helpers'
 
-import Picker from '../../mixins/picker'
 import DateYears from './mixins/date-years'
 import DateTitle from './mixins/date-title'
 import DateHeader from './mixins/date-header'
 import DateTable from './mixins/date-table'
 import MonthTable from './mixins/month-table'
+import Picker from '../../mixins/picker'
 import VBtn from '../VBtn'
 import VCard from '../VCard'
 import VIcon from '../VIcon'
@@ -36,46 +36,18 @@ export default {
 
   data () {
     return {
-      tableDate: new Date(),
-      originalDate: this.value,
+      activePicker: this.type.toUpperCase(),
       currentDay: null,
       currentMonth: null,
       currentYear: null,
       isReversing: false,
       narrowDays: [],
-      activePicker: this.type.toUpperCase()
+      originalDate: this.value,
+      tableDate: new Date()
     }
   },
 
   props: {
-    locale: {
-      type: String,
-      default: 'en-us'
-    },
-    type: {
-      type: String,
-      default: 'date',
-      validator: type => ['date', 'month'/*, 'year'*/].includes(type)
-    },
-    dateFormat: {
-      type: Function,
-      default: null
-    },
-    titleDateFormat: {
-      type: [Object, Function],
-      default: null
-    },
-    headerDateFormat: {
-      type: [Object, Function],
-      default: () => ({ month: 'long', year: 'numeric' })
-    },
-    monthFormat: {
-      type: [Object, Function],
-      default: () => ({ month: 'short' })
-    },
-    formattedValue: {
-      required: false
-    },
     allowedDates: {
       type: [Array, Object, Function],
       default: () => (null)
@@ -84,6 +56,28 @@ export default {
       type: [String, Number],
       default: 0
     },
+    headerDateFormat: {
+      type: [Object, Function],
+      default: () => ({ month: 'long', year: 'numeric' })
+    },
+    locale: {
+      type: String,
+      default: 'en-us'
+    },
+    monthFormat: {
+      type: [Object, Function],
+      default: () => ({ month: 'short' })
+    },
+    titleDateFormat: {
+      type: [Object, Function],
+      default: null
+    },
+    type: {
+      type: String,
+      default: 'date',
+      validator: type => ['date', 'month'/*, 'year'*/].includes(type)
+    },
+    value: String,
     yearIcon: String
   },
 
@@ -147,7 +141,6 @@ export default {
         const date = this.makeDate(value)
         const pickerDateFormat = createDefaultDateFormat(this.type)
         this.$emit('input', date == null ? this.originalDate : pickerDateFormat(date))
-        this.$emit('update:formattedValue', (this.dateFormat || pickerDateFormat)(date == null ? (this.makeDate(this.originalDate) || this.firstAllowedDate) : date))
       }
     },
     day () {
