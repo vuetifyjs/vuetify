@@ -49,11 +49,11 @@ npm run test -i
 npm config set commit-hooks false
 npm version $VERSION --message "[release] $VERSION"
 
+git push --no-verify --follow-tags
+
 if [[ "$BRANCH" == 'dev' ]]; then
   echo "Fast-forwarding 'master'..."
   echo #
   git fetch . dev:master
-  #git push origin master --no-verify
+  git push origin master --no-verify
 fi
-
-#git push --no-verify --follow-tags
