@@ -14,7 +14,8 @@ export default {
   mixins: [Colorable, Delayable, Dependent, Detachable, Menuable, Toggleable],
 
   data: () => ({
-    calculatedMinWidth: 0
+    calculatedMinWidth: 0,
+    closeDependents: false
   }),
 
   props: {
