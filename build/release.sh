@@ -30,8 +30,7 @@ echo #
 
 read -e -p "Enter release version: " VERSION
 
-read -e -p "Enter release tag (latest): " TAG
-TAG=${TAG:-"latest"}
+TAG=$(node -e "v=(require('semver').prerelease('$VERSION')||[])[0]||'';console.log(/^[a-zA-Z]+$/.test(v)?v:'latest')")
 
 echo #
 
