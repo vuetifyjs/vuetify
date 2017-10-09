@@ -339,11 +339,9 @@ export default {
       return pickerBodyChildren
     },
     sanitizeDateString (dateString, type) {
-      const [year, month, date] = dateString.trim().split(' ')[0].split('-')
-      const dateObject = new Date(`${year}-${month || 1}-${date || 1} GMT+0`)
-      const pad = n => n < 10 ? `0${n}` : `${n}`
-      const sanitizedFullString = `${dateObject.getUTCFullYear()}-${pad(dateObject.getUTCMonth() + 1)}-${pad(dateObject.getUTCDate())}`
-      return sanitizedFullString.substr(0, { date: 10, month: 7, year: 4 }[type])
+      const [year, month, date] = dateString.split('-')
+      const pad = n => (n * 1 < 10) ? `0${n * 1}` : `${n}`
+      return `${year}-${pad(month)}-${pad(date)}`.substr(0, { date: 10, month: 7, year: 4 }[type])
     }
   },
 
