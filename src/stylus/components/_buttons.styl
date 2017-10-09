@@ -5,14 +5,11 @@
 button($material)
   color: $material.text.primary
 
-  .icon
-    color: $material.text.primary
-
   &.btn--disabled
-    color: $material.buttons.disabled
+    color: $material.buttons.disabled !important
 
     .icon
-      color: $material.buttons.disabled
+      color: $material.buttons.disabled !important
 
     &:not(.btn--icon):not(.btn--flat)
       background-color: $material.buttons.focused !important
@@ -86,7 +83,7 @@ theme(button, "btn")
 
 /** Icons */
 .btn .btn__content .icon
-  color: inherit
+  color: inherit !important
 
 /** Types */
 .btn
@@ -340,3 +337,8 @@ theme(button, "btn")
   &.warning,
   &.info
     color: $material-dark.text.primary
+
+    &:hover,
+    &:focus,
+    &:active
+      color: $material-dark.text.primary

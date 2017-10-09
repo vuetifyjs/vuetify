@@ -12,6 +12,7 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - [Xavier Escoté](http://www.deister.net/)
 - [Steve Gehrman](https://cocoatech.com/)
 - [Cycloid](https://www.cycloid.io/)
+- [LiveCasino](https://livecasino.com/)
 
 ### $20+
 - Tibor Nagy
@@ -20,6 +21,8 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Michael Marti
 - [Aeroden](www.aeroden.com)
 - Sam Mitchell
+- David Hess
+- Roger Vilaseca
 
 ### $10+
 
@@ -41,3 +44,6 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Alexey Toroshchin
 - Phillippe Genois
 - Dominik Narożny
+- Jim O`Quinn
+- Sam Bosell
+- Cliff Hess

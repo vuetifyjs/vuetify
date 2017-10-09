@@ -37,15 +37,15 @@ export default {
   },
 
   render (h) {
-    const badge = h('span', {
+    const badge = this.$slots.badge ? [h('span', {
       staticClass: 'badge__badge',
-      'class': [this.color],
+      'class': this.addBackgroundColorClassChecks({}),
       attrs: this.attrs,
       directives: [{
         name: 'show',
         value: this.isActive
       }]
-    }, this.$slots.badge)
+    }, this.$slots.badge)] : null
 
     return h('span', {
       staticClass: 'badge',
@@ -56,7 +56,7 @@ export default {
         props: {
           name: this.transition
         }
-      }, [badge])
+      }, badge)
     ])
   }
 }

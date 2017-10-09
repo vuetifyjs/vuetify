@@ -1,5 +1,7 @@
 import Positionable from './positionable'
 
+import Stackable from './stackable'
+
 const dimensions = {
   activator: {
     top: 0, left: 0,
@@ -27,18 +29,25 @@ const dimensions = {
  * As well as be manually positioned
  */
 export default {
-  mixins: [Positionable],
+  mixins: [Positionable, Stackable],
 
   data: () => ({
     absoluteX: 0,
     absoluteY: 0,
     dimensions: Object.assign({}, dimensions),
     isContentActive: false,
-    pageYOffset: 0
+    pageYOffset: 0,
+    stackClass: 'menuable__content__active',
+    stackMinZIndex: 6
   }),
 
   props: {
-    activator: { default: null },
+    activator: {
+      default: null,
+      validate: val => {
+        return ['string', 'object'].includes(typeof val)
+      }
+    },
     allowOverflow: Boolean,
     maxWidth: {
       type: [Number, String],
@@ -76,7 +85,7 @@ export default {
     },
     zIndex: {
       type: [Number, String],
-      default: 6
+      default: null
     }
   },
 
@@ -198,7 +207,11 @@ export default {
     },
     deactivate () {},
     getActivator () {
-      if (this.activator) return this.activator
+      if (this.activator) {
+        return typeof this.activator === 'string'
+          ? document.querySelector(this.activator)
+          : this.activator
+      }
 
       return this.$refs.activator.children
         ? this.$refs.activator.children[0]

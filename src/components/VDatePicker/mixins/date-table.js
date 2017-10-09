@@ -8,29 +8,30 @@ export default {
       if (e.deltaY < 0) month++
       else month--
 
-      this.tableDate = new Date(this.tableYear, month)
+      this.tableDate = this.normalizeDate(this.tableYear, month)
     },
     dateGenTHead () {
       const days = this.narrowDays.map(day => this.$createElement('th', day))
       return this.$createElement('thead', this.dateGenTR(days))
     },
     dateClick (day) {
-      day = day < 10 ? `0${day}` : day
-      const tableYear = this.tableYear
-      let tableMonth = this.tableMonth + 1
-      tableMonth = tableMonth < 10 ? `0${tableMonth}` : tableMonth
-
-      this.inputDate = `${tableYear}-${tableMonth}-${day}T12:00:00`
+      this.inputDate = this.normalizeDate(this.tableYear, this.tableMonth, day)
       this.$nextTick(() => (this.autosave && this.save()))
     },
-    dateGenTD (day) {
-      const date = new Date(this.tableYear, this.tableMonth, day, 12)
-      const buttonText = this.supportsLocaleFormat
-        ? date.toLocaleDateString(this.locale, { day: 'numeric' })
+    dateGenButtonText (date, day) {
+      return this.supportsLocaleFormat
+        ? date.toLocaleDateString(this.locale, {
+          day: 'numeric',
+          timeZone: this.timeZone
+        })
         : day
+    },
+    dateGenTD (day) {
+      const date = this.normalizeDate(this.tableYear, this.tableMonth, day)
+      const buttonText = this.dateGenButtonText(date, day)
       const button = this.$createElement('button', {
+        staticClass: 'btn btn--date-picker btn--floating btn--small btn--flat',
         'class': {
-          'btn btn--date-picker btn--floating btn--small btn--flat': true,
           'btn--active': this.dateIsActive(day),
           'btn--outline': this.dateIsCurrent(day) && !this.dateIsActive(day),
           'btn--disabled': !this.isAllowed(date)
@@ -50,9 +51,9 @@ export default {
     },
     dateGenTBody () {
       const children = []
-      const daysInMonth = new Date(this.tableYear, this.tableMonth + 1, 0, 12).getDate()
+      const daysInMonth = this.normalizeDate(this.tableYear, this.tableMonth + 1, 0).getDate()
       let rows = []
-      const day = (new Date(this.tableYear, this.tableMonth, 1, 12).getDay() - parseInt(this.firstDayOfWeek) + 7) % 7
+      const day = (this.normalizeDate(this.tableYear, this.tableMonth).getDay() - parseInt(this.firstDayOfWeek) + 7) % 7
 
       for (let i = 0; i < day; i++) {
         rows.push(this.$createElement('td'))

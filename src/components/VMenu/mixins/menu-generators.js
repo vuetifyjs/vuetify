@@ -39,14 +39,32 @@ export default {
       }, [this.genContent()])
     },
 
+    genDirectives () {
+      // Do not add click outside for hover menu
+      const directives = !this.openOnHover ? [{
+        name: 'click-outside',
+        value: {
+          callback: () => this.closeOnClick,
+          include: () => [this.$el, ...this.getOpenDependentElements()]
+        }
+      }] : []
+
+      directives.push({
+        name: 'show',
+        value: this.isContentActive
+      })
+
+      return directives
+    },
+
     genContent () {
       const options = {
-        'class': (`menu__content ${this.contentClass}`).trim(),
+        'class': [
+          (`menu__content ${this.contentClass}`).trim(),
+          { 'menuable__content__active': this.isActive }
+        ],
         style: this.styles,
-        directives: [{
-          name: 'show',
-          value: this.isContentActive
-        }],
+        directives: this.genDirectives(),
         ref: 'content',
         on: {
           click: e => {

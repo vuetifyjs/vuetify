@@ -26,4 +26,42 @@ test('VChip.vue', () => {
     expect(input).toBeCalledWith(false)
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should render a colored chip', () => {
+    const wrapper = mount(VChip, {
+      propsData: {
+        color: 'blue',
+        textColor: 'green'
+      }
+    })
+
+    expect(wrapper.element.classList).toContain('blue')
+    expect(wrapper.element.classList).toContain('green--text')
+  })
+
+  it('should render a colored outline chip', () => {
+    const wrapper = mount(VChip, {
+      propsData: {
+        outline: true,
+        color: 'blue'
+      }
+    })
+
+    expect(wrapper.element.classList).toContain('blue')
+    expect(wrapper.element.classList).toContain('blue--text')
+  })
+
+  it('should render a colored outline chip with text color', () => {
+    const wrapper = mount(VChip, {
+      propsData: {
+        outline: true,
+        color: 'blue',
+        textColor: 'green'
+      }
+    })
+
+    expect(wrapper.element.classList).toContain('blue')
+    expect(wrapper.element.classList).toContain('green--text')
+  })
 })
+
