@@ -136,7 +136,7 @@ exports[`VDialog.js should render component with custom transition and match sna
 
 `;
 
-exports[`VDialog.js should render component with custom width and match snapshot 1`] = `
+exports[`VDialog.js should render component with custom width (max-width) and match snapshot 1`] = `
 
 <div class="dialog__container"
      style="display: block;"

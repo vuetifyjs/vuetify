@@ -64,6 +64,7 @@ export default {
     },
     click (e) {
       e.preventDefault()
+      this.$emit('click', e)
 
       if (!this.to && !this.href) return
 

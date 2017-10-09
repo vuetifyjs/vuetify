@@ -33,7 +33,8 @@ export default {
           offsetOverflow: this.isAutocomplete,
           openOnClick: false,
           value: this.menuIsActive &&
-            (!this.tags || this.tags && this.filteredItems.length > 0),
+            (!this.tags || this.filteredItems.length > 0) &&
+            (!this.combobox || this.filteredItems.length > 0),
           zIndex: this.menuZIndex
         },
         on: {
@@ -86,6 +87,16 @@ export default {
           ...this.genListeners(),
           input: e => {
             this.searchValue = this.unmaskText(e.target.value)
+          }
+        }
+
+        if (this.combobox) {
+          // When using the combobox
+          // update inputValue and
+          // set the menu status
+          data.on.blur = () => {
+            this.inputValue = this.lazySearch
+            this.menuIsActive = false
           }
         }
 

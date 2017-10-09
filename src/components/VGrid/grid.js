@@ -5,7 +5,11 @@ export default function Grid (name) {
     functional: true,
 
     props: {
-      id: String
+      id: String,
+      tag: {
+        type: String,
+        default: 'div'
+      }
     },
 
     render: (h, { props, data, children }) => {
@@ -21,7 +25,7 @@ export default function Grid (name) {
           else if (value) classes.push(key)
         })
 
-        data.staticClass += ` ${classes.join(' ')}`
+        if (classes.length) data.staticClass += ` ${classes.join(' ')}`
         delete data.attrs
       }
 
@@ -30,7 +34,7 @@ export default function Grid (name) {
         data.domProps.id = props.id
       }
 
-      return h('div', data, children)
+      return h(props.tag, data, children)
     }
   }
 }
