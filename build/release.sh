@@ -10,7 +10,7 @@ echo "Last git version was $(git describe --abbrev=0 --tags)"
 echo "Latest npm version is $LATEST"
 echo #
 
-if [[ "$BRANCH" != 'dev' ]]; then
+if [ "$BRANCH" != 'dev' ]; then
   echo "Releasing on a branch other than 'dev'"
   echo "This may have unintended side-effects"
   options=("Switch to dev" "Continue anyway")
@@ -38,7 +38,7 @@ echo "Releasing $VERSION on $BRANCH"
 echo "Tag: $TAG"
 read -p "Are you sure? [Y/n]" -n 1 -r
 echo #
-[[ ! $REPLY =~ ^[Yy]$ ]] && exit
+[ ! $REPLY =~ ^[Yy]$ ] && exit
 
 echo "Releasing $VERSION ..."
 
@@ -50,7 +50,7 @@ npm version $VERSION --message "[release] $VERSION"
 
 git push --no-verify --follow-tags
 
-if [[ "$BRANCH" == 'dev' ]]; then
+if [ "$BRANCH" == 'dev' ] && [ "$TAG" == 'latest' ]; then
   echo "Fast-forwarding 'master'..."
   echo #
   git fetch . dev:master
