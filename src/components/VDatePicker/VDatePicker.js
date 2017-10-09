@@ -21,6 +21,14 @@ const createDefaultDateFormat = type => date => {
   return isoString.substr(0, { date: 10, month: 7, year: 4 }[type])
 }
 
+const createNativeLocaleFormatter = (format, fallbackType) => (dateString, locale) => {
+  const [year, month, date] = dateString.trim().split(' ')[0].split('-')
+  const dateObject = new Date(`${year}-${month || 1}-${date || 1} GMT+0`)
+  return dateObject.toLocaleDateString ? dateObject.toLocaleDateString(locale, Object.assign(format, {
+    timeZone: 'UTC'
+  })) : createDefaultDateFormat(fallbackType, dateObject)
+}
+
 export default {
   name: 'v-date-picker',
 
@@ -57,19 +65,19 @@ export default {
       default: 0
     },
     headerDateFormat: {
-      type: [Object, Function],
-      default: () => ({ month: 'long', year: 'numeric' })
+      type: Function,
+      default: createNativeLocaleFormatter({ month: 'long', year: 'numeric' }, 'month')
     },
     locale: {
       type: String,
       default: 'en-us'
     },
     monthFormat: {
-      type: [Object, Function],
-      default: () => ({ month: 'short' })
+      type: Function,
+      default: createNativeLocaleFormatter({ month: 'short' }, 'month')
     },
     titleDateFormat: {
-      type: [Object, Function],
+      type: Function,
       default: null
     },
     type: {
@@ -162,7 +170,14 @@ export default {
       return this.isReversing ? 'tab-reverse-transition' : 'tab-transition'
     },
     titleText () {
-      const date = this.normalizeDate(this.year, this.month, this.day)
+      const pad = n => n < 10 ? `0${n}` : `${n}`
+      const date = this.type === 'month'
+        ? `${this.year}-${pad(this.month + 1)}`
+        : `${this.year}-${pad(this.month + 1)}-${pad(this.day)}`
+
+      if (this.titleDateFormat) {
+        return this.titleDateFormat(date, this.locale)
+      }
 
       const defaultTitleDateFormat = this.type === 'year' ? {
         year: 'numeric'
@@ -174,17 +189,7 @@ export default {
         day: 'numeric'
       })
 
-      let titleText
-      if (typeof this.titleDateFormat === 'function') {
-        titleText = this.titleDateFormat(date)
-      } else if (this.supportsLocaleFormat) {
-        titleText = date.toLocaleDateString(this.locale, Object.assign(this.titleDateFormat || defaultTitleDateFormat, {
-          timeZone: this.timeZone
-        }))
-      } else if ('toLocaleDateString' in Date.prototype) {
-        titleText = createDefaultDateFormat(this.type)(date)
-      }
-
+      let titleText = createNativeLocaleFormatter(defaultTitleDateFormat, this.type)(date, this.locale)
       if (this.landscape) {
         if (titleText.indexOf(',') > -1) titleText = titleText.replace(',', ',<br>')
         else if (titleText.indexOf(' ') > -1) titleText = titleText.replace(' ', '<br>')

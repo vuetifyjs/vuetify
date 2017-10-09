@@ -38,25 +38,14 @@ export default {
 
     genSelector () {
       const keyValue = this.activePicker === 'DATE' ? this.tableMonth : this.tableYear
-      const selectorDate = this.normalizeDate(this.tableYear, this.tableMonth)
-
-      let selectorText = ''
-      if (typeof this.headerDateFormat === 'function' && this.activePicker === 'DATE') {
-        selectorText = this.headerDateFormat(selectorDate, this.activePicker)
-      } else if (this.supportsLocaleFormat) {
-        const format = this.activePicker === 'DATE'
-          ? this.headerDateFormat
-          : { year: 'numeric' }
-        selectorText = selectorDate.toLocaleDateString(this.locale, Object.assign(format, {
-          timeZone: this.timeZone
-        }))
-      } else if (this.activePicker === 'DATE') {
-        selectorText = selectorDate.getFullYear() + '/'
-        if (selectorDate.getMonth() < 9) selectorText += '0'
-        selectorText += (1 + selectorDate.getMonth())
-      } else if (this.activePicker === 'MONTH') {
-        selectorText = selectorDate.getFullYear()
-      }
+      const pad = n => n < 10 ? `0${n}` : `${n}`
+      const selectorText = this.activePicker === 'DATE'
+        ? this.headerDateFormat(`${this.tableYear}-${pad(this.tableMonth + 1)}`, this.locale)
+        : Date.prototype.toLocaleDateString
+          ? new Date(`${this.tableYear}-01-01 GMT+0`).toLocaleDateString(this.locale, {
+            year: 'numeric',
+            timeZone: 'UTC'
+          }) : this.tableYear
 
       return this.$createElement('div', {
         'class': 'picker--date__header-selector'
