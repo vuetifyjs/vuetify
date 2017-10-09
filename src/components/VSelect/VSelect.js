@@ -87,6 +87,7 @@ export default {
       type: String,
       default: 'primary'
     },
+    combobox: Boolean,
     debounceSearch: {
       type: [Number, String],
       default: 200
@@ -195,7 +196,7 @@ export default {
         this.searchValue === this.getText(this.selectedItem)
     },
     isAutocomplete () {
-      return this.autocomplete || this.editable || this.tags
+      return this.autocomplete || this.editable || this.tags || this.combobox
     },
     isDirty () {
       return this.selectedItems.length > 0
@@ -472,6 +473,10 @@ export default {
     genSelectedItems (val = this.inputValue) {
       // If we are using tags, don't filter results
       if (this.tags) return (this.selectedItems = val)
+
+      // Combobox is the single version
+      // of a taggable select element
+      if (this.combobox) return (this.selectedItems = [val || ''])
 
       let selectedItems = this.computedItems.filter(i => {
         if (!this.isMultiple) {
