@@ -90,7 +90,7 @@ export default {
         // Inner unmaskText() strips of non-alphanum
         // maskText() masks and removes dirty alphanum
         // Outer unmaskText() provides a clean lazyValue
-        this.lazyValue = this.unmaskText(this.maskText(this.unmaskText(val)))
+        this.lazyValue = val ? this.unmaskText(this.maskText(this.unmaskText(val))) : val
         this.setSelectionRange()
       }
     },

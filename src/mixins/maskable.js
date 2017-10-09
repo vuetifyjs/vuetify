@@ -92,14 +92,16 @@ export default {
       let selection = 0
 
       this.$refs.input.value = newValue
-      for (const char of newValue) {
-        if (this.lazySelection <= 0) break
-        isMaskDelimiter(char) || this.lazySelection--
-        selection++
+      if (newValue) {
+        for (const char of newValue) {
+          if (this.lazySelection <= 0) break
+          isMaskDelimiter(char) || this.lazySelection--
+          selection++
+        }
       }
 
       this.setCaretPosition(selection)
-      // this.$emit() must occur when all internal values are correct
+      // this.$emit() must occur only when all internal values are correct
       this.$emit('input', this.returnMaskedValue ? this.$refs.input.value : this.lazyValue)
     },
     maskText (text) {
