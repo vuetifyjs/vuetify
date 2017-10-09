@@ -17,7 +17,7 @@ export default {
       }
     },
     dateGenTHead () {
-      const days = this.narrowDays.map(day => this.$createElement('th', day))
+      const days = this.weekDays.map(day => this.$createElement('th', day))
       return this.$createElement('thead', this.dateGenTR(days))
     },
     dateClick (day) {

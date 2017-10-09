@@ -50,7 +50,6 @@ export default {
       currentMonth: null,
       currentYear: null,
       isReversing: false,
-      narrowDays: [],
       originalDate: this.value,
       tableDate: this.sanitizeDateString(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`, this.type === 'month' ? 'year' : 'month'),
       yearFormat: createNativeLocaleFormatter({ year: 'numeric' }, 'year')
@@ -103,6 +102,17 @@ export default {
       } catch (e) {
         return 'UTC'
       }
+    },
+    weekDays () {
+      const first = parseInt(this.firstDayOfWeek, 10)
+      if (!this.supportsLocaleFormat) {
+        return createRange(7).map(i => ['S', 'M', 'T', 'W', 'T', 'F', 'S'][(i + first) % 7])
+      }
+
+      const date = new Date('2000-01-07 GMT+0')
+      const day = date.getUTCDate() - date.getUTCDay() + first
+      const format = { weekday: 'narrow', timeZone: 'UTC' }
+      return createRange(7).map(i => new Date(`2000-01-${day + i} GMT+0`).toLocaleDateString(this.locale, format))
     },
     supportsLocaleFormat () {
       return ('toLocaleDateString' in Date.prototype) &&
@@ -234,9 +244,6 @@ export default {
       } else if (val === 'year') {
         this.activePicker = 'YEAR'
       }
-    },
-    firstDayOfWeek () {
-      this.getWeekDays()
     }
   },
 
@@ -253,17 +260,6 @@ export default {
     cancel () {
       this.inputDate = this.originalDate
       if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
-    },
-    getWeekDays () {
-      const first = parseInt(this.firstDayOfWeek, 10)
-      if (this.supportsLocaleFormat) {
-        const date = new Date('2000-01-07 GMT+0')
-        const day = date.getUTCDate() - date.getUTCDay() + first
-        const format = { weekday: 'narrow', timeZone: 'UTC' }
-        this.narrowDays = createRange(7).map(i => new Date(`2000-01-${day + i} GMT+0`).toLocaleDateString(this.locale, format))
-      } else {
-        this.narrowDays = createRange(7).map(i => ['S', 'M', 'T', 'W', 'T', 'F', 'S'][(i + first) % 7])
-      }
     },
     isAllowed (date) {
       if (!this.allowedDates) return true
@@ -346,7 +342,6 @@ export default {
   },
 
   created () {
-    this.getWeekDays()
     this.tableDate = this.inputDate
   },
 
