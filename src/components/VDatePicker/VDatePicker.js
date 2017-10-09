@@ -52,7 +52,7 @@ export default {
       isReversing: false,
       narrowDays: [],
       originalDate: this.value,
-      tableDate: this.sanitizeDateString(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`, this.type),
+      tableDate: this.sanitizeDateString(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`, this.type === 'month' ? 'year' : 'month'),
       yearFormat: createNativeLocaleFormatter({ year: 'numeric' }, 'year')
     }
   },
@@ -224,7 +224,9 @@ export default {
       this.isReversing = val < prev
     },
     value (val) {
-      if (val) this.tableDate = this.inputDate
+      if (val) {
+        this.tableDate = this.sanitizeDateString(this.inputDate, this.type === 'month' ? 'year' : 'month')
+      }
     },
     type (val) {
       if (val === 'month' && this.activePicker === 'DATE') {
@@ -315,12 +317,21 @@ export default {
         pickerBodyChildren.push(this.genTable([
           this.dateGenTHead(),
           this.dateGenTBody()
-        ], value => this.tableDate = this.sanitizeDateString(`${this.tableYear}-${this.tableMonth + value + 1}`, 'month')))
+        ], value => {
+          const newMonth = this.tableMonth + value
+          if (newMonth === 12) {
+            this.tableDate = this.sanitizeDateString(`${this.tableYear + 1}-01`, 'month')
+          } else if (newMonth === -1) {
+            this.tableDate = this.sanitizeDateString(`${this.tableYear - 1}-12`, 'month')
+          } else {
+            this.tableDate = this.sanitizeDateString(`${this.tableYear}-${newMonth + 1}`, 'month')
+          }
+        }))
       } else if (this.activePicker === 'MONTH') {
         pickerBodyChildren.push(h('div', { staticClass: 'picker--date__header' }, [this.genSelector()]))
         pickerBodyChildren.push(this.genTable([
           this.monthGenTBody()
-        ], value => this.tableDate = this.sanitizeDateString(`${this.tableYear}`, 'year')))
+        ], value => this.tableDate = this.sanitizeDateString(`${this.tableYear + value}`, 'year')))
       } else if (this.activePicker === 'YEAR') {
         pickerBodyChildren.push(this.genYears())
       }

@@ -8,7 +8,7 @@ export default {
       if (e.deltaY < 0) year++
       else year--
 
-      this.tableDate = this.sanitizeDateString(year, 'year')
+      this.tableDate = this.sanitizeDateString(`${year}`, 'year')
     },
     monthClick (month) {
       this.inputDate = this.type === 'date'

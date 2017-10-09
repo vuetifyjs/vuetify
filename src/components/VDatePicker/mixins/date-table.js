@@ -8,7 +8,13 @@ export default {
       if (e.deltaY < 0) month++
       else month--
 
-      this.tableDate = this.sanitizeDateString(`${this.tableYear}-${month + 1}`, 'month')
+      if (month === 12) {
+        this.tableDate = this.sanitizeDateString(`${this.tableYear + 1}-01`, 'month')
+      } else if (month === -1) {
+        this.tableDate = this.sanitizeDateString(`${this.tableYear - 1}-12`, 'month')
+      } else {
+        this.tableDate = this.sanitizeDateString(`${this.tableYear}-${month + 1}`, 'month')
+      }
     },
     dateGenTHead () {
       const days = this.narrowDays.map(day => this.$createElement('th', day))

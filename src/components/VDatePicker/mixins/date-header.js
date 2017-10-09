@@ -18,7 +18,7 @@ export default {
                 this.tableDate = this.sanitizeDateString(`${this.tableYear}-${change + 1}`, 'month')
               }
             } else if (this.activePicker === 'MONTH') {
-              this.tableDate = this.sanitizeDateString(`${change}-${this.tableMonth + 1}`, 'month')
+              this.tableDate = this.sanitizeDateString(`${change}`, 'month')
             }
           }
         }
