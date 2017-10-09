@@ -15,18 +15,19 @@ import VIcon from '../VIcon'
 
 import Touch from '../../directives/touch'
 
-const createDefaultDateFormat = type => date => {
-  const pad = n => n < 10 ? `0${n}` : `${n}`
-  const isoString = `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`
-  return isoString.substr(0, { date: 10, month: 7, year: 4 }[type])
-}
-
 const createNativeLocaleFormatter = (format, fallbackType) => (dateString, locale) => {
   const [year, month, date] = dateString.trim().split(' ')[0].split('-')
   const dateObject = new Date(`${year}-${month || 1}-${date || 1} GMT+0`)
-  return dateObject.toLocaleDateString ? dateObject.toLocaleDateString(locale, Object.assign(format, {
-    timeZone: 'UTC'
-  })) : createDefaultDateFormat(fallbackType, dateObject)
+
+  if (dateObject.toLocaleDateString) {
+    return dateObject.toLocaleDateString(locale, Object.assign(format, {
+      timeZone: 'UTC'
+    }))
+  } else {
+    const pad = n => n < 10 ? `0${n}` : `${n}`
+    const isoString = `${date.getUTCFullYear()}-${pad(date.getUTCMonth() + 1)}-${pad(date.getUTCDate())}`
+    return isoString.substr(0, { date: 10, month: 7, year: 4 }[fallbackType])
+  }
 }
 
 export default {
@@ -51,7 +52,8 @@ export default {
       isReversing: false,
       narrowDays: [],
       originalDate: this.value,
-      tableDate: new Date()
+      tableDate: this.sanitizeDateString(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`, this.type),
+      yearFormat: createNativeLocaleFormatter({ year: 'numeric' }, 'year')
     }
   },
 
@@ -110,61 +112,67 @@ export default {
         }) === '15'
     },
     firstAllowedDate () {
-      const date = new Date()
+      const now = new Date()
+      const year = now.getFullYear()
+      const month = now.getMonth()
 
-      if (this.type === 'month') {
-        date.setDate(1)
-        date.setHours(1)
+      if (this.allowedDates) {
+        for (let date = 1; date <= 31; date++) {
+          const dateString = `${year}-${month + 1}-${date}`
+          if (isNaN(new Date(dateString).getDate())) break
 
-        if (this.allowedDates) {
-          const valid = new Date(date)
-          for (let month = 0; month < 12; month++) {
-            valid.setMonth(month)
-            if (this.isAllowed(valid)) {
-              return valid
-            }
-          }
-        }
-      } else if (this.type === 'date') {
-        date.setHours(1)
-        const month = date.getMonth()
-
-        if (this.allowedDates) {
-          const valid = new Date(date)
-          for (let i = 0; i < 31; i++) {
-            if (date.getMonth() === month && this.isAllowed(valid)) return valid
-            valid.setDate(i)
+          const sanitizedDateString = this.sanitizeDateString(dateString, 'date')
+          if (this.isAllowed(sanitizedDateString)) {
+            return sanitizedDateString
           }
         }
       }
 
-      return date
+      return this.sanitizeDateString(`${year}-${month + 1}-${now.getDate()}`, 'date')
+    },
+    firstAllowedMonth () {
+      const now = new Date()
+      const year = now.getFullYear()
+
+      if (this.allowedDates) {
+        for (let month = 0; month < 12; month++) {
+          const dateString = `${year}-${month + 1}`
+          const sanitizedDateString = this.sanitizeDateString(dateString, 'month')
+          if (this.isAllowed(sanitizedDateString)) {
+            return sanitizedDateString
+          }
+        }
+      }
+
+      return this.sanitizeDateString(`${year}-${now.getMonth() + 1}`, 'month')
     },
     inputDate: {
       get () {
-        const date = this.makeDate(this.value)
-        return date == null ? this.firstAllowedDate : date
+        if (this.value) {
+          return this.sanitizeDateString(this.value, this.type)
+        }
+
+        return this.type === 'month' ? this.firstAllowedMonth : this.firstAllowedDate
       },
       set (value) {
-        const date = this.makeDate(value)
-        const pickerDateFormat = createDefaultDateFormat(this.type)
-        this.$emit('input', date == null ? this.originalDate : pickerDateFormat(date))
+        const date = value == null ? this.originalDate : this.sanitizeDateString(value, this.type)
+        this.$emit('input', date)
       }
     },
     day () {
-      return this.inputDate.getDate()
+      return this.inputDate.split('-')[2] * 1
     },
     month () {
-      return this.inputDate.getMonth()
+      return this.inputDate.split('-')[1] - 1
     },
     year () {
-      return this.inputDate.getFullYear()
+      return this.inputDate.split('-')[0] * 1
     },
     tableMonth () {
-      return this.tableDate.getMonth()
+      return this.tableDate.split('-')[1] - 1
     },
     tableYear () {
-      return this.tableDate.getFullYear()
+      return this.tableDate.split('-')[0] * 1
     },
     computedTransition () {
       return this.isReversing ? 'tab-reverse-transition' : 'tab-transition'
@@ -247,10 +255,10 @@ export default {
     getWeekDays () {
       const first = parseInt(this.firstDayOfWeek, 10)
       if (this.supportsLocaleFormat) {
-        const date = this.normalizeDate(2000, 1, 7)
-        const day = date.getDate() - date.getDay() + first
-        const format = { weekday: 'narrow' }
-        this.narrowDays = createRange(7).map(i => this.normalizeDate(2000, 1, day + i).toLocaleDateString(this.locale, format))
+        const date = new Date('2000-01-07 GMT+0')
+        const day = date.getUTCDate() - date.getUTCDay() + first
+        const format = { weekday: 'narrow', timeZone: 'UTC' }
+        this.narrowDays = createRange(7).map(i => new Date(`2000-01-${day + i} GMT+0`).toLocaleDateString(this.locale, format))
       } else {
         this.narrowDays = createRange(7).map(i => ['S', 'M', 'T', 'W', 'T', 'F', 'S'][(i + first) % 7])
       }
@@ -259,19 +267,12 @@ export default {
       if (!this.allowedDates) return true
 
       if (Array.isArray(this.allowedDates)) {
-        const format = createDefaultDateFormat(this.activePicker === 'MONTH' ? 'month' : 'date')
-        date = format(this.makeDate(date))
-        return !!this.allowedDates.find(allowedDate => {
-          allowedDate = this.makeDate(allowedDate)
-          return allowedDate && format(allowedDate) === date
-        })
+        return this.allowedDates.indexOf(date) > -1
       } else if (this.allowedDates instanceof Function) {
         return this.allowedDates(date)
       } else if (this.allowedDates instanceof Object) {
-        const format = createDefaultDateFormat(this.activePicker === 'MONTH' ? 'month' : 'date')
-        const min = format(this.makeDate(this.allowedDates.min))
-        const max = format(this.makeDate(this.allowedDates.max))
-        date = format(date)
+        const min = this.allowedDates.min
+        const max = this.allowedDates.max
         return (!min || min <= date) && (!max || max >= date)
       }
 
@@ -314,27 +315,24 @@ export default {
         pickerBodyChildren.push(this.genTable([
           this.dateGenTHead(),
           this.dateGenTBody()
-        ], value => this.tableDate = this.normalizeDate(this.tableYear, this.tableMonth + value)))
+        ], value => this.tableDate = this.sanitizeDateString(`${this.tableYear}-${this.tableMonth + value + 1}`, 'month')))
       } else if (this.activePicker === 'MONTH') {
         pickerBodyChildren.push(h('div', { staticClass: 'picker--date__header' }, [this.genSelector()]))
         pickerBodyChildren.push(this.genTable([
           this.monthGenTBody()
-        ], value => this.tableDate = this.normalizeDate(this.tableYear + value)))
+        ], value => this.tableDate = this.sanitizeDateString(`${this.tableYear}`, 'year')))
       } else if (this.activePicker === 'YEAR') {
         pickerBodyChildren.push(this.genYears())
       }
 
       return pickerBodyChildren
     },
-    makeDate (val) {
-      if (val == null) return val
-      if (val instanceof Date) return val
-      if (!isNaN(val)) return new Date(val)
-      const [year, month, date] = val.trim().split(' ')[0].split('-')
-      return this.normalizeDate(year, month ? (month - 1) : 0, date ? (date * 1) : 1)
-    },
-    normalizeDate (year, month = 0, date = 1) {
-      return new Date(year, month, date, 1 /* Workaround for #1409 */)
+    sanitizeDateString (dateString, type) {
+      const [year, month, date] = dateString.trim().split(' ')[0].split('-')
+      const dateObject = new Date(`${year}-${month || 1}-${date || 1} GMT+0`)
+      const pad = n => n < 10 ? `0${n}` : `${n}`
+      const sanitizedFullString = `${dateObject.getUTCFullYear()}-${pad(dateObject.getUTCMonth() + 1)}-${pad(dateObject.getUTCDate())}`
+      return sanitizedFullString.substr(0, { date: 10, month: 7, year: 4 }[type])
     }
   },
 

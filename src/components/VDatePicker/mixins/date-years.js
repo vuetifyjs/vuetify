@@ -8,7 +8,7 @@ export default {
       }, this.genYearItems())
     },
     yearClick (year) {
-      this.inputDate = this.normalizeDate(year, this.tableMonth, this.day)
+      this.inputDate = this.sanitizeDateString(`${year}-${this.tableMonth + 1}-${this.day}`, this.type)
 
       if (this.type === 'year') {
         this.$nextTick(() => (this.autosave && this.save()))
@@ -19,7 +19,7 @@ export default {
     genYearItems () {
       const children = []
       for (let year = this.year + 100, length = this.year - 100; year > length; year--) {
-        const date = this.normalizeDate(year, this.month, this.day)
+        const date = new Date(`${year}-1-1 GMT+0`)
         const buttonText = this.supportsLocaleFormat
           ? date.toLocaleDateString(this.locale, {
             year: 'numeric',

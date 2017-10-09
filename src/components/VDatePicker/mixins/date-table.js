@@ -8,27 +8,27 @@ export default {
       if (e.deltaY < 0) month++
       else month--
 
-      this.tableDate = this.normalizeDate(this.tableYear, month)
+      this.tableDate = this.sanitizeDateString(`${this.tableYear}-${month + 1}`, 'month')
     },
     dateGenTHead () {
       const days = this.narrowDays.map(day => this.$createElement('th', day))
       return this.$createElement('thead', this.dateGenTR(days))
     },
     dateClick (day) {
-      this.inputDate = this.normalizeDate(this.tableYear, this.tableMonth, day)
+      this.inputDate = this.sanitizeDateString(`${this.tableYear}-${this.tableMonth + 1}-${day}`, 'date')
       this.$nextTick(() => (this.autosave && this.save()))
     },
-    dateGenButtonText (date, day) {
+    dateGenButtonText (day) {
       return this.supportsLocaleFormat
-        ? date.toLocaleDateString(this.locale, {
+        ? new Date(`${this.tableYear}-${this.tableMonth + 1}-${day} GMT+0`).toLocaleDateString(this.locale, {
           day: 'numeric',
-          timeZone: this.timeZone
+          timeZone: 'UTC'
         })
         : day
     },
     dateGenTD (day) {
-      const date = this.normalizeDate(this.tableYear, this.tableMonth, day)
-      const buttonText = this.dateGenButtonText(date, day)
+      const date = this.sanitizeDateString(`${this.tableYear}-${this.tableMonth + 1}-${day}`, 'date')
+      const buttonText = this.dateGenButtonText(day)
       const button = this.$createElement('button', {
         staticClass: 'btn btn--date-picker btn--floating btn--small btn--flat',
         'class': {
@@ -51,9 +51,9 @@ export default {
     },
     dateGenTBody () {
       const children = []
-      const daysInMonth = this.normalizeDate(this.tableYear, this.tableMonth + 1, 0).getDate()
+      const daysInMonth = new Date(this.tableYear, this.tableMonth + 1, 0).getDate()
       let rows = []
-      const day = (this.normalizeDate(this.tableYear, this.tableMonth).getDay() - parseInt(this.firstDayOfWeek) + 7) % 7
+      const day = (new Date(`${this.tableYear}-${this.tableMonth + 1}-01 GMT+0`).getUTCDay() - parseInt(this.firstDayOfWeek) + 7) % 7
 
       for (let i = 0; i < day; i++) {
         rows.push(this.$createElement('td'))

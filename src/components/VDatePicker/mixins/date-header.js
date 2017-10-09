@@ -10,9 +10,15 @@ export default {
           click: e => {
             e.stopPropagation()
             if (this.activePicker === 'DATE') {
-              this.tableDate = this.normalizeDate(this.tableYear, change)
+              if (change === 12) {
+                this.tableDate = this.sanitizeDateString(`${this.tableYear + 1}-1`, 'month')
+              } else if (change === -1) {
+                this.tableDate = this.sanitizeDateString(`${this.tableYear - 1}-12`, 'month')
+              } else {
+                this.tableDate = this.sanitizeDateString(`${this.tableYear}-${change + 1}`, 'month')
+              }
             } else if (this.activePicker === 'MONTH') {
-              this.tableDate = this.normalizeDate(change, this.tableMonth)
+              this.tableDate = this.sanitizeDateString(`${change}-${this.tableMonth + 1}`, 'month')
             }
           }
         }

@@ -2,8 +2,6 @@ import VDatePicker from '~components/VDatePicker'
 import { test } from '~util/testing'
 import { mount } from 'avoriaz'
 
-const persianMonths = ['حمل', 'ثور', 'جوزا', 'سرطان',' اسد', 'سنبله' ,'میزان' ,'عقرب' ,'قوس', 'جدی' ,'دلو', 'حوت']
-
 test('VDatePicker.js', ({ mount }) => {
   it('should display the correct date in title and header', () => {
     const wrapper = mount(VDatePicker, {

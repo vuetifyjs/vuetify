@@ -8,10 +8,13 @@ export default {
       if (e.deltaY < 0) year++
       else year--
 
-      this.tableDate = this.normalizeDate(year)
+      this.tableDate = this.sanitizeDateString(year, 'year')
     },
     monthClick (month) {
-      this.inputDate = this.normalizeDate(this.tableYear, month, this.day)
+      this.inputDate = this.type === 'date'
+        ? this.sanitizeDateString(`${this.tableYear}-${month + 1}-${this.day}`, this.type)
+        : this.sanitizeDateString(`${this.tableYear}-${month + 1}`, this.type)
+
       if (this.type === 'date') {
         this.activePicker = 'DATE'
       } else {
