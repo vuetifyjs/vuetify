@@ -45,7 +45,7 @@ echo "Releasing $VERSION ..."
 npm run lint
 npm run test -i
 
-npm config set commit-hooks false
+npm_config_commit_hooks=false
 npm version $VERSION --message "[release] $VERSION"
 
 git push --no-verify --follow-tags

@@ -13,3 +13,4 @@ dev/*css
 !dev/router.js
 /es5
 /dist
+/release
