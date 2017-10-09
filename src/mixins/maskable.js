@@ -71,7 +71,10 @@ export default {
         if (position <= 0) break
       }
 
-      this.setCaretPosition(selection)
+      this.$nextTick(() => {
+        this.$refs.input.value = newText
+        this.setCaretPosition(selection)
+      })
     }
   },
 
@@ -96,16 +99,14 @@ export default {
       }
 
       this.setCaretPosition(selection)
+      // this.$emit() must occur when all internal values are correct
+      this.$emit('input', this.returnMaskedValue ? this.$refs.input.value : this.lazyValue)
     },
     maskText (text) {
-      if (!this.mask) return text
-
-      return maskText(text, this.masked, this.dontFillMaskBlanks)
+      return this.mask ? maskText(text, this.masked, this.dontFillMaskBlanks) : text
     },
     unmaskText (text) {
-      if (this.returnMaskedValue || !this.mask) return text
-
-      return unmaskText(text)
+      return this.mask ? unmaskText(text) : text
     },
     // When the input changes and is
     // re-created, ensure that the

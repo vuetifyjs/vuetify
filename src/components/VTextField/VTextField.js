@@ -84,12 +84,14 @@ export default {
     },
     inputValue: {
       get () {
-        return this.value
+        return this.lazyValue
       },
       set (val) {
-        this.lazyValue = val
-        this.mask && this.setSelectionRange()
-        this.$emit('input', val)
+        // Inner unmaskText() strips of non-alphanum
+        // maskText() masks and removes dirty alphanum
+        // Outer unmaskText() provides a clean lazyValue
+        this.lazyValue = this.unmaskText(this.maskText(this.unmaskText(val)))
+        this.setSelectionRange()
       }
     },
     isDirty () {
@@ -113,10 +115,15 @@ export default {
     },
     value (val) {
       // Value was changed externally, update lazy
-      this.lazyValue = val
+      const masked = this.maskText(this.unmaskText(val))
+      this.lazyValue = this.unmaskText(masked)
 
       !this.validateOnBlur && this.validate()
       this.shouldAutoGrow && this.calculateInputHeight()
+      this.$nextTick(() => {
+        this.$refs.input.value = masked
+        this.$emit('input', this.lazyValue)
+      })
     }
   },
 
@@ -142,7 +149,7 @@ export default {
     },
     onInput (e) {
       this.resetSelections(e.target)
-      this.inputValue = this.unmaskText(e.target.value)
+      this.inputValue = e.target.value
       this.badInput = e.target.validity && e.target.validity.badInput
       this.shouldAutoGrow && this.calculateInputHeight()
     },
