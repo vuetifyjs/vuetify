@@ -36,13 +36,17 @@ export default {
 
       return this.$createElement('td', [button])
     },
+    // Returns number of the days from the firstDayOfWeek to the first day of the current month
+    weekDaysBeforeFirstDayOfTheMonth () {
+      const firstDayOfTheMonth = new Date(`${this.tableYear}-${this.tableMonth + 1}-01 GMT+0`)
+      const weekDay = firstDayOfTheMonth.getUTCDay()
+      return (weekDay - parseInt(this.firstDayOfWeek) + 7) % 7
+    },
     dateGenTBody () {
       const children = []
       const daysInMonth = new Date(this.tableYear, this.tableMonth + 1, 0).getDate()
       let rows = []
-
-      // Use UTC time zone to get the position of the first day of the month relative to the first day of the week
-      const day = (new Date(`${this.tableYear}-${this.tableMonth + 1}-01 GMT+0`).getUTCDay() - parseInt(this.firstDayOfWeek) + 7) % 7
+      const day = this.weekDaysBeforeFirstDayOfTheMonth()
 
       for (let i = 0; i < day; i++) {
         rows.push(this.$createElement('td'))
