@@ -1,14 +1,41 @@
 language: node_js
 node_js:
   - "8"
+
+env:
+  global:
+    - NPM_TAG=$(node -e "v=(require('semver').prerelease('$TRAVIS_TAG')||[])[0]||'';console.log(/^[a-zA-Z]+$/.test(v)?v:'latest')")
+
 script:
   - yarn
   - npm run lint
   - npm run test
   - npm run build
+
 cache:
   yarn: true
+
 branches:
   only:
     - master
     - dev
+
+before_deploy:
+  - mkdir -p release
+  - for file in ./dist/*; do cp "$file" "${file/dist\/vuetify/release\/vuetify-${TRAVIS_TAG}}"; done
+
+deploy:
+  - provider: npm
+    email: "john.j.leider@gmail.com"
+    api_key: $NPM_API_KEY
+    tag: $NPM_TAG
+    skip_cleanup: true
+    on:
+      repo: vuetifyjs/vuetify
+      tags: true
+  - provider: releases
+    api_key: $GITHUB_API_KEY
+    file: release/*
+    skip_cleanup: true
+    on:
+      tags: true
