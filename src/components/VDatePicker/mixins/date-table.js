@@ -3,18 +3,7 @@ export default {
     dateWheelScroll (e) {
       e.preventDefault()
 
-      let month = this.tableMonth
-
-      if (e.deltaY < 0) month++
-      else month--
-
-      if (month === 12) {
-        this.tableDate = this.sanitizeDateString(`${this.tableYear + 1}-01`, 'month')
-      } else if (month === -1) {
-        this.tableDate = this.sanitizeDateString(`${this.tableYear - 1}-12`, 'month')
-      } else {
-        this.tableDate = this.sanitizeDateString(`${this.tableYear}-${month + 1}`, 'month')
-      }
+      this.updateTableMonth(e.deltaY < 0 ? this.tableMonth + 1 : this.tableMonth - 1)
     },
     dateGenTHead () {
       const days = this.weekDays.map(day => this.$createElement('th', day))

@@ -44,6 +44,7 @@ export default {
   directives: { Touch },
 
   data () {
+    const now = new Date()
     return {
       activePicker: this.type.toUpperCase(),
       currentDay: null,
@@ -51,7 +52,9 @@ export default {
       currentYear: null,
       isReversing: false,
       originalDate: this.value,
-      tableDate: this.sanitizeDateString(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`, this.type === 'month' ? 'year' : 'month'),
+      tableDate: this.type === 'month'
+        ? `${now.getFullYear()}`
+        : `${now.getFullYear()}-${now.getMonth() + 1}`,
       yearFormat: createNativeLocaleFormatter({ year: 'numeric' }, 'year')
     }
   },
@@ -216,10 +219,10 @@ export default {
     },
     value (val) {
       if (val) {
-        this.tableDate = this.sanitizeDateString(this.inputDate, this.type === 'month' ? 'year' : 'month')
+        this.tableDate = this.type === 'month' ? `${this.year}` : `${this.year}-${this.month + 1}`
       }
     },
-    type (val) {
+    type (val, old) {
       if (val === 'month' && this.activePicker === 'DATE') {
         this.activePicker = 'MONTH'
       } else if (val === 'year') {
@@ -294,21 +297,12 @@ export default {
         pickerBodyChildren.push(this.genTable([
           this.dateGenTHead(),
           this.dateGenTBody()
-        ], value => {
-          const newMonth = this.tableMonth + value
-          if (newMonth === 12) {
-            this.tableDate = this.sanitizeDateString(`${this.tableYear + 1}-01`, 'month')
-          } else if (newMonth === -1) {
-            this.tableDate = this.sanitizeDateString(`${this.tableYear - 1}-12`, 'month')
-          } else {
-            this.tableDate = this.sanitizeDateString(`${this.tableYear}-${newMonth + 1}`, 'month')
-          }
-        }))
+        ], value => this.updateTableMonth(this.tableMonth + value)))
       } else if (this.activePicker === 'MONTH') {
         pickerBodyChildren.push(h('div', { staticClass: 'picker--date__header' }, [this.genSelector()]))
         pickerBodyChildren.push(this.genTable([
           this.monthGenTBody()
-        ], value => this.tableDate = this.sanitizeDateString(`${this.tableYear + value}`, 'year')))
+        ], value => this.tableDate = `${this.tableYear + value}`))
       } else if (this.activePicker === 'YEAR') {
         pickerBodyChildren.push(this.genYears())
       }
@@ -319,11 +313,20 @@ export default {
       const [year, month, date] = dateString.split('-')
       const pad = n => (n * 1 < 10) ? `0${n * 1}` : `${n}`
       return `${year}-${pad(month)}-${pad(date)}`.substr(0, { date: 10, month: 7, year: 4 }[type])
+    },
+    updateTableMonth (month /* -1..12 */) {
+      if (month === 12) {
+        this.tableDate = `${this.tableYear + 1}-01`
+      } else if (month === -1) {
+        this.tableDate = `${this.tableYear - 1}-12`
+      } else {
+        this.tableDate = `${this.tableYear}-${month + 1}`
+      }
     }
   },
 
   created () {
-    this.tableDate = this.inputDate
+    this.tableDate = this.type === 'month' ? `${this.year}` : `${this.year}-${this.month + 1}`
   },
 
   mounted () {
