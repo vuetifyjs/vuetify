@@ -17,15 +17,15 @@ import Touch from '../../directives/touch'
 
 const createNativeLocaleFormatter = (format, fallbackType) => (dateString, locale) => {
   const [year, month, date] = dateString.trim().split(' ')[0].split('-')
-  const dateObject = new Date(`${year}-${month || 1}-${date || 1} GMT+0`)
 
-  if (dateObject.toLocaleDateString) {
+  if (Date.prototype.toLocaleDateString) {
+    const dateObject = new Date(`${year}-${month || 1}-${date || 1} GMT+0`)
     return dateObject.toLocaleDateString(locale, Object.assign(format, {
       timeZone: 'UTC'
     }))
   } else {
     const pad = n => n < 10 ? `0${n}` : `${n}`
-    const isoString = `${date.getUTCFullYear()}-${pad(date.getUTCMonth() + 1)}-${pad(date.getUTCDate())}`
+    const isoString = `${year * 1}-${pad(month * 1)}-${pad(date * 1)}`
     return isoString.substr(0, { date: 10, month: 7, year: 4 }[fallbackType])
   }
 }

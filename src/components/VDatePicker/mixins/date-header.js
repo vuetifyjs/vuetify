@@ -18,7 +18,7 @@ export default {
                 this.tableDate = this.sanitizeDateString(`${this.tableYear}-${change + 1}`, 'month')
               }
             } else if (this.activePicker === 'MONTH') {
-              this.tableDate = this.sanitizeDateString(`${change}`, 'month')
+              this.tableDate = this.sanitizeDateString(`${change}`, 'year')
             }
           }
         }
@@ -44,9 +44,8 @@ export default {
 
     genSelector () {
       const keyValue = this.activePicker === 'DATE' ? this.tableMonth : this.tableYear
-      const pad = n => n < 10 ? `0${n}` : `${n}`
       const selectorText = this.activePicker === 'DATE'
-        ? this.headerDateFormat(`${this.tableYear}-${pad(this.tableMonth + 1)}`, this.locale)
+        ? this.headerDateFormat(`${this.tableYear}-${this.tableMonth + 1}`, this.locale)
         : Date.prototype.toLocaleDateString
           ? new Date(`${this.tableYear}-01-01 GMT+0`).toLocaleDateString(this.locale, {
             year: 'numeric',
