@@ -65,10 +65,12 @@ export default {
       }
 
       selection = 0
-      for (const char of newText) {
-        isMaskDelimiter(char) || position--
-        selection++
-        if (position <= 0) break
+      if (newText) {
+        for (const char of newText) {
+          isMaskDelimiter(char) || position--
+          selection++
+          if (position <= 0) break
+        }
       }
 
       this.$nextTick(() => {
