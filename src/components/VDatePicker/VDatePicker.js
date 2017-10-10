@@ -105,7 +105,7 @@ export default {
     },
     weekDays () {
       const first = parseInt(this.firstDayOfWeek, 10)
-      if (!this.supportsLocaleFormat) {
+      if (!Date.prototype.toLocaleDateString) {
         return createRange(7).map(i => ['S', 'M', 'T', 'W', 'T', 'F', 'S'][(i + first) % 7])
       }
 
@@ -113,13 +113,6 @@ export default {
       const day = date.getUTCDate() - date.getUTCDay() + first
       const format = { weekday: 'narrow', timeZone: 'UTC' }
       return createRange(7).map(i => new Date(`2000-01-${day + i} GMT+0`).toLocaleDateString(this.locale, format))
-    },
-    supportsLocaleFormat () {
-      return ('toLocaleDateString' in Date.prototype) &&
-        new Date('2000-01-15').toLocaleDateString('en', {
-          day: 'numeric',
-          timeZone: 'UTC'
-        }) === '15'
     },
     firstAllowedDate () {
       const now = new Date()

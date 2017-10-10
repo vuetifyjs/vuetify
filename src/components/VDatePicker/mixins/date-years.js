@@ -20,7 +20,7 @@ export default {
       const children = []
       for (let year = this.year + 100, length = this.year - 100; year > length; year--) {
         const date = new Date(`${year}-1-1 GMT+0`)
-        const buttonText = this.supportsLocaleFormat
+        const buttonText = Date.prototype.toLocaleDateString
           ? date.toLocaleDateString(this.locale, {
             year: 'numeric',
             timeZone: this.timeZone

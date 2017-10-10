@@ -25,7 +25,7 @@ export default {
       this.$nextTick(() => (this.autosave && this.save()))
     },
     dateGenButtonText (day) {
-      return this.supportsLocaleFormat
+      return Date.prototype.toLocaleDateString
         ? new Date(`${this.tableYear}-${this.tableMonth + 1}-${day} GMT+0`).toLocaleDateString(this.locale, {
           day: 'numeric',
           timeZone: 'UTC'
