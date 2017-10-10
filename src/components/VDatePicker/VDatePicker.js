@@ -15,6 +15,15 @@ import VIcon from '../VIcon'
 
 import Touch from '../../directives/touch'
 
+/**
+ * Creates the formatting function that uses Date::toLocaleDateString or returns date
+ * in ISO format if toLocaleDateString is not supported by the browser
+ * Formatting function takes a date string in ISO format and locale as a parameters
+ *
+ * @param {Object} format Passed as a second argument of Date::toLocaleDateString
+ * @param {String} fallbackType Can be 'year', 'month', 'date', 'monthOnly', 'dateOnly',
+ *   returns respectively date in 'YYYY', 'YYYY-MM', 'YYYY-MM-DD', 'MM', 'DD' format
+ */
 const createNativeLocaleFormatter = (format, fallbackType) => (dateString, locale) => {
   const [year, month, date] = dateString.trim().split(' ')[0].split('-')
 
@@ -25,8 +34,15 @@ const createNativeLocaleFormatter = (format, fallbackType) => (dateString, local
     }))
   } else {
     const pad = n => n < 10 ? `0${n}` : `${n}`
-    const isoString = `${year * 1}-${pad(month * 1)}-${pad(date * 1)}`
-    return isoString.substr(0, { date: 10, month: 7, year: 4 }[fallbackType])
+    const isoString = `${year * 1}-${pad(month || 1)}-${pad(date || 1)}`
+    const formats = {
+      date: { start: 0, length: 10 },
+      month: { start: 0, length: 7 },
+      year: { start: 0, length: 4 },
+      monthOnly: { start: 5, length: 2 },
+      dateOnly: { start: 8, length: 2 }
+    }
+    return isoString.substr(formats[fallbackType].start, formats[fallbackType].length)
   }
 }
 
@@ -52,10 +68,10 @@ export default {
       currentYear: null,
       isReversing: false,
       originalDate: this.value,
+      // tableDate is a string in 'YYYY' / 'YYYY-M' format (leading zero for month is not required)
       tableDate: this.type === 'month'
         ? `${now.getFullYear()}`
-        : `${now.getFullYear()}-${now.getMonth() + 1}`,
-      yearFormat: createNativeLocaleFormatter({ year: 'numeric' }, 'year')
+        : `${now.getFullYear()}-${now.getMonth() + 1}`
     }
   },
 
@@ -64,10 +80,16 @@ export default {
       type: [Array, Object, Function],
       default: () => (null)
     },
+    // Function formatting the day in date picker table
+    dayFormat: {
+      type: Function,
+      default: createNativeLocaleFormatter({ day: 'numeric' }, 'dateOnly')
+    },
     firstDayOfWeek: {
       type: [String, Number],
       default: 0
     },
+    // Function formatting the tableDate in the day/month table header
     headerDateFormat: {
       type: Function,
       default: createNativeLocaleFormatter({ month: 'long', year: 'numeric' }, 'month')
@@ -76,10 +98,12 @@ export default {
       type: String,
       default: 'en-us'
     },
+    // Function formatting month in the months table
     monthFormat: {
       type: Function,
-      default: createNativeLocaleFormatter({ month: 'short' }, 'month')
+      default: createNativeLocaleFormatter({ month: 'short' }, 'monthOnly')
     },
+    // Function formatting currently selected date in the picker title
     titleDateFormat: {
       type: Function,
       default: null
@@ -90,6 +114,11 @@ export default {
       validator: type => ['date', 'month'/*, 'year'*/].includes(type)
     },
     value: String,
+    // Function formatting the year in table header and pickup title
+    yearFormat: {
+      type: Function,
+      default: createNativeLocaleFormatter({ year: 'numeric' }, 'year')
+    },
     yearIcon: String
   },
 
@@ -100,6 +129,7 @@ export default {
         return createRange(7).map(i => ['S', 'M', 'T', 'W', 'T', 'F', 'S'][(i + first) % 7])
       }
 
+      // Operates on UTC time zone to get the names of the week days
       const date = new Date('2000-01-07 GMT+0')
       const day = date.getUTCDate() - date.getUTCDay() + first
       const format = { weekday: 'narrow', timeZone: 'UTC' }
@@ -140,6 +170,9 @@ export default {
 
       return this.sanitizeDateString(`${year}-${now.getMonth() + 1}`, 'month')
     },
+    // inputDate MUST be a string in ISO 8601 format (including leading zero for month/day)
+    // YYYY-MM for month picker
+    // YYYY-MM-DD for date picker
     inputDate: {
       get () {
         if (this.value) {
@@ -173,6 +206,8 @@ export default {
     },
     titleText () {
       const pad = n => n < 10 ? `0${n}` : `${n}`
+
+      // Current date in ISO 8601 format (with leading zero)
       const date = this.type === 'month'
         ? `${this.year}-${pad(this.month + 1)}`
         : `${this.year}-${pad(this.month + 1)}-${pad(this.day)}`
@@ -215,6 +250,8 @@ export default {
       }, 100)
     },
     tableDate (val, prev) {
+      // Make a ISO 8601 strings from val and prev for comparision, otherwise it will incorrectly
+      // compare for example '2000-9' and '2000-10'
       const sanitizeType = this.type === 'month' ? 'year' : 'month'
       this.isReversing = this.sanitizeDateString(val, sanitizeType) < this.sanitizeDateString(prev, sanitizeType)
     },
@@ -249,6 +286,9 @@ export default {
     isAllowed (date) {
       if (!this.allowedDates) return true
 
+      // date parameter must be in ISO 8601 format with leading zero
+      // If allowedDates is an array its values must be in ISO 8601 format with leading zero
+      // If allowedDates is on object its min/max properties must be in ISO 8601 with leading zero
       if (Array.isArray(this.allowedDates)) {
         return this.allowedDates.indexOf(date) > -1
       } else if (this.allowedDates instanceof Function) {
@@ -310,11 +350,16 @@ export default {
 
       return pickerBodyChildren
     },
+    // Adds leading zero to month/day if necessary, returns 'YYYY' if type = 'year',
+    // 'YYYY-MM' if 'month' and 'YYYY-MM-DD' if 'date'
     sanitizeDateString (dateString, type) {
       const [year, month, date] = dateString.split('-')
       const pad = n => (n * 1 < 10) ? `0${n * 1}` : `${n}`
       return `${year}-${pad(month)}-${pad(date)}`.substr(0, { date: 10, month: 7, year: 4 }[type])
     },
+    // For month = 12 it sets the tableDate to January next year
+    // For month = -1 it sets the tableDate to December previous year
+    // Otherwise it just changes the table month
     updateTableMonth (month /* -1..12 */) {
       if (month === 12) {
         this.tableDate = `${this.tableYear + 1}-01`

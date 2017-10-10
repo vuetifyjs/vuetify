@@ -11,6 +11,7 @@ export default {
       this.tableDate = `${year}`
     },
     monthClick (month) {
+      // Updates inputDate setting 'YYYY-MM' or 'YYYY-MM-DD' format, depending on the picker type
       this.inputDate = this.type === 'date'
         ? this.sanitizeDateString(`${this.tableYear}-${month + 1}-${this.day}`, this.type)
         : this.sanitizeDateString(`${this.tableYear}-${month + 1}`, this.type)

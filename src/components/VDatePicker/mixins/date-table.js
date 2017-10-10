@@ -13,17 +13,9 @@ export default {
       this.inputDate = this.sanitizeDateString(`${this.tableYear}-${this.tableMonth + 1}-${day}`, 'date')
       this.$nextTick(() => (this.autosave && this.save()))
     },
-    dateGenButtonText (day) {
-      return Date.prototype.toLocaleDateString
-        ? new Date(`${this.tableYear}-${this.tableMonth + 1}-${day} GMT+0`).toLocaleDateString(this.locale, {
-          day: 'numeric',
-          timeZone: 'UTC'
-        })
-        : day
-    },
     dateGenTD (day) {
       const date = this.sanitizeDateString(`${this.tableYear}-${this.tableMonth + 1}-${day}`, 'date')
-      const buttonText = this.dateGenButtonText(day)
+      const buttonText = this.dayFormat(date, this.locale)
       const button = this.$createElement('button', {
         staticClass: 'btn btn--date-picker btn--floating btn--small btn--flat',
         'class': {
@@ -48,6 +40,8 @@ export default {
       const children = []
       const daysInMonth = new Date(this.tableYear, this.tableMonth + 1, 0).getDate()
       let rows = []
+
+      // Use UTC time zone to get the position of the first day of the month relative to the first day of the week
       const day = (new Date(`${this.tableYear}-${this.tableMonth + 1}-01 GMT+0`).getUTCDay() - parseInt(this.firstDayOfWeek) + 7) % 7
 
       for (let i = 0; i < day; i++) {

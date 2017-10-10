@@ -38,13 +38,14 @@ export default {
 
     genSelector () {
       const keyValue = this.activePicker === 'DATE' ? this.tableMonth : this.tableYear
+      // Generates the text of the button switching the active picker in the table header.
+      // For date picker it uses headerDateFormat formatting function (defined by dev or
+      // default). For month picker it uses Date::toLocaleDateString to get the year
+      // in the current locale or just a year numeric value if Date::toLocaleDateString
+      // is not supported
       const selectorText = this.activePicker === 'DATE'
         ? this.headerDateFormat(`${this.tableYear}-${this.tableMonth + 1}`, this.locale)
-        : Date.prototype.toLocaleDateString
-          ? new Date(`${this.tableYear}-01-01 GMT+0`).toLocaleDateString(this.locale, {
-            year: 'numeric',
-            timeZone: 'UTC'
-          }) : this.tableYear
+        : this.yearFormat(`${this.tableYear}`, this.locale)
 
       return this.$createElement('div', {
         'class': 'picker--date__header-selector'
