@@ -55,13 +55,16 @@ export default {
     mask () {
       if (!this.$refs.input) return
 
-      const oldText = this.$refs.input.value || ''
-      const newText = this.maskText(this.lazyValue || '')
+      // Expect null
+      const oldText = this.$refs.input.value
+      const newText = this.maskText(this.lazyValue)
       let position = 0
       let selection = this.selection
 
-      for (const char of oldText.substr(0, selection)) {
-        isMaskDelimiter(char) || position++
+      if (oldText) {
+        for (const char of oldText.substr(0, selection)) {
+          isMaskDelimiter(char) || position++
+        }
       }
 
       selection = 0

@@ -87,11 +87,13 @@ export default {
         return this.lazyValue
       },
       set (val) {
-        // Inner unmaskText() strips of non-alphanum
+        // Inner unmaskText() strips off non-alphanum
         // maskText() masks and removes dirty alphanum
         // Outer unmaskText() provides a clean lazyValue
-        this.lazyValue = val ? this.unmaskText(this.maskText(this.unmaskText(val))) : val
-        this.setSelectionRange()
+        this.lazyValue = this.unmaskText(this.maskText(this.unmaskText(val)))
+        this.mask ? this.setSelectionRange()
+          : this.$emit('input', this.returnMaskedValue
+            ? this.$refs.input.value : this.lazyValue)
       }
     },
     isDirty () {
@@ -116,10 +118,11 @@ export default {
     value (val) {
       // Value was changed externally, update lazy
       const masked = this.maskText(this.unmaskText(val))
-      this.lazyValue = this.unmaskText(masked)
 
+      this.lazyValue = this.unmaskText(masked)
       !this.validateOnBlur && this.validate()
       this.shouldAutoGrow && this.calculateInputHeight()
+
       this.$nextTick(() => {
         this.$refs.input.value = masked
         this.$emit('input', this.lazyValue)
