@@ -215,7 +215,8 @@ export default {
       }, 100)
     },
     tableDate (val, prev) {
-      this.isReversing = val < prev
+      const sanitizeType = this.type === 'month' ? 'year' : 'month'
+      this.isReversing = this.sanitizeDateString(val, sanitizeType) < this.sanitizeDateString(prev, sanitizeType)
     },
     value (val) {
       if (val) {
