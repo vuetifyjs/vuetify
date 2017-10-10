@@ -23,7 +23,7 @@ export default {
         const buttonText = Date.prototype.toLocaleDateString
           ? date.toLocaleDateString(this.locale, {
             year: 'numeric',
-            timeZone: this.timeZone
+            timeZone: 'UTC'
           })
           : year
 

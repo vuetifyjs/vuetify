@@ -91,18 +91,6 @@ export default {
   },
 
   computed: {
-    timeZone () {
-      try {
-        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
-        new Date('2000-01-15').toLocaleDateString('en', {
-          day: 'numeric',
-          timeZone
-        })
-        return timeZone
-      } catch (e) {
-        return 'UTC'
-      }
-    },
     weekDays () {
       const first = parseInt(this.firstDayOfWeek, 10)
       if (!Date.prototype.toLocaleDateString) {
