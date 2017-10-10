@@ -59,6 +59,7 @@ test('VBreadcrumbs.js', () => {
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({ justifyCenter: false, justifyEnd: true })
+
     expect(wrapper.html()).toMatchSnapshot()
   })
 })
