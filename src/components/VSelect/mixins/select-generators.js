@@ -96,7 +96,6 @@ export default {
           // set the menu status
           data.on.blur = () => {
             this.inputValue = this.lazySearch
-            this.menuIsActive = false
           }
         }
 
