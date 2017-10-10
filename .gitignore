@@ -14,3 +14,4 @@ dev/*css
 !dev/prepare-commit-message.js
 /es5
 /dist
+/release
