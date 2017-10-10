@@ -260,7 +260,7 @@ export default {
         this.tableDate = this.type === 'month' ? `${this.year}` : `${this.year}-${this.month + 1}`
       }
     },
-    type (val, old) {
+    type (val) {
       if (val === 'month' && this.activePicker === 'DATE') {
         this.activePicker = 'MONTH'
       } else if (val === 'year') {
