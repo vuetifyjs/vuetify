@@ -1,6 +1,7 @@
 require('../../stylus/components/_chips.styl')
 
 import VIcon from '../VIcon'
+import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 import Toggleable from '../../mixins/toggleable'
 
@@ -11,7 +12,7 @@ export default {
     VIcon
   },
 
-  mixins: [Themeable, Toggleable],
+  mixins: [Colorable, Themeable, Toggleable],
 
   props: {
     close: Boolean,
@@ -21,6 +22,7 @@ export default {
     // Used for selects/tagging
     selected: Boolean,
     small: Boolean,
+    textColor: String,
     value: {
       type: Boolean,
       default: true
@@ -29,7 +31,7 @@ export default {
 
   computed: {
     classes () {
-      return {
+      const classes = this.addBackgroundColorClassChecks({
         'chip': true,
         'chip--disabled': this.disabled,
         'chip--selected': this.selected,
@@ -39,7 +41,11 @@ export default {
         'chip--removable': this.close,
         'theme--light': this.light,
         'theme--dark': this.dark
-      }
+      })
+
+      return (this.textColor || this.outline)
+        ? this.addTextColorClassChecks(classes, this.textColor ? 'textColor' : 'color')
+        : classes
     }
   },
 

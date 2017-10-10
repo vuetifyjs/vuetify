@@ -34,7 +34,7 @@ export default {
 
   computed: {
     classes () {
-      return this.addColorClassChecks({
+      return this.addTextColorClassChecks({
         'input-group': true,
         'input-group--active': this.isActive,
         'input-group--disabled': this.disabled,

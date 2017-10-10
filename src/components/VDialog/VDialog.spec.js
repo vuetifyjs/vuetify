@@ -76,10 +76,10 @@ test('VDialog.js', () => {
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
-  it('should render component with custom width and match snapshot', () => {
+  it('should render component with custom width (max-width) and match snapshot', () => {
     const wrapper = mount(VDialog, {
       propsData: {
-        width: 100
+        maxWidth: 100
       }
     })
 

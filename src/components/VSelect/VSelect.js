@@ -87,6 +87,7 @@ export default {
       type: String,
       default: 'primary'
     },
+    combobox: Boolean,
     debounceSearch: {
       type: [Number, String],
       default: 200
@@ -156,7 +157,7 @@ export default {
       if (this.hasError) {
         classes['error--text'] = true
       } else {
-        return this.addColorClassChecks(classes)
+        return this.addTextColorClassChecks(classes)
       }
 
       return classes
@@ -195,7 +196,7 @@ export default {
         this.searchValue === this.getText(this.selectedItem)
     },
     isAutocomplete () {
-      return this.autocomplete || this.editable || this.tags
+      return this.autocomplete || this.editable || this.tags || this.combobox
     },
     isDirty () {
       return this.selectedItems.length > 0
@@ -473,6 +474,10 @@ export default {
       // If we are using tags, don't filter results
       if (this.tags) return (this.selectedItems = val)
 
+      // Combobox is the single version
+      // of a taggable select element
+      if (this.combobox) return (this.selectedItems = [val || ''])
+
       let selectedItems = this.computedItems.filter(i => {
         if (!this.isMultiple) {
           return this.getValue(i) === this.getValue(val)
@@ -521,6 +526,8 @@ export default {
       if (!this.isActive) {
         requestAnimationFrame(() => (this.content.scrollTop = 0))
       } else {
+        if (this.lastItem >= this.computedItems.length) return
+
         const showMoreItems = (
           this.content.scrollHeight -
           (this.content.scrollTop +

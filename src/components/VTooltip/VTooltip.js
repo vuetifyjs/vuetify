@@ -14,7 +14,8 @@ export default {
   mixins: [Colorable, Delayable, Dependent, Detachable, Menuable, Toggleable],
 
   data: () => ({
-    calculatedMinWidth: 0
+    calculatedMinWidth: 0,
+    closeDependents: false
   }),
 
   props: {
@@ -121,11 +122,10 @@ export default {
   render (h) {
     const tooltip = h('div', {
       staticClass: 'tooltip__content',
-      'class': {
-        [this.color]: this.color,
+      'class': this.addBackgroundColorClassChecks({
         [this.contentClass]: true,
         'menuable__content__active': this.isActive
-      },
+      }),
       style: this.styles,
       attrs: this.attrs,
       directives: [{
