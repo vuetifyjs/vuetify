@@ -87,7 +87,7 @@ export default {
         !this.searchValue
       ) this.changeSelectedIndex(e.keyCode)
 
-      if (!this.tags || !this.searchValue) return
+      if (e.keyCode !== 13 && (!this.tags || !this.searchValue)) return
 
       // Tab, enter
       if ([9, 13].includes(e.keyCode)) {
