@@ -22,6 +22,7 @@
     "version": "npm run build",
     "test": "cross-env NODE_ENV=test jest",
     "lint": "eslint --ext .js,.vue src",
+    "preparecommitmsg": "node dev/prepare-commit-message.js",
     "precommit": "yarn run lint && yarn test",
     "prepush": "yarn run lint && yarn test"
   },
