@@ -90,7 +90,8 @@ export default {
         // Inner unmaskText() strips off non-alphanum
         // maskText() masks and removes dirty alphanum
         // Outer unmaskText() provides a clean lazyValue
-        this.lazyValue = this.unmaskText(this.maskText(this.unmaskText(val)))
+        const value = this.unmaskText(this.maskText(this.unmaskText(val)))
+        this.lazyValue = typeof val === 'number' ? +value : value
         this.mask ? this.setSelectionRange()
           : this.$emit('input', this.returnMaskedValue
             ? this.$refs.input.value : this.lazyValue)
@@ -118,8 +119,9 @@ export default {
     value (val) {
       // Value was changed externally, update lazy
       const masked = this.maskText(this.unmaskText(val))
+      const value = this.unmaskText(masked)
 
-      this.lazyValue = this.unmaskText(masked)
+      this.lazyValue = typeof val === 'number' ? +value : value
       !this.validateOnBlur && this.validate()
       this.shouldAutoGrow && this.calculateInputHeight()
 
