@@ -8,7 +8,9 @@ exports[`VCarousel.js should render component and match snapshot 1`] = `
             class="btn btn--icon btn--raised theme--dark"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           chevron_left
         </i>
       </div>
@@ -19,7 +21,9 @@ exports[`VCarousel.js should render component and match snapshot 1`] = `
             class="btn btn--icon btn--raised theme--dark"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           chevron_right
         </i>
       </div>
@@ -39,7 +43,9 @@ exports[`VCarousel.js should render component with custom duration between image
             class="btn btn--icon btn--raised theme--dark"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           chevron_left
         </i>
       </div>
@@ -50,7 +56,9 @@ exports[`VCarousel.js should render component with custom duration between image
             class="btn btn--icon btn--raised theme--dark"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           chevron_right
         </i>
       </div>
@@ -70,7 +78,9 @@ exports[`VCarousel.js should render component with custom icon and match snapsho
             class="btn btn--icon btn--raised theme--dark"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           chevron_left
         </i>
       </div>
@@ -81,7 +91,9 @@ exports[`VCarousel.js should render component with custom icon and match snapsho
             class="btn btn--icon btn--raised theme--dark"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           chevron_right
         </i>
       </div>
@@ -101,7 +113,9 @@ exports[`VCarousel.js should render component with custom left control icon and 
             class="btn btn--icon btn--raised theme--dark"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           stop
         </i>
       </div>
@@ -112,7 +126,9 @@ exports[`VCarousel.js should render component with custom left control icon and 
             class="btn btn--icon btn--raised theme--dark"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           chevron_right
         </i>
       </div>
@@ -132,7 +148,9 @@ exports[`VCarousel.js should render component with custom right control icon and
             class="btn btn--icon btn--raised theme--dark"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           chevron_left
         </i>
       </div>
@@ -143,7 +161,9 @@ exports[`VCarousel.js should render component with custom right control icon and
             class="btn btn--icon btn--raised theme--dark"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           stop
         </i>
       </div>
@@ -163,7 +183,9 @@ exports[`VCarousel.js should render component with image cycling off and match s
             class="btn btn--icon btn--raised theme--dark"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           chevron_left
         </i>
       </div>
@@ -174,7 +196,9 @@ exports[`VCarousel.js should render component with image cycling off and match s
             class="btn btn--icon btn--raised theme--dark"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           chevron_right
         </i>
       </div>
@@ -194,7 +218,9 @@ exports[`VCarousel.js should render component with selected active item 1`] = `
             class="btn btn--icon btn--raised theme--dark"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           chevron_left
         </i>
       </div>
@@ -205,7 +231,9 @@ exports[`VCarousel.js should render component with selected active item 1`] = `
             class="btn btn--icon btn--raised theme--dark"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           chevron_right
         </i>
       </div>
@@ -216,7 +244,9 @@ exports[`VCarousel.js should render component with selected active item 1`] = `
             class="btn btn--icon btn--raised theme--dark carousel__controls__item"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           fiber_manual_record
         </i>
       </div>
@@ -225,7 +255,9 @@ exports[`VCarousel.js should render component with selected active item 1`] = `
             class="btn btn--icon btn--raised theme--dark carousel__controls__item carousel__controls__item--active"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           fiber_manual_record
         </i>
       </div>
@@ -234,7 +266,9 @@ exports[`VCarousel.js should render component with selected active item 1`] = `
             class="btn btn--icon btn--raised theme--dark carousel__controls__item"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           fiber_manual_record
         </i>
       </div>
@@ -264,7 +298,9 @@ exports[`VCarousel.js should render component without left control icon and matc
             class="btn btn--icon btn--raised theme--dark"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           chevron_right
         </i>
       </div>
@@ -284,7 +320,9 @@ exports[`VCarousel.js should render component without right control icon and mat
             class="btn btn--icon btn--raised theme--dark"
     >
       <div class="btn__content">
-        <i class="material-icons icon">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
           chevron_left
         </i>
       </div>
