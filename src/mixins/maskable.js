@@ -55,8 +55,8 @@ export default {
     mask () {
       if (!this.$refs.input) return
 
-      const oldText = this.$refs.input.value || ''
-      const newText = this.maskText(this.lazyValue || '')
+      const oldText = this.$refs.input.value
+      const newText = this.maskText(this.lazyValue)
       let position = 0
       let selection = this.selection
 

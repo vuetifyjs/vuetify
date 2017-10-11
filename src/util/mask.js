@@ -90,6 +90,7 @@ const maskValidates = (mask, char) => {
  * @return {String}
  */
 export const maskText = (text, masked, dontFillMaskBlanks) => {
+  if (text == null) return ''
   text = String(text)
   if (!masked.length || !text.length) return text
   if (!Array.isArray(masked)) masked = masked.split('')
