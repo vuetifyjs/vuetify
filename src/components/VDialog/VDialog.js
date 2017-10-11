@@ -136,7 +136,7 @@ export default {
       let width = this.maxWidth
 
       if (this.width) {
-        console.log('The {width} property is being deprecated, please use {min-width}.')
+        console.log('The {width} property is being deprecated, please use {max-width}.')
         // TODO: Deprecate
         width = this.width
       }

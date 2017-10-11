@@ -7,6 +7,7 @@ report.html
 .vs/
 dev/
 build/
+release/
 **/*.spec.js
 /.babelrc
 /.editorconfig
