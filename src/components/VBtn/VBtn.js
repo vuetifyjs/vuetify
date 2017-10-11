@@ -25,16 +25,13 @@ export default {
       default: 'btn--active'
     },
     block: Boolean,
+    depressed: Boolean,
     fab: Boolean,
     flat: Boolean,
     icon: Boolean,
     large: Boolean,
     loading: Boolean,
     outline: Boolean,
-    raised: {
-      type: Boolean,
-      default: true
-    },
     ripple: {
       type: [Boolean, Object],
       default: true
@@ -73,7 +70,7 @@ export default {
         'btn--left': this.left,
         'btn--loader': this.loading,
         'btn--outline': this.outline,
-        'btn--raised': !this.flat || this.raised,
+        'btn--depressed': this.depressed && !this.flat,
         'btn--right': this.right,
         'btn--round': this.round,
         'btn--router': this.to,

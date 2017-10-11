@@ -4,13 +4,13 @@ exports[`VBottomNav.js should be hidden with a false value 1`] = `
 
 <div class="bottom-nav">
   <button type="button"
-          class="btn btn--raised"
+          class="btn"
   >
     <div class="btn__content">
     </div>
   </button>
   <button type="button"
-          class="btn btn--raised"
+          class="btn"
   >
     <div class="btn__content">
     </div>
@@ -23,13 +23,13 @@ exports[`VBottomNav.js should be visible with a true value 1`] = `
 
 <div class="bottom-nav bottom-nav--active">
   <button type="button"
-          class="btn btn--raised"
+          class="btn"
   >
     <div class="btn__content">
     </div>
   </button>
   <button type="button"
-          class="btn btn--raised"
+          class="btn"
   >
     <div class="btn__content">
     </div>
@@ -42,13 +42,13 @@ exports[`VBottomNav.js should have a bottom-nav class 1`] = `
 
 <div class="bottom-nav">
   <button type="button"
-          class="btn btn--raised"
+          class="btn"
   >
     <div class="btn__content">
     </div>
   </button>
   <button type="button"
-          class="btn btn--raised"
+          class="btn"
   >
     <div class="btn__content">
     </div>
@@ -61,13 +61,13 @@ exports[`VBottomNav.js should have prop classes 1`] = `
 
 <div class="bottom-nav bottom-nav--absolute bottom-nav--shift">
   <button type="button"
-          class="btn btn--raised"
+          class="btn"
   >
     <div class="btn__content">
     </div>
   </button>
   <button type="button"
-          class="btn btn--raised"
+          class="btn"
   >
     <div class="btn__content">
     </div>

@@ -2,7 +2,7 @@
 
 exports[`VBtn.js should render a <button> tag when using to prop 1`] = `
 
-<button class="btn btn--raised btn--router">
+<button class="btn btn--router">
 </button>
 
 `;
@@ -10,7 +10,7 @@ exports[`VBtn.js should render a <button> tag when using to prop 1`] = `
 exports[`VBtn.js should render an <a> tag when using href prop 1`] = `
 
 <a href="http://www.google.com"
-   class="btn btn--raised"
+   class="btn"
 >
   <div class="btn__content">
   </div>
@@ -21,7 +21,7 @@ exports[`VBtn.js should render an <a> tag when using href prop 1`] = `
 exports[`VBtn.js should render component and match snapshot 1`] = `
 
 <button type="button"
-        class="btn btn--raised"
+        class="btn"
 >
   <div class="btn__content">
   </div>
@@ -32,7 +32,7 @@ exports[`VBtn.js should render component and match snapshot 1`] = `
 exports[`VBtn.js should render specified tag when using tag prop 1`] = `
 
 <a href="javascript:;"
-   class="btn btn--raised"
+   class="btn"
 >
   <div class="btn__content">
   </div>
