@@ -11,7 +11,7 @@ exports[`VSelect should render buttons correctly when using items array with seg
          style="overflow: hidden;"
     >
       <button type="button"
-              class="btn btn--flat btn--raised"
+              class="btn btn--flat"
               data-ripple="true"
       >
         <div class="btn__content">

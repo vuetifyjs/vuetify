@@ -162,7 +162,7 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
               NaN-NaN of 3
             </div>
             <button type="button"
-                    class="btn btn--flat btn--icon btn--raised"
+                    class="btn btn--flat btn--icon"
                     data-ripple="true"
                     aria-label="Previous page"
             >
@@ -173,7 +173,7 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
               </div>
             </button>
             <button type="button"
-                    class="btn btn--flat btn--icon btn--raised"
+                    class="btn btn--flat btn--icon"
                     data-ripple="true"
                     aria-label="Next page"
             >
