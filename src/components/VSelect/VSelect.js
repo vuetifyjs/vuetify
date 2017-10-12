@@ -238,6 +238,11 @@ export default {
       this.genSelectedItems(val)
 
       this.$emit('input', val)
+
+      // When inputValue is changed
+      // and combobox is true set
+      // menu property to false
+      if (this.combobox) this.menuIsActive = false
     },
     isActive (val) {
       if (!val) {
