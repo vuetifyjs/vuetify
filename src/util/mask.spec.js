@@ -75,4 +75,8 @@ test('mask.js', ({ mount }) => {
   it('should include all possible matching values', () => {
     expect(unmaskText('555')).toBe('555')
   })
+
+  it('should mask numbers', () => {
+    expect(maskText(1234, '##.##')).toBe('12.34')
+  })
 })

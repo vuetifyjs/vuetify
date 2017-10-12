@@ -83,13 +83,15 @@ const maskValidates = (mask, char) => {
  * Takes an array of characters
  * and returns a compiled str
  *
- * @param {String} text
+ * @param {*} text
  * @param {Array|String} masked
- * @param {Boolean} dontFillMaskBlanks
+ * @param {Boolean} [dontFillMaskBlanks]
  *
  * @return {String}
  */
 export const maskText = (text, masked, dontFillMaskBlanks) => {
+  if (text == null) return ''
+  text = String(text)
   if (!masked.length || !text.length) return text
   if (!Array.isArray(masked)) masked = masked.split('')
 

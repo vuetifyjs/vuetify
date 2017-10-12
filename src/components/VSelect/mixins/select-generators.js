@@ -96,7 +96,6 @@ export default {
           // set the menu status
           data.on.blur = () => {
             this.inputValue = this.lazySearch
-            this.menuIsActive = false
           }
         }
 
@@ -263,7 +262,7 @@ export default {
       }
 
       return this.$createElement('v-list-tile', data,
-        [this.genAction(item, active && !disabled), this.genContent(item)]
+        [this.genAction(item, active), this.genContent(item)]
       )
     },
     genAction (item, active) {
