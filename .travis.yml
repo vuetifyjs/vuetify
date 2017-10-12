@@ -4,7 +4,7 @@ node_js:
 
 env:
   global:
-    - NPM_TAG=$(node -e "v=(require('semver').prerelease('$TRAVIS_TAG')||[])[0]||'';console.log(/^[a-zA-Z]+$/.test(v)?v:'latest')")
+    - NPM_TAG=$(node ./build/parse-npm-tag.js)
 
 script:
   - yarn
