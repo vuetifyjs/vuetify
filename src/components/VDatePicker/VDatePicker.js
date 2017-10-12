@@ -141,7 +141,7 @@ export default {
       const month = now.getMonth()
 
       if (this.allowedDates) {
-        for (let date = 1; date <= 31; date++) {
+        for (let date = now.getDate(); date <= 31; date++) {
           const dateString = `${year}-${month + 1}-${date}`
           if (isNaN(new Date(dateString).getDate())) break
 
@@ -159,7 +159,7 @@ export default {
       const year = now.getFullYear()
 
       if (this.allowedDates) {
-        for (let month = 0; month < 12; month++) {
+        for (let month = now.getMonth(); month < 12; month++) {
           const dateString = `${year}-${month + 1}`
           const sanitizedDateString = this.sanitizeDateString(dateString, 'month')
           if (this.isAllowed(sanitizedDateString)) {
