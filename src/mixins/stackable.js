@@ -24,22 +24,20 @@ export default {
   methods: {
     getMaxZIndex (exclude = []) {
       const base = this.stackBase || this.$el
-      // start with lowest allowed z-index or z-index of
+      // Start with lowest allowed z-index or z-index of
       // base component's element, whichever is greater
       const zis = [this.stackMinZIndex, getZIndex(base)]
-      // get z-index for all active dialogs
+      // Convert the NodeList to an array to
+      // prevent an Edge bug with Symbol.iterator
+      // https://github.com/vuetifyjs/vuetify/issues/2146
       const activeElements = [...document.getElementsByClassName(this.stackClass)]
 
-      // Changed to forEach due to
-      // Symbol iterator bug with
-      // Edge when there are 0
-      // active elements
-      // https://github.com/vuetifyjs/vuetify/issues/2146
-      activeElements.forEach(activeElement => {
+      // Get z-index for all active dialogs
+      for (const activeElement of activeElements) {
         if (!exclude.includes(activeElement)) {
           zis.push(getZIndex(activeElement))
         }
-      })
+      }
 
       return Math.max(...zis)
     }
