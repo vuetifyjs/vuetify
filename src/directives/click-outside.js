@@ -65,7 +65,8 @@ export default {
   },
 
   unbind (el) {
-    const app = document.querySelector('[data-app]')
+    const app = document.querySelector('[data-app]') ||
+      document.body // This is only for unit tests
     app && app.removeEventListener('click', el._clickOutside, true)
   }
 }
