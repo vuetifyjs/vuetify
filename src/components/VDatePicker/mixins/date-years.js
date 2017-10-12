@@ -8,12 +8,14 @@ export default {
       }, this.genYearItems())
     },
     yearClick (year) {
-      // Updates inputDate setting 'YYYY-MM' or 'YYYY-MM-DD' format, depending on the picker type
-      this.inputDate = this.sanitizeDateString(`${year}-${this.tableMonth + 1}-${this.day}`, this.type)
-
       if (this.type === 'year') {
+        this.inputDate = `${year}`
         this.$nextTick(() => (this.autosave && this.save()))
+      } else if (this.type === 'month') {
+        this.inputDate = this.sanitizeDateString(`${year}-${this.month + 1}`, 'month')
+        this.activePicker = 'MONTH'
       } else {
+        this.inputDate = this.sanitizeDateString(`${year}-${this.tableMonth + 1}-${this.day}`, 'date')
         this.activePicker = 'MONTH'
       }
     },
