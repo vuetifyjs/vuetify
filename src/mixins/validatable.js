@@ -104,7 +104,7 @@ export default {
 
       this.errorBucket = []
 
-      this.rules.forEach(rule => {
+      return this.valid = this.rules.every(rule => {
         const valid = typeof rule === 'function' ? rule(value) : rule
 
         if (valid !== true && !['string', 'boolean'].includes(typeof valid)) {
@@ -113,12 +113,11 @@ export default {
 
         if (valid !== true) {
           this.errorBucket.push(valid)
+          return false
         }
+
+        return true
       })
-
-      this.valid = this.errorBucket.length === 0
-
-      return this.valid
     }
   }
 }
