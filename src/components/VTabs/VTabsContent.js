@@ -69,7 +69,7 @@ export default {
 
   render (h) {
     const data = {
-      'class': 'tabs__content',
+      staticClass: 'tabs__content',
       directives: [{
         name: 'show',
         value: this.isActive
@@ -77,16 +77,14 @@ export default {
       on: this.$listeners
     }
 
+    if (this.id) data.domProps = { id: this.id }
+
     const div = h('div', data, this.showLazyContent(this.$slots.default))
 
-    if (!this.computedTransition) {
-      return div
-    }
+    if (!this.computedTransition) return div
 
     return h('transition', {
-      props: {
-        name: this.computedTransition
-      }
+      props: { name: this.computedTransition }
     }, [div])
   }
 }

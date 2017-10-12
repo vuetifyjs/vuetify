@@ -1,7 +1,8 @@
 require('../../stylus/components/_menus.styl')
 
 // Mixins
-import Bootable from '../../mixins/bootable'
+import Delayable from '../../mixins/delayable'
+import Dependent from '../../mixins/dependent'
 import Detachable from '../../mixins/detachable'
 import Menuable from '../../mixins/menuable.js'
 import Toggleable from '../../mixins/toggleable'
@@ -21,7 +22,8 @@ export default {
 
   mixins: [
     Activator,
-    Bootable,
+    Dependent,
+    Delayable,
     Detachable,
     Generators,
     Keyable,
@@ -42,8 +44,6 @@ export default {
       startIndex: 3,
       stopIndex: 0,
       hasJustFocused: false,
-      openTimeout: null,
-      closeTimeout: null,
       resizeTimeout: null
     }
   },
@@ -104,10 +104,19 @@ export default {
           : `${this.minWidth}px`
       }
 
-      return `${(
+      const minWidth = (
         this.dimensions.activator.width +
         this.nudgeWidth +
         (this.auto ? 16 : 0)
+      )
+
+      const calculatedMaxWidth = isNaN(parseInt(this.calculatedMaxWidth))
+        ? minWidth
+        : parseInt(this.calculatedMaxWidth)
+
+      return `${Math.min(
+        calculatedMaxWidth,
+        minWidth
       )}px`
     },
     calculatedTop () {
@@ -124,7 +133,7 @@ export default {
         top: this.calculatedTop,
         left: this.calculatedLeft,
         transformOrigin: this.origin,
-        zIndex: this.zIndex
+        zIndex: this.zIndex || this.activeZIndex
       }
     }
   },
@@ -150,7 +159,7 @@ export default {
       // Start the transition
       requestAnimationFrame(this.startTransition)
       // Once transitioning, calculate scroll position
-      requestAnimationFrame(this.calculateScroll)
+      setTimeout(this.calculateScroll, 50)
     },
     onResize () {
       if (!this.isActive) return
@@ -171,20 +180,6 @@ export default {
   },
 
   render (h) {
-    // Do not add click outside for hover menu
-    const directives = !this.openOnHover ? [{
-      name: 'click-outside',
-      value: () => this.closeOnClick
-    }] : []
-
-    directives.push({
-      name: 'resize',
-      value: {
-        debounce: 500,
-        value: this.onResize
-      }
-    })
-
     const data = {
       staticClass: 'menu',
       class: {
@@ -193,7 +188,13 @@ export default {
       style: {
         display: this.fullWidth ? 'block' : 'inline-block'
       },
-      directives,
+      directives: [{
+        name: 'resize',
+        value: {
+          debounce: 500,
+          value: this.onResize
+        }
+      }],
       on: {
         keydown: this.changeListIndex
       }

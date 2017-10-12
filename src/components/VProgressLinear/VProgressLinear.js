@@ -86,6 +86,7 @@ export default {
         : parseFloat(this.backgroundOpacity)
 
       return {
+        height: this.active ? 'auto' : 0,
         opacity: backgroundOpacity,
         width: `${this.bufferValue}%`
       }
@@ -97,9 +98,7 @@ export default {
       return h('div', {
         ref: 'front',
         staticClass: `progress-linear__bar__determinate`,
-        class: {
-          [this.color]: true
-        },
+        class: this.addBackgroundColorClassChecks({}),
         style: {
           width: `${this.effectiveWidth}%`
         }
@@ -108,10 +107,9 @@ export default {
     genBar (h, name) {
       return h('div', {
         staticClass: 'progress-linear__bar__indeterminate',
-        class: {
-          [name]: true,
-          [this.color]: true
-        }
+        class: this.addBackgroundColorClassChecks({
+          [name]: true
+        })
       })
     },
     genIndeterminate (h) {

@@ -5,7 +5,7 @@ import {
   VSlideYReverseTransition
 } from '../transitions'
 
-import Contextualable from '../../mixins/contextualable'
+import Colorable from '../../mixins/colorable'
 import Toggleable from '../../mixins/toggleable'
 
 export default {
@@ -16,7 +16,7 @@ export default {
     VSlideYReverseTransition
   },
 
-  mixins: [Contextualable, Toggleable],
+  mixins: [Colorable, Toggleable],
 
   data () {
     return {
@@ -31,6 +31,7 @@ export default {
     multiLine: Boolean,
     right: Boolean,
     top: Boolean,
+    // TODO: change this to closeDelay to match other API in delayable.js
     timeout: {
       type: Number,
       default: 6000
@@ -40,8 +41,7 @@ export default {
 
   computed: {
     classes () {
-      return {
-        'snack': true,
+      return this.addBackgroundColorClassChecks({
         'snack--active': this.isActive,
         'snack--absolute': this.absolute,
         'snack--bottom': this.bottom || !this.top,
@@ -49,14 +49,8 @@ export default {
         'snack--multi-line': this.multiLine && !this.vertical,
         'snack--right': this.right,
         'snack--top': this.top,
-        'snack--vertical': this.vertical,
-        'primary': this.primary,
-        'secondary': this.secondary,
-        'success': this.success,
-        'info': this.info,
-        'warning': this.warning,
-        'error': this.error
-      }
+        'snack--vertical': this.vertical
+      })
     },
     computedTransition () {
       return this.top ? 'v-slide-y-transition' : 'v-slide-y-reverse-transition'
@@ -90,11 +84,12 @@ export default {
 
     if (this.isActive) {
       children.push(h('div', {
-        'class': 'snack__content'
+        staticClass: 'snack__content'
       }, this.$slots.default))
     }
 
     return h('div', {
+      staticClass: 'snack',
       'class': this.classes,
       on: this.$listeners
     }, [h(this.computedTransition, children)])

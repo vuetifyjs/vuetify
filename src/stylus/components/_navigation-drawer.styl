@@ -17,13 +17,15 @@ navigation-drawer($material)
     background-color: $material.dividers
 
   .list
-    background: $material.cards
-
     &__tile:not(.list__tile--active)
       color: $material.text.primary
 
+      .icon
+        color: $material.icons.active
+
     &__tile__sub-title
       color: $material.text.secondary
+      
 
   .list--group__header--active
     .list__tile, + .list--group
@@ -41,7 +43,6 @@ theme(navigation-drawer, "navigation-drawer")
   pointer-events: auto
   position: fixed
   transition: .3s $transition.swing
-  width: $navigation-drawer-width
   top: 0
   left: 0
   will-change: transform
@@ -109,7 +110,7 @@ theme(navigation-drawer, "navigation-drawer")
       display: none !important
 
   &--temporary, &--is-mobile:not(.navigation-drawer--permanent)
-    z-index: 5
+    z-index: 6
 
     &:not(.navigation-drawer--close)
       elevation(16)
@@ -118,6 +119,9 @@ theme(navigation-drawer, "navigation-drawer")
   ~ toolbar
     + main
       min-height: "calc(100vh - %s)" % $toolbar-height
+
+  .list
+    background: inherit
 
   > .list
     .list__tile
@@ -128,10 +132,6 @@ theme(navigation-drawer, "navigation-drawer")
         .list__tile__title
           color: inherit
 
-        > *:first-child
-          .icon
-            color: $navigation-drawer-item-active-color
-
     .list--group
       .list__tile
         font-weight: $navigation-drawer-group-item-font-weight
@@ -139,10 +139,6 @@ theme(navigation-drawer, "navigation-drawer")
       &__header--active
         &:after
           background: transparent
-
-        .list__tile__action:first-of-type
-          .icon
-            color: $navigation-drawer-item-active-color
 
     .list--group__container
       .list__tile--active

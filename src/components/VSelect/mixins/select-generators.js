@@ -13,7 +13,8 @@ export default {
       const offsetY = this.isAutocomplete || this.offset || this.isDropdown
       let nudgeTop = 0
 
-      if (this.solo) nudgeTop = 0
+      if (this.auto) nudgeTop = -18
+      else if (this.solo) nudgeTop = 0
       else if (this.isDropdown) nudgeTop = 26
       else if (offsetY) nudgeTop = 24
 
@@ -32,8 +33,8 @@ export default {
           offsetOverflow: this.isAutocomplete,
           openOnClick: false,
           value: this.menuIsActive &&
-            this.computedItems.length &&
-            (!this.tags || this.tags && this.filteredItems.length > 0),
+            (!this.tags || this.filteredItems.length > 0) &&
+            (!this.combobox || this.filteredItems.length > 0),
           zIndex: this.menuZIndex
         },
         on: {
@@ -86,6 +87,15 @@ export default {
           ...this.genListeners(),
           input: e => {
             this.searchValue = this.unmaskText(e.target.value)
+          }
+        }
+
+        if (this.combobox) {
+          // When using the combobox
+          // update inputValue and
+          // set the menu status
+          data.on.blur = () => {
+            this.inputValue = this.lazySearch
           }
         }
 
@@ -163,6 +173,7 @@ export default {
 
       return this.$createElement('v-chip', {
         staticClass: 'chip--select-multi',
+        attrs: { tabindex: '-1' },
         props: {
           close: !isDisabled,
           dark: this.dark,

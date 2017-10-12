@@ -331,4 +331,12 @@ test('VTextField.js', ({ mount }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should display the number 0', async () => {
+    const wrapper = mount(VTextField, {
+      propsData: { value: 0 }
+    })
+
+    expect(wrapper.vm.$refs.input.value).toBe('0')
+  })
 })

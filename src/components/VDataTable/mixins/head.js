@@ -1,6 +1,8 @@
 export default {
   methods: {
     genTHead () {
+      if (this.hideHeaders) return // Exit Early since no headers are needed.
+
       let children = []
 
       if (this.$scopedSlots.headers) {
@@ -75,7 +77,10 @@ export default {
 
       data.attrs.tabIndex = 0
       data.on = {
-        click: () => this.sort(header.value),
+        click: () => {
+          this.expanded = []
+          this.sort(header.value)
+        },
         keydown: e => {
           // check for space
           if (e.keyCode === 32) {

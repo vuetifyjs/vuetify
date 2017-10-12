@@ -9,11 +9,11 @@ const stub = {
 }
 
 test('VListTile.vue', ({ mount }) => {
-  it('should render with a div when active is false and href is used', () => {
+  it('should render with a div when inactive is true and href is used', () => {
     const wrapper = mount(VListTile, {
       propsData: {
         href: 'http://www.google.com',
-        active: false
+        inactive: true
       }
     })
 
@@ -133,7 +133,7 @@ test('VListTile.vue', ({ mount }) => {
 
     const wrapper = mount(component)
 
-    expect(wrapper.contains('div.list__tile--link')).toBe(true)
+    expect(wrapper.contains('.list__tile--link')).toBe(true)
   })
 
   it('should have --link class when click.prevent.stop handler present', () => {
@@ -150,6 +150,6 @@ test('VListTile.vue', ({ mount }) => {
 
     const wrapper = mount(component)
 
-    expect(wrapper.contains('div.list__tile--link')).toBe(true)
+    expect(wrapper.contains('.list__tile--link')).toBe(true)
   })
 })

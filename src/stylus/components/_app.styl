@@ -5,9 +5,8 @@
   -webkit-backface-visibility: hidden
   display: flex
   min-height: 100vh
-  flex-wrap: wrap
   flex-direction: column
-  
+
   > main
     display: flex
     flex: 1 0 auto
@@ -15,5 +14,8 @@
 application($material)
   background: $material.background
   color: $material.text.primary
+
+  a
+    color: $material.text.link
 
 app(application)

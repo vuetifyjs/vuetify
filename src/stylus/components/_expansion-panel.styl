@@ -44,8 +44,9 @@ theme(expansion-panel, "expansion-panel")
         transition: none
 
     &--active
-      .header__icon .icon
-        transform: rotate(-180deg)
+      > .expansion-panel__header
+        .header__icon .icon
+          transform: rotate(-180deg)
 
   &__header
     display: flex
