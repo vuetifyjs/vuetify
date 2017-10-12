@@ -91,7 +91,7 @@ export default {
       ) {
         messages = [this.genHint()]
       } else if (this.validations.length) {
-        messages = this.validations.map(v => this.genError(v))
+        messages = [this.genError(this.validations[0])]
       }
 
       return this.$createElement('transition-group', {
