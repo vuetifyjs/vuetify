@@ -87,14 +87,14 @@ export default {
         return this.lazyValue
       },
       set (val) {
-        // Inner unmaskText() strips off non-alphanum
-        // maskText() masks and removes dirty alphanum
-        // Outer unmaskText() provides a clean lazyValue
-        const value = this.unmaskText(this.maskText(this.unmaskText(val)))
-        this.lazyValue = typeof val === 'number' ? +value : value
-        this.mask ? this.setSelectionRange()
-          : this.$emit('input', this.returnMaskedValue
-            ? this.$refs.input.value : this.lazyValue)
+        if (this.mask) {
+          const value = this.unmaskText(this.maskText(this.unmaskText(val)))
+          this.lazyValue = this.getLazyValue(value)
+          this.setSelectionRange()
+        } else {
+          this.lazyValue = val
+          this.$emit('input', this.lazyValue)
+        }
       }
     },
     isDirty () {
@@ -118,17 +118,9 @@ export default {
     },
     value (val) {
       // Value was changed externally, update lazy
-      const masked = this.maskText(this.unmaskText(val))
-      const value = this.unmaskText(masked)
-
-      this.lazyValue = typeof val === 'number' ? +value : value
       !this.validateOnBlur && this.validate()
       this.shouldAutoGrow && this.calculateInputHeight()
-
-      this.$nextTick(() => {
-        this.$refs.input.value = masked
-        this.$emit('input', this.lazyValue)
-      })
+      this.mask ? this.maskedUpdateOnValueChange(val) : this.updateOnValueChange(val)
     }
   },
 
@@ -140,6 +132,23 @@ export default {
   },
 
   methods: {
+    maskedUpdateOnValueChange (val) {
+      const masked = this.maskText(this.unmaskText(val))
+      const value = this.unmaskText(masked)
+
+      this.lazyValue = this.getLazyValue(value)
+      this.$nextTick(() => {
+        this.$refs.input.value = masked
+        this.$emit('input', this.lazyValue)
+      })
+    },
+    updateOnValueChange (val) {
+      this.lazyValue = val
+      this.$emit('input', this.lazyValue)
+    },
+    getLazyValue (val) {
+      return typeof val === 'number' ? +val : val
+    },
     calculateInputHeight () {
       this.inputHeight = null
 
@@ -153,7 +162,7 @@ export default {
       })
     },
     onInput (e) {
-      this.resetSelections(e.target)
+      this.mask && this.resetSelections(e.target)
       this.inputValue = e.target.value
       this.badInput = e.target.validity && e.target.validity.badInput
       this.shouldAutoGrow && this.calculateInputHeight()
