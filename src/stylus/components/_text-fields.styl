@@ -5,7 +5,7 @@ textfield($material)
   &.input-group--text-field-box
     .input-group__input
       background: $material.buttons.focused-alt
-      
+
   input::placeholder
     color: $material.text.disabled
 
@@ -26,7 +26,7 @@ theme(textfield, "input-group--text-field")
   input,
   textarea
     font-size: $input-font-size
-    
+
     &::placeholder
       color: inherit
 
@@ -131,6 +131,10 @@ theme(textfield, "input-group--text-field")
       &:not(.input-group--full-width).input-group--textarea
         label
           transform: translate3d(0, -8px, 0) scale(.75)
+
+      &.input-group--text-field-box
+        label
+          transform: translate3d(0, -10px, 0) scale(.75)
 
   &.input-group--dirty
     &.input-group--select,
