@@ -15,11 +15,6 @@ script:
 cache:
   yarn: true
 
-branches:
-  only:
-    - master
-    - dev
-
 before_deploy:
   - mkdir -p release
   - for file in ./dist/*; do cp "$file" "${file/dist\/vuetify/release\/vuetify-${TRAVIS_TAG}}"; done
