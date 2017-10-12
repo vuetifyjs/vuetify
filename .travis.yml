@@ -2,10 +2,6 @@ language: node_js
 node_js:
   - "8"
 
-env:
-  global:
-    - NPM_TAG=$(node ./build/parse-npm-tag.js)
-
 script:
   - yarn
   - npm run lint
@@ -16,6 +12,7 @@ cache:
   yarn: true
 
 before_deploy:
+  - export NPM_TAG=$(node ./build/parse-npm-tag.js)
   - mkdir -p release
   - for file in ./dist/*; do cp "$file" "${file/dist\/vuetify/release\/vuetify-${TRAVIS_TAG}}"; done
 
