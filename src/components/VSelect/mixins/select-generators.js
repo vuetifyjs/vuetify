@@ -53,6 +53,37 @@ export default {
       return this.$createElement('v-menu', data, [this.genList()])
     },
     genSelectionsAndSearch () {
+      return this.$createElement('div', {
+        'class': 'input-group__selections',
+        style: { 'overflow': 'hidden' },
+        ref: 'activator'
+      }, [
+        ...this.genSelections(),
+        this.genSearch()
+      ])
+    },
+    genSelections () {
+      if (this.hideSelections) return []
+
+      const children = []
+      const chips = this.chips
+      const slots = this.$scopedSlots.selection
+      const length = this.selectedItems.length
+      this.selectedItems.forEach((item, i) => {
+        if (slots) {
+          children.push(this.genSlotSelection(item, i))
+        } else if (chips) {
+          children.push(this.genChipSelection(item, i))
+        } else if (this.segmented) {
+          children.push(this.genSegmentedBtn(item, i))
+        } else {
+          children.push(this.genCommaSelection(item, i < length - 1, i))
+        }
+      })
+
+      return children
+    },
+    genSearch () {
       const data = {
         staticClass: 'input-group--select__autocomplete',
         'class': {
@@ -104,35 +135,7 @@ export default {
 
       if (this.placeholder) data.domProps.placeholder = this.placeholder
 
-      return this.$createElement('div', {
-        'class': 'input-group__selections',
-        style: { 'overflow': 'hidden' },
-        ref: 'activator'
-      }, [
-        ...this.genSelections(),
-        this.$createElement('input', data)
-      ])
-    },
-    genSelections () {
-      if (this.hideSelections) return []
-
-      const children = []
-      const chips = this.chips
-      const slots = this.$scopedSlots.selection
-      const length = this.selectedItems.length
-      this.selectedItems.forEach((item, i) => {
-        if (slots) {
-          children.push(this.genSlotSelection(item, i))
-        } else if (chips) {
-          children.push(this.genChipSelection(item, i))
-        } else if (this.segmented) {
-          children.push(this.genSegmentedBtn(item, i))
-        } else {
-          children.push(this.genCommaSelection(item, i < length - 1, i))
-        }
-      })
-
-      return children
+      return this.$createElement('input', data)
     },
     genSegmentedBtn (item) {
       if (!item.text || !item.callback) {
