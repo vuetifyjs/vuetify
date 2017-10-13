@@ -147,7 +147,7 @@ export default {
         }
       }, [tooltip]),
       h('span', {
-        on: {
+        on: this.disabled ? {} : {
           mouseenter: () => {
             this.runDelay('open', () => (this.isActive = true))
           },
