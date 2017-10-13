@@ -274,6 +274,7 @@ export default {
 
         requestAnimationFrame(() => {
           this.$refs.input.setSelectionRange(len, len)
+          this.shouldBreak && (this.$refs.input.scrollLeft = this.$refs.input.scrollWidth)
         })
       }
     },
