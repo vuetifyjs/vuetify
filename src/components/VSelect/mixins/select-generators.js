@@ -109,7 +109,7 @@ export default {
         style: { 'overflow': 'hidden' },
         ref: 'activator'
       }, [
-        this.genSelections(),
+        ...this.genSelections(),
         this.$createElement('input', data)
       ])
     },
