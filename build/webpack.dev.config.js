@@ -78,7 +78,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': "'development'"
     }),
-    new BundleAnalyzerPlugin(),
+    new BundleAnalyzerPlugin({ openAnalyzer: false }),
     new WriteFilePlugin({
       test: /\.css$/
     })
