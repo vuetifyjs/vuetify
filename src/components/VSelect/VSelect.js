@@ -181,7 +181,7 @@ export default {
      * @return {Number}
      */
     currentRange () {
-      return (this.selectedItem || '').length
+      return this.getText(this.selectedItem || '').length
     },
     filteredItems () {
       // If we are not actively filtering
