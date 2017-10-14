@@ -2,6 +2,10 @@
 
 .tooltip
   position: relative
+  // When wrapping selection-controls make
+  // sure tooltip spans the entire length
+  // https://github.com/vuetifyjs/vuetify/issues/2171
+  flex: 1 1 auto
 
   &__content
     background: $grey.darken-2
