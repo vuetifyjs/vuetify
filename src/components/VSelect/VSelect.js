@@ -482,7 +482,7 @@ export default {
 
       // Combobox is the single version
       // of a taggable select element
-      if (this.combobox) return (this.selectedItems = [val || ''])
+      if (this.combobox) return (this.selectedItems = val ? [val] : [])
 
       let selectedItems = this.computedItems.filter(i => {
         if (!this.isMultiple) {
