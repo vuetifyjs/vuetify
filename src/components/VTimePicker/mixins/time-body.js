@@ -28,6 +28,11 @@ export default {
         children.push(this.genHours()) ||
         children.push(this.genMinutes())
 
+      children.push(this.$createElement('div', {
+        staticClass: 'picker--time__clock__center',
+        'class': this.addBackgroundColorClassChecks({}, this.handColor ? 'handColor' : 'color')
+      }))
+
       if (this.scrollable) {
         data.on.wheel = e => {
           e.preventDefault()
@@ -55,7 +60,10 @@ export default {
     genHand (type) {
       const scale = this.is24hrAfter12 ? 'scaleY(0.6)' : ''
       return [this.$createElement('div', {
-        'class': `picker--time__clock-hand ${type}`,
+        staticClass: 'picker--time__clock-hand',
+        'class': this.addBackgroundColorClassChecks({
+          [type]: true
+        }, this.handColor ? 'handColor' : 'color'),
         style: {
           transform: `rotate(${this.clockHand}deg) ${scale}`
         }
@@ -72,11 +80,14 @@ export default {
       }
 
       for (let i = start; i < hours; i++) {
+        const classes = {
+          'active': i === this.hour,
+          'disabled': !this.isAllowed('hour', i)
+        }
         children.push(this.$createElement('span', {
-          'class': {
-            'active': i === this.hour,
-            'disabled': !this.isAllowed('hour', i)
-          },
+          'class': i === this.hour
+            ? this.addBackgroundColorClassChecks(classes, this.handColor ? 'handColor' : 'color')
+            : classes,
           style: this.getTransform(i),
           domProps: { innerHTML: `<span>${i}</span>` }
         }))
@@ -93,11 +104,14 @@ export default {
         if (num < 10) num = `0${num}`
         if (num === 60) num = '00'
 
+        const classes = {
+          'active': num.toString() === this.minute.toString(),
+          'disabled': !this.isAllowed('minute', i)
+        }
         children.push(this.$createElement('span', {
-          'class': {
-            'active': num.toString() === this.minute.toString(),
-            'disabled': !this.isAllowed('minute', i)
-          },
+          'class': num.toString() === this.minute.toString()
+            ? this.addBackgroundColorClassChecks(classes, this.handColor ? 'handColor' : 'color')
+            : classes,
           style: this.getTransform(i),
           domProps: { innerHTML: `<span>${num}</span>` }
         }))

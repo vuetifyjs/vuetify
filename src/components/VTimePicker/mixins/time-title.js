@@ -8,7 +8,8 @@ export default {
       }
 
       return this.$createElement('div', {
-        'class': 'picker__title'
+        staticClass: 'picker__title',
+        'class': this.addBackgroundColorClassChecks({})
       }, children)
     },
     genTime () {

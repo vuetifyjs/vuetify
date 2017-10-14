@@ -33,6 +33,11 @@ export default {
   },
 
   props: {
+    handColor: String,
+    color: {
+      type: String,
+      default: 'primary'
+    },
     format: {
       type: String,
       default: 'ampm',
