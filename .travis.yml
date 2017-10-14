@@ -4,15 +4,15 @@ node_js:
 
 script:
   - yarn
-  - npm run lint
-  - npm run test
-  - npm run build
+  - yarn run lint
+  - yarn run test
+  - yarn run build
 
 cache:
   yarn: true
 
 before_deploy:
-  - export NPM_TAG=$(node ./build/parse-npm-tag.js)
+  - rm -rf release
   - mkdir -p release
   - for file in ./dist/*; do cp "$file" "${file/dist\/vuetify/release\/vuetify-${TRAVIS_TAG}}"; done
 
@@ -20,14 +20,18 @@ deploy:
   - provider: npm
     email: "john.j.leider@gmail.com"
     api_key: $NPM_API_KEY
-    tag: $NPM_TAG
+    tag: $(node ./build/parse-npm-tag.js)
     skip_cleanup: true
     on:
       repo: vuetifyjs/vuetify
       tags: true
   - provider: releases
     api_key: $GITHUB_API_KEY
-    file: release/*
+    files:
+      - "release/vuetify-${TRAVIS_TAG}.css"
+      - "release/vuetify-${TRAVIS_TAG}.js"
+      - "release/vuetify-${TRAVIS_TAG}.min.css"
+      - "release/vuetify-${TRAVIS_TAG}.min.js"
     skip_cleanup: true
     on:
       tags: true
