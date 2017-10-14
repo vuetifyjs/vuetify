@@ -177,7 +177,7 @@ export default {
     },
     /**
      * The range of the current input text
-     * 
+     *
      * @return {Number}
      */
     currentRange () {
@@ -280,6 +280,9 @@ export default {
         val
       ) {
         this.setCaretPosition(this.currentRange)
+        this.shouldBreak && this.$nextTick(() => {
+          this.$refs.input.scrollLeft = this.$refs.input.scrollWidth
+        })
       }
     },
     items (val) {
@@ -486,7 +489,7 @@ export default {
 
       // Combobox is the single version
       // of a taggable select element
-      if (this.combobox) return (this.selectedItems = [val || ''])
+      if (this.combobox) return (this.selectedItems = val ? [val] : [])
 
       let selectedItems = this.computedItems.filter(i => {
         if (!this.isMultiple) {

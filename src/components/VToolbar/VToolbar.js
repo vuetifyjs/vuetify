@@ -112,6 +112,12 @@ export default {
   },
 
   watch: {
+    clippedLeft (val) {
+      this.updateApplication()
+    },
+    clippedRight (val) {
+      this.updateApplication()
+    },
     isScrolling (val) {
       this.whenScrolled(val)
     }

@@ -139,6 +139,16 @@ export default {
     permanent (val) {
       this.$emit('input', val)
     },
+    right (val, prev) {
+      // When the value changes
+      // reset previous direction
+      if (prev != null) {
+        const dir = val ? 'left' : 'right'
+        this.$vuetify.application[dir] = 0
+      }
+
+      this.updateApplication()
+    },
     value (val) {
       if (this.permanent) return
       if (val !== this.isActive) this.isActive = val
