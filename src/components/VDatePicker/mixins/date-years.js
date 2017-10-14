@@ -26,7 +26,7 @@ export default {
 
         children.push(this.$createElement('li', {
           'class': this.year === year
-            ? this.addTextColorClassChecks({ active: true }, this.contentColorProp)
+            ? this.addTextColorClassChecks({ active: true }, 'contentColor')
             : {},
           on: {
             click: () => this.yearClick(year)

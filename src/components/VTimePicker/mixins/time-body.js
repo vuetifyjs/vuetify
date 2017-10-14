@@ -58,7 +58,7 @@ export default {
         staticClass: 'picker--time__clock-hand',
         'class': this.addBackgroundColorClassChecks({
           [type]: true
-        }, this.contentColorProp),
+        }, 'contentColor'),
         style: {
           transform: `rotate(${this.clockHand}deg) ${scale}`
         }
@@ -81,7 +81,7 @@ export default {
         }
         children.push(this.$createElement('span', {
           'class': i === this.hour
-            ? this.addBackgroundColorClassChecks(classes, this.contentColorProp)
+            ? this.addBackgroundColorClassChecks(classes, 'contentColor')
             : classes,
           style: this.getTransform(i),
           domProps: { innerHTML: `<span>${i}</span>` }
@@ -105,7 +105,7 @@ export default {
         }
         children.push(this.$createElement('span', {
           'class': num.toString() === this.minute.toString()
-            ? this.addBackgroundColorClassChecks(classes, this.contentColorProp)
+            ? this.addBackgroundColorClassChecks(classes, 'contentColor')
             : classes,
           style: this.getTransform(i),
           domProps: { innerHTML: `<span>${num}</span>` }
