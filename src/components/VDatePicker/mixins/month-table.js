@@ -23,7 +23,7 @@ export default {
       }
     },
     monthGenTD (month) {
-      const pad = n => n < 10 ? `0${n}` : `${n}`
+      const pad = n => (n * 1 < 10) ? `0${n * 1}` : `${n}`
       const date = `${this.tableYear}-${pad(month + 1)}`
       const monthName = this.monthFormat(date, this.locale)
 
