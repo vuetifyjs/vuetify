@@ -29,7 +29,6 @@ export default {
       const isActive = this.monthIsActive(month)
       const isCurrent = this.monthIsCurrent(month)
       const classes = {
-        'btn btn--date-picker': true,
         'btn--flat': !isActive,
         'btn--active': isActive,
         'btn--outline': isCurrent && !isActive,
@@ -38,6 +37,7 @@ export default {
 
       return this.$createElement('td', [
         this.$createElement('button', {
+          staticClass: 'btn',
           'class': (isActive || isCurrent)
             ? this.addBackgroundColorClassChecks(classes, this.contentColorProp)
             : classes,

@@ -27,7 +27,7 @@ export default {
         staticClass: 'btn btn--raised btn--icon',
         'class': (isActive || isCurrent)
           ? this.addBackgroundColorClassChecks(classes, this.contentColorProp)
-          : Object.assign(classes, {}),
+          : classes,
         attrs: {
           type: 'button'
         },
