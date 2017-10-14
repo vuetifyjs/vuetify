@@ -43,7 +43,8 @@ export default {
     },
     // Returns number of the days from the firstDayOfWeek to the first day of the current month
     weekDaysBeforeFirstDayOfTheMonth () {
-      const firstDayOfTheMonth = new Date(`${this.tableYear}-${this.tableMonth + 1}-01 GMT+0`)
+      const pad = n => (n * 1 < 10) ? `0${n * 1}` : `${n}`
+      const firstDayOfTheMonth = new Date(`${this.tableYear}-${pad(this.tableMonth + 1)}-01T00:00:00+00:00`)
       const weekDay = firstDayOfTheMonth.getUTCDay()
       return (weekDay - parseInt(this.firstDayOfWeek) + 7) % 7
     },

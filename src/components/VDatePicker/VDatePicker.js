@@ -15,6 +15,8 @@ import VIcon from '../VIcon'
 
 import Touch from '../../directives/touch'
 
+const pad = n => (n * 1 < 10) ? `0${n * 1}` : `${n}`
+
 /**
  * Creates the formatting function that uses Date::toLocaleDateString or returns date
  * in ISO format if toLocaleDateString is not supported by the browser
@@ -28,12 +30,11 @@ const createNativeLocaleFormatter = (format, fallbackType) => (dateString, local
   const [year, month, date] = dateString.trim().split(' ')[0].split('-')
 
   if (Date.prototype.toLocaleDateString) {
-    const dateObject = new Date(`${year}-${month || 1}-${date || 1} GMT+0`)
+    const dateObject = new Date(`${year}-${pad(month || 1)}-${pad(date || 1)}T00:00:00+00:00`)
     return dateObject.toLocaleDateString(locale, Object.assign(format, {
       timeZone: 'UTC'
     }))
   } else {
-    const pad = n => n < 10 ? `0${n}` : `${n}`
     const isoString = `${year * 1}-${pad(month || 1)}-${pad(date || 1)}`
     const formats = {
       date: { start: 0, length: 10 },
@@ -131,10 +132,10 @@ export default {
       }
 
       // Operates on UTC time zone to get the names of the week days
-      const date = new Date('2000-01-07 GMT+0')
+      const date = new Date('2000-01-07T00:00:00+00:00')
       const day = date.getUTCDate() - date.getUTCDay() + first
       const format = { weekday: 'narrow', timeZone: 'UTC' }
-      return createRange(7).map(i => new Date(`2000-01-${day + i} GMT+0`).toLocaleDateString(this.locale, format))
+      return createRange(7).map(i => new Date(`2000-01-${pad(day + i)}T00:00:00+00:00`).toLocaleDateString(this.locale, format))
     },
     firstAllowedDate () {
       const now = new Date()
@@ -206,8 +207,6 @@ export default {
       return this.isReversing ? 'tab-reverse-transition' : 'tab-transition'
     },
     titleText () {
-      const pad = n => n < 10 ? `0${n}` : `${n}`
-
       // Current date in ISO 8601 format (with leading zero)
       const date = this.type === 'month'
         ? `${this.year}-${pad(this.month + 1)}`
@@ -358,7 +357,6 @@ export default {
     // 'YYYY-MM' if 'month' and 'YYYY-MM-DD' if 'date'
     sanitizeDateString (dateString, type) {
       const [year, month, date] = dateString.split('-')
-      const pad = n => (n * 1 < 10) ? `0${n * 1}` : `${n}`
       return `${year}-${pad(month)}-${pad(date)}`.substr(0, { date: 10, month: 7, year: 4 }[type])
     },
     // For month = 12 it sets the tableDate to January next year
