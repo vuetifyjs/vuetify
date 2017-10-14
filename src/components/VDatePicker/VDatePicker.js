@@ -87,7 +87,7 @@ export default {
     },
     dateColor: {
       type: String,
-      default: 'blue accent-1'
+      default: 'accent'
     },
     firstDayOfWeek: {
       type: [String, Number],

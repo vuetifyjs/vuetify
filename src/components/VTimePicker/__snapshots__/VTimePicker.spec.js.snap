@@ -25,7 +25,7 @@ exports[`VTimePicker.js should accept a date object for a value 1`] = `
   </div>
   <div class="picker__body">
     <div class="picker--time__clock">
-      <div class="picker--time__clock-hand hour blue accent-1">
+      <div class="picker--time__clock-hand hour accent">
       </div>
       <span class>
         <span>
@@ -82,7 +82,7 @@ exports[`VTimePicker.js should accept a date object for a value 1`] = `
           11
         </span>
       </span>
-      <span class="active blue accent-1">
+      <span class="active accent">
         <span>
           12
         </span>
@@ -118,7 +118,7 @@ exports[`VTimePicker.js should accept a value 1`] = `
   </div>
   <div class="picker__body">
     <div class="picker--time__clock">
-      <div class="picker--time__clock-hand hour blue accent-1">
+      <div class="picker--time__clock-hand hour accent">
       </div>
       <span class>
         <span>
@@ -160,7 +160,7 @@ exports[`VTimePicker.js should accept a value 1`] = `
           8
         </span>
       </span>
-      <span class="active blue accent-1">
+      <span class="active accent">
         <span>
           9
         </span>
@@ -211,7 +211,7 @@ exports[`VTimePicker.js should change am/pm when updated from model 1`] = `
   </div>
   <div class="picker__body">
     <div class="picker--time__clock">
-      <div class="picker--time__clock-hand hour blue accent-1">
+      <div class="picker--time__clock-hand hour accent">
       </div>
       <span class>
         <span>
@@ -253,7 +253,7 @@ exports[`VTimePicker.js should change am/pm when updated from model 1`] = `
           8
         </span>
       </span>
-      <span class="active blue accent-1">
+      <span class="active accent">
         <span>
           9
         </span>
