@@ -60,10 +60,8 @@ export default {
       let position = 0
       let selection = this.selection
 
-      if (oldText) {
-        for (const char of oldText.substr(0, selection)) {
-          isMaskDelimiter(char) || position++
-        }
+      for (const char of oldText.substr(0, selection)) {
+        isMaskDelimiter(char) || position++
       }
 
       selection = 0
