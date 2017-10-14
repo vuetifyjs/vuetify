@@ -39,7 +39,7 @@ export default {
       return this.$createElement('td', [
         this.$createElement('button', {
           'class': (isActive || isCurrent)
-            ? this.addBackgroundColorClassChecks(classes, this.dateColor ? 'dateColor' : 'color')
+            ? this.addBackgroundColorClassChecks(classes, this.contentColorProp)
             : classes,
           attrs: {
             type: 'button'

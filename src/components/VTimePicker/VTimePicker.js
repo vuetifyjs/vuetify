@@ -161,6 +161,9 @@ export default {
     },
     size () {
       return this.landscape ? 250 : 280
+    },
+    contentColorProp () {
+      return this.handColor ? 'handColor' : 'color'
     }
   },
 

@@ -21,7 +21,7 @@ export default {
 
     genHeader (keyValue, selectorText) {
       const header = this.$createElement('strong', {
-        'class': this.addTextColorClassChecks({}, this.dateColor ? 'dateColor' : 'color'),
+        'class': this.addTextColorClassChecks({}, this.contentColorProp),
         key: keyValue,
         on: {
           click: () => this.activePicker = this.activePicker === 'DATE' ? 'MONTH' : 'YEAR'

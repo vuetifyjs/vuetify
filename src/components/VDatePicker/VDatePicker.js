@@ -237,6 +237,9 @@ export default {
       }
 
       return titleText
+    },
+    contentColorProp () {
+      return this.dateColor ? 'dateColor' : 'color'
     }
   },
 
