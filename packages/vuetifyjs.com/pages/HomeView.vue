@@ -269,7 +269,7 @@
 <template lang="pug">
   div#home
     #announcementBanner
-      p {{ $t('home.announcementBanner')}}
+      p {{ $t('home.announcementBanner') }}
     v-parallax(
       jumbotron
     ).primary
@@ -277,12 +277,12 @@
         v-flex.text-xs-center
           img(src="/static/v-alt.svg" alt="Logo")
           h1.mt-4.mb-5
-            span {{ $t("home.heading1")}}
-            | {{ $t("home.heading1cont")}}
+            span {{ $t("home.heading1") }}
+            | {{ $t("home.heading1cont") }}
           v-btn(
             secondary
             to="/getting-started/quick-start"
-          ).px-3 {{ $t("home.getStarted")}}
+          ).px-3 {{ $t("home.getStarted") }}
           p version 0.16.0
 
     section#features
@@ -321,7 +321,7 @@
             v-avatar
              img(src="/static/doc-images/john.jpg")
             p.john John Leider
-            p.authorOfVuetify {{ $t("home.authorOfVuetify")}}
+            p.authorOfVuetify {{ $t("home.authorOfVuetify") }}
       v-container
     section#support
       v-container
@@ -333,18 +333,18 @@
               )
                 img(src="/static/doc-images/patreon_logo.png" width="75%")
             v-flex(xs12 md9 xl7).mb-5
-              p {{ $t("home.support.hasVuetifyHelped")}}
-              p {{ $t("home.support.showYourSupport")}} <a href="https://www.patreon.com/vuetify" target="_blank">{{ $t("home.support.becomingAPatron")}}</a>.
+              p {{ $t("home.support.hasVuetifyHelped") }}
+              p {{ $t("home.support.showYourSupport") }} <a href="https://www.patreon.com/vuetify" target="_blank">{{ $t("home.support.becomingAPatron") }}</a>.
     section#sponsors-and-backers.my-5
       v-container
         v-card
-          h2.text-xs-center.text-md-left {{ $t("home.proudlySponsoredBy")}}
+          h2.text-xs-center.text-md-left {{ $t("home.proudlySponsoredBy") }}
           v-layout(row wrap)
             v-flex(xs12 sm6 md4 lg3 v-for="(sponsor, i) in sponsors" :key="i").text-xs-center
                 a(:href="sponsor.href" target="_blank" :title="sponsor.title" rel="noopener")
                   img(:src="sponsor.src"  :height="sponsor.height" ).sponsor
             v-flex(xs12 sm6 md4 lg3).text-xs-center
-              v-btn(to="/vuetify/sponsors-and-backers" large).white.primary--text {{ $t("home.becomeSponsor")}}
+              v-btn(to="/vuetify/sponsors-and-backers" large).white.primary--text {{ $t("home.becomeSponsor") }}
                 v-icon(right).primary--text fa-arrow-circle-right
 
     section#callout
@@ -353,7 +353,7 @@
           v-layout(row wrap)
             v-flex(xs12 md8 lg10)
               img(src="/static/v-alt.svg" height="50px")
-              h2.mt-4.mb-5 {{ $t("home.callout")}}
+              h2.mt-4.mb-5 {{ $t("home.callout") }}
     home-footer
 </template>
 
@@ -391,16 +391,16 @@
     },
 
     computed: {
-      features(){
+      features () {
         return this.$t('home.features')
       },
-      checkFeatures(){
+      checkFeatures () {
         return this.$t('home.checkFeatures')
       },
-      checkFeaturesCtd(){
+      checkFeaturesCtd () {
         return this.$t('home.checkFeaturesCtd')
       },
-      letterFromAuthor(){
+      letterFromAuthor () {
         return this.$t('home.letterFromAuthor')
       }
     }

@@ -34,10 +34,10 @@
         alt="Sponsor"
       )
     v-container(fluid)
-      v-select(
-        autocomplete
+      v-text-field(
         solo
         append-icon="search"
+        placeholder="Search..."
       ).mb-4
     v-list(dense)
       template(v-for="item in items")
