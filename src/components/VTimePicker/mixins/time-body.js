@@ -28,11 +28,6 @@ export default {
         children.push(this.genHours()) ||
         children.push(this.genMinutes())
 
-      children.push(this.$createElement('div', {
-        staticClass: 'picker--time__clock__center',
-        'class': this.addBackgroundColorClassChecks({}, this.contentColorProp)
-      }))
-
       if (this.scrollable) {
         data.on.wheel = e => {
           e.preventDefault()

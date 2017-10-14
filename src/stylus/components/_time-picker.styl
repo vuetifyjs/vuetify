@@ -133,15 +133,18 @@ theme(date-picker, "picker--time")
       left: 50%
       transform: translate3d(-50%, -50%, 0)
 
-  &__center
-    content: ''
-    position: absolute
-    height: 8px
-    width: 8px
-    top: 50%
-    left: 50%
-    border-radius: 100%
-    transform: translate3d(calc(-50%, - 1px), -50%, 0)
+    &:after
+      content: ''
+      position: absolute
+      height: 8px
+      width: 8px
+      top: 100%
+      left: 50%
+      border-radius: 100%
+      border-style: solid
+      border-color: inherit
+      background-color: inherit
+      transform: translate3d(calc(-50%, - 1px), -50%, 0)
 
   > span
     align-items: center
