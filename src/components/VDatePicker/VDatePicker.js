@@ -80,16 +80,15 @@ export default {
       type: [Array, Object, Function],
       default: () => (null)
     },
-    color: {
-      type: String,
-      default: 'primary'
-    },
     // Function formatting the day in date picker table
     dayFormat: {
       type: Function,
       default: createNativeLocaleFormatter({ day: 'numeric' }, 'dateOnly')
     },
-    dateColor: String,
+    dateColor: {
+      type: String,
+      default: 'blue accent-1'
+    },
     firstDayOfWeek: {
       type: [String, Number],
       default: 0

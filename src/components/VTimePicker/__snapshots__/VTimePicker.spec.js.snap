@@ -5,7 +5,7 @@ exports[`VTimePicker.js should accept a date object for a value 1`] = `
 <div class="card picker picker--time picker--time--hours"
      style="height: auto;"
 >
-  <div class="picker__title primary">
+  <div class="picker__title">
     <div class="picker--time__title">
       <span class="active">
         12
@@ -25,7 +25,7 @@ exports[`VTimePicker.js should accept a date object for a value 1`] = `
   </div>
   <div class="picker__body">
     <div class="picker--time__clock">
-      <div class="picker--time__clock-hand hour primary">
+      <div class="picker--time__clock-hand hour blue accent-1">
       </div>
       <span class>
         <span>
@@ -82,12 +82,12 @@ exports[`VTimePicker.js should accept a date object for a value 1`] = `
           11
         </span>
       </span>
-      <span class="active primary">
+      <span class="active blue accent-1">
         <span>
           12
         </span>
       </span>
-      <div class="picker--time__clock__center primary">
+      <div class="picker--time__clock__center blue accent-1">
       </div>
     </div>
   </div>
@@ -100,7 +100,7 @@ exports[`VTimePicker.js should accept a value 1`] = `
 <div class="card picker picker--time picker--time--hours"
      style="height: auto;"
 >
-  <div class="picker__title primary">
+  <div class="picker__title">
     <div class="picker--time__title">
       <span class="active">
         9
@@ -120,7 +120,7 @@ exports[`VTimePicker.js should accept a value 1`] = `
   </div>
   <div class="picker__body">
     <div class="picker--time__clock">
-      <div class="picker--time__clock-hand hour primary">
+      <div class="picker--time__clock-hand hour blue accent-1">
       </div>
       <span class>
         <span>
@@ -162,7 +162,7 @@ exports[`VTimePicker.js should accept a value 1`] = `
           8
         </span>
       </span>
-      <span class="active primary">
+      <span class="active blue accent-1">
         <span>
           9
         </span>
@@ -182,7 +182,7 @@ exports[`VTimePicker.js should accept a value 1`] = `
           12
         </span>
       </span>
-      <div class="picker--time__clock__center primary">
+      <div class="picker--time__clock__center blue accent-1">
       </div>
     </div>
   </div>
@@ -195,7 +195,7 @@ exports[`VTimePicker.js should change am/pm when updated from model 1`] = `
 <div class="card picker picker--time picker--time--hours"
      style="height: auto;"
 >
-  <div class="picker__title primary">
+  <div class="picker__title">
     <div class="picker--time__title">
       <span class="active">
         9
@@ -215,7 +215,7 @@ exports[`VTimePicker.js should change am/pm when updated from model 1`] = `
   </div>
   <div class="picker__body">
     <div class="picker--time__clock">
-      <div class="picker--time__clock-hand hour primary">
+      <div class="picker--time__clock-hand hour blue accent-1">
       </div>
       <span class>
         <span>
@@ -257,7 +257,7 @@ exports[`VTimePicker.js should change am/pm when updated from model 1`] = `
           8
         </span>
       </span>
-      <span class="active primary">
+      <span class="active blue accent-1">
         <span>
           9
         </span>
@@ -277,7 +277,7 @@ exports[`VTimePicker.js should change am/pm when updated from model 1`] = `
           12
         </span>
       </span>
-      <div class="picker--time__clock__center primary">
+      <div class="picker--time__clock__center blue accent-1">
       </div>
     </div>
   </div>

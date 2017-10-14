@@ -33,10 +33,9 @@ export default {
   },
 
   props: {
-    handColor: String,
-    color: {
+    handColor: {
       type: String,
-      default: 'primary'
+      default: 'blue accent-1'
     },
     format: {
       type: String,
