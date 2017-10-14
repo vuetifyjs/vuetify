@@ -89,7 +89,7 @@ export default {
       set (val) {
         if (this.mask) {
           const value = this.unmaskText(this.maskText(this.unmaskText(val)))
-          this.lazyValue = this.getLazyValue(value)
+          this.lazyValue = typeof val === 'number' ? +value : value
           this.setSelectionRange()
         } else {
           this.lazyValue = val
@@ -136,7 +136,7 @@ export default {
       const masked = this.maskText(this.unmaskText(val))
       const value = this.unmaskText(masked)
 
-      this.lazyValue = this.getLazyValue(value)
+      this.lazyValue = typeof val === 'number' ? +value : value
       this.$nextTick(() => {
         this.$refs.input.value = masked
         this.$emit('input', this.lazyValue)
@@ -145,9 +145,6 @@ export default {
     updateOnValueChange (val) {
       this.lazyValue = val
       this.$emit('input', this.lazyValue)
-    },
-    getLazyValue (val) {
-      return typeof val === 'number' ? +val : val
     },
     calculateInputHeight () {
       this.inputHeight = null
