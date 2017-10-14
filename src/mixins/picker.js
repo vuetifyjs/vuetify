@@ -1,7 +1,8 @@
+import Colorable from './colorable'
 import Themeable from './themeable'
 
 export default {
-  mixins: [Themeable],
+  mixins: [Colorable, Themeable],
 
   data () {
     return {
