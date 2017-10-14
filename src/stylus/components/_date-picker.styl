@@ -7,23 +7,16 @@ date-picker($material)
     li
       color: $material.text.primary
 
-      &.active, &:hover
-        color: $theme.primary
-
   .picker--date__header
     color: $material.text.primary
 
     &-selector-date
-      strong:hover
-        color: $material.picker.date
+      strong:not(:hover)
+        color: $material.text.primary !important
 
     &-selector
       .btn
         color: $material.text.primary
-
-  .picker--date__title-year, .picker--date__title-date
-    &:not(.active)
-      opacity: 0.6
 
   .picker--date__table
     th
@@ -43,19 +36,6 @@ date-picker($material)
       &.btn--disabled
         color: $material.buttons.disabled
 
-      &.btn--outline
-        border-color: $theme.primary
-
-      &.btn--active:after
-        background-color: $material.picker.date
-
-      &:not(.btn--active):hover
-        color: #fff
-
-        &:after
-          background-color: $material.picker.date
-          opacity: .6
-
 theme(date-picker, "picker--date")
 
 .picker--date
@@ -73,14 +53,16 @@ theme(date-picker, "picker--date")
 
   li
     cursor: pointer
-    margin: 16px 0
+    padding: 8px 0
     transition: none
 
     &.active
       font-size: 24px
       font-weight: 500
-      margin: 20px 0
+      padding: 10px 0
 
+    &:hover
+      background: rgba(0, 0, 0, 0.12)
 
 /** Title */
 .picker--date__title
@@ -163,9 +145,6 @@ theme(date-picker, "picker--date")
     .btn
       margin: 0
       transition: none
-
-      &:hover, .btn__content:before
-        background-color: transparent !important
 
       &:after
         position: absolute

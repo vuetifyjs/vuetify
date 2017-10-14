@@ -23,11 +23,14 @@ export default {
       const children = []
       for (let year = this.year + 100, length = this.year - 100; year > length; year--) {
         const buttonText = this.yearFormat(`${year}`, this.locale)
+        const classes = {
+          active: this.year === year
+        }
 
         children.push(this.$createElement('li', {
-          'class': {
-            active: this.year === year
-          },
+          'class': this.year === year
+            ? this.addTextColorClassChecks(classes, this.dateColor ? 'dateColor' : 'color')
+            : classes,
           on: {
             click: () => this.yearClick(year)
           }
