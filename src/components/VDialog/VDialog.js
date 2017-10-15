@@ -37,13 +37,16 @@ export default {
     fullWidth: Boolean,
     maxWidth: {
       type: [String, Number],
-      default: 290
+      default: 'none'
     },
     origin: {
       type: String,
       default: 'center center'
     },
-    width: [String, Number],
+    width: {
+      type: [String, Number],
+      default: 'auto'
+    },
     scrollable: Boolean,
     transition: {
       type: [String, Boolean],
@@ -133,16 +136,9 @@ export default {
     }
 
     if (!this.fullscreen) {
-      let width = this.maxWidth
-
-      if (this.width) {
-        console.log('The {width} property is being deprecated, please use {max-width}.')
-        // TODO: Deprecate
-        width = this.width
-      }
-
       data.style = {
-        maxWidth: isNaN(width) ? width : `${width}px`
+        maxWidth: isNaN(this.maxWidth) ? this.maxWidth : `${this.maxWidth}px`,
+        width: isNaN(this.width) ? this.width : `${this.width}px`
       }
     }
 

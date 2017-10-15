@@ -9,7 +9,7 @@ exports[`VDialog.js should render a disabled component and match snapshot 1`] = 
        style="z-index: 0;"
   >
     <div class="dialog"
-         style="max-width: 290px; display: none;"
+         style="max-width: none; width: auto; display: none;"
     >
     </div>
   </div>
@@ -43,7 +43,7 @@ exports[`VDialog.js should render a lazy component and match snapshot 1`] = `
        style="z-index: 0;"
   >
     <div class="dialog"
-         style="max-width: 290px; display: none;"
+         style="max-width: none; width: auto; display: none;"
     >
     </div>
   </div>
@@ -60,7 +60,7 @@ exports[`VDialog.js should render a persistent component and match snapshot 1`] 
        style="z-index: 0;"
   >
     <div class="dialog dialog--persistent"
-         style="max-width: 290px; display: none;"
+         style="max-width: none; width: auto; display: none;"
     >
     </div>
   </div>
@@ -77,7 +77,7 @@ exports[`VDialog.js should render a scrollable component and match snapshot 1`] 
        style="z-index: 0;"
   >
     <div class="dialog dialog--scrollable"
-         style="max-width: 290px; display: none;"
+         style="max-width: none; width: auto; display: none;"
     >
     </div>
   </div>
@@ -94,7 +94,7 @@ exports[`VDialog.js should render component and match snapshot 1`] = `
        style="z-index: 0;"
   >
     <div class="dialog"
-         style="max-width: 290px; display: none;"
+         style="max-width: none; width: auto; display: none;"
     >
     </div>
   </div>
@@ -111,7 +111,7 @@ exports[`VDialog.js should render component with custom origin and match snapsho
        style="z-index: 0;"
   >
     <div class="dialog"
-         style="max-width: 290px; display: none;"
+         style="max-width: none; width: auto; display: none;"
     >
     </div>
   </div>
@@ -128,7 +128,7 @@ exports[`VDialog.js should render component with custom transition and match sna
        style="z-index: 0;"
   >
     <div class="dialog"
-         style="max-width: 290px; display: none;"
+         style="max-width: none; width: auto; display: none;"
     >
     </div>
   </div>
@@ -145,7 +145,7 @@ exports[`VDialog.js should render component with custom width (max-width) and ma
        style="z-index: 0;"
   >
     <div class="dialog"
-         style="max-width: 100px; display: none;"
+         style="max-width: 100px; width: auto; display: none;"
     >
     </div>
   </div>
