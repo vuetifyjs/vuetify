@@ -19,15 +19,17 @@ theme(system-bar, "system-bar")
   display: flex
   font-size: $headings.body-2.size
   font-weight: $headings.body-2.weight
-  left: 0
   padding: 0 8px
-  position: fixed
-  top: 0
-  width: 100%
-  z-index: 2
 
   .icon
     font-size: $headings.subheading.size
+
+  &--fixed
+    left: 0
+    position: fixed
+    top: 0
+    width: 100%
+    z-index: 2
 
   &--status
     .icon
@@ -37,13 +39,3 @@ theme(system-bar, "system-bar")
     .icon
       font-size: $headings.h6.size
       margin-right: 8px
-
-  &--status
-    + .navigation-drawer
-      margin-top: 24px
-      max-height: "calc(100vh - %s)" % 24px
-
-  &--window
-    + .navigation-drawer
-      margin-top: 32px
-      max-height: "calc(100vh - %s)" % 32px

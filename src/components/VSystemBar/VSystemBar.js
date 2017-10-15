@@ -17,32 +17,37 @@ export default {
 
   computed: {
     classes () {
-      return this.addBackgroundColorClassChecks({
-        'system-bar': true,
+      return this.addBackgroundColorClassChecks(Object.assign({
         'system-bar--lights-out': this.lightsOut,
+        'system-bar--fixed': this.app,
         'system-bar--status': this.status,
-        'system-bar--window': this.window,
-        'theme--dark': this.dark,
-        'theme--light': this.light
-      })
+        'system-bar--window': this.window
+      }, this.themeClasses))
     },
     computedHeight () {
-      if (this.window) return 32
+      return this.window ? 32 : 24
+    }
+  },
 
-      return 24
+  watch: {
+    window () {
+      this.updateApplication()
     }
   },
 
   methods: {
     updateApplication () {
-      if (!this.app) return
-
-      this.$vuetify.application.bar = this.computedHeight
+      if (this.app) this.$vuetify.application.bar = this.computedHeight
     }
+  },
+
+  destroyed () {
+    if (this.app) this.$vuetify.application.bar = 0
   },
 
   render (h) {
     const data = {
+      staticClass: 'system-bar',
       'class': this.classes,
       style: {
         height: `${this.computedHeight}px`
