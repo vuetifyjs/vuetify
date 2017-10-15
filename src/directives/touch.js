@@ -28,19 +28,20 @@ const touchmove = (event, wrapper) => {
 
 const handleGesture = (wrapper) => {
   const { touchstartX, touchendX, touchstartY, touchendY } = wrapper
+  const dirRatio = 0.5
   wrapper.offsetX = touchendX - touchstartX
   wrapper.offsetY = touchendY - touchstartY
 
-  if (touchendX < touchstartX) {
+  if (touchendX < touchstartX && Math.abs(wrapper.offsetY / wrapper.offsetX) < dirRatio) {
     wrapper.left && wrapper.left(wrapper)
   }
-  if (touchendX > touchstartX) {
+  if (touchendX > touchstartX && Math.abs(wrapper.offsetY / wrapper.offsetX) < dirRatio) {
     wrapper.right && wrapper.right(wrapper)
   }
-  if (touchendY < touchstartY) {
+  if (touchendY < touchstartY && Math.abs(wrapper.offsetX / wrapper.offsetY) < dirRatio) {
     wrapper.up && wrapper.up(wrapper)
   }
-  if (touchendY > touchstartY) {
+  if (touchendY > touchstartY && Math.abs(wrapper.offsetX / wrapper.offsetY) < dirRatio) {
     wrapper.down && wrapper.down(wrapper)
   }
 }
