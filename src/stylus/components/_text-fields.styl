@@ -6,7 +6,8 @@ textfield($material)
     .input-group__input
       background: $material.buttons.focused-alt
 
-  input::placeholder
+  input::placeholder,
+  textarea::placeholder
     color: $material.text.disabled
 
   &:not(.input-group--error)
@@ -29,6 +30,7 @@ theme(textfield, "input-group--text-field")
 
     &::placeholder
       color: inherit
+      transition: .3s $transition.swing
 
 .input-group--text-field input
   box-shadow: none
@@ -39,9 +41,6 @@ theme(textfield, "input-group--text-field")
   overflow: hidden
   text-overflow: ellipsis
   white-space: nowrap
-
-  &::placeholder
-    transition: .3s $transition.swing
 
   &:focus
     outline: none
@@ -92,7 +91,8 @@ theme(textfield, "input-group--text-field")
 /** Input States */
 .input-group--text-field
   &.input-group--placeholder.input-group--dirty
-    input::placeholder
+    input::placeholder,
+    textarea::placeholder
       opacity: 0
 
 /** Types */
