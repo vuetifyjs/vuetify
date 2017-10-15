@@ -182,7 +182,7 @@ export default {
           autofocus: this.autofocus,
           disabled: this.disabled,
           required: this.required,
-          value: this.maskText(this.lazyValue || '')
+          value: this.maskText(this.lazyValue)
         },
         attrs: {
           ...this.$attrs,

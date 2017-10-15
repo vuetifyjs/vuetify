@@ -49,6 +49,7 @@ export default {
         attrs: {
           role: 'columnheader',
           scope: 'col',
+          width: header.width || null,
           'aria-label': header[this.headerText] || '',
           'aria-sort': 'none'
         }

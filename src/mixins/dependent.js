@@ -27,6 +27,7 @@ export default {
     },
     getOpenDependentElements () {
       const result = []
+
       for (const dependent of this.getOpenDependents()) {
         result.push(...dependent.getClickableDependentElements())
       }

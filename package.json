@@ -1,6 +1,6 @@
 {
   "name": "vuetify",
-  "version": "0.16.5",
+  "version": "0.16.7",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -19,9 +19,9 @@
     "build:es5": "rimraf es5 && cross-env NODE_ENV=es5 babel src --out-dir es5",
     "debug-build": "node --inspect --debug-brk build/config.js",
     "debug:test": "./node_modules/.bin/cross-env NODE_ENV=test node --inspect --inspect-brk ./node_modules/jest/bin/jest.js --no-cache --runInBand --verbose",
-    "version": "npm run build",
     "test": "cross-env NODE_ENV=test jest",
     "lint": "eslint --ext .js,.vue src",
+    "preparecommitmsg": "node dev/prepare-commit-message.js",
     "precommit": "yarn run lint && yarn test",
     "prepush": "yarn run lint && yarn test"
   },
@@ -85,9 +85,9 @@
     "stylus-loader": "^3.0.1",
     "uglifyjs-webpack-plugin": "^0.4.6",
     "vue": "^2.5.2",
-    "vue-loader": "^13.0.4",
+    "vue-loader": "^13.3.0",
     "vue-router": "^2.7.0",
-    "vue-server-renderer": "^2.4.4",
+    "vue-server-renderer": "^2.5.2",
     "vue-template-compiler": "^2.5.2",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
@@ -97,6 +97,9 @@
     "write-file-webpack-plugin": "^4.1.0"
   },
   "dependencies": {},
+  "peerDependencies": {
+    "vue": "^2.4.3"
+  },
   "engines": {
     "node": ">= 4.0.0",
     "npm": ">= 3.0.0"

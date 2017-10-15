@@ -62,7 +62,10 @@ module.exports = {
   },
   devServer: {
     contentBase: resolve('../dev'),
-    publicPath: '/dev/'
+    publicPath: '/dev/',
+    host: process.env.HOST || 'localhost',
+    port: process.env.PORT || '8080',
+    disableHostCheck: true
   },
   plugins: [
     new ExtractTextPlugin({
@@ -75,7 +78,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': "'development'"
     }),
-    new BundleAnalyzerPlugin(),
+    new BundleAnalyzerPlugin({ openAnalyzer: false }),
     new WriteFilePlugin({
       test: /\.css$/
     })

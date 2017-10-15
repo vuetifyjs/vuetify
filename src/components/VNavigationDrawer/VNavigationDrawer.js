@@ -34,6 +34,7 @@ export default {
   props: {
     absolute: Boolean,
     clipped: Boolean,
+    disableRouteWatcher: Boolean,
     enableResizeWatcher: Boolean,
     height: String,
     floating: Boolean,
@@ -138,14 +139,15 @@ export default {
     permanent (val) {
       this.$emit('input', val)
     },
-    right (val) {
-      this.updateApplication()
-
-      if (val) {
-        this.$vuetify.application.left = 0
-      } else {
-        this.$vuetify.application.right = 0
+    right (val, prev) {
+      // When the value changes
+      // reset previous direction
+      if (prev != null) {
+        const dir = val ? 'left' : 'right'
+        this.$vuetify.application[dir] = 0
       }
+
+      this.updateApplication()
     },
     value (val) {
       if (this.permanent) return

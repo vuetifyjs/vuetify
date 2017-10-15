@@ -65,8 +65,8 @@ export default {
       if (this.top || this.bottom) {
         top = (
           activator.top -
-          (this.top ? content.height : -content.height) -
-          (this.top ? 10 : -20)
+          (this.top ? activator.height : -activator.height) -
+          (this.top ? 0 : -10)
         )
       } else if (this.left || this.right) {
         top = (
@@ -94,7 +94,7 @@ export default {
       if (this.left) return 'slide-x-reverse-transition'
     },
     offsetY () {
-      this.top || this.bottom
+      return this.top || this.bottom
     },
     offsetX () {
       return this.left || this.right
@@ -102,6 +102,7 @@ export default {
     styles () {
       return {
         left: this.calculatedLeft,
+        maxWidth: isNaN(this.maxWidth) ? this.maxWidth : `${this.maxWidth}px`,
         opacity: this.isActive ? 0.9 : 0,
         top: this.calculatedTop,
         zIndex: this.zIndex || this.activeZIndex
