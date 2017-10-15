@@ -1,5 +1,5 @@
 const injectWarning = () => {
-  return () => console.warn('The v-carousel-item omponent is not meant to be used outside of a v-carousel.')
+  return () => console.warn('The v-carousel-item component is not meant to be used outside of a v-carousel.')
 }
 
 export default {
