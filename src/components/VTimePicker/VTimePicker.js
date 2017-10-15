@@ -206,7 +206,7 @@ export default {
       if (Array.isArray(allowed)) {
         return !!allowed.some(v => v === value)
       } else if (allowed instanceof Function) {
-        return allowed(value)
+        return allowed(value, this.period)
       } else if (allowed === Object(allowed)) {
         const range = type === 'minute' ? this.ranges.minutes : this.ranges.hours
         const mod = type === 'minute' ? 60 : 24

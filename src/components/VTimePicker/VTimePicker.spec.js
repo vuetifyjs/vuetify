@@ -127,6 +127,18 @@ test('VTimePicker.js', ({ mount }) => {
       .toEqual([true, true, false, false, true])
   })
 
+  it('should return proper value for isAllowed when evaluating the current period (function)', () => {
+    const wrapper = mount(VTimePicker, {
+      propsData: {
+        allowedHours: (hour, ampm) => hour > 7 && ampm === 'pm',
+        value: null
+      }
+    })
+
+    expect([5, 6, 8, 9, 10].map(hour => wrapper.vm.isAllowed('hour', hour, 'pm')))
+      .toEqual([false, false, true, true, true])
+  })
+
   it('should reset selectingHour when saved/canceled', async () => {
     const wrapper = mount(VTimePicker, {
       propsData: {
