@@ -55,18 +55,18 @@ export default {
     mask () {
       if (!this.$refs.input) return
 
-      const oldText = this.$refs.input.value
-      const newText = this.maskText(this.lazyValue)
+      const oldValue = this.$refs.input.value
+      const newValue = this.maskText(this.lazyValue)
       let position = 0
       let selection = this.selection
 
-      for (const char of oldText.substr(0, selection)) {
+      for (const char of oldValue.substr(0, selection)) {
         isMaskDelimiter(char) || position++
       }
 
       selection = 0
-      if (newText) {
-        for (const char of newText) {
+      if (newValue) {
+        for (const char of newValue) {
           isMaskDelimiter(char) || position--
           selection++
           if (position <= 0) break
@@ -74,7 +74,7 @@ export default {
       }
 
       this.$nextTick(() => {
-        this.$refs.input.value = newText
+        this.$refs.input.value = newValue
         this.setCaretPosition(selection)
       })
     }

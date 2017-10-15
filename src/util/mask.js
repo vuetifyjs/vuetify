@@ -90,14 +90,14 @@ const maskValidates = (mask, char) => {
  * @return {String}
  */
 export const maskText = (text, masked, dontFillMaskBlanks) => {
-  if (!masked.length || !text) return text
+  if (text == null) return ''
+  text = String(text)
+  if (!masked.length || !text.length) return text
   if (!Array.isArray(masked)) masked = masked.split('')
 
   let textIndex = 0
   let maskIndex = 0
   let newText = ''
-
-  text = String(text)
 
   while (maskIndex < masked.length) {
     const mask = masked[maskIndex]
