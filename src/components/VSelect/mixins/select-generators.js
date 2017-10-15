@@ -258,6 +258,10 @@ export default {
         data.props.disabled = disabled
       }
 
+      if (this.color && this.addTextColorClassChecks) {
+        data.props.activeClass = Object.keys(this.addTextColorClassChecks({})).join(' ')
+      }
+
       if (this.$scopedSlots.item) {
         return this.$createElement('v-list-tile', data,
           [this.$scopedSlots.item({ parent: this, item })]
@@ -282,7 +286,12 @@ export default {
       }
 
       return this.$createElement('v-list-tile-action', data, [
-        this.$createElement('v-checkbox', { props: { inputValue: active } })
+        this.$createElement('v-checkbox', {
+          props: {
+            color: this.color,
+            inputValue: active
+          }
+        })
       ])
     },
     genContent (item) {
