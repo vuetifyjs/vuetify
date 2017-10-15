@@ -175,6 +175,14 @@ export default {
     computedItems () {
       return this.filterDuplicates(this.cachedItems.concat(this.items))
     },
+    /**
+     * The range of the current input text
+     *
+     * @return {Number}
+     */
+    currentRange () {
+      return this.getText(this.selectedItem || '').length
+    },
     filteredItems () {
       // If we are not actively filtering
       // Show all available items
@@ -264,17 +272,16 @@ export default {
       })
     },
     isFocused (val) {
-      // Always ensure caret is
-      // in correct position
+      // When focusing the input
+      // re-set the caret position
       if (this.isAutocomplete &&
         !this.mask &&
-        !this.isMultiple
+        !this.isMultiple &&
+        val
       ) {
-        const len = (this.selectedItem || '').length
-
-        requestAnimationFrame(() => {
-          this.$refs.input.setSelectionRange(len, len)
-          this.shouldBreak && (this.$refs.input.scrollLeft = this.$refs.input.scrollWidth)
+        this.setCaretPosition(this.currentRange)
+        this.shouldBreak && this.$nextTick(() => {
+          this.$refs.input.scrollLeft = this.$refs.input.scrollWidth
         })
       }
     },
@@ -582,8 +589,12 @@ export default {
       const savedIndex = this.$refs.menu.listIndex
       this.$refs.menu.listIndex = -1
 
+      // After selecting an item
+      // refocus the input and
+      // reset the caret pos
       this.$nextTick(() => {
         this.focus()
+        this.setCaretPosition(this.currentRange)
         this.$refs.menu && (this.$refs.menu.listIndex = savedIndex)
       })
     },
