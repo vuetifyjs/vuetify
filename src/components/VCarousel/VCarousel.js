@@ -15,6 +15,13 @@ export default {
 
   directives: { Touch },
 
+  provide () {
+    return {
+      register: this.register,
+      unregister: this.unregister
+    }
+  },
+
   data () {
     return {
       inputValue: null,
@@ -54,14 +61,10 @@ export default {
     inputValue () {
       // Evaluate items when inputValue changes to account for
       // dynamic changing of children
-      this.items = this.$children.filter(i => {
-        return i.$el.classList && i.$el.classList.contains('carousel__item')
-      })
 
-      this.items.forEach(i => i.open(
-        this.items[this.inputValue]._uid,
-        this.reverse
-      ))
+      this.items.forEach(i => {
+        i.open(this.items[this.inputValue].uid, this.reverse)
+      })
 
       this.$emit('input', this.inputValue)
       this.restartTimeout()
@@ -151,6 +154,12 @@ export default {
       if (!this.cycle) return
 
       this.slideTimeout = setTimeout(() => this.next(), this.interval > 0 ? this.interval : 6000)
+    },
+    register (uid, open) {
+      this.items.push({ uid, open })
+    },
+    unregister (uid) {
+      this.items = this.items.filter(i => i.uid !== uid)
     }
   },
 
