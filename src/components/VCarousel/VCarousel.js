@@ -36,11 +36,12 @@ export default {
       type: Boolean,
       default: true
     },
-    hideControls: Boolean,
-    icon: {
+    delimiterIcon: {
       type: String,
       default: 'fiber_manual_record'
     },
+    hideControls: Boolean,
+    hideDelimiters: Boolean,
     interval: {
       type: [Number, String],
       default: 6000,
@@ -90,7 +91,7 @@ export default {
   },
 
   methods: {
-    genControls () {
+    genDelimiters () {
       return this.$createElement('div', {
         staticClass: 'carousel__controls'
       }, this.genItems())
@@ -125,7 +126,7 @@ export default {
           },
           key: index,
           on: { click: this.select.bind(this, index) }
-        }, [this.$createElement(VIcon, this.icon)])
+        }, [this.$createElement(VIcon, this.delimiterIcon)])
       })
     },
     restartTimeout () {
@@ -174,9 +175,9 @@ export default {
         }
       }]
     }, [
-      this.genIcon('left', this.leftControlIcon, this.prev),
-      this.genIcon('right', this.rightControlIcon, this.next),
-      this.hideControls ? null : this.genControls(),
+      this.hideControls ? null : this.genIcon('left', this.leftControlIcon, this.prev),
+      this.hideControls ? null : this.genIcon('right', this.rightControlIcon, this.next),
+      this.hideDelimiters ? null : this.genDelimiters(),
       this.$slots.default
     ])
   }
