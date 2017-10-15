@@ -24,12 +24,17 @@ theme(system-bar, "system-bar")
   .icon
     font-size: $headings.subheading.size
 
-  &--fixed
+  &--fixed, &--absolute
     left: 0
-    position: fixed
     top: 0
     width: 100%
-    z-index: 2
+    z-index: 3
+
+  &--fixed
+    position: fixed
+
+  &--absolute
+    position: absolute
 
   &--status
     .icon

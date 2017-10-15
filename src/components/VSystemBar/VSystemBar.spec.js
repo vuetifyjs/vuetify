@@ -14,14 +14,23 @@ test('VSystemBar.vue', () => {
     expect(wrapper.element.classList).toContain('lighten-1')
   })
 
-  it('should render system bar with app prop', () => {
+  it('should render system bar with fixed prop', () => {
     const wrapper = mount(VSystemBar, {
       propsData: {
-        app: true
+        fixed: true
       }
     })
 
-    expect(`Cannot set property 'bar' of undefined`).toHaveBeenWarned()
     expect(wrapper.element.classList).toContain('system-bar--fixed')
+  })
+
+  it('should render system bar with absolute prop', () => {
+    const wrapper = mount(VSystemBar, {
+      propsData: {
+        absolute: true
+      }
+    })
+
+    expect(wrapper.element.classList).toContain('system-bar--absolute')
   })
 })

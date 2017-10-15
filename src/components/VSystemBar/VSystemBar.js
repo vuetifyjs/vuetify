@@ -10,6 +10,8 @@ export default {
   mixins: [Applicationable, Colorable, Themeable],
 
   props: {
+    absolute: Boolean,
+    fixed: Boolean,
     lightsOut: Boolean,
     status: Boolean,
     window: Boolean
@@ -19,7 +21,8 @@ export default {
     classes () {
       return this.addBackgroundColorClassChecks(Object.assign({
         'system-bar--lights-out': this.lightsOut,
-        'system-bar--fixed': this.app,
+        'system-bar--absolute': this.absolute,
+        'system-bar--fixed': this.fixed,
         'system-bar--status': this.status,
         'system-bar--window': this.window
       }, this.themeClasses))
@@ -32,17 +35,25 @@ export default {
   watch: {
     window () {
       this.updateApplication()
+    },
+    fixed () {
+      this.updateApplication()
+    },
+    absolute () {
+      this.updateApplication()
     }
   },
 
   methods: {
     updateApplication () {
-      if (this.app) this.$vuetify.application.bar = this.computedHeight
+      if (this.app && this.$vuetify) {
+        this.$vuetify.application.bar = (this.fixed || this.absolute) ? this.computedHeight : 0
+      }
     }
   },
 
   destroyed () {
-    if (this.app) this.$vuetify.application.bar = 0
+    if (this.app && this.$vuetify) this.$vuetify.application.bar = 0
   },
 
   render (h) {
