@@ -339,16 +339,17 @@ export default {
     }
   },
 
-  created () {
-    if (this.tags) this.selectedItems = this.inputValue
-  },
-
   mounted () {
-    this.$vuetify.load(() => {
-      if (this._isDestroyed) return
+    // If instance is being destroyed
+    // do not run mounted functions
+    if (this._isDestroyed) return
 
+    // Evaluate the selected items immediately
+    // to avoid a unnecessary label transition
+    this.genSelectedItems()
+
+    this.$vuetify.load(() => {
       this.content = this.$refs.menu.$refs.content
-      this.genSelectedItems()
     })
   },
 
