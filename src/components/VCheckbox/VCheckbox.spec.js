@@ -180,4 +180,29 @@ test('VCheckbox.js', () => {
 
     expect(ripple.getAttribute('data-ripple')).toBe('false')
   })
+
+  it('should not render ripple when ripple prop is false', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        inputValue: false,
+        ripple: false
+      }
+    })
+
+    const ripple = wrapper.find('.input-group--selection-controls__ripple')
+
+    expect(ripple.length).toBe(0)
+  })
+
+  it('should render ripple with data attribute when ripple prop is true', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        ripple: true
+      }
+    })
+
+    const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
+
+    expect(ripple.getAttribute('data-ripple')).toBe('true')
+  })
 })
