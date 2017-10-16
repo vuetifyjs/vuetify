@@ -33,6 +33,7 @@ export default {
   },
 
   props: {
+    handColor: String,
     format: {
       type: String,
       default: 'ampm',
@@ -157,6 +158,9 @@ export default {
     },
     size () {
       return this.landscape ? 250 : 280
+    },
+    contentColor () {
+      return this.handColor || this.color || 'accent'
     }
   },
 
