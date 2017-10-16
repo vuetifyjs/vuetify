@@ -9,7 +9,10 @@ export function test(name, cb) {
   Vue.prototype.$vuetify = {
     load: (fn) => fn(),
     breakpoint: {},
-    theme: {}
+    theme: {
+      dark: {},
+      light: {}
+    }
   }
 
 /*

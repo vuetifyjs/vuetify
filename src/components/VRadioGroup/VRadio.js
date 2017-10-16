@@ -20,16 +20,17 @@ export default {
 
   mixins: [Colorable, Rippleable, TabFocusable, Themeable],
 
+  data () {
+    return {
+      defaultColor: 'accent',
+      isActive: false
+    }
+  },
+
   props: {
     disabled: Boolean,
     value: null,
     label: String
-  },
-
-  data () {
-    return {
-      isActive: false
-    }
   },
 
   computed: {
@@ -45,7 +46,6 @@ export default {
         'theme--light': this.light
       })
     },
-
     icon () {
       return this.isActive ? 'radio_button_checked' : 'radio_button_unchecked'
     }

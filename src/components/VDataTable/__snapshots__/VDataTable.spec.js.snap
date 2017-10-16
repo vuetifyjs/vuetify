@@ -68,7 +68,7 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
               <div tabindex="0"
                    aria-label="Rows per page:"
                    role="combobox"
-                   class="input-group input-group--append-icon input-group--hide-details input-group--text-field input-group--select input-group--auto primary--text"
+                   class="input-group input-group--append-icon input-group--hide-details input-group--text-field input-group--select input-group--auto primary--light--text"
               >
                 <div class="input-group__input">
                   <div class="input-group__selections"

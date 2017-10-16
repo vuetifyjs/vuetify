@@ -2,7 +2,7 @@
 
 exports[`VTextField.js should not display counter when set to false 1`] = `
 
-<div class="input-group input-group--text-field primary--text">
+<div class="input-group input-group--text-field primary--light--text">
   <div class="input-group__input">
     <input tabindex="0"
            type="text"
@@ -21,7 +21,7 @@ exports[`VTextField.js should not display counter when set to false 1`] = `
 
 exports[`VTextField.js should not display counter when set to false 2`] = `
 
-<div class="input-group input-group--text-field primary--text">
+<div class="input-group input-group--text-field primary--light--text">
   <div class="input-group__input">
     <input tabindex="0"
            type="text"
@@ -37,7 +37,7 @@ exports[`VTextField.js should not display counter when set to false 2`] = `
 
 exports[`VTextField.js should render component and match snapshot 1`] = `
 
-<div class="input-group input-group--text-field primary--text">
+<div class="input-group input-group--text-field primary--light--text">
   <div class="input-group__input">
     <input tabindex="0"
            type="text"
@@ -53,7 +53,7 @@ exports[`VTextField.js should render component and match snapshot 1`] = `
 
 exports[`VTextField.js should render component with async loading and custom progress and match snapshot 1`] = `
 
-<div class="input-group input-group--async-loading input-group--text-field primary--text">
+<div class="input-group input-group--async-loading input-group--text-field primary--light--text">
   <div class="input-group__input">
     <input tabindex="0"
            type="text"
@@ -86,7 +86,7 @@ exports[`VTextField.js should render component with async loading and custom pro
 
 exports[`VTextField.js should render component with async loading and match snapshot 1`] = `
 
-<div class="input-group input-group--async-loading input-group--text-field primary--text">
+<div class="input-group input-group--async-loading input-group--text-field primary--light--text">
   <div class="input-group__input">
     <input tabindex="0"
            type="text"
@@ -102,9 +102,9 @@ exports[`VTextField.js should render component with async loading and match snap
       </div>
       <div class="progress-linear__bar">
         <div class="progress-linear__bar__indeterminate progress-linear__bar__indeterminate--active">
-          <div class="progress-linear__bar__indeterminate long primary">
+          <div class="progress-linear__bar__indeterminate long primary--light">
           </div>
-          <div class="progress-linear__bar__indeterminate short primary">
+          <div class="progress-linear__bar__indeterminate short primary--light">
           </div>
         </div>
         <!---->

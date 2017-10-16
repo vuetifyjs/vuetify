@@ -1,14 +1,6 @@
 import load from '../../util/load'
-
-const THEME_DEFAULTS = {
-  primary: '#1976D2',
-  secondary: '#424242',
-  accent: '#82B1FF',
-  error: '#FF5252',
-  info: '#2196F3',
-  success: '#4CAF50',
-  warning: '#FFC107'
-}
+import application from './mixins/application'
+import theme from './mixins/theme'
 
 const Vuetify = {
   install (Vue, opts = {}) {
@@ -16,15 +8,9 @@ const Vuetify = {
 
     const $vuetify = {
       load,
-      application: {
-        bar: 0,
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0
-      },
+      application,
       breakpoint: {},
-      theme: Object.assign({}, THEME_DEFAULTS, opts.theme),
+      theme: theme(opts),
       touchSupport: false
     }
 
