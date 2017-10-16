@@ -12,13 +12,13 @@ export default {
     },
     monthClick (month) {
       // Updates inputDate setting 'YYYY-MM' or 'YYYY-MM-DD' format, depending on the picker type
-      this.inputDate = this.type === 'date'
-        ? this.sanitizeDateString(`${this.tableYear}-${month + 1}-${this.day}`, this.type)
-        : this.sanitizeDateString(`${this.tableYear}-${month + 1}`, this.type)
-
       if (this.type === 'date') {
+        const date = this.sanitizeDateString(`${this.tableYear}-${month + 1}-${this.day}`, 'date')
+        if (this.isAllowed(date)) this.inputDate = date
+        this.updateTableMonth(month)
         this.activePicker = 'DATE'
       } else {
+        this.inputDate = this.sanitizeDateString(`${this.tableYear}-${month + 1}`, 'month')
         this.$nextTick(() => (this.autosave && this.save()))
       }
     },
@@ -68,7 +68,7 @@ export default {
     },
     monthIsActive (i) {
       return this.tableYear === this.year &&
-        this.month === i
+        (this.type === 'month' ? this.month : this.tableMonth) === i
     },
     monthIsCurrent (i) {
       return this.currentYear === this.tableYear &&
