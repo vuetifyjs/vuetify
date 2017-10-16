@@ -145,7 +145,7 @@ export default {
           'icon--radio': this.isActive
         },
         key: this.icon,
-        on: Object.assign({}, {
+        on: Object.assign({
           click: this.toggle
         }, this.$listeners)
       }, this.icon)

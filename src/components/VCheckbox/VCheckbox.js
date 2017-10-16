@@ -73,7 +73,7 @@ export default {
           'icon--checkbox': this.icon === 'check_box'
         },
         key: this.icon,
-        on: Object.assign({}, {
+        on: Object.assign({
           click: this.toggle
         }, this.$listeners)
       }, this.icon)

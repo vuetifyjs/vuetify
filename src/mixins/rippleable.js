@@ -15,7 +15,7 @@ export default {
     genRipple () {
       return this.$createElement('div', {
         'class': this.rippleClasses || 'input-group--selection-controls__ripple',
-        on: Object.assign({}, {
+        on: Object.assign({
           click: this.toggle
         }, this.$listeners),
         directives: [{
