@@ -23,6 +23,7 @@ export default {
       type: [Number, String],
       default: 0
     },
+    disabled: Boolean,
     fixed: {
       type: Boolean,
       default: true
@@ -147,7 +148,7 @@ export default {
         }
       }, [tooltip]),
       h('span', {
-        on: {
+        on: this.disabled ? {} : {
           mouseenter: () => {
             this.runDelay('open', () => (this.isActive = true))
           },
