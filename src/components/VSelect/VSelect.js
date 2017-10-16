@@ -355,9 +355,7 @@ export default {
     // to avoid a unnecessary label transition
     this.genSelectedItems()
 
-    this.$vuetify.load(() => {
-      this.content = this.$refs.menu.$refs.content
-    })
+    this.content = this.$refs.menu.$refs.content
   },
 
   beforeDestroy () {
