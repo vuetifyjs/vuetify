@@ -137,8 +137,8 @@ export default {
 
     if (!this.fullscreen) {
       data.style = {
-        maxWidth: isNaN(this.maxWidth) ? this.maxWidth : `${this.maxWidth}px`,
-        width: isNaN(this.width) ? this.width : `${this.width}px`
+        maxWidth: this.maxWidth === 'none' ? undefined : (isNaN(this.maxWidth) ? this.maxWidth : `${this.maxWidth}px`),
+        width: this.width === 'auto' ? undefined : (isNaN(this.width) ? this.width : `${this.width}px`)
       }
     }
 

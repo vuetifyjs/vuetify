@@ -200,7 +200,9 @@ export default {
     },
     isAllowed (type, value) {
       const allowed = this[`allowed${type.charAt(0).toUpperCase() + type.slice(1)}s`]
-      const val = !this.is24hr && this.period === 'pm'
+      const val = type === 'hour' &&
+        !this.is24hr &&
+        this.period === 'pm'
         ? value + 12
         : value
 

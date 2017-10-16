@@ -7,8 +7,14 @@ function style (el, value) {
   })
 }
 
+const RippleDataAttribute = 'data-ripple'
+
 const ripple = {
   show: (e, el, { value = {} }) => {
+    if (el.getAttribute(RippleDataAttribute) !== 'true') {
+      return
+    }
+
     var container = document.createElement('span')
     var animation = document.createElement('span')
 
@@ -46,6 +52,10 @@ const ripple = {
   },
 
   hide: (el) => {
+    if (el.getAttribute(RippleDataAttribute) !== 'true') {
+      return
+    }
+
     const ripples = el.getElementsByClassName('ripple__animation')
 
     if (ripples.length === 0) return
@@ -69,8 +79,8 @@ const ripple = {
   }
 }
 
-function directive (el, binding, v) {
-  if (binding.value === false) return
+function directive (el, binding) {
+  el.setAttribute(RippleDataAttribute, !!binding.value)
 
   if ('ontouchstart' in window) {
     el.addEventListener('touchend', () => ripple.hide(el), false)
@@ -94,8 +104,17 @@ function unbind (el, binding) {
   el.removeEventListener('dragstart', () => ripple.hide(el), false)
 }
 
+function update (el, binding) {
+  if (binding.value === binding.oldValue) {
+    return
+  }
+
+  el.setAttribute(RippleDataAttribute, !!binding.value)
+}
+
 export default {
   name: 'ripple',
   bind: directive,
-  unbind: unbind
+  unbind: unbind,
+  update: update
 }

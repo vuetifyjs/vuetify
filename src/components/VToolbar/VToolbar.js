@@ -16,9 +16,6 @@ export default {
       desktop: 64,
       dense: 48
     },
-    denseHeight: 48,
-    defaultHeight: 56,
-    prominentHeight: 64,
     isExtended: false,
     isScrollingProxy: false,
     marginTop: 0,
