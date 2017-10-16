@@ -17,12 +17,6 @@ button($material)
   &:not(.btn--icon):not(.btn--flat)
     background-color: $material.app-bar
 
-  // Specific styles for styling on date-picker
-  &:not(.btn--disabled):not(.btn--date-picker)
-    &.btn--icon,
-    &.btn--floating
-      color: $material.icons.active
-
 theme(button, "btn")
 
 /** Base Spec */
@@ -83,7 +77,7 @@ theme(button, "btn")
 
 /** Icons */
 .btn .btn__content .icon
-  color: inherit 
+  color: inherit
 
 /** Types */
 .btn

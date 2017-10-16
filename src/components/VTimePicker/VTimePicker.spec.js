@@ -156,4 +156,27 @@ test('VTimePicker.js', ({ mount }) => {
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.selectingHour).toBe(true)
   })
+
+  it('should render colored time picker', () => {
+    const wrapper = mount(VTimePicker, {
+      propsData: {
+        value: '09:00:00',
+        color: 'primary',
+        headerColor: 'orange darken-1'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render colored time picker', () => {
+    const wrapper = mount(VTimePicker, {
+      propsData: {
+        value: '09:00:00',
+        color: 'orange darken-1'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

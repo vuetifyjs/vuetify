@@ -134,4 +134,52 @@ test('VDatePicker.js', ({ mount }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should match snapshot with colored date picker', () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: '2005-11-01',
+        color: 'primary',
+        headerColor: 'orange darken-1'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should match snapshot with colored date picker', () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: '2005-11-01',
+        color: 'orange darken-1'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should match snapshot with colored month picker', () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        type: 'month',
+        value: '2005-11-01',
+        color: 'primary',
+        headerColor: 'orange darken-1'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should match snapshot with colored month picker', () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        type: 'month',
+        value: '2005-11-01',
+        color: 'orange darken-1'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

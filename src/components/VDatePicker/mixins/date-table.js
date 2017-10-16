@@ -16,13 +16,19 @@ export default {
     dateGenTD (day) {
       const date = this.sanitizeDateString(`${this.tableYear}-${this.tableMonth + 1}-${day}`, 'date')
       const buttonText = this.dayFormat(date, this.locale)
+      const isActive = this.dateIsActive(day)
+      const isCurrent = this.dateIsCurrent(day)
+      const classes = Object.assign({
+        'btn--active': isActive,
+        'btn--outline': isCurrent && !isActive,
+        'btn--disabled': !this.isAllowed(date)
+      }, this.themeClasses)
+
       const button = this.$createElement('button', {
-        staticClass: 'btn btn--date-picker btn--floating btn--small btn--flat',
-        'class': {
-          'btn--active': this.dateIsActive(day),
-          'btn--outline': this.dateIsCurrent(day) && !this.dateIsActive(day),
-          'btn--disabled': !this.isAllowed(date)
-        },
+        staticClass: 'btn btn--raised btn--icon',
+        'class': (isActive || isCurrent)
+          ? this.addBackgroundColorClassChecks(classes, 'contentColor')
+          : classes,
         attrs: {
           type: 'button'
         },

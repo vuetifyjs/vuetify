@@ -59,9 +59,7 @@ export default {
     },
 
     genTitle (title) {
-      return this.$createElement('div', {
-        'class': 'picker__title'
-      }, [
+      return this.genPickerTitle([
         this.getYearBtn(),
         this.genTitleDate(title)
       ])

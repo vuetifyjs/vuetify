@@ -7,59 +7,31 @@ date-picker($material)
     li
       color: $material.text.primary
 
-      &.active, &:hover
-        color: $theme.primary
-
   .picker--date__header
     color: $material.text.primary
 
     &-selector-date
-      strong:hover
-        color: $material.picker.date
+      strong:not(:hover)
+        color: $material.text.primary !important
 
     &-selector
       .btn
         color: $material.text.primary
 
-  .picker--date__title-year, .picker--date__title-date
-    &:not(.active)
-      opacity: 0.6
-
   .picker--date__table
     th
       color: $material.text.primary
 
-    .btn.btn--date-picker
-      &:not(.btn--disabled)
-        &:hover
-          color: #fff
-
-        &.btn--active
-          color: #fff
-
-      &:not(.btn--disabled):not(.btn--active)
-        color: $material.text.primary
-
-      &.btn--disabled
-        color: $material.buttons.disabled
-
-      &.btn--outline
-        border-color: $theme.primary
-
-      &.btn--active:after
-        background-color: $material.picker.date
-
-      &:not(.btn--active):hover
-        color: #fff
-
-        &:after
-          background-color: $material.picker.date
-          opacity: .6
+    .btn.btn--active
+      color: #fff !important
 
 theme(date-picker, "picker--date")
 
 .picker--date
   width: 100%
+
+  .btn--outline
+    background: transparent !important
 
 /** Years */
 .picker--date__years
@@ -73,14 +45,16 @@ theme(date-picker, "picker--date")
 
   li
     cursor: pointer
-    margin: 16px 0
+    padding: 8px 0
     transition: none
 
     &.active
       font-size: 24px
       font-weight: 500
-      margin: 20px 0
+      padding: 10px 0
 
+    &:hover
+      background: rgba(0, 0, 0, 0.12)
 
 /** Title */
 .picker--date__title
@@ -162,38 +136,8 @@ theme(date-picker, "picker--date")
 
     .btn
       margin: 0
-      transition: none
-
-      &:hover, .btn__content:before
-        background-color: transparent !important
-
-      &:after
-        position: absolute
-        content: ''
-        left: 0
-        top: 0
-        height: 100%
-        width: 100%
-
-      &__content
-        overflow: visible
-        transition: none
-        z-index: 1
-
-    .btn.btn--date-picker
       height: 32px
       width: 32px
-
-      &:after
-        transform: scale(0)
-
-      &:not(.btn--active):not(.btn--current):not(.btn--disabled):hover
-        &:after
-          transform: scale(1)
-
-    .btn.btn--date-picker.btn--active
-      &:after
-        transform: none
 
 .picker--landscape
   .picker--date__years
