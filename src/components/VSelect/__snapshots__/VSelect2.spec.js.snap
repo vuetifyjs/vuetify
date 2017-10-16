@@ -34,14 +34,14 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
           >
             <li>
               <a href="javascript:;"
-                 class="list__tile list__tile--link list__tile--active"
+                 class="list__tile list__tile--link primary--text"
                  data-ripple="true"
               >
                 <div class="list__tile__action list__tile__action--select-multi">
                   <div tabindex="0"
                        role="checkbox"
                        aria-checked="true"
-                       class="input-group input-group--dirty checkbox input-group--selection-controls input-group--active"
+                       class="input-group input-group--dirty checkbox input-group--selection-controls input-group--active primary--text"
                   >
                     <div class="input-group__input">
                       <i class="material-icons icon icon--selection-control fade-transition-leave fade-transition-leave-active">
@@ -79,7 +79,7 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
                   <div tabindex="0"
                        role="checkbox"
                        aria-checked="false"
-                       class="input-group checkbox input-group--selection-controls"
+                       class="input-group checkbox input-group--selection-controls primary--text"
                   >
                     <div class="input-group__input">
                       <i class="material-icons icon icon--selection-control">
@@ -159,7 +159,7 @@ exports[`VSelect should be clearable with prop, dirty and multi select 2`] = `
                   <div tabindex="0"
                        role="checkbox"
                        aria-checked="false"
-                       class="input-group checkbox input-group--selection-controls"
+                       class="input-group checkbox input-group--selection-controls primary--text"
                   >
                     <div class="input-group__input">
                       <i class="material-icons icon icon--selection-control icon--checkbox fade-transition-leave fade-transition-leave-active"
@@ -199,7 +199,7 @@ exports[`VSelect should be clearable with prop, dirty and multi select 2`] = `
                   <div tabindex="0"
                        role="checkbox"
                        aria-checked="false"
-                       class="input-group checkbox input-group--selection-controls"
+                       class="input-group checkbox input-group--selection-controls primary--text"
                   >
                     <div class="input-group__input">
                       <i class="material-icons icon icon--selection-control">
@@ -275,7 +275,7 @@ exports[`VSelect should be clearable with prop, dirty and single select 1`] = `
           >
             <li>
               <a href="javascript:;"
-                 class="list__tile list__tile--link list__tile--active"
+                 class="list__tile list__tile--link primary--text"
                  data-ripple="true"
               >
                 <div class="list__tile__content">
