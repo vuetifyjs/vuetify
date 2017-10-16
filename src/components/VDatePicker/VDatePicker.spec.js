@@ -2,13 +2,11 @@ import VDatePicker from '~components/VDatePicker'
 import { test } from '~util/testing'
 import { mount } from 'avoriaz'
 
-const persianMonths = ['حمل', 'ثور', 'جوزا', 'سرطان',' اسد', 'سنبله' ,'میزان' ,'عقرب' ,'قوس', 'جدی' ,'دلو', 'حوت']
-
 test('VDatePicker.js', ({ mount }) => {
   it('should display the correct date in title and header', () => {
     const wrapper = mount(VDatePicker, {
       propsData: {
-        value: new Date('November 1 2005')
+        value: '2005-11-01',
       }
     })
 
@@ -111,10 +109,10 @@ test('VDatePicker.js', ({ mount }) => {
   })
 
   it('should match snapshot with title/header formatting functions', () => {
-    const dateFormat = date => `${date.getFullYear() * 2} ${persianMonths[11 - date.getMonth()]}`
+    const dateFormat = (date, locale) => date + ', ' + locale
     const wrapper = mount(VDatePicker, {
       propsData: {
-        value: new Date('November 1 2005'),
+        value: '2005-11-01',
         headerDateFormat: dateFormat,
         titleDateFormat: dateFormat
       }
@@ -126,10 +124,10 @@ test('VDatePicker.js', ({ mount }) => {
   it('should match snapshot with month formatting functions', () => {
     const wrapper = mount(VDatePicker, {
       propsData: {
-        value: new Date('November 1 2005'),
+        value: '2005-11-01',
         type: 'month',
-        monthFormat: date => {
-          return persianMonths[11 - date.getMonth()]
+        monthFormat: (date, locale) => {
+          return date.split('-')[1] + ', ' + locale
         }
       }
     })

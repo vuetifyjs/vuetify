@@ -3,32 +3,19 @@ export default {
     dateWheelScroll (e) {
       e.preventDefault()
 
-      let month = this.tableMonth
-
-      if (e.deltaY < 0) month++
-      else month--
-
-      this.tableDate = this.normalizeDate(this.tableYear, month)
+      this.updateTableMonth(e.deltaY < 0 ? this.tableMonth + 1 : this.tableMonth - 1)
     },
     dateGenTHead () {
-      const days = this.narrowDays.map(day => this.$createElement('th', day))
+      const days = this.weekDays.map(day => this.$createElement('th', day))
       return this.$createElement('thead', this.dateGenTR(days))
     },
     dateClick (day) {
-      this.inputDate = this.normalizeDate(this.tableYear, this.tableMonth, day)
+      this.inputDate = this.sanitizeDateString(`${this.tableYear}-${this.tableMonth + 1}-${day}`, 'date')
       this.$nextTick(() => (this.autosave && this.save()))
     },
-    dateGenButtonText (date, day) {
-      return this.supportsLocaleFormat
-        ? date.toLocaleDateString(this.locale, {
-          day: 'numeric',
-          timeZone: this.timeZone
-        })
-        : day
-    },
     dateGenTD (day) {
-      const date = this.normalizeDate(this.tableYear, this.tableMonth, day)
-      const buttonText = this.dateGenButtonText(date, day)
+      const date = this.sanitizeDateString(`${this.tableYear}-${this.tableMonth + 1}-${day}`, 'date')
+      const buttonText = this.dayFormat(date, this.locale)
       const button = this.$createElement('button', {
         staticClass: 'btn btn--date-picker btn--floating btn--small btn--flat',
         'class': {
@@ -49,11 +36,18 @@ export default {
 
       return this.$createElement('td', [button])
     },
+    // Returns number of the days from the firstDayOfWeek to the first day of the current month
+    weekDaysBeforeFirstDayOfTheMonth () {
+      const pad = n => (n * 1 < 10) ? `0${n * 1}` : `${n}`
+      const firstDayOfTheMonth = new Date(`${this.tableYear}-${pad(this.tableMonth + 1)}-01T00:00:00+00:00`)
+      const weekDay = firstDayOfTheMonth.getUTCDay()
+      return (weekDay - parseInt(this.firstDayOfWeek) + 7) % 7
+    },
     dateGenTBody () {
       const children = []
-      const daysInMonth = this.normalizeDate(this.tableYear, this.tableMonth + 1, 0).getDate()
+      const daysInMonth = new Date(this.tableYear, this.tableMonth + 1, 0).getDate()
       let rows = []
-      const day = (this.normalizeDate(this.tableYear, this.tableMonth).getDay() - parseInt(this.firstDayOfWeek) + 7) % 7
+      const day = this.weekDaysBeforeFirstDayOfTheMonth()
 
       for (let i = 0; i < day; i++) {
         rows.push(this.$createElement('td'))

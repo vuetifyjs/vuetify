@@ -10,9 +10,9 @@ export default {
           click: e => {
             e.stopPropagation()
             if (this.activePicker === 'DATE') {
-              this.tableDate = this.normalizeDate(this.tableYear, change)
+              this.updateTableMonth(change)
             } else if (this.activePicker === 'MONTH') {
-              this.tableDate = this.normalizeDate(change, this.tableMonth)
+              this.tableDate = `${change}`
             }
           }
         }
@@ -38,25 +38,14 @@ export default {
 
     genSelector () {
       const keyValue = this.activePicker === 'DATE' ? this.tableMonth : this.tableYear
-      const selectorDate = this.normalizeDate(this.tableYear, this.tableMonth)
-
-      let selectorText = ''
-      if (typeof this.headerDateFormat === 'function' && this.activePicker === 'DATE') {
-        selectorText = this.headerDateFormat(selectorDate, this.activePicker)
-      } else if (this.supportsLocaleFormat) {
-        const format = this.activePicker === 'DATE'
-          ? this.headerDateFormat
-          : { year: 'numeric' }
-        selectorText = selectorDate.toLocaleDateString(this.locale, Object.assign(format, {
-          timeZone: this.timeZone
-        }))
-      } else if (this.activePicker === 'DATE') {
-        selectorText = selectorDate.getFullYear() + '/'
-        if (selectorDate.getMonth() < 9) selectorText += '0'
-        selectorText += (1 + selectorDate.getMonth())
-      } else if (this.activePicker === 'MONTH') {
-        selectorText = selectorDate.getFullYear()
-      }
+      // Generates the text of the button switching the active picker in the table header.
+      // For date picker it uses headerDateFormat formatting function (defined by dev or
+      // default). For month picker it uses Date::toLocaleDateString to get the year
+      // in the current locale or just a year numeric value if Date::toLocaleDateString
+      // is not supported
+      const selectorText = this.activePicker === 'DATE'
+        ? this.headerDateFormat(`${this.tableYear}-${this.tableMonth + 1}`, this.locale)
+        : this.yearFormat(`${this.tableYear}`, this.locale)
 
       return this.$createElement('div', {
         'class': 'picker--date__header-selector'
