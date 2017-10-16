@@ -418,8 +418,8 @@ export default {
       return true
     },
     filterDuplicates (arr) {
-      const val = this.returnObject ? this.getValue : el => el
-      return arr.filter((el, i, self) => i === self.findIndex(e => val(e) === val(el)))
+      const values = arr.map(this.getValue)
+      return arr.filter((el, i) => i === values.indexOf(values[i]))
     },
     focus () {
       this.isActive = true
