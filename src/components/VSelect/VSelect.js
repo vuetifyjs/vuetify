@@ -356,6 +356,8 @@ export default {
     this.genSelectedItems()
 
     this.$vuetify.load(() => {
+      // Check again, could have been destroyed by the time this runs
+      if (this._isDestroyed) return
       this.content = this.$refs.menu.$refs.content
     })
   },
