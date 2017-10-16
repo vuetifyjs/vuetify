@@ -59,10 +59,7 @@ export default {
     },
 
     genTitle (title) {
-      return this.$createElement('div', {
-        staticClass: 'picker__title',
-        'class': this.addBackgroundColorClassChecks({})
-      }, [
+      return this.genPickerTitle([
         this.getYearBtn(),
         this.genTitleDate(title)
       ])

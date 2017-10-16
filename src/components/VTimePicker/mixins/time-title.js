@@ -7,10 +7,7 @@ export default {
         children.push(this.genAMPM())
       }
 
-      return this.$createElement('div', {
-        staticClass: 'picker__title',
-        'class': this.addBackgroundColorClassChecks({})
-      }, children)
+      return this.genPickerTitle(children)
     },
     genTime () {
       let hour = this.hour

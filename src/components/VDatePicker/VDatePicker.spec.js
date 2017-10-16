@@ -139,8 +139,8 @@ test('VDatePicker.js', ({ mount }) => {
     const wrapper = mount(VDatePicker, {
       propsData: {
         value: '2005-11-01',
-        color: 'orange darken-1',
-        dateColor: 'primary'
+        color: 'primary',
+        headerColor: 'orange darken-1'
       }
     })
 
@@ -163,8 +163,8 @@ test('VDatePicker.js', ({ mount }) => {
       propsData: {
         type: 'month',
         value: '2005-11-01',
-        color: 'orange darken-1',
-        dateColor: 'primary'
+        color: 'primary',
+        headerColor: 'orange darken-1'
       }
     })
 

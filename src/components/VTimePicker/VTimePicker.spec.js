@@ -161,8 +161,8 @@ test('VTimePicker.js', ({ mount }) => {
     const wrapper = mount(VTimePicker, {
       propsData: {
         value: '09:00:00',
-        color: 'orange darken-1',
-        handColor: 'primary'
+        color: 'primary',
+        headerColor: 'orange darken-1'
       }
     })
 
