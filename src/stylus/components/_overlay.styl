@@ -7,6 +7,12 @@
   right: 0
   bottom: 0
   pointer-events: none
+  // The overlay has a dynamically set
+  // z-index, we want the transition
+  // timing to affect its changing
+  // https://github.com/vuetifyjs/vuetify/issues/2146
+  transition: .5s $transition.swing
+  // This is the standard index
   z-index: 5
 
   &--absolute
@@ -22,7 +28,12 @@
     position: absolute
     right: 0
     top: 0
-    transition: .5s ease
+    transition: inherit
+    // Delay the transition to avoid a
+    // rendering bug that is visible
+    // within Edge and Firefox
+    // https://github.com/vuetifyjs/vuetify/issues/2146
+    transition-delay: 150ms
     width: 100%
 
   &--active

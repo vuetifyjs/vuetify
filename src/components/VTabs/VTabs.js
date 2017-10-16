@@ -34,11 +34,13 @@ export default {
       activeIndex: null,
       isBooted: false,
       isMobile: false,
+      resizeTimeout: null,
       reverse: false,
       target: null,
       tabsSlider: null,
       targetEl: null,
-      tabsContainer: null
+      tabsContainer: null,
+      transitionTime: 300
     }
   },
 
@@ -95,6 +97,12 @@ export default {
         }
       }
       this.slider()
+    },
+    '$vuetify.application.left' () {
+      this.onContainerResize()
+    },
+    '$vuetify.application.right' () {
+      this.onContainerResize()
     }
   },
 
@@ -148,6 +156,17 @@ export default {
     onResize () {
       this.isMobile = window.innerWidth < this.mobileBreakPoint
       this.slider()
+    },
+    /**
+     * When v-navigation-drawer changes the
+     * width of the container, call resize
+     * after the transition is complete
+     * 
+     * @return {Void}
+     */
+    onContainerResize () {
+      clearTimeout(this.resizeTimeout)
+      this.resizeTimeout = setTimeout(this.onResize, this.transitionTime)
     },
     slider (el) {
       this.tabsSlider = this.tabsSlider ||

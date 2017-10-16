@@ -5,8 +5,9 @@ textfield($material)
   &.input-group--text-field-box
     .input-group__input
       background: $material.buttons.focused-alt
-      
-  input::placeholder
+
+  input::placeholder,
+  textarea::placeholder
     color: $material.text.disabled
 
   &:not(.input-group--error)
@@ -26,9 +27,10 @@ theme(textfield, "input-group--text-field")
   input,
   textarea
     font-size: $input-font-size
-    
+
     &::placeholder
       color: inherit
+      transition: .3s $transition.swing
 
 .input-group--text-field input
   box-shadow: none
@@ -39,9 +41,6 @@ theme(textfield, "input-group--text-field")
   overflow: hidden
   text-overflow: ellipsis
   white-space: nowrap
-
-  &::placeholder
-    transition: .3s $transition.swing
 
   &:focus
     outline: none
@@ -63,6 +62,7 @@ theme(textfield, "input-group--text-field")
 
   .input-group__input
     border-radius: 2px
+    transition: .4s $transition.fast-in-fast-out
 
   textarea
     font-size: $input-font-size
@@ -92,7 +92,8 @@ theme(textfield, "input-group--text-field")
 /** Input States */
 .input-group--text-field
   &.input-group--placeholder.input-group--dirty
-    input::placeholder
+    input::placeholder,
+    textarea::placeholder
       opacity: 0
 
 /** Types */
@@ -131,6 +132,10 @@ theme(textfield, "input-group--text-field")
       &:not(.input-group--full-width).input-group--textarea
         label
           transform: translate3d(0, -8px, 0) scale(.75)
+
+      &.input-group--text-field-box
+        label
+          transform: translate3d(0, -10px, 0) scale(.75)
 
   &.input-group--dirty
     &.input-group--select,

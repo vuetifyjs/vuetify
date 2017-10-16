@@ -4,7 +4,7 @@
   // TODO: revisit this
   .input-group--select__autocomplete
     display: block
-    padding-bottom: 1px
+    height: 0px
 
     &--index
       opacity: 0 !important
@@ -18,6 +18,7 @@
   &.input-group--focused
     .input-group--select__autocomplete
       display: inline-block
+      padding-bottom: 1px
       height: 30px
       opacity: 1
 
@@ -42,7 +43,7 @@
     &__comma
       display: inline-flex
       font-size: 16px
-      padding-right: 4px
+      padding: 3px 4px 3px 0
 
       &--active
         color: inherit
@@ -57,6 +58,10 @@
   &.input-group--autocomplete.input-group--search-focused
     .input-group__selections__comma
       display: none
+
+.input-group--autocomplete
+  .input-group__selections
+    cursor: text
 
 
 .input-group

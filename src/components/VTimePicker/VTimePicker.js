@@ -200,13 +200,18 @@ export default {
     },
     isAllowed (type, value) {
       const allowed = this[`allowed${type.charAt(0).toUpperCase() + type.slice(1)}s`]
+      const val = type === 'hour' &&
+        !this.is24hr &&
+        this.period === 'pm'
+        ? value + 12
+        : value
 
       if (!allowed) return true
 
       if (Array.isArray(allowed)) {
         return !!allowed.some(v => v === value)
       } else if (allowed instanceof Function) {
-        return allowed(value)
+        return allowed(val)
       } else if (allowed === Object(allowed)) {
         const range = type === 'minute' ? this.ranges.minutes : this.ranges.hours
         const mod = type === 'minute' ? 60 : 24

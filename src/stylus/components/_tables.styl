@@ -6,18 +6,17 @@ table($material)
   background-color: $material.cards
   color: $material.text.primary
 
-  tr:not(:last-child)
+  thead
     border-bottom: 1px solid rgba($material.fg-color, $material.divider-percent)
 
-  thead
     th
       color: rgba($material.text-color, $material.secondary-text-percent)
 
-    &:last-of-type
-      border-bottom: 1px solid rgba($material.fg-color, $material.divider-percent)
-
   tbody
     tr
+      &:not(:last-child)
+        border-bottom: 1px solid rgba($material.fg-color, $material.divider-percent)
+
       &[active]
         background: $material.table.active
 

@@ -38,7 +38,7 @@ echo "Releasing $VERSION on $BRANCH"
 echo "Tag: $TAG"
 read -p "Are you sure? [Y/n]" -n 1 -r
 echo #
-[ ! $REPLY =~ ^[Yy]$ ] && exit
+[ ${REPLY,,} != "y" ] && exit
 
 echo "Releasing $VERSION ..."
 
