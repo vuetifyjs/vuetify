@@ -25,9 +25,9 @@ export default {
         const buttonText = this.yearFormat(`${year}`, this.locale)
 
         children.push(this.$createElement('li', {
-          'class': {
-            active: this.year === year
-          },
+          'class': this.year === year
+            ? this.addTextColorClassChecks({ active: true }, 'contentColor')
+            : {},
           on: {
             click: () => this.yearClick(year)
           }

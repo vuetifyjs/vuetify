@@ -86,6 +86,7 @@ export default {
       type: Function,
       default: createNativeLocaleFormatter({ day: 'numeric' }, 'dateOnly')
     },
+    dateColor: String,
     firstDayOfWeek: {
       type: [String, Number],
       default: 0
@@ -232,6 +233,9 @@ export default {
       }
 
       return titleText
+    },
+    contentColor () {
+      return this.dateColor || this.color || 'accent'
     }
   },
 
