@@ -74,11 +74,17 @@ export default {
       this.tabFocused = false
     },
     genLabel () {
+      const required = this.required
+        ? this.$createElement('span', {
+          'class': {
+            'error--text': this.required && this.isFocused
+          }
+        }, '*')
+        : null
+
       return this.$createElement('label', {
-        attrs: {
-          for: this.$attrs.id
-        }
-      }, this.$slots.label || this.label)
+        attrs: { for: this.$attrs.id }
+      }, [this.$slots.label || this.label, required])
     },
     genMessages () {
       let messages = []

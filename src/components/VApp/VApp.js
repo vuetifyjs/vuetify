@@ -1,23 +1,29 @@
 require('../../stylus/components/_app.styl')
 
-import Breakpoint from '../../util/breakpoint'
+// Component level mixins
+import AppTheme from './mixins/app-theme'
+import AppBreakpoint from './mixins/app-breakpoint'
+
+// Directives
+import Resize from '../../directives/resize'
+
+// Utilities
 import Themeable from '../../mixins/themeable'
 import TouchSupport from '../../util/touchSupport'
-
-import Resize from '../../directives/resize'
 
 export default {
   name: 'v-app',
 
-  mixins: [Breakpoint, Themeable, TouchSupport],
+  mixins: [
+    AppBreakpoint,
+    AppTheme,
+    Themeable,
+    TouchSupport
+  ],
 
   directives: {
     Resize
   },
-
-  data: () => ({
-    resizeTimeout: {}
-  }),
 
   props: {
     id: {

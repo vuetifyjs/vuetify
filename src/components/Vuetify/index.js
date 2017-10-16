@@ -1,7 +1,19 @@
 import load from '../../util/load'
 
+const THEME_DEFAULTS = {
+  primary: '#1976D2',
+  secondary: '#424242',
+  accent: '#82B1FF',
+  error: '#FF5252',
+  info: '#2196F3',
+  success: '#4CAF50',
+  warning: '#FFC107'
+}
+
 const Vuetify = {
   install (Vue, opts = {}) {
+    if (Vue.prototype.$vuetify) return
+
     const $vuetify = {
       load,
       application: {
@@ -12,17 +24,18 @@ const Vuetify = {
         right: 0
       },
       breakpoint: {},
+      theme: Object.assign({}, THEME_DEFAULTS, opts.theme),
       touchSupport: false
     }
 
-    Vue.util.defineReactive({}, 'breakpoint', $vuetify)
     Vue.util.defineReactive({}, 'application', $vuetify)
+    Vue.util.defineReactive({}, 'breakpoint', $vuetify)
+    Vue.util.defineReactive({}, 'theme', $vuetify)
 
     Vue.prototype.$vuetify = $vuetify
 
     if (opts.transitions) {
-      Object.keys(opts.transitions).forEach(key => {
-        const t = opts.transitions[key]
+      Object.values(opts.transitions).forEach(t => {
         if (t.name !== undefined && t.name.startsWith('v-')) {
           Vue.component(t.name, t)
         }
@@ -30,15 +43,13 @@ const Vuetify = {
     }
 
     if (opts.directives) {
-      Object.keys(opts.directives).forEach(key => {
-        const d = opts.directives[key]
+      Object.values(opts.directives).forEach(d => {
         Vue.directive(d.name, d)
       })
     }
 
     if (opts.components) {
-      Object.keys(opts.components).forEach(key => {
-        const c = opts.components[key]
+      Object.values(opts.components).forEach(c => {
         Vue.use(c)
       })
     }

@@ -21,6 +21,10 @@ export default {
     outline: Boolean,
     // Used for selects/tagging
     selected: Boolean,
+    selectedClass: {
+      type: String,
+      default: 'accent'
+    },
     small: Boolean,
     textColor: String,
     value: {
@@ -34,7 +38,7 @@ export default {
       const classes = this.addBackgroundColorClassChecks({
         'chip': true,
         'chip--disabled': this.disabled,
-        'chip--selected': this.selected,
+        [`chip--selected ${this.selectedClass}`]: this.selected,
         'chip--label': this.label,
         'chip--outline': this.outline,
         'chip--small': this.small,

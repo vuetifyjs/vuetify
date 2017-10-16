@@ -8,7 +8,8 @@ export function test(name, cb) {
 
   Vue.prototype.$vuetify = {
     load: (fn) => fn(),
-    breakpoint: {}
+    breakpoint: {},
+    theme: {}
   }
 
 /*

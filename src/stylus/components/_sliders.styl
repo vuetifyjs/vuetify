@@ -70,10 +70,6 @@ theme(slider, "input-group--slider")
       margin-left: 16px
       flex: 1 0 auto
 
-  &:not(.input-group--disabled).input-group--dirty
-    .slider__track-fill
-      background: $theme.primary
-
   &.input-group--active
     .slider__thumb
       transform: translateY(-50%) scale(1.2)
@@ -96,14 +92,6 @@ theme(slider, "input-group--slider")
       .slider
         &__track__container:after, &__tick
           opacity: 1
-
-  &.input-group--dirty
-    .slider__thumb
-      background: $theme.primary
-      border-color: $theme.primary
-
-    .slider__thumb--label
-      background: $theme.primary
 
   &.input-group--disabled
     pointer-events: none

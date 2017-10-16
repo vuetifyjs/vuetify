@@ -10,6 +10,10 @@ export default {
   directives: { Resize },
 
   props: {
+    activeClass: {
+      type: String,
+      default: 'primary'
+    },
     circle: Boolean,
     disabled: Boolean,
     length: {
@@ -130,10 +134,13 @@ export default {
       ])
     },
     genItem (h, i) {
+      const isActive = i === this.value
+
       return h('a', {
         class: {
           'pagination__item': true,
-          'pagination__item--active': i === this.value
+          'pagination__item--active': isActive,
+          [this.activeClass]: isActive
         },
         attrs: { href: '#!' },
         on: {
