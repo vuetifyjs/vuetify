@@ -372,6 +372,7 @@ exports[`VMenu.js should work 1`] = `
   <div class="menu__activator menu__activator--active">
     <button type="button"
             class="btn btn--raised"
+            data-ripple="true"
     >
       <div class="btn__content">
       </div>
@@ -382,6 +383,7 @@ exports[`VMenu.js should work 1`] = `
   >
     <div class="card"
          style="height: auto;"
+         data-ripple="false"
     >
     </div>
   </div>
