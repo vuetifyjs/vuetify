@@ -73,12 +73,12 @@ export default {
   watch: {
     isActive (val) {
       if (val) {
-        !this.fullscreen && !this.hideOverlay && this.genOverlay()
-        this.fullscreen && this.hideScroll()
-        this.$refs.content.focus()
+        this.init()
       } else {
         if (!this.fullscreen) this.removeOverlay()
         else this.showScroll()
+
+        this.unbind()
       }
     }
   },
@@ -99,7 +99,9 @@ export default {
       return !this.persistent && getZIndex(this.$refs.content) >= this.getMaxZIndex()
     },
     init () {
-      this.isActive && this.genOverlay()
+      !this.fullscreen && !this.hideOverlay && this.genOverlay()
+      this.fullscreen && this.hideScroll()
+      this.$refs.content.focus()
 
       if (this.$listeners.keydown) this.bind()
     },
