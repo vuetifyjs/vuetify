@@ -16,9 +16,6 @@ export default {
       desktop: 64,
       dense: 48
     },
-    denseHeight: 48,
-    defaultHeight: 56,
-    prominentHeight: 64,
     isExtended: false,
     isScrollingProxy: false,
     marginTop: 0,
@@ -112,6 +109,12 @@ export default {
   },
 
   watch: {
+    clippedLeft (val) {
+      this.updateApplication()
+    },
+    clippedRight (val) {
+      this.updateApplication()
+    },
     isScrolling (val) {
       this.whenScrolled(val)
     }

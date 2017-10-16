@@ -29,7 +29,7 @@ export default {
 
         this.hasSelectAll && row.unshift(this.$createElement('th', [checkbox]))
 
-        children = this.genTR(row)
+        children = [this.genTR(row), this.genTProgress()]
       }
 
       return this.$createElement('thead', [children])
@@ -49,6 +49,7 @@ export default {
         attrs: {
           role: 'columnheader',
           scope: 'col',
+          width: header.width || null,
           'aria-label': header[this.headerText] || '',
           'aria-sort': 'none'
         }

@@ -1,6 +1,6 @@
 {
   "name": "vuetify",
-  "version": "0.16.5",
+  "version": "0.16.7",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -84,11 +84,11 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "uglifyjs-webpack-plugin": "^0.4.6",
-    "vue": "^2.4.4",
-    "vue-loader": "^13.0.4",
+    "vue": "^2.5.1",
+    "vue-loader": "^13.3.0",
     "vue-router": "^2.7.0",
-    "vue-server-renderer": "^2.4.4",
-    "vue-template-compiler": "^2.4.4",
+    "vue-server-renderer": "^2.5.1",
+    "vue-template-compiler": "^2.5.1",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-bundle-size-analyzer": "^2.7.0",
@@ -97,6 +97,9 @@
     "write-file-webpack-plugin": "^4.1.0"
   },
   "dependencies": {},
+  "peerDependencies": {
+    "vue": "^2.4.3"
+  },
   "engines": {
     "node": ">= 4.0.0",
     "npm": ">= 3.0.0"

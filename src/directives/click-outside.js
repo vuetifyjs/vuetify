@@ -54,14 +54,19 @@ export default {
   bind (el, binding, v) {
     v.context.$vuetify.load(() => {
       const onClick = e => directive(e, el, binding, v)
-      // Use capturing event so we avoid being blocked by 
-      // stopPropagation in bubbling phase
-      document.addEventListener('click', onClick, true)
+      // iOS does not recognize click events on document
+      // or body, this is the entire purpose of the v-app
+      // component and [data-app], stop removing this
+      const app = document.querySelector('[data-app]') ||
+        document.body // This is only for unit tests
+      app.addEventListener('click', onClick, true)
       el._clickOutside = onClick
     })
   },
 
   unbind (el) {
-    document.removeEventListener('click', el._clickOutside, true)
+    const app = document.querySelector('[data-app]') ||
+      document.body // This is only for unit tests
+    app && app.removeEventListener('click', el._clickOutside, true)
   }
 }

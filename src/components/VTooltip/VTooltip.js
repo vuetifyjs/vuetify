@@ -23,6 +23,7 @@ export default {
       type: [Number, String],
       default: 0
     },
+    disabled: Boolean,
     fixed: {
       type: Boolean,
       default: true
@@ -40,9 +41,10 @@ export default {
   computed: {
     calculatedLeft () {
       const { activator, content } = this.dimensions
+      const unknown = !this.bottom && !this.left && !this.top && !this.right
       let left = 0
 
-      if (this.top || this.bottom) {
+      if (this.top || this.bottom || unknown) {
         left = (
           activator.left +
           (activator.width / 2) -
@@ -146,7 +148,7 @@ export default {
         }
       }, [tooltip]),
       h('span', {
-        on: {
+        on: this.disabled ? {} : {
           mouseenter: () => {
             this.runDelay('open', () => (this.isActive = true))
           },

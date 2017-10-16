@@ -4,6 +4,7 @@ exports[`VTimePicker.js should accept a date object for a value 1`] = `
 
 <div class="card picker picker--time picker--time--hours"
      style="height: auto;"
+     data-ripple="false"
 >
   <div class="picker__title">
     <div class="picker--time__title">
@@ -97,6 +98,7 @@ exports[`VTimePicker.js should accept a value 1`] = `
 
 <div class="card picker picker--time picker--time--hours"
      style="height: auto;"
+     data-ripple="false"
 >
   <div class="picker__title">
     <div class="picker--time__title">
@@ -190,6 +192,7 @@ exports[`VTimePicker.js should change am/pm when updated from model 1`] = `
 
 <div class="card picker picker--time picker--time--hours"
      style="height: auto;"
+     data-ripple="false"
 >
   <div class="picker__title">
     <div class="picker--time__title">
