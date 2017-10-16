@@ -43,9 +43,7 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
           Third Column
         </th>
       </tr>
-    </thead>
-    <thead class="datatable__progress">
-      <tr>
+      <tr class="datatable__progress">
         <th colspan="100%"
             class="column"
         >

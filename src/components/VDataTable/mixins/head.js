@@ -29,7 +29,7 @@ export default {
 
         this.hasSelectAll && row.unshift(this.$createElement('th', [checkbox]))
 
-        children = this.genTR(row)
+        children = [this.genTR(row), this.genTProgress()]
       }
 
       return this.$createElement('thead', [children])
