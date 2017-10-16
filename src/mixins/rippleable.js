@@ -4,6 +4,13 @@ import Ripple from '../directives/ripple'
 export default {
   directives: { Ripple },
 
+  props: {
+    ripple: {
+      type: [Boolean, Object],
+      default: true
+    }
+  },
+
   methods: {
     genRipple () {
       return this.$createElement('div', {
@@ -13,7 +20,7 @@ export default {
         }, this.$listeners),
         directives: [{
           name: 'ripple',
-          value: !this.disabled && { center: true }
+          value: this.ripple && !this.disabled && { center: true }
         }]
       })
     }
