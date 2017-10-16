@@ -28,12 +28,12 @@ export default {
       const monthName = this.monthFormat(date, this.locale)
       const isActive = this.monthIsActive(month)
       const isCurrent = this.monthIsCurrent(month)
-      const classes = {
+      const classes = Object.assign({
         'btn--flat': !isActive,
         'btn--active': isActive,
         'btn--outline': isCurrent && !isActive,
         'btn--disabled': this.type === 'month' && !this.isAllowed(date)
-      }
+      }, this.themeClasses)
 
       return this.$createElement('td', [
         this.$createElement('button', {
