@@ -134,7 +134,7 @@ exports[`VSelect should be clearable with prop, dirty and multi select 2`] = `
          style="display: inline-block;"
     >
       <div class="menu__content menu__content--select menuable__content__active"
-           style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 10; display: none; z-index: 10;"
+           style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 12; display: none; z-index: 12;"
       >
         <div class="card"
              style="height: auto;"

@@ -131,6 +131,7 @@ test('VTimePicker.js', ({ mount }) => {
     const wrapper = mount(VTimePicker, {
       propsData: {
         allowedHours: hour => hour > 13,
+        format: '24hr',
         value: null
       }
     })
