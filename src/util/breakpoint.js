@@ -120,30 +120,18 @@ const breakpoint = {
 // https://stackoverflow.com/questions/1248081
 const clientDimensions = {
   getWidth () {
-    try {
-      return Math.max(
-        document.documentElement.clientWidth,
-        window.innerWidth || 0
-      )
-    } catch (e) {
-      if (e instanceof ReferenceError) {
-        return 0
-      }
-      throw e
-    }
+    if (typeof document === 'undefined') return 0 // SSR
+    return Math.max(
+      document.documentElement.clientWidth,
+      window.innerWidth || 0
+    )
   },
   getHeight () {
-    try {
-      return Math.max(
-        document.documentElement.clientHeight,
-        window.innerHeight || 0
-      )
-    } catch (e) {
-      if (e instanceof ReferenceError) {
-        return 0
-      }
-      throw e
-    }
+    if (typeof document === 'undefined') return 0 // SSR
+    return Math.max(
+      document.documentElement.clientHeight,
+      window.innerHeight || 0
+    )
   }
 }
 

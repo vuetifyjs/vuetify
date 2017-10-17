@@ -26,11 +26,8 @@ export default {
     }
   },
 
-  created () {
-    this.$vuetify.breakpoint = this.breakpoint
-  },
-
   mounted () {
+    this.$vuetify.breakpoint = this.breakpoint
     window.addEventListener('load', this.runCallbacks)
   },
 
