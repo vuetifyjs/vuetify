@@ -26,6 +26,10 @@ export default {
     }
   },
 
+  created () {
+    this.$vuetify.breakpoint = this.breakpoint
+  },
+
   mounted () {
     window.addEventListener('load', this.runCallbacks)
   },
