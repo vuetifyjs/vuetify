@@ -9,6 +9,10 @@ export default {
     event: 'change'
   },
 
+  data: () => ({
+    defaultColor: 'accent'
+  }),
+
   props: {
     id: String,
     inputValue: null,
