@@ -58,6 +58,20 @@ export default {
         i, this.searchValue, this.getText(i))
       )
     },
+    onTabDown (e) {
+      if (!this.menuIsActive || !this.isAutocomplete || (!this.searchValue && this.$refs.menu.listIndex === -1)) {
+        this.blur()
+      } else if (this.menuIsActive && this.searchValue && this.$refs.menu.listIndex > -1) {
+        e.preventDefault()
+        this.$refs.menu.tiles[this.$refs.menu.listIndex].click()
+      } else if (this.menuIsActive) {
+        this.blur()
+      }
+    },
+    onEscDown (e) {
+      e.preventDefault()
+      this.menuIsActive = false
+    },
     onKeyDown (e) {
       // If enter, space, up, or down is pressed, open menu
       if (!this.menuIsActive && [13, 32, 38, 40].includes(e.keyCode)) {
@@ -65,15 +79,11 @@ export default {
         return this.showMenuItems()
       }
 
-      // If escape or tab with no search, blur
-      if (e.keyCode === 27 || e.keyCode === 9 && !this.searchValue) {
-        return this.blur()
-      }
+      // If escape deactivate the menu
+      if (e.keyCode === 27) return this.onEscDown(e)
 
-      // Tab shouldn't switch inputs
-      if (e.keyCode === 9) {
-        this.tags ? e.preventDefault() : this.blur()
-      }
+      // If tab - select item or close menu
+      if (e.keyCode === 9) return this.onTabDown(e)
 
       if (!this.isAutocomplete ||
         ![32].includes(e.keyCode) // space
