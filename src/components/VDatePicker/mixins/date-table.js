@@ -15,7 +15,7 @@ export default {
     },
     dateGenTD (day) {
       const date = this.sanitizeDateString(`${this.tableYear}-${this.tableMonth + 1}-${day}`, 'date')
-      const buttonText = this.dayFormat(date, this.locale)
+      const buttonText = this.localeDays ? this.dayFormat(date, this.locale) : day
       const isActive = this.dateIsActive(day)
       const isCurrent = this.dateIsCurrent(day)
       const classes = Object.assign({

@@ -120,7 +120,8 @@ export default {
       type: Function,
       default: createNativeLocaleFormatter({ year: 'numeric' }, 'year')
     },
-    yearIcon: String
+    yearIcon: String,
+    localeDays: Boolean
   },
 
   computed: {
