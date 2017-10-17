@@ -12,7 +12,7 @@ export default {
 
     fill: {
       type: String,
-      default: () => this.indeterminate ? 'none' : 'transparent'
+      default () { return this.indeterminate ? 'none' : 'transparent' }
     },
 
     indeterminate: Boolean,
@@ -54,7 +54,7 @@ export default {
     },
 
     classes () {
-      return this.addColorClassChecks({
+      return this.addTextColorClassChecks({
         'progress-circular': true,
         'progress-circular--indeterminate': this.indeterminate,
         'progress-circular--button': this.button

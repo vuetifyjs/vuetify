@@ -35,7 +35,9 @@ $material-light := {
     theme: #fff,
     primary: rgba(#000, .87),
     secondary: rgba(#000, .54),
-    disabled: rgba(#000, .38)
+    disabled: rgba(#000, .38),
+    link: $theme.primary,
+    link-hover: $grey.darken-3
   },
   icons: {
     active: rgba(#000, .54),
@@ -82,11 +84,9 @@ $material-light := {
     hover: $grey.lighten-3
   },
   picker: {
-    buttons: #fff,
-    date: $theme.primary,
-    title: $theme.primary,
     body: #fff,
-    clock: $grey.lighten-2
+    clock: $grey.lighten-2,
+    title: $theme.primary
   },
   bg-color: #fff
   fg-color: #000
@@ -116,7 +116,9 @@ $material-dark := {
     theme: #fff,
     primary: #fff,
     secondary: rgba(#fff, .70),
-    disabled: rgba(#fff, .50)
+    disabled: rgba(#fff, .50),
+    link: $theme.accent,
+    link-hover: $grey.lighten-3
   },
   icons: {
     active: #fff,
@@ -164,11 +166,9 @@ $material-dark := {
     hover: $grey.darken-2
   },
   picker: {
-    date: $theme.accent,
-    title: $grey.darken-2,
     body: #424242,
     clock: $grey.darken-2,
-    buttons: rgba(#000, .87)
+    title: $grey.darken-2
   },
   bg-color: #303030
   fg-color: #fff

@@ -1,6 +1,5 @@
 import { test } from '~util/testing'
-import Vue from 'vue/dist/vue.common'
-import VFlex from 'src/components/VGrid/VFlex'
+import VFlex from '~components/VGrid/VFlex'
 
 test('VFlex', ({ mount, functionalContext }) => {
   it('should conditionally apply if boolean is used', () => {

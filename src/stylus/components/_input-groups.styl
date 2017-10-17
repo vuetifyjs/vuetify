@@ -58,6 +58,11 @@ input-group($material)
           background-color: $material.dividers
 
   &.input-group--disabled
+    .input-group__input
+      .input-group__append-icon,
+      .input-group__prepend-icon
+        color: $material.text.disabled
+
     .input-group__details:before
       background-color: transparent
       background-image: linear-gradient(
@@ -197,7 +202,7 @@ theme(input-group, "input-group")
           color: inherit
 
         .input-group__input
-          border-color: $theme.primary
+          border-color: inherit
 
     &.input-group--focused
       &:not(.input-group--disabled)

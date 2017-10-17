@@ -1,6 +1,8 @@
 export default {
   methods: {
     genTHead () {
+      if (this.hideHeaders) return // Exit Early since no headers are needed.
+
       let children = []
 
       if (this.$scopedSlots.headers) {
@@ -27,7 +29,7 @@ export default {
 
         this.hasSelectAll && row.unshift(this.$createElement('th', [checkbox]))
 
-        children = this.genTR(row)
+        children = [this.genTR(row), this.genTProgress()]
       }
 
       return this.$createElement('thead', [children])
@@ -47,6 +49,7 @@ export default {
         attrs: {
           role: 'columnheader',
           scope: 'col',
+          width: header.width || null,
           'aria-label': header[this.headerText] || '',
           'aria-sort': 'none'
         }
@@ -75,7 +78,10 @@ export default {
 
       data.attrs.tabIndex = 0
       data.on = {
-        click: () => this.sort(header.value),
+        click: () => {
+          this.expanded = []
+          this.sort(header.value)
+        },
         keydown: e => {
           // check for space
           if (e.keyCode === 32) {

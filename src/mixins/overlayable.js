@@ -6,7 +6,7 @@ export default {
       overlay: null,
       overlayOffset: 0,
       overlayTimeout: null,
-      overlayTransitionDuration: 500
+      overlayTransitionDuration: 500 + 150 // transition + delay
     }
   },
 
@@ -35,27 +35,24 @@ export default {
 
       this.overlay = document.createElement('div')
       this.overlay.className = 'overlay'
-      this.overlay.onclick = () => {
-        if (this.permanent) return
-        else if (!this.persistent) this.isActive = false
-        else if (this.isMobile) this.isActive = false
-      }
 
       if (this.absolute) this.overlay.className += ' overlay--absolute'
 
       this.hideScroll()
 
-      if (this.absolute) {
-        // Required for IE11
-        const parent = this.$el.parentNode
-        parent.insertBefore(this.overlay, parent.firstChild)
-      } else {
-        document.querySelector('[data-app]').appendChild(this.overlay)
-      }
+      const parent = this.absolute
+        ? this.$el.parentNode
+        : document.querySelector('[data-app]')
+
+      parent.insertBefore(this.overlay, parent.firstChild)
 
       this.overlay.clientHeight // Force repaint
       requestAnimationFrame(() => {
         this.overlay.className += ' overlay--active'
+
+        if (this.activeZIndex !== undefined) {
+          this.overlay.style.zIndex = this.activeZIndex - 1
+        }
       })
 
       return true

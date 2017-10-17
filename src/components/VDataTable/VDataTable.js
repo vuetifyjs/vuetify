@@ -61,6 +61,7 @@ export default {
       default: 'text'
     },
     hideActions: Boolean,
+    hideHeaders: Boolean,
     mustSort: Boolean,
     noResultsText: {
       type: String,
@@ -273,6 +274,9 @@ export default {
     isSelected (item) {
       return this.selected[item[this.itemKey]]
     },
+    isExpanded (item) {
+      return this.expanded[item[this.itemKey]]
+    },
     sort (index) {
       const { sortBy, descending } = this.computedPagination
       if (sortBy === null) {
@@ -333,7 +337,6 @@ export default {
         'class': this.classes
       }, [
         this.genTHead(),
-        this.genTProgress(),
         this.genTBody(),
         this.genTFoot()
       ])

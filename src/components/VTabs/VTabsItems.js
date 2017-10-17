@@ -1,5 +1,9 @@
+import Touch from '../../directives/touch'
+
 export default {
   name: 'v-tabs-items',
+
+  directives: { Touch },
 
   inject: ['next', 'prev'],
 

@@ -1,12 +1,13 @@
 require('../../stylus/components/_toolbar.styl')
 
 import Applicationable from '../../mixins/applicationable'
+import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 
 export default {
   name: 'v-toolbar',
 
-  mixins: [Applicationable, Themeable],
+  mixins: [Applicationable, Colorable, Themeable],
 
   data: () => ({
     heights: {
@@ -15,9 +16,6 @@ export default {
       desktop: 64,
       dense: 48
     },
-    denseHeight: 48,
-    defaultHeight: 56,
-    prominentHeight: 64,
     isExtended: false,
     isScrollingProxy: false,
     marginTop: 0,
@@ -51,7 +49,7 @@ export default {
 
   computed: {
     computedHeight () {
-      if (this.height) return this.height
+      if (this.height) return parseInt(this.height)
       if (this.dense) return this.heights.dense
       if (this.prominent ||
         this.$vuetify.breakpoint.mdAndUp
@@ -66,7 +64,7 @@ export default {
       return this.marginTop + this.$vuetify.application.bar
     },
     classes () {
-      return {
+      return this.addBackgroundColorClassChecks({
         'toolbar': true,
         'elevation-0': this.flat,
         'toolbar--absolute': this.absolute,
@@ -79,7 +77,7 @@ export default {
         'toolbar--extended': this.isExtended,
         'theme--dark': this.dark,
         'theme--light': this.light
-      }
+      })
     },
     isScrolling: {
       get () {
@@ -102,7 +100,7 @@ export default {
       return this.$vuetify.application.right
     },
     styles () {
-      return {
+      return this.app && {
         marginTop: `${this.computedMarginTop}px`,
         paddingLeft: `${this.paddingLeft}px`,
         paddingRight: `${this.paddingRight}px`
@@ -111,6 +109,12 @@ export default {
   },
 
   watch: {
+    clippedLeft (val) {
+      this.updateApplication()
+    },
+    clippedRight (val) {
+      this.updateApplication()
+    },
     isScrolling (val) {
       this.whenScrolled(val)
     }

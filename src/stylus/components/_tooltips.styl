@@ -2,7 +2,11 @@
 
 .tooltip
   position: relative
-  
+  // When wrapping selection-controls make
+  // sure tooltip spans the entire length
+  // https://github.com/vuetifyjs/vuetify/issues/2171
+  flex: 1 1 auto
+
   &__content
     background: $grey.darken-2
     border-radius: 2px
@@ -11,12 +15,15 @@
     display: inline-block
     padding: 5px 8px
     position: absolute
-    pointer-events: none
     text-transform: initial
     transition: .15s $transition.swing
     width: auto
     elevation(2)
-    
+
+    &[class*="-active"] {
+      pointer-events: none
+    }
+
   @media $display-breakpoints.sm-and-down
     .tooltip__content
       padding: 10px 16px

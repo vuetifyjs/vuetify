@@ -6,11 +6,6 @@
 
 $color-pack := true
 
-// Material Design
-// ============================================================
-$material-left-padding := 16px
-$material-right-padding := 16px
-
 // Grid
 // ============================================================
 $grid-breakpoints := {
@@ -174,9 +169,7 @@ $button-min-width := 88px
 $button-padding := 0 16px
 $button-text-transform := uppercase
 
-$button-dark-overlay := rgba($material-light.fg-color, .12)
 $button-dark-disabled-color := rgba($material-light.fg-color, .3)
-$button-light-overlay := rgba($material-dark.fg-color, .12)
 $button-light-disabled-color := rgba($material-dark.fg-color, .26)
 
 $button-small-height := 28px
@@ -193,30 +186,10 @@ $button-floating-large-width := 72px
 $button-floating-small-icon-width := 18px
 $button-floating-large-icon-width := 30px
 
-// Button Dropdown
-$button-dropdown-font-size := 16px
-$button-dropdown-font-weight := 500
-$button-dropdown-overflow-editable-height := 42px
-$button-dropdown-overflow-editable-min-width := 102px
-$button-dropdown-overflow-editable-padding := 0 16px
-$button-dropdown-border-bottom := 1px solid $material-twelve-percent-dark
-$button-dropdown-input-width := calc(100% - 40px)
-$button-dropdown-input-padding-left := 16px
-$button-dropdown-background := #fff
-
 // Card
-$card-actions-border-top := 1px solid rgba($material-theme.fg-color, .1)
-$card-background := $material-theme.bg-color
-$card-padding := 16px
 $card-border-radius := 2px
-$card-title-text-size := 24px
-$card-title-text-letter-spacing := 1px
-$card-title-text-font-weight := 400
-$card-row-min-height := 36px
 
 // Chip
-$chip-background := $grey.lighten-2
-$chip-border := 1px solid $grey.lighten-2
 $chip-border-radius := 28px
 $chip-font-size := 13px
 $chip-label-border-radius := $card-border-radius
@@ -287,18 +260,10 @@ $list-dense-subheader-group-height := $list-dense-subheader-height //the subhead
 
 
 /** Pickers */
-$picker-width := 315px
-$picker-title-min-height := 105px
 $time-picker-number-font-size := 16px
-$time-picker-number-margin := 10px
 
 // Toolbar
 $toolbar-height := 56px
-$toolbar-prominent-height := 64px
-$toolbar-extension-height := 72px
-$toolbar-mobile-portrait-height := 56px
-$toolbar-mobile-landscape-height := 48px
-$toolbar-extended-height := 128px
 $toolbar-item-padding := 0 16px
 $toolbar-padding-y := 0
 $toolbar-padding-x := 16px
@@ -310,87 +275,25 @@ $process-circular-intermediate-svg-transition := all .2s ease-in-out
 $progress-circular-underlay-stroke := rgba($material-light.fg-color, 0.1)
 $progress-circular-overlay-transition := all .6s ease-in-out
 
-
-/* Selection Controls */
-$selection-switch-dark-color := rgba(#000, .38)
-$selection-switch-dark-background := #fafafa
-$selection-switch-dark-label-color := #424242
-$selection-switch-dark-enabled-color := rgba($teal.base, 1)
-$selection-switch-dark-disabled-color := rgba($grey.lighten-1, 1)
-$selection-switch-dark-disabled-background := rgba(#000, .12)
-
-$selection-switch-light-color := rgba(#fff, .3)
-$selection-switch-light-background := #bdbdbd
-$selection-switch-light-label-color := $material-dark.text-color
-$selection-switch-light-enabled-color := rgba($teal.lighten-3, 1)
-$selection-switch-light-disabled-color := rgba($grey.darken-3, 1)
-$selection-switch-light-disabled-background := rgba(#fff, .1)
-
-$selection-controls-active-color := rgba($teal.base, 1)
-$selection-controls-light-color := rgba($material-dark.fg-color, .54)
-$selection-controls-light-disabled-color := rgba($material-dark.fg-color, .26)
-$selection-controls-light-label-color := $material-dark.text-color
-
-$selection-controls-dark-color := rgba($material-light.fg-color, .70)
-$selection-controls-dark-disabled-color := rgba($material-light.fg-color, .30)
-$selection-controls-dark-label-color := $material-light.text-color
-
-
-/* Navigation drawer */
-$navigation-drawer-height := 100vh
-$navigation-drawer-background-dark := $theme.secondary
-$navigation-drawer-background-light := $material-light.bg-color
-
-// Sidebar Item
+// Navigation drawer
 $navigation-drawer-item-font-size := 14px
 $navigation-drawer-item-font-weight := $font-weights.medium
 $navigation-drawer-item-active-color := $theme.primary
-
-// Sidebar Group
 $navigation-drawer-group-item-font-weight := $font-weights.regular
-
-/* Slider */
-$slider-light-off := rgba($material-dark.fg-color, .26)
-$slider-light-focus-off := rgba($material-dark.fg-color, .38)
-$slider-light-disabled := rgba($material-dark.fg-color, .26)
-$slider-light-label := $material-dark.text-color
-$slider-light-ticks := rgba($material-dark.fg-color, .6)
-
-$slider-dark-off := rgba($material-light.fg-color, .3)
-$slider-dark-focus-off := rgba($material-light.fg-color, .3)
-$slider-dark-disabled := rgba($material-light.fg-color, .3)
-$slider-dark-label := $material-light.text-color
-$slider-dark-ticks := rgba($material-light.fg-color, .6)
-
 
 /** Snackbar */
 $snackbar-background-color := #323232
 
-
 /* Text Input */
-$input-group-height := 58px
 $input-group-padding := 18px 0 0
 $input-font-size := 16px
-$label-font-size := 12px
 $input-height := 30px
 $input-group-text-field-label-top := 18px
 
-$input-group-light-normal := rgba($material-dark.fg-color, $material-dark.disabledORhints-text-percent)
-$input-group-light-focus := rgba($material-dark.fg-color, .87)
-
-$input-group-dark-normal := rgba($material-light.fg-color, $material-light.disabledORhints-text-percent)
-$input-group-dark-focus := $material-light.fg-color
-
-
-$label-padding-top := 16px
-$label-padding-bottom := 8px
-$input-padding-bottom := 8px
 
 // Directives
 // ============================================================
 
 // Ripple animation
-$ripple-container-color := currentColor
-$ripple-animation-background := currentColor
 $ripple-animation-transition := .4s $transition.linear-out-slow-in
 $ripple-animation-visible-opacity := .15

@@ -16,25 +16,25 @@ export default {
       return this.$createElement('tbody', children)
     },
     genExpandedRow (props) {
-      const expand = this.$createElement('div', {
-        class: 'datatable__expand-content',
-        key: props.item[this.itemKey],
-        directives: [{
-          name: 'show',
-          value: this.expanded[props.item[this.itemKey]]
-        }]
-      }, [this.$scopedSlots.expand(props)])
+      const children = []
+
+      if (this.isExpanded(props.item)) {
+        const expand = this.$createElement('div', {
+          class: 'datatable__expand-content',
+          key: props.item[this.itemKey]
+        }, this.$scopedSlots.expand(props))
+
+        children.push(expand)
+      }
 
       const transition = this.$createElement('transition-group', {
         class: 'datatable__expand-col',
         attrs: { colspan: '100%' },
         props: {
-          tag: 'td',
-          type: 'transition',
-          css: true
+          tag: 'td'
         },
         on: RowExpandTransitionFunctions
-      }, [expand])
+      }, children)
 
       return this.genTR([transition], { class: 'datatable__expand-row' })
     },

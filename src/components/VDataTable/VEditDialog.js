@@ -56,7 +56,7 @@ export default {
       return this.$createElement('v-btn', {
         props: {
           flat: true,
-          primary: true,
+          color: 'primary',
           light: true
         },
         on: { click: fn }
@@ -64,11 +64,7 @@ export default {
     },
     genActions () {
       return this.$createElement('div', {
-        'class': 'small-dialog__actions',
-        directives: [{
-          name: 'show',
-          value: this.large
-        }]
+        'class': 'small-dialog__actions'
       }, [
         this.genButton(this.cancel, this.cancelText),
         this.genButton(this.save, this.saveText)
@@ -108,7 +104,7 @@ export default {
         slot: 'activator'
       }, this.$slots.default),
       this.genContent(),
-      this.genActions()
+      this.large ? this.genActions() : null
     ])
   }
 }

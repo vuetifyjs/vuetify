@@ -33,8 +33,8 @@ export default {
           offsetOverflow: this.isAutocomplete,
           openOnClick: false,
           value: this.menuIsActive &&
-            this.computedItems.length &&
-            (!this.tags || this.tags && this.filteredItems.length > 0),
+            (!this.tags || this.filteredItems.length > 0) &&
+            (!this.combobox || this.filteredItems.length > 0),
           zIndex: this.menuZIndex
         },
         on: {
@@ -53,6 +53,37 @@ export default {
       return this.$createElement('v-menu', data, [this.genList()])
     },
     genSelectionsAndSearch () {
+      return this.$createElement('div', {
+        'class': 'input-group__selections',
+        style: { 'overflow': 'hidden' },
+        ref: 'activator'
+      }, [
+        ...this.genSelections(),
+        this.genSearch()
+      ])
+    },
+    genSelections () {
+      if (this.hideSelections) return []
+
+      const children = []
+      const chips = this.chips
+      const slots = this.$scopedSlots.selection
+      const length = this.selectedItems.length
+      this.selectedItems.forEach((item, i) => {
+        if (slots) {
+          children.push(this.genSlotSelection(item, i))
+        } else if (chips) {
+          children.push(this.genChipSelection(item, i))
+        } else if (this.segmented) {
+          children.push(this.genSegmentedBtn(item, i))
+        } else {
+          children.push(this.genCommaSelection(item, i < length - 1, i))
+        }
+      })
+
+      return children
+    },
+    genSearch () {
       const data = {
         staticClass: 'input-group--select__autocomplete',
         'class': {
@@ -90,40 +121,21 @@ export default {
           }
         }
 
+        if (this.combobox) {
+          // When using the combobox
+          // update inputValue and
+          // set the menu status
+          data.on.blur = () => {
+            this.inputValue = this.lazySearch
+          }
+        }
+
         data.directives = data.directives.concat(this.genDirectives())
       }
 
       if (this.placeholder) data.domProps.placeholder = this.placeholder
 
-      return this.$createElement('div', {
-        'class': 'input-group__selections',
-        style: { 'overflow': 'hidden' },
-        ref: 'activator'
-      }, [
-        this.genSelections(),
-        this.$createElement('input', data)
-      ])
-    },
-    genSelections () {
-      if (this.hideSelections) return []
-
-      const children = []
-      const chips = this.chips
-      const slots = this.$scopedSlots.selection
-      const length = this.selectedItems.length
-      this.selectedItems.forEach((item, i) => {
-        if (slots) {
-          children.push(this.genSlotSelection(item, i))
-        } else if (chips) {
-          children.push(this.genChipSelection(item, i))
-        } else if (this.segmented) {
-          children.push(this.genSegmentedBtn(item, i))
-        } else {
-          children.push(this.genCommaSelection(item, i < length - 1, i))
-        }
-      })
-
-      return children
+      return this.$createElement('input', data)
     },
     genSegmentedBtn (item) {
       if (!item.text || !item.callback) {
@@ -246,6 +258,10 @@ export default {
         data.props.disabled = disabled
       }
 
+      if (this.color && this.addTextColorClassChecks) {
+        data.props.activeClass = Object.keys(this.addTextColorClassChecks({})).join(' ')
+      }
+
       if (this.$scopedSlots.item) {
         return this.$createElement('v-list-tile', data,
           [this.$scopedSlots.item({ parent: this, item })]
@@ -253,7 +269,7 @@ export default {
       }
 
       return this.$createElement('v-list-tile', data,
-        [this.genAction(item, active && !disabled), this.genContent(item)]
+        [this.genAction(item, active), this.genContent(item)]
       )
     },
     genAction (item, active) {
@@ -270,7 +286,12 @@ export default {
       }
 
       return this.$createElement('v-list-tile-action', data, [
-        this.$createElement('v-checkbox', { props: { inputValue: active } })
+        this.$createElement('v-checkbox', {
+          props: {
+            color: this.color,
+            inputValue: active
+          }
+        })
       ])
     },
     genContent (item) {

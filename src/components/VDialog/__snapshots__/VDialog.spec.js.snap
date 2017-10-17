@@ -5,9 +5,11 @@ exports[`VDialog.js should render a disabled component and match snapshot 1`] = 
 <div class="dialog__container"
      style="display: block;"
 >
-  <div class="dialog__content">
+  <div class="dialog__content"
+       style="z-index: 0;"
+  >
     <div class="dialog"
-         style="width: 290px; display: none;"
+         style="display: none;"
     >
     </div>
   </div>
@@ -20,7 +22,9 @@ exports[`VDialog.js should render a fullscreen component and match snapshot 1`] 
 <div class="dialog__container"
      style="display: block;"
 >
-  <div class="dialog__content">
+  <div class="dialog__content"
+       style="z-index: 0;"
+  >
     <div class="dialog dialog--fullscreen"
          style="display: none;"
     >
@@ -35,9 +39,11 @@ exports[`VDialog.js should render a lazy component and match snapshot 1`] = `
 <div class="dialog__container"
      style="display: block;"
 >
-  <div class="dialog__content">
+  <div class="dialog__content"
+       style="z-index: 0;"
+  >
     <div class="dialog"
-         style="width: 290px; display: none;"
+         style="display: none;"
     >
     </div>
   </div>
@@ -50,9 +56,11 @@ exports[`VDialog.js should render a persistent component and match snapshot 1`] 
 <div class="dialog__container"
      style="display: block;"
 >
-  <div class="dialog__content">
+  <div class="dialog__content"
+       style="z-index: 0;"
+  >
     <div class="dialog dialog--persistent"
-         style="width: 290px; display: none;"
+         style="display: none;"
     >
     </div>
   </div>
@@ -65,9 +73,11 @@ exports[`VDialog.js should render a scrollable component and match snapshot 1`] 
 <div class="dialog__container"
      style="display: block;"
 >
-  <div class="dialog__content">
+  <div class="dialog__content"
+       style="z-index: 0;"
+  >
     <div class="dialog dialog--scrollable"
-         style="width: 290px; display: none;"
+         style="display: none;"
     >
     </div>
   </div>
@@ -80,9 +90,11 @@ exports[`VDialog.js should render component and match snapshot 1`] = `
 <div class="dialog__container"
      style="display: block;"
 >
-  <div class="dialog__content">
+  <div class="dialog__content"
+       style="z-index: 0;"
+  >
     <div class="dialog"
-         style="width: 290px; display: none;"
+         style="display: none;"
     >
     </div>
   </div>
@@ -95,9 +107,11 @@ exports[`VDialog.js should render component with custom origin and match snapsho
 <div class="dialog__container"
      style="display: block;"
 >
-  <div class="dialog__content">
+  <div class="dialog__content"
+       style="z-index: 0;"
+  >
     <div class="dialog"
-         style="width: 290px; display: none;"
+         style="display: none;"
     >
     </div>
   </div>
@@ -110,9 +124,11 @@ exports[`VDialog.js should render component with custom transition and match sna
 <div class="dialog__container"
      style="display: block;"
 >
-  <div class="dialog__content">
+  <div class="dialog__content"
+       style="z-index: 0;"
+  >
     <div class="dialog"
-         style="width: 290px; display: none;"
+         style="display: none;"
     >
     </div>
   </div>
@@ -120,14 +136,16 @@ exports[`VDialog.js should render component with custom transition and match sna
 
 `;
 
-exports[`VDialog.js should render component with custom width and match snapshot 1`] = `
+exports[`VDialog.js should render component with custom width (max-width) and match snapshot 1`] = `
 
 <div class="dialog__container"
      style="display: block;"
 >
-  <div class="dialog__content">
+  <div class="dialog__content"
+       style="z-index: 0;"
+  >
     <div class="dialog"
-         style="width: 100px; display: none;"
+         style="max-width: 100px; display: none;"
     >
     </div>
   </div>

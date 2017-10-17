@@ -7,9 +7,7 @@ export default {
         children.push(this.genAMPM())
       }
 
-      return this.$createElement('div', {
-        'class': 'picker__title'
-      }, children)
+      return this.genPickerTitle(children)
     },
     genTime () {
       let hour = this.hour

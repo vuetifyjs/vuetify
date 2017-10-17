@@ -43,9 +43,7 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
           Third Column
         </th>
       </tr>
-    </thead>
-    <thead class="datatable__progress">
-      <tr>
+      <tr class="datatable__progress">
         <th colspan="100%"
             class="column"
         >
@@ -87,10 +85,11 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
                        style="display: inline-block;"
                   >
                     <div class="menu__content menu__content--select menu__content--auto"
-                         style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 6; display: none;"
+                         style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                     >
                       <div class="card"
                            style="height: auto;"
+                           data-ripple="false"
                       >
                         <ul data-uid="5"
                             class="list"
@@ -98,6 +97,7 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
                           <li>
                             <a href="javascript:;"
                                class="list__tile list__tile--link"
+                               data-ripple="true"
                             >
                               <div class="list__tile__content">
                                 <div class="list__tile__title">
@@ -109,6 +109,7 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
                           <li>
                             <a href="javascript:;"
                                class="list__tile list__tile--link"
+                               data-ripple="true"
                             >
                               <div class="list__tile__content">
                                 <div class="list__tile__title">
@@ -120,6 +121,7 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
                           <li>
                             <a href="javascript:;"
                                class="list__tile list__tile--link"
+                               data-ripple="true"
                             >
                               <div class="list__tile__content">
                                 <div class="list__tile__title">
@@ -131,6 +133,7 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
                           <li>
                             <a href="javascript:;"
                                class="list__tile list__tile--link"
+                               data-ripple="true"
                             >
                               <div class="list__tile__content">
                                 <div class="list__tile__title">
@@ -159,7 +162,8 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
               NaN-NaN of 3
             </div>
             <button type="button"
-                    class="btn btn--flat btn--icon"
+                    class="btn btn--flat btn--icon btn--raised"
+                    data-ripple="true"
                     aria-label="Previous page"
             >
               <div class="btn__content">
@@ -169,7 +173,8 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
               </div>
             </button>
             <button type="button"
-                    class="btn btn--flat btn--icon"
+                    class="btn btn--flat btn--icon btn--raised"
+                    data-ripple="true"
                     aria-label="Next page"
             >
               <div class="btn__content">

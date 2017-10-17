@@ -6,6 +6,7 @@ export default {
   },
 
   props: {
+    activeClass: String,
     append: Boolean,
     disabled: Boolean,
     exact: Boolean,
@@ -13,9 +14,9 @@ export default {
     to: [String, Object],
     nuxt: Boolean,
     replace: Boolean,
-    router: Boolean,
     ripple: Boolean,
-    tag: String
+    tag: String,
+    target: String
   },
 
   methods: {
@@ -55,6 +56,7 @@ export default {
 
         if (tag === 'a') {
           data.attrs.href = this.href || 'javascript:;'
+          if (this.target) data.attrs.target = this.target
         }
       }
 

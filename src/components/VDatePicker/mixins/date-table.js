@@ -3,38 +3,32 @@ export default {
     dateWheelScroll (e) {
       e.preventDefault()
 
-      let month = this.tableMonth
-
-      if (e.deltaY < 0) month++
-      else month--
-
-      this.tableDate = new Date(this.tableYear, month)
+      this.updateTableMonth(e.deltaY < 0 ? this.tableMonth + 1 : this.tableMonth - 1)
     },
     dateGenTHead () {
-      const days = this.narrowDays.map(day => this.$createElement('th', day))
+      const days = this.weekDays.map(day => this.$createElement('th', day))
       return this.$createElement('thead', this.dateGenTR(days))
     },
     dateClick (day) {
-      day = day < 10 ? `0${day}` : day
-      const tableYear = this.tableYear
-      let tableMonth = this.tableMonth + 1
-      tableMonth = tableMonth < 10 ? `0${tableMonth}` : tableMonth
-
-      this.inputDate = `${tableYear}-${tableMonth}-${day}T12:00:00`
+      this.inputDate = this.sanitizeDateString(`${this.tableYear}-${this.tableMonth + 1}-${day}`, 'date')
       this.$nextTick(() => (this.autosave && this.save()))
     },
     dateGenTD (day) {
-      const date = new Date(this.tableYear, this.tableMonth, day, 12)
-      const buttonText = this.localeDays && this.supportsLocaleFormat
-        ? date.toLocaleDateString(this.locale, { day: 'numeric' })
-        : day
+      const date = this.sanitizeDateString(`${this.tableYear}-${this.tableMonth + 1}-${day}`, 'date')
+      const buttonText = this.localeDays ? this.dayFormat(date, this.locale) : day
+      const isActive = this.dateIsActive(day)
+      const isCurrent = this.dateIsCurrent(day)
+      const classes = Object.assign({
+        'btn--active': isActive,
+        'btn--outline': isCurrent && !isActive,
+        'btn--disabled': !this.isAllowed(date)
+      }, this.themeClasses)
+
       const button = this.$createElement('button', {
-        'class': {
-          'btn btn--date-picker btn--floating btn--small btn--flat': true,
-          'btn--active': this.dateIsActive(day),
-          'btn--outline': this.dateIsCurrent(day) && !this.dateIsActive(day),
-          'btn--disabled': !this.isAllowed(date)
-        },
+        staticClass: 'btn btn--raised btn--icon',
+        'class': (isActive || isCurrent)
+          ? this.addBackgroundColorClassChecks(classes, 'contentColor')
+          : classes,
         attrs: {
           type: 'button'
         },
@@ -48,11 +42,18 @@ export default {
 
       return this.$createElement('td', [button])
     },
+    // Returns number of the days from the firstDayOfWeek to the first day of the current month
+    weekDaysBeforeFirstDayOfTheMonth () {
+      const pad = n => (n * 1 < 10) ? `0${n * 1}` : `${n}`
+      const firstDayOfTheMonth = new Date(`${this.tableYear}-${pad(this.tableMonth + 1)}-01T00:00:00+00:00`)
+      const weekDay = firstDayOfTheMonth.getUTCDay()
+      return (weekDay - parseInt(this.firstDayOfWeek) + 7) % 7
+    },
     dateGenTBody () {
       const children = []
-      const daysInMonth = new Date(this.tableYear, this.tableMonth + 1, 0, 12).getDate()
+      const daysInMonth = new Date(this.tableYear, this.tableMonth + 1, 0).getDate()
       let rows = []
-      const day = (new Date(this.tableYear, this.tableMonth, 1, 12).getDay() - parseInt(this.firstDayOfWeek) + 7) % 7
+      const day = this.weekDaysBeforeFirstDayOfTheMonth()
 
       for (let i = 0; i < day; i++) {
         rows.push(this.$createElement('td'))

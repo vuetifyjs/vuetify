@@ -2,6 +2,8 @@ require('../../stylus/components/_tooltips.styl')
 
 // Mixins
 import Colorable from '../../mixins/colorable'
+import Delayable from '../../mixins/delayable'
+import Dependent from '../../mixins/dependent'
 import Detachable from '../../mixins/detachable'
 import Menuable from '../../mixins/menuable'
 import Toggleable from '../../mixins/toggleable'
@@ -9,10 +11,11 @@ import Toggleable from '../../mixins/toggleable'
 export default {
   name: 'v-tooltip',
 
-  mixins: [Colorable, Detachable, Menuable, Toggleable],
+  mixins: [Colorable, Delayable, Dependent, Detachable, Menuable, Toggleable],
 
   data: () => ({
-    calculatedMinWidth: 0
+    calculatedMinWidth: 0,
+    closeDependents: false
   }),
 
   props: {
@@ -20,6 +23,7 @@ export default {
       type: [Number, String],
       default: 0
     },
+    disabled: Boolean,
     fixed: {
       type: Boolean,
       default: true
@@ -30,16 +34,17 @@ export default {
     },
     transition: String,
     zIndex: {
-      default: '99'
+      default: null
     }
   },
 
   computed: {
     calculatedLeft () {
       const { activator, content } = this.dimensions
+      const unknown = !this.bottom && !this.left && !this.top && !this.right
       let left = 0
 
-      if (this.top || this.bottom) {
+      if (this.top || this.bottom || unknown) {
         left = (
           activator.left +
           (activator.width / 2) -
@@ -62,8 +67,8 @@ export default {
       if (this.top || this.bottom) {
         top = (
           activator.top -
-          (this.top ? content.height : -content.height) -
-          (this.top ? 10 : -20)
+          (this.top ? activator.height : -activator.height) -
+          (this.top ? 0 : -10)
         )
       } else if (this.left || this.right) {
         top = (
@@ -77,8 +82,6 @@ export default {
     },
     classes () {
       return {
-        'tooltip--absolute': this.absolute,
-        'tooltip--fixed': this.fixed && !this.absolute,
         'tooltip--top': this.top,
         'tooltip--right': this.right,
         'tooltip--bottom': this.bottom,
@@ -93,7 +96,7 @@ export default {
       if (this.left) return 'slide-x-reverse-transition'
     },
     offsetY () {
-      this.top || this.bottom
+      return this.top || this.bottom
     },
     offsetX () {
       return this.left || this.right
@@ -101,9 +104,10 @@ export default {
     styles () {
       return {
         left: this.calculatedLeft,
+        maxWidth: isNaN(this.maxWidth) ? this.maxWidth : `${this.maxWidth}px`,
         opacity: this.isActive ? 0.9 : 0,
         top: this.calculatedTop,
-        zIndex: this.zIndex
+        zIndex: this.zIndex || this.activeZIndex
       }
     }
   },
@@ -121,10 +125,10 @@ export default {
   render (h) {
     const tooltip = h('div', {
       staticClass: 'tooltip__content',
-      'class': {
-        [this.color]: this.color,
-        [this.contentClass]: true
-      },
+      'class': this.addBackgroundColorClassChecks({
+        [this.contentClass]: true,
+        'menuable__content__active': this.isActive
+      }),
       style: this.styles,
       attrs: this.attrs,
       directives: [{
@@ -144,19 +148,12 @@ export default {
         }
       }, [tooltip]),
       h('span', {
-        on: {
+        on: this.disabled ? {} : {
           mouseenter: () => {
-            clearTimeout(this.leaveTimeout)
-
-            this.isActive = true
+            this.runDelay('open', () => (this.isActive = true))
           },
           mouseleave: () => {
-            clearTimeout(this.leaveTimeout)
-
-            this.leaveTimeout = setTimeout(
-              () => (this.isActive = false),
-              this.debounce
-            )
+            this.runDelay('close', () => (this.isActive = false))
           }
         },
         ref: 'activator'
