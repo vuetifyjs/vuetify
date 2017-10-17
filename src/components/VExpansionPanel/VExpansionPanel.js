@@ -18,7 +18,9 @@ export default {
     expand: Boolean,
     focusable: Boolean,
     inset: Boolean,
-    popout: Boolean
+    popout: Boolean,
+    raised: Boolean,
+    flat: Boolean
   },
 
   methods: {
@@ -48,6 +50,8 @@ export default {
         'expansion-panel--focusable': this.focusable,
         'expansion-panel--popout': this.popout,
         'expansion-panel--inset': this.inset,
+        'expansion-panel--raised': this.raised,
+        'expansion-panel--flat': this.flat,
         ...this.themeClasses
       }
     }, this.$slots.default)
