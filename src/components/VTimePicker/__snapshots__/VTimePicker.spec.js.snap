@@ -26,7 +26,7 @@ exports[`VTimePicker.js should accept a date object for a value 1`] = `
   </div>
   <div class="picker__body">
     <div class="picker--time__clock">
-      <div class="picker--time__clock-hand hour accent">
+      <div class="picker--time__clock-hand hour accent--light">
       </div>
       <span class>
         <span>
@@ -83,7 +83,7 @@ exports[`VTimePicker.js should accept a date object for a value 1`] = `
           11
         </span>
       </span>
-      <span class="active accent">
+      <span class="active accent--light">
         <span>
           12
         </span>
@@ -120,7 +120,7 @@ exports[`VTimePicker.js should accept a value 1`] = `
   </div>
   <div class="picker__body">
     <div class="picker--time__clock">
-      <div class="picker--time__clock-hand hour accent">
+      <div class="picker--time__clock-hand hour accent--light">
       </div>
       <span class>
         <span>
@@ -162,7 +162,7 @@ exports[`VTimePicker.js should accept a value 1`] = `
           8
         </span>
       </span>
-      <span class="active accent">
+      <span class="active accent--light">
         <span>
           9
         </span>
@@ -214,7 +214,7 @@ exports[`VTimePicker.js should change am/pm when updated from model 1`] = `
   </div>
   <div class="picker__body">
     <div class="picker--time__clock">
-      <div class="picker--time__clock-hand hour accent">
+      <div class="picker--time__clock-hand hour accent--light">
       </div>
       <span class>
         <span>
@@ -256,7 +256,7 @@ exports[`VTimePicker.js should change am/pm when updated from model 1`] = `
           8
         </span>
       </span>
-      <span class="active accent">
+      <span class="active accent--light">
         <span>
           9
         </span>
@@ -308,7 +308,7 @@ exports[`VTimePicker.js should render colored time picker 1`] = `
   </div>
   <div class="picker__body">
     <div class="picker--time__clock">
-      <div class="picker--time__clock-hand hour primary">
+      <div class="picker--time__clock-hand hour primary--light">
       </div>
       <span class>
         <span>
@@ -350,7 +350,7 @@ exports[`VTimePicker.js should render colored time picker 1`] = `
           8
         </span>
       </span>
-      <span class="active primary">
+      <span class="active primary--light">
         <span>
           9
         </span>
