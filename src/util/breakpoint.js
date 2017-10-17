@@ -22,11 +22,11 @@
  *
  *   <div v-if="$breakpoint.smAndDown">...</div>
  */
-var breakpoint = {
+const breakpoint = {
   data () {
     return {
-      clientWidth: 0,
-      clientHeight: 0
+      clientWidth: clientDimensions.getWidth(),
+      clientHeight: clientDimensions.getHeight()
     }
   },
 
@@ -110,16 +110,39 @@ var breakpoint = {
 
   methods: {
     onResize () {
-      // Cross-browser support as described in:
-      // https://stackoverflow.com/questions/1248081
-      this.clientWidth = Math.max(
+      this.clientWidth = clientDimensions.getWidth()
+      this.clientHeight = clientDimensions.getHeight()
+    }
+  }
+}
+
+// Cross-browser support as described in:
+// https://stackoverflow.com/questions/1248081
+const clientDimensions = {
+  getWidth () {
+    try {
+      return Math.max(
         document.documentElement.clientWidth,
         window.innerWidth || 0
       )
-      this.clientHeight = Math.max(
+    } catch (e) {
+      if (e instanceof ReferenceError) {
+        return 0
+      }
+      throw e
+    }
+  },
+  getHeight () {
+    try {
+      return Math.max(
         document.documentElement.clientHeight,
         window.innerHeight || 0
       )
+    } catch (e) {
+      if (e instanceof ReferenceError) {
+        return 0
+      }
+      throw e
     }
   }
 }
