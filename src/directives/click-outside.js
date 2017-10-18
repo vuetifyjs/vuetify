@@ -1,4 +1,13 @@
 function directive (e, el, binding, v) {
+  // If click was triggered programmaticaly (domEl.click()) then
+  // it shouldn't be treated as click-outside
+  // Chrome/Firefox support isTrusted property
+  // IE/Edge support spointerType property (empty if not triggered
+  // by pointing device)
+  if (!e.isTrusted || ('pointerType' in e && !e.pointerType)) {
+    return true
+  }
+
   // The include element callbacks below can be expensive
   // so we should avoid calling them when we're not active.
   // Explicitly check for false to allow fallback compatibility
@@ -28,10 +37,6 @@ function directive (e, el, binding, v) {
 }
 
 function clickedInEls (e, elements) {
-  if (!e.isTrusted) {
-    return true
-  }
-
   // Get position of click
   const { clientX: x, clientY: y } = e
   // Loop over all included elements to see if click was in any of them
