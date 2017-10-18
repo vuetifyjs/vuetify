@@ -4,7 +4,6 @@ require('../../stylus/components/_text-fields.styl')
 import Colorable from '../../mixins/colorable'
 import Input from '../../mixins/input'
 import Maskable from '../../mixins/maskable'
-import { isMaskDelimiter } from '../../util/mask'
 
 export default {
   name: 'v-text-field',
@@ -19,7 +18,9 @@ export default {
       inputHeight: null,
       internalChange: false,
       badInput: false,
-      lazySelection: 0
+      backspace: false,
+      delete: false,
+      lazySelection: null
     }
   },
 
@@ -34,6 +35,7 @@ export default {
     },
     counter: [Boolean, Number, String],
     fullWidth: Boolean,
+    maxlength: [Number, String],
     multiLine: Boolean,
     placeholder: String,
     prefix: String,
@@ -188,6 +190,10 @@ export default {
       this.$emit('focus', e)
     },
     keyDown (e) {
+      const key = e.code || e.key
+
+      this.backspace = key === 'Backspace'
+      this.delete = key === 'Delete'
       this.internalChange = true
     },
     genCounter () {
@@ -238,8 +244,14 @@ export default {
         data.domProps.rows = this.rows
       }
 
-      if (this.mask) {
-        data.attrs.maxlength = this.masked.length
+      if (this.masked) {
+        if (typeof this.masked === 'string') {
+          data.attrs.maxlength = this.masked.length
+        } else if (this.maxlength) {
+          data.attrs.maxlength = this.maxlength
+        }
+      } else if (this.maxlength) {
+        data.attrs.maxlength = this.maxlength
       }
 
       const children = [this.$createElement(tag, data)]
@@ -264,7 +276,7 @@ export default {
       this.lazySelection = 0
 
       for (const char of input.value.substr(0, this.selection)) {
-        isMaskDelimiter(char) || this.lazySelection++
+        this.isMaskDelimiter(char) || this.lazySelection++
       }
     }
   },
