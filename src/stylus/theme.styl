@@ -12,13 +12,15 @@ theme($component, $name)
   dark($component, $name)
 
 light($component, $name)
-  .application--light .{$name}
-    $component($material-light)
-  .application .theme--light.{$name}
+  .application--light .{$name},
+  .application .theme--light .{$name},
+  .application.application--light .theme--light.{$name},
+  .application.application--dark .theme--light.{$name}
     $component($material-light)
 
 dark($component, $name)
-  .application--dark .{$name}
-    $component($material-dark)
-  .application .theme--dark.{$name}
+  .application--dark .{$name},
+  .application .theme--dark .{$name},
+  .application.application--light .theme--dark.{$name},
+  .application.application--dark .theme--dark.{$name}
     $component($material-dark)
