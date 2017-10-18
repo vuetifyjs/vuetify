@@ -39,7 +39,7 @@ export default {
         this.$createElement('button', {
           staticClass: 'btn',
           'class': (isActive || isCurrent)
-            ? this.addBackgroundColorClassChecks(classes, 'contentColor')
+            ? this.addBackgroundColorClassChecks(classes)
             : classes,
           attrs: {
             type: 'button'

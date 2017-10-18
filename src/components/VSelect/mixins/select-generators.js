@@ -259,7 +259,7 @@ export default {
       }
 
       if (this.color && this.addTextColorClassChecks) {
-        data.props.activeClass = Object.keys(this.addTextColorClassChecks({})).join(' ')
+        data.props.activeClass = Object.keys(this.addTextColorClassChecks()).join(' ')
       }
 
       if (this.$scopedSlots.item) {

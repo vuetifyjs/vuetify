@@ -6,6 +6,7 @@ export default {
 
   data () {
     return {
+      defaultColor: 'accent',
       isSaving: false
     }
   },
@@ -23,9 +24,6 @@ export default {
   },
 
   computed: {
-    contentColor () {
-      return this.color || 'accent'
-    },
     titleColor () {
       // If no headerColor/color is set then the default
       // title color will be taken from styles

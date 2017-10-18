@@ -20,12 +20,15 @@ export default {
     icon: String
   },
 
+  data: () => ({
+    defaultColor: 'error'
+  }),
+
   computed: {
     classes () {
-      return {
-        'alert--dismissible': this.dismissible,
-        [this.color || 'error']: true
-      }
+      return this.addBackgroundColorClassChecks({
+        'alert--dismissible': this.dismissible
+      })
     }
   },
 

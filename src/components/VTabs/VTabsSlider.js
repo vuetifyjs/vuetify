@@ -8,7 +8,7 @@ export default {
   render (h) {
     return h('li', {
       staticClass: 'tabs__slider',
-      class: this.addBackgroundColorClassChecks({})
+      class: this.addBackgroundColorClassChecks()
     })
   }
 }

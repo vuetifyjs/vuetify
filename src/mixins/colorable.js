@@ -16,19 +16,23 @@ export default {
   },
 
   methods: {
-    addBackgroundColorClassChecks (classes, prop = 'computedColor') {
-      if (this[prop]) {
+    addBackgroundColorClassChecks (classes = {}, prop = 'computedColor') {
+      if (prop && this[prop]) {
         classes[this[prop]] = true
       }
       return classes
     },
-    addTextColorClassChecks (classes, prop = 'computedColor') {
-      if (this[prop]) {
-        const parts = this[prop] ? this[prop].trim().split(' ') : ['']
+    addTextColorClassChecks (classes = {}, prop = 'computedColor') {
+      if (prop && this[prop]) {
+        const parts = this[prop].trim().split(' ')
+
         let color = parts[0] + '--text'
+
         if (parts.length > 1) color += ' text--' + parts[1]
+
         classes[color] = !!this[prop]
       }
+
       return classes
     }
   }
