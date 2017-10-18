@@ -3,9 +3,15 @@ export default {
     color: String
   },
 
+  data () {
+    return {
+      defaultColor: null
+    }
+  },
+
   computed: {
     computedColor () {
-      return this.color || `accent--${this.dark ? 'dark' : 'light'}`
+      return this.color || this.defaultColor
     }
   },
 
@@ -23,23 +29,23 @@ export default {
 
       return `${color}--${this.dark ? 'dark' : 'light'}`
     },
-    addBackgroundColorClassChecks (classes, prop = 'color') {
-      if (this[prop]) {
+    addBackgroundColorClassChecks (classes = {}, prop = 'computedColor') {
+      if (prop && this[prop]) {
         classes[this._genAppendedClass(this[prop])] = true
       }
 
       return classes
     },
-    addTextColorClassChecks (classes, prop = 'color') {
-      const parts = this[prop]
-        ? this[prop].trim().split(' ')
-        : [this.defaultColor]
+    addTextColorClassChecks (classes = {}, prop = 'computedColor') {
+      if (prop && this[prop]) {
+        const parts = this[prop].trim().split(' ')
 
-      let color = `${this._genAppendedClass(parts[0])}--text`
+        let color = `${this._genAppendedClass(parts[0])}--text`
 
-      if (parts.length > 1) color += ' text--' + parts[1]
+        if (parts.length > 1) color += ' text--' + parts[1]
 
-      classes[color] = !!this[prop] || this.defaultColor
+        classes[color] = !!this[prop]
+      }
 
       return classes
     }

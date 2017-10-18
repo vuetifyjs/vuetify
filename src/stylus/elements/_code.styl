@@ -1,20 +1,19 @@
-code
-  background: $grey.base
-  color: #bd4147
+code, kbd
   display: inline-block
-  background-color: $grey.lighten-4
   border-radius: 3px
   white-space: pre-wrap
   font-size: 85%
-  font-weight: 100
   font-weight: 900
   
   &:after,
   &:before
     content: "\00a0"
     letter-spacing: -1px
-    
+
+code
+  background-color: $grey.lighten-4
+  color: #bd4147
+
 kbd
-  @extend code
   background: $grey.darken-3
   color: #fff

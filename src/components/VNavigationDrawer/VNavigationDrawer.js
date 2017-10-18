@@ -73,12 +73,12 @@ export default {
         'navigation-drawer': true,
         'navigation-drawer--absolute': this.absolute,
         'navigation-drawer--clipped': this.clipped,
-        'navigation-drawer--close': !this.isActive,
+        'navigation-drawer--close': !this.isBooted || !this.isActive,
         'navigation-drawer--floating': this.floating,
         'navigation-drawer--is-booted': this.isBooted,
         'navigation-drawer--is-mobile': this.isMobile,
         'navigation-drawer--mini-variant': this.miniVariant,
-        'navigation-drawer--open': this.isActive,
+        'navigation-drawer--open': this.isActive && this.isBooted,
         'navigation-drawer--permanent': this.permanent,
         'navigation-drawer--persistent': this.persistent,
         'navigation-drawer--right': this.right,
@@ -243,6 +243,7 @@ export default {
       if (!this.app) return
 
       const width = !this.isActive ||
+        !this.isBooted ||
         !this.permanent &&
         this.$vuetify.breakpoint.width < this.mobileBreakPoint
         ? 0

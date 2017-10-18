@@ -10,6 +10,8 @@ export default {
   mixins: [Applicationable, Colorable, Themeable],
 
   props: {
+    absolute: Boolean,
+    fixed: Boolean,
     lightsOut: Boolean,
     status: Boolean,
     window: Boolean
@@ -17,32 +19,46 @@ export default {
 
   computed: {
     classes () {
-      return this.addBackgroundColorClassChecks({
-        'system-bar': true,
+      return this.addBackgroundColorClassChecks(Object.assign({
         'system-bar--lights-out': this.lightsOut,
+        'system-bar--absolute': this.absolute,
+        'system-bar--fixed': this.fixed,
         'system-bar--status': this.status,
-        'system-bar--window': this.window,
-        'theme--dark': this.dark,
-        'theme--light': this.light
-      })
+        'system-bar--window': this.window
+      }, this.themeClasses))
     },
     computedHeight () {
-      if (this.window) return 32
+      return this.window ? 32 : 24
+    }
+  },
 
-      return 24
+  watch: {
+    window () {
+      this.updateApplication()
+    },
+    fixed () {
+      this.updateApplication()
+    },
+    absolute () {
+      this.updateApplication()
     }
   },
 
   methods: {
     updateApplication () {
-      if (!this.app) return
-
-      this.$vuetify.application.bar = this.computedHeight
+      if (this.app && this.$vuetify) {
+        this.$vuetify.application.bar = (this.fixed || this.absolute) ? this.computedHeight : 0
+      }
     }
+  },
+
+  destroyed () {
+    if (this.app && this.$vuetify) this.$vuetify.application.bar = 0
   },
 
   render (h) {
     const data = {
+      staticClass: 'system-bar',
       'class': this.classes,
       style: {
         height: `${this.computedHeight}px`

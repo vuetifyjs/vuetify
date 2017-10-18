@@ -3,6 +3,12 @@ export default {
     app: Boolean
   },
 
+  watch: {
+    app () {
+      this.updateApplication()
+    }
+  },
+
   created () {
     this.updateApplication()
   }
