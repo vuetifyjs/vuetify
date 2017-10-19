@@ -191,13 +191,29 @@ export default {
       }
     },
     onKeyDown (e) {
+      if (![33, 34, 35, 36, 37, 39].includes(e.keyCode)) return
+
+      e.preventDefault()
+      const step = this.stepNumeric || 1
+      const steps = (this.max - this.min) / step
       if (e.keyCode === 37 || e.keyCode === 39) {
+        // Left/right
         this.keyPressed += 1
 
-        const direction = e.keyCode === 37 && -1 || e.keyCode === 39 && 1 || 0
-        const multiplier = e.shiftKey && 3 || e.ctrlKey && 2 || 1
+        const direction = e.keyCode === 37 ? -1 : 1
+        const multiplier = e.shiftKey ? 3 : (e.ctrlKey ? 2 : 1)
 
-        this.inputValue = this.inputValue + (direction * this.stepNumeric * multiplier)
+        this.inputValue = this.inputValue + direction * step * multiplier
+      } else if (e.keyCode === 36) {
+        // Home
+        this.inputValue = parseFloat(this.min)
+      } else if (e.keyCode === 35) {
+        // End
+        this.inputValue = parseFloat(this.max)
+      } else if (e.keyCode === 33 || e.keyCode === 34) {
+        // Page up/down
+        const direction = e.keyCode === 34 ? -1 : 1
+        this.inputValue = this.inputValue - direction * step * (steps > 100 ? steps / 10 : 10)
       }
     },
     onKeyUp (e) {
