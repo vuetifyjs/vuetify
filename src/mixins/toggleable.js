@@ -3,7 +3,7 @@ export function factory (prop = 'value', event = 'input') {
     model: { prop, event },
 
     props: {
-      [prop]: { required: false }
+      [prop]: Boolean
     },
 
     data () {
