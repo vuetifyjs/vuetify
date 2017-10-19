@@ -26,7 +26,7 @@ export default {
           closeOnClick: false,
           closeOnContentClick: !this.isMultiple,
           contentClass: this.computedContentClass,
-          disabled: this.disabled,
+          disabled: this.isDisabled,
           maxHeight: this.maxHeight,
           nudgeTop,
           offsetY,
@@ -94,9 +94,9 @@ export default {
         },
         attrs: {
           ...this.$attrs,
-          disabled: this.disabled || !this.isAutocomplete,
+          disabled: this.isDisabled || !this.isAutocomplete,
           readonly: this.readonly,
-          tabindex: this.disabled || !this.isAutocomplete ? -1 : this.tabindex
+          tabindex: this.isDisabled || !this.isAutocomplete ? -1 : this.tabindex
         },
         domProps: {
           value: this.maskText(this.lazySearch || '')
@@ -161,11 +161,11 @@ export default {
         item,
         index,
         selected: index === this.selectedIndex,
-        disabled: this.disabled || this.readonly
+        disabled: this.isDisabled || this.readonly
       })
     },
     genChipSelection (item, index) {
-      const isDisabled = this.disabled || this.readonly
+      const isDisabled = this.isDisabled || this.readonly
       const click = e => {
         if (isDisabled) return
 

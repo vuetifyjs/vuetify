@@ -11,11 +11,17 @@ export default {
   },
 
   props: {
-    value: Boolean,
-    lazyValidation: Boolean
+    disabled: Boolean,
+    lazyValidation: Boolean,
+    value: Boolean
   },
 
   watch: {
+    disabled (disabled) {
+      for (const input of this.inputs) {
+        input.formDisabled = disabled
+      }
+    },
     errorBag: {
       handler () {
         const errors = Object.values(this.errorBag).includes(true)
@@ -61,6 +67,8 @@ export default {
           this.$set(this.errorBag, child._uid, !val)
         }, { immediate: true })
       }
+
+      child.formDisabled = this.disabled
 
       if (!this.lazyValidation) return watcher(child)
 

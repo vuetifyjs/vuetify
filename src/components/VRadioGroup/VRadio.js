@@ -38,7 +38,7 @@ export default {
       return this.addTextColorClassChecks({
         'input-group': true,
         'input-group--active': this.isActive,
-        'input-group--disabled': this.disabled,
+        'input-group--disabled': this.isDisabled,
         'input-group--selection-controls': true,
         'input-group--tab-focused': this.tabFocused,
         'radio': true,
@@ -114,7 +114,7 @@ export default {
       const mandatory = this.isMandatory &&
         this.isMandatory() || false
 
-      if (!this.disabled && (!this.isActive || !mandatory)) {
+      if (!this.isDisabled && (!this.isActive || !mandatory)) {
         this.$refs.input.checked = true
         this.isActive = true
         this.$emit('change', this.value)

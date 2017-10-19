@@ -57,8 +57,8 @@ export default {
         'input-group--slider': true,
         'input-group--active': this.isActive,
         'input-group--dirty': this.inputWidth > 0,
-        'input-group--disabled': this.disabled,
-        'input-group--ticks': !this.disabled && this.step
+        'input-group--disabled': this.isDisabled,
+        'input-group--ticks': !this.isDisabled && this.step
       }
     },
     inputValue: {
@@ -158,7 +158,7 @@ export default {
 
   methods: {
     calculateScale (scale) {
-      return this.disabled ? scale - 0.015 : scale
+      return this.isDisabled ? scale - 0.015 : scale
     },
     onMouseDown (e) {
       this.keyPressed = 2

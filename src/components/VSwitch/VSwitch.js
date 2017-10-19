@@ -34,7 +34,7 @@ export default {
       return {
         'input-group--selection-controls__container': true,
         'input-group--selection-controls__container--light': this.light,
-        'input-group--selection-controls__container--disabled': this.disabled
+        'input-group--selection-controls__container--disabled': this.isDisabled
       }
     },
     toggleClasses () {

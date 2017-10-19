@@ -207,7 +207,7 @@ export default {
         style: {},
         domProps: {
           autofocus: this.autofocus,
-          disabled: this.disabled,
+          disabled: this.isDisabled,
           required: this.required,
           value: this.maskText(this.lazyValue)
         },

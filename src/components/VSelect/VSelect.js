@@ -451,12 +451,12 @@ export default {
       return {
         ...listeners,
         click: () => {
-          if (this.disabled || this.readonly) return
+          if (this.isDisabled || this.readonly) return
           this.showMenuItems()
           this.selectedIndex = -1
         },
         focus: () => {
-          if (this.disabled || this.readonly) return
+          if (this.isDisabled || this.readonly) return
 
           !this.isFocused && this.focus()
         },
@@ -606,7 +606,7 @@ export default {
   render (h) {
     const data = {
       attrs: {
-        tabindex: this.isAutocomplete || this.disabled ? -1 : this.tabindex,
+        tabindex: this.isAutocomplete || this.isDisabled ? -1 : this.tabindex,
         ...(this.isAutocomplete ? null : this.$attrs),
         role: this.isAutocomplete ? null : 'combobox'
       }
@@ -618,7 +618,7 @@ export default {
     } else {
       data.on = {
         click: () => {
-          if (this.disabled || this.readonly) return
+          if (this.isDisabled || this.readonly) return
 
           // Workaround for clicking select
           // when using autocomplete
