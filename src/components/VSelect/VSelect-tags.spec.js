@@ -208,30 +208,24 @@ test('VSelect - tags', () => {
       attachToDocument: true,
       propsData: {
         tags: true,
-        value: [],
-        items: []
+        value: ['foo', 'bar']
       }
     })
 
     const input = wrapper.find('input')[0]
+    
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
 
     wrapper.vm.focus()
     await wrapper.vm.$nextTick()
 
-    input.element.value = 'bar'
+    input.element.value = 'foo'
     input.trigger('input')
     input.trigger('keydown.tab')
     await wrapper.vm.$nextTick()
 
-    const change = jest.fn()
-    wrapper.vm.$on('change', change)
-
-    input.element.value = 'bar'
-    input.trigger('input')
-    input.trigger('keydown.tab')
-    await wrapper.vm.$nextTick()
-
-    expect(change).toBeCalledWith(['bar'])
+    expect(change).toBeCalledWith(['bar', 'foo'])
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
@@ -239,9 +233,7 @@ test('VSelect - tags', () => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,
       propsData: {
-        tags: true,
-        value: [],
-        items: []
+        tags: true
       }
     })
 
