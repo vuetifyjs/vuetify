@@ -254,6 +254,9 @@ export default {
     },
     isActive (val) {
       if (!val) {
+        if (this.tags && this.searchValue) {
+          this.addTag(this.searchValue)
+        }
         this.searchValue = null
         this.menuIsActive = false
         this.isFocused = false

@@ -113,9 +113,9 @@ export default {
     addTag (content) {
       if (this.selectedItems.includes(content)) {
         this.$delete(this.selectedItems, this.selectedItems.indexOf(content))
-      } else {
-        this.selectedItems.push(content)
       }
+      this.selectedItems.push(content)
+
       this.$nextTick(() => {
         this.searchValue = null
         this.$emit('change', this.selectedItems)
