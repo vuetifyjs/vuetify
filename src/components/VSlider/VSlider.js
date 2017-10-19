@@ -69,13 +69,13 @@ export default {
         return this.value
       },
       set (val) {
-        const { min, max, stepNumeric } = this
+        const { min, max } = this
         val = Math.min(Math.max(val, min), max)
 
         // Round value to ensure the
         // entire slider range can
         // be selected with step
-        const value = stepNumeric ? (Math.round(val / stepNumeric) * stepNumeric) : val
+        const value = this.roundValue(val)
         this.lazyValue = value
 
         if (value !== this.value) {
@@ -125,9 +125,7 @@ export default {
       return Math.ceil((this.max - this.min) / this.stepNumeric)
     },
     inputWidth () {
-      const val = this.stepNumeric ? (Math.round(this.inputValue / this.stepNumeric) * this.stepNumeric) : this.inputValue
-
-      return (val - this.min) / (this.max - this.min) * 100
+      return (this.roundValue(this.inputValue) - this.min) / (this.max - this.min) * 100
     }
   },
 
@@ -238,21 +236,21 @@ export default {
           ]
         }, [
           h('div', { 'class': ['slider__thumb--label', this.thumbColor || this.color] }, [
-            h('span', {}, this.formatThumbValue(this.inputValue))
+            h('span', {}, this.inputValue)
           ])
         ])
       ])
     },
-    formatThumbValue () {
+    roundValue (value) {
       if (!this.stepNumeric) {
-        return this.inputValue
+        return value
       }
 
       // Format input value using the same number
       // of decimals places as in the step prop
       const trimmedStep = this.step.toString().trim()
       const decimals = trimmedStep.indexOf('.') > -1 ? (trimmedStep.length - trimmedStep.indexOf('.') - 1) : 0
-      return this.inputValue.toFixed(decimals)
+      return 1 * (Math.round(value / this.stepNumeric) * this.stepNumeric).toFixed(decimals)
     },
     genThumbContainer (h) {
       const children = []
