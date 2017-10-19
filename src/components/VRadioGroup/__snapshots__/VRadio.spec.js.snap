@@ -4,7 +4,7 @@ exports[`VRadio.vue should not render aria-label attribute with no label value o
 
 <div role="radio"
      aria-checked="false"
-     class="input-group input-group--selection-controls radio"
+     class="input-group input-group--selection-controls radio accent--text"
 >
   <label>
   </label>
@@ -14,7 +14,9 @@ exports[`VRadio.vue should not render aria-label attribute with no label value o
     >
       radio_button_unchecked
     </i>
-    <div class="input-group--selection-controls__ripple">
+    <div class="input-group--selection-controls__ripple"
+         data-ripple="true"
+    >
     </div>
     <input name="name"
            type="radio"
@@ -30,7 +32,7 @@ exports[`VRadio.vue should render aria-label attribute with label value on input
 <div role="radio"
      aria-checked="false"
      aria-label="Test"
-     class="input-group input-group--selection-controls radio"
+     class="input-group input-group--selection-controls radio accent--text"
 >
   <label>
     Test
@@ -41,7 +43,9 @@ exports[`VRadio.vue should render aria-label attribute with label value on input
     >
       radio_button_unchecked
     </i>
-    <div class="input-group--selection-controls__ripple">
+    <div class="input-group--selection-controls__ripple"
+         data-ripple="true"
+    >
     </div>
     <input name="name"
            type="radio"
@@ -56,7 +60,7 @@ exports[`VRadio.vue should render proper input name 1`] = `
 
 <div role="radio"
      aria-checked="false"
-     class="input-group input-group--selection-controls radio"
+     class="input-group input-group--selection-controls radio accent--text"
 >
   <label>
   </label>
@@ -66,7 +70,9 @@ exports[`VRadio.vue should render proper input name 1`] = `
     >
       radio_button_unchecked
     </i>
-    <div class="input-group--selection-controls__ripple">
+    <div class="input-group--selection-controls__ripple"
+         data-ripple="true"
+    >
     </div>
     <input name="name"
            type="radio"
@@ -81,7 +87,7 @@ exports[`VRadio.vue should render role and aria-checked attributes on input grou
 
 <div role="radio"
      aria-checked="true"
-     class="input-group input-group--active input-group--selection-controls radio"
+     class="input-group input-group--active input-group--selection-controls radio accent--text"
 >
   <label>
   </label>
@@ -91,7 +97,9 @@ exports[`VRadio.vue should render role and aria-checked attributes on input grou
     >
       radio_button_unchecked
     </i>
-    <div class="input-group--selection-controls__ripple">
+    <div class="input-group--selection-controls__ripple"
+         data-ripple="true"
+    >
     </div>
     <input name="name"
            type="radio"

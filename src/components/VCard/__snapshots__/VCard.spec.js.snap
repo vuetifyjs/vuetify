@@ -4,6 +4,7 @@ exports[`VCard.vue should render a card with custom height 1`] = `
 
 <div class="card"
      style="height: 400px;"
+     data-ripple="false"
 >
 </div>
 
@@ -13,6 +14,7 @@ exports[`VCard.vue should render a flat card 1`] = `
 
 <div class="card card--flat"
      style="height: auto;"
+     data-ripple="false"
 >
 </div>
 
@@ -22,6 +24,7 @@ exports[`VCard.vue should render a raised card 1`] = `
 
 <div class="card card--raised"
      style="height: auto;"
+     data-ripple="false"
 >
 </div>
 
@@ -31,6 +34,7 @@ exports[`VCard.vue should render a tile card 1`] = `
 
 <div class="card card--tile"
      style="height: auto;"
+     data-ripple="false"
 >
 </div>
 
@@ -40,6 +44,7 @@ exports[`VCard.vue should render a tile card 2`] = `
 
 <div class="card card--tile"
      style="height: auto;"
+     data-ripple="false"
 >
 </div>
 
@@ -49,6 +54,7 @@ exports[`VCard.vue should render component and match snapshot 1`] = `
 
 <div class="card"
      style="height: auto;"
+     data-ripple="false"
 >
 </div>
 

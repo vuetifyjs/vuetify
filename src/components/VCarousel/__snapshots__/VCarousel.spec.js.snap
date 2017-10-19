@@ -6,6 +6,7 @@ exports[`VCarousel.js should render component and match snapshot 1`] = `
   <div class="carousel__left">
     <button type="button"
             class="btn btn--icon theme--dark"
+            data-ripple="true"
     >
       <div class="btn__content">
         <i aria-hidden="true"
@@ -19,6 +20,7 @@ exports[`VCarousel.js should render component and match snapshot 1`] = `
   <div class="carousel__right">
     <button type="button"
             class="btn btn--icon theme--dark"
+            data-ripple="true"
     >
       <div class="btn__content">
         <i aria-hidden="true"
@@ -41,6 +43,7 @@ exports[`VCarousel.js should render component with custom duration between image
   <div class="carousel__left">
     <button type="button"
             class="btn btn--icon theme--dark"
+            data-ripple="true"
     >
       <div class="btn__content">
         <i aria-hidden="true"
@@ -54,6 +57,7 @@ exports[`VCarousel.js should render component with custom duration between image
   <div class="carousel__right">
     <button type="button"
             class="btn btn--icon theme--dark"
+            data-ripple="true"
     >
       <div class="btn__content">
         <i aria-hidden="true"
@@ -76,6 +80,7 @@ exports[`VCarousel.js should render component with custom icon and match snapsho
   <div class="carousel__left">
     <button type="button"
             class="btn btn--icon theme--dark"
+            data-ripple="true"
     >
       <div class="btn__content">
         <i aria-hidden="true"
@@ -89,6 +94,7 @@ exports[`VCarousel.js should render component with custom icon and match snapsho
   <div class="carousel__right">
     <button type="button"
             class="btn btn--icon theme--dark"
+            data-ripple="true"
     >
       <div class="btn__content">
         <i aria-hidden="true"
@@ -102,6 +108,7 @@ exports[`VCarousel.js should render component with custom icon and match snapsho
   <div class="carousel__controls">
     <button type="button"
             class="btn btn--icon theme--dark carousel__controls__item carousel__controls__item--active"
+            data-ripple="true"
     >
       <div class="btn__content">
         <i aria-hidden="true"
@@ -113,6 +120,7 @@ exports[`VCarousel.js should render component with custom icon and match snapsho
     </button>
     <button type="button"
             class="btn btn--icon theme--dark carousel__controls__item"
+            data-ripple="true"
     >
       <div class="btn__content">
         <i aria-hidden="true"
@@ -124,6 +132,7 @@ exports[`VCarousel.js should render component with custom icon and match snapsho
     </button>
     <button type="button"
             class="btn btn--icon theme--dark carousel__controls__item"
+            data-ripple="true"
     >
       <div class="btn__content">
         <i aria-hidden="true"
@@ -156,6 +165,7 @@ exports[`VCarousel.js should render component with custom left control icon and 
   <div class="carousel__left">
     <button type="button"
             class="btn btn--icon theme--dark"
+            data-ripple="true"
     >
       <div class="btn__content">
         <i aria-hidden="true"
@@ -169,6 +179,7 @@ exports[`VCarousel.js should render component with custom left control icon and 
   <div class="carousel__right">
     <button type="button"
             class="btn btn--icon theme--dark"
+            data-ripple="true"
     >
       <div class="btn__content">
         <i aria-hidden="true"
@@ -191,6 +202,7 @@ exports[`VCarousel.js should render component with custom right control icon and
   <div class="carousel__left">
     <button type="button"
             class="btn btn--icon theme--dark"
+            data-ripple="true"
     >
       <div class="btn__content">
         <i aria-hidden="true"
@@ -204,6 +216,7 @@ exports[`VCarousel.js should render component with custom right control icon and
   <div class="carousel__right">
     <button type="button"
             class="btn btn--icon theme--dark"
+            data-ripple="true"
     >
       <div class="btn__content">
         <i aria-hidden="true"
@@ -226,6 +239,7 @@ exports[`VCarousel.js should render component with image cycling off and match s
   <div class="carousel__left">
     <button type="button"
             class="btn btn--icon theme--dark"
+            data-ripple="true"
     >
       <div class="btn__content">
         <i aria-hidden="true"
@@ -239,6 +253,7 @@ exports[`VCarousel.js should render component with image cycling off and match s
   <div class="carousel__right">
     <button type="button"
             class="btn btn--icon theme--dark"
+            data-ripple="true"
     >
       <div class="btn__content">
         <i aria-hidden="true"
@@ -261,6 +276,7 @@ exports[`VCarousel.js should render component with selected active item 1`] = `
   <div class="carousel__left">
     <button type="button"
             class="btn btn--icon theme--dark"
+            data-ripple="true"
     >
       <div class="btn__content">
         <i aria-hidden="true"
@@ -274,6 +290,7 @@ exports[`VCarousel.js should render component with selected active item 1`] = `
   <div class="carousel__right">
     <button type="button"
             class="btn btn--icon theme--dark"
+            data-ripple="true"
     >
       <div class="btn__content">
         <i aria-hidden="true"
@@ -287,6 +304,7 @@ exports[`VCarousel.js should render component with selected active item 1`] = `
   <div class="carousel__controls">
     <button type="button"
             class="btn btn--icon theme--dark carousel__controls__item"
+            data-ripple="true"
     >
       <div class="btn__content">
         <i aria-hidden="true"
@@ -298,6 +316,7 @@ exports[`VCarousel.js should render component with selected active item 1`] = `
     </button>
     <button type="button"
             class="btn btn--icon theme--dark carousel__controls__item carousel__controls__item--active"
+            data-ripple="true"
     >
       <div class="btn__content">
         <i aria-hidden="true"
@@ -309,6 +328,7 @@ exports[`VCarousel.js should render component with selected active item 1`] = `
     </button>
     <button type="button"
             class="btn btn--icon theme--dark carousel__controls__item"
+            data-ripple="true"
     >
       <div class="btn__content">
         <i aria-hidden="true"
@@ -341,6 +361,7 @@ exports[`VCarousel.js should render component without delimiters 1`] = `
   <div class="carousel__left">
     <button type="button"
             class="btn btn--icon theme--dark"
+            data-ripple="true"
     >
       <div class="btn__content">
         <i aria-hidden="true"
@@ -354,6 +375,7 @@ exports[`VCarousel.js should render component without delimiters 1`] = `
   <div class="carousel__right">
     <button type="button"
             class="btn btn--icon theme--dark"
+            data-ripple="true"
     >
       <div class="btn__content">
         <i aria-hidden="true"
@@ -386,6 +408,7 @@ exports[`VCarousel.js should render component without left control icon and matc
   <div class="carousel__right">
     <button type="button"
             class="btn btn--icon theme--dark"
+            data-ripple="true"
     >
       <div class="btn__content">
         <i aria-hidden="true"
@@ -408,6 +431,7 @@ exports[`VCarousel.js should render component without right control icon and mat
   <div class="carousel__left">
     <button type="button"
             class="btn btn--icon theme--dark"
+            data-ripple="true"
     >
       <div class="btn__content">
         <i aria-hidden="true"

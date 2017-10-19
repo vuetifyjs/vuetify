@@ -120,8 +120,7 @@ export default {
       )}px`
     },
     calculatedTop () {
-      let top = this.calcTop
-      if (this.auto) top = this.calcTopAuto
+      const top = this.auto ? this.calcTopAuto : this.calcTop
 
       return `${this.calcYOverflow(top())}px`
     },

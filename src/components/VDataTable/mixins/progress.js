@@ -8,9 +8,9 @@ export default {
         }
       }, [this.genProgress()])
 
-      return this.$createElement('thead', {
+      return this.genTR([col], {
         staticClass: 'datatable__progress'
-      }, [this.genTR([col])])
+      })
     }
   }
 }

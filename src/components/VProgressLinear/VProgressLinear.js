@@ -98,7 +98,7 @@ export default {
       return h('div', {
         ref: 'front',
         staticClass: `progress-linear__bar__determinate`,
-        class: this.addBackgroundColorClassChecks({}),
+        class: this.addBackgroundColorClassChecks(),
         style: {
           width: `${this.effectiveWidth}%`
         }

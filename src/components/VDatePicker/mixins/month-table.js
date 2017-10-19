@@ -8,43 +8,39 @@ export default {
       if (e.deltaY < 0) year++
       else year--
 
-      this.tableDate = this.normalizeDate(year)
+      this.tableDate = `${year}`
     },
     monthClick (month) {
-      this.inputDate = this.normalizeDate(this.tableYear, month, this.day)
+      // Updates inputDate setting 'YYYY-MM' or 'YYYY-MM-DD' format, depending on the picker type
       if (this.type === 'date') {
+        const date = this.sanitizeDateString(`${this.tableYear}-${month + 1}-${this.day}`, 'date')
+        if (this.isAllowed(date)) this.inputDate = date
+        this.updateTableMonth(month)
         this.activePicker = 'DATE'
       } else {
+        this.inputDate = this.sanitizeDateString(`${this.tableYear}-${month + 1}`, 'month')
         this.$nextTick(() => (this.autosave && this.save()))
       }
     },
     monthGenTD (month) {
-      const date = this.normalizeDate(this.tableYear, month)
-      let monthName
-
-      if (typeof this.monthFormat === 'function') {
-        monthName = this.monthFormat(date)
-      } else if (this.supportsLocaleFormat) {
-        monthName = date.toLocaleDateString(this.locale, Object.assign(this.monthFormat, {
-          timeZone: this.timeZone
-        }))
-      } else {
-        monthName = date.getMonth() + 1
-        if (monthName < 10) {
-          monthName = `0${monthName}`
-        }
-      }
+      const pad = n => (n * 1 < 10) ? `0${n * 1}` : `${n}`
+      const date = `${this.tableYear}-${pad(month + 1)}`
+      const monthName = this.monthFormat(date, this.locale)
+      const isActive = this.monthIsActive(month)
+      const isCurrent = this.monthIsCurrent(month)
+      const classes = Object.assign({
+        'btn--flat': !isActive,
+        'btn--active': isActive,
+        'btn--outline': isCurrent && !isActive,
+        'btn--disabled': this.type === 'month' && !this.isAllowed(date)
+      }, this.themeClasses)
 
       return this.$createElement('td', [
         this.$createElement('button', {
-          'class': {
-            'btn btn--date-picker': true,
-            'btn--raised': this.monthIsActive(month),
-            'btn--flat': true,
-            'btn--active': this.monthIsActive(month),
-            'btn--outline': this.monthIsCurrent(month) && !this.monthIsActive(month),
-            'btn--disabled': this.type === 'month' && !this.isAllowed(date)
-          },
+          staticClass: 'btn',
+          'class': (isActive || isCurrent)
+            ? this.addBackgroundColorClassChecks(classes)
+            : classes,
           attrs: {
             type: 'button'
           },
@@ -72,7 +68,7 @@ export default {
     },
     monthIsActive (i) {
       return this.tableYear === this.year &&
-        this.month === i
+        (this.type === 'month' ? this.month : this.tableMonth) === i
     },
     monthIsCurrent (i) {
       return this.currentYear === this.tableYear &&

@@ -27,19 +27,21 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
       >
         <div class="card"
              style="height: auto;"
+             data-ripple="false"
         >
           <ul data-uid="28"
               class="list"
           >
             <li>
               <a href="javascript:;"
-                 class="list__tile list__tile--link list__tile--active"
+                 class="list__tile list__tile--link primary--text"
+                 data-ripple="true"
               >
                 <div class="list__tile__action list__tile__action--select-multi">
                   <div tabindex="0"
                        role="checkbox"
                        aria-checked="true"
-                       class="input-group input-group--dirty checkbox input-group--selection-controls input-group--active"
+                       class="input-group input-group--dirty checkbox input-group--selection-controls input-group--active primary--text"
                   >
                     <div class="input-group__input">
                       <i aria-hidden="true"
@@ -53,7 +55,9 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
                       >
                         check_box
                       </i>
-                      <div class="input-group--selection-controls__ripple">
+                      <div class="input-group--selection-controls__ripple"
+                           data-ripple="true"
+                      >
                       </div>
                     </div>
                     <div class="input-group__details">
@@ -72,12 +76,13 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
             <li>
               <a href="javascript:;"
                  class="list__tile list__tile--link"
+                 data-ripple="true"
               >
                 <div class="list__tile__action list__tile__action--select-multi">
                   <div tabindex="0"
                        role="checkbox"
                        aria-checked="false"
-                       class="input-group checkbox input-group--selection-controls"
+                       class="input-group checkbox input-group--selection-controls primary--text"
                   >
                     <div class="input-group__input">
                       <i aria-hidden="true"
@@ -85,7 +90,9 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
                       >
                         check_box_outline_blank
                       </i>
-                      <div class="input-group--selection-controls__ripple">
+                      <div class="input-group--selection-controls__ripple"
+                           data-ripple="true"
+                      >
                       </div>
                     </div>
                     <div class="input-group__details">
@@ -143,6 +150,7 @@ exports[`VSelect should be clearable with prop, dirty and multi select 2`] = `
       >
         <div class="card"
              style="height: auto;"
+             data-ripple="false"
         >
           <ul data-uid="28"
               class="list"
@@ -150,12 +158,13 @@ exports[`VSelect should be clearable with prop, dirty and multi select 2`] = `
             <li>
               <a href="javascript:;"
                  class="list__tile list__tile--link"
+                 data-ripple="true"
               >
                 <div class="list__tile__action list__tile__action--select-multi">
                   <div tabindex="0"
                        role="checkbox"
                        aria-checked="false"
-                       class="input-group checkbox input-group--selection-controls"
+                       class="input-group checkbox input-group--selection-controls primary--text"
                   >
                     <div class="input-group__input">
                       <i aria-hidden="true"
@@ -170,7 +179,9 @@ exports[`VSelect should be clearable with prop, dirty and multi select 2`] = `
                       >
                         check_box_outline_blank
                       </i>
-                      <div class="input-group--selection-controls__ripple">
+                      <div class="input-group--selection-controls__ripple"
+                           data-ripple="true"
+                      >
                       </div>
                     </div>
                     <div class="input-group__details">
@@ -189,12 +200,13 @@ exports[`VSelect should be clearable with prop, dirty and multi select 2`] = `
             <li>
               <a href="javascript:;"
                  class="list__tile list__tile--link"
+                 data-ripple="true"
               >
                 <div class="list__tile__action list__tile__action--select-multi">
                   <div tabindex="0"
                        role="checkbox"
                        aria-checked="false"
-                       class="input-group checkbox input-group--selection-controls"
+                       class="input-group checkbox input-group--selection-controls primary--text"
                   >
                     <div class="input-group__input">
                       <i aria-hidden="true"
@@ -202,7 +214,9 @@ exports[`VSelect should be clearable with prop, dirty and multi select 2`] = `
                       >
                         check_box_outline_blank
                       </i>
-                      <div class="input-group--selection-controls__ripple">
+                      <div class="input-group--selection-controls__ripple"
+                           data-ripple="true"
+                      >
                       </div>
                     </div>
                     <div class="input-group__details">
@@ -263,13 +277,15 @@ exports[`VSelect should be clearable with prop, dirty and single select 1`] = `
       >
         <div class="card"
              style="height: auto;"
+             data-ripple="false"
         >
           <ul data-uid="20"
               class="list"
           >
             <li>
               <a href="javascript:;"
-                 class="list__tile list__tile--link list__tile--active"
+                 class="list__tile list__tile--link primary--text"
+                 data-ripple="true"
               >
                 <div class="list__tile__content">
                   <div class="list__tile__title">
@@ -281,6 +297,7 @@ exports[`VSelect should be clearable with prop, dirty and single select 1`] = `
             <li>
               <a href="javascript:;"
                  class="list__tile list__tile--link"
+                 data-ripple="true"
               >
                 <div class="list__tile__content">
                   <div class="list__tile__title">
@@ -331,6 +348,7 @@ exports[`VSelect should be clearable with prop, dirty and single select 2`] = `
       >
         <div class="card"
              style="height: auto;"
+             data-ripple="false"
         >
           <ul data-uid="20"
               class="list"
@@ -338,6 +356,7 @@ exports[`VSelect should be clearable with prop, dirty and single select 2`] = `
             <li>
               <a href="javascript:;"
                  class="list__tile list__tile--link"
+                 data-ripple="true"
               >
                 <div class="list__tile__content">
                   <div class="list__tile__title">
@@ -349,6 +368,7 @@ exports[`VSelect should be clearable with prop, dirty and single select 2`] = `
             <li>
               <a href="javascript:;"
                  class="list__tile list__tile--link"
+                 data-ripple="true"
               >
                 <div class="list__tile__content">
                   <div class="list__tile__title">

@@ -98,6 +98,7 @@ export const maskText = (text, masked, dontFillMaskBlanks) => {
   let textIndex = 0
   let maskIndex = 0
   let newText = ''
+
   while (maskIndex < masked.length) {
     const mask = masked[maskIndex]
 
@@ -134,5 +135,5 @@ export const maskText = (text, masked, dontFillMaskBlanks) => {
  * @return {String}
  */
 export const unmaskText = (text) => {
-  return text.replace(new RegExp(defaultDelimiters, 'g'), '')
+  return text ? String(text).replace(new RegExp(defaultDelimiters, 'g'), '') : text
 }

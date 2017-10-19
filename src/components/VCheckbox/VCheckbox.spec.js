@@ -163,4 +163,21 @@ test('VCheckbox.js', () => {
     wrapper.trigger('keydown.space')
     expect(change).toBeCalled()
   })
+
+  it('should set ripple data attribute based on disabled state', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        inputValue: false,
+        disabled: false
+      }
+    })
+
+    const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
+
+    expect(ripple.getAttribute('data-ripple')).toBe('true')
+
+    wrapper.setProps({ disabled: true })
+
+    expect(ripple.getAttribute('data-ripple')).toBe('false')
+  })
 })

@@ -12,6 +12,7 @@ exports[`VSelect should render buttons correctly when using items array with seg
     >
       <button type="button"
               class="btn btn--flat"
+              data-ripple="true"
       >
         <div class="btn__content">
           Hello
@@ -31,13 +32,15 @@ exports[`VSelect should render buttons correctly when using items array with seg
       >
         <div class="card"
              style="height: auto;"
+             data-ripple="false"
         >
           <ul data-uid="38"
               class="list"
           >
             <li>
               <a href="javascript:;"
-                 class="list__tile list__tile--link list__tile--active"
+                 class="list__tile list__tile--link primary--text"
+                 data-ripple="true"
               >
                 <div class="list__tile__content">
                   <div class="list__tile__title">
@@ -91,13 +94,15 @@ exports[`VSelect should render buttons correctly when using slot with segmented 
       >
         <div class="card"
              style="height: auto;"
+             data-ripple="false"
         >
           <ul data-uid="48"
               class="list"
           >
             <li>
               <a href="javascript:;"
-                 class="list__tile list__tile--link list__tile--active"
+                 class="list__tile list__tile--link primary--text"
+                 data-ripple="true"
               >
                 <div class="list__tile__content">
                   <div class="list__tile__title">

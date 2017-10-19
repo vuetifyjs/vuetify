@@ -266,7 +266,7 @@ export default {
     },
     isBooted () {
       this.$nextTick(() => {
-        if (this.content instanceof EventTarget) {
+        if (this.content && this.content.addEventListener) {
           this.content.addEventListener('scroll', this.onScroll, false)
         }
       })
@@ -355,9 +355,7 @@ export default {
     // to avoid a unnecessary label transition
     this.genSelectedItems()
 
-    this.$vuetify.load(() => {
-      this.content = this.$refs.menu.$refs.content
-    })
+    this.content = this.$refs.menu.$refs.content
   },
 
   beforeDestroy () {
@@ -420,8 +418,8 @@ export default {
       return true
     },
     filterDuplicates (arr) {
-      const val = this.returnObject ? this.getValue : el => el
-      return arr.filter((el, i, self) => i === self.findIndex(e => val(e) === val(el)))
+      const values = arr.map(this.getValue)
+      return arr.filter((el, i) => i === values.indexOf(values[i]))
     },
     focus () {
       this.isActive = true

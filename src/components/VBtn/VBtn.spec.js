@@ -1,6 +1,6 @@
 import { mount } from 'avoriaz'
-import Vue from 'vue/dist/vue.common'
-import VBtn from 'src/components/VBtn'
+import Vue from 'vue'
+import VBtn from '~components/VBtn'
 
 const stub = {
   name: 'router-link',
