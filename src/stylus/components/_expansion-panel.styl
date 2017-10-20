@@ -28,6 +28,12 @@ theme(expansion-panel, "expansion-panel")
   width: 100%
   elevation(2)
 
+  &--raised
+    elevation(3)
+
+  &--flat
+    elevation(0)
+
   &__container
     flex: 1 0 100%
     outline: none
@@ -38,7 +44,7 @@ theme(expansion-panel, "expansion-panel")
 
     .header__icon
       margin-left: auto
-      
+
       .icon
         // Edge rendering issue TODO: revisit later
         transition: none
@@ -75,7 +81,7 @@ theme(expansion-panel, "expansion-panel")
   &--popout, &--inset
     .expansion-panel__container
       max-width: 95%
-  
+
   &--popout
     .expansion-panel__container--active
       max-width: 100%
