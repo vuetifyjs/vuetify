@@ -2,7 +2,7 @@
 @import '../theme'
 
 breadcrumbs($material)
-  li:not(:last-child):after,
+  li.breadcrumbs__divider,
   li:last-child .breadcrumbs__item,
   li .breadcrumbs__item--disabled
     color: $material.text.disabled
@@ -10,36 +10,40 @@ breadcrumbs($material)
 theme(breadcrumbs, "breadcrumbs")
 
 .breadcrumbs
+  align-items: center
   display: flex
-  justify-content: center
   flex-wrap: wrap
   flex: $breadcrumbs-flex
-  margin: $breadcrumbs-margin
   list-style-type: none
+  margin: $breadcrumbs-margin
+  padding: $breadcrumbs-padding
 
   li
-    &:not(:last-child):after
-      content: attr(data-divider)
-      vertical-align: middle
+    align-items: center
+    display: inline-flex
+    font-size: $breadcrumbs-item-font-size
+
+    .icon
+      font-size: $breadcrumbs-item-large-font-size
 
     &:last-child a
-      pointer-events: none
       cursor: default
+      pointer-events: none
+      
+    &:nth-child(even)
+      padding: $breadcrumbs-even-child-padding
 
-  &--with-icons
+  &--large
     li
-      &:not(:last-child):after
-        font-family: 'Material Icons'
-        font-feature-settings: 'liga'
+      font-size: $breadcrumbs-item-large-font-size
+      
+      .icon
+        font-size: $breadcrumbs-item-large-font-size
 
   &__item
     align-items: center
     display: inline-flex
-    font-size: $breadcrumbs-item-font-size
-    padding: $breadcrumbs-padding
-    height: $breadcrumbs-height
     text-decoration: none
-    line-height: $breadcrumbs-height
     transition: $primary-transition
 
     &--disabled

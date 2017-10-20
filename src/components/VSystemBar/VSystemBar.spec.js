@@ -13,4 +13,24 @@ test('VSystemBar.vue', () => {
     expect(wrapper.element.classList).toContain('blue')
     expect(wrapper.element.classList).toContain('lighten-1')
   })
+
+  it('should render system bar with fixed prop', () => {
+    const wrapper = mount(VSystemBar, {
+      propsData: {
+        fixed: true
+      }
+    })
+
+    expect(wrapper.element.classList).toContain('system-bar--fixed')
+  })
+
+  it('should render system bar with absolute prop', () => {
+    const wrapper = mount(VSystemBar, {
+      propsData: {
+        absolute: true
+      }
+    })
+
+    expect(wrapper.element.classList).toContain('system-bar--absolute')
+  })
 })

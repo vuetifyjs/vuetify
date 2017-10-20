@@ -227,7 +227,7 @@ export default {
 
       let titleText = createNativeLocaleFormatter(defaultTitleDateFormat, this.type)(date, this.locale)
       if (this.landscape) {
-        if (titleText.indexOf(',') > -1) titleText = titleText.replace(',', ',<br>')
+        if (titleText.indexOf(',') > -1) titleText = titleText.replace(', ', ',<br>')
         else if (titleText.indexOf(' ') > -1) titleText = titleText.replace(' ', '<br>')
       }
 

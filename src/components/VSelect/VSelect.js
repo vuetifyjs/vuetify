@@ -266,7 +266,7 @@ export default {
     },
     isBooted () {
       this.$nextTick(() => {
-        if (this.content instanceof EventTarget) {
+        if (this.content && this.content.addEventListener) {
           this.content.addEventListener('scroll', this.onScroll, false)
         }
       })

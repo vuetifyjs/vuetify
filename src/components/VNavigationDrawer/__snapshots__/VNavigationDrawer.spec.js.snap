@@ -156,7 +156,7 @@ exports[`VNavigationDrawer.js should render component with custom touchless and 
 
 exports[`VNavigationDrawer.js should render component with custom value and match snapshot 1`] = `
 
-<aside class="navigation-drawer navigation-drawer--open"
+<aside class="navigation-drawer navigation-drawer--close"
        style="height: 100%; margin-top: 0px; max-height: calc(100% - 100%px); width: 300px;"
 >
   <div class="navigation-drawer__border">

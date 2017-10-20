@@ -5,9 +5,9 @@ export default {
 
   mixins: [Routable],
 
-  inject: ['divider'],
-
   props: {
+    // In a breadcrumb, the currently
+    // active item should be dimmed
     activeClass: {
       type: String,
       default: 'breadcrumbs__item--disabled'
@@ -16,22 +16,17 @@ export default {
 
   computed: {
     classes () {
-      const classes = {
-        'breadcrumbs__item': true
+      return {
+        'breadcrumbs__item': true,
+        [this.activeClass]: this.disabled
       }
-
-      classes[this.activeClass] = this.disabled
-
-      return classes
     }
   },
 
   render (h) {
     const { tag, data } = this.generateRouteLink()
 
-    return h('li', {
-      attrs: { 'data-divider': this.divider }
-    }, [
+    return h('li', [
       h(tag, data, this.$slots.default)
     ])
   }

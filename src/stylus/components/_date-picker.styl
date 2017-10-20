@@ -7,31 +7,15 @@ date-picker($material)
     li
       color: $material.text.primary
 
-  .picker--date__header
-    color: $material.text.primary
-
-    &-selector-date
-      strong:not(:hover)
-        color: $material.text.primary !important
-
-    &-selector
-      .btn
-        color: $material.text.primary
-
-  .picker--date__table
-    th
-      color: $material.text.primary
-
-    .btn.btn--active
-      color: #fff !important
+  .picker--date__header-selector-date
+    strong:not(:hover)
+      color: $material.text.primary !important
 
 theme(date-picker, "picker--date")
 
-.picker--date
-  width: 100%
-
-  .btn--outline
-    background: transparent !important
+.picker--date__table
+  .btn.btn--active
+    color: #fff
 
 /** Years */
 .picker--date__years
@@ -73,10 +57,13 @@ theme(date-picker, "picker--date")
 
     > div
       position: relative
+      white-space: pre
+      overflow: hidden
+      text-overflow: ellipsis
 
   &-year, &-date
     font-weight: 500
-    transition: .3s $transition.swing
+    transition: $primary-transition
     width: 100%
 
     &:not(.active)
@@ -107,7 +94,7 @@ theme(date-picker, "picker--date")
 
       strong
         cursor: pointer
-        transition: .3s $transition.swing
+        transition: $primary-transition
         display: block
         width: 100%
 
@@ -119,14 +106,11 @@ theme(date-picker, "picker--date")
     position: relative
 
   table
-    transition: .3s $transition.swing
+    transition: $primary-transition
     top: 0
 
-    thead
-      th
-        padding: 8px 0
-
     th
+      padding: 8px 0
       font-weight: 600
       font-size: 12px
 
@@ -139,10 +123,6 @@ theme(date-picker, "picker--date")
       height: 32px
       width: 32px
 
-.picker--landscape
-  .picker--date__years
-    width: 330px
-
 .picker--month__table
   table
     width: 100%
@@ -151,8 +131,3 @@ theme(date-picker, "picker--date")
       width: 33.333333%
       height: 56px
       vertical-align: middle
-
-  // .picker--date__title-date > div
-  //   white-space: pre
-  //   overflow: hidden
-  //   text-overflow: ellipsis

@@ -28,6 +28,7 @@ export default {
 
   data () {
     return {
+      defaultColor: 'accent',
       isActive: false
     }
   },

@@ -132,6 +132,8 @@ export default {
       return left
     },
     calcTop () {
+      this.checkForWindow()
+
       const a = this.dimensions.activator
       const c = this.dimensions.content
       let top = this.top ? a.bottom - c.height : a.top

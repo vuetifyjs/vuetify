@@ -39,7 +39,7 @@ export default {
   render (h) {
     const badge = this.$slots.badge ? [h('span', {
       staticClass: 'badge__badge',
-      'class': this.addBackgroundColorClassChecks({}),
+      'class': this.addBackgroundColorClassChecks(),
       attrs: this.attrs,
       directives: [{
         name: 'show',

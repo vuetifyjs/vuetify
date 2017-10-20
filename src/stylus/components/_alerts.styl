@@ -4,7 +4,6 @@
   border-radius: $alert-border-radius
   border-width: $alert-border-width
   border-style: solid
-  border-color: $material-light.dividers !important
   color: #fff
   display: flex
   font-size: $alert-font-size
@@ -12,33 +11,39 @@
   padding: $alert-padding
   position: relative
   transition: $primary-transition
-  
+
   .alert__icon.icon,
   &__dismissible .icon
     align-self: center
     color: $alert-icon-color
     font-size: $alert-icon-font-size
-    
+
   &__icon
     margin-right: $alert-padding
-    
+
   &__dismissible
     align-self: flex-start
     margin-left: $alert-padding
     margin-right: 0
     text-decoration: none
     transition: $primary-transition
-    
+
     &:hover
       color: lighten($alert-icon-color, 10%)
-    
+
   &--no-icon
     .alert__icon
       display: none
-      
+
   > div
     flex: 1
-    
+
   @media screen and (max-width: $grid-breakpoints.sm)
     &__icon
       display: none
+
+// Double .alert is intended - it increases css specificity
+// to properly set the border color where alert has set color
+// with modifier (for example "red lighten-2")
+.alert.alert
+  border-color: $material-light.dividers !important
