@@ -59,13 +59,33 @@ export default {
       )
     },
     onTabDown (e) {
-      if (!this.menuIsActive || !this.isAutocomplete || (!this.searchValue && this.$refs.menu.listIndex === -1)) {
+      if (this.tags) {
+        const newItem = this.filteredItems.length && this.$refs.menu.listIndex >= 0
+          ? this.filteredItems[this.$refs.menu.listIndex]
+          : this.searchValue
+        if (newItem) {
+          e.preventDefault()
+          this.addTag(newItem)
+        } else {
+          this.blur()
+        }
+        return
+      }
+
+      if (!this.menuIsActive || !this.isAutocomplete || this.$refs.menu.listIndex === -1) {
         this.blur()
-      } else if (this.menuIsActive && this.searchValue && this.$refs.menu.listIndex > -1) {
+        return
+      }
+
+      if (this.menuIsActive && this.filteredItems.length && this.$refs.menu.listIndex > -1) {
         e.preventDefault()
         this.$refs.menu.tiles[this.$refs.menu.listIndex].click()
-      } else if (this.menuIsActive) {
+        return
+      }
+
+      if (this.menuIsActive) {
         this.blur()
+        return
       }
     },
     onEscDown (e) {
@@ -99,8 +119,8 @@ export default {
 
       if (!this.tags || !this.searchValue) return
 
-      // Tab, enter
-      if ([9, 13].includes(e.keyCode)) {
+      // Enter
+      if (e.keyCode === 13) {
         const newItem = this.filteredItems.length && this.$refs.menu.listIndex >= 0
           ? this.filteredItems[this.$refs.menu.listIndex]
           : this.searchValue
