@@ -195,17 +195,16 @@ export default {
         {
           name: 'resize',
           value: this.onResize
+        },
+        {
+          name: 'touch',
+          value: {
+            parent: true,
+            left: this.swipeLeft,
+            right: this.swipeRight
+          }
         }
       ]
-
-      !this.touchless && directives.push({
-        name: 'touch',
-        value: {
-          parent: true,
-          left: this.swipeLeft,
-          right: this.swipeRight
-        }
-      })
 
       return directives
     },
@@ -220,7 +219,7 @@ export default {
       this.isActive = !this.isMobile
     },
     swipeRight (e) {
-      if (this.isActive && !this.right) return
+      if (this.touchless || (this.isActive && !this.right)) return
       this.calculateTouchArea()
 
       if (Math.abs(e.touchendX - e.touchstartX) < 100) return
@@ -230,7 +229,7 @@ export default {
       else if (this.right && this.isActive) this.isActive = false
     },
     swipeLeft (e) {
-      if (this.isActive && this.right) return
+      if (this.touchless || (this.isActive && this.right)) return
       this.calculateTouchArea()
 
       if (Math.abs(e.touchendX - e.touchstartX) < 100) return
