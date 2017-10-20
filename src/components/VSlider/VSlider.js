@@ -104,21 +104,18 @@ export default {
       }
     },
     trackStyles () {
-      const scaleX = this.calculateScale(1 - (this.inputWidth / 100))
-      const offsetX = this.thumbLabel ? 0 : !this.isActive ? 8 : 12
-      const translateX = `${offsetX}px`
+      const padding = (this.thumbLabel && this.isActive) ? 0 : 8
       return {
         transition: this.keyPressed >= 2 ? 'none' : '',
-        transform: `scaleX(${scaleX}) translateX(${translateX})`
+        left: `calc(${this.inputWidth}% + ${padding}px)`,
+        width: `calc(${100 - this.inputWidth}% - ${padding}px)`
       }
     },
     trackFillStyles () {
-      const inputWidth = this.inputWidth
-      const scaleX = this.calculateScale(inputWidth / 100)
-      const translateX = inputWidth > 99 && !this.thumbLabel ? `${-8}px` : 0
+      const padding = (this.thumbLabel && this.isActive) ? 0 : 8
       return {
         transition: this.keyPressed >= 2 ? 'none' : '',
-        transform: `scaleX(${scaleX}) translateX(${translateX})`
+        width: `calc(${this.inputWidth}% - ${padding}px)`
       }
     },
     numTicks () {
@@ -153,9 +150,6 @@ export default {
   },
 
   methods: {
-    calculateScale (scale) {
-      return this.disabled ? scale - 0.015 : scale
-    },
     onMouseDown (e) {
       this.keyPressed = 2
       const options = { passive: true }
