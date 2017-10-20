@@ -76,11 +76,9 @@ export default {
   watch: {
     isActive (val) {
       if (val) {
-        this.init()
+        this.show()
       } else {
-        if (!this.fullscreen) this.removeOverlay()
-        else this.showScroll()
-
+        this.removeOverlay()
         this.unbind()
       }
     }
@@ -102,11 +100,13 @@ export default {
       return !this.persistent && getZIndex(this.$refs.content) >= this.getMaxZIndex()
     },
     init () {
+      this.isActive && this.show()
+    },
+    show () {
       !this.fullscreen && !this.hideOverlay && this.genOverlay()
       this.fullscreen && this.hideScroll()
       this.$refs.content.focus()
-
-      if (this.$listeners.keydown) this.bind()
+      this.$listeners.keydown && this.bind()
     },
     bind () {
       window.addEventListener('keydown', this.onKeydown)
