@@ -201,7 +201,11 @@ export default {
       }, `${this.getText(item)}${comma ? ', ' : ''}`)
     },
     genList () {
-      const children = this.filteredItems.map(o => {
+      const visibleItems = this.hideSelected ? this.filteredItems.filter(o => {
+        return (this.selectedItems || []).indexOf(o) === -1
+      }) : this.filteredItems
+
+      const children = visibleItems.map(o => {
         if (o.header) return this.genHeader(o)
         if (o.divider) return this.genDivider(o)
         else return this.genTile(o)
@@ -271,7 +275,7 @@ export default {
       )
     },
     genAction (item, active) {
-      if (!this.isMultiple) return null
+      if (!this.isMultiple || this.hideSelected) return null
 
       const data = {
         staticClass: 'list__tile__action--select-multi',
