@@ -14,7 +14,7 @@ export default {
     el.td.style['border-bottom'] = '1px solid rgba(0,0,0,0.12)'
 
     setTimeout(() => {
-      el.style.height = `${height}px`
+      el.dataset.height = el.style.height = `${el.scrollHeight}px`
     }, 50)
   },
   afterEnter (el) {
