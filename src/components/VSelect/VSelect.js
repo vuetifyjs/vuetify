@@ -94,6 +94,7 @@ export default {
       default: 200
     },
     editable: Boolean,
+    hideSelected: Boolean,
     items: {
       type: Array,
       default: () => []
