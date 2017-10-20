@@ -2,6 +2,7 @@ require('../../stylus/components/_sliders.styl')
 
 import { addOnceEventListener, createRange } from '../../util/helpers'
 
+import Colorable from '../../mixins/colorable'
 import Input from '../../mixins/input'
 
 import ClickOutside from '../../directives/click-outside'
@@ -9,23 +10,20 @@ import ClickOutside from '../../directives/click-outside'
 export default {
   name: 'v-slider',
 
-  mixins: [Input],
+  mixins: [Colorable, Input],
 
   directives: { ClickOutside },
 
   data () {
     return {
       app: {},
+      defaultColor: 'primary',
       isActive: false,
       keyPressed: 0
     }
   },
 
   props: {
-    color: {
-      type: String,
-      default: null
-    },
     min: {
       type: [Number, String],
       default: 0
@@ -61,6 +59,12 @@ export default {
         'input-group--ticks': !this.disabled && this.stepNumeric && this.ticks
       }
     },
+    computedTrackColor () {
+      return this.disabled ? null : (this.trackColor || null)
+    },
+    computedThumbColor () {
+      return this.disabled ? null : (this.thumbColor || this.color || this.defaultColor)
+    },
     stepNumeric () {
       return this.step > 0 ? parseFloat(this.step) : 0
     },
@@ -85,12 +89,6 @@ export default {
     },
     interval () {
       return 100 / (this.max - this.min) * this.stepNumeric
-    },
-    thumbContainerClasses () {
-      return {
-        'slider__thumb-container': true,
-        'slider__thumb-container--label': this.thumbLabel
-      }
     },
     thumbStyles () {
       return {
@@ -221,7 +219,7 @@ export default {
         props: { origin: 'bottom center' }
       }, [
         h('div', {
-          'class': 'slider__thumb--label__container',
+          staticClass: 'slider__thumb--label__container',
           directives: [
             {
               name: 'show',
@@ -229,7 +227,10 @@ export default {
             }
           ]
         }, [
-          h('div', { 'class': ['slider__thumb--label', this.thumbColor || this.color] }, [
+          h('div', {
+            staticClass: 'slider__thumb--label',
+            'class': this.addBackgroundColorClassChecks({}, 'computedThumbColor')
+          }, [
             h('span', {}, this.inputValue)
           ])
         ])
@@ -248,12 +249,18 @@ export default {
     },
     genThumbContainer (h) {
       const children = []
-      children.push(h('div', { 'class': ['slider__thumb', this.thumbColor || this.color] }))
+      children.push(h('div', {
+        staticClass: 'slider__thumb',
+        'class': this.addBackgroundColorClassChecks({}, 'computedThumbColor')
+      }))
 
       this.thumbLabel && children.push(this.genThumbLabel(h))
 
       return h('div', {
-        'class': this.thumbContainerClasses,
+        staticClass: 'slider__thumb-container',
+        'class': {
+          'slider__thumb-container--label': this.thumbLabel
+        },
         style: this.thumbStyles,
         on: {
           touchstart: this.onMouseDown,
@@ -265,7 +272,7 @@ export default {
     genSteps (h) {
       const ticks = createRange(this.numTicks + 1).map((i) => {
         const span = h('span', {
-          class: 'slider__tick',
+          staticClass: 'slider__tick',
           style: {
             left: `${i * (100 / this.numTicks)}%`
           }
@@ -275,24 +282,26 @@ export default {
       })
 
       return h('div', {
-        'class': 'slider__ticks-container',
+        staticClass: 'slider__ticks-container',
         style: this.tickContainerStyles
       }, ticks)
     },
     genTrackContainer (h) {
       const children = [
         h('div', {
-          'class': ['slider__track', this.trackColor],
+          staticClass: 'slider__track',
+          'class': this.addBackgroundColorClassChecks({}, 'computedTrackColor'),
           style: this.trackStyles
         }),
         h('div', {
-          'class': ['slider__track-fill', this.color],
+          staticClass: 'slider__track-fill',
+          'class': this.addBackgroundColorClassChecks(),
           style: this.trackFillStyles
         })
       ]
 
       return h('div', {
-        'class': 'slider__track__container',
+        staticClass: 'slider__track__container',
         ref: 'track'
       }, children)
     }
@@ -305,7 +314,9 @@ export default {
     this.step && this.ticks && children.push(this.genSteps(h))
     children.push(this.genThumbContainer(h))
 
-    const slider = h('div', { 'class': 'slider' }, children)
+    const slider = h('div', {
+      staticClass: 'slider'
+    }, children)
 
     return this.genInputGroup([slider], {
       attrs: {
