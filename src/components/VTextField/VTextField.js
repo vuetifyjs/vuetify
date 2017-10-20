@@ -20,7 +20,7 @@ export default {
       badInput: false,
       backspace: false,
       delete: false,
-      lazySelection: null
+      lazySelection: 0
     }
   },
 

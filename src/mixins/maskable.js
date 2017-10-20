@@ -71,26 +71,20 @@ export default {
     },
     // Compute which callback to use
     maskText () {
-      if (this.isStringFormatter) {
-        // Case 1 and 4
+      if (this.isStringFormatter) { // Case 1 and 4
         return text => maskText(text, this.masked, this.fillMaskBlanks)
-      } else if (this.isNumeralFormatter) {
-        // Case 2 & 3
+      } else if (this.isNumeralFormatter) { // Case 2 & 3
         this.options = Object.assign({}, this.preDefined['numeral'])
         Object.assign(this.options, this.mask)
 
         return text => this.maskNumeralText(text)
-      } else if (this.isCustomFormatter) {
-        // Case 5
-        // Pass back the custom options as an argument
-        // but without the formatter
+      } else if (this.isCustomFormatter) { // Case 5
         const customOptions = Object.assign({}, this.mask)
         const formatter = this.masked.formatter
         delete customOptions.formatter
 
         return text => formatter(text, customOptions)
-      } else {
-        // No mask
+      } else { // No mask
         return text => text
       }
     },
@@ -118,7 +112,7 @@ export default {
       }
 
       selection = 0
-      if (newValue) {
+      if (position && newValue) {
         for (const char of newValue) {
           this.isMaskDelimiter(char) || position--
           selection++
