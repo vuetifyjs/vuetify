@@ -92,36 +92,24 @@ export default {
       text = this.internalChange ? this.removeNonNumeral(text) : this.attemptNumeralCorrection(text)
       if (!text) return text // attemptNumeralCorrection() may return null or falsy
 
-      let number
-      if (this.precision) {
-        number = text.split('')
-        number.splice(-this.precision, 0, '.')
-        number = this.parseFloat(number)
-      } else {
-        number = this.parseInt(text)
-      }
-
-      return this.sign + number.toString()
+      return this.parseNumber(text)
     },
     maskNumeralText (text) {
       if (!text) return this.numeralZero()
+      text = this.sign ? String(text).substr(1) : String(text)
 
-      const blockSize = Array.isArray(this.blockSize) ? this.blockSize : [this.blockSize]
       const masked = []
-
       let i = this.blockSeparator.length - 1
-      let j = blockSize.length - 1
+      let j = this.blockSize.length - 1
       let length = 0
       let integer = !this.precision
-
-      text = this.sign ? String(text).substr(1) : String(text)
 
       // Group the digits with specified separators.
       // The first size and separator element
       // of the arrays becomes the default value.
       for (const digit of text.split('').reverse()) {
         digit !== '.' && masked.push(digit)
-        if (integer && !(++length % blockSize[j])) {
+        if (integer && !(++length % this.blockSize[j])) {
           masked.push(this.oneChar(this.blockSeparator[i], ' '))
           i > 0 && i--
           j > 0 && j--
@@ -132,10 +120,10 @@ export default {
         }
       }
 
-      masked.reverse()
-      // Remove leading block separator
+      return this.maskedText(masked.reverse())
+    },
+    maskedText (masked) {
       this.blockSeparator.includes(masked[0]) && masked.shift()
-
       return this.addPrefixSuffix(masked.join(''))
     },
     numeralZero () {
@@ -239,6 +227,14 @@ export default {
     addPrefixSuffix (text) {
       return this.numeralPrefix + this.sign + text + this.numeralSuffix
     },
+    parseNumber (text) {
+      if (!this.precision) return this.parseInt(text)
+
+      text = text.split('')
+      text.splice(-this.precision, 0, '.')
+
+      return this.sign + this.parseFloat(text.join(''))
+    },
     parseInt (text) {
       return this.removeNonNumeral(this.removeLeadingZeros(text))
     },
@@ -251,20 +247,15 @@ export default {
       return text.substr(0, decimal) + '.' + fraction
     },
     removeLeadingZeros (text) {
-      let parsed = []
-      let leadingZeros = true
+      let i = 0
 
       for (const digit of text) {
-        if (leadingZeros) {
-          if (digit === '0') continue
-          leadingZeros = false
-        }
-
-        parsed.push(digit)
+        if (digit !== '0') break
+        i++
       }
 
-      parsed = parsed.join('')
-      return parsed[0] === '.' ? '0' + parsed : parsed
+      text = text.substr(i)
+      return text[0] === '.' ? '0' + text : text
     },
     removeNonNumeral (text, preserveDecimal = false) {
       if (text == null) return ''
