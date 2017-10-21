@@ -96,7 +96,7 @@ export default {
     },
     customFilter: {
       type: Function,
-      default: (items, headers, search, filter) => {
+      default: (items, search, filter, headers) => {
         search = search.toString().toLowerCase()
         const props = headers.map(h => h.value)
 
@@ -222,7 +222,7 @@ export default {
         this.search !== null
 
       if (hasSearch) {
-        items = this.customFilter(items, this.headers, this.search, this.filter)
+        items = this.customFilter(items, this.search, this.filter, this.headers)
         this.searchLength = items.length
       }
 
