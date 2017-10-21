@@ -44,7 +44,7 @@ const handleGesture = (wrapper) => {
   }
 }
 
-function inserted (el, { value }) {
+function inserted (el, { value }, { context }) {
   const wrapper = {
     touchstartX: 0,
     touchstartY: 0,
@@ -69,23 +69,26 @@ function inserted (el, { value }) {
   // Needed to pass unit tests
   if (!target) return
 
-  target._touchstartHandler = e => touchstart(e, wrapper)
-  target._touchendHandler = e => touchend(e, wrapper)
-  target._touchmoveHandler = e => touchmove(e, wrapper)
-
-  target.addEventListener('touchstart', target._touchstartHandler, options)
-  target.addEventListener('touchend', target._touchendHandler, options)
-  target.addEventListener('touchmove', target._touchmoveHandler, options)
+  target._touchHandlers = Object.assign(Object(target._touchHandlers), {
+    [context._uid]: {
+      touchstart: e => touchstart(e, wrapper),
+      touchend: e => touchend(e, wrapper),
+      touchmove: e => touchmove(e, wrapper)
+    }
+  })
+  Object.keys(target._touchHandlers[context._uid]).forEach(eventName => {
+    target.addEventListener(eventName, target._touchHandlers[context._uid][eventName], options)
+  })
 }
 
-function unbind (el, { value }) {
+function unbind (el, { value }, { context }) {
   const target = value.parent ? el.parentNode : el
 
   if (!target) return
 
-  target.removeEventListener('touchstart', target._touchstartHandler)
-  target.removeEventListener('touchend', target._touchendHandler)
-  target.removeEventListener('touchmove', target._touchmoveHandler)
+  const handlers = target._touchHandlers[context._uid]
+  Object.keys(handlers).forEach(eventName => target.removeEventListener(eventName, handlers[eventName]))
+  delete target._touchHandlers[context._uid]
 }
 
 export default {
