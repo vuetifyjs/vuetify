@@ -59,6 +59,9 @@ export default {
         'input-group--ticks': !this.disabled && this.stepNumeric && this.ticks
       }
     },
+    computedColor () {
+      return this.disabled ? null : (this.color || this.defaultColor)
+    },
     computedTrackColor () {
       return this.disabled ? null : (this.trackColor || null)
     },
