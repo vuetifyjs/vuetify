@@ -1,4 +1,4 @@
-import RowExpandTransitionFunctions from '../../transitions/row-expand-transition'
+import ExpandTransitionGenerator from '../../transitions/expand-transition'
 
 export default {
   methods: {
@@ -33,7 +33,7 @@ export default {
         props: {
           tag: 'td'
         },
-        on: RowExpandTransitionFunctions
+        on: ExpandTransitionGenerator('datatable__expand-col--expanded')
       }, children)
 
       return this.genTR([transition], { class: 'datatable__expand-row' })
