@@ -325,7 +325,9 @@ export default {
         this.menuIsActive = true
       }
 
-      this.$refs.menu.listIndex = null
+      // Only reset list index
+      // if typing in search
+      val && (this.$refs.menu.listIndex = null)
 
       this.$nextTick(() => {
         this.$refs.menu && (this.$refs.menu.listIndex = val ? 0 : -1)
@@ -591,7 +593,12 @@ export default {
       this.$nextTick(() => {
         this.focus()
         this.setCaretPosition(this.currentRange)
-        this.$refs.menu && (this.$refs.menu.listIndex = savedIndex)
+
+        if (!this.$refs.menu) return
+
+        requestAnimationFrame(() => {
+          this.$refs.menu.listIndex = savedIndex
+        })
       })
     },
     showMenuItems () {

@@ -10,10 +10,10 @@ export default {
     filter: {
       type: Function,
       default: (item, queryText, itemText) => {
-        const hasValue = val => [undefined, null].includes(val)
+        const hasValue = val => val != null ? val : ''
 
-        const text = hasValue(itemText) ? '' : itemText
-        const query = hasValue(queryText) ? '' : queryText
+        const text = hasValue(itemText)
+        const query = hasValue(queryText)
 
         return text.toString()
           .toLowerCase()
@@ -23,6 +23,25 @@ export default {
   },
 
   methods: {
+    updateTags (content) {
+      if (this.selectedItems.includes(content)) {
+        this.$delete(this.selectedItems, this.selectedItems.indexOf(content))
+      } else {
+        this.selectedItems.push(content)
+      }
+
+      this.$nextTick(() => {
+        this.searchValue = null
+        this.$emit('change', this.selectedItems)
+      })
+    },
+    filterSearch () {
+      if (!this.isAutocomplete) return this.computedItems
+
+      return this.computedItems.filter(i => this.filter(
+        i, this.searchValue, this.getText(i))
+      )
+    },
     genFiltered (text) {
       if (!this.isAutocomplete ||
         !this.searchValue ||
@@ -51,58 +70,42 @@ export default {
       const end = text.slice(index + searchValue.length)
       return { start, middle, end }
     },
-    filterSearch () {
-      if (!this.isAutocomplete) return this.computedItems
-
-      return this.computedItems.filter(i => this.filter(
-        i, this.searchValue, this.getText(i))
-      )
-    },
     getCurrentTag () {
-      return this.filteredItems.length && this.$refs.menu.listIndex >= 0
+      return this.filteredItems.length && this.$refs.menu.listIndex > -1
         ? this.filteredItems[this.$refs.menu.listIndex]
         : this.searchValue
     },
     onTabDown (e) {
-      if (this.tags) {
-        const newItem = this.getCurrentTag()
+      // If tabbing through inputs and
+      // and there is no need for an
+      // update, blur the v-select
+      if (!this.getCurrentTag() || !this.menuIsActive) return this.blur()
 
-        if (newItem) {
-          e.preventDefault()
-          this.addTag(newItem)
-        } else {
-          this.blur()
-        }
-
-        return
-      }
-
-      if (!this.menuIsActive ||
-        !this.isAutocomplete ||
-        this.$refs.menu.listIndex === -1) {
-        this.blur()
-        return
-      }
-
-      if (this.menuIsActive &&
-        this.filteredItems.length &&
-        this.$refs.menu.listIndex > -1) {
+      // When adding tags, if searching and
+      // there is not a filtered options,
+      // add the value to the tags list
+      if (this.tags &&
+        this.searchValue &&
+        !this.filteredItems.length
+      ) {
         e.preventDefault()
-        if (this.$refs.menu.tiles[this.$refs.menu.listIndex]) {
-          this.$refs.menu.tiles[this.$refs.menu.listIndex].click()
-        }
 
-        return
+        return this.updateTags(this.searchValue)
       }
 
-      if (this.menuIsActive) this.blur()
+      // An item that is selected by
+      // menu-index should toggled
+      if (this.menuIsActive) {
+        e.preventDefault()
+        this.selectListTile(this.$refs.menu.listIndex)
+      }
+    },
+    onEnterDown () {
+      this.updateTags(this.getCurrentTag())
     },
     onEscDown (e) {
       e.preventDefault()
       this.menuIsActive = false
-    },
-    onEnterDown () {
-      this.addTag(this.getCurrentTag())
     },
     onKeyDown (e) {
       // If enter, space, up, or down is pressed, open menu
@@ -136,7 +139,7 @@ export default {
 
       // Left arrow
       if (e.keyCode === 37 && this.$refs.input.selectionStart === 0 && this.selectedItems.length) {
-        this.addTag(this.searchValue)
+        this.updateTags(this.searchValue)
         this.$nextTick(() => {
           this.selectedIndex = Math.max(this.selectedItems.length - 2, 0)
         })
@@ -147,16 +150,10 @@ export default {
         this.$refs.menu.listIndex = -1
       }
     },
-    addTag (content) {
-      if (this.selectedItems.includes(content)) {
-        this.$delete(this.selectedItems, this.selectedItems.indexOf(content))
-      } else {
-        this.selectedItems.push(content)
-      }
-      this.$nextTick(() => {
-        this.searchValue = null
-        this.$emit('change', this.selectedItems)
-      })
+    selectListTile (index) {
+      if (!this.$refs.menu.tiles[index]) return
+
+      this.$refs.menu.tiles[index].click()
     }
   }
 }
