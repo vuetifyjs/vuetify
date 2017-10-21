@@ -189,7 +189,7 @@ export default {
       }
     },
     onKeyDown (e) {
-      if (![33, 34, 35, 36, 37, 39].includes(e.keyCode)) return
+      if (this.disabled || ![33, 34, 35, 36, 37, 39].includes(e.keyCode)) return
 
       e.preventDefault()
       const step = this.stepNumeric || 1
@@ -316,7 +316,7 @@ export default {
     return this.genInputGroup([slider], {
       attrs: {
         role: 'slider',
-        tabindex: this.tabindex
+        tabindex: this.disabled ? -1 : this.tabindex
       },
       on: Object.assign({}, {
         mouseup: this.sliderMove,
