@@ -15,11 +15,15 @@
     &.input-group__icon-clearable
       transition: none
 
+  &:not(.input-group--dirty),
+  &.input-group--focused
+    .input-group--select__autocomplete
+      padding-bottom: 1px
+      height: 30px
+
   &.input-group--focused
     .input-group--select__autocomplete
       display: inline-block
-      padding-bottom: 1px
-      height: 30px
       opacity: 1
 
     .input-group__append-icon:not(.input-group__icon-clearable)

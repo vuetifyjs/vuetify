@@ -69,7 +69,7 @@ test('VSelect', () => {
     expect(wrapper.html()).toMatchSnapshot()
 
     clear.trigger('click')
-    await wrapper.vm.$nextTick()
+    await new Promise(resolve => setTimeout(resolve, 5))
     expect(wrapper.vm.inputValue).toBe(null)
     expect(wrapper.html()).toMatchSnapshot()
 
@@ -96,7 +96,7 @@ test('VSelect', () => {
     expect(wrapper.html()).toMatchSnapshot()
 
     clear.trigger('click')
-    await wrapper.vm.$nextTick()
+    await new Promise(resolve => setTimeout(resolve, 5))
     expect(change).toHaveBeenCalledWith([])
     expect(wrapper.html()).toMatchSnapshot()
 

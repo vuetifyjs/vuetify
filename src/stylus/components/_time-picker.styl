@@ -6,32 +6,14 @@ date-picker($material)
   .picker--time__clock
     background: $material.picker.clock
 
-    > span
-      &:not(.disabled)
-        color: $material.text.primary
-
-      &.active
-        color: #fff
-
-  .picker__title
-    div:first-child
-      span
-        color: #fff
-
-    div:last-child
-      color: #fff
+    > span.disabled
+      color: $material.buttons.disabled
 
 theme(date-picker, "picker--time")
 
 .picker--time
   .card__row--actions
     margin-top: -10px
-
-  &.picker--dark
-    .picker--time__clock
-      > span
-        &.disabled
-          color: $button-light-disabled-color
 
   &.picker--landscape
     flex-wrap: wrap
@@ -62,6 +44,7 @@ theme(date-picker, "picker--time")
 /** Title */
 .picker--time
   .picker__title
+    color: #fff
     display: flex
     justify-content: flex-end
 
@@ -76,7 +59,7 @@ theme(date-picker, "picker--time")
         font-size: 70px
         justify-content: center
         opacity: .6
-        transition: .3s $transition.swing
+        transition: $primary-transition
 
         &.active
           opacity: 1
@@ -91,7 +74,7 @@ theme(date-picker, "picker--time")
       span
         cursor: pointer
         opacity: .6
-        transition: .3s $transition.swing
+        transition: $primary-transition
 
         &.active
           opacity: 1
@@ -108,7 +91,7 @@ theme(date-picker, "picker--time")
   user-select: none
   top: 50%
   left: 50%
-  transition: .5s $transition.swing
+  transition: $primary-transition
   transform: translate(-50%, -50%)
 
   &-hand
@@ -183,7 +166,6 @@ theme(date-picker, "picker--time")
       cursor: default
 
     &.disabled
-      color: $button-dark-disabled-color
       pointer-events: none
 
 .picker--time .card__row--actions
