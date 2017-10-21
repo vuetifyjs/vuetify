@@ -59,6 +59,7 @@ export default {
     return {
       cachedItems: [],
       content: {},
+      defaultColor: 'primary',
       inputValue: (this.multiple || this.tags) && !this.value ? [] : this.value,
       isBooted: false,
       lastItem: 20,
@@ -80,22 +81,20 @@ export default {
     appendIconCb: Function,
     auto: Boolean,
     autocomplete: Boolean,
+    browserAutocomplete: {
+      type: String,
+      default: 'on'
+    },
     cacheItems: Boolean,
     chips: Boolean,
     clearable: Boolean,
-    color: {
-      type: String,
-      default: 'primary'
-    },
     combobox: Boolean,
     debounceSearch: {
       type: [Number, String],
       default: 200
     },
-    browserAutocomplete: {
-      type: String,
-      default: 'on'
-    },
+    editable: Boolean,
+    hideSelected: Boolean,
     items: {
       type: Array,
       default: () => []
@@ -104,6 +103,10 @@ export default {
       type: String,
       default: 'avatar'
     },
+    itemDisabled: {
+      type: String,
+      default: 'disabled'
+    },
     itemText: {
       type: String,
       default: 'text'
@@ -111,10 +114,6 @@ export default {
     itemValue: {
       type: String,
       default: 'value'
-    },
-    itemDisabled: {
-      type: String,
-      default: 'disabled'
     },
     maxHeight: {
       type: [Number, String],
@@ -126,16 +125,15 @@ export default {
     },
     multiple: Boolean,
     multiLine: Boolean,
-    solo: Boolean,
+    overflow: Boolean,
+    returnObject: Boolean,
     searchInput: {
       default: null
     },
-    singleLine: Boolean,
-    tags: Boolean,
-    returnObject: Boolean,
-    overflow: Boolean,
     segmented: Boolean,
-    editable: Boolean
+    singleLine: Boolean,
+    solo: Boolean,
+    tags: Boolean
   },
 
   computed: {
@@ -528,7 +526,7 @@ export default {
       this.searchValue = null
       this.$emit('change', inputValue)
       this.genSelectedItems()
-      this.showMenu()
+      setTimeout(this.showMenu, 0)
     },
     showMenu () {
       this.showMenuItems()

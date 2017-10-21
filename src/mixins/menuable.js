@@ -271,7 +271,7 @@ export default {
       requestAnimationFrame(() => (this.isContentActive = true))
     },
     isShown (el) {
-      return el.style.display !== 'none'
+      return !!el && el.style.display !== 'none'
     },
     resetDimensions () {
       this.dimensions = Object.assign({}, dimensions)
@@ -283,7 +283,7 @@ export default {
 
       const dimensions = {}
 
-      // Activate should already be shown
+      // Activator should already be shown
       dimensions.activator = !this.hasActivator || this.absolute
         ? this.absolutePosition()
         : this.measure(this.getActivator())
