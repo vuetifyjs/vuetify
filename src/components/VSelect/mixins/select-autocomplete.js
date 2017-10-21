@@ -58,6 +58,52 @@ export default {
         i, this.searchValue, this.getText(i))
       )
     },
+    getCurrentTag () {
+      return this.filteredItems.length && this.$refs.menu.listIndex >= 0
+        ? this.filteredItems[this.$refs.menu.listIndex]
+        : this.searchValue
+    },
+    onTabDown (e) {
+      if (this.tags) {
+        const newItem = this.getCurrentTag()
+
+        if (newItem) {
+          e.preventDefault()
+          this.addTag(newItem)
+        } else {
+          this.blur()
+        }
+
+        return
+      }
+
+      if (!this.menuIsActive ||
+        !this.isAutocomplete ||
+        this.$refs.menu.listIndex === -1) {
+        this.blur()
+        return
+      }
+
+      if (this.menuIsActive &&
+        this.filteredItems.length &&
+        this.$refs.menu.listIndex > -1) {
+        e.preventDefault()
+        if (this.$refs.menu.tiles[this.$refs.menu.listIndex]) {
+          this.$refs.menu.tiles[this.$refs.menu.listIndex].click()
+        }
+
+        return
+      }
+
+      if (this.menuIsActive) this.blur()
+    },
+    onEscDown (e) {
+      e.preventDefault()
+      this.menuIsActive = false
+    },
+    onEnterDown () {
+      this.addTag(this.getCurrentTag())
+    },
     onKeyDown (e) {
       // If enter, space, up, or down is pressed, open menu
       if (!this.menuIsActive && [13, 32, 38, 40].includes(e.keyCode)) {
@@ -65,15 +111,11 @@ export default {
         return this.showMenuItems()
       }
 
-      // If escape or tab with no search, blur
-      if (e.keyCode === 27 || e.keyCode === 9 && !this.searchValue) {
-        return this.blur()
-      }
+      // If escape deactivate the menu
+      if (e.keyCode === 27) return this.onEscDown(e)
 
-      // Tab shouldn't switch inputs
-      if (e.keyCode === 9) {
-        this.tags ? e.preventDefault() : this.blur()
-      }
+      // If tab - select item or close menu
+      if (e.keyCode === 9) return this.onTabDown(e)
 
       if (!this.isAutocomplete ||
         ![32].includes(e.keyCode) // space
@@ -89,13 +131,8 @@ export default {
 
       if (!this.tags || !this.searchValue) return
 
-      // Tab, enter
-      if ([9, 13].includes(e.keyCode)) {
-        const newItem = this.filteredItems.length && this.$refs.menu.listIndex >= 0
-          ? this.filteredItems[this.$refs.menu.listIndex]
-          : this.searchValue
-        this.addTag(newItem)
-      }
+      // Enter
+      if (e.keyCode === 13) return this.onEnterDown()
 
       // Left arrow
       if (e.keyCode === 37 && this.$refs.input.selectionStart === 0 && this.selectedItems.length) {
