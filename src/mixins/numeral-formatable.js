@@ -34,11 +34,11 @@ export default {
     blockSeparator () { // Default separator = ' '
       const separator = this.options.blockSeparator
 
-      if (!Array.isArray(separator)) return [this.oneChar(separator, ' ')]
+      if (!Array.isArray(separator)) return [this.oneChar(separator, '')]
 
       switch (separator.length) {
         case 0: return [' ']
-        case 1: return this.oneChar(separator, ' ')
+        case 1: return this.oneChar(separator, '')
         default: return separator
       }
     },
@@ -90,7 +90,6 @@ export default {
 
       this.sign = text = String(text)
       text = this.internalChange ? this.removeNonNumeral(text) : this.attemptNumeralCorrection(text)
-      if (!text) return text // attemptNumeralCorrection() may return null or falsy
 
       return this.parseNumber(text)
     },
@@ -98,58 +97,77 @@ export default {
       if (!text) return this.numeralZero()
       text = this.sign ? String(text).substr(1) : String(text)
 
-      const masked = []
-      let i = this.blockSeparator.length - 1
-      let j = this.blockSize.length - 1
-      let length = 0
-      let integer = !this.precision
-
-      // Group the digits with specified separators.
-      // The first size and separator element
-      // of the arrays becomes the default value.
-      for (const digit of text.split('').reverse()) {
-        digit !== '.' && masked.push(digit)
-        if (integer && !(++length % this.blockSize[j])) {
-          masked.push(this.oneChar(this.blockSeparator[i], ' '))
-          i > 0 && i--
-          j > 0 && j--
-          length = 0
-        } else if (digit === '.') {
-          masked.push(this.decimal)
-          integer = true
-        }
+      const param = {
+        masked: [],
+        i: this.blockSeparator.length - 1,
+        j: this.blockSize.length - 1,
+        length: 0,
+        integer: !this.precision
       }
 
-      return this.maskedText(masked.reverse())
+      // Group the digits with specified separators and digit counts.
+      for (const digit of text.split('').reverse()) {
+        if (!this.maskNumeral(digit, param)) break
+      }
+
+      return this.maskedNumeral(param.masked.reverse())
     },
-    maskedText (masked) {
-      this.blockSeparator.includes(masked[0]) && masked.shift()
-      return this.addPrefixSuffix(masked.join(''))
+    maskNumeral (digit, param) {
+      if (digit !== '.') {
+        if (param.integer) {
+          this.blockSize[param.j] && this.blockSeparator[param.i] && param.masked.push(digit)
+        } else param.masked.push(digit)
+      }
+
+      if (param.integer) {
+        if (!this.blockSize[param.j]) return false
+        else if (!this.blockSeparator[param.i]) param.masked.push(digit)
+        else if (!(++param.length % this.blockSize[param.j])) {
+          param.masked.push(this.oneChar(this.blockSeparator[param.i], ' '))
+          param.i > 0 && param.i--
+          param.j > 0 && param.j--
+          param.length = 0
+        }
+      } else if (digit === '.') {
+        param.masked.push(this.decimal)
+        param.integer = true
+      }
+
+      return true
+    },
+    maskedNumeral (masked) {
+      if (!masked.length) masked.splice(0, 0, '0')
+      else if (this.blockSeparator.includes(masked[0])) masked.shift()
+
+      const result = this.addPrefixSuffix(masked.join(''))
+
+      return masked[0] === '.' ? '0' + result : result
     },
     numeralZero () {
       const zero = 0
       this.sign = '+'
       return this.addPrefixSuffix(zero.toFixed(this.precision).toString().replace('.', this.decimal))
     },
-    oneChar (char, singleChar = '.') {
-      return char ? char[0] : singleChar
+    oneChar (char, defaultChar = '.') {
+      return char ? char[0] : defaultChar
     },
+    // TODO: Rework this restrictive function to
+    // make -ve as a valid value in order
+    // to support special meaning/feature
     absVal (value) {
-      let parsed = parseInt(value, 10)
+      const parsed = parseInt(value, 10)
 
       if (isNaN(parsed)) return 0
-      parsed = Math.abs(parsed)
-
-      // Set the general limit to that of Number.prototype.toFixed()
-      return parsed > 20 ? 20 : parsed
+      return Math.abs(parsed)
     },
     adjustNumeralCaret (selection, text) {
       // Caret is at prefix
       if (selection === 0) return this.numeralPrefix.length + this.sign.length
 
-      // Whether it's an integer or a fractional where abs(value) >= 10
-      if (!this.precision ||
-        (String(this.lazyValue).length > this.precision + (this.sign ? 3 : 2))) {
+      // Whether selection !== 0 (may happen when block size === 0) or it's an
+      // integer or a fractional where abs(value) >= 10
+      if (selection !== text.length && (!this.precision ||
+        (String(this.lazyValue).length > this.precision + (this.sign ? 3 : 2)))) {
         return selection
       }
 
@@ -195,27 +213,14 @@ export default {
     // Correction on arbitrary value entered externally
     attemptNumeralCorrection (text) {
       const decimalPoint = text.lastIndexOf('.')
-      let integer
+      let integer = decimalPoint < 0 ? this.removeNonNumeral(text)
+        : this.removeNonNumeral(text.substring(0, decimalPoint))
 
-      // Integer only
-      if (!this.precision) {
-        // Assume floor conversion (truncate)
-        return decimalPoint < 0
-          ? this.removeNonNumeral(text) : this.removeNonNumeral(text.substring(0, decimalPoint))
-      }
+      integer = integer.length ? integer : '0'
+      if (!this.precision) return integer
 
-      // Missing fractional part
-      if (decimalPoint < 0) {
-        integer = this.removeNonNumeral(text)
-        if (!integer) return null // garbage
-
-        return integer + this.getFraction('')
-      }
-
-      integer = this.removeNonNumeral(text.substring(0, decimalPoint))
-      if (!integer) integer = '0'
-
-      return integer + this.getFraction(text.substr(decimalPoint))
+      return decimalPoint < 0 ? integer + this.getFraction('')
+        : integer + this.getFraction(text.substr(decimalPoint))
     },
     getFraction (text) {
       let fraction = this.removeNonNumeral(text)
@@ -247,14 +252,7 @@ export default {
       return text.substr(0, decimal) + '.' + fraction
     },
     removeLeadingZeros (text) {
-      let i = 0
-
-      for (const digit of text) {
-        if (digit !== '0') break
-        i++
-      }
-
-      text = text.substr(i)
+      text = text.replace(/^0+/, '')
       return text[0] === '.' ? '0' + text : text
     },
     removeNonNumeral (text, preserveDecimal = false) {
