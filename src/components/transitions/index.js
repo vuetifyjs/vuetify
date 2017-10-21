@@ -3,8 +3,7 @@ import {
   createJavaScriptTransition
 } from '../../util/helpers'
 
-import ExpandTransitionFunctions from './expand-transition'
-import RowExpandTransitionFunctions from './row-expand-transition'
+import ExpandTransitionGenerator from './expand-transition'
 
 // Component specific transitions
 export const VBottomSheetTranstion = createSimpleTransition('bottom-sheet-transition')
@@ -26,8 +25,8 @@ export const VSlideYTransition = createSimpleTransition('slide-y-transition')
 export const VSlideYReverseTransition = createSimpleTransition('slide-y-reverse-transition')
 
 // JavaScript transitions
-export const VExpandTransition = createJavaScriptTransition('expand-transition', ExpandTransitionFunctions)
-export const VRowExpandTransition = createJavaScriptTransition('row-expand-transition', RowExpandTransitionFunctions)
+export const VExpandTransition = createJavaScriptTransition('expand-transition', ExpandTransitionGenerator())
+export const VRowExpandTransition = createJavaScriptTransition('row-expand-transition', ExpandTransitionGenerator('datatable__expand-col--expanded'))
 
 export default function install (Vue) {
   Vue.component('v-bottom-sheet-transition', VBottomSheetTranstion)
