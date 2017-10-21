@@ -1,11 +1,17 @@
+// Mixins
 import Routable from '../../mixins/routable'
 import Toggleable from '../../mixins/toggleable'
+
+// Directives
 import Ripple from '../../directives/ripple'
 
 export default {
   name: 'v-list-tile',
 
-  mixins: [Routable, Toggleable],
+  mixins: [
+    Routable,
+    Toggleable
+  ],
 
   directives: {
     Ripple
@@ -16,7 +22,7 @@ export default {
   props: {
     activeClass: {
       type: String,
-      default: 'list__tile--active'
+      default: 'primary--light--text'
     },
     avatar: Boolean,
     inactive: Boolean,
