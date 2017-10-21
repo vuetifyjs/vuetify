@@ -11,13 +11,13 @@ exports[`Vslider.vue should be focused when active 1`] = `
       <div class="slider__track__container">
         <div class="slider__track">
         </div>
-        <div class="slider__track-fill primary">
+        <div class="slider__track-fill primary--light">
         </div>
       </div>
       <div class="slider__thumb-container"
            style="left: 50%;"
       >
-        <div class="slider__thumb primary">
+        <div class="slider__thumb primary--light">
         </div>
       </div>
     </div>
@@ -41,7 +41,7 @@ exports[`Vslider.vue should match a snapshot 1`] = `
       <div class="slider__track__container">
         <div class="slider__track">
         </div>
-        <div class="slider__track-fill primary">
+        <div class="slider__track-fill primary--light">
         </div>
       </div>
       <div class="slider__thumb-container">
