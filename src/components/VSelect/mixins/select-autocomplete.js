@@ -58,39 +58,51 @@ export default {
         i, this.searchValue, this.getText(i))
       )
     },
+    getCurrentTag () {
+      return this.filteredItems.length && this.$refs.menu.listIndex >= 0
+        ? this.filteredItems[this.$refs.menu.listIndex]
+        : this.searchValue
+    },
     onTabDown (e) {
       if (this.tags) {
-        const newItem = this.filteredItems.length && this.$refs.menu.listIndex >= 0
-          ? this.filteredItems[this.$refs.menu.listIndex]
-          : this.searchValue
+        const newItem = this.getCurrentTag()
+
         if (newItem) {
           e.preventDefault()
           this.addTag(newItem)
         } else {
           this.blur()
         }
+
         return
       }
 
-      if (!this.menuIsActive || !this.isAutocomplete || this.$refs.menu.listIndex === -1) {
+      if (!this.menuIsActive ||
+        !this.isAutocomplete ||
+        this.$refs.menu.listIndex === -1) {
         this.blur()
         return
       }
 
-      if (this.menuIsActive && this.filteredItems.length && this.$refs.menu.listIndex > -1) {
+      if (this.menuIsActive &&
+        this.filteredItems.length &&
+        this.$refs.menu.listIndex > -1) {
         e.preventDefault()
-        this.$refs.menu.tiles[this.$refs.menu.listIndex].click()
+        if (this.$refs.menu.tiles[this.$refs.menu.listIndex]) {
+          this.$refs.menu.tiles[this.$refs.menu.listIndex].click()
+        }
+
         return
       }
 
-      if (this.menuIsActive) {
-        this.blur()
-        return
-      }
+      if (this.menuIsActive) this.blur()
     },
     onEscDown (e) {
       e.preventDefault()
       this.menuIsActive = false
+    },
+    onEnterDown () {
+      this.addTag(this.getCurrentTag())
     },
     onKeyDown (e) {
       // If enter, space, up, or down is pressed, open menu
@@ -120,12 +132,7 @@ export default {
       if (!this.tags || !this.searchValue) return
 
       // Enter
-      if (e.keyCode === 13) {
-        const newItem = this.filteredItems.length && this.$refs.menu.listIndex >= 0
-          ? this.filteredItems[this.$refs.menu.listIndex]
-          : this.searchValue
-        this.addTag(newItem)
-      }
+      if (e.keyCode === 13) return this.onEnterDown()
 
       // Left arrow
       if (e.keyCode === 37 && this.$refs.input.selectionStart === 0 && this.selectedItems.length) {
