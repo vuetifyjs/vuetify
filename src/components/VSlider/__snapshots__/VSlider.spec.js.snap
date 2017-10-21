@@ -45,7 +45,7 @@ exports[`Vslider.vue should match a snapshot 1`] = `
         </div>
       </div>
       <div class="slider__thumb-container">
-        <div class="slider__thumb primary">
+        <div class="slider__thumb">
         </div>
       </div>
     </div>

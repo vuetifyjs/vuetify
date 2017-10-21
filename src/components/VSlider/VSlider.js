@@ -66,7 +66,7 @@ export default {
       return this.disabled ? null : (this.trackColor || null)
     },
     computedThumbColor () {
-      return this.disabled ? null : (this.thumbColor || this.color || this.defaultColor)
+      return (this.disabled || !this.inputWidth) ? null : (this.thumbColor || this.color || this.defaultColor)
     },
     stepNumeric () {
       return this.step > 0 ? parseFloat(this.step) : 0
@@ -104,19 +104,22 @@ export default {
         transform: `translate3d(0, -50%, 0)`
       }
     },
+    trackPadding () {
+      if (this.thumbLabel && this.isActive) return 0
+
+      return 6 + (this.isActive && !this.disabled ? 3 : 0)
+    },
     trackStyles () {
-      const padding = (this.thumbLabel && this.isActive) ? 0 : 8
       return {
         transition: this.keyPressed >= 2 ? 'none' : '',
-        left: `calc(${this.inputWidth}% + ${padding}px)`,
-        width: `calc(${100 - this.inputWidth}% - ${padding}px)`
+        left: `calc(${this.inputWidth}% + ${this.trackPadding}px)`,
+        width: `calc(${100 - this.inputWidth}% - ${this.trackPadding}px)`
       }
     },
     trackFillStyles () {
-      const padding = (this.thumbLabel && this.isActive) ? 0 : 8
       return {
         transition: this.keyPressed >= 2 ? 'none' : '',
-        width: `calc(${this.inputWidth}% - ${padding}px)`
+        width: `calc(${this.inputWidth}% - ${this.trackPadding}px)`
       }
     },
     numTicks () {
