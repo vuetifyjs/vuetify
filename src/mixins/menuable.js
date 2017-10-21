@@ -271,7 +271,7 @@ export default {
       requestAnimationFrame(() => (this.isContentActive = true))
     },
     isShown (el) {
-      return el.style.display !== 'none'
+      return !!el && el.style.display !== 'none'
     },
     resetDimensions () {
       this.dimensions = Object.assign({}, dimensions)
