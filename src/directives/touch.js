@@ -68,9 +68,14 @@ function inserted (el, { value }) {
 
   // Needed to pass unit tests
   if (!target) return
-  target.addEventListener('touchstart', e => touchstart(e, wrapper), options)
-  target.addEventListener('touchend', e => touchend(e, wrapper), options)
-  target.addEventListener('touchmove', e => touchmove(e, wrapper), options)
+
+  target._touchstartHandler = e => touchstart(e, wrapper)
+  target._touchendHandler = e => touchend(e, wrapper)
+  target._touchmoveHandler = e => touchmove(e, wrapper)
+
+  target.addEventListener('touchstart', target._touchstartHandler, options)
+  target.addEventListener('touchend', target._touchendHandler, options)
+  target.addEventListener('touchmove', target._touchmoveHandler, options)
 }
 
 function unbind (el, { value }) {
@@ -78,9 +83,9 @@ function unbind (el, { value }) {
 
   if (!target) return
 
-  target.removeEventListener('touchstart', touchstart)
-  target.removeEventListener('touchend', touchend)
-  target.removeEventListener('touchmove', touchmove)
+  target.removeEventListener('touchstart', target._touchstartHandler)
+  target.removeEventListener('touchend', target._touchendHandler)
+  target.removeEventListener('touchmove', target._touchmoveHandler)
 }
 
 export default {
