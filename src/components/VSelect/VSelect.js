@@ -201,6 +201,9 @@ export default {
         this.isDirty &&
         this.searchValue === this.getText(this.selectedItem)
     },
+    isHidingSelected () {
+      return this.hideSelected && this.isAutocomplete && this.isMultiple
+    },
     isAutocomplete () {
       return this.autocomplete || this.editable || this.tags || this.combobox
     },

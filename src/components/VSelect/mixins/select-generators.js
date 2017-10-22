@@ -201,7 +201,7 @@ export default {
       }, `${this.getText(item)}${comma ? ', ' : ''}`)
     },
     genList () {
-      const visibleItems = this.hideSelected ? this.filteredItems.filter(o => {
+      const visibleItems = this.isHidingSelected ? this.filteredItems.filter(o => {
         return (this.selectedItems || []).indexOf(o) === -1
       }) : this.filteredItems
 
@@ -275,7 +275,7 @@ export default {
       )
     },
     genAction (item, active) {
-      if (!this.isMultiple || this.hideSelected) return null
+      if (!this.isMultiple || this.isHidingSelected) return null
 
       const data = {
         staticClass: 'list__tile__action--select-multi',
