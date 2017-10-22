@@ -599,7 +599,7 @@ export default {
         this.setCaretPosition(this.currentRange)
 
         requestAnimationFrame(() => {
-          this.searchValue ? this.setMenuIndex(savedIndex) : this.resetMenuIndex()
+          (!this.isAutocomplete || this.searchValue) ? this.setMenuIndex(savedIndex) : this.resetMenuIndex()
         })
       })
     },
