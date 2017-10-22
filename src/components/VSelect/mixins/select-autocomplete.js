@@ -107,52 +107,6 @@ export default {
       e.preventDefault()
       this.menuIsActive = false
     },
-    getCurrentTag () {
-      return this.filteredItems.length && this.$refs.menu.listIndex >= 0
-        ? this.filteredItems[this.$refs.menu.listIndex]
-        : this.searchValue
-    },
-    onTabDown (e) {
-      if (this.tags) {
-        const newItem = this.getCurrentTag()
-
-        if (newItem) {
-          e.preventDefault()
-          this.addTag(newItem)
-        } else {
-          this.blur()
-        }
-
-        return
-      }
-
-      if (!this.menuIsActive ||
-        !this.isAutocomplete ||
-        this.$refs.menu.listIndex === -1) {
-        this.blur()
-        return
-      }
-
-      if (this.menuIsActive &&
-        this.filteredItems.length &&
-        this.$refs.menu.listIndex > -1) {
-        e.preventDefault()
-        if (this.$refs.menu.tiles[this.$refs.menu.listIndex]) {
-          this.$refs.menu.tiles[this.$refs.menu.listIndex].click()
-        }
-
-        return
-      }
-
-      if (this.menuIsActive) this.blur()
-    },
-    onEscDown (e) {
-      e.preventDefault()
-      this.menuIsActive = false
-    },
-    onEnterDown () {
-      this.addTag(this.getCurrentTag())
-    },
     onKeyDown (e) {
       // If enter, space, up, or down is pressed, open menu
       if (!this.menuIsActive && [13, 32, 38, 40].includes(e.keyCode)) {
