@@ -71,8 +71,8 @@ export default {
       return { start, middle, end }
     },
     getCurrentTag () {
-      return this.filteredItems.length && this.$refs.menu.listIndex > -1
-        ? this.filteredItems[this.$refs.menu.listIndex]
+      return this.isMenuItemSelected()
+        ? this.filteredItems[this.getMenuIndex()]
         : this.searchValue
     },
     onTabDown (e) {
@@ -97,7 +97,7 @@ export default {
       // menu-index should toggled
       if (this.menuIsActive) {
         e.preventDefault()
-        this.selectListTile(this.$refs.menu.listIndex)
+        this.selectListTile(this.getMenuIndex())
       }
     },
     onEnterDown () {
@@ -147,7 +147,7 @@ export default {
 
       // Right arrow
       if (e.keyCode === 39 && this.$refs.input.selectionEnd === this.searchValue.length) {
-        this.$refs.menu.listIndex = -1
+        this.resetMenuIndex()
       }
     },
     selectListTile (index) {

@@ -27,6 +27,7 @@ test('VSelect - tags', () => {
     input.element.value = 'foo'
     input.trigger('input')
     await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick()
 
     input.trigger('keydown.enter')
     await wrapper.vm.$nextTick()
