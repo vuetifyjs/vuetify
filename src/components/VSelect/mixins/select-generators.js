@@ -70,7 +70,7 @@ export default {
       this.setMenuIndex(-1)
     },
     isMenuItemSelected () {
-      return this.menuItems.length && this.getMenuIndex() > -1
+      return this.menuIsActive && this.menuItems.length && this.getMenuIndex() > -1
     },
     genSelectionsAndSearch () {
       return this.$createElement('div', {

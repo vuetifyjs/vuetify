@@ -216,6 +216,9 @@ export default {
     isMultiple () {
       return this.multiple || this.tags
     },
+    isAnyValueAllowed () {
+      return this.tags || this.combobox
+    },
     searchValue: {
       get () { return this.lazySearch },
       set (val) {

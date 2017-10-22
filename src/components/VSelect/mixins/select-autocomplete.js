@@ -73,13 +73,21 @@ export default {
     getCurrentTag () {
       return this.isMenuItemSelected()
         ? this.filteredItems[this.getMenuIndex()]
-        : this.searchValue
+        : (this.isAnyValueAllowed ? this.searchValue : null)
     },
     onTabDown (e) {
       // If tabbing through inputs and
       // and there is no need for an
       // update, blur the v-select
-      if (!this.getCurrentTag() || !this.menuIsActive) return this.blur()
+      if (!this.isAutocomplete || !this.getCurrentTag()) return this.blur()
+
+      // For combo box use selected
+      // menu item or searchValue
+      if (this.combobox) {
+        this.blur()
+        this.inputValue = this.getCurrentTag()
+        return
+      }
 
       // When adding tags, if searching and
       // there is not a filtered options,
