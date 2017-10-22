@@ -75,23 +75,24 @@ export default {
         ? this.filteredItems[this.getMenuIndex()]
         : (this.isAnyValueAllowed ? this.searchValue : null)
     },
+    tabOut () {
+      this.blur()
+
+      if (this.isAutocomplete && !this.isMultiple && !this.searchValue) {
+        // Single (not multiple) autocomplete select with an
+        // empty search value should clear the input value
+        this.inputValue = null
+      } else if (this.combobox) {
+        // For combo box use selected
+        // menu item or searchValue
+        this.inputValue = this.getCurrentTag()
+      }
+    },
     onTabDown (e) {
       // If tabbing through inputs and
       // and there is no need for an
       // update, blur the v-select
-      if (!this.isAutocomplete || !this.getCurrentTag()) {
-        this.blur()
-        this.isAutocomplete && !this.isMultiple && !this.searchValue && (this.inputValue = null)
-        return
-      }
-
-      // For combo box use selected
-      // menu item or searchValue
-      if (this.combobox) {
-        this.blur()
-        this.inputValue = this.getCurrentTag()
-        return
-      }
+      if (!this.isAutocomplete || !this.getCurrentTag() || this.combobox) return this.tabOut()
 
       // When adding tags, if searching and
       // there is not a filtered options,
