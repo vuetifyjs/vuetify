@@ -79,7 +79,11 @@ export default {
       // If tabbing through inputs and
       // and there is no need for an
       // update, blur the v-select
-      if (!this.isAutocomplete || !this.getCurrentTag()) return this.blur()
+      if (!this.isAutocomplete || !this.getCurrentTag()) {
+        this.blur()
+        this.isAutocomplete && !this.isMultiple && !this.searchValue && (this.inputValue = null)
+        return
+      }
 
       // For combo box use selected
       // menu item or searchValue
