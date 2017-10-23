@@ -1,7 +1,3 @@
-import {
-  allowedMasks
-} from '../util/mask'
-
 export default {
   data: () => ({
     options: {},
@@ -29,47 +25,22 @@ export default {
       return this.options.positiveSign ? '+' : ''
     },
     decimal () {
-      return this.oneChar(this.options.decimal)
+      return this.options.decimal || '.'
     },
-    blockSeparator () { // Default separator = ' '
-      const separator = this.options.blockSeparator
-
-      if (!Array.isArray(separator)) return [this.oneChar(separator, '')]
-
-      switch (separator.length) {
-        case 0: return [' ']
-        case 1: return this.oneChar(separator, '')
-        default: return separator
-      }
+    blockSeparator () {
+      return Array.isArray(this.options.blockSeparator) ? this.options.blockSeparator
+        : [this.options.blockSeparator]
     },
-    blockSize () { // Default size = 3
-      const size = this.options.blockSize
-
-      if (!Array.isArray(size)) return [this.absVal(size)]
-
-      switch (size.length) {
-        case 0: return [3]
-        case 1: return [this.absVal(size[0])]
-        default: return size
-      }
+    blockSize () {
+      return Array.isArray(this.options.blockSize) ? this.options.blockSize
+        : [this.absVal(this.options.blockSize)]
     },
     sign: {
       get () {
         return this.signSymbol
       },
       set (val) {
-        let i = 0
-
-        if (this.numeralPrefix) {
-          for (const char of val) {
-            if (allowedMasks['#'].test(char)) break
-            if (char === '+' || char === '-') break
-            i++
-          }
-          val = val.substr(i)
-        }
-
-        const negative = val && val.length > 0 && val[0] === '-'
+        const negative = val.replace(/[^\d+-]/g, '')[0] === '-'
         const positiveSymbol = this.positiveSign ? '+' : ''
 
         this.signSymbol = this.options.positiveOnly ? positiveSymbol
@@ -77,30 +48,29 @@ export default {
       }
     },
     numeralPrefix () {
-      return this.options.prefix ? this.options.prefix : ''
+      return this.options.prefix || ''
     },
     numeralSuffix () {
-      return this.options.suffix ? this.options.suffix : ''
+      return this.options.suffix || ''
     }
   },
 
   methods: {
     unmaskNumeralText (text) {
       if (!text) return text
-
       this.sign = text = String(text)
       text = this.internalChange ? this.removeNonNumeral(text) : this.attemptNumeralCorrection(text)
 
       return this.parseNumber(text)
     },
     maskNumeralText (text) {
-      if (!text) return this.numeralZero()
+      if (!text) return this.addPrefixSuffix(this.precision ? '0.' + this.getFraction('') : '0')
       text = this.sign ? String(text).substr(1) : String(text)
 
       const param = {
         masked: [],
-        i: this.blockSeparator.length - 1,
-        j: this.blockSize.length - 1,
+        separatorIndex: this.blockSeparator.length - 1,
+        sizeIndex: this.blockSize.length - 1,
         length: 0,
         integer: !this.precision
       }
@@ -115,17 +85,18 @@ export default {
     maskNumeral (digit, param) {
       if (digit !== '.') {
         if (param.integer) {
-          this.blockSize[param.j] && this.blockSeparator[param.i] && param.masked.push(digit)
+          this.blockSize[param.sizeIndex] && this.blockSeparator[param.separatorIndex] &&
+            param.masked.push(digit)
         } else param.masked.push(digit)
       }
 
       if (param.integer) {
-        if (!this.blockSize[param.j]) return false
-        else if (!this.blockSeparator[param.i]) param.masked.push(digit)
-        else if (!(++param.length % this.blockSize[param.j])) {
-          param.masked.push(this.oneChar(this.blockSeparator[param.i], ' '))
-          param.i > 0 && param.i--
-          param.j > 0 && param.j--
+        if (!this.blockSize[param.sizeIndex]) return false
+        else if (!this.blockSeparator[param.separatorIndex]) param.masked.push(digit)
+        else if (!(++param.length % this.blockSize[param.sizeIndex])) {
+          param.masked.push(this.blockSeparator[param.separatorIndex][0])
+          param.separatorIndex > 0 && param.separatorIndex--
+          param.sizeIndex > 0 && param.sizeIndex--
           param.length = 0
         }
       } else if (digit === '.') {
@@ -136,20 +107,11 @@ export default {
       return true
     },
     maskedNumeral (masked) {
-      if (!masked.length) masked.splice(0, 0, '0')
+      if (!masked.length) masked = ['0']
       else if (this.blockSeparator.includes(masked[0])) masked.shift()
 
       const result = this.addPrefixSuffix(masked.join(''))
-
       return masked[0] === '.' ? '0' + result : result
-    },
-    numeralZero () {
-      const zero = 0
-      this.sign = '+'
-      return this.addPrefixSuffix(zero.toFixed(this.precision).toString().replace('.', this.decimal))
-    },
-    oneChar (char, defaultChar = '.') {
-      return char ? char[0] : defaultChar
     },
     // TODO: Rework this restrictive function to
     // make -ve as a valid value in order
@@ -171,12 +133,12 @@ export default {
         return selection
       }
 
-      // Caret is at suffix
+      // Caret is at suffix or end of line
       const suffixPosition = this.numeralSuffix ? text.lastIndexOf(this.numeralSuffix) : 0
       if (suffixPosition > 0 && selection >= suffixPosition) {
         return selection > suffixPosition ? suffixPosition
           : this.delete || this.backspace ? suffixPosition : suffixPosition - 1
-      }
+      } else if (!suffixPosition && selection === text.length) return selection
 
       // Handle abs(value) < 10
       // Make the caret stay where it were when the
@@ -192,20 +154,19 @@ export default {
       return selection
     },
     numeralCaretOnDelete (selection, text) {
-      if (text.substr(this.selection, 1) === this.decimal) {
+      if (text[this.selection] === this.decimal) {
         selection += 1
       } else {
-        selection += text.substr(this.numeralPrefix.length + this.sign.length, 1) === '0' ? 1 : 0
-        selection += text.substr(selection - 1, 1) === this.decimal ? 1 : 0
+        selection += text[this.numeralPrefix.length + this.sign.length] === '0' ? 1 : 0
+        selection += text[selection - 1] === this.decimal ? 1 : 0
       }
 
       return selection
     },
     numeralCaretOnBackspace (selection, text) {
-      if (text.substr(this.numeralPrefix.length + this.sign.length, 1) === '0') {
-        // abs(value) < 1
-        text.substr(this.selection, 1) !== this.decimal && selection++
-        text.substr(this.selection - 1, 1) === this.decimal && selection++
+      if (text[this.numeralPrefix.length + this.sign.length] === '0') {
+        text[this.selection] !== this.decimal && selection++
+        text[this.selection - 1] === this.decimal && selection++
       }
 
       return selection
@@ -245,11 +206,9 @@ export default {
     },
     parseFloat (text) {
       text = this.removeLeadingZeros(text)
-
       const decimal = text.lastIndexOf('.')
-      const fraction = this.getFraction(text.substr(decimal + 1))
 
-      return text.substr(0, decimal) + '.' + fraction
+      return text.substr(0, decimal) + '.' + this.getFraction(text.substr(decimal + 1))
     },
     removeLeadingZeros (text) {
       text = text.replace(/^0+/, '')
@@ -257,8 +216,7 @@ export default {
     },
     removeNonNumeral (text, preserveDecimal = false) {
       if (text == null) return ''
-      return preserveDecimal ? text.replace(new RegExp(/[^\d.]/, 'g'), '')
-        : text.replace(new RegExp(/[^\d]/, 'g'), '')
+      return preserveDecimal ? text.replace(/[^\d.]/g, '') : text.replace(/[^\d]/g, '')
     },
     isNumeralDelimiter (char) {
       return char && char.match(/[^\d]/)

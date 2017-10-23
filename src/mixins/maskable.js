@@ -77,7 +77,7 @@ export default {
         this.options = Object.assign({}, this.preDefined['numeral'])
         Object.assign(this.options, this.mask)
 
-        return text => this.maskNumeralText(text)
+        return this.maskNumeralText
       } else if (this.isCustomFormatter) { // Case 5
         const customOptions = Object.assign({}, this.mask)
         const formatter = this.masked.formatter
@@ -90,7 +90,7 @@ export default {
     },
     unmaskText () {
       if (!this.mask) return text => text
-      return this.isNumeralFormatter ? text => this.unmaskNumeralText(text) : text => unmaskText(text)
+      return this.isNumeralFormatter ? this.unmaskNumeralText : unmaskText
     }
   },
 
@@ -153,7 +153,6 @@ export default {
       }
 
       this.setCaretPosition(selection)
-      // this.$emit() must occur only when all internal values are correct
       this.$emit('input', this.returnMaskedValue ? this.$refs.input.value : this.lazyValue)
     },
     // When the input changes and is
