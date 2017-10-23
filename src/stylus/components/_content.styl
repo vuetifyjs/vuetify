@@ -1,6 +1,10 @@
 @import '../bootstrap'
 
 .content
-  flex: 1 1 auto
-  max-width: 100%
-  transition: .3s padding $transition.swing
+  display: flex
+  flex: 1 0 auto
+
+  > div
+    flex: 1 1 auto
+    max-width: 100%
+    transition: .3s padding $transition.swing
