@@ -67,6 +67,38 @@ test('VSelect - autocomplete', () => {
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
+  it('should be able to clear autocomplete value', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        autocomplete: true,
+        items: ['red'],
+        debounceSearch: 0
+      }
+    })
+
+    const input = wrapper.find('input')[0]
+
+    wrapper.vm.focus()
+    await wrapper.vm.$nextTick()
+    wrapper.setProps({ searchInput: 're' })
+    await wrapper.vm.$nextTick()
+    input.trigger('keydown.tab')
+    await wrapper.vm.$nextTick()
+
+    const change = jest.fn()
+    wrapper.vm.$on('input', change)
+
+    wrapper.vm.focus()
+    await wrapper.vm.$nextTick()
+    wrapper.setProps({ searchInput: '' })
+    await wrapper.vm.$nextTick()
+    input.trigger('keydown.tab')
+    await wrapper.vm.$nextTick()
+    expect(change).toBeCalledWith(null)
+
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
   it('should filter autocomplete search results', () => {
     const wrapper = mount(VSelect, {
       propsData: {

@@ -1,4 +1,4 @@
-import RowExpandTransitionFunctions from '../../transitions/row-expand-transition'
+import ExpandTransitionGenerator from '../../transitions/expand-transition'
 
 export default {
   methods: {
@@ -6,9 +6,11 @@ export default {
       const children = []
 
       if (!this.itemsLength) {
-        children.push(this.genEmptyBody(this.noDataText))
+        const noData = this.$slots['no-data'] || this.noDataText
+        children.push(this.genEmptyBody(noData))
       } else if (!this.filteredItems.length) {
-        children.push(this.genEmptyBody(this.noResultsText))
+        const noResults = this.$slots['no-results'] || this.noResultsText
+        children.push(this.genEmptyBody(noResults))
       } else {
         children.push(this.genFilteredItems())
       }
@@ -33,7 +35,7 @@ export default {
         props: {
           tag: 'td'
         },
-        on: RowExpandTransitionFunctions
+        on: ExpandTransitionGenerator('datatable__expand-col--expanded')
       }, children)
 
       return this.genTR([transition], { class: 'datatable__expand-row' })
@@ -88,11 +90,11 @@ export default {
 
       return rows
     },
-    genEmptyBody (text) {
+    genEmptyBody (content) {
       return this.genTR([this.$createElement('td', {
         'class': 'text-xs-center',
         attrs: { colspan: '100%' }
-      }, text)])
+      }, content)])
     }
   }
 }
