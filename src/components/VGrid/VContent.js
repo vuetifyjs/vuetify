@@ -19,10 +19,11 @@ export default {
   },
 
   render (h) {
-    return h('div', {
-      staticClass: 'content'
-    }, [h('div', {
+    const data = {
+      staticClass: 'content',
       style: this.styles
-    }, this.$slots.default)])
+    }
+
+    return h('main', [h('div', data, this.$slots.default)])
   }
 }
