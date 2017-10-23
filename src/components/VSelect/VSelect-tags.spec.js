@@ -27,6 +27,7 @@ test('VSelect - tags', () => {
     input.element.value = 'foo'
     input.trigger('input')
     await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick()
 
     input.trigger('keydown.enter')
     await wrapper.vm.$nextTick()
@@ -129,18 +130,24 @@ test('VSelect - tags', () => {
     const input = wrapper.find('input')[0]
 
     const change = jest.fn()
+    const blur = jest.fn()
     wrapper.vm.$on('change', change)
+    wrapper.vm.$on('blur', blur)
 
     wrapper.vm.focus()
     await wrapper.vm.$nextTick()
-
-    input.element.value = 'ba'
-    input.trigger('input')
-    input.trigger('keydown.right')
+    wrapper.setProps({ searchInput: 'ba' })
+    await wrapper.vm.$nextTick()
     input.trigger('keydown.tab')
     await wrapper.vm.$nextTick()
+    expect(change).toBeCalledWith(['bar'])
 
-    expect(change).toBeCalledWith(['ba'])
+    wrapper.setProps({ searchInput: 'it' })
+    await wrapper.vm.$nextTick()
+    input.trigger('keydown.tab')
+    await wrapper.vm.$nextTick()
+    expect(change).toBeCalledWith(['bar', 'it'])
+
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
@@ -200,6 +207,60 @@ test('VSelect - tags', () => {
 
     expect(change).toBeCalledWith(['foo', 'b'])
     expect(wrapper.vm.selectedIndex).toBe(0)
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should remove a duplicate tag and add it to the end', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        tags: true,
+        value: ['foo', 'bar']
+      }
+    })
+
+    const input = wrapper.find('input')[0]
+    
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    wrapper.vm.focus()
+    await wrapper.vm.$nextTick()
+
+    input.element.value = 'foo'
+    input.trigger('input')
+    input.trigger('keydown.tab')
+    await wrapper.vm.$nextTick()
+
+    expect(change).toBeCalledWith(['bar', 'foo'])
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should add tag with valid search value on blur', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        tags: true
+      }
+    })
+
+    const input = wrapper.find('input')[0]
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    wrapper.vm.focus()
+    await wrapper.vm.$nextTick()
+
+    input.element.value = 'bar'
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
+
+    wrapper.vm.blur()
+    await wrapper.vm.$nextTick() // First tick processes blur, menu sets isActive false, adds tag
+    await wrapper.vm.$nextTick() // Second tick processes change after tag added
+
+    expect(change).toBeCalledWith(['bar'])
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 })

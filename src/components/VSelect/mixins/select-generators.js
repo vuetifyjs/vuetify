@@ -8,6 +8,14 @@ import { getObjectValueByPath } from '../../../util/helpers'
  * Used for creating the DOM elements for VSelect
  */
 export default {
+  computed: {
+    menuItems () {
+      return this.isHidingSelected ? this.filteredItems.filter(o => {
+        return (this.selectedItems || []).indexOf(o) === -1
+      }) : this.filteredItems
+    }
+  },
+
   methods: {
     genMenu () {
       const offsetY = this.isAutocomplete || this.offset || this.isDropdown
@@ -51,6 +59,18 @@ export default {
       this.minWidth && (data.props.minWidth = this.minWidth)
 
       return this.$createElement('v-menu', data, [this.genList()])
+    },
+    getMenuIndex () {
+      return this.$refs.menu ? this.$refs.menu.listIndex : -1
+    },
+    setMenuIndex (index) {
+      this.$refs.menu && (this.$refs.menu.listIndex = index)
+    },
+    resetMenuIndex () {
+      this.setMenuIndex(-1)
+    },
+    isMenuItemSelected () {
+      return this.menuIsActive && this.menuItems.length && this.getMenuIndex() > -1
     },
     genSelectionsAndSearch () {
       return this.$createElement('div', {
@@ -201,11 +221,7 @@ export default {
       }, `${this.getText(item)}${comma ? ', ' : ''}`)
     },
     genList () {
-      const visibleItems = this.hideSelected ? this.filteredItems.filter(o => {
-        return (this.selectedItems || []).indexOf(o) === -1
-      }) : this.filteredItems
-
-      const children = visibleItems.map(o => {
+      const children = this.menuItems.map(o => {
         if (o.header) return this.genHeader(o)
         if (o.divider) return this.genDivider(o)
         else return this.genTile(o)
@@ -275,7 +291,7 @@ export default {
       )
     },
     genAction (item, active) {
-      if (!this.isMultiple || this.hideSelected) return null
+      if (!this.isMultiple || this.isHidingSelected) return null
 
       const data = {
         staticClass: 'list__tile__action--select-multi',
