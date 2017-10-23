@@ -25,50 +25,6 @@ test('VRipple', () => {
     expect(div.getAttribute('data-ripple')).toBe('true')
   })
 
-  it('Ripple with true value should render data attribute true', () => {
-    const testComponent = Vue.component('test', {
-      directives: {
-        Ripple
-      },
-      render (h){
-        const data = {
-          directives: [{
-            name: 'ripple',
-            value: true
-          }]
-        }
-        return h('div', data)
-      }
-    })
-
-    const wrapper = mount(testComponent)
-
-    const div = wrapper.find('div')[0]
-    expect(div.getAttribute('data-ripple')).toBe('true')
-  })
-
-  it('Ripple with false value should render data attribute false', () => {
-    const testComponent = Vue.component('test', {
-      directives: {
-        Ripple
-      },
-      render (h){
-        const data = {
-          directives: [{
-            name: 'ripple',
-            value: false
-          }]
-        }
-        return h('div', data)
-      }
-    })
-
-    const wrapper = mount(testComponent)
-
-    const div = wrapper.find('div')[0]
-    expect(div.getAttribute('data-ripple')).toBe('false')
-  })
-
   it('Ripple should update data attribute reactively', () => {
     const testComponent = Vue.component('test', {
       directives: {
