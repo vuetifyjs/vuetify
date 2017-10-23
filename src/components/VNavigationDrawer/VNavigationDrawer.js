@@ -44,7 +44,7 @@ export default {
       default: 80
     },
     mobileBreakPoint: {
-      type: Number,
+      type: [Number, String],
       default: 1264
     },
     permanent: Boolean,
@@ -181,7 +181,7 @@ export default {
       }
     },
     checkIfMobile () {
-      this.isMobile = window.innerWidth < parseInt(this.mobileBreakPoint)
+      this.isMobile = window.innerWidth < parseInt(this.mobileBreakPoint, 10)
     },
     closeConditional () {
       return !this.permanent && (this.temporary || this.isMobile)
@@ -245,7 +245,7 @@ export default {
       const width = !this.isActive ||
         !this.isBooted ||
         !this.permanent &&
-        this.$vuetify.breakpoint.width < this.mobileBreakPoint
+        this.$vuetify.breakpoint.width < parseInt(this.mobileBreakPoint, 10)
         ? 0
         : this.calculatedWidth
 

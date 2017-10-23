@@ -1,34 +1,39 @@
 import { addOnceEventListener } from '../../util/helpers'
 
-export default {
-  enter (el, done) {
-    // Remove initial transition
-    el.style.transition = 'none'
-    addOnceEventListener(el, 'transitionend', done)
+export default function (expandedParentClass = '') {
+  return {
+    enter (el, done) {
+      el._parent = el.parentNode
 
-    // Get height that is to be scrolled
-    el.style.overflow = 'hidden'
-    el.style.height = null
-    el.style.display = 'block'
-    const height = `${el.clientHeight}px`
-    el.style.height = 0
-    el.style.transition = null
+      addOnceEventListener(el, 'transitionend', done)
 
-    setTimeout(() => (el.style.height = height), 100)
-  },
+      // Get height that is to be scrolled
+      el.style.overflow = 'hidden'
+      el.style.height = 0
+      el.style.display = 'block'
+      expandedParentClass && el._parent.classList.add(expandedParentClass)
 
-  afterEnter (el) {
-    el.style.height = 'auto'
-    el.style.overflow = null
-  },
+      setTimeout(() => (el.style.height = `${el.scrollHeight}px`), 0)
+    },
 
-  leave (el, done) {
-    addOnceEventListener(el, 'transitionend', done)
+    afterEnter (el) {
+      el.style.overflow = null
+      el.style.height = null
+    },
 
-    // Set height before we transition to 0
-    el.style.overflow = 'hidden'
-    el.style.height = `${el.clientHeight}px`
+    leave (el, done) {
+      // Remove initial transition
+      addOnceEventListener(el, 'transitionend', done)
 
-    setTimeout(() => (el.style.height = 0), 100)
+      // Set height before we transition to 0
+      el.style.overflow = 'hidden'
+      el.style.height = `${el.offsetHeight}px`
+
+      setTimeout(() => (el.style.height = 0), 100)
+    },
+
+    afterLeave (el) {
+      expandedParentClass && el._parent.classList.remove(expandedParentClass)
+    }
   }
 }

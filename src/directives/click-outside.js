@@ -1,9 +1,16 @@
 function directive (e, el, binding, v) {
   // The include element callbacks below can be expensive
   // so we should avoid calling them when we're not active.
-  // Explicitly check for false to allow fallback compatibility 
+  // Explicitly check for false to allow fallback compatibility
   // with non-toggleable components
   if (!e || v.context.isActive === false) return
+
+  // If click was triggered programmaticaly (domEl.click()) then
+  // it shouldn't be treated as click-outside
+  // Chrome/Firefox support isTrusted property
+  // IE/Edge support pointerType property (empty if not triggered
+  // by pointing device)
+  if (!e.isTrusted || ('pointerType' in e && !e.pointerType)) return
 
   // Get value passed to directive
   const val = binding.value || (() => true)
@@ -19,9 +26,9 @@ function directive (e, el, binding, v) {
   // Non-toggleable components should take action in their callback and return falsy.
   // Toggleable can return true if it wants to deactivate.
   // Note that, because we're in the capture phase, this callback will occure before
-  // the bubbling click event on any outside elements. 
+  // the bubbling click event on any outside elements.
   if (!clickedInEls(e, elements) && cb(e)) {
-    // Delay setting toggleable inactive to avoid conflicting 
+    // Delay setting toggleable inactive to avoid conflicting
     // with an outside click on any activator toggling our state.
     setTimeout(() => (v.context.isActive = false), 0)
   }
@@ -39,7 +46,7 @@ function clickedInEls (e, elements) {
 }
 
 function clickedInEl (el, x, y) {
-  // Get bounding rect for element 
+  // Get bounding rect for element
   // (we're in capturing event and we want to check for multiple elements,
   //  so can't use target.)
   const b = el.getBoundingClientRect()
