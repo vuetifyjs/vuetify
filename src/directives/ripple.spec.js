@@ -95,17 +95,13 @@ test('VRipple', () => {
       }
     })
 
-    wrapper.vm.$nextTick()
-
     const div = wrapper.find('div')[0]
     expect(div.getAttribute('data-ripple')).toBe('true')
 
     wrapper.setProps({ ripple: false })
-
     expect(div.getAttribute('data-ripple')).toBe('false')
 
     wrapper.setProps({ ripple: true })
-
     expect(div.getAttribute('data-ripple')).toBe('true')
   })
 })
