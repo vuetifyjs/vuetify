@@ -64,7 +64,7 @@ export default {
       return this.parseNumber(text)
     },
     maskNumeralText (text) {
-      if (!text) return this.addPrefixSuffix(this.precision ? '0.' + this.getFraction('') : '0')
+      if (!text) return this.numeralZero()
       text = this.sign ? String(text).substr(1) : String(text)
 
       const param = {
@@ -121,6 +121,9 @@ export default {
 
       if (isNaN(parsed)) return 0
       return Math.abs(parsed)
+    },
+    numeralZero () {
+      return this.addPrefixSuffix(this.precision ? '0.' + this.getFraction('') : '0')
     },
     adjustNumeralCaret (selection, text) {
       // Caret is at prefix
