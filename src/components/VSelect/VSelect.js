@@ -201,6 +201,9 @@ export default {
         this.isDirty &&
         this.searchValue === this.getText(this.selectedItem)
     },
+    isHidingSelected () {
+      return this.hideSelected && this.isAutocomplete && this.isMultiple
+    },
     isAutocomplete () {
       return this.autocomplete || this.editable || this.tags || this.combobox
     },
@@ -212,6 +215,9 @@ export default {
     },
     isMultiple () {
       return this.multiple || this.tags
+    },
+    isAnyValueAllowed () {
+      return this.tags || this.combobox
     },
     searchValue: {
       get () { return this.lazySearch },
@@ -288,11 +294,9 @@ export default {
         this.cachedItems = this.filterDuplicates(this.cachedItems.concat(val))
       }
 
-      this.$refs.menu.listIndex = -1
+      this.resetMenuIndex()
 
-      this.searchValue && this.$nextTick(() => {
-        this.$refs.menu && (this.$refs.menu.listIndex = 0)
-      })
+      this.searchValue && this.$nextTick(() => this.setMenuIndex(0))
 
       this.genSelectedItems()
     },
@@ -325,10 +329,12 @@ export default {
         this.menuIsActive = true
       }
 
-      this.$refs.menu.listIndex = null
+      // Only reset list index
+      // if typing in search
+      val && this.resetMenuIndex()
 
       this.$nextTick(() => {
-        this.$refs.menu && (this.$refs.menu.listIndex = val ? 0 : -1)
+        val ? this.setMenuIndex(0) : this.resetMenuIndex()
       })
     },
     selectedItems () {
@@ -582,8 +588,8 @@ export default {
 
       // List tile will re-render, reset index to
       // maintain highlighting
-      const savedIndex = this.$refs.menu.listIndex
-      this.$refs.menu.listIndex = -1
+      const savedIndex = this.getMenuIndex()
+      this.resetMenuIndex()
 
       // After selecting an item
       // refocus the input and
@@ -591,13 +597,16 @@ export default {
       this.$nextTick(() => {
         this.focus()
         this.setCaretPosition(this.currentRange)
-        this.$refs.menu && (this.$refs.menu.listIndex = savedIndex)
+
+        requestAnimationFrame(() => {
+          (!this.isAutocomplete || this.searchValue) ? this.setMenuIndex(savedIndex) : this.resetMenuIndex()
+        })
       })
     },
     showMenuItems () {
       this.isActive = true
       this.menuIsActive = true
-      this.chips && (this.$refs.menu.listIndex = -1)
+      this.chips && this.resetMenuIndex()
     }
   },
 

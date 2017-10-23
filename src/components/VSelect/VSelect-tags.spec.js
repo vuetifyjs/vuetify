@@ -27,6 +27,7 @@ test('VSelect - tags', () => {
     input.element.value = 'foo'
     input.trigger('input')
     await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick()
 
     input.trigger('keydown.enter')
     await wrapper.vm.$nextTick()
@@ -129,18 +130,24 @@ test('VSelect - tags', () => {
     const input = wrapper.find('input')[0]
 
     const change = jest.fn()
+    const blur = jest.fn()
     wrapper.vm.$on('change', change)
+    wrapper.vm.$on('blur', blur)
 
     wrapper.vm.focus()
     await wrapper.vm.$nextTick()
-
-    input.element.value = 'ba'
-    input.trigger('input')
-    input.trigger('keydown.right')
+    wrapper.setProps({ searchInput: 'ba' })
+    await wrapper.vm.$nextTick()
     input.trigger('keydown.tab')
     await wrapper.vm.$nextTick()
+    expect(change).toBeCalledWith(['bar'])
 
-    expect(change).toBeCalledWith(['ba'])
+    wrapper.setProps({ searchInput: 'it' })
+    await wrapper.vm.$nextTick()
+    input.trigger('keydown.tab')
+    await wrapper.vm.$nextTick()
+    expect(change).toBeCalledWith(['bar', 'it'])
+
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
