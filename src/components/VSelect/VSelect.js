@@ -257,14 +257,19 @@ export default {
       if (this.combobox) this.menuIsActive = false
     },
     isActive (val) {
-      if (!val) {
-        this.searchValue = null
-        this.menuIsActive = false
-        this.isFocused = false
-        this.selectedIndex = -1
-      } else {
+      if (val) {
         this.searchValue = this.getText(this.selectedItem)
+        return
       }
+
+      if (this.tags && this.searchValue) {
+        this.updateTags(this.searchValue)
+      }
+
+      this.searchValue = null
+      this.menuIsActive = false
+      this.isFocused = false
+      this.selectedIndex = -1
 
       // this.lastItem += !val ? 20 : 0
     },

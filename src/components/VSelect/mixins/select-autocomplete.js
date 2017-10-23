@@ -23,18 +23,6 @@ export default {
   },
 
   methods: {
-    updateTags (content) {
-      if (this.selectedItems.includes(content)) {
-        this.$delete(this.selectedItems, this.selectedItems.indexOf(content))
-      } else {
-        this.selectedItems.push(content)
-      }
-
-      this.$nextTick(() => {
-        this.searchValue = null
-        this.$emit('change', this.selectedItems)
-      })
-    },
     filterSearch () {
       if (!this.isAutocomplete) return this.computedItems
 
@@ -167,6 +155,20 @@ export default {
       if (!this.$refs.menu.tiles[index]) return
 
       this.$refs.menu.tiles[index].click()
+    },
+    updateTags (content) {
+      // If a duplicate item
+      // exists, remove it
+      if (this.selectedItems.includes(content)) {
+        this.$delete(this.selectedItems, this.selectedItems.indexOf(content))
+      }
+
+      this.selectedItems.push(content)
+
+      this.$nextTick(() => {
+        this.searchValue = null
+        this.$emit('change', this.selectedItems)
+      })
     }
   }
 }
