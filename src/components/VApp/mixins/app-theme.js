@@ -37,11 +37,19 @@ export default {
         )
       }).join('')
     },
+    genRules (key, color, suffix = '') {
+      return [
+        `.application--${color} .${key}${suffix}`,
+        `.application .theme--${color} .${key}${suffix}`,
+        `.application.application--light .theme--${color}.${key}${suffix}`,
+        `.application.application--dark .theme--${color}.${key}${suffix}`
+      ].join(',')
+    },
     genBackgroundColor (key, value, color) {
-      return `.${key}--${color}{background-color:${value}!important;border-color:${value}!important}`
+      return `${this.genRules(key, color)}{background-color:${value}!important;border-color:${value}!important}`
     },
     genTextColor (key, value, color) {
-      return `.${key}--${color}--text{color:${value}!important}`
+      return `${this.genRules(key, color, '--text')}{color:${value}!important}`
     },
     genStyle () {
       const style = document.createElement('style')
