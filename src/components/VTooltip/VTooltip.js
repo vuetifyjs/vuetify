@@ -28,6 +28,10 @@ export default {
       type: Boolean,
       default: true
     },
+    openDelay: {
+      type: [Number, String],
+      default: 200
+    },
     tag: {
       type: String,
       default: 'span'
