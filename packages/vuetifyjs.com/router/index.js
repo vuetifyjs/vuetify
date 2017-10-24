@@ -12,7 +12,7 @@ function route (path, view) {
   return {
     path: path,
     meta: meta[path],
-    component: resolve => import(`pages/${view}View.vue`).then(resolve)
+    component: resolve => import(`@pages/${view}View.vue`).then(resolve)
   }
 }
 
@@ -26,6 +26,7 @@ export function createRouter () {
         // Getting Started
         route('/getting-started/quick-start', 'QuickStart'),
         route('/playground', 'Playground'),
+        route('/components/alerts', 'Alerts'),
         // Global redirect for 404
         { path: '*', redirect: '/' }
       ]
@@ -33,11 +34,11 @@ export function createRouter () {
 
     // Send a pageview to Google Analytics
     router.beforeEach((to, from, next) => {
-        if (typeof ga !== 'undefined') {
-            ga('set', 'page', to.path)
-            ga('send', 'pageview')
-        }
-        next()
+      if (typeof ga !== 'undefined') {
+        ga('set', 'page', to.path)
+        ga('send', 'pageview')
+      }
+      next()
     })
 
     return router

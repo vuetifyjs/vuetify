@@ -1,37 +1,21 @@
-<style lang="stylus" scoped>
-  .toolbar__title
-    margin-left .5em
-    font-weight 400
-    font-size 21px
-    position relative
-    top 1px
-  .toolbar__items
-    margin-right 0 !important
-    .btn
-      text-transform capitalize
-      font-size 18px
-      margin 0
-      padding: 0 .125em
-      font-weight 300
-</style>
-
-
-
 <template lang="pug">
   v-toolbar(
+    class="primary"
     app
     clipped
-    ref="toolbar"
     dark
-    class="primary"
-  )
-    img(
-      src="/static/v-alt.svg"
-      height="38px"
-    )
-    <v-toolbar-title>Vuetify</v-toolbar-title>
-    <v-spacer></v-spacer>
-    <v-toolbar-items>
+    :manual-scroll="isManualScrolling"
+    ref="toolbar"
+  )#app-toolbar
+    v-toolbar-side-icon(@click="$store.commit('app/DRAWER_TOGGLE')")
+    router-link(to="/")
+      img(
+        src="/static/v-alt.svg"
+        height="38px"
+      )
+    v-toolbar-title Vuetify
+    v-spacer
+    v-toolbar-items
       v-btn(flat)
         span.hidden-md-and-up Docs
         span.hidden-sm-and-down Documentation
@@ -39,12 +23,15 @@
       v-btn(flat).hidden-sm-and-down Vueticasts
       v-btn(flat).hidden-sm-and-down Shop
       v-btn(flat).hidden-sm-and-down Donate
-    </v-toolbar-items>
 </template>
 
 <script>
   export default {
     name: 'app-toolbar',
+
+    data: () => ({
+      isManualScrolling: false
+    }),
 
     watch: {
       $route (current) {
@@ -53,13 +40,13 @@
           : 0
 
         setTimeout(() => {
-          this.$refs.toolbar.isScrolling = !duration
+          this.isManualScrolling = !duration
         }, duration)
       }
     },
 
     mounted () {
-      this.$refs.toolbar.isScrolling = this.$route.path === '/'
+      this.isManualScrolling = this.$route.path === '/'
     }
   }
 </script>

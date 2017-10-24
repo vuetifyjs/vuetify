@@ -14,13 +14,16 @@ export function createStore () {
     actions: {},
 
     mutations: {
-      ['app:disable-route-watcher'] (state, payload) {
+      ['app/DISABLE_ROUTE_WATCHER'] (state, payload) {
         state.routeWatcher = payload
       },
-      ['app:drawer'] (state, payload) {
+      ['app/DRAWER'] (state, payload) {
         state.appDrawer = payload
       },
-      ['app:footer'] (state, payload) {
+      ['app/DRAWER_TOGGLE'] (state) {
+        state.appDrawer = !state.appDrawer
+      },
+      ['app/FOOTER'] (state, payload) {
         state.appFooter = payload
       }
     },

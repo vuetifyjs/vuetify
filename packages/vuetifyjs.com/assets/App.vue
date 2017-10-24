@@ -7,11 +7,11 @@
 </template>
 
 <script>
-  import Meta from 'mixins/meta'
-  import AppDrawer from 'components/AppDrawer'
-  import AppToolbar from 'components/AppToolbar'
-  import AppView from 'components/AppView'
-  import AppFooter from 'components/AppFooter'
+  import Meta from '@mixins/meta'
+  import AppDrawer from '@components/AppDrawer'
+  import AppToolbar from '@components/AppToolbar'
+  import AppView from '@components/AppView'
+  import AppFooter from '@components/AppFooter'
 
   export default {
     name: 'documentation',
@@ -28,21 +28,21 @@
     watch: {
       $route (current, previous) {
         if (current.path !== '/' && previous.path !== '/') return
-        let watcher = true
-        let drawer = true
+        const watcher = true
+        const drawer = current.path !== '/'
 
-        if (current.path === '/') drawer = false
-
-        this.$store.commit('app:disable-route-watcher', watcher)
-        this.$store.commit('app:drawer', drawer)
+        setTimeout(() => {
+          this.$store.commit('app/DISABLE_ROUTE_WATCHER', watcher)
+          this.$store.commit('app/DRAWER', drawer)
+        }, 300)
       }
     },
 
     mounted () {
       if (this.$route.path !== '/') return
 
-      this.$store.commit('app:disable-route-watcher', true)
-      this.$store.commit('app:drawer', false)
+      this.$store.commit('app/DISABLE_ROUTE_WATCHER', true)
+      this.$store.commit('app/DRAWER', false)
     }
   }
 </script>

@@ -1,47 +1,5 @@
-<style lang="stylus" scoped>
-  footer
-    display: block // todo: default of display flex causing issues
-    a
-      text-decoration none
-      color #cfd8dc
-      &:hover
-        color white
-        cursor pointer
-    background #37424b
-    color white
-    .flex
-      padding 2.5em 3em
-      &.vuetify
-        background #303c42
-        h5
-          font-size 21px
-        img
-          height 32px
-          margin-right 10px
-          vertical-align middle
-        span
-          position relative
-          top 3px
-      h5
-        color white
-        font-size 16px
-      ul
-        list-style none
-        margin 0
-        padding 0
-        li
-          a
-            font-size 16px
-            display block
-            padding: 0 0 .66em
-            .icon.fa
-              font-size 18px
-              width 25px
-</style>
-
-
 <template lang="pug">
-  v-footer.white--text
+  v-footer#home-footer
     v-layout(row wrap).ma-0
       v-flex(xs6 md3).pa-5.blue-grey.darken-2.vuetify
         h5
