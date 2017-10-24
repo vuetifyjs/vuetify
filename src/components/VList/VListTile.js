@@ -16,7 +16,7 @@ export default {
   props: {
     activeClass: {
       type: String,
-      default: 'list__tile--active'
+      default: 'primary--text'
     },
     avatar: Boolean,
     inactive: Boolean,
@@ -30,6 +30,7 @@ export default {
         'list__tile--link': this.isLink && !this.inactive,
         'list__tile--avatar': this.avatar,
         'list__tile--disabled': this.disabled,
+        'list__tile--active': this.isActive,
         [this.activeClass]: this.isActive
       }
     },

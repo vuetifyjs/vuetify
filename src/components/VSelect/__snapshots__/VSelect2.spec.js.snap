@@ -34,7 +34,7 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
           >
             <li>
               <a href="javascript:;"
-                 class="list__tile list__tile--link primary--text"
+                 class="list__tile list__tile--link list__tile--active primary--text"
                  data-ripple="true"
               >
                 <div class="list__tile__action list__tile__action--select-multi">
@@ -275,7 +275,7 @@ exports[`VSelect should be clearable with prop, dirty and single select 1`] = `
           >
             <li>
               <a href="javascript:;"
-                 class="list__tile list__tile--link primary--text"
+                 class="list__tile list__tile--link list__tile--active primary--text"
                  data-ripple="true"
               >
                 <div class="list__tile__content">
