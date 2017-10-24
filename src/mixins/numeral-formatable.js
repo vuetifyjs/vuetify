@@ -2,6 +2,7 @@ export default {
   data: () => ({
     options: {},
     signSymbol: '',
+    growLength: true,
     preDefined: {
       'numeral': {
         positiveOnly: false, // Positive value only
@@ -52,6 +53,9 @@ export default {
     },
     numeralSuffix () {
       return this.options.suffix || ''
+    },
+    numeralZero () {
+      return this.addPrefixSuffix(this.precision ? '0.' + this.getFraction('') : '0')
     }
   },
 
@@ -59,13 +63,18 @@ export default {
     unmaskNumeralText (text) {
       if (!text) return text
       this.sign = text = String(text)
-      text = this.internalChange ? this.removeNonNumeral(text) : this.attemptNumeralCorrection(text)
 
-      return this.parseNumber(text)
+      if (this.internalChange) text = text.replace(/[^\d]/g, '')
+      else {
+        this.internalChange = true
+        text = this.attemptNumeralCorrection(text)
+      }
+
+      return this.sign === '-' ? '-' + this.parseNumber(text) : this.parseNumber(text)
     },
-    maskNumeralText (text) {
-      if (!text) return this.numeralZero()
-      text = this.sign ? String(text).substr(1) : String(text)
+    maskNumeralText (digits) {
+      if (!digits) return this.numeralZero
+      digits = this.sign ? String(digits).substr(1) : String(digits)
 
       const param = {
         masked: [],
@@ -76,7 +85,7 @@ export default {
       }
 
       // Group the digits with specified separators and digit counts.
-      for (const digit of text.split('').reverse()) {
+      for (const digit of digits.split('').reverse()) {
         if (!this.maskNumeral(digit, param)) break
       }
 
@@ -91,7 +100,7 @@ export default {
       }
 
       if (param.integer) {
-        if (!this.blockSize[param.sizeIndex]) return false
+        if (!this.blockSize[param.sizeIndex]) return this.growLength = false
         else if (!this.blockSeparator[param.separatorIndex]) param.masked.push(digit)
         else if (!(++param.length % this.blockSize[param.sizeIndex])) {
           param.masked.push(this.blockSeparator[param.separatorIndex][0])
@@ -108,10 +117,13 @@ export default {
     },
     maskedNumeral (masked) {
       if (!masked.length) masked = ['0']
-      else if (this.blockSeparator.includes(masked[0])) masked.shift()
+      else if (this.blockSeparator.includes(masked[0])) {
+        if (this.precision && masked.lastIndexOf(this.decimal) === 0) {
+          masked.splice(0, 0, '0')
+        } else masked.shift()
+      }
 
-      const result = this.addPrefixSuffix(masked.join(''))
-      return masked[0] === '.' ? '0' + result : result
+      return this.addPrefixSuffix(masked.join(''))
     },
     // TODO: Rework this restrictive function to
     // make -ve as a valid value in order
@@ -122,104 +134,71 @@ export default {
       if (isNaN(parsed)) return 0
       return Math.abs(parsed)
     },
-    numeralZero () {
-      return this.addPrefixSuffix(this.precision ? '0.' + this.getFraction('') : '0')
-    },
-    adjustNumeralCaret (selection, text) {
+    adjustNumeralCaret (selection, maskedText) {
       // Caret is at prefix
       if (selection === 0) return this.numeralPrefix.length + this.sign.length
 
-      // Whether selection !== 0 (may happen when block size === 0) or it's an
-      // integer or a fractional where abs(value) >= 10
-      if (selection !== text.length && (!this.precision ||
+      // Length of input grows and larger than minimum digit count.
+      if (this.growLength && (!this.precision ||
         (String(this.lazyValue).length > this.precision + (this.sign ? 3 : 2)))) {
         return selection
-      }
+      } else this.growLength = true
 
       // Caret is at suffix or end of line
-      const suffixPosition = this.numeralSuffix ? text.lastIndexOf(this.numeralSuffix) : 0
+      const suffixPosition = this.numeralSuffix ? maskedText.lastIndexOf(this.numeralSuffix) : 0
       if (suffixPosition > 0 && selection >= suffixPosition) {
         return selection > suffixPosition ? suffixPosition
           : this.delete || this.backspace ? suffixPosition : suffixPosition - 1
-      } else if (!suffixPosition && selection === text.length) return selection
+      }
 
-      // Handle abs(value) < 10
-      // Make the caret stay where it were when the
-      // length of input is the same before and after
-      return this.backspace ? this.numeralCaretOnBackspace(selection, text)
-        : this.delete ? this.numeralCaretOnDelete(selection, text)
+      // Length of input field is unchanged. Make the caret stay where it were.
+      return this.backspace ? this.numeralCaretOnBackspace(selection, maskedText)
+        : this.delete ? this.numeralCaretOnDelete(selection, maskedText)
           : this.numeralCaretOnInsert(selection)
     },
     numeralCaretOnInsert (selection) {
-      selection -= this.selection < selection ? 1 : 0
-      selection -= this.selection === selection ? 1 : 0
-
-      return selection
+      return selection -= this.selection === selection ? 1 : 0
     },
-    numeralCaretOnDelete (selection, text) {
-      if (text[this.selection] === this.decimal) {
+    numeralCaretOnDelete (selection, maskedText) {
+      if (maskedText[this.selection] === this.decimal) {
         selection += 1
       } else {
-        selection += text[this.numeralPrefix.length + this.sign.length] === '0' ? 1 : 0
-        selection += text[selection - 1] === this.decimal ? 1 : 0
+        selection += maskedText[this.numeralPrefix.length + this.sign.length] === '0' ? 1 : 0
+        selection += maskedText[selection - 1] === this.decimal ? 1 : 0
       }
 
       return selection
     },
-    numeralCaretOnBackspace (selection, text) {
-      if (text[this.numeralPrefix.length + this.sign.length] === '0') {
-        text[this.selection] !== this.decimal && selection++
-        text[this.selection - 1] === this.decimal && selection++
+    numeralCaretOnBackspace (selection, maskedText) {
+      if (maskedText[this.numeralPrefix.length + this.sign.length] === '0') {
+        maskedText[this.selection] !== this.decimal && selection++
+        maskedText[this.selection - 1] === this.decimal && selection++
       }
 
       return selection
     },
-    // Correction on arbitrary value entered externally
+    // Correction on arbitrary number entered externally
     attemptNumeralCorrection (text) {
-      const decimalPoint = text.lastIndexOf('.')
-      let integer = decimalPoint < 0 ? this.removeNonNumeral(text)
-        : this.removeNonNumeral(text.substring(0, decimalPoint))
+      const [decimalDigits = '0', fractionDigits = ''] = text.replace(/[^\d.]/g, '').split('.')
+      return `${decimalDigits}.${this.getFraction(fractionDigits)}`.replace('.', '')
+    },
+    getFraction (fractionDigits) {
+      return fractionDigits.substr(0, this.precision).padEnd(this.precision, '0')
+    },
+    addPrefixSuffix (number) {
+      return this.numeralPrefix + this.sign + number + this.numeralSuffix
+    },
+    parseNumber (digits) {
+      if (!this.precision) return this.removeLeadingZeros(digits)
 
-      integer = integer.length ? integer : '0'
-      if (!this.precision) return integer
+      digits = digits.split('')
+      digits.splice(-this.precision, 0, '.')
 
-      return decimalPoint < 0 ? integer + this.getFraction('')
-        : integer + this.getFraction(text.substr(decimalPoint))
+      return this.removeLeadingZeros(digits.join(''))
     },
-    getFraction (text) {
-      let fraction = this.removeNonNumeral(text)
-      fraction = fraction.substr(0, this.precision)
-      fraction = fraction.padEnd(this.precision, '0')
-
-      return fraction
-    },
-    addPrefixSuffix (text) {
-      return this.numeralPrefix + this.sign + text + this.numeralSuffix
-    },
-    parseNumber (text) {
-      if (!this.precision) return this.parseInt(text)
-
-      text = text.split('')
-      text.splice(-this.precision, 0, '.')
-
-      return this.sign + this.parseFloat(text.join(''))
-    },
-    parseInt (text) {
-      return this.removeNonNumeral(this.removeLeadingZeros(text))
-    },
-    parseFloat (text) {
-      text = this.removeLeadingZeros(text)
-      const decimal = text.lastIndexOf('.')
-
-      return text.substr(0, decimal) + '.' + this.getFraction(text.substr(decimal + 1))
-    },
-    removeLeadingZeros (text) {
-      text = text.replace(/^0+/, '')
-      return text[0] === '.' ? '0' + text : text
-    },
-    removeNonNumeral (text, preserveDecimal = false) {
-      if (text == null) return ''
-      return preserveDecimal ? text.replace(/[^\d.]/g, '') : text.replace(/[^\d]/g, '')
+    removeLeadingZeros (digits) {
+      digits = digits.replace(/^0+/, '')
+      return digits[0] === '.' ? '0' + digits : digits
     },
     isNumeralDelimiter (char) {
       return char && char.match(/[^\d]/)

@@ -121,7 +121,7 @@ export default {
       }
     },
     value (val) {
-      if (this.internalChange) { // Through keystroke
+      if (this.internalChange) {
         this.internalChange = false
         return
       }

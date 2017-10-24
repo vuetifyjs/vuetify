@@ -3,7 +3,7 @@
  *
  * @type {Object}
  */
-export const allowedMasks = {
+const allowedMasks = {
   '#': {
     test: char => char.match(/[0-9]/)
   },
