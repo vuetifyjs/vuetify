@@ -1,35 +1,15 @@
-<style lang="stylus" scoped>
-  img.logo
-    margin 40px 0 25px
-  .diamondSponsorLabel
-    color #676767
-    margin: 3em 0 .5em
-    font-size 13px
-  .diamondSponsor
-    // todo trim down actual image file dimensions
-    height: 40px
-    margin-bottom 1.25em
-
-    aside.navigation-drawer
-      ul
-        li
-          font-size 14px
-          color: #373737
-</style>
-
-
 <template lang="pug">
   v-navigation-drawer(
     app
-    permanent
+    persistent
     clipped
-    v-if="$route.fullPath !== '/'"
     v-model="appDrawer"
+    enable-resize-watcher
     :disable-route-watcher="!routeWatcher"
-  )
+  )#app-drawer
     div.text-xs-center
-      div.diamondSponsorLabel Diamond Sponsor
-      img.diamondSponsor(
+      div.diamond-sponsor-label Diamond Sponsor
+      img.diamond-sponsor(
         src="https://vuetifyjs.com/static/doc-images/backers/lmax-exchange.png"
         alt="Sponsor"
       )
@@ -158,7 +138,7 @@
           return this.$store.state.appDrawer
         },
         set (val) {
-          this.$store.commit('app:drawer', val)
+          this.$store.commit('app/DRAWER', val)
         }
       }
     }
