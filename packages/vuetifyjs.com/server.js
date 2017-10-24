@@ -61,6 +61,7 @@ const serve = (path, cache) => express.static(resolve(path), {
 
 app.use(compression({ threshold: 0 }))
 app.use(favicon('./static/favicon.ico'))
+app.use('/example-source', serve('./examples', true)) // TODO: This should be a regex to serve anything with an extension
 app.use('/static', serve('./static', true))
 app.use('/public', serve('./public', true))
 app.use('/static/robots.txt', serve('./robots.txt'))
