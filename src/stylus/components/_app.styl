@@ -1,16 +1,6 @@
 @import '../bootstrap'
 @import '../theme'
 
-.application
-  -webkit-backface-visibility: hidden
-  display: flex
-  min-height: 100vh
-  flex-direction: column
-
-  > main
-    display: flex
-    flex: 1 0 auto
-
 application($material)
   background: $material.background
   color: $material.text.primary
@@ -19,3 +9,13 @@ application($material)
     color: $material.text.link
 
 app(application)
+
+.application
+  -webkit-backface-visibility: hidden
+  display: flex
+  flex-direction: column
+  min-height: 100vh
+
+  > main
+    display: flex
+    flex: 1 0 auto

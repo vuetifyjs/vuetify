@@ -38,15 +38,15 @@ export default {
       }).join('')
     },
     genBackgroundColor (key, value, color) {
-      return `.${key}--${color}{background-color:${value}!important;border-color:${value}!important}`
+      return `.${key}--${color}{background-color:${value};border-color:${value}}`
     },
     genTextColor (key, value, color) {
-      return `.${key}--${color}--text{color:${value}!important}`
+      return `.${key}--${color}--text{color:${value}}`
     },
     genStyle () {
       const style = document.createElement('style')
       style.type = 'text/css'
-      document.head.insertBefore(style, document.head.firstChild)
+      document.head.appendChild(style)
       this.style = style
     },
     updateTheme (classes) {
