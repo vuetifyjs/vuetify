@@ -1,5 +1,5 @@
 <template lang="pug">
-  h2.headline.primary--light--text.mb-0
+  h2.headline.primary--light--text
     slot
 </template>
 

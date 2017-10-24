@@ -1,7 +1,31 @@
 <template lang="pug">
   div.component-example(:id="id")
     codepen(ref="codepen" :pen="pen")
-    v-card
+    div
+      v-expansion-panel.elevation-0.component-example__panel
+        v-expansion-panel-content(v-model="panel")
+          v-tabs(ref="tabs" dark :scrollable="false")
+            v-tabs-bar(v-bind:class="[currentColor]" class="darken-4 pl-0")
+              v-tabs-slider(v-bind:color="currentColor + ' lighten-4'")
+              v-tabs-item(
+                v-for="tab in tabs"
+                v-bind:key="tab"
+                v-bind:href="'#'+tab"
+                v-show="parsed[tab]"
+              ) {{ tab }}
+            v-tabs-items
+              v-tabs-content(
+                v-for="tab in tabs"
+                v-bind:key="tab"
+                v-bind:id="tab"
+              )
+                markup(:lang="getLang(tab)" v-if="parsed[tab]").ma-0
+                  div(v-html="parsed[tab]")
+      div.my-3.justify
+        slot(name="desc")
+      p
+        div(:id="'example-'+uid")
+
       v-toolbar(v-bind:color="currentColor" flat dense dark)
         v-btn(dark icon :to="{ hash: id }")
           v-icon link
@@ -37,30 +61,6 @@
           )
             v-icon code
           span View source
-      v-expansion-panel.elevation-0.component-example__panel
-        v-expansion-panel-content(v-model="panel")
-          v-tabs(ref="tabs" dark :scrollable="false")
-            v-tabs-bar(v-bind:class="[currentColor]" class="darken-4 pl-0")
-              v-tabs-slider(v-bind:color="currentColor + ' lighten-4'")
-              v-tabs-item(
-                v-for="tab in tabs"
-                v-bind:key="tab"
-                v-bind:href="'#'+tab"
-                v-show="parsed[tab]"
-              ) {{ tab }}
-            v-tabs-items
-              v-tabs-content(
-                v-for="tab in tabs"
-                v-bind:key="tab"
-                v-bind:id="tab"
-              )
-                markup(:lang="getLang(tab)" v-if="parsed[tab]").ma-0
-                  div(v-html="parsed[tab]")
-      v-card-text.subheading.justify
-        slot(name="desc")
-      v-card-text
-        div(:id="'example-'+uid")
-    v-divider.my-5
 </template>
 
 <script>
@@ -123,7 +123,6 @@
         /* webpackMode: "lazy-once" */
         `../examples/${this.file}.vue`
       ).then(comp => {
-        console.log(comp)
         this.instance = new Vue(comp.default)
         this.instance.$mount('#example-'+this.uid)
       })
@@ -192,6 +191,8 @@
 
 <style lang="stylus">
   .component-example
+    margin-bottom: 32px
+
     .component-example__panel
       .expansion-panel__body
         border: none

@@ -1,9 +1,14 @@
-import alerts from './components/alerts'
-import home from './pages/home'
-import quickStart from './pages/quick-start'
+// Components
+import Components from './components'
+
+// Pages
+import Vuetify from './vuetify'
+
+// Examples
+import Examples from './examples'
 
 export default {
-  alerts,
-  home,
-  quickStart
+  Components,
+  Vuetify,
+  Examples
 }
