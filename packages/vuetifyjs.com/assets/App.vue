@@ -27,22 +27,25 @@
 
     watch: {
       $route (current, previous) {
-        if (current.path !== '/' && previous.path !== '/') return
-        const watcher = true
-        const drawer = current.path !== '/'
-
-        setTimeout(() => {
-          this.$store.commit('app/DISABLE_ROUTE_WATCHER', watcher)
-          this.$store.commit('app/DRAWER', drawer)
-        }, 300)
+        this.setupLayout(300)
       }
     },
 
     mounted () {
-      if (this.$route.path !== '/') return
+      this.setupLayout()
+    },
 
-      this.$store.commit('app/DISABLE_ROUTE_WATCHER', true)
-      this.$store.commit('app/DRAWER', false)
+    methods: {
+      setupLayout (timeout = 0) {
+        const watcher = true
+        const drawer = this.$route.fullPath !== '/'
+
+        setTimeout(() => {
+          this.$store.commit('app/DISABLE_ROUTE_WATCHER', watcher)
+          this.$store.commit('app/DRAWER', drawer)
+          this.$store.commit('app/ENABLE_RESIZE_WATCHER', drawer)
+        }, timeout)
+      }
     }
   }
 </script>

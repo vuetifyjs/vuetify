@@ -2,8 +2,6 @@ import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import en from'./en-US'
 
-console.log(en)
-
 Vue.use(VueI18n)
 
 export function createI18n () {

@@ -4,7 +4,7 @@
     persistent
     clipped
     v-model="appDrawer"
-    enable-resize-watcher
+    :enable-resize-watcher="resizeWatcher"
     :disable-route-watcher="!routeWatcher"
   )#app-drawer
     div.text-xs-center
@@ -131,6 +131,7 @@
     }),
     computed: {
       ...mapState({
+        resizeWatcher: state => state.resizeWatcher,
         routeWatcher: state => state.routeWatcher
       }),
       appDrawer: {

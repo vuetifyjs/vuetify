@@ -28,6 +28,7 @@
     "vue-i18n": "^7.2.0",
     "vue-router": "^3.0.1",
     "vue-server-renderer": "^2.4.4",
+    "vuelidate": "^0.6.1",
     "vuetify": "^0.16.0-beta.3",
     "vuex": "^3.0.0",
     "vuex-router-sync": "^5.0.0"
@@ -44,7 +45,7 @@
     "eventsource-polyfill": "^0.9.6",
     "file-loader": "^1.1.5",
     "friendly-errors-webpack-plugin": "^1.6.1",
-    "highlight.js": "^9.8.0",
+    "highlight.js": "^9.12.0",
     "html-webpack-plugin": "^2.24.1",
     "pug": "^2.0.0-beta3",
     "rimraf": "^2.6.1",
