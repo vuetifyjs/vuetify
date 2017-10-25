@@ -13,6 +13,10 @@ export default {
 
   inheritAttrs: false,
 
+  data: () => ({
+    proxyClass: 'list__tile--active'
+  }),
+
   props: {
     activeClass: {
       type: String,
@@ -30,7 +34,6 @@ export default {
         'list__tile--link': this.isLink && !this.inactive,
         'list__tile--avatar': this.avatar,
         'list__tile--disabled': this.disabled,
-        'list__tile--active': this.isActive,
         [this.activeClass]: this.isActive
       }
     },
