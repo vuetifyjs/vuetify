@@ -34,6 +34,7 @@ export default {
         'list__tile--link': this.isLink && !this.inactive,
         'list__tile--avatar': this.avatar,
         'list__tile--disabled': this.disabled,
+        'list__tile--active': !this.to && this.isActive,
         [this.activeClass]: this.isActive
       }
     },
