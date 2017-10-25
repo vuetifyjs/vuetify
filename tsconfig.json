@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es5",
+    "module": "es6",
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "sourceMap": true,
+    "lib": ["es2018", "dom"]
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "**/*.spec.ts",
+    "**/*.spec.js",
+    "node_modules"
+  ]
+}

@@ -27,7 +27,7 @@ module.exports = merge(baseWebpackConfig, {
     library: 'Vuetify'
   },
   resolve: {
-    extensions: ['*', '.js', '.json', '.vue'],
+    extensions: ['*', '.js', '.json', '.vue', '.ts'],
     alias: {
       vuetify: resolve('../src'),
       'vue$': 'vue/dist/vue.esm.js'
@@ -49,8 +49,20 @@ module.exports = merge(baseWebpackConfig, {
         exclude: /node_modules/
       },
       {
-        test: /\.js$/,
-        loaders: ['babel-loader', 'eslint-loader'],
+        test: /\.[jt]s$/,
+        enforce: 'pre',
+        loader: 'tslint-loader',
+        options: {
+          failOnHint: true,
+          typeCheck: true,
+          configFile: resolve('../.tslint.js'),
+          tsConfigFile: resolve('../tsconfig.json')
+        },
+        exclude: /node_modules/
+      },
+      {
+        test: /\.[jt]s$/,
+        loaders: ['babel-loader', 'ts-loader'],
         exclude: /node_modules/
       },
       {

@@ -1,11 +1,16 @@
 import './stylus/app.styl'
 import * as components from './components'
 import * as directives from './directives'
+import { PluginObject, VueConstructor } from 'vue'
 
-function Vuetify (Vue, args) {
-  const Vuetify = components.Vuetify
+declare module Vuetify {
+  let version: string
+}
 
-  Vue.use(Vuetify, {
+function Vuetify (Vue: VueConstructor, args: any): void {
+  const VuetifyComponent: PluginObject<any> = components.Vuetify
+
+  Vue.use(VuetifyComponent, {
     components,
     directives,
     ...args
