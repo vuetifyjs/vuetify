@@ -1,4 +1,12 @@
-export function factory (prop = 'value', event = 'input') {
+import Vue, { ComponentOptions } from 'vue'
+
+export function factory (prop = 'value', event = 'input'): ComponentOptions<
+  Vue,
+  () => { isActive: boolean },
+  undefined,
+  undefined,
+  { [prop: string]: any }
+> {
   return {
     name: 'toggleable',
 
