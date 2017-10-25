@@ -1,6 +1,9 @@
 // Styles
 import '../../stylus/components/_buttons.styl'
 
+import Vue, { VNode, ComponentOptions, VNodeChildren } from 'vue'
+import mixins from '../../util/mixins'
+
 // Components
 import VProgressCircular from '../VProgressCircular'
 
@@ -10,19 +13,17 @@ import Positionable from '../../mixins/positionable'
 import Routable from '../../mixins/routable'
 import Themeable from '../../mixins/themeable'
 import { factory as ToggleableFactory } from '../../mixins/toggleable'
-import { inject as RegistrableInject } from '../../mixins/registrable'
+// import { inject as RegistrableInject } from '../../mixins/registrable'
 
-export default {
+export default mixins(
+  Colorable,
+  Routable,
+  Positionable,
+  Themeable,
+  ToggleableFactory('inputValue')
+  // RegistrableInject('buttonGroup') // TODO
+).extend({
   name: 'v-btn',
-
-  mixins: [
-    Colorable,
-    Routable,
-    Positionable,
-    Themeable,
-    ToggleableFactory('inputValue'),
-    RegistrableInject('buttonGroup')
-  ],
 
   props: {
     activeClass: {
@@ -55,7 +56,7 @@ export default {
   },
 
   computed: {
-    classes () {
+    classes (): any {
       const classes = {
         'btn': true,
         [this.activeClass]: this.isActive,
@@ -66,7 +67,7 @@ export default {
         'btn--flat': this.flat,
         'btn--floating': this.fab,
         'btn--fixed': this.fixed,
-        'btn--hover': this.hover,
+        // 'btn--hover': this.hover, // TODO
         'btn--icon': this.icon,
         'btn--large': this.large,
         'btn--left': this.left,
@@ -89,28 +90,29 @@ export default {
 
   methods: {
     // Prevent focus to match md spec
-    click (e) {
+    click (e: MouseEvent): void {
       !this.fab &&
-        e.detail &&
-        this.$el.blur()
+      e.detail &&
+      this.$el.blur()
 
       this.$emit('click', e)
     },
-    genContent () {
+    genContent (): VNode {
       return this.$createElement(
         'div',
         { 'class': 'btn__content' },
         [this.$slots.default]
       )
     },
-    genLoader () {
-      const children = []
+    genLoader (): VNode {
+      const children: VNodeChildren = []
 
       if (!this.$slots.loader) {
-        children.push(this.$createElement(VProgressCircular, {
+        children.push(this.$createElement(VProgressCircular as ComponentOptions<Vue>, {
           props: {
             indeterminate: true,
-            size: 26
+            size: 23,
+            width: 2
           }
         }))
       } else {
@@ -122,18 +124,18 @@ export default {
   },
 
   mounted () {
-    if (this.buttonGroup) {
-      this.buttonGroup.register(this)
-    }
+    // if (this.buttonGroup) {
+    //   this.buttonGroup.register(this)
+    // }
   },
 
   beforeDestroy () {
-    if (this.buttonGroup) {
-      this.buttonGroup.unregister(this)
-    }
+    // if (this.buttonGroup) {
+    //   this.buttonGroup.unregister(this)
+    // }
   },
 
-  render (h) {
+  render (h): VNode {
     const { tag, data } = this.generateRouteLink()
     const children = [this.genContent()]
 
@@ -146,4 +148,4 @@ export default {
 
     return h(tag, data, children)
   }
-}
+})

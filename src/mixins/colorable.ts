@@ -1,4 +1,6 @@
-export default {
+import Vue from 'vue'
+
+export default Vue.extend({
   name: 'colorable',
 
   props: {
@@ -12,14 +14,15 @@ export default {
   },
 
   computed: {
-    computedColor () {
+    computedColor (): string {
       return this.color || this.defaultColor
     }
   },
 
   methods: {
-    addBackgroundColorClassChecks (obj = {}, color = this.computedColor) {
-      const classes = Object.assign({}, obj)
+    addBackgroundColorClassChecks<T, C extends string> (obj?: T, color?: C): T & Record<C, true> {
+      const classes: any = Object.assign({}, obj)
+      if (color === undefined) color = this.computedColor as any
 
       if (color) {
         classes[color] = true
@@ -27,8 +30,9 @@ export default {
 
       return classes
     },
-    addTextColorClassChecks (obj = {}, color = this.computedColor) {
+    addTextColorClassChecks (obj?: any, color?: string): any {
       const classes = Object.assign({}, obj)
+      if (color === undefined) color = this.computedColor
 
       if (color) {
         const [colorName, colorModifier] = color.trim().split(' ')
@@ -39,4 +43,4 @@ export default {
       return classes
     }
   }
-}
+})

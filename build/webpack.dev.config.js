@@ -18,7 +18,7 @@ const extractPlugin = ExtractTextPlugin.extract({
 })
 
 module.exports = merge(baseWebpackConfig, {
-  devtool: '#cheap-module-eval-source-map',
+  devtool: 'source-map',
   entry: ['babel-polyfill', './dev/index.js'],
   output: {
     filename: '[name].js',
@@ -48,21 +48,26 @@ module.exports = merge(baseWebpackConfig, {
         }, 'eslint-loader'],
         exclude: /node_modules/
       },
+      // {
+      //   test: /\.[jt]s$/,
+      //   enforce: 'pre',
+      //   loader: 'tslint-loader',
+      //   options: {
+      //     failOnHint: true,
+      //     typeCheck: true,
+      //     configFile: resolve('../.tslint.js'),
+      //     tsConfigFile: resolve('../tsconfig.json')
+      //   },
+      //   exclude: /node_modules/
+      // },
       {
-        test: /\.[jt]s$/,
-        enforce: 'pre',
-        loader: 'tslint-loader',
-        options: {
-          failOnHint: true,
-          typeCheck: true,
-          configFile: resolve('../.tslint.js'),
-          tsConfigFile: resolve('../tsconfig.json')
-        },
+        test: /\.ts$/,
+        loaders: ['ts-loader'],
         exclude: /node_modules/
       },
       {
-        test: /\.[jt]s$/,
-        loaders: ['babel-loader', 'ts-loader'],
+        test: /\.js$/,
+        loaders: ['babel-loader'],
         exclude: /node_modules/
       },
       {

@@ -1,4 +1,5 @@
-import { VueConstructor } from 'vue'
+import { VueConstructor, ComponentOptions, PluginFunction } from 'vue'
+import { Vue } from 'vue/types/vue'
 
 declare global {
   interface Window {
@@ -8,6 +9,7 @@ declare global {
 
 declare module 'vue/types/vue' {
   interface VueConstructor {
-    version: string
+    version: string,
+    install?: PluginFunction<never>
   }
 }

@@ -3,10 +3,6 @@ import * as components from './components'
 import * as directives from './directives'
 import { PluginObject, VueConstructor } from 'vue'
 
-declare module Vuetify {
-  let version: string
-}
-
 function Vuetify (Vue: VueConstructor, args: any): void {
   const VuetifyComponent: PluginObject<any> = components.Vuetify
 
@@ -17,7 +13,9 @@ function Vuetify (Vue: VueConstructor, args: any): void {
   })
 }
 
-Vuetify.version = process.env.VUETIFY_VERSION
+namespace Vuetify {
+  export const version: string = process.env.VUETIFY_VERSION
+}
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(Vuetify)
