@@ -28,7 +28,9 @@ export const VSlideYReverseTransition = createSimpleTransition('slide-y-reverse-
 export const VExpandTransition = createJavaScriptTransition('expand-transition', ExpandTransitionGenerator())
 export const VRowExpandTransition = createJavaScriptTransition('row-expand-transition', ExpandTransitionGenerator('datatable__expand-col--expanded'))
 
-export default function install (Vue) {
+export default install
+/* istanbul ignore next */
+function install (Vue) {
   Vue.component('v-bottom-sheet-transition', VBottomSheetTranstion)
   Vue.component('v-carousel-transition', VCarouselTransition)
   Vue.component('v-carousel-reverse-transition', VCarouselReverseTransition)
