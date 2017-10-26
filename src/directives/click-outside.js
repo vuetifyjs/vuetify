@@ -37,6 +37,10 @@ function directive (e, el, binding, v) {
 function clickedInEls (e, elements) {
   // Get position of click
   const { clientX: x, clientY: y } = e
+  // Check if event is synthesized, e.g. call to HTMLElement.click()
+  if (x === 0 && y === 0) {
+    return true
+  }
   // Loop over all included elements to see if click was in any of them
   for (const el of elements) {
     if (clickedInEl(el, x, y)) return true
