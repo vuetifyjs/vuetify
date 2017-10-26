@@ -4,14 +4,12 @@
 .application
   -webkit-backface-visibility: hidden
   display: flex
-  min-height: 100vh
   flex-direction: column
 
   // TODO: Deprecate
   > main:not(.content)
     flex: 1 0 auto
     display: flex
-    flex-direction: column
 
 application($material)
   background: $material.background
