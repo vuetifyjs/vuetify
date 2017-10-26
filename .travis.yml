@@ -15,7 +15,7 @@ script:
   - yarn run test --coverage
   - yarn run build
 
-after_script:
+after_success:
   - $TRAVIS_PULL_REQUEST || codeclimate-test-reporter < $TRAVIS_BUILD_DIR/coverage/lcov.info
 
 cache:
