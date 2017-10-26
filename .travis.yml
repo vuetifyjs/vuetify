@@ -7,13 +7,12 @@ env:
     - CODECLIMATE_API_HOST=https://codebeat.co/webhooks/code_coverage
 
 before_script:
-  - $TRAVIS_PULL_REQUEST || yarn global add codeclimate-test-reporter
+  - yarn global add codeclimate-test-reporter
 
 script:
   - yarn
   - yarn run lint
-  - $TRAVIS_PULL_REQUEST && yarn run test
-  - $TRAVIS_PULL_REQUEST || yarn run test --coverage
+  - yarn run test --coverage
   - yarn run build
 
 after-script:
