@@ -17,36 +17,6 @@ import Touch from '../../directives/touch'
 
 const pad = n => (n * 1 < 10) ? `0${n * 1}` : `${n}`
 
-/**
- * Creates the formatting function that uses Date::toLocaleDateString or returns date
- * in ISO format if toLocaleDateString is not supported by the browser
- * Formatting function takes a date string in ISO format and locale as a parameters
- *
- * @param {Object} format Passed as a second argument of Date::toLocaleDateString
- * @param {String} fallbackType Can be 'year', 'month', 'date', 'monthOnly', 'dateOnly',
- *   returns respectively date in 'YYYY', 'YYYY-MM', 'YYYY-MM-DD', 'MM', 'DD' format
- */
-const createNativeLocaleFormatter = (format, fallbackType) => (dateString, locale) => {
-  const [year, month, date] = dateString.trim().split(' ')[0].split('-')
-
-  if (Date.prototype.toLocaleDateString) {
-    const dateObject = new Date(`${year}-${pad(month || 1)}-${pad(date || 1)}T00:00:00+00:00`)
-    return dateObject.toLocaleDateString(locale, Object.assign(format, {
-      timeZone: 'UTC'
-    }))
-  } else {
-    const isoString = `${year * 1}-${pad(month || 1)}-${pad(date || 1)}`
-    const formats = {
-      date: { start: 0, length: 10 },
-      month: { start: 0, length: 7 },
-      year: { start: 0, length: 4 },
-      monthOnly: { start: 5, length: 2 },
-      dateOnly: { start: 8, length: 2 }
-    }
-    return isoString.substr(formats[fallbackType].start, formats[fallbackType].length)
-  }
-}
-
 export default {
   name: 'v-date-picker',
 
@@ -67,6 +37,7 @@ export default {
       currentDay: null,
       currentMonth: null,
       currentYear: null,
+      intlFormatters: {},
       isReversing: false,
       originalDate: this.value,
       // tableDate is a string in 'YYYY' / 'YYYY-M' format (leading zero for month is not required)
@@ -84,7 +55,7 @@ export default {
     // Function formatting the day in date picker table
     dayFormat: {
       type: Function,
-      default: createNativeLocaleFormatter({ day: 'numeric' }, 'dateOnly')
+      default: null
     },
     firstDayOfWeek: {
       type: [String, Number],
@@ -93,7 +64,7 @@ export default {
     // Function formatting the tableDate in the day/month table header
     headerDateFormat: {
       type: Function,
-      default: createNativeLocaleFormatter({ month: 'long', year: 'numeric' }, 'month')
+      default: null
     },
     locale: {
       type: String,
@@ -102,7 +73,7 @@ export default {
     // Function formatting month in the months table
     monthFormat: {
       type: Function,
-      default: createNativeLocaleFormatter({ month: 'short' }, 'monthOnly')
+      default: null
     },
     // Function formatting currently selected date in the picker title
     titleDateFormat: {
@@ -118,7 +89,7 @@ export default {
     // Function formatting the year in table header and pickup title
     yearFormat: {
       type: Function,
-      default: createNativeLocaleFormatter({ year: 'numeric' }, 'year')
+      default: null
     },
     yearIcon: String
   },
@@ -126,15 +97,14 @@ export default {
   computed: {
     weekDays () {
       const first = parseInt(this.firstDayOfWeek, 10)
-      if (!Date.prototype.toLocaleDateString) {
+      if (!this.formatters.weekDay) {
         return createRange(7).map(i => ['S', 'M', 'T', 'W', 'T', 'F', 'S'][(i + first) % 7])
       }
 
       // Operates on UTC time zone to get the names of the week days
       const date = new Date('2000-01-07T00:00:00+00:00')
       const day = date.getUTCDate() - date.getUTCDay() + first
-      const format = { weekday: 'narrow', timeZone: 'UTC' }
-      return createRange(7).map(i => new Date(`2000-01-${pad(day + i)}T00:00:00+00:00`).toLocaleDateString(this.locale, format))
+      return createRange(7).map(i => this.formatters.weekDay(`2000-01-${pad(day + i)}`))
     },
     firstAllowedDate () {
       const now = new Date()
@@ -205,6 +175,27 @@ export default {
     computedTransition () {
       return this.isReversing ? 'tab-reverse-transition' : 'tab-transition'
     },
+    formatters () {
+      const formatters = {
+        day: this.dayFormat || this.createNativeLocaleFormatter(this.locale, { day: 'numeric', timeZone: 'UTC' }, { start: 8, length: 2 }),
+        headerDate: this.headerDateFormat || this.createNativeLocaleFormatter(this.locale, { month: 'long', year: 'numeric', timeZone: 'UTC' }, { start: 0, length: 7 }),
+        month: this.monthFormat || this.createNativeLocaleFormatter(this.locale, { month: 'short', timeZone: 'UTC' }, { start: 5, length: 2 }),
+        year: this.yearFormat || this.createNativeLocaleFormatter(this.locale, { year: 'numeric', timeZone: 'UTC' }, { start: 0, length: 4 }),
+        weekDay: this.createNativeLocaleFormatter(this.locale, { weekday: 'narrow', timeZone: 'UTC' }, { start: 0, length: 0 })
+      }
+
+      const titleFormats = {
+        year: { year: 'numeric', timeZone: 'UTC' },
+        month: { month: 'long', timeZone: 'UTC' },
+        date: { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'UTC' }
+      }
+      formatters.title = this.createNativeLocaleFormatter(this.locale, titleFormats[this.type], {
+        start: 0,
+        length: { date: 10, month: 7, year: 4 }[this.type]
+      })
+
+      return formatters
+    },
     titleText () {
       // Current date in ISO 8601 format (with leading zero)
       const date = this.type === 'month'
@@ -212,20 +203,10 @@ export default {
         : `${this.year}-${pad(this.month + 1)}-${pad(this.day)}`
 
       if (this.titleDateFormat) {
-        return this.titleDateFormat(date, this.locale)
+        return this.titleDateFormat(date)
       }
 
-      const defaultTitleDateFormat = this.type === 'year' ? {
-        year: 'numeric'
-      } : (this.type === 'month' ? {
-        month: 'long'
-      } : {
-        weekday: 'short',
-        month: 'short',
-        day: 'numeric'
-      })
-
-      let titleText = createNativeLocaleFormatter(defaultTitleDateFormat, this.type)(date, this.locale)
+      let titleText = this.formatters.title(date, this.locale)
       if (this.landscape) {
         if (titleText.indexOf(',') > -1) titleText = titleText.replace(', ', ',<br>')
         else if (titleText.indexOf(' ') > -1) titleText = titleText.replace(' ', '<br>')
@@ -348,6 +329,19 @@ export default {
       }
 
       return pickerBodyChildren
+    },
+    createNativeLocaleFormatter (locale, options, { start, length }) {
+      const makeIsoString = dateString => {
+        const [year, month, date] = dateString.trim().split(' ')[0].split('-')
+        return [year, pad(month || 1), pad(date || 1)].join('-')
+      }
+
+      try {
+        const intlFormatter = new Intl.DateTimeFormat(locale || undefined, options)
+        return dateString => intlFormatter.format(new Date(`${makeIsoString(dateString)}T00:00:00+00:00`))
+      } catch (e) {
+        return dateString => makeIsoString(dateString).substr(start, length)
+      }
     },
     // Adds leading zero to month/day if necessary, returns 'YYYY' if type = 'year',
     // 'YYYY-MM' if 'month' and 'YYYY-MM-DD' if 'date'
