@@ -5,6 +5,7 @@ import VCardTitle from './VCardTitle'
 
 export { VCard, VCardMedia, VCardTitle }
 
+/* istanbul ignore next */
 VCard.install = function install (Vue) {
   const VCardActions = createSimpleFunctional('card__actions')
   const VCardText = createSimpleFunctional('card__text')

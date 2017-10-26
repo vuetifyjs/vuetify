@@ -12,6 +12,7 @@ export const VListTileContent = createSimpleFunctional('list__tile__content', 'd
 export const VListTileTitle = createSimpleFunctional('list__tile__title', 'div')
 export const VListTileSubTitle = createSimpleFunctional('list__tile__sub-title', 'div')
 
+/* istanbul ignore next */
 VList.install = function install (Vue) {
   Vue.component(VList.name, VList)
   Vue.component(VListGroup.name, VListGroup)
