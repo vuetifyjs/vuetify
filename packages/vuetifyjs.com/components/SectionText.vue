@@ -1,10 +1,10 @@
 <template lang="pug">
-  h2(v-text="$t(value)").headline.primary--light--text
+  div(v-html="$t(value)").section-text
 </template>
 
 <script>
   export default {
-    name: 'section-heading',
+    name: 'section-text',
 
     props: {
       value: {
