@@ -1,4 +1,18 @@
 @import '../bootstrap'
+@import '../theme'
+
+selects($material)
+  &.input-group
+    &--editable,
+    &--overflow,
+    &--segmented
+      .input-group__input:hover
+        background: $material.cards
+      
+      &.input-group--focused .input-group__input
+        background: $material.cards
+
+theme(selects, "input-group--select")
 
 .input-group--select
   // TODO: revisit this

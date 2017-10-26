@@ -79,8 +79,12 @@ const ripple = {
   }
 }
 
+function isRippleEnabled (binding) {
+  return typeof binding.value === 'undefined' || !!binding.value
+}
+
 function directive (el, binding) {
-  el.setAttribute(RippleDataAttribute, !!binding.value)
+  el.setAttribute(RippleDataAttribute, isRippleEnabled(binding))
 
   if ('ontouchstart' in window) {
     el.addEventListener('touchend', () => ripple.hide(el), false)
@@ -109,7 +113,7 @@ function update (el, binding) {
     return
   }
 
-  el.setAttribute(RippleDataAttribute, !!binding.value)
+  el.setAttribute(RippleDataAttribute, isRippleEnabled(binding))
 }
 
 export default {

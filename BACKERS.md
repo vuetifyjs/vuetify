@@ -30,6 +30,8 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Max Matteo Staack
 - Jay Blanchard
 - Christo Crampton
+- Team Of Monkeys
+- Robin Paolini
 
 ### $10+
 
@@ -61,3 +63,6 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Luis F Rocha
 - HelloWorld
 - Eeico Wentrup
+- Mathieu Boyer
+- Chris Britton
+- Matthew O'Leary
