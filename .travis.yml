@@ -12,7 +12,7 @@ before_script:
 script:
   - yarn
   - yarn run lint
-  - yarn run test --coverage
+  - yarn run test:coverage
   - yarn run build
 
 after_success:

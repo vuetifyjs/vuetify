@@ -20,6 +20,7 @@
     "debug-build": "node --inspect --debug-brk build/config.js",
     "debug:test": "./node_modules/.bin/cross-env NODE_ENV=test node --inspect --inspect-brk ./node_modules/jest/bin/jest.js --no-cache --runInBand --verbose",
     "test": "cross-env NODE_ENV=test jest -i",
+    "test:coverage": "cross-env NODE_ENV=test jest -i --coverage",
     "lint": "eslint --ext .js,.vue src",
     "preparecommitmsg": "node dev/prepare-commit-message.js",
     "precommit": "yarn run lint && yarn test",
