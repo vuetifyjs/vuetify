@@ -37,7 +37,6 @@ export default {
       currentDay: null,
       currentMonth: null,
       currentYear: null,
-      intlFormatters: {},
       isReversing: false,
       originalDate: this.value,
       // tableDate is a string in 'YYYY' / 'YYYY-M' format (leading zero for month is not required)
@@ -176,43 +175,32 @@ export default {
       return this.isReversing ? 'tab-reverse-transition' : 'tab-transition'
     },
     formatters () {
-      const formatters = {
+      return {
         day: this.dayFormat || this.createNativeLocaleFormatter(this.locale, { day: 'numeric', timeZone: 'UTC' }, { start: 8, length: 2 }),
         headerDate: this.headerDateFormat || this.createNativeLocaleFormatter(this.locale, { month: 'long', year: 'numeric', timeZone: 'UTC' }, { start: 0, length: 7 }),
         month: this.monthFormat || this.createNativeLocaleFormatter(this.locale, { month: 'short', timeZone: 'UTC' }, { start: 5, length: 2 }),
         year: this.yearFormat || this.createNativeLocaleFormatter(this.locale, { year: 'numeric', timeZone: 'UTC' }, { start: 0, length: 4 }),
-        weekDay: this.createNativeLocaleFormatter(this.locale, { weekday: 'narrow', timeZone: 'UTC' }, { start: 0, length: 0 })
+        weekDay: this.createNativeLocaleFormatter(this.locale, { weekday: 'narrow', timeZone: 'UTC' }, { start: 0, length: 0 }),
+        titleDate: this.titleDateFormat || this.defaultTitleDateFormatter
       }
-
+    },
+    defaultTitleDateFormatter () {
       const titleFormats = {
         year: { year: 'numeric', timeZone: 'UTC' },
         month: { month: 'long', timeZone: 'UTC' },
         date: { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'UTC' }
       }
-      formatters.title = this.createNativeLocaleFormatter(this.locale, titleFormats[this.type], {
+
+      const titleDateFormatter = this.createNativeLocaleFormatter(this.locale, titleFormats[this.type], {
         start: 0,
         length: { date: 10, month: 7, year: 4 }[this.type]
       })
 
-      return formatters
-    },
-    titleText () {
-      // Current date in ISO 8601 format (with leading zero)
-      const date = this.type === 'month'
-        ? `${this.year}-${pad(this.month + 1)}`
-        : `${this.year}-${pad(this.month + 1)}-${pad(this.day)}`
+      const landscapeFormatter = date => titleDateFormatter(date)
+        .replace(/([^\d\s])([\d])/g, (match, nonDigit, digit) => `${nonDigit} ${digit}`)
+        .replace(', ', ',<br>')
 
-      if (this.titleDateFormat) {
-        return this.titleDateFormat(date)
-      }
-
-      let titleText = this.formatters.title(date)
-      if (this.landscape) {
-        if (titleText.indexOf(',') > -1) titleText = titleText.replace(', ', ',<br>')
-        else if (titleText.indexOf(' ') > -1) titleText = titleText.replace(' ', '<br>')
-      }
-
-      return titleText
+      return this.landscape ? landscapeFormatter : titleDateFormatter
     }
   },
 
@@ -377,7 +365,7 @@ export default {
   render (h) {
     const children = []
 
-    !this.noTitle && children.push(this.genTitle(this.titleText))
+    !this.noTitle && children.push(this.genTitle(this.formatters.titleDate(this.inputDate)))
 
     children.push(h('transition', {
       props: {
