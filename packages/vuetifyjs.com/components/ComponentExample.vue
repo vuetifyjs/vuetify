@@ -1,32 +1,37 @@
 <template lang="pug">
   div.component-example(:id="id")
-    codepen(ref="codepen" :pen="pen")
-    div
-      v-expansion-panel.elevation-0.component-example__panel
-        v-expansion-panel-content(v-model="panel")
-          v-tabs(ref="tabs" dark :scrollable="false")
-            v-tabs-bar(v-bind:class="[currentColor]" class="darken-4 pl-0")
-              v-tabs-slider(v-bind:color="currentColor + ' lighten-4'")
-              v-tabs-item(
-                v-for="tab in tabs"
-                v-bind:key="tab"
-                v-bind:href="'#'+tab"
-                v-show="parsed[tab]"
-              ) {{ tab }}
-            v-tabs-items
-              v-tabs-content(
-                v-for="tab in tabs"
-                v-bind:key="tab"
-                v-bind:id="tab"
-              )
-                markup(:lang="getLang(tab)" v-if="parsed[tab]").ma-0
-                  div(v-html="parsed[tab]")
-      div.my-3.justify
-        slot(name="desc")
-      p
-        div(:id="'example-'+uid")
+    h3(v-text="header").title
+    div.my-3.justify
+      slot(name="desc")
+    p
+      div(:id="'example-'+uid")
+    codepen(ref="codepen" :pen="pen").mb-5
+    v-tabs(ref="tabs" :scrollable="false").elevation-2
+      v-tabs-bar(color="accent" class="pl-0")
+        v-tabs-slider(color="accent")
+        v-tabs-item(
+          v-for="tab in tabs"
+          v-bind:key="tab"
+          v-bind:href="'#'+tab"
+          v-show="parsed[tab]"
+        ) {{ tab }}
+        v-spacer
+        v-btn(
+          flat
+          v-on:click="sendToCodepen"
+        )
+          span Open in Codepen
+          v-icon.ml-3 fa-codepen
+      v-tabs-items
+        v-tabs-content(
+          v-for="tab in tabs"
+          v-bind:key="tab"
+          v-bind:id="tab"
+        )
+          markup(:lang="getLang(tab)" v-if="parsed[tab]").ma-0
+            div(v-html="parsed[tab]")
 
-      v-toolbar(v-bind:color="currentColor" flat dense dark)
+      //v-toolbar(v-bind:color="currentColor" flat dense dark)
         v-btn(dark icon :to="{ hash: id }")
           v-icon link
         span.title.white--text.layout.align-end {{ header }}

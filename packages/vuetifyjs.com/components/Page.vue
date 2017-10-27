@@ -13,4 +13,7 @@
   .page
     max-width: 1024px !important
     padding-top: 75px
+    
+    section
+      margin-bottom: 48px
 </style>

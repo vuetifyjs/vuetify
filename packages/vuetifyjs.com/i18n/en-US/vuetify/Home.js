@@ -1,7 +1,7 @@
 export default {
   "announcementBanner": "Aww yisss, this is an exciting announcement! Or maybe its an advertisement!",
-  "heading1": "Supercharge your development with",
-  "heading1cont": "Vuetify Material Component Framework",
+  "heading1": "Vuetify",
+  "heading1cont": "Material Component Framework",
   "getStarted": "Get Started",
   "features": [
     {

@@ -5,6 +5,7 @@ Vue.use(Router)
 
 // The meta data for your routes
 const meta = require('./meta.json')
+const release = process.env.RELEASE
 
 // Function to create routes
 // Is default lazy but can be changed
@@ -12,15 +13,42 @@ function route (path, view) {
   return {
     path: path,
     meta: meta[path],
-    component: resolve => import(`@pages/${view}Page.vue`).then(resolve)
+    component: () => import(
+      /* webpackChunkName: "routes" */
+      /* webpackMode: "lazy-once" */
+      `@pages/${view}Page.vue`
+    )
   }
 }
 
 export function createRouter () {
     const router = new Router({
-      base: __dirname,
-      mode: 'history',
-      scrollBehavior: () => ({ y: 0 }),
+      base: release ? `/releases/${release}` : __dirname,
+      mode: release ? 'hash' : 'history',
+      async scrollBehavior (to, from, savedPosition) {
+        if (document.readyState !== 'complete') {
+          await new Promise(resolve => {
+            const cb = () => {
+              window.requestAnimationFrame(resolve)
+              window.removeEventListener('load', cb)
+            }
+            window.addEventListener('load', cb)
+          })
+        }
+
+        if (savedPosition) {
+          return savedPosition
+        }
+
+        if (to.hash) {
+          return {
+            selector: to.hash,
+            offset: { y: 80 }
+          }
+        }
+
+        return { y: 0 }
+      },
       routes: [
         route('/', 'Home'),
         // Getting Started
@@ -34,7 +62,7 @@ export function createRouter () {
 
     // Send a pageview to Google Analytics
     router.beforeEach((to, from, next) => {
-      if (typeof ga !== 'undefined') {
+      if (typeof ga !== 'undefined' && process.env.NODE_ENV !== 'development') {
         ga('set', 'page', to.path)
         ga('send', 'pageview')
       }

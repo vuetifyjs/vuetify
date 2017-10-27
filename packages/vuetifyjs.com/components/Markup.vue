@@ -73,7 +73,7 @@
     box-shadow: none
     display: flex
     padding: 3rem 2rem
-    margin: 32px 0
+    margin: 0 0 16px
     background: rgba(#000, 0.04)
     border-radius: 2px
     position: relative

@@ -2,10 +2,23 @@
   page(:id="id")
     page-heading
       template(slot="title") {{ $t(`Components.${this.data.namespace}.header`) }}
-      p(v-html="$t(`Components.${data.namespace}.headerText`)")
+      div(v-html="$t(`Components.${data.namespace}.headerText`)")
 
     section#usage
-      section-heading {{ $t('Components.ComponentPage.usage') }}
+      section-heading(:value="$t('Components.ComponentPage.usage')")
+      component-example(
+        :new-in="data.usage.new"
+        :file="`${data.namespace.toLowerCase()}/${data.usage.file}`"
+        :id="`data.usage-${-1}`"
+      )
+        div(
+          slot="desc"
+          v-html="genDesc(data.usage)"
+        )
+
+    slot(name="top")
+    section#examples
+      section-heading(:value="$t('Components.ComponentPage.examples')")
 
       component-example(
         :header="`#${i + 1} ${genHeader(example)}`"
@@ -21,20 +34,6 @@
         )
 
     section-heading {{ $t('Components.ComponentPage.examples') }}
-    slot(name="top")
-    section#examples
-      component-example(
-        :header="`#${i + 1} ${genHeader(example)}`"
-        :new-in="example.new"
-        :file="`${data.namespace.toLowerCase()}/${example.file}`"
-        :id="`example-${i + 1}`"
-        :key="i"
-        v-for="(example, i) in data.examples"
-      )
-        div(
-          slot="desc"
-          v-html="genDesc(example)"
-        )
     slot(name="bottom")
 </template>
 

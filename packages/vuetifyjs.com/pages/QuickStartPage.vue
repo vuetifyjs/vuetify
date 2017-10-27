@@ -72,13 +72,13 @@
           ).px-0
             v-list-tile(avatar tag="ul")
               v-list-tile-avatar
-                v-icon(dark).primary--light--text fa-{{ browser.icon }}
+                v-icon(dark color="primary") fa-{{ browser.icon }}
               v-list-tile-content
                 v-list-tile-title {{ browser.title }}
                 v-list-tile-sub-title {{ browser.supported === true ? 'Supported' : (browser.supported === false ? 'Not supported' : browser.supported) }}
               v-list-tile-action
-                v-icon(v-if="!browser.supported").error--light--text clear
-                v-icon(v-else).success--light--text check
+                v-icon(v-if="!browser.supported" text-color="error") clear
+                v-icon(v-else text-color="success") check
 </template>
 
 <script>

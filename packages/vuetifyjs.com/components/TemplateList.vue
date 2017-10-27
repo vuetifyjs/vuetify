@@ -1,5 +1,5 @@
 <template lang="pug">
-  div.elevation-2.my-5
+  div.elevation-2.mb-3
     v-layout(wrap)
       input(
         :style="{ position: 'absolute', left: '-1000px', top: '-1000px' }"
@@ -22,20 +22,20 @@
           )
             v-list-tile-action
               v-icon(
-                v-html="template.icon"
-                :class="[selectedIndex === i ? 'primary--text' : '']"
-              )
+                :text-color="selectedIndex === i ? 'primary' : ''"
+              ) {{ template.icon }}
             v-list-tile-content
               v-list-tile-title(v-text="template.title")
               v-list-tile-sub-title vue init vuetifyjs/{{ template.init }}
     v-expansion-panel.elevation-0
       v-expansion-panel-content(value)
         v-card(
+          color="blue darken-3"
           tile
           flat
           dark
           style="min-height: 75px"
-        ).blue.darken-3.hide-overflow
+        ).hide-overflow
           v-fade-transition(mode="out-in")
             v-layout(
               row
@@ -52,7 +52,7 @@
                 ) Init copied!
                   v-btn(flat @click="copied = !copied" color="light-blue") close
               v-flex(xs2).layout.column.align-end.pa-3
-                v-tooltip(left debounce="300")
+                v-tooltip(left debounce="300" dark)
                   v-btn(
                     icon
                     dark
@@ -64,7 +64,7 @@
                   )
                     v-icon fa-github
                   span Github
-                v-tooltip(left debounce="300")
+                v-tooltip(left debounce="300" dark)
                   v-btn(
                     icon
                     color="secondary"

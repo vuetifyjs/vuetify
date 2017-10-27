@@ -18,7 +18,19 @@
         solo
         append-icon="search"
         placeholder="Search..."
-      ).mb-4
+      )
+    div.py-3.text-xs-center
+      a(
+        href="https://vuejobs.com/?utm_source=vuejobs&utm_medium=banner&utm_campaign=linking"
+        target="_blank"
+        rel="noopener"
+      )
+        img(
+          src="/static/doc-images/affiliates/vuejobs-logo.svg"
+          alt="VueJobs"
+          title="VueJobs"
+          width="30%"
+        )
     v-list(dense)
       template(v-for="item in items")
         v-list-group(v-if="item.items" v-bind:group="item.group" no-action)
@@ -145,3 +157,23 @@
     }
   }
 </script>
+
+<style lang="stylus">
+  #app-drawer
+    img.logo
+      margin 40px 0 25px
+
+    .diamond-sponsor
+      // todo trim down actual image file dimensions
+      height: 40px
+      margin-bottom 1.25em
+
+      aside.navigation-drawer ul li
+        font-size 14px
+        color: #373737
+        
+      &-label
+        color #676767
+        margin: 3em 0 .5em
+        font-size 13px
+</style>

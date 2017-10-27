@@ -1,9 +1,8 @@
 <template lang="pug">
-  v-card(flat).transparent.page-heading
-    v-card-title(primary).px-0
-      h1.headline.primary--light--text.mb-0
-        slot(name="title")
-    v-card-text.px-0
+  div.page-heading.mb-5
+    h1.headline.primary--light--text
+      slot(name="title")
+    div
       slot
 </template>
 
