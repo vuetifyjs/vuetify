@@ -13,19 +13,6 @@ test('VListGroup.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render a lazy component and match snapshot', () => {
-    const wrapper = mount(VList, {
-      propsData: {
-        lazy: true
-      },
-      slots: {
-        default: [VListGroup]
-      }
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
   it('should render a component with no padding for action icon and match snapshot', () => {
     const wrapper = mount(VList, {
       propsData: {

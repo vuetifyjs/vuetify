@@ -11,10 +11,6 @@ export default {
     isBooted: false
   }),
 
-  props: {
-    lazy: Boolean
-  },
-
   watch: {
     isActive () {
       this.isBooted = true
@@ -23,7 +19,7 @@ export default {
 
   methods: {
     showLazyContent (content) {
-      return (this.isBooted || !this.lazy)
+      return (this.isActive && this.isBooted)
         ? content
         : null
     }

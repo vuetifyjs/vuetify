@@ -58,7 +58,6 @@ export default {
   data () {
     return {
       cachedItems: [],
-      content: {},
       defaultColor: 'primary',
       inputValue: (this.multiple || this.tags) && !this.value ? [] : this.value,
       isBooted: false,
@@ -137,6 +136,9 @@ export default {
   },
 
   computed: {
+    content () {
+      return this.$refs.menu && this.$refs.menu.$refs.content
+    },
     classes () {
       const classes = {
         'input-group--text-field input-group--select': true,
@@ -273,13 +275,6 @@ export default {
 
       // this.lastItem += !val ? 20 : 0
     },
-    isBooted () {
-      this.$nextTick(() => {
-        if (this.content && this.content.addEventListener) {
-          this.content.addEventListener('scroll', this.onScroll, false)
-        }
-      })
-    },
     isFocused (val) {
       // When focusing the input
       // re-set the caret position
@@ -306,6 +301,12 @@ export default {
       this.genSelectedItems()
     },
     menuIsActive (val) {
+      if (this.content) {
+        this.$nextTick(() => this.content && this.content.addEventListener('scroll', this.onScroll, false))
+      } else {
+        this.$nextTick(() => this.content && this.content.removeEventListener('scroll', this.onScroll, false))
+      }
+
       if (!val) return
 
       this.isBooted = true
@@ -321,7 +322,7 @@ export default {
       // Wrap input to next line if overflowing
       if (this.$refs.input.scrollWidth > this.$refs.input.clientWidth) {
         this.shouldBreak = true
-        this.$nextTick(this.$refs.menu.updateDimensions)
+        this.$nextTick(() => this.$refs.menu && this.$refs.menu.updateDimensions())
       } else if (val === null) {
         this.shouldBreak = false
       }
@@ -342,11 +343,11 @@ export default {
         val ? this.setMenuIndex(0) : this.resetMenuIndex()
       })
     },
-    selectedItems () {
+    selectedItems (val) {
       clearTimeout(this.searchTimeout)
 
       if (this.isAutocomplete) {
-        this.$nextTick(this.$refs.menu.updateDimensions)
+        this.$nextTick(() => this.$refs.menu && this.$refs.menu.updateDimensions())
       }
     },
     value (val) {
@@ -363,16 +364,6 @@ export default {
     // Evaluate the selected items immediately
     // to avoid a unnecessary label transition
     this.genSelectedItems()
-
-    this.content = this.$refs.menu.$refs.content
-  },
-
-  beforeDestroy () {
-    if (this.isBooted) {
-      if (this.content) {
-        this.content.removeEventListener('scroll', this.onScroll, false)
-      }
-    }
   },
 
   methods: {
