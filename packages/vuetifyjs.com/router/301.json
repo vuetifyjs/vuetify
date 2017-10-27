@@ -1,3 +1,23 @@
 {
-  "/home": "/"
+  "/components/dropdowns": "/components/menus",
+  "/quick-start": "/vuetify/quick-start",
+  "/overview": "/guides/server-side-rendering",
+  "/motion": "/motion/transitions",
+  "/event-bus": "/",
+  "/components/sidebars": "/components/navigation-drawers",
+  "/components/collapsible": "/components/expansion-panels",
+  "/components/navbars": "/components/toolbars",
+  "/components/toasts": "/components/snackbars",
+  "/components/carousel": "/components/carousels",
+  "/components/datatables": "/components/data-tables",
+  "/components/expansion-panel": "/components/expansion-panels",
+  "/vuetify/sandbox": "/layout/sandbox",
+  "/directives/badges": "/components/badges",
+  "/vuetify/quick-start": "/getting-started/quick-start",
+  "/vuetify/why-vuetify": "/getting-started/why-vuetify",
+  "/vuetify/frequently-asked-questions": "/getting-started/frequently-asked-questions",
+  "/vuetify/sponsors-and-backers": "/getting-started/sponsors-and-backers",
+  "/vuetify/contributing": "/getting-started/contributing",
+  "/vuetify/roadmap": "/getting-started/roadmap",
+  "/vuetify/a-la-carte": "/getting-started/a-la-carte"
 }

@@ -1,6 +1,6 @@
 <template lang="pug">
   v-toolbar(
-    class="primary"
+    color="primary"
     app
     clipped
     dark
@@ -50,3 +50,19 @@
     }
   }
 </script>
+
+<style lang="stylus">
+  #app-toolbar
+    .toolbar__title
+      margin-left .5em
+      font-weight 400
+      font-size 21px
+      position relative
+      top 1px
+
+    .toolbar__items
+      .btn
+        text-transform capitalize
+        font-size 18px
+        font-weight 300
+</style>

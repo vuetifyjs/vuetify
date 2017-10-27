@@ -1,5 +1,5 @@
 <template lang="pug">
-  div(v-html="$t(value)").section-text
+  p(v-html="$t(value)").section-text
 </template>
 
 <script>

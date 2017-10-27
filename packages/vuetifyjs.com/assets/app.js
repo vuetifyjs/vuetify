@@ -14,7 +14,9 @@ import Components from '@components'
 
 Vue.use(Vuetify, {
   theme: {
-    primary: '#005caf'
+    primary: '#0862C4',
+    secondary: '#5CBBF6',
+    accent: '#005CAF'
   }
 })
 
