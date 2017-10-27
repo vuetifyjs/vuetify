@@ -26,9 +26,9 @@ export default {
 
   computed: {
     classes () {
-      return this.addBackgroundColorClassChecks({
+      return {
         'alert--dismissible': this.dismissible
-      })
+      }
     }
   },
 
@@ -59,7 +59,7 @@ export default {
 
     const alert = h('div', {
       staticClass: 'alert',
-      'class': this.classes,
+      'class': this._computedClasses,
       directives: [{
         name: 'show',
         value: this.isActive

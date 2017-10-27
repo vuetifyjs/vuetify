@@ -86,10 +86,8 @@ export default {
     },
     classes () {
       return {
-        'tooltip--top': this.top,
-        'tooltip--right': this.right,
-        'tooltip--bottom': this.bottom,
-        'tooltip--left': this.left
+        [this.contentClass]: true,
+        'menuable__content__active': this.isActive
       }
     },
     computedTransition () {
@@ -129,10 +127,7 @@ export default {
   render (h) {
     const tooltip = h('div', {
       staticClass: 'tooltip__content',
-      'class': this.addBackgroundColorClassChecks({
-        [this.contentClass]: true,
-        'menuable__content__active': this.isActive
-      }),
+      'class': this._computedClasses,
       style: this.styles,
       attrs: this.attrs,
       directives: [{
@@ -144,7 +139,12 @@ export default {
 
     return h(this.tag, {
       staticClass: 'tooltip',
-      'class': this.classes
+      'class': {
+        'tooltip--top': this.top,
+        'tooltip--right': this.right,
+        'tooltip--bottom': this.bottom,
+        'tooltip--left': this.left
+      }
     }, [
       h('transition', {
         props: {

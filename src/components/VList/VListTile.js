@@ -1,4 +1,5 @@
 // Mixins
+import Colorable from '../../mixins/colorable'
 import Routable from '../../mixins/routable'
 import Toggleable from '../../mixins/toggleable'
 
@@ -9,6 +10,7 @@ export default {
   name: 'v-list-tile',
 
   mixins: [
+    Colorable,
     Routable,
     Toggleable
   ],
@@ -54,11 +56,10 @@ export default {
     const isRouteLink = !this.inactive && this.isLink
     const { tag, data } = isRouteLink ? this.generateRouteLink() : {
       tag: this.tag || 'div',
-      data: {
-        class: this.classes
-      }
+      data: {}
     }
 
+    data.class = this._computedClasses
     data.attrs = Object.assign({}, data.attrs, this.$attrs)
 
     return h('li', {

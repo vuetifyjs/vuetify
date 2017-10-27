@@ -1,12 +1,18 @@
 @import '../bootstrap'
+@import '../theme'
+
+tooltip($material)
+  &__content
+    background: $material.tooltips.background
+    color: $material.tooltips.text
+
+theme(tooltip, "tooltip")
 
 .tooltip
   position: relative
 
   &__content
-    background: $grey.darken-2
     border-radius: 2px
-    color: #FFFFFF
     font-size: 12px
     display: inline-block
     padding: 5px 8px

@@ -1,10 +1,14 @@
 import VIcon from '../VIcon'
 
+import Colorable from '../../mixins/colorable'
+
 import Resize from '../../directives/resize'
 import Touch from '../../directives/touch'
 
 export default {
   name: 'v-tabs-bar',
+
+  mixins: [Colorable],
 
   directives: {
     Resize,

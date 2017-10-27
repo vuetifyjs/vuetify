@@ -2,12 +2,11 @@ require('../../stylus/components/_toolbar.styl')
 
 import Applicationable from '../../mixins/applicationable'
 import Colorable from '../../mixins/colorable'
-import Themeable from '../../mixins/themeable'
 
 export default {
   name: 'v-toolbar',
 
-  mixins: [Applicationable, Colorable, Themeable],
+  mixins: [Applicationable, Colorable],
 
   data: () => ({
     heights: {
@@ -68,7 +67,7 @@ export default {
       return this.marginTop + this.$vuetify.application.bar
     },
     classes () {
-      return this.addBackgroundColorClassChecks({
+      return {
         'toolbar': true,
         'elevation-0': this.flat,
         'toolbar--absolute': this.absolute,
@@ -78,10 +77,8 @@ export default {
         'toolbar--fixed': this.fixed,
         'toolbar--floating': this.floating,
         'toolbar--prominent': this.prominent,
-        'toolbar--extended': this.isExtended,
-        'theme--dark': this.dark,
-        'theme--light': this.light
-      })
+        'toolbar--extended': this.isExtended
+      }
     },
     isScrolling: {
       get () {
@@ -185,7 +182,7 @@ export default {
 
     const children = []
     const data = {
-      'class': this.classes,
+      'class': this._computedClasses,
       style: this.styles,
       on: this.$listeners
     }

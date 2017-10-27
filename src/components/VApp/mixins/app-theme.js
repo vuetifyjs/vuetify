@@ -38,10 +38,10 @@ export default {
       }).join('')
     },
     genBackgroundColor (key, value, color) {
-      return `.${key}--${color}{background-color:${value};border-color:${value}}`
+      return `.${key}--${color}{background-color:${value} !important;border-color:${value} !important;}`
     },
     genTextColor (key, value, color) {
-      return `.${key}--${color}--text{color:${value}}`
+      return `.${key}--${color}--text{color:${value} !important;}`
     },
     genStyle () {
       const style = document.createElement('style')

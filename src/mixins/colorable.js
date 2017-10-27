@@ -1,53 +1,55 @@
+import Themeable from './themeable'
+import { genColorClasses } from '../util/helpers'
+
 export default {
+  mixins: [Themeable],
+
   props: {
-    color: String
+    color: String,
+    textColor: String
   },
 
   data () {
     return {
-      defaultColor: null
+      defaultColor: null,
+      defaultTextColor: null
     }
   },
 
   computed: {
-    computedColor () {
-      return this.color || this.defaultColor
-    }
-  },
+    classes () {},
+    _bgColor () {
+      const bg = {}
+      const bgColor = this.color || this.defaultColor
 
-  methods: {
-    _genAppendedClass (color) {
-      if (![
-        'primary',
-        'secondary',
-        'accent',
-        'error',
-        'info',
-        'success',
-        'warning'
-      ].includes(color)) return color
-
-      return `${color}--${this.dark ? 'dark' : 'light'}`
-    },
-    addBackgroundColorClassChecks (classes = {}, prop = 'computedColor') {
-      if (prop && this[prop]) {
-        classes[this._genAppendedClass(this[prop])] = true
+      if (bgColor) {
+        bg[genColorClasses(bgColor, this.dark)] = true
       }
 
-      return classes
+      return bg
     },
-    addTextColorClassChecks (classes = {}, prop = 'computedColor') {
-      if (prop && this[prop]) {
-        const parts = this[prop].trim().split(' ')
+    _textColor () {
+      const txt = {}
+      const txtColor = this.textColor || this.defaultTextColor
 
-        let color = `${this._genAppendedClass(parts[0])}--text`
+      if (txtColor) {
+        const parts = txtColor.trim().split(' ')
+        let color = `${genColorClasses(parts[0], this.dark)}--text`
 
         if (parts.length > 1) color += ' text--' + parts[1]
 
-        classes[color] = !!this[prop]
+        txt[color] = true
       }
 
-      return classes
+      return txt
+    },
+    _computedClasses () {
+      return Object.assign({},
+        this.classes,
+        this._bgColor,
+        this._textColor,
+        this._themeColor
+      )
     }
   }
 }

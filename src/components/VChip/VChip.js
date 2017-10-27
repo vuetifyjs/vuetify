@@ -26,7 +26,6 @@ export default {
       default: 'accent'
     },
     small: Boolean,
-    textColor: String,
     value: {
       type: Boolean,
       default: true
@@ -35,28 +34,22 @@ export default {
 
   computed: {
     classes () {
-      const classes = this.addBackgroundColorClassChecks({
+      return {
         'chip': true,
         'chip--disabled': this.disabled,
         [`chip--selected ${this.selectedClass}`]: this.selected,
         'chip--label': this.label,
         'chip--outline': this.outline,
         'chip--small': this.small,
-        'chip--removable': this.close,
-        'theme--light': this.light,
-        'theme--dark': this.dark
-      })
-
-      return (this.textColor || this.outline)
-        ? this.addTextColorClassChecks(classes, this.textColor ? 'textColor' : 'color')
-        : classes
+        'chip--removable': this.close
+      }
     }
   },
 
   render (h) {
     const children = [this.$slots.default]
     const data = {
-      'class': this.classes,
+      'class': this._computedClasses,
       attrs: { tabindex: this.disabled ? -1 : 0 },
       directives: [{
         name: 'show',

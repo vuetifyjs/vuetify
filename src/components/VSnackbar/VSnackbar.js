@@ -41,7 +41,7 @@ export default {
 
   computed: {
     classes () {
-      return this.addBackgroundColorClassChecks({
+      return {
         'snack--active': this.isActive,
         'snack--absolute': this.absolute,
         'snack--bottom': this.bottom || !this.top,
@@ -50,7 +50,7 @@ export default {
         'snack--right': this.right,
         'snack--top': this.top,
         'snack--vertical': this.vertical
-      })
+      }
     },
     computedTransition () {
       return this.top ? 'v-slide-y-transition' : 'v-slide-y-reverse-transition'
@@ -90,7 +90,7 @@ export default {
 
     return h('div', {
       staticClass: 'snack',
-      'class': this.classes,
+      'class': this._computedClasses,
       on: this.$listeners
     }, [h(this.computedTransition, children)])
   }

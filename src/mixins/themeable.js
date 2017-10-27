@@ -5,7 +5,7 @@ export default {
   },
 
   computed: {
-    themeClasses () {
+    _themeColor () {
       return {
         'theme--light': this.light,
         'theme--dark': this.dark

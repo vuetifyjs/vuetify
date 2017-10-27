@@ -2,12 +2,11 @@ require('../../stylus/components/_footer.styl')
 
 import Applicationable from '../../mixins/applicationable'
 import Colorable from '../../mixins/colorable'
-import Themeable from '../../mixins/themeable'
 
 export default {
   name: 'v-footer',
 
-  mixins: [Applicationable, Colorable, Themeable],
+  mixins: [Applicationable, Colorable],
 
   props: {
     absolute: Boolean,
@@ -15,6 +14,14 @@ export default {
   },
 
   computed: {
+    classes () {
+      return {
+        'footer--absolute': this.absolute,
+        'footer--fixed': this.fixed,
+        'theme--dark': this.dark,
+        'theme--light': this.light
+      }
+    },
     paddingLeft () {
       return this.fixed || !this.app
         ? 0
@@ -50,12 +57,7 @@ export default {
 
     const data = {
       staticClass: 'footer',
-      'class': this.addBackgroundColorClassChecks({
-        'footer--absolute': this.absolute,
-        'footer--fixed': this.fixed,
-        'theme--dark': this.dark,
-        'theme--light': this.light
-      }),
+      'class': this._computedClasses,
       style: {
         paddingLeft: `${this.paddingLeft}px`,
         paddingRight: `${this.paddingRight}px`

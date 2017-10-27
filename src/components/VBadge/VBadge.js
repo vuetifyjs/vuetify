@@ -26,20 +26,10 @@ export default {
     }
   },
 
-  computed: {
-    classes () {
-      return {
-        'badge--bottom': this.bottom,
-        'badge--left': this.left,
-        'badge--overlap': this.overlap
-      }
-    }
-  },
-
   render (h) {
     const badge = this.$slots.badge ? [h('span', {
       staticClass: 'badge__badge',
-      'class': this.addBackgroundColorClassChecks(),
+      'class': this._computedClasses(),
       attrs: this.attrs,
       directives: [{
         name: 'show',
@@ -49,7 +39,11 @@ export default {
 
     return h('span', {
       staticClass: 'badge',
-      'class': this.classes
+      'class': {
+        'badge--bottom': this.bottom,
+        'badge--left': this.left,
+        'badge--overlap': this.overlap
+      }
     }, [
       this.$slots.default,
       h('transition', {
