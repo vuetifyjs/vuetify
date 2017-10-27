@@ -206,7 +206,7 @@ export default {
         return this.titleDateFormat(date)
       }
 
-      let titleText = this.formatters.title(date, this.locale)
+      let titleText = this.formatters.title(date)
       if (this.landscape) {
         if (titleText.indexOf(',') > -1) titleText = titleText.replace(', ', ',<br>')
         else if (titleText.indexOf(' ') > -1) titleText = titleText.replace(' ', '<br>')
