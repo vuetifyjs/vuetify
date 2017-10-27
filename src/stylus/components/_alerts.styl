@@ -1,9 +1,8 @@
 @import '../bootstrap'
 
 .alert
+  align-items: center
   border-radius: $alert-border-radius
-  border-width: $alert-border-width
-  border-style: solid
   color: #fff
   display: flex
   font-size: $alert-font-size
@@ -11,6 +10,15 @@
   padding: $alert-padding
   position: relative
   transition: $primary-transition
+  
+  &:before
+    background: rgba(#000, .15)
+    content: ''
+    height: 4px
+    left: 0
+    position: absolute
+    top: 0
+    width: 100%
 
   .alert__icon.icon,
   &__dismissible .icon
@@ -36,14 +44,8 @@
       display: none
 
   > div
-    flex: 1
+    flex: 1 1 auto
 
   @media screen and (max-width: $grid-breakpoints.sm)
     &__icon
       display: none
-
-// Double .alert is intended - it increases css specificity
-// to properly set the border color where alert has set color
-// with modifier (for example "red lighten-2")
-.alert.alert
-  border-color: $material-light.dividers !important
