@@ -26,21 +26,21 @@ export default {
       const pad = n => (n * 1 < 10) ? `0${n * 1}` : `${n}`
       const date = `${this.tableYear}-${pad(month + 1)}`
       const monthName = this.monthFormat(date, this.locale)
-      const isActive = this.monthIsActive(month)
-      const isCurrent = this.monthIsCurrent(month)
-      const classes = Object.assign({
-        'btn--flat': !isActive,
-        'btn--active': isActive,
-        'btn--outline': isCurrent && !isActive,
-        'btn--disabled': this.type === 'month' && !this.isAllowed(date)
-      }, this.themeClasses)
+      // const isActive = this.monthIsActive(month)
+      // const isCurrent = this.monthIsCurrent(month)
+      // const classes = Object.assign({
+      //   'btn--flat': !isActive,
+      //   'btn--active': isActive,
+      //   'btn--outline': isCurrent && !isActive,
+      //   'btn--disabled': this.type === 'month' && !this.isAllowed(date)
+      // }, this.themeClasses)
 
       return this.$createElement('td', [
         this.$createElement('button', {
           staticClass: 'btn',
-          'class': (isActive || isCurrent)
-            ? this.addBackgroundColorClassChecks(classes)
-            : classes,
+          // 'class': (isActive || isCurrent)
+          //   ? this.addBackgroundColorClassChecks(classes)
+          //   : classes,
           attrs: {
             type: 'button'
           },

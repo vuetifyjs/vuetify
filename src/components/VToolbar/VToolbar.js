@@ -127,7 +127,7 @@ export default {
   },
 
   mounted () {
-    this.whenScrolled(this.isScrolling)
+    this.$vuetify.load(this.init)
   },
 
   destroyed () {
@@ -135,6 +135,9 @@ export default {
   },
 
   methods: {
+    init () {
+      this.whenScrolled(this.isScrolling)
+    },
     onScroll () {
       if (typeof window === 'undefined') return
 
@@ -169,7 +172,7 @@ export default {
     },
     whenScrolled (val) {
       this.marginTop = val
-        ? -this.$refs.content.clientHeight - 6
+        ? -this.$refs.content.clientHeight
         : 0
 
       this.updateApplication()

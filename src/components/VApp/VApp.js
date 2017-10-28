@@ -8,7 +8,6 @@ import AppBreakpoint from './mixins/app-breakpoint'
 import Resize from '../../directives/resize'
 
 // Utilities
-import Themeable from '../../mixins/themeable'
 import TouchSupport from '../../util/touchSupport'
 
 export default {
@@ -17,7 +16,6 @@ export default {
   mixins: [
     AppBreakpoint,
     AppTheme,
-    Themeable,
     TouchSupport
   ],
 
@@ -29,11 +27,25 @@ export default {
     id: {
       type: String,
       default: 'app'
+    },
+    type: {
+      type: String,
+      default: 'light',
+      validator: val => {
+        return ['dark', 'light'].includes(val)
+      }
+    }
+  },
+
+  computed: {
+    classes () {
+      return {
+        [`theme--${this.type}`]: true
+      }
     }
   },
 
   mounted () {
-    this.$vuetify.breakpoint = this.breakpoint
     window.addEventListener('load', this.runCallbacks)
   },
 
@@ -53,10 +65,7 @@ export default {
   render (h) {
     const data = {
       staticClass: 'application',
-      'class': {
-        'application--dark': this.dark,
-        'application--light': !this.dark
-      },
+      'class': this.classes,
       attrs: { 'data-app': true },
       domProps: { id: this.id },
       directives: [{

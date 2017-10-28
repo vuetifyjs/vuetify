@@ -4,21 +4,29 @@ export default {
   }),
 
   watch: {
+    type () {
+      this.applyType()
+    },
     '$vuetify.theme': {
       deep: true,
       handler () {
-        this.applyTheme()
+        this.applyType()
       }
     }
   },
 
   mounted () {
     this.genStyle()
-    this.applyTheme()
+    this.genThemeClasses()
+    this.applyType()
   },
 
   methods: {
-    applyTheme () {
+    applyType () {
+      this.genThemeClasses()
+      this.$vuetify.theme.type = this.type
+    },
+    genThemeClasses () {
       this.updateTheme(this.genTheme())
     },
     genTheme () {

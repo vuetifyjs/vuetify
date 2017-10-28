@@ -27,7 +27,7 @@ export default {
       const button = this.$createElement('button', {
         staticClass: 'btn btn--raised btn--icon',
         'class': (isActive || isCurrent)
-          ? this.addBackgroundColorClassChecks(classes)
+          ? classes
           : classes,
         attrs: {
           type: 'button'

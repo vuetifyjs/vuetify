@@ -98,7 +98,7 @@ export default {
       return h('div', {
         ref: 'front',
         staticClass: `progress-linear__bar__determinate`,
-        class: this.addBackgroundColorClassChecks(),
+        // class: this.addBackgroundColorClassChecks(),
         style: {
           width: `${this.effectiveWidth}%`
         }
@@ -107,9 +107,9 @@ export default {
     genBar (h, name) {
       return h('div', {
         staticClass: 'progress-linear__bar__indeterminate',
-        class: this.addBackgroundColorClassChecks({
+        class: {
           [name]: true
-        })
+        }
       })
     },
     genIndeterminate (h) {

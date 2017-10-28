@@ -14,11 +14,15 @@ export default function (opts) {
   const dark = opts.theme && opts.theme.dark
     ? opts.theme.dark
     : opts.theme
+
   const light = opts.theme && opts.theme.light
     ? opts.theme.light
     : opts.theme
 
+  const type = opts.theme && opts.theme.dark ? 'dark' : 'light'
+
   return {
+    type,
     dark: Object.assign({}, DARK_THEME_DEFAULTS, dark),
     light: Object.assign({}, LIGHT_THEME_DEFAULTS, light)
   }

@@ -275,7 +275,7 @@ export default {
         data.props.disabled = disabled
       }
 
-      data.props.activeClass = Object.keys(this.addTextColorClassChecks()).join(' ')
+      data.props.activeClass = ''
 
       if (this.$scopedSlots.item) {
         return this.$createElement('v-list-tile', data,
