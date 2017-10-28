@@ -43,17 +43,6 @@ test('VDialog.js', () => {
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
-  it('should render a lazy component and match snapshot', () => {
-    const wrapper = mount(VDialog, {
-      propsData: {
-        lazy: true
-      }
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
-  })
-
   it('should render a scrollable component and match snapshot', () => {
     const wrapper = mount(VDialog, {
       propsData: {

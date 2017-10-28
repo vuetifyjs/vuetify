@@ -199,6 +199,8 @@ test('VSelect', () => {
     expect(wrapper.vm.selectedItems).toHaveLength(1)
 
     wrapper.trigger('click')
+    await wrapper.vm.$nextTick()
+
     const item = wrapper.find('li')[0]
     item.trigger('click')
 

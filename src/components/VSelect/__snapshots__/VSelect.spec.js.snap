@@ -30,27 +30,6 @@ exports[`VSelect should render buttons correctly when using items array with seg
       <div class="menu__content menu__content--select  menu__content--dropdown"
            style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
       >
-        <div class="card"
-             style="height: auto;"
-             data-ripple="false"
-        >
-          <ul data-uid="38"
-              class="list"
-          >
-            <li>
-              <a href="javascript:;"
-                 class="list__tile list__tile--link list__tile--active primary--text"
-                 data-ripple="true"
-              >
-                <div class="list__tile__content">
-                  <div class="list__tile__title">
-                    Hello
-                  </div>
-                </div>
-              </a>
-            </li>
-          </ul>
-        </div>
       </div>
     </div>
     <i aria-hidden="true"
@@ -92,27 +71,6 @@ exports[`VSelect should render buttons correctly when using slot with segmented 
       <div class="menu__content menu__content--select  menu__content--dropdown"
            style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
       >
-        <div class="card"
-             style="height: auto;"
-             data-ripple="false"
-        >
-          <ul data-uid="48"
-              class="list"
-          >
-            <li>
-              <a href="javascript:;"
-                 class="list__tile list__tile--link list__tile--active primary--text"
-                 data-ripple="true"
-              >
-                <div class="list__tile__content">
-                  <div class="list__tile__title">
-                    Hello
-                  </div>
-                </div>
-              </a>
-            </li>
-          </ul>
-        </div>
       </div>
     </div>
     <i aria-hidden="true"

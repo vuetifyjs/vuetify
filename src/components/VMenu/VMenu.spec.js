@@ -215,17 +215,6 @@ test('VMenu.js', ({ mount }) => {
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
-  it('should render component with custom lazy and match snapshot', () => {
-    const wrapper = mount(VMenu, {
-      propsData: {
-        lazy: true
-      }
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
-  })
-
   it('should render component with custom closeOnClick and match snapshot', () => {
     const wrapper = mount(VMenu, {
       propsData: {
