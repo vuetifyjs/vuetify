@@ -8,3 +8,12 @@ exports[`VCarouselItem.js should render component and match snapshot 1`] = `
 </div>
 
 `;
+
+exports[`VCarouselItem.js should throw warning when not used inside v-carousel 1`] = `
+
+<div class="carousel__item"
+     style="background-image: url(https://vuetifyjs.com/static/doc-images/cards/sunshine.jpg); display: none;"
+>
+</div>
+
+`;

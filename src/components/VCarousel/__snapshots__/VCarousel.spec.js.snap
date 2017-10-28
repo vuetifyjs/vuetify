@@ -96,33 +96,30 @@ exports[`VCarousel.js should render component with custom icon and match snapsho
   <div class="carousel__controls">
     <button type="button"
             class="btn btn--icon theme--dark carousel__controls__item carousel__controls__item--active"
+            data-ripple="true"
     >
       <div class="btn__content">
-        <i aria-hidden="true"
-           class="material-icons icon"
-        >
+        <i class="material-icons icon">
           stop
         </i>
       </div>
     </button>
     <button type="button"
             class="btn btn--icon theme--dark carousel__controls__item"
+            data-ripple="true"
     >
       <div class="btn__content">
-        <i aria-hidden="true"
-           class="material-icons icon"
-        >
+        <i class="material-icons icon">
           stop
         </i>
       </div>
     </button>
     <button type="button"
             class="btn btn--icon theme--dark carousel__controls__item"
+            data-ripple="true"
     >
       <div class="btn__content">
-        <i aria-hidden="true"
-           class="material-icons icon"
-        >
+        <i class="material-icons icon">
           stop
         </i>
       </div>
@@ -324,11 +321,10 @@ exports[`VCarousel.js should render component without delimiters 1`] = `
   <div class="carousel__left">
     <button type="button"
             class="btn btn--icon theme--dark"
+            data-ripple="true"
     >
       <div class="btn__content">
-        <i aria-hidden="true"
-           class="material-icons icon"
-        >
+        <i class="material-icons icon">
           chevron_left
         </i>
       </div>
@@ -337,11 +333,10 @@ exports[`VCarousel.js should render component without delimiters 1`] = `
   <div class="carousel__right">
     <button type="button"
             class="btn btn--icon theme--dark"
+            data-ripple="true"
     >
       <div class="btn__content">
-        <i aria-hidden="true"
-           class="material-icons icon"
-        >
+        <i class="material-icons icon">
           chevron_right
         </i>
       </div>

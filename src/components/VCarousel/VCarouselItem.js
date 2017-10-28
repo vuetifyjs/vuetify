@@ -1,18 +1,9 @@
-const injectWarning = () => {
-  return () => console.warn('The v-carousel-item component is not meant to be used outside of a v-carousel.')
-}
+import { inject as RegistrableInject } from '../../mixins/registrable'
 
 export default {
   name: 'v-carousel-item',
 
-  inject: {
-    register: {
-      default: injectWarning
-    },
-    unregister: {
-      default: injectWarning
-    }
-  },
+  mixins: [RegistrableInject('v-carousel-item', 'v-carousel')],
 
   data () {
     return {
