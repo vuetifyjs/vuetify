@@ -119,13 +119,8 @@ export default {
       }
     },
     value (val) {
-      if (this.internalChange) { // Through keystroke
-        this.internalChange = false
-        return
-      }
-
-      // Value was changed externally, update lazy
-      if (this.mask) {
+      if (this.internalChange) this.internalChange = false
+      else if (this.mask) {
         const masked = this.maskText(this.unmaskText(val))
         const value = this.unmaskText(masked)
         this.lazyValue = typeof val === 'number' ? +value : value
@@ -135,9 +130,7 @@ export default {
           this.$refs.input.value = masked
           this.$emit('input', this.lazyValue)
         })
-      } else {
-        this.lazyValue = val
-      }
+      } else this.lazyValue = val
 
       !this.validateOnBlur && this.validate()
       this.shouldAutoGrow && this.calculateInputHeight()
