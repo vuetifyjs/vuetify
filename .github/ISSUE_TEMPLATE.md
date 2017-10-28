@@ -5,6 +5,8 @@ IMPORTANT: Please use the following link to create a new issue:
 
 If your issue was not created using the app above, it will be closed immediately.
 Das heißt wenn du das Problem nicht mit der App erstellt hast, wird dein Eintrag sofort gelöscht.
+Si votre issue n'a pas été crée avec l'application ci-dessus, elle sera fermée immédiatement.
+Jeśli zgłoszenie nie będzie utworzone za pomocą tej aplikacji zostanie ono automatycznie zamknięte
 
 -->
 
