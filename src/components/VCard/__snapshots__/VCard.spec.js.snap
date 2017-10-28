@@ -53,7 +53,7 @@ exports[`VCard.vue should render a tile card 2`] = `
 exports[`VCard.vue should render card with img 1`] = `
 
 <div class="card"
-     style="height: auto; width: 300px;"
+     style="height: auto;"
      data-ripple="false"
 >
 </div>
