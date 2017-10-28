@@ -5,6 +5,7 @@ import {
 import VDataTable from './VDataTable'
 import VEditDialog from './VEditDialog'
 
+/* istanbul ignore next */
 VDataTable.install = function install (Vue) {
   const VTableOverflow = createSimpleFunctional('table__overflow')
 

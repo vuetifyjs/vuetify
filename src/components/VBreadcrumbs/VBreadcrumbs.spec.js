@@ -3,8 +3,11 @@ import {
   VBreadcrumbs,
   VBreadcrumbsItem
 } from '~components/VBreadcrumbs'
+import { mount } from 'avoriaz'
+import Vue from 'vue'
+import { compileToFunctions } from 'vue-template-compiler'
 
-test('VBreadcrumbs.js', ({ mount }) => {
+test('VBreadcrumbs.js', () => {
   it('should have breadcrumbs classes', () => {
     const wrapper = mount(VBreadcrumbs)
 
@@ -12,23 +15,50 @@ test('VBreadcrumbs.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  // TODO: Return to this
-  it.skip('should inject slot to children', () => {
-    const wrapper = mount(VBreadcrumbs, {
-      attachToDocument: true,
-      slots: {
-        default: [
-          VBreadcrumbsItem,
-          VBreadcrumbsItem,
-          VBreadcrumbsItem,
-          VBreadcrumbsItem
-        ]
-      }
+  it('should inject slot to children', () => {
+    const { render } = compileToFunctions(`
+      <v-breadcrumbs>
+        <v-breadcrumbs-item v-for="i in 4" :key="i"/>
+      </v-breadcrumbs>
+    `)
+    const component = Vue.component('test', {
+      components: {
+        VBreadcrumbs, VBreadcrumbsItem
+      },
+      render
     })
+    const wrapper = mount(component)
 
-    const item = wrapper.find('.breadcrumbs__divider')[0]
-    // console.log(wrapper.html())
-    // expect(item.html()).toBe('/')
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should use a custom divider slot', () => {
+    const { render } = compileToFunctions(`
+      <v-breadcrumbs>
+        <template slot="divider">/divider/</template>
+        <v-breadcrumbs-item/>
+        <v-breadcrumbs-item/>
+      </v-breadcrumbs>
+    `)
+    const component = Vue.component('test', {
+      components: {
+        VBreadcrumbs, VBreadcrumbsItem
+      },
+      render
+    })
+    const wrapper = mount(component)
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  // TODO: Inline styles not working in jest?
+  it('should use custom justify props', () => {
+    const wrapper = mount(VBreadcrumbs)
+
+    wrapper.setProps({ justifyCenter: true, justifyEnd: false })
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ justifyCenter: false, justifyEnd: true })
     expect(wrapper.html()).toMatchSnapshot()
   })
 })

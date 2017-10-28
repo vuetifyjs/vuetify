@@ -2,11 +2,21 @@ language: node_js
 node_js:
   - "8"
 
+env:
+  global:
+    - CODECLIMATE_API_HOST=https://codebeat.co/webhooks/code_coverage
+
+before_script:
+  - yarn global add codeclimate-test-reporter
+
 script:
   - yarn
   - yarn run lint
-  - yarn run test
+  - yarn run test:coverage
   - yarn run build
+
+after_success:
+  - codeclimate-test-reporter < $TRAVIS_BUILD_DIR/coverage/lcov.info
 
 cache:
   yarn: true

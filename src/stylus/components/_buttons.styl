@@ -125,8 +125,11 @@ theme(button, "btn")
     height: $button-floating-width
     width: $button-floating-width
     padding: 0
-    z-index: 4
     elevation(6)
+    
+    &.btn--fixed,
+    &.btn--absolute
+      z-index: 4
 
     &:active
       elevation(12)

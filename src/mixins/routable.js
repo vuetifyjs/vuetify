@@ -10,6 +10,7 @@ export default {
     append: Boolean,
     disabled: Boolean,
     exact: Boolean,
+    exactActiveClass: String,
     href: [String, Object],
     to: [String, Object],
     nuxt: Boolean,
@@ -45,10 +46,21 @@ export default {
       }
 
       if (this.to) {
+        // Add a special activeClass hook
+        // for component level styles
+        let activeClass = this.activeClass
+        let exactActiveClass = this.exactActiveClass || activeClass
+
+        if (this.proxyClass) {
+          activeClass += ' ' + this.proxyClass
+          exactActiveClass += ' ' + this.proxyClass
+        }
+
         tag = this.nuxt ? 'nuxt-link' : 'router-link'
         data.props.to = this.to
         data.props.exact = exact
-        data.props.activeClass = this.activeClass
+        data.props.activeClass = activeClass
+        data.props.exactActiveClass = exactActiveClass
         data.props.append = this.append
         data.props.replace = this.replace
       } else {
