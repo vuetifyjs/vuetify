@@ -5,22 +5,16 @@ import VIcon from '../VIcon'
 
 import Bootable from '../../mixins/bootable'
 import Themeable from '../../mixins/themeable'
+import { provide as RegistrableProvide } from '../../mixins/registrable'
 
 import Touch from '../../directives/touch'
 
 export default {
   name: 'v-carousel',
 
-  mixins: [Bootable, Themeable],
+  mixins: [Bootable, Themeable, RegistrableProvide],
 
   directives: { Touch },
-
-  provide () {
-    return {
-      register: this.register,
-      unregister: this.unregister
-    }
-  },
 
   data () {
     return {
@@ -59,6 +53,11 @@ export default {
   },
 
   watch: {
+    items () {
+      if (this.inputValue >= this.items.length) {
+        this.inputValue = this.items.length - 1
+      }
+    },
     inputValue () {
       // Evaluate items when inputValue changes to account for
       // dynamic changing of children
