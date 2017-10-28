@@ -96,14 +96,10 @@ export default {
   computed: {
     weekDays () {
       const first = parseInt(this.firstDayOfWeek, 10)
-      if (!this.formatters.weekDay) {
-        return createRange(7).map(i => ['S', 'M', 'T', 'W', 'T', 'F', 'S'][(i + first) % 7])
-      }
 
-      // Operates on UTC time zone to get the names of the week days
-      const date = new Date('2000-01-07T00:00:00+00:00')
-      const day = date.getUTCDate() - date.getUTCDay() + first
-      return createRange(7).map(i => this.formatters.weekDay(`2000-01-${pad(day + i)}`))
+      return this.formatters.weekDay
+        ? createRange(7).map(i => this.formatters.weekDay(`2017-01-${first + i + 15}`)) // 2017-01-15 is Sunday
+        : createRange(7).map(i => ['S', 'M', 'T', 'W', 'T', 'F', 'S'][(i + first) % 7])
     },
     firstAllowedDate () {
       const now = new Date()
@@ -177,10 +173,10 @@ export default {
     formatters () {
       return {
         day: this.dayFormat || this.createNativeLocaleFormatter(this.locale, { day: 'numeric', timeZone: 'UTC' }, { start: 8, length: 2 }),
-        headerDate: this.headerDateFormat || this.createNativeLocaleFormatter(this.locale, { month: 'long', year: 'numeric', timeZone: 'UTC' }, { start: 0, length: 7 }),
+        headerDate: this.headerDateFormat || this.createNativeLocaleFormatter(this.locale, { month: 'long', year: 'numeric', timeZone: 'UTC' }, { length: 7 }),
         month: this.monthFormat || this.createNativeLocaleFormatter(this.locale, { month: 'short', timeZone: 'UTC' }, { start: 5, length: 2 }),
-        year: this.yearFormat || this.createNativeLocaleFormatter(this.locale, { year: 'numeric', timeZone: 'UTC' }, { start: 0, length: 4 }),
-        weekDay: this.createNativeLocaleFormatter(this.locale, { weekday: 'narrow', timeZone: 'UTC' }, { start: 0, length: 0 }),
+        year: this.yearFormat || this.createNativeLocaleFormatter(this.locale, { year: 'numeric', timeZone: 'UTC' }, { length: 4 }),
+        weekDay: this.createNativeLocaleFormatter(this.locale, { weekday: 'narrow', timeZone: 'UTC' }),
         titleDate: this.titleDateFormat || this.defaultTitleDateFormatter
       }
     },
@@ -318,7 +314,7 @@ export default {
 
       return pickerBodyChildren
     },
-    createNativeLocaleFormatter (locale, options, { start, length }) {
+    createNativeLocaleFormatter (locale, options, { start, length } = { start: 0, length: 0 }) {
       const makeIsoString = dateString => {
         const [year, month, date] = dateString.trim().split(' ')[0].split('-')
         return [year, pad(month || 1), pad(date || 1)].join('-')
@@ -328,7 +324,7 @@ export default {
         const intlFormatter = new Intl.DateTimeFormat(locale || undefined, options)
         return dateString => intlFormatter.format(new Date(`${makeIsoString(dateString)}T00:00:00+00:00`))
       } catch (e) {
-        return dateString => makeIsoString(dateString).substr(start, length)
+        return (start || length) ? dateString => makeIsoString(dateString).substr(start, length) : null
       }
     },
     // Adds leading zero to month/day if necessary, returns 'YYYY' if type = 'year',
