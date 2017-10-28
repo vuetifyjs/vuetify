@@ -3,6 +3,7 @@ import VStepper from './VStepper'
 import VStepperStep from './VStepperStep'
 import VStepperContent from './VStepperContent'
 
+/* istanbul ignore next */
 VStepper.install = function install (Vue) {
   const VStepperHeader = createSimpleFunctional('stepper__header')
   const VStepperItems = createSimpleFunctional('stepper__items')

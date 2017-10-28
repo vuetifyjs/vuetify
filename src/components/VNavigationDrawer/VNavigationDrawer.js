@@ -159,6 +159,12 @@ export default {
     this.$vuetify.load(this.init)
   },
 
+  destroyed () {
+    if (this.app) {
+      this.$vuetify.application[this.right ? 'right' : 'left'] = 0
+    }
+  },
+
   methods: {
     init () {
       if (this.value != null) this.isActive = this.value

@@ -43,7 +43,7 @@ export default {
       }
 
       if (this.img) {
-        style.background = `url(${this.img}) center center / cover no-repeat`
+        style.background = `url("${this.img}") center center / cover no-repeat`
       }
 
       return style

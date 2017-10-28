@@ -77,10 +77,7 @@ export default {
         'class': 'input-group__selections',
         style: { 'overflow': 'hidden' },
         ref: 'activator'
-      }, [
-        ...this.genSelections(),
-        this.genSearch()
-      ])
+      }, this.genSelections().concat([this.genSearch()]))
     },
     genSelections () {
       if (this.hideSelections) return []

@@ -82,6 +82,8 @@ export default {
      */
     scrollListener (e) {
       if (e.type === 'keydown') {
+        if (['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) return
+
         const up = [38, 33]
         const down = [40, 34]
 

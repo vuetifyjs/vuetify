@@ -85,7 +85,6 @@ export default {
   },
 
   mounted () {
-    this.isBooted = this.isActive
     this.$vuetify.load(this.init)
   },
 

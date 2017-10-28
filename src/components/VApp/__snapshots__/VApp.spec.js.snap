@@ -2,30 +2,24 @@
 
 exports[`VApp.js should allow a custom id 1`] = `
 
-<div data-app="true"
-     class="application application--light"
-     id="inspire"
->
+<div class="application--wrap">
+  <div data-app="true"
+       class="application application--light"
+       id="inspire"
+  >
+  </div>
 </div>
 
 `;
 
-exports[`VApp.js should have an application class 1`] = `
+exports[`VApp.js should match a snapshot 1`] = `
 
-<div data-app="true"
-     class="application application--light"
-     id="app"
->
-</div>
-
-`;
-
-exports[`VApp.js should have data-app attribute 1`] = `
-
-<div data-app="true"
-     class="application application--light"
-     id="app"
->
+<div class="application--wrap">
+  <div data-app="true"
+       class="application application--light"
+       id="app"
+  >
+  </div>
 </div>
 
 `;
