@@ -60,7 +60,6 @@ export default {
       cachedItems: [],
       defaultColor: 'primary',
       inputValue: (this.multiple || this.tags) && !this.value ? [] : this.value,
-      isBooted: false,
       lastItem: 20,
       lazySearch: null,
       isActive: false,
@@ -309,7 +308,6 @@ export default {
 
       if (!val) return
 
-      this.isBooted = true
       this.isActive = true
     },
     isMultiple (val) {

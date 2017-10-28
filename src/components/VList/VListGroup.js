@@ -27,8 +27,6 @@ export default {
 
   watch: {
     isActive () {
-      this.isBooted = true
-
       if (!this.isActive) {
         this.listClose(this._uid)
       }
@@ -46,8 +44,6 @@ export default {
   },
 
   mounted () {
-    this.isBooted = this.isActive
-
     if (this.group) {
       this.isActive = this.matchRoute(this.$route.path)
     }

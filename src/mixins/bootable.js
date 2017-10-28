@@ -7,19 +7,13 @@
  * Otherwise can be set manually
  */
 export default {
-  data: () => ({
-    isBooted: false
-  }),
-
-  watch: {
-    isActive () {
-      this.isBooted = true
-    }
+  props: {
+    eager: Boolean
   },
 
   methods: {
     showLazyContent (content) {
-      return (this.isActive && this.isBooted)
+      return (this.isActive || this.eager)
         ? content
         : null
     }
