@@ -9,6 +9,16 @@ test('VCard.vue', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render card with img', () => {
+    const wrapper = mount(VCard, {
+      propsData: {
+        img: 'image.jpg'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should render a flat card', () => {
     const wrapper = mount(VCard, {
       propsData: {
