@@ -320,6 +320,19 @@ export default {
 
       return props
     },
+    genItems () {
+      if (!this.itemsLength && !this.items.length) {
+        const noData = this.$slots['no-data'] || this.noDataText
+        return [this.genEmptyItems(noData)]
+      }
+
+      if (!this.filteredItems.length) {
+        const noResults = this.$slots['no-results'] || this.noResultsText
+        return [this.genEmptyItems(noResults)]
+      }
+
+      return this.genFilteredItems()
+    },
     genPrevIcon () {
       return this.$createElement('v-btn', {
         props: {

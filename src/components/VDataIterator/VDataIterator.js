@@ -49,38 +49,24 @@ export default {
       return this.$createElement(this.contentTag, data, children)
     },
     genEmptyItems (content) {
-      return this.$createElement('div', {
+      return [this.$createElement('div', {
         'class': 'text-xs-center',
         style: 'width: 100%'
-      }, content)
+      }, content)]
     },
     genFilteredItems () {
-      const items = []
-      this.filteredItems.forEach((item, index) => {
-        const props = this.createProps(item, index)
-        const itemSlot = this.$scopedSlots.item
-          ? this.$scopedSlots.item(props)
-          : []
-
-        items.push(itemSlot)
-      })
-
-      return items
-    },
-    genItems () {
-      const children = []
-
-      if (!this.itemsLength && !this.items.length) {
-        const noData = this.$slots['no-data'] || this.noDataText
-        children.push(this.genEmptyItems(noData))
-      } else if (!this.filteredItems.length) {
-        const noResults = this.$slots['no-results'] || this.noResultsText
-        children.push(this.genEmptyItems(noResults))
-      } else {
-        children.push(this.genFilteredItems())
+      if (!this.$scopedSlots.item) {
+        return null
       }
 
-      return children
+      const items = []
+      for (let index = 0, len = this.filteredItems.length; index < len; ++index) {
+        const item = this.filteredItems[index]
+        const props = this.createProps(item, index)
+        items.push(this.$scopedSlots.item(props))
+      }
+
+      return items
     },
     genFooter () {
       const children = []
