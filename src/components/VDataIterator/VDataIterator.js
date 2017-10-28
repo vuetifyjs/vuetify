@@ -10,17 +10,25 @@ export default {
   inheritAttrs: false,
 
   props: {
-    tag: {
+    contentTag: {
       type: String,
       default: 'div'
+    },
+    contentProps: {
+      type: Object,
+      required: false
+    },
+    contentClass: {
+      type: String,
+      required: false
     }
   },
 
   computed: {
     classes () {
       return {
-        'dataiterator': true,
-        'dataiterator--select-all': this.selectAll !== false,
+        'data-iterator': true,
+        'data-iterator--select-all': this.selectAll !== false,
         'theme--dark': this.dark,
         'theme--light': this.light
       }
@@ -28,30 +36,17 @@ export default {
   },
 
   methods: {
-    createProps (item, index) {
-      const props = { item, index }
-      const key = this.itemKey
-
-      Object.defineProperty(props, 'selected', {
-        get: () => this.selected[item[this.itemKey]],
-        set: (value) => {
-          let selected = this.value.slice()
-          if (value) selected.push(item)
-          else selected = selected.filter(i => i[key] !== item[key])
-          this.$emit('input', selected)
-        }
-      })
-
-      return props
-    },
     genContent () {
       const children = this.genItems()
 
       const data = {
-        attrs: { ...this.$attrs }
+        'class': this.contentClass,
+        attrs: { ...this.$attrs },
+        on: { ...this.$listeners },
+        props: this.contentProps
       }
 
-      return this.$createElement(this.tag, data, children)
+      return this.$createElement(this.contentTag, data, children)
     },
     genEmptyItems (content) {
       return this.$createElement('div', {
@@ -95,8 +90,7 @@ export default {
       }
 
       if (!this.hideActions) {
-        children.push(this.$createElement('div', this.genActions())
-        )
+        children.push(this.genActions())
       }
 
       if (!children.length) return null

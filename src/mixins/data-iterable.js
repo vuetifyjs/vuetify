@@ -36,15 +36,17 @@ export default {
         sortBy: null,
         totalItems: 0
       },
-      actionsClasses: 'dataiterator__actions',
-      actionsSelectClasses: 'dataiterator__actions__select',
-      actionsPaginationClasses: 'dataiterator__actions__pagination'
+      expanded: {},
+      actionsClasses: 'data-iterator__actions',
+      actionsSelectClasses: 'data-iterator__actions__select',
+      actionsPaginationClasses: 'data-iterator__actions__pagination'
     }
   },
 
   mixins: [Filterable, Loadable, Themeable],
 
   props: {
+    expand: Boolean,
     hideActions: Boolean,
     mustSort: Boolean,
     noResultsText: {
@@ -263,6 +265,9 @@ export default {
     isSelected (item) {
       return this.selected[item[this.itemKey]]
     },
+    isExpanded (item) {
+      return this.expanded[item[this.itemKey]]
+    },
     sort (index) {
       const { sortBy, descending } = this.computedPagination
       if (sortBy === null) {
@@ -286,6 +291,34 @@ export default {
       this.$emit('input', this.items.filter(i => (
         selected[i[this.itemKey]]))
       )
+    },
+    createProps (item, index) {
+      const props = { item, index }
+      const key = this.itemKey
+
+      Object.defineProperty(props, 'selected', {
+        get: () => this.selected[item[this.itemKey]],
+        set: (value) => {
+          let selected = this.value.slice()
+          if (value) selected.push(item)
+          else selected = selected.filter(i => i[key] !== item[key])
+          this.$emit('input', selected)
+        }
+      })
+
+      Object.defineProperty(props, 'expanded', {
+        get: () => this.expanded[item[this.itemKey]],
+        set: (value) => {
+          if (!this.expand) {
+            Object.keys(this.expanded).forEach((key) => {
+              this.$set(this.expanded, key, false)
+            })
+          }
+          this.$set(this.expanded, item[this.itemKey], value)
+        }
+      })
+
+      return props
     },
     genPrevIcon () {
       return this.$createElement('v-btn', {

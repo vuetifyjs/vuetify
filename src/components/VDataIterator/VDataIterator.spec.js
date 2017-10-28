@@ -2,6 +2,7 @@ import Vue from 'vue'
 import { test } from '~util/testing'
 import { mount } from 'avoriaz'
 import VDataIterator from './VDataIterator'
+import VBtn from '~components/VBtn'
 
 test('VDataIterator.js', () => {
   function dataIteratorTestData () {
@@ -28,6 +29,10 @@ test('VDataIterator.js', () => {
     const wrapper = mount(VDataIterator, data)
 
     expect(wrapper.html()).toMatchSnapshot()
+
+    const content = wrapper.find('.data-iterator div div')[0]
+    expect(content.element.textContent).toBe('No matching records found')
+
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
@@ -37,6 +42,10 @@ test('VDataIterator.js', () => {
     const wrapper = mount(VDataIterator, data)
 
     expect(wrapper.html()).toMatchSnapshot()
+
+    const content = wrapper.find('.data-iterator div div')[0]
+    expect(content.element.textContent).toBe('No data available')
+
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
@@ -47,17 +56,14 @@ test('VDataIterator.js', () => {
     const item = props => vm.$createElement('div', [props.item.col2])
     const component = Vue.component('test', {
       components: {
+        VBtn,
         VDataIterator
       },
       render (h) {
         return h('v-data-iterator', {
           props: {
-            tag: 'span',
+            'content-tag': 'span',
             ...data.propsData
-          },
-          attrs: {
-            row: true,
-            wrap: true
           },
           scopedSlots: {
             item
@@ -69,6 +75,47 @@ test('VDataIterator.js', () => {
     const wrapper = mount(component)
 
     expect(wrapper.html()).toMatchSnapshot()
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should pass attrs, class and props to content', () => {
+    const data = dataIteratorTestData()
+
+    const vm = new Vue()
+    const item = props => vm.$createElement('div', [props.item.col2])
+    const component = Vue.component('test', {
+      components: {
+        VBtn,
+        VDataIterator
+      },
+      render (h) {
+        return h('v-data-iterator', {
+          props: {
+            'content-tag': 'v-btn',
+            ...data.propsData,
+            'content-props': { block: true },
+            'content-class': 'test__class'
+          },
+          attrs: {
+            id: "testButtonId"
+          },
+          scopedSlots: {
+            item
+          }
+        })
+      }
+    })
+
+    const wrapper = mount(component)
+
+    const mainDiv = wrapper.find('.data-iterator')[0]
+    expect(mainDiv.hasAttribute('id')).toBe(false)
+
+    var button = mainDiv.find('button')[0]
+    expect(button.getAttribute('id')).toBe('testButtonId')
+    expect(button.hasClass('btn--block')).toBe(true)
+    expect(button.hasClass('test__class')).toBe(true)
+
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 })

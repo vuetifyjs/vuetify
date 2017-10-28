@@ -40,34 +40,6 @@ export default {
 
       return this.genTR([transition], { class: 'datatable__expand-row' })
     },
-    createProps (item, index) {
-      const props = { item, index }
-      const key = this.itemKey
-
-      Object.defineProperty(props, 'selected', {
-        get: () => this.selected[item[this.itemKey]],
-        set: (value) => {
-          let selected = this.value.slice()
-          if (value) selected.push(item)
-          else selected = selected.filter(i => i[key] !== item[key])
-          this.$emit('input', selected)
-        }
-      })
-
-      Object.defineProperty(props, 'expanded', {
-        get: () => this.expanded[item[this.itemKey]],
-        set: (value) => {
-          if (!this.expand) {
-            Object.keys(this.expanded).forEach((key) => {
-              this.$set(this.expanded, key, false)
-            })
-          }
-          this.$set(this.expanded, item[this.itemKey], value)
-        }
-      })
-
-      return props
-    },
     genFilteredItems () {
       const rows = []
       this.filteredItems.forEach((item, index) => {
