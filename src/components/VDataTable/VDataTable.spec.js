@@ -60,6 +60,10 @@ test('VDataTable.vue', () => {
     const wrapper = mount(VDataTable, data)
 
     expect(wrapper.html()).toMatchSnapshot()
+
+    const content = wrapper.find('table.datatable tbody > tr > td')[0]
+    expect(content.element.textContent).toBe('No matching records found')
+
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
@@ -69,6 +73,10 @@ test('VDataTable.vue', () => {
     const wrapper = mount(VDataTable, data)
 
     expect(wrapper.html()).toMatchSnapshot()
+
+    const content = wrapper.find('table.datatable tbody > tr > td')[0]
+    expect(content.element.textContent).toBe('No data available')
+
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
