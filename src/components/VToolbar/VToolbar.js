@@ -130,7 +130,7 @@ export default {
   },
 
   mounted () {
-    this.whenScrolled(this.isScrolling)
+    this.$vuetify.load(this.init)
   },
 
   destroyed () {
@@ -138,6 +138,9 @@ export default {
   },
 
   methods: {
+    init () {
+      this.whenScrolled(this.isScrolling)
+    },
     onScroll () {
       if (typeof window === 'undefined') return
 
