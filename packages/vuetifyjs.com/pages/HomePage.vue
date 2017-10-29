@@ -1,6 +1,6 @@
 <template lang="pug">
   div#home
-    v-alert(color="accent" value).mb-0
+    v-alert(color="accent" value).ma-0
       div {{ $t('Vuetify.Home.announcementBanner') }}
     v-card(dark tile flat)#banner.primary--light
       v-layout(align-center justify-center)
@@ -419,7 +419,7 @@
       @media $display-breakpoints.lg-and-up
           font-size 40px
           width: 70%
-          
+
   #home-footer
     background: #37424b
     color: white
