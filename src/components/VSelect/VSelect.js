@@ -364,6 +364,10 @@ export default {
     // to avoid a unnecessary label transition
     this.genSelectedItems()
 
+    if (this.isAutocomplete) {
+      this.lazySearch = this.getText(this.selectedItem)
+    }
+
     this.content = this.$refs.menu.$refs.content
   },
 
@@ -436,6 +440,7 @@ export default {
 
       if (this.$refs.input && this.isAutocomplete) {
         this.$refs.input.focus()
+        setTimeout(() => this.$refs.input.select(), 20)
       } else {
         this.$el.focus()
       }
