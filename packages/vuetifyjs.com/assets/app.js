@@ -1,3 +1,7 @@
+// Polyfills for IE Support
+import 'babel-polyfill'
+import 'event-source-polyfill'
+
 // Packages
 import Vue from 'vue'
 import Vuetify from 'vuetify'
