@@ -1,11 +1,22 @@
+// Styles
 require('../../stylus/components/_pagination.styl')
 
+// Components
 import VIcon from '../VIcon'
 
+// Mixins
+import Colorable from '../../mixins/colorable'
+
+// Directives
 import Resize from '../../directives/resize'
+
+// Helpers
+import { genColorClasses } from '../../util/helpers'
 
 export default {
   name: 'v-pagination',
+
+  mixins: [Colorable],
 
   directives: { Resize },
 
@@ -140,7 +151,7 @@ export default {
         class: {
           'pagination__item': true,
           'pagination__item--active': isActive,
-          [this.activeClass]: isActive
+          [genColorClasses(this.activeClass, this.dark)]: isActive
         },
         attrs: { href: '#!' },
         on: {
@@ -169,7 +180,7 @@ export default {
 
     return h('ul', {
       directives: [{ name: 'resize', value: this.onResize }],
-      class: this.classes
+      class: this._computedClasses
     }, children)
   }
 }
