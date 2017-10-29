@@ -280,19 +280,6 @@ export default {
         }
       })
     },
-    isFocused (val) {
-      // When focusing the input
-      // re-set the caret position
-      if (this.isAutocomplete &&
-        !this.mask &&
-        !this.isMultiple &&
-        val
-      ) {
-        this.shouldBreak && this.$nextTick(() => {
-          this.$refs.input.scrollLeft = this.$refs.input.scrollWidth
-        })
-      }
-    },
     items (val) {
       if (this.cacheItems) {
         this.cachedItems = this.filterDuplicates(this.cachedItems.concat(val))
@@ -439,7 +426,12 @@ export default {
 
       if (this.$refs.input && this.isAutocomplete) {
         this.$refs.input.focus()
-        this.$nextTick(() => this.$refs.input.select())
+        this.$nextTick(() => {
+          this.$refs.input.select()
+          this.shouldBreak && (
+            this.$refs.input.scrollLeft = this.$refs.input.scrollWidth
+          )
+        })
       } else {
         this.$el.focus()
       }
