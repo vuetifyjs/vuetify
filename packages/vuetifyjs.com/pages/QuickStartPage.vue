@@ -1,10 +1,10 @@
 <template lang="pug">
   text-page(:data="$data")
-    app-alert(error value="Vuetify.QuickStart.alert1")
+    app-alert(error value="GettingStarted.QuickStart.alert1")
 
     section#cdn-install
-      section-heading(value="Vuetify.QuickStart.cdnHeader")
-      section-text(value="Vuetify.QuickStart.cdnText")
+      section-heading(value="GettingStarted.QuickStart.cdnHeader")
+      section-text(value="GettingStarted.QuickStart.cdnText")
       markup(lang="html")
         |&lt;!DOCTYPE html&gt;
         |&lt;html&gt;
@@ -31,25 +31,25 @@
         |&lt;/html&gt;
 
     section#new-applications
-      section-heading(value="Vuetify.QuickStart.newHeader")
-      section-text(value="Vuetify.QuickStart.newText")
+      section-heading(value="GettingStarted.QuickStart.newHeader")
+      section-text(value="GettingStarted.QuickStart.newText")
       template-list
-    
+
     section#existing-applications
-      section-heading(value="Vuetify.QuickStart.existingHeader")
-      section-text(value="Vuetify.QuickStart.existingText1")
-      section-text(value="Vuetify.QuickStart.existingText2")
+      section-heading(value="GettingStarted.QuickStart.existingHeader")
+      section-text(value="GettingStarted.QuickStart.existingText1")
+      section-text(value="GettingStarted.QuickStart.existingText2")
       markup(lang="cli")
         |$  npm install vuetify
         |# or
         |$  yarn add vuetify
-      section-text(value="Vuetify.QuickStart.existingText3")
+      section-text(value="GettingStarted.QuickStart.existingText3")
       markup(lang="js")
         |import Vue from 'vue'
         |import Vuetify from 'vuetify'
         |&nbsp;
         |Vue.use(Vuetify)
-      section-text(value="Vuetify.QuickStart.existingText4")
+      section-text(value="GettingStarted.QuickStart.existingText4")
       markup(lang="js")
         |// index.js or main.js
         |import('path/to/node_modules/vuetify/dist/vuetify.min.css') // Ensure you are using css-loader
@@ -57,12 +57,12 @@
         |// main.styl
         |@import 'path/to/node_modules/vuetify/src/stylus/main.styl' // Ensure you are using stylus-loader
         |&nbsp;
-      section-text(value="Vuetify.QuickStart.existingText5")
-      app-alert(error value="Vuetify.QuickStart.alert2")
+      section-text(value="GettingStarted.QuickStart.existingText5")
+      app-alert(error value="GettingStarted.QuickStart.alert2")
 
     section#browser-support
-      section-heading(value="Vuetify.QuickStart.browserHeader")
-      section-text(value="Vuetify.QuickStart.browserText")
+      section-heading(value="GettingStarted.QuickStart.browserHeader")
+      section-text(value="GettingStarted.QuickStart.browserText")
       v-list.transparent
         v-layout(row wrap)
           v-flex(
@@ -90,8 +90,8 @@
     components: { TemplateList },
 
     data: () => ({
-      header: "Vuetify.QuickStart.header",
-      headerText: "Vuetify.QuickStart.headerText",
+      header: "GettingStarted.QuickStart.header",
+      headerText: "GettingStarted.QuickStart.headerText",
       //
       browsers: [
         { icon: 'internet-explorer', title: 'IE9 / IE10', supported: false },

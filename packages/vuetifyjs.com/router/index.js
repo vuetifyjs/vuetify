@@ -53,6 +53,7 @@ export function createRouter () {
         route('/', 'Home'),
         // Getting Started
         route('/getting-started/quick-start', 'QuickStart'),
+        route('/getting-started/why-vuetify', 'WhyVuetify'),
         route('/playground', 'Playground'),
         route('/components/alerts', 'Alerts'),
         // Global redirect for 404
