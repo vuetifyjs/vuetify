@@ -32,9 +32,7 @@ export default {
         'card--horizontal': this.horizontal,
         'card--hover': this.hover,
         'card--raised': this.raised,
-        'card--tile': this.tile,
-        'theme--light': this.light,
-        'theme--dark': this.dark
+        'card--tile': this.tile
       }
     },
     styles () {
