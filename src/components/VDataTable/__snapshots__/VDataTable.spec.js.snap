@@ -87,6 +87,63 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
                     <div class="menu__content menu__content--select menu__content--auto"
                          style="max-height: 200px; min-width: 75px; max-width: auto; top: 18px; left: 12px; z-index: 0; display: none;"
                     >
+                      <div class="card"
+                           style="height: auto;"
+                           data-ripple="false"
+                      >
+                        <ul data-uid="5"
+                            class="list"
+                        >
+                          <li>
+                            <a href="javascript:;"
+                               class="list__tile list__tile--link"
+                               data-ripple="true"
+                            >
+                              <div class="list__tile__content">
+                                <div class="list__tile__title">
+                                  5
+                                </div>
+                              </div>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="javascript:;"
+                               class="list__tile list__tile--link"
+                               data-ripple="true"
+                            >
+                              <div class="list__tile__content">
+                                <div class="list__tile__title">
+                                  10
+                                </div>
+                              </div>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="javascript:;"
+                               class="list__tile list__tile--link"
+                               data-ripple="true"
+                            >
+                              <div class="list__tile__content">
+                                <div class="list__tile__title">
+                                  25
+                                </div>
+                              </div>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="javascript:;"
+                               class="list__tile list__tile--link"
+                               data-ripple="true"
+                            >
+                              <div class="list__tile__content">
+                                <div class="list__tile__title">
+                                  All
+                                </div>
+                              </div>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                   <i aria-hidden="true"

@@ -40,7 +40,7 @@ test('VSelect', () => {
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
-  it('should disable list items', async () => {
+  it('should disable list items', () => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,
       propsData: {
@@ -51,8 +51,6 @@ test('VSelect', () => {
       }
     })
 
-    wrapper.trigger('click')
-    await wrapper.vm.$nextTick()
     const item = wrapper.find('li')[0]
 
     expect(item.element.getAttribute('disabled')).toBe('disabled')

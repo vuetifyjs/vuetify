@@ -87,7 +87,7 @@ export default {
       // add the value to the tags list
       if (this.tags &&
         this.searchValue &&
-        (!this.filteredItems.length || !this.isMenuItemSelected())
+        !this.filteredItems.length
       ) {
         e.preventDefault()
 
@@ -121,16 +121,6 @@ export default {
       // If tab - select item or close menu
       if (e.keyCode === 9) return this.onTabDown(e)
 
-      // Enter when tagging and search value
-      // is not included in the items list
-      if (e.keyCode === 13 &&
-        this.tags &&
-        this.searchValue &&
-        (!this.filteredItems.length || !this.isMenuItemSelected())) {
-        e.preventDefault()
-        return this.onEnterDown()
-      }
-
       if (!this.isAutocomplete ||
         ![32].includes(e.keyCode) // space
       ) this.$refs.menu.changeListIndex(e)
@@ -144,6 +134,9 @@ export default {
       ) this.changeSelectedIndex(e.keyCode)
 
       if (!this.tags || !this.searchValue) return
+
+      // Enter
+      if (e.keyCode === 13) return this.onEnterDown()
 
       // Left arrow
       if (e.keyCode === 37 && this.$refs.input.selectionStart === 0 && this.selectedItems.length) {

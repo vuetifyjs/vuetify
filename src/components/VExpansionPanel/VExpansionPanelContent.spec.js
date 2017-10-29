@@ -19,4 +19,14 @@ test.skip('VExpansionPanelContent.js', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should render an expanded component with lazy prop and match snapshot', () => {
+    const wrapper = mount(VExpansionPanelContent, {
+      propsData: {
+        lazy: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

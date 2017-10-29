@@ -36,6 +36,24 @@ exports[`VDialog.js should render a fullscreen component and match snapshot 1`] 
 
 `;
 
+exports[`VDialog.js should render a lazy component and match snapshot 1`] = `
+
+<div class="dialog__container"
+     style="display: block;"
+>
+  <div class="dialog__content"
+       tabindex="-1"
+       style="z-index: 0;"
+  >
+    <div class="dialog"
+         style="display: none;"
+    >
+    </div>
+  </div>
+</div>
+
+`;
+
 exports[`VDialog.js should render a persistent component and match snapshot 1`] = `
 
 <div class="dialog__container"

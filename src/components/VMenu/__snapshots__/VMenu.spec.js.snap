@@ -91,6 +91,19 @@ exports[`VMenu.js should render component with custom fullWidth and match snapsh
 
 `;
 
+exports[`VMenu.js should render component with custom lazy and match snapshot 1`] = `
+
+<div class="menu"
+     style="display: inline-block;"
+>
+  <div class="menu__content"
+       style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
+  >
+  </div>
+</div>
+
+`;
+
 exports[`VMenu.js should render component with custom left and match snapshot 1`] = `
 
 <div class="menu"
