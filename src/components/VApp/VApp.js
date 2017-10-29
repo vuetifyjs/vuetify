@@ -59,8 +59,8 @@ export default {
       }]
     }
 
-    const app = h('div', data, this.$slots.default)
+    const wrapper = h('div', { staticClass: 'application--wrap' }, this.$slots.default)
 
-    return h('div', { staticClass: 'application--wrap' }, [app])
+    return h('div', data, [wrapper])
   }
 }

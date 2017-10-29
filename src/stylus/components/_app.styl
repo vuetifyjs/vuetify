@@ -2,19 +2,19 @@
 @import '../theme'
 
 .application
-  flex: 1 1 auto
-  backface-visibility: hidden
   display: flex
-  flex-direction: column
-  min-height: 100vh
 
   &--wrap
+    flex: 1 1 auto
+    backface-visibility: hidden
     display: flex
+    flex-direction: column
+    min-height: 100vh
 
-  // TODO: Deprecate
-  > main:not(.content)
-    flex: 1 0 auto
-    display: flex
+    // TODO: Deprecate
+    > main:not(.content)
+      flex: 1 0 auto
+      display: flex
 
 application($material)
   background: $material.background
