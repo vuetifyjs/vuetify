@@ -20,6 +20,7 @@ export default {
       if (prop && this[prop]) {
         classes[this[prop]] = true
       }
+
       return classes
     },
     addTextColorClassChecks (classes = {}, prop = 'computedColor') {

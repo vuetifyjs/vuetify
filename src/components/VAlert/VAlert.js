@@ -17,7 +17,18 @@ export default {
 
   props: {
     dismissible: Boolean,
-    icon: String
+    icon: String,
+    type: {
+      type: String,
+      validator (val) {
+        return [
+          'info',
+          'error',
+          'success',
+          'warning'
+        ].includes(val)
+      }
+    }
   },
 
   data: () => ({
@@ -26,19 +37,31 @@ export default {
 
   computed: {
     classes () {
+      const type = this.type ? 'type' : 'computedColor'
+
       return this.addBackgroundColorClassChecks({
         'alert--dismissible': this.dismissible
-      })
+      }, type)
+    },
+    computedIcon () {
+      if (this.icon || !this.type) return this.icon
+
+      switch (this.type) {
+        case 'info': return 'info'
+        case 'error': return 'warning'
+        case 'success': return 'check_circle'
+        case 'warning': return 'priority_high'
+      }
     }
   },
 
   render (h) {
     const children = [h('div', this.$slots.default)]
 
-    if (this.icon) {
+    if (this.computedIcon) {
       children.unshift(h('v-icon', {
         'class': 'alert__icon'
-      }, this.icon))
+      }, this.computedIcon))
     }
 
     if (this.dismissible) {

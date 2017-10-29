@@ -54,4 +54,26 @@ test('VAlert.vue', ({ mount }) => {
 
     expect(wrapper.contains('.icon')).toBe(false)
   })
+
+  it('should display contextual colors by type', async () => {
+    const wrapper = mount(VAlert, {
+      propsData: {
+        type: 'error'
+      }
+    })
+
+    expect(wrapper.vm.classes.error).toBe(true)
+    wrapper.setProps({ 'type': 'success' })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.classes.success).toBe(true)
+    wrapper.setProps({ 'type': 'warning' })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.classes.warning).toBe(true)
+    wrapper.setProps({ 'type': 'info' })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.classes.info).toBe(true)
+  })
 })
