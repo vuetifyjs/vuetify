@@ -1,10 +1,16 @@
+// Styles
 require('../../stylus/components/_alerts.styl')
 
+// Components
 import VIcon from '../VIcon'
 
+// Mixins
 import Colorable from '../../mixins/colorable'
 import Toggleable from '../../mixins/toggleable'
 import Transitionable from '../../mixins/transitionable'
+
+// Helpers
+import { genColorClasses } from '../../util/helpers'
 
 export default {
   name: 'v-alert',
@@ -17,28 +23,46 @@ export default {
 
   props: {
     dismissible: Boolean,
-    icon: String
+    icon: String,
+    type: {
+      type: String,
+      validator (val) {
+        return [
+          'info',
+          'error',
+          'success',
+          'warning'
+        ].includes(val)
+      }
+    }
   },
-
-  data: () => ({
-    defaultColor: 'error'
-  }),
 
   computed: {
     classes () {
-      return this.addBackgroundColorClassChecks({
-        'alert--dismissible': this.dismissible
-      })
+      return {
+        'alert--dismissible': this.dismissible,
+        [genColorClasses(this.type, this.dark)]: true
+      }
+    },
+    computedIcon () {
+      if (this.icon || !this.type) return this.icon
+
+      switch (this.type) {
+        case 'info': return 'info'
+        case 'error': return 'warning'
+        case 'success': return 'check_circle'
+        case 'warning': return 'priority_high'
+      }
     }
   },
 
   render (h) {
     const children = [h('div', this.$slots.default)]
 
-    if (this.icon) {
+    if (this.computedIcon) {
       children.unshift(h('v-icon', {
         'class': 'alert__icon'
-      }, this.icon))
+      }, this.computedIcon))
     }
 
     if (this.dismissible) {
@@ -48,9 +72,7 @@ export default {
         on: { click: () => this.$emit('input', false) }
       }, [
         h(VIcon, {
-          props: {
-            right: true
-          }
+          props: { right: true }
         }, 'cancel')
       ])
 
@@ -59,7 +81,7 @@ export default {
 
     const alert = h('div', {
       staticClass: 'alert',
-      'class': this.classes,
+      'class': this._computedClasses,
       directives: [{
         name: 'show',
         value: this.isActive

@@ -1,8 +1,7 @@
 import Colorable from './colorable'
-import Themeable from './themeable'
 
 export default {
-  mixins: [Colorable, Themeable],
+  mixins: [Colorable],
 
   data () {
     return {
@@ -43,7 +42,7 @@ export default {
     genPickerTitle (children) {
       return this.$createElement('div', {
         staticClass: 'picker__title',
-        'class': this.addBackgroundColorClassChecks({}, 'titleColor')
+        'class': this._computedClasses
       }, children)
     }
   }

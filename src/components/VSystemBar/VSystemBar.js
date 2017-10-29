@@ -19,13 +19,13 @@ export default {
 
   computed: {
     classes () {
-      return this.addBackgroundColorClassChecks(Object.assign({
+      return {
         'system-bar--lights-out': this.lightsOut,
         'system-bar--absolute': this.absolute,
         'system-bar--fixed': this.fixed,
         'system-bar--status': this.status,
         'system-bar--window': this.window
-      }, this.themeClasses))
+      }
     },
     computedHeight () {
       return this.window ? 32 : 24

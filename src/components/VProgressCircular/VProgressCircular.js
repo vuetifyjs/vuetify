@@ -54,11 +54,11 @@ export default {
     },
 
     classes () {
-      return this.addTextColorClassChecks({
+      return {
         'progress-circular': true,
         'progress-circular--indeterminate': this.indeterminate,
         'progress-circular--button': this.button
-      })
+      }
     },
 
     cxy () {

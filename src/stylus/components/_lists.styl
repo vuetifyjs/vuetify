@@ -221,10 +221,6 @@ theme(list, "list")
     .list__tile
       padding-left: $list-item-left-padding
 
-    .list__tile--active
-      .list__tile__title
-        color: $theme.primary
-
     &__header
       > li:first-child
         cursor: pointer
@@ -237,16 +233,18 @@ theme(list, "list")
           opacity: 1
 
       &--active
-        .list__tile
+        > li > .list__tile
           background: $material-twelve-percent-dark
+          color: inherit !important
 
           &:after
             opacity: 1
 
-          .list__tile__title
-            color: inherit
+          .list__tile__action:first-of-type:not(:only-of-type)
+            .icon
+              color: inherit !important
 
-          .list__tile__action:last-of-type
+          .list__tile__action:last-of-type:not(:only-of-type)
             .icon
               transform: rotate(-180deg)
 

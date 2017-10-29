@@ -52,7 +52,7 @@ export default {
 
   computed: {
     classes () {
-      const classes = {
+      return {
         'input-group--text-field': true,
         'input-group--text-field-box': this.box,
         'input-group--single-line': this.singleLine || this.solo,
@@ -63,14 +63,6 @@ export default {
         'input-group--suffix': this.suffix,
         'input-group--textarea': this.textarea
       }
-
-      if (this.hasError) {
-        classes['error--text'] = true
-      } else {
-        return this.addTextColorClassChecks(classes)
-      }
-
-      return classes
     },
     count () {
       let inputLength

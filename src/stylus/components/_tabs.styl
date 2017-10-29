@@ -6,9 +6,6 @@ tabs($material)
   .tabs__item
     color: $material.tabs.inactive
 
-    &.tabs__item--active
-      color: $material.tabs.active
-
     &.tabs__item--disabled
       color: $material.buttons.disabled
 
@@ -67,7 +64,6 @@ theme(tabs, "tabs")
         overflow: hidden !important
 
   &__bar
-    background-color: $theme.primary
     width: 100%
     position: relative
     height: 48px
@@ -155,5 +151,4 @@ theme(tabs, "tabs")
     position: absolute
     bottom: 0
     height: 2px
-    background: $theme.accent
     transition: $primary-transition

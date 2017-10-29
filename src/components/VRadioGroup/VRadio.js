@@ -20,12 +20,6 @@ export default {
 
   mixins: [Colorable, Rippleable, TabFocusable, Themeable],
 
-  props: {
-    disabled: Boolean,
-    value: null,
-    label: String
-  },
-
   data () {
     return {
       defaultColor: 'accent',
@@ -33,9 +27,15 @@ export default {
     }
   },
 
+  props: {
+    disabled: Boolean,
+    value: null,
+    label: String
+  },
+
   computed: {
     classes () {
-      return this.addTextColorClassChecks({
+      return {
         'input-group': true,
         'input-group--active': this.isActive,
         'input-group--disabled': this.disabled,
@@ -44,9 +44,8 @@ export default {
         'radio': true,
         'theme--dark': this.dark,
         'theme--light': this.light
-      })
+      }
     },
-
     icon () {
       return this.isActive ? 'radio_button_checked' : 'radio_button_unchecked'
     }
@@ -83,7 +82,7 @@ export default {
       children.push(this.genInput(radio))
 
       return this.$createElement('div', {
-        class: this.classes,
+        class: this._computedClasses,
         attrs: {
           role: 'radio',
           'aria-checked': this.isActive && 'true' || 'false',

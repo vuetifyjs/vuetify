@@ -10,7 +10,7 @@ export default {
   },
 
   data: () => ({
-    defaultColor: 'accent'
+    defaultTextColor: 'accent'
   }),
 
   props: {

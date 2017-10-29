@@ -65,41 +65,7 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
           <div class="datatable__actions">
             <div class="datatable__actions__select">
               Rows per page:
-              <div tabindex="0"
-                   aria-label="Rows per page:"
-                   role="combobox"
-                   class="input-group input-group--append-icon input-group--hide-details input-group--text-field input-group--select input-group--auto primary--text"
-              >
-                <div class="input-group__input">
-                  <div class="input-group__selections"
-                       style="overflow: hidden;"
-                  >
-                    <input aria-label="Rows per page:"
-                           disabled="disabled"
-                           tabindex="-1"
-                           class="input-group--select__autocomplete"
-                           style="display: none;"
-                    >
-                  </div>
-                  <div class="menu"
-                       style="display: inline-block;"
-                  >
-                    <div class="menu__content menu__content--select menu__content--auto"
-                         style="max-height: 200px; min-width: 75px; max-width: auto; top: 18px; left: 12px; z-index: 0; display: none;"
-                    >
-                    </div>
-                  </div>
-                  <i aria-hidden="true"
-                     class="material-icons icon input-group__append-icon input-group__icon-cb"
-                  >
-                    arrow_drop_down
-                  </i>
-                </div>
-                <div class="input-group__details">
-                  <div class="input-group__messages">
-                  </div>
-                </div>
-              </div>
+              <!---->
             </div>
             <div class="datatable__actions__pagination">
               NaN-NaN of 3

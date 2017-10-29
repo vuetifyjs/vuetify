@@ -28,7 +28,6 @@ export default {
 
       const data = {
         attrs: { disabled: this.disabled },
-        class: this.classes,
         props: {},
         directives: [{
           name: 'ripple',

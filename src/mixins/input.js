@@ -1,3 +1,4 @@
+import Colorable from './colorable'
 import Loadable from './loadable'
 import Themeable from './themeable'
 import Validatable from './validatable'
@@ -8,7 +9,7 @@ export default {
     VIcon
   },
 
-  mixins: [Loadable, Themeable, Validatable],
+  mixins: [Colorable, Loadable, Themeable, Validatable],
 
   data () {
     return {
@@ -61,7 +62,7 @@ export default {
         'input-group--placeholder': !!this.placeholder,
         'theme--dark': this.dark,
         'theme--light': this.light
-      }, this.classes)
+      }, this._computedClasses)
     },
     isDirty () {
       return !!this.inputValue
@@ -74,11 +75,17 @@ export default {
       this.tabFocused = false
     },
     genLabel () {
+      const required = this.required
+        ? this.$createElement('span', {
+          'class': {
+            'error--text': this.required && this.isFocused
+          }
+        }, '*')
+        : null
+
       return this.$createElement('label', {
-        attrs: {
-          for: this.$attrs.id
-        }
-      }, this.$slots.label || this.label)
+        attrs: { for: this.$attrs.id }
+      }, [this.$slots.label || this.label, required])
     },
     genMessages () {
       let messages = []

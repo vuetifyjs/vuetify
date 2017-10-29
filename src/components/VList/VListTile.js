@@ -1,11 +1,19 @@
+// Mixins
+import Colorable from '../../mixins/colorable'
 import Routable from '../../mixins/routable'
 import Toggleable from '../../mixins/toggleable'
+
+// Directives
 import Ripple from '../../directives/ripple'
 
 export default {
   name: 'v-list-tile',
 
-  mixins: [Routable, Toggleable],
+  mixins: [
+    Colorable,
+    Routable,
+    Toggleable
+  ],
 
   directives: {
     Ripple
@@ -20,7 +28,7 @@ export default {
   props: {
     activeClass: {
       type: String,
-      default: 'primary--text'
+      default: 'primary--light--text'
     },
     avatar: Boolean,
     inactive: Boolean,
@@ -48,11 +56,10 @@ export default {
     const isRouteLink = !this.inactive && this.isLink
     const { tag, data } = isRouteLink ? this.generateRouteLink() : {
       tag: this.tag || 'div',
-      data: {
-        class: this.classes
-      }
+      data: {}
     }
 
+    data.class = this._computedClasses
     data.attrs = Object.assign({}, data.attrs, this.$attrs)
 
     return h('li', {

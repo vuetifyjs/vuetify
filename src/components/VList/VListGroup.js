@@ -11,6 +11,10 @@ export default {
   mixins: [Bootable, Toggleable],
 
   props: {
+    activeClass: {
+      type: String,
+      default: 'primary--light--text'
+    },
     group: String,
     noAction: Boolean
   },
@@ -19,6 +23,7 @@ export default {
     classes () {
       return {
         'list--group__header': true,
+        [this.activeClass]: this.isActive,
         'list--group__header--active': this.isActive,
         'list--group__header--no-action': this.noAction
       }
@@ -34,12 +39,13 @@ export default {
     $route (to) {
       const isActive = this.matchRoute(to.path)
 
-      if (this.group) {
-        if (isActive && this.isActive !== isActive) {
-          this.listClick(this._uid)
-        }
-        this.isActive = isActive
-      }
+      if (!this.group) return
+
+      if (isActive &&
+        this.isActive !== isActive
+      ) this.listClick(this._uid)
+
+      this.isActive = isActive
     }
   },
 
@@ -86,6 +92,8 @@ export default {
 
     const transition = h(VExpandTransition, [group])
 
-    return h('div', { 'class': 'list--group__container' }, [item, transition])
+    return h('div', {
+      'class': 'list--group__container'
+    }, [item, transition])
   }
 }

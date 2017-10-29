@@ -123,3 +123,27 @@ export function getZIndex (el) {
 
   return zi
 }
+
+/**
+ * Generate an append color class
+ * 
+ * @param  {string} color
+ * 
+ * @param  {boolean} dark
+ * 
+ * @return {string}
+ */
+export function genColorClasses (color, dark) {
+  if (![
+    'primary',
+    'secondary',
+    'accent',
+    'error',
+    'info',
+    'success',
+    'warning'
+  ].includes(color)) return color
+
+  return `${color}--${dark ? 'dark' : 'light'}`
+}
+

@@ -56,9 +56,9 @@ export default {
       const scale = this.is24hrAfter12 ? 'scaleY(0.6)' : ''
       return [this.$createElement('div', {
         staticClass: 'picker--time__clock-hand',
-        'class': this.addBackgroundColorClassChecks({
+        'class': {
           [type]: true
-        }),
+        },
         style: {
           transform: `rotate(${this.clockHand}deg) ${scale}`
         }
@@ -80,7 +80,7 @@ export default {
           'disabled': !this.isAllowed('hour', i)
         }
         children.push(this.$createElement('span', {
-          'class': this.addBackgroundColorClassChecks(classes, i === this.hour ? 'computedColor' : null),
+          'class': classes,
           style: this.getTransform(i),
           domProps: { innerHTML: `<span>${i}</span>` }
         }))
@@ -97,12 +97,12 @@ export default {
         if (num < 10) num = `0${num}`
         if (num === 60) num = '00'
 
-        const classes = {
-          'active': num.toString() === this.minute.toString(),
-          'disabled': !this.isAllowed('minute', i)
-        }
+        // const classes = {
+        //   'active': num.toString() === this.minute.toString(),
+        //   'disabled': !this.isAllowed('minute', i)
+        // }
         children.push(this.$createElement('span', {
-          'class': this.addBackgroundColorClassChecks(classes, num.toString() === this.minute.toString() ? 'computedColor' : null),
+          // 'class': this.addBackgroundColorClassChecks(classes, num.toString() === this.minute.toString() ? 'computedColor' : null),
           style: this.getTransform(i),
           domProps: { innerHTML: `<span>${num}</span>` }
         }))

@@ -2,12 +2,11 @@ require('../../stylus/components/_cards.styl')
 
 import Colorable from '../../mixins/colorable'
 import Routable from '../../mixins/routable'
-import Themeable from '../../mixins/themeable'
 
 export default {
   name: 'v-card',
 
-  mixins: [Colorable, Routable, Themeable],
+  mixins: [Colorable, Routable],
 
   props: {
     flat: Boolean,
@@ -27,7 +26,7 @@ export default {
 
   computed: {
     classes () {
-      return this.addBackgroundColorClassChecks({
+      return {
         'card': true,
         'card--flat': this.flat,
         'card--horizontal': this.horizontal,
@@ -36,7 +35,7 @@ export default {
         'card--tile': this.tile,
         'theme--light': this.light,
         'theme--dark': this.dark
-      })
+      }
     },
     styles () {
       const style = {
@@ -54,6 +53,7 @@ export default {
   render (h) {
     const { tag, data } = this.generateRouteLink()
 
+    data.class = this._computedClasses
     data.style = this.styles
 
     return h(tag, data, this.$slots.default)

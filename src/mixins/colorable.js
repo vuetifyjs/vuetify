@@ -1,39 +1,55 @@
+import Themeable from './themeable'
+import { genColorClasses } from '../util/helpers'
+
 export default {
+  mixins: [Themeable],
+
   props: {
-    color: String
+    color: String,
+    textColor: String
   },
 
   data () {
     return {
-      defaultColor: null
+      defaultColor: null,
+      defaultTextColor: null
     }
   },
 
   computed: {
-    computedColor () {
-      return this.color || this.defaultColor
-    }
-  },
+    classes () {},
+    _bgColor () {
+      const bg = {}
+      const bgColor = this.color || this.defaultColor
 
-  methods: {
-    addBackgroundColorClassChecks (classes = {}, prop = 'computedColor') {
-      if (prop && this[prop]) {
-        classes[this[prop]] = true
+      if (bgColor) {
+        bg[genColorClasses(bgColor, this.dark)] = true
       }
-      return classes
-    },
-    addTextColorClassChecks (classes = {}, prop = 'computedColor') {
-      if (prop && this[prop]) {
-        const parts = this[prop].trim().split(' ')
 
-        let color = parts[0] + '--text'
+      return bg
+    },
+    _textColor () {
+      const txt = {}
+      const txtColor = this.textColor || this.defaultTextColor
+
+      if (txtColor) {
+        const parts = txtColor.trim().split(' ')
+        let color = `${genColorClasses(parts[0], this.dark)}--text`
 
         if (parts.length > 1) color += ' text--' + parts[1]
 
-        classes[color] = !!this[prop]
+        txt[color] = true
       }
 
-      return classes
+      return txt
+    },
+    _computedClasses () {
+      return Object.assign({},
+        this.classes,
+        this._bgColor,
+        this._textColor,
+        this._themeColor
+      )
     }
   }
 }

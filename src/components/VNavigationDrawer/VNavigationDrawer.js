@@ -1,9 +1,11 @@
 require('../../stylus/components/_navigation-drawer.styl')
 
+// Mixins
 import Applicationable from '../../mixins/applicationable'
 import Overlayable from '../../mixins/overlayable'
-import Themeable from '../../mixins/themeable'
+import Colorable from '../../mixins/colorable'
 
+// Directives
 import ClickOutside from '../../directives/click-outside'
 import Resize from '../../directives/resize'
 import Touch from '../../directives/touch'
@@ -11,7 +13,7 @@ import Touch from '../../directives/touch'
 export default {
   name: 'v-navigation-drawer',
 
-  mixins: [Applicationable, Overlayable, Themeable],
+  mixins: [Applicationable, Overlayable, Colorable],
 
   directives: {
     ClickOutside,
@@ -267,7 +269,7 @@ export default {
     this.updateApplication()
 
     const data = {
-      'class': this.classes,
+      'class': this._computedClasses,
       style: this.styles,
       directives: this.genDirectives(),
       on: {
