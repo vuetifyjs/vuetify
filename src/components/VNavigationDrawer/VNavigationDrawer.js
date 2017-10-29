@@ -188,6 +188,7 @@ export default {
     },
     checkIfMobile () {
       this.isMobile = window.innerWidth < parseInt(this.mobileBreakPoint, 10)
+      this.$emit('mobile', this.isMobile)
     },
     closeConditional () {
       return !this.permanent && (this.temporary || this.isMobile)
