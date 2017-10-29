@@ -10,6 +10,7 @@ export function test(name, cb) {
     load: (fn) => fn(),
     breakpoint: {},
     theme: {
+      type: 'light',
       dark: {},
       light: {}
     }
