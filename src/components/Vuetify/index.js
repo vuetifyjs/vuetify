@@ -12,7 +12,8 @@ const Vuetify = {
         right: 0
       },
       breakpoint: {},
-      touchSupport: false
+      touchSupport: false,
+      hoverSupport: false
     }
 
     Vue.util.defineReactive({}, 'breakpoint', $vuetify)
