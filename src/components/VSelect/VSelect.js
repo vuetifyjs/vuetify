@@ -288,7 +288,6 @@ export default {
         !this.isMultiple &&
         val
       ) {
-        this.setCaretPosition(this.currentRange)
         this.shouldBreak && this.$nextTick(() => {
           this.$refs.input.scrollLeft = this.$refs.input.scrollWidth
         })
@@ -440,7 +439,7 @@ export default {
 
       if (this.$refs.input && this.isAutocomplete) {
         this.$refs.input.focus()
-        setTimeout(() => this.$refs.input.select(), 20)
+        this.$nextTick(() => this.$refs.input.select())
       } else {
         this.$el.focus()
       }
