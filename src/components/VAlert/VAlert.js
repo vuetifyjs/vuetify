@@ -22,6 +22,10 @@ export default {
   mixins: [Colorable, Toggleable, Transitionable],
 
   props: {
+    color: {
+      type: String,
+      default: 'primary'
+    },
     dismissible: Boolean,
     icon: String,
     type: {
