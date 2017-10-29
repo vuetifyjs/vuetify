@@ -350,10 +350,6 @@ export default {
     // to avoid a unnecessary label transition
     this.genSelectedItems()
 
-    if (this.isAutocomplete) {
-      this.lazySearch = this.getText(this.selectedItem)
-    }
-
     this.content = this.$refs.menu.$refs.content
   },
 
