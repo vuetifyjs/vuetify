@@ -101,7 +101,7 @@ export default {
     },
     tickContainerStyles () {
       return {
-        transform: `translate3d(0, -50%, 0)`
+        transform: `translate(0, -50%)`
       }
     },
     trackPadding () {
