@@ -4,10 +4,14 @@ import VIcon from '../VIcon'
 
 import Resize from '../../directives/resize'
 
+import Colorable from '../../mixins/colorable'
+
 export default {
   name: 'v-pagination',
 
   directives: { Resize },
+
+  mixins: [Colorable],
 
   props: {
     circle: Boolean,
@@ -34,7 +38,8 @@ export default {
 
   data () {
     return {
-      maxButtons: 0
+      maxButtons: 0,
+      defaultColor: 'primary'
     }
   },
 
@@ -119,28 +124,23 @@ export default {
     },
     genIcon (h, icon, disabled, fn) {
       return h('li', [
-        h('a', {
+        h('button', {
+          staticClass: 'pagination__navigation',
           class: {
-            'pagination__navigation': true,
             'pagination__navigation--disabled': disabled
           },
-          attrs: { href: '#!' },
           on: { click: fn }
         }, [h(VIcon, [icon])])
       ])
     },
     genItem (h, i) {
-      return h('a', {
-        class: {
-          'pagination__item': true,
-          'pagination__item--active': i === this.value
-        },
-        attrs: { href: '#!' },
+      return h('button', {
+        staticClass: 'pagination__item',
+        class: (i === this.value) ? this.addBackgroundColorClassChecks({
+          'pagination__item--active': true
+        }) : {},
         on: {
-          click: (e) => {
-            e.preventDefault()
-            this.$emit('input', i)
-          }
+          click: () => this.$emit('input', i)
         }
       }, [i])
     },
