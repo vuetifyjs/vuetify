@@ -15,8 +15,8 @@ const ripple = {
       return
     }
 
-    var container = document.createElement('span')
-    var animation = document.createElement('span')
+    const container = document.createElement('span')
+    const animation = document.createElement('span')
 
     container.appendChild(animation)
     container.className = 'ripple__container'
@@ -25,9 +25,7 @@ const ripple = {
       container.className += ` ${value.class}`
     }
 
-    const size = el.clientWidth > el.clientHeight
-      ? el.clientWidth
-      : el.clientHeight
+    const size = Math.sqrt(el.clientWidth ** 2 + el.clientHeight ** 2) * 1.1 // A bit extra
     animation.className = 'ripple__animation'
     animation.style.width = `${size * (value.center ? 1 : 2)}px`
     animation.style.height = animation.style.width
