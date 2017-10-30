@@ -16,13 +16,7 @@ import { sync } from 'vuex-router-sync'
 import App from './App.vue'
 import Components from '@components'
 
-Vue.use(Vuetify, {
-  theme: {
-    primary: '#0862C4',
-    secondary: '#5CBBF6',
-    accent: '#005CAF'
-  }
-})
+Vue.use(Vuetify)
 
 Object.values(Components).forEach(Component => {
   Vue.component(Component.name, Component)

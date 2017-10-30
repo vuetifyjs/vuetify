@@ -1,5 +1,5 @@
 <template lang="pug">
-  h2(v-text="$t(value)").headline.primary--light--text
+  h2(v-text="$t(value)").headline.primary--text
 </template>
 
 <script>
@@ -7,10 +7,7 @@
     name: 'section-heading',
 
     props: {
-      value: {
-        type: String,
-        default: ''
-      }
+      value: String
     }
   }
 </script>

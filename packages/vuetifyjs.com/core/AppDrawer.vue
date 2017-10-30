@@ -130,6 +130,7 @@
           group: '/components',
           items: [
             { href: '/components/alerts', title: 'Alerts' },
+            { href: '/components/avatars', title: 'Avatars' },
             {
               title: 'Form Components',
               group: '/components/form-components',

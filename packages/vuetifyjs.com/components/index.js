@@ -1,7 +1,8 @@
-import AppAlert from './AppAlert'
+import AppAlert from '../core/AppAlert'
 import Codepen from './Codepen'
 import ComponentExample from './ComponentExample'
 import ComponentPage from './ComponentPage'
+import ComponentParameters from './ComponentParameters'
 import Markup from './Markup'
 import Page from './Page'
 import PageHeading from './PageHeading'
@@ -14,6 +15,7 @@ export default {
   Codepen,
   ComponentExample,
   ComponentPage,
+  ComponentParameters,
   Markup,
   Page,
   PageHeading,

@@ -8,10 +8,10 @@
 
 <script>
   import Meta from '@mixins/meta'
-  import AppDrawer from '@components/AppDrawer'
-  import AppToolbar from '@components/AppToolbar'
-  import AppView from '@components/AppView'
-  import AppFooter from '@components/AppFooter'
+  import AppDrawer from '@core/AppDrawer'
+  import AppToolbar from '@core/AppToolbar'
+  import AppView from '@core/AppView'
+  import AppFooter from '@core/AppFooter'
 
   export default {
     name: 'documentation',
@@ -41,9 +41,12 @@
         const drawer = this.$route.fullPath !== '/'
 
         setTimeout(() => {
-          this.$store.commit('app/DISABLE_ROUTE_WATCHER', watcher)
-          this.$store.commit('app/DRAWER', drawer)
-          this.$store.commit('app/ENABLE_RESIZE_WATCHER', drawer)
+          this.$store.commit('app/ROUTE_WATCHER', !drawer)
+          this.$store.commit('app/RESIZE_WATCHER', drawer)
+
+          if (drawer) return
+
+          this.$store.commit('app/DRAWER', false)
         }, timeout)
       }
     }
