@@ -129,7 +129,7 @@ export default {
           class: {
             'pagination__navigation--disabled': disabled
           },
-          on: { click: fn }
+          on: disabled ? {} : { click: fn }
         }, [h(VIcon, [icon])])
       ])
     },
