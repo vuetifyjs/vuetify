@@ -63,17 +63,41 @@ test('VAlert.vue', ({ mount }) => {
     })
 
     expect(wrapper.vm.classes.error).toBe(true)
+
     wrapper.setProps({ 'type': 'success' })
     await wrapper.vm.$nextTick()
-
     expect(wrapper.vm.classes.success).toBe(true)
+
     wrapper.setProps({ 'type': 'warning' })
     await wrapper.vm.$nextTick()
-
     expect(wrapper.vm.classes.warning).toBe(true)
+
     wrapper.setProps({ 'type': 'info' })
     await wrapper.vm.$nextTick()
-
     expect(wrapper.vm.classes.info).toBe(true)
+  })
+
+  it('should allow overriding color for contextual alert', async () => {
+    const wrapper = mount(VAlert, {
+      propsData: {
+        type: 'error',
+        color: 'primary'
+      }
+    })
+
+    expect(wrapper.vm.classes.primary).toBe(true)
+  })
+
+  it('should allow overriding icon for contextual alert', async () => {
+    const wrapper = mount(VAlert, {
+      propsData: {
+        type: 'error',
+        icon: 'block'
+      }
+    })
+
+    const icon = wrapper.find('.alert__icon')[0]
+
+    expect(icon.text()).toBe('block')
   })
 })

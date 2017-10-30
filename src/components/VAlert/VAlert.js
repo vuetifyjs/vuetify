@@ -37,11 +37,11 @@ export default {
 
   computed: {
     classes () {
-      const type = this.type ? 'type' : 'computedColor'
+      const colorProp = (this.type && !this.color) ? 'type' : 'computedColor'
 
       return this.addBackgroundColorClassChecks({
         'alert--dismissible': this.dismissible
-      }, type)
+      }, colorProp)
     },
     computedIcon () {
       if (this.icon || !this.type) return this.icon
