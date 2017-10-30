@@ -29,17 +29,17 @@ export default {
 
   data () {
     return {
-      content: [],
-      tabItems: [],
       activeIndex: null,
+      content: [],
       isBooted: false,
       isMobile: false,
       resizeTimeout: null,
       reverse: false,
-      target: null,
-      tabsSlider: null,
-      targetEl: null,
+      tabItems: [],
       tabsContainer: null,
+      tabsSlider: null,
+      target: null,
+      targetEl: null,
       transitionTime: 300
     }
   },
@@ -161,7 +161,7 @@ export default {
      * When v-navigation-drawer changes the
      * width of the container, call resize
      * after the transition is complete
-     * 
+     *
      * @return {Void}
      */
     onContainerResize () {
