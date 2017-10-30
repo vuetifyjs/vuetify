@@ -119,6 +119,7 @@ export default {
       type: [Number, String],
       default: 300
     },
+    menuClass: String,
     minWidth: {
       type: [Boolean, Number, String],
       default: false
@@ -165,7 +166,8 @@ export default {
         'menu__content--select',
         this.auto ? 'menu__content--auto' : '',
         this.isDropdown ? 'menu__content--dropdown' : '',
-        this.isAutocomplete ? 'menu__content--autocomplete' : ''
+        this.isAutocomplete ? 'menu__content--autocomplete' : '',
+        this.menuClass || ''
       ]
 
       return children.join(' ')
