@@ -138,6 +138,10 @@ export default {
         })
       }
     },
+    defaultSort: {
+      type: Boolean,
+      default: true,
+    },
     value: {
       type: Array,
       default: () => []
@@ -314,7 +318,7 @@ export default {
       !('sortable' in h) || h.sortable)
     )
 
-    this.defaultPagination.sortBy = firstSortable
+    this.defaultPagination.sortBy = this.defaultSort && firstSortable
       ? firstSortable.value
       : null
 
