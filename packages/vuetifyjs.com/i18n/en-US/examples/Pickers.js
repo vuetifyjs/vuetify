@@ -43,10 +43,6 @@ export default {
     header: "Month pickers - Allowed months",
     desc: 'You can specify allowed months using arrays, objects, and functions.'
   },
-  monthCustomFormat: {
-    header: "Month pickers - Custom format",
-    desc: 'You can specify a custom month format. This will be returned through the <code>formatted-value</code> prop. Using the sync property (new in Vue 2.3), you can link up a formatted version of the month.'
-  },
   monthInternationalization: {
     header: "Month pickers - Internationalization",
     desc: 'The month picker supports internationalization through the JavaScript Date object. Specify a BCP 47 language tag using the <code>locale</code> prop, and then set the first day of the week with the <code>first-day-of-week</code> prop.'

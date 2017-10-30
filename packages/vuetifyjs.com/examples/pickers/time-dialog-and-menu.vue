@@ -29,6 +29,7 @@
         v-model="modal2"
         lazy
         full-width
+        width="290px"
       >
         <v-text-field
           slot="activator"

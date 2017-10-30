@@ -156,13 +156,11 @@
 
     methods: {
       copyMarkup () {
+        clearTimeout(this.copyTimeout)
         this.$refs.copy.select()
-        this.$nextTick(() => {
-          clearTimeout(this.copyTimeout)
-          document.execCommand('copy')
-          this.copied = true
-          this.copyTimeout = setTimeout(() => this.copied = false, 2000)
-        })
+        document.execCommand('copy')
+        this.copied = true
+        this.copyTimeout = setTimeout(() => this.copied = false, 2000)
       }
     }
   }
