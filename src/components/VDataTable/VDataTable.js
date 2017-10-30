@@ -140,7 +140,7 @@ export default {
     },
     defaultSort: {
       type: Boolean,
-      default: true,
+      default: true
     },
     value: {
       type: Array,
