@@ -95,8 +95,7 @@ export default {
           this.lazyValue = typeof val === 'number' ? +value : value
           this.setSelectionRange()
         } else {
-          const type = typeof this.lazyValue
-          this.lazyValue = type === 'number' ? +val : val
+          this.lazyValue = val
           this.$emit('input', this.lazyValue)
         }
       }
