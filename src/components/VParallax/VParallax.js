@@ -28,7 +28,7 @@ export default {
       return {
         display: 'block',
         opacity: this.isBooted ? 1 : 0,
-        transform: `translate3d(-50%, ${this.jumbotron ? 0 : this.parallax + 'px'}, 0)`
+        transform: `translate(-50%, ${this.jumbotron ? 0 : this.parallax + 'px'})`
       }
     }
   },

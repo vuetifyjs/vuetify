@@ -8,7 +8,7 @@
   height: 56px
   justify-content: center
   position: fixed
-  transform: translate3d(0, 60px, 0)
+  transform: translate(0, 60px)
   transition: all .4s $transition.swing
   width: 100%
   z-index: 4
@@ -17,7 +17,7 @@
     position: absolute
 
   &--active
-    transform: translate3d(0, 0, 0)
+    transform: translate(0, 0)
 
   .btn
     background: transparent !important
@@ -38,7 +38,7 @@
       flex-direction: column-reverse
       height: 56px
       font-size: 12px
-      transform: scale3d(1, 1, 1) translate3d(0, 0, 0)
+      transform: scale(1, 1) translate(0, 0)
       white-space: nowrap
       will-change: font-size
 
@@ -80,7 +80,7 @@
 .bottom-nav--shift
   .btn:not(.btn--active) .btn__content
     .icon
-      transform: scale3d(1, 1, 1) translate3d(0, 10px, 0)
+      transform: scale(1, 1) translate(0, 10px)
 
     span
       color: transparent
