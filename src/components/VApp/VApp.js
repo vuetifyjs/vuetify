@@ -46,7 +46,14 @@ export default {
   },
 
   mounted () {
+    this.$vuetify.theme.type = this.type
     window.addEventListener('load', this.runCallbacks)
+  },
+
+  watch: {
+    type () {
+      this.$vuetify.theme.type = this.type
+    }
   },
 
   methods: {

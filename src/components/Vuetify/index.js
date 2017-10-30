@@ -8,16 +8,11 @@ const Vuetify = {
 
     this.installed = true
 
-    const $vuetify = {
-      load,
-      application,
-      breakpoint: {},
-      theme: theme(opts.theme),
-      touchSupport: false
-    }
-
-    Vue.util.defineReactive({}, 'breakpoint', $vuetify)
-    Vue.util.defineReactive({}, 'application', $vuetify)
+    const $vuetify = { load }
+    Vue.util.defineReactive($vuetify, 'breakpoint', {})
+    Vue.util.defineReactive($vuetify, 'application', application)
+    Vue.util.defineReactive($vuetify, 'theme', theme(opts.theme))
+    Vue.util.defineReactive($vuetify, 'touchSupport', false)
 
     Vue.prototype.$vuetify = $vuetify
 
