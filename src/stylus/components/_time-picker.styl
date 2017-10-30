@@ -101,6 +101,8 @@ theme(date-picker, "picker--time")
     left: calc(50% - 1px)
     transform-origin: center bottom
     position: absolute
+    will-change: transform
+    z-index: 1
 
     &:before
       background: transparent
@@ -164,6 +166,7 @@ theme(date-picker, "picker--time")
     &.active
       color: #fff
       cursor: default
+      z-index: 2
 
     &.disabled
       pointer-events: none
