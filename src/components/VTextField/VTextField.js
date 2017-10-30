@@ -89,12 +89,11 @@ export default {
       },
       set (val) {
         if (this.mask) {
-          const value = this.unmaskText(this.maskText(this.unmaskText(val)))
-          this.lazyValue = typeof val === 'number' ? +value : value
+          this.lazyValue = this.getActualValue(typeof val,
+            this.unmaskText(this.maskText(this.unmaskText(val))))
           this.setSelectionRange()
         } else {
-          const type = typeof this.lazyValue
-          this.lazyValue = type === 'number' ? +val : val
+          this.lazyValue = this.getActualValue(typeof val, val)
           this.$emit('input', this.lazyValue)
         }
       }
@@ -127,8 +126,7 @@ export default {
       // Value was changed externally, update lazy
       if (this.mask) {
         const masked = this.maskText(this.unmaskText(val))
-        const value = this.unmaskText(masked)
-        this.lazyValue = typeof val === 'number' ? +value : value
+        this.lazyValue = this.getActualValue(typeof val, this.unmaskText(masked))
 
         // Emit when the externally set value was modified internally
         val !== this.lazyValue && this.$nextTick(() => {
@@ -266,6 +264,12 @@ export default {
       for (const char of input.value.substr(0, this.selection)) {
         isMaskDelimiter(char) || this.lazySelection++
       }
+    },
+    getActualValue (type, val) {
+      if (type !== 'number') return val
+
+      const value = Number(val)
+      return isNaN(value) ? val : value
     }
   },
 
