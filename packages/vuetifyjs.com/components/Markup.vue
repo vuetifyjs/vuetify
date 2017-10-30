@@ -1,5 +1,5 @@
 <template lang="pug">
-  div(class="markup" v-bind:data-lang="lang")
+  div(:class="['markup', color]" v-bind:data-lang="lang")
     pre
       code(v-bind:class="lang" ref="markup")
         slot
@@ -34,6 +34,10 @@
     },
 
     props: {
+      color: {
+        type: String,
+        default: 'grey lighten-3'
+      },
       lang: String,
     },
 
@@ -65,7 +69,6 @@
     display: flex
     padding: 3rem 2rem
     margin: 0 0 16px
-    background: rgba(#000, 0.04)
     border-radius: 2px
     position: relative
     align-items: center
@@ -95,8 +98,6 @@
       top: 25px
 
     &:hover
-      background: rgba(#000, 0.08)
-
       &:after
         opacity: 0
 

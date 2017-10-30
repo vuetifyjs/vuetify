@@ -21,6 +21,7 @@ module.exports = {
     alias: {
       '@assets': resolve('../assets'),
       '@components': resolve('../components'),
+      '@core': resolve('../core'),
       '@examples': resolve('../pages/examples'),
       '@layouts': resolve('../layouts'),
       '@i18n': resolve('../i18n'),

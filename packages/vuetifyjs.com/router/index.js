@@ -56,6 +56,7 @@ export function createRouter () {
         route('/getting-started/why-vuetify', 'WhyVuetify'),
         route('/playground', 'Playground'),
         route('/components/alerts', 'Alerts'),
+        route('/components/avatars', 'Avatars'),
         // Global redirect for 404
         { path: '*', redirect: '/' }
       ]

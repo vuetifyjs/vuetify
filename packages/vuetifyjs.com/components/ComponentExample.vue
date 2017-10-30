@@ -6,30 +6,36 @@
     p
       div(:id="'example-'+uid")
     codepen(ref="codepen" :pen="pen").mb-5
-    v-tabs(ref="tabs" :scrollable="false").elevation-2
-      v-tabs-bar(color="accent" class="pl-0")
-        v-tabs-slider(color="accent")
-        v-tabs-item(
-          v-for="tab in tabs"
-          v-bind:key="tab"
-          v-bind:href="'#'+tab"
-          v-show="parsed[tab]"
-        ) {{ tab }}
-        v-spacer
-        v-btn(
-          flat
-          v-on:click="sendToCodepen"
-        )
-          span Open in Codepen
-          v-icon.ml-3 fa-codepen
-      v-tabs-items
-        v-tabs-content(
-          v-for="tab in tabs"
-          v-bind:key="tab"
-          v-bind:id="tab"
-        )
-          markup(:lang="getLang(tab)" v-if="parsed[tab]").ma-0
-            div(v-html="parsed[tab]")
+    v-card
+      v-expansion-panel.elevation-0
+        v-expansion-panel-content(v-model="panel").grey.lighten-4
+          div(slot="header").text-xs-center
+            span.grey--text Show Example
+          v-tabs(ref="tabs" :scrollable="false")
+            v-tabs-bar(class="pl-0").grey.lighten-4.px-3
+              v-tabs-slider(color="accent")
+              v-tabs-item(
+                v-for="tab in tabs"
+                v-bind:key="tab"
+                v-bind:href="'#'+tab"
+                v-show="parsed[tab]"
+                active-class=""
+              ) {{ tab }}
+              v-spacer
+              v-btn(
+                flat
+                v-on:click="sendToCodepen"
+              ).grey--text
+                v-icon.mr-3 fa-codepen
+                span Open in Codepen
+            v-tabs-items
+              v-tabs-content(
+                v-for="tab in tabs"
+                v-bind:key="tab"
+                v-bind:id="tab"
+              )
+                markup(color="white" :lang="getLang(tab)" v-if="parsed[tab]").ma-0
+                  div(v-html="parsed[tab]")
 
       //v-toolbar(v-bind:color="currentColor" flat dense dark)
         v-btn(dark icon :to="{ hash: id }")

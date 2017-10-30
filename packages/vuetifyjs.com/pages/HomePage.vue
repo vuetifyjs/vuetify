@@ -2,7 +2,7 @@
   div#home
     v-alert(color="accent" value).ma-0
       div {{ $t('Vuetify.Home.announcementBanner') }}
-    v-card(dark tile flat)#banner.primary--light
+    v-card(dark tile flat color="primary")#banner
       v-layout(align-center justify-center)
         v-flex.text-xs-center
           img(
@@ -163,7 +163,7 @@
     background white
     color #455163
 
-    #banner.primary--light
+    #banner.primary
       height: auto !important
       padding-top: 4em
       padding-bottom 4em

@@ -1,6 +1,6 @@
 <template lang="pug">
   div.page-heading.mb-5
-    h1.headline.primary--light--text
+    h1.headline.primary--text
       slot(name="title")
     div
       slot

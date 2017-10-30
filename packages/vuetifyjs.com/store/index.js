@@ -8,17 +8,17 @@ export function createStore () {
     state: {
       appDrawer: null,
       appFooter: null,
-      resizeWatcher: true,
-      routeWatcher: true
+      resizeWatcher: false,
+      routeWatcher: false
     },
 
     actions: {},
 
     mutations: {
-      ['app/DISABLE_ROUTE_WATCHER'] (state, payload) {
+      ['app/ROUTE_WATCHER'] (state, payload) {
         state.routeWatcher = payload
       },
-      ['app/ENABLE_RESIZE_WATCHER'] (state, payload) {
+      ['app/RESIZE_WATCHER'] (state, payload) {
         state.resizeWatcher = payload
       },
       ['app/DRAWER'] (state, payload) {
