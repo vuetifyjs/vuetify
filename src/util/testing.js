@@ -2,14 +2,12 @@ import Vue from 'vue'
 import load from '~util/load'
 import { mount, shallow } from 'avoriaz'
 import toHaveBeenWarnedInit from '~util/to-have-been-warned'
+import Vuetify from '~components/Vuetify'
 
 export function test(name, cb) {
   toHaveBeenWarnedInit()
 
-  Vue.prototype.$vuetify = {
-    load: (fn) => fn(),
-    breakpoint: {}
-  }
+  Vuetify.install(Vue)
 
 /*
   const app = document.createElement('div')
