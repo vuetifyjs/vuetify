@@ -3,7 +3,7 @@
 exports[`VApp.js should allow a custom id 1`] = `
 
 <div data-app="true"
-     class="application application--light"
+     class="application theme--light"
      id="inspire"
 >
   <div class="application--wrap">
@@ -15,7 +15,7 @@ exports[`VApp.js should allow a custom id 1`] = `
 exports[`VApp.js should match a snapshot 1`] = `
 
 <div data-app="true"
-     class="application application--light"
+     class="application theme--light"
      id="app"
 >
   <div class="application--wrap">
