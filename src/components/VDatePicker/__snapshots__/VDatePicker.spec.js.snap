@@ -3219,7 +3219,7 @@ exports[`VDatePicker.js should match snapshot with month formatting functions 1`
                       class="btn btn--flat"
               >
                 <span class="btn__content">
-                  01, en-us
+                  (01)
                 </span>
               </button>
             </td>
@@ -3228,7 +3228,7 @@ exports[`VDatePicker.js should match snapshot with month formatting functions 1`
                       class="btn btn--flat"
               >
                 <span class="btn__content">
-                  02, en-us
+                  (02)
                 </span>
               </button>
             </td>
@@ -3237,36 +3237,7 @@ exports[`VDatePicker.js should match snapshot with month formatting functions 1`
                       class="btn btn--flat"
               >
                 <span class="btn__content">
-                  03, en-us
-                </span>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span class="btn__content">
-                  04, en-us
-                </span>
-              </button>
-            </td>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span class="btn__content">
-                  05, en-us
-                </span>
-              </button>
-            </td>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span class="btn__content">
-                  06, en-us
+                  (03)
                 </span>
               </button>
             </td>
@@ -3277,7 +3248,7 @@ exports[`VDatePicker.js should match snapshot with month formatting functions 1`
                       class="btn btn--flat"
               >
                 <span class="btn__content">
-                  07, en-us
+                  (04)
                 </span>
               </button>
             </td>
@@ -3286,7 +3257,7 @@ exports[`VDatePicker.js should match snapshot with month formatting functions 1`
                       class="btn btn--flat"
               >
                 <span class="btn__content">
-                  08, en-us
+                  (05)
                 </span>
               </button>
             </td>
@@ -3295,7 +3266,7 @@ exports[`VDatePicker.js should match snapshot with month formatting functions 1`
                       class="btn btn--flat"
               >
                 <span class="btn__content">
-                  09, en-us
+                  (06)
                 </span>
               </button>
             </td>
@@ -3306,7 +3277,36 @@ exports[`VDatePicker.js should match snapshot with month formatting functions 1`
                       class="btn btn--flat"
               >
                 <span class="btn__content">
-                  10, en-us
+                  (07)
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  (08)
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  (09)
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  (10)
                 </span>
               </button>
             </td>
@@ -3315,7 +3315,7 @@ exports[`VDatePicker.js should match snapshot with month formatting functions 1`
                       class="btn btn--active accent"
               >
                 <span class="btn__content">
-                  11, en-us
+                  (11)
                 </span>
               </button>
             </td>
@@ -3324,7 +3324,7 @@ exports[`VDatePicker.js should match snapshot with month formatting functions 1`
                       class="btn btn--flat"
               >
                 <span class="btn__content">
-                  12, en-us
+                  (12)
                 </span>
               </button>
             </td>
@@ -3894,7 +3894,7 @@ exports[`VDatePicker.js should match snapshot with title/header formatting funct
     </div>
     <div class="picker--date__title-date active">
       <div>
-        2005-11-01, en-us
+        (2005-11-01)
       </div>
     </div>
   </div>
@@ -3913,7 +3913,7 @@ exports[`VDatePicker.js should match snapshot with title/header formatting funct
         </button>
         <div class="picker--date__header-selector-date">
           <strong class="accent--text">
-            2005-11, en-us
+            (2005-11)
           </strong>
         </div>
         <button type="button"

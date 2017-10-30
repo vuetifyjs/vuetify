@@ -45,8 +45,8 @@ export default {
       // in the current locale or just a year numeric value if Date::toLocaleDateString
       // is not supported
       const selectorText = this.activePicker === 'DATE'
-        ? this.headerDateFormat(`${this.tableYear}-${this.tableMonth + 1}`, this.locale)
-        : this.yearFormat(`${this.tableYear}`, this.locale)
+        ? this.formatters.headerDate(`${this.tableYear}-${this.tableMonth + 1}`)
+        : this.formatters.year(`${this.tableYear}`)
 
       return this.$createElement('div', {
         'class': 'picker--date__header-selector'

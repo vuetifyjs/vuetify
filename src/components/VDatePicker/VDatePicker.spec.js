@@ -109,7 +109,7 @@ test('VDatePicker.js', ({ mount }) => {
   })
 
   it('should match snapshot with title/header formatting functions', () => {
-    const dateFormat = (date, locale) => date + ', ' + locale
+    const dateFormat = date => `(${date})`
     const wrapper = mount(VDatePicker, {
       propsData: {
         value: '2005-11-01',
@@ -126,9 +126,7 @@ test('VDatePicker.js', ({ mount }) => {
       propsData: {
         value: '2005-11-01',
         type: 'month',
-        monthFormat: (date, locale) => {
-          return date.split('-')[1] + ', ' + locale
-        }
+        monthFormat: date => `(${date.split('-')[1]})`
       }
     })
 
