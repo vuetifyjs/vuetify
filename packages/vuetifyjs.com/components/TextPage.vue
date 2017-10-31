@@ -2,7 +2,7 @@
   page
     page-heading
       template(slot="title") {{ $t(data.header) }}
-      p(v-html="$t(data.headerText)")
+      p(v-html="$t(data.headerText)" v-if="data.headerText")
     div(:id="data.id || _uid")
       slot
 </template>

@@ -1,6 +1,5 @@
 <template lang="pug">
   text-page(:data="$data")
-    section-heading(value="GettingStarted.WhyVuetify.header")
     v-layout(row wrap).mb-5
       v-flex(xs12)
         v-container(fluid grid-list-md).pa-0
@@ -101,6 +100,7 @@
 <script>
   export default {
     data: () => ({
+      header: "GettingStarted.WhyVuetify.header",
     }),
 
     computed: {
