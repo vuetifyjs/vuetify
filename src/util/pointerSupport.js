@@ -19,6 +19,7 @@ export default {
 
     // Add application--hover-support class
     // after mouseover event is triggered
-    setupPointerSupport('hoverSupport', 'mouseover')
+    // Useless as per #869 in Modernizr
+    // setupPointerSupport('hoverSupport', 'mouseover')
   }
 }
