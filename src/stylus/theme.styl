@@ -13,10 +13,10 @@ theme($component, $name)
 
 light($component, $name)
   .theme--light .{$name},
-  .theme--light.{$name}
+  .application .theme--light.{$name}
     $component($material-light)
 
 dark($component, $name)
   .theme--dark .{$name},
-  .theme--dark.{$name}
+  .application .theme--dark.{$name}
     $component($material-dark)
