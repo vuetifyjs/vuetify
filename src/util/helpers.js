@@ -123,3 +123,12 @@ export function getZIndex (el) {
 
   return zi
 }
+
+const tagsToReplace = {
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;'
+}
+export function escapeHTML (str) {
+  return str.replace(/[&<>]/g, tag => tagsToReplace[tag] || tag)
+}
