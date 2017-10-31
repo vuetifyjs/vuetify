@@ -135,6 +135,7 @@ export default {
     },
     isMobile (val) {
       !val && this.removeOverlay()
+      this.$emit('mobile', val)
     },
     permanent (val) {
       this.$emit('input', val)
@@ -187,9 +188,7 @@ export default {
       }
     },
     checkIfMobile () {
-      const savedState = this.isMobile
       this.isMobile = window.innerWidth < parseInt(this.mobileBreakPoint, 10)
-      if (savedState !== this.isMobile) this.$emit('mobile', this.isMobile)
     },
     closeConditional () {
       return !this.permanent && (this.temporary || this.isMobile)
