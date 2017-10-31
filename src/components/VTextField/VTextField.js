@@ -89,8 +89,7 @@ export default {
       },
       set (val) {
         if (this.mask) {
-          const value = this.unmaskText(this.maskText(this.unmaskText(val)))
-          this.lazyValue = typeof val === 'number' ? +value : value
+          this.lazyValue = this.unmaskText(this.maskText(this.unmaskText(val)))
           this.setSelectionRange()
         } else {
           this.lazyValue = val
