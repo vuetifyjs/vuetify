@@ -32,7 +32,6 @@ export default {
   computed: {
     classes () {
       const classes = this.addBackgroundColorClassChecks({
-        'chip': true,
         'chip--disabled': this.disabled,
         'chip--selected': this.selected,
         'chip--label': this.label,
@@ -49,19 +48,8 @@ export default {
     }
   },
 
-  render (h) {
-    const children = [this.$slots.default]
-    const data = {
-      'class': this.classes,
-      attrs: { tabindex: this.disabled ? -1 : 0 },
-      directives: [{
-        name: 'show',
-        value: this.isActive
-      }],
-      on: this.$listeners
-    }
-
-    if (this.close) {
+  methods: {
+    genClose (h) {
       const data = {
         staticClass: 'chip__close',
         on: {
@@ -73,11 +61,33 @@ export default {
         }
       }
 
-      children.push(h('div', data, [
+      return h('div', data, [
         h(VIcon, { props: { right: true } }, 'cancel')
-      ]))
+      ])
+    },
+    genContent (h) {
+      const children = [this.$slots.default]
+
+      this.close && children.push(this.genClose(h))
+
+      return h('span', {
+        staticClass: 'chip__content'
+      }, children)
+    }
+  },
+
+  render (h) {
+    const data = {
+      staticClass: 'chip',
+      'class': this.classes,
+      attrs: { tabindex: this.disabled ? -1 : 0 },
+      directives: [{
+        name: 'show',
+        value: this.isActive
+      }],
+      on: this.$listeners
     }
 
-    return h('span', data, children)
+    return h('span', data, [this.genContent(h)])
   }
 }
