@@ -128,11 +128,10 @@ export default {
       // Value was changed externally, update lazy
       if (this.mask) {
         const masked = this.maskText(this.unmaskText(val))
-        const value = this.unmaskText(masked)
-        this.lazyValue = typeof val === 'number' ? +value : value
+        this.lazyValue = this.unmaskText(masked)
 
         // Emit when the externally set value was modified internally
-        val !== this.lazyValue && this.$nextTick(() => {
+        String(val) !== this.lazyValue && this.$nextTick(() => {
           this.$refs.input.value = masked
           this.$emit('input', this.lazyValue)
         })
