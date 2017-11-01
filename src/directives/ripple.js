@@ -25,7 +25,9 @@ const ripple = {
       container.className += ` ${value.class}`
     }
 
-    const size = Math.sqrt(el.clientWidth ** 2 + el.clientHeight ** 2) * 1.1 // A bit extra
+    const size = el.clientWidth > el.clientHeight
+      ? el.clientWidth
+      : el.clientHeight
     animation.className = 'ripple__animation'
     animation.style.width = `${size * (value.center ? 1 : 2)}px`
     animation.style.height = animation.style.width
