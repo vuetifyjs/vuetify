@@ -43,6 +43,7 @@ export default {
         'alert--dismissible': this.dismissible,
         'alert--outline': this.outline
       }
+      
       return this.outline ? this.addTextColorClassChecks(classes, colorProp)
         : this.addBackgroundColorClassChecks(classes, colorProp)
     },
