@@ -28,19 +28,13 @@ export default {
       type: String,
       default: 'app'
     },
-    type: {
-      type: String,
-      default: 'light',
-      validator: val => {
-        return ['dark', 'light'].includes(val)
-      }
-    }
+    dark: Boolean
   },
 
   computed: {
     classes () {
       return {
-        [`theme--${this.type}`]: true
+        [`theme--${this.dark ? 'dark' : 'light'}`]: true
       }
     }
   },
