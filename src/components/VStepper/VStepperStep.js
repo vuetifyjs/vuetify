@@ -47,7 +47,8 @@ export default {
         'stepper__step--editable': this.editable,
         'stepper__step--inactive': this.isInactive,
         'stepper__step--error': this.hasError,
-        'stepper__step--complete': this.complete
+        'stepper__step--complete': this.complete,
+        'error--text': this.hasError
       }
     },
     hasError () {
@@ -92,8 +93,16 @@ export default {
       stepContent = this.step
     }
 
-    const step = h('span', { 'class': 'stepper__step__step' }, stepContent)
-    const label = h('div', { 'class': 'stepper__label' }, this.$slots.default)
+    const step = h('span', {
+      staticClass: 'stepper__step__step',
+      'class': {
+        'primary': !this.hasError && (this.complete || this.isActive)
+      }
+    }, stepContent)
+
+    const label = h('div', {
+      staticClass: 'stepper__label'
+    }, this.$slots.default)
 
     return h('div', data, [step, label])
   }

@@ -17,7 +17,7 @@ tabs($material)
     .icon--right
       color: $material.icons.inactive
 
-theme(tabs, "tabs")
+theme(tabs, "tabs__bar")
 
 .tabs
   overflow: hidden
@@ -67,7 +67,6 @@ theme(tabs, "tabs")
         overflow: hidden !important
 
   &__bar
-    background-color: $theme.primary
     width: 100%
     position: relative
     height: 48px
@@ -155,5 +154,4 @@ theme(tabs, "tabs")
     position: absolute
     bottom: 0
     height: 2px
-    background: $theme.accent
     transition: $primary-transition

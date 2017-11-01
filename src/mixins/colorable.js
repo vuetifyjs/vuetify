@@ -16,14 +16,18 @@ export default {
   },
 
   methods: {
-    addBackgroundColorClassChecks (classes = {}, prop = 'computedColor') {
+    addBackgroundColorClassChecks (obj = {}, prop = 'computedColor') {
+      const classes = Object.assign({}, obj)
+
       if (prop && this[prop]) {
         classes[this[prop]] = true
       }
 
       return classes
     },
-    addTextColorClassChecks (classes = {}, prop = 'computedColor') {
+    addTextColorClassChecks (obj = {}, prop = 'computedColor') {
+      const classes = Object.assign({}, obj)
+
       if (prop && this[prop]) {
         const parts = this[prop].trim().split(' ')
 

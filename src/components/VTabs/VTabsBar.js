@@ -1,10 +1,18 @@
+// Component imports
 import VIcon from '../VIcon'
 
+// Mixins
+import Colorable from '../../mixins/colorable'
+import Themeable from '../../mixins/themeable'
+
+// Directives
 import Resize from '../../directives/resize'
 import Touch from '../../directives/touch'
 
 export default {
   name: 'v-tabs-bar',
+
+  mixins: [Colorable, Themeable],
 
   directives: {
     Resize,
@@ -28,9 +36,10 @@ export default {
 
   data () {
     return {
+      defaultColor: 'primary',
       isOverflowing: false,
-      scrollOffset: 0,
       itemOffset: 0,
+      scrollOffset: 0,
       startX: 0
     }
   },
@@ -38,7 +47,9 @@ export default {
   computed: {
     classes () {
       return {
-        'tabs__bar': true
+        'tabs__bar': true,
+        'theme--dark': this.dark,
+        'theme--light': this.light
       }
     },
     containerClasses () {
@@ -188,7 +199,7 @@ export default {
 
   render (h) {
     return h('div', {
-      'class': this.classes,
+      'class': this.addBackgroundColorClassChecks(this.classes),
       directives: [{
         name: 'resize',
         value: this.onResize

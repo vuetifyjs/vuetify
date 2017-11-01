@@ -6,7 +6,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
      style="height: auto;"
      data-ripple="false"
 >
-  <div class="picker__title">
+  <div class="picker__title primary">
     <div class="picker--date__title-year">
       2013
     </div>
@@ -388,7 +388,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates and pick-month 
      style="height: auto;"
      data-ripple="false"
 >
-  <div class="picker__title">
+  <div class="picker__title primary">
     <div class="picker--date__title-year">
       2013
     </div>
@@ -2031,7 +2031,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
      style="height: auto;"
      data-ripple="false"
 >
-  <div class="picker__title">
+  <div class="picker__title primary">
     <div class="picker--date__title-year">
       2013
     </div>
@@ -2413,7 +2413,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
      style="height: auto;"
      data-ripple="false"
 >
-  <div class="picker__title">
+  <div class="picker__title primary">
     <div class="picker--date__title-year">
       2013
     </div>
@@ -3170,7 +3170,7 @@ exports[`VDatePicker.js should match snapshot with month formatting functions 1`
      style="height: auto;"
      data-ripple="false"
 >
-  <div class="picker__title">
+  <div class="picker__title primary">
     <div class="picker--date__title-year">
       2005
     </div>
@@ -3715,7 +3715,7 @@ exports[`VDatePicker.js should match snapshot with pick-month prop 1`] = `
      style="height: auto;"
      data-ripple="false"
 >
-  <div class="picker__title">
+  <div class="picker__title primary">
     <div class="picker--date__title-year">
       2013
     </div>
@@ -3888,7 +3888,7 @@ exports[`VDatePicker.js should match snapshot with title/header formatting funct
      style="height: auto;"
      data-ripple="false"
 >
-  <div class="picker__title">
+  <div class="picker__title primary">
     <div class="picker--date__title-year">
       2005
     </div>

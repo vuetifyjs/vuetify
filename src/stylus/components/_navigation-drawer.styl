@@ -4,6 +4,12 @@
 navigation-drawer($material)
   background-color: $material.cards
 
+  > .list
+    .list--group__container
+      .list__tile--active
+        .list__tile__title
+          color: $material.text.link
+
   &:not(.navigation-drawer--floating)
     .navigation-drawer__border
       background-color: $material.dividers
@@ -122,11 +128,6 @@ theme(navigation-drawer, "navigation-drawer")
       &__header--active
         &:after
           background: transparent
-
-    .list--group__container
-      .list__tile--active
-        .list__tile__title
-          color: $navigation-drawer-item-active-color
 
   > .list:not(.list--dense)
     .list__tile

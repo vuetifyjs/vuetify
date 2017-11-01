@@ -6,16 +6,6 @@ $body-font-family := 'Roboto', sans-serif
 $font-size-root := 14px
 $line-height-root := 1.5
 
-$theme := {
-  primary: $blue.darken-2
-  accent: $blue.accent-1
-  secondary: $grey.darken-3
-  info: $blue.base
-  warning: $amber.base
-  error: $red.accent-2
-  success: $green.base
-}
-
 // Material Design - https://material.io/guidelines/style/color.html#color-usability
 // ============================================================
 $material-light := {
@@ -36,7 +26,7 @@ $material-light := {
     primary: rgba(#000, .87),
     secondary: rgba(#000, .54),
     disabled: rgba(#000, .38),
-    link: $theme.primary,
+    link: $blue.darken-2,
     link-hover: $grey.darken-3
   },
   icons: {
@@ -69,7 +59,7 @@ $material-light := {
     discrete: #000
   },
   tabs: {
-    active: $theme.primary,
+    active: $blue.darken-2,
     inactive: rgba(#000, .70)
   },
   input-bottom-line: rgba(#000, .42),
@@ -85,7 +75,7 @@ $material-light := {
   picker: {
     body: #fff,
     clock: $grey.lighten-2,
-    title: $theme.primary
+    title: $grey.lighten-2
   },
   bg-color: #fff
   fg-color: #000
@@ -116,7 +106,7 @@ $material-dark := {
     primary: #fff,
     secondary: rgba(#fff, .70),
     disabled: rgba(#fff, .50),
-    link: $theme.accent,
+    link: $blue.accent-1,
     link-hover: $grey.lighten-3
   },
   icons: {

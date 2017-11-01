@@ -1,6 +1,5 @@
 require('../../stylus/components/_tabs.styl')
 
-import Themeable from '../../mixins/themeable'
 import Resize from '../../directives/resize'
 
 export default {
@@ -9,8 +8,6 @@ export default {
   directives: {
     Resize
   },
-
-  mixins: [Themeable],
 
   provide () {
     return {
@@ -29,17 +26,17 @@ export default {
 
   data () {
     return {
-      content: [],
-      tabItems: [],
       activeIndex: null,
+      content: [],
       isBooted: false,
       isMobile: false,
       resizeTimeout: null,
       reverse: false,
-      target: null,
-      tabsSlider: null,
-      targetEl: null,
+      tabItems: [],
       tabsContainer: null,
+      tabsSlider: null,
+      target: null,
+      targetEl: null,
       transitionTime: 300
     }
   },
@@ -69,9 +66,7 @@ export default {
         'tabs--grow': this.grow,
         'tabs--icons': this.icons,
         'tabs--mobile': this.isMobile,
-        'tabs--scroll-bars': this.scrollable,
-        'theme--dark': this.dark,
-        'theme--light': this.light
+        'tabs--scroll-bars': this.scrollable
       }
     }
   },
@@ -161,7 +156,7 @@ export default {
      * When v-navigation-drawer changes the
      * width of the container, call resize
      * after the transition is complete
-     * 
+     *
      * @return {Void}
      */
     onContainerResize () {

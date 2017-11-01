@@ -4,12 +4,13 @@ import { peerDependencies, version } from '../package.json'
 import * as components from './components'
 import * as directives from './directives'
 
-function Vuetify (Vue) {
+function Vuetify (Vue, args) {
   const Vuetify = components.Vuetify
 
   Vue.use(Vuetify, {
     components,
-    directives
+    directives,
+    ...args
   })
 }
 
