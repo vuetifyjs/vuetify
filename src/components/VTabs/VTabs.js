@@ -1,6 +1,5 @@
 require('../../stylus/components/_tabs.styl')
 
-import Themeable from '../../mixins/themeable'
 import Resize from '../../directives/resize'
 
 export default {
@@ -9,8 +8,6 @@ export default {
   directives: {
     Resize
   },
-
-  mixins: [Themeable],
 
   provide () {
     return {
@@ -69,9 +66,7 @@ export default {
         'tabs--grow': this.grow,
         'tabs--icons': this.icons,
         'tabs--mobile': this.isMobile,
-        'tabs--scroll-bars': this.scrollable,
-        'theme--dark': this.dark,
-        'theme--light': this.light
+        'tabs--scroll-bars': this.scrollable
       }
     }
   },

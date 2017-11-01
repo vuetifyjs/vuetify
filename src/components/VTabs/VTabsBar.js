@@ -1,19 +1,23 @@
+// Component imports
 import VIcon from '../VIcon'
 
+// Mixins
+import Colorable from '../../mixins/colorable'
+import Themeable from '../../mixins/themeable'
+
+// Directives
 import Resize from '../../directives/resize'
 import Touch from '../../directives/touch'
 
-import Colorable from '../../mixins/colorable'
-
 export default {
   name: 'v-tabs-bar',
+
+  mixins: [Colorable, Themeable],
 
   directives: {
     Resize,
     Touch
   },
-
-  mixins: [Colorable],
 
   provide () {
     return {
@@ -43,7 +47,9 @@ export default {
   computed: {
     classes () {
       return {
-        'tabs__bar': true
+        'tabs__bar': true,
+        'theme--dark': this.dark,
+        'theme--light': this.light
       }
     },
     containerClasses () {
