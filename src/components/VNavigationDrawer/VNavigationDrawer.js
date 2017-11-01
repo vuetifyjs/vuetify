@@ -250,6 +250,7 @@ export default {
 
       const width = !this.isActive ||
         !this.isBooted ||
+        this.temporary ||
         !this.permanent &&
         this.$vuetify.breakpoint.width < parseInt(this.mobileBreakPoint, 10)
         ? 0
