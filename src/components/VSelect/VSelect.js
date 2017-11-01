@@ -536,8 +536,7 @@ export default {
       this.inputValue = inputValue
       this.searchValue = null
       this.$emit('change', inputValue)
-      this.genSelectedItems()
-      setTimeout(this.showMenu, 0)
+      this.$nextTick(this.focus)
     },
     showMenu () {
       this.showMenuItems()
@@ -627,21 +626,11 @@ export default {
     if (!this.isAutocomplete) {
       data.on = this.genListeners()
       data.directives = this.genDirectives()
-    } else {
+    } else if (!this.disabled && !this.readonly) {
+      // Workaround for clicking autocomplete
+      // if click does not target the input
       data.on = {
-        click: () => {
-          if (this.disabled || this.readonly) return
-
-          // Workaround for clicking select
-          // when using autocomplete
-          // and click doesn't target the input
-          setTimeout(() => {
-            if (this.menuIsActive) return
-
-            this.focus()
-            this.menuIsActive = true
-          }, 100)
-        }
+        click: this.focus
       }
     }
 
