@@ -26,7 +26,8 @@ cache:
 before_deploy:
   - rm -rf release
   - mkdir -p release
-  - for file in ./dist/*; do cp "$file" "${file/dist\/vuetify/release\/vuetify-${TRAVIS_TAG}}"; done
+  - for file in ./dist/*; do cp "$file" "${file/dist\/vuetify/release/vuetify-${TRAVIS_TAG}}"; done
+  - zip -jr "release/vuetify-${TRAVIS_TAG}.zip" release/*
 
 deploy:
   - provider: npm
@@ -40,10 +41,7 @@ deploy:
   - provider: releases
     api_key: $GITHUB_API_KEY
     files:
-      - "release/vuetify-${TRAVIS_TAG}.css"
-      - "release/vuetify-${TRAVIS_TAG}.js"
-      - "release/vuetify-${TRAVIS_TAG}.min.css"
-      - "release/vuetify-${TRAVIS_TAG}.min.js"
+      - "release/vuetify-${TRAVIS_TAG}.zip"
     skip_cleanup: true
     on:
       tags: true
