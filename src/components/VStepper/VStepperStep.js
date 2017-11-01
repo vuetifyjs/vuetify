@@ -96,7 +96,7 @@ export default {
     const step = h('span', {
       staticClass: 'stepper__step__step',
       'class': {
-        'primary': this.complete || this.isActive
+        'primary': !this.hasError && (this.complete || this.isActive)
       }
     }, stepContent)
 
