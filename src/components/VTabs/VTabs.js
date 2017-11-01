@@ -165,10 +165,10 @@ export default {
     },
     slider (el) {
       this.tabsSlider = this.tabsSlider ||
-        this.$el.querySelector('.tabs__slider')
+        !!this.$el && this.$el.querySelector('.tabs__slider')
 
       this.tabsContainer = this.tabsContainer ||
-        this.$el.querySelector('.tabs__container')
+        !!this.$el && this.$el.querySelector('.tabs__container')
 
       if (!this.tabsSlider || !this.tabsContainer) return
 

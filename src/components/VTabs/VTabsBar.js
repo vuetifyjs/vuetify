@@ -36,7 +36,6 @@ export default {
 
   data () {
     return {
-      defaultColor: 'primary',
       isOverflowing: false,
       itemOffset: 0,
       scrollOffset: 0,
