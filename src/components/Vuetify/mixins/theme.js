@@ -5,8 +5,7 @@ const THEME_DEFAULTS = {
   error: '#FF5252',
   info: '#2196F3',
   success: '#4CAF50',
-  warning: '#FFC107',
-  type: 'light'
+  warning: '#FFC107'
 }
 
 export default function (theme) {
