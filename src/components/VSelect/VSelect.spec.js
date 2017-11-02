@@ -210,7 +210,7 @@ test('VSelect', () => {
 
     const wrapper = mount(VSelect, {
       propsData: {
-        menuClass: 'menu-class',
+        contentClass: 'menu-class',
         items
       }
     })
