@@ -11,6 +11,7 @@ const Vuetify = {
     const $vuetify = { load }
     Vue.util.defineReactive($vuetify, 'breakpoint', {})
     Vue.util.defineReactive($vuetify, 'application', application)
+    Vue.util.defineReactive($vuetify, 'dark', false)
     Vue.util.defineReactive($vuetify, 'theme', theme(opts.theme))
     Vue.util.defineReactive($vuetify, 'touchSupport', false)
 
