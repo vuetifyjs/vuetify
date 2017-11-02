@@ -110,6 +110,7 @@ test('VSelect - tags', () => {
     input.element.value = 'b'
     input.trigger('input')
     await wrapper.vm.$nextTick()
+    input.trigger('keydown.down')
     input.trigger('keydown.tab')
     await wrapper.vm.$nextTick()
 
@@ -137,6 +138,8 @@ test('VSelect - tags', () => {
     wrapper.vm.focus()
     await wrapper.vm.$nextTick()
     wrapper.setProps({ searchInput: 'ba' })
+    await wrapper.vm.$nextTick()
+    input.trigger('keydown.down')
     await wrapper.vm.$nextTick()
     input.trigger('keydown.tab')
     await wrapper.vm.$nextTick()

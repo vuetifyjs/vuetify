@@ -258,7 +258,7 @@ export default {
     },
     isActive (val) {
       if (val) {
-        this.searchValue = this.getText(this.selectedItem)
+        if (!this.chips) this.searchValue = this.getText(this.selectedItem)
         return
       }
 
@@ -266,7 +266,9 @@ export default {
         this.updateTags(this.searchValue)
       }
 
-      this.searchValue = null
+      // Only set search value if
+      // there is a value to set
+      this.searchValue && (this.searchValue = null)
       this.menuIsActive = false
       this.isFocused = false
       this.selectedIndex = -1
@@ -303,7 +305,7 @@ export default {
     searchInput (val) {
       this.searchValue = val
     },
-    searchValue (val) {
+    searchValue (val, prev) {
       // Wrap input to next line if overflowing
       if (this.$refs.input.scrollWidth > this.$refs.input.clientWidth) {
         this.shouldBreak = true
@@ -322,10 +324,12 @@ export default {
 
       // Only reset list index
       // if typing in search
-      val && this.resetMenuIndex()
+      val || prev && this.resetMenuIndex()
 
       this.$nextTick(() => {
-        val ? this.setMenuIndex(0) : this.resetMenuIndex()
+        if (val && !this.isAnyValueAllowed) {
+          this.setMenuIndex(0)
+        }
       })
     },
     selectedItems () {
@@ -394,7 +398,9 @@ export default {
             ? this.selectedIndex
             : -1
 
-        this.selectItem(this.selectedItems[this.selectedIndex])
+        this.combobox
+          ? this.inputValue = null
+          : this.selectItem(this.selectedItems[this.selectedIndex])
         this.selectedIndex = newIndex
       }
     },
@@ -577,9 +583,9 @@ export default {
         this.selectedItems = selectedItems
       }
 
-      this.searchValue = !this.isMultiple || this.chips
+      this.searchValue = !this.isMultiple && !this.combobox
         ? this.getText(this.selectedItem)
-        : ''
+        : null
 
       this.$emit('change', this.inputValue)
 
@@ -596,7 +602,9 @@ export default {
         this.setCaretPosition(this.currentRange)
 
         requestAnimationFrame(() => {
-          (!this.isAutocomplete || this.searchValue) ? this.setMenuIndex(savedIndex) : this.resetMenuIndex()
+          if (savedIndex > -1) {
+            this.setMenuIndex(savedIndex)
+          }
         })
       })
     },
