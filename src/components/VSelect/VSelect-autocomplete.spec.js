@@ -295,18 +295,12 @@ test('VSelect - autocomplete', () => {
       }
     })
 
-    const input = wrapper.find('input')[0]
-
-    input.trigger('click')
+    wrapper.setProps({ searchInput: 'asdf' })
+    wrapper.update()
     await wrapper.vm.$nextTick()
-
-    input.element.value = 'test'
-    input.trigger('input')
-    await wrapper.vm.$nextTick()
-
     const tile = wrapper.find('.list__tile__title')[0]
-    expect(tile.text()).toBe('No data available')
 
+    expect(tile.text()).toBe('No data available')
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 })

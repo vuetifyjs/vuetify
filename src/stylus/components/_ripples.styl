@@ -1,4 +1,4 @@
-.ripple    
+.ripple
   &__container
     color: inherit
     border-radius: inherit
@@ -10,7 +10,8 @@
     overflow: hidden
     z-index: 0
     pointer-events: none
-          
+    contain: strict
+
   &__animation
     color: inherit
     position: absolute
@@ -22,10 +23,10 @@
     transition: $ripple-animation-transition
     pointer-events: none
     overflow: hidden
-    will-change: opacity
-      
+    will-change: transform, opacity
+
     &--enter
       transition: none
-      
+
     &--visible
       opacity: $ripple-animation-visible-opacity

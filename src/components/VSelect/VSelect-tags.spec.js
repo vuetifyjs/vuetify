@@ -7,7 +7,7 @@ test('VSelect - tags', () => {
   const backspace = new Event('keydown')
   backspace.keyCode = 8
 
-  it('should create new values when tagging and pressed enter', async () => {
+  it('should create new values when tagging', async () => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,
       propsData: {
@@ -19,7 +19,7 @@ test('VSelect - tags', () => {
     const input = wrapper.find('input')[0]
 
     const change = jest.fn()
-    wrapper.vm.$on('change', change)
+    wrapper.vm.$on('input', change)
 
     wrapper.vm.focus()
     await wrapper.vm.$nextTick()
@@ -30,35 +30,6 @@ test('VSelect - tags', () => {
     await wrapper.vm.$nextTick()
 
     input.trigger('keydown.enter')
-    await wrapper.vm.$nextTick()
-
-    expect(change).toHaveBeenCalledWith(['foo'])
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
-  })
-
-  it('should create new values when tagging and pressed tab', async () => {
-    const wrapper = mount(VSelect, {
-      attachToDocument: true,
-      propsData: {
-        tags: true,
-        value: []
-      }
-    })
-
-    const input = wrapper.find('input')[0]
-
-    const change = jest.fn()
-    wrapper.vm.$on('change', change)
-
-    wrapper.vm.focus()
-    await wrapper.vm.$nextTick()
-
-    input.element.value = 'foo'
-    input.trigger('input')
-    await wrapper.vm.$nextTick()
-    await wrapper.vm.$nextTick()
-
-    input.trigger('keydown.tab')
     await wrapper.vm.$nextTick()
 
     expect(change).toHaveBeenCalledWith(['foo'])
@@ -100,7 +71,7 @@ test('VSelect - tags', () => {
     const input = wrapper.find('input')[0]
 
     const change = jest.fn()
-    wrapper.vm.$on('change', change)
+    wrapper.vm.$on('input', change)
 
     wrapper.vm.focus()
 
@@ -108,10 +79,12 @@ test('VSelect - tags', () => {
     expect(wrapper.vm.selectedIndex).toBe(1)
 
     input.trigger('keydown.delete')
+    await wrapper.vm.$nextTick()
     expect(change).toHaveBeenCalledWith(['foo'])
     expect(wrapper.vm.selectedIndex).toBe(0)
 
     input.element.dispatchEvent(backspace) // Avoriaz doesn't wrap keydown.backspace
+    await wrapper.vm.$nextTick()
     expect(change).toHaveBeenCalledWith([])
     expect(wrapper.vm.selectedIndex).toBe(-1)
 
@@ -131,7 +104,7 @@ test('VSelect - tags', () => {
     const input = wrapper.find('input')[0]
 
     const change = jest.fn()
-    wrapper.vm.$on('change', change)
+    wrapper.vm.$on('input', change)
 
     wrapper.vm.focus()
     await wrapper.vm.$nextTick()
@@ -139,7 +112,7 @@ test('VSelect - tags', () => {
     input.element.value = 'b'
     input.trigger('input')
     await wrapper.vm.$nextTick()
-    await wrapper.vm.$nextTick()
+    input.trigger('keydown.down')
     input.trigger('keydown.tab')
     await wrapper.vm.$nextTick()
 
@@ -161,13 +134,14 @@ test('VSelect - tags', () => {
 
     const change = jest.fn()
     const blur = jest.fn()
-    wrapper.vm.$on('change', change)
+    wrapper.vm.$on('input', change)
     wrapper.vm.$on('blur', blur)
 
     wrapper.vm.focus()
     await wrapper.vm.$nextTick()
     wrapper.setProps({ searchInput: 'ba' })
     await wrapper.vm.$nextTick()
+    input.trigger('keydown.down')
     await wrapper.vm.$nextTick()
     input.trigger('keydown.tab')
     await wrapper.vm.$nextTick()
@@ -195,7 +169,7 @@ test('VSelect - tags', () => {
     const input = wrapper.find('input')[0]
 
     const change = jest.fn()
-    wrapper.vm.$on('change', change)
+    wrapper.vm.$on('input', change)
 
     wrapper.vm.focus()
     await wrapper.vm.$nextTick()
@@ -207,37 +181,6 @@ test('VSelect - tags', () => {
     input.trigger('keydown.right')
     await wrapper.vm.$nextTick()
     input.trigger('keydown.enter')
-    await wrapper.vm.$nextTick()
-
-    expect(change).toBeCalledWith(['ba'])
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
-  })
-
-  it('should add a tag on tab using the current searchValue', async () => {
-    const wrapper = mount(VSelect, {
-      attachToDocument: true,
-      propsData: {
-        tags: true,
-        value: [],
-        items: ['bar']
-      }
-    })
-
-    const input = wrapper.find('input')[0]
-
-    const change = jest.fn()
-    wrapper.vm.$on('change', change)
-
-    wrapper.vm.focus()
-    await wrapper.vm.$nextTick()
-
-    input.element.value = 'ba'
-    input.trigger('input')
-    input.element.setSelectionRange(2, 2)
-    await wrapper.vm.$nextTick()
-    input.trigger('keydown.right')
-    await wrapper.vm.$nextTick()
-    input.trigger('keydown.tab')
     await wrapper.vm.$nextTick()
 
     expect(change).toBeCalledWith(['ba'])
@@ -257,7 +200,7 @@ test('VSelect - tags', () => {
     const input = wrapper.find('input')[0]
 
     const change = jest.fn()
-    wrapper.vm.$on('change', change)
+    wrapper.vm.$on('input', change)
 
     wrapper.vm.focus()
     await wrapper.vm.$nextTick()
@@ -282,9 +225,9 @@ test('VSelect - tags', () => {
     })
 
     const input = wrapper.find('input')[0]
-
+    
     const change = jest.fn()
-    wrapper.vm.$on('change', change)
+    wrapper.vm.$on('input', change)
 
     wrapper.vm.focus()
     await wrapper.vm.$nextTick()
@@ -309,7 +252,7 @@ test('VSelect - tags', () => {
     const input = wrapper.find('input')[0]
 
     const change = jest.fn()
-    wrapper.vm.$on('change', change)
+    wrapper.vm.$on('input', change)
 
     wrapper.vm.focus()
     await wrapper.vm.$nextTick()

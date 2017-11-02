@@ -15,6 +15,7 @@ export default {
       default: 'Cancel'
     },
     large: Boolean,
+    lazy: Boolean,
     saveText: {
       default: 'Save'
     },
@@ -91,7 +92,8 @@ export default {
         origin: 'top right',
         right: true,
         value: this.isActive,
-        closeOnContentClick: false
+        closeOnContentClick: false,
+        lazy: this.lazy
       },
       on: {
         input: val => (this.isActive = val)

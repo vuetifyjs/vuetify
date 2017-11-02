@@ -172,6 +172,10 @@ export default {
     },
     blur (e) {
       this.isFocused = false
+      // Reset internalChange state
+      // to allow external change
+      // to persist
+      this.internalChange = false
 
       this.$nextTick(() => {
         this.validate()

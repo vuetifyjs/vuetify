@@ -41,8 +41,8 @@ export default {
           offsetOverflow: this.isAutocomplete,
           openOnClick: false,
           value: this.menuIsActive &&
-            (!this.tags || this.filteredItems.length > 0) &&
-            (!this.combobox || this.filteredItems.length > 0),
+            this.computedItems.length &&
+            (!this.isAnyValueAllowed || this.filteredItems.length > 0),
           zIndex: this.menuZIndex
         },
         on: {
@@ -77,7 +77,10 @@ export default {
         'class': 'input-group__selections',
         style: { 'overflow': 'hidden' },
         ref: 'activator'
-      }, this.genSelections().concat([this.genSearch()]))
+      }, [
+        ...this.genSelections(),
+        this.genSearch()
+      ])
     },
     genSelections () {
       if (this.hideSelections) return []
@@ -143,6 +146,8 @@ export default {
           // update inputValue and
           // set the menu status
           data.on.blur = () => {
+            if (!this.lazySearch) return
+
             this.inputValue = this.lazySearch
           }
         }

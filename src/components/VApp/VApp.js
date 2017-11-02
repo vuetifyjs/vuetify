@@ -1,34 +1,53 @@
 require('../../stylus/components/_app.styl')
 
-import Breakpoint from '../../util/breakpoint'
-import Themeable from '../../mixins/themeable'
-import PointerSupport from '../../util/pointerSupport'
+// Component level mixins
+import AppTheme from './mixins/app-theme'
+import AppBreakpoint from './mixins/app-breakpoint'
 
+// Directives
 import Resize from '../../directives/resize'
+
+// Utilities
+import PointerSupport from '../../util/pointerSupport'
 
 export default {
   name: 'v-app',
 
-  mixins: [Breakpoint, PointerSupport, Themeable],
+  mixins: [
+    AppBreakpoint,
+    AppTheme,
+    PointerSupport
+  ],
 
   directives: {
     Resize
   },
 
-  data: () => ({
-    resizeTimeout: {}
-  }),
-
   props: {
     id: {
       type: String,
       default: 'app'
+    },
+    dark: Boolean
+  },
+
+  computed: {
+    classes () {
+      return {
+        [`theme--${this.dark ? 'dark' : 'light'}`]: true
+      }
     }
   },
 
   mounted () {
-    this.$vuetify.breakpoint = this.breakpoint
+    this.$vuetify.theme.type = this.type
     window.addEventListener('load', this.runCallbacks)
+  },
+
+  watch: {
+    type () {
+      this.$vuetify.theme.type = this.type
+    }
   },
 
   methods: {
@@ -47,10 +66,7 @@ export default {
   render (h) {
     const data = {
       staticClass: 'application',
-      'class': {
-        'application--dark': this.dark,
-        'application--light': !this.dark
-      },
+      'class': this.classes,
       attrs: { 'data-app': true },
       domProps: { id: this.id },
       directives: [{

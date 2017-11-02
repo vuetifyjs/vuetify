@@ -76,6 +76,8 @@ export default {
     toggle (uid) {
       const isActive = this._uid === uid && !this.isActive
 
+      if (isActive) this.isBooted = true
+
       // We treat bootable differently
       // Needs time to calc height
       this.$nextTick(() => (this.isActive = isActive))

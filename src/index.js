@@ -1,22 +1,23 @@
 require('./stylus/app.styl')
 import Semver from 'semver'
-import { devDependencies, version } from '../package.json'
+import { peerDependencies, version } from '../package.json'
 import * as components from './components'
 import * as directives from './directives'
 
-function Vuetify (Vue) {
+function Vuetify (Vue, args) {
   const Vuetify = components.Vuetify
 
   Vue.use(Vuetify, {
     components,
-    directives
+    directives,
+    ...args
   })
 }
 
 Vuetify.version = version
 
 function checkVueVersion () {
-  const vueDep = devDependencies.vue
+  const vueDep = peerDependencies.vue
   if (!Semver.satisfies(window.Vue.version, vueDep)) {
     console.warn(`Vuetify requires Vue version ${vueDep}`)
   }

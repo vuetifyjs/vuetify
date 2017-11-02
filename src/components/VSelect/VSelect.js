@@ -58,8 +58,10 @@ export default {
   data () {
     return {
       cachedItems: [],
+      content: {},
       defaultColor: 'primary',
       inputValue: (this.multiple || this.tags) && !this.value ? [] : this.value,
+      isBooted: false,
       lastItem: 20,
       lazySearch: null,
       isActive: false,
@@ -135,9 +137,6 @@ export default {
   },
 
   computed: {
-    content () {
-      return this.$refs.menu && this.$refs.menu.$refs.content
-    },
     classes () {
       const classes = {
         'input-group--text-field input-group--select': true,
@@ -250,7 +249,10 @@ export default {
       // Populate selected items
       this.genSelectedItems(val)
 
-      this.$emit('input', val)
+      // Only fire an update
+      // if values do not
+      // match
+      val !== this.value && this.$emit('input', val)
 
       // When inputValue is changed
       // and combobox is true set
@@ -259,7 +261,7 @@ export default {
     },
     isActive (val) {
       if (val) {
-        this.searchValue = this.getText(this.selectedItem)
+        if (!this.chips) this.searchValue = this.getText(this.selectedItem)
         return
       }
 
@@ -267,26 +269,21 @@ export default {
         this.updateTags(this.searchValue)
       }
 
-      this.searchValue = null
+      // Only set search value if
+      // there is a value to set
+      this.searchValue && (this.searchValue = null)
       this.menuIsActive = false
       this.isFocused = false
       this.selectedIndex = -1
 
       // this.lastItem += !val ? 20 : 0
     },
-    isFocused (val) {
-      // When focusing the input
-      // re-set the caret position
-      if (this.isAutocomplete &&
-        !this.mask &&
-        !this.isMultiple &&
-        val
-      ) {
-        this.setCaretPosition(this.currentRange)
-        this.shouldBreak && this.$nextTick(() => {
-          this.$refs.input.scrollLeft = this.$refs.input.scrollWidth
-        })
-      }
+    isBooted () {
+      this.$nextTick(() => {
+        if (this.content && this.content.addEventListener) {
+          this.content.addEventListener('scroll', this.onScroll, false)
+        }
+      })
     },
     items (val) {
       if (this.cacheItems) {
@@ -295,19 +292,18 @@ export default {
 
       this.resetMenuIndex()
 
-      this.searchValue && this.$nextTick(() => this.setMenuIndex(0))
+      // Tags and combobox should not
+      // pre-select the first entry
+      if (this.searchValue && !this.isAnyValueAllowed) {
+        this.$nextTick(() => this.setMenuIndex(0))
+      }
 
       this.genSelectedItems()
     },
     menuIsActive (val) {
-      if (this.content) {
-        this.$nextTick(() => this.content && this.content.addEventListener('scroll', this.onScroll, false))
-      } else {
-        this.$nextTick(() => this.content && this.content.removeEventListener('scroll', this.onScroll, false))
-      }
-
       if (!val) return
 
+      this.isBooted = true
       this.isActive = true
     },
     isMultiple (val) {
@@ -316,11 +312,11 @@ export default {
     searchInput (val) {
       this.searchValue = val
     },
-    searchValue (val) {
+    searchValue (val, prev) {
       // Wrap input to next line if overflowing
       if (this.$refs.input.scrollWidth > this.$refs.input.clientWidth) {
         this.shouldBreak = true
-        this.$nextTick(() => this.$refs.menu && this.$refs.menu.updateDimensions())
+        this.$nextTick(this.$refs.menu.updateDimensions)
       } else if (val === null) {
         this.shouldBreak = false
       }
@@ -335,17 +331,19 @@ export default {
 
       // Only reset list index
       // if typing in search
-      val && this.resetMenuIndex()
+      val || prev && this.resetMenuIndex()
 
       this.$nextTick(() => {
-        val ? this.setMenuIndex(0) : this.resetMenuIndex()
+        if (val && !this.isAnyValueAllowed) {
+          this.setMenuIndex(0)
+        }
       })
     },
-    selectedItems (val) {
+    selectedItems () {
       clearTimeout(this.searchTimeout)
 
       if (this.isAutocomplete) {
-        this.$nextTick(() => this.$refs.menu && this.$refs.menu.updateDimensions())
+        this.$nextTick(this.$refs.menu.updateDimensions)
       }
     },
     value (val) {
@@ -362,6 +360,16 @@ export default {
     // Evaluate the selected items immediately
     // to avoid a unnecessary label transition
     this.genSelectedItems()
+
+    this.content = this.$refs.menu.$refs.content
+  },
+
+  beforeDestroy () {
+    if (this.isBooted) {
+      if (this.content) {
+        this.content.removeEventListener('scroll', this.onScroll, false)
+      }
+    }
   },
 
   methods: {
@@ -397,7 +405,9 @@ export default {
             ? this.selectedIndex
             : -1
 
-        this.selectItem(this.selectedItems[this.selectedIndex])
+        this.combobox
+          ? this.inputValue = null
+          : this.selectItem(this.selectedItems[this.selectedIndex])
         this.selectedIndex = newIndex
       }
     },
@@ -425,6 +435,12 @@ export default {
 
       if (this.$refs.input && this.isAutocomplete) {
         this.$refs.input.focus()
+        this.$nextTick(() => {
+          this.$refs.input.select()
+          this.shouldBreak && (
+            this.$refs.input.scrollLeft = this.$refs.input.scrollWidth
+          )
+        })
       } else {
         this.$el.focus()
       }
@@ -574,9 +590,9 @@ export default {
         this.selectedItems = selectedItems
       }
 
-      this.searchValue = !this.isMultiple || this.chips
+      this.searchValue = !this.isMultiple && !this.chips
         ? this.getText(this.selectedItem)
-        : ''
+        : null
 
       this.$emit('change', this.inputValue)
 
@@ -593,7 +609,9 @@ export default {
         this.setCaretPosition(this.currentRange)
 
         requestAnimationFrame(() => {
-          (!this.isAutocomplete || this.searchValue) ? this.setMenuIndex(savedIndex) : this.resetMenuIndex()
+          if (savedIndex > -1) {
+            this.setMenuIndex(savedIndex)
+          }
         })
       })
     },

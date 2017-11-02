@@ -8,30 +8,41 @@ chip($material)
   &__close
     color: $material.icons.active
 
-  &.chip--selected
-    background: $theme.accent
-    color: $material.text.theme
+  :not(.chip--outline)
+    &:focus,
+    &.chip--active,
+    &.chip--selected
+      .chip__content
+        color: $material.text.theme
 
-    .chip__close
-      color: $material.text.theme
+        .chip__close
+          color: $material.text.theme
 
 theme(chip, "chip")
 
 .chip
-  align-items: center
   border-radius: $chip-border-radius
   color: $chip-label-color
-  cursor: default
-  display: inline-flex
-  height: $chip-height
-  justify-content: space-between
+  display: inline-block
   font-size: $chip-font-size
   margin: $chip-margin
   outline: none
-  padding: $chip-padding
   transition: $primary-transition
-  vertical-align: middle
-  white-space: nowrap
+
+  .chip__content
+    align-items: center
+    border-radius: $chip-border-radius
+    cursor: default
+    display: inline-flex
+    height: $chip-height
+    justify-content: space-between
+    padding: $chip-padding
+    vertical-align: middle
+    white-space: nowrap
+
+  &--removable
+    .chip__content
+      padding: $chip-removeable-padding
 
   .avatar
     // Important is needed to account for new avatar structure
@@ -47,13 +58,24 @@ theme(chip, "chip")
       height: 100%
 
   &:focus,
-  &--active
+  &--active,
+  &--selected
     &:not(.chip--disabled)
       elevation(2)
       outline: none
 
+      .chip__content
+        background: $chip-darken-background
+
+      &.chip--outline
+        .chip__content
+          background: $chip-darken-background-outline
+
   &--label
     border-radius: $chip-label-border-radius
+
+    .chip__content
+      border-radius: $chip-label-border-radius
 
   &.chip--outline
     background: $chip-outline-background
@@ -80,9 +102,6 @@ theme(chip, "chip")
 
     &:hover
       opacity: .8
-
-  &--removable
-    padding: $chip-removeable-padding
 
   &--select-multi
     margin: $chip-margin $chip-margin $chip-margin 0
