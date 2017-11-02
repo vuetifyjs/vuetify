@@ -249,7 +249,10 @@ export default {
       // Populate selected items
       this.genSelectedItems(val)
 
-      this.$emit('input', val)
+      // Only fire an update
+      // if values do not
+      // match
+      val !== this.value && this.$emit('input', val)
 
       // When inputValue is changed
       // and combobox is true set
@@ -289,7 +292,11 @@ export default {
 
       this.resetMenuIndex()
 
-      this.searchValue && this.$nextTick(() => this.setMenuIndex(0))
+      // Tags and combobox should not
+      // pre-select the first entry
+      if (this.searchValue && !this.isAnyValueAllowed) {
+        this.$nextTick(() => this.setMenuIndex(0))
+      }
 
       this.genSelectedItems()
     },
@@ -583,7 +590,7 @@ export default {
         this.selectedItems = selectedItems
       }
 
-      this.searchValue = !this.isMultiple && !this.combobox
+      this.searchValue = !this.isMultiple && !this.chips
         ? this.getText(this.selectedItem)
         : null
 

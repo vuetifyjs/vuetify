@@ -19,7 +19,7 @@ test('VSelect - tags', () => {
     const input = wrapper.find('input')[0]
 
     const change = jest.fn()
-    wrapper.vm.$on('change', change)
+    wrapper.vm.$on('input', change)
 
     wrapper.vm.focus()
     await wrapper.vm.$nextTick()
@@ -71,7 +71,7 @@ test('VSelect - tags', () => {
     const input = wrapper.find('input')[0]
 
     const change = jest.fn()
-    wrapper.vm.$on('change', change)
+    wrapper.vm.$on('input', change)
 
     wrapper.vm.focus()
 
@@ -79,10 +79,12 @@ test('VSelect - tags', () => {
     expect(wrapper.vm.selectedIndex).toBe(1)
 
     input.trigger('keydown.delete')
+    await wrapper.vm.$nextTick()
     expect(change).toHaveBeenCalledWith(['foo'])
     expect(wrapper.vm.selectedIndex).toBe(0)
 
     input.element.dispatchEvent(backspace) // Avoriaz doesn't wrap keydown.backspace
+    await wrapper.vm.$nextTick()
     expect(change).toHaveBeenCalledWith([])
     expect(wrapper.vm.selectedIndex).toBe(-1)
 
@@ -102,7 +104,7 @@ test('VSelect - tags', () => {
     const input = wrapper.find('input')[0]
 
     const change = jest.fn()
-    wrapper.vm.$on('change', change)
+    wrapper.vm.$on('input', change)
 
     wrapper.vm.focus()
     await wrapper.vm.$nextTick()
@@ -132,7 +134,7 @@ test('VSelect - tags', () => {
 
     const change = jest.fn()
     const blur = jest.fn()
-    wrapper.vm.$on('change', change)
+    wrapper.vm.$on('input', change)
     wrapper.vm.$on('blur', blur)
 
     wrapper.vm.focus()
@@ -167,7 +169,7 @@ test('VSelect - tags', () => {
     const input = wrapper.find('input')[0]
 
     const change = jest.fn()
-    wrapper.vm.$on('change', change)
+    wrapper.vm.$on('input', change)
 
     wrapper.vm.focus()
     await wrapper.vm.$nextTick()
@@ -198,7 +200,7 @@ test('VSelect - tags', () => {
     const input = wrapper.find('input')[0]
 
     const change = jest.fn()
-    wrapper.vm.$on('change', change)
+    wrapper.vm.$on('input', change)
 
     wrapper.vm.focus()
     await wrapper.vm.$nextTick()
@@ -225,7 +227,7 @@ test('VSelect - tags', () => {
     const input = wrapper.find('input')[0]
     
     const change = jest.fn()
-    wrapper.vm.$on('change', change)
+    wrapper.vm.$on('input', change)
 
     wrapper.vm.focus()
     await wrapper.vm.$nextTick()
@@ -250,7 +252,7 @@ test('VSelect - tags', () => {
     const input = wrapper.find('input')[0]
 
     const change = jest.fn()
-    wrapper.vm.$on('change', change)
+    wrapper.vm.$on('input', change)
 
     wrapper.vm.focus()
     await wrapper.vm.$nextTick()
