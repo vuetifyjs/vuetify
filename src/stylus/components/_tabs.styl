@@ -3,8 +3,8 @@
 
 /* Theme */
 tabs($material)
-  .tabs__item
-    color: $material.tabs.inactive
+  .tabs__li
+    color: $material.tabs.active
 
     &.tabs__item--disabled
       color: $material.buttons.disabled
@@ -119,12 +119,14 @@ theme(tabs, "tabs__bar")
 
   &__item
     align-items: center
+    color: inherit !important
     display: flex
     flex-shrink: 0
     justify-content: center
     height: 100%
     padding: 0 12px
     position: relative
+    opacity: .7
     text-align: center
     text-decoration: none
     text-transform: uppercase
@@ -134,6 +136,9 @@ theme(tabs, "tabs__bar")
     .icon
       color: inherit
       margin: 0 0 5px
+
+    &--active
+      opacity: 1
 
     &--disabled
       pointer-events: none

@@ -16,7 +16,7 @@ export default {
   props: {
     activeClass: {
       type: String,
-      default: 'primary--text'
+      default: 'tabs__item--active'
     }
   },
 
