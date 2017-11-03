@@ -8,7 +8,7 @@ import AppBreakpoint from './mixins/app-breakpoint'
 import Resize from '../../directives/resize'
 
 // Utilities
-import TouchSupport from '../../util/touchSupport'
+import PointerSupport from '../../util/pointerSupport'
 
 export default {
   name: 'v-app',
@@ -16,7 +16,7 @@ export default {
   mixins: [
     AppBreakpoint,
     AppTheme,
-    TouchSupport
+    PointerSupport
   ],
 
   directives: {
