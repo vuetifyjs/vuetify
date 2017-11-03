@@ -18,6 +18,7 @@ export default {
   props: {
     dismissible: Boolean,
     icon: String,
+    outline: Boolean,
     type: {
       type: String,
       validator (val) {
@@ -38,10 +39,13 @@ export default {
   computed: {
     classes () {
       const colorProp = (this.type && !this.color) ? 'type' : 'computedColor'
+      const classes = {
+        'alert--dismissible': this.dismissible,
+        'alert--outline': this.outline
+      }
 
-      return this.addBackgroundColorClassChecks({
-        'alert--dismissible': this.dismissible
-      }, colorProp)
+      return this.outline ? this.addTextColorClassChecks(classes, colorProp)
+        : this.addBackgroundColorClassChecks(classes, colorProp)
     },
     computedIcon () {
       if (this.icon || !this.type) return this.icon

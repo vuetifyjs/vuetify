@@ -17,6 +17,8 @@
     align-self: center
     color: $alert-icon-color
     font-size: $alert-icon-font-size
+  &--outline .icon
+    color: inherit !important
 
   &__icon
     margin-right: $alert-padding
@@ -47,3 +49,5 @@
 // with modifier (for example "red lighten-2")
 .alert.alert
   border-color: $material-light.dividers !important
+  &--outline
+    border: $alert-outline-border-width $alert-outline-border-style currentColor !important
