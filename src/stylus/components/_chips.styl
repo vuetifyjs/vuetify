@@ -21,13 +21,15 @@ chip($material)
 theme(chip, "chip")
 
 .chip
+  align-items: center
   border-radius: $chip-border-radius
   color: $chip-label-color
-  display: inline-block
+  display: inline-flex
   font-size: $chip-font-size
   margin: $chip-margin
   outline: none
   transition: $primary-transition
+  vertical-align: middle
 
   .chip__content
     align-items: center
