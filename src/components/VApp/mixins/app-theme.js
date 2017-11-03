@@ -19,7 +19,7 @@ export default {
 
   methods: {
     applyTheme () {
-      this.style.innerHTML = this.genColors(this.$vuetify.theme)
+      this.style.innerHTML = this.genColors(this.$vuetify.theme.current)
     },
     genColors (theme) {
       return Object.keys(theme).map(key => {

@@ -40,13 +40,13 @@ export default {
   },
 
   mounted () {
-    this.$vuetify.dark = this.dark
+    this.setCurrentTheme()
     window.addEventListener('load', this.runCallbacks)
   },
 
   watch: {
     dark () {
-      this.$vuetify.dark = this.dark
+      this.setCurrentTheme()
     }
   },
 
@@ -60,6 +60,9 @@ export default {
       while (document._loadCallbacks.length) {
         document._loadCallbacks.pop()()
       }
+    },
+    setCurrentTheme () {
+      this.$vuetify.theme.current = this.$vuetify.theme[this.dark ? 'dark' : 'light']
     }
   },
 

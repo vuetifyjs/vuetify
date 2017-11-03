@@ -8,8 +8,11 @@ const THEME_DEFAULTS = {
   warning: '#FFC107'
 }
 
-export default function (theme) {
-  theme = theme || {}
+export default function (customThemes = {}) {
+  const themes = {
+    light: Object.assign({}, THEME_DEFAULTS, customThemes.light),
+    dark: Object.assign({}, THEME_DEFAULTS, customThemes.dark)
+  }
 
-  return Object.assign({}, THEME_DEFAULTS, theme)
+  return Object.assign(themes, { current: themes.light })
 }
