@@ -25,7 +25,7 @@ export default {
     monthGenTD (month) {
       const pad = n => (n * 1 < 10) ? `0${n * 1}` : `${n}`
       const date = `${this.tableYear}-${pad(month + 1)}`
-      const monthName = this.monthFormat(date, this.locale)
+      const monthName = this.formatters.month(date)
       const isActive = this.monthIsActive(month)
       const isCurrent = this.monthIsCurrent(month)
       const classes = Object.assign({

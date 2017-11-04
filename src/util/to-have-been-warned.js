@@ -21,6 +21,7 @@ function createCompareFn (spy) {
         arg.toString().includes(msg)
       ))) return true
     }
+    return false
   }
 
   return {
@@ -32,8 +33,8 @@ function createCompareFn (spy) {
       return {
         pass: warned,
         message: warned
-          ? `Expected message "${msg}" not to have been warned`
-          : `Expected message "${msg}" to have been warned`
+          ? () => (`Expected message "${msg}" not to have been warned`)
+          : () => (`Expected message "${msg}" to have been warned`)
       }
     }
   }

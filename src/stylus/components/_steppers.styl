@@ -107,19 +107,10 @@ theme(stepper, "stepper")
       .stepper__label
         transition: .3s $transition.ease-in-out
 
-      .stepper__step__step
-        background: $theme.primary
-
     &--editable
       cursor: pointer
 
-    &--complete
-      .stepper__step__step
-        background: $theme.primary
-
     &.stepper__step--error
-      color: $theme.error
-
       .stepper__step__step
         background: transparent
         color: inherit
@@ -134,7 +125,7 @@ theme(stepper, "stepper")
         font-weight: 500
 
         small
-          color: $theme.error
+          color: inherit
 
 .stepper
   &__label

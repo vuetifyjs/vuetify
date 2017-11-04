@@ -1,22 +1,18 @@
 import load from '../../util/load'
+import application from './mixins/application'
+import theme from './mixins/theme'
 
 const Vuetify = {
   install (Vue, opts = {}) {
-    const $vuetify = {
-      load,
-      application: {
-        bar: 0,
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0
-      },
-      breakpoint: {},
-      touchSupport: false
-    }
+    if (this.installed) return
 
-    Vue.util.defineReactive({}, 'breakpoint', $vuetify)
-    Vue.util.defineReactive({}, 'application', $vuetify)
+    this.installed = true
+
+    const $vuetify = { load }
+    Vue.util.defineReactive($vuetify, 'breakpoint', {})
+    Vue.util.defineReactive($vuetify, 'application', application)
+    Vue.util.defineReactive($vuetify, 'theme', theme(opts.theme))
+    Vue.util.defineReactive($vuetify, 'touchSupport', false)
 
     Vue.prototype.$vuetify = $vuetify
 

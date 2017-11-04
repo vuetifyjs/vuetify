@@ -3,21 +3,20 @@
 
 /* Theme */
 tabs($material)
-  .tabs__item
-    color: $material.tabs.inactive
-
-    &.tabs__item--active
-      color: $material.tabs.active
+  .tabs__li
+    color: $material.tabs.active
 
     &.tabs__item--disabled
       color: $material.buttons.disabled
 
   .tabs__bar
+    background-color: $material.cards
+
     .icon--left,
     .icon--right
       color: $material.icons.inactive
 
-theme(tabs, "tabs")
+theme(tabs, "tabs__bar")
 
 .tabs
   overflow: hidden
@@ -67,7 +66,6 @@ theme(tabs, "tabs")
         overflow: hidden !important
 
   &__bar
-    background-color: $theme.primary
     width: 100%
     position: relative
     height: 48px
@@ -121,12 +119,14 @@ theme(tabs, "tabs")
 
   &__item
     align-items: center
+    color: inherit !important
     display: flex
     flex-shrink: 0
     justify-content: center
     height: 100%
     padding: 0 12px
     position: relative
+    opacity: .7
     text-align: center
     text-decoration: none
     text-transform: uppercase
@@ -136,6 +136,9 @@ theme(tabs, "tabs")
     .icon
       color: inherit
       margin: 0 0 5px
+
+    &--active
+      opacity: 1
 
     &--disabled
       pointer-events: none
@@ -155,5 +158,4 @@ theme(tabs, "tabs")
     position: absolute
     bottom: 0
     height: 2px
-    background: $theme.accent
     transition: $primary-transition

@@ -89,12 +89,10 @@ export default {
       },
       set (val) {
         if (this.mask) {
-          const value = this.unmaskText(this.maskText(this.unmaskText(val)))
-          this.lazyValue = typeof val === 'number' ? +value : value
+          this.lazyValue = this.unmaskText(this.maskText(this.unmaskText(val)))
           this.setSelectionRange()
         } else {
-          const type = typeof this.lazyValue
-          this.lazyValue = type === 'number' ? +val : val
+          this.lazyValue = val
           this.$emit('input', this.lazyValue)
         }
       }
@@ -122,11 +120,10 @@ export default {
       if (this.internalChange) this.internalChange = false
       else if (this.mask) {
         const masked = this.maskText(this.unmaskText(val))
-        const value = this.unmaskText(masked)
-        this.lazyValue = typeof val === 'number' ? +value : value
+        this.lazyValue = this.unmaskText(masked)
 
         // Emit when the externally set value was modified internally
-        val !== this.lazyValue && this.$nextTick(() => {
+        String(val) !== this.lazyValue && this.$nextTick(() => {
           this.$refs.input.value = masked
           this.$emit('input', this.lazyValue)
         })
@@ -165,6 +162,10 @@ export default {
     },
     blur (e) {
       this.isFocused = false
+      // Reset internalChange state
+      // to allow external change
+      // to persist
+      this.internalChange = false
 
       this.$nextTick(() => {
         this.validate()

@@ -8,7 +8,6 @@ pagination($material)
 
     &--active
       color: $material.text.theme
-      background: $theme.primary
 
   &__navigation
     background: $material.cards
@@ -23,22 +22,14 @@ theme(pagination, "pagination")
   align-items: center
   display: inline-flex
   list-style-type: none
-  height: 40px
   margin: 0
   overflow-x: auto
-  overflow-y: hidden
   max-width: 100%
   padding: 0
 
   > li
     align-items: center
     display: flex
-
-  a
-    transition: .3s $transition.linear-out-slow-in
-
-    &:hover
-      elevation(2)
 
   &--circle
     .pagination__item,
@@ -56,11 +47,13 @@ theme(pagination, "pagination")
     display: inline-flex
     justify-content: center
     align-items: center
+    font-size: $button-font-size
     background: transparent
     height: 34px
     width: 34px
     margin: .3rem
     text-decoration: none
+    transition: .3s $transition.linear-out-slow-in
 
     &--active
       elevation(4)

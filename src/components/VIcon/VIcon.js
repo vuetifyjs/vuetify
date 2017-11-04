@@ -2,14 +2,13 @@ require('../../stylus/components/_icons.styl')
 
 import Themeable from '../../mixins/themeable'
 import Colorable from '../../mixins/colorable'
-import Contextualable from '../../mixins/contextualable'
 
 export default {
   name: 'v-icon',
 
   functional: true,
 
-  mixins: [Colorable, Contextualable, Themeable],
+  mixins: [Colorable, Themeable],
 
   props: {
     disabled: Boolean,
@@ -21,12 +20,6 @@ export default {
   },
 
   render (h, { props, data, children = [] }) {
-    Object.keys(Contextualable.props).forEach(prop => {
-      if (props[prop]) {
-        console.warn(`Context prop '${prop}' for VIcon component has been deprecated. Use 'color' prop instead.`)
-      }
-    })
-
     if (props.fa || props.mdi) console.warn(`The v-icon prop 'fa' and 'mdi' will be deprecated in the next release. Use 'fa' or 'mdi' prefix in icon name instead.`)
     let iconName = ''
     let iconType = 'material-icons'
@@ -59,7 +52,7 @@ export default {
       'icon--x-large': props.xLarge,
       'theme--dark': props.dark,
       'theme--light': props.light
-    }, props.color ? Colorable.methods.addTextColorClassChecks.call(props, {}) : {
+    }, props.color ? Colorable.methods.addTextColorClassChecks.call(props, {}, 'color') : {
       'primary--text': props.primary,
       'secondary--text': props.secondary,
       'success--text': props.success,

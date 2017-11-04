@@ -11,6 +11,14 @@ test('VIcon.js', () => {
     expect(wrapper.element.className).toBe('material-icons icon')
   })
 
+  it('should render a colored component', () => {
+    const context = functionalContext({ props: { color: 'green lighten-1' } }, 'add')
+    const wrapper = mount(VIcon, context)
+
+    expect(wrapper.element.classList).toContain('green--text')
+    expect(wrapper.element.classList).toContain('text--lighten-1')
+  })
+
   it('should render a disabled component', () => {
     const context = functionalContext({ props: { disabled: true } }, 'add')
     const wrapper = mount(VIcon, context)

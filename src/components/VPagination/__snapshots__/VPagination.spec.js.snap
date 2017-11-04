@@ -4,57 +4,43 @@ exports[`VPagination.vue emits an event when next or previous is clicked 1`] = `
 
 <ul class="pagination">
   <li>
-    <a href="#!"
-       class="pagination__navigation"
-    >
+    <button class="pagination__navigation">
       <i class="material-icons icon">
         chevron_left
       </i>
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       1
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       2
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       3
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       4
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       5
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__navigation"
-    >
+    <button class="pagination__navigation">
       <i class="material-icons icon">
         chevron_right
       </i>
-    </a>
+    </button>
   </li>
 </ul>
 
@@ -64,20 +50,16 @@ exports[`VPagination.vue should only render middle of range if length is big and
 
 <ul class="pagination">
   <li>
-    <a href="#!"
-       class="pagination__navigation"
-    >
+    <button class="pagination__navigation">
       <i class="material-icons icon">
         chevron_left
       </i>
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       1
-    </a>
+    </button>
   </li>
   <li>
     <span class="pagination__more">
@@ -85,130 +67,94 @@ exports[`VPagination.vue should only render middle of range if length is big and
     </span>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       41
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       42
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       43
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       44
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       45
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       46
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       47
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       48
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       49
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item pagination__item--active"
-    >
+    <button class="pagination__item pagination__item--active primary">
       50
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       51
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       52
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       53
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       54
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       55
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       56
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       57
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       58
-    </a>
+    </button>
   </li>
   <li>
     <span class="pagination__more">
@@ -216,20 +162,16 @@ exports[`VPagination.vue should only render middle of range if length is big and
     </span>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       100
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__navigation"
-    >
+    <button class="pagination__navigation">
       <i class="material-icons icon">
         chevron_right
       </i>
-    </a>
+    </button>
   </li>
 </ul>
 
@@ -239,90 +181,66 @@ exports[`VPagination.vue should only render start and end of range if length is 
 
 <ul class="pagination">
   <li>
-    <a href="#!"
-       class="pagination__navigation"
-    >
+    <button class="pagination__navigation">
       <i class="material-icons icon">
         chevron_left
       </i>
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       1
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       2
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       3
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       4
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       5
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       6
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       7
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       8
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       9
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       10
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       11
-    </a>
+    </button>
   </li>
   <li>
     <span class="pagination__more">
@@ -330,83 +248,61 @@ exports[`VPagination.vue should only render start and end of range if length is 
     </span>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       91
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       92
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       93
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       94
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       95
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       96
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       97
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       98
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       99
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       100
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__navigation"
-    >
+    <button class="pagination__navigation">
       <i class="material-icons icon">
         chevron_right
       </i>
-    </a>
+    </button>
   </li>
 </ul>
 
@@ -416,20 +312,16 @@ exports[`VPagination.vue should use totalVisible prop if defined 1`] = `
 
 <ul class="pagination">
   <li>
-    <a href="#!"
-       class="pagination__navigation"
-    >
+    <button class="pagination__navigation">
       <i class="material-icons icon">
         chevron_left
       </i>
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       1
-    </a>
+    </button>
   </li>
   <li>
     <span class="pagination__more">
@@ -437,46 +329,34 @@ exports[`VPagination.vue should use totalVisible prop if defined 1`] = `
     </span>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       47
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       48
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       49
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item pagination__item--active"
-    >
+    <button class="pagination__item pagination__item--active primary">
       50
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       51
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       52
-    </a>
+    </button>
   </li>
   <li>
     <span class="pagination__more">
@@ -484,20 +364,16 @@ exports[`VPagination.vue should use totalVisible prop if defined 1`] = `
     </span>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__item"
-    >
+    <button class="pagination__item">
       100
-    </a>
+    </button>
   </li>
   <li>
-    <a href="#!"
-       class="pagination__navigation"
-    >
+    <button class="pagination__navigation">
       <i class="material-icons icon">
         chevron_right
       </i>
-    </a>
+    </button>
   </li>
 </ul>
 

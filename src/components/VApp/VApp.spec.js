@@ -2,18 +2,17 @@ import VApp from '~components/VApp'
 import { test } from '~util/testing'
 
 test('VApp.js', ({ mount }) => {
-  it('should have an application class', () => {
+  it('should match a snapshot', () => {
     const wrapper = mount(VApp)
 
-    expect(wrapper.hasClass('application')).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should have data-app attribute', () => {
     const wrapper = mount(VApp)
+    const app = wrapper.find('.application')[0]
 
-    expect(wrapper.getAttribute('data-app')).toBe('true')
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(app.getAttribute('data-app')).toBe('true')
   })
 
   it('should allow a custom id', () => {
@@ -22,8 +21,9 @@ test('VApp.js', ({ mount }) => {
         id: 'inspire'
       }
     })
+    const app = wrapper.find('.application')[0]
 
-    expect(wrapper.getAttribute('id')).toBe('inspire')
+    expect(app.getAttribute('id')).toBe('inspire')
     expect(wrapper.html()).toMatchSnapshot()
   })
 })

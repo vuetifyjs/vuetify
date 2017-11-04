@@ -27,7 +27,7 @@ theme(selection-control, "input-group--selection-controls")
 .input-group--tab-focused .input-group:focus
   .input-group--selection-controls__ripple
     &:before
-      transform: translate3d(-50%, -50%, 0) scale(1)
+      transform: translate(-50%, -50%) scale(1)
       opacity: $ripple-animation-visible-opacity
 
 /** Input */
@@ -66,9 +66,7 @@ theme(selection-control, "input-group--selection-controls")
 
 /** Label */
 .input-group.input-group--selection-controls label
-  pointer-events: inherit
   cursor: pointer
-  pointer-events: auto
   position: absolute
   left: 32px
   user-select: none
@@ -81,7 +79,7 @@ theme(selection-control, "input-group--selection-controls")
   width: 48px
   cursor: pointer
   position: absolute
-  transform: translate3d(-12px, -50%, 0)
+  transform: translate(-12px, -50%)
   transform-origin: center center
   top: 50%
   left: 0
@@ -95,7 +93,7 @@ theme(selection-control, "input-group--selection-controls")
     border-radius: 50%
     left: 50%
     top: 50%
-    transform: translate3d(-50%, -50%, 0) scale(.3)
+    transform: translate(-50%, -50%) scale(.3)
     opacity: 0
     transition: $ripple-animation-transition
     transform-origin: center center

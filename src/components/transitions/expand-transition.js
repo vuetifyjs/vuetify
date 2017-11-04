@@ -13,7 +13,7 @@ export default function (expandedParentClass = '') {
       el.style.display = 'block'
       expandedParentClass && el._parent.classList.add(expandedParentClass)
 
-      setTimeout(() => (el.style.height = `${el.scrollHeight}px`), 0)
+      setTimeout(() => (el.style.height = `${el.scrollHeight}px`), 100)
     },
 
     afterEnter (el) {

@@ -145,10 +145,15 @@ export default {
         'class': {
           'icon--radio': this.isActive
         },
-        key: this.icon
+        key: this.icon,
+        on: Object.assign({
+          click: this.toggle
+        }, this.$listeners)
       }, this.icon)
     ])
 
-    return this.genWrapper([transition, this.genRipple()])
+    const ripple = this.ripple ? this.genRipple() : null
+
+    return this.genWrapper([transition, ripple])
   }
 }

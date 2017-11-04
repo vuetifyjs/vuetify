@@ -127,4 +127,44 @@ test('VRadio.vue', ({ mount }) => {
 
     expect('immediate parent of v-radio-group').toHaveBeenTipped()
   })
+
+  it('should not render ripple when ripple prop is false', () => {
+    const wrapper = mount(VRadio, {
+      propsData: {
+        ripple: false
+      },
+      provide: {
+        name: () => 'name',
+        registerChild: () => {},
+        unregisterChild: () => {},
+        isMandatory: () => false
+      }
+    })
+
+    const ripple = wrapper.find('.input-group--selection-controls__ripple')
+
+    expect(ripple.length).toBe(0)
+
+    expect('immediate parent of v-radio-group').toHaveBeenTipped()
+  })
+
+  it('should render ripple with data attribute when ripple prop is true', () => {
+    const wrapper = mount(VRadio, {
+      propsData: {
+        ripple: true
+      },
+      provide: {
+        name: () => 'name',
+        registerChild: () => {},
+        unregisterChild: () => {},
+        isMandatory: () => false
+      }
+    })
+
+    const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
+
+    expect(ripple.getAttribute('data-ripple')).toBe('true')
+
+    expect('immediate parent of v-radio-group').toHaveBeenTipped()
+  })
 })
