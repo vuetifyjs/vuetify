@@ -16,7 +16,8 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - [Steve Gehrman](https://cocoatech.com/)
 - [Cycloid](https://www.cycloid.io/)
 - [LiveCasino](https://livecasino.com/)
-- Brad Stewart
+- [Nate Controls](http://www.natecontrols.com/)
+- [Trek10](https://www.trek10.com/)
 
 ### $20+
 - Tibor Nagy
@@ -32,6 +33,7 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Christo Crampton
 - Team Of Monkeys
 - Robin Paolini
+- [Integra CCS](https://www.integraccs.com/)
 
 ### $10+
 
@@ -66,3 +68,4 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Mathieu Boyer
 - Chris Britton
 - Matthew O'Leary
+- Mike Margerum
