@@ -4,11 +4,10 @@
 
 <script>
   export default {
-    name: 'avatars-page',
+    name: 'alerts-page',
 
     data: () => ({
-      namespace: 'Avatars',
-      folder: 'avatars',
+      component: 'v-avatar',
       usage: { file: 'standard' },
       examples: [
         { file: 'advanced' },

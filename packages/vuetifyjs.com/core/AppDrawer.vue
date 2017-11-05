@@ -2,7 +2,6 @@
   v-navigation-drawer(
     app
     persistent
-    clipped
     v-model="appDrawer"
     :enable-resize-watcher="resizeWatcher"
     :disable-route-watcher="!routeWatcher"

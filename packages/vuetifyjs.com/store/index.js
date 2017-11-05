@@ -1,13 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+const api = require('../api/api.js')
+
 Vue.use(Vuex)
 
 export function createStore () {
   return new Vuex.Store({
     state: {
+      api,
       appDrawer: null,
       appFooter: null,
+      currentVersion: null,
       resizeWatcher: false,
       routeWatcher: false
     },

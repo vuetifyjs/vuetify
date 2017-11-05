@@ -1,14 +1,14 @@
 <template lang="pug">
   page(:id="id")
     page-heading
-      template(slot="title") {{ $t(`Components.${this.data.namespace}.header`) }}
-      div(v-html="$t(`Components.${data.namespace}.headerText`)")
+      template(slot="title") {{ $t(`Components.${namespace}.header`) }}
+      div(v-html="$t(`Components.${namespace}.headerText`)")
 
     section#usage
       section-heading(value="Components.ComponentPage.usage")
       component-example(
         :new-in="data.usage.new"
-        :file="`${data.folder}/${data.usage.file}`"
+        :file="`${folder}/${data.usage.file}`"
         :id="`data.usage-${-1}`"
       )
         div(
@@ -16,28 +16,28 @@
           v-html="genDesc(data.usage)"
         )
 
-    section(v-if="data.props")#api
+    section#api
       section-heading(value="Components.ComponentPage.api")
       v-tabs(v-model="tabs" v-bind:scrollable="false").elevation-1
         v-tabs-bar.grey.lighten-3.px-3
           v-tabs-slider(color="primary")
           v-tabs-item(
-            v-for="(p, i) in ['props', 'slots', 'events', 'functional']"
-            v-show="data[p]"
+            v-for="(p, i) in ['props']"
             v-bind:href="`#${p}`"
             v-bind:key="i"
           ) {{ p }}
         v-tabs-items
           v-tabs-content(
-            v-for="(p, i) in ['props', 'slots', 'events', 'functional']"
-            v-if="data[p]"
+            v-for="(p, i) in ['props']"
             v-bind:id="p"
             v-bind:key="i"
           )
             component-parameters(
               v-bind:headers="headers[p]"
-              v-bind:data="data[p]"
               v-bind:type="p"
+              v-bind:items="getItems(p)"
+              v-bind:namespace="namespace"
+              v-bind:components="components"
             )
 
     slot(name="top")
@@ -47,7 +47,7 @@
       component-example(
         :header="`#${i + 1} ${genHeader(example)}`"
         :new-in="example.new"
-        :file="`${data.folder}/${example.file}`"
+        :file="`${folder}/${example.file}`"
         :id="`example-${i + 1}`"
         :key="i"
         v-for="(example, i) in data.examples"
@@ -75,7 +75,7 @@
       },
       headers: {
         props: [
-          { text: 'Option', value: 'prop', align: 'left' },
+          { text: 'Option', value: 'name', align: 'left' },
           { text: 'Type(s)', value: 'type', align: 'left' },
           { text: 'Default', value: 'default', align: 'left' },
           { text: 'Description', value: 'desc', align: 'left' }
@@ -101,12 +101,52 @@
       default: () => {}
     },
 
+    computed: {
+      component () {
+        return this.data.component
+      },
+      components () {
+        return this.data.components || [this.component]
+      },
+      name () {
+        return this.data.component.split('-').slice(1).join('-')
+      },
+      folder () {
+        return `${this.name}${this.data.plural ? '' : 's'}`
+      },
+      namespace () {
+        const namespace = this.name.split('-').map(n => {
+          return n.substr(0, 1).toUpperCase() + n.slice(1)
+        }).join('')
+        
+        if (this.data.plural) return namespace
+
+        return `${namespace}s`
+      },
+    },
+
     methods: {
       genDesc (example) {
-        return this.$t(`Examples.${this.data.namespace}.${example.file}.desc`)
+        return this.$t(`Examples.${this.namespace}.${example.file}.desc`)
       },
       genHeader (example) {
-        return this.$t(`Examples.${this.data.namespace}.${example.file}.header`)
+        return this.$t(`Examples.${this.namespace}.${example.file}.header`)
+      },
+      getItems (name) {
+        switch (name) {
+          case 'props':
+            return this.genComponentProps()
+          break
+        }
+      },
+      genComponentProps () {
+        const props = {}
+
+        this.components.forEach(component => {
+          props[component] = this.$store.state.api[component]
+        })
+
+        return props
       }
     }
   }

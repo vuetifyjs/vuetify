@@ -41,7 +41,7 @@
         const drawer = this.$route.fullPath !== '/'
 
         setTimeout(() => {
-          this.$store.commit('app/ROUTE_WATCHER', !drawer)
+          this.$store.commit('app/ROUTE_WATCHER', true)
           this.$store.commit('app/RESIZE_WATCHER', drawer)
 
           if (drawer) return

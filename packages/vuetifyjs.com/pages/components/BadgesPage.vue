@@ -7,8 +7,7 @@
     name: 'badges-page',
 
     data: () => ({
-      namespace: 'Badges',
-      folder: 'badges',
+      component: 'v-badge',
       usage: { file: 'character' },
       examples: [
         { file: 'icon' },

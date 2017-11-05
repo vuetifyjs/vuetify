@@ -7,8 +7,9 @@
     name: 'breadcrumbs-page',
 
     data: () => ({
-      namespace: 'Breadcrumbs',
-      folder: 'breadcrumbs',
+      plural: true,
+      component: 'v-breadcrumbs',
+      components: ['v-breadcrumbs', 'v-breadcrumbs-item'],
       usage: { file: 'textDividers' },
       examples: [
         { file: 'iconDividers' }
