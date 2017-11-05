@@ -18,7 +18,7 @@
             dark
             to="/getting-started/quick-start"
           ).px-3 {{ $t("Vuetify.Home.getStarted") }}
-          p version 0.16.0
+          p version {{ $store.state.currentVersion }}
 
     section#features
       v-container

@@ -1,3 +1,6 @@
+// Generic
+import Generic from './generic'
+
 // Components
 import Components from './components'
 
@@ -9,6 +12,7 @@ import GettingStarted from './getting-started'
 import Examples from './examples'
 
 export default {
+  Generic,
   Components,
   Vuetify,
   GettingStarted,

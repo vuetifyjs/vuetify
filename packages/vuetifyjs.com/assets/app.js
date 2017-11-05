@@ -16,7 +16,13 @@ import { sync } from 'vuex-router-sync'
 import App from './App.vue'
 import Components from '@components'
 
-Vue.use(Vuetify)
+Vue.use(Vuetify, {
+  theme: {
+    primary: '#1867C0',
+    secondary: '#5CBBF6',
+    accent: '#005CAF'
+  }
+})
 
 Object.values(Components).forEach(Component => {
   Vue.component(Component.name, Component)
@@ -29,6 +35,8 @@ export function createApp (ssrContext) {
   const store = createStore()
   const router = createRouter()
   const i18n = createI18n()
+
+  store.state.currentVersion = Vuetify.version
 
   // sync the router with the vuex store.
   // this registers `store.state.route`

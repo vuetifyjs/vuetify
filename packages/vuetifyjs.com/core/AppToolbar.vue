@@ -2,8 +2,8 @@
   v-toolbar(
     color="primary"
     app
-    clipped
     dark
+    :fixed="fixed"
     :manual-scroll="isManualScrolling"
     ref="toolbar"
   )#app-toolbar
@@ -30,16 +30,17 @@
     name: 'app-toolbar',
 
     data: () => ({
+      fixed: false,
       isManualScrolling: false
     }),
 
     watch: {
       $route (current) {
-        const duration = current.path !== '/'
-          ? 300
-          : 0
+        const fixed = current.path !== '/'
+        const duration = fixed ? 300 : 0
 
         setTimeout(() => {
+          this.fixed = fixed
           this.isManualScrolling = !duration
         }, duration)
       }

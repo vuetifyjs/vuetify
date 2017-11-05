@@ -4,11 +4,11 @@
 
 <script>
   export default {
-    name: 'bottom-navigation-page',
+    name: 'bottom-nav-page',
 
     data: () => ({
-      namespace: 'BottomNavigation',
-      folder: 'bottom-navigation',
+      plural: true,
+      component: 'v-bottom-nav',
       usage: { file: 'iconsAndText' },
       examples: [
         { file: 'colorAndShift' },

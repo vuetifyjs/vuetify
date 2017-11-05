@@ -62,7 +62,7 @@ export function createRouter () {
         route('/components/avatars', 'components/Avatars'),
         route('/components/badges', 'components/Badges'),
         route('/components/breadcrumbs', 'components/Breadcrumbs'),
-        route('/components/bottom-navigation', 'components/BottomNavigation'),
+        route('/components/bottom-navigation', 'components/BottomNav'),
         route('/components/bottom-sheets', 'components/BottomSheets'),
         route('/components/buttons', 'components/Buttons'),
         route('/components/floating-action-buttons', 'components/Fabs'),
