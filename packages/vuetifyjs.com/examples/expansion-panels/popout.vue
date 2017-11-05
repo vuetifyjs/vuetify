@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout row wrap>
-      <v-flex xs12 lg5>
+      <v-flex xs12 lg5 mb-3>
         <v-expansion-panel popout>
           <v-expansion-panel-content v-for="(item,i) in 5" :key="i">
             <div slot="header">Item</div>
