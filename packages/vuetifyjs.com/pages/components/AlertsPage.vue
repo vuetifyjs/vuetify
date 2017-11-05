@@ -8,6 +8,7 @@
 
     data: () => ({
       namespace: 'Alerts',
+      folder: 'alerts',
       usage: { file: 'contextual' },
       examples: [
         { file: 'closable' },
