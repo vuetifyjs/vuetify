@@ -1,5 +1,5 @@
 export default {
-  fullBbleed: {
+  fullBleed: {
     header: 'Full bleed',
     desc: 'Full bleed dividers extend the entire content width.'
   },

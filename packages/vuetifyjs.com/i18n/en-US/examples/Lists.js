@@ -31,7 +31,7 @@ export default {
     header: 'Title with sub-title, actions and action-text',
     desc: `A list can contain a stack within an action. Ripple and router props can be passed through the main v-list, to the v-list-tile or as a property in the items array.`
   },
-  actionWithTitleAndSubtitle: {
+  actionTitleAndSubtitle: {
     header: 'Action with title and sub-title',
     desc: `A list can contain up to 3 lines.`
   },

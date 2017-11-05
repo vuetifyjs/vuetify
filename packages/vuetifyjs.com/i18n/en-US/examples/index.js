@@ -13,7 +13,7 @@ import Dialogs from './Dialogs'
 import Dividers from './Dividers'
 import ExpansionPanels from './ExpansionPanels'
 import Fabs from './Fabs'
-import Footers from './Footers'
+import Footer from './Footer'
 import Forms from './Forms'
 import GridLists from './GridLists'
 import Icons from './Icons'
@@ -51,7 +51,7 @@ export default {
   Dividers,
   ExpansionPanels,
   Fabs,
-  Footers,
+  Footer,
   Forms,
   GridLists,
   Icons,
