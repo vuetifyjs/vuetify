@@ -131,13 +131,46 @@
           items: [
             { href: '/components/alerts', title: 'Alerts' },
             { href: '/components/avatars', title: 'Avatars' },
+            { href: '/components/badges', title: 'Badges' },
+            { href: '/components/breadcrumbs', title: 'Breadcrumbs' },
+            { href: '/components/bottom-navigation', title: 'BottomNavigation' },
+            { href: '/components/bottom-sheets', title: 'BottomSheets' },
+            { href: '/components/buttons', title: 'Buttons' },
+            { href: '/components/floating-action-buttons', title: 'Fabs' },
+            { href: '/components/cards', title: 'Cards' },
+            { href: '/components/carousels', title: 'Carousels' },
+            { href: '/components/chips', title: 'Chips' },
+            { href: '/components/data-tables', title: 'DataTables' },
+            { href: '/components/dialogs', title: 'Dialogs' },
+            { href: '/components/dividers', title: 'Dividers' },
+            { href: '/components/expansion-panels', title: 'ExpansionPanels' },
+            { href: '/components/footer', title: 'Footer' },
             {
               title: 'Form Components',
               group: '/components/form-components',
               items: [
                 { href: '/components/form-components/forms', title: 'Forms' }
               ]
-            }
+            },
+            { href: '/components/grid-lists', title: 'GridLists' },
+            { href: '/components/icons', title: 'Icons' },
+            { href: '/components/lists', title: 'Lists' },
+            { href: '/components/menus', title: 'Menus' },
+            { href: '/components/navigation-drawers', title: 'NavigationDrawers' },
+            { href: '/components/pagination', title: 'Pagination' },
+            { href: '/components/parallax', title: 'Parallax' },
+            { href: '/components/pickers', title: 'Pickers' },
+            { href: '/components/progress', title: 'Progress' },
+            { href: '/components/selects', title: 'Selects' },
+            { href: '/components/selection-controls', title: 'SelectionControls' },
+            { href: '/components/sliders', title: 'Sliders' },
+            { href: '/components/snackbars', title: 'Snackbars' },
+            { href: '/components/steppers', title: 'Steppers' },
+            { href: '/components/subheaders', title: 'Subheaders' },
+            { href: '/components/tabs', title: 'Tabs' },
+            { href: '/components/text-fields', title: 'TextFields' },
+            { href: '/components/toolbars', title: 'Toolbars' },
+            { href: '/components/tooltips', title: 'Tooltips' }
           ]
         }
       ]
@@ -172,7 +205,7 @@
       aside.navigation-drawer ul li
         font-size 14px
         color: #373737
-        
+
       &-label
         color #676767
         margin: 3em 0 .5em

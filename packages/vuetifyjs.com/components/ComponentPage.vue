@@ -8,7 +8,7 @@
       section-heading(value="Components.ComponentPage.usage")
       component-example(
         :new-in="data.usage.new"
-        :file="`${data.namespace.toLowerCase()}/${data.usage.file}`"
+        :file="`${data.folder}/${data.usage.file}`"
         :id="`data.usage-${-1}`"
       )
         div(
@@ -47,7 +47,7 @@
       component-example(
         :header="`#${i + 1} ${genHeader(example)}`"
         :new-in="example.new"
-        :file="`${data.namespace.toLowerCase()}/${example.file}`"
+        :file="`${data.folder}/${example.file}`"
         :id="`example-${i + 1}`"
         :key="i"
         v-for="(example, i) in data.examples"
