@@ -7,8 +7,10 @@
     name: 'progress-page',
 
     data: () => ({
-      namespace: 'Progress',
-      folder: 'progress',
+      component: 'v-progress-circular',
+      components: ['v-progress-linear'],
+      plural: true,
+      name: 'progress',
       usage: { file: 'default' },
       examples: [
         { file: 'circularColored' },

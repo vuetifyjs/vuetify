@@ -1,7 +1,7 @@
 <template>
   <div>
-    <v-tabs dark v-model="active">
-      <v-tabs-bar class="cyan">
+    <v-tabs v-model="active">
+      <v-tabs-bar class="cyan" dark>
         <v-tabs-item
           v-for="tab in tabs"
           :key="tab"

@@ -7,9 +7,8 @@
     name: 'navigation-drawers-page',
 
     data: () => ({
-      namespace: 'NavigationDrawers',
-      folder: 'navigation-drawers',
-      usage: { file: 'default' },
+      component: 'v-navigation-drawer',
+      usage: { file: 'permanent' },
       examples: [
         { file: 'permanentClipped' },
         { file: 'permanentFloating' },

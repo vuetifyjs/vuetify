@@ -7,8 +7,7 @@
     name: 'menus-page',
 
     data: () => ({
-      namespace: 'Menus',
-      folder: 'menus',
+      component: 'v-menu',
       usage: { file: 'activator' },
       examples: [
         { file: 'absolute' },

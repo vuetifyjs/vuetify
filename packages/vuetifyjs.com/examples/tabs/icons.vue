@@ -1,6 +1,6 @@
 <template>
-  <v-tabs dark fixed icons centered>
-    <v-tabs-bar class="cyan">
+  <v-tabs fixed icons centered>
+    <v-tabs-bar dark color="cyan">
       <v-tabs-slider color="yellow"></v-tabs-slider>
       <v-tabs-item href="#tab-1">
         <v-icon>phone</v-icon>

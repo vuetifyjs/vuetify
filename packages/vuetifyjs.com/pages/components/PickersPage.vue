@@ -7,8 +7,9 @@
     name: 'pickers-page',
 
     data: () => ({
-      namespace: 'Pickers',
-      folder: 'pickers',
+      component: 'v-date-picker',
+      components: ['v-time-picker'],
+      name: 'picker',
       usage: { file: 'dateLight' },
       examples: [
         { file: 'dateDark' },

@@ -7,8 +7,8 @@
     name: 'carousels-page',
 
     data: () => ({
-      namespace: 'Carousels',
-      folder: 'carousels',
+      component: 'v-carousel',
+      components: ['v-carousel-item'],
       usage: { file: 'default' },
       examples: [
         { file: 'customTransition' },

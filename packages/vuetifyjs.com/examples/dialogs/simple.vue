@@ -2,7 +2,7 @@
   <div>
     <v-layout row justify-center>
       <v-btn color="primary" dark @click.stop="dialog = true">Open Dialog 1</v-btn>
-       <v-btn color="primary" dark @click.stop="dialog2 = true">Open Dialog 2</v-btn>
+      <v-btn color="primary" dark @click.stop="dialog2 = true">Open Dialog 2</v-btn>
       <v-btn color="primary" dark @click.stop="dialog3 = true">Open Dialog 3</v-btn>
       <v-menu bottom offset-y>
         <v-btn slot="activator">A Menu</v-btn>
@@ -12,8 +12,13 @@
           </v-list-tile>
         </v-list>
       </v-menu>
-    <v-dialog v-model="dialog" fullscreen transition="dialog-bottom-transition" :overlay=false
-scrollable>
+    <v-dialog
+      v-model="dialog"
+      fullscreen
+      transition="dialog-bottom-transition"
+      :overlay=false
+      scrollable
+    >
       <v-card>
           <v-toolbar style="flex: 0 0 auto;" dark class="primary">
           <v-btn icon @click.native="dialog = false" dark>
@@ -91,50 +96,47 @@ scrollable>
         
           <div style="flex: 1 1 auto;"></div>
       </v-card>
-      
     </v-dialog>
-       <v-dialog v-model="dialog2">
-            <v-card> 
-        <v-card-title>
+      <v-dialog v-model="dialog2" max-width="500px">
+        <v-card> 
+          <v-card-title>
             Dialog 2
           </v-card-title>
-         <v-card-text>
-           <v-btn color="primary" dark @click.stop="dialog3 = !dialog3">Open Dialog 3</v-btn>
-           <v-select
+          <v-card-text>
+            <v-btn color="primary" dark @click.stop="dialog3 = !dialog3">Open Dialog 3</v-btn>
+            <v-select
               v-bind:items="select"
               label="A Select List"
               item-value="text"
             ></v-select>
-           </v-card-text>
+          </v-card-text>
         <v-card-actions>
-            <v-btn color="primary" flat @click.stop="dialog2=false">Close</v-btn>
+          <v-btn color="primary" flat @click.stop="dialog2=false">Close</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
-      
-      </v-dialog>
-       <v-dialog v-model="dialog3">
-            <v-card> 
-        <v-card-title>
-          <span>Dialog 3</span>
-          <v-spacer></v-spacer>
-              <v-menu bottom left>
-                <v-btn icon slot="activator">
-                  <v-icon>more_vert</v-icon>
-                </v-btn>
-                <v-list>
-                  <v-list-tile v-for="(item, i) in items" :key="i" @click="">
-                    <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                  </v-list-tile>
-                </v-list>
-              </v-menu>
+      <v-dialog v-model="dialog3" max-width="500px">
+        <v-card> 
+          <v-card-title>
+            <span>Dialog 3</span>
+            <v-spacer></v-spacer>
+            <v-menu bottom left>
+              <v-btn icon slot="activator">
+                <v-icon>more_vert</v-icon>
+              </v-btn>
+              <v-list>
+                <v-list-tile v-for="(item, i) in items" :key="i" @click="">
+                  <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                </v-list-tile>
+              </v-list>
+            </v-menu>
           </v-card-title>
-        <v-card-actions>
+          <v-card-actions>
             <v-btn color="primary" flat @click.stop="dialog3=false">Close</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
-  </v-layout>
+    </v-layout>
   </div>
 </template>
 

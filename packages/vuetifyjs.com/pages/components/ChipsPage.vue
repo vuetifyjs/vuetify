@@ -7,8 +7,7 @@
     name: 'chips-page',
 
     data: () => ({
-      namespace: 'Chips',
-      folder: 'chips',
+      component: 'v-chip',
       usage: { file: 'default' },
       examples: [
         { file: 'colored' },

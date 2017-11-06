@@ -47,7 +47,9 @@
     },
 
     mounted () {
-      this.isManualScrolling = this.$route.path === '/'
+      const fixed = this.$route.path !== '/'
+      this.isManualScrolling = !fixed
+      this.fixed = fixed
     }
   }
 </script>

@@ -7,8 +7,8 @@
     name: 'parallax-page',
 
     data: () => ({
-      namespace: 'Parallax',
-      folder: 'parallax',
+      plural: true,
+      component: 'v-parallax',
       usage: { file: 'default' },
       examples: [
         { file: 'content' },

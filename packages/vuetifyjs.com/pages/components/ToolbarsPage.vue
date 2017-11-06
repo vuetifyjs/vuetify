@@ -7,8 +7,13 @@
     name: 'toolbar-page',
 
     data: () => ({
-      namespace: 'Toolbar',
-      folder: 'toolbar',
+      component: 'v-toolbar',
+      components: [
+        'v-toolbar-title',
+        'v-toolbar-items',
+        'v-toolbar-side-icon',
+        'v-system-bar'
+      ],
       usage: { file: 'default' },
       examples: [
         { file: 'appBar' },

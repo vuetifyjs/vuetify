@@ -1,5 +1,5 @@
 <template>
-  <v-tabs dark fixed centered>
+  <v-tabs fixed centered>
     <v-toolbar extended color="cyan" dark>
       <v-toolbar-side-icon></v-toolbar-side-icon>
       <v-spacer></v-spacer>
@@ -11,7 +11,7 @@
       </v-btn>
       <v-toolbar-title slot="extension" class="display-2">Page title</v-toolbar-title>
     </v-toolbar>
-    <v-tabs-bar class="cyan">
+    <v-tabs-bar color="cyan" dark>
       <v-tabs-slider color="yellow"></v-tabs-slider>
       <v-tabs-item
         v-for="i in 3"
@@ -44,5 +44,4 @@
     }
   }
 </script>
-
 

@@ -7,10 +7,17 @@
     name: 'selection-controls-page',
 
     data: () => ({
-      namespace: 'Selection-controls',
-      folder: 'selection-controls',
-      usage: { file: 'checkboxesBoolean' },
+      component: 'v-checkbox',
+      components: [
+        'v-radio-group',
+        'v-radio',
+        'v-switch'
+      ],
+      name: 'selection-controls',
+      plural: true,
+      usage: { file: 'example' },
       examples: [
+        { file: 'checkboxesBoolean' },
         { file: 'checkboxesArray' },
         { file: 'checkboxesStates' },
         { file: 'checkboxesColors' },

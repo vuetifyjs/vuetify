@@ -7,8 +7,8 @@
     name: 'cards-page',
 
     data: () => ({
-      namespace: 'Cards',
-      folder: 'cards',
+      component: 'v-card',
+      components: ['v-card-media', 'v-card-title', 'v-card-actions'],
       usage: { file: 'components' },
       examples: [
         { file: 'mediaWithText' },

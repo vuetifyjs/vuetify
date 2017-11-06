@@ -71,11 +71,16 @@
         const items = this.items[this.currentComponent] || { props: [] }
 
         return items.props.map(item => {
+          const def = item.default
+          const type = this.$t(`Generic.Types.${item.type}`)
           let description = ''
 
+          const specialLevelDesc = `Components.${this.namespace}.special.props.${this.currentComponent}.${item.name}`
           const componentLevelDesc = `Components.${this.namespace}.props.${item.name}`
           const genericDesc = `Generic.Props.${item.name}`
-          if (this.$te(componentLevelDesc)) {
+          if (this.$te(specialLevelDesc)) {
+            description = this.$t(specialLevelDesc)
+          } else if (this.$te(componentLevelDesc)) {
             description = this.$t(componentLevelDesc)
           } else if (this.$te(genericDesc)) {
             description = this.$t(genericDesc)
@@ -83,8 +88,8 @@
 
           return {
             name: this.parseName(item.name),
-            type: this.$t(`Generic.Types.${item.type}`),
-            default: item.default,
+            type,
+            default: type === 'Boolean' && def === 'undefined' ? 'false' : def,
             description
           }
         })

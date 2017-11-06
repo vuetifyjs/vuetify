@@ -7,8 +7,8 @@
     name: 'grid-lists-page',
 
     data: () => ({
-      namespace: 'GridLists',
-      folder: 'grid-lists',
+      component: 'v-container',
+      components: ['v-layout', 'v-flex', 'v-spacer'],
       usage: { file: 'default' },
       examples: [
         { file: 'subheader' }

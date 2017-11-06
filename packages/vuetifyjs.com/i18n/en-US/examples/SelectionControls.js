@@ -1,4 +1,8 @@
 export default {
+  example: {
+    header: 'Default examples',
+    desc: ''
+  },
   checkboxesBoolean: {
     header: "Checkboxes - Boolean",
     desc: ''

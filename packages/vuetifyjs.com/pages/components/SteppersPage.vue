@@ -7,8 +7,12 @@
     name: 'steppers-page',
 
     data: () => ({
-      namespace: 'Steppers',
-      folder: 'steppers',
+      component: 'v-stepper',
+      components: [
+        'v-stepper-step',
+        'v-stepper-content',
+        'v-stepper-header'
+      ],
       usage: { file: 'example' },
       examples: [
         { file: 'editable' },

@@ -1,7 +1,7 @@
 <template>
   <v-card height="200px">
     <div class="headline text-xs-center pa-5">Active: {{ e1 }}</div>
-    <v-bottom-nav absolute :value="true" :active.sync="e1" class="transparent">
+    <v-bottom-nav absolute :value="true" :active.sync="e1" color="transparent">
       <v-btn flat color="teal" value="recent">
         <span>Recent</span>
         <v-icon>history</v-icon>

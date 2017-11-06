@@ -7,8 +7,7 @@
     name: 'text-fields-page',
 
     data: () => ({
-      namespace: 'TextFields',
-      folder: 'text-fields',
+      component: 'v-text-field',
       usage: { file: 'label' },
       examples: [
         { file: 'labelDark' },
@@ -21,7 +20,7 @@
         { file: 'characterCounter' },
         { file: 'password' },
         { file: 'validation' },
-        { file: 'FullWidthWithCharacterCounter' },
+        { file: 'fullWidthWithCharacterCounter' },
         { file: 'requiredFields' },
         { file: 'hint' },
         { file: 'prefixesAndSuffixes' },

@@ -1,6 +1,6 @@
 <template>
-  <v-tabs dark fixed centered>
-    <v-tabs-bar class="cyan">
+  <v-tabs fixed centered>
+    <v-tabs-bar class="cyan" dark>
       <v-tabs-slider class="yellow"></v-tabs-slider>
       <v-tabs-item
         v-for="i in items"

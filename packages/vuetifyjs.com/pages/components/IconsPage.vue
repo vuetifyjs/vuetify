@@ -7,8 +7,7 @@
     name: 'icons-page',
 
     data: () => ({
-      namespace: 'Icons',
-      folder: 'icons',
+      component: 'v-icon',
       usage: { file: 'standard' },
       examples: [
         { file: 'fontAwesome' },
