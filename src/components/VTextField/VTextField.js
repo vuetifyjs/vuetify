@@ -117,13 +117,8 @@ export default {
       }
     },
     value (val) {
-      if (this.internalChange) {
-        this.internalChange = false
-        return
-      }
-
-      // Value was changed externally, update lazy
-      if (this.mask) {
+      if (this.internalChange) this.internalChange = false
+      else if (this.mask) {
         const masked = this.maskText(this.unmaskText(val))
         this.lazyValue = this.unmaskText(masked)
 
@@ -132,9 +127,7 @@ export default {
           this.$refs.input.value = masked
           this.$emit('input', this.lazyValue)
         })
-      } else {
-        this.lazyValue = val
-      }
+      } else this.lazyValue = val
 
       !this.validateOnBlur && this.validate()
       this.shouldAutoGrow && this.calculateInputHeight()
