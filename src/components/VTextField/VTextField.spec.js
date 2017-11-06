@@ -339,4 +339,16 @@ test('VTextField.js', ({ mount }) => {
 
     expect(wrapper.vm.$refs.input.value).toBe('0')
   })
+
+  it('should reset internal change on blur', async () => {
+    const wrapper = mount(VTextField)
+
+    wrapper.setProps({ value: 'foo' })
+    wrapper.vm.internalChange = true
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.internalChange).toBe(true)
+    wrapper.vm.blur()
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.internalChange).toBe(false)
+  })
 })

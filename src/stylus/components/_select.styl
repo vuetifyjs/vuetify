@@ -1,4 +1,18 @@
 @import '../bootstrap'
+@import '../theme'
+
+selects($material)
+  &.input-group
+    &--editable,
+    &--overflow,
+    &--segmented
+      .input-group__input:hover
+        background: $material.cards
+      
+      &.input-group--focused .input-group__input
+        background: $material.cards
+
+theme(selects, "input-group--select")
 
 .input-group--select
   // TODO: revisit this
@@ -46,7 +60,7 @@
 
     &__comma
       display: inline-flex
-      font-size: 16px
+      font-size: $input-font-size
       padding: 3px 4px 3px 0
 
       &--active

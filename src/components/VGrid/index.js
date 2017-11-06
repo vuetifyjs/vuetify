@@ -16,6 +16,7 @@ export {
 
 const VGrid = {}
 
+/* istanbul ignore next */
 VGrid.install = function install (Vue) {
   Vue.component(VContent.name, VContent)
   Vue.component(VContainer.name, VContainer)

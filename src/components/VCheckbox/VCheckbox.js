@@ -72,7 +72,10 @@ export default {
         'class': {
           'icon--checkbox': this.icon === 'check_box'
         },
-        key: this.icon
+        key: this.icon,
+        on: Object.assign({
+          click: this.toggle
+        }, this.$listeners)
       }, this.icon)
     ])
 
@@ -87,6 +90,8 @@ export default {
       }
     }
 
-    return this.genInputGroup([transition, this.genRipple()], data)
+    const ripple = this.ripple ? this.genRipple() : null
+
+    return this.genInputGroup([transition, ripple], data)
   }
 }

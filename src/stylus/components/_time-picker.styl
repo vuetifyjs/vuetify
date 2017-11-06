@@ -101,6 +101,8 @@ theme(date-picker, "picker--time")
     left: calc(50% - 1px)
     transform-origin: center bottom
     position: absolute
+    will-change: transform
+    z-index: 1
 
     &:before
       background: transparent
@@ -114,7 +116,7 @@ theme(date-picker, "picker--time")
       position: absolute
       top: -3%
       left: 50%
-      transform: translate3d(-50%, -50%, 0)
+      transform: translate(-50%, -50%)
 
     &:after
       content: ''
@@ -127,7 +129,7 @@ theme(date-picker, "picker--time")
       border-style: solid
       border-color: inherit
       background-color: inherit
-      transform: translate3d(calc(-50%, - 1px), -50%, 0)
+      transform: translate(calc(-50%, - 1px), -50%)
 
   > span
     align-items: center
@@ -155,7 +157,7 @@ theme(date-picker, "picker--time")
       left: 50%
       height: 14px
       width: 14px
-      transform: translate3d(-50%, -50%, 0)
+      transform: translate(-50%, -50%)
 
     &:after, &:before
       height: $time-picker-number-font-size * 2.5
@@ -164,6 +166,7 @@ theme(date-picker, "picker--time")
     &.active
       color: #fff
       cursor: default
+      z-index: 2
 
     &.disabled
       pointer-events: none

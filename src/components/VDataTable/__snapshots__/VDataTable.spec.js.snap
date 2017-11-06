@@ -153,8 +153,6 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
                   </i>
                 </div>
                 <div class="input-group__details">
-                  <div class="input-group__messages">
-                  </div>
                 </div>
               </div>
             </div>

@@ -3,6 +3,13 @@ require('../../stylus/components/_content.styl')
 export default {
   name: 'v-content',
 
+  props: {
+    tag: {
+      type: String,
+      default: 'main'
+    }
+  },
+
   computed: {
     styles () {
       const {
@@ -31,6 +38,10 @@ export default {
       style: this.styles
     }
 
-    return h('main', data, this.$slots.default)
+    return h('div', {
+      staticClass: 'content--wrap'
+    }, [
+      h(this.tag, data, this.$slots.default)
+    ])
   }
 }

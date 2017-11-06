@@ -202,7 +202,8 @@ export default {
           'class': 'input-group__input'
         }, wrapperChildren)
       )
-      detailsChildren.push(this.genMessages())
+
+      !this.hideDetails && detailsChildren.push(this.genMessages())
 
       if (this.counter) {
         detailsChildren.push(this.genCounter())

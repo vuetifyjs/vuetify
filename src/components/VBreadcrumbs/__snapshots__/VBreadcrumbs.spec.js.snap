@@ -13,20 +13,12 @@ exports[`VBreadcrumbs.js should inject slot to children 1`] = `
   <li>
     <a href="javascript:;"
        class="breadcrumbs__item"
+       data-ripple="false"
     >
     </a>
   </li>
-  <li>
-    <a href="javascript:;"
-       class="breadcrumbs__item"
-    >
-    </a>
-  </li>
-  <li>
-    <a href="javascript:;"
-       class="breadcrumbs__item"
-    >
-    </a>
+  <li class="breadcrumbs__divider">
+    /
   </li>
   <li>
     <a href="javascript:;"
@@ -35,6 +27,64 @@ exports[`VBreadcrumbs.js should inject slot to children 1`] = `
     >
     </a>
   </li>
+  <li class="breadcrumbs__divider">
+    /
+  </li>
+  <li>
+    <a href="javascript:;"
+       class="breadcrumbs__item"
+       data-ripple="false"
+    >
+    </a>
+  </li>
+  <li class="breadcrumbs__divider">
+    /
+  </li>
+  <li>
+    <a href="javascript:;"
+       class="breadcrumbs__item"
+       data-ripple="false"
+    >
+    </a>
+  </li>
+</ul>
+
+`;
+
+exports[`VBreadcrumbs.js should use a custom divider slot 1`] = `
+
+<ul class="breadcrumbs">
+  <li>
+    <a href="javascript:;"
+       class="breadcrumbs__item"
+       data-ripple="false"
+    >
+    </a>
+  </li>
+  <li class="breadcrumbs__divider">
+    /divider/
+  </li>
+  <li>
+    <a href="javascript:;"
+       class="breadcrumbs__item"
+       data-ripple="false"
+    >
+    </a>
+  </li>
+</ul>
+
+`;
+
+exports[`VBreadcrumbs.js should use custom justify props 1`] = `
+
+<ul class="breadcrumbs">
+</ul>
+
+`;
+
+exports[`VBreadcrumbs.js should use custom justify props 2`] = `
+
+<ul class="breadcrumbs">
 </ul>
 
 `;

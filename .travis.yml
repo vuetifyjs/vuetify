@@ -2,11 +2,23 @@ language: node_js
 node_js:
   - "8"
 
+env:
+  global:
+    - CC_TEST_REPORTER_ID=b429c71716cd1302821cad1fdc0dd6ea964144ec975e3aad40cbaf1235afb775
+
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+
 script:
   - yarn
   - yarn run lint
-  - yarn run test
+  - yarn run test:coverage
   - yarn run build
+
+after_success:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
 cache:
   yarn: true
@@ -14,7 +26,8 @@ cache:
 before_deploy:
   - rm -rf release
   - mkdir -p release
-  - for file in ./dist/*; do cp "$file" "${file/dist\/vuetify/release\/vuetify-${TRAVIS_TAG}}"; done
+  - for file in ./dist/*; do cp "$file" "${file/dist\/vuetify/release/vuetify-${TRAVIS_TAG}}"; done
+  - zip -jr "release/vuetify-${TRAVIS_TAG}.zip" release/*
 
 deploy:
   - provider: npm
@@ -28,10 +41,7 @@ deploy:
   - provider: releases
     api_key: $GITHUB_API_KEY
     files:
-      - "release/vuetify-${TRAVIS_TAG}.css"
-      - "release/vuetify-${TRAVIS_TAG}.js"
-      - "release/vuetify-${TRAVIS_TAG}.min.css"
-      - "release/vuetify-${TRAVIS_TAG}.min.js"
+      - "release/vuetify-${TRAVIS_TAG}.zip"
     skip_cleanup: true
     on:
       tags: true

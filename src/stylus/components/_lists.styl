@@ -20,6 +20,11 @@ list($material)
   .list__tile__mask
     color: $material.text.disabled
 
+  &--group
+    .list__tile--active
+      .list__tile__title
+        color: $material.text.link
+
 theme(list, "list")
 
 .list
@@ -220,10 +225,6 @@ theme(list, "list")
 
     .list__tile
       padding-left: $list-item-left-padding
-
-    .list__tile--active
-      .list__tile__title
-        color: $theme.primary
 
     &__header
       > li:first-child

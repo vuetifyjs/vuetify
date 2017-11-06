@@ -24,7 +24,7 @@ export default {
           }
         }
       }, [
-        this.yearFormat(`${this.year}`, this.locale),
+        this.formatters.year(`${this.year}`),
         this.genYearIcon()
       ])
     },

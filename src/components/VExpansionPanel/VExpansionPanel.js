@@ -26,7 +26,7 @@ export default {
       return this.$children.filter(c => {
         if (!c.$options) return
 
-        return c.$options._componentTag === 'v-expansion-panel-content'
+        return c.$options.name === 'v-expansion-panel-content'
       })
     },
     panelClick (uid) {

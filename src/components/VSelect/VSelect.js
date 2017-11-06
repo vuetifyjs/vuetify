@@ -249,7 +249,10 @@ export default {
       // Populate selected items
       this.genSelectedItems(val)
 
-      this.$emit('input', val)
+      // Only fire an update
+      // if values do not
+      // match
+      val !== this.value && this.$emit('input', val)
 
       // When inputValue is changed
       // and combobox is true set
@@ -258,7 +261,7 @@ export default {
     },
     isActive (val) {
       if (val) {
-        this.searchValue = this.getText(this.selectedItem)
+        if (!this.chips) this.searchValue = this.getText(this.selectedItem)
         return
       }
 
@@ -266,7 +269,9 @@ export default {
         this.updateTags(this.searchValue)
       }
 
-      this.searchValue = null
+      // Only set search value if
+      // there is a value to set
+      this.searchValue && (this.searchValue = null)
       this.menuIsActive = false
       this.isFocused = false
       this.selectedIndex = -1
@@ -280,20 +285,6 @@ export default {
         }
       })
     },
-    isFocused (val) {
-      // When focusing the input
-      // re-set the caret position
-      if (this.isAutocomplete &&
-        !this.mask &&
-        !this.isMultiple &&
-        val
-      ) {
-        this.setCaretPosition(this.currentRange)
-        this.shouldBreak && this.$nextTick(() => {
-          this.$refs.input.scrollLeft = this.$refs.input.scrollWidth
-        })
-      }
-    },
     items (val) {
       if (this.cacheItems) {
         this.cachedItems = this.filterDuplicates(this.cachedItems.concat(val))
@@ -301,7 +292,11 @@ export default {
 
       this.resetMenuIndex()
 
-      this.searchValue && this.$nextTick(() => this.setMenuIndex(0))
+      // Tags and combobox should not
+      // pre-select the first entry
+      if (this.searchValue && !this.isAnyValueAllowed) {
+        this.$nextTick(() => this.setMenuIndex(0))
+      }
 
       this.genSelectedItems()
     },
@@ -317,7 +312,7 @@ export default {
     searchInput (val) {
       this.searchValue = val
     },
-    searchValue (val) {
+    searchValue (val, prev) {
       // Wrap input to next line if overflowing
       if (this.$refs.input.scrollWidth > this.$refs.input.clientWidth) {
         this.shouldBreak = true
@@ -336,10 +331,12 @@ export default {
 
       // Only reset list index
       // if typing in search
-      val && this.resetMenuIndex()
+      val || prev && this.resetMenuIndex()
 
       this.$nextTick(() => {
-        val ? this.setMenuIndex(0) : this.resetMenuIndex()
+        if (val && !this.isAnyValueAllowed) {
+          this.setMenuIndex(0)
+        }
       })
     },
     selectedItems () {
@@ -408,7 +405,9 @@ export default {
             ? this.selectedIndex
             : -1
 
-        this.selectItem(this.selectedItems[this.selectedIndex])
+        this.combobox
+          ? this.inputValue = null
+          : this.selectItem(this.selectedItems[this.selectedIndex])
         this.selectedIndex = newIndex
       }
     },
@@ -436,6 +435,12 @@ export default {
 
       if (this.$refs.input && this.isAutocomplete) {
         this.$refs.input.focus()
+        this.$nextTick(() => {
+          this.$refs.input.select()
+          this.shouldBreak && (
+            this.$refs.input.scrollLeft = this.$refs.input.scrollWidth
+          )
+        })
       } else {
         this.$el.focus()
       }
@@ -585,9 +590,9 @@ export default {
         this.selectedItems = selectedItems
       }
 
-      this.searchValue = !this.isMultiple || this.chips
+      this.searchValue = !this.isMultiple && !this.chips
         ? this.getText(this.selectedItem)
-        : ''
+        : null
 
       this.$emit('change', this.inputValue)
 
@@ -604,7 +609,9 @@ export default {
         this.setCaretPosition(this.currentRange)
 
         requestAnimationFrame(() => {
-          (!this.isAutocomplete || this.searchValue) ? this.setMenuIndex(savedIndex) : this.resetMenuIndex()
+          if (savedIndex > -1) {
+            this.setMenuIndex(savedIndex)
+          }
         })
       })
     },

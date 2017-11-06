@@ -4,16 +4,23 @@ import Ripple from '../directives/ripple'
 export default {
   directives: { Ripple },
 
+  props: {
+    ripple: {
+      type: [Boolean, Object],
+      default: true
+    }
+  },
+
   methods: {
     genRipple () {
       return this.$createElement('div', {
         'class': this.rippleClasses || 'input-group--selection-controls__ripple',
-        on: Object.assign({}, {
+        on: Object.assign({
           click: this.toggle
         }, this.$listeners),
         directives: [{
           name: 'ripple',
-          value: !this.disabled && { center: true }
+          value: this.ripple && !this.disabled && { center: true }
         }]
       })
     }
