@@ -1,0 +1,1 @@
+module.exports = {"v-bottom-sheet":{"props":[{"name":"inset","type":"Boolean","default":"undefined"},{"name":"value","type":"undefined","default":"undefined"}]}}

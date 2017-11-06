@@ -1,0 +1,22 @@
+{
+  "name": "vuetify-helper-json",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "debug": "babel-node inspect src/index.js",
+    "build": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-watch": "^0.5.5"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "vue": "^2.5.3",
+    "vuetify": "^0.17.0-beta.2"
+  }
+}
