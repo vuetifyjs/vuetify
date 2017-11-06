@@ -21,7 +21,7 @@ export default {
 
   data () {
     return {
-      isActive: this.value,
+      isActive: !!this.value,
       isBooted: false,
       isMobile: false,
       touchArea: {
@@ -35,7 +35,7 @@ export default {
     absolute: Boolean,
     clipped: Boolean,
     disableRouteWatcher: Boolean,
-    enableResizeWatcher: Boolean,
+    disableResizeWatcher: Boolean,
     height: String,
     floating: Boolean,
     miniVariant: Boolean,
@@ -167,13 +167,13 @@ export default {
 
   methods: {
     init () {
-      if (this.value != null) this.isActive = this.value
-      else if (this.permanent) this.isActive = true
-      else if (this.isMobile) this.isActive = false
-      else if (!this.value &&
-        (this.persistent || this.temporary)
-      ) this.isActive = false
-      else this.isActive = true
+      if (this.permanent) {
+        this.isActive = true
+      } else if (this.value == null) {
+        this.onResize()
+      } else {
+        this.isActive = this.value
+      }
 
       setTimeout(() => (this.isBooted = true), 0)
     },
@@ -200,7 +200,11 @@ export default {
         },
         {
           name: 'resize',
-          value: this.onResize
+          value: {
+            debounce: 200,
+            quiet: true,
+            value: this.onResize
+          }
         }
       ]
 
@@ -216,7 +220,7 @@ export default {
       return directives
     },
     onResize () {
-      if (!this.enableResizeWatcher ||
+      if (this.disableResizeWatcher ||
         this.permanent ||
         this.temporary
       ) return
