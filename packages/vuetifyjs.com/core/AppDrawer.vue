@@ -36,6 +36,8 @@
           v-list-tile(slot="item" ripple)
             v-list-tile-content
               v-list-tile-title {{ item.title }}
+            v-list-tile-action
+              v-icon keyboard_arrow_down
           v-list-tile(
             v-for="subItem in item.items" v-bind:key="subItem.title"
             v-bind="{ \
@@ -50,7 +52,7 @@
               v-list-tile-title {{ subItem.title }}
             v-list-tile-action(v-if="subItem.action")
               v-icon(dark :class="[subItem.actionClass || 'success--text']") {{ subItem.action }}
-        v-subheader(v-else-if="item.header" dark) {{ item.header }}
+        v-subheader(v-else-if="item.header").primary--text {{ item.header }}
         v-divider(v-else-if="item.divider")
         v-list-tile(
           v-bind="{ \
@@ -81,6 +83,7 @@
   export default {
     data: () => ({
       items: [
+        { header: 'Core documentation' },
         {
           title: 'Getting Started',
           group: '/getting-started',
@@ -132,44 +135,68 @@
             { href: '/components/avatars', title: 'Avatars' },
             { href: '/components/badges', title: 'Badges' },
             { href: '/components/breadcrumbs', title: 'Breadcrumbs' },
-            { href: '/components/bottom-navigation', title: 'BottomNavigation' },
-            { href: '/components/bottom-sheets', title: 'BottomSheets' },
+            { href: '/components/bottom-navigation', title: 'Bottom navigation' },
+            { href: '/components/bottom-sheets', title: 'Bottom sheets' },
             { href: '/components/buttons', title: 'Buttons' },
-            { href: '/components/floating-action-buttons', title: 'Fabs' },
+            { href: '/components/floating-action-buttons', title: 'Buttons: Floating Action Buttons' },
             { href: '/components/cards', title: 'Cards' },
             { href: '/components/carousels', title: 'Carousels' },
             { href: '/components/chips', title: 'Chips' },
-            { href: '/components/data-tables', title: 'DataTables' },
+            { href: '/components/data-tables', title: 'Data tables' },
             { href: '/components/dialogs', title: 'Dialogs' },
             { href: '/components/dividers', title: 'Dividers' },
-            { href: '/components/expansion-panels', title: 'ExpansionPanels' },
+            { href: '/components/expansion-panels', title: 'Expansion panels' },
             { href: '/components/footer', title: 'Footer' },
-            {
-              title: 'Form Components',
-              group: '/components/form-components',
-              items: [
-                { href: '/components/form-components/forms', title: 'Forms' }
-              ]
-            },
-            { href: '/components/grid-lists', title: 'GridLists' },
+            { href: '/components/forms', title: 'Forms' },
+            { href: '/components/grid-lists', title: 'Grid lists' },
             { href: '/components/icons', title: 'Icons' },
             { href: '/components/lists', title: 'Lists' },
             { href: '/components/menus', title: 'Menus' },
-            { href: '/components/navigation-drawers', title: 'NavigationDrawers' },
+            { href: '/components/navigation-drawers', title: 'Navigation drawers' },
             { href: '/components/pagination', title: 'Pagination' },
             { href: '/components/parallax', title: 'Parallax' },
             { href: '/components/pickers', title: 'Pickers' },
             { href: '/components/progress', title: 'Progress' },
             { href: '/components/selects', title: 'Selects' },
-            { href: '/components/selection-controls', title: 'SelectionControls' },
+            { href: '/components/selection-controls', title: 'Selection controls' },
             { href: '/components/sliders', title: 'Sliders' },
             { href: '/components/snackbars', title: 'Snackbars' },
             { href: '/components/steppers', title: 'Steppers' },
             { href: '/components/subheaders', title: 'Subheaders' },
             { href: '/components/tabs', title: 'Tabs' },
-            { href: '/components/text-fields', title: 'TextFields' },
+            { href: '/components/text-fields', title: 'Text fields' },
             { href: '/components/toolbars', title: 'Toolbars' },
             { href: '/components/tooltips', title: 'Tooltips' }
+          ]
+        },
+        {
+          title: 'Directives',
+          group: 'directives',
+          items: [
+            { href: '/resizing', title: 'Resizing' },
+            { href: '/ripples', title: 'Ripples' },
+            { href: '/scrolling', title: 'Scrolling' },
+            { href: '/touch-support', title: 'Touch support' }
+          ]
+        },
+        { href: '/pre-made-themes', title: 'Pre-made themes' },
+        { href: 'https://vuetify.threadless.com/', title: 'Shop', target: '_blank' },
+        { divider: true },
+        { header: 'Additional resources' },
+        {
+          title: 'Community',
+          group: 'community',
+          items: [
+            { href: 'https://chat.vuetifyjs.com/', title: 'Chat and support', target: '_blank' },
+            { href: 'https://github.com/vuetifyjs/vuetify/issues', title: 'Issue board', target: '_blank' },
+            { href: 'https://stackoverflow.com/search?q=vuetify', title: 'Stack overflow', target: '_blank' },
+          ]
+        },
+        {
+          title: 'Guides',
+          group: 'guides',
+          items: [
+            { href: '/guides/server-side-rendering', title: 'Server side rendering' }
           ]
         }
       ]
