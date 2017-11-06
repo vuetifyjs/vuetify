@@ -7,8 +7,7 @@
     name: 'footer-page',
 
     data: () => ({
-      namespace: 'Footer',
-      folder: 'footer',
+      component: 'v-footer',
       usage: { file: 'default' }
     })
   }

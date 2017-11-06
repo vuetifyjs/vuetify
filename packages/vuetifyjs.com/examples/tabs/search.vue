@@ -1,5 +1,5 @@
 <template>
-  <v-tabs dark fixed centered>
+  <v-tabs fixed centered>
     <v-toolbar color="cyan">
       <v-text-field
         solo
@@ -7,7 +7,7 @@
         append-icon="keyboard_voice"
         prepend-icon="search"
       ></v-text-field>
-      <v-tabs-bar class="cyan" slot="extension">
+      <v-tabs-bar color="transparent" slot="extension" dark>
         <v-tabs-slider color="yellow"></v-tabs-slider>
         <v-tabs-item
           v-for="i in 3"

@@ -7,8 +7,8 @@
     name: 'data-tables-page',
 
     data: () => ({
-      namespace: 'DataTables',
-      folder: 'tables',
+      component: 'v-data-table',
+      components: ['v-edit-dialog'],
       usage: { file: 'standard' },
       examples: [
         { file: 'noData' },

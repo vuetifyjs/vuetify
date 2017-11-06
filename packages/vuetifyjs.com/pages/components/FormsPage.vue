@@ -7,8 +7,7 @@
     name: 'forms-page',
 
     data: () => ({
-      namespace: 'Forms',
-      folder: 'forms',
+      component: 'v-form',
       usage: { file: 'basicValidation' },
       examples: [
         { file: 'submitAndClear' },

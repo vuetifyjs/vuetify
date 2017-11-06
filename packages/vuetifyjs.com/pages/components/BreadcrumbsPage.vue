@@ -9,7 +9,7 @@
     data: () => ({
       plural: true,
       component: 'v-breadcrumbs',
-      components: ['v-breadcrumbs', 'v-breadcrumbs-item'],
+      components: ['v-breadcrumbs-item'],
       usage: { file: 'textDividers' },
       examples: [
         { file: 'iconDividers' }

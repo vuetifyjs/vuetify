@@ -7,8 +7,7 @@
     name: 'selects-page',
 
     data: () => ({
-      namespace: 'Selects',
-      folder: 'selects',
+      component: 'v-select',
       usage: { file: 'light' },
       examples: [
         { file: 'dark' },
@@ -16,7 +15,7 @@
         { file: 'multiple' },
         { file: 'autocomplete' },
         { file: 'scopedSlots' },
-        { file: 'CustomTextAndValue' },
+        { file: 'customTextAndValue' },
         { file: 'tags' },
         { file: 'asynchronous' }
       ]

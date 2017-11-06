@@ -7,8 +7,8 @@
     name: 'fabs-page',
 
     data: () => ({
-      namespace: 'Fabs',
-      folder: 'fabs',
+      component: 'v-btn',
+      name: 'fab',
       usage: { file: 'promotedAction' },
       examples: [
         { file: 'small' },

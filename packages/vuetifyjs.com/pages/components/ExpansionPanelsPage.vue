@@ -7,8 +7,8 @@
     name: 'expansion-panels-page',
 
     data: () => ({
-      namespace: 'ExpansionPanels',
-      folder: 'expansion-panels',
+      component: 'v-expansion-panel',
+      components: ['v-expansion-panel-content'],
       usage: { file: 'accordion' },
       examples: [
         { file: 'expand' },

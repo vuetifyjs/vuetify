@@ -1,6 +1,6 @@
 <template>
-  <v-tabs dark>
-    <v-tabs-bar class="cyan">
+  <v-tabs>
+    <v-tabs-bar dark color="cyan">
       <v-tabs-slider color="yellow"></v-tabs-slider>
       <v-tabs-item
         v-for="i in 15"

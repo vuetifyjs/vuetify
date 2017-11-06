@@ -7,8 +7,7 @@
     name: 'snackbars-page',
 
     data: () => ({
-      namespace: 'Snackbars',
-      folder: 'snackbars',
+      component: 'v-snackbar',
       usage: { file: 'position' },
       examples: [
         { file: 'contextual' }

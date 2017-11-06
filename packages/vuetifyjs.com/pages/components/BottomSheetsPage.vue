@@ -7,8 +7,7 @@
     name: 'bottom-sheets-page',
 
     data: () => ({
-      namespace: 'BottomSheets',
-      folder: 'bottom-sheets',
+      component: 'v-bottom-sheet',
       usage: { file: 'standard' },
       examples: [
         { file: 'inset' }

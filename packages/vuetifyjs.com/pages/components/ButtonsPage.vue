@@ -7,8 +7,7 @@
     name: 'buttons-page',
 
     data: () => ({
-      namespace: 'Buttons',
-      folder: 'buttons',
+      component: 'v-btn',
       usage: { file: 'flat' },
       examples: [
         { file: 'raised' },

@@ -7,8 +7,15 @@
     name: 'tabs-page',
 
     data: () => ({
-      namespace: 'Tabs',
-      folder: 'tabs',
+      component: 'v-tabs',
+      components: [
+        'v-tabs-bar',
+        'v-tabs-slider',
+        'v-tabs-item',
+        'v-tabs-items',
+        'v-tabs-content',
+      ],
+      plural: true,
       usage: { file: 'toolbar' },
       examples: [
         { file: 'centered' },

@@ -7,8 +7,7 @@
     name: 'sliders-page',
 
     data: () => ({
-      namespace: 'Sliders',
-      folder: 'sliders',
+      component: 'v-slider',
       usage: { file: 'continuous' },
       examples: [
         { file: 'discrete' },

@@ -1,10 +1,10 @@
 import Alerts from './Alerts'
 import Avatars from './Avatars'
 import Badges from './Badges'
-import BottomNavigation from './BottomNavigation'
+import BottomNav from './BottomNav'
 import BottomSheets from './BottomSheets'
 import Breadcrumbs from './Breadcrumbs'
-import Buttons from './Buttons'
+import Btns from './Btns'
 import Cards from './Cards'
 import Carousels from './Carousels'
 import Chips from './Chips'
@@ -40,10 +40,10 @@ export default {
   Alerts,
   Avatars,
   Badges,
-  BottomNavigation,
+  BottomNav,
   BottomSheets,
   Breadcrumbs,
-  Buttons,
+  Btns,
   Cards,
   Carousels,
   Chips,

@@ -7,8 +7,7 @@
     name: 'tooltips-page',
 
     data: () => ({
-      namespace: 'Tooltips',
-      folder: 'tooltips',
+      component: 'v-tooltip',
       usage: { file: 'default' },
       examples: [
         { file: 'visibility' }

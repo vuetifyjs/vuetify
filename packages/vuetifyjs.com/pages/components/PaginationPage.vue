@@ -7,8 +7,7 @@
     name: 'pagination-page',
 
     data: () => ({
-      namespace: 'Pagination',
-      folder: 'pagination',
+      component: 'v-pagination',
       usage: { file: 'short' },
       examples: [
         { file: 'long' },

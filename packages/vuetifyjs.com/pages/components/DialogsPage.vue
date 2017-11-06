@@ -7,8 +7,7 @@
     name: 'dialogs-page',
 
     data: () => ({
-      namespace: 'Dialogs',
-      folder: 'dialogs',
+      component: 'v-dialog',
       usage: { file: 'simple' },
       examples: [
         { file: 'withoutActivator' },

@@ -106,9 +106,17 @@
         return this.data.component
       },
       components () {
-        return this.data.components || [this.component]
+        let components = [this.component]
+
+        if (this.data.components) {
+          components = components.concat(this.data.components)
+        }
+
+        return components
       },
       name () {
+        if (this.data.name) return this.data.name
+
         return this.data.component.split('-').slice(1).join('-')
       },
       folder () {

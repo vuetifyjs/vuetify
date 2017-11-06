@@ -39,7 +39,7 @@ export default {
     header: "Multi-line error state",
     desc: 'An error state can be displayed to notify the user of some action that must be taken.'
   },
-  alternativeError: {
+  alternateError: {
     header: "Alternative label multi-line error state",
     desc: 'The error state can also be applied to the alternative label style.'
   },

@@ -7,8 +7,7 @@
     name: 'dividers-page',
 
     data: () => ({
-      namespace: 'Dividers',
-      folder: 'dividers',
+      component: 'v-divider',
       usage: { file: 'fullBleed' },
       examples: [
         { file: 'lightAndDark' },

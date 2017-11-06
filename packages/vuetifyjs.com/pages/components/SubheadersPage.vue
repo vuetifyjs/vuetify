@@ -7,13 +7,11 @@
     name: 'subheaders-page',
 
     data: () => ({
-      namespace: 'Subheaders',
-      folder: 'subheaders',
+      component: 'v-subheader',
       usage: { file: 'list' },
       examples: [
         { file: 'grid' },
-        { file: 'menu' },
-        { file: 'avatarThreeLines' }
+        { file: 'menu' }
       ]
     })
   }
