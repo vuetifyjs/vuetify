@@ -655,7 +655,6 @@ export default {
           // and click doesn't target the input
           setTimeout(() => {
             if (this.menuIsActive) return
-            console.log('here')
 
             this.focus()
             this.menuIsActive = true
