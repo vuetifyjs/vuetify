@@ -128,22 +128,20 @@ export default {
       this.tryOverlay()
       this.$el.scrollTop = 0
     },
-    /**
-     * When mobile changes, adjust
-     * the active state only when
-     * there has been a previous
-     * value
-     */
-    isMobile (val, prev) {
+    isMobile (val) {
       // This skips normal functionality
       // when the drawer first boots up
-      if (prev == null) return
+      // or the drawer is temporary
+      if (!this.isBooted ||
+        this.temporary ||
+        this.disableResizeWatcher
+      ) return
 
-      !val && !this.isActive && this.removeOverlay()
+      this.isActive = !val
 
-      if (prev != null && !this.temporary) {
-        this.isActive = !val
-      }
+      // When resizing small to large
+      // remove the overlay
+      if (!val) this.removeOverlay()
     },
     permanent (val) {
       // If we are removing prop
@@ -189,13 +187,13 @@ export default {
 
   methods: {
     init () {
-      this.checkIfMobile()
+      this.onResize()
 
       if (this.permanent && !this.isMobile) {
         this.isActive = true
       } else if (this.value != null) {
         this.isActive = this.value
-      } else {
+      } else if (!this.temporary) {
         this.isActive = !this.isMobile
       }
 
@@ -209,9 +207,6 @@ export default {
         left: parentRect.left + 50,
         right: parentRect.right - 50
       }
-    },
-    checkIfMobile () {
-      this.isMobile = window.innerWidth < parseInt(this.mobileBreakPoint, 10)
     },
     closeConditional () {
       return this.isMobile || this.temporary
@@ -241,9 +236,7 @@ export default {
       return directives
     },
     onResize () {
-      if (this.disableResizeWatcher) return
-
-      this.checkIfMobile()
+      this.isMobile = window.innerWidth < parseInt(this.mobileBreakPoint, 10)
     },
     swipeRight (e) {
       if (this.isActive && !this.right) return
@@ -266,7 +259,10 @@ export default {
       else if (!this.right && this.isActive) this.isActive = false
     },
     tryOverlay () {
-      if (this.showOverlay && this.isActive) {
+      if (this.showOverlay &&
+        this.isActive &&
+        (this.temporary || this.isMobile)
+      ) {
         return this.genOverlay()
       }
 
