@@ -218,10 +218,7 @@ export default {
     },
     genDirectives () {
       const directives = [
-        {
-          name: 'click-outside',
-          value: this.closeConditional
-        },
+        { name: 'click-outside', value: this.closeConditional },
         {
           name: 'resize',
           value: {
