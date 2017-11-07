@@ -223,4 +223,48 @@ test('VSelect', () => {
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
+
+  it('should open menu when cleared with open-on-clear', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        clearable: true,
+        openOnClear: true,
+        value: 1
+      }
+    })
+
+    const clear = wrapper.find('.input-group__append-icon')[0]
+
+    clear.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.menuIsActive).toBe(true)
+
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should not rotate icon if menu is not open', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: [1]
+      }
+    })
+
+    wrapper.vm.focus()
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.menuIsVisible).toBe(false)
+    expect(wrapper.hasClass('input-group--open')).toBe(false)
+
+    wrapper.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.menuIsVisible).toBe(true)
+    expect(wrapper.hasClass('input-group--open')).toBe(true)
+
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 })

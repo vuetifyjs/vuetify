@@ -40,9 +40,7 @@ export default {
           offsetY,
           offsetOverflow: this.isAutocomplete,
           openOnClick: false,
-          value: this.menuIsActive &&
-            this.computedItems.length &&
-            (!this.isAnyValueAllowed || this.filteredItems.length > 0),
+          value: this.menuIsVisible,
           zIndex: this.menuZIndex
         },
         on: {
@@ -145,8 +143,16 @@ export default {
           // When using the combobox
           // update inputValue and
           // set the menu status
-          data.on.blur = () => {
-            if (!this.lazySearch) return
+          data.on.blur = (e) => {
+            // If user clears input
+            // value will be falsey
+            // but not null
+            if (this.lazySearch == null ||
+              // If blur was caused by clicking
+              // a menu list tile, do nothing
+              (this.content && this.content.contains(e.relatedTarget)) ||
+              (this.$el && this.$el.contains(e.relatedTarget))
+            ) return
 
             this.inputValue = this.lazySearch
           }

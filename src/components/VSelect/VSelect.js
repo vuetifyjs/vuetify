@@ -125,6 +125,7 @@ export default {
     },
     multiple: Boolean,
     multiLine: Boolean,
+    openOnClear: Boolean,
     overflow: Boolean,
     returnObject: Boolean,
     searchInput: {
@@ -149,7 +150,8 @@ export default {
         'input-group--multi-line': this.multiLine,
         'input-group--chips': this.chips,
         'input-group--solo': this.solo,
-        'input-group--multiple': this.multiple
+        'input-group--multiple': this.multiple,
+        'input-group--open': this.menuIsVisible
       }
 
       if (this.hasError) {
@@ -208,7 +210,8 @@ export default {
       return this.autocomplete || this.editable || this.tags || this.combobox
     },
     isDirty () {
-      return this.selectedItems.length > 0
+      return this.selectedItems.length > 0 ||
+        (this.isAutocomplete && this.searchValue)
     },
     isDropdown () {
       return this.segmented || this.overflow || this.editable || this.solo
@@ -218,6 +221,11 @@ export default {
     },
     isAnyValueAllowed () {
       return this.tags || this.combobox
+    },
+    menuIsVisible () {
+      return this.menuIsActive &&
+        this.computedItems.length > 0 &&
+        (!this.isAnyValueAllowed || this.filteredItems.length > 0)
     },
     searchValue: {
       get () { return this.lazySearch },
@@ -539,10 +547,13 @@ export default {
       const inputValue = this.isMultiple ? [] : null
 
       this.inputValue = inputValue
-      this.searchValue = null
       this.$emit('change', inputValue)
       this.genSelectedItems()
-      setTimeout(this.showMenu, 0)
+      setTimeout(this.focus, 0)
+
+      if (this.openOnClear) {
+        setTimeout(this.showMenu, 50)
+      }
     },
     showMenu () {
       this.showMenuItems()
@@ -644,6 +655,7 @@ export default {
           // and click doesn't target the input
           setTimeout(() => {
             if (this.menuIsActive) return
+            console.log('here')
 
             this.focus()
             this.menuIsActive = true
