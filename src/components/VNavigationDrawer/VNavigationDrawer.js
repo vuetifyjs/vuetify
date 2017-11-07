@@ -21,9 +21,9 @@ export default {
 
   data () {
     return {
-      isActive: !!this.value,
+      isActive: false,
       isBooted: false,
-      isMobile: false,
+      isMobile: null,
       touchArea: {
         left: 0,
         right: 0
@@ -37,6 +37,7 @@ export default {
     disableRouteWatcher: Boolean,
     disableResizeWatcher: Boolean,
     height: String,
+    fixed: Boolean,
     floating: Boolean,
     miniVariant: Boolean,
     miniVariantWidth: {
@@ -48,7 +49,6 @@ export default {
       default: 1264
     },
     permanent: Boolean,
-    persistent: Boolean,
     right: Boolean,
     temporary: Boolean,
     touchless: Boolean,
@@ -74,13 +74,12 @@ export default {
         'navigation-drawer--absolute': this.absolute,
         'navigation-drawer--clipped': this.clipped,
         'navigation-drawer--close': !this.isBooted || !this.isActive,
+        'navigation-drawer--fixed': this.fixed,
         'navigation-drawer--floating': this.floating,
         'navigation-drawer--is-booted': this.isBooted,
         'navigation-drawer--is-mobile': this.isMobile,
         'navigation-drawer--mini-variant': this.miniVariant,
         'navigation-drawer--open': this.isActive && this.isBooted,
-        'navigation-drawer--permanent': this.permanent,
-        'navigation-drawer--persistent': this.persistent,
         'navigation-drawer--right': this.right,
         'navigation-drawer--temporary': this.temporary,
         'theme--dark': this.dark,
@@ -105,8 +104,7 @@ export default {
         : this.$vuetify.application.bottom
     },
     showOverlay () {
-      return !this.permanent &&
-        this.isActive &&
+      return this.isActive &&
         (this.temporary || this.isMobile)
     },
     styles () {
@@ -127,17 +125,36 @@ export default {
     },
     isActive (val) {
       this.$emit('input', val)
-      this.showOverlay &&
-        val &&
-        this.genOverlay() ||
-        this.removeOverlay()
+      this.tryOverlay()
       this.$el.scrollTop = 0
     },
-    isMobile (val) {
-      !val && this.removeOverlay()
+    /**
+     * When mobile changes, adjust
+     * the active state only when
+     * there has been a previous
+     * value
+     */
+    isMobile (val, prev) {
+      // This skips normal functionality
+      // when the drawer first boots up
+      if (prev == null) return
+
+      !val && !this.isActive && this.removeOverlay()
+
+      if (prev != null && !this.temporary) {
+        this.isActive = !val
+      }
     },
     permanent (val) {
-      this.$emit('input', val)
+      // If we are removing prop
+      // reset active to match
+      // current value
+      if (!val) return (this.isActive = this.value)
+
+      // We are enabling prop
+      // set its state to match
+      // viewport size
+      this.isActive = !this.isMobile
     },
     right (val, prev) {
       // When the value changes
@@ -149,8 +166,13 @@ export default {
 
       this.updateApplication()
     },
+    temporary (val) {
+      if (!val) return
+
+      this.tryOverlay()
+    },
     value (val) {
-      if (this.permanent) return
+      if (this.permanent && !this.isMobile) return
       if (val !== this.isActive) this.isActive = val
     }
   },
@@ -167,12 +189,14 @@ export default {
 
   methods: {
     init () {
-      if (this.permanent) {
+      this.checkIfMobile()
+
+      if (this.permanent && !this.isMobile) {
         this.isActive = true
-      } else if (this.value == null) {
-        this.onResize()
-      } else {
+      } else if (this.value != null) {
         this.isActive = this.value
+      } else {
+        this.isActive = !this.isMobile
       }
 
       setTimeout(() => (this.isBooted = true), 0)
@@ -190,7 +214,7 @@ export default {
       this.isMobile = window.innerWidth < parseInt(this.mobileBreakPoint, 10)
     },
     closeConditional () {
-      return !this.permanent && (this.temporary || this.isMobile)
+      return this.isMobile || this.temporary
     },
     genDirectives () {
       const directives = [
@@ -220,14 +244,9 @@ export default {
       return directives
     },
     onResize () {
-      if (this.disableResizeWatcher ||
-        this.permanent ||
-        this.temporary
-      ) return
+      if (this.disableResizeWatcher) return
 
       this.checkIfMobile()
-
-      this.isActive = !this.isMobile
     },
     swipeRight (e) {
       if (this.isActive && !this.right) return
@@ -249,14 +268,19 @@ export default {
       ) this.isActive = true
       else if (!this.right && this.isActive) this.isActive = false
     },
+    tryOverlay () {
+      if (this.showOverlay && this.isActive) {
+        return this.genOverlay()
+      }
+
+      this.removeOverlay()
+    },
     updateApplication () {
       if (!this.app) return
 
       const width = !this.isActive ||
-        !this.isBooted ||
-        this.temporary ||
-        !this.permanent &&
-        this.$vuetify.breakpoint.width < parseInt(this.mobileBreakPoint, 10)
+        this.isMobile ||
+        this.temporary
         ? 0
         : this.calculatedWidth
 
