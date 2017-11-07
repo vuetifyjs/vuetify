@@ -139,7 +139,7 @@ export default {
       // when the drawer first boots up
       if (prev == null) return
 
-      !val && !this.isActive && this.removeOverlay()
+      !val && this.isActive && this.removeOverlay()
 
       if (prev != null && !this.temporary) {
         this.isActive = !val
