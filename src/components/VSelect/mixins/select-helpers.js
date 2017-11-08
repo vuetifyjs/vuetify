@@ -1,6 +1,14 @@
 // Helpers
 import { getObjectValueByPath } from '../../../util/helpers'
 
+/**
+ * Select helpers
+ *
+ * @mixin
+ *
+ * Helper methods for the
+ * v-select component
+ */
 export default {
   methods: {
     getText (item) {

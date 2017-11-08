@@ -66,7 +66,6 @@ export default {
       if (!val) return
 
       this.isBooted = true
-      // this.isActive = true
     },
     isMultiple (val) {
       this.inputValue = val ? [] : null
