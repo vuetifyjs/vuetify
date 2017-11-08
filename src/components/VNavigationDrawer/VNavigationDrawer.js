@@ -135,6 +135,7 @@ export default {
     },
     isMobile (val) {
       !val && this.removeOverlay()
+      this.$emit('mobile', val)
     },
     permanent (val) {
       this.$emit('input', val)
