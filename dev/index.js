@@ -1,13 +1,14 @@
 import Vue from 'vue'
 import App from './App'
-
+import Boilerplate from './Boilerplate'
 import Vuetify from 'vuetify'
-Vue.use(Vuetify)
-
 import VueRouter from 'vue-router'
+import router from './router'
+
+Vue.use(Vuetify)
 Vue.use(VueRouter)
 
-import router from './router'
+Vue.component(Boilerplate.name, Boilerplate)
 
 new Vue({
   render: h => h(App),
