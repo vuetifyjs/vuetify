@@ -39,10 +39,10 @@ test('VNavigationDrawer.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render component with custom enableResizeWatcher and match snapshot', () => {
+  it('should render component with custom disableResizeWatcher and match snapshot', () => {
     const wrapper = mount(VNavigationDrawer, {
       propsData: {
-        enableResizeWatcher: true
+        disableResizeWatcher: true
       }
     })
 
@@ -149,17 +149,24 @@ test('VNavigationDrawer.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should match value if resize-watcher is not enabled', async () => {
+  it('should match value if value is true or false', async () => {
     const wrapper = mount(VNavigationDrawer, {
       attachToDocument: true,
       propsData: {
-        permanent: true,
         value: false
+      }
+    })
+
+    const wrapper2 = mount(VNavigationDrawer, {
+      attachToDocument: true,
+      propsData: {
+        value: true
       }
     })
 
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.isActive).toBe(false)
+    expect(wrapper2.vm.isActive).toBe(true)
   })
 })

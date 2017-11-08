@@ -40,7 +40,6 @@ theme(navigation-drawer, "navigation-drawer")
   -webkit-overflow-scrolling: touch
   padding: 0 0 100px
   pointer-events: auto
-  position: fixed
   transition: .3s $transition.swing
   top: 0
   left: 0
@@ -59,7 +58,7 @@ theme(navigation-drawer, "navigation-drawer")
       left: 0
       right: initial
 
-  &--close:not(.navigation--permanent)
+  &--close
     &.navigation-drawer:not(.navigation-drawer--right)
       transform: translateX(-100%)
 
@@ -76,6 +75,9 @@ theme(navigation-drawer, "navigation-drawer")
 
   &--absolute
     position: absolute
+    
+  &--fixed
+    position: fixed
 
   &--floating:after
     display: none
@@ -97,7 +99,8 @@ theme(navigation-drawer, "navigation-drawer")
     .list--group
       display: none !important
 
-  &--temporary, &--is-mobile:not(.navigation-drawer--permanent)
+  &--temporary,
+  &--is-mobile
     z-index: 6
 
     &:not(.navigation-drawer--close)

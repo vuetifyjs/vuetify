@@ -204,4 +204,22 @@ test('VSelect', () => {
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
+
+  it('should escape items in menu', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        autocomplete: true,
+        items: ['<strong>foo</strong>']
+      }
+    })
+
+    const tileTitle = wrapper.find('.list__tile__title')[0]
+    expect(tileTitle.html()).toMatchSnapshot()
+
+    wrapper.setProps({ searchInput: 'str' })
+    await wrapper.vm.$nextTick()
+    expect(tileTitle.html()).toMatchSnapshot()
+
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 })
