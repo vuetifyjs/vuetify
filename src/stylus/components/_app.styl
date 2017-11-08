@@ -22,7 +22,10 @@ application($material)
   background: $material.background
   color: $material.text.primary
 
-  a
-    color: $material.text.link
+.theme--light a
+  color: $material-light.text.link
+
+.theme--dark a
+  color: $material-dark.text.link
 
 app(application)
