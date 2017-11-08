@@ -198,7 +198,7 @@ export default {
         staticClass: 'chip--select-multi',
         attrs: { tabindex: '-1' },
         props: {
-          close: !isDisabled,
+          close: this.deletableChips && !isDisabled,
           dark: this.dark,
           disabled: isDisabled,
           selected: index === this.selectedIndex

@@ -19,6 +19,7 @@ export default {
       type: [Number, String],
       default: 200
     },
+    deletableChips: Boolean,
     editable: Boolean,
     hideSelected: Boolean,
     items: {

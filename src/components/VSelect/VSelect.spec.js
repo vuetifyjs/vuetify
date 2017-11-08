@@ -205,4 +205,23 @@ test('VSelect', () => {
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
+
+  it('should have deletable chips', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        chips: true,
+        deletableChips: true,
+        tags: true,
+        items: ['foo', 'bar'],
+        value: ['foo']
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+    const chip = wrapper.find('.chip')[0]
+
+    expect(!!chip).toBe(true)
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 })

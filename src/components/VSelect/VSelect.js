@@ -3,8 +3,10 @@ require('../../stylus/components/_input-groups.styl')
 require('../../stylus/components/_select.styl')
 
 // Components
+import VBtn from '../VBtn'
 import VCard from '../VCard'
 import VCheckbox from '../VCheckbox'
+import VChip from '../VChip'
 import {
   VList,
   VListTile,
@@ -13,7 +15,6 @@ import {
   VListTileTitle
 } from '../VList'
 import VMenu from '../VMenu'
-import VBtn from '../VBtn'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
@@ -43,6 +44,7 @@ export default {
   components: {
     VCard,
     VCheckbox,
+    VChip,
     VList,
     VListTile,
     VListTileAction,
