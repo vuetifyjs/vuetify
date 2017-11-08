@@ -258,7 +258,9 @@ export default {
         this.selectedItems = selectedItems
       }
 
-      this.searchValue = !this.isMultiple && !this.chips
+      this.searchValue = !this.isMultiple &&
+        !this.chips &&
+        !this.$scopedSlots.selection
         ? this.getText(this.selectedItem)
         : null
 

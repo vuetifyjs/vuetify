@@ -66,7 +66,8 @@ export default {
       return this.isAutocomplete &&
         !this.isMultiple &&
         this.isFocused &&
-        !this.chips
+        !this.chips &&
+        !this.$scopedSlots.selection
     },
     isNotFiltering () {
       return this.isAutocomplete &&

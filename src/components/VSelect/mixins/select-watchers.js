@@ -24,11 +24,13 @@ export default {
     },
     isActive (val) {
       if (val) {
-        if (!this.chips) this.searchValue = this.getText(this.selectedItem)
+        if (!this.chips && !this.$scopedSlots.selection) {
+          this.searchValue = this.getText(this.selectedItem)
+        }
         return
-      } else {
-        this.blur()
       }
+
+      this.blur()
 
       if (this.tags && this.searchValue) {
         this.updateTags(this.searchValue)
