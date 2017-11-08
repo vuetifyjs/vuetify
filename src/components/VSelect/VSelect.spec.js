@@ -32,7 +32,8 @@ test('VSelect', () => {
       }
     })
 
-    wrapper.vm.focus()
+    wrapper.trigger('focus')
+    await wrapper.vm.$nextTick()
     wrapper.vm.blur()
     await wrapper.vm.$nextTick()
 

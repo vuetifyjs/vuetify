@@ -113,7 +113,7 @@ export default {
       // If enter, space, up, or down is pressed, open menu
       if (!this.menuIsActive && [13, 32, 38, 40].includes(e.keyCode)) {
         e.preventDefault()
-        return this.showMenuItems()
+        return this.showMenu()
       }
 
       // If escape deactivate the menu

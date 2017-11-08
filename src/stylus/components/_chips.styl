@@ -8,16 +8,6 @@ chip($material)
   &__close
     color: $material.icons.active
 
-  :not(.chip--outline)
-    &:focus,
-    &.chip--active,
-    &.chip--selected
-      .chip__content
-        color: $material.text.theme
-
-        .chip__close
-          color: $material.text.theme
-
 theme(chip, "chip")
 
 .chip
@@ -65,14 +55,6 @@ theme(chip, "chip")
   &--selected
     &:not(.chip--disabled)
       elevation(2)
-      outline: none
-
-      .chip__content
-        background: $chip-darken-background
-
-      &.chip--outline
-        .chip__content
-          background: $chip-darken-background-outline
 
   &--label
     border-radius: $chip-label-border-radius
