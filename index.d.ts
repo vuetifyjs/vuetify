@@ -5,4 +5,4 @@ declare class Vuetify {
   static install: PluginFunction<never>
 }
 
-export = Vuetify
+export default Vuetify
