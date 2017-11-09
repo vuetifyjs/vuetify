@@ -97,7 +97,7 @@ export default {
       return [this.$createElement('div', {
         'class': 'datatable__actions'
       }, [
-        this.genSelect(),
+        this.rowsPerPageItems.length > 1 ? this.genSelect() : null,
         this.genPagination(),
         this.genPrevIcon(),
         this.genNextIcon()
