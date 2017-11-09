@@ -186,9 +186,9 @@ test('VBtnToggle.vue', ({ mount }) => {
     expect(btn.getAttribute('data-only-child')).toBe('true')
   })
 
-  // TODO: change never fires
-  it.skip('should toggle values of any type', async () => {
+  it('should toggle values of any type', async () => {
     const values = [true, false, null, 6, 'foo', { key: 'value' }, ['arrayyy']]
+    const verifyValues = [true, 1, 2, 6, 'foo', { key: 'value' }, ['arrayyy']]
     const buttons = values.map(v => createBtn(v))
     const wrapper = mount(VBtnToggle, {
       propsData: {
@@ -197,15 +197,14 @@ test('VBtnToggle.vue', ({ mount }) => {
       slots: { default: buttons }
     })
 
-    const change = jest.fn(value => {
-      wrapper.setProps({ inputValue: value })
-    })
+    const change = jest.fn()
     wrapper.vm.$on('change', change)
 
-    for (const button of wrapper.find(VBtn)) {
+    wrapper.find('button').forEach((button, i) => {
       button.trigger('click')
-      expect(change).toBeCalledWith(button.vm.value)
-    }
+
+      expect(change).toBeCalledWith(verifyValues[i])
+    })
 
     expect(wrapper.html()).toMatchSnapshot()
   })

@@ -9,6 +9,15 @@ import { factory as ToggleableFactory } from '../../mixins/toggleable'
 export default {
   name: 'v-btn',
 
+  inject: {
+    registerChild: {
+      default: null
+    },
+    unregisterChild: {
+      default: null
+    }
+  },
+
   mixins: [
     Colorable,
     Routable,
@@ -131,6 +140,18 @@ export default {
       }
 
       return this.$createElement('span', { 'class': 'btn__loading' }, children)
+    }
+  },
+
+  mounted () {
+    if (this.registerChild) {
+      this.registerChild(this)
+    }
+  },
+
+  beforeDestroy () {
+    if (this.unregisterChild) {
+      this.unregisterChild(this)
     }
   },
 
