@@ -39,9 +39,6 @@ test('VPagination.vue', ({ mount }) => {
     })
     jest.runAllTimers()
 
-    await wrapper.vm.$nextTick()
-    await wrapper.vm.$nextTick()
-    await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
   })
 
