@@ -19,6 +19,7 @@ theme(chip, "chip")
   font-size: $chip-font-size
   margin: $chip-margin
   outline: none
+  position: relative
   transition: $primary-transition
   vertical-align: middle
 
@@ -54,7 +55,17 @@ theme(chip, "chip")
   &--active,
   &--selected
     &:not(.chip--disabled)
+      border-color: rgba(#000, .13)
       elevation(2)
+
+      &:after
+        background: rgba(#000, .13)
+        border-radius: inherit
+        content: ''
+        height: 100%
+        position: absolute
+        transition: inherit
+        width: 100%
 
   &--label
     border-radius: $chip-label-border-radius

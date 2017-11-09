@@ -179,14 +179,7 @@ export default {
           return this.getValue(i) === this.getValue(val)
         } else {
           // Always return Boolean
-          return val.find((j) => {
-            const a = this.getValue(j)
-            const b = this.getValue(i)
-
-            if (a !== Object(a)) return a === b
-
-            return this.compareObjects(a, b)
-          }) !== undefined
+          return this.findExistingItem(i) > -1
         }
       })
 
@@ -235,6 +228,16 @@ export default {
         }
       }
     },
+    findExistingItem (item) {
+      return this.inputValue.findIndex((i) => {
+        const a = this.getValue(i)
+        const b = this.getValue(item)
+
+        if (a !== Object(a)) return a === b
+
+        return this.compareObjects(a, b)
+      })
+    },
     selectItem (item) {
       if (!this.isMultiple) {
         this.inputValue = this.returnObject ? item : this.getValue(item)
@@ -242,14 +245,7 @@ export default {
       } else {
         const selectedItems = []
         const inputValue = this.inputValue.slice()
-        const i = this.inputValue.findIndex((i) => {
-          const a = this.getValue(i)
-          const b = this.getValue(item)
-
-          if (a !== Object(a)) return a === b
-
-          return this.compareObjects(a, b)
-        })
+        const i = this.findExistingItem(item)
 
         i !== -1 && inputValue.splice(i, 1) || inputValue.push(item)
         this.inputValue = inputValue.map((i) => {
