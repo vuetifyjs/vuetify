@@ -18,9 +18,7 @@ exports[`VAlert.vue should be dismissible 1`] = `
 >
   <div>
   </div>
-  <a class="alert__dismissible"
-     href="javascript:;"
-  >
+  <a class="alert__dismissible">
     <i class="material-icons icon icon--right">
       cancel
     </i>
@@ -36,9 +34,7 @@ exports[`VAlert.vue should have a close icon 1`] = `
 >
   <div>
   </div>
-  <a class="alert__dismissible"
-     href="javascript:;"
-  >
+  <a class="alert__dismissible">
     <i class="material-icons icon icon--right">
       cancel
     </i>

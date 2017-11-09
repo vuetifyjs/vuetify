@@ -67,7 +67,7 @@ export default {
         tag = this.href && 'a' || this.tag || 'a'
 
         if (tag === 'a') {
-          data.attrs.href = this.href || 'javascript:;'
+          if (this.href) data.attrs.href = this.href
           if (this.target) data.attrs.target = this.target
         }
       }

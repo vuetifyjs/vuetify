@@ -33,8 +33,7 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
               class="list"
           >
             <li>
-              <a href="javascript:;"
-                 class="list__tile list__tile--link list__tile--active primary--text"
+              <a class="list__tile list__tile--link list__tile--active primary--text"
                  data-ripple="true"
               >
                 <div class="list__tile__action list__tile__action--select-multi">
@@ -71,8 +70,7 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
               </a>
             </li>
             <li>
-              <a href="javascript:;"
-                 class="list__tile list__tile--link"
+              <a class="list__tile list__tile--link"
                  data-ripple="true"
               >
                 <div class="list__tile__action list__tile__action--select-multi">
@@ -154,8 +152,7 @@ exports[`VSelect should be clearable with prop, dirty and single select 1`] = `
               class="list"
           >
             <li>
-              <a href="javascript:;"
-                 class="list__tile list__tile--link list__tile--active primary--text"
+              <a class="list__tile list__tile--link list__tile--active primary--text"
                  data-ripple="true"
               >
                 <div class="list__tile__content">
@@ -166,8 +163,7 @@ exports[`VSelect should be clearable with prop, dirty and single select 1`] = `
               </a>
             </li>
             <li>
-              <a href="javascript:;"
-                 class="list__tile list__tile--link"
+              <a class="list__tile list__tile--link"
                  data-ripple="true"
               >
                 <div class="list__tile__content">

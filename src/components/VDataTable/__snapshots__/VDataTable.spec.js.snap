@@ -95,8 +95,7 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
                             class="list"
                         >
                           <li>
-                            <a href="javascript:;"
-                               class="list__tile list__tile--link"
+                            <a class="list__tile list__tile--link"
                                data-ripple="true"
                             >
                               <div class="list__tile__content">
@@ -107,8 +106,7 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
                             </a>
                           </li>
                           <li>
-                            <a href="javascript:;"
-                               class="list__tile list__tile--link"
+                            <a class="list__tile list__tile--link"
                                data-ripple="true"
                             >
                               <div class="list__tile__content">
@@ -119,8 +117,7 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
                             </a>
                           </li>
                           <li>
-                            <a href="javascript:;"
-                               class="list__tile list__tile--link"
+                            <a class="list__tile list__tile--link"
                                data-ripple="true"
                             >
                               <div class="list__tile__content">
@@ -131,8 +128,7 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
                             </a>
                           </li>
                           <li>
-                            <a href="javascript:;"
-                               class="list__tile list__tile--link"
+                            <a class="list__tile list__tile--link"
                                data-ripple="true"
                             >
                               <div class="list__tile__content">
