@@ -222,6 +222,8 @@ test('VSelect', () => {
     const chip = wrapper.find('.chip')[0]
 
     expect(!!chip).toBe(true)
+
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
   it('should escape items in menu', async () => {
