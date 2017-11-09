@@ -4,33 +4,22 @@ export default {
   }),
 
   watch: {
-    type () {
-      this.applyType()
-    },
     '$vuetify.theme': {
       deep: true,
       handler () {
-        this.applyType()
+        this.applyTheme()
       }
     }
   },
 
   mounted () {
     this.genStyle()
-    this.genThemeClasses()
-    this.applyType()
+    this.applyTheme()
   },
 
   methods: {
-    applyType () {
-      this.genThemeClasses()
-      this.$vuetify.theme.type = this.type
-    },
-    genThemeClasses () {
-      this.updateTheme(this.genTheme())
-    },
-    genTheme () {
-      return this.genColors(this.$vuetify.theme)
+    applyTheme () {
+      this.style.innerHTML = this.genColors(this.$vuetify.theme)
     },
     genColors (theme) {
       return Object.keys(theme).map(key => {
@@ -53,9 +42,6 @@ export default {
       style.type = 'text/css'
       document.head.appendChild(style)
       this.style = style
-    },
-    updateTheme (classes) {
-      this.style.innerHTML = classes
     }
   }
 }

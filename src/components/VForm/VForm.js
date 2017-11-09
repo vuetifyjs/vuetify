@@ -108,7 +108,9 @@ export default {
 
   render (h) {
     return h('form', {
-      attrs: this.$attrs,
+      attrs: Object.assign({
+        novalidate: true
+      }, this.$attrs),
       on: {
         submit: e => this.$emit('submit', e)
       }

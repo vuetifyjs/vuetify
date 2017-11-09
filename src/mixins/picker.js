@@ -25,7 +25,7 @@ export default {
 
   computed: {
     titleColor () {
-      const darkTheme = this.dark || (!this.light && this.$vuetify.theme.type === 'dark')
+      const darkTheme = this.dark || (!this.light && this.$vuetify.dark)
       const defaultTitleColor = darkTheme ? null : 'primary'
       return this.headerColor || this.color || defaultTitleColor
     }

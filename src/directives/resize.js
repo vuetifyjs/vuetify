@@ -1,13 +1,15 @@
 function inserted (el, binding) {
   let cb = binding.value
   let debounce = 200
+  let callOnLoad = true
 
   if (typeof binding.value !== 'function') {
     cb = binding.value.value
-    debounce = binding.value.debounce
+    debounce = binding.value.debounce || debounce
+    callOnLoad = binding.value.quiet != null ? false : callOnLoad
   }
 
-  let debounceTimeout = setTimeout(cb, debounce)
+  let debounceTimeout = null
   const onResize = () => {
     clearTimeout(debounceTimeout)
     debounceTimeout = setTimeout(cb, debounce)
@@ -16,7 +18,7 @@ function inserted (el, binding) {
   window.addEventListener('resize', onResize, { passive: true })
   el._onResize = onResize
 
-  onResize()
+  callOnLoad && onResize()
 }
 
 function unbind (el, binding) {

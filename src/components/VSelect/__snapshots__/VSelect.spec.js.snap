@@ -1,5 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VSelect should escape items in menu 1`] = `
+
+<div class="list__tile__title">
+  &lt;strong&gt;foo&lt;/strong&gt;
+</div>
+
+`;
+
+exports[`VSelect should escape items in menu 2`] = `
+
+<div class="list__tile__title">
+  &lt;
+  <span class="list__tile__mask">
+    str
+  </span>
+  ong&gt;foo&lt;/strong&gt;
+</div>
+
+`;
+
 exports[`VSelect should render buttons correctly when using items array with segmented prop 1`] = `
 
 <div tabindex="0"

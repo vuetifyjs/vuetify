@@ -40,13 +40,13 @@ export default {
   },
 
   mounted () {
-    this.$vuetify.theme.type = this.type
+    this.$vuetify.dark = this.dark
     window.addEventListener('load', this.runCallbacks)
   },
 
   watch: {
-    type () {
-      this.$vuetify.theme.type = this.type
+    dark () {
+      this.$vuetify.dark = this.dark
     }
   },
 

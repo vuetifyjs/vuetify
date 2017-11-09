@@ -1,3 +1,5 @@
+import { escapeHTML } from '../../../util/helpers'
+
 /**
  * Select autocomplete
  *
@@ -31,21 +33,21 @@ export default {
       )
     },
     genFiltered (text) {
+      text = (text || '').toString()
+
       if (!this.isAutocomplete ||
         !this.searchValue ||
         this.filteredItems.length < 1
-      ) return text
-
-      text = (text || '').toString()
+      ) return escapeHTML(text)
 
       const { start, middle, end } = this.getMaskedCharacters(text)
 
-      return `${start}${this.genHighlight(middle)}${end}`
+      return `${escapeHTML(start)}${this.genHighlight(middle)}${escapeHTML(end)}`
     },
     genHighlight (text) {
-      if (this.isNotFiltering) return text
+      if (this.isNotFiltering) return escapeHTML(text)
 
-      return `<span class="list__tile__mask">${text}</span>`
+      return `<span class="list__tile__mask">${escapeHTML(text)}</span>`
     },
     getMaskedCharacters (text) {
       const searchValue = (this.searchValue || '').toString().toLowerCase()
