@@ -58,8 +58,7 @@ exports[`VSelect should render buttons correctly when using items array with seg
               class="list"
           >
             <li>
-              <a href="javascript:;"
-                 class="list__tile list__tile--link list__tile--active primary--text"
+              <a class="list__tile list__tile--link list__tile--active primary--text"
                  data-ripple="true"
               >
                 <div class="list__tile__content">
@@ -120,8 +119,7 @@ exports[`VSelect should render buttons correctly when using slot with segmented 
               class="list"
           >
             <li>
-              <a href="javascript:;"
-                 class="list__tile list__tile--link list__tile--active primary--text"
+              <a class="list__tile list__tile--link list__tile--active primary--text"
                  data-ripple="true"
               >
                 <div class="list__tile__content">
