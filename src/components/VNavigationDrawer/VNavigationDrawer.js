@@ -204,13 +204,17 @@ export default {
     init () {
       this.checkIfMobile()
 
+      // Same as 3rd conditional
+      // but has higher precedence
+      // than simply providing
+      // a default value
       if (this.stateless) {
         this.isActive = this.value
       } else if (this.permanent && !this.isMobile) {
         this.isActive = true
       } else if (this.value != null) {
         this.isActive = this.value
-      } else {
+      } else if (!this.temporary) {
         this.isActive = !this.isMobile
       }
 
