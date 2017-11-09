@@ -8,14 +8,6 @@ import { getObjectValueByPath } from '../../../util/helpers'
  * Used for creating the DOM elements for VSelect
  */
 export default {
-  computed: {
-    menuItems () {
-      return this.isHidingSelected ? this.filteredItems.filter(o => {
-        return (this.selectedItems || []).indexOf(o) === -1
-      }) : this.filteredItems
-    }
-  },
-
   methods: {
     genMenu () {
       const offsetY = this.isAutocomplete || this.offset || this.isDropdown
@@ -198,7 +190,7 @@ export default {
         if (isDisabled) return
 
         e.stopPropagation()
-        this.focus()
+        this.focusInput()
         this.selectedIndex = index
       }
 
@@ -206,7 +198,7 @@ export default {
         staticClass: 'chip--select-multi',
         attrs: { tabindex: '-1' },
         props: {
-          close: !isDisabled,
+          close: this.deletableChips && !isDisabled,
           dark: this.dark,
           disabled: isDisabled,
           selected: index === this.selectedIndex
@@ -214,7 +206,10 @@ export default {
         on: {
           click: click,
           focus: click,
-          input: () => this.selectItem(item)
+          input: () => {
+            if (this.isMultiple) this.selectItem(item)
+            else this.inputValue = null
+          }
         },
         key: this.getValue(item)
       }, this.getText(item))
@@ -259,6 +254,19 @@ export default {
       return this.$createElement('v-divider', {
         props: item
       })
+    },
+    genLabel () {
+      const singleLine = this.singleLine || this.isDropdown
+
+      if (singleLine && this.isDirty ||
+        singleLine && this.isFocused && this.searchValue
+      ) return null
+
+      const data = {}
+
+      if (this.id) data.attrs = { for: this.id }
+
+      return this.$createElement('label', data, this.$slots.label || this.label)
     },
     genTile (item, disabled) {
       const active = this.selectedItems.indexOf(item) !== -1

@@ -32,7 +32,8 @@ test('VSelect', () => {
       }
     })
 
-    wrapper.vm.focus()
+    wrapper.trigger('focus')
+    await wrapper.vm.$nextTick()
     wrapper.vm.blur()
     await wrapper.vm.$nextTick()
 
@@ -201,6 +202,26 @@ test('VSelect', () => {
 
     wrapper.setProps({ items: [{ text: 'foo', value: 1 }] })
     expect(wrapper.vm.selectedItems).toContainEqual({ text: 'foo', value: 1 })
+
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should have deletable chips', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        chips: true,
+        deletableChips: true,
+        tags: true,
+        items: ['foo', 'bar'],
+        value: ['foo']
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+    const chip = wrapper.find('.chip')[0]
+
+    expect(!!chip).toBe(true)
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })

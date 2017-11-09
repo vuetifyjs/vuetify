@@ -115,7 +115,7 @@ export default {
       // If enter, space, up, or down is pressed, open menu
       if (!this.menuIsActive && [13, 32, 38, 40].includes(e.keyCode)) {
         e.preventDefault()
-        return this.showMenuItems()
+        return this.showMenu()
       }
 
       // If escape deactivate the menu
@@ -160,10 +160,14 @@ export default {
       this.$refs.menu.tiles[index].click()
     },
     updateTags (content) {
+      // Avoid direct mutation
+      // for vuex strict mode
+      let selectedItems = this.selectedItems.slice()
+
       // If a duplicate item
       // exists, remove it
-      if (this.selectedItems.includes(content)) {
-        this.$delete(this.selectedItems, this.selectedItems.indexOf(content))
+      if (selectedItems.includes(content)) {
+        this.$delete(selectedItems, selectedItems.indexOf(content))
       }
 
       // When updating tags ensure
@@ -171,11 +175,13 @@ export default {
       // is populated if needed
       let searchValue = null
       if (this.combobox) {
-        this.selectedItems = [content]
+        selectedItems = [content]
         searchValue = this.chips ? null : content
       } else {
-        this.selectedItems.push(content)
+        selectedItems.push(content)
       }
+
+      this.selectedItems = selectedItems
 
       this.$nextTick(() => {
         this.searchValue = searchValue
