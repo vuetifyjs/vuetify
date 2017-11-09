@@ -50,6 +50,7 @@ export default {
     },
     permanent: Boolean,
     right: Boolean,
+    stateless: Boolean,
     temporary: Boolean,
     touchless: Boolean,
     width: {
@@ -103,6 +104,15 @@ export default {
         ? this.$vuetify.application.top + this.$vuetify.application.bottom
         : this.$vuetify.application.bottom
     },
+    reactsToMobile () {
+      return !this.stateless &&
+        !this.disableResizeWatcher &&
+        this.isBooted &&
+        !this.temporary
+    },
+    reactsToRoute () {
+      return !this.disableRouteWatcher && !this.stateless
+    },
     showOverlay () {
       return this.isActive &&
         (this.temporary || this.isMobile)
@@ -119,12 +129,17 @@ export default {
 
   watch: {
     $route () {
-      if (!this.disableRouteWatcher) {
+      if (this.reactsToRoute) {
         this.isActive = !this.closeConditional()
       }
     },
     isActive (val) {
       this.$emit('input', val)
+
+      if (!this.isBooted ||
+        (!this.temporary && !this.isMobile)
+      ) return
+
       this.tryOverlay()
       this.$el.scrollTop = 0
     },
@@ -135,11 +150,9 @@ export default {
      * value
      */
     isMobile (val, prev) {
-      // This skips normal functionality
-      // when the drawer first boots up
-      if (prev == null) return
-
       !val && this.isActive && this.removeOverlay()
+
+      if (!this.reactsToMobile) return
 
       if (prev != null && !this.temporary) {
         this.isActive = !val
@@ -191,7 +204,9 @@ export default {
     init () {
       this.checkIfMobile()
 
-      if (this.permanent && !this.isMobile) {
+      if (this.stateless) {
+        this.isActive = this.value
+      } else if (this.permanent && !this.isMobile) {
         this.isActive = true
       } else if (this.value != null) {
         this.isActive = this.value
@@ -214,7 +229,7 @@ export default {
       this.isMobile = window.innerWidth < parseInt(this.mobileBreakPoint, 10)
     },
     closeConditional () {
-      return this.isMobile || this.temporary
+      return !this.stateless && (this.isMobile || this.temporary)
     },
     genDirectives () {
       const directives = [
@@ -241,8 +256,6 @@ export default {
       return directives
     },
     onResize () {
-      if (this.disableResizeWatcher) return
-
       this.checkIfMobile()
     },
     swipeRight (e) {
