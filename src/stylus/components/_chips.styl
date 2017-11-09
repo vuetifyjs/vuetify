@@ -8,16 +8,6 @@ chip($material)
   &__close
     color: $material.icons.active
 
-  :not(.chip--outline)
-    &:focus,
-    &.chip--active,
-    &.chip--selected
-      .chip__content
-        color: $material.text.theme
-
-        .chip__close
-          color: $material.text.theme
-
 theme(chip, "chip")
 
 .chip
@@ -29,6 +19,7 @@ theme(chip, "chip")
   font-size: $chip-font-size
   margin: $chip-margin
   outline: none
+  position: relative
   transition: $primary-transition
   vertical-align: middle
 
@@ -64,15 +55,17 @@ theme(chip, "chip")
   &--active,
   &--selected
     &:not(.chip--disabled)
+      border-color: rgba(#000, .13)
       elevation(2)
-      outline: none
 
-      .chip__content
-        background: $chip-darken-background
-
-      &.chip--outline
-        .chip__content
-          background: $chip-darken-background-outline
+      &:after
+        background: rgba(#000, .13)
+        border-radius: inherit
+        content: ''
+        height: 100%
+        position: absolute
+        transition: inherit
+        width: 100%
 
   &--label
     border-radius: $chip-label-border-radius

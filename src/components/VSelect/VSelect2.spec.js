@@ -13,9 +13,11 @@ test('VSelect', () => {
     })
 
     for (const key of ['up', 'down', 'space', 'enter']) {
-      wrapper.vm.focus()
+      wrapper.trigger('focus')
+      await wrapper.vm.$nextTick()
       expect(wrapper.vm.menuIsActive).toBe(false)
       wrapper.trigger(`keydown.${key}`)
+      await wrapper.vm.$nextTick()
       expect(wrapper.vm.menuIsActive).toBe(true)
       wrapper.vm.blur()
       await wrapper.vm.$nextTick()
@@ -69,9 +71,9 @@ test('VSelect', () => {
     expect(wrapper.html()).toMatchSnapshot()
 
     clear.trigger('click')
-    await new Promise(resolve => setTimeout(resolve, 5))
+    await wrapper.vm.$nextTick()
     expect(wrapper.vm.inputValue).toBe(null)
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.vm.menuIsVisible).toBe(false)
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
@@ -96,9 +98,9 @@ test('VSelect', () => {
     expect(wrapper.html()).toMatchSnapshot()
 
     clear.trigger('click')
-    await new Promise(resolve => setTimeout(resolve, 5))
+    await wrapper.vm.$nextTick()
     expect(change).toHaveBeenCalledWith([])
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.vm.menuIsVisible).toBe(false)
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
@@ -251,7 +253,7 @@ test('VSelect', () => {
       }
     })
 
-    wrapper.vm.focus()
+    wrapper.trigger('focus')
 
     await wrapper.vm.$nextTick()
 
