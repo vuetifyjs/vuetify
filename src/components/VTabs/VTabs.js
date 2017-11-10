@@ -29,7 +29,6 @@ export default {
       activeIndex: null,
       content: [],
       isBooted: false,
-      isMobile: false,
       resizeTimeout: null,
       reverse: false,
       tabItems: [],
@@ -65,7 +64,7 @@ export default {
         'tabs--fixed': this.fixed,
         'tabs--grow': this.grow,
         'tabs--icons': this.icons,
-        'tabs--mobile': this.isMobile,
+        'tabs--mobile': this.$vuetify.breakpoint.width < this.mobileBreakPoint,
         'tabs--scroll-bars': this.scrollable
       }
     }
@@ -111,7 +110,7 @@ export default {
 
       const tab = this.value || (this.tabItems[i !== -1 ? i : 0] || {}).id
 
-      tab && this.tabClick(tab) && this.onResize()
+      tab && this.tabClick(tab)
     })
   },
 
@@ -149,7 +148,6 @@ export default {
       this.tabClick(this.tabItems[prevIndex].id)
     },
     onResize () {
-      this.isMobile = window.innerWidth < this.mobileBreakPoint
       this.slider()
     },
     /**
