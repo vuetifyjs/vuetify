@@ -27,7 +27,7 @@ export default {
     /**
      * Clear any pending delay
      * timers from executing
-     * 
+     *
      * @return {void}
      */
     clearDelay () {
@@ -37,10 +37,10 @@ export default {
     /**
      * Runs callback after
      * a specified delay
-     * 
+     *
      * @param  {String}   type
      * @param  {Function} cb
-     * 
+     *
      * @return {void}
      */
     runDelay (type, cb) {

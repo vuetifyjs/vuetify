@@ -410,7 +410,9 @@ exports[`VDatePicker.js should match snapshot with allowed dates and pick-month 
                 data-ripple="true"
         >
           <div class="btn__content">
-            <i class="material-icons icon">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
               chevron_left
             </i>
           </div>
@@ -425,7 +427,9 @@ exports[`VDatePicker.js should match snapshot with allowed dates and pick-month 
                 data-ripple="true"
         >
           <div class="btn__content">
-            <i class="material-icons icon">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
               chevron_right
             </i>
           </div>
@@ -583,7 +587,9 @@ exports[`VDatePicker.js should match snapshot with colored date picker 1`] = `
                 data-ripple="true"
         >
           <div class="btn__content">
-            <i class="material-icons icon">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
               chevron_left
             </i>
           </div>
@@ -598,7 +604,9 @@ exports[`VDatePicker.js should match snapshot with colored date picker 1`] = `
                 data-ripple="true"
         >
           <div class="btn__content">
-            <i class="material-icons icon">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
               chevron_right
             </i>
           </div>
@@ -954,7 +962,9 @@ exports[`VDatePicker.js should match snapshot with colored date picker 2`] = `
                 data-ripple="true"
         >
           <div class="btn__content">
-            <i class="material-icons icon">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
               chevron_left
             </i>
           </div>
@@ -969,7 +979,9 @@ exports[`VDatePicker.js should match snapshot with colored date picker 2`] = `
                 data-ripple="true"
         >
           <div class="btn__content">
-            <i class="material-icons icon">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
               chevron_right
             </i>
           </div>
@@ -1325,7 +1337,9 @@ exports[`VDatePicker.js should match snapshot with colored month picker 1`] = `
                 data-ripple="true"
         >
           <div class="btn__content">
-            <i class="material-icons icon">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
               chevron_left
             </i>
           </div>
@@ -1340,7 +1354,9 @@ exports[`VDatePicker.js should match snapshot with colored month picker 1`] = `
                 data-ripple="true"
         >
           <div class="btn__content">
-            <i class="material-icons icon">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
               chevron_right
             </i>
           </div>

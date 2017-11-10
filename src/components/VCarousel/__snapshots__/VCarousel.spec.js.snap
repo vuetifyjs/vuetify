@@ -108,6 +108,7 @@ exports[`VCarousel.js should render component with custom icon and match snapsho
   <div class="carousel__controls">
     <button type="button"
             class="btn btn--icon theme--dark carousel__controls__item carousel__controls__item--active"
+            data-ripple="true"
     >
       <div class="btn__content">
         <i aria-hidden="true"
@@ -119,6 +120,7 @@ exports[`VCarousel.js should render component with custom icon and match snapsho
     </button>
     <button type="button"
             class="btn btn--icon theme--dark carousel__controls__item"
+            data-ripple="true"
     >
       <div class="btn__content">
         <i aria-hidden="true"
@@ -130,6 +132,7 @@ exports[`VCarousel.js should render component with custom icon and match snapsho
     </button>
     <button type="button"
             class="btn btn--icon theme--dark carousel__controls__item"
+            data-ripple="true"
     >
       <div class="btn__content">
         <i aria-hidden="true"
@@ -358,6 +361,7 @@ exports[`VCarousel.js should render component without delimiters 1`] = `
   <div class="carousel__left">
     <button type="button"
             class="btn btn--icon theme--dark"
+            data-ripple="true"
     >
       <div class="btn__content">
         <i aria-hidden="true"
@@ -371,6 +375,7 @@ exports[`VCarousel.js should render component without delimiters 1`] = `
   <div class="carousel__right">
     <button type="button"
             class="btn btn--icon theme--dark"
+            data-ripple="true"
     >
       <div class="btn__content">
         <i aria-hidden="true"

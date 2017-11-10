@@ -184,15 +184,6 @@ export default {
 
       this.tryOverlay()
     },
-    right (val) {
-      this.updateApplication()
-
-      if (val) {
-        this.$vuetify.application.left = 0
-      } else {
-        this.$vuetify.application.right = 0
-      }
-    },
     value (val) {
       if (this.permanent && !this.isMobile) return
       if (val !== this.isActive) this.isActive = val
