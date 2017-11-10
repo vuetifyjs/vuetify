@@ -1,5 +1,7 @@
-<p align="center"><a href="https://vuetifyjs.com" target="_blank"><img width="100"src="https://vuetifyjs.com/static/doc-images/logo.svg"></a></p>
-<p align="center">Vuetify for Vue.js</p>
+<p align="center">
+  <a href="https://vuetifyjs.com" target="_blank"><img width="100"src="https://vuetifyjs.com/static/doc-images/logo.svg"></a>
+</p>
+
 <p align="center">
   <a href="https://travis-ci.org/vuetifyjs/vuetify">
     <img src="https://img.shields.io/travis/vuetifyjs/vuetify.svg" alt="travis ci badge">
@@ -26,43 +28,53 @@
     <img src="https://img.shields.io/badge/chat-on%20discord-7289da.svg" alt="Chat">
   </a>
 </p>
-<p>Vuetify.js is a semantic component framework for Vue.js 2. It aims to provide clean, semantic and reusable components that make building your application a breeze. Vuetify.js uses Google's <strong><a href="https://material.io/" target="_blank">Material Design</a></strong> design pattern, taking cues from other popular frameworks such as <a href="http://materializecss.com/" target="_blank">Materialize.css</a>, <a href="https://getmdl.io/" target="_blank">Material Design Lite</a>, <a href="http://semantic-ui.com/" target="_blank">Semantic UI</a> and <a href="https://v4-alpha.getbootstrap.com/" target="_blank">Bootstrap 4</a></p>
-<p>Build <i>amazing</i> applications with the power of Vue and Material Design with a massive library of beautifully crafted components. Built for speed, Vuetify components feature an easy-to-remember semantic design that shifts remembering complex classes and markup, to type-as-you speak properties that have simple and clear names.</p
-<p>Vuetify.js supports all <strong>modern browsers</strong>, including IE11 and Safari 9+. From mobile to laptop to desktop, you can rest assured that your application will work as expected. Interested in the bleeding edge? Try the vue-cli Webpack SSR (Server side rendered) template and build the ultimate UI.</p>
+
+<h2 align="center">Supporting Vuetify</h2>
+<p>Vuetify is an open source MIT project that has been made possible due to the generous contributions by <a href="https://github.com/vuetifyjs/vuetify/blob/dev/BACKERS.md">community backers</a>. If you are interested in supporting this project, please consider:</p>
+
+- [Become a Patreon Backer](https://www.patreon.com/vuetify)
+
+<h3 align="center">Patrons</h3>
+
+<h4 align="center">Diamond</h4>
+
 <p align="center">
-  <br><br>
-  <strong>Vuetify.js is proudly sponsored by:</strong>
-  <br><br>
-  <a href="https://www.cloudflare.com" target="_blank">
-    <img height="60px" src="https://vuetifyjs.com/static/doc-images/cloudflare.svg">
-  </a>
-  <br><br>
-  <a href="https://www.browserstack.com" target="_blank">
-    <img width="300px" src="https://vuetifyjs.com/static/doc-images/browser-stack.svg">
-  </a>
-  <br><br>
-</p>
-<p align="center">
-  <strong>Looking for Vue.js jobs? Check out <a href="https://vuejobs.com/?ref=vuetify" target="_blank">vuejobs.com</a></strong>
-</p>
-<hr>
-<p align="center">
-  <strong>Support Vuetify.js's development with:</strong>
-  <br>
-  <a href="https://patreon.com/vuetify" target="_blank">
-    Patreon
-  </a>
-  &nbsp;or&nbsp;
-  <a href="https://www.paypal.me/vuetify" target="_blank">
-    Paypal
+  <a href="https://careers.lmax.com/?utm_source=vuetify&utm_medium=github-link&utm_campaign=lmax-careers">
+    <img height="70px" src="https://vuetifyjs.com/static/doc-images/backers/lmax-exchange.png">
   </a>
 </p>
 
-## Demo and Documentation
+<h4 align="center">Palladium</h4>
+
+<p align="center">
+  <a href="http://intygrate.com/?ref=vuetify-github">
+    <img height="40px" src="https://vuetifyjs.com/static/doc-images/backers/intygrate.png">
+  </a>
+  <br><br>
+  <a href="http://www.eikospartners.com/?ref=vuetify-github">
+    <img height="40px" src="https://vuetifyjs.com/static/doc-images/backers/eikos-partners.webp">
+  </a>
+  <br><br>
+  <a href="https://application.rategenius.com/?ref=vuetify-github">
+    <img height="40px" src="https://vuetifyjs.com/static/doc-images/backers/rate-genius.png">
+  </a>
+</p>
+
+<h2>Introduction</h2>
+
+<p>Vuetify is a semantic component framework for Vue.js 2. It aims to provide clean, semantic and reusable components that make building your application a breeze. Vuetify was created according to Google's <strong><a href="https://material.io/" target="_blank">Material Design Spec</a></strong>. Supercharge your development with a clean, semantic UI toolkit that makes application creation a breeze.</p>
+
+<p>Build <i>amazing</i> applications with the power of Vue and Material Design and a massive library of beautifully crafted components. Created according to Google's <strong><a href="https://material.io/" target="_blank">Material Design Spec</a></strong>, Vuetify components feature an easy-to-remember semantic design that shifts remembering complex classes and markup, to type-as-you speak properties that have simple and clear names.</p>
+
+<p>Harness the power of the [Vuetify community](https://chat.vuetifyjs.com) and get help 24/7 from talented developers across the world, the dev team and the creator, John Leider. Become a [patreon backer](https://www.patreon.com/vuetify) and get access to special Patreon only channels.</p>
+  
+<p>Vuetify.js supports all <strong>modern browsers</strong>, including IE11 and Safari 9+. From mobile to laptop to desktop, you can rest assured that your application will work as expected. Interested in the bleeding edge? Try the vue-cli Webpack SSR (Server side rendered) template and build websites optimized for SEO.</p>
+
+<h2>Demo and Documentation</h2>
 
 <a href="https://vuetifyjs.com" target="_blank">Documentation</a>
 
-## CDN Quick-start
+<h2>CDN Quick-start</h2>
 
 ```html
 <!DOCTYPE html>
@@ -92,7 +104,7 @@
 </html>
 ```
 
-## Project Install
+<h2>Project Install</h2>
 
 ``` bash
 # npm
@@ -124,11 +136,11 @@ require('/path/to/node_modules/vuetify/dist/vuetify.min.css')
 ```
 Keep in mind, you will need to ensure your webpack config contains a css-loader.
 
-## Frequently asked questions and Gotchas
+<h2>Frequently asked questions and Gotchas</h2>
 <a href="https://vuetifyjs.com/vuetify/frequently-asked-questions" target="_blank">Frequently asked questions</a>
 
-## Support and Questions
+<h2>Community Support</h2>
 Ask your support questions on the vuetifyjs [discord](https://chat.vuetifyjs.com).
 
-## Info
+<h2>Additional Resources</h2>
 Codepen starter [Vuetify Template](http://codepen.io/johnjleider/pen/bgJOrX)
