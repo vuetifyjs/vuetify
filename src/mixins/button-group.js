@@ -8,8 +8,10 @@ export default {
 
   provide () {
     return {
-      registerChild: this.registerChild,
-      unregisterChild: this.unregisterChild
+      buttonGroup: {
+        registerChild: this.registerChild,
+        unregisterChild: this.unregisterChild
+      }
     }
   },
 
@@ -62,11 +64,6 @@ export default {
       }
     },
     registerChild (button) {
-      // We only care about buttons, not other possible children
-      if (!button || !button.$vnode || !button.$vnode.componentOptions || button.$vnode.componentOptions.tag !== 'v-btn') {
-        return
-      }
-
       const index = this.buttons.length
       this.buttons.push(button)
       this.listeners.push(this.updateValue.bind(this, index))

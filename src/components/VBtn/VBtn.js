@@ -10,10 +10,7 @@ export default {
   name: 'v-btn',
 
   inject: {
-    registerChild: {
-      default: null
-    },
-    unregisterChild: {
+    buttonGroup: {
       default: null
     }
   },
@@ -144,14 +141,14 @@ export default {
   },
 
   mounted () {
-    if (this.registerChild) {
-      this.registerChild(this)
+    if (this.buttonGroup) {
+      this.buttonGroup.registerChild(this)
     }
   },
 
   beforeDestroy () {
-    if (this.unregisterChild) {
-      this.unregisterChild(this)
+    if (this.buttonGroup) {
+      this.buttonGroup.unregisterChild(this)
     }
   },
 
