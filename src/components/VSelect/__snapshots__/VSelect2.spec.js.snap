@@ -43,10 +43,13 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
                        class="input-group input-group--dirty checkbox input-group--selection-controls input-group--active primary--text"
                   >
                     <div class="input-group__input">
-                      <i class="material-icons icon icon--selection-control fade-transition-leave fade-transition-leave-active">
+                      <i aria-hidden="true"
+                         class="material-icons icon icon--selection-control fade-transition-leave fade-transition-leave-active"
+                      >
                         check_box_outline_blank
                       </i>
-                      <i class="material-icons icon icon--selection-control icon--checkbox fade-transition-enter fade-transition-enter-active"
+                      <i aria-hidden="true"
+                         class="material-icons icon icon--selection-control icon--checkbox fade-transition-enter fade-transition-enter-active"
                          style="-webkit-transform-origin: top center 0;"
                       >
                         check_box
@@ -80,7 +83,9 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
                        class="input-group checkbox input-group--selection-controls primary--text"
                   >
                     <div class="input-group__input">
-                      <i class="material-icons icon icon--selection-control">
+                      <i aria-hidden="true"
+                         class="material-icons icon icon--selection-control"
+                      >
                         check_box_outline_blank
                       </i>
                       <div class="input-group--selection-controls__ripple"

@@ -190,8 +190,14 @@ export default {
     }
   },
 
+  created () {
+    this.init()
+  },
+
   mounted () {
-    this.$vuetify.load(this.init)
+    this.onResize()
+
+    setTimeout(() => (this.isBooted = true), 0)
   },
 
   destroyed () {
