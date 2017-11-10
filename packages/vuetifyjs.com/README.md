@@ -1,19 +1,20 @@
-# Vuetify Webpack SSR Template
+<p align="center">
+  <a href="https://vuetifyjs.com" target="_blank"><img width="100"src="https://vuetifyjs.com/static/doc-images/logo.svg"></a>
+</p>
 
-> Vuetify SSR Webpack Template
+<h2>Vuetify Documentation</h2>
+<p>This is the repository for the <a href="https://vuetifyjs.com" target="_blank">Vuetify</a> documentation.</p>
 
-## Build Setup
+<h2>Project Install</h2>
 
 ``` bash
-vue init vuetifyjs/webpack-ssr
+git clone https://github.com/vuetifyjs/vuetifyjs.com.git
 
-cd webpack-ssr
+# yarn
+yarn
 
 # npm
 npm install
 
-# yarn
-yarn
+npm run dev
 ```
-
-For additional information, please visit the [Official Documentation](https://vuetifyjs.com).
