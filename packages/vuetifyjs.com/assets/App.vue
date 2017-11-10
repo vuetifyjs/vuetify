@@ -59,3 +59,10 @@
     }
   }
 </script>
+
+<style lang="stylus">
+  @import '../node_modules/vuetify/src/stylus/settings/_elevations.styl'
+
+  code
+    elevation(1)
+</style>

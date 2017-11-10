@@ -1,8 +1,7 @@
 <template lang="pug">
   page(:id="id")
     page-heading
-      template(slot="title")
-        span.display-1 {{ $t(`Components.${namespace}.header`) }}
+      template(slot="title") {{ $t(`Components.${namespace}.header`) }}
       div(v-html="$t(`Components.${namespace}.headerText`)")
 
     section#usage
