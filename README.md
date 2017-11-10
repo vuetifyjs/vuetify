@@ -62,7 +62,7 @@
 
 <h2>Introduction</h2>
 
-<p>Vuetify is a semantic component framework for Vue.js 2. It aims to provide clean, semantic and reusable components that make building your application a breeze. Vuetify was created according to Google's <strong><a href="https://material.io/" target="_blank">Material Design Spec</a></strong>. Supercharge your development with a clean, semantic UI toolkit that makes application creation a breeze.</p>
+<p>Vuetify is a semantic component framework for Vue.js 2. It aims to provide clean, semantic and reusable components that make building your application a breeze. Supercharge your development with a clean, semantic UI toolkit that makes application creation a breeze.</p>
 
 <p>Build <i>amazing</i> applications with the power of Vue and Material Design and a massive library of beautifully crafted components. Created according to Google's <strong><a href="https://material.io/" target="_blank">Material Design Spec</a></strong>, Vuetify components feature an easy-to-remember semantic design that shifts remembering complex classes and markup, to type-as-you speak properties that have simple and clear names.</p>
 
