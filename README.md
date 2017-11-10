@@ -28,12 +28,12 @@
     <img src="https://img.shields.io/badge/chat-on%20discord-7289da.svg" alt="Chat">
   </a>
 </p>
-
+<br><br>
 <h2 align="center">Supporting Vuetify</h2>
 <p>Vuetify is an open source MIT project that has been made possible due to the generous contributions by <a href="https://github.com/vuetifyjs/vuetify/blob/dev/BACKERS.md">community backers</a>. If you are interested in supporting this project, please consider:</p>
 
-- [Become a Patreon Backer](https://www.patreon.com/vuetify)
-
+- [Become a Patreon backer](https://www.patreon.com/vuetify)
+<br><br>
 <h3 align="center">Patrons</h3>
 
 <h4 align="center">Diamond</h4>
