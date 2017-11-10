@@ -74,7 +74,7 @@
 
 <a href="https://vuetifyjs.com" target="_blank">Documentation</a>
 
-<h2>CDN Quick-start</h2>
+<h2>One minute Quick-start</h2>
 
 ```html
 <!DOCTYPE html>
