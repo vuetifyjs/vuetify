@@ -12,7 +12,6 @@
               v-model="e1"
               label="Select"
               single-line
-              bottom
             ></v-select>
           </v-flex>
           <v-flex xs6>

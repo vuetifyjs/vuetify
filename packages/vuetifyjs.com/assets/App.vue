@@ -4,30 +4,33 @@
     app-toolbar
     app-view
     app-footer
+    app-fab
 </template>
 
 <script>
-  import Meta from '@mixins/meta'
   import AppDrawer from '@core/AppDrawer'
+  import AppFab from '@core/AppFab'
+  import AppFooter from '@core/AppFooter'
   import AppToolbar from '@core/AppToolbar'
   import AppView from '@core/AppView'
-  import AppFooter from '@core/AppFooter'
+  import Meta from '@mixins/meta'
 
   export default {
     name: 'documentation',
 
     components: {
       AppDrawer,
+      AppFab,
+      AppFooter,
       AppToolbar,
-      AppView,
-      AppFooter
+      AppView
     },
 
     mixins: [Meta],
 
     watch: {
       $route (current, previous) {
-        this.setupLayout(300)
+        this.setupLayout(200)
       }
     },
 
@@ -36,17 +39,21 @@
     },
 
     methods: {
-      setupLayout (timeout = 0) {
-        const watcher = true
+      setupLayout (timeout = 300) {
         const drawer = this.$route.fullPath !== '/'
 
         setTimeout(() => {
-          this.$store.commit('app/ROUTE_WATCHER', true)
-          this.$store.commit('app/RESIZE_WATCHER', drawer)
+          this.$store.commit('app/STATELESS', !drawer)
 
-          if (drawer) return
+          if (this.$route &&
+            this.$route.fullPath !== '/' &&
+            this.$route.from &&
+            this.$route.from.fullPath !== '/'
+          ) return
+          
+          if (this.$vuetify.breakpoint.mdAndDown) return
 
-          this.$store.commit('app/DRAWER', false)
+          this.$store.commit('app/DRAWER', drawer)
         }, timeout)
       }
     }

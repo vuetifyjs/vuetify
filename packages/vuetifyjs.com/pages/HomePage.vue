@@ -60,41 +60,51 @@
 
     section#support
       v-container
-          v-layout(row wrap)
-            v-flex(
-              xs6
-              offset-xs3
-              md3
-              offset-md0
-              offset-xl1
-            ).text-xs-center
-              a(
-                href="https://www.patreon.com/vuetify"
-                target="_blank" rel="noopener"
-              )
-                img(src="/static/doc-images/patreon_logo.png" width="75%")
-            v-flex(xs12 md9 xl7).mb-5
-              p {{ $t("Vuetify.Home.support.hasVuetifyHelped") }}
-              p {{ $t("Vuetify.Home.support.showYourSupport") }} <a href="https://www.patreon.com/vuetify" target="_blank">{{ $t("Vuetify.Home.support.becomingAPatron") }}</a>.
+        v-layout(row wrap)
+          v-flex(
+            xs6
+            offset-xs3
+            md3
+            offset-md0
+            offset-xl1
+          ).text-xs-center
+            a(
+              href="https://www.patreon.com/vuetify"
+              target="_blank"
+              rel="noopener"
+            )
+              img(src="/static/doc-images/patreon_logo.png" width="75%")
+          v-flex(xs12 md9 xl7).mb-5
+            p {{ $t("Vuetify.Home.support.hasVuetifyHelped") }}
+            p {{ $t("Vuetify.Home.support.showYourSupport") }} <a href="https://www.patreon.com/vuetify" target="_blank">{{ $t("Vuetify.Home.support.becomingAPatron") }}</a>.
 
     section#sponsors-and-backers.my-5
       v-container
         v-card
           h2.text-xs-center.text-md-left {{ $t("Vuetify.Home.proudlySponsoredBy") }}
-          v-layout(row wrap)
-            v-flex(
-              xs12
-              sm6
-              md4
-              lg3
-              v-for="(sponsor, i) in sponsors"
-              :key="i"
-            ).text-xs-center
-              a(:href="sponsor.href" target="_blank" :title="sponsor.title" rel="noopener")
-                img(:src="sponsor.src" :height="sponsor.height").sponsor
-            v-flex(xs12 sm6 md4 lg3).text-xs-center
-              v-btn(to="/vuetify/sponsors-and-backers" large).white.primary--text {{ $t("Vuetify.Home.becomeSponsor") }}
-                v-icon(right).primary--text fa-arrow-circle-right
+          v-layout(row wrap justify-center align-center)
+            template(v-for="(supporter, i) in supporters")
+              v-flex(
+                xs12
+                v-if="supporter.break"
+                :key="i"
+              ) &nbsp;
+              a(
+                target="_blank"
+                rel="noopener"
+                class="ma-3"
+                :href="`${supporter.href}?ref=vuetifyjs.com`"
+                :title="supporter.title"
+                :key="i"
+                v-else
+              )
+                img(
+                  :src="`/static/doc-images/${supporter.src}`"
+                  :height="supporter.size || 'auto'"
+                ).supporter
+            v-flex(xs12).text-xs-center.mt-5
+              v-btn(to="/getting-started/sponsors-and-backers" large).white.primary--text {{ $t("Vuetify.Home.becomeSponsor") }}
+                v-icon(right color="primary") chevron_right
 
     section#callout
       v-container
@@ -108,49 +118,45 @@
 </template>
 
 <script>
+  // Components
   import HomeFooter from '@components/HomeFooter'
 
-  export default {
-    name: 'home-view',
+  // Utilities
+  import { mapState } from 'vuex'
 
-    data: () => ({
-      sponsors: [
-        {
-          title: 'LMAX Exchange',
-          href: 'https://careers.lmax.com/?utm_source=vuetify&utm_medium=logo-link&utm_campaign=lmax-careers',
-          src: '/static/doc-images/backers/lmax-exchange.png',
-          height: '45px'
-        },
-        {
-          title: 'BrowserStack',
-          href: 'https://www.browserstack.com/',
-          src: '/static/doc-images/browser-stack.svg',
-          height: '50px'
-        },
-        {
-          title: 'Cloudflare',
-          href: 'https://www.cloudflare.com/',
-          src: '/static/doc-images/cloudflare.svg'
-        }
-      ]
-    }),
+  export default {
+    name: 'home-page',
 
     components: {
       HomeFooter
     },
 
     computed: {
-      features () {
-        return this.$t('Vuetify.Home.features')
-      },
+      ...mapState({
+        diamond: state => state.supporters.diamond,
+        palladium: state => state.supporters.palladium
+      }),
       checkFeatures () {
         return this.$t('Vuetify.Home.checkFeatures')
       },
       checkFeaturesCtd () {
         return this.$t('Vuetify.Home.checkFeaturesCtd')
       },
+      features () {
+        return this.$t('Vuetify.Home.features')
+      },
       letterFromAuthor () {
         return this.$t('Vuetify.Home.letterFromAuthor')
+      },
+      supporters () {
+        const supporters = [].concat(this.diamond)
+          .concat(this.palladium)
+
+        const end = { break: true }
+
+        supporters.splice(1, 0, end)
+
+        return supporters
       }
     }
   }
@@ -327,6 +333,9 @@
 
   #support
     margin 1em
+    position: relative
+    z-index: 1
+
     img
       margin-bottom 2em
     p
@@ -371,7 +380,6 @@
         font-weight 300
         margin-bottom 1.5em
       img
-        margin-bottom 1.5em
         max-width: 100%
 
   #callout

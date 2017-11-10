@@ -37,7 +37,7 @@
     watch: {
       $route (current) {
         const fixed = current.path !== '/'
-        const duration = fixed ? 300 : 0
+        const duration = fixed ? 400 : 0
 
         setTimeout(() => {
           this.fixed = fixed

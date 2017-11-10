@@ -23,16 +23,16 @@ export default {
   "checkFeaturesTitle": "All the Tools You Need",
   "checkFeaturesTitleCtd": "To Build Incredible User Interfaces",
   "checkFeatures": [
-    "Semantic Helper Components",
+    "Community Chat Support",
+    "Dynamic Themes",
     "SSR and PWA Support",
-    "8 Vue-CLI Templates",
-    "Community Chat Support"
+    "8 Vue-CLI Templates"
   ],
   "checkFeaturesCtd": [
     "80+ Material Design Components",
-    "Transition System Component",
+    "A La Carte Importing",
+    "Transition Components",
     "Blazing Fast",
-    "A La Carte Components"
   ],
   "letterFromAuthor": [
     "Hey there,",
@@ -47,6 +47,6 @@ export default {
     "becomingAPatron":  "becoming a patron"
   },
   "becomeSponsor": "Become a Sponsor",
-  "proudlySponsoredBy": "Proudly sponsored by",
+  "proudlySponsoredBy": "Patreon Sponsors",
   "callout": "Supercharge your development with the power of Vue and Material Design"
 }

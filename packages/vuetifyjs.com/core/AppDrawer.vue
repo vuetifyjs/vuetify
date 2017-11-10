@@ -1,10 +1,9 @@
 <template lang="pug">
   v-navigation-drawer(
     app
-    persistent
+    fixed
     v-model="appDrawer"
-    :enable-resize-watcher="resizeWatcher"
-    :disable-route-watcher="!routeWatcher"
+    :stateless="stateless"
   )#app-drawer
     div.text-xs-center
       div.diamond-sponsor-label Diamond Sponsor
@@ -203,8 +202,7 @@
     }),
     computed: {
       ...mapState({
-        resizeWatcher: state => state.resizeWatcher,
-        routeWatcher: state => state.routeWatcher
+        stateless: state => state.stateless
       }),
       appDrawer: {
         get (state) {
