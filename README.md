@@ -32,7 +32,7 @@
 <h2 align="center">Supporting Vuetify</h2>
 <p>Vuetify is an open source MIT project that has been made possible due to the generous contributions by <a href="https://github.com/vuetifyjs/vuetify/blob/dev/BACKERS.md">community backers</a>. If you are interested in supporting this project, please consider:</p>
 
-- [Become a Patreon backer](https://www.patreon.com/vuetify)
+- [Becoming a Patreon backer](https://www.patreon.com/vuetify)
 <br><br>
 <h3 align="center">Patrons</h3>
 
@@ -62,13 +62,13 @@
 
 <h2>Introduction</h2>
 
-<p>Vuetify is a semantic component framework for Vue.js 2. It aims to provide clean, semantic and reusable components that make building your application a breeze. Supercharge your development with a clean, semantic UI toolkit that makes application creation a breeze.</p>
+<p>Vuetify is a semantic component framework for Vue. It aims to provide clean, semantic and reusable components that make building your application a breeze.</p>
 
 <p>Build <i>amazing</i> applications with the power of Vue and Material Design and a massive library of beautifully crafted components. Created according to Google's <strong><a href="https://material.io/" target="_blank">Material Design Spec</a></strong>, Vuetify components feature an easy-to-remember semantic design that shifts remembering complex classes and markup, to type-as-you speak properties that have simple and clear names.</p>
 
-<p>Harness the power of the [Vuetify community](https://chat.vuetifyjs.com) and get help 24/7 from talented developers across the world, the dev team and the creator, John Leider. Become a [patreon backer](https://www.patreon.com/vuetify) and get access to special Patreon only channels.</p>
+<p>Harness the power of the <a href="https://chat.vuetifyjs.com">Vuetify community</a> and get help 24/7 from talented developers across the world, the dev team and the creator, John Leider. Become a <a href="https://www.patreon.com/vuetify">patreon backer</a> and get access to special Patreon only channels.</p>
   
-<p>Vuetify.js supports all <strong>modern browsers</strong>, including IE11 and Safari 9+. From mobile to laptop to desktop, you can rest assured that your application will work as expected. Interested in the bleeding edge? Try the vue-cli Webpack SSR (Server side rendered) template and build websites optimized for SEO.</p>
+<p>Vuetify supports all <strong>modern browsers</strong>, including IE11 and Safari 9+. From mobile to laptop to desktop, you can rest assured that your application will work as expected. Interested in the bleeding edge? Try the vue-cli Webpack SSR (Server side rendered) template and build websites optimized for SEO.</p>
 
 <h2>Demo and Documentation</h2>
 
