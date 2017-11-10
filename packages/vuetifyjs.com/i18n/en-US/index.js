@@ -7,6 +7,7 @@ import Components from './components'
 // Pages
 import Vuetify from './vuetify'
 import GettingStarted from './getting-started'
+import Guides from './guides'
 
 // Examples
 import Examples from './examples'
@@ -16,5 +17,6 @@ export default {
   Components,
   Vuetify,
   GettingStarted,
-  Examples
+  Examples,
+  Guides
 }
