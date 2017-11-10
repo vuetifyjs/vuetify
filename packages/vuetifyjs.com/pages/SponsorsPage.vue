@@ -5,10 +5,8 @@
       v-divider.mb-3
       v-list.transparent
         v-list-tile
-          v-list-tile-avatar
-            v-avatar
-              v-icon fa-diamond
-          v-list-tile-title {{ $t('GettingStarted.Sponsors.backersSubHeader') }}
+          v-list-tile-title 
+            strong {{ $t('GettingStarted.Sponsors.backersSubHeader') }}
       v-container(fluid grid-list-md).mb-5
         v-layout(
           row
@@ -20,19 +18,37 @@
             :href="`${backer.href}?ref=vuetifyjs.com`"
             target="_blank"
             :title="backer.title"
-            v-for="backer in backers"
+            v-for="backer in diamond"
             v-bind:key="backer.title"
           ).text-xs-center.mx-3
             img(
-              :src="`/static/doc-images/backers/${backer.src}`"
+              :src="`/static/doc-images/${backer.src}`"
               :alt="backer.title"
             )
+
       v-list.transparent
         v-list-tile(tag="div")
-          v-list-tile-avatar
-            v-avatar
-              v-icon star
-          v-list-tile-title {{ $t('GettingStarted.Sponsors.backersSubHeader2') }}
+          v-list-tile-title
+            strong {{ $t('GettingStarted.Sponsors.backersSubHeader2') }}
+      v-container(fluid grid-list-md).mb-5
+        v-layout(row wrap justify-start align-center)
+          a(
+            target="_blank"
+            :class="[backer.dark ? 'black' : '']"
+            :href="`${backer.href}?ref=vuetifyjs.com`"
+            :title="backer.title"
+            v-for="backer in palladium"
+            v-bind:key="backer.title"
+          ).text-xs-center.mx-3
+            img(
+              :src="`/static/doc-images/${backer.src}`"
+              :alt="backer.title"
+            )
+
+      v-list.transparent
+        v-list-tile(tag="div")
+          v-list-tile-title
+            strong {{ $t('GettingStarted.Sponsors.backersSubHeader4') }}
       v-container(fluid grid-list-md).mb-5
         v-layout(
           row
@@ -45,11 +61,11 @@
             :class="[backer.dark ? 'black' : '']"
             :href="`${backer.href}?ref=vuetifyjs.com`"
             :title="backer.title"
-            v-for="backer in backers2"
+            v-for="backer in gold"
             v-bind:key="backer.title"
           ).text-xs-center.mx-3
             img(
-              :src="`/static/doc-images/backers/${backer.src}`"
+              :src="`/static/doc-images/${backer.src}`"
               :alt="backer.title"
             )
       section-heading(value="GettingStarted.Sponsors.affiliatesHeader")
@@ -70,7 +86,7 @@
             v-bind:key="affiliate.title"
           ).text-xs-center.mx-3
             img(
-              :src="`/static/doc-images/affiliates/${affiliate.src}`"
+              :src="`/static/doc-images/${affiliate.src}`"
               :alt="affiliate.title"
               width="150px"
             )
@@ -105,32 +121,25 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex'
+
   export default {
     name: 'sponsors-page',
+
     data: () => ({
       header: "GettingStarted.Sponsors.header",
-      headerText: "GettingStarted.Sponsors.headerText",
-      sponsors: [
-        { title: 'BrowserStack', href: 'https://www.browserstack.com/', src: 'browser-stack.png' },
-        { title: 'Cloudflare', href: 'https://www.cloudflare.com/', src: 'cloudflare.svg' }
-      ],
-      backers: [
-        { title: 'LMAX Exchange', href: 'https://careers.lmax.com/?utm_source=vuetify&utm_medium=logo-link&utm_campaign=lmax-careers', src: 'lmax-exchange.png' }
-      ],
-      backers2: [
-        { title: 'Deister Software', href: 'http://www.deister.es/', src: 'deister-logo-light.png' },
-        { title: 'Cocoatech', href: 'https://cocoatech.com/', src: 'cocoatechlogo.png' },
-        { title: 'Cycloid', href: 'https://www.cycloid.io/', src: 'cycloid.png' },
-        { title: 'Live Casino', href: 'https://livecasino.com/', src: 'casino.webp', dark: true },
-        { title: 'Nate Controls', href: 'http://www.natecontrols.com/', src: 'n8controls.png' }
-      ],
-      affiliates: [
-        { title: 'VueJobs', href: 'https://vuejobs.com/?utm_source=vuejobs&utm_medium=affiliates&utm_campaign=linking', noref: true, src: 'vuejobs-logo.svg' },
-        { title: 'Vue.js Developers', href: 'https://vuejsdevelopers.com', src: 'vuejsdevelopers.png' },
-        { title: 'Made with Vue.js', href: 'https://madewithvuejs.com', src: 'madewithvuejs.png' },
-        { title: 'Vue.js Radar', href: 'https://vuejsradar.com', src: 'vueradar.png' }
-      ]
-    })
+      headerText: "GettingStarted.Sponsors.headerText"
+    }),
+
+    computed: {
+      ...mapState({
+        diamond: state => state.supporters.diamond,
+        gold: state => state.supporters.gold,
+        palladium: state => state.supporters.palladium,
+        affiliates: state => state.supporters.affiliates,
+        sponsors: state => state.supporters.sponsors
+      })
+    }
   }
 </script>
 
