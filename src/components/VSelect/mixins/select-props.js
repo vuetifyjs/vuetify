@@ -20,6 +20,7 @@ export default {
       default: 200
     },
     deletableChips: Boolean,
+    dense: Boolean,
     editable: Boolean,
     hideSelected: Boolean,
     items: {

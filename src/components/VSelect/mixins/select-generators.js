@@ -241,6 +241,9 @@ export default {
 
       return this.$createElement('v-card', [
         this.$createElement('v-list', {
+          props: {
+            dense: this.dense
+          },
           ref: 'list'
         }, children)
       ])
