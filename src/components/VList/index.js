@@ -18,11 +18,11 @@ VList.install = function install (Vue) {
   Vue.component(VListGroup.name, VListGroup)
   Vue.component(VListTile.name, VListTile)
   Vue.component(VListTileAction.name, VListTileAction)
-  Vue.component('v-list-tile-action-text', VListTileActionText)
-  Vue.component('v-list-tile-avatar', VListTileAvatar)
-  Vue.component('v-list-tile-content', VListTileContent)
-  Vue.component('v-list-tile-sub-title', VListTileSubTitle)
-  Vue.component('v-list-tile-title', VListTileTitle)
+  Vue.component(VListTileActionText.name, VListTileActionText)
+  Vue.component(VListTileAvatar.name, VListTileAvatar)
+  Vue.component(VListTileContent.name, VListTileContent)
+  Vue.component(VListTileSubTitle.name, VListTileSubTitle)
+  Vue.component(VListTileTitle.name, VListTileTitle)
 }
 
 export default VList

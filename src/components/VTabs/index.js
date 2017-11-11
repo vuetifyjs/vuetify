@@ -5,6 +5,8 @@ import VTabsItem from './VTabsItem'
 import VTabsItems from './VTabsItems'
 import VTabsSlider from './VTabsSlider'
 
+export { VTabs, VTabsBar, VTabsContent, VTabsItem, VTabsItems, VTabsSlider }
+
 /* istanbul ignore next */
 VTabs.install = function install (Vue) {
   Vue.component(VTabs.name, VTabs)
