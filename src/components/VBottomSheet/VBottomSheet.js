@@ -5,9 +5,7 @@ import VDialog from '../VDialog/VDialog'
 export default {
   name: 'v-bottom-sheet',
 
-  components: {
-    VDialog
-  },
+  mixins: [VDialog],
 
   props: {
     inset: Boolean,
