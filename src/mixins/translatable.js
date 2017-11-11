@@ -24,10 +24,6 @@ export default {
     }
   },
 
-  mounted () {
-    this.$vuetify.load(this.init)
-  },
-
   beforeDestroy () {
     window.removeEventListener('scroll', this.translate, false)
     window.removeEventListener('resize', this.translate, false)

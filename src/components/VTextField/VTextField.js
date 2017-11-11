@@ -135,10 +135,8 @@ export default {
   },
 
   mounted () {
-    this.$vuetify.load(() => {
-      this.shouldAutoGrow && this.calculateInputHeight()
-      this.autofocus && this.focus()
-    })
+    this.shouldAutoGrow && this.calculateInputHeight()
+    this.autofocus && this.focus()
   },
 
   methods: {
