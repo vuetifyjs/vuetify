@@ -16,7 +16,7 @@ exports[`VPagination.vue emits an event when next or previous is clicked 1`] = `
     </button>
   </li>
   <li>
-    <button class="pagination__item">
+    <button class="pagination__item pagination__item--active primary">
       2
     </button>
   </li>
@@ -181,7 +181,7 @@ exports[`VPagination.vue should only render start and end of range if length is 
 
 <ul class="pagination">
   <li>
-    <button class="pagination__navigation">
+    <button class="pagination__navigation pagination__navigation--disabled">
       <i class="material-icons icon">
         chevron_left
       </i>
@@ -299,6 +299,27 @@ exports[`VPagination.vue should only render start and end of range if length is 
   </li>
   <li>
     <button class="pagination__navigation">
+      <i class="material-icons icon">
+        chevron_right
+      </i>
+    </button>
+  </li>
+</ul>
+
+`;
+
+exports[`VPagination.vue should render disabled buttons with length equals to 0 1`] = `
+
+<ul class="pagination">
+  <li>
+    <button class="pagination__navigation pagination__navigation--disabled">
+      <i class="material-icons icon">
+        chevron_left
+      </i>
+    </button>
+  </li>
+  <li>
+    <button class="pagination__navigation pagination__navigation--disabled">
       <i class="material-icons icon">
         chevron_right
       </i>
