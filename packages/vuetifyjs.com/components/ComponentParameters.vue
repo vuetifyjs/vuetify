@@ -39,7 +39,7 @@
 
     data () {
       return {
-        currentComponent: Object.keys(this.items)[0],
+        currentComponent: this.components[0],
         pagination: {
           rowsPerPage: 10
         },
@@ -49,6 +49,10 @@
     },
 
     props: {
+      api: {
+        type: Object,
+        default: () => ({})
+      },
       components: {
         type: Array,
         default: () => ([])
@@ -58,49 +62,91 @@
         type: Array,
         default: () => ([])
       },
-      items: {
-        type: Object,
-        default: () => ({})
-      },
       namespace: String,
       type: String
     },
 
     computed: {
+      items () {
+        const component = this.api[this.currentComponent] || {
+          props: [],
+          slots: [],
+          scopedSlots: []
+        }
+
+        let items = component[this.type]
+
+        if (this.type === 'slots' && component.scopedSlots) {
+          items = items.concat(component.scopedSlots)
+        }
+
+        return items
+      },
       parsedItems () {
-        const items = this.items[this.currentComponent] || { props: [] }
-
-        return items.props.map(item => {
-          const def = item.default
-          const type = this.$t(`Generic.Types.${item.type}`)
-          let description = ''
-
-          const specialLevelDesc = `Components.${this.namespace}.special.props.${this.currentComponent}.${item.name}`
-          const componentLevelDesc = `Components.${this.namespace}.props.${item.name}`
-          const genericDesc = `Generic.Props.${item.name}`
-          if (this.$te(specialLevelDesc)) {
-            description = this.$t(specialLevelDesc)
-          } else if (this.$te(componentLevelDesc)) {
-            description = this.$t(componentLevelDesc)
-          } else if (this.$te(genericDesc)) {
-            description = this.$t(genericDesc)
-          }
-
-          return {
-            name: this.parseName(item.name),
-            type,
-            default: type === 'Boolean' && def === 'undefined' ? 'false' : def,
-            description
-          }
-        })
+        return this[`gen${this.type}`]()
       }
     },
 
     methods: {
-      parseName (name) {
+      genDefault () {
+        return Object.assign({}, {
+          props: [],
+          slots: []
+        })
+      },
+      genDescription (item) {
+        let description = ''
+        const specialLevelDesc = `Components.${this.namespace}.special.${this.type}.${this.currentComponent}.${item.name}`
+        const componentLevelDesc = `Components.${this.namespace}.${this.type}.${item.name}`
+        const genericDesc = `Generic.${this.uppercase(this.type)}.${item.name}`
+
+        if (this.$te(specialLevelDesc)) {
+          description = this.$t(specialLevelDesc)
+        } else if (this.$te(componentLevelDesc)) {
+          description = this.$t(componentLevelDesc)
+        } else if (this.$te(genericDesc)) {
+          description = this.$t(genericDesc)
+        }
+
+        return description
+      },
+      genprops () {
+        return this.items.map(item => {
+          return {
+            name: this.genName(item.name),
+            type: this.genType(item.type),
+            default: item.default,
+            description: this.genDescription(item)
+          }
+        })
+      },
+      genslots () {
+        return this.items.map(item => {
+          return {
+            name: this.genName((item || '').slice()),
+            description: this.genDescription({
+              name: item
+            })
+          }
+        })
+      },
+      genName (name) {
+        name = name || ''
         name = name.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`)
 
         return `<code>${name}</code>`
+      },
+      genType (type) {
+        type = Array.isArray(type) ? type : [type]
+
+        return type.map(t => {
+          return this.$t(`Generic.Types.${t}`)
+        }).join(', ')
+      },
+      uppercase (str) {
+        str = str || ''
+
+        return str.substr(0, 1).toUpperCase() + str.slice(1)
       }
     }
   }

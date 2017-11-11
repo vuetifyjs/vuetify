@@ -2,7 +2,12 @@
   div#home
     v-alert(color="accent" value).ma-0
       div {{ $t('Vuetify.Home.announcementBanner') }}
-    v-card(dark tile flat color="primary")#banner
+    v-card(
+      dark
+      tile
+      flat
+      color="primary"
+    )#banner
       v-layout(align-center justify-center)
         v-flex.text-xs-center
           img(
@@ -30,29 +35,48 @@
           )
 
             img(:src="feature.img")
-            h3 {{ feature.title }}
-            p {{ feature.text }}
+            h3(v-text="feature.title").mb-4
+            p(v-text="feature.text").text-xs-justify
 
     section#checkFeatures
       v-container
         h2.text-xs-center
           span All the Tools You  Need
           | To Build Incredible User Interfaces
-        v-layout(row wrap)
-          v-flex.xs12.md5.offset-md1.lg4.offset-lg2.xl3.offset-xl3
+        v-layout(row wrap justify-center)
+          v-flex(
+            xs12
+            md5
+            lg5
+            xl3
+            offset-lg1
+            offset-xl3
+            :pl-5="$vuetify.breakpoint.smAndDown"
+          )
             ul
               li(v-for="(feature, i) in checkFeatures" :key="i") {{feature}}
-          v-flex.xs12.md5.lg4.xl3
+          v-flex(
+            xs12
+            md4
+            lg4
+            xl3
+            offset-xl3
+            :pl-5="$vuetify.breakpoint.smAndDown"
+          )
             ul
               li(v-for="(feature, i) in checkFeaturesCtd" :key="i") {{feature}}
 
     section#letterFromAuthor
       v-container
         v-layout
-          v-flex.xs9.xl8.offset-xl1
+          v-flex(
+            xs12
+            xl8
+            offset-xl1
+          )
             v-card
               p(v-for="(p, i) in letterFromAuthor" :key="i") {{p}}
-          v-flex(xs3 xl2).text-xs-center
+          v-flex(xs3 xl2).text-xs-center.hidden-xs-only
             v-avatar
              img(src="/static/doc-images/john.jpg")
             p.john John Leider

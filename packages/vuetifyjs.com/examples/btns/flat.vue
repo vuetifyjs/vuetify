@@ -2,7 +2,7 @@
   <v-container fluid class="text-xs-center">
     <v-layout row wrap>
       <v-flex xs12 sm6><span>Light Theme</span>
-        <v-card height="185px" flat color="white">
+        <v-card height="185px" flat color="transparent">
           <v-card-text>
             <div>
               <v-btn flat>Normal</v-btn>
@@ -17,13 +17,13 @@
         </v-card>
       </v-flex>
       <v-flex xs12 sm6><span>Dark Theme</span>
-        <v-card height="185px" flat color="secondary">
+        <v-card height="185px" flat color="grey darken-3">
           <v-card-text>
             <div>
               <v-btn flat dark>Normal</v-btn>
             </div>
             <div>
-              <v-btn flat dark color="primary">Primary</v-btn>
+              <v-btn flat dark color="secondary">Accent</v-btn>
             </div>
             <div>
               <v-btn flat dark disabled>Disabled</v-btn>

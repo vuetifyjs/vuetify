@@ -25,5 +25,9 @@ export default {
     searchInput: 'Bound when using the autocomplete prop. Use the .sync modifier to catch user input from the autocomplete search input',
     segmented: 'Creates a segmented button - <a href="https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons" target="_blank" rel="noopener">spec</a>',
     tags: 'Tagging functionality, allows the user to create new values not available from the <strong>items</strong> prop'
+  },
+  slots: {
+    item: 'Scoped slot for designating the markup for a list-tile',
+    selection: 'Scoped slot for designating the markup for the selected items'
   }
 }

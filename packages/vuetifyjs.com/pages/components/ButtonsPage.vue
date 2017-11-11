@@ -8,8 +8,9 @@
 
     data: () => ({
       component: 'v-btn',
-      usage: { file: 'flat' },
+      usage: { file: 'usage' },
       examples: [
+        { file: 'flat' },
         { file: 'raised' },
         { file: 'dropdown' },
         { file: 'toggle' },
