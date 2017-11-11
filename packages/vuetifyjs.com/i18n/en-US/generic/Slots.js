@@ -1,3 +1,7 @@
 export default {
-  default: 'Default Vue slot'
+  activator: 'When used, will activate the component when clicked (or hover for specific components). This manually stops the event propagation. Without this slot, if you open the component through its model, you will need to manually stop the event propagation',
+  default: 'Default Vue slot',
+  label: 'Replaces the default label',
+  progress: 'Slot for custom progress linear (displayed when <strong>loading</strong> prop is not equal to Boolean False)',
+  noData: 'Displayed when there are no filtered items'
 }

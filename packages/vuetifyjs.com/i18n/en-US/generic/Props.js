@@ -21,6 +21,7 @@ export default {
   exact: 'Exactly match the link. Without this, "/" will match every route',
   exactActiveClass: 'Vue Router router-link prop',
   falseValue: 'Sets value for falsy state',
+  fullWidth: 'Forces 100% width',
   fixed: 'Position the element fixed',
   hideDetails: 'Hides hint, validation errors',
   hint: 'Hint text',
@@ -48,6 +49,7 @@ export default {
   offsetOverflow: 'Causes the component to flip to the opposite side when repositioned due to overflow',
   origin: 'Sets the transition origin',
   placeholder: `Sets the input's placeholder text`,
+  persistent: 'Clicking outside will not dismiss the dialog',
   persistentHint: 'Forces hint visible',
   positionX: 'Used to position the content when not using an activator slot',
   positionY: 'Used to position the content when not using an activator slot',
@@ -73,5 +75,6 @@ export default {
   transition: 'Sets the component transition. Can be one of the built in transitions or your own.',
   value: 'Controls visibility',
   validateOnBlur: 'Delays validation until blur event',
+  width: 'The width the content',
   zIndex: 'The z-index used for the component'
 }

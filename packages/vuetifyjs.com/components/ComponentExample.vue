@@ -1,6 +1,9 @@
 <template lang="pug">
   div.component-example(:id="id")
-    h3(v-text="header").title
+    h3.title.layout.align-center
+      v-btn(icon :to="{ hash: id }" color="primary" flat).mx-0
+        v-icon link
+      span(v-text="header")
     div.my-3.justify
       slot(name="desc")
     p

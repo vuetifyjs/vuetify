@@ -1,4 +1,8 @@
 export default {
+  usage: {
+    header: 'Usage',
+    desc: ``
+  },
   flat: {
     header: "Flat",
     desc: ``

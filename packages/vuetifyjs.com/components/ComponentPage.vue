@@ -18,26 +18,27 @@
 
     section#api
       section-heading(value="Components.ComponentPage.api")
-      v-tabs(v-model="tabs" v-bind:scrollable="false").elevation-1
+      v-tabs(v-model="tab" v-bind:scrollable="false").elevation-1
         v-tabs-bar.grey.lighten-3.px-3
           v-tabs-slider(color="primary")
           v-tabs-item(
-            v-for="(p, i) in ['props']"
+            v-for="(p, i) in tabs"
             v-bind:href="`#${p}`"
             v-bind:key="i"
           ) {{ p }}
         v-tabs-items
           v-tabs-content(
-            v-for="(p, i) in ['props']"
+            v-for="(p, i) in tabs"
             v-bind:id="p"
             v-bind:key="i"
           )
             component-parameters(
               v-bind:headers="headers[p]"
               v-bind:type="p"
-              v-bind:items="getItems(p)"
+              v-bind:api="api"
               v-bind:namespace="namespace"
               v-bind:components="components"
+              v-bind:items="getItems(p)"
             )
 
     slot(name="top")
@@ -62,6 +63,8 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex'
+
   export default {
     name: 'component-page',
 
@@ -93,7 +96,8 @@
           { text: 'Description', value: 'description', align: 'left' }
         ]
       },
-      tabs: null
+      tab: null,
+      tabs: ['props', 'slots']
     }),
 
     props: {
@@ -102,6 +106,9 @@
     },
 
     computed: {
+      ...mapState({
+        api: state => state.api
+      }),
       component () {
         return this.data.component
       },
@@ -130,7 +137,7 @@
         if (this.data.plural) return namespace
 
         return `${namespace}s`
-      },
+      }
     },
 
     methods: {
