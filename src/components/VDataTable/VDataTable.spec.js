@@ -44,6 +44,14 @@ test('VDataTable.vue', () => {
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
+  it('should match a snapshot with single rows-per-page-items', () => {
+    const data = dataTableTestData()
+    data.propsData.rowsPerPageItems = [1]
+    const wrapper = mount(VDataTable, data)
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should render aria-sort attribute on column headers', async () => {
     const data = dataTableTestData()
     const wrapper = mount(VDataTable, data)
