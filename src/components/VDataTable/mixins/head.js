@@ -92,7 +92,7 @@ export default {
       }
 
       classes.push('sortable')
-      const icon = this.$createElement('v-icon', { attrs: { 'aria-hidden': true } }, 'arrow_upward')
+      const icon = this.$createElement('v-icon', 'arrow_upward')
       if (header.align && header.align === 'left') {
         children.push(icon)
       } else {
