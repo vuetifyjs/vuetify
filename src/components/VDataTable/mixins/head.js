@@ -12,7 +12,7 @@ export default {
           all: this.all
         })
 
-        children = this.needsTR(row) ? this.genTR(row) : row
+        children = [this.needsTR(row) ? this.genTR(row) : row, this.genTProgress()]
       } else {
         const row = this.headers.map(o => this.genHeader(o))
         const checkbox = this.$createElement('v-checkbox', {

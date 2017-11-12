@@ -292,7 +292,7 @@ export default {
       }
     },
     needsTR (row) {
-      return row.length && row.find(c => c.tag === 'td')
+      return row.length && row.find(c => c.tag === 'td' || c.tag === 'th')
     },
     genTR (children, data = {}) {
       return this.$createElement('tr', data, children)
