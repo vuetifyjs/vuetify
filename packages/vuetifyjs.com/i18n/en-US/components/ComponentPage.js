@@ -1,5 +1,5 @@
 export default {
-  api: 'Api',
+  api: 'API',
   usage: 'Usage',
   examples: 'Examples',
   showExample: 'Show Example',

@@ -57,7 +57,6 @@ export function createRouter () {
         route('/getting-started/frequently-asked-questions', 'getting-started/Faq'),
         route('/getting-started/sponsors-and-backers', 'getting-started/Sponsors'),
         route('/getting-started/contributing', 'getting-started/Contributing'),
-        route('/playground', 'Playground'),
         // Components
         route('/components/alerts', 'components/Alerts'),
         route('/components/avatars', 'components/Avatars'),

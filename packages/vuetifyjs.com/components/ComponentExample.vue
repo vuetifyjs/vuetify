@@ -1,14 +1,28 @@
 <template lang="pug">
-  div.component-example(:id="id")
-    h3.title.layout.align-center
-      v-btn(icon :to="{ hash: id }" color="primary" flat).mx-0
+  section.component-example(:id="id")
+    //- Section header
+    h3(v-if="header").title.layout.align-center
+      v-btn(
+        icon
+        color="primary"
+        flat
+        :to="{ hash: id }"
+        v-if="id"
+      ).mx-0
         v-icon link
       span(v-text="header")
-    div.my-3.justify
+
+    //- Description
+    div(v-if="$slots.desc").my-3.justify
       slot(name="desc")
-    p
-      div(:id="'example-'+uid")
+
+    //- Example mount point
+    div(:id="'example-'+uid")
+
+    //- Codepen
     codepen(ref="codepen" :pen="pen").mb-5
+
+    //- Example markup
     v-card
       v-expansion-panel.elevation-0
         v-expansion-panel-content(v-model="panel").grey.lighten-4
