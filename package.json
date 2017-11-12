@@ -24,7 +24,8 @@
     "lint": "eslint --ext .js,.vue src",
     "preparecommitmsg": "node dev/prepare-commit-message.js",
     "precommit": "yarn run lint && yarn test",
-    "prepush": "yarn run lint && yarn test"
+    "prepush": "yarn run lint && yarn test",
+    "prepare": "git update-index --skip-worktree .env"
   },
   "description": "Vue.js 2 Semantic Component Framework",
   "devDependencies": {
@@ -49,6 +50,7 @@
     "css-loader": "^0.28.7",
     "css-mqpacker": "^6.0.1",
     "cssnano": "^3.10.0",
+    "dotenv": "^4.0.0",
     "eslint": "^4.6.1",
     "eslint-config-standard": "^10.2.1",
     "eslint-config-vue": "^2.0.2",
