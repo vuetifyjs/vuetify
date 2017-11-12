@@ -101,17 +101,15 @@ export default {
   },
 
   mounted () {
-    this.$vuetify.load(() => {
-      // // This is a workaround to detect if link is active
-      // // when being used as a router or nuxt link
-      const i = this.tabItems.findIndex(({ el }) => {
-        return el.firstChild.classList.contains('tabs__item--active')
-      })
-
-      const tab = this.value || (this.tabItems[i !== -1 ? i : 0] || {}).id
-
-      tab && this.tabClick(tab)
+    // This is a workaround to detect if link is active
+    // when being used as a router or nuxt link
+    const i = this.tabItems.findIndex(({ el }) => {
+      return el.firstChild.classList.contains('tabs__item--active')
     })
+
+    const tab = this.value || (this.tabItems[i !== -1 ? i : 0] || {}).id
+
+    tab && this.tabClick(tab)
   },
 
   methods: {

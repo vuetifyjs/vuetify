@@ -1,4 +1,3 @@
-import load from '../../util/load'
 import application from './mixins/application'
 import theme from './mixins/theme'
 
@@ -8,7 +7,7 @@ const Vuetify = {
 
     this.installed = true
 
-    const $vuetify = { load }
+    const $vuetify = {}
     Vue.util.defineReactive($vuetify, 'breakpoint', {})
     Vue.util.defineReactive($vuetify, 'application', application)
     Vue.util.defineReactive($vuetify, 'dark', false)

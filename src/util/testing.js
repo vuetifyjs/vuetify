@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import load from '~util/load'
 import { mount, shallow } from 'avoriaz'
 import toHaveBeenWarnedInit from '~util/to-have-been-warned'
 import Vuetify from '~components/Vuetify'

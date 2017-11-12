@@ -191,7 +191,23 @@ export default {
   },
 
   mounted () {
-    this.$vuetify.load(this.init)
+    this.checkIfMobile()
+
+    // Same as 3rd conditional
+    // but has higher precedence
+    // than simply providing
+    // a default value
+    if (this.stateless) {
+      this.isActive = this.value
+    } else if (this.permanent && !this.isMobile) {
+      this.isActive = true
+    } else if (this.value != null) {
+      this.isActive = this.value
+    } else if (!this.temporary) {
+      this.isActive = !this.isMobile
+    }
+
+    setTimeout(() => (this.isBooted = true), 0)
   },
 
   destroyed () {
@@ -201,25 +217,6 @@ export default {
   },
 
   methods: {
-    init () {
-      this.checkIfMobile()
-
-      // Same as 3rd conditional
-      // but has higher precedence
-      // than simply providing
-      // a default value
-      if (this.stateless) {
-        this.isActive = this.value
-      } else if (this.permanent && !this.isMobile) {
-        this.isActive = true
-      } else if (this.value != null) {
-        this.isActive = this.value
-      } else if (!this.temporary) {
-        this.isActive = !this.isMobile
-      }
-
-      setTimeout(() => (this.isBooted = true), 0)
-    },
     calculateTouchArea () {
       if (!this.$el.parentNode) return
       const parentRect = this.$el.parentNode.getBoundingClientRect()

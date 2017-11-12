@@ -87,7 +87,7 @@ export default {
   },
 
   mounted () {
-    this.$vuetify.load(() => this.watchInputs())
+    this.watchInputs()
   },
 
   updated () {

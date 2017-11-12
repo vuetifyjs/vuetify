@@ -84,7 +84,10 @@ export default {
   },
 
   mounted () {
-    this.$vuetify.load.call(this, this.init)
+    this.selected = null
+
+    // TODO: Change this (f75dee3a, cbdf7caa)
+    setTimeout(() => (this.selected = this.value), 100)
   },
 
   methods: {
@@ -94,12 +97,6 @@ export default {
         : window.innerWidth
 
       this.maxButtons = Math.floor((width - 96) / 42)
-    },
-    init () {
-      this.selected = null
-
-      // Change this
-      setTimeout(() => (this.selected = this.value), 100)
     },
     next (e) {
       e.preventDefault()
