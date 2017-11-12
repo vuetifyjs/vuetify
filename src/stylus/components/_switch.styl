@@ -38,11 +38,22 @@ theme(switch, "switch")
   z-index: 0
 
   &.switch
-    min-width: 36px
+    &.input-group--prepend-icon, &.input-group--append-icon
+      label
+        left: 62px
+
+    &.input-group--prepend-icon
+      .input-group--selection-controls__container
+        margin-left: 6px
+
+    &.input-group--append-icon
+      .input-group__append-icon
+        left: 40px
 
     .input-group--selection-controls__container
       color: inherit
       position: relative
+      width: 36px
 
       &[class*="--text"]
         .input-group--selection-controls__ripple--active:after
@@ -66,6 +77,7 @@ theme(switch, "switch")
       transform: translate(-15px, -24px)
       transition: .3s $transition.fast-in-fast-out
       z-index: 1
+      left: 0
 
       &:after
         content: ''
