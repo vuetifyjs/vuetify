@@ -1,6 +1,6 @@
 <template lang="pug">
-  page(:id="id")
-    page-heading
+  page(:id="id" :toc="toc")
+    page-heading#introduction
       template(slot="title") {{ $t(`Components.${namespace}.header`) }}
       div(v-html="$t(`Components.${namespace}.headerText`)")
 
@@ -97,7 +97,25 @@
         ]
       },
       tab: null,
-      tabs: ['props', 'slots']
+      tabs: ['props', 'slots'],
+      toc: [
+        {
+          text: 'Introduction',
+          href: 'introduction' 
+        },
+        {
+          text: 'Usage',
+          href: 'usage'
+        },
+        {
+          text: 'API',
+          href: 'api'
+        },
+        {
+          text: 'Examples',
+          href: 'examples'
+        }
+      ]
     }),
 
     props: {
