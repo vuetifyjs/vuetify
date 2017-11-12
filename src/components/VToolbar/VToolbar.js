@@ -58,7 +58,7 @@ export default {
 
       if (this.$vuetify.breakpoint.width >
         this.$vuetify.breakpoint.height
-      ) return this.mobileLandscape
+      ) return this.heights.mobileLandscape
 
       return this.heights.mobile
     },

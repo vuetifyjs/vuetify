@@ -57,16 +57,14 @@ export default {
   },
 
   mounted () {
-    this.$vuetify.load(() => {
-      this.buttons = this.$children
+    this.buttons = this.$children
 
-      this.buttons.forEach((button, i) => {
-        this.listeners.push(this.updateValue.bind(this, i))
-        button.$on('click', this.listeners[i])
-      })
-
-      this.update()
+    this.buttons.forEach((button, i) => {
+      this.listeners.push(this.updateValue.bind(this, i))
+      button.$on('click', this.listeners[i])
     })
+
+    this.update()
   },
 
   beforeDestroy () {

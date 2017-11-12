@@ -1,11 +1,16 @@
 require('../../stylus/components/_bottom-navs.styl')
 
 import ButtonGroup from '../../mixins/button-group'
+import Colorable from '../../mixins/colorable'
 
 export default {
   name: 'v-bottom-nav',
 
-  mixins: [ButtonGroup],
+  mixins: [ButtonGroup, Colorable],
+
+  data: () => ({
+    defaultColor: 'primary'
+  }),
 
   props: {
     absolute: Boolean,
@@ -44,7 +49,7 @@ export default {
 
   render (h) {
     return h('div', {
-      class: this.classes
+      class: this.addBackgroundColorClassChecks(this.classes)
     }, this.$slots.default)
   }
 }

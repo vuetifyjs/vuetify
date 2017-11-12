@@ -84,7 +84,10 @@ export default {
   },
 
   mounted () {
-    this.$vuetify.load.call(this, this.init)
+    this.selected = null
+
+    // TODO: Change this (f75dee3a, cbdf7caa)
+    setTimeout(() => (this.selected = this.value), 100)
   },
 
   methods: {
@@ -94,12 +97,6 @@ export default {
         : window.innerWidth
 
       this.maxButtons = Math.floor((width - 96) / 42)
-    },
-    init () {
-      this.selected = null
-
-      // Change this
-      setTimeout(() => (this.selected = this.value), 100)
     },
     next (e) {
       e.preventDefault()
@@ -155,9 +152,9 @@ export default {
 
   render (h) {
     const children = [
-      this.genIcon(h, this.prevIcon, this.value === 1, this.previous),
+      this.genIcon(h, this.prevIcon, this.value <= 1, this.previous),
       this.genItems(h),
-      this.genIcon(h, this.nextIcon, this.value === this.length, this.next)
+      this.genIcon(h, this.nextIcon, this.value >= this.length, this.next)
     ]
 
     return h('ul', {

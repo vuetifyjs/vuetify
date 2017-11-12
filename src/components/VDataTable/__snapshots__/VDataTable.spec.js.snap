@@ -95,8 +95,7 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
                             class="list"
                         >
                           <li>
-                            <a href="javascript:;"
-                               class="list__tile list__tile--link"
+                            <a class="list__tile list__tile--link"
                                data-ripple="true"
                             >
                               <div class="list__tile__content">
@@ -107,8 +106,7 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
                             </a>
                           </li>
                           <li>
-                            <a href="javascript:;"
-                               class="list__tile list__tile--link"
+                            <a class="list__tile list__tile--link"
                                data-ripple="true"
                             >
                               <div class="list__tile__content">
@@ -119,8 +117,7 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
                             </a>
                           </li>
                           <li>
-                            <a href="javascript:;"
-                               class="list__tile list__tile--link"
+                            <a class="list__tile list__tile--link"
                                data-ripple="true"
                             >
                               <div class="list__tile__content">
@@ -131,8 +128,7 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
                             </a>
                           </li>
                           <li>
-                            <a href="javascript:;"
-                               class="list__tile list__tile--link"
+                            <a class="list__tile list__tile--link"
                                data-ripple="true"
                             >
                               <div class="list__tile__content">
@@ -153,8 +149,6 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
                   </i>
                 </div>
                 <div class="input-group__details">
-                  <div class="input-group__messages">
-                  </div>
                 </div>
               </div>
             </div>
@@ -167,7 +161,9 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
                     aria-label="Previous page"
             >
               <div class="btn__content">
-                <i class="material-icons icon">
+                <i aria-hidden="true"
+                   class="material-icons icon"
+                >
                   chevron_left
                 </i>
               </div>
@@ -178,7 +174,110 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
                     aria-label="Next page"
             >
               <div class="btn__content">
-                <i class="material-icons icon">
+                <i aria-hidden="true"
+                   class="material-icons icon"
+                >
+                  chevron_right
+                </i>
+              </div>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+`;
+
+exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 1`] = `
+
+<div class="table__overflow">
+  <table class="datatable table">
+    <thead>
+      <tr>
+        <th role="columnheader"
+            scope="col"
+            aria-label="First Column: Sorted ascending. Activate to sort descending."
+            aria-sort="ascending"
+            tabindex="0"
+            class="column sortable active asc text-xs-right a-string"
+        >
+          <i aria-hidden="true"
+             class="material-icons icon"
+          >
+            arrow_upward
+          </i>
+          First Column
+        </th>
+        <th role="columnheader"
+            scope="col"
+            aria-label="Second Column: Not sorted."
+            aria-sort="none"
+            class="column text-xs-right"
+        >
+          Second Column
+        </th>
+        <th role="columnheader"
+            scope="col"
+            aria-label="Third Column: Not sorted. Activate to sort ascending."
+            aria-sort="none"
+            tabindex="0"
+            class="column sortable text-xs-right an array"
+        >
+          <i aria-hidden="true"
+             class="material-icons icon"
+          >
+            arrow_upward
+          </i>
+          Third Column
+        </th>
+      </tr>
+      <tr class="datatable__progress">
+        <th colspan="100%"
+            class="column"
+        >
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="100%"
+            class="text-xs-center"
+        >
+          No matching records found
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="100%">
+          <div class="datatable__actions">
+            <div class="datatable__actions__pagination">
+              NaN-NaN of 3
+            </div>
+            <button type="button"
+                    class="btn btn--flat btn--icon"
+                    data-ripple="true"
+                    aria-label="Previous page"
+            >
+              <div class="btn__content">
+                <i aria-hidden="true"
+                   class="material-icons icon"
+                >
+                  chevron_left
+                </i>
+              </div>
+            </button>
+            <button type="button"
+                    class="btn btn--flat btn--icon"
+                    data-ripple="true"
+                    aria-label="Next page"
+            >
+              <div class="btn__content">
+                <i aria-hidden="true"
+                   class="material-icons icon"
+                >
                   chevron_right
                 </i>
               </div>

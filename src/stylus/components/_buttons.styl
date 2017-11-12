@@ -126,7 +126,7 @@ theme(button, "btn")
     width: $button-floating-width
     padding: 0
     elevation(6)
-    
+
     &.btn--fixed,
     &.btn--absolute
       z-index: 4
@@ -258,10 +258,16 @@ theme(button, "btn")
   &--small
     font-size: $button-small-font-size
     height: $button-small-height
+    
+    .btn__content
+      padding: $button-small-padding
 
   &--large
     font-size: $button-large-font-size
     height: $button-large-height
+    
+    .btn__content
+      padding: $button-large-padding
 
 
 /** Loader */
@@ -294,7 +300,7 @@ theme(button, "btn")
 
 /** Custom Buttons */
 .btn
-  &--outline
+  &.btn--outline
     border: 1px solid currentColor
     background: transparent !important
     box-shadow: none

@@ -1,9 +1,21 @@
-import { mount } from 'avoriaz'
+import { test } from '~util/testing'
 import { VCarouselItem } from '~components/VCarousel'
 
 const imageSrc = 'https://vuetifyjs.com/static/doc-images/cards/sunshine.jpg'
+const warning = '[Vuetify] Warn: The v-carousel-item component must be used inside a v-carousel.'
 
-describe('VCarouselItem.js', () => {
+test('VCarouselItem.js', ({ mount }) => {
+  it('should throw warning when not used inside v-carousel', () => {
+    const wrapper = mount(VCarouselItem, {
+      propsData: {
+        src: imageSrc
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(warning).toHaveBeenTipped()
+  })
+
   it('should render component and match snapshot', () => {
     const wrapper = mount(VCarouselItem, {
       propsData: {
@@ -12,27 +24,6 @@ describe('VCarouselItem.js', () => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('should render component with custom transition and match snapshot', () => {
-    const wrapper = mount(VCarouselItem, {
-      propsData: {
-        src: imageSrc,
-        transition: 'slide-y-transition'
-      }
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('should render component with custom reverse transition and match snapshot', () => {
-    const wrapper = mount(VCarouselItem, {
-      propsData: {
-        src: imageSrc,
-        'reverse-ransition': 'slide-y-reverse-transition'
-      }
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(warning).toHaveBeenTipped()
   })
 })

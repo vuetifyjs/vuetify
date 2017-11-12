@@ -127,9 +127,6 @@ export default {
         : (this[`${type}IconCb`] || defaultCallback)
 
       return this.$createElement('v-icon', {
-        attrs: {
-          'aria-hidden': true
-        },
         'class': {
           [`input-group__${type}-icon`]: true,
           'input-group__icon-cb': !!callback,
@@ -202,7 +199,8 @@ export default {
           'class': 'input-group__input'
         }, wrapperChildren)
       )
-      detailsChildren.push(this.genMessages())
+
+      !this.hideDetails && detailsChildren.push(this.genMessages())
 
       if (this.counter) {
         detailsChildren.push(this.genCounter())

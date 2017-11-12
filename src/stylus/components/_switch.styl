@@ -63,7 +63,7 @@ theme(switch, "switch")
         opacity: .5
 
     .input-group--selection-controls__ripple
-      transform: translate3d(-15px, -24px, 0)
+      transform: translate(-15px, -24px)
       transition: .3s $transition.fast-in-fast-out
       z-index: 1
 
@@ -76,12 +76,12 @@ theme(switch, "switch")
         border-radius: 50%
         top: 50%
         left: 50%
-        transform: translate3d(-50%, -50%, 0)
+        transform: translate(-50%, -50%)
         height: 20px
         elevation(4)
 
       &--active
-        transform: translate3d(2px, -24px, 0)
+        transform: translate(2px, -24px)
 
     label
       padding-left: 14px

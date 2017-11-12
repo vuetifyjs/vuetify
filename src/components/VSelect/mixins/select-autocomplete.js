@@ -1,3 +1,5 @@
+import { escapeHTML } from '../../../util/helpers'
+
 /**
  * Select autocomplete
  *
@@ -31,21 +33,21 @@ export default {
       )
     },
     genFiltered (text) {
+      text = (text || '').toString()
+
       if (!this.isAutocomplete ||
         !this.searchValue ||
         this.filteredItems.length < 1
-      ) return text
-
-      text = (text || '').toString()
+      ) return escapeHTML(text)
 
       const { start, middle, end } = this.getMaskedCharacters(text)
 
-      return `${start}${this.genHighlight(middle)}${end}`
+      return `${escapeHTML(start)}${this.genHighlight(middle)}${escapeHTML(end)}`
     },
     genHighlight (text) {
-      if (this.isNotFiltering) return text
+      if (this.isNotFiltering) return escapeHTML(text)
 
-      return `<span class="list__tile__mask">${text}</span>`
+      return `<span class="list__tile__mask">${escapeHTML(text)}</span>`
     },
     getMaskedCharacters (text) {
       const searchValue = (this.searchValue || '').toString().toLowerCase()
@@ -66,14 +68,15 @@ export default {
     tabOut () {
       this.blur()
 
-      if (this.isAutocomplete && !this.isMultiple && !this.searchValue) {
-        // Single (not multiple) autocomplete select with an
-        // empty search value should clear the input value
+      // Single (not multiple) autocomplete select with an
+      // empty search value that is not a combobox should
+      // clear the input value
+      if (this.isAutocomplete &&
+        !this.isMultiple &&
+        !this.searchValue &&
+        !this.combobox
+      ) {
         this.inputValue = null
-      } else if (this.combobox) {
-        // For combo box use selected
-        // menu item or searchValue
-        this.inputValue = this.getCurrentTag()
       }
     },
     onTabDown (e) {
@@ -112,7 +115,7 @@ export default {
       // If enter, space, up, or down is pressed, open menu
       if (!this.menuIsActive && [13, 32, 38, 40].includes(e.keyCode)) {
         e.preventDefault()
-        return this.showMenuItems()
+        return this.showMenu()
       }
 
       // If escape deactivate the menu
@@ -133,7 +136,7 @@ export default {
         !this.searchValue
       ) this.changeSelectedIndex(e.keyCode)
 
-      if (!this.tags || !this.searchValue) return
+      if (!this.isAnyValueAllowed || !this.searchValue) return
 
       // Enter
       if (e.keyCode === 13) return this.onEnterDown()
@@ -157,17 +160,35 @@ export default {
       this.$refs.menu.tiles[index].click()
     },
     updateTags (content) {
+      // Avoid direct mutation
+      // for vuex strict mode
+      let selectedItems = this.selectedItems.slice()
+
       // If a duplicate item
       // exists, remove it
-      if (this.selectedItems.includes(content)) {
-        this.$delete(this.selectedItems, this.selectedItems.indexOf(content))
+      if (selectedItems.includes(content)) {
+        this.$delete(selectedItems, selectedItems.indexOf(content))
       }
 
-      this.selectedItems.push(content)
+      // When updating tags ensure
+      // that that the search text
+      // is populated if needed
+      let searchValue = null
+      if (this.combobox) {
+        selectedItems = [content]
+        searchValue = this.chips ? null : content
+      } else {
+        selectedItems.push(content)
+      }
+
+      this.selectedItems = selectedItems
 
       this.$nextTick(() => {
-        this.searchValue = null
-        this.$emit('change', this.selectedItems)
+        this.searchValue = searchValue
+        this.$emit('input', this.combobox ? content : this.selectedItems)
+
+        // Combobox should close its menu when tags are updated
+        this.menuIsActive = !this.combobox
       })
     }
   }

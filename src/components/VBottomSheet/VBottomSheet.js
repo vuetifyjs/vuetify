@@ -5,12 +5,16 @@ import VDialog from '../VDialog/VDialog'
 export default {
   name: 'v-bottom-sheet',
 
-  components: {
-    VDialog
-  },
-
   props: {
+    disabled: Boolean,
+    fullWidth: Boolean,
     inset: Boolean,
+    lazy: Boolean,
+    maxWidth: {
+      type: [String, Number],
+      default: 'auto'
+    },
+    persistent: Boolean,
     value: null
   },
 
@@ -26,7 +30,7 @@ export default {
 
     return h(VDialog, {
       attrs: {
-        ...this.$attrs
+        ...this.$props
       },
       on: {
         ...this.$listeners

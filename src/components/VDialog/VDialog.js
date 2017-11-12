@@ -86,7 +86,7 @@ export default {
 
   mounted () {
     this.isBooted = this.isActive
-    this.$vuetify.load(this.init)
+    this.isActive && this.show()
   },
 
   beforeDestroy () {
@@ -98,9 +98,6 @@ export default {
       // close dialog if !persistent, clicked outside and we're the topmost dialog.
       // Since this should only be called in a capture event (bottom up), we shouldn't need to stop propagation
       return !this.persistent && getZIndex(this.$refs.content) >= this.getMaxZIndex()
-    },
-    init () {
-      this.isActive && this.show()
     },
     show () {
       !this.fullscreen && !this.hideOverlay && this.genOverlay()

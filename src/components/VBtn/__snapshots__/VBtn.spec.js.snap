@@ -35,8 +35,7 @@ exports[`VBtn.js should render component and match snapshot 1`] = `
 
 exports[`VBtn.js should render specified tag when using tag prop 1`] = `
 
-<a href="javascript:;"
-   class="btn"
+<a class="btn"
    data-ripple="true"
 >
   <div class="btn__content">
