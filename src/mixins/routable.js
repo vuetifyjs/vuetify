@@ -1,4 +1,5 @@
 import Ripple from '../directives/ripple'
+import { normalizeEvent } from '../util/helpers'
 
 export default {
   directives: {
@@ -25,7 +26,9 @@ export default {
     generateRouteLink () {
       let exact = this.exact
       let tag
-
+      const normalizedListeners = Object.keys(this.$listeners).map(event =>
+        Object.create({ [normalizeEvent(event)]: this.$listeners[event] })
+      )
       const data = {
         attrs: { disabled: this.disabled },
         class: this.classes,
@@ -35,11 +38,10 @@ export default {
           value: this.ripple || false
         }],
         on: {
-          ...(this.$listeners || {}),
+          ...(normalizedListeners || {}),
           click: this.click
         }
       }
-
       if (typeof this.exact === 'undefined') {
         exact = this.to === '/' ||
           (this.to === Object(this.to) && this.to.path === '/')
