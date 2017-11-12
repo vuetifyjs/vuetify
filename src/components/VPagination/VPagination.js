@@ -157,7 +157,7 @@ export default {
     const children = [
       this.genIcon(h, this.prevIcon, this.value <= 1, this.previous),
       this.genItems(h),
-      this.genIcon(h, this.nextIcon, this.value > this.length, this.next)
+      this.genIcon(h, this.nextIcon, this.value >= this.length, this.next)
     ]
 
     return h('ul', {
