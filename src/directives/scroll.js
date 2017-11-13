@@ -10,26 +10,19 @@ function inserted (el, binding) {
     target = document.querySelector(target)
   }
 
-  const cb = () => {
-    const windowOffset = window.pageYOffset ||
-      document.documentElement.scrollTop
-
-    callback(windowOffset)
-  }
-
-  target.addEventListener('scroll', cb, options)
+  target.addEventListener('scroll', callback, options)
 
   el._onScroll = {
-    cb,
+    callback,
     options,
     target
   }
 }
 
 function unbind (el, binding) {
-  const { cb, options, target } = el._onScroll
+  const { callback, options, target } = el._onScroll
 
-  target.removeEventListener('scroll', cb, options)
+  target.removeEventListener('scroll', callback, options)
 }
 
 export default {
