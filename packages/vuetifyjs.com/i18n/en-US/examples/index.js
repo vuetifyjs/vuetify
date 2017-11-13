@@ -34,7 +34,7 @@ import Tabs from './Tabs'
 import TextFields from './TextFields'
 import Toolbars from './Toolbars'
 import Tooltips from './Tooltips'
-import Touch from './touch'
+import Touch from './Touch'
 
 export default {
   Alerts,
