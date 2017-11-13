@@ -1,5 +1,5 @@
 <template lang="pug">
-  page(:id="id" :toc="toc")
+  page(v-bind="$attrs" :toc="toc")
     page-heading#introduction
       template(slot="title") {{ $t(`Components.${namespace}.header`) }}
       div(v-html="$t(`Components.${namespace}.headerText`)")
@@ -63,9 +63,12 @@
 </template>
 
 <script>
+  // Utilities
   import { mapState } from 'vuex'
 
   export default {
+    inheritAttrs: false,
+
     name: 'component-page',
 
     data: () => ({
@@ -97,25 +100,7 @@
         ]
       },
       tab: null,
-      tabs: ['props', 'slots'],
-      toc: [
-        {
-          text: 'Introduction',
-          href: 'introduction' 
-        },
-        {
-          text: 'Usage',
-          href: 'usage'
-        },
-        {
-          text: 'API',
-          href: 'api'
-        },
-        {
-          text: 'Examples',
-          href: 'examples'
-        }
-      ]
+      tabs: ['props', 'slots']
     }),
 
     props: {
@@ -155,6 +140,9 @@
         if (this.data.plural) return namespace
 
         return `${namespace}s`
+      },
+      toc () {
+        return this.$t(`Components.ComponentPage.toc`)
       }
     },
 

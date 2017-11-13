@@ -1,5 +1,5 @@
 <template lang="pug">
-  page
+  page(v-bind="$attrs" :toc="toc")
     page-heading
       template(slot="title") {{ $t(data.header) }}
       p(v-html="$t(data.headerText)" v-if="data.headerText")
@@ -9,11 +9,19 @@
 
 <script>
   export default {
+    inheritAttrs: false,
+
     name: 'text-page',
 
     props: {
       data: Object,
       default: () => {}
+    },
+
+    computed: {
+      toc () {
+        return this.$t(`GettingStarted.QuickStart.toc`)
+      }
     }
   }
 </script>

@@ -14,5 +14,30 @@ export default {
   existingText5: `The easiest way to include the Material Design icons is to add a <code>link</code> tag to your <code>index.html</code> file.`,
   alert2: `Warning: While Vuetify attempts to not cause any css collision as much as possible, there is no guarantee that your custom styles will not alter your experience when integrating this framework into your existing project.`,
   browserHeader: 'Supported Browsers',
-  browserText: 'Vuetify.js is a progressive framework that attempts to push web development to the next level. In order to best accomplish this task, some sacrifices had to be made in terms of support for older versions of Internet Explorer.'
+  browserText: 'Vuetify.js is a progressive framework that attempts to push web development to the next level. In order to best accomplish this task, some sacrifices had to be made in terms of support for older versions of Internet Explorer.',
+  ie11Header: 'IE11 support',
+  ie11Text: `In your project directory, install <code>babel-polyfill</code> and import it into your main entry:`,
+  ie11Text2: `Due to Internet Explorer's limited support for <code>&lt;template&gt;</code> tags, you must send fully compiled dom elements to the browser. This can be done by either building your Vue code in advance or by creating helper components to replace the dom elements. For instance, if sent directly to IE, this will fail:`,
+  toc: [
+    {
+      text: 'Introduction',
+      href: 'quick-start-page'
+    },
+    {
+      text: 'CDN install',
+      href: 'cdn-install'
+    },
+    {
+      text: 'New applications',
+      href: 'new-applications'
+    },
+    {
+      text: 'Existing applications',
+      href: 'existing-applications'
+    },
+    {
+      text: 'Supported browsers',
+      href: 'supported-browsers'
+    }
+  ]
 }

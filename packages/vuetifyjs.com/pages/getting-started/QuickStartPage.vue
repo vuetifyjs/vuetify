@@ -1,5 +1,5 @@
 <template lang="pug">
-  text-page(:data="$data")
+  text-page(:data="$data" id="quick-start-page")
     app-alert(error value="GettingStarted.QuickStart.alert1")
 
     section#cdn-install
@@ -60,7 +60,7 @@
       section-text(value="GettingStarted.QuickStart.existingText5")
       app-alert(error value="GettingStarted.QuickStart.alert2")
 
-    section#browser-support
+    section#supported-browsers
       section-heading(value="GettingStarted.QuickStart.browserHeader")
       section-text(value="GettingStarted.QuickStart.browserText")
       v-list.transparent
@@ -79,6 +79,23 @@
               v-list-tile-action
                 v-icon(v-if="!browser.supported" color="error") clear
                 v-icon(v-else color="success") check
+
+    section#ie11-support
+      section-heading(value="GettingStarted.QuickStart.ie11Header")
+      section-text(value="GettingStarted.QuickStart.ie11Text")
+
+      markup(lang="cli")
+        |// my-project/
+        |npm install babel-polyfill --save-dev // or yarn add babel-polyfill
+
+      markup(lang="javascript")
+        |// my-project/src/index.js
+        |import 'babel-polyfill'
+        |...
+        |new Vue()
+
+      section-text(value="GettingStarted.QuickStart.ie11Text2")
+
 </template>
 
 <script>
