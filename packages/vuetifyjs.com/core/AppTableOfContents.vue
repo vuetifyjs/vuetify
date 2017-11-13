@@ -90,6 +90,10 @@
       onScroll (offset) {
         this.genList()
 
+        if (document.body.clientHeight - offset - window.innerHeight < 300) {
+          return (this.activeIndex = this.targets.length - 1)
+        }
+
         const shouldFloat = offset >= this.threshold
 
         this.position =  shouldFloat ? 'fixed' : 'relative'
