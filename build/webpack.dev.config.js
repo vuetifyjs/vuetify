@@ -73,9 +73,6 @@ module.exports = {
       filename: '[name].css',
       allChunks: true
     }),
-    new OptimizeCssAssetsPlugin({
-      assetNameRegExp: /\.css$/
-    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': "'development'"
     }),

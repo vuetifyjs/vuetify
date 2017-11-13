@@ -91,7 +91,6 @@ export default {
     return h('div', {
       staticClass: 'snack',
       'class': this.classes,
-      style: { zIndex: 999999 },
       on: this.$listeners
     }, [h(this.computedTransition, children)])
   }
