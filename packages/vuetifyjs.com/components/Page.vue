@@ -28,7 +28,7 @@
       id: {
         type: String,
         default () {
-          return this._uid
+          return this._uid.toString()
         }
       },
       toc: {
@@ -41,7 +41,7 @@
 
 <style lang="stylus">
   .page
-    // max-width: 1280px !important
+    max-width: 1185px !important
     padding-top: 75px
     
     section

@@ -44,7 +44,7 @@ export default {
   },
 
   mounted () {
-    this.$vuetify.load(this.bootstrapMeta)
+    this.bootstrapMeta()
   },
 
   methods: {

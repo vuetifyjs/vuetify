@@ -44,7 +44,7 @@
     },
 
     mounted () {
-      this.$vuetify.load(this.genList)
+      this.genList()
     },
 
     methods: {
