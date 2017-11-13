@@ -57,6 +57,9 @@ export function createRouter () {
         route('/getting-started/frequently-asked-questions', 'getting-started/Faq'),
         route('/getting-started/sponsors-and-backers', 'getting-started/Sponsors'),
         route('/getting-started/contributing', 'getting-started/Contributing'),
+        // Application Layout
+        // Base Styles
+        // Motion & Translations
         // Components
         route('/components/alerts', 'components/Alerts'),
         route('/components/avatars', 'components/Avatars'),
@@ -93,6 +96,10 @@ export function createRouter () {
         route('/components/text-fields', 'components/TextFields'),
         route('/components/toolbars', 'components/Toolbars'),
         route('/components/tooltips', 'components/Tooltips'),
+        // Directives
+        route('/directives/touch-support', 'directives/Touch'),
+        //
+        route('/pre-made-themes', 'PremadeThemes'),
         // Guides
         route('/guides/server-side-rendering', 'guides/SSR'),
         // Global redirect for 404

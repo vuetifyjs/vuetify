@@ -172,10 +172,10 @@
           title: 'Directives',
           group: 'directives',
           items: [
-            { href: '/resizing', title: 'Resizing' },
-            { href: '/ripples', title: 'Ripples' },
-            { href: '/scrolling', title: 'Scrolling' },
-            { href: '/touch-support', title: 'Touch support' }
+            { href: '/directives/resizing', title: 'Resizing' },
+            { href: '/directives/ripples', title: 'Ripples' },
+            { href: '/directives/scrolling', title: 'Scrolling' },
+            { href: '/directives/touch-support', title: 'Touch support' }
           ]
         },
         { href: '/pre-made-themes', title: 'Pre-made themes' },
