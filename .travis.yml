@@ -40,8 +40,7 @@ deploy:
       tags: true
   - provider: releases
     api_key: $GITHUB_API_KEY
-    files:
-      - "release/vuetify-${TRAVIS_TAG}.zip"
+    file: "release/vuetify-${TRAVIS_TAG}.zip"
     skip_cleanup: true
     on:
       tags: true
