@@ -5,30 +5,28 @@
         v-container(fluid grid-list-md).pa-0
           v-layout(row wrap).pillars
             v-flex(
-            xs12
-            sm4
-            v-for="(p, i) in philosophies"
+              xs12
+              sm4
+              v-for="(p, i) in philosophies"
               :key="i"
             )
               v-card
                 v-layout(align-center justify-center).pa-5
                   v-avatar(size="150px")
-                    img(
-                    :src="p.img"
-                    ).grey.darken-4
+                    img(:src="p.img").grey.darken-4
                 div.px-3
                   v-divider.indigo.lighten-4
                 v-card-title(primary).headline.layout.justify-center
                   span(v-text="p.title")
                 v-card-text(v-html="p.caption").caption
+
     v-layout(row wrap).mb-5
       v-flex(xs12)
         v-container(fluid grid-list-md).pa-0
           v-layout(row wrap)
             v-flex(xs12 md7).mb-5
-
               section
-                p(v-for="(p, i) in whyText" :key="i") {{p}}
+                p(v-for="(p, i) in whyText" :key="i") {{ p }}
 
               section#design-principles
                 section-heading(value="GettingStarted.WhyVuetify.designHeader")
@@ -43,8 +41,8 @@
                 section-text(value="GettingStarted.WhyVuetify.comparisonText")
 
                 v-subheader {{ $t('GettingStarted.WhyVuetify.featuresHeader') }}
-                v-layout(row wrap)
-                  v-flex(xs12 sm8)
+                v-layout(row wrap justify-center)
+                  v-flex(xs12)
                     v-list(style="max-width: 400px;" dense).transparent.mb-5
                       v-list-tile(
                       tag="div"
@@ -58,20 +56,11 @@
                           v-list-tile-title.subheading {{ feature }}
                         v-list-tile-action
                           v-icon(dark).green--text check
-                  v-flex(xs12 sm4)
-                    v-layout(fill-height column align-center justify-center)
-                      img(
-                      src="/static/doc-images/logo.svg"
-                      alt="Vuetify"
-                      width="150px"
-                      ).flex.text-xs-center
+
             v-flex(xs12 md4 ofset-xs0 offset-md1).mb-5
               v-badge(color="error" overlap)
                 v-icon(slot="badge" left overlap class="white--text") favorite
-                v-card(
-                flat
-                tile
-                ).red--after
+                v-card(flat tile).red--after
                   v-list
                     v-list-tile(avatar tag="div")
                       v-list-tile-avatar
@@ -83,10 +72,10 @@
                       v-list-tile-action
                         v-tooltip(left)
                           v-btn(
-                          icon
-                          href="mailto:john@vuetifyjs.com"
-                          slot="activator"
-                          )
+                            icon
+                            href="mailto:john@vuetifyjs.com"
+                            slot="activator"
+                          ).grey--text
                             v-icon mail
                           span {{ $t('GettingStarted.WhyVuetify.contactMe') }}
                   v-card-text {{ $t('GettingStarted.WhyVuetify.letterFromAuthor') }}

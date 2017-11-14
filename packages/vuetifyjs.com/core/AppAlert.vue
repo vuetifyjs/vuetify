@@ -3,7 +3,7 @@
     :color="computedColor"
     :icon="computedIcon"
     value
-  ).mb-5.mt-5
+  ).my-5
     span(v-html="$t(value)")
 </template>
 

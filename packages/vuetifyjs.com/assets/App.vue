@@ -3,14 +3,12 @@
     app-drawer
     app-toolbar
     app-view
-    app-footer
     app-fab
 </template>
 
 <script>
   import AppDrawer from '@core/AppDrawer'
   import AppFab from '@core/AppFab'
-  import AppFooter from '@core/AppFooter'
   import AppToolbar from '@core/AppToolbar'
   import AppView from '@core/AppView'
   import Meta from '@mixins/meta'
@@ -21,7 +19,6 @@
     components: {
       AppDrawer,
       AppFab,
-      AppFooter,
       AppToolbar,
       AppView
     },
