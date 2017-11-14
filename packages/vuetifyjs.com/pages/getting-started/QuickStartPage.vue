@@ -2,6 +2,26 @@
   text-page(:data="$data" id="quick-start-page")
     app-alert(error value="GettingStarted.QuickStart.alert1")
 
+    section#supported-browsers
+      section-heading(value="GettingStarted.QuickStart.browserHeader")
+      section-text(value="GettingStarted.QuickStart.browserText")
+      v-list.transparent
+        v-layout(row wrap)
+          v-flex(
+            xs12 sm6 md4
+            v-for="browser in browsers"
+            v-bind:key="browser.title"
+          ).px-0
+            v-list-tile(avatar tag="ul")
+              v-list-tile-avatar
+                v-icon(dark).primary fa-{{ browser.icon }}
+              v-list-tile-content
+                v-list-tile-title {{ browser.title }}
+                v-list-tile-sub-title {{ browser.supported === true ? 'Supported' : (browser.supported === false ? 'Not supported' : browser.supported) }}
+              v-list-tile-action
+                v-icon(v-if="!browser.supported" color="error") clear
+                v-icon(v-else color="success") check
+
     section#cdn-install
       section-heading(value="GettingStarted.QuickStart.cdnHeader")
       section-text(value="GettingStarted.QuickStart.cdnText")
@@ -60,26 +80,6 @@
       section-text(value="GettingStarted.QuickStart.existingText5")
       app-alert(error value="GettingStarted.QuickStart.alert2")
 
-    section#supported-browsers
-      section-heading(value="GettingStarted.QuickStart.browserHeader")
-      section-text(value="GettingStarted.QuickStart.browserText")
-      v-list.transparent
-        v-layout(row wrap)
-          v-flex(
-            xs12 sm6 md4
-            v-for="browser in browsers"
-            v-bind:key="browser.title"
-          ).px-0
-            v-list-tile(avatar tag="ul")
-              v-list-tile-avatar
-                v-icon(dark).primary fa-{{ browser.icon }}
-              v-list-tile-content
-                v-list-tile-title {{ browser.title }}
-                v-list-tile-sub-title {{ browser.supported === true ? 'Supported' : (browser.supported === false ? 'Not supported' : browser.supported) }}
-              v-list-tile-action
-                v-icon(v-if="!browser.supported" color="error") clear
-                v-icon(v-else color="success") check
-
     section#ie11-support
       section-heading(value="GettingStarted.QuickStart.ie11Header")
       section-text(value="GettingStarted.QuickStart.ie11Text")
@@ -109,7 +109,7 @@
     data: () => ({
       header: "GettingStarted.QuickStart.header",
       headerText: "GettingStarted.QuickStart.headerText",
-      //
+      toc: "GettingStarted.QuickStart.toc",
       browsers: [
         { icon: 'internet-explorer', title: 'IE9 / IE10', supported: false },
         { icon: 'internet-explorer', title: 'IE11', supported: 'Supported w/ polyfill' },

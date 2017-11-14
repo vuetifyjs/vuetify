@@ -1,5 +1,5 @@
 <template lang="pug">
-  h2(v-text="$t(value)").headline.primary--text.mb-3
+  h2(v-html="$t(value)").headline.primary--text.mb-3
 </template>
 
 <script>

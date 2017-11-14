@@ -1,3 +1,9 @@
+// Pages
+import Vuetify from './vuetify'
+import GettingStarted from './getting-started'
+import Guides from './guides'
+import Layout from './layout'
+
 // Generic
 import Generic from './generic'
 
@@ -7,18 +13,14 @@ import Components from './components'
 // Directives
 import Directives from './directives'
 
-// Pages
-import Vuetify from './vuetify'
-import GettingStarted from './getting-started'
-import Guides from './guides'
-
 // Examples
 import Examples from './examples'
 
 export default {
-  Generic,
   Components,
   Directives,
+  Generic,
+  Layout,
   Vuetify,
   GettingStarted,
   Examples,

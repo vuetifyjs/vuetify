@@ -5,6 +5,7 @@
     data: () => ({
       activeIndex: 0,
       currentOffset: 0,
+      isBooted: false,
       position: 'relative',
       right: 0,
       top: 0,
@@ -39,7 +40,11 @@
 
     watch: {
       activeIndex (val) {
-        window.location.hash = this.items[val].href
+        const target = this.items[val]
+
+        if (target == null) return
+
+        window.location.hash = target.href
       }
     },
 
@@ -73,8 +78,11 @@
       genList () {
         const targets = []
         const list = this.items.map(item => {
-          const target = item.target || document.getElementById(item.href)
-          const offsetTop = target.offsetTop - 75
+          item = Object.assign({}, item)
+          const target = this.isBooted && item.target
+            ? item.target
+            : document.getElementById(item.href)
+          const offsetTop = target.offsetTop - 100
 
           item.offsetTop = offsetTop
           item.target = target
@@ -87,10 +95,12 @@
         this.list = list
         this.targets = targets.sort((a, b) => a - b)
       },
-      onScroll (offset) {
+      onScroll () {
+        const offset = window.pageYOffset ||
+          document.documentElement.offsetTop
         this.genList()
 
-        if (document.body.clientHeight - offset - window.innerHeight < 300) {
+        if (document.body.clientHeight - offset - window.innerHeight < 25) {
           return (this.activeIndex = this.targets.length - 1)
         }
 
@@ -114,6 +124,7 @@
         })
 
         this.activeIndex = activeIndex
+        this.isBooted = true
       }
     },
 
@@ -129,7 +140,11 @@
         listeners: this.$listeners
       }
 
-      const children = this.list.map((item, i) => this.genItem(item, i))
+      let children = []
+
+      if (this.list.length) {
+        children = children.concat(this.list.map((item, i) => this.genItem(item, i)))
+      }
 
       if (this.$slots.default) {
         children.push(this.$slots.default)
