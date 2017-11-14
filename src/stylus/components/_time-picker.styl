@@ -1,29 +1,23 @@
+@import '../bootstrap'
+@import '../theme'
+
+/** Themes */
+date-picker($material)
+  .picker--time__clock
+    background: $material.picker.clock
+
+    > span.disabled
+      color: $material.buttons.disabled
+
+theme(date-picker, "picker--time")
+
 .picker--time
   .card__row--actions
     margin-top: -10px
 
-  &.picker--dark      
-    .picker--time__clock
-      background: $grey.darken-2
-
-      &-hand:before
-        border-color: $theme.accent
-
-      &-hand, &:after
-        background: $theme.accent
-
-      > span
-        color: #fff
-
-        &.active
-          color: #000
-          
-          &:before
-            background: $theme.accent
-
   &.picker--landscape
     flex-wrap: wrap
-    
+
     .picker__title
       flex-direction: column
       justify-content: center
@@ -39,17 +33,18 @@
         margin: 16px 0 0
         align-self: initial
         text-align: center
-    
+
     .picker--time__clock
       height: 250px
       width: 250px
-      
+
       &-hand
         height: 97px
 
 /** Title */
-.picker--time 
+.picker--time
   .picker__title
+    color: #fff
     display: flex
     justify-content: flex-end
 
@@ -64,54 +59,56 @@
         font-size: 70px
         justify-content: center
         opacity: .6
-        transition: .3s $transition.swing
-        
+        transition: $primary-transition
+
         &.active
           opacity: 1
-      
+
     div:last-child
       align-self: flex-end
       display: flex
       flex-direction: column
       font-size: 16px
       margin: 8px 0 6px 8px
-      
+
       span
         cursor: pointer
         opacity: .6
-        transition: .3s $transition.swing
-        
+        transition: $primary-transition
+
         &.active
           opacity: 1
-          
+
     div:only-child
       flex-direction: row
-    
+
 /** Clock */
 .picker--time__clock
   height: 270px
   width: 270px
   border-radius: 100%
-  background: $grey.lighten-2
   position: absolute
   user-select: none
   top: 50%
   left: 50%
-  transition: .5s $transition.swing
+  transition: $primary-transition
   transform: translate(-50%, -50%)
-  
+
   &-hand
     height: 40%
     width: 2px
-    background: $theme.primary
     bottom: 50%
     left: calc(50% - 1px)
     transform-origin: center bottom
     position: absolute
-    
+    will-change: transform
+    z-index: 1
+
     &:before
       background: transparent
-      border: 2px solid $theme.primary
+      border-width: 2px
+      border-style: solid
+      border-color: inherit
       border-radius: 100%
       width: 10px
       height: 10px
@@ -119,19 +116,21 @@
       position: absolute
       top: -3%
       left: 50%
-      transform: translate3d(-50%, -50%, 0)
+      transform: translate(-50%, -50%)
 
-  &:after
-    content: ''
-    position: absolute
-    height: 8px
-    width: 8px
-    top: 50%
-    left: 50%
-    background: #2196f3
-    border-radius: 100%
-    transform: translate3d(calc(-50%, - 1px), -50%, 0)
-    
+    &:after
+      content: ''
+      position: absolute
+      height: 8px
+      width: 8px
+      top: 100%
+      left: 50%
+      border-radius: 100%
+      border-style: solid
+      border-color: inherit
+      background-color: inherit
+      transform: translate(calc(-50%, - 1px), -50%)
+
   > span
     align-items: center
     border-radius: 100%
@@ -149,7 +148,7 @@
 
     > span
       z-index: 1
-      
+
     &:before, &:after
       content: ''
       border-radius: 100%
@@ -158,18 +157,19 @@
       left: 50%
       height: 14px
       width: 14px
-      transform: translate3d(-50%, -50%, 0)
-    
+      transform: translate(-50%, -50%)
+
     &:after, &:before
       height: $time-picker-number-font-size * 2.5
       width: $time-picker-number-font-size * 2.5
-    
+
     &.active
       color: #fff
       cursor: default
+      z-index: 2
 
-      &:before
-        background: $theme.primary
-        
+    &.disabled
+      pointer-events: none
+
 .picker--time .card__row--actions
   border: none

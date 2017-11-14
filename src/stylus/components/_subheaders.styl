@@ -1,9 +1,16 @@
+@import '../bootstrap'
+@import '../theme'
+
+subheader($material)
+  color: $material.text.secondary
+
+theme(subheader, "subheader")
+
 .subheader
   height: $list-item-single-height
   display: flex
   align-items: center
   font-size: $subheader-height-font-size
-  color: $grey.darken-1
   font-weight: $subheader-font-weight
   padding: 0 $list-right-padding 0 $list-left-padding
 

@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Vslider.vue should be focused when active 1`] = `
+
+<div role="slider"
+     tabindex="0"
+     class="input-group input-group--focused input-group--dirty input-group--slider input-group--active"
+>
+  <div class="input-group__input">
+    <div class="slider">
+      <div class="slider__track__container">
+        <div class="slider__track">
+        </div>
+        <div class="slider__track-fill primary">
+        </div>
+      </div>
+      <div class="slider__thumb-container"
+           style="left: 50%;"
+      >
+        <div class="slider__thumb primary">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="input-group__details">
+    <div class="input-group__messages">
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`Vslider.vue should match a snapshot 1`] = `
+
+<div role="slider"
+     tabindex="0"
+     class="input-group input-group--slider"
+>
+  <div class="input-group__input">
+    <div class="slider">
+      <div class="slider__track__container">
+        <div class="slider__track">
+        </div>
+        <div class="slider__track-fill primary">
+        </div>
+      </div>
+      <div class="slider__thumb-container">
+        <div class="slider__thumb">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="input-group__details">
+    <div class="input-group__messages">
+    </div>
+  </div>
+</div>
+
+`;

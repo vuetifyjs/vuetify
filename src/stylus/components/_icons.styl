@@ -1,20 +1,32 @@
-.icon
-  display: inline-flex
-  align-items: center
-  justify-content: center
-  vertical-align: middle
-  
-  &--dark
-    icon(#fff, rgba(#fff, .50))
-  
-  &--light
-    icon(rgba(#000, .54), rgba(#000, .38))
+@import '../bootstrap'
+@import '../theme'
 
-  &--large
+/* Themes */
+icon($material)
+  color: $material.icons.active
+
+  &.icon--disabled:not(.input-group__append-icon)
+    color: $material.icons.inactive !important
+
+theme(icon, "icon")
+
+.icon
+  align-items: center
+  display: inline-flex
+  font-size: 24px
+  justify-content: center
+  line-height: 1
+  transition: $primary-transition
+  vertical-align: middle
+
+  &.icon--large
     font-size: 2.5rem
-    
-  &--medium
+
+  &.icon--medium
     font-size: 2rem
-    
-  &--x-large
+
+  &.icon--x-large
     font-size: 3rem
+
+  &.icon--disabled
+    cursor: default

@@ -1,37 +1,55 @@
+@import '../bootstrap'
+@import '../theme'
+
+/** Themes */
+
+btn-toggle($material)
+  background: $material.cards
+
+  .btn
+    color: $material.text.primary
+
+    &[data-selected]:not(:last-child):not([data-only-child])
+      border-right-color: $material.buttons.disabled
+
+theme(btn-toggle, "btn-toggle")
+
 .btn-toggle
   display: inline-flex
   border-radius: 2px
   transition: $primary-transition
   will-change: background, box-shadow
-  
+
   .btn
     justify-content: center
     min-width: auto
+    width: auto
     padding: 0 8px
     margin: 0
     opacity: .4
     border-radius: 0
-    
+
     &:not(:last-child)
       border-right: 1px solid transparent
-    
+
     &:after
       display: none
-      
+
     &[data-selected]
       opacity: 1
-      background: $material-twelve-percent-dark
-      
-      &:not(:last-child):not([data-only-child])
-        border-right-color: $material-twelve-percent-dark
-      
-    .icon
-      font-size: 30px
-      
+
+    &__content
+      padding: 0
+
     span + .icon
       font-size: initial
       margin-left: 10px
-      
+
+    &:first-child
+      border-radius: 2px 0 0 2px
+
+    &:last-child
+      border-radius: 0 2px 2px 0
+
   &--selected
-    background: #fff
     elevation(2)

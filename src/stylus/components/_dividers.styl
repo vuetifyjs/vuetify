@@ -1,24 +1,19 @@
-.application--light
-  .divider
-    background: $material-twelve-percent-dark
+@import '../bootstrap'
+@import '../theme'
 
-.application--dark
-  .divider
-    background: $material-twelve-percent-light
+divider($material)
+  background-color: $material.dividers
+
+theme(divider, "divider")
 
 .divider
   border: none
   display: block
   height: 1px
+  min-height: 1px
   flex: 1
   width: 100%
-  
+
   &--inset
     margin-left: 72px
     width: calc(100% - 72px)
-    
-  &--dark
-    background: $material-twelve-percent-light
-
-  &--light
-    background: $material-twelve-percent-dark

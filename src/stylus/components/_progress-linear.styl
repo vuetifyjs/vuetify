@@ -1,25 +1,25 @@
+@import '../bootstrap'
+
 .progress-linear
   background: transparent
   margin: 1rem 0
   overflow: hidden
   width: 100%
   position: relative
-  progress-linear($theme.primary)
-  
+
   &__bar
     width: 100%
     height: inherit
     position: relative
     transition: .3s ease-in
     z-index: 1
-    
+
     &__determinate
       height: inherit
       transition: .3s ease-in
-      
+
     &__indeterminate
-      &:before, &:after
-        content: ''
+      .long, .short
         height: inherit
         position: absolute
         left: 0
@@ -27,44 +27,37 @@
         bottom: 0
         will-change: left, right
         width: auto
-      
-      &:before
+        background-color: inherit
+
+      &--active .long
         animation: indeterminate
         animation-duration: 2.2s
         animation-iteration-count: infinite
-        
-      &:after
+
+      &--active .short
         animation: indeterminate-short
         animation-duration: 2.2s
         animation-iteration-count: infinite
-        
+
+  &__background
+    position: absolute
+    top: 0
+    left: 0
+    bottom: 0
+    transition: .3s ease-in
+
   &--query
     .progress-linear__bar__indeterminate
-      &:before
+      &--active .long
         animation: query
         animation-duration: 2s
         animation-iteration-count: infinite
-        
-      &:after
+
+      &--active .short
         animation: query-short
         animation-duration: 2s
-        animation-iteration-count: infinite  
+        animation-iteration-count: infinite
 
-  &--secondary
-    progress-linear($theme.secondary)
-  
-  &--success
-    progress-linear($theme.success)
-  
-  &--info
-    progress-linear($theme.info)
-    
-  &--warning
-    progress-linear($theme.warning)
-    
-  &--error
-    progress-linear($theme.error)
-        
   @keyframes indeterminate
     0%
       left: -90%
@@ -75,7 +68,7 @@
     100%
       left: 100%
       right: -35%
-      
+
   @keyframes indeterminate-short
     0%
       left: -200%
@@ -86,7 +79,7 @@
     100%
       left: 107%
       right: -8%
-      
+
   @keyframes query
     0%
       right: -90%
@@ -97,7 +90,7 @@
     100%
       right: 100%
       left: -35%
-      
+
   @keyframes query-short
     0%
       right: -200%
@@ -108,3 +101,4 @@
     100%
       right: 107%
       left: -8%
+

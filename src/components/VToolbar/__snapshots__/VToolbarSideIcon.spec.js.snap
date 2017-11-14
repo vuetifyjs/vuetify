@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VToolbarSideIcon.js should create default icon when no slot used 1`] = `
+
+<button type="button"
+        class="toolbar__side-icon btn btn--icon"
+        data-ripple="true"
+>
+  <div class="btn__content">
+    <i aria-hidden="true"
+       class="material-icons icon"
+    >
+      menu
+    </i>
+  </div>
+</button>
+
+`;
+
+exports[`VToolbarSideIcon.js should create slot icon when present 1`] = `
+
+<button type="button"
+        class="toolbar__side-icon btn btn--icon"
+        data-ripple="true"
+>
+  <div class="btn__content">
+    <i aria-hidden="true"
+       class="fa icon fa-add"
+    >
+    </i>
+  </div>
+</button>
+
+`;

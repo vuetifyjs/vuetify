@@ -1,11 +1,4 @@
-for heading, options in $headings
-  {heading}
-    color: $heading-color
-    font-size: options.size
-    font-weight: options.weight
-    line-height: options.line-height
-    letter-spacing: options.letter-spacing
-    margin-bottom: $spacers.three.y
-    
-    @media screen and (max-width: $grid-breakpoints.sm)
-      font-size: options.size * .6
+heading($material)
+  color: $material.text.primary
+
+theme(heading, "heading")

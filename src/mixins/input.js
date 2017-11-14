@@ -1,9 +1,20 @@
+import Loadable from './loadable'
+import Themeable from './themeable'
+import Validatable from './validatable'
+import VIcon from '../components/VIcon'
+
 export default {
+  components: {
+    VIcon
+  },
+
+  mixins: [Loadable, Themeable, Validatable],
+
   data () {
     return {
-      errors: [],
-      focused: false,
+      isFocused: false,
       tabFocused: false,
+      internalTabIndex: null,
       lazyValue: this.value
     }
   },
@@ -11,123 +22,92 @@ export default {
   props: {
     appendIcon: String,
     appendIconCb: Function,
-    dark: Boolean,
     disabled: Boolean,
     hint: String,
     hideDetails: Boolean,
-    persistentHint: Boolean,
     label: String,
-    light: {
-      type: Boolean,
-      default: true
-    },
+    persistentHint: Boolean,
+    placeholder: String,
     prependIcon: String,
     prependIconCb: Function,
+    readonly: Boolean,
     required: Boolean,
-    rules: {
-      type: Array,
-      default: () => []
-    },
     tabindex: {
       default: 0
     },
+    toggleKeys: {
+      type: Array,
+      default: () => [13, 32]
+    },
     value: {
       required: false
-    },
-    placeholder: String
+    }
   },
 
   computed: {
-    hasError () {
-      return this.errors.length !== 0
-    },
     inputGroupClasses () {
       return Object.assign({
         'input-group': true,
-        'input-group--focused': this.focused,
+        'input-group--async-loading': this.loading !== false,
+        'input-group--focused': this.isFocused,
         'input-group--dirty': this.isDirty,
         'input-group--tab-focused': this.tabFocused,
         'input-group--disabled': this.disabled,
-        'input-group--light': this.light && !this.dark,
-        'input-group--dark': this.dark,
-        'input-group--error': this.hasError || this.errors.length > 0,
+        'input-group--error': this.hasError,
         'input-group--append-icon': this.appendIcon,
         'input-group--prepend-icon': this.prependIcon,
         'input-group--required': this.required,
         'input-group--hide-details': this.hideDetails,
-        'input-group--placeholder': !!this.placeholder
+        'input-group--placeholder': !!this.placeholder,
+        'theme--dark': this.dark,
+        'theme--light': this.light
       }, this.classes)
     },
     isDirty () {
-      return this.inputValue
-    },
-    modifiers () {
-      const modifiers = {
-        lazy: false,
-        number: false,
-        trim: false
-      }
-
-      if (!this.$vnode.data.directives) {
-        return modifiers
-      }
-
-      const model = this.$vnode.data.directives.find(i => i.name === 'model')
-
-      if (!model) {
-        return modifiers
-      }
-
-      return Object.assign(modifiers, model.modifiers)
+      return !!this.inputValue
     }
-  },
-
-  watch: {
-    rules () {
-      this.validate()
-    }
-  },
-
-  mounted () {
-    this.validate()
   },
 
   methods: {
-    genLabel () {
-      return this.$createElement('label', this.label)
+    groupFocus (e) {},
+    groupBlur (e) {
+      this.tabFocused = false
     },
-    toggle () {},
+    genLabel () {
+      return this.$createElement('label', {
+        attrs: {
+          for: this.$attrs.id
+        }
+      }, this.$slots.label || this.label)
+    },
     genMessages () {
       let messages = []
 
       if ((this.hint &&
-            this.focused ||
+            this.isFocused ||
             this.hint &&
             this.persistentHint) &&
-          this.errors.length === 0
+          this.validations.length === 0
       ) {
         messages = [this.genHint()]
-      } else if (this.errors.length) {
-        messages = this.errors.map(i => this.genError(i))
+      } else if (this.validations.length) {
+        messages = [this.genError(this.validations[0])]
       }
 
-      return this.$createElement(
-        'transition-group',
-        {
-          'class': 'input-group__messages',
-          props: {
-            tag: 'div',
-            name: 'slide-y-transition'
-          }
-        },
-        messages
-      )
+      return this.$createElement('transition-group', {
+        'class': 'input-group__messages',
+        props: {
+          tag: 'div',
+          name: 'slide-y-transition'
+        }
+      }, messages)
     },
     genHint () {
       return this.$createElement('div', {
         'class': 'input-group__hint',
-        key: this.hint
-      }, this.hint)
+        key: this.hint,
+        domProps: { innerHTML: this.hint }
+      })
     },
     genError (error) {
       return this.$createElement(
@@ -139,28 +119,33 @@ export default {
         error
       )
     },
-    genIcon (type) {
-      const icon = this[`${type}Icon`]
-      const cb = this[`${type}IconCb`]
-      const hasCallback = typeof cb === 'function'
+    genIcon (type, defaultCallback = null) {
+      const shouldClear = type === 'append' && this.clearable && this.isDirty
+      const icon = shouldClear ? 'clear' : this[`${type}Icon`]
+      const callback = shouldClear
+        ? this.clearableCallback
+        : (this[`${type}IconCb`] || defaultCallback)
 
-      return this.$createElement(
-        'v-icon',
-        {
-          'class': {
-            [`input-group__${type}-icon`]: true,
-            'input-group__icon-cb': hasCallback
-          },
-          'nativeOn': {
-            'click': e => {
-              hasCallback && cb(e)
-            }
-          }
+      return this.$createElement('v-icon', {
+        'class': {
+          [`input-group__${type}-icon`]: true,
+          'input-group__icon-cb': !!callback,
+          'input-group__icon-clearable': shouldClear
         },
-        icon
-      )
+        props: {
+          disabled: this.disabled
+        },
+        on: {
+          click: e => {
+            if (!callback) return
+
+            e.stopPropagation()
+            callback()
+          }
+        }
+      }, icon)
     },
-    genInputGroup (input, data = {}) {
+    genInputGroup (input, data = {}, defaultAppendCallback = null) {
       const children = []
       const wrapperChildren = []
       const detailsChildren = []
@@ -168,24 +153,31 @@ export default {
       data = Object.assign({}, {
         'class': this.inputGroupClasses,
         attrs: {
-          tabindex: this.tabindex
+          tabindex: this.disabled
+            ? -1
+            : this.internalTabIndex || this.tabindex
         },
         on: {
-          blur: () => (this.tabFocused = false),
+          focus: this.groupFocus,
+          blur: this.groupBlur,
           click: () => (this.tabFocused = false),
           keyup: e => {
             if ([9, 16].includes(e.keyCode)) {
               this.tabFocused = true
             }
+          },
+          keydown: e => {
+            if (!this.toggle) return
 
-            if (e.keyCode === 13) {
+            if (this.toggleKeys.includes(e.keyCode)) {
+              e.preventDefault()
               this.toggle()
             }
           }
         }
       }, data)
 
-      if (this.label) {
+      if (this.$slots.label || this.label) {
         children.push(this.genLabel())
       }
 
@@ -195,9 +187,12 @@ export default {
         wrapperChildren.unshift(this.genIcon('prepend'))
       }
 
-      if (this.appendIcon) {
-        wrapperChildren.push(this.genIcon('append'))
+      if (this.appendIcon || this.clearable) {
+        wrapperChildren.push(this.genIcon('append', defaultAppendCallback))
       }
+
+      const progress = this.genProgress()
+      progress && detailsChildren.push(progress)
 
       children.push(
         this.$createElement('div', {
@@ -205,8 +200,11 @@ export default {
         }, wrapperChildren)
       )
 
-      detailsChildren.push(this.genMessages())
-      this.counter && detailsChildren.push(this.genCounter())
+      !this.hideDetails && detailsChildren.push(this.genMessages())
+
+      if (this.counter) {
+        detailsChildren.push(this.genCounter())
+      }
 
       children.push(
         this.$createElement('div', {
@@ -215,19 +213,6 @@ export default {
       )
 
       return this.$createElement('div', data, children)
-    },
-    validate () {
-      this.errors = []
-
-      this.rules.forEach(rule => {
-        const valid = typeof rule === 'function'
-          ? rule(this.value)
-          : rule
-
-        if (valid !== true) {
-          this.errors.push(valid)
-        }
-      })
     }
   }
 }

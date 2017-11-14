@@ -1,0 +1,449 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VCarousel.js should render component and match snapshot 1`] = `
+
+<div class="carousel">
+  <div class="carousel__left">
+    <button type="button"
+            class="btn btn--icon theme--dark"
+            data-ripple="true"
+    >
+      <div class="btn__content">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
+          chevron_left
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__right">
+    <button type="button"
+            class="btn btn--icon theme--dark"
+            data-ripple="true"
+    >
+      <div class="btn__content">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
+          chevron_right
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__controls">
+  </div>
+</div>
+
+`;
+
+exports[`VCarousel.js should render component with custom duration between image cycles and match snapshot 1`] = `
+
+<div class="carousel">
+  <div class="carousel__left">
+    <button type="button"
+            class="btn btn--icon theme--dark"
+            data-ripple="true"
+    >
+      <div class="btn__content">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
+          chevron_left
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__right">
+    <button type="button"
+            class="btn btn--icon theme--dark"
+            data-ripple="true"
+    >
+      <div class="btn__content">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
+          chevron_right
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__controls">
+  </div>
+</div>
+
+`;
+
+exports[`VCarousel.js should render component with custom icon and match snapshot 1`] = `
+
+<div class="carousel">
+  <div class="carousel__left">
+    <button type="button"
+            class="btn btn--icon theme--dark"
+            data-ripple="true"
+    >
+      <div class="btn__content">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
+          chevron_left
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__right">
+    <button type="button"
+            class="btn btn--icon theme--dark"
+            data-ripple="true"
+    >
+      <div class="btn__content">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
+          chevron_right
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__controls">
+    <button type="button"
+            class="btn btn--icon theme--dark carousel__controls__item carousel__controls__item--active"
+            data-ripple="true"
+    >
+      <div class="btn__content">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
+          stop
+        </i>
+      </div>
+    </button>
+    <button type="button"
+            class="btn btn--icon theme--dark carousel__controls__item"
+            data-ripple="true"
+    >
+      <div class="btn__content">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
+          stop
+        </i>
+      </div>
+    </button>
+    <button type="button"
+            class="btn btn--icon theme--dark carousel__controls__item"
+            data-ripple="true"
+    >
+      <div class="btn__content">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
+          stop
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__item tab-transition-enter tab-transition-enter-active"
+       style="background-image: url(1);"
+  >
+  </div>
+  <div class="carousel__item"
+       style="background-image: url(2); display: none;"
+  >
+  </div>
+  <div class="carousel__item"
+       style="background-image: url(3); display: none;"
+  >
+  </div>
+</div>
+
+`;
+
+exports[`VCarousel.js should render component with custom left control icon and match snapshot 1`] = `
+
+<div class="carousel">
+  <div class="carousel__left">
+    <button type="button"
+            class="btn btn--icon theme--dark"
+            data-ripple="true"
+    >
+      <div class="btn__content">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
+          stop
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__right">
+    <button type="button"
+            class="btn btn--icon theme--dark"
+            data-ripple="true"
+    >
+      <div class="btn__content">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
+          chevron_right
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__controls">
+  </div>
+</div>
+
+`;
+
+exports[`VCarousel.js should render component with custom right control icon and match snapshot 1`] = `
+
+<div class="carousel">
+  <div class="carousel__left">
+    <button type="button"
+            class="btn btn--icon theme--dark"
+            data-ripple="true"
+    >
+      <div class="btn__content">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
+          chevron_left
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__right">
+    <button type="button"
+            class="btn btn--icon theme--dark"
+            data-ripple="true"
+    >
+      <div class="btn__content">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
+          stop
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__controls">
+  </div>
+</div>
+
+`;
+
+exports[`VCarousel.js should render component with image cycling off and match snapshot 1`] = `
+
+<div class="carousel">
+  <div class="carousel__left">
+    <button type="button"
+            class="btn btn--icon theme--dark"
+            data-ripple="true"
+    >
+      <div class="btn__content">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
+          chevron_left
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__right">
+    <button type="button"
+            class="btn btn--icon theme--dark"
+            data-ripple="true"
+    >
+      <div class="btn__content">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
+          chevron_right
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__controls">
+  </div>
+</div>
+
+`;
+
+exports[`VCarousel.js should render component with selected active item 1`] = `
+
+<div class="carousel">
+  <div class="carousel__left">
+    <button type="button"
+            class="btn btn--icon theme--dark"
+            data-ripple="true"
+    >
+      <div class="btn__content">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
+          chevron_left
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__right">
+    <button type="button"
+            class="btn btn--icon theme--dark"
+            data-ripple="true"
+    >
+      <div class="btn__content">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
+          chevron_right
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__controls">
+    <button type="button"
+            class="btn btn--icon theme--dark carousel__controls__item"
+            data-ripple="true"
+    >
+      <div class="btn__content">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
+          fiber_manual_record
+        </i>
+      </div>
+    </button>
+    <button type="button"
+            class="btn btn--icon theme--dark carousel__controls__item carousel__controls__item--active"
+            data-ripple="true"
+    >
+      <div class="btn__content">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
+          fiber_manual_record
+        </i>
+      </div>
+    </button>
+    <button type="button"
+            class="btn btn--icon theme--dark carousel__controls__item"
+            data-ripple="true"
+    >
+      <div class="btn__content">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
+          fiber_manual_record
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__item"
+       style="background-image: url(1); display: none;"
+  >
+  </div>
+  <div class="carousel__item tab-transition-enter tab-transition-enter-active"
+       style="background-image: url(2);"
+  >
+  </div>
+  <div class="carousel__item"
+       style="background-image: url(3); display: none;"
+  >
+  </div>
+</div>
+
+`;
+
+exports[`VCarousel.js should render component without delimiters 1`] = `
+
+<div class="carousel">
+  <div class="carousel__left">
+    <button type="button"
+            class="btn btn--icon theme--dark"
+            data-ripple="true"
+    >
+      <div class="btn__content">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
+          chevron_left
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__right">
+    <button type="button"
+            class="btn btn--icon theme--dark"
+            data-ripple="true"
+    >
+      <div class="btn__content">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
+          chevron_right
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__item tab-transition-enter tab-transition-enter-active"
+       style="background-image: url(1);"
+  >
+  </div>
+  <div class="carousel__item"
+       style="background-image: url(2); display: none;"
+  >
+  </div>
+  <div class="carousel__item"
+       style="background-image: url(3); display: none;"
+  >
+  </div>
+</div>
+
+`;
+
+exports[`VCarousel.js should render component without left control icon and match snapshot 1`] = `
+
+<div class="carousel">
+  <div class="carousel__right">
+    <button type="button"
+            class="btn btn--icon theme--dark"
+            data-ripple="true"
+    >
+      <div class="btn__content">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
+          chevron_right
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__controls">
+  </div>
+</div>
+
+`;
+
+exports[`VCarousel.js should render component without right control icon and match snapshot 1`] = `
+
+<div class="carousel">
+  <div class="carousel__left">
+    <button type="button"
+            class="btn btn--icon theme--dark"
+            data-ripple="true"
+    >
+      <div class="btn__content">
+        <i aria-hidden="true"
+           class="material-icons icon"
+        >
+          chevron_left
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__controls">
+  </div>
+</div>
+
+`;

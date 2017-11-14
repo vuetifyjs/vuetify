@@ -1,58 +1,83 @@
+@import '../bootstrap'
+@import '../components/_ripples'
+@import '../theme'
+
+button($material)
+  color: $material.text.primary
+
+  &.btn--disabled
+    color: $material.buttons.disabled !important
+
+    .icon
+      color: $material.buttons.disabled !important
+
+    &:not(.btn--icon):not(.btn--flat)
+      background-color: $material.buttons.focused !important
+
+  &:not(.btn--icon):not(.btn--flat)
+    background-color: $material.app-bar
+
+theme(button, "btn")
+
 /** Base Spec */
 .btn
   align-items: center
-  background: $grey.lighten-2
   border-radius: $button-border-radius
-  color: $button-color
   display: inline-flex
   height: $button-height
+  flex: 0 1 auto
   font-size: $button-font-size
   font-weight: $button-font-weight
   justify-content: center
   margin: $button-margin
   min-width: $button-min-width
   outline: 0
-  padding: $button-padding
   text-transform: $button-text-transform
   text-decoration: none
-  transition: $primary-transition
+  transition: .3s $transition.swing, color 1ms
   position: relative
   vertical-align: middle
+  user-select: none
 
 
 /** Psuedo */
 .btn
-  &:after
+  &__content:before
     border-radius: inherit
-    bottom: 0
+    color: inherit
     content: ''
-    left: 0
     position: absolute
+    left: 0
     top: 0
-    right: 0
+    height: 100%
+    opacity: .12
     transition: $primary-transition
-
-  &.btn--disabled
-    box-shadow: none !important
-    pointer-events: none
-    opacity: .4
-
-    &:not(.btn--loader)
-      color: $button-dark-disabled-color
-
+    width: 100%
 
 /** Content */
 .btn
+  &--active,
+  &:hover,
+  &:focus
+    .btn__content:before
+      background-color: currentColor
+
   &__content
     align-items: center
+    border-radius: inherit
+    color: inherit
     display: flex
-    flex: 1
+    height: 100%
+    flex: 1 0 auto
     justify-content: center
+    margin: 0 auto
+    padding: $button-padding
     transition: $primary-transition
     white-space: nowrap
-    overflow: hidden
-    text-overflow: ellipsis
 
+/** Icons */
+.btn .btn__content .icon
+  color: inherit
 
 /** Types */
 .btn
@@ -60,21 +85,7 @@
     background-color: transparent !important
     box-shadow: none !important
 
-    &.btn--light
-      &:hover:after
-        background-color: $button-light-overlay
-
-      &.btn--disabled
-        color: $button-light-disabled-color
-
-    &.btn--dark
-      &:hover:after
-        background-color: $button-dark-overlay
-
-      &.btn--disabled
-        color: $button-dark-disabled-color
-
-  &--raised
+  &:not(.btn--depressed)
     will-change: box-shadow
     elevation(2)
 
@@ -88,37 +99,69 @@
     justify-content: center
     height: $button-height
     width: $button-height
-    min-width: initial
-    padding: 0
-    
-    .icon
-      color: inherit
+    min-width: 0
 
-    &:after
-      border-radius: 50%
-      opacity: .12
+    .btn__content
+      padding: 0
 
-    &:hover
-      border-radius: 50%
+      &:before
+        border-radius: 50%
 
-      &:after
-        background-color: currentColor
-        opacity: .12
+    &.btn--small
+      width: $button-small-height
 
-    &.btn--disabled
-      background-color: transparent !important
-      color: $button-light-disabled-color !important
-      pointer-events: none
+      .btn__content
+        height: $button-small-height
+
+    &.btn--large
+      width: $button-large-height
+
+      .btn__content
+        height: $button-large-height
 
   &--floating
     border-radius: 50%
-    min-width: initial
+    min-width: 0
     height: $button-floating-width
     width: $button-floating-width
-    padding: initial
+    padding: 0
+    elevation(6)
+
+    &.btn--fixed,
+    &.btn--absolute
+      z-index: 4
+
+    &:active
+      elevation(12)
+
+    .btn__content
+      flex: 1 1 auto
+      margin: 0
+      padding: 0
 
     &:after
       border-radius: 50%
+
+    .icon
+      &:not(:only-of-type):last-of-type
+        opacity: 0
+        position: absolute
+        transform: rotate(-45deg)
+        left: calc(50% - 12px)
+        top: calc(50% - 12px)
+
+    &.btn--active
+      .icon
+        &:not(:only-of-type)
+          &:first-of-type
+            opacity: 0
+            transform: rotate(45deg)
+            left: 'calc(50% - %s)' % (24 / 2)
+            top: 'calc(50% - %s)' % (24 / 2)
+
+          &:last-of-type
+            opacity: 1
+            transform: none
 
     .icon
       height: $button-floating-icon-width
@@ -133,6 +176,10 @@
         height: $button-floating-small-icon-width
         width: $button-floating-small-icon-width
 
+      &.btn--floating .icon
+        left: 'calc(50% - %s)' % ($button-floating-small-icon-width / 2)
+        top: 'calc(50% - %s)' % ($button-floating-small-icon-width / 2)
+
 
     &.btn--large
       height: $button-floating-large-width
@@ -143,44 +190,84 @@
         height: $button-floating-large-icon-width
         width: $button-floating-large-icon-width
 
+      &.btn--floating .icon
+        left: 'calc(50% - %s)' % ($button-floating-large-icon-width / 2)
+        top: 'calc(50% - %s)' % ($button-floating-large-icon-width / 2)
 
-/** Themes */
+  &--reverse
+    .btn__content
+      flex-direction: row-reverse
+
+    &.btn--column
+      .btn__content
+        flex-direction: column-reverse
+
+  &--fixed, &--absolute
+    margin: 0
+
+  // Position must have prepended .btn
+  // to account for tooltip
+  // TODO: Remove this once tooltips are
+  // converted to elements
+  &.btn--absolute
+    position: absolute
+
+  &.btn--fixed
+    position: fixed
+
+  &--top
+    &:not(.btn--absolute)
+      top: $grid-gutters.lg
+
+    &.btn--absolute
+      top: -($button-floating-width / 2)
+
+      &.btn--small
+        top: -($button-floating-small-width / 2)
+
+      &.btn--large
+        top: -($button-floating-large-width / 2)
+
+  &--bottom
+    &:not(.btn--absolute)
+      bottom: $grid-gutters.lg
+
+    &.btn--absolute
+      bottom: -($button-floating-width / 2)
+
+      &.btn--small
+        bottom: -($button-floating-small-width / 2)
+
+      &.btn--large
+        bottom: -($button-floating-large-width / 2)
+
+  &--left
+    left: $grid-gutters.lg
+
+  &--right
+    right: $grid-gutters.lg
+
+/** Disabled */
 .btn
-  &--light
-    color: $color-light
-
-    &:hover:after
-      background-color: $button-light-overlay
-
-    &.btn--disabled
-      color: $button-light-disabled-color !important
-      opacity: 1
-
-    &.btn--disabled:not(.btn--flat)
-      background-color: $button-light-overlay !important
-
-  &--dark
-    color: $color-dark
-
-    &:hover:after
-      background-color: $button-dark-overlay
-
-    &.btn--disabled
-      color: $button-dark-disabled-color !important
-      opacity: 1
-
-    &.btn--disabled:not(.btn--flat)
-      background-color: $button-dark-overlay !important
+  &.btn--disabled
+    box-shadow: none !important
+    pointer-events: none
 
 /** Sizes */
 .btn
   &--small
     font-size: $button-small-font-size
     height: $button-small-height
+    
+    .btn__content
+      padding: $button-small-padding
 
   &--large
     font-size: $button-large-font-size
     height: $button-large-height
+    
+    .btn__content
+      padding: $button-large-padding
 
 
 /** Loader */
@@ -192,14 +279,14 @@
       opacity: 0
 
   &__loading
-    position: absolute
-    width: 100%
-    height: 100%
-    left: 0
-    top: 0
-    display: flex
-    justify-content: center
     align-items: center
+    display: flex
+    height: 100%
+    justify-content: center
+    left: 0
+    position: absolute
+    top: 0
+    width: 100%
 
     .icon
       &--left
@@ -213,7 +300,7 @@
 
 /** Custom Buttons */
 .btn
-  &--outline
+  &.btn--outline
     border: 1px solid currentColor
     background: transparent !important
     box-shadow: none
@@ -224,7 +311,7 @@
   &--block
     display: flex
     flex: 1
-    margin: $button-margin 0
+    margin: $button-margin-y 0
     width: 100%
 
   &--round
@@ -242,3 +329,14 @@
 
     &--left
       margin-right: 16px
+
+
+/** Themes */
+.btn
+  &.primary,
+  &.secondary,
+  &.success,
+  &.error,
+  &.warning,
+  &.info
+    color: $material-dark.text.primary

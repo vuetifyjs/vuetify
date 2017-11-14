@@ -1,3 +1,18 @@
+@import '../bootstrap'
+@import '../theme'
+
+small-dialog($material)
+  &__content
+    background: $material.cards
+
+  &__actions
+    background: $material.cards
+
+  a
+    color: rgba($material.fg-color, $material.primary-text-percent)
+
+theme(small-dialog, "small-dialog")
+
 .small-dialog
   display: block
   height: 100%
@@ -7,16 +22,16 @@
 
   &__actions
     text-align: right
-    
+
   a
     display: flex
     align-items: center
-    color: rgba(#000, .87)
+
     height: 100%
     text-decoration: none
-    
+
     > *
       width: 100%
-    
+
   .menu__activator
     height: 100%

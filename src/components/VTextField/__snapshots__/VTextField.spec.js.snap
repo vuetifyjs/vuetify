@@ -1,0 +1,118 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VTextField.js should not display counter when set to false 1`] = `
+
+<div class="input-group input-group--text-field primary--text">
+  <div class="input-group__input">
+    <input tabindex="0"
+           type="text"
+    >
+  </div>
+  <div class="input-group__details">
+    <div class="input-group__messages">
+    </div>
+    <div class="input-group__counter">
+      0 / 25
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTextField.js should not display counter when set to false 2`] = `
+
+<div class="input-group input-group--text-field primary--text">
+  <div class="input-group__input">
+    <input tabindex="0"
+           type="text"
+    >
+  </div>
+  <div class="input-group__details">
+    <div class="input-group__messages">
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTextField.js should render component and match snapshot 1`] = `
+
+<div class="input-group input-group--text-field primary--text">
+  <div class="input-group__input">
+    <input tabindex="0"
+           type="text"
+    >
+  </div>
+  <div class="input-group__details">
+    <div class="input-group__messages">
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTextField.js should render component with async loading and custom progress and match snapshot 1`] = `
+
+<div class="input-group input-group--async-loading input-group--text-field primary--text">
+  <div class="input-group__input">
+    <input tabindex="0"
+           type="text"
+    >
+  </div>
+  <div class="input-group__details">
+    <div class="progress-linear"
+         style="height: 7px;"
+    >
+      <div class="progress-linear__background orange"
+           style="height: auto; opacity: 0.3; width: 100%;"
+      >
+      </div>
+      <div class="progress-linear__bar">
+        <div class="progress-linear__bar__indeterminate progress-linear__bar__indeterminate--active">
+          <div class="progress-linear__bar__indeterminate long orange">
+          </div>
+          <div class="progress-linear__bar__indeterminate short orange">
+          </div>
+        </div>
+        <!---->
+      </div>
+    </div>
+    <div class="input-group__messages">
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTextField.js should render component with async loading and match snapshot 1`] = `
+
+<div class="input-group input-group--async-loading input-group--text-field primary--text">
+  <div class="input-group__input">
+    <input tabindex="0"
+           type="text"
+    >
+  </div>
+  <div class="input-group__details">
+    <div class="progress-linear"
+         style="height: 2px;"
+    >
+      <div class="progress-linear__background primary"
+           style="height: auto; opacity: 0.3; width: 100%;"
+      >
+      </div>
+      <div class="progress-linear__bar">
+        <div class="progress-linear__bar__indeterminate progress-linear__bar__indeterminate--active">
+          <div class="progress-linear__bar__indeterminate long primary">
+          </div>
+          <div class="progress-linear__bar__indeterminate short primary">
+          </div>
+        </div>
+        <!---->
+      </div>
+    </div>
+    <div class="input-group__messages">
+    </div>
+  </div>
+</div>
+
+`;

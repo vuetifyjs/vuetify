@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VAlert.vue should be closed by default 1`] = `
+
+<div class="alert error"
+     style="display: none;"
+>
+  <div>
+  </div>
+</div>
+
+`;
+
+exports[`VAlert.vue should be dismissible 1`] = `
+
+<div class="alert alert--dismissible error"
+     style="display: none;"
+>
+  <div>
+  </div>
+  <a class="alert__dismissible">
+    <i aria-hidden="true"
+       class="material-icons icon icon--right"
+    >
+      cancel
+    </i>
+  </a>
+</div>
+
+`;
+
+exports[`VAlert.vue should have a close icon 1`] = `
+
+<div class="alert alert--dismissible error"
+     style="display: none;"
+>
+  <div>
+  </div>
+  <a class="alert__dismissible">
+    <i aria-hidden="true"
+       class="material-icons icon icon--right"
+    >
+      cancel
+    </i>
+  </a>
+</div>
+
+`;

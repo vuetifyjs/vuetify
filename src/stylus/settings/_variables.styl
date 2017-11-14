@@ -1,96 +1,49 @@
+@require './_theme'
+
 // ============================================================
 // Vuetify variables
 // ============================================================
 
-
-// Material Design
-// ============================================================
-$material-left-padding := 16px
-$material-right-padding := 16px
-
-$material-light := {
-  bg-color: #fff
-  fg-color: #000
-  text-color: #000
-  primary-text-percent: .87
-  secondary-text-percent: .54
-  disabledORhints-text-percent: .38
-  divider-percent: .12
-  active-icon-percent: .54
-  inactive-icon-percent: .38
-}
-$material-dark := {
-  bg-color: #303030
-  fg-color: #fff
-  text-color: #fff
-  primary-text-percent: 1
-  secondary-text-percent: .70
-  disabledORhints-text-percent: .50
-  divider-percent: .12
-  active-icon-percent: 1
-  inactive-icon-percent: .50
-}
-
-$material-twelve-percent-light := rgba($material-dark.fg-color, $material-dark.divider-percent)
-$material-twelve-percent-dark := rgba($material-light.fg-color, $material-light.divider-percent)
-
-
-// Theme
-// ============================================================
-$theme := {
-  primary: $blue.darken-2
-  accent: $blue.accent-2
-  secondary: $grey.darken-3
-  info: $blue.base
-  warning: $amber.base
-  error: $red.accent-2
-  success: $green.base
-}
-$material-theme := $material-light
-
-$body-font-family := 'Roboto', sans-serif
-$body-bg-light := $material-light.bg-color
-$body-bg-dark := $material-dark.bg-color
-$color-light := rgba($material-light.text-color, $material-light.primary-text-percent)
-$color-dark := $material-dark.text-color
-$font-size-root := 14px
-$line-height-root := 1.5
-
 $color-pack := true
-
 
 // Grid
 // ============================================================
 $grid-breakpoints := {
   xs: 0
   sm: 600px
-  md: 1024px
-  lg: (1440px - 16px) // Desktop gets a 16dp reduction
+  md: 960px
+  lg: (1280px - 16px) // Desktop gets a 16dp reduction
   xl: (1920px - 16px) // https://material.io/guidelines/layout/responsive-ui.html#responsive-ui-breakpoints
 }
 
-$container-max-widths := {
-  sm: $grid-breakpoints.sm * .9
-  md: $grid-breakpoints.md * .9
-  lg: $grid-breakpoints.lg * .9
-  xl: $grid-breakpoints.xl * .9
+$grid-gutter = 8px
+$grid-columns := 12
+$grid-gutters := {
+  xs: ($grid-gutter / 4)
+  sm: ($grid-gutter / 2)
+  md: $grid-gutter
+  lg: ($grid-gutter * 2)
+  xl: ($grid-gutter * 3)
 }
 
-$grid-gutter := 24px
-$grid-gutter-mobile := 16px
-$grid-columns := 12
+$container-max-widths := {
+  md: $grid-breakpoints.md
+  lg: $grid-breakpoints.lg
+  xl: $grid-breakpoints.xl
+}
 
 
 // Display
 // ============================================================
 $display-breakpoints := {
   xs-only: "only screen and (max-width: %s)" % ($grid-breakpoints.sm - 1)
+  sm-only: "only screen and (min-width: %s) and (max-width: %s)" % ($grid-breakpoints.sm ($grid-breakpoints.md  - 1))
   sm-and-down: "only screen and (max-width: %s)" % ($grid-breakpoints.md - 1)
-  sm-and-up: "only screen and (min-width: (%s))" % $grid-breakpoints.sm
-  md-only: "only screen and (min-width: %s) and (max-width: %s)" % $grid-breakpoints.md ($grid-breakpoints.lg  - 1)
+  sm-and-up: "only screen and (min-width: %s)" % $grid-breakpoints.sm
+  md-only: "only screen and (min-width: %s) and (max-width: %s)" % ($grid-breakpoints.md ($grid-breakpoints.lg  - 1))
   md-and-down: "only screen and (max-width: %s )" % ($grid-breakpoints.lg - 1)
   md-and-up: "only screen and (min-width: %s)" % $grid-breakpoints.md
-  lg-only: "only screen and (min-width: %s) and (max-width: %s)" % $grid-breakpoints.lg ($grid-breakpoints.xl - 1)
+  lg-only: "only screen and (min-width: %s) and (max-width: %s)" % ($grid-breakpoints.lg ($grid-breakpoints.xl - 1))
   lg-and-down: "only screen and (max-width: (%s - 1))" % $grid-breakpoints.xl
   lg-and-up: "only screen and (min-width: %s)" % $grid-breakpoints.lg
   xl-only: "only screen and (min-width: %s)" % $grid-breakpoints.xl
@@ -99,7 +52,7 @@ $display-breakpoints := {
 
 // Spacing
 // ============================================================
-$spacer := 1rem
+$spacer := 16px
 $spacer-x := $spacer
 $spacer-y := $spacer
 $spacers := {
@@ -129,10 +82,17 @@ $spacers := {
   }
 }
 
+$font-weights := {
+  thin: 100,
+  light: 300,
+  regular: 400,
+  medium: 500,
+  bold: 700,
+  black: 900
+}
 
 // Headings
 // ============================================================
-$heading-color := $grey.darken-3
 $headings := {
   h1: { size: 112px, weight: 300, line-height: 1, letter-spacing: -.04em },
   h2: { size: 56px, weight: 400, line-height: 1.35, letter-spacing: -.02em },
@@ -155,7 +115,7 @@ $transition := {
   fast-out-linear-in: cubic-bezier(0.4, 0.0, 1, 1),
   ease-in-out: cubic-bezier(0.4, 0.0, 0.6, 1),
   fast-in-fast-out: cubic-bezier(.25,.8,.25,1),
-  swing: cubic-bezier(.25,.8,.25,1)
+  swing: cubic-bezier(.25,.8,.50,1)
 }
 
 $primary-transition := 0.3s $transition.swing
@@ -173,6 +133,8 @@ $alert-icon-color := rgba($material-light.fg-color, .3)
 $alert-icon-font-size := 24px
 $alert-padding := 16px
 $alert-margin := $spacers.one.y auto
+$alert-outline-border-width := 1px
+$alert-outline-border-style := solid
 
 // Badges
 $badge-border-radius := 50%
@@ -186,8 +148,10 @@ $badge-width := 22px
 
 // Breadcrumbs
 $breadcrumbs-flex := 0 1 auto
-$breadcrumbs-height := 40px
+$breadcrumbs-padding := 18px 12px
+$breadcrumbs-even-child-padding := 0 12px
 $breadcrumbs-item-font-size := 14px
+$breadcrumbs-item-large-font-size := 16px
 $breadcrumbs-margin := 0
 $breadcrumbs-padding := 0 14px
 
@@ -195,20 +159,19 @@ $breadcrumbs-padding := 0 14px
 
 // Base
 $button-border-radius := 2px
-$button-color := $material-dark.fg-color
+$button-color := $material-light.fg-color
 $button-background-color := #999999
 $button-height := 36px
 $button-font-size := 14px
 $button-font-weight := 500
-$button-margin := 6px
+$button-margin-y := 6px
+$button-margin-x := 8px
+$button-margin := $button-margin-y $button-margin-x
 $button-min-width := 88px
+$button-small-padding := 0 8px
 $button-padding := 0 16px
+$button-large-padding := 0 32px
 $button-text-transform := uppercase
-
-$button-dark-overlay := rgba($material-dark.fg-color, .12)
-$button-dark-disabled-color := rgba($material-dark.fg-color, .3)
-$button-light-overlay := rgba($material-light.fg-color, .12)
-$button-light-disabled-color := rgba($material-light.fg-color, .26)
 
 $button-small-height := 28px
 $button-small-font-size := 13px
@@ -224,33 +187,14 @@ $button-floating-large-width := 72px
 $button-floating-small-icon-width := 18px
 $button-floating-large-icon-width := 30px
 
-// Button Dropdown
-$button-dropdown-font-size := 16px
-$button-dropdown-font-weight := 500
-$button-dropdown-overflow-editable-height := 42px
-$button-dropdown-overflow-editable-min-width := 102px
-$button-dropdown-overflow-editable-padding := 0 16px
-$button-dropdown-border-bottom := 1px solid $material-twelve-percent-dark
-$button-dropdown-input-width := calc(100% - 40px)
-$button-dropdown-input-padding-left := 16px
-$button-dropdown-background := #fff
-
 // Card
-$card-actions-border-top := 1px solid rgba($material-theme.fg-color, .1)
-$card-background := $material-theme.bg-color
-$card-padding := 16px
 $card-border-radius := 2px
-$card-title-text-size := 24px
-$card-title-text-letter-spacing := 1px
-$card-title-text-font-weight := 400
-$card-row-min-height := 36px
 
 // Chip
-$chip-background := $grey.lighten-2
-$chip-border := 1px solid $grey.lighten-2
 $chip-border-radius := 28px
-$chip-font-size := 14px
-$chip-label-border-radius := 0
+$chip-font-size := 13px
+$chip-label-border-radius := $card-border-radius
+$chip-label-color := rgba($material-light.fg-color, .87)
 $chip-icon-font-size := 24px
 $chip-icon-color := rgba($material-light.fg-color, .54)
 $chip-padding := 0 12px
@@ -258,7 +202,7 @@ $chip-removeable-padding := 0 4px 0 12px
 $chip-outline-background := transparent !important
 $chip-outline-color := $grey.base
 $chip-height := 32px
-$chip-margin := 8px
+$chip-margin := 4px
 $chip-small-height := 26px
 
 // Collapsible
@@ -266,9 +210,23 @@ $expansion-panel-collapse-height := 48px
 $collapsible-transition-height := 0.23s
 
 // Footer
-$footer-height := 45px
+$footer-height := 36px
 
 /** Lists */
+//  list fonts and weights */
+$list-tile-font-size := $headings.subheading.size //16px - the mdc scss uses subheading to configure like this
+$list-tile-font-weight := $headings.subheading.weight //400
+
+$list-action-text-font-size := 12px //this is for the stacked actions
+$list-action-text-font-color := $grey.base
+
+$list-sub-title-font-size := ($list-tile-font-size - 2px) //14px
+
+$subheader-height-font-size := ($list-tile-font-size - 2px) //14px
+$subheader-font-weight := $font-weights.medium //500
+
+
+//   list spacing*/
 $list-left-padding := 16px
 $list-right-padding := 16px
 $list-top-padding := 8px
@@ -276,46 +234,33 @@ $list-bottom-padding := 8px
 
 $list-item-right-margin := 56px
 $list-item-left-padding := 72px
-$list-item-dense-top-padding := 4px
-
-$list-item-font-size := 16px
-$list-item-dense-font-size := 13px
-$list-item-font-weight := 500
 
 $list-item-single-height := 48px
-$list-item-dense-single-height := 40px
-$list-item-avatar-single-height := 56px
-$list-item-dense-avatar-single-height := 48px
-
 $list-item-double-height := 72px
-$list-item-dense-double-height := 60px
-
 $list-item-triple-height := 88px
-$list-item-dense-triple-height := 76px
+$list-item-avatar-single-height := 56px
 
 $subheader-inset-margin := $list-item-right-margin
-$subheader-font-weight := 500
-$subheader-height-font-size := 14px
 
-$list-title-font-size := 16px
-$list-title-font-weight := 500
-$list-title-dense-font-weight := 400
+//   list dense overrides */
+$list-item-dense-font-size := ($list-tile-font-size - 3px) //13px
+$subheader-dense-font-size := $list-item-dense-font-size
+$list-item-dense-icon-font-size := 21px //weird rendering issue
 
-$list-sub-title-font-size := 14px
-$list-sub-title-font-weight := 400
+$list-item-dense-top-padding := $list-top-padding / 2
+$list-item-dense-single-height := $list-item-single-height - 8px //40px
+$list-item-dense-double-height := $list-item-double-height - 12px //60px
+$list-item-dense-triple-height := $list-item-triple-height - 12px //76px
 
-$list-content-font-size := 15px
+$list-item-dense-avatar-single-height := $list-item-single-height //48px the dense concept was to take avatars to a normal single item height
+$list-item-dense-avatar-height := 38px
 
-$list-group-tile-title-font-weight := 300
-$list-group-tile-title-active-font-weight := 300
+$list-dense-subheader-height := $list-item-dense-single-height
+$list-dense-subheader-group-height := $list-dense-subheader-height //the subheader under a group menu
 
-$list-action-text-font-size := 12px
 
 /** Pickers */
-$picker-width := 315px
-$picker-title-min-height := 105px
 $time-picker-number-font-size := 16px
-$time-picker-number-margin := 10px
 
 // Toolbar
 $toolbar-height := 56px
@@ -330,89 +275,24 @@ $process-circular-intermediate-svg-transition := all .2s ease-in-out
 $progress-circular-underlay-stroke := rgba($material-light.fg-color, 0.1)
 $progress-circular-overlay-transition := all .6s ease-in-out
 
-
-/* Selection Controls */
-$selection-switch-light-color := rgba($material-light.fg-color, $material-light.disabledORhints-text-percent)
-$selection-switch-light-background := #fafafa
-$selection-switch-light-label-color := #424242
-$selection-switch-light-disabled-color := rgba($material-light.fg-color, $material-light.divider-percent)
-$selection-switch-light-disabled-background := #bdbdbd
-
-$selection-switch-dark-color := rgba($material-dark.fg-color, .30)
-$selection-switch-dark-background := #bdbdbd
-$selection-switch-dark-label-color := $material-dark.text-color
-$selection-switch-dark-disabled-color := rgba($material-dark.fg-color, .10)
-$selection-switch-dark-disabled-background := #424242
-
-$selection-controls-light-color := rgba($material-light.fg-color, .54)
-$selection-controls-light-disabled-color := rgba($material-light.fg-color, .26)
-$selection-controls-light-label-color := $material-light.text-color
-
-$selection-controls-dark-color := rgba($material-dark.fg-color, .70)
-$selection-controls-dark-disabled-color := rgba($material-dark.fg-color, .30)
-$selection-controls-dark-label-color := $material-dark.text-color
-
-
-/* Sidebar */
-
-$navigation-drawer-height := 100vh
-$navigation-drawer-width := 300px
-$navigation-drawer-mini-variant-width := 80px
-
-// Sidebar Item
-$navigation-drawer-item-color := $material-dark.fg-color
-$navigation-drawer-item-height := 50px
-$navigation-drawer-item-active-color := $material-dark.fg-color
-$navigation-drawer-item-active-background-color := $theme.primary
-$navigation-drawer-item-hover-background-color := rgba($theme.primary, .4)
-
-// Sidebar Group
-$navigation-drawer-group-items-background-color := darken($theme.secondary, 15%)
-$navigation-drawer-group-header-active-navigation-drawer-items-border := 1px solid rgba($material-dark.fg-color, .1)
-$navigation-drawer-group-header-active-navigation-drawer-item-active-background-color := rgba($theme.primary, .4)
-
-
-/* Slider */
-$slider-light-off := rgba($material-light.fg-color, .26)
-$slider-light-focus-off := rgba($material-light.fg-color, .38)
-$slider-light-disabled := rgba($material-light.fg-color, .26)
-$slider-light-label := $material-light.text-color
-$slider-light-ticks := rgba($material-light.fg-color, .6)
-
-$slider-dark-off := rgba($material-dark.fg-color, .3)
-$slider-dark-focus-off := rgba($material-dark.fg-color, .3)
-$slider-dark-disabled := rgba($material-dark.fg-color, .3)
-$slider-dark-label := $material-dark.text-color
-$slider-dark-ticks := rgba($material-dark.fg-color, .6)
-
+// Navigation drawer
+$navigation-drawer-item-font-size := 14px
+$navigation-drawer-item-font-weight := $font-weights.medium
+$navigation-drawer-group-item-font-weight := $font-weights.regular
 
 /** Snackbar */
 $snackbar-background-color := #323232
 
-
 /* Text Input */
-$input-group-height := 58px
-$input-group-margin := 18px 0
+$input-group-padding := 18px 0 0
 $input-font-size := 16px
-$label-font-size := 12px
 $input-height := 30px
+$input-group-text-field-label-top := 18px
 
-$input-group-light-normal := rgba($material-light.fg-color, $material-light.disabledORhints-text-percent)
-$input-group-light-focus := rgba($material-light.fg-color, .87)
-
-$input-group-dark-normal := rgba($material-dark.fg-color, $material-dark.disabledORhints-text-percent)
-$input-group-dark-focus := $material-dark.fg-color
-
-
-$label-padding-top := 16px
-$label-padding-bottom := 8px
-$input-padding-bottom := 8px
 
 // Directives
 // ============================================================
 
 // Ripple animation
-$ripple-container-color := currentColor
-$ripple-animation-background := currentColor
 $ripple-animation-transition := .4s $transition.linear-out-slow-in
 $ripple-animation-visible-opacity := .15

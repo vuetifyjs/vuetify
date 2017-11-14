@@ -1,0 +1,4306 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
+
+<div class="picker picker--date card"
+     style="height: auto;"
+     data-ripple="false"
+>
+  <div class="picker__title primary">
+    <div class="picker--date__title-year">
+      2013
+    </div>
+    <div class="picker--date__title-date active">
+      <div>
+        Tue, May 7
+      </div>
+    </div>
+  </div>
+  <div class="picker__body">
+    <div class="picker--date__header">
+      <div class="picker--date__header-selector">
+        <button type="button"
+                class="btn btn--icon"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div class="picker--date__header-selector-date">
+          <strong class="accent--text">
+            May 2013
+          </strong>
+        </div>
+        <button type="button"
+                class="btn btn--icon"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div class="picker--date__table">
+      <table>
+        <thead>
+          <tr>
+            <th>
+              S
+            </th>
+            <th>
+              M
+            </th>
+            <th>
+              T
+            </th>
+            <th>
+              W
+            </th>
+            <th>
+              T
+            </th>
+            <th>
+              F
+            </th>
+            <th>
+              S
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon btn--disabled"
+              >
+                <span class="btn__content">
+                  1
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon btn--disabled"
+              >
+                <span class="btn__content">
+                  2
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  3
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  4
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  5
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  6
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon btn--active accent"
+              >
+                <span class="btn__content">
+                  7
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  8
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  9
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  10
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  11
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  12
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  13
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  14
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  15
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  16
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  17
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  18
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  19
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon btn--disabled"
+              >
+                <span class="btn__content">
+                  20
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon btn--disabled"
+              >
+                <span class="btn__content">
+                  21
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon btn--disabled"
+              >
+                <span class="btn__content">
+                  22
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon btn--disabled"
+              >
+                <span class="btn__content">
+                  23
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon btn--disabled"
+              >
+                <span class="btn__content">
+                  24
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon btn--disabled"
+              >
+                <span class="btn__content">
+                  25
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon btn--disabled"
+              >
+                <span class="btn__content">
+                  26
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon btn--disabled"
+              >
+                <span class="btn__content">
+                  27
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon btn--disabled"
+              >
+                <span class="btn__content">
+                  28
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon btn--disabled"
+              >
+                <span class="btn__content">
+                  29
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon btn--disabled"
+              >
+                <span class="btn__content">
+                  30
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon btn--disabled"
+              >
+                <span class="btn__content">
+                  31
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              &nbsp;
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VDatePicker.js should match snapshot with allowed dates and pick-month prop 1`] = `
+
+<div class="picker picker--date card"
+     style="height: auto;"
+     data-ripple="false"
+>
+  <div class="picker__title primary">
+    <div class="picker--date__title-year">
+      2013
+    </div>
+    <div class="picker--date__title-date active">
+      <div>
+        May
+      </div>
+    </div>
+  </div>
+  <div class="picker__body">
+    <div class="picker--date__header">
+      <div class="picker--date__header-selector">
+        <button type="button"
+                class="btn btn--icon"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div class="picker--date__header-selector-date">
+          <strong class="accent--text">
+            2013
+          </strong>
+        </div>
+        <button type="button"
+                class="btn btn--icon"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div class="picker--date__table picker--month__table">
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Jan
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat btn--disabled"
+              >
+                <span class="btn__content">
+                  Feb
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Mar
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--flat btn--disabled"
+              >
+                <span class="btn__content">
+                  Apr
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--active accent"
+              >
+                <span class="btn__content">
+                  May
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat btn--disabled"
+              >
+                <span class="btn__content">
+                  Jun
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Jul
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat btn--disabled"
+              >
+                <span class="btn__content">
+                  Aug
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Sep
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--flat btn--disabled"
+              >
+                <span class="btn__content">
+                  Oct
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat btn--disabled"
+              >
+                <span class="btn__content">
+                  Nov
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat btn--disabled"
+              >
+                <span class="btn__content">
+                  Dec
+                </span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VDatePicker.js should match snapshot with colored date picker 1`] = `
+
+<div class="picker picker--date card"
+     style="height: auto;"
+     data-ripple="false"
+>
+  <div class="picker__title orange darken-1">
+    <div class="picker--date__title-year">
+      2005
+    </div>
+    <div class="picker--date__title-date active">
+      <div>
+        Tue, Nov 1
+      </div>
+    </div>
+  </div>
+  <div class="picker__body">
+    <div class="picker--date__header">
+      <div class="picker--date__header-selector">
+        <button type="button"
+                class="btn btn--icon"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div class="picker--date__header-selector-date">
+          <strong class="primary--text">
+            November 2005
+          </strong>
+        </div>
+        <button type="button"
+                class="btn btn--icon"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div class="picker--date__table">
+      <table>
+        <thead>
+          <tr>
+            <th>
+              S
+            </th>
+            <th>
+              M
+            </th>
+            <th>
+              T
+            </th>
+            <th>
+              W
+            </th>
+            <th>
+              T
+            </th>
+            <th>
+              F
+            </th>
+            <th>
+              S
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon btn--active primary"
+              >
+                <span class="btn__content">
+                  1
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  2
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  3
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  4
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  5
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  6
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  7
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  8
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  9
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  10
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  11
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  12
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  13
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  14
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  15
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  16
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  17
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  18
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  19
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  20
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  21
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  22
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  23
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  24
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  25
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  26
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  27
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  28
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  29
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  30
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              &nbsp;
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VDatePicker.js should match snapshot with colored date picker 2`] = `
+
+<div class="picker picker--date card"
+     style="height: auto;"
+     data-ripple="false"
+>
+  <div class="picker__title orange darken-1">
+    <div class="picker--date__title-year">
+      2005
+    </div>
+    <div class="picker--date__title-date active">
+      <div>
+        Tue, Nov 1
+      </div>
+    </div>
+  </div>
+  <div class="picker__body">
+    <div class="picker--date__header">
+      <div class="picker--date__header-selector">
+        <button type="button"
+                class="btn btn--icon"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div class="picker--date__header-selector-date">
+          <strong class="orange--text text--darken-1">
+            November 2005
+          </strong>
+        </div>
+        <button type="button"
+                class="btn btn--icon"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div class="picker--date__table">
+      <table>
+        <thead>
+          <tr>
+            <th>
+              S
+            </th>
+            <th>
+              M
+            </th>
+            <th>
+              T
+            </th>
+            <th>
+              W
+            </th>
+            <th>
+              T
+            </th>
+            <th>
+              F
+            </th>
+            <th>
+              S
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon btn--active orange darken-1"
+              >
+                <span class="btn__content">
+                  1
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  2
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  3
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  4
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  5
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  6
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  7
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  8
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  9
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  10
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  11
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  12
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  13
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  14
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  15
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  16
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  17
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  18
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  19
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  20
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  21
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  22
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  23
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  24
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  25
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  26
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  27
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  28
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  29
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  30
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              &nbsp;
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VDatePicker.js should match snapshot with colored month picker 1`] = `
+
+<div class="picker picker--date card"
+     style="height: auto;"
+     data-ripple="false"
+>
+  <div class="picker__title orange darken-1">
+    <div class="picker--date__title-year">
+      2005
+    </div>
+    <div class="picker--date__title-date active">
+      <div>
+        November
+      </div>
+    </div>
+  </div>
+  <div class="picker__body">
+    <div class="picker--date__header">
+      <div class="picker--date__header-selector">
+        <button type="button"
+                class="btn btn--icon"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div class="picker--date__header-selector-date">
+          <strong class="primary--text">
+            2005
+          </strong>
+        </div>
+        <button type="button"
+                class="btn btn--icon"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div class="picker--date__table picker--month__table">
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Jan
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Feb
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Mar
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Apr
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  May
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Jun
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Jul
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Aug
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Sep
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Oct
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--active primary"
+              >
+                <span class="btn__content">
+                  Nov
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Dec
+                </span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VDatePicker.js should match snapshot with colored month picker 2`] = `
+
+<div class="picker picker--date card"
+     style="height: auto;"
+     data-ripple="false"
+>
+  <div class="picker__title orange darken-1">
+    <div class="picker--date__title-year">
+      2005
+    </div>
+    <div class="picker--date__title-date active">
+      <div>
+        November
+      </div>
+    </div>
+  </div>
+  <div class="picker__body">
+    <div class="picker--date__header">
+      <div class="picker--date__header-selector">
+        <button type="button"
+                class="btn btn--icon"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div class="picker--date__header-selector-date">
+          <strong class="orange--text text--darken-1">
+            2005
+          </strong>
+        </div>
+        <button type="button"
+                class="btn btn--icon"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div class="picker--date__table picker--month__table">
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Jan
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Feb
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Mar
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Apr
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  May
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Jun
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Jul
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Aug
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Sep
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Oct
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--active orange darken-1"
+              >
+                <span class="btn__content">
+                  Nov
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Dec
+                </span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
+
+<div class="picker picker--date card theme--dark"
+     style="height: auto;"
+     data-ripple="false"
+>
+  <div class="picker__title">
+    <div class="picker--date__title-year">
+      2013
+    </div>
+    <div class="picker--date__title-date active">
+      <div>
+        Tue, May 7
+      </div>
+    </div>
+  </div>
+  <div class="picker__body">
+    <div class="picker--date__header">
+      <div class="picker--date__header-selector">
+        <button type="button"
+                class="btn btn--icon theme--dark"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div class="picker--date__header-selector-date">
+          <strong class="accent--text">
+            May 2013
+          </strong>
+        </div>
+        <button type="button"
+                class="btn btn--icon theme--dark"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div class="picker--date__table">
+      <table>
+        <thead>
+          <tr>
+            <th>
+              S
+            </th>
+            <th>
+              M
+            </th>
+            <th>
+              T
+            </th>
+            <th>
+              W
+            </th>
+            <th>
+              T
+            </th>
+            <th>
+              F
+            </th>
+            <th>
+              S
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon theme--dark"
+              >
+                <span class="btn__content">
+                  1
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon theme--dark"
+              >
+                <span class="btn__content">
+                  2
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon theme--dark"
+              >
+                <span class="btn__content">
+                  3
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon theme--dark"
+              >
+                <span class="btn__content">
+                  4
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon theme--dark"
+              >
+                <span class="btn__content">
+                  5
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon theme--dark"
+              >
+                <span class="btn__content">
+                  6
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon btn--active theme--dark accent"
+              >
+                <span class="btn__content">
+                  7
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon theme--dark"
+              >
+                <span class="btn__content">
+                  8
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon theme--dark"
+              >
+                <span class="btn__content">
+                  9
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon theme--dark"
+              >
+                <span class="btn__content">
+                  10
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon theme--dark"
+              >
+                <span class="btn__content">
+                  11
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon theme--dark"
+              >
+                <span class="btn__content">
+                  12
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon theme--dark"
+              >
+                <span class="btn__content">
+                  13
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon theme--dark"
+              >
+                <span class="btn__content">
+                  14
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon theme--dark"
+              >
+                <span class="btn__content">
+                  15
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon theme--dark"
+              >
+                <span class="btn__content">
+                  16
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon theme--dark"
+              >
+                <span class="btn__content">
+                  17
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon theme--dark"
+              >
+                <span class="btn__content">
+                  18
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon theme--dark"
+              >
+                <span class="btn__content">
+                  19
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon theme--dark"
+              >
+                <span class="btn__content">
+                  20
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon theme--dark"
+              >
+                <span class="btn__content">
+                  21
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon theme--dark"
+              >
+                <span class="btn__content">
+                  22
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon theme--dark"
+              >
+                <span class="btn__content">
+                  23
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon theme--dark"
+              >
+                <span class="btn__content">
+                  24
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon theme--dark"
+              >
+                <span class="btn__content">
+                  25
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon theme--dark"
+              >
+                <span class="btn__content">
+                  26
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon theme--dark"
+              >
+                <span class="btn__content">
+                  27
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon theme--dark"
+              >
+                <span class="btn__content">
+                  28
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon theme--dark"
+              >
+                <span class="btn__content">
+                  29
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon theme--dark"
+              >
+                <span class="btn__content">
+                  30
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon theme--dark"
+              >
+                <span class="btn__content">
+                  31
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              &nbsp;
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VDatePicker.js should match snapshot with default settings 1`] = `
+
+<div class="picker picker--date card"
+     style="height: auto;"
+     data-ripple="false"
+>
+  <div class="picker__title primary">
+    <div class="picker--date__title-year">
+      2013
+    </div>
+    <div class="picker--date__title-date active">
+      <div>
+        Tue, May 7
+      </div>
+    </div>
+  </div>
+  <div class="picker__body">
+    <div class="picker--date__header">
+      <div class="picker--date__header-selector">
+        <button type="button"
+                class="btn btn--icon"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div class="picker--date__header-selector-date">
+          <strong class="accent--text">
+            May 2013
+          </strong>
+        </div>
+        <button type="button"
+                class="btn btn--icon"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div class="picker--date__table">
+      <table>
+        <thead>
+          <tr>
+            <th>
+              S
+            </th>
+            <th>
+              M
+            </th>
+            <th>
+              T
+            </th>
+            <th>
+              W
+            </th>
+            <th>
+              T
+            </th>
+            <th>
+              F
+            </th>
+            <th>
+              S
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  1
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  2
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  3
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  4
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  5
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  6
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon btn--active accent"
+              >
+                <span class="btn__content">
+                  7
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  8
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  9
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  10
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  11
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  12
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  13
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  14
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  15
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  16
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  17
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  18
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  19
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  20
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  21
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  22
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  23
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  24
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  25
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  26
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  27
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  28
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  29
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  30
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  31
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              &nbsp;
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
+
+<div class="picker picker--date card"
+     style="height: auto;"
+     data-ripple="false"
+>
+  <div class="picker__title primary">
+    <div class="picker--date__title-year">
+      2013
+    </div>
+    <div class="picker--date__title-date active">
+      <div>
+        Tue, May 7
+      </div>
+    </div>
+  </div>
+  <div class="picker__body">
+    <div class="picker--date__header">
+      <div class="picker--date__header-selector">
+        <button type="button"
+                class="btn btn--icon"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div class="picker--date__header-selector-date">
+          <strong class="accent--text">
+            May 2013
+          </strong>
+        </div>
+        <button type="button"
+                class="btn btn--icon"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div class="picker--date__table">
+      <table>
+        <thead>
+          <tr>
+            <th>
+              T
+            </th>
+            <th>
+              W
+            </th>
+            <th>
+              T
+            </th>
+            <th>
+              F
+            </th>
+            <th>
+              S
+            </th>
+            <th>
+              S
+            </th>
+            <th>
+              M
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  1
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  2
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  3
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  4
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  5
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  6
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon btn--active accent"
+              >
+                <span class="btn__content">
+                  7
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  8
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  9
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  10
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  11
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  12
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  13
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  14
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  15
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  16
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  17
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  18
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  19
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  20
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  21
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  22
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  23
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  24
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  25
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  26
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  27
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  28
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  29
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  30
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  31
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              &nbsp;
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VDatePicker.js should match snapshot with locale 1`] = `
+
+<div class="picker picker--date card"
+     style="height: auto;"
+>
+  <div class="picker__title">
+    <div class="picker--date__title-year">
+      2013
+    </div>
+    <div class="picker--date__title-date active">
+      <div>
+        M05 7, Tue
+      </div>
+    </div>
+  </div>
+  <div class="picker__body">
+    <div class="picker--date__header">
+      <div class="picker--date__header-selector">
+        <button type="button"
+                class="btn btn--icon btn--raised"
+        >
+          <div class="btn__content">
+            <i class="material-icons icon">
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div class="picker--date__header-selector-date">
+          <strong>
+            2013 M05
+          </strong>
+        </div>
+        <button type="button"
+                class="btn btn--icon btn--raised"
+        >
+          <div class="btn__content">
+            <i class="material-icons icon">
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div class="picker--date__table">
+      <table>
+        <thead>
+          <tr>
+            <th>
+              S
+            </th>
+            <th>
+              M
+            </th>
+            <th>
+              T
+            </th>
+            <th>
+              W
+            </th>
+            <th>
+              T
+            </th>
+            <th>
+              F
+            </th>
+            <th>
+              S
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  1
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  2
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  3
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  4
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  5
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  6
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat btn--active"
+              >
+                <span class="btn__content">
+                  7
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  8
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  9
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  10
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  11
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  12
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  13
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  14
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  15
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  16
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  17
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  18
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  19
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  20
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  21
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  22
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  23
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  24
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  25
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  26
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  27
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  28
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  29
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  30
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--date-picker btn--floating btn--small btn--flat"
+              >
+                <span class="btn__content">
+                  31
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              &nbsp;
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VDatePicker.js should match snapshot with month formatting functions 1`] = `
+
+<div class="picker picker--date card"
+     style="height: auto;"
+     data-ripple="false"
+>
+  <div class="picker__title primary">
+    <div class="picker--date__title-year">
+      2005
+    </div>
+    <div class="picker--date__title-date active">
+      <div>
+        November
+      </div>
+    </div>
+  </div>
+  <div class="picker__body">
+    <div class="picker--date__header">
+      <div class="picker--date__header-selector">
+        <button type="button"
+                class="btn btn--icon"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div class="picker--date__header-selector-date">
+          <strong class="accent--text">
+            2005
+          </strong>
+        </div>
+        <button type="button"
+                class="btn btn--icon"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div class="picker--date__table picker--month__table">
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  (01)
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  (02)
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  (03)
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  (04)
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  (05)
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  (06)
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  (07)
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  (08)
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  (09)
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  (10)
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--active accent"
+              >
+                <span class="btn__content">
+                  (11)
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  (12)
+                </span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VDatePicker.js should match snapshot with no title 1`] = `
+
+<div class="picker picker--date card"
+     style="height: auto;"
+     data-ripple="false"
+>
+  <div class="picker__body">
+    <div class="picker--date__header">
+      <div class="picker--date__header-selector">
+        <button type="button"
+                class="btn btn--icon"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div class="picker--date__header-selector-date">
+          <strong class="accent--text">
+            May 2013
+          </strong>
+        </div>
+        <button type="button"
+                class="btn btn--icon"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div class="picker--date__table">
+      <table>
+        <thead>
+          <tr>
+            <th>
+              S
+            </th>
+            <th>
+              M
+            </th>
+            <th>
+              T
+            </th>
+            <th>
+              W
+            </th>
+            <th>
+              T
+            </th>
+            <th>
+              F
+            </th>
+            <th>
+              S
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  1
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  2
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  3
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  4
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  5
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  6
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon btn--active accent"
+              >
+                <span class="btn__content">
+                  7
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  8
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  9
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  10
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  11
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  12
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  13
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  14
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  15
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  16
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  17
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  18
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  19
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  20
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  21
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  22
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  23
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  24
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  25
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  26
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  27
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  28
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  29
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  30
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  31
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              &nbsp;
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VDatePicker.js should match snapshot with pick-month prop 1`] = `
+
+<div class="picker picker--date card"
+     style="height: auto;"
+     data-ripple="false"
+>
+  <div class="picker__title primary">
+    <div class="picker--date__title-year">
+      2013
+    </div>
+    <div class="picker--date__title-date active">
+      <div>
+        May
+      </div>
+    </div>
+  </div>
+  <div class="picker__body">
+    <div class="picker--date__header">
+      <div class="picker--date__header-selector">
+        <button type="button"
+                class="btn btn--icon"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div class="picker--date__header-selector-date">
+          <strong class="accent--text">
+            2013
+          </strong>
+        </div>
+        <button type="button"
+                class="btn btn--icon"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div class="picker--date__table picker--month__table">
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Jan
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Feb
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Mar
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Apr
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--active accent"
+              >
+                <span class="btn__content">
+                  May
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Jun
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Jul
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Aug
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Sep
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Oct
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Nov
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--flat"
+              >
+                <span class="btn__content">
+                  Dec
+                </span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VDatePicker.js should match snapshot with title/header formatting functions 1`] = `
+
+<div class="picker picker--date card"
+     style="height: auto;"
+     data-ripple="false"
+>
+  <div class="picker__title primary">
+    <div class="picker--date__title-year">
+      2005
+    </div>
+    <div class="picker--date__title-date active">
+      <div>
+        (2005-11-01)
+      </div>
+    </div>
+  </div>
+  <div class="picker__body">
+    <div class="picker--date__header">
+      <div class="picker--date__header-selector">
+        <button type="button"
+                class="btn btn--icon"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div class="picker--date__header-selector-date">
+          <strong class="accent--text">
+            (2005-11)
+          </strong>
+        </div>
+        <button type="button"
+                class="btn btn--icon"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div class="picker--date__table">
+      <table>
+        <thead>
+          <tr>
+            <th>
+              S
+            </th>
+            <th>
+              M
+            </th>
+            <th>
+              T
+            </th>
+            <th>
+              W
+            </th>
+            <th>
+              T
+            </th>
+            <th>
+              F
+            </th>
+            <th>
+              S
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon btn--active accent"
+              >
+                <span class="btn__content">
+                  1
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  2
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  3
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  4
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  5
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  6
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  7
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  8
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  9
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  10
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  11
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  12
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  13
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  14
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  15
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  16
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  17
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  18
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  19
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  20
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  21
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  22
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  23
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  24
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  25
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  26
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  27
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  28
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  29
+                </span>
+              </button>
+            </td>
+            <td>
+              <button type="button"
+                      class="btn btn--raised btn--icon"
+              >
+                <span class="btn__content">
+                  30
+                </span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              &nbsp;
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+`;

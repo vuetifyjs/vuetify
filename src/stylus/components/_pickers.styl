@@ -1,46 +1,50 @@
+@import '../bootstrap'
+@import '../theme'
+
+/* Themes */
+
+picker($material)
+  color: $material.text.primary
+
+  .picker__body
+    background: $material.picker.body
+
+
+picker-title($material)
+  .picker__title
+    background: $material.picker.title
+
+dark(picker-title, 'picker')
+theme(picker, "picker")
+
 .picker
   border-radius: $card-border-radius
-  color: #fff
   display: flex
   flex-direction: column
   width: 290px
-  
+  contain: content
+
   .card__row--actions
     border: none
     margin-top: -20px
 
   &__title
-    background: $theme.primary
-    height: 105px
+    color: #fff
     border-top-left-radius: $card-border-radius
     border-top-right-radius: $card-border-radius
+    height: 105px
     padding: 16px
-    
+
   &__body
-    color: #000
     height: 290px
     overflow: hidden
     position: relative
-
-  .btn
-    color: $color-light
-
-  &--dark
-    color: $color-dark
-
-    .picker__body
-      background: $grey.darken-3
-      
-    .picker__title
-      background: $grey.darken-2
-    
-
 
   &--landscape
     flex-direction: row
     flex-wrap: wrap
     width: 500px
-    
+
     .picker__title
       border-top-right-radius: 0
       border-bottom-right-radius: 0
@@ -52,7 +56,7 @@
       left: 0
       height: 100%
       z-index: 1
-      
+
     .picker__body
       flex: 1 0
       width: 330px

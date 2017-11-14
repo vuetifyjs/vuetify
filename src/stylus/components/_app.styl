@@ -1,0 +1,34 @@
+@import '../bootstrap'
+@import '../theme'
+
+.application
+  display: flex
+
+  &--wrap
+    flex: 1 1 auto
+    backface-visibility: hidden
+    display: flex
+    flex-direction: column
+    min-height: 100vh
+    max-width: 100%
+    position: relative
+
+    // TODO: Deprecate
+    > main:not(.content)
+      flex: 1 0 auto
+      display: flex
+
+application($material)
+  background: $material.background
+  color: $material.text.primary
+  
+  a
+    cursor: pointer
+
+.theme--light a
+  color: $material-light.text.link
+
+.theme--dark a
+  color: $material-dark.text.link
+
+app(application)

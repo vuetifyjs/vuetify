@@ -1,143 +1,145 @@
-.application--dark
-  .toolbar
-    background: $grey.darken-4
+@import '../bootstrap'
+@import '../theme'
+
+/* Theme */
+toolbar($material)
+  background-color: $material.app-bar
+  color: $material.text.primary
+
+theme(toolbar, "toolbar")
 
 .toolbar
-  align-items: center
-  background-color: $theme.primary
-  display: flex
-  flex-wrap: wrap
-  height: $toolbar-height
   position: relative
-  padding: $toolbar-padding-y 0
   transition: .3s $transition.swing
   width: 100%
   will-change: padding-left
   elevation(4)
-  z-index: 2
 
-  > *:first-child
-    margin-left: $grid-gutter
-
-  > *:right-child
-    margin-right: $grid-gutter
-
-  @media $display-breakpoints.xs-only
-    > *:first-child
-      margin-left: $grid-gutter-mobile
-
-    > *:right-child
-      margin-right: $grid-gutter-mobile
-
-  ul
-    list-style: none
-
-  li
-    height: 100%
-
-  i
-    font-size: 24px
-
-  .menu__activator
-    height: 100%
-
-  .btn:not(.toolbar__side-icon)
-    margin: 0 6px
-
-    &:first-child
-      margin-left: -6px
-    
-  &--fixed, &--absolute
-    + main
-      padding-top: $toolbar-height
-
-  &--fixed
-    position: fixed
-    
-  &--absolute
-    position: absolute
-
-  &__sub
-    flex: 1 0 100%
-    padding: 24px 0 24px 72px
-
-  &__side-icon
-    display: inline-flex
-    align-items: center
-    position: relative
-    margin-left: 10px
-
-  &__logo
-    color: #fff
-    font-size: 3rem
-    flex: 1;
-    text-decoration: none
+  .input-group--solo
+    .input-group__details
+      display: none
+      
+  .input-group--single-line:not(.input-group--solo)
     padding: 0
-    display: flex
-    align-items: center
 
+    label
+      top: auto
+
+/** Children */
+.toolbar
   &__title
-    color: #fff
     font-size: $headings.h6.size
-    flex: 1;
+    font-weight: $headings.h6.weight
+    letter-spacing: $headings.h6.letter-spacing
+    margin-left: 16px
     white-space: nowrap
     overflow: hidden
     text-overflow: ellipsis
-    
-    &:not(:first-child)
-      padding: 0 16px
+
+  &__content, &__extension
+    align-items: center
+    display: flex
+
+    > .list
+      flex: 1 1 auto
+      margin: 0 !important // come back to this
+      max-height: 100%
+
+    > .btn:last-child, > .menu:first-child
+      margin-right: 8px
+
+    > .btn:first-child, > .menu:first-child
+      margin-left: 8px
+
+    > *:not(.btn):not(.menu):first-child
+      margin-left: $grid-gutters.lg
+
+    > *:not(.btn):not(.menu):last-child
+      margin-right: $grid-gutters.lg
 
   &__items
-    list-style-type: none
-    padding: 0
     display: flex
-    align-items: center
     height: 100%
     max-width: 100%
+    padding: 0
+    
+    .menu
+      height: 100%
 
-    > li
-      display: flex
-      align-items: center
+    > .menu .menu__activator
+      height: 100%
 
-  &__item
-    align-items: center
-    color: #fff
-    display: flex
-    padding: $toolbar-item-padding
-    text-decoration: none
-    transition: all 0.3s ease-out
-    position: relative
-    height: 100%
-    white-space: nowrap
+      .btn
+        height: 100%
+        margin: 0
 
-    i
-      font-size: 2rem
+    > .btn
+      height: 100%
+      margin: 0
 
-    &:hover, &--active
-      background: rgba(#000,0.1)
+  @media $display-breakpoints.xs-only
+    .toolbar__content,
+    .toolbar__extension
+      > .btn:last-child
+        margin-right: 17px
 
-    &--disabled
-      opacity: .5
-      pointer-events: none
+      > .btn:first-child
+        margin-left: 17px
 
-  .input-group
-    margin: 0 0 0 16px
-    flex: 1
+      > *:not(.btn):not(.menu):first-child
+        margin-left: $grid-gutters.xl
 
-    &--dark
-      .icon
-        color: #fff
+      > *:not(.btn):not(.menu):last-child
+        margin-right: $grid-gutters.xl
 
-    &--light
-      .icon
-        color: #000
+  @media all and (max-width: $grid-breakpoints.sm) and (orientation: portrait)
+    toolbar-content(7px)
 
-    &--dark.input-group--focused.input-group--prepend-icon,
-    &--dark.input-group--focused.input-group--append-icon
-      .icon
-        color: #fff
+/** Types */
+.toolbar
+  &--card
+    border-radius: $card-border-radius $card-border-radius 0 0
+    elevation(0)
 
-    &--light.input-group--focused.input-group--prepend-icon,
-    &--light.input-group--focused.input-group--append-icon
-      .icon
-        color: #000
+  &--fixed
+    position: fixed
+    z-index: 2
+
+  &--fixed, &--absolute
+    top: 0
+    left: 0
+
+  &--absolute
+    position: absolute
+    z-index 2
+
+  &--floating
+    display: inline-flex
+    margin: 16px
+    width: auto
+  
+  &--clipped
+    z-index: 3
+
+  &--prominent
+    toolbar-content(15px)
+
+  &--dense
+    toolbar-content(7px)
+
+.toolbar__extension
+  .toolbar__title
+    margin-left: 72px !important
+
+  .tabs__bar
+    align-self: flex-end
+    margin: 0
+
+toolbar-content(left)
+  .toolbar__content,
+  .toolbar__extension
+    > *:first-child
+      margin-left: left
+
+    > *:last-child
+      margin-right: left

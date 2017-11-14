@@ -1,10 +1,22 @@
-.avatar
-  display: flex
-  justify-content: center
-  align-items: center
-  text-align: center
+@import '../bootstrap'
 
-  img, .icon
-    height: 42px
-    width: 42px
+.avatar
+  align-items: center
+  border-radius: 50%
+  display: inline-flex
+  justify-content: center
+  text-align: center
+  vertical-align: middle
+
+  img,
+  .icon
     border-radius: 50%
+    height: inherit
+    width: inherit
+    
+  &--tile
+    border-radius: 0
+
+    img,
+    .icon
+      border-radius: 0

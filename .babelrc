@@ -1,0 +1,43 @@
+{
+  "env": {
+    "test": {
+      "presets": [
+        ["es2015"],
+        ["stage-2"]
+      ],
+      "plugins": [
+        "transform-runtime",
+        ["module-resolver", {
+          "root": ["./src"],
+          "alias": {
+            "~components": "components",
+            "~directives": "directives",
+            "~mixins": "mixins",
+            "~stylus": "stylus",
+            "~util": "util"
+          }
+        }]
+      ]
+    },
+    "es5": {
+      "presets": [
+        ["es2015",  {"modules": false}],
+        ["stage-2"]
+      ],
+      "plugins": ["./build/babel-transform-stylus-paths.js"]
+    },
+    "development": {
+      "presets": [
+        ["es2015",  {"modules": false}],
+        ["stage-2"]
+      ],
+      "plugins": ["add-filehash"]
+    },
+    "production": {
+      "presets": [
+        ["es2015",  {"modules": false}],
+        ["stage-2"]
+      ]
+    }
+  }
+}

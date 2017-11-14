@@ -1,42 +1,50 @@
+﻿@import '../bootstrap'
+@import '../theme'
+
+breadcrumbs($material)
+  li.breadcrumbs__divider,
+  li:last-child .breadcrumbs__item,
+  li .breadcrumbs__item--disabled
+    color: $material.text.disabled
+
+theme(breadcrumbs, "breadcrumbs")
+
 .breadcrumbs
+  align-items: center
   display: flex
-  justify-content: center
   flex-wrap: wrap
   flex: $breadcrumbs-flex
-  margin: $breadcrumbs-margin
   list-style-type: none
-  
+  margin: $breadcrumbs-margin
+  padding: $breadcrumbs-padding
+
   li
-    &:not(:last-child):after
-      color: $grey.lighten-1
-      content: attr(data-divider)
-      vertical-align: middle
-      
-    &:last-child a
-      color: $grey.lighten-1
-      pointer-events: none
-      cursor: default
-      
-  &--with-icons
-    li
-      &:not(:last-child):after
-        font-family: 'Material Icons'
-      
-        
-  &__item
     align-items: center
-    color: $theme.primary
     display: inline-flex
     font-size: $breadcrumbs-item-font-size
-    padding: $breadcrumbs-padding
-    height: $breadcrumbs-height
-    text-decoration: none
-    line-height: $breadcrumbs-height
-    transition: $primary-transition
-    
-    &:hover
-      color: $grey.darken-1
+
+    .icon
+      font-size: $breadcrumbs-item-large-font-size
+
+    &:last-child a
+      cursor: default
+      pointer-events: none
       
+    &:nth-child(even)
+      padding: $breadcrumbs-even-child-padding
+
+  &--large
+    li
+      font-size: $breadcrumbs-item-large-font-size
+      
+      .icon
+        font-size: $breadcrumbs-item-large-font-size
+
+  &__item
+    align-items: center
+    display: inline-flex
+    text-decoration: none
+    transition: $primary-transition
+
     &--disabled
-      color: $grey.lighten-2
       pointer-events: none

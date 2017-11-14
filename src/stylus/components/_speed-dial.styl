@@ -1,0 +1,78 @@
+@import '../bootstrap'
+
+.speed-dial
+  position: relative
+
+  &--absolute
+    position: absolute
+
+  &--fixed
+    position: fixed
+
+  &--top
+    &:not(.speed-dial--absolute)
+      top: $grid-gutters.lg
+
+    &.speed-dial--absolute
+      top: 50%
+      transform: translateY(-50%)
+
+  &--bottom
+    &:not(.speed-dial--absolute)
+      bottom: $grid-gutters.lg
+
+    &.speed-dial--absolute
+      bottom: 50%
+      transform: translateY(50%)
+
+  &--left
+    left: $grid-gutters.lg
+
+  &--right
+    right: $grid-gutters.lg
+
+  &--direction
+    &-left,
+    &-right
+      .speed-dial__list
+        height: 100%
+        top: 0
+
+    &-top,
+    &-bottom
+      .speed-dial__list
+        left: 0
+        width: 100%
+
+    &-top
+      .speed-dial__list
+        flex-direction: column-reverse
+        bottom: 100%
+
+    &-right
+      .speed-dial__list
+        flex-direction: row
+        left: 100%
+
+    &-bottom
+      .speed-dial__list
+        flex-direction: column
+        top: 100%
+
+    &-left
+      .speed-dial__list
+        flex-direction: row-reverse
+        right: 100%
+
+/** Elements */
+.speed-dial__list
+  align-items: center
+  display: flex
+  justify-content: center
+  position: absolute
+
+  .btn
+    for n in (1..7)
+      &:nth-child({n})
+        transition-delay: "%ss" % (n * .05)
+

@@ -1,0 +1,87 @@
+@import '../bootstrap'
+@import '../theme'
+
+/** Theme */
+switch($material)
+  &:not(.input-group--dirty)
+    .input-group--selection-controls__container
+      // Must overwrite color helpers
+      color: $material.selection-controls.track.inactive !important
+
+  .input-group--selection-controls__ripple
+    &:after
+      background-color: $material.selection-controls.thumb.inactive
+
+    &:not(.input-group--selection-controls__ripple--active)
+      color: $material.selection-controls.track.inactive
+
+    &--active:after
+      background-color: currentColor
+
+  .input-group--selection-controls__toggle
+    color: $material.selection-controls.track.inactive
+
+    &--active
+      color: inherit
+
+  &.input-group--disabled
+    .input-group--selection-controls__ripple
+      &:after
+        background-color: $material.selection-controls.thumb.disabled !important
+
+    .input-group--selection-controls__toggle
+      color: $material.selection-controls.track.disabled !important
+
+theme(switch, "switch")
+
+.input-group.input-group--selection-controls
+  z-index: 0
+
+  &.switch
+    min-width: 36px
+
+    .input-group--selection-controls__container
+      color: inherit
+      position: relative
+
+      &[class*="--text"]
+        .input-group--selection-controls__ripple--active:after
+          background-color: currentColor
+
+    .input-group--selection-controls__toggle
+      background-color: currentColor
+      color: inherit
+      position: absolute
+      height: 14px
+      top: 50%
+      left: 0
+      width: 34px
+      border-radius: 8px
+      transform: translateY(-50%)
+
+      &.input-group--selection-controls__toggle--active
+        opacity: .5
+
+    .input-group--selection-controls__ripple
+      transform: translate(-15px, -24px)
+      transition: .3s $transition.fast-in-fast-out
+      z-index: 1
+
+      &:after
+        content: ''
+        position: absolute
+        display: inline-block
+        cursor: pointer
+        width: 20px
+        border-radius: 50%
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%)
+        height: 20px
+        elevation(4)
+
+      &--active
+        transform: translate(2px, -24px)
+
+    label
+      padding-left: 14px

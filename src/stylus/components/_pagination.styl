@@ -1,68 +1,84 @@
+@import '../bootstrap'
+@import '../theme'
+
+pagination($material)
+  &__item
+    background: $material.cards
+    color: $material.fg-color
+
+    &--active
+      color: $material.text.theme
+
+  &__navigation
+    background: $material.cards
+
+    .icon
+      color: rgba($material.fg-color, $material.active-icon-percent)
+
+theme(pagination, "pagination")
+
 .pagination
-  list-style-type: none
+  align-items: center
+  align-items: center
   display: inline-flex
-  align-items: center
-  padding: 0
+  list-style-type: none
   margin: 0
-  height: 40px
-  align-items: center
-  
-  a
-    transition: .3s $transition.linear-out-slow-in
-    
-    &:hover
-      elevation(2)
+  overflow-x: auto
+  max-width: 100%
+  padding: 0
+
+  > li
+    align-items: center
+    display: flex
 
   &--circle
     .pagination__item,
     .pagination__more,
     .pagination__navigation
       border-radius: 50%
-      
+
   &--disabled
     pointer-events: none
     opacity: .6
-  
+
   &__item
     elevation(2)
     border-radius: 4px
-    color: #000000
     display: inline-flex
     justify-content: center
     align-items: center
+    font-size: $button-font-size
     background: transparent
     height: 34px
     width: 34px
     margin: .3rem
     text-decoration: none
-    
+    transition: .3s $transition.linear-out-slow-in
+
     &--active
       elevation(4)
-      background: $theme.primary
-      color: #FFFFFF
-    
+
   &__navigation
     elevation(2)
     display: inline-flex
     justify-content: center
     align-items: center
     text-decoration: none
-    color: $grey.darken-2
     height: 2rem
-    
+
     border-radius: 4px
     width: 2rem
-    margin: .3rem 15px
-    
+    margin: .3rem 10px
+
     .icon
       font-size: 2rem
       transition: $secondary-transition
       vertical-align: middle
-      
+
     &--disabled
       opacity: .6
       pointer-events: none
-      
+
   &__more
     margin: .3rem
     display: inline-flex

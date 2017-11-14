@@ -3,7 +3,6 @@ export default {
     return {
       parallax: null,
       parallaxDist: null,
-      elOffsetTop: null,
       percentScrolled: null,
       scrollTop: null,
       windowHeight: null,
@@ -13,6 +12,10 @@ export default {
 
   computed: {
     normalizedHeight () {
+      if (this.jumbotron) {
+        return isNaN(this.height) ? this.height : `${this.height}px`
+      }
+
       return Number(this.height.toString().replace(/(^[0-9]*$)/, '$1'))
     },
 
@@ -21,26 +24,23 @@ export default {
     }
   },
 
-  mounted () {
-    this.$vuetify.load(this.init)
-  },
-
   beforeDestroy () {
     window.removeEventListener('scroll', this.translate, false)
-    document.removeEventListener('resize', this.translate, false)
+    window.removeEventListener('resize', this.translate, false)
   },
 
   methods: {
     listeners () {
       window.addEventListener('scroll', this.translate, false)
-      document.addEventListener('resize', this.translate, false)
+      window.addEventListener('resize', this.translate, false)
     },
 
     translate () {
       this.calcDimensions()
 
       this.percentScrolled = (
-        (this.windowBottom - this.elOffsetTop) / (this.normalizedHeight + this.windowHeight)
+        (this.windowBottom - this.elOffsetTop) /
+        (this.normalizedHeight + this.windowHeight)
       )
 
       this.parallax = Math.round(this.parallaxDist * this.percentScrolled)

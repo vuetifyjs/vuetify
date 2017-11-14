@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VSpeedDial.js should render component and match snapshot 1`] = `
+
+<div class="speed-dial speed-dial--direction-top">
+  <div class="speed-dial__list">
+  </div>
+</div>
+
+`;
+
+exports[`VSpeedDial.js should render component with custom direction and match snapshot 1`] = `
+
+<div class="speed-dial speed-dial--direction-right">
+  <div class="speed-dial__list">
+  </div>
+</div>
+
+`;
