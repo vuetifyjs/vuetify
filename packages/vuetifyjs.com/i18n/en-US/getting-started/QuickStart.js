@@ -24,6 +24,10 @@ export default {
       href: 'quick-start-page'
     },
     {
+      text: 'Supported browsers',
+      href: 'supported-browsers'
+    },
+    {
       text: 'CDN install',
       href: 'cdn-install'
     },
@@ -36,8 +40,8 @@ export default {
       href: 'existing-applications'
     },
     {
-      text: 'Supported browsers',
-      href: 'supported-browsers'
+      text: 'IE11 support',
+      href: 'ie11-support'
     }
   ]
 }

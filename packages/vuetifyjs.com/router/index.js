@@ -58,6 +58,7 @@ export function createRouter () {
         route('/getting-started/sponsors-and-backers', 'getting-started/Sponsors'),
         route('/getting-started/contributing', 'getting-started/Contributing'),
         // Application Layout
+        route('/layout/pre-defined', 'layout/PreDefined'),
         // Base Styles
         // Motion & Translations
         // Components

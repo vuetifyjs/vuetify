@@ -1,22 +1,24 @@
 <template lang="pug">
-  text-page(:data="$data")
+  text-page(:data="$data" id="contributing-page")
     section#reporting-issues
       section-heading(value="GettingStarted.Contributing.issuesHeader")
       div.mb-3
-        ul
-          li {{ $t('GettingStarted.Contributing.issue1') }}
+        ul.browser-list
+          li(v-html="$t('GettingStarted.Contributing.issue1')")
           ul
-            li {{ $t('GettingStarted.Contributing.issue2') }}
-          li {{ $t('GettingStarted.Contributing.issue3') }}
-          li {{ $t('GettingStarted.Contributing.issue4') }}
-          li {{ $t('GettingStarted.Contributing.issue5') }}
+            li(v-html="$t('GettingStarted.Contributing.issue2')")
+          li(v-html="$t('GettingStarted.Contributing.issue3')")
+          li(v-html="$t('GettingStarted.Contributing.issue4')")
+          li(v-html="$t('GettingStarted.Contributing.issue5')")
     section#pull-requests
       section-heading(value="GettingStarted.Contributing.pullRequestsHeader")
       div.mb-3
-        ul
-          li {{ $t('GettingStarted.Contributing.pullRequest1') }}
-          li {{ $t('GettingStarted.Contributing.pullRequest2') }}
-          li {{ $t('GettingStarted.Contributing.pullRequest3') }}
+        ul.browser-list
+          li(
+            v-for="n in 3"
+            :key="n"
+            v-html="$t(`GettingStarted.Contributing.pullRequest${n}`)"
+          )
     section#local-dev
       section-heading(value="GettingStarted.Contributing.localDevHeader")
       section-text(value="GettingStarted.Contributing.localDevText1").mb-5
@@ -35,6 +37,7 @@
     data: () => ({
       header: "GettingStarted.Contributing.header",
       headerText: "GettingStarted.Contributing.headerText",
+      toc: "GettingStarted.Contributing.toc"
     })
   }
 </script>

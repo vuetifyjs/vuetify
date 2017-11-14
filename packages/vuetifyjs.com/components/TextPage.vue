@@ -20,7 +20,9 @@
 
     computed: {
       toc () {
-        return this.$t(`GettingStarted.QuickStart.toc`)
+        return this.$te(this.data.toc)
+          ? this.$t(this.data.toc)
+          : []
       }
     }
   }
