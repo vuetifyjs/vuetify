@@ -104,14 +104,22 @@ export default {
         ? this.$vuetify.application.top + this.$vuetify.application.bottom
         : this.$vuetify.application.bottom
     },
-    reactsToMobile () {
+    reactsToClick () {
       return !this.stateless &&
-        !this.disableResizeWatcher &&
+        !this.permanent &&
+        (this.isMobile || this.temporary)
+    },
+    reactsToMobile () {
+      return !this.disableResizeWatcher &&
+        !this.stateless &&
+        !this.permanent &&
         this.isBooted &&
         !this.temporary
     },
     reactsToRoute () {
-      return !this.disableRouteWatcher && !this.stateless
+      return !this.disableRouteWatcher &&
+        !this.stateless &&
+        !this.permanent
     },
     showOverlay () {
       return this.isActive &&
@@ -142,6 +150,11 @@ export default {
 
       this.tryOverlay()
       this.$el.scrollTop = 0
+    },
+    isBooted (val) {
+      if (!val) return
+
+      this.tryOverlay()
     },
     /**
      * When mobile changes, adjust
@@ -199,7 +212,7 @@ export default {
     // a default value
     if (this.stateless) {
       this.isActive = this.value
-    } else if (this.permanent && !this.isMobile) {
+    } else if (this.permanent) {
       this.isActive = true
     } else if (this.value != null) {
       this.isActive = this.value
@@ -230,7 +243,7 @@ export default {
       this.isMobile = window.innerWidth < parseInt(this.mobileBreakPoint, 10)
     },
     closeConditional () {
-      return !this.stateless && (this.isMobile || this.temporary)
+      return this.reactsToClick
     },
     genDirectives () {
       const directives = [
@@ -280,7 +293,10 @@ export default {
       else if (!this.right && this.isActive) this.isActive = false
     },
     tryOverlay () {
-      if (this.showOverlay && this.isActive) {
+      if (!this.permanent &&
+        this.showOverlay &&
+        this.isActive
+      ) {
         return this.genOverlay()
       }
 
@@ -290,8 +306,8 @@ export default {
       if (!this.app) return
 
       const width = !this.isActive ||
-        this.isMobile ||
-        this.temporary
+        (this.reactsToMobile &&
+        this.isMobile)
         ? 0
         : this.calculatedWidth
 
