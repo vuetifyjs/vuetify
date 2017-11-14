@@ -1,6 +1,5 @@
 <template lang="pug">
   v-footer(
-    app
     color="transparent"
     v-if="footer"
   ).app-footer
@@ -8,8 +7,6 @@
       v-flex(
         v-if="previous.route"
         v-bind:xs6="!next.route"
-        v-bind:xs4="next.route && $vuetify.breakpoint.mdAndUp"
-        v-bind:xs2="next.route && $vuetify.breakpoint.smAndDown"
       ).pa-0
         v-btn(
           color="primary"
@@ -30,8 +27,7 @@
       v-flex(
         v-if="next.route && next.route !== '*'"
         v-bind:xs6="!previous.route"
-        v-bind:xs4="previous.route && $vuetify.breakpoint.mdAndUp"
-        v-bind:xs2="previous.route && $vuetify.breakpoint.smAndDown"
+        v-bind:offset-xs6="!previous.route"
       ).pa-0.text-xs-right
         span(v-text="next.name").subheading.no-wrap.hidden-sm-and-down
         v-btn(

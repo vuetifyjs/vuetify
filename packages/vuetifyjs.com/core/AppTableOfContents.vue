@@ -38,16 +38,6 @@
       }
     },
 
-    watch: {
-      activeIndex (val) {
-        const target = this.items[val]
-
-        if (target == null) return
-
-        window.location.hash = target.href
-      }
-    },
-
     mounted () {
       this.genList()
     },

@@ -3,6 +3,7 @@
     v-layout
       v-flex(xs9)
         slot
+        app-footer
       v-flex(xs3)
         app-table-of-contents(
           threshold="50"
@@ -14,6 +15,7 @@
 
 <script>
   import AppAd from '@core/AppAd'
+  import AppFooter from '@core/AppFooter'
   import AppTableOfContents from '@core/AppTableOfContents'
 
   export default {
@@ -21,6 +23,7 @@
 
     components: {
       AppAd,
+      AppFooter,
       AppTableOfContents
     },
 
@@ -43,6 +46,7 @@
   .page
     max-width: 1185px !important
     padding-top: 75px
+    padding-bottom: 0
     
     section
       margin-bottom: 48px

@@ -5,7 +5,7 @@
     section#supported-browsers
       section-heading(value="GettingStarted.QuickStart.browserHeader")
       section-text(value="GettingStarted.QuickStart.browserText")
-      v-list.transparent
+      v-list.transparent.py-0
         v-layout(row wrap)
           v-flex(
             xs12 sm6 md4
