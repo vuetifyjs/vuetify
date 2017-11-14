@@ -1,0 +1,90 @@
+<template lang="pug">
+  text-page(v-bind:data="$data" id="colors-page")
+    section#classes
+      section-heading(value="Style.Colors.classesHeader")
+      section-text(value="Style.Colors.classesText")
+
+    section#colors
+      v-container(fluid).pa-0
+        v-layout(row wrap)
+          v-flex(xs6 sm6 md4 lg3 v-for="color in colors" v-bind:key="color")
+            v-card(v-bind:color="color" height="100px")
+              v-card-text
+                h3 {{ color }}
+            v-card(
+              v-for="n in [4,3,2,1]"
+              v-bind:color="color + ' lighten-' + n"
+              class="black--text"
+              v-bind:key="n"
+            )
+              v-card-text {{ color }} lighten-{{ n }}
+            v-card(
+              v-for="n in 4"
+              v-bind:color="color + ' darken-' + n"
+              v-bind:key="n"
+            )
+              v-card-text {{ color }} darken-{{ n }}
+            v-card(
+              v-for="n in 4"
+              v-bind:color="color + ' accent-' + n"
+              v-if="['grey', 'blue-grey', 'brown'].indexOf(color) === -1"
+              class="black--text"
+              v-bind:key="n"
+            )
+              v-card-text {{ color }} accent-{{ n }}
+
+    section#color-pack
+      section-heading(value="Style.Colors.colorPackHeader")
+      section-text(value="Style.Colors.colorPackText")
+
+      h3.py-3 {{ $t('Style.Colors.colorPackSubHeader1') }}
+      section-text(value="Style.Colors.colorPackSubText1")
+
+      h3.py-3 {{ $t('Style.Colors.colorPackSubHeader2') }}
+      section-text(value="Style.Colors.colorPackSubText2")
+
+</template>
+
+<script>
+  export default {
+    name: 'colors-page',
+
+    data: () => ({
+      header: 'Style.Colors.header',
+      headerText: 'Style.Colors.headerText',
+      colors: [
+        'red', 'pink', 'purple', 'deep-purple',
+        'indigo', 'blue', 'light-blue', 'cyan',
+        'teal', 'green', 'light-green', 'lime',
+        'yellow', 'amber', 'orange', 'deep-orange',
+        'brown', 'blue-grey', 'grey'
+      ],
+      types: [
+        'darken', 'lighten', 'accent'
+      ]
+    })
+  }
+</script>
+
+<style lang="stylus">
+  #colors-page #colors
+    .flex
+      margin: 1rem 0
+
+    .card
+      color: #fff
+      font-weight: 500
+      letter-spacing: .5px
+      padding: 1rem
+      border-radius: 0
+
+      .card__text
+        h3
+          color: #fff
+          align-self: flex-start
+          font-size: 1.5rem
+          margin: 0
+
+    .card__text
+      padding: 0
+</style>

@@ -3,6 +3,7 @@ import Vuetify from './vuetify'
 import GettingStarted from './getting-started'
 import Guides from './guides'
 import Layout from './layout'
+import Style from './style'
 
 // Generic
 import Generic from './generic'
@@ -21,6 +22,7 @@ export default {
   Directives,
   Generic,
   Layout,
+  Style,
   Vuetify,
   GettingStarted,
   Examples,
