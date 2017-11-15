@@ -5,11 +5,15 @@ export default {
   },
   flat: {
     header: "Flat",
-    desc: ``
+    desc: `Flat buttons have no box shadow and no background. Only on hover is the container for the button shown.`
   },
   raised: {
     header: "Raised",
-    desc: ``
+    desc: `Raised buttons have a box shadow that increases when clicked. This is the default style.`
+  },
+  depressed: {
+    header: "Depressed",
+    desc: `Depressed buttons still maintain their background color, but have no box shadow.`
   },
   dropdown: {
     header: "Button Dropdown Variants",

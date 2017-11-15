@@ -12,6 +12,7 @@
       examples: [
         { file: 'flat' },
         { file: 'raised' },
+        { file: 'depressed' },
         { file: 'dropdown' },
         { file: 'toggle' },
         { file: 'icon' },

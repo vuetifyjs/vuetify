@@ -1,36 +1,46 @@
 <template>
-  <v-container fluid class="text-xs-center">
-    <v-layout row wrap>
-      <v-flex xs12 sm6><span>Light Theme</span>
-        <v-card height="185px" flat color="transparent">
-          <v-card-text>
-            <div>
-              <v-btn flat>Normal</v-btn>
-            </div>
-            <div>
-              <v-btn flat color="primary">Primary</v-btn>
-            </div>
-            <div>
-              <v-btn flat disabled>Disabled</v-btn>
-            </div>
-          </v-card-text>
-        </v-card>
-      </v-flex>
-      <v-flex xs12 sm6><span>Dark Theme</span>
-        <v-card height="185px" flat color="grey darken-3">
-          <v-card-text>
-            <div>
-              <v-btn flat dark>Normal</v-btn>
-            </div>
-            <div>
-              <v-btn flat dark color="secondary">Accent</v-btn>
-            </div>
-            <div>
-              <v-btn flat dark disabled>Disabled</v-btn>
-            </div>
-          </v-card-text>
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </v-container>
+  <v-layout align-center>
+    <v-flex xs12 sm4 text-xs-center>
+      <div>
+        <v-btn flat small>Normal</v-btn>
+      </div>
+      <div>
+        <v-btn flat small color="primary">Primary</v-btn>
+      </div>
+      <div>
+        <v-btn flat small color="error">Error</v-btn>
+      </div>
+      <div>
+        <v-btn flat small disabled>Disabled</v-btn>
+      </div>
+    </v-flex>
+    <v-flex xs12 sm4 text-xs-center>
+      <div>
+        <v-btn flat>Normal</v-btn>
+      </div>
+      <div>
+        <v-btn flat color="primary">Primary</v-btn>
+      </div>
+      <div>
+        <v-btn flat color="error">Error</v-btn>
+      </div>
+      <div>
+        <v-btn flat disabled>Disabled</v-btn>
+      </div>
+    </v-flex>
+    <v-flex xs12 sm4 text-xs-center>
+      <div>
+        <v-btn flat large>Normal</v-btn>
+      </div>
+      <div>
+        <v-btn flat large color="primary">Primary</v-btn>
+      </div>
+      <div>
+        <v-btn flat large color="error">Error</v-btn>
+      </div>
+      <div>
+        <v-btn flat large disabled>Disabled</v-btn>
+      </div>
+    </v-flex>
+  </v-layout>
 </template>

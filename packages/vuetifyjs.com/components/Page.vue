@@ -1,10 +1,10 @@
 <template lang="pug">
   v-container(:id="id").page
     v-layout
-      v-flex(xs9)
+      v-flex(xs12 md9)
         slot
         app-footer
-      v-flex(xs3)
+      v-flex(md3 hidden-sm-and-down)
         app-table-of-contents(
           threshold="50"
           offset="85"
