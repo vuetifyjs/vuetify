@@ -1,6 +1,7 @@
 <template>
   <div>
-    <v-breadcrumbs icons divider="forward">
+    <v-breadcrumbs>
+      <v-icon slot="divider">forward</v-icon>
       <v-breadcrumbs-item 
         v-for="item in items" :key="item.text"
         :disabled="item.disabled"
@@ -9,7 +10,8 @@
       </v-breadcrumbs-item>
     </v-breadcrumbs>
 
-    <v-breadcrumbs icons divider="chevron_right">
+    <v-breadcrumbs>
+      <v-icon slot="divider">chevron_right</v-icon>
       <v-breadcrumbs-item 
         v-for="item in items" :key="item.text"
         :disabled="item.disabled"

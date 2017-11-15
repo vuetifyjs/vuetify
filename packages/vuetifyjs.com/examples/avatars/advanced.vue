@@ -1,7 +1,7 @@
 <template>
   <v-layout justify-center column>
     <v-subheader>Today</v-subheader>
-    <v-expansion-panel>
+    <v-expansion-panel popout>
       <v-expansion-panel-content hide-actions>
         <v-layout align-center row spacer slot="header">
           <v-flex xs1>
@@ -12,7 +12,7 @@
           <v-flex xs3>
             <strong>John Leider</strong>
           </v-flex>
-          <v-flex no-wrap>
+          <v-flex no-wrap xs3>
             <strong>Welcome to Vuetify.js!</strong>
             &nbsp;&mdash;
           </v-flex>
@@ -20,7 +20,7 @@
             class="grey--text"
             ellipsis
           >
-            Thank you for joining our community and for using Vuetify in your projects
+            Thank you for joining our community...
           </v-flex>
         </v-layout>
         <v-card>

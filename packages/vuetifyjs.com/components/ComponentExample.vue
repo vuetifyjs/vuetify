@@ -16,76 +16,72 @@
     div(v-if="$slots.desc").justify
       slot(name="desc")
 
-    //- Example options
-    v-toolbar(flat dense).grey.lighten-4.mt-5.pr-1
-      v-btn(disabled flat).ml-0 Example options
-      v-spacer
-      v-tooltip(bottom)
-        v-btn(icon slot="activator" @click="dark = !dark")
-          v-icon(color="grey darken-1") invert_colors
-        span Invert colors
-      v-tooltip(bottom)
-        v-btn(
-          icon
-          tag="a"
-          v-bind:href="'https://github.com/vuetifyjs/docs/tree/master/examples/'+file+'.vue'"
-          target="_blank"
-          slot="activator"
-        )
-          v-icon(color="grey darken-1") fa-github
-        span View on Github
-      v-tooltip(bottom)
-        v-btn(
-          icon
-          v-on:click="sendToCodepen"
-          slot="activator"
-        )
-          v-icon(color="grey darken-1") fa-codepen
-        span Edit in codepen
-      v-tooltip(bottom)
-        v-btn(
-          icon
-          v-on:click.stop="panel = !panel"
-          slot="activator"
-        )
-          v-icon(color="grey darken-1") code
-        span View source
-    v-divider
+    v-card.mt-5
+      //- Example options
+      v-toolbar(flat dense card).pr-1
+        v-spacer
+        v-tooltip(top)
+          v-btn(icon slot="activator" @click="dark = !dark")
+            v-icon(color="grey darken-1") invert_colors
+          span Invert colors
+        v-tooltip(top)
+          v-btn(
+            icon
+            tag="a"
+            v-bind:href="'https://github.com/vuetifyjs/docs/tree/master/examples/'+file+'.vue'"
+            target="_blank"
+            slot="activator"
+          )
+            v-icon(color="grey darken-1") fa-github
+          span View on Github
+        v-tooltip(top)
+          v-btn(
+            icon
+            v-on:click="sendToCodepen"
+            slot="activator"
+          )
+            v-icon(color="grey darken-1") fa-codepen
+          span Edit in codepen
+        v-tooltip(top)
+          v-btn(
+            icon
+            v-on:click.stop="panel = !panel"
+            slot="activator"
+          )
+            v-icon(color="grey darken-1") code
+          span View source
+      v-divider
 
-    //- Example mount point
-    v-card(
-      flat
-      tile
-      :class="exampleClasses"
-    ).application.pa-3.application--example
-      div(:id="'example-'+uid")
+      //- Example mount
+      div(:class="exampleClasses").application.application--example.pa-3
+        div(:id="'example-'+uid")
+
+      //- Example markup
+      v-expansion-panel.elevation-0
+        v-expansion-panel-content(v-model="panel")
+          v-divider
+          v-tabs(ref="tabs" :scrollable="false")
+            v-tabs-bar(class="pl-0").grey.lighten-4.px-3
+              v-tabs-slider(color="accent")
+              v-tabs-item(
+                v-for="tab in tabs"
+                v-bind:key="tab"
+                v-bind:href="'#'+tab"
+                v-show="parsed[tab]"
+                active-class=""
+                class="body-2"
+              ) {{ tab }}
+            v-tabs-items
+              v-tabs-content(
+                v-for="tab in tabs"
+                v-bind:key="tab"
+                v-bind:id="tab"
+              )
+                markup(color="grey lighten-3" :lang="getLang(tab)" v-if="parsed[tab]").ma-0
+                  div(v-html="parsed[tab]")
 
     //- Codepen
     codepen(ref="codepen" :pen="pen")
-
-    //- Example markup
-    v-expansion-panel.elevation-0
-      v-expansion-panel-content(v-model="panel")
-        v-divider
-        v-tabs(ref="tabs" :scrollable="false")
-          v-tabs-bar(class="pl-0").grey.lighten-4.px-3
-            v-tabs-slider(color="accent")
-            v-tabs-item(
-              v-for="tab in tabs"
-              v-bind:key="tab"
-              v-bind:href="'#'+tab"
-              v-show="parsed[tab]"
-              active-class=""
-              class="body-2"
-            ) {{ tab }}
-          v-tabs-items
-            v-tabs-content(
-              v-for="tab in tabs"
-              v-bind:key="tab"
-              v-bind:id="tab"
-            )
-              markup(color="white" :lang="getLang(tab)" v-if="parsed[tab]").ma-0
-                div(v-html="parsed[tab]")
 </template>
 
 <script>
@@ -133,7 +129,6 @@
       exampleClasses () {
         return {
           'theme--dark': this.dark,
-          'grey darken-3': this.dark,
           'theme--light': !this.dark,
           'grey lighten-3': !this.dark
         }
@@ -225,10 +220,13 @@
 
 <style lang="stylus">
   .component-example
-    margin-bottom: 32px
+    // margin-bottom: 32px
     
     .application--example
       transition: .3s ease-in-out
+
+      > div
+        width: 100%
 
     .component-example__panel
       .expansion-panel__body
@@ -250,7 +248,4 @@
 
     nav.toolbar
       z-index: 0
-
-    [data-app]
-      min-height: 300px
 </style>

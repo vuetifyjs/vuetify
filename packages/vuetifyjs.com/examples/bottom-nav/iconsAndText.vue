@@ -1,5 +1,5 @@
 <template>
-  <v-card height="200px">
+  <v-card height="200px" flat>
     <div class="headline text-xs-center pa-5">Active: {{ e1 }}</div>
     <v-bottom-nav absolute :value="true" :active.sync="e1" color="transparent">
       <v-btn flat color="teal" value="recent">
