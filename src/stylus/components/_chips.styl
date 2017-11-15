@@ -33,6 +33,7 @@ theme(chip, "chip")
     padding: $chip-padding
     vertical-align: middle
     white-space: nowrap
+    z-index: 1
 
   &--removable
     .chip__content
@@ -66,6 +67,7 @@ theme(chip, "chip")
         position: absolute
         transition: inherit
         width: 100%
+        pointer-events: none
 
   &--label
     border-radius: $chip-label-border-radius
@@ -94,6 +96,7 @@ theme(chip, "chip")
     margin-left: 4px
     margin-right: -2px
     transition: none !important
+    user-select: none
 
     &:hover
       opacity: .8
