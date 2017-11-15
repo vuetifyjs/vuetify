@@ -22,7 +22,6 @@ export default {
   data () {
     return {
       isActive: false,
-      isBooted: false,
       isMobile: null,
       touchArea: {
         left: 0,
@@ -74,13 +73,12 @@ export default {
         'navigation-drawer': true,
         'navigation-drawer--absolute': this.absolute,
         'navigation-drawer--clipped': this.clipped,
-        'navigation-drawer--close': !this.isBooted || !this.isActive,
+        'navigation-drawer--close': !this.isActive,
         'navigation-drawer--fixed': this.fixed,
         'navigation-drawer--floating': this.floating,
-        'navigation-drawer--is-booted': this.isBooted,
         'navigation-drawer--is-mobile': this.isMobile,
         'navigation-drawer--mini-variant': this.miniVariant,
-        'navigation-drawer--open': this.isActive && this.isBooted,
+        'navigation-drawer--open': this.isActive,
         'navigation-drawer--right': this.right,
         'navigation-drawer--temporary': this.temporary,
         'theme--dark': this.dark,
@@ -104,14 +102,24 @@ export default {
         ? this.$vuetify.application.top + this.$vuetify.application.bottom
         : this.$vuetify.application.bottom
     },
-    reactsToMobile () {
+    reactsToClick () {
       return !this.stateless &&
-        !this.disableResizeWatcher &&
-        this.isBooted &&
+        !this.permanent &&
+        (this.isMobile || this.temporary)
+    },
+    reactsToMobile () {
+      return !this.disableResizeWatcher &&
+        !this.stateless &&
+        !this.permanent &&
         !this.temporary
     },
     reactsToRoute () {
-      return !this.disableRouteWatcher && !this.stateless
+      return !this.disableRouteWatcher &&
+        !this.stateless &&
+        !this.permanent
+    },
+    resizeIsDisabled () {
+      return this.disableResizeWatcher || this.stateless
     },
     showOverlay () {
       return this.isActive &&
@@ -136,12 +144,10 @@ export default {
     isActive (val) {
       this.$emit('input', val)
 
-      if (!this.isBooted ||
-        (!this.temporary && !this.isMobile)
-      ) return
-
-      this.tryOverlay()
-      this.$el.scrollTop = 0
+      if (this.temporary || this.isMobile) {
+        this.tryOverlay()
+        this.$el.scrollTop = 0
+      }
     },
     /**
      * When mobile changes, adjust
@@ -150,24 +156,21 @@ export default {
      * value
      */
     isMobile (val, prev) {
-      !val && this.isActive && this.removeOverlay()
+      !val &&
+        this.isActive &&
+        !this.temporary &&
+        this.removeOverlay()
 
-      if (!this.reactsToMobile) return
+      if (prev == null ||
+        this.resizeIsDisabled
+      ) return
 
-      if (prev != null && !this.temporary) {
-        this.isActive = !val
-      }
+      this.isActive = !val
     },
     permanent (val) {
-      // If we are removing prop
-      // reset active to match
-      // current value
-      if (!val) return (this.isActive = this.value)
-
-      // We are enabling prop
-      // set its state to match
-      // viewport size
-      this.isActive = !this.isMobile
+      // If enabling prop
+      // enable the drawer
+      if (val) this.isActive = true
     },
     right (val, prev) {
       // When the value changes
@@ -180,34 +183,27 @@ export default {
       this.updateApplication()
     },
     temporary (val) {
-      if (!val) return
-
       this.tryOverlay()
     },
     value (val) {
-      if (this.permanent && !this.isMobile) return
+      if (this.permanent) return
+
       if (val !== this.isActive) this.isActive = val
     }
   },
 
-  mounted () {
+  beforeMount () {
     this.checkIfMobile()
 
-    // Same as 3rd conditional
-    // but has higher precedence
-    // than simply providing
-    // a default value
-    if (this.stateless) {
-      this.isActive = this.value
-    } else if (this.permanent && !this.isMobile) {
+    if (this.permanent) {
       this.isActive = true
-    } else if (this.value != null) {
+    } else if (this.stateless ||
+      this.value != null
+    ) {
       this.isActive = this.value
     } else if (!this.temporary) {
       this.isActive = !this.isMobile
     }
-
-    setTimeout(() => (this.isBooted = true), 0)
   },
 
   destroyed () {
@@ -227,10 +223,14 @@ export default {
       }
     },
     checkIfMobile () {
+      if (this.permanent ||
+        this.temporary
+      ) return
+
       this.isMobile = window.innerWidth < parseInt(this.mobileBreakPoint, 10)
     },
     closeConditional () {
-      return !this.stateless && (this.isMobile || this.temporary)
+      return this.reactsToClick
     },
     genDirectives () {
       const directives = [
@@ -280,7 +280,10 @@ export default {
       else if (!this.right && this.isActive) this.isActive = false
     },
     tryOverlay () {
-      if (this.showOverlay && this.isActive) {
+      if (!this.permanent &&
+        this.showOverlay &&
+        this.isActive
+      ) {
         return this.genOverlay()
       }
 
@@ -290,8 +293,8 @@ export default {
       if (!this.app) return
 
       const width = !this.isActive ||
-        this.isMobile ||
-        this.temporary
+        this.temporary ||
+        this.isMobile
         ? 0
         : this.calculatedWidth
 

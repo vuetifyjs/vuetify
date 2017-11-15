@@ -108,7 +108,7 @@ const breakpoint = {
     }
   },
 
-  mounted () {
+  created () {
     this.$vuetify.breakpoint = this.breakpoint
   },
 
