@@ -60,7 +60,8 @@ export default {
 
   render (h) {
     return h('div', {
-      class: this.addBackgroundColorClassChecks(this.classes)
+      class: this.addBackgroundColorClassChecks(this.classes),
+      ref: 'content'
     }, this.$slots.default)
   }
 }

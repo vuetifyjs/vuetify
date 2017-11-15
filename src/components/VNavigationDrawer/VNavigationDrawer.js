@@ -22,7 +22,6 @@ export default {
   data () {
     return {
       isActive: false,
-      isBooted: false,
       isMobile: null,
       touchArea: {
         left: 0,
@@ -74,13 +73,12 @@ export default {
         'navigation-drawer': true,
         'navigation-drawer--absolute': this.absolute,
         'navigation-drawer--clipped': this.clipped,
-        'navigation-drawer--close': !this.isBooted || !this.isActive,
+        'navigation-drawer--close': !this.isActive,
         'navigation-drawer--fixed': this.fixed,
         'navigation-drawer--floating': this.floating,
-        'navigation-drawer--is-booted': this.isBooted,
         'navigation-drawer--is-mobile': this.isMobile,
         'navigation-drawer--mini-variant': this.miniVariant,
-        'navigation-drawer--open': this.isActive && this.isBooted,
+        'navigation-drawer--open': this.isActive,
         'navigation-drawer--right': this.right,
         'navigation-drawer--temporary': this.temporary,
         'theme--dark': this.dark,
@@ -113,7 +111,6 @@ export default {
       return !this.disableResizeWatcher &&
         !this.stateless &&
         !this.permanent &&
-        this.isBooted &&
         !this.temporary
     },
     reactsToRoute () {
@@ -195,7 +192,7 @@ export default {
     }
   },
 
-  mounted () {
+  beforeMount () {
     this.checkIfMobile()
 
     if (this.permanent) {
@@ -207,8 +204,6 @@ export default {
     } else if (!this.temporary) {
       this.isActive = !this.isMobile
     }
-
-    setTimeout(() => (this.isBooted = true), 0)
   },
 
   destroyed () {
