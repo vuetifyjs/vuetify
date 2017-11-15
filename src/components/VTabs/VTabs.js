@@ -64,9 +64,12 @@ export default {
         'tabs--fixed': this.fixed,
         'tabs--grow': this.grow,
         'tabs--icons': this.icons,
-        'tabs--mobile': this.$vuetify.breakpoint.width < this.mobileBreakPoint,
+        'tabs--mobile': this.isMobile,
         'tabs--scroll-bars': this.scrollable
       }
+    },
+    isMobile () {
+      return this.$vuetify.breakpoint.width < this.mobileBreakPoint
     }
   },
 
