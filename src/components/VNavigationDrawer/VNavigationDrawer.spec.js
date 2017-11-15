@@ -24,7 +24,7 @@ test('VNavigationDrawer', () => {
     expect(wrapper.vm.isActive).toBe(true)
     await resizeWindow(1200)
     expect(wrapper.vm.isActive).toBe(false)
-    expect(!!wrapper.vm.overlay).toBe(false)
+    expect(wrapper.vm.overlay).toBeFalsy()
   })
 
   it('should not resize the content when temporary', async () => {
@@ -36,7 +36,7 @@ test('VNavigationDrawer', () => {
 
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.$vuetify.application.left).toBe(0)
-    expect(!!wrapper.vm.overlay).toBe(true)
+    expect(wrapper.vm.overlay).toBeTruthy()
   })
 
   it('should not resize the content when permanent and stateless', async () => {
@@ -51,7 +51,7 @@ test('VNavigationDrawer', () => {
 
     await resizeWindow(1200)
     expect(wrapper.vm.$vuetify.application.left).toBe(300)
-    expect(!!wrapper.vm.overlay).toBe(false)
+    expect(wrapper.vm.overlay).toBeFalsy()
   })
 
   it('should not resize the content when permanent and resize watcher is disabled', async () => {
@@ -68,7 +68,7 @@ test('VNavigationDrawer', () => {
 
     await resizeWindow(1200)
     expect(wrapper.vm.$vuetify.application.left).toBe(300)
-    expect(!!wrapper.vm.overlay).toBe(false)
+    expect(wrapper.vm.overlay).toBeFalsy()
   })
 
   it('should stay active when resizing a temporary drawer', async () => {
@@ -83,12 +83,12 @@ test('VNavigationDrawer', () => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.isActive).toBe(true)
-    expect(!!wrapper.vm.overlay).toBe(true)
+    expect(wrapper.vm.overlay).toBeTruthy()
 
     await resizeWindow(1200)
 
     expect(wrapper.vm.isActive).toBe(true)
-    expect(!!wrapper.vm.overlay).toBe(true)
+    expect(wrapper.vm.overlay).toBeTruthy()
   })
 
   it('should open when changed to permanent', async () => {
