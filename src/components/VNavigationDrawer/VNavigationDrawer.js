@@ -121,6 +121,9 @@ export default {
         !this.stateless &&
         !this.permanent
     },
+    resizeIsDisabled () {
+      return this.disableResizeWatcher || this.stateless
+    },
     showOverlay () {
       return this.isActive &&
         (this.temporary || this.isMobile)
@@ -144,17 +147,10 @@ export default {
     isActive (val) {
       this.$emit('input', val)
 
-      if (!this.isBooted ||
-        (!this.temporary && !this.isMobile)
-      ) return
-
-      this.tryOverlay()
-      this.$el.scrollTop = 0
-    },
-    isBooted (val) {
-      if (!val) return
-
-      this.tryOverlay()
+      if (this.temporary || this.isMobile) {
+        this.tryOverlay()
+        this.$el.scrollTop = 0
+      }
     },
     /**
      * When mobile changes, adjust
@@ -163,24 +159,16 @@ export default {
      * value
      */
     isMobile (val, prev) {
-      !val && this.isActive && this.removeOverlay()
+      if (prev == null ||
+        this.resizeIsDisabled
+      ) return
 
-      if (!this.reactsToMobile) return
-
-      if (prev != null && !this.temporary) {
-        this.isActive = !val
-      }
+      this.isActive = !val
     },
     permanent (val) {
-      // If we are removing prop
-      // reset active to match
-      // current value
-      if (!val) return (this.isActive = this.value)
-
-      // We are enabling prop
-      // set its state to match
-      // viewport size
-      this.isActive = !this.isMobile
+      // If enabling prop
+      // enable the drawer
+      if (val) this.isActive = true
     },
     right (val, prev) {
       // When the value changes
@@ -198,7 +186,8 @@ export default {
       this.tryOverlay()
     },
     value (val) {
-      if (this.permanent && !this.isMobile) return
+      if (this.permanent) return
+
       if (val !== this.isActive) this.isActive = val
     }
   },
@@ -206,15 +195,11 @@ export default {
   mounted () {
     this.checkIfMobile()
 
-    // Same as 3rd conditional
-    // but has higher precedence
-    // than simply providing
-    // a default value
-    if (this.stateless) {
-      this.isActive = this.value
-    } else if (this.permanent) {
+    if (this.permanent) {
       this.isActive = true
-    } else if (this.value != null) {
+    } else if (this.stateless ||
+      this.value != null
+    ) {
       this.isActive = this.value
     } else if (!this.temporary) {
       this.isActive = !this.isMobile
@@ -240,6 +225,10 @@ export default {
       }
     },
     checkIfMobile () {
+      if (this.permanent ||
+        this.temporary
+      ) return
+
       this.isMobile = window.innerWidth < parseInt(this.mobileBreakPoint, 10)
     },
     closeConditional () {
@@ -306,8 +295,8 @@ export default {
       if (!this.app) return
 
       const width = !this.isActive ||
-        (this.reactsToMobile &&
-        this.isMobile)
+        this.temporary ||
+        this.isMobile
         ? 0
         : this.calculatedWidth
 

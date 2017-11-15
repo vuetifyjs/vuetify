@@ -24,6 +24,7 @@ test('VNavigationDrawer', () => {
     expect(wrapper.vm.isActive).toBe(true)
     await resizeWindow(1200)
     expect(wrapper.vm.isActive).toBe(false)
+    expect(!!wrapper.vm.overlay).toBe(false)
   })
 
   it('should not resize the content when temporary', async () => {
@@ -35,6 +36,7 @@ test('VNavigationDrawer', () => {
 
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.$vuetify.application.left).toBe(0)
+    expect(!!wrapper.vm.overlay).toBe(true)
   })
 
   it('should not resize the content when permanent and stateless', async () => {
@@ -49,6 +51,7 @@ test('VNavigationDrawer', () => {
 
     await resizeWindow(1200)
     expect(wrapper.vm.$vuetify.application.left).toBe(300)
+    expect(!!wrapper.vm.overlay).toBe(false)
   })
 
   it('should not resize the content when permanent and resize watcher is disabled', async () => {
@@ -65,5 +68,55 @@ test('VNavigationDrawer', () => {
 
     await resizeWindow(1200)
     expect(wrapper.vm.$vuetify.application.left).toBe(300)
+    expect(!!wrapper.vm.overlay).toBe(false)
+  })
+
+  it('should stay active when resizing a temporary drawer', async () => {
+    const wrapper = mount(VNavigationDrawer, {
+      propsData: {
+        app: true,
+        temporary: true,
+        value: true
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isActive).toBe(true)
+    expect(!!wrapper.vm.overlay).toBe(true)
+
+    await resizeWindow(1200)
+
+    expect(wrapper.vm.isActive).toBe(true)
+    expect(!!wrapper.vm.overlay).toBe(true)
+  })
+
+  it('should open when changed to permanent', async () => {
+    const wrapper = mount(VNavigationDrawer, {
+      propsData: {
+        value: null
+      }
+    })
+
+    wrapper.setProps({ permanent: true })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isActive).toBe(true)
+  })
+
+  it('should not close when value changes and permanent', async () => {
+    const wrapper = mount(VNavigationDrawer, {
+      propsData: {
+        permanent: true,
+        value: true
+      }
+    })
+
+    wrapper.setProps({ value: false })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isActive).toBe(true)
   })
 })
