@@ -186,8 +186,6 @@ export default {
       this.updateApplication()
     },
     temporary (val) {
-      if (!val) return
-
       this.tryOverlay()
     },
     value (val) {
