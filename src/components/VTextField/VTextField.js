@@ -180,6 +180,16 @@ export default {
       this.$emit('focus', e)
     },
     keyDown (e) {
+      // Prevents closing of a
+      // dialog when pressing
+      // enter
+      if (this.multiLine &&
+        this.isFocused &&
+        e.keyCode === 13
+      ) {
+        e.stopPropagation()
+      }
+
       this.internalChange = true
     },
     genCounter () {
