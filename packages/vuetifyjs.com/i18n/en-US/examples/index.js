@@ -35,6 +35,7 @@ import TextFields from './TextFields'
 import Toolbars from './Toolbars'
 import Tooltips from './Tooltips'
 import Touch from './Touch'
+import Transitions from './Transitions'
 
 export default {
   Alerts,
@@ -73,5 +74,6 @@ export default {
   TextFields,
   Toolbars,
   Tooltips,
-  Touch
+  Touch,
+  Transitions
 }

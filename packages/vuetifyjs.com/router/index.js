@@ -64,7 +64,8 @@ export function createRouter () {
         route('/style/theme', 'style/Theme'),
         route('/style/typography', 'style/Typography'),
         route('/style/content', 'style/Content'),
-        // Motion & Translations
+        // Motion & Transitions
+        route('/motion/transitions', 'motion/Transitions'),
         // Components
         route('/components/alerts', 'components/Alerts'),
         route('/components/avatars', 'components/Avatars'),
