@@ -166,7 +166,7 @@ export default {
       }
     },
     hideScroll () {
-      if (this.$vuetify.breakpoint.mdAndDown) {
+      if (this.$vuetify.breakpoint.smAndDown) {
         document.documentElement.classList.add('overflow-y-hidden')
       } else {
         window.addEventListener('wheel', this.scrollListener)
