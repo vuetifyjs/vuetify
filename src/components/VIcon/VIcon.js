@@ -16,7 +16,8 @@ export default {
     left: Boolean,
     medium: Boolean,
     right: Boolean,
-    xLarge: Boolean
+    xLarge: Boolean,
+    svg: Boolean
   },
 
   render (h, { props, data, children = [] }) {
@@ -26,12 +27,12 @@ export default {
     } else if (data.domProps && data.domProps.textContent) {
       iconName = data.domProps.textContent
       delete data.domProps.textContent
-    } else if (data.domProps && data.domProps.innerHTML) {
+    } else if (!props.svg && data.domProps && data.domProps.innerHTML) {
       iconName = data.domProps.innerHTML
       delete data.domProps.innerHTML
     }
 
-    let iconType = 'material-icons'
+    let iconType = !props.svg ? 'material-icons' : ''
     const thirdPartyIcon = iconName.indexOf('-') > -1
     if (thirdPartyIcon) iconType = iconName.slice(0, iconName.indexOf('-'))
 
