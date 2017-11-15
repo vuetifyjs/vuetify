@@ -159,6 +159,11 @@ export default {
      * value
      */
     isMobile (val, prev) {
+      !val &&
+        this.isActive &&
+        !this.temporary &&
+        this.removeOverlay()
+
       if (prev == null ||
         this.resizeIsDisabled
       ) return
