@@ -72,7 +72,7 @@
           const target = this.isBooted && item.target
             ? item.target
             : document.getElementById(item.href)
-          const offsetTop = target.offsetTop - 100
+          const offsetTop = target.offsetTop - 300
 
           item.offsetTop = offsetTop
           item.target = target
