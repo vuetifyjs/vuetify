@@ -8,6 +8,11 @@ import ClickOutside from '../../directives/click-outside'
 import Resize from '../../directives/resize'
 import Touch from '../../directives/touch'
 
+const watchers = {
+  unwatchRoute: Function,
+  unwatchResize: Function
+}
+
 export default {
   name: 'v-navigation-drawer',
 
@@ -136,11 +141,6 @@ export default {
   },
 
   watch: {
-    $route () {
-      if (this.reactsToRoute) {
-        this.isActive = !this.closeConditional()
-      }
-    },
     isActive (val) {
       this.$emit('input', val)
 
@@ -194,6 +194,7 @@ export default {
 
   beforeMount () {
     this.checkIfMobile()
+    this.registerWatchers()
 
     if (this.permanent) {
       this.isActive = true
@@ -207,14 +208,17 @@ export default {
   },
 
   destroyed () {
-    if (this.app) {
+    if (this.app)
       this.$vuetify.application[this.right ? 'right' : 'left'] = 0
-    }
+
+    this.unregisterWatchers()
   },
 
   methods: {
     calculateTouchArea () {
-      if (!this.$el.parentNode) return
+      if (!this.$el.parentNode)
+        return
+
       const parentRect = this.$el.parentNode.getBoundingClientRect()
 
       this.touchArea = {
@@ -223,9 +227,8 @@ export default {
       }
     },
     checkIfMobile () {
-      if (this.permanent ||
-        this.temporary
-      ) return
+      if (this.permanent || this.temporary)
+        return
 
       this.isMobile = window.innerWidth < parseInt(this.mobileBreakPoint, 10)
     },
@@ -259,6 +262,11 @@ export default {
     onResize () {
       this.checkIfMobile()
     },
+    registerWatchers () {
+      if (this.reactsToRoute)
+        watchers.unwatchRoute = this.$watch('$route',
+          () => this.isActive = !this.closeConditional())
+    },
     swipeRight (e) {
       if (this.isActive && !this.right) return
       this.calculateTouchArea()
@@ -288,6 +296,11 @@ export default {
       }
 
       this.removeOverlay()
+    },
+    unregisterWatchers () {
+      for (watcher in watchers) {
+        watchers[watcher]()
+      }
     },
     updateApplication () {
       if (!this.app) return
