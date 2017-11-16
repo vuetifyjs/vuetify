@@ -6,11 +6,16 @@
     :stateless="stateless"
   )#app-drawer
     div.text-xs-center
-      div.diamond-sponsor-label Diamond Sponsor
-      img.diamond-sponsor(
-        src="https://vuetifyjs.com/static/doc-images/backers/lmax-exchange.png"
-        alt="Sponsor"
+      div.diamond-sponsor-label Diamond Sponsors
+      div(
+        v-for="diamond in diamonds"
+        :key="diamond.title"
       )
+        a(:href="diamond.href" target="_blank" rel="noopener")
+          img.diamond-sponsor(
+            :src="`/static/doc-images/${diamond.src}`"
+            :alt="diamond.title"
+          )
     v-container(fluid)
       v-text-field(
         solo
@@ -22,6 +27,7 @@
         href="https://vuejobs.com/?utm_source=vuejobs&utm_medium=banner&utm_campaign=linking"
         target="_blank"
         rel="noopener"
+        class="d-inline-block"
       )
         img(
           src="/static/doc-images/affiliates/vuejobs-logo.svg"
@@ -215,7 +221,8 @@
     }),
     computed: {
       ...mapState({
-        stateless: state => state.stateless
+        stateless: state => state.stateless,
+        diamonds: state => state.supporters.diamond
       }),
       appDrawer: {
         get (state) {
@@ -232,11 +239,11 @@
 <style lang="stylus">
   #app-drawer
     img.logo
-      margin 40px 0 25px
+      margin 40px 0 15px
 
     .diamond-sponsor
       // todo trim down actual image file dimensions
-      height: 40px
+      height: 35px
       margin-bottom 1.25em
 
       aside.navigation-drawer ul li
@@ -245,6 +252,6 @@
 
       &-label
         color #676767
-        margin: 3em 0 .5em
+        margin: 2em 0 1.5em
         font-size 13px
 </style>
