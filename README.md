@@ -1,3 +1,4 @@
+
 <p align="center">
   <a href="https://vuetifyjs.com" target="_blank"><img width="100"src="https://vuetifyjs.com/static/doc-images/logo.svg"></a>
 </p>
@@ -23,6 +24,9 @@
   </a>
   <a href="https://www.npmjs.com/package/vuetify">
     <img src="https://img.shields.io/npm/l/vuetify.svg" alt="License">
+  </a>
+  <a href="https://app.zenhub.com/workspace/o/vuetifyjs/vuetify/boards">
+    <img src="https://img.shields.io/badge/Managed_with-ZenHub-5e60ba.svg" alt="zenhub">
   </a>
   <a href="https://chat.vuetifyjs.com">
     <img src="https://img.shields.io/badge/chat-on%20discord-7289da.svg" alt="Chat">
