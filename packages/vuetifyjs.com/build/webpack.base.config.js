@@ -49,14 +49,14 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: ['style-loader', 'css-loader']
+        loader: ['vue-style-loader', 'css-loader']
       },
       {
         test: /\.styl$/,
         loader: ['style-loader', 'css-loader', 'stylus-loader']
       },
       {
-        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)(\?.*)?$/,
         loader: 'url-loader',
         query: {
           limit: 10000,

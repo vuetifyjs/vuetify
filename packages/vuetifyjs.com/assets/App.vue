@@ -63,3 +63,5 @@
   code
     elevation(1)
 </style>
+
+<style src="../node_modules/mdi/css/materialdesignicons.css"></style>

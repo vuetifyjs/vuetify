@@ -31,14 +31,17 @@
         )
     v-list(dense)
       template(v-for="item in items")
-        v-list-group(v-if="item.items" v-bind:group="item.group" no-action)
+        v-list-group(v-if="item.items" v-bind:group="item.group")
           v-list-tile(slot="item" ripple)
+            v-list-tile-action
+              v-icon {{ item.icon }}
             v-list-tile-content
               v-list-tile-title {{ item.title }}
             v-list-tile-action
               v-icon keyboard_arrow_down
           v-list-tile(
-            v-for="subItem in item.items" v-bind:key="subItem.title"
+            v-for="subItem in item.items"
+            v-bind:key="subItem.title"
             v-bind="{ \
               to: !subItem.target ? subItem.href : null, \
               href: subItem.target && subItem.href \
@@ -47,7 +50,7 @@
             v-bind:disabled="subItem.disabled"
             v-bind:target="subItem.target"
           )
-            v-list-tile-content.pl-3
+            v-list-tile-content
               v-list-tile-title {{ subItem.title }}
             v-list-tile-action(v-if="subItem.action")
               v-icon(dark :class="[subItem.actionClass || 'success--text']") {{ subItem.action }}
@@ -64,6 +67,8 @@
           rel="noopener"
           v-else
         )
+          v-list-tile-action(v-if="item.icon")
+            v-icon {{ item.icon }}
           v-list-tile-content
             v-list-tile-title {{ item.title }}
           v-list-tile-action(v-if="item.subAction")
@@ -84,8 +89,9 @@
       items: [
         { header: 'Core documentation' },
         {
-          title: 'Getting Started',
+          title: 'Getting started',
           group: '/getting-started',
+          icon: 'mdi-speedometer',
           items: [
             { href: '/getting-started/quick-start', title: 'Quick Start' },
             { href: '/getting-started/starter-templates', title: 'Starter Templates' },
@@ -97,8 +103,9 @@
           ]
         },
         {
-          title: 'Application Layout',
+          title: 'Application layout',
           group: 'layout',
+          icon: 'mdi-page-layout-body',
           items: [
             { href: '/layout/pre-defined', title: 'Pre-defined', action: 'star', actionClass: 'white--text' },
             { href: '/layout/grid', title: 'Grid & breakpoints' },
@@ -110,8 +117,9 @@
           ]
         },
         {
-          title: 'Base Styles',
+          title: 'Styles & themes',
           group: '/style',
+          icon: 'mdi-format-color-fill',
           items: [
             { href: '/style/colors', title: 'Colors' },
             { href: '/style/theme', title: 'Theme' },
@@ -120,15 +128,17 @@
           ]
         },
         {
-          title: 'Motion & Transitions',
+          title: 'Motion & transitions',
           group: 'motion',
+          icon: 'mdi-clock-fast',
           items: [
             { href: '/motion/transitions', title: 'Transitions' }
           ]
         },
         {
-          title: 'UI Components',
+          title: 'UI components',
           group: '/components',
+          icon: 'mdi-view-dashboard',
           items: [
             { href: '/components/alerts', title: 'Alerts' },
             { href: '/components/avatars', title: 'Avatars' },
@@ -171,6 +181,7 @@
         {
           title: 'Directives',
           group: 'directives',
+          icon: 'mdi-function',
           items: [
             { href: '/directives/resizing', title: 'Resizing' },
             { href: '/directives/ripples', title: 'Ripples' },
@@ -178,13 +189,14 @@
             { href: '/directives/touch-support', title: 'Touch support' }
           ]
         },
-        { href: '/pre-made-themes', title: 'Pre-made themes' },
-        { href: 'https://vuetify.threadless.com/', title: 'Shop', target: '_blank' },
+        { href: '/pre-made-themes', title: 'Pre-made themes', icon: 'mdi-theme-light-dark' },
+        { href: 'https://vuetify.threadless.com/', title: 'Shop', target: '_blank', icon: 'mdi-store' },
         { divider: true },
         { header: 'Additional resources' },
         {
           title: 'Community',
           group: 'community',
+          icon: 'mdi-account-multiple',
           items: [
             { href: 'https://chat.vuetifyjs.com/', title: 'Chat and support', target: '_blank' },
             { href: 'https://github.com/vuetifyjs/vuetify/issues', title: 'Issue board', target: '_blank' },
@@ -194,6 +206,7 @@
         {
           title: 'Guides',
           group: 'guides',
+          icon: 'mdi-television-guide',
           items: [
             { href: '/guides/server-side-rendering', title: 'Server side rendering' }
           ]
