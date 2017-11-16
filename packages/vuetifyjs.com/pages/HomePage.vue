@@ -178,7 +178,7 @@
 
         const end = { break: true }
 
-        supporters.splice(1, 0, end)
+        supporters.splice(2, 0, end)
 
         return supporters
       }

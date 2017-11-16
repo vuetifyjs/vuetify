@@ -30,10 +30,15 @@ export function createStore () {
             size: 80,
             href: 'https://careers.lmax.com/?utm_source=vuetify&utm_medium=logo-link&utm_campaign=lmax-careers',
             src: 'backers/lmax-exchange.png'
+          },
+          {
+            title: 'Intygrate',
+            size: 80,
+            href: 'http://intygrate.com/',
+            src: 'backers/intygrate.png'
           }
         ],
         palladium: [
-          { title: 'Intygrate', size: 40, href: 'http://intygrate.com/', src: 'backers/intygrate.png' },
           { title: 'Eikos Partners', size: 50, href: 'http://www.eikospartners.com/', src: 'backers/eikos-partners.webp' },
           { title: 'rateGenius', size: 50, href: 'https://application.rategenius.com/', src: 'backers/rate-genius.png' }
         ],
