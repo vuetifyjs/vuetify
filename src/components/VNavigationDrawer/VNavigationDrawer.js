@@ -172,7 +172,13 @@ export default {
     permanent (val) {
       // If enabling prop
       // enable the drawer
-      if (val) this.isActive = true
+      if (val) {
+        this.isActive = true
+        this.isMobile = false
+      } else {
+        this.checkIfMobile()
+      }
+      this.updateApplication()
     },
     right (val, prev) {
       // When the value changes
@@ -186,6 +192,7 @@ export default {
     },
     temporary (val) {
       this.tryOverlay()
+      this.updateApplication()
     },
     value (val) {
       if (this.permanent) return

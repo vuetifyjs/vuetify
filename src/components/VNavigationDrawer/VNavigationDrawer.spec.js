@@ -119,4 +119,33 @@ test('VNavigationDrawer', () => {
 
     expect(wrapper.vm.isActive).toBe(true)
   })
+
+  it('should update content padding when temporary state is changed', async () => {
+    const wrapper = mount(VNavigationDrawer, { propsData: {
+      app: true
+    }})
+
+    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+
+    wrapper.setProps({ temporary: true })
+    expect(wrapper.vm.$vuetify.application.left).toBe(0)
+
+    wrapper.setProps({ temporary: false })
+    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+  })
+
+  it('should update content padding when permanent state is changed', async () => {
+    await resizeWindow(800)
+    const wrapper = mount(VNavigationDrawer, { propsData: {
+      app: true
+    }})
+
+    expect(wrapper.vm.$vuetify.application.left).toBe(0)
+
+    wrapper.setProps({ permanent: true })
+    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+
+    wrapper.setProps({ permanent: false })
+    expect(wrapper.vm.$vuetify.application.left).toBe(0)
+  })
 })
