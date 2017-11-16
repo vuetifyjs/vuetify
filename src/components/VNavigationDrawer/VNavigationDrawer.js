@@ -208,16 +208,18 @@ export default {
   },
 
   destroyed () {
-    if (this.app)
+    if (this.app) {
       this.$vuetify.application[this.right ? 'right' : 'left'] = 0
+    }
 
     this.unregisterWatchers()
   },
 
   methods: {
     calculateTouchArea () {
-      if (!this.$el.parentNode)
+      if (!this.$el.parentNode) {
         return
+      }
 
       const parentRect = this.$el.parentNode.getBoundingClientRect()
 
@@ -227,8 +229,9 @@ export default {
       }
     },
     checkIfMobile () {
-      if (this.permanent || this.temporary)
+      if (this.permanent || this.temporary) {
         return
+      }
 
       this.isMobile = window.innerWidth < parseInt(this.mobileBreakPoint, 10)
     },
@@ -263,9 +266,10 @@ export default {
       this.checkIfMobile()
     },
     registerWatchers () {
-      if (this.reactsToRoute)
+      if (this.reactsToRoute) {
         watchers.unwatchRoute = this.$watch('$route',
           () => this.isActive = !this.closeConditional())
+      }
     },
     swipeRight (e) {
       if (this.isActive && !this.right) return
@@ -298,7 +302,7 @@ export default {
       this.removeOverlay()
     },
     unregisterWatchers () {
-      for (watcher in watchers) {
+      for (var watcher in watchers) {
         watchers[watcher]()
       }
     },
