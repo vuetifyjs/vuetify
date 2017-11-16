@@ -148,6 +148,8 @@ export default {
         this.tryOverlay()
         this.$el.scrollTop = 0
       }
+
+      this.updateApplication()
     },
     /**
      * When mobile changes, adjust
@@ -307,8 +309,6 @@ export default {
   },
 
   render (h) {
-    this.updateApplication()
-
     const data = {
       'class': this.classes,
       style: this.styles,
