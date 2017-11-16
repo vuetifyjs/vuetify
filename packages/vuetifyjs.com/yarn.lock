@@ -2899,6 +2899,10 @@ math-expression-evaluator@^1.2.14:
   version "1.2.17"
   resolved "https://registry.yarnpkg.com/math-expression-evaluator/-/math-expression-evaluator-1.2.17.tgz#de819fdbcd84dccd8fae59c6aeb79615b9d266ac"
 
+mdi@^2.0.46:
+  version "2.0.46"
+  resolved "https://registry.yarnpkg.com/mdi/-/mdi-2.0.46.tgz#65e07a7c622eda06e871cd6a336c60db8393e27a"
+
 media-typer@0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
