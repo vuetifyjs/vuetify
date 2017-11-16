@@ -1,32 +1,37 @@
 <template lang="pug">
   text-page(:data="$data")
-    v-layout(row wrap).mb-5
-      v-flex(xs12)
-        v-container(fluid grid-list-md).pa-0
-          v-layout(row wrap).pillars
-            v-flex(
-              xs12
-              sm4
-              v-for="(p, i) in philosophies"
-              :key="i"
-            )
-              v-card
-                v-layout(align-center justify-center).pa-5
-                  v-avatar(size="150px")
-                    img(:src="p.img").grey.darken-4
-                div.px-3
-                  v-divider.indigo.lighten-4
-                v-card-title(primary).headline.layout.justify-center
-                  span(v-text="p.title")
-                v-card-text(v-html="p.caption").caption
+    section#why-vuetify
+      v-layout(row wrap).mb-5
+        v-flex(xs12)
+          v-container(fluid grid-list-md).pa-0
+            v-layout(row wrap).pillars
+              v-flex(
+                xs12
+                sm4
+                v-for="(p, i) in philosophies"
+                :key="i"
+              )
+                v-card
+                  v-layout(align-center justify-center).pa-5
+                    v-avatar(size="150px")
+                      img(:src="p.img").grey.darken-4
+                  div.px-3
+                    v-divider.indigo.lighten-4
+                  v-card-title(primary).headline.layout.justify-center
+                    span(v-text="p.title")
+                  v-card-text(v-html="p.caption").caption
 
     v-layout(row wrap).mb-5
       v-flex(xs12)
         v-container(fluid grid-list-md).pa-0
           v-layout(row wrap)
             v-flex(xs12 md7).mb-5
-              section
-                p(v-for="(p, i) in whyText" :key="i") {{ p }}
+              div
+                p(
+                  v-for="(p, i) in whyText"
+                  :key="i"
+                  v-html="p"
+                )
 
               section#design-principles
                 section-heading(value="GettingStarted.WhyVuetify.designHeader")
@@ -89,7 +94,8 @@
 <script>
   export default {
     data: () => ({
-      header: "GettingStarted.WhyVuetify.header",
+      header: 'GettingStarted.WhyVuetify.header',
+      toc: 'GettingStarted.WhyVuetify.toc'
     }),
 
     computed: {
