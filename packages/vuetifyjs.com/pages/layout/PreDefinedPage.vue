@@ -57,7 +57,8 @@
         { name: 'Google Contacts', href: '/examples/layouts/google-contacts' },
         { name: 'Google Keep', href: '/examples/layouts/google-keep'},
         { name: 'Google Youtube', href: '/examples/layouts/google-youtube', dark: true }
-      ]
+      ],
+      toc: 'Layout.PreDefined.toc'
     }),
 
     methods: {
