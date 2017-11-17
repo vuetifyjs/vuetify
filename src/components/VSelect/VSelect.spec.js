@@ -243,4 +243,34 @@ test('VSelect', () => {
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
+
+  it('should have the proper nudge', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        hideDetails: true,
+        items: ['foo', 'bar']
+      }
+    })
+
+    expect(wrapper.vm.nudgeTop).toBe(0)
+
+    wrapper.setProps({ autocomplete: true })
+
+    expect(wrapper.vm.nudgeTop).toBe(24)
+
+    wrapper.setProps({ autocomplete: false, overflow: true })
+
+    expect(wrapper.vm.nudgeTop).toBe(2)
+
+    wrapper.setProps({ auto: true, overflow: false })
+
+    expect(wrapper.vm.nudgeTop).toBe(-18)
+
+    wrapper.setProps({ auto: false, overflow: true, hideDetails: false })
+
+    expect(wrapper.vm.nudgeTop).toBe(26)
+
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 })

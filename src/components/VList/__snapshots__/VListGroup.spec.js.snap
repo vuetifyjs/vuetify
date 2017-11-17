@@ -5,14 +5,14 @@ exports[`VListGroup.js should render a component with no padding for action icon
 <ul data-uid="6"
     class="list"
 >
-  <div class="list--group__container">
-    <div class="list--group__header">
-    </div>
+  <li class="list--group__container">
+    <ul class="list--group__header">
+    </ul>
     <ul class="list list--group"
         style="display: none;"
     >
     </ul>
-  </div>
+  </li>
 </ul>
 
 `;
@@ -22,14 +22,14 @@ exports[`VListGroup.js should render a component with route namespace and match 
 <ul data-uid="9"
     class="list"
 >
-  <div class="list--group__container">
-    <div class="list--group__header">
-    </div>
+  <li class="list--group__container">
+    <ul class="list--group__header">
+    </ul>
     <ul class="list list--group"
         style="display: none;"
     >
     </ul>
-  </div>
+  </li>
 </ul>
 
 `;
@@ -39,14 +39,14 @@ exports[`VListGroup.js should render a lazy component and match snapshot 1`] = `
 <ul data-uid="3"
     class="list"
 >
-  <div class="list--group__container">
-    <div class="list--group__header">
-    </div>
+  <li class="list--group__container">
+    <ul class="list--group__header">
+    </ul>
     <ul class="list list--group"
         style="display: none;"
     >
     </ul>
-  </div>
+  </li>
 </ul>
 
 `;
@@ -56,14 +56,14 @@ exports[`VListGroup.js should render component and match snapshot 1`] = `
 <ul data-uid="0"
     class="list"
 >
-  <div class="list--group__container">
-    <div class="list--group__header">
-    </div>
+  <li class="list--group__container">
+    <ul class="list--group__header">
+    </ul>
     <ul class="list list--group"
         style="display: none;"
     >
     </ul>
-  </div>
+  </li>
 </ul>
 
 `;

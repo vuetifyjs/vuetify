@@ -39,6 +39,10 @@ export default {
     }
   },
 
+  mounted () {
+    this.init()
+  },
+
   methods: {
     init () {
       if (!this.$refs.img) return

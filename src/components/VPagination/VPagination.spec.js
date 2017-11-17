@@ -6,7 +6,8 @@ test('VPagination.vue', ({ mount }) => {
     jest.useFakeTimers()
     const wrapper = mount(VPagination, {
       propsData: {
-        length: 5
+        length: 5,
+        value: 2
       }
     })
     jest.runAllTimers()
@@ -25,6 +26,19 @@ test('VPagination.vue', ({ mount }) => {
 
     expect(next).toBeCalled()
     expect(previous).toBeCalled()
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render disabled buttons with length equals to 0', async () => {
+    jest.useFakeTimers()
+    const wrapper = mount(VPagination, {
+      propsData: {
+        length: 0,
+        value: 1
+      }
+    })
+    jest.runAllTimers()
+
     expect(wrapper.html()).toMatchSnapshot()
   })
 
