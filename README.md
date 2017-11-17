@@ -16,12 +16,7 @@
   <a href="https://www.npmjs.com/package/vuetify">
     <img src="https://img.shields.io/npm/dm/vuetify.svg" alt="Downloads">
   </a>
-  <a href="https://www.npmjs.com/package/vuetify">
-    <img src="https://img.shields.io/npm/v/vuetify.svg" alt="Version">
-  </a>
-  <a href="https://cdnjs.com/libraries/vuetify">
-    <img src="https://img.shields.io/cdnjs/v/vuetify.svg" alt="CDN">
-  </a>
+  <br>
   <a href="https://www.npmjs.com/package/vuetify">
     <img src="https://img.shields.io/npm/l/vuetify.svg" alt="License">
   </a>
@@ -30,6 +25,13 @@
   </a>
   <a href="https://chat.vuetifyjs.com">
     <img src="https://img.shields.io/badge/chat-on%20discord-7289da.svg" alt="Chat">
+  </a>
+  <br>
+  <a href="https://www.npmjs.com/package/vuetify">
+    <img src="https://img.shields.io/npm/v/vuetify.svg" alt="Version">
+  </a>
+  <a href="https://cdnjs.com/libraries/vuetify">
+    <img src="https://img.shields.io/cdnjs/v/vuetify.svg" alt="CDN">
   </a>
 </p>
 <br><br>
