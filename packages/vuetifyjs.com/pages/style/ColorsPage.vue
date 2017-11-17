@@ -59,6 +59,7 @@
         'yellow', 'amber', 'orange', 'deep-orange',
         'brown', 'blue-grey', 'grey'
       ],
+      toc: 'Style.Colors.toc',
       types: [
         'darken', 'lighten', 'accent'
       ]
