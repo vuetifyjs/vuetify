@@ -51,7 +51,8 @@
         { file: 'scaleTransition' },
         { file: 'fadeTransition' },
         { file: 'customOrigin' }
-      ]
+      ],
+      toc: 'Motion.Transitions.toc'
     })
   }
 </script>
