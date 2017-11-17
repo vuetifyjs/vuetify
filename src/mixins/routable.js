@@ -1,5 +1,4 @@
 import Ripple from '../directives/ripple'
-import { normalizeEvent } from '../util/helpers'
 
 export default {
   directives: {
@@ -27,7 +26,7 @@ export default {
       let exact = this.exact
       let tag
       const normalizedListeners = Object.keys(this.$listeners).map(event =>
-        Object.create({ [normalizeEvent(event)]: this.$listeners[event] })
+        Object.create({ [event.replace(/(&|!|~)/g, '')]: this.$listeners[event] })
       )
       const data = {
         attrs: { disabled: this.disabled },

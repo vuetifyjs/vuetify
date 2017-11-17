@@ -132,13 +132,3 @@ const tagsToReplace = {
 export function escapeHTML (str) {
   return str.replace(/[&<>]/g, tag => tagsToReplace[tag] || tag)
 }
-
-export function normalizeEvent (name) {
-  const passive = name.charAt(0) === '&'
-  name = passive ? name.slice(1) : name
-  const once = name.charAt(0) === '~'
-  name = once ? name.slice(1) : name
-  const capture = name.charAt(0) === '!'
-  name = capture ? name.slice(1) : name
-  return name
-}
