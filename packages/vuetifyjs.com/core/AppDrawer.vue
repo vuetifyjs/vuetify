@@ -59,7 +59,7 @@
             v-list-tile-content
               v-list-tile-title {{ subItem.title }}
             v-list-tile-action(v-if="subItem.action")
-              v-icon(dark :class="[subItem.actionClass || 'success--text']") {{ subItem.action }}
+              v-icon(:class="[subItem.actionClass || 'success--text']") {{ subItem.action }}
         v-subheader(v-else-if="item.header").primary--text {{ item.header }}
         v-divider(v-else-if="item.divider")
         v-list-tile(
@@ -78,7 +78,7 @@
           v-list-tile-content
             v-list-tile-title {{ item.title }}
           v-list-tile-action(v-if="item.subAction")
-            v-icon(dark class="success--text") {{ item.subAction }}
+            v-icon(class="success--text") {{ item.subAction }}
           v-chip(
             v-else-if="item.chip"
             label
@@ -113,7 +113,7 @@
           group: 'layout',
           icon: 'mdi-page-layout-body',
           items: [
-            { href: '/layout/pre-defined', title: 'Pre-defined', action: 'star', actionClass: 'white--text' },
+            { href: '/layout/pre-defined', title: 'Pre-defined' },
             { href: '/layout/grid', title: 'Grid & breakpoints' },
             { href: '/layout/spacing', title: 'Spacing' },
             { href: '/layout/alignment', title: 'Alignment' },
