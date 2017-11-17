@@ -169,6 +169,9 @@ export default {
 
       this.isActive = !val
     },
+    miniVariant () {
+      this.updateApplication()
+    },
     permanent (val) {
       // If enabling prop
       // enable the drawer

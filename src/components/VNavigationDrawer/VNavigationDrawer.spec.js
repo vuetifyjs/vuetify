@@ -148,4 +148,18 @@ test('VNavigationDrawer', () => {
     wrapper.setProps({ permanent: false })
     expect(wrapper.vm.$vuetify.application.left).toBe(0)
   })
+
+  it('should update content padding when miniVariant is changed', async () => {
+    const wrapper = mount(VNavigationDrawer, { propsData: {
+      app: true
+    }})
+
+    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+
+    wrapper.setProps({ miniVariant: true })
+    expect(wrapper.vm.$vuetify.application.left).toBe(80)
+
+    wrapper.setProps({ miniVariant: false })
+    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+  })
 })
