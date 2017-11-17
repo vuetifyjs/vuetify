@@ -72,14 +72,17 @@
           const target = this.isBooted && item.target
             ? item.target
             : document.getElementById(item.href)
-          const offsetTop = target.offsetTop - 300
 
-          item.offsetTop = offsetTop
-          item.target = target
+          if (target && target.offsetTop) {
+            const offsetTop = target.offsetTop - 100
 
-          targets.push(offsetTop)
+            item.offsetTop = offsetTop
+            item.target = target
 
-          return item
+            targets.push(offsetTop)
+
+            return item
+          }
         })
 
         this.list = list
@@ -89,10 +92,6 @@
         const offset = window.pageYOffset ||
           document.documentElement.offsetTop
         this.genList()
-
-        if (document.body.clientHeight - offset - window.innerHeight < 25) {
-          return (this.activeIndex = this.targets.length - 1)
-        }
 
         const shouldFloat = offset >= this.threshold
 

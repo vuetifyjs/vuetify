@@ -1,15 +1,13 @@
 <template lang="pug">
   section.component-example(:id="id")
     //- Section header
-    h3(v-if="header").title.layout.align-center
-      v-btn(
-        icon
-        color="primary"
-        flat
+    h3(v-if="header").title.layout.align-center.mb-3
+      router-link(
         :to="{ hash: id }"
         v-if="id"
-      ).mx-0
-        v-icon link
+        style="text-decoration: none;"
+      ).mr-2
+        v-icon(color="accent") mdi-pound
       span(v-text="header")
 
     //- Description
