@@ -1,25 +1,22 @@
 import { test } from '~util/testing'
+import { mount } from 'avoriaz'
 import VTabs from './VTabs'
 import VTabsBar from './VTabsBar'
 import VTabsItem from './VTabsItem'
-import Vue from 'vue/dist/vue.common'
+import Vue from 'vue'
 import { createRange } from '~util/helpers'
 
 function createBar (items = ['foo', 'bar']) {
-  return Vue.component('test', {
-    components: {
-      VTabsBar,
-      VTabsItem
-    },
+  return Vue.extend({
     render (h) {
-      return h('v-tabs-bar', {}, items.map(i => {
-        return h('v-tabs-item', { props: { href: `${i}` } })
-      }))
+      return h(VTabsBar, items.map(i => (
+        h(VTabsItem, { props: { href: `${i}` } })
+      )))
     }
   })
 }
 
-test('VTabs.vue', ({ mount }) => {
+test('VTabs', () => {
   it('should change model when tab is clicked', async () => {
     const wrapper = mount(VTabs, {
       slots: {
