@@ -59,7 +59,8 @@ export default {
       style: {
         paddingLeft: `${this.paddingLeft}px`,
         paddingRight: `${this.paddingRight}px`
-      }
+      },
+      ref: 'content'
     }
 
     return h('footer', data, this.$slots.default)

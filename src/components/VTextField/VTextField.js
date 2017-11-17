@@ -117,8 +117,7 @@ export default {
       }
     },
     value (val) {
-      if (this.internalChange) this.internalChange = false
-      else if (this.mask) {
+      if (this.mask && !this.internalChange) {
         const masked = this.maskText(this.unmaskText(val))
         this.lazyValue = this.unmaskText(masked)
 
@@ -129,16 +128,16 @@ export default {
         })
       } else this.lazyValue = val
 
+      if (this.internalChange) this.internalChange = false
+
       !this.validateOnBlur && this.validate()
       this.shouldAutoGrow && this.calculateInputHeight()
     }
   },
 
   mounted () {
-    this.$vuetify.load(() => {
-      this.shouldAutoGrow && this.calculateInputHeight()
-      this.autofocus && this.focus()
-    })
+    this.shouldAutoGrow && this.calculateInputHeight()
+    this.autofocus && this.focus()
   },
 
   methods: {
@@ -182,6 +181,16 @@ export default {
       this.$emit('focus', e)
     },
     keyDown (e) {
+      // Prevents closing of a
+      // dialog when pressing
+      // enter
+      if (this.multiLine &&
+        this.isFocused &&
+        e.keyCode === 13
+      ) {
+        e.stopPropagation()
+      }
+
       this.internalChange = true
     },
     genCounter () {

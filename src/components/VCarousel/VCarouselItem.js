@@ -1,5 +1,9 @@
+import { inject as RegistrableInject } from '../../mixins/registrable'
+
 export default {
   name: 'v-carousel-item',
+
+  mixins: [RegistrableInject('v-carousel-item', 'v-carousel')],
 
   data () {
     return {
@@ -42,6 +46,14 @@ export default {
       this.active = this._uid === id
       this.reverse = reverse
     }
+  },
+
+  mounted () {
+    this.register(this._uid, this.open)
+  },
+
+  beforeDestroy () {
+    this.unregister(this._uid, this.open)
   },
 
   render (h) {

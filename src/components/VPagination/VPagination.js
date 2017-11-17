@@ -9,9 +9,16 @@ import Colorable from '../../mixins/colorable'
 export default {
   name: 'v-pagination',
 
+  mixins: [Colorable],
+
   directives: { Resize },
 
-  mixins: [Colorable],
+  data () {
+    return {
+      maxButtons: 0,
+      defaultColor: 'primary'
+    }
+  },
 
   props: {
     circle: Boolean,
@@ -33,19 +40,6 @@ export default {
     value: {
       type: Number,
       default: 0
-    }
-  },
-
-  data () {
-    return {
-      maxButtons: 0,
-      defaultColor: 'primary'
-    }
-  },
-
-  watch: {
-    value () {
-      this.init()
     }
   },
 
@@ -83,23 +77,29 @@ export default {
     }
   },
 
+  watch: {
+    value () {
+      this.init()
+    }
+  },
+
   mounted () {
-    this.$vuetify.load.call(this, this.init)
+    this.init()
   },
 
   methods: {
+    init () {
+      this.selected = null
+
+      // TODO: Change this (f75dee3a, cbdf7caa)
+      setTimeout(() => (this.selected = this.value), 100)
+    },
     onResize () {
       const width = this.$el && this.$el.parentNode
         ? this.$el.parentNode.clientWidth
         : window.innerWidth
 
       this.maxButtons = Math.floor((width - 96) / 42)
-    },
-    init () {
-      this.selected = null
-
-      // Change this
-      setTimeout(() => (this.selected = this.value), 100)
     },
     next (e) {
       e.preventDefault()

@@ -1,3 +1,4 @@
+require('dotenv').config()
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.config')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
@@ -71,9 +72,6 @@ module.exports = {
     new ExtractTextPlugin({
       filename: '[name].css',
       allChunks: true
-    }),
-    new OptimizeCssAssetsPlugin({
-      assetNameRegExp: /\.css$/
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': "'development'"

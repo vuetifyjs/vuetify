@@ -103,6 +103,17 @@ export default {
         return (this.selectedItems || []).indexOf(o) === -1
       }) : this.filteredItems
     },
+    nudgeTop () {
+      let nudgeTop = 0
+
+      if (this.auto) nudgeTop = -18
+      else if (this.solo) nudgeTop = 0
+      else if (this.isDropdown) {
+        nudgeTop = this.hideDetails ? 2 : 26
+      } else if (this.shouldOffset) nudgeTop = 24
+
+      return nudgeTop
+    },
     searchValue: {
       get () { return this.lazySearch },
       set (val) {
@@ -125,6 +136,9 @@ export default {
       return this.selectedItems.find(i => (
         this.getValue(i) === this.getValue(this.inputValue)
       )) || null
+    },
+    shouldOffset () {
+      return this.isAutocomplete || this.offset || this.isDropdown
     }
   }
 }

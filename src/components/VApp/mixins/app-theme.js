@@ -12,7 +12,15 @@ export default {
     }
   },
 
-  mounted () {
+  created () {
+    if (typeof document === 'undefined') {
+      return this.$ssrContext && this.$ssrContext._styles &&
+        (this.$ssrContext._styles['vuetify-theme-stylesheet'] = {
+          ids: ['vuetify-theme-stylesheet'],
+          css: this.genColors(this.$vuetify.theme),
+          media: ''
+        })
+    }
     this.genStyle()
     this.applyTheme()
   },
@@ -38,9 +46,14 @@ export default {
       return `.${key}--text{color:${value} !important;}`
     },
     genStyle () {
-      const style = document.createElement('style')
-      style.type = 'text/css'
-      document.head.appendChild(style)
+      let style = document.querySelector('[data-vue-ssr-id=vuetify-theme-stylesheet]')
+
+      if (!style) {
+        style = document.createElement('style')
+        style.type = 'text/css'
+        document.head.appendChild(style)
+      }
+
       this.style = style
     }
   }

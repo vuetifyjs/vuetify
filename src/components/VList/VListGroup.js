@@ -82,7 +82,7 @@ export default {
       ref: 'group'
     }, this.showLazyContent(this.$slots.default))
 
-    const item = h('div', {
+    const item = h('ul', {
       'class': this.classes,
       on: Object.assign({}, { click: this.click }, this.$listeners),
       ref: 'item'
@@ -90,6 +90,6 @@ export default {
 
     const transition = h(VExpandTransition, [group])
 
-    return h('div', { 'class': 'list--group__container' }, [item, transition])
+    return h('li', { 'class': 'list--group__container' }, [item, transition])
   }
 }

@@ -41,25 +41,11 @@ export default {
 
   mounted () {
     this.$vuetify.dark = this.dark
-    window.addEventListener('load', this.runCallbacks)
   },
 
   watch: {
     dark () {
       this.$vuetify.dark = this.dark
-    }
-  },
-
-  methods: {
-    // Run all load callbacks created
-    // from the load helper utility
-    runCallbacks () {
-      // For unit tests
-      if (!document._loadCallbacks) return
-
-      while (document._loadCallbacks.length) {
-        document._loadCallbacks.pop()()
-      }
     }
   },
 

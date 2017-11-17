@@ -1,6 +1,6 @@
 {
   "name": "vuetify",
-  "version": "0.17.0-beta.3",
+  "version": "0.17.1",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -24,7 +24,8 @@
     "lint": "eslint --ext .js,.vue src",
     "preparecommitmsg": "node dev/prepare-commit-message.js",
     "precommit": "yarn run lint && yarn test",
-    "prepush": "yarn run lint && yarn test"
+    "prepush": "yarn run lint && yarn test",
+    "prepare": "git update-index --skip-worktree .env"
   },
   "description": "Vue.js 2 Semantic Component Framework",
   "devDependencies": {
@@ -49,6 +50,7 @@
     "css-loader": "^0.28.7",
     "css-mqpacker": "^6.0.1",
     "cssnano": "^3.10.0",
+    "dotenv": "^4.0.0",
     "eslint": "^4.6.1",
     "eslint-config-standard": "^10.2.1",
     "eslint-config-vue": "^2.0.2",
@@ -85,11 +87,11 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "uglifyjs-webpack-plugin": "^0.4.6",
-    "vue": "^2.5.2",
-    "vue-loader": "^13.3.0",
-    "vue-router": "^2.7.0",
-    "vue-server-renderer": "^2.5.2",
-    "vue-template-compiler": "^2.5.2",
+    "vue": "^2.5.4",
+    "vue-loader": "^13.5.0",
+    "vue-router": "^3.0.1",
+    "vue-server-renderer": "^2.5.4",
+    "vue-template-compiler": "^2.5.4",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-bundle-size-analyzer": "^2.7.0",

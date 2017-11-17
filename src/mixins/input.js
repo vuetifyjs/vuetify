@@ -127,9 +127,6 @@ export default {
         : (this[`${type}IconCb`] || defaultCallback)
 
       return this.$createElement('v-icon', {
-        attrs: {
-          'aria-hidden': true
-        },
         'class': {
           [`input-group__${type}-icon`]: true,
           'input-group__icon-cb': !!callback,

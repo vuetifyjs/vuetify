@@ -10,14 +10,6 @@ import { getObjectValueByPath } from '../../../util/helpers'
 export default {
   methods: {
     genMenu () {
-      const offsetY = this.isAutocomplete || this.offset || this.isDropdown
-      let nudgeTop = 0
-
-      if (this.auto) nudgeTop = -18
-      else if (this.solo) nudgeTop = 0
-      else if (this.isDropdown) nudgeTop = 26
-      else if (offsetY) nudgeTop = 24
-
       const data = {
         ref: 'menu',
         props: {
@@ -28,8 +20,8 @@ export default {
           contentClass: this.computedContentClass,
           disabled: this.disabled,
           maxHeight: this.maxHeight,
-          nudgeTop,
-          offsetY,
+          nudgeTop: this.nudgeTop,
+          offsetY: this.shouldOffset,
           offsetOverflow: this.isAutocomplete,
           openOnClick: false,
           value: this.menuIsVisible,

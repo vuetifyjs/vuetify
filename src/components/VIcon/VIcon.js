@@ -20,10 +20,7 @@ export default {
   },
 
   render (h, { props, data, children = [] }) {
-    if (props.fa || props.mdi) console.warn(`The v-icon prop 'fa' and 'mdi' will be deprecated in the next release. Use 'fa' or 'mdi' prefix in icon name instead.`)
     let iconName = ''
-    let iconType = 'material-icons'
-
     if (children.length) {
       iconName = children.pop().text
     } else if (data.domProps && data.domProps.textContent) {
@@ -34,14 +31,16 @@ export default {
       delete data.domProps.innerHTML
     }
 
+    let iconType = 'material-icons'
     const thirdPartyIcon = iconName.indexOf('-') > -1
     if (thirdPartyIcon) iconType = iconName.slice(0, iconName.indexOf('-'))
 
-    // To keep things backwards compatible for now
-    iconType = props.fa ? 'fa' : props.mdi ? 'mdi' : iconType
-
     data.staticClass = (`${iconType} icon ${data.staticClass || ''}`).trim()
     data.attrs = data.attrs || {}
+
+    if (!('aria-hidden' in data.attrs)) {
+      data.attrs['aria-hidden'] = true
+    }
 
     const classes = Object.assign({
       'icon--disabled': props.disabled,
@@ -64,16 +63,8 @@ export default {
     const iconClasses = Object.keys(classes).filter(k => classes[k]).join(' ')
     iconClasses && (data.staticClass += ` ${iconClasses}`)
 
-    // To keep things backwards compatible for now
-    if (props.fa || props.mdi) {
-      const comparison = props.fa ? 'fa' : 'mdi'
-
-      if (iconName.indexOf(' ') > -1) data.staticClass += ` ${comparison}-${iconName}`
-      else data.staticClass += ` ${comparison}-${iconName.split(' ').join('-')}`
-    }
-
     if (thirdPartyIcon) data.staticClass += ` ${iconName}`
-    !(thirdPartyIcon || props.fa || props.mdi) && children.push(iconName)
+    else children.push(iconName)
 
     return h('i', data, children)
   }

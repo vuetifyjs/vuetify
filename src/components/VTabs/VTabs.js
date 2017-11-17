@@ -64,9 +64,12 @@ export default {
         'tabs--fixed': this.fixed,
         'tabs--grow': this.grow,
         'tabs--icons': this.icons,
-        'tabs--mobile': this.$vuetify.breakpoint.width < this.mobileBreakPoint,
+        'tabs--mobile': this.isMobile,
         'tabs--scroll-bars': this.scrollable
       }
+    },
+    isMobile () {
+      return this.$vuetify.breakpoint.width < this.mobileBreakPoint
     }
   },
 
@@ -79,8 +82,11 @@ export default {
       this.$nextTick(() => (this.isBooted = true))
     },
     tabItems (newItems, oldItems) {
-      // Tab item got removed
-      if (oldItems.length > newItems.length) {
+      // Tab item was removed and
+      // there are still more
+      if (oldItems.length > newItems.length &&
+        newItems.length > 0
+      ) {
         if (!newItems.find(o => o.id === this.target)) {
           const i = oldItems.findIndex(o => o.id === this.target)
 
@@ -101,17 +107,15 @@ export default {
   },
 
   mounted () {
-    this.$vuetify.load(() => {
-      // // This is a workaround to detect if link is active
-      // // when being used as a router or nuxt link
-      const i = this.tabItems.findIndex(({ el }) => {
-        return el.firstChild.classList.contains('tabs__item--active')
-      })
-
-      const tab = this.value || (this.tabItems[i !== -1 ? i : 0] || {}).id
-
-      tab && this.tabClick(tab)
+    // This is a workaround to detect if link is active
+    // when being used as a router or nuxt link
+    const i = this.tabItems.findIndex(({ el }) => {
+      return el.firstChild.classList.contains('tabs__item--active')
     })
+
+    const tab = this.value || (this.tabItems[i !== -1 ? i : 0] || {}).id
+
+    tab && this.tabClick(tab)
   },
 
   methods: {

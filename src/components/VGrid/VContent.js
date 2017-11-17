@@ -35,7 +35,8 @@ export default {
   render (h) {
     const data = {
       staticClass: 'content',
-      style: this.styles
+      style: this.styles,
+      ref: 'content'
     }
 
     return h('div', {

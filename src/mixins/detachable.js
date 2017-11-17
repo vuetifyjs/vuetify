@@ -10,7 +10,7 @@ export default {
   },
 
   mounted () {
-    this.$vuetify.load(this.initDetach)
+    this.initDetach()
   },
 
   beforeDestroy () {

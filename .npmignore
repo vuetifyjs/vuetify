@@ -17,3 +17,5 @@ release/
 /package-lock.json
 /postcss.config.js
 /yarn.lock
+/.env
+/cc-test-reporter

@@ -1,100 +1,112 @@
-import VCarousel from '~components/VCarousel'
+import VCarousel from './VCarousel'
 import VCarouselItem from './VCarouselItem'
 import { test } from '~util/testing'
+import Vue from 'vue'
+
+const create = (props = {}, slots = 3) => Vue.component('zxc', {
+  functional: true,
+  render (h) {
+    const items = []
+    for (let i = 0; i < slots; i++) {
+      items.push(h(VCarouselItem, { props: { src: `${i + 1}` } }))
+    }
+    return h(VCarousel, { props }, items)
+  }
+})
 
 test('VCarousel.js', ({ mount }) => {
-  it('should render component and match snapshot', () => {
+  it('should render component and match snapshot', async () => {
     const wrapper = mount(VCarousel)
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render component with image cycling off and match snapshot', () => {
+  it('should render component with image cycling off and match snapshot', async () => {
     const wrapper = mount(VCarousel, {
       propsData: {
         cycle: false
       }
     })
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render component with custom icon and match snapshot', () => {
-    const wrapper = mount(VCarousel, {
-      propsData: {
-        icon: 'stop'
-      }
+  it('should render component with custom icon and match snapshot', async () => {
+    const component = create({
+      delimiterIcon: 'stop'
     })
+    const wrapper = mount(component)
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render component with custom duration between image cycles and match snapshot', () => {
+  it('should render component with custom duration between image cycles and match snapshot', async () => {
     const wrapper = mount(VCarousel, {
       propsData: {
         interval: 1000
       }
     })
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render component with custom left control icon and match snapshot', () => {
+  it('should render component with custom left control icon and match snapshot', async () => {
     const wrapper = mount(VCarousel, {
       propsData: {
         leftControlIcon: 'stop'
       }
     })
+    await wrapper.vm.$nextTick()
 
+    expect(wrapper.find('.carousel__left .icon')[0].text()).toBe('stop')
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render component without left control icon and match snapshot', () => {
+  it('should render component without left control icon and match snapshot', async () => {
     const wrapper = mount(VCarousel, {
       propsData: {
         leftControlIcon: false
       }
     })
+    await wrapper.vm.$nextTick()
 
+    expect(wrapper.contains('.carousel__left')).toBe(false)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render component with custom right control icon and match snapshot', () => {
+  it('should render component with custom right control icon and match snapshot', async () => {
     const wrapper = mount(VCarousel, {
       propsData: {
         rightControlIcon: 'stop'
       }
     })
+    await wrapper.vm.$nextTick()
 
+    expect(wrapper.find('.carousel__right .icon')[0].text()).toBe('stop')
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render component without right control icon and match snapshot', () => {
+  it('should render component without right control icon and match snapshot', async () => {
     const wrapper = mount(VCarousel, {
       propsData: {
         rightControlIcon: false
       }
     })
+    await wrapper.vm.$nextTick()
 
+    expect(wrapper.contains('.carousel__right')).toBe(false)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render component with selected active item', async () => {
-    const vm = mount(VCarousel).vm
-    const wrapper = mount(VCarousel, {
-      propsData: {
-        value: 1
-      },
-      slots: {
-        default: [1, 2, 3].map(i => {
-          return {
-            vNode: vm.$createElement(VCarouselItem, { attrs: { src: i.toString() } })
-          }
-        })
-      }
-    })
-
+    const component = create({ value: 1 })
+    const wrapper = mount(component)
     await wrapper.vm.$nextTick()
+
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -124,5 +136,14 @@ test('VCarousel.js', ({ mount }) => {
     })
 
     expect([].concat(...input.mock.calls)).toEqual([1, 2, 0])
+  })
+
+  it('should render component without delimiters', async () => {
+    const component = create({ hideDelimiters: true })
+    const wrapper = mount(component)
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.contains('carousel__controls')).toBe(false)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

@@ -161,7 +161,9 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
                     aria-label="Previous page"
             >
               <div class="btn__content">
-                <i class="material-icons icon">
+                <i aria-hidden="true"
+                   class="material-icons icon"
+                >
                   chevron_left
                 </i>
               </div>
@@ -172,7 +174,9 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
                     aria-label="Next page"
             >
               <div class="btn__content">
-                <i class="material-icons icon">
+                <i aria-hidden="true"
+                   class="material-icons icon"
+                >
                   chevron_right
                 </i>
               </div>
@@ -258,7 +262,9 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
                     aria-label="Previous page"
             >
               <div class="btn__content">
-                <i class="material-icons icon">
+                <i aria-hidden="true"
+                   class="material-icons icon"
+                >
                   chevron_left
                 </i>
               </div>
@@ -269,7 +275,9 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
                     aria-label="Next page"
             >
               <div class="btn__content">
-                <i class="material-icons icon">
+                <i aria-hidden="true"
+                   class="material-icons icon"
+                >
                   chevron_right
                 </i>
               </div>
