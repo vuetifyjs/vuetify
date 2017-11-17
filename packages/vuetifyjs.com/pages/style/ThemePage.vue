@@ -45,7 +45,8 @@
 
     data: () => ({
       header: 'Style.Theme.header',
-      headerText: 'Style.Theme.headerText'
+      headerText: 'Style.Theme.headerText',
+      toc: 'Style.Theme.toc'
     })
   }
 </script>
