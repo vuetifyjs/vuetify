@@ -26,7 +26,7 @@ export default {
       let exact = this.exact
       let tag
       const normalizedListeners = Object.keys(this.$listeners).map(event =>
-        Object.create({ [event.replace(/(&|!|~)/g, '')]: this.$listeners[event] })
+        Object.create({ [event.replace(/[&!~]/g, '')]: this.$listeners[event] })
       )
       const data = {
         attrs: { disabled: this.disabled },
