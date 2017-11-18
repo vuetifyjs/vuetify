@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import { test } from '~util/testing'
 import { mount } from 'avoriaz'
 import VDataTable from './VDataTable'
@@ -141,6 +142,28 @@ test('VDataTable.vue', () => {
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.defaultPagination.descending).toBe(false)
 
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should render a progress with headers slot', () => {
+    const vm = new Vue()
+    const wrapper = mount(Vue.component('test', {
+      components: {
+        VDataTable
+      },
+      render (h) {
+        return h('v-data-table', {
+          props: {
+            items: []
+          },
+          scopedSlots: {
+            headers: props => vm.$createElement('tr')
+          }
+        })
+      }
+    }))
+
+    expect(wrapper.find('.datatable__progress').length).toBe(1)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
