@@ -66,8 +66,7 @@ theme(list, "list")
       background: $material-twelve-percent-dark
 
     &__content,
-    &__action,
-    &__avatar
+    &__action
       height: 100%
 
     &__title, &__sub-title
@@ -86,7 +85,8 @@ theme(list, "list")
     &__sub-title
       font-size: $list-sub-title-font-size
 
-    .avatar
+    &__avatar
+      display: flex
       justify-content: flex-start
       min-width: 56px
 
@@ -133,7 +133,7 @@ theme(list, "list")
       justify-content: center
       flex-direction: column
 
-      ~ .avatar
+      ~ .list__tile__avatar
         justify-content: flex-end
 
       ~ .list__tile__action:not(.list__tile__action--stack)
@@ -150,12 +150,6 @@ theme(list, "list")
 
     &--avatar
       height: $list-item-avatar-single-height
-
-      .avatar
-        img,
-        .icon
-          height: 40px
-          width: 40px
 
   &--dense
     padding-top: $list-item-dense-top-padding
@@ -193,6 +187,9 @@ theme(list, "list")
   &--three-line
     .list__tile
       height: $list-item-triple-height
+      
+    .list__tile__avatar
+      margin-top: $list-item-avatar-triple-margin-top
 
     .list__tile__sub-title
       white-space: initial
@@ -203,6 +200,9 @@ theme(list, "list")
     &.list--dense
       .list__tile
         height: $list-item-dense-triple-height
+
+      .list__tile__avatar
+        margin-top: $list-item-dense-avatar-triple-margin-top
 
   &--group
     position: relative
@@ -253,8 +253,3 @@ theme(list, "list")
 
   &--subheader
     padding-top: 0
-
-  &.list--two-line,
-  &.list--three-line
-    .list__tile__avatar
-      align-items: flex-start
