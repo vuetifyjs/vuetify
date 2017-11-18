@@ -62,6 +62,7 @@ export default {
     },
     hideActions: Boolean,
     hideHeaders: Boolean,
+    disableInitialSort: Boolean,
     mustSort: Boolean,
     noResultsText: {
       type: String,
@@ -314,7 +315,7 @@ export default {
       !('sortable' in h) || h.sortable)
     )
 
-    this.defaultPagination.sortBy = firstSortable
+    this.defaultPagination.sortBy = !this.disableInitialSort && firstSortable
       ? firstSortable.value
       : null
 
