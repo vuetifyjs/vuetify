@@ -67,6 +67,26 @@ test('VDataTable.vue', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should match display no-data-text when no data', () => {
+    const data = dataTableTestData()
+    data.propsData.items = []
+    data.propsData.noDataText = 'foo'
+    const wrapper = mount(VDataTable, data)
+
+    expect(wrapper.find('tbody td')[0].html()).toMatchSnapshot()
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should match display no-results-text when no results', () => {
+    const data = dataTableTestData()
+    data.propsData.noResultsText = 'bar'
+    data.propsData.search = "no such item"
+    const wrapper = mount(VDataTable, data)
+
+    expect(wrapper.find('tbody td')[0].html()).toMatchSnapshot()
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
   it('should render aria-sort attribute on column headers', async () => {
     const data = dataTableTestData()
     const wrapper = mount(VDataTable, data)
