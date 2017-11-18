@@ -1,5 +1,8 @@
+// Mixins
 import Routable from '../../mixins/routable'
 import Toggleable from '../../mixins/toggleable'
+
+// Directives
 import Ripple from '../../directives/ripple'
 
 export default {

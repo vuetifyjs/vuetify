@@ -54,9 +54,7 @@ exports[`VSelect should render buttons correctly when using items array with seg
              style="height: auto;"
              data-ripple="false"
         >
-          <ul data-uid="38"
-              class="list"
-          >
+          <ul class="list">
             <li>
               <a class="list__tile list__tile--link list__tile--active primary--text"
                  data-ripple="true"
@@ -115,9 +113,7 @@ exports[`VSelect should render buttons correctly when using slot with segmented 
              style="height: auto;"
              data-ripple="false"
         >
-          <ul data-uid="48"
-              class="list"
-          >
+          <ul class="list">
             <li>
               <a class="list__tile list__tile--link list__tile--active primary--text"
                  data-ripple="true"
