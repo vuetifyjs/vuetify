@@ -37,7 +37,8 @@ export default {
         'menu__content--select',
         this.auto ? 'menu__content--auto' : '',
         this.isDropdown ? 'menu__content--dropdown' : '',
-        this.isAutocomplete ? 'menu__content--autocomplete' : ''
+        this.isAutocomplete ? 'menu__content--autocomplete' : '',
+        this.contentClass || ''
       ]
 
       return children.join(' ')
