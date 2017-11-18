@@ -26,7 +26,7 @@ export default {
       let exact = this.exact
       let tag
       const normalizedListeners = Object.keys(this.$listeners).map(event =>
-        Object.create({ [event.replace(/[&!~]/g, '')]: this.$listeners[event] })
+        ({ [event.replace(/[&!~]/g, '')]: this.$listeners[event] })
       )
       const data = {
         attrs: { disabled: this.disabled },
@@ -36,10 +36,7 @@ export default {
           name: 'ripple',
           value: this.ripple || false
         }],
-        on: {
-          ...(normalizedListeners || {}),
-          click: this.click
-        }
+        on: Object.assign({}, normalizedListeners, { click: this.click })
       }
       if (typeof this.exact === 'undefined') {
         exact = this.to === '/' ||
