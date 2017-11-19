@@ -1,5 +1,6 @@
 import application from './mixins/application'
 import theme from './mixins/theme'
+import colors from '../../util/colors'
 
 const Vuetify = {
   install (Vue, opts = {}) {
@@ -7,7 +8,7 @@ const Vuetify = {
 
     this.installed = true
 
-    const $vuetify = {}
+    const $vuetify = { colors }
     Vue.util.defineReactive($vuetify, 'breakpoint', {})
     Vue.util.defineReactive($vuetify, 'application', application)
     Vue.util.defineReactive($vuetify, 'dark', false)
