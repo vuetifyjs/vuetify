@@ -13,7 +13,7 @@
         { file: 'flat' },
         { file: 'raised' },
         { file: 'depressed' },
-        { file: 'dropdown' },
+        { file: 'dropdown', uninverted: true },
         { file: 'toggle' },
         { file: 'icon' },
         { file: 'floating' },

@@ -14,7 +14,7 @@
       @click.native="loader = 'loading3'"
       :disabled="loading3"
       color="blue-grey"
-      dark
+      class="white--text"
     >
       Upload
       <v-icon right dark>cloud_upload</v-icon>

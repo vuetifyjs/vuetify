@@ -35,32 +35,50 @@
           title="VueJobs"
           width="30%"
         )
-    v-list(dense)
+    v-list(dense expand)
       template(v-for="item in items")
-        v-list-group(v-if="item.items" v-bind:group="item.group")
-          v-list-tile(slot="item" ripple)
-            v-list-tile-action
-              v-icon {{ item.icon }}
+        v-list-group(
+          v-if="item.items"
+          v-bind:group="item.group"
+          no-action
+          :prepend-icon="item.icon"
+        )
+          v-list-tile(slot="activator" ripple)
             v-list-tile-content
               v-list-tile-title {{ item.title }}
-            v-list-tile-action
-              v-icon keyboard_arrow_down
-          v-list-tile(
-            v-for="subItem in item.items"
-            v-bind:key="subItem.title"
-            v-bind="{ \
-              to: !subItem.target ? subItem.href : null, \
-              href: subItem.target && subItem.href \
-            }"
-            ripple
-            v-bind:disabled="subItem.disabled"
-            v-bind:target="subItem.target"
-          )
-            v-list-tile-content
-              v-list-tile-title {{ subItem.title }}
-            v-list-tile-action(v-if="subItem.action")
-              v-icon(:class="[subItem.actionClass || 'success--text']") {{ subItem.action }}
-        v-subheader(v-else-if="item.header").primary--text {{ item.header }}
+          template(v-for="(subItem, i) in item.items")
+            v-list-group(
+              v-if="subItem.items"
+              sub-group
+              :group="subItem.group"
+            )
+              v-list-tile(slot="activator" ripple)
+                v-list-tile-content
+                  v-list-tile-title {{ subItem.title }}
+              v-list-tile(
+                v-for="(grand, i) in subItem.items"
+                :key="i"
+                :to="grand.href"
+              )
+                v-list-tile-content
+                  v-list-tile-title {{ grand.title }}
+            v-list-tile(
+              :key="i"
+              v-bind="{ \
+                to: !subItem.target ? subItem.href : null, \
+                href: subItem.target && subItem.href \
+              }"
+              exact
+              ripple
+              :disabled="subItem.disabled"
+              :target="subItem.target"
+              v-else
+            )
+              v-list-tile-content
+                v-list-tile-title {{ subItem.title }}
+              v-list-tile-action(v-if="subItem.action")
+                v-icon(:class="[subItem.actionClass || 'success--text']") {{ subItem.action }}
+        v-subheader(v-else-if="item.header").grey--text {{ item.header }}
         v-divider(v-else-if="item.divider")
         v-list-tile(
           v-bind="{ \
