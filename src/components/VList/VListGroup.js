@@ -21,7 +21,7 @@ export default {
 
   mixins: [
     Bootable,
-    RegistrableInject('v-list-group', 'v-list'),
+    RegistrableInject('list', 'v-list-group', 'v-list'),
     Toggleable
   ],
 
@@ -89,7 +89,7 @@ export default {
   },
 
   mounted () {
-    this.register(this._uid, this.toggle)
+    this.list.register(this._uid, this.toggle)
 
     if (this.group && this.$route) {
       this.isActive = this.matchRoute(this.$route.path)
@@ -99,7 +99,7 @@ export default {
   },
 
   beforeDestroy () {
-    this.unregister(this._uid)
+    this.list.unregister(this._uid)
   },
 
   methods: {

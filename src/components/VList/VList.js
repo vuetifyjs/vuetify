@@ -1,5 +1,7 @@
+// Styles
 require('../../stylus/components/_lists.styl')
 
+// Mixins
 import Themeable from '../../mixins/themeable'
 import {
   provide as RegistrableProvide
@@ -9,7 +11,7 @@ export default {
   name: 'v-list',
 
   mixins: [
-    RegistrableProvide,
+    RegistrableProvide('list'),
     Themeable
   ],
 
@@ -19,12 +21,9 @@ export default {
     }
   },
 
-  data () {
-    return {
-      uid: null,
-      groups: []
-    }
-  },
+  data: () => ({
+    groups: []
+  }),
 
   props: {
     dense: Boolean,
