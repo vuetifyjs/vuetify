@@ -1,6 +1,6 @@
 <template>
-    <v-card color="grey lighten-4" flat height="200px">
-      <v-toolbar color="white" light dense>
+    <v-card color="grey lighten-4" flat height="200px" tile>
+      <v-toolbar dense>
         <v-toolbar-side-icon></v-toolbar-side-icon>
         <v-toolbar-title>Title</v-toolbar-title>
         <v-spacer></v-spacer>

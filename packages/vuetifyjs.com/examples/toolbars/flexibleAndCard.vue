@@ -1,13 +1,12 @@
 <template>
-  <v-card color="grey lighten-5" flat>
+  <v-card flat>
     <v-toolbar dark color="primary" flat extended>
       <v-toolbar-side-icon></v-toolbar-side-icon>
-
     </v-toolbar>
-    <v-layout row>
+    <v-layout row pb-2>
       <v-flex xs8 offset-xs2>
         <v-card class="card--flex-toolbar">
-          <v-toolbar card color="white" prominent light>
+          <v-toolbar card prominent>
             <v-toolbar-title class="body-2 grey--text">Title</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn icon>

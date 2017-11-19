@@ -18,8 +18,8 @@
       //- Example options
       v-toolbar(flat dense card).pr-1
         v-spacer
-        v-tooltip(top)
-          v-btn(icon slot="activator" @click="dark = !dark")
+        v-tooltip(top v-if="hasInverted")
+          v-btn(icon slot="activator" @click="inverted = !inverted")
             v-icon(color="grey darken-1") invert_colors
           span Invert colors
         v-tooltip(top)
@@ -93,7 +93,6 @@
 
     data () {
       return {
-        dark: false,
         tabs: ['template', 'script', 'style'],
         component: null,
         instance: null,
@@ -114,8 +113,10 @@
     },
 
     props: {
+      hasInverted: Boolean,
       file: String,
       header: String,
+      inverted: Boolean,
       newIn: String,
       id: String
     },
@@ -126,9 +127,9 @@
       },
       exampleClasses () {
         return {
-          'theme--dark': this.dark,
-          'theme--light': !this.dark,
-          'grey lighten-3': !this.dark
+          'theme--dark': this.inverted,
+          'theme--light': !this.inverted,
+          'grey lighten-3': !this.inverted
         }
       }
     },
