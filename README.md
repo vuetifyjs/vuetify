@@ -48,15 +48,15 @@
   <a href="https://careers.lmax.com/?utm_source=vuetify&utm_medium=github-link&utm_campaign=lmax-careers">
     <img height="70px" src="https://vuetifyjs.com/static/doc-images/backers/lmax-exchange.png">
   </a>
+  <br><br>
+  <a href="http://intygrate.com/?ref=vuetify-github">
+    <img height="70px" src="https://vuetifyjs.com/static/doc-images/backers/intygrate.png">
+  </a>
 </p>
 
 <h4 align="center">Palladium</h4>
 
 <p align="center">
-  <a href="http://intygrate.com/?ref=vuetify-github">
-    <img height="40px" src="https://vuetifyjs.com/static/doc-images/backers/intygrate.png">
-  </a>
-  <br><br>
   <a href="http://www.eikospartners.com/?ref=vuetify-github">
     <img height="40px" src="https://vuetifyjs.com/static/doc-images/backers/eikos-partners.webp">
   </a>
