@@ -12,7 +12,7 @@ import Touch from '../../directives/touch'
 export default {
   name: 'v-carousel',
 
-  mixins: [Bootable, Themeable, RegistrableProvide],
+  mixins: [Bootable, Themeable, RegistrableProvide('carousel')],
 
   directives: { Touch },
 
