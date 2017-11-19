@@ -37,6 +37,7 @@ export default {
       type: String,
       default: 'primary--text'
     },
+    disabled: Boolean,
     group: String,
     noAction: Boolean,
     subGroup: Boolean
@@ -45,7 +46,8 @@ export default {
   computed: {
     groupClasses () {
       return {
-        'list__group--active': this.isActive
+        'list__group--active': this.isActive,
+        'list__group--disabled': this.disabled
       }
     },
     headerClasses () {

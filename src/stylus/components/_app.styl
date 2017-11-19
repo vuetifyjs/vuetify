@@ -24,11 +24,19 @@ application($material)
   
   a
     cursor: pointer
+    color: $material.text.link
+    
+    &:hover
+      color: $material.text.link-hover
 
-.theme--light a
-  color: $material-light.text.link
-
-.theme--dark a
-  color: $material-dark.text.link
+  .text
+    &--primary
+      color: $material.text.primary !important
+    
+    &--secondary
+      color: $material.text.secondary !important
+      
+    &--disabled
+      color: $material.text.disabled !important
 
 app(application)

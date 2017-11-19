@@ -5,9 +5,9 @@
 list($material)
   background: $material.cards
 
-  .list__tile:not(.list__tile--active)
-    .list__tile__content
-      color: $material.text.primary
+  // .list__tile:not(.list__tile--active)
+  //   .list__tile__content
+  //     color: $material.text.primary
 
   .list__tile__sub-title
     color: $material.text.secondary
@@ -40,6 +40,7 @@ theme(list, "list")
 
   &__tile
     align-items: center
+    color: inherit !important
     display: flex
     font-size: $list-tile-font-size
     font-weight: $list-tile-font-weight
