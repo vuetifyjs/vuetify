@@ -99,6 +99,8 @@ export default {
 
   methods: {
     click () {
+      if (this.disabled) return
+
       this.isActive = !this.isActive
     },
     genIcon (icon) {

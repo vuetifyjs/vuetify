@@ -20,6 +20,13 @@ list($material)
     &:before,
     &:after
       background: $material.dividers
+      
+  .list__group--disabled
+    .list__tile
+      color: $material.text.disabled !important
+    
+    .list__group__header__prepend-icon .icon
+      color: $material.icons.inactive !important
 
 theme(list, "list")
 
@@ -252,6 +259,9 @@ theme(list, "list")
       &--no-action
         .list__tile
           padding-left: $list-item-left-padding
+
+    &--disabled
+      pointer-events: none
 
   &--subheader
     padding-top: 0

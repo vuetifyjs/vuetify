@@ -38,9 +38,11 @@ export default {
 
   computed: {
     listClasses () {
-      return this.color
-        ? this.addTextColorClassChecks()
-        : [this.defaultColor]
+      return this.disabled
+        ? 'text--disabled'
+        : this.color
+          ? this.addTextColorClassChecks()
+          : [this.defaultColor]
     },
     classes () {
       return {
