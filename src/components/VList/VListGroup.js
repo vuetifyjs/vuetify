@@ -115,6 +115,31 @@ export default {
         this.genIcon('keyboard_arrow_down')
       ])
     },
+    genHeader () {
+      return this.$createElement('ul', {
+        staticClass: 'list__group__header',
+        'class': this.headerClasses,
+        on: Object.assign({}, {
+          click: this.click
+        }, this.$listeners),
+        ref: 'item'
+      }, [
+        this.genSubGroup(),
+        this.$slots.activator,
+        this.genDropdown()
+      ])
+    },
+    genItems () {
+      return this.$createElement('ul', {
+        staticClass: 'list__group__items',
+        'class': this.itemsClasses,
+        directives: [{
+          name: 'show',
+          value: this.isActive
+        }],
+        ref: 'group'
+      }, this.showLazyContent(this.$slots.default))
+    },
     genSubGroup () {
       if (!this.subGroup) return null
 
@@ -136,35 +161,12 @@ export default {
   },
 
   render (h) {
-    const header = h('ul', {
-      staticClass: 'list__group__header',
-      'class': this.headerClasses,
-      on: Object.assign({}, {
-        click: this.click
-      }, this.$listeners),
-      ref: 'item'
-    }, [
-      this.genSubGroup(),
-      this.$slots.activator,
-      this.genDropdown()
-    ])
-
-    const items = h('ul', {
-      staticClass: 'list__group__items',
-      'class': this.itemsClasses,
-      directives: [{
-        name: 'show',
-        value: this.isActive
-      }],
-      ref: 'group'
-    }, this.showLazyContent(this.$slots.default))
-
     return h('li', {
       staticClass: 'list__group',
       'class': this.groupClasses
     }, [
-      header,
-      h(VExpandTransition, [items])
+      this.genHeader(),
+      h(VExpandTransition, [this.genItems()])
     ])
   }
 }
