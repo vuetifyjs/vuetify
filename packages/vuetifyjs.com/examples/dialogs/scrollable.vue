@@ -1,6 +1,6 @@
 <template>
   <v-layout row justify-center>
-    <v-dialog v-model="dialog" scrollable>
+    <v-dialog v-model="dialog" scrollable max-width="300px">
       <v-btn color="primary" dark slot="activator">Open Dialog</v-btn>
       <v-card>
         <v-card-title>Select Country</v-card-title>

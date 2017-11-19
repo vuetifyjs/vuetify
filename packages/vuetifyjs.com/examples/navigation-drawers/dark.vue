@@ -51,7 +51,7 @@
   export default {
     data () {
       return {
-        drawer: true,
+        drawer: null,
         items: [
           { title: 'Home', icon: 'dashboard' },
           { title: 'About', icon: 'question_answer' }

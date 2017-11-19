@@ -10,17 +10,17 @@
             <v-icon>more_vert</v-icon>
           </v-btn>
         </v-toolbar>
-        <v-list class="teal darken-4">
+        <v-list class="teal darken-4" dark>
           <template v-for="item in items">
             <v-list-tile v-if="item.action" v-bind:key="item.title" @click="">
               <v-list-tile-action>
-                <v-icon dark>{{ item.action }}</v-icon>
+                <v-icon>{{ item.action }}</v-icon>
               </v-list-tile-action>
               <v-list-tile-content class="white--text">
                 <v-list-tile-title>{{ item.title }}</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
-            <v-divider v-else-if="item.divider" dark></v-divider>
+            <v-divider v-else-if="item.divider"></v-divider>
             <v-subheader v-else-if="item.header" v-text="item.header" class="grey--text text--lighten-4"></v-subheader>
           </template>
         </v-list>

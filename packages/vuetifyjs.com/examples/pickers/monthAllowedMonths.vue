@@ -33,7 +33,7 @@
         date: null,
         allowedMonths: null,
         thirtyOneDays: function (date) {
-          return [0, 2, 4, 6, 7, 9, 11].includes(date.getMonth())
+          return [0, 2, 4, 6, 7, 9, 11].includes(parseInt(date.split('-')[1], 10))
         },
         randomMonths: [],
         lastFiveMonths: {

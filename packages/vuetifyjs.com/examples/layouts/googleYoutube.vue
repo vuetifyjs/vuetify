@@ -4,9 +4,8 @@
     id="inspire"
   >
     <v-navigation-drawer
-      persistent
+      fixed
       clipped
-      enable-resize-watcher
       v-model="drawer"
       app
     >
@@ -60,20 +59,18 @@
         ></v-text-field>
       </v-layout>
     </v-toolbar>
-    <main>
-      <v-content>
-        <v-container fill-height>
-          <v-layout justify-center align-center>
-            <v-tooltip right>
-              <v-btn icon large :href="source" target="_blank" slot="activator">
-                <v-icon large>code</v-icon>
-              </v-btn>
-              <span>Source</span>
-            </v-tooltip>
-          </v-layout>
-        </v-container>
-      </v-content>
-    </main>
+    <v-content>
+      <v-container fill-height>
+        <v-layout justify-center align-center>
+          <v-tooltip right>
+            <v-btn icon large :href="source" target="_blank" slot="activator">
+              <v-icon large>code</v-icon>
+            </v-btn>
+            <span>Source</span>
+          </v-tooltip>
+        </v-layout>
+      </v-container>
+    </v-content>
   </v-app>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer light>
+  <v-navigation-drawer stateless light value="true">
     <v-toolbar flat>
       <v-list>
         <v-list-tile>

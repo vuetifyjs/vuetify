@@ -48,7 +48,7 @@
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title>Video sounds</v-list-tile-title>
-              <v-list-tile-sub-title>Hangouts vidoe call</v-list-tile-sub-title>
+              <v-list-tile-sub-title>Hangouts video call</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
           <v-list-tile avatar>

@@ -51,7 +51,7 @@
           <v-list-tile avatar>
             <v-list-tile-content>
               <v-list-tile-title>Content filtering</v-list-tile-title>
-              <v-list-tile-sub-title>Set the content filtering level to restrict appts that can be downloaded</v-list-tile-sub-title>
+              <v-list-tile-sub-title>Set the content filtering level to restrict apps that can be downloaded</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
           <v-list-tile avatar>
@@ -93,12 +93,12 @@
           </v-list-tile>
         </v-list>
         </v-card-text>
-        
+
           <div style="flex: 1 1 auto;"></div>
       </v-card>
     </v-dialog>
       <v-dialog v-model="dialog2" max-width="500px">
-        <v-card> 
+        <v-card>
           <v-card-title>
             Dialog 2
           </v-card-title>
@@ -116,7 +116,7 @@
         </v-card>
       </v-dialog>
       <v-dialog v-model="dialog3" max-width="500px">
-        <v-card> 
+        <v-card>
           <v-card-title>
             <span>Dialog 3</span>
             <v-spacer></v-spacer>

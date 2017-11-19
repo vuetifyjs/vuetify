@@ -4,17 +4,17 @@
       <v-btn
         :color="allowedDates === everyOtherDay ? 'primary' : ''"
         :class="{ 'white--text': allowedDates === everyOtherDay }"
-        @click.native="allowedDates = everyOtherDay"
+        @click="allowedDates = everyOtherDay"
       >Function</v-btn>
       <v-btn
         :color="allowedDates === randomDays ? 'primary' : ''"
         :class="{ 'white--text': allowedDates === randomDays }"
-        @click.native="allowedDates = randomDays"
+        @click="allowedDates = randomDays"
       >Array</v-btn>
       <v-btn
         :color="allowedDates === lastFiveDays ? 'primary' : ''"
         :class="{ 'white--text': allowedDates === lastFiveDays }"
-        @click.native="allowedDates = lastFiveDays"
+        @click="allowedDates = lastFiveDays"
       >Object</v-btn>
       <v-date-picker
         class="mt-3"
@@ -32,7 +32,8 @@
         date: null,
         allowedDates: null,
         everyOtherDay: function (date) {
-          return date.getDay() % 2 == 0
+          const [,,day] = date.split('-')
+          return parseInt(day, 10) % 2 == 0
         },
         randomDays: [],
         lastFiveDays: {
@@ -47,13 +48,13 @@
         const day = Math.floor(Math.random() * 30)
         const d = new Date()
         d.setDate(day)
-        return d
+        return d.toISOString().substr(0, 10)
       })
 
       const d = new Date()
       d.setDate(date.getDate() - 5)
-      this.lastFiveDays.min = d
-      this.lastFiveDays.max = date
+      this.lastFiveDays.min = d.toISOString().substr(0, 10)
+      this.lastFiveDays.max = date.toISOString().substr(0, 10)
 
       this.allowedDates = this.everyOtherDay
     }

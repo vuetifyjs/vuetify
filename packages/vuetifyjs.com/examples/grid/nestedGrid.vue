@@ -20,7 +20,8 @@
           </v-flex>
           <v-flex d-flex>
             <v-layout row wrap>
-              <v-flex d-flex
+              <v-flex
+                d-flex
                 v-for="n in 2"
                 :key="n"
                 xs12

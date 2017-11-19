@@ -1,27 +1,24 @@
 <template>
-  <v-layout row justify-center>
-    <v-dialog v-model="dialog" fullscreen transition="dialog-bottom-transition" :overlay=false>
-      <v-btn color="primary" dark slot="activator">Open Dialog</v-btn>
+  <v-layout row>
+    <v-flex xs12 sm6 offset-sm3>
       <v-card>
-        <v-toolbar dark color="primary">
-          <v-btn icon @click.native="dialog = false" dark>
-            <v-icon>close</v-icon>
-          </v-btn>
+        <v-toolbar color="purple" dark>
+          <v-toolbar-side-icon></v-toolbar-side-icon>
           <v-toolbar-title>Settings</v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-toolbar-items>
-            <v-btn dark flat @click.native="dialog = false">Save</v-btn>
-          </v-toolbar-items>
+          <v-btn icon>
+            <v-icon>search</v-icon>
+          </v-btn>
         </v-toolbar>
         <v-list three-line subheader>
           <v-subheader>User Controls</v-subheader>
-          <v-list-tile avatar>
+          <v-list-tile>
             <v-list-tile-content>
               <v-list-tile-title>Content filtering</v-list-tile-title>
               <v-list-tile-sub-title>Set the content filtering level to restrict apps that can be downloaded</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
-          <v-list-tile avatar>
+          <v-list-tile>
             <v-list-tile-content>
               <v-list-tile-title>Password</v-list-tile-title>
               <v-list-tile-sub-title>Require password for purchase or use password to restrict purchase</v-list-tile-sub-title>
@@ -31,36 +28,39 @@
         <v-divider></v-divider>
         <v-list three-line subheader>
           <v-subheader>General</v-subheader>
-          <v-list-tile avatar>
+          <v-list-tile href="javascript:;">
             <v-list-tile-action>
-              <v-checkbox v-model="notifications"></v-checkbox>
+              <v-checkbox
+                v-model="notifications"
+                readonly
+              ></v-checkbox>
             </v-list-tile-action>
-            <v-list-tile-content>
+            <v-list-tile-content @click="notifications = !notifications">
               <v-list-tile-title>Notifications</v-list-tile-title>
               <v-list-tile-sub-title>Notify me about updates to apps or games that I downloaded</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
-          <v-list-tile avatar>
+          <v-list-tile href="javascript:;">
             <v-list-tile-action>
               <v-checkbox v-model="sound"></v-checkbox>
             </v-list-tile-action>
-            <v-list-tile-content>
+            <v-list-tile-content @click="sound = !sound">
               <v-list-tile-title>Sound</v-list-tile-title>
               <v-list-tile-sub-title>Auto-update apps at any time. Data charges may apply</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
-          <v-list-tile avatar>
+          <v-list-tile href="javascript:;">
             <v-list-tile-action>
               <v-checkbox v-model="widgets"></v-checkbox>
             </v-list-tile-action>
-            <v-list-tile-content>
+            <v-list-tile-content @click="widgets = !widgets">
               <v-list-tile-title>Auto-add widgets</v-list-tile-title>
               <v-list-tile-sub-title>Automatically add home screen widgets</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
       </v-card>
-    </v-dialog>
+    </v-flex>
   </v-layout>
 </template>
 
@@ -68,7 +68,6 @@
   export default {
     data () {
       return {
-        dialog: false,
         notifications: false,
         sound: true,
         widgets: false

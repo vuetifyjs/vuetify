@@ -1,11 +1,10 @@
 <template>
   <v-app id="inspire">
     <v-navigation-drawer
-      persistent
+      fixed
       v-model="drawerRight"
       right
       clipped
-      enable-resize-watcher
       app
     >
       <v-list dense>
@@ -32,9 +31,8 @@
       <v-toolbar-side-icon @click.stop="drawerRight = !drawerRight"></v-toolbar-side-icon>
     </v-toolbar>
     <v-navigation-drawer
-      persistent
+      fixed
       v-model="drawer"
-      enable-resize-watcher
       app
     >
       <v-list dense>
@@ -48,31 +46,29 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <main>
-      <v-navigation-drawer
-        temporary
-        v-model="left"
-        fixed
-      ></v-navigation-drawer>
-      <v-content>
-        <v-container fluid fill-height>
-          <v-layout justify-center align-center>
-            <v-tooltip right>
-              <v-btn icon large :href="source" target="_blank" slot="activator">
-                <v-icon large>code</v-icon>
-              </v-btn>
-              <span>Source</span>
-            </v-tooltip>
-          </v-layout>
-        </v-container>
-      </v-content>
-      <v-navigation-drawer
-        right
-        temporary
-        v-model="right"
-        fixed
-      ></v-navigation-drawer>
-    </main>
+    <v-navigation-drawer
+      temporary
+      v-model="left"
+      fixed
+    ></v-navigation-drawer>
+    <v-content>
+      <v-container fluid fill-height>
+        <v-layout justify-center align-center>
+          <v-tooltip right>
+            <v-btn icon large :href="source" target="_blank" slot="activator">
+              <v-icon large>code</v-icon>
+            </v-btn>
+            <span>Source</span>
+          </v-tooltip>
+        </v-layout>
+      </v-container>
+    </v-content>
+    <v-navigation-drawer
+      right
+      temporary
+      v-model="right"
+      fixed
+    ></v-navigation-drawer>
     <v-footer color="blue-grey" class="white--text" app>
       <span>Vuetify</span>
       <v-spacer></v-spacer>

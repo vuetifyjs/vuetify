@@ -1,6 +1,6 @@
 <template>
   <v-layout row justify-center>
-    <v-dialog v-model="dialog" persistent>
+    <v-dialog v-model="dialog" persistent max-width="290">
       <v-btn color="primary" dark slot="activator">Open Dialog</v-btn>
       <v-card>
         <v-card-title class="headline">Use Google's location service?</v-card-title>

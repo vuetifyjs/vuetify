@@ -1,5 +1,5 @@
 <template>
-  <v-app toolbar--fixed toolbar style="overflow: hidden">
+  <div style="position: relative; overflow: hidden;">
     <v-toolbar
       absolute
       color="teal lighten-3"
@@ -20,12 +20,12 @@
         <v-icon>more_vert</v-icon>
       </v-btn>
     </v-toolbar>
-    <main
+    <div
       style="max-height: 600px;"
       class="scroll-y"
       id="scrolling-techniques"
     >
-      <v-container></v-container>
-    </main>
-  </v-app>
+      <v-container style="height: 1000px;"></v-container>
+    </div>
+  </div>
 </template>
