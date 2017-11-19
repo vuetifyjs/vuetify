@@ -48,6 +48,7 @@ export default {
   props: {
     expand: Boolean,
     hideActions: Boolean,
+    disableInitialSort: Boolean,
     mustSort: Boolean,
     noResultsText: {
       type: String,
@@ -193,27 +194,7 @@ export default {
         : this.computedPagination.page * this.getPage
     },
     filteredItems () {
-      if (this.totalItems) return this.items
-
-      let items = this.items.slice()
-      const hasSearch = typeof this.search !== 'undefined' &&
-        this.search !== null
-
-      if (hasSearch) {
-        items = this.customFilter(items, this.search, this.filter)
-        this.searchLength = items.length
-      }
-
-      items = this.customSort(
-        items,
-        this.computedPagination.sortBy,
-        this.computedPagination.descending
-      )
-
-      return this.hideActions &&
-        !this.hasPagination
-        ? items
-        : items.slice(this.pageStart, this.pageStop)
+      return this.filteredItemsImpl()
     },
     selected () {
       const selected = {}
@@ -267,6 +248,29 @@ export default {
     },
     isExpanded (item) {
       return this.expanded[item[this.itemKey]]
+    },
+    filteredItemsImpl (...additionalFilterArgs) {
+      if (this.totalItems) return this.items
+
+      let items = this.items.slice()
+      const hasSearch = typeof this.search !== 'undefined' &&
+        this.search !== null
+
+      if (hasSearch) {
+        items = this.customFilter(items, this.search, this.filter, ...additionalFilterArgs)
+        this.searchLength = items.length
+      }
+
+      items = this.customSort(
+        items,
+        this.computedPagination.sortBy,
+        this.computedPagination.descending
+      )
+
+      return this.hideActions &&
+        !this.hasPagination
+        ? items
+        : items.slice(this.pageStart, this.pageStop)
     },
     sort (index) {
       const { sortBy, descending } = this.computedPagination
@@ -430,7 +434,7 @@ export default {
       return [this.$createElement('div', {
         'class': this.actionsClasses
       }, [
-        this.genSelect(),
+        this.rowsPerPageItems.length > 1 ? this.genSelect() : null,
         this.genPagination(),
         this.genPrevIcon(),
         this.genNextIcon()

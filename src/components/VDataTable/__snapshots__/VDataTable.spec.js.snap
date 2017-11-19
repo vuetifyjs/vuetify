@@ -91,12 +91,11 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                            style="height: auto;"
                            data-ripple="false"
                       >
-                        <ul data-uid="18"
+                        <ul data-uid="17"
                             class="list"
                         >
                           <li>
-                            <a href="javascript:;"
-                               class="list__tile list__tile--link"
+                            <a class="list__tile list__tile--link"
                                data-ripple="true"
                             >
                               <div class="list__tile__content">
@@ -107,8 +106,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                             </a>
                           </li>
                           <li>
-                            <a href="javascript:;"
-                               class="list__tile list__tile--link"
+                            <a class="list__tile list__tile--link"
                                data-ripple="true"
                             >
                               <div class="list__tile__content">
@@ -119,8 +117,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                             </a>
                           </li>
                           <li>
-                            <a href="javascript:;"
-                               class="list__tile list__tile--link"
+                            <a class="list__tile list__tile--link"
                                data-ripple="true"
                             >
                               <div class="list__tile__content">
@@ -131,8 +128,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                             </a>
                           </li>
                           <li>
-                            <a href="javascript:;"
-                               class="list__tile list__tile--link"
+                            <a class="list__tile list__tile--link"
                                data-ripple="true"
                             >
                               <div class="list__tile__content">
@@ -153,8 +149,6 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                   </i>
                 </div>
                 <div class="input-group__details">
-                  <div class="input-group__messages">
-                  </div>
                 </div>
               </div>
             </div>
@@ -168,7 +162,9 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                     aria-label="Previous page"
             >
               <div class="btn__content">
-                <i class="material-icons icon">
+                <i aria-hidden="true"
+                   class="material-icons icon"
+                >
                   chevron_left
                 </i>
               </div>
@@ -180,7 +176,9 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                     aria-label="Next page"
             >
               <div class="btn__content">
-                <i class="material-icons icon">
+                <i aria-hidden="true"
+                   class="material-icons icon"
+                >
                   chevron_right
                 </i>
               </div>
@@ -359,7 +357,9 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
                     aria-label="Previous page"
             >
               <div class="btn__content">
-                <i class="material-icons icon">
+                <i aria-hidden="true"
+                   class="material-icons icon"
+                >
                   chevron_left
                 </i>
               </div>
@@ -371,7 +371,9 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
                     aria-label="Next page"
             >
               <div class="btn__content">
-                <i class="material-icons icon">
+                <i aria-hidden="true"
+                   class="material-icons icon"
+                >
                   chevron_right
                 </i>
               </div>
@@ -478,12 +480,11 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
                            style="height: auto;"
                            data-ripple="false"
                       >
-                        <ul data-uid="33"
+                        <ul data-uid="31"
                             class="list"
                         >
                           <li>
-                            <a href="javascript:;"
-                               class="list__tile list__tile--link"
+                            <a class="list__tile list__tile--link"
                                data-ripple="true"
                             >
                               <div class="list__tile__content">
@@ -494,8 +495,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
                             </a>
                           </li>
                           <li>
-                            <a href="javascript:;"
-                               class="list__tile list__tile--link"
+                            <a class="list__tile list__tile--link"
                                data-ripple="true"
                             >
                               <div class="list__tile__content">
@@ -506,8 +506,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
                             </a>
                           </li>
                           <li>
-                            <a href="javascript:;"
-                               class="list__tile list__tile--link"
+                            <a class="list__tile list__tile--link"
                                data-ripple="true"
                             >
                               <div class="list__tile__content">
@@ -518,8 +517,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
                             </a>
                           </li>
                           <li>
-                            <a href="javascript:;"
-                               class="list__tile list__tile--link"
+                            <a class="list__tile list__tile--link"
                                data-ripple="true"
                             >
                               <div class="list__tile__content">
@@ -540,8 +538,6 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
                   </i>
                 </div>
                 <div class="input-group__details">
-                  <div class="input-group__messages">
-                  </div>
                 </div>
               </div>
             </div>
@@ -640,23 +636,17 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td colspan="100%"
-            class="text-xs-center"
-        >
-          No matching records found
-        </td>
-      </tr>
     </tbody>
     <tfoot>
       <tr>
         <td colspan="100%">
           <div class="datatable__actions">
             <div class="datatable__actions__pagination">
-              NaN-NaN of 3
+              1-1 of 3
             </div>
-            <button type="button"
-                    class="btn btn--flat btn--icon"
+            <button disabled="disabled"
+                    type="button"
+                    class="btn btn--disabled btn--flat btn--icon"
                     data-ripple="true"
                     aria-label="Previous page"
             >
