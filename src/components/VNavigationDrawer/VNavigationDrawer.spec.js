@@ -162,4 +162,14 @@ test('VNavigationDrawer', () => {
     wrapper.setProps({ miniVariant: false })
     expect(wrapper.vm.$vuetify.application.left).toBe(300)
   })
+
+  it('should not remain mobile when temporary is toggled', async () => {
+    await resizeWindow(800)
+    const wrapper = mount(VNavigationDrawer, { propsData: {
+      temporary: true
+    }})
+
+    await resizeWindow(1920)
+    expect(wrapper.vm.isMobile).toBe(false)
+  })
 })
