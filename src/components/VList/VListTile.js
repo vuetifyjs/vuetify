@@ -22,7 +22,6 @@ export default {
   inheritAttrs: false,
 
   data: () => ({
-    defaultColor: 'text--primary',
     proxyClass: 'list__tile--active'
   }),
 

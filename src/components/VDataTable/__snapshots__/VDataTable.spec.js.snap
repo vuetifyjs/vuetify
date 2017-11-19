@@ -94,7 +94,7 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
                            data-ripple="false"
                       >
                         <ul class="list">
-                          <li class="text--primary">
+                          <li class>
                             <a class="list__tile list__tile--link"
                                data-ripple="true"
                             >
@@ -105,7 +105,7 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
                               </div>
                             </a>
                           </li>
-                          <li class="text--primary">
+                          <li class>
                             <a class="list__tile list__tile--link"
                                data-ripple="true"
                             >
@@ -116,7 +116,7 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
                               </div>
                             </a>
                           </li>
-                          <li class="text--primary">
+                          <li class>
                             <a class="list__tile list__tile--link"
                                data-ripple="true"
                             >
@@ -127,7 +127,7 @@ exports[`VDataTable.vue should match a snapshot 1`] = `
                               </div>
                             </a>
                           </li>
-                          <li class="text--primary">
+                          <li class>
                             <a class="list__tile list__tile--link"
                                data-ripple="true"
                             >

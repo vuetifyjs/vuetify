@@ -84,7 +84,7 @@ test('VListGroup.js', ({ mount }) => {
       }
     })
 
-    const header = wrapper.find('.list__group__header')[0]
+    const header = wrapper.find('.list__group__header__prepend-icon')[0]
 
     expect(header.hasClass('foo')).toBe(true)
     wrapper.setProps({ activeClass: 'bar' })
@@ -167,7 +167,7 @@ test('VListGroup.js', ({ mount }) => {
     expect('The v-list-group component must be used inside a v-list.').toHaveBeenTipped()
   })
 
-  it('should only render custom prepend icon if subgroup', async () => {
+  it('should only render custom prepend icon', async () => {
     const wrapper = mount(VListGroup, {
       slots: {
         prependIcon: {
@@ -176,13 +176,7 @@ test('VListGroup.js', ({ mount }) => {
       }
     })
 
-    let icon = wrapper.find('span')
-
-    expect(icon.length).toBe(0)
-    
-    wrapper.setProps({ subGroup: true })
-
-    icon = wrapper.find('span')[0]
+    const icon = wrapper.find('span')[0]
     expect(icon.html()).toBe('<span>bar</span>')
 
     expect('Injection "listClick" not found').toHaveBeenWarned()

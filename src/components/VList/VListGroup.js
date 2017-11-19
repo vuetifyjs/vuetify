@@ -36,9 +36,14 @@ export default {
       type: String,
       default: 'primary--text'
     },
+    appendIcon: {
+      type: String,
+      default: 'keyboard_arrow_down'
+    },
     disabled: Boolean,
     group: String,
     noAction: Boolean,
+    prependIcon: String,
     subGroup: Boolean
   },
 
@@ -51,7 +56,6 @@ export default {
     },
     headerClasses () {
       return {
-        [this.activeClass]: this.isActive,
         'list__group__header--active': this.isActive,
         'list__group__header--sub-group': this.subGroup
       }
@@ -82,7 +86,7 @@ export default {
     }
   },
 
-  beforeMount () {
+  mounted () {
     this.list.register(this._uid, this.toggle)
 
     if (this.group &&
@@ -106,18 +110,16 @@ export default {
     genIcon (icon) {
       return this.$createElement(VIcon, icon)
     },
-    genDropdown () {
-      if (this.subGroup) return null
-
-      if (this.$slots.appendIcon) return this.$slots.appendIcon
+    genAppendIcon () {
+      const icon = !this.subGroup ? this.appendIcon : ''
 
       return this.$createElement('li', {
         staticClass: 'list__group__header__append-icon'
       }, [
-        this.genIcon('keyboard_arrow_down')
+        this.$slots.appendIcon || this.genIcon(icon)
       ])
     },
-    genHeader () {
+    genGroup () {
       return this.$createElement('ul', {
         staticClass: 'list__group__header',
         'class': this.headerClasses,
@@ -126,9 +128,9 @@ export default {
         }, this.$listeners),
         ref: 'item'
       }, [
-        this.genSubGroup(),
+        this.genPrependIcon(),
         this.$slots.activator,
-        this.genDropdown()
+        this.genAppendIcon()
       ])
     },
     genItems () {
@@ -142,15 +144,20 @@ export default {
         ref: 'group'
       }, this.showLazyContent(this.$slots.default))
     },
-    genSubGroup () {
-      if (!this.subGroup) return null
-
-      if (this.$slots.prependIcon) return this.$slots.prependIcon
+    genPrependIcon () {
+      const icon = this.prependIcon
+        ? this.prependIcon
+        : this.subGroup
+          ? 'arrow_drop_down'
+          : ''
 
       return this.$createElement('li', {
-        staticClass: 'list__group__header__prepend-icon'
+        staticClass: 'list__group__header__prepend-icon',
+        'class': {
+          [this.activeClass]: this.isActive
+        }
       }, [
-        this.genIcon('arrow_drop_down')
+        this.$slots.prependIcon || this.genIcon(icon)
       ])
     },
     toggle (uid) {
@@ -167,7 +174,7 @@ export default {
       staticClass: 'list__group',
       'class': this.groupClasses
     }, [
-      this.genHeader(),
+      this.genGroup(),
       h(VExpandTransition, [this.genItems()])
     ])
   }

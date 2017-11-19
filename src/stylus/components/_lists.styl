@@ -43,7 +43,7 @@ theme(list, "list")
 
   &__tile
     align-items: center
-    color: inherit !important
+    color: inherit
     display: flex
     font-size: $list-tile-font-size
     font-weight: $list-tile-font-weight
@@ -228,29 +228,40 @@ theme(list, "list")
       
       > li:not(.list__group__header__prepend-icon):not(.list__group__header__append-icon)
         flex: 1 0 auto
-      
+
+      .list__group__header__append-icon,
+      .list__group__header__prepend-icon
+        padding: 0 16px
+
       &--sub-group
         align-items: center
         display: flex
 
         li .list__tile
           padding-left: 0
-      
-      .list__group__header__prepend-icon
-        padding-left: 40px
-        margin-right: 8px
-        
-      .list__group__header__append-icon
-        padding: 0 16px
-      
-      &--active
-        .list__tile__action .icon
-          color: inherit
 
-        .list__group__header__prepend-icon,
+        .list__group__header__prepend-icon
+          padding: 0 0 0 40px
+          margin-right: 8px
+
+      .list__group__header__prepend-icon
+        display: flex
+        justify-content: flex-start
+        min-width: 56px
+
+      &--active
         .list__group__header__append-icon
           .icon
             transform: rotate(-180deg)
+
+        .list__group__header__prepend-icon
+          .icon
+            color: inherit
+            
+        &.list__group__header--sub-group
+          .list__group__header__prepend-icon
+            .icon
+              transform: rotate(-180deg)
 
     &__items
       position: relative
