@@ -148,6 +148,8 @@ export default {
         this.tryOverlay()
         this.$el.scrollTop = 0
       }
+
+      this.updateApplication()
     },
     /**
      * When mobile changes, adjust
@@ -167,10 +169,19 @@ export default {
 
       this.isActive = !val
     },
+    miniVariant () {
+      this.updateApplication()
+    },
     permanent (val) {
       // If enabling prop
       // enable the drawer
-      if (val) this.isActive = true
+      if (val) {
+        this.isActive = true
+        this.isMobile = false
+      } else {
+        this.checkIfMobile()
+      }
+      this.updateApplication()
     },
     right (val, prev) {
       // When the value changes
@@ -184,6 +195,7 @@ export default {
     },
     temporary (val) {
       this.tryOverlay()
+      this.updateApplication()
     },
     value (val) {
       if (this.permanent) return
@@ -307,8 +319,6 @@ export default {
   },
 
   render (h) {
-    this.updateApplication()
-
     const data = {
       'class': this.classes,
       style: this.styles,
