@@ -33,7 +33,7 @@ deploy:
   - provider: npm
     email: "john.j.leider@gmail.com"
     api_key: $NPM_API_KEY
-    tag: $(node ./build/parse-npm-tag.js)
+    tag: $(node ./build/parse-npm-tag.js ${TRAVIS_TAG})
     skip_cleanup: true
     on:
       repo: vuetifyjs/vuetify

@@ -15,6 +15,7 @@ export default {
     chips: Boolean,
     clearable: Boolean,
     combobox: Boolean,
+    contentClass: String,
     debounceSearch: {
       type: [Number, String],
       default: 200

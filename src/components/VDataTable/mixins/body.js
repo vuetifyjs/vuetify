@@ -5,7 +5,7 @@ export default {
     genTBody () {
       const children = []
 
-      if (!this.itemsLength) {
+      if (!this.itemsLength && !this.items.length) {
         const noData = this.$slots['no-data'] || this.noDataText
         children.push(this.genEmptyBody(noData))
       } else if (!this.filteredItems.length) {
