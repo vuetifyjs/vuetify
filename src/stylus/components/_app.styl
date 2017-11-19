@@ -24,8 +24,18 @@ application($material)
 
   a
     cursor: pointer
-
+    
     &:hover
       opacity: .75
+
+  .text
+    &--primary
+      color: $material.text.primary !important
+    
+    &--secondary
+      color: $material.text.secondary !important
+      
+    &--disabled
+      color: $material.text.disabled !important
 
 app(application)

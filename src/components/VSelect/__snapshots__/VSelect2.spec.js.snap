@@ -29,10 +29,8 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
              style="height: auto;"
              data-ripple="false"
         >
-          <ul data-uid="28"
-              class="list"
-          >
-            <li>
+          <ul class="list">
+            <li class="text--primary">
               <a class="list__tile list__tile--link list__tile--active primary--text"
                  data-ripple="true"
               >
@@ -73,7 +71,7 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
                 </div>
               </a>
             </li>
-            <li>
+            <li class="text--primary">
               <a class="list__tile list__tile--link"
                  data-ripple="true"
               >
@@ -156,10 +154,8 @@ exports[`VSelect should be clearable with prop, dirty and single select 1`] = `
              style="height: auto;"
              data-ripple="false"
         >
-          <ul data-uid="20"
-              class="list"
-          >
-            <li>
+          <ul class="list">
+            <li class="text--primary">
               <a class="list__tile list__tile--link list__tile--active primary--text"
                  data-ripple="true"
               >
@@ -170,7 +166,7 @@ exports[`VSelect should be clearable with prop, dirty and single select 1`] = `
                 </div>
               </a>
             </li>
-            <li>
+            <li class="text--primary">
               <a class="list__tile list__tile--link"
                  data-ripple="true"
               >

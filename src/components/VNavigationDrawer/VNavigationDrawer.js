@@ -324,7 +324,11 @@ export default {
       style: this.styles,
       directives: this.genDirectives(),
       on: {
-        click: () => this.$emit('update:miniVariant', false)
+        click: () => {
+          if (!this.miniVariant) return
+
+          this.$emit('update:miniVariant', false)
+        }
       }
     }
 

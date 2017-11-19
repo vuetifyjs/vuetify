@@ -1,11 +1,19 @@
+// Mixins
+import Colorable from '../../mixins/colorable'
 import Routable from '../../mixins/routable'
 import Toggleable from '../../mixins/toggleable'
+
+// Directives
 import Ripple from '../../directives/ripple'
 
 export default {
   name: 'v-list-tile',
 
-  mixins: [Routable, Toggleable],
+  mixins: [
+    Colorable,
+    Routable,
+    Toggleable
+  ],
 
   directives: {
     Ripple
@@ -14,6 +22,7 @@ export default {
   inheritAttrs: false,
 
   data: () => ({
+    defaultColor: 'text--primary',
     proxyClass: 'list__tile--active'
   }),
 
@@ -28,6 +37,13 @@ export default {
   },
 
   computed: {
+    listClasses () {
+      return this.disabled
+        ? 'text--disabled'
+        : this.color
+          ? this.addTextColorClassChecks()
+          : [this.defaultColor]
+    },
     classes () {
       return {
         'list__tile': true,
@@ -56,6 +72,7 @@ export default {
     data.attrs = Object.assign({}, data.attrs, this.$attrs)
 
     return h('li', {
+      'class': this.listClasses,
       attrs: {
         disabled: this.disabled
       },

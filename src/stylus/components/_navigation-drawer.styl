@@ -8,27 +8,8 @@ navigation-drawer($material)
     .navigation-drawer__border
       background-color: $material.dividers
 
-  a:not(.list__tile--active),
-  .list
-    color: $material.text.primary
-
   .divider
     background-color: $material.dividers
-
-  .list
-    &__tile:not(.list__tile--active)
-      color: $material.text.primary
-
-      .icon
-        color: $material.icons.active
-
-    &__tile__sub-title
-      color: $material.text.secondary
-
-  .list--group__header--active
-    .list__tile, + .list--group
-      &:after
-        background: $material.dividers
 
 theme(navigation-drawer, "navigation-drawer")
 
