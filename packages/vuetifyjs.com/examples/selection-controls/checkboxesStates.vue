@@ -40,7 +40,7 @@
       </v-flex>
       <v-flex xs12 md6>
         <v-subheader>Dark</v-subheader>
-        <v-card color="secondary" flat>
+        <v-card color="secondary" flat dark>
           <v-card-text>
             <v-container fluid>
               <v-layout row wrap class="light--text">

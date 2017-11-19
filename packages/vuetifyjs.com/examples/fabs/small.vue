@@ -42,7 +42,7 @@
           </v-list-tile>
           <v-divider inset></v-divider>
           <v-subheader inset>Files</v-subheader>
-          <v-list-tile v-for="item in items2" v-bind:key="item.title" @click="">
+          <v-list-tile avatar v-for="item in items2" v-bind:key="item.title" @click="">
             <v-list-tile-avatar>
               <v-icon v-bind:class="[item.iconClass]">{{ item.icon }}</v-icon>
             </v-list-tile-avatar>
@@ -57,7 +57,7 @@
             </v-list-tile-action>
           </v-list-tile>
         </v-list>
-        <v-dialog absolute v-model="dialog">
+        <v-dialog v-model="dialog" max-width="500px">
           <v-card>
            <v-card-text>
               <v-text-field label="File name"></v-text-field>

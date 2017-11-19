@@ -30,7 +30,8 @@
           </v-flex>
           <v-flex d-flex>
             <v-layout row>
-              <v-flex d-flex
+              <v-flex
+                d-flex
                 v-for="n in 2"
                 :key="n"
               >

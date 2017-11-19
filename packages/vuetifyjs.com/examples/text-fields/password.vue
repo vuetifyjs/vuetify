@@ -40,7 +40,7 @@
         </v-layout>
         <v-layout row>
           <v-flex xs4>
-            <v-subheader>Nonvisible</v-subheader>
+            <v-subheader>Not visible</v-subheader>
           </v-flex>
           <v-flex xs8>
             <v-text-field

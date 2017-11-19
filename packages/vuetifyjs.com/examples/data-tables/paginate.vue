@@ -173,7 +173,7 @@
     },
     computed: {
       pages () {
-        return this.pagination.rowsPerPage ? Math.ceil(this.items.length / this.pagination.rowsPerPage) : 0
+        return this.pagination.rowsPerPage ? Math.ceil(this.items.totalItems / this.pagination.rowsPerPage) : 0
       }
     }
   }

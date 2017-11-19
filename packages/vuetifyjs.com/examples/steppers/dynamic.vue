@@ -26,18 +26,20 @@
           >
             Step {{ n }}
           </v-stepper-step>
-          <v-divider v-if="n !== steps"></v-divider>
+          <v-divider v-if="n !== steps" :key="n"></v-divider>
         </template>
       </v-stepper-header>
-      <v-stepper-content
-        :step="n"
-        v-for="n in steps"
-        :key="n"
-      >
-        <v-card color="grey lighten-1" class="mb-5" height="200px"></v-card>
-        <v-btn color="primary" @click="nextStep(n)">Continue</v-btn>
-        <v-btn flat>Cancel</v-btn>
-      </v-stepper-content>
+      <v-stepper-items>
+        <v-stepper-content
+          :step="n"
+          v-for="n in steps"
+          :key="n"
+        >
+          <v-card color="grey lighten-1" class="mb-5" height="200px"></v-card>
+          <v-btn color="primary" @click="nextStep(n)">Continue</v-btn>
+          <v-btn flat>Cancel</v-btn>
+        </v-stepper-content>
+      </v-stepper-items>
     </v-stepper>
   </div>
 </template>

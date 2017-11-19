@@ -1,9 +1,8 @@
 <template>
   <v-app id="inspire">
     <v-navigation-drawer
-      persistent
+      fixed
       v-model="drawer"
-      enable-resize-watcher
       right
       app
     >
@@ -31,20 +30,18 @@
       <v-toolbar-title>Application</v-toolbar-title>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
     </v-toolbar>
-    <main>
-      <v-content>
-        <v-container fluid fill-height>
-          <v-layout justify-center align-center>
-            <v-tooltip right>
-              <v-btn icon large :href="source" target="_blank" slot="activator">
-                <v-icon large>code</v-icon>
-              </v-btn>
-              <span>Source</span>
-            </v-tooltip>
-          </v-layout>
-        </v-container>
-      </v-content>
-    </main>
+    <v-content>
+      <v-container fluid fill-height>
+        <v-layout justify-center align-center>
+          <v-tooltip right>
+            <v-btn icon large :href="source" target="_blank" slot="activator">
+              <v-icon large>code</v-icon>
+            </v-btn>
+            <span>Source</span>
+          </v-tooltip>
+        </v-layout>
+      </v-container>
+    </v-content>
     <v-footer color="cyan" app>
       <v-spacer></v-spacer>
       <span class="white--text">&copy; 2017</span>

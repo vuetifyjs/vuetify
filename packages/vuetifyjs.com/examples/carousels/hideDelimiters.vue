@@ -1,5 +1,5 @@
 <template>
-  <v-carousel delimiter-icon="stop">
+  <v-carousel hide-delimiters>
     <v-carousel-item v-for="(item,i) in items" v-bind:src="item.src" :key="i"></v-carousel-item>
   </v-carousel>
 </template>

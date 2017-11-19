@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer dark class="blue lighten-3">
+  <v-navigation-drawer stateless dark class="blue lighten-3" value="true">
     <v-list>
       <v-list-tile v-for="item in items" :key="item.title" @click="">
         <v-list-tile-action>

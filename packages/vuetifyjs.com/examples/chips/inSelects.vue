@@ -26,7 +26,7 @@
   export default {
     data () {
       return {
-        chips: ['Progamming', 'Playing video games', 'Watching', 'Sleeping']
+        chips: ['Programming', 'Playing video games', 'Watching', 'Sleeping']
       }
     },
 
