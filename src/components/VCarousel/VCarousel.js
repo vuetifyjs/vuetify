@@ -108,7 +108,11 @@ export default {
             light: this.light
           },
           on: { click: fn }
-        }, [this.$createElement(VIcon, icon)])
+        }, [
+          this.$createElement(VIcon, {
+            props: { 'size': '46px' }
+          }, icon)
+        ])
       ])
     },
     genItems () {
@@ -120,12 +124,15 @@ export default {
           },
           props: {
             icon: true,
+            small: true,
             dark: this.dark || !this.light,
             light: this.light
           },
           key: index,
           on: { click: this.select.bind(this, index) }
-        }, [this.$createElement(VIcon, this.delimiterIcon)])
+        }, [this.$createElement(VIcon, {
+          props: { size: '18px' }
+        }, this.delimiterIcon)])
       })
     },
     restartTimeout () {
