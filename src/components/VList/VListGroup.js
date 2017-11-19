@@ -28,7 +28,6 @@ export default {
   inject: ['listClick'],
 
   data: () => ({
-    isReady: false,
     groups: []
   }),
 
@@ -66,14 +65,9 @@ export default {
 
   watch: {
     isActive (val) {
-      if (!this.subGroup &&
-        val &&
-        this.isReady
-      ) {
+      if (!this.subGroup && val) {
         this.listClick(this._uid)
       }
-
-      this.isReady = true
     },
     $route (to) {
       const isActive = this.matchRoute(to.path)
@@ -88,14 +82,15 @@ export default {
     }
   },
 
-  mounted () {
+  beforeMount () {
     this.list.register(this._uid, this.toggle)
 
-    if (this.group && this.$route) {
+    if (this.group &&
+      this.$route &&
+      this.value == null
+    ) {
       this.isActive = this.matchRoute(this.$route.path)
     }
-
-    this.$nextTick(() => (this.isReady = true))
   },
 
   beforeDestroy () {
