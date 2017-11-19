@@ -21,14 +21,11 @@
 application($material)
   background: $material.background
   color: $material.text.primary
-  
+
   a
     cursor: pointer
 
-.theme--light a
-  color: $material-light.text.link
-
-.theme--dark a
-  color: $material-dark.text.link
+    &:hover
+      opacity: .75
 
 app(application)
