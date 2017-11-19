@@ -44,7 +44,7 @@ export default {
       return colors.join('')
     },
     genAnchorColor (color) {
-      return `a{color: ${color};}`
+      return `.application a{color: ${color};}`
     },
     genBackgroundColor (key, value) {
       return `.${key}{background-color:${value} !important;border-color:${value} !important;}`
