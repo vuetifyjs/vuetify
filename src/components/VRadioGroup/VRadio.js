@@ -1,24 +1,35 @@
+// Components
 import { VFadeTransition } from '../transitions'
 import VIcon from '../VIcon'
 
+// Mixins
 import Colorable from '../../mixins/colorable'
 import Rippleable from '../../mixins/rippleable'
 import TabFocusable from '../../mixins/tab-focusable'
 import Themeable from '../../mixins/themeable'
+import {
+  inject as RegistrableInject
+} from '../../mixins/registrable'
 
 export default {
   name: 'v-radio',
 
   inheritAttrs: false,
 
-  inject: ['isMandatory', 'name', 'registerChild', 'unregisterChild'],
+  inject: ['isMandatory', 'name'],
 
   components: {
     VFadeTransition,
     VIcon
   },
 
-  mixins: [Colorable, Rippleable, TabFocusable, Themeable],
+  mixins: [
+    Colorable,
+    Rippleable,
+    RegistrableInject('radio', 'v-radio', 'v-radio-group'),
+    TabFocusable,
+    Themeable
+  ],
 
   props: {
     disabled: Boolean,
@@ -122,20 +133,12 @@ export default {
     }
   },
 
-  created () {
-    // Semantic check to help people identify the reason for the inject error above it.
-    if (!this.$parent || !this.$parent.$vnode || !this.$parent.$vnode.tag ||
-      !this.$parent.$vnode.tag.endsWith('v-radio-group')) {
-      console.warn('[Vuetify] Warn: The v-radio component must have an immediate parent of v-radio-group.')
-    }
-  },
-
   mounted () {
-    this.registerChild(this)
+    this.radio.register(this)
   },
 
   beforeDestroy () {
-    this.unregisterChild(this)
+    this.radio.unregister(this)
   },
 
   render (h) {
