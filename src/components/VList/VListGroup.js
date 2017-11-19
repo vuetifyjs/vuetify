@@ -112,7 +112,7 @@ export default {
     genDropdown () {
       if (this.subGroup) return null
 
-      if (this.$slots.appendIcon) return this.$slots.prependIcon
+      if (this.$slots.appendIcon) return this.$slots.appendIcon
 
       return this.$createElement('li', {
         staticClass: 'list__group__header__append-icon'
