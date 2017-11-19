@@ -19,7 +19,6 @@ export default {
       type: [String, Number],
       default: 500
     },
-    jumbotron: Boolean,
     src: String
   },
 
@@ -28,7 +27,7 @@ export default {
       return {
         display: 'block',
         opacity: this.isBooted ? 1 : 0,
-        transform: `translate(-50%, ${this.jumbotron ? 0 : this.parallax + 'px'})`
+        transform: `translate(-50%, ${this.parallax}px)`
       }
     }
   },
@@ -68,9 +67,6 @@ export default {
   render (h) {
     const imgData = {
       staticClass: 'parallax__image',
-      'class': {
-        'parallax__image--jumbotron': this.jumbotron
-      },
       style: this.styles,
       attrs: {
         src: this.src
@@ -93,9 +89,7 @@ export default {
     return h('div', {
       staticClass: 'parallax',
       style: {
-        height: this.jumbotron
-          ? this.normalizedHeight
-          : `${this.normalizedHeight}px`
+        height: `${this.normalizedHeight}px`
       },
       on: this.$listeners
     }, [container, content])

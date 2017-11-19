@@ -26,25 +26,18 @@ test('VIcon.js', () => {
     expect(wrapper.element.classList).toContain('icon--disabled')
   })
 
-  it('should render a large size component', () => {
-    const context = functionalContext({ props: { large: true } }, 'add')
-    const wrapper = mount(VIcon, context)
-
-    expect(wrapper.element.classList).toContain('icon--large')
-  })
-
-  it('should render a medium size component', () => {
-    const context = functionalContext({ props: { medium: true } }, 'add')
-    const wrapper = mount(VIcon, context)
-
-    expect(wrapper.element.classList).toContain('icon--medium')
-  })
-
-  it('should render a xLarge size component', () => {
+  it('should render a mapped size', () => {
     const context = functionalContext({ props: { xLarge: true } }, 'add')
     const wrapper = mount(VIcon, context)
 
-    expect(wrapper.element.classList).toContain('icon--x-large')
+    expect(wrapper.element.style.fontSize).toBe('40px')
+  })
+
+  it('should render a specific size', () => {
+    const context = functionalContext({ props: { size: '112px' } }, 'add')
+    const wrapper = mount(VIcon, context)
+
+    expect(wrapper.element.style.fontSize).toBe('112px')
   })
 
   it('should render a left aligned component', () => {
