@@ -1,13 +1,21 @@
+// Styles
 require('../../stylus/components/_input-groups.styl')
 require('../../stylus/components/_selection-controls.styl')
 require('../../stylus/components/_radio-group.styl')
 
+// Mixins
 import Input from '../../mixins/input'
+import {
+  provide as RegistrableProvide
+} from '../../mixins/registrable'
 
 export default {
   name: 'v-radio-group',
 
-  mixins: [Input],
+  mixins: [
+    Input,
+    RegistrableProvide('radio')
+  ],
 
   model: {
     prop: 'inputValue',
@@ -17,11 +25,14 @@ export default {
   provide () {
     return {
       isMandatory: () => this.mandatory,
-      name: () => this.name,
-      registerChild: this.registerChild,
-      unregisterChild: this.unregisterChild
+      name: () => this.name
     }
   },
+
+  data: () => ({
+    internalTabIndex: -1,
+    radios: []
+  }),
 
   props: {
     column: {
@@ -37,15 +48,9 @@ export default {
     row: Boolean
   },
 
-  data () {
-    return {
-      internalTabIndex: -1
-    }
-  },
-
   watch: {
     inputValue (val) {
-      this.getRadios().forEach((radio) => {
+      this.radios.forEach(radio => {
         radio.isActive = val === radio.value
       })
     }
@@ -62,10 +67,6 @@ export default {
   },
 
   methods: {
-    getRadios () {
-      return this.$children
-        .filter((child) => child.$el.classList.contains('radio'))
-    },
     toggleRadio (value) {
       if (this.disabled) {
         return
@@ -75,7 +76,7 @@ export default {
       this.$emit('change', value)
       this.$nextTick(() => this.validate())
 
-      this.getRadios()
+      this.radios
         .filter(r => r.value !== value)
         .forEach(r => r.isActive = false)
     },
@@ -85,26 +86,23 @@ export default {
         this.$emit('blur', this.inputValue)
       }
     },
-    registerChild (radio) {
+    register (radio) {
       radio.isActive = this.inputValue === radio.value
       radio.$el.tabIndex = radio.$el.tabIndex > 0 ? radio.$el.tabIndex : 0
       radio.$on('change', this.toggleRadio)
       radio.$on('blur', this.radioBlur)
       radio.$on('focus', this.radioFocus)
+      this.radios.push(radio)
     },
-    unregisterChild (radio) {
+    unregister (radio) {
       radio.$off('change', this.toggleRadio)
       radio.$off('blur', this.radioBlur)
       radio.$off('focus', this.radioFocus)
+
+      const index = this.radios.findIndex(r => r === radio)
+
+      if (index > -1) this.radios.splice(index, 1)
     }
-  },
-
-  mounted () {
-    this.getRadios().forEach(radio => this.registerChild(radio))
-  },
-
-  beforeDestroy () {
-    this.getRadios().forEach(radio => this.unregisterChild(radio))
   },
 
   render (h) {

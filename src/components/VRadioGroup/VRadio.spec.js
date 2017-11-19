@@ -6,17 +6,15 @@ test('VRadio.vue', ({ mount }) => {
     mount(VRadio, {
       provide: {
         name: () => 'name',
-        registerChild: () => {},
-        unregisterChild: () => {},
         isMandatory: () => false,
       }
     })
 
-    expect('immediate parent of v-radio-group').toHaveBeenTipped()
+    expect('The v-radio component must be used inside a v-radio-group.').toHaveBeenTipped()
   })
 
   // TODO: Enable test when there's a way to test $parent.$vnode.tag
-  it.skip('should not advise about v-radio-group being necessary in VRadioGroup', () => {
+  it('should not advise about v-radio-group being necessary in VRadioGroup', () => {
     const wrapper = mount(VRadioGroup, {
       slots: {
         default: [VRadio]
@@ -32,8 +30,6 @@ test('VRadio.vue', ({ mount }) => {
       },
       provide: {
         name: () => 'name',
-        registerChild: () => {},
-        unregisterChild: () => {},
         isMandatory: () => false
       }
     })
@@ -47,7 +43,7 @@ test('VRadio.vue', ({ mount }) => {
     expect(inputGroup.getAttribute('aria-checked')).toBe('true')
     expect(wrapper.html()).toMatchSnapshot()
 
-    expect('immediate parent of v-radio-group').toHaveBeenTipped()
+    expect('The v-radio component must be used inside a v-radio-group.').toHaveBeenTipped()
   })
 
   it('should render aria-label attribute with label value on input group', () => {
@@ -58,8 +54,6 @@ test('VRadio.vue', ({ mount }) => {
       attrs: {},
       provide: {
         name: () => 'name',
-        registerChild: () => {},
-        unregisterChild: () => {},
         isMandatory: () => false
       }
     })
@@ -68,7 +62,7 @@ test('VRadio.vue', ({ mount }) => {
     expect(inputGroup.getAttribute('aria-label')).toBe('Test')
     expect(wrapper.html()).toMatchSnapshot()
 
-    expect('immediate parent of v-radio-group').toHaveBeenTipped()
+    expect('The v-radio component must be used inside a v-radio-group.').toHaveBeenTipped()
   })
 
   it('should not render aria-label attribute with no label value on input group', () => {
@@ -78,8 +72,6 @@ test('VRadio.vue', ({ mount }) => {
       },
       provide: {
         name: () => 'name',
-        registerChild: () => {},
-        unregisterChild: () => {},
         isMandatory: () => false
       }
     })
@@ -88,15 +80,13 @@ test('VRadio.vue', ({ mount }) => {
     expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
     expect(wrapper.html()).toMatchSnapshot()
 
-    expect('immediate parent of v-radio-group').toHaveBeenTipped()
+    expect('The v-radio component must be used inside a v-radio-group.').toHaveBeenTipped()
   })
 
   it('should render proper input name', () => {
     const wrapper = mount(VRadio, {
       provide: {
         name: () => 'name',
-        registerChild: () => {},
-        unregisterChild: () => {},
         isMandatory: () => false
       }
     })
@@ -105,7 +95,7 @@ test('VRadio.vue', ({ mount }) => {
     expect(input.getAttribute('name')).toBe('name')
     expect(wrapper.html()).toMatchSnapshot()
 
-    expect('immediate parent of v-radio-group').toHaveBeenTipped()
+    expect('The v-radio component must be used inside a v-radio-group.').toHaveBeenTipped()
   })
 
   it('should register and unregister', () => {
@@ -113,10 +103,13 @@ test('VRadio.vue', ({ mount }) => {
     const unregister = jest.fn()
 
     const wrapper = mount(VRadio, {
+      attachToDocument: true,
       provide: {
         name: () => 'name',
-        registerChild: register,
-        unregisterChild: unregister,
+        radio: {
+          register: register,
+          unregister: unregister
+        },
         isMandatory: () => false
       }
     })
@@ -124,8 +117,6 @@ test('VRadio.vue', ({ mount }) => {
     expect(register).toHaveBeenCalled()
     wrapper.destroy()
     expect(unregister).toHaveBeenCalled()
-
-    expect('immediate parent of v-radio-group').toHaveBeenTipped()
   })
 
   it('should not render ripple when ripple prop is false', () => {
@@ -135,8 +126,6 @@ test('VRadio.vue', ({ mount }) => {
       },
       provide: {
         name: () => 'name',
-        registerChild: () => {},
-        unregisterChild: () => {},
         isMandatory: () => false
       }
     })
@@ -145,7 +134,7 @@ test('VRadio.vue', ({ mount }) => {
 
     expect(ripple.length).toBe(0)
 
-    expect('immediate parent of v-radio-group').toHaveBeenTipped()
+    expect('The v-radio component must be used inside a v-radio-group.').toHaveBeenTipped()
   })
 
   it('should render ripple with data attribute when ripple prop is true', () => {
@@ -155,8 +144,6 @@ test('VRadio.vue', ({ mount }) => {
       },
       provide: {
         name: () => 'name',
-        registerChild: () => {},
-        unregisterChild: () => {},
         isMandatory: () => false
       }
     })
@@ -165,6 +152,6 @@ test('VRadio.vue', ({ mount }) => {
 
     expect(ripple.getAttribute('data-ripple')).toBe('true')
 
-    expect('immediate parent of v-radio-group').toHaveBeenTipped()
+    expect('The v-radio component must be used inside a v-radio-group.').toHaveBeenTipped()
   })
 })

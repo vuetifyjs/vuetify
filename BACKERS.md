@@ -4,9 +4,9 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 
 ### $500+
 - [LMAX Exchange](https://www.lmax.com/)
+- [Intygrate](http://intygrate.com/)
 
 ### $250+
-- [Intygrate](http://intygrate.com/)
 - [Eikos Partners](http://www.eikospartners.com/)
 - [rateGenius](https://application.rategenius.com/)
 
@@ -36,9 +36,9 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Robin Paolini
 - [Integra CCS](https://www.integraccs.com/)
 - Joel Hatch
+- Pierre Vanhulst
 
 ### $10+
-
 - Kevin Pilard
 - Espen Bratberg
 - Ivan Vedernikov
@@ -74,3 +74,7 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Reto Aebersold
 - Max Matteo Staack
 - Mark Freedman
+- Fernando Rosentalski Neto
+- eric
+- Jon K
+- Alvin Wang

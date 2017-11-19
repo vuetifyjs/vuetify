@@ -26,6 +26,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
           <div class="btn__content">
             <i aria-hidden="true"
                class="material-icons icon"
+               style="font-size: 24px;"
             >
               chevron_left
             </i>
@@ -43,6 +44,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates 1`] = `
           <div class="btn__content">
             <i aria-hidden="true"
                class="material-icons icon"
+               style="font-size: 24px;"
             >
               chevron_right
             </i>
@@ -412,6 +414,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates and pick-month 
           <div class="btn__content">
             <i aria-hidden="true"
                class="material-icons icon"
+               style="font-size: 24px;"
             >
               chevron_left
             </i>
@@ -429,6 +432,7 @@ exports[`VDatePicker.js should match snapshot with allowed dates and pick-month 
           <div class="btn__content">
             <i aria-hidden="true"
                class="material-icons icon"
+               style="font-size: 24px;"
             >
               chevron_right
             </i>
@@ -589,6 +593,7 @@ exports[`VDatePicker.js should match snapshot with colored date picker 1`] = `
           <div class="btn__content">
             <i aria-hidden="true"
                class="material-icons icon"
+               style="font-size: 24px;"
             >
               chevron_left
             </i>
@@ -606,6 +611,7 @@ exports[`VDatePicker.js should match snapshot with colored date picker 1`] = `
           <div class="btn__content">
             <i aria-hidden="true"
                class="material-icons icon"
+               style="font-size: 24px;"
             >
               chevron_right
             </i>
@@ -964,6 +970,7 @@ exports[`VDatePicker.js should match snapshot with colored date picker 2`] = `
           <div class="btn__content">
             <i aria-hidden="true"
                class="material-icons icon"
+               style="font-size: 24px;"
             >
               chevron_left
             </i>
@@ -981,6 +988,7 @@ exports[`VDatePicker.js should match snapshot with colored date picker 2`] = `
           <div class="btn__content">
             <i aria-hidden="true"
                class="material-icons icon"
+               style="font-size: 24px;"
             >
               chevron_right
             </i>
@@ -1339,6 +1347,7 @@ exports[`VDatePicker.js should match snapshot with colored month picker 1`] = `
           <div class="btn__content">
             <i aria-hidden="true"
                class="material-icons icon"
+               style="font-size: 24px;"
             >
               chevron_left
             </i>
@@ -1356,6 +1365,7 @@ exports[`VDatePicker.js should match snapshot with colored month picker 1`] = `
           <div class="btn__content">
             <i aria-hidden="true"
                class="material-icons icon"
+               style="font-size: 24px;"
             >
               chevron_right
             </i>
@@ -1516,6 +1526,7 @@ exports[`VDatePicker.js should match snapshot with colored month picker 2`] = `
           <div class="btn__content">
             <i aria-hidden="true"
                class="material-icons icon"
+               style="font-size: 24px;"
             >
               chevron_left
             </i>
@@ -1533,6 +1544,7 @@ exports[`VDatePicker.js should match snapshot with colored month picker 2`] = `
           <div class="btn__content">
             <i aria-hidden="true"
                class="material-icons icon"
+               style="font-size: 24px;"
             >
               chevron_right
             </i>
@@ -1693,6 +1705,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
           <div class="btn__content">
             <i aria-hidden="true"
                class="material-icons icon"
+               style="font-size: 24px;"
             >
               chevron_left
             </i>
@@ -1710,6 +1723,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
           <div class="btn__content">
             <i aria-hidden="true"
                class="material-icons icon"
+               style="font-size: 24px;"
             >
               chevron_right
             </i>
@@ -2079,6 +2093,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
           <div class="btn__content">
             <i aria-hidden="true"
                class="material-icons icon"
+               style="font-size: 24px;"
             >
               chevron_left
             </i>
@@ -2096,6 +2111,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
           <div class="btn__content">
             <i aria-hidden="true"
                class="material-icons icon"
+               style="font-size: 24px;"
             >
               chevron_right
             </i>
@@ -2465,6 +2481,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
           <div class="btn__content">
             <i aria-hidden="true"
                class="material-icons icon"
+               style="font-size: 24px;"
             >
               chevron_left
             </i>
@@ -2482,6 +2499,7 @@ exports[`VDatePicker.js should match snapshot with first day of week 1`] = `
           <div class="btn__content">
             <i aria-hidden="true"
                class="material-icons icon"
+               style="font-size: 24px;"
             >
               chevron_right
             </i>
@@ -3226,6 +3244,7 @@ exports[`VDatePicker.js should match snapshot with month formatting functions 1`
           <div class="btn__content">
             <i aria-hidden="true"
                class="material-icons icon"
+               style="font-size: 24px;"
             >
               chevron_left
             </i>
@@ -3243,6 +3262,7 @@ exports[`VDatePicker.js should match snapshot with month formatting functions 1`
           <div class="btn__content">
             <i aria-hidden="true"
                class="material-icons icon"
+               style="font-size: 24px;"
             >
               chevron_right
             </i>
@@ -3393,6 +3413,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
           <div class="btn__content">
             <i aria-hidden="true"
                class="material-icons icon"
+               style="font-size: 24px;"
             >
               chevron_left
             </i>
@@ -3410,6 +3431,7 @@ exports[`VDatePicker.js should match snapshot with no title 1`] = `
           <div class="btn__content">
             <i aria-hidden="true"
                class="material-icons icon"
+               style="font-size: 24px;"
             >
               chevron_right
             </i>
@@ -3779,6 +3801,7 @@ exports[`VDatePicker.js should match snapshot with pick-month prop 1`] = `
           <div class="btn__content">
             <i aria-hidden="true"
                class="material-icons icon"
+               style="font-size: 24px;"
             >
               chevron_left
             </i>
@@ -3796,6 +3819,7 @@ exports[`VDatePicker.js should match snapshot with pick-month prop 1`] = `
           <div class="btn__content">
             <i aria-hidden="true"
                class="material-icons icon"
+               style="font-size: 24px;"
             >
               chevron_right
             </i>
@@ -3956,6 +3980,7 @@ exports[`VDatePicker.js should match snapshot with title/header formatting funct
           <div class="btn__content">
             <i aria-hidden="true"
                class="material-icons icon"
+               style="font-size: 24px;"
             >
               chevron_left
             </i>
@@ -3973,6 +3998,7 @@ exports[`VDatePicker.js should match snapshot with title/header formatting funct
           <div class="btn__content">
             <i aria-hidden="true"
                class="material-icons icon"
+               style="font-size: 24px;"
             >
               chevron_right
             </i>
