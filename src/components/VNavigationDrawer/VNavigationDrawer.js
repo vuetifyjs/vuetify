@@ -168,7 +168,8 @@ export default {
         this.removeOverlay()
 
       if (prev == null ||
-        this.resizeIsDisabled
+        this.resizeIsDisabled ||
+        !this.reactsToMobile
       ) return
 
       this.isActive = !val
