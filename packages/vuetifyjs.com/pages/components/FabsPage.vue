@@ -9,11 +9,11 @@
     data: () => ({
       component: 'v-btn',
       name: 'fab',
-      usage: { file: 'promotedAction' },
+      usage: { file: 'promotedAction', uninverted: true },
       examples: [
         { file: 'small' },
-        { file: 'displayAnimation' },
-        { file: 'lateralScreens' },
+        { file: 'displayAnimation', uninverted: true },
+        { file: 'lateralScreens', uninverted: true },
         { file: 'speedDial' }
       ]
     })
