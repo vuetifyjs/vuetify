@@ -36,9 +36,12 @@
 </p>
 <br><br>
 <h2 align="center">Supporting Vuetify</h2>
-<p>Vuetify is an open source MIT project that has been made possible due to the generous contributions by <a href="https://github.com/vuetifyjs/vuetify/blob/dev/BACKERS.md">community backers</a>. If you are interested in supporting this project, please consider:</p>
+<p>Vuetify is an open source MIT project that has been made possible due to the generous contributions by <a href="https://github.com/vuetifyjs/vuetify/blob/dev/BACKERS.md">community backers</a>. If you are interested in supporting this project, please consider becoming a patron.</p>
 
-- [Becoming a Patreon backer](https://www.patreon.com/vuetify)
+<a href="https://www.patreon.com/vuetify">
+  <img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patron" />
+</a>
+
 <br><br>
 <h3 align="center">Patrons</h3>
 
