@@ -41,11 +41,11 @@ export default {
       default: 6000,
       validator: value => value > 0
     },
-    leftControlIcon: {
+    prependIcon: {
       type: [Boolean, String],
       default: 'chevron_left'
     },
-    rightControlIcon: {
+    appendIcon: {
       type: [Boolean, String],
       default: 'chevron_right'
     },
@@ -181,8 +181,8 @@ export default {
         }
       }]
     }, [
-      this.hideControls ? null : this.genIcon('left', this.leftControlIcon, this.prev),
-      this.hideControls ? null : this.genIcon('right', this.rightControlIcon, this.next),
+      this.hideControls ? null : this.genIcon('left', this.prependIcon, this.prev),
+      this.hideControls ? null : this.genIcon('right', this.appendIcon, this.next),
       this.hideDelimiters ? null : this.genDelimiters(),
       this.$slots.default
     ])
