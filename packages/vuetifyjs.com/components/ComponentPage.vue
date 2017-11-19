@@ -9,6 +9,8 @@
       component-example(
         :new-in="data.usage.new"
         :file="`${folder}/${data.usage.file}`"
+        :inverted="data.usage.inverted"
+        :has-inverted="!data.usage.uninverted"
         :id="`data.usage-${-1}`"
       )
         div(
@@ -48,6 +50,8 @@
         :header="`${genHeader(example)}`"
         :new-in="example.new"
         :file="`${folder}/${example.file}`"
+        :inverted="example.inverted"
+        :has-inverted="!example.uninverted"
         :id="`example-${i + 1}`"
         :key="i"
         v-for="(example, i) in data.examples"
