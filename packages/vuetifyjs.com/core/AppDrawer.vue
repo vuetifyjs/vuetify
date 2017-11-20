@@ -68,7 +68,6 @@
                 to: !subItem.target ? subItem.href : null, \
                 href: subItem.target && subItem.href \
               }"
-              exact
               ripple
               :disabled="subItem.disabled"
               :target="subItem.target"
