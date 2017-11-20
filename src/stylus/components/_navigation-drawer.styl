@@ -17,14 +17,14 @@ theme(navigation-drawer, "navigation-drawer")
   max-width: 100%
   overflow-y: auto
   overflow-x: hidden
-  -webkit-overflow-scrolling: touch
+  left: 0
   padding: 0 0 100px
   pointer-events: auto
-  transition: .2s $transition.fast-out-slow-in
   top: 0
-  left: 0
+  transition: .2s $transition.fast-out-slow-in
   will-change: transform
   z-index: 3
+  -webkit-overflow-scrolling: touch
 
   &__border
     position: absolute
@@ -37,14 +37,7 @@ theme(navigation-drawer, "navigation-drawer")
     &:after
       left: 0
       right: initial
-
-  &--close
-    &.navigation-drawer:not(.navigation-drawer--right)
-      transform: translateX(-100%)
-
-    &.navigation-drawer--right
-      transform: translateX(100%)
-
+  
   &--right
     left: auto
     right: 0
