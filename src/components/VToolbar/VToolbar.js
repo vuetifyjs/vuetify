@@ -116,15 +116,23 @@ export default {
       return this.$vuetify.application.right
     },
     shouldScroll () {
-      const thresholdDifference = this.savedScroll - this.scrollThreshold
-
-      if (this.invertedScroll) {
-        return this.currentScroll < this.scrollThreshold
+      switch (true) {
+        // height is less than scroll
+        case this.currentScroll < this.computedHeight:
+          return this.invertedScroll
+        // scrolling up and not inverted
+        case this.isScrollingUp && !this.invertedScroll:
+          return this.savedScroll - this.scrollThreshold < this.currentScroll
+        // scrolling up and inverted
+        case this.isScrollingUp && this.invertedScroll:
+          return this.computedHeight > this.currentScroll
+        // scrolling down and inverted
+        case this.invertedScroll:
+          return this.currentScroll - this.scrollThreshold < this.savedScroll
+        // scrolling down and not inverted
+        default:
+          return this.currentScroll - this.computedHeight > this.savedScroll
       }
-
-      if (this.computedHeight > this.currentScroll) return false
-
-      return thresholdDifference < this.currentScroll
     },
     styles () {
       const style = {}
@@ -152,10 +160,8 @@ export default {
     isScrolling (val) {
       this.updateApplication()
     },
-    isScrollingUp (val) {
-      this.savedScroll = !val
-        ? 0
-        : this.currentScroll
+    isScrollingUp () {
+      this.savedScroll = this.currentScroll
     }
   },
 
