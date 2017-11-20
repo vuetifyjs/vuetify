@@ -151,9 +151,10 @@ theme(list, "list")
       font-size: $subheader-dense-font-size
       height: $list-dense-subheader-height
 
-    .list--group
+    .list__group
       .subheader
         height $list-dense-subheader-group-height
+
     .list__tile
       font-size: $list-item-dense-font-size
 
@@ -200,10 +201,11 @@ theme(list, "list")
 
       .list__tile__avatar
         margin-top: $list-item-dense-avatar-triple-margin-top
-
-  &--group
-    position: relative
+      
+  &__group
     padding: 0
+    position: relative
+    transition: inherit
 
     &:before,
     &:after
@@ -216,10 +218,6 @@ theme(list, "list")
     &--active ~ .list__group
       &:before
         display: none
-      
-  &__group
-    position: relative
-    transition: inherit
 
     &__header
       align-items: center
