@@ -16,6 +16,7 @@ export default {
   ],
 
   data: () => ({
+    activeTimeout: null,
     currentScroll: 0,
     heights: {
       mobileLandscape: 48,
@@ -23,9 +24,11 @@ export default {
       desktop: 64,
       dense: 48
     },
+    isActiveProxy: false,
     isExtended: false,
     isScrollingUp: false,
     previousScroll: null,
+    previousScrollDirection: null,
     target: null
   }),
 
@@ -84,7 +87,7 @@ export default {
     classes () {
       return this.addBackgroundColorClassChecks({
         'toolbar': true,
-        'elevation-0': this.flat || (!this.isActive && !this.tabs),
+        'elevation-0': this.flat || (!this.isActiveProxy && !this.tabs),
         'toolbar--absolute': this.absolute,
         'toolbar--card': this.card,
         'toolbar--clipped': this.clippedLeft || this.clippedRight,
@@ -120,7 +123,7 @@ export default {
     styles () {
       const style = {}
 
-      if (!this.isActive) {
+      if (!this.isActiveProxy) {
         style.transform = `translateY(-${this.computedHeight}px)`
       }
 
@@ -134,6 +137,21 @@ export default {
   },
 
   watch: {
+    // This is to avoid an accidental
+    // false positive when scrolling.
+    // sometimes for 1 frame it appears
+    // as if the direction has changed
+    // but it actually has not
+    isActive: {
+      immediate: true,
+      handler (val) {
+        clearTimeout(this.activeTimeout)
+
+        this.activeTimeout = setTimeout(() => {
+          this.isActiveProxy = val
+        }, 20)
+      }
+    },
     clippedLeft (val) {
       this.updateApplication()
     },
