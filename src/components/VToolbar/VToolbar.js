@@ -26,7 +26,6 @@ export default {
     isExtended: false,
     isScrollingUp: false,
     previousScroll: null,
-    savedScroll: 0,
     target: null
   }),
 
@@ -85,7 +84,7 @@ export default {
     classes () {
       return this.addBackgroundColorClassChecks({
         'toolbar': true,
-        'elevation-0': this.flat || (this.isScrolling && !this.tabs),
+        'elevation-0': this.flat || (!this.isActive && !this.tabs),
         'toolbar--absolute': this.absolute,
         'toolbar--card': this.card,
         'toolbar--clipped': this.clippedLeft || this.clippedRight,
@@ -99,12 +98,6 @@ export default {
         'theme--light': this.light
       })
     },
-    isScrolling () {
-      if (!this.scrollOffScreen) return false
-      if (this.manualScroll) return this.manualScroll
-
-      return this.shouldScroll
-    },
     paddingLeft () {
       if (!this.app || this.clippedLeft) return 0
 
@@ -115,29 +108,19 @@ export default {
 
       return this.$vuetify.application.right
     },
-    shouldScroll () {
-      switch (true) {
-        // height is less than scroll
-        case this.currentScroll < this.computedHeight:
-          return this.invertedScroll
-        // scrolling up and not inverted
-        case this.isScrollingUp && !this.invertedScroll:
-          return this.savedScroll - this.scrollThreshold < this.currentScroll
-        // scrolling up and inverted
-        case this.isScrollingUp && this.invertedScroll:
-          return this.computedHeight > this.currentScroll
-        // scrolling down and inverted
-        case this.invertedScroll:
-          return this.currentScroll - this.scrollThreshold < this.savedScroll
-        // scrolling down and not inverted
-        default:
-          return this.currentScroll - this.computedHeight > this.savedScroll
-      }
+    isActive () {
+      if (!this.scrollOffScreen) return true
+      if (this.manualScroll) return this.manualScroll
+
+      return this.invertedScroll
+        ? this.currentScroll > this.scrollThreshold
+        : this.currentScroll < this.scrollThreshold ||
+          this.isScrollingUp
     },
     styles () {
       const style = {}
 
-      if (this.isScrolling) {
+      if (!this.isActive) {
         style.transform = `translateY(-${this.computedHeight}px)`
       }
 
@@ -159,9 +142,6 @@ export default {
     },
     isScrolling (val) {
       this.updateApplication()
-    },
-    isScrollingUp () {
-      this.savedScroll = this.currentScroll
     }
   },
 
