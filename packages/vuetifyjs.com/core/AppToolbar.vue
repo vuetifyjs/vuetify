@@ -3,8 +3,9 @@
     color="primary"
     app
     dark
-    :fixed="fixed"
-    :manual-scroll="isManualScrolling"
+    fixed
+    :inverted-scroll="isManualScrolling"
+    :scroll-off-screen="isManualScrolling"
     ref="toolbar"
   )#app-toolbar
     v-toolbar-side-icon(@click="$store.commit('app/DRAWER_TOGGLE')")
@@ -16,7 +17,11 @@
     v-toolbar-title Vuetify
     v-spacer
     v-toolbar-items
-      v-btn(flat)
+      v-btn(
+        flat
+        v-if="$route.path === '/'"
+        to="/getting-started/quick-start"
+      )
         span.hidden-md-and-up Docs
         span.hidden-sm-and-down Documentation
       v-btn(flat) Blog
@@ -36,12 +41,11 @@
 
     watch: {
       $route (current) {
-        const fixed = current.path !== '/'
-        const duration = fixed ? 400 : 0
+        const isManualScrolling = current.path === '/'
+        const duration = !isManualScrolling ? 400 : 0
 
         setTimeout(() => {
-          this.fixed = fixed
-          this.isManualScrolling = !duration
+          this.isManualScrolling = isManualScrolling
         }, duration)
       }
     },
@@ -49,7 +53,6 @@
     mounted () {
       const fixed = this.$route.path !== '/'
       this.isManualScrolling = !fixed
-      this.fixed = fixed
     }
   }
 </script>
