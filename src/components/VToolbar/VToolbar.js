@@ -158,6 +158,9 @@ export default {
     clippedRight (val) {
       this.updateApplication()
     },
+    invertedScroll () {
+      this.updateApplication()
+    },
     isScrolling (val) {
       this.updateApplication()
     }
@@ -188,8 +191,8 @@ export default {
     updateApplication () {
       if (!this.app) return
 
-      this.$vuetify.application.top = !this.fixed &&
-        !this.absolute ||
+      this.$vuetify.application.top = (!this.fixed &&
+        !this.absolute) ||
         this.invertedScroll
         ? 0
         : this.computedHeight
