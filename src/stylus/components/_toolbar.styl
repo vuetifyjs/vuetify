@@ -10,7 +10,7 @@ theme(toolbar, "toolbar")
 
 .toolbar
   position: relative
-  transition: .2s $transition.fast-out-slow-in
+  transition: none
   width: 100%
   will-change: padding-left
   elevation(4)
@@ -117,6 +117,9 @@ theme(toolbar, "toolbar")
     display: inline-flex
     margin: 16px
     width: auto
+  
+  &--is-booted
+    transition: .2s $transition.fast-out-slow-in
   
   &--clipped
     z-index: 3
