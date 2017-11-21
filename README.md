@@ -7,8 +7,8 @@
   <a href="https://travis-ci.org/vuetifyjs/vuetify">
     <img src="https://img.shields.io/travis/vuetifyjs/vuetify.svg" alt="travis ci badge">
   </a>
-  <a href="https://codeclimate.com/github/vuetifyjs/vuetify/test_coverage">
-    <img src="https://img.shields.io/codeclimate/coverage/github/vuetifyjs/vuetify.svg" alt="Coverage">
+  <a href="https://codecov.io/gh/vuetifyjs/vuetify">
+    <img src="https://img.shields.io/codecov/c/github/vuetifyjs/vuetify.svg" alt="Coverage">
   </a>
   <a href="https://codebeat.co/projects/github-com-vuetifyjs-vuetify-dev">
     <img src="https://codebeat.co/badges/b2d1ce87-848b-440e-9d7e-df9883c0cd93" alt="codebeat badge">
