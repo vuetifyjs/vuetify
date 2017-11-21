@@ -4,8 +4,7 @@
       <v-btn color="primary" @click="alert = !alert">Toggle</v-btn>
     </div>
     <v-alert
-      color="success"
-      icon="check_circle"
+      type="success"
       :value="alert"
       transition="scale-transition"
     >
