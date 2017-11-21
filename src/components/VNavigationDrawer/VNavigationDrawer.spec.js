@@ -162,4 +162,27 @@ test('VNavigationDrawer', () => {
     wrapper.setProps({ miniVariant: false })
     expect(wrapper.vm.$vuetify.application.left).toBe(300)
   })
+
+  it('should not remain mobile when temporary is toggled', async () => {
+    await resizeWindow(800)
+    const wrapper = mount(VNavigationDrawer, { propsData: {
+      temporary: true
+    }})
+
+    await resizeWindow(1920)
+    expect(wrapper.vm.isMobile).toBe(false)
+  })
+
+  it('should stay closed when mobile and temporary is enabled', async () => {
+    await resizeWindow(800)
+    const wrapper = mount(VNavigationDrawer)
+    const input = jest.fn(value => wrapper.setProps({ value }))
+    wrapper.vm.$on('input', input)
+
+    wrapper.setProps({ temporary: true })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isActive).toBe(false)
+    expect(input.mock.calls).toHaveLength(0)
+  })
 })

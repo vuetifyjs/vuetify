@@ -7,7 +7,7 @@ import { inject as RegistrableInject } from '../../mixins/registrable'
 export default {
   name: 'v-carousel-item',
 
-  mixins: [RegistrableInject('v-carousel-item', 'v-carousel')],
+  mixins: [RegistrableInject('carousel', 'v-carousel-item', 'v-carousel')],
 
   inheritAttrs: false,
 
@@ -43,11 +43,11 @@ export default {
   },
 
   mounted () {
-    this.register(this._uid, this.open)
+    this.carousel.register(this._uid, this.open)
   },
 
   beforeDestroy () {
-    this.unregister(this._uid, this.open)
+    this.carousel.unregister(this._uid, this.open)
   },
 
   render (h) {

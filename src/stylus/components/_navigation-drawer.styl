@@ -8,27 +8,8 @@ navigation-drawer($material)
     .navigation-drawer__border
       background-color: $material.dividers
 
-  a:not(.list__tile--active),
-  .list
-    color: $material.text.primary
-
   .divider
     background-color: $material.dividers
-
-  .list
-    &__tile:not(.list__tile--active)
-      color: $material.text.primary
-
-      .icon
-        color: $material.icons.active
-
-    &__tile__sub-title
-      color: $material.text.secondary
-
-  .list--group__header--active
-    .list__tile, + .list--group
-      &:after
-        background: $material.dividers
 
 theme(navigation-drawer, "navigation-drawer")
 
@@ -36,14 +17,17 @@ theme(navigation-drawer, "navigation-drawer")
   max-width: 100%
   overflow-y: auto
   overflow-x: hidden
-  -webkit-overflow-scrolling: touch
+  left: 0
   padding: 0 0 100px
   pointer-events: auto
-  transition: .2s $transition.fast-out-slow-in
   top: 0
-  left: 0
+  transition: none
   will-change: transform
   z-index: 3
+  -webkit-overflow-scrolling: touch
+
+  &--is-booted
+    transition: .2s $transition.fast-out-slow-in
 
   &__border
     position: absolute
@@ -56,14 +40,7 @@ theme(navigation-drawer, "navigation-drawer")
     &:after
       left: 0
       right: initial
-
-  &--close
-    &.navigation-drawer:not(.navigation-drawer--right)
-      transform: translateX(-100%)
-
-    &.navigation-drawer--right
-      transform: translateX(100%)
-
+  
   &--right
     left: auto
     right: 0
