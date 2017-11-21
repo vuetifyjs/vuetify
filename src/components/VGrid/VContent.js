@@ -1,7 +1,13 @@
+// Styles
 require('../../stylus/components/_content.styl')
+
+// Mixins
+import SSRBootable from '../../mixins/ssr-bootable'
 
 export default {
   name: 'v-content',
+
+  mixins: [SSRBootable],
 
   props: {
     tag: {
@@ -11,6 +17,11 @@ export default {
   },
 
   computed: {
+    classes () {
+      return {
+        'content--is-booted': this.isBooted
+      }
+    },
     styles () {
       const {
         bar, top, right, bottom, left
@@ -35,6 +46,7 @@ export default {
   render (h) {
     const data = {
       staticClass: 'content',
+      'class': this.classes,
       style: this.styles,
       ref: 'content'
     }

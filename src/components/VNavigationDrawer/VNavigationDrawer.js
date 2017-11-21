@@ -3,6 +3,7 @@ require('../../stylus/components/_navigation-drawer.styl')
 // Mixins
 import Applicationable from '../../mixins/applicationable'
 import Overlayable from '../../mixins/overlayable'
+import SSRBootable from '../../mixins/ssr-bootable'
 import Themeable from '../../mixins/themeable'
 
 // Directives
@@ -16,6 +17,7 @@ export default {
   mixins: [
     Applicationable,
     Overlayable,
+    SSRBootable,
     Themeable
   ],
 
@@ -88,6 +90,7 @@ export default {
         'navigation-drawer--close': !this.isActive,
         'navigation-drawer--fixed': this.fixed,
         'navigation-drawer--floating': this.floating,
+        'navigation-drawer--is-booted': this.isBooted,
         'navigation-drawer--is-mobile': this.isMobile,
         'navigation-drawer--mini-variant': this.miniVariant,
         'navigation-drawer--open': this.isActive,
@@ -220,16 +223,8 @@ export default {
     }
   },
 
-  created () {
-    if (this.permanent) {
-      this.isActive = true
-    } else if (this.stateless ||
-      this.value != null
-    ) {
-      this.isActive = this.value
-    } else if (!this.temporary) {
-      this.isActive = !this.isMobile
-    }
+  beforeMount () {
+    this.init()
   },
 
   destroyed () {
@@ -266,6 +261,23 @@ export default {
       })
 
       return directives
+    },
+    /**
+     * Sets state before mount to avoid
+     * entry transitions in SSR
+     * 
+     * @return {void}
+     */
+    init () {
+      if (this.permanent) {
+        this.isActive = true
+      } else if (this.stateless ||
+        this.value != null
+      ) {
+        this.isActive = this.value
+      } else if (!this.temporary) {
+        this.isActive = !this.isMobile
+      }
     },
     swipeRight (e) {
       if (this.isActive && !this.right) return

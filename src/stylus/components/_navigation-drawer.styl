@@ -21,10 +21,13 @@ theme(navigation-drawer, "navigation-drawer")
   padding: 0 0 100px
   pointer-events: auto
   top: 0
-  transition: .2s $transition.fast-out-slow-in
+  transition: none
   will-change: transform
   z-index: 3
   -webkit-overflow-scrolling: touch
+
+  &--is-booted
+    transition: .2s $transition.fast-out-slow-in
 
   &__border
     position: absolute
