@@ -182,4 +182,15 @@ test('VDataTable.vue', () => {
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
+
+  it('should not filter items if search is empty', async () => {
+    const wrapper = mount(VDataTable, dataTableTestDataFilter())
+
+    wrapper.setProps({
+      search: '    '
+    })
+    expect(wrapper.instance().filteredItems.length).toBe(1)
+
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 })
