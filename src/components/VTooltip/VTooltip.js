@@ -126,6 +126,10 @@ export default {
     }
   },
 
+  mounted () {
+    this.value && this.callActivate()
+  },
+
   render (h) {
     const tooltip = h('div', {
       staticClass: 'tooltip__content',
