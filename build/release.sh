@@ -13,7 +13,7 @@ echo #
 
 read -e -p "Enter release version: " VERSION
 
-TAG=$(node ./parse-npm-tag.js ${VERSION})
+TAG=$(node ./build/parse-npm-tag.js ${VERSION})
 
 if [ "$BRANCH" != 'master' ] && [ "$TAG" == 'latest' ]; then
   echo #
