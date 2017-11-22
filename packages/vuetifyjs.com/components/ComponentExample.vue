@@ -19,7 +19,7 @@
       v-toolbar(flat dense card).pr-1
         v-spacer
         v-tooltip(top v-if="hasInverted")
-          v-btn(icon slot="activator" @click="inverted = !inverted")
+          v-btn(icon slot="activator" @click="invertedProxy = !invertedProxy")
             v-icon(color="grey darken-1") invert_colors
           span Invert colors
         v-tooltip(top)
@@ -96,6 +96,7 @@
         tabs: ['template', 'script', 'style'],
         component: null,
         instance: null,
+        invertedProxy: this.inverted,
         uid: null,
         panel: false,
         parsed: {
@@ -127,9 +128,9 @@
       },
       exampleClasses () {
         return {
-          'theme--dark': this.inverted,
-          'theme--light': !this.inverted,
-          'grey lighten-3': !this.inverted
+          'theme--dark': this.invertedProxy,
+          'theme--light': !this.invertedProxy,
+          'grey lighten-3': !this.invertedProxy
         }
       }
     },
