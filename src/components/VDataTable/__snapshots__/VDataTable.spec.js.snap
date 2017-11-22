@@ -94,7 +94,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                            data-ripple="false"
                       >
                         <ul class="list">
-                          <li class>
+                          <li>
                             <a class="list__tile list__tile--link"
                                data-ripple="true"
                             >
@@ -105,7 +105,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                               </div>
                             </a>
                           </li>
-                          <li class>
+                          <li>
                             <a class="list__tile list__tile--link"
                                data-ripple="true"
                             >
@@ -116,7 +116,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                               </div>
                             </a>
                           </li>
-                          <li class>
+                          <li>
                             <a class="list__tile list__tile--link"
                                data-ripple="true"
                             >
@@ -127,7 +127,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                               </div>
                             </a>
                           </li>
-                          <li class>
+                          <li>
                             <a class="list__tile list__tile--link"
                                data-ripple="true"
                             >
@@ -288,9 +288,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
                            style="height: auto;"
                            data-ripple="false"
                       >
-                        <ul data-uid="5"
-                            class="list"
-                        >
+                        <ul class="list">
                           <li>
                             <a class="list__tile list__tile--link"
                                data-ripple="true"
@@ -487,9 +485,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
                            style="height: auto;"
                            data-ripple="false"
                       >
-                        <ul data-uid="31"
-                            class="list"
-                        >
+                        <ul class="list">
                           <li>
                             <a class="list__tile list__tile--link"
                                data-ripple="true"
