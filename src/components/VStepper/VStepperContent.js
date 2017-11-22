@@ -83,8 +83,10 @@ export default {
   },
 
   methods: {
-    onTransition () {
-      if (!this.isActive) return
+    onTransition (e) {
+      if (!this.isActive ||
+        e.propertyName !== 'height'
+      ) return
 
       this.height = 'auto'
     },
