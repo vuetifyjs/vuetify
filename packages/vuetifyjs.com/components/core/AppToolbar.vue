@@ -50,7 +50,7 @@
       }
     },
 
-    mounted () {
+    created () {
       const fixed = this.$route.path !== '/'
       this.isManualScrolling = !fixed
     }

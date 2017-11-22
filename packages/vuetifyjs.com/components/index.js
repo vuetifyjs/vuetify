@@ -1,4 +1,4 @@
-import AppAlert from '../core/AppAlert'
+import AppAlert from './core/AppAlert'
 import Codepen from './Codepen'
 import ComponentExample from './ComponentExample'
 import ComponentPage from './ComponentPage'

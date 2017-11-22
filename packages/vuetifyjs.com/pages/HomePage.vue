@@ -143,7 +143,7 @@
 
 <script>
   // Components
-  import HomeFooter from '@components/HomeFooter'
+  import HomeFooter from '@/components/HomeFooter'
 
   // Utilities
   import { mapState } from 'vuex'

@@ -19,18 +19,7 @@ module.exports = {
   resolve: {
     extensions: ['*', '.js', '.json', '.vue'],
     alias: {
-      '@assets': resolve('../assets'),
-      '@components': resolve('../components'),
-      '@core': resolve('../core'),
-      '@examples': resolve('../pages/examples'),
-      '@layouts': resolve('../layouts'),
-      '@i18n': resolve('../i18n'),
-      '@mixins': resolve('../mixins'),
-      '@pages': resolve('../pages'),
-      '@public': resolve('../public'),
-      '@router': resolve('../router'),
-      '@static': resolve('../static'),
-      '@store': resolve('../store'),
+      '@': resolve('../'),
       'vue$': 'vue/dist/vue.common.js'
     }
   },
