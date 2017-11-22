@@ -3,17 +3,7 @@ import ExpandTransitionGenerator from '../../transitions/expand-transition'
 export default {
   methods: {
     genTBody () {
-      const children = []
-
-      if (!this.itemsLength && !this.items.length) {
-        const noData = this.$slots['no-data'] || this.noDataText
-        children.push(this.genEmptyBody(noData))
-      } else if (!this.filteredItems.length) {
-        const noResults = this.$slots['no-results'] || this.noResultsText
-        children.push(this.genEmptyBody(noResults))
-      } else {
-        children.push(this.genFilteredItems())
-      }
+      const children = this.genItems()
 
       return this.$createElement('tbody', children)
     },
@@ -40,41 +30,16 @@ export default {
 
       return this.genTR([transition], { class: 'datatable__expand-row' })
     },
-    createProps (item, index) {
-      const props = { item, index }
-      const key = this.itemKey
-
-      Object.defineProperty(props, 'selected', {
-        get: () => this.selected[item[this.itemKey]],
-        set: (value) => {
-          let selected = this.value.slice()
-          if (value) selected.push(item)
-          else selected = selected.filter(i => i[key] !== item[key])
-          this.$emit('input', selected)
-        }
-      })
-
-      Object.defineProperty(props, 'expanded', {
-        get: () => this.expanded[item[this.itemKey]],
-        set: (value) => {
-          if (!this.expand) {
-            Object.keys(this.expanded).forEach((key) => {
-              this.$set(this.expanded, key, false)
-            })
-          }
-          this.$set(this.expanded, item[this.itemKey], value)
-        }
-      })
-
-      return props
-    },
     genFilteredItems () {
+      if (!this.$scopedSlots.items) {
+        return null
+      }
+
       const rows = []
-      this.filteredItems.forEach((item, index) => {
+      for (let index = 0, len = this.filteredItems.length; index < len; ++index) {
+        const item = this.filteredItems[index]
         const props = this.createProps(item, index)
-        const row = this.$scopedSlots.items
-          ? this.$scopedSlots.items(props)
-          : []
+        const row = this.$scopedSlots.items(props)
 
         rows.push(this.needsTR(row)
           ? this.genTR(row, {
@@ -86,11 +51,11 @@ export default {
           const expandRow = this.genExpandedRow(props)
           rows.push(expandRow)
         }
-      })
+      }
 
       return rows
     },
-    genEmptyBody (content) {
+    genEmptyItems (content) {
       return this.genTR([this.$createElement('td', {
         'class': 'text-xs-center',
         attrs: { colspan: '100%' }

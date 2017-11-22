@@ -41,7 +41,7 @@ export default {
         ? 'text--disabled'
         : this.color
           ? this.addTextColorClassChecks()
-          : [this.defaultColor]
+          : this.defaultColor
     },
     classes () {
       return {
