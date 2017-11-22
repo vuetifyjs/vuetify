@@ -190,6 +190,7 @@ export default {
       ) return
 
       this.isActive = !val
+      this.updateApplication()
     },
     miniVariant () {
       this.updateApplication()
