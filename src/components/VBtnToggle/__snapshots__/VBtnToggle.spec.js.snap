@@ -249,7 +249,10 @@ exports[`VBtnToggle.vue should toggle values of any type 1`] = `
           data-ripple="true"
   >
     <div class="btn__content">
-      <i class="material-icons icon">
+      <i aria-hidden="true"
+         class="material-icons icon"
+         style="font-size: 24px;"
+      >
         add
       </i>
     </div>
@@ -259,7 +262,10 @@ exports[`VBtnToggle.vue should toggle values of any type 1`] = `
           data-ripple="true"
   >
     <div class="btn__content">
-      <i class="material-icons icon">
+      <i aria-hidden="true"
+         class="material-icons icon"
+         style="font-size: 24px;"
+      >
         add
       </i>
     </div>
@@ -269,7 +275,10 @@ exports[`VBtnToggle.vue should toggle values of any type 1`] = `
           data-ripple="true"
   >
     <div class="btn__content">
-      <i class="material-icons icon">
+      <i aria-hidden="true"
+         class="material-icons icon"
+         style="font-size: 24px;"
+      >
         add
       </i>
     </div>
@@ -280,7 +289,10 @@ exports[`VBtnToggle.vue should toggle values of any type 1`] = `
           data-ripple="true"
   >
     <div class="btn__content">
-      <i class="material-icons icon">
+      <i aria-hidden="true"
+         class="material-icons icon"
+         style="font-size: 24px;"
+      >
         add
       </i>
     </div>
@@ -291,7 +303,10 @@ exports[`VBtnToggle.vue should toggle values of any type 1`] = `
           data-ripple="true"
   >
     <div class="btn__content">
-      <i class="material-icons icon">
+      <i aria-hidden="true"
+         class="material-icons icon"
+         style="font-size: 24px;"
+      >
         add
       </i>
     </div>
@@ -302,7 +317,10 @@ exports[`VBtnToggle.vue should toggle values of any type 1`] = `
           data-ripple="true"
   >
     <div class="btn__content">
-      <i class="material-icons icon">
+      <i aria-hidden="true"
+         class="material-icons icon"
+         style="font-size: 24px;"
+      >
         add
       </i>
     </div>
@@ -313,7 +331,10 @@ exports[`VBtnToggle.vue should toggle values of any type 1`] = `
           data-ripple="true"
   >
     <div class="btn__content">
-      <i class="material-icons icon">
+      <i aria-hidden="true"
+         class="material-icons icon"
+         style="font-size: 24px;"
+      >
         add
       </i>
     </div>

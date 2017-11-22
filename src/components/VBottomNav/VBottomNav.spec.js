@@ -1,7 +1,7 @@
 import VBottomNav from './VBottomNav'
 import VBtn from '../VBtn'
 import { test } from '~util/testing'
-import Vue from 'vue/dist/vue.common'
+import Vue from 'vue'
 
 function createBtn (val = null) {
   const options = {

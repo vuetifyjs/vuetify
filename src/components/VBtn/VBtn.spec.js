@@ -106,8 +106,8 @@ test('VBtn.js', ({ mount, compileToFunctions }) => {
     const wrapper = mount(VBtn, {
       provide: {
         buttonGroup: {
-          registerChild: register,
-          unregisterChild: unregister
+          register: register,
+          unregister: unregister
         }
       }
     })

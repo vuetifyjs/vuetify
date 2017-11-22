@@ -1,17 +1,12 @@
+import { provide as RegistrableProvide } from './registrable'
+
 export default {
+  mixins: [RegistrableProvide('buttonGroup')],
+
   data () {
     return {
       buttons: [],
       listeners: []
-    }
-  },
-
-  provide () {
-    return {
-      buttonGroup: {
-        registerChild: this.registerChild,
-        unregisterChild: this.unregisterChild
-      }
     }
   },
 
@@ -63,13 +58,13 @@ export default {
         this.buttons[selected[0]].$el.setAttribute('data-only-child', true)
       }
     },
-    registerChild (button) {
+    register (button) {
       const index = this.buttons.length
       this.buttons.push(button)
       this.listeners.push(this.updateValue.bind(this, index))
       button.$on('click', this.listeners[index])
     },
-    unregisterChild (button) {
+    unregister (button) {
       const index = this.buttons.indexOf(button)
       if (index === -1) {
         return

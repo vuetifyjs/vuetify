@@ -2,7 +2,7 @@ import VBtnToggle from './VBtnToggle'
 import VBtn from '../VBtn'
 import VIcon from '../VIcon'
 import { test } from '~util/testing'
-import Vue from 'vue/dist/vue.common'
+import Vue from 'vue'
 
 function createBtn (val = null) {
   const options = {
@@ -26,11 +26,11 @@ function createFakeBtn() {
     inject: ['buttonGroup'],
     methods: {
       testUnregister() {
-        this.buttonGroup.unregisterChild(this)
+        this.buttonGroup.unregister(this)
       }
     },
     mounted() {
-      this.buttonGroup.registerChild(this)
+      this.buttonGroup.register(this)
     },
     render (h) {
       return h('div')
