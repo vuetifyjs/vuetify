@@ -21,25 +21,26 @@
       <v-tabs-items>
         <v-tabs-content v-for="content in ['one', 'two', 'three']" :key="content" :id="content">
           <v-card height="200px" flat>
+            <v-fab-transition>
+              <v-btn
+                :color="activeFab.color"
+                :key="activeFab.icon"
+                dark
+                fab
+                fixed
+                bottom
+                left
+                v-model="fab"
+              >
+                <v-icon>{{ activeFab.icon }}</v-icon>
+                <v-icon>close</v-icon>
+              </v-btn>
+            </v-fab-transition>
           </v-card>
         </v-tabs-content>
       </v-tabs-items>
     </v-tabs>
-    <v-fab-transition>
-      <v-btn
-        :color="activeFab.color"
-        :key="activeFab.icon"
-        dark
-        fab
-        fixed
-        bottom
-        left
-        v-model="fab"
-      >
-        <v-icon>{{ activeFab.icon }}</v-icon>
-        <v-icon>close</v-icon>
-      </v-btn>
-    </v-fab-transition>
+    
   </div>
 </template>
 
@@ -66,10 +67,6 @@
 
 <style>
   /* This is for documentation purposes and will not be needed in your application */
-  #lateral {
-    height: 400px;
-  }
-
   #lateral .speed-dial,
   #lateral .btn--floating {
     position: absolute;
