@@ -14,9 +14,9 @@
 </template>
 
 <script>
-  import AppAd from '@core/AppAd'
-  import AppFooter from '@core/AppFooter'
-  import AppTableOfContents from '@core/AppTableOfContents'
+  import AppAd from '@/components/core/AppAd'
+  import AppFooter from '@/components/core/AppFooter'
+  import AppTableOfContents from '@/components/core/AppTableOfContents'
 
   export default {
     name: 'page',

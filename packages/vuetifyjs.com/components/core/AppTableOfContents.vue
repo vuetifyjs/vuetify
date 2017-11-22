@@ -44,6 +44,7 @@
 
     methods: {
       genItem (item, index) {
+        item = item || {}
         const isActive = this.activeIndex === index
 
         return this.$createElement('li', [
@@ -73,7 +74,7 @@
             ? item.target
             : document.getElementById(item.href)
 
-          if (target && target.offsetTop) {
+          if (target) {
             const offsetTop = target.offsetTop - 100
 
             item.offsetTop = offsetTop

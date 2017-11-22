@@ -18,9 +18,16 @@
           )
     v-container(fluid)
       v-text-field(
-        solo
+        placeholder="Search"
         append-icon="search"
-        placeholder="Search..."
+        id="search"
+        clearable
+        single-line
+        solo
+        key="search"
+        v-model="search"
+        ref="search"
+        light
       )
     div.py-3.text-xs-center
       a(
@@ -74,7 +81,15 @@
               v-else
             )
               v-list-tile-content
-                v-list-tile-title {{ subItem.title }}
+                v-list-tile-title
+                  span {{ subItem.title }}
+              v-chip(
+                small
+                v-if="subItem.badge"
+                class="white--text pa-0 caption"
+                color="red lighten-2"
+                disabled
+              ) {{ subItem.badge }}
               v-list-tile-action(v-if="subItem.action")
                 v-icon(:class="[subItem.actionClass || 'success--text']") {{ subItem.action }}
         v-subheader(v-else-if="item.header").grey--text {{ item.header }}
@@ -109,6 +124,9 @@
 
   export default {
     data: () => ({
+      docSearch: {},
+      isSearching: false,
+      search: '',
       items: [
         { header: 'Core documentation' },
         {
@@ -130,7 +148,7 @@
           group: 'layout',
           icon: 'mdi-page-layout-body',
           items: [
-            { href: '/layout/pre-defined', title: 'Pre-defined' },
+            { href: '/layout/pre-defined', title: 'Pre-defined', badge: 'updated' },
             { href: '/layout/grid', title: 'Grid & breakpoints' },
             { href: '/layout/spacing', title: 'Spacing' },
             { href: '/layout/alignment', title: 'Alignment' },
@@ -236,6 +254,7 @@
         }
       ]
     }),
+
     computed: {
       ...mapState({
         stateless: state => state.stateless,
@@ -249,11 +268,82 @@
           this.$store.commit('app/DRAWER', val)
         }
       }
+    },
+
+    watch: {
+      isSearching (val) {
+        this.$refs.toolbar.isScrolling = !val
+
+        if (val) {
+          this.$nextTick(() => {
+            this.$refs.search.focus()
+          })
+        } else {
+          this.search = null
+        }
+      },
+      search (val) {
+        if (!val) {
+          this.docSearch.autocomplete.autocomplete.close()
+        }
+      }
+    },
+
+    mounted () {
+      this.init()
+    },
+
+    methods: {
+      init () {
+        this.initDocSearch()
+      },
+      initDocSearch () {
+        const vm = this
+
+        this.docSearch = docsearch({
+          apiKey: '259d4615e283a1bbaa3313b4eff7881c',
+          autocompleteOptions: {
+            appendTo: '#yourself',
+            hint: false,
+            debug: true
+          },
+          indexName: 'vuetifyjs',
+          inputSelector: '#search',
+          handleSelected (input, event, suggestion) {
+            const url = suggestion.url
+            const loc = url.split('.com')
+
+            vm.search = ''
+            vm.isSearching = false
+            vm.$router.push(loc.pop())
+          }
+        })
+      },
+      toggleSidebar () {
+        this.$store.commit('vuetify/SIDEBAR', !this.$store.state.sidebar)
+      }
     }
   }
 </script>
 
 <style lang="stylus">
+  @import '../../node_modules/vuetify/src/stylus/settings/_elevations.styl'
+
+  .algolia-autocomplete
+    flex: 1 1 auto
+
+  #search
+    width: 100%
+
+  #yourself
+    .algolia-autocomplete > span
+      left: -16px !important
+      top: 12px !important
+      elevation(6)
+
+      .ds-dataset-1
+        border: none !important
+
   #app-drawer
     img.logo
       margin 40px 0 15px

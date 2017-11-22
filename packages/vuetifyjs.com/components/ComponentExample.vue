@@ -141,7 +141,7 @@
     },
 
     beforeDestroy () {
-      this.instance.$destroy()
+      this.instance && this.instance.$destroy()
     },
 
     mounted () {

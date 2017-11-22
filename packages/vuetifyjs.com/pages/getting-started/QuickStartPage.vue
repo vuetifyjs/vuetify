@@ -99,7 +99,7 @@
 </template>
 
 <script>
-  import TemplateList from '@components/TemplateList'
+  import TemplateList from '@/components/TemplateList'
 
   export default {
     name: 'quick-start-page',
@@ -109,6 +109,7 @@
     data: () => ({
       header: "GettingStarted.QuickStart.header",
       headerText: "GettingStarted.QuickStart.headerText",
+      toc: "GettingStarted.QuickStart.toc",
       browsers: [
         { icon: 'internet-explorer', title: 'IE9 / IE10', supported: false },
         { icon: 'internet-explorer', title: 'IE11', supported: 'Supported w/ polyfill' },

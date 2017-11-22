@@ -1,4 +1,4 @@
-const meta = require('../router/meta.json')
+const meta = require('@/router/meta.json')
 
 export default {
   data: () => ({

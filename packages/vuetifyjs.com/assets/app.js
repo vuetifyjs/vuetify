@@ -7,14 +7,14 @@ import Vue from 'vue'
 import Vuetify from 'vuetify'
 
 // Bootstrap
-import { createStore } from '@store/index'
-import { createRouter } from '@router/index'
-import { createI18n } from '@i18n/index'
+import { createStore } from '@/store/index'
+import { createRouter } from '@/router/index'
+import { createI18n } from '@/i18n/index'
 import { sync } from 'vuex-router-sync'
 
 // Application
-import App from './App.vue'
-import Components from '@components'
+import App from './App'
+import Components from '@/components'
 
 Vue.use(Vuetify, {
   theme: {
