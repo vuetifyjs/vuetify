@@ -41,7 +41,7 @@ export default {
     /**
      * Add dividers between
      * v-breadcrumbs-item
-     * 
+     *
      * @return {array}
      */
     genChildren () {
@@ -59,7 +59,7 @@ export default {
           i === length - 1
         ) return
 
-        children.push(this.$createElement('li', dividerData, this.computedDivider))
+        children.push(this.$createElement('li', Object.assign({ key: i }, dividerData), this.computedDivider))
       })
 
       return children

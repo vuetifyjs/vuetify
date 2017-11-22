@@ -278,6 +278,7 @@ export default {
     genSteps (h) {
       const ticks = createRange(this.numTicks + 1).map((i) => {
         const span = h('span', {
+          key: i,
           staticClass: 'slider__tick',
           style: {
             left: `${i * (100 / this.numTicks)}%`

@@ -30,6 +30,7 @@ export default {
         const buttonText = this.formatters.year(`${year}`)
 
         children.push(this.$createElement('li', {
+          key: year,
           'class': this.year === year
             ? this.addTextColorClassChecks({ active: true })
             : {},
