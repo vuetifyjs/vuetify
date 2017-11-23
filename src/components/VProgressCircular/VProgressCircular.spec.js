@@ -14,6 +14,12 @@ test('VProgressCircular.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ value: -1 })
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ value: 101 })
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render component with color prop and match snapshot', () => {

@@ -11,6 +11,7 @@ describe('VCardMedia.js', () => {
   it('should render component with contained background and match snapshot', () => {
     const wrapper = mount(VCardMedia, {
       propsData: {
+        src: 'file.jpg',
         contain: true
       }
     })

@@ -54,6 +54,13 @@ test('VIcon.js', () => {
     expect(wrapper.element.classList).toContain('icon--right')
   })
 
+  it('should render a component with aria-hidden attr', () => {
+    const context = functionalContext({ attrs: { 'aria-hidden': 'foo' } }, 'add')
+    const wrapper = mount(VIcon, context)
+
+    expect(wrapper.element.getAttribute('aria-hidden')).toBe('foo')
+  })
+
   it('should allow third-party icons when using <icon>- prefix', () => {
     const context = functionalContext({ props: {} }, 'fa-add')
     const wrapper = mount(VIcon, context)
