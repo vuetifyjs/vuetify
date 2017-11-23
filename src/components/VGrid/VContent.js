@@ -36,13 +36,6 @@ export default {
     }
   },
 
-  mounted () {
-    // TODO: Deprecate
-    if (this.$el.parentElement.tagName === 'MAIN') {
-      console.warn('v-content no longer needs to be wrapped in a <main> tag', this.$el.parentElement)
-    }
-  },
-
   render (h) {
     const data = {
       staticClass: 'content',
