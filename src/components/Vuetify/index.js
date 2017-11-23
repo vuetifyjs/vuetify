@@ -8,13 +8,15 @@ const Vuetify = {
     this.installed = true
 
     const $vuetify = {}
-    Vue.util.defineReactive($vuetify, 'breakpoint', {})
-    Vue.util.defineReactive($vuetify, 'application', application)
-    Vue.util.defineReactive($vuetify, 'dark', false)
-    Vue.util.defineReactive($vuetify, 'theme', theme(opts.theme))
-    Vue.util.defineReactive($vuetify, 'touchSupport', false)
+    Vue.util.defineReactive($vuetify, 'inspire', {
+      breakpoint: {},
+      application,
+      dark: false,
+      theme: theme(opts.theme),
+      touchSupport: false
+    })
 
-    Vue.prototype.$vuetify = $vuetify
+    Vue.prototype.$vuetify = $vuetify.inspire
 
     if (opts.transitions) {
       Object.keys(opts.transitions).forEach(key => {

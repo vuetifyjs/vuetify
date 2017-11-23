@@ -62,6 +62,7 @@ export default {
     },
     hideActions: Boolean,
     hideHeaders: Boolean,
+    disableInitialSort: Boolean,
     mustSort: Boolean,
     noResultsText: {
       type: String,
@@ -292,7 +293,7 @@ export default {
       }
     },
     needsTR (row) {
-      return row.length && row.find(c => c.tag === 'td')
+      return row.length && row.find(c => c.tag === 'td' || c.tag === 'th')
     },
     genTR (children, data = {}) {
       return this.$createElement('tr', data, children)
@@ -314,7 +315,7 @@ export default {
       !('sortable' in h) || h.sortable)
     )
 
-    this.defaultPagination.sortBy = firstSortable
+    this.defaultPagination.sortBy = !this.disableInitialSort && firstSortable
       ? firstSortable.value
       : null
 

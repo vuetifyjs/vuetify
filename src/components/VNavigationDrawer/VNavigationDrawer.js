@@ -22,7 +22,6 @@ export default {
   data () {
     return {
       isActive: false,
-      isMobile: null,
       touchArea: {
         left: 0,
         right: 0
@@ -84,6 +83,11 @@ export default {
         'theme--dark': this.dark,
         'theme--light': this.light
       }
+    },
+    isMobile () {
+      return !this.permanent &&
+        !this.temporary &&
+        this.$vuetify.breakpoint.width < parseInt(this.mobileBreakPoint, 10)
     },
     marginTop () {
       if (!this.app) return 0
@@ -164,10 +168,12 @@ export default {
         this.removeOverlay()
 
       if (prev == null ||
-        this.resizeIsDisabled
+        this.resizeIsDisabled ||
+        !this.reactsToMobile
       ) return
 
       this.isActive = !val
+      this.updateApplication()
     },
     miniVariant () {
       this.updateApplication()
@@ -177,9 +183,6 @@ export default {
       // enable the drawer
       if (val) {
         this.isActive = true
-        this.isMobile = false
-      } else {
-        this.checkIfMobile()
       }
       this.updateApplication()
     },
@@ -204,9 +207,7 @@ export default {
     }
   },
 
-  beforeMount () {
-    this.checkIfMobile()
-
+  created () {
     if (this.permanent) {
       this.isActive = true
     } else if (this.stateless ||
@@ -234,27 +235,12 @@ export default {
         right: parentRect.right - 50
       }
     },
-    checkIfMobile () {
-      if (this.permanent ||
-        this.temporary
-      ) return
-
-      this.isMobile = window.innerWidth < parseInt(this.mobileBreakPoint, 10)
-    },
     closeConditional () {
       return this.reactsToClick
     },
     genDirectives () {
       const directives = [
-        { name: 'click-outside', value: this.closeConditional },
-        {
-          name: 'resize',
-          value: {
-            debounce: 200,
-            quiet: true,
-            value: this.onResize
-          }
-        }
+        { name: 'click-outside', value: this.closeConditional }
       ]
 
       !this.touchless && directives.push({
@@ -267,9 +253,6 @@ export default {
       })
 
       return directives
-    },
-    onResize () {
-      this.checkIfMobile()
     },
     swipeRight (e) {
       if (this.isActive && !this.right) return
