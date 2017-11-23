@@ -1,7 +1,6 @@
 require('../../stylus/components/_buttons.styl')
 
 import Colorable from '../../mixins/colorable'
-import Contextualable from '../../mixins/contextualable'
 import Positionable from '../../mixins/positionable'
 import Routable from '../../mixins/routable'
 import Themeable from '../../mixins/themeable'
@@ -12,7 +11,6 @@ export default {
 
   mixins: [
     Colorable,
-    Contextualable,
     Routable,
     Positionable,
     Themeable,
@@ -134,14 +132,6 @@ export default {
 
       return this.$createElement('span', { 'class': 'btn__loading' }, children)
     }
-  },
-
-  mounted () {
-    Object.keys(Contextualable.props).forEach(prop => {
-      if (this[prop]) {
-        console.warn(`Context prop '${prop}' for VBtn component has been deprecated. Use 'color' prop instead.`)
-      }
-    })
   },
 
   render (h) {
