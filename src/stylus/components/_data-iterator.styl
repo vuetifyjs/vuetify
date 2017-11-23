@@ -1,0 +1,46 @@
+@import '../bootstrap'
+@import '../theme'
+
+dataiterator($material)
+  .data-iterator__actions
+    color: rgba($material.fg-color, $material.secondary-text-percent)
+
+    &__select
+      .input-group--select
+        .input-group__selections__comma
+          color: rgba($material.fg-color, $material.secondary-text-percent) !important
+
+        .input-group__append-icon
+          color: rgba($material.fg-color, $material.secondary-text-percent) !important
+
+theme(dataiterator, "data-iterator")
+
+/** Actions */
+.data-iterator__actions
+  display: flex
+  justify-content: center
+  align-items: center
+  font-size: 12px
+
+  .btn
+    color: inherit
+
+    &:last-of-type
+      margin-left: 18px
+
+  &__pagination
+    text-align: center
+    margin: 0 26px 0 32px
+
+  &__select
+    display: flex
+    align-items: center
+    justify-content: center
+
+    .input-group--select
+      margin: 13px 0 13px 34px
+      padding: 0
+      position: initial
+
+      .input-group__selections__comma
+        font-size: 12px

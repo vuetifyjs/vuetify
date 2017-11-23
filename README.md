@@ -1,3 +1,4 @@
+
 <p align="center">
   <a href="https://vuetifyjs.com" target="_blank"><img width="100"src="https://vuetifyjs.com/static/doc-images/logo.svg"></a>
 </p>
@@ -6,8 +7,8 @@
   <a href="https://travis-ci.org/vuetifyjs/vuetify">
     <img src="https://img.shields.io/travis/vuetifyjs/vuetify.svg" alt="travis ci badge">
   </a>
-  <a href="https://codeclimate.com/github/vuetifyjs/vuetify/test_coverage">
-    <img src="https://img.shields.io/codeclimate/coverage/github/vuetifyjs/vuetify.svg" alt="Coverage">
+  <a href="https://codecov.io/gh/vuetifyjs/vuetify">
+    <img src="https://img.shields.io/codecov/c/github/vuetifyjs/vuetify.svg" alt="Coverage">
   </a>
   <a href="https://codebeat.co/projects/github-com-vuetifyjs-vuetify-dev">
     <img src="https://codebeat.co/badges/b2d1ce87-848b-440e-9d7e-df9883c0cd93" alt="codebeat badge">
@@ -15,24 +16,34 @@
   <a href="https://www.npmjs.com/package/vuetify">
     <img src="https://img.shields.io/npm/dm/vuetify.svg" alt="Downloads">
   </a>
+  <br>
+  <a href="https://www.npmjs.com/package/vuetify">
+    <img src="https://img.shields.io/npm/l/vuetify.svg" alt="License">
+  </a>
+  <a href="https://app.zenhub.com/workspace/o/vuetifyjs/vuetify/boards">
+    <img src="https://img.shields.io/badge/Managed_with-ZenHub-5e60ba.svg" alt="zenhub">
+  </a>
+  <a href="https://chat.vuetifyjs.com">
+    <img src="https://img.shields.io/badge/chat-on%20discord-7289da.svg" alt="Chat">
+  </a>
+  <br>
   <a href="https://www.npmjs.com/package/vuetify">
     <img src="https://img.shields.io/npm/v/vuetify.svg" alt="Version">
   </a>
   <a href="https://cdnjs.com/libraries/vuetify">
     <img src="https://img.shields.io/cdnjs/v/vuetify.svg" alt="CDN">
   </a>
-  <a href="https://www.npmjs.com/package/vuetify">
-    <img src="https://img.shields.io/npm/l/vuetify.svg" alt="License">
-  </a>
-  <a href="https://chat.vuetifyjs.com">
-    <img src="https://img.shields.io/badge/chat-on%20discord-7289da.svg" alt="Chat">
-  </a>
 </p>
 <br><br>
 <h2 align="center">Supporting Vuetify</h2>
-<p>Vuetify is an open source MIT project that has been made possible due to the generous contributions by <a href="https://github.com/vuetifyjs/vuetify/blob/dev/BACKERS.md">community backers</a>. If you are interested in supporting this project, please consider:</p>
+<p>Vuetify is an open source MIT project that has been made possible due to the generous contributions by <a href="https://github.com/vuetifyjs/vuetify/blob/dev/BACKERS.md">community backers</a>. If you are interested in supporting this project, please consider becoming a patron.</p>
 
-- [Becoming a Patreon backer](https://www.patreon.com/vuetify)
+<p align="center">
+  <a href="https://www.patreon.com/vuetify">
+    <img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patron" />
+  </a>
+</p>
+
 <br><br>
 <h3 align="center">Patrons</h3>
 
@@ -42,15 +53,15 @@
   <a href="https://careers.lmax.com/?utm_source=vuetify&utm_medium=github-link&utm_campaign=lmax-careers">
     <img height="70px" src="https://vuetifyjs.com/static/doc-images/backers/lmax-exchange.png">
   </a>
+  <br><br>
+  <a href="http://intygrate.com/?ref=vuetify-github">
+    <img height="70px" src="https://vuetifyjs.com/static/doc-images/backers/intygrate.png">
+  </a>
 </p>
 
 <h4 align="center">Palladium</h4>
 
 <p align="center">
-  <a href="http://intygrate.com/?ref=vuetify-github">
-    <img height="40px" src="https://vuetifyjs.com/static/doc-images/backers/intygrate.png">
-  </a>
-  <br><br>
   <a href="http://www.eikospartners.com/?ref=vuetify-github">
     <img height="40px" src="https://vuetifyjs.com/static/doc-images/backers/eikos-partners.webp">
   </a>
@@ -140,7 +151,7 @@ Keep in mind, you will need to ensure your webpack config contains a css-loader.
 <a href="https://vuetifyjs.com/vuetify/frequently-asked-questions" target="_blank">Frequently asked questions</a>
 
 <h2>Community Support</h2>
-Ask your support questions on the vuetifyjs [discord](https://chat.vuetifyjs.com).
+Ask your support questions on the vuetifyjs <a href="https://chat.vuetifyjs.com">discord</a>.
 
 <h2>Additional Resources</h2>
-Codepen starter [Vuetify Template](http://codepen.io/johnjleider/pen/bgJOrX)
+Codepen starter <a href="https://template.vuetifyjs.com">template</a>.

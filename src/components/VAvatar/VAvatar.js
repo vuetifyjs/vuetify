@@ -1,14 +1,18 @@
 require('../../stylus/components/_avatars.styl')
 
+// Mixins
+import Colorable from '../../mixins/colorable'
+
 export default {
   name: 'v-avatar',
 
   functional: true,
 
   props: {
+    color: String,
     size: {
-      type: String,
-      default: '48px'
+      type: [Number, String],
+      default: 48
     },
     tile: Boolean
   },
@@ -19,8 +23,10 @@ export default {
 
     if (props.tile) data.staticClass += ' avatar--tile'
 
-    data.style.height = props.size
-    data.style.width = props.size
+    const size = `${parseInt(props.size)}px`
+    data.style.height = size
+    data.style.width = size
+    data.class = Colorable.methods.addBackgroundColorClassChecks.call(props, {}, 'color')
 
     return h('div', data, children)
   }

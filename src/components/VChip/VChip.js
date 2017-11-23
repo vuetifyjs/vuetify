@@ -62,7 +62,7 @@ export default {
       }
 
       return h('div', data, [
-        h(VIcon, { props: { right: true } }, 'cancel')
+        h(VIcon, 'cancel')
       ])
     },
     genContent (h) {

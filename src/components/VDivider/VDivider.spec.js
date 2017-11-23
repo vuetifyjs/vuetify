@@ -9,13 +9,33 @@ test('VDivider.js', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render an inset component and match snapshot', () => {
+  it('should render an inset component', () => {
     const wrapper = mount(VDivider, functionalContext({
-      propsData: {
+      props: {
         inset: true
       }
     }))
 
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.hasClass('divider--inset')).toBe(true)
+  })
+
+  it('should render a light component', () => {
+    const wrapper = mount(VDivider, functionalContext({
+      props: {
+        light: true
+      }
+    }))
+
+    expect(wrapper.hasClass('theme--light')).toBe(true)
+  })
+
+  it('should render a dark component', () => {
+    const wrapper = mount(VDivider, functionalContext({
+      props: {
+        dark: true
+      }
+    }))
+
+    expect(wrapper.hasClass('theme--dark')).toBe(true)
   })
 })

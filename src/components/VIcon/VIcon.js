@@ -3,6 +3,14 @@ require('../../stylus/components/_icons.styl')
 import Themeable from '../../mixins/themeable'
 import Colorable from '../../mixins/colorable'
 
+const SIZE_MAP = {
+  small: '16px',
+  default: '24px',
+  medium: '28px',
+  large: '36px',
+  xLarge: '40px'
+}
+
 export default {
   name: 'v-icon',
 
@@ -16,10 +24,28 @@ export default {
     left: Boolean,
     medium: Boolean,
     right: Boolean,
+    size: {
+      type: [Number, String],
+      default: SIZE_MAP.default
+    },
+    small: Boolean,
     xLarge: Boolean
   },
 
   render (h, { props, data, children = [] }) {
+    let fontSize = props.size
+    switch (true) {
+      case props.small: fontSize = SIZE_MAP.small
+        break
+      case props.medium: fontSize = SIZE_MAP.medium
+        break
+      case props.large: fontSize = SIZE_MAP.large
+        break
+      case props.xLarge: fontSize = SIZE_MAP.xLarge
+        break
+    }
+    data.style = { fontSize }
+
     let iconName = ''
     if (children.length) {
       iconName = children.pop().text
@@ -44,11 +70,8 @@ export default {
 
     const classes = Object.assign({
       'icon--disabled': props.disabled,
-      'icon--large': props.large,
       'icon--left': props.left,
-      'icon--medium': props.medium,
       'icon--right': props.right,
-      'icon--x-large': props.xLarge,
       'theme--dark': props.dark,
       'theme--light': props.light
     }, props.color ? Colorable.methods.addTextColorClassChecks.call(props, {}, 'color') : {

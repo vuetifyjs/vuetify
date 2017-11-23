@@ -206,6 +206,21 @@ test('VSelect', () => {
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
+  it('should render select menu with content class', async () => {
+    const items = ['abc']
+
+    const wrapper = mount(VSelect, {
+      propsData: {
+        contentClass: 'menu-class',
+        items
+      }
+    })
+
+    const menu = wrapper.find('.menu__content')[0]
+    expect(menu.element.classList).toContain('menu-class')
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
   it('should have deletable chips', async () => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,

@@ -147,10 +147,9 @@ theme(stepper, "stepper")
 
 .stepper
   &__content
-    top: initial
-    bottom: 0
+    top: 0
     padding: 24px 24px 16px 24px
-    flex: 1
+    flex: 1 0 auto
     // Chrome has an issue with overflow hidden for rendering
     // Originally used translateZ but this messes up fixed
     // elements within the stepper
@@ -163,7 +162,7 @@ theme(stepper, "stepper")
 
   &--is-booted
     .stepper__content, .stepper__wrapper
-      transition: .4s $transition.ease-in-out
+      transition: .3s $transition.swing
 
 .stepper
   &--vertical

@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import { test } from '~util/testing'
 import { mount } from 'avoriaz'
 import VDataTable from './VDataTable'
@@ -8,7 +9,9 @@ test('VDataTable.vue', () => {
       propsData: {
         pagination: {
           descending: false,
-          sortBy: 'col1'
+          sortBy: 'col1',
+          rowsPerPage: 1,
+          page: 1
         },
         headers: [
           { text: 'First Column', value: 'col1', class: 'a-string' },
@@ -51,9 +54,55 @@ test('VDataTable.vue', () => {
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
-  it('should match a snapshot', () => {
+  it('should match a snapshot - no matching results', () => {
     const data = dataTableTestData()
+    data.propsData.search = "asdf"
     const wrapper = mount(VDataTable, data)
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    const content = wrapper.find('table.datatable tbody > tr > td')[0]
+    expect(content.element.textContent).toBe('No matching records found')
+
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should match a snapshot - no data', () => {
+    const data = dataTableTestData()
+    data.propsData.items = []
+    const wrapper = mount(VDataTable, data)
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    const content = wrapper.find('table.datatable tbody > tr > td')[0]
+    expect(content.element.textContent).toBe('No data available')
+
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should match a snapshot - with data', () => {
+    const data = dataTableTestData()
+    data.propsData.pagination.rowsPerPage = 3
+
+    const vm = new Vue()
+    const items = props => vm.$createElement('td', [props.item.col2])
+    const component = Vue.component('test', {
+      components: {
+        VDataTable
+      },
+      render (h) {
+        return h('v-data-table', {
+          props: {
+            ...data.propsData
+          },
+          scopedSlots: {
+            items
+          }
+        })
+      }
+    })
+
+    const wrapper = mount(component)
 
     expect(wrapper.html()).toMatchSnapshot()
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
@@ -65,6 +114,26 @@ test('VDataTable.vue', () => {
     const wrapper = mount(VDataTable, data)
 
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should match display no-data-text when no data', () => {
+    const data = dataTableTestData()
+    data.propsData.items = []
+    data.propsData.noDataText = 'foo'
+    const wrapper = mount(VDataTable, data)
+
+    expect(wrapper.find('tbody td')[0].html()).toMatchSnapshot()
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should match display no-results-text when no results', () => {
+    const data = dataTableTestData()
+    data.propsData.noResultsText = 'bar'
+    data.propsData.search = "no such item"
+    const wrapper = mount(VDataTable, data)
+
+    expect(wrapper.find('tbody td')[0].html()).toMatchSnapshot()
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
   it('should render aria-sort attribute on column headers', async () => {
@@ -121,6 +190,28 @@ test('VDataTable.vue', () => {
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.defaultPagination.descending).toBe(false)
 
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should render a progress with headers slot', () => {
+    const vm = new Vue()
+    const wrapper = mount(Vue.component('test', {
+      components: {
+        VDataTable
+      },
+      render (h) {
+        return h('v-data-table', {
+          props: {
+            items: []
+          },
+          scopedSlots: {
+            headers: props => vm.$createElement('tr')
+          }
+        })
+      }
+    }))
+
+    expect(wrapper.find('.datatable__progress').length).toBe(1)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 

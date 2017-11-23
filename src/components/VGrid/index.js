@@ -6,12 +6,14 @@ import VContainer from './VContainer'
 import VFlex from './VFlex'
 import VLayout from './VLayout'
 
-export const VSpacer = createSimpleFunctional('spacer')
+const VSpacer = createSimpleFunctional('spacer')
+
 export {
   VContainer,
   VContent,
   VFlex,
-  VLayout
+  VLayout,
+  VSpacer
 }
 
 const VGrid = {}

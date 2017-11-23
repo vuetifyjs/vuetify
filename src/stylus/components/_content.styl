@@ -3,8 +3,11 @@
 .content
   flex: 1 1 auto
   max-width: 100%
-  transition: .2s padding $transition.fast-out-slow-in
+  transition: none
   will-change: padding
+
+  &--is-booted
+    transition: .2s padding $transition.fast-out-slow-in
 
   &--wrap
     flex: 1 0 auto
