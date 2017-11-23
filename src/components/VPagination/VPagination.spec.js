@@ -64,7 +64,7 @@ test('VPagination.vue', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should update watch the value', async () => {
+  it('should watch the value', async () => {
     jest.useFakeTimers()
     const wrapper = mount(VPagination, {
       propsData: {
