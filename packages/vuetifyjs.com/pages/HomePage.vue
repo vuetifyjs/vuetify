@@ -50,7 +50,6 @@
             lg5
             xl3
             offset-lg1
-            offset-xl3
             :pl-5="$vuetify.breakpoint.smAndDown"
           )
             ul
