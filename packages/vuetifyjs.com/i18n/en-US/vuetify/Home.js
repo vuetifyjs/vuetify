@@ -7,7 +7,7 @@ export default {
     {
       "img": "/static/doc-images/feature1.svg",
       "title": "Ready-Made Project Scaffolding",
-      "text": "Vuetify comes ready to go with 5 pre-made vue-cli templates. From simple html to full-blown SSR you are ready to go in minutes."
+      "text": "Vuetify comes ready to go with 8 pre-made vue-cli templates. From simple html to full-blown SSR you are ready to go in minutes."
     },
     {
       "img": "/static/doc-images/feature2.svg",
@@ -26,7 +26,7 @@ export default {
     "Community Chat Support",
     "Dynamic Themes",
     "SSR and PWA Support",
-    "8 Vue-CLI Templates"
+    "8 vue-cli Templates"
   ],
   "checkFeaturesCtd": [
     "80+ Material Design Components",
