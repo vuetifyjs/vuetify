@@ -39,6 +39,16 @@ test('VChip.vue', () => {
     expect(wrapper.element.classList).toContain('green--text')
   })
 
+  it('should render a disabled chip', () => {
+    const wrapper = mount(VChip, {
+      propsData: {
+        disabled: true
+      }
+    })
+
+    expect(wrapper.element.classList).toContain('chip--disabled')
+  })
+
   it('should render a colored outline chip', () => {
     const wrapper = mount(VChip, {
       propsData: {
