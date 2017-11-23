@@ -15,17 +15,6 @@
         |   &lt;/v-content&gt;
         |   &lt;v-footer app&gt;&lt;/v-footer&gt;
         |&lt;/v-app&gt;
-      markup(lang='html' xs12 sm6)
-        |&lt;v-app&gt;
-        |   &lt;v-navigation-drawer app&gt;&lt;/v-navigation-drawer&gt;
-        |   &lt;v-toolbar app&gt;&lt;/v-toolbar&gt;
-        |   &lt;v-content&gt;
-        |     &lt;router-view&gt;
-        |       &lt;v-container fluid&gt;&lt;/v-container&gt;
-        |     &lt;/router-view&gt;
-        |   &lt;/v-content&gt;
-        |   &lt;v-footer app&gt;&lt;/v-footer&gt;
-        |&lt;/v-app&gt;
 
       app-alert(error value="GettingStarted.StarterTemplates.alert1")
 
