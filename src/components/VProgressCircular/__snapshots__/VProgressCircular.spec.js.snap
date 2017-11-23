@@ -39,6 +39,84 @@ exports[`VProgressCircular.js should render component and match snapshot 1`] = `
 
 `;
 
+exports[`VProgressCircular.js should render component and match snapshot 2`] = `
+
+<div class="progress-circular"
+     style="height: 32px; width: 32px;"
+>
+  <svg xmlns="http://www.w3.org/2000/svg"
+       height="32"
+       width="32"
+  >
+    <circle fill="transparent"
+            cx="16"
+            cy="16"
+            r="14"
+            stroke-width="4"
+            stroke-dasharray="87.965"
+            stroke-dashoffset="0"
+            class="progress-circular__underlay"
+    >
+    </circle>
+    <circle fill="transparent"
+            cx="16"
+            cy="16"
+            r="14"
+            stroke-width="4"
+            stroke-dasharray="87.965"
+            stroke-dashoffset="87.96459430051421px"
+            class="progress-circular__overlay"
+    >
+    </circle>
+  </svg>
+  <div class="progress-circular__info">
+    <span>
+      content
+    </span>
+  </div>
+</div>
+
+`;
+
+exports[`VProgressCircular.js should render component and match snapshot 3`] = `
+
+<div class="progress-circular"
+     style="height: 32px; width: 32px;"
+>
+  <svg xmlns="http://www.w3.org/2000/svg"
+       height="32"
+       width="32"
+  >
+    <circle fill="transparent"
+            cx="16"
+            cy="16"
+            r="14"
+            stroke-width="4"
+            stroke-dasharray="87.965"
+            stroke-dashoffset="0"
+            class="progress-circular__underlay"
+    >
+    </circle>
+    <circle fill="transparent"
+            cx="16"
+            cy="16"
+            r="14"
+            stroke-width="4"
+            stroke-dasharray="87.965"
+            stroke-dashoffset="0px"
+            class="progress-circular__overlay"
+    >
+    </circle>
+  </svg>
+  <div class="progress-circular__info">
+    <span>
+      content
+    </span>
+  </div>
+</div>
+
+`;
+
 exports[`VProgressCircular.js should render component with button prop and match snapshot 1`] = `
 
 <div class="progress-circular progress-circular--button"
