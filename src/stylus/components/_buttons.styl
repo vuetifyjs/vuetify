@@ -102,7 +102,9 @@ theme(button, "btn")
     min-width: 0
 
     .btn__content
-      padding: 0
+      // overwrite size padding when using `icon` prop together
+      // with one of size props (`small`, `large`)
+      padding: 0 !important
 
       &:before
         border-radius: 50%
