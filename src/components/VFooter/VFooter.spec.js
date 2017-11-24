@@ -51,4 +51,20 @@ test('VFooter.js', () => {
     expect(wrapper.element.classList).toContain('footer--absolute')
     expect(wrapper.element.classList).toContain('footer--fixed')
   })
+
+  it('should get the right padding with app prop', async () => {
+    const wrapper = mount(VFooter, {
+      propsData: {
+        absolute: true,
+        app: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.vm.$vuetify.application.left = 20
+    wrapper.vm.$vuetify.application.right  = 30
+    await wrapper.vm.$nextTick()
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
