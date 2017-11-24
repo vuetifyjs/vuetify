@@ -134,15 +134,37 @@ test('VDatePicker.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should match snapshot with allowed dates', () => {
+  it('should match snapshot with allowed dates as array', () => {
     const wrapper = mount(VDatePicker, {
       propsData: {
         value: '2013-05-07',
-        allowedDates: { min: '2013-05-03', max: '2013-05-19' }
+        allowedDates: ['2013-05-06', '2013-05-07', 'invalid date']
       }
     })
 
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.find('.picker--date__table')[0].html()).toMatchSnapshot()
+  })
+
+  it('should match snapshot with allowed dates as function', () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: '2013-05-07',
+        allowedDates: date => date.substr(9, 1) === '1'
+      }
+    })
+
+    expect(wrapper.find('.picker--date__table')[0].html()).toMatchSnapshot()
+  })
+
+  it('should match snapshot with allowed dates as object', () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: '2013-05-07',
+        allowedDates: { min: '2013-05-02', max: '2013-05-10' }
+      }
+    })
+
+    expect(wrapper.find('.picker--date__table')[0].html()).toMatchSnapshot()
   })
 
   it('should match snapshot with no title', () => {
@@ -331,5 +353,56 @@ test('VDatePicker.js', ({ mount }) => {
     expect(wrapper.vm.tableDate).toBe('2004-2')
     wrapper.vm.updateTableMonth(12)
     expect(wrapper.vm.tableDate).toBe('2005-01')
+  })
+
+  it('should calculate the first allowed date', () => {
+    const today = new Date().toISOString().substr(0, 10)
+
+    const wrapper1 = mount(VDatePicker, {
+      propsData: {
+        value: null
+      }
+    })
+    expect(wrapper1.vm.inputDate).toBe(today)
+
+    // Make sure that allowed day
+    // is not the same as today
+    const allowedDay = today.replace(/..$/, today.substr(8, 2) === '02' ? '03' : '02')
+    const wrapper2 = mount(VDatePicker, {
+      propsData: {
+        value: null,
+        allowedDates: [allowedDay]
+      }
+    })
+    expect(wrapper2.vm.inputDate).toBe(today.replace(allowedDay))
+  })
+
+  it('should set the table date when value has changed', () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: null
+      }
+    })
+
+    wrapper.setProps({ value: '2005-11-11' })
+    expect(wrapper.vm.tableDate).toBe('2005-11')
+  })
+
+  it('should update the active picker if type has changed', () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        type: 'date'
+      }
+    })
+
+    expect(wrapper.vm.activePicker).toBe('DATE')
+    wrapper.setProps({ type: 'month' })
+    expect(wrapper.vm.activePicker).toBe('MONTH')
+    wrapper.setProps({ type: 'year' })
+    expect(wrapper.vm.activePicker).toBe('YEAR')
+    wrapper.setProps({ type: 'month' })
+    expect(wrapper.vm.activePicker).toBe('YEAR')
+    wrapper.setProps({ type: 'date' })
+    expect(wrapper.vm.activePicker).toBe('YEAR')
   })
 })

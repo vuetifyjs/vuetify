@@ -80,16 +80,40 @@ test('VDatePicker.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should match snapshot with allowed dates and pick-month prop', () => {
+  it('should match snapshot with allowed dates as array', () => {
     const wrapper = mount(VDatePicker, {
       propsData: {
         value: '2013-05',
         type: 'month',
-        allowedDates: ['2013-01', '2013-03', '2013-05', '2013-07', '2013-09']
+        allowedDates: ['2013-01', '2013-03', '2013-05', '2013-07', 'invalid month']
       }
     })
 
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.find('.picker--date__table')[0].html()).toMatchSnapshot()
+  })
+
+  it('should match snapshot with allowed dates as function', () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: '2013-05',
+        type: 'month',
+        allowedDates: date => date.substr(6, 1) === '1'
+      }
+    })
+
+    expect(wrapper.find('.picker--date__table')[0].html()).toMatchSnapshot()
+  })
+
+  it('should match snapshot with allowed dates as object', () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: '2013-05',
+        type: 'month',
+        allowedDates: { min: '2013-03', max: '2013-07' }
+      }
+    })
+
+    expect(wrapper.find('.picker--date__table')[0].html()).toMatchSnapshot()
   })
 
   it('should match snapshot with month formatting functions', () => {
@@ -174,5 +198,55 @@ test('VDatePicker.js', ({ mount }) => {
     wrapper.find('.picker--date__years li.active + li')[0].trigger('click')
     expect(wrapper.vm.activePicker).toBe('MONTH')
     expect(wrapper.vm.tableDate).toBe('2004')
+  })
+
+  it('should calculate the first allowed month', () => {
+    const today = new Date().toISOString().substr(0, 7)
+
+    const wrapper1 = mount(VDatePicker, {
+      propsData: {
+        value: null,
+        type: 'month'
+      }
+    })
+    expect(wrapper1.vm.inputDate).toBe(today)
+
+    // Make sure that allowed month is
+    // not the same as current month
+    const allowedDay = today.replace(/..$/, today.substr(5, 2) === '02' ? '03' : '02')
+    const wrapper2 = mount(VDatePicker, {
+      propsData: {
+        value: null,
+        type: 'month',
+        allowedDates: [allowedDay]
+      }
+    })
+    expect(wrapper2.vm.inputDate).toBe(today.replace(allowedDay))
+  })
+
+  it('should set the table date when value has changed', () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: null,
+        type: 'month'
+      }
+    })
+
+    wrapper.setProps({ value: '2005-11' })
+    expect(wrapper.vm.tableDate).toBe('2005')
+  })
+
+  it('should update the active picker if type has changed', () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        type: 'month'
+      }
+    })
+
+    expect(wrapper.vm.activePicker).toBe('MONTH')
+    wrapper.setProps({ type: 'date' })
+    expect(wrapper.vm.activePicker).toBe('MONTH')
+    wrapper.setProps({ type: 'year' })
+    expect(wrapper.vm.activePicker).toBe('YEAR')
   })
 })
