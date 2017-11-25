@@ -41,4 +41,19 @@ test('VForm.js', () => {
 
     expect(submit).toBeCalled()
   })
+
+  it('should watch the error bag', async () => {
+    const wrapper = mount(VForm)
+
+    const input = jest.fn()
+    wrapper.vm.$on('input', input)
+
+    Vue.set(wrapper.vm.errorBag, 'foo', true)
+    await Vue.nextTick()
+    expect(input).toBeCalledWith(false)
+
+    Vue.set(wrapper.vm.errorBag, 'foo', false)
+    await Vue.nextTick()
+    expect(input).toBeCalledWith(true)
+  })
 })
