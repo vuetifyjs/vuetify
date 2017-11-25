@@ -91,23 +91,22 @@ test('VDatePicker.js', ({ mount }) => {
     expect(cb).toBeCalledWith('2012-05-13')
   })
 
-  // Uncomment after merging #2612
-  // it('should not emit input event on year click if date is not allowed', async () => {
-  //   const cb = jest.fn()
-  //   const wrapper = mount(VDatePicker, {
-  //     propsData: {
-  //       value: '2013-05-13',
-  //       allowedDates: []
-  //     },
-  //     data: {
-  //       activePicker: 'YEAR'
-  //     }
-  //   })
+  it('should not emit input event on year click if date is not allowed', async () => {
+    const cb = jest.fn()
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: '2013-05-13',
+        allowedDates: []
+      },
+      data: {
+        activePicker: 'YEAR'
+      }
+    })
 
-  //   wrapper.vm.$on('input', cb);
-  //   wrapper.find('.picker--date__years li.active + li')[0].trigger('click')
-  //   expect(cb).not.toBeCalled()
-  // })
+    wrapper.vm.$on('input', cb);
+    wrapper.find('.picker--date__years li.active + li')[0].trigger('click')
+    expect(cb).not.toBeCalled()
+  })
 
   it('should be scrollable', async () => {
     const wrapper = mount(VDatePicker, {
