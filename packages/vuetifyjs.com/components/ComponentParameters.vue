@@ -80,7 +80,7 @@
           items = items.concat(component.scopedSlots)
         }
 
-        return items
+        return items || []
       },
       parsedItems () {
         return this[`gen${this.type}`]()

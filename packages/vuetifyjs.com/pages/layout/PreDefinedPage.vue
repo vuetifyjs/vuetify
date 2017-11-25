@@ -4,17 +4,17 @@
       section-heading(value="Layout.PreDefined.markupHeader")
       section-text(value="Layout.PreDefined.markupText")
 
-    markup(lang='html')
-      |&lt;v-app&gt;
-      |   &lt;v-navigation-drawer app&gt;&lt;/v-navigation-drawer&gt;
-      |   &lt;v-toolbar app&gt;&lt;/v-toolbar&gt;
-      |   &lt;v-content&gt;
-      |     &lt;v-container fluid&gt;
-      |       &lt;router-view&gt;&lt;/router-view&gt;
-      |     &lt;/v-container&gt;
-      |   &lt;/v-content&gt;
-      |   &lt;v-footer app&gt;&lt;/v-footer&gt;
-      |&lt;/v-app&gt;
+      markup(lang='html')
+        |&lt;v-app&gt;
+        |   &lt;v-navigation-drawer app&gt;&lt;/v-navigation-drawer&gt;
+        |   &lt;v-toolbar app&gt;&lt;/v-toolbar&gt;
+        |   &lt;v-content&gt;
+        |     &lt;v-container fluid&gt;
+        |       &lt;router-view&gt;&lt;/router-view&gt;
+        |     &lt;/v-container&gt;
+        |   &lt;/v-content&gt;
+        |   &lt;v-footer app&gt;&lt;/v-footer&gt;
+        |&lt;/v-app&gt;
 
     section#all-about-app
       section-heading(value="Layout.PreDefined.appHeader")

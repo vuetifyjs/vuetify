@@ -18,7 +18,7 @@
         { file: 'icon' },
         { file: 'floating' },
         { file: 'loaders' },
-        { file: 'sizing' },
+        // { file: 'sizing' },
         { file: 'outline' },
         { file: 'round' },
         { file: 'block' }

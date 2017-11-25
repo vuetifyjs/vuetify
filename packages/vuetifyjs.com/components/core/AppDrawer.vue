@@ -46,9 +46,9 @@
       template(v-for="item in items")
         v-list-group(
           v-if="item.items"
-          v-bind:group="item.group"
-          no-action
+          :group="item.group"
           :prepend-icon="item.icon"
+          no-action
         )
           v-list-tile(slot="activator" ripple)
             v-list-tile-content
@@ -56,8 +56,8 @@
           template(v-for="(subItem, i) in item.items")
             v-list-group(
               v-if="subItem.items"
-              sub-group
               :group="subItem.group"
+              sub-group
             )
               v-list-tile(slot="activator" ripple)
                 v-list-tile-content
@@ -65,29 +65,29 @@
               v-list-tile(
                 v-for="(grand, i) in subItem.items"
                 :key="i"
-                :to="grand.href"
+                :to="`${item.group}/${grand.href}`"
+                ripple
               )
                 v-list-tile-content
                   v-list-tile-title {{ grand.title }}
             v-list-tile(
               :key="i"
               v-bind="{ \
-                to: !subItem.target ? subItem.href : null, \
+                to: !subItem.target ? `${item.group}/${subItem.href}` : null, \
                 href: subItem.target && subItem.href \
               }"
-              ripple
               :disabled="subItem.disabled"
               :target="subItem.target"
+              ripple
               v-else
             )
               v-list-tile-content
                 v-list-tile-title
                   span {{ subItem.title }}
               v-chip(
-                small
                 v-if="subItem.badge"
-                class="white--text pa-0 caption"
-                color="red lighten-2"
+                class="white--text pa-0 chip--x-small"
+                color="primary"
                 disabled
               ) {{ subItem.badge }}
               v-list-tile-action(v-if="subItem.action")
@@ -134,27 +134,26 @@
           group: '/getting-started',
           icon: 'mdi-speedometer',
           items: [
-            { href: '/getting-started/quick-start', title: 'Quick Start' },
-            { href: '/getting-started/starter-templates', title: 'Starter Templates' },
-            { href: '/getting-started/why-vuetify', title: 'Why Vuetify?' },
-            { href: '/getting-started/frequently-asked-questions', title: 'Frequently asked questions' },
-            { href: '/getting-started/sponsors-and-backers', title: 'Sponsors and backers' },
-            { href: '/getting-started/contributing', title: 'Contributing' },
-            { href: '/getting-started/roadmap', title: 'Roadmap' }
+            { href: 'quick-start', title: 'Quick Start' },
+            { href: 'starter-templates', title: 'Starter Templates' },
+            { href: 'why-vuetify', title: 'Why Vuetify?' },
+            { href: 'frequently-asked-questions', title: 'Frequently asked questions' },
+            { href: 'sponsors-and-backers', title: 'Sponsors and backers' },
+            { href: 'contributing', title: 'Contributing' },
+            { href: 'roadmap', title: 'Roadmap' }
           ]
         },
         {
           title: 'Application layout',
-          group: 'layout',
+          group: '/layout',
           icon: 'mdi-page-layout-body',
           items: [
-            { href: '/layout/pre-defined', title: 'Pre-defined', badge: 'updated' },
-            { href: '/layout/grid', title: 'Grid & breakpoints' },
-            { href: '/layout/spacing', title: 'Spacing' },
-            { href: '/layout/alignment', title: 'Alignment' },
-            { href: '/layout/display', title: 'Display' },
-            { href: '/layout/elevation', title: 'Elevation' },
-            { href: '/layout/sandbox', title: 'Sandbox' }
+            { href: 'pre-defined', title: 'Pre-defined', badge: 'updated' },
+            { href: 'spacing', title: 'Spacing' },
+            { href: 'alignment', title: 'Alignment' },
+            { href: 'display', title: 'Display' },
+            { href: 'elevation', title: 'Elevation' },
+            { href: 'sandbox', title: 'Sandbox' }
           ]
         },
         {
@@ -162,10 +161,10 @@
           group: '/style',
           icon: 'mdi-format-color-fill',
           items: [
-            { href: '/style/colors', title: 'Colors' },
-            { href: '/style/theme', title: 'Theme' },
-            { href: '/style/typography', title: 'Typography' },
-            { href: '/style/content', title: 'Content' }
+            { href: 'colors', title: 'Colors' },
+            { href: 'theme', title: 'Theme' },
+            { href: 'typography', title: 'Typography' },
+            { href: 'content', title: 'Content' }
           ]
         },
         {
@@ -181,53 +180,66 @@
           group: '/components',
           icon: 'mdi-view-dashboard',
           items: [
-            { href: '/components/alerts', title: 'Alerts' },
-            { href: '/components/avatars', title: 'Avatars' },
-            { href: '/components/badges', title: 'Badges' },
-            { href: '/components/breadcrumbs', title: 'Breadcrumbs' },
-            { href: '/components/bottom-navigation', title: 'Bottom navigation' },
-            { href: '/components/bottom-sheets', title: 'Bottom sheets' },
-            { href: '/components/buttons', title: 'Buttons' },
-            { href: '/components/floating-action-buttons', title: 'Buttons: Floating Action Buttons' },
-            { href: '/components/cards', title: 'Cards' },
-            { href: '/components/carousels', title: 'Carousels' },
-            { href: '/components/chips', title: 'Chips' },
-            { href: '/components/data-tables', title: 'Data tables' },
-            { href: '/components/dialogs', title: 'Dialogs' },
-            { href: '/components/dividers', title: 'Dividers' },
-            { href: '/components/expansion-panels', title: 'Expansion panels' },
-            { href: '/components/footer', title: 'Footer' },
-            { href: '/components/forms', title: 'Forms' },
-            { href: '/components/grid-lists', title: 'Grid lists' },
-            { href: '/components/icons', title: 'Icons' },
-            { href: '/components/lists', title: 'Lists' },
-            { href: '/components/menus', title: 'Menus' },
-            { href: '/components/navigation-drawers', title: 'Navigation drawers' },
-            { href: '/components/pagination', title: 'Pagination' },
-            { href: '/components/parallax', title: 'Parallax' },
-            { href: '/components/pickers', title: 'Pickers' },
-            { href: '/components/progress', title: 'Progress' },
-            { href: '/components/selects', title: 'Selects' },
-            { href: '/components/selection-controls', title: 'Selection controls' },
-            { href: '/components/sliders', title: 'Sliders' },
-            { href: '/components/snackbars', title: 'Snackbars' },
-            { href: '/components/steppers', title: 'Steppers' },
-            { href: '/components/subheaders', title: 'Subheaders' },
-            { href: '/components/tabs', title: 'Tabs' },
-            { href: '/components/text-fields', title: 'Text fields' },
-            { href: '/components/toolbars', title: 'Toolbars' },
-            { href: '/components/tooltips', title: 'Tooltips' }
+            { href: 'alerts', title: 'Alerts' },
+            { href: 'avatars', title: 'Avatars' },
+            { href: 'badges', title: 'Badges' },
+            { href: 'breadcrumbs', title: 'Breadcrumbs' },
+            { href: 'bottom-navigation', title: 'Bottom navigation' },
+            { href: 'bottom-sheets', title: 'Bottom sheets' },
+            { href: 'buttons', title: 'Buttons' },
+            { href: 'floating-action-buttons', title: 'Buttons: Floating Action Buttons' },
+            { href: 'cards', title: 'Cards' },
+            { href: 'carousels', title: 'Carousels' },
+            { href: 'chips', title: 'Chips' },
+            { href: 'data-tables', title: 'Data tables' },
+            { href: 'dialogs', title: 'Dialogs' },
+            { href: 'dividers', title: 'Dividers' },
+            { href: 'expansion-panels', title: 'Expansion panels' },
+            { href: 'footer', title: 'Footer' },
+            {
+              title: 'Inputs & controls',
+              group: '/(forms|selects|selection|text-fields)',
+              items: [
+                { href: 'forms', title: 'Forms' },
+                { href: 'selects', title: 'Selects' },
+                { href: 'selection-controls', title: 'Selection controls' },
+                { href: 'text-fields', title: 'Text fields' }
+              ]
+            },
+            {
+              title: 'Grid & breakpoints',
+              group: '/grid',
+              items: [
+                { href: 'grid', title: 'Grid' },
+                { href: 'grid-lists', title: 'Grid lists' },
+              ]
+            },
+            { href: 'icons', title: 'Icons' },
+            { href: 'lists', title: 'Lists' },
+            { href: 'menus', title: 'Menus' },
+            { href: 'navigation-drawers', title: 'Navigation drawers' },
+            { href: 'pagination', title: 'Pagination' },
+            { href: 'parallax', title: 'Parallax' },
+            { href: 'pickers', title: 'Pickers' },
+            { href: 'progress', title: 'Progress' },
+            { href: 'sliders', title: 'Sliders' },
+            { href: 'snackbars', title: 'Snackbars' },
+            { href: 'steppers', title: 'Steppers' },
+            { href: 'subheaders', title: 'Subheaders' },
+            { href: 'tabs', title: 'Tabs' },
+            { href: 'toolbars', title: 'Toolbars' },
+            { href: 'tooltips', title: 'Tooltips' }
           ]
         },
         {
           title: 'Directives',
-          group: 'directives',
+          group: '/directives',
           icon: 'mdi-function',
           items: [
-            { href: '/directives/resizing', title: 'Resizing' },
-            { href: '/directives/ripples', title: 'Ripples' },
-            { href: '/directives/scrolling', title: 'Scrolling' },
-            { href: '/directives/touch-support', title: 'Touch support' }
+            { href: 'resizing', title: 'Resizing' },
+            { href: 'ripples', title: 'Ripples' },
+            { href: 'scrolling', title: 'Scrolling' },
+            { href: 'touch-support', title: 'Touch support' }
           ]
         },
         { href: '/pre-made-themes', title: 'Pre-made themes', icon: 'mdi-theme-light-dark' },
@@ -246,10 +258,10 @@
         },
         {
           title: 'Guides',
-          group: 'guides',
+          group: '/guides',
           icon: 'mdi-television-guide',
           items: [
-            { href: '/guides/server-side-rendering', title: 'Server side rendering' }
+            { href: 'server-side-rendering', title: 'Server side rendering' }
           ]
         }
       ]
@@ -347,6 +359,14 @@
   #app-drawer
     img.logo
       margin 40px 0 15px
+
+    .chip--x-small
+      font-size: 10px
+      height: 16px
+
+      .chip__content
+        line-height: 1
+        padding: 8px
 
     .diamond-sponsor
       // todo trim down actual image file dimensions

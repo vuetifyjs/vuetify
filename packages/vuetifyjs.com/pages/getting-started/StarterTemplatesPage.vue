@@ -1,6 +1,6 @@
 <template lang="pug">
   text-page(:data="$data" id="starter-templates-page")
-    section#introduction
+    section#default-markup
       section-heading(value="GettingStarted.StarterTemplates.defaultHeader")
       section-text(value="GettingStarted.StarterTemplates.defaultText")
 
@@ -47,6 +47,7 @@
       return {
         header: 'GettingStarted.StarterTemplates.header',
         headerText: 'GettingStarted.StarterTemplates.headerText',
+        toc: 'GettingStarted.StarterTemplates.toc',
         layouts: [
           { name: 'Baseline', href: '/examples/layouts/baseline' },
           { name: 'Baseline Flipped', href: '/examples/layouts/baseline-flipped' },

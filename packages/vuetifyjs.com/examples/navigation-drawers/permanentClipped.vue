@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer stateless dark class="blue lighten-3" value="true">
+  <v-navigation-drawer permanent dark class="blue lighten-3">
     <v-list>
       <v-list-tile v-for="item in items" :key="item.title" @click="">
         <v-list-tile-action>
@@ -21,8 +21,7 @@
           { title: 'Dashboard', icon: 'dashboard' },
           { title: 'Account', icon: 'account_box' },
           { title: 'Admin', icon: 'gavel' }
-        ],
-        right: null
+        ]
       }
     }
   }
