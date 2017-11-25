@@ -54,11 +54,18 @@ exports[`VExpansionPanelContent.js should render component and match snapshot 1`
 
 `;
 
-exports[`VExpansionPanelContent.js should respect hideAction prop 1`] = `
+exports[`VExpansionPanelContent.js should respect hideActions prop 1`] = `
 
 <li tabindex="0"
     class="expansion-panel__container"
 >
+  <div class="expansion-panel__header"
+       data-ripple="false"
+  >
+    <span>
+      header
+    </span>
+  </div>
   <div class="expansion-panel__body"
        style="display: none;"
   >

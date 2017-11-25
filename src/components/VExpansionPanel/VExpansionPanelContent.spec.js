@@ -20,13 +20,14 @@ test('VExpansionPanelContent.js', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should respect hideAction prop', () => {
+  it('should respect hideActions prop', () => {
     const wrapper = mount(VExpansionPanelContent, {
       propsData: {
         hideActions: true
       },
       slots: {
-        actions: [compileToFunctions('<span>actions</span>')]
+        actions: [compileToFunctions('<span>actions</span>')],
+        header: [compileToFunctions('<span>header</span>')]
       },
       provide: {
         focusable: true,
