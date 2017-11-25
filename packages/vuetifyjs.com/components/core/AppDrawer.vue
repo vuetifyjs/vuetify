@@ -161,8 +161,8 @@
           group: '/style',
           icon: 'mdi-format-color-fill',
           items: [
-            { href: 'colors', title: 'Colors' },
-            { href: 'theme', title: 'Theme' },
+            { href: 'colors', title: 'Colors', badge: 'updated' },
+            { href: 'theme', title: 'Theme', badge: 'updated' },
             { href: 'typography', title: 'Typography' },
             { href: 'content', title: 'Content' }
           ]
@@ -216,6 +216,7 @@
             },
             { href: 'icons', title: 'Icons' },
             { href: 'lists', title: 'Lists' },
+            { href: 'jumbotron', title: 'Jumbotrons', badge: 'new' },
             { href: 'menus', title: 'Menus' },
             { href: 'navigation-drawers', title: 'Navigation drawers' },
             { href: 'pagination', title: 'Pagination' },
@@ -227,7 +228,7 @@
             { href: 'steppers', title: 'Steppers' },
             { href: 'subheaders', title: 'Subheaders' },
             { href: 'tabs', title: 'Tabs' },
-            { href: 'toolbars', title: 'Toolbars' },
+            { href: 'toolbars', title: 'Toolbars', badge: 'updated' },
             { href: 'tooltips', title: 'Tooltips' }
           ]
         },
@@ -257,11 +258,12 @@
           ]
         },
         {
-          title: 'Guides',
+          title: 'Advanced tutorials',
           group: '/guides',
           icon: 'mdi-television-guide',
           items: [
-            { href: 'server-side-rendering', title: 'Server side rendering' }
+            { href: 'server-side-rendering', title: 'Server side rendering' },
+            { href: 'a-la-carte', title: 'A la carte', badge: 'updated' }
           ]
         }
       ]
