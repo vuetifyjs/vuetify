@@ -146,7 +146,7 @@ export default {
     },
     genItems (h) {
       return this.items.map((i) => {
-        return h('li', [
+        return h('li', { key: i }, [
           isNaN(i) && h('span', { class: 'pagination__more' }, [i]) || this.genItem(h, i)
         ])
       })
