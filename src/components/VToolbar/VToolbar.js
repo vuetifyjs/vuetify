@@ -155,13 +155,16 @@ export default {
     clippedLeft (val) {
       this.updateApplication()
     },
+    height (val) {
+      this.updateApplication()
+    },
     clippedRight (val) {
       this.updateApplication()
     },
     invertedScroll () {
       this.updateApplication()
     },
-    isScrolling (val) {
+    isScrollingUp (val) {
       this.updateApplication()
     }
   },
