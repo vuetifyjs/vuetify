@@ -43,9 +43,10 @@ export default {
 
         rows.push(this.needsTR(row)
           ? this.genTR(row, {
+            key: index,
             attrs: { active: this.isSelected(item) }
           })
-          : row)
+          : Object.assign({ key: index }, row))
 
         if (this.$scopedSlots.expand) {
           const expandRow = this.genExpandedRow(props)
