@@ -35,6 +35,7 @@ export default {
     counter: [Boolean, Number, String],
     fullWidth: Boolean,
     multiLine: Boolean,
+    noResize: Boolean,
     placeholder: String,
     prefix: String,
     rows: {
@@ -59,6 +60,7 @@ export default {
         'input-group--solo': this.solo,
         'input-group--multi-line': this.multiLine,
         'input-group--full-width': this.fullWidth,
+        'input-group--no-resize': this.noResizeHandle,
         'input-group--prefix': this.prefix,
         'input-group--suffix': this.suffix,
         'input-group--textarea': this.textarea
@@ -102,6 +104,9 @@ export default {
         this.lazyValue.toString().length > 0 ||
         this.badInput ||
         ['time', 'date', 'datetime-local', 'week', 'month'].includes(this.type)
+    },
+    noResizeHandle () {
+      return (this.multiLine || this.textarea) && (this.noResize || this.autoGrow)
     },
     shouldAutoGrow () {
       return (this.multiLine || this.textarea) && this.autoGrow
