@@ -232,12 +232,11 @@ test('VDataTable.vue', () => {
   })
 
   it('should not filter items if search is empty', async () => {
-    const wrapper = mount(VDataTable, dataTableTestDataFilter())
+    const data = dataTableTestDataFilter()
+    data.propsData.search = '    '
+    const wrapper = mount(VDataTable, data)
 
-    wrapper.setProps({
-      search: '    '
-    })
-    expect(wrapper.instance().filteredItems.length).toBe(1)
+    expect(wrapper.instance().filteredItems.length).toBe(data.propsData.items.length)
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
