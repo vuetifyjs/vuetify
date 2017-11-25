@@ -52,6 +52,8 @@ export default {
       type: Function,
       default: (items, search, filter, headers) => {
         search = search.toString().toLowerCase()
+        if (search.trim() === '') return items
+
         const props = headers.map(h => h.value)
 
         return items.filter(item => props.some(prop => filter(getObjectValueByPath(item, prop), search)))

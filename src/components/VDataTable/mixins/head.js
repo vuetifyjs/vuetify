@@ -46,6 +46,7 @@ export default {
     genHeaderData (header, children) {
       const classes = ['column']
       const data = {
+        key: header[this.headerText],
         attrs: {
           role: 'columnheader',
           scope: 'col',
