@@ -58,6 +58,7 @@ export function createRouter () {
         route('/getting-started/frequently-asked-questions', 'getting-started/Faq'),
         route('/getting-started/sponsors-and-backers', 'getting-started/Sponsors'),
         route('/getting-started/contributing', 'getting-started/Contributing'),
+        route('/getting-started/roadmap', 'getting-started/Roadmap'),
         // Application Layout
         route('/layout/pre-defined', 'layout/PreDefined'),
         // Base Styles
@@ -84,6 +85,7 @@ export function createRouter () {
         route('/components/dividers', 'components/Dividers'),
         route('/components/expansion-panels', 'components/ExpansionPanels'),
         route('/components/footer', 'components/Footer'),
+        route('/components/grid', 'components/Grid'),
         route('/components/grid-lists', 'components/GridLists'),
         route('/components/icons', 'components/Icons'),
         route('/components/lists', 'components/Lists'),

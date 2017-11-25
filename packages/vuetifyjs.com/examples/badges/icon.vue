@@ -1,7 +1,7 @@
 <template>
   <div class="text-xs-center">
     <v-badge overlay left color="purple" overlap>
-      <v-icon slot="badge" dark>done</v-icon>
+      <v-icon slot="badge" dark small>done</v-icon>
       <v-icon
         large
         color="grey lighten-1"
@@ -11,7 +11,7 @@
     </v-badge>
 
     <v-badge overlap color="orange">
-      <v-icon slot="badge" dark>notifications</v-icon>
+      <v-icon slot="badge" dark small>notifications</v-icon>
       <v-icon
         large
         color="grey darken-1"

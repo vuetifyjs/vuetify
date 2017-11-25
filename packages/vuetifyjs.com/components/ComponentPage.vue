@@ -160,7 +160,10 @@
         switch (name) {
           case 'props':
             return this.genComponentProps()
-          break
+            break
+          case 'slots':
+            return {}
+            break
         }
       },
       genComponentProps () {

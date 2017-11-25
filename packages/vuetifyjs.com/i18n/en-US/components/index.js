@@ -16,6 +16,7 @@ import ExpansionPanels from './ExpansionPanels'
 import Fabs from './Fabs'
 import Footer from './Footer'
 import Forms from './Forms'
+import Grids from './Grids'
 import GridLists from './GridLists'
 import Icons from './Icons'
 import Lists from './Lists'
@@ -55,6 +56,7 @@ export default {
   Fabs,
   Footer,
   Forms,
+  Grids,
   GridLists,
   Icons,
   Lists,

@@ -85,7 +85,7 @@
       cursor: pointer
       width: 25px
       height: 25px
-      z-index: 2
+      z-index: 1
 
     &:after
       position: absolute

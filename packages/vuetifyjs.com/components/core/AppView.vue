@@ -1,5 +1,5 @@
 <template lang="pug">
   v-content
-    v-fade-transition(mode="out-in")
+    v-fade-transition
       router-view
 </template>

@@ -48,11 +48,6 @@
           )
             v-icon(color="grey darken-1") code
           span View source
-      v-divider
-
-      //- Example mount
-      div(:class="exampleClasses").application.application--example.pa-3
-        div(:id="'example-'+uid")
 
       //- Example markup
       v-expansion-panel.elevation-0
@@ -69,14 +64,19 @@
                 active-class=""
                 class="body-2"
               ) {{ tab }}
-            v-tabs-items
+            v-tabs-items(class="grey lighten-3")
               v-tabs-content(
                 v-for="tab in tabs"
                 v-bind:key="tab"
                 v-bind:id="tab"
               )
-                markup(color="grey lighten-3" :lang="getLang(tab)" v-if="parsed[tab]").ma-0
+                markup(:lang="getLang(tab)" v-if="parsed[tab]").ma-0
                   div(v-html="parsed[tab]")
+      v-divider
+
+      //- Example mount
+      div(:class="exampleClasses").application.application--example.pa-3
+        div(:id="'example-'+uid")
 
     //- Codepen
     codepen(ref="codepen" :pen="pen")
@@ -219,11 +219,13 @@
 </script>
 
 <style lang="stylus">
+  @import '../node_modules/vuetify/src/stylus/settings/_variables.styl'
+
   .component-example
     // margin-bottom: 32px
     
     .application--example
-      transition: .3s ease-in-out
+      transition: .3s $transition.swing
 
       > div
         width: 100%

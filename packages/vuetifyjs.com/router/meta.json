@@ -11,6 +11,12 @@
     "description": "Get started with Vue and Vuetify in no time.",
     "keywords": "quick start, vuetify templates, get started"
   },
+  "/getting-started/starter-templates": {
+    "h1": "Starter Templates",
+    "title": "Starter Templates",
+    "description": "Understand the layout and structure of your application. Check out examples.",
+    "keywords": "templates, vuetify"
+  },
   "/getting-started/why-vuetify": {
     "h1": "Why use Vuetify?",
     "title": "Why Vuetify?",
