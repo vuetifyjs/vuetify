@@ -279,9 +279,6 @@ export default {
     isShown (el) {
       return !!el && el.style.display !== 'none'
     },
-    resetDimensions () {
-      this.dimensions = Object.assign({}, dimensions)
-    },
     updateDimensions () {
       const dimensions = {}
 
