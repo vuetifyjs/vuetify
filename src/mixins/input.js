@@ -64,7 +64,7 @@ export default {
       }, this.classes)
     },
     isClearable () {
-      return this.disabled ? false : this.clearable
+      return this.clearable && !this.disabled && !this.readonly
     },
     isDirty () {
       return !!this.inputValue
