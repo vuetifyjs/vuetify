@@ -152,7 +152,7 @@ test('VCarousel.js', ({ mount }) => {
     const wrapper = mount(component)
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.find('.carousel__left').length).toBe(0)
-    expect(wrapper.find('.carousel__right').length).toBe(0)
+    expect(wrapper.find('.carousel__left')).toHaveLength(0)
+    expect(wrapper.find('.carousel__right')).toHaveLength(0)
   })
 })

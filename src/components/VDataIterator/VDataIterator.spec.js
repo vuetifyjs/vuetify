@@ -144,7 +144,7 @@ test('VDataIterator.js', () => {
     data.propsData.search = '    '
     const wrapper = mount(VDataIterator, data)
 
-    expect(wrapper.instance().filteredItems.length).toBe(data.propsData.items.length)
+    expect(wrapper.instance().filteredItems).toHaveLength(data.propsData.items.length)
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })

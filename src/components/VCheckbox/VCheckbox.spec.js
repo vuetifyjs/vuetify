@@ -191,7 +191,7 @@ test('VCheckbox.js', () => {
 
     const ripple = wrapper.find('.input-group--selection-controls__ripple')
 
-    expect(ripple.length).toBe(0)
+    expect(ripple).toHaveLength(0)
   })
 
   it('should render ripple with data attribute when ripple prop is true', () => {

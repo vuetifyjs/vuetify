@@ -23,6 +23,6 @@ test('VFlex', ({ mount, functionalContext }) => {
       }
     }))
 
-    expect(wrapper.find('#test').length).toBe(1)
+    expect(wrapper.find('#test')).toHaveLength(1)
   })
 })

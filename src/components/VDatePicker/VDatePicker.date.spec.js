@@ -173,7 +173,7 @@ test('VDatePicker.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.find('.picker__title').length).toBe(0)
+    expect(wrapper.find('.picker__title')).toHaveLength(0)
   })
 
   it('should match snapshot with first day of week', () => {
