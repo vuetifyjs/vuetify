@@ -27,10 +27,20 @@ test('VIcon.js', () => {
   })
 
   it('should render a mapped size', () => {
-    const context = functionalContext({ props: { xLarge: true } }, 'add')
-    const wrapper = mount(VIcon, context)
+    const SIZE_MAP = {
+      small: '16px',
+      default: '24px',
+      medium: '28px',
+      large: '36px',
+      xLarge: '40px'
+    }
 
-    expect(wrapper.element.style.fontSize).toBe('40px')
+    Object.keys(SIZE_MAP).forEach(size => {
+      const context = functionalContext({ props: { [size]: true } }, 'add')
+      const wrapper = mount(VIcon, context)
+
+      expect(wrapper.element.style.fontSize).toBe(SIZE_MAP[size])
+    })
   })
 
   it('should render a specific size', () => {

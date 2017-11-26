@@ -146,4 +146,13 @@ test('VCarousel.js', ({ mount }) => {
     expect(wrapper.contains('carousel__controls')).toBe(false)
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should render component without controls', async () => {
+    const component = create({ hideControls: true })
+    const wrapper = mount(component)
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.find('.carousel__left').length).toBe(0)
+    expect(wrapper.find('.carousel__right').length).toBe(0)
+  })
 })

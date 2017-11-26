@@ -12,6 +12,17 @@ test('VProgressLinear.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render inactive component and match snapshot', () => {
+    const wrapper = mount(VProgressLinear, {
+      propsData: {
+        value: 33,
+        active: false
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should render component with color and match snapshot', () => {
     const wrapper = mount(VProgressLinear, {
       propsData: {
@@ -80,7 +91,7 @@ test('VProgressLinear.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render component with buffer value and match snapshot', () => {
+  it('should render component with buffer value and match snapshot', async () => {
     const wrapper = mount(VProgressLinear, {
       propsData: {
         value: 33,
@@ -88,6 +99,12 @@ test('VProgressLinear.js', ({ mount }) => {
       }
     })
 
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({
+      bufferValue: 0
+    })
+    await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
   })
 

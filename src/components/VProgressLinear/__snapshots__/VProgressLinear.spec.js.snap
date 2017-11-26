@@ -42,6 +42,28 @@ exports[`VProgressLinear.js should render component with buffer value and match 
 
 `;
 
+exports[`VProgressLinear.js should render component with buffer value and match snapshot 2`] = `
+
+<div class="progress-linear"
+     style="height: 7px;"
+>
+  <div class="progress-linear__background primary"
+       style="height: auto; opacity: 0.3; width: 0%;"
+  >
+  </div>
+  <div class="progress-linear__bar"
+       style="width: 0%;"
+  >
+    <!---->
+    <div class="progress-linear__bar__determinate primary"
+         style="width: 0%;"
+    >
+    </div>
+  </div>
+</div>
+
+`;
+
 exports[`VProgressLinear.js should render component with buffer value and value > buffer value and match snapshot 1`] = `
 
 <div class="progress-linear"
@@ -136,6 +158,28 @@ exports[`VProgressLinear.js should render component with color and match snapsho
   <div class="progress-linear__bar">
     <!---->
     <div class="progress-linear__bar__determinate orange"
+         style="width: 33%;"
+    >
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VProgressLinear.js should render inactive component and match snapshot 1`] = `
+
+<div class="progress-linear"
+     style="height: 7px;"
+>
+  <div class="progress-linear__background primary"
+       style="height: 0px; opacity: 0.3; width: 100%;"
+  >
+  </div>
+  <div class="progress-linear__bar"
+       style="height: 0px;"
+  >
+    <!---->
+    <div class="progress-linear__bar__determinate primary"
          style="width: 33%;"
     >
     </div>

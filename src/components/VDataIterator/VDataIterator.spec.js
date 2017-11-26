@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import { compileToFunctions } from 'vue-template-compiler'
 import { test } from '~util/testing'
 import { mount } from 'avoriaz'
 import VDataIterator from './VDataIterator'
@@ -33,6 +34,25 @@ test('VDataIterator.js', () => {
     const content = wrapper.find('.data-iterator div div')[0]
     expect(content.element.textContent).toBe('No matching records found')
 
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should match a snapshot - hideActions and no footer slot', () => {
+    const data = dataIteratorTestData()
+    data.propsData.hideActions = true
+    const wrapper = mount(VDataIterator, data)
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should match a snapshot - footer slot', () => {
+    const data = dataIteratorTestData()
+    data.slots = {
+      footer: [compileToFunctions('<span>footer</span>')],
+    }
+    const wrapper = mount(VDataIterator, data)
+
+    expect(wrapper.html()).toMatchSnapshot()
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
