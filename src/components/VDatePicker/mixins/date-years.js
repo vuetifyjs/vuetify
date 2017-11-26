@@ -20,7 +20,6 @@ export default {
         const date = this.sanitizeDateString(`${year}-${this.tableMonth + 1}-${this.day}`, 'date')
         if (this.isAllowed(date)) this.inputDate = date
         this.tableDate = `${year}-${this.tableMonth + 1}`
-        this.inputDate = date
         this.activePicker = 'MONTH'
       }
     },
