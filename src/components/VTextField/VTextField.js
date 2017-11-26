@@ -105,11 +105,14 @@ export default {
         this.badInput ||
         ['time', 'date', 'datetime-local', 'week', 'month'].includes(this.type)
     },
+    isTextarea () {
+      return this.multiLine || this.textarea
+    },
     noResizeHandle () {
-      return (this.multiLine || this.textarea) && (this.noResize || this.autoGrow)
+      return this.isTextarea && (this.noResize || this.autoGrow)
     },
     shouldAutoGrow () {
-      return (this.multiLine || this.textarea) && this.autoGrow
+      return this.isTextarea && this.autoGrow
     }
   },
 
@@ -207,7 +210,7 @@ export default {
       }, this.count)
     },
     genInput () {
-      const tag = this.multiLine || this.textarea ? 'textarea' : 'input'
+      const tag = this.isTextarea ? 'textarea' : 'input'
       const listeners = Object.assign({}, this.$listeners)
       delete listeners['change'] // Change should not be bound externally
 
@@ -240,7 +243,7 @@ export default {
 
       if (this.placeholder) data.domProps.placeholder = this.placeholder
 
-      if (!this.textarea && !this.multiLine) {
+      if (!this.isTextarea) {
         data.domProps.type = this.type
       } else {
         data.domProps.rows = this.rows
