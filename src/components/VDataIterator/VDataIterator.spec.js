@@ -118,4 +118,14 @@ test('VDataIterator.js', () => {
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
+
+  it('should not filter items if search is empty', async () => {
+    const data = dataIteratorTestData()
+    data.propsData.search = '    '
+    const wrapper = mount(VDataIterator, data)
+
+    expect(wrapper.instance().filteredItems.length).toBe(data.propsData.items.length)
+
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 })
