@@ -159,7 +159,7 @@ test('VTextField.js', ({ mount }) => {
     expect(clear).toBe(undefined)
   })
 
-  it('should render append icon when input is disabled and append icon is set', async () => {
+  it('should render append icon when clearable input is disabled and append icon is set', async () => {
     const wrapper = mount(VTextField, {
       propsData: {
         clearable: true,
