@@ -199,7 +199,7 @@ test('VDatePicker.js', ({ mount }) => {
     expect(wrapper.vm.tableDate).toBe('2004')
   })
 
-  it('should calculate the first allowed month', () => {
+  it.skip('should calculate the first allowed month', () => {
     const today = new Date().toISOString().substr(0, 7)
 
     const wrapper1 = mount(VDatePicker, {
