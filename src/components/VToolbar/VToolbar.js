@@ -163,9 +163,6 @@ export default {
     },
     invertedScroll () {
       this.updateApplication()
-    },
-    isScrollingUp (val) {
-      this.updateApplication()
     }
   },
 
