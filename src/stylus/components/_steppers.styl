@@ -35,7 +35,7 @@ stepper($material)
         color: $material.stepper.completed
 
     &--inactive
-      &.stepper__step--editable
+      &.stepper__step--editable:not(.stepper__step--error)
         &:hover
           .stepper__step__step
             background: $material.stepper.hover
@@ -47,7 +47,7 @@ stepper($material)
       color: rgba($material.fg-color, $material.secondary-text-percent)
 
   &--non-linear
-    .stepper__step:not(.stepper__step--complete)
+    .stepper__step:not(.stepper__step--complete):not(.stepper__step--error)
       .stepper__label
         color: rgba($material.fg-color, $material.secondary-text-percent)
 
