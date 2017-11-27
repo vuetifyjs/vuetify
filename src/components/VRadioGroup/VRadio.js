@@ -31,22 +31,21 @@ export default {
     Themeable
   ],
 
+  data: () => ({
+    defaultColor: 'accent',
+    isActive: false,
+    parentError: false
+  }),
+
   props: {
     disabled: Boolean,
     value: null,
     label: String
   },
 
-  data () {
-    return {
-      defaultColor: 'accent',
-      isActive: false
-    }
-  },
-
   computed: {
     classes () {
-      return this.addTextColorClassChecks({
+      const classes = {
         'input-group': true,
         'input-group--active': this.isActive,
         'input-group--disabled': this.disabled,
@@ -55,9 +54,14 @@ export default {
         'radio': true,
         'theme--dark': this.dark,
         'theme--light': this.light
-      })
-    },
+      }
 
+      if (!this.parentError) {
+        return this.addTextColorClassChecks(classes)
+      }
+
+      return classes
+    },
     icon () {
       return this.isActive ? 'radio_button_checked' : 'radio_button_unchecked'
     }
