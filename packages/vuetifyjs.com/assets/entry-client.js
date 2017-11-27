@@ -1,5 +1,4 @@
 import '../node_modules/vuetify/dist/vuetify.css'
-import Vue from 'vue'
 import 'es6-promise/auto'
 import { createApp } from './app'
 
@@ -25,16 +24,12 @@ router.onReady(() => {
     const activated = matched.filter((c, i) => {
       return diffed || (diffed = (prevMatched[i] !== c))
     })
-    if (!activated.length) {
-      return next()
-    }
+
+    if (!activated.length) return next()
+
     Promise.all(activated.map(c => {
-      if (c.asyncData) {
-        return c.asyncData({ store, route: to })
-      }
-    })).then(() => {
-      next()
-    }).catch(next)
+      if (c.asyncData) return c.asyncData({ store, route: to })
+    })).then(next).catch(next)
   })
 
   // actually mount to DOM
