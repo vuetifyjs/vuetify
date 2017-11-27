@@ -17,10 +17,6 @@ export default {
     inputValue: {
       required: false
     },
-    items: {
-      type: Array,
-      default: () => []
-    },
     mandatory: Boolean,
     multiple: Boolean
   },
@@ -77,12 +73,6 @@ export default {
       }
 
       this.$emit('change', items)
-    }
-  },
-
-  mounted () {
-    if (this.items.length > 0) {
-      console.warn('The \'items\' props has been deprecated. v-btn-toggle now has a default slot where you can place buttons.')
     }
   },
 

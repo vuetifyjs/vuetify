@@ -85,6 +85,8 @@ export default {
       type: Function,
       default: (items, search, filter) => {
         search = search.toString().toLowerCase()
+        if (search.trim() === '') return items
+
         return items.filter(i => (
           Object.keys(i).some(j => filter(i[j], search))
         ))

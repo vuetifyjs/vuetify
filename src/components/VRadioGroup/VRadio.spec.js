@@ -132,7 +132,7 @@ test('VRadio.vue', ({ mount }) => {
 
     const ripple = wrapper.find('.input-group--selection-controls__ripple')
 
-    expect(ripple.length).toBe(0)
+    expect(ripple).toHaveLength(0)
 
     expect('The v-radio component must be used inside a v-radio-group.').toHaveBeenTipped()
   })

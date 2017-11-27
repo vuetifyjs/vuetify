@@ -268,11 +268,11 @@ test('VSelect', () => {
       }
     })
 
-    expect(wrapper.vm.nudgeTop).toBe(0)
+    expect(wrapper.vm.nudgeTop).toBe(-18)
 
     wrapper.setProps({ autocomplete: true })
 
-    expect(wrapper.vm.nudgeTop).toBe(24)
+    expect(wrapper.vm.nudgeTop).toBe(0)
 
     wrapper.setProps({ autocomplete: false, overflow: true })
 
@@ -285,6 +285,10 @@ test('VSelect', () => {
     wrapper.setProps({ auto: false, overflow: true, hideDetails: false })
 
     expect(wrapper.vm.nudgeTop).toBe(26)
+
+    wrapper.setProps({ hideDetails: true })
+
+    expect(wrapper.vm.nudgeTop).toBe(2)
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })

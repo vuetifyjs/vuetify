@@ -105,13 +105,15 @@ export default {
       }) : this.filteredItems
     },
     nudgeTop () {
-      let nudgeTop = 0
+      let nudgeTop = -18
 
-      if (this.auto) nudgeTop = -18
-      else if (this.solo) nudgeTop = 0
-      else if (this.isDropdown) {
-        nudgeTop = this.hideDetails ? 2 : 26
-      } else if (this.shouldOffset) nudgeTop = 24
+      if (this.solo) nudgeTop = 0
+      else if (this.shouldOffset) {
+        nudgeTop += 44
+
+        nudgeTop += this.hideDetails ? -24 : 0
+        nudgeTop += this.isAutocomplete && !this.isDropdown ? -2 : 0
+      }
 
       return nudgeTop
     },
@@ -139,7 +141,7 @@ export default {
       )) || null
     },
     shouldOffset () {
-      return this.isAutocomplete || this.offset || this.isDropdown
+      return this.isAutocomplete || this.isDropdown
     }
   }
 }

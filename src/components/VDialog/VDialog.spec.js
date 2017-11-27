@@ -1,6 +1,7 @@
 import VDialog from '~components/VDialog'
 import { test } from '~util/testing'
 import { mount } from 'avoriaz'
+import { compileToFunctions } from 'vue-template-compiler'
 
 test('VDialog.js', () => {
   it('should render component and match snapshot', () => {
@@ -95,6 +96,94 @@ test('VDialog.js', () => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should open dialog on activator click', async () => {
+    const input = jest.fn()
+    const wrapper = mount(VDialog, {
+      slots: {
+        activator: [compileToFunctions('<span>activator</span>')]
+      }
+    })
+
+    wrapper.vm.$on('input', input)
+
+    expect(wrapper.vm.isActive).toBe(false)
+    wrapper.find('.dialog__activator')[0].trigger('click')
+    expect(wrapper.vm.isActive).toBe(true)
+    await wrapper.vm.$nextTick()
+    expect(input).toBeCalledWith(true)
+
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('not should open disabed dialog on activator click', async () => {
+    const input = jest.fn()
+    const wrapper = mount(VDialog, {
+      propsData: {
+        disabled: true
+      },
+      slots: {
+        activator: [compileToFunctions('<span>activator</span>')]
+      }
+    })
+
+    wrapper.vm.$on('input', input)
+
+    expect(wrapper.vm.isActive).toBe(false)
+    wrapper.find('.dialog__activator')[0].trigger('click')
+    expect(wrapper.vm.isActive).toBe(false)
+    await wrapper.vm.$nextTick()
+    expect(input).not.toBeCalled()
+
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('not change state on v-model update', async () => {
+    const wrapper = mount(VDialog, {
+      propsData: {
+        value: false
+      },
+      slots: {
+        activator: [compileToFunctions('<span>activator</span>')]
+      }
+    })
+
+    expect(wrapper.vm.isActive).toBe(false)
+
+    wrapper.setProps({
+      value: true
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isActive).toBe(true)
+
+    wrapper.setProps({
+      value: false
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isActive).toBe(false)
+
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should emit keydown event', async () => {
+    const keydown = jest.fn()
+    const component = {
+      render: h => h(VDialog, {
+        props: {
+          value: true
+        },
+        on: {
+          keydown
+        }
+      })
+    }
+    const wrapper = mount(component)
+
+    window.dispatchEvent(new Event('keydown'))
+    expect(keydown).toBeCalled()
+
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 })
