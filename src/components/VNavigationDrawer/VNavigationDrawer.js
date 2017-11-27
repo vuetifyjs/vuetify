@@ -167,7 +167,7 @@ export default {
 
       if (this.temporary || this.isMobile) {
         this.tryOverlay()
-        this.$el.scrollTop = 0
+        this.$el && (this.$el.scrollTop = 0)
       }
 
       this.updateApplication()
