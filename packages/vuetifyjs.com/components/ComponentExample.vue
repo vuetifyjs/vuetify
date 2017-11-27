@@ -227,7 +227,8 @@
     .application--example
       transition: .3s $transition.swing
 
-      > div
+      > div,
+      > form
         width: 100%
 
     .component-example__panel

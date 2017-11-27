@@ -19,8 +19,8 @@
       :overlay=false
       scrollable
     >
-      <v-card>
-          <v-toolbar style="flex: 0 0 auto;" dark class="primary">
+      <v-card tile>
+        <v-toolbar card dark color="primary">
           <v-btn icon @click.native="dialog = false" dark>
             <v-icon>close</v-icon>
           </v-btn>
@@ -28,17 +28,17 @@
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <v-btn dark flat @click.native="dialog = false">Save</v-btn>
-            <v-menu bottom right offset-y>
-              <v-btn slot="activator" dark icon>
-                <v-icon>more_vert</v-icon>
-              </v-btn>
-              <v-list>
-                <v-list-tile v-for="item in items" :key="item.title" @click="">
-                  <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                </v-list-tile>
-              </v-list>
-            </v-menu>
           </v-toolbar-items>
+          <v-menu bottom right offset-y>
+            <v-btn slot="activator" dark icon>
+              <v-icon>more_vert</v-icon>
+            </v-btn>
+            <v-list>
+              <v-list-tile v-for="item in items" :key="item.title" @click="">
+                <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
         </v-toolbar>
         <v-card-text>
           <v-btn color="primary" dark @click.stop="dialog2 = !dialog2">Open Dialog 2</v-btn>

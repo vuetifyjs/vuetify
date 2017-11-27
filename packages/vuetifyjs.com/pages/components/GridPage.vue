@@ -1,8 +1,8 @@
 <template lang="pug">
-  component-page(v-bind:data="$data")
+  component-page(:data="data")
     section
-      section-head(value="Layout.Grids.breakpointHeader")
-      section-text(value="Layout.Grids.breakpointText1")
+      section-head(value="Components.Grid.breakpointHeader")
+      section-text(value="Components.Grid.breakpointText1")
       markup(lang="js")
         |export default {
         |    mounted () {
@@ -20,7 +20,7 @@
         |      }
         |    }
         |}
-      section-text(value="Layout.Grids.breakpointText2")
+      section-text(value="Components.Grid.breakpointText2")
       markup(lang="js")
         |export default {
         |    data: () => ({
@@ -41,7 +41,7 @@
         |      }
         |    }
         |}
-      section-text(value="Layout.Grids.breakpointText3")
+      section-text(value="Layout.Grid.breakpointText3")
       markup(lang="html")
         |&lt;v-dialog :fullscreen="$vuetify.breakpoint.xsOnly"&gt;
         |&nbsp;&nbsp;&nbsp;&nbsp;...
@@ -50,25 +50,19 @@
 
 <script>
   export default {
-    name: 'grid-layout-page',
-
-    data: () => ({
-      name: 'grid',
-      component: 'v-container',
-      components: [
-        'v-layout',
-        'v-flex'
-      ],
-      usage: { file: 'grid' },
-      examples: [
-        { file: 'offset' },
-        { file: 'order' },
-        { file: 'directionAndAlign' },
-        { file: 'rowColumnBreakpoint' },
-        { file: 'nestedGrid' },
-        { file: 'uniqueLayouts' },
-        { file: 'tags' }
-      ]
-    })
+    computed: {
+      components () {
+        return this.$t('Components.Grid.components')
+      },
+      data () {
+        return {
+          components: this.components,
+          examples: this.examples
+        }
+      },
+      examples () {
+        return this.$t('Components.Grid.examples')
+      }
+    }
   }
 </script>

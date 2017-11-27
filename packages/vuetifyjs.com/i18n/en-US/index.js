@@ -15,9 +15,6 @@ import Components from './components'
 // Directives
 import Directives from './directives'
 
-// Examples
-import Examples from './examples'
-
 export default {
   Components,
   Directives,
@@ -27,6 +24,5 @@ export default {
   Motion,
   Vuetify,
   GettingStarted,
-  Examples,
   Guides
 }
