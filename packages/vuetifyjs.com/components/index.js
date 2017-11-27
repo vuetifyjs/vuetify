@@ -5,8 +5,8 @@ import ComponentPage from './ComponentPage'
 import ComponentParameters from './ComponentParameters'
 import Markup from './Markup'
 import Page from './Page'
-import PageHeading from './PageHeading'
-import SectionHeading from './SectionHeading'
+import PageHead from './PageHead'
+import SectionHead from './SectionHead'
 import SectionText from './SectionText'
 import TextPage from './TextPage'
 
@@ -18,8 +18,8 @@ export default {
   ComponentParameters,
   Markup,
   Page,
-  PageHeading,
-  SectionHeading,
+  PageHead,
+  SectionHead,
   SectionText,
   TextPage
 }

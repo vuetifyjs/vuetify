@@ -3,8 +3,8 @@
     :color="computedColor"
     :icon="computedIcon"
     value
-  ).my-5
-    span(v-html="$t(value)")
+  ).my-5.app-alert
+    markdown(:source="$t(value)")
 </template>
 
 <script>
@@ -48,3 +48,9 @@
     }
   }
 </script>
+
+<style>
+  .app-alert p {
+    margin: 0 !important;
+  }
+</style>

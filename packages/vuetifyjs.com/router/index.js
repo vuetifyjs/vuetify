@@ -53,10 +53,9 @@ export function createRouter () {
         route('/', 'Home'),
         // Getting Started
         route('/getting-started/quick-start', 'getting-started/QuickStart'),
-        route('/getting-started/starter-templates', 'getting-started/StarterTemplates'),
         route('/getting-started/why-vuetify', 'getting-started/WhyVuetify'),
-        route('/getting-started/frequently-asked-questions', 'getting-started/Faq'),
-        route('/getting-started/sponsors-and-backers', 'getting-started/Sponsors'),
+        route('/getting-started/frequently-asked-questions', 'getting-started/FrequentlyAskedQuestions'),
+        route('/getting-started/sponsors-and-backers', 'getting-started/SponsorsAndBackers'),
         route('/getting-started/contributing', 'getting-started/Contributing'),
         route('/getting-started/roadmap', 'getting-started/Roadmap'),
         // Application Layout
@@ -69,19 +68,6 @@ export function createRouter () {
         // Motion & Transitions
         route('/motion/transitions', 'motion/Transitions'),
         // Components
-        route('/components/alerts', 'components/Alerts'),
-        route('/components/avatars', 'components/Avatars'),
-        route('/components/badges', 'components/Badges'),
-        route('/components/breadcrumbs', 'components/Breadcrumbs'),
-        route('/components/bottom-navigation', 'components/BottomNav'),
-        route('/components/bottom-sheets', 'components/BottomSheets'),
-        route('/components/buttons', 'components/Buttons'),
-        route('/components/floating-action-buttons', 'components/Fabs'),
-        route('/components/cards', 'components/Cards'),
-        route('/components/carousels', 'components/Carousels'),
-        route('/components/chips', 'components/Chips'),
-        route('/components/data-tables', 'components/DataTables'),
-        route('/components/dialogs', 'components/Dialogs'),
         route('/components/dividers', 'components/Dividers'),
         route('/components/expansion-panels', 'components/ExpansionPanels'),
         route('/components/footer', 'components/Footer'),
@@ -105,6 +91,7 @@ export function createRouter () {
         route('/components/text-fields', 'components/TextFields'),
         route('/components/toolbars', 'components/Toolbars'),
         route('/components/tooltips', 'components/Tooltips'),
+        route('/components/:component', 'components/Doc'),
         // Directives
         route('/directives/touch-support', 'directives/Touch'),
         //

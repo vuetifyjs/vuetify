@@ -22,7 +22,7 @@ export default {
     {
       img: '/static/vuetify_semantic.svg',
       title: 'Semantic toolkit',
-      caption: `Vuetify is built from the ground up to be semantic. Easy to learn, easy to remember&mdash;this means that whether you are developing your own application, or onboarding a new developer, Vuetify's <em>write-as-you-speak</em> components and properties make development a breeze.`
+      caption: `Vuetify is built from the ground up to be semantic. Easy to learn, easy to remember&mdash;this means that whether you are developing your own application, or onboarding a new developer, Vuetify's _write-as-you-speak_ components and properties make development a breeze.`
     },
     {
       img: '/static/vuetify_sizes.svg',
@@ -37,7 +37,7 @@ export default {
   ],
   whyText: [
     'Choosing a framework can be a daunting task, and I\'m not even talking about component frameworks. You\'ve arrived at Vue and now it\'s time to start developing your next great idea. There are many options to choose from, and everyone says that they are great. So you have to decide, what are my metrics for success?',
-    'This was me almost a year ago. There were plenty of <strong>UI toolkits</strong> to choose from, but none them had everything that I needed...yeah, you\'ve heard that before. Often enough though, it <em>is</em> the reason individual\'s attempts to create products that fill gaps, and is why I started working on Vuetify.',
+    'This was me almost a year ago. There were plenty of **UI toolkits** to choose from, but none them had everything that I needed...yeah, you\'ve heard that before. Often enough though, it _is_ the reason individual\'s attempts to create products that fill gaps, and is why I started working on Vuetify.',
     'But now you are the one searching for that perfect framework, and Vuetify is another on a list of many, vying for your attention. While my opinion will be subjective, I will try to outline features that I believe will be valuable to you and/or your organization.'
   ],
   designHeader: 'Design principles',

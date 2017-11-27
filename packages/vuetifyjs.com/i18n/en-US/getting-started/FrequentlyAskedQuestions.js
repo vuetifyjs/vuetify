@@ -21,11 +21,11 @@ export default {
     },
     {
       q: `My application does not look correct`,
-      a: `Vuetify requires the use of the <code>v-app</code> component. It should wrap your entire application and is the center point for much of the framework functionality. If for whatever reason you cannot use this element, you can mimic it from attributes and classes. Set the <code>data-app</code> attribute to true on the highest element available (not including body), and the <strong>application application--{light|dark}</strong> classes.`
+      a: `Vuetify requires the use of the <code>v-app</code> component. It should wrap your entire application and is the center point for much of the framework functionality. If for whatever reason you cannot use this element, you can mimic it from attributes and classes. Set the <code>data-app</code> attribute to true on the highest element available (not including body), and the **application application--{light|dark}** classes.`
     },
     {
       q: `The Dark or Light theme are not working.`,
-      a: `Vuetify requires a mounting point in order to perform tasks such as theme styling. Ensure that you have a <code>v-app</code> wrapping your application. In the event that this is not possible, for whatever reason, you can mimic its behavior by applying <strong>data-app</strong> and <strong>class="application application--light (or dark)</strong> to the highest element that you can within your application.`
+      a: `Vuetify requires a mounting point in order to perform tasks such as theme styling. Ensure that you have a <code>v-app</code> wrapping your application. In the event that this is not possible, for whatever reason, you can mimic its behavior by applying **data-app** and **class="application application--light (or dark)** to the highest element that you can within your application.`
     },
     {
       q: `Menu/Dialog/Navigation drawer are not opening properly.`,
@@ -37,11 +37,11 @@ export default {
     },
     {
       q: `How to center vertically?`,
-      a: `Apply the <strong>fill-height</strong> prop to <code>v-container</code>. This helper class normally only adds <strong>height: 100%</strong>, but for the container, it also looks for a child <code>v-layout</code> and applies the needed classes to vertically center the content.`
+      a: `Apply the **fill-height** prop to <code>v-container</code>. This helper class normally only adds **height: 100%**, but for the container, it also looks for a child <code>v-layout</code> and applies the needed classes to vertically center the content.`
     },
     {
       q: `My "/" link is active when I'm on "/home" page`,
-      a: 'Add the <strong>exact</strong> to the link that points to absolute /. For more information on this, you can visit the official Vue router <a href="https://router.vuejs.org/en/api/router-link.html" target="_blank" rel="noopener">documentation</a>.'
+      a: 'Add the **exact** to the link that points to absolute /. For more information on this, you can visit the official Vue router <a href="https://router.vuejs.org/en/api/router-link.html" target="_blank" rel="noopener">documentation</a>.'
     },
     {
       q: `My page on mobile is not responsive`,
@@ -56,7 +56,7 @@ export default {
     },
     {
       q: `My dialog closes immediately after clicking the button`,
-      a: `When not using the <strong>activator</strong> slot for <code>v-menu</code> and <code>v-dialog</code> for example, you must manually stop the <em>propagation</em> of the click event. To do this, simply add the <em>.stop</em> modifier to the click event, <code>@click.stop="myMethod"</code>.`
+      a: `When not using the **activator** slot for <code>v-menu</code> and <code>v-dialog</code> for example, you must manually stop the _propagation_ of the click event. To do this, simply add the _.stop_ modifier to the click event, <code>@click.stop="myMethod"</code>.`
     },
     {
       q: `Relative images are not working in <code>v-card</code> components`,

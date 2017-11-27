@@ -1,7 +1,7 @@
 export default {
   dateLight: {
     header: "Date pickers - Light",
-    desc: 'Date pickers come in two orientation variations, portrait <strong>(default)</strong> and landscape.'
+    desc: 'Date pickers come in two orientation variations, portrait **(default)** and landscape.'
   },
   dateDark: {
     header: "Date pickers - Dark",
@@ -13,7 +13,7 @@ export default {
   },
   dateDialogAndMenu: {
     header: "Date pickers - In dialog and menu",
-    desc: '<p>When integrating a picker into a <code>v-text-field</code>, it is recommended to use the <strong>readonly</strong> prop. This will prevent mobile keyboards from triggering. To save vertical space, you can also hide the picker title.</p><p>Pickers expose a scoped slot that allow you to hook into save and cancel functionality. This will maintain an old value which can be replaced if the user cancels.</p>'
+    desc: '<p>When integrating a picker into a <code>v-text-field</code>, it is recommended to use the **readonly** prop. This will prevent mobile keyboards from triggering. To save vertical space, you can also hide the picker title.</p><p>Pickers expose a scoped slot that allow you to hook into save and cancel functionality. This will maintain an old value which can be replaced if the user cancels.</p>'
   },
   dateAllowedDates: {
     header: "Date pickers - Allowed dates",
@@ -25,7 +25,7 @@ export default {
   },
   monthLight: {
     header: "Month pickers - Light",
-    desc: 'Month pickers come in two orientation variations, portrait <strong>(default)</strong> and landscape.'
+    desc: 'Month pickers come in two orientation variations, portrait **(default)** and landscape.'
   },
   monthDark: {
     header: "Month pickers - Dark",
@@ -37,7 +37,7 @@ export default {
   },
   monthDialogAndMenu: {
     header: "Month pickers - In dialog and menu",
-    desc: '<p>When integrating a picker into a <code>v-text-field</code>, it is recommended to use the <strong>readonly</strong> prop. This will prevent mobile keyboards from triggering. To save vertical space, you can also hide the picker title.</p><p>Pickers expose a scoped slot that allow you to hook into save and cancel functionality. This will maintain an old value which can be replaced if the user cancels.</p>'
+    desc: '<p>When integrating a picker into a <code>v-text-field</code>, it is recommended to use the **readonly** prop. This will prevent mobile keyboards from triggering. To save vertical space, you can also hide the picker title.</p><p>Pickers expose a scoped slot that allow you to hook into save and cancel functionality. This will maintain an old value which can be replaced if the user cancels.</p>'
   },
   monthAllowedMonths: {
     header: "Month pickers - Allowed months",

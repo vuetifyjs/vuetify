@@ -5,6 +5,7 @@ import 'event-source-polyfill'
 // Packages
 import Vue from 'vue'
 import Vuetify from 'vuetify'
+import Markdown from 'vue-markdown'
 
 // Bootstrap
 import { createStore } from '@/store/index'
@@ -16,6 +17,7 @@ import { sync } from 'vuex-router-sync'
 import App from './App'
 import Components from '@/components'
 
+Vue.component('markdown', Markdown)
 Vue.use(Vuetify, {
   theme: {
     primary: '#1867C0',
@@ -24,8 +26,8 @@ Vue.use(Vuetify, {
   }
 })
 
-Object.values(Components).forEach(Component => {
-  Vue.component(Component.name, Component)
+Object.keys(Components).forEach(key => {
+  Vue.component(key, Components[key])
 })
 
 // Expose a factory function that creates a fresh set of store, router,

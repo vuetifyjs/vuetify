@@ -135,7 +135,6 @@
           icon: 'mdi-speedometer',
           items: [
             { href: 'quick-start', title: 'Quick Start' },
-            { href: 'starter-templates', title: 'Starter Templates' },
             { href: 'why-vuetify', title: 'Why Vuetify?' },
             { href: 'frequently-asked-questions', title: 'Frequently asked questions' },
             { href: 'sponsors-and-backers', title: 'Sponsors and backers' },
@@ -183,9 +182,9 @@
             { href: 'alerts', title: 'Alerts' },
             { href: 'avatars', title: 'Avatars' },
             { href: 'badges', title: 'Badges' },
-            { href: 'breadcrumbs', title: 'Breadcrumbs' },
             { href: 'bottom-navigation', title: 'Bottom navigation' },
             { href: 'bottom-sheets', title: 'Bottom sheets' },
+            { href: 'breadcrumbs', title: 'Breadcrumbs' },
             { href: 'buttons', title: 'Buttons' },
             { href: 'floating-action-buttons', title: 'Buttons: Floating Action Buttons' },
             { href: 'cards', title: 'Cards' },

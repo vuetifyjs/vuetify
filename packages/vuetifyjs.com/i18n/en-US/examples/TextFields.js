@@ -49,7 +49,7 @@ export default {
   },
   requiredFields: {
     header: 'Required fields',
-    desc: 'In this example two of the text-fields are required. We utilize the <strong>required</strong> prop in order to apply an asterisk to the label and rules to validate the fields.'
+    desc: 'In this example two of the text-fields are required. We utilize the **required** prop in order to apply an asterisk to the label and rules to validate the fields.'
   },
   hint: {
     header: 'Hint text',
@@ -69,7 +69,7 @@ export default {
   },
   box: {
     header: 'Box style',
-    desc: 'Text-fields can be used with an alternative box design. Append and prepend icon props are <strong>not</strong> supported in this mode.'
+    desc: 'Text-fields can be used with an alternative box design. Append and prepend icon props are **not** supported in this mode.'
   },
   customColors: {
     header: 'Custom colors',

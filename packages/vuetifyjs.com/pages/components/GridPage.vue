@@ -1,7 +1,7 @@
 <template lang="pug">
   component-page(v-bind:data="$data")
     section
-      section-heading(value="Layout.Grids.breakpointHeader")
+      section-head(value="Layout.Grids.breakpointHeader")
       section-text(value="Layout.Grids.breakpointText1")
       markup(lang="js")
         |export default {

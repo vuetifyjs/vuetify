@@ -1,7 +1,7 @@
 <template lang="pug">
   text-page(v-bind:data="$data" id="transitions-page")
     section#examples
-      section-heading(value="Motion.Transitions.examplesHeader")
+      section-head(value="Motion.Transitions.examplesHeader")
       component-example(
         :header="`#${i + 1} ${$t(`Examples.Transitions.${example.file}.header`)}`"
         :new-in="example.new"
@@ -16,7 +16,7 @@
         )
 
     section#create-your-own
-      section-heading(value="Motion.Transitions.createYourOwnHeader")
+      section-head(value="Motion.Transitions.createYourOwnHeader")
       section-text(value="Motion.Transitions.createYourOwnText1")
       markup(lang="javascript")
         |import { createSimpleTransition } from '../../node_modules/vuetify/src/util/helpers'

@@ -1,17 +1,15 @@
 import Contributing from './Contributing'
-import Faq from './Faq'
+import FrequentlyAskedQuestions from './FrequentlyAskedQuestions'
 import QuickStart from './QuickStart'
 import Roadmap from './Roadmap'
-import Sponsors from './Sponsors'
-import StarterTemplates from './StarterTemplates'
+import SponsorsAndBackers from './SponsorsAndBackers'
 import WhyVuetify from './WhyVuetify'
 
 export default {
   Contributing,
-  Faq,
+  FrequentlyAskedQuestions,
   QuickStart,
   Roadmap,
-  Sponsors,
-  StarterTemplates,
+  SponsorsAndBackers,
   WhyVuetify
 }

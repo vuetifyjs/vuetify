@@ -1,0 +1,149 @@
+<template lang="pug">
+  page
+    template(slot-scope="{ namespace }")
+      section#sponsors-and-backers
+        section-head(value="GettingStarted.SponsorsAndBackers.backersHeader")
+        v-divider.mb-3
+        v-list.transparent
+          v-list-tile
+            v-list-tile-title 
+              strong {{ $t('GettingStarted.SponsorsAndBackers.backersSubHeader') }}
+        v-container(fluid grid-list-md).mb-5
+          v-layout(
+            row
+            wrap
+            justify-start
+            align-center
+          )
+            a(
+              :href="`${backer.href}?ref=vuetifyjs.com`"
+              target="_blank"
+              :title="backer.title"
+              v-for="backer in diamond"
+              v-bind:key="backer.title"
+            ).text-xs-center.mx-3
+              img(
+                :src="`/static/doc-images/${backer.src}`"
+                :alt="backer.title"
+              )
+
+        v-list.transparent
+          v-list-tile(tag="div")
+            v-list-tile-title
+              strong {{ $t('GettingStarted.SponsorsAndBackers.backersSubHeader2') }}
+        v-container(fluid grid-list-md).mb-5
+          v-layout(row wrap justify-start align-center)
+            a(
+              target="_blank"
+              :class="[backer.dark ? 'black' : '']"
+              :href="`${backer.href}?ref=vuetifyjs.com`"
+              :title="backer.title"
+              v-for="backer in palladium"
+              v-bind:key="backer.title"
+            ).text-xs-center.mx-3
+              img(
+                :src="`/static/doc-images/${backer.src}`"
+                :alt="backer.title"
+              )
+
+        v-list.transparent
+          v-list-tile(tag="div")
+            v-list-tile-title
+              strong {{ $t('GettingStarted.SponsorsAndBackers.backersSubHeader4') }}
+        v-container(fluid grid-list-md).mb-5
+          v-layout(
+            row
+            wrap
+            justify-start
+            align-center
+          )
+            a(
+            target="_blank"
+              :class="[backer.dark ? 'black' : '']"
+              :href="`${backer.href}?ref=vuetifyjs.com`"
+              :title="backer.title"
+              v-for="backer in gold"
+              v-bind:key="backer.title"
+            ).text-xs-center.mx-3
+              img(
+                :src="`/static/doc-images/${backer.src}`"
+                :alt="backer.title"
+                style="max-width: 150px;"
+              )
+        section-head(value="GettingStarted.SponsorsAndBackers.affiliatesHeader")
+        v-divider.mb-3
+        v-container(fluid grid-list-md).mb-5.affiliates
+          v-layout(
+            row
+            wrap
+            justify-start
+            align-center
+          )
+            a(
+              target="_blank"
+              :class="[affiliate.dark ? 'black' : '']"
+              :href="`${affiliate.href}${affiliate.noref ? '' : '?ref=vuetifyjs.com'}`"
+              :title="affiliate.title"
+              v-for="affiliate in affiliates"
+              v-bind:key="affiliate.title"
+            ).text-xs-center.mx-3
+              img(
+                :src="`/static/doc-images/${affiliate.src}`"
+                :alt="affiliate.title"
+                style="max-width: 150px;"
+              )
+        section-head(value="GettingStarted.SponsorsAndBackers.sponsorsHeader")
+        v-divider.mb-3
+        v-container(fluid).mb-5
+          v-layout(
+            row
+            wrap
+            justify-start
+            align-center
+          )
+            a(
+              :href="`${sponsor.href}?ref=vuetifyjs.com`"
+              target="_blank"
+              :title="sponsor.title"
+              v-for="sponsor in sponsors"
+              v-bind:key="sponsor.title"
+            ).text-xs-center.mx-3
+              img(
+                :src="`/static/doc-images/${sponsor.src}`"
+                alt="sponsor.title"
+                style="max-width: 150px;"
+              )
+        div.text-xs-center
+          div.mb-3 {{ $t('GettingStarted.SponsorsAndBackers.questionHeader') }}
+          v-btn(
+            outline
+            color="success"
+            round
+            href="mailto:john@vuetifyjs.com"
+          ) {{ $t('GettingStarted.SponsorsAndBackers.questionButton') }}
+</template>
+
+<script>
+  import { mapState } from 'vuex'
+
+  export default {
+    computed: {
+      ...mapState({
+        diamond: state => state.supporters.diamond,
+        gold: state => state.supporters.gold,
+        palladium: state => state.supporters.palladium,
+        affiliates: state => state.supporters.affiliates,
+        sponsors: state => state.supporters.sponsors
+      })
+    }
+  }
+</script>
+
+<style lang="stylus">
+  #sponsors-and-backers
+    img
+      max-width: 225px
+      width: 100%
+    .affiliates img
+      width: 80%
+</style>

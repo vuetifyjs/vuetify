@@ -24,7 +24,7 @@ export default {
       icon: 'mdi-package-variant-closed',
       name: 'Front-end pack',
       date: 'Q2 2017',
-      desc: 'Includes 10 new components. Will be <strong>free</strong> to everyone thanks to our Patrons.'
+      desc: 'Includes 10 new components. Will be **free** to everyone thanks to our Patrons.'
     },
     {
       icon: 'error',
@@ -36,13 +36,13 @@ export default {
       icon: 'mdi-package-variant-closed',
       name: 'Back-end pack',
       date: 'Q2 2017',
-      desc: 'Includes 10 new components. Will be <strong>free</strong> to everyone thanks to our Patrons.'
+      desc: 'Includes 10 new components. Will be **free** to everyone thanks to our Patrons.'
     },
     {
       icon: 'mdi-youtube-play',
       name: 'Vueticasts',
       date: '2017',
-      desc: 'A Video series on Vue and Vuetify. Will be <strong>free</strong> to everyone thanks to our Patrons.'
+      desc: 'A Video series on Vue and Vuetify. Will be **free** to everyone thanks to our Patrons.'
     }
   ]
 }

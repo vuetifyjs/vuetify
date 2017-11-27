@@ -4,7 +4,7 @@
 
 <script>
   export default {
-    name: 'section-heading',
+    name: 'section-head',
 
     props: {
       value: String

@@ -25,14 +25,14 @@ export default {
   },
   customTextAndValue: {
     header: 'Customized item text and value',
-    desc: `You can specify the specific properties within your items array correspond to the text and value fields. By default, this is <strong>text</strong> and <strong>value</strong>. In this example we also use the <code>return-object</code> prop which will return the entire object of the selected item on selection.`
+    desc: `You can specify the specific properties within your items array correspond to the text and value fields. By default, this is **text** and **value**. In this example we also use the <code>return-object</code> prop which will return the entire object of the selected item on selection.`
   },
   tags: {
     header: 'Tags',
-    desc: `With tags you can allow a user to create new values that may not be present in a provided items list. Keep in mind, tags only supports arrays of <strong>primitive</strong> items and cannot be used with props such as <code>item-text</code>, <code>item-value</code> for example.`
+    desc: `With tags you can allow a user to create new values that may not be present in a provided items list. Keep in mind, tags only supports arrays of **primitive** items and cannot be used with props such as <code>item-text</code>, <code>item-value</code> for example.`
   },
   asynchronous: {
     header: 'Asynchronous items',
-    desc: 'Sometimes you need to load data externally based upon a search query. Use the <code>search-input</code> prop with the <strong>.sync</strong> modifier when using the <code>autocomplete</code> prop. We also make use of the new <code>cache-items</code> prop. This will keep a unique list of all items that have been passed to the <code>items</code> prop and is <strong>REQUIRED</strong> when using asynchronous items and the <strong>multiple</strong> prop.'
+    desc: 'Sometimes you need to load data externally based upon a search query. Use the <code>search-input</code> prop with the **.sync** modifier when using the <code>autocomplete</code> prop. We also make use of the new <code>cache-items</code> prop. This will keep a unique list of all items that have been passed to the <code>items</code> prop and is **REQUIRED** when using asynchronous items and the **multiple** prop.'
   }
 }

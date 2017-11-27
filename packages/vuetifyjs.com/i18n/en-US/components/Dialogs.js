@@ -1,6 +1,37 @@
 export default {
   header: 'Dialog',
   headerText: 'The <code>v-dialog</code> component inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks. Use dialogs sparingly because they are interruptive.',
+  components: ['v-dialog'],
+  examples: [{
+    simple: {
+      header: 'Simple dialogs',
+      desc: `Choosing an option immediately commits the option and closes the menu. Touching outside of the dialog, or pressing Back, cancels the action and closes the dialog.`
+    },
+    withoutActivator: {
+      header: 'Without activator',
+      desc: `If for some reason you are unable to use the activator slot, be sure to add the <code>.stop</code> modifier to the event that triggers the dialog.`
+    },
+    modal: {
+      header: 'Modal',
+      desc: `Similar to a Simple Dialog, except that it's not dismissed when touching outside.`
+    },
+    fullscreen: {
+      header: 'Fullscreen',
+      desc: `Due to limited space, full-screen dialogs may be more appropriate for mobile devices than dialogs used on devices with larger screens.`
+    },
+    form: {
+      header: 'Form',
+      desc: `Just a simple example of a form in a dialog.`
+    },
+    scrollable: {
+      header: 'Scrollable',
+      desc: `Example of a dialog with scrollable content.`
+    },
+    overflowed: {
+      header: 'Overflowed',
+      desc: `Modals that do not fit within the available window space will scroll the container.`
+    }
+  }],
   props: {
     disabled: 'Disabled the ability to open the dialog',
     fullWidth: 'Specifies the modal to force 100% width',
