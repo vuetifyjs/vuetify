@@ -12,7 +12,7 @@ test('applicationable.js', () => {
       render: h => h('div')
     })
 
-    expect(updateApplication.mock.calls.length).toBe(1)
+    expect(updateApplication.mock.calls).toHaveLength(1)
   })
 
   it('should update application on app prop change', async () => {
@@ -24,6 +24,6 @@ test('applicationable.js', () => {
     })
 
     wrapper.setProps({ app: true })
-    expect(updateApplication.mock.calls.length).toBe(2)
+    expect(updateApplication.mock.calls).toHaveLength(2)
   })
 })

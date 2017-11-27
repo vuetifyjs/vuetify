@@ -211,33 +211,32 @@ test('VDataTable.vue', () => {
       }
     }))
 
-    expect(wrapper.find('.datatable__progress').length).toBe(1)
+    expect(wrapper.find('.datatable__progress')).toHaveLength(1)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
   it('should only filter on data specified in headers', async () => {
     const wrapper = mount(VDataTable, dataTableTestDataFilter())
 
-    expect(wrapper.instance().filteredItems.length).toBe(1)
+    expect(wrapper.instance().filteredItems).toHaveLength(1)
     wrapper.setProps({
       search: 'outside'
     })
-    expect(wrapper.instance().filteredItems.length).toBe(0)
+    expect(wrapper.instance().filteredItems).toHaveLength(0)
     wrapper.setProps({
       search: 'baz'
     })
-    expect(wrapper.instance().filteredItems.length).toBe(1)
+    expect(wrapper.instance().filteredItems).toHaveLength(1)
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
   it('should not filter items if search is empty', async () => {
-    const wrapper = mount(VDataTable, dataTableTestDataFilter())
+    const data = dataTableTestDataFilter()
+    data.propsData.search = '    '
+    const wrapper = mount(VDataTable, data)
 
-    wrapper.setProps({
-      search: '    '
-    })
-    expect(wrapper.instance().filteredItems.length).toBe(1)
+    expect(wrapper.instance().filteredItems).toHaveLength(data.propsData.items.length)
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })

@@ -33,4 +33,31 @@ test('VSystemBar.vue', () => {
 
     expect(wrapper.element.classList).toContain('system-bar--absolute')
   })
+
+  it('should update height when window prop change', async () => {
+    const wrapper = mount(VSystemBar, {
+      propsData: {
+        app: true
+      }
+    })
+
+    expect(wrapper.vm.$vuetify.application.bar).toBe(0)
+
+    wrapper.setProps({
+      fixed: false,
+      absolute: true
+    })
+    expect(wrapper.vm.$vuetify.application.bar).toBe(24)
+
+    wrapper.setProps({
+      fixed: true,
+      absolute: false
+    })
+    expect(wrapper.vm.$vuetify.application.bar).toBe(24)
+
+    wrapper.setProps({
+      window: true
+    })
+    expect(wrapper.vm.$vuetify.application.bar).toBe(32)
+  })
 })
