@@ -8,7 +8,6 @@ import Page from './Page'
 import PageHead from './PageHead'
 import SectionHead from './SectionHead'
 import SectionText from './SectionText'
-import TextPage from './TextPage'
 
 export default {
   AppAlert,
@@ -20,6 +19,5 @@ export default {
   Page,
   PageHead,
   SectionHead,
-  SectionText,
-  TextPage
+  SectionText
 }

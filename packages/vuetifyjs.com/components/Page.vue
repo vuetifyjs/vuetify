@@ -56,7 +56,7 @@
         return route.map(s => camel(s)).join('.')
       },
       computedToc () {
-        if (this.toc) return this.toc
+        if (this.toc.length > 0) return this.toc
 
         const toc = `${this.namespace}.toc`
 

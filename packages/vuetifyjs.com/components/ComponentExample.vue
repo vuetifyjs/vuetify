@@ -14,7 +14,7 @@
     div(v-if="$slots.desc").justify
       slot(name="desc")
 
-    v-card.mt-5
+    v-card.mt-4
       //- Example options
       v-toolbar(flat dense card).pr-1
         v-spacer

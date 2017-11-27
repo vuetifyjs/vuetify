@@ -20,7 +20,7 @@ export default {
   },
 
   watch: {
-    '$route' () {
+    $route () {
       this.setMeta()
     },
     meta: {
