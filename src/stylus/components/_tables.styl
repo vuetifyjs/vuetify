@@ -7,7 +7,9 @@ table($material)
   color: $material.text.primary
 
   thead
-    border-bottom: 1px solid rgba($material.fg-color, $material.divider-percent)
+    tr
+      &:first-child
+        border-bottom: 1px solid rgba($material.fg-color, $material.divider-percent)
 
     th
       color: rgba($material.text-color, $material.secondary-text-percent)
