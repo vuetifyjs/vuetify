@@ -218,7 +218,7 @@
             { href: 'jumbotron', title: 'Jumbotrons', badge: 'new' },
             { href: 'menus', title: 'Menus' },
             { href: 'navigation-drawers', title: 'Navigation drawers' },
-            { href: 'pagination', title: 'Pagination' },
+            { href: 'paginations', title: 'Paginations' },
             { href: 'parallax', title: 'Parallax' },
             { href: 'pickers', title: 'Pickers' },
             { href: 'progress', title: 'Progress' },

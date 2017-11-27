@@ -83,5 +83,5 @@
 
     &.fade-transition-leave,
     &.fade-transition-leave-active
-      display: none
+      // display: none
 </style>
