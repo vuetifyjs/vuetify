@@ -24,8 +24,8 @@ export default {
   methods: {
     getChildren () {
       return this.$children.reduce((toggleables, child) => {
-        const component = child.$children[0] || child;
-        const options = component.$options;
+        const component = child.$children[0] || child
+        const options = component.$options
         if (options && options.name === 'v-expansion-panel-content') {
           toggleables.push(component)
         }
