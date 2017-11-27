@@ -6,6 +6,8 @@ import Input from '../../mixins/input'
 import Maskable from '../../mixins/maskable'
 import { isMaskDelimiter } from '../../util/mask'
 
+const ROW_HEIGHT = 24
+
 export default {
   name: 'v-text-field',
 
@@ -156,9 +158,8 @@ export default {
         const height = this.$refs.input
           ? this.$refs.input.scrollHeight
           : 0
-        const minHeight = this.rows * 24
-        const inputHeight = height < minHeight ? minHeight : height
-        this.inputHeight = inputHeight + (this.textarea ? 4 : 0)
+        const minHeight = this.rows * ROW_HEIGHT
+        this.inputHeight = Math.max(minHeight, height)
       })
     },
     onInput (e) {
@@ -192,7 +193,7 @@ export default {
       // Prevents closing of a
       // dialog when pressing
       // enter
-      if (this.multiLine &&
+      if (this.isTextarea &&
         this.isFocused &&
         e.keyCode === 13
       ) {
