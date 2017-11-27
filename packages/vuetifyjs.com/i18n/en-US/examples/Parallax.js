@@ -13,6 +13,6 @@ export default {
   },
   jumbotron: {
     header: 'Jumbotron',
-    desc: 'The parallax can have its effect disabled to be used as a standard <strong>jumbotron</strong>'
+    desc: 'The parallax can have its effect disabled to be used as a standard **jumbotron**'
   }
 }

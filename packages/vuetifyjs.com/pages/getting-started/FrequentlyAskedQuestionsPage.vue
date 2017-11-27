@@ -1,6 +1,7 @@
 <template lang="pug">
-  text-page(:data="$data")
-    section#frequently-asked-questions
+  page
+    template(slot-scope="{ namespace }")
+      section#frequently-asked-questions
       v-text-field(
         label="Search"
         single-line
@@ -16,26 +17,26 @@
           v-bind:key="i"
         )
           div(slot="header").pr-5
-            strong {{ $t('GettingStarted.Faq.question') }} &nbsp;
+            strong {{ $t(`${namespace}.question`) }} &nbsp;
             span(v-html="faq.q")
           v-divider
           v-card(color="grey lighten-4")
             v-card-text
-              strong {{ $t('GettingStarted.Faq.answer') }} &nbsp;
+              strong {{ $t(`${namespace}.answer`) }} &nbsp;
               div(v-html="faq.a")
       v-fade-transition
         div(
           v-if="!faqs.length"
         ).text-xs-center.mb-5
-          h3 {{ $t('GettingStarted.Faq.noResultsFound') }}
+          h3 {{ $t(`${namespace}.noResultsFound`) }}
           v-btn(
             color="primary"
             flat
             @click="resetSearch"
-          ) {{ $t('GettingStarted.Faq.resetSearch') }}
+          ) {{ $t(`${namespace}.resetSearch`) }}
 
       div.text-xs-center
-        div.mb-3 {{ $t('GettingStarted.Faq.questionHeader') }}
+        div.mb-3 {{ $t(`${namespace}.questionHeader`) }}
         v-btn(
           outline
           color="success"
@@ -43,19 +44,18 @@
           href="https://chat.vuetifyjs.com"
           target="_blank"
           rel="noopener"
-        ) {{ $t('GettingStarted.Faq.questionButton') }}
+        ) {{ $t(`${namespace}.questionButton`) }}
 </template>
 
 <script>
   export default {
     data: () => ({
-      header: "GettingStarted.Faq.header",
-      headerText: "GettingStarted.Faq.headerText",
       search: ''
     }),
+
     computed: {
       gotchas () {
-        return this.$t('GettingStarted.Faq.gotchas')
+        return this.$t('GettingStarted.FrequentlyAskedQuestions.gotchas')
       },
       faqs () {
         return this.gotchas.filter(qa => {

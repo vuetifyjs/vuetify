@@ -1,57 +1,54 @@
 <template lang="pug">
-  text-page(v-bind:data="$data" id="colors-page")
-    section#classes
-      section-heading(value="Style.Colors.classesHeader")
-      section-text(value="Style.Colors.classesText")
+  page
+    template(slot-scope="{ namespace }")
+      section#classes
+        section-head(:value="`${namespace}.classesHeader`")
+        section-text(:value="`${namespace}.classesText`")
 
-    section#colors
-      v-container(fluid).pa-0
-        v-layout(row wrap)
-          v-flex(xs6 sm6 md4 lg3 v-for="color in colors" v-bind:key="color")
-            v-card(v-bind:color="color" height="100px")
-              v-card-text
-                h3 {{ color }}
-            v-card(
-              v-for="n in [4,3,2,1]"
-              v-bind:color="color + ' lighten-' + n"
-              class="black--text"
-              v-bind:key="n"
-            )
-              v-card-text {{ color }} lighten-{{ n }}
-            v-card(
-              v-for="n in 4"
-              v-bind:color="color + ' darken-' + n"
-              v-bind:key="n"
-            )
-              v-card-text {{ color }} darken-{{ n }}
-            v-card(
-              v-for="n in 4"
-              v-bind:color="color + ' accent-' + n"
-              v-if="['grey', 'blue-grey', 'brown'].indexOf(color) === -1"
-              class="black--text"
-              v-bind:key="n"
-            )
-              v-card-text {{ color }} accent-{{ n }}
+      section#colors
+        v-container(fluid).pa-0
+          v-layout(row wrap)
+            v-flex(xs6 sm6 md4 lg3 v-for="color in colors" v-bind:key="color")
+              v-card(v-bind:color="color" height="100px")
+                v-card-text
+                  h3 {{ color }}
+              v-card(
+                v-for="n in [4,3,2,1]"
+                v-bind:color="color + ' lighten-' + n"
+                class="black--text"
+                v-bind:key="n"
+              )
+                v-card-text {{ color }} lighten-{{ n }}
+              v-card(
+                v-for="n in 4"
+                v-bind:color="color + ' darken-' + n"
+                v-bind:key="n"
+              )
+                v-card-text {{ color }} darken-{{ n }}
+              v-card(
+                v-for="n in 4"
+                v-bind:color="color + ' accent-' + n"
+                v-if="['grey', 'blue-grey', 'brown'].indexOf(color) === -1"
+                class="black--text"
+                v-bind:key="n"
+              )
+                v-card-text {{ color }} accent-{{ n }}
 
-    section#color-pack
-      section-heading(value="Style.Colors.colorPackHeader")
-      section-text(value="Style.Colors.colorPackText")
+      section#color-pack
+        section-head(:value="`${namespace}.colorPackHeader`")
+        section-text(:value="`${namespace}.colorPackText`")
 
-      h3.py-3 {{ $t('Style.Colors.colorPackSubHeader1') }}
-      section-text(value="Style.Colors.colorPackSubText1")
+        h3.py-3 {{ $t('Style.Colors.colorPackSubHeader1') }}
+        section-text(:value="`${namespace}.colorPackSubText1`")
 
-      h3.py-3 {{ $t('Style.Colors.colorPackSubHeader2') }}
-      section-text(value="Style.Colors.colorPackSubText2")
+        h3.py-3 {{ $t('Style.Colors.colorPackSubHeader2') }}
+        section-text(:value="`${namespace}.colorPackSubText2`")
 
 </template>
 
 <script>
   export default {
-    name: 'colors-page',
-
     data: () => ({
-      header: 'Style.Colors.header',
-      headerText: 'Style.Colors.headerText',
       colors: [
         'red', 'pink', 'purple', 'deep-purple',
         'indigo', 'blue', 'light-blue', 'cyan',
@@ -59,10 +56,7 @@
         'yellow', 'amber', 'orange', 'deep-orange',
         'brown', 'blue-grey', 'grey'
       ],
-      toc: 'Style.Colors.toc',
-      types: [
-        'darken', 'lighten', 'accent'
-      ]
+      types: ['darken', 'lighten', 'accent']
     })
   }
 </script>

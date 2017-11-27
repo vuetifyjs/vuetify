@@ -1,36 +1,32 @@
 <template lang="pug">
-  text-page(v-bind:data="$data" id="content-page")
-    section#blockquote
-      section-heading(value="Style.Content.blockquoteHeader")
-      blockquote.blockquote.mb-5 {{ lorem }}
+  page#content-page
+    template(slot-scope="{ namespace }")
+      section#blockquote
+        section-head(:value="`${namespace}.blockquoteHeader`")
+        blockquote.blockquote.mb-5 {{ lorem }}
 
-    section#paragraphs
-      section-heading(value="Style.Content.paragraphsHeader")
-      p {{ lorem }}
-      p {{ lorem }}
+      section#paragraphs
+        section-head(:value="`${namespace}.paragraphsHeader`")
+        p {{ lorem }}
+        p {{ lorem }}
 
-    section#code
-      section-heading(value="Style.Content.codeHeader")
-      section-text(value="Style.Content.codeText")
+      section#code
+        section-head(:value="`${namespace}.codeHeader`")
+        section-text(:value="`${namespace}.codeText`")
 
-    section#variables
-      section-heading(value="Style.Content.variablesHeader")
-      section-text(value="Style.Content.variablesText")
+      section#variables
+        section-head(:value="`${namespace}.variablesHeader`")
+        section-text(:value="`${namespace}.variablesText`")
 
-    section#user-input
-      section-heading(value="Style.Content.userInputHeader")
-      section-text(value="Style.Content.userInputText")
+      section#user-input
+        section-head(:value="`${namespace}.userInputHeader`")
+        section-text(:value="`${namespace}.userInputText`")
 
 </template>
 
 <script>
   export default {
-    name: 'content-page',
-
     data: () => ({
-      header: 'Style.Content.header',
-      headerText: 'Style.Content.headerText',
-
       lorem: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum maiores modi quidem veniam, expedita quis laboriosam, ullam facere adipisci, iusto, voluptate sapiente corrupti asperiores rem nemo numquam fuga ab at.'
     })
   }

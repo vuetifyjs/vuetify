@@ -74,7 +74,7 @@
           scopedSlots: []
         }
 
-        let items = component[this.type]
+        let items = component[this.type] || []
 
         if (this.type === 'slots' && component.scopedSlots) {
           items = items.concat(component.scopedSlots)

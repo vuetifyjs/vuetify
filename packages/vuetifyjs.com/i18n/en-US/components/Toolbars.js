@@ -11,7 +11,7 @@ export default {
     floating: 'Makes the toolbar float inline',
     height: 'Designates a specific height for the toolbar',
     lightsOut: '  Reduces the system bar opacity',
-    manualScroll: 'Manually apply the <strong>scroll-off-screen</strong> functionality',
+    manualScroll: 'Manually apply the **scroll-off-screen** functionality',
     prominent: 'Increases the height of the toolbar content and extension',
     scrollOffScreen: 'Will transition the toolbar off screen when scrolling down',
     scrollTarget: 'Assign the scroll target for scroll-off-screen',

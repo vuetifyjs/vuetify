@@ -136,7 +136,8 @@
       > div
         width: 100%
 
-      &:before
+      &:before,
+      &:after
         display: none
 
     .hljs

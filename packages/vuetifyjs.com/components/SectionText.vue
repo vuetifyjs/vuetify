@@ -1,5 +1,5 @@
 <template lang="pug">
-  p(v-html="$t(value)").section-text
+  markdown(:source="$t(value)").mb-3
 </template>
 
 <script>

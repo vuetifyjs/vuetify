@@ -1,7 +1,7 @@
 export default {
   grid: {
     header: 'Usage',
-    desc: 'The <code>v-container</code> can be used for a center focused page, or given the <code>fluid</code> prop to extend its full width. <code>v-layout</code> is used for separating sections and contains the <code>v-flex</code>. The structure of your layout will be as follows, <strong>v-container</strong> &raquo; <strong>v-layout</strong> &raquo; <strong>v-flex</strong>. Each part of the grid chain is a flex-box element. The final, <code>v-flex</code>, automatically sets its children to have <kbd>flex: 1 1 auto</kbd>.'
+    desc: 'The <code>v-container</code> can be used for a center focused page, or given the <code>fluid</code> prop to extend its full width. <code>v-layout</code> is used for separating sections and contains the <code>v-flex</code>. The structure of your layout will be as follows, **v-container** &raquo; **v-layout** &raquo; **v-flex**. Each part of the grid chain is a flex-box element. The final, <code>v-flex</code>, automatically sets its children to have <kbd>flex: 1 1 auto</kbd>.'
   },
   offset: {
     header: 'Offset',
@@ -17,7 +17,7 @@ export default {
   },
   rowColumnBreakpoint: {
     header: 'Row and column breakpoints',
-    desc: 'Dynamically change your layout based upon resolution. <strong>(resize your screen and watch the layout change to a <code>row</code> on small breakpoints)</strong>'
+    desc: 'Dynamically change your layout based upon resolution. **(resize your screen and watch the layout change to a <code>row</code> on small breakpoints)**'
   },
   nestedGrid: {
     header: 'Nested grid',

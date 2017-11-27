@@ -81,9 +81,9 @@
             item.target = target
 
             targets.push(offsetTop)
-
-            return item
           }
+
+          return item
         })
 
         this.list = list

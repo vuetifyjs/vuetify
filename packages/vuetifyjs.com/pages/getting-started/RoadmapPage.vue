@@ -1,5 +1,5 @@
 <template lang="pug">
-  text-page(:data="$data" id="roadmap")
+  page
     section#higlights
       table.table.elevation-1
         tbody
@@ -13,16 +13,12 @@
             td.no-wrap
               div(v-html="road.name").body-2
               span(v-html="road.date")
-            td(v-html="road.desc")
+            td
+              markdown(:source="road.desc")
 </template>
 
 <script>
   export default {
-    data: () => ({
-      header: 'GettingStarted.Roadmap.header',
-      headerText: 'GettingStarted.Roadmap.headerText'
-    }),
-
     computed: {
       roadmap () {
         return this.$t('GettingStarted.Roadmap.roadmap')

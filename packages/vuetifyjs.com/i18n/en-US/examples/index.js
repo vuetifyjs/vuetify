@@ -1,18 +1,5 @@
-import Alerts from './Alerts'
-import Avatars from './Avatars'
-import Badges from './Badges'
-import BottomNav from './BottomNav'
-import BottomSheets from './BottomSheets'
-import Breadcrumbs from './Breadcrumbs'
-import Btns from './Btns'
-import Cards from './Cards'
-import Carousels from './Carousels'
-import Chips from './Chips'
-import DataTables from './DataTables'
-import Dialogs from './Dialogs'
 import Dividers from './Dividers'
 import ExpansionPanels from './ExpansionPanels'
-import Fabs from './Fabs'
 import Footer from './Footer'
 import Forms from './Forms'
 import Grids from './Grids'
@@ -39,21 +26,8 @@ import Touch from './Touch'
 import Transitions from './Transitions'
 
 export default {
-  Alerts,
-  Avatars,
-  Badges,
-  BottomNav,
-  BottomSheets,
-  Breadcrumbs,
-  Btns,
-  Cards,
-  Carousels,
-  Chips,
-  DataTables,
-  Dialogs,
   Dividers,
   ExpansionPanels,
-  Fabs,
   Footer,
   Forms,
   Grids,
