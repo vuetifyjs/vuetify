@@ -23,6 +23,7 @@ exports[`Vslider.vue should be focused when active 1`] = `
     </div>
   </div>
   <div class="input-group__details">
+    <!---->
   </div>
 </div>
 
@@ -49,6 +50,7 @@ exports[`Vslider.vue should match a snapshot 1`] = `
     </div>
   </div>
   <div class="input-group__details">
+    <!---->
   </div>
 </div>
 

@@ -59,6 +59,7 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
                       </div>
                     </div>
                     <div class="input-group__details">
+                      <!---->
                     </div>
                   </div>
                 </div>
@@ -92,6 +93,7 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
                       </div>
                     </div>
                     <div class="input-group__details">
+                      <!---->
                     </div>
                   </div>
                 </div>
@@ -114,6 +116,7 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
     </i>
   </div>
   <div class="input-group__details">
+    <!---->
   </div>
 </div>
 
@@ -183,6 +186,7 @@ exports[`VSelect should be clearable with prop, dirty and single select 1`] = `
     </i>
   </div>
   <div class="input-group__details">
+    <!---->
   </div>
 </div>
 

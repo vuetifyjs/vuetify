@@ -94,10 +94,6 @@ export default {
         messages = [this.genError(this.validations[0])]
       }
 
-      if (!messages || !messages.length) {
-        return null
-      }
-
       return this.$createElement('transition', {
         props: {
           name: 'slide-y-transition'
