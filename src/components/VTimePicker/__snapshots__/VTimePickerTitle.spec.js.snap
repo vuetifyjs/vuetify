@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VTimePickerTitle.js should render component in 12hr 1`] = `
+
+<div class="time-picker-title">
+  <div class="time-picker-title__time">
+    <span class="picker__title__btn time-picker-title__time__hour">
+      02
+    </span>
+    <span>
+      :
+    </span>
+    <span class="picker__title__btn time-picker-title__time__minute active">
+      13
+    </span>
+  </div>
+  <div class="time-picker-title__ampm">
+    <span class="picker__title__btn">
+      am
+    </span>
+    <span class="picker__title__btn active">
+      pm
+    </span>
+  </div>
+</div>
+
+`;
+
+exports[`VTimePickerTitle.js should render component in 24hr 1`] = `
+
+<div class="time-picker-title">
+  <div class="time-picker-title__time">
+    <span class="picker__title__btn time-picker-title__time__hour">
+      14
+    </span>
+    <span>
+      :
+    </span>
+    <span class="picker__title__btn time-picker-title__time__minute active">
+      13
+    </span>
+  </div>
+</div>
+
+`;
+
+exports[`VTimePickerTitle.js should render component when selecting hour 1`] = `
+
+<div class="time-picker-title">
+  <div class="time-picker-title__time">
+    <span class="picker__title__btn time-picker-title__time__hour active">
+      14
+    </span>
+    <span>
+      :
+    </span>
+    <span class="picker__title__btn time-picker-title__time__minute">
+      13
+    </span>
+  </div>
+</div>
+
+`;
