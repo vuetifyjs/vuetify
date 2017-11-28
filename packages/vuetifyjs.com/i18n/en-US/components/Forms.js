@@ -17,7 +17,7 @@ export default {
     },
     veeValidate: {
       header: "Vee-validate",
-      desc: 'Vee-validate is another validation plugin that allows you to check your forms. One caveat is that you must add the **type="checkbox"** to properly validate a <code>v-checkbox</code> when using the **value** prop.'
+      desc: 'Vee-validate is another validation plugin that allows you to check your forms. One caveat is that you must add the **type="checkbox"** to properly validate a `v-checkbox` when using the **value** prop.'
     }
   }]
 }

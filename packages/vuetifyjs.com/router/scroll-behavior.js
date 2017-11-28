@@ -20,5 +20,7 @@ export default async function (to, from, savedPosition) {
     }
   }
 
-  return { y: 0 }
+  return new Promise(resolve => {
+    setTimeout(() => resolve({ y: 0 }), 250)
+  })
 }

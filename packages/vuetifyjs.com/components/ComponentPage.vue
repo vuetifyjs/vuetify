@@ -9,6 +9,7 @@
           :inverted="usage.inverted"
           :has-inverted="!usage.uninverted"
           :id="`usage-${-1}`"
+          :key="usage.file"
         )
           markdown(
             slot="desc"
@@ -50,14 +51,13 @@
           :inverted="example.inverted"
           :has-inverted="!example.uninverted"
           :id="`example-${i + 1}`"
-          :key="i"
+          :key="example.file"
           v-for="(example, i) in examples.slice(1)"
         )
-          div(
+          markdown(
             slot="desc"
-            v-html="genDesc(example)"
+            :source="genDesc(example)"
           )
-
       section-head {{ $t('Components.ComponentPage.examples') }}
       slot(name="bottom")
 </template>
@@ -142,7 +142,7 @@
         return this.component.split('-').slice(1).join('-')
       },
       folder () {
-        return this.$route.params.component
+        return this.data.folder || this.$route.params.component
       },
       namespace () {
         const namespace = this.name.split('-').map(n => {

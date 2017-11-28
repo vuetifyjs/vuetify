@@ -1,5 +1,5 @@
 <template lang="pug">
-  component-page(:data="data" :key="name")
+  component-page(:data="data")
 </template>
 
 <script>

@@ -89,12 +89,6 @@
     "description": "Select from a multitude of official material design layouts.",
     "keywords": "pre-defined layouts, layouts, application layout, material design layouts"
   },
-  "/layout/grid": {
-    "h1": "Grid",
-    "title": "Layout grid system",
-    "description": "Vuetify supports the material design 12 point grid for laying out your application.",
-    "keywords": "grid, layout, flex"
-  },
   "/layout/spacing": {
     "h1": "Spacing",
     "title": "Spacing helpers",
@@ -226,6 +220,12 @@
     "title": "Form Component",
     "description": "Form component for Vuetify Framework",
     "keywords": "form"
+  },
+  "/components/grid": {
+    "h1": "Grid",
+    "title": "Layout grid system",
+    "description": "Vuetify supports the material design 12 point grid for laying out your application.",
+    "keywords": "grid, layout, flex"
   },
   "/components/grid-lists": {
     "h1": "Grid lists",

@@ -44,7 +44,9 @@
 
 <script>
   export default {
-    $validates: true,
+    $_veeValidate: {
+      validator: 'new'
+    },
     data () {
       return {
         name: '',
@@ -68,7 +70,7 @@
         this.email = ''
         this.select = null
         this.checkbox = null
-        this.$validator.clean()
+        this.$validator.reset()
       }
     }
 
