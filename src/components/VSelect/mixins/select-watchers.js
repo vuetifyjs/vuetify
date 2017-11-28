@@ -36,6 +36,10 @@ export default {
         this.updateTags(this.searchValue)
       }
 
+      if (this.combobox) {
+        this.inputValue = this.lazySearch
+      }
+
       // Only set search value if
       // there is a value to set
       this.searchValue && (this.searchValue = null)

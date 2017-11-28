@@ -28,7 +28,7 @@ test('VSelect - combobox', () => {
     input.trigger('input')
     await wrapper.vm.$nextTick()
 
-    input.trigger('blur')
+    wrapper.vm.blur()
     await wrapper.vm.$nextTick()
 
     expect(change).toHaveBeenCalledWith('foo')
@@ -50,6 +50,34 @@ test('VSelect - combobox', () => {
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.currentRange).toBe(1)
 
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should not use search input when blurring', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        combobox: true,
+        items: [1, 12]
+      }
+    })
+
+    const event = jest.fn()
+    wrapper.vm.$on('input', event)
+
+    const input = wrapper.find('input')[0]
+    input.trigger('focus')
+    await wrapper.vm.$nextTick()
+
+    wrapper.setProps({ searchInput: '1' })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.searchValue).toBe('1')
+
+    const list = wrapper.find('.list li')[1]
+    list.trigger('click')
+    await wrapper.vm.$nextTick()
+    expect(event).toBeCalledWith(12)
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 })
