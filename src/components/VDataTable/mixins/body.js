@@ -39,14 +39,20 @@ export default {
       for (let index = 0, len = this.filteredItems.length; index < len; ++index) {
         const item = this.filteredItems[index]
         const props = this.createProps(item, index)
-        const row = this.$scopedSlots.items(props)
+        let row = this.$scopedSlots.items(props)
 
-        rows.push(this.needsTR(row)
-          ? this.genTR(row, {
+        if (this.needsTR(row)) {
+          row = this.genTR(row, {
             key: index,
             attrs: { active: this.isSelected(item) }
           })
-          : row)
+        } else {
+          for (let childIndex = 0, childrenLen = row.length; childIndex < childrenLen; ++childIndex) {
+            const rowChild = row[childIndex]
+            rowChild.key = rowChild.key || `${index}:${childIndex}`
+          }
+        }
+        rows.push(row)
 
         if (this.$scopedSlots.expand) {
           const expandRow = this.genExpandedRow(props)
