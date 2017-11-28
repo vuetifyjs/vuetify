@@ -5,6 +5,7 @@ import 'event-source-polyfill'
 // Packages
 import Vue from 'vue'
 import Vuetify from 'vuetify'
+import VeeValidate from 'vee-validate'
 import Markdown from 'vue-markdown'
 
 // Bootstrap
@@ -18,6 +19,7 @@ import App from './App'
 import Components from '@/components'
 
 Vue.component('markdown', Markdown)
+Vue.use(VeeValidate, { inject: false })
 Vue.use(Vuetify, {
   theme: {
     primary: '#1867C0',

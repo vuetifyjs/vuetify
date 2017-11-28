@@ -56,12 +56,13 @@
       },
       data () {
         return {
+          folder: 'grid',
           components: this.components,
           examples: this.examples
         }
       },
       examples () {
-        return this.$t('Components.Grid.examples')
+        return this.$t('Components.Grid.examples')[0]
       }
     }
   }

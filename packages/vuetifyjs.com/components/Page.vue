@@ -80,8 +80,4 @@
     
     section
       margin-bottom: 48px
-
-    &.fade-transition-leave,
-    &.fade-transition-leave-active
-      // display: none
 </style>

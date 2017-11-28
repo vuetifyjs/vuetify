@@ -148,7 +148,7 @@
     mounted () {
       this.uid = this._uid
       import(
-        /* webpackChunkName: "examples" */
+        /* webpackChunkName: "component-examples" */
         /* webpackMode: "lazy-once" */
         `../examples/${this.file}.vue`
       ).then(comp => {
