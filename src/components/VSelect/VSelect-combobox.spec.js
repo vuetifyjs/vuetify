@@ -34,4 +34,18 @@ test('VSelect - combobox', () => {
     expect(change).toHaveBeenCalledWith('foo')
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
+
+  it('should evaluate the range of an integer', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        combobox: true,
+        value: 11
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.currentRange).toBe(2)
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 })

@@ -52,7 +52,9 @@ export default {
      * @return {Number}
      */
     currentRange () {
-      return this.getText(this.selectedItem || '').length
+      if (!this.selectedItem) return 0
+
+      return this.getText(this.selectedItem).toString().length
     },
     filteredItems () {
       // If we are not actively filtering
