@@ -49,6 +49,11 @@ export default {
   },
 
   watch: {
+    hasError (val) {
+      this.radios.forEach(radio => {
+        radio.parentError = val
+      })
+    },
     inputValue (val) {
       this.radios.forEach(radio => {
         radio.isActive = val === radio.value
@@ -61,7 +66,8 @@ export default {
       return {
         'radio-group': true,
         'radio-group--column': this.column && !this.row,
-        'radio-group--row': this.row
+        'radio-group--row': this.row,
+        'error--text': this.hasError
       }
     }
   },

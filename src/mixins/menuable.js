@@ -279,14 +279,7 @@ export default {
     isShown (el) {
       return !!el && el.style.display !== 'none'
     },
-    resetDimensions () {
-      this.dimensions = Object.assign({}, dimensions)
-    },
     updateDimensions () {
-      // Ensure that overflow calculation
-      // can work properly every update
-      this.resetDimensions()
-
       const dimensions = {}
 
       // Activator should already be shown

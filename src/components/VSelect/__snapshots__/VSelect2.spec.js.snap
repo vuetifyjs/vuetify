@@ -23,7 +23,7 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
          style="display: inline-block;"
     >
       <div class="menu__content menu__content--select"
-           style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
+           style="max-height: 300px; min-width: 0px; max-width: auto; top: 18px; left: 0px; z-index: 0; display: none;"
       >
         <div class="card"
              style="height: auto;"
@@ -59,8 +59,7 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
                       </div>
                     </div>
                     <div class="input-group__details">
-                      <div class="input-group__messages">
-                      </div>
+                      <!---->
                     </div>
                   </div>
                 </div>
@@ -94,8 +93,7 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
                       </div>
                     </div>
                     <div class="input-group__details">
-                      <div class="input-group__messages">
-                      </div>
+                      <!---->
                     </div>
                   </div>
                 </div>
@@ -118,8 +116,7 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
     </i>
   </div>
   <div class="input-group__details">
-    <div class="input-group__messages">
-    </div>
+    <!---->
   </div>
 </div>
 
@@ -148,7 +145,7 @@ exports[`VSelect should be clearable with prop, dirty and single select 1`] = `
          style="display: inline-block;"
     >
       <div class="menu__content menu__content--select"
-           style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
+           style="max-height: 300px; min-width: 0px; max-width: auto; top: 18px; left: 0px; z-index: 0; display: none;"
       >
         <div class="card"
              style="height: auto;"
@@ -189,8 +186,7 @@ exports[`VSelect should be clearable with prop, dirty and single select 1`] = `
     </i>
   </div>
   <div class="input-group__details">
-    <div class="input-group__messages">
-    </div>
+    <!---->
   </div>
 </div>
 

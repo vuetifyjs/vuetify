@@ -288,7 +288,7 @@ test('VTextField.js', ({ mount }) => {
     input.trigger('blur')
     await wrapper.vm.$nextTick()
 
-    expect(change.mock.calls.length).toBe(0)
+    expect(change.mock.calls).toHaveLength(0)
   })
 
   it('should render component with async loading and match snapshot', () => {

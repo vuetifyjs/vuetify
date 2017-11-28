@@ -6,7 +6,7 @@ import VListTile from './VListTile'
 import VListTileAction from './VListTileAction'
 import VListTileAvatar from './VListTileAvatar'
 
-export { VList, VListGroup, VListTile, VListTileAction }
+export { VList, VListGroup, VListTile, VListTileAction, VListTileAvatar }
 export const VListTileActionText = createSimpleFunctional('list__tile__action-text', 'span')
 export const VListTileContent = createSimpleFunctional('list__tile__content', 'div')
 export const VListTileTitle = createSimpleFunctional('list__tile__title', 'div')
