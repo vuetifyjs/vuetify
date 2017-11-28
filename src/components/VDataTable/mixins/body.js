@@ -31,7 +31,6 @@ export default {
       return this.genTR([transition], { class: 'datatable__expand-row' })
     },
     genFilteredItems () {
-      console.log(this.$scopedSlots.items)
       if (!this.$scopedSlots.items) {
         return null
       }
