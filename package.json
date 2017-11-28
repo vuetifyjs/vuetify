@@ -34,7 +34,7 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.2",
-    "babel-jest": "^21.2.0",
+    "babel-jest": "^21.0.2",
     "babel-loader": "^7.1.2",
     "babel-plugin-add-filehash": "^6.9.5",
     "babel-plugin-detective": "^2.0.0",
