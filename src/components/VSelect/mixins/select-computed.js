@@ -52,7 +52,7 @@ export default {
      * @return {Number}
      */
     currentRange () {
-      if (!this.selectedItem) return 0
+      if (this.selectedItem == null) return 0
 
       return this.getText(this.selectedItem).toString().length
     },
@@ -140,7 +140,7 @@ export default {
 
       return this.selectedItems.find(i => (
         this.getValue(i) === this.getValue(this.inputValue)
-      )) || null
+      ))
     },
     shouldOffset () {
       return this.isAutocomplete || this.isDropdown

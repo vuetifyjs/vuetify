@@ -44,8 +44,12 @@ test('VSelect - combobox', () => {
     })
 
     await wrapper.vm.$nextTick()
-
     expect(wrapper.vm.currentRange).toBe(2)
+
+    wrapper.setProps({ value: 0 })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.currentRange).toBe(1)
+
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 })
