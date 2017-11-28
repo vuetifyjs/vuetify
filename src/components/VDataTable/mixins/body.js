@@ -31,6 +31,7 @@ export default {
       return this.genTR([transition], { class: 'datatable__expand-row' })
     },
     genFilteredItems () {
+      console.log(this.$scopedSlots.items)
       if (!this.$scopedSlots.items) {
         return null
       }
@@ -46,7 +47,7 @@ export default {
             key: index,
             attrs: { active: this.isSelected(item) }
           })
-          : Object.assign({ key: index }, row))
+          : row)
 
         if (this.$scopedSlots.expand) {
           const expandRow = this.genExpandedRow(props)
