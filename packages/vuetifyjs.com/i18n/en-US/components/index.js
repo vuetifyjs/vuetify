@@ -20,6 +20,7 @@ import Grid from './Grid'
 import GridLists from './GridLists'
 import Icons from './Icons'
 import Lists from './Lists'
+import Jumbotrons from './Jumbotrons'
 import Menus from './Menus'
 import NavigationDrawers from './NavigationDrawers'
 import Paginations from './Paginations'
@@ -60,6 +61,7 @@ export default {
   GridLists,
   Icons,
   Lists,
+  Jumbotrons,
   Menus,
   NavigationDrawers,
   Paginations,

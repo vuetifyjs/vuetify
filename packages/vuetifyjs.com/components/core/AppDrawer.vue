@@ -215,7 +215,7 @@
             },
             { href: 'icons', title: 'Icons' },
             { href: 'lists', title: 'Lists' },
-            { href: 'jumbotron', title: 'Jumbotrons', badge: 'new' },
+            { href: 'jumbotrons', title: 'Jumbotrons', badge: 'new' },
             { href: 'menus', title: 'Menus' },
             { href: 'navigation-drawers', title: 'Navigation drawers' },
             { href: 'paginations', title: 'Paginations' },

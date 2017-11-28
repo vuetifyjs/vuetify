@@ -245,6 +245,12 @@
     "description": "List component for Vuetify Framework",
     "keywords": "list, lists"
   },
+  "/components/jumbotrons": {
+    "h1": "Jumbotrons",
+    "title": "Jumbotron Component",
+    "description": "Jumbotron component for Vuetify Framework",
+    "keywords": "jumbotrons"
+  },
   "/components/menus": {
     "h1": "Menus",
     "title": "Menu Component",
