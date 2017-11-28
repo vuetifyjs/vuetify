@@ -46,7 +46,7 @@ export default {
             key: index,
             attrs: { active: this.isSelected(item) }
           })
-          : Object.assign({ key: index }, row))
+          : row)
 
         if (this.$scopedSlots.expand) {
           const expandRow = this.genExpandedRow(props)

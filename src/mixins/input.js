@@ -84,7 +84,7 @@ export default {
       }, this.$slots.label || this.label)
     },
     genMessages () {
-      let messages = []
+      let messages = null
 
       if ((this.hint &&
             this.isFocused ||
@@ -97,18 +97,15 @@ export default {
         messages = [this.genError(this.validations[0])]
       }
 
-      return this.$createElement('transition-group', {
-        'class': 'input-group__messages',
+      return this.$createElement('transition', {
         props: {
-          tag: 'div',
           name: 'slide-y-transition'
         }
       }, messages)
     },
     genHint () {
       return this.$createElement('div', {
-        'class': 'input-group__hint',
-        key: this.hint,
+        'class': 'input-group__messages input-group__hint',
         domProps: { innerHTML: this.hint }
       })
     },
@@ -116,8 +113,7 @@ export default {
       return this.$createElement(
         'div',
         {
-          'class': 'input-group__error',
-          key: error
+          'class': 'input-group__messages input-group__error'
         },
         error
       )
