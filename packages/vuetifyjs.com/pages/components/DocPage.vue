@@ -8,7 +8,7 @@
   export default {
     computed: {
       components () {
-        const components = `Components.${this.name}.components`
+        const components = `${this.section}.${this.name}.components`
 
         return this.$te(components)
           ? this.$t(components)
@@ -21,16 +21,17 @@
         }
       },
       examples () {
-        const examples = `Components.${this.name}.examples`
+        const examples = `${this.section}.${this.name}.examples`
 
         return this.$te(examples)
           ? this.$t(examples)[0]
           : []
       },
       name () {
-        const name = camel(this.$route.params.component)
-
-        return `${name.substr(0, 1).toUpperCase()}${name.slice(1)}`
+        return camel(this.$route.params.component)
+      },
+      section () {
+        return camel(this.$route.params.section)
       }
     }
   }
