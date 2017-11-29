@@ -8,7 +8,7 @@
     :scroll-off-screen="isManualScrolling"
     ref="toolbar"
   )#app-toolbar
-    v-toolbar-side-icon(@click="$store.commit('app/DRAWER_TOGGLE')").hidden-sm-and-up
+    v-toolbar-side-icon(@click="$store.commit('app/DRAWER_TOGGLE')").hidden-lg-and-up
     router-link(to="/").ml-3
       img(
         src="/static/v-alt.svg"
@@ -21,7 +21,7 @@
         v-btn(
           slot="activator"
           flat
-        ) 
+        )
           span Translations
           v-icon keyboard_arrow_down
       v-menu(bottom offset-y)
