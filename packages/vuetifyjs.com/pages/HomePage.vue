@@ -1,29 +1,39 @@
 <template lang="pug">
   div#home
-    v-alert(color="accent" value).ma-0
-      div {{ $t('Vuetify.Home.announcementBanner') }}
-    v-card(
+    v-jumbotron(
+      gradient="to right top, #1867c0, #19e5f4"
+      height="50vh"
       dark
-      tile
-      flat
-      color="primary"
-    )#banner
-      v-layout(align-center justify-center)
-        v-flex.text-xs-center
-          img(
-            src="/static/v-alt.svg"
-            alt="Logo"
-            height="75px"
-          )
-          h1.mt-4.mb-5
-            span {{ $t("Vuetify.Home.heading1") }}
-            | {{ $t("Vuetify.Home.heading1cont") }}
-          v-btn(
-            color="secondary"
-            dark
-            to="/getting-started/quick-start"
-          ).px-3 {{ $t("Vuetify.Home.getStarted") }}
-          p version {{ $store.state.currentVersion }}
+    )
+      v-container(fill-height)
+        v-layout(align-center wrap).text-xs-center
+          v-flex(xs12)
+            img(
+              src="/static/vuetify-logo-300.png"
+              alt="Logo"
+              width="196px"
+            )
+            h1.display-3 {{ $t("Vuetify.Home.heading1") }}
+            div.headline.mb-3 {{ $t("Vuetify.Home.heading1cont") }}
+            div.mb-5
+              v-btn(
+                icon
+                color="white"
+                v-for="(social, i) in socials"
+                :key="i"
+                :href="social.href"
+                target="_blank"
+                rel="noopener"
+              ).mx-3
+                v-icon(color="primary") {{ social.icon }}
+            v-btn(
+              color="white"
+              class="primary--text"
+              to="/getting-started/quick-start"
+              large
+            ).mb-2
+              strong {{ $t("Vuetify.Home.getStarted") }}
+            div version {{ $store.state.currentVersion }}
 
     section#features
       v-container
@@ -154,6 +164,23 @@
       HomeFooter
     },
 
+    data: () => ({
+      socials: [
+        {
+          icon: 'fa-github',
+          href: 'https://github.com/vuetifyjs/vuetify'
+        },
+        {
+          icon: 'fa-twitter',
+          href: 'https://twitter.com/vuetifyjs'
+        },
+        {
+          icon: 'fa-facebook',
+          href: 'https://www.facebook.com/vuetifyjs/'
+        }
+      ]
+    }),
+
     computed: {
       ...mapState({
         diamond: state => state.supporters.diamond,
@@ -192,38 +219,6 @@
     background white
     color #455163
 
-    #banner.primary
-      height: auto !important
-      padding-top: 4em
-      padding-bottom 4em
-
-      img
-        height 160px
-
-      h1
-        font-size 32px
-        font-weight 100
-        display block
-        line-height 1.2em
-
-        span
-          font-size 42px
-          font-weight 500
-          line-height 1.2em
-          letter-spacing: 4px
-          display block
-          margin-bottom .3em
-
-      @media $display-breakpoints.xs-only
-        img
-          height 120px
-        h1
-          font-size 32px
-          span
-            font-size 24px
-      .btn
-        height 56px
-        font-size 18px
   #features
     padding 5vh 0 0
     margin 5vh 0 0
@@ -272,6 +267,7 @@
             font-size 21px
           img
             max-width 75%
+
   #checkFeatures
     padding 8em 0
     h2
@@ -307,6 +303,7 @@
           font-size 18px
     @media $display-breakpoints.sm-only
       padding 3em 0
+
   #letterFromAuthor
     .card
       padding 3em
