@@ -1,11 +1,10 @@
 export default {
   header: 'Alert',
-  headerText: 'The `v-alert` component is used to convey information to the user.',
+  headerText: 'The `v-alert` component is used to convey important information to the user. It comes in 4 variations, **success**, **info**, **warning** and **error**. These have default icons assigned which can be changed and represent different actions',
   components: ['v-alert'],
   examples: [{
     contextual: {
-      header: 'Contextual',
-      desc: 'The `v-alert` component comes in 4 variations, **success**, **info**, **warning** and **error**. These have default icons assigned which can be changed and represent different actions.'
+      header: 'Contextual'
     },
     closable: {
       header: 'Closable',
