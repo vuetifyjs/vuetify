@@ -149,5 +149,20 @@ export function rafPolyfill(w) {
 
   if (!w.requestAnimationFrame) w.requestAnimationFrame = raf;
   if (!w.cancelAnimationFrame)  w.cancelAnimationFrame  = cancelRaf;
+}
 
+export function touch(element) {
+  const trigger = (type, clientX, clientY) => {
+    const eventObject = document.createEvent('Event')
+    eventObject.initEvent(type, true, true)
+    eventObject.changedTouches = [{clientX, clientY}]
+    element.dispatchEvent(eventObject)
+    return touch(element)
+  }
+
+  return {
+    start: (x, y) => trigger('touchstart', x, y),
+    move: (x, y) => trigger('touchmove', x, y),
+    end: (x, y) => trigger('touchend', x, y)
+  }
 }
