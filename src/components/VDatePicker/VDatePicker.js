@@ -166,11 +166,7 @@ export default {
     },
     formatters () {
       return {
-        day: this.dayFormat || createNativeLocaleFormatter(this.locale, { day: 'numeric', timeZone: 'UTC' }, { start: 8, length: 2 }),
-        headerDate: this.headerDateFormat || createNativeLocaleFormatter(this.locale, { month: 'long', year: 'numeric', timeZone: 'UTC' }, { length: 7 }),
-        month: this.monthFormat || createNativeLocaleFormatter(this.locale, { month: 'short', timeZone: 'UTC' }, { start: 5, length: 2 }),
         year: this.yearFormat || createNativeLocaleFormatter(this.locale, { year: 'numeric', timeZone: 'UTC' }, { length: 4 }),
-        weekDay: createNativeLocaleFormatter(this.locale, { weekday: 'narrow', timeZone: 'UTC' }),
         titleDate: this.titleDateFormat || this.defaultTitleDateFormatter
       }
     },
@@ -202,9 +198,7 @@ export default {
       this.isReversing = this.sanitizeDateString(val, sanitizeType) < this.sanitizeDateString(prev, sanitizeType)
     },
     value (val) {
-      if (val) {
-        this.tableDate = this.type === 'month' ? `${this.year}` : `${this.year}-${this.month + 1}`
-      }
+      val && this.setTableDate()
     },
     type (val) {
       if (val === 'month' && this.activePicker === 'DATE') {
@@ -216,6 +210,9 @@ export default {
   },
 
   methods: {
+    setTableDate () {
+      this.tableDate = this.type === 'month' ? `${this.year}` : `${this.year}-${pad(this.month + 1)}`
+    },
     save () {
       if (this.originalDate) {
         this.originalDate = this.value
@@ -237,7 +234,7 @@ export default {
       } else {
         const date = `${value}-${pad(this.tableMonth + 1)}-${pad(this.day)}`
         if (isValueAllowed(date, this.allowedDates)) this.inputDate = date
-        this.tableDate = `${value}-${this.tableMonth + 1}`
+        this.tableDate = `${value}-${pad(this.tableMonth + 1)}`
       }
       this.activePicker = 'MONTH'
     },
@@ -257,66 +254,98 @@ export default {
       this.inputDate = value
       this.$nextTick(() => (this.autosave && this.save()))
     },
-    genBody (h) {
-      const props = {
-        color: this.color,
-        locale: this.locale,
-        value: this.activePicker === 'DATE' ? this.tableDate : `${this.tableYear}`
-      }
-      const listeners = {
-        toggle: () => this.activePicker = (this.activePicker === 'DATE' ? 'MONTH' : 'YEAR'),
-        input: this.activePicker === 'YEAR' ? this.yearClick : value => this.tableDate = value
-      }
-
-      if (this.activePicker === 'DATE') {
-        return [h('v-date-picker-header', {
-          props: Object.assign({ format: this.headerDateFormat }, props),
-          on: listeners
-        }), h('v-date-picker-date-table', {
-          props: {
-            allowedDates: this.allowedDates,
-            color: this.color,
-            firstDayOfWeek: this.firstDayOfWeek,
-            format: this.dayFormat,
-            locale: this.locale,
-            tableDate: this.tableDate,
-            scrollable: this.scrollable,
-            value: this.value
-          },
-          ref: 'table',
-          on: {
-            input: this.dateClick,
-            tableDate: value => this.tableDate = value
-          }
-        })]
-      }
-
-      if (this.activePicker === 'MONTH') {
-        return [h('v-date-picker-header', {
-          props: Object.assign({ format: this.headerDateFormat }, props),
-          on: listeners
-        }), h('v-date-picker-month-table', {
-          props: {
-            allowedDates: this.type === 'MONTH' ? this.allowedDates : null,
-            color: this.color,
-            format: this.monthFormat,
-            locale: this.locale,
-            scrollable: this.scrollable,
-            value: (!this.value || this.type === 'MONTH') ? this.value : this.value.substr(0, 7),
-            tableDate: `${this.tableYear}`
-          },
-          ref: 'table',
-          on: {
-            input: this.monthClick,
-            tableDate: value => this.tableDate = value
-          }
-        })]
-      }
-
-      return [h('v-date-picker-years', {
-        props: Object.assign({ format: this.yearFormat }, props),
-        on: listeners
-      })]
+    genTitle () {
+      return this.$createElement('v-date-picker-title', {
+        props: {
+          date: this.formatters.titleDate(this.inputDate),
+          year: this.formatters.year(`${this.year}`),
+          yearIcon: this.yearIcon,
+          value: this.activePicker === 'YEAR'
+        },
+        slot: 'title',
+        on: {
+          input: value => this.activePicker = value ? 'YEAR' : this.type.toUpperCase()
+        }
+      })
+    },
+    genActions () {
+      return this.$scopedSlots.default ? this.$createElement('div', {
+        staticClass: 'card__actions',
+        slot: 'actions'
+      }, [this.$scopedSlots.default({
+        save: this.save,
+        cancel: this.cancel
+      })]) : null
+    },
+    genTableHeader () {
+      return this.$createElement('v-date-picker-header', {
+        props: {
+          color: this.color,
+          format: this.headerDateFormat,
+          locale: this.locale,
+          value: this.activePicker === 'DATE' ? this.tableDate : `${this.tableYear}`
+        },
+        on: {
+          toggle: () => this.activePicker = (this.activePicker === 'DATE' ? 'MONTH' : 'YEAR'),
+          input: value => this.tableDate = value
+        }
+      })
+    },
+    genDateTable () {
+      return this.$createElement('v-date-picker-date-table', {
+        props: {
+          allowedDates: this.allowedDates,
+          color: this.color,
+          firstDayOfWeek: this.firstDayOfWeek,
+          format: this.dayFormat,
+          locale: this.locale,
+          tableDate: this.tableDate,
+          scrollable: this.scrollable,
+          value: this.value
+        },
+        ref: 'table',
+        on: {
+          input: this.dateClick,
+          tableDate: value => this.tableDate = value
+        }
+      })
+    },
+    genMonthTable () {
+      return this.$createElement('v-date-picker-month-table', {
+        props: {
+          allowedDates: this.type === 'MONTH' ? this.allowedDates : null,
+          color: this.color,
+          format: this.monthFormat,
+          locale: this.locale,
+          scrollable: this.scrollable,
+          value: (!this.value || this.type === 'MONTH') ? this.value : this.value.substr(0, 7),
+          tableDate: `${this.tableYear}`
+        },
+        ref: 'table',
+        on: {
+          input: this.monthClick,
+          tableDate: value => this.tableDate = value
+        }
+      })
+    },
+    genYears () {
+      return this.$createElement('v-date-picker-years', {
+        props: {
+          color: this.color,
+          format: this.yearFormat,
+          locale: this.locale,
+          value: `${this.tableYear}`
+        },
+        on: {
+          input: this.yearClick
+        }
+      })
+    },
+    genBody () {
+      return this.activePicker === 'YEAR' ? [this.genYears()] : [
+        this.genTableHeader(),
+        this.activePicker === 'DATE' ? this.genDateTable() : this.genMonthTable()
+      ]
     },
     // Adds leading zero to month/day if necessary, returns 'YYYY' if type = 'year',
     // 'YYYY-MM' if 'month' and 'YYYY-MM-DD' if 'date'
@@ -327,7 +356,7 @@ export default {
   },
 
   created () {
-    this.tableDate = this.type === 'month' ? `${this.year}` : `${this.year}-${this.month + 1}`
+    this.setTableDate()
   },
 
   mounted () {
@@ -338,19 +367,6 @@ export default {
   },
 
   render (h) {
-    const title = h('v-date-picker-title', {
-      props: {
-        date: this.formatters.titleDate(this.inputDate),
-        year: this.formatters.year(`${this.year}`),
-        yearIcon: this.yearIcon,
-        value: this.activePicker === 'YEAR'
-      },
-      slot: 'title',
-      on: {
-        input: value => this.activePicker = value ? 'YEAR' : this.type.toUpperCase()
-      }
-    })
-
     return h('v-picker', {
       staticClass: 'picker--date',
       props: {
@@ -360,15 +376,9 @@ export default {
         color: this.headerColor
       }
     }, [
-      this.noTitle ? null : title,
-      h('div', { key: this.activePicker }, this.genBody(h)),
-      this.$scopedSlots.default ? h('div', {
-        staticClass: 'card__actions',
-        slot: 'actions'
-      }, [this.$scopedSlots.default({
-        save: this.save,
-        cancel: this.cancel
-      })]) : null
+      this.noTitle ? null : this.genTitle(),
+      h('div', { key: this.activePicker }, this.genBody()),
+      this.genActions()
     ])
   }
 }

@@ -128,14 +128,13 @@ export default {
         inputHour = value.getHours()
         inputMinute = value.getMinutes()
       } else if (value) {
-        const arr = value.replace(/[^:0-9]/, '').split(':')
-        inputHour = parseInt(arr[0], 10)
-        inputMinute = parseInt(arr[1], 10)
+        const [, hour, minute, , period] = value.trim().toLowerCase().match(/^(\d+):(\d+)(:\d+)?([ap]m)?$/, '') || []
+        inputHour = parseInt(hour, 10)
+        inputMinute = parseInt(minute, 10)
 
-        const [, period] = value.match(/([ap]m)/i) || []
-        if (period && period.toLowerCase() === 'pm') {
+        if (period === 'pm') {
           inputHour = inputHour === 12 ? inputHour : inputHour + 12
-        } else if (period && period.toLowerCase() === 'am') {
+        } else if (period === 'am') {
           inputHour = inputHour === 12 ? 0 : inputHour
         }
       }
@@ -160,6 +159,24 @@ export default {
       // then set selectingHour
       this.$nextTick(() => (this.selectingHour = true))
     },
+    onInput (value) {
+      if (!this.selectingHour) {
+        this.minute = value
+      } else if (this.format === '24hr') {
+        this.hour = value
+      } else {
+        this.hour12 = value
+      }
+    },
+    onChange () {
+      if (!this.selectingHour && this.autosave) {
+        this.save()
+      }
+
+      if (this.selectingHour) {
+        this.selectingHour = !this.selectingHour
+      }
+    },
     genBody () {
       return this.$createElement('v-time-picker-clock', {
         props: {
@@ -177,24 +194,8 @@ export default {
           value: this.selectingHour ? (this.format === 'ampm' ? this.hour12 : this.hour) : this.minute
         },
         on: {
-          input: value => {
-            if (!this.selectingHour) {
-              this.minute = value
-            } else if (this.format === '24hr') {
-              this.hour = value
-            } else {
-              this.hour12 = value
-            }
-          },
-          change: () => {
-            if (!this.selectingHour && this.autosave) {
-              this.save()
-            }
-
-            if (this.selectingHour) {
-              this.selectingHour = !this.selectingHour
-            }
-          }
+          input: this.onInput,
+          change: this.onChange
         },
         ref: 'clock'
       })

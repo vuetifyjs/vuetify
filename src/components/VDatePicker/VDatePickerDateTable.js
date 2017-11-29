@@ -50,35 +50,38 @@ export default {
       return this.$createElement('thead', this.genTR(days))
     },
 
-    genTD (day) {
-      const date = `${this.displayedYear}-${pad(this.displayedMonth + 1)}-${pad(day)}`
-      const buttonText = this.formatter(date)
+    genButtonClasses (day, disabled) {
       const isActive = this.isActive(day)
       const isCurrent = this.isCurrent(day)
-      const isDisabled = !isValueAllowed(date, this.allowedDates)
       const classes = Object.assign({
         'btn--active': isActive,
         'btn--outline': isCurrent && !isActive,
-        'btn--disabled': isDisabled
+        'btn--disabled': disabled
       }, this.themeClasses)
 
-      const button = this.$createElement('button', {
+      return (isActive || isCurrent)
+        ? this.addBackgroundColorClassChecks(classes)
+        : classes
+    },
+
+    genButton (day) {
+      const date = `${this.displayedYear}-${pad(this.displayedMonth + 1)}-${pad(day)}`
+      const disabled = !isValueAllowed(date, this.allowedDates)
+
+      return this.$createElement('button', {
         staticClass: 'btn btn--raised btn--icon',
-        'class': (isActive || isCurrent)
-          ? this.addBackgroundColorClassChecks(classes)
-          : classes,
+        'class': this.genButtonClasses(day, disabled),
         attrs: {
           type: 'button'
         },
         domProps: {
-          innerHTML: `<span class="btn__content">${buttonText}</span>`
+          disabled,
+          innerHTML: `<span class="btn__content">${this.formatter(date)}</span>`
         },
-        on: isDisabled ? undefined : {
+        on: disabled ? {} : {
           click: () => this.$emit('input', date)
         }
       })
-
-      return this.$createElement('td', [button])
     },
 
     // Returns number of the days from the firstDayOfWeek to the first day of the current month
@@ -99,7 +102,7 @@ export default {
       }
 
       for (let i = 1; i <= daysInMonth; i++) {
-        rows.push(this.genTD(i))
+        rows.push(this.$createElement('td', [this.genButton(i)]))
 
         if (rows.length % 7 === 0) {
           children.push(this.genTR(rows))
@@ -110,10 +113,6 @@ export default {
       if (rows.length) {
         children.push(this.genTR(rows))
       }
-
-      children.length < 6 && children.push(this.genTR([
-        this.$createElement('td', { domProps: { innerHTML: '&nbsp;' } })
-      ]))
 
       return this.$createElement('tbody', children)
     },

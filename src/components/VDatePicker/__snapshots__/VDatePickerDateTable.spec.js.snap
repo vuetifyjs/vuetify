@@ -656,11 +656,6 @@ exports[`VDatePickerDateTable.js should render component and match snapshot 1`] 
           </button>
         </td>
       </tr>
-      <tr>
-        <td>
-          &nbsp;
-        </td>
-      </tr>
     </tbody>
   </table>
 </div>
