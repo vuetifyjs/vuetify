@@ -92,7 +92,7 @@
         }
 
         const extra = this.extra[this.currentComponent]
-        if (extra[this.type]) {
+        if (extra && extra[this.type]) {
           items = items.concat(extra[this.type])
         }
 

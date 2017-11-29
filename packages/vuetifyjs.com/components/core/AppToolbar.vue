@@ -8,15 +8,29 @@
     :scroll-off-screen="isManualScrolling"
     ref="toolbar"
   )#app-toolbar
-    v-toolbar-side-icon(@click="$store.commit('app/DRAWER_TOGGLE')")
-    router-link(to="/")
+    v-toolbar-side-icon(@click="$store.commit('app/DRAWER_TOGGLE')").hidden-sm-and-up
+    router-link(to="/").ml-3
       img(
         src="/static/v-alt.svg"
         height="38px"
       )
-    v-toolbar-title Vuetify
+    v-toolbar-title.pb-1 Vuetify
     v-spacer
     v-toolbar-items
+      v-menu(bottom offset-y)
+        v-btn(
+          slot="activator"
+          flat
+        ) 
+          span Translations
+          v-icon keyboard_arrow_down
+      v-menu(bottom offset-y)
+        v-btn(
+          slot="activator"
+          flat
+        )
+          span 0.17
+          v-icon keyboard_arrow_down
       v-btn(
         flat
         v-if="$route.path === '/'"
@@ -24,10 +38,6 @@
       )
         span.hidden-md-and-up Docs
         span.hidden-sm-and-down Documentation
-      v-btn(flat) Blog
-      v-btn(flat).hidden-sm-and-down Vueticasts
-      v-btn(flat).hidden-sm-and-down Shop
-      v-btn(flat).hidden-sm-and-down Donate
 </template>
 
 <script>
@@ -61,7 +71,7 @@
   #app-toolbar
     .toolbar__title
       margin-left .5em
-      font-weight 400
+      font-weight 300
       font-size 21px
       position relative
       top 1px

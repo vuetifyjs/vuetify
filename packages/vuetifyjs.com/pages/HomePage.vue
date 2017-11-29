@@ -33,7 +33,7 @@
               large
             ).mb-2
               strong {{ $t("Vuetify.Home.getStarted") }}
-            div version {{ $store.state.currentVersion }}
+            div version 1.0.0-alpha.1
 
     section#features
       v-container

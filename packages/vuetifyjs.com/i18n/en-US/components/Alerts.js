@@ -18,6 +18,10 @@ export default {
     transition: {
       header: 'Display transition',
       desc: `You can apply a custom transition to the show/hide of the alert.`
+    },
+    outline: {
+      header: 'Outline',
+      desc: 'Outline alerts inherit their borders from the current color applied.'
     }
   }]
 }
