@@ -15,7 +15,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
         >
           <i aria-hidden="true"
              class="material-icons icon"
-             style="font-size: 24px;"
+             style="font-size: 16px;"
           >
             arrow_upward
           </i>
@@ -38,7 +38,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
         >
           <i aria-hidden="true"
              class="material-icons icon"
-             style="font-size: 24px;"
+             style="font-size: 16px;"
           >
             arrow_upward
           </i>
@@ -210,7 +210,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
         >
           <i aria-hidden="true"
              class="material-icons icon"
-             style="font-size: 24px;"
+             style="font-size: 16px;"
           >
             arrow_upward
           </i>
@@ -233,7 +233,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
         >
           <i aria-hidden="true"
              class="material-icons icon"
-             style="font-size: 24px;"
+             style="font-size: 16px;"
           >
             arrow_upward
           </i>
@@ -405,7 +405,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
         >
           <i aria-hidden="true"
              class="material-icons icon"
-             style="font-size: 24px;"
+             style="font-size: 16px;"
           >
             arrow_upward
           </i>
@@ -428,7 +428,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
         >
           <i aria-hidden="true"
              class="material-icons icon"
-             style="font-size: 24px;"
+             style="font-size: 16px;"
           >
             arrow_upward
           </i>
@@ -602,7 +602,7 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
         >
           <i aria-hidden="true"
              class="material-icons icon"
-             style="font-size: 24px;"
+             style="font-size: 16px;"
           >
             arrow_upward
           </i>
@@ -625,7 +625,7 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
         >
           <i aria-hidden="true"
              class="material-icons icon"
-             style="font-size: 24px;"
+             style="font-size: 16px;"
           >
             arrow_upward
           </i>
