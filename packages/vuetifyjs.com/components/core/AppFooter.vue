@@ -53,7 +53,7 @@
       }),
       index () {
         return this.routes.findIndex(route => {
-          return this.$route.fullPath === route.href
+          return this.$route.path === route.href
         })
       },
       current () {
