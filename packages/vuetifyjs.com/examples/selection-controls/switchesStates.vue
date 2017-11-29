@@ -36,7 +36,7 @@
       </v-flex>
       <v-flex xs12 md6>
         <v-subheader>Dark</v-subheader>
-        <v-card color="secondary" flat dark>
+        <v-card color="grey darken-3" flat dark>
           <v-card-text>
             <v-container fluid>
               <v-layout row wrap class="light--text">
@@ -45,10 +45,10 @@
               </v-layout>
               <v-layout row wrap>
                 <v-flex xs6>
-                  <v-switch value input-value="true" dark></v-switch>
+                  <v-switch value input-value="true"></v-switch>
                 </v-flex>
                 <v-flex xs6>
-                  <v-switch dark></v-switch>
+                  <v-switch></v-switch>
                 </v-flex>
               </v-layout>
               <v-layout row wrap class="light--text">
@@ -57,10 +57,10 @@
               </v-layout>
               <v-layout row wrap>
                 <v-flex xs6>
-                  <v-switch value input-value="true" dark disabled></v-switch>
+                  <v-switch value input-value="true" disabled></v-switch>
                 </v-flex>
                 <v-flex xs6>
-                  <v-switch dark disabled></v-switch>
+                  <v-switch disabled></v-switch>
                 </v-flex>
               </v-layout>
             </v-container>

@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer permanent light>
+  <v-navigation-drawer permanent>
     <v-toolbar flat>
       <v-list>
         <v-list-tile>

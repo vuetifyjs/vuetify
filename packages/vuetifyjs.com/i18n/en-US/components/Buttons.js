@@ -21,7 +21,8 @@ export default {
     },
     dropdown: {
       header: "Button Dropdown Variants",
-      desc: `Button dropdowns are regular selects with additional styling.`
+      desc: `Button dropdowns are regular selects with additional styling.`,
+      uninverted: true
     },
     toggle: {
       header: "Button Toggle",

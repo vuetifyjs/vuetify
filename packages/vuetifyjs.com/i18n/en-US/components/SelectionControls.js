@@ -5,19 +5,23 @@ export default {
   examples: [{
     example: {
       header: 'Default examples',
-      desc: ''
+      desc: '',
+      uninverted: true
     },
     checkboxesBoolean: {
       header: "Checkboxes - Boolean",
-      desc: ''
+      desc: '',
+      uninverted: true
     },
     checkboxesArray: {
       header: "Checkboxes - Array",
-      desc: ''
+      desc: '',
+      uninverted: true
     },
     checkboxesStates: {
       header: "Checkboxes - States",
-      desc: ''
+      desc: '',
+      uninverted: true
     },
     checkboxesColors: {
       header: "Checkboxes - Colors",
@@ -25,11 +29,13 @@ export default {
     },
     radiosDefault: {
       header: "Radios - Default",
-      desc: 'Radio-groups are by default mandatory. This can be changed with the <code>mandatory</code> prop.'
+      desc: 'Radio-groups are by default mandatory. This can be changed with the <code>mandatory</code> prop.',
+      uninverted: true
     },
     radiosDirection: {
       header: "Radios - Direction",
-      desc: 'Radio-groups can be presented either as a row or a column, using their respective props. The default is as a column.'
+      desc: 'Radio-groups can be presented either as a row or a column, using their respective props. The default is as a column.',
+      uninverted: true
     },
     radiosColors: {
       header: "Radios - Colors",
@@ -37,15 +43,18 @@ export default {
     },
     switchesBoolean: {
       header: "Switches - Boolean",
-      desc: ''
+      desc: '',
+      uninverted: true
     },
     switchesArray: {
       header: "Switches - Array",
-      desc: ''
+      desc: '',
+      uninverted: true
     },
     switchesStates: {
       header: "Switches - States",
-      desc: ''
+      desc: '',
+      uninverted: true
     },
     switchesColors: {
       header: "Switches - Colors",

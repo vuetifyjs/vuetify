@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid grid-list-sm secondary>
+  <v-container fluid grid-list-sm>
     <v-layout row wrap>
       <v-flex d-flex xs12 order-xs5>
         <v-layout column>

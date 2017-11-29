@@ -16,7 +16,7 @@
         </v-container>
       </v-card-text>
     </v-card>
-    <v-card color="secondary" flat>
+    <v-card color="grey darken-3" flat>
       <v-card-text>
         <v-subheader dark>Dark Theme</v-subheader>
         <v-container fluid>

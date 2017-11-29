@@ -1,59 +1,55 @@
 <template>
-  <v-card color="grey lighten-4" flat>
-    <v-card-text>
-      <v-container fluid>
-        <v-layout row wrap>
-          <v-flex xs6>
-            <v-subheader>Standard</v-subheader>
-          </v-flex>
-          <v-flex xs6>
-            <v-select
-              v-bind:items="items"
-              v-model="e1"
-              label="Select"
-              single-line
-              bottom
-            ></v-select>
-          </v-flex>
-          <v-flex xs6>
-            <v-subheader>Standard with focus</v-subheader>
-          </v-flex>
-          <v-flex xs6>
-            <v-select
-              v-bind:items="items"
-              v-model="e2"
-              label="Select"
-              class="input-group--focused"
-              item-value="text"
-            ></v-select>
-          </v-flex>
-          <v-flex xs6>
-            <v-subheader>Error</v-subheader>
-          </v-flex>
-          <v-flex xs6>
-            <v-select
-              label="Select"
-              v-bind:items="items"
-              v-model="e3"
-              v-bind:error-messages="['Please select an option']"
-              item-value="text"
-            ></v-select>
-          </v-flex>
-          <v-flex xs6>
-            <v-subheader>Disabled</v-subheader>
-          </v-flex>
-          <v-flex xs6>
-            <v-select
-              label="Select"
-              v-bind:items="items"
-              v-model="e4"
-              disabled
-            ></v-select>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-card-text>
-  </v-card>
+  <v-container fluid>
+    <v-layout row wrap>
+      <v-flex xs6>
+        <v-subheader>Standard</v-subheader>
+      </v-flex>
+      <v-flex xs6>
+        <v-select
+          v-bind:items="items"
+          v-model="e1"
+          label="Select"
+          single-line
+          bottom
+        ></v-select>
+      </v-flex>
+      <v-flex xs6>
+        <v-subheader>Standard with focus</v-subheader>
+      </v-flex>
+      <v-flex xs6>
+        <v-select
+          v-bind:items="items"
+          v-model="e2"
+          label="Select"
+          class="input-group--focused"
+          item-value="text"
+        ></v-select>
+      </v-flex>
+      <v-flex xs6>
+        <v-subheader>Error</v-subheader>
+      </v-flex>
+      <v-flex xs6>
+        <v-select
+          label="Select"
+          v-bind:items="items"
+          v-model="e3"
+          v-bind:error-messages="['Please select an option']"
+          item-value="text"
+        ></v-select>
+      </v-flex>
+      <v-flex xs6>
+        <v-subheader>Disabled</v-subheader>
+      </v-flex>
+      <v-flex xs6>
+        <v-select
+          label="Select"
+          v-bind:items="items"
+          v-model="e4"
+          disabled
+        ></v-select>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>

@@ -9,7 +9,8 @@ export default {
     },
     lightAndDark: {
       header: 'Light and dark',
-      desc: 'Dividers have light and dark variants.'
+      desc: 'Dividers have light and dark variants.',
+      uninverted: true
     },
     inset: {
       header: 'Inset dividers',

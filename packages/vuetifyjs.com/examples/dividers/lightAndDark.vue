@@ -2,7 +2,7 @@
   <v-layout row>
     <v-flex xs12 sm6 offset-sm3>
       <v-card>
-        <v-toolbar color="teal lighten-3" dark>
+        <v-toolbar color="indigo" dark>
           <v-toolbar-side-icon></v-toolbar-side-icon>
           <v-toolbar-title>Manage</v-toolbar-title>
           <v-spacer></v-spacer>
@@ -10,7 +10,7 @@
             <v-icon>more_vert</v-icon>
           </v-btn>
         </v-toolbar>
-        <v-list class="teal darken-4" dark>
+        <v-list class="indigo darken-2" dark>
           <template v-for="item in items">
             <v-list-tile v-if="item.action" v-bind:key="item.title" @click="">
               <v-list-tile-action>

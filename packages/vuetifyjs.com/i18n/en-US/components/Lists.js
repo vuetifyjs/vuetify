@@ -54,7 +54,9 @@ export default {
     },
     dark: {
       header: 'Dark scheme',
-      desc: `A list can assume the alternate scheme color of dark.`
+      desc: `A list can assume the alternate scheme color of dark.`,
+      inverted: true,
+      uninverted: true
     }
   }]
 }
