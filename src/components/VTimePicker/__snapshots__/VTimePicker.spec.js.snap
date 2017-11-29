@@ -30,71 +30,73 @@ exports[`VTimePicker.js should accept a date object for a value 1`] = `
     </div>
   </div>
   <div class="picker__body">
-    <div class="time-picker-clock"
-         style="width: 280px; height: 280px;"
-    >
-      <div class="time-picker-clock__hand accent">
+    <div style="width: 100%; height: 100%;">
+      <div class="time-picker-clock"
+           style="width: 280px; height: 280px;"
+      >
+        <div class="time-picker-clock__hand accent">
+        </div>
+        <span class>
+          <span>
+            1
+          </span>
+        </span>
+        <span class>
+          <span>
+            2
+          </span>
+        </span>
+        <span class>
+          <span>
+            3
+          </span>
+        </span>
+        <span class>
+          <span>
+            4
+          </span>
+        </span>
+        <span class>
+          <span>
+            5
+          </span>
+        </span>
+        <span class>
+          <span>
+            6
+          </span>
+        </span>
+        <span class>
+          <span>
+            7
+          </span>
+        </span>
+        <span class>
+          <span>
+            8
+          </span>
+        </span>
+        <span class>
+          <span>
+            9
+          </span>
+        </span>
+        <span class>
+          <span>
+            10
+          </span>
+        </span>
+        <span class>
+          <span>
+            11
+          </span>
+        </span>
+        <span class="active accent">
+          <span>
+            12
+          </span>
+        </span>
       </div>
-      <span class>
-        <span>
-          1
-        </span>
-      </span>
-      <span class>
-        <span>
-          2
-        </span>
-      </span>
-      <span class>
-        <span>
-          3
-        </span>
-      </span>
-      <span class>
-        <span>
-          4
-        </span>
-      </span>
-      <span class>
-        <span>
-          5
-        </span>
-      </span>
-      <span class>
-        <span>
-          6
-        </span>
-      </span>
-      <span class>
-        <span>
-          7
-        </span>
-      </span>
-      <span class>
-        <span>
-          8
-        </span>
-      </span>
-      <span class>
-        <span>
-          9
-        </span>
-      </span>
-      <span class>
-        <span>
-          10
-        </span>
-      </span>
-      <span class>
-        <span>
-          11
-        </span>
-      </span>
-      <span class="active accent">
-        <span>
-          12
-        </span>
-      </span>
     </div>
   </div>
 </div>
@@ -131,71 +133,73 @@ exports[`VTimePicker.js should accept a value 1`] = `
     </div>
   </div>
   <div class="picker__body">
-    <div class="time-picker-clock"
-         style="width: 280px; height: 280px;"
-    >
-      <div class="time-picker-clock__hand accent">
+    <div style="width: 100%; height: 100%;">
+      <div class="time-picker-clock"
+           style="width: 280px; height: 280px;"
+      >
+        <div class="time-picker-clock__hand accent">
+        </div>
+        <span class>
+          <span>
+            1
+          </span>
+        </span>
+        <span class>
+          <span>
+            2
+          </span>
+        </span>
+        <span class>
+          <span>
+            3
+          </span>
+        </span>
+        <span class>
+          <span>
+            4
+          </span>
+        </span>
+        <span class>
+          <span>
+            5
+          </span>
+        </span>
+        <span class>
+          <span>
+            6
+          </span>
+        </span>
+        <span class>
+          <span>
+            7
+          </span>
+        </span>
+        <span class>
+          <span>
+            8
+          </span>
+        </span>
+        <span class="active accent">
+          <span>
+            9
+          </span>
+        </span>
+        <span class>
+          <span>
+            10
+          </span>
+        </span>
+        <span class>
+          <span>
+            11
+          </span>
+        </span>
+        <span class>
+          <span>
+            12
+          </span>
+        </span>
       </div>
-      <span class>
-        <span>
-          1
-        </span>
-      </span>
-      <span class>
-        <span>
-          2
-        </span>
-      </span>
-      <span class>
-        <span>
-          3
-        </span>
-      </span>
-      <span class>
-        <span>
-          4
-        </span>
-      </span>
-      <span class>
-        <span>
-          5
-        </span>
-      </span>
-      <span class>
-        <span>
-          6
-        </span>
-      </span>
-      <span class>
-        <span>
-          7
-        </span>
-      </span>
-      <span class>
-        <span>
-          8
-        </span>
-      </span>
-      <span class="active accent">
-        <span>
-          9
-        </span>
-      </span>
-      <span class>
-        <span>
-          10
-        </span>
-      </span>
-      <span class>
-        <span>
-          11
-        </span>
-      </span>
-      <span class>
-        <span>
-          12
-        </span>
-      </span>
     </div>
   </div>
 </div>
@@ -232,71 +236,73 @@ exports[`VTimePicker.js should change am/pm when updated from model 1`] = `
     </div>
   </div>
   <div class="picker__body">
-    <div class="time-picker-clock"
-         style="width: 280px; height: 280px;"
-    >
-      <div class="time-picker-clock__hand accent">
+    <div style="width: 100%; height: 100%;">
+      <div class="time-picker-clock"
+           style="width: 280px; height: 280px;"
+      >
+        <div class="time-picker-clock__hand accent">
+        </div>
+        <span class>
+          <span>
+            1
+          </span>
+        </span>
+        <span class>
+          <span>
+            2
+          </span>
+        </span>
+        <span class>
+          <span>
+            3
+          </span>
+        </span>
+        <span class>
+          <span>
+            4
+          </span>
+        </span>
+        <span class>
+          <span>
+            5
+          </span>
+        </span>
+        <span class>
+          <span>
+            6
+          </span>
+        </span>
+        <span class>
+          <span>
+            7
+          </span>
+        </span>
+        <span class>
+          <span>
+            8
+          </span>
+        </span>
+        <span class="active accent">
+          <span>
+            9
+          </span>
+        </span>
+        <span class>
+          <span>
+            10
+          </span>
+        </span>
+        <span class>
+          <span>
+            11
+          </span>
+        </span>
+        <span class>
+          <span>
+            12
+          </span>
+        </span>
       </div>
-      <span class>
-        <span>
-          1
-        </span>
-      </span>
-      <span class>
-        <span>
-          2
-        </span>
-      </span>
-      <span class>
-        <span>
-          3
-        </span>
-      </span>
-      <span class>
-        <span>
-          4
-        </span>
-      </span>
-      <span class>
-        <span>
-          5
-        </span>
-      </span>
-      <span class>
-        <span>
-          6
-        </span>
-      </span>
-      <span class>
-        <span>
-          7
-        </span>
-      </span>
-      <span class>
-        <span>
-          8
-        </span>
-      </span>
-      <span class="active accent">
-        <span>
-          9
-        </span>
-      </span>
-      <span class>
-        <span>
-          10
-        </span>
-      </span>
-      <span class>
-        <span>
-          11
-        </span>
-      </span>
-      <span class>
-        <span>
-          12
-        </span>
-      </span>
     </div>
   </div>
 </div>
@@ -333,71 +339,73 @@ exports[`VTimePicker.js should render colored time picker 1`] = `
     </div>
   </div>
   <div class="picker__body">
-    <div class="time-picker-clock"
-         style="width: 280px; height: 280px;"
-    >
-      <div class="time-picker-clock__hand primary">
+    <div style="width: 100%; height: 100%;">
+      <div class="time-picker-clock"
+           style="width: 280px; height: 280px;"
+      >
+        <div class="time-picker-clock__hand primary">
+        </div>
+        <span class>
+          <span>
+            1
+          </span>
+        </span>
+        <span class>
+          <span>
+            2
+          </span>
+        </span>
+        <span class>
+          <span>
+            3
+          </span>
+        </span>
+        <span class>
+          <span>
+            4
+          </span>
+        </span>
+        <span class>
+          <span>
+            5
+          </span>
+        </span>
+        <span class>
+          <span>
+            6
+          </span>
+        </span>
+        <span class>
+          <span>
+            7
+          </span>
+        </span>
+        <span class>
+          <span>
+            8
+          </span>
+        </span>
+        <span class="active primary">
+          <span>
+            9
+          </span>
+        </span>
+        <span class>
+          <span>
+            10
+          </span>
+        </span>
+        <span class>
+          <span>
+            11
+          </span>
+        </span>
+        <span class>
+          <span>
+            12
+          </span>
+        </span>
       </div>
-      <span class>
-        <span>
-          1
-        </span>
-      </span>
-      <span class>
-        <span>
-          2
-        </span>
-      </span>
-      <span class>
-        <span>
-          3
-        </span>
-      </span>
-      <span class>
-        <span>
-          4
-        </span>
-      </span>
-      <span class>
-        <span>
-          5
-        </span>
-      </span>
-      <span class>
-        <span>
-          6
-        </span>
-      </span>
-      <span class>
-        <span>
-          7
-        </span>
-      </span>
-      <span class>
-        <span>
-          8
-        </span>
-      </span>
-      <span class="active primary">
-        <span>
-          9
-        </span>
-      </span>
-      <span class>
-        <span>
-          10
-        </span>
-      </span>
-      <span class>
-        <span>
-          11
-        </span>
-      </span>
-      <span class>
-        <span>
-          12
-        </span>
-      </span>
     </div>
   </div>
 </div>
@@ -434,71 +442,73 @@ exports[`VTimePicker.js should render colored time picker 2`] = `
     </div>
   </div>
   <div class="picker__body">
-    <div class="time-picker-clock"
-         style="width: 280px; height: 280px;"
-    >
-      <div class="time-picker-clock__hand orange darken-1">
+    <div style="width: 100%; height: 100%;">
+      <div class="time-picker-clock"
+           style="width: 280px; height: 280px;"
+      >
+        <div class="time-picker-clock__hand orange darken-1">
+        </div>
+        <span class>
+          <span>
+            1
+          </span>
+        </span>
+        <span class>
+          <span>
+            2
+          </span>
+        </span>
+        <span class>
+          <span>
+            3
+          </span>
+        </span>
+        <span class>
+          <span>
+            4
+          </span>
+        </span>
+        <span class>
+          <span>
+            5
+          </span>
+        </span>
+        <span class>
+          <span>
+            6
+          </span>
+        </span>
+        <span class>
+          <span>
+            7
+          </span>
+        </span>
+        <span class>
+          <span>
+            8
+          </span>
+        </span>
+        <span class="active orange darken-1">
+          <span>
+            9
+          </span>
+        </span>
+        <span class>
+          <span>
+            10
+          </span>
+        </span>
+        <span class>
+          <span>
+            11
+          </span>
+        </span>
+        <span class>
+          <span>
+            12
+          </span>
+        </span>
       </div>
-      <span class>
-        <span>
-          1
-        </span>
-      </span>
-      <span class>
-        <span>
-          2
-        </span>
-      </span>
-      <span class>
-        <span>
-          3
-        </span>
-      </span>
-      <span class>
-        <span>
-          4
-        </span>
-      </span>
-      <span class>
-        <span>
-          5
-        </span>
-      </span>
-      <span class>
-        <span>
-          6
-        </span>
-      </span>
-      <span class>
-        <span>
-          7
-        </span>
-      </span>
-      <span class>
-        <span>
-          8
-        </span>
-      </span>
-      <span class="active orange darken-1">
-        <span>
-          9
-        </span>
-      </span>
-      <span class>
-        <span>
-          10
-        </span>
-      </span>
-      <span class>
-        <span>
-          11
-        </span>
-      </span>
-      <span class>
-        <span>
-          12
-        </span>
-      </span>
     </div>
   </div>
 </div>
@@ -535,71 +545,73 @@ exports[`VTimePicker.js should render landscape component 1`] = `
     </div>
   </div>
   <div class="picker__body picker__body--landscape">
-    <div class="time-picker-clock"
-         style="width: 250px; height: 250px;"
-    >
-      <div class="time-picker-clock__hand accent">
+    <div style="width: 100%; height: 100%;">
+      <div class="time-picker-clock"
+           style="width: 250px; height: 250px;"
+      >
+        <div class="time-picker-clock__hand accent">
+        </div>
+        <span class>
+          <span>
+            1
+          </span>
+        </span>
+        <span class>
+          <span>
+            2
+          </span>
+        </span>
+        <span class>
+          <span>
+            3
+          </span>
+        </span>
+        <span class>
+          <span>
+            4
+          </span>
+        </span>
+        <span class>
+          <span>
+            5
+          </span>
+        </span>
+        <span class>
+          <span>
+            6
+          </span>
+        </span>
+        <span class>
+          <span>
+            7
+          </span>
+        </span>
+        <span class>
+          <span>
+            8
+          </span>
+        </span>
+        <span class="active accent">
+          <span>
+            9
+          </span>
+        </span>
+        <span class>
+          <span>
+            10
+          </span>
+        </span>
+        <span class>
+          <span>
+            11
+          </span>
+        </span>
+        <span class>
+          <span>
+            12
+          </span>
+        </span>
       </div>
-      <span class>
-        <span>
-          1
-        </span>
-      </span>
-      <span class>
-        <span>
-          2
-        </span>
-      </span>
-      <span class>
-        <span>
-          3
-        </span>
-      </span>
-      <span class>
-        <span>
-          4
-        </span>
-      </span>
-      <span class>
-        <span>
-          5
-        </span>
-      </span>
-      <span class>
-        <span>
-          6
-        </span>
-      </span>
-      <span class>
-        <span>
-          7
-        </span>
-      </span>
-      <span class>
-        <span>
-          8
-        </span>
-      </span>
-      <span class="active accent">
-        <span>
-          9
-        </span>
-      </span>
-      <span class>
-        <span>
-          10
-        </span>
-      </span>
-      <span class>
-        <span>
-          11
-        </span>
-      </span>
-      <span class>
-        <span>
-          12
-        </span>
-      </span>
     </div>
   </div>
 </div>

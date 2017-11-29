@@ -257,7 +257,7 @@ export default {
       this.inputDate = value
       this.$nextTick(() => (this.autosave && this.save()))
     },
-    genPickerBody (h) {
+    genBody (h) {
       const props = {
         color: this.color,
         locale: this.locale,
@@ -357,12 +357,11 @@ export default {
         landscape: this.landscape,
         dark: this.dark,
         light: this.light,
-        color: this.headerColor,
-        bodyKey: this.activePicker
+        color: this.headerColor
       }
     }, [
       this.noTitle ? null : title,
-      this.genPickerBody(h),
+      h('div', { key: this.activePicker }, this.genBody(h)),
       this.$scopedSlots.default ? h('div', {
         staticClass: 'card__actions',
         slot: 'actions'

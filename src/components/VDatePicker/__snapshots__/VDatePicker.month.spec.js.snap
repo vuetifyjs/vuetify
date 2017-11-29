@@ -142,160 +142,162 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
     </div>
   </div>
   <div class="picker__body">
-    <div class="date-picker-header">
-      <button type="button"
-              class="btn btn--icon"
-              data-ripple="true"
-      >
-        <div class="btn__content">
-          <i aria-hidden="true"
-             class="material-icons icon"
-             style="font-size: 24px;"
-          >
-            chevron_left
-          </i>
+    <div>
+      <div class="date-picker-header">
+        <button type="button"
+                class="btn btn--icon"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+               style="font-size: 24px;"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div class="date-picker-header__value">
+          <strong class="primary--text">
+            2005
+          </strong>
         </div>
-      </button>
-      <div class="date-picker-header__value">
-        <strong class="primary--text">
-          2005
-        </strong>
+        <button type="button"
+                class="btn btn--icon"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+               style="font-size: 24px;"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
       </div>
-      <button type="button"
-              class="btn btn--icon"
-              data-ripple="true"
-      >
-        <div class="btn__content">
-          <i aria-hidden="true"
-             class="material-icons icon"
-             style="font-size: 24px;"
-          >
-            chevron_right
-          </i>
-        </div>
-      </button>
-    </div>
-    <div class="date-picker-table date-picker-table--month">
-      <table>
-        <tbody>
-          <tr>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Jan
-                </span>
-              </button>
-            </td>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Feb
-                </span>
-              </button>
-            </td>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Mar
-                </span>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Apr
-                </span>
-              </button>
-            </td>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  May
-                </span>
-              </button>
-            </td>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Jun
-                </span>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Jul
-                </span>
-              </button>
-            </td>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Aug
-                </span>
-              </button>
-            </td>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Sep
-                </span>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Oct
-                </span>
-              </button>
-            </td>
-            <td>
-              <button type="button"
-                      class="btn btn--active primary"
-              >
-                <span>
-                  Nov
-                </span>
-              </button>
-            </td>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Dec
-                </span>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="date-picker-table date-picker-table--month">
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Jan
+                  </span>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Feb
+                  </span>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Mar
+                  </span>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Apr
+                  </span>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    May
+                  </span>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Jun
+                  </span>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Jul
+                  </span>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Aug
+                  </span>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Sep
+                  </span>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Oct
+                  </span>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--active primary"
+                >
+                  <span>
+                    Nov
+                  </span>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Dec
+                  </span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
@@ -321,160 +323,162 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
     </div>
   </div>
   <div class="picker__body">
-    <div class="date-picker-header">
-      <button type="button"
-              class="btn btn--icon"
-              data-ripple="true"
-      >
-        <div class="btn__content">
-          <i aria-hidden="true"
-             class="material-icons icon"
-             style="font-size: 24px;"
-          >
-            chevron_left
-          </i>
+    <div>
+      <div class="date-picker-header">
+        <button type="button"
+                class="btn btn--icon"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+               style="font-size: 24px;"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div class="date-picker-header__value">
+          <strong class="orange--text text--darken-1">
+            2005
+          </strong>
         </div>
-      </button>
-      <div class="date-picker-header__value">
-        <strong class="orange--text text--darken-1">
-          2005
-        </strong>
+        <button type="button"
+                class="btn btn--icon"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+               style="font-size: 24px;"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
       </div>
-      <button type="button"
-              class="btn btn--icon"
-              data-ripple="true"
-      >
-        <div class="btn__content">
-          <i aria-hidden="true"
-             class="material-icons icon"
-             style="font-size: 24px;"
-          >
-            chevron_right
-          </i>
-        </div>
-      </button>
-    </div>
-    <div class="date-picker-table date-picker-table--month">
-      <table>
-        <tbody>
-          <tr>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Jan
-                </span>
-              </button>
-            </td>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Feb
-                </span>
-              </button>
-            </td>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Mar
-                </span>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Apr
-                </span>
-              </button>
-            </td>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  May
-                </span>
-              </button>
-            </td>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Jun
-                </span>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Jul
-                </span>
-              </button>
-            </td>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Aug
-                </span>
-              </button>
-            </td>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Sep
-                </span>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Oct
-                </span>
-              </button>
-            </td>
-            <td>
-              <button type="button"
-                      class="btn btn--active orange darken-1"
-              >
-                <span>
-                  Nov
-                </span>
-              </button>
-            </td>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Dec
-                </span>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="date-picker-table date-picker-table--month">
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Jan
+                  </span>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Feb
+                  </span>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Mar
+                  </span>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Apr
+                  </span>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    May
+                  </span>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Jun
+                  </span>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Jul
+                  </span>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Aug
+                  </span>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Sep
+                  </span>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Oct
+                  </span>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--active orange darken-1"
+                >
+                  <span>
+                    Nov
+                  </span>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Dec
+                  </span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
@@ -623,160 +627,162 @@ exports[`VDatePicker.js should match snapshot with pick-month prop 1`] = `
     </div>
   </div>
   <div class="picker__body">
-    <div class="date-picker-header">
-      <button type="button"
-              class="btn btn--icon"
-              data-ripple="true"
-      >
-        <div class="btn__content">
-          <i aria-hidden="true"
-             class="material-icons icon"
-             style="font-size: 24px;"
-          >
-            chevron_left
-          </i>
+    <div>
+      <div class="date-picker-header">
+        <button type="button"
+                class="btn btn--icon"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+               style="font-size: 24px;"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div class="date-picker-header__value">
+          <strong class="accent--text">
+            2013
+          </strong>
         </div>
-      </button>
-      <div class="date-picker-header__value">
-        <strong class="accent--text">
-          2013
-        </strong>
+        <button type="button"
+                class="btn btn--icon"
+                data-ripple="true"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+               style="font-size: 24px;"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
       </div>
-      <button type="button"
-              class="btn btn--icon"
-              data-ripple="true"
-      >
-        <div class="btn__content">
-          <i aria-hidden="true"
-             class="material-icons icon"
-             style="font-size: 24px;"
-          >
-            chevron_right
-          </i>
-        </div>
-      </button>
-    </div>
-    <div class="date-picker-table date-picker-table--month">
-      <table>
-        <tbody>
-          <tr>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Jan
-                </span>
-              </button>
-            </td>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Feb
-                </span>
-              </button>
-            </td>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Mar
-                </span>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Apr
-                </span>
-              </button>
-            </td>
-            <td>
-              <button type="button"
-                      class="btn btn--active accent"
-              >
-                <span>
-                  May
-                </span>
-              </button>
-            </td>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Jun
-                </span>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Jul
-                </span>
-              </button>
-            </td>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Aug
-                </span>
-              </button>
-            </td>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Sep
-                </span>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Oct
-                </span>
-              </button>
-            </td>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Nov
-                </span>
-              </button>
-            </td>
-            <td>
-              <button type="button"
-                      class="btn btn--flat"
-              >
-                <span>
-                  Dec
-                </span>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="date-picker-table date-picker-table--month">
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Jan
+                  </span>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Feb
+                  </span>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Mar
+                  </span>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Apr
+                  </span>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--active accent"
+                >
+                  <span>
+                    May
+                  </span>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Jun
+                  </span>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Jul
+                  </span>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Aug
+                  </span>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Sep
+                  </span>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Oct
+                  </span>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Nov
+                  </span>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat"
+                >
+                  <span>
+                    Dec
+                  </span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

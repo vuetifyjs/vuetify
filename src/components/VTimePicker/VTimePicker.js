@@ -220,7 +220,13 @@ export default {
   render (h) {
     const children = [
       this.noTitle ? null : this.genTitle(),
-      this.genBody(),
+      h('div', {
+        style: {
+          width: '100%',
+          height: '100%'
+        },
+        key: this.selectingHour
+      }, [this.genBody()]),
       this.$scopedSlots.default ? h('<div>', {
         slot: 'actions'
       }, [this.$scopedSlots.default({
@@ -235,8 +241,7 @@ export default {
         landscape: this.landscape,
         dark: this.dark,
         light: this.light,
-        color: this.headerColor,
-        bodyKey: this.selectingHour
+        color: this.headerColor
       }
     }
 

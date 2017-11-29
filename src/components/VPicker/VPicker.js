@@ -21,8 +21,11 @@ export default {
   },
 
   props: {
-    bodyKey: [Boolean, Number, String],
-    landscape: Boolean
+    landscape: Boolean,
+    transition: {
+      type: String,
+      default: 'scale-transition'
+    }
   },
 
   computed: {
@@ -48,9 +51,9 @@ export default {
         props: {
           origin: 'center center',
           mode: 'out-in',
-          name: 'scale-transition'
+          name: this.transition
         }
-      }, [this.genBody()])
+      }, this.$slots.default)
     },
 
     genBody () {
@@ -58,9 +61,8 @@ export default {
         staticClass: 'picker__body',
         'class': {
           'picker__body--landscape': this.landscape
-        },
-        key: this.bodyKey
-      }, this.$slots.default)
+        }
+      }, [this.genBodyTransition()])
     }
   },
 
@@ -73,7 +75,7 @@ export default {
       }
     }, [
       this.genTitle(),
-      this.genBodyTransition(),
+      this.genBody(),
       this.$slots.actions
     ])
   }
