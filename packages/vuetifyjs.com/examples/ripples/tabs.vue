@@ -1,7 +1,7 @@
 <template>
-  <v-tabs grow dark>
-    <v-tabs-bar slot="activators">
-      <v-tabs-slider color="yellow"></v-tabs-slider>
+  <v-tabs grow>
+    <v-tabs-bar color="purple" dark>
+      <v-tabs-slider color="purple lighten-3"></v-tabs-slider>
       <v-tabs-item
         v-for="i in 3"
         :key="i"

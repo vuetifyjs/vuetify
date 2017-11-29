@@ -47,10 +47,8 @@ export function createRouter () {
         route('/motion/transitions', 'motion/Transitions'),
         // Components
         route('/components/grid', 'components/Grid'),
-        route('/components/:component', 'components/Doc'),
-        // Directives
-        route('/directives/touch-support', 'directives/Touch'),
-        //
+        // Dynamic
+        route('/:section/:component', 'components/Doc'),
         route('/pre-made-themes', 'PremadeThemes'),
         // Guides
         route('/guides/server-side-rendering', 'guides/SSR'),

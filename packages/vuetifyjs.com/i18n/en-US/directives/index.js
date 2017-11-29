@@ -1,5 +1,11 @@
-import Touch from './Touch'
+import Resizing from './Resizing'
+import Ripples from './Ripples'
+import Scrolling from './Scrolling'
+import TouchSupport from './TouchSupport'
 
 export default {
-  Touch
+  Resizing,
+  Ripples,
+  Scrolling,
+  TouchSupport
 }

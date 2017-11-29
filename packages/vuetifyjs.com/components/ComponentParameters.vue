@@ -34,6 +34,8 @@
 </template>
 
 <script>
+  import { capitalize } from '@/util/helpers'
+
   export default {
     name: 'component-parameters',
 
@@ -67,6 +69,15 @@
     },
 
     computed: {
+      extra () {
+        const component = capitalize(this.$route.params.component)
+        const section = capitalize(this.$route.params.section)
+        const props = `${section}.${component}.extra`
+
+        return this.$te(props)
+          ? this.$t(props)[0]
+          : {}
+      },
       items () {
         const component = this.api[this.currentComponent] || {
           props: [],
@@ -80,7 +91,12 @@
           items = items.concat(component.scopedSlots)
         }
 
-        return items || []
+        const extra = this.extra[this.currentComponent]
+        if (extra[this.type]) {
+          items = items.concat(extra[this.type])
+        }
+
+        return items
       },
       parsedItems () {
         return this[`gen${this.type}`]()

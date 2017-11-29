@@ -38,7 +38,6 @@
                 v-bind:api="api"
                 v-bind:namespace="namespace"
                 v-bind:components="components"
-                v-bind:items="getItems(p)"
               )
 
       slot(name="top")
@@ -59,13 +58,13 @@
             :source="genDesc(example)"
           )
       section-head {{ $t('Components.ComponentPage.examples') }}
-      slot(name="bottom")
+      slot
 </template>
 
 <script>
   // Utilities
   import { mapState } from 'vuex'
-  import { kebab } from '@/util/helpers'
+  import { capitalize, kebab } from '@/util/helpers'
 
   export default {
     inheritAttrs: false,
@@ -74,12 +73,6 @@
 
     data: () => ({
       id: '',
-      current: {
-        props: null,
-        slots: null,
-        events: null,
-        functional: null
-      },
       headers: {
         props: [
           { text: 'Option', value: 'name', align: 'left' },
@@ -144,15 +137,6 @@
       folder () {
         return this.data.folder || this.$route.params.component
       },
-      namespace () {
-        const namespace = this.name.split('-').map(n => {
-          return n.substr(0, 1).toUpperCase() + n.slice(1)
-        }).join('')
-        
-        if (this.plural) return namespace
-
-        return `${namespace}s`
-      },
       plural () {
         return this.name[this.name.length - 1] === 's'
       },
@@ -166,37 +150,10 @@
 
     methods: {
       genDesc (example) {
-        if (example.desc) return example.desc
-
-        const desc = `Examples.${this.namespace}.${kebab(example.file)}.desc`
-
-        return this.$te(desc)
-          ? this.$t(desc)
-          : '' // TODO: deprecate
+        return example.desc
       },
       genHeader (example) {
-        if (example.header) return example.header
-
-        return this.$t(`Examples.${this.namespace}.${kebab(example.file)}.header`) // TODO: deprecate
-      },
-      getItems (name) {
-        switch (name) {
-          case 'props':
-            return this.genComponentProps()
-            break
-          case 'slots':
-            return {}
-            break
-        }
-      },
-      genComponentProps () {
-        const props = {}
-
-        this.components.forEach(component => {
-          props[component] = this.$store.state.api[component]
-        })
-
-        return props
+        return example.header
       }
     }
   }
