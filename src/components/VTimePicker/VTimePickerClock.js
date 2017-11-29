@@ -92,7 +92,7 @@ export default {
     wheel (e) {
       e.preventDefault()
       const value = this.value + Math.sign(e.wheelDelta || 1)
-      this.$emit('input', (value - this.min + this.count) % this.count + this.min)
+      this.update((value - this.min + this.count) % this.count + this.min)
     },
 
     handScale (value) {
@@ -165,31 +165,29 @@ export default {
       e.preventDefault()
       if (!this.isDragging && e.type !== 'click') return
 
-      const rect = this.$refs.clock.getBoundingClientRect()
-      const center = { x: rect.width / 2, y: 0 - rect.width / 2 }
-      const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY
-      const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
-      const coords = {
-        y: rect.top - clientY,
-        x: clientX - rect.left
-      }
-
+      const { width, top, left } = this.$refs.clock.getBoundingClientRect()
+      const { clientX, clientY } = 'touches' in e ? e.touches[0] : e
+      const center = { x: width / 2, y: -width / 2 }
+      const coords = { x: clientX - left, y: top - clientY }
       const handAngle = Math.round(this.angle(center, coords) - this.rotate + 360) % 360
-      let value = Math.round(handAngle / this.degreesPerUnit) + this.min
-
       const insideClick = this.double && this.euclidean(center, coords) / this.radius < (outerRadius + innerRadius) / 2
-      value = insideClick ? value + this.roundCount : value
+      const value = Math.round(handAngle / this.degreesPerUnit) + this.min + (insideClick ? this.roundCount : 0)
 
-      // Necessary to fix edge case when selecting left part of 0 and 12
+      // Necessary to fix edge case when selecting left part of max value
       if (handAngle >= (360 - this.degreesPerUnit / 2)) {
-        value = insideClick ? this.max : this.min
+        this.update(insideClick ? this.max : this.min)
+      } else {
+        this.update(value)
       }
+    },
 
+    update (value) {
       if (this.inputValue !== value && this.isAllowed(value)) {
         this.inputValue = value
         this.$emit('input', value)
       }
     },
+
     euclidean (p0, p1) {
       const dx = p1.x - p0.x
       const dy = p1.y - p0.y
