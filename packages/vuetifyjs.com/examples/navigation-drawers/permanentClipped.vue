@@ -1,9 +1,9 @@
 <template>
-  <v-navigation-drawer permanent dark class="blue lighten-3">
+  <v-navigation-drawer permanent class="blue lighten-3" dark>
     <v-list>
       <v-list-tile v-for="item in items" :key="item.title" @click="">
         <v-list-tile-action>
-          <v-icon dark>{{ item.icon }}</v-icon>
+          <v-icon>{{ item.icon }}</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
           <v-list-tile-title>{{ item.title }}</v-list-tile-title>

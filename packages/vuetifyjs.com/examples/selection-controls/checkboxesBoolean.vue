@@ -12,7 +12,7 @@
       </v-flex>
       <v-flex xs12 md6>
         <v-subheader>Dark</v-subheader>
-        <v-card color="secondary" flat>
+        <v-card color="grey darken-3" flat>
           <v-card-text>
             <v-checkbox v-bind:label="`Checkbox 2: ${ex3.toString()}`" v-model="ex3" dark></v-checkbox>
             <v-checkbox v-bind:label="`Checkbox 2: ${ex4.toString()}`" v-model="ex4" dark></v-checkbox>

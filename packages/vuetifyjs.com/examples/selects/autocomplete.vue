@@ -1,23 +1,19 @@
 <template>
-  <v-card color="grey lighten-4" flat>
-    <v-card-text>
-      <v-container fluid>
-        <v-layout row wrap>
-          <v-flex xs12 sm6>
-            <v-subheader v-text="'Autocomplete'"></v-subheader>
-          </v-flex>
-          <v-flex xs12 sm6>
-            <v-select
-              v-bind:items="states"
-              v-model="a1"
-              label="Select"
-              autocomplete
-            ></v-select>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-card-text>
-  </v-card>
+  <v-container fluid>
+    <v-layout row wrap>
+      <v-flex xs12 sm6>
+        <v-subheader v-text="'Autocomplete'"></v-subheader>
+      </v-flex>
+      <v-flex xs12 sm6>
+        <v-select
+          v-bind:items="states"
+          v-model="a1"
+          label="Select"
+          autocomplete
+        ></v-select>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>

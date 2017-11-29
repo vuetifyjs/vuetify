@@ -1,15 +1,15 @@
 <template>
   <v-layout row>
     <v-flex xs12 sm6 offset-sm3>
-      <v-card class="grid">
-        <v-toolbar color="white" flat>
-          <v-btn icon light>
-            <v-icon color="grey darken-2">arrow_back</v-icon>
+      <v-card>
+        <v-toolbar flat>
+          <v-btn icon>
+            <v-icon>arrow_back</v-icon>
           </v-btn>
-          <v-toolbar-title class="grey--text text--darken-4">Albums</v-toolbar-title>
+          <v-toolbar-title>Albums</v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-btn icon light>
-            <v-icon color="grey darken-2">search</v-icon>
+          <v-btn icon>
+            <v-icon>search</v-icon>
           </v-btn>
         </v-toolbar>
         <v-subheader>May</v-subheader>

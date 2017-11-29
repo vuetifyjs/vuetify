@@ -12,7 +12,7 @@
       </v-flex>
       <v-flex xs12 md6>
         <v-subheader>Dark</v-subheader>
-        <v-card color="secondary" flat>
+        <v-card color="grey darken-3" flat>
           <v-card-text>
             <v-switch v-bind:label="`Switch 3: ${ex13.toString()}`" v-model="ex13" dark></v-switch>
             <v-switch v-bind:label="`Switch 4: ${ex14.toString()}`" v-model="ex14" dark></v-switch>

@@ -23,7 +23,7 @@
           :class="['column sortable', pagination.descending ? 'desc' : 'asc', header.value === pagination.sortBy ? 'active' : '']"
           @click="changeSort(header.value)"
         >
-          <v-icon>arrow_upward</v-icon>
+          <v-icon small>arrow_upward</v-icon>
           {{ header.text }}
         </th>
       </tr>

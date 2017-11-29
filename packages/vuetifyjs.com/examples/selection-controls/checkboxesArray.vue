@@ -13,7 +13,7 @@
       </v-flex>
       <v-flex xs12 md6>
         <v-subheader>Dark</v-subheader>
-        <v-card color="secondary" flat>
+        <v-card color="grey darken-3" flat>
           <v-card-text>
             <p class="white--text">{{ ex6 }}</p>
             <v-checkbox label="John" v-model="ex6" value="John" dark></v-checkbox>

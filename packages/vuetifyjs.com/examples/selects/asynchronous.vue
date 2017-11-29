@@ -1,28 +1,23 @@
 <template>
-  <v-card color="secondary" flat>
-    <v-card-text>
-      <v-container fluid>
-        <v-layout>
-          <v-flex>
-            <v-select
-              label="Async items"
-              autocomplete
-              :loading="loading"
-              dark
-              multiple
-              cache-items
-              chips
-              required
-              :items="items"
-              :rules="[() => select.length > 0 || 'You must choose at least one']"
-              :search-input.sync="search"
-              v-model="select"
-            ></v-select>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-card-text>
-  </v-card>
+  <v-container fluid>
+    <v-layout>
+      <v-flex>
+        <v-select
+          label="Async items"
+          autocomplete
+          :loading="loading"
+          multiple
+          cache-items
+          chips
+          required
+          :items="items"
+          :rules="[() => select.length > 0 || 'You must choose at least one']"
+          :search-input.sync="search"
+          v-model="select"
+        ></v-select>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>

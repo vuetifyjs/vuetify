@@ -228,7 +228,8 @@
       transition: .3s $transition.swing
 
       > div,
-      > form
+      > form,
+      > footer
         width: 100%
 
     .component-example__panel

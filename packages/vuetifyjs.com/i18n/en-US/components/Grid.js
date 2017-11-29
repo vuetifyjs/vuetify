@@ -5,31 +5,38 @@ export default {
   examples: [{
     grid: {
       header: 'Usage',
-      desc: 'The <code>v-container</code> can be used for a center focused page, or given the <code>fluid</code> prop to extend its full width. <code>v-layout</code> is used for separating sections and contains the <code>v-flex</code>. The structure of your layout will be as follows, **v-container** &raquo; **v-layout** &raquo; **v-flex**. Each part of the grid chain is a flex-box element. The final, <code>v-flex</code>, automatically sets its children to have <kbd>flex: 1 1 auto</kbd>.'
+      desc: 'The <code>v-container</code> can be used for a center focused page, or given the <code>fluid</code> prop to extend its full width. <code>v-layout</code> is used for separating sections and contains the <code>v-flex</code>. The structure of your layout will be as follows, **v-container** &raquo; **v-layout** &raquo; **v-flex**. Each part of the grid chain is a flex-box element. The final, <code>v-flex</code>, automatically sets its children to have <kbd>flex: 1 1 auto</kbd>.',
+      uninverted: true
     },
     offset: {
       header: 'Offset',
-      desc: `Offsets are useful for compensating for elements that may not be visible yet, or to control the position of content. Just as with breakpoints, you can set an offset for any available sizes. This allows you to fine tune your application layout precisely to your needs.`
+      desc: `Offsets are useful for compensating for elements that may not be visible yet, or to control the position of content. Just as with breakpoints, you can set an offset for any available sizes. This allows you to fine tune your application layout precisely to your needs.`,
+      uninverted: true
     },
     order: {
       header: 'Order',
-      desc: 'You can control the ordering of grid items. As with offsets, you can set different orders for different sizes. Design specialized screen layouts that accommodate to any application.'
+      desc: 'You can control the ordering of grid items. As with offsets, you can set different orders for different sizes. Design specialized screen layouts that accommodate to any application.',
+      uninverted: true
     },
     directionAndAlign: {
       header: 'Direction and Align',
-      desc: 'Designate the direction and alignment in a variety of ways. All of the available <kbd>flex-box</kbd> api is available through intuitive helper props.'
+      desc: 'Designate the direction and alignment in a variety of ways. All of the available <kbd>flex-box</kbd> api is available through intuitive helper props.',
+      uninverted: true
     },
     rowColumnBreakpoint: {
       header: 'Row and column breakpoints',
-      desc: 'Dynamically change your layout based upon resolution. **(resize your screen and watch the layout change to a <code>row</code> on small breakpoints)**'
+      desc: 'Dynamically change your layout based upon resolution. **(resize your screen and watch the layout change to a <code>row</code> on small breakpoints)**',
+      uninverted: true
     },
     nestedGrid: {
       header: 'Nested grid',
-      desc: 'Grids can be nested, similar to other frameworks, in order to achieve very custom layouts.'
+      desc: 'Grids can be nested, similar to other frameworks, in order to achieve very custom layouts.',
+      uninverted: true
     },
     uniqueLayouts: {
       header: 'Unique layouts',
-      desc: 'The power and flexibility of the Vuetify grid system allows you to create amazing user interfaces.'
+      desc: 'The power and flexibility of the Vuetify grid system allows you to create amazing user interfaces.',
+      uninverted: true
     },
     tags: {
       header: 'Tags',

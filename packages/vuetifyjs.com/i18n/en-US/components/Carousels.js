@@ -5,30 +5,23 @@ export default {
   examples: [{
     default: {
       header: 'Default',
-      desc: 'A carousel by default has a slide transition.'
+      desc: 'A carousel by default has a slide transition.',
+      uninverted: true
     },
     customTransition: {
       header: 'Custom transition',
-      desc: 'You can also apply your own custom transition.'
+      desc: 'You can also apply your own custom transition.',
+      uninverted: true
     },
     customDelimiter: {
       header: 'Custom delimiter',
-      desc: 'You can also change the icon for the carousel delimiter.'
+      desc: 'You can also change the icon for the carousel delimiter.',
+      uninverted: true
     },
     hideControls: {
       header: 'Hide controls',
-      desc: 'You can hide the bottom controls with the `hide-controls` prop.'
+      desc: 'You can hide the bottom controls with the `hide-controls` prop.',
+      uninverted: true
     }
-  }],
-  props: {
-    cycle: 'Determines if carousel should cycle through images',
-    hideControls: 'Hides the panel with carousel delimiters',
-    icon: 'Sets icon for carousel delimiter',
-    interval: 'The duration between image cycles',
-    lazy: 'Lazily load the carousel slides',
-    leftControlIcon: 'Sets icon for left carousel control, false removes icon',
-    reverseTransition: 'Sets the reverse transition',
-    rightControlIcon: 'Sets icon for right carousel control, false removes icon',
-    src: 'The image src'
-  }
+  }]
 }

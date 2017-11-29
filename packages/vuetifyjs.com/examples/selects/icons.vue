@@ -1,40 +1,36 @@
 <template>
-  <v-card color="grey lighten-4" flat>
-    <v-card-text>
-      <v-container fluid>
-        <v-layout row wrap>
-          <v-flex xs6>
-            <v-subheader>Prepended icon</v-subheader>
-          </v-flex>
-          <v-flex xs6>
-            <v-select
-              v-bind:items="states"
-              v-model="e1"
-              label="Select"
-              single-line
-              auto
-              prepend-icon="map"
-              hide-details
-            ></v-select>
-          </v-flex>
-          <v-flex xs6>
-            <v-subheader>Appended icon</v-subheader>
-          </v-flex>
-          <v-flex xs6>
-            <v-select
-              v-bind:items="states"
-              v-model="e2"
-              label="Select"
-              single-line
-              auto
-              append-icon="map"
-              hide-details
-            ></v-select>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-card-text>
-  </v-card>
+  <v-container fluid>
+    <v-layout row wrap>
+      <v-flex xs6>
+        <v-subheader>Prepended icon</v-subheader>
+      </v-flex>
+      <v-flex xs6>
+        <v-select
+          v-bind:items="states"
+          v-model="e1"
+          label="Select"
+          single-line
+          auto
+          prepend-icon="map"
+          hide-details
+        ></v-select>
+      </v-flex>
+      <v-flex xs6>
+        <v-subheader>Appended icon</v-subheader>
+      </v-flex>
+      <v-flex xs6>
+        <v-select
+          v-bind:items="states"
+          v-model="e2"
+          label="Select"
+          single-line
+          auto
+          append-icon="map"
+          hide-details
+        ></v-select>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>

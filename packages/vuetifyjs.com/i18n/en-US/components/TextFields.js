@@ -7,33 +7,17 @@ export default {
       header: 'With label',
       desc: 'Text-fields come in two theme options, dark and light.'
     },
-    labelDark: {
-      header: 'Dark theme with label',
-      desc: 'The dark theme compliments darker backgrounds.'
-    },
     singleLine: {
       header: 'Single line light theme',
       desc: 'Single line text-fields do not float their label on focus or with data.'
-    },
-    singleLineDark: {
-      header: 'Single line dark theme',
-      desc: 'A single line label mimics the display of a placeholder.'
     },
     icon: {
       header: 'With Icon',
       desc: 'Icons can be specified as prepended or appended.'
     },
-    iconDark: {
-      header: 'Dark theme with icon',
-      desc: 'The icon inherits the applications primary color on text-field focus.'
-    },
     multiLine: {
       header: 'Multi-Line',
       desc: 'A multi-line text-field is useful for larger amounts of text.'
-    },
-    multiLineDark: {
-      header: 'Dark theme multi-line',
-      desc: 'Multi-line text-fields can be set to autogrow allowing the field to scale with the input.'
     },
     characterCounter: {
       header: 'Character counter',
@@ -69,11 +53,13 @@ export default {
     },
     textarea: {
       header: 'Textarea',
-      desc: 'Textarea text-fields have an alternate style.'
+      desc: 'Textarea text-fields have an alternate style.',
+      uninverted: true
     },
     box: {
       header: 'Box style',
-      desc: 'Text-fields can be used with an alternative box design. Append and prepend icon props are **not** supported in this mode.'
+      desc: 'Text-fields can be used with an alternative box design. Append and prepend icon props are **not** supported in this mode.',
+      uninverted: true
     },
     customColors: {
       header: 'Custom colors',

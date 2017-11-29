@@ -47,10 +47,6 @@ export default {
         header: 'Paginate and sort server-side',
         desc: 'If you\'re loading data from a backend and want to paginate and sort the results before displaying them, you can use the <code>total-items</code> prop. Defining this prop will disable the built-in sorting and pagination, and you will instead need to use the <code>pagination</code> prop to listen for changes. Use the <code>loading</code> prop to display a progress bar while fetching data.'
       },
-      theme: {
-        header: 'Theme support',
-        desc: 'The <code>v-data-table</code> component supports the application dark theme.'
-      },
       headerless: {
         header: 'Headerless tables',
         desc: 'Setting the <code>hide-headers</code> prop creates a headerless table.'

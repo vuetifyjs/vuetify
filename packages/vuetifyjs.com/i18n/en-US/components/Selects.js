@@ -9,7 +9,9 @@ export default {
       },
       dark: {
         header: 'Dark theme',
-        desc: 'Selects also support theming, dark and light.'
+        desc: 'Selects also support theming, dark and light.',
+        inverted: true,
+        uninverted: true
       },
       icons: {
         header: 'Icons',

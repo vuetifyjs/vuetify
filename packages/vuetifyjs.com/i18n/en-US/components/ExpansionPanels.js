@@ -9,15 +9,18 @@ export default {
     },
     expand: {
       header: 'Expand',
-      desc: 'Expand expansion panels will stay open until closed.'
+      desc: 'Expand expansion panels will stay open until closed.',
+      uninverted: true
     },
     popout: {
       header: 'Popout & Inset',
-      desc: 'The expansion panel also has two alternative designs you can activate with the props <code>popout</code> and <code>inset</code>.'
+      desc: 'The expansion panel also has two alternative designs you can activate with the props <code>popout</code> and <code>inset</code>.',
+      inverted: true
     },
     focusable: {
       header: 'Focusable',
-      desc: 'The expansion panel headers can be made focusable with the prop <code>focusable</code>.'
+      desc: 'The expansion panel headers can be made focusable with the prop <code>focusable</code>.',
+      uninverted: true
     }
   }]
 }

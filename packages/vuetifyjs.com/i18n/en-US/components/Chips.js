@@ -5,7 +5,8 @@ export default {
   examples: [{
     default: {
       header: 'Default',
-      desc: 'Chips come in 4 primary variations. Regular, with icon, with portrait and closeable.'
+      desc: 'Chips come in 4 primary variations. Regular, with icon, with portrait and closeable.',
+      uninverted: true
     },
     colored: {
       header: 'Colored',
@@ -25,11 +26,13 @@ export default {
     },
     closable: {
       header: 'Closable',
-      desc: 'Closable chips can be controlled with a v-model. Listen to the <code>input</code> event if you want to know when a chip has been closed.'
+      desc: 'Closable chips can be controlled with a v-model. Listen to the <code>input</code> event if you want to know when a chip has been closed.',
+      uninverted: true
     },
     inSelects: {
       header: 'In selects',
-      desc: 'Selects can use chips to display the selected data.'
+      desc: 'Selects can use chips to display the selected data.',
+      uninverted: true
     }
   }],
   props: {

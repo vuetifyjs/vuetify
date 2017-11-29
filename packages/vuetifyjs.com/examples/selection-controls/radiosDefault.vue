@@ -15,7 +15,7 @@
       </v-flex>
       <v-flex xs12 md6>
         <v-subheader>Dark</v-subheader>
-        <v-card color="secondary" flat>
+        <v-card color="grey darken-3" flat>
           <v-card-text>
             <p class="white--text">{{ ex9 || 'null' }}</p>
             <v-radio-group v-model="ex9" :mandatory="false">
