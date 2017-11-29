@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { test } from '~util/testing'
+import { test, touch } from '~util/testing'
 import { mount } from 'avoriaz'
 import VDatePicker from '~components/VDatePicker'
 import VMenu from '~components/VMenu'
@@ -143,7 +143,22 @@ test('VDatePicker.js', ({ mount }) => {
     })
 
     wrapper.find('.date-picker-table--date')[0].trigger('wheel')
-    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.tableDate).toBe('2013-06')
+  })
+
+  it('should change tableDate on touch', async () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: '2013-05-07',
+        scrollable: true
+      }
+    })
+
+    const table = wrapper.find('.date-picker-table--date')[0].element
+    touch(table).start(0, 0).end(20, 0)
+    expect(wrapper.vm.tableDate).toBe('2013-04')
+
+    touch(table).start(0, 0).end(-20, 0)
     expect(wrapper.vm.tableDate).toBe('2013-06')
   })
 

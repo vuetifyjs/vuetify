@@ -34,13 +34,6 @@ export default {
   },
 
   methods: {
-    genSlot () {
-      return this.$scopedSlots.default({
-        save: this.save,
-        cancel: this.cancel
-      })
-    },
-
     genTitle () {
       return this.$slots.title ? this.$createElement('div', {
         staticClass: 'picker__title',

@@ -1,5 +1,5 @@
 import { VTimePickerClock } from '~components/VTimePicker'
-import { test } from '~util/testing'
+import { test, touch } from '~util/testing'
 
 test('VTimePickerClock.js', ({ mount }) => {
   it('should render component', () => {
@@ -117,5 +117,47 @@ test('VTimePickerClock.js', ({ mount }) => {
     expect(angle({ x: 0, y: 2 })).toBe(315)
     expect(angle({ x: 0, y: 0 })).toBe(225)
     expect(angle({ x: 2, y: 0 })).toBe(135)
+  })
+
+  it('should change with touch move', () => {
+    const wrapper = mount(VTimePickerClock, {
+      propsData: {
+        min: 0,
+        max: 7,
+        value: 0,
+        size: 100,
+        double: true
+      }
+    })
+
+    wrapper.vm.$refs.clock.getBoundingClientRect = () => {
+      return {
+        width: 100,
+        height: 100,
+        top: 0,
+        left: 0,
+        right: 100,
+        bottom: 0,
+        x: 0,
+        y: 0
+      }
+    }
+
+    const input = jest.fn()
+    const finger = touch(wrapper.element).start(0, 0)
+    wrapper.vm.$on('input', input)
+
+    finger.move(100, 50)
+    expect(input).toBeCalledWith(1)
+    finger.move(50, 100)
+    expect(input).toBeCalledWith(2)
+    finger.move(50, 70)
+    expect(input).toBeCalledWith(6)
+
+    // edge case
+    finger.move(40, 0)
+    expect(input).toBeCalledWith(0)
+    finger.move(45, 30)
+    expect(input).toBeCalledWith(7)
   })
 })
