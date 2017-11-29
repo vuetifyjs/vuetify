@@ -51,7 +51,7 @@
         return this.$te(headerText) ? this.$t(headerText) : ''
       },
       namespace () {
-        const route = this.$route.fullPath.slice(1).split('/')
+        const route = this.$route.path.slice(1).split('/')
 
         return route.map(s => camel(s)).join('.')
       },
