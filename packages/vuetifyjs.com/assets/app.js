@@ -7,6 +7,7 @@ import Vue from 'vue'
 import Vuetify from 'vuetify'
 import VeeValidate from 'vee-validate'
 import Markdown from 'vue-markdown'
+import axios from 'axios'
 
 // Bootstrap
 import { createStore } from '@/store/index'
@@ -17,6 +18,8 @@ import { sync } from 'vuex-router-sync'
 // Application
 import App from './App.vue'
 import Components from '@/components'
+
+Vue.prototype.$http = axios.create({ baseURL: '/' })
 
 Vue.component('markdown', Markdown)
 Vue.use(VeeValidate, { inject: false })

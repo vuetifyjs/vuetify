@@ -48,23 +48,6 @@ export default {
   },
 
   methods: {
-    getPrevNext () {
-      const currentIndex = this.$router.options.routes.findIndex(r => r.path === this.$route.path)
-      const previous = currentIndex > 0 ? this.$router.options.routes[currentIndex - 1] : null
-      const next = currentIndex < this.$router.options.routes.length - 1
-        ? this.$router.options.routes[currentIndex + 1]
-        : null
-
-      this.$store.commit('app/NEXT', {
-        name: next ? next.meta && next.meta.h1 : null,
-        route: next ? next.path : null
-      })
-
-      this.$store.commit('app/PREVIOUS', {
-        name: previous ? previous.meta && previous.meta.h1 : null,
-        route: previous && previous.path !== '/' ? previous.path : null
-      })
-    },
     bootstrapMeta () {
       if (typeof document === 'undefined') return
 
@@ -75,7 +58,6 @@ export default {
       this.setMeta()
     },
     setMeta () {
-      this.getPrevNext()
       this.meta = meta[this.$route.path] || {}
     }
   }

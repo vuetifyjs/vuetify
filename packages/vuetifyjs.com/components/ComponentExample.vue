@@ -97,6 +97,7 @@
         component: null,
         instance: null,
         invertedProxy: this.inverted,
+        isBooted: false,
         uid: null,
         panel: false,
         parsed: {
@@ -137,12 +138,8 @@
 
     watch: {
       panel () {
-        this.$refs.tabs.slider()
+        this.getMarkup().then(() => this.$refs.tabs.slider())
       }
-    },
-
-    beforeDestroy () {
-      this.instance && this.instance.$destroy()
     },
 
     mounted () {
@@ -155,10 +152,20 @@
         this.instance = new Vue(comp.default)
         this.instance.$mount('#example-'+this.uid)
       })
-      this.request(this.file, this.boot)
+    },
+
+    beforeDestroy () {
+      this.instance && this.instance.$destroy()
     },
 
     methods: {
+      getMarkup () {
+        if (!this.isBooted) {
+          this.isBooted = true
+          return this.request(this.file, this.boot)
+        }
+        return Promise.resolve()
+      },
       getLang (tab) {
         if (tab === 'script') return 'js'
         if (tab === 'style') return 'css'
@@ -197,19 +204,12 @@
         this.active = !this.active
       },
       request (file, cb) {
-        const xmlhttp = new XMLHttpRequest()
-        const vm = this
-        const timeout = setTimeout(() => this.loading = true, 500)
-        xmlhttp.open('GET', `/${this.url}example-source/${file}.vue`, true)
-
-        xmlhttp.onreadystatechange = function () {
-          if(xmlhttp.status == 200 && xmlhttp.readyState == 4) {
-            clearTimeout(timeout)
-            vm.loading = false
-            cb(xmlhttp.responseText)
-          }
-        }
-        xmlhttp.send()
+        this.loading = true
+        return this.$http.get(`/${this.url}example-source/${file}.vue`).then(({ data }) => {
+          cb(data)
+          this.loading = false
+          return Promise.resolve()
+        })
       },
       sendToCodepen () {
         this.$refs.codepen.submit()
