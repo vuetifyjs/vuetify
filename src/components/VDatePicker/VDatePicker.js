@@ -54,7 +54,7 @@ export default {
     // array of dates to mark days in picker
     eventDates: {
       type: Array,
-      default: []
+      default: () => (null)
     },
     // Function formatting the day in date picker table
     dayFormat: {
@@ -270,9 +270,9 @@ export default {
 
       return true
     },
-    isEventDate(date) {
+    isEventDate (date) {
       // function to check date in eventDates array or not
-      if (!this.eventDates.length) return false
+      if (!this.eventDates) return false
       return this.eventDates.indexOf(date) > -1
     },
     genTableTouch (touchCallback) {
