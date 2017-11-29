@@ -15,7 +15,7 @@ import { createI18n } from '@/i18n/index'
 import { sync } from 'vuex-router-sync'
 
 // Application
-import App from './App'
+import App from './App.vue'
 import Components from '@/components'
 
 Vue.component('markdown', Markdown)
