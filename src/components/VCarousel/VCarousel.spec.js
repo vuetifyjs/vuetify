@@ -1,6 +1,6 @@
 import VCarousel from './VCarousel'
 import VCarouselItem from './VCarouselItem'
-import { test } from '~util/testing'
+import { test, touch } from '~util/testing'
 import Vue from 'vue'
 
 const create = (props = {}, slots = 3) => Vue.component('zxc', {
@@ -154,5 +154,32 @@ test('VCarousel.js', ({ mount }) => {
 
     expect(wrapper.find('.carousel__left')).toHaveLength(0)
     expect(wrapper.find('.carousel__right')).toHaveLength(0)
+  })
+
+  it('should change item on swipe', async () => {
+    const wrapper = mount(create())
+    await wrapper.vm.$nextTick()
+
+    const input = jest.fn()
+    wrapper.vm.$children[0].$on('input', input)
+
+    touch(wrapper.element).start(0, 0).end(-20, 0)
+    await wrapper.vm.$nextTick()
+    expect(input).toBeCalledWith(1)
+    touch(wrapper.element).start(0, 0).end(20, 0)
+    await wrapper.vm.$nextTick()
+    expect(input).toBeCalledWith(0)
+  })
+
+  it('should change item on controls click', async () => {
+    const wrapper = mount(create())
+    await wrapper.vm.$nextTick()
+
+    const input = jest.fn()
+    wrapper.vm.$children[0].$on('input', input)
+
+    wrapper.find('.carousel__controls__item')[2].trigger('click')
+    await wrapper.vm.$nextTick()
+    expect(input).toBeCalledWith(2)
   })
 })
