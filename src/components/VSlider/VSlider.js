@@ -7,12 +7,16 @@ import Input from '../../mixins/input'
 
 import ClickOutside from '../../directives/click-outside'
 
+import { VScaleTransition } from '../transitions'
+
 export default {
   name: 'v-slider',
 
   mixins: [Colorable, Input],
 
   directives: { ClickOutside },
+
+  components: { VScaleTransition },
 
   data () {
     return {
@@ -206,7 +210,7 @@ export default {
       } else if (e.keyCode === 35) {
         // End
         this.inputValue = parseFloat(this.max)
-      } else if (e.keyCode === 33 || e.keyCode === 34) {
+      } else /* if (e.keyCode === 33 || e.keyCode === 34) */ {
         // Page up/down
         const direction = e.keyCode === 34 ? -1 : 1
         this.inputValue = this.inputValue - direction * step * (steps > 100 ? steps / 10 : 10)
