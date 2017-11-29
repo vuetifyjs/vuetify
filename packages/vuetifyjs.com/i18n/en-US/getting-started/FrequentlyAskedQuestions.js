@@ -60,7 +60,7 @@ export default {
     },
     {
       q: `Relative images are not working in <code>v-card</code> components`,
-      a: `<p>Vue loader converts relative paths into require functions automatically for you. Unfortunately, this is not the case when it comes to custom components.</p><p>In order to use relative paths, you must use the <code>require</code>:</p><p><code class="pa-2">methods: {<br>&nbsp;&nbsp;getImgUrl (img) {<br>&nbsp;&nbsp;&nbsp;&nbsp;return require('../../assets/img/' + img)<br>&nbsp;&nbsp;}<br>}</code></p><p>and use it in the tempate: <code>:src="getImgUrl('card.img')"</code></p>`
+      a: `<p>Vue loader converts relative paths into require functions automatically for you. Unfortunately, this is not the case when it comes to custom components.</p><p>In order to use relative paths, you must use the <code>require</code>:</p><p><code class="pa-2">methods: {<br>&nbsp;&nbsp;getImgUrl (img) {<br>&nbsp;&nbsp;&nbsp;&nbsp;return require('../../assets/img/' + img)<br>&nbsp;&nbsp;}<br>}</code></p><p>and use it in the tempate: <code>:src="getImgUrl('card.png')"</code></p>`
     }
   ],
   questionHeader: 'Have something that you think belongs here?',
