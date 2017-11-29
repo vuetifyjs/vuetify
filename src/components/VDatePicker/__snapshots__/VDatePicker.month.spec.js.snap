@@ -129,7 +129,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
      style="height: auto;"
      data-ripple="false"
 >
-  <div class="picker__title primary">
+  <div class="picker__title orange darken-1">
     <div class="date-picker-title">
       <div class="picker__title__btn date-picker-title__year">
         2005
@@ -310,7 +310,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
      style="height: auto;"
      data-ripple="false"
 >
-  <div class="picker__title primary">
+  <div class="picker__title orange darken-1">
     <div class="date-picker-title">
       <div class="picker__title__btn date-picker-title__year">
         2005

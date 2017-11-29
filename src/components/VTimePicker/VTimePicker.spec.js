@@ -389,6 +389,6 @@ test('VTimePicker.js', ({ mount }) => {
     })
 
     const wrapper = mount(component)
-    expect(wrapper.find('.card__actions .scoped-slot')).toHaveLength(1)
+    expect(wrapper.find('.picker__actions .scoped-slot')).toHaveLength(1)
   })
 })

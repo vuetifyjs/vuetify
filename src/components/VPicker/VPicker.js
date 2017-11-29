@@ -38,12 +38,12 @@ export default {
 
   methods: {
     genTitle () {
-      return this.$slots.title ? this.$createElement('div', {
+      return this.$createElement('div', {
         staticClass: 'picker__title',
         'class': this.addBackgroundColorClassChecks({
           'picker__title--landscape': this.landscape
         }, 'computedTitleColor')
-      }, this.$slots.title) : null
+      }, this.$slots.title)
     },
 
     genBodyTransition () {
@@ -58,11 +58,14 @@ export default {
 
     genBody () {
       return this.$createElement('div', {
-        staticClass: 'picker__body',
-        'class': {
-          'picker__body--landscape': this.landscape
-        }
+        staticClass: 'picker__body'
       }, [this.genBodyTransition()])
+    },
+
+    genActions () {
+      return this.$createElement('div', {
+        staticClass: 'picker__actions card__actions'
+      }, this.$slots.actions)
     }
   },
 
@@ -74,9 +77,9 @@ export default {
         ...this.themeClasses
       }
     }, [
-      this.genTitle(),
+      this.$slots.title ? this.genTitle() : null,
       this.genBody(),
-      this.$slots.actions
+      this.$slots.actions ? this.genActions() : null
     ])
   }
 }

@@ -1,9 +1,10 @@
-import Colorable from '../../mixins/colorable'
-import Themeable from '../../mixins/themeable'
+// Mixins
+import Picker from '../../mixins/picker'
+
+// Components
 import VBtn from '../VBtn'
 import VCard from '../VCard'
 import VIcon from '../VIcon'
-import VPicker from '../VPicker'
 import VDatePickerTitle from './VDatePickerTitle'
 import VDatePickerHeader from './VDatePickerHeader'
 import VDatePickerDateTable from './VDatePickerDateTable'
@@ -20,7 +21,6 @@ export default {
     VBtn,
     VCard,
     VIcon,
-    VPicker,
     VDatePickerTitle,
     VDatePickerHeader,
     VDatePickerDateTable,
@@ -28,7 +28,7 @@ export default {
     VDatePickerYears
   },
 
-  mixins: [Colorable, Themeable],
+  mixins: [Picker],
 
   data () {
     const now = new Date()
@@ -67,7 +67,6 @@ export default {
       type: Function,
       default: null
     },
-    landscape: Boolean,
     locale: {
       type: String,
       default: 'en-us'
@@ -77,7 +76,6 @@ export default {
       type: Function,
       default: null
     },
-    noTitle: Boolean,
     scrollable: Boolean,
     // Function formatting currently selected date in the picker title
     titleDateFormat: {
@@ -254,7 +252,7 @@ export default {
       this.inputDate = value
       this.$nextTick(() => (this.autosave && this.save()))
     },
-    genTitle () {
+    genPickerTitle () {
       return this.$createElement('v-date-picker-title', {
         props: {
           date: this.formatters.titleDate(this.inputDate),
@@ -267,15 +265,6 @@ export default {
           input: value => this.activePicker = value ? 'YEAR' : this.type.toUpperCase()
         }
       })
-    },
-    genActions () {
-      return this.$createElement('div', {
-        staticClass: 'card__actions',
-        slot: 'actions'
-      }, [this.$scopedSlots.default({
-        save: this.save,
-        cancel: this.cancel
-      })])
     },
     genTableHeader () {
       return this.$createElement('v-date-picker-header', {
@@ -341,11 +330,15 @@ export default {
         }
       })
     },
-    genBody () {
-      return this.activePicker === 'YEAR' ? [this.genYears()] : [
+    genPickerBody () {
+      const children = this.activePicker === 'YEAR' ? [
+        this.genYears()
+      ] : [
         this.genTableHeader(),
         this.activePicker === 'DATE' ? this.genDateTable() : this.genMonthTable()
       ]
+
+      return this.$createElement('div', { key: this.activePicker }, children)
     },
     // Adds leading zero to month/day if necessary, returns 'YYYY' if type = 'year',
     // 'YYYY-MM' if 'month' and 'YYYY-MM-DD' if 'date'
@@ -367,18 +360,6 @@ export default {
   },
 
   render (h) {
-    return h('v-picker', {
-      staticClass: 'picker--date',
-      props: {
-        landscape: this.landscape,
-        dark: this.dark,
-        light: this.light,
-        color: this.headerColor
-      }
-    }, [
-      this.noTitle ? null : this.genTitle(),
-      h('div', { key: this.activePicker }, this.genBody()),
-      this.$scopedSlots.default ? this.genActions() : null
-    ])
+    return this.genPicker('picker--date')
   }
 }

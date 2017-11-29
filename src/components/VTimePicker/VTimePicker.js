@@ -1,28 +1,22 @@
 // Utils
 import pad from '../VDatePicker/util/pad'
 
+// Mixins
+import Picker from '../../mixins/picker'
+
 // Components
-import VPicker from '../VPicker'
 import VTimePickerTitle from './VTimePickerTitle'
 import VTimePickerClock from './VTimePickerClock'
-
-// Mixins
-import Colorable from '../../mixins/colorable'
-import Themeable from '../../mixins/themeable'
 
 export default {
   name: 'v-time-picker',
 
   components: {
-    VPicker,
     VTimePickerTitle,
     VTimePickerClock
   },
 
-  mixins: [
-    Colorable,
-    Themeable
-  ],
+  mixins: [Picker],
 
   data () {
     const { inputHour, inputMinute } = this.getInputTime(this.value)
@@ -53,9 +47,6 @@ export default {
         return ['ampm', '24hr'].includes(val)
       }
     },
-    headerColor: String,
-    landscape: Boolean,
-    noTitle: Boolean,
     scrollable: Boolean,
     value: null
   },
@@ -186,7 +177,7 @@ export default {
         ref: 'clock'
       })
     },
-    genBody () {
+    genPickerBody () {
       return this.$createElement('div', {
         style: {
           width: '100%',
@@ -195,7 +186,7 @@ export default {
         key: this.selectingHour
       }, [this.genClock()])
     },
-    genTitle () {
+    genPickerTitle () {
       return this.$createElement('v-time-picker-title', {
         props: {
           ampm: this.format === 'ampm',
@@ -209,31 +200,10 @@ export default {
         ref: 'title',
         slot: 'title'
       })
-    },
-    genActions () {
-      return this.$createElement('div', {
-        staticClass: 'card__actions',
-        slot: 'actions'
-      }, [this.$scopedSlots.default({
-        save: this.save,
-        cancel: this.cancel
-      })])
     }
   },
 
   render (h) {
-    return h('v-picker', {
-      staticClass: 'picker--time',
-      props: {
-        landscape: this.landscape,
-        dark: this.dark,
-        light: this.light,
-        color: this.headerColor
-      }
-    }, [
-      this.noTitle ? null : this.genTitle(),
-      this.genBody(),
-      this.$scopedSlots.default ? this.genActions() : null
-    ])
+    return this.genPicker('picker--time')
   }
 }
