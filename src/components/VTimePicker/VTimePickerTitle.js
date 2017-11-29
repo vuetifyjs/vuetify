@@ -33,7 +33,10 @@ export default {
     },
 
     genTime () {
-      const hour = this.ampm ? (this.hour ? (this.hour % 12) : 12) : this.hour
+      let hour = this.hour
+      if (this.ampm) {
+        hour = hour ? ((hour - 1) % 12 + 1) : 12
+      }
 
       return this.$createElement('div', {
         'class': 'time-picker-title__time'

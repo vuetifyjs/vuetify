@@ -35,7 +35,7 @@ test('VTimePickerTitle.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should emit event when clicked on am/pm', () => {
+  it('should emit event when clicked on am/pm', async () => {
     const wrapper = mount(VTimePickerTitle, {
       propsData: {
         value: '14:13',
@@ -50,6 +50,12 @@ test('VTimePickerTitle.js', ({ mount }) => {
     expect(period).not.toBeCalled()
     wrapper.find('.time-picker-title__ampm span:not(.active)')[0].trigger('click')
     expect(period).toBeCalledWith('am')
+
+    wrapper.setProps({
+      value: '2:13'
+    })
+    wrapper.find('.time-picker-title__ampm span:not(.active)')[0].trigger('click')
+    expect(period).toBeCalledWith('pm')
   })
 
   it('should emit event when clicked on hours/minutes', async () => {

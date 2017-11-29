@@ -43,7 +43,7 @@ export default {
       const value = `${this.displayedYear}-${pad(month + 1)}`
       const isDisabled = !isValueAllowed(value, this.allowedDates)
       const btnContent = this.$createElement('span', {
-        statiClass: 'btn__content'
+        staticClass: 'btn__content'
       }, [
         this.formatter(value)
       ])

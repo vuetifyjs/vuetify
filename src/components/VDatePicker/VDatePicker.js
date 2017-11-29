@@ -269,13 +269,13 @@ export default {
       })
     },
     genActions () {
-      return this.$scopedSlots.default ? this.$createElement('div', {
+      return this.$createElement('div', {
         staticClass: 'card__actions',
         slot: 'actions'
       }, [this.$scopedSlots.default({
         save: this.save,
         cancel: this.cancel
-      })]) : null
+      })])
     },
     genTableHeader () {
       return this.$createElement('v-date-picker-header', {
@@ -378,7 +378,7 @@ export default {
     }, [
       this.noTitle ? null : this.genTitle(),
       h('div', { key: this.activePicker }, this.genBody()),
-      this.genActions()
+      this.$scopedSlots.default ? this.genActions() : null
     ])
   }
 }

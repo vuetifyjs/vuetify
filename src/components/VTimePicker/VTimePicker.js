@@ -69,24 +69,6 @@ export default {
         this.inputHour = value
       }
     },
-    hour12: {
-      get () {
-        if (this.hour === 0) {
-          return 12
-        } else if (this.hour > 12) {
-          return this.hour - 12
-        } else {
-          return this.hour
-        }
-      },
-      set (value) {
-        if (this.period === 'pm') {
-          this.hour = value === 12 ? value : value + 12
-        } else {
-          this.hour = value === 12 ? 0 : value
-        }
-      }
-    },
     minute: {
       get () {
         return this.inputMinute == null ? new Date().getMinutes() : this.inputMinute
@@ -121,25 +103,29 @@ export default {
 
   methods: {
     getInputTime (value) {
-      let inputHour
-      let inputMinute
-
       if (value instanceof Date) {
-        inputHour = value.getHours()
-        inputMinute = value.getMinutes()
-      } else if (value) {
-        const [, hour, minute, , period] = value.trim().toLowerCase().match(/^(\d+):(\d+)(:\d+)?([ap]m)?$/, '') || []
-        inputHour = parseInt(hour, 10)
-        inputMinute = parseInt(minute, 10)
-
-        if (period === 'pm') {
-          inputHour = inputHour === 12 ? inputHour : inputHour + 12
-        } else if (period === 'am') {
-          inputHour = inputHour === 12 ? 0 : inputHour
+        return {
+          inputHour: value.getHours(),
+          inputMinute: value.getMinutes()
         }
       }
 
-      return { inputHour, inputMinute }
+      if (value) {
+        const [, hour, minute, , period] = value.trim().toLowerCase().match(/^(\d+):(\d+)(:\d+)?([ap]m)?$/, '') || []
+
+        return {
+          inputMinute: parseInt(minute, 10),
+          inputHour: period ? this.convert12to24(parseInt(hour, 10), period) : parseInt(hour, 10)
+        }
+      }
+
+      return {}
+    },
+    convert24to12 (hour) {
+      return hour ? ((hour - 1) % 12 + 1) : 12
+    },
+    convert12to24 (hour, period) {
+      return hour % 12 + (period === 'pm' ? 12 : 0)
     },
     save () {
       this.originalHour = this.inputHour
@@ -165,7 +151,7 @@ export default {
       } else if (this.format === '24hr') {
         this.hour = value
       } else {
-        this.hour12 = value
+        this.hour = this.convert12to24(value, this.period)
       }
     },
     onChange () {
@@ -177,7 +163,7 @@ export default {
         this.selectingHour = !this.selectingHour
       }
     },
-    genBody () {
+    genClock () {
       return this.$createElement('v-time-picker-clock', {
         props: {
           allowedValues: this.selectingHour ? this.allowedHours : this.allowedMinutes,
@@ -191,7 +177,7 @@ export default {
           scrollable: this.scrollable,
           size: this.landscape ? 250 : 280,
           step: this.selectingHour ? 1 : 5,
-          value: this.selectingHour ? (this.format === 'ampm' ? this.hour12 : this.hour) : this.minute
+          value: this.selectingHour ? (this.format === 'ampm' ? this.convert24to12(this.hour) : this.hour) : this.minute
         },
         on: {
           input: this.onInput,
@@ -200,7 +186,15 @@ export default {
         ref: 'clock'
       })
     },
-
+    genBody () {
+      return this.$createElement('div', {
+        style: {
+          width: '100%',
+          height: '100%'
+        },
+        key: this.selectingHour
+      }, [this.genClock()])
+    },
     genTitle () {
       return this.$createElement('v-time-picker-title', {
         props: {
@@ -215,28 +209,20 @@ export default {
         ref: 'title',
         slot: 'title'
       })
-    }
-  },
-
-  render (h) {
-    const children = [
-      this.noTitle ? null : this.genTitle(),
-      h('div', {
-        style: {
-          width: '100%',
-          height: '100%'
-        },
-        key: this.selectingHour
-      }, [this.genBody()]),
-      this.$scopedSlots.default ? h('<div>', {
+    },
+    genActions () {
+      return this.$createElement('div', {
+        staticClass: 'card__actions',
         slot: 'actions'
       }, [this.$scopedSlots.default({
         save: this.save,
         cancel: this.cancel
-      })]) : null
-    ]
+      })])
+    }
+  },
 
-    const data = {
+  render (h) {
+    return h('v-picker', {
       staticClass: 'picker--time',
       props: {
         landscape: this.landscape,
@@ -244,8 +230,10 @@ export default {
         light: this.light,
         color: this.headerColor
       }
-    }
-
-    return h('v-picker', data, children)
+    }, [
+      this.noTitle ? null : this.genTitle(),
+      this.genBody(),
+      this.$scopedSlots.default ? this.genActions() : null
+    ])
   }
 }

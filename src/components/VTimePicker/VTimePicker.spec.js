@@ -196,31 +196,6 @@ test('VTimePicker.js', ({ mount }) => {
   it('should set input hour when setting hour in 12hr mode', () => {
     const wrapper = mount(VTimePicker, {
       propsData: {
-        value: '01:23',
-        format: 'ampm'
-      }
-    })
-
-    wrapper.vm.hour12 = 12
-    expect(wrapper.vm.inputHour).toBe(0)
-
-    wrapper.vm.hour12 = 5
-    expect(wrapper.vm.inputHour).toBe(5)
-
-    wrapper.setProps({
-      value: '23:45'
-    })
-
-    wrapper.vm.hour12 = 12
-    expect(wrapper.vm.inputHour).toBe(12)
-
-    wrapper.vm.hour12 = 5
-    expect(wrapper.vm.inputHour).toBe(17)
-  })
-
-  it('should set input hour when setting hour in 12hr mode', () => {
-    const wrapper = mount(VTimePicker, {
-      propsData: {
         value: '01:23pm',
         format: 'ampm'
       }
@@ -392,5 +367,28 @@ test('VTimePicker.js', ({ mount }) => {
     expect(wrapper.vm.selectingHour).toBe(false)
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.selectingHour).toBe(true)
+  })
+
+  it('should match snapshot with slot', async () => {
+    const vm = new Vue()
+    const slot = props => vm.$createElement('div', { class: 'scoped-slot' })
+    const component = Vue.component('test', {
+      components: {
+        VTimePicker
+      },
+      render (h) {
+        return h('v-time-picker', {
+          props: {
+            value: '10:12'
+          },
+          scopedSlots: {
+            default: slot
+          }
+        })
+      }
+    })
+
+    const wrapper = mount(component)
+    expect(wrapper.find('.card__actions .scoped-slot')).toHaveLength(1)
   })
 })
