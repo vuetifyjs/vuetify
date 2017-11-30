@@ -90,27 +90,33 @@ function isRippleEnabled (binding) {
 
 function directive (el, binding) {
   el.setAttribute(RippleDataAttribute, isRippleEnabled(binding))
+  el._rippleValue = binding
+
+  const rippleHide = () => ripple.hide(el)
+  const rippleShow = e => ripple.show(e, el, el._rippleValue)
 
   if ('ontouchstart' in window) {
-    el.addEventListener('touchend', () => ripple.hide(el), false)
-    el.addEventListener('touchcancel', () => ripple.hide(el), false)
+    el.addEventListener('touchend', rippleHide, false)
+    el.addEventListener('touchcancel', rippleHide, false)
   }
 
-  el.addEventListener('mousedown', e => ripple.show(e, el, binding), false)
-  el.addEventListener('mouseup', () => ripple.hide(el), false)
-  el.addEventListener('mouseleave', () => ripple.hide(el), false)
+  el.addEventListener('mousedown', rippleShow, false)
+  el.addEventListener('mouseup', rippleHide, false)
+  el.addEventListener('mouseleave', rippleHide, false)
   // Anchor tags can be dragged, causes other hides to fail - #1537
-  el.addEventListener('dragstart', () => ripple.hide(el), false)
+  el.addEventListener('dragstart', rippleHide, false)
+  el._rippleHide = rippleHide
+  el._rippleShow = rippleShow
 }
 
 function unbind (el, binding) {
-  el.removeEventListener('touchstart', e => ripple.show(e, el, binding), false)
-  el.removeEventListener('mousedown', e => ripple.show(e, el, binding), false)
-  el.removeEventListener('touchend', () => ripple.hide(el), false)
-  el.removeEventListener('touchcancel', () => ripple.hide(el), false)
-  el.removeEventListener('mouseup', () => ripple.hide(el), false)
-  el.removeEventListener('mouseleave', () => ripple.hide(el), false)
-  el.removeEventListener('dragstart', () => ripple.hide(el), false)
+  el.removeEventListener('touchstart', el._rippleShow, false)
+  el.removeEventListener('mousedown', el._rippleShow, false)
+  el.removeEventListener('touchend', el._rippleHide, false)
+  el.removeEventListener('touchcancel', el._rippleHide, false)
+  el.removeEventListener('mouseup', el._rippleHide, false)
+  el.removeEventListener('mouseleave', el._rippleHide, false)
+  el.removeEventListener('dragstart', el._rippleHide, false)
 }
 
 function update (el, binding) {
@@ -119,6 +125,7 @@ function update (el, binding) {
   }
 
   el.setAttribute(RippleDataAttribute, isRippleEnabled(binding))
+  el._rippleValue = binding
 }
 
 export default {
