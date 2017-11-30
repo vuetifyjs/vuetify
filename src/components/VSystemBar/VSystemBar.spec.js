@@ -59,5 +59,10 @@ test('VSystemBar.vue', () => {
       window: true
     })
     expect(wrapper.vm.$vuetify.application.bar).toBe(32)
+
+    wrapper.setProps({
+      height: 90
+    })
+    expect(wrapper.vm.$vuetify.application.bar).toBe(90)
   })
 })
