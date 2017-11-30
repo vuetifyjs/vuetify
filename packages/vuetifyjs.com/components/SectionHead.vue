@@ -1,5 +1,6 @@
 <template lang="pug">
-  h2(v-html="$t(value)").headline.primary--text.mb-3
+  h2.headline.primary--text.mb-3
+    markdown(:source="$t(value)")
 </template>
 
 <script>
