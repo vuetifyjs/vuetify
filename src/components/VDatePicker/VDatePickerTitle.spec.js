@@ -47,8 +47,8 @@ test('VDatePickerTitle.js', ({ mount }) => {
       }
     })
 
-    const input = jest.fn(value => wrapper.setProps({ value }))
-    wrapper.vm.$on('input', input)
+    const input = jest.fn(value => wrapper.setProps({ selectingYear: value }))
+    wrapper.vm.$on('update:selectingYear', input)
 
     wrapper.find('.date-picker-title__date')[0].trigger('click')
     expect(input).not.toBeCalled()

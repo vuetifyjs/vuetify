@@ -195,8 +195,8 @@ export default {
           selectingHour: this.selectingHour
         },
         on: {
-          selectingHour: value => (this.selectingHour = value),
-          period: value => (this.period = value)
+          'update:selectingHour': value => (this.selectingHour = value),
+          'update:period': value => (this.period = value)
         },
         ref: 'title',
         slot: 'title'

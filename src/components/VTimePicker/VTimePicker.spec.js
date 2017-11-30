@@ -269,9 +269,9 @@ test('VTimePicker.js', ({ mount }) => {
     const title = wrapper.vm.$refs.title
 
     expect(wrapper.vm.selectingHour).toBe(true)
-    title.$emit('selectingHour', false)
+    title.$emit('update:selectingHour', false)
     expect(wrapper.vm.selectingHour).toBe(false)
-    title.$emit('selectingHour', true)
+    title.$emit('update:selectingHour', true)
     expect(wrapper.vm.selectingHour).toBe(true)
   })
 
@@ -286,9 +286,9 @@ test('VTimePicker.js', ({ mount }) => {
     const title = wrapper.vm.$refs.title
 
     expect(wrapper.vm.period).toBe('pm')
-    title.$emit('period', 'am')
+    title.$emit('update:period', 'am')
     expect(wrapper.vm.period).toBe('am')
-    title.$emit('period', 'pm')
+    title.$emit('update:period', 'pm')
     expect(wrapper.vm.period).toBe('pm')
   })
 

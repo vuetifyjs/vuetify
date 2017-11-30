@@ -44,17 +44,17 @@ test('VTimePickerTitle.js', ({ mount }) => {
     })
 
     const period = jest.fn()
-    wrapper.vm.$on('period', period)
+    wrapper.vm.$on('update:period', period)
 
-    wrapper.find('.time-picker-title__ampm span.active')[0].trigger('click')
+    wrapper.find('.time-picker-title__ampm .picker__title__btn.active')[0].trigger('click')
     expect(period).not.toBeCalled()
-    wrapper.find('.time-picker-title__ampm span:not(.active)')[0].trigger('click')
+    wrapper.find('.time-picker-title__ampm .picker__title__btn:not(.active)')[0].trigger('click')
     expect(period).toBeCalledWith('am')
 
     wrapper.setProps({
       value: '2:13'
     })
-    wrapper.find('.time-picker-title__ampm span:not(.active)')[0].trigger('click')
+    wrapper.find('.time-picker-title__ampm .picker__title__btn:not(.active)')[0].trigger('click')
     expect(period).toBeCalledWith('pm')
   })
 
@@ -66,7 +66,7 @@ test('VTimePickerTitle.js', ({ mount }) => {
     })
 
     const selectingHour = jest.fn()
-    wrapper.vm.$on('selectingHour', selectingHour)
+    wrapper.vm.$on('update:selectingHour', selectingHour)
 
     wrapper.find('.time-picker-title__time .picker__title__btn')[1].trigger('click')
     expect(selectingHour).not.toBeCalled()

@@ -268,13 +268,13 @@ export default {
       return this.$createElement('v-date-picker-title', {
         props: {
           date: this.formatters.titleDate(this.inputDate),
+          selectingYear: this.activePicker === 'YEAR',
           year: this.formatters.year(`${this.year}`),
-          yearIcon: this.yearIcon,
-          value: this.activePicker === 'YEAR'
+          yearIcon: this.yearIcon
         },
         slot: 'title',
         on: {
-          input: value => this.activePicker = value ? 'YEAR' : this.type.toUpperCase()
+          'update:selectingYear': value => this.activePicker = value ? 'YEAR' : this.type.toUpperCase()
         }
       })
     },

@@ -3,6 +3,9 @@ require('../../stylus/components/_date-picker-title.styl')
 // Components
 import VIcon from '../VIcon'
 
+// Mixins
+import PickerButton from '../../mixins/picker-button'
+
 export default {
   name: 'v-date-picker-title',
 
@@ -10,12 +13,14 @@ export default {
     VIcon
   },
 
+  mixins: [PickerButton],
+
   props: {
     date: {
       type: String,
       default: ''
     },
-    value: Boolean,
+    selectingYear: Boolean,
     year: {
       type: [Number, String],
       default: ''
@@ -34,21 +39,10 @@ export default {
       }, this.yearIcon)
     },
     getYearBtn () {
-      return this.$createElement('div', {
-        staticClass: 'picker__title__btn date-picker-title__year',
-        'class': {
-          'active': this.value
-        },
-        on: {
-          click: e => {
-            e.stopPropagation()
-            this.$emit('input', !this.value)
-          }
-        }
-      }, [
+      return this.genPickerButton('selectingYear', true, [
         this.year,
         this.yearIcon ? this.genYearIcon() : null
-      ])
+      ], 'date-picker-title__year')
     },
     genTitleText () {
       return this.$createElement('transition', {
@@ -64,18 +58,7 @@ export default {
       ])
     },
     genTitleDate (title) {
-      return this.$createElement('div', {
-        staticClass: 'picker__title__btn date-picker-title__date',
-        'class': {
-          'active': !this.value
-        },
-        on: this.value ? {
-          click: e => {
-            e.stopPropagation()
-            this.$emit('input', !this.value)
-          }
-        } : {}
-      }, [this.genTitleText(title)])
+      return this.genPickerButton('selectingYear', false, this.genTitleText(title), 'date-picker-title__date')
     }
   },
 
