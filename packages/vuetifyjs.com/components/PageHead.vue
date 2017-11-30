@@ -1,7 +1,7 @@
 <template lang="pug">
-  div.page-head.mb-5
-    h1.display-1.primary--text.mb-3#introduction
-      |{{ header }}
+  section.page-head
+    h1.display-1.primary--text#introduction
+      markdown(:source="header")
     markdown(:source="text")
 </template>
 

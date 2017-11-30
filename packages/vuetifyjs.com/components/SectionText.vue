@@ -1,5 +1,5 @@
 <template lang="pug">
-  markdown(:source="$t(value)").mb-3
+  markdown(:source="$t(value)")
 </template>
 
 <script>
