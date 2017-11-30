@@ -4,12 +4,14 @@
       app-drawer
       app-toolbar
       app-view
+      app-footer
       app-fab
 </template>
 
 <script>
   import AppDrawer from '@/components/core/AppDrawer'
   import AppFab from '@/components/core/AppFab'
+  import AppFooter from '@/components/core/AppFooter'
   import AppToolbar from '@/components/core/AppToolbar'
   import AppView from '@/components/core/AppView'
   import Meta from '@/mixins/meta'
@@ -20,6 +22,7 @@
     components: {
       AppDrawer,
       AppFab,
+      AppFooter,
       AppToolbar,
       AppView
     },

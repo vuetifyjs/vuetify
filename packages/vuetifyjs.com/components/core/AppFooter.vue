@@ -2,44 +2,38 @@
   v-footer(
     color="transparent"
     v-if="footer"
-  ).app-footer
-    v-layout(row justify-center).ma-0
-      v-flex(
-        v-if="prev"
-        v-bind:xs6="!next"
-      ).pa-0
-        v-btn(
-          color="primary"
-          dark
-          :icon="$vuetify.breakpoint.mdAndUp"
-          :fab="$vuetify.breakpoint.smAndDown"
-          :to="prev.href"
-        )
-          v-icon chevron_left
-        span(v-text="prev.title").subheading.no-wrap.hidden-sm-and-down
-      v-flex(
-        xs3
-        hidden-md-and-up
-        hidden-xs-only
-        layout
-        align-center
-        justify-center
-      ) NAVIGATION
-      v-flex(
-        v-if="next"
-        v-bind:xs6="!prev"
-        v-bind:offset-xs6="!prev"
-        class="nextnav"
-      ).pa-0.text-xs-right
-        span(v-text="next.title").subheading.no-wrap.hidden-sm-and-down
-        v-btn(
-          color="primary"
-          dark
-          :icon="$vuetify.breakpoint.mdAndUp"
-          :fab="$vuetify.breakpoint.smAndDown"
-          :to="next.href"
-        )
-          v-icon chevron_right
+    app
+  ).app-footer.justify-center
+    v-layout(style="max-width: 1185px;").ma-0.px-5
+      v-flex(xs12 md9)
+        v-layout(row justify-center)
+          v-flex(
+            v-if="prev"
+            :xs6="next"
+          ).pa-0
+            v-btn(
+              color="primary"
+              dark
+              :icon="$vuetify.breakpoint.mdAndUp"
+              :fab="$vuetify.breakpoint.smAndDown"
+              :to="prev.href"
+            )
+              v-icon chevron_left
+            span(v-text="prev.title").subheading.no-wrap.hidden-sm-and-down
+          v-flex(
+            v-if="next"
+            :xs6="prev"
+            class="nextnav"
+          ).pa-0.text-xs-right
+            span(v-text="next.title").subheading.no-wrap.hidden-sm-and-down
+            v-btn(
+              color="primary"
+              dark
+              :icon="$vuetify.breakpoint.mdAndUp"
+              :fab="$vuetify.breakpoint.smAndDown"
+              :to="next.href"
+            )
+              v-icon chevron_right
 </template>
 
 <script>
