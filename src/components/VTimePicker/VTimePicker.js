@@ -75,6 +75,9 @@ export default {
       set (val) {
         this.hour += val === 'am' ? -12 : 12
       }
+    },
+    isAmPm () {
+      return this.format === 'ampm'
     }
   },
 
@@ -139,10 +142,8 @@ export default {
     onInput (value) {
       if (!this.selectingHour) {
         this.minute = value
-      } else if (this.format === '24hr') {
-        this.hour = value
       } else {
-        this.hour = this.convert12to24(value, this.period)
+        this.hour = this.isAmPm ? this.convert12to24(value, this.period) : value
       }
     },
     onChange () {
@@ -160,15 +161,15 @@ export default {
           allowedValues: this.selectingHour ? this.allowedHours : this.allowedMinutes,
           color: this.color,
           dark: this.dark,
-          double: this.selectingHour && this.format !== 'ampm',
-          max: this.selectingHour ? (this.format === 'ampm' ? 12 : 23) : 59,
-          min: this.selectingHour && this.format === 'ampm' ? 1 : 0,
+          double: this.selectingHour && !this.isAmPm,
+          max: this.selectingHour ? (this.isAmPm ? 12 : 23) : 59,
+          min: this.selectingHour && this.isAmPm ? 1 : 0,
           pad: this.selectingHour ? 0 : 2,
-          rotate: this.selectingHour && this.format === 'ampm' ? 30 : 0,
+          rotate: this.selectingHour && this.isAmPm ? 30 : 0,
           scrollable: this.scrollable,
           size: this.landscape ? 250 : 280,
           step: this.selectingHour ? 1 : 5,
-          value: this.selectingHour ? (this.format === 'ampm' ? this.convert24to12(this.hour) : this.hour) : this.minute
+          value: this.selectingHour ? (this.isAmPm ? this.convert24to12(this.hour) : this.hour) : this.minute
         },
         on: {
           input: this.onInput,
@@ -189,7 +190,7 @@ export default {
     genPickerTitle () {
       return this.$createElement('v-time-picker-title', {
         props: {
-          ampm: this.format === 'ampm',
+          ampm: this.isAmPm,
           value: pad(this.hour) + ':' + pad(this.minute),
           selectingHour: this.selectingHour
         },

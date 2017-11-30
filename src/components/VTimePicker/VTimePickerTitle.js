@@ -19,8 +19,8 @@ export default {
     minute () {
       return parseInt(this.value.split(':')[1], 10)
     },
-    period () {
-      return this.hour < 12 ? 'am' : 'pm'
+    isPm () {
+      return this.hour >= 12
     }
   },
 
@@ -46,12 +46,12 @@ export default {
         this.genPickerButton(!this.selectingHour, () => this.$emit('selectingHour', false), pad(this.minute))
       ])
     },
-    genAMPM () {
+    genAmPm () {
       return this.$createElement('div', {
         staticClass: 'time-picker-title__ampm'
       }, [
-        this.genPickerButton(this.period === 'am', () => this.$emit('period', 'am'), 'am'),
-        this.genPickerButton(this.period === 'pm', () => this.$emit('period', 'pm'), 'pm')
+        this.genPickerButton(!this.isPm, () => this.$emit('period', 'am'), 'am'),
+        this.genPickerButton(this.isPm, () => this.$emit('period', 'pm'), 'pm')
       ])
     }
   },
@@ -61,7 +61,7 @@ export default {
       staticClass: 'time-picker-title'
     }, [
       this.genTime(),
-      this.ampm ? this.genAMPM() : null
+      this.ampm ? this.genAmPm() : null
     ])
   }
 }
