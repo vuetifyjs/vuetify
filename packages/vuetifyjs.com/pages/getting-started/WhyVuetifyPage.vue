@@ -1,5 +1,5 @@
 <template lang="pug">
-  page
+  doc-view
     template(slot-scope="{ namespace }")
       section#why-vuetify
         v-layout(row wrap).mb-5

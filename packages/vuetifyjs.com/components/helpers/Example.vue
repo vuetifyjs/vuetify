@@ -11,8 +11,7 @@
       span(v-text="header")
 
     //- Description
-    div(v-if="$slots.desc").justify
-      slot(name="desc")
+    markdown(v-if="desc" :source="desc")
 
     v-card.mt-4
       //- Example options
@@ -89,8 +88,6 @@
   const resolve = (file) => path.resolve(__dirname, file)
 
   export default {
-    name: 'component-example',
-
     data () {
       return {
         tabs: ['template', 'script', 'style'],
@@ -118,6 +115,7 @@
       hasInverted: Boolean,
       file: String,
       header: String,
+      desc: String,
       inverted: Boolean,
       newIn: String,
       id: String
@@ -147,7 +145,7 @@
       import(
         /* webpackChunkName: "component-examples" */
         /* webpackMode: "lazy-once" */
-        `../examples/${this.file}.vue`
+        `../../examples/${this.file}.vue`
       ).then(comp => {
         this.instance = new Vue(comp.default)
         this.instance.$mount('#example-'+this.uid)
@@ -219,7 +217,7 @@
 </script>
 
 <style lang="stylus">
-  @import '../node_modules/vuetify/src/stylus/settings/_variables.styl'
+  @import '../../node_modules/vuetify/src/stylus/settings/_variables.styl'
 
   .component-example
     // margin-bottom: 32px

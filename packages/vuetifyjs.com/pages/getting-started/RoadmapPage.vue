@@ -1,5 +1,5 @@
 <template lang="pug">
-  page
+  doc-view
     section#higlights
       table.table.elevation-1
         tbody

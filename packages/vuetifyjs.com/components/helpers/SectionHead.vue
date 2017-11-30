@@ -5,8 +5,6 @@
 
 <script>
   export default {
-    name: 'section-head',
-
     props: {
       value: String
     }

@@ -1,5 +1,5 @@
 <template lang="pug">
-  component-page(:data="data")
+  example-view(:data="data")
     section
       section-head(value="Components.Grid.breakpointHeader")
       section-text(value="Components.Grid.breakpointText1")

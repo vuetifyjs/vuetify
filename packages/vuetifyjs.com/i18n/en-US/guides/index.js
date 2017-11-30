@@ -1,5 +1,5 @@
-import SSR from './SSR'
+import ServerSideRendering from './ServerSideRendering'
 
 export default {
-  SSR
+  ServerSideRendering
 }

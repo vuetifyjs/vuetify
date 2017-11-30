@@ -1,5 +1,5 @@
 <template lang="pug">
-  page
+  doc-view
     template(slot-scope="{ namespace }")
       section#frequently-asked-questions
       v-text-field(

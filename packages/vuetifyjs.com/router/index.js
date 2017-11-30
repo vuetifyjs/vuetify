@@ -47,11 +47,13 @@ export function createRouter () {
         route('/motion/transitions', 'motion/Transitions'),
         // Components
         route('/components/grid', 'components/Grid'),
-        // Dynamic
-        route('/:section/:component', 'components/Doc'),
+        // Extra
         route('/pre-made-themes', 'PremadeThemes'),
         // Guides
         route('/guides/server-side-rendering', 'guides/SSR'),
+        route('/guides/a-la-carte', 'guides/ALaCarte'),
+        // Dynamic
+        route('/:section/:component', 'components/Doc'),
         // Global redirect for 404
         { path: '*', redirect: '/' }
       ]

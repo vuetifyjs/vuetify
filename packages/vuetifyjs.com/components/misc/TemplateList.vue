@@ -78,8 +78,6 @@
 
 <script>
   export default {
-    name: 'template-list',
-
     data: () => ({
       copied: false,
       copyTimeout: null,

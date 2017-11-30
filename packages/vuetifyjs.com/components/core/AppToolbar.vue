@@ -17,13 +17,17 @@
     v-toolbar-title.pb-1 Vuetify
     v-spacer
     v-toolbar-items
-      v-menu(bottom offset-y)
+      v-menu(bottom offset-y left)
         v-btn(
           slot="activator"
           flat
         )
           span Translations
           v-icon keyboard_arrow_down
+        v-card
+          v-card-title.title Coming soon!
+          v-card-text
+            div For more information, visit the <a href="https://discord.gg/CweuCn7" target="_blank">community</a>
       v-menu(bottom offset-y)
         v-btn(
           slot="activator"
@@ -31,6 +35,13 @@
         )
           span 0.17
           v-icon keyboard_arrow_down
+        v-list
+          v-list-tile(
+            v-for="release in releases"
+            :key="release"
+            @click=""
+          )
+            v-list-tile-title {{ release }}
       v-btn(
         flat
         v-if="$route.path === '/'"
@@ -41,13 +52,20 @@
 </template>
 
 <script>
-  export default {
-    name: 'app-toolbar',
+  // Utilities
+  import { mapState } from 'vuex'
 
+  export default {
     data: () => ({
       fixed: false,
       isManualScrolling: false
     }),
+
+    computed: {
+      ...mapState({
+        releases: state => state.releases
+      })
+    },
 
     watch: {
       $route (current) {

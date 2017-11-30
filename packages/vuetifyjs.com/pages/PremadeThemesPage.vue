@@ -1,5 +1,5 @@
 <template lang="pug">
-  text-page(:data="$data")
+  doc-view
     section#themes-view
       v-container.pa-0(fluid grid-list-xl)
         v-layout(row wrap)

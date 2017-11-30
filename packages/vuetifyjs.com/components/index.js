@@ -1,23 +1,11 @@
-import AppAlert from './core/AppAlert'
-import Codepen from './Codepen'
-import ComponentExample from './ComponentExample'
-import ComponentPage from './ComponentPage'
-import ComponentParameters from './ComponentParameters'
-import Markup from './Markup'
-import Page from './Page'
-import PageHead from './PageHead'
-import SectionHead from './SectionHead'
-import SectionText from './SectionText'
+import Core from '@/components/core'
+import Helpers from '@/components/helpers'
+import Misc from '@/components/misc'
+import Views from '@/components/views'
 
-export default {
-  AppAlert,
-  Codepen,
-  ComponentExample,
-  ComponentPage,
-  ComponentParameters,
-  Markup,
-  Page,
-  PageHead,
-  SectionHead,
-  SectionText
-}
+export default Object.assign({},
+  Core,
+  Helpers,
+  Misc,
+  Views
+)

@@ -6,7 +6,6 @@ import 'event-source-polyfill'
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import VeeValidate from 'vee-validate'
-import Markdown from 'vue-markdown'
 import axios from 'axios'
 
 // Bootstrap
@@ -19,9 +18,9 @@ import { sync } from 'vuex-router-sync'
 import App from './App.vue'
 import Components from '@/components'
 
+// Requests
 Vue.prototype.$http = axios.create({ baseURL: '/' })
 
-Vue.component('markdown', Markdown)
 Vue.use(VeeValidate, { inject: false })
 Vue.use(Vuetify, {
   theme: {
@@ -31,6 +30,7 @@ Vue.use(Vuetify, {
   }
 })
 
+// Bootstrap application components
 Object.keys(Components).forEach(key => {
   Vue.component(key, Components[key])
 })

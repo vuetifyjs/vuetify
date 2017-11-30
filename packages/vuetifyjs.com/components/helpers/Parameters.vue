@@ -34,11 +34,9 @@
 </template>
 
 <script>
-  import { capitalize } from '@/util/helpers'
+  import { capitalize, uppercase } from '@/util/helpers'
 
   export default {
-    name: 'component-parameters',
-
     data () {
       return {
         currentComponent: this.components[0],

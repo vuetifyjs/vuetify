@@ -1,5 +1,5 @@
 <template lang="pug">
-  page
+  doc-view
     template(slot-scope="{ namespace }")
       app-alert(error :value="`${namespace}.alert1`")
 
@@ -100,7 +100,7 @@
 </template>
 
 <script>
-  import TemplateList from '@/components/TemplateList'
+  import TemplateList from '@/components/misc/TemplateList'
 
   export default {
     components: { TemplateList },

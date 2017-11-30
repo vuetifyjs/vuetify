@@ -1,5 +1,5 @@
 <template lang="pug">
-  page#content-page
+  doc-view#content-page
     template(slot-scope="{ namespace }")
       section#blockquote
         section-head(:value="`${namespace}.blockquoteHeader`")
