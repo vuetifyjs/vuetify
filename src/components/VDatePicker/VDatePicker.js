@@ -52,6 +52,10 @@ export default {
       type: [Array, Object, Function],
       default: () => null
     },
+    events: {
+      type: [Array, Object, Function],
+      default: () => null
+    },
     autosave: Boolean,
     // Function formatting the day in date picker table
     dayFormat: {
@@ -284,6 +288,7 @@ export default {
       return this.$createElement('v-date-picker-date-table', {
         props: {
           allowedDates: this.allowedDates,
+          events: this.events,
           color: this.color,
           firstDayOfWeek: this.firstDayOfWeek,
           format: this.dayFormat,
