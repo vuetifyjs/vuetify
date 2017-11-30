@@ -28,10 +28,10 @@
             v-layout(row wrap)
               v-flex(xs12 md7).mb-5
                 section
-                  p(
+                  markdown(
                     v-for="(p, i) in whyText"
                     :key="i"
-                    v-html="p"
+                    :source="p"
                   )
 
                 section#design-principles
@@ -51,12 +51,12 @@
                     v-flex(xs12)
                       v-list(style="max-width: 400px;" dense).transparent.mb-5
                         v-list-tile(
-                        tag="div"
+                          tag="div"
                           :ripple="false"
-                        v-for="(feature, $index) in featuresList"
+                          v-for="(feature, $index) in featuresList"
                           :key="$index"
-                        avatar
-                        :class="{ 'grey lighten-3': $index % 2 === 0 }"
+                          avatar
+                          :class="{ 'grey lighten-3': $index % 2 === 0 }"
                         )
                           v-list-tile-content
                             v-list-tile-title.subheading {{ feature }}
