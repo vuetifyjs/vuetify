@@ -4,6 +4,7 @@ import DatePickerTable from './mixins/date-picker-table'
 import { pad, createNativeLocaleFormatter, monthChange } from './util'
 import { createRange } from '../../util/helpers'
 import isValueAllowed from '../../util/isValueAllowed'
+import isValueEvent from '../../util/isValueEvent'
 
 export default {
   name: 'v-date-picker-date-table',
@@ -50,13 +51,14 @@ export default {
       return this.$createElement('thead', this.genTR(days))
     },
 
-    genButtonClasses (day, disabled) {
+    genButtonClasses (day, disabled, event) {
       const isActive = this.isActive(day)
       const isCurrent = this.isCurrent(day)
       const classes = Object.assign({
         'btn--active': isActive,
         'btn--outline': isCurrent && !isActive,
-        'btn--disabled': disabled
+        'btn--disabled': disabled,
+        'date-picker-table__event': event
       }, this.themeClasses)
 
       return (isActive || isCurrent)
@@ -67,10 +69,11 @@ export default {
     genButton (day) {
       const date = `${this.displayedYear}-${pad(this.displayedMonth + 1)}-${pad(day)}`
       const disabled = !isValueAllowed(date, this.allowedDates)
+      const event = isValueEvent(date)
 
       return this.$createElement('button', {
         staticClass: 'btn btn--raised btn--icon',
-        'class': this.genButtonClasses(day, disabled),
+        'class': this.genButtonClasses(day, disabled, event),
         attrs: {
           type: 'button'
         },
