@@ -1,6 +1,8 @@
+// Mixins
 import Colorable from '../../mixins/colorable'
 import DatePickerTable from './mixins/date-picker-table'
 
+// Utils
 import { pad, createNativeLocaleFormatter, monthChange } from './util'
 import { createRange } from '../../util/helpers'
 import isValueAllowed from '../../util/isValueAllowed'
@@ -44,12 +46,10 @@ export default {
     calculateTableDate (delta) {
       return monthChange(this.tableDate, Math.sign(delta || 1))
     },
-
     genTHead () {
       const days = this.weekDays.map(day => this.$createElement('th', day))
       return this.$createElement('thead', this.genTR(days))
     },
-
     genButtonClasses (day, disabled) {
       const isActive = this.isActive(day)
       const isCurrent = this.isCurrent(day)
@@ -63,7 +63,6 @@ export default {
         ? this.addBackgroundColorClassChecks(classes)
         : classes
     },
-
     genButton (day) {
       const date = `${this.displayedYear}-${pad(this.displayedMonth + 1)}-${pad(day)}`
       const disabled = !isValueAllowed(date, this.allowedDates)
@@ -83,14 +82,12 @@ export default {
         }
       })
     },
-
     // Returns number of the days from the firstDayOfWeek to the first day of the current month
     weekDaysBeforeFirstDayOfTheMonth () {
       const firstDayOfTheMonth = new Date(`${this.displayedYear}-${pad(this.displayedMonth + 1)}-01T00:00:00+00:00`)
       const weekDay = firstDayOfTheMonth.getUTCDay()
       return (weekDay - parseInt(this.firstDayOfWeek) + 7) % 7
     },
-
     genTBody () {
       const children = []
       const daysInMonth = new Date(this.displayedYear, this.displayedMonth + 1, 0).getDate()
@@ -116,17 +113,14 @@ export default {
 
       return this.$createElement('tbody', children)
     },
-
     genTR (children) {
       return [this.$createElement('tr', children)]
     },
-
     isActive (date) {
       return this.selectedYear === this.displayedYear &&
         this.selectedMonth === this.displayedMonth &&
         this.selectedDate === date
     },
-
     isCurrent (date) {
       return this.currentYear === this.displayedYear &&
         this.currentMonth === this.displayedMonth &&

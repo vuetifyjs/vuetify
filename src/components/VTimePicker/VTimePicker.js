@@ -1,12 +1,12 @@
-// Utils
-import pad from '../VDatePicker/util/pad'
+// Components
+import VTimePickerTitle from './VTimePickerTitle'
+import VTimePickerClock from './VTimePickerClock'
 
 // Mixins
 import Picker from '../../mixins/picker'
 
-// Components
-import VTimePickerTitle from './VTimePickerTitle'
-import VTimePickerClock from './VTimePickerClock'
+// Utils
+import pad from '../VDatePicker/util/pad'
 
 export default {
   name: 'v-time-picker',

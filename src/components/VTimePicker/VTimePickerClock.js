@@ -1,12 +1,12 @@
 require('../../stylus/components/_time-picker-clock.styl')
 
-// Utils
-import isValueAllowed from '../../util/isValueAllowed'
-import { pad } from '../VDatePicker/util'
-
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
+
+// Utils
+import isValueAllowed from '../../util/isValueAllowed'
+import { pad } from '../VDatePicker/util'
 
 const outerRadius = 0.8
 const innerRadius = 0.5
@@ -18,6 +18,14 @@ export default {
     Colorable,
     Themeable
   ],
+
+  data () {
+    return {
+      defaultColor: 'accent',
+      inputValue: this.value,
+      isDragging: false
+    }
+  },
 
   props: {
     allowedValues: {
@@ -56,20 +64,6 @@ export default {
     }
   },
 
-  data () {
-    return {
-      defaultColor: 'accent',
-      inputValue: this.value,
-      isDragging: false
-    }
-  },
-
-  watch: {
-    value (value) {
-      this.inputValue = value
-    }
-  },
-
   computed: {
     count () {
       return this.max - this.min + 1
@@ -88,21 +82,24 @@ export default {
     }
   },
 
+  watch: {
+    value (value) {
+      this.inputValue = value
+    }
+  },
+
   methods: {
     wheel (e) {
       e.preventDefault()
       const value = this.value + Math.sign(e.wheelDelta || 1)
       this.update((value - this.min + this.count) % this.count + this.min)
     },
-
     handScale (value) {
       return this.double && (value - this.min >= this.roundCount) ? (innerRadius / outerRadius) : 1
     },
-
     isAllowed (value) {
       return isValueAllowed(value, this.allowedValues)
     },
-
     genValues () {
       const children = []
 
@@ -121,7 +118,6 @@ export default {
 
       return children
     },
-
     genHand () {
       const scale = `scaleY(${this.handScale(this.value)})`
       const angle = this.rotate + this.degreesPerUnit * (this.value - this.min)
@@ -134,12 +130,10 @@ export default {
         }
       })
     },
-
     getTransform (i) {
       const { x, y } = this.getPosition(i)
       return { transform: `translate(${x}px, ${y}px)` }
     },
-
     getPosition (value) {
       const radius = 0.8 * this.radius * this.handScale(value)
       const rotateRadians = this.rotate * Math.PI / 180
@@ -148,19 +142,16 @@ export default {
         y: Math.round(-Math.cos((value - this.min) * this.degrees + rotateRadians) * radius)
       }
     },
-
     onMouseDown (e) {
       e.preventDefault()
 
       this.isDragging = true
       this.onDragMove(e)
     },
-
     onMouseUp () {
       this.isDragging = false
       this.$emit('change', this.inputValue)
     },
-
     onDragMove (e) {
       e.preventDefault()
       if (!this.isDragging && e.type !== 'click') return
@@ -180,21 +171,18 @@ export default {
         this.update(value)
       }
     },
-
     update (value) {
       if (this.inputValue !== value && this.isAllowed(value)) {
         this.inputValue = value
         this.$emit('input', value)
       }
     },
-
     euclidean (p0, p1) {
       const dx = p1.x - p0.x
       const dy = p1.y - p0.y
 
       return Math.sqrt(dx * dx + dy * dy)
     },
-
     angle (center, p1) {
       const value = 2 * Math.atan2(p1.y - center.y - this.euclidean(center, p1), p1.x - center.x)
       return Math.abs(value * 180 / Math.PI)

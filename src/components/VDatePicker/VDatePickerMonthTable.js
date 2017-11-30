@@ -1,6 +1,8 @@
+// Mixins
 import Colorable from '../../mixins/colorable'
 import DatePickerTable from './mixins/date-picker-table'
 
+// Utils
 import { pad, createNativeLocaleFormatter } from './util'
 import isValueAllowed from '../../util/isValueAllowed'
 
@@ -22,7 +24,6 @@ export default {
     calculateTableDate (delta) {
       return `${parseInt(this.tableDate, 10) + Math.sign(delta || 1)}`
     },
-
     genMonthButtonClasses (month) {
       const isSelected = this.selectedYear === this.displayedYear && this.selectedMonth === month
       const isCurrent = this.currentYear === this.displayedYear && this.currentMonth === month
@@ -38,7 +39,6 @@ export default {
         ? this.addBackgroundColorClassChecks(classes)
         : classes
     },
-
     genMonthButton (month) {
       const value = `${this.displayedYear}-${pad(month + 1)}`
       const isDisabled = !isValueAllowed(value, this.allowedDates)
@@ -57,7 +57,6 @@ export default {
         }
       }, [btnContent])
     },
-
     genTBody () {
       const children = []
       const cols = Array(3).fill(null)

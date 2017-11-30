@@ -1,15 +1,15 @@
 require('../../stylus/components/_date-picker-years.styl')
 
-import { createNativeLocaleFormatter } from './util'
-
+// Mixins
 import Colorable from '../../mixins/colorable'
+
+// Utils
+import { createNativeLocaleFormatter } from './util'
 
 export default {
   name: 'v-date-picker-years',
 
-  mixins: [
-    Colorable
-  ],
+  mixins: [Colorable],
 
   data () {
     return {
@@ -37,6 +37,10 @@ export default {
     }
   },
 
+  mounted () {
+    this.$el.scrollTop = this.$el.scrollHeight / 2 - 125
+  },
+
   methods: {
     genYearItem (year) {
       const formatted = this.formatter(`${year}`)
@@ -51,7 +55,6 @@ export default {
         }
       }, formatted)
     },
-
     genYearItems () {
       const children = []
       const selectedYear = this.value ? parseInt(this.value, 10) : new Date().getFullYear()
@@ -64,10 +67,6 @@ export default {
 
       return children
     }
-  },
-
-  mounted () {
-    this.$el.scrollTop = this.$el.scrollHeight / 2 - 125
   },
 
   render (h) {

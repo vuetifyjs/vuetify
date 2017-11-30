@@ -1,6 +1,7 @@
 require('../../stylus/components/_time-picker-title.styl')
 
-import pad from '../VDatePicker/util/pad'
+// Utils
+import { pad } from '../VDatePicker/util'
 
 export default {
   name: 'v-time-picker-title',
@@ -31,7 +32,6 @@ export default {
         on: active ? undefined : { click }
       }, [text])
     },
-
     genTime () {
       let hour = this.hour
       if (this.ampm) {
@@ -46,7 +46,6 @@ export default {
         this.genPickerButton(!this.selectingHour, () => this.$emit('selectingHour', false), pad(this.minute))
       ])
     },
-
     genAMPM () {
       return this.$createElement('div', {
         staticClass: 'time-picker-title__ampm'

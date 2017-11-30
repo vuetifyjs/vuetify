@@ -1,7 +1,9 @@
 require('../../stylus/components/_pickers.styl')
 
+// Components
 import VCard from '../VCard'
 
+// Mixins
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 
@@ -45,7 +47,6 @@ export default {
         }, 'computedTitleColor')
       }, this.$slots.title)
     },
-
     genBodyTransition () {
       return this.$createElement('transition', {
         props: {
@@ -55,13 +56,11 @@ export default {
         }
       }, this.$slots.default)
     },
-
     genBody () {
       return this.$createElement('div', {
         staticClass: 'picker__body'
       }, [this.genBodyTransition()])
     },
-
     genActions () {
       return this.$createElement('div', {
         staticClass: 'picker__actions card__actions'

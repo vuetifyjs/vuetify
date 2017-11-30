@@ -1,10 +1,13 @@
 require('../../stylus/components/_date-picker-header.styl')
 
-import Colorable from '../../mixins/colorable'
-
+// Components
 import VBtn from '../VBtn'
 import VIcon from '../VIcon'
 
+// Mixins
+import Colorable from '../../mixins/colorable'
+
+// Utils
 import { createNativeLocaleFormatter, monthChange } from './util'
 
 export default {
@@ -15,9 +18,14 @@ export default {
     VIcon
   },
 
-  mixins: [
-    Colorable
-  ],
+  mixins: [Colorable],
+
+  data () {
+    return {
+      isReversing: false,
+      defaultColor: 'accent'
+    }
+  },
 
   props: {
     format: {
@@ -42,19 +50,6 @@ export default {
     }
   },
 
-  data () {
-    return {
-      isReversing: false,
-      defaultColor: 'accent'
-    }
-  },
-
-  watch: {
-    value (newVal, oldVal) {
-      this.isReversing = newVal < oldVal
-    }
-  },
-
   computed: {
     formatter () {
       if (this.format) {
@@ -64,6 +59,12 @@ export default {
       } else {
         return createNativeLocaleFormatter(this.locale, { year: 'numeric', timeZone: 'UTC' }, { length: 4 })
       }
+    }
+  },
+
+  watch: {
+    value (newVal, oldVal) {
+      this.isReversing = newVal < oldVal
     }
   },
 
@@ -84,7 +85,6 @@ export default {
         this.$createElement('v-icon', change < 0 ? this.iconPrev : this.iconNext)
       ])
     },
-
     calculateChange (sign) {
       const [year, month] = String(this.value).split('-').map(v => 1 * v)
 
@@ -94,7 +94,6 @@ export default {
         return monthChange(String(this.value), sign)
       }
     },
-
     genHeader () {
       const header = this.$createElement('strong', {
         'class': this.addTextColorClassChecks(),

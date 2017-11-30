@@ -1,6 +1,3 @@
-// Mixins
-import Picker from '../../mixins/picker'
-
 // Components
 import VBtn from '../VBtn'
 import VCard from '../VCard'
@@ -11,6 +8,10 @@ import VDatePickerDateTable from './VDatePickerDateTable'
 import VDatePickerMonthTable from './VDatePickerMonthTable'
 import VDatePickerYears from './VDatePickerYears'
 
+// Mixins
+import Picker from '../../mixins/picker'
+
+// Utils
 import { pad, createNativeLocaleFormatter } from './util'
 import isValueAllowed from '../../util/isValueAllowed'
 
@@ -207,6 +208,17 @@ export default {
     }
   },
 
+  created () {
+    this.setTableDate()
+  },
+
+  mounted () {
+    const date = new Date()
+    this.currentDay = date.getDate()
+    this.currentMonth = date.getMonth()
+    this.currentYear = date.getFullYear()
+  },
+
   methods: {
     setTableDate () {
       this.tableDate = this.type === 'month' ? `${this.year}` : `${this.year}-${pad(this.month + 1)}`
@@ -346,17 +358,6 @@ export default {
       const [year, month, date] = dateString.split('-')
       return `${year}-${pad(month)}-${pad(date)}`.substr(0, { date: 10, month: 7, year: 4 }[type])
     }
-  },
-
-  created () {
-    this.setTableDate()
-  },
-
-  mounted () {
-    const date = new Date()
-    this.currentDay = date.getDate()
-    this.currentMonth = date.getMonth()
-    this.currentYear = date.getFullYear()
   },
 
   render (h) {

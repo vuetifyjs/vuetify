@@ -6,6 +6,13 @@ import Touch from '../../../directives/touch'
 export default {
   directives: { Touch },
 
+  data () {
+    return {
+      defaultColor: 'accent',
+      isReversing: false
+    }
+  },
+
   props: {
     allowedDates: {
       type: [Array, Object, Function],
@@ -31,19 +38,6 @@ export default {
     value: {
       type: String,
       required: false
-    }
-  },
-
-  data () {
-    return {
-      defaultColor: 'accent',
-      isReversing: false
-    }
-  },
-
-  watch: {
-    tableDate (newVal, oldVal) {
-      this.isReversing = newVal < oldVal
     }
   },
 
@@ -77,16 +71,20 @@ export default {
     }
   },
 
+  watch: {
+    tableDate (newVal, oldVal) {
+      this.isReversing = newVal < oldVal
+    }
+  },
+
   methods: {
     wheel (e) {
       e.preventDefault()
       this.$emit('tableDate', this.calculateTableDate(e.deltaY))
     },
-
     touch (value) {
       this.$emit('tableDate', this.calculateTableDate(value))
     },
-
     genTable (staticClass, children) {
       const transition = this.$createElement('transition', {
         props: { name: this.computedTransition }

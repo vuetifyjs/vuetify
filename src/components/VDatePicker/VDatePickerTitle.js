@@ -1,5 +1,6 @@
 require('../../stylus/components/_date-picker-title.styl')
 
+// Components
 import VIcon from '../VIcon'
 
 export default {
@@ -32,7 +33,6 @@ export default {
         }
       }, this.yearIcon)
     },
-
     getYearBtn () {
       return this.$createElement('div', {
         staticClass: 'picker__title__btn date-picker-title__year',
@@ -50,7 +50,6 @@ export default {
         this.yearIcon ? this.genYearIcon() : null
       ])
     },
-
     genTitleText () {
       return this.$createElement('transition', {
         props: {
@@ -64,7 +63,6 @@ export default {
         })
       ])
     },
-
     genTitleDate (title) {
       return this.$createElement('div', {
         staticClass: 'picker__title__btn date-picker-title__date',
