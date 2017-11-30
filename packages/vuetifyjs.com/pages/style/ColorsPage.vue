@@ -9,7 +9,7 @@
         v-container(fluid).pa-0
           v-layout(row wrap)
             v-flex(xs6 sm6 md4 lg3 v-for="color in colors" v-bind:key="color")
-              v-card(v-bind:color="color" height="100px")
+              v-card(v-bind:color="color" height="100px" tile)
                 v-card-text
                   h3 {{ color }}
               v-card(
@@ -17,12 +17,15 @@
                 v-bind:color="color + ' lighten-' + n"
                 class="black--text"
                 v-bind:key="n"
+                tile
               )
                 v-card-text {{ color }} lighten-{{ n }}
               v-card(
                 v-for="n in 4"
                 v-bind:color="color + ' darken-' + n"
                 v-bind:key="n"
+                class="white--text"
+                tile
               )
                 v-card-text {{ color }} darken-{{ n }}
               v-card(
@@ -31,6 +34,7 @@
                 v-if="['grey', 'blue-grey', 'brown'].indexOf(color) === -1"
                 class="black--text"
                 v-bind:key="n"
+                tile
               )
                 v-card-text {{ color }} accent-{{ n }}
 
