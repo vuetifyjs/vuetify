@@ -15,6 +15,6 @@ test('VTimePicker/util/isValueEvent.js', ({ mount }) => {
   it('should check if the date is event when events values is function', () => {
     const fn = value => value.toString()[0] === '1'
     expect(isValueEvent(13, fn)).toBe(true)
-    expect(isValueAllowed(23, fn)).toBe(false)
+    expect(isValueEvent(23, fn)).toBe(false)
   })
 })
