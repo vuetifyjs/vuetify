@@ -19,7 +19,7 @@ test('VDatePickerTitle.js', ({ mount }) => {
       propsData: {
         year: '1234',
         date: '2005-11-01',
-        value: true
+        selectingYear: true
       }
     })
 
