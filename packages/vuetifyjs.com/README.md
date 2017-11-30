@@ -37,10 +37,10 @@ yarn link
 npm run watch
 ```
 
-<h3>Link the docs</h3>
+<h3>Link Vuetify to docs</h3>
 
 ``` bash
-git clone https://github.com/vuetifyjs/vuetify.git
+git clone https://github.com/vuetifyjs/vuetifyjs.com.git
 
 # yarn
 yarn
