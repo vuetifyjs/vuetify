@@ -1,5 +1,5 @@
 <template lang="pug">
-  component-page(:data="data")
+  example-view(:data="data")
 </template>
 
 <script>

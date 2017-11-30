@@ -1,9 +1,15 @@
 export default {
   api: 'API',
-  usage: 'Usage',
+  default: 'Default',
+  description: 'Description',
   examples: 'Examples',
-  showExample: 'Show Example',
+  name: 'Name',
   openInCodePen: 'Open in Codepen',
+  options: 'Options',
+  props: 'Props',
+  showExample: 'Show Example',
+  slots: 'Slots',
+  type: 'Type',
   toc: [
     {
       text: 'Introduction',
@@ -21,5 +27,6 @@ export default {
       text: 'Examples',
       href: 'examples'
     }
-  ]
+  ],
+  usage: 'Usage'
 }

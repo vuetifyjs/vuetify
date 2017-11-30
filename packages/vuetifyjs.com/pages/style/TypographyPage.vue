@@ -1,5 +1,5 @@
 <template lang="pug">
-  page#typography-page
+  doc-view#typography-page
     template(slot-scope="{ namespace }")
       section#examples
         section-head(:value="`${namespace}.examplesHeader`")

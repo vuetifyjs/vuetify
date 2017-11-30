@@ -22,8 +22,6 @@
   import { camel } from '@/util/helpers'
 
   export default {
-    name: 'page',
-
     components: {
       AppAd,
       AppTableOfContents
@@ -64,7 +62,7 @@
 </script>
 
 <style lang="stylus">
-  @import '../node_modules/vuetify/src/stylus/settings/_variables.styl'
+  @import '../../node_modules/vuetify/src/stylus/settings/_variables.styl'
 
   .page
     max-width: 1185px !important

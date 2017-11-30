@@ -1,5 +1,5 @@
 <template lang="pug">
-  page
+  doc-view
     template(slot-scope="{ namespace }")
       section#classes
         section-head(:value="`${namespace}.classesHeader`")

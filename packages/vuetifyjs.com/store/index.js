@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-const api = require('@/api/api.js')
-
 Vue.use(Vuex)
 
 export function createStore () {
+  const api = require('@/api/api.js')
+  const releases = require('../router/releases.json')
+
   return new Vuex.Store({
     state: {
       api,
@@ -153,17 +154,8 @@ export function createStore () {
       ],
       appFooter: true,
       currentVersion: null,
+      releases,
       stateless: false,
-      previous: {
-        name: 'Components',
-        color: 'primary',
-        route: '/components'
-      },
-      next: {
-        name: 'Breadcrumbs',
-        color: 'green',
-        route: '/components/breadcrumbs'
-      },
       supporters: {
         diamond: [
           { 

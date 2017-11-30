@@ -1,5 +1,5 @@
 <template lang="pug">
-  component-page(:data="data")
+  example-view(:data="data")
     section#create-your-own
       section-head(value="Motion.Transitions.createYourOwnHeader")
       section-text(value="Motion.Transitions.createYourOwnText1")

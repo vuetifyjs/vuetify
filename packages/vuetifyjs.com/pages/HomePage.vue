@@ -33,7 +33,7 @@
               large
             ).mb-2
               strong {{ $t("Vuetify.Home.getStarted") }}
-            div version 1.0.0-alpha.1
+            div version {{ $store.state.currentVersion }}
 
     section#features
       v-container
@@ -152,7 +152,7 @@
 
 <script>
   // Components
-  import HomeFooter from '@/components/HomeFooter'
+  import HomeFooter from '@/components/misc/HomeFooter'
 
   // Utilities
   import { mapState } from 'vuex'

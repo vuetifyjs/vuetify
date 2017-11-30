@@ -4,8 +4,6 @@
 
 <script>
   export default {
-    name: 'section-text',
-
     props: {
       value: {
         type: String,

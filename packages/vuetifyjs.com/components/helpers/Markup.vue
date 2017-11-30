@@ -60,7 +60,7 @@
 </script>
 
 <style lang="stylus">
-  @import '../node_modules/vuetify/src/stylus/settings/_colors.styl'
+  @import '../../node_modules/vuetify/src/stylus/settings/_colors.styl'
 
   .markup
     font-size: 1.2rem

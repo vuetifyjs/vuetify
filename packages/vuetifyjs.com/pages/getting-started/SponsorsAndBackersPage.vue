@@ -1,5 +1,5 @@
 <template lang="pug">
-  page
+  doc-view
     template(slot-scope="{ namespace }")
       section#sponsors-and-backers
         section-head(value="GettingStarted.SponsorsAndBackers.backersHeader")
