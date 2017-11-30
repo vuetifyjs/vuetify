@@ -18,3 +18,37 @@ npm install
 
 npm run dev
 ```
+
+<h2>Running with local Vuetify</h2>
+
+<h3>Run Vuetify</h3>
+
+``` bash
+git clone https://github.com/vuetifyjs/vuetify.git
+
+# yarn
+yarn
+
+# npm
+npm install
+
+yarn link
+
+npm run watch
+```
+
+<h3>Link the docs</h3>
+
+``` bash
+git clone https://github.com/vuetifyjs/vuetify.git
+
+# yarn
+yarn
+
+# npm
+npm install
+
+yarn link vuetify
+
+npm run dev
+```
