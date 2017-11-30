@@ -22,23 +22,47 @@
           v-tabs-bar.grey.lighten-3.px-3
             v-tabs-slider(color="primary")
             v-tabs-item(
-              v-for="(p, i) in tabs"
-              v-bind:href="`#${p}`"
-              v-bind:key="i"
-            ) {{ p }}
+              v-for="(tab, i) in tabs"
+              :href="`#${tab}`"
+              :key="i"
+              v-if="hasTab(tab)"
+            ) {{ tab }}
+          v-card
+            v-card-title
+              v-select(
+                label="Component"
+                hide-details
+                single-line
+                v-bind:items="components"
+                v-model="current"
+                auto
+                :disabled="components.length < 2"
+              )
+              v-spacer
+              v-spacer.hidden-sm-and-down
+              v-text-field(
+                append-icon="search"
+                label="Search..."
+                single-line
+                hide-details
+                v-model="search"
+              )
           v-tabs-items
             v-tabs-content(
-              v-for="(p, i) in tabs"
-              v-bind:id="p"
-              v-bind:key="i"
+              v-for="(tab, i) in tabs"
+              :id="tab"
+              :key="i"
             )
-              parameters(
-                v-bind:headers="headers[p]"
-                v-bind:type="p"
-                v-bind:api="api"
-                v-bind:namespace="namespace"
-                v-bind:components="components"
-              )
+              v-card(flat)
+                parameters(
+                  :headers="headers[tab]"
+                  :items="items"
+                  :namespace="namespace"
+                  :search="search"
+                  :target="current"
+                  :type="tab"
+                  v-if="hasTab(tab)"
+                )
 
       slot(name="top")
       section(v-if="examples.length > 1")#examples
@@ -68,6 +92,7 @@
 
     data () {
       return {
+        current: null,
         id: '',
         headers: {
           props: [
@@ -89,7 +114,8 @@
             { text: this.$t('Generic.Pages.description'), value: 'description', align: 'left' }
           ]
         },
-        tab: null,
+        search: null,
+        tab: 'props',
         tabs: ['props', 'slots']
       }
     },
@@ -102,11 +128,6 @@
       ...mapState({
         api: state => state.api
       }),
-      component () {
-        if (this.data.component) return this.data.component
-
-        return this.data.components[0]
-      },
       components () {
         let components = (this.data.components || []).slice()
 
@@ -116,8 +137,12 @@
 
         return components
       },
-      computedTabs () {
-        return this.tabs.filter(tab => this.hasTab(tab))
+      currentApi () {
+        return this.api[this.current] || {
+          props: [],
+          slots: [],
+          scopedSlots: []
+        }
       },
       examples () {
         const examples = this.data.examples || {}
@@ -131,6 +156,18 @@
       folder () {
         return this.data.folder || this.$route.params.component
       },
+      extra () {
+        const component = capitalize(this.$route.params.component)
+        const section = capitalize(this.$route.params.section)
+        const props = `${section}.${component}.extra`
+
+        return this.$te(props)
+          ? this.$t(props)[0]
+          : {}
+      },
+      items () {
+        return this.currentApi[this.tab]
+      },
       toc () {
         return this.$t(`Generic.Pages.toc`)
       },
@@ -139,9 +176,15 @@
       }
     },
 
+    created () {
+      if (this.components.length) {
+        this.current = this.components[0]
+      }
+    },
+
     methods: {
       hasTab (tab) {
-        return true // TODO: setup this functionality
+        return this.currentApi[tab].length > 0
       }
     }
   }
