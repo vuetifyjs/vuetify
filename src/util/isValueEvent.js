@@ -1,4 +1,4 @@
-import isValueAllowed from './isValueAllowed
+import isValueAllowed from './isValueAllowed'
 
 export default (value, events) => {
   
