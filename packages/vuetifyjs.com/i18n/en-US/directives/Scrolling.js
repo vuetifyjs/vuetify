@@ -8,7 +8,7 @@ export default {
       desc: 'The default behavior is to bind to the window. If no additional configuration options are needed, you can simple pass your callback function.'
     },
     options: {
-      header: 'Scroll w/ options',
+      header: 'Scroll with options',
       desc: 'For a more fine tuned approach, you can designate the target to bind the scroll event listener.'
     }
   }],
