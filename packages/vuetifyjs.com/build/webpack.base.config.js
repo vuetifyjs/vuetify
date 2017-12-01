@@ -7,6 +7,8 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const isProd = process.env.NODE_ENV === 'production'
 const resolve = (file) => path.resolve(__dirname, file)
 
+let plugins = []
+
 module.exports = {
   devtool: isProd
     ? false
@@ -39,12 +41,15 @@ module.exports = {
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
-          use: ['css-loader']
+          loader: 'css-loader',
+          options: {
+            minimize: isProd
+          }
         })
       },
       {
         test: /\.styl$/,
-        loader: ['style-loader', 'css-loader', 'stylus-loader']
+        loader: ['style-loader', `css-loader?minimize=${isProd}`, 'stylus-loader']
       },
       {
         test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)(\?.*)?$/,
@@ -60,14 +65,18 @@ module.exports = {
     maxEntrypointSize: 300000,
     hints: isProd ? 'warning' : false
   },
-  plugins: [
-    new ExtractTextPlugin({
-      filename: 'common.[chunkhash].css'
-    }),
-    isProd
-      ? new webpack.optimize.UglifyJsPlugin({
-        compress: { warnings: false }
-      })
-      : new FriendlyErrorsPlugin()
-  ]
+  plugins
 }
+
+plugins.push(
+  new ExtractTextPlugin({
+    filename: 'common.[chunkhash].css'
+  }),
+  new FriendlyErrorsPlugin()
+)
+
+isProd && plugins.push(
+  new webpack.optimize.UglifyJsPlugin({
+    compress: { warnings: false }
+  })
+)
