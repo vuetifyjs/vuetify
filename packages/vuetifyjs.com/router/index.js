@@ -42,6 +42,7 @@ export function createRouter () {
         route('/layout/alignment', 'layout/Alignment'),
         route('/layout/display', 'layout/Display'),
         route('/layout/elevation', 'layout/Elevation'),
+        route('/layout/sandbox', 'layout/Sandbox'),
         // Base Styles
         route('/style/colors', 'style/Colors'),
         route('/style/theme', 'style/Theme'),

@@ -3,7 +3,6 @@
     <v-navigation-drawer
       v-model="primaryDrawer.model"
       :permanent="primaryDrawer.type === 'permanent'"
-      :persistent="primaryDrawer.type === 'persistent'"
       :temporary="primaryDrawer.type === 'temporary'"
       :clipped="primaryDrawer.clipped"
       :floating="primaryDrawer.floating"
@@ -71,7 +70,7 @@
       dark: true,
       drawers: ['Permanent', 'Persistent', 'Temporary'],
       primaryDrawer: {
-        model: true,
+        model: null,
         type: 'persistent',
         clipped: false,
         floating: false,
