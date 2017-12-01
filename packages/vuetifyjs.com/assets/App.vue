@@ -1,11 +1,14 @@
 <template lang="pug">
   v-fade-transition(appear)
-    v-app(v-cloak)
+    v-app(v-cloak v-if="!examples")
       app-drawer
       app-toolbar
       app-view
       app-footer
       app-fab
+
+    div(v-else)#app
+      router-view
 </template>
 
 <script>
@@ -28,6 +31,12 @@
     },
 
     mixins: [Meta],
+
+    computed: {
+      examples () {
+        return !!this.$route.params.example
+      }
+    },
 
     watch: {
       $route (current, previous) {
