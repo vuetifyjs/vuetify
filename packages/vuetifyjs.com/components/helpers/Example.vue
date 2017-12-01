@@ -13,9 +13,9 @@
     //- Description
     markdown(v-if="desc" :source="desc")
 
-    v-card.mt-4
+    v-card(:class="[readonly ? 'elevation-0' : '']").mt-4
       //- Example options
-      v-toolbar(flat dense card).pr-1
+      v-toolbar(flat dense card v-if="!readonly").pr-1
         v-spacer
         v-tooltip(top v-if="hasInverted")
           v-btn(icon slot="activator" @click="invertedProxy = !invertedProxy")
@@ -51,9 +51,9 @@
       //- Example markup
       v-expansion-panel.elevation-0
         v-expansion-panel-content(v-model="panel")
-          v-divider
+          v-divider(v-if="!readonly")
           v-tabs(ref="tabs" :scrollable="false")
-            v-tabs-bar(class="pl-0").grey.lighten-4.px-3
+            v-tabs-bar(class="pl-0" v-show="!readonly").grey.lighten-4.px-3
               v-tabs-slider(color="accent")
               v-tabs-item(
                 v-for="tab in tabs"
@@ -119,7 +119,8 @@
       desc: String,
       inverted: Boolean,
       newIn: String,
-      id: String
+      id: String,
+      readonly: Boolean
     },
 
     computed: {
@@ -142,7 +143,7 @@
     },
 
     created () {
-      if (this.active) {
+      if (this.active || this.readonly) {
         this.panel = true
       }
     },

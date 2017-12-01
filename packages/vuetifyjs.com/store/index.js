@@ -33,7 +33,7 @@ export function createStore () {
           items: [
             { href: 'pre-defined', title: 'Pre-defined', badge: 'updated' },
             { href: 'spacing', title: 'Spacing' },
-            { href: 'alignment', title: 'Alignment' },
+            { href: 'alignment', title: 'Text alignment' },
             { href: 'display', title: 'Display' },
             { href: 'elevation', title: 'Elevation' },
             { href: 'sandbox', title: 'Sandbox' }

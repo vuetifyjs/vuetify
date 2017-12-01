@@ -28,7 +28,7 @@
 
       section#examples
         section-head(value="Generic.Pages.examples")
-        markup(lang="stylus" readonly)
+        markup(lang="stylus")
           |$spacer := 16px
           |
           |.mt-5
@@ -48,7 +48,7 @@
       section#horizontal-centering
         section-head(:value="`${namespace}.horizontalHeader`")
         example(
-          active
+          readonly
           file="spacing/horizontal"
           :desc="$t(`${namespace}.horizontalText`)"
         )
