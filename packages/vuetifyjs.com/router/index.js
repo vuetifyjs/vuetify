@@ -41,6 +41,7 @@ export function createRouter () {
         route('/layout/spacing', 'layout/Spacing'),
         route('/layout/alignment', 'layout/Alignment'),
         route('/layout/display', 'layout/Display'),
+        route('/layout/elevation', 'layout/Elevation'),
         // Base Styles
         route('/style/colors', 'style/Colors'),
         route('/style/theme', 'style/Theme'),
