@@ -115,29 +115,22 @@ test('Vslider.vue', ({ mount }) => {
       }
     })
 
-    const keydown = keyCode => {
-      const eventObject = document.createEvent('Event')
-      eventObject.initEvent('keydown', true, true)
-      eventObject.keyCode = keyCode
-      wrapper.element.dispatchEvent(eventObject)
-    }
-
     const input = jest.fn()
     wrapper.vm.$on('input', input)
 
-    keydown(32) // space
+    wrapper.trigger('keydown.space')
     expect(input).not.toBeCalled()
-    keydown(37) // left
+    wrapper.trigger('keydown.left')
     expect(input).toBeCalledWith(49)
-    keydown(39) // right
+    wrapper.trigger('keydown.right')
     expect(input).toBeCalledWith(51)
-    keydown(36) // home
+    wrapper.trigger('keydown.home')
     expect(input).toBeCalledWith(0)
-    keydown(35) // end
+    wrapper.trigger('keydown.end')
     expect(input).toBeCalledWith(100)
-    keydown(33) // pageUp
+    wrapper.trigger('keydown.pageup')
     expect(input).toBeCalledWith(40)
-    keydown(34) // pageDown
+    wrapper.trigger('keydown.pagedown')
     expect(input).toBeCalledWith(60)
 
     expect(warning).toHaveBeenTipped()
