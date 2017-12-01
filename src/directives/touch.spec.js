@@ -12,7 +12,7 @@ test('touch.js', ({ mount }) => {
           value
         }]
       })
-    })).element
+    }))
   }
 
   it('should call directive handlers', async () => {
@@ -73,21 +73,11 @@ test('touch.js', ({ mount }) => {
 
   it('should unbind', async () => {
     const start = jest.fn()
-    const wrapper = mount(Vue.component('test', {
-      directives: { Touch },
-      render: h => h('div', {
-        directives: [{
-          name: 'touch',
-          value: {
-            start
-          }
-        }]
-      })
-    }))
+    const wrapper = create({ start })
 
     Touch.unbind(wrapper.element, { value: {} }, { context: wrapper.vm })
 
-    touch(wrapper.element).start(0, 0)
+    touch(wrapper).start(0, 0)
     expect(start.mock.calls).toHaveLength(0)
   })
 })

@@ -28,11 +28,11 @@ test('VSwitch.js', ({ mount }) => {
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
-    touch(wrapper.find('.input-group--selection-controls__ripple')[0].element).start(0, 0).end(20, 0)
+    touch(wrapper.find('.input-group--selection-controls__ripple')[0]).start(0, 0).end(20, 0)
     expect(change).toBeCalledWith(true)
 
     wrapper.setProps({ inputValue: true })
-    touch(wrapper.find('.input-group--selection-controls__ripple')[0].element).start(0, 0).end(-20, 0)
+    touch(wrapper.find('.input-group--selection-controls__ripple')[0]).start(0, 0).end(-20, 0)
     expect(change).toBeCalledWith(false)
   })
 
