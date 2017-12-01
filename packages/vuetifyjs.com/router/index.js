@@ -40,6 +40,7 @@ export function createRouter () {
         route('/layout/pre-defined', 'layout/PreDefined'),
         route('/layout/spacing', 'layout/Spacing'),
         route('/layout/alignment', 'layout/Alignment'),
+        route('/layout/display', 'layout/Display'),
         // Base Styles
         route('/style/colors', 'style/Colors'),
         route('/style/theme', 'style/Theme'),
