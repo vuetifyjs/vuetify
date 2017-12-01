@@ -1,12 +1,8 @@
 <template>
-  <v-layout row wrap>
-    <v-flex md12 lg4>
-      <v-date-picker v-model="picker"></v-date-picker>
-    </v-flex>
-    <v-flex md12 lg8 class="hidden-xs-only">
-      <v-date-picker v-model="picker2" landscape></v-date-picker>
-    </v-flex>
-  </v-layout>
+  <div>
+    <v-checkbox label="Landscape" v-model="landscape"></v-checkbox>
+    <v-date-picker v-model="picker" :landscape="landscape"></v-date-picker>
+  </div>
 </template>
 
 <script>
@@ -14,7 +10,7 @@
     data () {
       return {
         picker: null,
-        picker2: null
+        landscape: false
       }
     }
   }

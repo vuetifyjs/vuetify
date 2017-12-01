@@ -4,12 +4,8 @@ export default {
   components: ['v-date-picker', 'v-time-picker'],
   examples: [{
     dateLight: {
-      header: "Date pickers - Light",
+      header: "Date pickers",
       desc: 'Date pickers come in two orientation variations, portrait **(default)** and landscape.'
-    },
-    dateDark: {
-      header: "Date pickers - Dark",
-      desc: 'Date pickers come in a dark variant which utilizes the applications primary accent color.'
     },
     dateColorable: {
       header: "Date pickers - Colors",
@@ -28,12 +24,8 @@ export default {
       desc: 'The date picker supports internationalization through the JavaScript Date object. Specify a BCP 47 language tag using the <code>locale</code> prop, and then set the first day of the week with the <code>first-day-of-week</code> prop.'
     },
     monthLight: {
-      header: "Month pickers - Light",
+      header: "Month pickers",
       desc: 'Month pickers come in two orientation variations, portrait **(default)** and landscape.'
-    },
-    monthDark: {
-      header: "Month pickers - Dark",
-      desc: 'Month pickers come in a dark variant which utilizes the applications primary accent color.'
     },
     monthColorable: {
       header: "Month pickers - Colors",
@@ -52,15 +44,11 @@ export default {
       desc: 'The month picker supports internationalization through the JavaScript Date object. Specify a BCP 47 language tag using the <code>locale</code> prop, and then set the first day of the week with the <code>first-day-of-week</code> prop.'
     },
     timeLight: {
-      header: "Time pickers - Light",
+      header: "Time pickers",
       desc: 'Time pickers have the light theme enabled by default.'
     },
-    timeDark: {
-      header: "Time pickers - Dark",
-      desc: 'An alternate dark theme can be used for dark theme applications.'
-    },
     timeColorable: {
-      header: "Date pickers - Colors",
+      header: "Time pickers - Colors",
       desc: 'Time picker colors can be set using the <code>color</code> and <code>header-color</code> props. If <code>header-color</code> prop is not provided header will use the <code>color</code> prop value.'
     },
     timeDialogAndMenu: {
