@@ -8,7 +8,7 @@
     :scroll-off-screen="isManualScrolling"
     ref="toolbar"
   )#app-toolbar
-    v-toolbar-side-icon(@click="$store.commit('app/DRAWER_TOGGLE')").hidden-lg-and-up
+    v-toolbar-side-icon(@click="$store.commit('app/DRAWER_TOGGLE')" v-if="!stateless").hidden-lg-and-up
     router-link(to="/").ml-3
       img(
         src="/static/v-alt.svg"
@@ -63,14 +63,15 @@
 
     computed: {
       ...mapState({
-        releases: state => state.releases
+        releases: state => state.releases,
+        stateless: state => state.stateless
       })
     },
 
     watch: {
       $route (current) {
         const isManualScrolling = current.path === '/'
-        const duration = !isManualScrolling ? 400 : 0
+        const duration = isManualScrolling ? 0 : 400
 
         setTimeout(() => {
           this.isManualScrolling = isManualScrolling

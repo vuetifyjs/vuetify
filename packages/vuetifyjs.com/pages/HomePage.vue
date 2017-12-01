@@ -2,7 +2,7 @@
   div#home
     v-jumbotron(
       gradient="to right top, #1867c0, #19e5f4"
-      height="50vh"
+      height="auto"
       dark
     )
       v-container(fill-height)
@@ -134,6 +134,7 @@
                 img(
                   :src="`/static/doc-images/${supporter.src}`"
                   :height="supporter.size || 'auto'"
+                  :style="{ maxHeight: `${supporter.size}px` }"
                 ).supporter
             v-flex(xs12).text-xs-center.mt-5
               v-btn(to="/getting-started/sponsors-and-backers" large).white.primary--text {{ $t("Vuetify.Home.becomeSponsor") }}
@@ -141,11 +142,9 @@
 
     section#callout
       v-container
-        v-container
-          v-layout(row wrap)
-            v-flex(xs12 md8 lg10)
-              img(src="/static/v-alt.svg" height="50px")
-              h2.mt-4.mb-5 {{ $t("Vuetify.Home.callout") }}
+        v-layout(flex xs12 md8 lg10 align-center justify-center mx-auto wrap)
+          img(src="/static/v-alt.svg" height="75px")
+          h2.mx-4 {{ $t("Vuetify.Home.callout") }}
 
     home-footer
 </template>
@@ -399,8 +398,9 @@
         color #666666
         font-weight 300
         margin-bottom 1.5em
-      img
-        max-width: 100%
+    .supporter
+      max-width: 100%
+      height: auto
 
   #callout
     position: relative
@@ -416,11 +416,12 @@
       right 0
       bottom 0
       height 100vw
-      background url('/static/doc-images/slant-footer.svg') no-repeat  50% 100%
+      min-height 100%
+      background url('/static/doc-images/slant-footer.svg') no-repeat 50% 100%
       background-size 100%
 
       @media $display-breakpoints.xs-only
-        background-position 50% 105%
+        background-position 50% 100%
         background-size 375%
 
       @media $display-breakpoints.sm-only
