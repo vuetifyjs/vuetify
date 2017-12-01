@@ -39,6 +39,7 @@ export function createRouter () {
         // Application Layout
         route('/layout/pre-defined', 'layout/PreDefined'),
         route('/layout/spacing', 'layout/Spacing'),
+        route('/layout/alignment', 'layout/Alignment'),
         // Base Styles
         route('/style/colors', 'style/Colors'),
         route('/style/theme', 'style/Theme'),
