@@ -101,11 +101,8 @@ theme(button, "btn")
     width: $button-height
     min-width: 0
 
-    .btn__content
-      padding: 0
-
-      &:before
-        border-radius: 50%
+    .btn__content:before
+      border-radius: 50%
 
     &.btn--small
       width: $button-small-height
@@ -268,6 +265,10 @@ theme(button, "btn")
 
     .btn__content
       padding: $button-large-padding
+
+.btn--icon
+  .btn__content
+    padding: 0
 
 
 /** Loader */
