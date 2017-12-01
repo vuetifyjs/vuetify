@@ -9,8 +9,8 @@
       td(
         v-for="(opt, i) in item"
         :key="i"
-        v-html="opt"
       )
+        markdown(:source="opt")
 </template>
 
 <script>
@@ -43,6 +43,10 @@
         return this.items.map(item => {
           const newItem = {}
 
+          if (item !== Object(item)) {
+            item = { name: item }
+          }
+
           Object.keys(item).map(key => {
             const fn = this[`gen${capitalize(key)}`]
 
@@ -53,7 +57,7 @@
             }
           })
 
-          newItem.desc = this.genDescription(item.name)
+          newItem.desc = item.desc || this.genDescription(item.name)
 
           return newItem
         })
@@ -98,4 +102,7 @@
   .component-parameters
     code
       white-space: nowrap
+
+    p
+      margin-bottom: 0
 </style>
