@@ -14,6 +14,7 @@ export default {
 
   created () {
     if (typeof document === 'undefined') {
+      this.$ssrContext && !this.$ssrContext._styles && (this.$ssrContext._styles = {})
       return this.$ssrContext && this.$ssrContext._styles &&
         (this.$ssrContext._styles['vuetify-theme-stylesheet'] = {
           ids: ['vuetify-theme-stylesheet'],
