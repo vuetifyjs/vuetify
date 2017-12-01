@@ -37,7 +37,7 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - [Integra CCS](https://www.integraccs.com/)
 - Joel Hatch
 - Pierre Vanhulst
-- David Briscese
+- Davide Briscese
 - Juha Vehnia
 
 ### $10+
