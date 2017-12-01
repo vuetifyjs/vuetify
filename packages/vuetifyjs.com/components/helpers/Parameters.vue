@@ -4,6 +4,8 @@
     :search="search"
     :items="computedItems"
     :pagination.sync="pagination"
+    :hide-actions="this.items.length <= 10"
+    :rows-per-page-items="[10, 25, 'all']"
   ).component-parameters
     template(slot="items" slot-scope="{ item }")
       td(
