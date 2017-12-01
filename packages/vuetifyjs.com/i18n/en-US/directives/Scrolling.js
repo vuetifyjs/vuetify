@@ -12,8 +12,25 @@ export default {
       desc: 'For a more fine tuned approach, you can designate the target to bind the scroll event listener.'
     }
   }],
-  props: {
-    '[up, down, left, right]': 'Assign a callback based upon a swipe direction. Pairing x-axis and y-axis callbacks is not recommended at this time',
-    '[move, start, end]': 'Assign a callback when the touch event starts, ends, and while it is in progress'
-  }
+  params: [{
+    'v-scroll': [
+      {
+        name: 'callback',
+        type: 'Function',
+        default: 'null'
+      },
+      {
+        name: 'target',
+        type: 'String',
+        default: 'null',
+        desc: 'The DOM element to bind the scroll event listener'
+      },
+      {
+        name: 'debounce',
+        type: 'Object',
+        default: '{ _passive_: **true** }',
+        desc: 'The options to be passed to the event listener of the binding target'
+      }
+    ]
+  }]
 }

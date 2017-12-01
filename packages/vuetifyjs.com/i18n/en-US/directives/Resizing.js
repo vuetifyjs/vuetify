@@ -8,15 +8,24 @@ export default {
       desc: 'Resize your window and observe the values change..'
     }
   }],
-  extra: [{
-    'v-resize': {
-      props: [
-        {
-          default: 'undefined',
-          name: 'cb',
-          type: 'Function'
-        }
-      ]
-    }
+  params: [{
+    'v-resize': [
+      {
+        name: 'callback',
+        type: 'Function',
+        default: 'null'
+      },
+      {
+        name: 'quiet',
+        type: 'Boolean',
+        default: 'false',
+        desc: 'Do not invoke callback method when directive is bound'
+      },
+      {
+        name: 'debounce',
+        type: 'Number',
+        default: '200'
+      }
+    ]
   }]
 }

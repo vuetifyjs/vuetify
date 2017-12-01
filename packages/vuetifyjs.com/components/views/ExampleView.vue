@@ -85,7 +85,7 @@
 <script>
   // Utilities
   import { mapState } from 'vuex'
-  import { capitalize, kebab } from '@/util/helpers'
+  import { camel, capitalize, kebab } from '@/util/helpers'
 
   export default {
     inheritAttrs: false,
@@ -95,6 +95,12 @@
         current: null,
         id: '',
         headers: {
+          params: [
+            { text: this.$t('Generic.Pages.name'), value: 'name', align: 'left' },
+            { text: this.$t('Generic.Pages.type'), value: 'type', align: 'left' },
+            { text: this.$t('Generic.Pages.default'), value: 'default', align: 'left' },
+            { text: this.$t('Generic.Pages.description'), value: 'desc', align: 'left' }
+          ],
           props: [
             { text: this.$t('Generic.Pages.options'), value: 'name', align: 'left' },
             { text: this.$t('Generic.Pages.type'), value: 'type', align: 'left' },
@@ -115,8 +121,8 @@
           ]
         },
         search: null,
-        tab: 'props',
-        tabs: ['props', 'slots']
+        tab: null,
+        tabs: ['props', 'slots', 'params', 'events', 'functional']
       }
     },
 
@@ -138,11 +144,28 @@
         return components
       },
       currentApi () {
-        return this.api[this.current] || {
+        const api = this.api[this.current] || {
+          params: [],
           props: [],
           slots: [],
           scopedSlots: []
         }
+
+        const add = `${this.namespace}`
+
+        Object.keys(api).forEach(key => {
+          const lang = `${add}.${key}`
+
+          if (!this.$te(lang)) return
+
+          const items = this.$t(lang)[0]
+
+          if (!items[this.current]) return
+
+          api[key] = api[key].concat(items[this.current])
+        })
+
+        return api
       },
       examples () {
         const examples = this.data.examples || {}
@@ -156,14 +179,11 @@
       folder () {
         return this.data.folder || this.$route.params.component
       },
-      extra () {
-        const component = capitalize(this.$route.params.component)
-        const section = capitalize(this.$route.params.section)
-        const props = `${section}.${component}.extra`
+      namespace () {
+        const component = camel(this.$route.params.component)
+        const section = camel(this.$route.params.section)
 
-        return this.$te(props)
-          ? this.$t(props)[0]
-          : {}
+        return `${section}.${component}`
       },
       items () {
         return this.currentApi[this.tab]
@@ -184,7 +204,7 @@
 
     methods: {
       hasTab (tab) {
-        return this.currentApi[tab].length > 0
+        return (this.currentApi[tab] || []).length > 0
       }
     }
   }

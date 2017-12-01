@@ -80,6 +80,15 @@ export function createStore () {
             { href: 'expansion-panels', title: 'Expansion panels' },
             { href: 'footer', title: 'Footer' },
             {
+              title: 'Grid & breakpoints',
+              group: '/grid',
+              namespace: '/components',
+              items: [
+                { href: 'grid', title: 'Grid' },
+                { href: 'grid-lists', title: 'Grid lists' },
+              ]
+            },
+            {
               title: 'Inputs & controls',
               group: '/(forms|selects|selection|text-fields)',
               namespace: '/components',
@@ -88,15 +97,6 @@ export function createStore () {
                 { href: 'selects', title: 'Selects' },
                 { href: 'selection-controls', title: 'Selection controls' },
                 { href: 'text-fields', title: 'Text fields' }
-              ]
-            },
-            {
-              title: 'Grid & breakpoints',
-              group: '/grid',
-              namespace: '/components',
-              items: [
-                { href: 'grid', title: 'Grid' },
-                { href: 'grid-lists', title: 'Grid lists' },
               ]
             },
             { href: 'icons', title: 'Icons' },

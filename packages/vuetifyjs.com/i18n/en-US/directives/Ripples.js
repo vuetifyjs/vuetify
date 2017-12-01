@@ -1,7 +1,7 @@
 export default {
   header: 'Ripple directive',
   headerText: 'The `v-ripple` directive is used to show action from a user. It can be applied to any block level element. Numerous components come with the ripple directive built in, such as the `v-btn`, `v-tabs-item` and many more.',
-  components: ['v-resize'],
+  components: ['v-ripple'],
   examples: [{
     buttons: {
       header: 'Default',
@@ -32,8 +32,20 @@ export default {
       desc: 'Add the ripple effect to a standard HTML element. This can be enabled with the `v-ripple` HTML attribute.'
     }
   }],
-  props: {
-    '[up, down, left, right]': 'Assign a callback based upon a swipe direction. Pairing x-axis and y-axis callbacks is not recommended at this time',
-    '[move, start, end]': 'Assign a callback when the touch event starts, ends, and while it is in progress'
-  }
+  props: [{
+    'v-ripple': [
+      {
+        name: 'class',
+        type: 'String',
+        default: 'undefined',
+        desc: 'Applies a custom class to the ripple, used for changing color'
+      },
+      {
+        name: 'center',
+        type: 'Boolean',
+        default: 'False',
+        desc: 'Force ripple to originate from the center of the target'
+      }
+    ]
+  }]
 }
