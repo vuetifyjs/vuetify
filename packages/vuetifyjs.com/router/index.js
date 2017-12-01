@@ -57,6 +57,7 @@ export function createRouter () {
         route('/guides/server-side-rendering', 'guides/SSR'),
         route('/guides/a-la-carte', 'guides/ALaCarte'),
         // Dynamic
+        route('/examples/:example+', 'examples/Example'),
         route('/:section/:component', 'components/Doc'),
         // Global redirect for 404
         { path: '*', redirect: '/' }
