@@ -39,7 +39,7 @@ export default {
       uninverted: true
     },
     tags: {
-      header: 'Tags',
+      header: 'Html tags',
       desc: 'Sometimes you will want to specify a layout item as a specific tag, such as a <code>section</code> or <code>li</code> element.'
     }
   }],
