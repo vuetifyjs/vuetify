@@ -1,12 +1,8 @@
 import { test } from '~util/testing'
-import { mount } from 'avoriaz'
 import VSelect from '~components/VSelect'
 import VMenu from '~components/VMenu'
 
-test('VSelect - combobox', () => {
-  const backspace = new Event('keydown')
-  backspace.keyCode = 8
-
+test('VSelect - combobox', ({ mount }) => {
   it('should emit custom value on blur', async () => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,

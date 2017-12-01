@@ -1,21 +1,20 @@
 import Vue from 'vue'
 import Touch from './touch'
-import { mount } from 'avoriaz'
 import { test, touch } from '~util/testing'
 
-function create(value) {
-  return mount(Vue.component('test', {
-    directives: { Touch },
-    render: h => h('div', {
-      directives: [{
-        name: 'touch',
-        value
-      }]
-    })
-  })).element
-}
+test('touch.js', ({ mount }) => {
+  function create(value) {
+    return mount(Vue.component('test', {
+      directives: { Touch },
+      render: h => h('div', {
+        directives: [{
+          name: 'touch',
+          value
+        }]
+      })
+    }))
+  }
 
-test('touch.js', () => {
   it('should call directive handlers', async () => {
     const down = jest.fn()
     touch(create({ down })).start(0, 0).end(0, 20)
@@ -74,21 +73,11 @@ test('touch.js', () => {
 
   it('should unbind', async () => {
     const start = jest.fn()
-    const wrapper = mount(Vue.component('test', {
-      directives: { Touch },
-      render: h => h('div', {
-        directives: [{
-          name: 'touch',
-          value: {
-            start
-          }
-        }]
-      })
-    }))
+    const wrapper = create({ start })
 
     Touch.unbind(wrapper.element, { value: {} }, { context: wrapper.vm })
 
-    touch(wrapper.element).start(0, 0)
+    touch(wrapper).start(0, 0)
     expect(start.mock.calls).toHaveLength(0)
   })
 })

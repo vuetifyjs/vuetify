@@ -1,11 +1,9 @@
 import Vue from 'vue'
-import { compileToFunctions } from 'vue-template-compiler'
 import { test } from '~util/testing'
-import { mount } from 'avoriaz'
 import VDataIterator from './VDataIterator'
 import VBtn from '~components/VBtn'
 
-test('VDataIterator.js', () => {
+test('VDataIterator.js', ({ mount, compileToFunctions }) => {
   function dataIteratorTestData () {
     return {
       propsData: {

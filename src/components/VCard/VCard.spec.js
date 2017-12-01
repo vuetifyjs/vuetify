@@ -1,8 +1,7 @@
 import { test } from '~util/testing'
-import { mount } from 'avoriaz'
 import VCard from '~components/VCard'
 
-test('VCard.vue', () => {
+test('VCard.vue', ({ mount }) => {
   it('should render component and match snapshot', () => {
     const wrapper = mount(VCard)
 

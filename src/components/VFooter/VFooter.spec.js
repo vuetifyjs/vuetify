@@ -1,8 +1,7 @@
-import { test, functionalContext } from '~util/testing'
-import { mount } from 'avoriaz'
+import { test } from '~util/testing'
 import VFooter from './VFooter'
 
-test('VFooter.js', () => {
+test('VFooter.js', ({ mount, functionalContext }) => {
   it('should render component and match snapshot', () => {
     const wrapper = mount(VFooter)
 

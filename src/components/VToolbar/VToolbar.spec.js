@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import { test } from '~util/testing'
-import { mount } from 'avoriaz'
 import VToolbar from '~components/VToolbar'
 
-test('VToolbar.vue', () => {
+test('VToolbar.vue', ({ mount }) => {
   it('should render a colored toolbar', () => {
     const wrapper = mount(VToolbar, {
       propsData: {

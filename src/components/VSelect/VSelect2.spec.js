@@ -1,8 +1,7 @@
 import { test } from '~util/testing'
-import { mount } from 'avoriaz'
 import VSelect from '~components/VSelect'
 
-test('VSelect', () => {
+test('VSelect', ({ mount, compileToFunctions }) => {
   // Inspired by https://github.com/vuetifyjs/vuetify/pull/1425 - Thanks @kevmo314
   it('should open the select when focused and enter, space, up or down are pressed', async () => {
     const wrapper = mount(VSelect, {

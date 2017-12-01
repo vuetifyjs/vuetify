@@ -1,8 +1,7 @@
 import { test } from '~util/testing'
-import { mount } from 'avoriaz'
 import VSystemBar from '~components/VSystemBar'
 
-test('VSystemBar.vue', () => {
+test('VSystemBar.vue', ({ mount }) => {
   it('should render a colored system bar', () => {
     const wrapper = mount(VSystemBar, {
       propsData: {

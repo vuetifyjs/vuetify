@@ -1,9 +1,7 @@
-import { compileToFunctions } from 'vue-template-compiler'
 import { test } from '~util/testing'
-import { mount } from 'avoriaz'
 import VExpansionPanelContent from './VExpansionPanelContent'
 
-test('VExpansionPanelContent.js', () => {
+test('VExpansionPanelContent.js', ({ mount, compileToFunctions }) => {
   it('should render component and match snapshot', () => {
     const wrapper = mount(VExpansionPanelContent, {
       slots: {
