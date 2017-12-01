@@ -113,7 +113,9 @@
 
     section#sponsors-and-backers.my-5
       v-container
-        v-card
+        v-card(
+          :class="{ 'pa-5': $vuetify.breakpoint.mdAndUp, 'py-5 px-2': $vuetify.breakpoint.smAndDown }"
+        )
           h2.text-xs-center.text-md-left {{ $t("Vuetify.Home.proudlySponsoredBy") }}
           v-layout(row wrap justify-center align-center)
             template(v-for="(supporter, i) in supporters")
@@ -392,7 +394,7 @@
   #sponsors-and-backers
     .card
       z-index 1
-      padding: 2.5em 3em
+
       h2
         font-size 24px
         color #666666

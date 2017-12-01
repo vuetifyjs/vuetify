@@ -160,20 +160,21 @@ export function createStore () {
         diamond: [
           { 
             title: 'LMAX Exchange',
-            size: 80,
+            size: 70,
             href: 'https://careers.lmax.com/?utm_source=vuetify&utm_medium=logo-link&utm_campaign=lmax-careers',
             src: 'backers/lmax-exchange.png'
           },
           {
             title: 'Intygrate',
-            size: 80,
+            size: 70,
             href: 'http://intygrate.com/',
             src: 'backers/intygrate.png'
           }
         ],
         palladium: [
           { title: 'Eikos Partners', size: 50, href: 'http://www.eikospartners.com/', src: 'backers/eikos-partners.webp' },
-          { title: 'rateGenius', size: 50, href: 'https://application.rategenius.com/', src: 'backers/rate-genius.png' }
+          { title: 'rateGenius', size: 50, href: 'https://application.rategenius.com/', src: 'backers/rate-genius.png' },
+          { title: 'quitt.ch', size: 50, href: 'https://quitt.ch', src: 'backers/quitt.png' }
         ],
         gold: [
           { title: 'Deister Software', href: 'http://www.deister.es/', src: 'backers/deister-logo-light.png' },
