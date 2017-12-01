@@ -1,6 +1,5 @@
 import { VDatePickerYears } from '~components/VDatePicker'
 import { test } from '~util/testing'
-import { mount } from 'avoriaz'
 
 test('VDatePickerYears.js', ({ mount }) => {
   it('should render component and match snapshot', () => {

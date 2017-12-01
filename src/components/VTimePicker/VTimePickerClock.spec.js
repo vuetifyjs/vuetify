@@ -144,7 +144,7 @@ test('VTimePickerClock.js', ({ mount }) => {
     }
 
     const input = jest.fn()
-    const finger = touch(wrapper.element).start(0, 0)
+    const finger = touch(wrapper).start(0, 0)
     wrapper.vm.$on('input', input)
 
     finger.move(100, 50)

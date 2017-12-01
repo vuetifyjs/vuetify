@@ -1,9 +1,7 @@
-import { compileToFunctions } from 'vue-template-compiler'
 import { test } from '~util/testing'
-import { mount } from 'avoriaz'
 import VPicker from './VPicker'
 
-test('VPicker.js', () => {
+test('VPicker.js', ({ mount, compileToFunctions }) => {
   it('should render component without title and match snapshot', () => {
     const wrapper = mount(VPicker, {
       slots: {

@@ -1,7 +1,6 @@
 import { compileToFunctions } from 'vue-template-compiler'
 import { VDatePickerHeader } from '~components/VDatePicker'
 import { test } from '~util/testing'
-import { mount } from 'avoriaz'
 
 test('VDatePickerHeader.js', ({ mount }) => {
   it('should render component and match snapshot', () => {

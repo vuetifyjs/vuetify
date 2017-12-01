@@ -84,6 +84,11 @@ export default {
 
       return this.computedContentHeight + this.computedExtensionHeight
     },
+    computedMarginTop () {
+      if (!this.app) return 0
+
+      return this.$vuetify.application.bar
+    },
     classes () {
       return this.addBackgroundColorClassChecks({
         'toolbar': true,
@@ -125,6 +130,10 @@ export default {
 
       if (!this.isActiveProxy) {
         style.transform = `translateY(-${this.computedHeight}px)`
+      }
+
+      if (this.computedMarginTop) {
+        style.marginTop = `${this.computedMarginTop}px`
       }
 
       if (this.app) {

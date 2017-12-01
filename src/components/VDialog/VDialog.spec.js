@@ -1,9 +1,7 @@
 import VDialog from '~components/VDialog'
 import { test } from '~util/testing'
-import { mount } from 'avoriaz'
-import { compileToFunctions } from 'vue-template-compiler'
 
-test('VDialog.js', () => {
+test('VDialog.js', ({ mount, compileToFunctions }) => {
   it('should render component and match snapshot', () => {
     const wrapper = mount(VDialog)
 

@@ -1,9 +1,7 @@
-import { mount } from 'avoriaz'
-import { compileToFunctions } from 'vue-template-compiler'
 import VTooltip from '~components/VTooltip'
 import { test } from '~util/testing'
 
-test('VTooltip.js', () => {
+test('VTooltip.js', ({ mount, compileToFunctions }) => {
   it('should render component and match snapshot', async () => {
     const wrapper = mount(VTooltip, {
       propsData: {

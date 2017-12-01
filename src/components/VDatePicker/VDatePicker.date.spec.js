@@ -1,36 +1,35 @@
 import Vue from 'vue'
 import { test, touch } from '~util/testing'
-import { mount } from 'avoriaz'
 import VDatePicker from '~components/VDatePicker'
 import VMenu from '~components/VMenu'
 
-function createMenuPicker (mount, props) {
-  const wrapper = mount(Vue.component('test', {
-    components: {
-      VDatePicker,
-      VMenu
-    },
-    render (h) {
-      return h('v-menu', {
-        ref: 'menu'
-      }, [h('v-date-picker', {
-        props,
-        ref: 'picker'
-      })])
-    }
-  }))
+test('VDatePicker.js', ({ mount, compileToFunctions }) => {
+  function createMenuPicker (mount, props) {
+    const wrapper = mount(Vue.component('test', {
+      components: {
+        VDatePicker,
+        VMenu
+      },
+      render (h) {
+        return h('v-menu', {
+          ref: 'menu'
+        }, [h('v-date-picker', {
+          props,
+          ref: 'picker'
+        })])
+      }
+    }))
 
-  const menu = wrapper.vm.$refs.menu
-  menu.isActive = true
+    const menu = wrapper.vm.$refs.menu
+    menu.isActive = true
 
-  const picker = menu.$slots.default[0].context.$refs.picker
+    const picker = menu.$slots.default[0].context.$refs.picker
 
-  expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
 
-  return { wrapper, menu, picker }
-}
+    return { wrapper, menu, picker }
+  }
 
-test('VDatePicker.js', ({ mount }) => {
   it('should display the correct date in title and header', () => {
     const wrapper = mount(VDatePicker, {
       propsData: {
@@ -154,7 +153,7 @@ test('VDatePicker.js', ({ mount }) => {
       }
     })
 
-    const table = wrapper.find('.date-picker-table--date')[0].element
+    const table = wrapper.find('.date-picker-table--date')[0]
     touch(table).start(0, 0).end(20, 0)
     expect(wrapper.vm.tableDate).toBe('2013-04')
 

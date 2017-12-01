@@ -163,10 +163,10 @@ test('VCarousel.js', ({ mount }) => {
     const input = jest.fn()
     wrapper.vm.$children[0].$on('input', input)
 
-    touch(wrapper.element).start(0, 0).end(-20, 0)
+    touch(wrapper).start(0, 0).end(-20, 0)
     await wrapper.vm.$nextTick()
     expect(input).toBeCalledWith(1)
-    touch(wrapper.element).start(0, 0).end(20, 0)
+    touch(wrapper).start(0, 0).end(20, 0)
     await wrapper.vm.$nextTick()
     expect(input).toBeCalledWith(0)
   })

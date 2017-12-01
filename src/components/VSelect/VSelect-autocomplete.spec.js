@@ -1,8 +1,7 @@
 import { test } from '~util/testing'
-import { mount } from 'avoriaz'
 import VSelect from '~components/VSelect'
 
-test('VSelect - autocomplete', () => {
+test('VSelect - autocomplete', ({ mount }) => {
   it('should have -1 tabindex when disabled', () => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,

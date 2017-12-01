@@ -1,8 +1,7 @@
 import VIcon from '~components/VIcon'
 import { test, functionalContext } from '~util/testing'
-import { mount } from 'avoriaz'
 
-test('VIcon.js', () => {
+test('VIcon.js', ({ mount, compileToFunctions }) => {
   it('should render component', () => {
     const context = functionalContext({}, 'add')
     const wrapper = mount(VIcon, context)

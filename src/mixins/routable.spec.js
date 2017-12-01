@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import { test } from '~util/testing'
-import { mount } from 'avoriaz'
 import Routable from '~mixins/routable'
 
-test('applicationable.js', () => {
+test('routable.js', ({ mount }) => {
   it('should generate exact route link with to="/" and undefined exact', async () => {
     const wrapper = mount({
       mixins: [ Routable ],

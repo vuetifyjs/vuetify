@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import { test } from '~util/testing'
-import { mount } from 'avoriaz'
 import VSelect from '~components/VSelect'
 
-test('VSelect', () => {
+test('VSelect', ({ mount, compileToFunctions }) => {
   it('should return numeric 0', () => {
     const item = { value: 0, text: '0' }
     const wrapper = mount(VSelect, {
