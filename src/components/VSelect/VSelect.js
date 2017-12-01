@@ -79,7 +79,7 @@ export default {
 
   data () {
     return {
-      cachedItems: [],
+      cachedItems: this.cacheItems ? this.items : [],
       content: {},
       defaultColor: 'primary',
       inputValue: (this.multiple || this.tags) && !this.value ? [] : this.value,

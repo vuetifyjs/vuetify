@@ -251,6 +251,24 @@ test('VSelect - autocomplete', ({ mount }) => {
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
 
+  it('should cache items passed via prop', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        autocomplete: true,
+        cacheItems: true,
+        items: [1, 2, 3, 4]
+      }
+    })
+
+    expect(wrapper.vm.computedItems).toHaveLength(4)
+
+    wrapper.setProps({ items: [5] })
+    expect(wrapper.vm.computedItems).toHaveLength(5)
+
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
   it('should allow changing of browser autocomplete', () => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,
