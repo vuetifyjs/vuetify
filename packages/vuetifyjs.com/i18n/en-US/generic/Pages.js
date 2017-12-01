@@ -3,6 +3,7 @@ export default {
   default: 'Default',
   description: 'Description',
   examples: 'Examples',
+  howItWorks: 'How it works',
   name: 'Name',
   openInCodePen: 'Open in Codepen',
   options: 'Options',

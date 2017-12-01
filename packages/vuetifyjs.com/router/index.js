@@ -38,6 +38,7 @@ export function createRouter () {
         route('/getting-started/roadmap', 'getting-started/Roadmap'),
         // Application Layout
         route('/layout/pre-defined', 'layout/PreDefined'),
+        route('/layout/spacing', 'layout/Spacing'),
         // Base Styles
         route('/style/colors', 'style/Colors'),
         route('/style/theme', 'style/Theme'),

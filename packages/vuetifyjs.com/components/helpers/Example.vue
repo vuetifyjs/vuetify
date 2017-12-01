@@ -112,6 +112,7 @@
     },
 
     props: {
+      active: Boolean,
       hasInverted: Boolean,
       file: String,
       header: String,
@@ -137,6 +138,12 @@
     watch: {
       panel () {
         this.getMarkup().then(() => this.$refs.tabs.slider())
+      }
+    },
+
+    created () {
+      if (this.active) {
+        this.panel = true
       }
     },
 
