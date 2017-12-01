@@ -3,9 +3,6 @@ import VSelect from '~components/VSelect'
 import VMenu from '~components/VMenu'
 
 test('VSelect - combobox', ({ mount }) => {
-  const backspace = new Event('keydown')
-  backspace.keyCode = 8
-
   it('should emit custom value on blur', async () => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,
