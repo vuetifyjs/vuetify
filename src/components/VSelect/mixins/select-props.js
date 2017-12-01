@@ -57,6 +57,10 @@ export default {
     openOnClear: Boolean,
     overflow: Boolean,
     returnObject: Boolean,
+    objectComparator: {
+      type: Function,
+      default: null
+    },
     searchInput: {
       default: null
     },
