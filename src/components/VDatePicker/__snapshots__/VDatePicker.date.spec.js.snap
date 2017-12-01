@@ -925,7 +925,6 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
 
 <div class="picker picker--date card"
      style="height: auto;"
-     data-ripple="false"
 >
   <div class="picker__title orange darken-1">
     <div class="picker--date__title-year">
@@ -942,7 +941,6 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
       <div class="picker--date__header-selector">
         <button type="button"
                 class="btn btn--icon"
-                data-ripple="true"
         >
           <div class="btn__content">
             <i aria-hidden="true"
@@ -960,7 +958,6 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
         </div>
         <button type="button"
                 class="btn btn--icon"
-                data-ripple="true"
         >
           <div class="btn__content">
             <i aria-hidden="true"
@@ -1302,7 +1299,6 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
 
 <div class="picker picker--date card"
      style="height: auto;"
-     data-ripple="false"
 >
   <div class="picker__title orange darken-1">
     <div class="picker--date__title-year">
@@ -1319,7 +1315,6 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
       <div class="picker--date__header-selector">
         <button type="button"
                 class="btn btn--icon"
-                data-ripple="true"
         >
           <div class="btn__content">
             <i aria-hidden="true"
@@ -1337,7 +1332,6 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
         </div>
         <button type="button"
                 class="btn btn--icon"
-                data-ripple="true"
         >
           <div class="btn__content">
             <i aria-hidden="true"
@@ -1679,7 +1673,6 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
 
 <div class="picker picker--date card theme--dark"
      style="height: auto;"
-     data-ripple="false"
 >
   <div class="picker__title">
     <div class="picker--date__title-year">
@@ -1696,7 +1689,6 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
       <div class="picker--date__header-selector">
         <button type="button"
                 class="btn btn--icon theme--dark"
-                data-ripple="true"
         >
           <div class="btn__content">
             <i aria-hidden="true"
@@ -1714,7 +1706,6 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
         </div>
         <button type="button"
                 class="btn btn--icon theme--dark"
-                data-ripple="true"
         >
           <div class="btn__content">
             <i aria-hidden="true"
@@ -2067,7 +2058,6 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
 
 <div class="picker picker--date card"
      style="height: auto;"
-     data-ripple="false"
 >
   <div class="picker__title primary">
     <div class="picker--date__title-year">
@@ -2084,7 +2074,6 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
       <div class="picker--date__header-selector">
         <button type="button"
                 class="btn btn--icon"
-                data-ripple="true"
         >
           <div class="btn__content">
             <i aria-hidden="true"
@@ -2102,7 +2091,6 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
         </div>
         <button type="button"
                 class="btn btn--icon"
-                data-ripple="true"
         >
           <div class="btn__content">
             <i aria-hidden="true"
@@ -2787,7 +2775,6 @@ exports[`VDatePicker.js should match snapshot with slot 1`] = `
 
 <div class="picker picker--date card"
      style="height: auto;"
-     data-ripple="false"
 >
   <div class="picker__title primary">
     <div class="picker--date__title-year">
@@ -2804,7 +2791,6 @@ exports[`VDatePicker.js should match snapshot with slot 1`] = `
       <div class="picker--date__header-selector">
         <button type="button"
                 class="btn btn--icon"
-                data-ripple="true"
         >
           <div class="btn__content">
             <i aria-hidden="true"
@@ -2822,7 +2808,6 @@ exports[`VDatePicker.js should match snapshot with slot 1`] = `
         </div>
         <button type="button"
                 class="btn btn--icon"
-                data-ripple="true"
         >
           <div class="btn__content">
             <i aria-hidden="true"
@@ -3187,7 +3172,6 @@ exports[`VDatePicker.js should match years snapshot 1`] = `
 
 <div class="picker picker--date card"
      style="height: auto;"
-     data-ripple="false"
 >
   <div class="picker__title primary">
     <div class="picker--date__title-year active">

@@ -7,16 +7,14 @@ function style (el, value) {
   })
 }
 
-const RippleDataAttribute = 'data-ripple'
-
 const ripple = {
   /**
    * @param {Event} e
    * @param {Element} el
    * @param {{ class?: string, center?: boolean }} [value={}]
    */
-  show: (e, el, { value = {} }) => {
-    if (el.getAttribute(RippleDataAttribute) !== 'true') {
+  show: (e, el, value = {}) => {
+    if (!el.__ripple || !el.__ripple.enabled) {
       return
     }
 
@@ -57,7 +55,7 @@ const ripple = {
   },
 
   hide: (el) => {
-    if (el.getAttribute(RippleDataAttribute) !== 'true') {
+    if (!el.__ripple || !el.__ripple.enabled) {
       return
     }
 
@@ -84,39 +82,71 @@ const ripple = {
   }
 }
 
-function isRippleEnabled (binding) {
-  return typeof binding.value === 'undefined' || !!binding.value
+function isRippleEnabled (value) {
+  return typeof value === 'undefined' || !!value
+}
+
+function rippleShow (e) {
+  const value = {}
+  const element = e.currentTarget
+  value.center = element.__ripple.centered
+  if (element.__ripple.class) {
+    value.class = element.__ripple.class
+  }
+  ripple.show(e, element, value)
+}
+
+function rippleHide (e) {
+  ripple.hide(e.currentTarget)
+}
+
+function updateRipple (el, binding, wasEnabled) {
+  const enabled = isRippleEnabled(binding.value)
+  if (!enabled) {
+    ripple.hide(el)
+  }
+  el.__ripple = el.__ripple || {}
+  el.__ripple.enabled = enabled
+  const value = binding.value || {}
+  if (value.center) {
+    el.__ripple.centered = true
+  }
+  if (value.class) {
+    el.__ripple.class = binding.value.class
+  }
+  if (enabled && !wasEnabled) {
+    if ('ontouchstart' in window) {
+      el.addEventListener('touchend', rippleHide, false)
+      el.addEventListener('touchcancel', rippleHide, false)
+    }
+
+    el.addEventListener('mousedown', rippleShow, false)
+    el.addEventListener('mouseup', rippleHide, false)
+    el.addEventListener('mouseleave', rippleHide, false)
+    // Anchor tags can be dragged, causes other hides to fail - #1537
+    el.addEventListener('dragstart', rippleHide, false)
+  } else if (!enabled && wasEnabled) {
+    removeListeners(el)
+  }
+}
+
+function removeListeners (el) {
+  el.removeEventListener('touchstart', rippleShow, false)
+  el.removeEventListener('mousedown', rippleShow, false)
+  el.removeEventListener('touchend', rippleHide, false)
+  el.removeEventListener('touchcancel', rippleHide, false)
+  el.removeEventListener('mouseup', rippleHide, false)
+  el.removeEventListener('mouseleave', rippleHide, false)
+  el.removeEventListener('dragstart', rippleHide, false)
 }
 
 function directive (el, binding) {
-  el.setAttribute(RippleDataAttribute, isRippleEnabled(binding))
-  el._rippleValue = binding
-
-  const rippleHide = () => ripple.hide(el)
-  const rippleShow = e => ripple.show(e, el, el._rippleValue)
-
-  if ('ontouchstart' in window) {
-    el.addEventListener('touchend', rippleHide, false)
-    el.addEventListener('touchcancel', rippleHide, false)
-  }
-
-  el.addEventListener('mousedown', rippleShow, false)
-  el.addEventListener('mouseup', rippleHide, false)
-  el.addEventListener('mouseleave', rippleHide, false)
-  // Anchor tags can be dragged, causes other hides to fail - #1537
-  el.addEventListener('dragstart', rippleHide, false)
-  el._rippleHide = rippleHide
-  el._rippleShow = rippleShow
+  updateRipple(el, binding, false)
 }
 
 function unbind (el, binding) {
-  el.removeEventListener('touchstart', el._rippleShow, false)
-  el.removeEventListener('mousedown', el._rippleShow, false)
-  el.removeEventListener('touchend', el._rippleHide, false)
-  el.removeEventListener('touchcancel', el._rippleHide, false)
-  el.removeEventListener('mouseup', el._rippleHide, false)
-  el.removeEventListener('mouseleave', el._rippleHide, false)
-  el.removeEventListener('dragstart', el._rippleHide, false)
+  delete el.__ripple
+  removeListeners(el)
 }
 
 function update (el, binding) {
@@ -124,8 +154,8 @@ function update (el, binding) {
     return
   }
 
-  el.setAttribute(RippleDataAttribute, isRippleEnabled(binding))
-  el._rippleValue = binding
+  const wasEnabled = isRippleEnabled(binding.oldValue)
+  updateRipple(el, binding, wasEnabled)
 }
 
 export default {

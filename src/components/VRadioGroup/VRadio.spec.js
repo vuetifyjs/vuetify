@@ -137,7 +137,7 @@ test('VRadio.vue', ({ mount }) => {
     expect('The v-radio component must be used inside a v-radio-group.').toHaveBeenTipped()
   })
 
-  it('should render ripple with data attribute when ripple prop is true', () => {
+  it('should render ripple when ripple prop is true', () => {
     const wrapper = mount(VRadio, {
       propsData: {
         ripple: true
@@ -150,7 +150,8 @@ test('VRadio.vue', ({ mount }) => {
 
     const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
 
-    expect(ripple.getAttribute('data-ripple')).toBe('true')
+    expect(ripple.element.__ripple.enabled).toBe(true)
+    expect(ripple.element.__ripple.centered).toBe(true)
 
     expect('The v-radio component must be used inside a v-radio-group.').toHaveBeenTipped()
   })

@@ -26,9 +26,7 @@ exports[`VRadioGroup.vue should be in error when v-radio-group is 1`] = `
         >
           radio_button_checked
         </i>
-        <div class="input-group--selection-controls__ripple"
-             data-ripple="true"
-        >
+        <div class="input-group--selection-controls__ripple">
         </div>
         <input type="radio"
                style="display: none;"
@@ -69,9 +67,7 @@ exports[`VRadioGroup.vue should be in error when v-radio-group is 2`] = `
         >
           radio_button_checked
         </i>
-        <div class="input-group--selection-controls__ripple"
-             data-ripple="true"
-        >
+        <div class="input-group--selection-controls__ripple">
         </div>
         <input type="radio"
                style="display: none;"

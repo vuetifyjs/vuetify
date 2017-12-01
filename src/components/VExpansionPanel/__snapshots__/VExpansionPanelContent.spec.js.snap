@@ -31,9 +31,7 @@ exports[`VExpansionPanelContent.js should render component and match snapshot 1`
 <li tabindex="0"
     class="expansion-panel__container"
 >
-  <div class="expansion-panel__header"
-       data-ripple="false"
-  >
+  <div class="expansion-panel__header">
     <span>
       header
     </span>
@@ -59,9 +57,7 @@ exports[`VExpansionPanelContent.js should respect hideActions prop 1`] = `
 <li tabindex="0"
     class="expansion-panel__container"
 >
-  <div class="expansion-panel__header"
-       data-ripple="false"
-  >
+  <div class="expansion-panel__header">
     <span>
       header
     </span>
@@ -79,9 +75,7 @@ exports[`VExpansionPanelContent.js should toggle panel on header click 1`] = `
 <li tabindex="0"
     class="expansion-panel__container expansion-panel__container--active"
 >
-  <div class="expansion-panel__header"
-       data-ripple="false"
-  >
+  <div class="expansion-panel__header">
     <span>
       header
     </span>
