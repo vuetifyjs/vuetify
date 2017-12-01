@@ -26,7 +26,7 @@ export default {
     meta: {
       deep: true,
       handler () {
-        document.title = this.title
+        document.title = `${this.title} | Vuetify.js`
         this._description.setAttribute('content', this.description)
         this._keywords.setAttribute('content', this.keywords)
       }
@@ -38,7 +38,7 @@ export default {
 
     this.setMeta()
 
-    this.$ssrContext.title = this.title
+    this.$ssrContext.title = `${this.title} | Vuetify.js`
     this.$ssrContext.description = this.description
     this.$ssrContext.keywords = this.keywords
   },
