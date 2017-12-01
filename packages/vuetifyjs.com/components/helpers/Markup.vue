@@ -153,7 +153,8 @@
         color: $red.lighten-2
 
       .hljs-comment
-        color: $grey.lighten-1
+        color: $grey.base
+        font-weight: 100
 
   .tabs
     .markup
