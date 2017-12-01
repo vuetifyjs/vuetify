@@ -1,10 +1,8 @@
 import Vue from 'vue'
-import { compileToFunctions } from 'vue-template-compiler'
 import { test } from '~util/testing'
-import { mount } from 'avoriaz'
 import VDatePicker from '~components/VDatePicker'
 
-test('VDatePicker.js', ({ mount }) => {
+test('VDatePicker.js', ({ mount, compileToFunctions }) => {
   it('should emit input event on year click', async () => {
     const cb = jest.fn()
     const wrapper = mount(VDatePicker, {

@@ -1,8 +1,7 @@
 import VChip from '~components/VChip'
-import { mount } from 'avoriaz'
 import { test } from '~util/testing'
 
-test('VChip.vue', () => {
+test('VChip.vue', ({ mount, compileToFunctions }) => {
   it('should have a chip class', () => {
     const wrapper = mount(VChip)
 

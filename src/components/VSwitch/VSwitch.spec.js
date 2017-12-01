@@ -1,8 +1,7 @@
 import { test, touch } from '~util/testing'
-import { mount } from 'avoriaz'
 import VSwitch from '~components/VSwitch'
 
-test('VSwitch.js', () => {
+test('VSwitch.js', ({ mount }) => {
   it('should set ripple data attribute based on ripple prop state', () => {
     const wrapper = mount(VSwitch, {
       propsData: {

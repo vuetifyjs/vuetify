@@ -1,21 +1,20 @@
 import Vue from 'vue'
 import Touch from './touch'
-import { mount } from 'avoriaz'
 import { test, touch } from '~util/testing'
 
-function create(value) {
-  return mount(Vue.component('test', {
-    directives: { Touch },
-    render: h => h('div', {
-      directives: [{
-        name: 'touch',
-        value
-      }]
-    })
-  })).element
-}
+test('touch.js', ({ mount }) => {
+  function create(value) {
+    return mount(Vue.component('test', {
+      directives: { Touch },
+      render: h => h('div', {
+        directives: [{
+          name: 'touch',
+          value
+        }]
+      })
+    })).element
+  }
 
-test('touch.js', () => {
   it('should call directive handlers', async () => {
     const down = jest.fn()
     touch(create({ down })).start(0, 0).end(0, 20)

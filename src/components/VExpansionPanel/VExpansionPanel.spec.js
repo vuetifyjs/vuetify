@@ -1,7 +1,5 @@
 import Vue from 'vue'
-import { compileToFunctions } from 'vue-template-compiler'
 import { test } from '~util/testing'
-import { mount } from 'avoriaz'
 import VExpansionPanel from '~components/VExpansionPanel'
 import { VExpansionPanelContent } from '~components/VExpansionPanel'
 
@@ -18,7 +16,7 @@ const createPanel = props => {
   })
 }
 
-test('VExpansionPanel.js', () => {
+test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
   it('should render component and match snapshot', async () => {
     const wrapper = mount(createPanel())
 

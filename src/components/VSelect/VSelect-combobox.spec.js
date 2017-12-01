@@ -1,9 +1,8 @@
 import { test } from '~util/testing'
-import { mount } from 'avoriaz'
 import VSelect from '~components/VSelect'
 import VMenu from '~components/VMenu'
 
-test('VSelect - combobox', () => {
+test('VSelect - combobox', ({ mount }) => {
   const backspace = new Event('keydown')
   backspace.keyCode = 8
 

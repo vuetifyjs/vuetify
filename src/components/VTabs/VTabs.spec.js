@@ -1,5 +1,4 @@
 import { test } from '~util/testing'
-import { mount } from 'avoriaz'
 import VTabs from './VTabs'
 import VTabsBar from './VTabsBar'
 import VTabsItem from './VTabsItem'
@@ -16,7 +15,7 @@ function createBar (items = ['foo', 'bar']) {
   })
 }
 
-test('VTabs', () => {
+test('VTabs', ({ mount }) => {
   it('should change model when tab is clicked', async () => {
     const wrapper = mount(VTabs, {
       slots: {
