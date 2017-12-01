@@ -8,7 +8,7 @@ export default {
       desc: ''
     },
     validationWithSubmitAndClear: {
-      header: "VForm - Validation w/ submit & clear",
+      header: "VForm - Validation with submit & clear",
       desc: ''
     },
     vuelidate: {

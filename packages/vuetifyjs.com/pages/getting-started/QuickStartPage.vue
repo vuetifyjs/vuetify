@@ -108,7 +108,7 @@
     data: () => ({
       browsers: [
         { icon: 'internet-explorer', title: 'IE9 / IE10', supported: false },
-        { icon: 'internet-explorer', title: 'IE11', supported: 'Supported w/ polyfill' },
+        { icon: 'internet-explorer', title: 'IE11', supported: 'Supported with polyfill' },
         { icon: 'edge', title: 'Edge', supported: true },
         { icon: 'chrome', title: 'Chrome', supported: true },
         { icon: 'firefox', title: 'Firefox', supported: true },
