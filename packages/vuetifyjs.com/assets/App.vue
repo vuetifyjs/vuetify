@@ -50,7 +50,7 @@
             this.$route.from &&
             this.$route.from.fullPath !== '/'
           ) return
-          
+
           if (this.$vuetify.breakpoint.mdAndDown) return
 
           this.$store.commit('app/DRAWER', drawer)
@@ -62,9 +62,7 @@
 
 <style lang="stylus">
   @import '../node_modules/vuetify/src/stylus/settings/_elevations.styl'
-  
+
   [v-cloak]
     display: none
 </style>
-
-<style src="../node_modules/mdi/css/materialdesignicons.css"></style>
