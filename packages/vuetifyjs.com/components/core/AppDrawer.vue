@@ -178,7 +178,7 @@
         this.docSearch = docsearch({
           apiKey: '259d4615e283a1bbaa3313b4eff7881c',
           autocompleteOptions: {
-            appendTo: '#yourself',
+            appendTo: '#app',
             hint: false,
             debug: true
           },
@@ -210,10 +210,10 @@
   #search
     width: 100%
 
-  #yourself
+  #app
     .algolia-autocomplete > span
       left: -16px !important
-      top: 12px !important
+      top: 18px !important
       elevation(6)
 
       .ds-dataset-1
