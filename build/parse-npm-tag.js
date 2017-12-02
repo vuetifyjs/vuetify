@@ -8,6 +8,9 @@ if (!semver.valid(version)) {
 }
 
 const prerelease = semver.prerelease(version)
-const prereleaseTag = (prerelease || [])[0] || ''
 
-console.log(/^[a-zA-Z]+$/.test(prereleaseTag) ? prereleaseTag : 'latest')
+if (prerelease == null) {
+  console.log('latest')
+} else {
+  console.log('next')
+}
