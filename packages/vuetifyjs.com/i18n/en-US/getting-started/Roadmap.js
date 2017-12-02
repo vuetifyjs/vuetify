@@ -11,37 +11,37 @@ export default {
     {
       icon: 'brush',
       name: 'Alpha theme',
-      date: 'Q1 2017',
+      date: 'Q1 2018',
       desc: `Vuetify's first theme. A handcrafted Material Design theme with Vuetify at its core. Features custom components.`
     },
     {
       icon: 'error',
       name: 'Version 1.1',
-      date: 'Q1 2017',
+      date: 'Q1 2018',
       desc: 'Will be focused on updating/improving and abstracted the form elements. The new abstracted components will be publicly available so that developers can create their own implementations easier.'
     },
     {
       icon: 'mdi-package-variant-closed',
       name: 'Front-end pack',
-      date: 'Q2 2017',
+      date: 'Q2 2018',
       desc: 'Includes 10 new components. Will be **free** to everyone thanks to our Patrons.'
     },
     {
       icon: 'error',
       name: 'Version 1.2',
-      date: 'Q2 2017',
+      date: 'Q2 2018',
       desc: 'TBD'
     },
     {
       icon: 'mdi-package-variant-closed',
       name: 'Back-end pack',
-      date: 'Q2 2017',
+      date: 'Q2 2018',
       desc: 'Includes 10 new components. Will be **free** to everyone thanks to our Patrons.'
     },
     {
       icon: 'mdi-youtube-play',
       name: 'Vueticasts',
-      date: '2017',
+      date: '2018',
       desc: 'A Video series on Vue and Vuetify. Will be **free** to everyone thanks to our Patrons.'
     }
   ]
