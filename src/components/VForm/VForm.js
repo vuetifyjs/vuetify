@@ -34,6 +34,9 @@ export default {
 
       const search = (children, depth = 0) => {
         for (const child of children) {
+          if (child.$options.name === 'v-form') {
+            continue
+          }
           if (child.errorBucket !== undefined) {
             results.push(child)
           } else {
