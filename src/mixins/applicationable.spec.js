@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import { test } from '~util/testing'
-import { mount } from 'avoriaz'
 import Applicationable from '~mixins/applicationable'
 
-test('applicationable.js', () => {
+test('applicationable.js', ({ mount }) => {
   it('should update application on mount', async () => {
     const updateApplication = jest.fn()
     const wrapper = mount({

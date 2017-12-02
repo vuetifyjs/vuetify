@@ -1,8 +1,7 @@
 import { test } from '~util/testing'
-import { mount } from 'avoriaz'
 import VSelect from '~components/VSelect'
 
-test('VSelect - autocomplete', () => {
+test('VSelect - autocomplete', ({ mount }) => {
   it('should have -1 tabindex when disabled', () => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,
@@ -248,6 +247,24 @@ test('VSelect - autocomplete', () => {
 
     wrapper.setProps({ items: ['bar'] })
     expect(wrapper.vm.computedItems).toHaveLength(3)
+
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
+
+  it('should cache items passed via prop', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        autocomplete: true,
+        cacheItems: true,
+        items: [1, 2, 3, 4]
+      }
+    })
+
+    expect(wrapper.vm.computedItems).toHaveLength(4)
+
+    wrapper.setProps({ items: [5] })
+    expect(wrapper.vm.computedItems).toHaveLength(5)
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })

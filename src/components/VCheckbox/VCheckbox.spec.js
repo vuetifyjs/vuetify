@@ -1,8 +1,7 @@
 ﻿import { test } from '~util/testing'
-import { mount } from 'avoriaz'
 import VCheckbox from '~components/VCheckbox'
 
-test('VCheckbox.js', () => {
+test('VCheckbox.js', ({ mount }) => {
   it('should return true when clicked', () => {
     const wrapper = mount(VCheckbox, {
       propsData: {

@@ -80,7 +80,7 @@ export default {
       data.attrs.tabIndex = 0
       data.on = {
         click: () => {
-          this.expanded = []
+          this.expanded = {}
           this.sort(header.value)
         },
         keydown: e => {
@@ -93,7 +93,11 @@ export default {
       }
 
       classes.push('sortable')
-      const icon = this.$createElement('v-icon', 'arrow_upward')
+      const icon = this.$createElement('v-icon', {
+        props: {
+          small: true
+        }
+      }, 'arrow_upward')
       if (header.align && header.align === 'left') {
         children.push(icon)
       } else {

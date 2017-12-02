@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import { test } from '~util/testing'
-import { mount } from 'avoriaz'
 import Bootable from '~mixins/bootable'
 
-test('bootable.js', () => {
+test('bootable.js', ({ mount }) => {
   it('should be booted after activation', async () => {
     const wrapper = mount({
       data: () => ({

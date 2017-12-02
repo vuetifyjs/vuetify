@@ -1,7 +1,7 @@
-import { mount } from 'avoriaz'
+import { test } from '~util/testing'
 import { VCardMedia } from '~components/VCard'
 
-describe('VCardMedia.js', () => {
+test('VCardMedia.js', ({ mount }) => {
   it('should render component and match snapshot', () => {
     const wrapper = mount(VCardMedia)
 

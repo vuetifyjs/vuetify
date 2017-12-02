@@ -1,9 +1,8 @@
 import { test } from '~util/testing'
-import { mount } from 'avoriaz'
 import VSelect from '~components/VSelect'
 import VMenu from '~components/VMenu'
 
-test('VSelect - tags', () => {
+test('VSelect - tags', ({ mount, compileToFunctions }) => {
   const backspace = new Event('keydown')
   backspace.keyCode = 8
 
@@ -225,7 +224,7 @@ test('VSelect - tags', () => {
     })
 
     const input = wrapper.find('input')[0]
-    
+
     const change = jest.fn()
     wrapper.vm.$on('input', change)
 

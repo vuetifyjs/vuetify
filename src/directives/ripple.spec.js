@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import { test } from '~util/testing'
-import { mount } from 'avoriaz'
 import Ripple from '~directives/ripple'
 
-test('VRipple', () => {
+test('VRipple', ({ mount }) => {
   it('Ripple with no value should render data attribute true', () => {
     const testComponent = Vue.component('test', {
       directives: {

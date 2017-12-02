@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import { test } from '~util/testing'
-import { mount } from 'avoriaz'
 import VDataTable from './VDataTable'
 
-test('VDataTable.vue', () => {
+test('VDataTable.vue', ({ mount, compileToFunctions }) => {
   function dataTableTestData () {
     return {
       propsData: {

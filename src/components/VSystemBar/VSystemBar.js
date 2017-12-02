@@ -12,6 +12,7 @@ export default {
   props: {
     absolute: Boolean,
     fixed: Boolean,
+    height: [Number, String],
     lightsOut: Boolean,
     status: Boolean,
     window: Boolean
@@ -28,32 +29,39 @@ export default {
       }, this.themeClasses))
     },
     computedHeight () {
+      if (this.height) return parseInt(this.height)
+
       return this.window ? 32 : 24
     }
   },
 
   watch: {
-    window () {
+    absolute () {
       this.updateApplication()
     },
     fixed () {
       this.updateApplication()
     },
-    absolute () {
+    height () {
+      this.updateApplication()
+    },
+    window () {
       this.updateApplication()
     }
   },
 
   methods: {
     updateApplication () {
-      if (this.app && this.$vuetify) {
-        this.$vuetify.application.bar = (this.fixed || this.absolute) ? this.computedHeight : 0
+      if (this.app) {
+        this.$vuetify.application.bar = (this.fixed || this.absolute)
+          ? this.computedHeight
+          : 0
       }
     }
   },
 
   destroyed () {
-    if (this.app && this.$vuetify) this.$vuetify.application.bar = 0
+    if (this.app) this.$vuetify.application.bar = 0
   },
 
   render (h) {

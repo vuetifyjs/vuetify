@@ -79,7 +79,7 @@ export default {
 
   data () {
     return {
-      cachedItems: [],
+      cachedItems: this.cacheItems ? this.items : [],
       content: {},
       defaultColor: 'primary',
       inputValue: (this.multiple || this.tags) && !this.value ? [] : this.value,
@@ -172,7 +172,7 @@ export default {
 
       // Combobox is the single version
       // of a taggable select element
-      if (this.combobox) return (this.selectedItems = val ? [val] : [])
+      if (this.combobox) return (this.selectedItems = val != null ? [val] : [])
 
       let selectedItems = this.computedItems.filter(i => {
         if (!this.isMultiple) {

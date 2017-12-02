@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import { test } from '~util/testing'
-import { mount } from 'avoriaz'
 import VToolbar from '~components/VToolbar'
 
-test('VToolbar.vue', () => {
+test('VToolbar.vue', ({ mount }) => {
   it('should render a colored toolbar', () => {
     const wrapper = mount(VToolbar, {
       propsData: {
@@ -111,5 +110,16 @@ test('VToolbar.vue', () => {
     Vue.set(wrapper.vm.$vuetify.breakpoint, 'width', 100)
     Vue.set(wrapper.vm.$vuetify.breakpoint, 'height', 200)
     expect(wrapper.vm.computedContentHeight).toBe(wrapper.vm.heights.mobile)
+  })
+
+  it('should set margin top', () => {
+    const wrapper = mount(VToolbar, {
+      propsData: {
+        app: true
+      }
+    })
+
+    Vue.set(wrapper.vm.$vuetify.application, 'bar', 24)
+    expect(wrapper.vm.computedMarginTop).toBe(24)
   })
 })

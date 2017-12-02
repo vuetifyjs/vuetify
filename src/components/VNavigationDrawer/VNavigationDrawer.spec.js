@@ -1,7 +1,6 @@
 import VApp from '~components/VApp'
 import VNavigationDrawer from '~components/VNavigationDrawer'
 import { test } from '~util/testing'
-import { mount } from 'avoriaz'
 
 const resizeWindow = (width = global.innerWidth, height = global.innerHeight) => {
   global.innerWidth = width
@@ -14,7 +13,7 @@ beforeEach(() => {
   return resizeWindow(1920, 1080)
 })
 
-test('VNavigationDrawer', () => {
+test('VNavigationDrawer', ({ mount }) => {
   // v-app is needed to initialise $vuetify.application
   const app = mount(VApp)
 
