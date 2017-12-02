@@ -23,11 +23,15 @@ export default {
 
   methods: {
     getChildren () {
-      return this.$children.filter(c => {
-        if (!c.$options) return
+      return this.$children.reduce((toggleables, child) => {
+        const component = child.$children[0] || child
+        const options = component.$options
+        if (options && options.name === 'v-expansion-panel-content') {
+          toggleables.push(component)
+        }
 
-        return c.$options.name === 'v-expansion-panel-content'
-      })
+        return toggleables
+      }, [])
     },
     panelClick (uid) {
       if (!this.expand) {
