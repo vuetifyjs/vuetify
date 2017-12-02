@@ -16,7 +16,8 @@ module.exports = {
   output: {
     path: resolve('../public'),
     publicPath: '/public/',
-    filename: '[name].[chunkhash].js'
+    filename: '[name].[chunkhash].js',
+    chunkFilename: '[name].[chunkhash].js'
   },
   resolve: {
     extensions: ['*', '.js', '.json', '.vue'],
