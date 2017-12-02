@@ -218,7 +218,7 @@
         })
       },
       sendToCodepen () {
-        this.$refs.codepen.submit()
+        this.getMarkup().then(() => this.$refs.codepen.submit())
       }
     }
   }
