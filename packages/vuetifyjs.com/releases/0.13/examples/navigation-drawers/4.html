@@ -1,0 +1,28 @@
+<v-card id="e4" height="400px">
+  <v-toolbar>
+    <v-toolbar-side-icon class="hidden-lg-and-up" @click.native.stop="e4 = !e4"></v-toolbar-side-icon>
+    <v-toolbar-logo class="text-xs-right">Logo</v-toolbar-logo>
+  </v-toolbar>
+  <v-sidebar v-model="e4" height="100%" absolute>
+    <v-list dense>
+      <template v-for="(item,i) in itemGroup">
+        <v-list-group v-if="item.items">
+          <v-list-tile ripple slot="item">
+            <v-list-tile-title v-text="item.title"></v-list-tile-title>
+            <v-list-tile-action>
+              <v-icon>keyboard_arrow_down</v-icon>
+            </v-list-tile-action>
+          </v-list-tile>
+          <v-list-tile ripple v-for="(subItem,i) in item.items" :key="i">
+            <v-list-tile-title v-text="subItem.title"></v-list-tile-title>
+          </v-list-tile>
+        </v-list-group>
+        <v-subheader v-else-if="item.header" v-text="item.header"></v-subheader>
+        <v-divider v-else-if="item.divider" light></v-divider>
+        <v-list-tile ripple v-else>
+          <v-list-tile-title v-text="item.title"></v-list-tile-title>
+        </v-list-tile>
+      </template>
+    </v-list>
+  </v-sidebar>
+</v-card>

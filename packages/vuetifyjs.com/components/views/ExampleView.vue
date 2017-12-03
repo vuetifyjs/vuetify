@@ -1,7 +1,7 @@
 <template lang="pug">
   doc-view(:toc="toc")
     template(slot-scope="{ namespace }")
-      section#usage
+      section(v-if="usage")#usage
         section-head(value="Generic.Pages.usage")
         example(
           :new-in="usage.new"

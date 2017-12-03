@@ -33,13 +33,13 @@
           slot="activator"
           flat
         )
-          span 0.17
+          span {{ currentVersion }}
           v-icon keyboard_arrow_down
         v-list
           v-list-tile(
             v-for="release in releases"
             :key="release"
-            @click=""
+            @click="changeToRelease(release)"
           )
             v-list-tile-title {{ release }}
       v-btn(
@@ -63,6 +63,7 @@
 
     computed: {
       ...mapState({
+        currentVersion: state => state.currentVersion,
         releases: state => state.releases,
         stateless: state => state.stateless
       })
@@ -82,6 +83,12 @@
     created () {
       const fixed = this.$route.path !== '/'
       this.isManualScrolling = !fixed
+    },
+
+    methods: {
+      changeToRelease (release) {
+        window.location.href = `${window.location.origin}/releases/${release}/#${this.$route.fullPath}`
+      }
     }
   }
 </script>

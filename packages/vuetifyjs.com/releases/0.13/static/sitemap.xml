@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+<url>
+  <loc>https://vuetifyjs.com/</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/vuetify/quick-start</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/motion/transitions</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/style/colors</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/style/theme</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/style/typography</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/style/content</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/layout/pre-defined</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/layout/grid</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/layout/spacing</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/layout/alignment</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/layout/display</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/layout/elevation</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/components/alerts</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/components/breadcrumbs</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/components/bottom-navigation</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/components/buttons</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/components/cards</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/components/carousels</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/components/chips</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/components/data-tables</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/components/dialogs</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/components/dividers</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/components/expansion-panels</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/components/footer</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/components/icons</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/components/lists</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/components/menus</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/components/navigation-drawers</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/components/pagination</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/components/parallax</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/components/pickers</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/components/progress</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/components/selects</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/components/selection-controls</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/components/sliders</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/components/snackbars</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/components/steppers</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/components/subheaders</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/components/tabs</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/components/text-fields</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/components/toolbars</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/directives/badges</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/directives/ripples</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/directives/tooltips</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/guides/server-side-rendering</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/components</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://vuetifyjs.com/layouts</loc>
+  <lastmod>2017-05-23T00:14:59+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.51</priority>
+</url>
+</urlset>
