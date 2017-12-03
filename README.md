@@ -156,3 +156,7 @@ Ask your support questions on the vuetifyjs <a href="https://chat.vuetifyjs.com"
 
 <h2>Additional Resources</h2>
 Codepen starter <a href="https://template.vuetifyjs.com">template</a>.
+
+Starter Storybook-for-Vue Boilerplate project with Vuetity Material Component Framework
+https://github.com/white-rabbit-japan/vuetify-storyboard-boilerplate
+
