@@ -53,7 +53,6 @@
   <a href="https://careers.lmax.com/?utm_source=vuetify&utm_medium=github-link&utm_campaign=lmax-careers">
     <img height="70px" src="https://vuetifyjs.com/static/doc-images/backers/lmax-exchange.png">
   </a>
-  <br><br>
   <a href="http://intygrate.com/?ref=vuetify-github">
     <img height="70px" src="https://vuetifyjs.com/static/doc-images/backers/intygrate.png">
   </a>
@@ -65,9 +64,11 @@
   <a href="http://www.eikospartners.com/?ref=vuetify-github">
     <img height="40px" src="https://vuetifyjs.com/static/doc-images/backers/eikos-partners.webp">
   </a>
-  <br><br>
   <a href="https://application.rategenius.com/?ref=vuetify-github">
     <img height="40px" src="https://vuetifyjs.com/static/doc-images/backers/rate-genius.png">
+  </a>
+  <a href="http://quitt.ch/?ref=vuetify-github">
+    <img height="40px" src="https://vuetifyjs.com/static/doc-images/backers/quitt.png">
   </a>
 </p>
 
