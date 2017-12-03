@@ -56,7 +56,7 @@
               v-card(flat)
                 parameters(
                   :headers="headers[tab]"
-                  :items="items"
+                  :items="currentApi[tab]"
                   :namespace="namespace"
                   :search="search"
                   :target="current"
@@ -184,9 +184,6 @@
         const section = camel(this.$route.params.section)
 
         return `${section}.${component}`
-      },
-      items () {
-        return this.currentApi[this.tab]
       },
       toc () {
         return this.$t(`Generic.Pages.toc`)
