@@ -2,6 +2,13 @@ import Vue from 'vue'
 import { test } from '~util/testing'
 import VToolbar from '~components/VToolbar'
 
+const scrollWindow = y => {
+  global.pageYOffset = y
+  global.dispatchEvent(new Event('scroll'))
+
+  return new Promise(resolve => setTimeout(resolve, 200))
+}
+
 test('VToolbar.vue', ({ mount }) => {
   it('should render a colored toolbar', () => {
     const wrapper = mount(VToolbar, {
@@ -42,17 +49,17 @@ test('VToolbar.vue', ({ mount }) => {
     wrapper.vm.$vuetify.application.right = 84
 
     wrapper.setProps({ app: false, clippedLeft: false, clippedRight: false })
-    expect(wrapper.vm.paddingLeft).toBe(0)
-    expect(wrapper.vm.paddingRight).toBe(0)
+    expect(wrapper.vm.computedPaddingLeft).toBe(0)
+    expect(wrapper.vm.computedPaddingRight).toBe(0)
     wrapper.setProps({ app: false, clippedLeft: true, clippedRight: true })
-    expect(wrapper.vm.paddingLeft).toBe(0)
-    expect(wrapper.vm.paddingRight).toBe(0)
+    expect(wrapper.vm.computedPaddingLeft).toBe(0)
+    expect(wrapper.vm.computedPaddingRight).toBe(0)
     wrapper.setProps({ app: true, clippedLeft: false, clippedRight: false })
-    expect(wrapper.vm.paddingLeft).toBe(42)
-    expect(wrapper.vm.paddingRight).toBe(84)
+    expect(wrapper.vm.computedPaddingLeft).toBe(42)
+    expect(wrapper.vm.computedPaddingRight).toBe(84)
     wrapper.setProps({ app: true, clippedLeft: true, clippedRight: true })
-    expect(wrapper.vm.paddingLeft).toBe(0)
-    expect(wrapper.vm.paddingRight).toBe(0)
+    expect(wrapper.vm.computedPaddingLeft).toBe(0)
+    expect(wrapper.vm.computedPaddingRight).toBe(0)
   })
 
   it('should calculate application top', async () => {
@@ -121,5 +128,40 @@ test('VToolbar.vue', ({ mount }) => {
 
     Vue.set(wrapper.vm.$vuetify.application, 'bar', 24)
     expect(wrapper.vm.computedMarginTop).toBe(24)
+  })
+
+  it('should set active based on manual scroll', async () => {
+    const wrapper = mount(VToolbar, {
+      propsData: {
+        scrollOffScreen: true
+      }
+    })
+
+    expect(wrapper.vm.isActive).toBe(true)
+    wrapper.setProps({ manualScroll: true })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isActive).toBe(false)
+    await new Promise(resolve => setTimeout(resolve, 20))
+    expect(wrapper.vm.isActiveProxy).toBe(false)
+  })
+
+  it.skip('should set a custom target', async () => {
+    const wrapper = mount(VToolbar, {
+      propsData: {
+        target: 'body'
+      }
+    })
+
+    wrapper.vm.onScroll()
+    expect(wrapper.vm.target).toBe('body')
+  })
+
+  it.skip('should set isScrollingUp', async () => {
+    const wrapper = mount(VToolbar)
+
+    await scrollWindow(100)
+    expect(wrapper.vm.isScrollingUp).toBe(false)
+    await scrollWindow(0)
+    expect(wrapper.vm.isScrollingUp).toBe(true)
   })
 })
