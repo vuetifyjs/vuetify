@@ -12,7 +12,7 @@
         v-for="(opt, i) in item"
         :key="i"
       )
-        markdown(:source="opt")
+        markdown(:source="opt.toString()")
 </template>
 
 <script>
@@ -20,6 +20,7 @@
 
   export default {
     data: () => ({
+      cachedItems: {},
       pagination: {
         rowsPerPage: 10
       }
@@ -42,7 +43,10 @@
 
     computed: {
       computedItems () {
-        return this.items.map(item => {
+        const existing = this.cachedItems[this.type]
+        if (existing && existing.length > 0) return existing
+
+        const items = this.items.map(item => {
           const newItem = {}
 
           if (item !== Object(item)) {
@@ -63,6 +67,10 @@
 
           return newItem
         })
+
+        this.cachedItems[this.type] = items
+
+        return items
       }
     },
 
