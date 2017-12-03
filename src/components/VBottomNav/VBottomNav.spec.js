@@ -70,4 +70,34 @@ test('VBottomNav.js', ({ mount }) => {
     btn.trigger('click')
     expect(change).toBeCalledWith(0)
   })
+
+  it('should set the application bottom', () => {
+    const wrapper = mount(VBottomNav, {
+      propsData: {
+        app: true,
+        height: 80,
+        value: true
+      },
+      slots: {
+        default: [VBtn, VBtn]
+      }
+    })
+
+    expect(wrapper.vm.$vuetify.application.bottom).toBe(80)
+  })
+
+  it('should emit update when active changes', async () => {
+    const update = jest.fn()
+    const wrapper = mount(VBottomNav, {
+      slots: {
+        default: [VBtn, VBtn]
+      }
+    })
+
+    wrapper.vm.$on('update:active', update)
+    await wrapper.vm.$nextTick()
+    wrapper.setProps({ active: 1 })
+    await wrapper.vm.$nextTick()
+    expect(update).toBeCalledWith(1)
+  })
 })

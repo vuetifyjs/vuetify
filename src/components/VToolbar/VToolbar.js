@@ -1,19 +1,31 @@
+// Styles
 require('../../stylus/components/_toolbar.styl')
 
+// Mixins
 import Applicationable from '../../mixins/applicationable'
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 import SSRBootable from '../../mixins/ssr-bootable'
 
+// Directives
+import Scroll from '../../directives/scroll'
+
 export default {
   name: 'v-toolbar',
 
   mixins: [
-    Applicationable,
+    Applicationable('top', [
+      'clippedLeft',
+      'clippedRight',
+      'height',
+      'invertedScroll'
+    ]),
     Colorable,
     SSRBootable,
     Themeable
   ],
+
+  directives: { Scroll },
 
   data: () => ({
     activeTimeout: null,
@@ -33,17 +45,21 @@ export default {
   }),
 
   props: {
-    absolute: Boolean,
     card: Boolean,
     clippedLeft: Boolean,
     clippedRight: Boolean,
     dense: Boolean,
     extended: Boolean,
-    extensionHeight: [Number, String],
-    fixed: Boolean,
+    extensionHeight: {
+      type: [Number, String],
+      validator: v => !isNaN(parseInt(v))
+    },
     flat: Boolean,
     floating: Boolean,
-    height: [Number, String],
+    height: {
+      type: [Number, String],
+      validator: v => !isNaN(parseInt(v))
+    },
     invertedScroll: Boolean,
     manualScroll: {
       type: Boolean,
@@ -98,7 +114,7 @@ export default {
         'toolbar--clipped': this.clippedLeft || this.clippedRight,
         'toolbar--dense': this.dense,
         'toolbar--extended': this.isExtended,
-        'toolbar--fixed': this.fixed,
+        'toolbar--fixed': this.fixed || this.app,
         'toolbar--floating': this.floating,
         'toolbar--is-booted': this.isBooted,
         'toolbar--prominent': this.prominent,
@@ -106,19 +122,19 @@ export default {
         'theme--light': this.light
       })
     },
-    paddingLeft () {
+    computedPaddingLeft () {
       if (!this.app || this.clippedLeft) return 0
 
       return this.$vuetify.application.left
     },
-    paddingRight () {
+    computedPaddingRight () {
       if (!this.app || this.clippedRight) return 0
 
       return this.$vuetify.application.right
     },
     isActive () {
       if (!this.scrollOffScreen) return true
-      if (this.manualScroll) return this.manualScroll
+      if (this.manualScroll != null) return !this.manualScroll
 
       return this.invertedScroll
         ? this.currentScroll > this.scrollThreshold
@@ -137,8 +153,8 @@ export default {
       }
 
       if (this.app) {
-        style.paddingRight = `${this.paddingRight}px`
-        style.paddingLeft = `${this.paddingLeft}px`
+        style.paddingRight = `${this.computedPaddingRight}px`
+        style.paddingLeft = `${this.computedPaddingLeft}px`
       }
 
       return style
@@ -160,23 +176,7 @@ export default {
           this.isActiveProxy = val
         }, 20)
       }
-    },
-    clippedLeft (val) {
-      this.updateApplication()
-    },
-    height (val) {
-      this.updateApplication()
-    },
-    clippedRight (val) {
-      this.updateApplication()
-    },
-    invertedScroll () {
-      this.updateApplication()
     }
-  },
-
-  destroyed () {
-    if (this.app) this.$vuetify.application.top -= this.computedHeight
   },
 
   methods: {
@@ -197,12 +197,13 @@ export default {
 
       this.previousScroll = this.currentScroll
     },
+    /**
+     * Update the application layout
+     *
+     * @return {number}
+     */
     updateApplication () {
-      if (!this.app) return
-
-      this.$vuetify.application.top = (!this.fixed &&
-        !this.absolute) ||
-        this.invertedScroll
+      return this.invertedScroll
         ? 0
         : this.computedHeight
     }
