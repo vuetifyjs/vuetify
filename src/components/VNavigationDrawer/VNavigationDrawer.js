@@ -75,7 +75,7 @@ export default {
      * value from a dynamic
      * property. Called from
      * applicationable.js
-     * 
+     *
      * @return {string}
      */
     applicationProperty () {
@@ -269,7 +269,7 @@ export default {
     /**
      * Sets state before mount to avoid
      * entry transitions in SSR
-     * 
+     *
      * @return {void}
      */
     init () {
@@ -315,8 +315,8 @@ export default {
     },
     /**
      * Update the application layout
-     * 
-     * @return {integer}
+     *
+     * @return {number}
      */
     updateApplication () {
       return !this.isActive ||

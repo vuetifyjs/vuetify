@@ -69,8 +69,8 @@ export default {
   methods: {
     /**
      * Update the application layout
-     * 
-     * @return {integer}
+     *
+     * @return {number}
      */
     updateApplication () {
       return this.computedHeight

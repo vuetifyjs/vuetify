@@ -56,8 +56,8 @@ export default {
     },
     /**
      * Update the application layout
-     * 
-     * @return {integer}
+     *
+     * @return {number}
      */
     updateApplication () {
       return !this.value
