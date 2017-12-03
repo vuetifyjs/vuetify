@@ -46,9 +46,17 @@
 
     created () {
       this.setupLayout()
+      this.getReleases()
     },
 
     methods: {
+      getReleases () {
+        this.$http.get('/releases/releases.json').then(({ data }) => {
+          this.$store.commit('app/RELEASES', data)
+        }).catch(err => {
+          console.log(err)
+        })
+      },
       setupLayout (timeout = 300) {
         const drawer = this.$route.fullPath !== '/'
         this.$store.commit('app/STATELESS', !drawer)

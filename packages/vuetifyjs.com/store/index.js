@@ -5,7 +5,6 @@ Vue.use(Vuex)
 
 export function createStore () {
   const api = require('@/api/api.js')
-  const releases = require('../router/releases.json')
 
   return new Vuex.Store({
     state: {
@@ -154,11 +153,11 @@ export function createStore () {
       ],
       appFooter: true,
       currentVersion: null,
-      releases,
+      releases: [],
       stateless: false,
       supporters: {
         diamond: [
-          { 
+          {
             title: 'LMAX Exchange',
             size: 70,
             href: 'https://careers.lmax.com/?utm_source=vuetify&utm_medium=logo-link&utm_campaign=lmax-careers',
@@ -213,14 +212,8 @@ export function createStore () {
       ['app/DRAWER_TOGGLE'] (state) {
         state.appDrawer = !state.appDrawer
       },
-      ['app/FOOTER'] (state, payload) {
-        state.appFooter = payload
-      },
-      ['app/PREVIOUS'] (state, payload) {
-        state.previous = payload
-      },
-      ['app/NEXT'] (state, payload) {
-        state.next = payload
+      ['app/RELEASES'] (state, payload) {
+        state.releases = payload
       }
     },
 
