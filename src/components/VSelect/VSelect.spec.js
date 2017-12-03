@@ -292,4 +292,23 @@ test('VSelect', () => {
 
     expect('Application is missing <v-app> component.').toHaveBeenTipped()
   })
+
+  it('should not open if readonly', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        readonly: true,
+        items: ['foo', 'bar']
+      }
+    })
+
+    wrapper.trigger('click')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.menuIsActive).toBe(false)
+
+    wrapper.find('.input-group__append-icon')[0].trigger('click')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.menuIsActive).toBe(false)
+
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 })
