@@ -15,9 +15,5 @@ export default {
       header: 'Icon and text',
       desc: 'An avatar also accepts the `v-icon` component or text. Mix and match functionality to create something unique.'
     }
-  }],
-  props: {
-    size: 'Controls the height and width of a child `img` or `v-icon`.',
-    tile: 'Removes the border radius from the avatar'
-  }
+  }]
 }

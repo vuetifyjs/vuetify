@@ -16,8 +16,8 @@ export default {
       desc: 'As with other Vuetify components, you can control the display state with `v-model`.'
     }
   }],
-  props: {
+  props: [{
     active: 'Holds the value of the currently active button. If the button has no value supplied, its index will be used instead. This prop supports the **.sync** modifier.',
     shift: 'Hide text of button when not active'
-  }
+  }]
 }

@@ -66,14 +66,25 @@ module.exports = {
     ],
     "slots": [
       "default"
+    ],
+    "events": [
+      "input"
     ]
   },
   "v-avatar": {
     "props": [
       {
-        "name": "size",
+        "name": "color",
         "type": "String",
-        "default": "48px"
+        "default": "undefined"
+      },
+      {
+        "name": "size",
+        "type": [
+          "Number",
+          "String"
+        ],
+        "default": 48
       },
       {
         "name": "tile",
@@ -126,14 +137,24 @@ module.exports = {
   "v-bottom-nav": {
     "props": [
       {
-        "name": "color",
-        "type": "String",
-        "default": "undefined"
-      },
-      {
         "name": "absolute",
         "type": "Boolean",
         "default": "False"
+      },
+      {
+        "name": "app",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "fixed",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "color",
+        "type": "String",
+        "default": "undefined"
       },
       {
         "name": "active",
@@ -142,6 +163,14 @@ module.exports = {
           "String"
         ],
         "default": "undefined"
+      },
+      {
+        "name": "height",
+        "type": [
+          "Number",
+          "String"
+        ],
+        "default": 48
       },
       {
         "name": "shift",
@@ -310,36 +339,6 @@ module.exports = {
         "name": "color",
         "type": "String",
         "default": "undefined"
-      },
-      {
-        "name": "primary",
-        "type": "Boolean",
-        "default": "False"
-      },
-      {
-        "name": "secondary",
-        "type": "Boolean",
-        "default": "False"
-      },
-      {
-        "name": "success",
-        "type": "Boolean",
-        "default": "False"
-      },
-      {
-        "name": "info",
-        "type": "Boolean",
-        "default": "False"
-      },
-      {
-        "name": "warning",
-        "type": "Boolean",
-        "default": "False"
-      },
-      {
-        "name": "error",
-        "type": "Boolean",
-        "default": "False"
       },
       {
         "name": "activeClass",
@@ -538,10 +537,6 @@ module.exports = {
         "default": "undefined"
       },
       {
-        "name": "items",
-        "type": "Array"
-      },
-      {
         "name": "mandatory",
         "type": "Boolean",
         "default": "False"
@@ -665,6 +660,14 @@ module.exports = {
         "name": "tile",
         "type": "Boolean",
         "default": "False"
+      },
+      {
+        "name": "width",
+        "type": [
+          "String",
+          "Number"
+        ],
+        "default": "undefined"
       }
     ],
     "slots": [
@@ -731,14 +734,19 @@ module.exports = {
         "default": "True"
       },
       {
+        "name": "delimiterIcon",
+        "type": "String",
+        "default": "fiber_manual_record"
+      },
+      {
         "name": "hideControls",
         "type": "Boolean",
         "default": "False"
       },
       {
-        "name": "icon",
-        "type": "String",
-        "default": "fiber_manual_record"
+        "name": "hideDelimiters",
+        "type": "Boolean",
+        "default": "False"
       },
       {
         "name": "interval",
@@ -749,7 +757,7 @@ module.exports = {
         "default": 6000
       },
       {
-        "name": "leftControlIcon",
+        "name": "prependIcon",
         "type": [
           "Boolean",
           "String"
@@ -757,7 +765,7 @@ module.exports = {
         "default": "chevron_left"
       },
       {
-        "name": "rightControlIcon",
+        "name": "appendIcon",
         "type": [
           "Boolean",
           "String"
@@ -776,11 +784,6 @@ module.exports = {
   },
   "v-carousel-item": {
     "props": [
-      {
-        "name": "src",
-        "type": "String",
-        "default": "undefined"
-      },
       {
         "name": "transition",
         "type": "String",
@@ -1016,6 +1019,129 @@ module.exports = {
       "default"
     ]
   },
+  "v-data-iterator": {
+    "props": [
+      {
+        "name": "noDataText",
+        "type": "String",
+        "default": "No data available"
+      },
+      {
+        "name": "loading",
+        "type": [
+          "Boolean",
+          "String"
+        ],
+        "default": false
+      },
+      {
+        "name": "dark",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "light",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "expand",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "hideActions",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "disableInitialSort",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "mustSort",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "noResultsText",
+        "type": "String",
+        "default": "No matching records found"
+      },
+      {
+        "name": "rowsPerPageItems",
+        "type": "Array"
+      },
+      {
+        "name": "rowsPerPageText",
+        "type": "String",
+        "default": "Items per page:"
+      },
+      {
+        "name": "selectAll",
+        "type": [
+          "Boolean",
+          "String"
+        ],
+        "default": "undefined"
+      },
+      {
+        "name": "search",
+        "type": "Any",
+        "default": "undefined"
+      },
+      {
+        "name": "filter",
+        "type": "Any"
+      },
+      {
+        "name": "customFilter",
+        "type": "Any"
+      },
+      {
+        "name": "customSort",
+        "type": "Any"
+      },
+      {
+        "name": "value",
+        "type": "Array"
+      },
+      {
+        "name": "items",
+        "type": "Array"
+      },
+      {
+        "name": "totalItems",
+        "type": "Number",
+        "default": "undefined"
+      },
+      {
+        "name": "itemKey",
+        "type": "String",
+        "default": "id"
+      },
+      {
+        "name": "pagination",
+        "type": "Object"
+      },
+      {
+        "name": "contentTag",
+        "type": "String",
+        "default": "div"
+      },
+      {
+        "name": "contentProps",
+        "type": "Object",
+        "default": "undefined"
+      },
+      {
+        "name": "contentClass",
+        "type": "String",
+        "default": "undefined"
+      }
+    ]
+  },
   "v-data-table": {
     "props": [
       {
@@ -1047,21 +1173,12 @@ module.exports = {
         "default": "False"
       },
       {
-        "name": "headers",
-        "type": "Array"
-      },
-      {
-        "name": "headerText",
-        "type": "String",
-        "default": "text"
-      },
-      {
         "name": "hideActions",
         "type": "Boolean",
         "default": "False"
       },
       {
-        "name": "hideHeaders",
+        "name": "disableInitialSort",
         "type": "Boolean",
         "default": "False"
       },
@@ -1130,6 +1247,20 @@ module.exports = {
       {
         "name": "pagination",
         "type": "Object"
+      },
+      {
+        "name": "headers",
+        "type": "Array"
+      },
+      {
+        "name": "headerText",
+        "type": "String",
+        "default": "text"
+      },
+      {
+        "name": "hideHeaders",
+        "type": "Boolean",
+        "default": "False"
       }
     ],
     "scopedSlots": [
@@ -1450,7 +1581,17 @@ module.exports = {
   "v-footer": {
     "props": [
       {
+        "name": "absolute",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
         "name": "app",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "fixed",
         "type": "Boolean",
         "default": "False"
       },
@@ -1470,12 +1611,15 @@ module.exports = {
         "default": "False"
       },
       {
-        "name": "absolute",
-        "type": "Boolean",
-        "default": "False"
+        "name": "height",
+        "type": [
+          "Number",
+          "String"
+        ],
+        "default": 32
       },
       {
-        "name": "fixed",
+        "name": "inset",
         "type": "Boolean",
         "default": "False"
       }
@@ -1598,6 +1742,19 @@ module.exports = {
         "default": "False"
       },
       {
+        "name": "size",
+        "type": [
+          "Number",
+          "String"
+        ],
+        "default": "24px"
+      },
+      {
+        "name": "small",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
         "name": "xLarge",
         "type": "Boolean",
         "default": "False"
@@ -1605,6 +1762,109 @@ module.exports = {
     ],
     "slots": [
       "default"
+    ]
+  },
+  "v-jumbotron": {
+    "props": [
+      {
+        "name": "color",
+        "type": "String",
+        "default": "undefined"
+      },
+      {
+        "name": "activeClass",
+        "type": "String",
+        "default": "undefined"
+      },
+      {
+        "name": "append",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "disabled",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "exact",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "exactActiveClass",
+        "type": "String",
+        "default": "undefined"
+      },
+      {
+        "name": "href",
+        "type": [
+          "String",
+          "Object"
+        ],
+        "default": "undefined"
+      },
+      {
+        "name": "to",
+        "type": [
+          "String",
+          "Object"
+        ],
+        "default": "undefined"
+      },
+      {
+        "name": "nuxt",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "replace",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "ripple",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "tag",
+        "type": "String",
+        "default": "div"
+      },
+      {
+        "name": "target",
+        "type": "String",
+        "default": "undefined"
+      },
+      {
+        "name": "dark",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "light",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "gradient",
+        "type": "String",
+        "default": "undefined"
+      },
+      {
+        "name": "height",
+        "type": [
+          "Number",
+          "String"
+        ],
+        "default": "400px"
+      },
+      {
+        "name": "src",
+        "type": "String",
+        "default": "undefined"
+      }
     ]
   },
   "v-list": {
@@ -1621,6 +1881,11 @@ module.exports = {
       },
       {
         "name": "dense",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "expand",
         "type": "Boolean",
         "default": "False"
       },
@@ -1657,6 +1922,21 @@ module.exports = {
         "default": "undefined"
       },
       {
+        "name": "activeClass",
+        "type": "String",
+        "default": "primary--text"
+      },
+      {
+        "name": "appendIcon",
+        "type": "String",
+        "default": "keyboard_arrow_down"
+      },
+      {
+        "name": "disabled",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
         "name": "group",
         "type": "String",
         "default": "undefined"
@@ -1665,11 +1945,26 @@ module.exports = {
         "name": "noAction",
         "type": "Boolean",
         "default": "False"
+      },
+      {
+        "name": "prependIcon",
+        "type": "String",
+        "default": "undefined"
+      },
+      {
+        "name": "subGroup",
+        "type": "Boolean",
+        "default": "False"
       }
     ]
   },
   "v-list-tile": {
     "props": [
+      {
+        "name": "color",
+        "type": "String",
+        "default": "undefined"
+      },
       {
         "name": "activeClass",
         "type": "String",
@@ -1766,7 +2061,21 @@ module.exports = {
     "props": []
   },
   "v-list-tile-avatar": {
-    "props": [],
+    "props": [
+      {
+        "name": "color",
+        "type": "String",
+        "default": "undefined"
+      },
+      {
+        "name": "size",
+        "type": [
+          "Number",
+          "String"
+        ],
+        "default": 40
+      }
+    ],
     "slots": [
       "default"
     ]
@@ -1995,7 +2304,17 @@ module.exports = {
   "v-navigation-drawer": {
     "props": [
       {
+        "name": "absolute",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
         "name": "app",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "fixed",
         "type": "Boolean",
         "default": "False"
       },
@@ -2011,11 +2330,6 @@ module.exports = {
       },
       {
         "name": "light",
-        "type": "Boolean",
-        "default": "False"
-      },
-      {
-        "name": "absolute",
         "type": "Boolean",
         "default": "False"
       },
@@ -2036,13 +2350,11 @@ module.exports = {
       },
       {
         "name": "height",
-        "type": "String",
-        "default": "undefined"
-      },
-      {
-        "name": "fixed",
-        "type": "Boolean",
-        "default": "False"
+        "type": [
+          "Number",
+          "String"
+        ],
+        "default": "100%"
       },
       {
         "name": "floating",
@@ -2174,11 +2486,6 @@ module.exports = {
           "Number"
         ],
         "default": 500
-      },
-      {
-        "name": "jumbotron",
-        "type": "Boolean",
-        "default": "False"
       },
       {
         "name": "src",
@@ -2668,6 +2975,11 @@ module.exports = {
         "name": "combobox",
         "type": "Boolean",
         "default": "False"
+      },
+      {
+        "name": "contentClass",
+        "type": "String",
+        "default": "undefined"
       },
       {
         "name": "debounceSearch",
@@ -3368,7 +3680,17 @@ module.exports = {
   "v-system-bar": {
     "props": [
       {
+        "name": "absolute",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
         "name": "app",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "fixed",
         "type": "Boolean",
         "default": "False"
       },
@@ -3388,14 +3710,12 @@ module.exports = {
         "default": "False"
       },
       {
-        "name": "absolute",
-        "type": "Boolean",
-        "default": "False"
-      },
-      {
-        "name": "fixed",
-        "type": "Boolean",
-        "default": "False"
+        "name": "height",
+        "type": [
+          "Number",
+          "String"
+        ],
+        "default": "undefined"
       },
       {
         "name": "lightsOut",
@@ -3890,7 +4210,17 @@ module.exports = {
   "v-toolbar": {
     "props": [
       {
+        "name": "absolute",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
         "name": "app",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "fixed",
         "type": "Boolean",
         "default": "False"
       },
@@ -3906,11 +4236,6 @@ module.exports = {
       },
       {
         "name": "light",
-        "type": "Boolean",
-        "default": "False"
-      },
-      {
-        "name": "absolute",
         "type": "Boolean",
         "default": "False"
       },
@@ -3940,9 +4265,12 @@ module.exports = {
         "default": "False"
       },
       {
-        "name": "fixed",
-        "type": "Boolean",
-        "default": "False"
+        "name": "extensionHeight",
+        "type": [
+          "Number",
+          "String"
+        ],
+        "default": "undefined"
       },
       {
         "name": "flat",
@@ -3961,6 +4289,11 @@ module.exports = {
           "String"
         ],
         "default": "undefined"
+      },
+      {
+        "name": "invertedScroll",
+        "type": "Boolean",
+        "default": "False"
       },
       {
         "name": "manualScroll",
@@ -3985,7 +4318,12 @@ module.exports = {
       {
         "name": "scrollThreshold",
         "type": "Number",
-        "default": 100
+        "default": 300
+      },
+      {
+        "name": "tabs",
+        "type": "Boolean",
+        "default": "False"
       }
     ],
     "slots": [

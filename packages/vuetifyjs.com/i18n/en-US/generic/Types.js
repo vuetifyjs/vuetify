@@ -1,5 +1,5 @@
 export default {
-  Any: '*',
+  Any: 'Any',
   Array: 'Array',
   Boolean: 'Boolean',
   Function: 'Function',
