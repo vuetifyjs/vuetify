@@ -4,8 +4,13 @@ export default {
   mixins: [Bootable],
 
   props: {
+    absolute: Boolean,
     contentClass: {
       default: ''
+    },
+    target: {
+      type: String,
+      default: '[data-app]'
     }
   },
 
@@ -24,9 +29,9 @@ export default {
 
   methods: {
     initDetach () {
-      if (this._isDestroyed) return
+      if (this._isDestroyed || this.absolute) return
 
-      const app = document.querySelector('[data-app]')
+      const app = document.querySelector(this.target)
 
       if (!app) {
         return console.warn('Application is missing <v-app> component.')

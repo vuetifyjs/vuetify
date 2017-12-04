@@ -59,19 +59,19 @@ export default {
       default: 0
     },
     nudgeLeft: {
-      type: Number,
+      type: [Number, String],
       default: 0
     },
     nudgeRight: {
-      type: Number,
+      type: [Number, String],
       default: 0
     },
     nudgeTop: {
-      type: Number,
+      type: [Number, String],
       default: 0
     },
     nudgeWidth: {
-      type: Number,
+      type: [Number, String],
       default: 0
     },
     offsetOverflow: Boolean,
@@ -90,8 +90,46 @@ export default {
   },
 
   computed: {
+    computedLeft () {
+      const a = this.dimensions.activator
+      const c = this.dimensions.content
+      const minWidth = a.width < c.width ? c.width : a.width
+      let left = this.left ? 16 : 0
+
+      if (this.isAbsolute) {
+        left += this.left ? -a.width : 0
+      } else {
+        left += this.left ? a.left - minWidth : a.left
+      }
+
+      if (this.offsetX) left += this.left ? -a.width : a.width
+      if (this.nudgeLeft) left -= parseInt(this.nudgeLeft)
+      if (this.nudgeRight) left += parseInt(this.nudgeRight)
+
+      return left
+    },
+    computedTop () {
+      const a = this.dimensions.activator
+      const c = this.dimensions.content
+      let top
+
+      if (this.isAbsolute) top = 0
+      else {
+        top = this.top ? a.bottom - c.height : a.top
+        top += this.pageYOffset
+      }
+
+      if (this.offsetY) top += this.top ? -a.height : a.height
+      if (this.nudgeTop) top -= this.nudgeTop
+      if (this.nudgeBottom) top += this.nudgeBottom
+
+      return top
+    },
     hasActivator () {
       return !!this.$slots.activator || this.activator
+    },
+    isAbsolute () {
+      return this.absolute || this.target !== '[data-app]'
     }
   },
 
@@ -121,36 +159,16 @@ export default {
     },
     activate () {},
     calcLeft () {
-      const a = this.dimensions.activator
-      const c = this.dimensions.content
-      // Content always has a min width
-      // of its activator. This is applied
-      // when the menu is shown, but not
-      // reflected in the getBoundingClientRect
-      // method
-      const minWidth = a.width < c.width ? c.width : a.width
-      let left = this.left ? a.right - minWidth : a.left
-
-      if (this.offsetX) left += this.left ? -a.width : a.width
-      if (this.nudgeLeft) left -= this.nudgeLeft
-      if (this.nudgeRight) left += this.nudgeRight
-
-      return left
+      return this.computedLeft
     },
     calcTop () {
       this.checkForWindow()
 
-      const a = this.dimensions.activator
-      const c = this.dimensions.content
-      let top = this.top ? a.bottom - c.height : a.top
-
-      if (this.offsetY) top += this.top ? -a.height : a.height
-      if (this.nudgeTop) top -= this.nudgeTop
-      if (this.nudgeBottom) top += this.nudgeBottom
-
-      return top + this.pageYOffset
+      return this.computedTop
     },
     calcXOverflow (left) {
+      if (this.isAbsolute) return left
+
       const parsedMaxWidth = isNaN(parseInt(this.maxWidth))
         ? 0
         : parseInt(this.maxWidth)
@@ -175,6 +193,8 @@ export default {
       return left
     },
     calcYOverflow (top) {
+      if (this.isAbsolute) return top
+
       const documentHeight = this.getInnerHeight()
       const toTop = this.pageYOffset + documentHeight
       const activator = this.dimensions.activator
@@ -247,19 +267,20 @@ export default {
 
       if (!el) return null
 
+      if (this.hasWindow) {
+        const style = window.getComputedStyle(el)
+        console.log(style.width, style.height)
+      }
+
       const {
-        top,
-        bottom,
-        left,
-        right,
-        height,
-        width
+        top, bottom, left, right, width, height
       } = el.getBoundingClientRect()
 
       return {
+        top, bottom, left, right, width, height,
+        clientWidth: [el.clientWidth, el.scrollWidth, el.outerWidth, el.innerWidth],
         offsetTop: el.offsetTop,
-        scrollHeight: el.scrollHeight,
-        top, bottom, left, right, height, width
+        offsetLeft: el.offsetLeft
       }
     },
     sneakPeek (cb) {
@@ -283,9 +304,10 @@ export default {
       const dimensions = {}
 
       // Activator should already be shown
-      dimensions.activator = !this.hasActivator || this.absolute
-        ? this.absolutePosition()
-        : this.measure(this.getActivator())
+      // dimensions.activator = !this.hasActivator || this.absolute
+      //   ? this.absolutePosition()
+      //   : this.measure(this.getActivator())
+      dimensions.activator = this.measure(this.getActivator())
 
       // Display and hide to get dimensions
       this.sneakPeek(() => {

@@ -80,10 +80,7 @@ export default {
 
   computed: {
     calculatedLeft () {
-      let left = this.calcLeft
-      if (this.auto) left = this.calcLeftAuto
-
-      return `${this.calcXOverflow(left())}px`
+      return `${this.calcXOverflow(this.computedLeft)}px`
     },
     calculatedMaxHeight () {
       return this.auto
