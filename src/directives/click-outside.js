@@ -28,6 +28,7 @@ function directive (e, el, binding, v) {
   // Note that, because we're in the capture phase, this callback will occure before
   // the bubbling click event on any outside elements.
   if (!clickedInEls(e, elements) && cb(e)) {
+    e.preventDefault()
     // Delay setting toggleable inactive to avoid conflicting
     // with an outside click on any activator toggling our state.
     setTimeout(() => (v.context.isActive = false), 0)
@@ -35,8 +36,8 @@ function directive (e, el, binding, v) {
 }
 
 function clickedInEls (e, elements) {
-  // Get position of click
-  const { clientX: x, clientY: y } = e
+  // Get position of click and touch
+  const { pageX: x, pageY: y } = e
   // Loop over all included elements to see if click was in any of them
   for (const el of elements) {
     if (clickedInEl(el, x, y)) return true
@@ -55,6 +56,8 @@ function clickedInEl (el, x, y) {
   return x >= b.left && x <= b.right && y >= b.top && y <= b.bottom
 }
 
+const events = ['touchend', 'click']
+
 export default {
   name: 'click-outside',
 
@@ -64,14 +67,21 @@ export default {
     // or body, this is the entire purpose of the v-app
     // component and [data-app], stop removing this
     const app = document.querySelector('[data-app]') ||
-      document.body // This is only for unit tests
-    app.addEventListener('click', onClick, true)
+      document.body // This is only for unit tests    
+
+    events.forEach(event => {
+      app.addEventListener(event, onClick, true)
+    })
     el._clickOutside = onClick
   },
 
   unbind (el) {
     const app = document.querySelector('[data-app]') ||
       document.body // This is only for unit tests
-    app && app.removeEventListener('click', el._clickOutside, true)
+    if (app) {
+      events.forEach(event => {
+        app.removeEventListener(event, el._clickOutside, true)
+      })
+    }
   }
 }
