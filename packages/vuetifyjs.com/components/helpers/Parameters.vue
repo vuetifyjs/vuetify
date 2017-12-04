@@ -63,20 +63,21 @@
 
           return newItem
         })
-
-        return items
       }
     },
 
     methods: {
       genDescription (name) {
         let description = ''
-        const specialLevelDesc = `Components.${this.namespace}.special.${this.type}.${this.target}.${name}`
-        const componentLevelDesc = `Components.${this.namespace}.${this.type}.${name}`
+        const specialLevelDesc = `${this.namespace}.special.${this.type}.${this.target}.${name}`
+        const pageComponentLevelDesc = `${this.namespace}.${this.type}.${this.target}.${name}`
+        const componentLevelDesc = `${this.namespace}.${this.type}.${name}`
         const genericDesc = `Generic.${capitalize(this.type)}.${name}`
 
         if (this.$te(specialLevelDesc)) {
           description = this.$t(specialLevelDesc)
+        } else if (this.$te(pageComponentLevelDesc)) {
+          description = this.$t(pageComponentLevelDesc)
         } else if (this.$te(componentLevelDesc)) {
           description = this.$t(componentLevelDesc)
         } else if (this.$te(genericDesc)) {
