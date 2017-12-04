@@ -1,12 +1,16 @@
 @import '../bootstrap'
+@import '../theme'
+
+bottom-nav($material)
+  background-color: $material.cards
+
+theme(bottom-nav, "bottom-nav")
 
 .bottom-nav
   bottom: 0
   box-shadow: 0 3px 14px 2px rgba(#000, .12)
   display: flex
-  height: 56px
   justify-content: center
-  position: fixed
   transform: translate(0, 60px)
   transition: all .4s $transition.swing
   width: 100%
@@ -17,6 +21,9 @@
 
   &--active
     transform: translate(0, 0)
+  
+  &--fixed
+    position: fixed
 
   .btn
     background: transparent !important
@@ -35,7 +42,7 @@
     .btn__content
       height: 100%
       flex-direction: column-reverse
-      height: 56px
+      height: inherit
       font-size: 12px
       transform: scale(1, 1) translate(0, 0)
       white-space: nowrap

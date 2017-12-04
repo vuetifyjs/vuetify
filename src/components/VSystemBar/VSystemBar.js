@@ -7,12 +7,20 @@ import Themeable from '../../mixins/themeable'
 export default {
   name: 'v-system-bar',
 
-  mixins: [Applicationable, Colorable, Themeable],
+  mixins: [
+    Applicationable('bar', [
+      'height',
+      'window'
+    ]),
+    Colorable,
+    Themeable
+  ],
 
   props: {
-    absolute: Boolean,
-    fixed: Boolean,
-    height: [Number, String],
+    height: {
+      type: [Number, String],
+      validator: v => !isNaN(parseInt(v))
+    },
     lightsOut: Boolean,
     status: Boolean,
     window: Boolean
@@ -23,7 +31,7 @@ export default {
       return this.addBackgroundColorClassChecks(Object.assign({
         'system-bar--lights-out': this.lightsOut,
         'system-bar--absolute': this.absolute,
-        'system-bar--fixed': this.fixed,
+        'system-bar--fixed': this.fixed || this.app,
         'system-bar--status': this.status,
         'system-bar--window': this.window
       }, this.themeClasses))
@@ -35,33 +43,15 @@ export default {
     }
   },
 
-  watch: {
-    absolute () {
-      this.updateApplication()
-    },
-    fixed () {
-      this.updateApplication()
-    },
-    height () {
-      this.updateApplication()
-    },
-    window () {
-      this.updateApplication()
-    }
-  },
-
   methods: {
+    /**
+     * Update the application layout
+     *
+     * @return {number}
+     */
     updateApplication () {
-      if (this.app) {
-        this.$vuetify.application.bar = (this.fixed || this.absolute)
-          ? this.computedHeight
-          : 0
-      }
+      return this.computedHeight
     }
-  },
-
-  destroyed () {
-    if (this.app) this.$vuetify.application.bar = 0
   },
 
   render (h) {
