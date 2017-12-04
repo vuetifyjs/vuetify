@@ -74,6 +74,14 @@ export default {
       type: Function,
       default: null
     },
+    nextIcon: {
+      type: String,
+      default: 'chevron_right'
+    },
+    previousIcon: {
+      type: String,
+      default: 'chevron_left'
+    },
     // Function formatting currently selected date in the picker title
     titleDateFormat: {
       type: Function,
