@@ -150,8 +150,18 @@ export default {
       }
     },
     filterDuplicates (arr) {
-      const values = arr.map(this.getValue)
-      return arr.filter((el, i) => i === values.indexOf(values[i]))
+      const result = []
+      const uniqueValues = new Set()
+      for (let index = 0; index < arr.length; ++index) {
+        const item = arr[index]
+        const val = this.getValue(item)
+        if (uniqueValues.has(val)) {
+          continue
+        }
+        uniqueValues.add(val)
+        result.push(item)
+      }
+      return result
     },
     genDirectives () {
       return [{
