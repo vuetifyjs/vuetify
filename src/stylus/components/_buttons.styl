@@ -57,7 +57,6 @@ theme(button, "btn")
 /** Content */
 .btn
   &--active,
-  &:hover,
   &:focus
     .btn__content:before
       background-color: currentColor
@@ -74,6 +73,11 @@ theme(button, "btn")
     padding: $button-padding
     transition: $primary-transition
     white-space: nowrap
+
+  @media not all and (hover: none)
+    &:hover
+      .btn__content:before
+        background-color: currentColor
 
 /** Icons */
 .btn .btn__content .icon
