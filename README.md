@@ -155,6 +155,7 @@ Keep in mind, you will need to ensure your webpack config contains a css-loader.
 Ask your support questions on the vuetifyjs <a href="https://chat.vuetifyjs.com">discord</a>.
 
 <h2>Additional Resources</h2>
+
 - [Codepen starter template](https://template.vuetifyjs.com)
 - [Storybook for Vue boilerplate project with Vuetify](https://github.com/white-rabbit-japan/vuetify-storyboard-boilerplate)
 
