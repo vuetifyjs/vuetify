@@ -104,7 +104,7 @@ export default {
       if (this.isAttached) {
         left += this.left ? -a.width : 0
       } else {
-        left += this.left ? a.left - minWidth : a.left
+        left += this.left ? a.left - (minWidth - a.width) : a.left
       }
 
       if (this.offsetX) left += this.left ? -a.width : a.width
