@@ -162,16 +162,10 @@ export default {
     styles () {
       const styles = {
         height: this.calculatedHeight,
+        marginTop: `${this.marginTop}px`,
         maxHeight: `calc(100% - ${this.maxHeight}px)`,
+        transform: `translateX(${this.calculatedTransform}px)`,
         width: `${this.calculatedWidth}px`
-      }
-
-      if (this.marginTop) {
-        styles.marginTop = `${this.marginTop}px`
-      }
-
-      if (this.calculatedTransform) {
-        styles.transform = `translateX(${this.calculatedTransform}px)`
       }
 
       return styles
