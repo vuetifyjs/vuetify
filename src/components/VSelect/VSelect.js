@@ -235,6 +235,8 @@ export default {
 
         if (a !== Object(a)) return a === b
 
+        if (this.objectComparator) return this.objectComparator(a, b)
+
         return this.compareObjects(a, b)
       })
     },
