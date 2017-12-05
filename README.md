@@ -137,7 +137,7 @@ import Vuetify from 'vuetify'
 Vue.use(Vuetify)
 ```
 
-For including styles, you can either place the below styles in your ```index.html```
+For including styles, you can either place the below styles in your `index.html`
 ```html
 <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
 <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
@@ -155,8 +155,7 @@ Keep in mind, you will need to ensure your webpack config contains a css-loader.
 Ask your support questions on the vuetifyjs <a href="https://chat.vuetifyjs.com">discord</a>.
 
 <h2>Additional Resources</h2>
-Codepen starter <a href="https://template.vuetifyjs.com">template</a>.
+- [Codepen starter template](https://template.vuetifyjs.com)
+- [Storybook for Vue boilerplate project with Vuetify](https://github.com/white-rabbit-japan/vuetify-storyboard-boilerplate)
 
-Starter Storybook-for-Vue Boilerplate project with Vuetity Material Component Framework
-https://github.com/white-rabbit-japan/vuetify-storyboard-boilerplate
 
