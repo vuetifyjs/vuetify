@@ -4,7 +4,7 @@ export default {
   mixins: [Bootable],
 
   props: {
-    absolute: Boolean,
+    attach: Boolean,
     contentClass: {
       default: ''
     },
@@ -30,9 +30,9 @@ export default {
     initDetach () {
       if (this._isDestroyed ||
         !this.$refs.content ||
-        // Leave menu in place if absolute
+        // Leave menu in place if attached
         // and dev has not changed target
-        (this.absolute && this.target === '[data-app]')
+        (this.attach && this.target === '[data-app]')
       ) return
 
       const app = typeof this.target === 'string'

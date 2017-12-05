@@ -49,7 +49,7 @@ export default {
   props: {
     activator: {
       default: null,
-      validate: val => {
+      validator: val => {
         return ['string', 'object'].includes(typeof val)
       }
     },
@@ -101,7 +101,7 @@ export default {
       const minWidth = a.width < c.width ? c.width : a.width
       let left = 0
 
-      if (this.isAbsolute) {
+      if (this.isAttached) {
         left += this.left ? -a.width : 0
       } else {
         left += this.left ? a.left - minWidth : a.left
@@ -118,7 +118,7 @@ export default {
       const c = this.dimensions.content
       let top = 0
 
-      if (!this.isAbsolute) {
+      if (!this.isAttached) {
         top = this.top ? a.bottom - c.height : a.top
         top += this.pageYOffset
       }
@@ -132,8 +132,8 @@ export default {
     hasActivator () {
       return !!this.$slots.activator || this.activator
     },
-    isAbsolute () {
-      return this.absolute || this.target !== '[data-app]'
+    isAttached () {
+      return this.attach || this.target !== '[data-app]'
     }
   },
 
@@ -167,13 +167,13 @@ export default {
     },
     activate () {},
     calcLeft () {
-      return `${this.isAbsolute
+      return `${this.isAttached
         ? this.computedLeft
         : this.calcXOverflow(this.computedLeft)
       }px`
     },
     calcTop () {
-      return `${this.isAbsolute
+      return `${this.isAttached
         ? this.computedTop
         : this.calcYOverflow(this.computedTop)
       }px`
