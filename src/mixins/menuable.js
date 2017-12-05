@@ -1,6 +1,7 @@
 import Positionable from './positionable'
 
 import Stackable from './stackable'
+import Themeable from './themeable'
 
 const dimensions = {
   activator: {
@@ -29,7 +30,11 @@ const dimensions = {
  * As well as be manually positioned
  */
 export default {
-  mixins: [Positionable, Stackable],
+  mixins: [
+    Positionable,
+    Stackable,
+    Themeable
+  ],
 
   data: () => ({
     absoluteX: 0,
@@ -94,7 +99,7 @@ export default {
       const a = this.dimensions.activator
       const c = this.dimensions.content
       const minWidth = a.width < c.width ? c.width : a.width
-      let left = this.left ? 16 : 0
+      let left = 0
 
       if (this.isAbsolute) {
         left += this.left ? -a.width : 0
@@ -111,10 +116,9 @@ export default {
     computedTop () {
       const a = this.dimensions.activator
       const c = this.dimensions.content
-      let top
+      let top = 0
 
-      if (this.isAbsolute) top = 0
-      else {
+      if (!this.isAbsolute) {
         top = this.top ? a.bottom - c.height : a.top
         top += this.pageYOffset
       }
@@ -144,6 +148,10 @@ export default {
     }
   },
 
+  beforeMount () {
+    this.checkForWindow()
+  },
+
   methods: {
     absolutePosition () {
       return {
@@ -159,16 +167,18 @@ export default {
     },
     activate () {},
     calcLeft () {
-      return this.computedLeft
+      return `${this.isAbsolute
+        ? this.computedLeft
+        : this.calcXOverflow(this.computedLeft)
+      }px`
     },
     calcTop () {
-      this.checkForWindow()
-
-      return this.computedTop
+      return `${this.isAbsolute
+        ? this.computedTop
+        : this.calcYOverflow(this.computedTop)
+      }px`
     },
     calcXOverflow (left) {
-      if (this.isAbsolute) return left
-
       const parsedMaxWidth = isNaN(parseInt(this.maxWidth))
         ? 0
         : parseInt(this.maxWidth)
@@ -193,8 +203,6 @@ export default {
       return left
     },
     calcYOverflow (top) {
-      if (this.isAbsolute) return top
-
       const documentHeight = this.getInnerHeight()
       const toTop = this.pageYOffset + documentHeight
       const activator = this.dimensions.activator
@@ -227,7 +235,9 @@ export default {
       this.deactivate()
     },
     checkForWindow () {
-      this.hasWindow = typeof window !== 'undefined'
+      if (!this.hasWindow) {
+        this.hasWindow = typeof window !== 'undefined'
+      }
 
       if (this.hasWindow) {
         this.pageYOffset = this.getOffsetTop()
@@ -267,18 +277,12 @@ export default {
 
       if (!el) return null
 
-      if (this.hasWindow) {
-        const style = window.getComputedStyle(el)
-        console.log(style.width, style.height)
-      }
-
       const {
         top, bottom, left, right, width, height
       } = el.getBoundingClientRect()
 
       return {
         top, bottom, left, right, width, height,
-        clientWidth: [el.clientWidth, el.scrollWidth, el.outerWidth, el.innerWidth],
         offsetTop: el.offsetTop,
         offsetLeft: el.offsetLeft
       }
@@ -304,10 +308,9 @@ export default {
       const dimensions = {}
 
       // Activator should already be shown
-      // dimensions.activator = !this.hasActivator || this.absolute
-      //   ? this.absolutePosition()
-      //   : this.measure(this.getActivator())
-      dimensions.activator = this.measure(this.getActivator())
+      dimensions.activator = !this.hasActivator
+        ? this.absolutePosition()
+        : this.measure(this.getActivator())
 
       // Display and hide to get dimensions
       this.sneakPeek(() => {

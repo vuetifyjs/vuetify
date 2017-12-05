@@ -13,17 +13,21 @@ export default {
       const data = {
         ref: 'menu',
         props: {
+          absolute: this.absolute,
           activator: this.$el,
           auto: this.auto,
           closeOnClick: false,
           closeOnContentClick: !this.isMultiple,
           contentClass: this.computedContentClass,
+          dark: this.dark,
           disabled: this.disabled,
+          light: this.light,
           maxHeight: this.maxHeight,
           nudgeTop: this.nudgeTop,
           offsetY: this.shouldOffset,
           offsetOverflow: this.isAutocomplete,
           openOnClick: false,
+          target: this.absolute ? `[data-uid="${this._uid}"]` : undefined,
           value: this.menuIsVisible,
           zIndex: this.menuZIndex
         },

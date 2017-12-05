@@ -9,7 +9,6 @@ export default {
       default: ''
     },
     target: {
-      type: String,
       default: '[data-app]'
     }
   },
@@ -29,16 +28,20 @@ export default {
 
   methods: {
     initDetach () {
-      if (this._isDestroyed || this.absolute) return
+      if (this._isDestroyed ||
+        !this.$refs.content ||
+        // Leave menu in place if absolute
+        // and dev has not changed target
+        (this.absolute && this.target === '[data-app]')
+      ) return
 
-      const app = document.querySelector(this.target)
+      const app = typeof this.target === 'string'
+        ? document.querySelector(this.target)
+        : this.target
 
       if (!app) {
-        return console.warn('Application is missing <v-app> component.')
+        return console.warn(`Unable to locate target ${this.target}`)
       }
-
-      // If child has already been removed, bail
-      if (!this.$refs.content) return
 
       app.insertBefore(
         this.$refs.content,

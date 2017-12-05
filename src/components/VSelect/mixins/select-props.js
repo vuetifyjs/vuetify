@@ -1,5 +1,6 @@
 export default {
   props: {
+    absolute: Boolean,
     appendIcon: {
       type: String,
       default: 'arrow_drop_down'
