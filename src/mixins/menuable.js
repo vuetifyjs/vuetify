@@ -133,7 +133,7 @@ export default {
       return !!this.$slots.activator || this.activator
     },
     isAttached () {
-      return this.attach || this.target !== '[data-app]'
+      return this.attach !== false
     }
   },
 
