@@ -63,6 +63,9 @@ export default {
         'theme--light': this.light
       }, this.classes)
     },
+    isClearable () {
+      return this.clearable && !this.disabled
+    },
     isDirty () {
       return !!this.inputValue
     }
@@ -116,7 +119,7 @@ export default {
       )
     },
     genIcon (type, defaultCallback = null) {
-      const shouldClear = type === 'append' && this.clearable && this.isDirty
+      const shouldClear = type === 'append' && this.isClearable && this.isDirty
       const icon = shouldClear ? 'clear' : this[`${type}Icon`]
       const callback = shouldClear
         ? this.clearableCallback
@@ -183,7 +186,7 @@ export default {
         wrapperChildren.unshift(this.genIcon('prepend'))
       }
 
-      if (this.appendIcon || this.clearable) {
+      if (this.appendIcon || this.isClearable) {
         wrapperChildren.push(this.genIcon('append', defaultAppendCallback))
       }
 

@@ -146,6 +146,33 @@ test('VTextField.js', ({ mount }) => {
     expect(input).toHaveBeenCalledWith(null)
   })
 
+  it('should not render clear when input is disabled', async () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        clearable: true,
+        disabled: true
+      }
+    })
+
+    const clear = wrapper.find('.input-group__append-icon')[0]
+
+    expect(clear).toBe(undefined)
+  })
+
+  it('should render append icon when clearable input is disabled and append icon is set', async () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        clearable: true,
+        disabled: true,
+        appendIcon: 'person'
+      }
+    })
+
+    const clear = wrapper.find('.input-group__append-icon')[0]
+
+    expect(clear.element.textContent).toBe('person')
+  })
+
   it('should not clear input if not clearable and has appended icon (with callback)', async () => {
     const appendIconCb = jest.fn()
     const wrapper = mount(VTextField, {
