@@ -1,6 +1,23 @@
 import VBottomNav from './VBottomNav'
 import VBtn from '../VBtn'
 import { test } from '~util/testing'
+import Vue from 'vue'
+
+function createBtn (val = null) {
+  const options = {
+    props: { flat: true }
+  }
+  if (val) options.attrs = { value: val }
+
+  return Vue.component('test', {
+    components: {
+      VBtn
+    },
+    render (h) {
+      return h('v-btn', options)
+    }
+  })
+}
 
 test('VBottomNav.js', ({ mount }) => {
   it('should have a bottom-nav class', () => {
@@ -58,7 +75,10 @@ test('VBottomNav.js', ({ mount }) => {
     const wrapper = mount(VBottomNav, {
       propsData: { value: true, active: 1 },
       slots: {
-        default: [VBtn, VBtn]
+        default: [
+          createBtn(),
+          createBtn()
+        ]
       }
     })
 
