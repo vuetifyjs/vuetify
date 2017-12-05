@@ -16,6 +16,9 @@ input-group($material)
   &.input-group--textarea:not(.input-group--full-width)
     .input-group__input
       border: 2px solid $material.text.secondary
+      
+  &.input-group--solo
+    background: $material.cards
 
   // This is specific for selects
   &.input-group--dirty
@@ -165,7 +168,6 @@ theme(input-group, "input-group")
 
   // Solo
   &.input-group--solo
-    background: #fff
     min-height: 46px
     border-radius: $card-border-radius
     padding: 0
