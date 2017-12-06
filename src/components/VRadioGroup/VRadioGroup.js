@@ -50,14 +50,14 @@ export default {
 
   watch: {
     hasError (val) {
-      this.radios.forEach(radio => {
+      for (const radio of this.radios) {
         radio.parentError = val
-      })
+      }
     },
     inputValue (val) {
-      this.radios.forEach(radio => {
+      for (const radio of this.radios) {
         radio.isActive = val === radio.value
-      })
+      }
     }
   },
 
@@ -82,9 +82,9 @@ export default {
       this.$emit('change', value)
       this.$nextTick(() => this.validate())
 
-      this.radios
-        .filter(r => r.value !== value)
-        .forEach(r => r.isActive = false)
+      for (const radio of this.radios) {
+        if (radio.value !== value) radio.isActive = false
+      }
     },
     radioBlur (e) {
       if (!e.relatedTarget || !e.relatedTarget.classList.contains('radio')) {
