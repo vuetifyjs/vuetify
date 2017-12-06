@@ -35,7 +35,7 @@
           |})
         section-text(:value="`${namespace}.customizingText3`")
         markup(lang="javascript")
-          |import colors from 'vuetify/src/util/colors'
+          |import colors from 'vuetify/es5/util/colors'
           |
           |Vue.use(Vuetify, {
           |   theme: {
