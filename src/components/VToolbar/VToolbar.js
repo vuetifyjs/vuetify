@@ -36,11 +36,12 @@ export default {
       desktop: 64,
       dense: 48
     },
-    isActiveProxy: false,
+    isActive: true,
     isExtended: false,
     isScrollingUp: false,
     previousScroll: null,
     previousScrollDirection: null,
+    savedScroll: 0,
     target: null
   }),
 
@@ -61,10 +62,7 @@ export default {
       validator: v => !isNaN(parseInt(v))
     },
     invertedScroll: Boolean,
-    manualScroll: {
-      type: Boolean,
-      default: null
-    },
+    manualScroll: Boolean,
     prominent: Boolean,
     scrollOffScreen: Boolean,
     scrollTarget: String,
@@ -108,7 +106,7 @@ export default {
     classes () {
       return this.addBackgroundColorClassChecks({
         'toolbar': true,
-        'elevation-0': this.flat || (!this.isActiveProxy && !this.tabs),
+        'elevation-0': this.flat || (!this.isActive && !this.tabs),
         'toolbar--absolute': this.absolute,
         'toolbar--card': this.card,
         'toolbar--clipped': this.clippedLeft || this.clippedRight,
@@ -132,50 +130,60 @@ export default {
 
       return this.$vuetify.application.right
     },
-    isActive () {
-      if (!this.scrollOffScreen) return true
-      if (this.manualScroll != null) return !this.manualScroll
-
-      return this.invertedScroll
-        ? this.currentScroll > this.scrollThreshold
-        : this.currentScroll < this.scrollThreshold ||
-          this.isScrollingUp
+    computedTransform () {
+      return !this.isActive
+        ? -this.computedHeight
+        : 0
+    },
+    currentThreshold () {
+      return Math.abs(this.currentScroll - this.savedScroll)
     },
     styles () {
-      const style = {}
-
-      if (!this.isActiveProxy) {
-        style.transform = `translateY(-${this.computedHeight}px)`
+      return {
+        marginTop: `${this.computedMarginTop}px`,
+        paddingRight: `${this.computedPaddingRight}px`,
+        paddingLeft: `${this.computedPaddingLeft}px`,
+        transform: `translateY(${this.computedTransform}px)`
       }
-
-      if (this.computedMarginTop) {
-        style.marginTop = `${this.computedMarginTop}px`
-      }
-
-      if (this.app) {
-        style.paddingRight = `${this.computedPaddingRight}px`
-        style.paddingLeft = `${this.computedPaddingLeft}px`
-      }
-
-      return style
     }
   },
 
   watch: {
-    // This is to avoid an accidental
-    // false positive when scrolling.
-    // sometimes for 1 frame it appears
-    // as if the direction has changed
-    // but it actually has not
-    isActive: {
-      immediate: true,
-      handler (val) {
-        clearTimeout(this.activeTimeout)
-
-        this.activeTimeout = setTimeout(() => {
-          this.isActiveProxy = val
-        }, 20)
+    currentThreshold (val) {
+      if (this.invertedScroll) {
+        return this.isActive = this.currentScroll > this.scrollThreshold
       }
+
+      if (val < this.scrollThreshold ||
+        !this.isBooted
+      ) return
+
+      this.isActive = this.isScrollingUp
+      this.savedScroll = this.currentScroll
+    },
+    isActive () {
+      this.savedScroll = 0
+    },
+    invertedScroll (val) {
+      this.isActive = !val
+    },
+    manualScroll (val) {
+      this.isActive = !val
+    },
+    isScrollingUp (val) {
+      this.savedScroll = this.savedScroll || this.currentScroll
+    }
+  },
+
+  beforeMount () {
+    if (this.invertedScroll ||
+      this.manualScroll
+    ) this.isActive = false
+  },
+
+  mounted () {
+    if (this.scrollTarget) {
+      this.target = document.querySelector(this.scrollTarget)
     }
   },
 
@@ -183,15 +191,11 @@ export default {
     onScroll () {
       if (typeof window === 'undefined') return
 
-      if (!this.target) {
-        this.target = this.scrollTarget
-          ? document.querySelector(this.scrollTarget)
-          : window
-      }
+      const target = this.target || window
 
       this.currentScroll = this.scrollTarget
-        ? this.target.scrollTop
-        : this.target.pageYOffset || document.documentElement.scrollTop
+        ? target.scrollTop
+        : target.pageYOffset || document.documentElement.scrollTop
 
       this.isScrollingUp = this.currentScroll < this.previousScroll
 
