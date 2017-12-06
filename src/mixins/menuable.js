@@ -266,7 +266,7 @@ export default {
       requestAnimationFrame(() => {
         const el = this.$refs.content
 
-        if (this.isShown(el)) return cb()
+        if (!el || this.isShown(el)) return cb()
 
         el.style.display = 'inline-block'
         cb()
@@ -277,7 +277,7 @@ export default {
       requestAnimationFrame(() => (this.isContentActive = true))
     },
     isShown (el) {
-      return !!el && el.style.display !== 'none'
+      return el.style.display !== 'none'
     },
     updateDimensions () {
       const dimensions = {}
