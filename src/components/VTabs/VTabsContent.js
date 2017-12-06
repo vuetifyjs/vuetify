@@ -35,6 +35,7 @@ export default {
       type: String,
       required: true
     },
+    touchless: Boolean,
     transition: {
       type: [Boolean, String],
       default: 'tab-transition'
@@ -86,5 +87,14 @@ export default {
     return h('transition', {
       props: { name: this.computedTransition }
     }, [div])
+
+    if(this.touchless) data.directives.push({
+      name: 'touch',
+      value: {
+        parent: true,
+        left: this.swipeLeft,
+        right: this.swipeRight
+      }
+    })
   }
 }
