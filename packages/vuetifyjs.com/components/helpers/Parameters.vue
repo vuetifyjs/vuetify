@@ -49,15 +49,16 @@
             item = { name: item }
           }
 
-          Object.keys(item).map(key => {
+          for (const header of this.headers) {
+            const key = header.value
             const fn = this[`gen${capitalize(key)}`]
 
             if (fn) {
               newItem[key] = fn(item[key])
             } else {
-              newItem[key] = item[key]
+              newItem[key] = item[key] == null ? '' : item[key]
             }
-          })
+          }
 
           newItem.desc = item.desc || this.genDescription(item.name)
 
