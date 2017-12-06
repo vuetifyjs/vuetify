@@ -150,8 +150,14 @@ export default {
       }
     },
     filterDuplicates (arr) {
-      const values = arr.map(this.getValue)
-      return arr.filter((el, i) => i === values.indexOf(values[i]))
+      const uniqueValues = new Map()
+      for (let index = 0; index < arr.length; ++index) {
+        const item = arr[index]
+        const val = this.getValue(item)
+
+        !uniqueValues.has(val) && uniqueValues.set(val, item)
+      }
+      return Array.from(uniqueValues.values())
     },
     genDirectives () {
       return [{
