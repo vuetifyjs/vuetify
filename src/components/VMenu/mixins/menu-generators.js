@@ -59,10 +59,13 @@ export default {
 
     genContent () {
       const options = {
-        'class': [
-          (`menu__content ${this.contentClass}`).trim(),
-          { 'menuable__content__active': this.isActive }
-        ],
+        staticClass: 'menu__content',
+        'class': {
+          [this.contentClass.trim()]: true,
+          'menuable__content__active': this.isActive,
+          'theme--dark': this.dark,
+          'theme--light': this.light
+        },
         style: this.styles,
         directives: this.genDirectives(),
         ref: 'content',

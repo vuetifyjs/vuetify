@@ -2,6 +2,7 @@
 
 .menu
   display: inline-block
+  margin: $button-margin
   position: relative
   vertical-align: middle
 
@@ -20,6 +21,9 @@
 
     input[readonly]
       cursor: pointer
+      
+    > *
+      margin: 0
 
   &__content
     position: absolute

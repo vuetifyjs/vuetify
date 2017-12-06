@@ -5,6 +5,7 @@ export default {
       default: 'arrow_drop_down'
     },
     appendIconCb: Function,
+    attach: Boolean,
     auto: Boolean,
     autocomplete: Boolean,
     browserAutocomplete: {

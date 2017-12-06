@@ -289,6 +289,7 @@ export default {
     const data = {
       attrs: {
         tabindex: this.isAutocomplete || this.disabled ? -1 : this.tabindex,
+        'data-uid': this._uid,
         ...(this.isAutocomplete ? null : this.$attrs),
         role: this.isAutocomplete ? null : 'combobox'
       }
