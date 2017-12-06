@@ -5,7 +5,8 @@ export default {
   examples: [{
     default: {
       header: 'Default',
-      desc: 'On a mobile device, try swiping in various directions.'
+      desc: 'On a mobile device, try swiping in various directions.',
+      uninverted: true
     }
   }],
   props: [{
