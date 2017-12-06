@@ -114,7 +114,7 @@ export default {
         'toolbar--clipped': this.clippedLeft || this.clippedRight,
         'toolbar--dense': this.dense,
         'toolbar--extended': this.isExtended,
-        'toolbar--fixed': this.fixed || this.app,
+        'toolbar--fixed': !this.absolute && (this.app || this.fixed),
         'toolbar--floating': this.floating,
         'toolbar--is-booted': this.isBooted,
         'toolbar--prominent': this.prominent,

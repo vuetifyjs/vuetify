@@ -39,7 +39,7 @@ export default {
     classes () {
       return {
         'bottom-nav--absolute': this.absolute,
-        'bottom-nav--fixed': this.fixed || this.app,
+        'bottom-nav--fixed': !this.absolute && (this.app || this.fixed),
         'bottom-nav--shift': this.shift,
         'bottom-nav--active': this.value
       }

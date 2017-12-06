@@ -102,7 +102,7 @@ export default {
         'navigation-drawer--absolute': this.absolute,
         'navigation-drawer--clipped': this.clipped,
         'navigation-drawer--close': !this.isActive,
-        'navigation-drawer--fixed': this.fixed || this.app,
+        'navigation-drawer--fixed': !this.absolute && (this.app || this.fixed),
         'navigation-drawer--floating': this.floating,
         'navigation-drawer--is-booted': this.isBooted,
         'navigation-drawer--is-mobile': this.isMobile,
