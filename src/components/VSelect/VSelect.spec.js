@@ -330,6 +330,6 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.menuIsActive).toBe(false)
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 })
