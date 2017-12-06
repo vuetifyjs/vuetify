@@ -34,7 +34,19 @@
           |   }
           |})
         section-text(:value="`${namespace}.customizingText3`")
+        markup(lang="javascript")
+          |import colors from 'vuetify/src/util/colors'
+          |
+          |Vue.use(Vuetify, {
+          |   theme: {
+          |     primary: colors.purple.base,
+          |     secondary: colors.gray.darken1,
+          |     accent: colors.shades.black,
+          |     error: colors.red.accent3
+          |   }
+          |})
         section-text(:value="`${namespace}.customizingText4`")
+        section-text(:value="`${namespace}.customizingText5`")
         markup(lang="javascript")
           |this.$vuetify.theme.primary = '#4caf50'
 </template>
