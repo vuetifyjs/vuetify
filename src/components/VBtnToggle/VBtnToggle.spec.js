@@ -1,9 +1,8 @@
-import { mount } from 'avoriaz'
 import VBtnToggle from './VBtnToggle'
 import VBtn from '../VBtn'
 import VIcon from '../VIcon'
 import { test } from '~util/testing'
-import Vue from 'vue/dist/vue.common'
+import Vue from 'vue'
 
 function createBtn (val = null) {
   const options = {
@@ -22,7 +21,24 @@ function createBtn (val = null) {
   })
 }
 
-test('VBtnToggle.vue', () => {
+function createFakeBtn() {
+  return Vue.component('v-btn', {
+    inject: ['buttonGroup'],
+    methods: {
+      testUnregister() {
+        this.buttonGroup.unregister(this)
+      }
+    },
+    mounted() {
+      this.buttonGroup.register(this)
+    },
+    render (h) {
+      return h('div')
+    }
+  })
+}
+
+test('VBtnToggle.vue', ({ mount }) => {
   it('should not allow empty value when mandatory prop is used', () => {
     const wrapper = mount(VBtnToggle, {
       propsData: {
@@ -169,6 +185,51 @@ test('VBtnToggle.vue', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should preserve mandatory invariant when selected child is unregistered', () => {
+    const wrapper = mount(VBtnToggle, {
+      propsData: {
+        inputValue: 1,
+        mandatory: true
+      },
+      slots: {
+        default: [
+          createBtn(),
+          createFakeBtn()
+        ]
+      }
+    })
+
+    const change = jest.fn()
+    wrapper.instance().$on('change', change)
+
+    wrapper.vm.$children[1].testUnregister()
+    wrapper.update()
+
+    expect(change).toBeCalledWith(0)
+  })
+
+  it('should not set new value when not mandatory and selected child is unregistered', () => {
+    const wrapper = mount(VBtnToggle, {
+      propsData: {
+        inputValue: 1,
+      },
+      slots: {
+        default: [
+          createBtn(),
+          createFakeBtn()
+        ]
+      }
+    })
+
+    const change = jest.fn()
+    wrapper.instance().$on('change', change)
+
+    wrapper.vm.$children[1].testUnregister()
+    wrapper.update()
+
+    expect(change).not.toBeCalled()
+  })
+
   it('should have btn with data-only-child if only one selected', () => {
     const wrapper = mount(VBtnToggle, {
       propsData: {
@@ -187,9 +248,9 @@ test('VBtnToggle.vue', () => {
     expect(btn.getAttribute('data-only-child')).toBe('true')
   })
 
-  // TODO: change never fires
-  it.skip('should toggle values of any type', async () => {
+  it('should toggle values of any type', async () => {
     const values = [true, false, null, 6, 'foo', { key: 'value' }, ['arrayyy']]
+    const verifyValues = [true, 1, 2, 6, 'foo', { key: 'value' }, ['arrayyy']]
     const buttons = values.map(v => createBtn(v))
     const wrapper = mount(VBtnToggle, {
       propsData: {
@@ -198,15 +259,14 @@ test('VBtnToggle.vue', () => {
       slots: { default: buttons }
     })
 
-    const change = jest.fn(value => {
-      wrapper.setProps({ inputValue: value })
-    })
+    const change = jest.fn()
     wrapper.vm.$on('change', change)
 
-    for (const button of wrapper.find(VBtn)) {
+    wrapper.find('button').forEach((button, i) => {
       button.trigger('click')
-      expect(change).toBeCalledWith(button.vm.value)
-    }
+
+      expect(change).toBeCalledWith(verifyValues[i])
+    })
 
     expect(wrapper.html()).toMatchSnapshot()
   })

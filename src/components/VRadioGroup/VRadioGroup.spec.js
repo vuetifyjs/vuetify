@@ -1,5 +1,5 @@
 import { test } from '~util/testing'
-import { VRadioGroup /*, VRadio */ } from '~components/VRadioGroup'
+import { VRadioGroup, VRadio } from '~components/VRadioGroup'
 
 test('VRadioGroup.vue', ({ mount }) => {
   it('should render role on radio group', () => {
@@ -12,4 +12,27 @@ test('VRadioGroup.vue', ({ mount }) => {
   })
 
   // TODO: Test ability to toggle multiple data types
+
+  it('should be in error when v-radio-group is', async () => {
+    const wrapper = mount(VRadioGroup, {
+      propsData: {
+        error: false
+      },
+      slots: {
+        default: [VRadio]
+      }
+    })
+    
+    const radio = wrapper.vm.radios[0]
+
+    wrapper.setProps({ error: true })
+    await wrapper.vm.$nextTick()
+    expect(radio.parentError).toBe(true)
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ error: false })
+    await wrapper.vm.$nextTick()
+    expect(radio.parentError).toBe(false)
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

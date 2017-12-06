@@ -1,8 +1,7 @@
 import VChip from '~components/VChip'
-import { mount } from 'avoriaz'
 import { test } from '~util/testing'
 
-test('VChip.vue', () => {
+test('VChip.vue', ({ mount, compileToFunctions }) => {
   it('should have a chip class', () => {
     const wrapper = mount(VChip)
 
@@ -37,6 +36,16 @@ test('VChip.vue', () => {
 
     expect(wrapper.element.classList).toContain('blue')
     expect(wrapper.element.classList).toContain('green--text')
+  })
+
+  it('should render a disabled chip', () => {
+    const wrapper = mount(VChip, {
+      propsData: {
+        disabled: true
+      }
+    })
+
+    expect(wrapper.element.classList).toContain('chip--disabled')
   })
 
   it('should render a colored outline chip', () => {

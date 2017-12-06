@@ -2,7 +2,9 @@
 
 exports[`VBottomNav.js should be hidden with a false value 1`] = `
 
-<div class="bottom-nav primary">
+<div class="bottom-nav"
+     style="height: 48px;"
+>
   <button type="button"
           class="btn"
           data-ripple="true"
@@ -23,7 +25,9 @@ exports[`VBottomNav.js should be hidden with a false value 1`] = `
 
 exports[`VBottomNav.js should be visible with a true value 1`] = `
 
-<div class="bottom-nav bottom-nav--active primary">
+<div class="bottom-nav bottom-nav--active"
+     style="height: 48px;"
+>
   <button type="button"
           class="btn"
           data-ripple="true"
@@ -44,7 +48,9 @@ exports[`VBottomNav.js should be visible with a true value 1`] = `
 
 exports[`VBottomNav.js should have a bottom-nav class 1`] = `
 
-<div class="bottom-nav primary">
+<div class="bottom-nav"
+     style="height: 48px;"
+>
   <button type="button"
           class="btn"
           data-ripple="true"
@@ -65,7 +71,9 @@ exports[`VBottomNav.js should have a bottom-nav class 1`] = `
 
 exports[`VBottomNav.js should have prop classes 1`] = `
 
-<div class="bottom-nav bottom-nav--absolute bottom-nav--shift primary">
+<div class="bottom-nav bottom-nav--absolute bottom-nav--shift"
+     style="height: 48px;"
+>
   <button type="button"
           class="btn"
           data-ripple="true"

@@ -18,6 +18,24 @@ test('VAlert.vue', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render component with transition', async () => {
+    const wrapper = mount(VAlert, {
+      propsData: { transition: 'foo' }
+    })
+
+    wrapper.setProps({ value: true })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.hasClass('foo-enter')).toBe(true)
+  })
+
+  it('should render component with outline prop', async () => {
+    const wrapper = mount(VAlert, {
+      propsData: { outline: true }
+    })
+
+    expect(wrapper.hasClass('alert--outline')).toBe(true)
+  })
+
   it('should be dismissible', async () => {
     const wrapper = mount(VAlert, {
       propsData: {

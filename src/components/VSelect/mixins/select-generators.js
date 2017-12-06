@@ -15,10 +15,13 @@ export default {
         props: {
           activator: this.$el,
           auto: this.auto,
+          attach: this.attach && `[data-uid="${this._uid}"]`,
           closeOnClick: false,
           closeOnContentClick: !this.isMultiple,
           contentClass: this.computedContentClass,
+          dark: this.dark,
           disabled: this.disabled,
+          light: this.light,
           maxHeight: this.maxHeight,
           nudgeTop: this.nudgeTop,
           offsetY: this.shouldOffset,
@@ -120,25 +123,6 @@ export default {
           ...this.genListeners(),
           input: e => {
             this.searchValue = this.unmaskText(e.target.value)
-          }
-        }
-
-        if (this.combobox) {
-          // When using the combobox
-          // update inputValue and
-          // set the menu status
-          data.on.blur = (e) => {
-            // If user clears input
-            // value will be falsey
-            // but not null
-            if (this.lazySearch == null ||
-              // If blur was caused by clicking
-              // a menu list tile, do nothing
-              (this.content && this.content.contains(e.relatedTarget)) ||
-              (this.$el && this.$el.contains(e.relatedTarget))
-            ) return
-
-            this.inputValue = this.lazySearch
           }
         }
 

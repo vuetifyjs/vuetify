@@ -4,11 +4,12 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 
 ### $500+
 - [LMAX Exchange](https://www.lmax.com/)
+- [Intygrate](http://intygrate.com/)
 
 ### $250+
-- [Intygrate](http://intygrate.com/)
 - [Eikos Partners](http://www.eikospartners.com/)
 - [rateGenius](https://application.rategenius.com/)
+- [quitt](https://quitt.ch/)
 
 ### $100+
 - [Anthony Gherghetta](https://gorilladash.com/)
@@ -24,7 +25,6 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 ### $20+
 - Tibor Nagy
 - [Jaime Olmo](https://www.jaimeolmo.com)
-- Maxim Bogdanov
 - Michael Marti
 - [Aeroden](www.aeroden.com)
 - Sam Mitchell
@@ -36,26 +36,22 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Robin Paolini
 - [Integra CCS](https://www.integraccs.com/)
 - Joel Hatch
+- Pierre Vanhulst
+- David Briscese
+- Juha Vehnia
 
 ### $10+
-
 - Kevin Pilard
 - Espen Bratberg
 - Ivan Vedernikov
-- Jérôme Pott
-- Sebastian Mares
 - Chava Sobreyra
-- Dima Shmakov
 - Costa Huang
-- Ryan Mortier
-- Roger Vilaseca
 - Paul
 - Asif Mehedi
 - Jussi Pesonen
 - Jordan Wood
 - Alexey Toroshchin
 - Phillippe Genois
-- Dominik Narożny
 - Jim O`Quinn
 - Sam Bosell
 - Cliff Hess
@@ -65,7 +61,6 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Dejan Kovac
 - Anythony Estebe
 - Luis F Rocha
-- HelloWorld
 - Eeico Wentrup
 - Mathieu Boyer
 - Chris Britton
@@ -74,3 +69,7 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Reto Aebersold
 - Max Matteo Staack
 - Mark Freedman
+- Fernando Rosentalski Neto
+- eric
+- Jon K
+- Alvin Wang

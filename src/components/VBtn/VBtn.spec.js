@@ -1,15 +1,61 @@
-import { mount } from 'avoriaz'
+import { test } from '~util/testing'
 import Vue from 'vue'
 import VBtn from '~components/VBtn'
+import VProgressCircular from '~components/VProgressCircular'
 
 const stub = {
   name: 'router-link',
   render: h => h('button')
 }
 
-describe('VBtn.js', () => {
+test('VBtn.js', ({ mount, compileToFunctions }) => {
   it('should render component and match snapshot', () => {
     const wrapper = mount(VBtn)
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render component with color prop and match snapshot', () => {
+    const wrapper1 = mount(VBtn, {
+      propsData: {
+        color: 'green darken-1'
+      }
+    })
+
+    expect(wrapper1.html()).toMatchSnapshot()
+
+    const wrapper2 = mount(VBtn, {
+      propsData: {
+        color: 'green darken-1',
+        flat: true
+      }
+    })
+
+    expect(wrapper2.html()).toMatchSnapshot()
+  })
+
+  it('should render component with loader slot and match snapshot', () => {
+    const wrapper = mount(VBtn, {
+      propsData: {
+        loading: true
+      },
+      slots: {
+        loader: [compileToFunctions('<span>loader</span>')]
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render component with loader and match snapshot', () => {
+    const wrapper = mount(VBtn, {
+      components: {
+        VProgressCircular
+      },
+      propsData: {
+        loading: true
+      }
+    })
 
     expect(wrapper.html()).toMatchSnapshot()
   })
@@ -51,5 +97,23 @@ describe('VBtn.js', () => {
 
     expect(wrapper.is('a')).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should register and unregister', () => {
+    const register = jest.fn()
+    const unregister = jest.fn()
+
+    const wrapper = mount(VBtn, {
+      provide: {
+        buttonGroup: {
+          register: register,
+          unregister: unregister
+        }
+      }
+    })
+
+    expect(register).toHaveBeenCalled()
+    wrapper.destroy()
+    expect(unregister).toHaveBeenCalled()
   })
 })

@@ -35,23 +35,23 @@ export default {
         'btn--disabled': this.type === 'month' && !this.isAllowed(date)
       }, this.themeClasses)
 
-      return this.$createElement('td', [
-        this.$createElement('button', {
-          staticClass: 'btn',
-          'class': (isActive || isCurrent)
-            ? this.addBackgroundColorClassChecks(classes)
-            : classes,
-          attrs: {
-            type: 'button'
-          },
-          domProps: {
-            innerHTML: `<span class="btn__content">${monthName}</span>`
-          },
-          on: {
-            click: () => this.monthClick(month)
-          }
-        })
-      ])
+      return this.$createElement('td', {
+        key: month
+      }, [this.$createElement('button', {
+        staticClass: 'btn',
+        'class': (isActive || isCurrent)
+          ? this.addBackgroundColorClassChecks(classes)
+          : classes,
+        attrs: {
+          type: 'button'
+        },
+        domProps: {
+          innerHTML: `<span class="btn__content">${monthName}</span>`
+        },
+        on: {
+          click: () => this.monthClick(month)
+        }
+      })])
     },
     monthGenTBody () {
       const children = []

@@ -82,8 +82,11 @@ export default {
       this.$nextTick(() => (this.isBooted = true))
     },
     tabItems (newItems, oldItems) {
-      // Tab item got removed
-      if (oldItems.length > newItems.length) {
+      // Tab item was removed and
+      // there are still more
+      if (oldItems.length > newItems.length &&
+        newItems.length > 0
+      ) {
         if (!newItems.find(o => o.id === this.target)) {
           const i = oldItems.findIndex(o => o.id === this.target)
 

@@ -71,15 +71,6 @@ export default {
 
       return this.value * 100 / this.bufferValue
     },
-    bufferStyles () {
-      const styles = {}
-
-      if (!this.active) {
-        styles.height = 0
-      }
-
-      return styles
-    },
     backgroundStyle () {
       const backgroundOpacity = this.backgroundOpacity == null
         ? (this.backgroundColor ? 1 : 0.3)

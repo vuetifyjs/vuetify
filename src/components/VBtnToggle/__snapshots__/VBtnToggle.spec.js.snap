@@ -10,6 +10,7 @@ exports[`VBtnToggle.vue should allow deselecting a value when mandatory prop is 
     <div class="btn__content">
       <i aria-hidden="true"
          class="material-icons icon"
+         style="font-size: 24px;"
       >
         add
       </i>
@@ -23,6 +24,7 @@ exports[`VBtnToggle.vue should allow deselecting a value when mandatory prop is 
     <div class="btn__content">
       <i aria-hidden="true"
          class="material-icons icon"
+         style="font-size: 24px;"
       >
         add
       </i>
@@ -36,6 +38,7 @@ exports[`VBtnToggle.vue should allow deselecting a value when mandatory prop is 
     <div class="btn__content">
       <i aria-hidden="true"
          class="material-icons icon"
+         style="font-size: 24px;"
       >
         add
       </i>
@@ -55,6 +58,7 @@ exports[`VBtnToggle.vue should allow new value when mandatory prop is used 1`] =
     <div class="btn__content">
       <i aria-hidden="true"
          class="material-icons icon"
+         style="font-size: 24px;"
       >
         add
       </i>
@@ -69,6 +73,7 @@ exports[`VBtnToggle.vue should allow new value when mandatory prop is used 1`] =
     <div class="btn__content">
       <i aria-hidden="true"
          class="material-icons icon"
+         style="font-size: 24px;"
       >
         add
       </i>
@@ -81,6 +86,7 @@ exports[`VBtnToggle.vue should allow new value when mandatory prop is used 1`] =
     <div class="btn__content">
       <i aria-hidden="true"
          class="material-icons icon"
+         style="font-size: 24px;"
       >
         add
       </i>
@@ -100,6 +106,7 @@ exports[`VBtnToggle.vue should allow new value when mandatory prop is used with 
     <div class="btn__content">
       <i aria-hidden="true"
          class="material-icons icon"
+         style="font-size: 24px;"
       >
         add
       </i>
@@ -114,6 +121,7 @@ exports[`VBtnToggle.vue should allow new value when mandatory prop is used with 
     <div class="btn__content">
       <i aria-hidden="true"
          class="material-icons icon"
+         style="font-size: 24px;"
       >
         add
       </i>
@@ -126,6 +134,7 @@ exports[`VBtnToggle.vue should allow new value when mandatory prop is used with 
     <div class="btn__content">
       <i aria-hidden="true"
          class="material-icons icon"
+         style="font-size: 24px;"
       >
         add
       </i>
@@ -147,6 +156,7 @@ exports[`VBtnToggle.vue should not allow empty value when mandatory prop is used
     <div class="btn__content">
       <i aria-hidden="true"
          class="material-icons icon"
+         style="font-size: 24px;"
       >
         add
       </i>
@@ -159,6 +169,7 @@ exports[`VBtnToggle.vue should not allow empty value when mandatory prop is used
     <div class="btn__content">
       <i aria-hidden="true"
          class="material-icons icon"
+         style="font-size: 24px;"
       >
         add
       </i>
@@ -171,6 +182,7 @@ exports[`VBtnToggle.vue should not allow empty value when mandatory prop is used
     <div class="btn__content">
       <i aria-hidden="true"
          class="material-icons icon"
+         style="font-size: 24px;"
       >
         add
       </i>
@@ -190,6 +202,7 @@ exports[`VBtnToggle.vue should not allow empty value when mandatory prop is used
     <div class="btn__content">
       <i aria-hidden="true"
          class="material-icons icon"
+         style="font-size: 24px;"
       >
         add
       </i>
@@ -204,6 +217,7 @@ exports[`VBtnToggle.vue should not allow empty value when mandatory prop is used
     <div class="btn__content">
       <i aria-hidden="true"
          class="material-icons icon"
+         style="font-size: 24px;"
       >
         add
       </i>
@@ -216,6 +230,110 @@ exports[`VBtnToggle.vue should not allow empty value when mandatory prop is used
     <div class="btn__content">
       <i aria-hidden="true"
          class="material-icons icon"
+         style="font-size: 24px;"
+      >
+        add
+      </i>
+    </div>
+  </button>
+</div>
+
+`;
+
+exports[`VBtnToggle.vue should toggle values of any type 1`] = `
+
+<div class="btn-toggle">
+  <button type="button"
+          value="true"
+          class="btn btn--flat"
+          data-ripple="true"
+  >
+    <div class="btn__content">
+      <i aria-hidden="true"
+         class="material-icons icon"
+         style="font-size: 24px;"
+      >
+        add
+      </i>
+    </div>
+  </button>
+  <button type="button"
+          class="btn btn--flat"
+          data-ripple="true"
+  >
+    <div class="btn__content">
+      <i aria-hidden="true"
+         class="material-icons icon"
+         style="font-size: 24px;"
+      >
+        add
+      </i>
+    </div>
+  </button>
+  <button type="button"
+          class="btn btn--flat"
+          data-ripple="true"
+  >
+    <div class="btn__content">
+      <i aria-hidden="true"
+         class="material-icons icon"
+         style="font-size: 24px;"
+      >
+        add
+      </i>
+    </div>
+  </button>
+  <button type="button"
+          value="6"
+          class="btn btn--flat"
+          data-ripple="true"
+  >
+    <div class="btn__content">
+      <i aria-hidden="true"
+         class="material-icons icon"
+         style="font-size: 24px;"
+      >
+        add
+      </i>
+    </div>
+  </button>
+  <button type="button"
+          value="foo"
+          class="btn btn--flat"
+          data-ripple="true"
+  >
+    <div class="btn__content">
+      <i aria-hidden="true"
+         class="material-icons icon"
+         style="font-size: 24px;"
+      >
+        add
+      </i>
+    </div>
+  </button>
+  <button type="button"
+          value="{&quot;key&quot;:&quot;value&quot;}"
+          class="btn btn--flat"
+          data-ripple="true"
+  >
+    <div class="btn__content">
+      <i aria-hidden="true"
+         class="material-icons icon"
+         style="font-size: 24px;"
+      >
+        add
+      </i>
+    </div>
+  </button>
+  <button type="button"
+          value="[&quot;arrayyy&quot;]"
+          class="btn btn--flat"
+          data-ripple="true"
+  >
+    <div class="btn__content">
+      <i aria-hidden="true"
+         class="material-icons icon"
+         style="font-size: 24px;"
       >
         add
       </i>
@@ -236,6 +354,7 @@ exports[`VBtnToggle.vue should use button value attribute if available 1`] = `
     <div class="btn__content">
       <i aria-hidden="true"
          class="material-icons icon"
+         style="font-size: 24px;"
       >
         add
       </i>
@@ -251,6 +370,7 @@ exports[`VBtnToggle.vue should use button value attribute if available 1`] = `
     <div class="btn__content">
       <i aria-hidden="true"
          class="material-icons icon"
+         style="font-size: 24px;"
       >
         add
       </i>
@@ -264,6 +384,7 @@ exports[`VBtnToggle.vue should use button value attribute if available 1`] = `
     <div class="btn__content">
       <i aria-hidden="true"
          class="material-icons icon"
+         style="font-size: 24px;"
       >
         add
       </i>

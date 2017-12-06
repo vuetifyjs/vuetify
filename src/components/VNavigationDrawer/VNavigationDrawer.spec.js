@@ -1,7 +1,6 @@
 import VApp from '~components/VApp'
 import VNavigationDrawer from '~components/VNavigationDrawer'
 import { test } from '~util/testing'
-import { mount } from 'avoriaz'
 
 const resizeWindow = (width = global.innerWidth, height = global.innerHeight) => {
   global.innerWidth = width
@@ -14,7 +13,7 @@ beforeEach(() => {
   return resizeWindow(1920, 1080)
 })
 
-test('VNavigationDrawer', () => {
+test('VNavigationDrawer', ({ mount }) => {
   // v-app is needed to initialise $vuetify.application
   const app = mount(VApp)
 
@@ -118,5 +117,97 @@ test('VNavigationDrawer', () => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.isActive).toBe(true)
+  })
+
+  it('should update content padding when temporary state is changed', async () => {
+    const wrapper = mount(VNavigationDrawer, { propsData: {
+      app: true
+    }})
+
+    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+
+    wrapper.setProps({ temporary: true })
+    expect(wrapper.vm.$vuetify.application.left).toBe(0)
+
+    wrapper.setProps({ temporary: false })
+    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+  })
+
+  it('should update content padding when permanent state is changed', async () => {
+    await resizeWindow(800)
+    const wrapper = mount(VNavigationDrawer, { propsData: {
+      app: true
+    }})
+
+    expect(wrapper.vm.$vuetify.application.left).toBe(0)
+
+    wrapper.setProps({ permanent: true })
+    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+
+    wrapper.setProps({ permanent: false })
+    expect(wrapper.vm.$vuetify.application.left).toBe(0)
+  })
+
+  it('should update content padding when miniVariant is changed', async () => {
+    const wrapper = mount(VNavigationDrawer, { propsData: {
+      app: true
+    }})
+
+    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+
+    wrapper.setProps({ miniVariant: true })
+    expect(wrapper.vm.$vuetify.application.left).toBe(80)
+
+    wrapper.setProps({ miniVariant: false })
+    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+  })
+
+  it('should not remain mobile when temporary is toggled', async () => {
+    await resizeWindow(800)
+    const wrapper = mount(VNavigationDrawer, { propsData: {
+      temporary: true
+    }})
+
+    await resizeWindow(1920)
+    expect(wrapper.vm.isMobile).toBe(false)
+  })
+
+  it('should stay closed when mobile and temporary is enabled', async () => {
+    await resizeWindow(800)
+    const wrapper = mount(VNavigationDrawer)
+    const input = jest.fn(value => wrapper.setProps({ value }))
+    wrapper.vm.$on('input', input)
+
+    wrapper.setProps({ temporary: true })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isActive).toBe(false)
+    expect(input.mock.calls).toHaveLength(0)
+  })
+
+  it('should update content padding when mobile is toggled', async () => {
+    const input = jest.fn()
+    const wrapper = mount(VNavigationDrawer, { propsData: {
+      app: true,
+      fixed: true,
+      value: true
+    }})
+
+    wrapper.vm.$on('input', input)
+    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+    await resizeWindow(800)
+    expect(wrapper.vm.$vuetify.application.left).toBe(0)
+    expect(wrapper.vm.isActive).toBe(false)
+    expect(input).toBeCalledWith(false)
+    wrapper.setProps({ value: false })
+    await wrapper.vm.$nextTick()
+    wrapper.setProps({ value: true })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isActive).toBe(true)
+    expect(wrapper.vm.$vuetify.application.left).toBe(0)
+    await resizeWindow(1920)
+    expect(wrapper.vm.isActive).toBe(true)
+    expect(wrapper.vm.isMobile).toBe(false)
+    expect(wrapper.vm.$vuetify.application.left).toBe(300)
   })
 })

@@ -1,6 +1,16 @@
 const semver = require('semver')
 
-const prerelease = semver.prerelease(process.env.TRAVIS_TAG)
-const prereleaseTag = (prerelease || [])[0] || ''
+const version = process.argv[2]
 
-console.log(/^[a-zA-Z]+$/.test(prereleaseTag) ? prereleaseTag : 'latest')
+if (!semver.valid(version)) {
+  console.error(`Error: '${version}' is not a valid NPM version string`)
+  process.exit(9)
+}
+
+const prerelease = semver.prerelease(version)
+
+if (prerelease == null) {
+  console.log('latest')
+} else {
+  console.log('next')
+}

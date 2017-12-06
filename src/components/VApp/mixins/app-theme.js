@@ -14,6 +14,7 @@ export default {
 
   created () {
     if (typeof document === 'undefined') {
+      this.$ssrContext && !this.$ssrContext._styles && (this.$ssrContext._styles = {})
       return this.$ssrContext && this.$ssrContext._styles &&
         (this.$ssrContext._styles['vuetify-theme-stylesheet'] = {
           ids: ['vuetify-theme-stylesheet'],
@@ -30,14 +31,21 @@ export default {
       this.style.innerHTML = this.genColors(this.$vuetify.theme)
     },
     genColors (theme) {
-      return Object.keys(theme).map(key => {
+      const colors = Object.keys(theme).map(key => {
         const value = theme[key]
 
         return (
           this.genBackgroundColor(key, value) +
           this.genTextColor(key, value)
         )
-      }).join('')
+      })
+
+      colors.push(this.genAnchorColor(this.$vuetify.theme.primary))
+
+      return colors.join('')
+    },
+    genAnchorColor (color) {
+      return `a{color: ${color};}`
     },
     genBackgroundColor (key, value) {
       return `.${key}{background-color:${value} !important;border-color:${value} !important;}`
