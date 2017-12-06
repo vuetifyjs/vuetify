@@ -13,7 +13,7 @@
     computed: {
       source () {
         const path = this.$route.fullPath
-        return `https://github.com/vuetifyjs/docs/blob/master${path}.vue`
+        return `https://github.com/vuetifyjs/vuetifyjs.com/blob/master${path}.vue`
       }
     },
 
