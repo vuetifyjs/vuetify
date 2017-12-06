@@ -25,7 +25,7 @@
           v-btn(
             icon
             tag="a"
-            v-bind:href="'https://github.com/vuetifyjs/docs/tree/master/examples/'+file+'.vue'"
+            v-bind:href="'https://github.com/vuetifyjs/vuetifyjs.com/tree/master/examples/'+file+'.vue'"
             target="_blank"
             slot="activator"
           )
@@ -229,7 +229,7 @@
 
   .component-example
     // margin-bottom: 32px
-    
+
     .application--example
       transition: .3s $transition.swing
 
