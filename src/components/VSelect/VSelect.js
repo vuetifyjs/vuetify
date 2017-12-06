@@ -154,6 +154,7 @@ export default {
       for (let index = 0; index < arr.length; ++index) {
         const item = arr[index]
         const val = this.getValue(item)
+
         !uniqueValues.has(val) && uniqueValues.set(val, item)
       }
       return Array.from(uniqueValues.values())
