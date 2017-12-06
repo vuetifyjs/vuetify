@@ -5,7 +5,8 @@ export default {
   examples: [{
     default: {
       header: 'Default',
-      desc: 'Resize your window and observe the values change..'
+      desc: 'Resize your window and observe the values change..',
+      uninverted: true
     }
   }],
   params: [{

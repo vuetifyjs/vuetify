@@ -5,31 +5,38 @@ export default {
   examples: [{
     buttons: {
       header: 'Default',
-      desc: 'Buttons by default have ripples enabled. This can be removed with the prop `:ripple="false`.'
+      desc: 'Buttons by default have ripples enabled. This can be removed with the prop `:ripple="false`.',
+      uninverted: true
     },
     customColor: {
       header: 'Custom color',
-      desc: 'Using a helper class, you can change the color of the ripple.'
+      desc: 'Using a helper class, you can change the color of the ripple.',
+      uninverted: true
     },
     tabs: {
       header: 'Tabs',
-      desc: 'Tabs by default have ripples disabled. This can be enabled with the **ripple** prop.'
+      desc: 'Tabs by default have ripples disabled. This can be enabled with the **ripple** prop.',
+      uninverted: true
     },
     navigationDrawers: {
       header: 'Navigation drawers',
-      desc: 'List items by default have ripples disabled. This can be enabled with the **ripple** prop'
+      desc: 'List items by default have ripples disabled. This can be enabled with the **ripple** prop',
+      uninverted: true
     },
     toolbars: {
       header: 'Toolbars',
-      desc: 'Toolbar items by default have ripples disabled. This can be enabled with the **ripple** prop.'
+      desc: 'Toolbar items by default have ripples disabled. This can be enabled with the **ripple** prop.',
+      uninverted: true
     },
     expansionPanels: {
       header: 'Expansion panels',
-      desc: 'Expansion panels by default have ripples disabled. This can be enabled with the **ripple** prop.'
+      desc: 'Expansion panels by default have ripples disabled. This can be enabled with the **ripple** prop.',
+      uninverted: true
     },
     htmlElement: {
       header: 'Standard HTML element',
-      desc: 'Add the ripple effect to a standard HTML element. This can be enabled with the `v-ripple` HTML attribute.'
+      desc: 'Add the ripple effect to a standard HTML element. This can be enabled with the `v-ripple` HTML attribute.',
+      uninverted: true
     }
   }],
   props: [{

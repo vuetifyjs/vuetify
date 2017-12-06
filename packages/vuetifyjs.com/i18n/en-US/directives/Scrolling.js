@@ -5,11 +5,13 @@ export default {
   examples: [{
     default: {
       header: 'Default',
-      desc: 'The default behavior is to bind to the window. If no additional configuration options are needed, you can simple pass your callback function.'
+      desc: 'The default behavior is to bind to the window. If no additional configuration options are needed, you can simple pass your callback function.',
+      uninverted: true
     },
     options: {
       header: 'Scroll with options',
-      desc: 'For a more fine tuned approach, you can designate the target to bind the scroll event listener.'
+      desc: 'For a more fine tuned approach, you can designate the target to bind the scroll event listener.',
+      uninverted: true
     }
   }],
   params: [{
