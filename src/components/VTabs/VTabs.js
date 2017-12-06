@@ -215,13 +215,13 @@ export default {
       })
     },
     updateTabs () {
-      this.content.forEach(({ toggle }) => {
-        toggle(this.target, this.reverse, this.isBooted)
-      })
+      for (const content of this.content) {
+        content.toggle(this.target, this.reverse, this.isBooted)
+      }
 
-      this.tabItems.forEach(({ toggle }) => {
-        toggle(this.target)
-      })
+      for (const tabItem of this.tabItems) {
+        tabItem.toggle(this.target)
+      }
     }
   },
 
