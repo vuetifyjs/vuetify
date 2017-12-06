@@ -9,7 +9,7 @@ export default {
     },
     colorAndShift: {
       header: 'Color & shift',
-      desc: 'When using a colored background, it is recommended to use the `light` prop. The `shift` prop will hide the button text until active. Keep in mind, `v-btn` text is required to be wrapped in a `&lt;span&gt;` tag.'
+      desc: 'When using a colored background, it is recommended to use the `light` prop. The `shift` prop will hide the button text until active. Keep in mind, `v-btn` text is required to be wrapped in a `<span>` tag.'
     },
     toggle: {
       header: 'Toggle',
