@@ -150,18 +150,13 @@ export default {
       }
     },
     filterDuplicates (arr) {
-      const result = []
-      const uniqueValues = new Set()
+      const uniqueValues = new Map()
       for (let index = 0; index < arr.length; ++index) {
         const item = arr[index]
         const val = this.getValue(item)
-        if (uniqueValues.has(val)) {
-          continue
-        }
-        uniqueValues.add(val)
-        result.push(item)
+        !uniqueValues.has(val) && uniqueValues.set(val, item)
       }
-      return result
+      return Array.from(uniqueValues.values())
     },
     genDirectives () {
       return [{
