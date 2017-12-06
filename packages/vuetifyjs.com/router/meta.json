@@ -263,7 +263,7 @@
     "description": "Navigation drawer component for Vuetify Framework",
     "keywords": "navigation, drawer, sidebar, sidenav"
   },
-  "/components/pagination": {
+  "/components/paginations": {
     "h1": "Pagination",
     "title": "Pagination Component",
     "description": "The v-pagination component is used to separate long sets of data so that it is easier for a user to consume information.",
