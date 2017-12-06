@@ -41,7 +41,7 @@
         |      }
         |    }
         |}
-      section-text(value="Layout.Grid.breakpointText3")
+      section-text(value="Components.Grid.breakpointText3")
       markup(lang="html")
         |&lt;v-dialog :fullscreen="$vuetify.breakpoint.xsOnly"&gt;
         |&nbsp;&nbsp;&nbsp;&nbsp;...
