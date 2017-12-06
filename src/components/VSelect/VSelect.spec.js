@@ -311,6 +311,6 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.selectedItems).toHaveLength(1)
     expect(wrapper.vm.selectedItems[0].value).toBe(3)
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 })
