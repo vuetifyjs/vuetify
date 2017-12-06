@@ -36,7 +36,7 @@ export default {
       }
 
       const rows = []
-      for (let index = 0, len = this.filteredItems.length; index < len; ++index) {
+      for (let index = 0; index < this.filteredItems.length; ++index) {
         const item = this.filteredItems[index]
         const props = this.createProps(item, index)
         let row = this.$scopedSlots.items(props)
@@ -47,7 +47,7 @@ export default {
             attrs: { active: this.isSelected(item) }
           })
         } else {
-          for (let childIndex = 0, childrenLen = row.length; childIndex < childrenLen; ++childIndex) {
+          for (let childIndex = 0; childIndex < row.length; ++childIndex) {
             const rowChild = row[childIndex]
             rowChild.key = rowChild.key || `${index}:${childIndex}`
           }
