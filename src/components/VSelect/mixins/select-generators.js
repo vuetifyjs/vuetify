@@ -70,10 +70,10 @@ export default {
     genSelections () {
       if (this.hideSelections) return []
 
-      const children = []
       const chips = this.chips
       const slots = this.$scopedSlots.selection
       const length = this.selectedItems.length
+      const children = new Array(length)
 
       let genSelection
       if (slots) {
@@ -87,7 +87,7 @@ export default {
       }
 
       for (let i = 0; i < length; i++) {
-        children.push(genSelection(this.selectedItems[i], i, i === length - 1))
+        children[i] = genSelection(this.selectedItems[i], i, i === length - 1)
       }
 
       return children
