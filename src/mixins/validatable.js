@@ -104,17 +104,17 @@ export default {
 
       this.errorBucket = []
 
-      this.rules.forEach(rule => {
+      for (const rule of this.rules) {
         const valid = typeof rule === 'function' ? rule(value) : rule
 
-        if (valid !== true && !['string', 'boolean'].includes(typeof valid)) {
-          throw new TypeError(`Rules should return a string or boolean, received '${typeof valid}' instead`)
-        }
-
         if (valid !== true) {
+          if (valid !== false && typeof valid !== 'string') {
+            throw new TypeError(`Rules should return a string or boolean, received '${typeof valid}' instead`)
+          }
+
           this.errorBucket.push(valid)
         }
-      })
+      }
 
       this.valid = this.errorBucket.length === 0
 
