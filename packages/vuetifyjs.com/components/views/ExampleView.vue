@@ -73,7 +73,7 @@
           :file="`${folder}/${example.file}`"
           :inverted="example.inverted"
           :has-inverted="!example.uninverted"
-          :id="`example-${i + 1}`"
+          :id="`example-${camelCaseToDash(example.file)}`"
           :key="example.file"
           :desc="example.desc"
           v-for="(example, i) in examples.slice(1)"
@@ -202,6 +202,9 @@
     methods: {
       hasTab (tab) {
         return (this.currentApi[tab] || []).length > 0
+      },
+      camelCaseToDash (str) {
+        return str.replace( /([a-z])([A-Z])/g, '$1-$2' ).toLowerCase()
       }
     }
   }
