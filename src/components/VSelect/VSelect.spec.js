@@ -291,4 +291,26 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
+
+  it('should use value comparator', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        multiple: true,
+        items: [
+          {text: 'one', value: 1},
+          {text: 'two', value: 2},
+          {text: 'three', value: 3}
+        ],
+        itemText: 'text',
+        itemValue: 'value',
+        valueComparator: (a, b) => Math.round(a) === Math.round(b),
+        value: [3.1]
+      }
+    })
+
+    expect(wrapper.vm.selectedItems).toHaveLength(1)
+    expect(wrapper.vm.selectedItems[0].value).toBe(3)
+    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  })
 })

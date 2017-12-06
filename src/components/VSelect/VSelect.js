@@ -235,14 +235,8 @@ export default {
       }
     },
     findExistingItem (item) {
-      return this.inputValue.findIndex((i) => {
-        const a = this.getValue(i)
-        const b = this.getValue(item)
-
-        if (a !== Object(a)) return a === b
-
-        return this.compareObjects(a, b)
-      })
+      const itemValue = this.getValue(item)
+      return this.inputValue.findIndex(i => this.valueComparator(this.getValue(i), itemValue))
     },
     selectItem (item) {
       if (!this.isMultiple) {
