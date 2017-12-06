@@ -60,7 +60,9 @@ export default {
     listClick (uid, isBooted) {
       if (this.expand) return
 
-      this.groups.forEach(group => group.cb(uid))
+      for (let i = this.groups.length - 1; i >= 0; i--) {
+        this.groups[i].cb(uid)
+      }
     }
   },
 
