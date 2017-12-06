@@ -74,17 +74,21 @@ export default {
       const chips = this.chips
       const slots = this.$scopedSlots.selection
       const length = this.selectedItems.length
-      this.selectedItems.forEach((item, i) => {
-        if (slots) {
-          children.push(this.genSlotSelection(item, i))
-        } else if (chips) {
-          children.push(this.genChipSelection(item, i))
-        } else if (this.segmented) {
-          children.push(this.genSegmentedBtn(item, i))
-        } else {
-          children.push(this.genCommaSelection(item, i < length - 1, i))
-        }
-      })
+
+      let genSelection
+      if (slots) {
+        genSelection = this.genSlotSelection
+      } else if (chips) {
+        genSelection = this.genChipSelection
+      } else if (this.segmented) {
+        genSelection = this.genSegmentedBtn
+      } else {
+        genSelection = this.genCommaSelection
+      }
+
+      for (let i = 0; i < length; i++) {
+        children.push(genSelection(this.selectedItems[i], i, i === length - 1))
+      }
 
       return children
     },
@@ -190,14 +194,14 @@ export default {
         key: this.getValue(item)
       }, this.getText(item))
     },
-    genCommaSelection (item, comma, index) {
+    genCommaSelection (item, index, last) {
       return this.$createElement('div', {
         staticClass: 'input-group__selections__comma',
         'class': {
           'input-group__selections__comma--active': index === this.selectedIndex
         },
         key: JSON.stringify(this.getValue(item)) // Item may be an object
-      }, `${this.getText(item)}${comma ? ', ' : ''}`)
+      }, `${this.getText(item)}${last ? '' : ', '}`)
     },
     genList () {
       const children = this.menuItems.map(o => {
