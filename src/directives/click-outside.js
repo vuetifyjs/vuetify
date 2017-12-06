@@ -67,11 +67,11 @@ export default {
     // or body, this is the entire purpose of the v-app
     // component and [data-app], stop removing this
     const app = document.querySelector('[data-app]') ||
-      document.body // This is only for unit tests    
+      document.body // This is only for unit tests
 
-    events.forEach(event => {
+    for (const event of events) {
       app.addEventListener(event, onClick, true)
-    })
+    }
     el._clickOutside = onClick
   },
 
@@ -79,9 +79,9 @@ export default {
     const app = document.querySelector('[data-app]') ||
       document.body // This is only for unit tests
     if (app) {
-      events.forEach(event => {
+      for (const event of events) {
         app.removeEventListener(event, el._clickOutside, true)
-      })
+      }
     }
   }
 }
