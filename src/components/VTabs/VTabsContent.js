@@ -35,6 +35,7 @@ export default {
       type: String,
       required: true
     },
+    touchless: Boolean,
     transition: {
       type: [Boolean, String],
       default: 'tab-transition'
