@@ -60,7 +60,7 @@ export default {
     listClick (uid, isBooted) {
       if (this.expand) return
 
-      for (let i = this.groups.length - 1; i >= 0; i--) {
+      for (let i = this.groups.length; i--;) {
         this.groups[i].cb(uid)
       }
     }

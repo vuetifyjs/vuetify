@@ -79,7 +79,7 @@ export default {
       return !errors
     },
     reset () {
-      for (let i = this.inputs.length - 1; i >= 0; i--) {
+      for (let i = this.inputs.length; i--;) {
         this.inputs[i].reset()
       }
       if (this.lazyValidation) this.errorBag = {}
