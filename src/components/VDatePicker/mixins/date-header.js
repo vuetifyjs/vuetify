@@ -52,11 +52,11 @@ export default {
         'class': 'picker--date__header-selector'
       }, [
         this.genBtn(keyValue - 1, [
-          this.$createElement('v-icon', this.previousIcon)
+          this.$createElement('v-icon', this.prependIcon)
         ]),
         this.genHeader(keyValue, selectorText),
         this.genBtn(keyValue + 1, [
-          this.$createElement('v-icon', this.nextIcon)
+          this.$createElement('v-icon', this.appendIcon)
         ])
       ])
     }
