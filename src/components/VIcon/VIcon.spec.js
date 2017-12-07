@@ -94,14 +94,4 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.text()).toBe('')
     expect(wrapper.element.className).toBe('fa icon fa-home')
   })
-
-  it('should render a custom svg icon', () => {
-    const wrapper = mount(VIcon, functionalContext({
-      props: { svg: true },
-      domProps: { innerHTML: '<svg viewBox="0 0 20 20"><path d="M19 4.23L15.75 1 10 6.83 4.12 1 1 4.23l5.88 5.83L1 15.9 4.13 19 10 13.17 15.75 19 19 15.9l-5.88-5.84"></path></svg>' }
-    }))
-
-    expect(wrapper.contains('svg')).toEqual(true)
-    expect(wrapper.element.className).toBe('icon')
-  })
 })

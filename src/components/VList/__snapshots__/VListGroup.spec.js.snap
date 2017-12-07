@@ -8,14 +8,12 @@ exports[`VListGroup.js should render a component with no padding for action icon
       <li class="list__group__header__prepend-icon">
         <i aria-hidden="true"
            class="material-icons icon"
-           style="font-size: 24px;"
         >
         </i>
       </li>
       <li class="list__group__header__append-icon">
         <i aria-hidden="true"
            class="material-icons icon"
-           style="font-size: 24px;"
         >
           keyboard_arrow_down
         </i>
@@ -38,14 +36,12 @@ exports[`VListGroup.js should render a component with route namespace and match 
       <li class="list__group__header__prepend-icon">
         <i aria-hidden="true"
            class="material-icons icon"
-           style="font-size: 24px;"
         >
         </i>
       </li>
       <li class="list__group__header__append-icon">
         <i aria-hidden="true"
            class="material-icons icon"
-           style="font-size: 24px;"
         >
           keyboard_arrow_down
         </i>
@@ -68,14 +64,12 @@ exports[`VListGroup.js should render a lazy component and match snapshot 1`] = `
       <li class="list__group__header__prepend-icon">
         <i aria-hidden="true"
            class="material-icons icon"
-           style="font-size: 24px;"
         >
         </i>
       </li>
       <li class="list__group__header__append-icon">
         <i aria-hidden="true"
            class="material-icons icon"
-           style="font-size: 24px;"
         >
           keyboard_arrow_down
         </i>
@@ -98,14 +92,12 @@ exports[`VListGroup.js should render component and match snapshot 1`] = `
       <li class="list__group__header__prepend-icon">
         <i aria-hidden="true"
            class="material-icons icon"
-           style="font-size: 24px;"
         >
         </i>
       </li>
       <li class="list__group__header__append-icon">
         <i aria-hidden="true"
            class="material-icons icon"
-           style="font-size: 24px;"
         >
           keyboard_arrow_down
         </i>
