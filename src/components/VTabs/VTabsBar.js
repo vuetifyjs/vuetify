@@ -43,6 +43,10 @@ export default {
     }
   },
 
+  props: {
+    touchless: Boolean
+  },
+
   computed: {
     classes () {
       return {
@@ -97,6 +101,20 @@ export default {
         ref: 'container'
       }, this.$slots.default)
     },
+    genDirectives () {
+      const directives = []
+
+      !this.touchless && directives.push({
+        name: 'touch',
+        value: {
+          start: this.start,
+          move: this.move,
+          end: this.end
+        }
+      })
+
+      return directives
+    },
     genIcon (direction) {
       const capitalize = direction.charAt(0).toUpperCase() + direction.slice(1)
       return this.$createElement(VIcon, {
@@ -110,14 +128,7 @@ export default {
     genWrapper () {
       return this.$createElement('div', {
         class: this.wrapperClasses,
-        directives: [{
-          name: 'touch',
-          value: {
-            start: this.start,
-            move: this.move,
-            end: this.end
-          }
-        }]
+        directives: this.genDirectives()
       }, [this.genContainer()])
     },
     start (e) {
