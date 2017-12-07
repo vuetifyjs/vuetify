@@ -73,7 +73,6 @@ exports[`VSelect should render buttons correctly when using items array with seg
     </div>
     <i aria-hidden="true"
        class="material-icons icon input-group__append-icon input-group__icon-cb"
-       style="font-size: 24px;"
     >
       arrow_drop_down
     </i>
@@ -133,7 +132,6 @@ exports[`VSelect should render buttons correctly when using slot with segmented 
     </div>
     <i aria-hidden="true"
        class="material-icons icon input-group__append-icon input-group__icon-cb"
-       style="font-size: 24px;"
     >
       arrow_drop_down
     </i>

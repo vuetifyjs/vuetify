@@ -28,7 +28,6 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
   it('should render a mapped size', () => {
     const SIZE_MAP = {
       small: '16px',
-      default: '24px',
       medium: '28px',
       large: '36px',
       xLarge: '40px'
