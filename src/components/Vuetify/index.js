@@ -18,24 +18,18 @@ const Vuetify = {
 
     Vue.prototype.$vuetify = $vuetify.inspire
 
-    if (opts.transitions) {
-      for (const t of Object.values(opts.transitions)) {
-        if (t.name !== undefined && t.name.startsWith('v-')) {
-          Vue.component(t.name, t)
-        }
+    for (const t of Object.values(Object(opts.transitions))) {
+      if (t.name !== undefined && t.name.startsWith('v-')) {
+        Vue.component(t.name, t)
       }
     }
 
-    if (opts.directives) {
-      for (const d of Object.values(opts.directives)) {
-        Vue.directive(d.name, d)
-      }
+    for (const d of Object.values(Object(opts.directives))) {
+      Vue.directive(d.name, d)
     }
 
-    if (opts.components) {
-      for (const c of Object.values(opts.components)) {
-        Vue.use(c)
-      }
+    for (const c of Object.values(Object(opts.components))) {
+      Vue.use(c)
     }
   }
 }

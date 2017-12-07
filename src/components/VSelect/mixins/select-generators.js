@@ -70,15 +70,13 @@ export default {
     genSelections () {
       if (this.hideSelections) return []
 
-      const chips = this.chips
-      const slots = this.$scopedSlots.selection
-      const length = this.selectedItems.length
+      let length = this.selectedItems.length
       const children = new Array(length)
 
       let genSelection
-      if (slots) {
+      if (this.$scopedSlots.selection) {
         genSelection = this.genSlotSelection
-      } else if (chips) {
+      } else if (this.chips) {
         genSelection = this.genChipSelection
       } else if (this.segmented) {
         genSelection = this.genSegmentedBtn
@@ -86,8 +84,8 @@ export default {
         genSelection = this.genCommaSelection
       }
 
-      for (let i = 0; i < length; i++) {
-        children[i] = genSelection(this.selectedItems[i], i, i === length - 1)
+      while (length--) {
+        children[length] = genSelection(this.selectedItems[length], length, length === children.length - 1)
       }
 
       return children
