@@ -1,4 +1,8 @@
+import { provide as RegistrableProvide } from './registrable'
+
 export default {
+  mixins: [RegistrableProvide('buttonGroup')],
+
   data () {
     return {
       buttons: [],
@@ -53,23 +57,36 @@ export default {
       if (selected.length === 1) {
         this.buttons[selected[0]].$el.setAttribute('data-only-child', true)
       }
+    },
+    register (button) {
+      const index = this.buttons.length
+      this.buttons.push(button)
+      this.listeners.push(this.updateValue.bind(this, index))
+      button.$on('click', this.listeners[index])
+    },
+    unregister (button) {
+      const index = this.buttons.indexOf(button)
+      if (index === -1) {
+        return
+      }
+
+      const wasSelected = this.isSelected(index)
+
+      button.$off('click', this.listeners[index])
+      this.buttons.splice(index, 1)
+      this.listeners.splice(index, 1)
+
+      // Preserve the mandatory invariant
+      if (wasSelected &&
+          this.mandatory &&
+          this.buttons.every((_, i) => !this.isSelected(i)) &&
+          this.listeners.length > 0) {
+        this.listeners[0]()
+      }
     }
   },
 
   mounted () {
-    this.buttons = this.$children
-
-    this.buttons.forEach((button, i) => {
-      this.listeners.push(this.updateValue.bind(this, i))
-      button.$on('click', this.listeners[i])
-    })
-
     this.update()
-  },
-
-  beforeDestroy () {
-    this.buttons.forEach((button, i) => {
-      button.$off('click', this.listeners[i])
-    })
   }
 }

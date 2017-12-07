@@ -5,6 +5,7 @@ import Positionable from '../../mixins/positionable'
 import Routable from '../../mixins/routable'
 import Themeable from '../../mixins/themeable'
 import { factory as ToggleableFactory } from '../../mixins/toggleable'
+import { inject as RegistrableInject } from '../../mixins/registrable'
 
 export default {
   name: 'v-btn',
@@ -14,7 +15,8 @@ export default {
     Routable,
     Positionable,
     Themeable,
-    ToggleableFactory('inputValue')
+    ToggleableFactory('inputValue'),
+    RegistrableInject('buttonGroup')
   ],
 
   props: {
@@ -131,6 +133,18 @@ export default {
       }
 
       return this.$createElement('span', { 'class': 'btn__loading' }, children)
+    }
+  },
+
+  mounted () {
+    if (this.buttonGroup) {
+      this.buttonGroup.register(this)
+    }
+  },
+
+  beforeDestroy () {
+    if (this.buttonGroup) {
+      this.buttonGroup.unregister(this)
     }
   },
 

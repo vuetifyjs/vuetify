@@ -141,8 +141,6 @@ test('VToolbar.vue', ({ mount }) => {
     wrapper.setProps({ manualScroll: true })
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.isActive).toBe(false)
-    await new Promise(resolve => setTimeout(resolve, 20))
-    expect(wrapper.vm.isActiveProxy).toBe(false)
   })
 
   it.skip('should set a custom target', async () => {

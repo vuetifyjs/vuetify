@@ -10,7 +10,9 @@ function directive (e, el, binding, v) {
   // Chrome/Firefox support isTrusted property
   // IE/Edge support pointerType property (empty if not triggered
   // by pointing device)
-  if (!e.isTrusted || ('pointerType' in e && !e.pointerType)) return
+  if (('isTrusted' in e && !e.isTrusted) ||
+    ('pointerType' in e && !e.pointerType)
+  ) return
 
   // Get value passed to directive
   const val = binding.value || (() => true)
@@ -58,7 +60,12 @@ function clickedInEl (el, x, y) {
 export default {
   name: 'click-outside',
 
-  bind (el, binding, v) {
+  // [data-app] may not be found
+  // if using bind, inserted makes
+  // sure that the root element is
+  // available, iOS does not support
+  // clicks on body
+  inserted (el, binding, v) {
     const onClick = e => directive(e, el, binding, v)
     // iOS does not recognize click events on document
     // or body, this is the entire purpose of the v-app

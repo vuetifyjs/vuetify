@@ -80,10 +80,9 @@ export default {
 
   computed: {
     calculatedLeft () {
-      let left = this.calcLeft
-      if (this.auto) left = this.calcLeftAuto
+      if (!this.auto) return this.calcLeft()
 
-      return `${this.calcXOverflow(left())}px`
+      return `${this.calcXOverflow(this.calcLeftAuto())}px`
     },
     calculatedMaxHeight () {
       return this.auto
@@ -120,9 +119,9 @@ export default {
       )}px`
     },
     calculatedTop () {
-      const top = this.auto ? this.calcTopAuto : this.calcTop
+      if (!this.auto || this.absolute) return this.calcTop()
 
-      return `${this.calcYOverflow(top())}px`
+      return `${this.calcYOverflow(this.calcTopAuto())}px`
     },
     styles () {
       return {
