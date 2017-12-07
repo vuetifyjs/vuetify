@@ -9,7 +9,7 @@ btn-toggle($material)
   .btn
     color: $material.text.primary
 
-    &[data-selected]:not(:last-child):not([data-only-child])
+    &.btn--active:not(:last-child):not([data-only-child])
       border-right-color: $material.buttons.disabled
 
 theme(btn-toggle, "btn-toggle")
@@ -35,7 +35,7 @@ theme(btn-toggle, "btn-toggle")
     &:after
       display: none
 
-    &[data-selected]
+    &.btn--active
       opacity: 1
 
     &__content

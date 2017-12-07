@@ -29,28 +29,14 @@ export default {
       for (let i = 0; i < this.buttons.length; i++) {
         const elm = this.buttons[i].$el
 
-        // Fix for testing, dataset does not exist on elm?
-        if (!elm.dataset) elm.dataset = {}
-
         elm.removeAttribute('data-only-child')
 
         if (this.isSelected(i)) {
-          elm.setAttribute('data-selected', true)
-
-          if (!elm.classList.contains('btn--router')) {
-            elm.classList.add('btn--active')
-          }
-
+          elm.classList.contains('btn--router') || elm.classList.add('btn--active')
           selected.push(i)
         } else {
-          elm.removeAttribute('data-selected')
-
-          if (!elm.classList.contains('btn--router')) {
-            elm.classList.remove('btn--active')
-          }
+          elm.classList.contains('btn--router') || elm.classList.remove('btn--active')
         }
-
-        elm.dataset.index = i
       }
 
       if (selected.length === 1) {
