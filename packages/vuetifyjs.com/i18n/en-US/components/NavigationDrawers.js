@@ -29,7 +29,8 @@ export default {
     },
     dark: {
       header: 'Dark theme',
-      desc: 'Vuetify also supports the dark application theme. This will not override components that have default themes so in some cases it will be necessary to manually set the dark theme accents.'
+      desc: 'Vuetify also supports the dark application theme. This will not override components that have default themes so in some cases it will be necessary to manually set the dark theme accents.',
+      uninverted: true
     }
   }]
 }

@@ -1,6 +1,6 @@
 <template>
   <v-card height="350px">
-    <v-navigation-drawer permanent absolute light v-model="drawer">
+    <v-navigation-drawer permanent absolute v-model="drawer">
       <v-toolbar flat class="transparent">
         <v-list class="pa-0">
           <v-list-tile avatar>

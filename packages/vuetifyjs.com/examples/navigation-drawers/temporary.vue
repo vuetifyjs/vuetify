@@ -8,7 +8,6 @@
     <v-navigation-drawer
       temporary
       v-model="drawer"
-      light
       absolute
     >
       <v-list class="pa-1">
