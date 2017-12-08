@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-jumbotron
-      src="https://vuetifyjs.com/static/doc-images/parallax/material2.jpg"
+      src="/static/doc-images/parallax/material2.jpg"
       :gradient="gradient"
       dark
     >

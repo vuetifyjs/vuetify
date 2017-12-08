@@ -29,7 +29,11 @@
     computed: {
       script () {
         const replace = /(export default {|<script>|<\/script>|}([^}]*)$)/g
-        return (this.pen.script || '').replace(replace, '').replace(/\n {2}/g, '\n').trim()
+        return (this.pen.script || '')
+          .replace(replace, '')
+          .replace(/\/static\//g, 'https://vuetifyjs.com/static/')
+          .replace(/\n {2}/g, '\n')
+          .trim()
       },
       style () {
         return {
@@ -40,7 +44,8 @@
       template () {
         const template = this.pen.template || ''
 
-        return template.replace('/static/', 'https://vuetifyjs.com/static/')
+        return template
+          .replace(/\/static\//g, 'https://vuetifyjs.com/static/')
           .replace(/(<template>|<\/template>([^<\/template>]*)$)/g, '')
           .replace(/\n/g, '\n  ')
           .trim()
