@@ -23,6 +23,10 @@ export default {
       header: "Date pickers - Internationalization",
       desc: 'The date picker supports internationalization through the JavaScript Date object. Specify a BCP 47 language tag using the <code>locale</code> prop, and then set the first day of the week with the <code>first-day-of-week</code> prop.'
     },
+    dateIcons: {
+      header: "Date pickers - icons",
+      desc: 'You can override the default icons used in the picker.'
+    },
     monthLight: {
       header: "Month pickers",
       desc: 'Month pickers come in two orientation variations, portrait **(default)** and landscape.'
@@ -42,6 +46,10 @@ export default {
     monthInternationalization: {
       header: "Month pickers - Internationalization",
       desc: 'The month picker supports internationalization through the JavaScript Date object. Specify a BCP 47 language tag using the <code>locale</code> prop, and then set the first day of the week with the <code>first-day-of-week</code> prop.'
+    },
+    monthIcons: {
+      header: "Month pickers - icons",
+      desc: 'You can override the default icons used in the picker.'
     },
     timeLight: {
       header: "Time pickers",
@@ -81,7 +89,9 @@ export default {
       "headerDateFormat": "Allows you to customize the format of the month string that appears in the header of the calendar. Called with date (ISO 8601 string) and locale (string) arguments.",
       "yearFormat": "Allows you to customize the format of the year string that appears in the header of the calendar. Called with date (ISO 8601 string) and locale (string) arguments.",
       "dayFormat": "Allows you to customize the format of the day string that appears in the date table. Called with date (ISO 8601 string) and locale (string) arguments.",
-      "yearIcon": "Generates an icon next to the year"
+      "yearIcon": "Generates an icon next to the year",
+      "appendIcon": "Sets the icon for next month/year button",
+      "prependIcon": "Sets the icon for previous month/year button"
     },
     "v-time-picker": {
       "actions": "Use this when using actions inside the picker",
