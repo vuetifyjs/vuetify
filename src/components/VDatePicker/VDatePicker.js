@@ -51,6 +51,10 @@ export default {
       type: [Array, Object, Function],
       default: () => (null)
     },
+    appendIcon: {
+      type: String,
+      default: 'chevron_right'
+    },
     // Function formatting the day in date picker table
     dayFormat: {
       type: Function,
@@ -73,6 +77,10 @@ export default {
     monthFormat: {
       type: Function,
       default: null
+    },
+    prependIcon: {
+      type: String,
+      default: 'chevron_left'
     },
     // Function formatting currently selected date in the picker title
     titleDateFormat: {

@@ -42,7 +42,8 @@ export default {
         // Leave menu in place if attached
         // and dev has not changed target
         this.attach === '' || // If used as a boolean prop (<v-menu attach>)
-        this.attach === true // If bound to a boolean (<v-menu :attach="true">)
+        this.attach === true || // If bound to a boolean (<v-menu :attach="true">)
+        this.attach === 'attach' // If bound as boolean prop in pug (v-menu(attach))
       ) return
 
       let target
