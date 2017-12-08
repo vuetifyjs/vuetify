@@ -8,29 +8,29 @@
     ).app-footer.justify-center
       v-layout(justify-space-between).ma-0
         v-flex(v-if="prev")
-          v-btn(
-            color="primary"
-            dark
-            :icon="$vuetify.breakpoint.mdAndUp"
-            :fab="$vuetify.breakpoint.smAndDown"
-            :to="prev.href"
-          )
-            v-icon chevron_left
-          span(v-text="prev.title").subheading.no-wrap.hidden-xs-only
+          router-link(:to="prev.href").d-inline-flex.align-center
+            v-btn(
+              color="primary"
+              dark
+              :icon="$vuetify.breakpoint.mdAndUp"
+              :fab="$vuetify.breakpoint.smAndDown"
+            )
+              v-icon chevron_left
+            span(v-text="prev.title").subheading.no-wrap.hidden-xs-only
         v-flex(
           :mr-5="$vuetify.breakpoint.smAndDown"
           :pr-4="$vuetify.breakpoint.smAndDown"
           v-if="next"
         ).text-xs-right
-          span(v-text="next.title").subheading.no-wrap.hidden-xs-only
-          v-btn(
-            color="primary"
-            dark
-            :icon="$vuetify.breakpoint.mdAndUp"
-            :fab="$vuetify.breakpoint.smAndDown"
-            :to="next.href"
-          )
-            v-icon chevron_right
+          router-link(:to="next.href").d-inline-flex.align-center
+            span(v-text="next.title").subheading.no-wrap.hidden-xs-only
+            v-btn(
+              color="primary"
+              dark
+              :icon="$vuetify.breakpoint.mdAndUp"
+              :fab="$vuetify.breakpoint.smAndDown"
+            )
+              v-icon chevron_right
 </template>
 
 <script>
@@ -92,6 +92,10 @@
 
 <style lang="stylus">
   .app-footer
+    a
+      color: inherit
+      text-decoration: none
+
     &__title
       color: #fff
 
