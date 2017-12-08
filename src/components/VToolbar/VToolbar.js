@@ -189,7 +189,9 @@ export default {
 
   methods: {
     onScroll () {
-      if (typeof window === 'undefined') return
+      if (!this.scrollOffScreen ||
+        typeof window === 'undefined'
+      ) return
 
       const target = this.target || window
 
@@ -223,15 +225,13 @@ export default {
       on: this.$listeners
     }
 
-    if (this.scrollOffScreen) {
-      data.directives = [{
-        name: 'scroll',
-        value: {
-          callback: this.onScroll,
-          target: this.scrollTarget
-        }
-      }]
-    }
+    data.directives = [{
+      name: 'scroll',
+      value: {
+        callback: this.onScroll,
+        target: this.scrollTarget
+      }
+    }]
 
     children.push(h('div', {
       staticClass: 'toolbar__content',
