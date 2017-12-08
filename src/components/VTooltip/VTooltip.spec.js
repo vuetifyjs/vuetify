@@ -21,7 +21,7 @@ test('VTooltip.js', ({ mount, compileToFunctions }) => {
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with value=true and match snapshot', async () => {
@@ -37,7 +37,7 @@ test('VTooltip.js', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.data().isActive).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with zIndex prop and match snapshot', async () => {
@@ -48,7 +48,7 @@ test('VTooltip.js', ({ mount, compileToFunctions }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should display tooltip after mouseenter and hide after mouseleave', async () => {
@@ -82,6 +82,6 @@ test('VTooltip.js', ({ mount, compileToFunctions }) => {
     expect(setTimeout.mock.calls[1][1]).toBe(321)
     expect(cb).toBeCalledWith(false)
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 })

@@ -24,7 +24,7 @@ function createMenuPicker (mount, props) {
 
   const picker = menu.$slots.default[0].context.$refs.picker
 
-  expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  expect('Unable to locate target [data-app]').toHaveBeenTipped()
 
   return { wrapper, menu, picker }
 }
@@ -256,5 +256,19 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     await wrapper.vm.$nextTick()
     expect(menu.isActive).toBe(false)
     expect(input).toBeCalledWith('2013-06')
+  })
+
+  it('should use prev and next icons', () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        type: 'month',
+        prependIcon: 'block',
+        appendIcon: 'check'
+      }
+    })
+
+    const icons = wrapper.find('.date-picker-header .icon')
+    expect(icons[0].element.textContent).toBe('block')
+    expect(icons[1].element.textContent).toBe('check')
   })
 })

@@ -50,7 +50,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     pagination.descending = true
 
     expect(wrapper.vm.$props.pagination.descending).toBe(true)
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should match a snapshot - no matching results', () => {
@@ -63,7 +63,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     const content = wrapper.find('table.datatable tbody > tr > td')[0]
     expect(content.element.textContent).toBe('No matching records found')
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should match a snapshot - no data', () => {
@@ -76,7 +76,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     const content = wrapper.find('table.datatable tbody > tr > td')[0]
     expect(content.element.textContent).toBe('No data available')
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should match a snapshot - with data', () => {
@@ -104,7 +104,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     const wrapper = mount(component)
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should match a snapshot with single rows-per-page-items', () => {
@@ -122,7 +122,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     const wrapper = mount(VDataTable, data)
 
     expect(wrapper.find('tbody td')[0].html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should match display no-results-text when no results', () => {
@@ -132,7 +132,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     const wrapper = mount(VDataTable, data)
 
     expect(wrapper.find('tbody td')[0].html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render aria-sort attribute on column headers', async () => {
@@ -156,7 +156,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
       headers.map(h => h.getAttribute('aria-sort'))
     ).toEqual(['none', 'none', 'ascending'])
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should match not allow a null sort', async () => {
@@ -189,7 +189,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.defaultPagination.descending).toBe(false)
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render a progress with headers slot', () => {
@@ -211,7 +211,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     }))
 
     expect(wrapper.find('.datatable__progress')).toHaveLength(1)
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should only filter on data specified in headers', async () => {
@@ -227,7 +227,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     })
     expect(wrapper.instance().filteredItems).toHaveLength(1)
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should not filter items if search is empty', async () => {
@@ -237,6 +237,6 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.instance().filteredItems).toHaveLength(data.propsData.items.length)
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 })

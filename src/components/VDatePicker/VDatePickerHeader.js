@@ -28,21 +28,21 @@ export default {
   },
 
   props: {
+    appendIcon: {
+      type: String,
+      default: 'chevron_right'
+    },
     format: {
       type: Function,
       default: null
     },
-    iconPrev: {
-      type: String,
-      default: 'chevron_left'
-    },
-    iconNext: {
-      type: String,
-      default: 'chevron_right'
-    },
     locale: {
       type: String,
       default: 'en-us'
+    },
+    prependIcon: {
+      type: String,
+      default: 'chevron_left'
     },
     value: {
       type: [Number, String],
@@ -82,7 +82,7 @@ export default {
           }
         }
       }, [
-        this.$createElement('v-icon', change < 0 ? this.iconPrev : this.iconNext)
+        this.$createElement('v-icon', change < 0 ? this.prependIcon : this.appendIcon)
       ])
     },
     calculateChange (sign) {

@@ -4,6 +4,7 @@
 /* Themes */
 list($material)
   background: $material.cards
+  color: $material.text.primary
 
   .list__tile__sub-title
     color: $material.text.secondary
@@ -92,6 +93,7 @@ theme(list, "list")
 
       .input-group--selection-controls
         align-items: center
+        flex: 0 1
         padding: 0
 
       .input-group__details
@@ -230,6 +232,7 @@ theme(list, "list")
       .list__group__header__append-icon,
       .list__group__header__prepend-icon
         padding: 0 16px
+        user-select: none
 
       &--sub-group
         align-items: center

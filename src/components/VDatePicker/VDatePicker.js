@@ -54,6 +54,10 @@ export default {
       default: () => null
     },
     autosave: Boolean,
+    appendIcon: {
+      type: String,
+      default: 'chevron_right'
+    },
     // Function formatting the day in date picker table
     dayFormat: {
       type: Function,
@@ -76,6 +80,10 @@ export default {
     monthFormat: {
       type: Function,
       default: null
+    },
+    prependIcon: {
+      type: String,
+      default: 'chevron_left'
     },
     scrollable: Boolean,
     // Function formatting currently selected date in the picker title
@@ -281,9 +289,11 @@ export default {
     genTableHeader () {
       return this.$createElement('v-date-picker-header', {
         props: {
+          appendIcon: this.appendIcon,
           color: this.color,
           format: this.headerDateFormat,
           locale: this.locale,
+          prependIcon: this.prependIcon,
           value: this.activePicker === 'DATE' ? this.tableDate : `${this.tableYear}`
         },
         on: {

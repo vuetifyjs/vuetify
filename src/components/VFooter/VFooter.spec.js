@@ -48,6 +48,7 @@ test('VFooter.js', ({ mount, functionalContext }) => {
     })
 
     expect(wrapper.element.classList).toContain('footer--absolute')
+    wrapper.setProps({ absolute: false })
     expect(wrapper.element.classList).toContain('footer--fixed')
   })
 
@@ -65,5 +66,33 @@ test('VFooter.js', ({ mount, functionalContext }) => {
     wrapper.vm.$vuetify.application.right  = 30
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should have margin bottom', async () => {
+    const wrapper = mount(VFooter, {
+      propsData: {
+        app: true,
+        height: 60
+      }
+    })
+
+    expect(wrapper.vm.$vuetify.application.footer).toBe(60)
+    wrapper.vm.$vuetify.application.bottom = 30
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.$vuetify.application.bottom).toBe(30)
+  })
+
+  it('should have padding left when using inset', async () => {
+    const wrapper = mount(VFooter, {
+      propsData: {
+        app: true,
+        inset: true
+      }
+    })
+
+    wrapper.vm.$vuetify.application.left = 300
+
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.computedPaddingLeft).toBe(300)
   })
 })

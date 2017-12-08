@@ -23,6 +23,19 @@ test('VDatePickerHeader.js', ({ mount }) => {
     expect(wrapper.find('.date-picker-header__value strong')[0].element.textContent).toBe('2005')
   })
 
+  it('should render prepend/append icons', () => {
+    const wrapper = mount(VDatePickerHeader, {
+      propsData: {
+        value: '2005',
+        prependIcon: 'foo',
+        appendIcon: 'bar'
+      }
+    })
+
+    expect(wrapper.find('.icon')[0].element.textContent).toBe('foo')
+    expect(wrapper.find('.icon')[1].element.textContent).toBe('bar')
+  })
+
   it('should render component with own formatter and match snapshot', () => {
     const wrapper = mount(VDatePickerHeader, {
       propsData: {

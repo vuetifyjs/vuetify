@@ -68,6 +68,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
             <div class="datatable__actions__select">
               Rows per page:
               <div tabindex="0"
+                   data-uid="13"
                    aria-label="Rows per page:"
                    role="combobox"
                    class="input-group input-group--append-icon input-group--hide-details input-group--text-field input-group--select input-group--auto primary--text"
@@ -263,6 +264,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
             <div class="datatable__actions__select">
               Rows per page:
               <div tabindex="0"
+                   data-uid="1"
                    aria-label="Rows per page:"
                    role="combobox"
                    class="input-group input-group--append-icon input-group--hide-details input-group--text-field input-group--select input-group--auto primary--text"
@@ -460,6 +462,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
             <div class="datatable__actions__select">
               Rows per page:
               <div tabindex="0"
+                   data-uid="27"
                    aria-label="Rows per page:"
                    role="combobox"
                    class="input-group input-group--append-icon input-group--hide-details input-group--text-field input-group--select input-group--auto primary--text"

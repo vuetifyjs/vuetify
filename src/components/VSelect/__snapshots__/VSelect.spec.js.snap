@@ -23,6 +23,7 @@ exports[`VSelect should escape items in menu 2`] = `
 exports[`VSelect should render buttons correctly when using items array with segmented prop 1`] = `
 
 <div tabindex="0"
+     data-uid="34"
      role="combobox"
      class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select input-group--segmented input-group--single-line primary--text"
 >
@@ -87,6 +88,7 @@ exports[`VSelect should render buttons correctly when using items array with seg
 exports[`VSelect should render buttons correctly when using slot with segmented prop 1`] = `
 
 <div tabindex="0"
+     data-uid="44"
      role="combobox"
      class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select input-group--segmented input-group--single-line primary--text"
 >

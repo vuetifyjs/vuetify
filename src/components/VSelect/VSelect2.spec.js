@@ -22,7 +22,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       await wrapper.vm.$nextTick()
     }
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should clear input value', async () => {
@@ -49,7 +49,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.inputValue).toBe(null)
     expect(input).toHaveBeenCalledWith(null)
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should be clearable with prop, dirty and single select', async () => {
@@ -74,7 +74,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.inputValue).toBe(null)
     expect(wrapper.vm.menuIsVisible).toBe(false)
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should be clearable with prop, dirty and multi select', async () => {
@@ -101,7 +101,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(change).toHaveBeenCalledWith([])
     expect(wrapper.vm.menuIsVisible).toBe(false)
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should prepropulate selectedItems', () => {
@@ -132,7 +132,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.selectedItems).toHaveLength(1)
     expect(wrapper2.vm.selectedItems).toHaveLength(2)
     expect(wrapper3.vm.selectedItems).toHaveLength(0)
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should show input with placeholder and not dirty', async () => {
@@ -144,7 +144,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     })
 
     expect(wrapper.find('input')[0].hasStyle('display', 'block'))
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should not show input with placeholder and dirty', async () => {
@@ -158,7 +158,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     })
 
     expect(wrapper.find('input')[0].hasStyle('display', 'none'))
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   // #1704
@@ -180,7 +180,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     const selections = wrapper.find('.input-group__selections__comma')
 
     expect(selections.length).toBeGreaterThan(0)
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   // Discovered when working on #1704
@@ -204,7 +204,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     item.trigger('click')
 
     expect(wrapper.vm.selectedItems).toHaveLength(0)
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should open menu when arrow is clicked', async () => {
@@ -222,7 +222,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     arrow.trigger('click')
     expect(wrapper.vm.menuIsActive).toBe(true)
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should open menu when cleared with open-on-clear', async () => {
@@ -242,7 +242,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.menuIsActive).toBe(true)
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should not rotate icon if menu is not open', async () => {
@@ -266,6 +266,6 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.menuIsVisible).toBe(true)
     expect(wrapper.hasClass('input-group--open')).toBe(true)
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 })

@@ -23,7 +23,7 @@ function createMenuPicker(mount, props) {
   const menu = wrapper.vm.$refs.menu
   const picker = menu.$slots.default[0].context.$refs.picker
 
-  expect('Application is missing <v-app> component.').toHaveBeenTipped()
+  expect('Unable to locate target [data-app]').toHaveBeenTipped()
 
   return { wrapper, menu, picker }
 }
