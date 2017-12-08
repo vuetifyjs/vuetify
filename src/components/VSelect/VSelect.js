@@ -116,6 +116,9 @@ export default {
   },
 
   methods: {
+    needTile (tile) {
+      return !/v-list-tile$/.test(tile.tag)
+    },
     changeSelectedIndex (keyCode) {
       // backspace, left, right, delete
       if (![8, 37, 39, 46].includes(keyCode)) return

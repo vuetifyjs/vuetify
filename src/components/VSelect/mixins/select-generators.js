@@ -272,14 +272,11 @@ export default {
 
       data.props.activeClass = Object.keys(this.addTextColorClassChecks()).join(' ')
 
-      if (this.$scopedSlots['item-tile']) {
-        return this.$scopedSlots['item-tile']({ parent: this, item, listTile: data })
-      }
-
       if (this.$scopedSlots.item) {
-        return this.$createElement('v-list-tile', data,
-          [this.$scopedSlots.item({ parent: this, item })]
-        )
+        const tile = this.$scopedSlots.item({ parent: this, item, tile: data })
+        return this.needTile(tile)
+          ? this.$createElement('v-list-tile', data, [tile])
+          : tile
       }
 
       return this.$createElement('v-list-tile', data,
