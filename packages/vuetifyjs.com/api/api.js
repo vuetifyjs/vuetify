@@ -315,8 +315,11 @@ module.exports = {
       },
       {
         "name": "ripple",
-        "type": "Boolean",
-        "default": "False"
+        "type": [
+          "Boolean",
+          "Object"
+        ],
+        "default": "undefined"
       },
       {
         "name": "tag",
@@ -608,8 +611,11 @@ module.exports = {
       },
       {
         "name": "ripple",
-        "type": "Boolean",
-        "default": "False"
+        "type": [
+          "Boolean",
+          "Object"
+        ],
+        "default": "undefined"
       },
       {
         "name": "tag",
@@ -1420,6 +1426,15 @@ module.exports = {
         "default": "False"
       },
       {
+        "name": "attach",
+        "type": [
+          "Boolean",
+          "String",
+          "Object"
+        ],
+        "default": false
+      },
+      {
         "name": "contentClass",
         "type": "Any",
         "default": "undefined"
@@ -1824,8 +1839,11 @@ module.exports = {
       },
       {
         "name": "ripple",
-        "type": "Boolean",
-        "default": "False"
+        "type": [
+          "Boolean",
+          "Object"
+        ],
+        "default": "undefined"
       },
       {
         "name": "tag",
@@ -2018,8 +2036,11 @@ module.exports = {
       },
       {
         "name": "ripple",
-        "type": "Boolean",
-        "default": "False"
+        "type": [
+          "Boolean",
+          "Object"
+        ],
+        "default": "undefined"
       },
       {
         "name": "tag",
@@ -2119,6 +2140,15 @@ module.exports = {
         "default": "False"
       },
       {
+        "name": "attach",
+        "type": [
+          "Boolean",
+          "String",
+          "Object"
+        ],
+        "default": false
+      },
+      {
         "name": "contentClass",
         "type": "Any",
         "default": "undefined"
@@ -2150,6 +2180,16 @@ module.exports = {
       },
       {
         "name": "top",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "dark",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "light",
         "type": "Boolean",
         "default": "False"
       },
@@ -2186,22 +2226,34 @@ module.exports = {
       },
       {
         "name": "nudgeLeft",
-        "type": "Number",
+        "type": [
+          "Number",
+          "String"
+        ],
         "default": 0
       },
       {
         "name": "nudgeRight",
-        "type": "Number",
+        "type": [
+          "Number",
+          "String"
+        ],
         "default": 0
       },
       {
         "name": "nudgeTop",
-        "type": "Number",
+        "type": [
+          "Number",
+          "String"
+        ],
         "default": 0
       },
       {
         "name": "nudgeWidth",
-        "type": "Number",
+        "type": [
+          "Number",
+          "String"
+        ],
         "default": 0
       },
       {
@@ -2942,6 +2994,11 @@ module.exports = {
         "default": "False"
       },
       {
+        "name": "attach",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
         "name": "auto",
         "type": "Boolean",
         "default": "False"
@@ -3099,6 +3156,10 @@ module.exports = {
         "name": "tags",
         "type": "Boolean",
         "default": "False"
+      },
+      {
+        "name": "valueComparator",
+        "type": "Any"
       }
     ],
     "slots": [
@@ -3880,8 +3941,11 @@ module.exports = {
       },
       {
         "name": "ripple",
-        "type": "Boolean",
-        "default": "False"
+        "type": [
+          "Boolean",
+          "Object"
+        ],
+        "default": "undefined"
       },
       {
         "name": "tag",
@@ -4369,6 +4433,15 @@ module.exports = {
         "default": "False"
       },
       {
+        "name": "attach",
+        "type": [
+          "Boolean",
+          "String",
+          "Object"
+        ],
+        "default": false
+      },
+      {
         "name": "contentClass",
         "type": "Any",
         "default": "undefined"
@@ -4400,6 +4473,16 @@ module.exports = {
       },
       {
         "name": "top",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "dark",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "light",
         "type": "Boolean",
         "default": "False"
       },
@@ -4436,22 +4519,34 @@ module.exports = {
       },
       {
         "name": "nudgeLeft",
-        "type": "Number",
+        "type": [
+          "Number",
+          "String"
+        ],
         "default": 0
       },
       {
         "name": "nudgeRight",
-        "type": "Number",
+        "type": [
+          "Number",
+          "String"
+        ],
         "default": 0
       },
       {
         "name": "nudgeTop",
-        "type": "Number",
+        "type": [
+          "Number",
+          "String"
+        ],
         "default": 0
       },
       {
         "name": "nudgeWidth",
-        "type": "Number",
+        "type": [
+          "Number",
+          "String"
+        ],
         "default": 0
       },
       {

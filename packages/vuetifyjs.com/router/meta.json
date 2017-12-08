@@ -47,12 +47,6 @@
     "description": "The upcoming planned features and new functionality coming to Vuetify. New vue components, new directives, and much much more!.",
     "keywords": "roadmap, future plans"
   },
-  "/getting-started/a-la-carte": {
-    "h1": "A La Carte",
-    "title": "A La Carte",
-    "description": "Use only the components you need. Single component importing allows you to select what you want and leave the rest.",
-    "keywords": "a la carte, a-la-carte, vuetify single import, vuetify import, component importing"
-  },
   "/motion/transitions": {
     "h1": "Transitions",
     "title": "Transitions",
@@ -382,6 +376,12 @@
     "title": "Free / Premium Themes",
     "description": "Vuetify offers numerous pre-build starter and premium themes. Kickstart your next application today, no design skills needed.",
     "keywords": "vuetify themes, pre-built material themes, premium themes"
+  },
+  "/guides/a-la-carte": {
+    "h1": "A La Carte",
+    "title": "A La Carte",
+    "description": "Use only the components you need. Single component importing allows you to select what you want and leave the rest.",
+    "keywords": "a la carte, a-la-carte, vuetify single import, vuetify import, component importing"
   },
   "/guides/server-side-rendering": {
     "h1": "Server side rendering",

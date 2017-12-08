@@ -2,7 +2,7 @@
   <v-app id="inspire">
     <v-navigation-drawer
       fixed
-      clipped
+      :clipped="$vuetify.breakpoint.mdAndUp"
       app
       v-model="drawer"
     >
@@ -66,17 +66,18 @@
       color="blue darken-3"
       dark
       app
-      clipped-left
+      :clipped-left="$vuetify.breakpoint.mdAndUp"
       fixed
     >
       <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-        Google Contacts
+        <span class="hidden-sm-and-down">Google Contacts</span>
       </v-toolbar-title>
       <v-text-field
         solo
         prepend-icon="search"
         placeholder="Search"
+        class="hidden-sm-and-down"
       ></v-text-field>
       <v-spacer></v-spacer>
       <v-btn icon>
@@ -187,7 +188,7 @@
   export default {
     data: () => ({
       dialog: false,
-      drawer: true,
+      drawer: null,
       items: [
         { icon: 'contacts', text: 'Contacts' },
         { icon: 'history', text: 'Frequently contacted' },

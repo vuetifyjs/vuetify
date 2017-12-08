@@ -3,6 +3,7 @@
     h1.display-1.primary--text#introduction
       markdown(:source="header")
     markdown(:source="text")
+    slot(name="sup")
 </template>
 
 <script>

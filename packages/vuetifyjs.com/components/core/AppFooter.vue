@@ -3,39 +3,34 @@
     v-footer(
       color="transparent"
       v-if="footer"
-      app
+      height="90"
       :key="$route.path"
     ).app-footer.justify-center
-      v-layout(style="max-width: 1185px;").ma-0.px-5
-        v-flex(xs12 md9)
-          v-layout(row justify-center)
-            v-flex(
-              v-if="prev"
-              :xs6="next"
-            ).pa-0
-              v-btn(
-                color="primary"
-                dark
-                :icon="$vuetify.breakpoint.mdAndUp"
-                :fab="$vuetify.breakpoint.smAndDown"
-                :to="prev.href"
-              )
-                v-icon chevron_left
-              span(v-text="prev.title").subheading.no-wrap.hidden-sm-and-down
-            v-flex(
-              v-if="next"
-              :xs6="prev"
-              class="nextnav"
-            ).pa-0.text-xs-right
-              span(v-text="next.title").subheading.no-wrap.hidden-sm-and-down
-              v-btn(
-                color="primary"
-                dark
-                :icon="$vuetify.breakpoint.mdAndUp"
-                :fab="$vuetify.breakpoint.smAndDown"
-                :to="next.href"
-              )
-                v-icon chevron_right
+      v-layout(justify-space-between).ma-0
+        v-flex(v-if="prev")
+          v-btn(
+            color="primary"
+            dark
+            :icon="$vuetify.breakpoint.mdAndUp"
+            :fab="$vuetify.breakpoint.smAndDown"
+            :to="prev.href"
+          )
+            v-icon chevron_left
+          span(v-text="prev.title").subheading.no-wrap.hidden-xs-only
+        v-flex(
+          :mr-5="$vuetify.breakpoint.smAndDown"
+          :pr-4="$vuetify.breakpoint.smAndDown"
+          v-if="next"
+        ).text-xs-right
+          span(v-text="next.title").subheading.no-wrap.hidden-xs-only
+          v-btn(
+            color="primary"
+            dark
+            :icon="$vuetify.breakpoint.mdAndUp"
+            :fab="$vuetify.breakpoint.smAndDown"
+            :to="next.href"
+          )
+            v-icon chevron_right
 </template>
 
 <script>
@@ -63,6 +58,15 @@
       },
       routes () {
         return this.mapRoutes(this.items)
+      },
+      styles () {
+        const styles = {}
+
+        if (this.$vuetify.breakpoint.mdAndUp) {
+          styles.paddingLeft = `${this.$vuetify.application.left}px`
+        }
+
+        return styles
       }
     },
 
@@ -88,12 +92,6 @@
 
 <style lang="stylus">
   .app-footer
-    height: 88px
-
-    .nextnav
-      @media all and (max-width: 959px)
-        padding-right: 86px !important
-
     &__title
       color: #fff
 

@@ -1,5 +1,5 @@
 <template lang="pug">
-  div(:class="['markup', color]" v-bind:data-lang="lang")
+  div(:class="['markup', color]" v-bind:data-lang="lang").mb-3
     pre
       code(v-bind:class="lang" ref="markup")
         slot
@@ -63,12 +63,12 @@
   @import '../../node_modules/vuetify/src/stylus/settings/_colors.styl'
 
   .markup
-    font-size: 1.2rem
+    font-size: 1.3rem
+    font-family: 'Inconsolata', monospace
     transition: .3s ease-out
     box-shadow: none
     display: flex
-    padding: 3rem 2rem
-    margin: 0 0 16px
+    padding: 24px
     border-radius: 2px
     position: relative
     align-items: center
@@ -80,8 +80,8 @@
 
     &__copy
       position: absolute
-      right: 25px
-      top: 12px
+      right: 0px
+      top: 0px
       cursor: pointer
       width: 25px
       height: 25px
@@ -89,13 +89,13 @@
 
     &:after
       position: absolute
-      right: 25px
+      right: 10px
       transition: opacity .2s ease-in
       content: attr(data-lang)
       color: rgba(#000, 0.3)
       font-size: 1rem
       font-weight: 700
-      top: 25px
+      top: 5px
 
     &:hover
       &:after
@@ -119,11 +119,11 @@
 
     pre, code
       background: transparent
+      font-family: 'Inconsolata', monospace
       line-height: 1.5
       width: 100%
 
     code
-      font-weight: 600 !important
       position: relative
       box-shadow: none
       overflow-x: auto
@@ -141,20 +141,24 @@
         display: none
 
     .hljs
-      color: $blue.base
+      color: #1867C0
+      font-weight: 300
+
+      .hljs-keyword,
+      .hljs-attr
+        color: #333
+        font-weight: 700
 
       .hljs-tag, .hljs-variable
         color: $purple.lighten-1
 
-      .hljs-attr, .hljs-keyword
-        color: $blue.base
-
       .hljs-string, .hljs-literal, .hljs-number
-        color: $red.lighten-2
+        color: $red.lighten-1
+        font-weight: 400
 
       .hljs-comment
         color: $grey.base
-        font-weight: 100
+        font-weight: 300
 
   .tabs
     .markup

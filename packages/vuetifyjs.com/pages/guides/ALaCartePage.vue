@@ -1,89 +1,133 @@
 <template lang="pug">
   doc-view
-    input(
-      :style="{ position: 'absolute', left: '-1000px', top: '-1000px' }"
-      :value="copy"
-      ref="copy"
-    )
-    section#application
-      section-head(value="Guides.ALaCarte.applicationHeader")
-      section-text(value="Guides.ALaCarte.applicationText1")
-      section-text(value="Guides.ALaCarte.applicationText2")
-      markup(lang="js")
-       | import Vue from 'vue'
-       | import {
-       |   Vuetify,
-       |   VApp,
-       |   VNavigationDrawer,
-       |   VFooter,
-       |   VToolbar,
-       |   transitions
-       | } from 'vuetify'
-       | import App from './App.vue'
+    section-text(slot="sup" :value="`Guides.ALaCarte.headerText2`")
+    template(slot-scope="{ namespace }")
+      input(
+        :style="{ position: 'absolute', left: '-1000px', top: '-1000px' }"
+        :value="copy"
+        ref="copy"
+      )
+      section#importing-components
+        section-head(:value="`${namespace}.importHeader`")
+        section-text(:value="`${namespace}.importText1`")
+        markup(lang="js")
+          |["transform-imports", {
+          |  "vuetify": {
+          |    "transform": "vuetify/es5/components/${member}",
+          |    "preventFullImport": true
+          |  }
+          |}]
+        app-alert(:value="`${namespace}.alert2`" error)
+        markup(lang="js")
+          |import Vue from 'vue'
+          |import App from './App.vue'
+          |import {
+          |  Vuetify, // required
+          |  VApp, // required
+          |  VNavigationDrawer,
+          |  VFooter,
+          |  VToolbar,
+          |  transitions
+          |} from 'vuetify'
+          |
+          |Vue.use(Vuetify, {
+          |   components: {
+          |     VApp,
+          |     VNavigationDrawer,
+          |     VFooter,
+          |     VToolbar,
+          |     transitions
+          |   }
+          |})
+        app-alert(:value="`${namespace}.alert3`" info)
+        section-text(:value="`${namespace}.importText2`")
+        markup(lang="js")
+          |// Without `transform-imports` package
+          |import Vue from 'vue'
+          |import VApp from 'vuetify/es5/components/VApp'
+          |import Vuetify from 'vuetify/es5/components/Vuetify'
+          |import transitions from 'vuetify/es5/components/transitions'
+          |import directives from 'vuetify/es5/components/directives'
+          |
+          |Vue.use(Vuetify, {
+          |   components: {
+          |      VApp,
+          |      Vuetify
+          |   },
+          |   directives,
+          |   transitions,
+          |})
 
-       | Vue.use(Vuetify, {
-       |   components: {
-       |     VApp,
-       |     VNavigationDrawer,
-       |     VFooter,
-       |     VToolbar,
-       |     transitions
-       |   },
-       | });
+      section#required-styles
+        section-head(:value="`${namespace}.styleHeader`")
+        section-text(:value="`${namespace}.styleText1`")
+        markup(lang="cli")
+          |$ npm install --save-dev stylus stylus-loader
+          |# or
+          |$ yarn add --dev stylus stylus-loader
+        section-text(:value="`${namespace}.styleText2`")
+        markup(lang="js")
+          |// src/main.js
+          |require('vuetify/src/stylus/app.styl')
 
-    section#component-name-list
-      section-head(value="Guides.ALaCarte.componentNameListHeader")
-      section-text(value="Guides.ALaCarte.componentNameListText1")
-      v-card
-        v-card-title
-          v-spacer
-          v-text-field(
-            append-icon="search"
-            label="Search"
-            single-line
-            hide-details
-            v-model="search"
-          )
-        v-data-table(
-            :headers="headers"
-            :items="items"
-            :customFilter="customFilter"
-            :search="search"
-            v-model="selected"
-            item-key="name"
-            select-all
-            class="elevation-1"
-          )
-          template(slot="headerCell" slot-scope="props")
-            v-tooltip(bottom)
-              span(slot="activator") {{ props.header.text }}
-              span {{ props.header.text }}
-          template(slot="items" slot-scope="props")
-            td
-              v-checkbox(
-                primary
-                hide-details
-                v-model="props.selected"
-              )
-            td(class="text-xs-right") {{ props.item.name }}
-            td(class="text-xs-right") {{ props.item.component }}
-            td(class="text-xs-right") {{ props.item.group }}
-          template(slot="footer")
-            td(colspan="100%")
-              v-tooltip(
-                right
-                debounce="300"
-                dark
-              )
-                  v-btn(
-                    icon
-                    color="primary"
-                    dark
-                    @click="copyMarkup"
-                    slot="activator"
-                  )
-                    v-icon content_copy
-                  span Copy components
+      section#application
+        section-head(:value="`${namespace}.applicationHeader`")
+        section-text(:value="`${namespace}.applicationText1`")
+        section-text(:value="`${namespace}.applicationText2`")
+
+      section#component-name-list
+        section-head(:value="`${namespace}.componentNameListHeader`")
+        section-text(:value="`${namespace}.componentNameListText1`")
+        v-card
+          v-card-title
+            v-spacer
+            v-text-field(
+              append-icon="search"
+              label="Search"
+              single-line
+              hide-details
+              v-model="search"
+            )
+          v-data-table(
+              :headers="headers"
+              :items="items"
+              :customFilter="customFilter"
+              :search="search"
+              v-model="selected"
+              item-key="name"
+              select-all
+              class="elevation-1"
+            )
+            template(slot="headerCell" slot-scope="props")
+              v-tooltip(bottom)
+                span(slot="activator") {{ props.header.text }}
+                span {{ props.header.text }}
+            template(slot="items" slot-scope="props")
+              td
+                v-checkbox(
+                  primary
+                  hide-details
+                  v-model="props.selected"
+                )
+              td(class="text-xs-right") {{ props.item.name }}
+              td(class="text-xs-right") {{ props.item.component }}
+              td(class="text-xs-right") {{ props.item.group }}
+            template(slot="footer")
+              td(colspan="100%")
+                v-tooltip(
+                  right
+                  debounce="300"
+                  dark
+                )
+                    v-btn(
+                      icon
+                      color="primary"
+                      dark
+                      @click="copyMarkup"
+                      slot="activator"
+                    )
+                      v-icon content_copy
+                    span Copy components
 </template>
 
 <script>

@@ -9,33 +9,40 @@
     ref="toolbar"
   )#app-toolbar
     v-toolbar-side-icon(@click="$store.commit('app/DRAWER_TOGGLE')" v-if="!stateless").hidden-lg-and-up
-    router-link(to="/").ml-3
+    router-link(to="/").d-flex.ml-3
       img(
         src="/static/v-alt.svg"
         height="38px"
       )
-    v-toolbar-title.pb-1 Vuetify
+    v-toolbar-title.pb-1.hidden-xs-only Vuetify
     v-spacer
     v-toolbar-items
-      v-menu(bottom offset-y left)
+      v-menu(
+        bottom
+        offset-y
+        left
+        attach
+        min-width="300"
+        nudge-right="6"
+      )
         v-btn(
           slot="activator"
           flat
         )
           span Translations
           v-icon keyboard_arrow_down
-        v-card
+        v-card(light)
           v-card-title.title Coming soon!
           v-card-text
             div For more information, visit the <a href="https://discord.gg/CweuCn7" target="_blank">community</a>
-      v-menu(bottom offset-y)
+      v-menu(bottom offset-y attach).hidden-xs-only
         v-btn(
           slot="activator"
           flat
         )
           span {{ currentVersion }}
           v-icon keyboard_arrow_down
-        v-list
+        v-list(light)
           v-list-tile(
             v-for="release in releases"
             :key="release"

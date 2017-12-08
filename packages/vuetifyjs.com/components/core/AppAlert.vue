@@ -3,7 +3,7 @@
     :color="computedColor"
     :icon="computedIcon"
     value
-  ).my-5.app-alert
+  ).my-4.app-alert
     markdown(:source="$t(value)")
 </template>
 
