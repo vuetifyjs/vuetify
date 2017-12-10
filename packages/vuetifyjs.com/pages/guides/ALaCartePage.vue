@@ -2,7 +2,7 @@
   doc-view
     section-text(slot="sup" :value="`Guides.ALaCarte.headerText2`")
     template(slot-scope="{ namespace }")
-      input(
+      textarea(
         :style="{ position: 'absolute', left: '-1000px', top: '-1000px' }"
         :value="copy"
         ref="copy"
@@ -111,7 +111,6 @@
                 )
               td(class="text-xs-right") {{ props.item.name }}
               td(class="text-xs-right") {{ props.item.component }}
-              td(class="text-xs-right") {{ props.item.group }}
             template(slot="footer")
               td(colspan="100%")
                 v-tooltip(
@@ -137,11 +136,9 @@ export default {
       search: '',
       pagination: {},
       selected: [],
-      components: '',
       headers: [
         { text: 'Markup', value: 'markup' },
         { text: 'Component Name', value: 'component' },
-        { text: 'Component Group', value: 'group' },
       ],
       // component list.
       items: [
@@ -225,10 +222,8 @@ export default {
       return items.filter(item => filter(item['name'], search) || filter(item['component'], search)) || filter(item['group'], search);
     },
     generateCustomComponent() {
-      this.components = '';
-      const unique = [...(new Set(this.selected.map(({ component }) => component)))];
-      unique.forEach(element => this.components += `${element}, `);
-      return `import Vue from 'vue'; import { Vuetify, ${this.components}transitions } from 'vuetify'; import App from './App.vue'; Vue.use(Vuetify, { components: { ${this.components}transitions }, });`;
+      const components = this.selected.map(({ component }) => component).join(', ');
+      return `import Vue from 'vue';\nimport { Vuetify, ${components} } from 'vuetify';\nVue.use(Vuetify, { components: { ${components} } });`;
     },
     copyMarkup () {
       this.$refs.copy.select();
