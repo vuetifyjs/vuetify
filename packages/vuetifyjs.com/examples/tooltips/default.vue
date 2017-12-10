@@ -1,20 +1,16 @@
 <template>
-  <div class="text-xs-center">
-    <v-tooltip top>
-      <v-btn dark color="primary" slot="activator">Top</v-btn>
-      <span>Top tooltip</span>
-    </v-tooltip>
-    <v-tooltip right>
-      <v-btn dark color="primary" slot="activator">Right</v-btn>
-      <span>Right tooltip</span>
+  <div class="text-xs-center d-flex align-center">
+    <v-tooltip bottom>
+      <v-btn dark color="primary" slot="activator">Button</v-btn>
+      <span>Tooltip</span>
     </v-tooltip>
     <v-tooltip bottom>
-      <v-btn dark color="primary" slot="activator">Bottom</v-btn>
-      <span>Bottom tooltip</span>
+      <v-icon dark color="primary" slot="activator">home</v-icon>
+      <span>Tooltip</span>
     </v-tooltip>
-    <v-tooltip left>
-      <v-btn dark color="primary" slot="activator">Left</v-btn>
-      <span>Left tooltip</span>
+    <v-tooltip bottom>
+      <span slot="activator">This text has a tooltip</span>
+      <span>Tooltip</span>
     </v-tooltip>
   </div>
 </template>
