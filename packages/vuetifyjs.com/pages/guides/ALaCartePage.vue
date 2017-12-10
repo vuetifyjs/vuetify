@@ -29,6 +29,7 @@
           |  VToolbar,
           |  transitions
           |} from 'vuetify'
+          |import { Ripple } from 'vuetify/es5/src/directives'
           |
           |Vue.use(Vuetify, {
           |   components: {
@@ -37,6 +38,9 @@
           |     VFooter,
           |     VToolbar,
           |     transitions
+          |   },
+          |   directives: {
+          |     Ripple
           |   }
           |})
         app-alert(:value="`${namespace}.alert3`" info)
@@ -47,7 +51,7 @@
           |import VApp from 'vuetify/es5/components/VApp'
           |import Vuetify from 'vuetify/es5/components/Vuetify'
           |import transitions from 'vuetify/es5/components/transitions'
-          |import directives from 'vuetify/es5/components/directives'
+          |import directives from 'vuetify/es5/directives'
           |
           |Vue.use(Vuetify, {
           |   components: {
@@ -57,6 +61,16 @@
           |   directives,
           |   transitions,
           |})
+        section-text(:value="`${namespace}.importText3`")
+        markup(lang="js")
+          |import { VTextField } from 'vuetify'
+          |
+          |export default {
+          |  components: {
+          |    VTextField
+          |  },
+          |  ...
+          |}
 
       section#required-styles
         section-head(:value="`${namespace}.styleHeader`")
@@ -69,11 +83,6 @@
         markup(lang="js")
           |// src/main.js
           |require('vuetify/src/stylus/app.styl')
-
-      section#application
-        section-head(:value="`${namespace}.applicationHeader`")
-        section-text(:value="`${namespace}.applicationText1`")
-        section-text(:value="`${namespace}.applicationText2`")
 
       section#component-name-list
         section-head(:value="`${namespace}.componentNameListHeader`")
