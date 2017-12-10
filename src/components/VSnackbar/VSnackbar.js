@@ -1,20 +1,10 @@
 require('../../stylus/components/_snackbars.styl')
 
-import {
-  VSlideYTransition,
-  VSlideYReverseTransition
-} from '../transitions'
-
 import Colorable from '../../mixins/colorable'
 import Toggleable from '../../mixins/toggleable'
 
 export default {
   name: 'v-snackbar',
-
-  components: {
-    VSlideYTransition,
-    VSlideYReverseTransition
-  },
 
   mixins: [Colorable, Toggleable],
 
@@ -25,9 +15,12 @@ export default {
   },
 
   props: {
+    action: String,
+    actionColor: String,
     absolute: Boolean,
     bottom: Boolean,
     left: Boolean,
+    message: String,
     multiLine: Boolean,
     right: Boolean,
     top: Boolean,
@@ -51,9 +44,6 @@ export default {
         'snack--top': this.top,
         'snack--vertical': this.vertical
       })
-    },
-    computedTransition () {
-      return this.top ? 'v-slide-y-transition' : 'v-slide-y-reverse-transition'
     }
   },
 
@@ -81,17 +71,41 @@ export default {
 
   render (h) {
     const children = []
+    let content
+
+    if (this.message) {
+      content = [h('span', this.message)]
+      if (this.action) {
+        content.push(h('v-btn', {
+          staticClass: 'snack__action',
+          props: {
+            color: this.actionColor,
+            flat: true,
+            ripple: false
+          },
+          on: {
+            click: () => {
+              this.$emit('action')
+            }
+          }
+        }, this.action))
+      }
+    } else {
+      // Developer should remove ripple from button if using slot
+      // https://material.io/guidelines/components/snackbars-toasts.html
+      content = this.$slots.default
+    }
 
     if (this.isActive) {
       children.push(h('div', {
+        staticClass: 'snack',
+        'class': this.classes,
+        on: this.$listeners
+      }, [h('div', {
         staticClass: 'snack__content'
-      }, this.$slots.default))
+      }, content)]))
     }
 
-    return h('div', {
-      staticClass: 'snack',
-      'class': this.classes,
-      on: this.$listeners
-    }, [h(this.computedTransition, children)])
+    return h('transition', children)
   }
 }
