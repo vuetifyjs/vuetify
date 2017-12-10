@@ -15,7 +15,7 @@ export default {
   applicationText1: 'Navigate to the **src** folder and open up `main.js`. We see that in the template come some components already configured to load.',
   applicationText2: 'For example the code below tells the application that you use a `<v-app>`, `<v-navigation-drawer>`, `<v-footer>` and `<v-toolbar>`. Once defined, the markup can be used in any .vue file.',
   componentNameListHeader: 'UI Component Name List',
-  componentNameListText1: 'We must be aware that components such as `VLayout` or `VFlex` are not defined as such, for organizational reasons are included within `VGrid`, to know what is the name of a component to import can review the following section',
+  componentNameListText1: 'Some components such as `VLayout` or `VFlex` are for organizational reasons included in other components, in this case `VGrid`. To know which component to import you can review the following table.',
   toc: [
     {
       text: 'Overview',
