@@ -7,6 +7,10 @@ export default {
       header: 'Default',
       desc: 'Tooltips can wrap any element.'
     },
+    alignment: {
+      header: 'Alignment',
+      desc: 'Tooltip can be aligned to any of the four sides of the activator element'
+    },
     visibility: {
       header: 'Visibility',
       desc: 'Tooltip visibility can be programmatically changed using <code>v-model</code>.'
