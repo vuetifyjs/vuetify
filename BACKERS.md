@@ -73,3 +73,6 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - eric
 - Jon K
 - Alvin Wang
+- Jadranko Dragoje
+- Charles McKeever
+- Caleb Blankemeyer
