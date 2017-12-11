@@ -2,7 +2,6 @@
 
 .menu
   display: inline-block
-  margin: $button-margin
   position: relative
   vertical-align: middle
 
@@ -17,13 +16,11 @@
   &__activator
     align-items: center
     cursor: pointer
+    height: inherit
     position: relative
 
     input[readonly]
       cursor: pointer
-      
-    > *
-      margin: 0
 
   &__content
     position: absolute
@@ -47,6 +44,9 @@
     & > .card
       contain: content
       backface-visibility: hidden
+      
+  > .menu__content
+    max-width: none
 
   &-transition
     &-enter
