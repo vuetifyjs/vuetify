@@ -31,7 +31,6 @@ promptForVersion()
   .then(version => {
     lint()
     release(version)
-    afterRelease()
   })
 
 //============================ FUNCTIONS =============================//
@@ -130,29 +129,18 @@ function release (version) {
   process.env.npm_config_commit_hooks = 'false'
 
   shell.exec(`npm version ${version} --message "[release] ${version}"`)
-  if (exec(`git config branch.${branch}.remote`)) {
-    shell.exec(`git push --no-verify --follow-tags`)
-  } else {
-    const remote = exec(`git config branch.master.remote`)
-    shell.exec(`git push --no-verify --follow-tags -u ${remote}`)
-  }
-}
+  shell.exec(`git push --no-verify --follow-tags`)
 
-function afterRelease () {
-  if (branch.match(/release\/.*/)) {
-    const previousBranch = branch
-    shell.exec('git checkout master')
-    branch = 'master'
+  if (branch === 'master') {
+    shell.exec('git checkout dev')
+    branch = 'dev'
     shell.exec('git pull --ff-only')
-    shell.exec(`git merge ${previousBranch}`)
-    shell.echo(`\n\nYou can now push if there are no conflicts`)
-  }
-}
+    shell.exec('git merge master')
 
-function getBranches () {
-  return exec(`git for-each-ref refs/heads refs/remotes --format='%(refname)'`)
-    .split('\n')
-    .map(ref => (
-      /refs\/.*?\/(.*)/.exec(ref)[1]
-    ))
+    if (exec('git status --porcelain') === '') {
+      shell.exec('git push --no-verify')
+    } else {
+      shell.echo('Please resolve conflicts then push the current branch')
+    }
+  }
 }
