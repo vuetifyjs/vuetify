@@ -7,6 +7,7 @@
   },
   "license": "MIT",
   "homepage": "http://vuetifyjs.com",
+  "repository": "vuetifyjs/vuetify",
   "main": "dist/vuetify.js",
   "unpkg": "dist/vuetify.js",
   "types": "index.d.ts",
