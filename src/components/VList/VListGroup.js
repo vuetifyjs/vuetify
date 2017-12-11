@@ -1,36 +1,76 @@
-import { VExpandTransition } from '../transitions'
+// Components
+import VIcon from '../../components/VIcon'
 
+// Mixins
 import Bootable from '../../mixins/bootable'
 import Toggleable from '../../mixins/toggleable'
+import {
+  inject as RegistrableInject
+} from '../../mixins/registrable'
 
+// Transitions
+import { VExpandTransition } from '../transitions'
+
+/**
+ * List group
+ *
+ * @component
+ */
 export default {
   name: 'v-list-group',
 
-  inject: ['listClick', 'listClose'],
+  mixins: [
+    Bootable,
+    RegistrableInject('list', 'v-list-group', 'v-list'),
+    Toggleable
+  ],
 
-  mixins: [Bootable, Toggleable],
+  inject: ['listClick'],
+
+  data: () => ({
+    groups: []
+  }),
 
   props: {
+    activeClass: {
+      type: String,
+      default: 'primary--text'
+    },
+    appendIcon: {
+      type: String,
+      default: 'keyboard_arrow_down'
+    },
+    disabled: Boolean,
     group: String,
-    noAction: Boolean
+    noAction: Boolean,
+    prependIcon: String,
+    subGroup: Boolean
   },
 
   computed: {
-    classes () {
+    groupClasses () {
       return {
-        'list--group__header': true,
-        'list--group__header--active': this.isActive,
-        'list--group__header--no-action': this.noAction
+        'list__group--active': this.isActive,
+        'list__group--disabled': this.disabled
+      }
+    },
+    headerClasses () {
+      return {
+        'list__group__header--active': this.isActive,
+        'list__group__header--sub-group': this.subGroup
+      }
+    },
+    itemsClasses () {
+      return {
+        'list__group__items--no-action': this.noAction
       }
     }
   },
 
   watch: {
-    isActive () {
-      this.isBooted = true
-
-      if (!this.isActive) {
-        this.listClose(this._uid)
+    isActive (val) {
+      if (!this.subGroup && val) {
+        this.listClick(this._uid)
       }
     },
     $route (to) {
@@ -40,28 +80,85 @@ export default {
         if (isActive && this.isActive !== isActive) {
           this.listClick(this._uid)
         }
+
         this.isActive = isActive
       }
     }
   },
 
   mounted () {
-    this.isBooted = this.isActive
+    this.list.register(this._uid, this.toggle)
 
-    if (this.group) {
+    if (this.group &&
+      this.$route &&
+      this.value == null
+    ) {
       this.isActive = this.matchRoute(this.$route.path)
     }
+  },
 
-    if (this.isActive) {
-      this.listClick(this._uid)
-    }
+  beforeDestroy () {
+    this.list.unregister(this._uid)
   },
 
   methods: {
     click () {
-      if (!this.$refs.item.querySelector('.list__tile--disabled')) {
-        requestAnimationFrame(() => this.listClick(this._uid))
-      }
+      if (this.disabled) return
+
+      this.isActive = !this.isActive
+    },
+    genIcon (icon) {
+      return this.$createElement(VIcon, icon)
+    },
+    genAppendIcon () {
+      const icon = !this.subGroup ? this.appendIcon : ''
+
+      return this.$createElement('li', {
+        staticClass: 'list__group__header__append-icon'
+      }, [
+        this.$slots.appendIcon || this.genIcon(icon)
+      ])
+    },
+    genGroup () {
+      return this.$createElement('ul', {
+        staticClass: 'list__group__header',
+        'class': this.headerClasses,
+        on: Object.assign({}, {
+          click: this.click
+        }, this.$listeners),
+        ref: 'item'
+      }, [
+        this.genPrependIcon(),
+        this.$slots.activator,
+        this.genAppendIcon()
+      ])
+    },
+    genItems () {
+      return this.$createElement('ul', {
+        staticClass: 'list__group__items',
+        'class': this.itemsClasses,
+        directives: [{
+          name: 'show',
+          value: this.isActive
+        }],
+        ref: 'group'
+      }, this.showLazyContent(this.$slots.default))
+    },
+    genPrependIcon () {
+      const icon = this.prependIcon
+        ? this.prependIcon
+        : this.subGroup
+          ? 'arrow_drop_down'
+          : ''
+
+      return this.$createElement('li', {
+        staticClass: 'list__group__header__prepend-icon',
+        'class': {
+          [this.activeClass]: this.isActive
+        }
+      }, [
+        this.$slots.prependIcon || this.genIcon(icon)
+      ])
     },
     toggle (uid) {
       this.isActive = this._uid === uid
@@ -73,23 +170,12 @@ export default {
   },
 
   render (h) {
-    const group = h('ul', {
-      'class': 'list list--group',
-      directives: [{
-        name: 'show',
-        value: this.isActive
-      }],
-      ref: 'group'
-    }, this.showLazyContent(this.$slots.default))
-
-    const item = h('ul', {
-      'class': this.classes,
-      on: Object.assign({}, { click: this.click }, this.$listeners),
-      ref: 'item'
-    }, [this.$slots.item])
-
-    const transition = h(VExpandTransition, [group])
-
-    return h('li', { 'class': 'list--group__container' }, [item, transition])
+    return h('li', {
+      staticClass: 'list__group',
+      'class': this.groupClasses
+    }, [
+      this.genGroup(),
+      h(VExpandTransition, [this.genItems()])
+    ])
   }
 }

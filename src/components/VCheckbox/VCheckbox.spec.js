@@ -1,8 +1,7 @@
 ﻿import { test } from '~util/testing'
-import { mount } from 'avoriaz'
 import VCheckbox from '~components/VCheckbox'
 
-test('VCheckbox.js', () => {
+test('VCheckbox.js', ({ mount }) => {
   it('should return true when clicked', () => {
     const wrapper = mount(VCheckbox, {
       propsData: {
@@ -191,7 +190,7 @@ test('VCheckbox.js', () => {
 
     const ripple = wrapper.find('.input-group--selection-controls__ripple')
 
-    expect(ripple.length).toBe(0)
+    expect(ripple).toHaveLength(0)
   })
 
   it('should render ripple with data attribute when ripple prop is true', () => {

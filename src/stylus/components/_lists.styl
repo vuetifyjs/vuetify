@@ -4,23 +4,30 @@
 /* Themes */
 list($material)
   background: $material.cards
-
-  .list__tile:not(.list__tile--active)
-    color: $material.text.primary
+  color: $material.text.primary
 
   .list__tile__sub-title
     color: $material.text.secondary
 
-  .divider
-    background-color: $material.dividers
-
   .list__tile__mask
     color: $material.text.disabled
 
-  &--group
-    .list__tile--active
-      .list__tile__title
-        color: $material.text.link
+  .list__tile--link:hover,
+  .list__tile--highlighted,
+  .list__group__header:hover
+    background: $material.expansion-panels.focus
+    
+  .list__group--active
+    &:before,
+    &:after
+      background: $material.dividers
+      
+  .list__group--disabled
+    .list__tile
+      color: $material.text.disabled !important
+    
+    .list__group__header__prepend-icon .icon
+      color: $material.icons.inactive !important
 
 theme(list, "list")
 
@@ -28,56 +35,43 @@ theme(list, "list")
   list-style-type: none
   padding: $list-top-padding 0 $list-bottom-padding
   transition: height .3s $transition.fast-out-slow-in
+  
+  li:not(.subheader)
+    display: block
 
   .input-group
     margin: 0
 
-  > .list__tile ~ .list__tile
-    margin-top: 0
-
   &__tile
+    align-items: center
+    color: inherit
+    display: flex
     font-size: $list-tile-font-size
     font-weight: $list-tile-font-weight
-    display: flex
     height: $list-item-single-height
-    text-decoration: none
-    align-items: center
-    padding: 0 16px
     margin: 0
-    transition: $primary-transition
+    padding: 0 16px
     position: relative
+    text-decoration: none
+    transition: $primary-transition
     user-select: none
-
-    &:after
-      content: ''
-      position: absolute
-      left: 0
-      top: 0
-      height: 1px
-      opacity: 0
-      width: 100%
-      transition: $primary-transition
-      background-color: $material-twelve-percent-dark
 
     &--link
       cursor: pointer
 
-    &--link:hover, &--highlighted
-      background: $material-twelve-percent-dark
-
     &__content,
-    &__action,
-    &__avatar
+    &__action
       height: 100%
 
-    &__title, &__sub-title
+    &__title,
+    &__sub-title
       white-space: nowrap
       overflow: hidden
       text-overflow: ellipsis
+      transition: $primary-transition
       width: 100%
 
     &__title
-      transition: $primary-transition
       height: 24px
       line-height: 24px
       position: relative
@@ -86,7 +80,8 @@ theme(list, "list")
     &__sub-title
       font-size: $list-sub-title-font-size
 
-    .avatar
+    &__avatar
+      display: flex
       justify-content: flex-start
       min-width: 56px
 
@@ -98,17 +93,16 @@ theme(list, "list")
 
       .input-group--selection-controls
         align-items: center
+        flex: 0 1
         padding: 0
 
       .input-group__details
         display: none
 
-      .icon
-        transition: $primary-transition
-
-      .btn //fix button padding if used
+      .btn // fix button padding if used
         padding 0
         margin 0
+
         &--icon
           margin -8px
 
@@ -133,7 +127,7 @@ theme(list, "list")
       justify-content: center
       flex-direction: column
 
-      ~ .avatar
+      ~ .list__tile__avatar
         justify-content: flex-end
 
       ~ .list__tile__action:not(.list__tile__action--stack)
@@ -151,12 +145,6 @@ theme(list, "list")
     &--avatar
       height: $list-item-avatar-single-height
 
-      .avatar
-        img,
-        .icon
-          height: 40px
-          width: 40px
-
   &--dense
     padding-top: $list-item-dense-top-padding
     padding-bottom: $list-item-dense-top-padding
@@ -164,9 +152,11 @@ theme(list, "list")
     .subheader
       font-size: $subheader-dense-font-size
       height: $list-dense-subheader-height
-    .list--group
+
+    .list__group
       .subheader
         height $list-dense-subheader-group-height
+
     .list__tile
       font-size: $list-item-dense-font-size
 
@@ -193,6 +183,9 @@ theme(list, "list")
   &--three-line
     .list__tile
       height: $list-item-triple-height
+      
+    .list__tile__avatar
+      margin-top: $list-item-avatar-triple-margin-top
 
     .list__tile__sub-title
       white-space: initial
@@ -203,58 +196,85 @@ theme(list, "list")
     &.list--dense
       .list__tile
         height: $list-item-dense-triple-height
+        
+  > .list__group
+    &:before
+      top: 0
 
-  &--group
-    position: relative
+      .list__tile__avatar
+        margin-top: $list-item-dense-avatar-triple-margin-top
+      
+  &__group
     padding: 0
+    position: relative
+    transition: inherit
 
+    &:before,
     &:after
       content: ''
-      position: absolute
-      left: 0
-      bottom: 0
       height: 1px
-      opacity: 0
+      position: absolute
+      transition: $primary-transition
       width: 100%
-      background-color: $material-twelve-percent-dark
-
-    .list__tile
-      padding-left: $list-item-left-padding
+    
+    &--active ~ .list__group
+      &:before
+        display: none
 
     &__header
-      > li:first-child
-        cursor: pointer
-        display: block
+      align-items: center
+      cursor: pointer
+      display: flex
+      
+      > li:not(.list__group__header__prepend-icon):not(.list__group__header__append-icon)
+        flex: 1 0 auto
 
-        &:hover
-          background: $material-twelve-percent-dark
+      .list__group__header__append-icon,
+      .list__group__header__prepend-icon
+        padding: 0 16px
+        user-select: none
 
-      + .list--group
-        &:after
-          opacity: 1
+      &--sub-group
+        align-items: center
+        display: flex
+
+        li .list__tile
+          padding-left: 0
+
+        .list__group__header__prepend-icon
+          padding: 0 0 0 40px
+          margin-right: 8px
+
+      .list__group__header__prepend-icon
+        display: flex
+        justify-content: flex-start
+        min-width: 56px
 
       &--active
-        .list__tile
-          background: $material-twelve-percent-dark
+        .list__group__header__append-icon
+          .icon
+            transform: rotate(-180deg)
 
-          &:after
-            opacity: 1
-
-          .list__tile__title
+        .list__group__header__prepend-icon
+          .icon
             color: inherit
-
-          .list__tile__action:last-of-type
+            
+        &.list__group__header--sub-group
+          .list__group__header__prepend-icon
             .icon
               transform: rotate(-180deg)
 
-      &--no-action + .list--group
+    &__items
+      position: relative
+      padding: 0
+      transition: inherit
+      
+      &--no-action
         .list__tile
-          padding-left: $list-left-padding
+          padding-left: $list-item-left-padding
+
+    &--disabled
+      pointer-events: none
 
   &--subheader
     padding-top: 0
-
-  &.list--two-line,
-  &.list--three-line
-    .list__tile__avatar
-      align-items: flex-start

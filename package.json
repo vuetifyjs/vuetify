@@ -1,6 +1,6 @@
 {
   "name": "vuetify",
-  "version": "0.17.4",
+  "version": "1.0.0-alpha.2",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -30,7 +30,7 @@
   "description": "Vue.js 2 Semantic Component Framework",
   "devDependencies": {
     "autoprefixer": "^7.1.4",
-    "avoriaz": "^4.1.0",
+    "avoriaz": "^6.3.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.0",
@@ -89,11 +89,11 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "uglifyjs-webpack-plugin": "^0.4.6",
-    "vue": "^2.5.4",
+    "vue": "^2.5.9",
     "vue-loader": "^13.5.0",
     "vue-router": "^3.0.1",
-    "vue-server-renderer": "^2.5.4",
-    "vue-template-compiler": "^2.5.4",
+    "vue-server-renderer": "^2.5.9",
+    "vue-template-compiler": "^2.5.9",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-bundle-size-analyzer": "^2.7.0",

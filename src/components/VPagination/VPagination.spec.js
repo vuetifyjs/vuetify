@@ -29,6 +29,28 @@ test('VPagination.vue', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('emits an event when pagination item is clicked', async () => {
+    jest.useFakeTimers()
+    const wrapper = mount(VPagination, {
+      propsData: {
+        length: 5,
+        value: 2
+      }
+    })
+    jest.runAllTimers()
+
+    await wrapper.vm.$nextTick()
+
+    const cb = jest.fn()
+
+    wrapper.instance().$on('input', cb)
+
+    const navigation = wrapper.find('.pagination__item')
+    navigation[1].trigger('click')
+
+    expect(cb).toBeCalledWith(2)
+  })
+
   it('should render disabled buttons with length equals to 0', async () => {
     jest.useFakeTimers()
     const wrapper = mount(VPagination, {
@@ -40,6 +62,23 @@ test('VPagination.vue', ({ mount }) => {
     jest.runAllTimers()
 
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should watch the value', async () => {
+    jest.useFakeTimers()
+    const wrapper = mount(VPagination, {
+      propsData: {
+        length: 5,
+        value: 1
+      }
+    })
+
+    jest.runAllTimers()
+    expect(wrapper.vm.selected).toBe(1)
+
+    wrapper.setProps({ value: 2 })
+    jest.runAllTimers()
+    expect(wrapper.vm.selected).toBe(2)
   })
 
   it('should only render start and end of range if length is big', async () => {

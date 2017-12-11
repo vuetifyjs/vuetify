@@ -3,13 +3,15 @@ function generateWarning (child, parent) {
 }
 
 export function inject (namespace, child, parent) {
+  const defaultImpl = child && parent ? {
+    register: generateWarning(child, parent),
+    unregister: generateWarning(child, parent)
+  } : null
+
   return {
     inject: {
       [namespace]: {
-        default: {
-          register: generateWarning(child, parent),
-          unregister: generateWarning(child, parent)
-        }
+        default: defaultImpl
       }
     }
   }

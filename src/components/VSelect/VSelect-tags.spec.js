@@ -1,9 +1,8 @@
 import { test } from '~util/testing'
-import { mount } from 'avoriaz'
 import VSelect from '~components/VSelect'
 import VMenu from '~components/VMenu'
 
-test('VSelect - tags', () => {
+test('VSelect - tags', ({ mount, compileToFunctions }) => {
   const backspace = new Event('keydown')
   backspace.keyCode = 8
 
@@ -33,7 +32,7 @@ test('VSelect - tags', () => {
     await wrapper.vm.$nextTick()
 
     expect(change).toHaveBeenCalledWith(['foo'])
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should change selectedIndex with keyboard', async () => {
@@ -56,7 +55,7 @@ test('VSelect - tags', () => {
       expect(wrapper.vm.selectedIndex).toBe(index)
     }
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should delete a tagged item when selected and backspace/delete is pressed', async () => {
@@ -88,7 +87,7 @@ test('VSelect - tags', () => {
     expect(change).toHaveBeenCalledWith([])
     expect(wrapper.vm.selectedIndex).toBe(-1)
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should add a tag on tab using the first suggestion', async () => {
@@ -117,7 +116,7 @@ test('VSelect - tags', () => {
     await wrapper.vm.$nextTick()
 
     expect(change).toBeCalledWith(['bar'])
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should add a tag on tab using the current searchValue', async () => {
@@ -153,7 +152,7 @@ test('VSelect - tags', () => {
     await wrapper.vm.$nextTick()
     expect(change).toBeCalledWith(['bar', 'it'])
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should add a tag on enter using the current searchValue', async () => {
@@ -184,7 +183,7 @@ test('VSelect - tags', () => {
     await wrapper.vm.$nextTick()
 
     expect(change).toBeCalledWith(['ba'])
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should add a tag on left arrow and select the previous tag', async () => {
@@ -212,7 +211,7 @@ test('VSelect - tags', () => {
 
     expect(change).toBeCalledWith(['foo', 'b'])
     expect(wrapper.vm.selectedIndex).toBe(0)
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should remove a duplicate tag and add it to the end', async () => {
@@ -225,7 +224,7 @@ test('VSelect - tags', () => {
     })
 
     const input = wrapper.find('input')[0]
-    
+
     const change = jest.fn()
     wrapper.vm.$on('input', change)
 
@@ -238,7 +237,7 @@ test('VSelect - tags', () => {
     await wrapper.vm.$nextTick()
 
     expect(change).toBeCalledWith(['bar', 'foo'])
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should add tag with valid search value on blur', async () => {
@@ -266,6 +265,6 @@ test('VSelect - tags', () => {
     await wrapper.vm.$nextTick() // Second tick processes change after tag added
 
     expect(change).toBeCalledWith(['bar'])
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 })

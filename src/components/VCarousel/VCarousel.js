@@ -41,11 +41,11 @@ export default {
       default: 6000,
       validator: value => value > 0
     },
-    leftControlIcon: {
+    prependIcon: {
       type: [Boolean, String],
       default: 'chevron_left'
     },
-    rightControlIcon: {
+    appendIcon: {
       type: [Boolean, String],
       default: 'chevron_right'
     },
@@ -108,7 +108,11 @@ export default {
             light: this.light
           },
           on: { click: fn }
-        }, [this.$createElement(VIcon, icon)])
+        }, [
+          this.$createElement(VIcon, {
+            props: { 'size': '46px' }
+          }, icon)
+        ])
       ])
     },
     genItems () {
@@ -120,12 +124,15 @@ export default {
           },
           props: {
             icon: true,
+            small: true,
             dark: this.dark || !this.light,
             light: this.light
           },
           key: index,
           on: { click: this.select.bind(this, index) }
-        }, [this.$createElement(VIcon, this.delimiterIcon)])
+        }, [this.$createElement(VIcon, {
+          props: { size: '18px' }
+        }, this.delimiterIcon)])
       })
     },
     restartTimeout () {
@@ -174,8 +181,8 @@ export default {
         }
       }]
     }, [
-      this.hideControls ? null : this.genIcon('left', this.leftControlIcon, this.prev),
-      this.hideControls ? null : this.genIcon('right', this.rightControlIcon, this.next),
+      this.hideControls ? null : this.genIcon('left', this.prependIcon, this.prev),
+      this.hideControls ? null : this.genIcon('right', this.appendIcon, this.next),
       this.hideDelimiters ? null : this.genDelimiters(),
       this.$slots.default
     ])

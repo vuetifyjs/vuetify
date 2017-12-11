@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VExpansionPanelContent.js should render an expanded component and match snapshot 1`] = `
+
+<li tabindex="0"
+    class="expansion-panel__container"
+>
+  <div class="expansion-panel__body"
+       style="display: none;"
+  >
+  </div>
+</li>
+
+`;
+
+exports[`VExpansionPanelContent.js should render an expanded component with lazy prop and match snapshot 1`] = `
+
+<li tabindex="0"
+    class="expansion-panel__container"
+>
+  <div class="expansion-panel__body"
+       style="display: none;"
+  >
+  </div>
+</li>
+
+`;
+
+exports[`VExpansionPanelContent.js should render component and match snapshot 1`] = `
+
+<li tabindex="0"
+    class="expansion-panel__container"
+>
+  <div class="expansion-panel__header"
+       data-ripple="false"
+  >
+    <span>
+      header
+    </span>
+    <div class="header__icon">
+      <span>
+        actions
+      </span>
+    </div>
+  </div>
+  <div class="expansion-panel__body"
+       style="display: none;"
+  >
+    <span>
+      default
+    </span>
+  </div>
+</li>
+
+`;
+
+exports[`VExpansionPanelContent.js should respect hideActions prop 1`] = `
+
+<li tabindex="0"
+    class="expansion-panel__container"
+>
+  <div class="expansion-panel__header"
+       data-ripple="false"
+  >
+    <span>
+      header
+    </span>
+  </div>
+  <div class="expansion-panel__body"
+       style="display: none;"
+  >
+  </div>
+</li>
+
+`;
+
+exports[`VExpansionPanelContent.js should toggle panel on header click 1`] = `
+
+<li tabindex="0"
+    class="expansion-panel__container expansion-panel__container--active"
+>
+  <div class="expansion-panel__header"
+       data-ripple="false"
+  >
+    <span>
+      header
+    </span>
+    <div class="header__icon">
+      <i aria-hidden="true"
+         class="material-icons icon"
+         style="font-size: 24px;"
+      >
+        keyboard_arrow_down
+      </i>
+    </div>
+  </div>
+  <div class="expansion-panel__body expand-transition-enter expand-transition-enter-active"
+       style="overflow: hidden; height: 0px; display: block;"
+  >
+  </div>
+</li>
+
+`;

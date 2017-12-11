@@ -8,10 +8,13 @@ export default {
       }, this.genYearItems())
     },
     yearClick (year) {
-      if (this.type === 'year') {
-        this.inputDate = `${year}`
-        this.$nextTick(() => (this.autosave && this.save()))
-      } else if (this.type === 'month') {
+      // Not used as the year picker is not supported yet
+      // if (this.type === 'year') {
+      //   this.inputDate = `${year}`
+      //   this.$nextTick(() => (this.autosave && this.save()))
+      // } else
+
+      if (this.type === 'month') {
         const date = this.sanitizeDateString(`${year}-${this.month + 1}`, 'month')
         if (this.isAllowed(date)) this.inputDate = date
         this.tableDate = `${year}`
@@ -29,6 +32,7 @@ export default {
         const buttonText = this.formatters.year(`${year}`)
 
         children.push(this.$createElement('li', {
+          key: year,
           'class': this.year === year
             ? this.addTextColorClassChecks({ active: true })
             : {},

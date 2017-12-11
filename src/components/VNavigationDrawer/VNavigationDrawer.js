@@ -1,9 +1,12 @@
 require('../../stylus/components/_navigation-drawer.styl')
 
+// Mixins
 import Applicationable from '../../mixins/applicationable'
 import Overlayable from '../../mixins/overlayable'
+import SSRBootable from '../../mixins/ssr-bootable'
 import Themeable from '../../mixins/themeable'
 
+// Directives
 import ClickOutside from '../../directives/click-outside'
 import Resize from '../../directives/resize'
 import Touch from '../../directives/touch'
@@ -11,7 +14,16 @@ import Touch from '../../directives/touch'
 export default {
   name: 'v-navigation-drawer',
 
-  mixins: [Applicationable, Overlayable, Themeable],
+  mixins: [
+    Applicationable(null, [
+      'miniVariant',
+      'right',
+      'width'
+    ]),
+    Overlayable,
+    SSRBootable,
+    Themeable
+  ],
 
   directives: {
     ClickOutside,
@@ -19,23 +31,22 @@ export default {
     Touch
   },
 
-  data () {
-    return {
-      isActive: false,
-      touchArea: {
-        left: 0,
-        right: 0
-      }
+  data: () => ({
+    isActive: false,
+    touchArea: {
+      left: 0,
+      right: 0
     }
-  },
+  }),
 
   props: {
-    absolute: Boolean,
     clipped: Boolean,
     disableRouteWatcher: Boolean,
     disableResizeWatcher: Boolean,
-    height: String,
-    fixed: Boolean,
+    height: {
+      type: [Number, String],
+      default: '100%'
+    },
     floating: Boolean,
     miniVariant: Boolean,
     miniVariantWidth: {
@@ -59,8 +70,26 @@ export default {
   },
 
   computed: {
+    /**
+     * Used for setting an app
+     * value from a dynamic
+     * property. Called from
+     * applicationable.js
+     *
+     * @return {string}
+     */
+    applicationProperty () {
+      return this.right ? 'right' : 'left'
+    },
     calculatedHeight () {
-      return this.height || '100%'
+      return isNaN(this.height) ? this.height : `${this.height}px`
+    },
+    calculatedTransform () {
+      if (this.isActive) return 0
+
+      return this.right
+        ? this.calculatedWidth
+        : -this.calculatedWidth
     },
     calculatedWidth () {
       return this.miniVariant
@@ -73,8 +102,9 @@ export default {
         'navigation-drawer--absolute': this.absolute,
         'navigation-drawer--clipped': this.clipped,
         'navigation-drawer--close': !this.isActive,
-        'navigation-drawer--fixed': this.fixed,
+        'navigation-drawer--fixed': !this.absolute && (this.app || this.fixed),
         'navigation-drawer--floating': this.floating,
+        'navigation-drawer--is-booted': this.isBooted,
         'navigation-drawer--is-mobile': this.isMobile,
         'navigation-drawer--mini-variant': this.miniVariant,
         'navigation-drawer--open': this.isActive,
@@ -130,12 +160,15 @@ export default {
         (this.temporary || this.isMobile)
     },
     styles () {
-      return {
+      const styles = {
         height: this.calculatedHeight,
         marginTop: `${this.marginTop}px`,
         maxHeight: `calc(100% - ${this.maxHeight}px)`,
+        transform: `translateX(${this.calculatedTransform}px)`,
         width: `${this.calculatedWidth}px`
       }
+
+      return styles
     }
   },
 
@@ -153,7 +186,7 @@ export default {
         this.$el && (this.$el.scrollTop = 0)
       }
 
-      this.updateApplication()
+      this.callUpdate()
     },
     /**
      * When mobile changes, adjust
@@ -173,10 +206,7 @@ export default {
       ) return
 
       this.isActive = !val
-      this.updateApplication()
-    },
-    miniVariant () {
-      this.updateApplication()
+      this.callUpdate()
     },
     permanent (val) {
       // If enabling prop
@@ -184,21 +214,11 @@ export default {
       if (val) {
         this.isActive = true
       }
-      this.updateApplication()
+      this.callUpdate()
     },
-    right (val, prev) {
-      // When the value changes
-      // reset previous direction
-      if (prev != null) {
-        const dir = val ? 'left' : 'right'
-        this.$vuetify.application[dir] = 0
-      }
-
-      this.updateApplication()
-    },
-    temporary (val) {
+    temporary () {
       this.tryOverlay()
-      this.updateApplication()
+      this.callUpdate()
     },
     value (val) {
       if (this.permanent) return
@@ -207,22 +227,8 @@ export default {
     }
   },
 
-  created () {
-    if (this.permanent) {
-      this.isActive = true
-    } else if (this.stateless ||
-      this.value != null
-    ) {
-      this.isActive = this.value
-    } else if (!this.temporary) {
-      this.isActive = !this.isMobile
-    }
-  },
-
-  destroyed () {
-    if (this.app) {
-      this.$vuetify.application[this.right ? 'right' : 'left'] = 0
-    }
+  beforeMount () {
+    this.init()
   },
 
   methods: {
@@ -254,6 +260,23 @@ export default {
 
       return directives
     },
+    /**
+     * Sets state before mount to avoid
+     * entry transitions in SSR
+     *
+     * @return {void}
+     */
+    init () {
+      if (this.permanent) {
+        this.isActive = true
+      } else if (this.stateless ||
+        this.value != null
+      ) {
+        this.isActive = this.value
+      } else if (!this.temporary) {
+        this.isActive = !this.isMobile
+      }
+    },
     swipeRight (e) {
       if (this.isActive && !this.right) return
       this.calculateTouchArea()
@@ -284,20 +307,17 @@ export default {
 
       this.removeOverlay()
     },
+    /**
+     * Update the application layout
+     *
+     * @return {number}
+     */
     updateApplication () {
-      if (!this.app) return
-
-      const width = !this.isActive ||
+      return !this.isActive ||
         this.temporary ||
         this.isMobile
         ? 0
         : this.calculatedWidth
-
-      if (this.right) {
-        this.$vuetify.application.right = width
-      } else {
-        this.$vuetify.application.left = width
-      }
     }
   },
 
@@ -307,7 +327,11 @@ export default {
       style: this.styles,
       directives: this.genDirectives(),
       on: {
-        click: () => this.$emit('update:miniVariant', false)
+        click: () => {
+          if (!this.miniVariant) return
+
+          this.$emit('update:miniVariant', false)
+        }
       }
     }
 

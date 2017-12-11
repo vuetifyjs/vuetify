@@ -1,3 +1,4 @@
+// Styles
 require('../../stylus/components/_bottom-navs.styl')
 
 // Mixins
@@ -9,36 +10,42 @@ export default {
   name: 'v-bottom-nav',
 
   mixins: [
-    Applicationable,
+    Applicationable('bottom', [
+      'height',
+      'value'
+    ]),
     ButtonGroup,
     Colorable
   ],
 
-  data: () => ({
-    defaultColor: 'primary'
-  }),
-
   props: {
-    absolute: Boolean,
     active: [Number, String],
+    height: {
+      default: 48,
+      type: [Number, String],
+      validator: v => !isNaN(parseInt(v))
+    },
     shift: Boolean,
     value: { required: false }
   },
 
   watch: {
-    active () {
-      this.update()
+    active (val) {
+      this.updateValue(val)
     }
   },
 
   computed: {
     classes () {
       return {
-        'bottom-nav': true,
         'bottom-nav--absolute': this.absolute,
+        'bottom-nav--fixed': !this.absolute && (this.app || this.fixed),
         'bottom-nav--shift': this.shift,
         'bottom-nav--active': this.value
       }
+    },
+    computedHeight () {
+      return parseInt(this.height)
     }
   },
 
@@ -47,20 +54,30 @@ export default {
       const item = this.getValue(i)
       return this.active === item
     },
+    /**
+     * Update the application layout
+     *
+     * @return {number}
+     */
     updateApplication () {
-      if (!this.app) return
-
-      this.$vuetify.application.bottom = this.$el.clientHeight
+      return !this.value
+        ? 0
+        : this.computedHeight
     },
     updateValue (i) {
       const item = this.getValue(i)
+
       this.$emit('update:active', item)
     }
   },
 
   render (h) {
     return h('div', {
+      staticClass: 'bottom-nav',
       class: this.addBackgroundColorClassChecks(this.classes),
+      style: {
+        height: `${parseInt(this.computedHeight)}px`
+      },
       ref: 'content'
     }, this.$slots.default)
   }

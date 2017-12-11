@@ -46,6 +46,7 @@ export default {
     genHeaderData (header, children) {
       const classes = ['column']
       const data = {
+        key: header[this.headerText],
         attrs: {
           role: 'columnheader',
           scope: 'col',
@@ -92,7 +93,11 @@ export default {
       }
 
       classes.push('sortable')
-      const icon = this.$createElement('v-icon', 'arrow_upward')
+      const icon = this.$createElement('v-icon', {
+        props: {
+          small: true
+        }
+      }, 'arrow_upward')
       if (header.align && header.align === 'left') {
         children.push(icon)
       } else {

@@ -13,16 +13,21 @@
     max-width: 100%
     position: relative
 
-    // TODO: Deprecate
-    > main:not(.content)
-      flex: 1 0 auto
-      display: flex
-
 application($material)
   background: $material.background
   color: $material.text.primary
 
   a
     cursor: pointer
+
+  .text
+    &--primary
+      color: $material.text.primary !important
+
+    &--secondary
+      color: $material.text.secondary !important
+
+    &--disabled
+      color: $material.text.disabled !important
 
 app(application)

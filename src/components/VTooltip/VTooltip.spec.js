@@ -1,9 +1,7 @@
-import { mount } from 'avoriaz'
-import { compileToFunctions } from 'vue-template-compiler'
 import VTooltip from '~components/VTooltip'
 import { test } from '~util/testing'
 
-test('VTooltip.js', () => {
+test('VTooltip.js', ({ mount, compileToFunctions }) => {
   it('should render component and match snapshot', async () => {
     const wrapper = mount(VTooltip, {
       propsData: {
@@ -23,7 +21,7 @@ test('VTooltip.js', () => {
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with value=true and match snapshot', async () => {
@@ -39,7 +37,7 @@ test('VTooltip.js', () => {
 
     expect(wrapper.data().isActive).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with zIndex prop and match snapshot', async () => {
@@ -50,7 +48,7 @@ test('VTooltip.js', () => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should display tooltip after mouseenter and hide after mouseleave', async () => {
@@ -84,6 +82,6 @@ test('VTooltip.js', () => {
     expect(setTimeout.mock.calls[1][1]).toBe(321)
     expect(cb).toBeCalledWith(false)
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 })

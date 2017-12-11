@@ -1,8 +1,7 @@
 import { test } from '~util/testing'
-import { mount } from 'avoriaz'
 import VSelect from '~components/VSelect'
 
-test('VSelect - autocomplete', () => {
+test('VSelect - autocomplete', ({ mount }) => {
   it('should have -1 tabindex when disabled', () => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,
@@ -14,7 +13,7 @@ test('VSelect - autocomplete', () => {
 
     expect(wrapper.vm.$refs.input.tabIndex).toBe(-1)
     expect(wrapper.vm.$el.tabIndex).toBe(-1)
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should have explicit tabindex passed through when autocomplete', () => {
@@ -28,7 +27,7 @@ test('VSelect - autocomplete', () => {
 
     expect(wrapper.vm.$refs.input.tabIndex).toBe(10)
     expect(wrapper.vm.$el.tabIndex).toBe(-1)
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should have explicit tabindex passed through when not autocomplete', () => {
@@ -41,7 +40,7 @@ test('VSelect - autocomplete', () => {
 
     expect(wrapper.vm.$refs.input.tabIndex).toBe(-1)
     expect(wrapper.vm.$el.tabIndex).toBe(10)
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should emit search input changes', async () => {
@@ -64,39 +63,7 @@ test('VSelect - autocomplete', () => {
     await new Promise(resolve => setTimeout(resolve, 1))
 
     expect(update).toBeCalledWith('test')
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
-  })
-
-  it('should be able to clear autocomplete value', async () => {
-    const wrapper = mount(VSelect, {
-      propsData: {
-        autocomplete: true,
-        items: ['red'],
-        debounceSearch: 0
-      }
-    })
-
-    const input = wrapper.find('input')[0]
-
-    wrapper.vm.focus()
-    await wrapper.vm.$nextTick()
-    wrapper.setProps({ searchInput: 're' })
-    await wrapper.vm.$nextTick()
-    input.trigger('keydown.tab')
-    await wrapper.vm.$nextTick()
-
-    const change = jest.fn()
-    wrapper.vm.$on('input', change)
-
-    wrapper.vm.focus()
-    await wrapper.vm.$nextTick()
-    wrapper.setProps({ searchInput: '' })
-    await wrapper.vm.$nextTick()
-    input.trigger('keydown.tab')
-    await wrapper.vm.$nextTick()
-    expect(change).toBeCalledWith(null)
-
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should filter autocomplete search results', () => {
@@ -111,7 +78,7 @@ test('VSelect - autocomplete', () => {
 
     expect(wrapper.vm.filteredItems).toHaveLength(1)
     expect(wrapper.vm.filteredItems[0]).toBe('foo')
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should filter numeric primitives', () => {
@@ -126,7 +93,7 @@ test('VSelect - autocomplete', () => {
 
     expect(wrapper.vm.filteredItems).toHaveLength(1)
     expect(wrapper.vm.filteredItems[0]).toBe(1)
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should activate when search changes and not active', async () => {
@@ -145,7 +112,7 @@ test('VSelect - autocomplete', () => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.isActive).toBe(true)
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should set searchValue to null when deactivated', async () => {
@@ -165,7 +132,7 @@ test('VSelect - autocomplete', () => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.searchValue).toBe(null)
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render role=combobox correctly when autocomplete', async () => {
@@ -181,7 +148,7 @@ test('VSelect - autocomplete', () => {
     const input = wrapper.find('input')[0]
     expect(input.getAttribute('role')).toBe('combobox')
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render role=combobox correctly when not autocomplete)', async () => {
@@ -190,7 +157,7 @@ test('VSelect - autocomplete', () => {
     const inputGroup = wrapper.find('.input-group--select')[0]
     expect(inputGroup.element.getAttribute('role')).toBe('combobox')
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should not duplicate items after items update when caching is turned on', async () => {
@@ -209,7 +176,7 @@ test('VSelect - autocomplete', () => {
     expect(wrapper.vm.computedItems).toHaveLength(1)
     wrapper.setProps({ items: [{ id: 1, text: 'A' }] })
     expect(wrapper.vm.computedItems).toHaveLength(1)
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should not display list with no items and autocomplete', async () => {
@@ -227,7 +194,7 @@ test('VSelect - autocomplete', () => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.menuIsActive).toBe(false)
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should cache items', async () => {
@@ -249,7 +216,7 @@ test('VSelect - autocomplete', () => {
     wrapper.setProps({ items: ['bar'] })
     expect(wrapper.vm.computedItems).toHaveLength(3)
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should cache items passed via prop', async () => {
@@ -267,7 +234,7 @@ test('VSelect - autocomplete', () => {
     wrapper.setProps({ items: [5] })
     expect(wrapper.vm.computedItems).toHaveLength(5)
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should allow changing of browser autocomplete', () => {
@@ -282,7 +249,7 @@ test('VSelect - autocomplete', () => {
     const input = wrapper.find('input')[0]
 
     expect(input.getAttribute('autocomplete')).toBe('off')
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should show input when focused and autocomplete', async () => {
@@ -301,7 +268,7 @@ test('VSelect - autocomplete', () => {
     await wrapper.vm.$nextTick()
     expect(input.hasStyle('display', 'block'))
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should not filter text with no items', async () => {
@@ -319,6 +286,6 @@ test('VSelect - autocomplete', () => {
     const tile = wrapper.find('.list__tile__title')[0]
 
     expect(tile.text()).toBe('No data available')
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 })

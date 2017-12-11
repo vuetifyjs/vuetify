@@ -24,9 +24,7 @@ export default {
   methods: {
     getChildren () {
       return this.$children.filter(c => {
-        if (!c.$options) return
-
-        return c.$options.name === 'v-expansion-panel-content'
+        return c.$options && c.$options.name === 'v-expansion-panel-content'
       })
     },
     panelClick (uid) {

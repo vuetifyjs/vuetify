@@ -21,8 +21,7 @@ export default function Grid (name) {
         Object.keys(data.attrs).forEach(key => {
           const value = data.attrs[key]
 
-          if (typeof value === 'string') classes.push(key)
-          else if (value) classes.push(key)
+          if ((typeof value === 'string') || value) classes.push(key)
         })
 
         if (classes.length) data.staticClass += ` ${classes.join(' ')}`

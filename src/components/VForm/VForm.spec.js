@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import { mount } from 'avoriaz'
 import { test } from '~util/testing'
 import VTextField from '~components/VTextField'
 import VBtn from '~components/VBtn'
@@ -13,7 +12,7 @@ const inputOne = Vue.component('input-one', {
   }
 })
 
-test('VForm.js', () => {
+test('VForm.js', ({ mount }) => {
   it('should pass on listeners to form element', async () => {
     const submit = jest.fn()
     const component = Vue.component('test', {
@@ -40,5 +39,20 @@ test('VForm.js', () => {
     btn.trigger('click')
 
     expect(submit).toBeCalled()
+  })
+
+  it('should watch the error bag', async () => {
+    const wrapper = mount(VForm)
+
+    const input = jest.fn()
+    wrapper.vm.$on('input', input)
+
+    Vue.set(wrapper.vm.errorBag, 'foo', true)
+    await Vue.nextTick()
+    expect(input).toBeCalledWith(false)
+
+    Vue.set(wrapper.vm.errorBag, 'foo', false)
+    await Vue.nextTick()
+    expect(input).toBeCalledWith(true)
   })
 })
