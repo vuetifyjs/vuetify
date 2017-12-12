@@ -35,9 +35,6 @@ theme(list, "list")
   list-style-type: none
   padding: $list-top-padding 0 $list-bottom-padding
   transition: height .3s $transition.fast-out-slow-in
-  
-  li:not(.subheader)
-    display: block
 
   .input-group
     margin: 0
@@ -225,6 +222,7 @@ theme(list, "list")
       align-items: center
       cursor: pointer
       display: flex
+      list-style-type: none
       
       > li:not(.list__group__header__prepend-icon):not(.list__group__header__append-icon)
         flex: 1 0 auto
