@@ -351,4 +351,54 @@ test('VTextField.js', ({ mount }) => {
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.internalChange).toBe(false)
   })
+
+  it('should match multi-line snapshot', () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        multiLine: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should match textarea snapshot', () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        textarea: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should match auto-grow snapshot', async () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        textarea: true,
+        autoGrow: true
+      }
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render no-resize the same if already auto-grow', () => {
+    const wrappers = [
+      { autoGrow:true, multiLine: true },
+      { autoGrow:true, textarea: true }
+    ].map(propsData => mount(VTextField,{propsData}))
+
+    wrappers.forEach(async wrapper => {
+      await wrapper.vm.$nextTick()
+      const html1 = wrapper.html()
+
+      wrapper.setProps({ noResize: true })
+      // will still pass without this, do not remove
+      await wrapper.vm.$nextTick()
+      const html2 = wrapper.html()
+
+      expect(html2).toBe(html1)
+    })
+  })
 })
