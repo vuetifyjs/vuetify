@@ -1,5 +1,6 @@
 import Vue from 'vue'
-import { test } from '~util/testing'
+import { test, resizeWindow } from '~util/testing'
+import VApp from '~components/VApp'
 import VToolbar from '~components/VToolbar'
 
 const scrollWindow = y => {
@@ -161,5 +162,20 @@ test('VToolbar.vue', ({ mount }) => {
     expect(wrapper.vm.isScrollingUp).toBe(false)
     await scrollWindow(0)
     expect(wrapper.vm.isScrollingUp).toBe(true)
+  })
+
+  it('should update the application content height if screen size changes', async () => {
+    const app = mount(VApp)
+    const wrapper = mount(VToolbar, {
+      propsData: {
+        app: true
+      }
+    })
+
+    await resizeWindow(1920)
+    expect(wrapper.vm.$vuetify.application.top).toBe(64)
+
+    await resizeWindow(200)
+    expect(wrapper.vm.$vuetify.application.top).toBe(56)
   })
 })

@@ -17,7 +17,7 @@ export default {
     Applicationable('top', [
       'clippedLeft',
       'clippedRight',
-      'height',
+      'computedHeight',
       'invertedScroll'
     ]),
     Colorable,
