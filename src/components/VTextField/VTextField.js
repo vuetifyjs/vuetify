@@ -6,10 +6,6 @@ import Input from '../../mixins/input'
 import Maskable from '../../mixins/maskable'
 import { isMaskDelimiter } from '../../util/mask'
 
-const warnNaN = (val, result) => {
-  if (isNaN(result)) console.warn('[Vuetify] Expected a number, got', val)
-}
-
 export default {
   name: 'v-text-field',
 
@@ -44,11 +40,17 @@ export default {
     prefix: String,
     rowHeight: {
       type: [Number, String],
-      default: 24
+      default: 24,
+      validator (val) {
+        return !isNaN(parseFloat(val))
+      }
     },
     rows: {
       type: [Number, String],
-      default: 5
+      default: 5,
+      validator (val) {
+        return !isNaN(parseInt(val, 10))
+      }
     },
     singleLine: Boolean,
     solo: Boolean,
@@ -122,16 +124,6 @@ export default {
     },
     shouldAutoGrow () {
       return this.isTextarea && this.autoGrow
-    },
-    _rowHeight () {
-      const _rowHeight = parseFloat(this.rowHeight)
-      warnNaN(this.rowHeight, _rowHeight)
-      return _rowHeight
-    },
-    _rows () {
-      const _rows = parseInt(this.rows, 10)
-      warnNaN(this.rows, _rows)
-      return _rows
     }
   },
 
@@ -175,7 +167,7 @@ export default {
         const height = this.$refs.input
           ? this.$refs.input.scrollHeight
           : 0
-        const minHeight = this._rows * this._rowHeight
+        const minHeight = parseInt(this.rows, 10) * parseFloat(this.rowHeight)
         this.inputHeight = Math.max(minHeight, height)
       })
     },
@@ -264,7 +256,7 @@ export default {
       if (!this.isTextarea) {
         data.domProps.type = this.type
       } else {
-        data.domProps.rows = this._rows
+        data.domProps.rows = this.rows
       }
 
       if (this.mask) {
