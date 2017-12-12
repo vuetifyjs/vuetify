@@ -274,7 +274,7 @@ export default {
 
       if (this.$scopedSlots.item) {
         const tile = this.$scopedSlots.item({ parent: this, item, tile: data })
-        return this.needTile(tile)
+        return this.needsTile(tile)
           ? this.$createElement('v-list-tile', data, [tile])
           : tile
       }

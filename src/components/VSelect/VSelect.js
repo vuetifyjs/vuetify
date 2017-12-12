@@ -116,7 +116,7 @@ export default {
   },
 
   methods: {
-    needTile (tile) {
+    needsTile (tile) {
       return !/v-list-tile$/.test(tile.tag)
     },
     changeSelectedIndex (keyCode) {
