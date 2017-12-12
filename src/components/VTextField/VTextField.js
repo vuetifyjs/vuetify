@@ -120,7 +120,7 @@ export default {
       return this.multiLine || this.textarea
     },
     noResizeHandle () {
-      return this.isTextarea && (this.noResize || this.autoGrow)
+      return this.isTextarea && (this.noResize || this.shouldAutoGrow)
     },
     shouldAutoGrow () {
       return this.isTextarea && this.autoGrow
