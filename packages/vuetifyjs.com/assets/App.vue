@@ -58,14 +58,14 @@
         })
       },
       setupLayout (timeout = 300) {
-        const drawer = this.$route.fullPath !== '/'
+        const drawer = !['/', '/404'].includes(this.$route.path)
         this.$store.commit('app/STATELESS', !drawer)
 
         setTimeout(() => {
           if (this.$route &&
-            this.$route.fullPath !== '/' &&
+            this.$route.path !== '/' &&
             this.$route.from &&
-            this.$route.from.fullPath !== '/'
+            this.$route.from.path !== '/'
           ) return
 
           if (this.$vuetify.breakpoint.mdAndDown) return

@@ -28,6 +28,7 @@ export function createRouter () {
       mode: release ? 'hash' : 'history',
       scrollBehavior,
       routes: [
+        route('/404', 'general/404'),
         route('/', 'Home'),
         // Getting Started
         route('/getting-started/quick-start', 'getting-started/QuickStart'),
@@ -61,7 +62,7 @@ export function createRouter () {
         route('/examples/:example+', 'examples/Example'),
         route('/:section/:component', 'components/Doc'),
         // Global redirect for 404
-        { path: '*', redirect: '/' }
+        { path: '*', redirect: '/404' }
       ]
     })
 

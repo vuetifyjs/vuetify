@@ -77,7 +77,7 @@
 
     watch: {
       $route (current) {
-        const isManualScrolling = current.path === '/'
+        const isManualScrolling = this.getManualScroll(current.path)
         const duration = isManualScrolling ? 0 : 400
 
         setTimeout(() => {
@@ -87,13 +87,15 @@
     },
 
     created () {
-      const fixed = this.$route.path !== '/'
-      this.isManualScrolling = !fixed
+      this.isManualScrolling = this.getManualScroll(this.$route.path)
     },
 
     methods: {
       changeToRelease (release) {
         window.location.href = `${window.location.origin}/releases/${release}/#${this.$route.fullPath}`
+      },
+      getManualScroll (path) {
+        return ['/', '/404'].includes(path)
       }
     }
   }
