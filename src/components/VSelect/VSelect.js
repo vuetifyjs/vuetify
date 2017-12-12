@@ -117,7 +117,7 @@ export default {
 
   methods: {
     needsTile (tile) {
-      return !/v-list-tile$/.test(tile.tag)
+      return tile.componentOptions == null || tile.componentOptions.tag !== 'v-list-tile'
     },
     changeSelectedIndex (keyCode) {
       // backspace, left, right, delete
