@@ -23,7 +23,6 @@
         left
         attach
         min-width="300"
-        nudge-right="6"
       )
         v-btn(
           slot="activator"
