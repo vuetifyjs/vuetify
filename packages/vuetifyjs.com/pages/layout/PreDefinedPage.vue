@@ -1,5 +1,7 @@
 <template lang="pug">
   doc-view
+    app-alert(error :value="`Layout.PreDefined.alert1`" slot="sup")
+
     template(slot-scope="{ namespace }")
       section#default-markup
         section-head(:value="`${namespace}.markupHeader`")
@@ -17,11 +19,11 @@
           |   &lt;v-footer app&gt;&lt;/v-footer&gt;
           |&lt;/v-app&gt;
 
+        app-alert(info :value="`${namespace}.alert2`" slot="sup")
+
       section#all-about-app
         section-head(:value="`${namespace}.appHeader`")
         section-text(:value="`${namespace}.appText`")
-
-      app-alert(error :value="`${namespace}.alert1`")
 
       section#layouts
         v-container(fluid grid-list-xl).pa-0

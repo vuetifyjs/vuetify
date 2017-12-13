@@ -34,6 +34,6 @@
         markup(lang="cli").mb-5
           |$ git checkout dev
           |$ npm install // or yarn
-          |$ npm run dev
+          |$ npm run dev // or yarn dev
         section-text(:value="`${namespace}.localDevText3`")
 </template>
