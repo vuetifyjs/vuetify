@@ -41,16 +41,13 @@ export default {
     rowHeight: {
       type: [Number, String],
       default: 24,
-      validator (val) {
-        return !isNaN(parseFloat(val))
+      validator: v => !isNaN(parseFloat(v))
       }
     },
     rows: {
       type: [Number, String],
       default: 5,
-      validator (val) {
-        return !isNaN(parseInt(val, 10))
-      }
+      validator: v => !isNaN(parseInt(v, 10))
     },
     singleLine: Boolean,
     solo: Boolean,
