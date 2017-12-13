@@ -44,7 +44,7 @@
                   </v-flex>
                   <v-flex xs12 md6>
                     <span>Footer</span>
-                    <v-switch label="Fixed" v-model="footer.fixed" primary></v-switch>
+                    <v-switch label="Inset" v-model="footer.inset" primary></v-switch>
                   </v-flex>
                 </v-layout>
               </v-card-text>
@@ -58,8 +58,8 @@
         </v-layout>
       </v-container>
     </v-content>
-    <v-footer :fixed="footer.fixed" app>
-      <span>&copy; {{ new Date().getFullYear() }}</span>
+    <v-footer :inset="footer.inset" app>
+      <span class="px-3">&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>
 </template>
@@ -68,16 +68,16 @@
   export default {
     data: () => ({
       dark: true,
-      drawers: ['Permanent', 'Persistent', 'Temporary'],
+      drawers: ['Default (no property)', 'Permanent', 'Temporary'],
       primaryDrawer: {
         model: null,
-        type: 'persistent',
+        type: 'default (no property)',
         clipped: false,
         floating: false,
         mini: false
       },
       footer: {
-        fixed: false
+        inset: false
       }
     })
   }

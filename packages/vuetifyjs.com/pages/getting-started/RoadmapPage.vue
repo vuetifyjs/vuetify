@@ -1,6 +1,6 @@
 <template lang="pug">
   doc-view
-    section#higlights
+    section#highlights
       table.table.elevation-1
         tbody
           tr(
@@ -26,3 +26,8 @@
     }
   }
 </script>
+
+<style lang="stylus">
+  #highlights table.table tbody p
+    margin-bottom: 0
+</style>

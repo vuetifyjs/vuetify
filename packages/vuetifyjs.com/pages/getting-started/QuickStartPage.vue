@@ -78,7 +78,7 @@
         markup(lang="stylus")
           |// main.styl
           |@import 'path/to/node_modules/vuetify/src/stylus/main.styl' // Ensure you are using stylus-loader
-          |&nbsp;
+
         section-text(:value="`${namespace}.existingText5`")
         app-alert(error :value="`${namespace}.alert2`")
 
