@@ -88,7 +88,7 @@
 
         markup(lang="cli")
           |// my-project/
-          |npm install babel-polyfill --save-dev // or yarn add babel-polyfill
+          |$ npm install babel-polyfill --save-dev // or yarn add babel-polyfill
 
         markup(lang="javascript")
           |// my-project/src/index.js
