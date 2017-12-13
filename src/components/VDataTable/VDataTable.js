@@ -27,6 +27,7 @@ export default {
   data () {
     return {
       actionsClasses: 'datatable__actions',
+      actionsRangeControlsClasses: 'datatable__actions__range-controls',
       actionsSelectClasses: 'datatable__actions__select',
       actionsPaginationClasses: 'datatable__actions__pagination'
     }
