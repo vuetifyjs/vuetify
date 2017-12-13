@@ -97,7 +97,7 @@ export default {
   },
 
   render (h) {
-    return h('v-table-overflow', {}, [
+    const tableOverflow = h('v-table-overflow', {}, [
       h('table', {
         'class': this.classes
       }, [
@@ -105,6 +105,11 @@ export default {
         this.genTBody(),
         this.genTFoot()
       ])
+    ])
+
+    return h('div', [
+      tableOverflow,
+      this.genActionsFooter()
     ])
   }
 }
