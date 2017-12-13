@@ -78,6 +78,14 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.element.className).toBe('fa icon fa-add')
   })
 
+  it('should support font awesome 5 icons when using <icon>- prefix', () => {
+    const context = functionalContext({ props: {} }, 'fab fa-facebook')
+    const wrapper = mount(VIcon, context)
+
+    expect(wrapper.text()).toBe('')
+    expect(wrapper.element.className).toBe('icon fab fa-facebook')
+  })
+
   it('should allow the use of v-text', () => {
     const wrapper = mount(VIcon, functionalContext({
       domProps: { textContent: 'fa-home' }
