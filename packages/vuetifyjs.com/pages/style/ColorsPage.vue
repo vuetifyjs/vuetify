@@ -18,7 +18,7 @@
         section-head(:value="`${namespace}.javascriptPackHeader`")
         section-text(:value="`${namespace}.javascriptPackText`")
 
-        markup(lang="javascript")
+        markup(lang="js")
           |// src/index.js
           |
           |// Libraries
@@ -46,7 +46,7 @@
           |
           |@import '/path/to/node_modules/vuetify/src/stylus/main.styl'
         section-text(:value="`${namespace}.stylusPackText2`")
-        markup(lang="javascript").mb-3
+        markup(lang="js").mb-3
           |// src/index.js
           |
           |import('./assets/stylus/main.styl')
