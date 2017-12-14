@@ -1,7 +1,7 @@
 <template>
   <div id="lateral">
     <v-tabs grow v-model="tabs">
-      <v-toolbar color="grey lighten-4" light>
+      <v-toolbar>
         <v-toolbar-side-icon></v-toolbar-side-icon>
         <v-toolbar-title>Page title</v-toolbar-title>
         <v-spacer></v-spacer>
@@ -12,7 +12,7 @@
           <v-icon>more_vert</v-icon>
         </v-btn>
       </v-toolbar>
-      <v-tabs-bar class="grey lighten-4">
+      <v-tabs-bar>
         <v-tabs-item href="#one">Item One</v-tabs-item>
         <v-tabs-item href="#two">Item Two</v-tabs-item>
         <v-tabs-item href="#three">Item Three</v-tabs-item>
