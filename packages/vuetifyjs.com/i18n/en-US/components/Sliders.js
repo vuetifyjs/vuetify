@@ -21,7 +21,8 @@ export default {
     },
     dark: {
       header: 'Dark theme',
-      desc: 'Sliders also support theming.'
+      desc: 'Sliders also support theming.',
+      uninverted: true
     },
     customColors: {
       header: 'Custom colors',
