@@ -56,6 +56,8 @@ export function createRouter () {
         // Guides
         route('/guides/server-side-rendering', 'guides/SSR'),
         route('/guides/a-la-carte', 'guides/ALaCarte'),
+        // Additional resources
+        route('/theme-generator', 'ThemeGenerator'),
         // Dynamic
         route('/examples/:example+', 'examples/Example'),
         route('/:section/:component', 'components/Doc'),

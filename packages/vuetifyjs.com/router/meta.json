@@ -377,18 +377,6 @@
     "description": "Vuetify offers numerous pre-build starter and premium themes. Kickstart your next application today, no design skills needed.",
     "keywords": "vuetify themes, pre-built material themes, premium themes"
   },
-  "/guides/a-la-carte": {
-    "h1": "A La Carte",
-    "title": "A La Carte",
-    "description": "Use only the components you need. Single component importing allows you to select what you want and leave the rest.",
-    "keywords": "a la carte, a-la-carte, vuetify single import, vuetify import, component importing"
-  },
-  "/guides/server-side-rendering": {
-    "h1": "Server side rendering",
-    "title": "Server side rendering",
-    "description": "Server side rendering guide for the Vuetify framework.",
-    "keywords": "server side rendering, ssr"
-  },
   "/examples/layouts/baseline": {
     "h1": "Baseline",
     "title": "Baseline example",
@@ -436,5 +424,23 @@
     "title": "Layout Sandbox",
     "description": "Layout Sandbox for the Vuetify.js framework",
     "keywords": "template, pre-made, vuetify layout, sandbox"
+  },
+  "/guides/a-la-carte": {
+    "h1": "A La Carte",
+    "title": "A La Carte",
+    "description": "Use only the components you need. Single component importing allows you to select what you want and leave the rest.",
+    "keywords": "a la carte, a-la-carte, vuetify single import, vuetify import, component importing"
+  },
+  "/guides/server-side-rendering": {
+    "h1": "Server side rendering",
+    "title": "Server side rendering",
+    "description": "Server side rendering guide for the Vuetify framework.",
+    "keywords": "server side rendering, ssr"
+  },
+  "/theme-generator": {
+    "h1": "Theme generator",
+    "title": "Material design theme generator",
+    "description": "Create a custom Material Design theme for your next application.",
+    "keywords": "material theme, theme generator, material theme generator, vuetify theme generator"
   }
 }

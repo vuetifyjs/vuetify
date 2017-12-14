@@ -17,6 +17,8 @@
   import AppView from '@/components/core/AppView'
   import Meta from '@/mixins/meta'
 
+  import { mapState } from 'vuex'
+
   export default {
     name: 'documentation',
 
@@ -30,6 +32,9 @@
     mixins: [Meta],
 
     computed: {
+      ...mapState({
+        fullscreenRoutes: state => state.fullscreenRoutes
+      }),
       examples () {
         return !!this.$route.params.example
       }
@@ -58,7 +63,7 @@
         })
       },
       setupLayout (timeout = 300) {
-        const drawer = !['/', '/404'].includes(this.$route.path)
+        const drawer = !this.fullscreenRoutes.includes(this.$route.path)
         this.$store.commit('app/STATELESS', !drawer)
 
         setTimeout(() => {
