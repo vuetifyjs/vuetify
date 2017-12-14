@@ -17,9 +17,9 @@
       v-btn(icon :disabled="current === total" @click="current = current + 1")
         v-icon chevron_right
     component(:is="components[current - 1]" :dark="dark")
-    div.text-xs-center
-      v-btn(flat icon @click="dark = !dark")
-        v-icon(:dark="dark") invert_colors
+    //- div.text-xs-center
+    //-   v-btn(flat icon @click="dark = !dark")
+    //-     v-icon(:dark="dark") invert_colors
     v-navigation-drawer(
       right
       app
