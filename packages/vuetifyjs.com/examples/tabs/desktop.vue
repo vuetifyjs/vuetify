@@ -1,6 +1,6 @@
 <template>
-  <v-tabs id="mobile-tabs-5" fixed light centered>
-    <v-toolbar color="grey lighten-4" light>
+  <v-tabs id="mobile-tabs-5" fixed centered>
+    <v-toolbar>
       <v-toolbar-side-icon></v-toolbar-side-icon>
       <v-toolbar-title>Page title</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -10,8 +10,8 @@
       <v-btn icon>
         <v-icon>more_vert</v-icon>
       </v-btn>
-      <v-tabs-bar class="grey lighten-4" slot="extension">
-        <v-tabs-slider color="primary"></v-tabs-slider>
+      <v-tabs-bar slot="extension">
+        <v-tabs-slider></v-tabs-slider>
         <v-tabs-item href="#mobile-tabs-5-1" class="primary--text">
           <v-icon>phone</v-icon>
         </v-tabs-item>
