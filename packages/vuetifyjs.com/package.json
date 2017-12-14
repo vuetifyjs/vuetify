@@ -32,7 +32,7 @@
     "vue-router": "^3.0.1",
     "vue-server-renderer": "^2.5.9",
     "vuelidate": "^0.6.1",
-    "vuetify": "1.0.0-alpha.2",
+    "vuetify": "1.0.0-alpha.3",
     "vuex": "^3.0.1",
     "vuex-router-sync": "^5.0.0"
   },
