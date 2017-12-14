@@ -1,5 +1,5 @@
 <template>
-  <v-card color="grey lighten-4">
+  <v-card>
     <v-card-text>
       <v-container fluid>
         <v-layout row wrap>
