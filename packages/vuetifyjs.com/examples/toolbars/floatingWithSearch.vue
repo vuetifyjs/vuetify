@@ -6,7 +6,6 @@
     class="pa-3"
   >
     <v-toolbar
-      color="white"
       floating
       dense
     >
