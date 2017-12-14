@@ -51,8 +51,6 @@ export function createRouter () {
         route('/style/content', 'style/Content'),
         // Motion & Transitions
         route('/motion/transitions', 'motion/Transitions'),
-        // Components
-        route('/components/grid', 'components/Grid'),
         // Extra
         route('/pre-made-themes', 'PremadeThemes'),
         // Guides
