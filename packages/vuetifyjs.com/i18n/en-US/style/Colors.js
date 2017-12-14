@@ -1,17 +1,21 @@
 export default {
   header: 'Colors',
-  headerText: 'Included with Vuetify is the entire Material Design color library. These color classes drastically help the prototyping phase or make the need for additional color declaration not needed.',
+  headerText: 'Out of the box you get access to all colors in the [Material Design spec](https://material.io/guidelines/style/color.html) through **stylus** and **javascript**. These values can be used within your style sheets, your component files and on actual components via the **color class** system.',
   classesHeader: 'Classes',
-  classesText: 'You can change a background or text color by adding a class to the element. For background, use the name, for example, `<div class="red">`. To use a shade, just add the modifying type, such as, **darken-3**. Text is very similar, adding a modification class, **red--text**, you can change the color of text, or change the type with adding **text--lighten-2**. These colors are also available as javascript variables, just import colors from <code>vuetify/es5/util/colors</code>',
-  colorPackHeader: 'Color pack',
-  colorPackText: 'Vuetify comes pre-built with a Material Design Color Pack (thanks <a href="http://materializecss.com/color.html" target="_blank" rel="noopener">Materialize.css</a>) by default. While convenient, this also increases the css export size by ~30kb. This can be disabled in both the webpack and webpack-ssr Vue cli templates.',
-  colorPackSubHeader1: 'Webpack',
-  colorPackSubText1: 'Navigate to <kbd>src/App.vue</kbd>. Scroll to the style element and set <code>$color-pack = false</code> above the Vuetify css import.',
-  colorPackSubHeader2: 'Webpack-SSR',
-  colorPackSubText2: 'Navigate to <kbd>src/stylus/main.styl</kbd>. At the top of the file, declare <code>$color-pack = false</code>.',
+  classesText: 'Each color from the spec gets converted to a **background** and **text** variant for styling within your application through a class, e.g. `<div class="red">` or `<span class="red--text">`. These class colors are defined [here](https://github.com/vuetifyjs/vuetify/blob/master/src/stylus/settings/_colors.styl).',
+  classesText2: 'Text colors also support **darken** and **lighten** variants using `text--{lighten|darken}-{n}`',
+  javascriptPackHeader: 'Javascript color pack',
+  javascriptPackText: 'Vuetify has an optional javascript color pack that you can import and use within your application. This can also be used to help define your applications theme.',
+  stylusPackHeader: 'Stylus color pack',
+  stylusPackText: 'While convenient, the color pack increases the css export size by ~30kb. Some projects may only require the default provided classes that are created at run-time from the Vuetify bootstrap. To disable this feature, you will have to _manually_ import and build the main **stylus** file. This will require a [stylus loader](https://github.com/shama/stylus-loader) and a `.styl` file entry.',
+  stylusPackText2: 'Your created `main.styl` file will then need to be included in your project.',
+  alert: 'You **must** configure your webpack setup to use `stylus`. If you are using a [pre-made template](/getting-started/quick-start#new-applications) this will already be done for you.',
+  stylusPackText3: 'This can also be done within your main **App.vue** file. Keep in mind, depending on your project setup, this _will_ increase build times as everytime your entry file is updated, the stylus files will be re-generated.',
+  colorHeader: 'Material colors',
+  colorText: 'Below is a list of the Material design color palette grouped by primary color',
   toc: [
     {
-      text: 'Colors',
+      text: 'Introduction',
       href: 'introduction'
     },
     {
@@ -19,8 +23,16 @@ export default {
       href: 'classes'
     },
     {
-      text: 'Color pack',
-      href: 'color-pack'
+      text: 'Javascript color pack',
+      href: 'javascript-color-pack'
+    },
+    {
+      text: 'Stylus color pack',
+      href: 'javascript-color-pack'
+    },
+    {
+      text: 'Material colors',
+      href: 'introduction'
     }
   ]
 }

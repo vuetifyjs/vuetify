@@ -4,19 +4,67 @@
       section#classes
         section-head(:value="`${namespace}.classesHeader`")
         section-text(:value="`${namespace}.classesText`")
+        example(
+          readonly
+          file="colors/classes"
+        )
+        section-text(:value="`${namespace}.classesText2`")
+        example(
+          readonly
+          file="colors/textClasses"
+        )
 
-      section#color-pack
-        section-head(:value="`${namespace}.colorPackHeader`")
-        section-text(:value="`${namespace}.colorPackText`")
+      section#javascript-color-pack
+        section-head(:value="`${namespace}.javascriptPackHeader`")
+        section-text(:value="`${namespace}.javascriptPackText`")
 
-        h3.py-3 {{ $t('Style.Colors.colorPackSubHeader1') }}
-        section-text(:value="`${namespace}.colorPackSubText1`")
+        markup(lang="javascript")
+          |// src/index.js
+          |
+          |// Libraries
+          |import Vue from 'vue'
+          |import Vuetify from 'vuetify'
+          |
+          |// Helpers
+          |import colors from 'vuetify/es5/util/colors'
+          |
+          |Vue.use(Vuetify, {
+          |   theme: {
+          |     primary: colors.red.darken1 // #E53935,
+          |     secondary: colors.red.lighten4 // #FFCDD2
+          |     accent: colors.indigo.base // #3F51B5
+          |   }
+          |})
 
-        h3.py-3 {{ $t('Style.Colors.colorPackSubHeader2') }}
-        section-text(:value="`${namespace}.colorPackSubText2`")
+      section#stylus-color-pack
+        section-head(:value="`${namespace}.stylusPackHeader`")
+        section-text(:value="`${namespace}.stylusPackText`")
+        markup(lang="stylus").mb-3
+          |// src/assets/stylus/main.styl
+          |
+          |$color-pack = false
+          |
+          |@import '/path/to/node_modules/vuetify/src/stylus/main.styl'
+        section-text(:value="`${namespace}.stylusPackText2`")
+        markup(lang="javascript").mb-3
+          |// src/index.js
+          |
+          |import('./assets/stylus/main.styl')
+          |// or
+          |require('./assets/stylus/main.styl')
+        app-alert(error :value="`${namespace}.alert`")
+        section-text(:value="`${namespace}.stylusPackText3`")
+        markup(lang="vue")
+          |&lt;style lang="stylus"&gt;
+          |   $color-pack = false
+          |
+          |   @import '/path/to/node_modules/vuetify/src/stylus/main.styl'
+          |&lt;/style&gt;
 
       section#colors
-        v-container(fluid).pa-0
+        section-head(:value="`${namespace}.colorHeader`")
+        section-text(:value="`${namespace}.colorText`")
+        v-container(fluid grid-list-xl).pa-0
           v-layout(row wrap)
             v-flex(xs12).mb-3
               v-text-field(
@@ -27,7 +75,7 @@
                 v-model="search"
               )
             v-flex(
-              xs6 sm6 md4 lg3
+              xs6 sm6 md4
               v-for="(color, key) in computedColors"
               :key="key"
             )
@@ -40,14 +88,17 @@
               v-card(
                 v-for="(subColor, key2) in color"
                 :color="`${key} ${convertToClass(key2)}`"
-                :class="`${key2.indexOf('light') > -1 ? 'black' : 'white'}--text`"
+                :class="getColorClass(key2)"
                 :key="key2"
                 tile
               )
                 v-card-text
                   v-layout
-                    v-flex(xs6) {{ key2 }}
-                    v-flex(xs6).text-xs-right {{ subColor.toUpperCase() }}
+                    v-flex(xs8).caption
+                      span(v-if="key !== 'shades'") {{ key }}&nbsp;
+                      span(v-if="key2 !== 'base'") {{ key2.replace(/(.*)(\d)/, '$1-$2') }}
+                    v-flex(xs4).text-xs-right
+                      span(v-if="subColor !== 'transparent'") {{ subColor.toUpperCase() }}
 
 </template>
 
@@ -67,7 +118,7 @@
         const search = this.search.toLowerCase()
 
         Object.keys(this.colors).forEach(key => {
-          if (key.indexOf(search) > -1 && key !== 'shades') {
+          if (key.indexOf(search) > -1) {
             colors[kebab(key)] = this.colors[key]
           }
         })
@@ -87,6 +138,14 @@
         if (isNaN(parseInt(end))) return str
 
         return `${sub}-${end}`
+      },
+      getColorClass (key) {
+        if (['white', 'transparent'].includes(key) ||
+          key.indexOf('light') > -1 ||
+          key.indexOf('accent') > -1
+        ) return 'black--text'
+
+        return 'white--text'
       }
     }
   }
