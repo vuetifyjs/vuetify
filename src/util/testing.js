@@ -164,3 +164,10 @@ export function touch(element) {
     end: createTrigger('touchend')
   }
 }
+
+export const resizeWindow = (width = global.innerWidth, height = global.innerHeight) => {
+  global.innerWidth = width
+  global.innerHeight = height
+  global.dispatchEvent(new Event('resize'))
+  return new Promise(resolve => setTimeout(resolve, 200))
+}
