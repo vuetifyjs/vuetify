@@ -35,7 +35,8 @@ export default {
     },
     variations: {
       header: 'Variations',
-      desc: 'An app-bar has multiple variations that can be applied with themes and helper classes. These range from light and dark themes, colored and transparent.'
+      desc: 'An app-bar has multiple variations that can be applied with themes and helper classes. These range from light and dark themes, colored and transparent.',
+      uninverted: true
     },
     prominent: {
       header: 'Prominent toolbars',
