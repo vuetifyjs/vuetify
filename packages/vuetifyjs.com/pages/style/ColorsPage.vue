@@ -17,7 +17,6 @@
       section#javascript-color-pack
         section-head(:value="`${namespace}.javascriptPackHeader`")
         section-text(:value="`${namespace}.javascriptPackText`")
-
         markup(lang="js")
           |// src/index.js
           |

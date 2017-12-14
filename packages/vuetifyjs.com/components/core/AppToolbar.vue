@@ -70,6 +70,7 @@
     computed: {
       ...mapState({
         currentVersion: state => state.currentVersion,
+        fullscreenRoutes: state => state.fullscreenRoutes,
         releases: state => state.releases,
         stateless: state => state.stateless
       })
@@ -95,7 +96,7 @@
         window.location.href = `${window.location.origin}/releases/${release}/#${this.$route.fullPath}`
       },
       getManualScroll (path) {
-        return ['/', '/404'].includes(path)
+        return this.fullscreenRoutes.includes(path)
       }
     }
   }

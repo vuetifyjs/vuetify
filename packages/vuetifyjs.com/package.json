@@ -59,6 +59,7 @@
     "stylus-loader": "^3.0.1",
     "sw-precache-webpack-plugin": "^0.11.4",
     "url-loader": "^0.6.2",
+    "vue-color": "^2.4.3",
     "vue-loader": "^13.5.0",
     "vue-style-loader": "^3.0.3",
     "vue-template-compiler": "^2.5.9",

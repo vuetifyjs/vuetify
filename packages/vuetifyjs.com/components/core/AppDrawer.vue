@@ -109,6 +109,12 @@
             v-icon {{ item.icon }}
           v-list-tile-content
             v-list-tile-title {{ item.title }}
+          v-chip(
+            v-if="item.badge"
+            class="white--text pa-0 chip--x-small"
+            color="primary"
+            disabled
+          ) {{ item.badge }}
           v-list-tile-action(v-if="item.subAction")
             v-icon(class="success--text") {{ item.subAction }}
           v-chip(

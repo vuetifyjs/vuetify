@@ -149,10 +149,17 @@ export function createStore () {
             { href: 'server-side-rendering', title: 'Server side rendering' },
             { href: 'a-la-carte', title: 'A la carte', badge: 'updated' }
           ]
+        },
+        {
+          title: 'Theme generator',
+          icon: 'mdi-format-paint',
+          href: '/theme-generator',
+          badge: 'new'
         }
       ],
       appFooter: true,
       currentVersion: null,
+      fullscreenRoutes: ['/', '/404', '/theme-generator'],
       releases: [],
       stateless: false,
       supporters: {
