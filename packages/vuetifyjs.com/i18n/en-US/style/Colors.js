@@ -28,7 +28,7 @@ export default {
     },
     {
       text: 'Stylus color pack',
-      href: 'javascript-color-pack'
+      href: 'stylus-color-pack'
     },
     {
       text: 'Material colors',

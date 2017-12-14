@@ -118,8 +118,10 @@
         const search = this.search.toLowerCase()
 
         Object.keys(this.colors).forEach(key => {
-          if (key.indexOf(search) > -1) {
-            colors[kebab(key)] = this.colors[key]
+          const kebabKey = kebab(key).toLowerCase()
+
+          if (kebabKey.indexOf(search) > -1) {
+            colors[kebabKey] = this.colors[key]
           }
         })
 
