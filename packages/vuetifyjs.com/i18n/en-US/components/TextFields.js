@@ -58,8 +58,7 @@ export default {
     },
     box: {
       header: 'Box style',
-      desc: 'Text-fields can be used with an alternative box design. Append and prepend icon props are **not** supported in this mode.',
-      uninverted: true
+      desc: 'Text-fields can be used with an alternative box design. Append and prepend icon props are **not** supported in this mode.'
     },
     customColors: {
       header: 'Custom colors',
