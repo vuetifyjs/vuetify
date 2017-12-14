@@ -3,7 +3,7 @@
     <v-layout row wrap>
       <v-flex xs12 sm12 md6 offset-md3>
         <v-card>
-          <v-toolbar color="white" extended>
+          <v-toolbar extended>
             <v-toolbar-side-icon></v-toolbar-side-icon>
             <v-fab-transition>
               <v-btn
