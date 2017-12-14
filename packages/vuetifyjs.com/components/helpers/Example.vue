@@ -175,7 +175,7 @@
       getLang (tab) {
         if (tab === 'script') return 'js'
         if (tab === 'style') return 'css'
-        return 'html'
+        return 'vue'
       },
       parseTemplate (target, template) {
         const string = `(<${target}(.*)?>[\\w\\W]*<\\/${target}>)`
