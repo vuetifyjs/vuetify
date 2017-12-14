@@ -190,6 +190,7 @@ export default {
   methods: {
     onScroll () {
       if (!this.scrollOffScreen ||
+        this.manualScroll ||
         typeof window === 'undefined'
       ) return
 
