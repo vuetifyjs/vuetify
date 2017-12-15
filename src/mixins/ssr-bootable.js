@@ -15,7 +15,9 @@ export default {
     // Use setAttribute instead of dataset
     // because dataset does not work well
     // with unit tests
-    this.$el.setAttribute('data-booted', true)
-    this.isBooted = true
+    setTimeout(() => {
+      this.$el.setAttribute('data-booted', true)
+      this.isBooted = true
+    }, 200)
   }
 }
