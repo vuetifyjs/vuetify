@@ -152,6 +152,12 @@
     },
 
     watch: {
+      $route () {
+        if(this.stateless &&
+          this.appDrawer &&
+          this.$vuetify.breakpoint.mdAndDown
+        ) this.appDrawer = false
+      },
       isSearching (val) {
         this.$refs.toolbar.isScrolling = !val
 
