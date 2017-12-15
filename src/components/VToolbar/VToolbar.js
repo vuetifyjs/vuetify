@@ -17,7 +17,7 @@ export default {
     Applicationable('top', [
       'clippedLeft',
       'clippedRight',
-      'height',
+      'computedHeight',
       'invertedScroll'
     ]),
     Colorable,
@@ -190,6 +190,7 @@ export default {
   methods: {
     onScroll () {
       if (!this.scrollOffScreen ||
+        this.manualScroll ||
         typeof window === 'undefined'
       ) return
 
