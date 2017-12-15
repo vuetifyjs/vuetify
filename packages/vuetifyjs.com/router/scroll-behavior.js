@@ -9,15 +9,14 @@ export default async function (to, from, savedPosition) {
     })
   }
 
-  if (savedPosition) {
-    return savedPosition
-  }
-
   if (to.hash) {
     return {
-      selector: to.hash,
-      offset: { y: 80 }
+      selector: to.hash
     }
+  }
+
+  if (savedPosition) {
+    return savedPosition
   }
 
   return new Promise(resolve => {

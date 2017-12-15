@@ -90,4 +90,14 @@
 
   .dashme
     border: 1px dashed black !important
+
+  main
+    section
+        &:before
+            content ''
+            display block
+            position relative
+            width 0
+            height 80px
+            margin-top -80px
 </style>
