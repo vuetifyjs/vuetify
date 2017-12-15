@@ -9,11 +9,13 @@ toolbar($material)
 theme(toolbar, "toolbar")
 
 .toolbar
+  bootable()
+  elevation(4)
+
+  display: block
   position: relative
-  transition: none
   width: 100%
   will-change: padding-left
-  elevation(4)
 
   .input-group--solo
     .input-group__details
@@ -108,9 +110,6 @@ theme(toolbar, "toolbar")
     display: inline-flex
     margin: 16px
     width: auto
-  
-  &--is-booted
-    transition: .2s $transition.fast-out-slow-in
   
   &--clipped
     z-index: 3

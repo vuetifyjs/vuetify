@@ -54,11 +54,13 @@ export default {
       return `.${key}--text{color:${value} !important;}`
     },
     genStyle () {
-      let style = document.querySelector('[data-vue-ssr-id=vuetify-theme-stylesheet]')
+      let style = document.querySelector('[data-vue-ssr-id=vuetify-theme-stylesheet]') ||
+        document.getElementById('vuetify-theme-stylesheet')
 
       if (!style) {
         style = document.createElement('style')
         style.type = 'text/css'
+        style.id = 'vuetify-theme-stylesheet'
         document.head.appendChild(style)
       }
 
