@@ -59,6 +59,7 @@ export default {
       if (!style) {
         style = document.createElement('style')
         style.type = 'text/css'
+        style.id = 'vuetify-theme-stylesheet'
         document.head.appendChild(style)
       }
 
