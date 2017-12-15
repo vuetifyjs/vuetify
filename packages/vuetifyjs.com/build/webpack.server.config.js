@@ -4,6 +4,8 @@ const base = require('./webpack.base.config')
 const nodeExternals = require('webpack-node-externals')
 const VueSSRServerPlugin = require('vue-server-renderer/server-plugin')
 
+const isProd = process.env.NODE_ENV === 'production'
+
 module.exports = merge(base, {
   target: 'node',
   devtool: '#source-map',
@@ -16,7 +18,7 @@ module.exports = merge(base, {
   // https://github.com/liady/webpack-node-externals
   externals: nodeExternals({
     // do not externalize CSS files in case we need to import it from a dep
-    whitelist: /\.css$/
+    whitelist: isProd ? /\.css$/ : [/\.css$/, 'vuetify']
   }),
   plugins: [
     new webpack.DefinePlugin({
