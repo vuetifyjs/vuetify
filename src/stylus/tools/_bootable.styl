@@ -1,5 +1,5 @@
-bootable($display)
-  display: none
+bootable()
+  transition: none
   
   &[data-booted="true"]
-    display: $display
+    transition: .2s $transition.fast-out-slow-in

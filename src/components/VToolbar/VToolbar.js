@@ -174,7 +174,7 @@ export default {
     }
   },
 
-  beforeMount () {
+  created () {
     if (this.invertedScroll ||
       this.manualScroll
     ) this.isActive = false
