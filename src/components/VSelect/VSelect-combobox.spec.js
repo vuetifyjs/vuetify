@@ -76,4 +76,27 @@ test('VSelect - combobox', ({ mount }) => {
     expect(event).toBeCalledWith(12)
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
+
+  it('should not populate search field if value is falsey', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        combobox: true
+      }
+    })
+
+    const event = jest.fn()
+    wrapper.vm.$on('input', event)
+
+    wrapper.setData({ isActive: true })
+    await wrapper.vm.$nextTick()
+
+    wrapper.setProps({ searchInput: '' })
+    await wrapper.vm.$nextTick()
+
+    wrapper.setData({ isActive: false })
+    await wrapper.vm.$nextTick()
+
+    expect(event).not.toBeCalled()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
 })
