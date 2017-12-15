@@ -44,7 +44,7 @@ export default {
   props: {
     activator: {
       default: null,
-      validate: val => {
+      validator: val => {
         return ['string', 'object'].includes(typeof val)
       }
     },
