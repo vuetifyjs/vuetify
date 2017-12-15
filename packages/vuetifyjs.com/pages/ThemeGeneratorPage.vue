@@ -90,7 +90,7 @@
         current: 1,
         dark: false,
         dialog: false,
-        drawer: null,
+        drawer: false,
         theme: {
           primary: colors.red.base,
           secondary: colors.red.lighten2,
