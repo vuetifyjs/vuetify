@@ -1,4 +1,5 @@
 import application from './mixins/application'
+import store from '../../store'
 import theme from './mixins/theme'
 
 const Vuetify = {
@@ -11,6 +12,7 @@ const Vuetify = {
     Vue.util.defineReactive($vuetify, 'inspire', {
       breakpoint: {},
       application,
+      store,
       dark: false,
       theme: theme(opts.theme),
       touchSupport: false

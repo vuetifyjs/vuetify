@@ -10,6 +10,7 @@ export default {
 
   data () {
     return {
+      isVisible: false,
       activeTimeout: {}
     }
   },
@@ -44,32 +45,60 @@ export default {
         'snack--top': this.top,
         'snack--vertical': this.vertical
       })
+    },
+    snackbarQueue () {
+      return this.$vuetify.store.getSnackbarQueue()
     }
   },
 
   watch: {
-    isActive () {
-      this.setTimeout()
+    isActive (current) {
+      this.toggle()
+    },
+    isVisible (current) {
+      if (current) {
+        this.setTimeout()
+      }
+    },
+    snackbarQueue (current, previous) {
+      const activeSnackbar = this.$vuetify.store.getSnackbarFromQueue()
+      if (activeSnackbar === this._uid) {
+        this.isVisible = true
+      }
     }
   },
 
   methods: {
+    afterLeave () {
+      this.$vuetify.store.removeSnackbarFromQueue(this._uid)
+      this.isActive = false
+    },
+    close () {
+      this.isVisible = false
+    },
     setTimeout () {
       clearTimeout(this.activeTimeout)
 
-      if (this.isActive && this.timeout) {
-        this.activeTimeout = setTimeout(() => {
-          this.isActive = false
-        }, this.timeout)
+      if (this.isVisible && this.timeout) {
+        this.activeTimeout = setTimeout(this.close, this.timeout)
+      }
+    },
+    toggle () {
+      if (this.isActive) {
+        this.$vuetify.store.addSnackbarToQueue(this._uid)
+      } else {
+        this.close()
       }
     }
   },
 
   mounted () {
-    this.setTimeout()
+    this.toggle()
   },
 
   render (h) {
+    if (!this.isVisible) return
+
     const children = []
     let content
 
@@ -96,16 +125,18 @@ export default {
       content = this.$slots.default
     }
 
-    if (this.isActive) {
-      children.push(h('div', {
-        staticClass: 'snack',
-        'class': this.classes,
-        on: this.$listeners
-      }, [h('div', {
-        staticClass: 'snack__content'
-      }, content)]))
-    }
+    children.push(h('div', {
+      staticClass: 'snack',
+      'class': this.classes,
+      on: this.$listeners
+    }, [h('div', {
+      staticClass: 'snack__content'
+    }, content)]))
 
-    return h('transition', children)
+    return h('transition', {
+      on: {
+        afterLeave: this.afterLeave
+      }
+    }, children)
   }
 }
