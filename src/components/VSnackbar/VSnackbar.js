@@ -7,6 +7,7 @@ import {
 
 import Colorable from '../../mixins/colorable'
 import Toggleable from '../../mixins/toggleable'
+import Delayable from '../../mixins/delayable'
 
 export default {
   name: 'v-snackbar',
@@ -16,7 +17,7 @@ export default {
     VSlideYReverseTransition
   },
 
-  mixins: [Colorable, Toggleable],
+  mixins: [Colorable, Toggleable, Delayable],
 
   data () {
     return {
@@ -31,9 +32,8 @@ export default {
     multiLine: Boolean,
     right: Boolean,
     top: Boolean,
-    // TODO: change this to closeDelay to match other API in delayable.js
-    timeout: {
-      type: Number,
+    closeDelay: {
+      type: [Number, String],
       default: 6000
     },
     vertical: Boolean
@@ -59,24 +59,24 @@ export default {
 
   watch: {
     isActive () {
-      this.setTimeout()
+      this.clearAndRunDelay()
     }
   },
 
   methods: {
-    setTimeout () {
-      clearTimeout(this.activeTimeout)
+    clearAndRunDelay () {
+      this.clearDelay()
 
-      if (this.isActive && this.timeout) {
-        this.activeTimeout = setTimeout(() => {
+      if (this.isActive && this.closeDelay) {
+        this.runDelay('close', () => {
           this.isActive = false
-        }, this.timeout)
+        })
       }
     }
   },
 
   mounted () {
-    this.setTimeout()
+    this.clearAndRunDelay()
   },
 
   render (h) {

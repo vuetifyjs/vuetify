@@ -41,7 +41,7 @@ test('VSnackbar.vue', ({ mount }) => {
     const wrapper = mount(VSnackbar, {
       propsData: {
         value: false,
-        timeout: 3141
+        closeDelay: 3141
       }
     })
 
@@ -69,7 +69,7 @@ test('VSnackbar.vue', ({ mount }) => {
     const wrapper = mount(VSnackbar, {
       propsData: {
         value: true,
-        timeout: 3141
+        closeDelay: 3141
       }
     })
 
