@@ -34,23 +34,24 @@ theme(bottom-nav, "bottom-nav")
     margin: 0
     max-width: 168px
     min-width: 80px
-    padding: 0px
+    padding: 6px 0 10px
     text-transform: none
     opacity: .5
     width: 100%
 
     .btn__content
-      height: 100%
       flex-direction: column-reverse
-      height: inherit
       font-size: 12px
-      transform: scale(1, 1) translate(0, 0)
       white-space: nowrap
       will-change: font-size
 
       i.icon
         color: inherit
+        margin-bottom: 4px
         transition: all .4s cubic-bezier(.25, .8, .50, 1)
+
+      span
+        line-height: 1
 
     &--active
       opacity: 1
@@ -70,9 +71,6 @@ theme(bottom-nav, "bottom-nav")
   &--shift
     .btn__content
       font-size: 14px
-
-      span
-        height: 21px
 
     .btn
       transition: all .3s
