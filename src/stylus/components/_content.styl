@@ -13,6 +13,7 @@
     max-width: 100%
 
 +firefox()
-  .content
-    &--wrap
-      display: block
+  @media print
+    .content
+      &--wrap
+        display: block

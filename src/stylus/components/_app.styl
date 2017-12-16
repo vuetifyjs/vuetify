@@ -29,8 +29,9 @@ application($material)
 app(application)
 
 +firefox()
-  .application
-    display: block
-
-    &--wrap
+  @media print
+    .application
       display: block
+
+      &--wrap
+        display: block
