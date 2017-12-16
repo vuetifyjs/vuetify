@@ -1,4 +1,5 @@
 @import '../bootstrap'
+@import '../browsers'
 
 .content
   flex: 1 1 auto
@@ -10,3 +11,8 @@
     flex: 1 0 auto
     display: flex
     max-width: 100%
+
++firefox()
+  .content
+    &--wrap
+      display: block
