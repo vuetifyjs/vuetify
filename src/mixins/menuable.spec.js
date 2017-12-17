@@ -1,6 +1,6 @@
-import { test } from '~util/testing'
-import Menuable from '~mixins/menuable'
-import VBtn from '~components/VBtn'
+import { test } from '@util/testing'
+import Menuable from '@mixins/menuable'
+import VBtn from '@components/VBtn'
 
 test('menuable.js', ({ mount }) => {
   it('should bind custom activator', () => {

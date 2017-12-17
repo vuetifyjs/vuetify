@@ -1,6 +1,6 @@
-import { test } from '~util/testing'
-import VSelect from '~components/VSelect'
-import VMenu from '~components/VMenu'
+import { test } from '@util/testing'
+import VSelect from '@components/VSelect'
+import VMenu from '@components/VMenu'
 
 test('VSelect - combobox', ({ mount }) => {
   it('should emit custom value on blur', async () => {

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Touch from './touch'
-import { test, touch } from '~util/testing'
+import { test, touch } from '@util/testing'
 
 test('touch.js', ({ mount }) => {
   function create(value) {

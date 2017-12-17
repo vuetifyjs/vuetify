@@ -1,7 +1,7 @@
-import VBtn from '~components/VBtn'
-import VCard from '~components/VCard'
-import VMenu from '~components/VMenu'
-import { test } from '~util/testing'
+import VBtn from '@components/VBtn'
+import VCard from '@components/VCard'
+import VMenu from '@components/VMenu'
+import { test } from '@util/testing'
 
 // TODO: Most of these have exactly the same snapshots
 test('VMenu.js', ({ mount }) => {

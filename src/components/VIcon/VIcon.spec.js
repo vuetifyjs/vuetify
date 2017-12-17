@@ -1,5 +1,5 @@
-import VIcon from '~components/VIcon'
-import { test, functionalContext } from '~util/testing'
+import VIcon from '@components/VIcon'
+import { test, functionalContext } from '@util/testing'
 
 test('VIcon.js', ({ mount, compileToFunctions }) => {
   it('should render component', () => {

@@ -123,7 +123,8 @@
       "node_modules"
     ],
     "moduleNameMapper": {
-      "src/(.*)": "<rootDir>/src/$1"
+      "src/(.*)": "<rootDir>/src/$1",
+      "^@(.*)$": "<rootDir>/src/$1"
     },
     "transform": {
       ".*\\.(vue)$": "<rootDir>/node_modules/jest-vue-preprocessor",

@@ -1,5 +1,5 @@
-import VChip from '~components/VChip'
-import { test } from '~util/testing'
+import VChip from '@components/VChip'
+import { test } from '@util/testing'
 
 test('VChip.vue', ({ mount, compileToFunctions }) => {
   it('should have a chip class', () => {

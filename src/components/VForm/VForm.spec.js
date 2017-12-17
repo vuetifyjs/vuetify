@@ -1,7 +1,7 @@
 import Vue from 'vue'
-import { test } from '~util/testing'
-import VTextField from '~components/VTextField'
-import VBtn from '~components/VBtn'
+import { test } from '@util/testing'
+import VTextField from '@components/VTextField'
+import VBtn from '@components/VBtn'
 import VForm from './VForm'
 
 const inputOne = Vue.component('input-one', {
