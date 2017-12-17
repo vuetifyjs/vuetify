@@ -1,7 +1,7 @@
-import { test } from '~util/testing'
+import { test } from '@util/testing'
 import Vue from 'vue/dist/vue.common'
-import VTextField from '~components/VTextField'
-import VProgressLinear from '~components/VProgressLinear'
+import VTextField from '@components/VTextField'
+import VProgressLinear from '@components/VProgressLinear'
 
 test('VTextField.js', ({ mount }) => {
   it('should render component and match snapshot', () => {

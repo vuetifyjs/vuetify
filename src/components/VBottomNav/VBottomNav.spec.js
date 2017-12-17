@@ -1,6 +1,6 @@
 import VBottomNav from './VBottomNav'
 import VBtn from '../VBtn'
-import { test } from '~util/testing'
+import { test } from '@util/testing'
 import Vue from 'vue'
 
 function createBtn (val = null) {

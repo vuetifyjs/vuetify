@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import { test } from '~util/testing'
-import VDatePicker from '~components/VDatePicker'
+import { test } from '@util/testing'
+import VDatePicker from '@components/VDatePicker'
 
 test('VDatePicker.js', ({ mount, compileToFunctions }) => {
   it('should display the correct date in title and header', () => {

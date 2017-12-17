@@ -1,7 +1,7 @@
 import Vue from 'vue'
-import { test } from '~util/testing'
-import VExpansionPanel from '~components/VExpansionPanel'
-import { VExpansionPanelContent } from '~components/VExpansionPanel'
+import { test } from '@util/testing'
+import VExpansionPanel from '@components/VExpansionPanel'
+import { VExpansionPanelContent } from '@components/VExpansionPanel'
 
 const createPanel = props => {
   return Vue.component('test', {

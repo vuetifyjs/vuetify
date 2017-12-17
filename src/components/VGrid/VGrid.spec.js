@@ -1,5 +1,5 @@
-import { test } from '~util/testing'
-import VFlex from '~components/VGrid/VFlex'
+import { test } from '@util/testing'
+import VFlex from '@components/VGrid/VFlex'
 
 test('VFlex', ({ mount, functionalContext }) => {
   it('should conditionally apply if boolean is used', () => {

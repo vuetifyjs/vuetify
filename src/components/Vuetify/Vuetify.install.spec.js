@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import Vuetify from '~components/Vuetify'
-import { test } from '~util/testing'
+import Vuetify from '@components/Vuetify'
+import { test } from '@util/testing'
 
 test('Vuetify.install.js', () => {
   it('should install transitions, directives and components', async () => {

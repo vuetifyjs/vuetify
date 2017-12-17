@@ -1,5 +1,5 @@
-import VDialog from '~components/VDialog'
-import { test } from '~util/testing'
+import VDialog from '@components/VDialog'
+import { test } from '@util/testing'
 
 test('VDialog.js', ({ mount, compileToFunctions }) => {
   it('should render component and match snapshot', () => {
