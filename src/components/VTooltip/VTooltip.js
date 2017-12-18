@@ -130,10 +130,6 @@ export default {
     this.value && this.callActivate()
   },
 
-  deactivated () {
-    this.isActive = false
-  },
-
   render (h) {
     const tooltip = h('div', {
       staticClass: 'tooltip__content',
