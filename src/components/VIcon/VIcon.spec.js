@@ -95,4 +95,22 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.text()).toBe('')
     expect(wrapper.element.className).toBe('fa icon fa-home')
   })
+
+  it('set font size from helper prop', async () => {
+    const iconFactory = size => mount(VIcon, functionalContext({
+      props: { [size]: true }
+    }))
+
+    const small = iconFactory('small')
+    expect(small.html()).toMatchSnapshot()
+
+    const medium = iconFactory('medium')
+    expect(medium.html()).toMatchSnapshot()
+
+    const large = iconFactory('large')
+    expect(large.html()).toMatchSnapshot()
+
+    const xLarge = iconFactory('xLarge')
+    expect(xLarge.html()).toMatchSnapshot()
+  })
 })
