@@ -1,5 +1,5 @@
-import VTooltip from '~components/VTooltip'
-import { test } from '~util/testing'
+import VTooltip from '@components/VTooltip'
+import { test } from '@util/testing'
 
 test('VTooltip.js', ({ mount, compileToFunctions }) => {
   it('should render component and match snapshot', async () => {

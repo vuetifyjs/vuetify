@@ -114,7 +114,6 @@ export default {
         'toolbar--extended': this.isExtended,
         'toolbar--fixed': !this.absolute && (this.app || this.fixed),
         'toolbar--floating': this.floating,
-        'toolbar--is-booted': this.isBooted,
         'toolbar--prominent': this.prominent,
         'theme--dark': this.dark,
         'theme--light': this.light
@@ -175,7 +174,7 @@ export default {
     }
   },
 
-  beforeMount () {
+  created () {
     if (this.invertedScroll ||
       this.manualScroll
     ) this.isActive = false

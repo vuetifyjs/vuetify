@@ -1,6 +1,6 @@
-import VApp from '~components/VApp'
-import VNavigationDrawer from '~components/VNavigationDrawer'
-import { test, resizeWindow } from '~util/testing'
+import VApp from '@components/VApp'
+import VNavigationDrawer from '@components/VNavigationDrawer'
+import { test, resizeWindow } from '@util/testing'
 
 beforeEach(() => resizeWindow(1920, 1080))
 

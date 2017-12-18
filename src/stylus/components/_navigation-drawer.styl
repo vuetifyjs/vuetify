@@ -14,20 +14,19 @@ navigation-drawer($material)
 theme(navigation-drawer, "navigation-drawer")
 
 .navigation-drawer
+  bootable()
+
+  display: block
+  left: 0
   max-width: 100%
   overflow-y: auto
   overflow-x: hidden
-  left: 0
   padding: 0 0 100px
   pointer-events: auto
   top: 0
-  transition: none
   will-change: transform
   z-index: 3
   -webkit-overflow-scrolling: touch
-
-  &--is-booted
-    transition: .2s $transition.fast-out-slow-in
 
   &__border
     position: absolute

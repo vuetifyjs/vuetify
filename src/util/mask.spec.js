@@ -1,4 +1,4 @@
-import { test } from '~util/testing'
+import { test } from '@util/testing'
 import { maskText, unmaskText } from './mask'
 
 test('mask.js', ({ mount }) => {

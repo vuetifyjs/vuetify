@@ -24,6 +24,11 @@ theme(textfield, "input-group--text-field")
 
 /** Input */
 .input-group--text-field
+  // TODO: Revisit in 1.1 refactor
+  // Input was mis-aligned by 1px
+  input
+    padding-bottom: 1px
+
   input,
   textarea
     font-size: $input-font-size
@@ -105,7 +110,6 @@ theme(textfield, "input-group--text-field")
       display: flex
       justify-content: flex-start
       min-width: 40px
-      transition: .3s $transition.fast-in-fast-out
 
     .input-group__details
       margin-left: auto

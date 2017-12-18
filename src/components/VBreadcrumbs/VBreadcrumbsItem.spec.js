@@ -1,5 +1,5 @@
-import { test } from '~util/testing'
-import { VBreadcrumbsItem } from '~components/VBreadcrumbs'
+import { test } from '@util/testing'
+import { VBreadcrumbsItem } from '@components/VBreadcrumbs'
 
 // TODO: Enable when Vue has optional injects
 test.skip('VBreadcrumbsItem.js', ({ mount }) => {

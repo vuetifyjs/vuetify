@@ -1,5 +1,5 @@
-import { test } from '~util/testing'
-import { VCarouselItem } from '~components/VCarousel'
+import { test } from '@util/testing'
+import { VCarouselItem } from '@components/VCarousel'
 
 const imageSrc = 'https://vuetifyjs.com/static/doc-images/cards/sunshine.jpg'
 const warning = '[Vuetify] Warn: The v-carousel-item component must be used inside a v-carousel.'

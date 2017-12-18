@@ -18,24 +18,32 @@ theme(dataiterator, "data-iterator")
 /** Actions */
 .data-iterator__actions
   display: flex
-  justify-content: center
+  justify-content: flex-end
   align-items: center
   font-size: 12px
+  flex-wrap: wrap-reverse
 
   .btn
     color: inherit
 
     &:last-of-type
-      margin-left: 18px
+      margin-left: 14px
+
+  &__range-controls
+    display: flex
+    align-items: center
+    min-height: 48px
 
   &__pagination
+    display: block
     text-align: center
-    margin: 0 26px 0 32px
+    margin: 0 32px 0 24px
 
   &__select
     display: flex
     align-items: center
     justify-content: center
+    margin-right: 14px
 
     .input-group--select
       margin: 13px 0 13px 34px
