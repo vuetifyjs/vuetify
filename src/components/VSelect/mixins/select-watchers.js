@@ -8,6 +8,9 @@
  */
 export default {
   watch: {
+    filteredItems () {
+      this.$refs.menu && this.$refs.menu.updateDimensions()
+    },
     inputValue (val) {
       // Populate selected items
       this.genSelectedItems(val)
