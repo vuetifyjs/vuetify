@@ -228,8 +228,8 @@ export default {
     data.directives = [{
       name: 'scroll',
       value: {
-        callback: this.onScroll,
-        target: this.scrollTarget
+        value: this.onScroll,
+        arg: this.scrollTarget
       }
     }]
 
