@@ -80,5 +80,6 @@ export default {
     const app = document.querySelector('[data-app]') ||
       document.body // This is only for unit tests
     app && app.removeEventListener('click', el._clickOutside, true)
+    delete el._clickOutside
   }
 }
