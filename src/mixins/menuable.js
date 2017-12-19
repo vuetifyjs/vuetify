@@ -183,6 +183,7 @@ export default {
       const isOverflowing = toTop < totalHeight
 
       // If overflowing bottom and offset
+      // TODO: set 'bottom' position instead of 'top'
       if (isOverflowing && this.offsetOverflow) {
         top = this.pageYOffset + (activator.top - contentHeight)
       // If overflowing bottom
