@@ -23,6 +23,7 @@ function inserted (el, binding) {
 
 function unbind (el, binding) {
   window.removeEventListener('resize', el._onResize)
+  delete el._onResize
 }
 
 export default {
