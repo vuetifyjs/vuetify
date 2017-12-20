@@ -43,10 +43,19 @@ export default {
     counter: [Boolean, Number, String],
     fullWidth: Boolean,
     multiLine: Boolean,
+    noResize: Boolean,
     placeholder: String,
     prefix: String,
+    rowHeight: {
+      type: [Number, String],
+      default: 24,
+      validator: v => !isNaN(parseFloat(v))
+      }
+    },
     rows: {
-      default: 5
+      type: [Number, String],
+      default: 5,
+      validator: v => !isNaN(parseInt(v, 10))
     },
     singleLine: Boolean,
     suffix: String,
@@ -66,6 +75,7 @@ export default {
         'input-group--single-line': this.singleLine || this.isSolo,
         'input-group--multi-line': this.multiLine,
         'input-group--full-width': this.fullWidth,
+        'input-group--no-resize': this.noResizeHandle,
         'input-group--prefix': this.prefix,
         'input-group--suffix': this.suffix,
         'input-group--textarea': this.textarea
@@ -110,8 +120,14 @@ export default {
         this.badInput ||
         ['time', 'date', 'datetime-local', 'week', 'month'].includes(this.type)
     },
+    isTextarea () {
+      return this.multiLine || this.textarea
+    },
+    noResizeHandle () {
+      return this.isTextarea && (this.noResize || this.shouldAutoGrow)
+    },
     shouldAutoGrow () {
-      return (this.multiLine || this.textarea) && this.autoGrow
+      return this.isTextarea && this.autoGrow
     }
   },
 
@@ -155,9 +171,8 @@ export default {
         const height = this.$refs.input
           ? this.$refs.input.scrollHeight
           : 0
-        const minHeight = this.rows * 24
-        const inputHeight = height < minHeight ? minHeight : height
-        this.inputHeight = inputHeight + (this.textarea ? 4 : 0)
+        const minHeight = parseInt(this.rows, 10) * parseFloat(this.rowHeight)
+        this.inputHeight = Math.max(minHeight, height)
       })
     },
     onInput (e) {
@@ -191,7 +206,7 @@ export default {
       // Prevents closing of a
       // dialog when pressing
       // enter
-      if (this.multiLine &&
+      if (this.isTextarea &&
         this.isFocused &&
         e.keyCode === 13
       ) {
@@ -209,7 +224,7 @@ export default {
       }, this.count)
     },
     genInput () {
-      const tag = this.multiLine || this.textarea ? 'textarea' : 'input'
+      const tag = this.isTextarea ? 'textarea' : 'input'
       const listeners = Object.assign({}, this.$listeners)
       delete listeners['change'] // Change should not be bound externally
 
@@ -242,7 +257,7 @@ export default {
 
       if (this.placeholder) data.domProps.placeholder = this.placeholder
 
-      if (!this.textarea && !this.multiLine) {
+      if (!this.isTextarea) {
         data.domProps.type = this.type
       } else {
         data.domProps.rows = this.rows
