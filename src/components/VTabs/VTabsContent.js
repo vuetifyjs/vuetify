@@ -5,14 +5,19 @@ import {
   VTabReverseTransition
 } from '../transitions'
 
+import {
+  inject as RegistrableInject
+} from '../../mixins/registrable'
+
 import Touch from '../../directives/touch'
 
 export default {
   name: 'v-tabs-content',
 
-  mixins: [Bootable],
-
-  inject: ['registerContent', 'unregisterContent'],
+  mixins: [
+    Bootable,
+    RegistrableInject('tabs', 'v-tabs-content', 'v-tabs')
+  ],
 
   components: {
     VTabTransition,
@@ -60,11 +65,14 @@ export default {
   },
 
   mounted () {
-    this.registerContent(this.id, this.toggle)
+    this.tabs.register('content', {
+      id: this.id,
+      toggle: this.toggle
+    })
   },
 
   beforeDestroy () {
-    this.unregisterContent(this.id)
+    this.tabs.unregister('content', this.id)
   },
 
   render (h) {

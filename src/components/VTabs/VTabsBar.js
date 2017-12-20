@@ -3,6 +3,9 @@ import VIcon from '../VIcon'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
+import {
+  inject as RegistrableInject
+} from '../../mixins/registrable'
 import Themeable from '../../mixins/themeable'
 
 // Directives
@@ -12,7 +15,11 @@ import Touch from '../../directives/touch'
 export default {
   name: 'v-tabs-bar',
 
-  mixins: [Colorable, Themeable],
+  mixins: [
+    Colorable,
+    RegistrableInject('tabs', 'v-tabs-bar', 'v-tabs'),
+    Themeable
+  ],
 
   directives: {
     Resize,
@@ -21,67 +28,85 @@ export default {
 
   provide () {
     return {
-      addTabItem: (action, toggle, el) => {
-        this.registerTabItem(action, toggle, el)
-        this.onResize()
-      },
-      removeTabItem: (action) => {
-        this.unregisterTabItem(action)
-        this.onResize()
-      }
+      slider: this.slider
     }
   },
 
-  inject: ['isScrollable', 'isMobile', 'registerTabItem', 'unregisterTabItem'],
+  data: () => ({
+    defaultColor: 'white',
+    isOverflowing: false,
+    itemOffset: 0,
+    scrollOffset: 0,
+    startX: 0,
+    tabsContainer: null,
+    tabsSlider: null,
+    targetEl: null
+  }),
 
-  data () {
-    return {
-      isOverflowing: false,
-      itemOffset: 0,
-      scrollOffset: 0,
-      startX: 0
+  props: {
+    alignWithTitle: Boolean,
+    appendIcon: {
+      type: String,
+      default: 'chevron_right'
+    },
+    centered: Boolean,
+    fixedTabs: Boolean,
+    grow: Boolean,
+    height: {
+      type: [Number, String],
+      default: undefined,
+      validator: v => !isNaN(parseInt(v))
+    },
+    hideArrows: Boolean,
+    iconsAndText: Boolean,
+    mobileBreakPoint: {
+      type: [Number, String],
+      default: 1280,
+      validator: v => !isNaN(parseInt(v))
+    },
+    prependIcon: {
+      type: String,
+      default: 'chevron_left'
     }
   },
 
   computed: {
     classes () {
       return {
-        'tabs__bar': true,
+        'tabs__bar--align-with-title': this.alignWithTitle,
+        'tabs__bar--centered': this.centered || this.fixedTabs,
+        'tabs__bar--fixed-tabs': this.fixedTabs,
+        'tabs__bar--grow': this.grow || (this.fixedTabs && this.isMobile),
+        'tabs__bar--icons-and-text': this.iconsAndText,
+        'tabs__bar--overflow': !this.hideArrows && this.isOverflowing,
         'theme--dark': this.dark,
         'theme--light': this.light
       }
     },
-    containerClasses () {
-      return {
-        'tabs__container': true
-      }
-    },
-    wrapperClasses () {
-      return {
-        'tabs__wrapper': true,
-        'tabs__wrapper--scrollable': this.isScrollable(),
-        'tabs__wrapper--overflow': this.isOverflowing
-      }
+    computedHeight () {
+      if (this.height) return this.height
+
+      return this.iconsAndText ? 72 : 48
     },
     containerStyles () {
       return {
-        'transform': `translateX(${-this.scrollOffset}px)`
+        height: `${parseInt(this.computedHeight)}px`,
+        transform: `translateX(${-this.scrollOffset}px)`
       }
     },
-    leftIconVisible () {
-      return !this.isMobile() &&
-        this.isScrollable() &&
-        this.isOverflowing &&
+    isMobile () {
+      return this.$vuetify.breakpoint.width < this.mobileBreakPoint
+    },
+    prependIconVisible () {
+      return this.isOverflowing &&
         this.scrollOffset > 0
     },
-    rightIconVisible () {
-      if (this.isMobile() ||
-        !this.isScrollable() ||
-        !this.isOverflowing) return
+    appendIconVisible () {
+      if (!this.isOverflowing) return
 
       // Check one scroll ahead to know the width of right-most item
       const container = this.$refs.container
-      const item = this.newOffsetRight(this.scrollOffset, this.itemOffset)
+      const item = this.newOffsetAppend(this.scrollOffset, this.itemOffset)
       const itemWidth = item && container.children[item.index].clientWidth || 0
       const scrollOffset = this.scrollOffset + container.clientWidth
 
@@ -89,46 +114,144 @@ export default {
     }
   },
 
+  mounted () {
+    this.tabs.register('bar', {
+      id: 'bar',
+      slider: this.slider
+    })
+    this.setOverflow()
+  },
+
+  beforeDestroy () {
+    this.tabs.unregister('bar', 'bar')
+  },
+
   methods: {
     genContainer () {
-      return this.$createElement('ul', {
-        'class': this.containerClasses,
-        'style': this.containerStyles,
+      return this.$createElement('div', {
+        staticClass: 'tabs__container',
+        style: this.containerStyles,
         ref: 'container'
       }, this.$slots.default)
     },
     genIcon (direction) {
-      const capitalize = direction.charAt(0).toUpperCase() + direction.slice(1)
+      if (!this[`${direction}IconVisible`] ||
+        this.hideArrows
+      ) return null
+
       return this.$createElement(VIcon, {
-        props: { [`${direction}`]: true },
+        staticClass: `icon--${direction}`,
         style: { display: 'inline-flex' },
         on: {
-          click: this[`scroll${capitalize}`]
+          click: () => this.scrollTo(direction)
         }
-      }, `chevron_${direction}`)
+      }, this[`${direction}Icon`])
+    },
+    genTransition (direction) {
+      return this.$createElement('transition', {
+        props: { name: 'fade-transition' }
+      }, [this.genIcon(direction)])
     },
     genWrapper () {
       return this.$createElement('div', {
-        class: this.wrapperClasses,
+        staticClass: 'tabs__wrapper',
         directives: [{
           name: 'touch',
           value: {
-            start: this.start,
-            move: this.move,
-            end: this.end
+            start: this.onTouchStart,
+            move: this.onTouchMove,
+            end: this.onTouchEnd
           }
         }]
       }, [this.genContainer()])
     },
-    start (e) {
+    isSlider (el) {
+      return el.className.indexOf('tabs__slider') > -1
+    },
+    newOffset (direction) {
+      const capitalize = `${direction.charAt(0).toUpperCase()}${direction.slice(1)}`
+      const container = this.$refs.container
+      const items = container.children
+
+      return this[`newOffset${capitalize}`](container, items)
+    },
+    newOffsetPrepend (container, items, offset = 0) {
+      for (let index = this.itemOffset - 1; index >= 0; index--) {
+        if (this.isSlider(items[index])) return
+
+        const newOffset = offset + items[index].clientWidth
+        if (newOffset >= container.clientWidth) {
+          return { offset: this.scrollOffset - offset, index: index + 1 }
+        }
+        offset = newOffset
+      }
+
+      return { offset: 0, index: 0 }
+    },
+    newOffsetAppend (container, items, offset = this.scrollOffset) {
+      for (let index = this.itemOffset; index < items.length; index++) {
+        if (this.isSlider(items[index])) return
+
+        const newOffset = offset + items[index].clientWidth
+        if (newOffset > this.scrollOffset + container.clientWidth) {
+          return { offset, index }
+        }
+        offset = newOffset
+      }
+
+      return null
+    },
+    onResize () {
+      if (this._isDestroyed) return
+
+      this.setOverflow()
+      this.slider()
+    },
+    scrollTo (direction) {
+      const { offset, index } = this.newOffset(direction)
+      this.scrollOffset = offset
+      this.itemOffset = index
+    },
+    setOverflow () {
+      const container = this.$refs.container
+      this.isOverflowing = container.clientWidth < container.scrollWidth
+    },
+    slider (el) {
+      this.tabsSlider = this.tabsSlider ||
+        !!this.$el && this.$el.querySelector('.tabs__slider')
+
+      this.tabsContainer = this.tabsContainer ||
+        !!this.$el && this.$el.querySelector('.tabs__container')
+
+      if (!this.tabsSlider || !this.tabsContainer) return
+
+      this.targetEl = el || this.targetEl
+
+      if (!this.targetEl) return
+
+      // Gives DOM time to paint when
+      // processing slider for
+      // dynamic tabs
+      this.$nextTick(() => {
+        // #684 Calculate width as %
+        const width = (
+          this.targetEl.scrollWidth /
+          this.tabsContainer.clientWidth *
+          100
+        )
+
+        this.tabsSlider.style.width = `${width}%`
+        this.tabsSlider.style.left = `${this.targetEl.offsetLeft}px`
+      })
+    },
+    onTouchStart (e) {
       this.startX = this.scrollOffset + e.touchstartX
       this.$refs.container.style.transition = 'none'
     },
-    move (e) {
-      const offset = this.startX - e.touchmoveX
-      this.scrollOffset = offset
+    onTouchMove (e) {
+      this.scrollOffset = this.startX - e.touchmoveX
     },
-    end (e) {
+    onTouchEnd (e) {
       this.onResize()
       const container = this.$refs.container
       const scrollWidth = container.scrollWidth - this.$el.clientWidth / 2
@@ -140,73 +263,23 @@ export default {
         const lastItem = container.children[container.children.length - 1]
         this.scrollOffset = scrollWidth - lastItem.clientWidth
       }
-    },
-    scrollLeft () {
-      const { offset, index } = this.newOffset('Left')
-      this.scrollOffset = offset
-      this.itemOffset = index
-    },
-    scrollRight () {
-      const { offset, index } = this.newOffset('Right')
-      this.scrollOffset = offset
-      this.itemOffset = index
-    },
-    onResize () {
-      if (this._isDestroyed) return
-
-      const container = this.$refs.container
-      this.isOverflowing = container.clientWidth < container.scrollWidth
-    },
-    newOffset (direction) {
-      return this[`newOffset${direction}`](this.scrollOffset, this.itemOffset)
-    },
-    newOffsetLeft (currentOffset, currentIndex) {
-      const container = this.$refs.container
-      const items = container.children
-      let offset = 0
-
-      for (let index = currentIndex - 1; index >= 0; index--) {
-        if (!items[index].classList.contains('tabs__slider')) {
-          const newOffset = offset + items[index].clientWidth
-          if (newOffset >= container.clientWidth) {
-            return { offset: currentOffset - offset, index: index + 1 }
-          }
-          offset = newOffset
-        }
-      }
-
-      return { offset: 0, index: 0 }
-    },
-    newOffsetRight (currentOffset, currentIndex) {
-      const container = this.$refs.container
-      const items = container.children
-      let offset = currentOffset
-
-      for (let index = currentIndex; index < items.length; index++) {
-        if (!items[index].classList.contains('tabs__slider')) {
-          const newOffset = offset + items[index].clientWidth
-          if (newOffset > currentOffset + container.clientWidth) {
-            return { offset, index }
-          }
-          offset = newOffset
-        }
-      }
-
-      return null
     }
   },
 
   render (h) {
     return h('div', {
+      staticClass: 'tabs__bar',
       'class': this.addBackgroundColorClassChecks(this.classes),
       directives: [{
         name: 'resize',
+        arg: 0,
+        modifiers: { quiet: false },
         value: this.onResize
       }]
     }, [
       this.genWrapper(),
-      this.leftIconVisible ? this.genIcon('left') : null,
-      this.rightIconVisible ? this.genIcon('right') : null
+      this.genTransition('prepend'),
+      this.genTransition('append')
     ])
   }
 }

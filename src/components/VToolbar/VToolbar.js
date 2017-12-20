@@ -69,8 +69,7 @@ export default {
     scrollThreshold: {
       type: Number,
       default: 300
-    },
-    tabs: Boolean
+    }
   },
 
   computed: {

@@ -3,7 +3,7 @@
 
 /* Theme */
 tabs($material)
-  .tabs__li
+  .tabs__div
     color: $material.tabs.active
 
     &.tabs__item--disabled
@@ -18,144 +18,255 @@ tabs($material)
 
 theme(tabs, "tabs__bar")
 
-.tabs
-  overflow: hidden
+.tabs__bar
   position: relative
-  width: 100%
-
-  &--grow .tabs__bar
-    .tabs__li
-      flex: 1
-
-  &--fixed > .tabs__bar
-    .tabs__li
-      min-width: 160px
-      max-width: 264px
-      flex: 0 1 160px
-
-      @media $display-breakpoints.xs-only
-        min-width: 72px
-
-  &--centered .tabs__bar
-    .tabs__container
-      justify-content: center
-
-  &--icons
-    .tabs__bar
-      height: 72px
-
-    .tabs__item
-      flex-direction: column
-
-  &.tabs--mobile .tabs__bar
-    .icon--left, .icon--right
-      display: none
-
-    .tabs__wrapper
-      &--scrollable.tabs__wrapper--overflow
-        overflow: hidden !important
-
-  &:not(.tabs--grow):not(.tabs--mobile)
-    .tabs__item
-      padding: 0 24px
-
-  &:not(.tabs--centered):not(.tabs--grow):not(.tabs--mobile)
-    .tabs__wrapper
-      &--scrollable
-        margin: 0 60px
-        overflow: hidden !important
-
-  &__bar
-    width: 100%
-    position: relative
-    height: 48px
-
-    @media $display-breakpoints.sm-and-down
-      padding-left: 0
-
-    .icon--left, .icon--right
-      position: absolute
-      top: 0
-      width: 32px
-      align-items: center
-      height: 100%
-      cursor: pointer
-      user-select: none
-
-    .icon--left
-      left: 28px
-
-    .icon--right
-      right: 28px
-
-  &__container
-    display: flex
-    height: 100%
-    width: 100%
+  
+  .icon--prepend,
+  .icon--append
     position: absolute
-    padding: 0
     top: 0
+    width: 32px
     align-items: center
-    list-style: none
-    will-change: transform
-    transition: transform 0.6s cubic-bezier(0.86, 0, 0.07, 1)
-
-    > li:not(.tabs__slider)
-      height: 100%
-
-    &-left
-      position: absolute
-      left: 0
-      top: 0
-      height: 100%
-      width: 32px
-      display: flex
-      align-items: center
-
-  &__wrapper
-    position: relative
-    overflow-x: auto
-    height: inherit
-
-  &__item
-    align-items: center
-    color: inherit !important
-    display: flex
-    flex-shrink: 0
-    justify-content: center
     height: 100%
-    padding: 0 12px
-    position: relative
+    cursor: pointer
+    user-select: none
+
+  .icon--prepend
+    left: 4px
+
+  .icon--append
+    right: 4px
+  
+  &--align-with-title,
+  &--overflow
+    .tabs__wrapper
+      overflow: hidden
+  
+  &--overflow
+    .tabs__wrapper
+      margin-left: 40px
+      margin-right: 40px
+
+  &--align-with-title
+    .tabs__wrapper
+      margin-left: 56px
+      
+      @media $display-breakpoints.xs-only
+        margin-left: 66px
+
+  &--fixed-tabs
+    .tabs__div
+      min-width: 128px
+
+  &--fixed-tabs,
+  &--scrollable
+    .tabs__container
+      display: flex
+
+  &--centered:not(.tabs__bar--is-mobile)
+    .tabs__container
+      text-align: center
+        
+  &--grow
+    .tabs__container
+      display: flex
+
+    .tabs__div
+      flex: 1 0
+      max-width: none
+        
+  &--icons-and-text
+    .tabs__item
+      flex-direction: column-reverse
+      
+      .icon
+        margin-bottom: 6px
+
+.tabs__container
+  list-style-type: none
+  transition: transform 0.6s cubic-bezier(0.86, 0, 0.07, 1)
+  white-space: nowrap
+
+.tabs__items
+  position: relative
+
+.tabs__div
+  align-items: center
+  display: inline-flex
+  flex: 0 1
+  height: inherit
+  max-width: 260px
+  vertical-align: middle
+
+.tabs__item
+  align-items: center
+  color: inherit
+  display: flex
+  flex: 1 1
+  flex-basis: 264px
+  font-size: 14px
+  font-weight: 500
+  height: 100%
+  justify-content: center
+  line-height: normal
+  padding: 6px 12px
+  text-align: center
+  text-decoration: none
+  text-transform: uppercase
+  transition: $primary-transition
+  
+  &:not(.tabs__item--active)
     opacity: .7
-    text-align: center
-    text-decoration: none
-    text-transform: uppercase
-    text-overflow: ellipsis
-    white-space: nowrap
 
-    .icon
-      color: inherit
-      margin: 0 0 5px
+.tabs__slider
+  bottom: 0
+  height: 2px
+  position: absolute
+  transition: $primary-transition
 
-    &--active
-      opacity: 1
+.tabs__content
+  width: 100%
+  transition: transform 0.6s cubic-bezier(0.86, 0, 0.07, 1)
+// .tabs
 
-    &--disabled
-      pointer-events: none
+// .tabs
+//   overflow: hidden
+//   position: relative
+//   width: 100%
 
-  &__items
-    position: relative
-    overflow: hidden
+//   &--grow .tabs__bar
+//     .tabs__li
+//       flex: 1 1
 
-  &__content
-    transition: $primary-transition
-    width: 100%
+//   &--fixed > .tabs__bar
+//     .tabs__li
+//       min-width: 160px
+//       max-width: 264px
+//       flex: 0 1 160px
 
-    .card
-      border-radius: 0 0 2px 2px
+//       @media $display-breakpoints.xs-only
+//         min-width: 72px
 
-  &__slider
-    position: absolute
-    bottom: 0
-    height: 2px
-    transition: $primary-transition
+//   &--centered .tabs__bar
+//     .tabs__container
+//       justify-content: center
+
+//   &--icons
+//     .tabs__bar
+//       height: 72px
+
+//     .tabs__item
+//       flex-direction: column
+
+//   &.tabs--mobile .tabs__bar
+//     .icon--left, .icon--right
+//       display: none
+
+//     .tabs__wrapper
+//       &--scrollable.tabs__wrapper--overflow
+//         overflow: hidden !important
+
+//   &:not(.tabs--grow):not(.tabs--mobile)
+//     .tabs__item
+//       padding: 0 24px
+
+//   &:not(.tabs--centered):not(.tabs--grow):not(.tabs--mobile)
+//     .tabs__wrapper
+//       &--scrollable
+//         margin: 0 60px
+//         overflow: hidden !important
+
+//   &__bar
+//     width: 100%
+//     position: relative
+//     height: 48px
+
+//     @media $display-breakpoints.sm-and-down
+//       padding-left: 0
+
+//     .icon--left, .icon--right
+//       position: absolute
+//       top: 0
+//       width: 32px
+//       align-items: center
+//       height: 100%
+//       cursor: pointer
+//       user-select: none
+
+//     .icon--left
+//       left: 28px
+
+//     .icon--right
+//       right: 28px
+
+//   &__container
+//     display: flex
+//     height: 100%
+//     width: 100%
+//     position: absolute
+//     padding: 0
+//     top: 0
+//     align-items: center
+//     list-style: none
+//     will-change: transform
+//     transition: transform 0.6s cubic-bezier(0.86, 0, 0.07, 1)
+
+//     > li:not(.tabs__slider)
+//       height: 100%
+
+//     &-left
+//       position: absolute
+//       left: 0
+//       top: 0
+//       height: 100%
+//       width: 32px
+//       display: flex
+//       align-items: center
+
+//   &__wrapper
+//     position: relative
+//     overflow-x: auto
+//     height: inherit
+
+//   &__item
+//     align-items: center
+//     color: inherit !important
+//     display: flex
+//     flex-shrink: 0
+//     justify-content: center
+//     height: 100%
+//     padding: 0 12px
+//     position: relative
+//     opacity: .7
+//     text-align: center
+//     text-decoration: none
+//     text-transform: uppercase
+//     text-overflow: ellipsis
+//     white-space: nowrap
+
+//     .icon
+//       color: inherit
+//       margin: 0 0 5px
+
+//     &--active
+//       opacity: 1
+
+//     &--disabled
+//       pointer-events: none
+
+//   &__items
+//     position: relative
+//     overflow: hidden
+
+//   &__content
+//     transition: $primary-transition
+//     width: 100%
+
+//     .card
+//       border-radius: 0 0 2px 2px
+
+//   &__slider
+//     position: absolute
+//     bottom: 0
+//     height: 2px
+//     transition: $primary-transition

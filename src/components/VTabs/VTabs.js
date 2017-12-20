@@ -2,6 +2,10 @@ require('../../stylus/components/_tabs.styl')
 
 import Resize from '../../directives/resize'
 
+import {
+  provide as RegistrableProvide
+} from '../../mixins/registrable'
+
 export default {
   name: 'v-tabs',
 
@@ -9,71 +13,48 @@ export default {
     Resize
   },
 
+  mixins: [RegistrableProvide('tabs')],
+
   provide () {
     return {
-      registerContent: this.registerContent,
-      unregisterContent: this.unregisterContent,
-      registerTabItem: this.registerTabItem,
-      unregisterTabItem: this.unregisterTabItem,
       next: this.next,
       prev: this.prev,
-      slider: this.slider,
-      tabClick: this.tabClick,
-      isScrollable: () => this.scrollable,
-      isMobile: () => this.isMobile
+      tabClick: this.tabClick
     }
   },
 
-  data () {
-    return {
-      activeIndex: null,
-      content: [],
-      isBooted: false,
-      resizeTimeout: null,
-      reverse: false,
-      tabItems: [],
-      tabsContainer: null,
-      tabsSlider: null,
-      target: null,
-      targetEl: null,
-      transitionTime: 300
-    }
-  },
+  data: () => ({
+    activeIndex: null,
+    content: [],
+    bar: [],
+    isBooted: false,
+    resizeTimeout: null,
+    reverse: false,
+    tabItems: [],
+    target: null,
+    transitionTime: 300
+  }),
 
   props: {
-    centered: Boolean,
-    fixed: Boolean,
-    grow: Boolean,
-    icons: Boolean,
-    mobileBreakPoint: {
-      type: [Number, String],
-      default: 1280
-    },
-    value: String,
-    scrollable: {
-      type: Boolean,
-      default: true
-    }
+    value: String
   },
 
   computed: {
-    classes () {
-      return {
-        'tabs': true,
-        'tabs--centered': this.centered,
-        'tabs--fixed': this.fixed,
-        'tabs--grow': this.grow,
-        'tabs--icons': this.icons,
-        'tabs--mobile': this.isMobile,
-        'tabs--scroll-bars': this.scrollable
-      }
-    },
-    isMobile () {
-      return this.$vuetify.breakpoint.width < this.mobileBreakPoint
+    activeTab () {
+      if (!this.tabItems.length) return undefined
+
+      return this.tabItems[this.activeIndex]
     }
   },
 
   watch: {
+    bar (val) {
+      if (!val) return
+
+      // Welcome to suggestions for solving
+      // initial load positioning
+      setTimeout(() => this.activeTab.toggle(this.activeTab.id), 100)
+    },
     value () {
       this.tabClick(this.value)
     },
@@ -95,8 +76,9 @@ export default {
             this.target = this.activeIndex
           })
         }
+      } else if (newItems !== oldItems) {
+        this.callSlider()
       }
-      this.slider()
     },
     '$vuetify.application.left' () {
       this.onContainerResize()
@@ -109,27 +91,22 @@ export default {
   mounted () {
     // This is a workaround to detect if link is active
     // when being used as a router or nuxt link
-    const i = this.tabItems.findIndex(({ el }) => {
-      return el.firstChild.classList.contains('tabs__item--active')
+    const i = this.tabItems.findIndex(tabItem => {
+      return tabItem.id === this.value ||
+        tabItem.el.firstChild.className.indexOf('tabs__item--active') > -1
     })
 
-    const tab = this.value || (this.tabItems[i !== -1 ? i : 0] || {}).id
-
-    tab && this.tabClick(tab)
+    this.activeIndex = i > -1 ? i : 0
   },
 
   methods: {
-    registerContent (id, toggle) {
-      this.content.push({ id, toggle })
-    },
-    registerTabItem (id, toggle, el) {
-      this.tabItems.push({ id, toggle, el })
-    },
-    unregisterContent (id) {
-      this.content = this.content.filter(o => o.id !== id)
-    },
-    unregisterTabItem (id) {
-      this.tabItems = this.tabItems.filter(o => o.id !== id)
+    callSlider () {
+      if (!this.bar.length ||
+        !this.tabItems[this.activeIndex] ||
+        !this.activeTab
+      ) return
+
+      this.bar[0].slider(this.activeTab.el)
     },
     next (cycle) {
       let nextIndex = this.activeIndex + 1
@@ -151,9 +128,6 @@ export default {
 
       this.tabClick(this.tabItems[prevIndex].id)
     },
-    onResize () {
-      this.slider()
-    },
     /**
      * When v-navigation-drawer changes the
      * width of the container, call resize
@@ -165,33 +139,8 @@ export default {
       clearTimeout(this.resizeTimeout)
       this.resizeTimeout = setTimeout(this.onResize, this.transitionTime)
     },
-    slider (el) {
-      this.tabsSlider = this.tabsSlider ||
-        !!this.$el && this.$el.querySelector('.tabs__slider')
-
-      this.tabsContainer = this.tabsContainer ||
-        !!this.$el && this.$el.querySelector('.tabs__container')
-
-      if (!this.tabsSlider || !this.tabsContainer) return
-
-      this.targetEl = el || this.targetEl
-
-      if (!this.targetEl) return
-
-      // Gives DOM time to paint when
-      // processing slider for
-      // dynamic tabs
-      this.$nextTick(() => {
-        // #684 Calculate width as %
-        const width = (
-          this.targetEl.scrollWidth /
-          this.tabsContainer.clientWidth *
-          100
-        )
-
-        this.tabsSlider.style.width = `${width}%`
-        this.tabsSlider.style.left = `${this.targetEl.offsetLeft}px`
-      })
+    register (type, args) {
+      this[type].push(args)
     },
     tabClick (target) {
       const setActiveIndex = index => {
@@ -214,6 +163,9 @@ export default {
         this.$emit('input', this.target)
       })
     },
+    unregister (type, id) {
+      this[type] = this.content.filter(o => o.id !== id)
+    },
     updateTabs () {
       this.content.forEach(({ toggle }) => {
         toggle(this.target, this.reverse, this.isBooted)
@@ -227,11 +179,7 @@ export default {
 
   render (h) {
     return h('div', {
-      'class': this.classes,
-      directives: [{
-        name: 'resize',
-        value: this.onResize
-      }]
+      staticClass: 'tabs'
     }, this.$slots.default)
   }
 }
