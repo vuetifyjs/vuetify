@@ -207,11 +207,12 @@ export default {
     value (val) {
       val && this.setTableDate()
     },
-    type (val) {
-      if (val === 'month' && this.activePicker === 'DATE') {
-        this.activePicker = 'MONTH'
-      } else if (val === 'year') {
-        this.activePicker = 'YEAR'
+    type (type) {
+      this.activePicker = type.toUpperCase()
+
+      if (this.value) {
+        const date = this.sanitizeDateString(this.value, type)
+        this.$emit('input', isValueAllowed(date, this.allowedDates) ? date : null)
       }
     }
   },
@@ -324,12 +325,12 @@ export default {
     genMonthTable () {
       return this.$createElement('v-date-picker-month-table', {
         props: {
-          allowedDates: this.type === 'MONTH' ? this.allowedDates : null,
+          allowedDates: this.type === 'month' ? this.allowedDates : null,
           color: this.color,
           format: this.monthFormat,
           locale: this.locale,
           scrollable: this.scrollable,
-          value: (!this.value || this.type === 'MONTH') ? this.value : this.value.substr(0, 7),
+          value: (!this.value || this.type === 'month') ? this.value : this.value.substr(0, 7),
           tableDate: `${this.tableYear}`
         },
         ref: 'table',
@@ -365,7 +366,7 @@ export default {
     // Adds leading zero to month/day if necessary, returns 'YYYY' if type = 'year',
     // 'YYYY-MM' if 'month' and 'YYYY-MM-DD' if 'date'
     sanitizeDateString (dateString, type) {
-      const [year, month, date] = dateString.split('-')
+      const [year, month = 1, date = 1] = dateString.split('-')
       return `${year}-${pad(month)}-${pad(date)}`.substr(0, { date: 10, month: 7, year: 4 }[type])
     }
   },

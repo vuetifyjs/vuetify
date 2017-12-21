@@ -376,19 +376,26 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
   it('should update the active picker if type has changed', () => {
     const wrapper = mount(VDatePicker, {
       propsData: {
+        value: '1999-12-13',
         type: 'date'
       }
     })
 
-    expect(wrapper.vm.activePicker).toBe('DATE')
+    wrapper.vm.$on('input', value => wrapper.setProps({ value }))
+
     wrapper.setProps({ type: 'month' })
     expect(wrapper.vm.activePicker).toBe('MONTH')
-    wrapper.setProps({ type: 'year' })
-    expect(wrapper.vm.activePicker).toBe('YEAR')
-    wrapper.setProps({ type: 'month' })
-    expect(wrapper.vm.activePicker).toBe('YEAR')
+    expect(wrapper.vm.value).toBe('1999-12')
+    // TODO: uncomment when type: 'year' is implemented
+    // wrapper.setProps({ type: 'year' })
+    // expect(wrapper.vm.activePicker).toBe('YEAR')
+    // expect(wrapper.vm.inputDate).toBe('1999')
+    // wrapper.setProps({ type: 'month' })
+    // expect(wrapper.vm.activePicker).toBe('MONTH')
+    // expect(wrapper.vm.inputDate).toBe('1999-01')
     wrapper.setProps({ type: 'date' })
-    expect(wrapper.vm.activePicker).toBe('YEAR')
+    expect(wrapper.vm.activePicker).toBe('DATE')
+    expect(wrapper.vm.value).toBe('1999-12-01')
   })
 
   it('should emit original date if value is set to null', () => {

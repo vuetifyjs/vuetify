@@ -227,20 +227,6 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.tableDate).toBe('2005')
   })
 
-  it('should update the active picker if type has changed', () => {
-    const wrapper = mount(VDatePicker, {
-      propsData: {
-        type: 'month'
-      }
-    })
-
-    expect(wrapper.vm.activePicker).toBe('MONTH')
-    wrapper.setProps({ type: 'date' })
-    expect(wrapper.vm.activePicker).toBe('MONTH')
-    wrapper.setProps({ type: 'year' })
-    expect(wrapper.vm.activePicker).toBe('YEAR')
-  })
-
   it('should update with autosave on month click', async () => {
     const { wrapper, menu, picker } = createMenuPicker(mount, {
       type: 'month',
