@@ -4,6 +4,9 @@ import VIcon from '../VIcon'
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
+import {
+  inject as RegistrableInject
+} from '../../mixins/registrable'
 
 // Directives
 import Resize from '../../directives/resize'
@@ -14,6 +17,7 @@ export default {
 
   mixins: [
     Colorable,
+    RegistrableInject('tabs', 'v-tabs-bar', 'v-tabs'),
     Themeable
   ],
 
@@ -72,7 +76,7 @@ export default {
         'tabs__bar--align-with-title': this.alignWithTitle,
         'tabs__bar--centered': this.centered || this.fixedTabs,
         'tabs__bar--fixed-tabs': this.fixedTabs,
-        'tabs__bar--grow': this.grow || this.isMobile,
+        'tabs__bar--grow': this.grow,
         'tabs__bar--icons-and-text': this.iconsAndText,
         'tabs__bar--overflow': !this.hideArrows && this.isOverflowing,
         'theme--dark': this.dark,
@@ -111,7 +115,14 @@ export default {
   },
 
   mounted () {
-    this.setOverflow()
+    this.tabs.register('bar', {
+      action: this.setOverflow,
+      id: 'bar'
+    })
+  },
+
+  beforeDestroy () {
+    this.tabs.unregister('bar', 'bar')
   },
 
   methods: {

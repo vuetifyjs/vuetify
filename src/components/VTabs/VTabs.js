@@ -63,6 +63,8 @@ export default {
       setTimeout(() => this.activeTab.toggle(this.activeTab.id), 100)
     },
     tabItems (newItems, oldItems) {
+      let activeIndex = this.activeIndex
+
       // Tab item was removed and
       // there are still more
       if (oldItems.length > newItems.length &&
@@ -71,12 +73,16 @@ export default {
         if (!newItems.find(o => o.id === this.target)) {
           const i = oldItems.findIndex(o => o.id === this.target)
 
-          this.$nextTick(() => {
-            this.activeIndex = this.tabItems[i > 0 ? i - 1 : 0].id
-            this.target = this.activeIndex
-          })
+          activeIndex = i > 0 ? i - 1 : 0
         }
       }
+
+      // On boot activeIndex may not
+      // be set yet, just abort
+      if (activeIndex < 0 || activeIndex == null) return
+
+      this.tabClick(this.tabItems[activeIndex].id)
+      this.callBar()
     },
     value () {
       this.tabClick(this.value)
@@ -97,13 +103,21 @@ export default {
         tabItem.el.firstChild.className.indexOf('tabs__item--active') > -1
     })
 
-    const index = i > -1 ? i : 0
-    if (index > this.tabItems.length - 1) return
+    const activeIndex = i > -1 ? i : 0
 
-    this.tabClick(this.tabItems[index].id)
+    if (activeIndex > this.tabItems.length - 1) return
+
+    this.tabClick(this.tabItems[activeIndex].id)
   },
 
   methods: {
+    // Force v-tabs-bar to re-evaluate
+    // overflow when items change
+    callBar () {
+      if (!this.bar.length) return
+
+      this.bar[0].action()
+    },
     next (cycle) {
       let nextIndex = this.activeIndex + 1
 
@@ -152,7 +166,7 @@ export default {
       this.target = target
 
       this.$nextTick(() => {
-        const nextIndex = this.content.findIndex(o => o.id === target)
+        const nextIndex = this.tabItems.findIndex(o => o.id === target)
         this.reverse = nextIndex < this.activeIndex
         setActiveIndex(nextIndex)
 
