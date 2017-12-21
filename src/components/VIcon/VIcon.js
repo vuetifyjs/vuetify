@@ -44,8 +44,8 @@ export default {
         break
     }
 
-    if (fontSize !== undefined) {
-      data.style = { fontSize, ...data.style }
+    if (fontSize) {
+      data.style.fontSize = fontSize;
     }
 
     let iconName = ''
