@@ -13,11 +13,8 @@ export default {
   },
 
   methods: {
-    swipeLeft () {
-      this.next(this.cycle)
-    },
-    swipeRight () {
-      this.prev(this.cycle)
+    onSwipe (e, action) {
+      this[action](this.cycle)
     }
   },
 
@@ -30,8 +27,8 @@ export default {
     !this.touchless && data.directives.push({
       name: 'touch',
       value: {
-        left: this.swipeLeft,
-        right: this.swipeRight
+        left: e => this.onSwipe(e, 'next'),
+        right: e => this.onSwipe(e, 'prev')
       }
     })
 
