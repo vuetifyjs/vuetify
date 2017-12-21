@@ -1,5 +1,5 @@
 <template lang="pug">
-  div(:class="['markup', color]" v-bind:data-lang="lang")
+  div(:class="['markup', color]" v-bind:data-lang="lang").mb-3
     pre
       code(v-bind:class="lang" ref="markup")
         slot

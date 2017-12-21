@@ -17,9 +17,8 @@
         section-head(value="Generic.Pages.api")
         v-tabs(
           v-model="tab"
-          :scrollable="false"
         ).elevation-1
-          v-tabs-bar.grey.lighten-3.px-3
+          v-tabs-bar(color="grey lighten-3").px-3
             v-tabs-slider(color="primary")
             v-tabs-item(
               v-for="(tab, i) in tabs"
@@ -27,7 +26,7 @@
               :key="i"
               v-if="hasTab(tab)"
             ) {{ tab }}
-          v-card
+          v-card(flat)
             v-card-title
               v-select(
                 label="Component"
@@ -47,7 +46,7 @@
                 hide-details
                 v-model="search"
               )
-          v-tabs-items
+          v-tabs-items(touchless).white
             v-tabs-content(
               v-for="(tab, i) in tabs"
               :id="tab"

@@ -4,11 +4,14 @@
     app
     dark
     fixed
-    :inverted-scroll="isManualScrolling"
-    :scroll-off-screen="isManualScrolling"
+    :inverted-scroll="getManualScroll($route.path)"
+    scroll-off-screen
     ref="toolbar"
   )#app-toolbar
-    v-toolbar-side-icon(@click="$store.commit('app/DRAWER_TOGGLE')" v-if="!stateless").hidden-lg-and-up
+    v-toolbar-side-icon(
+      @click="$store.commit('app/DRAWER_TOGGLE')"
+      v-show="!stateless && $vuetify.breakpoint.mdAndDown"
+    )
     router-link(to="/").d-flex.ml-3
       img(
         src="/static/v-alt.svg"
@@ -74,21 +77,6 @@
         releases: state => state.releases,
         stateless: state => state.stateless
       })
-    },
-
-    watch: {
-      $route (current) {
-        const isManualScrolling = this.getManualScroll(current.path)
-        const duration = isManualScrolling ? 0 : 400
-
-        setTimeout(() => {
-          this.isManualScrolling = isManualScrolling
-        }, duration)
-      }
-    },
-
-    created () {
-      this.isManualScrolling = this.getManualScroll(this.$route.path)
     },
 
     methods: {
