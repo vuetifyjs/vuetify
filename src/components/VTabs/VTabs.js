@@ -77,11 +77,13 @@ export default {
         }
       }
 
+      const activeTab = this.tabItems[activeIndex]
+
       // On boot activeIndex may not
       // be set yet, just abort
-      if (activeIndex < 0 || activeIndex == null) return
+      if (!activeTab) return
 
-      this.tabClick(this.tabItems[activeIndex].id)
+      this.tabClick(activeTab.id)
       this.callBar()
     },
     value () {
