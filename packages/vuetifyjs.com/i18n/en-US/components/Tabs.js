@@ -46,12 +46,5 @@ export default {
       header: 'Disabled scroll',
       desc: 'You can disable the pagination controls by setting the <code>scrollable</code> prop to <code>false</code>. This also has the effect of removing the margins around the tab item container.'
     }
-  }],
-  props: {
-    centered: ' Centers the tabs',
-    fixed: 'Items have a fixed size',
-    grow: 'Items fill available space',
-    icons: 'Designates the tab items as containing icons',
-    scrollable: 'Displays pagination controls when content overflows'
-  }
+  }]
 }

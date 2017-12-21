@@ -170,7 +170,7 @@ module.exports = {
           "Number",
           "String"
         ],
-        "default": 48
+        "default": 56
       },
       {
         "name": "shift",
@@ -1369,6 +1369,11 @@ module.exports = {
         ]
       },
       {
+        "name": "appendIcon",
+        "type": "String",
+        "default": "chevron_right"
+      },
+      {
         "name": "dayFormat",
         "type": "Any",
         "default": "undefined"
@@ -1395,6 +1400,11 @@ module.exports = {
         "name": "monthFormat",
         "type": "Any",
         "default": "undefined"
+      },
+      {
+        "name": "prependIcon",
+        "type": "String",
+        "default": "chevron_left"
       },
       {
         "name": "titleDateFormat",
@@ -3148,11 +3158,6 @@ module.exports = {
         "default": "False"
       },
       {
-        "name": "solo",
-        "type": "Boolean",
-        "default": "False"
-      },
-      {
         "name": "tags",
         "type": "Boolean",
         "default": "False"
@@ -3160,6 +3165,21 @@ module.exports = {
       {
         "name": "valueComparator",
         "type": "Any"
+      },
+      {
+        "name": "flat",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "soloInverted",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "solo",
+        "type": "Boolean",
+        "default": "False"
       }
     ],
     "slots": [
@@ -3798,42 +3818,9 @@ module.exports = {
   "v-tabs": {
     "props": [
       {
-        "name": "centered",
-        "type": "Boolean",
-        "default": "False"
-      },
-      {
-        "name": "fixed",
-        "type": "Boolean",
-        "default": "False"
-      },
-      {
-        "name": "grow",
-        "type": "Boolean",
-        "default": "False"
-      },
-      {
-        "name": "icons",
-        "type": "Boolean",
-        "default": "False"
-      },
-      {
-        "name": "mobileBreakPoint",
-        "type": [
-          "Number",
-          "String"
-        ],
-        "default": 1280
-      },
-      {
         "name": "value",
         "type": "String",
         "default": "undefined"
-      },
-      {
-        "name": "scrollable",
-        "type": "Boolean",
-        "default": "True"
       }
     ]
   },
@@ -3853,6 +3840,62 @@ module.exports = {
         "name": "light",
         "type": "Boolean",
         "default": "False"
+      },
+      {
+        "name": "alignWithTitle",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "appendIcon",
+        "type": "String",
+        "default": "chevron_right"
+      },
+      {
+        "name": "centered",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "fixedTabs",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "grow",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "height",
+        "type": [
+          "Number",
+          "String"
+        ],
+        "default": "undefined"
+      },
+      {
+        "name": "hideArrows",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "iconsAndText",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "mobileBreakPoint",
+        "type": [
+          "Number",
+          "String"
+        ],
+        "default": 1264
+      },
+      {
+        "name": "prependIcon",
+        "type": "String",
+        "default": "chevron_left"
       }
     ]
   },
@@ -3941,11 +3984,8 @@ module.exports = {
       },
       {
         "name": "ripple",
-        "type": [
-          "Boolean",
-          "Object"
-        ],
-        "default": "undefined"
+        "type": "Boolean",
+        "default": "True"
       },
       {
         "name": "tag",
@@ -4121,6 +4161,21 @@ module.exports = {
         "default": "False"
       },
       {
+        "name": "flat",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "soloInverted",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
+        "name": "solo",
+        "type": "Boolean",
+        "default": "False"
+      },
+      {
         "name": "autofocus",
         "type": "Boolean",
         "default": "False"
@@ -4171,11 +4226,6 @@ module.exports = {
       },
       {
         "name": "singleLine",
-        "type": "Boolean",
-        "default": "False"
-      },
-      {
-        "name": "solo",
         "type": "Boolean",
         "default": "False"
       },
@@ -4383,11 +4433,6 @@ module.exports = {
         "name": "scrollThreshold",
         "type": "Number",
         "default": 300
-      },
-      {
-        "name": "tabs",
-        "type": "Boolean",
-        "default": "False"
       }
     ],
     "slots": [

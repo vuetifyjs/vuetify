@@ -52,8 +52,12 @@
       v-expansion-panel.elevation-0
         v-expansion-panel-content(v-model="panel")
           v-divider(v-if="!readonly")
-          v-tabs(ref="tabs" :scrollable="false")
-            v-tabs-bar(class="pl-0" v-show="!readonly").grey.lighten-4.px-3
+          v-tabs
+            v-tabs-bar(
+              ref="tabs"
+              class="pl-0"
+              v-show="!readonly"
+            ).grey.lighten-4.px-3
               v-tabs-slider(color="accent")
               v-tabs-item(
                 v-for="tab in tabs"
@@ -71,7 +75,8 @@
               )
                 markup(:lang="getLang(tab)" v-if="parsed[tab]").ma-0
                   div(v-html="parsed[tab]")
-      v-divider
+
+      v-divider(v-if="!readonly")
 
       //- Example mount
       div(:class="exampleClasses").application.application--example.pa-3

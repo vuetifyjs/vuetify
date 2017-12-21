@@ -38,10 +38,10 @@
     computed: {
       color () {
         switch (this.e2) {
-          case 1: return 'blue-grey'
-          case 2: return 'teal'
-          case 3: return 'brown'
-          case 4: return 'brown lighten-1'
+          case 0: return 'blue-grey'
+          case 1: return 'teal'
+          case 2: return 'brown'
+          case 3: return 'indigo'
         }
       }
     }
