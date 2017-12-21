@@ -63,7 +63,7 @@ export default {
   },
 
   beforeDestroy () {
-    this.register('tabItems', this.el)
+    this.tabs.unregister('tabItems', this.action)
   },
 
   methods: {

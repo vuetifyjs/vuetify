@@ -5,6 +5,7 @@ import Resize from '../../directives/resize'
 import {
   provide as RegistrableProvide
 } from '../../mixins/registrable'
+import SSRBootable from '../../mixins/ssr-bootable'
 
 export default {
   name: 'v-tabs',
@@ -13,7 +14,10 @@ export default {
     Resize
   },
 
-  mixins: [RegistrableProvide('tabs')],
+  mixins: [
+    RegistrableProvide('tabs'),
+    SSRBootable
+  ],
 
   provide () {
     return {
@@ -48,19 +52,15 @@ export default {
   },
 
   watch: {
+    activeIndex () {
+      this.updateTabs()
+    },
     bar (val) {
-      if (!val) return
+      if (!val || !this.activeTab) return
 
       // Welcome to suggestions for solving
       // initial load positioning
       setTimeout(() => this.activeTab.toggle(this.activeTab.id), 100)
-    },
-    value () {
-      this.tabClick(this.value)
-    },
-    activeIndex () {
-      this.updateTabs()
-      this.$nextTick(() => (this.isBooted = true))
     },
     tabItems (newItems, oldItems) {
       // Tab item was removed and
@@ -76,9 +76,10 @@ export default {
             this.target = this.activeIndex
           })
         }
-      } else if (newItems !== oldItems) {
-        this.callSlider()
       }
+    },
+    value () {
+      this.tabClick(this.value)
     },
     '$vuetify.application.left' () {
       this.onContainerResize()
@@ -96,18 +97,13 @@ export default {
         tabItem.el.firstChild.className.indexOf('tabs__item--active') > -1
     })
 
-    this.activeIndex = i > -1 ? i : 0
+    const index = i > -1 ? i : 0
+    if (index > this.tabItems.length - 1) return
+
+    this.tabClick(this.tabItems[index].id)
   },
 
   methods: {
-    callSlider () {
-      if (!this.bar.length ||
-        !this.tabItems[this.activeIndex] ||
-        !this.activeTab
-      ) return
-
-      this.bar[0].slider(this.activeTab.el)
-    },
     next (cycle) {
       let nextIndex = this.activeIndex + 1
 
@@ -164,7 +160,7 @@ export default {
       })
     },
     unregister (type, id) {
-      this[type] = this.content.filter(o => o.id !== id)
+      this[type] = this[type].filter(o => o.id !== id)
     },
     updateTabs () {
       this.content.forEach(({ toggle }) => {

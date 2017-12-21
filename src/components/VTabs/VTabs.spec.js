@@ -81,7 +81,7 @@ test('VTabs', ({ mount }) => {
     expect(wrapper.vm.isBooted).toBe(false)
 
     wrapper.vm.activeIndex = 0
-    await wrapper.vm.$nextTick()
+    await new Promise(resolve => setTimeout(resolve, 200))
 
     expect(wrapper.vm.isBooted).toBe(true)
   })

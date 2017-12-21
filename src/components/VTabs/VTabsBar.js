@@ -3,9 +3,6 @@ import VIcon from '../VIcon'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
-import {
-  inject as RegistrableInject
-} from '../../mixins/registrable'
 import Themeable from '../../mixins/themeable'
 
 // Directives
@@ -17,7 +14,6 @@ export default {
 
   mixins: [
     Colorable,
-    RegistrableInject('tabs', 'v-tabs-bar', 'v-tabs'),
     Themeable
   ],
 
@@ -61,7 +57,7 @@ export default {
     iconsAndText: Boolean,
     mobileBreakPoint: {
       type: [Number, String],
-      default: 1280,
+      default: 1264,
       validator: v => !isNaN(parseInt(v))
     },
     prependIcon: {
@@ -76,7 +72,7 @@ export default {
         'tabs__bar--align-with-title': this.alignWithTitle,
         'tabs__bar--centered': this.centered || this.fixedTabs,
         'tabs__bar--fixed-tabs': this.fixedTabs,
-        'tabs__bar--grow': this.grow || (this.fixedTabs && this.isMobile),
+        'tabs__bar--grow': this.grow || this.isMobile,
         'tabs__bar--icons-and-text': this.iconsAndText,
         'tabs__bar--overflow': !this.hideArrows && this.isOverflowing,
         'theme--dark': this.dark,
@@ -115,15 +111,7 @@ export default {
   },
 
   mounted () {
-    this.tabs.register('bar', {
-      id: 'bar',
-      slider: this.slider
-    })
     this.setOverflow()
-  },
-
-  beforeDestroy () {
-    this.tabs.unregister('bar', 'bar')
   },
 
   methods: {
@@ -135,13 +123,18 @@ export default {
       }, this.$slots.default)
     },
     genIcon (direction) {
-      if (!this[`${direction}IconVisible`] ||
-        this.hideArrows
+      if ((!this[`${direction}IconVisible`] &&
+        !this.isMobile) ||
+        this.hideArrows ||
+        !this.isOverflowing
       ) return null
 
       return this.$createElement(VIcon, {
         staticClass: `icon--${direction}`,
         style: { display: 'inline-flex' },
+        props: {
+          disabled: !this[`${direction}IconVisible`]
+        },
         on: {
           click: () => this.scrollTo(direction)
         }
@@ -272,7 +265,7 @@ export default {
       'class': this.addBackgroundColorClassChecks(this.classes),
       directives: [{
         name: 'resize',
-        arg: 0,
+        arg: 400,
         modifiers: { quiet: false },
         value: this.onResize
       }]
