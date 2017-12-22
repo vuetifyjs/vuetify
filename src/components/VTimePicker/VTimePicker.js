@@ -23,7 +23,7 @@ export default {
       isDragging: false,
       rotate: 0,
       originalTime: this.value,
-      period: 'am',
+      period: this.currentPeriod(this.value),
       selectingHour: true,
       ranges: {
         hours: createRange(24),
@@ -69,12 +69,6 @@ export default {
     inputTime: {
       get () {
         if (this.value && !(this.value instanceof Date)) {
-          if (!this.is24hr) {
-            this.period = this.value.match(/pm/i)
-              ? 'pm'
-              : 'am'
-          }
-
           return this.value
         }
         let value = new Date()
@@ -93,8 +87,6 @@ export default {
           hour = hour === 0 ? 12 : hour
         }
 
-        period && (this.period = period)
-
         hour = this.firstAllowed('hour', hour)
         minute = this.firstAllowed('minute', minute)
 
@@ -103,6 +95,7 @@ export default {
         return `${hour}:${minute}${period}`
       },
       set (val) {
+        this.period = this.currentPeriod(val)
         return this.$emit('input', val)
       }
     },
@@ -166,6 +159,7 @@ export default {
       this.inputTime = `${hour}:${this.minute}${val}`
     },
     value (val) {
+      this.inputTime = val
       if (this.isSaving) {
         this.originalTime = this.inputTime
         this.isSaving = false
@@ -266,6 +260,22 @@ export default {
       const first = range.find(v => this.isAllowed(type, v))
 
       return first || value
+    },
+    currentPeriod (val) {
+      if (val && !(val instanceof Date)) {
+        return val.match(/pm/i) ? 'pm' : 'am'
+      }
+
+      let value = new Date()
+      if (val instanceof Date) {
+        value = val
+      }
+
+      if (!this.is24hr) {
+        return value.getHours() >= 12 ? 'pm' : 'am'
+      }
+
+      return 'am'
     }
   },
 
