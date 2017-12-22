@@ -25,7 +25,7 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.element.classList).toContain('icon--disabled')
   })
 
-  it('should render no size by default', () => {
+  it('should not set font size if none provided', () => {
     const context = functionalContext({}, 'add')
     const wrapper = mount(VIcon, context)
 
