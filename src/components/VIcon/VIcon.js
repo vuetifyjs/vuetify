@@ -45,7 +45,7 @@ export default {
     }
 
     if (fontSize) {
-      data.style = { fontSize, ...data.style };
+      data.style = { fontSize, ...data.style }
     }
 
     let iconName = ''
