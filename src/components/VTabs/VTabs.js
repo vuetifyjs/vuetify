@@ -70,11 +70,9 @@ export default {
       if (oldItems.length > newItems.length &&
         newItems.length > 0
       ) {
-        if (!newItems.find(o => o.id === this.target)) {
-          const i = oldItems.findIndex(o => o.id === this.target)
+        const i = oldItems.findIndex(o => o.id === this.target)
 
-          activeIndex = i > 0 ? i - 1 : 0
-        }
+        activeIndex = i > 0 ? i - 1 : 0
       }
 
       const activeTab = this.tabItems[activeIndex]
@@ -123,7 +121,7 @@ export default {
     next (cycle) {
       let nextIndex = this.activeIndex + 1
 
-      if (!this.content[nextIndex]) {
+      if (!this.tabItems[nextIndex]) {
         if (!cycle) return
         nextIndex = 0
       }
@@ -133,9 +131,9 @@ export default {
     prev (cycle) {
       let prevIndex = this.activeIndex - 1
 
-      if (!this.content[prevIndex]) {
+      if (!this.tabItems[prevIndex]) {
         if (!cycle) return
-        prevIndex = this.content.length - 1
+        prevIndex = this.tabItems.length - 1
       }
 
       this.tabClick(this.tabItems[prevIndex].id)
@@ -149,7 +147,7 @@ export default {
      */
     onContainerResize () {
       clearTimeout(this.resizeTimeout)
-      this.resizeTimeout = setTimeout(this.onResize, this.transitionTime)
+      this.resizeTimeout = setTimeout(this.callBar, this.transitionTime)
     },
     register (type, args) {
       this[type].push(args)
