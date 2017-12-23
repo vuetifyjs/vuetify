@@ -10,6 +10,7 @@ export default {
   props: 'Props',
   showExample: 'Show Example',
   slots: 'Slots',
+  supplemental: 'Supplemental',
   type: 'Type',
   toc: [
     {
@@ -23,6 +24,10 @@ export default {
     {
       text: 'API',
       href: 'api'
+    },
+    {
+      text: 'Supplemental',
+      href: 'supplemental'
     },
     {
       text: 'Examples',

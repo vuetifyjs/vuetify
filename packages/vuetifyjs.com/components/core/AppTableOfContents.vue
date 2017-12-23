@@ -11,8 +11,7 @@
       position: 'relative',
       right: 0,
       top: 0,
-      list: [],
-      targets: []
+      list: []
     }),
 
     props: {
@@ -49,6 +48,15 @@
           position: this.position,
           top: `${parseInt(this.top)}px`
         }
+      },
+      targets () {
+        const targets = []
+
+        for (const item of this.list) {
+          if (item.offsetTop) targets.push(item.offsetTop)
+        }
+
+        return targets
       }
     },
 
@@ -63,7 +71,12 @@
         item = item || {}
         const isActive = this.activeIndex === index
 
-        return this.$createElement('li', [
+        return this.$createElement('li', {
+          directives: [{
+            name: 'show',
+            value: !!item.offsetTop
+          }]
+        }, [
           this.$createElement('router-link', {
             staticClass: 'subheading mb-3 d-block',
             'class': {
@@ -83,8 +96,7 @@
         ])
       },
       genList () {
-        const targets = []
-        const list = this.items.map(item => {
+        this.list = this.items.map(item => {
           item = Object.assign({}, item)
           const target = item.target
             ? item.target
@@ -95,15 +107,10 @@
 
             item.offsetTop = offsetTop
             item.target = target
-
-            targets.push(offsetTop)
           }
 
           return item
         })
-
-        this.list = list
-        this.targets = targets.sort((a, b) => a - b)
       },
       onScroll () {
         this.currentOffset = window.pageYOffset ||

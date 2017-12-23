@@ -2,6 +2,7 @@ export default {
   header: 'Select',
   headerText: 'Select fields components are used for collecting user provided information from a list of options.',
   components: ['v-select'],
+  supplemental: ['MaskTable'],
   examples: [{
     light: {
         header: 'Light theme',
