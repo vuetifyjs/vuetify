@@ -236,7 +236,9 @@
     // margin-bottom: 32px
 
     .application--example
+      position: relative
       transition: .3s $transition.swing
+      z-index: 0
 
       > div,
       > form,
