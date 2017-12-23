@@ -492,12 +492,15 @@
         margin: 0
         padding: 0
 
+        li:not(:last-child)
+          margin-bottom: 12px
+
         li a
           font-size: 16px
-          display: block
-          padding: 0 0 .66em
+          display: inline-block
 
-          .icon.fa
+          .icon
+            margin-right: 8px
             font-size: 18px
             width: 25px
 </style>

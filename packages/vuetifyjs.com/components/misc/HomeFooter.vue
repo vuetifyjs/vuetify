@@ -1,7 +1,7 @@
 <template lang="pug">
   v-footer#home-footer
     v-layout(row wrap).ma-0
-      v-flex(xs12 sm6 md3).pa-5.blue-grey.darken-2.vuetify
+      v-flex(xs12 sm6 md3).px-5.blue-grey.darken-2.vuetify
         h5.mb-3
           img(src="/static/doc-images/logo.svg")
           span Vuetify
