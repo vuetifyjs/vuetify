@@ -75,7 +75,6 @@
     padding-top: 75px
     padding-bottom: 0
     transition: .2s $transition.fast-out-slow-in
-    transform: translateZ(0)
     
     section
       margin-bottom: 48px
