@@ -1,7 +1,7 @@
 export default {
   header: 'Selection controls',
   headerText: 'Selection control components allow a user to select options. These components **must** be used with the <code>v-model</code> prop as they do not maintain their own state.',
-  components: ['v-radio-group', 'v-radio', 'v-switch'],
+  components: ['v-radio-group', 'v-radio', 'v-checkbox', 'v-switch'],
   examples: [{
     example: {
       header: 'Default examples',
