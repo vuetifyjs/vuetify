@@ -1,6 +1,6 @@
 <template lang="pug">
   example-view(:data="data")
-    section#create-your-own
+    section(slot-scope="props")#create-your-own
       section-head(value="Motion.Transitions.createYourOwnHeader")
       section-text(value="Motion.Transitions.createYourOwnText1")
       markup(lang="javascript")
