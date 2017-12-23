@@ -1,14 +1,5 @@
 <template lang="pug">
   div#home
-    //- v-card(color="primary" dark tile flat)
-    //-   v-card-text.text-xs-center
-    //-     span.subheading Check out our Developer Giveaway!
-    //-     v-btn(
-    //-       color="white"
-    //-       light
-    //-       href="https://www.rafflecopter.com/rafl/display/f34912162/?widget_template=5a2166cc8a060bf50df94b01"
-    //-       target="_blank"
-    //-     ).primary--text.ml-3 Take me there
     v-jumbotron(
       gradient="to right top, #1867c0, #19e5f4"
       height="auto"
@@ -430,6 +421,7 @@
       min-height 100%
       background url('/static/doc-images/slant-footer.svg') no-repeat 50% 100%
       background-size 100%
+      width: 100%
 
       @media $display-breakpoints.xs-only
         background-position 50% 100%
