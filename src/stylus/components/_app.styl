@@ -1,4 +1,5 @@
 @import '../bootstrap'
+@import '../browsers'
 @import '../theme'
 
 .application
@@ -26,3 +27,11 @@ application($material)
     cursor: pointer
 
 app(application)
+
++firefox()
+  @media print
+    .application
+      display: block
+
+      &--wrap
+        display: block
