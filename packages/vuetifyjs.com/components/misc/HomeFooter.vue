@@ -25,7 +25,7 @@
               |  Facebook
 
       v-flex(xs12 sm6 md3).blue-grey.darken-3
-        h5 Donate
+        h5.title.mb-3 Donate
         ul
           li
             a(href="https://www.patreon.com/vuetify" target="_blank") Patreon
@@ -33,7 +33,7 @@
             a(href="https://www.paypal.me/vuetify" target="_blank") PayPal
 
       v-flex(xs12 sm6 md3).blue-grey.darken-3
-        h5 Sponsors
+        h5.title.mb-3 Sponsors
         ul
           li
             a(href="https://www.browserstack.com/" target="_blank") BrowserStack
@@ -41,7 +41,7 @@
             a(href="https://www.cloudflare.com/" target="_blank") CloudFlare
 
       v-flex(xs12 sm6 md3).blue-grey.darken-3
-        h5 Links
+        h5.title.mb-3 Links
         ul
           li
             a( href="https://vuejs.org/" target="_blank") Vue.js
