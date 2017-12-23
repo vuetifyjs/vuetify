@@ -21,7 +21,7 @@ export default {
   toc: [
     {
       text: 'Introduction',
-      href: 'quick-start-page'
+      href: 'introduction'
     },
     {
       text: 'Supported browsers',
