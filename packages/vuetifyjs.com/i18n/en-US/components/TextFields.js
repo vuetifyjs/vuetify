@@ -34,7 +34,7 @@ export default {
     },
     fullWidthWithCharacterCounter: {
       header: 'Full-width text field with character counter',
-      desc: 'Light theme'
+      desc: 'Full width text fields allow you to create boundless inputs. In this example, we use a `v-divider` to separate the fields.'
     },
     requiredFields: {
       header: 'Required fields',
