@@ -1,25 +1,7 @@
 <template>
   <v-container fluid>
-    <v-layout row wrap>
-      <v-flex xs12 md6>
-        <v-subheader>Light</v-subheader>
-        <v-card flat>
-          <v-card-text>
-            <v-switch v-bind:label="`Switch 1: ${ex11.toString()}`" v-model="ex11"></v-switch>
-            <v-switch v-bind:label="`Switch 2: ${ex12.toString()}`" v-model="ex12"></v-switch>
-          </v-card-text>
-        </v-card>
-      </v-flex>
-      <v-flex xs12 md6>
-        <v-subheader>Dark</v-subheader>
-        <v-card color="grey darken-3" flat>
-          <v-card-text>
-            <v-switch v-bind:label="`Switch 3: ${ex13.toString()}`" v-model="ex13" dark></v-switch>
-            <v-switch v-bind:label="`Switch 4: ${ex14.toString()}`" v-model="ex14" dark></v-switch>
-          </v-card-text>
-        </v-card>
-      </v-flex>
-    </v-layout>
+    <v-switch v-bind:label="`Switch 1: ${ex11.toString()}`" v-model="ex11"></v-switch>
+    <v-switch v-bind:label="`Switch 2: ${ex12.toString()}`" v-model="ex12"></v-switch>
   </v-container>
 </template>
 
@@ -28,9 +10,7 @@
     data () {
       return {
         ex11: true,
-        ex12: false,
-        ex13: true,
-        ex14: false,
+        ex12: false
       }
     }
   }

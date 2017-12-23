@@ -41,11 +41,11 @@ export default {
     },
     hint: {
       header: 'Hint text',
-      desc: 'Light theme'
+      desc: 'The **hint** property on text-fields adds the provided string beneath the text-field. Using **persistent-hint** keeps the hint visible when the text-field is not focused.'
     },
     prefixesAndSuffixes: {
       header: 'Prefixes & suffixes',
-      desc: 'Light theme'
+      desc: 'The **prefix** and **suffix** property allows you to prepend and append inline non-modifiable text next to the text-field'
     },
     customValidation: {
       header: 'Custom validation',
