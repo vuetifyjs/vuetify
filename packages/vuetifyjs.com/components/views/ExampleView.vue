@@ -62,6 +62,14 @@
                   :type="tab"
                   v-if="hasTab(tab)"
                 )
+      
+      section(v-if="supplemental.length > 0")#supplemental
+        section-head(value="Generic.Pages.supplemental")
+        component(
+          v-for="sup in supplemental"
+          :key="sup"
+          :is="sup"
+        )
 
       slot(name="top")
       section(v-if="examples.length > 1")#examples
@@ -78,6 +86,7 @@
           v-for="(example, i) in examples.slice(1)"
         )
       section-head {{ $t('Generic.Pages.examples') }}
+
       slot
 </template>
 
@@ -183,6 +192,11 @@
         const section = camel(this.$route.params.section)
 
         return `${section}.${component}`
+      },
+      supplemental () {
+        return this.$te(`${this.namespace}.supplemental`)
+          ? this.$t(`${this.namespace}.supplemental`)
+          : []
       },
       toc () {
         return this.$t(`Generic.Pages.toc`)
