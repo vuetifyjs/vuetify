@@ -1,11 +1,13 @@
 <script>
+  import SSRBootable from '@/node_modules/vuetify/src/mixins/ssr-bootable'
+
   export default {
     name: 'app-table-of-contents',
 
+    mixins: [SSRBootable],
+
     data: () => ({
-      activeIndex: 0,
       currentOffset: 0,
-      isBooted: false,
       position: 'relative',
       right: 0,
       top: 0,
@@ -19,10 +21,6 @@
         type: Array,
         default: () => ([])
       },
-      offset: {
-        type: [Number, String],
-        required: true
-      },
       threshold: {
         type: [Number, String],
         required: true
@@ -30,6 +28,22 @@
     },
 
     computed: {
+      activeIndex () {
+        const offset = this.currentOffset
+
+        let activeIndex = 0
+        this.targets.forEach((target, i) => {
+          if (i === 0 && offset <= target) {
+            activeIndex = i
+          } else if (offset >= target - 75 &&
+            (!this.targets[i + 1] || offset <= this.targets[i + 1] + 30)
+          ) {
+            activeIndex = i
+          }
+        })
+
+        return activeIndex
+      },
       styles () {
         return {
           position: this.position,
@@ -38,8 +52,10 @@
       }
     },
 
-    mounted () {
-      this.genList()
+    watch: {
+      isBooted () {
+        this.genList()
+      }
     },
 
     methods: {
@@ -70,12 +86,12 @@
         const targets = []
         const list = this.items.map(item => {
           item = Object.assign({}, item)
-          const target = this.isBooted && item.target
+          const target = item.target
             ? item.target
             : document.getElementById(item.href)
 
           if (target) {
-            const offsetTop = target.offsetTop - 100
+            const offsetTop = target.offsetTop
 
             item.offsetTop = offsetTop
             item.target = target
@@ -90,30 +106,13 @@
         this.targets = targets.sort((a, b) => a - b)
       },
       onScroll () {
-        const offset = window.pageYOffset ||
+        this.currentOffset = window.pageYOffset ||
           document.documentElement.offsetTop
-        this.genList()
 
-        const shouldFloat = offset >= this.threshold
+        const shouldFloat = this.currentOffset >= this.threshold
 
         this.position =  shouldFloat ? 'fixed' : 'relative'
-        this.top = shouldFloat ? this.offset : 0
-        this.currentOffset = offset
-
-        let activeIndex = 0
-        this.targets.forEach((target, i) => {
-          if (i === 0) {
-            if (offset <= target) {
-              activeIndex = i
-            }
-          } else if (offset >= target - 30 &&
-            (!this.targets[i + 1] || offset <= this.targets[i + 1] + 30)
-          ) {
-            activeIndex = i
-          }
-        })
-
-        this.activeIndex = activeIndex
+        this.top = shouldFloat ? 85 : 0
         this.isBooted = true
       }
     },
@@ -151,7 +150,6 @@
 
 <style lang="stylus">
   .app-table-of-contents
-    height: 200px
     list-style-type: none
     margin: 0 24px
     width: 200px
