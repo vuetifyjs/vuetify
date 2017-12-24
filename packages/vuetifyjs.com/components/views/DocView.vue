@@ -12,8 +12,8 @@
         app-footer
       v-flex(md3 hidden-sm-and-down)
         app-table-of-contents(
-          threshold="50"
-          offset="85"
+          :threshold="50"
+          :offset="85"
           :items="computedToc"
         )
           app-ad(slot="top")

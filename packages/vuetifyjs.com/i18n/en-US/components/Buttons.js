@@ -58,17 +58,19 @@ export default {
     }
   }],
   props: {
-    block: 'Expands the button to 100% of available space',
-    depressed: 'Removes the button box shadow',
-    fab: 'Makes button round',
-    flat: 'Removes the button background color',
-    icon: 'Designates the button as icon - round and flat',
-    inputValue: 'Controls the button active state',
-    large: 'Large size button',
-    loading: 'Adds a loading icon animation',
-    outline: 'Button will have an outline',
-    round: 'Button will be round on the sides',
-    small: 'Small size button',
-    type: 'Set the button\'s type attribute'
+    'v-btn': {
+      block: 'Expands the button to 100% of available space',
+      depressed: 'Removes the button box shadow',
+      fab: 'Makes button round',
+      flat: 'Removes the button background color',
+      icon: 'Designates the button as icon - round and flat',
+      inputValue: 'Controls the button active state',
+      large: 'Large size button',
+      loading: 'Adds a loading icon animation',
+      outline: 'Button will have an outline',
+      round: 'Button will be round on the sides',
+      small: 'Small size button',
+      type: 'Set the button\'s type attribute'
+    }
   }
 }
