@@ -60,7 +60,7 @@
             }
           }
 
-          newItem.desc = item.desc || this.genDescription(item.name)
+          newItem.description = item.description || this.genDescription(item.name)
 
           return newItem
         })
