@@ -1,6 +1,6 @@
 import VCarousel from './VCarousel'
 import VCarouselItem from './VCarouselItem'
-import { test, touch } from '~util/testing'
+import { test, touch } from '@util/testing'
 import Vue from 'vue'
 
 const create = (props = {}, slots = 3) => Vue.component('zxc', {

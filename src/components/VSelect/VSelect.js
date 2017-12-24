@@ -1,3 +1,4 @@
+// Styles
 require('../../stylus/components/_text-fields.styl')
 require('../../stylus/components/_input-groups.styl')
 require('../../stylus/components/_select.styl')
@@ -22,6 +23,7 @@ import Dependent from '../../mixins/dependent'
 import Filterable from '../../mixins/filterable'
 import Input from '../../mixins/input'
 import Maskable from '../../mixins/maskable'
+import Soloable from '../../mixins/soloable'
 
 // Component level mixins
 import Autocomplete from './mixins/select-autocomplete'
@@ -70,6 +72,7 @@ export default {
     Maskable,
     Menu,
     Props,
+    Soloable,
     Watchers,
     // Input and Computed both
     // contain isDirty props

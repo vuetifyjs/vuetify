@@ -1,5 +1,5 @@
-import { test } from '~util/testing'
-import { VRadioGroup, VRadio } from '~components/VRadioGroup'
+import { test } from '@util/testing'
+import { VRadioGroup, VRadio } from '@components/VRadioGroup'
 
 test('VRadioGroup.vue', ({ mount }) => {
   it('should render role on radio group', () => {

@@ -3,7 +3,7 @@ node_js:
   - "8"
 
 before_script:
-  - yarn global add codecov
+  - npm i codecov -g
 
 script:
   - yarn

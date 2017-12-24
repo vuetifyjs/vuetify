@@ -65,13 +65,17 @@ theme(selection-control, "input-group--selection-controls")
         color: inherit
 
 /** Label */
-.input-group.input-group--selection-controls label
-  cursor: pointer
-  position: absolute
-  left: 32px
-  user-select: none
-  z-index: 1
-  pointer-events: all
+.input-group.input-group--selection-controls
+  label
+    cursor: pointer
+    position: absolute
+    left: 32px
+    user-select: none
+    z-index: 1
+  
+  &:not(.input-group--disabled)
+    label
+      pointer-events: all
 
 .input-group--selection-controls__ripple
   border-radius: 50%

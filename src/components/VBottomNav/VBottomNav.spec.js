@@ -1,6 +1,6 @@
 import VBottomNav from './VBottomNav'
 import VBtn from '../VBtn'
-import { test } from '~util/testing'
+import { test } from '@util/testing'
 import Vue from 'vue'
 
 function createBtn (val = null) {
@@ -115,8 +115,10 @@ test('VBottomNav.js', ({ mount }) => {
     })
 
     wrapper.vm.$on('update:active', update)
-    await wrapper.vm.$nextTick()
-    wrapper.setProps({ active: 1 })
+
+    const btn = wrapper.find('.btn')[1]
+    btn.trigger('click')
+
     await wrapper.vm.$nextTick()
     expect(update).toBeCalledWith(1)
   })

@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import { VListTileAction } from '~components/VList'
-import { test } from '~util/testing'
+import { VListTileAction } from '@components/VList'
+import { test } from '@util/testing'
 
 test('VListTileAction.js', ({ mount, functionalContext }) => {
   it('should render component and match snapshot', () => {

@@ -1,5 +1,5 @@
-import { test } from '~util/testing'
-import { VRadioGroup, VRadio } from '~components/VRadioGroup'
+import { test } from '@util/testing'
+import { VRadioGroup, VRadio } from '@components/VRadioGroup'
 
 test('VRadio.vue', ({ mount }) => {
   it('should advise about v-radio-group being necessary', () => {

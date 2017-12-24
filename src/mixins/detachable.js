@@ -26,6 +26,10 @@ export default {
     this.initDetach()
   },
 
+  deactivated () {
+    this.isActive = false
+  },
+
   beforeDestroy () {
     if (!this.$refs.content) return
 

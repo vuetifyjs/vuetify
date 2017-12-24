@@ -1,5 +1,5 @@
-import VDivider from '~components/VDivider'
-import { test } from '~util/testing'
+import VDivider from '@components/VDivider'
+import { test } from '@util/testing'
 
 test('VDivider.js', ({ mount, compileToFunctions, functionalContext }) => {
   it('should render component and match snapshot', () => {

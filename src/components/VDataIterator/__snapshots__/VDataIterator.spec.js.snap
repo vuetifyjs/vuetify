@@ -90,7 +90,6 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
             </div>
             <i aria-hidden="true"
                class="material-icons icon input-group__append-icon input-group__icon-cb"
-               style="font-size: 24px;"
             >
               arrow_drop_down
             </i>
@@ -99,39 +98,39 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
           </div>
         </div>
       </div>
-      <div class="data-iterator__actions__pagination">
-        1-3 of 3
+      <div class="data-iterator__actions__range-controls">
+        <div class="data-iterator__actions__pagination">
+          1-3 of 3
+        </div>
+        <button disabled="disabled"
+                type="button"
+                class="btn btn--disabled btn--flat btn--icon"
+                data-ripple="true"
+                aria-label="Previous page"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <button disabled="disabled"
+                type="button"
+                class="btn btn--disabled btn--flat btn--icon"
+                data-ripple="true"
+                aria-label="Next page"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
       </div>
-      <button disabled="disabled"
-              type="button"
-              class="btn btn--disabled btn--flat btn--icon"
-              data-ripple="true"
-              aria-label="Previous page"
-      >
-        <div class="btn__content">
-          <i aria-hidden="true"
-             class="material-icons icon"
-             style="font-size: 24px;"
-          >
-            chevron_left
-          </i>
-        </div>
-      </button>
-      <button disabled="disabled"
-              type="button"
-              class="btn btn--disabled btn--flat btn--icon"
-              data-ripple="true"
-              aria-label="Next page"
-      >
-        <div class="btn__content">
-          <i aria-hidden="true"
-             class="material-icons icon"
-             style="font-size: 24px;"
-          >
-            chevron_right
-          </i>
-        </div>
-      </button>
     </div>
   </div>
 </div>
@@ -239,7 +238,6 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
             </div>
             <i aria-hidden="true"
                class="material-icons icon input-group__append-icon input-group__icon-cb"
-               style="font-size: 24px;"
             >
               arrow_drop_down
             </i>
@@ -248,39 +246,39 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
           </div>
         </div>
       </div>
-      <div class="data-iterator__actions__pagination">
-        –
+      <div class="data-iterator__actions__range-controls">
+        <div class="data-iterator__actions__pagination">
+          –
+        </div>
+        <button disabled="disabled"
+                type="button"
+                class="btn btn--disabled btn--flat btn--icon"
+                data-ripple="true"
+                aria-label="Previous page"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <button disabled="disabled"
+                type="button"
+                class="btn btn--disabled btn--flat btn--icon"
+                data-ripple="true"
+                aria-label="Next page"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
       </div>
-      <button disabled="disabled"
-              type="button"
-              class="btn btn--disabled btn--flat btn--icon"
-              data-ripple="true"
-              aria-label="Previous page"
-      >
-        <div class="btn__content">
-          <i aria-hidden="true"
-             class="material-icons icon"
-             style="font-size: 24px;"
-          >
-            chevron_left
-          </i>
-        </div>
-      </button>
-      <button disabled="disabled"
-              type="button"
-              class="btn btn--disabled btn--flat btn--icon"
-              data-ripple="true"
-              aria-label="Next page"
-      >
-        <div class="btn__content">
-          <i aria-hidden="true"
-             class="material-icons icon"
-             style="font-size: 24px;"
-          >
-            chevron_right
-          </i>
-        </div>
-      </button>
     </div>
   </div>
 </div>
@@ -379,7 +377,6 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
             </div>
             <i aria-hidden="true"
                class="material-icons icon input-group__append-icon input-group__icon-cb"
-               style="font-size: 24px;"
             >
               arrow_drop_down
             </i>
@@ -388,39 +385,39 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
           </div>
         </div>
       </div>
-      <div class="data-iterator__actions__pagination">
-        –
+      <div class="data-iterator__actions__range-controls">
+        <div class="data-iterator__actions__pagination">
+          –
+        </div>
+        <button disabled="disabled"
+                type="button"
+                class="btn btn--disabled btn--flat btn--icon"
+                data-ripple="true"
+                aria-label="Previous page"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <button disabled="disabled"
+                type="button"
+                class="btn btn--disabled btn--flat btn--icon"
+                data-ripple="true"
+                aria-label="Next page"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
       </div>
-      <button disabled="disabled"
-              type="button"
-              class="btn btn--disabled btn--flat btn--icon"
-              data-ripple="true"
-              aria-label="Previous page"
-      >
-        <div class="btn__content">
-          <i aria-hidden="true"
-             class="material-icons icon"
-             style="font-size: 24px;"
-          >
-            chevron_left
-          </i>
-        </div>
-      </button>
-      <button disabled="disabled"
-              type="button"
-              class="btn btn--disabled btn--flat btn--icon"
-              data-ripple="true"
-              aria-label="Next page"
-      >
-        <div class="btn__content">
-          <i aria-hidden="true"
-             class="material-icons icon"
-             style="font-size: 24px;"
-          >
-            chevron_right
-          </i>
-        </div>
-      </button>
     </div>
   </div>
 </div>
@@ -523,7 +520,6 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
             </div>
             <i aria-hidden="true"
                class="material-icons icon input-group__append-icon input-group__icon-cb"
-               style="font-size: 24px;"
             >
               arrow_drop_down
             </i>
@@ -532,39 +528,39 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
           </div>
         </div>
       </div>
-      <div class="data-iterator__actions__pagination">
-        1-3 of 3
+      <div class="data-iterator__actions__range-controls">
+        <div class="data-iterator__actions__pagination">
+          1-3 of 3
+        </div>
+        <button disabled="disabled"
+                type="button"
+                class="btn btn--disabled btn--flat btn--icon"
+                data-ripple="true"
+                aria-label="Previous page"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <button disabled="disabled"
+                type="button"
+                class="btn btn--disabled btn--flat btn--icon"
+                data-ripple="true"
+                aria-label="Next page"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="material-icons icon"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
       </div>
-      <button disabled="disabled"
-              type="button"
-              class="btn btn--disabled btn--flat btn--icon"
-              data-ripple="true"
-              aria-label="Previous page"
-      >
-        <div class="btn__content">
-          <i aria-hidden="true"
-             class="material-icons icon"
-             style="font-size: 24px;"
-          >
-            chevron_left
-          </i>
-        </div>
-      </button>
-      <button disabled="disabled"
-              type="button"
-              class="btn btn--disabled btn--flat btn--icon"
-              data-ripple="true"
-              aria-label="Next page"
-      >
-        <div class="btn__content">
-          <i aria-hidden="true"
-             class="material-icons icon"
-             style="font-size: 24px;"
-          >
-            chevron_right
-          </i>
-        </div>
-      </button>
     </div>
   </div>
 </div>

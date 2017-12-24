@@ -1,5 +1,5 @@
-import { test } from '~util/testing'
-import VSnackbar from '~components/VSnackbar'
+import { test } from '@util/testing'
+import VSnackbar from '@components/VSnackbar'
 
 test('VSnackbar.vue', ({ mount }) => {
   it('should have a snack class', () => {

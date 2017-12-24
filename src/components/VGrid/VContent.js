@@ -17,11 +17,6 @@ export default {
   },
 
   computed: {
-    classes () {
-      return {
-        'content--is-booted': this.isBooted
-      }
-    },
     styles () {
       const {
         bar, top, right, footer, bottom, left

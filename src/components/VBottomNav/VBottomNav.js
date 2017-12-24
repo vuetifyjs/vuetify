@@ -21,7 +21,7 @@ export default {
   props: {
     active: [Number, String],
     height: {
-      default: 48,
+      default: 56,
       type: [Number, String],
       validator: v => !isNaN(parseInt(v))
     },
@@ -30,8 +30,8 @@ export default {
   },
 
   watch: {
-    active (val) {
-      this.updateValue(val)
+    active () {
+      this.update()
     }
   },
 
