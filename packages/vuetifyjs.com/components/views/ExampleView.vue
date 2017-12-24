@@ -51,6 +51,7 @@
               v-for="(tab, i) in tabs"
               :id="tab"
               :key="i"
+              v-if="hasTab(tab)"
             )
               v-card(flat)
                 parameters(
@@ -60,7 +61,6 @@
                   :search="search"
                   :target="current"
                   :type="tab"
-                  v-if="hasTab(tab)"
                 )
       
       section(v-if="supplemental.length > 0")#supplemental
