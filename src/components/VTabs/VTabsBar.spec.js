@@ -4,7 +4,7 @@ import VTabsItem from './VTabsItem'
 import { createRange } from '@util/helpers'
 
 const tabsWarning = 'The v-tabs-bar component must be used inside a v-tabs.'
-const tabClickWarning = 'Injection "tabClick" not found.'
+const tabClickWarning = '[Vue warn]: Injection "tabClick" not found'
 
 function barProvide (
   register = () => {},

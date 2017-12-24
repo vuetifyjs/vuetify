@@ -28,6 +28,7 @@ function createItems (items = ['foo', 'bar']) {
 test('VTabs', ({ mount }) => {
   it('should change model when tab is clicked', async () => {
     const wrapper = mount(VTabs, {
+      attachToDocument: true,
       slots: {
         default: [
           createBar()
@@ -100,6 +101,9 @@ test('VTabs', ({ mount }) => {
     const wrapper = mount(VTabs, {
       slots: {
         default: [createBar()]
+      },
+      propsData: {
+        value: 'foo'
       }
     })
 
@@ -121,6 +125,9 @@ test('VTabs', ({ mount }) => {
     const wrapper = mount(VTabs, {
       slots: {
         default: [createBar()]
+      },
+      propsData: {
+        value: 'foo'
       }
     })
 
@@ -141,6 +148,9 @@ test('VTabs', ({ mount }) => {
     const wrapper = mount(VTabs, {
       slots: {
         default: [createBar()]
+      },
+      propsData: {
+        value: 'foo'
       }
     })
 
@@ -165,15 +175,16 @@ test('VTabs', ({ mount }) => {
       }
     })
 
-    const callBar = jest.fn()
-    wrapper.setData({ transitionTime: 0 })
-    wrapper.setMethods({ callBar })
-    await wrapper.vm.$nextTick()
+    const onContainerResize = jest.fn()
+    const bar = wrapper.find(VTabsBar)[0]
+    bar.setData({ transitionTime: 0 })
+    bar.setMethods({ onContainerResize })
     wrapper.vm.$vuetify.application.left = 1
     await new Promise(resolve => setTimeout(resolve, 50))
     wrapper.vm.$vuetify.application.right = 1
     await new Promise(resolve => setTimeout(resolve, 50))
-    expect(callBar.mock.calls.length).toBe(2)
+    // One call exists from boot from tabItems watcher
+    expect(onContainerResize.mock.calls.length).toBe(2)
   })
 
   it('should unregister tabs and content', async () => {
@@ -214,10 +225,6 @@ test('VTabs', ({ mount }) => {
     wrapper.vm.unregister('tabItems', 'baz')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.activeIndex).toBe(2)
-    // wrapper.setProps({ value: 'biz' })
-    wrapper.setData({ target: 'biz' })
-    // wrapper.vm.tabClick('biz')
-    await wrapper.vm.$nextTick()
     wrapper.vm.unregister('tabItems', 'biz')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.activeIndex).toBe(1)
@@ -235,11 +242,12 @@ test('VTabs', ({ mount }) => {
 
     await wrapper.vm.$nextTick()
 
-    const content = wrapper.find('#bar')[0]
-    expect(content.vNode.elm.style.display).toBe('none')
+    const content = wrapper.find(VTabsItems)[0]
+    const bar = wrapper.find('#bar')[0]
+    expect(bar.vNode.elm.style.display).toBe("none")
     wrapper.setProps({ value: 'bar' })
     await wrapper.vm.$nextTick()
-    expect(content.vNode.elm.style.display).toBe("")
+    expect(bar.vNode.elm.style.display).toBe("")
   })
 
   // Just satisfying coverage
@@ -247,5 +255,13 @@ test('VTabs', ({ mount }) => {
     const wrapper = mount(VTabs)
 
     wrapper.vm.callBar()
+  })
+
+  it('should not change activeIndex if no tabs', () => {
+    const wrapper = mount(VTabs)
+
+    expect(wrapper.vm.activeIndex).toBe(null)
+    wrapper.vm.findActiveLink()
+    expect(wrapper.vm.activeIndex).toBe(null)
   })
 })

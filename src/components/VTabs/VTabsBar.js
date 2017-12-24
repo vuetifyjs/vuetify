@@ -36,11 +36,13 @@ export default {
     defaultColor: 'white',
     isOverflowing: false,
     itemOffset: 0,
+    resizeTimeout: null,
     scrollOffset: 0,
     startX: 0,
     tabsContainer: null,
     tabsSlider: null,
-    targetEl: null
+    targetEl: null,
+    transitionTime: 300
   }),
 
   props: {
@@ -114,9 +116,18 @@ export default {
     }
   },
 
+  watch: {
+    '$vuetify.application.left' () {
+      this.onContainerResize()
+    },
+    '$vuetify.application.right' () {
+      this.onContainerResize()
+    }
+  },
+
   mounted () {
     this.tabs.register('bar', {
-      action: this.setOverflow,
+      action: this.slider,
       id: 'bar'
     })
   },
@@ -205,10 +216,20 @@ export default {
 
       return null
     },
+    /**
+     * When v-navigation-drawer changes the
+     * width of the container, call resize
+     * after the transition is complete
+     *
+     * @return {Void}
+     */
+    onContainerResize () {
+      clearTimeout(this.resizeTimeout)
+      this.resizeTimeout = setTimeout(this.callBar, this.transitionTime)
+    },
     onResize () {
       if (this._isDestroyed) return
 
-      this.setOverflow()
       this.slider()
     },
     scrollTo (direction) {
@@ -221,6 +242,8 @@ export default {
       this.isOverflowing = container.clientWidth < container.scrollWidth
     },
     slider (el) {
+      this.setOverflow()
+
       this.tabsSlider = this.tabsSlider ||
         !!this.$el && this.$el.querySelector('.tabs__slider')
 
@@ -277,7 +300,7 @@ export default {
       directives: [{
         name: 'resize',
         arg: 400,
-        modifiers: { quiet: false },
+        modifiers: { quiet: true },
         value: this.onResize
       }]
     }, [

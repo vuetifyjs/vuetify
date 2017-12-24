@@ -82,10 +82,9 @@ export default {
         name: 'show',
         value: this.isActive
       }],
+      domProps: { id: this.id },
       on: this.$listeners
     }
-
-    if (this.id) data.domProps = { id: this.id }
 
     const div = h('div', data, this.showLazyContent(this.$slots.default))
 

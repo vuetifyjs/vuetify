@@ -32,11 +32,8 @@ export default {
     content: [],
     bar: [],
     isBooted: false,
-    resizeTimeout: null,
     reverse: false,
-    tabItems: [],
-    target: null,
-    transitionTime: 300
+    tabItems: []
   }),
 
   props: {
@@ -48,75 +45,71 @@ export default {
       if (!this.tabItems.length) return undefined
 
       return this.tabItems[this.activeIndex]
+    },
+    target () {
+      return this.activeTab
+        ? this.activeTab.id
+        : null
     }
   },
 
   watch: {
-    activeIndex () {
+    activeIndex (current, previous) {
+      this.reverse = current < previous
       this.updateTabs()
+    },
+    activeTab (val) {
+      this.$emit('input', (val && val.id || val))
     },
     bar (val) {
       if (!val || !this.activeTab) return
 
       // Welcome to suggestions for solving
       // initial load positioning
-      setTimeout(() => this.activeTab.toggle(this.activeTab.id), 100)
+      this.updateTabs()
     },
     tabItems (newItems, oldItems) {
-      let activeIndex = this.activeIndex
+      if (!newItems.length) return (this.activeIndex = null)
+      if (!oldItems.length) return this.findActiveLink()
 
-      // Tab item was removed and
-      // there are still more
-      if (oldItems.length > newItems.length &&
-        newItems.length > 0
-      ) {
-        const i = oldItems.findIndex(o => o.id === this.target)
+      const newIndex = newItems.findIndex(o => o.id === this.target)
 
-        activeIndex = i > 0 ? i - 1 : 0
-      }
+      if (newIndex > -1) return this.activeIndex = newIndex
 
-      const activeTab = this.tabItems[activeIndex]
-
-      // On boot activeIndex may not
-      // be set yet, just abort
-      if (!activeTab) return
-
-      this.tabClick(activeTab.id)
-      this.callBar()
+      this.activeIndex = newItems.length - 1
     },
-    value () {
-      this.tabClick(this.value)
-    },
-    '$vuetify.application.left' () {
-      this.onContainerResize()
-    },
-    '$vuetify.application.right' () {
-      this.onContainerResize()
+    value (val) {
+      this.tabClick(val)
     }
-  },
-
-  mounted () {
-    // This is a workaround to detect if link is active
-    // when being used as a router or nuxt link
-    const i = this.tabItems.findIndex(tabItem => {
-      return tabItem.id === this.value ||
-        tabItem.el.firstChild.className.indexOf('tabs__item--active') > -1
-    })
-
-    const activeIndex = i > -1 ? i : 0
-
-    if (activeIndex > this.tabItems.length - 1) return
-
-    this.tabClick(this.tabItems[activeIndex].id)
   },
 
   methods: {
     // Force v-tabs-bar to re-evaluate
     // overflow when items change
     callBar () {
-      if (!this.bar.length) return
+      if (!this.bar.length || !this.activeTab) return
 
-      this.bar[0].action()
+      this.bar[0].action(this.activeTab.el)
+    },
+    findActiveLink () {
+      if (!this.tabItems.length) return
+
+      const activeIndex = this.tabItems.findIndex(tabItem => {
+        return tabItem.id === this.value ||
+          tabItem.el.firstChild.className.indexOf('tabs__item--active') > -1
+      })
+
+      // If we found an active link
+      if (activeIndex > -1) {
+        return (this.activeIndex = activeIndex)
+      }
+
+      if (!this.isBooted &&
+        this.content.length > 0 &&
+        this.tabItems.length > 0
+      ) {
+        this.activeIndex = 0
+      }
     },
     next (cycle) {
       let nextIndex = this.activeIndex + 1
@@ -126,7 +119,7 @@ export default {
         nextIndex = 0
       }
 
-      this.tabClick(this.tabItems[nextIndex].id)
+      this.activeIndex = nextIndex
     },
     prev (cycle) {
       let prevIndex = this.activeIndex - 1
@@ -136,44 +129,24 @@ export default {
         prevIndex = this.tabItems.length - 1
       }
 
-      this.tabClick(this.tabItems[prevIndex].id)
+      this.activeIndex = prevIndex
     },
-    /**
-     * When v-navigation-drawer changes the
-     * width of the container, call resize
-     * after the transition is complete
-     *
-     * @return {Void}
-     */
-    onContainerResize () {
-      clearTimeout(this.resizeTimeout)
-      this.resizeTimeout = setTimeout(this.callBar, this.transitionTime)
-    },
+    // Potential Vue bug,
+    // pushing to this[type]
+    // makes the tabItems
+    // watcher new and old
+    // items always match
     register (type, args) {
-      this[type].push(args)
+      const mask = this[type].slice()
+      mask.push(args)
+
+      this[type] = mask
     },
     tabClick (target) {
-      const setActiveIndex = index => {
-        if (this.activeIndex === index) {
-          // #762 update tabs display
-          // In case tabs count got changed but activeIndex didn't
-          this.updateTabs()
-        } else {
-          this.activeIndex = index
-        }
-      }
-
-      this.target = target
-
-      this.$nextTick(() => {
-        const nextIndex = this.tabItems.findIndex(o => o.id === target)
-        this.reverse = nextIndex < this.activeIndex
-        setActiveIndex(nextIndex)
-
-        this.$emit('input', this.target)
-      })
+      this.activeIndex = this.tabItems.findIndex(tab => tab.id === target)
     },
     unregister (type, id) {
+      // console.log(type, id)
       this[type] = this[type].filter(o => o.id !== id)
     },
     updateTabs () {
@@ -184,6 +157,8 @@ export default {
       this.tabItems.forEach(({ toggle }) => {
         toggle(this.target)
       })
+
+      this.callBar()
     }
   },
 

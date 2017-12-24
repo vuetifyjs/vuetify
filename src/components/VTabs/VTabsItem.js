@@ -12,7 +12,7 @@ export default {
     Routable
   ],
 
-  inject: ['slider', 'tabClick'],
+  inject: ['tabClick'],
 
   data () {
     return {
@@ -49,8 +49,12 @@ export default {
   },
 
   watch: {
-    $route () {
-      this.to && this.callSlider()
+    $route (val) {
+      this.$nextTick(() => {
+        if (this.$el.firstChild.className.indexOf('tabs__item--active') > -1) {
+          this.tabClick(this.action)
+        }
+      })
     }
   },
 
@@ -67,25 +71,17 @@ export default {
   },
 
   methods: {
-    callSlider () {
-      if (this.$el.firstChild.className.indexOf('tabs__item--active') < 0) return
-      setTimeout(() => this.slider(this.$el), 0)
-    },
     click (e) {
       e.preventDefault()
       this.$emit('click', e)
 
       if (!this.to && !this.href) return
       if (!this.to) this.tabClick(this.action)
-
-      this.callSlider()
     },
     toggle (action) {
       this.isActive = this.action === action
 
       if (!this.isActive) return
-
-      this.$nextTick(() => this.slider(this.$el))
     }
   },
 
