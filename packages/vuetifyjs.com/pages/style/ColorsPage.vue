@@ -29,8 +29,8 @@
           |
           |Vue.use(Vuetify, {
           |   theme: {
-          |     primary: colors.red.darken1 // #E53935,
-          |     secondary: colors.red.lighten4 // #FFCDD2
+          |     primary: colors.red.darken1, // #E53935,
+          |     secondary: colors.red.lighten4, // #FFCDD2
           |     accent: colors.indigo.base // #3F51B5
           |   }
           |})
@@ -69,8 +69,8 @@
               v-text-field(
                 prepend-icon="filter_list"
                 solo
-                label="Search" 
-                single-line 
+                label="Search"
+                single-line
                 v-model="search"
               )
             v-flex(
