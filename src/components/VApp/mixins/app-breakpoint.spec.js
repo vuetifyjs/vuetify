@@ -1,5 +1,5 @@
-import VApp from '~components/VApp'
-import { test } from '~util/testing'
+import VApp from '@components/VApp'
+import { test } from '@util/testing'
 
 test('breakpoint.js', ({ mount }) => {
   const scenarios = [

@@ -63,7 +63,6 @@ export default {
     },
     segmented: Boolean,
     singleLine: Boolean,
-    solo: Boolean,
     tags: Boolean,
     valueComparator: {
       type: Function,

@@ -1,7 +1,7 @@
 import Vue from 'vue'
-import { test, touch } from '~util/testing'
-import VDatePicker from '~components/VDatePicker'
-import VMenu from '~components/VMenu'
+import { test, touch } from '@util/testing'
+import VDatePicker from '@components/VDatePicker'
+import VMenu from '@components/VMenu'
 
 test('VDatePicker.js', ({ mount, compileToFunctions }) => {
   function createMenuPicker (mount, props) {

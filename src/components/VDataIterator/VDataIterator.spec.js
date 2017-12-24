@@ -1,7 +1,7 @@
 import Vue from 'vue'
-import { test } from '~util/testing'
+import { test } from '@util/testing'
 import VDataIterator from './VDataIterator'
-import VBtn from '~components/VBtn'
+import VBtn from '@components/VBtn'
 
 test('VDataIterator.js', ({ mount, compileToFunctions }) => {
   function dataIteratorTestData () {

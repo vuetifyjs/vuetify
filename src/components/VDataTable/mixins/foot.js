@@ -1,25 +1,23 @@
 export default {
   methods: {
     genTFoot () {
-      const children = []
-
-      if (this.$slots.footer) {
-        const footer = this.$slots.footer
-        const row = this.needsTR(footer) ? this.genTR(footer) : footer
-
-        children.push(row)
+      if (!this.$slots.footer) {
+        return null
       }
 
-      if (!this.hideActions) {
-        children.push(this.genTR([
-          this.$createElement('td', {
-            attrs: { colspan: '100%' }
-          }, this.genActions())
-        ]))
+      const footer = this.$slots.footer
+      const row = this.needsTR(footer) ? this.genTR(footer) : footer
+
+      return this.$createElement('tfoot', [row])
+    },
+    genActionsFooter () {
+      if (this.hideActions) {
+        return null
       }
 
-      if (!children.length) return null
-      return this.$createElement('tfoot', children)
+      return this.$createElement('div', {
+        'class': this.classes
+      }, this.genActions())
     }
   }
 }

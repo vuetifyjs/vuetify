@@ -1,5 +1,5 @@
-﻿import { test } from '~util/testing'
-import VCheckbox from '~components/VCheckbox'
+import { test } from '@util/testing'
+import VCheckbox from '@components/VCheckbox'
 
 test('VCheckbox.js', ({ mount }) => {
   it('should return true when clicked', () => {

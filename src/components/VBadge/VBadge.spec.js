@@ -1,5 +1,5 @@
-import VBadge from '~components/VBadge'
-import { test } from '~util/testing'
+import VBadge from '@components/VBadge'
+import { test } from '@util/testing'
 
 test('VBadge.js', ({ mount, compileToFunctions }) => {
   it('should render component and match snapshot', async () => {

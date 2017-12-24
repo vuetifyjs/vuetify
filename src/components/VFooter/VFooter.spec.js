@@ -1,4 +1,4 @@
-import { test } from '~util/testing'
+import { test } from '@util/testing'
 import VFooter from './VFooter'
 
 test('VFooter.js', ({ mount, functionalContext }) => {

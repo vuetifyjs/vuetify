@@ -187,11 +187,9 @@ export default {
         display: this.fullWidth ? 'block' : 'inline-block'
       },
       directives: [{
+        arg: 500,
         name: 'resize',
-        value: {
-          debounce: 500,
-          value: this.onResize
-        }
+        value: this.onResize
       }],
       on: {
         keydown: this.changeListIndex

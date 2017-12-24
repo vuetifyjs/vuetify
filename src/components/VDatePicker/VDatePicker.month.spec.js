@@ -1,7 +1,7 @@
 import Vue from 'vue'
-import { test } from '~util/testing'
-import VDatePicker from '~components/VDatePicker'
-import VMenu from '~components/VMenu'
+import { test } from '@util/testing'
+import VDatePicker from '@components/VDatePicker'
+import VMenu from '@components/VMenu'
 
 function createMenuPicker (mount, props) {
   const wrapper = mount(Vue.component('test', {

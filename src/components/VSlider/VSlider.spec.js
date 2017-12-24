@@ -1,4 +1,4 @@
-import { test } from '~util/testing'
+import { test } from '@util/testing'
 import VSlider from './VSlider'
 
 const warning = 'The v-slider component requires the presence of v-app or a non-body wrapping element with the [data-app] attribute.'
