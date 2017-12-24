@@ -54,6 +54,7 @@ export default {
   offsetOverflow: 'Causes the component to flip to the opposite side when repositioned due to overflow',
   outline: 'Alert will have an outline',
   origin: 'Sets the transition origin',
+  overlap: 'Component will overlap the slotted content',
   placeholder: `Sets the input's placeholder text`,
   persistent: 'Clicking outside will not dismiss the dialog',
   persistentHint: 'Forces hint visible',

@@ -19,13 +19,5 @@ export default {
       header: 'Visibility',
       desc: 'The visibility of badges can be controlled using <code>v-model</code>.'
     }
-  }],
-  props: {
-    bottom: 'Position the badge to the bottom',
-    left: 'Position the badge to the left',
-    overlap: 'Remove the added margin and allow badge to overlap designated element'
-  },
-  slots: {
-    badge: 'The slot that will be used for the badge'
-  }
+  }]
 }
