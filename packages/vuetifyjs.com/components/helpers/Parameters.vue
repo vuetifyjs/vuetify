@@ -70,22 +70,27 @@
     methods: {
       genDescription (name) {
         let description = ''
+        let devPrepend = ''
         const specialLevelDesc = `${this.namespace}.special.${this.type}.${this.target}.${name}`
         const pageComponentLevelDesc = `${this.namespace}.${this.type}.${this.target}.${name}`
         const componentLevelDesc = `${this.namespace}.${this.type}.${name}`
         const genericDesc = `Generic.${capitalize(this.type)}.${name}`
-
         if (this.$te(specialLevelDesc)) {
           description = this.$t(specialLevelDesc)
+          devPrepend = '**SPECIAL*** - '
         } else if (this.$te(pageComponentLevelDesc)) {
           description = this.$t(pageComponentLevelDesc)
+          devPrepend = '**PAGE*** - '
         } else if (this.$te(componentLevelDesc)) {
+          devPrepend = '**COMPONENT*** - '
           description = this.$t(componentLevelDesc)
         } else if (this.$te(genericDesc)) {
           description = this.$t(genericDesc)
         }
 
-        return description
+        const prepend = process.env.NODE_ENV === 'development' ? devPrepend : ''
+
+        return `${prepend}${description}`
       },
       genName (name) {
         name = name || ''
