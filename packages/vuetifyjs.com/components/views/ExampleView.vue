@@ -48,19 +48,19 @@
               )
           v-tabs-items(touchless).white
             v-tabs-content(
-              v-for="(tab, i) in tabs"
-              :id="tab"
+              v-for="(tabItem, i) in tabs"
+              :id="tabItem"
               :key="i"
-              v-if="hasTab(tab)"
             )
-              v-card(flat)
+              v-card(flat v-if="hasTab(tabItem)")
                 parameters(
-                  :headers="headers[tab]"
-                  :items="currentApi[tab]"
+                  :headers="headers[tabItem]"
+                  :items="currentApi[tabItem]"
                   :namespace="namespace"
                   :search="search"
                   :target="current"
-                  :type="tab"
+                  :type="tabItem"
+                  :key="`${tabItem}${namespace}`"
                 )
       
       section(v-if="supplemental.length > 0")#supplemental
@@ -107,13 +107,13 @@
             { text: this.$t('Generic.Pages.name'), value: 'name', align: 'left' },
             { text: this.$t('Generic.Pages.type'), value: 'type', align: 'left' },
             { text: this.$t('Generic.Pages.default'), value: 'default', align: 'left' },
-            { text: this.$t('Generic.Pages.description'), value: 'desc', align: 'left' }
+            { text: this.$t('Generic.Pages.description'), value: 'description', align: 'left' }
           ],
           props: [
             { text: this.$t('Generic.Pages.options'), value: 'name', align: 'left' },
             { text: this.$t('Generic.Pages.type'), value: 'type', align: 'left' },
             { text: this.$t('Generic.Pages.default'), value: 'default', align: 'left' },
-            { text: this.$t('Generic.Pages.description'), value: 'desc', align: 'left' }
+            { text: this.$t('Generic.Pages.description'), value: 'description', align: 'left' }
           ],
           slots: [
             { text: this.$t('Generic.Pages.name'), value: 'name', align: 'left' },
@@ -152,28 +152,12 @@
         return components
       },
       currentApi () {
-        const api = this.api[this.current] || {
+        return this.api[this.current] || {
           params: [],
           props: [],
           slots: [],
           scopedSlots: []
         }
-
-        const add = `${this.namespace}`
-
-        Object.keys(api).forEach(key => {
-          const lang = `${add}.${key}`
-
-          if (!this.$te(lang)) return
-
-          const items = this.$t(lang)[0]
-
-          if (!items[this.current]) return
-
-          api[key] = api[key].concat(items[this.current])
-        })
-
-        return api
       },
       examples () {
         const examples = this.data.examples || {}
