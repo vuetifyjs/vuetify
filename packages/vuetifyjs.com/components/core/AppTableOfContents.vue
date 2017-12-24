@@ -28,17 +28,28 @@
 
     computed: {
       activeIndex () {
-        const offset = this.currentOffset
+        if (this.list.length < 2) return 0
 
+        const list = this.list.slice(1)
+        const offset = this.currentOffset
         let activeIndex = 0
-        this.targets.forEach((target, i) => {
-          if (i === 0 && offset <= target) {
-            activeIndex = i
-          } else if (offset >= target - 75 &&
-            (!this.targets[i + 1] || offset <= this.targets[i + 1] + 30)
+        let prevItem = this.list[0]
+
+        list.forEach((item, i) => {
+          const distanceDiff = .1 * (item.offsetTop - prevItem.offsetTop)
+          const nextItem = list[i + 1]
+
+          if (!nextItem) {
+            if (offset >= item.offsetTop - distanceDiff) {
+              activeIndex = i + 1
+            }
+          } else if (offset >= item.offsetTop - distanceDiff &&
+            offset <= nextItem.offsetTop - distanceDiff
           ) {
-            activeIndex = i
+            activeIndex = i + 1
           }
+
+          prevItem = item
         })
 
         return activeIndex
@@ -48,15 +59,6 @@
           position: this.position,
           top: `${parseInt(this.top)}px`
         }
-      },
-      targets () {
-        const targets = []
-
-        for (const item of this.list) {
-          if (item.offsetTop) targets.push(item.offsetTop)
-        }
-
-        return targets
       }
     },
 
@@ -71,12 +73,7 @@
         item = item || {}
         const isActive = this.activeIndex === index
 
-        return this.$createElement('li', {
-          directives: [{
-            name: 'show',
-            value: !!item.offsetTop
-          }]
-        }, [
+        return this.$createElement('li', [
           this.$createElement('router-link', {
             staticClass: 'subheading mb-3 d-block',
             'class': {
@@ -96,8 +93,11 @@
         ])
       },
       genList () {
-        this.list = this.items.map(item => {
+        const list = []
+
+        for (let item of this.items) {
           item = Object.assign({}, item)
+
           const target = item.target
             ? item.target
             : document.getElementById(item.href)
@@ -107,10 +107,12 @@
 
             item.offsetTop = offsetTop
             item.target = target
-          }
 
-          return item
-        })
+            list.push(item)
+          }
+        }
+
+        this.list = list
       },
       onScroll () {
         this.currentOffset = window.pageYOffset ||
