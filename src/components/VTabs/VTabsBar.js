@@ -181,7 +181,7 @@ export default {
     },
     newOffsetPrepend (container, items, offset = 0) {
       for (let index = this.itemOffset - 1; index >= 0; index--) {
-        if (this.isSlider(items[index])) return
+        if (this.isSlider(items[index])) continue
 
         const newOffset = offset + items[index].clientWidth
         if (newOffset >= container.clientWidth) {
@@ -194,7 +194,7 @@ export default {
     },
     newOffsetAppend (container, items, offset = this.scrollOffset) {
       for (let index = this.itemOffset; index < items.length; index++) {
-        if (this.isSlider(items[index])) return
+        if (this.isSlider(items[index])) continue
 
         const newOffset = offset + items[index].clientWidth
         if (newOffset > this.scrollOffset + container.clientWidth) {

@@ -18,8 +18,6 @@ tabs($material)
 
 theme(tabs, "tabs__bar")
 
-.tabs
-
 .tabs__bar
   position: relative
   
@@ -121,6 +119,8 @@ theme(tabs, "tabs__bar")
   text-transform: uppercase
   transition: $primary-transition
   user-select: none
+  white-space: normal
+  word-break: break-all
   
   &:not(.tabs__item--active)
     opacity: .7
