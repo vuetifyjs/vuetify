@@ -1,5 +1,31 @@
 export default {
   methods: {
+    genColgroup () {
+      return this.$createElement('colgroup', {}, [...this.genCols()])
+    },
+    genCols () {
+      return this.columnsWidth.map(
+        colWidth => this.$createElement('col', {
+          attrs: {
+            width: colWidth
+          }
+        })
+      )
+    },
+    genFixedHeader () {
+      if (this.height === undefined) return // disabled fixed header if height is not specify
+
+      return this.$createElement('table', {
+        'class': { ...this.classes, 'fixed': true }
+      }, [
+        this.genColgroup(),
+        this.genTHead()
+      ])
+    },
+    genDefaultHeader () {
+      if (this.height !== undefined) return
+      return this.genTHead()
+    },
     genTHead () {
       if (this.hideHeaders) return // Exit Early since no headers are needed.
 
@@ -50,7 +76,6 @@ export default {
         attrs: {
           role: 'columnheader',
           scope: 'col',
-          width: header.width || null,
           'aria-label': header[this.headerText] || '',
           'aria-sort': 'none'
         }

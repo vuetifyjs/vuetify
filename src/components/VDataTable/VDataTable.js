@@ -2,6 +2,7 @@ require('../../stylus/components/_tables.styl')
 require('../../stylus/components/_data-table.styl')
 
 import DataIterable from '../../mixins/data-iterable'
+import Resize from '../../directives/resize'
 
 import VProgressLinear from '../VProgressLinear'
 
@@ -29,11 +30,14 @@ export default {
       actionsClasses: 'datatable__actions',
       actionsRangeControlsClasses: 'datatable__actions__range-controls',
       actionsSelectClasses: 'datatable__actions__select',
-      actionsPaginationClasses: 'datatable__actions__pagination'
+      actionsPaginationClasses: 'datatable__actions__pagination',
+      columnsWidth: []
     }
   },
 
   mixins: [DataIterable, Head, Body, Foot, Progress],
+
+  directives: { Resize },
 
   props: {
     headers: {
@@ -43,6 +47,13 @@ export default {
     headerText: {
       type: String,
       default: 'text'
+    },
+    height: {
+      type: Number
+    },
+    minColumnWidth: {
+      type: Number,
+      default: 100
     },
     hideHeaders: Boolean,
     rowsPerPageText: {
@@ -82,6 +93,50 @@ export default {
     },
     genTR (children, data = {}) {
       return this.$createElement('tr', data, children)
+    },
+    getContainerWidth () {
+      const el = this.$refs.tableRef
+      if (el.scrollHeight > el.offsetHeight) {
+        return el.clientWidth // exclude the width of scrollbar
+      } else {
+        return el.offsetWidth
+      }
+    },
+    computedWidth (autoAssignedWidth, unassignedCount) {
+      const computedWidth = parseInt(autoAssignedWidth * 1.0 / unassignedCount)
+      return computedWidth > this.minColumnWidth ? computedWidth : this.minColumnWidth
+    },
+    calculateColumnWidth () {
+      const actualColumnsWidth = this.headers.map(o => o.width)
+      let autoAssignedWidth = this.getContainerWidth()
+      let lastUnassignedIdx = -1
+      let unassignedCount = 0
+      for (let i = 0; i < actualColumnsWidth.length; i++) {
+        if (actualColumnsWidth[i] === undefined) {
+          lastUnassignedIdx = i
+          unassignedCount++
+        } else {
+          autoAssignedWidth -= actualColumnsWidth[i]
+        }
+      }
+
+      const computedWidth = this.computedWidth(autoAssignedWidth, unassignedCount)
+      let remain = autoAssignedWidth
+      for (let i = 0; i < actualColumnsWidth.length; i++) {
+        if (actualColumnsWidth[i] === undefined) {
+          if (i === lastUnassignedIdx && remain > this.minColumnWidth) {
+            actualColumnsWidth[i] = remain
+          } else {
+            actualColumnsWidth[i] = computedWidth
+          }
+          remain -= actualColumnsWidth[i]
+        }
+      }
+
+      this.columnsWidth = actualColumnsWidth
+    },
+    onResize () {
+      this.calculateColumnWidth()
     }
   },
 
@@ -97,12 +152,22 @@ export default {
     this.initPagination()
   },
 
+  mounted () {
+    this.calculateColumnWidth()
+  },
+
   render (h) {
-    const tableOverflow = h('v-table-overflow', {}, [
+    const tableOverflow = h('v-table-overflow', {
+      ref: 'tableRef',
+      directives: [{ name: 'resize', value: this.onResize }],
+      style: { height: this.height ? `${this.height}px` : undefined }
+    }, [
+      this.genFixedHeader(),
       h('table', {
         'class': this.classes
       }, [
-        this.genTHead(),
+        this.genColgroup(),
+        this.genDefaultHeader(),
         this.genTBody(),
         this.genTFoot()
       ])

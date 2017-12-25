@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import { test } from '@util/testing'
 import VDataTable from './VDataTable'
+import Resize from '../../directives/resize'
 
 test('VDataTable.vue', ({ mount, compileToFunctions }) => {
   function dataTableTestData () {
