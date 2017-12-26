@@ -37,7 +37,6 @@ export default {
 
   props: {
     id: {
-      type: String,
       required: true
     },
     transition: {
@@ -82,7 +81,7 @@ export default {
         name: 'show',
         value: this.isActive
       }],
-      domProps: { id: this.id },
+      domProps: { id: this.id.toString() },
       on: this.$listeners
     }
 
