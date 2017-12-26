@@ -5,16 +5,14 @@ import VDialog from '../VDialog/VDialog'
 export default {
   name: 'v-bottom-sheet',
 
+  inheritAttrs: false,
+
   props: {
-    disabled: Boolean,
-    fullWidth: Boolean,
     inset: Boolean,
-    lazy: Boolean,
     maxWidth: {
       type: [String, Number],
       default: 'auto'
     },
-    persistent: Boolean,
     value: null
   },
 
@@ -30,12 +28,13 @@ export default {
 
     return h(VDialog, {
       attrs: {
-        ...this.$props
+        ...this.$attrs
       },
       on: {
         ...this.$listeners
       },
       props: {
+        maxWidth: this.maxWidth,
         contentClass: contentClass,
         transition: 'bottom-sheet-transition',
         value: this.value
