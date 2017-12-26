@@ -1,5 +1,5 @@
-import { test } from '~util/testing'
-import { VCardMedia } from '~components/VCard'
+import { test } from '@util/testing'
+import { VCardMedia } from '@components/VCard'
 
 test('VCardMedia.js', ({ mount }) => {
   it('should render component and match snapshot', () => {

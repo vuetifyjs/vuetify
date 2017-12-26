@@ -1,4 +1,4 @@
-import { test } from '~util/testing'
+import { test } from '@util/testing'
 import VExpansionPanelContent from './VExpansionPanelContent'
 
 test('VExpansionPanelContent.js', ({ mount, compileToFunctions }) => {

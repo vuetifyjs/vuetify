@@ -1,5 +1,5 @@
-import { test } from '~util/testing'
-import VSystemBar from '~components/VSystemBar'
+import { test } from '@util/testing'
+import VSystemBar from '@components/VSystemBar'
 
 test('VSystemBar.vue', ({ mount }) => {
   it('should render a colored system bar', () => {

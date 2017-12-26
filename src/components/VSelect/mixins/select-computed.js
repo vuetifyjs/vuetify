@@ -10,6 +10,7 @@ export default {
   computed: {
     classes () {
       const classes = {
+        ...this.genSoloClasses(),
         'input-group--text-field input-group--select': true,
         'input-group--auto': this.auto,
         'input-group--overflow': this.overflow,
@@ -19,7 +20,6 @@ export default {
         'input-group--single-line': this.singleLine || this.isDropdown,
         'input-group--multi-line': this.multiLine,
         'input-group--chips': this.chips,
-        'input-group--solo': this.solo,
         'input-group--multiple': this.multiple,
         'input-group--open': this.menuIsVisible
       }
@@ -88,7 +88,7 @@ export default {
         (this.isAutocomplete && this.searchValue)
     },
     isDropdown () {
-      return this.segmented || this.overflow || this.editable || this.solo
+      return this.segmented || this.overflow || this.editable || this.isSolo
     },
     isMultiple () {
       return this.multiple || this.tags
@@ -109,7 +109,7 @@ export default {
     nudgeTop () {
       let nudgeTop = -18
 
-      if (this.solo) nudgeTop = 0
+      if (this.isSolo) nudgeTop = 0
       else if (this.shouldOffset) {
         nudgeTop += 44
 

@@ -1,5 +1,5 @@
-import { test } from '~util/testing'
-import VSelect from '~components/VSelect'
+import { test } from '@util/testing'
+import VSelect from '@components/VSelect'
 
 test('VSelect', ({ mount, compileToFunctions }) => {
   // Inspired by https://github.com/vuetifyjs/vuetify/pull/1425 - Thanks @kevmo314

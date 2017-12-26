@@ -80,6 +80,21 @@ export default {
     }
   },
 
+  beforeMount () {
+    if (!this.mask ||
+      this.value == null ||
+      !this.returnMaskedValue
+    ) return
+
+    const value = this.maskText(this.value)
+
+    // See if masked value does not
+    // match the user given value
+    if (value === this.value) return
+
+    this.$emit('input', value)
+  },
+
   methods: {
     setCaretPosition (selection) {
       this.selection = selection
@@ -110,7 +125,7 @@ export default {
       return this.mask ? maskText(text, this.masked, this.dontFillMaskBlanks) : text
     },
     unmaskText (text) {
-      return this.mask ? unmaskText(text) : text
+      return this.mask && !this.returnMaskedValue ? unmaskText(text) : text
     },
     // When the input changes and is
     // re-created, ensure that the

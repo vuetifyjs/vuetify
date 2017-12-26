@@ -17,7 +17,7 @@ export default {
     Applicationable('top', [
       'clippedLeft',
       'clippedRight',
-      'height',
+      'computedHeight',
       'invertedScroll'
     ]),
     Colorable,
@@ -114,7 +114,6 @@ export default {
         'toolbar--extended': this.isExtended,
         'toolbar--fixed': !this.absolute && (this.app || this.fixed),
         'toolbar--floating': this.floating,
-        'toolbar--is-booted': this.isBooted,
         'toolbar--prominent': this.prominent,
         'theme--dark': this.dark,
         'theme--light': this.light
@@ -175,7 +174,7 @@ export default {
     }
   },
 
-  beforeMount () {
+  created () {
     if (this.invertedScroll ||
       this.manualScroll
     ) this.isActive = false
@@ -189,7 +188,10 @@ export default {
 
   methods: {
     onScroll () {
-      if (typeof window === 'undefined') return
+      if (!this.scrollOffScreen ||
+        this.manualScroll ||
+        typeof window === 'undefined'
+      ) return
 
       const target = this.target || window
 
@@ -223,15 +225,13 @@ export default {
       on: this.$listeners
     }
 
-    if (this.scrollOffScreen) {
-      data.directives = [{
-        name: 'scroll',
-        value: {
-          callback: this.onScroll,
-          target: this.scrollTarget
-        }
-      }]
-    }
+    data.directives = [{
+      name: 'scroll',
+      value: {
+        callback: this.onScroll,
+        target: this.scrollTarget
+      }
+    }]
 
     children.push(h('div', {
       staticClass: 'toolbar__content',

@@ -1,5 +1,5 @@
-import { test } from '~util/testing'
-import VSelect from '~components/VSelect'
+import { test } from '@util/testing'
+import VSelect from '@components/VSelect'
 
 test('VSelect - autocomplete', ({ mount }) => {
   it('should have -1 tabindex when disabled', () => {

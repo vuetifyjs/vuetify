@@ -101,11 +101,7 @@ export default {
       const minWidth = a.width < c.width ? c.width : a.width
       let left = 0
 
-      if (this.isAttached) {
-        left += this.left ? -a.width : 0
-      } else {
-        left += this.left ? a.left - (minWidth - a.width) : a.left
-      }
+      left += this.left ? a.left - (minWidth - a.width) : a.left
 
       if (this.offsetX) left += this.left ? -a.width : a.width
       if (this.nudgeLeft) left -= parseInt(this.nudgeLeft)
@@ -116,13 +112,9 @@ export default {
     computedTop () {
       const a = this.dimensions.activator
       const c = this.dimensions.content
-      let top = 0
+      let top = this.top ? a.bottom - c.height : a.top
 
-      if (!this.isAttached) {
-        top = this.top ? a.bottom - c.height : a.top
-        top += this.pageYOffset
-      }
-
+      if (!this.isAttached) top += this.pageYOffset
       if (this.offsetY) top += this.top ? -a.height : a.height
       if (this.nudgeTop) top -= this.nudgeTop
       if (this.nudgeBottom) top += this.nudgeBottom
@@ -251,7 +243,7 @@ export default {
           : this.activator
       }
 
-      return this.$refs.activator.children
+      return this.$refs.activator.children.length > 0
         ? this.$refs.activator.children[0]
         : this.$refs.activator
     },
@@ -275,16 +267,24 @@ export default {
     measure (el, selector) {
       el = selector ? el.querySelector(selector) : el
 
-      if (!el) return null
+      if (!el || !this.hasWindow) return null
 
-      const {
-        top, bottom, left, right, width, height
-      } = el.getBoundingClientRect()
+      const rect = el.getBoundingClientRect()
+      let top = rect.top
+      let left = rect.left
+
+      // Account for activator margin
+      if (this.isAttached) {
+        const style = window.getComputedStyle(el)
+
+        left = parseInt(style.marginLeft)
+        top = parseInt(style.marginTop)
+      }
 
       return {
-        top, bottom, left, right, width, height,
-        offsetTop: el.offsetTop,
-        offsetLeft: el.offsetLeft
+        bottom: rect.bottom,
+        right: rect.right,
+        top, left, width: rect.width, height: rect.height
       }
     },
     sneakPeek (cb) {

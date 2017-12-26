@@ -42,7 +42,7 @@ export default {
       case props.xLarge: fontSize = SIZE_MAP.xLarge
         break
     }
-    data.style = { fontSize }
+    data.style = { fontSize, ...data.style }
 
     let iconName = ''
     if (children.length) {

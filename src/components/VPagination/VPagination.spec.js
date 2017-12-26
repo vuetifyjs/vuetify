@@ -1,4 +1,4 @@
-import { test } from '~util/testing'
+import { test } from '@util/testing'
 import VPagination from './VPagination'
 
 test('VPagination.vue', ({ mount }) => {

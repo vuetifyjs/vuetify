@@ -1,7 +1,7 @@
-import { test } from '~util/testing'
+import { test } from '@util/testing'
 import Vue from 'vue'
-import VBtn from '~components/VBtn'
-import VProgressCircular from '~components/VProgressCircular'
+import VBtn from '@components/VBtn'
+import VProgressCircular from '@components/VProgressCircular'
 
 const stub = {
   name: 'router-link',

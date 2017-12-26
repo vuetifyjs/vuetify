@@ -61,7 +61,7 @@ exports[`VTextField.js should render component with async loading and custom pro
          style="height: 7px;"
     >
       <div class="progress-linear__background orange"
-           style="height: auto; opacity: 0.3; width: 100%;"
+           style="height: 7px; opacity: 0.3; width: 100%;"
       >
       </div>
       <div class="progress-linear__bar">
@@ -93,7 +93,7 @@ exports[`VTextField.js should render component with async loading and match snap
          style="height: 2px;"
     >
       <div class="progress-linear__background primary"
-           style="height: auto; opacity: 0.3; width: 100%;"
+           style="height: 2px; opacity: 0.3; width: 100%;"
       >
       </div>
       <div class="progress-linear__bar">
