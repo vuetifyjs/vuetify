@@ -47,9 +47,17 @@ declare interface VuetifyTheme {
   [name: string]: VuetifyThemeItem
 }
 
-declare type VuetifyThemeItem = string | {
-  color: string | number
-  text?: string | number
+declare type VuetifyThemeItem = string | number
+
+declare interface VuetifyThemeCache {
+  get: (parsedTheme: VuetifyTheme) => string | null
+  set: (parsedTheme: VuetifyTheme, css: string) => void
+}
+
+declare interface VuetifyOptions {
+  themeVariations?: string[]
+  minifyTheme?: (css: string) => string
+  themeCache?: VuetifyThemeCache
 }
 
 declare interface VuetifyObject {
@@ -57,6 +65,7 @@ declare interface VuetifyObject {
   breakpoint: VuetifyBreakpoint
   dark: boolean
   theme: VuetifyTheme
+  options: VuetifyOptions
   touchSupport: boolean
 }
 

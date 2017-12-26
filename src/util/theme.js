@@ -54,7 +54,7 @@ function darken (value, amount) {
  * @param {string|number} value - The color value
  * @returns {string}
  */
-const genBaseColor = (name, value) => {
+export const genBaseColor = (name, value) => {
   value = intToHex(value)
   return `
 .${name} {
@@ -82,7 +82,7 @@ const genBaseColor = (name, value) => {
  * @param {number} n - The darken/lighten step number
  * @returns {string}
  */
-const genVariantColor = (name, value, type, n) => {
+export const genVariantColor = (name, value, type, n) => {
   value = intToHex(value)
   return `
 .${name}.${type}-${n} {

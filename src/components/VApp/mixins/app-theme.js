@@ -19,14 +19,14 @@ export default {
   },
 
   created () {
-    if (typeof document === 'undefined') {
-      this.$ssrContext && !this.$ssrContext._styles && (this.$ssrContext._styles = {})
-      return this.$ssrContext && this.$ssrContext._styles &&
-        (this.$ssrContext._styles['vuetify-theme-stylesheet'] = {
-          ids: ['vuetify-theme-stylesheet'],
-          css: this.genColors(this.parsedTheme),
-          media: ''
-        })
+    if (typeof document === 'undefined' && this.$ssrContext) {
+      if (!this.$ssrContext._styles) this.$ssrContext._styles = {}
+      this.$ssrContext._styles['vuetify-theme-stylesheet'] = {
+        ids: ['vuetify-theme-stylesheet'],
+        css: this.genColors(this.parsedTheme),
+        media: ''
+      }
+      return
     }
     this.genStyle()
     this.applyTheme()
@@ -37,14 +37,34 @@ export default {
       this.style.innerHTML = this.genColors(this.parsedTheme)
     },
     genColors (theme) {
+      let css
+
+      if (this.$vuetify.options.themeCache != null) {
+        css = this.$vuetify.options.themeCache.get(theme)
+        if (css != null) return css
+      }
+
       const colors = Object.keys(theme)
-      let css = `a { color: ${intToHex(theme.primary)}; }`
+      css = `a { color: ${intToHex(theme.primary)}; }`
 
       for (let i = 0; i < colors.length; ++i) {
         const name = colors[i]
         const value = theme[name]
-        css += Theme.genVariations(name, value).join('')
+        if (this.$vuetify.options.themeVariations.includes(name)) {
+          css += Theme.genVariations(name, value).join('')
+        } else {
+          css += Theme.genBaseColor(name, value)
+        }
       }
+
+      if (this.$vuetify.options.minifyTheme != null) {
+        css = this.$vuetify.options.minifyTheme(css)
+      }
+
+      if (this.$vuetify.options.themeCache != null) {
+        this.$vuetify.options.themeCache.set(theme, css)
+      }
+
       return css
     },
     genStyle () {
