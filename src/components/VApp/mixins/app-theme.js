@@ -13,13 +13,8 @@ export default {
   },
 
   watch: {
-    parsedTheme: {
-      deep: true,
-      handler () {
-        const start = performance.now()
-        this.applyTheme()
-        console.log(performance.now() - start + 'ms')
-      }
+    parsedTheme () {
+      this.applyTheme()
     }
   },
 
@@ -43,7 +38,7 @@ export default {
     },
     genColors (theme) {
       const colors = Object.keys(theme)
-      let css = `a { color: ${intToHex(theme.primary.color)}; }`
+      let css = `a { color: ${intToHex(theme.primary)}; }`
 
       for (let i = 0; i < colors.length; ++i) {
         const name = colors[i]

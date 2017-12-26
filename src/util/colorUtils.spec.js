@@ -36,21 +36,6 @@ describe('intToHex', () => {
   })
 })
 
-// TODO
-describe.skip('getContrast', () => {
-  //
-})
-
-describe('getLuma', () => {
-  it('should return the Luma of a color', () => {
-    expect(getLuma('#45a081')).toBeCloseTo(0.279918, 6)
-    expect(getLuma('#191995')).toBeCloseTo(0.030719, 6)
-    expect(getLuma('#cd6600')).toBeCloseTo(0.224819, 6)
-    expect(getLuma(0)).toBe(0)
-    expect(getLuma(0xffffff)).toBe(1)
-  })
-})
-
 describe('transformSRGB', () => {
   it('should convert sRGB to XYZ', () => {
     expect(transformSRGB.toXYZ(0)).toEqual([0, 0, 0])
