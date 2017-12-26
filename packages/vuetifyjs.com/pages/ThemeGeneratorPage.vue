@@ -2,10 +2,10 @@
   fullscreen-view(:to="to")#theme-generator
     v-btn(
       fab
-      top 
-      right 
-      fixed 
-      @click="drawer = !drawer" 
+      top
+      right
+      fixed
+      @click="drawer = !drawer"
       small
       color="indigo"
     ).mt-1.white--text
@@ -59,7 +59,7 @@
         v-dialog(v-model="dialog" width="300px" content-class="generator-dialog")
           v-card
             v-card-text
-              kbd {{ JSON.stringify(this.theme, null, 2) }}
+              kbd {{ JSON.stringify(this.themeExport, null, 2) }}
             v-card-actions
               v-btn(block color="blue darken-2 white--text" flat="flat" @click.native="dialog = false") Close
 
@@ -114,6 +114,12 @@
         })
 
         return palette
+      },
+      themeExport () {
+        return Object.keys(this.theme).reduce((e, k) => {
+          e[k] = this.findName(this.theme[k])
+          return e
+        }, {})
       }
     },
 
@@ -132,6 +138,20 @@
       }
     },
 
+    methods: {
+      change (value) {
+        this.theme[this.active] = value.hex
+      },
+      findName (value) {
+        for (const [color, shades] of Object.entries(colors)) {
+          for (const [name, hex] of Object.entries(shades)) {
+            if (hex === value) return `${color}.${name}`
+          }
+        }
+        return value
+      }
+    },
+
     beforeDestroy () {
       this.drawer = false
       this.$vuetify.theme = this.backupTheme
@@ -144,12 +164,6 @@
 
     mounted () {
       setTimeout(() => (this.drawer = true), 300)
-    },
-
-    methods: {
-      change (value) {
-        this.theme[this.active] = value.hex
-      }
     }
   }
 </script>
