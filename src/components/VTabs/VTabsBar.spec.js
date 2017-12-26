@@ -4,7 +4,7 @@ import VTabsItem from './VTabsItem'
 import { createRange } from '@util/helpers'
 
 const tabsWarning = 'The v-tabs-bar component must be used inside a v-tabs.'
-const tabClickWarning = '[Vue warn]: Injection "tabClick" not found'
+const tabsClickWarning = '[Vue warn]: Injection "tabClick" not found'
 
 function barProvide (
   register = () => {},
@@ -76,6 +76,26 @@ test('VTabs', ({ mount }) => {
     wrapper.destroy()
     wrapper.vm.onResize()
     expect(wrapper.vm.isOverflowing).toBe(true)
+
+    expect(tabsWarning).toHaveBeenTipped()
+  })
+
+  it('should display display prepended icon', async () => {
+    const wrapper = mount(VTabsBar)
+
+    wrapper.setData({ isOverflowing: true, scrollOffset: 1 })
+    expect(wrapper.vm.genIcon('prepend')).toBeTruthy()
+
+    expect(tabsWarning).toHaveBeenTipped()
+  })
+
+  it('should check if element is v-tabs-slider', () => {
+    const wrapper = mount(VTabsBar)
+
+    const el = document.createElement('div')
+    el.className = 'tabs__slider'
+
+    expect(wrapper.vm.isSlider(el)).toBe(true)
 
     expect(tabsWarning).toHaveBeenTipped()
   })
