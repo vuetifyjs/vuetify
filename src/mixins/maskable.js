@@ -18,6 +18,7 @@ import {
 export default {
   data: () => ({
     selection: 0,
+    lazySelection: 0,
     preDefined: {
       'credit-card': '#### - #### - #### - ####',
       'date': '##/##/####',
@@ -56,7 +57,7 @@ export default {
       if (!this.$refs.input) return
 
       const oldValue = this.$refs.input.value
-      const newValue = this.maskText(this.lazyValue)
+      const newValue = this.maskText(unmaskText(this.lazyValue))
       let position = 0
       let selection = this.selection
 
@@ -132,6 +133,15 @@ export default {
     // caret location is correct
     setSelectionRange () {
       this.$nextTick(this.updateRange)
+    },
+    resetSelections (input) {
+      if (!input.selectionEnd) return
+      this.selection = input.selectionEnd
+      this.lazySelection = 0
+
+      for (const char of input.value.substr(0, this.selection)) {
+        isMaskDelimiter(char) || this.lazySelection++
+      }
     }
   }
 }

@@ -7,7 +7,6 @@ import Colorable from '../../mixins/colorable'
 import Input from '../../mixins/input'
 import Maskable from '../../mixins/maskable'
 import Soloable from '../../mixins/soloable'
-import { isMaskDelimiter } from '../../util/mask'
 
 export default {
   name: 'v-text-field',
@@ -26,8 +25,7 @@ export default {
       initialValue: null,
       inputHeight: null,
       internalChange: false,
-      badInput: false,
-      lazySelection: 0
+      badInput: false
     }
   },
 
@@ -267,15 +265,6 @@ export default {
     clearableCallback () {
       this.inputValue = null
       this.$nextTick(() => this.$refs.input.focus())
-    },
-    resetSelections (input) {
-      if (!input.selectionEnd) return
-      this.selection = input.selectionEnd
-      this.lazySelection = 0
-
-      for (const char of input.value.substr(0, this.selection)) {
-        isMaskDelimiter(char) || this.lazySelection++
-      }
     }
   },
 

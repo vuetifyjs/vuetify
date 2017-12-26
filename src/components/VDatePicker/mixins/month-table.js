@@ -29,9 +29,8 @@ export default {
       const isActive = this.monthIsActive(month)
       const isCurrent = this.monthIsCurrent(month)
       const classes = Object.assign({
-        'btn--flat': !isActive,
+        'btn--flat': true,
         'btn--active': isActive,
-        'btn--outline': isCurrent && !isActive,
         'btn--disabled': this.type === 'month' && !this.isAllowed(date)
       }, this.themeClasses)
 
@@ -39,9 +38,9 @@ export default {
         key: month
       }, [this.$createElement('button', {
         staticClass: 'btn',
-        'class': (isActive || isCurrent)
-          ? this.addBackgroundColorClassChecks(classes)
-          : classes,
+        'class': isActive && this.addBackgroundColorClassChecks(classes) ||
+          isCurrent && this.addTextColorClassChecks(classes) ||
+          classes,
         attrs: {
           type: 'button'
         },

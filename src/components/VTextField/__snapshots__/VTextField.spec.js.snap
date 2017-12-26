@@ -1,5 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VTextField.js should calculate element height when using auto-grow prop 1`] = `
+
+<div class="input-group input-group--focused input-group--dirty input-group--text-field input-group--multi-line primary--text">
+  <div class="input-group__input">
+    <textarea tabindex="0"
+              rows="5"
+              style="height: 120px;"
+    >
+    </textarea>
+  </div>
+  <div class="input-group__details">
+    <!---->
+  </div>
+</div>
+
+`;
+
 exports[`VTextField.js should not display counter when set to false 1`] = `
 
 <div class="input-group input-group--text-field primary--text">
