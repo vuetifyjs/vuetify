@@ -72,6 +72,13 @@ export default {
 
   methods: {
     click (e) {
+      // If user provides an
+      // actual link, do not
+      // prevent default
+      if (this.href &&
+        this.href.indexOf('#') > -1
+      ) e.preventDefault()
+
       this.$emit('click', e)
 
       if (!this.to && !this.href) return
