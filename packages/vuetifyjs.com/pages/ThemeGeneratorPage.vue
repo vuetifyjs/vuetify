@@ -59,9 +59,10 @@
         v-dialog(v-model="dialog" width="300px" content-class="generator-dialog")
           v-card
             v-card-text
-              kbd {{ JSON.stringify(this.themeExport, null, 2) }}
+              kbd {{ themeExport }}
             v-card-actions
-              v-btn(block color="blue darken-2 white--text" flat="flat" @click.native="dialog = false") Close
+              v-btn(block color="grey white--text" flat @click.native="useNames = !useNames") Use {{ useNames && 'hex codes' || 'names' }} 
+              v-btn(block color="blue darken-2 white--text" flat @click.native="dialog = false") Close
 
 </template>
 
@@ -91,6 +92,7 @@
         dark: false,
         dialog: false,
         drawer: false,
+        useNames: false,
         theme: {
           primary: colors.red.base,
           secondary: colors.red.lighten2,
@@ -116,10 +118,18 @@
         return palette
       },
       themeExport () {
-        return Object.keys(this.theme).reduce((e, k) => {
-          e[k] = this.findName(this.theme[k])
-          return e
-        }, {})
+        if (this.useNames) {
+          const names = Object.keys(this.theme).reduce((e, k) => {
+            e[k] = this.findName(this.theme[k])
+            return e
+          }, {})
+          let str = `import colors from 'vuetify/src/util/colors'\n\n${JSON.stringify(names, null, 2)}`
+          str = str.replace(/(.*)\:\s\"(.*)\"/g, "$1: colors.$2")
+
+          return str
+        } else {
+          return JSON.stringify(this.theme, null, 2)
+        }
       }
     },
 
