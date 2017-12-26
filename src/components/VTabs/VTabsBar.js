@@ -173,9 +173,9 @@ export default {
         directives: [{
           name: 'touch',
           value: {
-            start: this.onTouchStart,
-            move: this.onTouchMove,
-            end: this.onTouchEnd
+            start: e => this.overflowCheck(e, this.onTouchStart),
+            move: e => this.overflowCheck(e, this.onTouchMove),
+            end: e => this.overflowCheck(e, this.onTouchEnd)
           }
         }]
       }, [this.genContainer()])
@@ -231,6 +231,9 @@ export default {
       if (this._isDestroyed) return
 
       this.slider()
+    },
+    overflowCheck (e, fn) {
+      this.isOverflowing && fn(e)
     },
     scrollTo (direction) {
       const { offset, index } = this.newOffset(direction)
