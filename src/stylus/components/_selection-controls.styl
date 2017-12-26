@@ -120,3 +120,17 @@ theme(selection-control, "input-group--selection-controls")
 
     label
       left: 52px
+
+/** Flow checkbox labels */
+.input-group
+  &.checkbox
+    .input-group__input
+      display: flex
+      flex: 0 0 38px
+      align-self: flex-start
+
+    label
+      white-space: normal
+      left: 0
+      position: relative
+      height: inherit

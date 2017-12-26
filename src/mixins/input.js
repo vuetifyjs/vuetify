@@ -173,10 +173,6 @@ export default {
         }
       }, data)
 
-      if (this.$slots.label || this.label) {
-        children.push(this.genLabel())
-      }
-
       wrapperChildren.push(input)
 
       if (this.prependIcon) {
@@ -195,6 +191,10 @@ export default {
           'class': 'input-group__input'
         }, wrapperChildren)
       )
+
+      if (this.$slots.label || this.label) {
+        children.push(this.genLabel())
+      }
 
       !this.hideDetails && detailsChildren.push(this.genMessages())
 
