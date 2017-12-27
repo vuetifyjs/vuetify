@@ -1,6 +1,6 @@
 export default {
   header: 'Selection controls',
-  headerText: 'Selection control components allow a user to select options. These components **must** be used with the <code>v-model</code> prop as they do not maintain their own state.',
+  headerText: 'Selection control components allow a user to select options. These components **must** be used with the `v-model` prop as they do not maintain their own state.',
   components: ['v-radio-group', 'v-radio', 'v-checkbox', 'v-switch'],
   examples: [{
     example: {
@@ -22,6 +22,10 @@ export default {
     checkboxesColors: {
       header: "Checkboxes - Colors",
       desc: 'Checkboxes can be colored by using any of the builtin colors and contextual names using the color prop.'
+    },
+    checkboxesInlineTexfield: {
+      header: "Checkboxes - Inline with a textfield",
+      desc: ''
     },
     radiosDefault: {
       header: "Radios - Default",
