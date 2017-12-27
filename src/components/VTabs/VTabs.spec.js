@@ -23,6 +23,8 @@ const component = {
   }
 }
 
+const ssrBootable = () => new Promise(resolve => setTimeout(resolve, 200))
+
 test('VTabs', ({ mount, shallow }) => {
   it('should provide', () => {
     const wrapper = mount(component)
@@ -37,21 +39,80 @@ test('VTabs', ({ mount, shallow }) => {
     expect(typeof items.vm.unregisterItems).toBe('function')
   })
 
-  it('should move slider', async () => {
-    // const wrapper = mount(component, {
-    //   attachToDocument: true,
-    //   propsData: {
-    //     value: 'foo'
-    //   }
-    // })
-    // const tabs = wrapper.find(VTabs)[0]
+  it('should register tabs and items', async () => {
+    const wrapper = mount(VTabs, {
+      slots: {
+        default: [VTab, VTabsItems]
+      }
+    })
 
-    // await wrapper.vm.$nextTick()
-    // console.log(tabs.vm.activeIndex)
-    // console.log(tabs.html())
+    const tab = wrapper.find(VTab)[0]
+    expect(wrapper.vm.tabs.length).toBe(1)
+    tab.destroy()
+    expect(wrapper.vm.tabs.length).toBe(0)
+
+    const items = wrapper.find(VTabsItems)[0]
+    expect(typeof wrapper.vm.tabItems).toBe('function')
+    items.destroy()
+    expect(wrapper.vm.tabItems).toBe(null)
   })
 
-  it('should change tab when model changes', async () => {
+  it('should change tab and content when model changes', async () => {
+    const wrapper = mount(component, {
+      attachToDocument: true
+    })
+
+    const tabs = wrapper.find(VTabs)[0]
+    const tab = wrapper.find(VTab)[0]
+    const item = wrapper.find(VTabItem)[0]
+
+    expect(tabs.vm.activeIndex).toBe(-1)
+    expect(tab.vm.isActive).toBe(false)
+    expect(item.vm.isActive).toBe(false)
+    await ssrBootable()
+    expect(tabs.vm.activeIndex).toBe(0)
+    expect(tab.vm.isActive).toBe(true)
+    expect(item.vm.isActive).toBe(true)
+  })
+
+  it('should not call slider if no active tab', () => {
+    const wrapper = mount(VTabs)
+
+    expect(wrapper.vm.callSlider()).toBe(false)
+  })
+
+  it('should call slider on application resize', async () => {
+    const wrapper = mount(component)
+
+    const tabs = wrapper.find(VTabs)[0]
+
+    expect(tabs.vm.resizeTimeout).toBe(null)
+    tabs.vm.$vuetify.application.left = 100
+    await tabs.vm.$nextTick()
+    expect(tabs.vm.resizeTimeout).toBeTruthy()
+    tabs.setData({ resizeTimeout: null })
+    expect(tabs.vm.resizeTimeout).toBe(null)
+    tabs.vm.$vuetify.application.right = 100
+    await tabs.vm.$nextTick()
+    expect(tabs.vm.resizeTimeout).toBeTruthy()
+  })
+
+  it('should reset offset on resize', async () => {
+    const wrapper = mount(component, {
+      attachToDocument: true
+    })
+
+    const tabs = wrapper.find(VTabs)[0]
+
+    tabs.setData({ scrollOffset: 1 })
+    tabs.vm.onResize()
+    await tabs.vm.$nextTick()
+    expect(tabs.vm.scrollOffset).toBe(0)
+    tabs.setData({ scrollOffset: 2 })
+    await tabs.vm.$nextTick()
+    tabs.destroy()
+    tabs.vm.onResize()
+    expect(tabs.vm.scrollOffset).toBe(2)
   })
 
   it('should mount with booted false then activate to remove transition', async () => {

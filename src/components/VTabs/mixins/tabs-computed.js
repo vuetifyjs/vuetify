@@ -6,7 +6,7 @@
 export default {
   computed: {
     activeIndex () {
-      return this.tabs.findIndex(tab => tab.id === this.value)
+      return this.tabs.findIndex(tab => tab.id === this.lazyValue)
     },
     activeTab () {
       if (!this.tabs.length) return undefined

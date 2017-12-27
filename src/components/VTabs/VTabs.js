@@ -60,30 +60,32 @@ export default {
     }
   },
 
-  data: () => ({
-    content: [],
-    bar: [],
-    isBooted: false,
-    defaultColor: 'white',
-    isOverflowing: false,
-    itemOffset: 0,
-    lazyValue: null,
-    resizeTimeout: null,
-    reverse: false,
-    scrollOffset: 0,
-    sliderWidth: null,
-    sliderLeft: null,
-    startX: 0,
-    tabsContainer: null,
-    tabs: [],
-    tabItems: null,
-    transitionTime: 300
-  }),
+  data () {
+    return {
+      content: [],
+      bar: [],
+      isBooted: false,
+      defaultColor: 'white',
+      isOverflowing: false,
+      itemOffset: 0,
+      lazyValue: this.value,
+      resizeTimeout: null,
+      reverse: false,
+      scrollOffset: 0,
+      sliderWidth: null,
+      sliderLeft: null,
+      startX: 0,
+      tabsContainer: null,
+      tabs: [],
+      tabItems: null,
+      transitionTime: 300
+    }
+  },
 
   methods: {
     callSlider () {
       this.setOverflow()
-      if (!this.activeTab) return
+      if (!this.activeTab) return false
 
       // Give screen time to paint
       this.$nextTick(() => {
@@ -106,13 +108,12 @@ export default {
      */
     onContainerResize () {
       clearTimeout(this.resizeTimeout)
-      this.resizeTimeout = setTimeout(this.callBar, this.transitionTime)
+      this.resizeTimeout = setTimeout(this.callSlider, this.transitionTime)
     },
     onResize () {
       if (this._isDestroyed) return
       this.scrollOffset = 0
       this.callSlider()
-      this.setOverflow()
     },
     overflowCheck (e, fn) {
       this.isOverflowing && fn(e)
@@ -127,10 +128,10 @@ export default {
       this.isOverflowing = container.clientWidth < container.scrollWidth
     },
     findActiveLink () {
-      if (!this.tabs.length || this.value) return
+      if (!this.tabs.length || this.lazyValue) return
 
       const activeIndex = this.tabs.findIndex(tabItem => {
-        return tabItem.id === this.value ||
+        return tabItem.id === this.lazyValue ||
           tabItem.el.firstChild.className.indexOf('tabs__item--active') > -1
       })
 

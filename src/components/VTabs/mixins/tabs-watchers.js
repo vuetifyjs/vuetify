@@ -10,6 +10,7 @@ export default {
       this.tabItems && this.tabItems(val.id)
     },
     isBooted: 'findActiveLink',
+    lazyValue: 'updateTabs',
     value: 'tabClick',
     '$vuetify.application.left': 'onContainerResize',
     '$vuetify.application.right': 'onContainerResize'

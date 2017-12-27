@@ -136,6 +136,7 @@ export function escapeHTML (str) {
 
 export function filterChildren (array = [], tag) {
   return array.filter(child => {
-    return child.componentOptions.Ctor.options.name === tag
+    return child.componentOptions &&
+      child.componentOptions.Ctor.options.name === tag
   })
 }
