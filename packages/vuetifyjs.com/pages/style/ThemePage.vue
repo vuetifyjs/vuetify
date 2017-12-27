@@ -5,7 +5,7 @@
         section-head(:value="`${namespace}.lightAndDarkHeader`")
         section-text(:value="`${namespace}.lightAndDarkText1`")
         markup(lang="html")
-          |&lt;v-app light&gt;
+          |&lt;v-app dark&gt;
           |...
           |&lt;/v-app&gt;
         section-text(:value="`${namespace}.lightAndDarkText2`")
@@ -49,4 +49,42 @@
         section-text(:value="`${namespace}.customizingText5`")
         markup(lang="javascript")
           |this.$vuetify.theme.primary = '#4caf50'
+
+      section#stylus-guide
+        section-head(:value="`${namespace}.stylusHeader`")
+        section-text(:value="`${namespace}.stylusText1`")
+        h3.mb-3 {{ $t(`${namespace}.stylusHeader2`) }}
+        section-text(:value="`${namespace}.stylusText2`")
+        markup(lang="cli")
+          |$ npm i stylus stylus-loader style-loader css-loader --save-dev
+          |// or
+          |$ yarn add stylus stylus-loader style-loader css-loader --dev
+        section-text(:value="`${namespace}.stylusText3`")
+        markup(lang="javascript")
+          |module: {
+          |  rules: [
+          |    {
+          |      test: /\.styl$/,
+          |      loader: ['style-loader', 'css-loader', 'stylus-loader']
+          |    }
+          |  ]
+          |}
+        section-text(:value="`${namespace}.stylusText4`")
+        markup(lang="stylus")
+          |// main.styl
+          |@require '../../node_modules/vuetify/src/stylus/main'
+        section-text(:value="`${namespace}.stylusText5`")
+        markup(lang="javascript")
+          |// app.js
+          |import('./stylus/main.styl')
+        section-text(:value="`${namespace}.stylusText6`")
+        h3.mb-3 {{ $t(`${namespace}.stylusHeader3`) }}
+        section-text(:value="`${namespace}.stylusText7`")
+        markup(lang="stylus")
+          |$body-font-family = 'Open Sans'
+          |$alert-font-size = 18px
+          |&nbsp;
+          |@import '../../node_modules/vuetify/src/stylus/main'
+          |// For a-la-carte
+          |@import '../../node_modules/vuetify/src/stylus/app'
 </template>
