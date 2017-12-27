@@ -24,6 +24,9 @@ import {
 import Resize from '../../directives/resize'
 import Touch from '../../directives/touch'
 
+// Helpers
+import { filterChildren } from '../../util/helpers'
+
 export default {
   name: 'v-tabs',
 
@@ -170,7 +173,7 @@ export default {
     }, [
       this.genTransition('prepend'),
       this.genWrapper(),
-      this.filterChildren('v-tabs-items'),
+      filterChildren(this.$slots.default, 'v-tabs-items'),
       this.genTransition('append')
     ])
   }

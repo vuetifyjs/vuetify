@@ -129,6 +129,13 @@ const tagsToReplace = {
   '<': '&lt;',
   '>': '&gt;'
 }
+
 export function escapeHTML (str) {
   return str.replace(/[&<>]/g, tag => tagsToReplace[tag] || tag)
+}
+
+export function filterChildren (array = [], tag) {
+  return array.filter(child => {
+    return child.componentOptions.Ctor.options.name === tag
+  })
 }

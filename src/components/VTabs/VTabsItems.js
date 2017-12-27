@@ -87,7 +87,7 @@ export default {
         nextIndex = 0
       }
 
-      this.inputValue = items[nextIndex].id
+      this.inputValue = this.items[nextIndex].id
     },
     prev (cycle) {
       let prevIndex = this.activeIndex - 1

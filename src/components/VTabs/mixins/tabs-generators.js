@@ -1,3 +1,6 @@
+// Helpers
+import { filterChildren } from '../../../util/helpers'
+
 /**
  * Tabs generators
  *
@@ -12,7 +15,7 @@ export default {
         ref: 'container'
       }, [
         this.genSlider(),
-        this.filterChildren('v-tab')
+        filterChildren(this.$slots.default, 'v-tab')
       ])
     },
     genIcon (direction) {
@@ -55,7 +58,7 @@ export default {
       }, [this.genContainer()])
     },
     genSlider () {
-      let slider = this.filterChildren('v-tabs-slider')
+      let slider = filterChildren(this.$slots.default, 'v-tabs-slider')
       if (!slider.length) {
         slider = [this.$createElement('v-tabs-slider', {
           props: { color: this.sliderColor }
@@ -66,12 +69,6 @@ export default {
         staticClass: 'tabs__slider-wrapper',
         style: this.sliderStyles
       }, slider)
-    },
-    filterChildren (tag) {
-      return (this.$slots.default || []).filter(child => (
-        child.componentOptions &&
-        child.componentOptions.tag === tag
-      ))
     }
   }
 }
