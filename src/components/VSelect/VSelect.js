@@ -237,6 +237,9 @@ export default {
         }
       }
     },
+    findExistingItem (val) {
+      return this.items.find(i => this.valueComparator(this.getValue(i), this.getValue(val)))
+    },
     findExistingIndex (item) {
       const itemValue = this.getValue(item)
       return this.inputValue.findIndex(i => this.valueComparator(this.getValue(i), itemValue))
