@@ -102,9 +102,8 @@ export default {
         'navigation-drawer--absolute': this.absolute,
         'navigation-drawer--clipped': this.clipped,
         'navigation-drawer--close': !this.isActive,
-        'navigation-drawer--fixed': this.fixed || this.app,
+        'navigation-drawer--fixed': !this.absolute && (this.app || this.fixed),
         'navigation-drawer--floating': this.floating,
-        'navigation-drawer--is-booted': this.isBooted,
         'navigation-drawer--is-mobile': this.isMobile,
         'navigation-drawer--mini-variant': this.miniVariant,
         'navigation-drawer--open': this.isActive,
@@ -162,16 +161,10 @@ export default {
     styles () {
       const styles = {
         height: this.calculatedHeight,
+        marginTop: `${this.marginTop}px`,
         maxHeight: `calc(100% - ${this.maxHeight}px)`,
+        transform: `translateX(${this.calculatedTransform}px)`,
         width: `${this.calculatedWidth}px`
-      }
-
-      if (this.marginTop) {
-        styles.marginTop = `${this.marginTop}px`
-      }
-
-      if (this.calculatedTransform) {
-        styles.transform = `translateX(${this.calculatedTransform}px)`
       }
 
       return styles

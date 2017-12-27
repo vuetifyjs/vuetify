@@ -12,6 +12,12 @@ export default {
   }),
 
   mounted () {
-    setTimeout(() => (this.isBooted = true), 200)
+    // Use setAttribute instead of dataset
+    // because dataset does not work well
+    // with unit tests
+    setTimeout(() => {
+      this.$el.setAttribute('data-booted', true)
+      this.isBooted = true
+    }, 200)
   }
 }

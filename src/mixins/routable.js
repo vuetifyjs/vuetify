@@ -15,7 +15,7 @@ export default {
     to: [String, Object],
     nuxt: Boolean,
     replace: Boolean,
-    ripple: Boolean,
+    ripple: [Boolean, Object],
     tag: String,
     target: String
   },

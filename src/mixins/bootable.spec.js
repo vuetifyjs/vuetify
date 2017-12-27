@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import { test } from '~util/testing'
-import Bootable from '~mixins/bootable'
+import { test } from '@util/testing'
+import Bootable from '@mixins/bootable'
 
 test('bootable.js', ({ mount }) => {
   it('should be booted after activation', async () => {

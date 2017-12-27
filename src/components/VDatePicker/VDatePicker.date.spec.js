@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import { test } from '~util/testing'
-import VDatePicker from '~components/VDatePicker'
+import { test } from '@util/testing'
+import VDatePicker from '@components/VDatePicker'
 
 test('VDatePicker.js', ({ mount, compileToFunctions }) => {
   it('should display the correct date in title and header', () => {
@@ -402,5 +402,18 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.activePicker).toBe('YEAR')
     wrapper.setProps({ type: 'date' })
     expect(wrapper.vm.activePicker).toBe('YEAR')
+  })
+
+  it('should use prev and next icons', () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        prependIcon: 'block',
+        appendIcon: 'check'
+      }
+    })
+
+    const icons = wrapper.find('.picker--date__header-selector .icon')
+    expect(icons[0].element.textContent).toBe('block')
+    expect(icons[1].element.textContent).toBe('check')
   })
 })

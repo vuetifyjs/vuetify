@@ -20,15 +20,14 @@ export default {
       const isCurrent = this.dateIsCurrent(day)
       const classes = Object.assign({
         'btn--active': isActive,
-        'btn--outline': isCurrent && !isActive,
         'btn--disabled': !this.isAllowed(date)
       }, this.themeClasses)
 
       const button = this.$createElement('button', {
         staticClass: 'btn btn--raised btn--icon',
-        'class': (isActive || isCurrent)
-          ? this.addBackgroundColorClassChecks(classes)
-          : classes,
+        'class': isActive && this.addBackgroundColorClassChecks(classes) ||
+          isCurrent && this.addTextColorClassChecks(classes) ||
+          classes,
         attrs: {
           type: 'button'
         },

@@ -1,6 +1,6 @@
-import { test } from '~util/testing'
-import VSelect from '~components/VSelect'
-import VMenu from '~components/VMenu'
+import { test } from '@util/testing'
+import VSelect from '@components/VSelect'
+import VMenu from '@components/VMenu'
 
 test('VSelect - combobox', ({ mount }) => {
   it('should emit custom value on blur', async () => {
@@ -28,7 +28,7 @@ test('VSelect - combobox', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(change).toHaveBeenCalledWith('foo')
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should evaluate the range of an integer', async () => {
@@ -46,7 +46,7 @@ test('VSelect - combobox', ({ mount }) => {
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.currentRange).toBe(1)
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should not use search input when blurring', async () => {
@@ -74,6 +74,29 @@ test('VSelect - combobox', ({ mount }) => {
     list.trigger('click')
     await wrapper.vm.$nextTick()
     expect(event).toBeCalledWith(12)
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should not populate search field if value is falsey', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        combobox: true
+      }
+    })
+
+    const event = jest.fn()
+    wrapper.vm.$on('input', event)
+
+    wrapper.setData({ isActive: true })
+    await wrapper.vm.$nextTick()
+
+    wrapper.setProps({ searchInput: '' })
+    await wrapper.vm.$nextTick()
+
+    wrapper.setData({ isActive: false })
+    await wrapper.vm.$nextTick()
+
+    expect(event).not.toBeCalled()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 })

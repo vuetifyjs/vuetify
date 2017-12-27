@@ -1,5 +1,5 @@
-import VSpeedDial from '~components/VSpeedDial'
-import { test } from '~util/testing'
+import VSpeedDial from '@components/VSpeedDial'
+import { test } from '@util/testing'
 import { compileToFunctions } from 'vue-template-compiler'
 
 test('VSpeedDial.js', ({ mount }) => {

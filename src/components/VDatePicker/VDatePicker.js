@@ -51,6 +51,10 @@ export default {
       type: [Array, Object, Function],
       default: () => (null)
     },
+    appendIcon: {
+      type: String,
+      default: 'chevron_right'
+    },
     // Function formatting the day in date picker table
     dayFormat: {
       type: Function,
@@ -73,6 +77,10 @@ export default {
     monthFormat: {
       type: Function,
       default: null
+    },
+    prependIcon: {
+      type: String,
+      default: 'chevron_left'
     },
     // Function formatting currently selected date in the picker title
     titleDateFormat: {
@@ -229,6 +237,10 @@ export default {
         this.activePicker = 'MONTH'
       } else if (val === 'year') {
         this.activePicker = 'YEAR'
+      } else if (val === 'date' && this.activePicker === 'MONTH') {
+        const date = this.sanitizeDateString(`${this.tableYear}-${this.month + 1}-01`, 'date')
+        if (this.isAllowed(date)) this.inputDate = date
+        this.activePicker = 'DATE'
       }
     }
   },
@@ -330,7 +342,7 @@ export default {
     // Adds leading zero to month/day if necessary, returns 'YYYY' if type = 'year',
     // 'YYYY-MM' if 'month' and 'YYYY-MM-DD' if 'date'
     sanitizeDateString (dateString, type) {
-      const [year, month, date] = dateString.split('-')
+      const [year, month = 1, date = 1] = dateString.split('-')
       return `${year}-${pad(month)}-${pad(date)}`.substr(0, { date: 10, month: 7, year: 4 }[type])
     },
     // For month = 12 it sets the tableDate to January next year

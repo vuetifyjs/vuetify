@@ -1,5 +1,5 @@
-import { test, touch } from '~util/testing'
-import VSwitch from '~components/VSwitch'
+import { test, touch } from '@util/testing'
+import VSwitch from '@components/VSwitch'
 
 test('VSwitch.js', ({ mount }) => {
   it('should set ripple data attribute based on ripple prop state', () => {
