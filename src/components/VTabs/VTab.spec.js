@@ -1,12 +1,12 @@
 import { test } from '@/util/testing'
-import VTabsItem from './VTabsItem'
+import VTab from './VTab'
 
 const tabClick = 'Injection "tabClick" not found'
-const tabsWarning = 'The v-tabs-item component must be used inside a v-tabs-bar.'
+const tabsWarning = 'The v-tab component must be used inside a v-tabs.'
 
-test('VTabsItem', ({ mount }) => {
+test('VTab', ({ mount }) => {
   it('should render a div when disabled', async () => {
-    const wrapper = mount(VTabsItem, {
+    const wrapper = mount(VTab, {
       propsData: {
         href: '#foo'
       }
@@ -35,11 +35,11 @@ test('VTabsItem', ({ mount }) => {
       }
     }, {
       slots: {
-        default: [VTabsItem]
+        default: [VTab]
       }
     })
 
-    const item = wrapper.find(VTabsItem)[0]
+    const item = wrapper.find(VTab)[0]
     item.destroy()
 
     expect(register).toHaveBeenCalled()

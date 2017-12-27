@@ -12,11 +12,11 @@ import {
 import Touch from '../../directives/touch'
 
 export default {
-  name: 'v-tabs-content',
+  name: 'v-tab-item',
 
   mixins: [
     Bootable,
-    RegistrableInject('tabs', 'v-tabs-content', 'v-tabs')
+    RegistrableInject('tabs', 'v-tab-item', 'v-tabs-items')
   ],
 
   components: {
@@ -64,14 +64,14 @@ export default {
   },
 
   mounted () {
-    this.tabs.register('content', {
+    this.tabs.register({
       id: this.id,
       toggle: this.toggle
     })
   },
 
   beforeDestroy () {
-    this.tabs.unregister('content', this.id)
+    this.tabs.unregister(this.id)
   },
 
   render (h) {

@@ -1,15 +1,16 @@
 import { test } from '@util/testing'
 import VTabs from './VTabs'
-import VTabsBar from './VTabsBar'
-import VTabsItem from './VTabsItem'
+import VTabItem from './VTabItem'
 import VTabsItems from './VTabsItems'
-import VTabsContent from './VTabsContent'
+
+const tabsWarning = 'The v-tabs-bar component must be used inside a v-tabs.'
+const tabsClickWarning = '[Vue warn]: Injection "tabClick" not found'
 
 function createBar (items = ['foo', 'bar']) {
   return {
     render (h) {
-      return h(VTabsBar, items.map(i => (
-        h(VTabsItem, { props: { href: `${i}` } })
+      return h(VTabs, items.map(i => (
+        h(VTabItem, { props: { href: `${i}` } })
       )))
     }
   }
@@ -21,6 +22,26 @@ function createItems (items = ['foo', 'bar']) {
       return h(VTabsItems, items.map(i => {
         return h(VTabsContent, { props: { id: `${i}` } }, i)
       }))
+    }
+  }
+}
+
+function barProvide (
+  register = () => {},
+  unregister = () => {},
+  tabClick = () => {}
+) {
+  return {
+    provide: {
+      tabs: {
+        register,
+        unregister
+      },
+      tabClick
+    },
+
+    render (h) {
+      return h('div', this.$slots.default)
     }
   }
 }
@@ -176,7 +197,7 @@ test('VTabs', ({ mount }) => {
     })
 
     const onContainerResize = jest.fn()
-    const bar = wrapper.find(VTabsBar)[0]
+    const bar = wrapper.find(VTabs)[0]
     bar.setData({ transitionTime: 0 })
     bar.setMethods({ onContainerResize })
     wrapper.vm.$vuetify.application.left = 1
@@ -199,7 +220,7 @@ test('VTabs', ({ mount }) => {
     })
 
     await wrapper.vm.$nextTick()
-    const item = wrapper.find(VTabsItem)[0]
+    const item = wrapper.find(VTabItem)[0]
 
     expect(wrapper.vm.tabItems.length).toBe(2)
     item.vm.tabs.unregister('tabItems', item.vm.action)
@@ -250,18 +271,44 @@ test('VTabs', ({ mount }) => {
     expect(bar.vNode.elm.style.display).toBe("")
   })
 
-  // Just satisfying coverage
-  it('should not call bar if none exists', () => {
-    const wrapper = mount(VTabs)
-
-    wrapper.vm.callBar()
-  })
-
   it('should not change activeIndex if no tabs', () => {
     const wrapper = mount(VTabs)
 
-    expect(wrapper.vm.activeIndex).toBe(null)
+    expect(wrapper.vm.activeIndex).toBe(-1)
     wrapper.vm.findActiveLink()
-    expect(wrapper.vm.activeIndex).toBe(null)
+    expect(wrapper.vm.activeIndex).toBe(-1)
+  })
+
+  it('should validate height is a number and have default values', async () => {
+    const wrapper = mount(VTabs, {
+      propsData: {
+        height: 'auto'
+      }
+    })
+
+    expect('Invalid prop: custom validator check failed for prop "height"').toHaveBeenWarned()
+    wrapper.setProps({ height: null })
+    expect(wrapper.vm.computedHeight).toBe(48)
+    wrapper.setProps({ iconsAndText: true })
+    expect(wrapper.vm.computedHeight).toBe(72)
+    wrapper.setProps({ height: 112 })
+    expect(wrapper.vm.computedHeight).toBe(112)
+  })
+
+  it('should set overflowing on resize', async () => {
+    const wrapper = mount(VTabs)
+
+    wrapper.setData({ isOverflowing: true })
+    wrapper.vm.onResize()
+    expect(wrapper.vm.isOverflowing).toBe(false)
+
+    wrapper.setData({ isOverflowing: true })
+
+    // Should not set overflow after being destroyed
+    wrapper.destroy()
+    wrapper.vm.onResize()
+    expect(wrapper.vm.isOverflowing).toBe(true)
+
+    // expect(tabsWarning).toHaveBeenTipped()
   })
 })

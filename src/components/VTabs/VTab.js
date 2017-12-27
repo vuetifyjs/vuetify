@@ -5,10 +5,10 @@ import {
 } from '../../mixins/registrable'
 
 export default {
-  name: 'v-tabs-item',
+  name: 'v-tab',
 
   mixins: [
-    RegistrableInject('tabs', 'v-tabs-item', 'v-tabs-bar'),
+    RegistrableInject('tabs', 'v-tab', 'v-tabs'),
     Routable
   ],
 
@@ -26,7 +26,7 @@ export default {
       default: 'tabs__item--active'
     },
     ripple: {
-      type: Boolean,
+      type: [Boolean, Object],
       default: true
     }
   },
@@ -59,7 +59,7 @@ export default {
   },
 
   mounted () {
-    this.tabs.register('tabItems', {
+    this.tabs.register({
       id: this.action,
       toggle: this.toggle,
       el: this.$el
@@ -67,7 +67,7 @@ export default {
   },
 
   beforeDestroy () {
-    this.tabs.unregister('tabItems', this.action)
+    this.tabs.unregister(this.action)
   },
 
   methods: {

@@ -3,22 +3,21 @@
 
 /* Theme */
 tabs($material)
+  background-color: $material.cards
+
+  .icon--left,
+  .icon--right
+    color: $material.icons.inactive
+
   .tabs__div
     color: $material.tabs.active
 
     &.tabs__item--disabled
       color: $material.buttons.disabled
 
-  .tabs__bar
-    background-color: $material.cards
+theme(tabs, "tabs")
 
-    .icon--left,
-    .icon--right
-      color: $material.icons.inactive
-
-theme(tabs, "tabs__bar")
-
-.tabs__bar
+.tabs
   position: relative
   
   .icon--prepend,
@@ -27,7 +26,6 @@ theme(tabs, "tabs__bar")
     top: 0
     width: 32px
     align-items: center
-    height: 100%
     cursor: pointer
     user-select: none
 
@@ -54,7 +52,7 @@ theme(tabs, "tabs__bar")
       @media $display-breakpoints.xs-only
         margin-left: 64px
     
-    &.tabs__bar--show-arrows
+    &.tabs--show-arrows
       .tabs__container div:first-child,
       .tabs__slider + .tabs__div
         margin-left: 16px
@@ -147,10 +145,13 @@ theme(tabs, "tabs__bar")
     opacity: .7
 
 .tabs__slider
-  bottom: 0
   height: 2px
-  position: absolute
-  transition: $primary-transition
+  width: 100%
+  
+  &-wrapper
+    bottom: 0
+    position: absolute
+    transition: $primary-transition
 
 .tabs__items
   overflow: hidden

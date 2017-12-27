@@ -1,10 +1,10 @@
 import { test } from '@util/testing'
 import VTabs from './VTabs'
-import VTabsContent from './VTabsContent'
+import VTabItem from './VTabItem'
 
-const contentWarning = 'The v-tabs-content component must be used inside a v-tabs.'
+const contentWarning = 'The v-tab-item component must be used inside a v-tabs-items.'
 
-test('VTabsContent', ({ mount }) => {
+test('VTabItem', ({ mount }) => {
   it('should unregister on destroy', async () => {
     const register = jest.fn()
     const unregister = jest.fn()
@@ -19,7 +19,7 @@ test('VTabsContent', ({ mount }) => {
       },
       render (h) {
         return h('div', [
-          h(VTabsContent, {
+          h(VTabItem, {
             props: { id: 'foo' }
           })
         ])
@@ -29,14 +29,14 @@ test('VTabsContent', ({ mount }) => {
     await wrapper.vm.$nextTick()
     expect(register).toHaveBeenCalled()
     
-    const content = wrapper.find(VTabsContent)[0]
+    const content = wrapper.find(VTabItem)[0]
     content.destroy()
     await wrapper.vm.$nextTick()
     expect(unregister).toHaveBeenCalled()
   })
 
   it('should not wrap component in transition if false is used', () => {
-    const wrapper = mount(VTabsContent, {
+    const wrapper = mount(VTabItem, {
       propsData: {
         id: 'foo',
         transition: false,
@@ -49,7 +49,7 @@ test('VTabsContent', ({ mount }) => {
   })
 
   it('should set transition to none of no transition', async () => {
-    const wrapper = mount(VTabsContent, {
+    const wrapper = mount(VTabItem, {
       propsData: {
         id: 'foo'
       }
