@@ -35,32 +35,38 @@ export default {
         return null
       }
 
-      const rows = []
+      const rowMultiplier = this.$scopedSlots.expand ? 2 : 1
+      const rows = new Array(this.filteredItems.length * rowMultiplier)
       for (let index = 0; index < this.filteredItems.length; ++index) {
         const item = this.filteredItems[index]
         const props = this.createProps(item, index)
-        let row = this.$scopedSlots.items(props)
+        const row = this.$scopedSlots.items(props)
 
-        if (this.needsTR(row)) {
-          row = this.genTR(row, {
-            key: index,
-            attrs: { active: this.isSelected(item) }
-          })
-        } else {
-          for (let childIndex = 0; childIndex < row.length; ++childIndex) {
-            const rowChild = row[childIndex]
-            rowChild.key = rowChild.key || `${index}:${childIndex}`
-          }
-        }
-        rows.push(row)
+        const rowPosition = index * rowMultiplier
+        rows[rowPosition] = this.processRow(row, item, index)
 
         if (this.$scopedSlots.expand) {
           const expandRow = this.genExpandedRow(props)
-          rows.push(expandRow)
+          rows[rowPosition + 1] = expandRow
         }
       }
 
       return rows
+    },
+    processRow (row, item, index) {
+      if (this.needsTR(row)) {
+        return this.genTR(row, {
+          key: index,
+          attrs: { active: this.isSelected(item) }
+        })
+      }
+
+      for (let childIndex = 0; childIndex < row.length; ++childIndex) {
+        const rowChild = row[childIndex]
+        rowChild.key = rowChild.key || `${index}:${childIndex}`
+      }
+
+      return row
     },
     genEmptyItems (content) {
       return this.genTR([this.$createElement('td', {
