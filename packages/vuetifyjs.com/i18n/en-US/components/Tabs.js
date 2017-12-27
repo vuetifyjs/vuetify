@@ -12,11 +12,11 @@ export default {
   examples: [{
     toolbar: {
       header: 'Toolbar tabs',
-      desc: 'The <code>v-tabs</code> component is highly customizable to suit your needs. You can get and set the currently active tab by using the <code>v-model</code> prop on the <code>v-tabs</code> component.'
+      desc: ''
     },
-    centered: {
-      header: 'Centered tabs',
-      desc: 'Tabs can be centered by using the <code>centered</code> prop. Here we have also applied the <code>fixed</code> prop which gives all tab items a fixed size, regardless of content.'
+    fixedTabs: {
+      header: 'Fixed tabs',
+      desc: 'The **fixed-tabs** prop sets a higher minimum width and applies a new maximum width to `v-tabs-items`. On desktop screens, the tab items will be centered within the `v-tabs-bar` component and switch to evenly fill on mobile.'
     },
     content: {
       header: 'Content',
