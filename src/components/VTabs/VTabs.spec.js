@@ -299,27 +299,57 @@ test('VTabs', ({ mount, shallow }) => {
 
   it('should return object or null when calling new offset', async () => {
     const wrapper = mount(VTabs)
+    const mockEls = createRange(25).map(x => ({ clientWidth: 50 }))
 
     await ssrBootable()
 
     // Mocking container and children
-    const appendOffset = wrapper.vm.newOffsetAppend(
+    expect(wrapper.vm.newOffsetAppend(
       { clientWidth: 400 },
-      createRange(25).map(x => ({ clientWidth: 50 })),
+      mockEls,
       0
-    )
-    expect(appendOffset).toEqual({ offset: 400, index: 8 })
+    )).toEqual({ offset: 400, index: 8 })
 
     // Mock offset
     wrapper.setData({ itemOffset: 10 })
 
     // Mocking container and children
-    const prependOffset = wrapper.vm.newOffsetPrepend(
+    expect(wrapper.vm.newOffsetPrepend(
       { clientWidth: 200 },
-      createRange(25).map(x => ({ clientWidth: 50 })),
+      mockEls,
       50
-    )
+    )).toEqual({ offset: -150, index: 8 })
 
-    expect(prependOffset).toEqual({ offset: -150, index: 8 })
+    wrapper.setData({ itemOffset: 0 })
+    // Mocking container and children
+    expect(wrapper.vm.newOffsetPrepend(
+      { clientWidth: 0 },
+      [{ clientWidth: 50 }]
+    )).toEqual({ offset: 0, index: 0 })
+  })
+
+  it('should handle touch events and remove container transition', async () => {
+    const wrapper = mount(VTabs, {
+      attachToDocument: true
+    })
+
+    wrapper.setData({ isOverflowing: true })
+    const container = wrapper.find('.tabs__container')[0]
+
+    await ssrBootable()
+
+    expect(wrapper.vm.startX).toBe(0)
+    wrapper.vm.onTouchStart({ touchstartX: 0 })
+    expect(container.hasStyle('transition', 'none')).toBe(true)
+
+    wrapper.vm.onTouchMove({ touchmoveX: -100 })
+    expect(wrapper.vm.scrollOffset).toBe(100)
+
+    wrapper.vm.onTouchEnd()
+    expect(wrapper.vm.scrollOffset).toBe(0)
+
+    wrapper.setData({ isOverflowing: false })    
+    wrapper.vm.onTouchEnd()
+    expect(wrapper.vm.scrollOffset).toBe(0)
   })
 })

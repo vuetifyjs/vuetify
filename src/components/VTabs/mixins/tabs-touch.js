@@ -41,7 +41,7 @@ export default {
     onTouchMove (e) {
       this.scrollOffset = this.startX - e.touchmoveX
     },
-    onTouchEnd (e) {
+    onTouchEnd () {
       const container = this.$refs.container
       const scrollWidth = container.scrollWidth - this.$el.clientWidth / 2
       container.style.transition = null
