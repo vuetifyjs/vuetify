@@ -45,16 +45,16 @@ theme(tabs, "tabs")
       flex: 1 0 auto
 
   &--align-with-title
-    .tabs__container div:first-child,
-    .tabs__slider + .tabs__div
+    .tabs__container > div:first-child,
+    .tabs__slider-wrapper + .tabs__div
       margin-left: 56px
       
       @media $display-breakpoints.xs-only
         margin-left: 64px
     
     &.tabs--show-arrows
-      .tabs__container div:first-child,
-      .tabs__slider + .tabs__div
+      .tabs__container > div:first-child,
+      .tabs__slider-wrapper + .tabs__div
         margin-left: 16px
         
         @media $display-breakpoints.xs-only
@@ -150,6 +150,7 @@ theme(tabs, "tabs")
   
   &-wrapper
     bottom: 0
+    margin: 0 !important
     position: absolute
     transition: $primary-transition
 

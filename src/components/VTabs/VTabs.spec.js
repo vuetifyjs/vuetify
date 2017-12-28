@@ -1,25 +1,27 @@
-import { test } from '@util/testing'
+import { test, touch } from '@util/testing'
+import { createRange } from '@util/helpers'
 import VTabs from './VTabs'
 import VTab from './VTab'
 import VTabItem from './VTabItem'
 import VTabsItems from './VTabsItems'
+import VTabsSlider from './VTabsSlider'
 
-const component = {
-  inheritAttrs: false,
+const Component = (items = ['foo', 'bar']) => {
+  return {
+    inheritAttrs: false,
 
-  render (h) {
-    return h(VTabs, {
-      attrs: this.$attrs
-    }, [
-      h(VTab, {
-        props: { href: '#foo' }
-      }),
-      h(VTabsItems, [
-        h(VTabItem, {
-          props: { id: 'foo' }
-        })
+    render (h) {
+      return h(VTabs, {
+        attrs: this.$attrs
+      }, [
+        items.map(item => h(VTab, {
+          props: { href: `#${item}` }
+        })),
+        h(VTabsItems, items.map(item => h(VTabItem, {
+          props: { id: item }
+        })))
       ])
-    ])
+    }
   }
 }
 
@@ -27,7 +29,7 @@ const ssrBootable = () => new Promise(resolve => setTimeout(resolve, 200))
 
 test('VTabs', ({ mount, shallow }) => {
   it('should provide', () => {
-    const wrapper = mount(component)
+    const wrapper = mount(Component())
 
     const tab = wrapper.find(VTab)[0]
     expect(typeof tab.vm.tabClick).toBe('function')
@@ -58,7 +60,7 @@ test('VTabs', ({ mount, shallow }) => {
   })
 
   it('should change tab and content when model changes', async () => {
-    const wrapper = mount(component, {
+    const wrapper = mount(Component(), {
       attachToDocument: true
     })
 
@@ -82,7 +84,7 @@ test('VTabs', ({ mount, shallow }) => {
   })
 
   it('should call slider on application resize', async () => {
-    const wrapper = mount(component)
+    const wrapper = mount(Component())
 
     const tabs = wrapper.find(VTabs)[0]
 
@@ -98,7 +100,7 @@ test('VTabs', ({ mount, shallow }) => {
   })
 
   it('should reset offset on resize', async () => {
-    const wrapper = mount(component, {
+    const wrapper = mount(Component(), {
       attachToDocument: true
     })
 
@@ -115,39 +117,209 @@ test('VTabs', ({ mount, shallow }) => {
     expect(tabs.vm.scrollOffset).toBe(2)
   })
 
-  it('should mount with booted false then activate to remove transition', async () => {
+  it('should update model when route changes', async () => {
+    const $route = { path: 'bar' }
+    const wrapper = mount(Component(), {
+      attachToDocument: true,
+      globals: {
+        $route
+      }
+    })
+
+    await ssrBootable()
+    
+    const tabs = wrapper.find(VTabs)[0]
+    const tab = wrapper.find(VTab)[1]
+    const input = jest.fn()
+
+    tabs.vm.$on('input', input)
+    tab.vm.click(new Event('click'))
+    await wrapper.vm.$nextTick()
+    
+    expect(input).toHaveBeenCalled()
   })
 
-  it('should re-evaluate activeTab when removing tabs', async () => {
+  it('should call method if overflowing', () => {
+    const wrapper = mount(VTabs)
+    const fn = jest.fn()
+
+    wrapper.vm.overflowCheck(null, fn)
+    expect(fn).not.toHaveBeenCalled()
+    wrapper.setData({ isOverflowing: true })
+    wrapper.vm.overflowCheck(null, fn)
+    expect(fn).toHaveBeenCalled()
   })
 
-  it('should not set active index if there are no items', async () => {
+  it('should update scroll and item offset', async () => {
+    const newOffset = jest.fn()
+    const wrapper = mount(VTabs, {
+      props: {
+        showArrows: true
+      }
+    })
+
+    wrapper.setMethods({ newOffset })
+
+    await ssrBootable()
+
+    wrapper.vm.scrollTo('append')
+    wrapper.vm.scrollTo('prepend')
+    expect(newOffset.mock.calls.length).toBe(2)
+
+    wrapper.setMethods({ newOffset: () => ({
+      offset: 5,
+      index: 1
+    })})
+    await wrapper.vm.$nextTick()
+
+    wrapper.vm.scrollTo('prepend')
+    expect(wrapper.vm.scrollOffset).toBe(5)
+    expect(wrapper.vm.itemOffset).toBe(1)
   })
 
-  it('change activeIndex on next', async () => {
+  it('should return the correct height', async () => {
+    const wrapper = mount(VTabs, {
+      propsData: { height: 'auto' }
+    })
+
+    expect('Invalid prop: custom validator check failed for prop "height"').toHaveBeenWarned()
+    wrapper.setProps({ height: null })
+    expect(wrapper.vm.computedHeight).toBe(48)
+    wrapper.setProps({ height: 112 })
+    expect(wrapper.vm.computedHeight).toBe(112)
+    wrapper.setProps({ height: null, iconsAndText: true })
+    expect(wrapper.vm.computedHeight).toBe(72)
   })
 
-  it('change activeIndex on prev', async () => {
+  it('should return lazy value when accessing input', async () => {
+    const wrapper = mount(VTabs)
+
+    expect(wrapper.vm.inputValue).toBe(undefined)
+    wrapper.setData({ lazyValue: 'foo' })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.inputValue).toBe('foo')
   })
 
-  it('should react to window resize', async () => {
+  it('should show tabs arrows', async () => {
+    const wrapper = mount(VTabs, {
+      propsData: { showArrows: true }
+    })
+
+    wrapper.setData({ isOverflowing: true })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.hasClass('tabs--show-arrows')).toBe(true)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should unregister tabs and content', async () => {
+  it('should have a null target with no activeTab', () => {
+    const wrapper = mount(VTabs)
+
+    expect(wrapper.vm.target).toBe(null)
   })
 
-  it('should select previous sibling if active tab is removed', async () => {
+  it('should not conditionally render append and prepend icons', async () => {
+    const scrollTo = jest.fn()
+    const wrapper = mount(VTabs, {
+      attachToDocument: true,
+      propsData: { showArrows: true }
+    })
+
+    expect(wrapper.vm.genIcon('prepend')).toBe(null)
+
+    // Mock display state
+    wrapper.setData({ isOverflowing: true })
+    wrapper.vm.$vuetify.breakpoint.width = 800
+    await ssrBootable()
+    wrapper.setProps({ mobileBreakPoint: 1200 })
+
+    expect(wrapper.vm.genIcon('prepend')).toBeTruthy()
+    await wrapper.vm.$nextTick()
+
+    wrapper.setMethods({ scrollTo })
+
+    const next = wrapper.find('.icon--append')[0]
+    next.trigger('click')
+    await wrapper.vm.$nextTick()
+    expect(scrollTo).toHaveBeenCalledWith('append')
   })
 
-  it('should toggle content when activeIndex changes', async () => {
+  it('should call on touch methods', async () => {
+    const wrapper = mount(VTabs, {
+      attachToDocument: true
+    })
+
+    wrapper.setData({ isOverflowing: true })
+
+    const onTouch = jest.fn()
+    wrapper.setMethods({
+      onTouchStart: onTouch,
+      onTouchMove: onTouch,
+      onTouchEnd: onTouch
+    })
+    await ssrBootable()
+
+    const tabsWrapper = wrapper.find('.tabs__wrapper')[0]
+
+    touch(tabsWrapper).start(0, 0)
+    touch(tabsWrapper).end(0, 0)
+    touch(tabsWrapper).move(15, 15)
+    expect(onTouch.mock.calls.length).toBe(3)
   })
 
-  it('should not change activeIndex if no tabs', () => {
+  it('should use a slotted slider', () => {
+    const wrapper = mount(VTabs, {
+      slots: {
+        default: [{
+          name: 'v-tabs-slider',
+          render: h => h(VTabsSlider, {
+            props: { color: 'pink' }
+          })
+        }]
+      }
+    })
+
+    const slider = wrapper.find(VTabsSlider)[0]
+    expect(slider.hasClass('pink')).toBe(true)
   })
 
-  it('should validate height is a number and have default values', async () => {
+  it('should call append or prepend offset method', () => {
+    const wrapper = mount(VTabs)
+    const offsetFn = jest.fn()
+
+    wrapper.setMethods({
+      newOffsetPrepend: offsetFn,
+      newOffsetAppend: offsetFn
+    })
+
+    wrapper.vm.newOffset('append')
+    wrapper.vm.newOffset('prepend')
+
+    expect(offsetFn.mock.calls.length).toBe(2)
   })
 
-  it('should set overflowing on resize', async () => {
+  it('should return object or null when calling new offset', async () => {
+    const wrapper = mount(VTabs)
+
+    await ssrBootable()
+
+    // Mocking container and children
+    const appendOffset = wrapper.vm.newOffsetAppend(
+      { clientWidth: 400 },
+      createRange(25).map(x => ({ clientWidth: 50 })),
+      0
+    )
+    expect(appendOffset).toEqual({ offset: 400, index: 8 })
+
+    // Mock offset
+    wrapper.setData({ itemOffset: 10 })
+
+    // Mocking container and children
+    const prependOffset = wrapper.vm.newOffsetPrepend(
+      { clientWidth: 200 },
+      createRange(25).map(x => ({ clientWidth: 50 })),
+      50
+    )
+
+    expect(prependOffset).toEqual({ offset: -150, index: 8 })
   })
 })

@@ -65,7 +65,6 @@ export default {
       content: [],
       bar: [],
       isBooted: false,
-      defaultColor: 'white',
       isOverflowing: false,
       itemOffset: 0,
       lazyValue: this.value,
@@ -119,7 +118,12 @@ export default {
       this.isOverflowing && fn(e)
     },
     scrollTo (direction) {
-      const { offset, index } = this.newOffset(direction)
+      const newOffset = this.newOffset(direction)
+
+      if (!newOffset) return
+
+      const { offset, index } = newOffset
+
       this.scrollOffset = offset
       this.itemOffset = index
     },
