@@ -45,20 +45,11 @@ theme(tabs, "tabs")
       flex: 1 0 auto
 
   &--align-with-title
-    .tabs__container > div:first-child,
-    .tabs__slider-wrapper + .tabs__div
-      margin-left: 56px
-      
+    .tabs__container
+      padding-left: 16px
+
       @media $display-breakpoints.xs-only
-        margin-left: 64px
-    
-    &.tabs--show-arrows
-      .tabs__container > div:first-child,
-      .tabs__slider-wrapper + .tabs__div
-        margin-left: 16px
-        
-        @media $display-breakpoints.xs-only
-          margin-left: 24px
+        padding-left: 24px
 
   &--fixed-tabs,
   &--icons-and-text
@@ -83,13 +74,13 @@ theme(tabs, "tabs")
   &--centered,
   &--fixed-tabs
     .tabs__container
-      div:first-child
+      > div:first-child
         margin-left: auto
         
-      div:last-child
+      > div:last-child
         margin-right: auto
         
-      .tabs__slider + .tabs__div
+      .tabs__slider-wrapper + .tabs__div
         margin-left: auto
       
   &--grow
