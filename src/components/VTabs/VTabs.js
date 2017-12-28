@@ -3,6 +3,7 @@ require('../../stylus/components/_tabs.styl')
 
 // Component imports
 import VIcon from '../VIcon'
+import VTabsItems from './VTabsItems'
 import VTabsSlider from './VTabsSlider'
 
 // Component level mixins
@@ -24,14 +25,12 @@ import {
 import Resize from '../../directives/resize'
 import Touch from '../../directives/touch'
 
-// Helpers
-import { filterChildren } from '../../util/helpers'
-
 export default {
   name: 'v-tabs',
 
   components: {
     VIcon,
+    VTabsItems,
     VTabsSlider
   },
 
@@ -141,6 +140,32 @@ export default {
 
       this.inputValue = this.tabs[activeIndex > -1 ? activeIndex : 0].id
     },
+    parseNodes () {
+      const item = []
+      const items = []
+      const slider = []
+      const tab = []
+      const length = (this.$slots.default || []).length
+
+      for (let i = 0; i < length; i++) {
+        const vnode = this.$slots.default[i]
+
+        if (vnode.componentOptions) {
+          switch (vnode.componentOptions.Ctor.options.name) {
+            case 'v-tab': tab.push(vnode)
+              break
+            case 'v-tabs-slider': slider.push(vnode)
+              break
+            case 'v-tabs-items': items.push(vnode)
+              break
+            case 'v-tab-item': item.push(vnode)
+              break
+          }
+        }
+      }
+
+      return { tab, slider, items, item }
+    },
     register (options) {
       this.tabs.push(options)
     },
@@ -166,6 +191,8 @@ export default {
   },
 
   render (h) {
+    const { tab, slider, items, item } = this.parseNodes()
+
     return h('div', {
       staticClass: 'tabs',
       'class': this.addBackgroundColorClassChecks(this.classes),
@@ -177,8 +204,13 @@ export default {
       }]
     }, [
       this.genTransition('prepend'),
-      this.genWrapper(),
-      filterChildren(this.$slots.default, 'v-tabs-items'),
+      this.genWrapper(
+        this.genContainer([
+          this.genSlider(slider),
+          tab
+        ])
+      ),
+      this.genItems(items, item),
       this.genTransition('append')
     ])
   }

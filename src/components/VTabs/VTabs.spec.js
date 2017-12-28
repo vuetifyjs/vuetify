@@ -352,4 +352,20 @@ test('VTabs', ({ mount, shallow }) => {
     wrapper.vm.onTouchEnd()
     expect(wrapper.vm.scrollOffset).toBe(0)
   })
+
+  it('should generate a v-tabs-items if none present and has v-tab-item', async () => {
+    const wrapper = mount(VTabs, {
+      propsData: { value: 'foo' },
+      slots: {
+        default: [{
+          name: 'v-tab-item',
+          render: h => h('div')
+        }]
+      }
+    })
+
+    await ssrBootable()
+
+    expect(wrapper.find(VTabsItems).length).toBe(1)
+  })
 })

@@ -1,6 +1,3 @@
-// Helpers
-import { filterChildren } from '../../../util/helpers'
-
 /**
  * Tabs generators
  *
@@ -8,15 +5,12 @@ import { filterChildren } from '../../../util/helpers'
  */
 export default {
   methods: {
-    genContainer () {
+    genContainer (items) {
       return this.$createElement('div', {
         staticClass: 'tabs__container',
         style: this.containerStyles,
         ref: 'container'
-      }, [
-        this.genSlider(),
-        filterChildren(this.$slots.default, 'v-tab')
-      ])
+      }, items)
     },
     genIcon (direction) {
       if ((!this[`${direction}IconVisible`] &&
@@ -39,12 +33,18 @@ export default {
         }
       }, this[`${direction}Icon`])
     },
+    genItems (items, item) {
+      if (items.length > 0) return items
+      if (!item.length) return null
+
+      return this.$createElement('v-tabs-items', item)
+    },
     genTransition (direction) {
       return this.$createElement('transition', {
         props: { name: 'fade-transition' }
       }, [this.genIcon(direction)])
     },
-    genWrapper () {
+    genWrapper (items) {
       return this.$createElement('div', {
         staticClass: 'tabs__wrapper',
         directives: [{
@@ -55,12 +55,11 @@ export default {
             end: e => this.overflowCheck(e, this.onTouchEnd)
           }
         }]
-      }, [this.genContainer()])
+      }, [items])
     },
-    genSlider () {
-      let slider = filterChildren(this.$slots.default, 'v-tabs-slider')
-      if (!slider.length) {
-        slider = [this.$createElement('v-tabs-slider', {
+    genSlider (items) {
+      if (!items.length) {
+        items = [this.$createElement('v-tabs-slider', {
           props: { color: this.sliderColor }
         })]
       }
@@ -68,7 +67,7 @@ export default {
       return this.$createElement('div', {
         staticClass: 'tabs__slider-wrapper',
         style: this.sliderStyles
-      }, slider)
+      }, items)
     }
   }
 }
