@@ -1,8 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VSelect should escape items in menu 1`] = `
+
+<div class="list__tile__title">
+  &lt;strong&gt;foo&lt;/strong&gt;
+</div>
+
+`;
+
+exports[`VSelect should escape items in menu 2`] = `
+
+<div class="list__tile__title">
+  &lt;
+  <span class="list__tile__mask">
+    str
+  </span>
+  ong&gt;foo&lt;/strong&gt;
+</div>
+
+`;
+
 exports[`VSelect should render buttons correctly when using items array with segmented prop 1`] = `
 
 <div tabindex="0"
+     data-uid="34"
      role="combobox"
      class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select input-group--segmented input-group--single-line primary--text"
 >
@@ -34,12 +55,9 @@ exports[`VSelect should render buttons correctly when using items array with seg
              style="height: auto;"
              data-ripple="false"
         >
-          <ul data-uid="38"
-              class="list"
-          >
+          <ul class="list">
             <li>
-              <a href="javascript:;"
-                 class="list__tile list__tile--link list__tile--active primary--text"
+              <a class="list__tile list__tile--link list__tile--active primary--text"
                  data-ripple="true"
               >
                 <div class="list__tile__content">
@@ -60,8 +78,7 @@ exports[`VSelect should render buttons correctly when using items array with seg
     </i>
   </div>
   <div class="input-group__details">
-    <div class="input-group__messages">
-    </div>
+    <!---->
   </div>
 </div>
 
@@ -70,6 +87,7 @@ exports[`VSelect should render buttons correctly when using items array with seg
 exports[`VSelect should render buttons correctly when using slot with segmented prop 1`] = `
 
 <div tabindex="0"
+     data-uid="44"
      role="combobox"
      class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select input-group--segmented input-group--single-line primary--text"
 >
@@ -96,12 +114,9 @@ exports[`VSelect should render buttons correctly when using slot with segmented 
              style="height: auto;"
              data-ripple="false"
         >
-          <ul data-uid="48"
-              class="list"
-          >
+          <ul class="list">
             <li>
-              <a href="javascript:;"
-                 class="list__tile list__tile--link list__tile--active primary--text"
+              <a class="list__tile list__tile--link list__tile--active primary--text"
                  data-ripple="true"
               >
                 <div class="list__tile__content">
@@ -122,8 +137,7 @@ exports[`VSelect should render buttons correctly when using slot with segmented 
     </i>
   </div>
   <div class="input-group__details">
-    <div class="input-group__messages">
-    </div>
+    <!---->
   </div>
 </div>
 

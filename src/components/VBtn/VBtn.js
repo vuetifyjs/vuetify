@@ -1,22 +1,22 @@
 require('../../stylus/components/_buttons.styl')
 
 import Colorable from '../../mixins/colorable'
-import Contextualable from '../../mixins/contextualable'
 import Positionable from '../../mixins/positionable'
 import Routable from '../../mixins/routable'
 import Themeable from '../../mixins/themeable'
 import { factory as ToggleableFactory } from '../../mixins/toggleable'
+import { inject as RegistrableInject } from '../../mixins/registrable'
 
 export default {
   name: 'v-btn',
 
   mixins: [
     Colorable,
-    Contextualable,
     Routable,
     Positionable,
     Themeable,
-    ToggleableFactory('inputValue')
+    ToggleableFactory('inputValue'),
+    RegistrableInject('buttonGroup')
   ],
 
   props: {
@@ -137,11 +137,15 @@ export default {
   },
 
   mounted () {
-    Object.keys(Contextualable.props).forEach(prop => {
-      if (this[prop]) {
-        console.warn(`Context prop '${prop}' for VBtn component has been deprecated. Use 'color' prop instead.`)
-      }
-    })
+    if (this.buttonGroup) {
+      this.buttonGroup.register(this)
+    }
+  },
+
+  beforeDestroy () {
+    if (this.buttonGroup) {
+      this.buttonGroup.unregister(this)
+    }
   },
 
   render (h) {

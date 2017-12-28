@@ -1,5 +1,15 @@
+// Components
+import VJumbotron from '../VJumbotron'
+
+// Mixins
+import { inject as RegistrableInject } from '../../mixins/registrable'
+
 export default {
   name: 'v-carousel-item',
+
+  mixins: [RegistrableInject('carousel', 'v-carousel-item', 'v-carousel')],
+
+  inheritAttrs: false,
 
   data () {
     return {
@@ -9,16 +19,10 @@ export default {
   },
 
   props: {
-    src: {
-      type: String,
-      required: true
-    },
-
     transition: {
       type: String,
       default: 'tab-transition'
     },
-
     reverseTransition: {
       type: String,
       default: 'tab-reverse-transition'
@@ -28,12 +32,6 @@ export default {
   computed: {
     computedTransition () {
       return this.reverse ? this.reverseTransition : this.transition
-    },
-
-    styles () {
-      return {
-        backgroundImage: `url(${this.src})`
-      }
     }
   },
 
@@ -44,21 +42,26 @@ export default {
     }
   },
 
+  mounted () {
+    this.carousel.register(this._uid, this.open)
+  },
+
+  beforeDestroy () {
+    this.carousel.unregister(this._uid, this.open)
+  },
+
   render (h) {
-    const item = h('div', {
-      class: {
-        'carousel__item': true,
-        'reverse': this.reverse
+    const item = h(VJumbotron, {
+      props: {
+        ...this.$attrs,
+        height: '100%'
       },
-      style: this.styles,
       on: this.$listeners,
-      directives: [
-        {
-          name: 'show',
-          value: this.active
-        }
-      ]
-    }, [this.$slots.default])
+      directives: [{
+        name: 'show',
+        value: this.active
+      }]
+    }, this.$slots.default)
 
     return h('transition', { props: { name: this.computedTransition } }, [item])
   }

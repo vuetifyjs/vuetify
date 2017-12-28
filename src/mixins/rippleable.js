@@ -12,17 +12,17 @@ export default {
   },
 
   methods: {
-    genRipple () {
-      return this.$createElement('div', {
-        'class': this.rippleClasses || 'input-group--selection-controls__ripple',
-        on: Object.assign({
-          click: this.toggle
-        }, this.$listeners),
-        directives: [{
-          name: 'ripple',
-          value: this.ripple && !this.disabled && { center: true }
-        }]
+    genRipple (data = { directives: [] }) {
+      data.class = this.rippleClasses || 'input-group--selection-controls__ripple'
+      data.directives.push({
+        name: 'ripple',
+        value: this.ripple && !this.disabled && { center: true }
       })
+      data.on = Object.assign({
+        click: this.toggle
+      }, this.$listeners)
+
+      return this.$createElement('div', data)
     }
   }
 }

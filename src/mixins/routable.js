@@ -15,7 +15,7 @@ export default {
     to: [String, Object],
     nuxt: Boolean,
     replace: Boolean,
-    ripple: Boolean,
+    ripple: [Boolean, Object],
     tag: String,
     target: String
   },
@@ -57,17 +57,19 @@ export default {
         }
 
         tag = this.nuxt ? 'nuxt-link' : 'router-link'
-        data.props.to = this.to
-        data.props.exact = exact
-        data.props.activeClass = activeClass
-        data.props.exactActiveClass = exactActiveClass
-        data.props.append = this.append
-        data.props.replace = this.replace
+        Object.assign(data.props, {
+          to: this.to,
+          exact,
+          activeClass,
+          exactActiveClass,
+          append: this.append,
+          replace: this.replace
+        })
       } else {
         tag = this.href && 'a' || this.tag || 'a'
 
         if (tag === 'a') {
-          data.attrs.href = this.href || 'javascript:;'
+          if (this.href) data.attrs.href = this.href
           if (this.target) data.attrs.target = this.target
         }
       }

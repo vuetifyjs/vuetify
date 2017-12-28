@@ -10,6 +10,11 @@ function style (el, value) {
 const RippleDataAttribute = 'data-ripple'
 
 const ripple = {
+  /**
+   * @param {Event} e
+   * @param {Element} el
+   * @param {{ class?: string, center?: boolean }} [value={}]
+   */
   show: (e, el, { value = {} }) => {
     if (el.getAttribute(RippleDataAttribute) !== 'true') {
       return

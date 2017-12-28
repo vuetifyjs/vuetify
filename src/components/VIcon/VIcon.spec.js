@@ -1,8 +1,7 @@
-import VIcon from '~components/VIcon'
-import { test, functionalContext } from '~util/testing'
-import { mount } from 'avoriaz'
+import VIcon from '@components/VIcon'
+import { test, functionalContext } from '@util/testing'
 
-test('VIcon.js', () => {
+test('VIcon.js', ({ mount, compileToFunctions }) => {
   it('should render component', () => {
     const context = functionalContext({}, 'add')
     const wrapper = mount(VIcon, context)
@@ -26,25 +25,34 @@ test('VIcon.js', () => {
     expect(wrapper.element.classList).toContain('icon--disabled')
   })
 
-  it('should render a large size component', () => {
-    const context = functionalContext({ props: { large: true } }, 'add')
+  it('should not set font size if none provided', () => {
+    const context = functionalContext({}, 'add')
     const wrapper = mount(VIcon, context)
 
-    expect(wrapper.element.classList).toContain('icon--large')
+    expect(wrapper.element.style.fontSize).toBe('')
   })
 
-  it('should render a medium size component', () => {
-    const context = functionalContext({ props: { medium: true } }, 'add')
-    const wrapper = mount(VIcon, context)
+  it('should render a mapped size', () => {
+    const SIZE_MAP = {
+      small: '16px',
+      medium: '28px',
+      large: '36px',
+      xLarge: '40px'
+    }
 
-    expect(wrapper.element.classList).toContain('icon--medium')
+    Object.keys(SIZE_MAP).forEach(size => {
+      const context = functionalContext({ props: { [size]: true } }, 'add')
+      const wrapper = mount(VIcon, context)
+
+      expect(wrapper.element.style.fontSize).toBe(SIZE_MAP[size])
+    })
   })
 
-  it('should render a xLarge size component', () => {
-    const context = functionalContext({ props: { xLarge: true } }, 'add')
+  it('should render a specific size', () => {
+    const context = functionalContext({ props: { size: '112px' } }, 'add')
     const wrapper = mount(VIcon, context)
 
-    expect(wrapper.element.classList).toContain('icon--x-large')
+    expect(wrapper.element.style.fontSize).toBe('112px')
   })
 
   it('should render a left aligned component', () => {
@@ -59,6 +67,13 @@ test('VIcon.js', () => {
     const wrapper = mount(VIcon, context)
 
     expect(wrapper.element.classList).toContain('icon--right')
+  })
+
+  it('should render a component with aria-hidden attr', () => {
+    const context = functionalContext({ attrs: { 'aria-hidden': 'foo' } }, 'add')
+    const wrapper = mount(VIcon, context)
+
+    expect(wrapper.element.getAttribute('aria-hidden')).toBe('foo')
   })
 
   it('should allow third-party icons when using <icon>- prefix', () => {
@@ -85,5 +100,23 @@ test('VIcon.js', () => {
 
     expect(wrapper.text()).toBe('')
     expect(wrapper.element.className).toBe('fa icon fa-home')
+  })
+
+  it('set font size from helper prop', async () => {
+    const iconFactory = size => mount(VIcon, functionalContext({
+      props: { [size]: true }
+    }))
+
+    const small = iconFactory('small')
+    expect(small.html()).toMatchSnapshot()
+
+    const medium = iconFactory('medium')
+    expect(medium.html()).toMatchSnapshot()
+
+    const large = iconFactory('large')
+    expect(large.html()).toMatchSnapshot()
+
+    const xLarge = iconFactory('xLarge')
+    expect(xLarge.html()).toMatchSnapshot()
   })
 })

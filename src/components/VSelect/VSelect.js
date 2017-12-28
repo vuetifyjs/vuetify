@@ -1,10 +1,13 @@
+// Styles
 require('../../stylus/components/_text-fields.styl')
 require('../../stylus/components/_input-groups.styl')
 require('../../stylus/components/_select.styl')
 
 // Components
+import VBtn from '../VBtn'
 import VCard from '../VCard'
 import VCheckbox from '../VCheckbox'
+import VChip from '../VChip'
 import {
   VList,
   VListTile,
@@ -13,7 +16,6 @@ import {
   VListTileTitle
 } from '../VList'
 import VMenu from '../VMenu'
-import VBtn from '../VBtn'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
@@ -21,16 +23,20 @@ import Dependent from '../../mixins/dependent'
 import Filterable from '../../mixins/filterable'
 import Input from '../../mixins/input'
 import Maskable from '../../mixins/maskable'
+import Soloable from '../../mixins/soloable'
 
 // Component level mixins
 import Autocomplete from './mixins/select-autocomplete'
+import Computed from './mixins/select-computed'
+import Events from './mixins/select-events'
 import Generators from './mixins/select-generators'
+import Helpers from './mixins/select-helpers'
+import Menu from './mixins/select-menu'
+import Props from './mixins/select-props'
+import Watchers from './mixins/select-watchers'
 
 // Directives
 import ClickOutside from '../../directives/click-outside'
-
-// Helpers
-import { getObjectValueByPath } from '../../util/helpers'
 
 export default {
   name: 'v-select',
@@ -40,6 +46,7 @@ export default {
   components: {
     VCard,
     VCheckbox,
+    VChip,
     VList,
     VListTile,
     VListTileAction,
@@ -53,11 +60,29 @@ export default {
     ClickOutside
   },
 
-  mixins: [Autocomplete, Colorable, Dependent, Filterable, Generators, Input, Maskable],
+  mixins: [
+    Autocomplete,
+    Colorable,
+    Dependent,
+    Events,
+    Filterable,
+    Generators,
+    Helpers,
+    Input,
+    Maskable,
+    Menu,
+    Props,
+    Soloable,
+    Watchers,
+    // Input and Computed both
+    // contain isDirty props
+    // last gets merged in
+    Computed
+  ],
 
   data () {
     return {
-      cachedItems: [],
+      cachedItems: this.cacheItems ? this.items : [],
       content: {},
       defaultColor: 'primary',
       inputValue: (this.multiple || this.tags) && !this.value ? [] : this.value,
@@ -70,285 +95,6 @@ export default {
       selectedIndex: -1,
       selectedItems: [],
       shouldBreak: false
-    }
-  },
-
-  props: {
-    appendIcon: {
-      type: String,
-      default: 'arrow_drop_down'
-    },
-    appendIconCb: Function,
-    auto: Boolean,
-    autocomplete: Boolean,
-    browserAutocomplete: {
-      type: String,
-      default: 'on'
-    },
-    cacheItems: Boolean,
-    chips: Boolean,
-    clearable: Boolean,
-    combobox: Boolean,
-    debounceSearch: {
-      type: [Number, String],
-      default: 200
-    },
-    editable: Boolean,
-    hideSelected: Boolean,
-    items: {
-      type: Array,
-      default: () => []
-    },
-    itemAvatar: {
-      type: String,
-      default: 'avatar'
-    },
-    itemDisabled: {
-      type: String,
-      default: 'disabled'
-    },
-    itemText: {
-      type: String,
-      default: 'text'
-    },
-    itemValue: {
-      type: String,
-      default: 'value'
-    },
-    maxHeight: {
-      type: [Number, String],
-      default: 300
-    },
-    minWidth: {
-      type: [Boolean, Number, String],
-      default: false
-    },
-    multiple: Boolean,
-    multiLine: Boolean,
-    overflow: Boolean,
-    returnObject: Boolean,
-    searchInput: {
-      default: null
-    },
-    segmented: Boolean,
-    singleLine: Boolean,
-    solo: Boolean,
-    tags: Boolean
-  },
-
-  computed: {
-    classes () {
-      const classes = {
-        'input-group--text-field input-group--select': true,
-        'input-group--auto': this.auto,
-        'input-group--overflow': this.overflow,
-        'input-group--segmented': this.segmented,
-        'input-group--editable': this.editable,
-        'input-group--autocomplete': this.isAutocomplete,
-        'input-group--single-line': this.singleLine || this.isDropdown,
-        'input-group--multi-line': this.multiLine,
-        'input-group--chips': this.chips,
-        'input-group--solo': this.solo,
-        'input-group--multiple': this.multiple
-      }
-
-      if (this.hasError) {
-        classes['error--text'] = true
-      } else {
-        return this.addTextColorClassChecks(classes)
-      }
-
-      return classes
-    },
-    computedContentClass () {
-      const children = [
-        'menu__content--select',
-        this.auto ? 'menu__content--auto' : '',
-        this.isDropdown ? 'menu__content--dropdown' : '',
-        this.isAutocomplete ? 'menu__content--autocomplete' : ''
-      ]
-
-      return children.join(' ')
-    },
-    computedItems () {
-      return this.filterDuplicates(this.cachedItems.concat(this.items))
-    },
-    /**
-     * The range of the current input text
-     *
-     * @return {Number}
-     */
-    currentRange () {
-      return this.getText(this.selectedItem || '').length
-    },
-    filteredItems () {
-      // If we are not actively filtering
-      // Show all available items
-      const items = this.isNotFiltering
-        ? this.computedItems
-        : this.filterSearch()
-
-      return !this.auto ? items.slice(0, this.lastItem) : items
-    },
-    hideSelections () {
-      return this.isAutocomplete &&
-        !this.isMultiple &&
-        this.isFocused &&
-        !this.chips
-    },
-    isNotFiltering () {
-      return this.isAutocomplete &&
-        this.isDirty &&
-        this.searchValue === this.getText(this.selectedItem)
-    },
-    isHidingSelected () {
-      return this.hideSelected && this.isAutocomplete && this.isMultiple
-    },
-    isAutocomplete () {
-      return this.autocomplete || this.editable || this.tags || this.combobox
-    },
-    isDirty () {
-      return this.selectedItems.length > 0
-    },
-    isDropdown () {
-      return this.segmented || this.overflow || this.editable || this.solo
-    },
-    isMultiple () {
-      return this.multiple || this.tags
-    },
-    isAnyValueAllowed () {
-      return this.tags || this.combobox
-    },
-    searchValue: {
-      get () { return this.lazySearch },
-      set (val) {
-        if (!this.isAutocomplete ||
-          this.selectedIndex > -1
-        ) return
-
-        this.lazySearch = val
-
-        clearTimeout(this.searchTimeout)
-
-        this.searchTimeout = setTimeout(() => {
-          this.$emit('update:searchInput', val)
-        }, this.debounceSearch)
-      }
-    },
-    selectedItem () {
-      if (this.isMultiple) return null
-
-      return this.selectedItems.find(i => (
-        this.getValue(i) === this.getValue(this.inputValue)
-      )) || null
-    }
-  },
-
-  watch: {
-    inputValue (val) {
-      // Populate selected items
-      this.genSelectedItems(val)
-
-      // Only fire an update
-      // if values do not
-      // match
-      val !== this.value && this.$emit('input', val)
-
-      // When inputValue is changed
-      // and combobox is true set
-      // menu property to false
-      if (this.combobox) this.menuIsActive = false
-    },
-    isActive (val) {
-      if (val) {
-        if (!this.chips) this.searchValue = this.getText(this.selectedItem)
-        return
-      }
-
-      if (this.tags && this.searchValue) {
-        this.updateTags(this.searchValue)
-      }
-
-      // Only set search value if
-      // there is a value to set
-      this.searchValue && (this.searchValue = null)
-      this.menuIsActive = false
-      this.isFocused = false
-      this.selectedIndex = -1
-
-      // this.lastItem += !val ? 20 : 0
-    },
-    isBooted () {
-      this.$nextTick(() => {
-        if (this.content && this.content.addEventListener) {
-          this.content.addEventListener('scroll', this.onScroll, false)
-        }
-      })
-    },
-    items (val) {
-      if (this.cacheItems) {
-        this.cachedItems = this.filterDuplicates(this.cachedItems.concat(val))
-      }
-
-      this.resetMenuIndex()
-
-      // Tags and combobox should not
-      // pre-select the first entry
-      if (this.searchValue && !this.isAnyValueAllowed) {
-        this.$nextTick(() => this.setMenuIndex(0))
-      }
-
-      this.genSelectedItems()
-    },
-    menuIsActive (val) {
-      if (!val) return
-
-      this.isBooted = true
-      this.isActive = true
-    },
-    isMultiple (val) {
-      this.inputValue = val ? [] : null
-    },
-    searchInput (val) {
-      this.searchValue = val
-    },
-    searchValue (val, prev) {
-      // Wrap input to next line if overflowing
-      if (this.$refs.input.scrollWidth > this.$refs.input.clientWidth) {
-        this.shouldBreak = true
-        this.$nextTick(this.$refs.menu.updateDimensions)
-      } else if (val === null) {
-        this.shouldBreak = false
-      }
-
-      // Activate menu if inactive and searching
-      if (this.isActive &&
-        !this.menuIsActive &&
-        val !== this.getValue(this.selectedItem)
-      ) {
-        this.menuIsActive = true
-      }
-
-      // Only reset list index
-      // if typing in search
-      val || prev && this.resetMenuIndex()
-
-      this.$nextTick(() => {
-        if (val && !this.isAnyValueAllowed) {
-          this.setMenuIndex(0)
-        }
-      })
-    },
-    selectedItems () {
-      clearTimeout(this.searchTimeout)
-
-      if (this.isAutocomplete) {
-        this.$nextTick(this.$refs.menu.updateDimensions)
-      }
-    },
-    value (val) {
-      this.inputValue = val
-      this.validate()
     }
   },
 
@@ -373,11 +119,6 @@ export default {
   },
 
   methods: {
-    blur () {
-      this.$emit('blur')
-      if (this.isAutocomplete && this.$refs.input) this.$refs.input.blur()
-      this.$nextTick(() => (this.isActive = false))
-    },
     changeSelectedIndex (keyCode) {
       // backspace, left, right, delete
       if (![8, 37, 39, 46].includes(keyCode)) return
@@ -411,90 +152,28 @@ export default {
         this.selectedIndex = newIndex
       }
     },
-    compareObjects (a, b) {
-      const aProps = Object.keys(a)
-      const bProps = Object.keys(b)
-
-      if (aProps.length !== bProps.length) return false
-
-      for (let i = 0, length = aProps.length; i < length; i++) {
-        const propName = aProps[i]
-
-        if (a[propName] !== b[propName]) return false
-      }
-
-      return true
-    },
     filterDuplicates (arr) {
-      const values = arr.map(this.getValue)
-      return arr.filter((el, i) => i === values.indexOf(values[i]))
-    },
-    focus () {
-      this.isActive = true
-      this.isFocused = true
+      const uniqueValues = new Map()
+      for (let index = 0; index < arr.length; ++index) {
+        const item = arr[index]
+        const val = this.getValue(item)
 
-      if (this.$refs.input && this.isAutocomplete) {
-        this.$refs.input.focus()
-        this.$nextTick(() => {
-          this.$refs.input.select()
-          this.shouldBreak && (
-            this.$refs.input.scrollLeft = this.$refs.input.scrollWidth
-          )
-        })
-      } else {
-        this.$el.focus()
+        !uniqueValues.has(val) && uniqueValues.set(val, item)
       }
-
-      this.$emit('focus')
+      return Array.from(uniqueValues.values())
     },
     genDirectives () {
       return [{
         name: 'click-outside',
         value: e => {
           return (
-            this.$refs.menu &&
-            !this.$refs.menu.$refs.content.contains(e.target)
+            !!this.content &&
+            !this.content.contains(e.target) &&
+            !!this.$el &&
+            !this.$el.contains(e.target)
           )
         }
       }]
-    },
-    genListeners () {
-      const listeners = Object.assign({}, this.$listeners)
-      delete listeners.input
-
-      return {
-        ...listeners,
-        click: () => {
-          if (this.disabled || this.readonly) return
-          this.showMenuItems()
-          this.selectedIndex = -1
-        },
-        focus: () => {
-          if (this.disabled || this.readonly) return
-
-          !this.isFocused && this.focus()
-        },
-        keydown: this.onKeyDown // Located in mixins/select-autocomplete.js
-      }
-    },
-    genLabel () {
-      const singleLine = this.singleLine || this.isDropdown
-      if (singleLine && this.isDirty ||
-        singleLine && this.isFocused && this.searchValue
-      ) return null
-
-      const data = {}
-
-      if (this.id) data.attrs = { for: this.id }
-
-      return this.$createElement('label', data, this.$slots.label || this.label)
-    },
-    getPropertyFromItem (item, field) {
-      if (item !== Object(item)) return item
-
-      const value = getObjectValueByPath(item, field)
-
-      return typeof value === 'undefined' ? item : value
     },
     genSelectedItems (val = this.inputValue) {
       // If we are using tags, don't filter results
@@ -502,21 +181,14 @@ export default {
 
       // Combobox is the single version
       // of a taggable select element
-      if (this.combobox) return (this.selectedItems = val ? [val] : [])
+      if (this.combobox) return (this.selectedItems = val != null ? [val] : [])
 
       let selectedItems = this.computedItems.filter(i => {
         if (!this.isMultiple) {
           return this.getValue(i) === this.getValue(val)
         } else {
           // Always return Boolean
-          return val.find((j) => {
-            const a = this.getValue(j)
-            const b = this.getValue(i)
-
-            if (a !== Object(a)) return a === b
-
-            return this.compareObjects(a, b)
-          }) !== undefined
+          return this.findExistingItem(i) > -1
         }
       })
 
@@ -529,24 +201,24 @@ export default {
 
       this.selectedItems = selectedItems
     },
-    getText (item) {
-      return this.getPropertyFromItem(item, this.itemText)
-    },
-    getValue (item) {
-      return this.getPropertyFromItem(item, this.itemValue)
-    },
     clearableCallback () {
       const inputValue = this.isMultiple ? [] : null
 
       this.inputValue = inputValue
-      this.searchValue = null
       this.$emit('change', inputValue)
       this.genSelectedItems()
-      setTimeout(this.showMenu, 0)
-    },
-    showMenu () {
-      this.showMenuItems()
-      this.isAutocomplete && this.focus()
+
+      // When input is cleared
+      // reset search value and
+      // re-focus the input
+      setTimeout(() => {
+        this.searchValue = null
+        this.focusInput()
+      }, 0)
+
+      if (this.openOnClear) {
+        setTimeout(this.showMenu, 50)
+      }
     },
     onScroll () {
       if (!this.isActive) {
@@ -565,6 +237,10 @@ export default {
         }
       }
     },
+    findExistingItem (item) {
+      const itemValue = this.getValue(item)
+      return this.inputValue.findIndex(i => this.valueComparator(this.getValue(i), itemValue))
+    },
     selectItem (item) {
       if (!this.isMultiple) {
         this.inputValue = this.returnObject ? item : this.getValue(item)
@@ -572,14 +248,7 @@ export default {
       } else {
         const selectedItems = []
         const inputValue = this.inputValue.slice()
-        const i = this.inputValue.findIndex((i) => {
-          const a = this.getValue(i)
-          const b = this.getValue(item)
-
-          if (a !== Object(a)) return a === b
-
-          return this.compareObjects(a, b)
-        })
+        const i = this.findExistingItem(item)
 
         i !== -1 && inputValue.splice(i, 1) || inputValue.push(item)
         this.inputValue = inputValue.map((i) => {
@@ -590,7 +259,9 @@ export default {
         this.selectedItems = selectedItems
       }
 
-      this.searchValue = !this.isMultiple && !this.chips
+      this.searchValue = !this.isMultiple &&
+        !this.chips &&
+        !this.$scopedSlots.selection
         ? this.getText(this.selectedItem)
         : null
 
@@ -605,7 +276,7 @@ export default {
       // refocus the input and
       // reset the caret pos
       this.$nextTick(() => {
-        this.focus()
+        this.focusInput()
         this.setCaretPosition(this.currentRange)
 
         requestAnimationFrame(() => {
@@ -614,11 +285,6 @@ export default {
           }
         })
       })
-    },
-    showMenuItems () {
-      this.isActive = true
-      this.menuIsActive = true
-      this.chips && this.resetMenuIndex()
     }
   },
 
@@ -626,6 +292,7 @@ export default {
     const data = {
       attrs: {
         tabindex: this.isAutocomplete || this.disabled ? -1 : this.tabindex,
+        'data-uid': this._uid,
         ...(this.isAutocomplete ? null : this.$attrs),
         role: this.isAutocomplete ? null : 'combobox'
       }
@@ -637,17 +304,15 @@ export default {
     } else {
       data.on = {
         click: () => {
-          if (this.disabled || this.readonly) return
+          if (this.disabled || this.readonly || this.isFocused) return
 
-          // Workaround for clicking select
-          // when using autocomplete
-          // and click doesn't target the input
-          setTimeout(() => {
-            if (this.menuIsActive) return
-
+          // If the input is dirty,
+          // the input is not targetable
+          // so we must manually focus
+          if (this.isDirty) {
             this.focus()
-            this.menuIsActive = true
-          }, 100)
+            this.$nextTick(this.focusInput)
+          }
         }
       }
     }
@@ -655,6 +320,6 @@ export default {
     return this.genInputGroup([
       this.genSelectionsAndSearch(),
       this.genMenu()
-    ], data, () => this.showMenu())
+    ], data, this.toggleMenu)
   }
 }

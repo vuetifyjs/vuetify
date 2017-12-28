@@ -1,7 +1,7 @@
-import { mount } from 'avoriaz'
-import { VCardMedia } from '~components/VCard'
+import { test } from '@util/testing'
+import { VCardMedia } from '@components/VCard'
 
-describe('VCardMedia.js', () => {
+test('VCardMedia.js', ({ mount }) => {
   it('should render component and match snapshot', () => {
     const wrapper = mount(VCardMedia)
 
@@ -11,6 +11,7 @@ describe('VCardMedia.js', () => {
   it('should render component with contained background and match snapshot', () => {
     const wrapper = mount(VCardMedia, {
       propsData: {
+        src: 'file.jpg',
         contain: true
       }
     })

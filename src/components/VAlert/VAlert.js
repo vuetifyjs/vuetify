@@ -71,7 +71,6 @@ export default {
     if (this.dismissible) {
       const close = h('a', {
         'class': 'alert__dismissible',
-        domProps: { href: 'javascript:;' },
         on: { click: () => this.$emit('input', false) }
       }, [
         h(VIcon, {

@@ -1,8 +1,7 @@
-import { test } from '~util/testing'
-import { mount } from 'avoriaz'
-import VCard from '~components/VCard'
+import { test } from '@util/testing'
+import VCard from '@components/VCard'
 
-test('VCard.vue', () => {
+test('VCard.vue', ({ mount }) => {
   it('should render component and match snapshot', () => {
     const wrapper = mount(VCard)
 
@@ -70,6 +69,11 @@ test('VCard.vue', () => {
 
     expect(wrapper.hasStyle('height', heightpx)).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({
+      height: 401
+    })
+    expect(wrapper.hasStyle('height', '401px')).toBe(true)
   })
 
   it('should render a tile card', () => {

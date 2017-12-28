@@ -5,13 +5,14 @@ import VIcon from '../VIcon'
 
 import Bootable from '../../mixins/bootable'
 import Themeable from '../../mixins/themeable'
+import { provide as RegistrableProvide } from '../../mixins/registrable'
 
 import Touch from '../../directives/touch'
 
 export default {
   name: 'v-carousel',
 
-  mixins: [Bootable, Themeable],
+  mixins: [Bootable, Themeable, RegistrableProvide('carousel')],
 
   directives: { Touch },
 
@@ -29,21 +30,22 @@ export default {
       type: Boolean,
       default: true
     },
-    hideControls: Boolean,
-    icon: {
+    delimiterIcon: {
       type: String,
       default: 'fiber_manual_record'
     },
+    hideControls: Boolean,
+    hideDelimiters: Boolean,
     interval: {
       type: [Number, String],
       default: 6000,
       validator: value => value > 0
     },
-    leftControlIcon: {
+    prependIcon: {
       type: [Boolean, String],
       default: 'chevron_left'
     },
-    rightControlIcon: {
+    appendIcon: {
       type: [Boolean, String],
       default: 'chevron_right'
     },
@@ -51,17 +53,18 @@ export default {
   },
 
   watch: {
+    items () {
+      if (this.inputValue >= this.items.length) {
+        this.inputValue = this.items.length - 1
+      }
+    },
     inputValue () {
       // Evaluate items when inputValue changes to account for
       // dynamic changing of children
-      this.items = this.$children.filter(i => {
-        return i.$el.classList && i.$el.classList.contains('carousel__item')
-      })
 
-      this.items.forEach(i => i.open(
-        this.items[this.inputValue]._uid,
-        this.reverse
-      ))
+      this.items.forEach(i => {
+        i.open(this.items[this.inputValue].uid, this.reverse)
+      })
 
       this.$emit('input', this.inputValue)
       this.restartTimeout()
@@ -87,7 +90,7 @@ export default {
   },
 
   methods: {
-    genControls () {
+    genDelimiters () {
       return this.$createElement('div', {
         staticClass: 'carousel__controls'
       }, this.genItems())
@@ -105,7 +108,11 @@ export default {
             light: this.light
           },
           on: { click: fn }
-        }, [this.$createElement(VIcon, icon)])
+        }, [
+          this.$createElement(VIcon, {
+            props: { 'size': '46px' }
+          }, icon)
+        ])
       ])
     },
     genItems () {
@@ -117,12 +124,15 @@ export default {
           },
           props: {
             icon: true,
+            small: true,
             dark: this.dark || !this.light,
             light: this.light
           },
           key: index,
           on: { click: this.select.bind(this, index) }
-        }, [this.$createElement(VIcon, this.icon)])
+        }, [this.$createElement(VIcon, {
+          props: { size: '18px' }
+        }, this.delimiterIcon)])
       })
     },
     restartTimeout () {
@@ -151,6 +161,12 @@ export default {
       if (!this.cycle) return
 
       this.slideTimeout = setTimeout(() => this.next(), this.interval > 0 ? this.interval : 6000)
+    },
+    register (uid, open) {
+      this.items.push({ uid, open })
+    },
+    unregister (uid) {
+      this.items = this.items.filter(i => i.uid !== uid)
     }
   },
 
@@ -165,9 +181,9 @@ export default {
         }
       }]
     }, [
-      this.genIcon('left', this.leftControlIcon, this.prev),
-      this.genIcon('right', this.rightControlIcon, this.next),
-      this.hideControls ? null : this.genControls(),
+      this.hideControls ? null : this.genIcon('left', this.prependIcon, this.prev),
+      this.hideControls ? null : this.genIcon('right', this.appendIcon, this.next),
+      this.hideDelimiters ? null : this.genDelimiters(),
       this.$slots.default
     ])
   }

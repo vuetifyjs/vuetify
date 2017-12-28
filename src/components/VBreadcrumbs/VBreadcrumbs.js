@@ -41,7 +41,7 @@ export default {
     /**
      * Add dividers between
      * v-breadcrumbs-item
-     * 
+     *
      * @return {array}
      */
     genChildren () {

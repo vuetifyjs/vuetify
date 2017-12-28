@@ -100,7 +100,6 @@ export default {
       }
     }, [
       h('a', {
-        domProps: { href: 'javascript:;' },
         slot: 'activator'
       }, this.$slots.default),
       this.genContent(),

@@ -40,26 +40,12 @@ export default {
   },
 
   mounted () {
-    this.$vuetify.theme.type = this.type
-    window.addEventListener('load', this.runCallbacks)
+    this.$vuetify.dark = this.dark
   },
 
   watch: {
-    type () {
-      this.$vuetify.theme.type = this.type
-    }
-  },
-
-  methods: {
-    // Run all load callbacks created
-    // from the load helper utility
-    runCallbacks () {
-      // For unit tests
-      if (!document._loadCallbacks) return
-
-      while (document._loadCallbacks.length) {
-        document._loadCallbacks.pop()()
-      }
+    dark () {
+      this.$vuetify.dark = this.dark
     }
   },
 

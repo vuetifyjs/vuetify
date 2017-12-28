@@ -60,15 +60,12 @@ export default {
   },
 
   mounted () {
-    this.$vuetify.load(this.init)
+    this.getSteps()
+
+    this.inputValue = this.value || this.steps[0].step || 1
   },
 
   methods: {
-    init () {
-      this.getSteps()
-
-      this.inputValue = this.value || this.steps[0].step || 1
-    },
     getSteps () {
       this.steps = []
       this.content = []

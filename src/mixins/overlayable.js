@@ -44,7 +44,7 @@ export default {
         ? this.$el.parentNode
         : document.querySelector('[data-app]')
 
-      parent.insertBefore(this.overlay, parent.firstChild)
+      parent && parent.insertBefore(this.overlay, parent.firstChild)
 
       this.overlay.clientHeight // Force repaint
       requestAnimationFrame(() => {
@@ -101,6 +101,8 @@ export default {
         this.checkPath(e)) e.preventDefault()
     },
     hasScrollbar (el) {
+      if (!el || el.nodeType !== Node.ELEMENT_NODE) return false
+
       const style = window.getComputedStyle(el)
       return ['auto', 'scroll'].includes(style['overflow-y']) && el.scrollHeight > el.clientHeight
     },
@@ -166,7 +168,7 @@ export default {
       }
     },
     hideScroll () {
-      if (this.$vuetify.breakpoint.mdAndDown) {
+      if (this.$vuetify.breakpoint.smAndDown) {
         document.documentElement.classList.add('overflow-y-hidden')
       } else {
         window.addEventListener('wheel', this.scrollListener)

@@ -33,6 +33,7 @@ import {
 export default {
   data: () => ({
     selection: 0,
+    lazySelection: 0,
     preDefined: {
       'credit-card': '#### - #### - #### - ####',
       'date': '##/##/####',
@@ -72,7 +73,7 @@ export default {
     // Compute which callback to use
     maskText () {
       if (this.isStringFormatter) { // Case 1 and 4
-        return text => maskText(text, this.masked, this.fillMaskBlanks)
+        return text => maskText(text, this.masked, this.fillMaskBlanks, this.dontFillMaskBlanks)
       } else if (this.isNumeralFormatter) { // Case 2 & 3
         this.options = Object.assign({}, this.preDefined['numeral'])
         Object.assign(this.options, this.mask)
@@ -90,7 +91,8 @@ export default {
     },
     unmaskText () {
       if (!this.mask) return text => text
-      return this.isNumeralFormatter ? this.unmaskNumeralText : unmaskText
+      return this.isNumeralFormatter ? this.unmaskNumeralText
+        : !this.returnMaskedValue ? unmaskText : text => text
     }
   },
 
@@ -103,7 +105,7 @@ export default {
       if (!this.$refs.input) return
 
       const oldValue = this.$refs.input.value
-      const newValue = this.maskText(this.lazyValue)
+      const newValue = this.maskText(unmaskText(this.lazyValue))
       let position = 0
       let selection = this.selection
 
@@ -125,6 +127,21 @@ export default {
         this.setCaretPosition(selection)
       })
     }
+  },
+
+  beforeMount () {
+    if (!this.mask ||
+      this.value == null ||
+      !this.returnMaskedValue
+    ) return
+
+    const value = this.maskText(this.value)
+
+    // See if masked value does not
+    // match the user given value
+    if (value === this.value) return
+
+    this.$emit('input', value)
   },
 
   methods: {
@@ -163,6 +180,15 @@ export default {
     },
     isMaskDelimiter (char) {
       return this.isNumeralFormatter ? this.isNumeralDelimiter(char) : isMaskDelimiter(char)
+    },
+    resetSelections (input) {
+      if (!input.selectionEnd) return
+      this.selection = input.selectionEnd
+      this.lazySelection = 0
+
+      for (const char of input.value.substr(0, this.selection)) {
+        isMaskDelimiter(char) || this.lazySelection++
+      }
     }
   }
 }

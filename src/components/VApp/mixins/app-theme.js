@@ -4,43 +4,48 @@ export default {
   }),
 
   watch: {
-    type () {
-      this.applyType()
-    },
     '$vuetify.theme': {
       deep: true,
       handler () {
-        this.applyType()
+        this.applyTheme()
       }
     }
   },
 
-  mounted () {
+  created () {
+    if (typeof document === 'undefined') {
+      this.$ssrContext && !this.$ssrContext._styles && (this.$ssrContext._styles = {})
+      return this.$ssrContext && this.$ssrContext._styles &&
+        (this.$ssrContext._styles['vuetify-theme-stylesheet'] = {
+          ids: ['vuetify-theme-stylesheet'],
+          css: this.genColors(this.$vuetify.theme),
+          media: ''
+        })
+    }
     this.genStyle()
-    this.genThemeClasses()
-    this.applyType()
+    this.applyTheme()
   },
 
   methods: {
-    applyType () {
-      this.genThemeClasses()
-      this.$vuetify.theme.type = this.type
-    },
-    genThemeClasses () {
-      this.updateTheme(this.genTheme())
-    },
-    genTheme () {
-      return this.genColors(this.$vuetify.theme)
+    applyTheme () {
+      this.style.innerHTML = this.genColors(this.$vuetify.theme)
     },
     genColors (theme) {
-      return Object.keys(theme).map(key => {
+      const colors = Object.keys(theme).map(key => {
         const value = theme[key]
 
         return (
           this.genBackgroundColor(key, value) +
           this.genTextColor(key, value)
         )
-      }).join('')
+      })
+
+      colors.push(this.genAnchorColor(this.$vuetify.theme.primary))
+
+      return colors.join('')
+    },
+    genAnchorColor (color) {
+      return `a{color: ${color};}`
     },
     genBackgroundColor (key, value) {
       return `.${key}{background-color:${value} !important;border-color:${value} !important;}`
@@ -49,13 +54,17 @@ export default {
       return `.${key}--text{color:${value} !important;}`
     },
     genStyle () {
-      const style = document.createElement('style')
-      style.type = 'text/css'
-      document.head.appendChild(style)
+      let style = document.querySelector('[data-vue-ssr-id=vuetify-theme-stylesheet]') ||
+        document.getElementById('vuetify-theme-stylesheet')
+
+      if (!style) {
+        style = document.createElement('style')
+        style.type = 'text/css'
+        style.id = 'vuetify-theme-stylesheet'
+        document.head.appendChild(style)
+      }
+
       this.style = style
-    },
-    updateTheme (classes) {
-      this.style.innerHTML = classes
     }
   }
 }

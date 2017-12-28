@@ -83,8 +83,10 @@ export default {
   },
 
   methods: {
-    onTransition () {
-      if (!this.isActive) return
+    onTransition (e) {
+      if (!this.isActive ||
+        e.propertyName !== 'height'
+      ) return
 
       this.height = 'auto'
     },
@@ -92,9 +94,9 @@ export default {
       let scrollHeight = 0
 
       // Render bug with height
-      setTimeout(() => {
+      requestAnimationFrame(() => {
         scrollHeight = this.$refs.wrapper.scrollHeight
-      }, 0)
+      })
 
       this.height = 0
 
@@ -103,7 +105,7 @@ export default {
     },
     leave () {
       this.height = this.$refs.wrapper.clientHeight
-      setTimeout(() => (this.height = 0), 0)
+      setTimeout(() => (this.height = 0), 10)
     },
     toggle (step, reverse) {
       this.isActive = step.toString() === this.step.toString()

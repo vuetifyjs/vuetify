@@ -62,7 +62,7 @@ const convert = (mask, char) => {
  *
  * @return {Boolean}
  */
-export const isMaskDelimiter = char => char && char.match(defaultDelimiters)
+export const isMaskDelimiter = char => char && defaultDelimiters.test(char)
 
 /**
  * Mask Validation
@@ -80,8 +80,8 @@ const maskValidates = (mask, char) => {
 /**
  * Mask Text
  *
- * Takes an array of characters
- * and returns a compiled str
+ * Takes a string or an array of characters
+ * and returns a masked string
  *
  * @param {*} text
  * @param {Array|String} masked

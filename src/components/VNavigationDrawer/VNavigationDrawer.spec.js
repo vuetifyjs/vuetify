@@ -1,165 +1,204 @@
-import VNavigationDrawer from '~components/VNavigationDrawer'
-import { test } from '~util/testing'
+import VApp from '@components/VApp'
+import VNavigationDrawer from '@components/VNavigationDrawer'
+import { test, resizeWindow } from '@util/testing'
 
-// TODO: Test behaviour instead of styles
-test('VNavigationDrawer.js', ({ mount }) => {
-  it('should render component and match snapshot', () => {
+beforeEach(() => resizeWindow(1920, 1080))
+
+test('VNavigationDrawer', ({ mount }) => {
+  // v-app is needed to initialise $vuetify.application
+  const app = mount(VApp)
+
+  it('should become temporary when the window resizes', async () => {
     const wrapper = mount(VNavigationDrawer)
 
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.vm.isActive).toBe(true)
+    await resizeWindow(1200)
+    expect(wrapper.vm.isActive).toBe(false)
+    expect(wrapper.vm.overlay).toBeFalsy()
   })
 
-  it('should render component with custom absolute and match snapshot', () => {
-    const wrapper = mount(VNavigationDrawer, {
-      propsData: {
-        absolute: true
-      }
-    })
+  it('should not resize the content when temporary', async () => {
+    const wrapper = mount(VNavigationDrawer, { propsData: {
+      app: true,
+      temporary: true,
+      value: true
+    }})
 
-    expect(wrapper.html()).toMatchSnapshot()
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.$vuetify.application.left).toBe(0)
+    expect(wrapper.vm.overlay).toBeTruthy()
   })
 
-  it('should render component with custom clipped and match snapshot', () => {
-    const wrapper = mount(VNavigationDrawer, {
-      propsData: {
-        clipped: true
-      }
-    })
+  it('should not resize the content when permanent and stateless', async () => {
+    const wrapper = mount(VNavigationDrawer, { propsData: {
+      app: true,
+      permanent: true,
+      stateless: true
+    }})
 
-    expect(wrapper.html()).toMatchSnapshot()
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+
+    await resizeWindow(1200)
+    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+    expect(wrapper.vm.overlay).toBeFalsy()
   })
 
-  it('should render component with custom disableRouteWatcher and match snapshot', () => {
+  it('should not resize the content when permanent and resize watcher is disabled', async () => {
     const wrapper = mount(VNavigationDrawer, {
       propsData: {
-        disableRouteWatcher: true
-      }
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('should render component with custom enableResizeWatcher and match snapshot', () => {
-    const wrapper = mount(VNavigationDrawer, {
-      propsData: {
-        enableResizeWatcher: true
-      }
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('should render component with custom height and match snapshot', () => {
-    const wrapper = mount(VNavigationDrawer, {
-      propsData: {
-        height: '100px'
-      }
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('should render component with custom floating and match snapshot', () => {
-    const wrapper = mount(VNavigationDrawer, {
-      propsData: {
-        floating: true
-      }
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('should render component with custom miniVariant and match snapshot', () => {
-    const wrapper = mount(VNavigationDrawer, {
-      propsData: {
-        miniVariant: true
-      }
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('should render component with custom mobileBreakPoint and match snapshot', () => {
-    const wrapper = mount(VNavigationDrawer, {
-      propsData: {
-        mobileBreakPoint: 1000
-      }
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('should render component with custom permanent and match snapshot', () => {
-    const wrapper = mount(VNavigationDrawer, {
-      propsData: {
-        permanent: true
-      }
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('should render component with custom persistent and match snapshot', () => {
-    const wrapper = mount(VNavigationDrawer, {
-      propsData: {
-        persistent: true
-      }
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('should render component with custom right and match snapshot', () => {
-    const wrapper = mount(VNavigationDrawer, {
-      propsData: {
-        right: true
-      }
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('should render component with custom temporary and match snapshot', () => {
-    const wrapper = mount(VNavigationDrawer, {
-      propsData: {
-        temporary: true
-      }
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('should render component with custom touchless and match snapshot', () => {
-    const wrapper = mount(VNavigationDrawer, {
-      propsData: {
-        touchless: true
-      }
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('should render component with custom value and match snapshot', () => {
-    const wrapper = mount(VNavigationDrawer, {
-      propsData: {
-        value: true
-      }
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('should match value if resize-watcher is not enabled', async () => {
-    const wrapper = mount(VNavigationDrawer, {
-      attachToDocument: true,
-      propsData: {
+        app: true,
         permanent: true,
-        value: false
+        disableResizeWatcher: true
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+
+    await resizeWindow(1200)
+    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+    expect(wrapper.vm.overlay).toBeFalsy()
+  })
+
+  it('should stay active when resizing a temporary drawer', async () => {
+    const wrapper = mount(VNavigationDrawer, {
+      propsData: {
+        app: true,
+        temporary: true,
+        value: true
       }
     })
 
     await wrapper.vm.$nextTick()
 
+    expect(wrapper.vm.isActive).toBe(true)
+    expect(wrapper.vm.overlay).toBeTruthy()
+
+    await resizeWindow(1200)
+
+    expect(wrapper.vm.isActive).toBe(true)
+    expect(wrapper.vm.overlay).toBeTruthy()
+  })
+
+  it('should open when changed to permanent', async () => {
+    const wrapper = mount(VNavigationDrawer, {
+      propsData: {
+        value: null
+      }
+    })
+
+    wrapper.setProps({ permanent: true })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isActive).toBe(true)
+  })
+
+  it('should not close when value changes and permanent', async () => {
+    const wrapper = mount(VNavigationDrawer, {
+      propsData: {
+        permanent: true,
+        value: true
+      }
+    })
+
+    wrapper.setProps({ value: false })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isActive).toBe(true)
+  })
+
+  it('should update content padding when temporary state is changed', async () => {
+    const wrapper = mount(VNavigationDrawer, { propsData: {
+      app: true
+    }})
+
+    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+
+    wrapper.setProps({ temporary: true })
+    expect(wrapper.vm.$vuetify.application.left).toBe(0)
+
+    wrapper.setProps({ temporary: false })
+    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+  })
+
+  it('should update content padding when permanent state is changed', async () => {
+    await resizeWindow(800)
+    const wrapper = mount(VNavigationDrawer, { propsData: {
+      app: true
+    }})
+
+    expect(wrapper.vm.$vuetify.application.left).toBe(0)
+
+    wrapper.setProps({ permanent: true })
+    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+
+    wrapper.setProps({ permanent: false })
+    expect(wrapper.vm.$vuetify.application.left).toBe(0)
+  })
+
+  it('should update content padding when miniVariant is changed', async () => {
+    const wrapper = mount(VNavigationDrawer, { propsData: {
+      app: true
+    }})
+
+    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+
+    wrapper.setProps({ miniVariant: true })
+    expect(wrapper.vm.$vuetify.application.left).toBe(80)
+
+    wrapper.setProps({ miniVariant: false })
+    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+  })
+
+  it('should not remain mobile when temporary is toggled', async () => {
+    await resizeWindow(800)
+    const wrapper = mount(VNavigationDrawer, { propsData: {
+      temporary: true
+    }})
+
+    await resizeWindow(1920)
+    expect(wrapper.vm.isMobile).toBe(false)
+  })
+
+  it('should stay closed when mobile and temporary is enabled', async () => {
+    await resizeWindow(800)
+    const wrapper = mount(VNavigationDrawer)
+    const input = jest.fn(value => wrapper.setProps({ value }))
+    wrapper.vm.$on('input', input)
+
+    wrapper.setProps({ temporary: true })
+    await wrapper.vm.$nextTick()
+
     expect(wrapper.vm.isActive).toBe(false)
+    expect(input.mock.calls).toHaveLength(0)
+  })
+
+  it('should update content padding when mobile is toggled', async () => {
+    const input = jest.fn()
+    const wrapper = mount(VNavigationDrawer, { propsData: {
+      app: true,
+      fixed: true,
+      value: true
+    }})
+
+    wrapper.vm.$on('input', input)
+    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+    await resizeWindow(800)
+    expect(wrapper.vm.$vuetify.application.left).toBe(0)
+    expect(wrapper.vm.isActive).toBe(false)
+    expect(input).toBeCalledWith(false)
+    wrapper.setProps({ value: false })
+    await wrapper.vm.$nextTick()
+    wrapper.setProps({ value: true })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isActive).toBe(true)
+    expect(wrapper.vm.$vuetify.application.left).toBe(0)
+    await resizeWindow(1920)
+    expect(wrapper.vm.isActive).toBe(true)
+    expect(wrapper.vm.isMobile).toBe(false)
+    expect(wrapper.vm.$vuetify.application.left).toBe(300)
   })
 })

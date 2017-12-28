@@ -8,44 +8,25 @@ navigation-drawer($material)
     .navigation-drawer__border
       background-color: $material.dividers
 
-  a:not(.list__tile--active),
-  .subheader,
-  .list
-    color: $material.text.primary
-
   .divider
     background-color: $material.dividers
-
-  .list
-    &__tile:not(.list__tile--active)
-      color: $material.text.primary
-
-      .icon
-        color: $material.icons.active
-
-    &__tile__sub-title
-      color: $material.text.secondary
-
-  .list--group__header--active
-    .list__tile, + .list--group
-      &:after
-        background: $material.dividers
 
 theme(navigation-drawer, "navigation-drawer")
 
 .navigation-drawer
+  bootable()
+
+  display: block
+  left: 0
   max-width: 100%
   overflow-y: auto
   overflow-x: hidden
-  -webkit-overflow-scrolling: touch
   padding: 0 0 100px
   pointer-events: auto
-  position: fixed
-  transition: .3s $transition.swing
   top: 0
-  left: 0
   will-change: transform
   z-index: 3
+  -webkit-overflow-scrolling: touch
 
   &__border
     position: absolute
@@ -58,14 +39,7 @@ theme(navigation-drawer, "navigation-drawer")
     &:after
       left: 0
       right: initial
-
-  &--close:not(.navigation--permanent)
-    &.navigation-drawer:not(.navigation-drawer--right)
-      transform: translateX(-100%)
-
-    &.navigation-drawer--right
-      transform: translateX(100%)
-
+  
   &--right
     left: auto
     right: 0
@@ -77,11 +51,19 @@ theme(navigation-drawer, "navigation-drawer")
   &--absolute
     position: absolute
 
+  &--fixed
+    position: fixed
+
   &--floating:after
     display: none
 
   &--mini-variant
     overflow: hidden
+    
+    .list__group__header__prepend-icon
+      flex: 1 0 auto
+      justify-content: center
+      width: 100%
 
     .list__tile__action,
     .list__tile__avatar
@@ -97,7 +79,8 @@ theme(navigation-drawer, "navigation-drawer")
     .list--group
       display: none !important
 
-  &--temporary, &--is-mobile:not(.navigation-drawer--permanent)
+  &--temporary,
+  &--is-mobile
     z-index: 6
 
     &:not(.navigation-drawer--close)

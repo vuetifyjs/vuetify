@@ -1,14 +1,22 @@
+// Styles
 require('../../stylus/components/_input-groups.styl')
 require('../../stylus/components/_text-fields.styl')
 
+// Mixins
 import Colorable from '../../mixins/colorable'
 import Input from '../../mixins/input'
 import Maskable from '../../mixins/maskable'
+import Soloable from '../../mixins/soloable'
 
 export default {
   name: 'v-text-field',
 
-  mixins: [Colorable, Input, Maskable],
+  mixins: [
+    Colorable,
+    Input,
+    Maskable,
+    Soloable
+  ],
 
   inheritAttrs: false,
 
@@ -43,7 +51,6 @@ export default {
       default: 5
     },
     singleLine: Boolean,
-    solo: Boolean,
     suffix: String,
     textarea: Boolean,
     type: {
@@ -55,10 +62,10 @@ export default {
   computed: {
     classes () {
       const classes = {
+        ...this.genSoloClasses(),
         'input-group--text-field': true,
         'input-group--text-field-box': this.box,
-        'input-group--single-line': this.singleLine || this.solo,
-        'input-group--solo': this.solo,
+        'input-group--single-line': this.singleLine || this.isSolo,
         'input-group--multi-line': this.multiLine,
         'input-group--full-width': this.fullWidth,
         'input-group--prefix': this.prefix,
@@ -119,8 +126,7 @@ export default {
       }
     },
     value (val) {
-      if (this.internalChange) this.internalChange = false
-      else if (this.mask) {
+      if (this.mask && !this.internalChange) {
         const masked = this.maskText(this.unmaskText(val))
         this.lazyValue = this.unmaskText(masked)
 
@@ -131,16 +137,16 @@ export default {
         })
       } else this.lazyValue = val
 
+      if (this.internalChange) this.internalChange = false
+
       !this.validateOnBlur && this.validate()
       this.shouldAutoGrow && this.calculateInputHeight()
     }
   },
 
   mounted () {
-    this.$vuetify.load(() => {
-      this.shouldAutoGrow && this.calculateInputHeight()
-      this.autofocus && this.focus()
-    })
+    this.shouldAutoGrow && this.calculateInputHeight()
+    this.autofocus && this.focus()
   },
 
   methods: {
@@ -188,6 +194,17 @@ export default {
 
       this.backspace = key === 'Backspace'
       this.delete = key === 'Delete'
+
+      // Prevents closing of a
+      // dialog when pressing
+      // enter
+      if (this.multiLine &&
+        this.isFocused &&
+        e.keyCode === 13
+      ) {
+        e.stopPropagation()
+      }
+
       this.internalChange = true
     },
     genCounter () {
@@ -263,15 +280,6 @@ export default {
     clearableCallback () {
       this.inputValue = null
       this.$nextTick(() => this.$refs.input.focus())
-    },
-    resetSelections (input) {
-      if (!input.selectionEnd) return
-      this.selection = input.selectionEnd
-      this.lazySelection = 0
-
-      for (const char of input.value.substr(0, this.selection)) {
-        this.isMaskDelimiter(char) || this.lazySelection++
-      }
     }
   },
 

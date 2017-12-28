@@ -2,23 +2,14 @@ language: node_js
 node_js:
   - "8"
 
-env:
-  global:
-    - CC_TEST_REPORTER_ID=b429c71716cd1302821cad1fdc0dd6ea964144ec975e3aad40cbaf1235afb775
-
 before_script:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
+  - npm i codecov -g
 
 script:
   - yarn
   - yarn run lint
-  - yarn run test:coverage
+  - yarn run test:coverage && codecov
   - yarn run build
-
-after_success:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
 cache:
   yarn: true
@@ -33,15 +24,14 @@ deploy:
   - provider: npm
     email: "john.j.leider@gmail.com"
     api_key: $NPM_API_KEY
-    tag: $(node ./build/parse-npm-tag.js)
+    tag: $(node ./build/parse-npm-tag.js ${TRAVIS_TAG})
     skip_cleanup: true
     on:
       repo: vuetifyjs/vuetify
       tags: true
   - provider: releases
     api_key: $GITHUB_API_KEY
-    files:
-      - "release/vuetify-${TRAVIS_TAG}.zip"
+    file: "release/vuetify-${TRAVIS_TAG}.zip"
     skip_cleanup: true
     on:
       tags: true

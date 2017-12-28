@@ -3,6 +3,7 @@
 
 footer($material)
   background: $material.app-bar
+  color: $material.text.primary
   
 theme(footer, "footer")
 
@@ -11,30 +12,21 @@ theme(footer, "footer")
   display: flex
   flex: 0 1 auto !important // Don't let devs break their code
   min-height: $footer-height
-  transition: .3s $transition.swing
+  transition: .2s $transition.fast-out-slow-in
 
-  &--absolute, &--fixed
+  &--absolute,
+  &--fixed
     bottom: 0
     left: 0
     width: 100%
     z-index: 3
+    
+  &--inset
+    z-index: 2
 
   &--absolute
     position: absolute
 
   &--fixed
     position: fixed
-
-  > *:first-child
-    margin-left: $grid-gutters.md
-
-  > *:last-child
-    margin-right: $grid-gutters.md
-
-  @media $display-breakpoints.xs-only
-    > *:first-child
-      margin-left: $grid-gutters.lg
-
-    > *:last-child
-      margin-right: $grid-gutters.lg
 

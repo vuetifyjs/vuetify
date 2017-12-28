@@ -1,3 +1,5 @@
+import { escapeHTML } from '../../../util/helpers'
+
 /**
  * Select autocomplete
  *
@@ -31,21 +33,21 @@ export default {
       )
     },
     genFiltered (text) {
+      text = (text || '').toString()
+
       if (!this.isAutocomplete ||
         !this.searchValue ||
         this.filteredItems.length < 1
-      ) return text
-
-      text = (text || '').toString()
+      ) return escapeHTML(text)
 
       const { start, middle, end } = this.getMaskedCharacters(text)
 
-      return `${start}${this.genHighlight(middle)}${end}`
+      return `${escapeHTML(start)}${this.genHighlight(middle)}${escapeHTML(end)}`
     },
     genHighlight (text) {
-      if (this.isNotFiltering) return text
+      if (this.isNotFiltering) return escapeHTML(text)
 
-      return `<span class="list__tile__mask">${text}</span>`
+      return `<span class="list__tile__mask">${escapeHTML(text)}</span>`
     },
     getMaskedCharacters (text) {
       const searchValue = (this.searchValue || '').toString().toLowerCase()
@@ -65,17 +67,6 @@ export default {
     },
     tabOut () {
       this.blur()
-
-      // Single (not multiple) autocomplete select with an
-      // empty search value that is not a combobox should
-      // clear the input value
-      if (this.isAutocomplete &&
-        !this.isMultiple &&
-        !this.searchValue &&
-        !this.combobox
-      ) {
-        this.inputValue = null
-      }
     },
     onTabDown (e) {
       // If tabbing through inputs and
@@ -113,7 +104,7 @@ export default {
       // If enter, space, up, or down is pressed, open menu
       if (!this.menuIsActive && [13, 32, 38, 40].includes(e.keyCode)) {
         e.preventDefault()
-        return this.showMenuItems()
+        return this.showMenu()
       }
 
       // If escape deactivate the menu
@@ -158,10 +149,14 @@ export default {
       this.$refs.menu.tiles[index].click()
     },
     updateTags (content) {
+      // Avoid direct mutation
+      // for vuex strict mode
+      let selectedItems = this.selectedItems.slice()
+
       // If a duplicate item
       // exists, remove it
-      if (this.selectedItems.includes(content)) {
-        this.$delete(this.selectedItems, this.selectedItems.indexOf(content))
+      if (selectedItems.includes(content)) {
+        this.$delete(selectedItems, selectedItems.indexOf(content))
       }
 
       // When updating tags ensure
@@ -169,11 +164,13 @@ export default {
       // is populated if needed
       let searchValue = null
       if (this.combobox) {
-        this.selectedItems = [content]
+        selectedItems = [content]
         searchValue = this.chips ? null : content
       } else {
-        this.selectedItems.push(content)
+        selectedItems.push(content)
       }
+
+      this.selectedItems = selectedItems
 
       this.$nextTick(() => {
         this.searchValue = searchValue

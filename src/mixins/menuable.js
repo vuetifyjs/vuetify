@@ -1,6 +1,7 @@
 import Positionable from './positionable'
 
 import Stackable from './stackable'
+import Themeable from './themeable'
 
 const dimensions = {
   activator: {
@@ -29,7 +30,11 @@ const dimensions = {
  * As well as be manually positioned
  */
 export default {
-  mixins: [Positionable, Stackable],
+  mixins: [
+    Positionable,
+    Stackable,
+    Themeable
+  ],
 
   data: () => ({
     absoluteX: 0,
@@ -44,7 +49,7 @@ export default {
   props: {
     activator: {
       default: null,
-      validate: val => {
+      validator: val => {
         return ['string', 'object'].includes(typeof val)
       }
     },
@@ -59,19 +64,19 @@ export default {
       default: 0
     },
     nudgeLeft: {
-      type: Number,
+      type: [Number, String],
       default: 0
     },
     nudgeRight: {
-      type: Number,
+      type: [Number, String],
       default: 0
     },
     nudgeTop: {
-      type: Number,
+      type: [Number, String],
       default: 0
     },
     nudgeWidth: {
-      type: Number,
+      type: [Number, String],
       default: 0
     },
     offsetOverflow: Boolean,
@@ -90,8 +95,37 @@ export default {
   },
 
   computed: {
+    computedLeft () {
+      const a = this.dimensions.activator
+      const c = this.dimensions.content
+      const minWidth = a.width < c.width ? c.width : a.width
+      let left = 0
+
+      left += this.left ? a.left - (minWidth - a.width) : a.left
+
+      if (this.offsetX) left += this.left ? -a.width : a.width
+      if (this.nudgeLeft) left -= parseInt(this.nudgeLeft)
+      if (this.nudgeRight) left += parseInt(this.nudgeRight)
+
+      return left
+    },
+    computedTop () {
+      const a = this.dimensions.activator
+      const c = this.dimensions.content
+      let top = this.top ? a.bottom - c.height : a.top
+
+      if (!this.isAttached) top += this.pageYOffset
+      if (this.offsetY) top += this.top ? -a.height : a.height
+      if (this.nudgeTop) top -= this.nudgeTop
+      if (this.nudgeBottom) top += this.nudgeBottom
+
+      return top
+    },
     hasActivator () {
       return !!this.$slots.activator || this.activator
+    },
+    isAttached () {
+      return this.attach !== false
     }
   },
 
@@ -104,6 +138,10 @@ export default {
 
       val && this.callActivate() || this.callDeactivate()
     }
+  },
+
+  beforeMount () {
+    this.checkForWindow()
   },
 
   methods: {
@@ -121,28 +159,16 @@ export default {
     },
     activate () {},
     calcLeft () {
-      const a = this.dimensions.activator
-      const c = this.dimensions.content
-      let left = this.left ? a.right - c.width : a.left
-
-      if (this.offsetX) left += this.left ? -a.width : a.width
-      if (this.nudgeLeft) left -= this.nudgeLeft
-      if (this.nudgeRight) left += this.nudgeRight
-
-      return left
+      return `${this.isAttached
+        ? this.computedLeft
+        : this.calcXOverflow(this.computedLeft)
+      }px`
     },
     calcTop () {
-      this.checkForWindow()
-
-      const a = this.dimensions.activator
-      const c = this.dimensions.content
-      let top = this.top ? a.bottom - c.height : a.top
-
-      if (this.offsetY) top += this.top ? -a.height : a.height
-      if (this.nudgeTop) top -= this.nudgeTop
-      if (this.nudgeBottom) top += this.nudgeBottom
-
-      return top + this.pageYOffset
+      return `${this.isAttached
+        ? this.computedTop
+        : this.calcYOverflow(this.computedTop)
+      }px`
     },
     calcXOverflow (left) {
       const parsedMaxWidth = isNaN(parseInt(this.maxWidth))
@@ -177,6 +203,7 @@ export default {
       const isOverflowing = toTop < totalHeight
 
       // If overflowing bottom and offset
+      // TODO: set 'bottom' position instead of 'top'
       if (isOverflowing && this.offsetOverflow) {
         top = this.pageYOffset + (activator.top - contentHeight)
       // If overflowing bottom
@@ -201,7 +228,9 @@ export default {
       this.deactivate()
     },
     checkForWindow () {
-      this.hasWindow = typeof window !== 'undefined'
+      if (!this.hasWindow) {
+        this.hasWindow = typeof window !== 'undefined'
+      }
 
       if (this.hasWindow) {
         this.pageYOffset = this.getOffsetTop()
@@ -215,7 +244,7 @@ export default {
           : this.activator
       }
 
-      return this.$refs.activator.children
+      return this.$refs.activator.children.length > 0
         ? this.$refs.activator.children[0]
         : this.$refs.activator
     },
@@ -239,28 +268,31 @@ export default {
     measure (el, selector) {
       el = selector ? el.querySelector(selector) : el
 
-      if (!el) return null
+      if (!el || !this.hasWindow) return null
 
-      const {
-        top,
-        bottom,
-        left,
-        right,
-        height,
-        width
-      } = el.getBoundingClientRect()
+      const rect = el.getBoundingClientRect()
+      let top = rect.top
+      let left = rect.left
+
+      // Account for activator margin
+      if (this.isAttached) {
+        const style = window.getComputedStyle(el)
+
+        left = parseInt(style.marginLeft)
+        top = parseInt(style.marginTop)
+      }
 
       return {
-        offsetTop: el.offsetTop,
-        scrollHeight: el.scrollHeight,
-        top, bottom, left, right, height, width
+        bottom: rect.bottom,
+        right: rect.right,
+        top, left, width: rect.width, height: rect.height
       }
     },
     sneakPeek (cb) {
       requestAnimationFrame(() => {
         const el = this.$refs.content
 
-        if (this.isShown(el)) return cb()
+        if (!el || this.isShown(el)) return cb()
 
         el.style.display = 'inline-block'
         cb()
@@ -271,20 +303,13 @@ export default {
       requestAnimationFrame(() => (this.isContentActive = true))
     },
     isShown (el) {
-      return !!el && el.style.display !== 'none'
-    },
-    resetDimensions () {
-      this.dimensions = Object.assign({}, dimensions)
+      return el.style.display !== 'none'
     },
     updateDimensions () {
-      // Ensure that overflow calculation
-      // can work properly every update
-      this.resetDimensions()
-
       const dimensions = {}
 
       // Activator should already be shown
-      dimensions.activator = !this.hasActivator || this.absolute
+      dimensions.activator = !this.hasActivator
         ? this.absolutePosition()
         : this.measure(this.getActivator())
 
