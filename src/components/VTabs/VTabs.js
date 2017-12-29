@@ -121,8 +121,7 @@ export default {
       this.itemOffset = index
     },
     setOverflow () {
-      const wrapper = this.$refs.wrapper
-      this.isOverflowing = wrapper.clientWidth < wrapper.scrollWidth
+      this.isOverflowing = this.$refs.bar.clientWidth < this.$refs.container.clientWidth
     },
     findActiveLink () {
       if (!this.tabs.length || this.lazyValue) return
