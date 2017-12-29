@@ -49,13 +49,7 @@ export default {
   },
 
   watch: {
-    $route (val) {
-      this.$nextTick(() => {
-        if (this.$el.firstChild.className.indexOf('tabs__item--active') > -1) {
-          this.tabClick(this.action)
-        }
-      })
-    }
+    $route: 'onRouteChange'
   },
 
   mounted () {
@@ -84,10 +78,17 @@ export default {
       if (!this.to && !this.href) return
       if (!this.to) this.tabClick(this.action)
     },
+    onRouteChange () {
+      if (!this.to) return
+
+      this.$nextTick(() => {
+        if (this.$el.firstChild.className.indexOf('tabs__item--active') > -1) {
+          this.tabClick(this.action)
+        }
+      })
+    },
     toggle (action) {
       this.isActive = this.action === action
-
-      if (!this.isActive) return
     }
   },
 
