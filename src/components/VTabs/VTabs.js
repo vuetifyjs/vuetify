@@ -87,7 +87,7 @@ export default {
 
       // Give screen time to paint
       this.$nextTick(() => {
-        const activeTab = document.querySelector(`[href="#${this.activeTab.id}"]`)
+        const activeTab = this.$el.querySelector(`[href="#${this.activeTab.id}"]`)
 
         this.sliderWidth = (
           activeTab.scrollWidth /
