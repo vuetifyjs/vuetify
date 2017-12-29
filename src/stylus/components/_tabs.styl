@@ -19,7 +19,7 @@ theme(tabs, "tabs")
 
 .tabs
   position: relative
-  
+
   .icon--prepend,
   .icon--append
     position: absolute
@@ -40,7 +40,7 @@ theme(tabs, "tabs")
       margin-left: 40px
       margin-right: 40px
 
-  &--overflow      
+  &--overflow
     .tabs__div
       flex: 1 0 auto
 
@@ -55,7 +55,7 @@ theme(tabs, "tabs")
   &--icons-and-text
     .tabs__div
       min-width: 160px
-      
+
   &--fixed-tabs,
   &--icons-and-text,
   &--centered
@@ -76,33 +76,34 @@ theme(tabs, "tabs")
     .tabs__container
       > div:first-child
         margin-left: auto
-        
+
       > div:last-child
         margin-right: auto
-        
+
       .tabs__slider-wrapper + .tabs__div
         margin-left: auto
-      
+
   &--grow
     .tabs__div
       flex: 1 0 auto
       max-width: none
-        
+
   &--icons-and-text
     .tabs__item
       flex-direction: column-reverse
-      
+
       .icon
         margin-bottom: 6px
 
 .tabs__wrapper
   overflow: hidden
-  
+
 .tabs__container
   display: flex
   list-style-type: none
   transition: transform 0.6s cubic-bezier(0.86, 0, 0.07, 1)
   white-space: nowrap
+  position: relative
 
 .tabs__div
   align-items: center
@@ -131,14 +132,14 @@ theme(tabs, "tabs")
   transition: $primary-transition
   user-select: none
   white-space: normal
-  
+
   &:not(.tabs__item--active)
     opacity: .7
 
 .tabs__slider
   height: 2px
   width: 100%
-  
+
   &-wrapper
     bottom: 0
     margin: 0 !important
@@ -148,7 +149,7 @@ theme(tabs, "tabs")
 .tabs__items
   overflow: hidden
   position: relative
- 
+
 .tabs__content
   width: 100%
   transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1)
