@@ -186,6 +186,10 @@ export default {
     }
   },
 
+  mounted () {
+    this.callSlider()
+  },
+
   render (h) {
     const { tab, slider, items, item } = this.parseNodes()
 
