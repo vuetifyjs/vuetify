@@ -1,7 +1,6 @@
 import { test } from '@/util/testing'
 import VTab from './VTab'
 import Vue from 'vue'
-import Router from 'vue-router'
 
 const tabClick = 'Injection "tabClick" not found'
 const tabsWarning = 'The v-tab component must be used inside a v-tabs.'

@@ -138,6 +138,8 @@ export default {
           tabItem.el.firstChild.className.indexOf('tabs__item--active') > -1
       })
 
+      /* istanbul ignore next */
+      // There is not a reliable way to test
       this.inputValue = this.tabs[activeIndex > -1 ? activeIndex : 0].id
     },
     parseNodes () {

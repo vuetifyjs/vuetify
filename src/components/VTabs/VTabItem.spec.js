@@ -50,15 +50,23 @@ test('VTabItem', ({ mount }) => {
 
   it('should set transition to none of no transition', async () => {
     const wrapper = mount(VTabItem, {
-      propsData: {
-        id: 'foo'
-      }
+      propsData: { id: 'foo' }
     })
 
     wrapper.vm.toggle('foo', false, false)
     expect(wrapper.vm.$el.style.transition).toBe('none')
     wrapper.vm.toggle('foo', false, true)
     expect(wrapper.vm.$el.style.transition).toBe(null)
+    expect(contentWarning).toHaveBeenTipped()
+  })
+
+  it('should return reverse transition', () => {
+    const wrapper = mount(VTabItem, {
+      propsData: { id: 'foo' }
+    })
+
+    wrapper.setData({ reverse: true })
+    expect(wrapper.vm.computedTransition).toBe('tab-reverse-transition')
     expect(contentWarning).toHaveBeenTipped()
   })
 })
