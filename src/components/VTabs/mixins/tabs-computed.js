@@ -17,6 +17,7 @@ export default {
       return {
         'tabs--align-with-title': this.alignWithTitle,
         'tabs--centered': this.centered,
+        'tabs--right': this.right,
         'tabs--fixed-tabs': this.fixedTabs,
         'tabs--grow': this.grow,
         'tabs--icons-and-text': this.iconsAndText,

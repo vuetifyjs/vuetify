@@ -29,6 +29,7 @@ export default {
       type: String,
       default: 'chevron_left'
     },
+    right: Boolean,
     showArrows: Boolean,
     sliderColor: {
       type: String,

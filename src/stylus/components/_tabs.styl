@@ -69,16 +69,20 @@ theme(tabs__container, "tabs__container")
         flex: 1 0 auto
 
   &--centered,
-  &--fixed-tabs
+  &--fixed-tabs,
+  &--right
     .tabs__container
       > div:first-child
         margin-left: auto
 
-      > div:last-child
-        margin-right: auto
-
       .tabs__slider-wrapper + .tabs__div
         margin-left: auto
+
+  &--centered,
+  &--fixed-tabs
+    .tabs__container
+      > div:last-child
+        margin-right: auto
 
   &--grow
     .tabs__div
