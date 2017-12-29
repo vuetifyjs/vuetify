@@ -5,14 +5,26 @@
  */
 export default {
   methods: {
-    genContainer (items) {
+    genBar (items) {
       return this.$createElement('div', {
-        staticClass: 'tabs__container',
-        style: this.containerStyles,
+        staticClass: 'tabs__bar',
         'class': this.addBackgroundColorClassChecks({
           'theme--dark': this.dark,
           'theme--light': this.light
         }),
+        ref: 'bar'
+      }, [
+        this.genTransition('prepend'),
+        this.genWrapper(
+          this.genContainer(items)
+        ),
+        this.genTransition('append')
+      ])
+    },
+    genContainer (items) {
+      return this.$createElement('div', {
+        staticClass: 'tabs__container',
+        style: this.containerStyles,
         ref: 'container'
       }, items)
     },
@@ -51,6 +63,7 @@ export default {
     genWrapper (items) {
       return this.$createElement('div', {
         staticClass: 'tabs__wrapper',
+        ref: 'wrapper',
         directives: [{
           name: 'touch',
           value: {

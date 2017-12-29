@@ -2,7 +2,7 @@
 @import '../theme'
 
 /* Theme */
-tabs__container($material)
+tabs__bar($material)
   background-color: $material.cards
 
   .icon--left,
@@ -15,7 +15,7 @@ tabs__container($material)
     &.tabs__item--disabled
       color: $material.buttons.disabled
 
-theme(tabs__container, "tabs__container")
+theme(tabs__bar, "tabs__bar")
 
 .tabs
   position: relative
@@ -101,8 +101,10 @@ theme(tabs__container, "tabs__container")
 
 .tabs__wrapper
   overflow: hidden
+  display: flex
 
 .tabs__container
+  flex: 0 0 auto
   display: flex
   list-style-type: none
   transition: transform 0.6s cubic-bezier(0.86, 0, 0.07, 1)

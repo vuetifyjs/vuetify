@@ -121,8 +121,8 @@ export default {
       this.itemOffset = index
     },
     setOverflow () {
-      const container = this.$refs.container
-      this.isOverflowing = container.clientWidth < container.scrollWidth
+      const wrapper = this.$refs.wrapper
+      this.isOverflowing = wrapper.clientWidth < wrapper.scrollWidth
     },
     findActiveLink () {
       if (!this.tabs.length || this.lazyValue) return
@@ -203,15 +203,8 @@ export default {
         value: this.onResize
       }]
     }, [
-      this.genTransition('prepend'),
-      this.genWrapper(
-        this.genContainer([
-          this.genSlider(slider),
-          tab
-        ])
-      ),
-      this.genItems(items, item),
-      this.genTransition('append')
+      this.genBar([this.genSlider(slider), tab]),
+      this.genItems(items, item)
     ])
   }
 }
