@@ -9,6 +9,7 @@ export default {
       this.callSlider()
       this.tabItems && this.tabItems(val.id)
     },
+    alignWithTitle: 'callSlider',
     centered: 'callSlider',
     fixedTabs: 'callSlider',
     isBooted: 'findActiveLink',
