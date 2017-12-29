@@ -127,7 +127,7 @@ test('VTabs', ({ mount, shallow }) => {
     })
 
     await ssrBootable()
-    
+
     const tabs = wrapper.find(VTabs)[0]
     const tab = wrapper.find(VTab)[1]
     const input = jest.fn()
@@ -135,7 +135,7 @@ test('VTabs', ({ mount, shallow }) => {
     tabs.vm.$on('input', input)
     tab.vm.click(new Event('click'))
     await wrapper.vm.$nextTick()
-    
+
     expect(input).toHaveBeenCalled()
   })
 
@@ -305,7 +305,7 @@ test('VTabs', ({ mount, shallow }) => {
 
     // Mocking container and children
     expect(wrapper.vm.newOffsetAppend(
-      { clientWidth: 400 },
+      { scrollWidth: 800, clientWidth: 400 },
       mockEls,
       0
     )).toEqual({ offset: 400, index: 8 })
@@ -348,7 +348,7 @@ test('VTabs', ({ mount, shallow }) => {
     wrapper.vm.onTouchEnd()
     expect(wrapper.vm.scrollOffset).toBe(0)
 
-    wrapper.setData({ isOverflowing: false })    
+    wrapper.setData({ isOverflowing: false })
     wrapper.vm.onTouchEnd()
     expect(wrapper.vm.scrollOffset).toBe(0)
   })

@@ -57,8 +57,9 @@ export default {
 
       // Check one scroll ahead to know the width of right-most item
       const container = this.$refs.container
+      const wrapper = this.$refs.wrapper
       const bar = this.$refs.bar
-      const item = this.newOffsetAppend(this.scrollOffset, this.itemOffset)
+      const item = this.newOffsetAppend(wrapper, this.scrollOffset, this.itemOffset)
       const itemWidth = item && container.children[item.index].clientWidth || 0
       const scrollOffset = this.scrollOffset + bar.clientWidth
 

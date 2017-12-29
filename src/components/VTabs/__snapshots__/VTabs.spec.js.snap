@@ -3,18 +3,20 @@
 exports[`VTabs should show tabs arrows 1`] = `
 
 <div class="tabs tabs--overflow tabs--show-arrows">
-  <!---->
-  <div class="tabs__wrapper">
-    <div class="tabs__container"
-         style="height: 48px;"
-    >
-      <div class="tabs__slider-wrapper">
-        <div class="tabs__slider accent">
+  <div class="tabs__bar">
+    <!---->
+    <div class="tabs__wrapper">
+      <div class="tabs__container"
+           style="height: 48px;"
+      >
+        <div class="tabs__slider-wrapper">
+          <div class="tabs__slider accent">
+          </div>
         </div>
       </div>
     </div>
+    <!---->
   </div>
-  <!---->
 </div>
 
 `;

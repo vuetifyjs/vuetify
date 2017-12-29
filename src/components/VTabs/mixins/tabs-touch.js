@@ -8,14 +8,15 @@ export default {
     newOffset (direction) {
       const capitalize = `${direction.charAt(0).toUpperCase()}${direction.slice(1)}`
       const container = this.$refs.container
+      const wrapper = this.$refs.wrapper
       const items = container.children
 
-      return this[`newOffset${capitalize}`](container, items)
+      return this[`newOffset${capitalize}`](wrapper, items)
     },
-    newOffsetPrepend (container, items, offset = 0) {
+    newOffsetPrepend (wrapper, items, offset = 0) {
       for (let index = this.itemOffset - 1; index >= 0; index--) {
         const newOffset = offset + items[index].clientWidth
-        if (newOffset >= container.clientWidth) {
+        if (newOffset >= wrapper.clientWidth) {
           return { offset: this.scrollOffset - offset, index: index + 1 }
         }
         offset = newOffset
@@ -23,11 +24,11 @@ export default {
 
       return { offset: 0, index: 0 }
     },
-    newOffsetAppend (container, items, offset = this.scrollOffset) {
+    newOffsetAppend (wrapper, items, offset = this.scrollOffset) {
       for (let index = this.itemOffset; index < items.length; index++) {
         const newOffset = offset + items[index].clientWidth
-        if (newOffset > this.scrollOffset + container.clientWidth) {
-          return { offset, index }
+        if (newOffset > this.scrollOffset + wrapper.clientWidth) {
+          return { offset: Math.min(offset, wrapper.scrollWidth - wrapper.clientWidth), index }
         }
         offset = newOffset
       }
@@ -44,15 +45,15 @@ export default {
     },
     onTouchEnd () {
       const container = this.$refs.container
-      const scrollWidth = container.scrollWidth - this.$el.clientWidth / 2
+      const wrapper = this.$refs.wrapper
+      const maxScrollOffset = container.clientWidth - wrapper.clientWidth
       container.style.transition = null
       container.style.willChange = null
 
       if (this.scrollOffset < 0 || !this.isOverflowing) {
         this.scrollOffset = 0
-      } else if (this.scrollOffset >= scrollWidth) {
-        const lastItem = container.children[container.children.length - 1]
-        this.scrollOffset = scrollWidth - lastItem.clientWidth
+      } else if (this.scrollOffset >= maxScrollOffset) {
+        this.scrollOffset = maxScrollOffset
       }
     }
   }
