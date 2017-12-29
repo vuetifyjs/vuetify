@@ -67,7 +67,7 @@ export default {
       return {
         left: `${this.sliderLeft}px`,
         transition: this.sliderLeft != null ? null : 'none',
-        width: `${this.sliderWidth}%`
+        width: `${this.sliderWidth}px`
       }
     },
     target () {
