@@ -57,11 +57,12 @@ export default {
 
       // Check one scroll ahead to know the width of right-most item
       const container = this.$refs.container
+      const bar = this.$refs.bar
       const item = this.newOffsetAppend(this.scrollOffset, this.itemOffset)
       const itemWidth = item && container.children[item.index].clientWidth || 0
-      const scrollOffset = this.scrollOffset + container.clientWidth
+      const scrollOffset = this.scrollOffset + bar.clientWidth
 
-      return container.scrollWidth - scrollOffset > itemWidth * 0.30
+      return container.clientWidth - scrollOffset > itemWidth * 0.30
     },
     sliderStyles () {
       return {
