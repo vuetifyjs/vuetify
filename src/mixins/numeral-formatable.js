@@ -157,7 +157,7 @@ export default {
           : this.numeralCaretOnInsert(selection)
     },
     numeralCaretOnInsert (selection) {
-      return selection -= this.selection === selection ? 1 : 0
+      return selection -= this.selection <= selection ? 1 : 0
     },
     numeralCaretOnDelete (selection, maskedText) {
       if (maskedText[this.selection] === this.decimal) {

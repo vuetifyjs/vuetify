@@ -27,8 +27,7 @@ export default {
       internalChange: false,
       badInput: false,
       backspace: false,
-      delete: false,
-      lazySelection: 0
+      delete: false
     }
   },
 
