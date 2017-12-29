@@ -145,6 +145,7 @@ export default {
       for (let i = 0; i < length; i++) {
         const vnode = this.$slots.default[i]
 
+        /* istanbul ignore else */
         if (vnode.componentOptions) {
           switch (vnode.componentOptions.Ctor.options.name) {
             case 'v-tab': tab.push(vnode)

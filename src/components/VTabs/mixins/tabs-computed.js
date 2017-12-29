@@ -23,7 +23,7 @@ export default {
         'tabs--icons-and-text': this.iconsAndText,
         'tabs--is-mobile': this.isMobile,
         'tabs--overflow': this.isOverflowing,
-        'tabs--show-arrows': this.showArrows && this.isOverflowing
+        'tabs--show-arrows': this.hasArrows
       }
     },
     computedHeight () {
@@ -35,6 +35,9 @@ export default {
       return {
         height: `${parseInt(this.computedHeight)}px`
       }
+    },
+    hasArrows () {
+      return (this.showArrows || !this.isMobile) && this.isOverflowing
     },
     inputValue: {
       get () {
@@ -49,11 +52,12 @@ export default {
       return this.$vuetify.breakpoint.width < this.mobileBreakPoint
     },
     prependIconVisible () {
-      return this.isOverflowing &&
+      return this.hasArrows &&
+        this.isOverflowing &&
         this.scrollOffset > 0
     },
     appendIconVisible () {
-      if (!this.isOverflowing) return
+      if (!this.isOverflowing || !this.hasArrows) return false
 
       // Check one scroll ahead to know the width of right-most item
       const container = this.$refs.container

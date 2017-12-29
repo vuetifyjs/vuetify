@@ -50,6 +50,7 @@ export default {
       container.style.transition = null
       container.style.willChange = null
 
+      /* istanbul ignore else */
       if (this.scrollOffset < 0 || !this.isOverflowing) {
         this.scrollOffset = 0
       } else if (this.scrollOffset >= maxScrollOffset) {

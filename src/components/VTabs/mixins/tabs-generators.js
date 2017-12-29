@@ -29,11 +29,7 @@ export default {
       }, items)
     },
     genIcon (direction) {
-      if ((!this[`${direction}IconVisible`] &&
-        !this.isMobile) ||
-        !this.showArrows ||
-        !this.isOverflowing
-      ) return null
+      if (!this[`${direction}IconVisible`]) return null
 
       return this.$createElement('v-icon', {
         staticClass: `icon--${direction}`,

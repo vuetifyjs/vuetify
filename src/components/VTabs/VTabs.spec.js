@@ -220,22 +220,25 @@ test('VTabs', ({ mount, shallow }) => {
   it('should not conditionally render append and prepend icons', async () => {
     const scrollTo = jest.fn()
     const wrapper = mount(VTabs, {
-      attachToDocument: true,
-      propsData: { showArrows: true }
+      attachToDocument: true
     })
 
     expect(wrapper.vm.genIcon('prepend')).toBe(null)
 
-    // Mock display state
-    wrapper.setData({ isOverflowing: true })
+    // // Mock display state
+    wrapper.setData({ isOverflowing: true, scrollOffset: 1 })
+    wrapper.setProps({ showArrows: true })
     wrapper.vm.$vuetify.breakpoint.width = 800
     await ssrBootable()
     wrapper.setProps({ mobileBreakPoint: 1200 })
 
     expect(wrapper.vm.genIcon('prepend')).toBeTruthy()
-    await wrapper.vm.$nextTick()
 
     wrapper.setMethods({ scrollTo })
+    // Since the elements will have no width
+    // trick append icon to show
+    wrapper.setData({ scrollOffset: -1 })
+    await wrapper.vm.$nextTick()
 
     const next = wrapper.find('.icon--append')[0]
     next.trigger('click')
@@ -303,11 +306,15 @@ test('VTabs', ({ mount, shallow }) => {
 
     await ssrBootable()
 
+    expect(wrapper.vm.newOffsetAppend(
+      { scrollWidth: 800, clientWidth: 400 },
+      []
+    )).toBe(null)
+
     // Mocking container and children
     expect(wrapper.vm.newOffsetAppend(
       { scrollWidth: 800, clientWidth: 400 },
-      mockEls,
-      0
+      mockEls
     )).toEqual({ offset: 400, index: 8 })
 
     // Mock offset
@@ -348,7 +355,7 @@ test('VTabs', ({ mount, shallow }) => {
     wrapper.vm.onTouchEnd()
     expect(wrapper.vm.scrollOffset).toBe(0)
 
-    wrapper.setData({ isOverflowing: false })
+    wrapper.setData({ isOverflowing: false, scrollOffset: 100 })
     wrapper.vm.onTouchEnd()
     expect(wrapper.vm.scrollOffset).toBe(0)
   })
