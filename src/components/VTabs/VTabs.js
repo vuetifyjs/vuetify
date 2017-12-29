@@ -133,7 +133,7 @@ export default {
 
       const activeIndex = this.tabs.findIndex(tabItem => {
         return tabItem.id === this.lazyValue ||
-          tabItem.el.firstChild.className.indexOf('tabs__item--active') > -1
+          tabItem.el.firstChild.className.indexOf(this.activeClass) > -1
       })
 
       /* istanbul ignore next */
