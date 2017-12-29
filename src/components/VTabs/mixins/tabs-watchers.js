@@ -13,6 +13,9 @@ export default {
     lazyValue: 'updateTabs',
     value: 'tabClick',
     '$vuetify.application.left': 'onContainerResize',
-    '$vuetify.application.right': 'onContainerResize'
+    '$vuetify.application.right': 'onContainerResize',
+    scrollOffset (val) {
+      this.$refs.container.style.transform = `translateX(${-val}px)`
+    }
   }
 }

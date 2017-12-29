@@ -34,8 +34,7 @@ export default {
     },
     containerStyles () {
       return {
-        height: `${parseInt(this.computedHeight)}px`,
-        transform: `translateX(${-this.scrollOffset}px)`
+        height: `${parseInt(this.computedHeight)}px`
       }
     },
     inputValue: {

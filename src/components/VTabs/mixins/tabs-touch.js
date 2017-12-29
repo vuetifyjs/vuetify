@@ -37,6 +37,7 @@ export default {
     onTouchStart (e) {
       this.startX = this.scrollOffset + e.touchstartX
       this.$refs.container.style.transition = 'none'
+      this.$refs.container.style.willChange = 'transform'
     },
     onTouchMove (e) {
       this.scrollOffset = this.startX - e.touchmoveX
@@ -45,6 +46,7 @@ export default {
       const container = this.$refs.container
       const scrollWidth = container.scrollWidth - this.$el.clientWidth / 2
       container.style.transition = null
+      container.style.willChange = null
 
       if (this.scrollOffset < 0 || !this.isOverflowing) {
         this.scrollOffset = 0
