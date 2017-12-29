@@ -28,7 +28,7 @@ export default {
       for (let index = this.itemOffset; index < items.length; index++) {
         const newOffset = offset + items[index].clientWidth
         if (newOffset > this.scrollOffset + wrapper.clientWidth) {
-          return { offset: Math.min(offset, wrapper.scrollWidth - wrapper.clientWidth), index }
+          return { offset: Math.min(offset, wrapper.scrollWidth + this.scrollOffset - wrapper.clientWidth), index }
         }
         offset = newOffset
       }
