@@ -2,7 +2,7 @@
 @import '../theme'
 
 /* Theme */
-tabs($material)
+tabs__container($material)
   background-color: $material.cards
 
   .icon--left,
@@ -15,7 +15,7 @@ tabs($material)
     &.tabs__item--disabled
       color: $material.buttons.disabled
 
-theme(tabs, "tabs")
+theme(tabs__container, "tabs__container")
 
 .tabs
   position: relative

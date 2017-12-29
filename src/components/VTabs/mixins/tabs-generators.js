@@ -9,6 +9,10 @@ export default {
       return this.$createElement('div', {
         staticClass: 'tabs__container',
         style: this.containerStyles,
+        'class': this.addBackgroundColorClassChecks({
+          'theme--dark': this.dark,
+          'theme--light': this.light
+        }),
         ref: 'container'
       }, items)
     },

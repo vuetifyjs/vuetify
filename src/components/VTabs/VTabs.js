@@ -101,8 +101,6 @@ export default {
      * When v-navigation-drawer changes the
      * width of the container, call resize
      * after the transition is complete
-     *
-     * @return {Void}
      */
     onContainerResize () {
       clearTimeout(this.resizeTimeout)
@@ -197,7 +195,7 @@ export default {
 
     return h('div', {
       staticClass: 'tabs',
-      'class': this.addBackgroundColorClassChecks(this.classes),
+      'class': this.classes,
       directives: [{
         name: 'resize',
         arg: 400,

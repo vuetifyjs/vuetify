@@ -22,9 +22,7 @@ export default {
         'tabs--icons-and-text': this.iconsAndText,
         'tabs--is-mobile': this.isMobile,
         'tabs--overflow': this.isOverflowing,
-        'tabs--show-arrows': this.showArrows && this.isOverflowing,
-        'theme--dark': this.dark,
-        'theme--light': this.light
+        'tabs--show-arrows': this.showArrows && this.isOverflowing
       }
     },
     computedHeight () {
