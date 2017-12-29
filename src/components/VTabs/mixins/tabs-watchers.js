@@ -9,8 +9,11 @@ export default {
       this.callSlider()
       this.tabItems && this.tabItems(val.id)
     },
+    centered: 'callSlider',
+    fixedTabs: 'callSlider',
     isBooted: 'findActiveLink',
     lazyValue: 'updateTabs',
+    right: 'callSlider',
     value: 'tabClick',
     '$vuetify.application.left': 'onContainerResize',
     '$vuetify.application.right': 'onContainerResize',
