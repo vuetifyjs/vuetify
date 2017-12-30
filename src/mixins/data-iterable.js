@@ -18,6 +18,7 @@ import { getObjectValueByPath } from '../util/helpers'
  *
  */
 export default {
+  name: 'data-iterable',
 
   components: {
     VBtn,

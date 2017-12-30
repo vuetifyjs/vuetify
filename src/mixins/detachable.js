@@ -9,6 +9,8 @@ function validateAttachTarget (val) {
 }
 
 export default {
+  name: 'detachable',
+
   mixins: [Bootable],
 
   props: {

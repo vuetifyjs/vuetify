@@ -1,6 +1,8 @@
 import { getZIndex } from '../util/helpers'
 
 export default {
+  name: 'stackable',
+
   data () {
     return {
       stackBase: null,
@@ -13,7 +15,7 @@ export default {
   computed: {
     /**
      * Currently active z-index
-     * 
+     *
      * @return {number}
      */
     activeZIndex () {

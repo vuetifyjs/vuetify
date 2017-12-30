@@ -30,6 +30,8 @@ const dimensions = {
  * As well as be manually positioned
  */
 export default {
+  name: 'menuable',
+
   mixins: [
     Positionable,
     Stackable,

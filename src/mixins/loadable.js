@@ -8,6 +8,8 @@
  * or designate a custom progress linear bar
  */
 export default {
+  name: 'loadable',
+
   props: {
     loading: {
       type: [Boolean, String],
