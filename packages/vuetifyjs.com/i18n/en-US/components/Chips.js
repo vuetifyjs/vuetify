@@ -1,6 +1,6 @@
 export default {
   header: 'Chip',
-  headerText: 'The <code>v-chip</code> component is used to convey small pieces of information. Using the <code>close</code> property, the chip becomes interactive, allowing user interaction.',
+  headerText: 'The `v-chip` component is used to convey small pieces of information. Using the `close` property, the chip becomes interactive, allowing user interaction.',
   components: ['v-chip'],
   examples: [{
     default: {
@@ -22,11 +22,11 @@ export default {
     },
     label: {
       header: 'Label',
-      desc: 'Label chips use the <code>v-card</code> border-radius.'
+      desc: 'Label chips use the `v-card` border-radius.'
     },
     closable: {
       header: 'Closable',
-      desc: 'Closable chips can be controlled with a v-model. Listen to the <code>input</code> event if you want to know when a chip has been closed.',
+      desc: 'Closable chips can be controlled with a v-model. Listen to the `input` event if you want to know when a chip has been closed.',
       uninverted: true
     },
     inSelects: {
@@ -39,7 +39,7 @@ export default {
     close: 'Adds remove button',
     label: 'Removes circle edges',
     outline: 'Removes background and applies border and text color',
-    selected: 'Applies a selection color to the chip. Primarily used for displaying highlight context in <code>v-select</code>',
+    selected: 'Applies a selection color to the chip. Primarily used for displaying highlight context in `v-select`',
     small: 'Decreases the chip size'
   }
 }

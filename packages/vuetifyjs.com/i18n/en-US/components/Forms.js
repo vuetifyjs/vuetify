@@ -4,19 +4,19 @@ export default {
   components: ['v-form'],
   examples: [{
     basicValidation: {
-      header: "VForm - Basic validation",
+      header: 'VForm - Basic validation',
       desc: ''
     },
     validationWithSubmitAndClear: {
-      header: "VForm - Validation with submit & clear",
+      header: 'VForm - Validation with submit & clear',
       desc: ''
     },
     vuelidate: {
-      header: "Vuelidate",
+      header: 'Vuelidate',
       desc: ''
     },
     veeValidate: {
-      header: "Vee-validate",
+      header: 'Vee-validate',
       desc: 'Vee-validate is another validation plugin that allows you to check your forms. One caveat is that you must add the **type="checkbox"** to properly validate a `v-checkbox` when using the **value** prop.'
     }
   }]

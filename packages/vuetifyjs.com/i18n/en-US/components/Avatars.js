@@ -5,11 +5,11 @@ export default {
   examples: [{
     standard: {
       header: 'Standard display',
-      desc: `The avatar has a dynamic size that can be scaled for any situation. A **tile** variation is available for displaying an avatar without border radius.`
+      desc: 'The avatar has a dynamic size that can be scaled for any situation. A **tile** variation is available for displaying an avatar without border radius.'
     },
     advanced: {
       header: 'Advanced usage',
-      desc: `Combining an avatar with other components allows you to build beautiful user interfaces right out of the box.`
+      desc: 'Combining an avatar with other components allows you to build beautiful user interfaces right out of the box.'
     },
     iconAndText: {
       header: 'Icon and text',

@@ -20,27 +20,27 @@ export default {
       },
       multiple: {
         header: 'Multiple',
-        desc: `A multi-select can utilize v-chip as the display for selected items.`
+        desc: 'A multi-select can utilize v-chip as the display for selected items.'
       },
       autocomplete: {
         header: 'Autocomplete',
-        desc: `Provides type-ahead autocomplete functionality.`
+        desc: 'Provides type-ahead autocomplete functionality.'
       },
       scopedSlots: {
         header: 'Scoped slots',
-        desc: `With the power of scoped slots, you can customize the visual output of the select. In this example we add a profile picture for both the chips and list items.`
+        desc: 'With the power of scoped slots, you can customize the visual output of the select. In this example we add a profile picture for both the chips and list items.'
       },
       customTextAndValue: {
         header: 'Customized item text and value',
-        desc: `You can specify the specific properties within your items array correspond to the text and value fields. By default, this is **text** and **value**. In this example we also use the <code>return-object</code> prop which will return the entire object of the selected item on selection.`
+        desc: 'You can specify the specific properties within your items array correspond to the text and value fields. By default, this is **text** and **value**. In this example we also use the `return-object` prop which will return the entire object of the selected item on selection.'
       },
       tags: {
         header: 'Tags',
-        desc: `With tags you can allow a user to create new values that may not be present in a provided items list. Keep in mind, tags only supports arrays of **primitive** items and cannot be used with props such as <code>item-text</code>, <code>item-value</code> for example.`
+        desc: 'With tags you can allow a user to create new values that may not be present in a provided items list. Keep in mind, tags only supports arrays of **primitive** items and cannot be used with props such as `item-text`, `item-value` for example.'
       },
       asynchronous: {
         header: 'Asynchronous items',
-        desc: 'Sometimes you need to load data externally based upon a search query. Use the <code>search-input</code> prop with the **.sync** modifier when using the <code>autocomplete</code> prop. We also make use of the new <code>cache-items</code> prop. This will keep a unique list of all items that have been passed to the <code>items</code> prop and is **REQUIRED** when using asynchronous items and the **multiple** prop.'
+        desc: 'Sometimes you need to load data externally based upon a search query. Use the `search-input` prop with the **.sync** modifier when using the `autocomplete` prop. We also make use of the new `cache-items` prop. This will keep a unique list of all items that have been passed to the `items` prop and is **REQUIRED** when using asynchronous items and the **multiple** prop.'
       }
   }],
   props: {
@@ -54,10 +54,10 @@ export default {
     editable: ' Creates an editable button - <a href="https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons" target="_blank" rel="noopener">spec<a/>',
     filter: 'The function used for filtering items',
     hideSelected: 'Do not display in the select menu items that are already selected',
-    itemAvatar: `Set property of **items**'s avatar value`,
-    itemDisabled: `Set property of **items**'s disabled value`,
-    itemText: `Set property of **items**'s text value`,
-    itemValue: `Set property of **items**'s value`,
+    itemAvatar: 'Set property of **items**\'s avatar value',
+    itemDisabled: 'Set property of **items**\'s disabled value',
+    itemText: 'Set property of **items**\'s text value',
+    itemValue: 'Set property of **items**\'s value',
     items: 'Can be an array of objects or array of strings. When using objects, will look for a text and value field. This can be changed using the **item-text** and **item-value** props.',
     multiple: 'Changes select to multiple. Accepts array for value',
     multiLine: 'Causes label to float when the select component is focused or dirty',

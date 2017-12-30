@@ -30,7 +30,7 @@ export default {
     },
     validation: {
       header: 'Validation',
-      desc: `Vuetify includes simple validation through the <code>rules</code> prop. The prop accepts an array of callbacks. While validating rules, the current v-model value will be passed to the callback. This callback should return either <code>true</code> or a <code>String</code>, the error message.`
+      desc: 'Vuetify includes simple validation through the `rules` prop. The prop accepts an array of callbacks. While validating rules, the current v-model value will be passed to the callback. This callback should return either `true` or a `String`, the error message.'
     },
     fullWidthWithCharacterCounter: {
       header: 'Full-width text field with character counter',
@@ -50,7 +50,7 @@ export default {
     },
     customValidation: {
       header: 'Custom validation',
-      desc: 'While the built in <code>v-form</code> or 3rd party plugin such as <a href="https://github.com/monterail/vuelidate" target="_blank" rel="noopener">vuelidate</a> or <a href="https://github.com/logaretm/vee-validate" target="_blank" rel="noopener">vee-validation</a> can help streamline your validation process, you can choose to simply control it yourself.'
+      desc: 'While the built in `v-form` or 3rd party plugin such as <a href="https://github.com/monterail/vuelidate" target="_blank" rel="noopener">vuelidate</a> or <a href="https://github.com/logaretm/vee-validate" target="_blank" rel="noopener">vee-validation</a> can help streamline your validation process, you can choose to simply control it yourself.'
     },
     textarea: {
       header: 'Textarea',
@@ -71,7 +71,7 @@ export default {
     },
     progressBar: {
       header: 'Progress bar',
-      desc: 'You can display a progress bar instead of the bottom line. You can use the default indeterminate progress having same color as the text field or designate a custom one using the <code>progress</code> slot'
+      desc: 'You can display a progress bar instead of the bottom line. You can use the default indeterminate progress having same color as the text field or designate a custom one using the `progress` slot'
     }
   }],
   props: {

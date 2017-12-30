@@ -8,51 +8,51 @@ export default {
       desc: ''
     },
     checkboxesBoolean: {
-      header: "Checkboxes - Boolean",
+      header: 'Checkboxes - Boolean',
       desc: ''
     },
     checkboxesArray: {
-      header: "Checkboxes - Array",
+      header: 'Checkboxes - Array',
       desc: ''
     },
     checkboxesStates: {
-      header: "Checkboxes - States",
+      header: 'Checkboxes - States',
       desc: ''
     },
     checkboxesColors: {
-      header: "Checkboxes - Colors",
+      header: 'Checkboxes - Colors',
       desc: 'Checkboxes can be colored by using any of the builtin colors and contextual names using the color prop.'
     },
     checkboxesInlineTexfield: {
-      header: "Checkboxes - Inline with a textfield",
+      header: 'Checkboxes - Inline with a textfield',
       desc: ''
     },
     radiosDefault: {
-      header: "Radios - Default",
-      desc: 'Radio-groups are by default mandatory. This can be changed with the <code>mandatory</code> prop.'
+      header: 'Radios - Default',
+      desc: 'Radio-groups are by default mandatory. This can be changed with the `mandatory` prop.'
     },
     radiosDirection: {
-      header: "Radios - Direction",
+      header: 'Radios - Direction',
       desc: 'Radio-groups can be presented either as a row or a column, using their respective props. The default is as a column.'
     },
     radiosColors: {
-      header: "Radios - Colors",
+      header: 'Radios - Colors',
       desc: 'Radios can be colored by using any of the builtin colors and contextual names using the color prop.'
     },
     switchesBoolean: {
-      header: "Switches - Boolean",
+      header: 'Switches - Boolean',
       desc: ''
     },
     switchesArray: {
-      header: "Switches - Array",
+      header: 'Switches - Array',
       desc: ''
     },
     switchesStates: {
-      header: "Switches - States",
+      header: 'Switches - States',
       desc: ''
     },
     switchesColors: {
-      header: "Switches - Colors",
+      header: 'Switches - Colors',
       desc: 'Switches can be colored by using any of the builtin colors and contextual names using the color prop.'
     }
   }],

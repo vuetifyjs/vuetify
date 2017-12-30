@@ -1,6 +1,6 @@
 export default {
   header: 'Subheaders',
-  headerText: 'The <code>v-subheader</code> component is used to separate sections of lists.',
+  headerText: 'The `v-subheader` component is used to separate sections of lists.',
   components: ['v-subheader'],
   examples: [{
     list: {

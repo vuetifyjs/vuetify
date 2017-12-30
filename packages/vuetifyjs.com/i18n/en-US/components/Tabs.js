@@ -1,6 +1,6 @@
 export default {
   header: 'Tab',
-  headerText: 'The <code>v-tabs</code> component is used for hiding content behind a selectable item. This can also be used as a pseudo-navigation for a page, where the tabs are links and the tab-items are the content.',
+  headerText: 'The `v-tabs` component is used for hiding content behind a selectable item. This can also be used as a pseudo-navigation for a page, where the tabs are links and the tab-items are the content.',
   components: [
     'v-tabs',
     'v-tabs-bar',
@@ -20,15 +20,15 @@ export default {
     },
     content: {
       header: 'Content',
-      desc: 'Tabs are not the only thing you can put inside the <code>v-tabs</code> component. In this example we\'ve also added a toolbar.'
+      desc: 'Tabs are not the only thing you can put inside the `v-tabs` component. In this example we\'ve also added a toolbar.'
     },
     search: {
       header: 'With search',
-      desc: 'Here is another example of additional content inside the <code>v-tabs</code> component.'
+      desc: 'Here is another example of additional content inside the `v-tabs` component.'
     },
     icons: {
       header: 'Icons',
-      desc: 'By using the <code>icons</code> prop you can add icons to each tab item.'
+      desc: 'By using the `icons` prop you can add icons to each tab item.'
     },
     desktop: {
       header: 'Desktop tabs',
@@ -36,7 +36,7 @@ export default {
     },
     grow: {
       header: 'Grow',
-      desc: 'The <code>grow</code> prop will make the tab items take up all available space.'
+      desc: 'The `grow` prop will make the tab items take up all available space.'
     },
     pagination: {
       header: 'Pagination',
@@ -44,7 +44,7 @@ export default {
     },
     disabledScroll: {
       header: 'Disabled scroll',
-      desc: 'You can disable the pagination controls by setting the <code>scrollable</code> prop to <code>false</code>. This also has the effect of removing the margins around the tab item container.'
+      desc: 'You can disable the pagination controls by setting the `scrollable` prop to `false`. This also has the effect of removing the margins around the tab item container.'
     }
   }]
 }

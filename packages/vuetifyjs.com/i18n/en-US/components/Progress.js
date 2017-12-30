@@ -1,6 +1,6 @@
 export default {
   header: 'Progress',
-  headerText: 'The <code>v-progress-circular</code> and <code>v-progress-linear</code> components are used to convey data visually to users. They can also represent an indeterminate amount, such as loading or processing. These components contains a slot that is centered within the component container.',
+  headerText: 'The `v-progress-circular` and `v-progress-linear` components are used to convey data visually to users. They can also represent an indeterminate amount, such as loading or processing. These components contains a slot that is centered within the component container.',
   components: ['v-progress-circular', 'v-progress-linear'],
   examples: [{
     circularDefault: {
@@ -33,7 +33,7 @@ export default {
     },
     linearBuffer: {
       header: 'Buffer',
-      desc: 'A buffer state represents two values simultaneously. The primary value is controled by the model, whereas the buffer is controlled by the <code>buffer-value</code> prop.'
+      desc: 'A buffer state represents two values simultaneously. The primary value is controled by the model, whereas the buffer is controlled by the `buffer-value` prop.'
     },
     linearQueryIndeterminateAndDeterminate: {
       header: 'Query Indeterminate and Determinate',
@@ -45,7 +45,7 @@ export default {
     },
     linearCustomColors: {
       header: 'Custom colors',
-      desc: 'You can also set the color using the props <code>color</code> and <code>background-color</code>.'
+      desc: 'You can also set the color using the props `color` and `background-color`.'
     }
   }]
 }
