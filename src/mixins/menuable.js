@@ -217,7 +217,6 @@ export default {
       return top < 12 ? 12 : top
     },
     callActivate () {
-      this.checkForWindow()
       if (!this.hasWindow) return
 
       this.activate()
@@ -306,6 +305,8 @@ export default {
       return el.style.display !== 'none'
     },
     updateDimensions () {
+      this.checkForWindow()
+
       const dimensions = {}
 
       // Activator should already be shown
