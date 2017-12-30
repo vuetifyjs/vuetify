@@ -24,6 +24,15 @@ export default {
     genContainer (items) {
       return this.$createElement('div', {
         staticClass: 'tabs__container',
+        class: {
+          'tabs__container--align-with-title': this.alignWithTitle,
+          'tabs__container--centered': this.centered,
+          'tabs__container--fixed-tabs': this.fixedTabs,
+          'tabs__container--grow': this.grow,
+          'tabs__container--icons-and-text': this.iconsAndText,
+          'tabs__container--overflow': this.isOverflowing,
+          'tabs__container--right': this.right
+            },
         style: this.containerStyles,
         ref: 'container'
       }, items)
@@ -34,7 +43,7 @@ export default {
       ) return null
 
       return this.$createElement('v-icon', {
-        staticClass: `icon--${direction}`,
+        staticClass: `tabs__icon tabs__icon--${direction}`,
         style: {
           display: 'inline-flex',
           top: `${this.computedHeight / 2 - 12}px`
@@ -61,6 +70,9 @@ export default {
     genWrapper (items) {
       return this.$createElement('div', {
         staticClass: 'tabs__wrapper',
+        class: {
+          'tabs__wrapper--show-arrows': this.hasArrows
+        },
         ref: 'wrapper',
         directives: [{
           name: 'touch',

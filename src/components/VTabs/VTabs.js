@@ -200,7 +200,6 @@ export default {
 
     return h('div', {
       staticClass: 'tabs',
-      'class': this.classes,
       directives: [{
         name: 'resize',
         arg: 400,

@@ -13,19 +13,6 @@ export default {
 
       return this.tabs[this.activeIndex]
     },
-    classes () {
-      return {
-        'tabs--align-with-title': this.alignWithTitle,
-        'tabs--centered': this.centered,
-        'tabs--right': this.right,
-        'tabs--fixed-tabs': this.fixedTabs,
-        'tabs--grow': this.grow,
-        'tabs--icons-and-text': this.iconsAndText,
-        'tabs--is-mobile': this.isMobile,
-        'tabs--overflow': this.isOverflowing,
-        'tabs--show-arrows': this.hasArrows
-      }
-    },
     computedHeight () {
       if (this.height) return this.height
 

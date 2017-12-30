@@ -209,7 +209,7 @@ test('VTabs', ({ mount, shallow }) => {
 
     wrapper.setData({ isOverflowing: true })
     await wrapper.vm.$nextTick()
-    expect(wrapper.hasClass('tabs--show-arrows')).toBe(true)
+    expect(wrapper.find('.tabs__wrapper--show-arrows')).toHaveLength(1)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -242,7 +242,7 @@ test('VTabs', ({ mount, shallow }) => {
     wrapper.setData({ scrollOffset: -1 })
     await wrapper.vm.$nextTick()
 
-    const next = wrapper.find('.icon--append')[0]
+    const next = wrapper.find('.tabs__icon--append')[0]
     next.trigger('click')
     await wrapper.vm.$nextTick()
     expect(scrollTo).toHaveBeenCalledWith('append')
