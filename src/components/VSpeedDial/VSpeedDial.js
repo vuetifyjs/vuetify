@@ -2,13 +2,14 @@ require('../../stylus/components/_speed-dial.styl')
 
 import Toggleable from '../../mixins/toggleable'
 import Positionable from '../../mixins/positionable'
+import Transitionable from '../../mixins/transitionable'
 
 import ClickOutside from '../../directives/click-outside'
 
 export default {
   name: 'v-speed-dial',
 
-  mixins: [Positionable, Toggleable],
+  mixins: [Positionable, Toggleable, Transitionable],
 
   directives: { ClickOutside },
 
@@ -71,6 +72,8 @@ export default {
       'class': 'speed-dial__list',
       props: {
         name: this.transition,
+        mode: this.mode,
+        origin: this.origin,
         tag: 'div'
       }
     }, children)
