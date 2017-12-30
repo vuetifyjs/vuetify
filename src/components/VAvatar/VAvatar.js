@@ -8,6 +8,8 @@ export default {
 
   functional: true,
 
+  mixins: [Colorable],
+
   props: {
     color: String,
     size: {
