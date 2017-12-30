@@ -161,7 +161,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="true"
+                data-ripple="false"
                 aria-label="Previous page"
         >
           <div class="btn__content">
@@ -175,7 +175,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="true"
+                data-ripple="false"
                 aria-label="Next page"
         >
           <div class="btn__content">
@@ -354,7 +354,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="true"
+                data-ripple="false"
                 aria-label="Previous page"
         >
           <div class="btn__content">
@@ -368,7 +368,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="true"
+                data-ripple="false"
                 aria-label="Next page"
         >
           <div class="btn__content">
@@ -549,7 +549,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="true"
+                data-ripple="false"
                 aria-label="Previous page"
         >
           <div class="btn__content">
@@ -563,7 +563,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="true"
+                data-ripple="false"
                 aria-label="Next page"
         >
           <div class="btn__content">
@@ -647,7 +647,7 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="true"
+                data-ripple="false"
                 aria-label="Previous page"
         >
           <div class="btn__content">
