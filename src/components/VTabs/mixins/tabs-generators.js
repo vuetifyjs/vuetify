@@ -32,7 +32,7 @@ export default {
           'tabs__container--icons-and-text': this.iconsAndText,
           'tabs__container--overflow': this.isOverflowing,
           'tabs__container--right': this.right
-            },
+        },
         style: this.containerStyles,
         ref: 'container'
       }, items)
