@@ -1,6 +1,6 @@
 export default {
   header: 'Divider',
-  headerText: 'The <code>v-divider</code> component is used to separate sections of lists.',
+  headerText: 'The `v-divider` component is used to separate sections of lists.',
   components: ['v-divider'],
   examples: [{
     fullBleed: {

@@ -12,11 +12,11 @@ export default {
     },
     icon: {
       header: 'Custom Icon / No Icon',
-      desc: `You can easily assign a custom icon or remove it all together.`
+      desc: 'You can easily assign a custom icon or remove it all together.'
     },
     transition: {
       header: 'Display transition',
-      desc: `You can apply a custom transition to the show/hide of the alert.`
+      desc: 'You can apply a custom transition to the show/hide of the alert.'
     },
     outline: {
       header: 'Outline',

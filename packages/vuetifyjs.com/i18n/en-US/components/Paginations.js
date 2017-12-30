@@ -1,6 +1,6 @@
 export default {
   header: 'Pagination',
-  headerText: 'The <code>v-pagination</code> component is used to separate long sets of data so that it is easier for a user to consume information. Depending on the length provided, the pagination component will automatically scale. To maintain the current page, simply supply a v-model attribute.',
+  headerText: 'The `v-pagination` component is used to separate long sets of data so that it is easier for a user to consume information. Depending on the length provided, the pagination component will automatically scale. To maintain the current page, simply supply a v-model attribute.',
   components: ['v-pagination'],
   examples: [{
     short: {
@@ -13,7 +13,7 @@ export default {
     },
     limit: {
       header: 'Limit',
-      desc: 'You can also manually set the maximum number of visible page buttons with the <code>total-visible</code> prop.'
+      desc: 'You can also manually set the maximum number of visible page buttons with the `total-visible` prop.'
     },
     round: {
       header: 'Round',

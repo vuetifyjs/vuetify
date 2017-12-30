@@ -1,6 +1,6 @@
 export default {
   header: 'Tooltip',
-  headerText: 'The <code>v-tooltip</code> component is useful for conveying information when a user hovers over an element. You can also programmatically control the display of tooltips through a **v-model**',
+  headerText: 'The `v-tooltip` component is useful for conveying information when a user hovers over an element. You can also programmatically control the display of tooltips through a **v-model**',
   components: ['v-tooltip'],
   examples: [{
     default: {
@@ -13,7 +13,7 @@ export default {
     },
     visibility: {
       header: 'Visibility',
-      desc: 'Tooltip visibility can be programmatically changed using <code>v-model</code>.'
+      desc: 'Tooltip visibility can be programmatically changed using `v-model`.'
     }
   }],
   props: {

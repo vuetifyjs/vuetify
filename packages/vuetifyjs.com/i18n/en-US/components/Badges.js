@@ -1,6 +1,6 @@
 export default {
   header: 'Badge',
-  headerText: 'The <code>v-badge</code> component can wrap any type of content to highlight information to a user or to just draw attention to a specific element.',
+  headerText: 'The `v-badge` component can wrap any type of content to highlight information to a user or to just draw attention to a specific element.',
   components: ['v-badge'],
   examples: [{
     character: {
@@ -21,7 +21,7 @@ export default {
     },
     visibility: {
       header: 'Visibility',
-      desc: 'The visibility of badges can be controlled using <code>v-model</code>.'
+      desc: 'The visibility of badges can be controlled using `v-model`.'
     }
   }]
 }

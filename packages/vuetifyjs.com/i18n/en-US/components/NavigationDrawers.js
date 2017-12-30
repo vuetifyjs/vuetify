@@ -1,6 +1,6 @@
 export default {
   header: 'Navigation drawer',
-  headerText: 'The <code>v-navigation-drawer</code> component is what your users will utilize to navigate through the application. The navigation-drawer is pre-configured to work with or without **vue-router** right out the box.',
+  headerText: 'The `v-navigation-drawer` component is what your users will utilize to navigate through the application. The navigation-drawer is pre-configured to work with or without **vue-router** right out the box.',
   components: ['v-navigation-drawer'],
   examples: [{
     permanent: {
@@ -9,7 +9,7 @@ export default {
     },
     permanentClipped: {
       header: 'Colored drawer',
-      desc: 'Navigation drawers can be customized to fit any application\'s design. While any component can be used within a drawer, the primary ones you will use are <code>v-list</code>, all of the **list** children components and <code>v-divider</code>'
+      desc: 'Navigation drawers can be customized to fit any application\'s design. While any component can be used within a drawer, the primary ones you will use are `v-list`, all of the **list** children components and `v-divider`'
     },
     permanentFloating: {
       header: 'Permanent floating drawer',
@@ -17,11 +17,11 @@ export default {
     },
     persistent: {
       header: 'Avatars',
-      desc: 'Since drawers support the <code>v-list</code> component, you can easily create customized dashboard solutions.'
+      desc: 'Since drawers support the `v-list` component, you can easily create customized dashboard solutions.'
     },
     mini: {
       header: 'Mini',
-      desc: 'The navigation drawer also has a mini-variant which can be controlled using the prop <code>mini-variant.sync</code>.'
+      desc: 'The navigation drawer also has a mini-variant which can be controlled using the prop `mini-variant.sync`.'
     },
     temporary: {
       header: 'Temporary',

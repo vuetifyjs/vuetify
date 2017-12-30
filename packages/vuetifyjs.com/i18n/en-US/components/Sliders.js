@@ -1,6 +1,6 @@
 export default {
   header: 'Slider',
-  headerText: 'The <code>v-slider</code> component is a better visualization of the number input. It is used for gathering numerical user data.',
+  headerText: 'The `v-slider` component is a better visualization of the number input. It is used for gathering numerical user data.',
   components: ['v-slider'],
   examples: [{
     continuous: {
@@ -9,11 +9,11 @@ export default {
     },
     discrete: {
       header: 'Discrete',
-      desc: 'Discrete sliders offer a thumb label that displays the exact current amount. Using the <code>step</code> prop you can disallow selecting values outside of steps.'
+      desc: 'Discrete sliders offer a thumb label that displays the exact current amount. Using the `step` prop you can disallow selecting values outside of steps.'
     },
     icons: {
       header: 'Icons',
-      desc: 'You can add icons to the slider with the <code>append-icon</code> and <code>prepend-icon</code> props.'
+      desc: 'You can add icons to the slider with the `append-icon` and `prepend-icon` props.'
     },
     editableNumericValue: {
       header: 'With an editable numeric value',
@@ -26,7 +26,7 @@ export default {
     },
     customColors: {
       header: 'Custom colors',
-      desc: 'You can set the colors of the slider using the props <code>color</code>, <code>track-color</code> and <code>thumb-color</code>.'
+      desc: 'You can set the colors of the slider using the props `color`, `track-color` and `thumb-color`.'
     }
   }],
   props: {

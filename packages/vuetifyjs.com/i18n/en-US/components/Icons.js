@@ -1,6 +1,6 @@
 export default {
   header: 'Icon',
-  headerText: 'The <code>v-icon</code> component provides a large set of glyphs to provide context to various aspects of your application. Vuetify icons utilize Google\\\'s Material Icons font library. For a list of all available icons, visit the official <a href="https://material.io/icons/" target="_blank" rel="noopener">Material Icons</a> page.',
+  headerText: 'The `v-icon` component provides a large set of glyphs to provide context to various aspects of your application. Vuetify icons utilize Google\'s Material Icons font library. For a list of all available icons, visit the official <a href="https://material.io/icons/" target="_blank" rel="noopener">Material Icons</a> page.',
   components: ['v-icon'],
   examples: [{
     standard: {
@@ -9,11 +9,11 @@ export default {
     },
     fontAwesome: {
       header: 'Font Awesome',
-      desc: '<a href="http://fontawesome.io/icons/">Font Awesome</a> is also supported. Simply use the <code>fa-</code> prefixed icon name. Please note that you still need to include the Font Awesome icons in your project.'
+      desc: '[Font Awesome](http://fontawesome.io/icons/) is also supported. Simply use the `fa-` prefixed icon name. Please note that you still need to include the Font Awesome icons in your project.'
     },
     mdi: {
       header: 'Material Design Icons',
-      desc: '<a href="https://materialdesignicons.com/">Material Design Icons</a> is also supported. Simply use the <code>mdi-</code> prefixed icon name. Please note that you still need to include the MDI icons in your project.'
+      desc: '[Material Design Icons](https://materialdesignicons.com/) is also supported. Simply use the `mdi-` prefixed icon name. Please note that you still need to include the MDI icons in your project.'
     },
     color: {
       header: 'Color',
