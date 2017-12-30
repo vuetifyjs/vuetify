@@ -20,6 +20,10 @@ export default {
     '$vuetify.application.right': 'onContainerResize',
     scrollOffset (val) {
       this.$refs.container.style.transform = `translateX(${-val}px)`
+      if (this.hasArrows) {
+        this.prependIconVisible = this.checkPrependIcon()
+        this.appendIconVisible = this.checkAppendIcon()
+      }
     }
   }
 }

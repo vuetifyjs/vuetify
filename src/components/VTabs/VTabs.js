@@ -61,6 +61,8 @@ export default {
 
   data () {
     return {
+      prependIconVisible: false,
+      appendIconVisible: false,
       bar: [],
       content: [],
       isBooted: false,
@@ -80,6 +82,16 @@ export default {
   },
 
   methods: {
+    checkPrependIcon () {
+      return this.scrollOffset > 0
+    },
+    checkAppendIcon () {
+      // Check one scroll ahead to know the width of right-most item
+      const container = this.$refs.container
+      const wrapper = this.$refs.wrapper
+
+      return container.clientWidth > this.scrollOffset + wrapper.clientWidth
+    },
     callSlider () {
       this.setOverflow()
       if (!this.activeTab) return false
@@ -185,6 +197,8 @@ export default {
 
   mounted () {
     this.callSlider()
+    this.prependIconVisible = this.checkPrependIcon()
+    this.appendIconVisible = this.checkAppendIcon()
   },
 
   render (h) {

@@ -33,16 +33,6 @@ export default {
     isMobile () {
       return this.$vuetify.breakpoint.width < this.mobileBreakPoint
     },
-    prependIconVisible () {
-      return this.scrollOffset > 0
-    },
-    appendIconVisible () {
-      // Check one scroll ahead to know the width of right-most item
-      const container = this.$refs.container
-      const wrapper = this.$refs.wrapper
-
-      return container.clientWidth > this.scrollOffset + wrapper.clientWidth
-    },
     sliderStyles () {
       return {
         left: `${this.sliderLeft}px`,
