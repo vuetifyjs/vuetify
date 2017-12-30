@@ -129,6 +129,16 @@ const tagsToReplace = {
   '<': '&lt;',
   '>': '&gt;'
 }
+
 export function escapeHTML (str) {
   return str.replace(/[&<>]/g, tag => tagsToReplace[tag] || tag)
+}
+
+export function filterObjectOnKeys(obj, keys) {
+  return Object.keys(obj)
+               .filter(p => keys.includes(p))
+               .reduce((o, key) =>  {
+                 o[key] = obj[key]
+                 return o
+               }, {})
 }
