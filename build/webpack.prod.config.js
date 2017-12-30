@@ -3,7 +3,11 @@ const baseWebpackConfig = require('./webpack.base.config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 var extractPlugin = ExtractTextPlugin.extract({
-  use: ['css-loader', 'postcss-loader', 'stylus-loader']
+  use: [
+    { loader: 'css-loader', options: { sourceMap: true } },
+    { loader: 'postcss-loader', options: { sourceMap: true } },
+    { loader: 'stylus-loader', options: { sourceMap: true } }
+  ]
 })
 
 // Helpers
