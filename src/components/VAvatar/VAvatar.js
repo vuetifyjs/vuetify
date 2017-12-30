@@ -11,7 +11,6 @@ export default {
   mixins: [Colorable],
 
   props: {
-    color: String,
     size: {
       type: [Number, String],
       default: 48
