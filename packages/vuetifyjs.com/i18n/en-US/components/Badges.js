@@ -5,15 +5,19 @@ export default {
   examples: [{
     character: {
       header: 'Character',
-      desc: 'Any character can be placed with a badge.'
+      desc: 'Any element can be used with a badge.'
     },
-    icon: {
-      header: 'Icon',
-      desc: 'The icon badge type only supports Material Design icons.'
+    overlap: {
+      header: 'Overlap',
+      desc: 'The badge will overlap its content when using the `overlap` prop'
     },
     inline: {
       header: 'Inline',
       desc: 'Badges can also be placed inline with text.'
+    },
+    icon: {
+      header: 'Icon',
+      desc: 'The badge can use all of the currently supported icon sets.'
     },
     visibility: {
       header: 'Visibility',
