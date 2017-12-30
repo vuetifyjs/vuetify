@@ -19,7 +19,7 @@ export default {
     '$vuetify.application.left': 'onContainerResize',
     '$vuetify.application.right': 'onContainerResize',
     scrollOffset (val) {
-      this.containerTransform = -val
+      this.$refs.container.style.transform = `translateX(${-val}px)`
     }
   }
 }

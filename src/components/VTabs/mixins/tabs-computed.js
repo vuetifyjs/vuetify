@@ -20,8 +20,7 @@ export default {
     },
     containerStyles () {
       return {
-        height: `${parseInt(this.computedHeight)}px`,
-        transform: `translateX(${this.containerTransform}px)`
+        height: `${parseInt(this.computedHeight)}px`
       }
     },
     hasArrows () {

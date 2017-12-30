@@ -63,7 +63,6 @@ export default {
     return {
       bar: [],
       content: [],
-      containerTransform: 0,
       isBooted: false,
       isOverflowing: false,
       itemOffset: 0,
