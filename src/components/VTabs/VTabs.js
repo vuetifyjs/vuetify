@@ -89,6 +89,7 @@ export default {
       this.$nextTick(() => {
         const activeTab = this.$el.querySelector(`[href="#${this.activeTab.id}"]`)
 
+        if (!activeTab) return
         this.sliderWidth = activeTab.scrollWidth
         this.sliderLeft = activeTab.offsetLeft
       })

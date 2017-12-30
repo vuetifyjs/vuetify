@@ -44,10 +44,6 @@ export default {
 
       return this.$createElement('v-icon', {
         staticClass: `tabs__icon tabs__icon--${direction}`,
-        style: {
-          display: 'inline-flex',
-          top: `${this.computedHeight / 2 - 12}px`
-        },
         props: {
           disabled: !this[`${direction}IconVisible`]
         },

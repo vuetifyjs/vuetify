@@ -179,18 +179,16 @@ test('VTabs', ({ mount, shallow }) => {
     expect(wrapper.vm.itemOffset).toBe(1)
   })
 
-  it('should return the correct height', async () => {
+  it('should validate height prop', async () => {
     const wrapper = mount(VTabs, {
       propsData: { height: 'auto' }
     })
 
     expect('Invalid prop: custom validator check failed for prop "height"').toHaveBeenWarned()
     wrapper.setProps({ height: null })
-    expect(wrapper.vm.computedHeight).toBe(48)
+    expect(wrapper.vm.containerStyles).toBe(null)
     wrapper.setProps({ height: 112 })
-    expect(wrapper.vm.computedHeight).toBe(112)
-    wrapper.setProps({ height: null, iconsAndText: true })
-    expect(wrapper.vm.computedHeight).toBe(72)
+    expect(wrapper.vm.containerStyles.height).toBe('112px')
   })
 
   it('should return lazy value when accessing input', async () => {

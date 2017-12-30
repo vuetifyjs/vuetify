@@ -17,12 +17,14 @@ theme(tabs__bar, "tabs__bar")
   position: relative
 
 .tabs__icon
-  position: absolute
-  top: 0
-  width: 32px
   align-items: center
   cursor: pointer
+  display: inline-flex
+  height: 100%
+  position: absolute
+  top: 0
   user-select: none
+  width: 32px
 
   &--prepend
     left: 4px
@@ -42,6 +44,7 @@ theme(tabs__bar, "tabs__bar")
 .tabs__container
   flex: 0 0 auto
   display: flex
+  height: 48px
   list-style-type: none
   transition: transform 0.6s cubic-bezier(0.86, 0, 0.07, 1)
   white-space: nowrap
@@ -55,6 +58,9 @@ theme(tabs__bar, "tabs__bar")
     .tabs__div
       flex: 1 0 auto
       max-width: none
+
+  &--icons-and-text
+    height: 72px
 
   &--align-with-title
     padding-left: 16px

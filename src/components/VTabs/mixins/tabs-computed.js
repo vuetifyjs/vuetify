@@ -13,15 +13,10 @@ export default {
 
       return this.tabs[this.activeIndex]
     },
-    computedHeight () {
-      if (this.height) return this.height
-
-      return this.iconsAndText ? 72 : 48
-    },
     containerStyles () {
-      return {
-        height: `${parseInt(this.computedHeight)}px`
-      }
+      return this.height ? {
+        height: `${parseInt(this.height, 10)}px`
+      } : null
     },
     hasArrows () {
       return (this.showArrows || !this.isMobile) && this.isOverflowing
