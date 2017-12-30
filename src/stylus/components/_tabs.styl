@@ -44,6 +44,12 @@ theme(tabs__bar, "tabs__bar")
     margin-left: 40px
     margin-right: 40px
 
+    .tabs__container--align-with-title
+      padding-left: 16px
+
+      @media $display-breakpoints.xs-only
+        padding-left: 24px
+
 .tabs__container
   flex: 0 0 auto
   display: flex
@@ -66,10 +72,10 @@ theme(tabs__bar, "tabs__bar")
     height: 72px
 
   &--align-with-title
-    padding-left: 16px
+    padding-left: 56px
 
     @media $display-breakpoints.xs-only
-      padding-left: 24px
+      padding-left: 64px
 
   &--fixed-tabs,
   &--icons-and-text,
