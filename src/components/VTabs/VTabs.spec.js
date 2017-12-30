@@ -104,6 +104,8 @@ test('VTabs', ({ mount, shallow }) => {
       attachToDocument: true
     })
 
+    await ssrBootable()
+
     const tabs = wrapper.find(VTabs)[0]
 
     tabs.setData({ scrollOffset: 1 })

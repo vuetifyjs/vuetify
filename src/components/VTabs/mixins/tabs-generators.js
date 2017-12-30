@@ -29,7 +29,9 @@ export default {
       }, items)
     },
     genIcon (direction) {
-      if (!this[`${direction}IconVisible`]) return null
+      if (!this.hasArrows ||
+        !this[`${direction}IconVisible`]
+      ) return null
 
       return this.$createElement('v-icon', {
         staticClass: `icon--${direction}`,

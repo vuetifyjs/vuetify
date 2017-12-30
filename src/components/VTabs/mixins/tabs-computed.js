@@ -33,7 +33,8 @@ export default {
     },
     containerStyles () {
       return {
-        height: `${parseInt(this.computedHeight)}px`
+        height: `${parseInt(this.computedHeight)}px`,
+        transform: `translateX(${this.containerTransform}px)`
       }
     },
     hasArrows () {
@@ -52,13 +53,9 @@ export default {
       return this.$vuetify.breakpoint.width < this.mobileBreakPoint
     },
     prependIconVisible () {
-      return this.hasArrows &&
-        this.isOverflowing &&
-        this.scrollOffset > 0
+      return this.scrollOffset > 0
     },
     appendIconVisible () {
-      if (!this.isOverflowing || !this.hasArrows) return false
-
       // Check one scroll ahead to know the width of right-most item
       const container = this.$refs.container
       const wrapper = this.$refs.wrapper

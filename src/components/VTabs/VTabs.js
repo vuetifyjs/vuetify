@@ -61,8 +61,9 @@ export default {
 
   data () {
     return {
-      content: [],
       bar: [],
+      content: [],
+      containerTransform: 0,
       isBooted: false,
       isOverflowing: false,
       itemOffset: 0,
@@ -104,8 +105,12 @@ export default {
     },
     onResize () {
       if (this._isDestroyed) return
-      this.scrollOffset = 0
+
       this.callSlider()
+
+      if (!this.activeTab) return
+
+      this.scrollOffset = this.activeTab.el.offsetLeft
     },
     overflowCheck (e, fn) {
       this.isOverflowing && fn(e)
