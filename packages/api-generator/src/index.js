@@ -53,49 +53,69 @@ function getPropDefault (def, type) {
   }
 }
 
-function genComponent (name, prop) {
+function getPropSource (name, mixins) {
+  let source = null
+  for (let i = 0; i < mixins.length; i++) {
+    const mixin = mixins[i]
+    if (mixin.name) {
+      const source = Object.keys(mixin.props || {}).find(p => p === name) && mixin.name
+      let found = getPropSource(name, mixin.mixins || []) || source
+      if (found) return found
+    }
+  }
+
+  return source
+}
+
+function genProp (name, props, mixins) {
+  const prop = props[name]
   const type = getPropType(prop.type)
+  const source = getPropSource(name, mixins)
 
   return {
     name,
     type,
-    default: getPropDefault(prop.default, type)
+    default: getPropDefault(prop.default, type),
+    source
   }
 }
 
 function parseComponent (component) {
   return {
-    props: parseProps(component)
+    props: parseProps(component),
+    mixins: parseMixins(component)
   }
 }
 
-function parseProps (component, array = []) {
+function parseProps (component, array = [], mixin = false) {
   const mixins = component.mixins || []
   const props = component.props || {}
   
   Object.keys(props).forEach(prop => {
-    array.push(genComponent(prop, props[prop]))
+    let generated = genProp(prop, props, mixins)
+    array.push(generated)
   })
   
-  mixins.forEach(mixin => {
-    array = array.concat(parseMixin(mixin, array))
-  })
-
-  const exists = []
-
-  return array.filter(item => {
-    if (!exists.includes(item.name)) {
-      exists.push(item.name)
-
-      return true
-    }
-
-    return false
-  })
+  return array
 }
 
-function parseMixin (mixin, array) {
-  return parseProps(mixin)
+function parseMixins (component) {
+  if (!component.mixins) return []
+
+  let mixins = []
+  for (let i = 0; i < component.mixins.length; i++) {
+    const mixin = component.mixins[i]
+    
+    if (mixin.name) {
+      mixins.push(mixin.name)
+
+      if (mixin.mixins) {
+        mixins = mixins.concat(parseMixins(mixin))
+      }
+    }
+  }
+  
+  return mixins
 }
 
 function mapComponent (component, mapping) {
@@ -114,7 +134,6 @@ Object.keys(installedComponents).forEach(key => {
 
     if (map[name]) {
       mapComponent(options, map[name])
-      console.log(options)
     }
 
     components[name] = options

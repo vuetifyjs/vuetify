@@ -38,12 +38,24 @@ module.exports = {
   'v-chip': {
     slots: ['default']
   },
-  'v-data-table': {
+  'v-data-iterator': {
+    slots: [
+      { name: 'footer', source: 'data-iterable' }
+    ],
     scopedSlots: [
-      'headerCell',
-      'headers',
-      'items',
-      'pageText'
+      { name: 'items', props: ['item', 'index', 'selected', 'expanded'], source: 'data-iterable' },
+      { name: 'pageText', props: ['pageStart', 'pageStop', 'itemsLength'], source: 'data-iterable' }
+    ]
+  },
+  'v-data-table': {
+    slots: [
+      { name: 'footer', source: 'data-iterable' }
+    ],
+    scopedSlots: [
+      { name: 'headerCell', props: ['header'] },
+      { name: 'headers', props: ['headers', 'indeterminate', 'all'] },
+      { name: 'items', props: ['item', 'index', 'selected', 'expanded'], source: 'data-iterable' },
+      { name: 'pageText', props: ['pageStart', 'pageStop', 'itemsLength'], source: 'data-iterable' }
     ]
   },
   'v-dialog': {
