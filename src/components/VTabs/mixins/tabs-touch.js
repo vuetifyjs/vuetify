@@ -6,34 +6,13 @@
 export default {
   methods: {
     newOffset (direction) {
-      const capitalize = `${direction.charAt(0).toUpperCase()}${direction.slice(1)}`
-      const container = this.$refs.container
-      const wrapper = this.$refs.wrapper
-      const items = container.children
+      const clientWidth = this.$refs.wrapper.clientWidth
 
-      return this[`newOffset${capitalize}`](wrapper, items)
-    },
-    newOffsetPrepend (wrapper, items, offset = 0) {
-      for (let index = this.itemOffset - 1; index >= 0; index--) {
-        const newOffset = offset + items[index].clientWidth
-        if (newOffset >= wrapper.clientWidth) {
-          return { offset: this.scrollOffset - offset, index: index + 1 }
-        }
-        offset = newOffset
+      if (direction === 'prepend') {
+        return Math.max(this.scrollOffset - clientWidth, 0)
+      } else {
+        return Math.min(this.scrollOffset + clientWidth, this.$refs.container.clientWidth - clientWidth)
       }
-
-      return { offset: 0, index: 0 }
-    },
-    newOffsetAppend (wrapper, items, offset = this.scrollOffset) {
-      for (let index = this.itemOffset; index < items.length; index++) {
-        const newOffset = offset + items[index].clientWidth
-        if (newOffset > this.scrollOffset + wrapper.clientWidth) {
-          return { offset: Math.min(offset, wrapper.scrollWidth + this.scrollOffset - wrapper.clientWidth), index }
-        }
-        offset = newOffset
-      }
-
-      return null
     },
     onTouchStart (e) {
       this.startX = this.scrollOffset + e.touchstartX

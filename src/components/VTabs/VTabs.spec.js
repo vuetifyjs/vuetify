@@ -168,15 +168,11 @@ test('VTabs', ({ mount, shallow }) => {
     wrapper.vm.scrollTo('prepend')
     expect(newOffset.mock.calls.length).toBe(2)
 
-    wrapper.setMethods({ newOffset: () => ({
-      offset: 5,
-      index: 1
-    })})
+    wrapper.setMethods({ newOffset: () => 5 })
     await wrapper.vm.$nextTick()
 
     wrapper.vm.scrollTo('prepend')
     expect(wrapper.vm.scrollOffset).toBe(5)
-    expect(wrapper.vm.itemOffset).toBe(1)
   })
 
   it('should validate height prop', async () => {
@@ -283,56 +279,6 @@ test('VTabs', ({ mount, shallow }) => {
 
     const slider = wrapper.find(VTabsSlider)[0]
     expect(slider.hasClass('pink')).toBe(true)
-  })
-
-  it('should call append or prepend offset method', () => {
-    const wrapper = mount(VTabs)
-    const offsetFn = jest.fn()
-
-    wrapper.setMethods({
-      newOffsetPrepend: offsetFn,
-      newOffsetAppend: offsetFn
-    })
-
-    wrapper.vm.newOffset('append')
-    wrapper.vm.newOffset('prepend')
-
-    expect(offsetFn.mock.calls.length).toBe(2)
-  })
-
-  it('should return object or null when calling new offset', async () => {
-    const wrapper = mount(VTabs)
-    const mockEls = createRange(25).map(x => ({ clientWidth: 50 }))
-
-    await ssrBootable()
-
-    expect(wrapper.vm.newOffsetAppend(
-      { scrollWidth: 800, clientWidth: 400 },
-      []
-    )).toBe(null)
-
-    // Mocking container and children
-    expect(wrapper.vm.newOffsetAppend(
-      { scrollWidth: 800, clientWidth: 400 },
-      mockEls
-    )).toEqual({ offset: 400, index: 8 })
-
-    // Mock offset
-    wrapper.setData({ itemOffset: 10 })
-
-    // Mocking container and children
-    expect(wrapper.vm.newOffsetPrepend(
-      { clientWidth: 200 },
-      mockEls,
-      50
-    )).toEqual({ offset: -150, index: 8 })
-
-    wrapper.setData({ itemOffset: 0 })
-    // Mocking container and children
-    expect(wrapper.vm.newOffsetPrepend(
-      { clientWidth: 0 },
-      [{ clientWidth: 50 }]
-    )).toEqual({ offset: 0, index: 0 })
   })
 
   it('should handle touch events and remove container transition', async () => {

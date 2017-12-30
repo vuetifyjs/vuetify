@@ -65,7 +65,6 @@ export default {
       content: [],
       isBooted: false,
       isOverflowing: false,
-      itemOffset: 0,
       lazyValue: this.value,
       resizeTimeout: null,
       reverse: false,
@@ -116,14 +115,7 @@ export default {
       this.isOverflowing && fn(e)
     },
     scrollTo (direction) {
-      const newOffset = this.newOffset(direction)
-
-      if (!newOffset) return
-
-      const { offset, index } = newOffset
-
-      this.scrollOffset = offset
-      this.itemOffset = index
+      this.scrollOffset = this.newOffset(direction)
     },
     setOverflow () {
       this.isOverflowing = this.$refs.bar.clientWidth < this.$refs.container.clientWidth
