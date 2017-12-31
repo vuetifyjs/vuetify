@@ -22,5 +22,16 @@ export default {
       desc: 'The expansion panel headers can be made focusable with the prop `focusable`.',
       uninverted: true
     }
-  }]
+  }],
+  props: {
+    'v-expansion-panel': {
+      expand: 'Leaves expansion-panel open when selecting another',
+      focusable: 'Makes the expansion panel headers focusable',
+      inset: 'Makes the expansion panel open with a inset style',
+      popout: 'Makes the expansion panel open with an popout style'
+    },
+    'v-expansion-panel-content': {
+      hideActions: 'Hide the expand icon in the content header',
+    }
+  }
 }
