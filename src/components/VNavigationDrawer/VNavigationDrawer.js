@@ -148,6 +148,7 @@ export default {
     },
     reactsToRoute () {
       return !this.disableRouteWatcher &&
+        !this.stateless &&
         (this.temporary || this.isMobile)
     },
     resizeIsDisabled () {
