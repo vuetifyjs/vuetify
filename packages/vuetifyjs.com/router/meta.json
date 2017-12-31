@@ -185,6 +185,12 @@
     "description": "Divider component for Vuetify Framework.",
     "keywords": "carousel"
   },
+  "/components/data-iterator": {
+    "h1": "Data iterator",
+    "title": "Data iterator Component",
+    "description": "The v-data-iterator component is used for displaying data, and shares a majority of its functionality with the v-data-table component. Features include sorting, searching, pagination, and selection.",
+    "keywords": "data iterator, tables"
+  },
   "/components/data-tables": {
     "h1": "Data tables",
     "title": "Data tables Component",
