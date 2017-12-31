@@ -77,12 +77,6 @@ test('VTabs', ({ mount, shallow }) => {
     expect(item.vm.isActive).toBe(true)
   })
 
-  it('should not call slider if no active tab', () => {
-    const wrapper = mount(VTabs)
-
-    expect(wrapper.vm.callSlider()).toBe(false)
-  })
-
   it('should call slider on application resize', async () => {
     const wrapper = mount(Component())
 
@@ -320,5 +314,42 @@ test('VTabs', ({ mount, shallow }) => {
     await ssrBootable()
 
     expect(wrapper.find(VTabsItems).length).toBe(1)
+  })
+
+  it('should scroll active item into view if off screen', async () => {
+    const wrapper = mount(VTabs, {
+      attachToDocument: true,
+      propsData: { value: 'bar' },
+      slots: {
+        default: [{
+          name: 'v-tab',
+          render: h => h(VTab, {
+            props: { href: 'foo' }
+          })
+        }]
+      }
+    })
+
+    await ssrBootable()
+
+    expect(wrapper.vm.scrollIntoView()).toEqual(false)
+
+    wrapper.setProps({ value: 'foo' })
+    // Simulate being scrolled too far to the right
+    wrapper.setData({ scrollOffset: 400 })
+    await wrapper.vm.$nextTick()
+
+    wrapper.vm.scrollIntoView()
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.scrollOffset).toBe(0)
+
+    // DOM elements have no actual widths
+    // Trick into running else condition
+    wrapper.setData({ scrollOffset: -1 })
+    wrapper.vm.scrollIntoView()
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.scrollOffset).toBe(0)
   })
 })

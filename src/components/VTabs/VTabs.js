@@ -118,10 +118,7 @@ export default {
       if (this._isDestroyed) return
 
       this.callSlider()
-
-      if (!this.activeTab) return
-
-      this.scrollOffset = this.activeTab.el.offsetLeft
+      this.scrollIntoView()
     },
     overflowCheck (e, fn) {
       this.isOverflowing && fn(e)
@@ -174,8 +171,25 @@ export default {
     register (options) {
       this.tabs.push(options)
     },
+    scrollIntoView () {
+      if (!this.activeTab) return false
+
+      const { clientWidth, offsetLeft } = this.activeTab.el
+      const wrapperWidth = this.$refs.wrapper.clientWidth
+      const totalWidth = wrapperWidth + this.scrollOffset
+      const itemOffset = clientWidth + offsetLeft
+      const additionalOffset = clientWidth * 0.3
+
+      /* instanbul ignore else */
+      if (offsetLeft < this.scrollOffset) {
+        this.scrollOffset = Math.max(offsetLeft - additionalOffset, 0)
+      } else if (totalWidth < itemOffset) {
+        this.scrollOffset -= totalWidth - itemOffset - additionalOffset
+      }
+    },
     tabClick (target) {
       this.inputValue = target
+      this.scrollIntoView()
     },
     registerItems (fn) {
       this.tabItems = fn
