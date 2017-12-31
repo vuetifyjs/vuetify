@@ -146,7 +146,7 @@ export default {
 
       /* istanbul ignore next */
       // There is not a reliable way to test
-      this.inputValue = tab.action === tab ? index.toString() : tab.action
+      this.inputValue = tab.action === tab ? index : tab.action
     },
     parseNodes () {
       const item = []
@@ -195,7 +195,7 @@ export default {
       }
     },
     tabClick (tab) {
-      this.inputValue = tab.action === tab ? this.tabs.indexOf(tab).toString() : tab.action
+      this.inputValue = tab.action === tab ? this.tabs.indexOf(tab) : tab.action
       this.scrollIntoView()
     },
     registerItems (fn) {

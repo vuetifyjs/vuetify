@@ -33,7 +33,7 @@ export default {
   props: {
     cycle: Boolean,
     touchless: Boolean,
-    value: null
+    value: String
   },
 
   computed: {
@@ -50,6 +50,8 @@ export default {
         return this.lazyValue
       },
       set (val) {
+        val = val.toString()
+
         this.lazyValue = val
 
         !this.registerItems && this.$emit('input', val)
@@ -87,7 +89,7 @@ export default {
         nextIndex = 0
       }
 
-      this.inputValue = this.items[nextIndex].id || nextIndex.toString()
+      this.inputValue = this.items[nextIndex].id || nextIndex
     },
     prev (cycle) {
       let prevIndex = this.activeIndex - 1
@@ -97,7 +99,7 @@ export default {
         prevIndex = this.items.length - 1
       }
 
-      this.inputValue = this.items[prevIndex].id || prevIndex.toString()
+      this.inputValue = this.items[prevIndex].id || prevIndex
     },
     onSwipe (action) {
       this[action](this.cycle)

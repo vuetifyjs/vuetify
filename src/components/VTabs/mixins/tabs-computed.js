@@ -29,6 +29,9 @@ export default {
         return this.lazyValue
       },
       set (val) {
+        // Always use strings
+        val = val.toString()
+
         this.lazyValue = val
         this.$emit('input', val)
       }

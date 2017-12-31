@@ -18,8 +18,11 @@ export default {
     lazyValue: 'updateTabs',
     right: 'callSlider',
     value (val) {
-      // Avoid duplicate value updates
-      if (this.lazyValue !== val) this.tabClick(val)
+      const tab = this.tabs[parseInt(val)]
+
+      if (!tab) return
+
+      this.tabClick(tab)
     },
     '$vuetify.application.left': 'onContainerResize',
     '$vuetify.application.right': 'onContainerResize',
