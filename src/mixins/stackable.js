@@ -1,6 +1,8 @@
 import { getZIndex } from '../util/helpers'
 
 export default {
+  name: 'stackable',
+
   data () {
     return {
       stackBase: null,
@@ -11,14 +13,24 @@ export default {
     }
   },
   computed: {
+    /**
+     * Currently active z-index
+     *
+     * @return {number}
+     */
     activeZIndex () {
       const content = this.stackElement || this.$refs.content
       // Return current zindex if not active
-      if (!this.isActive) return getZIndex(content)
+
+      const index = !this.isActive
+        ? getZIndex(content)
+        : this.getMaxZIndex(this.stackExclude || [content]) + 2
+
+      if (index == null) return index
 
       // Return max current z-index (excluding self) + 2
       // (2 to leave room for an overlay below, if needed)
-      return this.getMaxZIndex(this.stackExclude || [content]) + 2
+      return parseInt(index)
     }
   },
   methods: {

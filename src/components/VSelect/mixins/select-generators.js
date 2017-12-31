@@ -15,10 +15,13 @@ export default {
         props: {
           activator: this.$el,
           auto: this.auto,
+          attach: this.attach && `[data-uid="${this._uid}"]`,
           closeOnClick: false,
           closeOnContentClick: !this.isMultiple,
           contentClass: this.computedContentClass,
+          dark: this.dark,
           disabled: this.disabled,
+          light: this.light,
           maxHeight: this.maxHeight,
           nudgeTop: this.nudgeTop,
           offsetY: this.shouldOffset,

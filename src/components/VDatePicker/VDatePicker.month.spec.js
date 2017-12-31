@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import { test } from '~util/testing'
-import VDatePicker from '~components/VDatePicker'
+import { test } from '@util/testing'
+import VDatePicker from '@components/VDatePicker'
 
 test('VDatePicker.js', ({ mount, compileToFunctions }) => {
   it('should emit input event on year click', async () => {
@@ -237,14 +237,34 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
   it('should update the active picker if type has changed', () => {
     const wrapper = mount(VDatePicker, {
       propsData: {
-        type: 'month'
+        value: '1999-12-01',
+        type: 'date'
       }
     })
 
+    expect(wrapper.vm.activePicker).toBe('DATE')
+    wrapper.setProps({ type: 'month' })
+    expect(wrapper.vm.inputDate).toBe('1999-12')
     expect(wrapper.vm.activePicker).toBe('MONTH')
     wrapper.setProps({ type: 'date' })
-    expect(wrapper.vm.activePicker).toBe('MONTH')
+    expect(wrapper.vm.inputDate).toBe('1999-12-01')
+    expect(wrapper.vm.activePicker).toBe('DATE')
     wrapper.setProps({ type: 'year' })
+    expect(wrapper.vm.inputDate).toBe('1999')
     expect(wrapper.vm.activePicker).toBe('YEAR')
+  })
+
+  it('should use prev and next icons', () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        type: 'month',
+        prependIcon: 'block',
+        appendIcon: 'check'
+      }
+    })
+
+    const icons = wrapper.find('.picker--date__header-selector .icon')
+    expect(icons[0].element.textContent).toBe('block')
+    expect(icons[1].element.textContent).toBe('check')
   })
 })

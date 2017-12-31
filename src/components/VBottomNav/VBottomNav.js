@@ -21,7 +21,7 @@ export default {
   props: {
     active: [Number, String],
     height: {
-      default: 48,
+      default: 56,
       type: [Number, String],
       validator: v => !isNaN(parseInt(v))
     },
@@ -30,8 +30,8 @@ export default {
   },
 
   watch: {
-    active (val) {
-      this.updateValue(val)
+    active () {
+      this.update()
     }
   },
 
@@ -39,7 +39,7 @@ export default {
     classes () {
       return {
         'bottom-nav--absolute': this.absolute,
-        'bottom-nav--fixed': this.fixed || this.app,
+        'bottom-nav--fixed': !this.absolute && (this.app || this.fixed),
         'bottom-nav--shift': this.shift,
         'bottom-nav--active': this.value
       }

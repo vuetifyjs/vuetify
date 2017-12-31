@@ -1,5 +1,5 @@
-import { test } from '~util/testing'
-import { maskText, unmaskText } from './mask'
+import { test } from '@util/testing'
+import { maskText, unmaskText, isMaskDelimiter } from './mask'
 
 test('mask.js', ({ mount }) => {
   // Mask
@@ -56,6 +56,18 @@ test('mask.js', ({ mount }) => {
     expect(maskText('123', '(###)!!')).toBe('(123)!!')
   })
 
+  it('should mask numbers', () => {
+    expect(maskText(1234, '##.##')).toBe('12.34')
+  })
+
+  it('should return empty string if no input is given', () => {
+    expect(maskText(null, '#')).toBe('')
+  })
+
+  it('should accept masked parameter if array', () => {
+    expect(maskText('12', ['#', '-', '#'])).toBe('1-2')
+  })
+
   // Unmasks
   it('should remove delimiter', () => {
     expect(unmaskText('(5')).toBe('5')
@@ -76,7 +88,13 @@ test('mask.js', ({ mount }) => {
     expect(unmaskText('555')).toBe('555')
   })
 
-  it('should mask numbers', () => {
-    expect(maskText(1234, '##.##')).toBe('12.34')
+  it('should return null if no input is given', () => {
+    expect(unmaskText(null)).toBe(null)
+  })
+
+  // isMaskDelimiter
+  it('should identify mask delimiters', () => {
+    expect(isMaskDelimiter('a')).toBe(false)
+    expect(isMaskDelimiter('-')).toBe(true)
   })
 })

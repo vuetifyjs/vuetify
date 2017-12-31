@@ -1,5 +1,5 @@
-import VTimePicker from '~components/VTimePicker'
-import { test } from '~util/testing'
+import VTimePicker from '@components/VTimePicker'
+import { test } from '@util/testing'
 
 test('VTimePicker.js', ({ mount }) => {
   it('should accept a value', () => {

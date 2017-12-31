@@ -5,10 +5,6 @@ chip($material)
   background: $material.chips.background
   color: $material.chips.color
 
-  &:not(.chip--outline)
-    .chip__close
-      color: $material.icons.active
-
 theme(chip, "chip")
 
 .chip
@@ -100,21 +96,21 @@ theme(chip, "chip")
     font-size: $chip-icon-font-size
     margin: $chip-close-margin
     text-decoration: none
-    transition: none !important
     user-select: none
     
     > .icon
       color: inherit !important
+      font-size: 20px
+      opacity: .5
 
-    &:hover
-      opacity: .8
+      &:hover
+        opacity: 1
 
   &--select-multi
     margin: $chip-margin $chip-margin $chip-margin 0
 
   .icon
     color: inherit
-    transition: none
 
     &--right
       margin-left: $chip-icon-offset

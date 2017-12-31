@@ -1,5 +1,5 @@
-import { test } from '~util/testing'
-import VParallax from '~components/VParallax'
+import { test } from '@util/testing'
+import VParallax from '@components/VParallax'
 
 test('VParallax.js', ({ mount }) => {
   it('should render', async () => {

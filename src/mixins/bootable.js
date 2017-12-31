@@ -7,6 +7,8 @@
  * Otherwise can be set manually
  */
 export default {
+  name: 'bootable',
+
   data: () => ({
     isBooted: false
   }),

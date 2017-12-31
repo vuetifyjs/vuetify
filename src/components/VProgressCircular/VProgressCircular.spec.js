@@ -1,4 +1,4 @@
-import { test } from '~util/testing'
+import { test } from '@util/testing'
 import VProgressCircular from './VProgressCircular'
 import { compileToFunctions } from 'vue-template-compiler'
 

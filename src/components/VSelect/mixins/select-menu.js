@@ -29,7 +29,7 @@ export default {
       this.menuIsActive = true
     },
     toggleMenu () {
-      if (this.menuIsVisible) return this.hideMenu()
+      if (this.disabled || this.readonly || this.menuIsVisible) return this.hideMenu()
 
       this.showMenu()
       this.focusInput()

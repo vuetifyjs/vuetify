@@ -31,7 +31,7 @@ export default {
       return this.addBackgroundColorClassChecks(Object.assign({
         'system-bar--lights-out': this.lightsOut,
         'system-bar--absolute': this.absolute,
-        'system-bar--fixed': this.fixed || this.app,
+        'system-bar--fixed': !this.absolute && (this.app || this.fixed),
         'system-bar--status': this.status,
         'system-bar--window': this.window
       }, this.themeClasses))

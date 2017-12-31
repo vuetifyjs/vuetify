@@ -1,9 +1,9 @@
-import { test } from '~util/testing'
+import { test } from '@util/testing'
 import VTabs from './VTabs'
 import VTabsBar from './VTabsBar'
 import VTabsItem from './VTabsItem'
 import Vue from 'vue'
-import { createRange } from '~util/helpers'
+import { createRange } from '@util/helpers'
 
 function createBar (items = ['foo', 'bar']) {
   return Vue.extend({

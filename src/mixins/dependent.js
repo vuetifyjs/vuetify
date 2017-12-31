@@ -12,6 +12,8 @@ function searchChildren (children) {
 }
 
 export default {
+  name: 'dependent',
+
   data () {
     return {
       closeDependents: true,

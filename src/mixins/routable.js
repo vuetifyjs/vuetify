@@ -1,6 +1,8 @@
 import Ripple from '../directives/ripple'
 
 export default {
+  name: 'routable',
+
   directives: {
     Ripple
   },
@@ -15,7 +17,7 @@ export default {
     to: [String, Object],
     nuxt: Boolean,
     replace: Boolean,
-    ripple: Boolean,
+    ripple: [Boolean, Object],
     tag: String,
     target: String
   },
