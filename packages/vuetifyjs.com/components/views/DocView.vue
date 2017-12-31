@@ -44,12 +44,12 @@
       header () {
         const header = `${this.namespace}.header`
 
-        return this.$te(header) ? this.$t(header) : ''
+        return this.$t(header)
       },
       headerText () {
         const headerText = `${this.namespace}.headerText`
 
-        return this.$te(headerText) ? this.$t(headerText) : ''
+        return this.$t(headerText)
       },
       namespace () {
         const route = this.$route.path.slice(1).split('/')
@@ -75,7 +75,7 @@
     padding-top: 75px
     padding-bottom: 0
     transition: .2s $transition.fast-out-slow-in
-    
+
     section
       margin-bottom: 48px
 </style>

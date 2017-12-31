@@ -1,5 +1,6 @@
 export default {
   header: 'What\'s the difference?',
+  headerText: '',
   toc: [
     {
       text: `What's the difference?`,
