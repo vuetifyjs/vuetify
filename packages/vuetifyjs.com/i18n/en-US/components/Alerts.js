@@ -22,5 +22,11 @@ export default {
       header: 'Outline',
       desc: 'Outline alerts inherit their borders from the current color applied.'
     }
-  }]
+  }],
+  props: {
+    dismissible: 'Specifies that the Alert can be closed',
+    icon: 'Designates a specific icon',
+    outline: 'Alert will have an outline',
+    type: 'Specify a **success**, **info**, **warning** or **error** alert. Uses the contextual color and a pre-defined icon.'
+  }
 }

@@ -25,7 +25,7 @@
               :href="`#${tab}`"
               :key="i"
               v-if="hasTab(tab)"
-            ) {{ tab }}
+            ) {{ tab.replace(/([A-Z])/g, ' $1') }}
           v-card(flat)
             v-card-title
               v-select(
@@ -62,7 +62,7 @@
                   :type="tabItem"
                   :key="`${tabItem}${namespace}`"
                 )
-      
+
       section(v-if="supplemental.length > 0")#supplemental
         section-head(value="Generic.Pages.supplemental")
         component(
@@ -119,6 +119,11 @@
             { text: this.$t('Generic.Pages.name'), value: 'name', align: 'left' },
             { text: this.$t('Generic.Pages.description'), value: 'description', align: 'left' }
           ],
+          scopedSlots: [
+            { text: this.$t('Generic.Pages.name'), value: 'name', align: 'left' },
+            { text: this.$t('Generic.Pages.props'), value: 'props', align: 'left' },
+            { text: this.$t('Generic.Pages.description'), value: 'description', align: 'left' }
+          ],
           events: [
             { text: this.$t('Generic.Pages.name'), value: 'name', align: 'left' },
             { text: this.$t('Generic.Pages.description'), value: 'description', align: 'left' }
@@ -130,7 +135,7 @@
         },
         search: null,
         tab: null,
-        tabs: ['props', 'slots', 'params', 'events', 'functional']
+        tabs: ['props', 'slots', 'scopedSlots', 'params', 'events', 'functional']
       }
     },
 
