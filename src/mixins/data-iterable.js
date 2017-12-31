@@ -18,6 +18,7 @@ import { getObjectValueByPath } from '../util/helpers'
  *
  */
 export default {
+  name: 'data-iterable',
 
   components: {
     VBtn,
@@ -38,6 +39,7 @@ export default {
       },
       expanded: {},
       actionsClasses: 'data-iterator__actions',
+      actionsRangeControlsClasses: 'data-iterator__actions__range-controls',
       actionsSelectClasses: 'data-iterator__actions__select',
       actionsPaginationClasses: 'data-iterator__actions__pagination'
     }
@@ -433,13 +435,19 @@ export default {
       }, [pagination])
     },
     genActions () {
+      const rangeControls = this.$createElement('div', {
+        'class': this.actionsRangeControlsClasses
+      }, [
+        this.genPagination(),
+        this.genPrevIcon(),
+        this.genNextIcon()
+      ])
+
       return [this.$createElement('div', {
         'class': this.actionsClasses
       }, [
         this.rowsPerPageItems.length > 1 ? this.genSelect() : null,
-        this.genPagination(),
-        this.genPrevIcon(),
-        this.genNextIcon()
+        rangeControls
       ])]
     }
   }

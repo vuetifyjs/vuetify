@@ -4,6 +4,7 @@
 /* Themes */
 list($material)
   background: $material.cards
+  color: $material.text.primary
 
   .list__tile__sub-title
     color: $material.text.secondary
@@ -34,9 +35,6 @@ theme(list, "list")
   list-style-type: none
   padding: $list-top-padding 0 $list-bottom-padding
   transition: height .3s $transition.fast-out-slow-in
-  
-  li:not(.subheader)
-    display: block
 
   .input-group
     margin: 0
@@ -92,6 +90,7 @@ theme(list, "list")
 
       .input-group--selection-controls
         align-items: center
+        flex: 0 1
         padding: 0
 
       .input-group__details
@@ -223,6 +222,7 @@ theme(list, "list")
       align-items: center
       cursor: pointer
       display: flex
+      list-style-type: none
       
       > li:not(.list__group__header__prepend-icon):not(.list__group__header__append-icon)
         flex: 1 0 auto
@@ -230,6 +230,7 @@ theme(list, "list")
       .list__group__header__append-icon,
       .list__group__header__prepend-icon
         padding: 0 16px
+        user-select: none
 
       &--sub-group
         align-items: center
@@ -265,6 +266,9 @@ theme(list, "list")
       position: relative
       padding: 0
       transition: inherit
+      
+      > li
+        display: block
       
       &--no-action
         .list__tile

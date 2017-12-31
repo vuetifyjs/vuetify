@@ -7,10 +7,10 @@ module.exports = {
   resolve: {
     extensions: ['*', '.js', '.json', '.vue'],
     alias: {
-      '~components': resolve('../src/components'),
-      '~directives': resolve('../src/directives'),
-      '~mixins': resolve('../src/mixins'),
-      '~util': resolve('../src/util'),
+      '@components': resolve('../src/components'),
+      '@directives': resolve('../src/directives'),
+      '@mixins': resolve('../src/mixins'),
+      '@util': resolve('../src/util'),
       'stylus': resolve('../src/stylus')
     }
   },

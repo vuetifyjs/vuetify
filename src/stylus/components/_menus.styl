@@ -16,6 +16,7 @@
   &__activator
     align-items: center
     cursor: pointer
+    height: inherit
     position: relative
 
     input[readonly]
@@ -28,7 +29,6 @@
     max-width: 80%
     overflow-y: auto
     overflow-x: hidden
-    transition: .3s $transition.swing
     contain: content
     elevation(8)
 
@@ -43,6 +43,9 @@
     & > .card
       contain: content
       backface-visibility: hidden
+      
+  > .menu__content
+    max-width: none
 
   &-transition
     &-enter

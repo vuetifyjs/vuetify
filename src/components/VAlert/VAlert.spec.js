@@ -1,6 +1,6 @@
-import { test } from '~util/testing'
-import VAlert from '~components/VAlert'
-import VIcon from '~components/VIcon'
+import { test } from '@util/testing'
+import VAlert from '@components/VAlert'
+import VIcon from '@components/VIcon'
 
 test('VAlert.vue', ({ mount }) => {
   it('should be closed by default', async () => {

@@ -1,8 +1,8 @@
-import { test } from '~util/testing'
+import { test } from '@util/testing'
 import {
   VBreadcrumbs,
   VBreadcrumbsItem
-} from '~components/VBreadcrumbs'
+} from '@components/VBreadcrumbs'
 import Vue from 'vue'
 
 test('VBreadcrumbs.js', ({ mount, compileToFunctions }) => {

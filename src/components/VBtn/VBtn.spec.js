@@ -1,7 +1,7 @@
-import { test } from '~util/testing'
+import { test } from '@util/testing'
 import Vue from 'vue'
-import VBtn from '~components/VBtn'
-import VProgressCircular from '~components/VProgressCircular'
+import VBtn from '@components/VBtn'
+import VProgressCircular from '@components/VProgressCircular'
 
 const stub = {
   name: 'router-link',
@@ -97,5 +97,23 @@ test('VBtn.js', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.is('a')).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should register and unregister', () => {
+    const register = jest.fn()
+    const unregister = jest.fn()
+
+    const wrapper = mount(VBtn, {
+      provide: {
+        buttonGroup: {
+          register: register,
+          unregister: unregister
+        }
+      }
+    })
+
+    expect(register).toHaveBeenCalled()
+    wrapper.destroy()
+    expect(unregister).toHaveBeenCalled()
   })
 })

@@ -1,5 +1,5 @@
-import { test } from '~util/testing'
-import VTabsSlider from '~components/VTabs/VTabsSlider.js'
+import { test } from '@util/testing'
+import VTabsSlider from '@components/VTabs/VTabsSlider.js'
 
 test('VTabsSlider.vue', ({ mount }) => {
   it('should render a tabs slider', () => {

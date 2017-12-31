@@ -67,17 +67,6 @@ export default {
     },
     tabOut () {
       this.blur()
-
-      // Single (not multiple) autocomplete select with an
-      // empty search value that is not a combobox should
-      // clear the input value
-      if (this.isAutocomplete &&
-        !this.isMultiple &&
-        !this.searchValue &&
-        !this.combobox
-      ) {
-        this.inputValue = null
-      }
     },
     onTabDown (e) {
       // If tabbing through inputs and

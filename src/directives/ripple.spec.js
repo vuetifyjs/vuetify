@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import { test } from '~util/testing'
-import Ripple from '~directives/ripple'
+import { test } from '@util/testing'
+import Ripple from '@directives/ripple'
 
 test('VRipple', ({ mount }) => {
   it('Ripple with no value should render data attribute true', () => {

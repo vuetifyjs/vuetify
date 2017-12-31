@@ -53,7 +53,6 @@
   <a href="https://careers.lmax.com/?utm_source=vuetify&utm_medium=github-link&utm_campaign=lmax-careers">
     <img height="70px" src="https://vuetifyjs.com/static/doc-images/backers/lmax-exchange.png">
   </a>
-  <br><br>
   <a href="http://intygrate.com/?ref=vuetify-github">
     <img height="70px" src="https://vuetifyjs.com/static/doc-images/backers/intygrate.png">
   </a>
@@ -65,9 +64,11 @@
   <a href="http://www.eikospartners.com/?ref=vuetify-github">
     <img height="40px" src="https://vuetifyjs.com/static/doc-images/backers/eikos-partners.webp">
   </a>
-  <br><br>
   <a href="https://application.rategenius.com/?ref=vuetify-github">
     <img height="40px" src="https://vuetifyjs.com/static/doc-images/backers/rate-genius.png">
+  </a>
+  <a href="http://quitt.ch/?ref=vuetify-github">
+    <img height="40px" src="https://vuetifyjs.com/static/doc-images/backers/quitt.png">
   </a>
 </p>
 
@@ -136,7 +137,7 @@ import Vuetify from 'vuetify'
 Vue.use(Vuetify)
 ```
 
-For including styles, you can either place the below styles in your ```index.html```
+For including styles, you can either place the below styles in your `index.html`
 ```html
 <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
 <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
@@ -154,4 +155,8 @@ Keep in mind, you will need to ensure your webpack config contains a css-loader.
 Ask your support questions on the vuetifyjs <a href="https://chat.vuetifyjs.com">discord</a>.
 
 <h2>Additional Resources</h2>
-Codepen starter <a href="https://template.vuetifyjs.com">template</a>.
+
+- [Codepen starter template](https://template.vuetifyjs.com)
+- [Storybook for Vue boilerplate project with Vuetify](https://github.com/white-rabbit-japan/vuetify-storyboard-boilerplate)
+
+

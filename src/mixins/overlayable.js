@@ -1,6 +1,8 @@
 require('../stylus/components/_overlay.styl')
 
 export default {
+  name: 'overlayable',
+
   data () {
     return {
       overlay: null,
@@ -101,6 +103,8 @@ export default {
         this.checkPath(e)) e.preventDefault()
     },
     hasScrollbar (el) {
+      if (!el || el.nodeType !== Node.ELEMENT_NODE) return false
+
       const style = window.getComputedStyle(el)
       return ['auto', 'scroll'].includes(style['overflow-y']) && el.scrollHeight > el.clientHeight
     },

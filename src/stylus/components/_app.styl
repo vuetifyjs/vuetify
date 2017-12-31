@@ -1,4 +1,5 @@
 @import '../bootstrap'
+@import '../browsers'
 @import '../theme'
 
 .application
@@ -31,3 +32,11 @@ application($material)
       color: $material.text.disabled !important
 
 app(application)
+
++firefox()
+  @media print
+    .application
+      display: block
+
+      &--wrap
+        display: block
