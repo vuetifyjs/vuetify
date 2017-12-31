@@ -72,6 +72,7 @@ test('VTabs', ({ mount, shallow }) => {
     expect(tab.vm.isActive).toBe(false)
     expect(item.vm.isActive).toBe(false)
     await ssrBootable()
+    await wrapper.vm.$nextTick()
     expect(tabs.vm.activeIndex).toBe(0)
     expect(tab.vm.isActive).toBe(true)
     expect(item.vm.isActive).toBe(true)
@@ -342,7 +343,7 @@ test('VTabs', ({ mount, shallow }) => {
     wrapper.vm.scrollIntoView()
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.scrollOffset).toBe(400)
+    expect(wrapper.vm.scrollOffset).toBe(0)
 
     // DOM elements have no actual widths
     // Trick into running else condition
@@ -350,6 +351,6 @@ test('VTabs', ({ mount, shallow }) => {
     wrapper.vm.scrollIntoView()
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.scrollOffset).toBe(-1)
+    expect(wrapper.vm.scrollOffset).toBe(0)
   })
 })

@@ -18,7 +18,7 @@ export default {
     lazyValue: 'updateTabs',
     right: 'callSlider',
     value (val) {
-      const tab = this.tabs[parseInt(val)]
+      const tab = this.tabs.find(tab => tab.action === val)
 
       if (!tab) return
 

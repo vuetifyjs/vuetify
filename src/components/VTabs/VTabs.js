@@ -54,6 +54,7 @@ export default {
   provide () {
     return {
       tabClick: this.tabClick,
+      tabProxy: this.tabProxy,
       registerItems: this.registerItems,
       unregisterItems: this.unregisterItems
     }
@@ -197,6 +198,9 @@ export default {
     tabClick (tab) {
       this.inputValue = tab.action === tab ? this.tabs.indexOf(tab) : tab.action
       this.scrollIntoView()
+    },
+    tabProxy (val) {
+      this.inputValue = val
     },
     registerItems (fn) {
       this.tabItems = fn

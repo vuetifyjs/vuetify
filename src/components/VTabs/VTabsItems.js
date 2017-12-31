@@ -17,6 +17,9 @@ export default {
     registerItems: {
       default: null
     },
+    tabProxy: {
+      default: null
+    },
     unregisterItems: {
       default: null
     }
@@ -54,7 +57,8 @@ export default {
 
         this.lazyValue = val
 
-        !this.registerItems && this.$emit('input', val)
+        if (this.tabProxy) this.tabProxy(val)
+        else this.$emit('input', val)
       }
     }
   },
