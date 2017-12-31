@@ -36,9 +36,7 @@ export default {
   },
 
   props: {
-    id: {
-      required: true
-    },
+    id: String,
     transition: {
       type: [Boolean, String],
       default: 'tab-transition'
@@ -56,22 +54,19 @@ export default {
   },
 
   methods: {
-    toggle (target, reverse, showTransition) {
+    toggle (target, reverse, showTransition, index) {
       this.$el.style.transition = !showTransition ? 'none' : null
       this.reverse = reverse
-      this.isActive = this.id === target
+      this.isActive = (this.id || index.toString()) === target
     }
   },
 
   mounted () {
-    this.tabs.register({
-      id: this.id,
-      toggle: this.toggle
-    })
+    this.tabs.register(this)
   },
 
   beforeDestroy () {
-    this.tabs.unregister(this.id)
+    this.tabs.unregister(this)
   },
 
   render (h) {
@@ -81,7 +76,7 @@ export default {
         name: 'show',
         value: this.isActive
       }],
-      domProps: { id: this.id.toString() },
+      domProps: { id: this.id },
       on: this.$listeners
     }
 

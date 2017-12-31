@@ -38,7 +38,7 @@ export default {
 
   computed: {
     activeIndex () {
-      return this.items.findIndex(item => item.id === this.lazyValue)
+      return this.items.findIndex((item, index) => (item.id || index.toString()) === this.lazyValue)
     },
     activeItem () {
       if (!this.items.length) return undefined
@@ -87,7 +87,7 @@ export default {
         nextIndex = 0
       }
 
-      this.inputValue = this.items[nextIndex].id
+      this.inputValue = this.items[nextIndex].id || nextIndex.toString()
     },
     prev (cycle) {
       let prevIndex = this.activeIndex - 1
@@ -97,20 +97,20 @@ export default {
         prevIndex = this.items.length - 1
       }
 
-      this.inputValue = this.items[prevIndex].id
+      this.inputValue = this.items[prevIndex].id || prevIndex.toString()
     },
     onSwipe (action) {
       this[action](this.cycle)
     },
-    register (options) {
-      this.items.push(options)
+    register (item) {
+      this.items.push(item)
     },
-    unregister (id) {
-      this.items = this.items.filter(item => item.id !== id)
+    unregister (item) {
+      this.items = this.items.filter(i => i !== item)
     },
     updateItems () {
-      this.items.forEach(({ toggle }) => {
-        toggle(this.lazyValue, this.reverse, this.isBooted)
+      this.items.forEach(({ toggle }, index) => {
+        toggle(this.lazyValue, this.reverse, this.isBooted, index)
       })
       this.isBooted = true
     }

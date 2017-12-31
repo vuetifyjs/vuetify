@@ -5,9 +5,11 @@
  */
 export default {
   watch: {
-    activeTab (val) {
+    activeTab (tab) {
       this.callSlider()
-      this.tabItems && this.tabItems(val.id)
+
+      const action = tab.action
+      this.tabItems && this.tabItems(action === tab ? this.tabs.indexOf(tab).toString() : action)
     },
     alignWithTitle: 'callSlider',
     centered: 'callSlider',

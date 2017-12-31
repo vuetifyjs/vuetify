@@ -98,11 +98,14 @@ export default {
 
       // Give screen time to paint
       this.$nextTick(() => {
-        const activeTab = this.$el.querySelector(`[href="#${this.activeTab.id}"]`)
+        const action = this.activeTab.action
+        const activeTab = action === this.activeTab
+          ? this.activeTab
+          : this.tabs.find(tab => tab.action === action)
 
         if (!activeTab) return
-        this.sliderWidth = activeTab.scrollWidth
-        this.sliderLeft = activeTab.offsetLeft
+        this.sliderWidth = activeTab.$el.scrollWidth
+        this.sliderLeft = activeTab.$el.offsetLeft
       })
     },
     /**
@@ -132,14 +135,18 @@ export default {
     findActiveLink () {
       if (!this.tabs.length || this.lazyValue) return
 
-      const activeIndex = this.tabs.findIndex(tabItem => {
-        return tabItem.id === this.lazyValue ||
-          tabItem.el.firstChild.className.indexOf(this.activeClass) > -1
+      const activeIndex = this.tabs.findIndex((tabItem, index) => {
+        const id = tabItem.action === tabItem ? index.toString() : tabItem.action
+        return id === this.lazyValue ||
+          tabItem.$el.firstChild.className.indexOf(this.activeClass) > -1
       })
+
+      const index = activeIndex > -1 ? activeIndex : 0
+      const tab = this.tabs[index]
 
       /* istanbul ignore next */
       // There is not a reliable way to test
-      this.inputValue = this.tabs[activeIndex > -1 ? activeIndex : 0].id
+      this.inputValue = tab.action === tab ? index.toString() : tab.action
     },
     parseNodes () {
       const item = []
@@ -174,7 +181,7 @@ export default {
     scrollIntoView () {
       if (!this.activeTab) return false
 
-      const { clientWidth, offsetLeft } = this.activeTab.el
+      const { clientWidth, offsetLeft } = this.activeTab.$el
       const wrapperWidth = this.$refs.wrapper.clientWidth
       const totalWidth = wrapperWidth + this.scrollOffset
       const itemOffset = clientWidth + offsetLeft
@@ -187,8 +194,8 @@ export default {
         this.scrollOffset -= totalWidth - itemOffset - additionalOffset
       }
     },
-    tabClick (target) {
-      this.inputValue = target
+    tabClick (tab) {
+      this.inputValue = tab.action === tab ? this.tabs.indexOf(tab).toString() : tab.action
       this.scrollIntoView()
     },
     registerItems (fn) {
@@ -197,8 +204,8 @@ export default {
     unregisterItems () {
       this.tabItems = null
     },
-    unregister (id) {
-      this.tabs = this.tabs.filter(o => o.id !== id)
+    unregister (tab) {
+      this.tabs = this.tabs.filter(o => o !== tab)
     },
     updateTabs () {
       this.tabs.forEach(({ toggle }) => {

@@ -11,7 +11,7 @@ test('VTabItem', ({ mount }) => {
     const wrapper = mount({
       provide () {
         return {
-          tabs: { 
+          tabs: {
             register,
             unregister
           }
@@ -28,7 +28,7 @@ test('VTabItem', ({ mount }) => {
 
     await wrapper.vm.$nextTick()
     expect(register).toHaveBeenCalled()
-    
+
     const content = wrapper.find(VTabItem)[0]
     content.destroy()
     await wrapper.vm.$nextTick()

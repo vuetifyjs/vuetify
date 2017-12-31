@@ -47,7 +47,7 @@ export default {
         to.hasOwnProperty('path')
       ) return to.path
 
-      return this._uid
+      return this
     }
   },
 
@@ -59,15 +59,11 @@ export default {
   },
 
   mounted () {
-    this.tabs.register({
-      id: this.action,
-      toggle: this.toggle,
-      el: this.$el
-    })
+    this.tabs.register(this)
   },
 
   beforeDestroy () {
-    this.tabs.unregister(this.action)
+    this.tabs.unregister(this)
   },
 
   methods: {
@@ -81,20 +77,19 @@ export default {
 
       this.$emit('click', e)
 
-      if (!this.to && !this.href) return
-      if (!this.to) this.tabClick(this.action)
+      this.to || this.tabClick(this)
     },
     onRouteChange () {
       if (!this.to) return
 
       this.$nextTick(() => {
         if (this.$el.firstChild.className.indexOf(this.activeClass) > -1) {
-          this.tabClick(this.action)
+          this.tabClick(this)
         }
       })
     },
     toggle (action) {
-      this.isActive = this.action === action
+      this.isActive = (action === this) || (action === this.action)
     }
   },
 

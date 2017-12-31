@@ -6,7 +6,10 @@
 export default {
   computed: {
     activeIndex () {
-      return this.tabs.findIndex(tab => tab.id === this.lazyValue)
+      return this.tabs.findIndex((tab, index) => {
+        const id = tab.action === tab ? index.toString() : tab.action
+        return id === this.lazyValue
+      })
     },
     activeTab () {
       if (!this.tabs.length) return undefined
@@ -42,7 +45,7 @@ export default {
     },
     target () {
       return this.activeTab
-        ? this.activeTab.id
+        ? this.activeTab.action
         : null
     }
   }
