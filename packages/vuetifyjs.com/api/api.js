@@ -2032,13 +2032,16 @@ module.exports = {
         "source": "toggleable"
       },
       {
-        "name": "hideActions",
-        "type": "Boolean",
-        "default": "False",
-        "source": null
+        "name": "ripple",
+        "type": [
+          "Boolean",
+          "Object"
+        ],
+        "default": true,
+        "source": "rippleable"
       },
       {
-        "name": "ripple",
+        "name": "hideActions",
         "type": "Boolean",
         "default": "False",
         "source": null
@@ -2046,7 +2049,8 @@ module.exports = {
     ],
     "mixins": [
       "bootable",
-      "toggleable"
+      "toggleable",
+      "rippleable"
     ],
     "slots": [
       "default",
@@ -4350,7 +4354,7 @@ module.exports = {
         "source": null
       },
       {
-        "name": "openOnHover",
+        "name": "hover",
         "type": "Boolean",
         "default": "False",
         "source": null
