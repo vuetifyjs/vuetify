@@ -117,17 +117,17 @@ test('VTab', ({ mount }) => {
     expect(mockClick).not.toHaveBeenCalled()
 
     wrapper.vm.click(new Event('click'))
-    expect(click).toHaveBeenCalled()
+    expect(mockClick.mock.calls.length).toBe(1)
 
     wrapper.setProps({ href: '/foo' })
     wrapper.vm.click(new Event('click'))
     await wrapper.vm.$nextTick()
-    expect(mockClick.mock.calls.length).toBe(1)
+    expect(mockClick.mock.calls.length).toBe(2)
 
     wrapper.setProps({ href: null, to: '/foo' })
     wrapper.vm.click(new Event('click'))
     await wrapper.vm.$nextTick()
-    expect(mockClick.mock.calls.length).toBe(1)
+    expect(mockClick.mock.calls.length).toBe(2)
 
     expect(tabClick).toHaveBeenWarned()
     expect(tabsWarning).toHaveBeenTipped()
@@ -184,7 +184,7 @@ test('VTab', ({ mount }) => {
     wrapper.setProps({ to: { path: '/bar' }})
     expect(wrapper.vm.action).toBe('/bar')
     wrapper.setProps({ to: null })
-    expect(wrapper.vm.action).toBe(wrapper.vm._uid)
+    expect(wrapper.vm.action).toBe(wrapper.vm)
 
     expect(tabClick).toHaveBeenWarned()
     expect(tabsWarning).toHaveBeenTipped()

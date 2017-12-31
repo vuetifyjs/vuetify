@@ -342,7 +342,7 @@ test('VTabs', ({ mount, shallow }) => {
     wrapper.vm.scrollIntoView()
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.scrollOffset).toBe(0)
+    expect(wrapper.vm.scrollOffset).toBe(400)
 
     // DOM elements have no actual widths
     // Trick into running else condition
@@ -350,6 +350,6 @@ test('VTabs', ({ mount, shallow }) => {
     wrapper.vm.scrollIntoView()
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.scrollOffset).toBe(0)
+    expect(wrapper.vm.scrollOffset).toBe(-1)
   })
 })
