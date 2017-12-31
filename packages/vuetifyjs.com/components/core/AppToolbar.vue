@@ -33,17 +33,13 @@
         )
           span Translations
           v-icon keyboard_arrow_down
-        v-card(light)
-          v-card-title.title Coming soon!
-          v-card-text
-            v-list(light)
-              v-list-tile(
-                v-for="language in languages"
-                :key="language.locale"
-                @click="translateI18n(language.locale)"
-              )
-                v-list-tile-title {{language.title}}
-            div For more information, visit the <a href="https://discord.gg/CweuCn7" target="_blank">community</a>
+        v-list(light)
+          v-list-tile(
+            v-for="language in languages"
+            :key="language.locale"
+            @click="translateI18n(language.locale)"
+          )
+            v-list-tile-title {{language.title}}
       v-menu(bottom offset-y attach).hidden-xs-only
         v-btn(
           slot="activator"
