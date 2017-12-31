@@ -77,6 +77,7 @@ export default {
   props: {
     autoGrow: 'Auto-grows the input. This option requires the use of **v-model**',
     autofocus: 'Enable autofocus',
+    box: 'Applies the alternate box input style',
     counter: 'Creates counter for input length. If no Number is specified, it defaults to 25. Does not apply any validation.',
     fullWidth: 'Desginates input type as full-width',
     multiLine: 'Turns into textarea',

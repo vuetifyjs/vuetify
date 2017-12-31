@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import { capitalize } from '@/util/helpers'
+  import { capitalize, camel } from '@/util/helpers'
 
   export default {
     data: () => ({
@@ -54,13 +54,11 @@
             const fn = this[`gen${capitalize(key)}`]
 
             if (fn) {
-              newItem[key] = fn(item[key])
+              newItem[key] = fn(item[key] || item.name, item)
             } else {
               newItem[key] = item[key] == null ? '' : item[key]
             }
           }
-
-          newItem.description = item.description || this.genDescription(item.name)
 
           return newItem
         })
@@ -68,22 +66,26 @@
     },
 
     methods: {
-      genDescription (name) {
+      genDescription (name, item) {
         let description = ''
         let devPrepend = ''
         const specialLevelDesc = `${this.namespace}.special.${this.type}.${this.target}.${name}`
         const pageComponentLevelDesc = `${this.namespace}.${this.type}.${this.target}.${name}`
         const componentLevelDesc = `${this.namespace}.${this.type}.${name}`
+        const mixinDesc = `Mixins.${camel(item.source)}.${this.type}.${name}`
         const genericDesc = `Generic.${capitalize(this.type)}.${name}`
         if (this.$te(specialLevelDesc)) {
           description = this.$t(specialLevelDesc)
-          devPrepend = '**SPECIAL*** - '
+          devPrepend = '**SPECIAL** - '
         } else if (this.$te(pageComponentLevelDesc)) {
           description = this.$t(pageComponentLevelDesc)
-          devPrepend = '**PAGE*** - '
+          devPrepend = '**PAGE** - '
         } else if (this.$te(componentLevelDesc)) {
-          devPrepend = '**COMPONENT*** - '
+          devPrepend = '**COMPONENT** - '
           description = this.$t(componentLevelDesc)
+        } else if (this.$te(mixinDesc)) {
+          description = this.$t(mixinDesc)
+          devPrepend = '**MIXIN** - '
         } else if (this.$te(genericDesc)) {
           description = this.$t(genericDesc)
         }
@@ -104,6 +106,11 @@
         return type.map(t => {
           return this.$t(`Generic.Types.${t}`)
         }).join(', ')
+      },
+      genProps (props) {
+        if (!Array.isArray(props)) return 'Missing data'
+
+        return `<kbd>{ ${props.join(', ')} }</kbd>`
       }
     }
   }

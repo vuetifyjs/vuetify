@@ -15,14 +15,18 @@ import Components from './components'
 // Directives
 import Directives from './directives'
 
+// Mixins
+import Mixins from './mixins'
+
 export default {
   Components,
   Directives,
   Generic,
-  Layout,
-  Style,
-  Motion,
-  Vuetify,
   GettingStarted,
-  Guides
+  Guides,
+  Layout,
+  Mixins,
+  Motion,
+  Style,
+  Vuetify
 }
