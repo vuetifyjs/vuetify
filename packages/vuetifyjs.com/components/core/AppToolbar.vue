@@ -36,6 +36,13 @@
         v-card(light)
           v-card-title.title Coming soon!
           v-card-text
+            v-list(light)
+              v-list-tile(
+                v-for="language in languages"
+                :key="language.locale"
+                @click="translateI18n(language.locale)"
+              )
+                v-list-tile-title {{language.title}}
             div For more information, visit the <a href="https://discord.gg/CweuCn7" target="_blank">community</a>
       v-menu(bottom offset-y attach).hidden-xs-only
         v-btn(
@@ -67,7 +74,17 @@
   export default {
     data: () => ({
       fixed: false,
-      isManualScrolling: false
+      isManualScrolling: false,
+      languages: [
+        {
+          title: 'English',
+          locale: 'en-US'
+        },
+        {
+          title: 'русский',
+          locale: 'ru-RU'
+        }
+      ]
     }),
 
     computed: {
@@ -85,6 +102,9 @@
       },
       getManualScroll (path) {
         return this.fullscreenRoutes.includes(path)
+      },
+      translateI18n (locale) {
+        this.$i18n.locale = locale
       }
     }
   }
