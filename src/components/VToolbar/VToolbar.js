@@ -227,11 +227,9 @@ export default {
     }
 
     data.directives = [{
+      arg: this.scrollTarget,
       name: 'scroll',
-      value: {
-        value: this.onScroll,
-        arg: this.scrollTarget
-      }
+      value: this.onScroll
     }]
 
     children.push(h('div', {
