@@ -1,6 +1,8 @@
 require('../stylus/components/_overlay.styl')
 
 export default {
+  name: 'overlayable',
+
   data () {
     return {
       overlay: null,

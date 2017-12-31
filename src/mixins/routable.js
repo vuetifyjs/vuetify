@@ -1,6 +1,8 @@
 import Ripple from '../directives/ripple'
 
 export default {
+  name: 'routable',
+
   directives: {
     Ripple
   },

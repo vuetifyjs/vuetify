@@ -9,6 +9,8 @@ export function inject (namespace, child, parent) {
   } : null
 
   return {
+    name: 'registerable-inject',
+
     inject: {
       [namespace]: {
         default: defaultImpl
@@ -19,6 +21,8 @@ export function inject (namespace, child, parent) {
 
 export function provide (namespace) {
   return {
+    name: 'registerable-provide',
+
     methods: {
       register: null,
       unregister: null

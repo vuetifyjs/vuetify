@@ -31,6 +31,8 @@ import {
 } from '../util/mask'
 
 export default {
+  name: 'maskable',
+
   data: () => ({
     selection: 0,
     lazySelection: 0,
