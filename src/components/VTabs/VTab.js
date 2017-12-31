@@ -42,14 +42,20 @@ export default {
     action () {
       const to = this.to || this.href
 
-      if (!to || to === Object(to)) return this._uid
+      if (typeof to === 'string') return to.replace('#', '')
+      if (to === Object(to) &&
+        to.hasOwnProperty('path')
+      ) return to.path
 
-      return to.replace('#', '')
+      return this._uid
     }
   },
 
   watch: {
-    $route: 'onRouteChange'
+    $route: {
+      immediate: true,
+      handler: 'onRouteChange'
+    }
   },
 
   mounted () {

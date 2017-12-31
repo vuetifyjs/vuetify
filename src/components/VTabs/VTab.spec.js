@@ -8,7 +8,7 @@ const stub = {
   name: 'router-link',
 
   props: {
-    to: String
+    to: [String, Object]
   },
 
   render (h) {
@@ -164,6 +164,28 @@ test('VTab', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(mockClick).toHaveBeenCalled()
+    expect(tabClick).toHaveBeenWarned()
+    expect(tabsWarning).toHaveBeenTipped()
+  })
+
+  it('should have the correct actions', () => {
+    const instance = Vue.extend()
+    instance.component('router-link', stub)
+    const wrapper = mount(VTab, {
+      propsData: {
+        href: '#foo'
+      },
+      instance
+    })
+
+    expect(wrapper.vm.action).toBe('foo')
+    wrapper.setProps({ href: null, to: '/foo' })
+    expect(wrapper.vm.action).toBe('/foo')
+    wrapper.setProps({ to: { path: '/bar' }})
+    expect(wrapper.vm.action).toBe('/bar')
+    wrapper.setProps({ to: null })
+    expect(wrapper.vm.action).toBe(wrapper.vm._uid)
+
     expect(tabClick).toHaveBeenWarned()
     expect(tabsWarning).toHaveBeenTipped()
   })

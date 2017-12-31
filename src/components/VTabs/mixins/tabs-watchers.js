@@ -15,7 +15,10 @@ export default {
     isBooted: 'findActiveLink',
     lazyValue: 'updateTabs',
     right: 'callSlider',
-    value: 'tabClick',
+    value (val) {
+      // Avoid duplicate value updates
+      if (this.lazyValue !== val) this.tabClick(val)
+    },
     '$vuetify.application.left': 'onContainerResize',
     '$vuetify.application.right': 'onContainerResize',
     scrollOffset (val) {
