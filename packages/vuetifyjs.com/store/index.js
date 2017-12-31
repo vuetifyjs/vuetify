@@ -73,6 +73,7 @@ export function createStore () {
             { href: 'cards', title: 'Cards' },
             { href: 'carousels', title: 'Carousels' },
             { href: 'chips', title: 'Chips' },
+            { href: 'data-iterator', title: 'Data iterator' },
             { href: 'data-tables', title: 'Data tables' },
             { href: 'dialogs', title: 'Dialogs' },
             { href: 'dividers', title: 'Dividers' },
