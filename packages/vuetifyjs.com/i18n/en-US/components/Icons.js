@@ -23,5 +23,14 @@ export default {
       header: 'Buttons',
       desc: 'Icons can be used inside of buttons to add emphasis to the action.'
     }
-  }]
+  }],
+  props: {
+    disabled: 'Mixins.Input.props.disabled',
+    large: 'Makes the icon large **(36px)**',
+    left: 'Places icon on the left, when used inside a button',
+    medium: 'Makes the icon medium **(28px)**',
+    right: 'Places icon on the right, when used inside a button',
+    small: 'Makes the icon small **(16px)**',
+    xLarge: 'Makes the icon extra large **(40px)**'
+  }
 }

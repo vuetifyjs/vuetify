@@ -2,6 +2,7 @@ export default {
   header: 'List',
   headerText: 'The `v-list` component is used to display information. It can contain an avatar, content, actions, subheaders and much more. Lists can contain children and are used in the sidebar.',
   components: [
+    'v-list',
     'v-list-tile',
     'v-list-tile-title',
     'v-list-tile-sub-title',
@@ -58,5 +59,14 @@ export default {
       inverted: true,
       uninverted: true
     }
-  }]
+  }],
+  props: {
+    avatar: 'Used to set minimum tile height on a single-line list item',
+    dense: 'Lowers max height of list tiles',
+    expand: 'Will only collapse when explicitly closed',
+    subheader: 'Removes top padding. Used when previous sibling is a header',
+    threeLine: 'Increases list-tile height for three lines',
+    twoLine: 'Increases list-tile height for two lines',
+    inactive: 'If set, the list tile will not be rendered as a link even if it has to/href prop or @click handler'
+  }
 }

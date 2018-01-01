@@ -966,15 +966,21 @@ module.exports = {
   "v-carousel-item": {
     "props": [
       {
-        "name": "transition",
-        "type": "String",
-        "default": "tab-transition",
-        "source": null
-      },
-      {
         "name": "reverseTransition",
         "type": "String",
         "default": "tab-reverse-transition",
+        "source": null
+      },
+      {
+        "name": "src",
+        "type": "String",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "transition",
+        "type": "String",
+        "default": "tab-transition",
         "source": null
       }
     ],

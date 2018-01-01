@@ -32,5 +32,21 @@ export default {
       desc: 'Vuetify also supports the dark application theme. This will not override components that have default themes so in some cases it will be necessary to manually set the dark theme accents.',
       uninverted: true
     }
-  }]
+  }],
+  props: {
+    absolute: 'Mixins.Positionable.props.absolute',
+    clipped: 'A clipped drawer rests under the application toolbar',
+    disableResizeWatcher: 'Will automatically open/close drawer when resized depending if mobile or desktop.',
+    disableRouteWatcher: 'Disables opening of navigation drawer when route changes',
+    fixed: 'Mixins.Positionable.props.fixed',
+    floating: 'A floating drawer has no visible container (no border-right)',
+    hideOverlay: 'Hide the display of the overlay',
+    miniVariantWidth: 'Designates the width assigned when the `mini` prop is turned on',
+    miniVariant: 'Condenses navigation drawer width, also accepts the **.sync** modifier. With this, the drawer will re-open when clicking it',
+    permanent: 'The drawer remains visible regardless of screen size',
+    right: 'Places the navigation drawer on the right',
+    stateless: 'Remove all automated state functionality (resize, mobile, route) and manually control the drawer state',
+    temporary: 'A temporary drawer sits above its application and uses a scrim (overlay) to darken the background',
+    touchless: 'Disable mobile touch functionality'
+  }
 }

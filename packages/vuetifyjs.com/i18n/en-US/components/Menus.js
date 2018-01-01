@@ -38,5 +38,16 @@ export default {
       desc: 'A menu can be configured to be static when opened, allowing it to function as a popover. This can be useful when there are multiple interactive items within the menu contents.',
       uninverted: true
     }
-  }]
+  }],
+  props: {
+    closeOnClick: 'Designates if menu should close on outside-activator click',
+    closeOnContentClick: 'Designates if menu should close when its content is clicked',
+    disabled: 'Disables the menu',
+    offsetX: 'Offset the menu on the x-axis. Works in conjunction with direction left/right',
+    offsetY: 'Offset the menu on the y-axis. Works in conjunction with direction top/bottom',
+    openOnClick: 'Designates whether menu should open on activator click',
+    openOnHover: 'Designates whether menu should open on activator hover',
+    origin: 'Mixins.Transitionable.props.origin',
+    transition: 'Mixins.Transitionable.props.transition'
+  }
 }

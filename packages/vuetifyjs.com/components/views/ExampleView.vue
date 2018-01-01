@@ -60,7 +60,7 @@
                   :search="search"
                   :target="current"
                   :type="tabItem"
-                  :key="`${tabItem}${namespace}`"
+                  :key="`${tabItem}${namespace}${current}`"
                 )
 
       section(v-if="supplemental.length > 0")#supplemental

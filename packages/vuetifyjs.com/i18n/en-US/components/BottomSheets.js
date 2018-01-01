@@ -14,6 +14,8 @@ export default {
   }],
   props: {
     disabled: 'Disables the ability to open the dialog',
-    inset: 'Reduces the dialog content maximum width to 70%'
+    inset: 'Reduces the dialog content maximum width to 70%',
+    lazy: 'Mixins.Bootable.props.lazy',
+    maxWidth: 'Specify the maximum width of the sheet\'s container'
   }
 }
