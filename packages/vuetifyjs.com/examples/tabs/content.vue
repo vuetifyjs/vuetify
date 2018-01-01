@@ -1,7 +1,8 @@
 <template>
-  <v-tabs fixed centered>
-    <v-toolbar extended color="cyan" dark>
+  <div>
+    <v-toolbar color="cyan" dark tabs>
       <v-toolbar-side-icon></v-toolbar-side-icon>
+      <v-toolbar-title>Page title</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon>
         <v-icon>search</v-icon>
@@ -9,36 +10,41 @@
       <v-btn icon>
         <v-icon>more_vert</v-icon>
       </v-btn>
-      <v-toolbar-title slot="extension" class="display-2">Page title</v-toolbar-title>
-    </v-toolbar>
-    <v-tabs-bar color="cyan" dark>
-      <v-tabs-slider color="yellow"></v-tabs-slider>
-      <v-tabs-item
-        v-for="i in 3"
-        :key="i"
-        :href="'#tab-' + i"
+      <v-tabs
+        centered
+        color="cyan"
+        slot="extension"
+        slider-color="yellow"
+        v-model="model"
       >
-        Item {{ i }}
-      </v-tabs-item>
-    </v-tabs-bar>
-    <v-tabs-items>
-      <v-tabs-content
+        <v-tab
+          v-for="i in 3"
+          :key="i"
+          :href="`#tab-${i}`"
+        >
+          Item {{ i }}
+        </v-tab>
+      </v-tabs>
+    </v-toolbar>
+    <v-tabs-items v-model="model">
+      <v-tab-item
         v-for="i in 3"
         :key="i"
-        :id="'tab-' + i"
+        :id="`tab-${i}`"
       >
         <v-card flat>
-          <v-card-text>{{ text }}</v-card-text>
+          <v-card-text v-text="text"></v-card-text>
         </v-card>
-      </v-tabs-content>
+      </v-tab-item>
     </v-tabs-items>
-  </v-tabs>
+  </div>
 </template>
 
 <script>
   export default {
     data () {
       return {
+        model: 'tab-2',
         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
       }
     }

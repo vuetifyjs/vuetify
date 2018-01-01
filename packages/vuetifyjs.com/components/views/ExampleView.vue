@@ -15,39 +15,39 @@
 
       section#api
         section-head(value="Generic.Pages.api")
-        v-tabs(
-          v-model="tab"
-        ).elevation-1
-          v-tabs-bar(color="grey lighten-3").px-3
-            v-tabs-slider(color="primary")
-            v-tabs-item(
+        v-card
+          v-tabs(
+            v-model="tab"
+            color="grey lighten-3"
+            slider-color="primary"
+          )
+            v-tab(
               v-for="(tab, i) in tabs"
               :href="`#${tab}`"
               :key="i"
               v-if="hasTab(tab)"
             ) {{ tab.replace(/([A-Z])/g, ' $1') }}
-          v-card(flat)
-            v-card-title
-              v-select(
-                label="Component"
-                hide-details
-                single-line
-                v-bind:items="components"
-                v-model="current"
-                auto
-                :disabled="components.length < 2"
-              )
-              v-spacer
-              v-spacer.hidden-sm-and-down
-              v-text-field(
-                append-icon="search"
-                label="Search..."
-                single-line
-                hide-details
-                v-model="search"
-              )
-          v-tabs-items(touchless).white
-            v-tabs-content(
+          v-card-title
+            v-select(
+              label="Component"
+              hide-details
+              single-line
+              v-bind:items="components"
+              v-model="current"
+              auto
+              :disabled="components.length < 2"
+            )
+            v-spacer
+            v-spacer.hidden-sm-and-down
+            v-text-field(
+              append-icon="search"
+              label="Search..."
+              single-line
+              hide-details
+              v-model="search"
+            )
+          v-tabs-items(touchless v-model="tab").white
+            v-tab-item(
               v-for="(tabItem, i) in tabs"
               :id="tabItem"
               :key="i"
