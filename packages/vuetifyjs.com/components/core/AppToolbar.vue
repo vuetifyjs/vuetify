@@ -25,7 +25,6 @@
         offset-y
         left
         attach
-        min-width="300"
       )
         v-btn(
           slot="activator"
