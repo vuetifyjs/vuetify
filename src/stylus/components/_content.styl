@@ -1,4 +1,5 @@
 @import '../bootstrap'
+@import '../browsers'
 
 .content
   bootable()
@@ -12,3 +13,9 @@
     display: flex
     flex: 1 0 auto
     max-width: 100%
+
++firefox()
+  @media print
+    .content
+      &--wrap
+        display: block

@@ -10,7 +10,7 @@ export default {
   }),
 
   render (h) {
-    return h('li', {
+    return h('div', {
       staticClass: 'tabs__slider',
       class: this.addBackgroundColorClassChecks()
     })
