@@ -14,6 +14,7 @@
         color="cyan"
         slot="extension"
         v-model="tab"
+        grow
       >
         <v-tabs-slider color="yellow"></v-tabs-slider>
         <v-tab
