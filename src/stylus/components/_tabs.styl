@@ -87,8 +87,6 @@ theme(tabs__bar, "tabs__bar")
           min-width: 160px
 
   &--fixed-tabs
-    flex-grow: 1
-
     .tabs__div
       @media $display-breakpoints.xs-only
         flex: 1 0 auto
@@ -104,6 +102,8 @@ theme(tabs__bar, "tabs__bar")
 
   &--centered,
   &--fixed-tabs
+    flex-grow: 1
+
     > .tabs__div:last-child
       margin-right: auto
 
