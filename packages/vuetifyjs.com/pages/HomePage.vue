@@ -214,7 +214,7 @@
 </script>
 
 <style lang="stylus">
-  @import '../node_modules/vuetify/src/stylus/settings/_variables'
+  @import '~vuetify/src/stylus/settings/_variables'
 
   #home
     background white
