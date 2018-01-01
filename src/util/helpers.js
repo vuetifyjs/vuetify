@@ -135,10 +135,14 @@ export function escapeHTML (str) {
 }
 
 export function filterObjectOnKeys(obj, keys) {
-  return Object.keys(obj)
-               .filter(p => keys.includes(p))
-               .reduce((o, key) =>  {
-                 o[key] = obj[key]
-                 return o
-               }, {})
+  const filtered = {}
+
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i]
+    if (typeof obj[key] !== 'undefined') {
+      filtered[key] = obj[key]
+    }
+  }
+
+  return filtered
 }
