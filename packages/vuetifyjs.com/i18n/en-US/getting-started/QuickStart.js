@@ -15,7 +15,7 @@ export default {
   existingText4: 'You will also need to include the Vuetify css file. Simply include the Vuetify css file in your `index.html` or import the actual stylus file or the minified css.',
   existingText5: 'The easiest way to include the Material Design icons is to add a `link` tag to your `index.html` file.',
   alert2: 'Warning: While Vuetify attempts to not cause any css collision as much as possible, there is no guarantee that your custom styles will not alter your experience when integrating this framework into your existing project.',
-  ie11Header: 'IE11 support',
+  ie11Header: 'IE11 & Safari 9 support',
   ie11Text: 'In your project directory, install `babel-polyfill` and import it into your main entry:',
   ie11Text2: 'Due to Internet Explorer\'s limited support for `<template>` tags, you must send fully compiled dom elements to the browser. This can be done by either building your Vue code in advance or by creating helper components to replace the dom elements. For instance, if sent directly to IE, this will fail:',
   toc: [
