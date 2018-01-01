@@ -1,17 +1,14 @@
 <script>
-  import SSRBootable from '@/node_modules/vuetify/src/mixins/ssr-bootable'
-
   export default {
     name: 'app-table-of-contents',
-
-    mixins: [SSRBootable],
 
     data: () => ({
       currentOffset: 0,
       position: 'relative',
       right: 0,
       top: 0,
-      list: []
+      list: [],
+      isBooted: false
     }),
 
     props: {
@@ -66,6 +63,13 @@
       isBooted () {
         this.genList()
       }
+    },
+
+    mounted () {
+      setTimeout(() => {
+        this.$el.setAttribute('data-booted', true)
+        this.isBooted = true
+      }, 200)
     },
 
     methods: {
