@@ -77,7 +77,7 @@
           | import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
         markup(lang="stylus")
           | // main.styl
-          | @import 'vuetify/src/stylus/main.styl' // Ensure you are using stylus-loader
+          | @import '~vuetify/src/stylus/main' // Ensure you are using stylus-loader
 
         section-text(:value="`${namespace}.existingText5`")
         app-alert(error :value="`${namespace}.alert2`")

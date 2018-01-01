@@ -18,47 +18,47 @@
         section-head(:value="`${namespace}.javascriptPackHeader`")
         section-text(:value="`${namespace}.javascriptPackText`")
         markup(lang="js")
-          |// src/index.js
+          | // src/index.js
           |
-          |// Libraries
-          |import Vue from 'vue'
-          |import Vuetify from 'vuetify'
+          | // Libraries
+          | import Vue from 'vue'
+          | import Vuetify from 'vuetify'
           |
-          |// Helpers
-          |import colors from 'vuetify/es5/util/colors'
+          | // Helpers
+          | import colors from 'vuetify/es5/util/colors'
           |
-          |Vue.use(Vuetify, {
+          | Vue.use(Vuetify, {
           |   theme: {
           |     primary: colors.red.darken1, // #E53935
           |     secondary: colors.red.lighten4, // #FFCDD2
           |     accent: colors.indigo.base // #3F51B5
           |   }
-          |})
+          | })
 
       section#stylus-color-pack
         section-head(:value="`${namespace}.stylusPackHeader`")
         section-text(:value="`${namespace}.stylusPackText`")
         markup(lang="stylus").mb-3
-          |// src/assets/stylus/main.styl
+          | // src/assets/stylus/main.styl
           |
-          |$color-pack = false
+          | $color-pack = false
           |
-          |@import '/path/to/node_modules/vuetify/src/stylus/main.styl'
+          | @import '~vuetify/src/stylus/main'
         section-text(:value="`${namespace}.stylusPackText2`")
         markup(lang="js").mb-3
-          |// src/index.js
+          | // src/index.js
           |
-          |import('./assets/stylus/main.styl')
-          |// or
-          |require('./assets/stylus/main.styl')
+          | import './assets/stylus/main.styl'
+          | // or
+          | require('./assets/stylus/main.styl')
         app-alert(error :value="`${namespace}.alert`")
         section-text(:value="`${namespace}.stylusPackText3`")
         markup(lang="vue")
-          |&lt;style lang="stylus"&gt;
+          | &lt;style lang="stylus"&gt;
           |   $color-pack = false
           |
-          |   @import '/path/to/node_modules/vuetify/src/stylus/main.styl'
-          |&lt;/style&gt;
+          |   @import '~vuetify/src/stylus/main'
+          | &lt;/style&gt;
 
       section#material-colors
         section-head(:value="`${namespace}.colorHeader`")
