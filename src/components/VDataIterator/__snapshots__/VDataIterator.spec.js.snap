@@ -105,7 +105,7 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="true"
+                data-ripple="false"
                 aria-label="Previous page"
         >
           <div class="btn__content">
@@ -119,7 +119,7 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="true"
+                data-ripple="false"
                 aria-label="Next page"
         >
           <div class="btn__content">
@@ -253,7 +253,7 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="true"
+                data-ripple="false"
                 aria-label="Previous page"
         >
           <div class="btn__content">
@@ -267,7 +267,7 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="true"
+                data-ripple="false"
                 aria-label="Next page"
         >
           <div class="btn__content">
@@ -392,7 +392,7 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="true"
+                data-ripple="false"
                 aria-label="Previous page"
         >
           <div class="btn__content">
@@ -406,7 +406,7 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="true"
+                data-ripple="false"
                 aria-label="Next page"
         >
           <div class="btn__content">
@@ -535,7 +535,7 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="true"
+                data-ripple="false"
                 aria-label="Previous page"
         >
           <div class="btn__content">
@@ -549,7 +549,7 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="true"
+                data-ripple="false"
                 aria-label="Next page"
         >
           <div class="btn__content">
