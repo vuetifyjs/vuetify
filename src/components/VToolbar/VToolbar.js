@@ -89,6 +89,7 @@ export default {
       return this.heights.mobile
     },
     computedExtensionHeight () {
+      if (this.tabs) return 48
       if (this.extensionHeight) return parseInt(this.extensionHeight)
 
       return this.computedContentHeight
