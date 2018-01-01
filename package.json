@@ -31,6 +31,7 @@
   },
   "description": "Vue.js 2 Semantic Component Framework",
   "devDependencies": {
+    "animejs": "^2.2.0",
     "autoprefixer": "7.2.5",
     "avoriaz": "6.3.0",
     "babel-cli": "6.26.0",
