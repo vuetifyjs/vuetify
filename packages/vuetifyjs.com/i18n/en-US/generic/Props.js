@@ -18,6 +18,7 @@ export default {
   overlap: 'Component will overlap the slotted content',
   persistent: 'Clicking outside will not dismiss the dialog',
   returnMaskedValue: 'Returns the unmodified masked string',
+  right: 'Aligns tabs to the right',
   ripple: 'Applies the `v-ripple` directive',
   shift: 'Hide text of button when not active',
   singleLine: 'Label does not move on focus/dirty',
