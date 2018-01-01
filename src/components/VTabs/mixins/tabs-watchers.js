@@ -18,7 +18,7 @@ export default {
     lazyValue: 'updateTabs',
     right: 'callSlider',
     value (val) {
-      const tab = this.tabs.find(tab => tab.action === val)
+      const tab = this.tabs.find(tab => tab.action === val) || this.tabs[val]
 
       if (!tab) return
 
