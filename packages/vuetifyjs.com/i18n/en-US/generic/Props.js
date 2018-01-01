@@ -1,5 +1,4 @@
 export default {
-  alignWithTitle: 'Apply margin left to the container, aligning the first tab with toolbar title',
   app: 'Designates the component as part of the application layout. Used for dynamically adjusting content sizing',
   auto: 'Centers list on selected element',
   centered: 'Centers the tabs',

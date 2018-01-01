@@ -37,6 +37,10 @@ export default {
       header: 'Desktop tabs',
       desc: ''
     },
+    alignWithTitle: {
+      header: 'Align tabs with toolbar title',
+      desc: 'Make `v-tabs` lined up with the `v-toolbar-title` component (`v-toolbar-side-icon` or `v-btn` must be used in `v-toolbar`). May not work if the tab text is wrapped.'
+    },
     grow: {
       header: 'Grow',
       desc: 'The `grow` prop will make the tab items take up all available space.'
@@ -51,6 +55,7 @@ export default {
     }
   }],
   props: {
+    alignWithTitle: 'Make `v-tabs` lined up with the toolbar title',
     prependIcon: 'Left pagination icon',
     appendIcon: 'Right pagination icon',
     right: 'Aligns tabs to the right'
