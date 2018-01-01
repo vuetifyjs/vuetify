@@ -8,7 +8,7 @@ export default {
   issue4: 'See if the error is reproducible with the latest version.',
   issue5: 'If reproducible, please provide a simple [codepen](https://template.vuetifyjs.com) or repository that can be cloned to produce the expected behavior.',
   pullRequestsHeader: 'Pull requests',
-  pullRequest1: 'All PR\'s should be made to the `dev` branch of Vuetify.',
+  pullRequest1: 'All PRs should be made to the `dev` branch of Vuetify.',
   pullRequest2: 'For changes and feature requests, please include an example of what you are trying to solve and an example of the markup',
   pullRequest3: 'For bug fixes please reference the issue # that the PR resolves',
   localDevHeader: 'Setup local dev',
