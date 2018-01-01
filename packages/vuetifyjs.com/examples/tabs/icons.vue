@@ -1,31 +1,27 @@
 <template>
-  <v-tabs fixed icons centered>
-    <v-tabs-bar dark color="cyan">
-      <v-tabs-slider color="yellow"></v-tabs-slider>
-      <v-tabs-item href="#tab-1">
-        <v-icon>phone</v-icon>
-        Recents
-      </v-tabs-item>
-      <v-tabs-item href="#tab-2">
-        <v-icon>favorite</v-icon>
-        Favorites
-      </v-tabs-item>
-      <v-tabs-item href="#tab-3">
-        <v-icon>account_box</v-icon>
-        Nearby
-      </v-tabs-item>
-    </v-tabs-bar>
-    <v-tabs-items>
-      <v-tabs-content
-        v-for="i in 3"
-        :key="i"
-        :id="'tab-' + i"
-      >
-        <v-card flat>
-          <v-card-text>{{ text }}</v-card-text>
-        </v-card>
-      </v-tabs-content>
-    </v-tabs-items>
+  <v-tabs icons-and-text centered dark color="cyan">
+    <v-tabs-slider color="yellow"></v-tabs-slider>
+    <v-tab href="#tab-1">
+      Recents
+      <v-icon>phone</v-icon>
+    </v-tab>
+    <v-tab href="#tab-2">
+      Favorites
+      <v-icon>favorite</v-icon>
+    </v-tab>
+    <v-tab href="#tab-3">
+      Nearby
+      <v-icon>account_box</v-icon>
+    </v-tab>
+    <v-tab-item
+      v-for="i in 3"
+      :key="i"
+      :id="'tab-' + i"
+    >
+      <v-card flat>
+        <v-card-text>{{ text }}</v-card-text>
+      </v-card>
+    </v-tab-item>
   </v-tabs>
 </template>
 

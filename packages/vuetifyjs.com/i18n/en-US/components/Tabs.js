@@ -16,7 +16,7 @@ export default {
     },
     fixedTabs: {
       header: 'Fixed tabs',
-      desc: 'The **fixed-tabs** prop sets a higher minimum width and applies a new maximum width to `v-tabs-items`. On desktop screens, the tab items will be centered within the `v-tabs-bar` component and switch to evenly fill on mobile.'
+      desc: 'The **fixed-tabs** prop sets a higher minimum width and applies a new maximum width to `v-tabs-items`. On desktop screens, the tab items will be centered within the `v-tabs` component and switch to evenly fill on mobile.'
     },
     content: {
       header: 'Content',
@@ -41,10 +41,6 @@ export default {
     pagination: {
       header: 'Pagination',
       desc: 'If the tab items overflow their container, pagination controls will appear.'
-    },
-    disabledScroll: {
-      header: 'Disabled scroll',
-      desc: 'You can disable the pagination controls by setting the `scrollable` prop to `false`. This also has the effect of removing the margins around the tab item container.'
     }
   }]
 }

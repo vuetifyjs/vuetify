@@ -52,23 +52,21 @@
       v-expansion-panel.elevation-0
         v-expansion-panel-content(v-model="panel")
           v-divider(v-if="!readonly")
-          v-tabs
-            v-tabs-bar(
-              ref="tabs"
-              class="pl-0"
-              v-show="!readonly"
-            ).grey.lighten-4.px-3
-              v-tabs-slider(color="accent")
-              v-tabs-item(
-                v-for="tab in tabs"
-                v-bind:key="tab"
-                v-bind:href="'#'+tab"
-                v-show="parsed[tab]"
-                active-class=""
-                class="body-2"
-              ) {{ tab }}
+          v-tabs(
+            ref="tabs"
+            color="grey lighten-4"
+            v-show="!readonly"
+          )
+            v-tab(
+              v-for="tab in tabs"
+              v-bind:key="tab"
+              v-bind:href="'#'+tab"
+              v-show="parsed[tab]"
+              active-class=""
+              class="body-2"
+            ) {{ tab }}
             v-tabs-items(class="grey lighten-3")
-              v-tabs-content(
+              v-tab-item(
                 v-for="tab in tabs"
                 v-bind:key="tab"
                 v-bind:id="tab"
@@ -143,7 +141,7 @@
 
     watch: {
       panel () {
-        this.getMarkup().then(() => this.$refs.tabs.slider())
+        this.getMarkup().then(() => this.$refs.tabs.callSlider())
       }
     },
 
