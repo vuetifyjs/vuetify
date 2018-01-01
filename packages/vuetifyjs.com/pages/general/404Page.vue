@@ -6,3 +6,11 @@
 				p The page you were looking for does not exist
 				v-btn(outline color="primary" to="/getting-started/quick-start") Get me out of here!
 </template>
+
+<script>
+  export default {
+    mounted () {
+      this.$store.state.appDrawer = false
+    }
+  }
+</script>
