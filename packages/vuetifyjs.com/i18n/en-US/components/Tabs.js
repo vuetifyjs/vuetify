@@ -29,7 +29,7 @@ export default {
       header: 'With search',
       desc: 'Here is another example of additional content inside the `v-tabs` component.'
     },
-    icons: {
+    iconsAndText: {
       header: 'Icons',
       desc: 'By using the `icons` prop you can add icons to each tab item.'
     },
@@ -44,6 +44,15 @@ export default {
     pagination: {
       header: 'Pagination',
       desc: 'If the tab items overflow their container, pagination controls will appear.'
+    },
+    icons: {
+      header: 'Custom icons',
+      desc: '**prepend-icon** and **append-icon** can be used for applying custom pagination icons.'
     }
-  }]
+  }],
+  props: {
+    prependIcon: 'Left pagination icon',
+    appendIcon: 'Right pagination icon',
+    right: 'Aligns tabs to the right'
+  }
 }
