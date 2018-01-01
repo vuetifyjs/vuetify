@@ -1,27 +1,39 @@
 <template>
-  <v-tabs icons-and-text centered dark color="cyan">
+  <v-tabs
+    dark
+    color="cyan"
+    show-arrows
+    prepend-icon="mdi-arrow-left-bold-box-outline"
+    append-icon="mdi-arrow-right-bold-box-outline"
+  >
     <v-tabs-slider color="yellow"></v-tabs-slider>
-    <v-tab href="#tab-1">
-      Recents
-      <v-icon>phone</v-icon>
-    </v-tab>
-    <v-tab href="#tab-2">
-      Favorites
-      <v-icon>favorite</v-icon>
-    </v-tab>
-    <v-tab href="#tab-3">
-      Nearby
-      <v-icon>account_box</v-icon>
-    </v-tab>
-    <v-tab-item
-      v-for="i in 3"
+    <v-tab
+      v-for="i in 15"
       :key="i"
-      :id="'tab-' + i"
+      :href="'#tab-' + i"
     >
-      <v-card flat>
-        <v-card-text>{{ text }}</v-card-text>
-      </v-card>
-    </v-tab-item>
+      Item {{ i }}
+    </v-tab>
+    <v-menu>
+      <v-tabs-item slot="activator">
+        Menu
+        <v-icon>arrow_drop_down</v-icon>
+      </v-tabs-item>
+      <v-list v-for="n in 4" v-bind:key="n">
+        <v-list-tile @click="">Item {{ n }}</v-list-tile>
+      </v-list>
+    </v-menu>
+    <v-tabs-items>
+      <v-tab-item
+        v-for="i in 15"
+        :key="i"
+        :id="'tab-' + i"
+      >
+        <v-card flat>
+          <v-card-text>{{ text }}</v-card-text>
+        </v-card>
+      </v-tab-item>
+    </v-tabs-items>
   </v-tabs>
 </template>
 
