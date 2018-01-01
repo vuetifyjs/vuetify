@@ -30,8 +30,8 @@ export default {
       desc: 'Here is another example of additional content inside the `v-tabs` component.'
     },
     iconsAndText: {
-      header: 'Icons',
-      desc: 'By using the `icons` prop you can add icons to each tab item.'
+      header: 'Icons and text',
+      desc: 'By using the **icons-and-text** prop you can add icons to each tab item.'
     },
     desktop: {
       header: 'Desktop tabs',
@@ -43,7 +43,7 @@ export default {
     },
     grow: {
       header: 'Grow',
-      desc: 'The `grow` prop will make the tab items take up all available space.'
+      desc: 'The **grow** prop will make the tab items take up all available space.'
     },
     pagination: {
       header: 'Pagination',
