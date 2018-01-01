@@ -65,7 +65,7 @@
       }
     }
   }
-</script>
+</script>http://l.test:8071/getting-started/contributing
 
 <style lang="stylus">
   @import '../../node_modules/vuetify/src/stylus/settings/_variables.styl'

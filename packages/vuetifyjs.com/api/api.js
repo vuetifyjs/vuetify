@@ -134,44 +134,30 @@ module.exports = {
         "name": "bottom",
         "type": "Boolean",
         "default": "False",
-        "source": "positionable"
+        "source": null
       },
       {
         "name": "left",
         "type": "Boolean",
         "default": "False",
-        "source": "positionable"
-      },
-      {
-        "name": "mode",
-        "type": "String",
-        "default": "undefined",
-        "source": "transitionable"
-      },
-      {
-        "name": "origin",
-        "type": "String",
-        "default": "undefined",
-        "source": "transitionable"
-      },
-      {
-        "name": "transition",
-        "type": "String",
-        "default": "fab-transition",
-        "source": "transitionable"
+        "source": null
       },
       {
         "name": "overlap",
         "type": "Boolean",
         "default": "False",
         "source": null
+      },
+      {
+        "name": "transition",
+        "type": "String",
+        "default": "fab-transition",
+        "source": null
       }
     ],
     "mixins": [
       "colorable",
-      "toggleable",
-      "positionable",
-      "transitionable"
+      "toggleable"
     ],
     "slots": [
       "default",
@@ -184,16 +170,16 @@ module.exports = {
         "name": "absolute",
         "type": "Boolean",
         "default": "False",
-        "source": "positionable"
-      },
-      {
-        "name": "fixed",
-        "type": "Boolean",
-        "default": "False",
-        "source": "positionable"
+        "source": "applicationable"
       },
       {
         "name": "app",
+        "type": "Boolean",
+        "default": "False",
+        "source": "applicationable"
+      },
+      {
+        "name": "fixed",
         "type": "Boolean",
         "default": "False",
         "source": "applicationable"
@@ -237,7 +223,6 @@ module.exports = {
     ],
     "mixins": [
       "applicationable",
-      "positionable",
       "button-group",
       "registerable-provide",
       "colorable"
@@ -2032,16 +2017,13 @@ module.exports = {
         "source": "toggleable"
       },
       {
-        "name": "ripple",
-        "type": [
-          "Boolean",
-          "Object"
-        ],
-        "default": true,
-        "source": "rippleable"
+        "name": "hideActions",
+        "type": "Boolean",
+        "default": "False",
+        "source": null
       },
       {
-        "name": "hideActions",
+        "name": "ripple",
         "type": "Boolean",
         "default": "False",
         "source": null
@@ -2049,8 +2031,7 @@ module.exports = {
     ],
     "mixins": [
       "bootable",
-      "toggleable",
-      "rippleable"
+      "toggleable"
     ],
     "slots": [
       "default",
@@ -2063,16 +2044,16 @@ module.exports = {
         "name": "absolute",
         "type": "Boolean",
         "default": "False",
-        "source": "positionable"
-      },
-      {
-        "name": "fixed",
-        "type": "Boolean",
-        "default": "False",
-        "source": "positionable"
+        "source": "applicationable"
       },
       {
         "name": "app",
+        "type": "Boolean",
+        "default": "False",
+        "source": "applicationable"
+      },
+      {
+        "name": "fixed",
         "type": "Boolean",
         "default": "False",
         "source": "applicationable"
@@ -2113,7 +2094,6 @@ module.exports = {
     ],
     "mixins": [
       "applicationable",
-      "positionable",
       "colorable",
       "themeable"
     ],
@@ -2996,16 +2976,16 @@ module.exports = {
         "name": "absolute",
         "type": "Boolean",
         "default": "False",
-        "source": "positionable"
-      },
-      {
-        "name": "fixed",
-        "type": "Boolean",
-        "default": "False",
-        "source": "positionable"
+        "source": "applicationable"
       },
       {
         "name": "app",
+        "type": "Boolean",
+        "default": "False",
+        "source": "applicationable"
+      },
+      {
+        "name": "fixed",
         "type": "Boolean",
         "default": "False",
         "source": "applicationable"
@@ -3133,7 +3113,6 @@ module.exports = {
     ],
     "mixins": [
       "applicationable",
-      "positionable",
       "overlayable",
       "ssr-bootable",
       "themeable"
@@ -4330,24 +4309,6 @@ module.exports = {
         "source": "toggleable"
       },
       {
-        "name": "mode",
-        "type": "String",
-        "default": "undefined",
-        "source": "transitionable"
-      },
-      {
-        "name": "origin",
-        "type": "String",
-        "default": "undefined",
-        "source": "transitionable"
-      },
-      {
-        "name": "transition",
-        "type": "String",
-        "default": "scale-transition",
-        "source": "transitionable"
-      },
-      {
         "name": "direction",
         "type": "String",
         "default": "top",
@@ -4358,16 +4319,17 @@ module.exports = {
         "type": "Boolean",
         "default": "False",
         "source": null
+      },
+      {
+        "name": "transition",
+        "type": "String",
+        "default": "scale-transition",
+        "source": null
       }
     ],
     "mixins": [
       "positionable",
-      "toggleable",
-      "transitionable"
-    ],
-    "slots": [
-      "activator",
-      "default"
+      "toggleable"
     ]
   },
   "v-stepper": {
@@ -4726,16 +4688,16 @@ module.exports = {
         "name": "absolute",
         "type": "Boolean",
         "default": "False",
-        "source": "positionable"
-      },
-      {
-        "name": "fixed",
-        "type": "Boolean",
-        "default": "False",
-        "source": "positionable"
+        "source": "applicationable"
       },
       {
         "name": "app",
+        "type": "Boolean",
+        "default": "False",
+        "source": "applicationable"
+      },
+      {
+        "name": "fixed",
         "type": "Boolean",
         "default": "False",
         "source": "applicationable"
@@ -4788,7 +4750,6 @@ module.exports = {
     ],
     "mixins": [
       "applicationable",
-      "positionable",
       "colorable",
       "themeable"
     ]
@@ -4796,13 +4757,31 @@ module.exports = {
   "v-tabs": {
     "props": [
       {
+        "name": "color",
+        "type": "String",
+        "default": "undefined",
+        "source": "colorable"
+      },
+      {
+        "name": "alignWithTitle",
+        "type": "Boolean",
+        "default": "False",
+        "source": null
+      },
+      {
+        "name": "appendIcon",
+        "type": "String",
+        "default": "chevron_right",
+        "source": null
+      },
+      {
         "name": "centered",
         "type": "Boolean",
         "default": "False",
         "source": null
       },
       {
-        "name": "fixed",
+        "name": "fixedTabs",
         "type": "Boolean",
         "default": "False",
         "source": null
@@ -4814,7 +4793,22 @@ module.exports = {
         "source": null
       },
       {
-        "name": "icons",
+        "name": "height",
+        "type": [
+          "Number",
+          "String"
+        ],
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "hideSlider",
+        "type": "Boolean",
+        "default": "False",
+        "source": null
+      },
+      {
+        "name": "iconsAndText",
         "type": "Boolean",
         "default": "False",
         "source": null
@@ -4825,31 +4819,41 @@ module.exports = {
           "Number",
           "String"
         ],
-        "default": 1280,
+        "default": 1264,
+        "source": null
+      },
+      {
+        "name": "prependIcon",
+        "type": "String",
+        "default": "chevron_left",
+        "source": null
+      },
+      {
+        "name": "right",
+        "type": "Boolean",
+        "default": "False",
+        "source": null
+      },
+      {
+        "name": "showArrows",
+        "type": "Boolean",
+        "default": "False",
+        "source": null
+      },
+      {
+        "name": "sliderColor",
+        "type": "String",
+        "default": "accent",
         "source": null
       },
       {
         "name": "value",
-        "type": "String",
+        "type": [
+          "Number",
+          "String"
+        ],
         "default": "undefined",
         "source": null
-      },
-      {
-        "name": "scrollable",
-        "type": "Boolean",
-        "default": "True",
-        "source": null
-      }
-    ],
-    "mixins": []
-  },
-  "v-tabs-bar": {
-    "props": [
-      {
-        "name": "color",
-        "type": "String",
-        "default": "undefined",
-        "source": "colorable"
       },
       {
         "name": "dark",
@@ -4865,48 +4869,13 @@ module.exports = {
       }
     ],
     "mixins": [
+      "registerable-provide",
       "colorable",
+      "ssr-bootable",
       "themeable"
     ]
   },
-  "v-tabs-content": {
-    "props": [
-      {
-        "name": "lazy",
-        "type": "Boolean",
-        "default": "False",
-        "source": "bootable"
-      },
-      {
-        "name": "id",
-        "type": "String",
-        "default": "undefined",
-        "source": null
-      },
-      {
-        "name": "transition",
-        "type": [
-          "Boolean",
-          "String"
-        ],
-        "default": "tab-transition",
-        "source": null
-      },
-      {
-        "name": "reverseTransition",
-        "type": [
-          "Boolean",
-          "String"
-        ],
-        "default": "tab-reverse-transition",
-        "source": null
-      }
-    ],
-    "mixins": [
-      "bootable"
-    ]
-  },
-  "v-tabs-item": {
+  "v-tab": {
     "props": [
       {
         "name": "activeClass",
@@ -4974,7 +4943,7 @@ module.exports = {
           "Boolean",
           "Object"
         ],
-        "default": "undefined",
+        "default": true,
         "source": "routable"
       },
       {
@@ -4991,6 +4960,7 @@ module.exports = {
       }
     ],
     "mixins": [
+      "registerable-inject",
       "routable"
     ]
   },
@@ -5007,9 +4977,58 @@ module.exports = {
         "type": "Boolean",
         "default": "False",
         "source": null
+      },
+      {
+        "name": "value",
+        "type": [
+          "Number",
+          "String"
+        ],
+        "default": "undefined",
+        "source": null
       }
     ],
-    "mixins": []
+    "mixins": [
+      "registerable-provide"
+    ]
+  },
+  "v-tab-item": {
+    "props": [
+      {
+        "name": "lazy",
+        "type": "Boolean",
+        "default": "False",
+        "source": "bootable"
+      },
+      {
+        "name": "id",
+        "type": "String",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "transition",
+        "type": [
+          "Boolean",
+          "String"
+        ],
+        "default": "tab-transition",
+        "source": null
+      },
+      {
+        "name": "reverseTransition",
+        "type": [
+          "Boolean",
+          "String"
+        ],
+        "default": "tab-reverse-transition",
+        "source": null
+      }
+    ],
+    "mixins": [
+      "bootable",
+      "registerable-inject"
+    ]
   },
   "v-tabs-slider": {
     "props": [
@@ -5398,16 +5417,16 @@ module.exports = {
         "name": "absolute",
         "type": "Boolean",
         "default": "False",
-        "source": "positionable"
-      },
-      {
-        "name": "fixed",
-        "type": "Boolean",
-        "default": "False",
-        "source": "positionable"
+        "source": "applicationable"
       },
       {
         "name": "app",
+        "type": "Boolean",
+        "default": "False",
+        "source": "applicationable"
+      },
+      {
+        "name": "fixed",
         "type": "Boolean",
         "default": "False",
         "source": "applicationable"
@@ -5535,7 +5554,6 @@ module.exports = {
     ],
     "mixins": [
       "applicationable",
-      "positionable",
       "colorable",
       "ssr-bootable",
       "themeable"

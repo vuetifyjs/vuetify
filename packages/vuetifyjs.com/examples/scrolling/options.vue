@@ -13,10 +13,7 @@
         column
         align-center
         justify-center
-        v-scroll="{
-          target: '#scroll-target',
-          callback: this.onScroll
-        }"
+        v-scroll:#scroll-target="onScroll"
         style="height: 1000px"
       >
       </v-layout>

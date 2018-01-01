@@ -1,30 +1,33 @@
 <template>
   <div id="lateral">
-    <v-tabs grow v-model="tabs">
-      <v-toolbar>
-        <v-toolbar-side-icon></v-toolbar-side-icon>
-        <v-toolbar-title>Page title</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-btn icon>
-          <v-icon>search</v-icon>
-        </v-btn>
-        <v-btn icon>
-          <v-icon>more_vert</v-icon>
-        </v-btn>
-      </v-toolbar>
-      <v-tabs-bar>
-        <v-tabs-item href="#one">Item One</v-tabs-item>
-        <v-tabs-item href="#two">Item Two</v-tabs-item>
-        <v-tabs-item href="#three">Item Three</v-tabs-item>
-        <v-tabs-slider></v-tabs-slider>
-      </v-tabs-bar>
-      <v-tabs-items>
-        <v-tabs-content v-for="content in ['one', 'two', 'three']" :key="content" :id="content">
-          <v-card height="200px" flat>
-          </v-card>
-        </v-tabs-content>
-      </v-tabs-items>
-    </v-tabs>
+    <v-toolbar dark tabs flat color="indigo">
+      <v-toolbar-side-icon></v-toolbar-side-icon>
+      <v-toolbar-title>Page title</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn icon>
+        <v-icon>search</v-icon>
+      </v-btn>
+      <v-btn icon>
+        <v-icon>more_vert</v-icon>
+      </v-btn>
+      <v-tabs
+        align-with-title
+        v-model="tabs"
+        slot="extension"
+        color="transparent"
+      >
+        <v-tab href="#one">Item One</v-tab>
+        <v-tab href="#two">Item Two</v-tab>
+        <v-tab href="#three">Item Three</v-tab>
+        <v-tabs-slider color="pink"></v-tabs-slider>
+      </v-tabs>
+    </v-toolbar>
+    <v-tabs-items v-model="tabs">
+      <v-tab-item v-for="content in ['one', 'two', 'three']" :key="content" :id="content">
+        <v-card height="200px" flat>
+        </v-card>
+      </v-tab-item>
+    </v-tabs-items>
     <v-fab-transition>
       <v-btn
         :color="activeFab.color"
