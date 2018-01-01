@@ -60,7 +60,7 @@
           |   @import '/path/to/node_modules/vuetify/src/stylus/main.styl'
           |&lt;/style&gt;
 
-      section#colors
+      section#material-colors
         section-head(:value="`${namespace}.colorHeader`")
         section-text(:value="`${namespace}.colorText`")
         v-container(fluid grid-list-xl).pa-0
