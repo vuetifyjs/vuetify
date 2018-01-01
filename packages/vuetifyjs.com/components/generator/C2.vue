@@ -8,18 +8,16 @@
     </v-toolbar>
     <v-card class="elevation-0">
       <v-card-media height="200px" class="grey lighten-2"></v-card-media>
-      <v-tabs centered grow :scrollable="false">
-        <v-tabs-bar color="primary">
-          <v-tabs-item
-            v-for="tab in [1, 2, 3]"
-            :key="tab"
-            :href="'#' + tab"
-            ripple
-          >
-            <span class="subheading white--text">Item {{ tab }}</span>
-          </v-tabs-item>
-          <v-tabs-slider color="accent" style="height: 4px"></v-tabs-slider>
-        </v-tabs-bar>
+      <v-tabs centered grow :scrollable="false" color="primary">
+        <v-tab
+          v-for="tab in 3"
+          :key="tab"
+          :href="'#' + tab"
+          ripple
+        >
+          <span class="subheading white--text">Item {{ tab }}</span>
+        </v-tab>
+        <v-tabs-slider color="accent" style="height: 4px"></v-tabs-slider>
       </v-tabs>
       <v-card-text class="grey lighten-4" style="position: relative; height: 330px">
         <v-btn

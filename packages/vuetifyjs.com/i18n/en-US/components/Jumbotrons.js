@@ -1,6 +1,9 @@
 export default {
   header: 'Jumbotron',
   headerText: 'Soon...',
+  components: [
+    'v-jumbotron'
+  ],
   examples: [{
     usage: {
       header: 'Usage',
