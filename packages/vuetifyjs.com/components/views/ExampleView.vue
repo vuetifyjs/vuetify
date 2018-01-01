@@ -25,7 +25,7 @@
               v-for="(tab, i) in tabs"
               :href="`#${tab}`"
               :key="i"
-              v-if="hasTab(tab)"
+              v-show="hasTab(tab)"
             ) {{ tab.replace(/([A-Z])/g, ' $1') }}
           v-card-title
             v-select(
