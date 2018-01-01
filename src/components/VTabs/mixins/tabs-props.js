@@ -35,6 +35,6 @@ export default {
       type: String,
       default: 'accent'
     },
-    value: String
+    value: [Number, String]
   }
 }

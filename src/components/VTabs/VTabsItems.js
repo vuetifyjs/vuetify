@@ -36,7 +36,7 @@ export default {
   props: {
     cycle: Boolean,
     touchless: Boolean,
-    value: String
+    value: [Number, String]
   },
 
   computed: {
