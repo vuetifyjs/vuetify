@@ -49,7 +49,15 @@ export default {
       },
       headerless: {
         header: 'Headerless tables',
-        desc: 'Setting the `hide-headers` prop creates a headerless table.'
+        desc: 'Setting the <code>hide-headers</code> prop creates a headerless table.'
+      },
+      editdialog: {
+        header: 'Inline Editing',
+        desc: 'The `v-edit-dialog` component is used for inline-editing within data tables.'
+      },
+      crud: {
+        header: 'CRUD Actions',
+        desc: 'data-table with CRUD actions using a `v-dialog` component for editing each row'
       }
   }],
   props: {
