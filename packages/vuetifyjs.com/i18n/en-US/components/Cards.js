@@ -1,7 +1,12 @@
 export default {
   header: 'Card',
   headerText: 'The `v-card` component is a versatile component that can be used for anything from a panel to a static image. The **card** component has numerous helper components to make markup as easy as possible. Components that have no listed options use **Vue\'s** functional component option for faster rendering and serve as markup sugar to make building easier.',
-  components: ['v-card-media', 'v-card-title', 'v-card-actions'],
+  components: [
+    'v-card',
+    'v-card-media',
+    'v-card-title',
+    'v-card-actions'
+  ],
   examples: [{
     components: {
       header: 'Components',
@@ -25,11 +30,14 @@ export default {
     }
   }],
   props: {
+    contain: 'Change the background-size to contain.',
     flat: 'Removes card box shadow',
     height: 'Manually define the height of the card',
     hover: 'Apply a higher elevation on hover',
     img: 'Specifies an image background',
+    primaryTitle: 'Applies primary title specific padding.',
     raised: 'Specifies a higher default elevation',
+    src: 'The image to display as a background.',
     tile: 'Turn the card into a tile by removing the border radius'
   }
 }

@@ -2,6 +2,7 @@ export default {
   header: 'Stepper',
   headerText: 'The `v-stepper` component displays progress through numbered steps.',
   components: [
+    'v-stepper',
     'v-stepper-step',
     'v-stepper-content',
     'v-stepper-header'
@@ -68,16 +69,12 @@ export default {
     editIcon: 'Icon to display when step is editable',
     errorIcon: 'Icon to display when step has an error',
     nonLinear: 'Allow user to jump to any step',
-    vertical: 'Display steps vertically'
-  },
-  special: {
-    props: {
-      'v-stepper-step': {
-        step: 'Content to display inside step circle'
-      },
-      'v-stepper-content': {
-        step: 'Sets step to associate the content to'
-      }
+    vertical: 'Display steps vertically',
+    'v-stepper-step': {
+      step: 'Content to display inside step circle'
+    },
+    'v-stepper-content': {
+      step: 'Sets step to associate the content to'
     }
   }
 }

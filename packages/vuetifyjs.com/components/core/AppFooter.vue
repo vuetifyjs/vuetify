@@ -18,8 +18,8 @@
               v-icon chevron_left
             span(v-text="prev.title").subheading.no-wrap.hidden-xs-only
         v-flex(
-          :mr-5="$vuetify.breakpoint.smAndDown"
-          :pr-4="$vuetify.breakpoint.smAndDown"
+          :mr-5="$vuetify.breakpoint.xsOnly"
+          :pr-4="$vuetify.breakpoint.xsOnly"
           v-if="next"
         ).text-xs-right
           router-link(:to="next.href").d-inline-flex.align-center

@@ -57,6 +57,12 @@ export default {
     }
   }],
   props: {
+    column: 'Displays radio buttons in column',
+    disabled: 'Mixins.Input.props.disabled',
+    label: 'Mixins.Input.props.label',
+    mandatory: 'Forces a selection on a `v-radio` child',
+    name: 'Sets the component\'s name attribute',
+    row: 'Displays radio buttons in row',
     indeterminate: 'Sets an indeterminate state for the checkbox',
     inputValue: 'The **v-model** bound value',
     value: 'Sets the value of the selection control component'

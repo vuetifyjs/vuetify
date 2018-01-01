@@ -7,5 +7,10 @@ export default {
       header: 'Default',
       desc: 'The footer component is just a basic container.'
     }
-  }]
+  }],
+  props: {
+    absolute: 'Mixins.Positionable.props.absolute',
+    fixed: 'Mixins.Positionable.props.fixed',
+    inset: 'Positions the toolbar offset from an application `v-navigation-drawer`'
+  }
 }

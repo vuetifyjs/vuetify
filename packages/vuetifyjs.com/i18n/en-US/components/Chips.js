@@ -37,6 +37,7 @@ export default {
   }],
   props: {
     close: 'Adds remove button',
+    disabled: 'Disables the chip, making it un-selectable',
     label: 'Removes circle edges',
     outline: 'Removes background and applies border and text color',
     selected: 'Applies a selection color to the chip. Primarily used for displaying highlight context in `v-select`',

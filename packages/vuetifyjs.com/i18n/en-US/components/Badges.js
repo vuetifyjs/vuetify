@@ -23,5 +23,10 @@ export default {
       header: 'Visibility',
       desc: 'The visibility of badges can be controlled using `v-model`.'
     }
-  }]
+  }],
+  props: {
+    bottom: 'Mixins.Positionable.props.bottom',
+    left: 'Mixins.Positionable.props.left',
+    transition: 'Mixins.Transitionable.props.transition'
+  }
 }

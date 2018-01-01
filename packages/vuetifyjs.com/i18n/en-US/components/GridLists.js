@@ -11,5 +11,8 @@ export default {
       header: 'Grid lists',
       desc: 'Grid lists will work seamlessly with your current grid implementation and allow you to create amazing user interfaces.'
     }
-  }]
+  }],
+  props: {
+    tag: 'Mixins.Routable.props.tag'
+  }
 }

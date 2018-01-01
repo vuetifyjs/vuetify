@@ -17,6 +17,8 @@ export default {
     }
   }],
   props: {
-    active: 'Holds the value of the currently active button. If the button has no value supplied, its index will be used instead. This prop supports the **.sync** modifier.'
+    active: 'Holds the value of the currently active button. If the button has no value supplied, its index will be used instead. This prop supports the **.sync** modifier.',
+    absolute: 'Mixins.Positionable.props.absolute',
+    fixed: 'Mixins.Positionable.props.fixed'
   }
 }

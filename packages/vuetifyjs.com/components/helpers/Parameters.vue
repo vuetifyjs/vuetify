@@ -69,25 +69,35 @@
       genDescription (name, item) {
         let description = ''
         let devPrepend = ''
-        const specialLevelDesc = `${this.namespace}.special.${this.type}.${this.target}.${name}`
-        const pageComponentLevelDesc = `${this.namespace}.${this.type}.${this.target}.${name}`
+        const camelSource = camel(item.source)
+
+        const specialLevelDesc = `${this.namespace}.${this.type}.${this.target}.${name}`
         const componentLevelDesc = `${this.namespace}.${this.type}.${name}`
-        const mixinDesc = `Mixins.${camel(item.source)}.${this.type}.${name}`
+        const mixinDesc = `Mixins.${camelSource}.${this.type}.${name}`
         const genericDesc = `Generic.${capitalize(this.type)}.${name}`
+
         if (this.$te(specialLevelDesc)) {
           description = this.$t(specialLevelDesc)
+
+          if (description.indexOf('Mixins.') > -1) {
+            description = this.$t(description)
+          }
+
           devPrepend = '**SPECIAL** - '
-        } else if (this.$te(pageComponentLevelDesc)) {
-          description = this.$t(pageComponentLevelDesc)
-          devPrepend = '**PAGE** - '
         } else if (this.$te(componentLevelDesc)) {
-          devPrepend = '**COMPONENT** - '
           description = this.$t(componentLevelDesc)
+          
+          if (description.indexOf('Mixins.') > -1) {
+            description = this.$t(description)
+          }
+
+          devPrepend = '**COMPONENT** - '
         } else if (this.$te(mixinDesc)) {
           description = this.$t(mixinDesc)
           devPrepend = '**MIXIN** - '
         } else if (this.$te(genericDesc)) {
           description = this.$t(genericDesc)
+          devPrepend = '**GENERIC** - '
         }
 
         const prepend = process.env.NODE_ENV === 'development' ? devPrepend : ''

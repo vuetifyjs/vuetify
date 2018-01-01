@@ -63,9 +63,10 @@ export default {
   props: {
     'v-edit-dialog': {
       cancelText: 'Sets the default text for the cancel button when using the **large** prop',
-      lazy: 'Lazily load the dialog contents',
+      lazy: 'Mixins.Bootable.props.lazy',
       large: 'Attachs a submit and cancel button to the dialog',
-      saveText: 'Sets the default text for the save button when using the **large** prop'
+      saveText: 'Sets the default text for the save button when using the **large** prop',
+      transition: 'Mixins.Transitionable.props.transition'
     },
     'v-data-table': {
       headerText: 'If using an object, the text value for the header',

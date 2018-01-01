@@ -20,5 +20,8 @@ export default {
       header: 'Subheaders and dividers',
       desc: 'Subheaders can be lined up with inset dividers by using the same prop.'
     }
-  }]
+  }],
+  props: {
+    inset: 'Adds indentation (72px)'
+  }
 }
