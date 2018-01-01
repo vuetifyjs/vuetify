@@ -42,7 +42,7 @@
 
     watch: {
       $route (current, previous) {
-        this.setupLayout(200)
+        this.setupLayout(0)
       }
     },
 
