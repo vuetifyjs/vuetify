@@ -32,7 +32,7 @@ export default {
     },
     {
       text: 'Material colors',
-      href: 'introduction'
+      href: 'material-colors'
     }
   ]
 }

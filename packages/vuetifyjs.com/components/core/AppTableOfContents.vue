@@ -25,31 +25,12 @@
 
     computed: {
       activeIndex () {
-        if (this.list.length < 2) return 0
+        const list = this.list.slice().reverse()
+        const index = list.findIndex(item => item.offsetTop - 100 < this.currentOffset)
 
-        const list = this.list.slice(1)
-        const offset = this.currentOffset
-        let activeIndex = 0
-        let prevItem = this.list[0]
-
-        list.forEach((item, i) => {
-          const distanceDiff = .1 * (item.offsetTop - prevItem.offsetTop)
-          const nextItem = list[i + 1]
-
-          if (!nextItem) {
-            if (offset >= item.offsetTop - distanceDiff) {
-              activeIndex = i + 1
-            }
-          } else if (offset >= item.offsetTop - distanceDiff &&
-            offset <= nextItem.offsetTop - distanceDiff
-          ) {
-            activeIndex = i + 1
-          }
-
-          prevItem = item
-        })
-
-        return activeIndex
+        return index > -1
+          ? list.length - 1 - index
+          : 0
       },
       styles () {
         return {
