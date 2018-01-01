@@ -17,10 +17,10 @@ export default {
       header: 'Fixed tabs',
       desc: 'The **fixed-tabs** prop sets a higher minimum width and applies a new maximum width to `v-tabs-items`. On desktop screens, the tab items will be centered within the `v-tabs` component and switch to evenly fill on mobile.'
     },
-    right: {
-      header: 'Right aligned tabs',
-      desc: 'The **right** prop aligns the tabs to the right'
-    },
+    // right: {
+    //   header: 'Right aligned tabs',
+    //   desc: 'The **right** prop aligns the tabs to the right'
+    // },
     content: {
       header: 'Content',
       desc: 'Tabs are not the only thing you can put inside the `v-tabs` component. In this example we\'ve also added a toolbar.'
