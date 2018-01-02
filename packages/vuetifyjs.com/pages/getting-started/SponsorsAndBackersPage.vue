@@ -1,6 +1,12 @@
 <template lang="pug">
   doc-view
     template(slot-scope="{ namespace }")
+      a(href="https://www.patreon.com/bePatron?u=6223325" target="_blank").d-inline-block.mb-5
+        img(
+          src="/static/doc-images/become_a_patron_button.png"
+          alt="Become a Patron"
+          width="175px"
+        )
       section#sponsors-and-backers
         section-head(value="GettingStarted.SponsorsAndBackers.backersHeader")
         v-divider.mb-3
