@@ -3,7 +3,7 @@ import VTab from './VTab'
 import Vue from 'vue'
 
 const tabClick = 'Injection "tabClick" not found'
-const tabsWarning = 'The v-tab component must be used inside a v-tabs.'
+const tabsWarning = '[Vuetify] The v-tab component must be used inside a v-tabs'
 const stub = {
   name: 'router-link',
 

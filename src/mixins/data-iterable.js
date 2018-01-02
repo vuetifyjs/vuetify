@@ -7,6 +7,7 @@ import Themeable from './themeable'
 import Loadable from './loadable'
 
 import { getObjectValueByPath } from '../util/helpers'
+import { consoleWarn } from '../util/console'
 
 /**
  * DataIterable
@@ -225,7 +226,7 @@ export default {
   methods: {
     initPagination () {
       if (!this.rowsPerPageItems.length) {
-        console.warn(`The prop 'rows-per-page-items' in ${this.name} can not be empty.`)
+        consoleWarn(`The prop 'rows-per-page-items' can not be empty`, this)
       } else {
         this.defaultPagination.rowsPerPage = this.rowsPerPageItems[0]
       }
@@ -309,7 +310,7 @@ export default {
         get: () => this.selected[item[this.itemKey]],
         set: (value) => {
           if (itemKey == null) {
-            console.warn(`[Vuetify] Warn: "${keyProp}" attribute must be defined for item in "${this.$options._componentTag}".`)
+            consoleWarn(`"${keyProp}" attribute must be defined for item`, this)
           }
 
           let selected = this.value.slice()
@@ -323,7 +324,7 @@ export default {
         get: () => this.expanded[item[this.itemKey]],
         set: (value) => {
           if (itemKey == null) {
-            console.warn(`[Vuetify] Warn: "${keyProp}" attribute must be defined for item in "${this.$options._componentTag}".`)
+            consoleWarn(`"${keyProp}" attribute must be defined for item`, this)
           }
 
           if (!this.expand) {
