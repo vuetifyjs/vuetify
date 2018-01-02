@@ -18,7 +18,7 @@ export default {
     },
     horizontal: {
       header: 'Horizontal cards',
-      desc: 'Using `v-flex`, you can create customized horizontal cards. Use the `contain` property to shrink the `v-card-media` to fit inside the container, instead of covering.'
+      desc: 'Using `v-flex`, you can create customized horizontal cards. Use the to the `contain` property to shrink the `v-card-media` to fit inside the container, instead of covering.'
     },
     grids: {
       header: 'Grids',

@@ -73,11 +73,11 @@
       languages: [
         {
           title: 'English',
-          locale: 'en-US'
+          locale: 'en'
         },
         {
           title: 'русский',
-          locale: 'ru-RU'
+          locale: 'ru'
         }
       ]
     }),
@@ -86,6 +86,7 @@
       ...mapState({
         currentVersion: state => state.currentVersion,
         fullscreenRoutes: state => state.fullscreenRoutes,
+        loadedLangs: state => state.loadedLangs,
         releases: state => state.releases,
         stateless: state => state.stateless
       })
@@ -98,8 +99,18 @@
       getManualScroll (path) {
         return this.fullscreenRoutes.includes(path)
       },
-      translateI18n (locale) {
-        this.$i18n.locale = locale
+      async translateI18n (lang) {
+        if (this.loadedLangs.indexOf(lang) < 0) {
+          await import(
+            /* webpackChunkName: "lang-[request]" */
+            `@/lang/${lang}`
+          ).then(msgs => this.$i18n.setLocaleMessage(lang, msgs.default))
+          .catch(err => Promise.resolve(err))
+        }
+
+        document.querySelector('html').setAttribute('lang', lang)
+
+        this.$i18n.locale = lang
       }
     }
   }
