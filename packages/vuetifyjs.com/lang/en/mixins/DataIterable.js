@@ -2,7 +2,7 @@ export default {
   props: {
     customFilter: 'Custom search filter',
     customSort: 'Custom sort filter',
-    disableInitialSort: 'Disables initial sorting of items',
+    disableInitialSort: 'Disable default sorting on initial render',
     expand: 'Designates the table as containing rows that are expandable',
     filter: 'The function used for filtering items',
     hideActions: 'Hide the table actions',
