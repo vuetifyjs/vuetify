@@ -133,6 +133,14 @@ export function createStore () {
         { divider: true },
         { header: 'Additional resources' },
         {
+          title: 'Ecosystem',
+          group: '/ecosystem',
+          icon: 'mdi-earth',
+          items: [
+            { href: 'https://github.com/vuetifyjs/awesome-vuetify', title: 'Awesome Vuetify', target: '_blank', badge: 'new' }
+          ]
+        },
+        {
           title: 'Community',
           group: '/community',
           icon: 'mdi-account-multiple',
