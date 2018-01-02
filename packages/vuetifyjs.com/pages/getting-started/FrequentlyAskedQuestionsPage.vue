@@ -17,13 +17,11 @@
           v-bind:key="i"
         )
           div(slot="header").pr-5
-            strong {{ $t(`${namespace}.question`) }} &nbsp;
-            span(v-html="faq.q")
+            markdown(:source="faq.q").question
           v-divider
           v-card(color="grey lighten-4")
             v-card-text
-              strong {{ $t(`${namespace}.answer`) }} &nbsp;
-              div(v-html="faq.a")
+              markdown(:source="faq.a").answer
       v-fade-transition
         div(
           v-if="!faqs.length"
@@ -75,3 +73,10 @@
     }
   }
 </script>
+
+<style lang="stylus">
+  .question,
+  .answer
+    > p
+      margin-bottom: 0
+</style>
