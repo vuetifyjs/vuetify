@@ -54,7 +54,7 @@ declare class VuetifyObject {
   dark: boolean;
   theme: VuetifyTheme;
   touchSupport: boolean;
-  goTo: goTo;
+  goTo: (target: string | number | HTMLElement) => void;
 }
 
 declare module "vue/types/vue" {
