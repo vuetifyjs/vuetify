@@ -13,7 +13,7 @@
       ></v-radio>
     </v-radio-group>
     <v-switch
-      v-bind:label="`Switch 1: ${ex1.toString()}`"
+      v-bind:label="`Switch 1: ${ex3.toString()}`"
       v-model="ex3"
     ></v-switch>
   </v-container>
