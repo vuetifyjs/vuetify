@@ -45,12 +45,16 @@ declare class VuetifyTheme {
   success: string;
 }
 
+declare function goTo(n: number): void;
+declare function goTo(s: string): void;
+
 declare class VuetifyObject {
   application: VuetifyApplication;
   breakpoint: VuetifyBreakpoint;
   dark: boolean;
   theme: VuetifyTheme;
   touchSupport: boolean;
+  goTo: goTo;
 }
 
 declare module "vue/types/vue" {
