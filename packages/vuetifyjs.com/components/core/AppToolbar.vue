@@ -103,6 +103,7 @@
         if (this.loadedLangs.indexOf(lang) < 0) {
           await import(
             /* webpackChunkName: "lang-[request]" */
+            /* webpackMode: "lazy-once" */
             `@/lang/${lang}`
           ).then(msgs => this.$i18n.setLocaleMessage(lang, msgs.default))
           .catch(err => Promise.resolve(err))
