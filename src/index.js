@@ -20,7 +20,7 @@ Vuetify.version = version
 function checkVueVersion () {
   const vueDep = peerDependencies.vue
   if (!Semver.satisfies(window.Vue.version, vueDep)) {
-    consoleWarn(`Vuetify required Vue version ${vueDep}`)
+    consoleWarn(`Vuetify requires Vue version ${vueDep}`)
   }
 }
 
