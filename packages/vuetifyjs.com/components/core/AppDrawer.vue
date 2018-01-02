@@ -16,6 +16,15 @@
             :src="`/static/doc-images/${diamond.src}`"
             :alt="diamond.title"
           )
+      v-btn(
+        small
+        round
+        outline
+        color="primary"
+        active-class=""
+        to="/getting-started/sponsors-and-backers"
+      )
+        span.caption Become a Sponsor
     v-container(fluid)
       v-text-field(
         placeholder="Search"
@@ -246,7 +255,7 @@
     .diamond-sponsor
       // todo trim down actual image file dimensions
       height: 35px
-      margin-bottom 1.25em
+      margin-bottom 0.25em
 
       aside.navigation-drawer ul li
         font-size 14px
