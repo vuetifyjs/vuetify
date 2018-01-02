@@ -34,7 +34,7 @@ export default {
         props: {},
         directives: [{
           name: 'ripple',
-          value: (this.ripple && !this.disabled) || false
+          value: (this.ripple && !this.disabled) ? this.ripple : false
         }],
         on: {
           ...(this.$listeners || {}),
