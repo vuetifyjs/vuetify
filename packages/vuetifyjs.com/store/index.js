@@ -112,7 +112,7 @@ export function createStore () {
             { href: 'snackbars', title: 'Snackbars' },
             { href: 'steppers', title: 'Steppers' },
             { href: 'subheaders', title: 'Subheaders' },
-            { href: 'tabs', title: 'Tabs' },
+            { href: 'tabs', title: 'Tabs', badge: 'updated' },
             { href: 'toolbars', title: 'Toolbars', badge: 'updated' },
             { href: 'tooltips', title: 'Tooltips' }
           ]
