@@ -161,6 +161,7 @@ export function createStore () {
       appFooter: true,
       currentVersion: null,
       fullscreenRoutes: ['/', '/404', '/theme-generator'],
+      loadedLangs: [],
       releases: [],
       stateless: false,
       supporters: {
@@ -223,6 +224,9 @@ export function createStore () {
       },
       ['app/RELEASES'] (state, payload) {
         state.releases = payload
+      },
+      ['app/LOAD_LANG'] (state, payload) {
+        state.loadedLangs.push(payload)
       }
     },
 
