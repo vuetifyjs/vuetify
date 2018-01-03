@@ -1,5 +1,5 @@
 <template lang="pug">
-  div(:class="['markup', color]" v-bind:data-lang="lang").mb-3
+  div(:class="['markup', color]" :data-lang="lang").mb-3
     pre
       code(v-bind:class="lang" ref="markup")
         slot
@@ -42,7 +42,12 @@
     },
 
     mounted () {
-      highlight.highlightBlock(this.$refs.markup)
+      'requestIdleCallback' in window
+        ? requestIdleCallback(
+          () => highlight.highlightBlock(this.$refs.markup),
+          { timeout: 1000 }
+        )
+        : highlight.highlightBlock(this.$refs.markup)
     },
 
     methods: {
