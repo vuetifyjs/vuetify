@@ -98,16 +98,14 @@ export default {
       if (!this.activeTab) return false
 
       // Give screen time to paint
-      this.$nextTick(() => {
-        const action = this.activeTab.action
-        const activeTab = action === this.activeTab
-          ? this.activeTab
-          : this.tabs.find(tab => tab.action === action)
+      const action = this.activeTab.action
+      const activeTab = action === this.activeTab
+        ? this.activeTab
+        : this.tabs.find(tab => tab.action === action)
 
-        if (!activeTab) return
-        this.sliderWidth = activeTab.$el.scrollWidth
-        this.sliderLeft = activeTab.$el.offsetLeft
-      })
+      if (!activeTab) return
+      this.sliderWidth = activeTab.$el.scrollWidth
+      this.sliderLeft = activeTab.$el.offsetLeft
     },
     /**
      * When v-navigation-drawer changes the
