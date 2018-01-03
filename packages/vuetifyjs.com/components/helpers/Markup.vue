@@ -29,7 +29,8 @@
     data () {
       return {
         copied: false,
-        content: ''
+        content: '',
+        highlightAttempts: 0
       }
     },
 
@@ -43,7 +44,8 @@
 
     mounted () {
       const cb = deadline => {
-        if (deadline.timeRemaining() < 33.3 && !deadline.didTimeout) {
+        if (deadline.timeRemaining() < 33.3 && this.highlightAttempts < 3 && !deadline.didTimeout) {
+          ++this.highlightAttempts
           requestIdleCallback(cb, { timeout: 250 })
         } else {
           highlight.highlightBlock(this.$refs.markup)
@@ -51,7 +53,7 @@
       }
 
       'requestIdleCallback' in window
-        ? window.requestIdleCallback(cb, { timeout: 1000 })
+        ? window.requestIdleCallback(cb, { timeout: 500 })
         : highlight.highlightBlock(this.$refs.markup)
     },
 
