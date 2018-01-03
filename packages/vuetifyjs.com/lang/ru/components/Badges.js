@@ -7,17 +7,26 @@ export default {
       header: 'Xарактеристика',
       desc: 'Любой символ может быть помещен с иконкой.'
     },
-    icon: {
-      header: 'Иконка',
-      desc: 'Иконки поддерживаюстя только Material Design.'
+    overlap: {
+        header: 'Перекрытие',
+        desc: 'Badge будет перекрывать его содержимое при использовании свойства `overlap`'
     },
     inline: {
       header: 'В одну линию',
-      desc: 'Значки также могут быть помещены в линию с текстом.'
+      desc: 'Badge также могут быть помещены в линию с текстом.'
+    },
+    icon: {
+      header: 'Иконка',
+      desc: 'Иконки поддерживаюстя только Material Design.'
     },
     visibility: {
       header: 'Видимость',
       desc: 'Видимость значков можно контролировать с помощью `v-model`.'
     }
-  }]
+  }],
+  props: {
+    bottom: 'Mixins.Positionable.props.bottom',
+    left: 'Mixins.Positionable.props.left',
+    transition: 'Mixins.Transitionable.props.transition'
+  }
 }

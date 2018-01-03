@@ -1,24 +1,27 @@
 export default {
-  header: 'Divider',
-  headerText: 'The `v-divider` component is used to separate sections of lists.',
+  header: 'Разделитель',
+  headerText: 'Компонент `v-divider` используется для разделения групп списков.',
   components: ['v-divider'],
   examples: [{
     fullBleed: {
-      header: 'Full bleed',
-      desc: 'Full bleed dividers extend the entire content width.'
+      header: 'Полная заливка',
+      desc: 'Полные разделители для прокачки расширяют всю ширину содержимого.'
     },
     lightAndDark: {
-      header: 'Light and dark',
-      desc: 'Dividers have light and dark variants.',
+      header: 'Светлая и Темная',
+      desc: 'Разделители имеют светлые и темные варианты.',
       uninverted: true
     },
     inset: {
-      header: 'Inset dividers',
-      desc: 'Inset dividers are moved 72px to the right. This will cause them to line up with list items.'
+      header: 'Вставные разделители',
+      desc: 'Вставки вставки перемещены на 72px вправо. Это приведет к выравниванию элементов списка.'
     },
     subheaders: {
-      header: 'Subheaders and dividers',
-      desc: 'Subheaders can be lined up with inset dividers by using the same prop.'
+      header: 'Суб заголовки и разделители',
+      desc: 'Подзаголовки могут быть выстроены с помощью вставных разделителей, используя то же свойство.'
     }
-  }]
+  }],
+  props: {
+    inset: 'Добавляет отступы (72px)'
+  }
 }

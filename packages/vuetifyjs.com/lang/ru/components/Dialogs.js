@@ -1,53 +1,54 @@
 export default {
-  header: 'Dialog',
-  headerText: 'The `v-dialog` component inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks. Use dialogs sparingly because they are interruptive.',
+  header: 'Диалог',
+  headerText: 'Компонент `v-dialog` информирует пользователей о конкретной задаче и может содержать критическую информацию, принимать решения или включать несколько задач. Используйте диалоги экономно, потому что они прерываются.',
   components: ['v-dialog'],
   examples: [{
     simple: {
-      header: 'Simple dialogs',
-      desc: 'Choosing an option immediately commits the option and closes the menu. Touching outside of the dialog, or pressing Back, cancels the action and closes the dialog.',
+      header: 'Простые диалоги',
+      desc: 'Выбор опции немедленно выполняет эту опцию и закрывает меню. Прикосновение к окну диалога или нажатие клавиши «Back» отменяет действие и закрывает диалог.',
       uninverted: true
     },
     withoutActivator: {
-      header: 'Without activator',
-      desc: 'If for some reason you are unable to use the activator slot, be sure to add the `.stop` modifier to the event that triggers the dialog.',
+      header: 'Без активатора',
+      desc: 'Если по какой-то причине вы не можете использовать слот активатора, обязательно добавьте модификатор `.stop` в событие, которое запускает диалог.',
       uninverted: true
     },
     modal: {
-      header: 'Modal',
-      desc: 'Similar to a Simple Dialog, except that it\'s not dismissed when touching outside.',
+      header: 'Модальный',
+      desc: 'Подобно простому диалогу, за исключением того, что он не убирается при касании снаружи.',
       uninverted: true
     },
     fullscreen: {
-      header: 'Fullscreen',
-      desc: 'Due to limited space, full-screen dialogs may be more appropriate for mobile devices than dialogs used on devices with larger screens.',
+      header: 'Полноэкранный',
+      desc: 'Из-за ограниченного пространства полноэкранные диалоги могут быть более подходящими для мобильных устройств, чем диалоги, используемые на устройствах с большими экранами.',
       uninverted: true
     },
     form: {
-      header: 'Form',
-      desc: 'Just a simple example of a form in a dialog.',
+      header: 'Форма',
+      desc: 'Просто простой пример формы в диалоговом окне.',
       uninverted: true
     },
     scrollable: {
-      header: 'Scrollable',
-      desc: 'Example of a dialog with scrollable content.',
+      header: 'Прокручиваемый',
+      desc: 'Пример диалога с прокручиваемым контентом.',
       uninverted: true
     },
     overflowed: {
-      header: 'Overflowed',
-      desc: 'Modals that do not fit within the available window space will scroll the container.',
+      header: 'Переполнение',
+      desc: 'Модификации, которые не помещаются в доступное пространство окна, будут прокручивать контейнер.',
       uninverted: true
     }
   }],
   props: {
-    disabled: 'Disabled the ability to open the dialog',
-    fullWidth: 'Specifies the modal to force 100% width',
-    fullscreen: 'Changes layout for fullscreen display',
-    hideOverlay: 'Hide the display of the overlay',
-    lazy: 'Lazily load dialog contents',
-    maxWidth: 'The maximum width the content',
-    persistent: 'Clicking outside will not dismiss the dialog',
-    scrollable: 'When set to true, expects a card, card-title, card-text and card-actions. Additionally card-text should have specified height. Will set card-text to overflow-y',
-    width: 'Sets the dialog width'
+    disabled: 'Отключено возможность открытия диалога',
+    fullWidth: 'Указывает, что модальное действие 100% ширины',
+    fullscreen: 'Изменение макета для полноэкранного отображения',
+    hideOverlay: 'Скрыть отображение наложения',
+    lazy: 'Mixins.Bootable.props.lazy',
+    maxWidth: 'Максимальная ширина содержимого',
+    origin: 'Mixins.Transitionable.props.origin',
+    persistent: 'Клик снаружи не отменяет диалог',
+    scrollable: 'Если установлено значение true, ожидается карта, название карты, текст карты и действия карты. Кроме того, текст карты должен иметь указанную высоту. Устанавливает перенос текста карты на переполнение',
+    width: 'Устанавливает ширину диалогового окна'
   }
 }
