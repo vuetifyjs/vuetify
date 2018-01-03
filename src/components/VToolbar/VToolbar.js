@@ -18,7 +18,8 @@ export default {
       'clippedLeft',
       'clippedRight',
       'computedHeight',
-      'invertedScroll'
+      'invertedScroll',
+      'manualScroll'
     ]),
     Colorable,
     SSRBootable,
@@ -210,7 +211,7 @@ export default {
      * @return {number}
      */
     updateApplication () {
-      return this.invertedScroll
+      return this.invertedScroll || this.manualScroll
         ? 0
         : this.computedHeight
     }
