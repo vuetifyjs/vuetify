@@ -52,6 +52,7 @@
     "html-webpack-plugin": "^2.30.1",
     "mdi": "^2.1.19",
     "pug": "^2.0.0-rc.4",
+    "raw-loader": "^0.5.1",
     "rimraf": "^2.6.2",
     "script-ext-html-webpack-plugin": "^1.8.8",
     "style-loader": "^0.19.1",

@@ -28,7 +28,7 @@
       ).then(comp => {
         next(vm => vm.component = comp.default)
       }).catch(e => {
-        next('/')
+        next('/404')
       })
     }
   }
