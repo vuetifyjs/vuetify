@@ -29,7 +29,7 @@
           |  VToolbar,
           |  transitions
           |} from 'vuetify'
-          |import { Ripple } from 'vuetify/es5/src/directives'
+          |import { Ripple } from 'vuetify/es5/directives'
           |
           |Vue.use(Vuetify, {
           |   components: {
