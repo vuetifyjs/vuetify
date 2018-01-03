@@ -2004,9 +2004,9 @@ diff@^3.2.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/diff/-/diff-3.3.0.tgz#056695150d7aa93237ca7e378ac3b1682b7963b9"
 
-diffable-html@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/diffable-html/-/diffable-html-2.1.0.tgz#0d4c2de115ac58f904aab1b72e6649cefca5f025"
+diffable-html@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/diffable-html/-/diffable-html-3.0.0.tgz#3766be8bcf6e90e061bdc321e04e14fc0630853f"
   dependencies:
     htmlparser2 "^3.9.2"
 
@@ -3871,11 +3871,11 @@ jest-runtime@^21.2.1:
     write-file-atomic "^2.1.0"
     yargs "^9.0.0"
 
-jest-serializer-html@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/jest-serializer-html/-/jest-serializer-html-4.0.1.tgz#f9e04022add07b8e03da5ad305581f1004d8f7e8"
+jest-serializer-html@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/jest-serializer-html/-/jest-serializer-html-5.0.0.tgz#6848c4d8fb0f6c6dcb1e26a05e46d66c7ff9edb9"
   dependencies:
-    diffable-html "^2.0.0"
+    diffable-html "^3.0.0"
 
 jest-snapshot@^21.2.1:
   version "21.2.1"

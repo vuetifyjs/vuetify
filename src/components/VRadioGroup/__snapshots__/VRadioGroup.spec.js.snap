@@ -36,7 +36,6 @@ exports[`VRadioGroup.vue should be in error when v-radio-group is 1`] = `
     </div>
   </div>
   <div class="input-group__details">
-    <!---->
   </div>
 </div>
 
@@ -78,7 +77,6 @@ exports[`VRadioGroup.vue should be in error when v-radio-group is 2`] = `
     </div>
   </div>
   <div class="input-group__details">
-    <!---->
   </div>
 </div>
 
@@ -92,7 +90,6 @@ exports[`VRadioGroup.vue should render role on radio group 1`] = `
   <div class="input-group__input">
   </div>
   <div class="input-group__details">
-    <!---->
   </div>
 </div>
 
