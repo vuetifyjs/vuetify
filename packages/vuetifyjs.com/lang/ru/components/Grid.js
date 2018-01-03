@@ -38,12 +38,18 @@ export default {
       desc: 'The power and flexibility of the Vuetify grid system allows you to create amazing user interfaces.',
       uninverted: true
     },
+    spacer: {
+      header: 'v-spacer',
+      desc: 'The `v-spacer` component is useful when you want to fill available space or make space between two components.'
+    },
     tags: {
       header: 'Html tags',
       desc: 'Sometimes you will want to specify a layout item as a specific tag, such as a `section` or `li` element.'
     }
   }],
-  props: {},
+  props: {
+    tag: 'Mixins.Routable.props.tag'
+  },
   breakpointHeader: 'Breakpoint object',
   breakpointText1: 'Vuetify converts the available breakpoints into an accessible object from within your application. This will allow you to assign/apply specific properties and attributes based upon viewport size. The object can be accessed from:',
   breakpointText2: 'This object contains the same semantic properties that you are already used to using from the grid system. Let\'s try a real world example. You have a `v-dialog` component that you want to convert to a **full-screen** dialog on mobile devices. Normally you would need to bind watchers for the viewport size, and/or check whenever the page loads.',

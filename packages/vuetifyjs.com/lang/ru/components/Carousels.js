@@ -1,6 +1,6 @@
 export default {
   header: 'Карусель',
-  headerText: 'Компонент `v-carousel` используется для отображения большого количества визуального контента на вращающемся таймере.',
+  headerText: 'Компонент `v-carousel` используется для перебора элементов—изображений или слайдов текста.',
   components: ['v-carousel', 'v-carousel-item'],
   examples: [{
     default: {
@@ -23,5 +23,17 @@ export default {
       desc: 'Вы можете скрыть нижние элементы управления с помощью `hide-controls`.',
       uninverted: true
     }
-  }]
+  }],
+  props: {
+    appendIcon: 'Mixins.Input.props.appendIcon',
+    prependIcon: 'Mixins.Input.props.prependIcon',
+      cycle: 'Определяет, должна ли карусель перемещаться по изображениям',
+    delimiterIcon: 'Устанавливает значок для карусельного разделителя',
+    hideControls: 'Скрывает элементы управления навигацией',
+    hideDelimiters: 'Скрывает панель с разделителями карусели',
+    interval: 'Продолжительность между циклами изображения',
+    reverseTransition: 'Устанавливает обратный переход',
+    src: 'Изображение src',
+    transition: 'Mixins.Transitionable.props.transition'
+  }
 }

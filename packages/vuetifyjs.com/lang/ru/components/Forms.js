@@ -19,5 +19,8 @@ export default {
       header: 'Vee-validate',
       desc: 'Vee-validate is another validation plugin that allows you to check your forms. One caveat is that you must add the **type="checkbox"** to properly validate a `v-checkbox` when using the **value** prop.'
     }
-  }]
+  }],
+  props: {
+    lazyValidation: 'If enabled, **value** will always be _true_ unless there are visible validation errors. You can still call `validate()` to manually trigger validation'
+  }
 }
