@@ -50,7 +50,7 @@
 
       //- Example markup
       v-expansion-panel.elevation-0
-        v-expansion-panel-content(v-model="panel" lazy)
+        v-expansion-panel-content(v-model="panel")
           v-divider(v-if="!readonly")
           v-tabs(
             ref="tabs"
@@ -121,6 +121,12 @@
           'theme--light': !this.invertedProxy,
           'grey lighten-3': !this.invertedProxy
         }
+      }
+    },
+
+    watch: {
+      panel () {
+        this.$nextTick(this.$refs.tabs.callSlider)
       }
     },
 
