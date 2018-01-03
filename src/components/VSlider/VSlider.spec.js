@@ -1,7 +1,7 @@
 import { test } from '@util/testing'
 import VSlider from './VSlider'
 
-const warning = 'The v-slider component requires the presence of v-app or a non-body wrapping element with the [data-app] attribute.'
+const warning = '[Vuetify] Missing v-app or a non-body wrapping element with the [data-app] attribute in "v-slider"'
 
 test('Vslider.vue', ({ mount }) => {
   it('should match a snapshot', () => {

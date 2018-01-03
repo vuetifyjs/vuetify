@@ -2,7 +2,7 @@ import { test } from '@util/testing'
 import VTabs from './VTabs'
 import VTabItem from './VTabItem'
 
-const contentWarning = 'The v-tab-item component must be used inside a v-tabs-items.'
+const contentWarning = '[Vuetify] The v-tab-item component must be used inside a v-tabs-items'
 
 test('VTabItem', ({ mount }) => {
   it('should unregister on destroy', async () => {
