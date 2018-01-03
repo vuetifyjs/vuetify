@@ -1,7 +1,7 @@
 export default {
   header: 'Buttons: Floating Action Button',
   headerText: 'The `v-btn` component can be used as a Floating action button. This provides an application a main point of action. Combined with the `v-speed-dial` component, you can create a diverse set of functions available for your users.',
-  components: ['v-btn'],
+  components: ['v-speed-dial', 'v-btn'],
   examples: [{
     promotedAction: {
       header: 'Promoted action',
@@ -38,6 +38,10 @@ export default {
       round: 'Button will be round on the sides',
       small: 'Small size button',
       type: 'Set the button\'s type attribute'
+    },
+    'v-speed-dial': {
+      direction: 'Direction in which speed-dial content will show. Possible values are `top`, `bottom`, `left`, `right`.',
+      openOnHover: 'Opens speed-dial on hover'
     }
   }
 }

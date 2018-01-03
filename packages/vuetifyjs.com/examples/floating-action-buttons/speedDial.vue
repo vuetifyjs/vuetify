@@ -41,7 +41,7 @@
       :right="right"
       :left="left"
       :direction="direction"
-      :hover="hover"
+      :open-on-hover="hover"
       :transition="transition"
     >
       <v-btn
