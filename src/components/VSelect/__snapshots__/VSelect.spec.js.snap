@@ -78,7 +78,6 @@ exports[`VSelect should render buttons correctly when using items array with seg
     </i>
   </div>
   <div class="input-group__details">
-    <!---->
   </div>
 </div>
 
@@ -137,7 +136,6 @@ exports[`VSelect should render buttons correctly when using slot with segmented 
     </i>
   </div>
   <div class="input-group__details">
-    <!---->
   </div>
 </div>
 

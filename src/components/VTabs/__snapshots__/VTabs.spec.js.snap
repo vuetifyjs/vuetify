@@ -4,7 +4,6 @@ exports[`VTabs should show tabs arrows 1`] = `
 
 <div class="tabs">
   <div class="tabs__bar">
-    <!---->
     <div class="tabs__wrapper tabs__wrapper--show-arrows">
       <div class="tabs__container tabs__container--overflow">
         <div class="tabs__slider-wrapper">
@@ -13,7 +12,6 @@ exports[`VTabs should show tabs arrows 1`] = `
         </div>
       </div>
     </div>
-    <!---->
   </div>
 </div>
 
