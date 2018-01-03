@@ -1,6 +1,6 @@
 export default {
   header: `What's coming up`,
-  headerText: 'Vuetify is always under development, working to improve the existing codebase, as well as add new features and functionality that help make building applications even easier. Below is a tentative list of planned features. This is not an exhaustive list and may change at any time without notice. This list is subject to change without notice.',
+  headerText: 'Vuetify is always under development. We are constantly working towards improving the existing codebase, as well as adding new features and functionality that help make building applications even easier. Below is a tentative list of planned features. This is not an exhaustive list and is subject to change at any time without notice.',
   roadmap: [
     {
       icon: 'mdi-alert-decagram',
