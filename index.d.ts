@@ -50,7 +50,6 @@ declare class VuetifyObject {
   breakpoint: VuetifyBreakpoint;
   dark: boolean;
   theme: VuetifyTheme;
-  touchSupport: boolean;
 }
 
 declare module "vue/types/vue" {
