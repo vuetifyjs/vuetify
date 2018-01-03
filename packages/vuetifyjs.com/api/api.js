@@ -4321,7 +4321,7 @@ module.exports = {
         "source": null
       },
       {
-        "name": "hover",
+        "name": "openOnHover",
         "type": "Boolean",
         "default": "False",
         "source": null
