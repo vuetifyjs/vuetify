@@ -42,11 +42,16 @@
     },
 
     mounted () {
+      const cb = deadline => {
+        if (deadline.timeRemaining() < 33.3 && !deadline.didTimeout) {
+          requestIdleCallback(cb, { timeout: 250 })
+        } else {
+          highlight.highlightBlock(this.$refs.markup)
+        }
+      }
+
       'requestIdleCallback' in window
-        ? requestIdleCallback(
-          () => highlight.highlightBlock(this.$refs.markup),
-          { timeout: 1000 }
-        )
+        ? window.requestIdleCallback(cb, { timeout: 1000 })
         : highlight.highlightBlock(this.$refs.markup)
     },
 
