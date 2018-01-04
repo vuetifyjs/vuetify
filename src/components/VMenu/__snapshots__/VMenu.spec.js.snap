@@ -1,5 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VMenu.js should render component with custom absolute and match snapshot 1`] = `
+
+<div class="menu"
+     style="display: inline-block;"
+>
+  <div class="menu__content"
+       style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
+  >
+  </div>
+</div>
+
+`;
+
 exports[`VMenu.js should render component with custom activator and match snapshot 1`] = `
 
 <div class="menu"
@@ -274,19 +287,6 @@ exports[`VMenu.js should render component with custom openOnHover and match snap
 `;
 
 exports[`VMenu.js should render component with custom origin and match snapshot 1`] = `
-
-<div class="menu"
-     style="display: inline-block;"
->
-  <div class="menu__content"
-       style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
-  >
-  </div>
-</div>
-
-`;
-
-exports[`VMenu.js should render component with custom positionAbsolutely and match snapshot 1`] = `
 
 <div class="menu"
      style="display: inline-block;"
