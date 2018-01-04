@@ -1,16 +1,16 @@
 export default {
   header: 'Footer',
-  headerText: 'The `v-footer` component is used for displaying general information that a user might want to access from any page within your site.',
+  headerText: 'Компонент `v-footer` используется для отображения общей информации, которую пользователь может получить с любой страницы вашего сайта.',
   components: ['v-footer'],
   examples: [{
     default: {
-      header: 'Default',
-      desc: 'The footer component is just a basic container.'
+      header: 'По умолчанию',
+      desc: 'Компонент footer - это просто базовый контейнер.'
     }
   }],
   props: {
     absolute: 'Mixins.Positionable.props.absolute',
     fixed: 'Mixins.Positionable.props.fixed',
-    inset: 'Positions the toolbar offset from an application `v-navigation-drawer`'
+    inset: 'Позиционирует смещение панели инструментов от приложения `v-navigation-drawer`'
   }
 }

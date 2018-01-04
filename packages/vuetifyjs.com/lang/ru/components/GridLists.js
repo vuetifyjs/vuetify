@@ -1,15 +1,15 @@
 export default {
-  header: 'Grid list',
-  headerText: 'Grid lists are an addon for the `v-container` component that add gutter control between items.',
+  header: 'Список сеток',
+  headerText: 'Список сеток - это дополнение для компонента `v-container`, который добавляет контроль _gutter_ между элементами.',
   components: ['v-container', 'v-layout', 'v-flex', 'v-spacer'],
   examples: [{
     default: {
-      header: 'Grid lists',
-      desc: 'Grid lists augment the `v-container` component to allow for greater flexibility with gutters. It comes in 5 variants, from xs to xl and can be dynamically changed.'
+      header: 'Список сеток',
+      desc: 'Список сеток дополняют компонент `v-container`, чтобы обеспечить большую гибкость с _gutters_. Он поставляется в 5 вариантах: от xs до xl и может быть динамически изменен.'
     },
     subheader: {
-      header: 'Grid lists',
-      desc: 'Grid lists will work seamlessly with your current grid implementation and allow you to create amazing user interfaces.'
+      header: 'Список сеток',
+      desc: 'Список сеток будут работать без проблем с вашей текущей реализацией сетки `grid` и позволяют создавать удивительные пользовательские интерфейсы.'
     }
   }],
   props: {

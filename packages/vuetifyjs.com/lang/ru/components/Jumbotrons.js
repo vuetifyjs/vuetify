@@ -1,22 +1,22 @@
 export default {
   header: 'Jumbotron',
-  headerText: 'Soon...',
+  headerText: 'Скоро...',
   examples: [{
     usage: {
-      header: 'Usage',
-      desc: 'Soon..'
+      header: 'Использование',
+      desc: 'Скоро..'
     },
     color: {
-      header: 'Custom color',
-      desc: 'Soon...'
+      header: 'Пользовательские цвета',
+      desc: 'Скоро...'
     },
     gradient: {
-      header: 'Gradient',
-      desc: 'More information on writing gradients can be found [here](https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient)'
+      header: 'Градиент',
+      desc: 'Более подробную информацию о градиентах можно найти [здесь](https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient)'
     },
     gradientWithImage: {
-      header: 'Gradient with image',
-      desc: 'More information on writing gradients can be found [here](https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient)'
+      header: 'Градиент с изображением',
+      desc: ' Более подробную информацию о градиентах можно найти [здесь](https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient)'
     }
   }]
 }

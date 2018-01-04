@@ -1,36 +1,36 @@
 export default {
-  header: 'Icon',
-  headerText: 'The `v-icon` component provides a large set of glyphs to provide context to various aspects of your application. Vuetify icons utilize Google\'s Material Icons font library. For a list of all available icons, visit the official <a href="https://material.io/icons/" target="_blank" rel="noopener">Material Icons</a> page.',
+  header: 'Иконка',
+  headerText: 'Компонент `v-icon` предоставляет большой набор иконок для предоставления контекста различным аспектам вашего приложения. Иконки Vuetify используют библиотеку шрифтов Material Icons Google. Список всех доступных иконок можно найти на официальной странице [Material Icons](https://material.io/icons/).',
   components: ['v-icon'],
   examples: [{
     standard: {
-      header: 'Standard',
-      desc: 'Icons come in two themes (light and dark), and four different sizes (standard, medium, large, and x-large).'
+      header: 'Стандарт',
+      desc: 'Иконки бывают двух тем (светлые и темные) и четырех разных размеров (стандартный, средний, большой и очень-большой).'
     },
     fontAwesome: {
       header: 'Font Awesome',
-      desc: '[Font Awesome](http://fontawesome.io/icons/) is also supported. Simply use the `fa-` prefixed icon name. Please note that you still need to include the Font Awesome icons in your project.'
+      desc: '[Font Awesome](http://fontawesome.io/icons/) также поддерживается. Просто используйте имя знака `fa-` с префиксом. Обратите внимание, что вам все равно нужно добавить значки шрифта Awesome в ваш проект.'
     },
     mdi: {
       header: 'Material Design Icons',
-      desc: '[Material Design Icons](https://materialdesignicons.com/) is also supported. Simply use the `mdi-` prefixed icon name. Please note that you still need to include the MDI icons in your project.'
+      desc: '[Material Design Icons](https://materialdesignicons.com/) также поддерживается. Просто используйте имя знака `mdi-` с префиксом. Обратите внимание, что вам все равно необходимо включить иконки MDI в свой проект.'
     },
     color: {
-      header: 'Color',
-      desc: 'Using color helpers you can change the color of an icon from the standard dark and light themes.'
+      header: 'Цвет',
+      desc: 'Используя цветные помощники, вы можете изменить цвет значка из стандартных темных и светлых тем.'
     },
     buttons: {
-      header: 'Buttons',
-      desc: 'Icons can be used inside of buttons to add emphasis to the action.'
+      header: 'Кнопки',
+      desc: 'Иконки можно использовать внутри кнопок, чтобы добавить акцент на действие.'
     }
   }],
   props: {
     disabled: 'Mixins.Input.props.disabled',
-    large: 'Makes the icon large **(36px)**',
-    left: 'Places icon on the left, when used inside a button',
-    medium: 'Makes the icon medium **(28px)**',
-    right: 'Places icon on the right, when used inside a button',
-    small: 'Makes the icon small **(16px)**',
-    xLarge: 'Makes the icon extra large **(40px)**'
+    large: 'Делает иконку большой **(36px)**',
+    left: 'Расположение иконки с слева, если используется внутри кнопки',
+    medium: 'Делает иконку средней **(28px)**',
+    right: 'Расположение иконки с права, если используется внутри кнопки',
+    small: 'Делает иконку маленькую **(16px)**',
+    xLarge: 'Делает иконку очень-большой **(40px)**'
   }
 }
