@@ -1,3 +1,126 @@
+const sharedGridProps = [
+  {
+    'name': 'id',
+    'type': 'String',
+    'default': 'undefined',
+    'source': null
+  },
+  {
+    'name': 'tag',
+    'type': 'String',
+    'default': 'div',
+    'source': null
+  },
+  {
+    'name': 'alignBaseline',
+    'type': 'Boolean',
+    'default': 'false',
+    'source': null
+  },
+  {
+    'name': 'alignCenter',
+    'type': 'Boolean',
+    'default': 'false',
+    'source': null
+  },
+  {
+    'name': 'alignContentCenter',
+    'type': 'Boolean',
+    'default': 'false',
+    'source': null
+  },
+  {
+    'name': 'alignContentEnd',
+    'type': 'Boolean',
+    'default': 'false',
+    'source': null
+  },
+  {
+    'name': 'alignContentSpaceAround',
+    'type': 'Boolean',
+    'default': 'false',
+    'source': null
+  },
+  {
+    'name': 'alignContentSpaceBetween',
+    'type': 'Boolean',
+    'default': 'false',
+    'source': null
+  },
+  {
+    'name': 'alignContentStart',
+    'type': 'Boolean',
+    'default': 'false',
+    'source': null
+  },
+  {
+    'name': 'alignEnd',
+    'type': 'Boolean',
+    'default': 'false',
+    'source': null
+  },
+  {
+    'name': 'alignStart',
+    'type': 'Boolean',
+    'default': 'false',
+    'source': null
+  },
+  {
+    'name': 'd-{type}',
+    'type': 'Boolean',
+    'default': 'false',
+    'source': null
+  },
+  {
+    'name': 'fillHeight',
+    'type': 'Boolean',
+    'default': 'false',
+    'source': null
+  },
+  {
+    'name': 'justifyCenter',
+    'type': 'Boolean',
+    'default': 'false',
+    'source': null
+  },
+  {
+    'name': 'justifyEnd',
+    'type': 'Boolean',
+    'default': 'false',
+    'source': null
+  },
+  {
+    'name': 'justifySpaceAround',
+    'type': 'Boolean',
+    'default': 'false',
+    'source': null
+  },
+  {
+    'name': 'justifySpaceBetween',
+    'type': 'Boolean',
+    'default': 'false',
+    'source': null
+  },
+  {
+    'name': 'justifyStart',
+    'type': 'Boolean',
+    'default': 'false',
+    'source': null
+  },
+  {
+    'name': 'reverse',
+    'type': 'Boolean',
+    'default': 'false',
+    'source': null
+  },
+  {
+    'name': 'wrap',
+    'type': 'Boolean',
+    'default': 'false',
+    'source': null
+  }
+]
+
 module.exports = {
   'v-app': {
     slots: ['default']
@@ -38,6 +161,22 @@ module.exports = {
   'v-chip': {
     slots: ['default']
   },
+  'v-container': {
+    props: [
+      {
+        'name': 'grid-list-{xs through xl}',
+        'type': 'Boolean',
+        'default': 'false',
+        'source': null
+      },
+      {
+        'name': 'fluid',
+        'type': 'Boolean',
+        'default': 'false',
+        'source': null
+      }
+    ].concat(sharedGridProps)
+  },
   'v-data-iterator': {
     slots: [
       { name: 'footer', source: 'data-iterable' }
@@ -67,6 +206,28 @@ module.exports = {
   'v-expansion-panel-content': {
     slots: ['default', 'header']
   },
+  'v-flex': {
+    props: [
+      {
+        'name': 'offset-(size)(0-12)',
+        'type': 'Boolean',
+        'default': 'false',
+        'source': null
+      },
+      {
+        'name': 'order-(size)(0-12)',
+        'type': 'Boolean',
+        'default': 'false',
+        'source': null
+      },
+      {
+        'name': '(size)(1-12)',
+        'type': 'Boolean',
+        'default': 'false',
+        'source': null
+      }
+    ].concat(sharedGridProps)
+  },
   'v-footer': {
     slots: ['default']
   },
@@ -75,6 +236,22 @@ module.exports = {
   },
   'v-icon': {
     slots: ['default']
+  },
+  'v-layout': {
+    props: [
+      {
+        'name': 'row',
+        'type': 'Boolean',
+        'default': 'true',
+        'source': null
+      },
+      {
+        'name': 'column',
+        'type': 'Boolean',
+        'default': 'false',
+        'source': null
+      }
+    ].concat(sharedGridProps)
   },
   'v-list': {
     slots: ['default']
