@@ -1,43 +1,43 @@
 export default {
-  header: 'Buttons: Floating Action Button',
-  headerText: 'The `v-btn` component can be used as a Floating action button. This provides an application a main point of action. Combined with the `v-speed-dial` component, you can create a diverse set of functions available for your users.',
+  header: 'Кнопки: плавающая кнопка действия',
+  headerText: 'Компонент `v-btn` может использоваться в качестве плавающей кнопки действий. Это обеспечивает приложению основную точку действия. В сочетании с компонентом `v-speed-dial вы можете создать разнообразный набор функций, доступных для ваших пользователей.',
   components: ['v-btn'],
   examples: [{
     promotedAction: {
-      header: 'Promoted action',
-      desc: 'Floating action buttons can be attached to material to signify a promoted action in your application. The default size will be used in most cases, whereas the `small` variant can be used to maintain continuity with similar sized elements.'
+      header: 'Продвинутое действие',
+      desc: 'Плавающие кнопки действий можно прикрепить к блоку, чтобы обозначить повышеное действие в приложении. Размер будет использоваться в большинстве случае по умолчанию, в то время как вариант `small` может использоваться для поддержания схожести с аналогичными элементами.'
     },
     small: {
-      header: 'Small variant',
-      desc: 'For better visual appeal, we use a small button to match our list avatars.'
+      header: 'Малый вариант',
+      desc: 'Для лучшей визуальной привлекательности мы используем небольшую кнопку, чтобы соответствовать нашим аватарам.'
     },
     displayAnimation: {
-      header: 'Display animation',
-      desc: 'When displaying for the first time, a floating action button should animate onto the screen. Here we use the `v-fab-transition` with v-show. You can also use any custom transition provided by Vuetify or your own.'
+      header: 'Отображать анимацию',
+      desc: 'При отображении в первый раз плавающая кнопка действия должна анимироваться на экране. Здесь мы используем `v-fab-transition` с `v-show`. Вы также можете использовать любой пользовательский переход, предоставляемый Vuetify или вашим собственным.'
     },
     lateralScreens: {
-      header: 'Lateral screens',
-      desc: 'When changing the default action of your button, it is recommended that you display a transition to signify a change. We do this by binding the `key` prop to a piece of data that can properly signal a change in action to the Vue transition system. While you can use a custom transition for this, ensure that you set the `mode` prop to **out-in**.'
+      header: 'Боковые экраны',
+      desc: 'При изменении действия по умолчанию вашей кнопки рекомендуется отображать переход для обозначения изменения. Мы делаем это, связывая `key` с частью данных, которая может правильно сигнализировать об изменении в системе перехода Vue. Хотя вы можете использовать для этого специальный переход, убедитесь, что вы установили свойство `mode` для **out-in**.'
     },
     speedDial: {
-      header: 'FAB with speed-dial',
-      desc: 'The speed-dial component has an very robust api for customizing your FAB experience exactly how you want.'
+      header: 'FAB со скоростным набором',
+      desc: 'Компонент быстрого набора обладает очень надежным интерфейсом для настройки вашего FAB-интерфейса именно так, как вы хотите.'
     }
   }],
   props: {
     'v-btn': {
-      block: 'Expands the button to 100% of available space',
-      depressed: 'Removes the button box shadow',
-      fab: 'Makes button round',
-      flat: 'Removes the button background color',
-      icon: 'Designates the button as icon - round and flat',
-      inputValue: 'Controls the button active state',
-      large: 'Large size button',
-      loading: 'Adds a loading icon animation',
-      outline: 'Button will have an outline',
-      round: 'Button will be round on the sides',
-      small: 'Small size button',
-      type: 'Set the button\'s type attribute'
+      block: 'Расширяет кнопку до 100% доступного пространства',
+      depressed: 'Удаляет тень кнопки',
+      fab: 'Делает кнопку круглой',
+      flat: 'Удаляет цвет фона кнопки',
+      icon: 'Назначает кнопку в виде значка - круглый и плоский',
+      inputValue: 'Управляет активным состоянием кнопки',
+      large: 'Кнопка большого размера',
+      loading: 'Добавляет анимацию иконок загрузки',
+      outline: 'Кнопка будет иметь контур',
+      round: 'Кнопка будет круглой по бокам',
+      small: 'Кнопка малого размера',
+      type: 'Установите атрибут'
     }
   }
 }

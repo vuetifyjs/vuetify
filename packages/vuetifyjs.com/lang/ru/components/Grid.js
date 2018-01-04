@@ -1,57 +1,57 @@
 export default {
-  header: 'Grid system',
-  headerText: 'Vuetify has a 12 point grid system. Built using <kbd>flex-box</kbd>, the grid is used to layout an application\'s content.  It contains 5 types of media breakpoints that are used for targeting specific screen sizes or orientations. The props for grid components are actually classes that are derived from their defined properties. This allows you to easily specify these helper classes as props, while still providing the classes to be used anywhere.',
+  header: 'Система сеток',
+  headerText: 'Vuetify имеет 12-ти точечную систему сеток. Построенную с использованием <kbd>flex-box</kbd>, сетка используется для компоновки содержимого приложения. Она содержит 5 типов точек прерывания, которые используются для определенных размеров экрана или ориентации. Свойства для компонентов сетки фактически являются классами, которые получены из их определенных свойств. Это позволяет вам легко указать вспомогательные классы в качестве свойства, при этом все еще предоставляя классы для использования в любом месте.',
   components: ['v-container', 'v-layout', 'v-flex', 'v-spacer'],
   examples: [{
     grid: {
       header: 'Usage',
-      desc: 'The `v-container` can be used for a center focused page, or given the `fluid` prop to extend its full width. `v-layout` is used for separating sections and contains the `v-flex`. The structure of your layout will be as follows, **v-container** &raquo; **v-layout** &raquo; **v-flex**. Each part of the grid chain is a flex-box element. The final, `v-flex`, automatically sets its children to have <kbd>flex: 1 1 auto</kbd>.',
+      desc: '`v-container` можно использовать для страницы фокусирующейся на центре, или с учетом того, что `fluid` поддерживает всю ширину. `v-layout` используется для разделения секций и содержит` v-flex`. Структура вашего макета будет следующей: **v-container** &raquo; **v-layout** &raquo; **v-flex**. Каждая часть сетки представляет собой элемент _flex-box_. Окончательно `v-flex` автоматически устанавливает для своих детей <kbd>flex: 1 1 auto</kbd>.',
       uninverted: true
     },
     offset: {
-      header: 'Offset',
-      desc: 'Offsets are useful for compensating for elements that may not be visible yet, or to control the position of content. Just as with breakpoints, you can set an offset for any available sizes. This allows you to fine tune your application layout precisely to your needs.',
+      header: 'Смещение',
+      desc: 'Смещения полезны для компенсации элементов, которые еще не видны, или для контроля положения контента. Так же, как и с точками останова, вы можете установить смещение для любых доступных размеров. Это позволяет точно настроить ваш макет приложения именно на ваши нужды.',
       uninverted: true
     },
     order: {
-      header: 'Order',
-      desc: 'You can control the ordering of grid items. As with offsets, you can set different orders for different sizes. Design specialized screen layouts that accommodate to any application.',
+      header: 'Порядок',
+      desc: 'Вы можете управлять упорядочением элементов сетки. Как и в случае смещений, вы можете устанавливать различный порядок для разных размеров. Дизайн спец макетов экрана, которые подходят для любого приложения.',
       uninverted: true
     },
     directionAndAlign: {
-      header: 'Direction and Align',
-      desc: 'Designate the direction and alignment in a variety of ways. All of the available <kbd>flex-box</kbd> api is available through intuitive helper props.',
+      header: 'Направление и выравнивание',
+      desc: 'Назначьте направление и выравнивание различными способами. Все <kbd>flex-box</kbd> api доступны через интуитивные вспомогательные свойства.',
       uninverted: true
     },
     rowColumnBreakpoint: {
-      header: 'Row and column breakpoints',
-      desc: 'Dynamically change your layout based upon resolution. **(resize your screen and watch the layout change to a `row` on small breakpoints)**',
+      header: 'Точки останова строки и столбца',
+      desc: 'Динамически изменяйте свой макет на основе разрешения. **(измените размер экрана и посмотрите, как изменится разметка `row` на небольших контрольных точках)**',
       uninverted: true
     },
     nestedGrid: {
-      header: 'Nested grid',
-      desc: 'Grids can be nested, similar to other frameworks, in order to achieve very custom layouts.',
+      header: 'Вложенная сетка',
+      desc: 'Сетки могут быть вложенными, подобно другим фреймворкам, для того, чтобы достичь очень настраиваемой разметки.',
       uninverted: true
     },
     uniqueLayouts: {
-      header: 'Unique layouts',
-      desc: 'The power and flexibility of the Vuetify grid system allows you to create amazing user interfaces.',
+      header: 'Уникальная разметка',
+      desc: 'Сила и гибкость сетки Vuetify позволяют создавать удивительные пользовательские интерфейсы.',
       uninverted: true
     },
     spacer: {
       header: 'v-spacer',
-      desc: 'The `v-spacer` component is useful when you want to fill available space or make space between two components.'
+      desc: 'Компонент `v-spacer` полезен, когда вы хотите заполнить свободное пространство или сделать пространство между двумя компонентами.'
     },
     tags: {
-      header: 'Html tags',
-      desc: 'Sometimes you will want to specify a layout item as a specific tag, such as a `section` or `li` element.'
+      header: 'Html теги',
+      desc: 'Иногда вам нужно указать элемент макета в качестве определенного тега, например, элемент `section` или` li`.'
     }
   }],
   props: {
     tag: 'Mixins.Routable.props.tag'
   },
-  breakpointHeader: 'Breakpoint object',
-  breakpointText1: 'Vuetify converts the available breakpoints into an accessible object from within your application. This will allow you to assign/apply specific properties and attributes based upon viewport size. The object can be accessed from:',
-  breakpointText2: 'This object contains the same semantic properties that you are already used to using from the grid system. Let\'s try a real world example. You have a `v-dialog` component that you want to convert to a **full-screen** dialog on mobile devices. Normally you would need to bind watchers for the viewport size, and/or check whenever the page loads.',
-  breakpointText3: 'That\'s a lot of boilerplate to write. Even if you opt to use the built in <a href="/directives/resizing">v-resize</a> directive, you are still going to have to define a resize method. With the **breakpoint** object you can completely skip this logic and get back to building your application.'
+  breakpointHeader: 'Объект точки останова',
+  breakpointText1: 'Vuetify преобразует доступные точки останова в доступный объект из вашего приложения. Это позволит вам назначать / применять определенные свойства и атрибуты на основе размера видимого экрана. Доступ к объекту можно получить из:',
+  breakpointText2: 'Этот объект содержит те же семантические свойства, которые вы уже использовали в сетке. Давайте попробуем реальный пример У вас есть компонент `v-dialog`, который вы хотите преобразовать в **full-screen** на мобильных устройствах. Обычно вам нужно привязывать наблюдателей к размеру видимого экрана и/или проверять каждый раз, когда загружается страница.',
+  breakpointText3: 'Это много шаблонов для написания. Даже если вы решите использовать встроенную директиву <a href="/directives/resizing">v-resize</a>, вам все равно придется определять метод изменения размера. С объектом **breakpoint(точка останова)** вы можете полностью пропустить эту логику и вернуться к созданию своего приложения.'
 }
