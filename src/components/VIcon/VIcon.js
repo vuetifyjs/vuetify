@@ -25,8 +25,7 @@ export default {
     medium: Boolean,
     right: Boolean,
     size: {
-      type: [Number, String],
-      default: SIZE_MAP.default
+      type: [Number, String]
     },
     small: Boolean,
     xLarge: Boolean
@@ -44,7 +43,10 @@ export default {
       case props.xLarge: fontSize = SIZE_MAP.xLarge
         break
     }
-    data.style = { fontSize, ...data.style }
+
+    if (fontSize) {
+      data.style = { fontSize, ...data.style }
+    }
 
     let iconName = ''
     if (children.length) {

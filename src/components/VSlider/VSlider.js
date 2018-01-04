@@ -9,6 +9,8 @@ import ClickOutside from '../../directives/click-outside'
 
 import { VScaleTransition } from '../transitions'
 
+import { consoleWarn } from '../../util/console'
+
 export default {
   name: 'v-slider',
 
@@ -154,7 +156,7 @@ export default {
 
     // Without a v-app, iOS does not work with body selectors
     this.app = document.querySelector('[data-app]') ||
-      console.warn('The v-slider component requires the presence of v-app or a non-body wrapping element with the [data-app] attribute.')
+      consoleWarn('Missing v-app or a non-body wrapping element with the [data-app] attribute', this)
   },
 
   methods: {

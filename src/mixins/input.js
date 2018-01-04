@@ -4,6 +4,8 @@ import Validatable from './validatable'
 import VIcon from '../components/VIcon'
 
 export default {
+  name: 'input',
+
   components: {
     VIcon
   },

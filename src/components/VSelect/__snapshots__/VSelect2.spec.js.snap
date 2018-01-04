@@ -44,13 +44,12 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
                     <div class="input-group__input">
                       <i aria-hidden="true"
                          class="material-icons icon icon--selection-control fade-transition-leave fade-transition-leave-active"
-                         style="font-size: 24px;"
                       >
                         check_box_outline_blank
                       </i>
                       <i aria-hidden="true"
                          class="material-icons icon icon--selection-control icon--checkbox fade-transition-enter fade-transition-enter-active"
-                         style="font-size: 24px; -webkit-transform-origin: top center 0;"
+                         style="-webkit-transform-origin: top center 0;"
                       >
                         check_box
                       </i>
@@ -60,7 +59,6 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
                       </div>
                     </div>
                     <div class="input-group__details">
-                      <!---->
                     </div>
                   </div>
                 </div>
@@ -84,7 +82,6 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
                     <div class="input-group__input">
                       <i aria-hidden="true"
                          class="material-icons icon icon--selection-control"
-                         style="font-size: 24px;"
                       >
                         check_box_outline_blank
                       </i>
@@ -94,7 +91,6 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
                       </div>
                     </div>
                     <div class="input-group__details">
-                      <!---->
                     </div>
                   </div>
                 </div>
@@ -111,13 +107,11 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
     </div>
     <i aria-hidden="true"
        class="material-icons icon input-group__append-icon input-group__icon-cb input-group__icon-clearable"
-       style="font-size: 24px;"
     >
       clear
     </i>
   </div>
   <div class="input-group__details">
-    <!---->
   </div>
 </div>
 
@@ -182,13 +176,11 @@ exports[`VSelect should be clearable with prop, dirty and single select 1`] = `
     </div>
     <i aria-hidden="true"
        class="material-icons icon input-group__append-icon input-group__icon-cb input-group__icon-clearable"
-       style="font-size: 24px;"
     >
       clear
     </i>
   </div>
   <div class="input-group__details">
-    <!---->
   </div>
 </div>
 

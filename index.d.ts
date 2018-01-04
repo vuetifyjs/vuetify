@@ -66,7 +66,6 @@ declare interface VuetifyObject {
   dark: boolean
   theme: VuetifyTheme
   options: VuetifyOptions
-  touchSupport: boolean
 }
 
 declare module 'vue/types/vue' {

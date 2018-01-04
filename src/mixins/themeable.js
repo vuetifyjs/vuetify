@@ -1,4 +1,6 @@
 export default {
+  name: 'themeable',
+
   props: {
     dark: Boolean,
     light: Boolean

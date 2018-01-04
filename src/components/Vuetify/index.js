@@ -14,8 +14,7 @@ const Vuetify = {
       application,
       dark: false,
       theme: theme(opts.theme),
-      options: options(opts.options),
-      touchSupport: false
+      options: options(opts.options)
     })
 
     Vue.prototype.$vuetify = $vuetify.inspire
