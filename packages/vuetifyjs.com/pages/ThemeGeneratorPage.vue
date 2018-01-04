@@ -173,7 +173,7 @@
     },
 
     mounted () {
-      setTimeout(() => (this.drawer = true), 300)
+      setTimeout(() => (this.drawer = true), 400)
     }
   }
 </script>

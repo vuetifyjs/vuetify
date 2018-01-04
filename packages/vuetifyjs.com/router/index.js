@@ -53,6 +53,7 @@ export function createRouter () {
         route('/motion/transitions', 'motion/Transitions'),
         // Extra
         route('/pre-made-themes', 'PremadeThemes'),
+        route('/store', 'Store'),
         // Guides
         route('/guides/server-side-rendering', 'guides/SSR'),
         route('/guides/a-la-carte', 'guides/ALaCarte'),

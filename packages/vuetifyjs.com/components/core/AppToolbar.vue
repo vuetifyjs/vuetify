@@ -4,8 +4,10 @@
     app
     dark
     fixed
-    :inverted-scroll="getManualScroll($route.path)"
     scroll-off-screen
+    height="58px"
+    :manual-scroll="isManualScrolled"
+    :inverted-scroll="$route.path === '/'"
     ref="toolbar"
   )#app-toolbar
     v-toolbar-side-icon(
@@ -17,14 +19,26 @@
         src="/static/v-alt.svg"
         height="38px"
       )
-    v-toolbar-title.pb-1.hidden-xs-only Vuetify
+    v-fade-transition(mode="out-in")
+      v-btn(flat :to="backPath" v-if="$route.path === '/store'")
+        v-icon(left) mdi-arrow-left
+        span Back to Docs
+      v-toolbar-title(v-else).pb-1.hidden-xs-only Vuetify
     v-spacer
     v-toolbar-items
+      v-btn(
+        flat
+        v-show="$route.path === '/'"
+        to="/getting-started/quick-start"
+      )
+        span.hidden-md-and-up Docs
+        span.hidden-sm-and-down Documentation
       v-menu(
         bottom
         offset-y
         left
         attach
+        v-show="!isStore"
       )
         v-btn(
           slot="activator"
@@ -39,7 +53,12 @@
             @click="translateI18n(language.locale)"
           )
             v-list-tile-title {{language.title}}
-      v-menu(bottom offset-y attach).hidden-xs-only
+      v-menu(
+        bottom
+        offset-y
+        attach
+        v-show="!isStore"
+      ).hidden-xs-only
         v-btn(
           slot="activator"
           flat
@@ -53,13 +72,6 @@
             @click="changeToRelease(release)"
           )
             v-list-tile-title {{ release }}
-      v-btn(
-        flat
-        v-if="$route.path === '/'"
-        to="/getting-started/quick-start"
-      )
-        span.hidden-md-and-up Docs
-        span.hidden-sm-and-down Documentation
 </template>
 
 <script>
@@ -69,7 +81,6 @@
   export default {
     data: () => ({
       fixed: false,
-      isManualScrolling: false,
       languages: [
         {
           title: 'English',
@@ -84,20 +95,31 @@
 
     computed: {
       ...mapState({
+        appToolbar: state => state.appToolbar,
         currentVersion: state => state.currentVersion,
-        fullscreenRoutes: state => state.fullscreenRoutes,
+        isFullscreen: state => state.isFullscreen,
         loadedLangs: state => state.loadedLangs,
         releases: state => state.releases,
+        route: state => state.route,
         stateless: state => state.stateless
-      })
+      }),
+      backPath () {
+        return this.route.from.path === '/'
+          ? '/getting-started/quick-start'
+          : this.route.from.path
+      },
+      isManualScrolled () {
+        return this.$route.path !== '/' &&
+          this.isFullscreen
+      },
+      isStore () {
+        return this.$route.path === '/store'
+      }
     },
 
     methods: {
       changeToRelease (release) {
         window.location.href = `${window.location.origin}/releases/${release}/#${this.$route.fullPath}`
-      },
-      getManualScroll (path) {
-        return this.fullscreenRoutes.includes(path)
       },
       async translateI18n (lang) {
         if (this.loadedLangs.indexOf(lang) < 0) {

@@ -33,21 +33,11 @@
 
     computed: {
       ...mapState({
-        fullscreenRoutes: state => state.fullscreenRoutes
+        isFullscreen: state => state.isFullscreen
       }),
       examples () {
         return !!this.$route.params.example
       }
-    },
-
-    watch: {
-      $route (current, previous) {
-        this.setupLayout(0)
-      }
-    },
-
-    created () {
-      this.setupLayout()
     },
 
     mounted () {
@@ -61,22 +51,6 @@
         }).catch(err => {
           console.log(err)
         })
-      },
-      setupLayout (timeout = 300) {
-        const drawer = !this.fullscreenRoutes.includes(this.$route.path)
-        this.$store.commit('app/STATELESS', !drawer)
-
-        setTimeout(() => {
-          if (this.$route &&
-            this.$route.path !== '/' &&
-            this.$route.from &&
-            this.$route.from.path !== '/'
-          ) return
-
-          if (this.$vuetify.breakpoint.mdAndDown) return
-
-          this.$store.commit('app/DRAWER', drawer)
-        }, timeout)
       }
     }
   }

@@ -3,7 +3,6 @@
     app
     fixed
     v-model="appDrawer"
-    :stateless="stateless"
   )#app-drawer
     div.text-xs-center
       div.diamond-sponsor-label Diamond Sponsors
@@ -147,12 +146,14 @@
     computed: {
       ...mapState({
         diamonds: state => state.supporters.diamond,
+        isFullscreen: state => state.isFullscreen,
         items: state => state.appDrawerItems,
         stateless: state => state.stateless
       }),
       appDrawer: {
         get (state) {
-          return this.$store.state.appDrawer
+          return this.$store.state.appDrawer &&
+            !this.isFullscreen
         },
         set (val) {
           this.$store.commit('app/DRAWER', val)

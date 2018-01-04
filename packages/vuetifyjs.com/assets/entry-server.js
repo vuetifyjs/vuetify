@@ -1,5 +1,8 @@
 import { createApp } from './app'
 
+// ENV Variables
+require('dotenv').config()
+
 const isDev = process.env.NODE_ENV !== 'production'
 
 // This exported function will be called by `bundleRenderer`.
