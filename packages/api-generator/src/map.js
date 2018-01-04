@@ -299,6 +299,9 @@ module.exports = {
   'v-snackbar': {
     slots: ['default']
   },
+  'v-speed-dial': {
+    slots: ['activator', 'default']
+  },
   'v-stepper': {
     slots: ['default']
   },
