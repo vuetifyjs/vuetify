@@ -1,3 +1,9 @@
+/* 
+ * THIS FILE HAS BEEN AUTOMATICALLY GENERATED USING THE VUETIFY-HELPER-JSON TOOL.
+ *
+ * CHANGES MADE TO THIS FILE WILL BE LOST!
+ */
+
 module.exports = {
   "v-app": {
     "props": [
@@ -91,7 +97,7 @@ module.exports = {
         "name": "color",
         "type": "String",
         "default": "undefined",
-        "source": null
+        "source": "colorable"
       },
       {
         "name": "size",
@@ -109,7 +115,9 @@ module.exports = {
         "source": null
       }
     ],
-    "mixins": [],
+    "mixins": [
+      "colorable"
+    ],
     "slots": [
       "default"
     ]
@@ -2135,6 +2143,18 @@ module.exports = {
   "v-container": {
     "props": [
       {
+        "name": "grid-list-{xs through xl}",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "fluid",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
         "name": "id",
         "type": "String",
         "default": "undefined",
@@ -2144,6 +2164,114 @@ module.exports = {
         "name": "tag",
         "type": "String",
         "default": "div",
+        "source": null
+      },
+      {
+        "name": "alignBaseline",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignCenter",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignContentCenter",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignContentEnd",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignContentSpaceAround",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignContentSpaceBetween",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignContentStart",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignEnd",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignStart",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "d-{type}",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "fillHeight",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "justifyCenter",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "justifyEnd",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "justifySpaceAround",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "justifySpaceBetween",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "justifyStart",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "reverse",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "wrap",
+        "type": "Boolean",
+        "default": "false",
         "source": null
       }
     ],
@@ -2152,6 +2280,24 @@ module.exports = {
   "v-flex": {
     "props": [
       {
+        "name": "offset-(size)(0-12)",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "order-(size)(0-12)",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "(size)(1-12)",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
         "name": "id",
         "type": "String",
         "default": "undefined",
@@ -2161,6 +2307,114 @@ module.exports = {
         "name": "tag",
         "type": "String",
         "default": "div",
+        "source": null
+      },
+      {
+        "name": "alignBaseline",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignCenter",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignContentCenter",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignContentEnd",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignContentSpaceAround",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignContentSpaceBetween",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignContentStart",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignEnd",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignStart",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "d-{type}",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "fillHeight",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "justifyCenter",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "justifyEnd",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "justifySpaceAround",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "justifySpaceBetween",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "justifyStart",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "reverse",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "wrap",
+        "type": "Boolean",
+        "default": "false",
         "source": null
       }
     ],
@@ -2169,6 +2423,18 @@ module.exports = {
   "v-layout": {
     "props": [
       {
+        "name": "row",
+        "type": "Boolean",
+        "default": "true",
+        "source": null
+      },
+      {
+        "name": "column",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
         "name": "id",
         "type": "String",
         "default": "undefined",
@@ -2178,6 +2444,114 @@ module.exports = {
         "name": "tag",
         "type": "String",
         "default": "div",
+        "source": null
+      },
+      {
+        "name": "alignBaseline",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignCenter",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignContentCenter",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignContentEnd",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignContentSpaceAround",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignContentSpaceBetween",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignContentStart",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignEnd",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignStart",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "d-{type}",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "fillHeight",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "justifyCenter",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "justifyEnd",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "justifySpaceAround",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "justifySpaceBetween",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "justifyStart",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "reverse",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "wrap",
+        "type": "Boolean",
+        "default": "false",
         "source": null
       }
     ],
@@ -4313,7 +4687,7 @@ module.exports = {
         "source": null
       },
       {
-        "name": "hover",
+        "name": "openOnHover",
         "type": "Boolean",
         "default": "False",
         "source": null
@@ -4328,6 +4702,10 @@ module.exports = {
     "mixins": [
       "positionable",
       "toggleable"
+    ],
+    "slots": [
+      "activator",
+      "default"
     ]
   },
   "v-stepper": {
@@ -4755,13 +5133,31 @@ module.exports = {
   "v-tabs": {
     "props": [
       {
+        "name": "color",
+        "type": "String",
+        "default": "undefined",
+        "source": "colorable"
+      },
+      {
+        "name": "alignWithTitle",
+        "type": "Boolean",
+        "default": "False",
+        "source": null
+      },
+      {
+        "name": "appendIcon",
+        "type": "String",
+        "default": "chevron_right",
+        "source": null
+      },
+      {
         "name": "centered",
         "type": "Boolean",
         "default": "False",
         "source": null
       },
       {
-        "name": "fixed",
+        "name": "fixedTabs",
         "type": "Boolean",
         "default": "False",
         "source": null
@@ -4773,7 +5169,22 @@ module.exports = {
         "source": null
       },
       {
-        "name": "icons",
+        "name": "height",
+        "type": [
+          "Number",
+          "String"
+        ],
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "hideSlider",
+        "type": "Boolean",
+        "default": "False",
+        "source": null
+      },
+      {
+        "name": "iconsAndText",
         "type": "Boolean",
         "default": "False",
         "source": null
@@ -4784,31 +5195,41 @@ module.exports = {
           "Number",
           "String"
         ],
-        "default": 1280,
+        "default": 1264,
+        "source": null
+      },
+      {
+        "name": "prependIcon",
+        "type": "String",
+        "default": "chevron_left",
+        "source": null
+      },
+      {
+        "name": "right",
+        "type": "Boolean",
+        "default": "False",
+        "source": null
+      },
+      {
+        "name": "showArrows",
+        "type": "Boolean",
+        "default": "False",
+        "source": null
+      },
+      {
+        "name": "sliderColor",
+        "type": "String",
+        "default": "accent",
         "source": null
       },
       {
         "name": "value",
-        "type": "String",
+        "type": [
+          "Number",
+          "String"
+        ],
         "default": "undefined",
         "source": null
-      },
-      {
-        "name": "scrollable",
-        "type": "Boolean",
-        "default": "True",
-        "source": null
-      }
-    ],
-    "mixins": []
-  },
-  "v-tabs-bar": {
-    "props": [
-      {
-        "name": "color",
-        "type": "String",
-        "default": "undefined",
-        "source": "colorable"
       },
       {
         "name": "dark",
@@ -4824,48 +5245,13 @@ module.exports = {
       }
     ],
     "mixins": [
+      "registerable-provide",
       "colorable",
+      "ssr-bootable",
       "themeable"
     ]
   },
-  "v-tabs-content": {
-    "props": [
-      {
-        "name": "lazy",
-        "type": "Boolean",
-        "default": "False",
-        "source": "bootable"
-      },
-      {
-        "name": "id",
-        "type": "String",
-        "default": "undefined",
-        "source": null
-      },
-      {
-        "name": "transition",
-        "type": [
-          "Boolean",
-          "String"
-        ],
-        "default": "tab-transition",
-        "source": null
-      },
-      {
-        "name": "reverseTransition",
-        "type": [
-          "Boolean",
-          "String"
-        ],
-        "default": "tab-reverse-transition",
-        "source": null
-      }
-    ],
-    "mixins": [
-      "bootable"
-    ]
-  },
-  "v-tabs-item": {
+  "v-tab": {
     "props": [
       {
         "name": "activeClass",
@@ -4933,7 +5319,7 @@ module.exports = {
           "Boolean",
           "Object"
         ],
-        "default": "undefined",
+        "default": true,
         "source": "routable"
       },
       {
@@ -4950,6 +5336,7 @@ module.exports = {
       }
     ],
     "mixins": [
+      "registerable-inject",
       "routable"
     ]
   },
@@ -4966,9 +5353,58 @@ module.exports = {
         "type": "Boolean",
         "default": "False",
         "source": null
+      },
+      {
+        "name": "value",
+        "type": [
+          "Number",
+          "String"
+        ],
+        "default": "undefined",
+        "source": null
       }
     ],
-    "mixins": []
+    "mixins": [
+      "registerable-provide"
+    ]
+  },
+  "v-tab-item": {
+    "props": [
+      {
+        "name": "lazy",
+        "type": "Boolean",
+        "default": "False",
+        "source": "bootable"
+      },
+      {
+        "name": "id",
+        "type": "String",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "transition",
+        "type": [
+          "Boolean",
+          "String"
+        ],
+        "default": "tab-transition",
+        "source": null
+      },
+      {
+        "name": "reverseTransition",
+        "type": [
+          "Boolean",
+          "String"
+        ],
+        "default": "tab-reverse-transition",
+        "source": null
+      }
+    ],
+    "mixins": [
+      "bootable",
+      "registerable-inject"
+    ]
   },
   "v-tabs-slider": {
     "props": [
