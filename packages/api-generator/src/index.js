@@ -142,7 +142,16 @@ Object.keys(installedComponents).forEach(key => {
 
 const stream = fs.createWriteStream('dist/api.js')
 
+const comment = `/* 
+ * THIS FILE HAS BEEN AUTOMATICALLY GENERATED USING THE VUETIFY-HELPER-JSON TOOL.
+ *
+ * CHANGES MADE TO THIS FILE WILL BE LOST!
+ */
+
+`
+
 stream.once('open', () => {
+  stream.write(comment)
   stream.write('module.exports = ')
   stream.write(JSON.stringify(components, null, 2))
   stream.end()
