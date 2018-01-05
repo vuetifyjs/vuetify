@@ -48,7 +48,38 @@ export default {
     }
   }],
   props: {
-    tag: 'Mixins.Routable.props.tag'
+    tag: 'Mixins.Routable.props.tag',
+    alignBaseline: 'Align items to the baseline.',
+    alignCenter: 'Align items to the center.',
+    alignContentCenter: 'Align content to the center.',
+    alignContentEnd: 'Align content to the end.',
+    alignContentSpaceAround: 'Align content to the space around.',
+    alignContentSpaceBetween: 'Align content to the space between.',
+    alignContentStart: 'Align content to the start.',
+    alignEnd: 'Align items to the end.',
+    alignStart: 'Align items to the start.',
+    'd-{type}': 'Specify to display an element as flex/inline-flex/block etc. Syntax is `d-{type}`. For example `d-flex`.',
+    fillHeight: 'Make sure that col element height is filled with parent and child. Important for Safari/Firefox if children is column element.',
+    justifyCenter: 'Justify content to the center.',
+    justifyEnd: 'Justify content to the end.',
+    justifySpaceAround: 'Justify content to the space around.',
+    justifySpaceBetween: 'Justify content to the space between.',
+    justifyStart: 'Justify content to the start.',
+    reverse: 'Reverses the currently selected direction (column, row).',
+    wrap: 'Allows children to wrap within the container if the elements use more than 100%.',
+    'v-container': {
+      'grid-list-{xs through xl}': 'Sets the gutter between grid list items ranging from 2px to 24px',
+      fluid: 'Removes viewport size breakpoints'
+    },
+    'v-flex': {
+      'offset-(size)(1-12)': 'offset-xs: extra small, offset-sm: small, offset-md: medium, offset-lg: large, offset-xl: extra large. Example: offset-xs3',
+      'order-(size)(1-12)': 'order-xs: extra small, order-sm: small, order-md: medium, order-lg: large, order-xl: extra large. Example: order-xs3',
+      '(size)(1-12)': 'xs: extra small, sm: small, md: medium, lg: large, xl: extra large - 1 through 12',
+    },
+    'v-layout': {
+      row: 'Sets flex direction to row',
+      column: 'Sets flex direction to column'
+    }
   },
   breakpointHeader: 'Breakpoint object',
   breakpointText1: 'Vuetify converts the available breakpoints into an accessible object from within your application. This will allow you to assign/apply specific properties and attributes based upon viewport size. The object can be accessed from:',

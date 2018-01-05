@@ -1,3 +1,9 @@
+/*
+ * THIS FILE HAS BEEN AUTOMATICALLY GENERATED USING THE VUETIFY-HELPER-JSON TOOL.
+ *
+ * CHANGES MADE TO THIS FILE WILL BE LOST!
+ */
+
 module.exports = {
   "v-app": {
     "props": [
@@ -966,21 +972,15 @@ module.exports = {
   "v-carousel-item": {
     "props": [
       {
-        "name": "reverseTransition",
-        "type": "String",
-        "default": "tab-reverse-transition",
-        "source": null
-      },
-      {
-        "name": "src",
-        "type": "String",
-        "default": "undefined",
-        "source": null
-      },
-      {
         "name": "transition",
         "type": "String",
         "default": "tab-transition",
+        "source": null
+      },
+      {
+        "name": "reverseTransition",
+        "type": "String",
+        "default": "tab-reverse-transition",
         "source": null
       }
     ],
@@ -2143,6 +2143,18 @@ module.exports = {
   "v-container": {
     "props": [
       {
+        "name": "grid-list-{xs through xl}",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "fluid",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
         "name": "id",
         "type": "String",
         "default": "undefined",
@@ -2152,6 +2164,114 @@ module.exports = {
         "name": "tag",
         "type": "String",
         "default": "div",
+        "source": null
+      },
+      {
+        "name": "alignBaseline",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignCenter",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignContentCenter",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignContentEnd",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignContentSpaceAround",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignContentSpaceBetween",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignContentStart",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignEnd",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignStart",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "d-{type}",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "fillHeight",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "justifyCenter",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "justifyEnd",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "justifySpaceAround",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "justifySpaceBetween",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "justifyStart",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "reverse",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "wrap",
+        "type": "Boolean",
+        "default": "false",
         "source": null
       }
     ],
@@ -2160,6 +2280,24 @@ module.exports = {
   "v-flex": {
     "props": [
       {
+        "name": "offset-(size)(0-12)",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "order-(size)(0-12)",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "(size)(1-12)",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
         "name": "id",
         "type": "String",
         "default": "undefined",
@@ -2169,6 +2307,114 @@ module.exports = {
         "name": "tag",
         "type": "String",
         "default": "div",
+        "source": null
+      },
+      {
+        "name": "alignBaseline",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignCenter",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignContentCenter",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignContentEnd",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignContentSpaceAround",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignContentSpaceBetween",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignContentStart",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignEnd",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignStart",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "d-{type}",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "fillHeight",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "justifyCenter",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "justifyEnd",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "justifySpaceAround",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "justifySpaceBetween",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "justifyStart",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "reverse",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "wrap",
+        "type": "Boolean",
+        "default": "false",
         "source": null
       }
     ],
@@ -2177,6 +2423,18 @@ module.exports = {
   "v-layout": {
     "props": [
       {
+        "name": "row",
+        "type": "Boolean",
+        "default": "true",
+        "source": null
+      },
+      {
+        "name": "column",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
         "name": "id",
         "type": "String",
         "default": "undefined",
@@ -2186,6 +2444,114 @@ module.exports = {
         "name": "tag",
         "type": "String",
         "default": "div",
+        "source": null
+      },
+      {
+        "name": "alignBaseline",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignCenter",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignContentCenter",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignContentEnd",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignContentSpaceAround",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignContentSpaceBetween",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignContentStart",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignEnd",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "alignStart",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "d-{type}",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "fillHeight",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "justifyCenter",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "justifyEnd",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "justifySpaceAround",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "justifySpaceBetween",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "justifyStart",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "reverse",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "wrap",
+        "type": "Boolean",
+        "default": "false",
         "source": null
       }
     ],
@@ -4336,6 +4702,10 @@ module.exports = {
     "mixins": [
       "positionable",
       "toggleable"
+    ],
+    "slots": [
+      "activator",
+      "default"
     ]
   },
   "v-stepper": {
