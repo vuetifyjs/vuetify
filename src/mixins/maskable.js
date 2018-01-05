@@ -3,12 +3,27 @@
  *
  * @mixin
  *
- * Creates an input mask that is
- * generated from a masked str
+ * Creates an input mask
  *
- * Example: mask="#### #### #### ####"
+ * Handled cases:
+ *
+ * 1. Predefined : String (existing)
+ *      Ex: mask="credit-card"
+ *
+ * 2. Predefined with default options : String mapped to Object
+ *      Ex: mask="numeral"
+ *
+ * 3. Predefined with overidden options : Object
+ *      Ex: mask="{ formatter: 'numeral', prefix: '$', precision: 4 }"
+ *
+ * 4. Custom mask : String (existing)
+ *      Ex: mask="(##) - (AA)"
+ *
+ * 5. Custom mask with formatter : Object
+ *      Ex: mask="{ formatter: function () {}, myOption1: '23', myOption2: '?' }"
  */
 
+import numeralFormatable from './numeral-formatable'
 import {
   isMaskDelimiter,
   maskText,
@@ -32,6 +47,8 @@ export default {
     }
   }),
 
+  mixins: [numeralFormatable],
+
   props: {
     dontFillMaskBlanks: Boolean,
     mask: {
@@ -43,10 +60,42 @@ export default {
 
   computed: {
     masked () {
-      const preDefined = this.preDefined[this.mask]
-      const mask = preDefined || this.mask || ''
+      return this.mask ? this.preDefined[this.mask] || this.mask : false
+    },
+    isStringFormatter () {
+      return typeof this.masked === 'string'
+    },
+    isNumeralFormatter () {
+      return this.masked && typeof this.masked !== 'string' && this.masked.formatter === 'numeral'
+    },
+    isCustomFormatter () {
+      return this.masked && typeof this.masked !== 'string' &&
+        typeof this.masked.formatter === 'function'
+    },
+    // Compute which callback to use
+    maskText () {
+      if (this.isStringFormatter) { // Case 1 and 4
+        return text => maskText(text, this.masked, this.dontFillMaskBlanks)
+      } else if (this.isNumeralFormatter) { // Case 2 & 3
+        this.options = Object.assign({}, this.preDefined['numeral'])
+        Object.assign(this.options, this.mask)
 
-      return mask.split('')
+        return this.maskNumeralText
+      } else if (this.isCustomFormatter) { // Case 5
+        const customOptions = Object.assign({}, this.mask)
+        const formatter = this.masked.formatter
+        delete customOptions.formatter
+
+        return text => formatter(text, customOptions)
+      } else { // No mask
+        return text => text
+      }
+    },
+    unmaskText () {
+      if (!this.mask) return text => text
+      return this.isNumeralFormatter ? this.unmaskNumeralText
+        : this.isCustomFormatter ? text => text
+          : this.isStringFormatter && !this.returnMaskedValue ? unmaskText : text => text
     }
   },
 
@@ -64,13 +113,13 @@ export default {
       let selection = this.selection
 
       for (const char of oldValue.substr(0, selection)) {
-        isMaskDelimiter(char) || position++
+        this.isMaskDelimiter(char) || position++
       }
 
       selection = 0
-      if (newValue) {
+      if (position && newValue) {
         for (const char of newValue) {
-          isMaskDelimiter(char) || position--
+          this.isMaskDelimiter(char) || position--
           selection++
           if (position <= 0) break
         }
@@ -115,20 +164,16 @@ export default {
       if (newValue) {
         for (const char of newValue) {
           if (this.lazySelection <= 0) break
-          isMaskDelimiter(char) || this.lazySelection--
+          this.isMaskDelimiter(char) || this.lazySelection--
           selection++
         }
+
+        selection = this.isNumeralFormatter
+          ? this.adjustNumeralCaret(selection, newValue) : selection
       }
 
       this.setCaretPosition(selection)
-      // this.$emit() must occur only when all internal values are correct
       this.$emit('input', this.returnMaskedValue ? this.$refs.input.value : this.lazyValue)
-    },
-    maskText (text) {
-      return this.mask ? maskText(text, this.masked, this.dontFillMaskBlanks) : text
-    },
-    unmaskText (text) {
-      return this.mask && !this.returnMaskedValue ? unmaskText(text) : text
     },
     // When the input changes and is
     // re-created, ensure that the
@@ -136,13 +181,17 @@ export default {
     setSelectionRange () {
       this.$nextTick(this.updateRange)
     },
+    isMaskDelimiter (char) {
+      return this.isNumeralFormatter ? this.isNumeralDelimiter(char)
+        : this.isCustomFormatter ? false : isMaskDelimiter(char)
+    },
     resetSelections (input) {
       if (!input.selectionEnd) return
       this.selection = input.selectionEnd
       this.lazySelection = 0
 
       for (const char of input.value.substr(0, this.selection)) {
-        isMaskDelimiter(char) || this.lazySelection++
+        this.isMaskDelimiter(char) || this.lazySelection++
       }
     }
   }

@@ -85,12 +85,12 @@ test('VForm.js', ({ mount }) => {
     wrapper.vm.watchChild(input)
     await wrapper.vm.$nextTick()
 
-    expect(input._watchers.length).toBe(26)
+    expect(input._watchers.length).toBe(40)
     input.shouldValidate = false
     wrapper.vm.watchChild(input)
     await wrapper.vm.$nextTick()
 
-    expect(input._watchers.length).toBe(27)
+    expect(input._watchers.length).toBe(41)
     input.shouldValidate = true
     await wrapper.vm.$nextTick()
 

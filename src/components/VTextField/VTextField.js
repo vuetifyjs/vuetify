@@ -25,7 +25,9 @@ export default {
       initialValue: null,
       inputHeight: null,
       internalChange: false,
-      badInput: false
+      badInput: false,
+      backspace: false,
+      delete: false
     }
   },
 
@@ -40,6 +42,7 @@ export default {
     },
     counter: [Boolean, Number, String],
     fullWidth: Boolean,
+    maxlength: [Number, String],
     multiLine: Boolean,
     placeholder: String,
     prefix: String,
@@ -186,6 +189,11 @@ export default {
       this.$emit('focus', e)
     },
     keyDown (e) {
+      const key = e.code || e.key
+
+      this.backspace = key === 'Backspace'
+      this.delete = key === 'Delete'
+
       // Prevents closing of a
       // dialog when pressing
       // enter
@@ -246,8 +254,14 @@ export default {
         data.domProps.rows = this.rows
       }
 
-      if (this.mask) {
-        data.attrs.maxlength = this.masked.length
+      if (this.masked) {
+        if (typeof this.masked === 'string') {
+          data.attrs.maxlength = this.masked.length
+        } else if (this.maxlength) {
+          data.attrs.maxlength = this.maxlength
+        }
+      } else if (this.maxlength) {
+        data.attrs.maxlength = this.maxlength
       }
 
       const children = [this.$createElement(tag, data)]
