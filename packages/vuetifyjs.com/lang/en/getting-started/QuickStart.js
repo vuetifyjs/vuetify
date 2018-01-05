@@ -18,6 +18,11 @@ export default {
   ie11Header: 'IE11 & Safari 9 support',
   ie11Text: 'In your project directory, install `babel-polyfill` and import it into your main entry:',
   ie11Text2: 'Due to Internet Explorer\'s limited support for `<template>` tags, you must send fully compiled dom elements to the browser. This can be done by either building your Vue code in advance or by creating helper components to replace the dom elements. For instance, if sent directly to IE, this will fail:',
+  browserSupport: {
+    supported: 'Supported',
+    notSupported: 'Not supported',
+    polyfill: 'Supported with polyfill'
+  },
   toc: [
     {
       text: 'Introduction',

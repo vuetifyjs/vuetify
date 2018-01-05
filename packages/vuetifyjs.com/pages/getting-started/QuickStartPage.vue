@@ -18,7 +18,7 @@
                   v-icon(dark).primary fa-{{ browser.icon }}
                 v-list-tile-content
                   v-list-tile-title {{ browser.title }}
-                  v-list-tile-sub-title {{ browser.supported === true ? 'Supported' : (browser.supported === false ? 'Not supported' : browser.supported) }}
+                  v-list-tile-sub-title {{ getBrowserSupport(browser) }}
                 v-list-tile-action
                   v-icon(v-if="!browser.supported" color="error") clear
                   v-icon(v-else color="success") check
@@ -114,12 +114,21 @@
     data: () => ({
       browsers: [
         { icon: 'internet-explorer', title: 'IE9 / IE10', supported: false },
-        { icon: 'internet-explorer', title: 'IE11', supported: 'Supported with polyfill' },
+        { icon: 'internet-explorer', title: 'IE11', supported: 'polyfill' },
         { icon: 'edge', title: 'Edge', supported: true },
         { icon: 'chrome', title: 'Chrome', supported: true },
         { icon: 'firefox', title: 'Firefox', supported: true },
-        { icon: 'safari', title: 'Safari 9+', supported: true },
+        { icon: 'safari', title: 'Safari 9', supported: 'polyfill' },
+        { icon: 'safari', title: 'Safari 10+', supported: true },
       ]
-    })
+    }),
+
+    methods: {
+      getBrowserSupport (browser) {
+        if (browser.supported === true) return this.$t('GettingStarted.QuickStart.browserSupport.supported')
+        else if (browser.supported === false) return this.$t('GettingStarted.QuickStart.browserSupport.notSupported')
+        else return this.$t(`GettingStarted.QuickStart.browserSupport.${browser.supported}`)
+      }
+    }
   }
 </script>
