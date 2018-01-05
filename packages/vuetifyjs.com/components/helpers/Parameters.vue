@@ -86,7 +86,7 @@
           devPrepend = '**SPECIAL** - '
         } else if (this.$te(componentLevelDesc)) {
           description = this.$t(componentLevelDesc)
-          
+
           if (description.indexOf('Mixins.') > -1) {
             description = this.$t(description)
           }
@@ -98,17 +98,20 @@
         } else if (this.$te(genericDesc)) {
           description = this.$t(genericDesc)
           devPrepend = '**GENERIC** - '
+        } else {
+          description = '**MISSING DESCRIPTION**'
         }
 
         const prepend = process.env.NODE_ENV === 'development' ? devPrepend : ''
 
         return `${prepend}${description}`
       },
-      genName (name) {
+      genName (name, item) {
         name = name || ''
         name = name.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`)
+        const sync = item.sync && '.sync' || ''
 
-        return `<code>${name}</code>`
+        return `<code>${name}${sync}</code>`
       },
       genType (type) {
         type = Array.isArray(type) ? type : [type]
@@ -121,6 +124,10 @@
         if (!Array.isArray(props)) return 'Missing data'
 
         return `<kbd>{ ${props.join(', ')} }</kbd>`
+      },
+      genDefault (value) {
+        if (typeof value !== 'string') return JSON.stringify(value)
+        else return value
       }
     }
   }

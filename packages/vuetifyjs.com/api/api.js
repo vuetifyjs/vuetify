@@ -16,7 +16,7 @@ module.exports = {
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       }
     ],
@@ -60,7 +60,7 @@ module.exports = {
       {
         "name": "dismissible",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -72,7 +72,7 @@ module.exports = {
       {
         "name": "outline",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -111,7 +111,7 @@ module.exports = {
       {
         "name": "tile",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       }
     ],
@@ -139,19 +139,19 @@ module.exports = {
       {
         "name": "bottom",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "left",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "overlap",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -175,19 +175,19 @@ module.exports = {
       {
         "name": "absolute",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "applicationable"
       },
       {
         "name": "app",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "applicationable"
       },
       {
         "name": "fixed",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "applicationable"
       },
       {
@@ -217,7 +217,7 @@ module.exports = {
       {
         "name": "shift",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -242,25 +242,25 @@ module.exports = {
       {
         "name": "disabled",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "fullWidth",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "inset",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "lazy",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -275,7 +275,7 @@ module.exports = {
       {
         "name": "persistent",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -302,19 +302,19 @@ module.exports = {
       {
         "name": "large",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "justifyCenter",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "justifyEnd",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       }
     ],
@@ -334,19 +334,19 @@ module.exports = {
       {
         "name": "append",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "routable"
       },
       {
         "name": "disabled",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "routable"
       },
       {
         "name": "exact",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "routable"
       },
       {
@@ -376,13 +376,13 @@ module.exports = {
       {
         "name": "nuxt",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "routable"
       },
       {
         "name": "replace",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "routable"
       },
       {
@@ -431,19 +431,19 @@ module.exports = {
       {
         "name": "append",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "routable"
       },
       {
         "name": "disabled",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "routable"
       },
       {
         "name": "exact",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "routable"
       },
       {
@@ -473,13 +473,13 @@ module.exports = {
       {
         "name": "nuxt",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "routable"
       },
       {
         "name": "replace",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "routable"
       },
       {
@@ -506,49 +506,49 @@ module.exports = {
       {
         "name": "absolute",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "positionable"
       },
       {
         "name": "bottom",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "positionable"
       },
       {
         "name": "fixed",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "positionable"
       },
       {
         "name": "left",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "positionable"
       },
       {
         "name": "right",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "positionable"
       },
       {
         "name": "top",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "positionable"
       },
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "light",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
@@ -560,61 +560,61 @@ module.exports = {
       {
         "name": "block",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "depressed",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "fab",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "flat",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "icon",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "large",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "loading",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "outline",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "round",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "small",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -647,13 +647,13 @@ module.exports = {
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "light",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
@@ -665,13 +665,13 @@ module.exports = {
       {
         "name": "mandatory",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "multiple",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       }
     ],
@@ -698,19 +698,19 @@ module.exports = {
       {
         "name": "append",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "routable"
       },
       {
         "name": "disabled",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "routable"
       },
       {
         "name": "exact",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "routable"
       },
       {
@@ -740,13 +740,13 @@ module.exports = {
       {
         "name": "nuxt",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "routable"
       },
       {
         "name": "replace",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "routable"
       },
       {
@@ -773,19 +773,19 @@ module.exports = {
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "light",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "flat",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -797,7 +797,7 @@ module.exports = {
       {
         "name": "hover",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -809,13 +809,13 @@ module.exports = {
       {
         "name": "raised",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "tile",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -842,7 +842,7 @@ module.exports = {
       {
         "name": "contain",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -868,7 +868,7 @@ module.exports = {
       {
         "name": "primaryTitle",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       }
     ],
@@ -887,25 +887,25 @@ module.exports = {
       {
         "name": "lazy",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "bootable"
       },
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "light",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "cycle",
         "type": "Boolean",
-        "default": "True",
+        "default": "true",
         "source": null
       },
       {
@@ -917,13 +917,13 @@ module.exports = {
       {
         "name": "hideControls",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "hideDelimiters",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -1014,19 +1014,19 @@ module.exports = {
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "light",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "error",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "validatable"
       },
       {
@@ -1035,17 +1035,19 @@ module.exports = {
           "String",
           "Array"
         ],
+        "default": [],
         "source": "validatable"
       },
       {
         "name": "rules",
         "type": "Array",
+        "default": [],
         "source": "validatable"
       },
       {
         "name": "validateOnBlur",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "validatable"
       },
       {
@@ -1056,14 +1058,14 @@ module.exports = {
       },
       {
         "name": "appendIconCb",
-        "type": "Any",
-        "default": "undefined",
+        "type": "Function",
+        "default": "null",
         "source": "input"
       },
       {
         "name": "disabled",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "input"
       },
       {
@@ -1075,7 +1077,7 @@ module.exports = {
       {
         "name": "hideDetails",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "input"
       },
       {
@@ -1087,7 +1089,7 @@ module.exports = {
       {
         "name": "persistentHint",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "input"
       },
       {
@@ -1104,20 +1106,20 @@ module.exports = {
       },
       {
         "name": "prependIconCb",
-        "type": "Any",
-        "default": "undefined",
+        "type": "Function",
+        "default": "null",
         "source": "input"
       },
       {
         "name": "readonly",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "input"
       },
       {
         "name": "required",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "input"
       },
       {
@@ -1129,6 +1131,10 @@ module.exports = {
       {
         "name": "toggleKeys",
         "type": "Array",
+        "default": [
+          13,
+          32
+        ],
         "source": "input"
       },
       {
@@ -1170,7 +1176,7 @@ module.exports = {
       {
         "name": "indeterminate",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       }
     ],
@@ -1198,55 +1204,55 @@ module.exports = {
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "light",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "value",
         "type": "Boolean",
-        "default": "True",
+        "default": "true",
         "source": "toggleable"
       },
       {
         "name": "close",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "disabled",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "label",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "outline",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "selected",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "small",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -1285,37 +1291,37 @@ module.exports = {
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "light",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "expand",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "data-iterable"
       },
       {
         "name": "hideActions",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "data-iterable"
       },
       {
         "name": "disableInitialSort",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "data-iterable"
       },
       {
         "name": "mustSort",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "data-iterable"
       },
       {
@@ -1327,6 +1333,15 @@ module.exports = {
       {
         "name": "rowsPerPageItems",
         "type": "Array",
+        "default": [
+          5,
+          10,
+          25,
+          {
+            "text": "All",
+            "value": -1
+          }
+        ],
         "source": "data-iterable"
       },
       {
@@ -1352,27 +1367,32 @@ module.exports = {
       },
       {
         "name": "filter",
-        "type": "Any",
+        "type": "Function",
+        "default": "(val, search) => {}",
         "source": "data-iterable"
       },
       {
         "name": "customFilter",
-        "type": "Any",
+        "type": "Function",
+        "default": "(items, search, filter) => {}",
         "source": "data-iterable"
       },
       {
         "name": "customSort",
-        "type": "Any",
+        "type": "Function",
+        "default": "(items, index, isDescending) => {}",
         "source": "data-iterable"
       },
       {
         "name": "value",
         "type": "Array",
+        "default": [],
         "source": "data-iterable"
       },
       {
         "name": "items",
         "type": "Array",
+        "default": [],
         "source": "data-iterable"
       },
       {
@@ -1390,7 +1410,8 @@ module.exports = {
       {
         "name": "pagination",
         "type": "Object",
-        "source": "data-iterable"
+        "source": "data-iterable",
+        "sync": true
       },
       {
         "name": "contentTag",
@@ -1465,37 +1486,37 @@ module.exports = {
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "light",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "expand",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "data-iterable"
       },
       {
         "name": "hideActions",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "data-iterable"
       },
       {
         "name": "disableInitialSort",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "data-iterable"
       },
       {
         "name": "mustSort",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "data-iterable"
       },
       {
@@ -1507,6 +1528,15 @@ module.exports = {
       {
         "name": "rowsPerPageItems",
         "type": "Array",
+        "default": [
+          5,
+          10,
+          25,
+          {
+            "text": "All",
+            "value": -1
+          }
+        ],
         "source": "data-iterable"
       },
       {
@@ -1532,27 +1562,32 @@ module.exports = {
       },
       {
         "name": "filter",
-        "type": "Any",
+        "type": "Function",
+        "default": "(val, search) => {}",
         "source": "data-iterable"
       },
       {
         "name": "customFilter",
-        "type": "Any",
+        "type": "Function",
+        "default": "(items, search, filter, headers) => {}",
         "source": "data-iterable"
       },
       {
         "name": "customSort",
-        "type": "Any",
+        "type": "Function",
+        "default": "(items, index, isDescending) => {}",
         "source": "data-iterable"
       },
       {
         "name": "value",
         "type": "Array",
+        "default": [],
         "source": "data-iterable"
       },
       {
         "name": "items",
         "type": "Array",
+        "default": [],
         "source": "data-iterable"
       },
       {
@@ -1570,11 +1605,13 @@ module.exports = {
       {
         "name": "pagination",
         "type": "Object",
-        "source": "data-iterable"
+        "source": "data-iterable",
+        "sync": true
       },
       {
         "name": "headers",
         "type": "Array",
+        "default": [],
         "source": null
       },
       {
@@ -1586,7 +1623,7 @@ module.exports = {
       {
         "name": "hideHeaders",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       }
     ],
@@ -1649,13 +1686,13 @@ module.exports = {
       {
         "name": "large",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "lazy",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -1688,25 +1725,25 @@ module.exports = {
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "light",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "actions",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "picker"
       },
       {
         "name": "autosave",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "picker"
       },
       {
@@ -1718,19 +1755,19 @@ module.exports = {
       {
         "name": "landscape",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "picker"
       },
       {
         "name": "noTitle",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "picker"
       },
       {
         "name": "scrollable",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "picker"
       },
       {
@@ -1744,8 +1781,9 @@ module.exports = {
         "type": [
           "Array",
           "Object",
-          "Any"
+          "Function"
         ],
+        "default": null,
         "source": null
       },
       {
@@ -1756,8 +1794,8 @@ module.exports = {
       },
       {
         "name": "dayFormat",
-        "type": "Any",
-        "default": "undefined",
+        "type": "Function",
+        "default": "null",
         "source": null
       },
       {
@@ -1771,8 +1809,8 @@ module.exports = {
       },
       {
         "name": "headerDateFormat",
-        "type": "Any",
-        "default": "undefined",
+        "type": "Function",
+        "default": "null",
         "source": null
       },
       {
@@ -1783,8 +1821,8 @@ module.exports = {
       },
       {
         "name": "monthFormat",
-        "type": "Any",
-        "default": "undefined",
+        "type": "Function",
+        "default": "null",
         "source": null
       },
       {
@@ -1795,8 +1833,8 @@ module.exports = {
       },
       {
         "name": "titleDateFormat",
-        "type": "Any",
-        "default": "undefined",
+        "type": "Function",
+        "default": "null",
         "source": null
       },
       {
@@ -1807,8 +1845,8 @@ module.exports = {
       },
       {
         "name": "yearFormat",
-        "type": "Any",
-        "default": "undefined",
+        "type": "Function",
+        "default": "null",
         "source": null
       },
       {
@@ -1829,7 +1867,7 @@ module.exports = {
       {
         "name": "lazy",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "bootable"
       },
       {
@@ -1851,7 +1889,7 @@ module.exports = {
       {
         "name": "hideOverlay",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "overlayable"
       },
       {
@@ -1863,25 +1901,25 @@ module.exports = {
       {
         "name": "disabled",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "persistent",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "fullscreen",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "fullWidth",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -1911,7 +1949,7 @@ module.exports = {
       {
         "name": "scrollable",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -1942,19 +1980,19 @@ module.exports = {
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "light",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "inset",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       }
     ],
@@ -1967,37 +2005,37 @@ module.exports = {
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "light",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "expand",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "focusable",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "inset",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "popout",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       }
     ],
@@ -2013,7 +2051,7 @@ module.exports = {
       {
         "name": "lazy",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "bootable"
       },
       {
@@ -2025,13 +2063,13 @@ module.exports = {
       {
         "name": "hideActions",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "ripple",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       }
     ],
@@ -2049,19 +2087,19 @@ module.exports = {
       {
         "name": "absolute",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "applicationable"
       },
       {
         "name": "app",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "applicationable"
       },
       {
         "name": "fixed",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "applicationable"
       },
       {
@@ -2073,13 +2111,13 @@ module.exports = {
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "light",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
@@ -2094,7 +2132,7 @@ module.exports = {
       {
         "name": "inset",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       }
     ],
@@ -2112,13 +2150,13 @@ module.exports = {
       {
         "name": "value",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "lazyValidation",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       }
     ],
@@ -2143,18 +2181,6 @@ module.exports = {
   "v-container": {
     "props": [
       {
-        "name": "grid-list-{xs through xl}",
-        "type": "Boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "fluid",
-        "type": "Boolean",
-        "default": "false",
-        "source": null
-      },
-      {
         "name": "id",
         "type": "String",
         "default": "undefined",
@@ -2164,6 +2190,18 @@ module.exports = {
         "name": "tag",
         "type": "String",
         "default": "div",
+        "source": null
+      },
+      {
+        "name": "grid-list-{xs through xl}",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "fluid",
+        "type": "Boolean",
+        "default": "false",
         "source": null
       },
       {
@@ -2280,6 +2318,18 @@ module.exports = {
   "v-flex": {
     "props": [
       {
+        "name": "id",
+        "type": "String",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "tag",
+        "type": "String",
+        "default": "div",
+        "source": null
+      },
+      {
         "name": "offset-(size)(0-12)",
         "type": "Boolean",
         "default": "false",
@@ -2295,18 +2345,6 @@ module.exports = {
         "name": "(size)(1-12)",
         "type": "Boolean",
         "default": "false",
-        "source": null
-      },
-      {
-        "name": "id",
-        "type": "String",
-        "default": "undefined",
-        "source": null
-      },
-      {
-        "name": "tag",
-        "type": "String",
-        "default": "div",
         "source": null
       },
       {
@@ -2423,18 +2461,6 @@ module.exports = {
   "v-layout": {
     "props": [
       {
-        "name": "row",
-        "type": "Boolean",
-        "default": "true",
-        "source": null
-      },
-      {
-        "name": "column",
-        "type": "Boolean",
-        "default": "false",
-        "source": null
-      },
-      {
         "name": "id",
         "type": "String",
         "default": "undefined",
@@ -2444,6 +2470,18 @@ module.exports = {
         "name": "tag",
         "type": "String",
         "default": "div",
+        "source": null
+      },
+      {
+        "name": "row",
+        "type": "Boolean",
+        "default": "true",
+        "source": null
+      },
+      {
+        "name": "column",
+        "type": "Boolean",
+        "default": "false",
         "source": null
       },
       {
@@ -2572,43 +2610,43 @@ module.exports = {
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "light",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "disabled",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "large",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "left",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "medium",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "right",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -2623,13 +2661,13 @@ module.exports = {
       {
         "name": "small",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "xLarge",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       }
     ],
@@ -2658,19 +2696,19 @@ module.exports = {
       {
         "name": "append",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "routable"
       },
       {
         "name": "disabled",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "routable"
       },
       {
         "name": "exact",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "routable"
       },
       {
@@ -2700,13 +2738,13 @@ module.exports = {
       {
         "name": "nuxt",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "routable"
       },
       {
         "name": "replace",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "routable"
       },
       {
@@ -2733,13 +2771,13 @@ module.exports = {
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "light",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
@@ -2775,43 +2813,43 @@ module.exports = {
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "light",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "dense",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "expand",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "subheader",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "threeLine",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "twoLine",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       }
     ],
@@ -2828,7 +2866,7 @@ module.exports = {
       {
         "name": "lazy",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "bootable"
       },
       {
@@ -2852,7 +2890,7 @@ module.exports = {
       {
         "name": "disabled",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -2864,7 +2902,7 @@ module.exports = {
       {
         "name": "noAction",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -2876,7 +2914,7 @@ module.exports = {
       {
         "name": "subGroup",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       }
     ],
@@ -2903,19 +2941,19 @@ module.exports = {
       {
         "name": "append",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "routable"
       },
       {
         "name": "disabled",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "routable"
       },
       {
         "name": "exact",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "routable"
       },
       {
@@ -2945,13 +2983,13 @@ module.exports = {
       {
         "name": "nuxt",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "routable"
       },
       {
         "name": "replace",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "routable"
       },
       {
@@ -2984,13 +3022,13 @@ module.exports = {
       {
         "name": "avatar",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "inactive",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       }
     ],
@@ -3078,7 +3116,7 @@ module.exports = {
       {
         "name": "lazy",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "bootable"
       },
       {
@@ -3100,49 +3138,49 @@ module.exports = {
       {
         "name": "absolute",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "positionable"
       },
       {
         "name": "bottom",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "positionable"
       },
       {
         "name": "fixed",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "positionable"
       },
       {
         "name": "left",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "positionable"
       },
       {
         "name": "right",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "positionable"
       },
       {
         "name": "top",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "positionable"
       },
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "light",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
@@ -3154,7 +3192,7 @@ module.exports = {
       {
         "name": "allowOverflow",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "menuable"
       },
       {
@@ -3220,7 +3258,7 @@ module.exports = {
       {
         "name": "offsetOverflow",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "menuable"
       },
       {
@@ -3253,31 +3291,31 @@ module.exports = {
       {
         "name": "auto",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "closeOnClick",
         "type": "Boolean",
-        "default": "True",
+        "default": "true",
         "source": null
       },
       {
         "name": "closeOnContentClick",
         "type": "Boolean",
-        "default": "True",
+        "default": "true",
         "source": null
       },
       {
         "name": "disabled",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "fullWidth",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -3289,25 +3327,25 @@ module.exports = {
       {
         "name": "offsetX",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "offsetY",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "openOnClick",
         "type": "Boolean",
-        "default": "True",
+        "default": "true",
         "source": null
       },
       {
         "name": "openOnHover",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -3347,55 +3385,55 @@ module.exports = {
       {
         "name": "absolute",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "applicationable"
       },
       {
         "name": "app",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "applicationable"
       },
       {
         "name": "fixed",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "applicationable"
       },
       {
         "name": "hideOverlay",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "overlayable"
       },
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "light",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "clipped",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "disableRouteWatcher",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "disableResizeWatcher",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -3410,13 +3448,13 @@ module.exports = {
       {
         "name": "floating",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "miniVariant",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -3440,31 +3478,31 @@ module.exports = {
       {
         "name": "permanent",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "right",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "stateless",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "temporary",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "touchless",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -3504,13 +3542,13 @@ module.exports = {
       {
         "name": "circle",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "disabled",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -3593,18 +3631,13 @@ module.exports = {
       {
         "name": "button",
         "type": "Boolean",
-        "default": "False",
-        "source": null
-      },
-      {
-        "name": "fill",
-        "type": "String",
+        "default": "false",
         "source": null
       },
       {
         "name": "indeterminate",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -3653,7 +3686,7 @@ module.exports = {
       {
         "name": "active",
         "type": "Boolean",
-        "default": "True",
+        "default": "true",
         "source": null
       },
       {
@@ -3692,13 +3725,13 @@ module.exports = {
       {
         "name": "indeterminate",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "query",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -3729,19 +3762,19 @@ module.exports = {
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "light",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "error",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "validatable"
       },
       {
@@ -3750,17 +3783,19 @@ module.exports = {
           "String",
           "Array"
         ],
+        "default": [],
         "source": "validatable"
       },
       {
         "name": "rules",
         "type": "Array",
+        "default": [],
         "source": "validatable"
       },
       {
         "name": "validateOnBlur",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "validatable"
       },
       {
@@ -3771,14 +3806,14 @@ module.exports = {
       },
       {
         "name": "appendIconCb",
-        "type": "Any",
-        "default": "undefined",
+        "type": "Function",
+        "default": "null",
         "source": "input"
       },
       {
         "name": "disabled",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "input"
       },
       {
@@ -3790,7 +3825,7 @@ module.exports = {
       {
         "name": "hideDetails",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "input"
       },
       {
@@ -3802,7 +3837,7 @@ module.exports = {
       {
         "name": "persistentHint",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "input"
       },
       {
@@ -3819,20 +3854,20 @@ module.exports = {
       },
       {
         "name": "prependIconCb",
-        "type": "Any",
-        "default": "undefined",
+        "type": "Function",
+        "default": "null",
         "source": "input"
       },
       {
         "name": "readonly",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "input"
       },
       {
         "name": "required",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "input"
       },
       {
@@ -3844,6 +3879,10 @@ module.exports = {
       {
         "name": "toggleKeys",
         "type": "Array",
+        "default": [
+          13,
+          32
+        ],
         "source": "input"
       },
       {
@@ -3855,7 +3894,7 @@ module.exports = {
       {
         "name": "column",
         "type": "Boolean",
-        "default": "True",
+        "default": "true",
         "source": null
       },
       {
@@ -3867,7 +3906,7 @@ module.exports = {
       {
         "name": "mandatory",
         "type": "Boolean",
-        "default": "True",
+        "default": "true",
         "source": null
       },
       {
@@ -3879,7 +3918,7 @@ module.exports = {
       {
         "name": "row",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       }
     ],
@@ -3914,19 +3953,19 @@ module.exports = {
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "light",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "disabled",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -3954,7 +3993,8 @@ module.exports = {
     "props": [
       {
         "name": "filter",
-        "type": "Any",
+        "type": "Function",
+        "default": "(item, queryText, itemText) => {}",
         "source": null
       },
       {
@@ -3981,19 +4021,19 @@ module.exports = {
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "light",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "error",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "validatable"
       },
       {
@@ -4002,17 +4042,19 @@ module.exports = {
           "String",
           "Array"
         ],
+        "default": [],
         "source": "validatable"
       },
       {
         "name": "rules",
         "type": "Array",
+        "default": [],
         "source": "validatable"
       },
       {
         "name": "validateOnBlur",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "validatable"
       },
       {
@@ -4023,14 +4065,14 @@ module.exports = {
       },
       {
         "name": "appendIconCb",
-        "type": "Any",
-        "default": "undefined",
+        "type": "Function",
+        "default": "null",
         "source": "input"
       },
       {
         "name": "disabled",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "input"
       },
       {
@@ -4042,7 +4084,7 @@ module.exports = {
       {
         "name": "hideDetails",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "input"
       },
       {
@@ -4054,7 +4096,7 @@ module.exports = {
       {
         "name": "persistentHint",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "input"
       },
       {
@@ -4071,20 +4113,20 @@ module.exports = {
       },
       {
         "name": "prependIconCb",
-        "type": "Any",
-        "default": "undefined",
+        "type": "Function",
+        "default": "null",
         "source": "input"
       },
       {
         "name": "readonly",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "input"
       },
       {
         "name": "required",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "input"
       },
       {
@@ -4096,6 +4138,10 @@ module.exports = {
       {
         "name": "toggleKeys",
         "type": "Array",
+        "default": [
+          13,
+          32
+        ],
         "source": "input"
       },
       {
@@ -4107,7 +4153,7 @@ module.exports = {
       {
         "name": "dontFillMaskBlanks",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "maskable"
       },
       {
@@ -4122,25 +4168,25 @@ module.exports = {
       {
         "name": "returnMaskedValue",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "maskable"
       },
       {
         "name": "attach",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "auto",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "autocomplete",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -4152,25 +4198,25 @@ module.exports = {
       {
         "name": "cacheItems",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "chips",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "clearable",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "combobox",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -4191,30 +4237,31 @@ module.exports = {
       {
         "name": "deletableChips",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "dense",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "editable",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "hideSelected",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "items",
         "type": "Array",
+        "default": [],
         "source": null
       },
       {
@@ -4263,31 +4310,31 @@ module.exports = {
       {
         "name": "multiple",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "multiLine",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "openOnClear",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "overflow",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "returnObject",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -4299,42 +4346,43 @@ module.exports = {
       {
         "name": "segmented",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "singleLine",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "tags",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "valueComparator",
-        "type": "Any",
+        "type": "Function",
+        "default": "(a, b) => {}",
         "source": null
       },
       {
         "name": "flat",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "soloable"
       },
       {
         "name": "soloInverted",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "soloable"
       },
       {
         "name": "solo",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "soloable"
       }
     ],
@@ -4379,19 +4427,19 @@ module.exports = {
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "light",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "error",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "validatable"
       },
       {
@@ -4400,17 +4448,19 @@ module.exports = {
           "String",
           "Array"
         ],
+        "default": [],
         "source": "validatable"
       },
       {
         "name": "rules",
         "type": "Array",
+        "default": [],
         "source": "validatable"
       },
       {
         "name": "validateOnBlur",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "validatable"
       },
       {
@@ -4421,14 +4471,14 @@ module.exports = {
       },
       {
         "name": "appendIconCb",
-        "type": "Any",
-        "default": "undefined",
+        "type": "Function",
+        "default": "null",
         "source": "input"
       },
       {
         "name": "disabled",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "input"
       },
       {
@@ -4440,7 +4490,7 @@ module.exports = {
       {
         "name": "hideDetails",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "input"
       },
       {
@@ -4452,7 +4502,7 @@ module.exports = {
       {
         "name": "persistentHint",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "input"
       },
       {
@@ -4469,20 +4519,20 @@ module.exports = {
       },
       {
         "name": "prependIconCb",
-        "type": "Any",
-        "default": "undefined",
+        "type": "Function",
+        "default": "null",
         "source": "input"
       },
       {
         "name": "readonly",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "input"
       },
       {
         "name": "required",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "input"
       },
       {
@@ -4494,6 +4544,10 @@ module.exports = {
       {
         "name": "toggleKeys",
         "type": "Array",
+        "default": [
+          13,
+          32
+        ],
         "source": "input"
       },
       {
@@ -4535,7 +4589,7 @@ module.exports = {
       {
         "name": "ticks",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -4547,7 +4601,7 @@ module.exports = {
       {
         "name": "thumbLabel",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -4582,37 +4636,37 @@ module.exports = {
       {
         "name": "absolute",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "bottom",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "left",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "multiLine",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "right",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "top",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -4624,7 +4678,7 @@ module.exports = {
       {
         "name": "vertical",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       }
     ],
@@ -4641,37 +4695,37 @@ module.exports = {
       {
         "name": "absolute",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "positionable"
       },
       {
         "name": "bottom",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "positionable"
       },
       {
         "name": "fixed",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "positionable"
       },
       {
         "name": "left",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "positionable"
       },
       {
         "name": "right",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "positionable"
       },
       {
         "name": "top",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "positionable"
       },
       {
@@ -4689,7 +4743,7 @@ module.exports = {
       {
         "name": "openOnHover",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -4713,31 +4767,31 @@ module.exports = {
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "light",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "nonLinear",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "altLabels",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "vertical",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -4779,7 +4833,7 @@ module.exports = {
       {
         "name": "complete",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -4803,12 +4857,13 @@ module.exports = {
       {
         "name": "editable",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "rules",
         "type": "Array",
+        "default": [],
         "source": null
       },
       {
@@ -4845,19 +4900,19 @@ module.exports = {
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "light",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "inset",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       }
     ],
@@ -4891,19 +4946,19 @@ module.exports = {
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "light",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "error",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "validatable"
       },
       {
@@ -4912,17 +4967,19 @@ module.exports = {
           "String",
           "Array"
         ],
+        "default": [],
         "source": "validatable"
       },
       {
         "name": "rules",
         "type": "Array",
+        "default": [],
         "source": "validatable"
       },
       {
         "name": "validateOnBlur",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "validatable"
       },
       {
@@ -4933,14 +4990,14 @@ module.exports = {
       },
       {
         "name": "appendIconCb",
-        "type": "Any",
-        "default": "undefined",
+        "type": "Function",
+        "default": "null",
         "source": "input"
       },
       {
         "name": "disabled",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "input"
       },
       {
@@ -4952,7 +5009,7 @@ module.exports = {
       {
         "name": "hideDetails",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "input"
       },
       {
@@ -4964,7 +5021,7 @@ module.exports = {
       {
         "name": "persistentHint",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "input"
       },
       {
@@ -4981,20 +5038,20 @@ module.exports = {
       },
       {
         "name": "prependIconCb",
-        "type": "Any",
-        "default": "undefined",
+        "type": "Function",
+        "default": "null",
         "source": "input"
       },
       {
         "name": "readonly",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "input"
       },
       {
         "name": "required",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "input"
       },
       {
@@ -5006,6 +5063,10 @@ module.exports = {
       {
         "name": "toggleKeys",
         "type": "Array",
+        "default": [
+          13,
+          32
+        ],
         "source": "input"
       },
       {
@@ -5063,19 +5124,19 @@ module.exports = {
       {
         "name": "absolute",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "applicationable"
       },
       {
         "name": "app",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "applicationable"
       },
       {
         "name": "fixed",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "applicationable"
       },
       {
@@ -5087,13 +5148,13 @@ module.exports = {
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "light",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
@@ -5108,19 +5169,19 @@ module.exports = {
       {
         "name": "lightsOut",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "status",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "window",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       }
     ],
@@ -5141,7 +5202,7 @@ module.exports = {
       {
         "name": "alignWithTitle",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -5153,19 +5214,19 @@ module.exports = {
       {
         "name": "centered",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "fixedTabs",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "grow",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -5180,13 +5241,13 @@ module.exports = {
       {
         "name": "hideSlider",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "iconsAndText",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -5207,13 +5268,13 @@ module.exports = {
       {
         "name": "right",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "showArrows",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -5234,13 +5295,13 @@ module.exports = {
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "light",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       }
     ],
@@ -5262,19 +5323,19 @@ module.exports = {
       {
         "name": "append",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "routable"
       },
       {
         "name": "disabled",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "routable"
       },
       {
         "name": "exact",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "routable"
       },
       {
@@ -5304,13 +5365,13 @@ module.exports = {
       {
         "name": "nuxt",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "routable"
       },
       {
         "name": "replace",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "routable"
       },
       {
@@ -5345,13 +5406,13 @@ module.exports = {
       {
         "name": "cycle",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "touchless",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -5373,7 +5434,7 @@ module.exports = {
       {
         "name": "lazy",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "bootable"
       },
       {
@@ -5439,19 +5500,19 @@ module.exports = {
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "light",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "error",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "validatable"
       },
       {
@@ -5460,17 +5521,19 @@ module.exports = {
           "String",
           "Array"
         ],
+        "default": [],
         "source": "validatable"
       },
       {
         "name": "rules",
         "type": "Array",
+        "default": [],
         "source": "validatable"
       },
       {
         "name": "validateOnBlur",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "validatable"
       },
       {
@@ -5481,14 +5544,14 @@ module.exports = {
       },
       {
         "name": "appendIconCb",
-        "type": "Any",
-        "default": "undefined",
+        "type": "Function",
+        "default": "null",
         "source": "input"
       },
       {
         "name": "disabled",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "input"
       },
       {
@@ -5500,7 +5563,7 @@ module.exports = {
       {
         "name": "hideDetails",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "input"
       },
       {
@@ -5512,7 +5575,7 @@ module.exports = {
       {
         "name": "persistentHint",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "input"
       },
       {
@@ -5529,20 +5592,20 @@ module.exports = {
       },
       {
         "name": "prependIconCb",
-        "type": "Any",
-        "default": "undefined",
+        "type": "Function",
+        "default": "null",
         "source": "input"
       },
       {
         "name": "readonly",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "input"
       },
       {
         "name": "required",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "input"
       },
       {
@@ -5554,6 +5617,10 @@ module.exports = {
       {
         "name": "toggleKeys",
         "type": "Array",
+        "default": [
+          13,
+          32
+        ],
         "source": "input"
       },
       {
@@ -5565,7 +5632,7 @@ module.exports = {
       {
         "name": "dontFillMaskBlanks",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "maskable"
       },
       {
@@ -5580,49 +5647,49 @@ module.exports = {
       {
         "name": "returnMaskedValue",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "maskable"
       },
       {
         "name": "flat",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "soloable"
       },
       {
         "name": "soloInverted",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "soloable"
       },
       {
         "name": "solo",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "soloable"
       },
       {
         "name": "autofocus",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "autoGrow",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "box",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "clearable",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -5638,13 +5705,13 @@ module.exports = {
       {
         "name": "fullWidth",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "multiLine",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -5662,7 +5729,7 @@ module.exports = {
       {
         "name": "singleLine",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -5674,7 +5741,7 @@ module.exports = {
       {
         "name": "textarea",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -5705,25 +5772,25 @@ module.exports = {
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "light",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "actions",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "picker"
       },
       {
         "name": "autosave",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "picker"
       },
       {
@@ -5735,19 +5802,19 @@ module.exports = {
       {
         "name": "landscape",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "picker"
       },
       {
         "name": "noTitle",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "picker"
       },
       {
         "name": "scrollable",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "picker"
       },
       {
@@ -5767,8 +5834,9 @@ module.exports = {
         "type": [
           "Array",
           "Object",
-          "Any"
+          "Function"
         ],
+        "default": null,
         "source": null
       },
       {
@@ -5776,8 +5844,9 @@ module.exports = {
         "type": [
           "Array",
           "Object",
-          "Any"
+          "Function"
         ],
+        "default": null,
         "source": null
       }
     ],
@@ -5792,19 +5861,19 @@ module.exports = {
       {
         "name": "absolute",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "applicationable"
       },
       {
         "name": "app",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "applicationable"
       },
       {
         "name": "fixed",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "applicationable"
       },
       {
@@ -5816,43 +5885,43 @@ module.exports = {
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "light",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "card",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "clippedLeft",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "clippedRight",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "dense",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "extended",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -5867,13 +5936,13 @@ module.exports = {
       {
         "name": "flat",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "floating",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -5888,25 +5957,25 @@ module.exports = {
       {
         "name": "invertedScroll",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "manualScroll",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "prominent",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
         "name": "scrollOffScreen",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -5924,7 +5993,7 @@ module.exports = {
       {
         "name": "tabs",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       }
     ],
@@ -5980,7 +6049,7 @@ module.exports = {
       {
         "name": "lazy",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "bootable"
       },
       {
@@ -6002,49 +6071,49 @@ module.exports = {
       {
         "name": "absolute",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "positionable"
       },
       {
         "name": "bottom",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "positionable"
       },
       {
         "name": "fixed",
         "type": "Boolean",
-        "default": "True",
+        "default": "true",
         "source": "positionable"
       },
       {
         "name": "left",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "positionable"
       },
       {
         "name": "right",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "positionable"
       },
       {
         "name": "top",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "positionable"
       },
       {
         "name": "dark",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
         "name": "light",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "themeable"
       },
       {
@@ -6056,7 +6125,7 @@ module.exports = {
       {
         "name": "allowOverflow",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "menuable"
       },
       {
@@ -6122,7 +6191,7 @@ module.exports = {
       {
         "name": "offsetOverflow",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": "menuable"
       },
       {
@@ -6161,7 +6230,7 @@ module.exports = {
       {
         "name": "disabled",
         "type": "Boolean",
-        "default": "False",
+        "default": "false",
         "source": null
       },
       {
@@ -6364,7 +6433,7 @@ module.exports = {
       {
         "name": "css",
         "type": "Boolean",
-        "default": "True",
+        "default": "true",
         "source": null
       },
       {
@@ -6381,7 +6450,7 @@ module.exports = {
       {
         "name": "css",
         "type": "Boolean",
-        "default": "True",
+        "default": "true",
         "source": null
       },
       {
