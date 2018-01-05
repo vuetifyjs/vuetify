@@ -30,6 +30,8 @@ const dimensions = {
  * As well as be manually positioned
  */
 export default {
+  name: 'menuable',
+
   mixins: [
     Positionable,
     Stackable,
@@ -217,7 +219,6 @@ export default {
       return top < 12 ? 12 : top
     },
     callActivate () {
-      this.checkForWindow()
       if (!this.hasWindow) return
 
       this.activate()
@@ -306,10 +307,12 @@ export default {
       return el.style.display !== 'none'
     },
     updateDimensions () {
+      this.checkForWindow()
+
       const dimensions = {}
 
       // Activator should already be shown
-      dimensions.activator = !this.hasActivator
+      dimensions.activator = !this.hasActivator || this.absolute
         ? this.absolutePosition()
         : this.measure(this.getActivator())
 

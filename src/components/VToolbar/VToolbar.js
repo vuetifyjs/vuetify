@@ -18,7 +18,8 @@ export default {
       'clippedLeft',
       'clippedRight',
       'computedHeight',
-      'invertedScroll'
+      'invertedScroll',
+      'manualScroll'
     ]),
     Colorable,
     SSRBootable,
@@ -89,6 +90,7 @@ export default {
       return this.heights.mobile
     },
     computedExtensionHeight () {
+      if (this.tabs) return 48
       if (this.extensionHeight) return parseInt(this.extensionHeight)
 
       return this.computedContentHeight
@@ -209,7 +211,7 @@ export default {
      * @return {number}
      */
     updateApplication () {
-      return this.invertedScroll
+      return this.invertedScroll || this.manualScroll
         ? 0
         : this.computedHeight
     }

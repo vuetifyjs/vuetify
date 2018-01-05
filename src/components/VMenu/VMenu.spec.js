@@ -303,10 +303,10 @@ test('VMenu.js', ({ mount }) => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
-  it('should render component with custom positionAbsolutely and match snapshot', () => {
+  it('should render component with custom absolute and match snapshot', () => {
     const wrapper = mount(VMenu, {
       propsData: {
-        positionAbsolutely: true
+        absolute: true
       }
     })
 

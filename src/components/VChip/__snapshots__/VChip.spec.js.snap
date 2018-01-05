@@ -8,7 +8,7 @@ exports[`VChip.vue should be removable 1`] = `
   <span class="chip__content">
     <div class="chip__close">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
       >
         cancel
       </i>
@@ -27,7 +27,7 @@ exports[`VChip.vue should be removable 2`] = `
   <span class="chip__content">
     <div class="chip__close">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
       >
         cancel
       </i>

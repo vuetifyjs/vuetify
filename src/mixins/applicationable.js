@@ -1,5 +1,7 @@
 export default function applicationable (value, events = []) {
   return {
+    name: 'applicationable',
+
     props: {
       absolute: Boolean,
       app: Boolean,

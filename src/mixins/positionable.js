@@ -1,4 +1,6 @@
 export default {
+  name: 'positionable',
+
   props: {
     absolute: Boolean,
     bottom: Boolean,

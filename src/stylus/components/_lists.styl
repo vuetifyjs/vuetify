@@ -12,15 +12,14 @@ list($material)
   .list__tile__mask
     color: $material.text.disabled
 
+    background: $material.expansion-panels.focus
+    
   .list__tile--link:hover,
   .list__tile--highlighted,
   .list__group__header:hover
-    background: $material.expansion-panels.focus
-    
-  .list__group--active
-    &:before,
-    &:after
-      background: $material.dividers
+  .list__group--active:before,
+  .list__group--active:after
+    background: $material.dividers
       
   .list__group--disabled
     .list__tile
