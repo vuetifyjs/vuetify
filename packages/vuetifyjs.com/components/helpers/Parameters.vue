@@ -71,10 +71,10 @@
         let devPrepend = ''
         const camelSource = camel(item.source)
 
-        const specialLevelDesc = `${this.namespace}.${this.type}.${this.target}.${name}`
-        const componentLevelDesc = `${this.namespace}.${this.type}.${name}`
-        const mixinDesc = `Mixins.${camelSource}.${this.type}.${name}`
-        const genericDesc = `Generic.${capitalize(this.type)}.${name}`
+        const specialLevelDesc = `${this.namespace}.${this.type}.${this.target}['${name}']`
+        const componentLevelDesc = `${this.namespace}.${this.type}['${name}']`
+        const mixinDesc = `Mixins.${camelSource}.${this.type}['${name}']`
+        const genericDesc = `Generic.${capitalize(this.type)}['${name}']`
 
         if (this.$te(specialLevelDesc)) {
           description = this.$t(specialLevelDesc)
