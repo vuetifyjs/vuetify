@@ -121,6 +121,13 @@ const sharedGridProps = [
   }
 ]
 
+dataIterableProps = [
+  {
+    name: 'pagination',
+    sync: true
+  }
+]
+
 module.exports = {
   'v-app': {
     slots: ['default']
@@ -178,6 +185,7 @@ module.exports = {
     ].concat(sharedGridProps)
   },
   'v-data-iterator': {
+    props: dataIterableProps,
     slots: [
       { name: 'footer', source: 'data-iterable' }
     ],
@@ -187,6 +195,7 @@ module.exports = {
     ]
   },
   'v-data-table': {
+    props: dataIterableProps,
     slots: [
       { name: 'footer', source: 'data-iterable' }
     ],
