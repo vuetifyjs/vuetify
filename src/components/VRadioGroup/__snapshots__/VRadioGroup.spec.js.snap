@@ -15,12 +15,12 @@ exports[`VRadioGroup.vue should be in error when v-radio-group is 1`] = `
       </label>
       <div class="input-group__input">
         <i aria-hidden="true"
-           class="material-icons icon icon--selection-control fade-transition-leave fade-transition-leave-active"
+           class="icon icon--selection-control material-icons fade-transition-leave fade-transition-leave-active"
         >
           radio_button_unchecked
         </i>
         <i aria-hidden="true"
-           class="material-icons icon icon--selection-control icon--radio fade-transition-enter fade-transition-enter-active"
+           class="icon icon--selection-control material-icons icon--radio fade-transition-enter fade-transition-enter-active"
            style="-webkit-transform-origin: top center 0;"
         >
           radio_button_checked
@@ -56,12 +56,12 @@ exports[`VRadioGroup.vue should be in error when v-radio-group is 2`] = `
       </label>
       <div class="input-group__input">
         <i aria-hidden="true"
-           class="material-icons icon icon--selection-control fade-transition-leave fade-transition-leave-active"
+           class="icon icon--selection-control material-icons fade-transition-leave fade-transition-leave-active"
         >
           radio_button_unchecked
         </i>
         <i aria-hidden="true"
-           class="material-icons icon icon--selection-control icon--radio fade-transition-enter fade-transition-enter-active"
+           class="icon icon--selection-control material-icons icon--radio fade-transition-enter fade-transition-enter-active"
            style="-webkit-transform-origin: top center 0;"
         >
           radio_button_checked
