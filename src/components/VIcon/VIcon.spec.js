@@ -7,7 +7,7 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     const wrapper = mount(VIcon, context)
 
     expect(wrapper.text()).toBe('add')
-    expect(wrapper.element.className).toBe('material-icons icon')
+    expect(wrapper.element.className).toBe('icon material-icons')
   })
 
   it('should render a colored component', () => {
@@ -81,7 +81,7 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     const wrapper = mount(VIcon, context)
 
     expect(wrapper.text()).toBe('')
-    expect(wrapper.element.className).toBe('fa icon fa-add')
+    expect(wrapper.element.className).toBe('icon fa fa-add')
   })
 
   it('should support font awesome 5 icons when using <icon>- prefix', () => {
@@ -98,7 +98,7 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     }))
 
     expect(wrapper.text()).toBe('')
-    expect(wrapper.element.className).toBe('fa icon fa-home')
+    expect(wrapper.element.className).toBe('icon fa fa-home')
   })
 
   it('should allow the use of v-html', () => {
@@ -107,7 +107,7 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     }))
 
     expect(wrapper.text()).toBe('')
-    expect(wrapper.element.className).toBe('fa icon fa-home')
+    expect(wrapper.element.className).toBe('icon fa fa-home')
   })
 
   it('set font size from helper prop', async () => {
@@ -126,5 +126,18 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
 
     const xLarge = iconFactory('xLarge')
     expect(xLarge.html()).toMatchSnapshot()
+  })
+
+  it('should have proper classname', () => {
+    const wrapper = mount(VIcon, functionalContext({
+      props: {
+        color: 'primary'
+      },
+      domProps: {
+        innerHTML: 'fa-lock'
+      }
+    }))
+
+    expect(wrapper.element.className).toBe('icon primary--text fa fa-lock')
   })
 })
