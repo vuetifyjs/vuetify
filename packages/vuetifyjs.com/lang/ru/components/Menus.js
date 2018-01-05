@@ -1,41 +1,41 @@
 export default {
-  header: 'Menu',
-  headerText: 'The `v-menu` component shows a menu at the position of the element used to activate it.',
+  header: 'Меню',
+  headerText: 'Компонент `v-menu` показывает меню в позиции элемента, который его активирует.',
   components: ['v-menu'],
   examples: [{
     activator: {
-      header: 'Activator',
-      desc: 'Remember to put the element that activates the menu in the `activator` slot.',
+      header: 'Активатор',
+      desc: 'Не забудьте включить элемент, который активирует меню в слоте `activator`.',
       uninverted: true
     },
     absolute: {
       header: 'Absolute position',
-      desc: 'Menus can also be placed absolutely on top of the activator element using the `absolute` prop. Try clicking anywhere on the image.',
+      desc: 'Меню также могут быть помещены абсолютно поверх элемента активатора с помощью свойства `absolute`. Попробуйте кликнуть в любом месте изображения.',
       uninverted: true
     },
     absoluteWithoutActivator: {
-      header: 'Absolute position without activator',
-      desc: 'Menus can also be used without an activator by using `absolute` together with the props `position-x` and `position-y`. Try right-clicking anywhere on the image.',
+      header: 'Абсолютное положение без активатора',
+      desc: 'Меню также можно использовать без активатора, используя `absolute` вместе со свойствами `position-x` и `position-y`. Попробуйте кликнуть правой кнопкой мыши в любом месте изображения.',
       uninverted: true
     },
     hover: {
       header: 'Hover',
-      desc: 'Menus can be accessed using hover instead of clicking with the `open-on-hover` prop.',
+      desc: 'Доступ к меню можно получить с помощью наведения, вместо нажатия кнопки. Используйте свойство`open-on-hover`.',
       uninverted: true
     },
     menus: {
-      header: 'Menus',
-      desc: 'Menus can be placed within almost any component.',
+      header: 'Меню',
+      desc: 'Меню можно размещать практически в любом компоненте.',
       uninverted: true
     },
     customTransition: {
-      header: 'Custom transitions',
-      desc: 'Vuetify comes with 3 standard transitions, **scale**, **slide-x** and **slide-y**. You can also create your own and pass it as the transition argument. For an example of how the stock transitions are constructed, visit <a href="https://github.com/vuetifyjs/vuetify/blob/master/src/util/helpers.js#L13" target="_blank" rel="noopener">here</a>.',
+      header: 'Пользовательские переходы',
+      desc: 'Vuetify поставляется с 3 стандартными переходами, **scale**, **slide-x** и **lide-y**. Вы также можете создать свой собственный и передать его в качестве аргумента перехода. В качестве примера того, как создаются переходы, [посетите](https://github.com/vuetifyjs/vuetify/blob/master/src/util/helpers.js#L13)',
       uninverted: true
     },
     popover: {
-      header: 'Popover menu',
-      desc: 'A menu can be configured to be static when opened, allowing it to function as a popover. This can be useful when there are multiple interactive items within the menu contents.',
+      header: 'Меню Popover',
+      desc: 'Меню можно настроить как статическое при открытии, что позволяет ему функционировать как popover. Это может быть полезно, когда в содержимом меню есть несколько интерактивных элементов.',
       uninverted: true
     }
   }]
