@@ -61,7 +61,11 @@ export default {
 
     let iconType = 'material-icons'
     const thirdPartyIcon = iconName.indexOf('-') > -1
-    if (thirdPartyIcon) iconType = iconName.slice(0, iconName.indexOf('-'))
+
+    if (thirdPartyIcon) {
+      iconType = iconName.slice(0, iconName.indexOf('-'))
+      if (['fas', 'far', 'fal', 'fab'].some(val => iconType.includes(val))) iconType = ''
+    }
 
     data.staticClass = (`${iconType} icon ${data.staticClass || ''}`).trim()
     data.attrs = data.attrs || {}
