@@ -49,7 +49,7 @@ export default {
       },
       headerless: {
         header: 'Headerless tables',
-        desc: 'Setting the <code>hide-headers</code> prop creates a headerless table.'
+        desc: 'Setting the `hide-headers` prop creates a headerless table.'
       },
       editdialog: {
         header: 'Inline Editing',
