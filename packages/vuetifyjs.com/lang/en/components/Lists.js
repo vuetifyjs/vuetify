@@ -27,7 +27,7 @@ export default {
     },
     avatarThreeLines: {
       header: 'Avatar with 3 lines',
-      desc: 'For three line lists, the subtitle will clamp vertically at 2 lines and then ellipsis. If you need more than 3 lines, it is advised to use a <router-link to="/components/cards">card</router-link>.'
+      desc: 'For three line lists, the subtitle will clamp vertically at 2 lines and then ellipsis. If you need more than 3 lines, it is advised to use a [card](/components/cards).'
     },
     avatarSubheaderTitleAndAction: {
       header: 'Avatar with title and action',
