@@ -1,35 +1,35 @@
 export default {
-  header: 'Navigation drawer',
-  headerText: 'The `v-navigation-drawer` component is what your users will utilize to navigate through the application. The navigation-drawer is pre-configured to work with or without **vue-router** right out the box.',
+  header: 'Панель навигации',
+  headerText: 'Компонент `v-navigation-drawer` - это то, что ваши пользователи будут использовать для навигации по приложению. Панель навигации предварительно настроена для работы с или без **vue-router** прямо из коробки.',
   components: ['v-navigation-drawer'],
   examples: [{
     permanent: {
-      header: 'Default',
-      desc: 'The navigation drawer is primarily used to house links to the pages in your application'
+      header: 'По умолчанию',
+      desc: 'Панель навигации в основном используются для размещения ссылок на страницы вашего приложения'
     },
     permanentClipped: {
-      header: 'Colored drawer',
-      desc: 'Navigation drawers can be customized to fit any application\'s design. While any component can be used within a drawer, the primary ones you will use are `v-list`, all of the **list** children components and `v-divider`'
+      header: 'Цветная панель',
+      desc: 'Панель навигации может быть настроена в соответствии с дизайном любого приложения. Хотя любой компонент может использоваться в панели, основными из них будут `v-list`, все дочерние компоненты **list** и` v-divider`'
     },
     permanentFloating: {
-      header: 'Permanent floating drawer',
-      desc: 'A navigation drawer can be placed inside of a card and float over the content background.'
+      header: 'Постоянно плавающая панель',
+      desc: 'Панель навигации может быть расположена внутри карты и размещаться над фоновым контентом.'
     },
     persistent: {
-      header: 'Avatars',
-      desc: 'Since drawers support the `v-list` component, you can easily create customized dashboard solutions.'
+      header: 'Аватар',
+      desc: 'Поскольку панели поддерживают компонент `v-list`, вы можете легко создавать индивидуальные решения для панели мониторинга.'
     },
     mini: {
-      header: 'Mini',
-      desc: 'The navigation drawer also has a mini-variant which can be controlled using the prop `mini-variant.sync`.'
+      header: 'Мини',
+      desc: 'В навигационной панели есть мини-вариант, который можно контролировать с помощью свойства `mini-variant.sync`.'
     },
     temporary: {
-      header: 'Temporary',
-      desc: 'A temporary drawer sits above its application and uses a scrim (overlay) to darken the background. This drawer behavior is mimicked on the persistent drawer when on mobile. Clicking outside of the drawer will cause it to close.'
+      header: 'Временная',
+      desc: 'Временная панель находится над своим приложением и использует холст (наложение), чтобы затемнить фон. Это поведение панели имитирует обычной навигации на мобильном устройстве. Клик за пределами панели приведет к ее закрытию.'
     },
     dark: {
-      header: 'Dark theme',
-      desc: 'Vuetify also supports the dark application theme. This will not override components that have default themes so in some cases it will be necessary to manually set the dark theme accents.',
+      header: 'Темная тема',
+      desc: 'Vuetify также поддерживает темную тему приложения. Это не будет отменять компоненты, которые имеют темы по умолчанию, поэтому в некоторых случаях необходимо вручную установить темные темы.',
       uninverted: true
     }
   }]
