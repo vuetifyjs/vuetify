@@ -1410,7 +1410,8 @@ module.exports = {
       {
         "name": "pagination",
         "type": "Object",
-        "source": "data-iterable"
+        "source": "data-iterable",
+        "sync": true
       },
       {
         "name": "contentTag",
