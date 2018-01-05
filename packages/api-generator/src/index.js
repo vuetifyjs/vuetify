@@ -2,11 +2,31 @@ const Vue = require('vue')
 const Vuetify = require('vuetify').default
 const fs = require('fs')
 const map = require('./map')
+const deepmerge = require('deepmerge')
+
+function arrayMerge (a, b) {
+  const arr = a.slice()
+  for (let i = 0; i < b.length; i++) {
+    const found = a.findIndex(item => item.name == b[i].name)
+    if (found >= 0) {
+      arr[found] = deepmerge(a[found], b[i])
+    } else {
+      arr.push(b[i])
+    }
+  }
+  return arr
+}
 
 Vue.use(Vuetify)
 
 function uppercase (str) {
   return str.substr(0, 1) + str.slice(1)
+}
+
+function parseFunctionParams (func) {
+  const groups = /function\s_.*\((.*)\)\s\{.*/i.exec(func)
+  if (groups && groups.length > 1) return `(${groups[1]}) => {}`
+  else return 'null'
 }
 
 function getPropType (type) {
@@ -21,34 +41,29 @@ function getPropType (type) {
   if (type.match(/Number/)) return 'Number'
   if (type.match(/Object/)) return 'Object'
   if (type.match(/String/)) return 'String'
+  if (type.match(/Function/)) return 'Function'
 
   return 'Any'
 }
 
 function getPropDefault (def, type) {
   if (def === '' ||
-    (def == null && type !== 'Boolean')
+    (def == null && type !== 'Boolean' && type !== 'Function')
   ) {
     return 'undefined'
+  } else if (typeof(def) === 'function' && type !== 'Function') {
+    def = def()
   }
 
   switch (type) {
-    case 'Array':
-      return def
-    break
     case 'Boolean':
-      if (def) return 'True'
-      else return 'False'
-    break
-    case 'Number':
-      return def
-    break
-    case 'String':
-      return def
-    break
-    case 'Object':
-      return def
-    break
+    if (def) return 'true'
+    else return 'false'
+    case 'Function': return parseFunctionParams(def)
+    case 'Array': 
+    case 'Number': 
+    case 'String': 
+    case 'Object': return def
     default: return def
   }
 }
@@ -118,10 +133,6 @@ function parseMixins (component) {
   return mixins
 }
 
-function mapComponent (component, mapping) {
-  return Object.assign(component, mapping)
-} 
-
 const components = {}
 
 const installedComponents = Vue.options._base.options.components
@@ -130,12 +141,12 @@ Object.keys(installedComponents).forEach(key => {
   const name = key
   if (name.match(/v-/)) {
     const component = installedComponents[key]
-    const options = parseComponent(component.options)
+    let options = parseComponent(component.options)
 
     if (map[name]) {
-      mapComponent(options, map[name])
+      options = deepmerge(options, map[name], { arrayMerge })
     }
-
+    
     components[name] = options
   }
 })
