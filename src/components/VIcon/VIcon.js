@@ -5,7 +5,6 @@ import Colorable from '../../mixins/colorable'
 
 const SIZE_MAP = {
   small: '16px',
-  default: '24px',
   medium: '28px',
   large: '36px',
   xLarge: '40px'
@@ -20,14 +19,14 @@ export default {
 
   props: {
     disabled: Boolean,
-    large: Boolean,
     left: Boolean,
-    medium: Boolean,
     right: Boolean,
     size: {
       type: [Number, String]
     },
     small: Boolean,
+    large: Boolean,
+    medium: Boolean,
     xLarge: Boolean
   },
 
