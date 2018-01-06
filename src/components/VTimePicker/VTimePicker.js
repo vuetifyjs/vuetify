@@ -6,7 +6,12 @@ import VTimePickerClock from './VTimePickerClock'
 import Picker from '../../mixins/picker'
 
 // Utils
+import { createRange } from '../../util/helpers'
 import pad from '../VDatePicker/util/pad'
+import isValueAllowed from '../../util/isValueAllowed'
+
+const rangeHours = createRange(24)
+const rangeMinutes = createRange(60)
 
 export default {
   name: 'v-time-picker',
@@ -54,7 +59,7 @@ export default {
   computed: {
     hour: {
       get () {
-        return this.inputHour == null ? new Date().getHours() : this.inputHour
+        return this.inputHour == null ? this.firstAllowed('hour', new Date().getHours()) : this.inputHour
       },
       set (value) {
         this.inputHour = value
@@ -62,7 +67,7 @@ export default {
     },
     minute: {
       get () {
-        return this.inputMinute == null ? new Date().getMinutes() : this.inputMinute
+        return this.inputMinute == null ? this.firstAllowed('minute', new Date().getMinutes()) : this.inputMinute
       },
       set (value) {
         this.inputMinute = value
@@ -73,7 +78,8 @@ export default {
         return this.hour < 12 ? 'am' : 'pm'
       },
       set (val) {
-        this.hour += val === 'am' ? -12 : 12
+        const newHour = this.hour + (val === 'am' ? -12 : 12)
+        this.hour = this.firstAllowed('hour', newHour)
       }
     },
     isAmPm () {
@@ -154,6 +160,14 @@ export default {
       if (this.selectingHour) {
         this.selectingHour = !this.selectingHour
       }
+    },
+    firstAllowed (type, value) {
+      const allowedFn = type === 'hour' ? this.allowedHours : this.allowedMinutes
+      if (!allowedFn) return value
+
+      const range = type === 'minute' ? rangeMinutes : rangeHours
+      const first = range.find(v => isValueAllowed((v + value) % range.length, allowedFn))
+      return (first || 0) + value
     },
     genClock () {
       return this.$createElement('v-time-picker-clock', {
