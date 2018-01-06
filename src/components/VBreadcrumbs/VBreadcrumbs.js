@@ -60,7 +60,7 @@ export default {
           i === length - 1
         ) continue
 
-        children.push(this.$createElement('li', Object.assign({ key: i }, dividerData), this.computedDivider))
+        children.push(this.$createElement('li', dividerData, this.computedDivider))
       }
 
       return children

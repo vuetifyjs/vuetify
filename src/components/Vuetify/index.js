@@ -12,24 +12,29 @@ const Vuetify = {
       breakpoint: {},
       application,
       dark: false,
-      theme: theme(opts.theme),
-      touchSupport: false
+      theme: theme(opts.theme)
     })
 
     Vue.prototype.$vuetify = $vuetify.inspire
 
-    for (const t of Object.values(Object(opts.transitions))) {
-      if (t.name !== undefined && t.name.startsWith('v-')) {
-        Vue.component(t.name, t)
-      }
+    if (opts.transitions) {
+      Object.values(opts.transitions).forEach(transition => {
+        if (transition.name !== undefined && transition.name.startsWith('v-')) {
+          Vue.component(transition.name, transition)
+        }
+      })
     }
 
-    for (const d of Object.values(Object(opts.directives))) {
-      Vue.directive(d.name, d)
+    if (opts.directives) {
+      Object.values(opts.directives).forEach(directive => {
+        Vue.directive(directive.name, directive)
+      })
     }
 
-    for (const c of Object.values(Object(opts.components))) {
-      Vue.use(c)
+    if (opts.components) {
+      Object.values(opts.components).forEach(component => {
+        Vue.use(component)
+      })
     }
   }
 }

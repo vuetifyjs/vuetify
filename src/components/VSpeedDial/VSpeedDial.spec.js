@@ -1,5 +1,5 @@
-import VSpeedDial from '~components/VSpeedDial'
-import { test } from '~util/testing'
+import VSpeedDial from '@components/VSpeedDial'
+import { test } from '@util/testing'
 import { compileToFunctions } from 'vue-template-compiler'
 
 test('VSpeedDial.js', ({ mount }) => {
@@ -43,7 +43,7 @@ test('VSpeedDial.js', ({ mount }) => {
   it('should activate on hover', () => {
     const wrapper = mount(VSpeedDial, {
       propsData: {
-        hover: true
+        openOnHover: true
       }
     })
 

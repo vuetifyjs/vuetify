@@ -25,13 +25,15 @@
 
   &__dismissible
     align-self: flex-start
+    color: inherit
     margin-left: $alert-padding
     margin-right: 0
     text-decoration: none
     transition: $primary-transition
+    user-select: none
 
     &:hover
-      color: lighten($alert-icon-color, 10%)
+      opacity: .8
 
   &--no-icon
     .alert__icon

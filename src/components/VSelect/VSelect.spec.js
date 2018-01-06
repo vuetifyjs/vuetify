@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import { test } from '~util/testing'
-import VSelect from '~components/VSelect'
+import { test } from '@util/testing'
+import VSelect from '@components/VSelect'
 
 test('VSelect', ({ mount, compileToFunctions }) => {
   it('should return numeric 0', () => {

@@ -8,6 +8,9 @@
  */
 export default {
   watch: {
+    filteredItems () {
+      this.$refs.menu && this.$refs.menu.updateDimensions()
+    },
     inputValue (val) {
       // Populate selected items
       this.genSelectedItems(val)
@@ -36,7 +39,7 @@ export default {
         this.updateTags(this.searchValue)
       }
 
-      if (this.combobox) {
+      if (this.combobox && this.lazySearch) {
         this.inputValue = this.lazySearch
       }
 

@@ -1,5 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VTextField.js should calculate element height when using auto-grow prop 1`] = `
+
+<div class="input-group input-group--focused input-group--dirty input-group--text-field input-group--multi-line primary--text">
+  <div class="input-group__input">
+    <textarea tabindex="0"
+              rows="5"
+              style="height: 120px;"
+    >
+    </textarea>
+  </div>
+  <div class="input-group__details">
+  </div>
+</div>
+
+`;
+
 exports[`VTextField.js should not display counter when set to false 1`] = `
 
 <div class="input-group input-group--text-field primary--text">
@@ -9,7 +25,6 @@ exports[`VTextField.js should not display counter when set to false 1`] = `
     >
   </div>
   <div class="input-group__details">
-    <!---->
     <div class="input-group__counter">
       0 / 25
     </div>
@@ -27,7 +42,6 @@ exports[`VTextField.js should not display counter when set to false 2`] = `
     >
   </div>
   <div class="input-group__details">
-    <!---->
   </div>
 </div>
 
@@ -42,7 +56,6 @@ exports[`VTextField.js should render component and match snapshot 1`] = `
     >
   </div>
   <div class="input-group__details">
-    <!---->
   </div>
 </div>
 
@@ -61,7 +74,7 @@ exports[`VTextField.js should render component with async loading and custom pro
          style="height: 7px;"
     >
       <div class="progress-linear__background orange"
-           style="height: auto; opacity: 0.3; width: 100%;"
+           style="height: 7px; opacity: 0.3; width: 100%;"
       >
       </div>
       <div class="progress-linear__bar">
@@ -71,10 +84,8 @@ exports[`VTextField.js should render component with async loading and custom pro
           <div class="progress-linear__bar__indeterminate short orange">
           </div>
         </div>
-        <!---->
       </div>
     </div>
-    <!---->
   </div>
 </div>
 
@@ -93,7 +104,7 @@ exports[`VTextField.js should render component with async loading and match snap
          style="height: 2px;"
     >
       <div class="progress-linear__background primary"
-           style="height: auto; opacity: 0.3; width: 100%;"
+           style="height: 2px; opacity: 0.3; width: 100%;"
       >
       </div>
       <div class="progress-linear__bar">
@@ -103,10 +114,8 @@ exports[`VTextField.js should render component with async loading and match snap
           <div class="progress-linear__bar__indeterminate short primary">
           </div>
         </div>
-        <!---->
       </div>
     </div>
-    <!---->
   </div>
 </div>
 

@@ -1,4 +1,6 @@
 export default {
+  name: 'validatable',
+
   data () {
     return {
       errorBucket: [],

@@ -104,7 +104,6 @@ export default {
         'navigation-drawer--close': !this.isActive,
         'navigation-drawer--fixed': !this.absolute && (this.app || this.fixed),
         'navigation-drawer--floating': this.floating,
-        'navigation-drawer--is-booted': this.isBooted,
         'navigation-drawer--is-mobile': this.isMobile,
         'navigation-drawer--mini-variant': this.miniVariant,
         'navigation-drawer--open': this.isActive,
@@ -150,7 +149,7 @@ export default {
     reactsToRoute () {
       return !this.disableRouteWatcher &&
         !this.stateless &&
-        !this.permanent
+        (this.temporary || this.isMobile)
     },
     resizeIsDisabled () {
       return this.disableResizeWatcher || this.stateless

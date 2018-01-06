@@ -23,7 +23,6 @@ exports[`Vslider.vue should be focused when active 1`] = `
     </div>
   </div>
   <div class="input-group__details">
-    <!---->
   </div>
 </div>
 
@@ -50,7 +49,6 @@ exports[`Vslider.vue should match a snapshot 1`] = `
     </div>
   </div>
   <div class="input-group__details">
-    <!---->
   </div>
 </div>
 
@@ -85,7 +83,6 @@ exports[`Vslider.vue should render component with thumbLabel and match a snapsho
     </div>
   </div>
   <div class="input-group__details">
-    <!---->
   </div>
 </div>
 
@@ -134,7 +131,6 @@ exports[`Vslider.vue should render component with ticks and match a snapshot 1`]
     </div>
   </div>
   <div class="input-group__details">
-    <!---->
   </div>
 </div>
 

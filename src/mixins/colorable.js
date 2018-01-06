@@ -1,4 +1,6 @@
 export default {
+  name: 'colorable',
+
   props: {
     color: String
   },

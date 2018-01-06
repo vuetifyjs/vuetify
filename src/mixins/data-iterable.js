@@ -7,6 +7,7 @@ import Themeable from './themeable'
 import Loadable from './loadable'
 
 import { getObjectValueByPath } from '../util/helpers'
+import { consoleWarn } from '../util/console'
 
 /**
  * DataIterable
@@ -18,6 +19,7 @@ import { getObjectValueByPath } from '../util/helpers'
  *
  */
 export default {
+  name: 'data-iterable',
 
   components: {
     VBtn,
@@ -38,6 +40,7 @@ export default {
       },
       expanded: {},
       actionsClasses: 'data-iterator__actions',
+      actionsRangeControlsClasses: 'data-iterator__actions__range-controls',
       actionsSelectClasses: 'data-iterator__actions__select',
       actionsPaginationClasses: 'data-iterator__actions__pagination'
     }
@@ -76,8 +79,8 @@ export default {
     filter: {
       type: Function,
       default: (val, search) => {
-        return val !== null &&
-          ['undefined', 'boolean'].indexOf(typeof val) === -1 &&
+        return val != null &&
+          typeof val !== 'boolean' &&
           val.toString().toLowerCase().indexOf(search) !== -1
       }
     },
@@ -223,7 +226,7 @@ export default {
   methods: {
     initPagination () {
       if (!this.rowsPerPageItems.length) {
-        console.warn(`The prop 'rows-per-page-items' in ${this.name} can not be empty.`)
+        consoleWarn(`The prop 'rows-per-page-items' can not be empty`, this)
       } else {
         this.defaultPagination.rowsPerPage = this.rowsPerPageItems[0]
       }
@@ -298,14 +301,19 @@ export default {
     },
     createProps (item, index) {
       const props = { item, index }
-      const key = this.itemKey
+      const keyProp = this.itemKey
+      const itemKey = item[keyProp]
 
       Object.defineProperty(props, 'selected', {
         get: () => this.selected[item[this.itemKey]],
         set: (value) => {
+          if (itemKey == null) {
+            consoleWarn(`"${keyProp}" attribute must be defined for item`, this)
+          }
+
           let selected = this.value.slice()
           if (value) selected.push(item)
-          else selected = selected.filter(i => i[key] !== item[key])
+          else selected = selected.filter(i => i[keyProp] !== itemKey)
           this.$emit('input', selected)
         }
       })
@@ -313,12 +321,16 @@ export default {
       Object.defineProperty(props, 'expanded', {
         get: () => this.expanded[item[this.itemKey]],
         set: (value) => {
+          if (itemKey == null) {
+            consoleWarn(`"${keyProp}" attribute must be defined for item`, this)
+          }
+
           if (!this.expand) {
             for (const key in this.expanded) {
               this.expanded.hasOwnProperty(key) && this.$set(this.expanded, key, false)
             }
           }
-          this.$set(this.expanded, item[this.itemKey], value)
+          this.$set(this.expanded, itemKey, value)
         }
       })
 
@@ -431,13 +443,19 @@ export default {
       }, [pagination])
     },
     genActions () {
+      const rangeControls = this.$createElement('div', {
+        'class': this.actionsRangeControlsClasses
+      }, [
+        this.genPagination(),
+        this.genPrevIcon(),
+        this.genNextIcon()
+      ])
+
       return [this.$createElement('div', {
         'class': this.actionsClasses
       }, [
         this.rowsPerPageItems.length > 1 ? this.genSelect() : null,
-        this.genPagination(),
-        this.genPrevIcon(),
-        this.genNextIcon()
+        rangeControls
       ])]
     }
   }

@@ -1,6 +1,8 @@
 import { provide as RegistrableProvide } from './registrable'
 
 export default {
+  name: 'button-group',
+
   mixins: [RegistrableProvide('buttonGroup')],
 
   data () {

@@ -27,6 +27,7 @@ export default {
   data () {
     return {
       actionsClasses: 'datatable__actions',
+      actionsRangeControlsClasses: 'datatable__actions__range-controls',
       actionsSelectClasses: 'datatable__actions__select',
       actionsPaginationClasses: 'datatable__actions__pagination'
     }
@@ -97,7 +98,7 @@ export default {
   },
 
   render (h) {
-    return h('v-table-overflow', {}, [
+    const tableOverflow = h('v-table-overflow', {}, [
       h('table', {
         'class': this.classes
       }, [
@@ -105,6 +106,11 @@ export default {
         this.genTBody(),
         this.genTFoot()
       ])
+    ])
+
+    return h('div', [
+      tableOverflow,
+      this.genActionsFooter()
     ])
   }
 }

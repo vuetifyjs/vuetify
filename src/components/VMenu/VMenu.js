@@ -119,7 +119,7 @@ export default {
       )}px`
     },
     calculatedTop () {
-      if (!this.auto || this.absolute) return this.calcTop()
+      if (!this.auto || this.isAttached) return this.calcTop()
 
       return `${this.calcYOverflow(this.calcTopAuto())}px`
     },
@@ -187,11 +187,9 @@ export default {
         display: this.fullWidth ? 'block' : 'inline-block'
       },
       directives: [{
+        arg: 500,
         name: 'resize',
-        value: {
-          debounce: 500,
-          value: this.onResize
-        }
+        value: this.onResize
       }],
       on: {
         keydown: this.changeListIndex

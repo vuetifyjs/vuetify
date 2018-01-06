@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import { test } from '~util/testing'
-import Applicationable from '~mixins/applicationable'
+import { test } from '@util/testing'
+import Applicationable from '@mixins/applicationable'
 
 test('applicationable.js', ({ mount }) => {
   it('should update application on mount', async () => {

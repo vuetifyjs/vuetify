@@ -1,5 +1,7 @@
 export function factory (prop = 'value', event = 'input') {
   return {
+    name: 'toggleable',
+
     model: { prop, event },
 
     props: {

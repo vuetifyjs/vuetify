@@ -1,5 +1,5 @@
-import { VListTileAvatar } from '~components/VList'
-import { test } from '~util/testing'
+import { VListTileAvatar } from '@components/VList'
+import { test } from '@util/testing'
 
 test('VListTileAvatar.js', ({ mount, functionalContext }) => {
   it('should render component and match snapshot', () => {

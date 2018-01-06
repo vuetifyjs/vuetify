@@ -1,4 +1,4 @@
-import { test } from '~util/testing'
+import { test } from '@util/testing'
 import VProgressLinear from './VProgressLinear'
 
 test('VProgressLinear.js', ({ mount }) => {

@@ -1,7 +1,7 @@
-import VBtn from '~components/VBtn'
-import VCard from '~components/VCard'
-import VMenu from '~components/VMenu'
-import { test } from '~util/testing'
+import VBtn from '@components/VBtn'
+import VCard from '@components/VCard'
+import VMenu from '@components/VMenu'
+import { test } from '@util/testing'
 
 // TODO: Most of these have exactly the same snapshots
 test('VMenu.js', ({ mount }) => {
@@ -303,10 +303,10 @@ test('VMenu.js', ({ mount }) => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
-  it('should render component with custom positionAbsolutely and match snapshot', () => {
+  it('should render component with custom absolute and match snapshot', () => {
     const wrapper = mount(VMenu, {
       propsData: {
-        positionAbsolutely: true
+        absolute: true
       }
     })
 

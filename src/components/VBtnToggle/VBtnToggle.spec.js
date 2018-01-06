@@ -1,7 +1,7 @@
 import VBtnToggle from './VBtnToggle'
 import VBtn from '../VBtn'
 import VIcon from '../VIcon'
-import { test } from '~util/testing'
+import { test } from '@util/testing'
 import Vue from 'vue'
 
 function createBtn (val = null) {
