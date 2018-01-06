@@ -26,6 +26,10 @@ export default {
         header: 'Autocomplete',
         desc: 'Provides type-ahead autocomplete functionality.'
       },
+      customFilter: {
+        header: 'Custom Filter on autocomplete',
+        desc: '`filter` prop used to filter each individual item with custom logic, in this example we filter items by name'
+      },
       scopedSlots: {
         header: 'Scoped slots',
         desc: 'With the power of scoped slots, you can customize the visual output of the select. In this example we add a profile picture for both the chips and list items.'

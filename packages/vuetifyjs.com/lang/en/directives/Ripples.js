@@ -33,6 +33,11 @@ export default {
       desc: 'Expansion panels by default have ripples disabled. This can be enabled with the **ripple** prop.',
       uninverted: true
     },
+    customRipple: {
+      header: 'Custom Element',
+      desc: 'Add the ripple effect to any custom element. This can be done with the `v-ripple` HTML attribute.',
+      uninverted: true
+    },
     htmlElement: {
       header: 'Standard HTML element',
       desc: 'Add the ripple effect to a standard HTML element. This can be enabled with the `v-ripple` HTML attribute.',
