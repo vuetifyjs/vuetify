@@ -7,7 +7,6 @@
       section#examples
         section-head(value="Generic.Pages.examples")
         example(
-          readonly
           file="alignment/example"
         )
 </template>
