@@ -135,7 +135,7 @@ export default {
       return { transform: `translate(${x}px, ${y}px)` }
     },
     getPosition (value) {
-      const radius = 0.8 * this.radius * this.handScale(value)
+      const radius = 0.83 * this.radius * this.handScale(value)
       const rotateRadians = this.rotate * Math.PI / 180
       return {
         x: Math.round(Math.sin((value - this.min) * this.degrees + rotateRadians) * radius),

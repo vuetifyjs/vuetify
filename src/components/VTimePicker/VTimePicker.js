@@ -167,7 +167,7 @@ export default {
           pad: this.selectingHour ? 0 : 2,
           rotate: this.selectingHour && this.isAmPm ? 30 : 0,
           scrollable: this.scrollable,
-          size: this.landscape ? 250 : 280,
+          size: this.landscape ? 250 : 270,
           step: this.selectingHour ? 1 : 5,
           value: this.selectingHour ? (this.isAmPm ? this.convert24to12(this.hour) : this.hour) : this.minute
         },
