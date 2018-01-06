@@ -143,6 +143,12 @@
       data: Object
     },
 
+    watch: {
+      currentApi () {
+        if (!this.currentApi.hasOwnProperty(this.tab)) this.tab = 'props'
+      }
+    },
+
     computed: {
       ...mapState({
         api: state => state.api
