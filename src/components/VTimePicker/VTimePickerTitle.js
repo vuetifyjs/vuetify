@@ -39,7 +39,7 @@ export default {
       return this.$createElement('div', {
         'class': 'time-picker-title__time'
       }, [
-        this.genPickerButton('selectingHour', true, pad(hour)),
+        this.genPickerButton('selectingHour', true, this.ampm ? hour : pad(hour)),
         this.$createElement('span', ':'),
         this.genPickerButton('selectingHour', false, pad(this.minute))
       ])

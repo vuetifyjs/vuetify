@@ -5,7 +5,7 @@ exports[`VTimePickerTitle.js should render component in 12hr 1`] = `
 <div class="time-picker-title">
   <div class="time-picker-title__time">
     <div class="picker__title__btn">
-      02
+      2
     </div>
     <span>
       :
