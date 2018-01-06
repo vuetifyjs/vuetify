@@ -50,8 +50,8 @@
         },
         minMaxValues: {
           hours: {
-            min: '9AM',
-            max: '3PM'
+            min: 9,
+            max: 15
           },
           minutes: {
             min: 30,
@@ -61,8 +61,8 @@
       }
     },
     mounted () {
-      this.randomValues.hours = [...Array(6)].map(() => {
-        return Math.floor(Math.random() * 12)
+      this.randomValues.hours = [...Array(8)].map(() => {
+        return Math.floor(Math.random() * 24)
       })
       this.randomValues.minutes = [...Array(6)].map(() => {
         return Math.floor(Math.random() * 12) * 5
