@@ -70,7 +70,7 @@ declare interface VuetifyObject {
 
 declare module 'vue/types/vue' {
   interface Vue {
-    $vuetify: VuetifyObject;
+    $vuetify: VuetifyObject
   }
 }
 
