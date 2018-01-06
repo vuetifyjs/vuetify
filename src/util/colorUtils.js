@@ -1,3 +1,5 @@
+import { consoleWarn } from './console'
+
 /**
  * @param {string|number} color
  * @returns {number}
@@ -16,9 +18,11 @@ export function colorToInt (color) {
   }
 
   if (rgb < 0) {
-    throw new RangeError(`Colors cannot be negative: '${color}'`)
+    consoleWarn(`Colors cannot be negative: '${color}'`)
+    rgb = 0
   } else if (rgb > 0xffffff) {
-    throw new RangeError(`'${color}' is not a valid rgb color`)
+    consoleWarn(`'${color}' is not a valid rgb color`)
+    rgb = 0xffffff
   }
 
   return rgb
