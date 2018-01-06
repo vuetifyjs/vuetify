@@ -47,8 +47,8 @@ export default {
   watch: {
     inputValue (val, prev) {
       this.isReverse = Number(val) < Number(prev)
-      this.steps.forEach(i => i.toggle(this.inputValue))
-      this.content.forEach(i => i.toggle(this.inputValue, this.isReverse))
+      for (const i of this.steps) i.toggle(this.inputValue)
+      for (const i of this.content) i.toggle(this.inputValue, this.isReverse)
 
       this.$emit('input', this.inputValue)
       prev && (this.isBooted = true)
@@ -69,14 +69,14 @@ export default {
     getSteps () {
       this.steps = []
       this.content = []
-      this.$children.forEach(i => {
+      for (const i of this.$children) {
         if (i.$options._componentTag === 'v-stepper-step') {
           this.steps.push(i)
         } else if (i.$options._componentTag === 'v-stepper-content') {
           i.isVertical = this.vertical
           this.content.push(i)
         }
-      })
+      }
     },
     stepClick (step) {
       this.getSteps()

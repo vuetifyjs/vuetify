@@ -18,11 +18,11 @@ export default function Grid (name) {
       if (data.attrs) {
         const classes = []
 
-        Object.keys(data.attrs).forEach(key => {
+        for (const key of Object.keys(data.attrs)) {
           const value = data.attrs[key]
 
           if ((typeof value === 'string') || value) classes.push(key)
-        })
+        }
 
         if (classes.length) data.staticClass += ` ${classes.join(' ')}`
         delete data.attrs

@@ -1,10 +1,6 @@
 function style (el, value) {
-  [
-    'transform',
-    'webkitTransform'
-  ].forEach(i => {
-    el.style[i] = value
-  })
+  el.style['transform'] = value
+  el.style['webkitTransform'] = value
 }
 
 const RippleDataAttribute = 'data-ripple'

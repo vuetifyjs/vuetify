@@ -28,14 +28,19 @@ export default {
       })
     },
     panelClick (uid) {
+      const children = this.getChildren()
+
       if (!this.expand) {
-        return this.getChildren()
-          .forEach(e => e.toggle(uid))
+        for (const child of children) child.toggle(uid)
+        return
       }
 
-      const panel = this.$children.find(e => e._uid === uid)
-
-      panel && panel.toggle(uid)
+      for (const child of children) {
+        if (child._uid === uid) {
+          child.toggle(uid)
+          return
+        }
+      }
     }
   },
 

@@ -203,7 +203,7 @@ export default {
     },
     selected () {
       const selected = {}
-      this.value.forEach(i => (selected[i[this.itemKey]] = true))
+      for (const item of this.value) selected[item[this.itemKey]] = true
       return selected
     }
   },
@@ -293,9 +293,7 @@ export default {
     },
     toggle (value) {
       const selected = Object.assign({}, this.selected)
-      this.filteredItems.forEach(i => (
-        selected[i[this.itemKey]] = value)
-      )
+      for (const item of this.filteredItems) selected[item[this.itemKey]] = value
 
       this.$emit('input', this.items.filter(i => (
         selected[i[this.itemKey]]))
@@ -328,9 +326,9 @@ export default {
           }
 
           if (!this.expand) {
-            Object.keys(this.expanded).forEach((key) => {
-              this.$set(this.expanded, key, false)
-            })
+            for (const key in this.expanded) {
+              this.expanded.hasOwnProperty(key) && this.$set(this.expanded, key, false)
+            }
           }
           this.$set(this.expanded, itemKey, value)
         }

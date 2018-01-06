@@ -59,12 +59,11 @@ export default {
       }
     },
     inputValue () {
-      // Evaluate items when inputValue changes to account for
-      // dynamic changing of children
+      // Evaluates items when inputValue changes to
+      // account for dynamic changing of children
 
-      this.items.forEach(i => {
-        i.open(this.items[this.inputValue].uid, this.reverse)
-      })
+      const uid = (this.items[this.inputValue] || {}).uid
+      for (const item of this.items) item.open(uid, this.reverse)
 
       this.$emit('input', this.inputValue)
       this.restartTimeout()

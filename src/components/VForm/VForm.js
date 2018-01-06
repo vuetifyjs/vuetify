@@ -79,10 +79,10 @@ export default {
       return !errors
     },
     reset () {
-      this.inputs.forEach((input) => input.reset())
-      if (this.lazyValidation) {
-        Object.keys(this.errorBag).forEach(key => this.$delete(this.errorBag, key))
+      for (let i = this.inputs.length; i--;) {
+        this.inputs[i].reset()
       }
+      if (this.lazyValidation) this.errorBag = {}
     }
   },
 
