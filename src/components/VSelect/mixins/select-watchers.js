@@ -12,7 +12,8 @@ export default {
       this.$refs.menu && this.$refs.menu.updateDimensions()
     },
     inputValue (val) {
-      // Search for an existing item when a value was selected from the menu
+      // Search for an existing item when a
+      // value was selected from the menu
       if (this.combobox && this.isNotFiltering) {
         val = this.findExistingItem(val)
       }
