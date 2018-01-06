@@ -9,13 +9,13 @@ picker($material)
   .picker__body
     background: $material.picker.body
 
+dark(picker, 'picker')
 
 picker-title($material)
   .picker__title
     background: $material.picker.title
 
-dark(picker-title, 'picker')
-theme(picker, "picker")
+theme(picker-title, "picker")
 
 .picker
   border-radius: $card-border-radius
@@ -28,40 +28,52 @@ theme(picker, "picker")
     border: none
     margin-top: -20px
 
-  &__title
-    color: #fff
-    border-top-left-radius: $card-border-radius
-    border-top-right-radius: $card-border-radius
-    height: 105px
-    padding: 16px
+.picker__title
+  color: #fff
+  border-top-left-radius: $card-border-radius
+  border-top-right-radius: $card-border-radius
+  height: 105px
+  padding: 16px
 
-  &__body
-    height: 290px
-    overflow: hidden
-    position: relative
+.picker__title__btn
+  transition: $primary-transition
 
-  &--landscape
-    flex-direction: row
-    flex-wrap: wrap
-    width: 500px
+  &.active
+    opacity: 1
 
-    .picker__title
-      border-top-right-radius: 0
-      border-bottom-right-radius: 0
-      flex: 0 1 170px
-      width: 170px
-      height: auto
-      position: absolute
-      top: 0
-      left: 0
-      height: 100%
-      z-index: 1
+  &:not(.active)
+    opacity: .6
+    cursor: pointer
 
-    .picker__body
-      flex: 1 0
-      width: 330px
-      margin-left: 170px
+    &:hover
+      opacity: 1
 
-    .card__row--actions
-      margin-left: 170px
-      width: 330px
+.picker__body
+  height: 290px
+  overflow: hidden
+  position: relative
+
+.picker--landscape
+  flex-direction: row
+  flex-wrap: wrap
+  width: 500px
+
+  .picker__title
+    border-top-right-radius: 0
+    border-bottom-right-radius: 0
+    flex: 0 1 170px
+    width: 170px
+    position: absolute
+    top: 0
+    left: 0
+    height: 100%
+    z-index: 1
+
+  .picker__body
+    flex: 1 0
+    width: 330px
+    margin-left: 170px
+
+  .card__row--actions
+    margin-left: 170px
+    width: 330px

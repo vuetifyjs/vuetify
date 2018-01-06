@@ -210,9 +210,9 @@ export default {
       this.tabs = this.tabs.filter(o => o !== tab)
     },
     updateTabs () {
-      this.tabs.forEach(({ toggle }) => {
-        toggle(this.target)
-      })
+      for (let index = this.tabs.length; --index >= 0;) {
+        this.tabs[index].toggle(this.target)
+      }
 
       this.setOverflow()
     }

@@ -79,8 +79,8 @@ export default {
     filter: {
       type: Function,
       default: (val, search) => {
-        return val !== null &&
-          ['undefined', 'boolean'].indexOf(typeof val) === -1 &&
+        return val != null &&
+          typeof val !== 'boolean' &&
           val.toString().toLowerCase().indexOf(search) !== -1
       }
     },
@@ -203,7 +203,9 @@ export default {
     },
     selected () {
       const selected = {}
-      this.value.forEach(i => (selected[i[this.itemKey]] = true))
+      for (let index = 0; index < this.value.length; index++) {
+        selected[this.value[index][this.itemKey]] = true
+      }
       return selected
     }
   },
@@ -293,9 +295,9 @@ export default {
     },
     toggle (value) {
       const selected = Object.assign({}, this.selected)
-      this.filteredItems.forEach(i => (
-        selected[i[this.itemKey]] = value)
-      )
+      for (let index = 0; index < this.filteredItems.length; index++) {
+        selected[this.filteredItems[index][this.itemKey]] = value
+      }
 
       this.$emit('input', this.items.filter(i => (
         selected[i[this.itemKey]]))
@@ -328,9 +330,9 @@ export default {
           }
 
           if (!this.expand) {
-            Object.keys(this.expanded).forEach((key) => {
-              this.$set(this.expanded, key, false)
-            })
+            for (const key in this.expanded) {
+              this.expanded.hasOwnProperty(key) && this.$set(this.expanded, key, false)
+            }
           }
           this.$set(this.expanded, itemKey, value)
         }

@@ -1,0 +1,128 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VDatePickerMonthTable.js should render component and match snapshot 1`] = `
+
+<div class="date-picker-table date-picker-table--month">
+  <table>
+    <tbody>
+      <tr>
+        <td>
+          <button type="button"
+                  class="btn btn--flat"
+          >
+            <span class="btn__content">
+              Jan
+            </span>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="btn btn--flat"
+          >
+            <span class="btn__content">
+              Feb
+            </span>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="btn btn--flat"
+          >
+            <span class="btn__content">
+              Mar
+            </span>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button type="button"
+                  class="btn btn--flat"
+          >
+            <span class="btn__content">
+              Apr
+            </span>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="btn btn--flat btn--outline accent"
+          >
+            <span class="btn__content">
+              May
+            </span>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="btn btn--flat"
+          >
+            <span class="btn__content">
+              Jun
+            </span>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button type="button"
+                  class="btn btn--flat"
+          >
+            <span class="btn__content">
+              Jul
+            </span>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="btn btn--flat"
+          >
+            <span class="btn__content">
+              Aug
+            </span>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="btn btn--flat"
+          >
+            <span class="btn__content">
+              Sep
+            </span>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button type="button"
+                  class="btn btn--flat"
+          >
+            <span class="btn__content">
+              Oct
+            </span>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="btn btn--active accent"
+          >
+            <span class="btn__content">
+              Nov
+            </span>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="btn btn--flat"
+          >
+            <span class="btn__content">
+              Dec
+            </span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+`;

@@ -51,9 +51,6 @@ export default {
 
   computed: {
     classes () {
-      const colorBackground = !this.outline && !this.flat
-      const colorText = !this.disabled && !colorBackground
-
       const classes = {
         'btn': true,
         'btn--active': this.isActive,
@@ -79,24 +76,7 @@ export default {
         ...this.themeClasses
       }
 
-      if (!this.color) {
-        return Object.assign(classes, {
-          'primary': this.primary && colorBackground,
-          'secondary': this.secondary && colorBackground,
-          'success': this.success && colorBackground,
-          'info': this.info && colorBackground,
-          'warning': this.warning && colorBackground,
-          'error': this.error && colorBackground,
-          'primary--text': this.primary && colorText,
-          'secondary--text': this.secondary && colorText,
-          'success--text': this.success && colorText,
-          'info--text': this.info && colorText,
-          'warning--text': this.warning && colorText,
-          'error--text': this.error && colorText
-        })
-      }
-
-      return colorBackground
+      return (!this.outline && !this.flat)
         ? this.addBackgroundColorClassChecks(classes)
         : this.addTextColorClassChecks(classes)
     }

@@ -1,52 +1,51 @@
+// Components
+import VPicker from '../components/VPicker'
+
+// Mixins
 import Colorable from './colorable'
 import Themeable from './themeable'
 
 export default {
   name: 'picker',
 
-  mixins: [Colorable, Themeable],
-
-  data () {
-    return {
-      defaultColor: 'accent',
-      isSaving: false
-    }
+  components: {
+    VPicker
   },
+
+  mixins: [
+    Colorable,
+    Themeable
+  ],
 
   props: {
-    actions: Boolean,
-    autosave: Boolean,
     headerColor: String,
     landscape: Boolean,
-    noTitle: Boolean,
-    scrollable: Boolean,
-    value: {
-      required: true
-    }
-  },
-
-  computed: {
-    titleColor () {
-      const darkTheme = this.dark || (!this.light && this.$vuetify.dark)
-      const defaultTitleColor = darkTheme ? null : 'primary'
-      return this.headerColor || this.color || defaultTitleColor
-    }
+    noTitle: Boolean
   },
 
   methods: {
-    save () {},
-    cancel () {},
-    genSlot () {
-      return this.$scopedSlots.default({
+    genPickerTitle () {},
+    genPickerBody () {},
+    genPickerActionsSlot () {
+      return this.$scopedSlots.default ? this.$scopedSlots.default({
         save: this.save,
         cancel: this.cancel
-      })
+      }) : this.$slots.default
     },
-    genPickerTitle (children) {
-      return this.$createElement('div', {
-        staticClass: 'picker__title',
-        'class': this.addBackgroundColorClassChecks({}, 'titleColor')
-      }, children)
+    genPicker (staticClass) {
+      return this.$createElement('v-picker', {
+        staticClass,
+        props: {
+          landscape: this.landscape,
+          dark: this.dark,
+          light: this.light,
+          color: this.headerColor || this.color
+        }
+      }, [
+        this.noTitle ? null : this.genPickerTitle(),
+        this.genPickerBody(),
+        this.$createElement('template', { slot: 'actions' }, [this.genPickerActionsSlot()])
+      ])
     }
   }
 }

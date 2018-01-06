@@ -138,8 +138,13 @@ export default {
         return true
       }
 
-      for (const el of path) {
-        if ([document, document.documentElement, this.$refs.content].includes(el)) return true
+      for (let index = 0; index < path.length; index++) {
+        const el = path[index]
+
+        if (el === document) return true
+        if (el === document.documentElement) return true
+        if (el === this.$refs.content) return true
+
         if (this.hasScrollbar(el)) return this.shouldScroll(el, delta)
       }
 

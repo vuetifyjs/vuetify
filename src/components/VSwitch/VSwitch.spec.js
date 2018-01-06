@@ -19,7 +19,7 @@ test('VSwitch.js', ({ mount }) => {
     expect(ripple.getAttribute('data-ripple')).toBe('true')
   })
 
-  it('should emit change event on swipe right', async () => {
+  it('should emit change event on swipe', async () => {
     const wrapper = mount(VSwitch, {
       props: {
         inputValue: false
@@ -34,6 +34,23 @@ test('VSwitch.js', ({ mount }) => {
     wrapper.setProps({ inputValue: true })
     touch(wrapper.find('.input-group--selection-controls__ripple')[0]).start(0, 0).end(-20, 0)
     expect(change).toBeCalledWith(false)
+  })
+
+  it('shouldn not emit change event on swipe when not active', async () => {
+    const wrapper = mount(VSwitch, {
+      props: {
+        inputValue: false
+      }
+    })
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+    touch(wrapper.find('.input-group--selection-controls__ripple')[0]).start(0, 0).end(-20, 0)
+    expect(change).not.toBeCalled()
+
+    wrapper.setProps({ inputValue: true })
+    touch(wrapper.find('.input-group--selection-controls__ripple')[0]).start(0, 0).end(20, 0)
+    expect(change).not.toBeCalled()
   })
 
   it('should render component with error', async () => {
