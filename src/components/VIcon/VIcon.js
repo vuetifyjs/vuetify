@@ -11,6 +11,10 @@ const SIZE_MAP = {
   xLarge: '40px'
 }
 
+function isFontAwesome5(iconType) {
+  return ['fas', 'far', 'fal', 'fab'].some(val => iconType.includes(val))
+}
+
 export default {
   name: 'v-icon',
 
@@ -32,40 +36,42 @@ export default {
   },
 
   render (h, { props, data, children = [] }) {
-    let fontSize = props.size
-    switch (true) {
-      case props.small: fontSize = SIZE_MAP.small
-        break
-      case props.medium: fontSize = SIZE_MAP.medium
-        break
-      case props.large: fontSize = SIZE_MAP.large
-        break
-      case props.xLarge: fontSize = SIZE_MAP.xLarge
-        break
-    }
+    const { small, medium, large, xLarge } = props
+    const sizes = { small, medium, large, xLarge }
+    const explicitSize = Object.keys(sizes).find(key => sizes[key] && key)
+    const fontSize = explicitSize && SIZE_MAP[explicitSize] || props.size
 
-    if (fontSize) {
-      data.style = { fontSize, ...data.style }
-    }
+    if (fontSize) data.style = { fontSize, ...data.style }
 
     let iconName = ''
-    if (children.length) {
-      iconName = children.pop().text
-    } else if (data.domProps && data.domProps.textContent) {
-      iconName = data.domProps.textContent
+    if (children.length) iconName = children.pop().text
+    // Support usage of v-text and v-html
+    else if (data.domProps) {
+      iconName = data.domProps.textContent ||
+        data.domProps.innerHTML ||
+        iconName
+
+      // Remove nodes so it doesn't
+      // overwrite our changes
       delete data.domProps.textContent
-    } else if (data.domProps && data.domProps.innerHTML) {
-      iconName = data.domProps.innerHTML
       delete data.domProps.innerHTML
     }
 
     let iconType = 'material-icons'
-    const thirdPartyIcon = iconName.indexOf('-') > -1
-    if (thirdPartyIcon) iconType = iconName.slice(0, iconName.indexOf('-'))
+    // Material Icon delimiter is _
+    // https://material.io/icons/
+    const delimiterIndex = iconName.indexOf('-')
+    const isCustomIcon = delimiterIndex > -1
 
-    data.staticClass = (`${iconType} icon ${data.staticClass || ''}`).trim()
+    if (isCustomIcon) {
+      iconType = iconName.slice(0, delimiterIndex)
+
+      if (isFontAwesome5(iconType)) iconType = ''
+    // Assume if not a custom icon
+    // is Material Icon font
+    } else children.push(iconName)
+
     data.attrs = data.attrs || {}
-
     if (!('aria-hidden' in data.attrs)) {
       data.attrs['aria-hidden'] = true
     }
@@ -85,11 +91,18 @@ export default {
       'error--text': props.error
     })
 
-    const iconClasses = Object.keys(classes).filter(k => classes[k]).join(' ')
-    iconClasses && (data.staticClass += ` ${iconClasses}`)
-
-    if (thirdPartyIcon) data.staticClass += ` ${iconName}`
-    else children.push(iconName)
+    // Order classes
+    // * Component class
+    // * Vuetify classes
+    // * Icon Classes
+    data.staticClass = [
+      'icon',
+      data.staticClass,
+      Object.keys(classes).filter(k => classes[k]).join(' '),
+      iconType,
+      isCustomIcon ? iconName : null
+    ].reduce((prev, curr) => curr ? `${prev} ${curr}` : prev)
+    .trim()
 
     return h('i', data, children)
   }

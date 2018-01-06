@@ -146,3 +146,10 @@ export function filterObjectOnKeys(obj, keys) {
 
   return filtered
 }
+
+export function filterChildren (array = [], tag) {
+  return array.filter(child => {
+    return child.componentOptions &&
+      child.componentOptions.Ctor.options.name === tag
+  })
+}

@@ -10,11 +10,6 @@ export default {
   props: {
     button: Boolean,
 
-    fill: {
-      type: String,
-      default () { return this.indeterminate ? 'none' : 'transparent' }
-    },
-
     indeterminate: Boolean,
 
     rotate: {

@@ -21,7 +21,7 @@ export default {
         return ['top', 'right', 'bottom', 'left'].includes(val)
       }
     },
-    hover: Boolean,
+    openOnHover: Boolean,
     transition: {
       type: String,
       default: 'scale-transition'
@@ -55,7 +55,7 @@ export default {
       }
     }
 
-    if (this.hover) {
+    if (this.openOnHover) {
       data.on.mouseenter = () => (this.isActive = true)
       data.on.mouseleave = () => (this.isActive = false)
     }
