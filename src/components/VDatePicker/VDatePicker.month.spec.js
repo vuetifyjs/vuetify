@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { test } from '@util/testing'
-import VDatePicker from '@components/VDatePicker'
+import VDatePicker from './VDatePicker'
 import VMenu from '@components/VMenu'
 
 function createMenuPicker (mount, props) {

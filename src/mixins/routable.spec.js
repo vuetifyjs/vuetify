@@ -9,8 +9,7 @@ test('routable.js', ({ mount }) => {
       render: h => h('div')
     }, {
       propsData: {
-        to: '/',
-        exact: undefined
+        to: '/'
       }
     })
 

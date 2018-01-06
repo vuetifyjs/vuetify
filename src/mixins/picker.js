@@ -6,6 +6,8 @@ import Colorable from './colorable'
 import Themeable from './themeable'
 
 export default {
+  name: 'picker',
+
   components: {
     VPicker
   },

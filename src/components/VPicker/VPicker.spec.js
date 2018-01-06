@@ -1,4 +1,4 @@
-import { test } from '~util/testing'
+import { test } from '@util/testing'
 import VPicker from './VPicker'
 
 test('VPicker.js', ({ mount, compileToFunctions }) => {

@@ -1,5 +1,5 @@
-import { VDatePickerTitle } from '~components/VDatePicker'
-import { test } from '~util/testing'
+import VDatePickerTitle from './VDatePickerTitle'
+import { test } from '@util/testing'
 
 test('VDatePickerTitle.js', ({ mount }) => {
   it('should render component and match snapshot', () => {

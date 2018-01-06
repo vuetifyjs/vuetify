@@ -1,5 +1,5 @@
-import { VTimePickerTitle } from '~components/VTimePicker'
-import { test } from '~util/testing'
+import VTimePickerTitle from './VTimePickerTitle'
+import { test } from '@util/testing'
 
 test('VTimePickerTitle.js', ({ mount }) => {
   it('should render component in 24hr', () => {

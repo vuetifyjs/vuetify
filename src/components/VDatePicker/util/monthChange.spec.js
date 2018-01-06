@@ -1,5 +1,5 @@
 import monthChange from './monthChange'
-import { test } from '~util/testing'
+import { test } from '@util/testing'
 
 test('VDatePicker/util/monthChange.js', ({ mount }) => {
   it('should change month', () => {

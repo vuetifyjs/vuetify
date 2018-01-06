@@ -2,6 +2,8 @@ import Colorable from './colorable'
 import Input from './input'
 
 export default {
+  name: 'selectable',
+
   mixins: [Input, Colorable],
 
   model: {

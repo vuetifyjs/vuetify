@@ -1,6 +1,6 @@
 import { compileToFunctions } from 'vue-template-compiler'
-import { VDatePickerHeader } from '~components/VDatePicker'
-import { test } from '~util/testing'
+import VDatePickerHeader from './VDatePickerHeader'
+import { test } from '@util/testing'
 
 test('VDatePickerHeader.js', ({ mount }) => {
   it('should render component and match snapshot', () => {

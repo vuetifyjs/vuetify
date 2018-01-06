@@ -35,7 +35,7 @@ exports[`VDatePickerTitle.js should render year icon 1`] = `
 <div class="picker__title__btn date-picker-title__year">
   1234
   <i aria-hidden="true"
-     class="material-icons icon theme--dark"
+     class="icon theme--dark material-icons"
   >
     year
   </i>

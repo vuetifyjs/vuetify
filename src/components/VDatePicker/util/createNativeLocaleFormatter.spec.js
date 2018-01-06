@@ -1,5 +1,5 @@
 import createNativeLocaleFormatter from './createNativeLocaleFormatter'
-import { test } from '~util/testing'
+import { test } from '@util/testing'
 
 test('VDatePicker/util/createNativeLocaleFormatter.js', ({ mount }) => {
   it('should format dates', () => {

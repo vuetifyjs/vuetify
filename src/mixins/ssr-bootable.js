@@ -1,12 +1,14 @@
 /**
  * SSRBootable
- * 
+ *
  * @mixin
  *
  * Used in layout components (drawer, toolbar, content)
  * to avoid an entry animation when using SSR
  */
 export default {
+  name: 'ssr-bootable',
+
   data: () => ({
     isBooted: false
   }),
@@ -15,9 +17,9 @@ export default {
     // Use setAttribute instead of dataset
     // because dataset does not work well
     // with unit tests
-    setTimeout(() => {
+    window.requestAnimationFrame(() => {
       this.$el.setAttribute('data-booted', true)
       this.isBooted = true
-    }, 200)
+    })
   }
 }

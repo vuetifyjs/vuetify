@@ -358,7 +358,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
         >
           <div class="btn__content">
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
             >
               chevron_left
             </i>
@@ -375,7 +375,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
         >
           <div class="btn__content">
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
             >
               chevron_right
             </i>
@@ -730,7 +730,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
         >
           <div class="btn__content">
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
             >
               chevron_left
             </i>
@@ -747,7 +747,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
         >
           <div class="btn__content">
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
             >
               chevron_right
             </i>
@@ -1102,7 +1102,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
         >
           <div class="btn__content">
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
             >
               chevron_left
             </i>
@@ -1119,7 +1119,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
         >
           <div class="btn__content">
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
             >
               chevron_right
             </i>
@@ -1485,7 +1485,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
         >
           <div class="btn__content">
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
             >
               chevron_left
             </i>
@@ -1502,7 +1502,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
         >
           <div class="btn__content">
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
             >
               chevron_right
             </i>
@@ -1848,7 +1848,7 @@ exports[`VDatePicker.js should match snapshot with year icon 1`] = `
     <div class="picker__title__btn date-picker-title__year">
       2005
       <i aria-hidden="true"
-         class="material-icons icon theme--dark"
+         class="icon theme--dark material-icons"
       >
         year
       </i>

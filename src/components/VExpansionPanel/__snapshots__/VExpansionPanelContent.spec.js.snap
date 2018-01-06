@@ -87,7 +87,7 @@ exports[`VExpansionPanelContent.js should toggle panel on header click 1`] = `
     </span>
     <div class="header__icon">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
       >
         keyboard_arrow_down
       </i>

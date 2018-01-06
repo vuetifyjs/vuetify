@@ -1,5 +1,5 @@
-import { VTimePickerClock } from '~components/VTimePicker'
-import { test, touch } from '~util/testing'
+import VTimePickerClock from './VTimePickerClock'
+import { test, touch } from '@util/testing'
 
 test('VTimePickerClock.js', ({ mount }) => {
   it('should render component', () => {

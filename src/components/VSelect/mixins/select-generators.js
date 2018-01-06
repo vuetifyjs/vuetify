@@ -1,4 +1,5 @@
 import { getObjectValueByPath } from '../../../util/helpers'
+import { consoleWarn } from '../../../util/console'
 
 /**
  * Select generators
@@ -135,7 +136,7 @@ export default {
     },
     genSegmentedBtn (item) {
       if (!item.text || !item.callback) {
-        console.warn('[Vuetify] Warn: When using the v-select component with \'segmented\' prop without a selection slot, items must contain both a text and callback property')
+        consoleWarn('When using \'segmented\' prop without a selection slot, items must contain both a text and callback property', this)
         return null
       }
 

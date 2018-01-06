@@ -1,5 +1,5 @@
 import isValueAllowed from './isValueAllowed'
-import { test } from '~util/testing'
+import { test } from '@util/testing'
 
 test('VTimePicker/util/isValueAllowed.js', ({ mount }) => {
   it('should check if the date is allowed when allowed values is null', () => {

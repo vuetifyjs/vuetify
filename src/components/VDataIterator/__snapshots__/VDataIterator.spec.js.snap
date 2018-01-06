@@ -89,7 +89,7 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
               </div>
             </div>
             <i aria-hidden="true"
-               class="material-icons icon input-group__append-icon input-group__icon-cb"
+               class="icon material-icons input-group__append-icon input-group__icon-cb"
             >
               arrow_drop_down
             </i>
@@ -105,12 +105,12 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="true"
+                data-ripple="false"
                 aria-label="Previous page"
         >
           <div class="btn__content">
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
             >
               chevron_left
             </i>
@@ -119,12 +119,12 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="true"
+                data-ripple="false"
                 aria-label="Next page"
         >
           <div class="btn__content">
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
             >
               chevron_right
             </i>
@@ -237,7 +237,7 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
               </div>
             </div>
             <i aria-hidden="true"
-               class="material-icons icon input-group__append-icon input-group__icon-cb"
+               class="icon material-icons input-group__append-icon input-group__icon-cb"
             >
               arrow_drop_down
             </i>
@@ -253,12 +253,12 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="true"
+                data-ripple="false"
                 aria-label="Previous page"
         >
           <div class="btn__content">
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
             >
               chevron_left
             </i>
@@ -267,12 +267,12 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="true"
+                data-ripple="false"
                 aria-label="Next page"
         >
           <div class="btn__content">
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
             >
               chevron_right
             </i>
@@ -376,7 +376,7 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
               </div>
             </div>
             <i aria-hidden="true"
-               class="material-icons icon input-group__append-icon input-group__icon-cb"
+               class="icon material-icons input-group__append-icon input-group__icon-cb"
             >
               arrow_drop_down
             </i>
@@ -392,12 +392,12 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="true"
+                data-ripple="false"
                 aria-label="Previous page"
         >
           <div class="btn__content">
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
             >
               chevron_left
             </i>
@@ -406,12 +406,12 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="true"
+                data-ripple="false"
                 aria-label="Next page"
         >
           <div class="btn__content">
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
             >
               chevron_right
             </i>
@@ -519,7 +519,7 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
               </div>
             </div>
             <i aria-hidden="true"
-               class="material-icons icon input-group__append-icon input-group__icon-cb"
+               class="icon material-icons input-group__append-icon input-group__icon-cb"
             >
               arrow_drop_down
             </i>
@@ -535,12 +535,12 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="true"
+                data-ripple="false"
                 aria-label="Previous page"
         >
           <div class="btn__content">
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
             >
               chevron_left
             </i>
@@ -549,12 +549,12 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="true"
+                data-ripple="false"
                 aria-label="Next page"
         >
           <div class="btn__content">
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
             >
               chevron_right
             </i>

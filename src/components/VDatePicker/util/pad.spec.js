@@ -1,5 +1,5 @@
 import pad from './pad'
-import { test } from '~util/testing'
+import { test } from '@util/testing'
 
 test('VDatePicker/util/pad.js', ({ mount }) => {
   it('should pad 1-digit numbers', () => {

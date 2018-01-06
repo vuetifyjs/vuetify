@@ -8,7 +8,7 @@ exports[`VToolbarSideIcon.js should create default icon when no slot used 1`] = 
 >
   <div class="btn__content">
     <i aria-hidden="true"
-       class="material-icons icon"
+       class="icon material-icons"
     >
       menu
     </i>
@@ -25,7 +25,7 @@ exports[`VToolbarSideIcon.js should create slot icon when present 1`] = `
 >
   <div class="btn__content">
     <i aria-hidden="true"
-       class="fa icon fa-add"
+       class="icon fa fa-add"
     >
     </i>
   </div>
