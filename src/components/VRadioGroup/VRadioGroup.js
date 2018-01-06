@@ -50,12 +50,13 @@ export default {
 
   watch: {
     hasError (val) {
-      for (const radio of this.radios) {
-        radio.parentError = val
+      for (let index = this.radios.length; --index >= 0;) {
+        this.radios[index].parentError = val
       }
     },
     inputValue (val) {
-      for (const radio of this.radios) {
+      for (let index = this.radios.length; --index >= 0;) {
+        const radio = this.radios[index]
         radio.isActive = val === radio.value
       }
     }
@@ -82,7 +83,8 @@ export default {
       this.$emit('change', value)
       this.$nextTick(() => this.validate())
 
-      for (const radio of this.radios) {
+      for (let index = this.radios.length; --index >= 0;) {
+        const radio = this.radios[index]
         if (radio.value !== value) radio.isActive = false
       }
     },

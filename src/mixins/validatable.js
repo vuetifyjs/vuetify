@@ -106,7 +106,8 @@ export default {
 
       this.errorBucket = []
 
-      for (const rule of this.rules) {
+      for (let index = 0; index < this.rules.length; index++) {
+        const rule = this.rules[index]
         const valid = typeof rule === 'function' ? rule(value) : rule
 
         if (valid === false || typeof valid === 'string') {

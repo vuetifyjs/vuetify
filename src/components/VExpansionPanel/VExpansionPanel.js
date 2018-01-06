@@ -31,13 +31,15 @@ export default {
       const children = this.getChildren()
 
       if (!this.expand) {
-        for (const child of children) child.toggle(uid)
+        for (let index = children.length; --index >= 0;) {
+          children[index].toggle(uid)
+        }
         return
       }
 
-      for (const child of children) {
-        if (child._uid === uid) {
-          child.toggle(uid)
+      for (let index = children.length; --index >= 0;) {
+        if (children[index]._uid === uid) {
+          children[index].toggle(uid)
           return
         }
       }

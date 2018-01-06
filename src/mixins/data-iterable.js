@@ -203,7 +203,9 @@ export default {
     },
     selected () {
       const selected = {}
-      for (const item of this.value) selected[item[this.itemKey]] = true
+      for (let index = 0; index < this.value.length; index++) {
+        selected[this.value[index][this.itemKey]] = true
+      }
       return selected
     }
   },
@@ -293,7 +295,9 @@ export default {
     },
     toggle (value) {
       const selected = Object.assign({}, this.selected)
-      for (const item of this.filteredItems) selected[item[this.itemKey]] = value
+      for (let index = 0; index < this.filteredItems.length; index++) {
+        selected[this.filteredItems[index][this.itemKey]] = value
+      }
 
       this.$emit('input', this.items.filter(i => (
         selected[i[this.itemKey]]))
