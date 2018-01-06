@@ -139,7 +139,7 @@ module.exports = {
     slots: ['default']
   },
   'v-badge': {
-    slots: ['default', 'badge']
+    slots: ['badge', 'default']
   },
   'v-breadcrumbs': {
     slots: ['default']
@@ -151,7 +151,7 @@ module.exports = {
     slots: ['default']
   },
   'v-bottom-sheet': {
-    slots: ['default', 'activator']
+    slots: ['activator', 'default']
   },
   'v-btn': {
     slots: ['default']
@@ -207,7 +207,7 @@ module.exports = {
     ]
   },
   'v-dialog': {
-    slots: ['default', 'activator']
+    slots: ['activator', 'default']
   },
   'v-expansion-panel': {
     slots: ['default']
@@ -281,7 +281,7 @@ module.exports = {
     slots: ['default']
   },
   'v-menu': {
-    slots: ['default', 'activator']
+    slots: ['activator', 'default']
   },
   'v-navigation-drawer': {
     slots: ['default']
@@ -293,8 +293,8 @@ module.exports = {
     slots: ['default']
   },
   'v-select': {
-    slots: ['label', 'progress', 'noData'],
-    scopedSlots: ['selection', 'item']
+    slots: ['label', 'noData', 'progress'],
+    scopedSlots: ['item', 'selection']
   },
   'v-checkbox': {
     slots: ['label']
@@ -329,10 +329,22 @@ module.exports = {
   'v-subheader': {
     slots: ['default']
   },
+  'v-tabs': {
+    slots: ['default']
+  },
+  'v-tab': {
+    slots: ['default']
+  },
+  'v-tab-item': {
+    slots: ['default']
+  },
+  'v-tabs-items': {
+    slots: ['default']
+  },
   'v-toolbar': {
     slots: ['default', 'extension']
   },
   'v-tooltip': {
-    slots: ['default', 'activator']
+    slots: ['activator', 'default']
   }
 }

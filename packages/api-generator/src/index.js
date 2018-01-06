@@ -111,7 +111,7 @@ function parseProps (component, array = [], mixin = false) {
     array.push(generated)
   })
   
-  return array
+  return array.sort((a, b) => a.name > b.name)
 }
 
 function parseMixins (component) {
@@ -130,7 +130,7 @@ function parseMixins (component) {
     }
   }
   
-  return mixins
+  return mixins.sort((a, b) => a > b)
 }
 
 const components = {}
