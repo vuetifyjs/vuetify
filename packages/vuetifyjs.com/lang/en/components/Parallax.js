@@ -19,5 +19,9 @@ export default {
       header: 'Jumbotron',
       desc: 'The parallax can have its effect disabled to be used as a standard **jumbotron**'
     }
-  }]
+  }],
+  props: {
+    alt: 'Attaches an alt property to the parallax image',
+    src: 'The image to parallax'
+  }
 }
