@@ -1,3 +1,5 @@
+import { consoleError } from '../util/console'
+
 export default {
   name: 'validatable',
 
@@ -113,7 +115,7 @@ export default {
         if (valid === false || typeof valid === 'string') {
           this.errorBucket.push(valid)
         } else if (valid !== true) {
-          throw new TypeError(`Rules should return a string or boolean, received '${typeof valid}' instead`)
+          consoleError(`Rules should return a string or boolean, received '${typeof valid}' instead`, this)
         }
       }
 
