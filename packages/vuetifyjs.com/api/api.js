@@ -4941,13 +4941,13 @@ module.exports = {
         "name": "absolute",
         "type": "Boolean",
         "default": "false",
-        "source": null
+        "source": "positionable"
       },
       {
         "name": "bottom",
         "type": "Boolean",
         "default": "false",
-        "source": null
+        "source": "positionable"
       },
       {
         "name": "color",
@@ -4959,7 +4959,7 @@ module.exports = {
         "name": "left",
         "type": "Boolean",
         "default": "false",
-        "source": null
+        "source": "positionable"
       },
       {
         "name": "multiLine",
@@ -4971,7 +4971,7 @@ module.exports = {
         "name": "right",
         "type": "Boolean",
         "default": "false",
-        "source": null
+        "source": "positionable"
       },
       {
         "name": "timeout",
@@ -4983,7 +4983,7 @@ module.exports = {
         "name": "top",
         "type": "Boolean",
         "default": "false",
-        "source": null
+        "source": "positionable"
       },
       {
         "name": "value",
@@ -5000,6 +5000,7 @@ module.exports = {
     ],
     "mixins": [
       "colorable",
+      "positionable",
       "toggleable"
     ],
     "slots": [
