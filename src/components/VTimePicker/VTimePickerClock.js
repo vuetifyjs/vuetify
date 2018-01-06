@@ -150,7 +150,7 @@ export default {
     },
     onMouseUp () {
       this.isDragging = false
-      this.$emit('change', this.inputValue)
+      this.isAllowed(this.inputValue) && this.$emit('change', this.inputValue)
     },
     onDragMove (e) {
       e.preventDefault()
