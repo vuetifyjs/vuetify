@@ -2440,6 +2440,18 @@ module.exports = {
     "mixins": [],
     "slots": [
       "default"
+    ],
+    "functions": [
+      {
+        "name": "reset",
+        "parameters": null,
+        "return": "void"
+      },
+      {
+        "name": "validate",
+        "parameters": null,
+        "return": "Boolean"
+      }
     ]
   },
   "v-content": {
