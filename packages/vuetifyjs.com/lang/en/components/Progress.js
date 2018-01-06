@@ -25,7 +25,7 @@ export default {
     },
     linearDeterminate: {
       header: 'Determinate',
-      desc: 'The progress linear component can have a determinate state modified by v-model.'
+      desc: 'The progress linear component can have a determinate state modified by `v-model`.'
     },
     linearIndeterminate: {
       header: 'Indeterminate',
