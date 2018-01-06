@@ -3,10 +3,10 @@ export default {
   headerText: 'The `v-tabs` component is used for hiding content behind a selectable item. This can also be used as a pseudo-navigation for a page, where the tabs are links and the tab-items are the content.',
   components: [
     'v-tabs',
-    'v-tabs-slider',
-    'v-tabs-item',
+    'v-tab',
     'v-tabs-items',
-    'v-tabs-content',
+    'v-tab-item',
+    'v-tabs-slider'
   ],
   examples: [{
     toolbar: {
