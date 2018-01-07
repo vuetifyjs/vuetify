@@ -16,9 +16,7 @@
               v-list-tile(avatar tag="ul")
                 v-list-tile-avatar(:color="browser.supported ? browser.supported === 'polyfill' ? 'warning' : 'success' : 'error'")
                   v-icon(dark v-if="typeof browser.icon === 'string'") fa-{{ browser.icon }}
-                  template(v-else)
-                    v-icon(dark style="position: absolute; clip: rect(0px 21px 40px 0px)") fa-{{ browser.icon[0] }}
-                    v-icon(dark style="position: absolute; clip: rect(0px 40px 40px 22px)") fa-{{ browser.icon[1] }}
+                  v-icon(dark v-else v-for="icon in browser.icon").browser-icon--split fa-{{ icon }}
                 v-list-tile-content
                   v-list-tile-title {{ browser.title }}
                   v-list-tile-sub-title {{ getBrowserSupport(browser) }}
@@ -131,3 +129,17 @@
     }
   }
 </script>
+
+<style lang="stylus">
+  .browser-icon--split
+    position: absolute
+
+    // IE  щ（ﾟДﾟщ）
+    top: 8px
+    left: 16px
+
+    &:nth-child(1)
+      clip: rect(0px 21px 40px 0px)
+    &:nth-child(2)
+      clip: rect(0px 40px 40px 22px)
+</style>
