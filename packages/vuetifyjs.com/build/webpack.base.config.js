@@ -12,7 +12,7 @@ let plugins = []
 module.exports = {
   devtool: isProd
     ? false
-    : '#cheap-module-source-map',
+    : 'eval-source-map',
   output: {
     path: resolve('../public'),
     publicPath: '/public/',
