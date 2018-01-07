@@ -10,7 +10,9 @@ import { createRange } from '../../util/helpers'
 import pad from '../VDatePicker/util/pad'
 import isValueAllowed from '../../util/isValueAllowed'
 
-const rangeHours = createRange(24)
+const rangeHours24 = createRange(24)
+const rangeHours12am = createRange(12)
+const rangeHours12pm = rangeHours12am.map(v => v + 12)
 const rangeMinutes = createRange(60)
 
 export default {
@@ -165,9 +167,15 @@ export default {
       const allowedFn = type === 'hour' ? this.allowedHours : this.allowedMinutes
       if (!allowedFn) return value
 
-      const range = type === 'minute' ? rangeMinutes : rangeHours
-      const first = range.find(v => isValueAllowed((v + value) % range.length, allowedFn))
-      return (first || 0) + value
+      const range = type === 'minute'
+        ? rangeMinutes :
+        (this.isAmPm
+          ? (value < 12
+            ? rangeHours12am
+            : rangeHours12pm)
+          : rangeHours24)
+      const first = range.find(v => isValueAllowed((v + value) % range.length + range[0], allowedFn))
+      return ((first || 0) + value) % range.length + range[0]
     },
     genClock () {
       return this.$createElement('v-time-picker-clock', {
@@ -176,14 +184,13 @@ export default {
           color: this.color,
           dark: this.dark,
           double: this.selectingHour && !this.isAmPm,
-          max: this.selectingHour ? (this.isAmPm ? 12 : 23) : 59,
-          min: this.selectingHour && this.isAmPm ? 1 : 0,
-          pad: this.selectingHour ? 0 : 2,
-          rotate: this.selectingHour && this.isAmPm ? 30 : 0,
+          format: this.selectingHour ? (this.isAmPm ? this.convert24to12 : val => val) : val => pad(val, 2),
+          max: this.selectingHour ? (this.isAmPm && this.period === 'am' ? 11 : 23) : 59,
+          min: this.selectingHour && this.isAmPm && this.period === 'pm' ? 12 : 0,
           scrollable: this.scrollable,
           size: this.landscape ? 250 : 270,
           step: this.selectingHour ? 1 : 5,
-          value: this.selectingHour ? (this.isAmPm ? this.convert24to12(this.hour) : this.hour) : this.minute
+          value: this.selectingHour ? this.hour : this.minute
         },
         on: {
           input: this.onInput,
