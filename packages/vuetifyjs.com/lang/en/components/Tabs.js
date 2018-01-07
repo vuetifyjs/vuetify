@@ -45,6 +45,10 @@ export default {
       header: 'Grow',
       desc: 'The **grow** prop will make the tab items take up all available space.'
     },
+    overflowToMenu: {
+      header: 'With menu',
+      desc: 'You can use a menu to hold additional tabs, swapping them out on the fly'
+    },
     pagination: {
       header: 'Pagination',
       desc: 'If the tab items overflow their container, pagination controls will appear.'

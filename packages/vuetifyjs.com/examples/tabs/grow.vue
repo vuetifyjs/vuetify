@@ -17,37 +17,13 @@
         grow
       >
         <v-tabs-slider color="yellow"></v-tabs-slider>
-        <v-tab
-          v-for="(item, i) in items"
-          :key="i"
-          :href="'#tab-' + (i + 1)"
-        >
+        <v-tab v-for="item in items" :key="item">
           {{ item }}
         </v-tab>
-        <v-menu :nudge-width="100" left bottom>
-          <v-tab slot="activator">
-            Menu
-            <v-icon>arrow_drop_down</v-icon>
-          </v-tab>
-          <v-list class="grey lighten-3">
-            <v-list-tile
-              tag="a"
-              v-for="n in 4"
-              :key="n"
-              @click=""
-            >
-              Item {{ n }}
-            </v-list-tile>
-          </v-list>
-        </v-menu>
       </v-tabs>
     </v-toolbar>
     <v-tabs-items v-model="tab">
-      <v-tab-item
-        v-for="i in 5"
-        :key="i"
-        :id="'tab-' + i"
-      >
+      <v-tab-item v-for="item in items" :key="item">
         <v-card flat>
           <v-card-text>{{ text }}</v-card-text>
         </v-card>
