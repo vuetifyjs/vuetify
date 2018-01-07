@@ -61,17 +61,17 @@
         checkbox: null,
         dictionary: {
           attributes: {
-            email: 'Email Address'
+            email: 'E-mail Address'
             // custom attributes
           },
           custom: {
             name: {
-              required: () => 'Your name is not valid empty field',
-              max:'The name field may not be greater than 10 characters. custom Message',
+              required: () => 'Name can not be empty',
+              max:'The name field may not be greater than 10 characters',
               // custom messages
             },
             select: {
-               required: 'select field is required'
+               required: 'Select field is required'
             }
           }
         }

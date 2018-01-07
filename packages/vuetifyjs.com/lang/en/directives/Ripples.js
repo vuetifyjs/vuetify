@@ -15,32 +15,32 @@ export default {
     },
     tabs: {
       header: 'Tabs',
-      desc: 'Tabs by default have ripples disabled. This can be enabled with the **ripple** prop.',
+      desc: 'Tabs by default have ripples disabled. This can be enabled with the `ripple` prop.',
       uninverted: true
     },
     navigationDrawers: {
       header: 'Navigation drawers',
-      desc: 'List items by default have ripples disabled. This can be enabled with the **ripple** prop',
+      desc: 'List items by default have ripples disabled. This can be enabled with the `ripple` prop',
       uninverted: true
     },
     toolbars: {
       header: 'Toolbars',
-      desc: 'Toolbar items by default have ripples disabled. This can be enabled with the **ripple** prop.',
+      desc: 'Toolbar items by default have ripples disabled. This can be enabled with the `ripple` prop.',
       uninverted: true
     },
     expansionPanels: {
       header: 'Expansion panels',
-      desc: 'Expansion panels by default have ripples disabled. This can be enabled with the **ripple** prop.',
+      desc: 'Expansion panels by default have ripples disabled. This can be enabled with the `ripple` prop.',
       uninverted: true
     },
     customRipple: {
-      header: 'Custom Element',
-      desc: 'Add the ripple effect to any custom element. This can be done with the `v-ripple` HTML attribute.',
+      header: 'Components',
+      desc: 'Several other components have built-in support for ripples. Enable it with the `ripple` prop.',
       uninverted: true
     },
     htmlElement: {
       header: 'Standard HTML element',
-      desc: 'Add the ripple effect to a standard HTML element. This can be enabled with the `v-ripple` HTML attribute.',
+      desc: 'Add the ripple effect to a standard HTML element. This can be enabled with the `v-ripple` directive.',
       uninverted: true
     }
   }],
