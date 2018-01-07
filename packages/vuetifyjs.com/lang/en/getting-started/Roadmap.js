@@ -18,7 +18,7 @@ export default {
       icon: 'error',
       name: 'Version 1.1',
       date: 'Q1 2018',
-      desc: 'Will be focused on updating/improving and abstracted the form elements. The new abstracted components will be publicly available so that developers can create their own implementations easier.'
+      desc: 'All form components will be refactored into more concise abstracted implementations, paving way for numerous improvements, new functionality, and a more streamlined approach to testing.'
     },
     {
       icon: 'mdi-package-variant-closed',
