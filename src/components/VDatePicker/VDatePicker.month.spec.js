@@ -3,32 +3,6 @@ import { test } from '@util/testing'
 import VDatePicker from './VDatePicker'
 import VMenu from '@components/VMenu'
 
-function createMenuPicker (mount, props) {
-  const wrapper = mount(Vue.component('test', {
-    components: {
-      VDatePicker,
-      VMenu
-    },
-    render (h) {
-      return h('v-menu', {
-        ref: 'menu'
-      }, [h('v-date-picker', {
-        props,
-        ref: 'picker'
-      })])
-    }
-  }))
-
-  const menu = wrapper.vm.$refs.menu
-  menu.isActive = true
-
-  const picker = menu.$slots.default[0].context.$refs.picker
-
-  expect('Unable to locate target [data-app]').toHaveBeenTipped()
-
-  return { wrapper, menu, picker }
-}
-
 test('VDatePicker.js', ({ mount, compileToFunctions }) => {
   it('should emit input event on year click', async () => {
     const cb = jest.fn()
@@ -225,23 +199,6 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
 
     wrapper.setProps({ value: '2005-11' })
     expect(wrapper.vm.tableDate).toBe('2005')
-  })
-
-  it('should update with autosave on month click', async () => {
-    const { wrapper, menu, picker } = createMenuPicker(mount, {
-      type: 'month',
-      value: '2013-05',
-      autosave: true
-    })
-
-    const input = jest.fn()
-    picker.$on('input', input)
-
-    picker.monthClick('2013-06')
-    expect(menu.isActive).toBe(true)
-    await wrapper.vm.$nextTick()
-    expect(menu.isActive).toBe(false)
-    expect(input).toBeCalledWith('2013-06')
   })
 
   it('should use prev and next icons', () => {

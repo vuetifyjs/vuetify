@@ -40,7 +40,6 @@ export default {
       currentMonth: null,
       currentYear: null,
       isReversing: false,
-      originalDate: this.value,
       // tableDate is a string in 'YYYY' / 'YYYY-M' format (leading zero for month is not required)
       tableDate: this.type === 'month'
         ? `${now.getFullYear()}`
@@ -53,7 +52,6 @@ export default {
       type: [Array, Object, Function],
       default: () => null
     },
-    autosave: Boolean,
     appendIcon: {
       type: String,
       default: 'chevron_right'
@@ -152,7 +150,7 @@ export default {
         return this.type === 'month' ? this.firstAllowedMonth : this.firstAllowedDate
       },
       set (value) {
-        const date = value == null ? this.originalDate : this.sanitizeDateString(value, this.type)
+        const date = value ? this.sanitizeDateString(value, this.type) : null
         this.$emit('input', date)
       }
     },
@@ -232,19 +230,6 @@ export default {
     setTableDate () {
       this.tableDate = this.type === 'month' ? `${this.year}` : `${this.year}-${pad(this.month + 1)}`
     },
-    save () {
-      if (this.originalDate) {
-        this.originalDate = this.value
-      } else {
-        this.originalDate = this.inputDate
-      }
-
-      if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
-    },
-    cancel () {
-      this.inputDate = this.originalDate
-      if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
-    },
     yearClick (value) {
       if (this.type === 'month') {
         const date = `${value}-${pad(this.month + 1)}`
@@ -266,12 +251,12 @@ export default {
         this.activePicker = 'DATE'
       } else {
         this.inputDate = value
-        this.$nextTick(() => (this.autosave && this.save()))
+        this.$emit('change', value)
       }
     },
     dateClick (value) {
       this.inputDate = value
-      this.$nextTick(() => (this.autosave && this.save()))
+      this.$emit('change', value)
     },
     genPickerTitle () {
       return this.$createElement('v-date-picker-title', {

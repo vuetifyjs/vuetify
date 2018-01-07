@@ -3,31 +3,6 @@ import { test } from '@util/testing'
 import VTimePicker from '@components/VTimePicker'
 import VMenu from '@components/VMenu'
 
-function createMenuPicker(mount, props) {
-  const wrapper = mount(Vue.component('test', {
-    components: {
-      VTimePicker,
-      VMenu
-    },
-    render (h) {
-      return h('v-menu', {
-        props: { value: true },
-        ref: 'menu'
-      }, [h('v-time-picker', {
-        props,
-        ref: 'picker'
-      })])
-    }
-  }))
-
-  const menu = wrapper.vm.$refs.menu
-  const picker = menu.$slots.default[0].context.$refs.picker
-
-  expect('Unable to locate target [data-app]').toHaveBeenTipped()
-
-  return { wrapper, menu, picker }
-}
-
 test('VTimePicker.js', ({ mount }) => {
   it('should accept a value', () => {
     const wrapper = mount(VTimePicker, {
@@ -131,23 +106,6 @@ test('VTimePicker.js', ({ mount }) => {
     expect(wrapper.vm.period).toBe('am')
   })
 
-  it('should reset selectingHour when saved/canceled', async () => {
-    const wrapper = mount(VTimePicker, {
-      propsData: {
-        value: null
-      }
-    })
-
-    wrapper.vm.selectingHour = false
-    wrapper.vm.save()
-    await wrapper.vm.$nextTick()
-    expect(wrapper.vm.selectingHour).toBe(true)
-    wrapper.vm.selectingHour = false
-    wrapper.vm.cancel()
-    await wrapper.vm.$nextTick()
-    expect(wrapper.vm.selectingHour).toBe(true)
-  })
-
   it('should render colored time picker', () => {
     const wrapper = mount(VTimePicker, {
       propsData: {
@@ -242,7 +200,7 @@ test('VTimePicker.js', ({ mount }) => {
     expect(wrapper.vm.inputHour).toBe(15)
   })
 
-  it('should change selectingHour when hour is selected', () => {
+  it('should change selectingHour when hour/minute is selected', () => {
     const wrapper = mount(VTimePicker, {
       propsData: {
         value: '01:23pm',
@@ -255,7 +213,7 @@ test('VTimePicker.js', ({ mount }) => {
     clock.$emit('change')
     expect(wrapper.vm.selectingHour).toBe(false)
     clock.$emit('change')
-    expect(wrapper.vm.selectingHour).toBe(false)
+    expect(wrapper.vm.selectingHour).toBe(true)
   })
 
   it('should change selectingHour when clicked in title', () => {
@@ -290,83 +248,6 @@ test('VTimePicker.js', ({ mount }) => {
     expect(wrapper.vm.period).toBe('am')
     title.$emit('update:period', 'pm')
     expect(wrapper.vm.period).toBe('pm')
-  })
-
-  it('should toggle selectingHour on cancel in next tick', async () => {
-    const wrapper = mount(VTimePicker, {
-      propsData: {
-        value: '20:13',
-      }
-    })
-    wrapper.vm.selectingHour = false
-    wrapper.vm.cancel()
-    expect(wrapper.vm.selectingHour).toBe(false)
-    await wrapper.vm.$nextTick()
-    expect(wrapper.vm.selectingHour).toBe(true)
-  })
-
-  it('should deactivate parent component on cancel', async () => {
-    const { wrapper, menu, picker } = createMenuPicker(mount, { value: '20:13' })
-
-    picker.selectingHour = false
-
-    picker.$refs.clock.$emit('input', 17)
-    picker.$refs.clock.$emit('change')
-    await wrapper.vm.$nextTick()
-    expect(menu.isActive).toBe(true)
-    expect(picker.selectingHour).toBe(false)
-
-    picker.cancel()
-    await wrapper.vm.$nextTick()
-    expect(picker.inputHour).toBe(20)
-    expect(picker.inputMinute).toBe(13)
-    expect(picker.selectingHour).toBe(true)
-  })
-
-  it('should deactivate parent component on cancel (no value provided)', async () => {
-    const { wrapper, menu, picker } = createMenuPicker(mount, {})
-
-    picker.selectingHour = false
-    picker.$refs.clock.$emit('input', 17)
-    picker.$refs.clock.$emit('change')
-    await wrapper.vm.$nextTick()
-    expect(menu.isActive).toBe(true)
-    expect(picker.selectingHour).toBe(false)
-
-    picker.cancel()
-    await wrapper.vm.$nextTick()
-    expect(picker.inputHour).toBe(undefined)
-    expect(picker.inputMinute).toBe(undefined)
-    expect(picker.selectingHour).toBe(true)
-  })
-
-  it('should update with autosave on minute click', async () => {
-    const { wrapper, menu, picker } = createMenuPicker(mount, {
-      value: '20:13',
-      autosave: true
-    })
-
-    picker.selectingHour = false
-    picker.$refs.clock.$emit('input', 23)
-    expect(picker.originalMinute).toBe(13)
-    picker.$refs.clock.$emit('change')
-    expect(menu.isActive).toBe(false)
-    expect(picker.originalMinute).toBe(23)
-  })
-
-  it('should update selectingHour in next tick on minute click (autosave)', async () => {
-    const wrapper = mount(VTimePicker, {
-      propsData: {
-        value: '20:13',
-        autosave: true
-      }
-    })
-
-    wrapper.vm.selectingHour = false
-    wrapper.vm.$refs.clock.$emit('change')
-    expect(wrapper.vm.selectingHour).toBe(false)
-    await wrapper.vm.$nextTick()
-    expect(wrapper.vm.selectingHour).toBe(true)
   })
 
   it('should match snapshot with slot', async () => {
