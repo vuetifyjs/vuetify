@@ -1,7 +1,7 @@
 import Home from './Home'
-import PremadeThemes from './PremadeThemes'
+import PreMadeThemes from './PreMadeThemes'
 
 export default {
   Home,
-  PremadeThemes
+  PreMadeThemes
 }
