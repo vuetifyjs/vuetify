@@ -27,8 +27,8 @@ export default {
         desc: 'Provides type-ahead autocomplete functionality.'
       },
       customFilter: {
-        header: 'Custom Filter on autocomplete',
-        desc: '`filter` prop used to filter each individual item with custom logic, in this example we filter items by name'
+        header: 'Custom filter on autocomplete',
+        desc: 'The `filter` prop can be used to filter each individual item with custom logic. In this example we filter items by name'
       },
       scopedSlots: {
         header: 'Scoped slots',
