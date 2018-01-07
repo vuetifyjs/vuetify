@@ -86,7 +86,8 @@ export function createStore () {
       },
       ['app/FULLSCREEN'] (state, payload) {
         state.isFullscreen = payload
-        state.appDrawer = !payload
+        state.stateless = payload
+        state.appDrawer = !payload && null
         state.appToolbar = !payload
       }
     },

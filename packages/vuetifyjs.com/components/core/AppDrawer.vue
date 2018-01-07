@@ -3,6 +3,7 @@
     app
     fixed
     v-model="appDrawer"
+    :stateless="isFullscreen"
   )#app-drawer
     div.text-xs-center
       div.diamond-sponsor-label Diamond Sponsors
