@@ -44,7 +44,7 @@ export default {
         staticClass: 'picker__title',
         'class': this.addBackgroundColorClassChecks({
           'picker__title--landscape': this.landscape
-        }, 'computedTitleColor')
+        }, this.computedTitleColor)
       }, this.$slots.title)
     },
     genBodyTransition () {
