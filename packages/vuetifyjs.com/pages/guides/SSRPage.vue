@@ -4,7 +4,7 @@
       section-head(value="Guides.ServerSideRendering.structureHeader")
       section-text(value="Guides.ServerSideRendering.structureText1")
       h3.mb-3 {{ $t('Guides.ServerSideRendering.structureSubHeader') }}
-      markup(lang="cli")
+      markup(lang="bash")
         | / project
         |   / assets
         |   / build
