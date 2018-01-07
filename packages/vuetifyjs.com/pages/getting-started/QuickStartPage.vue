@@ -16,7 +16,7 @@
               v-list-tile(avatar tag="ul")
                 v-list-tile-avatar(:color="browser.supported ? browser.supported === 'polyfill' ? 'warning' : 'success' : 'error'")
                   v-icon(dark v-if="typeof browser.icon === 'string'") fa-{{ browser.icon }}
-                  v-icon(dark v-else v-for="icon in browser.icon").browser-icon--split fa-{{ icon }}
+                  v-icon(dark v-else v-for="icon in browser.icon" :key="icon").browser-icon--split fa-{{ icon }}
                 v-list-tile-content
                   v-list-tile-title {{ browser.title }}
                   v-list-tile-sub-title {{ getBrowserSupport(browser) }}
