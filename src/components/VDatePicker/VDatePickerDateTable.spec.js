@@ -138,18 +138,6 @@ test('VDatePickerDateTable.js', ({ mount }) => {
     expect(tableDate).toBeCalledWith('2005-06')
   })
 
-  it('should calculate current date if not provided', () => {
-    const wrapper = mount(VDatePickerDateTable, {
-      propsData: {
-        tableDate: '2005-05'
-      }
-    })
-
-    expect(wrapper.vm.currentDate).toBe(new Date().getDate())
-    expect(wrapper.vm.currentMonth).toBe(new Date().getMonth())
-    expect(wrapper.vm.currentYear).toBe(new Date().getFullYear())
-  })
-
   it('should return null for selected date if not provided', () => {
     const wrapper = mount(VDatePickerDateTable, {
       propsData: {
