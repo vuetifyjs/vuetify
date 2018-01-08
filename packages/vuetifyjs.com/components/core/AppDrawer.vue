@@ -169,6 +169,9 @@
           this.$vuetify.breakpoint.mdAndDown
         ) this.appDrawer = false
       },
+      appDrawer (val) {
+        if (!val) this.docSearch.autocomplete.autocomplete.close()
+      },
       isSearching (val) {
         this.$refs.toolbar.isScrolling = !val
 
