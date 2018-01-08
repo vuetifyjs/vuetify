@@ -73,6 +73,7 @@ export default {
       default: 'Items per page:'
     },
     selectAll: [Boolean, String],
+    radioSelect: [Boolean],
     search: {
       required: false
     },
@@ -275,7 +276,7 @@ export default {
       )
 
       return this.hideActions &&
-        !this.hasPagination
+      !this.hasPagination
         ? items
         : items.slice(this.pageStart, this.pageStop)
     },
@@ -316,8 +317,15 @@ export default {
           }
 
           let selected = this.value.slice()
-          if (value) selected.push(item)
-          else selected = selected.filter(i => i[keyProp] !== itemKey)
+          if (value) {
+            if (this.radioSelect) {
+              selected.length = 0
+            }
+            selected.push(item)
+          }
+          else {
+            selected = selected.filter(i => i[keyProp] !== itemKey)
+          }
           this.$emit('input', selected)
         }
       })
