@@ -149,7 +149,7 @@ export default {
     reactsToRoute () {
       return !this.disableRouteWatcher &&
         !this.stateless &&
-        !this.permanent
+        (this.temporary || this.isMobile)
     },
     resizeIsDisabled () {
       return this.disableResizeWatcher || this.stateless
@@ -221,6 +221,8 @@ export default {
     },
     value (val) {
       if (this.permanent) return
+
+      if (val == null) return this.init()
 
       if (val !== this.isActive) this.isActive = val
     }

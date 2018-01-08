@@ -1,11 +1,13 @@
+import { factory as PositionableFactory } from './positionable'
+
 export default function applicationable (value, events = []) {
   return {
     name: 'applicationable',
 
+    mixins: [PositionableFactory(['absolute', 'fixed'])],
+
     props: {
-      absolute: Boolean,
-      app: Boolean,
-      fixed: Boolean
+      app: Boolean
     },
 
     computed: {

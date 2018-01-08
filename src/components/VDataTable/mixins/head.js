@@ -1,3 +1,5 @@
+import { consoleWarn } from '../../../util/console'
+
 export default {
   methods: {
     genTHead () {
@@ -74,7 +76,7 @@ export default {
     },
     genHeaderSortingData (header, children, data, classes) {
       if (!('value' in header)) {
-        console.warn('Data table headers must have a value property that corresponds to a value in the v-model array')
+        consoleWarn('Headers must have a value property that corresponds to a value in the v-model array', this)
       }
 
       data.attrs.tabIndex = 0

@@ -39,10 +39,12 @@ export default {
       ref: 'content'
     }
 
-    return h('div', {
-      staticClass: 'content--wrap'
-    }, [
-      h(this.tag, data, this.$slots.default)
+    return h(this.tag, data, [
+      h(
+        'div',
+        { staticClass: 'content--wrap' },
+        this.$slots.default
+      )
     ])
   }
 }
