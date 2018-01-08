@@ -20,7 +20,7 @@ export default {
       },
       multiple: {
         header: 'Multiple',
-        desc: 'A multi-select can utilize v-chip as the display for selected items.'
+        desc: 'A multi-select can utilize `v-chip` as the display for selected items.'
       },
       autocomplete: {
         header: 'Autocomplete',
@@ -59,7 +59,7 @@ export default {
     deletableChips: 'Adds a remove icon to selected chips',
     dense: 'Lowers max height of list items',
     disabled: 'Disables the input',
-    editable: ' Creates an editable button - <a href="https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons" target="_blank" rel="noopener">spec<a/>',
+    editable: ' Creates an editable button - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)',
     filter: 'The function used for filtering items',
     hideSelected: 'Do not display in the select menu items that are already selected',
     itemAvatar: 'Set property of **items**\'s avatar value',
@@ -72,10 +72,10 @@ export default {
     multiLine: 'Causes label to float when the select component is focused or dirty',
     noDataText: 'Display text when there is no data',
     openOnClear: 'When using the **clearable** prop, once cleared, the select menu will either open or stay open, depending on the current state',
-    overflow: 'Creates an overflow button - <a href="https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons" target="_blank" rel="noopener">spec</a>',
-    returnObject: 'Changes the selection behavior to return the object directly rather than the value specified with item-value',
-    searchInput: 'Bound when using the autocomplete prop. Use the .sync modifier to catch user input from the autocomplete search input',
-    segmented: 'Creates a segmented button - <a href="https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons" target="_blank" rel="noopener">spec</a>',
+    overflow: 'Creates an overflow button - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)',
+    returnObject: 'Changes the selection behavior to return the object directly rather than the value specified with **item-value**',
+    searchInput: 'Bound when using the autocomplete prop. Use the **.sync** modifier to catch user input from the autocomplete search input',
+    segmented: 'Creates a segmented button - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)',
     tags: 'Tagging functionality, allows the user to create new values not available from the **items** prop'
   },
   slots: {
