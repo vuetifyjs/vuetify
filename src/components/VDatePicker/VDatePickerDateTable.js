@@ -67,23 +67,29 @@ export default {
         'btn--disabled': disabled
       }, this.themeClasses)
 
-      return (isActive || isCurrent)
+      return isActive
         ? this.addBackgroundColorClassChecks(classes)
-        : classes
+        // Normally with a v-btn component
+        // using the outline prop would envoke
+        // to TextColor classes as opposed
+        // to BackgroundColor
+        : isCurrent
+          ? this.addTextColorClassChecks(classes)
+          : classes
     },
     genButton (day) {
       const date = `${this.displayedYear}-${pad(this.displayedMonth + 1)}-${pad(day)}`
       const disabled = !isValueAllowed(date, this.allowedDates)
 
       return this.$createElement('button', {
-        staticClass: 'btn btn--raised btn--icon',
+        staticClass: 'btn btn--icon',
         'class': this.genButtonClasses(day, disabled),
         attrs: {
           type: 'button'
         },
         domProps: {
           disabled,
-          innerHTML: `<span class="btn__content">${this.formatter(date)}</span>`
+          innerHTML: `<div class="btn__content">${this.formatter(date)}</div>`
         },
         on: disabled ? {} : {
           click: () => this.$emit('input', date)
