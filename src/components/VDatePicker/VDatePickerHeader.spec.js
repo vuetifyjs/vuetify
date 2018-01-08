@@ -55,7 +55,7 @@ test('VDatePickerHeader.js', ({ mount }) => {
       }
     })
 
-    const strong = wrapper.find('.date-picker-header__value strong')[0]
+    const strong = wrapper.find('.date-picker-header__value')[0]
     expect(strong.hasClass('green--text')).toBe(true)
     expect(strong.hasClass('text--lighten-1')).toBe(true)
   })

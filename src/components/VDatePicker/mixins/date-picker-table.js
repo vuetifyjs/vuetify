@@ -30,6 +30,7 @@ export default {
       type: String,
       default: 'en-us'
     },
+    readonly: Boolean,
     scrollable: Boolean,
     tableDate: {
       type: String,

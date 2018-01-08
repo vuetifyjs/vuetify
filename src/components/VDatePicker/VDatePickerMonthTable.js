@@ -24,10 +24,9 @@ export default {
     calculateTableDate (delta) {
       return `${parseInt(this.tableDate, 10) + Math.sign(delta || 1)}`
     },
-    genMonthButtonClasses (month) {
+    genMonthButtonClasses (month, isDisabled) {
       const isSelected = this.selectedYear === this.displayedYear && this.selectedMonth === month
       const isCurrent = this.currentYear === this.displayedYear && this.currentMonth === month
-      const isDisabled = !isValueAllowed(`${this.displayedYear}-${pad(month + 1)}`, this.allowedDates)
       const classes = {
         'btn--flat': !isSelected,
         'btn--active btn--depressed': isSelected,
@@ -50,9 +49,12 @@ export default {
 
       return this.$createElement('button', {
         staticClass: 'btn',
-        'class': this.genMonthButtonClasses(month),
+        'class': this.genMonthButtonClasses(month, isDisabled),
         attrs: { type: 'button' },
-        on: isDisabled ? undefined : {
+        style: this.readonly ? {
+          'pointer-events': 'none'
+        } : undefined,
+        on: (this.readonly || isDisabled) ? undefined : {
           click: () => this.$emit('input', `${value}`)
         }
       }, [btnContent])

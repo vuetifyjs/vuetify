@@ -15,8 +15,8 @@ exports[`VDatePickerHeader.js should render component and match snapshot 1`] = `
       </i>
     </div>
   </button>
-  <div class="date-picker-header__value">
-    <strong class="accent--text">
+  <div class="date-picker-header__value accent--text">
+    <strong>
       November 2005
     </strong>
   </div>
@@ -51,8 +51,8 @@ exports[`VDatePickerHeader.js should render component with default slot and matc
       </i>
     </div>
   </button>
-  <div class="date-picker-header__value">
-    <strong class="accent--text">
+  <div class="date-picker-header__value accent--text">
+    <strong>
       <span>
         foo
       </span>

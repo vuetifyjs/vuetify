@@ -24,6 +24,7 @@ export default {
       type: String,
       default: ''
     },
+    readonly: Boolean,
     selectingYear: Boolean,
     year: {
       type: [Number, String],
@@ -54,7 +55,7 @@ export default {
       }, this.yearIcon)
     },
     getYearBtn () {
-      return this.genPickerButton('selectingYear', true, [
+      return this.genPickerButton('selectingYear', !this.readonly, [
         this.year,
         this.yearIcon ? this.genYearIcon() : null
       ], 'date-picker-title__year')

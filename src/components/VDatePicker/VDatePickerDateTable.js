@@ -73,11 +73,14 @@ export default {
         attrs: {
           type: 'button'
         },
+        style: this.readonly ? {
+          'pointer-events': 'none'
+        } : undefined,
         domProps: {
           disabled,
           innerHTML: `<span class="btn__content">${this.formatter(date)}</span>`
         },
-        on: disabled ? {} : {
+        on: (this.readonly || disabled)  ? {} : {
           click: () => this.$emit('input', date)
         }
       })

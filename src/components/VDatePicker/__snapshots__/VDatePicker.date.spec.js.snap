@@ -364,8 +364,8 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
             </i>
           </div>
         </button>
-        <div class="date-picker-header__value">
-          <strong class="primary--text">
+        <div class="date-picker-header__value primary--text">
+          <strong>
             November 2005
           </strong>
         </div>
@@ -736,8 +736,8 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
             </i>
           </div>
         </button>
-        <div class="date-picker-header__value">
-          <strong class="orange--text text--darken-1">
+        <div class="date-picker-header__value orange--text text--darken-1">
+          <strong>
             November 2005
           </strong>
         </div>
@@ -1108,8 +1108,8 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             </i>
           </div>
         </button>
-        <div class="date-picker-header__value">
-          <strong class="accent--text">
+        <div class="date-picker-header__value accent--text">
+          <strong>
             May 2013
           </strong>
         </div>
@@ -1491,8 +1491,8 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             </i>
           </div>
         </button>
-        <div class="date-picker-header__value">
-          <strong class="accent--text">
+        <div class="date-picker-header__value accent--text">
+          <strong>
             May 2013
           </strong>
         </div>
