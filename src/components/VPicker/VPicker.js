@@ -26,7 +26,7 @@ export default {
     landscape: Boolean,
     transition: {
       type: String,
-      default: 'scale-transition'
+      default: 'picker-transition'
     }
   },
 
@@ -50,8 +50,6 @@ export default {
     genBodyTransition () {
       return this.$createElement('transition', {
         props: {
-          origin: 'center center',
-          mode: 'out-in',
           name: this.transition
         }
       }, this.$slots.default)

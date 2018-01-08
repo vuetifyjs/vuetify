@@ -30,7 +30,7 @@ export default {
       const isDisabled = !isValueAllowed(`${this.displayedYear}-${pad(month + 1)}`, this.allowedDates)
       const classes = {
         'btn--flat': !isSelected,
-        'btn--active': isSelected,
+        'btn--active btn--depressed': isSelected,
         'btn--outline': isCurrent && !isSelected,
         'btn--disabled': isDisabled
       }

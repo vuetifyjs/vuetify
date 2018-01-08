@@ -15,6 +15,10 @@ export default {
 
   mixins: [PickerButton],
 
+  data: () => ({
+    isReversing: false
+  }),
+
   props: {
     date: {
       type: String,
@@ -28,6 +32,17 @@ export default {
     yearIcon: {
       type: String
     }
+  },
+
+  computed: {
+    computedTransition () {
+      return this.isReversing ? 'picker-reverse-transition' : 'picker-transition'
+    }
+  },
+
+  watch: {
+    date: 'setReversing',
+    year: 'setReversing'
   },
 
   methods: {
@@ -47,8 +62,7 @@ export default {
     genTitleText () {
       return this.$createElement('transition', {
         props: {
-          name: 'slide-y-reverse-transition',
-          mode: 'out-in'
+          name: this.computedTransition,
         }
       }, [
         this.$createElement('div', {
@@ -59,6 +73,11 @@ export default {
     },
     genTitleDate (title) {
       return this.genPickerButton('selectingYear', false, this.genTitleText(title), 'date-picker-title__date')
+    },
+    setReversing (val, prev) {
+      const getTime = v => new Date(v).getTime()
+
+      this.isReversing = getTime(val) < getTime(prev)
     }
   },
 

@@ -21,6 +21,7 @@ theme(picker-title, "picker")
   border-radius: $card-border-radius
   display: flex
   flex-direction: column
+  line-height: 1
   width: 290px
   contain: content
 
@@ -32,7 +33,6 @@ theme(picker-title, "picker")
   color: #fff
   border-top-left-radius: $card-border-radius
   border-top-right-radius: $card-border-radius
-  height: 105px
   padding: 16px
 
 .picker__title__btn
@@ -52,6 +52,9 @@ theme(picker-title, "picker")
   height: 290px
   overflow: hidden
   position: relative
+
+  > div
+    width: 100%
 
 .picker--landscape
   flex-direction: row
