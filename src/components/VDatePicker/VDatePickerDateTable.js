@@ -16,6 +16,14 @@ export default {
   ],
 
   props: {
+    events: {
+      type: [Array, Object, Function],
+      default: () => null
+    },
+    eventColor: {
+      type: String,
+      default: 'warning'
+    },
     firstDayOfWeek: {
       type: [String, Number],
       default: 0
@@ -82,6 +90,12 @@ export default {
         }
       })
     },
+    genEvent () {
+      return this.$createElement('div', {
+        staticClass: 'date-picker-table__event',
+        class: this.addBackgroundColorClassChecks({}, 'eventColor')
+      })
+    },
     // Returns number of the days from the firstDayOfWeek to the first day of the current month
     weekDaysBeforeFirstDayOfTheMonth () {
       const firstDayOfTheMonth = new Date(`${this.displayedYear}-${pad(this.displayedMonth + 1)}-01T00:00:00+00:00`)
@@ -92,14 +106,16 @@ export default {
       const children = []
       const daysInMonth = new Date(this.displayedYear, this.displayedMonth + 1, 0).getDate()
       let rows = []
-      const day = this.weekDaysBeforeFirstDayOfTheMonth()
+      let day = this.weekDaysBeforeFirstDayOfTheMonth()
 
-      for (let i = 0; i < day; i++) {
-        rows.push(this.$createElement('td'))
-      }
-
-      for (let i = 1; i <= daysInMonth; i++) {
-        rows.push(this.$createElement('td', [this.genButton(i)]))
+      while (day--) rows.push(this.$createElement('td'))
+      for (day = 1; day <= daysInMonth; day++) {
+        const date = `${this.displayedYear}-${pad(this.displayedMonth + 1)}-${pad(day)}`
+        const isEvent = isValueAllowed(date, this.events, false)
+        rows.push(this.$createElement('td', [
+          this.genButton(day),
+          isEvent ? this.genEvent() : null
+        ]))
 
         if (rows.length % 7 === 0) {
           children.push(this.genTR(rows))

@@ -61,6 +61,14 @@ export default {
       type: Function,
       default: null
     },
+    events: {
+      type: [Array, Object, Function],
+      default: () => null
+    },
+    eventColor: {
+      type: String,
+      default: 'warning'
+    },
     firstDayOfWeek: {
       type: [String, Number],
       default: 0
@@ -308,7 +316,8 @@ export default {
         props: {
           allowedDates: this.allowedDates,
           color: this.color,
-          current: this.current,
+          events: this.events,
+          eventColor: this.eventColor,
           firstDayOfWeek: this.firstDayOfWeek,
           format: this.dayFormat,
           locale: this.locale,
