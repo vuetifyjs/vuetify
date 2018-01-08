@@ -316,6 +316,7 @@ export default {
         props: {
           allowedDates: this.allowedDates,
           color: this.color,
+          current: this.current,
           events: this.events,
           eventColor: this.eventColor,
           firstDayOfWeek: this.firstDayOfWeek,
