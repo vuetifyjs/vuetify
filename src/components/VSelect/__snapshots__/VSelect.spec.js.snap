@@ -199,13 +199,12 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
       </div>
     </div>
     <i aria-hidden="true"
-       class="material-icons icon input-group__append-icon input-group__icon-cb"
+       class="icon material-icons input-group__append-icon input-group__icon-cb"
     >
       arrow_drop_down
     </i>
   </div>
   <div class="input-group__details">
-    <!---->
   </div>
 </div>
 
@@ -269,13 +268,12 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
       </div>
     </div>
     <i aria-hidden="true"
-       class="material-icons icon input-group__append-icon input-group__icon-cb"
+       class="icon material-icons input-group__append-icon input-group__icon-cb"
     >
       arrow_drop_down
     </i>
   </div>
   <div class="input-group__details">
-    <!---->
   </div>
 </div>
 
@@ -331,13 +329,12 @@ exports[`VSelect should render v-select correctly when using v-list-tile in item
       </div>
     </div>
     <i aria-hidden="true"
-       class="material-icons icon input-group__append-icon input-group__icon-cb"
+       class="icon material-icons input-group__append-icon input-group__icon-cb"
     >
       arrow_drop_down
     </i>
   </div>
   <div class="input-group__details">
-    <!---->
   </div>
 </div>
 
