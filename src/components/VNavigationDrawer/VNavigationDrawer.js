@@ -222,6 +222,8 @@ export default {
     value (val) {
       if (this.permanent) return
 
+      if (val == null) return this.init()
+
       if (val !== this.isActive) this.isActive = val
     }
   },

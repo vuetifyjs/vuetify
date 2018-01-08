@@ -36,6 +36,11 @@ exports[`VTimePicker.js should accept a date object for a value 1`] = `
       >
         <div class="time-picker-clock__hand accent">
         </div>
+        <span class="active accent">
+          <span>
+            12
+          </span>
+        </span>
         <span class>
           <span>
             1
@@ -89,11 +94,6 @@ exports[`VTimePicker.js should accept a date object for a value 1`] = `
         <span class>
           <span>
             11
-          </span>
-        </span>
-        <span class="active accent">
-          <span>
-            12
           </span>
         </span>
       </div>
@@ -141,6 +141,11 @@ exports[`VTimePicker.js should accept a value 1`] = `
         </div>
         <span class>
           <span>
+            12
+          </span>
+        </span>
+        <span class>
+          <span>
             1
           </span>
         </span>
@@ -192,11 +197,6 @@ exports[`VTimePicker.js should accept a value 1`] = `
         <span class>
           <span>
             11
-          </span>
-        </span>
-        <span class>
-          <span>
-            12
           </span>
         </span>
       </div>
@@ -244,6 +244,11 @@ exports[`VTimePicker.js should change am/pm when updated from model 1`] = `
         </div>
         <span class>
           <span>
+            12
+          </span>
+        </span>
+        <span class>
+          <span>
             1
           </span>
         </span>
@@ -297,11 +302,6 @@ exports[`VTimePicker.js should change am/pm when updated from model 1`] = `
             11
           </span>
         </span>
-        <span class>
-          <span>
-            12
-          </span>
-        </span>
       </div>
     </div>
   </div>
@@ -345,6 +345,11 @@ exports[`VTimePicker.js should render colored time picker 1`] = `
       >
         <div class="time-picker-clock__hand primary">
         </div>
+        <span class>
+          <span>
+            12
+          </span>
+        </span>
         <span class>
           <span>
             1
@@ -400,11 +405,6 @@ exports[`VTimePicker.js should render colored time picker 1`] = `
             11
           </span>
         </span>
-        <span class>
-          <span>
-            12
-          </span>
-        </span>
       </div>
     </div>
   </div>
@@ -448,6 +448,11 @@ exports[`VTimePicker.js should render colored time picker 2`] = `
       >
         <div class="time-picker-clock__hand orange darken-1">
         </div>
+        <span class>
+          <span>
+            12
+          </span>
+        </span>
         <span class>
           <span>
             1
@@ -503,11 +508,6 @@ exports[`VTimePicker.js should render colored time picker 2`] = `
             11
           </span>
         </span>
-        <span class>
-          <span>
-            12
-          </span>
-        </span>
       </div>
     </div>
   </div>
@@ -551,6 +551,11 @@ exports[`VTimePicker.js should render landscape component 1`] = `
       >
         <div class="time-picker-clock__hand accent">
         </div>
+        <span class>
+          <span>
+            12
+          </span>
+        </span>
         <span class>
           <span>
             1
@@ -604,11 +609,6 @@ exports[`VTimePicker.js should render landscape component 1`] = `
         <span class>
           <span>
             11
-          </span>
-        </span>
-        <span class>
-          <span>
-            12
           </span>
         </span>
       </div>

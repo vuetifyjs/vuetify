@@ -8,7 +8,6 @@ test('VTimePickerClock.js', ({ mount }) => {
         allowedValues: n => n % 2,
         max: 59,
         min: 0,
-        pad: 2,
         size: 280,
         step: 5,
         value: 10
@@ -25,7 +24,6 @@ test('VTimePickerClock.js', ({ mount }) => {
         double: true,
         max: 59,
         min: 0,
-        pad: 2,
         size: 280,
         step: 5,
         value: 10

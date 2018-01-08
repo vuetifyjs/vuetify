@@ -82,14 +82,7 @@ export default {
       'icon--right': props.right,
       'theme--dark': props.dark,
       'theme--light': props.light
-    }, props.color ? Colorable.methods.addTextColorClassChecks.call(props, {}, 'color') : {
-      'primary--text': props.primary,
-      'secondary--text': props.secondary,
-      'success--text': props.success,
-      'info--text': props.info,
-      'warning--text': props.warning,
-      'error--text': props.error
-    })
+    }, props.color ? Colorable.methods.addTextColorClassChecks.call(props, {}, 'color') : {})
 
     // Order classes
     // * Component class

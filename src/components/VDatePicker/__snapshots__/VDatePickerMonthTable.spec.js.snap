@@ -104,7 +104,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
         </td>
         <td>
           <button type="button"
-                  class="btn btn--active accent"
+                  class="btn btn--active btn--depressed accent"
           >
             <span class="btn__content">
               Nov
