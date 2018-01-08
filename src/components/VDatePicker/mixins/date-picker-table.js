@@ -18,10 +18,7 @@ export default {
       type: [Array, Object, Function],
       default: () => null
     },
-    current: {
-      type: String,
-      default: null
-    },
+    current: String,
     format: {
       type: Function,
       default: null
@@ -55,13 +52,13 @@ export default {
       return this.value ? (this.value.split('-')[0] * 1) : null
     },
     currentDate () {
-      return this.current ? (this.current.split('-')[2] * 1) : new Date().getDate()
+      return this.current ? (this.current.split('-')[2] * 1) : null
     },
     currentMonth () {
-      return this.current ? (this.current.split('-')[1] - 1) : new Date().getMonth()
+      return this.current ? (this.current.split('-')[1] - 1) : null
     },
     currentYear () {
-      return this.current ? (this.current.split('-')[0] * 1) : new Date().getFullYear()
+      return this.current ? (this.current.split('-')[0] * 1) : null
     },
     displayedMonth () {
       return this.tableDate.split('-')[1] - 1

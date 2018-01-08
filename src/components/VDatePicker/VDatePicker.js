@@ -34,12 +34,10 @@ export default {
   data () {
     const now = new Date()
     return {
-      defaultColor: 'accent',
       activePicker: this.type.toUpperCase(),
-      currentDay: null,
-      currentMonth: null,
-      currentYear: null,
+      defaultColor: 'accent',
       isReversing: false,
+      now,
       originalDate: this.value,
       // tableDate is a string in 'YYYY' / 'YYYY-M' format (leading zero for month is not required)
       tableDate: this.type === 'month'
@@ -86,6 +84,10 @@ export default {
       default: 'chevron_left'
     },
     scrollable: Boolean,
+    showCurrent: {
+      type: [Boolean, String],
+      default: true
+    },
     // Function formatting currently selected date in the picker title
     titleDateFormat: {
       type: Function,
@@ -106,10 +108,16 @@ export default {
   },
 
   computed: {
+    current () {
+      if (this.showCurrent === true) {
+        return this.sanitizeDateString(`${this.now.getFullYear()}-${this.now.getMonth() + 1}-${this.now.getDate()}`, this.type)
+      }
+
+      return this.showCurrent || null
+    },
     firstAllowedDate () {
-      const now = new Date()
-      const year = now.getFullYear()
-      const month = now.getMonth()
+      const year = this.now.getFullYear()
+      const month = this.now.getMonth()
 
       if (this.allowedDates) {
         for (let date = 1; date <= 31; date++) {
@@ -123,11 +131,10 @@ export default {
         }
       }
 
-      return this.sanitizeDateString(`${year}-${month + 1}-${now.getDate()}`, 'date')
+      return this.sanitizeDateString(`${year}-${month + 1}-${this.now.getDate()}`, 'date')
     },
     firstAllowedMonth () {
-      const now = new Date()
-      const year = now.getFullYear()
+      const year = this.now.getFullYear()
 
       if (this.allowedDates) {
         for (let month = 0; month < 12; month++) {
@@ -138,7 +145,7 @@ export default {
         }
       }
 
-      return `${year}-${pad(now.getMonth() + 1)}`
+      return `${year}-${pad(this.now.getMonth() + 1)}`
     },
     // inputDate MUST be a string in ISO 8601 format (including leading zero for month/day)
     // YYYY-MM for month picker
@@ -221,13 +228,6 @@ export default {
     this.setTableDate()
   },
 
-  mounted () {
-    const date = new Date()
-    this.currentDay = date.getDate()
-    this.currentMonth = date.getMonth()
-    this.currentYear = date.getFullYear()
-  },
-
   methods: {
     setTableDate () {
       this.tableDate = this.type === 'month' ? `${this.year}` : `${this.year}-${pad(this.month + 1)}`
@@ -308,6 +308,7 @@ export default {
         props: {
           allowedDates: this.allowedDates,
           color: this.color,
+          current: this.current,
           firstDayOfWeek: this.firstDayOfWeek,
           format: this.dayFormat,
           locale: this.locale,
@@ -327,6 +328,7 @@ export default {
         props: {
           allowedDates: this.type === 'month' ? this.allowedDates : null,
           color: this.color,
+          current: this.current,
           format: this.monthFormat,
           locale: this.locale,
           scrollable: this.scrollable,
