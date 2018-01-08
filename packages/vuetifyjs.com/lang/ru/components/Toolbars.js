@@ -1,6 +1,6 @@
 export default {
-  header: 'Toolbar',
-  headerText: 'The `v-toolbar` component is pivotal to any gui, as it generally is the primary source of site navigation. The toolbar component works great in conjunction with a navigation drawer for hiding links and presenting an activator to open the sidebar on mobile.',
+  header: 'Панель инструментов',
+  headerText: 'Компонент `v-toolbar` является ключевым для любого gui, поскольку он обычно является основным источником навигации по сайту. Компонент панели инструментов отлично работает в сочетании с панелью навигации для скрытия ссылок и представления активатора для открытия боковой панели на мобильном устройстве.',
   components: [
     'v-toolbar',
     'v-toolbar-title',
@@ -10,75 +10,75 @@ export default {
   ],
   examples: [{
     default: {
-      header: 'Default',
-      desc: 'A toolbar is a flexible container that can be utilized in a number of ways. By default, the toolbar is 64px high on desktop, 56px high on mobile portrait and 48px high on mobile landscape. These can be overwritten using the `dense` and `prominent` props.'
+      header: 'По умолчанию',
+      desc: 'Панель инструментов представляет собой гибкий контейнер, который можно использовать несколькими способами. По умолчанию панель инструментов имеет 64px на рабочем столе, 56px на мобильном портрете и 48px на мобильном ландшафте. Они могут быть перезаписаны с использованием `dense` и `prominent` .'
     },
     appBar: {
-      header: 'App bar',
-      desc: 'An App bar is the primary toolbar of your application. It can contain icons, menus and more.'
+      header: 'Панель приложений',
+      desc: 'Панель приложений является основной панелью приложения. Он может содержать значки, меню и многое другое.'
     },
     appBarExtension: {
-      header: 'App bar with extension',
-      desc: 'An extension can be used that creates a much more prominent bar. If a title is placed within the extension, it will automatically be shifted to the right to match the normal location it would be at in the main bar.'
+      header: 'Панель приложений с расширением',
+      desc: 'Можно использовать расширение, которое создает гораздо более заметный бар. Если заголовок помещен в расширение, он будет автоматически смещен вправо, чтобы соответствовать нормальному местоположению, на котором он находился бы в основной строке.'
     },
     columnWidthWithHierarchy: {
-      header: 'Column width with hierarchy',
-      desc: 'Toolbars come in 2 variants, light and dark. Light toolbars have dark tinted buttons and dark text whereas Dark toolbars have white tinted buttons and white text.'
+      header: 'Ширина столбца с иерархией',
+      desc: 'Панели инструментов представлены в двух вариантах: светлых и темных. Светлые панели инструментов имеют темные тонированные кнопки и темный текст, тогда как темные панели имеют белые тонированные кнопки и белый текст.'
     },
     flexibleAndCard: {
-      header: 'Flexible toolbar and card toolbar',
-      desc: 'With a few custom styles, you can easily create your amazing user interfaces.'
+      header: 'Гибкая панель инструментов и панель инструментов',
+      desc: 'С помощью нескольких пользовательских стилей вы можете легко создавать свои удивительные пользовательские интерфейсы.'
     },
     floatingWithSearch: {
-      header: 'Floating with search',
-      desc: 'A floating toolbar can be placed over the content that it references.'
+      header: 'Плавающая с поиском',
+      desc: 'Плавающая панель инструментов может быть размещена над содержимым, на которое оно ссылается.'
     },
     variations: {
-      header: 'Variations',
-      desc: 'An app-bar has multiple variations that can be applied with themes and helper classes. These range from light and dark themes, colored and transparent.',
+      header: 'Вариации',
+      desc: 'Панель приложений имеет несколько вариантов, которые могут применяться с темами и вспомогательными классами. Они варьируются от светлых и темных тем, цветных и прозрачных.',
       uninverted: true
     },
     prominent: {
-      header: 'Prominent toolbars',
-      desc: 'Prominent toolbars add a slot where you can placed elements in the extended area. The content and extension areas will be locked to 64px in height.'
+      header: 'Выпадающие панели инструментов',
+      desc: 'Выпадающие панели инструментов добавляют слот, в который вы можете поместить элементы в расширенную область. Области содержимого и расширения будут заблокированы до 64px в высоту.'
     },
     dense: {
-      header: 'Dense toolbars',
-      desc: 'Dense toolbars reduce their height to 48px. This is also the default behavior for mobile landscape orientation.'
+      header: 'Непрозрачные панели инструментов',
+      desc: 'Непрозрачные панели инструментов уменьшают их высоту до 48рх. Это также поведение по умолчанию для мобильной ландшафтной ориентации.'
     },
     denseProminent: {
-      header: 'Dense prominent toolbars',
-      desc: 'You can combine both the prominent and dense to extend a smaller variant of the toolbar.'
+      header: 'Непрозрачные выпадающие панели инструментов',
+      desc: 'Вы можете комбинировать как выпадающие, так и видимые, чтобы расширить малый вариант панели инструментов.'
     },
     scrolling: {
-      header: 'Scrolling techniques',
-      desc: 'A toolbar can transition off screen when scrolling. Here we demonstrate how you can specify the scroll target (default is window). Keep in mind, for this example there is special markup that will not be required in your application.'
+      header: 'Методы прокрутки',
+      desc: 'При прокрутке панели инструментов можно перейти с экрана. Здесь мы демонстрируем, как вы можете указать цель прокрутки (по умолчанию это окно). Имейте в виду, для этого примера есть специальная разметка, которая не потребуется в вашем приложении.'
     },
     appBarMenu: {
-      header: 'App bar with menu',
-      desc: 'You can add menu components to a toolbar.'
+      header: 'Панель приложений с меню',
+      desc: 'Вы можете добавлять компоненты меню на панель инструментов.'
     },
     systemBarsStatusWindow: {
-      header: 'System bars - status/window',
-      desc: 'System bars are useful for notification icons on mobile and desktop. For live examples of, head to the pre-defined layouts.'
+      header: 'Системные бары - статус / окно',
+      desc: 'Системные панели полезны для значков уведомлений на мобильных устройствах и на рабочем столе. Для живых примеров, перейдите к заранее определенным макетам.'
     }
   }],
   props: {
-    card: 'Inherits border radius when used within `v-card`',
-    clippedLeft: 'Designates that the applications `v-navigation-drawer` is clipped on the left side of the toolbar',
-    clippedRight: 'Designates that the applications `v-navigation-drawer` is clipped on the right side of the toolbar',
-    dense: 'Reduces the height of the toolbar content and extension',
-    extended: 'Force the toolbar to generate the extension without using the slot',
-    flat: 'Removes the toolbar box-shadow',
-    floating: 'Makes the toolbar float inline',
-    height: 'Designates a specific height for the toolbar',
-    lightsOut: 'Reduces the system bar opacity',
-    manualScroll: 'Manually apply the **scroll-off-screen** functionality',
-    prominent: 'Increases the height of the toolbar content and extension',
-    scrollOffScreen: 'Will transition the toolbar off screen when scrolling down',
-    scrollTarget: 'Assign the scroll target for scroll-off-screen',
-    scrollThreshold: 'The amount of scroll distance down before the toolbar uses scroll-off-screen',
-    status: 'Reduces the system bar height',
-    window: 'Increases the system bar height'
+    card: 'Наследует радиус границы при использовании внутри `v-card`',
+    clippedLeft: 'Указывает, что приложения `v-navigation-drawer` обрезаются с левой стороны панели инструментов',
+    clippedRight: 'Указывает, что приложения `v-navigation-drawer` обрезаются с правой стороны панели инструментов',
+    dense: 'Уменьшает высоту содержимого панели инструментов и расширения',
+    extended: 'Настройте панель инструментов для создания расширения без использования слота',
+    flat: 'Удаляет тень панели инструментов',
+    floating: 'Создает встроенную панель инструментов',
+    height: 'Определяет определенную высоту для панели инструментов',
+    lightsOut: 'Уменьшает непрозрачность панели',
+    manualScroll: 'Вручную применить функциональность **scroll-off-screen**',
+    prominent: 'Увеличивает высоту содержимого панели инструментов и расширения',
+    scrollOffScreen: 'Если вы прокрутите вниз, перейдет панель инструментов',
+    scrollTarget: 'Назначить цель прокрутки для прокрутки экрана',
+    scrollThreshold: 'Количество прокрутки вниз до панели инструментов использует прокрутку за кадром',
+    status: 'Уменьшает высоту панели',
+    window: 'Увеличивает высоту панели'
   }
 }

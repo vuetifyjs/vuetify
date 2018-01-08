@@ -1,24 +1,24 @@
 export default {
-  header: 'Tooltip',
-  headerText: 'The `v-tooltip` component is useful for conveying information when a user hovers over an element. You can also programmatically control the display of tooltips through a **v-model**',
+  header: 'Подсказка',
+  headerText: 'Компонент `v-tooltip` полезен для передачи информации, когда пользователь нависает над элементом. Вы также можете программно управлять отображением всплывающих подсказок с помощью **v-model**',
   components: ['v-tooltip'],
   examples: [{
     default: {
-      header: 'Default',
-      desc: 'Tooltips can wrap any element.'
+      header: 'По умолчанию',
+      desc: 'Подсказки могут обернуть любой элемент.'
     },
     alignment: {
-      header: 'Alignment',
-      desc: 'Tooltip can be aligned to any of the four sides of the activator element'
+      header: 'Выравнивание',
+      desc: 'Подсказка может быть выровнена с любой из четырех сторон элемента-активатора'
     },
     visibility: {
-      header: 'Visibility',
-      desc: 'Tooltip visibility can be programmatically changed using `v-model`.'
+      header: 'Видимость',
+      desc: 'Видимость подсказки можно программно изменить, используя `v-model`.'
     }
   }],
   props: {
-    closeDelay: 'Delay (in ms) after which menu closes (when open-on-hover prop is set to true)',
-    debounce: 'Duration before tooltip is shown and hidden when hovered',
-    openDelay: 'Delay (in ms) after which menu opens (when open-on-hover prop is set to true)'
+    closeDelay: 'Задержка (в миллисекундах), после которой закрывается меню (когда для параметра **open-on-hover** установлено значение **true**)',
+    debounce: 'Длительность перед всплывающей подсказкой отображается и скрывается при наведении курсора',
+    openDelay: 'Задержка (в миллисекундах), после которой открывается меню (когда для параметра **open-on-hover** установлено значение **true**)'
   }
 }

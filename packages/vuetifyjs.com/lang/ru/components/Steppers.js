@@ -1,6 +1,6 @@
 export default {
   header: 'Stepper',
-  headerText: 'The `v-stepper` component displays progress through numbered steps.',
+  headerText: 'Компонент `v-stepper` отображает прогресс с помощью пронумерованных шагов.',
   components: [
     'v-stepper-step',
     'v-stepper-content',
@@ -8,75 +8,75 @@ export default {
   ],
   examples: [{
     example: {
-      header: 'Example',
-      desc: 'A stepper can be used for a multitude of scenarios, including shopping carts, record creation and more.'
+      header: 'Пример',
+      desc: '_Stepper_ может использоваться для множества сценариев, включая карточки для покупок, создание записей и многое другое.'
     },
     editable: {
-      header: 'Editable steps',
-      desc: 'An editable step can be selected by a user at any point and will navigate them to that step.'
+      header: 'Редактируемые steppers',
+      desc: 'Редактируемый шаг может быть выбран пользователем в любой точке и будет перемещать их на этот шаг.'
     },
     nonEditable: {
-      header: 'Non-editable steps',
-      desc: 'Non-editable steps force a user to process linearly through your process.'
+      header: 'Не редактируемые steppers',
+      desc: 'Не редактируемые steppers заставляют пользователя обрабатывать линейно через ваш процесс.'
     },
     optional: {
-      header: 'Optional steps',
-      desc: 'An optional step can be called out with sub-text.'
+      header: 'Дополнительные steppers',
+      desc: 'Необязательный шаг можно вызвать с помощью субтекста.'
     },
     horizontal: {
-      header: 'Horizontal steps',
-      desc: 'Horizontal steppers move users along the x-axis through the defined steps.'
+      header: 'Горизонтальные steppers',
+      desc: 'Горизонтальные _steppers_ перемещают пользователей по оси X с помощью определенных шагов.'
     },
     vertical: {
-      header: 'Vertical steppers',
-      desc: 'Vertical steppers move users along the y-axis and otherwise work exactly the same as their horizontal counterpart.'
+      header: 'Вертикальные steppers',
+      desc: 'Вертикальные steppers перемещают пользователей по оси Y и в противном случае работают точно так же, как и их горизонтальная копия.'
     },
     linear: {
-      header: 'Linear steppers',
-      desc: 'Linear steppers will always move a user through your defined path.'
+      header: 'Линейные steppers',
+      desc: 'Линейные steppers всегда будет перемещать пользователя по определенному пути.'
     },
     nonLinear: {
-      header: 'Non-linear steppers',
-      desc: 'Non-linear steppers allow the user to move through your process in whatever way they choose.'
+      header: 'Нелинейные steppers',
+      desc: 'Нелинейные steppers позволяют пользователю перемещаться по вашему процессу любым способом, который они выбирают.'
     },
     alternateLabels: {
-      header: 'Alternate labels',
-      desc: 'Steppers also have an alternative label style which places the title under the step itself.'
+      header: 'Альтернативная метка',
+      desc: 'Steppers также имеют альтернативный стиль метки, который помещает заголовок под сам шаг.'
     },
     error: {
-      header: 'Multi-line error state',
-      desc: 'An error state can be displayed to notify the user of some action that must be taken.'
+      header: 'Многострочное состояние ошибки',
+      desc: 'Может отображат состояние ошибки, чтобы уведомить пользователя о некоторых действиях, которые необходимо предпринять.'
     },
     alternateError: {
-      header: 'Alternative label multi-line error state',
-      desc: 'The error state can also be applied to the alternative label style.'
+      header: 'Альтернативная метка многострочного состояние ошибки',
+      desc: 'Состояние ошибки также может быть применено к альтернативному стилю метки.'
     },
     verticalError: {
-      header: 'Vertical multi-line error state',
-      desc: 'The same state also applies to Vertical steppers.'
+      header: 'Вертикальное многострочное состояние ошибки',
+      desc: 'То же состояние также относится и к вертикальным steppers.'
     },
     dynamic: {
-      header: 'Dynamic steps',
-      desc: 'Steppers can have their steps dynamically added or removed. If a currently active step is removed, be sure to account for this by changing the applied model.'
+      header: 'Динамические шаги',
+      desc: 'Steppers могут динамически добавлять или удалять свои шаги. Если текущий активный шаг удален, обязательно учтите это, изменив применяемую модель.'
     }
   }],
   props: {
-    altLabels: 'Places the labels beneath the step',
-    complete: 'Marks step as complete',
-    completeIcon: 'Icon to display when step is marked as completed',
-    editable: 'Marks step as editable',
-    editIcon: 'Icon to display when step is editable',
-    errorIcon: 'Icon to display when step has an error',
-    nonLinear: 'Allow user to jump to any step',
-    vertical: 'Display steps vertically'
+    altLabels: 'Помещает метки под шаг',
+    complete: 'Пометка, шаг завершен',
+    completeIcon: 'Иконка для отображения, когда шаг отмечен как завершенный',
+    editable: 'Помечает шаг как редактируемый',
+    editIcon: 'Иконка, отображаемая при редактировании шага',
+    errorIcon: 'Иконка для отображения, если на шаге имеется ошибка',
+    nonLinear: 'Разрешить пользователю перейти на любой шаг',
+    vertical: 'Показывать шаги по вертикали'
   },
   special: {
     props: {
       'v-stepper-step': {
-        step: 'Content to display inside step circle'
+        step: 'Содержимое для отображения внутри шага'
       },
       'v-stepper-content': {
-        step: 'Sets step to associate the content to'
+        step: 'Устанавливает шаг для связывания содержимого с'
       }
     }
   }
