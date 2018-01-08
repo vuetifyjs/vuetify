@@ -13,6 +13,17 @@ test('VDatePickerHeader.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render readonly component and match snapshot', () => {
+    const wrapper = mount(VDatePickerHeader, {
+      propsData: {
+        value: '2005-11',
+        readonly: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should render component with year value and match snapshot', () => {
     const wrapper = mount(VDatePickerHeader, {
       propsData: {

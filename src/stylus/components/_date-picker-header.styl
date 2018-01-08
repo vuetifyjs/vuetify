@@ -5,9 +5,6 @@ date-picker-header($material)
   .date-picker-header__value:not(:hover)
     color: $material.text.primary !important
 
-  .date-picker-header__value--disabled strong
-    color: $material.text.disabled !important
-
 theme(date-picker-header, "date-picker-header")
 
 .date-picker-header
@@ -35,4 +32,4 @@ theme(date-picker-header, "date-picker-header")
     width: 100%
 
 .date-picker-header__value--disabled
-  cursor: default
+  pointer-events: none

@@ -112,9 +112,7 @@ export default {
 
       return this.$createElement('div', {
         staticClass: 'date-picker-header__value',
-        'class': this.addTextColorClassChecks({
-          'date-picker-header__value--disabled': this.readonly
-        })
+        'class': this.readonly ? ['date-picker-header__value--disabled'] : this.addTextColorClassChecks()
       }, [transition])
     }
   },
