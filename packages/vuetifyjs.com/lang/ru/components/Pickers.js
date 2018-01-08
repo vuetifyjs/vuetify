@@ -1,108 +1,96 @@
 export default {
   header: 'Picker',
-  headerText: 'The `v-date-picker` and `v-time-picker` are stand-alone components that can be utilized in many existing Vuetify components. They offer the user a visual representation for selecting date and time.',
+  headerText: '`v-date-picker` и` v-time-picker` являются автономными компонентами, которые могут использоваться во многих существующих компонентах Vuetify. Они предлагают пользователю визуальное представление для выбора даты и времени.',
   components: ['v-date-picker', 'v-time-picker'],
   examples: [{
     dateLight: {
-      header: 'Date pickers',
-      desc: 'Date pickers come in two orientation variations, portrait **(default)** and landscape.'
+      header: 'Выбор даты',
+      desc: 'Выбор даты осуществляется в двух вариантах ориентации: портретная **(по умолчанию)** и альбомная.'
     },
     dateColorable: {
-      header: 'Date pickers - Colors',
-      desc: 'Date picker colors can be set using the `color` and `header-color` props. If `header-color` prop is not provided header will use the `color` prop value.'
+      header: 'Выбор даты - Цвета',
+      desc: 'Цвета Выбора даты можно установить с помощью `color` и `header-color`. Если `header-color` не указан, заголовок будет использовать значение `color`.'
     },
     dateDialogAndMenu: {
-      header: 'Date pickers - In dialog and menu',
-      desc: 'When integrating a picker into a `v-text-field`, it is recommended to use the **readonly** prop. This will prevent mobile keyboards from triggering. To save vertical space, you can also hide the picker title.  \n\n  Pickers expose a scoped slot that allow you to hook into save and cancel functionality. This will maintain an old value which can be replaced if the user cancels.'
+      header: 'Выбор даты - В диалоговом окне и меню',
+      desc: 'При интеграции, в поле `v-text-field` рекомендуется использовать **readonly**. Это предотвратит запуск мобильных клавиатур. Чтобы сохранить вертикальное пространство, вы также можете скрыть заголовок Выбора даты. \n\n Выбор даты предоставляет доступный слот, который позволяет вам подключаться к функциям сохранения и отмены. Это позволит сохранить старое значение, которое может быть заменено, если пользователь отменит свой выбор.'
     },
     dateAllowedDates: {
-      header: 'Date pickers - Allowed dates',
-      desc: 'You can specify allowed dates using arrays, objects, and functions.'
+      header: 'Выбор даты - Допустимые даты',
+      desc: 'Вы можете указать допустимые даты с использованием массивов, объектов и функций.'
     },
     dateInternationalization: {
-      header: 'Date pickers - Internationalization',
-      desc: 'The date picker supports internationalization through the JavaScript Date object. Specify a BCP 47 language tag using the `locale` prop, and then set the first day of the week with the `first-day-of-week` prop.'
+      header: 'Выбор даты - интернационализация',
+      desc: 'Выбор даты поддерживает интернационализацию через объект JavaScript Date. Укажите тег языка BCP 47, используя `locale`, а затем установите первый день недели с помощью свойства `first-day-of-week`.'
     },
     dateIcons: {
-      header: 'Date pickers - icons',
-      desc: 'You can override the default icons used in the picker.'
+      header: 'Выбор даты - Иконки',
+      desc: 'Вы можете переопределить иконки по умолчанию, используемые в Выборе даты'
     },
     monthLight: {
-      header: 'Month pickers',
-      desc: 'Month pickers come in two orientation variations, portrait **(default)** and landscape.'
+      header: 'Выбор месяца',
+      desc: 'Выбор месяца осуществляется в двух вариантах ориентации: портретная **(по умолчанию)** и альбомная.'
     },
     monthColorable: {
-      header: 'Month pickers - Colors',
-      desc: 'Month picker colors can be set using the `color` and `header-color` props. If `header-color` prop is not provided header will use the `color` prop value.'
+      header: 'Выбор месяца - цвета',
+      desc: 'Цвета Выбора месяца можно установить с помощью `color` и` header-color`. Если `header-color` не указан, заголовок будет использовать значение `color`.'
     },
     monthDialogAndMenu: {
-      header: 'Month pickers - In dialog and menu',
-      desc: 'When integrating a picker into a `v-text-field`, it is recommended to use the **readonly** prop. This will prevent mobile keyboards from triggering. To save vertical space, you can also hide the picker title. \n\n Pickers expose a scoped slot that allow you to hook into save and cancel functionality. This will maintain an old value which can be replaced if the user cancels.'
+      header: 'Выбор месяца - В диалоговом окне и меню',
+      desc: 'При интеграции, в `v-text-field` рекомендуется использовать **readonly** prop. Это предотвратит запуск мобильных клавиатур. Чтобы сохранить вертикальное пространство, вы также можете скрыть заголовок Выбора месяца. \n\n Выбор месяца предоставляет доступный слот, который позволяет вам подключаться к функциям сохранения и отмены. Это позволит помнить старое значение, которое может быть заменено, если пользователь отменит свой выбор.'
     },
     monthAllowedMonths: {
-      header: 'Month pickers - Allowed months',
-      desc: 'You can specify allowed months using arrays, objects, and functions.'
+      header: 'Выбор месяца - Допустимые месяцы',
+      desc: 'Вы можете указать допустимые месяцы, используя массивы, объекты и функции.'
     },
     monthInternationalization: {
-      header: 'Month pickers - Internationalization',
-      desc: 'The month picker supports internationalization through the JavaScript Date object. Specify a BCP 47 language tag using the `locale` prop, and then set the first day of the week with the `first-day-of-week` prop.'
+      header: 'Выбор месяца - интернационализация',
+      desc: 'Выбор месяца поддерживает интернационализацию через объект JavaScript Date. Укажите тег языка BCP 47, используя `locale`, а затем установите первый день недели с помощью свойства `first-day-of-week`.'
     },
     monthIcons: {
-      header: 'Month pickers - icons',
-      desc: 'You can override the default icons used in the picker.'
+      header: 'Выбор месяца - Иконки',
+      desc: 'Вы можете переопределить иконки по умолчанию, используемые в Выборе месяца'
     },
     timeLight: {
-      header: 'Time pickers',
-      desc: 'Time pickers have the light theme enabled by default.'
+      header: 'Выбор времени',
+      desc: 'У Выбора времени по умолчанию включена светлая тема.'
     },
     timeColorable: {
-      header: 'Time pickers - Colors',
-      desc: 'Time picker colors can be set using the `color` and `header-color` props. If `header-color` prop is not provided  header will use the `color` prop value.'
+      header: 'Выбор времени - Цвета',
+      desc: 'Цветовая схема Выбора времени может быть установлена с помощью `color` и `header-color`. Если `header-color` не указан, заголовок будет использовать значение `color`'
     },
     timeDialogAndMenu: {
-      header: 'Time pickers - In dialog and menu',
-      desc: 'Due to the flexibility of pickers, you can really dial in the experience exactly how you want it.'
+      header: 'Выбор времени - В диалоговом окне и меню',
+      desc: 'Благодаря гибкости Picker вы действительно можете собрать на любой случай, именно так, как вы этого хотите.'
     },
     time24hFormat: {
-      header: 'Time pickers - 24h format',
-      desc: 'A time picker can be switched to 24hr format.'
+      header: 'Выбор времени - 24-часовой формат',
+      desc: 'Выбор времени можно переключить на 24-часовой формат.'
     },
     timeAllowedTimes: {
-      header: 'Time pickers - Allowed times',
-      desc: 'You can specify allowed times using arrays, objects, and functions.'
+      header: 'Выбор времени - Допустимое время',
+      desc: 'Вы можете указать допустимые времена, используя массивы, объекты и функции.'
     }
   }],
   props: {
     'v-date-picker': {
-      type: 'Determines the type of the picker - `\'date\'` for date picker, `\'month\'` for month picker',
-      headerColor: 'Defines the header color. If not specified it will use the color defined by `color` prop or the default picker color',
-      actions: 'Use this when using actions inside the picker',
-      autosave: 'Automatically save the selected value. This updates the internal previous value so if cancel is clicked, it will not revert the user changes',
-      landscape: 'Orients picker horizontal',
-      noTitle: 'Hide the picker title',
-      monthFormat: 'Formatting function used for displaying months in the months table. Called with date (ISO 8601 string) and locale (string) arguments.',
-      scrollable: 'Allows the use of the mousewheel in the picker',
-      allowedDates: 'Restricts which dates can be selected',
-      locale: 'Sets the locale. Accepts a string with a BCP 47 language tag.',
-      firstDayOfWeek: 'Sets the first day of the week, starting with 0 for Sunday.',
-      titleDateFormat: 'Allows you to customize the format of the date string that appears in the title of the date picker. Called with date (ISO 8601 string) and locale (string) arguments.',
-      headerDateFormat: 'Allows you to customize the format of the month string that appears in the header of the calendar. Called with date (ISO 8601 string) and locale (string) arguments.',
-      yearFormat: 'Allows you to customize the format of the year string that appears in the header of the calendar. Called with date (ISO 8601 string) and locale (string) arguments.',
-      dayFormat: 'Allows you to customize the format of the day string that appears in the date table. Called with date (ISO 8601 string) and locale (string) arguments.',
-      yearIcon: 'Generates an icon next to the year',
-      appendIcon: 'Sets the icon for next month/year button',
-      prependIcon: 'Sets the icon for previous month/year button'
+      type: 'Определяет тип - `date` для выбора даты,` month` для выбора месяца',
+      monthFormat: 'Функция форматирования, используемая для отображения месяцев в таблице месяцев. Вызывается с датой(строка ISO 8601) и locale(строка).',
+      allowedDates: 'Ограничивает, какие даты могут быть выбраны',
+      locale: 'Устанавливает языковой стандарт. Принимает строку с тегом языка BCP 47.',
+      firstDayOfWeek: 'Устанавливает первый день недели, начиная с 0 для воскресенья.',
+      titleDateFormat: 'Позволяет настроить формат строки даты, который отображается в заголовке выбора даты. Вызывается с датой(строка ISO 8601) и locale(строка).',
+      headerDateFormat: 'Позволяет настроить формат строки месяца, который отображается в заголовке календаря. Вызывается с датой (строка ISO 8601) и locale (строка).',
+      yearFormat: 'Позволяет настроить формат строки года, отображаемой в заголовке календаря. Вызывается с датой (строка ISO 8601) и locale(строка).',
+      dayFormat: 'Позволяет настроить формат дневной строки, отображаемой в таблице даты. Вызывается с датой (строка ISO 8601) и locale(строка).',
+      yearIcon: 'Создает Иконку рядом с годом',
+      appendIcon: 'Устанавливает иконку для кнопки следующего месяца/года',
+      prependIcon: 'Устанавливает иконку для кнопки предыдущий месяц/год'
     },
     'v-time-picker': {
-      actions: 'Use this when using actions inside the picker',
-      headerColor: 'Defines the header color. If not specified it will use the color defined by `color` prop or the default picker color',
-      autosave: 'Automatically save the selected value. This updates the internal previous value so if cancel is clicked, it will not revert the user changes',
-      landscape: 'Orients picker horizontal',
-      noTitle: 'Hide the picker title',
-      format: 'Available options are [ampm, 24hr]',
-      scrollable: 'Allows the use of the mousewheel in the picker',
-      allowedHours: 'Restricts which hours can be selected',
-      allowedMinutes: 'Restricts which minutes can be selected'
+      format: 'Доступны следующие опции: `am/pm` и` 24ч`',
+      allowedHours: 'Ограничивает, часы которые могут быть выбраны',
+      allowedMinutes: 'Ограничивает, какие минуты можно выбрать'
     }
   }
 }

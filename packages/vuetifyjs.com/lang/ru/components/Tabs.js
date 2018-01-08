@@ -1,9 +1,8 @@
 export default {
-  header: 'Tab',
-  headerText: 'The `v-tabs` component is used for hiding content behind a selectable item. This can also be used as a pseudo-navigation for a page, where the tabs are links and the tab-items are the content.',
+  header: 'Вкладки',
+  headerText: 'Компонент `v-tabs` используется для скрытия содержимого за выбранным элементом. Это также можно использовать в качестве псевдо-навигации для страницы, где вкладки являются ссылками, а элементом вкладки является содержимое.',
   components: [
     'v-tabs',
-    'v-tabs-bar',
     'v-tabs-slider',
     'v-tabs-item',
     'v-tabs-items',
@@ -11,40 +10,54 @@ export default {
   ],
   examples: [{
     toolbar: {
-      header: 'Toolbar tabs',
+      header: 'Вкладки панели инструментов',
       desc: ''
     },
     fixedTabs: {
-      header: 'Fixed tabs',
-      desc: 'The **fixed-tabs** prop sets a higher minimum width and applies a new maximum width to `v-tabs-items`. On desktop screens, the tab items will be centered within the `v-tabs-bar` component and switch to evenly fill on mobile.'
+      header: 'Фиксированные вкладки',
+      desc: 'Свойство **fixed-tabs** устанавливает более высокую минимальную ширину и применяет новую максимальную ширину к `v-tabs-items`. На экранах рабочего стола элементы вкладки будут центрироваться в компоненте `v-tabs` и переключаться на равномерное заполнение на мобильном устройстве.'
     },
+    // right: {
+    //   header: 'Right aligned tabs',
+    //   desc: 'The **right** prop aligns the tabs to the right'
+    // },
     content: {
-      header: 'Content',
-      desc: 'Tabs are not the only thing you can put inside the `v-tabs` component. In this example we\'ve also added a toolbar.'
+      header: 'Содержание',
+      desc: 'Вкладки - это не единственное, что можно добавить в компонент `v-tabs`. В этом примере мы также добавили панель инструментов.'
     },
     search: {
-      header: 'With search',
-      desc: 'Here is another example of additional content inside the `v-tabs` component.'
+      header: 'С поиском',
+      desc: 'Вот еще один пример дополнительного содержимого внутри компонента `v-tabs`.'
     },
-    icons: {
-      header: 'Icons',
-      desc: 'By using the `icons` prop you can add icons to each tab item.'
+    iconsAndText: {
+      header: 'Иконки и текст',
+      desc: 'Используя свойство **icons-and-text** , вы можете добавлять значки к каждому элементу табуляции.'
     },
     desktop: {
-      header: 'Desktop tabs',
+      header: 'Вкладки рабочего стола',
       desc: ''
+    },
+    alignWithTitle: {
+      header: 'Выровнять вкладки с заголовком панели инструментов',
+      desc: 'Создайте `v-tabs`, выровненные с компонентом` v-toolbar-title` (`v-toolbar-side-icon` или` v-btn` должны использоваться в `v-toolbar`). Может не работать, если текст вкладки обернут.'
     },
     grow: {
       header: 'Grow',
-      desc: 'The `grow` prop will make the tab items take up all available space.'
+      desc: 'Свойство **grow** заставит элементы вкладки занять все доступное пространство.'
     },
     pagination: {
-      header: 'Pagination',
-      desc: 'If the tab items overflow their container, pagination controls will appear.'
+      header: 'Нумерация страниц',
+      desc: 'Если элементы табуляции переполняют свой контейнер, появятся элементы управления разбиением на страницы.'
     },
-    disabledScroll: {
-      header: 'Disabled scroll',
-      desc: 'You can disable the pagination controls by setting the `scrollable` prop to `false`. This also has the effect of removing the margins around the tab item container.'
+    icons: {
+      header: 'Пользовательские Иконки',
+      desc: '**prepend-icon** и **append-icon** могут использоваться для применения пользовательских значков разбиения на страницы.'
     }
-  }]
+  }],
+  props: {
+    alignWithTitle: 'Сделайте `v-tabs` выровненным с заголовком панели инструментов',
+    prependIcon: 'Иконка левой страницы',
+    appendIcon: 'Иконка правой страницы',
+    right: 'Выравнивает вкладки вправо'
+  }
 }

@@ -1,75 +1,85 @@
 export default {
   header: 'Select',
-  headerText: 'Select fields components are used for collecting user provided information from a list of options.',
+  headerText: 'Поля компонента _Select_ используются для сбора предоставленной пользователем информации из списка параметров.',
   components: ['v-select'],
   supplemental: ['MaskTable'],
   examples: [{
     light: {
-        header: 'Light theme',
-        desc: 'A standard single select has a multitude of configuration options.'
+        header: 'Светлая тема',
+        desc: 'Стандартный одиночный _select_ имеет множество параметров конфигурации.'
       },
       dark: {
-        header: 'Dark theme',
-        desc: 'Selects also support theming, dark and light.',
+        header: 'Темная тема',
+        desc: 'Select также поддерживают темную и светлую тему.',
         inverted: true,
         uninverted: true
       },
       icons: {
-        header: 'Icons',
-        desc: 'Use a custom prepended or appended icon.'
+        header: 'Иконки',
+        desc: 'Используйте свою или добавленную иконку.'
       },
       multiple: {
-        header: 'Multiple',
-        desc: 'A multi-select can utilize v-chip as the display for selected items.'
+        header: 'Множественный select',
+        desc: 'Multi-select может использовать `v-chip` для отображения выбранных элементов.'
       },
       autocomplete: {
-        header: 'Autocomplete',
-        desc: 'Provides type-ahead autocomplete functionality.'
+        header: 'Автозаполнение',
+        desc: 'Обеспечивает функциональность автозаполнения при наборе символов.'
+      },
+      customFilter: {
+        header: 'Пользовательский фильтр на автозаполнении',
+        desc: 'свойство `filter` используется для фильтрации каждого отдельного элемента с пользовательской логикой, в этом примере мы фильтруем элементы по имени'
       },
       scopedSlots: {
-        header: 'Scoped slots',
-        desc: 'With the power of scoped slots, you can customize the visual output of the select. In this example we add a profile picture for both the chips and list items.'
+        header: 'Слоты с расширенными возможностями',
+        desc: 'С мощью слотов с областью действия вы можете настроить визуальный вывод _select_. В этом примере мы добавляем изображение профиля как для chips, так и для элементов списка.'
       },
       customTextAndValue: {
-        header: 'Customized item text and value',
-        desc: 'You can specify the specific properties within your items array correspond to the text and value fields. By default, this is **text** and **value**. In this example we also use the `return-object` prop which will return the entire object of the selected item on selection.'
+        header: 'Настроенный текст и значение элемента',
+        desc: 'Вы можете указать конкретные свойства в вашем массиве элементов, соответствующие полям текста и значения. По умолчанию это **текст** и **значение**. В этом примере мы также используем свойство `return-object`, которое вернет весь объект выбранного элемента при выборе.'
       },
       tags: {
-        header: 'Tags',
-        desc: 'With tags you can allow a user to create new values that may not be present in a provided items list. Keep in mind, tags only supports arrays of **primitive** items and cannot be used with props such as `item-text`, `item-value` for example.'
+        header: 'Теги',
+        desc: 'С помощью тегов вы можете разрешить пользователю создавать новые значения, которые могут отсутствовать в списке предоставленных элементов. Имейте в виду, что теги поддерживают только массивы **примитивных** элементов и не могут использоваться с реквизитами, такими как `item-text`, `item-value` например.'
       },
       asynchronous: {
-        header: 'Asynchronous items',
-        desc: 'Sometimes you need to load data externally based upon a search query. Use the `search-input` prop with the **.sync** modifier when using the `autocomplete` prop. We also make use of the new `cache-items` prop. This will keep a unique list of all items that have been passed to the `items` prop and is **REQUIRED** when using asynchronous items and the **multiple** prop.'
+        header: 'Асинхронные элементы',
+        desc: 'Иногда вам приходится загружать данные извне на основе поискового запроса. Используйте опцию `search-input` с модификатором **.sync** при использовании `autocomplete`. Мы также используем новую опцию `cache-items`. Это сохранит уникальный список всех элементов, которые были переданы в `items`, и **НЕОБХОДИМЫ** при использовании асинхронных элементов и **multiple**.'
       }
   }],
   props: {
-    autocomplete: 'Filter the items in the list based on user input',
-    browserAutocomplete: 'Set the autocomplete prop for the search input when using the **autocomplete** prop',
-    cacheItems: 'Keeps a local _unique_ copy of all items that have been passed through the **items** prop.',
-    chips: 'Changes display of selections to chips',
-    combobox: 'The single select variant of **tags**',
-    debounceSearch: 'Debounces the search input value being emitted',
-    disabled: 'Disables the input',
-    editable: ' Creates an editable button - <a href="https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons" target="_blank" rel="noopener">spec<a/>',
-    filter: 'The function used for filtering items',
-    hideSelected: 'Do not display in the select menu items that are already selected',
-    itemAvatar: 'Set property of **items**\'s avatar value',
-    itemDisabled: 'Set property of **items**\'s disabled value',
-    itemText: 'Set property of **items**\'s text value',
-    itemValue: 'Set property of **items**\'s value',
-    items: 'Can be an array of objects or array of strings. When using objects, will look for a text and value field. This can be changed using the **item-text** and **item-value** props.',
-    multiple: 'Changes select to multiple. Accepts array for value',
-    multiLine: 'Causes label to float when the select component is focused or dirty',
-    noDataText: 'Display text when there is no data',
-    overflow: 'Creates an overflow button - <a href="https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons" target="_blank" rel="noopener">spec</a>',
-    returnObject: 'Changes the selection behavior to return the object directly rather than the value specified with item-value',
-    searchInput: 'Bound when using the autocomplete prop. Use the .sync modifier to catch user input from the autocomplete search input',
-    segmented: 'Creates a segmented button - <a href="https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons" target="_blank" rel="noopener">spec</a>',
-    tags: 'Tagging functionality, allows the user to create new values not available from the **items** prop'
+    attach: 'Mixins.Detachable.props.attach',
+    autocomplete: 'Фильтрация элементов в списке на основе ввода пользователем',
+    browserAutocomplete: 'Установите свойство автозаполнения для поискового ввода при использовании свойства **autocomplete**',
+    cacheItems: ' Сохраняет локальную копию всех элементов, прошедших через свойство **items**.',
+    chips: 'Изменяет отображение выбранных _chips_',
+    combobox: 'Единственный вариант выбора **tags**',
+    contentClass: 'Mixins.Detachable.props.contentClass',
+    debounceSearch: 'Дескриптор выбранного входного значения поиска',
+    deletableChips: 'Добавляет значок удаления в выбранный _chips_',
+    dense: 'Уменьшает максимальную высоту элементов списка',
+    disabled: 'Отключает ввод',
+    editable: 'Создает редактируемую кнопку - [спецификация](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)',
+    filter: 'Функция, используемая для фильтрации элементов',
+    hideSelected: 'Не отображать в элементах _select_ , которые уже выбраны',
+    itemAvatar: 'Установить свойству **items** значение аватара',
+    itemDisabled: 'Установить свойству **items** отключено',
+    itemText: 'Установить свойству **items** значение text',
+    itemValue: 'Установить свойству **items** значение',
+    items: 'Может быть массив объектов или массив строк. При использовании объектов будет искать поле текста и значения. Это можно изменить с помощью **item-text** и **item-value** свойств.',
+    minWidth: 'Mixins.Menuable.props.minWidth',
+    multiple: 'Множественные изменения _select_. Принимает массив для значения',
+    multiLine: 'Заставляет ярлык плавать, когда выбранный компонент сфокусирован или нет',
+    noDataText: 'Отображать текст, когда нет данных',
+    openOnClear: 'При использовании свойства **clearable** , после очистки, меню выбора будет либо открыто, либо оставаться открытым, в зависимости от текущего состояния',
+    overflow: 'Создает кнопку переполнения - [спец.](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)',
+    returnObject: 'Изменяет поведение выбора, чтобы вернуть объект напрямую, а не значение, указанное с помощью значения **item-value**',
+    searchInput: 'При использовании свойства автозаполнения. Используйте модификатор **.sync**, чтобы отлавить пользовательский ввод из ввода автозаполнения',
+    segmented: 'Создает сегментированную кнопку - [спец.](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)',
+    tags: 'Функция тегов позволяет пользователю создавать новые значения, недоступные из **items**'
   },
   slots: {
-    item: 'Scoped slot for designating the markup for a list-tile',
-    selection: 'Scoped slot for designating the markup for the selected items'
+    item: 'Область видимости для обозначения разметки для list-tile',
+    selection: 'Область видимости для обозначения разметки для выбранных элементов'
   }
 }

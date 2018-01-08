@@ -1,39 +1,39 @@
 export default {
   header: 'Slider',
-  headerText: 'The `v-slider` component is a better visualization of the number input. It is used for gathering numerical user data.',
+  headerText: 'Компонент `v-slider` является лучшей визуализацией ввода чисел. Он используется для обработки числовых пользовательских данных.',
   components: ['v-slider'],
   examples: [{
     continuous: {
-      header: 'Continuous',
-      desc: 'Continuous sliders should be used when precision is not a concern.'
+      header: 'Непрерывный',
+      desc: 'Непрерывные слайдеры должны использоваться, когда требуется невысокая точность.'
     },
     discrete: {
-      header: 'Discrete',
-      desc: 'Discrete sliders offer a thumb label that displays the exact current amount. Using the `step` prop you can disallow selecting values outside of steps.'
+      header: 'Дискретный',
+      desc: 'Дискретные слайдеры предлагают визуализатор, который отображает точное текущее значение. С помощью свойства `step` вы можете запретить выбор значений за пределами шагов.'
     },
     icons: {
-      header: 'Icons',
-      desc: 'You can add icons to the slider with the `append-icon` and `prepend-icon` props.'
+      header: 'Иконки',
+      desc: 'Вы можете добавлять иконки в слайдер с помощью свойств `append-icon` и `preend-icon`.'
     },
     editableNumericValue: {
-      header: 'With an editable numeric value',
-      desc: 'Sliders can be combined with other components for a better display.'
+      header: 'С редактируемым числовым значением',
+      desc: 'Слайдеры можно комбинировать с другими компонентами для лучшего отображения.'
     },
     dark: {
-      header: 'Dark theme',
-      desc: 'Sliders also support theming.',
+      header: 'Темная тема',
+      desc: 'Слайдеры также поддерживают темы.',
       uninverted: true
     },
     customColors: {
-      header: 'Custom colors',
-      desc: 'You can set the colors of the slider using the props `color`, `track-color` and `thumb-color`.'
+      header: 'Пользовательские цвета',
+      desc: 'Вы можете использовать различные цвета используя свойства `color`, `track-color` и `thumb-color`.'
     }
   }],
   props: {
-    step: 'If greater than 0, sets step interval for ticks',
-    thumbColor: 'Sets the thumb and thumb label color',
-    thumbLabel: 'Show thumb label',
+    step: 'Если значение больше 0, задает интервал шагов для тиков',
+    thumbColor: 'Установка визуализации и цвета метки визуализации',
+    thumbLabel: 'Показать визуализатор',
     ticks: '',
-    trackColor: 'Sets the track fill color'
+    trackColor: 'Устанавливает цвет дорожки'
   }
 }
