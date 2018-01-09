@@ -16,12 +16,24 @@
         :class="{ 'white--text': events === lastFiveDays }"
         @click="events = lastFiveDays"
       >Object</v-btn>
-      <v-date-picker
-        class="mt-3"
-        v-model="date"
-        event-color="green lighten-1"
-        :events="events"
-      ></v-date-picker>
+      <v-layout justify-space-between wrap>
+        <v-flex xs12 sm6>
+          <v-date-picker
+            class="mt-3"
+            v-model="date"
+            event-color="green lighten-1"
+            :events="events"
+          ></v-date-picker>
+        </v-flex>
+        <v-flex xs12 sm6>
+          <v-date-picker
+            class="mt-3"
+            v-model="date"
+            :event-color="date => date[9] % 2 ? 'red' : 'yellow'"
+            :events="events"
+          ></v-date-picker>
+        </v-flex>
+      </v-layout>
     </v-flex>
   </v-layout>
 </template>
