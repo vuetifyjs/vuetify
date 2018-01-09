@@ -66,7 +66,7 @@ export default {
       default: () => null
     },
     eventColor: {
-      type: String,
+      type: [String, Function, Object],
       default: 'warning'
     },
     firstDayOfWeek: {
