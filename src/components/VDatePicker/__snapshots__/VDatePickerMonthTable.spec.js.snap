@@ -10,27 +10,27 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
           <button type="button"
                   class="btn btn--flat"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               Jan
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
                   class="btn btn--flat"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               Feb
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
                   class="btn btn--flat"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               Mar
-            </span>
+            </div>
           </button>
         </td>
       </tr>
@@ -39,27 +39,27 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
           <button type="button"
                   class="btn btn--flat"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               Apr
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--outline accent"
+                  class="btn btn--flat btn--outline accent--text"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               May
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
                   class="btn btn--flat"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               Jun
-            </span>
+            </div>
           </button>
         </td>
       </tr>
@@ -68,27 +68,27 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
           <button type="button"
                   class="btn btn--flat"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               Jul
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
                   class="btn btn--flat"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               Aug
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
                   class="btn btn--flat"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               Sep
-            </span>
+            </div>
           </button>
         </td>
       </tr>
@@ -97,27 +97,27 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
           <button type="button"
                   class="btn btn--flat"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               Oct
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
                   class="btn btn--active btn--depressed accent"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               Nov
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
                   class="btn btn--flat"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               Dec
-            </span>
+            </div>
           </button>
         </td>
       </tr>

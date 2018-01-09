@@ -35,14 +35,16 @@ export default {
         'btn--disabled': isDisabled
       }
 
-      return (isSelected || isCurrent)
+      return isSelected
         ? this.addBackgroundColorClassChecks(classes)
-        : classes
+        : isCurrent
+          ? this.addTextColorClassChecks(classes)
+          : classes
     },
     genMonthButton (month) {
       const value = `${this.displayedYear}-${pad(month + 1)}`
       const isDisabled = !isValueAllowed(value, this.allowedDates)
-      const btnContent = this.$createElement('span', {
+      const btnContent = this.$createElement('div', {
         staticClass: 'btn__content'
       }, [
         this.formatter(value)
