@@ -9,7 +9,7 @@ export default {
     'v-list-tile-content',
     'v-list-tile-action',
     'v-list-tile-avatar',
-    'v-list-tile-group',
+    'v-list-group',
     'v-list-tile-action-text',
   ],
   examples: [{
