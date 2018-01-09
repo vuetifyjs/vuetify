@@ -85,8 +85,10 @@ theme(button, "btn")
     background-color: transparent !important
     box-shadow: none !important
 
-  &:not(.btn--depressed)
+  &:not(.btn--flat):not(.btn--icon):not(.btn--disabled)
     will-change: box-shadow
+
+  &:not(.btn--depressed)
     elevation(2)
 
     &:active
