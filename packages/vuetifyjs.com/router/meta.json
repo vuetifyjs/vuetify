@@ -395,6 +395,12 @@
     "description": "Baseline Flipped layout for the Vuetify.js framework",
     "keywords": "template, pre-made, vuetify layout"
   },
+  "/examples/layouts/centered": {
+    "h1": "Centered",
+    "title": "Centered layout example",
+    "description": "Centered layout for the Vuetify.js framework",
+    "keywords": "template, pre-made, vuetify layout"
+  },
   "/examples/layouts/complex": {
     "h1": "Complex",
     "title": "Complex layout example",
