@@ -81,7 +81,7 @@ export default {
       'type': 'Determines the type of the picker - `date` for date picker, `month` for month picker',
       'monthFormat': 'Formatting function used for displaying months in the months table. Called with date (ISO 8601 string) and locale (string) arguments.',
       'allowedDates': 'Restricts which dates can be selected',
-      'eventColor': 'Sets the color for event dot',
+      'eventColor': 'Sets the color for event dot. It can be string (all events will have the same color) or `object` where attribute is the event date and value is the color for specified date or `function` taking date as a parameter and returning color for that date',
       'events': 'Marks the date as an event (only for date picker)',
       'locale': 'Sets the locale. Accepts a string with a BCP 47 language tag.',
       'firstDayOfWeek': 'Sets the first day of the week, starting with 0 for Sunday.',
