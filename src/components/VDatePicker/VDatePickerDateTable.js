@@ -69,10 +69,9 @@ export default {
 
       return isActive
         ? this.addBackgroundColorClassChecks(classes)
-        // Normally with a v-btn component
-        // using the outline prop would envoke
-        // to TextColor classes as opposed
-        // to BackgroundColor
+        // Normally a v-btn component using
+        // the outline prop would run the
+        // addTextColorClasses method
         : isCurrent
           ? this.addTextColorClassChecks(classes)
           : classes
