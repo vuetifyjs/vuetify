@@ -1769,9 +1769,9 @@ module.exports = {
         "source": null
       },
       {
-        "name": "monthFormat",
-        "type": "Function",
-        "default": "null",
+        "name": "locale",
+        "type": "String",
+        "default": "en-us",
         "source": null
       },
       {
@@ -1799,6 +1799,22 @@ module.exports = {
         "source": null
       },
       {
+        "name": "events",
+        "type": [
+          "Array",
+          "Object",
+          "Function"
+        ],
+        "default": null,
+        "source": null
+      },
+      {
+        "name": "eventColor",
+        "type": "String",
+        "default": "warning",
+        "source": null
+      },
+      {
         "name": "dark",
         "type": "Boolean",
         "default": "false",
@@ -1811,16 +1827,16 @@ module.exports = {
         "source": null
       },
       {
-        "name": "locale",
-        "type": "String",
-        "default": "en-us",
-        "source": null
-      },
-      {
         "name": "landscape",
         "type": "Boolean",
         "default": "false",
         "source": "picker"
+      },
+      {
+        "name": "monthFormat",
+        "type": "Function",
+        "default": "null",
+        "source": null
       },
       {
         "name": "prependIcon",
@@ -1832,6 +1848,15 @@ module.exports = {
         "name": "scrollable",
         "type": "Boolean",
         "default": "false",
+        "source": null
+      },
+      {
+        "name": "showCurrent",
+        "type": [
+          "Boolean",
+          "String"
+        ],
+        "default": true,
         "source": null
       },
       {
@@ -1952,6 +1977,18 @@ module.exports = {
   "v-date-picker-date-table": {
     "props": [
       {
+        "name": "tableDate",
+        "type": "String",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "color",
+        "type": "String",
+        "default": "undefined",
+        "source": "colorable"
+      },
+      {
         "name": "allowedDates",
         "type": [
           "Array",
@@ -1962,15 +1999,29 @@ module.exports = {
         "source": null
       },
       {
-        "name": "color",
-        "type": "String",
-        "default": "undefined",
-        "source": "colorable"
-      },
-      {
         "name": "current",
         "type": "String",
         "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "eventColor",
+        "type": [
+          "String",
+          "Function",
+          "Object"
+        ],
+        "default": "warning",
+        "source": null
+      },
+      {
+        "name": "events",
+        "type": [
+          "Array",
+          "Object",
+          "Function"
+        ],
+        "default": null,
         "source": null
       },
       {
@@ -1998,12 +2049,6 @@ module.exports = {
         "name": "scrollable",
         "type": "Boolean",
         "default": "false",
-        "source": null
-      },
-      {
-        "name": "tableDate",
-        "type": "String",
-        "default": "undefined",
         "source": null
       },
       {
@@ -3927,7 +3972,7 @@ module.exports = {
       {
         "name": "transition",
         "type": "String",
-        "default": "scale-transition",
+        "default": "picker-transition",
         "source": null
       }
     ],
@@ -4941,13 +4986,13 @@ module.exports = {
         "name": "absolute",
         "type": "Boolean",
         "default": "false",
-        "source": null
+        "source": "positionable"
       },
       {
         "name": "bottom",
         "type": "Boolean",
         "default": "false",
-        "source": null
+        "source": "positionable"
       },
       {
         "name": "color",
@@ -4959,7 +5004,7 @@ module.exports = {
         "name": "left",
         "type": "Boolean",
         "default": "false",
-        "source": null
+        "source": "positionable"
       },
       {
         "name": "multiLine",
@@ -4971,7 +5016,7 @@ module.exports = {
         "name": "right",
         "type": "Boolean",
         "default": "false",
-        "source": null
+        "source": "positionable"
       },
       {
         "name": "timeout",
@@ -4983,7 +5028,7 @@ module.exports = {
         "name": "top",
         "type": "Boolean",
         "default": "false",
-        "source": null
+        "source": "positionable"
       },
       {
         "name": "value",
@@ -5000,6 +5045,7 @@ module.exports = {
     ],
     "mixins": [
       "colorable",
+      "positionable",
       "toggleable"
     ],
     "slots": [
@@ -6195,7 +6241,7 @@ module.exports = {
   "v-time-picker-clock": {
     "props": [
       {
-        "name": "min",
+        "name": "max",
         "type": "Number",
         "default": "undefined",
         "source": null
@@ -6229,21 +6275,21 @@ module.exports = {
         "source": null
       },
       {
+        "name": "format",
+        "type": "Function",
+        "default": "(val) => {}",
+        "source": null
+      },
+      {
         "name": "light",
         "type": "Boolean",
         "default": "false",
         "source": "themeable"
       },
       {
-        "name": "max",
+        "name": "min",
         "type": "Number",
         "default": "undefined",
-        "source": null
-      },
-      {
-        "name": "pad",
-        "type": "Number",
-        "default": 0,
         "source": null
       },
       {
