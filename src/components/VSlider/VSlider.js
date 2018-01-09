@@ -241,7 +241,7 @@ export default {
         }, [
           h('div', {
             staticClass: 'slider__thumb--label',
-            'class': this.addBackgroundColorClassChecks({}, 'computedThumbColor')
+            'class': this.addBackgroundColorClassChecks({}, this.computedThumbColor)
           }, [
             h('span', {}, this.inputValue)
           ])
@@ -263,7 +263,7 @@ export default {
       const children = []
       children.push(h('div', {
         staticClass: 'slider__thumb',
-        'class': this.addBackgroundColorClassChecks({}, 'computedThumbColor')
+        'class': this.addBackgroundColorClassChecks({}, this.computedThumbColor)
       }))
 
       this.thumbLabel && children.push(this.genThumbLabel(h))
@@ -303,7 +303,7 @@ export default {
       const children = [
         h('div', {
           staticClass: 'slider__track',
-          'class': this.addBackgroundColorClassChecks({}, 'computedTrackColor'),
+          'class': this.addBackgroundColorClassChecks({}, this.computedTrackColor),
           style: this.trackStyles
         }),
         h('div', {

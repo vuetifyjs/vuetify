@@ -109,7 +109,7 @@ export default {
         }
 
         children.push(this.$createElement('span', {
-          'class': this.addBackgroundColorClassChecks(classes, value === this.value ? 'computedColor' : null),
+          'class': this.addBackgroundColorClassChecks(classes, value === this.value ? this.computedColor : null),
           style: this.getTransform(value),
           domProps: { innerHTML: `<span>${this.format(value)}</span>` }
         }))
