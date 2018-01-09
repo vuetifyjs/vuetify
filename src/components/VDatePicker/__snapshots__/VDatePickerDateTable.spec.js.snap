@@ -43,291 +43,291 @@ exports[`VDatePickerDateTable.js should match snapshot with first day of week 1`
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               1
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               2
-            </span>
+            </div>
           </button>
         </td>
       </tr>
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               3
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               4
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               5
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               6
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               7
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               8
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               9
-            </span>
+            </div>
           </button>
         </td>
       </tr>
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               10
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               11
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               12
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               13
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               14
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               15
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               16
-            </span>
+            </div>
           </button>
         </td>
       </tr>
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               17
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               18
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               19
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               20
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               21
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               22
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               23
-            </span>
+            </div>
           </button>
         </td>
       </tr>
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               24
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               25
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               26
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               27
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               28
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               29
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               30
-            </span>
+            </div>
           </button>
         </td>
       </tr>
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               31
-            </span>
+            </div>
           </button>
         </td>
       </tr>
@@ -370,289 +370,289 @@ exports[`VDatePickerDateTable.js should render component and match snapshot 1`] 
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               1
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               2
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               3
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               4
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               5
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               6
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               7
-            </span>
+            </div>
           </button>
         </td>
       </tr>
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               8
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               9
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               10
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               11
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               12
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               13
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               14
-            </span>
+            </div>
           </button>
         </td>
       </tr>
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               15
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               16
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               17
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               18
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               19
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               20
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               21
-            </span>
+            </div>
           </button>
         </td>
       </tr>
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               22
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               23
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               24
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               25
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               26
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               27
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               28
-            </span>
+            </div>
           </button>
         </td>
       </tr>
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               29
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               30
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               31
-            </span>
+            </div>
           </button>
         </td>
       </tr>
@@ -695,291 +695,291 @@ exports[`VDatePickerDateTable.js should render component with events and match s
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               1
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               2
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               3
-            </span>
+            </div>
           </button>
           <div class="date-picker-table__event red">
           </div>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               4
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               5
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               6
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               7
-            </span>
+            </div>
           </button>
         </td>
       </tr>
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               8
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               9
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               10
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               11
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               12
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               13
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               14
-            </span>
+            </div>
           </button>
         </td>
       </tr>
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               15
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               16
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               17
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               18
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               19
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               20
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               21
-            </span>
+            </div>
           </button>
         </td>
       </tr>
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               22
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               23
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               24
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               25
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               26
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               27
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               28
-            </span>
+            </div>
           </button>
         </td>
       </tr>
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               29
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               30
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               31
-            </span>
+            </div>
           </button>
         </td>
       </tr>
@@ -1022,293 +1022,293 @@ exports[`VDatePickerDateTable.js should render component with events colored by 
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               1
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               2
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               3
-            </span>
+            </div>
           </button>
           <div class="date-picker-table__event red">
           </div>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               4
-            </span>
+            </div>
           </button>
           <div class="date-picker-table__event blue lighten-1">
           </div>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               5
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               6
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               7
-            </span>
+            </div>
           </button>
         </td>
       </tr>
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               8
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               9
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               10
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               11
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               12
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               13
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               14
-            </span>
+            </div>
           </button>
         </td>
       </tr>
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               15
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               16
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               17
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               18
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               19
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               20
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               21
-            </span>
+            </div>
           </button>
         </td>
       </tr>
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               22
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               23
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               24
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               25
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               26
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               27
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               28
-            </span>
+            </div>
           </button>
         </td>
       </tr>
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               29
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               30
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               31
-            </span>
+            </div>
           </button>
         </td>
       </tr>
@@ -1351,293 +1351,293 @@ exports[`VDatePickerDateTable.js should render component with events colored by 
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               1
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               2
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               3
-            </span>
+            </div>
           </button>
           <div class="date-picker-table__event red">
           </div>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               4
-            </span>
+            </div>
           </button>
           <div class="date-picker-table__event accent">
           </div>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               5
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               6
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               7
-            </span>
+            </div>
           </button>
         </td>
       </tr>
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               8
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               9
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               10
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               11
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               12
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               13
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               14
-            </span>
+            </div>
           </button>
         </td>
       </tr>
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               15
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               16
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               17
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               18
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               19
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               20
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               21
-            </span>
+            </div>
           </button>
         </td>
       </tr>
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               22
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               23
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               24
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               25
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               26
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               27
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               28
-            </span>
+            </div>
           </button>
         </td>
       </tr>
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               29
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               30
-            </span>
+            </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--raised btn--icon"
+                  class="btn btn--icon"
           >
-            <span class="btn__content">
+            <div class="btn__content">
               31
-            </span>
+            </div>
           </button>
         </td>
       </tr>

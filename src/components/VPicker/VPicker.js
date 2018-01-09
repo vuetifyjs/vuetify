@@ -26,7 +26,7 @@ export default {
     landscape: Boolean,
     transition: {
       type: String,
-      default: 'picker-transition'
+      default: 'fade-transition'
     }
   },
 
