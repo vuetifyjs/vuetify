@@ -15,7 +15,7 @@ export default [
   ['layout/sandbox', 'layout/Sandbox'],
   ['style/colors', 'style/Colors'],
   ['style/theme', 'style/Theme'],
-  ['style/typography', 'style/Typograhy'],
+  ['style/typography', 'style/Typography'],
   ['style/content', 'style/Content'],
   ['motion/transitions', 'motion/Transitions'],
   ['pre-made-themes', 'PremadeThemes'],
