@@ -21,7 +21,7 @@ export default {
       default: () => null
     },
     eventColor: {
-      type: String,
+      type: [String, Function, Object],
       default: 'warning'
     },
     firstDayOfWeek: {
@@ -95,10 +95,18 @@ export default {
         }
       })
     },
-    genEvent () {
+    genEvent (date) {
+      let eventColor
+      if (typeof this.eventColor === 'string') {
+        eventColor = this.eventColor
+      } else if (typeof this.eventColor === 'function') {
+        eventColor = this.eventColor(date)
+      } else {
+        eventColor = this.eventColor[date]
+      }
       return this.$createElement('div', {
         staticClass: 'date-picker-table__event',
-        class: this.addBackgroundColorClassChecks({}, 'eventColor')
+        class: this.addBackgroundColorClassChecks({}, eventColor || this.color)
       })
     },
     // Returns number of the days from the firstDayOfWeek to the first day of the current month
@@ -119,7 +127,7 @@ export default {
         const isEvent = isValueAllowed(date, this.events, false)
         rows.push(this.$createElement('td', [
           this.genButton(day),
-          isEvent ? this.genEvent() : null
+          isEvent ? this.genEvent(date) : null
         ]))
 
         if (rows.length % 7 === 0) {

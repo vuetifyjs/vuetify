@@ -119,6 +119,9 @@ export default {
   },
 
   methods: {
+    needsTile (tile) {
+      return tile.componentOptions == null || tile.componentOptions.tag !== 'v-list-tile'
+    },
     changeSelectedIndex (keyCode) {
       // backspace, left, right, delete
       if (![8, 37, 39, 46].includes(keyCode)) return
