@@ -91,6 +91,7 @@ export default {
       type: String,
       default: 'chevron_left'
     },
+    readonly: Boolean,
     scrollable: Boolean,
     showCurrent: {
       type: [Boolean, String],
@@ -290,6 +291,9 @@ export default {
           yearIcon: this.yearIcon
         },
         slot: 'title',
+        style: this.readonly ? {
+          'pointer-events': 'none'
+        } : undefined,
         on: {
           'update:selectingYear': value => this.activePicker = value ? 'YEAR' : this.type.toUpperCase()
         }
@@ -373,7 +377,12 @@ export default {
         this.activePicker === 'DATE' ? this.genDateTable() : this.genMonthTable()
       ]
 
-      return this.$createElement('div', { key: this.activePicker }, children)
+      return this.$createElement('div', {
+        key: this.activePicker,
+        style: this.readonly ? {
+          'pointer-events': 'none'
+        } : undefined
+      }, children)
     },
     // Adds leading zero to month/day if necessary, returns 'YYYY' if type = 'year',
     // 'YYYY-MM' if 'month' and 'YYYY-MM-DD' if 'date'
