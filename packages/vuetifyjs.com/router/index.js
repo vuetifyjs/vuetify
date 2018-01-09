@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import paths from './paths'
 import scrollBehavior from './scroll-behavior'
 
 Vue.use(Router)
@@ -22,49 +23,18 @@ function route (path, view) {
   }
 }
 
+const routes = paths.map(path => {
+  return route(`/${path.shift()}`, path)
+})
+
+routes.push({ path: '*', redirect: '/404' })
+
 export function createRouter () {
     const router = new Router({
       base: release ? `/releases/${release}` : __dirname,
       mode: release ? 'hash' : 'history',
       scrollBehavior,
-      routes: [
-        route('/404', 'general/404'),
-        route('/', 'Home'),
-        // Getting Started
-        route('/getting-started/quick-start', 'getting-started/QuickStart'),
-        route('/getting-started/why-vuetify', 'getting-started/WhyVuetify'),
-        route('/getting-started/frequently-asked-questions', 'getting-started/FrequentlyAskedQuestions'),
-        route('/getting-started/sponsors-and-backers', 'getting-started/SponsorsAndBackers'),
-        route('/getting-started/contributing', 'getting-started/Contributing'),
-        route('/getting-started/roadmap', 'getting-started/Roadmap'),
-        // Application Layout
-        route('/layout/pre-defined', 'layout/PreDefined'),
-        route('/layout/spacing', 'layout/Spacing'),
-        route('/layout/alignment', 'layout/Alignment'),
-        route('/layout/display', 'layout/Display'),
-        route('/layout/elevation', 'layout/Elevation'),
-        route('/layout/sandbox', 'layout/Sandbox'),
-        // Base Styles
-        route('/style/colors', 'style/Colors'),
-        route('/style/theme', 'style/Theme'),
-        route('/style/typography', 'style/Typography'),
-        route('/style/content', 'style/Content'),
-        // Motion & Transitions
-        route('/motion/transitions', 'motion/Transitions'),
-        // Extra
-        route('/pre-made-themes', 'PremadeThemes'),
-        route('/store', 'Store'),
-        // Guides
-        route('/guides/server-side-rendering', 'guides/SSR'),
-        route('/guides/a-la-carte', 'guides/ALaCarte'),
-        // Additional resources
-        route('/theme-generator', 'ThemeGenerator'),
-        // Dynamic
-        route('/examples/:example+', 'examples/Example'),
-        route('/:section/:component', 'components/Doc'),
-        // Global redirect for 404
-        { path: '*', redirect: '/404' }
-      ]
+      routes
     })
 
     // Send a pageview to Google Analytics
