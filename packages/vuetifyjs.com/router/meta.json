@@ -385,43 +385,43 @@
   },
   "/examples/layouts/baseline": {
     "h1": "Baseline",
-    "title": "Baseline example",
+    "title": "Baseline layout example",
     "description": "Baseline layout for the Vuetify.js framework",
     "keywords": "template, pre-made, vuetify layout"
   },
-  "/examples/layouts/baseline-flipped": {
+  "/examples/layouts/baselineFlipped": {
     "h1": "Baseline Flipped",
-    "title": "Baseline Flipped example",
+    "title": "Baseline Flipped layout example",
     "description": "Baseline Flipped layout for the Vuetify.js framework",
     "keywords": "template, pre-made, vuetify layout"
   },
   "/examples/layouts/complex": {
     "h1": "Complex",
-    "title": "Complex example",
+    "title": "Complex layout example",
     "description": "Complex layout for the Vuetify.js framework",
     "keywords": "template, pre-made, vuetify layout"
   },
   "/examples/layouts/dark": {
     "h1": "Dark",
-    "title": "Dark example",
+    "title": "Dark layout example",
     "description": "Dark layout for the Vuetify.js framework",
     "keywords": "template, pre-made, vuetify layout"
   },
-  "/examples/layouts/google-contacts": {
+  "/examples/layouts/googleContacts": {
     "h1": "Google Contacts",
-    "title": "Google Contacts example",
+    "title": "Google Contacts layout example",
     "description": "Google Contacts layout for the Vuetify.js framework",
     "keywords": "template, pre-made, vuetify layout"
   },
-  "/examples/layouts/google-keep": {
+  "/examples/layouts/googleKeep": {
     "h1": "Google Keep",
-    "title": "Google Keep example",
+    "title": "Google Keep layout example",
     "description": "Google Keep layout for the Vuetify.js framework",
     "keywords": "template, pre-made, vuetify layout"
   },
-  "/examples/layouts/google-youtube": {
+  "/examples/layouts/googleYoutube": {
     "h1": "Google Youtube",
-    "title": "Google Youtube example",
+    "title": "Google Youtube layout example",
     "description": "Google Youtube layout for the Vuetify.js framework",
     "keywords": "template, pre-made, vuetify layout"
   },
