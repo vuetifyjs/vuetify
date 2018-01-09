@@ -27,7 +27,10 @@ export default {
     const size = `${parseInt(props.size)}px`
     data.style.height = size
     data.style.width = size
-    data.class = Colorable.methods.addBackgroundColorClassChecks.call(props, {}, props.color)
+    data.class = [
+      data.class,
+      Colorable.methods.addBackgroundColorClassChecks.call(props, {}, props.color)
+    ]
 
     return h('div', data, children)
   }
