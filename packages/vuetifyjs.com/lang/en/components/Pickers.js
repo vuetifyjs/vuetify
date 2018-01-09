@@ -19,6 +19,10 @@ export default {
       header: 'Date pickers - Allowed dates',
       desc: 'You can specify allowed dates using arrays, objects, and functions.'
     },
+    dateEvents: {
+      header: 'Date pickers - Events',
+      desc: 'You can specify events using arrays, objects, and functions. To change the default color of the event use **event-color** prop.'
+    },
     dateInternationalization: {
       header: 'Date pickers - Internationalization',
       desc: 'The date picker supports internationalization through the JavaScript Date object. Specify a BCP 47 language tag using the `locale` prop, and then set the first day of the week with the `first-day-of-week` prop.'
@@ -74,18 +78,20 @@ export default {
   }],
   props: {
     'v-date-picker': {
-      type: 'Determines the type of the picker - `date` for date picker, `month` for month picker',
-      monthFormat: 'Formatting function used for displaying months in the months table. Called with date (ISO 8601 string) and locale (string) arguments.',
-      allowedDates: 'Restricts which dates can be selected',
-      locale: 'Sets the locale. Accepts a string with a BCP 47 language tag.',
-      firstDayOfWeek: 'Sets the first day of the week, starting with 0 for Sunday.',
-      titleDateFormat: 'Allows you to customize the format of the date string that appears in the title of the date picker. Called with date (ISO 8601 string) and locale (string) arguments.',
-      headerDateFormat: 'Allows you to customize the format of the month string that appears in the header of the calendar. Called with date (ISO 8601 string) and locale (string) arguments.',
-      yearFormat: 'Allows you to customize the format of the year string that appears in the header of the calendar. Called with date (ISO 8601 string) and locale (string) arguments.',
-      dayFormat: 'Allows you to customize the format of the day string that appears in the date table. Called with date (ISO 8601 string) and locale (string) arguments.',
-      yearIcon: 'Generates an icon next to the year',
-      appendIcon: 'Sets the icon for next month/year button',
-      prependIcon: 'Sets the icon for previous month/year button'
+      'type': 'Determines the type of the picker - `date` for date picker, `month` for month picker',
+      'monthFormat': 'Formatting function used for displaying months in the months table. Called with date (ISO 8601 string) and locale (string) arguments.',
+      'allowedDates': 'Restricts which dates can be selected',
+      'eventColor': 'Sets the color for event dot',
+      'events': 'Marks the date as an event (only for date picker)',
+      'locale': 'Sets the locale. Accepts a string with a BCP 47 language tag.',
+      'firstDayOfWeek': 'Sets the first day of the week, starting with 0 for Sunday.',
+      'titleDateFormat': 'Allows you to customize the format of the date string that appears in the title of the date picker. Called with date (ISO 8601 string) and locale (string) arguments.',
+      'headerDateFormat': 'Allows you to customize the format of the month string that appears in the header of the calendar. Called with date (ISO 8601 string) and locale (string) arguments.',
+      'yearFormat': 'Allows you to customize the format of the year string that appears in the header of the calendar. Called with date (ISO 8601 string) and locale (string) arguments.',
+      'dayFormat': 'Allows you to customize the format of the day string that appears in the date table. Called with date (ISO 8601 string) and locale (string) arguments.',
+      'yearIcon': 'Generates an icon next to the year',
+      'appendIcon': 'Sets the icon for next month/year button',
+      'prependIcon': 'Sets the icon for previous month/year button'
     },
     'v-time-picker': {
       format: 'Available options are `ampm` and `24hr`',
