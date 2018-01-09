@@ -16,6 +16,14 @@ export default {
   ],
 
   props: {
+    events: {
+      type: [Array, Object, Function],
+      default: () => null
+    },
+    eventColor: {
+      type: [String, Function, Object],
+      default: 'warning'
+    },
     firstDayOfWeek: {
       type: [String, Number],
       default: 0
@@ -59,27 +67,46 @@ export default {
         'btn--disabled': disabled
       }, this.themeClasses)
 
-      return (isActive || isCurrent)
+      return isActive
         ? this.addBackgroundColorClassChecks(classes)
-        : classes
+        // Normally a v-btn component using
+        // the outline prop would run the
+        // addTextColorClasses method
+        : isCurrent
+          ? this.addTextColorClassChecks(classes)
+          : classes
     },
     genButton (day) {
       const date = `${this.displayedYear}-${pad(this.displayedMonth + 1)}-${pad(day)}`
       const disabled = !isValueAllowed(date, this.allowedDates)
 
       return this.$createElement('button', {
-        staticClass: 'btn btn--raised btn--icon',
+        staticClass: 'btn btn--icon',
         'class': this.genButtonClasses(day, disabled),
         attrs: {
           type: 'button'
         },
         domProps: {
           disabled,
-          innerHTML: `<span class="btn__content">${this.formatter(date)}</span>`
+          innerHTML: `<div class="btn__content">${this.formatter(date)}</div>`
         },
         on: disabled ? {} : {
           click: () => this.$emit('input', date)
         }
+      })
+    },
+    genEvent (date) {
+      let eventColor
+      if (typeof this.eventColor === 'string') {
+        eventColor = this.eventColor
+      } else if (typeof this.eventColor === 'function') {
+        eventColor = this.eventColor(date)
+      } else {
+        eventColor = this.eventColor[date]
+      }
+      return this.$createElement('div', {
+        staticClass: 'date-picker-table__event',
+        class: this.addBackgroundColorClassChecks({}, eventColor || this.color)
       })
     },
     // Returns number of the days from the firstDayOfWeek to the first day of the current month
@@ -92,14 +119,16 @@ export default {
       const children = []
       const daysInMonth = new Date(this.displayedYear, this.displayedMonth + 1, 0).getDate()
       let rows = []
-      const day = this.weekDaysBeforeFirstDayOfTheMonth()
+      let day = this.weekDaysBeforeFirstDayOfTheMonth()
 
-      for (let i = 0; i < day; i++) {
-        rows.push(this.$createElement('td'))
-      }
-
-      for (let i = 1; i <= daysInMonth; i++) {
-        rows.push(this.$createElement('td', [this.genButton(i)]))
+      while (day--) rows.push(this.$createElement('td'))
+      for (day = 1; day <= daysInMonth; day++) {
+        const date = `${this.displayedYear}-${pad(this.displayedMonth + 1)}-${pad(day)}`
+        const isEvent = isValueAllowed(date, this.events, false)
+        rows.push(this.$createElement('td', [
+          this.genButton(day),
+          isEvent ? this.genEvent(date) : null
+        ]))
 
         if (rows.length % 7 === 0) {
           children.push(this.genTR(rows))

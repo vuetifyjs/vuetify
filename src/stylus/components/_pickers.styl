@@ -21,7 +21,6 @@ theme(picker-title, "picker")
   border-radius: $card-border-radius
   display: flex
   flex-direction: column
-  line-height: 1
   width: 290px
   contain: content
 
@@ -55,6 +54,9 @@ theme(picker-title, "picker")
 
   > div
     width: 100%
+    
+    &.fade-transition-leave-active
+      position: absolute
 
 .picker--landscape
   flex-direction: row
