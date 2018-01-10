@@ -91,6 +91,7 @@ export default {
       type: String,
       default: 'chevron_left'
     },
+    readonly: Boolean,
     scrollable: Boolean,
     showCurrent: {
       type: [Boolean, String],
@@ -290,6 +291,9 @@ export default {
           yearIcon: this.yearIcon
         },
         slot: 'title',
+        style: this.readonly ? {
+          'pointer-events': 'none'
+        } : undefined,
         on: {
           'update:selectingYear': value => this.activePicker = value ? 'YEAR' : this.type.toUpperCase()
         }
@@ -300,6 +304,7 @@ export default {
         props: {
           appendIcon: this.appendIcon,
           color: this.color,
+          disabled: this.readonly,
           format: this.headerDateFormat,
           locale: this.locale,
           prependIcon: this.prependIcon,
@@ -317,6 +322,7 @@ export default {
           allowedDates: this.allowedDates,
           color: this.color,
           current: this.current,
+          disabled: this.readonly,
           events: this.events,
           eventColor: this.eventColor,
           firstDayOfWeek: this.firstDayOfWeek,
@@ -339,6 +345,7 @@ export default {
           allowedDates: this.type === 'month' ? this.allowedDates : null,
           color: this.color,
           current: this.current,
+          disabled: this.readonly,
           format: this.monthFormat,
           locale: this.locale,
           scrollable: this.scrollable,
@@ -373,7 +380,12 @@ export default {
         this.activePicker === 'DATE' ? this.genDateTable() : this.genMonthTable()
       ]
 
-      return this.$createElement('div', { key: this.activePicker }, children)
+      return this.$createElement('div', {
+        key: this.activePicker,
+        style: this.readonly ? {
+          'pointer-events': 'none'
+        } : undefined
+      }, children)
     },
     // Adds leading zero to month/day if necessary, returns 'YYYY' if type = 'year',
     // 'YYYY-MM' if 'month' and 'YYYY-MM-DD' if 'date'

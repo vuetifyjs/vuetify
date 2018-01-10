@@ -1862,3 +1862,390 @@ exports[`VDatePicker.js should match snapshot with year icon 1`] = `
 </div>
 
 `;
+
+exports[`VDatePicker.js should render readonly picker 1`] = `
+
+<div class="picker picker--date card"
+     style="height: auto;"
+     data-ripple="false"
+>
+  <div class="picker__title primary">
+    <div class="date-picker-title"
+         style="pointer-events: none;"
+    >
+      <div class="picker__title__btn date-picker-title__year">
+        2013
+      </div>
+      <div class="picker__title__btn date-picker-title__date active">
+        <div>
+          Tue, May 7
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="picker__body">
+    <div style="pointer-events: none;">
+      <div class="date-picker-header">
+        <button disabled="disabled"
+                type="button"
+                class="btn btn--disabled btn--icon"
+                data-ripple="false"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="icon material-icons"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div class="date-picker-header__value date-picker-header__value--disabled">
+          <strong>
+            May 2013
+          </strong>
+        </div>
+        <button disabled="disabled"
+                type="button"
+                class="btn btn--disabled btn--icon"
+                data-ripple="false"
+        >
+          <div class="btn__content">
+            <i aria-hidden="true"
+               class="icon material-icons"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+      <div class="date-picker-table date-picker-table--date">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                S
+              </th>
+              <th>
+                M
+              </th>
+              <th>
+                T
+              </th>
+              <th>
+                W
+              </th>
+              <th>
+                T
+              </th>
+              <th>
+                F
+              </th>
+              <th>
+                S
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat btn--floating"
+                >
+                  <div class="btn__content">
+                    1
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat btn--floating"
+                >
+                  <div class="btn__content">
+                    2
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat btn--floating"
+                >
+                  <div class="btn__content">
+                    3
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat btn--floating"
+                >
+                  <div class="btn__content">
+                    4
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="btn btn--flat btn--floating"
+                >
+                  <div class="btn__content">
+                    5
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat btn--floating"
+                >
+                  <div class="btn__content">
+                    6
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--active btn--floating btn--disabled accent"
+                >
+                  <div class="btn__content">
+                    7
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat btn--floating"
+                >
+                  <div class="btn__content">
+                    8
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat btn--floating"
+                >
+                  <div class="btn__content">
+                    9
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat btn--floating"
+                >
+                  <div class="btn__content">
+                    10
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat btn--floating"
+                >
+                  <div class="btn__content">
+                    11
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="btn btn--flat btn--floating"
+                >
+                  <div class="btn__content">
+                    12
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat btn--floating"
+                >
+                  <div class="btn__content">
+                    13
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat btn--floating"
+                >
+                  <div class="btn__content">
+                    14
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat btn--floating"
+                >
+                  <div class="btn__content">
+                    15
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat btn--floating"
+                >
+                  <div class="btn__content">
+                    16
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat btn--floating"
+                >
+                  <div class="btn__content">
+                    17
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat btn--floating"
+                >
+                  <div class="btn__content">
+                    18
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="btn btn--flat btn--floating"
+                >
+                  <div class="btn__content">
+                    19
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat btn--floating"
+                >
+                  <div class="btn__content">
+                    20
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat btn--floating"
+                >
+                  <div class="btn__content">
+                    21
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat btn--floating"
+                >
+                  <div class="btn__content">
+                    22
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat btn--floating"
+                >
+                  <div class="btn__content">
+                    23
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat btn--floating"
+                >
+                  <div class="btn__content">
+                    24
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat btn--floating"
+                >
+                  <div class="btn__content">
+                    25
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="btn btn--flat btn--floating"
+                >
+                  <div class="btn__content">
+                    26
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat btn--floating"
+                >
+                  <div class="btn__content">
+                    27
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat btn--floating"
+                >
+                  <div class="btn__content">
+                    28
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat btn--floating"
+                >
+                  <div class="btn__content">
+                    29
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat btn--floating"
+                >
+                  <div class="btn__content">
+                    30
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="btn btn--flat btn--floating"
+                >
+                  <div class="btn__content">
+                    31
+                  </div>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;

@@ -22,6 +22,7 @@ export default {
       default: () => null
     },
     current: String,
+    disabled: Boolean,
     format: {
       type: Function,
       default: null
@@ -87,7 +88,7 @@ export default {
         'btn--flat': !isSelected,
         'btn--floating': isFloating,
         'btn--depressed': !isFloating && isSelected,
-        'btn--disabled': isDisabled,
+        'btn--disabled': isDisabled || (this.disabled && isSelected),
         'btn--outline': isCurrent && !isSelected
       }
 
