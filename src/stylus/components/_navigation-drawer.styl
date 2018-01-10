@@ -28,6 +28,11 @@ theme(navigation-drawer, "navigation-drawer")
   z-index: 3
   -webkit-overflow-scrolling: touch
 
+  &[data-booted="true"]
+    // Work around for Safari bug. See https://github.com/vuetifyjs/vuetify/issues/2773
+    // We really want transition-property: all but must exclude max-height.
+    transition-property: background,background-color,border,border-bottom,border-bottom-color,border-bottom-width,border-color,border-left,border-left-color,border-left-width,border-right,border-right-color,border-right-width,border-top,border-top-color,border-top-width,border-width,bottom,box-shadow,color,height,left,margin,margin-bottom,margin-left,margin-right,margin-top,max-width,min-height,min-width,opacity,padding,padding-bottom,padding-left,padding-right,padding-top,right,top,transform,transform-origin,width;
+
   &__border
     position: absolute
     right: 0
@@ -39,7 +44,7 @@ theme(navigation-drawer, "navigation-drawer")
     &:after
       left: 0
       right: initial
-  
+
   &--right
     left: auto
     right: 0
@@ -59,7 +64,7 @@ theme(navigation-drawer, "navigation-drawer")
 
   &--mini-variant
     overflow: hidden
-    
+
     .list__group__header__prepend-icon
       flex: 1 0 auto
       justify-content: center
