@@ -200,8 +200,8 @@ test('VDatePickerDateTable.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.vm.isActive(11)).toBe(true)
-    expect(wrapper.vm.isActive(12)).toBe(false)
+    expect(wrapper.vm.isSelected(11)).toBe(true)
+    expect(wrapper.vm.isSelected(12)).toBe(false)
   })
 
   it('should calculate active date', () => {
