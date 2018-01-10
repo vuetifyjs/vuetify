@@ -364,6 +364,28 @@ exports[`VMenu.js should render component with custom transition and match snaps
 
 `;
 
+exports[`VMenu.js should render component with rounded min-width and left and match snapshot 1`] = `
+
+<div class="menu"
+     style="display: inline-block;"
+>
+  <div class="menu__activator menu__activator--active">
+    <button type="button"
+            class="btn"
+            data-ripple="true"
+    >
+      <div class="btn__content">
+      </div>
+    </button>
+  </div>
+  <div class="menu__content menuable__content__active menu-transition-enter-active menu-transition-enter-to"
+       style="max-height: auto; min-width: 101px; max-width: auto; top: 12px; left: 50px; z-index: 8; z-index: 8;"
+  >
+  </div>
+</div>
+
+`;
+
 exports[`VMenu.js should work 1`] = `
 
 <div class="menu"
