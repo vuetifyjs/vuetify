@@ -62,6 +62,8 @@ export default {
       const isSelected = this.isSelected(day)
       const isCurrent = this.isCurrent(day)
       const classes = Object.assign({
+        'btn--icon': !isSelected || !isDisabled,
+        'btn--floating': isSelected && isDisabled,
         'btn--active': isSelected,
         'btn--outline': isCurrent && !isSelected,
         'btn--disabled': isDisabled
@@ -81,7 +83,7 @@ export default {
       const isDisabled = !isValueAllowed(date, this.allowedDates)
 
       return this.$createElement('button', {
-        staticClass: 'btn btn--icon',
+        staticClass: 'btn',
         'class': this.genButtonClasses(day, isDisabled),
         attrs: {
           type: 'button'
