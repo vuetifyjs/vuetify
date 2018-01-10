@@ -3,9 +3,7 @@
     :headers="headers"
     :search="search"
     :items="computedItems"
-    :pagination.sync="pagination"
-    :hide-actions="this.items.length <= 10"
-    :rows-per-page-items="[10, 25, { text: 'All', value: -1 }]"
+    hide-actions
   ).component-parameters
     template(slot="items" slot-scope="{ item }")
       td(
@@ -19,12 +17,6 @@
   import { capitalize, camel } from '@/util/helpers'
 
   export default {
-    data: () => ({
-      pagination: {
-        rowsPerPage: 10
-      }
-    }),
-
     props: {
       target: String,
       headers: {
