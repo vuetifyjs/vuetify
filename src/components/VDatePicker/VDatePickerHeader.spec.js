@@ -13,6 +13,17 @@ test('VDatePickerHeader.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render readonly component and match snapshot', () => {
+    const wrapper = mount(VDatePickerHeader, {
+      propsData: {
+        value: '2005-11',
+        readonly: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should render component with year value and match snapshot', () => {
     const wrapper = mount(VDatePickerHeader, {
       propsData: {
@@ -55,7 +66,7 @@ test('VDatePickerHeader.js', ({ mount }) => {
       }
     })
 
-    const strong = wrapper.find('.date-picker-header__value strong')[0]
+    const strong = wrapper.find('.date-picker-header__value')[0]
     expect(strong.hasClass('green--text')).toBe(true)
     expect(strong.hasClass('text--lighten-1')).toBe(true)
   })

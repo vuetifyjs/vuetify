@@ -91,6 +91,7 @@ export default {
       type: String,
       default: 'chevron_left'
     },
+    readonly: Boolean,
     scrollable: Boolean,
     showCurrent: {
       type: [Boolean, String],
@@ -285,6 +286,7 @@ export default {
       return this.$createElement('v-date-picker-title', {
         props: {
           date: this.formatters.titleDate(this.inputDate),
+          readonly: this.readonly,
           selectingYear: this.activePicker === 'YEAR',
           year: this.formatters.year(`${this.year}`),
           yearIcon: this.yearIcon
@@ -303,6 +305,7 @@ export default {
           format: this.headerDateFormat,
           locale: this.locale,
           prependIcon: this.prependIcon,
+          readonly: this.readonly,
           value: this.activePicker === 'DATE' ? this.tableDate : `${this.tableYear}`
         },
         on: {
@@ -322,8 +325,9 @@ export default {
           firstDayOfWeek: this.firstDayOfWeek,
           format: this.dayFormat,
           locale: this.locale,
+          readonly: this.readonly,
           tableDate: this.tableDate,
-          scrollable: this.scrollable,
+          scrollable: this.scrollable && !this.readonly,
           value: this.value
         },
         ref: 'table',
@@ -341,7 +345,8 @@ export default {
           current: this.current,
           format: this.monthFormat,
           locale: this.locale,
-          scrollable: this.scrollable,
+          readonly: this.readonly,
+          scrollable: this.scrollable && !this.readonly,
           value: (!this.value || this.type === 'month') ? this.value : this.value.substr(0, 7),
           tableDate: `${this.tableYear}`
         },

@@ -44,6 +44,7 @@ export default {
       type: String,
       default: 'chevron_left'
     },
+    readonly: Boolean,
     value: {
       type: [Number, String],
       required: true
@@ -73,6 +74,7 @@ export default {
       return this.$createElement('v-btn', {
         props: {
           dark: this.dark,
+          disabled: this.readonly,
           icon: true
         },
         nativeOn: {
@@ -96,9 +98,8 @@ export default {
     },
     genHeader () {
       const header = this.$createElement('strong', {
-        'class': this.addTextColorClassChecks(),
         key: String(this.value),
-        on: {
+        on: this.readonly ? undefined : {
           click: () => this.$emit('toggle')
         }
       }, [this.$slots.default || this.formatter(String(this.value))])
@@ -110,7 +111,8 @@ export default {
       }, [header])
 
       return this.$createElement('div', {
-        'class': 'date-picker-header__value'
+        staticClass: 'date-picker-header__value',
+        'class': this.readonly ? ['date-picker-header__value--disabled'] : this.addTextColorClassChecks()
       }, [transition])
     }
   },

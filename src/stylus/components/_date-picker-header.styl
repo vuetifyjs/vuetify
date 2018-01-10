@@ -2,9 +2,8 @@
 @import '../theme'
 
 date-picker-header($material)
-  .date-picker-header__value
-    strong:not(:hover)
-      color: $material.text.primary !important
+  .date-picker-header__value:not(:hover)
+    color: $material.text.primary !important
 
 theme(date-picker-header, "date-picker-header")
 
@@ -20,18 +19,17 @@ theme(date-picker-header, "date-picker-header")
     margin: 0
     z-index: auto
 
-  .icon
-    cursor: pointer
-    user-select: none
-
 .date-picker-header__value
   flex: 1
   text-align: center
   position: relative
   overflow: hidden
+  cursor: pointer
 
   strong
-    cursor: pointer
     transition: $primary-transition
     display: block
     width: 100%
+
+.date-picker-header__value--disabled
+  pointer-events: none
