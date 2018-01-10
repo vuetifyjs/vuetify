@@ -75,9 +75,7 @@ export default {
       return this.genPickerButton('selectingYear', false, this.genTitleText(title), 'date-picker-title__date')
     },
     setReversing (val, prev) {
-      const getTime = v => new Date(v).getTime()
-
-      this.isReversing = getTime(val) < getTime(prev)
+      this.isReversing = val < prev
     }
   },
 
