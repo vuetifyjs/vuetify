@@ -87,7 +87,7 @@
           locale: 'en'
         },
         {
-          title: 'русский',
+          title: 'Русский',
           locale: 'ru'
         }
       ]
