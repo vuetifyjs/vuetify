@@ -1886,9 +1886,10 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
   <div class="picker__body">
     <div style="pointer-events: none;">
       <div class="date-picker-header">
-        <button type="button"
-                class="btn btn--icon"
-                data-ripple="true"
+        <button disabled="disabled"
+                type="button"
+                class="btn btn--disabled btn--icon"
+                data-ripple="false"
         >
           <div class="btn__content">
             <i aria-hidden="true"
@@ -1898,14 +1899,15 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
             </i>
           </div>
         </button>
-        <div class="date-picker-header__value">
-          <strong class="accent--text">
+        <div class="date-picker-header__value date-picker-header__value--disabled">
+          <strong>
             May 2013
           </strong>
         </div>
-        <button type="button"
-                class="btn btn--icon"
-                data-ripple="true"
+        <button disabled="disabled"
+                type="button"
+                class="btn btn--disabled btn--icon"
+                data-ripple="false"
         >
           <div class="btn__content">
             <i aria-hidden="true"

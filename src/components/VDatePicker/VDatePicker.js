@@ -304,6 +304,7 @@ export default {
         props: {
           appendIcon: this.appendIcon,
           color: this.color,
+          disabled: this.readonly,
           format: this.headerDateFormat,
           locale: this.locale,
           prependIcon: this.prependIcon,
