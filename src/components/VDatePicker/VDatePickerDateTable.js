@@ -58,45 +58,6 @@ export default {
       const days = this.weekDays.map(day => this.$createElement('th', day))
       return this.$createElement('thead', this.genTR(days))
     },
-    genButtonClasses (day, isDisabled) {
-      const isSelected = this.isSelected(day)
-      const isCurrent = this.isCurrent(day)
-      const classes = Object.assign({
-        'btn--icon': !isSelected || !isDisabled,
-        'btn--floating': isSelected && isDisabled,
-        'btn--active': isSelected,
-        'btn--outline': isCurrent && !isSelected,
-        'btn--disabled': isDisabled
-      }, this.themeClasses)
-
-      return isSelected
-        ? this.addBackgroundColorClassChecks(classes)
-        // Normally a v-btn component using
-        // the outline prop would run the
-        // addTextColorClasses method
-        : isCurrent
-          ? this.addTextColorClassChecks(classes)
-          : classes
-    },
-    genButton (day) {
-      const date = `${this.displayedYear}-${pad(this.displayedMonth + 1)}-${pad(day)}`
-      const isDisabled = !isValueAllowed(date, this.allowedDates)
-
-      return this.$createElement('button', {
-        staticClass: 'btn',
-        'class': this.genButtonClasses(day, isDisabled),
-        attrs: {
-          type: 'button'
-        },
-        domProps: {
-          disabled: isDisabled,
-          innerHTML: `<div class="btn__content">${this.formatter(date)}</div>`
-        },
-        on: isDisabled ? {} : {
-          click: () => this.$emit('input', date)
-        }
-      })
-    },
     genEvent (date) {
       let eventColor
       if (typeof this.eventColor === 'string') {
@@ -127,8 +88,9 @@ export default {
       for (day = 1; day <= daysInMonth; day++) {
         const date = `${this.displayedYear}-${pad(this.displayedMonth + 1)}-${pad(day)}`
         const isEvent = isValueAllowed(date, this.events, false)
+
         rows.push(this.$createElement('td', [
-          this.genButton(day),
+          this.genButton(date, true),
           isEvent ? this.genEvent(date) : null
         ]))
 
@@ -147,16 +109,6 @@ export default {
     genTR (children) {
       return [this.$createElement('tr', children)]
     },
-    isSelected (date) {
-      return this.selectedYear === this.displayedYear &&
-        this.selectedMonth === this.displayedMonth &&
-        this.selectedDate === date
-    },
-    isCurrent (date) {
-      return this.currentYear === this.displayedYear &&
-        this.currentMonth === this.displayedMonth &&
-        this.currentDate === date
-    }
   },
 
   render (h) {
