@@ -192,30 +192,6 @@ test('VDatePickerDateTable.js', ({ mount }) => {
     expect(wrapper.vm.selectedYear).toBe(null)
   })
 
-  it('should calculate active date', () => {
-    const wrapper = mount(VDatePickerDateTable, {
-      propsData: {
-        tableDate: '2005-05',
-        value: '2005-05-11'
-      }
-    })
-
-    expect(wrapper.vm.isSelected(11)).toBe(true)
-    expect(wrapper.vm.isSelected(12)).toBe(false)
-  })
-
-  it('should calculate active date', () => {
-    const wrapper = mount(VDatePickerDateTable, {
-      propsData: {
-        tableDate: '2005-05',
-        current: '2005-05-11'
-      }
-    })
-
-    expect(wrapper.vm.isCurrent(11)).toBe(true)
-    expect(wrapper.vm.isCurrent(12)).toBe(false)
-  })
-
   it('should change tableDate when touch is called', () => {
     const wrapper = mount(VDatePickerDateTable, {
       propsData: {

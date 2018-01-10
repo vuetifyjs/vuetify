@@ -3,6 +3,9 @@ require('../../../stylus/components/_date-picker-table.styl')
 // Directives
 import Touch from '../../../directives/touch'
 
+// Util
+import isValueAllowed from '../../../util/isValueAllowed'
+
 export default {
   directives: { Touch },
 
@@ -75,6 +78,41 @@ export default {
   },
 
   methods: {
+    genButtonClasses (value, isDisabled, isFloating) {
+      const isSelected = value === this.value
+      const isCurrent = value === this.current
+
+      const classes = {
+        'btn--active': isSelected,
+        'btn--flat': !isSelected,
+        'btn--floating': isFloating,
+        'btn--depressed': !isFloating && isSelected,
+        'btn--disabled': isDisabled,
+        'btn--outline': isCurrent && !isSelected
+      }
+
+      if (isSelected) return this.addBackgroundColorClassChecks(classes)
+      if (isCurrent) return this.addTextColorClassChecks(classes)
+      return classes
+    },
+    genButton (value, isFloating) {
+      const isDisabled = !isValueAllowed(value, this.allowedDates)
+
+      return this.$createElement('button', {
+        staticClass: 'btn',
+        'class': this.genButtonClasses(value, isDisabled, isFloating),
+        attrs: {
+          type: 'button'
+        },
+        domProps: {
+          disabled: isDisabled,
+          innerHTML: `<div class="btn__content">${this.formatter(value)}</div>`
+        },
+        on: isDisabled ? {} : {
+          click: () => this.$emit('input', value)
+        }
+      })
+    },
     wheel (e) {
       e.preventDefault()
       this.$emit('tableDate', this.calculateTableDate(e.deltaY))
