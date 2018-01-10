@@ -8,7 +8,7 @@ export default {
     hideActions: 'Hide the table actions',
     itemKey: 'The field in the item object that designates a unique key',
     items: 'The array of table rows',
-    mustSort: 'Forces at least one column to always be sorted instead of toggling between <code>sorted ascending</code>/<code>sorted descending</code>/<code>unsorted</code> states',
+    mustSort: 'Forces at least one column to always be sorted instead of toggling between `sorted ascending`/`sorted descending`/`unsorted` states',
     noResultsText: 'Display text when there are no filtered results',
     pagination: 'Used to control pagination and sorting from outside the data table. Can also be used to set default sorted column',
     rowsPerPageItems: 'The default values for the rows-per-page dropdown',
