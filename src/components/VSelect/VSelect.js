@@ -99,6 +99,7 @@ export default {
   },
 
   mounted () {
+    console.log('Fire!!!')
     // If instance is being destroyed
     // do not run mounted functions
     if (this._isDestroyed) return
