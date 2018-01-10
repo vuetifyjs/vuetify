@@ -1,7 +1,7 @@
 export default {
   props: {
-    activeClass: `Class bound when component is active. **warning** Depending upon the component, this could cause side effects. If you need to add a custom class on top of a default, just do <code>active-class="default-class your-class"</code>`,
-    append: `Vue Router router-link prop`,
+    activeClass: 'Class bound when component is active. **warning** Depending upon the component, this could cause side effects. If you need to add a custom class on top of a default, just do `active-class="default-class your-class"`',
+    append: 'Vue Router router-link prop',
     disabled: 'Route item is disabled',
     exact: 'Exactly match the link. Without this, "/" will match every route',
     exactActiveClass: 'Vue Router router-link prop',

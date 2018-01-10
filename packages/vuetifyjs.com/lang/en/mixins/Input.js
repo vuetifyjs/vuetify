@@ -7,7 +7,7 @@ export default {
     hint: 'Hint text',
     label: 'Sets input label',
     persistentHint: 'Forces hint to always be visible',
-    placeholder: `Sets the input's placeholder text`,
+    placeholder: 'Sets the input\'s placeholder text',
     prependIcon: 'Prepend an icon to the component, uses same syntax as `v-icon`',
     prependIconCb: 'Callback for prepended icon when clicked',
     readonly: 'Puts input in readonly state',
