@@ -1,6 +1,7 @@
 function searchChildren (children) {
   const results = []
-  for (const child of children) {
+  for (let index = 0; index < children.length; index++) {
+    const child = children[index]
     if (child.isActive && child.isDependent) {
       results.push(child)
     } else {
@@ -29,9 +30,10 @@ export default {
     },
     getOpenDependentElements () {
       const result = []
+      const openDependents = this.getOpenDependents()
 
-      for (const dependent of this.getOpenDependents()) {
-        result.push(...dependent.getClickableDependentElements())
+      for (let index = 0; index < openDependents.length; index++) {
+        result.push(...openDependents[index].getClickableDependentElements())
       }
 
       return result
@@ -49,8 +51,9 @@ export default {
     isActive (val) {
       if (val) return
 
-      for (const dependent of this.getOpenDependents()) {
-        dependent.isActive = false
+      const openDependents = this.getOpenDependents()
+      for (let index = 0; index < openDependents.length; index++) {
+        openDependents[index].isActive = false
       }
     }
   }

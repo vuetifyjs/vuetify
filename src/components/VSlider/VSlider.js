@@ -9,6 +9,8 @@ import ClickOutside from '../../directives/click-outside'
 
 import { VScaleTransition } from '../transitions'
 
+import { consoleWarn } from '../../util/console'
+
 export default {
   name: 'v-slider',
 
@@ -154,7 +156,7 @@ export default {
 
     // Without a v-app, iOS does not work with body selectors
     this.app = document.querySelector('[data-app]') ||
-      console.warn('The v-slider component requires the presence of v-app or a non-body wrapping element with the [data-app] attribute.')
+      consoleWarn('Missing v-app or a non-body wrapping element with the [data-app] attribute', this)
   },
 
   methods: {
@@ -239,7 +241,7 @@ export default {
         }, [
           h('div', {
             staticClass: 'slider__thumb--label',
-            'class': this.addBackgroundColorClassChecks({}, 'computedThumbColor')
+            'class': this.addBackgroundColorClassChecks({}, this.computedThumbColor)
           }, [
             h('span', {}, this.inputValue)
           ])
@@ -261,7 +263,7 @@ export default {
       const children = []
       children.push(h('div', {
         staticClass: 'slider__thumb',
-        'class': this.addBackgroundColorClassChecks({}, 'computedThumbColor')
+        'class': this.addBackgroundColorClassChecks({}, this.computedThumbColor)
       }))
 
       this.thumbLabel && children.push(this.genThumbLabel(h))
@@ -301,7 +303,7 @@ export default {
       const children = [
         h('div', {
           staticClass: 'slider__track',
-          'class': this.addBackgroundColorClassChecks({}, 'computedTrackColor'),
+          'class': this.addBackgroundColorClassChecks({}, this.computedTrackColor),
           style: this.trackStyles
         }),
         h('div', {

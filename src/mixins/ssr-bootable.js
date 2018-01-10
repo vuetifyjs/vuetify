@@ -17,9 +17,9 @@ export default {
     // Use setAttribute instead of dataset
     // because dataset does not work well
     // with unit tests
-    setTimeout(() => {
+    window.requestAnimationFrame(() => {
       this.$el.setAttribute('data-booted', true)
       this.isBooted = true
-    }, 200)
+    })
   }
 }

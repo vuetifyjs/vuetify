@@ -43,7 +43,7 @@ test('VSpeedDial.js', ({ mount }) => {
   it('should activate on hover', () => {
     const wrapper = mount(VSpeedDial, {
       propsData: {
-        hover: true
+        openOnHover: true
       }
     })
 

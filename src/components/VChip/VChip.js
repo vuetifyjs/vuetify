@@ -43,7 +43,7 @@ export default {
       })
 
       return (this.textColor || this.outline)
-        ? this.addTextColorClassChecks(classes, this.textColor ? 'textColor' : 'color')
+        ? this.addTextColorClassChecks(classes, this.textColor || this.color)
         : classes
     }
   },

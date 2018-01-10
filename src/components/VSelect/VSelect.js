@@ -119,6 +119,9 @@ export default {
   },
 
   methods: {
+    needsTile (tile) {
+      return tile.componentOptions == null || tile.componentOptions.tag !== 'v-list-tile'
+    },
     changeSelectedIndex (keyCode) {
       // backspace, left, right, delete
       if (![8, 37, 39, 46].includes(keyCode)) return
@@ -188,7 +191,7 @@ export default {
           return this.getValue(i) === this.getValue(val)
         } else {
           // Always return Boolean
-          return this.findExistingItem(i) > -1
+          return this.findExistingIndex(i) > -1
         }
       })
 
@@ -237,7 +240,11 @@ export default {
         }
       }
     },
-    findExistingItem (item) {
+    findExistingItem (val) {
+      const itemValue = this.getValue(val)
+      return this.items.find(i => this.valueComparator(this.getValue(i), itemValue))
+    },
+    findExistingIndex (item) {
       const itemValue = this.getValue(item)
       return this.inputValue.findIndex(i => this.valueComparator(this.getValue(i), itemValue))
     },
@@ -248,7 +255,7 @@ export default {
       } else {
         const selectedItems = []
         const inputValue = this.inputValue.slice()
-        const i = this.findExistingItem(item)
+        const i = this.findExistingIndex(item)
 
         i !== -1 && inputValue.splice(i, 1) || inputValue.push(item)
         this.inputValue = inputValue.map((i) => {

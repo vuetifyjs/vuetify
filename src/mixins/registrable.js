@@ -1,5 +1,7 @@
+import { consoleWarn } from '../util/console'
+
 function generateWarning (child, parent) {
-  return () => console.warn(`[Vuetify] Warn: The ${child} component must be used inside a ${parent}.`)
+  return () => consoleWarn(`The ${child} component must be used inside a ${parent}`)
 }
 
 export function inject (namespace, child, parent) {

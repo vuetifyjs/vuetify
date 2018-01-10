@@ -2,23 +2,22 @@ import { VExpandTransition } from '../transitions'
 
 import Bootable from '../../mixins/bootable'
 import Toggleable from '../../mixins/toggleable'
+import Rippleable from '../../mixins/rippleable'
 
 import VIcon from '../VIcon'
 
-import Ripple from '../../directives/ripple'
 import ClickOutside from '../../directives/click-outside'
 
 export default {
   name: 'v-expansion-panel-content',
 
-  mixins: [Bootable, Toggleable],
+  mixins: [Bootable, Toggleable, Rippleable],
 
   components: {
     VIcon
   },
 
   directives: {
-    Ripple,
     ClickOutside
   },
 
@@ -32,7 +31,10 @@ export default {
 
   props: {
     hideActions: Boolean,
-    ripple: Boolean
+    ripple: {
+      type: [Boolean, Object],
+      default: false
+    }
   },
 
   methods: {

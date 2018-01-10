@@ -1,5 +1,6 @@
 import application from './mixins/application'
 import theme from './mixins/theme'
+import options from './mixins/options'
 import goTo from './mixins/goTo'
 
 const Vuetify = {
@@ -14,7 +15,7 @@ const Vuetify = {
       application,
       dark: false,
       theme: theme(opts.theme),
-      touchSupport: false,
+      options: options(opts.options),
       goTo
     })
 

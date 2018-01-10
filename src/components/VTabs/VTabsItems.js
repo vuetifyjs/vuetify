@@ -115,9 +115,9 @@ export default {
       this.items = this.items.filter(i => i !== item)
     },
     updateItems () {
-      this.items.forEach(({ toggle }, index) => {
-        toggle(this.lazyValue, this.reverse, this.isBooted, index)
-      })
+      for (let index = this.items.length; --index >= 0;) {
+        this.items[index].toggle(this.lazyValue, this.reverse, this.isBooted, index)
+      }
       this.isBooted = true
     }
   },

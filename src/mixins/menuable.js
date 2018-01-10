@@ -312,7 +312,7 @@ export default {
       const dimensions = {}
 
       // Activator should already be shown
-      dimensions.activator = !this.hasActivator
+      dimensions.activator = !this.hasActivator || this.absolute
         ? this.absolutePosition()
         : this.measure(this.getActivator())
 
