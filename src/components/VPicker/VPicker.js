@@ -26,7 +26,7 @@ export default {
     landscape: Boolean,
     transition: {
       type: String,
-      default: 'scale-transition'
+      default: 'fade-transition'
     }
   },
 
@@ -44,14 +44,12 @@ export default {
         staticClass: 'picker__title',
         'class': this.addBackgroundColorClassChecks({
           'picker__title--landscape': this.landscape
-        }, 'computedTitleColor')
+        }, this.computedTitleColor)
       }, this.$slots.title)
     },
     genBodyTransition () {
       return this.$createElement('transition', {
         props: {
-          origin: 'center center',
-          mode: 'out-in',
           name: this.transition
         }
       }, this.$slots.default)

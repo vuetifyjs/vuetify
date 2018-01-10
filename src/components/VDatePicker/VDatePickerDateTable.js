@@ -16,6 +16,14 @@ export default {
   ],
 
   props: {
+    events: {
+      type: [Array, Object, Function],
+      default: () => null
+    },
+    eventColor: {
+      type: [String, Function, Object],
+      default: 'warning'
+    },
     firstDayOfWeek: {
       type: [String, Number],
       default: 0
@@ -50,36 +58,57 @@ export default {
       const days = this.weekDays.map(day => this.$createElement('th', day))
       return this.$createElement('thead', this.genTR(days))
     },
-    genButtonClasses (day, disabled) {
-      const isActive = this.isActive(day)
+    genButtonClasses (day, isDisabled) {
+      const isSelected = this.isSelected(day)
       const isCurrent = this.isCurrent(day)
       const classes = Object.assign({
-        'btn--active': isActive,
-        'btn--outline': isCurrent && !isActive,
-        'btn--disabled': disabled
+        'btn--icon': !isSelected || !isDisabled,
+        'btn--floating': isSelected && isDisabled,
+        'btn--active': isSelected,
+        'btn--outline': isCurrent && !isSelected,
+        'btn--disabled': isDisabled
       }, this.themeClasses)
 
-      return (isActive || isCurrent)
+      return isSelected
         ? this.addBackgroundColorClassChecks(classes)
-        : classes
+        // Normally a v-btn component using
+        // the outline prop would run the
+        // addTextColorClasses method
+        : isCurrent
+          ? this.addTextColorClassChecks(classes)
+          : classes
     },
     genButton (day) {
       const date = `${this.displayedYear}-${pad(this.displayedMonth + 1)}-${pad(day)}`
-      const disabled = !isValueAllowed(date, this.allowedDates)
+      const isDisabled = !isValueAllowed(date, this.allowedDates)
 
       return this.$createElement('button', {
-        staticClass: 'btn btn--raised btn--icon',
-        'class': this.genButtonClasses(day, disabled),
+        staticClass: 'btn',
+        'class': this.genButtonClasses(day, isDisabled),
         attrs: {
           type: 'button'
         },
         domProps: {
-          disabled,
-          innerHTML: `<span class="btn__content">${this.formatter(date)}</span>`
+          disabled: isDisabled,
+          innerHTML: `<div class="btn__content">${this.formatter(date)}</div>`
         },
-        on: disabled ? {} : {
+        on: isDisabled ? {} : {
           click: () => this.$emit('input', date)
         }
+      })
+    },
+    genEvent (date) {
+      let eventColor
+      if (typeof this.eventColor === 'string') {
+        eventColor = this.eventColor
+      } else if (typeof this.eventColor === 'function') {
+        eventColor = this.eventColor(date)
+      } else {
+        eventColor = this.eventColor[date]
+      }
+      return this.$createElement('div', {
+        staticClass: 'date-picker-table__event',
+        class: this.addBackgroundColorClassChecks({}, eventColor || this.color)
       })
     },
     // Returns number of the days from the firstDayOfWeek to the first day of the current month
@@ -92,14 +121,16 @@ export default {
       const children = []
       const daysInMonth = new Date(this.displayedYear, this.displayedMonth + 1, 0).getDate()
       let rows = []
-      const day = this.weekDaysBeforeFirstDayOfTheMonth()
+      let day = this.weekDaysBeforeFirstDayOfTheMonth()
 
-      for (let i = 0; i < day; i++) {
-        rows.push(this.$createElement('td'))
-      }
-
-      for (let i = 1; i <= daysInMonth; i++) {
-        rows.push(this.$createElement('td', [this.genButton(i)]))
+      while (day--) rows.push(this.$createElement('td'))
+      for (day = 1; day <= daysInMonth; day++) {
+        const date = `${this.displayedYear}-${pad(this.displayedMonth + 1)}-${pad(day)}`
+        const isEvent = isValueAllowed(date, this.events, false)
+        rows.push(this.$createElement('td', [
+          this.genButton(day),
+          isEvent ? this.genEvent(date) : null
+        ]))
 
         if (rows.length % 7 === 0) {
           children.push(this.genTR(rows))
@@ -116,7 +147,7 @@ export default {
     genTR (children) {
       return [this.$createElement('tr', children)]
     },
-    isActive (date) {
+    isSelected (date) {
       return this.selectedYear === this.displayedYear &&
         this.selectedMonth === this.displayedMonth &&
         this.selectedDate === date

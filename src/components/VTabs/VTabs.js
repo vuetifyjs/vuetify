@@ -160,14 +160,14 @@ export default {
         /* istanbul ignore else */
         if (vnode.componentOptions) {
           switch (vnode.componentOptions.Ctor.options.name) {
-            case 'v-tab': tab.push(vnode)
-              break
             case 'v-tabs-slider': slider.push(vnode)
               break
             case 'v-tabs-items': items.push(vnode)
               break
             case 'v-tab-item': item.push(vnode)
               break
+            // case 'v-tab' - intentionally omitted
+            default: tab.push(vnode)
           }
         }
       }
