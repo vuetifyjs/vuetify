@@ -31,6 +31,14 @@ export default {
       header: 'Date pickers - icons',
       desc: 'You can override the default icons used in the picker.'
     },
+    dateReadonly: {
+      header: 'Date pickers - read only',
+      desc: 'Selecting new date could be disabled by adding **readonly** prop.'
+    },
+    dateCurrent: {
+      header: 'Date pickers - current date indicator',
+      desc: 'By default the current date is displayed using outline button - **show-current** prop allows you to remove the border or select different date to be displayed as the current one.'
+    },
     monthLight: {
       header: 'Month pickers',
       desc: 'Month pickers come in two orientation variations, portrait **(default)** and landscape.'
@@ -54,6 +62,14 @@ export default {
     monthIcons: {
       header: 'Month pickers - icons',
       desc: 'You can override the default icons used in the picker.'
+    },
+    monthReadonly: {
+      header: 'Month pickers - read only',
+      desc: 'Selecting new date could be disabled by adding **readonly** prop.'
+    },
+    monthCurrent: {
+      header: 'Month pickers - current month indicator',
+      desc: 'By default the current month is displayed using outline button - **show-current** prop allows you to remove the border or select different month to be displayed as the current one.'
     },
     timeLight: {
       header: 'Time pickers',
