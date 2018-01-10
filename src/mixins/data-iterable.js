@@ -306,15 +306,16 @@ export default {
     },
     createProps (item, index) {
       let props = { item, index }
-      const keyProp = this.itemKey
-      const itemKey = item[keyProp]
 
-      props = this.createSelectedProp(item, props, keyProp, itemKey)
-      props = this.createExpandedProp(item, props, keyProp, itemKey)
+      props = this.createSelectedProp(item, props)
+      props = this.createExpandedProp(item, props)
 
       return props
     },
-    createSelectedProp (item, props, keyProp, itemKey) {
+    createSelectedProp (item, props) {
+      const keyProp = this.itemKey
+      const itemKey = item[keyProp]
+
       Object.defineProperty(props, 'selected', {
         get: () => this.selected[item[this.itemKey]],
         set: (value) => {
@@ -339,7 +340,10 @@ export default {
 
       return props
     },
-    createExpandedProp (item, props, keyProp, itemKey) {
+    createExpandedProp (item, props) {
+      const keyProp = this.itemKey
+      const itemKey = item[keyProp]
+
       Object.defineProperty(props, 'expanded', {
         get: () => this.expanded[item[this.itemKey]],
         set: (value) => {
