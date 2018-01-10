@@ -32,6 +32,7 @@ export default {
       type: String,
       default: 'chevron_right'
     },
+    disabled: Boolean,
     format: {
       type: Function,
       default: null
@@ -73,6 +74,7 @@ export default {
       return this.$createElement('v-btn', {
         props: {
           dark: this.dark,
+          disabled: this.disabled,
           icon: true
         },
         nativeOn: {
@@ -96,7 +98,7 @@ export default {
     },
     genHeader () {
       const header = this.$createElement('strong', {
-        'class': this.addTextColorClassChecks(),
+        'class': this.disabled ? undefined : this.addTextColorClassChecks(),
         key: String(this.value),
         on: {
           click: () => this.$emit('toggle')
@@ -110,7 +112,10 @@ export default {
       }, [header])
 
       return this.$createElement('div', {
-        'class': 'date-picker-header__value'
+        staticClass: 'date-picker-header__value',
+        class: {
+          'date-picker-header__value--disabled': this.disabled
+        }
       }, [transition])
     }
   },
