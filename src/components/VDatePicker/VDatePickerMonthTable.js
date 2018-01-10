@@ -32,7 +32,7 @@ export default {
         'btn--flat': !isSelected,
         'btn--active btn--depressed': isSelected,
         'btn--outline': isCurrent && !isSelected,
-        'btn--disabled': isDisabled
+        'btn--disabled': isDisabled || (isSelected && this.disabled)
       }
 
       return isSelected

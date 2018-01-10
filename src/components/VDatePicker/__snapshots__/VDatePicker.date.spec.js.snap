@@ -2011,7 +2011,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="btn btn--icon btn--active accent"
+                        class="btn btn--floating btn--active btn--disabled accent"
                 >
                   <div class="btn__content">
                     7

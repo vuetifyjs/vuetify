@@ -58,16 +58,18 @@ export default {
       const days = this.weekDays.map(day => this.$createElement('th', day))
       return this.$createElement('thead', this.genTR(days))
     },
-    genButtonClasses (day, disabled) {
-      const isActive = this.isActive(day)
+    genButtonClasses (day, isDisabled) {
+      const isSelected = this.isSelected(day)
       const isCurrent = this.isCurrent(day)
       const classes = Object.assign({
-        'btn--active': isActive,
-        'btn--outline': isCurrent && !isActive,
-        'btn--disabled': disabled
+        'btn--icon': !isSelected || (!isDisabled && !this.disabled),
+        'btn--floating': isSelected && (isDisabled || this.disabled),
+        'btn--active': isSelected,
+        'btn--outline': isCurrent && !isSelected,
+        'btn--disabled': isDisabled || (isSelected && this.disabled)
       }, this.themeClasses)
 
-      return isActive
+      return isSelected
         ? this.addBackgroundColorClassChecks(classes)
         // Normally a v-btn component using
         // the outline prop would run the
@@ -78,19 +80,19 @@ export default {
     },
     genButton (day) {
       const date = `${this.displayedYear}-${pad(this.displayedMonth + 1)}-${pad(day)}`
-      const disabled = !isValueAllowed(date, this.allowedDates)
+      const isDisabled = !isValueAllowed(date, this.allowedDates)
 
       return this.$createElement('button', {
-        staticClass: 'btn btn--icon',
-        'class': this.genButtonClasses(day, disabled),
+        staticClass: 'btn',
+        'class': this.genButtonClasses(day, isDisabled),
         attrs: {
           type: 'button'
         },
         domProps: {
-          disabled,
+          disabled: isDisabled,
           innerHTML: `<div class="btn__content">${this.formatter(date)}</div>`
         },
-        on: disabled ? {} : {
+        on: isDisabled ? {} : {
           click: () => this.$emit('input', date)
         }
       })
@@ -145,7 +147,7 @@ export default {
     genTR (children) {
       return [this.$createElement('tr', children)]
     },
-    isActive (date) {
+    isSelected (date) {
       return this.selectedYear === this.displayedYear &&
         this.selectedMonth === this.displayedMonth &&
         this.selectedDate === date

@@ -19,6 +19,7 @@ export default {
       default: () => null
     },
     current: String,
+    disabled: Boolean,
     format: {
       type: Function,
       default: null
