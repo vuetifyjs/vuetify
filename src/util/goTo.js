@@ -16,14 +16,14 @@ export default function goTo (target, offset = 0, duration = 500) {
 
   let end
 
-  if (typeof target === 'string') {
-    let scrollTo = document.querySelector(target)
-    if (!scrollTo) return
-    end = scrollTo.getBoundingClientRect().top + window.pageYOffset
+  if (target instanceof Element) {
+    end = target.getBoundingClientRect().top + window.pageYOffset
+  } else if (typeof target === 'string') {
+    end = document.querySelector(target).getBoundingClientRect().top + window.pageYOffset
   } else if (typeof target === 'number') {
     end = target
   } else {
-    consoleError(`Target must be a String/Number, received ${target.constructor.name} instead.`)
+    consoleError(`Target must be a String/Number/DOMElement, received ${target.constructor.name} instead.`)
     return
   }
 
