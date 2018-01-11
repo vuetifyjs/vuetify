@@ -40,18 +40,19 @@ export default {
       }
 
       this.blur()
-
-      if (this.tags && this.searchValue) {
-        this.updateTags(this.searchValue)
-      }
-
-      if (this.combobox && this.lazySearch && !this.isNotFiltering) {
-        this.inputValue = this.lazySearch
-      }
-
-      // Only set search value if
-      // there is a value to set
       this.searchValue && (this.searchValue = null)
+
+//       if (this.tags && this.searchValue) {
+//         this.updateTags(this.searchValue)
+//       }
+
+//       if (this.combobox && this.lazySearch && !this.isNotFiltering) {
+//         this.inputValue = this.lazySearch
+//       }
+
+        // Only set search value if
+        // there is a value to set
+//       this.searchValue && (this.searchValue = null)
     },
     isBooted () {
       this.$nextTick(() => {
