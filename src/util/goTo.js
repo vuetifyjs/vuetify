@@ -19,13 +19,11 @@ export default function goTo (target, offset = 0) {
   if (typeof target === 'string') {
     let anchor = target.charAt(0) === '#' ? target.substring(1) : target
     let scrollTo = document.getElementById(anchor)
-    if(!scrollTo) return
+    if (!scrollTo) return
     end = scrollTo.getBoundingClientRect().top + window.pageYOffset
-  }
-  else if (typeof target === 'number') {
+  } else if (typeof target === 'number') {
     end = target
-  }
-  else {
+  } else {
     consoleError(`Target must be a String/Number, received ${target.constructor.name} instead.`)
     return
   }
