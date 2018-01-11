@@ -60,7 +60,6 @@ export function createStore () {
           { title: 'Vue.js Radar', href: 'https://vuejsradar.com', src: 'affiliates/vueradar2.png' }
         ],
         sponsors: [
-          { title: 'BrowserStack', size: 35, href: 'https://www.browserstack.com/', src: 'browser-stack.png' },
           { title: 'Cloudflare', size: 35, href: 'https://www.cloudflare.com/', src: 'cloudflare.svg' }
         ]
       }
