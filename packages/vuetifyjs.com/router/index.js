@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import VueAnalytics from 'vue-analytics'
 import paths from './paths'
 import scrollBehavior from './scroll-behavior'
 
@@ -37,13 +38,17 @@ export function createRouter () {
       routes
     })
 
-    // Send a pageview to Google Analytics
-    router.beforeEach((to, from, next) => {
-      if (typeof ga !== 'undefined' && process.env.NODE_ENV !== 'development') {
-        ga('set', 'page', to.path)
-        ga('send', 'pageview')
-      }
-      next()
+    Vue.use(VueAnalytics, {
+      id: 'UA-75262397-3',
+      router,
+      autoTracking: {
+        page: process.env.NODE_ENV !== 'development'
+      },
+      debug: false ? {
+        enabled: true,
+        trace: false,
+        sendHitTask: true
+      } : false
     })
 
     return router

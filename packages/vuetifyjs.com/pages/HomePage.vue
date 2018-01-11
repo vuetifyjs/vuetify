@@ -131,6 +131,7 @@
                 :href="`${supporter.href}?ref=vuetifyjs.com`"
                 :title="supporter.title"
                 :key="i"
+                @click="$ga.event('home sponsor click', 'click', supporter.title)"
                 v-else
               )
                 img(

@@ -32,6 +32,7 @@
     "shopify-buy": "^1.0.2",
     "vee-validate": "^2.0.0",
     "vue": "^2.5.13",
+    "vue-analytics": "^5.8.0",
     "vue-i18n": "^7.3.3",
     "vue-markdown": "^2.2.4",
     "vue-router": "^3.0.1",
