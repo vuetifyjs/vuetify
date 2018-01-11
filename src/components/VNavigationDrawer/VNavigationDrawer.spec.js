@@ -9,7 +9,7 @@ test('VNavigationDrawer', ({ mount }) => {
   const app = mount(VApp)
 
   // TODO Figure out why test fails but real world succeeeds
-  it.skip('should become temporary when the window resizes', async () => {
+  it('should become temporary when the window resizes', async () => {
     const wrapper = mount(VNavigationDrawer)
 
     expect(wrapper.vm.isActive).toBe(true)
