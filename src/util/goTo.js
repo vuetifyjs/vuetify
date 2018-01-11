@@ -1,4 +1,4 @@
-import { consoleError } from '../../../util/console'
+import { consoleError } from './console'
 
 /**
  * Modified from https://github.com/alamcordeiro/vue-smooth-scroll
@@ -10,7 +10,7 @@ export default function goTo (target, offset = 0) {
   if (typeof window === 'undefined') return
 
   if (offset && isNaN(offset)) {
-    consoleError(`Offset must be a number, received '${typeof offset}' instead.`)
+    consoleError(`Offset must be a Number, received ${offset.constructor.name} instead.`)
     return
   }
 
@@ -22,9 +22,11 @@ export default function goTo (target, offset = 0) {
     if(!scrollTo) return
     end = scrollTo.getBoundingClientRect().top + window.pageYOffset
   }
-  else if (typeof target === 'number') end = target
+  else if (typeof target === 'number') {
+    end = target
+  }
   else {
-    consoleError(`Target must be a String or a Number, received '${typeof target}' instead.`)
+    consoleError(`Target must be a String/Number, received ${target.constructor.name} instead.`)
     return
   }
 
@@ -35,7 +37,7 @@ export default function goTo (target, offset = 0) {
   function step (now) {
     let elapsed = now - start
     let position = end
-    if (elapsed < duration){
+    if (elapsed < duration) {
       position = window.pageYOffset + (end - window.pageYOffset) * easeInOutCubic(elapsed / duration)
       window.requestAnimationFrame(step)
     }
