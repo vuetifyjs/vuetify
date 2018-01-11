@@ -8,7 +8,6 @@ test('VNavigationDrawer', ({ mount }) => {
   // v-app is needed to initialise $vuetify.application
   const app = mount(VApp)
 
-  // TODO Figure out why test fails but real world succeeeds
   it('should become temporary when the window resizes', async () => {
     const wrapper = mount(VNavigationDrawer)
 
