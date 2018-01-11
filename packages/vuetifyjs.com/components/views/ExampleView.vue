@@ -21,12 +21,12 @@
             color="grey lighten-3"
             slider-color="primary"
           )
-            v-tab(
-              v-for="(tab, i) in tabs"
-              :href="`#${tab}`"
-              :key="i"
-              v-show="hasTab(tab)"
-            ) {{ tab.replace(/([A-Z])/g, ' $1') }}
+            template(v-for="(tab, i) in tabs")
+              v-tab(
+                :key="i"
+                :href="`#${tab}`"
+                v-if="hasTab(tab)"
+              ) {{ tab.replace(/([A-Z])/g, ' $1') }}
           v-card-title
             v-select(
               label="Component"
