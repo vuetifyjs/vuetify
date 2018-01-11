@@ -180,18 +180,6 @@ test('VDatePickerDateTable.js', ({ mount }) => {
     expect(tableDate).toBeCalledWith('2005-06')
   })
 
-  it('should return null for selected date if not provided', () => {
-    const wrapper = mount(VDatePickerDateTable, {
-      propsData: {
-        tableDate: '2005-05'
-      }
-    })
-
-    expect(wrapper.vm.selectedDate).toBe(null)
-    expect(wrapper.vm.selectedMonth).toBe(null)
-    expect(wrapper.vm.selectedYear).toBe(null)
-  })
-
   it('should change tableDate when touch is called', () => {
     const wrapper = mount(VDatePickerDateTable, {
       propsData: {
