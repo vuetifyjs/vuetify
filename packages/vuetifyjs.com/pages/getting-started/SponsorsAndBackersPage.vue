@@ -27,6 +27,7 @@
               :title="backer.title"
               v-for="backer in diamond"
               v-bind:key="backer.title"
+              @click="$ga.event('backers page click', 'click', backer.title)"
             ).text-xs-center.mx-3
               img(
                 :src="`/static/doc-images/${backer.src}`"
@@ -46,6 +47,7 @@
               :title="backer.title"
               v-for="backer in palladium"
               v-bind:key="backer.title"
+              @click="$ga.event('backers page click', 'click', backer.title)"
             ).text-xs-center.mx-3
               img(
                 :src="`/static/doc-images/${backer.src}`"
@@ -70,6 +72,7 @@
               :title="backer.title"
               v-for="backer in gold"
               v-bind:key="backer.title"
+              @click="$ga.event('backers page click', 'click', backer.title)"
             ).text-xs-center.mx-3
               img(
                 :src="`/static/doc-images/${backer.src}`"
@@ -92,6 +95,7 @@
               :title="affiliate.title"
               v-for="affiliate in affiliates"
               v-bind:key="affiliate.title"
+              @click="$ga.event('backers page click', 'click', affiliate.title)"
             ).text-xs-center.mx-3
               img(
                 :src="`/static/doc-images/${affiliate.src}`"
@@ -113,6 +117,7 @@
               :title="sponsor.title"
               v-for="sponsor in sponsors"
               v-bind:key="sponsor.title"
+              @click="$ga.event('backers page click', 'click', sponsor.title)"
             ).text-xs-center.mx-3
               img(
                 :src="`/static/doc-images/${sponsor.src}`"
