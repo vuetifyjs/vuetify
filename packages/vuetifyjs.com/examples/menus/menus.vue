@@ -10,7 +10,7 @@
               <v-icon>more_vert</v-icon>
             </v-btn>
             <v-list>
-              <v-list-tile v-for="item in items" :key="item.title" @click="">
+              <v-list-tile v-for="(item, i) in items" :key="i" @click="">
                 <v-list-tile-title>{{ item.title }}</v-list-tile-title>
               </v-list-tile>
             </v-list>
