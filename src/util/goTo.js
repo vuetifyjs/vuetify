@@ -17,8 +17,7 @@ export default function goTo (target, offset = 0, duration = 500) {
   let end
 
   if (typeof target === 'string') {
-    let anchor = target.charAt(0) === '#' ? target.substring(1) : target
-    let scrollTo = document.getElementById(anchor)
+    let scrollTo = document.querySelector(target)
     if (!scrollTo) return
     end = scrollTo.getBoundingClientRect().top + window.pageYOffset
   } else if (typeof target === 'number') {
