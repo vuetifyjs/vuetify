@@ -4,3 +4,4 @@ dist/
 public/
 npm-debug.log
 .idea/
+.env
