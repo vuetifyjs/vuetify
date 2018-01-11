@@ -19,11 +19,6 @@ export default {
       header: 'With an editable numeric value',
       desc: 'Sliders can be combined with other components for a better display.'
     },
-    dark: {
-      header: 'Dark theme',
-      desc: 'Sliders also support theming.',
-      uninverted: true
-    },
     customColors: {
       header: 'Custom colors',
       desc: 'You can set the colors of the slider using the props `color`, `track-color` and `thumb-color`.'

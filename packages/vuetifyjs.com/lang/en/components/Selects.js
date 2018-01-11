@@ -8,12 +8,6 @@ export default {
         header: 'Light theme',
         desc: 'A standard single select has a multitude of configuration options.'
       },
-      dark: {
-        header: 'Dark theme',
-        desc: 'Selects also support theming, dark and light.',
-        inverted: true,
-        uninverted: true
-      },
       icons: {
         header: 'Icons',
         desc: 'Use a custom prepended or appended icon.'
