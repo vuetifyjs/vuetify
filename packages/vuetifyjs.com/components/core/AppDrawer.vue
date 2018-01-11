@@ -11,7 +11,12 @@
         v-for="diamond in diamonds"
         :key="diamond.title"
       )
-        a(:href="diamond.href" target="_blank" rel="noopener")
+        a(
+          :href="diamond.href"
+          target="_blank"
+          rel="noopener"
+          @click="$ga.event('drawer sponsor click', 'click', diamond.title)"
+        )
           img.diamond-sponsor(
             :src="`/static/doc-images/${diamond.src}`"
             :alt="diamond.title"
@@ -44,6 +49,7 @@
         target="_blank"
         rel="noopener"
         class="d-inline-block"
+        @click="$ga.event('drawer jobs click', 'click', 'vuejobs')"
       )
         img(
           src="/static/doc-images/affiliates/vuejobs-logo.svg"
