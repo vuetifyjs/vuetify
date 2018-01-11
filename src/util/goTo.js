@@ -13,6 +13,10 @@ export default function goTo (target, offset = 0, duration = 500) {
     consoleError(`Offset must be a Number, received ${offset.constructor.name} instead.`)
     return
   }
+  if (duration && isNaN(duration)) {
+    consoleError(`Duration must be a Number, received ${duration.constructor.name} instead.`)
+    return
+  }
 
   let end
 
