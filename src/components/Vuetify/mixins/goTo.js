@@ -1,3 +1,5 @@
+import { consoleError } from '../../../util/console'
+
 /**
  * Modified from https://github.com/alamcordeiro/vue-smooth-scroll
  */
@@ -8,7 +10,7 @@ export default function goTo (target, offset = 0) {
   if (typeof window === 'undefined') return
 
   if (offset && isNaN(offset)) {
-    console.error('$vuetify.goTo: Offset must be a number.')
+    consoleError(`Offset must be a number, received '${typeof offset}' instead.`)
     return
   }
 
@@ -22,7 +24,7 @@ export default function goTo (target, offset = 0) {
   }
   else if (typeof target === 'number') end = target
   else {
-    console.error('$vuetify.goTo: Target must be a String or a Number.')
+    consoleError(`Target must be a String or a Number, received '${typeof target}' instead.`)
     return
   }
 
