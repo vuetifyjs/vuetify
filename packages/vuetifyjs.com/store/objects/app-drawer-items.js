@@ -94,7 +94,7 @@ export default [
       { href: 'navigation-drawers', title: 'Navigation drawers' },
       { href: 'paginations', title: 'Paginations' },
       { href: 'parallax', title: 'Parallax' },
-      { href: 'pickers', title: 'Pickers' },
+      { href: 'pickers', title: 'Pickers', badge: 'updated' },
       { href: 'progress', title: 'Progress' },
       { href: 'sliders', title: 'Sliders' },
       { href: 'snackbars', title: 'Snackbars' },
