@@ -60,9 +60,6 @@ declare interface VuetifyOptions {
   themeCache?: VuetifyThemeCache
 }
 
-declare function goTo(n: number): void;
-declare function goTo(s: string): void;
-
 declare interface VuetifyObject {
   application: VuetifyApplication
   breakpoint: VuetifyBreakpoint
