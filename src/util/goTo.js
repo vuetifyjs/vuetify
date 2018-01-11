@@ -6,7 +6,7 @@ import { consoleError } from './console'
 
 function easeInOutCubic (t) { return t < .5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1 }
 
-export default function goTo (target, offset = 0) {
+export default function goTo (target, offset = 0, duration = 500) {
   if (typeof window === 'undefined') return
 
   if (offset && isNaN(offset)) {
@@ -29,7 +29,6 @@ export default function goTo (target, offset = 0) {
   }
 
   end += offset
-  let duration = 500
   let start = performance.now()
 
   function step (now) {
