@@ -246,9 +246,13 @@ export default {
       return this.reactsToClick
     },
     genDirectives () {
-      const directives = [
-        { name: 'click-outside', value: this.closeConditional }
-      ]
+      const directives = [{
+        name: 'click-outside',
+        value: () => (this.isActive = false),
+        args: {
+          closeConditional: this.closeConditional
+        }
+      }]
 
       !this.touchless && directives.push({
         name: 'touch',

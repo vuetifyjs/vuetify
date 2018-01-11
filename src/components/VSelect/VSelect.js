@@ -155,6 +155,14 @@ export default {
         this.selectedIndex = newIndex
       }
     },
+    closeConditional (e) {
+      return (
+        !!this.content &&
+        !this.content.contains(e.target) &&
+        !!this.$el &&
+        !this.$el.contains(e.target)
+      )
+    },
     filterDuplicates (arr) {
       const uniqueValues = new Map()
       for (let index = 0; index < arr.length; ++index) {
@@ -168,13 +176,9 @@ export default {
     genDirectives () {
       return [{
         name: 'click-outside',
-        value: e => {
-          return (
-            !!this.content &&
-            !this.content.contains(e.target) &&
-            !!this.$el &&
-            !this.$el.contains(e.target)
-          )
+        value: () => (this.isActive = false),
+        args: {
+          closeConditional: this.closeConditional
         }
       }]
     },

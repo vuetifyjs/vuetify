@@ -342,7 +342,8 @@ export default {
         keyup: this.onKeyUp
       }, this.$listeners),
       directives: [{
-        name: 'click-outside'
+        name: 'click-outside',
+        value: () => (this.isActive = false)
       }]
     })
   }
