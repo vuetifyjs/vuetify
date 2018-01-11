@@ -46,24 +46,6 @@ export default {
     computedTransition () {
       return this.isReversing ? 'tab-reverse-transition' : 'tab-transition'
     },
-    selectedDate () {
-      return this.value ? (this.value.split('-')[2] * 1) : null
-    },
-    selectedMonth () {
-      return this.value ? (this.value.split('-')[1] - 1) : null
-    },
-    selectedYear () {
-      return this.value ? (this.value.split('-')[0] * 1) : null
-    },
-    currentDate () {
-      return this.current ? (this.current.split('-')[2] * 1) : null
-    },
-    currentMonth () {
-      return this.current ? (this.current.split('-')[1] - 1) : null
-    },
-    currentYear () {
-      return this.current ? (this.current.split('-')[0] * 1) : null
-    },
     displayedMonth () {
       return this.tableDate.split('-')[1] - 1
     },
@@ -85,7 +67,7 @@ export default {
 
       const classes = {
         'btn--active': isSelected,
-        'btn--flat': !isSelected,
+        'btn--flat': !isSelected || (isFloating && isSelected && !isDisabled && !this.disabled),
         'btn--floating': isFloating,
         'btn--depressed': !isFloating && isSelected,
         'btn--disabled': isDisabled || (this.disabled && isSelected),

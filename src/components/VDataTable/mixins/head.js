@@ -11,7 +11,7 @@ export default {
         const row = this.$scopedSlots.headers({
           headers: this.headers,
           indeterminate: this.indeterminate,
-          all: this.all
+          all: this.everyItem
         })
 
         children = [this.needsTR(row) ? this.genTR(row) : row, this.genTProgress()]
@@ -23,7 +23,7 @@ export default {
             light: this.light,
             color: this.selectAll === true ? '' : this.selectAll,
             hideDetails: true,
-            inputValue: this.all,
+            inputValue: this.everyItem,
             indeterminate: this.indeterminate
           },
           on: { change: this.toggle }
