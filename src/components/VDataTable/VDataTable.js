@@ -187,7 +187,7 @@ export default {
       return this.selectAll !== undefined && this.selectAll !== false
     },
     itemsLength () {
-      if (this.search) return this.searchLength
+      if (this.search) return this.searchLength || this.totalItems
       return this.totalItems || this.items.length
     },
     indeterminate () {
