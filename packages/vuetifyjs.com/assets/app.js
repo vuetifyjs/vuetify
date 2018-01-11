@@ -8,6 +8,8 @@ import Vuetify from 'vuetify'
 import VeeValidate from 'vee-validate'
 import axios from 'axios'
 
+Vue.config.performance = process.env.NODE_ENV === 'development'
+
 // Bootstrap
 import { createStore } from '@/store/index'
 import { createRouter } from '@/router/index'
