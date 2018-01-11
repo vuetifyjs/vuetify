@@ -156,7 +156,7 @@ export default {
     },
     showOverlay () {
       return this.isActive &&
-        (this.temporary || this.isMobile)
+        (this.isMobile || this.temporary)
     },
     styles () {
       const styles = {
@@ -179,12 +179,6 @@ export default {
     },
     isActive (val) {
       this.$emit('input', val)
-
-      if (this.temporary || this.isMobile) {
-        this.tryOverlay()
-        this.$el && (this.$el.scrollTop = 0)
-      }
-
       this.callUpdate()
     },
     /**
@@ -215,8 +209,11 @@ export default {
       }
       this.callUpdate()
     },
+    showOverlay (val) {
+      if (val) this.genOverlay()
+      else this.removeOverlay()
+    },
     temporary () {
-      this.tryOverlay()
       this.callUpdate()
     },
     value (val) {
@@ -246,9 +243,13 @@ export default {
       return this.reactsToClick
     },
     genDirectives () {
-      const directives = [
-        { name: 'click-outside', value: this.closeConditional }
-      ]
+      const directives = [{
+        name: 'click-outside',
+        value: () => (this.isActive = false),
+        args: {
+          closeConditional: this.closeConditional
+        }
+      }]
 
       !this.touchless && directives.push({
         name: 'touch',
@@ -297,16 +298,6 @@ export default {
         e.touchstartX >= this.touchArea.right
       ) this.isActive = true
       else if (!this.right && this.isActive) this.isActive = false
-    },
-    tryOverlay () {
-      if (!this.permanent &&
-        this.showOverlay &&
-        this.isActive
-      ) {
-        return this.genOverlay()
-      }
-
-      this.removeOverlay()
     },
     /**
      * Update the application layout
