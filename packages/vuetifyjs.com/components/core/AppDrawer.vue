@@ -142,19 +142,21 @@
 
 <script>
   import { mapState } from 'vuex'
+  import supporters from '@/assets/supporters'
+  import appDrawerItems from '@/assets/app-drawer-items'
 
   export default {
     data: () => ({
+      diamonds: supporters.diamond,
       docSearch: {},
       isSearching: false,
+      items: appDrawerItems,
       search: ''
     }),
 
     computed: {
       ...mapState({
-        diamonds: state => state.supporters.diamond,
         isFullscreen: state => state.isFullscreen,
-        items: state => state.appDrawerItems,
         stateless: state => state.stateless
       }),
       appDrawer: {
