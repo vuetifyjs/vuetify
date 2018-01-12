@@ -188,7 +188,7 @@ export default {
           max: this.selectingHour ? (this.isAmPm && this.period === 'am' ? 11 : 23) : 59,
           min: this.selectingHour && this.isAmPm && this.period === 'pm' ? 12 : 0,
           scrollable: this.scrollable,
-          size: this.landscape ? 250 : 270,
+          size: this.width - 20,
           step: this.selectingHour ? 1 : 5,
           value: this.selectingHour ? this.hour : this.minute
         },
@@ -201,9 +201,10 @@ export default {
     },
     genPickerBody () {
       return this.$createElement('div', {
+        staticClass: 'time-picker-clock__container',
         style: {
-          width: '100%',
-          height: '100%'
+          width: `${this.width}px`,
+          height: `${this.width}px`
         },
         key: this.selectingHour
       }, [this.genClock()])

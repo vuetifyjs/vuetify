@@ -192,8 +192,8 @@ export default {
     const data = {
       staticClass: 'time-picker-clock',
       style: {
-        width: `${this.size}px`,
-        height: `${this.size}px`
+        width: `100%`,
+        height: `100%`
       },
       on: {
         mousedown: this.onMouseDown,

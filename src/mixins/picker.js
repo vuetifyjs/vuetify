@@ -20,7 +20,12 @@ export default {
   props: {
     headerColor: String,
     landscape: Boolean,
-    noTitle: Boolean
+    noTitle: Boolean,
+    width: {
+      type: [Number, String],
+      default: 290,
+      validator: value => parseInt(value, 10) > 0
+    }
   },
 
   methods: {
@@ -36,10 +41,11 @@ export default {
       return this.$createElement('v-picker', {
         staticClass,
         props: {
-          landscape: this.landscape,
+          color: this.headerColor || this.color,
           dark: this.dark,
+          landscape: this.landscape,
           light: this.light,
-          color: this.headerColor || this.color
+          width: this.width
         }
       }, [
         this.noTitle ? null : this.genPickerTitle(),

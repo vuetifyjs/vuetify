@@ -19,9 +19,8 @@ theme(picker-title, "picker")
 
 .picker
   border-radius: $card-border-radius
-  display: flex
+  display: inline-flex
   flex-direction: column
-  width: 290px
   contain: content
 
   .card__row--actions
@@ -48,20 +47,20 @@ theme(picker-title, "picker")
       opacity: 1
 
 .picker__body
-  height: 290px
+  height: auto
   overflow: hidden
   position: relative
+  transition: all $primary-transition
 
   > div
     width: 100%
-    
+
     &.fade-transition-leave-active
       position: absolute
 
 .picker--landscape
   flex-direction: row
   flex-wrap: wrap
-  width: 500px
 
   .picker__title
     border-top-right-radius: 0
@@ -76,9 +75,7 @@ theme(picker-title, "picker")
 
   .picker__body
     flex: 1 0
-    width: 330px
     margin-left: 170px
 
   .card__row--actions
     margin-left: 170px
-    width: 330px

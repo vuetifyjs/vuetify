@@ -13,17 +13,19 @@ time-picker-clock($material)
 
 theme(time-picker-clock, "time-picker-clock")
 
+.time-picker-clock__container
+  display: flex
+  align-items: center
+  justify-content: center
+  padding: 10px
+
 .time-picker-clock
   border-radius: 100%
-  position: absolute
   user-select: none
-  top: 50%
-  left: 50%
   transition: $primary-transition
-  transform: translate(-50%, -50%)
 
   &__hand
-    height: 40%
+    height: calc(42.5% - 14px)
     width: 2px
     bottom: 50%
     left: calc(50% - 1px)

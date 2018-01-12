@@ -27,6 +27,11 @@ export default {
     transition: {
       type: String,
       default: 'fade-transition'
+    },
+    width: {
+      type: [Number, String],
+      default: 290,
+      validator: value => parseInt(value, 10) > 0
     }
   },
 
@@ -56,7 +61,10 @@ export default {
     },
     genBody () {
       return this.$createElement('div', {
-        staticClass: 'picker__body'
+        staticClass: 'picker__body',
+        style: {
+          width: this.width + 'px'
+        }
       }, [this.genBodyTransition()])
     },
     genActions () {
