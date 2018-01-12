@@ -7,13 +7,13 @@ exports[`VListGroup.js should render a component with no padding for action icon
     <ul class="list__group__header">
       <li class="list__group__header__prepend-icon">
         <i aria-hidden="true"
-           class="material-icons icon"
+           class="icon material-icons"
         >
         </i>
       </li>
       <li class="list__group__header__append-icon">
         <i aria-hidden="true"
-           class="material-icons icon"
+           class="icon material-icons"
         >
           keyboard_arrow_down
         </i>
@@ -35,13 +35,13 @@ exports[`VListGroup.js should render a component with route namespace and match 
     <ul class="list__group__header">
       <li class="list__group__header__prepend-icon">
         <i aria-hidden="true"
-           class="material-icons icon"
+           class="icon material-icons"
         >
         </i>
       </li>
       <li class="list__group__header__append-icon">
         <i aria-hidden="true"
-           class="material-icons icon"
+           class="icon material-icons"
         >
           keyboard_arrow_down
         </i>
@@ -63,13 +63,13 @@ exports[`VListGroup.js should render a lazy component and match snapshot 1`] = `
     <ul class="list__group__header">
       <li class="list__group__header__prepend-icon">
         <i aria-hidden="true"
-           class="material-icons icon"
+           class="icon material-icons"
         >
         </i>
       </li>
       <li class="list__group__header__append-icon">
         <i aria-hidden="true"
-           class="material-icons icon"
+           class="icon material-icons"
         >
           keyboard_arrow_down
         </i>
@@ -91,13 +91,13 @@ exports[`VListGroup.js should render component and match snapshot 1`] = `
     <ul class="list__group__header">
       <li class="list__group__header__prepend-icon">
         <i aria-hidden="true"
-           class="material-icons icon"
+           class="icon material-icons"
         >
         </i>
       </li>
       <li class="list__group__header__append-icon">
         <i aria-hidden="true"
-           class="material-icons icon"
+           class="icon material-icons"
         >
           keyboard_arrow_down
         </i>

@@ -5,14 +5,19 @@ import {
   VTabReverseTransition
 } from '../transitions'
 
+import {
+  inject as RegistrableInject
+} from '../../mixins/registrable'
+
 import Touch from '../../directives/touch'
 
 export default {
-  name: 'v-tabs-content',
+  name: 'v-tab-item',
 
-  mixins: [Bootable],
-
-  inject: ['registerContent', 'unregisterContent'],
+  mixins: [
+    Bootable,
+    RegistrableInject('tabs', 'v-tab-item', 'v-tabs-items')
+  ],
 
   components: {
     VTabTransition,
@@ -31,10 +36,7 @@ export default {
   },
 
   props: {
-    id: {
-      type: String,
-      required: true
-    },
+    id: String,
     transition: {
       type: [Boolean, String],
       default: 'tab-transition'
@@ -52,19 +54,19 @@ export default {
   },
 
   methods: {
-    toggle (target, reverse, showTransition) {
+    toggle (target, reverse, showTransition, index) {
       this.$el.style.transition = !showTransition ? 'none' : null
       this.reverse = reverse
-      this.isActive = this.id === target
+      this.isActive = (this.id || index.toString()) === target
     }
   },
 
   mounted () {
-    this.registerContent(this.id, this.toggle)
+    this.tabs.register(this)
   },
 
   beforeDestroy () {
-    this.unregisterContent(this.id)
+    this.tabs.unregister(this)
   },
 
   render (h) {
@@ -74,10 +76,9 @@ export default {
         name: 'show',
         value: this.isActive
       }],
+      domProps: { id: this.id },
       on: this.$listeners
     }
-
-    if (this.id) data.domProps = { id: this.id }
 
     const div = h('div', data, this.showLazyContent(this.$slots.default))
 

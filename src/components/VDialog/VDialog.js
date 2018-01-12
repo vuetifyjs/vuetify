@@ -125,8 +125,9 @@ export default {
       directives: [
         {
           name: 'click-outside',
-          value: {
-            callback: this.closeConditional,
+          value: () => (this.isActive = false),
+          args: {
+            closeConditional: this.closeConditional,
             include: this.getOpenDependentElements
           }
         },

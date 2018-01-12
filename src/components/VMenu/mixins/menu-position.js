@@ -1,6 +1,6 @@
 /**
  * Menu position
- * 
+ *
  * @mixin
  *
  * Used for calculating an automatic position (used for VSelect)
@@ -26,7 +26,7 @@ export default {
       this.$refs.content.scrollTop = scrollTop
     },
     calcLeftAuto () {
-      if (this.isAbsolute) return 0
+      if (this.isAttached) return 0
 
       return parseInt(this.dimensions.activator.left - this.defaultOffset * 2)
     },

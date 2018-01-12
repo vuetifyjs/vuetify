@@ -239,4 +239,28 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
+
+  it('should initialize everyItem state', async () => {
+    const data = dataTableTestData()
+    data.propsData.value = data.propsData.items
+    const wrapper = mount(VDataTable, data)
+
+    expect(wrapper.vm.everyItem).toBe(true);
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should update everyItem state', async () => {
+    const data = dataTableTestData()
+    data.propsData.itemKey = 'other';
+    const wrapper = mount(VDataTable, data)
+
+    expect(wrapper.vm.everyItem).toBe(false);
+    wrapper.vm.value.push(wrapper.vm.items[0]);
+    expect(wrapper.vm.everyItem).toBe(false);
+
+    wrapper.vm.value.push(wrapper.vm.items[1]);
+    wrapper.vm.value.push(wrapper.vm.items[2]);
+    expect(wrapper.vm.everyItem).toBe(true);
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
 })

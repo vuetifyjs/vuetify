@@ -2,6 +2,8 @@ import Ripple from '../directives/ripple'
 
 /** @mixin */
 export default {
+  name: 'rippleable',
+
   directives: { Ripple },
 
   props: {

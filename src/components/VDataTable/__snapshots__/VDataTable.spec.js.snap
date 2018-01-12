@@ -15,7 +15,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
               class="column sortable active asc text-xs-right a-string"
           >
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
@@ -38,7 +38,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
               class="column sortable text-xs-right an array"
           >
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
@@ -136,7 +136,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
               </div>
             </div>
             <i aria-hidden="true"
-               class="material-icons icon input-group__append-icon input-group__icon-cb"
+               class="icon material-icons input-group__append-icon input-group__icon-cb"
             >
               arrow_drop_down
             </i>
@@ -156,7 +156,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
         >
           <div class="btn__content">
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
             >
               chevron_left
             </i>
@@ -169,7 +169,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
         >
           <div class="btn__content">
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
             >
               chevron_right
             </i>
@@ -197,7 +197,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
               class="column sortable active asc text-xs-right a-string"
           >
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
@@ -220,7 +220,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
               class="column sortable text-xs-right an array"
           >
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
@@ -318,7 +318,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
               </div>
             </div>
             <i aria-hidden="true"
-               class="material-icons icon input-group__append-icon input-group__icon-cb"
+               class="icon material-icons input-group__append-icon input-group__icon-cb"
             >
               arrow_drop_down
             </i>
@@ -338,7 +338,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
         >
           <div class="btn__content">
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
             >
               chevron_left
             </i>
@@ -351,7 +351,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
         >
           <div class="btn__content">
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
             >
               chevron_right
             </i>
@@ -379,7 +379,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
               class="column sortable active asc text-xs-right a-string"
           >
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
@@ -402,7 +402,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
               class="column sortable text-xs-right an array"
           >
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
@@ -502,7 +502,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
               </div>
             </div>
             <i aria-hidden="true"
-               class="material-icons icon input-group__append-icon input-group__icon-cb"
+               class="icon material-icons input-group__append-icon input-group__icon-cb"
             >
               arrow_drop_down
             </i>
@@ -522,7 +522,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
         >
           <div class="btn__content">
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
             >
               chevron_left
             </i>
@@ -535,7 +535,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
         >
           <div class="btn__content">
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
             >
               chevron_right
             </i>
@@ -563,7 +563,7 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
               class="column sortable active asc text-xs-right a-string"
           >
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
@@ -586,7 +586,7 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
               class="column sortable text-xs-right an array"
           >
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
@@ -618,7 +618,7 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
         >
           <div class="btn__content">
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
             >
               chevron_left
             </i>
@@ -630,7 +630,7 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
         >
           <div class="btn__content">
             <i aria-hidden="true"
-               class="material-icons icon"
+               class="icon material-icons"
             >
               chevron_right
             </i>
