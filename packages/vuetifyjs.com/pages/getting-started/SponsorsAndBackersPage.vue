@@ -32,7 +32,7 @@
               img(
                 :src="`/static/doc-images/${backer.src}`"
                 :alt="backer.title"
-              )
+              ).supporter
 
         v-list.transparent
           v-list-tile(tag="div")
@@ -52,7 +52,7 @@
               img(
                 :src="`/static/doc-images/${backer.src}`"
                 :alt="backer.title"
-              )
+              ).supporter
 
         v-list.transparent
           v-list-tile(tag="div")
@@ -78,7 +78,7 @@
                 :src="`/static/doc-images/${backer.src}`"
                 :alt="backer.title"
                 style="max-width: 150px;"
-              )
+              ).supporter
         section-head(value="GettingStarted.SponsorsAndBackers.affiliatesHeader")
         v-divider.mb-3
         v-container(fluid grid-list-md).mb-5.affiliates
@@ -101,7 +101,7 @@
                 :src="`/static/doc-images/${affiliate.src}`"
                 :alt="affiliate.title"
                 style="max-width: 150px;"
-              )
+              ).supporter
         section-head(value="GettingStarted.SponsorsAndBackers.sponsorsHeader")
         v-divider.mb-3
         v-container(fluid).mb-5
@@ -123,7 +123,7 @@
                 :src="`/static/doc-images/${sponsor.src}`"
                 alt="sponsor.title"
                 style="max-width: 150px;"
-              )
+              ).supporter
         div.text-xs-center
           div.mb-3 {{ $t('GettingStarted.SponsorsAndBackers.questionHeader') }}
           v-btn(
@@ -148,11 +148,11 @@
   }
 </script>
 
-<style lang="stylus">
-  #sponsors-and-backers
-    img
-      max-width: 225px
-      width: 100%
-    .affiliates img
+<style lang="stylus" scoped>
+  .supporter
+    max-width: 225px
+    width: 100%
+
+    .affiliates &
       width: 80%
 </style>

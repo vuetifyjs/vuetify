@@ -111,7 +111,7 @@
             p {{ $t("Vuetify.Home.support.hasVuetifyHelped") }}
             p {{ $t("Vuetify.Home.support.showYourSupport") }} <a href="https://www.patreon.com/vuetify" target="_blank">{{ $t("Vuetify.Home.support.becomingAPatron") }}</a>.
 
-    section#sponsors-and-backers.my-5
+    section.sponsors-and-backers.my-5
       v-container
         v-card(
           :class="{ 'pa-5': $vuetify.breakpoint.mdAndUp, 'py-5 px-2': $vuetify.breakpoint.smAndDown }"
@@ -399,7 +399,7 @@
       p
         font-size 36px
 
-  #sponsors-and-backers
+  .sponsors-and-backers
     .card
       z-index 1
 
