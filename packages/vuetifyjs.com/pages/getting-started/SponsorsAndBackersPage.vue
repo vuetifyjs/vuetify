@@ -12,7 +12,7 @@
         v-divider.mb-3
         v-list.transparent
           v-list-tile
-            v-list-tile-title 
+            v-list-tile-title
               strong {{ $t('GettingStarted.SponsorsAndBackers.backersSubHeader') }}
         v-container(fluid grid-list-md).mb-5
           v-layout(
@@ -135,18 +135,16 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import supporters from '@/assets/supporters'
 
   export default {
-    computed: {
-      ...mapState({
-        diamond: state => state.supporters.diamond,
-        gold: state => state.supporters.gold,
-        palladium: state => state.supporters.palladium,
-        affiliates: state => state.supporters.affiliates,
-        sponsors: state => state.supporters.sponsors
-      })
-    }
+    data: () => ({
+      diamond: supporters.diamond,
+      gold: supporters.gold,
+      palladium: supporters.palladium,
+      affiliates: supporters.affiliates,
+      sponsors: supporters.sponsors
+    })
   }
 </script>
 

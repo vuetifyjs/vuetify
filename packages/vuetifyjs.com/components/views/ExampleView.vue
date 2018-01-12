@@ -91,6 +91,7 @@
 </template>
 
 <script>
+  import api from '@/api/api'
   // Utilities
   import { mapState } from 'vuex'
   import { camel, capitalize, kebab } from '@/util/helpers'
@@ -100,6 +101,7 @@
 
     data () {
       return {
+        api,
         current: null,
         id: '',
         headers: {
@@ -156,9 +158,6 @@
     },
 
     computed: {
-      ...mapState({
-        api: state => state.api
-      }),
       components () {
         let components = (this.data.components || []).slice()
 

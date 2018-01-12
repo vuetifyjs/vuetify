@@ -153,6 +153,8 @@
 </template>
 
 <script>
+  import supporters from '@/assets/supporters'
+
   // Components
   import HomeFooter from '@/components/misc/HomeFooter'
 
@@ -167,6 +169,8 @@
     },
 
     data: () => ({
+      diamond: supporters.diamond,
+      palladium: supporters.palladium,
       socials: [
         {
           icon: 'fa-github',
@@ -184,10 +188,6 @@
     }),
 
     computed: {
-      ...mapState({
-        diamond: state => state.supporters.diamond,
-        palladium: state => state.supporters.palladium
-      }),
       checkFeatures () {
         return this.$t('Vuetify.Home.checkFeatures')
       },
@@ -201,8 +201,7 @@
         return this.$t('Vuetify.Home.letterFromAuthor')
       },
       supporters () {
-        const supporters = [].concat(this.diamond)
-          .concat(this.palladium)
+        const supporters = [...this.diamond, ...this.palladium]
 
         const end = { break: true }
 
