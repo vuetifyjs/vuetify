@@ -61,13 +61,13 @@
             v-card-text
               kbd {{ themeExport }}
             v-card-actions
-              v-btn(block color="grey white--text" flat @click.native="useNames = !useNames") Use {{ useNames && 'hex codes' || 'names' }} 
+              v-btn(block color="grey white--text" flat @click.native="useNames = !useNames") Use {{ useNames && 'hex codes' || 'names' }}
               v-btn(block color="blue darken-2 white--text" flat @click.native="dialog = false") Close
 
 </template>
 
 <script>
-  import colors from '@/util/colors'
+  import colors from 'vuetify/src/util/colors'
   import Components from '@/components/generator'
   import { Swatches } from 'vue-color'
 
@@ -124,11 +124,13 @@
             return e
           }, {})
           let str = `import colors from 'vuetify/src/util/colors'\n\n${JSON.stringify(names, null, 2)}`
-          str = str.replace(/(.*)\:\s\"(.*)\"/g, "$1: colors.$2")
+          str = str.replace(/\"(.*)\"\:\s\"(.*)\"/g, "$1: colors.$2")
 
           return str
         } else {
-          return JSON.stringify(this.theme, null, 2)
+          let str = JSON.stringify(this.theme, null, 2)
+          str = str.replace(/\"(.*)\"\:\s\"(.*)\"/g, "$1: \"$2\"")
+          return str
         }
       }
     },
@@ -155,7 +157,7 @@
       findName (value) {
         for (const [color, shades] of Object.entries(colors)) {
           for (const [name, hex] of Object.entries(shades)) {
-            if (hex === value) return `${color}.${name}`
+            if (hex === value.toLowerCase()) return `${color}.${name}`
           }
         }
         return value
