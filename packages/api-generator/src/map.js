@@ -125,6 +125,40 @@ dataIterableProps = [
   {
     name: 'pagination',
     sync: true
+  },
+  {
+    name: 'filter',
+    default: '(val: object, search: string): boolean'
+  },
+  {
+    name: 'customSort',
+    default: '(items: object[], index: number, isDescending: boolean): object[]'
+  },
+  {
+    name: 'customFilter',
+    default: '(items: object[], search: string, filter: Filter) => object[]'
+  }
+]
+
+dataIterableScopedSlots = [
+  {
+    name: 'items',
+    props: {
+      item: 'object',
+      index: 'number',
+      selected: 'boolean',
+      expanded: 'boolean'
+    },
+    source: 'data-iterable'
+  },
+  {
+    name: 'pageText',
+    props: {
+      pageStart: 'number',
+      pageStop: 'number',
+      itemsLength: 'number'
+    },
+    source: 'data-iterable'
   }
 ]
 
@@ -189,22 +223,41 @@ module.exports = {
     slots: [
       { name: 'footer', source: 'data-iterable' }
     ],
-    scopedSlots: [
-      { name: 'items', props: ['item', 'index', 'selected', 'expanded'], source: 'data-iterable' },
-      { name: 'pageText', props: ['pageStart', 'pageStop', 'itemsLength'], source: 'data-iterable' }
-    ]
+    scopedSlots: dataIterableScopedSlots
   },
   'v-data-table': {
-    props: dataIterableProps,
+    props: [
+      {
+        name: 'headers',
+        example: {
+          text: 'string',
+          value: 'string',
+          align: '\'left\' | \'center\' | \'right\'',
+          sortable: 'boolean',
+          class: 'string[] | string',
+          width: 'string'
+        }
+      }
+    ].concat(dataIterableProps),
     slots: [
       { name: 'footer', source: 'data-iterable' }
     ],
     scopedSlots: [
-      { name: 'headerCell', props: ['header'] },
-      { name: 'headers', props: ['headers', 'indeterminate', 'all'] },
-      { name: 'items', props: ['item', 'index', 'selected', 'expanded'], source: 'data-iterable' },
-      { name: 'pageText', props: ['pageStart', 'pageStop', 'itemsLength'], source: 'data-iterable' }
-    ]
+      {
+        name: 'headerCell',
+        props: {
+          header: 'object'
+        }
+      },
+      {
+        name: 'headers',
+        props: {
+          headers: 'object[]',
+          indeterminate: 'boolean',
+          all: 'boolean'
+        }
+      }
+    ].concat(dataIterableScopedSlots)
   },
   'v-dialog': {
     slots: ['activator', 'default']
@@ -241,7 +294,17 @@ module.exports = {
     slots: ['default']
   },
   'v-form': {
-    slots: ['default']
+    slots: ['default'],
+    functions: [
+      {
+        name: 'reset',
+        signature: '(): void'
+      },
+      {
+        name: 'validate',
+        signature: '(): boolean'
+      }
+    ]
   },
   'v-icon': {
     slots: ['default']
