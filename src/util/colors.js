@@ -1,18 +1,18 @@
 const red = Object.freeze({
-  base: '#F44336',
-  lighten5: '#FFEBEE',
-  lighten4: '#FFCDD2',
-  lighten3: '#EF9A9A',
-  lighten2: '#E57373',
-  lighten1: '#EF5350',
-  darken1: '#E53935',
-  darken2: '#D32F2F',
-  darken3: '#C62828',
-  darken4: '#B71C1C',
-  accent1: '#FF8A80',
-  accent2: '#FF5252',
-  accent3: '#FF1744',
-  accent4: '#D50000'
+  base: '#f44336',
+  lighten5: '#ffebee',
+  lighten4: '#ffcdd2',
+  lighten3: '#ef9a9a',
+  lighten2: '#e57373',
+  lighten1: '#ef5350',
+  darken1: '#e53935',
+  darken2: '#d32f2f',
+  darken3: '#c62828',
+  darken4: '#b71c1c',
+  accent1: '#ff8a80',
+  accent2: '#ff5252',
+  accent3: '#ff1744',
+  accent4: '#d50000'
 })
 
 const pink = Object.freeze({
@@ -84,20 +84,20 @@ const indigo = Object.freeze({
 })
 
 const blue = Object.freeze({
-  base: '#2196F3',
-  lighten5: '#E3F2FD',
-  lighten4: '#BBDEFB',
-  lighten3: '#90CAF9',
-  lighten2: '#64B5F6',
-  lighten1: '#42A5F5',
-  darken1: '#1E88E5',
-  darken2: '#1976D2',
-  darken3: '#1565C0',
-  darken4: '#0D47A1',
-  accent1: '#82B1FF',
-  accent2: '#448AFF',
-  accent3: '#2979FF',
-  accent4: '#2962FF'
+  base: '#2196f3',
+  lighten5: '#e3f2fd',
+  lighten4: '#bbdefb',
+  lighten3: '#90caf9',
+  lighten2: '#64b5f6',
+  lighten1: '#42a5f5',
+  darken1: '#1e88e5',
+  darken2: '#1976d2',
+  darken3: '#1565c0',
+  darken4: '#0d47a1',
+  accent1: '#82b1ff',
+  accent2: '#448aff',
+  accent3: '#2979ff',
+  accent4: '#2962ff'
 })
 
 const lightBlue = Object.freeze({
@@ -152,20 +152,20 @@ const teal = Object.freeze({
 })
 
 const green = Object.freeze({
-  base: '#4CAF50',
-  lighten5: '#E8F5E9',
-  lighten4: '#C8E6C9',
-  lighten3: '#A5D6A7',
-  lighten2: '#81C784',
-  lighten1: '#66BB6A',
-  darken1: '#43A047',
-  darken2: '#388E3C',
-  darken3: '#2E7D32',
-  darken4: '#1B5E20',
-  accent1: '#B9F6CA',
-  accent2: '#69F0AE',
-  accent3: '#00E676',
-  accent4: '#00C853'
+  base: '#4caf50',
+  lighten5: '#e8f5e9',
+  lighten4: '#c8e6c9',
+  lighten3: '#a5d6a7',
+  lighten2: '#81c784',
+  lighten1: '#66bb6a',
+  darken1: '#43a047',
+  darken2: '#388e3c',
+  darken3: '#2e7d32',
+  darken4: '#1b5e20',
+  accent1: '#b9f6ca',
+  accent2: '#69f0ae',
+  accent3: '#00e676',
+  accent4: '#00c853'
 })
 
 const lightGreen = Object.freeze({
@@ -311,7 +311,7 @@ const grey = Object.freeze({
 
 const shades = Object.freeze({
   black: '#000000',
-  white: '#FFFFFF',
+  white: '#ffffff',
   transparent: 'transparent'
 })
 
