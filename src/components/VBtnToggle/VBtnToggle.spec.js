@@ -4,9 +4,9 @@ import VIcon from '../VIcon'
 import { test } from '@util/testing'
 import Vue from 'vue'
 
-function createBtn (val = null) {
+function createBtn (val = null, buttonProps = {}) {
   const options = {
-    props: { flat: true }
+    props: Object.assign({ flat: true }, buttonProps)
   }
   if (val) options.attrs = { value: val }
 
@@ -285,5 +285,30 @@ test('VBtnToggle.vue', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should toggle active state of button', async () => {
+    const wrapper = mount(VBtnToggle, {
+      propsData: {
+        inputValue: 'foo'
+      },
+      slots: {
+        default: [
+          createBtn('foo', { color: 'error' }),
+          createBtn('bar', { color: 'success' })
+        ]
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.buttons[0].$data.isActive).toBe(true)
+    expect(wrapper.vm.buttons[1].$data.isActive).toBe(false)
+
+    wrapper.setProps({ inputValue: 'bar' })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.buttons[0].$data.isActive).toBe(false)
+    expect(wrapper.vm.buttons[1].$data.isActive).toBe(true)
   })
 })
