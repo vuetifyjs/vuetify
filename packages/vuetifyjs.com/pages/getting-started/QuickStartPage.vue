@@ -78,6 +78,10 @@
           | @import '~vuetify/src/stylus/main' // Ensure you are using stylus-loader
 
         section-text(:value="`${namespace}.existingText5`")
+        markup(lang="html")
+          | &lt;head&gt;
+          |   &lt;link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet"&gt;
+          | &lt;/head&gt;
         app-alert(error :value="`${namespace}.alert2`")
 
       section#ie11-support
