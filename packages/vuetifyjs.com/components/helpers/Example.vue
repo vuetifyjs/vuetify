@@ -223,12 +223,10 @@
 
     .justify
       text-align: justify
-    
-    aside.navigation-drawer
-      z-index: 1
 
+    aside.navigation-drawer,
     .overlay
-      z-index: 0
+      z-index: 1
 
     nav.toolbar
       z-index: 0
