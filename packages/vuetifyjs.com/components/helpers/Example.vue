@@ -199,7 +199,7 @@
     .application--example
       position: relative
       transition: .3s $transition.swing
-      z-index: 0
+      overflow: hidden
 
       > div,
       > form,
@@ -223,6 +223,12 @@
 
     .justify
       text-align: justify
+    
+    aside.navigation-drawer
+      z-index: 1
+
+    .overlay
+      z-index: 0
 
     nav.toolbar
       z-index: 0
