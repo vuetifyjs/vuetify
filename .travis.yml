@@ -6,7 +6,7 @@ before_script:
   - npm i codecov -g
 
 script:
-  - yarn
+  - yarn --frozen-lockfile --non-interactive
   - yarn run lint
   - yarn run test:coverage && codecov
   - yarn run build
