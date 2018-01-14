@@ -3,6 +3,9 @@ require('../../stylus/components/_input-groups.styl')
 require('../../stylus/components/_selection-controls.styl')
 require('../../stylus/components/_radio-group.styl')
 
+// Helpers
+import {looseEqual} from "../../util/helpers";
+
 // Mixins
 import Input from '../../mixins/input'
 import {
@@ -45,7 +48,11 @@ export default {
       default: true
     },
     name: String,
-    row: Boolean
+    row: Boolean,
+    valueComparator: {
+      type: Function,
+      default: looseEqual
+    }
   },
 
   watch: {
@@ -56,7 +63,7 @@ export default {
     },
     inputValue (val) {
       this.radios.forEach(radio => {
-        radio.isActive = val === radio.value
+        radio.isActive = this.valueComparator(val, radio.value)
       })
     }
   },
@@ -83,7 +90,7 @@ export default {
       this.$nextTick(() => this.validate())
 
       this.radios
-        .filter(r => r.value !== value)
+        .filter(r => this.valueComparator(value, r.value))
         .forEach(r => r.isActive = false)
     },
     radioBlur (e) {
@@ -93,7 +100,7 @@ export default {
       }
     },
     register (radio) {
-      radio.isActive = this.inputValue === radio.value
+      radio.isActive = this.valueComparator(this.inputValue, radio.value)
       radio.$el.tabIndex = radio.$el.tabIndex > 0 ? radio.$el.tabIndex : 0
       radio.$on('change', this.toggleRadio)
       radio.$on('blur', this.radioBlur)
