@@ -314,6 +314,28 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
+  it('can use itemValue as function', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        multiple: true,
+        items: [
+          {text: 'one', v1: "prop v1"},
+          {text: 'two', v2: "prop v2"},
+          {text: 'three', v1: "also prop v1"}
+        ],
+        itemText: 'text',
+        itemValue: item => item.hasOwnProperty('v1') ? item.v1 : item.v2,
+        value: ["prop v1", "prop v2"]
+      }
+    })
+
+    expect(wrapper.vm.selectedItems).toHaveLength(2)
+    expect(wrapper.vm.getValue(wrapper.vm.selectedItems[0])).toBe("prop v1")
+    expect(wrapper.vm.getValue(wrapper.vm.selectedItems[1])).toBe("prop v2")
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
   it('should not open if readonly', async () => {
     const wrapper = mount(VSelect, {
       propsData: {
