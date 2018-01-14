@@ -11,6 +11,10 @@ export default {
       a: 'First, ensure that you\'re using the latest version of Vue.js and Vuetify. Try to reproduce it in codepen using the following [template](https://template.vuetifyjs.com/). If you are unable to reproduce the issue outside of your environment, this usually means the issue resides locally. If you are still unable to resolve your issue, please provide your codepen and issue in **#need-help** in the [community](https://chat.vuetifyjs.com).'
     },
     {
+      q: 'I\'m receiving an error similar to the following:<br>Error in ./node_modules/vuetify/src/dir/file.js Module parse failed: Unexpected token (&lt;lineno&gt;:&lt;characterno&gt;)',
+      a: 'If you\'re using an IDE, such as IntelliJ IDEA or WebStorm, it will often add automatic imports pointing to the `vuetify/src/` directory for components you use.  Change the import statement path from `vuetify/src/` to `vuetify/es5/`.'
+    },
+    {
       q: 'Is there a codepen template with router?',
       a: 'Yes, [right here](https://codepen.io/zikeji/pen/ypeQNm).'
     },
