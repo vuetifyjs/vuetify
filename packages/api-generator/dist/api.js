@@ -1,4 +1,4 @@
-/*
+/* 
  * THIS FILE HAS BEEN AUTOMATICALLY GENERATED USING THE VUETIFY-HELPER-JSON TOOL.
  *
  * CHANGES MADE TO THIS FILE WILL BE LOST!
@@ -1457,6 +1457,14 @@ module.exports = {
       {
         "name": "footer",
         "source": "data-iterable"
+      },
+      {
+        "name": "noData",
+        "source": "data-iterable"
+      },
+      {
+        "name": "noResults",
+        "source": "data-iterable"
       }
     ],
     "scopedSlots": [
@@ -1660,6 +1668,14 @@ module.exports = {
       {
         "name": "footer",
         "source": "data-iterable"
+      },
+      {
+        "name": "noData",
+        "source": "data-iterable"
+      },
+      {
+        "name": "noResults",
+        "source": "data-iterable"
       }
     ],
     "scopedSlots": [
@@ -1777,9 +1793,9 @@ module.exports = {
         "source": null
       },
       {
-        "name": "locale",
-        "type": "String",
-        "default": "en-us",
+        "name": "monthFormat",
+        "type": "Function",
+        "default": "null",
         "source": null
       },
       {
@@ -1839,16 +1855,16 @@ module.exports = {
         "source": null
       },
       {
+        "name": "locale",
+        "type": "String",
+        "default": "en-us",
+        "source": null
+      },
+      {
         "name": "landscape",
         "type": "Boolean",
         "default": "false",
         "source": "picker"
-      },
-      {
-        "name": "monthFormat",
-        "type": "Function",
-        "default": "null",
-        "source": null
       },
       {
         "name": "prependIcon",

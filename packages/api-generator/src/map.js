@@ -140,6 +140,12 @@ dataIterableProps = [
   }
 ]
 
+dataIterableSlots = [
+  { name: 'footer', source: 'data-iterable' },
+  { name: 'noData', source: 'data-iterable' },
+  { name: 'noResults', source: 'data-iterable' }
+]
+
 dataIterableScopedSlots = [
   {
     name: 'items',
@@ -220,9 +226,7 @@ module.exports = {
   },
   'v-data-iterator': {
     props: dataIterableProps,
-    slots: [
-      { name: 'footer', source: 'data-iterable' }
-    ],
+    slots: dataIterableSlots,
     scopedSlots: dataIterableScopedSlots
   },
   'v-data-table': {
@@ -239,9 +243,7 @@ module.exports = {
         }
       }
     ].concat(dataIterableProps),
-    slots: [
-      { name: 'footer', source: 'data-iterable' }
-    ],
+    slots: dataIterableSlots,
     scopedSlots: [
       {
         name: 'headerCell',
