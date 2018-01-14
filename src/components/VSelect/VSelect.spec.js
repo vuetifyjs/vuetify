@@ -170,7 +170,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     const wrapper = mount(component)
 
-    wrapper.vm.$children[0].inputValue = items[0]
+    wrapper.vm.$children[0].inputValue = items[0].value
 
     await wrapper.vm.$nextTick()
 
@@ -210,7 +210,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     const wrapper = mount(component)
 
-    wrapper.vm.$children[0].inputValue = items[0]
+    wrapper.vm.$children[0].inputValue = items[0].value
 
     await wrapper.vm.$nextTick()
 
@@ -236,7 +236,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     const wrapper = mount(component)
 
-    wrapper.vm.$children[0].inputValue = items[0]
+    wrapper.vm.$children[0].inputValue = items[0].value
 
     await wrapper.vm.$nextTick()
 
