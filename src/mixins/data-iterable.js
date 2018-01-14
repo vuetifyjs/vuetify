@@ -142,7 +142,7 @@ export default {
       default: null
     },
     itemKey: {
-      type: String,
+      type: [String, Function],
       default: 'id'
     },
     pagination: {
@@ -201,7 +201,7 @@ export default {
     },
     selected () {
       const selected = {}
-      this.value.forEach(i => (selected[i[this.itemKey]] = true))
+      this.value.forEach(i => (selected[this.getItemKey(i)] = true))
       return selected
     }
   },
@@ -246,11 +246,18 @@ export default {
         this.defaultPagination = updatedPagination
       }
     },
+    getItemKey (item) {
+      const key = this.itemKey
+      if (typeof key === 'function') {
+        return key(item)
+      }
+      return getObjectValueByPath(item, key)
+    },
     isSelected (item) {
-      return this.selected[item[this.itemKey]]
+      return this.selected[this.getItemKey(item)]
     },
     isExpanded (item) {
-      return this.expanded[item[this.itemKey]]
+      return this.expanded[this.getItemKey(item)]
     },
     filteredItemsImpl (...additionalFilterArgs) {
       if (this.totalItems) return this.items
@@ -292,36 +299,36 @@ export default {
     toggle (value) {
       const selected = Object.assign({}, this.selected)
       this.filteredItems.forEach(i => (
-        selected[i[this.itemKey]] = value)
+        selected[this.getItemKey(i)] = value)
       )
 
       this.$emit('input', this.items.filter(i => (
-        selected[i[this.itemKey]]))
+        selected[this.getItemKey(i)]))
       )
     },
     createProps (item, index) {
       const props = { item, index }
-      const key = this.itemKey
+      const key = this.getItemKey(item)
 
       Object.defineProperty(props, 'selected', {
-        get: () => this.selected[item[this.itemKey]],
+        get: () => this.selected[this.getItemKey(item)],
         set: (value) => {
           let selected = this.value.slice()
           if (value) selected.push(item)
-          else selected = selected.filter(i => i[key] !== item[key])
+          else selected = selected.filter(i => this.getItemKey(i) !== key)
           this.$emit('input', selected)
         }
       })
 
       Object.defineProperty(props, 'expanded', {
-        get: () => this.expanded[item[this.itemKey]],
+        get: () => this.expanded[this.getItemKey(item)],
         set: (value) => {
           if (!this.expand) {
             Object.keys(this.expanded).forEach((key) => {
               this.$set(this.expanded, key, false)
             })
           }
-          this.$set(this.expanded, item[this.itemKey], value)
+          this.$set(this.expanded, this.getItemKey(item), value)
         }
       })
 
