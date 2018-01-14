@@ -78,7 +78,7 @@ export default {
     },
     'v-data-table': {
       headerText: 'If using an object, the text value for the header',
-      headers: 'The array of headers',
+      headers: 'An array of objects that each describe a header column. See the example below for a definition of all properties.',
       hideHeaders: 'Hide the table headers'
     }
   },
