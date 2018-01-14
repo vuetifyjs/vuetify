@@ -1303,7 +1303,7 @@ module.exports = {
       {
         "name": "filter",
         "type": "Function",
-        "default": "(val, search) => {}",
+        "default": "(val: object, search: string): boolean",
         "source": "data-iterable"
       },
       {
@@ -1327,13 +1327,13 @@ module.exports = {
       {
         "name": "customSort",
         "type": "Function",
-        "default": "(items, index, isDescending) => {}",
+        "default": "(items: object[], index: number, isDescending: boolean): object[]",
         "source": "data-iterable"
       },
       {
         "name": "customFilter",
         "type": "Function",
-        "default": "(items, search, filter) => {}",
+        "default": "(items: object[], search: string, filter: Filter) => object[]",
         "source": "data-iterable"
       },
       {
@@ -1457,26 +1457,34 @@ module.exports = {
       {
         "name": "footer",
         "source": "data-iterable"
+      },
+      {
+        "name": "noData",
+        "source": "data-iterable"
+      },
+      {
+        "name": "noResults",
+        "source": "data-iterable"
       }
     ],
     "scopedSlots": [
       {
         "name": "items",
-        "props": [
-          "item",
-          "index",
-          "selected",
-          "expanded"
-        ],
+        "props": {
+          "item": "object",
+          "index": "number",
+          "selected": "boolean",
+          "expanded": "boolean"
+        },
         "source": "data-iterable"
       },
       {
         "name": "pageText",
-        "props": [
-          "pageStart",
-          "pageStop",
-          "itemsLength"
-        ],
+        "props": {
+          "pageStart": "number",
+          "pageStop": "number",
+          "itemsLength": "number"
+        },
         "source": "data-iterable"
       }
     ]
@@ -1529,24 +1537,32 @@ module.exports = {
         "name": "headers",
         "type": "Array",
         "default": [],
-        "source": null
+        "source": null,
+        "example": {
+          "text": "string",
+          "value": "string",
+          "align": "'left' | 'center' | 'right'",
+          "sortable": "boolean",
+          "class": "string[] | string",
+          "width": "string"
+        }
       },
       {
         "name": "customSort",
         "type": "Function",
-        "default": "(items, index, isDescending) => {}",
+        "default": "(items: object[], index: number, isDescending: boolean): object[]",
         "source": "data-iterable"
       },
       {
         "name": "customFilter",
         "type": "Function",
-        "default": "(items, search, filter, headers) => {}",
+        "default": "(items: object[], search: string, filter: Filter) => object[]",
         "source": "data-iterable"
       },
       {
         "name": "filter",
         "type": "Function",
-        "default": "(val, search) => {}",
+        "default": "(val: object, search: string): boolean",
         "source": "data-iterable"
       },
       {
@@ -1652,40 +1668,48 @@ module.exports = {
       {
         "name": "footer",
         "source": "data-iterable"
+      },
+      {
+        "name": "noData",
+        "source": "data-iterable"
+      },
+      {
+        "name": "noResults",
+        "source": "data-iterable"
       }
     ],
     "scopedSlots": [
       {
         "name": "headerCell",
-        "props": [
-          "header"
-        ]
+        "props": {
+          "header": "object"
+        }
       },
       {
         "name": "headers",
-        "props": [
-          "headers",
-          "indeterminate",
-          "all"
-        ]
+        "props": {
+          "headers": "object[]",
+          "indeterminate": "boolean",
+          "all": "boolean"
+        }
       },
       {
         "name": "items",
-        "props": [
-          "item",
-          "index",
-          "selected",
-          "expanded"
-        ],
+        "props": {
+          "item": "object",
+          "index": "number",
+          "selected": "boolean",
+          "expanded": "boolean"
+        },
         "source": "data-iterable"
       },
       {
         "name": "pageText",
-        "props": [
-          "pageStart",
-          "pageStop",
-          "itemsLength"
-        ],
+        "props": {
+          "pageStart": "number",
+          "pageStop": "number",
+          "itemsLength": "number"
+        },
         "source": "data-iterable"
       }
     ]
@@ -1769,9 +1793,9 @@ module.exports = {
         "source": null
       },
       {
-        "name": "locale",
-        "type": "String",
-        "default": "en-us",
+        "name": "monthFormat",
+        "type": "Function",
+        "default": "null",
         "source": null
       },
       {
@@ -1810,7 +1834,11 @@ module.exports = {
       },
       {
         "name": "eventColor",
-        "type": "String",
+        "type": [
+          "String",
+          "Function",
+          "Object"
+        ],
         "default": "warning",
         "source": null
       },
@@ -1827,21 +1855,27 @@ module.exports = {
         "source": null
       },
       {
+        "name": "locale",
+        "type": "String",
+        "default": "en-us",
+        "source": null
+      },
+      {
         "name": "landscape",
         "type": "Boolean",
         "default": "false",
         "source": "picker"
       },
       {
-        "name": "monthFormat",
-        "type": "Function",
-        "default": "null",
-        "source": null
-      },
-      {
         "name": "prependIcon",
         "type": "String",
         "default": "chevron_left",
+        "source": null
+      },
+      {
+        "name": "readonly",
+        "type": "Boolean",
+        "default": "false",
         "source": null
       },
       {
@@ -1943,6 +1977,12 @@ module.exports = {
         "source": "colorable"
       },
       {
+        "name": "disabled",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
         "name": "format",
         "type": "Function",
         "default": "null",
@@ -1977,9 +2017,9 @@ module.exports = {
   "v-date-picker-date-table": {
     "props": [
       {
-        "name": "tableDate",
-        "type": "String",
-        "default": "undefined",
+        "name": "scrollable",
+        "type": "Boolean",
+        "default": "false",
         "source": null
       },
       {
@@ -2002,6 +2042,12 @@ module.exports = {
         "name": "current",
         "type": "String",
         "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "disabled",
+        "type": "Boolean",
+        "default": "false",
         "source": null
       },
       {
@@ -2046,9 +2092,9 @@ module.exports = {
         "source": null
       },
       {
-        "name": "scrollable",
-        "type": "Boolean",
-        "default": "false",
+        "name": "tableDate",
+        "type": "String",
+        "default": "undefined",
         "source": null
       },
       {
@@ -2090,6 +2136,12 @@ module.exports = {
         "name": "current",
         "type": "String",
         "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "disabled",
+        "type": "Boolean",
+        "default": "false",
         "source": null
       },
       {
@@ -2485,6 +2537,16 @@ module.exports = {
     "mixins": [],
     "slots": [
       "default"
+    ],
+    "functions": [
+      {
+        "name": "reset",
+        "signature": "(): void"
+      },
+      {
+        "name": "validate",
+        "signature": "(): boolean"
+      }
     ]
   },
   "v-content": {
@@ -3972,7 +4034,7 @@ module.exports = {
       {
         "name": "transition",
         "type": "String",
-        "default": "picker-transition",
+        "default": "fade-transition",
         "source": null
       }
     ],
