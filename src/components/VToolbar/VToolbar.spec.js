@@ -84,6 +84,18 @@ test('VToolbar.vue', ({ mount }) => {
     })
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.$vuetify.application.top).toBe(0)
+
+    wrapper.setProps({
+      invertedScroll: false
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.$vuetify.application.top).toBe(42)
+
+    wrapper.setProps({
+      manualScroll: true
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.$vuetify.application.top).toBe(0)
   })
 
   it('should properly calculate content height', () => {

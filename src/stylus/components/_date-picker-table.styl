@@ -1,0 +1,56 @@
+@import '../bootstrap'
+@import '../theme'
+
+date-picker-table($material)
+  .btn
+    color: $material.text.primary
+
+theme(date-picker-table, "date-picker-table")
+
+.date-picker-table
+  position: relative
+
+  table
+    transition: $primary-transition
+    top: 0
+    table-layout: fixed
+    width: 100%
+
+  td, th
+    text-align: center
+    position: relative
+
+  .btn
+    z-index: auto
+    margin: 0
+    height: 32px
+    width: 32px
+
+    &.btn--active
+      color: #fff
+
+.date-picker-table--month
+  td
+    width: 33.333333%
+    height: 56px
+    vertical-align: middle
+
+.date-picker-table--date
+  th
+    padding: 8px 0
+    font-weight: 600
+    font-size: 12px
+
+  td
+    width: 45px
+
+.date-picker-table__event
+  border-radius: 50%
+  bottom: -2px
+  content: ""
+  display: block
+  height: 8px
+  left: 50%
+  position: absolute
+  transform: translateX(-4px)
+  width: 8px

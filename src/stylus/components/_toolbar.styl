@@ -29,6 +29,9 @@ theme(toolbar, "toolbar")
 
 /** Children */
 .toolbar
+  .tabs
+    width: 100%
+
   &__title
     font-size: $headings.h6.size
     font-weight: $headings.h6.weight
@@ -53,10 +56,10 @@ theme(toolbar, "toolbar")
     > .btn:first-child, > .menu:first-child
       margin-left: 8px
 
-    > *:not(.btn):not(.menu):first-child
+    > *:not(.btn):not(.menu):first-child:not(:only-child)
       margin-left: $grid-gutters.lg
 
-    > *:not(.btn):not(.menu):last-child
+    > *:not(.btn):not(.menu):last-child:not(:only-child)
       margin-right: $grid-gutters.lg
 
   &__items
@@ -79,10 +82,10 @@ theme(toolbar, "toolbar")
       > .btn:first-child
         margin-left: 17px
 
-      > *:not(.btn):not(.menu):first-child
+      > *:not(.btn):not(.menu):first-child:not(:only-child)
         margin-left: $grid-gutters.xl
 
-      > *:not(.btn):not(.menu):last-child
+      > *:not(.btn):not(.menu):last-child:not(:only-child)
         margin-right: $grid-gutters.xl
 
   @media all and (max-width: $grid-breakpoints.sm) and (orientation: portrait)
@@ -119,14 +122,6 @@ theme(toolbar, "toolbar")
 
   &--dense
     toolbar-content(7px)
-
-.toolbar__extension
-  .toolbar__title
-    margin-left: 72px !important
-
-  .tabs__bar
-    align-self: flex-end
-    margin: 0
 
 toolbar-content(left)
   .toolbar__content,

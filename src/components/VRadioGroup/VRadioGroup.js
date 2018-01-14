@@ -57,14 +57,15 @@ export default {
 
   watch: {
     hasError (val) {
-      this.radios.forEach(radio => {
-        radio.parentError = val
-      })
+      for (let index = this.radios.length; --index >= 0;) {
+        this.radios[index].parentError = val
+      }
     },
     inputValue (val) {
-      this.radios.forEach(radio => {
+      for (let index = this.radios.length; --index >= 0;) {
+        const radio = this.radios[index]
         radio.isActive = this.valueComparator(val, radio.value)
-      })
+      }
     }
   },
 
@@ -89,9 +90,10 @@ export default {
       this.$emit('change', value)
       this.$nextTick(() => this.validate())
 
-      this.radios
-        .filter(r => this.valueComparator(value, r.value))
-        .forEach(r => r.isActive = false)
+      for (let index = this.radios.length; --index >= 0;) {
+        const radio = this.radios[index]
+        if (!this.valueComparator(value, radio.value)) radio.isActive = false
+      }
     },
     radioBlur (e) {
       if (!e.relatedTarget || !e.relatedTarget.classList.contains('radio')) {

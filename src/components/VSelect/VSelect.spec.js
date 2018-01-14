@@ -1,6 +1,11 @@
 import Vue from 'vue'
 import { test } from '@util/testing'
 import VSelect from '@components/VSelect'
+import {
+  VListTile,
+  VListTileTitle,
+  VListTileContent
+} from '@components/VList'
 
 test('VSelect', ({ mount, compileToFunctions }) => {
   it('should return numeric 0', () => {
@@ -117,6 +122,113 @@ test('VSelect', ({ mount, compileToFunctions }) => {
           },
           scopedSlots: {
             selection
+          }
+        })
+      }
+    })
+
+    const wrapper = mount(component)
+
+    wrapper.vm.$children[0].inputValue = items[0]
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should render v-select correctly when using v-list-tile in item scope slot', async () => {
+    const items = Array.from({ length: 2 }, (x, i) => ({ value: i, text: `Text ${i}` }))
+
+    const vm = new Vue({
+      components: {
+        VListTile
+      }
+    })
+    const itemSlot = ({ item, tile }) => vm.$createElement('v-list-tile', {
+      on: tile.on,
+      props: tile.props,
+      class: item.value % 2 === 0 ? '' : 'red lighten-1'
+    }, [
+      item.text
+    ])
+    const component = Vue.component('test', {
+      components: {
+        VSelect
+      },
+      render (h) {
+        return h('v-select', {
+          props: {
+            items
+          },
+          scopedSlots: {
+            item: itemSlot
+          }
+        })
+      }
+    })
+
+    const wrapper = mount(component)
+
+    wrapper.vm.$children[0].inputValue = items[0]
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should render v-select correctly when not using v-list-tile in item scope slot', async () => {
+    const items = Array.from({ length: 2 }, (x, i) => ({ value: i, text: `Text ${i}` }))
+
+    const vm = new Vue({
+      components: {
+        VListTileTitle,
+        VListTileContent
+      }
+    })
+    const itemSlot = ({ item }) => vm.$createElement('v-list-tile-content', {
+      class: item.value % 2 === 0 ? '' : 'red lighten-1'
+    }, [
+      vm.$createElement('v-list-tile-title', item.value)
+    ])
+    const component = Vue.component('test', {
+      components: {
+        VSelect
+      },
+      render (h) {
+        return h('v-select', {
+          props: {
+            items
+          },
+          scopedSlots: {
+            item: itemSlot
+          }
+        })
+      }
+    })
+
+    const wrapper = mount(component)
+
+    wrapper.vm.$children[0].inputValue = items[0]
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should render v-select correctly when not using scope slot', async () => {
+    const items = Array.from({ length: 2 }, (x, i) => ({ value: i, text: `Text ${i}` }))
+
+    const component = Vue.component('test', {
+      components: {
+        VSelect
+      },
+      render (h) {
+        return h('v-select', {
+          props: {
+            items
           }
         })
       }

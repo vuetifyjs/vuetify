@@ -7,6 +7,7 @@ import Themeable from './themeable'
 import Loadable from './loadable'
 
 import { getObjectValueByPath } from '../util/helpers'
+import { consoleWarn } from '../util/console'
 
 /**
  * DataIterable
@@ -18,6 +19,7 @@ import { getObjectValueByPath } from '../util/helpers'
  *
  */
 export default {
+  name: 'data-iterable',
 
   components: {
     VBtn,
@@ -27,7 +29,6 @@ export default {
 
   data () {
     return {
-      all: false,
       searchLength: 0,
       defaultPagination: {
         descending: false,
@@ -77,8 +78,8 @@ export default {
     filter: {
       type: Function,
       default: (val, search) => {
-        return val !== null &&
-          ['undefined', 'boolean'].indexOf(typeof val) === -1 &&
+        return val != null &&
+          typeof val !== 'boolean' &&
           val.toString().toLowerCase().indexOf(search) !== -1
       }
     },
@@ -201,30 +202,23 @@ export default {
     },
     selected () {
       const selected = {}
-      this.value.forEach(i => (selected[this.getItemKey(i)] = true))
+      for (let index = 0; index < this.value.length; index++) {
+        selected[this.getItemKey(this.value[index])] = true
+      }
       return selected
     }
   },
 
   watch: {
-    indeterminate (val) {
-      if (val) this.all = true
-    },
-    someItems (val) {
-      if (!val) this.all = false
-    },
     search () {
       this.updatePagination({ page: 1, totalItems: this.itemsLength })
-    },
-    everyItem (val) {
-      if (val) this.all = true
     }
   },
 
   methods: {
     initPagination () {
       if (!this.rowsPerPageItems.length) {
-        console.warn(`The prop 'rows-per-page-items' in ${this.name} can not be empty.`)
+        consoleWarn(`The prop 'rows-per-page-items' can not be empty`, this)
       } else {
         this.defaultPagination.rowsPerPage = this.rowsPerPageItems[0]
       }
@@ -298,9 +292,10 @@ export default {
     },
     toggle (value) {
       const selected = Object.assign({}, this.selected)
-      this.filteredItems.forEach(i => (
-        selected[this.getItemKey(i)] = value)
-      )
+      
+      for (let index = 0; index < this.filteredItems.length; index++) {
+        selected[this.getItemKey(this.filteredItems[index])] = value
+      }
 
       this.$emit('input', this.items.filter(i => (
         selected[this.getItemKey(i)]))
@@ -308,14 +303,18 @@ export default {
     },
     createProps (item, index) {
       const props = { item, index }
-      const key = this.getItemKey(item)
+      const itemKey = this.getItemKey(item)
 
       Object.defineProperty(props, 'selected', {
         get: () => this.selected[this.getItemKey(item)],
         set: (value) => {
+          if (itemKey == null) {
+            consoleWarn(`"itemKey" attribute must be present for item`, this)
+          }
+
           let selected = this.value.slice()
           if (value) selected.push(item)
-          else selected = selected.filter(i => this.getItemKey(i) !== key)
+          else selected = selected.filter(i => this.getItemKey(i) !== itemKey)
           this.$emit('input', selected)
         }
       })
@@ -323,11 +322,16 @@ export default {
       Object.defineProperty(props, 'expanded', {
         get: () => this.expanded[this.getItemKey(item)],
         set: (value) => {
-          if (!this.expand) {
-            Object.keys(this.expanded).forEach((key) => {
-              this.$set(this.expanded, key, false)
-            })
+          if (itemKey == null) {
+            consoleWarn(`"itemKey" attribute must be present for item`, this)
           }
+
+          if (!this.expand) {
+            for (const key in this.expanded) {
+              this.expanded.hasOwnProperty(key) && this.$set(this.expanded, key, false)
+            }
+          }
+          
           this.$set(this.expanded, this.getItemKey(item), value)
         }
       })

@@ -3,19 +3,17 @@
 
 .content
   bootable()
-  
-  flex: 1 1 auto
+
+  display: flex
+  flex: 1 0 auto
   max-width: 100%
-  transition: .2s padding $transition.fast-out-slow-in
   will-change: padding
 
   &--wrap
-    display: flex
-    flex: 1 0 auto
+    flex: 1 1 auto
     max-width: 100%
 
 +firefox()
   @media print
     .content
-      &--wrap
-        display: block
+      display: block
