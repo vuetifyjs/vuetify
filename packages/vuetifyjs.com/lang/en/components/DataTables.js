@@ -8,31 +8,39 @@ export default {
         desc: 'The standard data-table contains data with no additional functionality. You can opt out of displaying table actions that allow you to control the pagination of information with the `hide-actions` prop.'
       },
       noData: {
-        header: 'Slots: no-data / no-results',
-        desc: 'The `no-data` and `no-results` slots can display custom HTML when there\s no data or no filtered data in the table'
+        header: 'Slot: no-data',
+        desc: 'The `no-data` slot can display custom HTML when there\'s no data.'
       },
       headers: {
-        header: 'Slots: items and headers',
+        header: 'Slot: items and headers',
         desc: 'The `items` and `headers` slots can accept either a collection of <kbd>td/th</kbd> tags, or if you want control of the entire row, a <kbd>tr</kbd> tag.'
       },
       headerCell: {
-        header: 'Slots: headerCell',
+        header: 'Slot: headerCell',
         desc: 'If you only want to apply some common markup or effect on each of the header cells, you can use the slot `headerCell`. In this example is has been used to apply a tooltip to each header.'
       },
+      progress: {
+        header: 'Slot: progress',
+        desc: 'There is also a `progress` slot for when you want to customize the display for the data table\'s `loading` state.  By default this is an `indeterminate` `v-progress-linear`'
+      },
       footer: {
-        header: 'Slots: footer',
+        header: 'Slot: footer',
         desc: 'There is also a `footer` slot for when you want to add some extra functionality to tables, for example per column filtering or search.'
       },
       expand: {
-        header: 'Slots: expand',
+        header: 'Slot: expand',
         desc: 'The `v-data-table` component also supports expandable rows using the `expand` slot. You can use the prop `expand` to prevent expanded rows from closing when clicking on another row.'
+      },
+      pageText: {
+        header: 'Slot: page-text',
+        desc: 'You can customize the page text displaying the range and total items by using the `page-text` slot.'
       },
       select: {
         header: 'Selectable rows',
         desc: 'Selectable rows allow you to perform an action on specific and all rows.'
       },
       search: {
-        header: 'Search with custom page text',
+        header: 'Search with custom no-results slot',
         desc: 'The data table exposes a `search` prop that allows you to filter your data.'
       },
       paginate: {

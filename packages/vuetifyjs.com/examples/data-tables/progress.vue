@@ -1,43 +1,28 @@
 <template>
-  <v-card>
-    <v-card-title>
-      Nutrition
-      <v-spacer></v-spacer>
-      <v-text-field
-        append-icon="search"
-        label="Search"
-        single-line
-        hide-details
-        v-model="search"
-      ></v-text-field>
-    </v-card-title>
-    <v-data-table
-        :headers="headers"
-        :items="items"
-        :search="search"
-      >
-      <template slot="items" slot-scope="props">
-        <td>{{ props.item.name }}</td>
-        <td class="text-xs-right">{{ props.item.calories }}</td>
-        <td class="text-xs-right">{{ props.item.fat }}</td>
-        <td class="text-xs-right">{{ props.item.carbs }}</td>
-        <td class="text-xs-right">{{ props.item.protein }}</td>
-        <td class="text-xs-right">{{ props.item.sodium }}</td>
-        <td class="text-xs-right">{{ props.item.calcium }}</td>
-        <td class="text-xs-right">{{ props.item.iron }}</td>
-      </template>
-      <v-alert slot="no-results" :value="true" color="error" icon="warning">
-        Your search for "{{ search }}" found no results.
-      </v-alert>
-    </v-data-table>
-  </v-card>
+  <v-data-table
+      v-bind:headers="headers"
+      :items="items"
+      :loading="true"
+      class="elevation-1"
+    >
+    <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
+    <template slot="items" slot-scope="props">
+      <td>{{ props.item.name }}</td>
+      <td class="text-xs-right">{{ props.item.calories }}</td>
+      <td class="text-xs-right">{{ props.item.fat }}</td>
+      <td class="text-xs-right">{{ props.item.carbs }}</td>
+      <td class="text-xs-right">{{ props.item.protein }}</td>
+      <td class="text-xs-right">{{ props.item.sodium }}</td>
+      <td class="text-xs-right">{{ props.item.calcium }}</td>
+      <td class="text-xs-right">{{ props.item.iron }}</td>
+    </template>
+  </v-data-table>
 </template>
 
 <script>
   export default {
     data () {
       return {
-        search: '',
         headers: [
           {
             text: 'Dessert (100g serving)',

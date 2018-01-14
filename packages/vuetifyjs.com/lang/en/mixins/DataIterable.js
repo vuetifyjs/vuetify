@@ -19,9 +19,12 @@ export default {
     value: 'Selected row items'
   },
   slots: {
-    footer: 'Slot to specify an extra footer'
+    footer: 'Slot to specify an extra footer',
+    noData: "Displayed when there are no items (takes precedence over `no-results`)",
+    noResults: "Displayed when there are no filtered items"
   },
   scopedSlots: {
-    items: 'Slot to specify how items are rendered'
+    items: 'Slot to specify how items are rendered',
+    pageText: 'Slot to customize the page text region of the pagination controls.'
   }
 }
