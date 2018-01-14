@@ -140,6 +140,17 @@ dataIterableProps = [
   }
 ]
 
+dataIterableEvents = [
+  {
+    name: 'update:pagination',
+    value: 'object'
+  },
+  {
+    name: 'input',
+    value: 'object[]'
+  }
+]
+
 dataIterableSlots = [
   { name: 'footer', source: 'data-iterable' },
   { name: 'noData', source: 'data-iterable' },
@@ -168,12 +179,25 @@ dataIterableScopedSlots = [
   }
 ]
 
+validatableEvents = [
+  {
+    name: 'update:error',
+    value: 'boolean'
+  }
+]
+
 module.exports = {
   'v-app': {
     slots: ['default']
   },
   'v-alert': {
-    slots: ['default']
+    slots: ['default'],
+    events: [
+      {
+        name: 'input',
+        value: 'boolean'
+      }
+    ]
   },
   'v-avatar': {
     slots: ['default']
@@ -188,7 +212,23 @@ module.exports = {
     slots: ['default']
   },
   'v-bottom-nav': {
-    slots: ['default']
+    props: [
+      {
+        name: 'active',
+        sync: true
+      }
+    ],
+    slots: ['default'],
+    events: [
+      {
+        name: 'input',
+        value: 'boolean'
+      },
+      {
+        name: 'update:active',
+        value: 'string | number'
+      }
+    ]
   },
   'v-bottom-sheet': {
     slots: ['activator', 'default']
@@ -196,17 +236,47 @@ module.exports = {
   'v-btn': {
     slots: ['default']
   },
+  'v-btn-toggle': {
+    slots: ['default'],
+    events: [
+      {
+        name: 'change',
+        value: 'any[] | any'
+      }
+    ]
+  },
   'v-card': {
     slots: ['default']
   },
   'v-carousel': {
-    slots: ['default']
+    slots: ['default'],
+    events: [
+      {
+        name: 'input',
+        value: 'number'
+      }
+    ]
   },
   'v-carousel-item': {
     slots: ['default']
   },
+  'v-checkbox': {
+    slots: ['label'],
+    events: [
+      {
+        name: 'blur',
+        value: 'any'
+      }
+    ]
+  },
   'v-chip': {
-    slots: ['default']
+    slots: ['default'],
+    events: [
+      {
+        name: 'input',
+        value: 'boolean'
+      }
+    ]
   },
   'v-container': {
     props: [
@@ -227,7 +297,8 @@ module.exports = {
   'v-data-iterator': {
     props: dataIterableProps,
     slots: dataIterableSlots,
-    scopedSlots: dataIterableScopedSlots
+    scopedSlots: dataIterableScopedSlots,
+    events: dataIterableEvents
   },
   'v-data-table': {
     props: [
@@ -259,10 +330,40 @@ module.exports = {
           all: 'boolean'
         }
       }
-    ].concat(dataIterableScopedSlots)
+    ].concat(dataIterableScopedSlots),
+    events: dataIterableEvents
+  },
+  'v-date-picker': {
+    events: [
+      {
+        name: 'input',
+        value: 'string'
+      }
+    ]
   },
   'v-dialog': {
     slots: ['activator', 'default']
+  },
+  'v-edit-dialog': {
+    slots: ['default', 'input'],
+    events: [
+      {
+        name: 'open',
+        value: 'void'
+      },
+      {
+        name: 'cancel',
+        value: 'void'
+      },
+      {
+        name: 'close',
+        value: 'void'
+      },
+      {
+        name: 'save',
+        value: 'void'
+      }
+    ]
   },
   'v-expansion-panel': {
     slots: ['default']
@@ -305,6 +406,12 @@ module.exports = {
       {
         name: 'validate',
         signature: '(): boolean'
+      }
+    ],
+    events: [
+      {
+        name: 'input',
+        value: 'boolean'
       }
     ]
   },
@@ -349,7 +456,33 @@ module.exports = {
     slots: ['activator', 'default']
   },
   'v-navigation-drawer': {
-    slots: ['default']
+    slots: ['default'],
+    events: [
+      {
+        name: 'input',
+        value: 'boolean'
+      },
+      {
+        name: 'update:miniVariant',
+        value: 'boolean'
+      }
+    ]
+  },
+  'v-pagination': {
+    events: [
+      {
+        name: 'input',
+        value: 'number'
+      },
+      {
+        name: 'next',
+        value: 'void'
+      },
+      {
+        name: 'right',
+        value: 'void'
+      }
+    ]
   },
   'v-parallax': {
     slots: ['default']
@@ -357,27 +490,99 @@ module.exports = {
   'v-progress-circular': {
     slots: ['default']
   },
-  'v-select': {
-    slots: ['label', 'noData', 'progress'],
-    scopedSlots: ['item', 'selection']
-  },
-  'v-checkbox': {
-    slots: ['label']
-  },
   'v-switch': {
     slots: ['label']
   },
+  'v-radio': {
+    events: [
+      {
+        name: 'change',
+        value: 'any'
+      }
+    ]
+  },
   'v-radio-group': {
-    slots: ['label']
+    slots: ['label'],
+    events: [
+      {
+        name: 'change',
+        value: 'any'
+      },
+      {
+        name: 'blur',
+        value: 'any'
+      }
+    ].concat(validatableEvents)
   },
   'v-snackbar': {
     slots: ['default']
+  },
+  'v-select': {
+    props: [
+      {
+        name: 'filter',
+        default: '(item: object, queryText: string, itemText: string): boolean'
+      },
+      {
+        name: 'valueComparator',
+        default: '(a: any, b: any): boolean'
+      }
+    ],
+    slots: ['no-data', 'label', 'progress'],
+    scopedSlots: [
+      {
+        name: 'selection',
+        props: {
+          parent: 'VueComponent',
+          item: 'object',
+          index: 'number',
+          selected: 'boolean',
+          disabled: 'boolean'
+        }
+      },
+      {
+        name: 'item',
+        props: {
+          parent: 'VueComponent',
+          item: 'object',
+          tile: 'object'
+        }
+      }
+    ],
+    events: [
+      {
+        name: 'input',
+        value: 'any'
+      },
+      {
+        name: 'change',
+        value: 'any'
+      },
+      {
+        name: 'update:searchInput',
+        value: 'string'
+      }
+    ].concat(validatableEvents)
+  },
+  'v-slider': {
+    events: [
+      {
+        name: 'input',
+        value: 'number'
+      }
+    ].concat(validatableEvents)
   },
   'v-speed-dial': {
     slots: ['activator', 'default']
   },
   'v-stepper': {
-    slots: ['default']
+    slots: ['default'],
+    events: [
+      {
+        name: 'input',
+        value: 'number'
+      }
+    ]
   },
   'v-stepper-content': {
     slots: ['default']
@@ -395,7 +600,13 @@ module.exports = {
     slots: ['default']
   },
   'v-tabs': {
-    slots: ['default']
+    slots: ['default'],
+    events: [
+      {
+        name: 'input',
+        value: 'string'
+      }
+    ]
   },
   'v-tab': {
     slots: ['default']
@@ -404,7 +615,41 @@ module.exports = {
     slots: ['default']
   },
   'v-tabs-items': {
-    slots: ['default']
+    slots: ['default'],
+    events: [
+      {
+        name: 'input',
+        value: 'string'
+      }
+    ]
+  },
+  'v-text-field': {
+    events: [
+      {
+        name: 'input',
+        value: 'string'
+      },
+      {
+        name: 'change',
+        value: 'string'
+      }
+    ].concat(validatableEvents)
+  },
+  'v-time-picker': {
+    events: [
+      {
+        name: 'input',
+        value: 'string'
+      }
+    ]
+  },
+  'v-time-picker-clock': {
+    props: [
+      {
+        name: 'format',
+        default: '(val: string): string'
+      }
+    ]
   },
   'v-toolbar': {
     slots: ['default', 'extension']

@@ -60,9 +60,9 @@ function getPropDefault (def, type) {
     if (def) return 'true'
     else return 'false'
     case 'Function': return parseFunctionParams(def)
-    case 'Array': 
-    case 'Number': 
-    case 'String': 
+    case 'Array':
+    case 'Number':
+    case 'String':
     case 'Object': return def
     default: return def
   }
@@ -105,12 +105,12 @@ function parseComponent (component) {
 function parseProps (component, array = [], mixin = false) {
   const mixins = component.mixins || []
   const props = component.props || {}
-  
+
   Object.keys(props).forEach(prop => {
     let generated = genProp(prop, props, mixins)
     array.push(generated)
   })
-  
+
   return array.sort((a, b) => a.name > b.name)
 }
 
@@ -120,7 +120,7 @@ function parseMixins (component) {
   let mixins = []
   for (let i = 0; i < component.mixins.length; i++) {
     const mixin = component.mixins[i]
-    
+
     if (mixin.name) {
       mixins.push(mixin.name)
 
@@ -129,7 +129,7 @@ function parseMixins (component) {
       }
     }
   }
-  
+
   return mixins.sort((a, b) => a > b)
 }
 
@@ -146,14 +146,14 @@ Object.keys(installedComponents).forEach(key => {
     if (map[name]) {
       options = deepmerge(options, map[name], { arrayMerge })
     }
-    
+
     components[name] = options
   }
 })
 
 const stream = fs.createWriteStream('dist/api.js')
 
-const comment = `/* 
+const comment = `/*
  * THIS FILE HAS BEEN AUTOMATICALLY GENERATED USING THE VUETIFY-HELPER-JSON TOOL.
  *
  * CHANGES MADE TO THIS FILE WILL BE LOST!

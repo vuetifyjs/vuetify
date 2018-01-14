@@ -1,4 +1,4 @@
-/* 
+/*
  * THIS FILE HAS BEEN AUTOMATICALLY GENERATED USING THE VUETIFY-HELPER-JSON TOOL.
  *
  * CHANGES MADE TO THIS FILE WILL BE LOST!
@@ -89,6 +89,12 @@ module.exports = {
     ],
     "slots": [
       "default"
+    ],
+    "events": [
+      {
+        "name": "input",
+        "value": "boolean"
+      }
     ]
   },
   "v-avatar": {
@@ -199,7 +205,8 @@ module.exports = {
           "String"
         ],
         "default": "undefined",
-        "source": null
+        "source": null,
+        "sync": true
       },
       {
         "name": "app",
@@ -250,6 +257,16 @@ module.exports = {
     ],
     "slots": [
       "default"
+    ],
+    "events": [
+      {
+        "name": "input",
+        "value": "boolean"
+      },
+      {
+        "name": "update:active",
+        "value": "string | number"
+      }
     ]
   },
   "v-bottom-sheet": {
@@ -694,6 +711,15 @@ module.exports = {
       "button-group",
       "registerable-provide",
       "themeable"
+    ],
+    "slots": [
+      "default"
+    ],
+    "events": [
+      {
+        "name": "change",
+        "value": "any[] | any"
+      }
     ]
   },
   "v-card": {
@@ -982,6 +1008,12 @@ module.exports = {
     ],
     "slots": [
       "default"
+    ],
+    "events": [
+      {
+        "name": "input",
+        "value": "number"
+      }
     ]
   },
   "v-carousel-item": {
@@ -1206,6 +1238,12 @@ module.exports = {
     ],
     "slots": [
       "label"
+    ],
+    "events": [
+      {
+        "name": "blur",
+        "value": "any"
+      }
     ]
   },
   "v-chip": {
@@ -1284,6 +1322,12 @@ module.exports = {
     ],
     "slots": [
       "default"
+    ],
+    "events": [
+      {
+        "name": "input",
+        "value": "boolean"
+      }
     ]
   },
   "v-data-iterator": {
@@ -1486,6 +1530,16 @@ module.exports = {
           "itemsLength": "number"
         },
         "source": "data-iterable"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:pagination",
+        "value": "object"
+      },
+      {
+        "name": "input",
+        "value": "object[]"
       }
     ]
   },
@@ -1712,6 +1766,16 @@ module.exports = {
         },
         "source": "data-iterable"
       }
+    ],
+    "events": [
+      {
+        "name": "update:pagination",
+        "value": "object"
+      },
+      {
+        "name": "input",
+        "value": "object[]"
+      }
     ]
   },
   "v-edit-dialog": {
@@ -1747,7 +1811,29 @@ module.exports = {
         "source": null
       }
     ],
-    "mixins": []
+    "mixins": [],
+    "slots": [
+      "default",
+      "input"
+    ],
+    "events": [
+      {
+        "name": "open",
+        "value": "void"
+      },
+      {
+        "name": "cancel",
+        "value": "void"
+      },
+      {
+        "name": "close",
+        "value": "void"
+      },
+      {
+        "name": "save",
+        "value": "void"
+      }
+    ]
   },
   "v-table-overflow": {
     "props": [],
@@ -1928,6 +2014,12 @@ module.exports = {
       "colorable",
       "picker",
       "themeable"
+    ],
+    "events": [
+      {
+        "name": "input",
+        "value": "string"
+      }
     ]
   },
   "v-date-picker-title": {
@@ -2546,6 +2638,12 @@ module.exports = {
       {
         "name": "validate",
         "signature": "(): boolean"
+      }
+    ],
+    "events": [
+      {
+        "name": "input",
+        "value": "boolean"
       }
     ]
   },
@@ -3914,6 +4012,16 @@ module.exports = {
     ],
     "slots": [
       "default"
+    ],
+    "events": [
+      {
+        "name": "input",
+        "value": "boolean"
+      },
+      {
+        "name": "update:miniVariant",
+        "value": "boolean"
+      }
     ]
   },
   "v-pagination": {
@@ -3972,6 +4080,20 @@ module.exports = {
     ],
     "mixins": [
       "colorable"
+    ],
+    "events": [
+      {
+        "name": "input",
+        "value": "number"
+      },
+      {
+        "name": "next",
+        "value": "void"
+      },
+      {
+        "name": "right",
+        "value": "void"
+      }
     ]
   },
   "v-parallax": {
@@ -4354,6 +4476,20 @@ module.exports = {
     ],
     "slots": [
       "label"
+    ],
+    "events": [
+      {
+        "name": "change",
+        "value": "any"
+      },
+      {
+        "name": "blur",
+        "value": "any"
+      },
+      {
+        "name": "update:error",
+        "value": "boolean"
+      }
     ]
   },
   "v-radio": {
@@ -4410,6 +4546,12 @@ module.exports = {
       "rippleable",
       "tab-focusable",
       "themeable"
+    ],
+    "events": [
+      {
+        "name": "change",
+        "value": "any"
+      }
     ]
   },
   "v-select": {
@@ -4423,7 +4565,7 @@ module.exports = {
       {
         "name": "filter",
         "type": "Function",
-        "default": "(item, queryText, itemText) => {}",
+        "default": "(item: object, queryText: string, itemText: string): boolean",
         "source": null
       },
       {
@@ -4805,7 +4947,7 @@ module.exports = {
       {
         "name": "valueComparator",
         "type": "Function",
-        "default": "(a, b) => {}",
+        "default": "(a: any, b: any): boolean",
         "source": null
       }
     ],
@@ -4821,13 +4963,47 @@ module.exports = {
       "validatable"
     ],
     "slots": [
+      "no-data",
       "label",
-      "noData",
       "progress"
     ],
     "scopedSlots": [
-      "item",
-      "selection"
+      {
+        "name": "selection",
+        "props": {
+          "parent": "VueComponent",
+          "item": "object",
+          "index": "number",
+          "selected": "boolean",
+          "disabled": "boolean"
+        }
+      },
+      {
+        "name": "item",
+        "props": {
+          "parent": "VueComponent",
+          "item": "object",
+          "tile": "object"
+        }
+      }
+    ],
+    "events": [
+      {
+        "name": "input",
+        "value": "any"
+      },
+      {
+        "name": "change",
+        "value": "any"
+      },
+      {
+        "name": "update:searchInput",
+        "value": "string"
+      },
+      {
+        "name": "update:error",
+        "value": "boolean"
+      }
     ]
   },
   "v-slider": {
@@ -5040,6 +5216,16 @@ module.exports = {
       "loadable",
       "themeable",
       "validatable"
+    ],
+    "events": [
+      {
+        "name": "input",
+        "value": "number"
+      },
+      {
+        "name": "update:error",
+        "value": "boolean"
+      }
     ]
   },
   "v-snackbar": {
@@ -5246,6 +5432,12 @@ module.exports = {
     ],
     "slots": [
       "default"
+    ],
+    "events": [
+      {
+        "name": "input",
+        "value": "number"
+      }
     ]
   },
   "v-stepper-content": {
@@ -5751,6 +5943,12 @@ module.exports = {
     ],
     "slots": [
       "default"
+    ],
+    "events": [
+      {
+        "name": "input",
+        "value": "string"
+      }
     ]
   },
   "v-tab": {
@@ -5874,6 +6072,12 @@ module.exports = {
     ],
     "slots": [
       "default"
+    ],
+    "events": [
+      {
+        "name": "input",
+        "value": "string"
+      }
     ]
   },
   "v-tab-item": {
@@ -6209,6 +6413,20 @@ module.exports = {
       "soloable",
       "themeable",
       "validatable"
+    ],
+    "events": [
+      {
+        "name": "input",
+        "value": "string"
+      },
+      {
+        "name": "change",
+        "value": "string"
+      },
+      {
+        "name": "update:error",
+        "value": "boolean"
+      }
     ]
   },
   "v-time-picker": {
@@ -6298,6 +6516,12 @@ module.exports = {
       "colorable",
       "picker",
       "themeable"
+    ],
+    "events": [
+      {
+        "name": "input",
+        "value": "string"
+      }
     ]
   },
   "v-time-picker-clock": {
@@ -6339,7 +6563,7 @@ module.exports = {
       {
         "name": "format",
         "type": "Function",
-        "default": "(val) => {}",
+        "default": "(val: string): string",
         "source": null
       },
       {
