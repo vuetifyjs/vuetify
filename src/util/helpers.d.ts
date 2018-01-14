@@ -34,4 +34,5 @@ declare module 'vuetify/src/util/helpers' {
   export function createRange (length: number): number[]
   export function getZIndex (el: Element): number
   export function escapeHTML (str: string): string
+  export function looseEqual (a: any, b: any): boolean
 }
