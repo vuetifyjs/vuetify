@@ -1,6 +1,6 @@
 export default {
   header: 'Часто задаваемые вопросы',
-  headerText: 'Застрял на конкретной проблеме? Проверьте некоторые из этих распространенных ошибок, прежде чем создавать билет. Если вы все еще не можете найти то, что ищете, отправьте <a href="https://issues.vuetifyjs.com" target="_blank" rel="noopener"> вопрос </a> на github или попросите сообщество в <a href="https://chat.vuetifyjs.com" target="_blank" rel="noopener"> разлад </a>.',
+  headerText: 'Застрял на конкретной проблеме? Проверьте некоторые из этих распространенных ошибок, прежде чем создавать вопрос. Если вы все еще не можете найти то, что ищете, отправьте [вопрос](https://issues.vuetifyjs.com) на github или попросите сообщество в [discord](https://chat.vuetifyjs.com).',
   question: 'Вопрос:',
   answer: 'Ответ',
   noResultsFound: 'результатов не найдено',
