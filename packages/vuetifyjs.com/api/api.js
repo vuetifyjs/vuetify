@@ -1,4 +1,4 @@
-/* 
+/*
  * THIS FILE HAS BEEN AUTOMATICALLY GENERATED USING THE VUETIFY-HELPER-JSON TOOL.
  *
  * CHANGES MADE TO THIS FILE WILL BE LOST!
@@ -1333,7 +1333,7 @@ module.exports = {
       {
         "name": "customFilter",
         "type": "Function",
-        "default": "(items: object[], search: string, filter: Filter) => object[]",
+        "default": "(items: object[], search: string, filter: Filter): object[]",
         "source": "data-iterable"
       },
       {
@@ -1556,7 +1556,7 @@ module.exports = {
       {
         "name": "customFilter",
         "type": "Function",
-        "default": "(items: object[], search: string, filter: Filter) => object[]",
+        "default": "(items: object[], search: string, filter: Filter): object[]",
         "source": "data-iterable"
       },
       {
@@ -3972,6 +3972,20 @@ module.exports = {
     ],
     "mixins": [
       "colorable"
+    ],
+    "events": [
+      {
+        "name": "input",
+        "value": "number"
+      },
+      {
+        "name": "next",
+        "value": "void"
+      },
+      {
+        "name": "right",
+        "value": "void"
+      }
     ]
   },
   "v-parallax": {
@@ -4423,7 +4437,7 @@ module.exports = {
       {
         "name": "filter",
         "type": "Function",
-        "default": "(item, queryText, itemText) => {}",
+        "default": "(item: object, queryText: string, itemText: string): boolean",
         "source": null
       },
       {
@@ -4805,7 +4819,7 @@ module.exports = {
       {
         "name": "valueComparator",
         "type": "Function",
-        "default": "(a, b) => {}",
+        "default": "(a: any, b: any): boolean",
         "source": null
       }
     ],
@@ -4819,15 +4833,6 @@ module.exports = {
       "soloable",
       "themeable",
       "validatable"
-    ],
-    "slots": [
-      "label",
-      "noData",
-      "progress"
-    ],
-    "scopedSlots": [
-      "item",
-      "selection"
     ]
   },
   "v-slider": {
@@ -6339,7 +6344,7 @@ module.exports = {
       {
         "name": "format",
         "type": "Function",
-        "default": "(val) => {}",
+        "default": "(val: string): string",
         "source": null
       },
       {
