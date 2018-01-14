@@ -136,7 +136,7 @@ dataIterableProps = [
   },
   {
     name: 'customFilter',
-    default: '(items: object[], search: string, filter: Filter) => object[]'
+    default: '(items: object[], search: string, filter: Filter): object[]'
   }
 ]
 

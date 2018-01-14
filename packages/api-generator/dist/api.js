@@ -1333,7 +1333,7 @@ module.exports = {
       {
         "name": "customFilter",
         "type": "Function",
-        "default": "(items: object[], search: string, filter: Filter) => object[]",
+        "default": "(items: object[], search: string, filter: Filter): object[]",
         "source": "data-iterable"
       },
       {
@@ -1556,7 +1556,7 @@ module.exports = {
       {
         "name": "customFilter",
         "type": "Function",
-        "default": "(items: object[], search: string, filter: Filter) => object[]",
+        "default": "(items: object[], search: string, filter: Filter): object[]",
         "source": "data-iterable"
       },
       {
