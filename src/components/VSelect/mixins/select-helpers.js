@@ -20,6 +20,11 @@ export default {
     getPropertyFromItem (item, field) {
       if (item !== Object(item)) return item
 
+      if (typeof field === 'function') {
+        // Custom field getter
+        return field(item)
+      }
+
       const value = getObjectValueByPath(item, field)
 
       return typeof value === 'undefined' ? item : value

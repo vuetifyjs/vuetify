@@ -40,11 +40,11 @@ export default {
       default: 'disabled'
     },
     itemText: {
-      type: String,
+      type: [String, Function],
       default: 'text'
     },
     itemValue: {
-      type: String,
+      type: [String, Function],
       default: 'value'
     },
     maxHeight: {
