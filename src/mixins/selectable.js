@@ -1,5 +1,6 @@
 import Colorable from './colorable'
 import Input from './input'
+import {looseEqual} from "../util/helpers"
 
 export default {
   name: 'selectable',
@@ -19,23 +20,40 @@ export default {
     id: String,
     inputValue: null,
     falseValue: null,
-    trueValue: null
+    trueValue: null,
+    multiple: {
+      type: Boolean,
+      default: false
+    },
+    valueComparator: {
+      type: Function,
+      default: looseEqual
+    }
   },
 
   computed: {
     isActive () {
-      if ((Array.isArray(this.inputValue))
-      ) {
-        return this.inputValue.indexOf(this.value) !== -1
+      const value = this.value
+      const inputValue = this.inputValue
+      if (this.multiple) {
+        if (!Array.isArray(inputValue)) {
+          return false
+        }
+        for (let i = 0, m = inputValue.length; i < m; i++) {
+          if (this.valueComparator(inputValue[i], value)) {
+            return true
+          }
+        }
+        return false
       }
 
       if (!this.trueValue || !this.falseValue) {
-        return this.value
-          ? this.value === this.inputValue
-          : Boolean(this.inputValue)
+        return value
+          ? this.valueComparator(value, inputValue)
+          : Boolean(inputValue)
       }
 
-      return this.inputValue === this.trueValue
+      return this.valueComparator(inputValue, this.trueValue)
     },
     isDirty () {
       return this.isActive
@@ -62,23 +80,32 @@ export default {
         return
       }
 
+      const value = this.value
       let input = this.inputValue
-      if (Array.isArray(input)) {
-        input = input.slice()
-        const i = input.indexOf(this.value)
-
-        if (i === -1) {
-          input.push(this.value)
-        } else {
-          input.splice(i, 1)
+      if (this.multiple) {
+        if (!Array.isArray(input)) {
+          // Cannot toggle if not an array
+          return
         }
-      } else if (this.trueValue || this.falseValue) {
-        input = input === this.trueValue ? this.falseValue : this.trueValue
-      } else if (this.value) {
-        input = this.value === this.inputValue
-          ? null
-          : this.value
-      } else {
+        let removed = false
+        for (let i = 0, m = input.length; i < m; i++) {
+          if (this.valueComparator(input[i], value)) {
+            removed = true
+            input.splice(i, 1)
+            i--; m--
+          }
+        }
+        if (!removed) {
+          input.push(value)
+        }
+      }
+      else if (this.trueValue || this.falseValue) {
+        input = this.valueComparator(input, this.trueValue) ? this.falseValue : this.trueValue
+      }
+      else if (value) {
+        input = this.valueComparator(value, input) ? null : value
+      }
+      else {
         input = !input
       }
 
