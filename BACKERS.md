@@ -26,7 +26,7 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Tibor Nagy
 - [Jaime Olmo](https://www.jaimeolmo.com)
 - Michael Marti
-- [Aeroden](www.aeroden.com)
+- [Aeroden](https://www.aeroden.com)
 - Sam Mitchell
 - David Hess
 - Roger Vilaseca

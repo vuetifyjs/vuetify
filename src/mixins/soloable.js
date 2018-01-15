@@ -1,4 +1,6 @@
 export default {
+  name: 'soloable',
+
   props: {
     flat: Boolean,
     soloInverted: Boolean,

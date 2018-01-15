@@ -1,6 +1,8 @@
 import { VList, VListGroup } from '@components/VList'
 import { test } from '@util/testing'
 
+const warning = '[Vuetify] The v-list-group component must be used inside a v-list'
+
 // TODO: Test actual behaviour instead of classes
 test('VListGroup.js', ({ mount }) => {
   it('should render component and match snapshot', () => {
@@ -91,7 +93,7 @@ test('VListGroup.js', ({ mount }) => {
     expect(header.hasClass('bar')).toBe(true)
 
     expect('Injection "listClick" not found').toHaveBeenWarned()
-    expect('The v-list-group component must be used inside a v-list.').toHaveBeenTipped()
+    expect(warning).toHaveBeenTipped()
   })
 
   it('should open if no value provided and group matches route', async () => {
@@ -113,7 +115,7 @@ test('VListGroup.js', ({ mount }) => {
     await wrapper.vm.$nextTick()
     expect(listClick).toBeCalledWith(wrapper.vm._uid)
 
-    expect('The v-list-group component must be used inside a v-list.').toHaveBeenTipped()
+    expect(warning).toHaveBeenTipped()
   })
 
   it('should toggle when clicked', async () => {
@@ -130,7 +132,7 @@ test('VListGroup.js', ({ mount }) => {
     await wrapper.vm.$nextTick()
     expect(input).toBeCalledWith(true)
 
-    expect('The v-list-group component must be used inside a v-list.').toHaveBeenTipped()
+    expect(warning).toHaveBeenTipped()
   })
 
   it('should unregister when destroyed', async () => {
@@ -148,7 +150,7 @@ test('VListGroup.js', ({ mount }) => {
 
     wrapper.destroy()
     await wrapper.vm.$nextTick()
-    expect(unregister).toBeCalledWith(wrapper.vm._uid)    
+    expect(unregister).toBeCalledWith(wrapper.vm._uid)
   })
 
   it('should render a custom append icon', async () => {
@@ -164,7 +166,7 @@ test('VListGroup.js', ({ mount }) => {
     expect(icon.html()).toBe('<span>bar</span>')
 
     expect('Injection "listClick" not found').toHaveBeenWarned()
-    expect('The v-list-group component must be used inside a v-list.').toHaveBeenTipped()
+    expect(warning).toHaveBeenTipped()
   })
 
   it('should only render custom prepend icon', async () => {
@@ -180,7 +182,7 @@ test('VListGroup.js', ({ mount }) => {
     expect(icon.html()).toBe('<span>bar</span>')
 
     expect('Injection "listClick" not found').toHaveBeenWarned()
-    expect('The v-list-group component must be used inside a v-list.').toHaveBeenTipped()
+    expect(warning).toHaveBeenTipped()
   })
 
   it('should render a default prepended icon', async () => {
@@ -195,6 +197,6 @@ test('VListGroup.js', ({ mount }) => {
     expect(icon.text()).toBe('arrow_drop_down')
 
     expect('Injection "listClick" not found').toHaveBeenWarned()
-    expect('The v-list-group component must be used inside a v-list.').toHaveBeenTipped()
+    expect(warning).toHaveBeenTipped()
   })
 })

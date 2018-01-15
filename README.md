@@ -88,6 +88,7 @@
 
 <h2>One minute Quick-start</h2>
 
+[Codepen link](https://codepen.io/johnjleider/pen/jYZwVZ)
 ```html
 <!DOCTYPE html>
 <html>
@@ -99,9 +100,9 @@
 <body>
   <div id="app">
     <v-app>
-      <main>
+      <v-content>
         <v-container>Hello world</v-container>
-      </main>
+      </v-content>
     </v-app>
   </div>
 
