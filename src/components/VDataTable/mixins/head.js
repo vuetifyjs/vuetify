@@ -1,3 +1,5 @@
+import { consoleWarn } from '../../../util/console'
+
 export default {
   methods: {
     genColgroup () {
@@ -35,7 +37,7 @@ export default {
         const row = this.$scopedSlots.headers({
           headers: this.headers,
           indeterminate: this.indeterminate,
-          all: this.all
+          all: this.everyItem
         })
 
         children = [this.needsTR(row) ? this.genTR(row) : row, this.genTProgress()]
@@ -47,7 +49,7 @@ export default {
             light: this.light,
             color: this.selectAll === true ? '' : this.selectAll,
             hideDetails: true,
-            inputValue: this.all,
+            inputValue: this.everyItem,
             indeterminate: this.indeterminate
           },
           on: { change: this.toggle }
@@ -99,7 +101,7 @@ export default {
     },
     genHeaderSortingData (header, children, data, classes) {
       if (!('value' in header)) {
-        console.warn('Data table headers must have a value property that corresponds to a value in the v-model array')
+        consoleWarn('Headers must have a value property that corresponds to a value in the v-model array', this)
       }
 
       data.attrs.tabIndex = 0

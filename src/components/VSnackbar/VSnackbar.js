@@ -7,6 +7,7 @@ import {
 
 import Colorable from '../../mixins/colorable'
 import Toggleable from '../../mixins/toggleable'
+import { factory as PositionableFactory } from '../../mixins/positionable'
 
 export default {
   name: 'v-snackbar',
@@ -16,7 +17,7 @@ export default {
     VSlideYReverseTransition
   },
 
-  mixins: [Colorable, Toggleable],
+  mixins: [Colorable, Toggleable, PositionableFactory(['absolute', 'top', 'bottom', 'left', 'right'])],
 
   data () {
     return {
@@ -25,12 +26,7 @@ export default {
   },
 
   props: {
-    absolute: Boolean,
-    bottom: Boolean,
-    left: Boolean,
     multiLine: Boolean,
-    right: Boolean,
-    top: Boolean,
     // TODO: change this to closeDelay to match other API in delayable.js
     timeout: {
       type: Number,

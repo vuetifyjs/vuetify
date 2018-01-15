@@ -63,14 +63,14 @@ export default {
       let position = 0
       let selection = this.selection
 
-      for (const char of oldValue.substr(0, selection)) {
-        isMaskDelimiter(char) || position++
+      for (let index = 0; index < selection; index++) {
+        isMaskDelimiter(oldValue[index]) || position++
       }
 
       selection = 0
       if (newValue) {
-        for (const char of newValue) {
-          isMaskDelimiter(char) || position--
+        for (let index = 0; index < newValue.length; index++) {
+          isMaskDelimiter(newValue[index]) || position--
           selection++
           if (position <= 0) break
         }
@@ -113,9 +113,9 @@ export default {
 
       this.$refs.input.value = newValue
       if (newValue) {
-        for (const char of newValue) {
+        for (let index = 0; index < newValue.length; index++) {
           if (this.lazySelection <= 0) break
-          isMaskDelimiter(char) || this.lazySelection--
+          isMaskDelimiter(newValue[index]) || this.lazySelection--
           selection++
         }
       }
@@ -141,8 +141,8 @@ export default {
       this.selection = input.selectionEnd
       this.lazySelection = 0
 
-      for (const char of input.value.substr(0, this.selection)) {
-        isMaskDelimiter(char) || this.lazySelection++
+      for (let index = 0; index < this.selection; index++) {
+        isMaskDelimiter(input.value[index]) || this.lazySelection++
       }
     }
   }

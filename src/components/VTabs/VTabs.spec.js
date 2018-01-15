@@ -25,7 +25,7 @@ const Component = (items = ['foo', 'bar']) => {
   }
 }
 
-const ssrBootable = () => new Promise(resolve => setTimeout(resolve, 200))
+const ssrBootable = () => new Promise(resolve => requestAnimationFrame(resolve))
 
 test('VTabs', ({ mount, shallow }) => {
   it('should provide', () => {

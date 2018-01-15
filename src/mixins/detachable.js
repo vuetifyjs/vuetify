@@ -1,4 +1,5 @@
 import Bootable from './bootable'
+import { consoleWarn } from '../util/console'
 
 function validateAttachTarget (val) {
   const type = typeof val
@@ -65,7 +66,8 @@ export default {
       }
 
       if (!target) {
-        return console.warn(`Unable to locate target ${this.attach || '[data-app]'}`)
+        consoleWarn(`Unable to locate target ${this.attach || '[data-app]'}`, this)
+        return
       }
 
       target.insertBefore(

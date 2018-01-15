@@ -266,28 +266,33 @@ export default {
       return window.pageYOffset ||
         document.documentElement.scrollTop
     },
+    getRoundedBoundedClientRect(el) {
+      const rect = el.getBoundingClientRect()
+      return {
+        top: Math.round(rect.top),
+        left: Math.round(rect.left),
+        bottom: Math.round(rect.bottom),
+        right: Math.round(rect.right),
+        width: Math.round(rect.width),
+        height: Math.round(rect.height)
+      }
+    },
     measure (el, selector) {
       el = selector ? el.querySelector(selector) : el
 
       if (!el || !this.hasWindow) return null
 
-      const rect = el.getBoundingClientRect()
-      let top = rect.top
-      let left = rect.left
+      const rect = this.getRoundedBoundedClientRect(el)
 
       // Account for activator margin
       if (this.isAttached) {
         const style = window.getComputedStyle(el)
 
-        left = parseInt(style.marginLeft)
-        top = parseInt(style.marginTop)
+        rect.left = parseInt(style.marginLeft)
+        rect.top = parseInt(style.marginTop)
       }
 
-      return {
-        bottom: rect.bottom,
-        right: rect.right,
-        top, left, width: rect.width, height: rect.height
-      }
+      return rect
     },
     sneakPeek (cb) {
       requestAnimationFrame(() => {
@@ -312,7 +317,7 @@ export default {
       const dimensions = {}
 
       // Activator should already be shown
-      dimensions.activator = !this.hasActivator
+      dimensions.activator = !this.hasActivator || this.absolute
         ? this.absolutePosition()
         : this.measure(this.getActivator())
 

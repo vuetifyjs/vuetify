@@ -18,4 +18,22 @@ test('VAvatar.vue', ({ mount, functionalContext }) => {
 
     expect(wrapper.hasClass('avatar--tile')).toBe(true)
   })
+
+  it('should accept custom or no class declarations', () => {
+    const wrapper = mount(VAvatar, functionalContext())
+    const wrapperTwo = mount(VAvatar, functionalContext({
+      class: 'active'
+    }))
+    const wrapperThree = mount(VAvatar, functionalContext({
+      class: ['active']
+    }))
+    const wrapperFour = mount(VAvatar, functionalContext({
+      class: { 'active': true }
+    }))
+
+    expect(wrapper.hasClass('active')).toBe(false)
+    expect(wrapperTwo.hasClass('active')).toBe(true)
+    expect(wrapperThree.hasClass('active')).toBe(true)
+    expect(wrapperFour.hasClass('active')).toBe(true)
+  })
 })

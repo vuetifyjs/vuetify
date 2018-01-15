@@ -8,6 +8,8 @@ export default {
     activeTab (tab) {
       this.callSlider()
 
+      if (!tab) return
+
       const action = tab.action
       this.tabItems && this.tabItems(action === tab ? this.tabs.indexOf(tab).toString() : action)
     },

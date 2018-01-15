@@ -36,6 +36,55 @@
   &-enter, &-leave-to
     transform: translateY(100%)
 
+.picker-transition,
+.picker-reverse-transition
+  &-enter-active,
+  &-leave-active
+    transition: .3s $transition.linear-out-slow-in
+  
+  &-enter,
+  &-leave-to
+    opacity: 0
+
+  &-enter-to
+    transtion: translate(0, 0)
+
+  &-leave,
+  &-leave-active,
+  &-leave-to
+    position: absolute !important
+
+.picker-transition
+  &-enter
+    transform: translate(0, 100%)
+
+  &-leave-to
+    transform: translate(0, -100%)
+
+.picker-reverse-transition
+  &-enter
+    transform: translate(0, -100%)
+
+  &-leave-to
+    transform: translate(0, 100%)
+    
+.picker-title-transition
+  &-enter-to,
+  &-leave
+    transform: translate(0, 0)
+  
+  &-enter
+    transform: translate(-100%, 0)
+    
+  &-leave-to
+    opacity: 0
+    transform: translate(100%, 0)
+  
+  &-leave,
+  &-leave-to,
+  &-leave-active
+    position: absolute !important
+
 .tab-transition
   &-enter
     transform: translate(100%, 0)
@@ -63,7 +112,7 @@
 // Generic transitions
 .scale-transition
   &-enter-active, &-leave-active
-    transition: $primary-transition
+    transition: $secondary-transition
 
   &-enter, &-leave, &-leave-to
     opacity: 0
