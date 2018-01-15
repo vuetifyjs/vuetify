@@ -137,7 +137,7 @@ export function escapeHTML (str) {
 
 export function looseEqual(a, b) {
     if (a === b) return true
-    if (typeof a !== 'object' || typeof b !== 'object') {
+    if (a !== Object(a) || b !== Object(b)) {
         // If the values aren't objects, they were already checked for equality
         return false
     }
