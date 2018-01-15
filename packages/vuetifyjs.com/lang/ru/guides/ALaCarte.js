@@ -37,6 +37,6 @@ export default {
     {
       text: 'Список имен компонентов пользовательского интерфейса',
       href: 'component-name-list'
-    },
+    }
   ]
 }

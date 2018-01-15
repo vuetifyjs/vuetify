@@ -8,14 +8,33 @@
 </template>
 
 <script>
+  const iconMap = {
+    error: 'warning',
+    info: 'info',
+    success: 'check_circle',
+    warning: 'priority_high'
+  }
+
   export default {
-    name: 'app-alert',
+    name: 'AppAlert',
 
     props: {
-      error: Boolean,
-      info: Boolean,
-      success: Boolean,
-      warning: Boolean,
+      error: {
+        type: Boolean,
+        default: false
+      },
+      info: {
+        type: Boolean,
+        default: false
+      },
+      success: {
+        type: Boolean,
+        default: false
+      },
+      warning: {
+        type: Boolean,
+        default: false
+      },
       value: {
         type: String,
         default: ''
@@ -30,20 +49,7 @@
         else if (this.warning) return 'warning'
       },
       computedIcon () {
-        switch (this.computedColor) {
-          case 'error':
-            return 'warning'
-          break
-          case 'info':
-            return 'info'
-          break
-          case 'success':
-            return 'check_circle'
-          break
-          case 'warning':
-            return 'priority_high'
-          break
-        }
+        return iconMap[this.computedColor]
       }
     }
   }

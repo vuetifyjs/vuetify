@@ -19,7 +19,13 @@
           prepend-icon="event"
           @blur="date = parseDate(dateFormatted)"
         ></v-text-field>
-        <v-date-picker v-model="date" @input="dateFormatted = formatDate($event)" no-title scrollable actions>
+        <v-date-picker
+          v-model="date"
+          @input="dateFormatted = formatDate($event)"
+          no-title
+          scrollable
+          actions
+        >
           <template slot-scope="{ save, cancel }">
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -41,19 +47,16 @@
       dateFormatted: null,
       menu: false
     }),
+
     methods: {
       formatDate (date) {
-        if (!date) {
-          return null
-        }
+        if (!date) return null
 
         const [year, month, day] = date.split('-')
         return `${month}/${day}/${year}`
       },
       parseDate (date) {
-        if (!date) {
-          return null
-        }
+        if (!date) return null
 
         const [month, day, year] = date.split('/')
         return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`

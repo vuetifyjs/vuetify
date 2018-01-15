@@ -1,9 +1,9 @@
 <template>
   <v-data-table
-      v-bind:headers="headers"
-      :items="items"
-      class="elevation-1"
-    >
+    :headers="headers"
+    :items="items"
+    class="elevation-1"
+  >
     <template slot="headerCell" slot-scope="props">
       <v-tooltip bottom>
         <span slot="activator">

@@ -43,7 +43,7 @@
     }),
     computed: {
       ...mapState({
-        footer: state => !state.stateless,
+        footer: state => !state.stateless
       }),
       index () {
         return this.routes.findIndex(route => {

@@ -1,7 +1,6 @@
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const base = require('./webpack.base.config')
-const SWPrecachePlugin = require('sw-precache-webpack-plugin')
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 
 const config = merge(base, {
@@ -23,7 +22,7 @@ const config = merge(base, {
           // it's inside node_modules
           /node_modules/.test(module.context) &&
           // and not a CSS file (due to extract-text-webpack-plugin limitation)
-          !/\.css$/.test(module.request)
+          !(/\.css$/.test(module.request))
         )
       }
     }),

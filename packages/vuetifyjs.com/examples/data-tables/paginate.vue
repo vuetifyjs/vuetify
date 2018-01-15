@@ -1,10 +1,10 @@
 <template>
   <div>
     <v-data-table
-      v-bind:headers="headers"
-      v-bind:items="items"
-      v-bind:search="search"
-      v-bind:pagination.sync="pagination"
+      :headers="headers"
+      :items="items"
+      :search="search"
+      :pagination.sync="pagination"
       hide-actions
       class="elevation-1"
     >
@@ -20,13 +20,13 @@
       </template>
       <template slot="items" slot-scope="props">
         <td>{{ props.item.name }}</td>
-        <td  class="text-xs-right">{{ props.item.calories }}</td>
-        <td  class="text-xs-right">{{ props.item.fat }}</td>
-        <td  class="text-xs-right">{{ props.item.carbs }}</td>
-        <td  class="text-xs-right">{{ props.item.protein }}</td>
-        <td  class="text-xs-right">{{ props.item.sodium }}</td>
-        <td  class="text-xs-right">{{ props.item.calcium }}</td>
-        <td  class="text-xs-right">{{ props.item.iron }}</td>
+        <td class="text-xs-right">{{ props.item.calories }}</td>
+        <td class="text-xs-right">{{ props.item.fat }}</td>
+        <td class="text-xs-right">{{ props.item.carbs }}</td>
+        <td class="text-xs-right">{{ props.item.protein }}</td>
+        <td class="text-xs-right">{{ props.item.sodium }}</td>
+        <td class="text-xs-right">{{ props.item.calcium }}</td>
+        <td class="text-xs-right">{{ props.item.iron }}</td>
       </template>
     </v-data-table>
     <div class="text-xs-center pt-2">

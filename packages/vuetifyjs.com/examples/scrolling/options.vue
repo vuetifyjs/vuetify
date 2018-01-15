@@ -4,7 +4,7 @@
       <v-subheader>Offset Top</v-subheader>
       {{ offsetTop }}
     </v-layout>
-    <v-container 
+    <v-container
       style="max-height: 400px"
       class="scroll-y"
       id="scroll-target"

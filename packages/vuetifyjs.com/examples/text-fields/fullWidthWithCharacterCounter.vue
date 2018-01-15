@@ -17,13 +17,13 @@
               <v-flex xs10 class="text-xs-right">
                 <v-chip>
                   <v-avatar>
-                    <img src="https://randomuser.me/api/portraits/men/92.jpg" />
+                    <img src="https://randomuser.me/api/portraits/men/92.jpg" >
                   </v-avatar>
                   Trevor Hansen
                 </v-chip>
                 <v-chip>
                   <v-avatar>
-                    <img src="https://randomuser.me/api/portraits/men/91.jpg" />
+                    <img src="https://randomuser.me/api/portraits/men/91.jpg" >
                   </v-avatar>
                   Alex Nelson
                 </v-chip>

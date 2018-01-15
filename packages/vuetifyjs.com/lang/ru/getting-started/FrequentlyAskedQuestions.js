@@ -61,4 +61,4 @@ export default {
   ],
   questionHeader: 'Есть что-то, что, по-твоему, здесь нет?',
   questionButton: 'Дайте нам знать'
-};
+}

@@ -17,14 +17,14 @@ export default {
     {
       screenshot: '/static/doc-images/starter/vuetify-parallax-starter.png',
       title: 'Parallax',
-      description:'This beautiful single page parallax is a great home page for any application.',
+      description: 'This beautiful single page parallax is a great home page for any application.',
       sourceUrl: 'vuetifyjs/parallax-starter',
       demoUrl: '/themes/parallax-starter'
     },
     {
       screenshot: '/static/doc-images/starter/vuetify-blog-starter.png',
       title: 'Blog',
-      description:'A simple template that features a clean interface for creating a blog or blog-like application.',
+      description: 'A simple template that features a clean interface for creating a blog or blog-like application.',
       sourceUrl: 'vuetifyjs/blog-starter',
       demoUrl: '/themes/blog-starter'
     }

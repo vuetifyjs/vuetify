@@ -16,10 +16,13 @@
 
 <script>
   export default {
-    name: 'app-back-fab',
+    name: 'AppBackFab',
 
     props: {
-      to: null
+      to: {
+        type: null,
+        default: null
+      }
     }
   }
 </script>

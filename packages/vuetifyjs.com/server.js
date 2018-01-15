@@ -17,7 +17,7 @@ const serverInfo =
 
 const app = express()
 
-const template = fs.readFileSync(resolve('./assets/index.template.html'), 'utf-8')
+// const template = fs.readFileSync(resolve('./assets/index.template.html'), 'utf-8')
 
 function createRenderer (bundle, options) {
   // https://github.com/vuejs/vue/blob/dev/packages/vue-server-renderer/README.md#why-use-bundlerenderer
@@ -76,12 +76,12 @@ app.use('/static/robots.txt', serve('./robots.txt'))
 app.use('/releases', serve('./releases'))
 app.use('/themes', serve('./themes'))
 app.get('/releases/:release', (req, res) => {
-  res.setHeader("Content-Type", "text/html")
+  res.setHeader('Content-Type', 'text/html')
   res.sendFile(resolve(`./releases/${req.params.release}`))
 })
 
 app.get('/sitemap.xml', (req, res) => {
-  res.setHeader("Content-Type", "text/xml")
+  res.setHeader('Content-Type', 'text/xml')
   res.sendFile(resolve('./static/sitemap.xml'))
 })
 
@@ -101,13 +101,13 @@ app.use(microcache.cacheSeconds(1, req => useMicroCache && req.originalUrl))
 function render (req, res) {
   const s = Date.now()
 
-  res.setHeader("Content-Type", "text/html")
-  res.setHeader("Server", serverInfo)
+  res.setHeader('Content-Type', 'text/html')
+  res.setHeader('Server', serverInfo)
 
   const handleError = err => {
     if (err.url) {
       res.redirect(err.url)
-    } else if(err.code === 404) {
+    } else if (err.code === 404) {
       res.status(404).send('404 | Page Not Found')
     } else {
       // Render Error Page or Redirect

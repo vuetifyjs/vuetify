@@ -16,7 +16,9 @@
                 <v-text-field label="Legal middle name" hint="example of helper text only on focus"></v-text-field>
               </v-flex>
               <v-flex xs12 sm6 md4>
-                <v-text-field label="Legal last name" hint="example of persistent helper text"
+                <v-text-field
+                  label="Legal last name"
+                  hint="example of persistent helper text"
                   persistent-hint
                   required
                 ></v-text-field>
@@ -59,10 +61,8 @@
 
 <script>
   export default {
-    data () {
-      return {
-        dialog: false
-      }
-    }
+    data: () => ({
+      dialog: false
+    })
   }
 </script>

@@ -4,7 +4,7 @@
 
 <script>
   export default {
-    name: 'touch-support-page',
+    name: 'TouchSupportPage',
 
     data: () => ({
       component: 'v-touch',

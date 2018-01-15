@@ -16,16 +16,12 @@
                 <v-icon>fast_rewind</v-icon>
               </v-btn>
             </v-list-tile-action>
-            <v-list-tile-action :class="{
-              'mx-5': $vuetify.breakpoint.mdAndUp
-            }">
+            <v-list-tile-action :class="{ 'mx-5': $vuetify.breakpoint.mdAndUp }">
               <v-btn icon>
                 <v-icon>pause</v-icon>
               </v-btn>
             </v-list-tile-action>
-            <v-list-tile-action :class="{
-              'mr-3': $vuetify.breakpoint.mdAndUp
-            }">
+            <v-list-tile-action :class="{ 'mr-3': $vuetify.breakpoint.mdAndUp }">
               <v-btn icon>
                 <v-icon>fast_forward</v-icon>
               </v-btn>

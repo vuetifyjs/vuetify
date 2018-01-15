@@ -31,25 +31,25 @@ const routes = paths.map(path => {
 routes.push({ path: '*', redirect: '/404' })
 
 export function createRouter () {
-    const router = new Router({
-      base: release ? `/releases/${release}` : __dirname,
-      mode: release ? 'hash' : 'history',
-      scrollBehavior,
-      routes
-    })
+  const router = new Router({
+    base: release ? `/releases/${release}` : __dirname,
+    mode: release ? 'hash' : 'history',
+    scrollBehavior,
+    routes
+  })
 
-    Vue.use(VueAnalytics, {
-      id: 'UA-75262397-3',
-      router,
-      autoTracking: {
-        page: process.env.NODE_ENV !== 'development'
-      },
-      debug: false ? {
-        enabled: true,
-        trace: false,
-        sendHitTask: true
-      } : false
-    })
+  Vue.use(VueAnalytics, {
+    id: 'UA-75262397-3',
+    router,
+    autoTracking: {
+      page: process.env.NODE_ENV !== 'development'
+    },
+    debug: process.env.DEBUG && {
+      enabled: true,
+      trace: false,
+      sendHitTask: true
+    }
+  })
 
-    return router
+  return router
 }

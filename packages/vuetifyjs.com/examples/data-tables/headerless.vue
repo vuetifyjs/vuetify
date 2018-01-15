@@ -1,10 +1,10 @@
 <template>
   <v-data-table
-      :items="items"
-      class="elevation-1"
-      hide-actions
-      hide-headers
-    >
+    :items="items"
+    class="elevation-1"
+    hide-actions
+    hide-headers
+  >
     <template slot="items" slot-scope="props">
       <td>{{ props.item.name }}</td>
       <td class="text-xs-right">{{ props.item.calories }}</td>

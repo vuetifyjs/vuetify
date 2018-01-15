@@ -31,7 +31,7 @@ export default {
       popout: 'Makes the expansion panel open with an popout style'
     },
     'v-expansion-panel-content': {
-      hideActions: 'Hide the expand icon in the content header',
+      hideActions: 'Hide the expand icon in the content header'
     }
   }
 }

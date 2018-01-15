@@ -50,11 +50,11 @@
 <script>
   export default {
     data: () => ({
-      header: "Vuetify.PreMadeThemes.header",
-      headerText: "Vuetify.PreMadeThemes.headerText"
+      header: 'Vuetify.PreMadeThemes.header',
+      headerText: 'Vuetify.PreMadeThemes.headerText'
     }),
     computed: {
-      templates() {
+      templates () {
         return this.$t('Vuetify.PreMadeThemes.templates')
       }
     }

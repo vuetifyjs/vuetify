@@ -1,10 +1,10 @@
 <template>
   <div>
     <v-data-table
-      v-bind:headers="headers"
-      v-bind:items="items"
-      v-bind:search="search"
-      v-bind:pagination.sync="pagination"
+      :headers="headers"
+      :items="items"
+      :search="search"
+      :pagination.sync="pagination"
       :total-items="totalItems"
       :loading="loading"
       class="elevation-1"

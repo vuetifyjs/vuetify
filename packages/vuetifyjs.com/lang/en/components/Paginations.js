@@ -27,7 +27,7 @@ export default {
   props: {
     circle: 'Shape pagination elements as circles',
     disabled: 'Disables component',
-    length: '	The length of the paginator',
+    length: 'The length of the paginator',
     nextIcon: 'Specify the icon to use for the next icon',
     prevIcon: 'Specify the icon to use for the prev icon',
     totalVisible: 'Specify the max total visible pagination numbers',

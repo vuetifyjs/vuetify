@@ -16,7 +16,7 @@
 
 <script>
   export default {
-    name: 'app-fab',
+    name: 'AppFab',
 
     data: () => ({
       fab: false

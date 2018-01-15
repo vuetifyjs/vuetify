@@ -27,7 +27,7 @@ export default {
     '`sm` - small devices',
     '`md` - medium devices',
     '`lg` - large devices',
-    '`xl` - extra large',
+    '`xl` - extra large'
   ],
   conditionText: 'The _condition_ applies the class base on:',
   conditions: [

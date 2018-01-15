@@ -10,7 +10,7 @@
         :timeout="0"
         bottom
       )
-        div Angular vs React vs Vue — 
+        div Angular vs React vs Vue —
           strong.amber--text CanariasJS
         v-btn(
           flat
@@ -43,7 +43,7 @@
   import { mapState } from 'vuex'
 
   export default {
-    name: 'documentation',
+    name: 'Documentation',
 
     components: {
       AppDrawer,

@@ -86,7 +86,7 @@
             icon: 'landscape',
             title: 'Simple HTML',
             init: 'simple',
-            desc: 'This template is intended for users who want to try out Vue.js and Vuetify.js in the most simplistic way. It contains a basic index.html with no additional functionality. This is useful for developers who want to easily preview the features of the framework.',
+            desc: 'This template is intended for users who want to try out Vue.js and Vuetify.js in the most simplistic way. It contains a basic index.html with no additional functionality. This is useful for developers who want to easily preview the features of the framework.'
         },
         {
           icon: 'web',
@@ -158,7 +158,7 @@
         this.$refs.copy.select()
         document.execCommand('copy')
         this.copied = true
-        this.copyTimeout = setTimeout(() => this.copied = false, 2000)
+        this.copyTimeout = setTimeout(() => { this.copied = false }, 2000)
       }
     }
   }

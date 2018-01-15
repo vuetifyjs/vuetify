@@ -1,9 +1,9 @@
 <template>
   <v-data-table
-      v-bind:headers="headers"
-      :items="items"
-      class="elevation-1"
-    >
+    :headers="headers"
+    :items="items"
+    class="elevation-1"
+  >
     <template slot="items" slot-scope="props">
       <td>{{ props.item.name }}</td>
       <td class="text-xs-right">{{ props.item.calories }}</td>

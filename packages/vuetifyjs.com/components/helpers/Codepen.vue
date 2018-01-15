@@ -16,7 +16,14 @@
   const version = require('vuetify/package.json').version || 'latest'
 
   export default {
-    name: 'codepen',
+    name: 'Codepen',
+
+    props: {
+      pen: {
+        type: Object,
+        default: () => ({})
+      }
+    },
 
     data: () => ({
       title: 'Vuetify Example Pen',
@@ -30,8 +37,6 @@
         `https://unpkg.com/vuetify@${version}/dist/vuetify.min.js`
       ].join(';')
     }),
-
-    props: ['pen'],
 
     computed: {
       script () {
@@ -53,7 +58,7 @@
 
         return template
           .replace(/\/static\//g, 'https://vuetifyjs.com/static/')
-          .replace(/(<template>|<\/template>([^<\/template>]*)$)/g, '')
+          .replace(/(<template>|<\/template>([^</template>]*)$)/g, '')
           .replace(/\n/g, '\n  ')
           .trim()
       },

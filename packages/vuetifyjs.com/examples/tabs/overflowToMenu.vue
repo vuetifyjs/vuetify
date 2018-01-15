@@ -79,7 +79,7 @@
           ...this.more.splice(this.more.indexOf(item), 1)
         )
         this.more.push(...removed)
-        this.$nextTick(() => this.currentItem = 'tab-' + item)
+        this.$nextTick(() => { this.currentItem = 'tab-' + item })
       }
     }
   }

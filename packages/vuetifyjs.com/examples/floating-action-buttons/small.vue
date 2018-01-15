@@ -26,9 +26,9 @@
         </v-toolbar>
         <v-list two-line subheader>
           <v-subheader inset>Folders</v-subheader>
-          <v-list-tile avatar v-for="item in items" v-bind:key="item.title" @click="">
+          <v-list-tile avatar v-for="item in items" :key="item.title" @click="">
             <v-list-tile-avatar>
-              <v-icon v-bind:class="[item.iconClass]">{{ item.icon }}</v-icon>
+              <v-icon :class="[item.iconClass]">{{ item.icon }}</v-icon>
             </v-list-tile-avatar>
             <v-list-tile-content>
               <v-list-tile-title>{{ item.title }}</v-list-tile-title>
@@ -42,9 +42,9 @@
           </v-list-tile>
           <v-divider inset></v-divider>
           <v-subheader inset>Files</v-subheader>
-          <v-list-tile avatar v-for="item in items2" v-bind:key="item.title" @click="">
+          <v-list-tile avatar v-for="item in items2" :key="item.title" @click="">
             <v-list-tile-avatar>
-              <v-icon v-bind:class="[item.iconClass]">{{ item.icon }}</v-icon>
+              <v-icon :class="[item.iconClass]">{{ item.icon }}</v-icon>
             </v-list-tile-avatar>
             <v-list-tile-content>
               <v-list-tile-title>{{ item.title }}</v-list-tile-title>
@@ -59,14 +59,14 @@
         </v-list>
         <v-dialog v-model="dialog" max-width="500px">
           <v-card>
-           <v-card-text>
+            <v-card-text>
               <v-text-field label="File name"></v-text-field>
               <small class="grey--text">* This doesn't actually save.</small>
-           </v-card-text>
-           <v-card-actions>
-             <v-spacer></v-spacer>
-             <v-btn flat color="primary" @click.native="dialog = false">Submit</v-btn>
-           </v-card-actions>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn flat color="primary" @click.native="dialog = false">Submit</v-btn>
+            </v-card-actions>
           </v-card>
         </v-dialog>
       </v-card>
@@ -86,7 +86,7 @@
         ],
         items2: [
           { icon: 'assignment', iconClass: 'blue white--text', title: 'Vacation itinerary', subtitle: 'Jan 20, 2014' },
-          { icon: 'call_to_action', iconClass: 'amber white--text', title: 'Kitchen remodel', subtitle: 'Jan 10, 2014' },
+          { icon: 'call_to_action', iconClass: 'amber white--text', title: 'Kitchen remodel', subtitle: 'Jan 10, 2014' }
         ]
       }
     }

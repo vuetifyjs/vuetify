@@ -13,7 +13,7 @@
         ></v-text-field>
       </v-flex>
       <v-flex xs12 sm3>
-        <v-select v-bind:items="[{ text: 'Mobile' }]" label="Mobile"></v-select>
+        <v-select :items="[{ text: 'Mobile' }]" label="Mobile"></v-select>
       </v-flex>
     </v-layout>
     <v-layout row wrap>
@@ -31,7 +31,7 @@
         ></v-text-field>
       </v-flex>
       <v-flex xs12 sm3>
-        <v-select v-bind:items="[{ text: 'Mobile' }]" label="Mobile"></v-select>
+        <v-select :items="[{ text: 'Mobile' }]" label="Mobile"></v-select>
       </v-flex>
 
     </v-layout>
@@ -49,7 +49,7 @@
         ></v-text-field>
       </v-flex>
       <v-flex xs12 sm3>
-        <v-select v-bind:items="[{ text: 'Mobile' }]" label="Mobile"></v-select>
+        <v-select :items="[{ text: 'Mobile' }]" label="Mobile"></v-select>
       </v-flex>
     </v-layout>
   </v-container>

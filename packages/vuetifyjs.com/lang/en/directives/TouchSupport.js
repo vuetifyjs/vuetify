@@ -15,7 +15,7 @@ export default {
         name: '[up, down, left, right]',
         type: 'Function',
         default: 'null',
-        desc: 'Assign a callback based upon a swipe direction. Pairing x-axis and y-axis callbacks is not recommended at this time',
+        desc: 'Assign a callback based upon a swipe direction. Pairing x-axis and y-axis callbacks is not recommended at this time'
       },
       {
         name: '[move, start, end]',

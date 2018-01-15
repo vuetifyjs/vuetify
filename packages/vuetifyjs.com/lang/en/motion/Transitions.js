@@ -16,7 +16,7 @@ export default {
     },
     slideYTransitions: {
       header: 'Slide Y transitions',
-      desc: 'Animations use the applications <code>$primary-transition</code>.',
+      desc: 'Animations use the applications <code>$primary-transition</code>.'
     },
     scaleTransition: {
       header: 'Scale transition',

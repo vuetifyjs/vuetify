@@ -16,7 +16,7 @@
 
 <script>
   export default {
-    data() {
+    data () {
       return {
         color: 0,
         colors: [

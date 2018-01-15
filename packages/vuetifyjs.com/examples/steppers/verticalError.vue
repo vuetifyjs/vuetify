@@ -14,7 +14,7 @@
       <v-btn color="primary" @click.native="e13 = 3">Continue</v-btn>
       <v-btn flat>Cancel</v-btn>
     </v-stepper-content>
-    <v-stepper-step step="3" v-bind:rules="[() => false]">
+    <v-stepper-step step="3" :rules="[() => false]">
       Ad templates
       <small>Alert message</small>
     </v-stepper-step>

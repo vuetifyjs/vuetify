@@ -5,7 +5,7 @@
     </v-alert>
 
     <div class="text-xs-center">
-      <v-btn color="primary" dark v-if="!alert" v-on:click="alert = true">Reset</v-btn>
+      <v-btn color="primary" dark v-if="!alert" @click="alert = true">Reset</v-btn>
     </div>
   </div>
 </template>

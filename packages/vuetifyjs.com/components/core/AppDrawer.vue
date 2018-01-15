@@ -172,7 +172,7 @@
 
     watch: {
       $route () {
-        if(this.stateless &&
+        if (this.stateless &&
           this.appDrawer &&
           this.$vuetify.breakpoint.mdAndDown
         ) this.appDrawer = false

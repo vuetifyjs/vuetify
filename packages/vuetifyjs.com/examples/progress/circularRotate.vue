@@ -1,40 +1,40 @@
 <template>
   <div>
     <v-progress-circular
-      v-bind:size="100"
-      v-bind:width="15"
-      v-bind:rotate="360"
-      v-bind:value="value"
+      :size="100"
+      :width="15"
+      :rotate="360"
+      :value="value"
       color="teal"
     >
       {{ value }}
     </v-progress-circular>
 
     <v-progress-circular
-      v-bind:size="100"
-      v-bind:width="15"
-      v-bind:rotate="-90"
-      v-bind:value="value"
+      :size="100"
+      :width="15"
+      :rotate="-90"
+      :value="value"
       color="primary"
     >
       {{ value }}
     </v-progress-circular>
 
     <v-progress-circular
-      v-bind:size="100"
-      v-bind:width="15"
-      v-bind:rotate="90"
-      v-bind:value="value"
+      :size="100"
+      :width="15"
+      :rotate="90"
+      :value="value"
       color="red"
     >
       {{ value }}
     </v-progress-circular>
 
     <v-progress-circular
-      v-bind:size="100"
-      v-bind:width="15"
-      v-bind:rotate="180"
-      v-bind:value="value"
+      :size="100"
+      :width="15"
+      :rotate="180"
+      :value="value"
       color="pink"
     >
       {{ value }}

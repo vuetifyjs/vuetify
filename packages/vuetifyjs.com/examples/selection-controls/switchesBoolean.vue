@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
-    <v-switch v-bind:label="`Switch 1: ${ex11.toString()}`" v-model="ex11"></v-switch>
-    <v-switch v-bind:label="`Switch 2: ${ex12.toString()}`" v-model="ex12"></v-switch>
+    <v-switch :label="`Switch 1: ${switch1.toString()}`" v-model="switch1"></v-switch>
+    <v-switch :label="`Switch 2: ${switch2.toString()}`" v-model="switch2"></v-switch>
   </v-container>
 </template>
 
@@ -9,8 +9,8 @@
   export default {
     data () {
       return {
-        ex11: true,
-        ex12: false
+        switch1: true,
+        switch2: false
       }
     }
   }

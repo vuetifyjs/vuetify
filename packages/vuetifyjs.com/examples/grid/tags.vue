@@ -12,14 +12,14 @@
           <v-flex>
             <v-card flat>
               <v-card-text
-                v-text="lorem">
+              v-text="lorem">
               </v-card-text>
             </v-card>
           </v-flex>
           <v-flex>
             <v-card flat>
               <v-card-text
-                v-text="lorem">
+              v-text="lorem">
               </v-card-text>
             </v-card>
           </v-flex>

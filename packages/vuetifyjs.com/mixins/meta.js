@@ -32,7 +32,7 @@ export default {
       }
     }
   },
-  
+
   created () {
     if (process.env.VUE_ENV === 'client') return
 

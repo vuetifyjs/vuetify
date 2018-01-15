@@ -43,7 +43,13 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar color="red" dense fixed clipped-left app>
+    <v-toolbar
+      color="red"
+      dense
+      fixed
+      clipped-left
+      app
+    >
       <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
         <v-icon class="ml-3">fa-youtube</v-icon>
@@ -63,7 +69,13 @@
       <v-container fill-height>
         <v-layout justify-center align-center>
           <v-tooltip right>
-            <v-btn icon large :href="source" target="_blank" slot="activator">
+            <v-btn
+              icon
+              large
+              :href="source"
+              target="_blank"
+              slot="activator"
+            >
               <v-icon large>code</v-icon>
             </v-btn>
             <span>Source</span>
@@ -90,7 +102,7 @@
         { picture: 38, text: 'Apple' },
         { picture: 48, text: 'Xbox Ahoy' },
         { picture: 58, text: 'Nokia' },
-        { picture: 78, text: 'MKBHD' },
+        { picture: 78, text: 'MKBHD' }
       ]
     }),
     props: {

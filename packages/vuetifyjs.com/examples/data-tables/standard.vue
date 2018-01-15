@@ -1,10 +1,10 @@
 <template>
   <v-data-table
-      v-bind:headers="headers"
-      :items="items"
-      hide-actions
-      class="elevation-1"
-    >
+    :headers="headers"
+    :items="items"
+    hide-actions
+    class="elevation-1"
+  >
     <template slot="items" slot-scope="props">
       <td>{{ props.item.name }}</td>
       <td class="text-xs-right">{{ props.item.calories }}</td>
