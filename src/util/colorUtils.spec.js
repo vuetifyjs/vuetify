@@ -1,12 +1,11 @@
+import { test } from '@util/testing'
 import { colorToInt, intToHex, getContrast, getLuma } from './colorUtils'
 import * as transformSRGB from './color/transformSRGB'
 import * as transformCIELAB from './color/transformCIELAB'
 
-describe.skip('colorToInt', () => {
+test('colorToInt', () => {
   it('should convert a hex string to a number', () => {
     expect(colorToInt('#123456')).toBe(0x123456)
-
-    // TODO:
     expect(colorToInt('#abc')).toBe(0xaabbcc)
     expect(colorToInt('876543')).toBe(0x876543)
     expect(colorToInt('669')).toBe(0x666699)
@@ -17,14 +16,22 @@ describe.skip('colorToInt', () => {
     expect(colorToInt(0xabcdef)).toBe(0xabcdef)
   })
 
-  it('should reject invalid formats', () => {
+  // TODO: toHaveBeenWarned only seems to work once
+  it('should reject invalid formats', async () => {
     expect(() => colorToInt([])).toThrow('Colors can only be numbers or strings, recieved Array instead')
     expect(() => colorToInt(() => {})).toThrow('Colors can only be numbers or strings, recieved Function instead')
-    expect(() => colorToInt(-1)).toThrow(`Colors cannot be negative: '-1'`)
-    expect(() => colorToInt('#1000000')).toThrow(`'#1000000' is not a valid rgb color`)
-    // TODO:
-    expect(() => colorToInt('#13')).toThrow(`'#13' is not a valid rgb color`)
-    expect(() => colorToInt('#6')).toThrow(`'#6' is not a valid rgb color`)
+
+    colorToInt(-1)
+    colorToInt('#1000000')
+    colorToInt('#13')
+    colorToInt('#6')
+    colorToInt('red')
+
+    expect(`Colors cannot be negative: '-1'`).toHaveBeenTipped()
+    expect(`'#1000000' is not a valid rgb color`).toHaveBeenTipped()
+    expect(`'#13' is not a valid rgb color`).toHaveBeenTipped()
+    expect(`'#6' is not a valid rgb color`).toHaveBeenTipped()
+    expect(`'red' is not a valid rgb color`).toHaveBeenTipped()
   })
 })
 
