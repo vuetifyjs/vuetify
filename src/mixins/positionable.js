@@ -12,7 +12,7 @@ export function factory (selected = []) {
 
   return {
     name: 'positionable',
-    props: selected.length && filterObjectOnKeys(props, selected) || props
+    props: selected.length ? filterObjectOnKeys(props, selected) : props
   }
 }
 

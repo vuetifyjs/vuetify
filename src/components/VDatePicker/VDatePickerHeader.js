@@ -1,4 +1,4 @@
-require('../../stylus/components/_date-picker-header.styl')
+import '../../stylus/components/_date-picker-header.styl'
 
 // Components
 import VBtn from '../VBtn'

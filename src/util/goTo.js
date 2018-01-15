@@ -4,7 +4,7 @@ import { consoleError } from './console'
  * Modified from https://github.com/alamcordeiro/vue-smooth-scroll
  */
 
-function easeInOutCubic (t) { return t < .5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1 }
+function easeInOutCubic (t) { return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1 }
 
 export default function goTo (target, offset = 0, duration = 500) {
   if (typeof window === 'undefined') return

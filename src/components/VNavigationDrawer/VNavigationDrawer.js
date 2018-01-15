@@ -1,4 +1,4 @@
-require('../../stylus/components/_navigation-drawer.styl')
+import '../../stylus/components/_navigation-drawer.styl'
 
 // Mixins
 import Applicationable from '../../mixins/applicationable'
@@ -284,7 +284,7 @@ export default {
       this.calculateTouchArea()
 
       if (Math.abs(e.touchendX - e.touchstartX) < 100) return
-      else if (!this.right &&
+      if (!this.right &&
         e.touchstartX <= this.touchArea.left
       ) this.isActive = true
       else if (this.right && this.isActive) this.isActive = false
@@ -294,7 +294,7 @@ export default {
       this.calculateTouchArea()
 
       if (Math.abs(e.touchendX - e.touchstartX) < 100) return
-      else if (this.right &&
+      if (this.right &&
         e.touchstartX >= this.touchArea.right
       ) this.isActive = true
       else if (!this.right && this.isActive) this.isActive = false

@@ -1,4 +1,4 @@
-require('../../stylus/components/_progress-linear.styl')
+import '../../stylus/components/_progress-linear.styl'
 
 import Colorable from '../../mixins/colorable'
 

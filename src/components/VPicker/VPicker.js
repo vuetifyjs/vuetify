@@ -1,4 +1,4 @@
-require('../../stylus/components/_pickers.styl')
+import '../../stylus/components/_pickers.styl'
 
 // Components
 import VCard from '../VCard'

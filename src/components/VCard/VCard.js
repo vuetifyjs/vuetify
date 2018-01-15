@@ -1,4 +1,4 @@
-require('../../stylus/components/_cards.styl')
+import '../../stylus/components/_cards.styl'
 
 import Colorable from '../../mixins/colorable'
 import Routable from '../../mixins/routable'

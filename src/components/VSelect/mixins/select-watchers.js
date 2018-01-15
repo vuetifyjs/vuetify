@@ -105,7 +105,7 @@ export default {
 
       // Only reset list index
       // if typing in search
-      val || prev && this.resetMenuIndex()
+      !val && prev && this.resetMenuIndex()
 
       this.$nextTick(() => {
         if (val && !this.isAnyValueAllowed) {

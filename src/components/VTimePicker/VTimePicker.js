@@ -167,9 +167,10 @@ export default {
       const allowedFn = type === 'hour' ? this.allowedHours : this.allowedMinutes
       if (!allowedFn) return value
 
+      // TODO: clean up
       const range = type === 'minute'
-        ? rangeMinutes :
-        (this.isAmPm
+        ? rangeMinutes
+        : (this.isAmPm
           ? (value < 12
             ? rangeHours12am
             : rangeHours12pm)
