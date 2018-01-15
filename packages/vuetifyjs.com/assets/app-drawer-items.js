@@ -73,7 +73,7 @@ export default [
         namespace: '/components',
         items: [
           { href: 'grid', title: 'Grid' },
-          { href: 'grid-lists', title: 'Grid lists' },
+          { href: 'grid-lists', title: 'Grid lists' }
         ]
       },
       {
@@ -136,7 +136,7 @@ export default [
     items: [
       { href: 'https://chat.vuetifyjs.com/', title: 'Chat and support', target: '_blank' },
       { href: 'https://github.com/vuetifyjs/vuetify/issues', title: 'Issue board', target: '_blank' },
-      { href: 'https://stackoverflow.com/search?q=vuetify', title: 'Stack overflow', target: '_blank' },
+      { href: 'https://stackoverflow.com/search?q=vuetify', title: 'Stack overflow', target: '_blank' }
     ]
   },
   {

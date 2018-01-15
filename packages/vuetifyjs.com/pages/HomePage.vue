@@ -158,11 +158,8 @@
   // Components
   import HomeFooter from '@/components/misc/HomeFooter'
 
-  // Utilities
-  import { mapState } from 'vuex'
-
   export default {
-    name: 'home-page',
+    name: 'HomePage',
 
     components: {
       HomeFooter

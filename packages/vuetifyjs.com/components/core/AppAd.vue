@@ -4,7 +4,7 @@
 
 <script>
   export default {
-    name: 'app-ad',
+    name: 'AppAd',
 
     mounted () {
       if (process.env.NODE_ENV === 'development') return
@@ -29,7 +29,7 @@
     background-color: hsla(0, 0%, 98%, .9)
     z-index: 3
     margin-bottom: 48px
-    
+
     .duck
       display: none
 
@@ -38,7 +38,7 @@
       display: inline-block
       max-width: 130px
       text-decoration: none
-      
+
       &.carbon-poweredby
         color: rgba(#000, .56)
         text-transform: uppercase
@@ -54,12 +54,12 @@
   //   @media $display-breakpoints.lg-and-up
   //     padding: 0 !important
   //     flex-basis: 0 !important
-    
+
   //   @media only screen and (max-width: 1550px)
   //     #carbonads
   //       position: initial
   //       margin-bottom: 25px
-        
+
   //   @media $display-breakpoints.xs-only
   //     #carbonads
   //       margin-bottom: 50px

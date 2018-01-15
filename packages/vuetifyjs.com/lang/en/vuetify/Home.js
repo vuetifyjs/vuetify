@@ -32,7 +32,7 @@ export default {
     '80+ Material Design Components',
     'A La Carte Importing',
     'Transition Components',
-    'Blazing Fast',
+    'Blazing Fast'
   ],
   letterFromAuthor: [
     'Hey there,',
@@ -44,7 +44,7 @@ export default {
   support: {
     hasVuetifyHelped: 'Has Vuetify helped you create an amazing application?',
     showYourSupport: 'Show your support for Vuetify by',
-    becomingAPatron:  'becoming a patron'
+    becomingAPatron: 'becoming a patron'
   },
   becomeSponsor: 'Become a Sponsor',
   proudlySponsoredBy: 'Patreon Sponsors',

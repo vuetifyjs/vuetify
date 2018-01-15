@@ -27,21 +27,20 @@
 
 <script>
   export default {
-    data () {
-      return {
-        date: null,
-        allowedDates: null,
-        everyOtherDay: function (date) {
-          const [,,day] = date.split('-')
-          return parseInt(day, 10) % 2 == 0
-        },
-        randomDays: [],
-        lastFiveDays: {
-          min: null,
-          max: null
-        }
+    data: () => ({
+      date: null,
+      allowedDates: null,
+      everyOtherDay (date) {
+        const [,, day] = date.split('-')
+        return parseInt(day, 10) % 2 === 0
+      },
+      randomDays: [],
+      lastFiveDays: {
+        min: null,
+        max: null
       }
-    },
+    }),
+
     mounted () {
       const date = new Date()
       this.randomDays = [...Array(10)].map(() => {

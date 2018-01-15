@@ -2,7 +2,7 @@
   <div class="text-xs-center">
     <div class="text-xs-center">
       <v-btn
-        v-on:click="chip1 = true, chip2 = true, chip3 = true, chip4= true"
+        @click="chip1 = true, chip2 = true, chip3 = true, chip4= true"
         v-if="!chip1 && !chip2 && !chip3 && !chip4"
         color="primary"
         dark

@@ -1,9 +1,9 @@
 <template>
   <v-progress-linear
-    v-bind:indeterminate="query"
-    v-bind:query="true"
+    :indeterminate="query"
+    :query="true"
     v-model="value"
-    v-bind:active="show"
+    :active="show"
   ></v-progress-linear>
 </template>
 
@@ -14,16 +14,23 @@
         value: 0,
         query: false,
         show: true,
-        interval: {}
+        interval: 0
       }
     },
+
+    mounted () {
+      this.queryAndIndeterminate()
+    },
+
+    beforeDestroy () {
+      clearInterval(this.interval)
+    },
+
     methods: {
       queryAndIndeterminate () {
         this.query = true
         this.show = true
         this.value = 0
-        let int
-
         this.query = false
 
         this.interval = setInterval(() => {
@@ -35,12 +42,6 @@
           this.value += 25
         }, 1000)
       }
-    },
-    beforeDestroy () {
-      clearInterval(this.interval)
-  },
-    mounted () {
-      this.queryAndIndeterminate()
     }
   }
 </script>

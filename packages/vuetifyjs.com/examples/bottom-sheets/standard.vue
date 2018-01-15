@@ -30,7 +30,7 @@
         { img: 'inbox.png', title: 'Inbox' },
         { img: 'hangouts.png', title: 'Hangouts' },
         { img: 'messenger.png', title: 'Messenger' },
-        { img: 'google.png', title: 'Google+' },
+        { img: 'google.png', title: 'Google+' }
       ]
     })
   }

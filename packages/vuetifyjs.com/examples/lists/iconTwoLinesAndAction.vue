@@ -15,9 +15,9 @@
         </v-toolbar>
         <v-list two-line subheader>
           <v-subheader inset>Folders</v-subheader>
-          <v-list-tile avatar v-for="item in items" v-bind:key="item.title" @click="">
+          <v-list-tile avatar v-for="item in items" :key="item.title" @click="">
             <v-list-tile-avatar>
-              <v-icon v-bind:class="[item.iconClass]">{{ item.icon }}</v-icon>
+              <v-icon :class="[item.iconClass]">{{ item.icon }}</v-icon>
             </v-list-tile-avatar>
             <v-list-tile-content>
               <v-list-tile-title>{{ item.title }}</v-list-tile-title>
@@ -31,9 +31,9 @@
           </v-list-tile>
           <v-divider inset></v-divider>
           <v-subheader inset>Files</v-subheader>
-          <v-list-tile v-for="item in items2" v-bind:key="item.title" avatar @click="">
+          <v-list-tile v-for="item in items2" :key="item.title" avatar @click="">
             <v-list-tile-avatar>
-              <v-icon v-bind:class="[item.iconClass]">{{ item.icon }}</v-icon>
+              <v-icon :class="[item.iconClass]">{{ item.icon }}</v-icon>
             </v-list-tile-avatar>
             <v-list-tile-content>
               <v-list-tile-title>{{ item.title }}</v-list-tile-title>

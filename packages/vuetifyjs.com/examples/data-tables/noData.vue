@@ -1,6 +1,6 @@
 <template>
   <v-data-table
-    v-bind:headers="headers"
+    :headers="headers"
     :items="items"
     hide-actions
     class="elevation-1"

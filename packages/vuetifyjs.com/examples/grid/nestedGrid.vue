@@ -5,7 +5,7 @@
         <v-card color="purple" dark>
           <v-card-title primary class="title">Lorem</v-card-title>
           <v-card-text
-            v-text="lorem">
+          v-text="lorem">
           </v-card-text>
         </v-card>
       </v-flex>
@@ -14,7 +14,7 @@
           <v-flex d-flex>
             <v-card color="indigo" dark>
               <v-card-text
-                v-text="lorem.slice(0, 70)">
+              v-text="lorem.slice(0, 70)">
               </v-card-text>
             </v-card>
           </v-flex>
@@ -31,7 +31,7 @@
                   dark
                 >
                   <v-card-text
-                    v-text="lorem.slice(0, 40)">
+                  v-text="lorem.slice(0, 40)">
                   </v-card-text>
                 </v-card>
               </v-flex>
@@ -42,14 +42,14 @@
       <v-flex d-flex xs12 sm6 md2 child-flex>
         <v-card color="green lighten-2" dark>
           <v-card-text
-            v-text="lorem.slice(0, 90)">
+          v-text="lorem.slice(0, 90)">
           </v-card-text>
         </v-card>
       </v-flex>
       <v-flex d-flex xs12 sm6 md3>
         <v-card color="blue lighten-2" dark>
           <v-card-text
-            v-text="lorem.slice(0, 100)">
+          v-text="lorem.slice(0, 100)">
           </v-card-text>
         </v-card>
       </v-flex>

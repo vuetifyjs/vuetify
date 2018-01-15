@@ -2,7 +2,7 @@
   <v-layout v-resize="onResize" column align-center justify-center>
     <v-subheader>Window Size</v-subheader>
     {{ windowSize }}
-  </v-layout>  
+  </v-layout>
 </template>
 
 <script>

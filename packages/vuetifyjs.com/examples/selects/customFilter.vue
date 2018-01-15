@@ -6,7 +6,7 @@
       </v-flex>
       <v-flex xs12 sm6>
         <v-select
-          v-bind:items="states"
+          :items="states"
           :filter="customFilter"
           v-model="a1"
           item-text="name"
@@ -24,13 +24,13 @@
       return {
         a1: null,
         states: [
-          { name: 'Florida', abbr: 'FL', id:1 },
-          { name: 'Georgia', abbr: 'GA', id:2 },
-          { name: 'Nebraska', abbr: 'NE', id:3 },
-          { name: 'California', abbr: 'CA', id:4 },
-          { name: 'New York', abbr: 'NY', id:5 }
+          { name: 'Florida', abbr: 'FL', id: 1 },
+          { name: 'Georgia', abbr: 'GA', id: 2 },
+          { name: 'Nebraska', abbr: 'NE', id: 3 },
+          { name: 'California', abbr: 'CA', id: 4 },
+          { name: 'New York', abbr: 'NY', id: 5 }
         ],
-        customFilter(item, queryText, itemText) {
+        customFilter (item, queryText, itemText) {
             const hasValue = val => val != null ? val : ''
             const text = hasValue(item.name)
             const query = hasValue(queryText)

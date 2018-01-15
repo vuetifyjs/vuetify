@@ -15,7 +15,7 @@
 
 <script>
   export default {
-    name: 'elevation-view',
+    name: 'ElevationView',
 
     data () {
       return {

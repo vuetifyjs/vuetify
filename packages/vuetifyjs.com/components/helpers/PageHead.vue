@@ -8,11 +8,17 @@
 
 <script>
   export default {
-    name: 'page-head',
+    name: 'PageHead',
 
     props: {
-      header: null,
-      text: null
+      header: {
+        type: null,
+        default: null
+      },
+      text: {
+        type: null,
+        default: null
+      }
     }
   }
 </script>

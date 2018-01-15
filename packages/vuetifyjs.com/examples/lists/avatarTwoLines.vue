@@ -11,12 +11,12 @@
           </v-btn>
         </v-toolbar>
         <v-list two-line>
-          <template v-for="item in items">
-            <v-subheader v-if="item.header" v-text="item.header"></v-subheader>
-            <v-divider v-else-if="item.divider" v-bind:inset="item.inset"></v-divider>
-            <v-list-tile avatar v-else v-bind:key="item.title" @click="">
+          <template v-for="(item, index) in items">
+            <v-subheader v-if="item.header" :key="item.header">{{ item.header }}</v-subheader>
+            <v-divider v-else-if="item.divider" :inset="item.inset" :key="index"></v-divider>
+            <v-list-tile avatar v-else :key="item.title" @click="">
               <v-list-tile-avatar>
-                <img v-bind:src="item.avatar">
+                <img :src="item.avatar">
               </v-list-tile-avatar>
               <v-list-tile-content>
                 <v-list-tile-title v-html="item.title"></v-list-tile-title>

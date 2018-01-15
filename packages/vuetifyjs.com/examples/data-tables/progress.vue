@@ -1,10 +1,10 @@
 <template>
   <v-data-table
-      v-bind:headers="headers"
-      :items="items"
-      :loading="true"
-      class="elevation-1"
-    >
+    :headers="headers"
+    :items="items"
+    :loading="true"
+    class="elevation-1"
+  >
     <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
     <template slot="items" slot-scope="props">
       <td>{{ props.item.name }}</td>

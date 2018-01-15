@@ -1,3 +1,3 @@
 <template>
-  <v-progress-linear v-bind:indeterminate="true"></v-progress-linear>
+  <v-progress-linear :indeterminate="true"></v-progress-linear>
 </template>

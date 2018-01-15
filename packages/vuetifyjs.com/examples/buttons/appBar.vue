@@ -1,7 +1,7 @@
 <template>
   <v-toolbar>
-    <v-select v-bind:items="dropdown_font" overflow label="Select font" hide-details></v-select>
-    <v-select v-bind:items="dropdown_edit" overflow label="Select size" hide-details editable></v-select>
+    <v-select :items="dropdown_font" overflow label="Select font" hide-details></v-select>
+    <v-select :items="dropdown_edit" overflow label="Select size" hide-details editable></v-select>
     <v-btn-toggle v-model="toggle_multiple" multiple>
       <v-btn icon :value="1">
         <v-icon>format_bold</v-icon>

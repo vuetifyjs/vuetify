@@ -37,6 +37,6 @@ export default {
     {
       text: 'UI Component Name List',
       href: 'component-name-list'
-    },
+    }
   ]
 }

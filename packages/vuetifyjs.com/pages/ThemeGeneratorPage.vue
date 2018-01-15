@@ -73,7 +73,7 @@
 
   export default {
     components: {
-      'swatch-picker': Swatches
+      SwatchPicker: Swatches
     },
 
     beforeRouteEnter (to, from, next) {
@@ -124,12 +124,12 @@
             return e
           }, {})
           let str = `import colors from 'vuetify/src/util/colors'\n\n${JSON.stringify(names, null, 2)}`
-          str = str.replace(/\"(.*)\"\:\s\"(.*)\"/g, "$1: colors.$2")
+          str = str.replace(/"(.*)":\s"(.*)"/g, '$1: colors.$2')
 
           return str
         } else {
           let str = JSON.stringify(this.theme, null, 2)
-          str = str.replace(/\"(.*)\"\:\s\"(.*)\"/g, "$1: \"$2\"")
+          str = str.replace(/"(.*)":\s"(.*)"/g, '$1: "$2"')
           return str
         }
       }
@@ -150,6 +150,20 @@
       }
     },
 
+    created () {
+      this.backupTheme = Object.assign({}, this.$vuetify.theme)
+      this.$vuetify.theme = this.theme
+    },
+
+    mounted () {
+      setTimeout(() => (this.drawer = true), 400)
+    },
+
+    beforeDestroy () {
+      this.drawer = false
+      this.$vuetify.theme = this.backupTheme
+    },
+
     methods: {
       change (value) {
         this.theme[this.active] = value.hex
@@ -162,20 +176,6 @@
         }
         return value
       }
-    },
-
-    beforeDestroy () {
-      this.drawer = false
-      this.$vuetify.theme = this.backupTheme
-    },
-
-    created () {
-      this.backupTheme = Object.assign({}, this.$vuetify.theme)
-      this.$vuetify.theme = this.theme
-    },
-
-    mounted () {
-      setTimeout(() => (this.drawer = true), 400)
     }
   }
 </script>

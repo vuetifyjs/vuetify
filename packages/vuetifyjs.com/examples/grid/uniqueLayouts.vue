@@ -6,14 +6,14 @@
           <v-flex d-flex>
             <v-card color="blue-grey" dark tile flat>
               <v-card-text
-                v-text="lorem">
+              v-text="lorem">
               </v-card-text>
             </v-card>
           </v-flex>
           <v-flex d-flex>
             <v-card color="brown" dark tile flat>
               <v-card-text
-                v-text="lorem">
+              v-text="lorem">
               </v-card-text>
             </v-card>
           </v-flex>
@@ -24,7 +24,7 @@
           <v-flex d-flex>
             <v-card color="indigo lighten-2" dark tile flat>
               <v-card-text
-                v-text="lorem.slice(0, 70)">
+              v-text="lorem.slice(0, 70)">
               </v-card-text>
             </v-card>
           </v-flex>
@@ -41,7 +41,7 @@
                   flat
                 >
                   <v-card-text
-                    v-text="lorem.slice(0, 40)">
+                  v-text="lorem.slice(0, 40)">
                   </v-card-text>
                 </v-card>
               </v-flex>
@@ -52,14 +52,14 @@
       <v-flex d-flex xs12 sm2 child-flex>
         <v-card color="orange lighten-2" tile flat>
           <v-card-text
-            v-text="lorem.slice(0, 90)">
+          v-text="lorem.slice(0, 90)">
           </v-card-text>
         </v-card>
       </v-flex>
       <v-flex d-flex xs12 sm3>
         <v-card color="red lighten-2" dark tile flat>
           <v-card-text
-            v-text="lorem.slice(0, 100)">
+          v-text="lorem.slice(0, 100)">
           </v-card-text>
         </v-card>
       </v-flex>

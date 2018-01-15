@@ -24,7 +24,18 @@
   highlight.registerLanguage('js', highlightJS)
 
   export default {
-    name: 'markup',
+    name: 'Markup',
+
+    props: {
+      color: {
+        type: String,
+        default: 'grey lighten-3'
+      },
+      lang: {
+        type: String,
+        default: ''
+      }
+    },
 
     data () {
       return {
@@ -32,14 +43,6 @@
         content: '',
         highlightAttempts: 0
       }
-    },
-
-    props: {
-      color: {
-        type: String,
-        default: 'grey lighten-3'
-      },
-      lang: String,
     },
 
     mounted () {
@@ -65,7 +68,7 @@
         document.execCommand('selectAll', false, null)
         this.copied = document.execCommand('copy')
         markup.removeAttribute('contenteditable')
-        setTimeout(() => this.copied = false, 2000)
+        setTimeout(() => { this.copied = false }, 2000)
       }
     }
   }

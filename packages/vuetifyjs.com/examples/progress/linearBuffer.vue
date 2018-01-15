@@ -2,7 +2,7 @@
   <v-progress-linear
     v-model="buffer"
     buffer
-    v-bind:buffer-value="bufferValue"
+    :buffer-value="bufferValue"
   ></v-progress-linear>
 </template>
 
@@ -13,9 +13,18 @@
         value: 0,
         buffer: 10,
         bufferValue: 20,
-        interval: {}
+        interval: 0
       }
     },
+
+    mounted () {
+      this.startBuffer()
+    },
+
+    beforeDestroy () {
+      clearInterval(this.interval)
+    },
+
     methods: {
       startBuffer () {
         this.interval = setInterval(() => {
@@ -23,12 +32,6 @@
           this.bufferValue += Math.random() * (15 - 5) + 5
         }, 2000)
       }
-    },
-    beforeDestroy () {
-      clearInterval(this.interval)
-    },
-    mounted () {
-      this.startBuffer()
     }
   }
 </script>

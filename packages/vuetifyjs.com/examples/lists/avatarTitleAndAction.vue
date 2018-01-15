@@ -7,14 +7,14 @@
           <v-toolbar-title>Inbox</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn icon>
-             <v-icon>search</v-icon>
+            <v-icon>search</v-icon>
           </v-btn>
           <v-btn icon>
             <v-icon>more_vert</v-icon>
           </v-btn>
         </v-toolbar>
         <v-list>
-          <v-list-tile avatar v-for="item in items" v-bind:key="item.title" @click="">
+          <v-list-tile avatar v-for="item in items" :key="item.title" @click="">
             <v-list-tile-action>
               <v-icon v-if="item.icon" color="pink">star</v-icon>
             </v-list-tile-action>
@@ -22,7 +22,7 @@
               <v-list-tile-title v-text="item.title"></v-list-tile-title>
             </v-list-tile-content>
             <v-list-tile-avatar>
-              <img v-bind:src="item.avatar"/>
+              <img :src="item.avatar">
             </v-list-tile-avatar>
           </v-list-tile>
         </v-list>
@@ -39,7 +39,7 @@
           { icon: true, title: 'Jason Oner', avatar: '/static/doc-images/lists/1.jpg' },
           { title: 'Travis Howard', avatar: '/static/doc-images/lists/2.jpg' },
           { title: 'Ali Connors', avatar: '/static/doc-images/lists/3.jpg' },
-          { title: 'Cindy Baker', avatar: '/static/doc-images/lists/4.jpg' },
+          { title: 'Cindy Baker', avatar: '/static/doc-images/lists/4.jpg' }
         ]
       }
     }

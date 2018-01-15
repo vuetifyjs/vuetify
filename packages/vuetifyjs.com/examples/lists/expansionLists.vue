@@ -13,7 +13,7 @@
         <v-list>
           <v-list-group
             v-for="item in items"
-            v-bind:key="item.title"
+            :key="item.title"
             :prepend-icon="item.action"
             no-action
           >
@@ -22,7 +22,7 @@
                 <v-list-tile-title>{{ item.title }}</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
-            <v-list-tile v-for="subItem in item.items" v-bind:key="subItem.title" @click="">
+            <v-list-tile v-for="subItem in item.items" :key="subItem.title" @click="">
               <v-list-tile-content>
                 <v-list-tile-title>{{ subItem.title }}</v-list-tile-title>
               </v-list-tile-content>

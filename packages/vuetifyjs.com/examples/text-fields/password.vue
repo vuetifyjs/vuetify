@@ -67,7 +67,7 @@
           :append-icon="e4 ? 'visibility' : 'visibility_off'"
           :append-icon-cb="() => (e4 = !e4)"
           value="Pa"
-          v-bind:rules="[() => ('The email and password you entered don\'t match')]"
+          :rules="[() => ('The email and password you entered don\'t match')]"
           error
           :type="e4 ? 'password' : 'text'"
         ></v-text-field>

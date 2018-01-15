@@ -4,7 +4,7 @@
       <v-btn color="primary" dark slot="activator" class="mb-2">New Item</v-btn>
       <v-card>
         <v-card-title>
-          <span class="headline">{{formTitle}}</span>
+          <span class="headline">{{ formTitle }}</span>
         </v-card-title>
         <v-card-text>
           <v-container grid-list-md>
@@ -35,10 +35,10 @@
       </v-card>
     </v-dialog>
     <v-data-table
-        v-bind:headers="headers"
-        :items="items"
-        hide-actions
-        class="elevation-1"
+      :headers="headers"
+      :items="items"
+      hide-actions
+      class="elevation-1"
     >
       <template slot="items" slot-scope="props">
         <td>{{ props.item.name }}</td>
@@ -64,41 +64,44 @@
 
 <script>
   export default {
-    data() {
-      return {
-        dialog: false,
-        headers: [
-          {
-            text: 'Dessert (100g serving)',
-            align: 'left',
-            sortable: false,
-            value: 'name'
-          },
-          {text: 'Calories', value: 'calories'},
-          {text: 'Fat (g)', value: 'fat'},
-          {text: 'Carbs (g)', value: 'carbs'},
-          {text: 'Protein (g)', value: 'protein'},
-          {text: 'Actions', value: 'name', sortable: false},
-        ],
-        items: [],
-        item: {
-          edit: false,
-          name: '',
-          calories: 0,
-          fat: 0,
-          carbs: 0,
-          protein: 0,
-        }
+    data: () => ({
+      dialog: false,
+      headers: [
+        {
+          text: 'Dessert (100g serving)',
+          align: 'left',
+          sortable: false,
+          value: 'name'
+        },
+        { text: 'Calories', value: 'calories' },
+        { text: 'Fat (g)', value: 'fat' },
+        { text: 'Carbs (g)', value: 'carbs' },
+        { text: 'Protein (g)', value: 'protein' },
+        { text: 'Actions', value: 'name', sortable: false }
+      ],
+      items: [],
+      item: {
+        edit: false,
+        name: '',
+        calories: 0,
+        fat: 0,
+        carbs: 0,
+        protein: 0
       }
-    },
+    }),
+
     computed: {
-      formTitle() {
+      formTitle () {
         return this.item.edit ? 'Edit Item' : 'New Item'
       }
     },
-    methods: {
 
-      initialize() {
+    created () {
+      this.initialize()
+    },
+
+    methods: {
+      initialize () {
         this.items = [
           {
             edit: false,
@@ -106,7 +109,7 @@
             calories: 159,
             fat: 6.0,
             carbs: 24,
-            protein: 4.0,
+            protein: 4.0
           },
           {
             edit: false,
@@ -114,7 +117,7 @@
             calories: 237,
             fat: 9.0,
             carbs: 37,
-            protein: 4.3,
+            protein: 4.3
           },
           {
             edit: false,
@@ -122,7 +125,7 @@
             calories: 262,
             fat: 16.0,
             carbs: 23,
-            protein: 6.0,
+            protein: 6.0
           },
           {
             edit: false,
@@ -130,7 +133,7 @@
             calories: 305,
             fat: 3.7,
             carbs: 67,
-            protein: 4.3,
+            protein: 4.3
           },
           {
             edit: false,
@@ -138,7 +141,7 @@
             calories: 356,
             fat: 16.0,
             carbs: 49,
-            protein: 3.9,
+            protein: 3.9
           },
           {
             edit: false,
@@ -146,7 +149,7 @@
             calories: 375,
             fat: 0.0,
             carbs: 94,
-            protein: 0.0,
+            protein: 0.0
           },
           {
             edit: false,
@@ -154,7 +157,7 @@
             calories: 392,
             fat: 0.2,
             carbs: 98,
-            protein: 0,
+            protein: 0
           },
           {
             edit: false,
@@ -162,7 +165,7 @@
             calories: 408,
             fat: 3.2,
             carbs: 87,
-            protein: 6.5,
+            protein: 6.5
           },
           {
             edit: false,
@@ -170,7 +173,7 @@
             calories: 452,
             fat: 25.0,
             carbs: 51,
-            protein: 4.9,
+            protein: 4.9
           },
           {
             edit: false,
@@ -178,39 +181,36 @@
             calories: 518,
             fat: 26.0,
             carbs: 65,
-            protein: 7,
+            protein: 7
           }
         ]
       },
 
-      editItem(item) {
-        this.item = item;
-        this.item.edit = true;
-        this.dialog = true;
+      editItem (item) {
+        this.item = item
+        this.item.edit = true
+        this.dialog = true
       },
 
-      deleteItem(index) {
+      deleteItem (index) {
         // alert user for delete
-        this.items.splice(index, 1);
+        this.items.splice(index, 1)
       },
 
-      close() {
-        this.item.edit = false;
-        this.dialog = false;
+      close () {
+        this.item.edit = false
+        this.dialog = false
       },
 
-      save() {
+      save () {
         if (this.item.edit) {
           // edit item
-          this.item.edit = false;
+          this.item.edit = false
         } else {
-          this.items.push(this.item);
+          this.items.push(this.item)
         }
-        this.dialog = false;
+        this.dialog = false
       }
-    },
-    created() {
-      this.initialize();
     }
   }
 </script>

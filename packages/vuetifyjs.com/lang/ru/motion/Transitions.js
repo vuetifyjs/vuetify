@@ -54,4 +54,4 @@ export default {
       href: 'create-your-own'
     }
   ]
-};
+}

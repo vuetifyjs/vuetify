@@ -2,8 +2,9 @@
   <div>
     <v-breadcrumbs>
       <v-icon slot="divider">forward</v-icon>
-      <v-breadcrumbs-item 
-        v-for="item in items" :key="item.text"
+      <v-breadcrumbs-item
+        v-for="item in items"
+        :key="item.text"
         :disabled="item.disabled"
       >
         {{ item.text }}
@@ -12,8 +13,9 @@
 
     <v-breadcrumbs>
       <v-icon slot="divider">chevron_right</v-icon>
-      <v-breadcrumbs-item 
-        v-for="item in items" :key="item.text"
+      <v-breadcrumbs-item
+        v-for="item in items"
+        :key="item.text"
         :disabled="item.disabled"
       >
         {{ item.text }}

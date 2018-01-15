@@ -20,8 +20,8 @@ export default {
   },
   slots: {
     footer: 'Slot to specify an extra footer',
-    noData: "Displayed when there are no items (takes precedence over `no-results`)",
-    noResults: "Displayed when there are no filtered items"
+    noData: 'Displayed when there are no items (takes precedence over `no-results`)',
+    noResults: 'Displayed when there are no filtered items'
   },
   scopedSlots: {
     items: 'Slot to specify how items are rendered',

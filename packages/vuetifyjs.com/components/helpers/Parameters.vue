@@ -16,7 +16,6 @@
             markdown(:source="item.description" class="justify")
             kbd(v-if="item.example" class="pa-2 d-flex mt-2 grey darken-2") {{ genTypescriptDef(item.example) }}
 
-
 </template>
 
 <script>
@@ -24,7 +23,10 @@
 
   export default {
     props: {
-      target: String,
+      target: {
+        type: String,
+        default: ''
+      },
       headers: {
         type: Array,
         default: () => ([])
@@ -33,19 +35,26 @@
         type: Array,
         default: () => ([])
       },
-      namespace: String,
-      search: String,
-      type: String
-    },
-
-    data () {
-      return {
-        pagination: {
-          sortBy: 'name',
-          rowsPerPage: -1
-        }
+      namespace: {
+        type: String,
+        default: ''
+      },
+      search: {
+        type: String,
+        default: ''
+      },
+      type: {
+        type: String,
+        default: ''
       }
     },
+
+    data: () => ({
+      pagination: {
+        sortBy: 'name',
+        rowsPerPage: -1
+      }
+    }),
 
     computed: {
       computedItems () {
@@ -113,7 +122,7 @@
       genName (name, item) {
         name = name || ''
         name = name.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`)
-        const sync = item.sync && '.sync' || ''
+        const sync = (item.sync && '.sync') || ''
 
         return `${name}${sync}`
       },
@@ -134,7 +143,7 @@
         else return value
       },
       genTypescriptDef (obj) {
-        return JSON.stringify(obj, null, 2).replace(/\"(.*)\"\:\s\"(.*)\",?/g, "$1: $2;")
+        return JSON.stringify(obj, null, 2).replace(/"(.*)":\s"(.*)",?/g, '$1: $2;')
       },
       genHeaderName (header, item) {
         let name = header

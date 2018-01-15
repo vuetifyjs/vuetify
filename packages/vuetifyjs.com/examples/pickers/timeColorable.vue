@@ -13,7 +13,7 @@
   export default {
     data () {
       return {
-        e4: null,
+        e4: null
       }
     }
   }

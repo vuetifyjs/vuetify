@@ -11,23 +11,30 @@
         <v-container grid-list-md>
           <v-layout wrap>
             <v-flex xs12 sm6 md4>
-              <v-text-field label="Legal first name" required :rules="[required]"></v-text-field>
+              <v-text-field label="Legal first name" required :rules="[required]"/>
             </v-flex>
             <v-flex xs12 sm6 md4>
-              <v-text-field label="Legal middle name" hint="example of helper text only on focus"></v-text-field>
+              <v-text-field label="Legal middle name" hint="example of helper text only on focus"/>
             </v-flex>
             <v-flex xs12 sm6 md4>
-              <v-text-field label="Legal last name" hint="example of persistent helper text"
+              <v-text-field
+                label="Legal last name"
+                hint="example of persistent helper text"
                 persistent-hint
                 required
                 :rules="[required]"
-              ></v-text-field>
+              />
             </v-flex>
             <v-flex xs12>
-              <v-text-field label="Email" required :rules="[required]"></v-text-field>
+              <v-text-field label="Email" required :rules="[required]"/>
             </v-flex>
             <v-flex xs12>
-              <v-text-field label="Password" type="password" required :rules="[required]"></v-text-field>
+              <v-text-field
+                label="Password"
+                type="password"
+                required
+                :rules="[required]"
+              />
             </v-flex>
             <v-flex xs12 sm6>
               <v-select
@@ -35,7 +42,7 @@
                 required
                 :items="['0-17', '18-29', '30-54', '54+']"
                 :rules="[required]"
-              ></v-select>
+              />
             </v-flex>
             <v-flex xs12 sm6>
               <v-select
@@ -44,7 +51,7 @@
                 autocomplete
                 chips
                 :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
-              ></v-select>
+              />
             </v-flex>
             <v-flex xs12>
               <small>*indicates required field</small>
@@ -57,7 +64,7 @@
       </v-form>
     </v-card-text>
     <v-card-actions>
-      <v-spacer></v-spacer>
+      <v-spacer/>
       <v-btn color="primary" flat>Close</v-btn>
       <v-btn color="primary" flat>Save</v-btn>
     </v-card-actions>
@@ -69,7 +76,7 @@
     data () {
       return {
         valid: false,
-        required: (v) => !!v || 'Required',
+        required: (v) => !!v || 'Required'
       }
     }
   }

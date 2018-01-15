@@ -27,7 +27,7 @@ export default {
   props: {
     appendIcon: 'Mixins.Input.props.appendIcon',
     prependIcon: 'Mixins.Input.props.prependIcon',
-      cycle: 'Определяет, должна ли карусель перемещаться по изображениям',
+    cycle: 'Определяет, должна ли карусель перемещаться по изображениям',
     delimiterIcon: 'Устанавливает значок для карусельного разделителя',
     hideControls: 'Скрывает элементы управления навигацией',
     hideDelimiters: 'Скрывает панель с разделителями карусели',

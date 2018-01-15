@@ -2,10 +2,10 @@
   <v-carousel>
     <v-carousel-item
       v-for="(item,i) in items"
-      v-bind:key="i"
-      v-bind:src="item.src"
+      :key="i"
+      :src="item.src"
       transition="fade"
-      reverseTransition="fade"
+      reverse-transition="fade"
     ></v-carousel-item>
   </v-carousel>
 </template>

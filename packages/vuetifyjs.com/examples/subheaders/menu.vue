@@ -11,8 +11,8 @@
           </v-btn>
         </v-toolbar>
         <v-list>
-          <template v-for="item in items">
-            <v-list-tile v-if="item.action" @click="">
+          <template v-for="(item, index) in items">
+            <v-list-tile v-if="item.action" @click="" :key="item.title">
               <v-list-tile-action>
                 <v-icon>{{ item.action }}</v-icon>
               </v-list-tile-action>
@@ -20,8 +20,8 @@
                 <v-list-tile-title>{{ item.title }}</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
-            <v-divider v-else-if="item.divider"></v-divider>
-            <v-subheader v-else-if="item.header" v-text="item.header"></v-subheader>
+            <v-divider v-else-if="item.divider" :key="index"></v-divider>
+            <v-subheader v-else-if="item.header" :key="item.header">{{ item.header }}</v-subheader>
           </template>
         </v-list>
       </v-card>
@@ -44,7 +44,7 @@
           },
           {
             action: 'delete',
-            title: 'Trash',
+            title: 'Trash'
           },
           {
             action: 'report',
@@ -62,7 +62,7 @@
           },
           {
             action: 'label',
-            title: 'Work',
+            title: 'Work'
           }
         ]
       }

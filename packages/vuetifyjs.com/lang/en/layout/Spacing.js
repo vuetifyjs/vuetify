@@ -41,7 +41,7 @@ export default {
     '`2` - sets the `margin` or `padding` property to `$spacer * .5`',
     '`3` - sets the `margin` or `padding` property to `$spacer`',
     '`4` - sets the `margin` or `padding` property to `$spacer * 1.5`',
-    '`5` - sets the `margin` or `padding` property to `$spacer * 3`',
+    '`5` - sets the `margin` or `padding` property to `$spacer * 3`'
   ],
   horizontalHeader: 'Horizontal centering',
   horizontalText: 'For block elements with a designated width, you can apply `.mx-auto` to horizontally center the content.'

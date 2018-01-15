@@ -9,7 +9,7 @@
       :key="i"
       ripple
     >
-        Item {{ i }}
+      Item {{ i }}
     </v-tab>
   </v-tabs>
 </template>

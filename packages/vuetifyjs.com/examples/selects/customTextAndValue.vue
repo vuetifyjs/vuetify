@@ -6,7 +6,7 @@
       </v-flex>
       <v-flex xs6>
         <v-select
-          v-bind:items="items"
+          :items="items"
           v-model="select"
           label="Select"
           single-line

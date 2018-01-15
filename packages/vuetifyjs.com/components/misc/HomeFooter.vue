@@ -58,6 +58,6 @@
 
 <script>
   export default {
-    name: 'home-footer'
+    name: 'HomeFooter'
   }
 </script>

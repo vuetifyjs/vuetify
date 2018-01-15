@@ -19,7 +19,7 @@
 
 <script>
   export default {
-    data() {
+    data () {
       return {
         picker: null
       }

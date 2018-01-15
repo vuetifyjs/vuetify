@@ -19,7 +19,6 @@
           app-ad(slot="top")
 </template>
 
-
 <script>
   import AppAd from '@/components/core/AppAd'
   import AppFooter from '@/components/core/AppFooter'

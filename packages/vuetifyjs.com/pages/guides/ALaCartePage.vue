@@ -140,14 +140,14 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       search: '',
       pagination: {},
       selected: [],
       headers: [
         { text: 'Markup', value: 'markup' },
-        { text: 'Component Name', value: 'component' },
+        { text: 'Component Name', value: 'component' }
       ],
       // component list.
       items: [
@@ -214,29 +214,32 @@ export default {
         { value: false, name: 'v-toolbar', component: 'VToolbar', group: 'VToolbar' },
         { value: false, name: 'v-toolbar-side-icon', component: 'VToolbar', group: 'VToolbar' },
         { value: false, name: 'v-tooltip', component: 'VTooltip', group: 'VTooltip' },
-        { value: false, name: 'transitions', component: 'transitions', group: 'transitions' },
-      ],
-    };
+        { value: false, name: 'transitions', component: 'transitions', group: 'transitions' }
+      ]
+    }
   },
   computed: {
-    copy() {
-      return this.generateCustomComponent();
-    },
+    copy () {
+      return this.generateCustomComponent()
+    }
   },
   methods: {
-    customFilter(items, search, filter) {
-      if (!search) return items;
+    customFilter (items, search, filter) {
+      if (!search) return items
       search = search.toString().toLowerCase()
-      return items.filter(item => filter(item['name'], search) || filter(item['component'], search)) || filter(item['group'], search);
+
+      return items.filter(item => (
+        filter(item['name'], search) || filter(item['component'], search) || filter(item['group'], search)
+      ))
     },
-    generateCustomComponent() {
-      const components = this.selected.map(({ component }) => component).join(', ');
-      return `import Vue from 'vue';\nimport { Vuetify, ${components} } from 'vuetify';\nVue.use(Vuetify, { components: { ${components} } });`;
+    generateCustomComponent () {
+      const components = this.selected.map(({ component }) => component).join(', ')
+      return `import Vue from 'vue';\nimport { Vuetify, ${components} } from 'vuetify';\nVue.use(Vuetify, { components: { ${components} } });`
     },
     copyMarkup () {
-      this.$refs.copy.select();
-      document.execCommand('copy');
+      this.$refs.copy.select()
+      document.execCommand('copy')
     }
   }
-};
+}
 </script>

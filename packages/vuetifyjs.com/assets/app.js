@@ -8,8 +8,6 @@ import Vuetify from 'vuetify'
 import VeeValidate from 'vee-validate'
 import axios from 'axios'
 
-Vue.config.performance = process.env.NODE_ENV === 'development'
-
 // Bootstrap
 import { createStore } from '@/store/index'
 import { createRouter } from '@/router/index'
@@ -19,6 +17,8 @@ import { sync } from 'vuex-router-sync'
 // Application
 import App from './App.vue'
 import Components from '@/components'
+
+Vue.config.performance = process.env.NODE_ENV === 'development'
 
 // Requests
 Vue.prototype.$http = axios.create({ baseURL: '/' })

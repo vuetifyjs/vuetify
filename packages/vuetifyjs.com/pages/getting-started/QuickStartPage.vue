@@ -120,7 +120,7 @@
         { icon: 'edge', title: 'Edge', supported: true },
         { icon: 'chrome', title: 'Chrome', supported: true },
         { icon: 'firefox', title: 'Firefox', supported: true },
-        { icon: 'safari', title: 'Safari 10+', supported: true },
+        { icon: 'safari', title: 'Safari 10+', supported: true }
       ]
     }),
 

@@ -1,14 +1,14 @@
 <template>
   <div>
-    <v-progress-circular v-bind:value="20"></v-progress-circular>
+    <v-progress-circular :value="20"></v-progress-circular>
 
-    <v-progress-circular v-bind:value="40"></v-progress-circular>
+    <v-progress-circular :value="40"></v-progress-circular>
 
-    <v-progress-circular v-bind:value="60"></v-progress-circular>
+    <v-progress-circular :value="60"></v-progress-circular>
 
-    <v-progress-circular v-bind:value="80"></v-progress-circular>
+    <v-progress-circular :value="80"></v-progress-circular>
 
-    <v-progress-circular v-bind:value="100"></v-progress-circular>
+    <v-progress-circular :value="100"></v-progress-circular>
   </div>
 </template>
 

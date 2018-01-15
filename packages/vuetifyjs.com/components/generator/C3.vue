@@ -4,7 +4,7 @@
     class="grey lighten-3"
   >
     <v-toolbar dark color="primary" flat extended>
-      <v-toolbar-side-icon></v-toolbar-side-icon>
+      <v-toolbar-side-icon/>
 
     </v-toolbar>
     <v-layout row>
@@ -12,7 +12,7 @@
         <v-card class="card--flex-toolbar">
           <v-toolbar card color="white" prominent>
             <v-toolbar-title class="body-2 grey--text">Title</v-toolbar-title>
-            <v-spacer></v-spacer>
+            <v-spacer/>
             <v-btn icon>
               <v-icon>search</v-icon>
             </v-btn>
@@ -20,10 +20,10 @@
               <v-icon>more_vert</v-icon>
             </v-btn>
           </v-toolbar>
-          <v-divider></v-divider>
-          <v-card-text style="height: 200px;"></v-card-text>
+          <v-divider/>
+          <v-card-text style="height: 200px;"/>
           <v-card-actions>
-            <v-spacer></v-spacer>
+            <v-spacer/>
             <v-btn flat color="accent">click me</v-btn>
           </v-card-actions>
         </v-card>

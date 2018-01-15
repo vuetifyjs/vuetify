@@ -1,23 +1,23 @@
 <template>
   <v-card class="e4">
-    <v-card-media height="300px" v-bind:style="{ background: `rgb(${red}, ${green}, ${blue})` }"></v-card-media>
+    <v-card-media height="300px" :style="{ background: `rgb(${red}, ${green}, ${blue})` }"></v-card-media>
     <v-card-text>
       <v-container fluid grid-list-md>
         <v-layout row wrap>
           <v-flex xs9>
-            <v-slider label="R" v-bind:max="255" v-model="red"></v-slider>
+            <v-slider label="R" :max="255" v-model="red"></v-slider>
           </v-flex>
           <v-flex xs3>
             <v-text-field v-model="red" type="number"></v-text-field>
           </v-flex>
           <v-flex xs9>
-            <v-slider label="G" v-bind:max="255" v-model="green"></v-slider>
+            <v-slider label="G" :max="255" v-model="green"></v-slider>
           </v-flex>
           <v-flex xs3>
             <v-text-field v-model="green" type="number"></v-text-field>
           </v-flex>
           <v-flex xs9>
-            <v-slider label="B" v-bind:max="255" v-model="blue"></v-slider>
+            <v-slider label="B" :max="255" v-model="blue"></v-slider>
           </v-flex>
           <v-flex xs3>
             <v-text-field v-model="blue" type="number"></v-text-field>

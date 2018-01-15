@@ -52,4 +52,4 @@ export default {
   becomeSponsor: 'Стать спонсором',
   proudlySponsoredBy: 'Patreon спонсоры',
   callout: 'Повысьте эффективность разработки Vue и Material Design'
-};
+}

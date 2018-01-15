@@ -12,10 +12,10 @@
       ></v-text-field>
     </v-card-title>
     <v-data-table
-        :headers="headers"
-        :items="items"
-        :search="search"
-      >
+      :headers="headers"
+      :items="items"
+      :search="search"
+    >
       <template slot="items" slot-scope="props">
         <td>{{ props.item.name }}</td>
         <td class="text-xs-right">{{ props.item.calories }}</td>

@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
-    <v-checkbox v-bind:label="`Checkbox 1: ${ex1.toString()}`" v-model="ex1"></v-checkbox>
-    <v-checkbox v-bind:label="`Checkbox 2: ${ex2.toString()}`" v-model="ex2"></v-checkbox>
+    <v-checkbox :label="`Checkbox 1: ${checkbox1.toString()}`" v-model="checkbox1"></v-checkbox>
+    <v-checkbox :label="`Checkbox 2: ${checkbox2.toString()}`" v-model="checkbox2"></v-checkbox>
   </v-container>
 </template>
 
@@ -9,10 +9,8 @@
   export default {
     data () {
       return {
-        ex1: true,
-        ex2: false,
-        ex3: true,
-        ex4: false,
+        checkbox1: true,
+        checkbox2: false
       }
     }
   }

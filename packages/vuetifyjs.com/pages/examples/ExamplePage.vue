@@ -26,7 +26,7 @@
         /* webpackMode: "lazy-once" */
         `../../examples/${example}.vue`
       ).then(comp => {
-        next(vm => vm.component = comp.default)
+        next(vm => { vm.component = comp.default })
       }).catch(e => {
         next('/404')
       })

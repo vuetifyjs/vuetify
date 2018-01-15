@@ -55,7 +55,7 @@
         { name: 'Complex', href: '/examples/layouts/complex' },
         { name: 'Dark', href: '/examples/layouts/dark', dark: true },
         { name: 'Google Contacts', href: '/examples/layouts/googleContacts' },
-        { name: 'Google Keep', href: '/examples/layouts/googleKeep'},
+        { name: 'Google Keep', href: '/examples/layouts/googleKeep' },
         { name: 'Google Youtube', href: '/examples/layouts/googleYoutube', dark: true }
       ]
     }),

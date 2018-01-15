@@ -15,14 +15,14 @@
             >
               <img
                 src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
-                alt="" 
+                alt=""
                 v-if="message.avatar"
               >
               <v-icon :color="message.color" v-else>{{ message.icon }}</v-icon>
             </v-avatar>
           </v-flex>
           <v-flex sm5 md3 hidden-xs-only>
-            <strong v-html="message.name"></strong>
+            <strong v-html="message.name"/>
             <span class="grey--text" v-if="message.total">&nbsp;({{ message.total }})</span>
           </v-flex>
           <v-flex no-wrap xs5 sm3>
@@ -33,7 +33,7 @@
               class="ml-0"
               v-if="message.new"
             >{{ message.new }} new</v-chip>
-            <strong v-html="message.title"></strong>
+            <strong v-html="message.title"/>
           </v-flex>
           <v-flex
             class="grey--text"

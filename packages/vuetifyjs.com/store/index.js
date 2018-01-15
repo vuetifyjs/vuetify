@@ -20,22 +20,22 @@ export function createStore () {
     actions: {},
 
     mutations: {
-      ['app/STATELESS'] (state, payload) {
+      'app/STATELESS' (state, payload) {
         state.stateless = payload
       },
-      ['app/DRAWER'] (state, payload) {
+      'app/DRAWER' (state, payload) {
         state.appDrawer = payload
       },
-      ['app/DRAWER_TOGGLE'] (state) {
+      'app/DRAWER_TOGGLE' (state) {
         state.appDrawer = !state.appDrawer
       },
-      ['app/RELEASES'] (state, payload) {
+      'app/RELEASES' (state, payload) {
         state.releases = payload
       },
-      ['app/LOAD_LANG'] (state, payload) {
+      'app/LOAD_LANG' (state, payload) {
         state.loadedLangs.push(payload)
       },
-      ['app/FULLSCREEN'] (state, payload) {
+      'app/FULLSCREEN' (state, payload) {
         state.isFullscreen = payload
         state.stateless = payload
         state.appDrawer = !payload && null

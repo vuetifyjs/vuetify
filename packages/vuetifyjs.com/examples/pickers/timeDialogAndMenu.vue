@@ -57,7 +57,7 @@
       return {
         time: null,
         menu2: false,
-        modal2: false,
+        modal2: false
       }
     }
   }

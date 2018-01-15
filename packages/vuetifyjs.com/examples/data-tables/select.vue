@@ -1,8 +1,8 @@
 <template>
   <v-data-table
-    v-bind:headers="headers"
-    v-bind:items="items"
-    v-bind:search="search"
+    :headers="headers"
+    :items="items"
+    :search="search"
     v-model="selected"
     item-key="name"
     select-all

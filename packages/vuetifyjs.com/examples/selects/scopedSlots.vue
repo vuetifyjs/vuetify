@@ -7,7 +7,7 @@
       <v-flex xs12 sm6>
         <v-select
           label="Select"
-          v-bind:items="people"
+          :items="people"
           v-model="e11"
           item-text="name"
           item-value="name"
@@ -36,7 +36,7 @@
             </template>
             <template v-else>
               <v-list-tile-avatar>
-                <img v-bind:src="data.item.avatar"/>
+                <img :src="data.item.avatar">
               </v-list-tile-avatar>
               <v-list-tile-content>
                 <v-list-tile-title v-html="data.item.name"></v-list-tile-title>
@@ -64,13 +64,13 @@
       return {
         e11: [],
         people: [
-          { header: 'Group 1'},
+          { header: 'Group 1' },
           { name: 'Sandra Adams', group: 'Group 1', avatar: srcs[1] },
           { name: 'Ali Connors', group: 'Group 1', avatar: srcs[2] },
           { name: 'Trevor Hansen', group: 'Group 1', avatar: srcs[3] },
           { name: 'Tucker Smith', group: 'Group 1', avatar: srcs[2] },
           { divider: true },
-          { header: 'Group 2'},
+          { header: 'Group 2' },
           { name: 'Britta Holt', group: 'Group 2', avatar: srcs[4] },
           { name: 'Jane Smith ', group: 'Group 2', avatar: srcs[5] },
           { name: 'John Smith', group: 'Group 2', avatar: srcs[1] },
