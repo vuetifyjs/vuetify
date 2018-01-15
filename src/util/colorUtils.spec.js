@@ -16,7 +16,6 @@ test('colorToInt', () => {
     expect(colorToInt(0xabcdef)).toBe(0xabcdef)
   })
 
-  // TODO: toHaveBeenWarned only seems to work once
   it('should reject invalid formats', async () => {
     expect(() => colorToInt([])).toThrow('Colors can only be numbers or strings, recieved Array instead')
     expect(() => colorToInt(() => {})).toThrow('Colors can only be numbers or strings, recieved Function instead')
