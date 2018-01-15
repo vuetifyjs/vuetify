@@ -353,4 +353,22 @@ test('VTabs', ({ mount, shallow }) => {
 
     expect(wrapper.vm.scrollOffset).toBe(0)
   })
+
+  it('should hide slider', async () => {
+    const wrapper = mount(VTabs, {
+      attachToDocument: true,
+      propsData: { hideSlider: true },
+      slots: {
+        default: [{
+          name: 'v-tab',
+          render: h => h(VTab)
+        }]
+      }
+    })
+
+    await ssrBootable()
+
+    const slider = wrapper.find('.tabs__slider')
+    expect(slider).toHaveLength(0)
+  })
 })
