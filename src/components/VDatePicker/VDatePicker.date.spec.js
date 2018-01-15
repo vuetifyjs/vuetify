@@ -503,4 +503,29 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     expect(icons[0].element.textContent).toBe('block')
     expect(icons[1].element.textContent).toBe('check')
   })
+
+  it('should emit update:pickerDate event when tableDate changes', async () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: '2017-09'
+      }
+    })
+
+    const pickerDate = jest.fn()
+    wrapper.vm.$on('update:pickerDate', pickerDate)
+    wrapper.vm.tableDate = '2013-11'
+    await wrapper.vm.$nextTick()
+    expect(pickerDate).toBeCalledWith('2013-11')
+  })
+
+  it('should set tableDate to pickerDate if provided', async () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: '2017-09',
+        pickerDate: '2013-11'
+      }
+    })
+
+    expect(wrapper.vm.tableDate).toBe('2013-11')
+  })
 })

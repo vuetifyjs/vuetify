@@ -40,9 +40,15 @@ export default {
       now,
       originalDate: this.value,
       // tableDate is a string in 'YYYY' / 'YYYY-M' format (leading zero for month is not required)
-      tableDate: this.type === 'month'
-        ? `${now.getFullYear()}`
-        : `${now.getFullYear()}-${now.getMonth() + 1}`
+      tableDate: (() => {
+        if (this.pickerDate) {
+          return this.pickerDate
+        }
+
+        const date = this.value || `${now.getFullYear()}-${now.getMonth() + 1}`
+        const type = this.type === 'date' ? 'month' : 'year'
+        return this.sanitizeDateString(date, type)
+      })()
     }
   },
 
@@ -87,6 +93,7 @@ export default {
       type: Function,
       default: null
     },
+    pickerDate: String,
     prependIcon: {
       type: String,
       default: 'chevron_left'
@@ -182,10 +189,10 @@ export default {
       return this.inputDate.split('-')[0] * 1
     },
     tableMonth () {
-      return this.tableDate.split('-')[1] - 1
+      return (this.pickerDate || this.tableDate).split('-')[1] - 1
     },
     tableYear () {
-      return this.tableDate.split('-')[0] * 1
+      return (this.pickerDate || this.tableDate).split('-')[0] * 1
     },
     formatters () {
       return {
@@ -219,9 +226,21 @@ export default {
       // compare for example '2000-9' and '2000-10'
       const sanitizeType = this.type === 'month' ? 'year' : 'month'
       this.isReversing = this.sanitizeDateString(val, sanitizeType) < this.sanitizeDateString(prev, sanitizeType)
+      this.$emit('update:pickerDate', val)
     },
-    value (val) {
-      val && this.setTableDate()
+    pickerDate (val) {
+      if (val) {
+        this.tableDate = val
+      } else if (this.value && this.type === 'date') {
+        this.tableDate = this.sanitizeDateString(val, 'month')
+      } else if (this.value && this.type === 'month') {
+        this.tableDate = this.sanitizeDateString(val, 'year')
+      }
+    },
+    value () {
+      if (this.value && !this.pickerDate) {
+        this.tableDate = this.type === 'month' ? `${this.year}` : `${this.year}-${pad(this.month + 1)}`
+      }
     },
     type (type) {
       this.activePicker = type.toUpperCase()
@@ -233,14 +252,7 @@ export default {
     }
   },
 
-  created () {
-    this.setTableDate()
-  },
-
   methods: {
-    setTableDate () {
-      this.tableDate = this.type === 'month' ? `${this.year}` : `${this.year}-${pad(this.month + 1)}`
-    },
     save () {
       if (this.originalDate) {
         this.originalDate = this.value
@@ -308,7 +320,7 @@ export default {
           format: this.headerDateFormat,
           locale: this.locale,
           prependIcon: this.prependIcon,
-          value: this.activePicker === 'DATE' ? this.tableDate : `${this.tableYear}`
+          value: this.activePicker === 'DATE' ? `${this.tableYear}-${pad(this.tableMonth + 1)}` : `${this.tableYear}`
         },
         on: {
           toggle: () => this.activePicker = (this.activePicker === 'DATE' ? 'MONTH' : 'YEAR'),
@@ -328,7 +340,7 @@ export default {
           firstDayOfWeek: this.firstDayOfWeek,
           format: this.dayFormat,
           locale: this.locale,
-          tableDate: this.tableDate,
+          tableDate: `${this.tableYear}-${pad(this.tableMonth + 1)}`,
           scrollable: this.scrollable,
           value: this.value
         },
