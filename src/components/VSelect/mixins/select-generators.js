@@ -1,4 +1,3 @@
-import { getObjectValueByPath } from '../../../util/helpers'
 import { consoleWarn } from '../../../util/console'
 
 /**
@@ -254,7 +253,7 @@ export default {
       const active = this.selectedItems.indexOf(item) !== -1
 
       if (typeof disabled === 'undefined') {
-        disabled = getObjectValueByPath(item, this.itemDisabled)
+        disabled = Boolean(this.getDisabled(item))
       }
 
       const data = {
@@ -266,7 +265,7 @@ export default {
           }
         },
         props: {
-          avatar: item === Object(item) && this.itemAvatar in item,
+          avatar: item === Object(item) && this.getAvatar(item),
           ripple: true,
           value: active
         }

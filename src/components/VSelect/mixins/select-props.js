@@ -32,11 +32,11 @@ export default {
       default: () => []
     },
     itemAvatar: {
-      type: String,
+      type: [String, Function],
       default: 'avatar'
     },
     itemDisabled: {
-      type: String,
+      type: [String, Function],
       default: 'disabled'
     },
     itemText: {
