@@ -67,7 +67,7 @@ export default {
         'btn--left': this.left,
         'btn--loader': this.loading,
         'btn--outline': this.outline,
-        'btn--depressed': this.flat ? this.outline : this.depressed,
+        'btn--depressed': (this.depressed && !this.flat) || this.outline,
         'btn--right': this.right,
         'btn--round': this.round,
         'btn--router': this.to,
