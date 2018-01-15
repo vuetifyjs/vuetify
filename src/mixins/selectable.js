@@ -1,6 +1,6 @@
 import Colorable from './colorable'
 import Input from './input'
-import {looseEqual} from "../util/helpers"
+import { looseEqual } from "../util/helpers"
 
 export default {
   name: 'selectable',
@@ -35,15 +35,14 @@ export default {
     isActive () {
       const value = this.value
       const inputValue = this.inputValue
+
       if (this.multiple) {
-        if (!Array.isArray(inputValue)) {
-          return false
-        }
+        if (!Array.isArray(inputValue)) return false
+
         for (let i = 0, m = inputValue.length; i < m; i++) {
-          if (this.valueComparator(inputValue[i], value)) {
-            return true
-          }
+          if (this.valueComparator(inputValue[i], value)) return true
         }
+
         return false
       }
 
@@ -82,12 +81,15 @@ export default {
 
       const value = this.value
       let input = this.inputValue
+
       if (this.multiple) {
         if (!Array.isArray(input)) {
           // Cannot toggle if not an array
           return
         }
+
         let removed = false
+
         for (let i = 0, m = input.length; i < m; i++) {
           if (this.valueComparator(input[i], value)) {
             removed = true
@@ -95,15 +97,20 @@ export default {
             i--; m--
           }
         }
+
         if (!removed) {
           input.push(value)
         }
       }
       else if (this.trueValue || this.falseValue) {
-        input = this.valueComparator(input, this.trueValue) ? this.falseValue : this.trueValue
+        input = this.valueComparator(input, this.trueValue)
+          ? this.falseValue
+          : this.trueValue
       }
       else if (value) {
-        input = this.valueComparator(value, input) ? null : value
+        input = this.valueComparator(value, input)
+          ? null
+          : value
       }
       else {
         input = !input

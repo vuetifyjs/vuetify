@@ -242,10 +242,10 @@ export default {
     },
     getItemKey (item) {
       const key = this.itemKey
-      if (typeof key === 'function') {
-        return key(item)
-      }
-      return getObjectValueByPath(item, key)
+
+      return typeof key === 'function'
+        ? key(item)
+        : getObjectValueByPath(item, key)
     },
     isSelected (item) {
       return this.selected[this.getItemKey(item)]
@@ -313,8 +313,14 @@ export default {
           }
 
           let selected = this.value.slice()
-          if (value) selected.push(item)
-          else selected = selected.filter(i => this.getItemKey(i) !== itemKey)
+
+          if (value) {
+            selected.push(item)
+          }
+          else {
+            selected = selected.filter(i => this.getItemKey(i) !== itemKey)
+          }
+
           this.$emit('input', selected)
         }
       })

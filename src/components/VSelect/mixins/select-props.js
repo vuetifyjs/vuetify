@@ -1,4 +1,4 @@
-import {looseEqual} from "../../../util/helpers"
+import { looseEqual } from "../../../util/helpers"
 
 export default {
   props: {
