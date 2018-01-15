@@ -316,8 +316,7 @@ export default {
 
           if (value) {
             selected.push(item)
-          }
-          else {
+          } else {
             selected = selected.filter(i => this.getItemKey(i) !== itemKey)
           }
 

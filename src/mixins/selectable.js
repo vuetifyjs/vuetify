@@ -101,18 +101,15 @@ export default {
         if (!removed) {
           input.push(value)
         }
-      }
-      else if (this.trueValue || this.falseValue) {
+      } else if (this.trueValue || this.falseValue) {
         input = this.valueComparator(input, this.trueValue)
           ? this.falseValue
           : this.trueValue
-      }
-      else if (value) {
+      } else if (value) {
         input = this.valueComparator(value, input)
           ? null
           : value
-      }
-      else {
+      } else {
         input = !input
       }
 
