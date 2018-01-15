@@ -102,6 +102,7 @@ export function getNestedValue (obj, path) {
     }
     obj = obj[path[i]]
   }
+
   return obj;
 }
 
@@ -137,15 +138,19 @@ export function escapeHTML (str) {
 
 export function looseEqual(a, b) {
     if (a === b) return true
+
     if (a !== Object(a) || b !== Object(b)) {
         // If the values aren't objects, they were already checked for equality
         return false
     }
+
     const props = Object.keys(a)
+
     if (props.length !== Object.keys(b).length) {
         // Different number of props, don't bother to check
         return false
     }
+
     return props.every(p => looseEqual(a[p], b[p]));
 }
 
