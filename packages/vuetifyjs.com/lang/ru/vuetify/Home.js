@@ -20,7 +20,7 @@ export default {
       img: '/static/doc-images/feature3.svg',
       title: 'Яркое сообщество',
       text:
-        'Когда вы столкнётесь с проблемой, вам понадобиться помощь. Vuetify предлагает поддержку чата в нашем растущем сообществе в <a href="https://discordapp.com/invite/s93b7Fv" target="_blank" rel="noopener"> Discord </a>.'
+        'Когда вы столкнётесь с проблемой, вам понадобиться помощь. Vuetify предлагает поддержку чата в нашем растущем сообществе в Discord.'
     }
   ],
   checkFeaturesTitle: 'Все необходимые инструменты',
