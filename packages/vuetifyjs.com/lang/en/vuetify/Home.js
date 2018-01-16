@@ -17,7 +17,7 @@ export default {
     {
       img: '/static/doc-images/feature3.svg',
       title: 'Vibrant Community',
-      text: 'When you run into a roadblock, you need assistance right away. Vuetify offers chat support in our growing community on Discord server.'
+      text: 'When you run into a roadblock, you need assistance right away. Vuetify offers chat support in our growing community on Discord.'
     }
   ],
   checkFeaturesTitle: 'All the Tools You Need',
