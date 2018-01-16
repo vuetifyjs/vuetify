@@ -151,9 +151,10 @@ Object.keys(installedComponents).forEach(key => {
   }
 })
 
-const stream = fs.createWriteStream('dist/api.js')
+function writeApiFile (obj, file) {
+  const stream = fs.createWriteStream(file)
 
-const comment = `/*
+  const comment = `/*
  * THIS FILE HAS BEEN AUTOMATICALLY GENERATED USING THE VUETIFY-HELPER-JSON TOOL.
  *
  * CHANGES MADE TO THIS FILE WILL BE LOST!
@@ -161,9 +162,53 @@ const comment = `/*
 
 `
 
-stream.once('open', () => {
-  stream.write(comment)
-  stream.write('module.exports = ')
-  stream.write(JSON.stringify(components, null, 2))
-  stream.end()
-})
+  stream.once('open', () => {
+    stream.write(comment)
+    stream.write('module.exports = ')
+    stream.write(JSON.stringify(obj, null, 2))
+    stream.end()
+  })
+}
+
+function writeJsonFile (obj, file) {
+  const stream = fs.createWriteStream(file)
+
+  stream.once('open', () => {
+    stream.write(JSON.stringify(obj, null, 2))
+    stream.end()
+  })
+}
+
+
+const tags = Object.keys(components).reduce((t, k) => {
+  t[k] = {
+    attributes: components[k].props.map(p => p.name.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`)),
+    description: ''
+  }
+
+  return t
+}, {})
+
+
+const attributes = Object.keys(components).reduce((attrs, k) => {
+  const tmp = components[k].props.reduce((a, prop) => {
+    let type = prop.type
+    if (Array.isArray(type)) type = type.map(t => t.toLowerCase()).join('|')
+    else type = type.toLowerCase()
+
+    const name = prop.name.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`)
+
+    a[`${k}/${name}`] = {
+      type,
+      description: ''
+    }
+
+    return a
+  }, {})
+
+  return Object.assign(attrs, tmp)
+}, {})
+
+writeJsonFile(tags, 'dist/tags.json')
+writeJsonFile(attributes, 'dist/attributes.json')
+writeApiFile(components, 'dist/api.js')

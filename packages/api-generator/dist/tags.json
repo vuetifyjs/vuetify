@@ -1,0 +1,1434 @@
+{
+  "v-app": {
+    "attributes": [
+      "dark",
+      "id"
+    ],
+    "description": ""
+  },
+  "v-alert": {
+    "attributes": [
+      "color",
+      "dismissible",
+      "icon",
+      "mode",
+      "origin",
+      "outline",
+      "transition",
+      "type",
+      "value"
+    ],
+    "description": ""
+  },
+  "v-avatar": {
+    "attributes": [
+      "color",
+      "size",
+      "tile"
+    ],
+    "description": ""
+  },
+  "v-badge": {
+    "attributes": [
+      "bottom",
+      "color",
+      "left",
+      "mode",
+      "origin",
+      "overlap",
+      "transition",
+      "value"
+    ],
+    "description": ""
+  },
+  "v-bottom-nav": {
+    "attributes": [
+      "absolute",
+      "active",
+      "app",
+      "color",
+      "fixed",
+      "height",
+      "shift",
+      "value"
+    ],
+    "description": ""
+  },
+  "v-bottom-sheet": {
+    "attributes": [
+      "disabled",
+      "full-width",
+      "inset",
+      "lazy",
+      "max-width",
+      "persistent",
+      "value"
+    ],
+    "description": ""
+  },
+  "v-breadcrumbs": {
+    "attributes": [
+      "divider",
+      "justify-center",
+      "justify-end",
+      "large"
+    ],
+    "description": ""
+  },
+  "v-breadcrumbs-item": {
+    "attributes": [
+      "to",
+      "active-class",
+      "append",
+      "disabled",
+      "exact",
+      "exact-active-class",
+      "href",
+      "nuxt",
+      "replace",
+      "ripple",
+      "tag",
+      "target"
+    ],
+    "description": ""
+  },
+  "v-btn": {
+    "attributes": [
+      "right",
+      "color",
+      "append",
+      "block",
+      "active-class",
+      "bottom",
+      "absolute",
+      "light",
+      "to",
+      "replace",
+      "ripple",
+      "tag",
+      "target",
+      "href",
+      "exact-active-class",
+      "fixed",
+      "left",
+      "exact",
+      "small",
+      "dark",
+      "nuxt",
+      "input-value",
+      "disabled",
+      "depressed",
+      "fab",
+      "flat",
+      "icon",
+      "large",
+      "loading",
+      "outline",
+      "round",
+      "top",
+      "type",
+      "value"
+    ],
+    "description": ""
+  },
+  "v-btn-toggle": {
+    "attributes": [
+      "dark",
+      "input-value",
+      "light",
+      "mandatory",
+      "multiple"
+    ],
+    "description": ""
+  },
+  "v-card": {
+    "attributes": [
+      "tag",
+      "color",
+      "append",
+      "active-class",
+      "dark",
+      "exact",
+      "disabled",
+      "light",
+      "to",
+      "replace",
+      "ripple",
+      "href",
+      "target",
+      "exact-active-class",
+      "nuxt",
+      "flat",
+      "height",
+      "hover",
+      "img",
+      "raised",
+      "tile",
+      "width"
+    ],
+    "description": ""
+  },
+  "v-card-media": {
+    "attributes": [
+      "contain",
+      "height",
+      "src"
+    ],
+    "description": ""
+  },
+  "v-card-title": {
+    "attributes": [
+      "primary-title"
+    ],
+    "description": ""
+  },
+  "v-card-actions": {
+    "attributes": [],
+    "description": ""
+  },
+  "v-card-text": {
+    "attributes": [],
+    "description": ""
+  },
+  "v-carousel": {
+    "attributes": [
+      "hide-controls",
+      "lazy",
+      "append-icon",
+      "cycle",
+      "delimiter-icon",
+      "dark",
+      "hide-delimiters",
+      "interval",
+      "light",
+      "prepend-icon",
+      "value"
+    ],
+    "description": ""
+  },
+  "v-carousel-item": {
+    "attributes": [
+      "reverse-transition",
+      "transition"
+    ],
+    "description": ""
+  },
+  "v-checkbox": {
+    "attributes": [
+      "persistent-hint",
+      "indeterminate",
+      "dark",
+      "false-value",
+      "error",
+      "error-messages",
+      "id",
+      "color",
+      "append-icon",
+      "append-icon-cb",
+      "disabled",
+      "hint",
+      "hide-details",
+      "toggle-keys",
+      "label",
+      "input-value",
+      "value",
+      "prepend-icon",
+      "light",
+      "placeholder",
+      "loading",
+      "prepend-icon-cb",
+      "readonly",
+      "required",
+      "ripple",
+      "rules",
+      "tabindex",
+      "true-value",
+      "validate-on-blur"
+    ],
+    "description": ""
+  },
+  "v-chip": {
+    "attributes": [
+      "disabled",
+      "color",
+      "close",
+      "dark",
+      "label",
+      "light",
+      "outline",
+      "selected",
+      "small",
+      "text-color",
+      "value"
+    ],
+    "description": ""
+  },
+  "v-data-iterator": {
+    "attributes": [
+      "search",
+      "content-class",
+      "filter",
+      "dark",
+      "content-props",
+      "content-tag",
+      "custom-sort",
+      "custom-filter",
+      "value",
+      "no-data-text",
+      "expand",
+      "hide-actions",
+      "loading",
+      "light",
+      "must-sort",
+      "disable-initial-sort",
+      "item-key",
+      "items",
+      "no-results-text",
+      "pagination",
+      "rows-per-page-items",
+      "rows-per-page-text",
+      "select-all",
+      "total-items"
+    ],
+    "description": ""
+  },
+  "v-data-table": {
+    "attributes": [
+      "search",
+      "hide-headers",
+      "dark",
+      "header-text",
+      "expand",
+      "hide-actions",
+      "disable-initial-sort",
+      "headers",
+      "custom-sort",
+      "custom-filter",
+      "filter",
+      "items",
+      "no-data-text",
+      "light",
+      "must-sort",
+      "item-key",
+      "loading",
+      "no-results-text",
+      "pagination",
+      "rows-per-page-items",
+      "rows-per-page-text",
+      "select-all",
+      "total-items",
+      "value"
+    ],
+    "description": ""
+  },
+  "v-edit-dialog": {
+    "attributes": [
+      "cancel-text",
+      "large",
+      "lazy",
+      "save-text",
+      "transition"
+    ],
+    "description": ""
+  },
+  "v-table-overflow": {
+    "attributes": [],
+    "description": ""
+  },
+  "v-date-picker": {
+    "attributes": [
+      "first-day-of-week",
+      "color",
+      "append-icon",
+      "autosave",
+      "allowed-dates",
+      "month-format",
+      "no-title",
+      "header-color",
+      "light",
+      "day-format",
+      "events",
+      "event-color",
+      "dark",
+      "header-date-format",
+      "locale",
+      "landscape",
+      "prepend-icon",
+      "readonly",
+      "scrollable",
+      "show-current",
+      "title-date-format",
+      "type",
+      "value",
+      "year-format",
+      "year-icon"
+    ],
+    "description": ""
+  },
+  "v-date-picker-title": {
+    "attributes": [
+      "date",
+      "selecting-year",
+      "year",
+      "year-icon"
+    ],
+    "description": ""
+  },
+  "v-date-picker-header": {
+    "attributes": [
+      "append-icon",
+      "color",
+      "disabled",
+      "format",
+      "locale",
+      "prepend-icon",
+      "value"
+    ],
+    "description": ""
+  },
+  "v-date-picker-date-table": {
+    "attributes": [
+      "scrollable",
+      "color",
+      "allowed-dates",
+      "current",
+      "disabled",
+      "event-color",
+      "events",
+      "first-day-of-week",
+      "format",
+      "locale",
+      "table-date",
+      "value",
+      "weekday-format"
+    ],
+    "description": ""
+  },
+  "v-date-picker-month-table": {
+    "attributes": [
+      "allowed-dates",
+      "color",
+      "current",
+      "disabled",
+      "format",
+      "locale",
+      "scrollable",
+      "table-date",
+      "value"
+    ],
+    "description": ""
+  },
+  "v-date-picker-years": {
+    "attributes": [
+      "color",
+      "format",
+      "locale",
+      "max",
+      "min",
+      "value"
+    ],
+    "description": ""
+  },
+  "v-dialog": {
+    "attributes": [
+      "fullscreen",
+      "lazy",
+      "content-class",
+      "hide-overlay",
+      "full-width",
+      "disabled",
+      "attach",
+      "max-width",
+      "origin",
+      "persistent",
+      "scrollable",
+      "transition",
+      "value",
+      "width"
+    ],
+    "description": ""
+  },
+  "v-divider": {
+    "attributes": [
+      "dark",
+      "inset",
+      "light"
+    ],
+    "description": ""
+  },
+  "v-expansion-panel": {
+    "attributes": [
+      "dark",
+      "expand",
+      "focusable",
+      "inset",
+      "light",
+      "popout"
+    ],
+    "description": ""
+  },
+  "v-expansion-panel-content": {
+    "attributes": [
+      "hide-actions",
+      "lazy",
+      "ripple",
+      "value"
+    ],
+    "description": ""
+  },
+  "v-footer": {
+    "attributes": [
+      "absolute",
+      "app",
+      "color",
+      "dark",
+      "fixed",
+      "height",
+      "inset",
+      "light"
+    ],
+    "description": ""
+  },
+  "v-form": {
+    "attributes": [
+      "lazy-validation",
+      "value"
+    ],
+    "description": ""
+  },
+  "v-content": {
+    "attributes": [
+      "tag"
+    ],
+    "description": ""
+  },
+  "v-container": {
+    "attributes": [
+      "id",
+      "tag",
+      "grid-list-{xs through xl}",
+      "fluid",
+      "align-baseline",
+      "align-center",
+      "align-content-center",
+      "align-content-end",
+      "align-content-space-around",
+      "align-content-space-between",
+      "align-content-start",
+      "align-end",
+      "align-start",
+      "d-{type}",
+      "fill-height",
+      "justify-center",
+      "justify-end",
+      "justify-space-around",
+      "justify-space-between",
+      "justify-start",
+      "reverse",
+      "wrap"
+    ],
+    "description": ""
+  },
+  "v-flex": {
+    "attributes": [
+      "id",
+      "tag",
+      "offset-(size)(0-12)",
+      "order-(size)(0-12)",
+      "(size)(1-12)",
+      "align-baseline",
+      "align-center",
+      "align-content-center",
+      "align-content-end",
+      "align-content-space-around",
+      "align-content-space-between",
+      "align-content-start",
+      "align-end",
+      "align-start",
+      "d-{type}",
+      "fill-height",
+      "justify-center",
+      "justify-end",
+      "justify-space-around",
+      "justify-space-between",
+      "justify-start",
+      "reverse",
+      "wrap"
+    ],
+    "description": ""
+  },
+  "v-layout": {
+    "attributes": [
+      "id",
+      "tag",
+      "row",
+      "column",
+      "align-baseline",
+      "align-center",
+      "align-content-center",
+      "align-content-end",
+      "align-content-space-around",
+      "align-content-space-between",
+      "align-content-start",
+      "align-end",
+      "align-start",
+      "d-{type}",
+      "fill-height",
+      "justify-center",
+      "justify-end",
+      "justify-space-around",
+      "justify-space-between",
+      "justify-start",
+      "reverse",
+      "wrap"
+    ],
+    "description": ""
+  },
+  "v-spacer": {
+    "attributes": [],
+    "description": ""
+  },
+  "v-icon": {
+    "attributes": [
+      "left",
+      "color",
+      "dark",
+      "disabled",
+      "large",
+      "light",
+      "medium",
+      "right",
+      "size",
+      "small",
+      "x-large"
+    ],
+    "description": ""
+  },
+  "v-jumbotron": {
+    "attributes": [
+      "replace",
+      "color",
+      "append",
+      "active-class",
+      "tag",
+      "exact",
+      "dark",
+      "disabled",
+      "exact-active-class",
+      "gradient",
+      "height",
+      "href",
+      "light",
+      "nuxt",
+      "ripple",
+      "src",
+      "target",
+      "to"
+    ],
+    "description": ""
+  },
+  "v-list": {
+    "attributes": [
+      "dark",
+      "dense",
+      "expand",
+      "light",
+      "subheader",
+      "three-line",
+      "two-line"
+    ],
+    "description": ""
+  },
+  "v-list-group": {
+    "attributes": [
+      "active-class",
+      "append-icon",
+      "disabled",
+      "group",
+      "lazy",
+      "no-action",
+      "prepend-icon",
+      "sub-group",
+      "value"
+    ],
+    "description": ""
+  },
+  "v-list-tile": {
+    "attributes": [
+      "nuxt",
+      "color",
+      "append",
+      "avatar",
+      "active-class",
+      "ripple",
+      "exact-active-class",
+      "disabled",
+      "exact",
+      "href",
+      "inactive",
+      "replace",
+      "tag",
+      "target",
+      "to",
+      "value"
+    ],
+    "description": ""
+  },
+  "v-list-tile-action": {
+    "attributes": [],
+    "description": ""
+  },
+  "v-list-tile-action-text": {
+    "attributes": [],
+    "description": ""
+  },
+  "v-list-tile-avatar": {
+    "attributes": [
+      "color",
+      "size"
+    ],
+    "description": ""
+  },
+  "v-list-tile-content": {
+    "attributes": [],
+    "description": ""
+  },
+  "v-list-tile-sub-title": {
+    "attributes": [],
+    "description": ""
+  },
+  "v-list-tile-title": {
+    "attributes": [],
+    "description": ""
+  },
+  "v-menu": {
+    "attributes": [
+      "nudge-right",
+      "open-delay",
+      "lazy",
+      "attach",
+      "content-class",
+      "absolute",
+      "bottom",
+      "fixed",
+      "left",
+      "offset-y",
+      "offset-x",
+      "dark",
+      "light",
+      "activator",
+      "allow-overflow",
+      "max-width",
+      "min-width",
+      "nudge-bottom",
+      "nudge-left",
+      "close-delay",
+      "nudge-top",
+      "nudge-width",
+      "offset-overflow",
+      "max-height",
+      "full-width",
+      "disabled",
+      "close-on-content-click",
+      "auto",
+      "close-on-click",
+      "open-on-click",
+      "open-on-hover",
+      "origin",
+      "position-x",
+      "position-y",
+      "right",
+      "top",
+      "transition",
+      "value",
+      "z-index"
+    ],
+    "description": ""
+  },
+  "v-navigation-drawer": {
+    "attributes": [
+      "floating",
+      "absolute",
+      "mini-variant",
+      "app",
+      "mini-variant-width",
+      "dark",
+      "clipped",
+      "permanent",
+      "disable-route-watcher",
+      "disable-resize-watcher",
+      "right",
+      "fixed",
+      "height",
+      "hide-overlay",
+      "light",
+      "mobile-break-point",
+      "stateless",
+      "temporary",
+      "touchless",
+      "value",
+      "width"
+    ],
+    "description": ""
+  },
+  "v-pagination": {
+    "attributes": [
+      "circle",
+      "color",
+      "disabled",
+      "length",
+      "next-icon",
+      "prev-icon",
+      "total-visible",
+      "value"
+    ],
+    "description": ""
+  },
+  "v-parallax": {
+    "attributes": [
+      "alt",
+      "height",
+      "src"
+    ],
+    "description": ""
+  },
+  "v-picker": {
+    "attributes": [
+      "color",
+      "dark",
+      "landscape",
+      "light",
+      "transition"
+    ],
+    "description": ""
+  },
+  "v-progress-circular": {
+    "attributes": [
+      "button",
+      "color",
+      "indeterminate",
+      "rotate",
+      "size",
+      "value",
+      "width"
+    ],
+    "description": ""
+  },
+  "v-progress-linear": {
+    "attributes": [
+      "active",
+      "background-color",
+      "background-opacity",
+      "buffer-value",
+      "color",
+      "height",
+      "indeterminate",
+      "query",
+      "value"
+    ],
+    "description": ""
+  },
+  "v-radio-group": {
+    "attributes": [
+      "persistent-hint",
+      "loading",
+      "light",
+      "error",
+      "error-messages",
+      "input-value",
+      "column",
+      "append-icon",
+      "append-icon-cb",
+      "disabled",
+      "hint",
+      "hide-details",
+      "label",
+      "dark",
+      "toggle-keys",
+      "placeholder",
+      "name",
+      "mandatory",
+      "prepend-icon",
+      "prepend-icon-cb",
+      "readonly",
+      "required",
+      "row",
+      "rules",
+      "tabindex",
+      "validate-on-blur",
+      "value"
+    ],
+    "description": ""
+  },
+  "v-radio": {
+    "attributes": [
+      "color",
+      "dark",
+      "disabled",
+      "label",
+      "light",
+      "ripple",
+      "value"
+    ],
+    "description": ""
+  },
+  "v-select": {
+    "attributes": [
+      "browser-autocomplete",
+      "filter",
+      "editable",
+      "dense",
+      "dark",
+      "deletable-chips",
+      "error",
+      "error-messages",
+      "debounce-search",
+      "content-class",
+      "append-icon",
+      "append-icon-cb",
+      "disabled",
+      "combobox",
+      "clearable",
+      "chips",
+      "cache-items",
+      "color",
+      "autocomplete",
+      "auto",
+      "attach",
+      "dont-fill-mask-blanks",
+      "items",
+      "solo",
+      "flat",
+      "required",
+      "mask",
+      "return-masked-value",
+      "readonly",
+      "prepend-icon-cb",
+      "prepend-icon",
+      "placeholder",
+      "persistent-hint",
+      "label",
+      "hide-details",
+      "hint",
+      "single-line",
+      "rules",
+      "light",
+      "loading",
+      "no-data-text",
+      "hide-selected",
+      "segmented",
+      "item-avatar",
+      "item-disabled",
+      "item-text",
+      "item-value",
+      "max-height",
+      "min-width",
+      "multiple",
+      "multi-line",
+      "open-on-clear",
+      "overflow",
+      "return-object",
+      "search-input",
+      "solo-inverted",
+      "tabindex",
+      "tags",
+      "toggle-keys",
+      "validate-on-blur",
+      "value",
+      "value-comparator"
+    ],
+    "description": ""
+  },
+  "v-slider": {
+    "attributes": [
+      "placeholder",
+      "color",
+      "append-icon-cb",
+      "append-icon",
+      "prepend-icon-cb",
+      "error",
+      "disabled",
+      "dark",
+      "required",
+      "light",
+      "error-messages",
+      "hint",
+      "hide-details",
+      "label",
+      "value",
+      "persistent-hint",
+      "max",
+      "min",
+      "loading",
+      "prepend-icon",
+      "track-color",
+      "toggle-keys",
+      "readonly",
+      "rules",
+      "tabindex",
+      "step",
+      "ticks",
+      "thumb-color",
+      "thumb-label",
+      "validate-on-blur"
+    ],
+    "description": ""
+  },
+  "v-snackbar": {
+    "attributes": [
+      "absolute",
+      "bottom",
+      "color",
+      "left",
+      "multi-line",
+      "right",
+      "timeout",
+      "top",
+      "value",
+      "vertical"
+    ],
+    "description": ""
+  },
+  "v-speed-dial": {
+    "attributes": [
+      "value",
+      "absolute",
+      "bottom",
+      "direction",
+      "fixed",
+      "left",
+      "mode",
+      "open-on-hover",
+      "origin",
+      "right",
+      "top",
+      "transition"
+    ],
+    "description": ""
+  },
+  "v-stepper": {
+    "attributes": [
+      "alt-labels",
+      "dark",
+      "light",
+      "non-linear",
+      "value",
+      "vertical"
+    ],
+    "description": ""
+  },
+  "v-stepper-content": {
+    "attributes": [
+      "step"
+    ],
+    "description": ""
+  },
+  "v-stepper-step": {
+    "attributes": [
+      "complete",
+      "complete-icon",
+      "edit-icon",
+      "editable",
+      "error-icon",
+      "rules",
+      "step"
+    ],
+    "description": ""
+  },
+  "v-stepper-header": {
+    "attributes": [],
+    "description": ""
+  },
+  "v-stepper-items": {
+    "attributes": [],
+    "description": ""
+  },
+  "v-subheader": {
+    "attributes": [
+      "dark",
+      "inset",
+      "light"
+    ],
+    "description": ""
+  },
+  "v-switch": {
+    "attributes": [
+      "persistent-hint",
+      "ripple",
+      "dark",
+      "light",
+      "error",
+      "error-messages",
+      "false-value",
+      "input-value",
+      "append-icon",
+      "append-icon-cb",
+      "disabled",
+      "hint",
+      "hide-details",
+      "label",
+      "loading",
+      "placeholder",
+      "prepend-icon",
+      "prepend-icon-cb",
+      "readonly",
+      "required",
+      "id",
+      "color",
+      "rules",
+      "tabindex",
+      "toggle-keys",
+      "true-value",
+      "validate-on-blur",
+      "value"
+    ],
+    "description": ""
+  },
+  "v-system-bar": {
+    "attributes": [
+      "absolute",
+      "app",
+      "color",
+      "dark",
+      "fixed",
+      "height",
+      "light",
+      "lights-out",
+      "status",
+      "window"
+    ],
+    "description": ""
+  },
+  "v-tabs": {
+    "attributes": [
+      "icons-and-text",
+      "color",
+      "append-icon",
+      "centered",
+      "align-with-title",
+      "right",
+      "grow",
+      "dark",
+      "fixed-tabs",
+      "height",
+      "hide-slider",
+      "light",
+      "mobile-break-point",
+      "prepend-icon",
+      "show-arrows",
+      "slider-color",
+      "value"
+    ],
+    "description": ""
+  },
+  "v-tab": {
+    "attributes": [
+      "to",
+      "active-class",
+      "append",
+      "disabled",
+      "exact",
+      "exact-active-class",
+      "href",
+      "nuxt",
+      "replace",
+      "ripple",
+      "tag",
+      "target"
+    ],
+    "description": ""
+  },
+  "v-tabs-items": {
+    "attributes": [
+      "cycle",
+      "touchless",
+      "value"
+    ],
+    "description": ""
+  },
+  "v-tab-item": {
+    "attributes": [
+      "id",
+      "lazy",
+      "reverse-transition",
+      "transition"
+    ],
+    "description": ""
+  },
+  "v-tabs-slider": {
+    "attributes": [
+      "color"
+    ],
+    "description": ""
+  },
+  "v-text-field": {
+    "attributes": [
+      "toggle-keys",
+      "color",
+      "clearable",
+      "box",
+      "auto-grow",
+      "autofocus",
+      "append-icon-cb",
+      "append-icon",
+      "return-masked-value",
+      "type",
+      "disabled",
+      "hint",
+      "hide-details",
+      "label",
+      "persistent-hint",
+      "placeholder",
+      "prepend-icon",
+      "prepend-icon-cb",
+      "readonly",
+      "required",
+      "tabindex",
+      "loading",
+      "textarea",
+      "dont-fill-mask-blanks",
+      "mask",
+      "rules",
+      "flat",
+      "solo-inverted",
+      "solo",
+      "error-messages",
+      "error",
+      "light",
+      "dark",
+      "counter",
+      "full-width",
+      "multi-line",
+      "prefix",
+      "rows",
+      "single-line",
+      "suffix",
+      "validate-on-blur",
+      "value"
+    ],
+    "description": ""
+  },
+  "v-time-picker": {
+    "attributes": [
+      "allowed-hours",
+      "color",
+      "autosave",
+      "allowed-minutes",
+      "dark",
+      "format",
+      "header-color",
+      "landscape",
+      "light",
+      "no-title",
+      "scrollable",
+      "value"
+    ],
+    "description": ""
+  },
+  "v-time-picker-clock": {
+    "attributes": [
+      "max",
+      "color",
+      "allowed-values",
+      "dark",
+      "double",
+      "format",
+      "light",
+      "min",
+      "rotate",
+      "scrollable",
+      "size",
+      "step",
+      "value"
+    ],
+    "description": ""
+  },
+  "v-time-picker-title": {
+    "attributes": [
+      "ampm",
+      "selecting-hour",
+      "value"
+    ],
+    "description": ""
+  },
+  "v-toolbar": {
+    "attributes": [
+      "extension-height",
+      "absolute",
+      "flat",
+      "app",
+      "floating",
+      "dark",
+      "card",
+      "clipped-left",
+      "clipped-right",
+      "color",
+      "manual-scroll",
+      "extended",
+      "dense",
+      "fixed",
+      "height",
+      "inverted-scroll",
+      "light",
+      "prominent",
+      "scroll-off-screen",
+      "scroll-target",
+      "scroll-threshold",
+      "tabs"
+    ],
+    "description": ""
+  },
+  "v-toolbar-items": {
+    "attributes": [],
+    "description": ""
+  },
+  "v-toolbar-title": {
+    "attributes": [],
+    "description": ""
+  },
+  "v-toolbar-side-icon": {
+    "attributes": [],
+    "description": ""
+  },
+  "v-tooltip": {
+    "attributes": [
+      "max-width",
+      "color",
+      "close-delay",
+      "allow-overflow",
+      "attach",
+      "activator",
+      "absolute",
+      "bottom",
+      "nudge-right",
+      "fixed",
+      "disabled",
+      "debounce",
+      "dark",
+      "content-class",
+      "offset-overflow",
+      "light",
+      "lazy",
+      "left",
+      "position-y",
+      "nudge-bottom",
+      "min-width",
+      "z-index",
+      "nudge-top",
+      "nudge-left",
+      "nudge-width",
+      "open-delay",
+      "position-x",
+      "right",
+      "tag",
+      "top",
+      "transition",
+      "value"
+    ],
+    "description": ""
+  },
+  "v-bottom-sheet-transition": {
+    "attributes": [
+      "origin"
+    ],
+    "description": ""
+  },
+  "v-carousel-transition": {
+    "attributes": [
+      "origin"
+    ],
+    "description": ""
+  },
+  "v-carousel-reverse-transition": {
+    "attributes": [
+      "origin"
+    ],
+    "description": ""
+  },
+  "v-dialog-transition": {
+    "attributes": [
+      "origin"
+    ],
+    "description": ""
+  },
+  "v-dialog-bottom-transition": {
+    "attributes": [
+      "origin"
+    ],
+    "description": ""
+  },
+  "v-fab-transition": {
+    "attributes": [
+      "origin"
+    ],
+    "description": ""
+  },
+  "v-fade-transition": {
+    "attributes": [
+      "origin"
+    ],
+    "description": ""
+  },
+  "v-menu-transition": {
+    "attributes": [
+      "origin"
+    ],
+    "description": ""
+  },
+  "v-scale-transition": {
+    "attributes": [
+      "origin"
+    ],
+    "description": ""
+  },
+  "v-slide-x-transition": {
+    "attributes": [
+      "origin"
+    ],
+    "description": ""
+  },
+  "v-slide-x-reverse-transition": {
+    "attributes": [
+      "origin"
+    ],
+    "description": ""
+  },
+  "v-slide-y-transition": {
+    "attributes": [
+      "origin"
+    ],
+    "description": ""
+  },
+  "v-slide-y-reverse-transition": {
+    "attributes": [
+      "origin"
+    ],
+    "description": ""
+  },
+  "v-tab-reverse-transition": {
+    "attributes": [
+      "origin"
+    ],
+    "description": ""
+  },
+  "v-tab-transition": {
+    "attributes": [
+      "origin"
+    ],
+    "description": ""
+  },
+  "v-expand-transition": {
+    "attributes": [
+      "css",
+      "mode"
+    ],
+    "description": ""
+  },
+  "v-row-expand-transition": {
+    "attributes": [
+      "css",
+      "mode"
+    ],
+    "description": ""
+  }
+}
