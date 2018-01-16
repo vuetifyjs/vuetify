@@ -391,4 +391,46 @@ test('VTimePicker.js', ({ mount }) => {
     const wrapper = mount(component)
     expect(wrapper.find('.picker__actions .scoped-slot')).toHaveLength(1)
   })
+
+  it('should calculate allowed minute/hour callback', async () => {
+    const wrapper = mount(VTimePicker, {
+      propsData: {
+        value: '10:00',
+        allowedMinutes: value => value % 5 === 0,
+        allowedHours: value => value !== 11,
+        min: '9:31',
+        max: '12:30'
+      }
+    })
+
+    expect(wrapper.vm.isAllowedHourCb(8)).toBe(false)
+    expect(wrapper.vm.isAllowedHourCb(9)).toBe(true)
+    expect(wrapper.vm.isAllowedHourCb(10)).toBe(true)
+    expect(wrapper.vm.isAllowedHourCb(11)).toBe(false)
+    expect(wrapper.vm.isAllowedHourCb(12)).toBe(true)
+    expect(wrapper.vm.isAllowedHourCb(13)).toBe(false)
+
+    wrapper.vm.hour = 8
+    expect(wrapper.vm.isAllowedMinuteCb(30)).toBe(false)
+
+    wrapper.vm.hour = 9
+    expect(wrapper.vm.isAllowedMinuteCb(30)).toBe(false)
+    expect(wrapper.vm.isAllowedMinuteCb(31)).toBe(false)
+    expect(wrapper.vm.isAllowedMinuteCb(35)).toBe(true)
+
+    wrapper.vm.hour = 10
+    expect(wrapper.vm.isAllowedMinuteCb(30)).toBe(true)
+    expect(wrapper.vm.isAllowedMinuteCb(31)).toBe(false)
+    expect(wrapper.vm.isAllowedMinuteCb(35)).toBe(true)
+
+    wrapper.vm.hour = 11
+    expect(wrapper.vm.isAllowedMinuteCb(30)).toBe(false)
+    expect(wrapper.vm.isAllowedMinuteCb(31)).toBe(false)
+    expect(wrapper.vm.isAllowedMinuteCb(35)).toBe(false)
+
+    wrapper.vm.hour = 12
+    expect(wrapper.vm.isAllowedMinuteCb(30)).toBe(true)
+    expect(wrapper.vm.isAllowedMinuteCb(31)).toBe(false)
+    expect(wrapper.vm.isAllowedMinuteCb(35)).toBe(false)
+  })
 })

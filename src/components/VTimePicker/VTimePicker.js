@@ -54,11 +54,42 @@ export default {
         return ['ampm', '24hr'].includes(val)
       }
     },
+    min: String,
+    max: String,
     scrollable: Boolean,
     value: null
   },
 
   computed: {
+    isAllowedHourCb () {
+      if (!this.min && !this.max) return this.allowedHours
+
+      const minHour = this.min ? this.min.split(':')[0] : 0
+      const maxHour = this.max ? this.max.split(':')[0] : 23
+
+      return val => {
+        return val >= minHour * 1
+          && val <= maxHour * 1
+          && isValueAllowed(val, this.allowedHours)
+      }
+    },
+    isAllowedMinuteCb () {
+      if (!this.min && !this.max) return this.allowedHours
+
+      const [minHour, minMinute] = this.min ? this.min.split(':') : [0, 0]
+      const [maxHour, maxMinute] = this.max ? this.max.split(':') : [23, 59]
+      const minTime = minHour * 60 + minMinute * 1
+      const maxTime = maxHour * 60 + maxMinute * 1
+      const isHourAllowed = isValueAllowed(this.hour, this.allowedHours)
+
+      return val => {
+        const time = 60 * this.hour + val
+        return time >= minTime
+          && time <= maxTime
+          && isHourAllowed
+          && isValueAllowed(val, this.allowedMinutes)
+      }
+    },
     hour: {
       get () {
         return this.inputHour == null ? this.firstAllowed('hour', new Date().getHours()) : this.inputHour
@@ -164,7 +195,7 @@ export default {
       }
     },
     firstAllowed (type, value) {
-      const allowedFn = type === 'hour' ? this.allowedHours : this.allowedMinutes
+      const allowedFn = type === 'hour' ? this.isAllowedHourCb : this.isAllowedMinuteCb
       if (!allowedFn) return value
 
       const range = type === 'minute'
@@ -180,7 +211,7 @@ export default {
     genClock () {
       return this.$createElement('v-time-picker-clock', {
         props: {
-          allowedValues: this.selectingHour ? this.allowedHours : this.allowedMinutes,
+          allowedValues: this.selectingHour ? this.isAllowedHourCb : this.isAllowedMinuteCb,
           color: this.color,
           dark: this.dark,
           double: this.selectingHour && !this.isAmPm,
