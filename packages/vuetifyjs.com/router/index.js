@@ -44,11 +44,11 @@ export function createRouter () {
     autoTracking: {
       page: process.env.NODE_ENV !== 'development'
     },
-    debug: process.env.DEBUG && {
+    debug: process.env.DEBUG ? {
       enabled: true,
       trace: false,
       sendHitTask: true
-    }
+    } : false
   })
 
   return router
