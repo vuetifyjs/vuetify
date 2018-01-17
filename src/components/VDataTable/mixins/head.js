@@ -100,7 +100,7 @@ export default {
           small: true
         }
       }, 'arrow_upward')
-      if (header.align && header.align === 'left') {
+      if (!header.align || header.align === 'left') {
         children.push(icon)
       } else {
         children.unshift(icon)

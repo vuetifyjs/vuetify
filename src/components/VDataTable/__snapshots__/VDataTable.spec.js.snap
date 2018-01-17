@@ -14,13 +14,13 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
               tabindex="0"
               class="column sortable active asc text-xs-left a-string"
           >
+            First Column
             <i aria-hidden="true"
                class="icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
             </i>
-            First Column
           </th>
           <th role="columnheader"
               scope="col"
@@ -37,13 +37,13 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
               tabindex="0"
               class="column sortable text-xs-left an array"
           >
+            Third Column
             <i aria-hidden="true"
                class="icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
             </i>
-            Third Column
           </th>
         </tr>
         <tr class="datatable__progress">
@@ -207,13 +207,13 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
               tabindex="0"
               class="column sortable active asc text-xs-left a-string"
           >
+            First Column
             <i aria-hidden="true"
                class="icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
             </i>
-            First Column
           </th>
           <th role="columnheader"
               scope="col"
@@ -230,13 +230,13 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
               tabindex="0"
               class="column sortable text-xs-left an array"
           >
+            Third Column
             <i aria-hidden="true"
                class="icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
             </i>
-            Third Column
           </th>
         </tr>
         <tr class="datatable__progress">
@@ -400,13 +400,13 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
               tabindex="0"
               class="column sortable active asc text-xs-left a-string"
           >
+            First Column
             <i aria-hidden="true"
                class="icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
             </i>
-            First Column
           </th>
           <th role="columnheader"
               scope="col"
@@ -423,13 +423,13 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
               tabindex="0"
               class="column sortable text-xs-left an array"
           >
+            Third Column
             <i aria-hidden="true"
                class="icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
             </i>
-            Third Column
           </th>
         </tr>
         <tr class="datatable__progress">
@@ -595,13 +595,13 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
               tabindex="0"
               class="column sortable active asc text-xs-left a-string"
           >
+            First Column
             <i aria-hidden="true"
                class="icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
             </i>
-            First Column
           </th>
           <th role="columnheader"
               scope="col"
@@ -618,13 +618,13 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
               tabindex="0"
               class="column sortable text-xs-left an array"
           >
+            Third Column
             <i aria-hidden="true"
                class="icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
             </i>
-            Third Column
           </th>
         </tr>
         <tr class="datatable__progress">
