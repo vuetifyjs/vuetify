@@ -195,7 +195,7 @@ export default {
       return this.min ? this.sanitizeDateString(this.min, 'year') : null
     },
     maxYear () {
-      return this.min ? this.sanitizeDateString(this.max, 'year') : null
+      return this.max ? this.sanitizeDateString(this.max, 'year') : null
     },
     formatters () {
       return {
