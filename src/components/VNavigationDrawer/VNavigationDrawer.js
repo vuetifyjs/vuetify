@@ -240,7 +240,7 @@ export default {
       }
     },
     closeConditional () {
-      return this.reactsToClick
+      return this.isActive && this.reactsToClick
     },
     genDirectives () {
       const directives = [{
