@@ -29,9 +29,9 @@
           v-tabs-slider
           v-tabs-item(ripple href="#simple") Simple HTML
             v-icon landscape
-          v-tabs-item(ripple href="#webpack") Webpack
+          v-tabs-item(ripple href="#webpack-simple") Webpack Simple
             v-icon web
-          v-tabs-item(ripple href="#webpack-advanced") Webpack Advanced
+          v-tabs-item(ripple href="#webpack") Webpack
             v-icon layers
           v-tabs-item(ripple href="#webpack-ssr") Webpack SSR
             v-icon cloud_circle

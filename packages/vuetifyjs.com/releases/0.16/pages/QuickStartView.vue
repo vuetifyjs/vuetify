@@ -225,14 +225,14 @@
           },
           {
             icon: 'web',
-            title: 'Webpack',
-            init: 'webpack',
+            title: 'Webpack Simple',
+            init: 'webpack-simple',
             desc: 'This template is intended for users who are already familiar with Vue/Webpack. It contains a very simple webpack setup and is targetted at developers creating prototype or basic applications.'
           },
           {
             icon: 'layers',
-            title: 'Webpack Advanced',
-            init: 'webpack-advanced',
+            title: 'Webpack',
+            init: 'webpack',
             desc: 'This template is intended for users who are looking for out of the box linting and unit testing.'
           },
           {
