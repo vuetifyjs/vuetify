@@ -45,7 +45,7 @@ export default {
         name: 'click-outside',
         value: () => (this.isActive = false),
         args: {
-          closeConditional: () => this.closeOnClick,
+          closeConditional: this.closeConditional,
           include: () => [this.$el, ...this.getOpenDependentElements()]
         }
       }] : []
