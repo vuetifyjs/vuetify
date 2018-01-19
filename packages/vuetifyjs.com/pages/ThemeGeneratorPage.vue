@@ -123,7 +123,7 @@
             e[k] = this.findName(this.theme[k])
             return e
           }, {})
-          let str = `import colors from 'vuetify/src/util/colors'\n\n${JSON.stringify(names, null, 2)}`
+          let str = `import colors from 'vuetify/es5/util/colors'\n\n${JSON.stringify(names, null, 2)}`
           str = str.replace(/"(.*)":\s"(.*)"/g, '$1: colors.$2')
 
           return str
