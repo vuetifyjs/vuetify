@@ -8,7 +8,6 @@ import Picker from '../../mixins/picker'
 // Utils
 import { createRange } from '../../util/helpers'
 import pad from '../VDatePicker/util/pad'
-import isValueAllowed from '../../util/isValueAllowed'
 
 const rangeHours24 = createRange(24)
 const rangeHours12am = createRange(12)
@@ -38,14 +37,8 @@ export default {
   },
 
   props: {
-    allowedHours: {
-      type: [Array, Object, Function],
-      default: () => (null)
-    },
-    allowedMinutes: {
-      type: [Array, Object, Function],
-      default: () => (null)
-    },
+    allowedHours: Function,
+    allowedMinutes: Function,
     autosave: Boolean,
     format: {
       type: String,
@@ -70,7 +63,7 @@ export default {
       return val => {
         return val >= minHour * 1
           && val <= maxHour * 1
-          && isValueAllowed(val, this.allowedHours)
+          && (!this.allowedHours || this.allowedHours(val))
       }
     },
     isAllowedMinuteCb () {
@@ -80,14 +73,14 @@ export default {
       const [maxHour, maxMinute] = this.max ? this.max.split(':') : [23, 59]
       const minTime = minHour * 60 + minMinute * 1
       const maxTime = maxHour * 60 + maxMinute * 1
-      const isHourAllowed = isValueAllowed(this.hour, this.allowedHours)
+      const isHourAllowed = !this.allowedHours || this.allowedHours(this.hour)
 
       return val => {
         const time = 60 * this.hour + val
         return time >= minTime
           && time <= maxTime
           && isHourAllowed
-          && isValueAllowed(val, this.allowedMinutes)
+          && (!this.allowedMinutes || this.allowedMinutes(val))
       }
     },
     hour: {
@@ -205,7 +198,7 @@ export default {
             ? rangeHours12am
             : rangeHours12pm)
           : rangeHours24)
-      const first = range.find(v => isValueAllowed((v + value) % range.length + range[0], allowedFn))
+      const first = range.find(v => allowedFn((v + value) % range.length + range[0]))
       return ((first || 0) + value) % range.length + range[0]
     },
     genClock () {
