@@ -38,5 +38,9 @@ export function colorToInt (color) {
  * @returns {string}
  */
 export function intToHex (color) {
-  return '#' + color.toString(16).padStart(6, '0')
+  color = color.toString(16)
+
+  while (color.length < 6) color = `0${color}`
+
+  return `#${color}`
 }
