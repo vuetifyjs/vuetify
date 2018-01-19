@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node server",
     "start": "NODE_ENV=production node server",
-    "build": "rimraf dist && npm run build:client && npm run build:server",
+    "build": "rimraf public && npm run build:client && npm run build:server",
     "build:client": "NODE_ENV=production webpack --config build/webpack.client.config.js --progress --hide-modules",
     "build:server": "NODE_ENV=production webpack --config build/webpack.server.config.js --progress --hide-modules",
     "lint": "eslint --ext .js,.vue .",
