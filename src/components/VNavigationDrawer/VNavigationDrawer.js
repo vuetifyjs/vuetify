@@ -173,8 +173,8 @@ export default {
 
   watch: {
     $route () {
-      if (this.reactsToRoute) {
-        this.isActive = !this.closeConditional()
+      if (this.reactsToRoute && this.closeConditional()) {
+        this.isActive = false
       }
     },
     isActive (val) {
@@ -240,7 +240,7 @@ export default {
       }
     },
     closeConditional () {
-      return this.reactsToClick
+      return this.isActive && this.reactsToClick
     },
     genDirectives () {
       const directives = [{

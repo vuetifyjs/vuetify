@@ -371,10 +371,10 @@ test('VTextField.js', ({ mount }) => {
     wrapper.setProps({ value: '4444' })
     await wrapper.vm.$nextTick()
 
-    expect(value).toBe('44')    
+    expect(value).toBe('44')
     expect(input).toBeCalled()
   })
-  
+
   it('should mask value if return-masked-value is true', async () => {
     let value = '44'
     const component = {
@@ -391,18 +391,18 @@ test('VTextField.js', ({ mount }) => {
         })
       }
     }
-    
+
     const wrapper = mount(component)
     const input = wrapper.find('input')[0]
-    
+
     expect(value).toBe('4-4')
-    
+
     input.trigger('focus')
     await wrapper.vm.$nextTick()
     input.element.value = '33'
     input.trigger('input')
     await wrapper.vm.$nextTick()
-    
+
     expect(value).toBe('3-3')
   })
 
@@ -422,21 +422,21 @@ test('VTextField.js', ({ mount }) => {
         })
       }
     }
-    
+
     const wrapper = mount(component)
     const input = wrapper.find('input')[0]
-    
+
     expect(value).toBe('44')
-    
+
     input.trigger('focus')
     await wrapper.vm.$nextTick()
     input.element.value = '33'
     input.trigger('input')
     await wrapper.vm.$nextTick()
-    
+
     expect(value).toBe('33')
   })
-  
+
   it('should use pre-defined mask if prop matches', async () => {
     let value = '12311999'
     const component = {
@@ -453,9 +453,9 @@ test('VTextField.js', ({ mount }) => {
         })
       }
     }
-    
+
     const wrapper = mount(component)
-    
+
     expect(value).toBe('12/31/1999')
   })
 
@@ -501,7 +501,7 @@ test('VTextField.js', ({ mount }) => {
 
     const wrapper = mount(component)
     const input = wrapper.find('textarea')[0]
-    
+
     input.trigger('focus')
     await wrapper.vm.$nextTick()
     input.element.value = 'this is a really long text that should hopefully make auto-grow kick in. maybe?'
@@ -510,5 +510,55 @@ test('VTextField.js', ({ mount }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
     expect(input.element.style.getPropertyValue('height').length).not.toBe(0)
+  })
+
+  it('should match multi-line snapshot', () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        multiLine: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should match textarea snapshot', () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        textarea: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should match auto-grow snapshot', async () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        textarea: true,
+        autoGrow: true
+      }
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render no-resize the same if already auto-grow', () => {
+    const wrappers = [
+      { autoGrow:true, multiLine: true },
+      { autoGrow:true, textarea: true }
+    ].map(propsData => mount(VTextField,{propsData}))
+
+    wrappers.forEach(async wrapper => {
+      await wrapper.vm.$nextTick()
+      const html1 = wrapper.html()
+
+      wrapper.setProps({ noResize: true })
+      // will still pass without this, do not remove
+      await wrapper.vm.$nextTick()
+      const html2 = wrapper.html()
+
+      expect(html2).toBe(html1)
+    })
   })
 })
