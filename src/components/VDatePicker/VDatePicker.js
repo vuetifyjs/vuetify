@@ -13,6 +13,7 @@ import Picker from '../../mixins/picker'
 
 // Utils
 import { pad, createNativeLocaleFormatter } from './util'
+import isDateAllowed from './util/isDateAllowed'
 
 export default {
   name: 'v-date-picker',
@@ -249,9 +250,7 @@ export default {
 
   methods: {
     isDateAllowed (value) {
-      return (!this.min || value >= this.min)
-        && (!this.max || value <= this.max)
-        && (!this.allowedDates || this.allowedDates(value))
+      return isDateAllowed(value, this.min, this.max, this.allowedDates)
     },
     setTableDate () {
       this.tableDate = this.type === 'month' ? `${this.year}` : `${this.year}-${pad(this.month + 1)}`

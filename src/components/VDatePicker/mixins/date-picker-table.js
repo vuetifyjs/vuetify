@@ -3,6 +3,9 @@ require('../../../stylus/components/_date-picker-table.styl')
 // Directives
 import Touch from '../../../directives/touch'
 
+// Utils
+import isDateAllowed from '.././util/isDateAllowed'
+
 export default {
   directives: { Touch },
 
@@ -57,11 +60,6 @@ export default {
   },
 
   methods: {
-    isDateAllowed (value) {
-      return (!this.min || value >= this.min)
-        && (!this.max || value <= this.max)
-        && (!this.allowedDates || this.allowedDates(value))
-    },
     genButtonClasses (value, isDisabled, isFloating) {
       const isSelected = value === this.value
       const isCurrent = value === this.current
@@ -80,7 +78,7 @@ export default {
       return classes
     },
     genButton (value, isFloating) {
-      const isDisabled = !this.isDateAllowed(value)
+      const isDisabled = !isDateAllowed(value, this.min, this.max, this.allowedDates)
 
       return this.$createElement('button', {
         staticClass: 'btn',
