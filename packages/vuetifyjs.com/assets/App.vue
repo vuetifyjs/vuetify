@@ -5,29 +5,6 @@
       app-toolbar
       app-view
       app-fab
-      v-snackbar(
-        :value="snackbar"
-        :timeout="0"
-        bottom
-      )
-        div Angular vs React vs Vue —
-          strong.amber--text CanariasJS
-        v-btn(
-          flat
-          color="amber"
-          href="https://canariasjs.com/"
-          target="_blank"
-          @click="$ga.event('canariajs click', 'click', $route.path)"
-        ) Check it out
-        v-btn(
-          icon
-          dark
-          @click="\
-            $ga.event('canariajs close', 'click', $route.path),\
-            closeSnack()\
-          "
-        ).ml-3
-          v-icon close
 
     div(v-else)#app
       router-view
@@ -54,10 +31,6 @@
 
     mixins: [Meta],
 
-    data: () => ({
-      snackbar: false
-    }),
-
     computed: {
       ...mapState({
         isFullscreen: state => state.isFullscreen
@@ -69,14 +42,9 @@
 
     mounted () {
       this.getReleases()
-      this.snackbar = !localStorage.getItem('__vuetify_canarias_snack')
     },
 
     methods: {
-      closeSnack () {
-        this.snackbar = false
-        localStorage.setItem('__vuetify_canarias_snack', false)
-      },
       getReleases () {
         this.$http.get('/releases/releases.json').then(({ data }) => {
           this.$store.commit('app/RELEASES', data)
