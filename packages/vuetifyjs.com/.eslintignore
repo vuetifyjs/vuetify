@@ -1,3 +1,5 @@
 /api/**/*
 /releases/**/*
 /static/**/*
+/dist/**/*
+/public/**/*
