@@ -1,5 +1,5 @@
 const padStart = (string, targetLength, padString) => {
-  targetLength = targetLength >>> 0
+  targetLength = targetLength >> 0
   string = String(string)
   padString = String(padString)
   if (string.length > targetLength) {

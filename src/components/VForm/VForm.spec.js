@@ -85,12 +85,14 @@ test('VForm.js', ({ mount }) => {
     wrapper.vm.watchChild(input)
     await wrapper.vm.$nextTick()
 
-    expect(input._watchers.length).toBe(26)
+    // beware, depends on number of computeds in VTextField
+    const watchers = 28
+    expect(input._watchers.length).toBe(watchers)
     input.shouldValidate = false
     wrapper.vm.watchChild(input)
     await wrapper.vm.$nextTick()
 
-    expect(input._watchers.length).toBe(27)
+    expect(input._watchers.length).toBe(watchers + 1)
     input.shouldValidate = true
     await wrapper.vm.$nextTick()
 

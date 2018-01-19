@@ -336,7 +336,7 @@ test('VMenu.js', ({ mount }) => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
-  it('should render component with rounded min-width and left and match snapshot', async () => {
+  it('should round dimensions', async () => {
     const wrapper = mount(VMenu, {
       propsData: {
         value: false
@@ -345,6 +345,8 @@ test('VMenu.js', ({ mount }) => {
         activator: [VBtn]
       }
     })
+
+    const content = wrapper.find('.menu__content')[0]
 
     const getBoundingClientRect = () => {
       return {
@@ -362,12 +364,11 @@ test('VMenu.js', ({ mount }) => {
     wrapper.vm.$refs.activator.querySelector('.btn').getBoundingClientRect = getBoundingClientRect
     wrapper.vm.$refs.content.getBoundingClientRect = getBoundingClientRect
 
-    wrapper.setProps({ value: true})
+    wrapper.setProps({ value: true })
 
-    // There's gotta be a better way
-    await new Promise(resolve => setTimeout(resolve, 200))
+    await new Promise(resolve => requestAnimationFrame(resolve))
 
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(content.getAttribute('style')).toMatchSnapshot()
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 })
