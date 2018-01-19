@@ -23,7 +23,7 @@ export default {
     noTitle: Boolean,
     width: {
       type: [Number, String],
-      default: 290,
+      default: 330,
       validator: value => parseInt(value, 10) > 0
     }
   },

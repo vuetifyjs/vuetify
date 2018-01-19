@@ -30,7 +30,7 @@ export default {
     },
     width: {
       type: [Number, String],
-      default: 290,
+      default: 330,
       validator: value => parseInt(value, 10) > 0
     }
   },
@@ -65,7 +65,10 @@ export default {
         style: {
           width: this.width + 'px'
         }
-      }, [this.genBodyTransition()])
+      }, [
+        this.genBodyTransition(),
+        this.$slots.actions ? this.genActions() : null
+      ])
     },
     genActions () {
       return this.$createElement('div', {
@@ -83,8 +86,7 @@ export default {
       }
     }, [
       this.$slots.title ? this.genTitle() : null,
-      this.genBody(),
-      this.$slots.actions ? this.genActions() : null
+      this.genBody()
     ])
   }
 }

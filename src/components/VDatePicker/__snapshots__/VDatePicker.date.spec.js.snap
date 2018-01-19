@@ -350,7 +350,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
     </div>
   </div>
   <div class="picker__body"
-       style="width: 290px;"
+       style="width: 330px;"
   >
     <div>
       <div class="date-picker-header">
@@ -724,7 +724,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
     </div>
   </div>
   <div class="picker__body"
-       style="width: 290px;"
+       style="width: 330px;"
   >
     <div>
       <div class="date-picker-header">
@@ -1098,7 +1098,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
     </div>
   </div>
   <div class="picker__body"
-       style="width: 290px;"
+       style="width: 330px;"
   >
     <div>
       <div class="date-picker-header">
@@ -1483,7 +1483,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
     </div>
   </div>
   <div class="picker__body"
-       style="width: 290px;"
+       style="width: 330px;"
   >
     <div>
       <div class="date-picker-header">
@@ -1892,7 +1892,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
     </div>
   </div>
   <div class="picker__body"
-       style="width: 290px;"
+       style="width: 330px;"
   >
     <div style="pointer-events: none;">
       <div class="date-picker-header">

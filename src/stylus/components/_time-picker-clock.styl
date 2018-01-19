@@ -71,12 +71,12 @@ theme(time-picker-clock, "time-picker-clock")
     display: flex
     font-size: $time-picker-number-font-size
     justify-content: center
-    left: 'calc(50% - %s)' % $time-picker-number-font-size
-    height: $time-picker-number-font-size * 2
+    left: 'calc(50% - %s / 2)' % $time-picker-indicator-size
+    height: $time-picker-indicator-size
     position: absolute
     text-align: center
-    top: 'calc(50% - %s)' % $time-picker-number-font-size
-    width: $time-picker-number-font-size * 2
+    top: 'calc(50% - %s / 2)' % $time-picker-indicator-size
+    width: $time-picker-indicator-size
     user-select: none
 
     > span
@@ -93,8 +93,8 @@ theme(time-picker-clock, "time-picker-clock")
       transform: translate(-50%, -50%)
 
     &:after, &:before
-      height: $time-picker-number-font-size * 2.5
-      width: $time-picker-number-font-size * 2.5
+      height: $time-picker-indicator-size
+      width: $time-picker-indicator-size
 
     &.active
       color: #fff
