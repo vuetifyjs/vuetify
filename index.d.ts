@@ -1,11 +1,11 @@
 import 'vuetify/src/util/helpers'
 import { PluginFunction } from 'vue'
 
-declare class Vuetify {
+export declare class Vuetify {
   static install: PluginFunction<never>
 }
 
-declare interface VuetifyApplication {
+export declare interface VuetifyApplication {
   bar: number
   bottom: number
   left: number
@@ -13,7 +13,7 @@ declare interface VuetifyApplication {
   top: number
 }
 
-declare interface VuetifyBreakpoint {
+export declare interface VuetifyBreakpoint {
   height: number
   lg: boolean
   lgAndDown: boolean
@@ -35,7 +35,7 @@ declare interface VuetifyBreakpoint {
   xsOnly: boolean
 }
 
-declare interface VuetifyTheme {
+export declare interface VuetifyTheme {
   primary: VuetifyThemeItem
   accent: VuetifyThemeItem
   secondary: VuetifyThemeItem
@@ -47,20 +47,20 @@ declare interface VuetifyTheme {
   [name: string]: VuetifyThemeItem
 }
 
-declare type VuetifyThemeItem = string | number
+export declare type VuetifyThemeItem = string | number
 
-declare interface VuetifyThemeCache {
+export declare interface VuetifyThemeCache {
   get: (parsedTheme: VuetifyTheme) => string | null
   set: (parsedTheme: VuetifyTheme, css: string) => void
 }
 
-declare interface VuetifyOptions {
+export declare interface VuetifyOptions {
   themeVariations?: string[]
   minifyTheme?: (css: string) => string
   themeCache?: VuetifyThemeCache
 }
 
-declare interface VuetifyObject {
+export declare interface VuetifyObject {
   application: VuetifyApplication
   breakpoint: VuetifyBreakpoint
   dark: boolean
