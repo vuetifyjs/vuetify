@@ -67,7 +67,8 @@ export default {
 
       const classes = {
         'btn--active': isSelected,
-        'btn--flat': !isSelected || (isFloating && isSelected && !isDisabled && !this.disabled),
+        'btn--flat': !isSelected,
+        'btn--icon': isSelected && !isDisabled && isFloating,
         'btn--floating': isFloating,
         'btn--depressed': !isFloating && isSelected,
         'btn--disabled': isDisabled || (this.disabled && isSelected),
