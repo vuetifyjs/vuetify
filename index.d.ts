@@ -1,11 +1,11 @@
 import "vuetify/src/util/helpers";
 import {PluginFunction} from "vue";
 
-declare class Vuetify {
+export declare class Vuetify {
   static install: PluginFunction<never>;
 }
 
-declare class VuetifyApplication {
+export declare class VuetifyApplication {
   bar: number;
   bottom: number;
   left: number;
@@ -13,7 +13,7 @@ declare class VuetifyApplication {
   top: number;
 }
 
-declare class VuetifyBreakpoint {
+export declare class VuetifyBreakpoint {
   height: number;
   lg: boolean;
   lgAndDown: boolean;
@@ -35,7 +35,7 @@ declare class VuetifyBreakpoint {
   xsOnly: boolean;
 }
 
-declare class VuetifyTheme {
+export declare class VuetifyTheme {
   primary: string;
   accent: string;
   secondary: string;
@@ -45,7 +45,7 @@ declare class VuetifyTheme {
   success: string;
 }
 
-declare class VuetifyObject {
+export declare class VuetifyObject {
   application: VuetifyApplication;
   breakpoint: VuetifyBreakpoint;
   dark: boolean;
