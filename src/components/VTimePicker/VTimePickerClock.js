@@ -191,10 +191,6 @@ export default {
   render (h) {
     const data = {
       staticClass: 'time-picker-clock',
-      style: {
-        width: `100%`,
-        height: `100%`
-      },
       on: {
         mousedown: this.onMouseDown,
         mouseup: this.onMouseUp,

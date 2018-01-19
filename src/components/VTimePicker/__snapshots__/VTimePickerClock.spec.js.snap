@@ -2,9 +2,7 @@
 
 exports[`VTimePickerClock.js should render component 1`] = `
 
-<div class="time-picker-clock"
-     style="width: 100%; height: 100%;"
->
+<div class="time-picker-clock">
   <div class="time-picker-clock__hand accent">
   </div>
   <span class="disabled">
@@ -73,9 +71,7 @@ exports[`VTimePickerClock.js should render component 1`] = `
 
 exports[`VTimePickerClock.js should render component with double prop 1`] = `
 
-<div class="time-picker-clock"
-     style="width: 100%; height: 100%;"
->
+<div class="time-picker-clock">
   <div class="time-picker-clock__hand accent">
   </div>
   <span class="disabled">

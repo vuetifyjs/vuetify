@@ -13,19 +13,22 @@ time-picker-clock($material)
 
 theme(time-picker-clock, "time-picker-clock")
 
-.time-picker-clock__container
-  display: flex
-  align-items: center
-  justify-content: center
-  padding: 10px
-
 .time-picker-clock
   border-radius: 100%
-  user-select: none
+  height: 100%
+  position: relative
   transition: $primary-transition
+  user-select: none
+  width: 100%
+
+  &__container
+    display: flex
+    align-items: center
+    justify-content: center
+    padding: 10px
 
   &__hand
-    height: calc(42.5% - 14px)
+    height: calc(41.5% - 4px) // 41.5 = 83 / 2, see VTimePickerClock.js:getPosition()
     width: 2px
     bottom: 50%
     left: calc(50% - 1px)
