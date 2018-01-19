@@ -1,0 +1,41 @@
+@import '../bootstrap'
+@import '../theme'
+
+date-picker-header($material)
+
+  .date-picker-header__value:not(.date-picker-header__value--disabled)
+    strong:not(:hover)
+      color: $material.text.primary !important
+
+  .date-picker-header__value--disabled strong
+    color: $material.text.disabled
+
+theme(date-picker-header, "date-picker-header")
+
+.date-picker-header
+  padding: 4px 16px
+
+  align-items: center
+  display: flex
+  justify-content: space-between
+  position: relative
+
+  .btn
+    margin: 0
+    z-index: auto
+
+  .icon
+    cursor: pointer
+    user-select: none
+
+.date-picker-header__value
+  flex: 1
+  text-align: center
+  position: relative
+  overflow: hidden
+
+  strong
+    cursor: pointer
+    transition: $primary-transition
+    display: block
+    width: 100%

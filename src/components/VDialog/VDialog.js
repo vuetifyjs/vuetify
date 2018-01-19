@@ -61,7 +61,6 @@ export default {
         'dialog--active': this.isActive,
         'dialog--persistent': this.persistent,
         'dialog--fullscreen': this.fullscreen,
-        'dialog--stacked-actions': this.stackedActions && !this.fullscreen,
         'dialog--scrollable': this.scrollable
       }
     },
@@ -97,7 +96,7 @@ export default {
     closeConditional (e) {
       // close dialog if !persistent, clicked outside and we're the topmost dialog.
       // Since this should only be called in a capture event (bottom up), we shouldn't need to stop propagation
-      return !this.persistent &&
+      return this.isActive && !this.persistent &&
         getZIndex(this.$refs.content) >= this.getMaxZIndex() &&
         !this.$refs.content.contains(e.target)
     },
@@ -126,8 +125,9 @@ export default {
       directives: [
         {
           name: 'click-outside',
-          value: {
-            callback: this.closeConditional,
+          value: () => (this.isActive = false),
+          args: {
+            closeConditional: this.closeConditional,
             include: this.getOpenDependentElements
           }
         },

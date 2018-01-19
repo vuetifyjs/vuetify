@@ -80,10 +80,9 @@ export default {
 
   computed: {
     calculatedLeft () {
-      let left = this.calcLeft
-      if (this.auto) left = this.calcLeftAuto
+      if (!this.auto) return this.calcLeft()
 
-      return `${this.calcXOverflow(left())}px`
+      return `${this.calcXOverflow(this.calcLeftAuto())}px`
     },
     calculatedMaxHeight () {
       return this.auto
@@ -120,9 +119,9 @@ export default {
       )}px`
     },
     calculatedTop () {
-      const top = this.auto ? this.calcTopAuto : this.calcTop
+      if (!this.auto || this.isAttached) return this.calcTop()
 
-      return `${this.calcYOverflow(top())}px`
+      return `${this.calcYOverflow(this.calcTopAuto())}px`
     },
     styles () {
       return {
@@ -160,6 +159,9 @@ export default {
       // Once transitioning, calculate scroll position
       setTimeout(this.calculateScroll, 50)
     },
+    closeConditional () {
+      return this.isActive && this.closeOnClick
+    },
     onResize () {
       if (!this.isActive) return
 
@@ -188,11 +190,9 @@ export default {
         display: this.fullWidth ? 'block' : 'inline-block'
       },
       directives: [{
+        arg: 500,
         name: 'resize',
-        value: {
-          debounce: 500,
-          value: this.onResize
-        }
+        value: this.onResize
       }],
       on: {
         keydown: this.changeListIndex

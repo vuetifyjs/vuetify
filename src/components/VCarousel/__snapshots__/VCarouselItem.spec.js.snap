@@ -2,18 +2,32 @@
 
 exports[`VCarouselItem.js should render component and match snapshot 1`] = `
 
-<div class="carousel__item"
-     style="background-image: url(https://vuetifyjs.com/static/doc-images/cards/sunshine.jpg); display: none;"
+<div class="jumbotron"
+     style="height: 100%; display: none;"
+     data-ripple="false"
 >
+  <div class="jumbotron__wrapper">
+    <div class="jumbotron__background">
+    </div>
+    <div class="jumbotron__content">
+    </div>
+  </div>
 </div>
 
 `;
 
 exports[`VCarouselItem.js should throw warning when not used inside v-carousel 1`] = `
 
-<div class="carousel__item"
-     style="background-image: url(https://vuetifyjs.com/static/doc-images/cards/sunshine.jpg); display: none;"
+<div class="jumbotron"
+     style="height: 100%; display: none;"
+     data-ripple="false"
 >
+  <div class="jumbotron__wrapper">
+    <div class="jumbotron__background">
+    </div>
+    <div class="jumbotron__content">
+    </div>
+  </div>
 </div>
 
 `;

@@ -132,6 +132,12 @@ for size, width in $grid-breakpoints
 .spacer
   flex-grow: 1 !important
 
+.grow
+  flex-shrink: 0 !important
+
+.shrink
+  flex-grow: 0 !important
+
 .scroll-y
   overflow-y: auto
 
@@ -154,18 +160,18 @@ for size, width in $grid-breakpoints
   
 // Display helpers
 .d-flex
-  display: flex
+  display: flex !important
     
 .d-inline-flex
-  display: inline-flex
+  display: inline-flex !important
   
 .d-flex,
 .d-inline-flex
   > *
-    flex: 1 1 auto
+    flex: 1 1 auto !important
     
 .d-block
-  display: block
+  display: block !important
   
 .d-inline-block
-  display: inline-block
+  display: inline-block !important

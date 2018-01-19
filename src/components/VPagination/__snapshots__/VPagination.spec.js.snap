@@ -6,7 +6,7 @@ exports[`VPagination.vue emits an event when next or previous is clicked 1`] = `
   <li>
     <button class="pagination__navigation">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
       >
         chevron_left
       </i>
@@ -40,7 +40,7 @@ exports[`VPagination.vue emits an event when next or previous is clicked 1`] = `
   <li>
     <button class="pagination__navigation">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
       >
         chevron_right
       </i>
@@ -56,7 +56,7 @@ exports[`VPagination.vue should only render middle of range if length is big and
   <li>
     <button class="pagination__navigation">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
       >
         chevron_left
       </i>
@@ -175,7 +175,7 @@ exports[`VPagination.vue should only render middle of range if length is big and
   <li>
     <button class="pagination__navigation">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
       >
         chevron_right
       </i>
@@ -191,7 +191,7 @@ exports[`VPagination.vue should only render start and end of range if length is 
   <li>
     <button class="pagination__navigation pagination__navigation--disabled">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
       >
         chevron_left
       </i>
@@ -310,7 +310,7 @@ exports[`VPagination.vue should only render start and end of range if length is 
   <li>
     <button class="pagination__navigation">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
       >
         chevron_right
       </i>
@@ -326,7 +326,7 @@ exports[`VPagination.vue should render disabled buttons with length equals to 0 
   <li>
     <button class="pagination__navigation pagination__navigation--disabled">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
       >
         chevron_left
       </i>
@@ -335,7 +335,7 @@ exports[`VPagination.vue should render disabled buttons with length equals to 0 
   <li>
     <button class="pagination__navigation pagination__navigation--disabled">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
       >
         chevron_right
       </i>
@@ -351,7 +351,7 @@ exports[`VPagination.vue should use totalVisible prop if defined 1`] = `
   <li>
     <button class="pagination__navigation">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
       >
         chevron_left
       </i>
@@ -410,7 +410,7 @@ exports[`VPagination.vue should use totalVisible prop if defined 1`] = `
   <li>
     <button class="pagination__navigation">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
       >
         chevron_right
       </i>

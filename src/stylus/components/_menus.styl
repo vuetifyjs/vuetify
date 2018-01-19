@@ -16,13 +16,11 @@
   &__activator
     align-items: center
     cursor: pointer
+    height: inherit
     position: relative
 
     input[readonly]
       cursor: pointer
-
-    .toolbar__side-icon
-      margin: 0
 
   &__content
     position: absolute
@@ -45,6 +43,9 @@
     & > .card
       contain: content
       backface-visibility: hidden
+
+  > .menu__content
+    max-width: none
 
   &-transition
     &-enter

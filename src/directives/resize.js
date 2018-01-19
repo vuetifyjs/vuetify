@@ -1,28 +1,22 @@
 function inserted (el, binding) {
-  let cb = binding.value
-  let debounce = 200
-  let callOnLoad = true
+  const callback = binding.value
+  const options = binding.options || { passive: true }
 
-  if (typeof binding.value !== 'function') {
-    cb = binding.value.value
-    debounce = binding.value.debounce || debounce
-    callOnLoad = binding.value.quiet != null ? false : callOnLoad
+  window.addEventListener('resize', callback, options)
+  el._onResize = {
+    callback,
+    options
   }
 
-  let debounceTimeout = null
-  const onResize = () => {
-    clearTimeout(debounceTimeout)
-    debounceTimeout = setTimeout(cb, debounce)
+  if (!binding.modifiers || !binding.modifiers.quiet) {
+    callback()
   }
-
-  window.addEventListener('resize', onResize, { passive: true })
-  el._onResize = onResize
-
-  callOnLoad && onResize()
 }
 
 function unbind (el, binding) {
-  window.removeEventListener('resize', el._onResize)
+  const { callback, options } = el._onResize
+
+  window.removeEventListener('resize', callback, options)
   delete el._onResize
 }
 

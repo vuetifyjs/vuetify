@@ -8,42 +8,30 @@ navigation-drawer($material)
     .navigation-drawer__border
       background-color: $material.dividers
 
-  a:not(.list__tile--active),
-  .list
-    color: $material.text.primary
-
   .divider
     background-color: $material.dividers
-
-  .list
-    &__tile:not(.list__tile--active)
-      color: $material.text.primary
-
-      .icon
-        color: $material.icons.active
-
-    &__tile__sub-title
-      color: $material.text.secondary
-
-  .list--group__header--active
-    .list__tile, + .list--group
-      &:after
-        background: $material.dividers
 
 theme(navigation-drawer, "navigation-drawer")
 
 .navigation-drawer
+  bootable()
+
+  display: block
+  left: 0
   max-width: 100%
   overflow-y: auto
   overflow-x: hidden
-  -webkit-overflow-scrolling: touch
   padding: 0 0 100px
   pointer-events: auto
-  transition: .2s $transition.fast-out-slow-in
   top: 0
-  left: 0
   will-change: transform
   z-index: 3
+  -webkit-overflow-scrolling: touch
+
+  &[data-booted="true"]
+    // Work around for Safari bug. See https://github.com/vuetifyjs/vuetify/issues/2773
+    // We really want transition-property: all but must exclude max-height.
+    transition-property: background,background-color,border,border-bottom,border-bottom-color,border-bottom-width,border-color,border-left,border-left-color,border-left-width,border-right,border-right-color,border-right-width,border-top,border-top-color,border-top-width,border-width,bottom,box-shadow,color,height,left,margin,margin-bottom,margin-left,margin-right,margin-top,max-width,min-height,min-width,opacity,padding,padding-bottom,padding-left,padding-right,padding-top,right,top,transform,transform-origin,width;
 
   &__border
     position: absolute
@@ -56,13 +44,6 @@ theme(navigation-drawer, "navigation-drawer")
     &:after
       left: 0
       right: initial
-
-  &--close
-    &.navigation-drawer:not(.navigation-drawer--right)
-      transform: translateX(-100%)
-
-    &.navigation-drawer--right
-      transform: translateX(100%)
 
   &--right
     left: auto
@@ -83,6 +64,11 @@ theme(navigation-drawer, "navigation-drawer")
 
   &--mini-variant
     overflow: hidden
+
+    .list__group__header__prepend-icon
+      flex: 1 0 auto
+      justify-content: center
+      width: 100%
 
     .list__tile__action,
     .list__tile__avatar

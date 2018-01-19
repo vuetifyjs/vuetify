@@ -1,4 +1,4 @@
-import { test } from '~util/testing'
+import { test } from '@util/testing'
 import VProgressCircular from './VProgressCircular'
 import { compileToFunctions } from 'vue-template-compiler'
 
@@ -14,6 +14,22 @@ test('VProgressCircular.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ value: -1 })
+    const htmlMinus1 = wrapper.html()
+
+    wrapper.setProps({ value: 0 })
+    const html0 = wrapper.html()
+
+    wrapper.setProps({ value: 100 })
+    const html100 = wrapper.html()
+
+    wrapper.setProps({ value: 101 })
+    const html101 = wrapper.html()
+
+    expect(htmlMinus1).toBe(html0)
+    expect(html100).toBe(html101)
+    expect(html0).not.toBe(html100)
   })
 
   it('should render component with color prop and match snapshot', () => {

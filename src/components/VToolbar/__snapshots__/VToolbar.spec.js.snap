@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VToolbar.vue should render an extended toolbar 1`] = `
+
+<nav class="toolbar toolbar--extended"
+     style="margin-top: 0px; padding-right: 0px; padding-left: 0px;"
+>
+  <div class="toolbar__content"
+       style="height: 56px;"
+  >
+  </div>
+  <div class="toolbar__extension"
+       style="height: 56px;"
+  >
+  </div>
+</nav>
+
+`;
+
+exports[`VToolbar.vue should render an extended toolbar with specific height 1`] = `
+
+<nav class="toolbar toolbar--extended"
+     style="margin-top: 0px; padding-right: 0px; padding-left: 0px;"
+>
+  <div class="toolbar__content"
+       style="height: 56px;"
+  >
+  </div>
+  <div class="toolbar__extension"
+       style="height: 42px;"
+  >
+  </div>
+</nav>
+
+`;

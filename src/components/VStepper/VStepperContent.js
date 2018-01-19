@@ -14,7 +14,9 @@ export default {
   data () {
     return {
       height: 0,
-      isActive: false,
+      // Must be null to allow
+      // previous comparison
+      isActive: null,
       isReverse: false,
       isVertical: false
     }
@@ -53,16 +55,17 @@ export default {
   },
 
   watch: {
-    isActive () {
-      if (!this.isVertical) {
-        return
+    isActive (current, previous) {
+      // If active and the previous state
+      // was null, is just booting up
+      if (current && previous == null) {
+        return (this.height = 'auto')
       }
 
-      if (this.isActive) {
-        this.enter()
-      } else {
-        this.leave()
-      }
+      if (!this.isVertical) return
+
+      if (this.isActive) this.enter()
+      else this.leave()
     }
   },
 
@@ -83,8 +86,10 @@ export default {
   },
 
   methods: {
-    onTransition () {
-      if (!this.isActive) return
+    onTransition (e) {
+      if (!this.isActive ||
+        e.propertyName !== 'height'
+      ) return
 
       this.height = 'auto'
     },
@@ -92,9 +97,9 @@ export default {
       let scrollHeight = 0
 
       // Render bug with height
-      setTimeout(() => {
+      requestAnimationFrame(() => {
         scrollHeight = this.$refs.wrapper.scrollHeight
-      }, 0)
+      })
 
       this.height = 0
 
@@ -103,7 +108,7 @@ export default {
     },
     leave () {
       this.height = this.$refs.wrapper.clientHeight
-      setTimeout(() => (this.height = 0), 0)
+      setTimeout(() => (this.height = 0), 10)
     },
     toggle (step, reverse) {
       this.isActive = step.toString() === this.step.toString()
