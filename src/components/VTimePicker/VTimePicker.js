@@ -188,7 +188,7 @@ export default {
           max: this.selectingHour ? (this.isAmPm && this.period === 'am' ? 11 : 23) : 59,
           min: this.selectingHour && this.isAmPm && this.period === 'pm' ? 12 : 0,
           scrollable: this.scrollable,
-          size: this.width - 20,
+          size: this.width - (this.landscape ? 80 : 20),
           step: this.selectingHour ? 1 : 5,
           value: this.selectingHour ? this.hour : this.minute
         },
@@ -204,7 +204,7 @@ export default {
         staticClass: 'time-picker-clock__container',
         style: {
           width: `${this.width}px`,
-          height: `${this.width}px`
+          height: `${this.width - (this.landscape ? 60 : 0)}px`
         },
         key: this.selectingHour
       }, [this.genClock()])

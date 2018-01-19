@@ -15,11 +15,9 @@ theme(time-picker-clock, "time-picker-clock")
 
 .time-picker-clock
   border-radius: 100%
-  height: 100%
   position: relative
   transition: $primary-transition
   user-select: none
-  width: 100%
 
   &__container
     display: flex
@@ -28,7 +26,7 @@ theme(time-picker-clock, "time-picker-clock")
     padding: 10px
 
   &__hand
-    height: calc(41.5% - 4px) // 41.5 = 83 / 2, see VTimePickerClock.js:getPosition()
+    height: calc(50% - 28px)
     width: 2px
     bottom: 50%
     left: calc(50% - 1px)
