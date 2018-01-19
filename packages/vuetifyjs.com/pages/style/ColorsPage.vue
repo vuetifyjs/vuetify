@@ -102,7 +102,7 @@
 </template>
 
 <script>
-  import colors from 'vuetify/src/util/colors'
+  import colors from 'vuetify/es5/util/colors'
   import { kebab } from '@/util/helpers'
 
   export default {
