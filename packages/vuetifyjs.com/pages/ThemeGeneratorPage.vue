@@ -67,7 +67,7 @@
 </template>
 
 <script>
-  import colors from 'vuetify/src/util/colors'
+  import colors from 'vuetify/es5/util/colors'
   import Components from '@/components/generator'
   import { Swatches } from 'vue-color'
 
