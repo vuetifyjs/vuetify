@@ -8,7 +8,6 @@ test('VTimePickerClock.js', ({ mount }) => {
         allowedValues: n => n % 2,
         max: 59,
         min: 0,
-        pad: 2,
         size: 280,
         step: 5,
         value: 10
@@ -25,7 +24,6 @@ test('VTimePickerClock.js', ({ mount }) => {
         double: true,
         max: 59,
         min: 0,
-        pad: 2,
         size: 280,
         step: 5,
         value: 10
@@ -70,7 +68,9 @@ test('VTimePickerClock.js', ({ mount }) => {
   it('should emit change event on mouseup/touchend', () => {
     const wrapper = mount(VTimePickerClock, {
       propsData: {
-        value: 59
+        value: 59,
+        min: 0,
+        max: 60
       }
     })
 
@@ -88,7 +88,9 @@ test('VTimePickerClock.js', ({ mount }) => {
   it('should emit change event on mouseleave', () => {
     const wrapper = mount(VTimePickerClock, {
       propsData: {
-        value: 59
+        value: 59,
+        min: 0,
+        max: 60
       }
     })
 
@@ -106,7 +108,9 @@ test('VTimePickerClock.js', ({ mount }) => {
   it('should calculate angle', () => {
     const wrapper = mount(VTimePickerClock, {
       propsData: {
-        value: 59
+        value: 59,
+        min: 0,
+        max: 60
       }
     })
 

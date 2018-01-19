@@ -6,7 +6,6 @@ import Themeable from '../../mixins/themeable'
 
 // Utils
 import isValueAllowed from '../../util/isValueAllowed'
-import { pad } from '../VDatePicker/util'
 
 const outerRadius = 0.8
 const innerRadius = 0.5
@@ -33,17 +32,17 @@ export default {
       default: () => null
     },
     double: Boolean,
+    format: {
+      type: Function,
+      default: val => val
+    },
     max: {
       type: Number,
-      require: true
+      required: true
     },
     min: {
       type: Number,
-      require: true
-    },
-    pad: {
-      type: Number,
-      default: 0
+      required: true
     },
     scrollable: Boolean,
     rotate: {
@@ -110,9 +109,9 @@ export default {
         }
 
         children.push(this.$createElement('span', {
-          'class': this.addBackgroundColorClassChecks(classes, value === this.value ? 'computedColor' : null),
+          'class': this.addBackgroundColorClassChecks(classes, value === this.value ? this.computedColor : null),
           style: this.getTransform(value),
-          domProps: { innerHTML: `<span>${pad(value, this.pad)}</span>` }
+          domProps: { innerHTML: `<span>${this.format(value)}</span>` }
         }))
       }
 

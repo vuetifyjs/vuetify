@@ -364,6 +364,8 @@ exports[`VMenu.js should render component with custom transition and match snaps
 
 `;
 
+exports[`VMenu.js should round dimensions 1`] = `"max-height: auto; min-width: 101px; max-width: auto; top: 12px; left: 50px; z-index: 8; display: none; z-index: 8;"`;
+
 exports[`VMenu.js should work 1`] = `
 
 <div class="menu"

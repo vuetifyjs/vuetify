@@ -48,7 +48,8 @@ export default {
     const data = {
       'class': this.classes,
       directives: [{
-        name: 'click-outside'
+        name: 'click-outside',
+        value: () => (this.isActive = false)
       }],
       on: {
         click: () => (this.isActive = !this.isActive)

@@ -29,7 +29,6 @@ export default {
 
   data () {
     return {
-      all: false,
       searchLength: 0,
       defaultPagination: {
         descending: false,
@@ -211,17 +210,8 @@ export default {
   },
 
   watch: {
-    indeterminate (val) {
-      if (val) this.all = true
-    },
-    someItems (val) {
-      if (!val) this.all = false
-    },
     search () {
       this.updatePagination({ page: 1, totalItems: this.itemsLength })
-    },
-    everyItem (val) {
-      if (val) this.all = true
     }
   },
 

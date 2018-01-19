@@ -1,5 +1,6 @@
 import application from './mixins/application'
 import theme from './mixins/theme'
+import options from './mixins/options'
 
 const Vuetify = {
   install (Vue, opts = {}) {
@@ -12,7 +13,8 @@ const Vuetify = {
       breakpoint: {},
       application,
       dark: false,
-      theme: theme(opts.theme)
+      theme: theme(opts.theme),
+      options: options(opts.options)
     })
 
     Vue.prototype.$vuetify = $vuetify.inspire

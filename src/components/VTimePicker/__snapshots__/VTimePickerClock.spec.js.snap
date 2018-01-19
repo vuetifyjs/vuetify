@@ -9,12 +9,12 @@ exports[`VTimePickerClock.js should render component 1`] = `
   </div>
   <span class="disabled">
     <span>
-      00
+      0
     </span>
   </span>
   <span class>
     <span>
-      05
+      5
     </span>
   </span>
   <span class="active disabled accent">
@@ -80,12 +80,12 @@ exports[`VTimePickerClock.js should render component with double prop 1`] = `
   </div>
   <span class="disabled">
     <span>
-      00
+      0
     </span>
   </span>
   <span class>
     <span>
-      05
+      5
     </span>
   </span>
   <span class="active disabled accent">

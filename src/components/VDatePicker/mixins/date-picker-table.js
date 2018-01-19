@@ -3,6 +3,9 @@ require('../../../stylus/components/_date-picker-table.styl')
 // Directives
 import Touch from '../../../directives/touch'
 
+// Util
+import isValueAllowed from '../../../util/isValueAllowed'
+
 export default {
   directives: { Touch },
 
@@ -18,10 +21,8 @@ export default {
       type: [Array, Object, Function],
       default: () => null
     },
-    current: {
-      type: String,
-      default: null
-    },
+    current: String,
+    disabled: Boolean,
     format: {
       type: Function,
       default: null
@@ -45,24 +46,6 @@ export default {
     computedTransition () {
       return this.isReversing ? 'tab-reverse-transition' : 'tab-transition'
     },
-    selectedDate () {
-      return this.value ? (this.value.split('-')[2] * 1) : null
-    },
-    selectedMonth () {
-      return this.value ? (this.value.split('-')[1] - 1) : null
-    },
-    selectedYear () {
-      return this.value ? (this.value.split('-')[0] * 1) : null
-    },
-    currentDate () {
-      return this.current ? (this.current.split('-')[2] * 1) : new Date().getDate()
-    },
-    currentMonth () {
-      return this.current ? (this.current.split('-')[1] - 1) : new Date().getMonth()
-    },
-    currentYear () {
-      return this.current ? (this.current.split('-')[0] * 1) : new Date().getFullYear()
-    },
     displayedMonth () {
       return this.tableDate.split('-')[1] - 1
     },
@@ -78,6 +61,41 @@ export default {
   },
 
   methods: {
+    genButtonClasses (value, isDisabled, isFloating) {
+      const isSelected = value === this.value
+      const isCurrent = value === this.current
+
+      const classes = {
+        'btn--active': isSelected,
+        'btn--flat': !isSelected || (isFloating && isSelected && !isDisabled && !this.disabled),
+        'btn--floating': isFloating,
+        'btn--depressed': !isFloating && isSelected,
+        'btn--disabled': isDisabled || (this.disabled && isSelected),
+        'btn--outline': isCurrent && !isSelected
+      }
+
+      if (isSelected) return this.addBackgroundColorClassChecks(classes)
+      if (isCurrent) return this.addTextColorClassChecks(classes)
+      return classes
+    },
+    genButton (value, isFloating) {
+      const isDisabled = !isValueAllowed(value, this.allowedDates)
+
+      return this.$createElement('button', {
+        staticClass: 'btn',
+        'class': this.genButtonClasses(value, isDisabled, isFloating),
+        attrs: {
+          type: 'button'
+        },
+        domProps: {
+          disabled: isDisabled,
+          innerHTML: `<div class="btn__content">${this.formatter(value)}</div>`
+        },
+        on: isDisabled ? {} : {
+          click: () => this.$emit('input', value)
+        }
+      })
+    },
     wheel (e) {
       e.preventDefault()
       this.$emit('tableDate', this.calculateTableDate(e.deltaY))

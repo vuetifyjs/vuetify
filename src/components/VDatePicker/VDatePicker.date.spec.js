@@ -54,6 +54,17 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render readonly picker', () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: '2013-05-07',
+        readonly: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should emit input event on date click', async () => {
     const cb = jest.fn()
     const wrapper = mount(VDatePicker, {

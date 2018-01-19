@@ -11,7 +11,7 @@ export default {
         const row = this.$scopedSlots.headers({
           headers: this.headers,
           indeterminate: this.indeterminate,
-          all: this.all
+          all: this.everyItem
         })
 
         children = [this.needsTR(row) ? this.genTR(row) : row, this.genTProgress()]
@@ -23,7 +23,7 @@ export default {
             light: this.light,
             color: this.selectAll === true ? '' : this.selectAll,
             hideDetails: true,
-            inputValue: this.all,
+            inputValue: this.everyItem,
             indeterminate: this.indeterminate
           },
           on: { change: this.toggle }
@@ -64,7 +64,7 @@ export default {
         data.attrs['aria-label'] += ': Not sorted.' // TODO: Localization
       }
 
-      classes.push(`text-xs-${header.align || 'right'}`)
+      classes.push(`text-xs-${header.align || 'left'}`)
       if (Array.isArray(header.class)) {
         classes.push(...header.class)
       } else if (header.class) {
@@ -100,7 +100,7 @@ export default {
           small: true
         }
       }, 'arrow_upward')
-      if (header.align && header.align === 'left') {
+      if (!header.align || header.align === 'left') {
         children.push(icon)
       } else {
         children.unshift(icon)

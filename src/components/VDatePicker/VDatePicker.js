@@ -34,12 +34,10 @@ export default {
   data () {
     const now = new Date()
     return {
-      defaultColor: 'accent',
       activePicker: this.type.toUpperCase(),
-      currentDay: null,
-      currentMonth: null,
-      currentYear: null,
+      defaultColor: 'accent',
       isReversing: false,
+      now,
       originalDate: this.value,
       // tableDate is a string in 'YYYY' / 'YYYY-M' format (leading zero for month is not required)
       tableDate: this.type === 'month'
@@ -63,6 +61,14 @@ export default {
       type: Function,
       default: null
     },
+    events: {
+      type: [Array, Object, Function],
+      default: () => null
+    },
+    eventColor: {
+      type: [String, Function, Object],
+      default: 'warning'
+    },
     firstDayOfWeek: {
       type: [String, Number],
       default: 0
@@ -85,7 +91,12 @@ export default {
       type: String,
       default: 'chevron_left'
     },
+    readonly: Boolean,
     scrollable: Boolean,
+    showCurrent: {
+      type: [Boolean, String],
+      default: true
+    },
     // Function formatting currently selected date in the picker title
     titleDateFormat: {
       type: Function,
@@ -106,10 +117,16 @@ export default {
   },
 
   computed: {
+    current () {
+      if (this.showCurrent === true) {
+        return this.sanitizeDateString(`${this.now.getFullYear()}-${this.now.getMonth() + 1}-${this.now.getDate()}`, this.type)
+      }
+
+      return this.showCurrent || null
+    },
     firstAllowedDate () {
-      const now = new Date()
-      const year = now.getFullYear()
-      const month = now.getMonth()
+      const year = this.now.getFullYear()
+      const month = this.now.getMonth()
 
       if (this.allowedDates) {
         for (let date = 1; date <= 31; date++) {
@@ -123,11 +140,10 @@ export default {
         }
       }
 
-      return this.sanitizeDateString(`${year}-${month + 1}-${now.getDate()}`, 'date')
+      return this.sanitizeDateString(`${year}-${month + 1}-${this.now.getDate()}`, 'date')
     },
     firstAllowedMonth () {
-      const now = new Date()
-      const year = now.getFullYear()
+      const year = this.now.getFullYear()
 
       if (this.allowedDates) {
         for (let month = 0; month < 12; month++) {
@@ -138,7 +154,7 @@ export default {
         }
       }
 
-      return `${year}-${pad(now.getMonth() + 1)}`
+      return `${year}-${pad(this.now.getMonth() + 1)}`
     },
     // inputDate MUST be a string in ISO 8601 format (including leading zero for month/day)
     // YYYY-MM for month picker
@@ -221,13 +237,6 @@ export default {
     this.setTableDate()
   },
 
-  mounted () {
-    const date = new Date()
-    this.currentDay = date.getDate()
-    this.currentMonth = date.getMonth()
-    this.currentYear = date.getFullYear()
-  },
-
   methods: {
     setTableDate () {
       this.tableDate = this.type === 'month' ? `${this.year}` : `${this.year}-${pad(this.month + 1)}`
@@ -282,6 +291,9 @@ export default {
           yearIcon: this.yearIcon
         },
         slot: 'title',
+        style: this.readonly ? {
+          'pointer-events': 'none'
+        } : undefined,
         on: {
           'update:selectingYear': value => this.activePicker = value ? 'YEAR' : this.type.toUpperCase()
         }
@@ -292,6 +304,7 @@ export default {
         props: {
           appendIcon: this.appendIcon,
           color: this.color,
+          disabled: this.readonly,
           format: this.headerDateFormat,
           locale: this.locale,
           prependIcon: this.prependIcon,
@@ -308,6 +321,10 @@ export default {
         props: {
           allowedDates: this.allowedDates,
           color: this.color,
+          current: this.current,
+          disabled: this.readonly,
+          events: this.events,
+          eventColor: this.eventColor,
           firstDayOfWeek: this.firstDayOfWeek,
           format: this.dayFormat,
           locale: this.locale,
@@ -327,6 +344,8 @@ export default {
         props: {
           allowedDates: this.type === 'month' ? this.allowedDates : null,
           color: this.color,
+          current: this.current,
+          disabled: this.readonly,
           format: this.monthFormat,
           locale: this.locale,
           scrollable: this.scrollable,
@@ -361,7 +380,12 @@ export default {
         this.activePicker === 'DATE' ? this.genDateTable() : this.genMonthTable()
       ]
 
-      return this.$createElement('div', { key: this.activePicker }, children)
+      return this.$createElement('div', {
+        key: this.activePicker,
+        style: this.readonly ? {
+          'pointer-events': 'none'
+        } : undefined
+      }, children)
     },
     // Adds leading zero to month/day if necessary, returns 'YYYY' if type = 'year',
     // 'YYYY-MM' if 'month' and 'YYYY-MM-DD' if 'date'

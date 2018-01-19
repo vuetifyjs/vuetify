@@ -116,4 +116,25 @@ test('VBtn.js', ({ mount, compileToFunctions }) => {
     wrapper.destroy()
     expect(unregister).toHaveBeenCalled()
   })
+
+  it('should emit a click event', async () => {
+    const instance = Vue.extend()
+    instance.component('router-link', stub)
+
+    const wrapper = mount(VBtn, {
+      propsData: {
+        href: '#!'
+      },
+      instance
+    })
+
+    const click = jest.fn()
+    wrapper.vm.$on('click', click)
+    wrapper.trigger('click')
+
+    wrapper.setProps({ href: undefined, to: '/foo' })
+    wrapper.trigger('click')
+
+    expect(click.mock.calls.length).toBe(2)
+  })
 })

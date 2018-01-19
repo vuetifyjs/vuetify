@@ -2,9 +2,13 @@
 @import '../theme'
 
 date-picker-header($material)
-  .date-picker-header__value
+
+  .date-picker-header__value:not(.date-picker-header__value--disabled)
     strong:not(:hover)
       color: $material.text.primary !important
+
+  .date-picker-header__value--disabled strong
+    color: $material.text.disabled
 
 theme(date-picker-header, "date-picker-header")
 

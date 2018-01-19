@@ -15,6 +15,48 @@ test('VDatePickerDateTable.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render component with events and match snapshot', () => {
+    const wrapper = mount(VDatePickerDateTable, {
+      propsData: {
+        tableDate: '2005-05',
+        current: '2005-07',
+        value: '2005-11-03',
+        events: ['2005-05-03'],
+        eventColor: 'red'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render component with events colored by object and match snapshot', () => {
+    const wrapper = mount(VDatePickerDateTable, {
+      propsData: {
+        tableDate: '2005-05',
+        current: '2005-07',
+        value: '2005-11-03',
+        events: ['2005-05-03', '2005-05-04'],
+        eventColor: {'2005-05-03': 'red', '2005-05-04': 'blue lighten-1'}
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render component with events colored by object and match snapshot', () => {
+    const wrapper = mount(VDatePickerDateTable, {
+      propsData: {
+        tableDate: '2005-05',
+        current: '2005-07',
+        value: '2005-11-03',
+        events: ['2005-05-03', '2005-05-04'],
+        eventColor: date => ({'2005-05-03': 'red'}[date])
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should match snapshot with first day of week', function () {
     const wrapper = mount(VDatePickerDateTable, {
       propsData: {
@@ -136,54 +178,6 @@ test('VDatePickerDateTable.js', ({ mount }) => {
     wrapper.trigger('touchstart')
     wrapper.trigger('touchend')
     expect(tableDate).toBeCalledWith('2005-06')
-  })
-
-  it('should calculate current date if not provided', () => {
-    const wrapper = mount(VDatePickerDateTable, {
-      propsData: {
-        tableDate: '2005-05'
-      }
-    })
-
-    expect(wrapper.vm.currentDate).toBe(new Date().getDate())
-    expect(wrapper.vm.currentMonth).toBe(new Date().getMonth())
-    expect(wrapper.vm.currentYear).toBe(new Date().getFullYear())
-  })
-
-  it('should return null for selected date if not provided', () => {
-    const wrapper = mount(VDatePickerDateTable, {
-      propsData: {
-        tableDate: '2005-05'
-      }
-    })
-
-    expect(wrapper.vm.selectedDate).toBe(null)
-    expect(wrapper.vm.selectedMonth).toBe(null)
-    expect(wrapper.vm.selectedYear).toBe(null)
-  })
-
-  it('should calculate active date', () => {
-    const wrapper = mount(VDatePickerDateTable, {
-      propsData: {
-        tableDate: '2005-05',
-        value: '2005-05-11'
-      }
-    })
-
-    expect(wrapper.vm.isActive(11)).toBe(true)
-    expect(wrapper.vm.isActive(12)).toBe(false)
-  })
-
-  it('should calculate active date', () => {
-    const wrapper = mount(VDatePickerDateTable, {
-      propsData: {
-        tableDate: '2005-05',
-        current: '2005-05-11'
-      }
-    })
-
-    expect(wrapper.vm.isCurrent(11)).toBe(true)
-    expect(wrapper.vm.isCurrent(12)).toBe(false)
   })
 
   it('should change tableDate when touch is called', () => {

@@ -1,5 +1,5 @@
-import { test, touch } from '@/util/testing'
-import { createRange } from '@/util/helpers'
+import { test, touch } from '@util/testing'
+import { createRange } from '@util/helpers'
 import VTabItem from './VTabItem'
 import VTabsItems from './VTabsItems'
 
