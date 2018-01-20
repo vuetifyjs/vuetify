@@ -335,13 +335,15 @@ export default {
   },
 
   render (h) {
+    var headersLength = this.headers.length
+
     return h('v-table-overflow', {}, [
       h('table', {
         'class': this.classes
       }, [
-        this.genTHead(),
-        this.genTBody(),
-        this.genTFoot()
+        this.genTHead(headersLength),
+        this.genTBody(headersLength),
+        this.genTFoot(headersLength)
       ])
     ])
   }

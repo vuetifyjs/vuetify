@@ -1,6 +1,6 @@
 export default {
   methods: {
-    genTHead () {
+    genTHead (headersLength) {
       if (this.hideHeaders) return // Exit Early since no headers are needed.
 
       let children = []
@@ -12,7 +12,7 @@ export default {
           all: this.all
         })
 
-        children = [this.needsTR(row) ? this.genTR(row) : row, this.genTProgress()]
+        children = [this.needsTR(row) ? this.genTR(row) : row, this.genTProgress(headersLength)]
       } else {
         const row = this.headers.map(o => this.genHeader(o))
         const checkbox = this.$createElement('v-checkbox', {
@@ -29,7 +29,7 @@ export default {
 
         this.hasSelectAll && row.unshift(this.$createElement('th', [checkbox]))
 
-        children = [this.genTR(row), this.genTProgress()]
+        children = [this.genTR(row), this.genTProgress(headersLength)]
       }
 
       return this.$createElement('thead', [children])

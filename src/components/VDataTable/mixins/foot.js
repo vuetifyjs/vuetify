@@ -103,7 +103,7 @@ export default {
         this.genNextIcon()
       ])]
     },
-    genTFoot () {
+    genTFoot (headersLength) {
       const children = []
 
       if (this.$slots.footer) {
@@ -116,7 +116,7 @@ export default {
       if (!this.hideActions) {
         children.push(this.genTR([
           this.$createElement('td', {
-            attrs: { colspan: '100%' }
+            attrs: { colspan: headersLength }
           }, this.genActions())
         ]))
       }

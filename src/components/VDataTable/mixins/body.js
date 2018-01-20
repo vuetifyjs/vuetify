@@ -2,22 +2,22 @@ import ExpandTransitionGenerator from '../../transitions/expand-transition'
 
 export default {
   methods: {
-    genTBody () {
+    genTBody (headersLength) {
       const children = []
 
       if (!this.itemsLength && !this.items.length) {
         const noData = this.$slots['no-data'] || this.noDataText
-        children.push(this.genEmptyBody(noData))
+        children.push(this.genEmptyBody(noData, headersLength))
       } else if (!this.filteredItems.length) {
         const noResults = this.$slots['no-results'] || this.noResultsText
-        children.push(this.genEmptyBody(noResults))
+        children.push(this.genEmptyBody(noResults, headersLength))
       } else {
-        children.push(this.genFilteredItems())
+        children.push(this.genFilteredItems(headersLength))
       }
 
       return this.$createElement('tbody', children)
     },
-    genExpandedRow (props) {
+    genExpandedRow (props, headersLength) {
       const children = []
 
       if (this.isExpanded(props.item)) {
@@ -31,7 +31,7 @@ export default {
 
       const transition = this.$createElement('transition-group', {
         class: 'datatable__expand-col',
-        attrs: { colspan: '100%' },
+        attrs: { colspan: headersLength },
         props: {
           tag: 'td'
         },
@@ -68,7 +68,7 @@ export default {
 
       return props
     },
-    genFilteredItems () {
+    genFilteredItems (headersLength) {
       const rows = []
       this.filteredItems.forEach((item, index) => {
         const props = this.createProps(item, index)
@@ -83,17 +83,17 @@ export default {
           : row)
 
         if (this.$scopedSlots.expand) {
-          const expandRow = this.genExpandedRow(props)
+          const expandRow = this.genExpandedRow(props, headersLength)
           rows.push(expandRow)
         }
       })
 
       return rows
     },
-    genEmptyBody (content) {
+    genEmptyBody (content, headersLength) {
       return this.genTR([this.$createElement('td', {
         'class': 'text-xs-center',
-        attrs: { colspan: '100%' }
+        attrs: { colspan: headersLength }
       }, content)])
     }
   }
