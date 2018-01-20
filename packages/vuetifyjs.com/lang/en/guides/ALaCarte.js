@@ -7,7 +7,7 @@ export default {
   alert2: 'Keep in mind, both the `Vuetify` and `VApp` components are required to use Vuetify',
   alert3: 'The options object that you pass as the second argument to `Vue.use` can also include both a _directives_ and a _transitions_ property.',
   importText2: 'If you are not using the transform-imports package, you will need to import each component like this:',
-  importText3: 'You can also import components in .vue files, as seen below.',
+  importText3: 'You can also import components in .vue files, as seen below. When doing so it\'s important that you import all named exports, and then destructure them in components. Otherwise child components such as `v-card-text` or `v-expansion-panel-content` will not be available.',
   styleHeader: 'Required styles',
   styleText1: 'In order to obtain all the required styles, we need to import them in stylus. In order for webpack to handle this, you will need to install `stylus` and the `stylus-loader` from **npm**.',
   alert4: 'For a more detailed explanation on how to setup your application to handle stylus, please navigate to the <a href="/style/themes">theme page</a>.',
