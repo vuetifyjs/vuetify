@@ -19,9 +19,10 @@ theme(picker-title, "picker")
 
 .picker
   border-radius: $card-border-radius
+  contain: content
   display: inline-flex
   flex-direction: column
-  contain: content
+  vertical-align: top
 
   .card__row--actions
     border: none
@@ -67,12 +68,9 @@ theme(picker-title, "picker")
       position: absolute
 
 .picker--landscape
-  flex-direction: row
-
   .picker__title
     border-top-right-radius: 0
     border-bottom-right-radius: 0
-    flex: 0 1 170px
     width: 170px
     position: absolute
     top: 0
@@ -81,5 +79,5 @@ theme(picker-title, "picker")
     z-index: 1
 
   .picker__body,
-  .card__row--actions
+  .picker__actions
     margin-left: 170px

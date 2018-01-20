@@ -67,8 +67,7 @@ export default {
           width: this.width + 'px'
         }
       }, [
-        this.genBodyTransition(),
-        this.$slots.actions ? this.genActions() : null
+        this.genBodyTransition()
       ])
     },
     genActions () {
@@ -87,7 +86,8 @@ export default {
       }
     }, [
       this.$slots.title ? this.genTitle() : null,
-      this.genBody()
+      this.genBody(),
+      this.$slots.actions ? this.genActions() : null
     ])
   }
 }
