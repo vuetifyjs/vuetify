@@ -374,7 +374,7 @@ export default {
         props: {
           allowedDates: this.type === 'month' ? this.allowedDates : null,
           color: this.color,
-          current: this.current,
+          current: this.sanitizeDateString(this.current, 'month'),
           disabled: this.readonly,
           format: this.monthFormat,
           locale: this.locale,

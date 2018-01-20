@@ -23,10 +23,16 @@ export default {
   },
 
   props: {
+    fullWidth: Boolean,
     landscape: Boolean,
     transition: {
       type: String,
       default: 'fade-transition'
+    },
+    width: {
+      type: [Number, String],
+      default: 330,
+      validator: value => parseInt(value, 10) > 0
     }
   },
 
@@ -56,8 +62,13 @@ export default {
     },
     genBody () {
       return this.$createElement('div', {
-        staticClass: 'picker__body'
-      }, [this.genBodyTransition()])
+        staticClass: 'picker__body',
+        style: this.fullWidth ? undefined : {
+          width: this.width + 'px'
+        }
+      }, [
+        this.genBodyTransition()
+      ])
     },
     genActions () {
       return this.$createElement('div', {
