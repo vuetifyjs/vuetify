@@ -1,9 +1,12 @@
 export default {
   header: 'Jumbotron',
   headerText: 'Скоро...',
+  components: [
+    'v-jumbotron'
+  ],
   examples: [{
     usage: {
-      header: 'Использование',
+      header: 'Применение',
       desc: 'Скоро..'
     },
     color: {
@@ -16,7 +19,11 @@ export default {
     },
     gradientWithImage: {
       header: 'Градиент с изображением',
-      desc: ' Более подробную информацию о градиентах можно найти [здесь](https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient)'
+      desc: 'Более подробную информацию о градиентах можно найти [здесь](https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient)'
     }
-  }]
+  }],
+  props: {
+    gradient: 'Примените градиент как фон. Если используется с **src** , наложите его',
+    src: 'img src'
+  }
 }
