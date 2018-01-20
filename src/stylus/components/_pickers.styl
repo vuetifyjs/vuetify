@@ -27,6 +27,9 @@ theme(picker-title, "picker")
     border: none
     margin-top: -20px
 
+.picker--full-width
+  display: flex
+
 .picker__title
   color: #fff
   border-top-left-radius: $card-border-radius
@@ -50,6 +53,12 @@ theme(picker-title, "picker")
   height: auto
   overflow: hidden
   position: relative
+
+
+  flex: 1
+  display: flex
+  flex-direction: column
+  align-items: center
 
   > div
     width: 100%

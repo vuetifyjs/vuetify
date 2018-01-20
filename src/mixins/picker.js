@@ -18,6 +18,7 @@ export default {
   ],
 
   props: {
+    fullWidth: Boolean,
     headerColor: String,
     landscape: Boolean,
     noTitle: Boolean,
@@ -40,9 +41,11 @@ export default {
     genPicker (staticClass) {
       return this.$createElement('v-picker', {
         staticClass,
+        class: this.fullWidth ? ['picker--full-width'] : [],
         props: {
           color: this.headerColor || this.color,
           dark: this.dark,
+          fullWidth: this.fullWidth,
           landscape: this.landscape,
           light: this.light,
           width: this.width

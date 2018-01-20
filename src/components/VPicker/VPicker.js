@@ -23,6 +23,7 @@ export default {
   },
 
   props: {
+    fullWidth: Boolean,
     landscape: Boolean,
     transition: {
       type: String,
@@ -62,7 +63,7 @@ export default {
     genBody () {
       return this.$createElement('div', {
         staticClass: 'picker__body',
-        style: {
+        style: this.fullWidth ? undefined : {
           width: this.width + 'px'
         }
       }, [
