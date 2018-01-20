@@ -8,7 +8,6 @@ import Picker from '../../mixins/picker'
 // Utils
 import { createRange } from '../../util/helpers'
 import pad from '../VDatePicker/util/pad'
-import isValueAllowed from '../../util/isValueAllowed'
 
 const rangeHours24 = createRange(24)
 const rangeHours12am = createRange(12)
@@ -36,14 +35,8 @@ export default {
   },
 
   props: {
-    allowedHours: {
-      type: [Array, Object, Function],
-      default: () => (null)
-    },
-    allowedMinutes: {
-      type: [Array, Object, Function],
-      default: () => (null)
-    },
+    allowedHours: Function,
+    allowedMinutes: Function,
     format: {
       type: String,
       default: 'ampm',
@@ -51,11 +44,42 @@ export default {
         return ['ampm', '24hr'].includes(val)
       }
     },
+    min: String,
+    max: String,
     scrollable: Boolean,
     value: null
   },
 
   computed: {
+    isAllowedHourCb () {
+      if (!this.min && !this.max) return this.allowedHours
+
+      const minHour = this.min ? this.min.split(':')[0] : 0
+      const maxHour = this.max ? this.max.split(':')[0] : 23
+
+      return val => {
+        return val >= minHour * 1
+          && val <= maxHour * 1
+          && (!this.allowedHours || this.allowedHours(val))
+      }
+    },
+    isAllowedMinuteCb () {
+      if (!this.min && !this.max) return this.allowedHours
+
+      const [minHour, minMinute] = this.min ? this.min.split(':') : [0, 0]
+      const [maxHour, maxMinute] = this.max ? this.max.split(':') : [23, 59]
+      const minTime = minHour * 60 + minMinute * 1
+      const maxTime = maxHour * 60 + maxMinute * 1
+      const isHourAllowed = !this.allowedHours || this.allowedHours(this.hour)
+
+      return val => {
+        const time = 60 * this.hour + val
+        return time >= minTime
+          && time <= maxTime
+          && isHourAllowed
+          && (!this.allowedMinutes || this.allowedMinutes(val))
+      }
+    },
     hour: {
       get () {
         return this.inputHour == null ? this.firstAllowed('hour', new Date().getHours()) : this.inputHour
@@ -141,7 +165,7 @@ export default {
       this.selectingHour = !this.selectingHour
     },
     firstAllowed (type, value) {
-      const allowedFn = type === 'hour' ? this.allowedHours : this.allowedMinutes
+      const allowedFn = type === 'hour' ? this.isAllowedHourCb : this.isAllowedMinuteCb
       if (!allowedFn) return value
 
       const range = type === 'minute'
@@ -151,13 +175,13 @@ export default {
             ? rangeHours12am
             : rangeHours12pm)
           : rangeHours24)
-      const first = range.find(v => isValueAllowed((v + value) % range.length + range[0], allowedFn))
+      const first = range.find(v => allowedFn((v + value) % range.length + range[0]))
       return ((first || 0) + value) % range.length + range[0]
     },
     genClock () {
       return this.$createElement('v-time-picker-clock', {
         props: {
-          allowedValues: this.selectingHour ? this.allowedHours : this.allowedMinutes,
+          allowedValues: this.selectingHour ? this.isAllowedHourCb : this.isAllowedMinuteCb,
           color: this.color,
           dark: this.dark,
           double: this.selectingHour && !this.isAmPm,
@@ -165,7 +189,7 @@ export default {
           max: this.selectingHour ? (this.isAmPm && this.period === 'am' ? 11 : 23) : 59,
           min: this.selectingHour && this.isAmPm && this.period === 'pm' ? 12 : 0,
           scrollable: this.scrollable,
-          size: this.landscape ? 250 : 270,
+          size: this.width - ((!this.fullWidth && this.landscape) ? 80 : 20),
           step: this.selectingHour ? 1 : 5,
           value: this.selectingHour ? this.hour : this.minute
         },
@@ -178,9 +202,10 @@ export default {
     },
     genPickerBody () {
       return this.$createElement('div', {
+        staticClass: 'time-picker-clock__container',
         style: {
-          width: '100%',
-          height: '100%'
+          width: `${this.width}px`,
+          height: `${this.width - ((!this.fullWidth && this.landscape) ? 60 : 0)}px`
         },
         key: this.selectingHour
       }, [this.genClock()])

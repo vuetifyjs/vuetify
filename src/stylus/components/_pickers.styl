@@ -19,14 +19,17 @@ theme(picker-title, "picker")
 
 .picker
   border-radius: $card-border-radius
-  display: flex
-  flex-direction: column
-  width: 290px
   contain: content
+  display: inline-flex
+  flex-direction: column
+  vertical-align: top
 
   .card__row--actions
     border: none
     margin-top: -20px
+
+.picker--full-width
+  display: flex
 
 .picker__title
   color: #fff
@@ -48,25 +51,26 @@ theme(picker-title, "picker")
       opacity: 1
 
 .picker__body
-  height: 290px
+  height: auto
   overflow: hidden
   position: relative
 
+
+  flex: 1
+  display: flex
+  flex-direction: column
+  align-items: center
+
   > div
     width: 100%
-    
+
     &.fade-transition-leave-active
       position: absolute
 
 .picker--landscape
-  flex-direction: row
-  flex-wrap: wrap
-  width: 500px
-
   .picker__title
     border-top-right-radius: 0
     border-bottom-right-radius: 0
-    flex: 0 1 170px
     width: 170px
     position: absolute
     top: 0
@@ -74,11 +78,6 @@ theme(picker-title, "picker")
     height: 100%
     z-index: 1
 
-  .picker__body
-    flex: 1 0
-    width: 330px
+  .picker__body,
+  .picker__actions
     margin-left: 170px
-
-  .card__row--actions
-    margin-left: 170px
-    width: 330px

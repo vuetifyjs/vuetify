@@ -27,7 +27,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       propsData: {
         value: '2013-05',
         type: 'month',
-        allowedDates: []
+        allowedDates: () => false
       },
       data: {
         activePicker: 'YEAR'
@@ -83,7 +83,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       propsData: {
         value: '2013-05',
         type: 'month',
-        allowedDates: ['2013-01', '2013-03', '2013-05', '2013-07', 'invalid month']
+        allowedDates: value => ['2013-01', '2013-03', '2013-05', '2013-07'].includes(value)
       }
     })
 
@@ -183,7 +183,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       propsData: {
         value: null,
         type: 'month',
-        allowedDates: [`${year}-03`]
+        allowedDates: value => value === `${year}-03`
       }
     })
     expect(wrapper2.vm.inputDate).toBe(`${year}-03`)

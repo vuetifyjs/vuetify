@@ -5,7 +5,6 @@ import DatePickerTable from './mixins/date-picker-table'
 // Utils
 import { pad, createNativeLocaleFormatter, monthChange } from './util'
 import { createRange } from '../../util/helpers'
-import isValueAllowed from '../../util/isValueAllowed'
 
 export default {
   name: 'v-date-picker-date-table',
@@ -78,6 +77,15 @@ export default {
       const weekDay = firstDayOfTheMonth.getUTCDay()
       return (weekDay - parseInt(this.firstDayOfWeek) + 7) % 7
     },
+    isEvent (date) {
+      if (Array.isArray(this.events)) {
+        return this.events.indexOf(date) > -1
+      } else if (this.events instanceof Function) {
+        return this.events(date)
+      } else {
+        return false
+      }
+    },
     genTBody () {
       const children = []
       const daysInMonth = new Date(this.displayedYear, this.displayedMonth + 1, 0).getDate()
@@ -87,11 +95,10 @@ export default {
       while (day--) rows.push(this.$createElement('td'))
       for (day = 1; day <= daysInMonth; day++) {
         const date = `${this.displayedYear}-${pad(this.displayedMonth + 1)}-${pad(day)}`
-        const isEvent = isValueAllowed(date, this.events, false)
 
         rows.push(this.$createElement('td', [
           this.genButton(date, true),
-          isEvent ? this.genEvent(date) : null
+          this.isEvent(date) ? this.genEvent(date) : null
         ]))
 
         if (rows.length % 7 === 0) {
