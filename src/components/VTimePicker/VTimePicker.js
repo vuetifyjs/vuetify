@@ -30,8 +30,6 @@ export default {
     return {
       inputHour,
       inputMinute,
-      originalHour: inputHour,
-      originalMinute: inputMinute,
       selectingHour: true
     }
   },
@@ -39,7 +37,6 @@ export default {
   props: {
     allowedHours: Function,
     allowedMinutes: Function,
-    autosave: Boolean,
     format: {
       type: String,
       default: 'ampm',
@@ -153,24 +150,6 @@ export default {
     convert12to24 (hour, period) {
       return hour % 12 + (period === 'pm' ? 12 : 0)
     },
-    save () {
-      this.originalHour = this.inputHour
-      this.originalMinute = this.inputMinute
-      this.commit()
-    },
-    cancel () {
-      this.inputHour = this.originalHour
-      this.inputMinute = this.originalMinute
-      this.commit()
-    },
-    commit () {
-      if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
-
-      // Fix for #1818
-      // Wait for data to persist
-      // then set selectingHour
-      this.$nextTick(() => (this.selectingHour = true))
-    },
     onInput (value) {
       if (!this.selectingHour) {
         this.minute = value
@@ -179,13 +158,11 @@ export default {
       }
     },
     onChange () {
-      if (!this.selectingHour && this.autosave) {
-        this.save()
+      if (!this.selectingHour) {
+        this.$emit('change', this.value)
       }
 
-      if (this.selectingHour) {
-        this.selectingHour = !this.selectingHour
-      }
+      this.selectingHour = !this.selectingHour
     },
     firstAllowed (type, value) {
       const allowedFn = type === 'hour' ? this.isAllowedHourCb : this.isAllowedMinuteCb

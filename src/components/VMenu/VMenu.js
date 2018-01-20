@@ -5,6 +5,7 @@ import Delayable from '../../mixins/delayable'
 import Dependent from '../../mixins/dependent'
 import Detachable from '../../mixins/detachable'
 import Menuable from '../../mixins/menuable.js'
+import Returnable from '../../mixins/returnable'
 import Toggleable from '../../mixins/toggleable'
 
 // Component level mixins
@@ -29,6 +30,7 @@ export default {
     Keyable,
     Menuable,
     Position,
+    Returnable,
     Toggleable
   ],
 

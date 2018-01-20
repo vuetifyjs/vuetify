@@ -4,32 +4,6 @@ import VDatePicker from './VDatePicker'
 import VMenu from '@components/VMenu'
 
 test('VDatePicker.js', ({ mount, compileToFunctions }) => {
-  function createMenuPicker (mount, props) {
-    const wrapper = mount(Vue.component('test', {
-      components: {
-        VDatePicker,
-        VMenu
-      },
-      render (h) {
-        return h('v-menu', {
-          ref: 'menu'
-        }, [h('v-date-picker', {
-          props,
-          ref: 'picker'
-        })])
-      }
-    }))
-
-    const menu = wrapper.vm.$refs.menu
-    menu.isActive = true
-
-    const picker = menu.$slots.default[0].context.$refs.picker
-
-    expect('Unable to locate target [data-app]').toHaveBeenTipped()
-
-    return { wrapper, menu, picker }
-  }
-
   it('should display the correct date in title and header', () => {
     const wrapper = mount(VDatePicker, {
       propsData: {
@@ -409,24 +383,6 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.value).toBe('1999-12-01')
   })
 
-  it('should emit original date if value is set to null', () => {
-    const wrapper = mount(VDatePicker, {
-      propsData: {
-        type: 'date',
-        value: '2013-05-07'
-      }
-    })
-
-    const input = jest.fn()
-    wrapper.vm.$on('input', input)
-
-    wrapper.vm.inputDate = '2014-06-08'
-    expect(input).toBeCalledWith('2014-06-08')
-
-    wrapper.vm.inputDate = null
-    expect(input).toBeCalledWith('2013-05-07')
-  })
-
   it('should format title date', () => {
     const wrapper = mount(VDatePicker, {
       propsData: {
@@ -438,46 +394,6 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
 
     wrapper.setProps({ landscape: true })
     expect(wrapper.vm.defaultTitleDateFormatter('2013-03-05')).toBe('Tue,<br>Mar 5')
-  })
-
-  it('should deactivate parent component on cancel', () => {
-    const { wrapper, menu, picker } = createMenuPicker(mount, { value: '2013-05-07' })
-
-    picker.dateClick('2013-06-08')
-    picker.cancel()
-    expect(menu.isActive).toBe(false)
-    expect(picker.inputDate).toBe('2013-05-07')
-
-    const wrapperNoParent = mount(VDatePicker, {
-      propsData: {
-        value: '2013-05-07',
-      }
-    })
-    wrapperNoParent.vm.cancel()
-  })
-
-  it('should update with autosave on date click', async () => {
-    const { wrapper, menu, picker } = createMenuPicker(mount, {
-      value: '2013-05-07',
-      autosave: true
-    })
-
-    const input = jest.fn()
-    picker.$on('input', input)
-
-    picker.dateClick('2013-06-08')
-    expect(menu.isActive).toBe(true)
-    await wrapper.vm.$nextTick()
-    expect(menu.isActive).toBe(false)
-    expect(input).toBeCalledWith('2013-06-08')
-
-    const wrapperNoParent = mount(VDatePicker, {
-      propsData: {
-        value: '2013-05-07',
-        autosave: true
-      }
-    })
-    wrapperNoParent.vm.save()
   })
 
   it('should use prev and next icons', () => {
