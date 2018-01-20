@@ -98,12 +98,14 @@ export default {
   },
 
   render (h) {
+    var headersLength = this.headers.length
+
     const tableOverflow = h('v-table-overflow', {}, [
       h('table', {
         'class': this.classes
       }, [
-        this.genTHead(),
-        this.genTBody(),
+        this.genTHead(headersLength),
+        this.genTBody(headersLength),
         this.genTFoot()
       ])
     ])

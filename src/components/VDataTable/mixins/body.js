@@ -2,12 +2,12 @@ import ExpandTransitionGenerator from '../../transitions/expand-transition'
 
 export default {
   methods: {
-    genTBody () {
-      const children = this.genItems()
+    genTBody (headersLength) {
+      const children = this.genItems(headersLength)
 
       return this.$createElement('tbody', children)
     },
-    genExpandedRow (props) {
+    genExpandedRow (props, headersLength) {
       const children = []
 
       if (this.isExpanded(props.item)) {
@@ -21,7 +21,7 @@ export default {
 
       const transition = this.$createElement('transition-group', {
         class: 'datatable__expand-col',
-        attrs: { colspan: '100%' },
+        attrs: { colspan: headersLength },
         props: {
           tag: 'td'
         },
@@ -30,7 +30,7 @@ export default {
 
       return this.genTR([transition], { class: 'datatable__expand-row' })
     },
-    genFilteredItems () {
+    genFilteredItems (headersLength) {
       if (!this.$scopedSlots.items) {
         return null
       }
@@ -49,18 +49,18 @@ export default {
           : row)
 
         if (this.$scopedSlots.expand) {
-          const expandRow = this.genExpandedRow(props)
+          const expandRow = this.genExpandedRow(props, headersLength)
           rows.push(expandRow)
         }
       }
 
       return rows
     },
-    genEmptyItems (content) {
+    genEmptyItems (content, headersLength) {
       if (typeof content === 'string') {
         return this.genTR([this.$createElement('td', {
           'class': 'text-xs-center',
-          attrs: { colspan: '100%' }
+          attrs: { colspan: headersLength }
         }, content)])
       } else {
         return this.needsTR(content) ? this.genTR(content) : content
