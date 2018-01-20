@@ -240,6 +240,43 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
+  it('should allow custom tr when using no-data slot', async () => {
+    const wrapper = mount(Vue.component('test', {
+      components: {
+        VDataTable
+      },
+      render (h) {
+        return h('v-data-table', {
+          props: {
+            items: []
+          },
+        }, [h('tr', { slot: 'no-data', class: 'custom-class' })])
+      }
+    }))
+
+    expect(wrapper.find('table tbody tr.custom-class').length).toBe(1)
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should allow custom td when using no-results slot', async () => {
+    const wrapper = mount(Vue.component('test', {
+      components: {
+        VDataTable
+      },
+      render (h) {
+        return h('v-data-table', {
+          props: {
+            items: [{}],
+            search: 'foo'
+          },
+        }, [h('td', { slot: 'no-results', class: 'custom-class' })])
+      }
+    }))
+
+    expect(wrapper.find('table tbody tr td.custom-class').length).toBe(1)
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
   it('should initialize everyItem state', async () => {
     const data = dataTableTestData()
     data.propsData.value = data.propsData.items

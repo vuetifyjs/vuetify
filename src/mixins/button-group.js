@@ -30,14 +30,15 @@ export default {
 
       for (let i = 0; i < this.buttons.length; i++) {
         const elm = this.buttons[i].$el
+        const button = this.buttons[i]
 
         elm.removeAttribute('data-only-child')
 
         if (this.isSelected(i)) {
-          elm.classList.contains('btn--router') || elm.classList.add('btn--active')
+          !button.to && (button.isActive = true)
           selected.push(i)
         } else {
-          elm.classList.contains('btn--router') || elm.classList.remove('btn--active')
+          !button.to && (button.isActive = false)
         }
       }
 
