@@ -7,13 +7,6 @@ export default {
 
   mixins: [props],
 
-  props: {
-    barWidth: {
-      type: Number,
-      default: 8
-    }
-  },
-
   render (h) {
     if (!this.data || this.data.length < 2) return
     const { width, height, padding } = this

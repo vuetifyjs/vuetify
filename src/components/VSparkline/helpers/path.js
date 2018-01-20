@@ -1,15 +1,9 @@
 import { checkCollinear, getDistance, moveTo } from './math'
 
-export function genLinearPath (points) {
-  const { x, y } = points.shift()
-
-  return `M${x} ${y}` + points.map(({ x, y }) => `L${x} ${y}`).join('')
-}
-
 /**
  * From https://github.com/unsplash/react-trend/blob/master/src/helpers/DOM.helpers.js#L18
  */
-export function genSmoothPath (points, radius) {
+export function genPath (points, radius) {
   const start = points.shift()
 
   return (

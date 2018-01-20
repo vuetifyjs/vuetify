@@ -28,6 +28,7 @@ export default {
       type: Number,
       default: 8
     },
-    smooth: Boolean
+    smooth: [Boolean, Number],
+    lineWidth: Number
   }
 }

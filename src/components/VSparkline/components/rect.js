@@ -6,7 +6,7 @@ export default {
     'smooth',
     'data',
     'boundary',
-    'barWidth',
+    'lineWidth',
     'gradient',
     'autoDrawDuration',
     'autoDraw'
@@ -17,11 +17,9 @@ export default {
     const props = this.$props
     const { maxX, maxY } = props.boundary
     const totalWidth = maxX / (points.length - 1)
-    if (!props.barWidth) {
-      props.barWidth = totalWidth - (props.padding || 5)
-    }
-    const rounding = props.smooth ? 2 : 0
-    const offsetX = (totalWidth - props.barWidth) / 2
+    const lineWidth = props.lineWidth || (totalWidth - (props.padding || 5))
+    const rounding = props.smooth ? 2 : Number(props.smooth)
+    const offsetX = (totalWidth - lineWidth) / 2
 
     return h(
       'clipPath',
@@ -38,7 +36,7 @@ export default {
             attrs: {
               x: item.x - offsetX,
               y: 0,
-              width: props.barWidth,
+              width: lineWidth,
               height: maxY - item.y,
               rx: rounding,
               ry: rounding

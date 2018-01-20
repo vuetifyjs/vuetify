@@ -7,13 +7,6 @@ export default {
 
   mixins: [props],
 
-  props: {
-    radius: {
-      type: Number,
-      default: 10
-    }
-  },
-
   watch: {
     data: {
       immediate: true,
@@ -59,7 +52,7 @@ export default {
       {
         attrs: {
           stroke: 'black',
-          'stroke-width': '1',
+          'stroke-width': this.lineWidth || 1,
           width: width || '100%',
           height: height || '25%',
           viewBox: `0 0 ${viewWidth} ${viewHeight}`
