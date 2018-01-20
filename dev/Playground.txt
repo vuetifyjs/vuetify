@@ -1,0 +1,113 @@
+<template>
+  <v-app>
+    <v-data-table
+      :headers="headers"
+      :items="[]"
+      hide-actions
+      class="example-table-layout"
+    >
+      <template
+        slot="items"
+        slot-scope="props"
+      >
+        <td>{{ props.item.a }}</td>
+        <td>{{ props.item.b }}</td>
+        <td>{{ props.item.c }}</td>
+        <td>fixed</td>
+      </template>
+    </v-data-table>
+    <v-card-title>
+      Nutrition
+      <v-spacer></v-spacer>
+      <v-text-field
+        append-icon="search"
+        label="Search"
+        single-line
+        hide-details
+        v-model="search"
+      ></v-text-field>
+    </v-card-title>
+    <v-data-table
+      :headers="headers"
+      :items="items"
+      :search="search"
+      hide-actions
+      class="example-table-layout"
+    >
+      <template
+        slot="items"
+        slot-scope="props"
+      >
+        <td>{{ props.item.a }}</td>
+        <td>{{ props.item.b }}</td>
+        <td>{{ props.item.c }}</td>
+        <td>fixed</td>
+      </template>
+    </v-data-table>
+  </v-app>
+</template>
+
+<style>
+.example-table-layout table {
+  table-layout: fixed;
+}
+.datatable__progress th {
+  background-color: red;
+}
+.example-column {
+	width: calc(33% - 52px);
+}
+.example-column-fixed {
+	width: 156px;
+}
+</style>
+
+<script>
+  export default {
+    data: () => ({
+      search: '',
+      headers: [
+				{
+					text: 'Column A',
+					value: 'a',
+					align: 'left',
+					class: 'example-column'
+				},
+				{
+					text: 'Column B',
+					value: 'b',
+					align: 'left',
+					class: 'example-column'
+				},
+				{
+					text: 'Column C',
+					value: 'c',
+					align: 'left',
+					class: 'example-column'
+				},
+				{
+					text: 'Column Fixed',
+					sortable: false,
+					class: 'example-column-fixed'
+				}
+			],
+      items: [
+        {
+          a: 'Text bla bla',
+          b: 'Another text',
+          c: 'Text C'
+        },
+        {
+          a: 'Text A',
+          b: 'Text B',
+          c: 'More text'
+        },
+        {
+          a: 'Vuetify',
+          b: 'Rocks!!!',
+          c: 'You know'
+        }
+			]
+    })
+  }
+</script>
