@@ -335,4 +335,40 @@ test('VMenu.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
+
+  it('should round dimensions', async () => {
+    const wrapper = mount(VMenu, {
+      propsData: {
+        value: false
+      },
+      slots: {
+        activator: [VBtn]
+      }
+    })
+
+    const content = wrapper.find('.menu__content')[0]
+
+    const getBoundingClientRect = () => {
+      return {
+        width: 100.5,
+        height: 100.25,
+        top: 0.75,
+        left: 50.123,
+        right: 75.987,
+        bottom: 4,
+        x: 0,
+        y: 0
+      }
+    }
+
+    wrapper.vm.$refs.activator.querySelector('.btn').getBoundingClientRect = getBoundingClientRect
+    wrapper.vm.$refs.content.getBoundingClientRect = getBoundingClientRect
+
+    wrapper.setProps({ value: true })
+
+    await new Promise(resolve => requestAnimationFrame(resolve))
+
+    expect(content.getAttribute('style')).toMatchSnapshot()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
 })

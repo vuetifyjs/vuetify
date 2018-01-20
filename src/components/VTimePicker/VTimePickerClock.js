@@ -38,11 +38,11 @@ export default {
     },
     max: {
       type: Number,
-      require: true
+      required: true
     },
     min: {
       type: Number,
-      require: true
+      required: true
     },
     scrollable: Boolean,
     rotate: {
