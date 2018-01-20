@@ -63,13 +63,12 @@
           |})
         section-text(:value="`${namespace}.importText3`")
         markup(lang="js")
-          |import { VTextField } from 'vuetify'
+          |import * as VCard from 'vuetify/es5/components/VCard'
           |
           |export default {
           |  components: {
-          |    VTextField
-          |  },
-          |  ...
+          |    ...VCard
+          |  }
           |}
 
       section#required-styles
