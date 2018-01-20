@@ -4,9 +4,6 @@ require('../../stylus/components/_time-picker-clock.styl')
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 
-// Utils
-import isValueAllowed from '../../util/isValueAllowed'
-
 const outerRadius = 0.8
 const innerRadius = 0.5
 
@@ -27,10 +24,7 @@ export default {
   },
 
   props: {
-    allowedValues: {
-      type: [Array, Object, Function],
-      default: () => null
-    },
+    allowedValues: Function,
     double: Boolean,
     format: {
       type: Function,
@@ -97,7 +91,7 @@ export default {
       return this.double && (value - this.min >= this.roundCount) ? (innerRadius / outerRadius) : 1
     },
     isAllowed (value) {
-      return isValueAllowed(value, this.allowedValues)
+      return !this.allowedValues || this.allowedValues(value)
     },
     genValues () {
       const children = []

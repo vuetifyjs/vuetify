@@ -96,7 +96,7 @@ export default {
     closeConditional (e) {
       // close dialog if !persistent, clicked outside and we're the topmost dialog.
       // Since this should only be called in a capture event (bottom up), we shouldn't need to stop propagation
-      return !this.persistent &&
+      return this.isActive && !this.persistent &&
         getZIndex(this.$refs.content) >= this.getMaxZIndex() &&
         !this.$refs.content.contains(e.target)
     },
