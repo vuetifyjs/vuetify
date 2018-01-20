@@ -159,6 +159,9 @@ export default {
       // Once transitioning, calculate scroll position
       setTimeout(this.calculateScroll, 50)
     },
+    closeConditional () {
+      return this.isActive && this.closeOnClick
+    },
     onResize () {
       if (!this.isActive) return
 

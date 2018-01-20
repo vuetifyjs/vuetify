@@ -15,15 +15,18 @@ theme(time-picker-clock, "time-picker-clock")
 
 .time-picker-clock
   border-radius: 100%
-  position: absolute
-  user-select: none
-  top: 50%
-  left: 50%
+  position: relative
   transition: $primary-transition
-  transform: translate(-50%, -50%)
+  user-select: none
+
+  &__container
+    display: flex
+    align-items: center
+    justify-content: center
+    padding: 10px
 
   &__hand
-    height: 40%
+    height: calc(50% - 28px)
     width: 2px
     bottom: 50%
     left: calc(50% - 1px)
@@ -66,12 +69,12 @@ theme(time-picker-clock, "time-picker-clock")
     display: flex
     font-size: $time-picker-number-font-size
     justify-content: center
-    left: 'calc(50% - %s)' % $time-picker-number-font-size
-    height: $time-picker-number-font-size * 2
+    left: 'calc(50% - %s / 2)' % $time-picker-indicator-size
+    height: $time-picker-indicator-size
     position: absolute
     text-align: center
-    top: 'calc(50% - %s)' % $time-picker-number-font-size
-    width: $time-picker-number-font-size * 2
+    top: 'calc(50% - %s / 2)' % $time-picker-indicator-size
+    width: $time-picker-indicator-size
     user-select: none
 
     > span
@@ -88,8 +91,8 @@ theme(time-picker-clock, "time-picker-clock")
       transform: translate(-50%, -50%)
 
     &:after, &:before
-      height: $time-picker-number-font-size * 2.5
-      width: $time-picker-number-font-size * 2.5
+      height: $time-picker-indicator-size
+      width: $time-picker-indicator-size
 
     &.active
       color: #fff

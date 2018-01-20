@@ -1,4 +1,4 @@
-import { test } from '@/util/testing'
+import { test } from '@util/testing'
 import VStepperContent from './VStepperContent'
 
 test('VStepperContent.js', ({ mount }) => {
