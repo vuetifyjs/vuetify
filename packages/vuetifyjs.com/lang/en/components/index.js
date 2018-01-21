@@ -10,6 +10,7 @@ import Carousels from './Carousels'
 import Chips from './Chips'
 import DataIterator from './DataIterator'
 import DataTables from './DataTables'
+import DatePickers from './DatePickers'
 import Dialogs from './Dialogs'
 import Dividers from './Dividers'
 import ExpansionPanels from './ExpansionPanels'
@@ -25,7 +26,6 @@ import Menus from './Menus'
 import NavigationDrawers from './NavigationDrawers'
 import Paginations from './Paginations'
 import Parallax from './Parallax'
-import Pickers from './Pickers'
 import Progress from './Progress'
 import SelectionControls from './SelectionControls'
 import Selects from './Selects'
@@ -35,6 +35,7 @@ import Steppers from './Steppers'
 import Subheaders from './Subheaders'
 import Tabs from './Tabs'
 import TextFields from './TextFields'
+import TimePickers from './TimePickers'
 import Toolbars from './Toolbars'
 import Tooltips from './Tooltips'
 
@@ -51,6 +52,7 @@ export default {
   Chips,
   DataIterator,
   DataTables,
+  DatePickers,
   Dialogs,
   Dividers,
   ExpansionPanels,
@@ -66,7 +68,6 @@ export default {
   NavigationDrawers,
   Paginations,
   Parallax,
-  Pickers,
   Progress,
   SelectionControls,
   Selects,
@@ -76,6 +77,7 @@ export default {
   Subheaders,
   Tabs,
   TextFields,
+  TimePickers,
   Toolbars,
   Tooltips
 }

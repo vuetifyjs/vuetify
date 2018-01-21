@@ -1,0 +1,45 @@
+<template>
+  <v-layout>
+    <v-flex xs6>
+      <v-date-picker
+        ref="picker"
+        v-model="date"
+        :picker-date.sync="pickerDate"
+        full-width
+      ></v-date-picker>
+    </v-flex>
+    <v-flex xs6 class="pl-2">
+      <div class="title">Month news ({{ pickerDate || 'change month...' }})</div>
+      <div class="subheading">Change month to see other news</div>
+      <ul class="ma-3">
+        <li v-for="note in notes" :key="note">{{ note }}</li>
+      </ul>
+    </v-flex>
+  </v-layout>
+</template>
+
+<script>
+export default {
+  data: () => ({
+    date: null,
+    pickerDate: null,
+    notes: [],
+    allNotes: [
+      'President met with prime minister',
+      'New power plant opened',
+      'Rocket launch announced',
+      'Global warming discussion cancelled',
+      'Company changed its location'
+    ]
+  }),
+  watch: {
+    pickerDate (val) {
+      this.notes = [
+        this.allNotes[Math.floor(Math.random() * 5)],
+        this.allNotes[Math.floor(Math.random() * 5)],
+        this.allNotes[Math.floor(Math.random() * 5)]
+      ].filter((value, index, self) => self.indexOf(value) === index)
+    }
+  }
+}
+</script>

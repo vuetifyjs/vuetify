@@ -6,6 +6,7 @@
     <template slot="items" slot-scope="props">
       <td>
         <v-edit-dialog
+          :return-value.sync="props.item.name"
           lazy
         > {{ props.item.name }}
           <v-text-field
@@ -26,8 +27,7 @@
       <td class="text-xs-right">{{ props.item.calcium }}</td>
       <td class="text-xs-right">
         <v-edit-dialog
-          @open="tmp = props.item.iron"
-          @save="props.item.iron = tmp || props.item.iron"
+          :return-value.sync="props.item.iron"
           large
           lazy
         >
@@ -36,7 +36,7 @@
           <v-text-field
             slot="input"
             label="Edit"
-            v-model="tmp"
+            v-model="props.item.iron"
             single-line
             counter
             autofocus
@@ -56,7 +56,6 @@
     data () {
       return {
         max25chars: (v) => v.length <= 25 || 'Input too long!',
-        tmp: '',
         pagination: {},
         headers: [
           {

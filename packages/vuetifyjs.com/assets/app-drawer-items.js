@@ -94,7 +94,15 @@ export default [
       { href: 'navigation-drawers', title: 'Navigation drawers' },
       { href: 'paginations', title: 'Paginations' },
       { href: 'parallax', title: 'Parallax' },
-      { href: 'pickers', title: 'Pickers', badge: 'updated' },
+      {
+        title: 'Pickers',
+        group: '/(date-pickers|time-pickers)',
+        namespace: '/components',
+        items: [
+          { href: 'date-pickers', title: 'Date pickers', badge: 'updated' },
+          { href: 'time-pickers', title: 'Time pickers', badge: 'updated' }
+        ]
+      },
       { href: 'progress', title: 'Progress' },
       { href: 'sliders', title: 'Sliders' },
       { href: 'snackbars', title: 'Snackbars' },
