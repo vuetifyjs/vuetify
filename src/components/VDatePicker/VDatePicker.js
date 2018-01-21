@@ -414,6 +414,12 @@ export default {
     }
   },
 
+  mounted () {
+    if (this.pickerDate !== this.tableDate) {
+      this.$emit('update:pickerDate', this.tableDate)
+    }
+  },
+
   render (h) {
     return this.genPicker('picker--date')
   }

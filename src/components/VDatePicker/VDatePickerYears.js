@@ -38,7 +38,7 @@ export default {
   },
 
   mounted () {
-    this.$el.scrollTop = this.$el.scrollHeight / 2 - 125
+    this.$el.scrollTop = this.$el.scrollHeight / 2 - this.$el.offsetHeight / 2
   },
 
   methods: {
