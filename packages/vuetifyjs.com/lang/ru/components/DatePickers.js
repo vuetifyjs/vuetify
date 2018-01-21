@@ -1,7 +1,7 @@
 export default {
-  header: 'Picker',
+  header: 'Date/month picker',
   headerText: '`v-date-picker` и` v-time-picker` являются автономными компонентами, которые могут использоваться во многих существующих компонентах Vuetify. Они предлагают пользователю визуальное представление для выбора даты и времени.',
-  components: ['v-date-picker', 'v-time-picker'],
+  components: ['v-date-picker'],
   examples: [{
     dateLight: {
       header: 'Выбор даты',
@@ -18,6 +18,18 @@ export default {
     dateAllowedDates: {
       header: 'Выбор даты - Доступные даты',
       desc: 'Вы можете указать даты, которые будут доступны пользователю, с использованием массивов, объектов и функций.'
+    },
+    dateWidth: {
+      header: 'Date pickers - Setting picker width',
+      desc: 'You can specify allowed the picker\'s width or make it full width.'
+    },
+    dateBirthday: {
+      header: 'Date pickers - birthday picker',
+      desc: 'Starting with year picker by default, resticting dates range and closing the picker menu after selecting the day make the perfect birthday picker.'
+    },
+    datePickerDate: {
+      header: 'Date pickers - react to disaplyed month/year change',
+      desc: 'You can watch the `pickerDate` which is the displayed month/year (depending on the picker type and active view) to perform some action when it changes.'
     },
     dateInternationalization: {
       header: 'Выбор даты - интернационализация',
@@ -43,6 +55,10 @@ export default {
       header: 'Выбор месяца - Доступные для выбора месяцы',
       desc: 'Вы можете указать доступные для выбора месяцы, используя массивы, объекты и функции.'
     },
+    monthWidth: {
+      header: 'Month pickers - Setting picker width',
+      desc: 'You can specify allowed the picker\'s width or make it full width.'
+    },
     monthInternationalization: {
       header: 'Выбор месяца - интернационализация',
       desc: 'Выбор месяца поддерживает интернационализацию через объект JavaScript Date. Укажите тег языка BCP 47, используя `locale`, а затем установите первый день недели с помощью свойства `first-day-of-week`.'
@@ -50,26 +66,6 @@ export default {
     monthIcons: {
       header: 'Выбор месяца - Иконки',
       desc: 'Вы можете переопределить иконки по умолчанию, используемые в Выборе месяца'
-    },
-    timeLight: {
-      header: 'Выбор времени',
-      desc: 'У Выбора времени по умолчанию включена светлая тема.'
-    },
-    timeColorable: {
-      header: 'Выбор времени - Цвета',
-      desc: 'Цветовая схема Выбора времени может быть установлена с помощью `color` и `header-color`. Если `header-color` не указан, заголовок будет использовать значение `color`'
-    },
-    timeDialogAndMenu: {
-      header: 'Выбор времени - В диалоговом окне и меню',
-      desc: 'Благодаря гибкости Picker вы действительно можете собрать на любой случай, именно так, как вы этого хотите.'
-    },
-    time24hFormat: {
-      header: 'Выбор времени - 24-часовой формат',
-      desc: 'Выбор времени можно переключить на 24-часовой формат.'
-    },
-    timeAllowedTimes: {
-      header: 'Выбор времени - Доступное для выбора время',
-      desc: 'Вы можете указать доступное для выбора время, используя массивы, объекты и функции.'
     }
   }],
   props: {
@@ -77,6 +73,8 @@ export default {
       type: 'Определяет тип - `date` для выбора даты,` month` для выбора месяца',
       monthFormat: 'Функция форматирования, используемая для отображения месяцев в таблице месяцев. Вызывается с датой(строка ISO 8601) и locale(строка).',
       allowedDates: 'Ограничивает, какие даты могут быть выбраны',
+      eventColor: 'Sets the color for event dot. It can be string (all events will have the same color) or `object` where attribute is the event date and value is the color for specified date or `function` taking date as a parameter and returning color for that date',
+      events: 'Marks the date as an event (only for date picker)',
       locale: 'Устанавливает языковой стандарт. Принимает строку с тегом языка BCP 47.',
       firstDayOfWeek: 'Устанавливает первый день недели, начиная с 0 для воскресенья.',
       titleDateFormat: 'Позволяет настроить формат строки даты, который отображается в заголовке выбора даты. Вызывается с датой(строка ISO 8601) и locale(строка).',
@@ -84,13 +82,14 @@ export default {
       yearFormat: 'Позволяет настроить формат строки года, отображаемой в заголовке календаря. Вызывается с датой (строка ISO 8601) и locale(строка).',
       dayFormat: 'Позволяет настроить формат дневной строки, отображаемой в таблице даты. Вызывается с датой (строка ISO 8601) и locale(строка).',
       yearIcon: 'Создает Иконку рядом с годом',
+      min: 'Minimum allowed date/month',
+      max: 'Maximum allowed date/month',
+      pickerDate: 'Displayed year/month',
       appendIcon: 'Устанавливает иконку для кнопки следующего месяца/года',
-      prependIcon: 'Устанавливает иконку для кнопки предыдущий месяц/год'
-    },
-    'v-time-picker': {
-      format: 'Доступны следующие опции: `am/pm` и` 24ч`',
-      allowedHours: 'Ограничивает, часы которые могут быть выбраны',
-      allowedMinutes: 'Ограничивает, какие минуты можно выбрать'
+      prependIcon: 'Устанавливает иконку для кнопки предыдущий месяц/год',
+      readonly: 'Makes the picker readonly (doesnt\'t allow to select new date or navigate through months/years)',
+      scrollable: 'Allows changing displayed month with mouse scroll',
+      showCurrent: 'Toggles visibility of the current date/month outline or shows the provided date/month as a current'
     }
   }
 }

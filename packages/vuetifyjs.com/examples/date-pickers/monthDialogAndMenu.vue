@@ -2,6 +2,7 @@
   <v-layout row wrap>
     <v-flex xs11 sm5>
       <v-menu
+        ref="menu"
         lazy
         :close-on-content-click="false"
         v-model="menu"
@@ -9,8 +10,9 @@
         offset-y
         full-width
         :nudge-right="40"
-        max-width="290px"
-        min-width="290px"
+        max-width="330px"
+        min-width="330px"
+        :return-value.sync="date"
       >
         <v-text-field
           slot="activator"
@@ -19,25 +21,28 @@
           prepend-icon="event"
           readonly
         ></v-text-field>
-        <v-date-picker v-model="date" no-title scrollable actions>
-          <template slot-scope="{ save, cancel }">
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn flat color="primary" @click="cancel">Cancel</v-btn>
-              <v-btn flat color="primary" @click="save">OK</v-btn>
-            </v-card-actions>
-          </template>
+        <v-date-picker
+          type="month"
+          v-model="date"
+          no-title
+          scrollable
+        >
+          <v-spacer></v-spacer>
+          <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
+          <v-btn flat color="primary" @click="$refs.menu.save(date)">OK</v-btn>
         </v-date-picker>
       </v-menu>
     </v-flex>
     <v-spacer></v-spacer>
     <v-flex xs11 sm5>
       <v-dialog
+        ref="dialog"
         persistent
         v-model="modal"
         lazy
         full-width
-        width="290px"
+        width="330px"
+        :return-value.sync="date"
       >
         <v-text-field
           slot="activator"
@@ -46,14 +51,10 @@
           prepend-icon="event"
           readonly
         ></v-text-field>
-        <v-date-picker v-model="date" scrollable actions>
-          <template slot-scope="{ save, cancel }">
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn flat color="primary" @click="cancel">Cancel</v-btn>
-              <v-btn flat color="primary" @click="save">OK</v-btn>
-            </v-card-actions>
-          </template>
+        <v-date-picker type="month" v-model="date" scrollable>
+          <v-spacer></v-spacer>
+          <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
+          <v-btn flat color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
         </v-date-picker>
       </v-dialog>
     </v-flex>
