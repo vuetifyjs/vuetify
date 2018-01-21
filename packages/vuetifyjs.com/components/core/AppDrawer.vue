@@ -6,7 +6,7 @@
     :stateless="isFullscreen"
   )#app-drawer
     div.text-xs-center
-      div.diamond-sponsor-label Diamond Sponsors
+      div(v-text="$t('Vuetify.AppDrawer.diamondSponsors')").diamond-sponsor-label
       div(
         v-for="diamond in diamonds"
         :key="diamond.title"
@@ -29,7 +29,7 @@
         active-class=""
         to="/getting-started/sponsors-and-backers"
       )
-        span.caption Become a Sponsor
+        span(v-text="$t('Vuetify.AppDrawer.becomeASponsor')").caption
     v-container(fluid)
       v-text-field(
         placeholder="Search"
@@ -45,7 +45,7 @@
       )
     div.py-3.text-xs-center
       a(
-        href="https://vuejobs.com/?utm_source=vuejobs&utm_medium=banner&utm_campaign=linking"
+        href="https://vuejobs.com/?utm_source=vuejobs&utm_medium=banner&utm_campaign=linking&ref=vuetifyjs.com"
         target="_blank"
         rel="noopener"
         class="d-inline-block"
@@ -227,9 +227,6 @@
             vm.$router.push(loc.pop())
           }
         })
-      },
-      toggleSidebar () {
-        this.$store.commit('vuetify/SIDEBAR', !this.$store.state.sidebar)
       }
     }
   }
@@ -276,6 +273,6 @@
 
       &-label
         color #676767
-        margin: 2em 0 1.5em
+        margin: 24px 0 16px 0
         font-size 13px
 </style>

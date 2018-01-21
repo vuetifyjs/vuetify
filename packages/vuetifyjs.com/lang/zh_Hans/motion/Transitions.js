@@ -16,7 +16,7 @@ export default {
     },
     slideYTransitions: {
       header: 'Y轴滑动过渡',
-      desc: '过渡地使用应用程序<code>$primary-transition</code>.',
+      desc: '过渡地使用应用程序<code>$primary-transition</code>.'
     },
     scaleTransition: {
       header: '缩放过渡',

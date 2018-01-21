@@ -37,6 +37,6 @@ export default {
     {
       text: 'UI组件名称列表',
       href: 'component-name-list'
-    },
+    }
   ]
 }

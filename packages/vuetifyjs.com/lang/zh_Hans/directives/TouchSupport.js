@@ -15,7 +15,7 @@ export default {
         name: '[up, down, left, right]',
         type: 'Function',
         default: 'null',
-        desc: '根据滑动方向分配回调。目前不建议配对x轴和y轴回调。',
+        desc: '根据滑动方向分配回调。目前不建议配对x轴和y轴回调。'
       },
       {
         name: '[move, start, end]',

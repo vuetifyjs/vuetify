@@ -41,7 +41,7 @@ export default {
     '`2` - 将`margin`或者`padding`属性设置为`$spacer * .5`',
     '`3` - 将`margin`或者`padding`属性设置为`$spacer`',
     '`4` - 将`margin`或者`padding`属性设置为`$spacer * 1.5`',
-    '`5` - 将`margin`或者`padding`属性设置为`$spacer * 3`',
+    '`5` - 将`margin`或者`padding`属性设置为`$spacer * 3`'
   ],
   horizontalHeader: '水平居中',
   horizontalText: '对于具有指定宽度的块元素，可以使用`.mx-auto`来使它的内容水平居中'

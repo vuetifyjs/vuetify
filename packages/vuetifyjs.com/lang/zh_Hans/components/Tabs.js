@@ -6,7 +6,7 @@ export default {
     'v-tabs-slider',
     'v-tabs-item',
     'v-tabs-items',
-    'v-tabs-content',
+    'v-tabs-content'
   ],
   examples: [{
     toolbar: {
