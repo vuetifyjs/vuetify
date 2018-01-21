@@ -1,4 +1,4 @@
-require('../../stylus/components/_pagination.styl')
+import '../../stylus/components/_pagination.styl'
 
 import VIcon from '../VIcon'
 
@@ -147,7 +147,7 @@ export default {
     genItems (h) {
       return this.items.map((i, index) => {
         return h('li', { key: index }, [
-          isNaN(i) && h('span', { class: 'pagination__more' }, [i]) || this.genItem(h, i)
+          isNaN(i) ? h('span', { class: 'pagination__more' }, [i]) : this.genItem(h, i)
         ])
       })
     }

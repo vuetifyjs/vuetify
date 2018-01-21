@@ -1,6 +1,6 @@
 // Styles
-require('../../stylus/components/_input-groups.styl')
-require('../../stylus/components/_text-fields.styl')
+import '../../stylus/components/_input-groups.styl'
+import '../../stylus/components/_text-fields.styl'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
@@ -112,8 +112,8 @@ export default {
       }
     },
     isDirty () {
-      return this.lazyValue != null &&
-        this.lazyValue.toString().length > 0 ||
+      return (this.lazyValue != null &&
+        this.lazyValue.toString().length > 0) ||
         this.badInput ||
         ['time', 'date', 'datetime-local', 'week', 'month'].includes(this.type)
     },

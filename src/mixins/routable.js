@@ -71,7 +71,7 @@ export default {
           replace: this.replace
         })
       } else {
-        tag = this.href && 'a' || this.tag || 'a'
+        tag = (this.href && 'a') || this.tag || 'a'
 
         if (tag === 'a') {
           if (this.href) data.attrs.href = this.href

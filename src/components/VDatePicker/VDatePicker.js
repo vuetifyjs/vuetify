@@ -109,7 +109,7 @@ export default {
     type: {
       type: String,
       default: 'date',
-      validator: type => ['date', 'month'/*, 'year'*/].includes(type)
+      validator: type => ['date', 'month'].includes(type) // TODO: year
     },
     value: String,
     // Function formatting the year in table header and pickup title

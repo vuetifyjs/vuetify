@@ -52,7 +52,7 @@ const ripple = {
     }, 0)
   },
 
-  hide: (el) => {
+  hide: el => {
     if (el.getAttribute(RippleDataAttribute) !== 'true') {
       return
     }

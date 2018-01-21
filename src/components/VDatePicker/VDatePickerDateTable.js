@@ -115,7 +115,7 @@ export default {
     },
     genTR (children) {
       return [this.$createElement('tr', children)]
-    },
+    }
   },
 
   render (h) {

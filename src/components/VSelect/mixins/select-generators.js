@@ -240,8 +240,8 @@ export default {
     genLabel () {
       const singleLine = this.singleLine || this.isDropdown
 
-      if (singleLine && this.isDirty ||
-        singleLine && this.isFocused && this.searchValue
+      if (singleLine &&
+        (this.isDirty || (this.isFocused && this.searchValue))
       ) return null
 
       const data = {}

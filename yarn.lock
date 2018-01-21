@@ -2211,13 +2211,6 @@ doctrine@1.5.0:
     esutils "^2.0.2"
     isarray "^1.0.0"
 
-doctrine@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/doctrine/-/doctrine-2.0.0.tgz#c73d8d2909d22291e1a007a395804da8b665fe63"
-  dependencies:
-    esutils "^2.0.2"
-    isarray "^1.0.0"
-
 doctrine@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/doctrine/-/doctrine-2.0.2.tgz#68f96ce8efc56cc42651f1faadb4f175273b0075"
@@ -2460,13 +2453,9 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-config-standard@11.0.0-beta.0:
+eslint-config-standard@^11.0.0-beta.0:
   version "11.0.0-beta.0"
   resolved "https://registry.yarnpkg.com/eslint-config-standard/-/eslint-config-standard-11.0.0-beta.0.tgz#f8afe69803d95c685a4b8392b8793188eb03cbb3"
-
-eslint-config-vue@2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/eslint-config-vue/-/eslint-config-vue-2.0.2.tgz#a3ab1004899e49327a94c63e24d47a396b2f4848"
 
 eslint-friendly-formatter@3.0.0:
   version "3.0.0"
@@ -2502,20 +2491,7 @@ eslint-module-utils@^2.1.1:
     debug "^2.6.8"
     pkg-dir "^1.0.0"
 
-eslint-plugin-html@4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-html/-/eslint-plugin-html-4.0.1.tgz#fc70072263cc938496fbbc9cf648660e41fa269a"
-  dependencies:
-    htmlparser2 "^3.8.2"
-
-eslint-plugin-html@^3.0.0:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-html/-/eslint-plugin-html-3.2.1.tgz#4289d38245f3d95134d22c17b1894d78db92c572"
-  dependencies:
-    htmlparser2 "^3.8.2"
-    semver "^5.4.1"
-
-eslint-plugin-import@2.8.0:
+eslint-plugin-import@^2.8.0:
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.8.0.tgz#fa1b6ef31fcb3c501c09859c1b86f1fc5b986894"
   dependencies:
@@ -2530,7 +2506,7 @@ eslint-plugin-import@2.8.0:
     minimatch "^3.0.3"
     read-pkg-up "^2.0.0"
 
-eslint-plugin-node@5.2.1:
+eslint-plugin-node@^5.2.1:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-node/-/eslint-plugin-node-5.2.1.tgz#80df3253c4d7901045ec87fa660a284e32bdca29"
   dependencies:
@@ -2539,36 +2515,13 @@ eslint-plugin-node@5.2.1:
     resolve "^1.3.3"
     semver "5.3.0"
 
-eslint-plugin-promise@3.6.0:
+eslint-plugin-promise@^3.6.0:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-promise/-/eslint-plugin-promise-3.6.0.tgz#54b7658c8f454813dc2a870aff8152ec4969ba75"
 
-eslint-plugin-pug@1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-pug/-/eslint-plugin-pug-1.1.1.tgz#edae0ffcea79b93bfae5b5132faf95d1dc18b7c9"
-  dependencies:
-    pug-lexer "^3.1.0"
-    pug-parser "^4.0.0"
-    pug-walk-extract-text "^1.1.0"
-
-eslint-plugin-react@^7.0.0:
-  version "7.2.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.2.1.tgz#c2673526ed6571b08c69c5f453d03f5f13e8ddbe"
-  dependencies:
-    doctrine "^2.0.0"
-    has "^1.0.1"
-    jsx-ast-utils "^2.0.0"
-
-eslint-plugin-standard@3.0.1:
+eslint-plugin-standard@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-standard/-/eslint-plugin-standard-3.0.1.tgz#34d0c915b45edc6f010393c7eef3823b08565cf2"
-
-eslint-plugin-vue@2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-vue/-/eslint-plugin-vue-2.1.0.tgz#50ed0b7e9a2389d90e689743a3cc26b502441b69"
-  dependencies:
-    eslint-plugin-html "^3.0.0"
-    eslint-plugin-react "^7.0.0"
 
 eslint-scope@^3.7.1, eslint-scope@~3.7.1:
   version "3.7.1"
@@ -3477,7 +3430,7 @@ html-entities@^1.2.0:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/html-entities/-/html-entities-1.2.1.tgz#0df29351f0721163515dfb9e5543e5f6eed5162f"
 
-htmlparser2@^3.8.2, htmlparser2@^3.9.2:
+htmlparser2@^3.9.2:
   version "3.9.2"
   resolved "https://registry.yarnpkg.com/htmlparser2/-/htmlparser2-3.9.2.tgz#1bdf87acca0f3f9e53fa4fcceb0f4b4cbb00b338"
   dependencies:
@@ -4418,12 +4371,6 @@ jstransformer@1.0.0:
   dependencies:
     is-promise "^2.0.0"
     promise "^7.0.1"
-
-jsx-ast-utils@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/jsx-ast-utils/-/jsx-ast-utils-2.0.0.tgz#ec06a3d60cf307e5e119dac7bad81e89f096f0f8"
-  dependencies:
-    array-includes "^3.0.3"
 
 killable@^1.0.0:
   version "1.0.0"
@@ -5854,13 +5801,7 @@ pug-strip-comments@^1.0.2:
   dependencies:
     pug-error "^1.3.2"
 
-pug-walk-extract-text@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/pug-walk-extract-text/-/pug-walk-extract-text-1.1.0.tgz#da2acf3b5e9340c7d26b1fda1cb8851d43f29a6c"
-  dependencies:
-    pug-walk "^1.1.0"
-
-pug-walk@^1.0.0, pug-walk@^1.1.0:
+pug-walk@^1.0.0:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/pug-walk/-/pug-walk-1.1.4.tgz#29e5174af43b67e99c31b448632e1ff86ddd671c"
 

@@ -1,4 +1,4 @@
-require('../../stylus/components/_date-picker-header.styl')
+import '../../stylus/components/_date-picker-header.styl'
 
 // Components
 import VBtn from '../VBtn'
@@ -73,9 +73,9 @@ export default {
 
   methods: {
     genBtn (change) {
-      const disabled = this.disabled
-        || (change < 0 && this.min && this.calculateChange(change) < this.min)
-        || (change > 0 && this.max && this.calculateChange(change) > this.max)
+      const disabled = this.disabled ||
+        (change < 0 && this.min && this.calculateChange(change) < this.min) ||
+        (change > 0 && this.max && this.calculateChange(change) > this.max)
 
       return this.$createElement('v-btn', {
         props: {

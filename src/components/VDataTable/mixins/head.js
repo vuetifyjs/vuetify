@@ -58,7 +58,7 @@ export default {
         }
       }
 
-      if ('sortable' in header && header.sortable || !('sortable' in header)) {
+      if (header.sortable == null || header.sortable) {
         this.genHeaderSortingData(header, children, data, classes)
       } else {
         data.attrs['aria-label'] += ': Not sorted.' // TODO: Localization

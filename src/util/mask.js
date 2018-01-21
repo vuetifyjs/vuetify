@@ -3,7 +3,7 @@
  *
  * @type {RegExp}
  */
-export const defaultDelimiters = /[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/\\ ]/
+export const defaultDelimiters = /[-!$%^&*()_+|~=`{}[\]:";'<>?,./\\ ]/
 
 /**
  *
@@ -134,6 +134,6 @@ export const maskText = (text, masked, dontFillMaskBlanks) => {
  *
  * @return {String}
  */
-export const unmaskText = (text) => {
+export const unmaskText = text => {
   return text ? String(text).replace(new RegExp(defaultDelimiters, 'g'), '') : text
 }

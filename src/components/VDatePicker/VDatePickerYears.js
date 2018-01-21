@@ -1,4 +1,4 @@
-require('../../stylus/components/_date-picker-years.styl')
+import '../../stylus/components/_date-picker-years.styl'
 
 // Mixins
 import Colorable from '../../mixins/colorable'

@@ -1,4 +1,4 @@
-require('../../stylus/components/_dividers.styl')
+import '../../stylus/components/_dividers.styl'
 
 import Themeable from '../../mixins/themeable'
 

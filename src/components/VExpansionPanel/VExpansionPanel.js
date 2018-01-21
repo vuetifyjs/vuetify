@@ -1,4 +1,4 @@
-require('../../stylus/components/_expansion-panel.styl')
+import '../../stylus/components/_expansion-panel.styl'
 
 import Themeable from '../../mixins/themeable'
 import { provide as RegistrableProvide } from '../../mixins/registrable'

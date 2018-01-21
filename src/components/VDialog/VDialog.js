@@ -1,4 +1,4 @@
-require('../../stylus/components/_dialogs.styl')
+import '../../stylus/components/_dialogs.styl'
 
 // Mixins
 import Dependent from '../../mixins/dependent'
@@ -179,9 +179,9 @@ export default {
     }, [dialog]))
 
     return h('div', {
-      'class': 'dialog__container',
+      staticClass: 'dialog__container',
       style: {
-        display: !this.$slots.activator && 'none' || this.fullWidth ? 'block' : 'inline-block'
+        display: (!this.$slots.activator || this.fullWidth) ? 'block' : 'inline-block'
       }
     }, children)
   }

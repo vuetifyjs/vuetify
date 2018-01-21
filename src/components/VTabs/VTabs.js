@@ -1,5 +1,5 @@
 // Styles
-require('../../stylus/components/_tabs.styl')
+import '../../stylus/components/_tabs.styl'
 
 // Component imports
 import VIcon from '../VIcon'

@@ -1,4 +1,4 @@
-require('../../stylus/components/_menus.styl')
+import '../../stylus/components/_menus.styl'
 
 // Mixins
 import Delayable from '../../mixins/delayable'
@@ -169,6 +169,7 @@ export default {
 
       // Account for screen resize
       // and orientation change
+      // eslint-disable-next-line no-unused-expressions
       this.$refs.content.offsetWidth
       this.updateDimensions()
 

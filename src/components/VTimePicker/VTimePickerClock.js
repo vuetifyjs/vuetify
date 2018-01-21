@@ -1,4 +1,4 @@
-require('../../stylus/components/_time-picker-clock.styl')
+import '../../stylus/components/_time-picker-clock.styl'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
@@ -158,8 +158,8 @@ export default {
       const coords = { x: clientX - left, y: top - clientY }
       const handAngle = Math.round(this.angle(center, coords) - this.rotate + 360) % 360
       const insideClick = this.double && this.euclidean(center, coords) < (this.outerRadius + this.innerRadius) / 2 - 16
-      const value = Math.round(handAngle / this.degreesPerUnit)
-        + this.min + (insideClick ? this.roundCount : 0)
+      const value = Math.round(handAngle / this.degreesPerUnit) +
+        this.min + (insideClick ? this.roundCount : 0)
 
       // Necessary to fix edge case when selecting left part of max value
       if (handAngle >= (360 - this.degreesPerUnit / 2)) {

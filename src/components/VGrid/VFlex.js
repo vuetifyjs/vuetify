@@ -1,4 +1,4 @@
-require('../../stylus/components/_grid.styl')
+import '../../stylus/components/_grid.styl'
 
 import Grid from './grid'
 

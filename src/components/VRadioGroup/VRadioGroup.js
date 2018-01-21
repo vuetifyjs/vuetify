@@ -1,7 +1,7 @@
 // Styles
-require('../../stylus/components/_input-groups.styl')
-require('../../stylus/components/_selection-controls.styl')
-require('../../stylus/components/_radio-group.styl')
+import '../../stylus/components/_input-groups.styl'
+import '../../stylus/components/_selection-controls.styl'
+import '../../stylus/components/_radio-group.styl'
 
 // Mixins
 import Input from '../../mixins/input'

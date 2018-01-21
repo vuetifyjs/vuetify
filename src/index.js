@@ -1,4 +1,4 @@
-require('./stylus/app.styl')
+import './stylus/app.styl'
 import Semver from 'semver'
 import { peerDependencies, version } from '../package.json'
 import * as components from './components'

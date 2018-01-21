@@ -47,7 +47,7 @@ export default {
 
           this.focus()
         },
-        focus: (e) => {
+        focus: e => {
           if (this.disabled || this.readonly || this.isFocused) {
             return
           }
