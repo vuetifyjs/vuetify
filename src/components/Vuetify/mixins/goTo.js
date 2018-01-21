@@ -1,4 +1,4 @@
-import { consoleError } from './console'
+import { consoleError } from '../../../util/console'
 
 /**
  * Modified from https://github.com/alamcordeiro/vue-smooth-scroll
