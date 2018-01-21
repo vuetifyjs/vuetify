@@ -58,9 +58,9 @@ export default {
       const maxHour = this.max ? this.max.split(':')[0] : 23
 
       return val => {
-        return val >= minHour * 1
-          && val <= maxHour * 1
-          && (!this.allowedHours || this.allowedHours(val))
+        return val >= minHour * 1 &&
+          val <= maxHour * 1 &&
+          (!this.allowedHours || this.allowedHours(val))
       }
     },
     isAllowedMinuteCb () {
@@ -74,10 +74,10 @@ export default {
 
       return val => {
         const time = 60 * this.hour + val
-        return time >= minTime
-          && time <= maxTime
-          && isHourAllowed
-          && (!this.allowedMinutes || this.allowedMinutes(val))
+        return time >= minTime &&
+          time <= maxTime &&
+          isHourAllowed &&
+          (!this.allowedMinutes || this.allowedMinutes(val))
       }
     },
     hour: {

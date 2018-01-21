@@ -1,6 +1,6 @@
 import '../../stylus/components/_small-dialog.styl'
 
-// Mixins 
+// Mixins
 import Returnable from '../../mixins/returnable'
 
 export default {
