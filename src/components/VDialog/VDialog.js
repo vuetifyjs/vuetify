@@ -173,7 +173,6 @@ export default {
     return h('div', {
       staticClass: 'dialog__container',
       style: {
-        // TODO: double-check this logic, it might need 'none'
         display: (!this.$slots.activator || this.fullWidth) ? 'block' : 'inline-block'
       }
     }, children)
