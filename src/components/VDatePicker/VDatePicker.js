@@ -272,9 +272,19 @@ export default {
     type (type) {
       this.activePicker = type.toUpperCase()
 
-      if (this.value) {
-        const date = this.sanitizeDateString(this.value, type)
-        this.$emit('input', this.isDateAllowed(date) ? date : null)
+      if (this.value && this.value.length) {
+        const output = (this.multiple ? this.value : [this.value]).reduce(
+          (acc, val) => {
+            const date = this.sanitizeDateString(val, type)
+            if (this.isDateAllowed(date)) {
+              acc.push(date)
+            }
+            return acc
+          },
+          []
+        )
+
+        this.$emit('input', this.multiple ? output : output[0])
       }
     }
   },
