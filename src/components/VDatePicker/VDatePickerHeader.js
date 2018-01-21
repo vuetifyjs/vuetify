@@ -41,6 +41,8 @@ export default {
       type: String,
       default: 'en-us'
     },
+    min: String,
+    max: String,
     prependIcon: {
       type: String,
       default: 'chevron_left'
@@ -71,10 +73,14 @@ export default {
 
   methods: {
     genBtn (change) {
+      const disabled = this.disabled
+        || (change < 0 && this.min && this.calculateChange(change) < this.min)
+        || (change > 0 && this.max && this.calculateChange(change) > this.max)
+
       return this.$createElement('v-btn', {
         props: {
           dark: this.dark,
-          disabled: this.disabled,
+          disabled,
           icon: true
         },
         nativeOn: {

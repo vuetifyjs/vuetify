@@ -157,6 +157,7 @@ export default {
     },
     closeConditional (e) {
       return (
+        this.isActive &&
         !!this.content &&
         !this.content.contains(e.target) &&
         !!this.$el &&

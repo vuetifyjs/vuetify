@@ -39,8 +39,8 @@ export default {
           name: 'ripple',
           value: (this.ripple && !this.disabled) ? this.ripple : false
         }],
-        on: {
-          ...(this.$listeners || {}),
+        [this.to ? 'nativeOn' : 'on']: {
+          ...this.$listeners,
           click: this.click
         }
       }

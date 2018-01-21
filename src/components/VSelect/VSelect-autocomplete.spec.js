@@ -288,4 +288,36 @@ test('VSelect - autocomplete', ({ mount }) => {
     expect(tile.text()).toBe('No data available')
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
+
+  it('should not display menu when tab focused', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        autocomplete: true,
+        items: [1 ,2],
+        value: 1
+      }
+    })
+
+    const input = wrapper.find('input')[0]
+    input.trigger('focus')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.menuIsActive).toBe(false)
+
+    wrapper.setProps({
+      items: [
+        { text: 'Foo', value: 1 },
+        { text: 'Bar', value: 2 }
+      ]
+    })
+
+    wrapper.vm.blur()
+    await wrapper.vm.$nextTick()
+    input.trigger('focus')
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.menuIsActive).toBe(false)
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
 })

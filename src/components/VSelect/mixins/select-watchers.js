@@ -98,7 +98,7 @@ export default {
       // Activate menu if inactive and searching
       if (this.isActive &&
         !this.menuIsActive &&
-        val !== this.getValue(this.selectedItem)
+        val !== this.getText(this.selectedItem)
       ) {
         this.menuIsActive = true
       }
