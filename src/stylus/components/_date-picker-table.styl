@@ -39,12 +39,6 @@ theme(date-picker-table, "date-picker-table")
     &.btn--active
       color: #fff
 
-.picker--landscape
-  .date-picker-table--date
-    .btn
-      height: 32px
-      width: 32px
-
 .date-picker-table--month
   td
     width: 33.333333%
@@ -68,7 +62,7 @@ theme(date-picker-table, "date-picker-table")
 
 .date-picker-table__event
   border-radius: 50%
-  bottom: -2px
+  bottom: 6px
   content: ""
   display: block
   height: 8px
@@ -76,3 +70,12 @@ theme(date-picker-table, "date-picker-table")
   position: absolute
   transform: translateX(-4px)
   width: 8px
+
+.picker--landscape
+  .date-picker-table--date
+    .btn
+      height: 32px
+      width: 32px
+
+  .date-picker-table__event
+    bottom: 2px
