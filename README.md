@@ -78,7 +78,7 @@
 
 <p>Build <i>amazing</i> applications with the power of Vue and Material Design and a massive library of beautifully crafted components. Created according to Google's <strong><a href="https://material.io/" target="_blank">Material Design Spec</a></strong>, Vuetify components feature an easy-to-remember semantic design that shifts remembering complex classes and markup, to type-as-you speak properties that have simple and clear names.</p>
 
-<p>Harness the power of the <a href="https://chat.vuetifyjs.com">Vuetify community</a> and get help 24/7 from talented developers across the world, the dev team and the creator, John Leider. Become a <a href="https://www.patreon.com/vuetify">patreon backer</a> and get access to special Patreon only channels.</p>
+<p>Harness the power of the <a href="https://chat.vuetifyjs.com">Vuetify community</a> and get help 24/7 from talented developers across the world, the dev team and the creator, John Leider. Become a <a href="https://www.patreon.com/vuetify">backer</a> and get access to dedicated support from the team.</p>
   
 <p>Vuetify supports all <strong>modern browsers</strong>, including IE11 and Safari 9+. From mobile to laptop to desktop, you can rest assured that your application will work as expected. Interested in the bleeding edge? Try the vue-cli Webpack SSR (Server side rendered) template and build websites optimized for SEO.</p>
 
@@ -88,6 +88,7 @@
 
 <h2>One minute Quick-start</h2>
 
+[Codepen link](https://codepen.io/johnjleider/pen/jYZwVZ)
 ```html
 <!DOCTYPE html>
 <html>
@@ -99,9 +100,9 @@
 <body>
   <div id="app">
     <v-app>
-      <main>
+      <v-content>
         <v-container>Hello world</v-container>
-      </main>
+      </v-content>
     </v-app>
   </div>
 
@@ -148,8 +149,8 @@ require('/path/to/node_modules/vuetify/dist/vuetify.min.css')
 ```
 Keep in mind, you will need to ensure your webpack config contains a css-loader.
 
-<h2>Frequently asked questions and Gotchas</h2>
-<a href="https://vuetifyjs.com/vuetify/frequently-asked-questions" target="_blank">Frequently asked questions</a>
+## Frequently asked questions and Gotchas
+[FAQ Guide](https://vuetifyjs.com/vuetify/frequently-asked-questions)
 
 <h2>Community Support</h2>
 Ask your support questions on the vuetifyjs <a href="https://chat.vuetifyjs.com">discord</a>.
@@ -157,6 +158,3 @@ Ask your support questions on the vuetifyjs <a href="https://chat.vuetifyjs.com"
 <h2>Additional Resources</h2>
 
 - [Codepen starter template](https://template.vuetifyjs.com)
-- [Storybook for Vue boilerplate project with Vuetify](https://github.com/white-rabbit-japan/vuetify-storyboard-boilerplate)
-
-

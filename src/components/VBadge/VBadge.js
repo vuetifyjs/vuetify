@@ -1,21 +1,21 @@
-require('../../stylus/components/_badges.styl')
+import '../../stylus/components/_badges.styl'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Toggleable from '../../mixins/toggleable'
+import { factory as PositionableFactory } from '../../mixins/positionable'
+import Transitionable from '../../mixins/transitionable'
 
 export default {
   name: 'v-badge',
 
-  mixins: [Colorable, Toggleable],
+  mixins: [Colorable, Toggleable, PositionableFactory(['left', 'bottom']), Transitionable],
 
   props: {
-    bottom: Boolean,
     color: {
       type: String,
       default: 'primary'
     },
-    left: Boolean,
     overlap: Boolean,
     transition: {
       type: String,
@@ -54,7 +54,9 @@ export default {
       this.$slots.default,
       h('transition', {
         props: {
-          name: this.transition
+          name: this.transition,
+          origin: this.origin,
+          mode: this.mode
         }
       }, badge)
     ])

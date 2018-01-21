@@ -9,33 +9,31 @@ exports[`VBtnToggle.vue should allow deselecting a value when mandatory prop is 
   >
     <div class="btn__content">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
       >
         add
       </i>
     </div>
   </button>
   <button type="button"
-          class="btn btn--flat btn--active"
+          class="btn btn--active btn--flat"
           data-ripple="true"
-          data-selected="true"
   >
     <div class="btn__content">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
       >
         add
       </i>
     </div>
   </button>
   <button type="button"
-          class="btn btn--flat btn--active"
+          class="btn btn--active btn--flat"
           data-ripple="true"
-          data-selected="true"
   >
     <div class="btn__content">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
       >
         add
       </i>
@@ -54,21 +52,20 @@ exports[`VBtnToggle.vue should allow new value when mandatory prop is used 1`] =
   >
     <div class="btn__content">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
       >
         add
       </i>
     </div>
   </button>
   <button type="button"
-          class="btn btn--flat btn--active"
+          class="btn btn--active btn--flat"
           data-ripple="true"
-          data-selected="true"
           data-only-child="true"
   >
     <div class="btn__content">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
       >
         add
       </i>
@@ -80,7 +77,7 @@ exports[`VBtnToggle.vue should allow new value when mandatory prop is used 1`] =
   >
     <div class="btn__content">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
       >
         add
       </i>
@@ -99,21 +96,20 @@ exports[`VBtnToggle.vue should allow new value when mandatory prop is used with 
   >
     <div class="btn__content">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
       >
         add
       </i>
     </div>
   </button>
   <button type="button"
-          class="btn btn--flat btn--active"
+          class="btn btn--active btn--flat"
           data-ripple="true"
-          data-selected="true"
           data-only-child="true"
   >
     <div class="btn__content">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
       >
         add
       </i>
@@ -125,7 +121,7 @@ exports[`VBtnToggle.vue should allow new value when mandatory prop is used with 
   >
     <div class="btn__content">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
       >
         add
       </i>
@@ -139,14 +135,13 @@ exports[`VBtnToggle.vue should not allow empty value when mandatory prop is used
 
 <div class="btn-toggle btn-toggle--selected">
   <button type="button"
-          class="btn btn--flat btn--active"
+          class="btn btn--active btn--flat"
           data-ripple="true"
-          data-selected="true"
           data-only-child="true"
   >
     <div class="btn__content">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
       >
         add
       </i>
@@ -158,7 +153,7 @@ exports[`VBtnToggle.vue should not allow empty value when mandatory prop is used
   >
     <div class="btn__content">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
       >
         add
       </i>
@@ -170,7 +165,7 @@ exports[`VBtnToggle.vue should not allow empty value when mandatory prop is used
   >
     <div class="btn__content">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
       >
         add
       </i>
@@ -189,21 +184,20 @@ exports[`VBtnToggle.vue should not allow empty value when mandatory prop is used
   >
     <div class="btn__content">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
       >
         add
       </i>
     </div>
   </button>
   <button type="button"
-          class="btn btn--flat btn--active"
+          class="btn btn--active btn--flat"
           data-ripple="true"
-          data-selected="true"
           data-only-child="true"
   >
     <div class="btn__content">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
       >
         add
       </i>
@@ -215,7 +209,103 @@ exports[`VBtnToggle.vue should not allow empty value when mandatory prop is used
   >
     <div class="btn__content">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
+      >
+        add
+      </i>
+    </div>
+  </button>
+</div>
+
+`;
+
+exports[`VBtnToggle.vue should toggle values of any type 1`] = `
+
+<div class="btn-toggle">
+  <button type="button"
+          value="true"
+          class="btn btn--flat"
+          data-ripple="true"
+  >
+    <div class="btn__content">
+      <i aria-hidden="true"
+         class="icon material-icons"
+      >
+        add
+      </i>
+    </div>
+  </button>
+  <button type="button"
+          class="btn btn--flat"
+          data-ripple="true"
+  >
+    <div class="btn__content">
+      <i aria-hidden="true"
+         class="icon material-icons"
+      >
+        add
+      </i>
+    </div>
+  </button>
+  <button type="button"
+          class="btn btn--flat"
+          data-ripple="true"
+  >
+    <div class="btn__content">
+      <i aria-hidden="true"
+         class="icon material-icons"
+      >
+        add
+      </i>
+    </div>
+  </button>
+  <button type="button"
+          value="6"
+          class="btn btn--flat"
+          data-ripple="true"
+  >
+    <div class="btn__content">
+      <i aria-hidden="true"
+         class="icon material-icons"
+      >
+        add
+      </i>
+    </div>
+  </button>
+  <button type="button"
+          value="foo"
+          class="btn btn--flat"
+          data-ripple="true"
+  >
+    <div class="btn__content">
+      <i aria-hidden="true"
+         class="icon material-icons"
+      >
+        add
+      </i>
+    </div>
+  </button>
+  <button type="button"
+          value="{&quot;key&quot;:&quot;value&quot;}"
+          class="btn btn--flat"
+          data-ripple="true"
+  >
+    <div class="btn__content">
+      <i aria-hidden="true"
+         class="icon material-icons"
+      >
+        add
+      </i>
+    </div>
+  </button>
+  <button type="button"
+          value="[&quot;arrayyy&quot;]"
+          class="btn btn--flat"
+          data-ripple="true"
+  >
+    <div class="btn__content">
+      <i aria-hidden="true"
+         class="icon material-icons"
       >
         add
       </i>
@@ -235,7 +325,7 @@ exports[`VBtnToggle.vue should use button value attribute if available 1`] = `
   >
     <div class="btn__content">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
       >
         add
       </i>
@@ -243,14 +333,13 @@ exports[`VBtnToggle.vue should use button value attribute if available 1`] = `
   </button>
   <button type="button"
           value="center"
-          class="btn btn--flat btn--active"
+          class="btn btn--active btn--flat"
           data-ripple="true"
-          data-selected="true"
           data-only-child="true"
   >
     <div class="btn__content">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
       >
         add
       </i>
@@ -263,7 +352,7 @@ exports[`VBtnToggle.vue should use button value attribute if available 1`] = `
   >
     <div class="btn__content">
       <i aria-hidden="true"
-         class="material-icons icon"
+         class="icon material-icons"
       >
         add
       </i>

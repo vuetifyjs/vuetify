@@ -1,5 +1,5 @@
-import VList from '~components/VList'
-import { test } from '~util/testing'
+import VList from '@components/VList'
+import { test } from '@util/testing'
 
 // TODO: Test actual behaviour instead of classes
 test('VList.js', ({ mount }) => {

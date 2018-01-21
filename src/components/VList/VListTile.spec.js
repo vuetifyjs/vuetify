@@ -1,5 +1,5 @@
-import { test } from '~util/testing'
-import { VListTile } from '~components/VList'
+import { test } from '@util/testing'
+import { VListTile } from '@components/VList'
 import { compileToFunctions } from 'vue-template-compiler'
 import Vue from 'vue/dist/vue.common'
 

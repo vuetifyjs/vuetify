@@ -1,8 +1,7 @@
-import { test } from '~util/testing'
-import { mount } from 'avoriaz'
-import VTabsSlider from '~components/VTabs/VTabsSlider.js'
+import { test } from '@util/testing'
+import VTabsSlider from '@components/VTabs/VTabsSlider.js'
 
-test('VTabsSlider.vue', () => {
+test('VTabsSlider.vue', ({ mount }) => {
   it('should render a tabs slider', () => {
     const wrapper = mount(VTabsSlider, {
       propsData: {

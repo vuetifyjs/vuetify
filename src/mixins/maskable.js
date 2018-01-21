@@ -16,8 +16,11 @@ import {
 } from '../util/mask'
 
 export default {
+  name: 'maskable',
+
   data: () => ({
     selection: 0,
+    lazySelection: 0,
     preDefined: {
       'credit-card': '#### - #### - #### - ####',
       'date': '##/##/####',
@@ -56,18 +59,18 @@ export default {
       if (!this.$refs.input) return
 
       const oldValue = this.$refs.input.value
-      const newValue = this.maskText(this.lazyValue)
+      const newValue = this.maskText(unmaskText(this.lazyValue))
       let position = 0
       let selection = this.selection
 
-      for (const char of oldValue.substr(0, selection)) {
-        isMaskDelimiter(char) || position++
+      for (let index = 0; index < selection; index++) {
+        isMaskDelimiter(oldValue[index]) || position++
       }
 
       selection = 0
       if (newValue) {
-        for (const char of newValue) {
-          isMaskDelimiter(char) || position--
+        for (let index = 0; index < newValue.length; index++) {
+          isMaskDelimiter(newValue[index]) || position--
           selection++
           if (position <= 0) break
         }
@@ -78,6 +81,21 @@ export default {
         this.setCaretPosition(selection)
       })
     }
+  },
+
+  beforeMount () {
+    if (!this.mask ||
+      this.value == null ||
+      !this.returnMaskedValue
+    ) return
+
+    const value = this.maskText(this.value)
+
+    // See if masked value does not
+    // match the user given value
+    if (value === this.value) return
+
+    this.$emit('input', value)
   },
 
   methods: {
@@ -95,9 +113,9 @@ export default {
 
       this.$refs.input.value = newValue
       if (newValue) {
-        for (const char of newValue) {
+        for (let index = 0; index < newValue.length; index++) {
           if (this.lazySelection <= 0) break
-          isMaskDelimiter(char) || this.lazySelection--
+          isMaskDelimiter(newValue[index]) || this.lazySelection--
           selection++
         }
       }
@@ -110,13 +128,22 @@ export default {
       return this.mask ? maskText(text, this.masked, this.dontFillMaskBlanks) : text
     },
     unmaskText (text) {
-      return this.mask ? unmaskText(text) : text
+      return this.mask && !this.returnMaskedValue ? unmaskText(text) : text
     },
     // When the input changes and is
     // re-created, ensure that the
     // caret location is correct
     setSelectionRange () {
       this.$nextTick(this.updateRange)
+    },
+    resetSelections (input) {
+      if (!input.selectionEnd) return
+      this.selection = input.selectionEnd
+      this.lazySelection = 0
+
+      for (let index = 0; index < this.selection; index++) {
+        isMaskDelimiter(input.value[index]) || this.lazySelection++
+      }
     }
   }
 }
