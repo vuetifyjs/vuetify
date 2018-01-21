@@ -187,8 +187,6 @@ export default {
         const sanitized = value ? this.sanitizeDateString(value, this.type) : null
         let output = sanitized
         if (sanitized && this.multiple) {
-          console.log(this.value.indexOf(sanitized))
-
           output = this.value.indexOf(sanitized) === -1
             ? this.value.concat([sanitized])
             : this.value.filter(x => x !== sanitized)
