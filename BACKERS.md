@@ -21,6 +21,7 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - [LiveCasino](https://livecasino.com/)
 - [Nate Controls](http://www.natecontrols.com/)
 - [Trek10](https://www.trek10.com/)
+- [Zweidenker](http://zweidenker.de)
 
 ### $20+
 - Tibor Nagy
@@ -29,7 +30,6 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - [Aeroden](https://www.aeroden.com)
 - Sam Mitchell
 - David Hess
-- Roger Vilaseca
 - Jay Blanchard
 - Christo Crampton
 - Team Of Monkeys
@@ -47,12 +47,11 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Chava Sobreyra
 - Costa Huang
 - Paul
-- Asif Mehedi
 - Jussi Pesonen
 - Jordan Wood
 - Alexey Toroshchin
 - Phillippe Genois
-- Jim O`Quinn
+- Jim O\`Quinn
 - Sam Bosell
 - Cliff Hess
 - Antonio Luis Gil Rodríguez
@@ -67,12 +66,20 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Matthew O'Leary
 - Mike Margerum
 - Reto Aebersold
-- Max Matteo Staack
 - Mark Freedman
 - Fernando Rosentalski Neto
-- eric
-- Jon K
+- Eric Nguyen
 - Alvin Wang
 - Jadranko Dragoje
 - Charles McKeever
 - Caleb Blankemeyer
+- Nicholas Coates
+- Stanislovas Janonis
+- Nico Rogers
+- Jamie Sartell
+- Brandon Deo
+- Chanlito Hem
+- Idea Junction Ltd.
+- Michael Hipp
+- Keyur Desai
+- Phillipp Naderer-Puiu
