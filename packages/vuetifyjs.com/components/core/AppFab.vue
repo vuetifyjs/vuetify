@@ -34,7 +34,7 @@
       },
       toTop () {
         this.$router.push({ hash: '' })
-        window.scrollTo(0, 0)
+        this.$vuetify.goTo(0)
       }
     }
   }

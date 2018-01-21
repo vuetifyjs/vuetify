@@ -10,7 +10,7 @@ export default {
     'v-list-tile-action',
     'v-list-tile-avatar',
     'v-list-tile-group',
-    'v-list-tile-action-text',
+    'v-list-tile-action-text'
   ],
   examples: [{
     avatarTwoLines: {

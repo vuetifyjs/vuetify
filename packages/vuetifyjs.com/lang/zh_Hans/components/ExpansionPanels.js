@@ -31,7 +31,7 @@ export default {
       popout: '使扩展面板以弹出的样式打开'
     },
     'v-expansion-panel-content': {
-      hideActions: '隐藏内容标题中的展开图标',
+      hideActions: '隐藏内容标题中的展开图标'
     }
   }
 }

@@ -9,7 +9,7 @@ export default {
     },
     noData: {
       header: 'Slot: no-data',
-      desc: 'The `no-data` slot can display custom HTML when there\'s no data.'
+      desc: "The `no-data` slot can display custom HTML when there's no data."
     },
     headers: {
       header: 'Slot: items and headers',

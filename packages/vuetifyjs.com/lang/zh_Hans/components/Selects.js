@@ -5,43 +5,43 @@ export default {
   supplemental: ['MaskTable'],
   examples: [{
     light: {
-        header: 'Light theme',
-        desc: 'A standard single select has a multitude of configuration options.'
-      },
-      dark: {
-        header: 'Dark theme',
-        desc: 'Selects also support theming, dark and light.',
-        inverted: true,
-        uninverted: true
-      },
-      icons: {
-        header: 'Icons',
-        desc: 'Use a custom prepended or appended icon.'
-      },
-      multiple: {
-        header: 'Multiple',
-        desc: 'A multi-select can utilize v-chip as the display for selected items.'
-      },
-      autocomplete: {
-        header: 'Autocomplete',
-        desc: 'Provides type-ahead autocomplete functionality.'
-      },
-      scopedSlots: {
-        header: 'Scoped slots',
-        desc: 'With the power of scoped slots, you can customize the visual output of the select. In this example we add a profile picture for both the chips and list items.'
-      },
-      customTextAndValue: {
-        header: 'Customized item text and value',
-        desc: 'You can specify the specific properties within your items array correspond to the text and value fields. By default, this is **text** and **value**. In this example we also use the `return-object` prop which will return the entire object of the selected item on selection.'
-      },
-      tags: {
-        header: 'Tags',
-        desc: 'With tags you can allow a user to create new values that may not be present in a provided items list. Keep in mind, tags only supports arrays of **primitive** items and cannot be used with props such as `item-text`, `item-value` for example.'
-      },
-      asynchronous: {
-        header: 'Asynchronous items',
-        desc: 'Sometimes you need to load data externally based upon a search query. Use the `search-input` prop with the **.sync** modifier when using the `autocomplete` prop. We also make use of the new `cache-items` prop. This will keep a unique list of all items that have been passed to the `items` prop and is **REQUIRED** when using asynchronous items and the **multiple** prop.'
-      }
+      header: 'Light theme',
+      desc: 'A standard single select has a multitude of configuration options.'
+    },
+    dark: {
+      header: 'Dark theme',
+      desc: 'Selects also support theming, dark and light.',
+      inverted: true,
+      uninverted: true
+    },
+    icons: {
+      header: 'Icons',
+      desc: 'Use a custom prepended or appended icon.'
+    },
+    multiple: {
+      header: 'Multiple',
+      desc: 'A multi-select can utilize v-chip as the display for selected items.'
+    },
+    autocomplete: {
+      header: 'Autocomplete',
+      desc: 'Provides type-ahead autocomplete functionality.'
+    },
+    scopedSlots: {
+      header: 'Scoped slots',
+      desc: 'With the power of scoped slots, you can customize the visual output of the select. In this example we add a profile picture for both the chips and list items.'
+    },
+    customTextAndValue: {
+      header: 'Customized item text and value',
+      desc: 'You can specify the specific properties within your items array correspond to the text and value fields. By default, this is **text** and **value**. In this example we also use the `return-object` prop which will return the entire object of the selected item on selection.'
+    },
+    tags: {
+      header: 'Tags',
+      desc: 'With tags you can allow a user to create new values that may not be present in a provided items list. Keep in mind, tags only supports arrays of **primitive** items and cannot be used with props such as `item-text`, `item-value` for example.'
+    },
+    asynchronous: {
+      header: 'Asynchronous items',
+      desc: 'Sometimes you need to load data externally based upon a search query. Use the `search-input` prop with the **.sync** modifier when using the `autocomplete` prop. We also make use of the new `cache-items` prop. This will keep a unique list of all items that have been passed to the `items` prop and is **REQUIRED** when using asynchronous items and the **multiple** prop.'
+    }
   }],
   props: {
     attach: 'Mixins.Detachable.props.attach',

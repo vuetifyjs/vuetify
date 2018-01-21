@@ -1,19 +1,19 @@
 // Pages
-import Vuetify from './vuetify';
-import GettingStarted from './getting-started';
-import Guides from './guides';
-import Layout from './layout';
-import Style from './style';
-import Motion from './motion';
+import Vuetify from './vuetify'
+import GettingStarted from './getting-started'
+import Guides from './guides'
+import Layout from './layout'
+import Style from './style'
+import Motion from './motion'
 
 // // Generic
-import Generic from './generic';
+import Generic from './generic'
 
 // // Components
-import Components from './components';
+import Components from './components'
 
 // // Directives
-import Directives from './directives';
+import Directives from './directives'
 
 // Mixins
 import Mixins from './mixins'
@@ -29,5 +29,4 @@ export default {
   Vuetify,
   GettingStarted,
   Guides
-};
-
+}

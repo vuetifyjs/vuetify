@@ -27,7 +27,7 @@ export default {
     '`sm` - 小型设备',
     '`md` - 中型设备',
     '`lg` - 大型设备',
-    '`xl` - 格外大的设备',
+    '`xl` - 格外大的设备'
   ],
   conditionText: '_条件（condition）_ 适用于基于以下前置条件的类:',
   conditions: [

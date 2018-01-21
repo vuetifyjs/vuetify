@@ -3,7 +3,7 @@ export default {
   headerText: '底部表单是一个修改后的`v-dialog`，可以从屏幕底部滑动，类似于一个`v-bottom-nav`。底部导航组件用于按钮和特定应用程序级别操作，而底部表单可以包含任何内容。',
   components: ['v-bottom-sheet'],
   examples: [{
-      standard: {
+    standard: {
       header: '标准显示',
       desc: '这里我们显示一个可能出现在应用程序中的操作例子列表。'
     },
