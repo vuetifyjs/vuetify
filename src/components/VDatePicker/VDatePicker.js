@@ -44,7 +44,9 @@ export default {
           return this.pickerDate
         }
 
-        const date = this.value || `${now.getFullYear()}-${now.getMonth() + 1}`
+        const date =
+          (this.multiple ? this.value[this.value.length - 1] : this.value) ||
+           `${now.getFullYear()}-${now.getMonth() + 1}`
         const type = this.type === 'date' ? 'month' : 'year'
         return this.sanitizeDateString(date, type)
       })()
@@ -90,6 +92,10 @@ export default {
       type: Function,
       default: null
     },
+    multiple: {
+      type: Boolean,
+      default: false
+    },
     pickerDate: String,
     prependIcon: {
       type: String,
@@ -111,7 +117,7 @@ export default {
       default: 'date',
       validator: type => ['date', 'month'].includes(type) // TODO: year
     },
-    value: String,
+    value: [Array, String],
     // Function formatting the year in table header and pickup title
     yearFormat: {
       type: Function,
@@ -121,6 +127,12 @@ export default {
   },
 
   computed: {
+    selectedDates () {
+      return this.multiple ? this.value : null
+    },
+    lastValue () {
+      return this.multiple ? this.value[this.value.length - 1] : this.value
+    },
     current () {
       if (this.showCurrent === true) {
         return this.sanitizeDateString(`${this.now.getFullYear()}-${this.now.getMonth() + 1}-${this.now.getDate()}`, this.type)
@@ -165,15 +177,23 @@ export default {
     // YYYY-MM-DD for date picker
     inputDate: {
       get () {
-        if (this.value) {
-          return this.sanitizeDateString(this.value, this.type)
+        if (this.lastValue) {
+          return this.sanitizeDateString(this.lastValue, this.type)
         }
 
         return this.type === 'month' ? this.firstAllowedMonth : this.firstAllowedDate
       },
       set (value) {
-        const date = value ? this.sanitizeDateString(value, this.type) : null
-        this.$emit('input', date)
+        const sanitized = value ? this.sanitizeDateString(value, this.type) : null
+        let output = sanitized
+        if (sanitized && this.multiple) {
+          console.log(this.value.indexOf(sanitized))
+
+          output = this.value.indexOf(sanitized) === -1
+            ? this.value.concat([sanitized])
+            : this.value.filter(x => x !== sanitized)
+        }
+        this.$emit('input', output)
       }
     },
     day () {
@@ -240,9 +260,9 @@ export default {
     pickerDate (val) {
       if (val) {
         this.tableDate = val
-      } else if (this.value && this.type === 'date') {
+      } else if (this.lastValue && this.type === 'date') {
         this.tableDate = this.sanitizeDateString(val, 'month')
-      } else if (this.value && this.type === 'month') {
+      } else if (this.lastValue && this.type === 'month') {
         this.tableDate = this.sanitizeDateString(val, 'year')
       }
     },
@@ -344,8 +364,9 @@ export default {
           min: this.min,
           max: this.max,
           tableDate: `${this.tableYear}-${pad(this.tableMonth + 1)}`,
+          selectedDates: this.selectedDates,
           scrollable: this.scrollable,
-          value: this.value
+          value: this.lastValue
         },
         ref: 'table',
         on: {
@@ -365,8 +386,9 @@ export default {
           locale: this.locale,
           min: this.minMonth,
           max: this.maxMonth,
+          selectedDates: this.selectedDates,
           scrollable: this.scrollable,
-          value: (!this.value || this.type === 'month') ? this.value : this.value.substr(0, 7),
+          value: (!this.lastValue || this.type === 'month') ? this.lastValue : this.lastValue.substr(0, 7),
           tableDate: `${this.tableYear}`
         },
         ref: 'table',
