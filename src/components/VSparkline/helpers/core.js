@@ -17,7 +17,8 @@ export function genPoints (arr, { minX, minY, maxX, maxY }) {
         maxY -
         (value - minValue) * gridY +
         +(index === arr.length - 1) * 0.00001 -
-        +(index === 0) * 0.00001
+        +(index === 0) * 0.00001,
+      value
     }
   })
 }

@@ -1,14 +1,12 @@
 import { genPath } from '../helpers/path'
-import { genPoints } from '../helpers/core'
 
 export default {
-  props: ['smooth', 'data', 'boundary', 'radius', 'id'],
+  props: ['smooth', 'radius', 'id', 'points'],
 
   render (h) {
-    const { data, boundary, smooth, id } = this
-    const points = genPoints(data, boundary)
+    const { smooth, id } = this
     const radius = smooth === true ? 8 : Number(smooth)
-    const d = genPath(points, radius)
+    const d = genPath(this.points, radius)
 
     return h('path', {
       attrs: { d, fill: 'none', stroke: `url(#${id})` }

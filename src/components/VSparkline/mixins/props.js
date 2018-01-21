@@ -29,6 +29,7 @@ export default {
       default: 8
     },
     smooth: [Boolean, Number],
-    lineWidth: Number
+    lineWidth: Number,
+    showLabel: Boolean
   }
 }

@@ -1,6 +1,8 @@
 import props from './mixins/props'
 import Rect from './components/rect'
+import Text from './components/text'
 import Gradient from './components/gradient'
+import { genPoints } from './helpers/core'
 
 export default {
   name: 'bar',
@@ -9,7 +11,7 @@ export default {
 
   render (h) {
     if (!this.data || this.data.length < 2) return
-    const { width, height, padding } = this
+    const { width, height, padding, lineWidth } = this
     const viewWidth = width || 300
     const viewHeight = height || 75
     const boundary = {
@@ -20,8 +22,14 @@ export default {
     }
     const props = this.$props
 
+    props.points = genPoints(this.data, boundary)
+
+    const totalWidth = boundary.maxX / (props.points.length - 1)
+
     props.boundary = boundary
-    props.id = 'sparkline-trend-' + this._uid
+    props.id = 'sparkline-bar-' + this._uid
+    props.lineWidth = lineWidth || (totalWidth - (padding || 5))
+    props.offsetX = (totalWidth - props.lineWidth) / 2
 
     return h(
       'svg',
@@ -35,8 +43,10 @@ export default {
       [
         h(Gradient, { props }),
         h(Rect, { props }),
+        this.showLabel && h(Text, { props }),
         h('g', {
           attrs: {
+            transform: `scale(1,-1) translate(0,-${boundary.maxY})`,
             'clip-path': `url(#${props.id}-clip)`,
             fill: `url(#${props.id})`
           }

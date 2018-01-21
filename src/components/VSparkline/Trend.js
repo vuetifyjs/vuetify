@@ -1,6 +1,8 @@
 import props from './mixins/props'
 import Path from './components/path'
+import Text from './components/text'
 import Gradient from './components/gradient'
+import { genPoints } from './helpers/core'
 
 export default {
   name: 'trend',
@@ -31,7 +33,7 @@ export default {
     }
   },
 
-  render(h) {
+  render (h) {
     if (!this.data || this.data.length < 2) return
     const { width, height, padding } = this
     const viewWidth = width || 300
@@ -46,12 +48,12 @@ export default {
 
     props.boundary = boundary
     props.id = 'sparkline-trend-' + this._uid
+    props.points = genPoints(this.data, boundary)
 
     return h(
       'svg',
       {
         attrs: {
-          stroke: 'black',
           'stroke-width': this.lineWidth || 1,
           width: width || '100%',
           height: height || '25%',
@@ -60,6 +62,7 @@ export default {
       },
       [
         h(Gradient, { props }),
+        this.showLabel && h(Text, { props }),
         h(Path, {
           props,
           ref: 'path'
