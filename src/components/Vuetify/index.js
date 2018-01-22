@@ -1,7 +1,7 @@
 import application from './mixins/application'
-import goTo from './mixins/goTo'
 import theme from './mixins/theme'
 import options from './mixins/options'
+import goTo from './util/goTo'
 
 const Vuetify = {
   install (Vue, opts = {}) {
