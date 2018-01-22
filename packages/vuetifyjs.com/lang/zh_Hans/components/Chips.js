@@ -1,46 +1,46 @@
 export default {
-  header: 'Chip',
-  headerText: 'The `v-chip` component is used to convey small pieces of information. Using the `close` property, the chip becomes interactive, allowing user interaction.',
+  header: '厚切薯条🍟',
+  headerText: '`v-chip`组件用于传递小块信息。使用`close`属性，厚切薯条变得互动，允许用户交互。',
   components: ['v-chip'],
   examples: [{
     default: {
-      header: 'Default',
-      desc: 'Chips come in 4 primary variations. Regular, with icon, with portrait and closeable.',
+      header: '默认情况',
+      desc: '厚切薯条有4个主要的变种，Regular, 带图标、带头像和可关闭。',
       uninverted: true
     },
     colored: {
-      header: 'Colored',
-      desc: 'Any color from the Material Design palette can be used to change a chips color.'
+      header: '色彩',
+      desc: ' Material Design调色板中的任何色彩均可用于更改厚切薯条的颜色。'
     },
     icon: {
-      header: 'Icon',
-      desc: 'Chips can use text or any icon available in the Material Icons font library.'
+      header: '图标',
+      desc: '厚切薯条可以使用Material图标字体库中的文本或任何图标。'
     },
     outline: {
-      header: 'Outline',
-      desc: 'Outlined chips inherit their border color from the current text color.'
+      header: '轮廓',
+      desc: '轮廓厚切薯条从当前的文字颜色继承它们的边框颜色。'
     },
     label: {
-      header: 'Label',
-      desc: 'Label chips use the `v-card` border-radius.'
+      header: '标签',
+      desc: '标签厚切薯条使用`v-card`的边框半径'
     },
     closable: {
-      header: 'Closable',
-      desc: 'Closable chips can be controlled with a v-model. Listen to the `input` event if you want to know when a chip has been closed.',
+      header: '可关闭',
+      desc: '可关闭厚切薯条可以用一个v-model来控制。如果您想知道厚切薯条何时关闭，请监听`input`事件。',
       uninverted: true
     },
     inSelects: {
-      header: 'In selects',
-      desc: 'Selects can use chips to display the selected data.',
+      header: '选中',
+      desc: '选择框可以用厚切薯条来显示选定的数据。',
       uninverted: true
     }
   }],
   props: {
-    close: 'Adds remove button',
-    disabled: 'Disables the chip, making it un-selectable',
-    label: 'Removes circle edges',
-    outline: 'Removes background and applies border and text color',
-    selected: 'Applies a selection color to the chip. Primarily used for displaying highlight context in `v-select`',
-    small: 'Decreases the chip size'
+    close: '添加删除按钮',
+    disabled: '禁用厚切薯条，使其不可选择',
+    label: '移除圆形边缘',
+    outline: '删除背景并应用边框和文本颜色',
+    selected: '将选择框颜色应用于厚切薯条，主要用于在`v-select`中显示高亮上下文',
+    small: '减少后期薯条的尺寸'
   }
 }
