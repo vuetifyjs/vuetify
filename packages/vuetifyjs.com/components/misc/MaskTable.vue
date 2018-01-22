@@ -13,25 +13,25 @@
             v-for="(row, i) in masks"
             :key="i"
           )
-            td(
-              v-for="(mask, i) in row"
-              :key="i"
-              v-html="mask"
-            )
+            template(v-if="row.header")
+              td
+                strong {{ row.text }}
+            template(v-else)
+              td(v-for="(mask, i) in row" :key="i") {{ mask }}
 </template>
 
 <script>
   export default {
     data: () => ({
       masks: [
-        ['<strong>Masks</strong>', ''],
+        { header: true, text: 'Masks' },
         ['#', 'Any digit'],
         ['A', 'Any capital letter'],
         ['a', 'Any small letter'],
         ['N', 'Any capital alphanumeric character'],
         ['n', 'Any small alphanumeric character'],
         ['X', 'Any special symbol (-!$%^&*()_+|~=`{}[]:";\'<>?,./\\) or space'],
-        ['<strong>Pre-made</strong>', ''],
+        { header: true, text: 'Pre-made' },
         ['credit-card', '#### - #### - #### - ####'],
         ['date-with-time', '##/##/#### ##:##'],
         ['phone', '(###) ### - ####'],
