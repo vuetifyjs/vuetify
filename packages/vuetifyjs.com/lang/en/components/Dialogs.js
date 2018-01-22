@@ -45,7 +45,7 @@ export default {
     fullscreen: 'Changes layout for fullscreen display',
     hideOverlay: 'Hide the display of the overlay',
     lazy: 'Mixins.Bootable.props.lazy',
-    maxWidth: 'The maximum width the content',
+    maxWidth: 'The maximum width of the content',
     origin: 'Mixins.Transitionable.props.origin',
     persistent: 'Clicking outside will not dismiss the dialog',
     scrollable: 'When set to true, expects a card, card-title, card-text and card-actions. Additionally card-text should have specified height. Will set card-text to overflow-y',
