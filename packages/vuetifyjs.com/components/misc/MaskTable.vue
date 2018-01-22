@@ -24,14 +24,14 @@
   export default {
     data: () => ({
       masks: [
-        ['<strong>Masks</strong', ''],
+        ['<strong>Masks</strong>', ''],
         ['#', 'Any digit'],
         ['A', 'Any capital letter'],
         ['a', 'Any small letter'],
         ['N', 'Any capital alphanumeric character'],
         ['n', 'Any small alphanumeric character'],
         ['X', 'Any special symbol (-!$%^&*()_+|~=`{}[]:";\'<>?,./\\) or space'],
-        ['<strong>Pre-made</strong', ''],
+        ['<strong>Pre-made</strong>', ''],
         ['credit-card', '#### - #### - #### - ####'],
         ['date-with-time', '##/##/#### ##:##'],
         ['phone', '(###) ### - ####'],
