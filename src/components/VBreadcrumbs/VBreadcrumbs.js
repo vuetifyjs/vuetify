@@ -1,4 +1,4 @@
-require('../../stylus/components/_breadcrumbs.styl')
+import '../../stylus/components/_breadcrumbs.styl'
 
 export default {
   name: 'v-breadcrumbs',
@@ -51,16 +51,17 @@ export default {
       const dividerData = { staticClass: 'breadcrumbs__divider' }
       const length = this.$slots.default.length
 
-      this.$slots.default.forEach((elm, i) => {
+      for (let i = 0; i < length; i++) {
+        const elm = this.$slots.default[i]
         children.push(elm)
 
         if (!elm.componentOptions ||
           elm.componentOptions.tag !== 'v-breadcrumbs-item' ||
           i === length - 1
-        ) return
+        ) continue
 
         children.push(this.$createElement('li', dividerData, this.computedDivider))
-      })
+      }
 
       return children
     }

@@ -1,4 +1,4 @@
-require('../../stylus/components/_steppers.styl')
+import '../../stylus/components/_steppers.styl'
 
 import Themeable from '../../mixins/themeable'
 
@@ -47,8 +47,12 @@ export default {
   watch: {
     inputValue (val, prev) {
       this.isReverse = Number(val) < Number(prev)
-      this.steps.forEach(i => i.toggle(this.inputValue))
-      this.content.forEach(i => i.toggle(this.inputValue, this.isReverse))
+      for (let index = this.steps.length; --index >= 0;) {
+        this.steps[index].toggle(this.inputValue)
+      }
+      for (let index = this.content.length; --index >= 0;) {
+        this.content[index].toggle(this.inputValue, this.isReverse)
+      }
 
       this.$emit('input', this.inputValue)
       prev && (this.isBooted = true)
@@ -69,14 +73,15 @@ export default {
     getSteps () {
       this.steps = []
       this.content = []
-      this.$children.forEach(i => {
-        if (i.$options._componentTag === 'v-stepper-step') {
-          this.steps.push(i)
-        } else if (i.$options._componentTag === 'v-stepper-content') {
-          i.isVertical = this.vertical
-          this.content.push(i)
+      for (let index = 0; index < this.$children.length; index++) {
+        const child = this.$children[index]
+        if (child.$options._componentTag === 'v-stepper-step') {
+          this.steps.push(child)
+        } else if (child.$options._componentTag === 'v-stepper-content') {
+          child.isVertical = this.vertical
+          this.content.push(child)
         }
-      })
+      }
     },
     stepClick (step) {
       this.getSteps()

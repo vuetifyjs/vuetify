@@ -28,33 +28,19 @@ export default {
     update () {
       const selected = []
 
-      this.buttons
-        .forEach((button, i) => {
-          const elm = button.$el
+      for (let i = 0; i < this.buttons.length; i++) {
+        const elm = this.buttons[i].$el
+        const button = this.buttons[i]
 
-          // Fix for testing, dataset does not exist on elm?
-          if (!elm.dataset) elm.dataset = {}
+        elm.removeAttribute('data-only-child')
 
-          elm.removeAttribute('data-only-child')
-
-          if (this.isSelected(i)) {
-            elm.setAttribute('data-selected', true)
-
-            if (!elm.classList.contains('btn--router')) {
-              elm.classList.add('btn--active')
-            }
-
-            selected.push(i)
-          } else {
-            elm.removeAttribute('data-selected')
-
-            if (!elm.classList.contains('btn--router')) {
-              elm.classList.remove('btn--active')
-            }
-          }
-
-          elm.dataset.index = i
-        })
+        if (this.isSelected(i)) {
+          !button.to && (button.isActive = true)
+          selected.push(i)
+        } else {
+          !button.to && (button.isActive = false)
+        }
+      }
 
       if (selected.length === 1) {
         this.buttons[selected[0]].$el.setAttribute('data-only-child', true)

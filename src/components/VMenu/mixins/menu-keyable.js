@@ -35,7 +35,7 @@ export default {
     changeListIndex (e) {
       // Up, Down, Enter, Space
       if ([40, 38, 13].includes(e.keyCode) ||
-        e.keyCode === 32 && !this.isActive
+        (e.keyCode === 32 && !this.isActive)
       ) {
         e.preventDefault()
       }

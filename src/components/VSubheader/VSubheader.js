@@ -1,4 +1,4 @@
-require('../../stylus/components/_subheaders.styl')
+import '../../stylus/components/_subheaders.styl'
 
 import Themeable from '../../mixins/themeable'
 

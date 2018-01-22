@@ -1,16 +1,23 @@
-require('../../stylus/components/_expansion-panel.styl')
+import '../../stylus/components/_expansion-panel.styl'
 
 import Themeable from '../../mixins/themeable'
+import { provide as RegistrableProvide } from '../../mixins/registrable'
 
 export default {
   name: 'v-expansion-panel',
 
-  mixins: [Themeable],
+  mixins: [Themeable, RegistrableProvide('expansionPanel')],
 
   provide () {
     return {
       panelClick: this.panelClick,
       focusable: this.focusable
+    }
+  },
+
+  data () {
+    return {
+      items: []
     }
   },
 
@@ -22,20 +29,26 @@ export default {
   },
 
   methods: {
-    getChildren () {
-      return this.$children.filter(c => {
-        return c.$options && c.$options.name === 'v-expansion-panel-content'
-      })
-    },
     panelClick (uid) {
       if (!this.expand) {
-        return this.getChildren()
-          .forEach(e => e.toggle(uid))
+        for (let i = 0; i < this.items.length; i++) {
+          this.items[i].toggle(uid)
+        }
+        return
       }
 
-      const panel = this.$children.find(e => e._uid === uid)
-
-      panel && panel.toggle(uid)
+      for (let i = 0; i < this.items.length; i++) {
+        if (this.items[i].uid === uid) {
+          this.items[i].toggle(uid)
+          return
+        }
+      }
+    },
+    register (uid, toggle) {
+      this.items.push({ uid, toggle })
+    },
+    unregister (uid) {
+      this.items = this.items.filter(i => i.uid !== uid)
     }
   },
 

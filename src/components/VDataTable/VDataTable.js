@@ -1,5 +1,5 @@
-require('../../stylus/components/_tables.styl')
-require('../../stylus/components/_data-table.styl')
+import '../../stylus/components/_tables.styl'
+import '../../stylus/components/_data-table.styl'
 
 import DataIterable from '../../mixins/data-iterable'
 
