@@ -25,5 +25,5 @@ export default {
   tile: 'Removes border radius',
   trueValue: 'Sets value for truthy state',
   value: 'Controls visibility',
-  width: 'The width the content'
+  width: 'The width of the content'
 }
