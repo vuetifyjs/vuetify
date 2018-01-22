@@ -123,7 +123,7 @@ export default {
       get () { return this.lazySearch },
       set (val) {
         if (!this.isAutocomplete ||
-          this.selectedIndex > -1
+          (!this.multiple && this.selectedIndex > -1)
         ) return
 
         this.lazySearch = val
