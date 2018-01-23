@@ -48,7 +48,7 @@
         footer: state => !state.stateless
       }),
       index () {
-        const path = this.$route.path.replace(/\/[^\/]*\/(.*)/, '/$1')
+        const path = this.$route.path.replace(/\/[^/]*\/(.*)/, '/$1')
 
         return this.routes.findIndex(route => {
           return path === route.route
