@@ -16,16 +16,16 @@ input-group($material)
   &.input-group--textarea:not(.input-group--full-width)
     .input-group__input
       border: 2px solid $material.text.secondary
-      
+
   &.input-group--solo
     background: $material.cards
-  
+
   &.input-group--solo-inverted
     background: rgba($material.inputs.solo-inverted)
-    
+
     &.input-group--focused
       background: rgba($material.inputs.solo-inverted-focused)
-        
+
       .input-group__append-icon,
       .input-group__prepend-icon,
       input,
@@ -310,7 +310,7 @@ theme(input-group, "input-group")
 .input-group
   &__error
     color: inherit
-    flex: 1 0
+    flex: 1 0 100%
     transition: .3s $transition.fast-in-fast-out
 
 /** Types */
