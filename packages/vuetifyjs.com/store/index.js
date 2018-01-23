@@ -17,7 +17,8 @@ export function createStore () {
       appSnackbar: {
         color: 'success',
         msg: '',
-        text: 'Close'
+        text: 'Close',
+        timeout: 6000
       },
       appToolbar: null,
       currentVersion: null,
