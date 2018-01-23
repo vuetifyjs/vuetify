@@ -1,11 +1,15 @@
 <template lang="pug">
   example-view(:data="data" v-if="exists")
+  not-found(v-else)
 </template>
 
 <script>
   import { camel } from '@/util/helpers'
+  import NotFound from '@/pages/general/404Page'
 
   export default {
+    components: { NotFound },
+
     computed: {
       components () {
         const components = `${this.section}.${this.name}.components`
@@ -35,12 +39,6 @@
       },
       section () {
         return camel(this.$route.params.section)
-      }
-    },
-
-    created () {
-      if (!this.exists) {
-        this.$router.replace('/404')
       }
     }
   }
