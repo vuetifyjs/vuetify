@@ -4,6 +4,7 @@
 
 <script>
   import { camel } from '@/util/helpers'
+  import NotFound from '@/pages/general/404Page'
 
   export default {
     data: () => ({
@@ -25,10 +26,8 @@
         /* webpackChunkName: "examples" */
         /* webpackMode: "lazy-once" */
         `../../examples/${example}.vue`
-      ).then(comp => {
+      ).catch(e => NotFound).then(comp => {
         next(vm => { vm.component = comp.default })
-      }).catch(e => {
-        next('/404')
       })
     }
   }
