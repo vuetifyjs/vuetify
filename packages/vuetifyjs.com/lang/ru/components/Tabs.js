@@ -17,10 +17,10 @@ export default {
       header: 'Фиксированные вкладки',
       desc: 'Свойство **fixed-tabs** устанавливает более высокую минимальную ширину и применяет новую максимальную ширину к `v-tabs-items`. На экранах рабочего стола элементы вкладки будут центрироваться в компоненте `v-tabs` и переключаться на равномерное заполнение на мобильном устройстве.'
     },
-    // right: {
-    //   header: 'Right aligned tabs',
-    //   desc: 'The **right** prop aligns the tabs to the right'
-    // },
+    right: {
+      header: 'Right aligned tabs',
+      desc: 'The **right** prop aligns the tabs to the right'
+    },
     content: {
       header: 'Содержание',
       desc: 'Вкладки - это не единственное, что можно добавить в компонент `v-tabs`. В этом примере мы также добавили панель инструментов.'
