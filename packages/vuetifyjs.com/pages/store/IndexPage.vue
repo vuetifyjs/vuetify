@@ -7,6 +7,7 @@
           :sub-header="$t('Vuetify.Store.indexSubheader')"
           :loading="dataLoading"
         )
+          strong(v-text="$t('Vuetify.Store.helpSupport')")
       v-flex(shrink mb-5)
         v-fade-transition(mode="out-in")
           v-container(
