@@ -127,7 +127,7 @@ export default [
     ]
   },
   { name: 'PremadeThemes', title: 'Pre-made themes', icon: 'mdi-theme-light-dark' },
-  { name: 'store/Index', title: 'Store', icon: 'mdi-store', badge: 'new' },
+  { name: 'store/Index', title: 'Store', icon: 'mdi-store', badge: 'Grand Opening', color: 'red lighten-3' },
   { divider: true },
   { header: 'Additional resources' },
   {

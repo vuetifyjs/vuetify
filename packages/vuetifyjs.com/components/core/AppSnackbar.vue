@@ -3,6 +3,7 @@
     top
     center
     :color="snackbar.color"
+    :timeout="snackbar.timeout"
     v-model="snack"
   >
     <v-layout
@@ -54,6 +55,9 @@
     },
 
     watch: {
+      $route () {
+        this.snack = false
+      },
       snackbar () {
         this.snack = true
       }

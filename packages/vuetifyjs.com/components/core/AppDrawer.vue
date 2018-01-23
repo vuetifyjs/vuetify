@@ -131,7 +131,7 @@
           v-chip(
             v-if="item.badge"
             class="white--text pa-0 chip--x-small"
-            color="primary"
+            :color="item.color || 'primary'"
             disabled
           ) {{ item.badge }}
           v-list-tile-action(v-if="item.subAction")
