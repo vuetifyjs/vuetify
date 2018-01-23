@@ -18,5 +18,6 @@
   "/vuetify/sponsors-and-backers": "/getting-started/sponsors-and-backers",
   "/vuetify/contributing": "/getting-started/contributing",
   "/vuetify/roadmap": "/getting-started/roadmap",
-  "/vuetify/a-la-carte": "/getting-started/a-la-carte"
+  "/vuetify/a-la-carte": "/getting-started/a-la-carte",
+  "/layout/grid": "/components/grid"
 }
