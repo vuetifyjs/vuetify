@@ -281,13 +281,13 @@ export default {
     'description': 'The v-parallax component creates a 3d effect that makes an image appear to scroll slower than the window.',
     'keywords': 'parallax, components'
   },
-  '/components/date-pickers': {
+  'components/date-pickers': {
     'h1': 'Date Pickers',
     'title': 'Date Picker Component',
     'description': 'Date Picker component for the Vuetify framework.',
     'keywords': 'vuetify, picker, date picker, component'
   },
-  '/components/time-pickers': {
+  'components/time-pickers': {
     'h1': 'Time pickers',
     'title': 'Time Picker Component',
     'description': 'Time Picker component for the Vuetify framework.',
