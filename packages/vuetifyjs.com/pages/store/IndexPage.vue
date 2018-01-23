@@ -19,7 +19,7 @@
                 xs12
                 sm6
                 md4
-                lg3
+                xl3
                 d-flex
                 v-for="product in products"
                 :key="product.id"
