@@ -72,15 +72,19 @@ export default {
       const path = this.$route.path.split('/').slice(2).join('/')
       const lang = this.$route.path.split('/')[1]
       const meta = this.$i18n.getLocaleMessage(lang).meta || {}
-      const fallbackmeta = this.$i18n.getLocaleMessage('en').meta
 
       if (this.$route.path.indexOf('product') > -1) {
         return (this.meta = this.getProductMeta())
       }
 
-      this.meta = meta[path] ||
-        (console.warn('Falling back to english meta for ' + (path || '/')), fallbackmeta[path]) ||
-        {}
+      this.meta = meta[path] || this.getFallbackMeta(path) || {}
+    },
+    getFallbackMeta (path) {
+      const fallbackmeta = this.$i18n.getLocaleMessage('en').meta
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('Falling back to english meta for ' + (path || '/'))
+      }
+      return fallbackmeta[path]
     }
   }
 }
