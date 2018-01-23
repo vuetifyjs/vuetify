@@ -72,14 +72,33 @@
             @click="changeToRelease(release)"
           )
             v-list-tile-title {{ release }}
+      v-btn(
+        v-if="isStore && cart"
+        flat
+        :to="{ name: 'store/Cart' }"
+        active-class="btn"
+      )
+        v-badge(color="red" left :value="cart.lineItems.length")
+          template(slot="badge") {{ cart.lineItems.length }}
+          v-icon(left) shopping_cart
+        span Cart
 </template>
 
 <script>
   // Utilities
   import { mapState } from 'vuex'
+  import asyncData from '@/util/asyncData'
   import languages from '@/i18n/languages'
 
   export default {
+    mixins: [asyncData],
+
+    asyncData ({ store, route }) {
+      return store.state.store.cart && route.name.startsWith('store/')
+        ? Promise.resolve()
+        : store.dispatch('store/getCheckout')
+    },
+
     data: () => ({
       fixed: false,
       languages
@@ -88,6 +107,7 @@
     computed: {
       ...mapState({
         appToolbar: state => state.appToolbar,
+        cart: state => state.store.checkout,
         currentVersion: state => state.currentVersion,
         isFullscreen: state => state.isFullscreen,
         releases: state => state.releases,
@@ -107,7 +127,7 @@
           this.isFullscreen
       },
       isStore () {
-        return this.$route.name.startsWith === 'store/'
+        return this.$route.name.startsWith('store/')
       }
     },
 

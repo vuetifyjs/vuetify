@@ -30,6 +30,7 @@
     "extract-text-webpack-plugin": "^3.0.2",
     "lru-cache": "^4.1.1",
     "memory-fs": "^0.4.1",
+    "node-fetch": "^1.7.3",
     "route-cache": "^0.4.4",
     "serialize-javascript": "^1.4.0",
     "serve-favicon": "^2.4.5",
