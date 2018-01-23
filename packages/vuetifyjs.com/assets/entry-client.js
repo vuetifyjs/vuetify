@@ -29,7 +29,7 @@ router.onReady(() => {
     if (!activated.length) return next()
 
     Promise.all(activated.map(c => {
-      if (c.asyncData) return c.asyncData({ store, route: to })
+      if (c.asyncData && c.waitForData) return c.asyncData({ store, route: to })
     })).then(next).catch(next)
   })
 

@@ -127,8 +127,7 @@ export default [
     ]
   },
   { name: 'PremadeThemes', title: 'Pre-made themes', icon: 'mdi-theme-light-dark' },
-  // { href: '/store', title: 'Store', icon: 'mdi-store', badge: 'coming soon' },
-  { href: 'https://vuetify.threadless.com/', title: 'Store', icon: 'mdi-store', target: '_blank' },
+  { name: 'store/Index', title: 'Store', icon: 'mdi-store', badge: 'new' },
   { divider: true },
   { header: 'Additional resources' },
   {

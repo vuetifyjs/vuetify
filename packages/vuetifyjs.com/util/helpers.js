@@ -17,3 +17,12 @@ export function capitalize (str) {
 
   return `${str.substr(0, 1).toUpperCase()}${str.slice(1)}`
 }
+
+export function getLongId (id) {
+  // btoa() but for node
+  return Buffer.from(`gid://shopify/Product/${id}`, 'binary').toString('base64')
+}
+
+export function findProduct (store, id) {
+  return store.state.store.products.find(p => p.id === id)
+}
