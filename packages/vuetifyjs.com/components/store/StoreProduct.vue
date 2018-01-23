@@ -10,8 +10,8 @@
     ).my-3
     v-divider
     v-card-text(style="height: 88px;")
-      div(v-text="value.title").body-2.mb-2
-      div(v-text="description").caption.grey--text
+      div(v-html="value.title").body-2.mb-2
+      div(v-html="description").caption.grey--text
     v-card-text.text-xs-center
       div.green--text.headline.mb-4 {{ priceRange }}
       v-btn(block color="primary" depressed large).my-0 Details

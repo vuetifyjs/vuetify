@@ -1,3 +1,6 @@
+// Utilities
+import { getLongId, findProduct } from '@/util/helpers'
+
 export default {
   data: () => ({
     meta: {},
@@ -55,12 +58,29 @@ export default {
 
       this.setMeta()
     },
+    getProductMeta () {
+      const longId = getLongId(this.$route.params.id)
+      const product = findProduct(this.$store, longId)
+
+      return {
+        title: product.title,
+        description: product.description,
+        keywords: `vuetify store, ${product.title}`
+      }
+    },
     setMeta () {
       const path = this.$route.path.split('/').slice(2).join('/')
       const lang = this.$route.path.split('/')[1]
       const meta = this.$i18n.getLocaleMessage(lang).meta || {}
       const fallbackmeta = this.$i18n.getLocaleMessage('en').meta
-      this.meta = meta[path] || (console.warn('Falling back to english meta for ' + (path || '/')), fallbackmeta[path]) || {}
+
+      if (this.$route.path.indexOf('product') > -1) {
+        return (this.meta = this.getProductMeta())
+      }
+
+      this.meta = meta[path] ||
+        (console.warn('Falling back to english meta for ' + (path || '/')), fallbackmeta[path]) ||
+        {}
     }
   }
 }
