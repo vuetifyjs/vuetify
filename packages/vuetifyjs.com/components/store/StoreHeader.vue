@@ -9,7 +9,9 @@
         ).mb-3
 
         h1(v-text="header").display-1.primary--text.mb-3
-        p(v-text="subHeader").subheading.mb-5
+        p(v-text="subHeader").subheading
+        div.mb-5
+          slot
 </template>
 
 <script>
