@@ -1,38 +1,10 @@
 import { consoleError } from '../../../util/console'
+import * as easingPatterns from '../../../util/easing-patterns'
 
 const defaults = {
   duration: 500,
   offset: 0,
   easing: 'easeInOutCubic'
-}
-
-const easingPatterns = {
-  // linear
-  linear: t => t,
-  // accelerating from zero velocity
-  easeInQuad: t => t * t,
-  // decelerating to zero velocity
-  easeOutQuad: t => t * (2 - t),
-  // acceleration until halfway, then deceleration
-  easeInOutQuad: t => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t),
-  // accelerating from zero velocity
-  easeInCubic: t => t * t * t,
-  // decelerating to zero velocity
-  easeOutCubic: t => --t * t * t + 1,
-  // acceleration until halfway, then deceleration
-  easeInOutCubic: t => t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1,
-  // accelerating from zero velocity
-  easeInQuart: t => t * t * t * t,
-  // decelerating to zero velocity
-  easeOutQuart: t => 1 - --t * t * t * t,
-  // acceleration until halfway, then deceleration
-  easeInOutQuart: t => (t < 0.5 ? 8 * t * t * t * t : 1 - 8 * --t * t * t * t),
-  // accelerating from zero velocity
-  easeInQuint: t => t * t * t * t * t,
-  // decelerating to zero velocity
-  easeOutQuint: t => 1 + --t * t * t * t * t,
-  // acceleration until halfway, then deceleration
-  easeInOutQuint: t => t < 0.5 ? 16 * t * t * t * t * t : 1 + 16 * --t * t * t * t * t
 }
 
 function getDocumentHeight () {
@@ -75,16 +47,17 @@ export default function goTo (target, options) {
   const startLocation = window.pageYOffset
   const targetLocation = getTargetLocation(target, settings)
   const distanceToScroll = targetLocation - startLocation
+  const easingFunction = typeof settings.easing === 'function' ? settings.easing : easingPatterns[settings.easing]
 
   if (isNaN(targetLocation)) return consoleError(`Target must be a Selector/Number/DOMElement, received ${target.constructor.name} instead.`)
+  if (!easingFunction) return consoleError(`Easing function '${settings.easing}' not found.`)
 
   function step (currentTime) {
     let progressPercentage = Math.min(1, ((currentTime - startTime) / settings.duration))
-    let easing = easingPatterns[settings.easing](progressPercentage)
-    let targetPosition = Math.floor(startLocation + distanceToScroll * easing)
+    let targetPosition = Math.floor(startLocation + distanceToScroll * easingFunction(progressPercentage))
 
     window.scrollTo(0, targetPosition)
-    if (window.pageYOffset === targetLocation) return
+    if (Math.round(window.pageYOffset) === targetLocation) return
     window.requestAnimationFrame(step)
   }
 
