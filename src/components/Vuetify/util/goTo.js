@@ -80,8 +80,8 @@ export default function goTo (target, options) {
 
   function step (currentTime) {
     let progressPercentage = Math.min(1, ((currentTime - startTime) / settings.duration))
-    let easeFunction = easingPatterns[settings.easing](progressPercentage)
-    let targetPosition = Math.floor(startLocation + distanceToScroll * easeFunction)
+    let easing = easingPatterns[settings.easing](progressPercentage)
+    let targetPosition = Math.floor(startLocation + distanceToScroll * easing)
 
     window.scrollTo(0, targetPosition)
     if (window.pageYOffset === targetLocation) return
