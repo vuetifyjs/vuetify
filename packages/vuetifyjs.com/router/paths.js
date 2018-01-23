@@ -1,6 +1,5 @@
 export default [
-  ['404', 'general/404'],
-  ['', 'Home'],
+  ['', 'Home', true],
   ['getting-started/quick-start', 'getting-started/QuickStart'],
   ['getting-started/why-vuetify', 'getting-started/WhyVuetify'],
   ['getting-started/frequently-asked-questions', 'getting-started/FrequentlyAskedQuestions'],
@@ -22,7 +21,8 @@ export default [
   ['store', 'Store'],
   ['guides/server-side-rendering', 'guides/SSR'],
   ['guides/a-la-carte', 'guides/ALaCarte'],
-  ['theme-generator', 'ThemeGenerator'],
-  ['examples/:example+', 'examples/Example'],
-  [':section/:component', 'components/Doc']
+  ['theme-generator', 'ThemeGenerator', true],
+  ['examples/:example+', 'examples/Example', true],
+  [':section/:component', 'components/Doc'],
+  ['*', 'general/404', true]
 ]

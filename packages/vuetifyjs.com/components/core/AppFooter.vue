@@ -8,7 +8,7 @@
     ).app-footer.justify-center
       v-layout(justify-space-between).ma-0
         v-flex(v-if="prev")
-          router-link(:to="prev.href").d-inline-flex.align-center
+          router-link(:to="{ path: prev.route }").d-inline-flex.align-center
             v-btn(
               color="primary"
               dark
@@ -22,7 +22,7 @@
           :pr-4="$vuetify.breakpoint.xsOnly"
           v-if="next"
         ).text-xs-right
-          router-link(:to="next.href").d-inline-flex.align-center
+          router-link(:to="next.route").d-inline-flex.align-center
             span(v-text="next.title").subheading.no-wrap.hidden-xs-only
             v-btn(
               color="primary"
@@ -34,7 +34,9 @@
 </template>
 
 <script>
+  // Utilities
   import { mapState } from 'vuex'
+  import { kebab } from '@/util/helpers'
   import appDrawerItems from '@/assets/app-drawer-items'
 
   export default {
@@ -46,8 +48,10 @@
         footer: state => !state.stateless
       }),
       index () {
+        const path = this.$route.path.replace(/\/[^\/]*\/(.*)/, '/$1')
+
         return this.routes.findIndex(route => {
-          return this.$route.path === route.href
+          return path === route.route
         })
       },
       current () {
@@ -78,11 +82,12 @@
         items.forEach(item => {
           if (item.items) {
             this.mapRoutes(item.items, routes, item.namespace || item.group)
-          } else if (item.href && !item.href.match(/http/)) {
+          } else if (item.name) {
             const ref = Object.assign({}, item)
-            if (group) {
-              ref.href = `${group}/${ref.href}`
-            }
+
+            ref.group = group
+            ref.route = `/${group ? group + '/' : ''}${kebab(ref.name)}`
+
             routes.push(ref)
           }
         })

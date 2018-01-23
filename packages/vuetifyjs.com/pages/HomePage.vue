@@ -29,7 +29,7 @@
             v-btn(
               color="white"
               class="primary--text"
-              to="/getting-started/quick-start"
+              :to="{ name: 'getting-started/QuickStart' }"
               large
             ).mb-2
               strong {{ $t("Vuetify.Home.getStarted") }}
@@ -140,7 +140,7 @@
                   :style="{ maxHeight: `${supporter.size}px` }"
                 ).supporter
             v-flex(xs12).text-xs-center.mt-5
-              v-btn(to="/getting-started/sponsors-and-backers" large).white.primary--text {{ $t("Vuetify.Home.becomeSponsor") }}
+              v-btn(:to="{ name: 'getting-started/SponsorsAndBackers' }" large).white.primary--text {{ $t("Vuetify.Home.becomeSponsor") }}
                 v-icon(right color="primary") chevron_right
 
     section#callout
@@ -206,14 +206,6 @@
 
         return supporters
       }
-    },
-
-    created () {
-      this.$store.commit('app/FULLSCREEN', true)
-    },
-
-    beforeDestroy () {
-      this.$store.commit('app/FULLSCREEN', false)
     }
   }
 </script>

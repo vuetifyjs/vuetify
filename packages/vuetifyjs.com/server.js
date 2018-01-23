@@ -2,6 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const LRU = require('lru-cache')
 const express = require('express')
+const cookieParser = require('cookie-parser')
 const favicon = require('serve-favicon')
 const compression = require('compression')
 const microcache = require('route-cache')
@@ -14,6 +15,8 @@ const useMicroCache = process.env.MICRO_CACHE !== 'false'
 const serverInfo =
   `express/${require('express/package.json').version} ` +
   `vue-server-renderer/${require('vue-server-renderer/package.json').version}`
+
+const availableLanguages = require('./i18n/languages').map(lang => lang.locale)
 
 const app = express()
 
@@ -66,6 +69,7 @@ const serve = (path, cache) => express.static(resolve(path), {
   maxAge: cache && isProd ? 1000 * 60 * 60 * 24 * 30 : 0
 })
 
+app.use(cookieParser())
 app.use(compression({ threshold: 0 }))
 app.use(favicon('./static/favicon.ico'))
 app.use('/example-source', serve('./examples', true)) // TODO: This should be a regex to serve anything with an extension
@@ -103,6 +107,9 @@ function render (req, res) {
 
   res.setHeader('Content-Type', 'text/html')
   res.setHeader('Server', serverInfo)
+  res.cookie('currentLanguage', req.params[0], {
+    maxAge: 1000 * 60 * 60 * 24 * 7 // 7 days
+  })
 
   const handleError = err => {
     if (err.url) {
@@ -119,7 +126,9 @@ function render (req, res) {
 
   const context = {
     title: 'Vuetify', // default title
-    url: req.url
+    url: req.url,
+    lang: req.params[0],
+    res
   }
   renderer.renderToString(context, (err, html) => {
     if (err) {
@@ -132,8 +141,17 @@ function render (req, res) {
   })
 }
 
-app.get('*', isProd ? render : (req, res) => {
+const languageRegex = /^\/([a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,3})(?:\/.*)?$/
+
+app.get(languageRegex, isProd ? render : (req, res) => {
   readyPromise.then(() => render(req, res))
+})
+
+// 302 redirect for no language
+app.get('*', (req, res) => {
+  let lang = req.cookies.currentLanguage || req.acceptsLanguages(availableLanguages) || 'en'
+  if (!languageRegex.test('/' + lang)) lang = 'en'
+  res.redirect(302, `/${lang}${req.path}`)
 })
 
 const port = process.env.PORT || 8095

@@ -4,6 +4,10 @@ export function camel (str) {
   return capitalize(camel)
 }
 
+export function camelActual (str) {
+  return (str || '').replace(/-(\w)/g, (_, c) => c ? c.toUpperCase() : '')
+}
+
 export function kebab (str) {
   return (str || '').replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
 }

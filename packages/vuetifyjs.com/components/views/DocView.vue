@@ -51,7 +51,7 @@
         return this.$t(headerText)
       },
       namespace () {
-        const route = this.$route.path.slice(1).split('/')
+        const route = this.$route.path.split('/').slice(2)
 
         // If a root page, prefix namespace with Vuetify
         if (route.length === 1) route.unshift('vuetify')

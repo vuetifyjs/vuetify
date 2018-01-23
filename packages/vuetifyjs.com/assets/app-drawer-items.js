@@ -2,136 +2,138 @@ export default [
   { header: 'Core documentation' },
   {
     title: 'Getting started',
-    group: '/getting-started',
+    group: 'getting-started',
     icon: 'mdi-speedometer',
     items: [
-      { href: 'quick-start', title: 'Quick Start' },
-      { href: 'why-vuetify', title: 'Why Vuetify?' },
-      { href: 'frequently-asked-questions', title: 'Frequently asked questions' },
-      { href: 'sponsors-and-backers', title: 'Sponsors and backers' },
-      { href: 'contributing', title: 'Contributing' },
-      { href: 'roadmap', title: 'Roadmap' }
+      { name: 'QuickStart', title: 'Quick Start' },
+      { name: 'WhyVuetify', title: 'Why Vuetify?' },
+      { name: 'FrequentlyAskedQuestions', title: 'Frequently asked questions' },
+      { name: 'SponsorsAndBackers', title: 'Sponsors and backers' },
+      { name: 'Contributing', title: 'Contributing' },
+      { name: 'Roadmap', title: 'Roadmap' }
     ]
   },
   {
     title: 'Application layout',
-    group: '/layout',
+    group: 'layout',
     icon: 'mdi-page-layout-body',
     items: [
-      { href: 'pre-defined', title: 'Pre-defined', badge: 'updated' },
-      { href: 'spacing', title: 'Spacing' },
-      { href: 'alignment', title: 'Text alignment' },
-      { href: 'display', title: 'Display' },
-      { href: 'elevation', title: 'Elevation' },
-      { href: 'sandbox', title: 'Sandbox' }
+      { name: 'PreDefined', title: 'Pre-defined', badge: 'updated' },
+      { name: 'Spacing', title: 'Spacing' },
+      { name: 'Alignment', title: 'Text alignment' },
+      { name: 'Display', title: 'Display' },
+      { name: 'Elevation', title: 'Elevation' },
+      { name: 'Sandbox', title: 'Sandbox' }
     ]
   },
   {
     title: 'Styles & themes',
-    group: '/style',
+    group: 'style',
     icon: 'mdi-format-color-fill',
     items: [
-      { href: 'colors', title: 'Colors', badge: 'updated' },
-      { href: 'theme', title: 'Theme', badge: 'updated' },
-      { href: 'typography', title: 'Typography' },
-      { href: 'content', title: 'Content' }
+      { name: 'Colors', title: 'Colors', badge: 'updated' },
+      { name: 'Theme', title: 'Theme', badge: 'updated' },
+      { name: 'Typography', title: 'Typography' },
+      { name: 'Content', title: 'Content' }
     ]
   },
   {
     title: 'Motion & transitions',
-    group: '/motion',
+    group: 'motion',
     icon: 'mdi-clock-fast',
     items: [
-      { href: 'transitions', title: 'Transitions' }
+      { name: 'Transitions', title: 'Transitions' }
     ]
   },
   {
     title: 'UI components',
-    group: '/components',
+    group: 'components',
+    component: 'components/Doc',
     icon: 'mdi-view-dashboard',
     items: [
-      { href: 'alerts', title: 'Alerts' },
-      { href: 'avatars', title: 'Avatars' },
-      { href: 'badges', title: 'Badges' },
-      { href: 'bottom-navigation', title: 'Bottom navigation' },
-      { href: 'bottom-sheets', title: 'Bottom sheets' },
-      { href: 'breadcrumbs', title: 'Breadcrumbs' },
-      { href: 'buttons', title: 'Buttons' },
-      { href: 'floating-action-buttons', title: 'Buttons: Floating Action Buttons' },
-      { href: 'cards', title: 'Cards' },
-      { href: 'carousels', title: 'Carousels' },
-      { href: 'chips', title: 'Chips' },
-      { href: 'data-iterator', title: 'Data iterator', badge: 'new' },
-      { href: 'data-tables', title: 'Data tables' },
-      { href: 'dialogs', title: 'Dialogs' },
-      { href: 'dividers', title: 'Dividers' },
-      { href: 'expansion-panels', title: 'Expansion panels' },
-      { href: 'footer', title: 'Footer' },
+      { name: 'alerts', title: 'Alerts' },
+      { name: 'avatars', title: 'Avatars' },
+      { name: 'badges', title: 'Badges' },
+      { name: 'bottom-navigation', title: 'Bottom navigation' },
+      { name: 'bottom-sheets', title: 'Bottom sheets' },
+      { name: 'breadcrumbs', title: 'Breadcrumbs' },
+      { name: 'buttons', title: 'Buttons' },
+      { name: 'floating-action-buttons', title: 'Buttons: Floating Action Buttons' },
+      { name: 'cards', title: 'Cards' },
+      { name: 'carousels', title: 'Carousels' },
+      { name: 'chips', title: 'Chips' },
+      { name: 'data-iterator', title: 'Data iterator', badge: 'new' },
+      { name: 'data-tables', title: 'Data tables' },
+      { name: 'dialogs', title: 'Dialogs' },
+      { name: 'dividers', title: 'Dividers' },
+      { name: 'expansion-panels', title: 'Expansion panels' },
+      { name: 'footer', title: 'Footer' },
       {
         title: 'Grid & breakpoints',
-        group: '/grid',
-        namespace: '/components',
+        group: 'grid',
+        namespace: 'components',
         items: [
-          { href: 'grid', title: 'Grid' },
-          { href: 'grid-lists', title: 'Grid lists' }
+          { name: 'grid', title: 'Grid' },
+          { name: 'grid-lists', title: 'Grid lists' }
         ]
       },
       {
         title: 'Inputs & controls',
-        group: '/(forms|selects|selection|text-fields)',
-        namespace: '/components',
+        group: '(forms|selects|selection|text-fields)',
+        namespace: 'components',
         items: [
-          { href: 'forms', title: 'Forms' },
-          { href: 'selects', title: 'Selects' },
-          { href: 'selection-controls', title: 'Selection controls' },
-          { href: 'text-fields', title: 'Text fields' }
+          { name: 'forms', title: 'Forms' },
+          { name: 'selects', title: 'Selects' },
+          { name: 'selection-controls', title: 'Selection controls' },
+          { name: 'text-fields', title: 'Text fields' }
         ]
       },
-      { href: 'icons', title: 'Icons' },
-      { href: 'lists', title: 'Lists' },
-      { href: 'jumbotrons', title: 'Jumbotrons', badge: 'new' },
-      { href: 'menus', title: 'Menus' },
-      { href: 'navigation-drawers', title: 'Navigation drawers' },
-      { href: 'paginations', title: 'Paginations' },
-      { href: 'parallax', title: 'Parallax' },
+      { name: 'icons', title: 'Icons' },
+      { name: 'lists', title: 'Lists' },
+      { name: 'jumbotrons', title: 'Jumbotrons', badge: 'new' },
+      { name: 'menus', title: 'Menus' },
+      { name: 'navigation-drawers', title: 'Navigation drawers' },
+      { name: 'paginations', title: 'Paginations' },
+      { name: 'parallax', title: 'Parallax' },
       {
         title: 'Pickers',
-        group: '/(date-pickers|time-pickers)',
-        namespace: '/components',
+        group: '(date-pickers|time-pickers)',
+        namespace: 'components',
         items: [
-          { href: 'date-pickers', title: 'Date pickers', badge: 'updated' },
-          { href: 'time-pickers', title: 'Time pickers', badge: 'updated' }
+          { name: 'date-pickers', title: 'Date pickers', badge: 'updated' },
+          { name: 'time-pickers', title: 'Time pickers', badge: 'updated' }
         ]
       },
-      { href: 'progress', title: 'Progress' },
-      { href: 'sliders', title: 'Sliders' },
-      { href: 'snackbars', title: 'Snackbars' },
-      { href: 'steppers', title: 'Steppers' },
-      { href: 'subheaders', title: 'Subheaders' },
-      { href: 'tabs', title: 'Tabs', badge: 'updated' },
-      { href: 'toolbars', title: 'Toolbars', badge: 'updated' },
-      { href: 'tooltips', title: 'Tooltips' }
+      { name: 'progress', title: 'Progress' },
+      { name: 'sliders', title: 'Sliders' },
+      { name: 'snackbars', title: 'Snackbars' },
+      { name: 'steppers', title: 'Steppers' },
+      { name: 'subheaders', title: 'Subheaders' },
+      { name: 'tabs', title: 'Tabs', badge: 'updated' },
+      { name: 'toolbars', title: 'Toolbars', badge: 'updated' },
+      { name: 'tooltips', title: 'Tooltips' }
     ]
   },
   {
     title: 'Directives',
-    group: '/directives',
+    group: 'directives',
+    component: 'components/Doc',
     icon: 'mdi-function',
     items: [
-      { href: 'resizing', title: 'Resizing' },
-      { href: 'ripples', title: 'Ripples' },
-      { href: 'scrolling', title: 'Scrolling' },
-      { href: 'touch-support', title: 'Touch support' }
+      { name: 'resizing', title: 'Resizing' },
+      { name: 'ripples', title: 'Ripples' },
+      { name: 'scrolling', title: 'Scrolling' },
+      { name: 'touch-support', title: 'Touch support' }
     ]
   },
-  { href: '/pre-made-themes', title: 'Pre-made themes', icon: 'mdi-theme-light-dark' },
+  { name: 'PremadeThemes', title: 'Pre-made themes', icon: 'mdi-theme-light-dark' },
   // { href: '/store', title: 'Store', icon: 'mdi-store', badge: 'coming soon' },
   { href: 'https://vuetify.threadless.com/', title: 'Store', icon: 'mdi-store', target: '_blank' },
   { divider: true },
   { header: 'Additional resources' },
   {
     title: 'Ecosystem',
-    group: '/ecosystem',
+    group: 'ecosystem',
     icon: 'mdi-earth',
     items: [
       { href: 'https://github.com/vuetifyjs/awesome-vuetify', title: 'Awesome Vuetify', target: '_blank', badge: 'new' }
@@ -139,7 +141,7 @@ export default [
   },
   {
     title: 'Community',
-    group: '/community',
+    group: 'community',
     icon: 'mdi-account-multiple',
     items: [
       { href: 'https://chat.vuetifyjs.com/', title: 'Chat and support', target: '_blank' },
@@ -149,17 +151,17 @@ export default [
   },
   {
     title: 'Advanced tutorials',
-    group: '/guides',
+    group: 'guides',
     icon: 'mdi-television-guide',
     items: [
-      { href: 'server-side-rendering', title: 'Server side rendering' },
-      { href: 'a-la-carte', title: 'A la carte', badge: 'updated' }
+      { name: 'SSR', title: 'Server side rendering' },
+      { name: 'ALaCarte', title: 'A la carte', badge: 'updated' }
     ]
   },
   {
     title: 'Theme generator',
     icon: 'mdi-format-paint',
-    href: '/theme-generator',
+    name: 'ThemeGenerator',
     badge: 'new'
   }
 ]
