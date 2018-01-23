@@ -4,13 +4,20 @@
       v-flex.text-xs-center
         h1.display-2.primary--text Whoops, 404
         p The page you were looking for does not exist
-        v-btn(outline color="primary" to="/getting-started/quick-start") Get me out of here!
+        v-btn(outline color="primary" :to="`${to}getting-started/quick-start`") Get me out of here!
 </template>
 
 <script>
   export default {
-    mounted () {
-      this.$store.state.appDrawer = false
+    props: {
+      to: {
+        type: String,
+        default: '/'
+      }
+    },
+
+    created () {
+      this.$ssrContext && this.$ssrContext.res.status(404)
     }
   }
 </script>

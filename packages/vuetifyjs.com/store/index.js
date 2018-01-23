@@ -11,7 +11,6 @@ export function createStore () {
       appToolbar: null,
       currentVersion: null,
       isFullscreen: false,
-      fullscreenRoutes: ['/', '/404', '/store', '/theme-generator'],
       loadedLangs: [],
       releases: [],
       stateless: false

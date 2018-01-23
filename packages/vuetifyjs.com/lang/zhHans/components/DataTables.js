@@ -9,7 +9,7 @@ export default {
     },
     noData: {
       header: 'Slots: no-data / no-results',
-      desc: 'The `no-data` and `no-results` slots can display custom HTML when there\s no data or no filtered data in the table'
+      desc: 'The `no-data` and `no-results` slots can display custom HTML when there\'s no data or no filtered data in the table'
     },
     headers: {
       header: 'Slots: items and headers',

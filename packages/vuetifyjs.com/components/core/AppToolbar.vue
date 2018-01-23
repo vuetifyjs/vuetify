@@ -7,20 +7,20 @@
     scroll-off-screen
     height="58px"
     :manual-scroll="isManualScrolled"
-    :inverted-scroll="$route.path === '/'"
+    :inverted-scroll="isHome"
     ref="toolbar"
   )#app-toolbar
     v-toolbar-side-icon(
       @click="$store.commit('app/DRAWER_TOGGLE')"
       v-show="!stateless && $vuetify.breakpoint.mdAndDown"
     )
-    router-link(to="/").d-flex.ml-3
+    router-link(:to="{ name: 'Home' }").d-flex.ml-3
       img(
         src="/static/v-alt.svg"
         height="38px"
       )
     v-fade-transition(mode="out-in")
-      v-btn(flat :to="backPath" v-if="$route.path === '/store'")
+      v-btn(flat :to="backPath" v-if="$route.path.name === 'store/Index'")
         v-icon(left) mdi-arrow-left
         span Back to Docs
       v-toolbar-title(v-else).pb-1.hidden-xs-only Vuetify
@@ -28,8 +28,8 @@
     v-toolbar-items
       v-btn(
         flat
-        v-show="$route.path === '/'"
-        to="/getting-started/quick-start"
+        v-show="isHome"
+        :to="{ name: 'getting-started/QuickStart' }"
       )
         span.hidden-md-and-up Docs
         span.hidden-sm-and-down Documentation
@@ -77,24 +77,12 @@
 <script>
   // Utilities
   import { mapState } from 'vuex'
+  import languages from '@/i18n/languages'
 
   export default {
     data: () => ({
       fixed: false,
-      languages: [
-        {
-          title: 'English',
-          locale: 'en'
-        },
-        {
-          title: 'Русский',
-          locale: 'ru'
-        },
-        {
-          title: '简体中文',
-          locale: 'zh_Hans'
-        }
-      ]
+      languages
     }),
 
     computed: {
@@ -102,22 +90,24 @@
         appToolbar: state => state.appToolbar,
         currentVersion: state => state.currentVersion,
         isFullscreen: state => state.isFullscreen,
-        loadedLangs: state => state.loadedLangs,
         releases: state => state.releases,
         route: state => state.route,
         stateless: state => state.stateless
       }),
       backPath () {
         return this.route.from.path === '/'
-          ? '/getting-started/quick-start'
+          ? { name: 'getting-started/QuickStart' }
           : this.route.from.path
       },
+      isHome () {
+        return this.route.name === 'Home'
+      },
       isManualScrolled () {
-        return this.$route.path !== '/' &&
+        return !this.isHome &&
           this.isFullscreen
       },
       isStore () {
-        return this.$route.path === '/store'
+        return this.$route.name.startsWith === 'store/'
       }
     },
 
@@ -125,19 +115,9 @@
       changeToRelease (release) {
         window.location.href = `${window.location.origin}/releases/${release}/#${this.$route.fullPath}`
       },
-      async translateI18n (lang) {
-        if (this.loadedLangs.indexOf(lang) < 0) {
-          await import(
-            /* webpackChunkName: "lang-[request]" */
-            /* webpackMode: "lazy-once" */
-            `@/lang/${lang}`
-          ).then(msgs => this.$i18n.setLocaleMessage(lang, msgs.default))
-          .catch(err => Promise.resolve(err))
-        }
-
-        document.querySelector('html').setAttribute('lang', lang)
-
-        this.$i18n.locale = lang
+      translateI18n (lang) {
+        this.$router.replace({ params: { lang } })
+        document.cookie = `currentLanguage=${lang};path=/;max-age=${60 * 60 * 24 * 7}` // expires in 7 days
       }
     }
   }

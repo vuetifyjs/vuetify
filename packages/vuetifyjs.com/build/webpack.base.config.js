@@ -22,7 +22,7 @@ module.exports = {
   resolve: {
     extensions: ['*', '.js', '.json', '.vue'],
     alias: {
-      '@': resolve('../'),
+      '@': path.resolve(__dirname, '../'),
       'vue$': 'vue/dist/vue.common.js'
     }
   },
