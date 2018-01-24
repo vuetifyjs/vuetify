@@ -13,8 +13,8 @@
 
     computed: {
       source () {
-        const path = this.$route.fullPath
-        return `https://github.com/vuetifyjs/vuetifyjs.com/blob/master${path}.vue`
+        const path = this.$route.path.split('/').slice(2).join('/')
+        return `https://github.com/vuetifyjs/vuetifyjs.com/blob/master/${path}.vue`
       }
     },
 
