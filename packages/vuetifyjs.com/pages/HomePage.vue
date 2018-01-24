@@ -213,10 +213,6 @@
       }
     },
 
-    mounted () {
-      this._default('The new Vuetify store is now live!', 'Take me there!', 12000)
-    },
-
     methods: {
       snackHandler () {
         this.$router.push({ name: 'store/Index' })
