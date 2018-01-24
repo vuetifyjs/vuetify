@@ -14,6 +14,7 @@ export default {
   back: 'Back',
   backToStore: 'Continue Shopping',
   thankYouBack: 'Having issues?<br>Come to the [community](https://community.vuetifyjs.com)',
+  onSale: 'On Sale',
   cartHeaders: [
     {
       text: 'Product',

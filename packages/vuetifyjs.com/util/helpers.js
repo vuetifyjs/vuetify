@@ -26,3 +26,9 @@ export function getLongId (id) {
 export function findProduct (store, id) {
   return store.state.store.products.find(p => p.id === id)
 }
+
+export function isOnSale (variants) {
+  return variants.some(variant => {
+    return parseFloat(variant.price) < parseFloat(variant.compareAtPrice)
+  })
+}
