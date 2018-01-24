@@ -100,8 +100,11 @@
     "webpack-merge": "4.1.1",
     "write-file-webpack-plugin": "4.2.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "animejs": "^2.2.0"
+  },
   "peerDependencies": {
+    "animejs": "^2.2.0",
     "vue": "^2.5.0"
   },
   "engines": {

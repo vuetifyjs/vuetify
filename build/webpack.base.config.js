@@ -21,5 +21,8 @@ module.exports = {
     new FriendlyErrorsWebpackPlugin({
       clearConsole: true
     })
-  ]
+  ],
+  externals: {
+    animejs: 'animejs'
+  }
 }
