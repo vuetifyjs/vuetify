@@ -10,7 +10,15 @@
     ).my-3
     v-divider
     v-card-text(style="height: 88px;")
-      div(v-html="value.title").body-2.mb-2
+      div.body-2.mb-2
+        div(v-html="value.title").d-inline-block.mr-2
+        v-chip(
+          color="red lighten-3"
+          small
+          v-if="isOnSale"
+        ).white--text
+          span(v-text="$t('Vuetify.Store.onSale')")
+          v-icon(right) mdi-fire
       div(v-html="description").caption.grey--text
     v-card-text.text-xs-center
       div.green--text.headline.mb-4 {{ priceRange }}
@@ -18,6 +26,9 @@
 </template>
 
 <script>
+  // Utilities
+  import { isOnSale } from '@/util/helpers'
+
   export default {
     props: {
       value: {
@@ -33,6 +44,9 @@
         if (description.length < 75) return description
 
         return description.slice(0, 72) + '...'
+      },
+      isOnSale () {
+        return isOnSale(this.value.variants)
       },
       priceRange () {
         const prices = this.value.variants

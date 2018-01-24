@@ -8,8 +8,22 @@
     )
     v-container(grid-list-xl).pa-0
       v-layout(wrap)
-        v-flex(xs12 md6 order-xs2 order-sm2 order-md1).text-xs-center
-          img(:src="product.images[0].src").product-image
+        v-flex(
+          xs12
+          md6
+          order-xs2
+          order-sm2
+          order-md1
+          style="max-width: 500px;"
+        ).text-xs-center.mx-auto
+          v-carousel(:cycle="false").elevation-0
+            v-carousel-item(
+              v-for="(item, i) in product.images"
+              :key="i"
+              :src="item.src"
+              :href="item.src"
+              target="_blank"
+            )
 
         v-flex(xs12 md6 order-md2)
           h2(v-text="product.title").display-2.primary--text.mb-3
@@ -43,14 +57,25 @@
                   max="5"
                   hide-details
                 )
-              v-flex(xs12).my-3
+              v-flex(xs3)
+                v-btn(
+                  color="grey darken-1"
+                  exact
+                  flat
+                  large
+                  outline
+                  :to="{ name: 'store/Index' }"
+                ).ml-0
+                  span(v-text="$t('Vuetify.Store.backToStore')")
+              v-spacer
+              v-flex(xs7)
                 v-btn(
                   large
                   color="primary"
                   @click="addToCart"
                   :loading="cartLoading"
                   block
-                ).px-5.mx-0
+                ).px-5.mr-0
                   span(v-text="$t('Vuetify.Store.addToCart')")
                   v-icon(right size="18px") add_shopping_cart
 
@@ -144,6 +169,16 @@
     height: 100%
     display: flex
     flex-direction: column
+
+    .jumbotron
+      &__image
+        max-width: 90%
+
+    .carousel
+      .carousel__left,
+      .carousel__right
+        .icon
+          color: rgba(#000, .54) !important
 
     .strike
       text-decoration: line-through
