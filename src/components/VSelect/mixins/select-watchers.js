@@ -98,14 +98,14 @@ export default {
       // Activate menu if inactive and searching
       if (this.isActive &&
         !this.menuIsActive &&
-        val !== this.getValue(this.selectedItem)
+        val !== this.getText(this.selectedItem)
       ) {
         this.menuIsActive = true
       }
 
       // Only reset list index
       // if typing in search
-      val || prev && this.resetMenuIndex()
+      !val && prev && this.resetMenuIndex()
 
       this.$nextTick(() => {
         if (val && !this.isAnyValueAllowed) {

@@ -57,10 +57,14 @@ export default {
       return rows
     },
     genEmptyItems (content) {
-      return this.genTR([this.$createElement('td', {
-        'class': 'text-xs-center',
-        attrs: { colspan: '100%' }
-      }, content)])
+      if (typeof content === 'string') {
+        return this.genTR([this.$createElement('td', {
+          'class': 'text-xs-center',
+          attrs: { colspan: '100%' }
+        }, content)])
+      } else {
+        return this.needsTR(content) ? this.genTR(content) : content
+      }
     }
   }
 }

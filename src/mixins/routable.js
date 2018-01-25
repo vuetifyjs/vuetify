@@ -39,8 +39,8 @@ export default {
           name: 'ripple',
           value: (this.ripple && !this.disabled) ? this.ripple : false
         }],
-        on: {
-          ...(this.$listeners || {}),
+        [this.to ? 'nativeOn' : 'on']: {
+          ...this.$listeners,
           click: this.click
         }
       }
@@ -71,7 +71,7 @@ export default {
           replace: this.replace
         })
       } else {
-        tag = this.href && 'a' || this.tag || 'a'
+        tag = (this.href && 'a') || this.tag || 'a'
 
         if (tag === 'a') {
           if (this.href) data.attrs.href = this.href

@@ -418,7 +418,7 @@ export default {
             minWidth: '75px'
           },
           on: {
-            input: (val) => {
+            input: val => {
               this.updatePagination({
                 page: 1,
                 rowsPerPage: val

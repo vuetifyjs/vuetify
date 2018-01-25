@@ -1,4 +1,4 @@
-require('../../stylus/components/_date-picker-title.styl')
+import '../../stylus/components/_date-picker-title.styl'
 
 // Components
 import VIcon from '../VIcon'
@@ -62,7 +62,7 @@ export default {
     genTitleText () {
       return this.$createElement('transition', {
         props: {
-          name: this.computedTransition,
+          name: this.computedTransition
         }
       }, [
         this.$createElement('div', {

@@ -1,4 +1,5 @@
 import application from './mixins/application'
+import goTo from './mixins/goTo'
 import theme from './mixins/theme'
 import options from './mixins/options'
 
@@ -14,7 +15,8 @@ const Vuetify = {
       application,
       dark: false,
       theme: theme(opts.theme),
-      options: options(opts.options)
+      options: options(opts.options),
+      goTo
     })
 
     Vue.prototype.$vuetify = $vuetify.inspire

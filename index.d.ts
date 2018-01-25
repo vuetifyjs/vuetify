@@ -66,6 +66,7 @@ declare interface VuetifyObject {
   dark: boolean
   theme: VuetifyTheme
   options: VuetifyOptions
+  goTo: (target: string | number | HTMLElement) => void
 }
 
 declare module 'vue/types/vue' {

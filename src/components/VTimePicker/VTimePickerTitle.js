@@ -1,4 +1,4 @@
-require('../../stylus/components/_time-picker-title.styl')
+import '../../stylus/components/_time-picker-title.styl'
 
 // Mixins
 import PickerButton from '../../mixins/picker-button'
