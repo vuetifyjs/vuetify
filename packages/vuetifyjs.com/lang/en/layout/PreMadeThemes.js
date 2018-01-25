@@ -8,9 +8,9 @@ export default {
   templates: [
     {
       screenshot: '/static/doc-images/starter/vuetify-premium.jpg',
-      title: 'Startup',
+      title: 'Alpha Theme',
       tag: 'Premium',
-      description: 'Showcase your Company or personal portfolio with this beautifully hand-crafted Material design template.',
+      description: 'Complete theme experience including enhanced vue-cli, full documentation, 5 custom components and much more!',
       price: '25$',
       demoUrl: ''
     },

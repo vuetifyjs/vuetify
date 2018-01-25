@@ -19,5 +19,6 @@
   "/vuetify/contributing": "/getting-started/contributing",
   "/vuetify/roadmap": "/getting-started/roadmap",
   "/vuetify/a-la-carte": "/getting-started/a-la-carte",
-  "/layout/grid": "/components/grid"
+  "/layout/grid": "/components/grid",
+  "/pre-made-themes": "/layout/pre-made-themes"
 }

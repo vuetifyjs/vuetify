@@ -89,6 +89,12 @@ export default {
     'description': 'Select from a multitude of official material design layouts.',
     'keywords': 'pre-defined layouts, layouts, application layout, material design layouts'
   },
+  'layout/pre-made-themes': {
+    'h1': 'Pre-made themes',
+    'title': 'Free / Premium Themes',
+    'description': 'Vuetify offers numerous pre-build starter and premium themes. Kickstart your next application today, no design skills needed.',
+    'keywords': 'vuetify themes, pre-built material themes, premium themes'
+  },
   'layout/spacing': {
     'h1': 'Spacing',
     'title': 'Spacing helpers',
@@ -382,12 +388,6 @@ export default {
     'title': 'Touch Support',
     'description': 'Touch directive for the Vuetify framework.',
     'keywords': 'touch, touch directive, mobile touch directive'
-  },
-  'pre-made-themes': {
-    'h1': 'Pre-made themes',
-    'title': 'Free / Premium Themes',
-    'description': 'Vuetify offers numerous pre-build starter and premium themes. Kickstart your next application today, no design skills needed.',
-    'keywords': 'vuetify themes, pre-built material themes, premium themes'
   },
   'examples/layouts/baseline': {
     'h1': 'Baseline',
