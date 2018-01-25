@@ -127,7 +127,7 @@ export default [
       { name: 'touch-support', title: 'Touch support' }
     ]
   },
-  { name: 'store/Index', title: 'Store', icon: 'mdi-store', badge: 'Grand Opening', color: 'red lighten-3' },
+  { name: 'store/Index', title: 'Store', icon: 'mdi-store', badge: 'Sale: 15% - 40% Off', color: 'red lighten-3' },
   { divider: true },
   { header: 'Additional resources' },
   {
