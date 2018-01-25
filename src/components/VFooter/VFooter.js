@@ -21,7 +21,7 @@ export default {
     height: {
       default: 32,
       type: [Number, String],
-      validator: v => !isNaN(parseInt(v))
+      validator: v => !isNaN(parseInt(v)) || v === 'auto'
     },
     inset: Boolean
   },
@@ -73,7 +73,9 @@ export default {
      * @return {number}
      */
     updateApplication () {
-      return this.computedHeight
+      return this.height === 'auto'
+        ? this.$el.clientHeight
+        : this.computedHeight
     }
   },
 
