@@ -6,6 +6,18 @@ export default {
     default: {
       header: 'Default',
       desc: 'The footer component is just a basic container.'
+    },
+    companyFooter: {
+      header: 'Company Footer',
+      desc: 'The footer component as a basic company footer with links.'
+    },
+    indigoFooter: {
+      header: 'Indigo Footer',
+      desc: 'The footer component with Indigo background color and social media icons and button.'
+    },
+    tealFooter: {
+      header: 'Teal Footer',
+      desc: 'The footer component with a Teal color header and columns and rows of links.'
     }
   }],
   props: {
