@@ -13,12 +13,12 @@
               v-card-title.align-center
                 h2.headline.mb-0 {{ template.title }}
                   v-chip(label small color="indigo" text-color="white" v-if="template.tag") {{ template.tag.toUpperCase() }}
-                  v-chip(label small color="blue-grey" text-color="white" v-else) {{ $t('Vuetify.PreMadeThemes.free').toUpperCase() }}
+                  v-chip(label small color="blue-grey" text-color="white" v-else) {{ $t('Layout.PreMadeThemes.free').toUpperCase() }}
                 v-spacer
                 v-avatar(v-if="template.buy").green.lighten-2
                   span.white--text.title 25$
               v-divider
-              v-card-text {{ template.description }}
+              v-card-text(style="min-height: 95px") {{ template.description }}
               v-card-actions
                 v-btn(
                   flat
@@ -27,14 +27,15 @@
                   v-if="!template.price"
                   target="_blank"
                   rel="noopener"
-                ) {{ $t('Vuetify.PreMadeThemes.demo') }}
+                ) {{ $t('Layout.PreMadeThemes.demo') }}
                 v-spacer
                 v-btn(
+                  color="primary"
                   flat
-                  href="javascript:;"
-                  disabled
+                  :to="{ name: 'store/Index' }"
                   v-if="template.price"
-                ) {{ $t('Vuetify.PreMadeThemes.comingSoon') }}
+                ) {{ $t('Layout.PreMadeThemes.comingSoon') }}
+                  v-icon(right) mdi-arrow-right
                 v-btn(
                   flat
                   color="success"
@@ -42,8 +43,8 @@
                   target="_blank"
                   rel="noopener"
                   v-else
-                ) {{ $t('Vuetify.PreMadeThemes.sourceCode') }}
-                  v-icon(right success) chevron_right
+                ) {{ $t('Layout.PreMadeThemes.sourceCode') }}
+                  v-icon(right success) mdi-arrow-right
 
 </template>
 
@@ -55,7 +56,7 @@
     }),
     computed: {
       templates () {
-        return this.$t('Vuetify.PreMadeThemes.templates')
+        return this.$t('Layout.PreMadeThemes.templates')
       }
     }
   }
