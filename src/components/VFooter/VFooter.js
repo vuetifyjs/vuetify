@@ -28,7 +28,11 @@ export default {
 
   computed: {
     computedHeight () {
-      return parseInt(this.height)
+      const height = parseInt(this.height)
+
+      if (isNaN(height)) return 0
+
+      return height
     },
     computedMarginBottom () {
       if (!this.app) return

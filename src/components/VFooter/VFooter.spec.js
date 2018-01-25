@@ -95,4 +95,15 @@ test('VFooter.js', ({ mount, functionalContext }) => {
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.computedPaddingLeft).toBe(300)
   })
+
+  it('should accept an auto height', async () => {
+    const wrapper = mount(VFooter, {
+      attachToDocument: true,
+      propsData: {
+        height: 'auto'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
