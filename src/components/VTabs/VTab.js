@@ -83,7 +83,7 @@ export default {
       if (!this.to) return
 
       this.$nextTick(() => {
-        if (this.$el.firstChild.className.indexOf(this.activeClass) > -1) {
+        if (this.$el && this.$el.firstChild.className.indexOf(this.activeClass) > -1) {
           this.tabClick(this)
         }
       })
