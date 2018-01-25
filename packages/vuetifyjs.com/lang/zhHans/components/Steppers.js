@@ -1,6 +1,6 @@
 export default {
-  header: 'Stepper',
-  headerText: 'The `v-stepper` component displays progress through numbered steps.',
+  header: '步骤线',
+  headerText: '`v-stepper` 组件用于显示步骤进度。',
   components: [
     'v-stepper',
     'v-stepper-step',
@@ -9,72 +9,72 @@ export default {
   ],
   examples: [{
     example: {
-      header: 'Example',
-      desc: 'A stepper can be used for a multitude of scenarios, including shopping carts, record creation and more.'
+      header: '示例',
+      desc: '一个步骤组件适用于多种场景，包括购物车、创建记录等等。'
     },
     editable: {
-      header: 'Editable steps',
-      desc: 'An editable step can be selected by a user at any point and will navigate them to that step.'
+      header: '可编辑步骤',
+      desc: '用户随时可以选择可编辑的步骤并将跳转到该步。'
     },
     nonEditable: {
-      header: 'Non-editable steps',
-      desc: 'Non-editable steps force a user to process linearly through your process.'
+      header: '不可编辑步骤',
+      desc: '不可编辑步骤（Non-editable steps）强制用户在整个流程中进行线性处理。'
     },
     optional: {
-      header: 'Optional steps',
-      desc: 'An optional step can be called out with sub-text.'
+      header: '可选步骤',
+      desc: '可选步骤可由子文本调出。'
     },
     horizontal: {
-      header: 'Horizontal steps',
-      desc: 'Horizontal steppers move users along the x-axis through the defined steps.'
+      header: '水平步骤线',
+      desc: '水平步骤线可以让用户定义沿x轴移动的步骤。'
     },
     vertical: {
-      header: 'Vertical steppers',
-      desc: 'Vertical steppers move users along the y-axis and otherwise work exactly the same as their horizontal counterpart.'
+      header: '垂直步骤线',
+      desc: '垂直步骤线可以让用户定义沿y轴移动的步骤。其他地方与水平方向的一致。'
     },
     linear: {
-      header: 'Linear steppers',
-      desc: 'Linear steppers will always move a user through your defined path.'
+      header: '线性步骤',
+      desc: '线性步骤始终沿着你定义的路径移动。'
     },
     nonLinear: {
-      header: 'Non-linear steppers',
-      desc: 'Non-linear steppers allow the user to move through your process in whatever way they choose.'
+      header: '非线性步骤',
+      desc: '非线性步骤可以让用户按照自己选择路线在流程中移动。'
     },
     alternateLabels: {
-      header: 'Alternate labels',
-      desc: 'Steppers also have an alternative label style which places the title under the step itself.'
+      header: '备用标签',
+      desc: '步骤组件也有一个放置在步骤下方的备用标签样式。'
     },
     error: {
-      header: 'Multi-line error state',
-      desc: 'An error state can be displayed to notify the user of some action that must be taken.'
+      header: '多行表示的错误状态',
+      desc: '可以显示错误状态来通知用户必须采取的一些行动。'
     },
     alternateError: {
-      header: 'Alternative label multi-line error state',
-      desc: 'The error state can also be applied to the alternative label style.'
+      header: '备用标签样式的多行错误状态显示',
+      desc: '错误状态的显示同样可以应用于备用标签样式。'
     },
     verticalError: {
-      header: 'Vertical multi-line error state',
-      desc: 'The same state also applies to Vertical steppers.'
+      header: '垂直的多行错误状态显示',
+      desc: '同样的，错误状态也可以应用于垂直的步骤。'
     },
     dynamic: {
-      header: 'Dynamic steps',
-      desc: 'Steppers can have their steps dynamically added or removed. If a currently active step is removed, be sure to account for this by changing the applied model.'
+      header: '动态步骤',
+      desc: '步骤可以动态的添加和移除，如果删除的是当前处于激活状态的步骤，请务必通过更改应用模型来解决这个问题。'
     }
   }],
   props: {
-    altLabels: 'Places the labels beneath the step',
-    complete: 'Marks step as complete',
-    completeIcon: 'Icon to display when step is marked as completed',
-    editable: 'Marks step as editable',
-    editIcon: 'Icon to display when step is editable',
-    errorIcon: 'Icon to display when step has an error',
-    nonLinear: 'Allow user to jump to any step',
-    vertical: 'Display steps vertically',
+    altLabels: '将标签置于步骤的下方',
+    complete: '标志一步完成',
+    completeIcon: '标志一步完成时的图标显示',
+    editable: '表示步骤可编辑',
+    editIcon: '步骤可编辑时的图标显示',
+    errorIcon: '步骤错误时的图标显示',
+    nonLinear: '允许用户跳过任意一步',
+    vertical: '垂直显示步骤线',
     'v-stepper-step': {
-      step: 'Content to display inside step circle'
+      step: '要在步骤圈内显示的内容'
     },
     'v-stepper-content': {
-      step: 'Sets step to associate the content to'
+      step: '设置步骤关联的内容'
     }
   }
 }

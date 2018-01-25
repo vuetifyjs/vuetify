@@ -1,54 +1,54 @@
 export default {
-  header: 'Dialog',
-  headerText: 'The `v-dialog` component inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks. Use dialogs sparingly because they are interruptive.',
+  header: '对话框',
+  headerText: '`v-dialog` 组件用来通知用户有关特定任务的信息，并且可能包含重要信息，需要作出决定或者涉及多任务；应谨慎使用对话框，因为它是中断的。',
   components: ['v-dialog'],
   examples: [{
     simple: {
-      header: 'Simple dialogs',
-      desc: 'Choosing an option immediately commits the option and closes the menu. Touching outside of the dialog, or pressing Back, cancels the action and closes the dialog.',
+      header: '简易对话框',
+      desc: '选择一个选项立即提交后会关闭菜单；点击对话框之外，或者按下后退，取消操作即可关闭对话框。',
       uninverted: true
     },
     withoutActivator: {
-      header: 'Without activator',
-      desc: 'If for some reason you are unable to use the activator slot, be sure to add the `.stop` modifier to the event that triggers the dialog.',
+      header: '没有激活器',
+      desc: '如果因为某些原因而不能使用 activator slot(激活器插槽)，请确保将`.stop`修饰符添加到触发对话框的事件。',
       uninverted: true
     },
     modal: {
-      header: 'Modal',
-      desc: 'Similar to a Simple Dialog, except that it\'s not dismissed when touching outside.',
+      header: '模态框',
+      desc: '类似于简单对话框，除了说点击对话框外部不会关闭外。',
       uninverted: true
     },
     fullscreen: {
-      header: 'Fullscreen',
-      desc: 'Due to limited space, full-screen dialogs may be more appropriate for mobile devices than dialogs used on devices with larger screens.',
+      header: '全屏对话框',
+      desc: '由于空间的限制，全屏对话框可能更适用于移动设备，相对大屏设备来说。',
       uninverted: true
     },
     form: {
-      header: 'Form',
-      desc: 'Just a simple example of a form in a dialog.',
+      header: '表单对话框',
+      desc: '这里有一个简单的表单对话框的例子。',
       uninverted: true
     },
     scrollable: {
-      header: 'Scrollable',
-      desc: 'Example of a dialog with scrollable content.',
+      header: '可滚动',
+      desc: '一个可滚动内容的对话框示例',
       uninverted: true
     },
     overflowed: {
-      header: 'Overflowed',
-      desc: 'Modals that do not fit within the available window space will scroll the container.',
+      header: '溢出',
+      desc: '如果内容溢出有效窗口空间，将会滚动容器',
       uninverted: true
     }
   }],
   props: {
-    disabled: 'Disabled the ability to open the dialog',
-    fullWidth: 'Specifies the modal to force 100% width',
-    fullscreen: 'Changes layout for fullscreen display',
-    hideOverlay: 'Hide the display of the overlay',
+    disabled: '禁用打开对话框',
+    fullWidth: '指定模态框强制100%宽度',
+    fullscreen: '改变布局全屏显示',
+    hideOverlay: '隐藏遮罩',
     lazy: 'Mixins.Bootable.props.lazy',
-    maxWidth: 'The maximum width the content',
+    maxWidth: '内容的最大宽度',
     origin: 'Mixins.Transitionable.props.origin',
-    persistent: 'Clicking outside will not dismiss the dialog',
-    scrollable: 'When set to true, expects a card, card-title, card-text and card-actions. Additionally card-text should have specified height. Will set card-text to overflow-y',
-    width: 'Sets the dialog width'
+    persistent: '点击对话框外部不能使其关闭',
+    scrollable: '当包含card, card-title, card-text 以及 card-actions这几个的对话框可滚动设为 true 的时候； card-text 应该指定高度并且设置 overflow-y',
+    width: '设置对话框的宽度'
   }
 }
