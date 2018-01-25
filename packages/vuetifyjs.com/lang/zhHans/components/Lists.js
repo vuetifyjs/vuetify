@@ -1,6 +1,6 @@
 export default {
-  header: 'List',
-  headerText: 'The `v-list` component is used to display information. It can contain an avatar, content, actions, subheaders and much more. Lists can contain children and are used in the sidebar.',
+  header: '列表',
+  headerText: '`v-list` 组件用于显示信息，它可以包含一个头像、内容、操作、列表组标题等等。列表也可以包含子元素并在侧边栏（sidebar）使用。',
   components: [
     'v-list',
     'v-list-tile',
@@ -14,59 +14,53 @@ export default {
   ],
   examples: [{
     avatarTwoLines: {
-      header: 'Avatar with 2 lines',
-      desc: 'Lists can take an array of list items. When given an array, the list component will figure out the classes that are needed depending on what it was given. You can also define headers or dividers within the items array.'
+      header: '头像和两行内容的组合',
+      desc: '列表可以包含一个items数组。如果给定一个数组，列表组件将依据给出的内容找到相关的类，你也可以在items数组定义列表组标题（headers）或分隔线（divider）。'
     },
     avatarTitleAndAction: {
-      header: 'Avatar with title and action',
-      desc: 'Lists also contain slots for a more explicit approach. If you choose this approach, remember you must provide additional props for correct spacing. In this example, we have a tile with an avatar, so we must provide an `avatar` property.'
+      header: '头像和列表项标题以及操作的组合',
+      desc: '列表组件还提供了用于更明确做法的插槽，如果你选择这种方法，切记必须提供附加属性来确保正确的间距。在这个例子中，有一个带有头像的图块，所以我们必须提供 `avatar` 属性。'
     },
     iconTwoLinesAndAction: {
-      header: 'Icon with 2 lines and action',
-      desc: 'Lists can contain subheaders, dividers, and can contain 1 or more lines. The subtitle will overflow with ellipsis if it extends past one line.'
+      header: '图标加两行内容以及操作的组合',
+      desc: '列表组件可以包含列表组标题，分割线，以及1行或者更多行，如果副标题文本溢出则会以省略号的形式截断文本'
     },
     avatarThreeLines: {
-      header: 'Avatar with 3 lines',
-      desc: 'For three line lists, the subtitle will clamp vertically at 2 lines and then ellipsis. If you need more than 3 lines, it is advised to use a <router-link to="/components/cards">card</router-link>.'
+      header: '头像和三行的组合',
+      desc: '对于3行的列表，列表项副标题内容占两行的时候如果超出范围则以省略号形式截断文字，如果你需要超过3行，建议使用 <router-link to="/components/cards">card</router-link>组件。'
     },
     avatarSubheaderTitleAndAction: {
-      header: 'Avatar with title and action',
-      desc: 'When a lists slot is used, you must manually define whether it contains headers, or if the items contain an avatar. This is required to maintain proper spacing.'
+      header: '头像和标题以及操作的组合',
+      desc: '当使用一个 lists 插槽时，你必须手动定义它是否包含列表组标题（headers）或者列表项是否包含 avatar，这样做是为了确保正确的间距。'
     },
     subheadingsAndDividers: {
-      header: 'Subheadings and dividers',
-      desc: 'Lists can contain multiple subheaders and dividers.'
+      header: '列表组标题和分割线',
+      desc: 'Lists 组件可以包含多个列表组标题和分割线。'
     },
     cardList: {
-      header: 'Card image with toolbar and list',
-      desc: 'A list can be combined with a card.'
+      header: '图像卡片和工具栏以及列表的组合',
+      desc: '一个列表可以和卡片组合。'
     },
     titleSubtitleActionsAndActionText: {
-      header: 'Title with sub-title, actions and action-text',
-      desc: 'A list can contain a stack within an action. Ripple and router props can be passed through the main v-list, to the v-list-tile or as a property in the items array.'
+      header: '列表项的标题和子标题, 操作与操作文本说明',
+      desc: '列表组件可以包含一个操作栈。波纹效果和路由属性也可以应用到 v-list 甚至 v-list-tile中，或者作为列表项数组的一个属性。'
     },
     actionTitleAndSubtitle: {
-      header: 'Action with title and sub-title',
-      desc: 'A list can contain up to 3 lines.'
+      header: '操作和标题以及副标题的组合',
+      desc: '一个列表项最多包含3行。'
     },
     expansionLists: {
-      header: 'Expansion Lists',
-      desc: 'A list can contain a group of items which will display on click. Expansion lists are also used within the `navigation drawer` component.'
-    },
-    dark: {
-      header: 'Dark scheme',
-      desc: 'A list can assume the alternate scheme color of dark.',
-      inverted: true,
-      uninverted: true
+      header: '可展开的列表',
+      desc: '一个列表项可以包含一组在点击时展开的项，可展开的列表也可以在 `navigation drawer` 组件中使用。'
     }
   }],
   props: {
-    avatar: 'Used to set minimum tile height on a single-line list item',
-    dense: 'Lowers max height of list tiles',
-    expand: 'Will only collapse when explicitly closed',
-    subheader: 'Removes top padding. Used when previous sibling is a header',
-    threeLine: 'Increases list-tile height for three lines',
-    twoLine: 'Increases list-tile height for two lines',
-    inactive: 'If set, the list tile will not be rendered as a link even if it has to/href prop or @click handler'
+    avatar: '用来设置单行列表项的最小高度（即使用该属性后将有一个头像大小的最小高度）',
+    dense: '减小列表块的最大宽度',
+    expand: '将只有在明确关闭后才会折叠起来',
+    subheader: '会移除上边距（top padding），当前面只有一个列表组标题的时候使用',
+    threeLine: '增加列表块的高度到3行',
+    twoLine: '增加列表块的高度到2行',
+    inactive: '如果设置了该属性，即使有to/href或者@click，列表块也不会响应链接。'
   }
 }

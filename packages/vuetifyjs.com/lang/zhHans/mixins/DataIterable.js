@@ -3,7 +3,7 @@ export default {
     customFilter: '自定义搜索过滤器',
     customSort: '自定义排序过滤器',
     disableInitialSort: '在初始渲染时禁用默认排序',
-    expand: 'Designates the table as containing rows that are expandable',
+    expand: '将表格指定为包含可展开的行',
     filter: '用于过滤条目的功能',
     hideActions: '隐藏表格操作',
     itemKey: '条目对象中指定唯一键的字段',

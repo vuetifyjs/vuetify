@@ -1,91 +1,91 @@
 export default {
-  header: 'Text field',
-  headerText: 'Text fields components are used for collecting user provided information.',
+  header: '文本框',
+  headerText: '文本框组件用于收集用户提供的信息。',
   components: ['v-text-field'],
   supplemental: ['MaskTable'],
   examples: [{
     label: {
-      header: 'With label',
-      desc: 'Text-fields come in two theme options, dark and light.'
+      header: '带标签',
+      desc: '文本框组件有两个主题选项，亮色和暗色。'
     },
     singleLine: {
-      header: 'Single line light theme',
-      desc: 'Single line text-fields do not float their label on focus or with data.'
+      header: '单行亮色主题',
+      desc: '单行文本框的标签不会浮动到焦点或数据之上。'
     },
     icon: {
-      header: 'With Icon',
-      desc: 'Icons can be specified as prepended or appended.'
+      header: '带图标',
+      desc: '图标可以指定为预加或附加。'
     },
     multiLine: {
-      header: 'Multi-Line',
-      desc: 'A multi-line text-field is useful for larger amounts of text.'
+      header: '多行',
+      desc: '多行文本框在需要大量文本输入时很有用。'
     },
     characterCounter: {
-      header: 'Character counter',
-      desc: 'Use a counter to inform a user of the character limit. The counter does not perform any validation by itself. You will need to pair it with either the internal validation system, or a 3rd party library.'
+      header: '字符计数器',
+      desc: '使用计数器通知用户字符限制，计数器本身不执行任何验证，您需要将其与内部验证系统或第三方库配对。'
     },
     password: {
-      header: 'Password input',
-      desc: 'A password input can be used with an appended icon and callback to control the visibility.'
+      header: '密码输入',
+      desc: '密码输入可以用附加图标以及回调一起控制密码的可见性。'
     },
     validation: {
-      header: 'Validation',
-      desc: 'Vuetify includes simple validation through the `rules` prop. The prop accepts an array of callbacks. While validating rules, the current v-model value will be passed to the callback. This callback should return either `true` or a `String`, the error message.'
+      header: '验证',
+      desc: 'Vuetify包含简单的验证通过使用 `rules` 属性，这个属性接受一个回调函数组，在验证规则时，当前的 v-model 值将被传递给回调函数，这个回调函数必须返回 `ture` 或 `String` 或者错误信息。'
     },
     fullWidthWithCharacterCounter: {
-      header: 'Full-width text field with character counter',
-      desc: 'Full width text fields allow you to create boundless inputs. In this example, we use a `v-divider` to separate the fields.'
+      header: '带计数器的全宽文本框',
+      desc: '全宽文本框允许你创建一个不限制输入的文本框，在下面的例子中，我们是用 `v-divider` 来分隔文本框。'
     },
     requiredFields: {
-      header: 'Required fields',
-      desc: 'In this example two of the text-fields are required. We utilize the **required** prop in order to apply an asterisk to the label and rules to validate the fields.'
+      header: '必填字段',
+      desc: '在这个例子中两个文本输入框是必填的，我们利用 **required** 属性为必填项设置星号并验证这些字段。'
     },
     hint: {
-      header: 'Hint text',
-      desc: 'The **hint** property on text-fields adds the provided string beneath the text-field. Using **persistent-hint** keeps the hint visible when the text-field is not focused.'
+      header: '提示文本',
+      desc: '在文本框组件使用 **hint** 来设置将提示的文本添加到文本字段下。使用 **persistent-hint** 保持提示文本在文本字段未被聚焦时保持可见性。'
     },
     prefixesAndSuffixes: {
-      header: 'Prefixes & suffixes',
-      desc: 'The **prefix** and **suffix** property allows you to prepend and append inline non-modifiable text next to the text-field'
+      header: '前缀和后缀',
+      desc: ' **prefix** 和 **suffix** 属性允许你在文本字段旁添加一段不可修改的文本。'
     },
     customValidation: {
-      header: 'Custom validation',
-      desc: 'While the built in `v-form` or 3rd party plugin such as <a href="https://github.com/monterail/vuelidate" target="_blank" rel="noopener">vuelidate</a> or <a href="https://github.com/logaretm/vee-validate" target="_blank" rel="noopener">vee-validation</a> can help streamline your validation process, you can choose to simply control it yourself.'
+      header: '自定义验证',
+      desc: '虽然内置的 `v-form` 组件以及第三方插件比如 <a href="https://github.com/monterail/vuelidate" target="_blank" rel="noopener">vuelidate</a> or <a href="https://github.com/logaretm/vee-validate" target="_blank" rel="noopener">vee-validation</a> 可以帮助你简化验证过程，但你仍可以简单的自行控制它。'
     },
     textarea: {
-      header: 'Textarea',
-      desc: 'Textarea text-fields have an alternate style.',
+      header: '多行文本框',
+      desc: '多行文本框有一个可选样式。',
       uninverted: true
     },
     box: {
-      header: 'Box style',
-      desc: 'Text-fields can be used with an alternative box design. Append and prepend icon props are **not** supported in this mode.'
+      header: '盒子样式',
+      desc: '文本框可以使用替代的样式设计，但是这种模式下不支持附加或者前置图标属性。'
     },
     customColors: {
-      header: 'Custom colors',
-      desc: 'You can optionally change a text-field into any color in the Material design palette. Below is an example implementation of a custom form with validation.'
+      header: '自定义颜色',
+      desc: '你可以将文本框的颜色更改为 Material design 调色板中的任何颜色。下面是带验证的自定义表单的示例实现。'
     },
     masks: {
-      header: 'Masks',
-      desc: 'Text fields can validate against character masks. Using either a pre-made or custom rules, you can optionally format and validate specific character sets.'
+      header: '掩码',
+      desc: '文本框可以验证字符掩码，使用预制或自定义规则，你可以选择格式化和验证特定的字符集。'
     },
     progressBar: {
-      header: 'Progress bar',
-      desc: 'You can display a progress bar instead of the bottom line. You can use the default indeterminate progress having same color as the text field or designate a custom one using the `progress` slot'
+      header: '进度条',
+      desc: '你可以用一个进度条来替换下划线，你可以使用与文本框具有相同颜色的默认的不确定进度的进度条，你也可以使用 `progress` 插槽来自定义进度条。'
     }
   }],
   props: {
-    autoGrow: 'Auto-grows the input. This option requires the use of **v-model**',
-    autofocus: 'Enable autofocus',
-    box: 'Applies the alternate box input style',
-    counter: 'Creates counter for input length. If no Number is specified, it defaults to 25. Does not apply any validation.',
-    fullWidth: 'Desginates input type as full-width',
-    multiLine: 'Turns into textarea',
-    prefix: 'Displays prefix text',
-    rows: 'Number of rows in textarea',
-    suffix: 'Displays suffix text',
-    textarea: 'Textarea text-field with alternate style',
-    toggleKeys: 'Array of key codes that will toggle the input (if it supports toggling)',
-    type: 'Sets input type'
+    autoGrow: '自动增长输入，需要使用 **v-model**',
+    autofocus: '启用自动聚焦',
+    box: '应用备用输入框样式',
+    counter: '为输入长度创建一个计数器，如果未指定数字，则默认为25，不会应用任何验证。',
+    fullWidth: '指定输入框为全屏宽度。',
+    multiLine: '转为多行文本框',
+    prefix: '显示前缀',
+    rows: 'Textarea 的行数',
+    suffix: '显示后缀',
+    textarea: 'Textarea 使用备用样式',
+    toggleKeys: '切换输入键值的数组（如果支持切换的话）',
+    type: '设置输入类型'
   }
 }
