@@ -82,6 +82,9 @@ export default {
     },
     genTR (children, data = {}) {
       return this.$createElement('tr', data, children)
+    },
+    hasTR (row) {
+      return row.length && row.find(c => c.tag === 'tr')
     }
   },
 

@@ -55,9 +55,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
       </thead>
       <tbody>
         <tr>
-          <td colspan="100%"
-              class="text-xs-center"
-          >
+          <td colspan="3">
             No data available
           </td>
         </tr>
@@ -248,9 +246,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
       </thead>
       <tbody>
         <tr>
-          <td colspan="100%"
-              class="text-xs-center"
-          >
+          <td colspan="3">
             No matching records found
           </td>
         </tr>
@@ -680,9 +676,7 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
 
 exports[`VDataTable.vue should match display no-data-text when no data 1`] = `
 
-<td colspan="100%"
-    class="text-xs-center"
->
+<td colspan="3">
   foo
 </td>
 
@@ -690,9 +684,7 @@ exports[`VDataTable.vue should match display no-data-text when no data 1`] = `
 
 exports[`VDataTable.vue should match display no-results-text when no results 1`] = `
 
-<td colspan="100%"
-    class="text-xs-center"
->
+<td colspan="3">
   bar
 </td>
 

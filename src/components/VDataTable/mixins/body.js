@@ -57,13 +57,14 @@ export default {
       return rows
     },
     genEmptyItems (content) {
-      if (typeof content === 'string') {
+      if (typeof content === 'string' || (!this.hasTR(content) && !this.needsTR(content))) {
         return this.genTR([this.$createElement('td', {
-          'class': 'text-xs-center',
-          attrs: { colspan: '100%' }
+          attrs: { colspan: `${this.headers.length}` }
         }, content)])
+      } else if (this.needsTR(content)) {
+        return this.genTR(content)
       } else {
-        return this.needsTR(content) ? this.genTR(content) : content
+        return content
       }
     }
   }
