@@ -129,28 +129,6 @@ test('VTimePicker.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should set input hour when setting hour', () => {
-    const wrapper = mount(VTimePicker, {
-      propsData: {
-        value: '12:34'
-      }
-    })
-
-    wrapper.vm.hour = 15
-    expect(wrapper.vm.inputHour).toBe(15)
-  })
-
-  it('should set input minute when setting minute', () => {
-    const wrapper = mount(VTimePicker, {
-      propsData: {
-        value: '12:34'
-      }
-    })
-
-    wrapper.vm.minute = 15
-    expect(wrapper.vm.inputMinute).toBe(15)
-  })
-
   it('should set input hour when setting hour in 12hr mode', () => {
     const wrapper = mount(VTimePicker, {
       propsData: {
@@ -291,25 +269,25 @@ test('VTimePicker.js', ({ mount }) => {
     expect(wrapper.vm.isAllowedHourCb(12)).toBe(true)
     expect(wrapper.vm.isAllowedHourCb(13)).toBe(false)
 
-    wrapper.vm.hour = 8
+    wrapper.vm.inputHour = 8
     expect(wrapper.vm.isAllowedMinuteCb(30)).toBe(false)
 
-    wrapper.vm.hour = 9
+    wrapper.vm.inputHour = 9
     expect(wrapper.vm.isAllowedMinuteCb(30)).toBe(false)
     expect(wrapper.vm.isAllowedMinuteCb(31)).toBe(false)
     expect(wrapper.vm.isAllowedMinuteCb(35)).toBe(true)
 
-    wrapper.vm.hour = 10
+    wrapper.vm.inputHour = 10
     expect(wrapper.vm.isAllowedMinuteCb(30)).toBe(true)
     expect(wrapper.vm.isAllowedMinuteCb(31)).toBe(false)
     expect(wrapper.vm.isAllowedMinuteCb(35)).toBe(true)
 
-    wrapper.vm.hour = 11
+    wrapper.vm.inputHour = 11
     expect(wrapper.vm.isAllowedMinuteCb(30)).toBe(false)
     expect(wrapper.vm.isAllowedMinuteCb(31)).toBe(false)
     expect(wrapper.vm.isAllowedMinuteCb(35)).toBe(false)
 
-    wrapper.vm.hour = 12
+    wrapper.vm.inputHour = 12
     expect(wrapper.vm.isAllowedMinuteCb(30)).toBe(true)
     expect(wrapper.vm.isAllowedMinuteCb(31)).toBe(false)
     expect(wrapper.vm.isAllowedMinuteCb(35)).toBe(false)

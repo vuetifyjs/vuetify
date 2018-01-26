@@ -64,45 +64,31 @@ export default {
       }
     },
     isAllowedMinuteCb () {
-      if (!this.min && !this.max) return this.allowedHours
+      const isHourAllowed = !this.allowedHours || this.allowedHours(this.inputHour)
+      if (!this.min && !this.max) {
+        return isHourAllowed ? this.allowedMinutes : () => false
+      }
 
       const [minHour, minMinute] = this.min ? this.min.split(':') : [0, 0]
       const [maxHour, maxMinute] = this.max ? this.max.split(':') : [23, 59]
       const minTime = minHour * 60 + minMinute * 1
       const maxTime = maxHour * 60 + maxMinute * 1
-      const isHourAllowed = !this.allowedHours || this.allowedHours(this.hour)
 
       return val => {
-        const time = 60 * this.hour + val
+        const time = 60 * this.inputHour + val
         return time >= minTime &&
           time <= maxTime &&
           isHourAllowed &&
           (!this.allowedMinutes || this.allowedMinutes(val))
       }
     },
-    hour: {
-      get () {
-        return this.inputHour == null ? this.firstAllowed('hour', new Date().getHours()) : this.inputHour
-      },
-      set (value) {
-        this.inputHour = value
-      }
-    },
-    minute: {
-      get () {
-        return this.inputMinute == null ? this.firstAllowed('minute', new Date().getMinutes()) : this.inputMinute
-      },
-      set (value) {
-        this.inputMinute = value
-      }
-    },
     period: {
       get () {
-        return this.hour < 12 ? 'am' : 'pm'
+        return this.inputHour < 12 ? 'am' : 'pm'
       },
       set (val) {
-        const newHour = this.hour + (val === 'am' ? -12 : 12)
-        this.hour = this.firstAllowed('hour', newHour)
+        const newHour = this.inputHour + (val === 'am' ? -12 : 12)
+        this.inputHour = this.firstAllowed('hour', newHour)
       }
     },
     isAmPm () {
@@ -117,10 +103,14 @@ export default {
       this.inputMinute = inputMinute
     },
     inputHour (val) {
-      this.$emit('input', `${pad(this.hour)}:${pad(this.minute)}`)
+      if (this.inputHour != null && this.inputMinute != null) {
+        this.$emit('input', `${pad(this.inputHour)}:${pad(this.inputMinute)}`)
+      }
     },
     inputMinute (val) {
-      this.$emit('input', `${pad(this.hour)}:${pad(this.minute)}`)
+      if (this.inputHour != null && this.inputMinute != null) {
+        this.$emit('input', `${pad(this.inputHour)}:${pad(this.inputMinute)}`)
+      }
     }
   },
 
@@ -152,9 +142,9 @@ export default {
     },
     onInput (value) {
       if (!this.selectingHour) {
-        this.minute = value
+        this.inputMinute = value
       } else {
-        this.hour = this.isAmPm ? this.convert12to24(value, this.period) : value
+        this.inputHour = this.isAmPm ? this.convert12to24(value, this.period) : value
       }
     },
     onChange () {
@@ -192,7 +182,7 @@ export default {
           scrollable: this.scrollable,
           size: this.width - ((!this.fullWidth && this.landscape) ? 80 : 20),
           step: this.selectingHour ? 1 : 5,
-          value: this.selectingHour ? this.hour : this.minute
+          value: this.selectingHour ? this.inputHour : this.inputMinute
         },
         on: {
           input: this.onInput,
@@ -215,7 +205,8 @@ export default {
       return this.$createElement('v-time-picker-title', {
         props: {
           ampm: this.isAmPm,
-          value: pad(this.hour) + ':' + pad(this.minute),
+          hour: this.inputHour,
+          minute: this.inputMinute,
           selectingHour: this.selectingHour
         },
         on: {
