@@ -332,21 +332,6 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.tableDate).toBe('2004-11')
   })
 
-  it('should calculate the first allowed date', () => {
-    const now = new Date()
-    const year = now.getFullYear()
-    const month = now.getMonth()
-    const date = now.getDate()
-
-    const wrapper2 = mount(VDatePicker, {
-      propsData: {
-        value: null,
-        allowedDates: value => value === `${year}-${(month < 9 ? '0' : '') + (month + 1)}-03`
-      }
-    })
-    expect(wrapper2.vm.inputDate).toBe(`${year}-${(month < 9 ? '0' : '') + (month + 1)}-03`)
-  })
-
   it('should set the table date when value has changed', () => {
     const wrapper = mount(VDatePicker, {
       propsData: {
