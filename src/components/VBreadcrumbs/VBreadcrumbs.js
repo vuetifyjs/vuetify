@@ -41,7 +41,7 @@ export default {
     /**
      * Add dividers between
      * v-breadcrumbs-item
-     * 
+     *
      * @return {array}
      */
     genChildren () {
@@ -55,7 +55,7 @@ export default {
         children.push(elm)
 
         if (!elm.componentOptions ||
-          elm.componentOptions.tag !== 'v-breadcrumbs-item' ||
+          elm.componentOptions.Ctor.extendOptions.name !== 'v-breadcrumbs-item' ||
           i === length - 1
         ) return
 
