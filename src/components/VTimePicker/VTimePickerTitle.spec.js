@@ -7,6 +7,7 @@ test('VTimePickerTitle.js', ({ mount }) => {
       propsData: {
         hour: 14,
         minute: 13,
+        period: 'pm',
         ampm: false
       }
     })
@@ -19,6 +20,7 @@ test('VTimePickerTitle.js', ({ mount }) => {
       propsData: {
         hour: 14,
         minute: 13,
+        period: 'pm',
         ampm: true
       }
     })
@@ -31,6 +33,7 @@ test('VTimePickerTitle.js', ({ mount }) => {
       propsData: {
         hour: 14,
         minute: 13,
+        period: 'pm',
         selectingHour: true
       }
     })
@@ -43,6 +46,7 @@ test('VTimePickerTitle.js', ({ mount }) => {
       propsData: {
         hour: 14,
         minute: 13,
+        period: 'pm',
         ampm: true
       }
     })
@@ -58,6 +62,7 @@ test('VTimePickerTitle.js', ({ mount }) => {
     wrapper.setProps({
       hour: 2,
       minute: 13,
+      period: 'am'
     })
     wrapper.find('.time-picker-title__ampm .picker__title__btn:not(.active)')[0].trigger('click')
     expect(period).toBeCalledWith('pm')
@@ -68,6 +73,7 @@ test('VTimePickerTitle.js', ({ mount }) => {
       propsData: {
         hour: 14,
         minute: 13,
+        period: 'pm'
       }
     })
 

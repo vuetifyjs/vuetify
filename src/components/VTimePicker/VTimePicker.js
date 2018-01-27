@@ -25,11 +25,10 @@ export default {
   mixins: [Picker],
 
   data () {
-    const { inputHour, inputMinute } = this.getInputTime(this.value)
-
     return {
-      inputHour,
-      inputMinute,
+      inputHour: null,
+      inputMinute: null,
+      period: 'am',
       selectingHour: true
     }
   },
@@ -82,26 +81,13 @@ export default {
           (!this.allowedMinutes || this.allowedMinutes(val))
       }
     },
-    period: {
-      get () {
-        return this.inputHour < 12 ? 'am' : 'pm'
-      },
-      set (val) {
-        const newHour = this.inputHour + (val === 'am' ? -12 : 12)
-        this.inputHour = this.firstAllowed('hour', newHour)
-      }
-    },
     isAmPm () {
       return this.format === 'ampm'
     }
   },
 
   watch: {
-    value (value) {
-      const { inputHour, inputMinute } = this.getInputTime(value)
-      this.inputHour = inputHour
-      this.inputMinute = inputMinute
-    },
+    value: 'setInputData',
     inputHour: 'emitValue',
     inputMinute: 'emitValue'
   },
@@ -110,6 +96,21 @@ export default {
     emitValue () {
       if (this.inputHour != null && this.inputMinute != null) {
         this.$emit('input', `${pad(this.inputHour)}:${pad(this.inputMinute)}`)
+      }
+    },
+    setPeriod (period) {
+      this.period = period
+      if (this.inputHour != null) {
+        const newHour = this.inputHour + (period === 'am' ? -12 : 12)
+        this.inputHour = this.firstAllowed('hour', newHour)
+      }
+    },
+    setInputData (value) {
+      const { inputHour, inputMinute } = this.getInputTime(value)
+      this.inputHour = inputHour
+      this.inputMinute = inputMinute
+      if (inputHour != null) {
+        this.period = inputHour < 12 ? 'am' : 'pm'
       }
     },
     getInputTime (value) {
@@ -204,16 +205,21 @@ export default {
           ampm: this.isAmPm,
           hour: this.inputHour,
           minute: this.inputMinute,
+          period: this.period,
           selectingHour: this.selectingHour
         },
         on: {
           'update:selectingHour': value => (this.selectingHour = value),
-          'update:period': value => (this.period = value)
+          'update:period': this.setPeriod
         },
         ref: 'title',
         slot: 'title'
       })
     }
+  },
+
+  mounted () {
+    this.setInputData(this.value)
   },
 
   render (h) {

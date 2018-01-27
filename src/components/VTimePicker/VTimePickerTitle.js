@@ -15,13 +15,11 @@ export default {
     ampm: Boolean,
     hour: Number,
     minute: Number,
+    period: {
+      type: String,
+      validator: period => period === 'am' || period === 'pm'
+    },
     selectingHour: Boolean
-  },
-
-  computed: {
-    period () {
-      return this.hour < 12 ? 'am' : 'pm'
-    }
   },
 
   methods: {
