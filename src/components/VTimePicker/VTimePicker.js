@@ -87,9 +87,7 @@ export default {
   },
 
   watch: {
-    value: 'setInputData',
-    inputHour: 'emitValue',
-    inputMinute: 'emitValue'
+    value: 'setInputData'
   },
 
   methods: {
@@ -103,6 +101,7 @@ export default {
       if (this.inputHour != null) {
         const newHour = this.inputHour + (period === 'am' ? -12 : 12)
         this.inputHour = this.firstAllowed('hour', newHour)
+        this.emitValue()
       }
     },
     setInputData (value) {
@@ -144,6 +143,7 @@ export default {
       } else {
         this.inputHour = this.isAmPm ? this.convert12to24(value, this.period) : value
       }
+      this.emitValue()
     },
     onChange () {
       if (!this.selectingHour) {
