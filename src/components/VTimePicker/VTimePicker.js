@@ -102,19 +102,16 @@ export default {
       this.inputHour = inputHour
       this.inputMinute = inputMinute
     },
-    inputHour (val) {
+    inputHour: 'emitValue',
+    inputMinute: 'emitValue'
+  },
+
+  methods: {
+    emitValue () {
       if (this.inputHour != null && this.inputMinute != null) {
         this.$emit('input', `${pad(this.inputHour)}:${pad(this.inputMinute)}`)
       }
     },
-    inputMinute (val) {
-      if (this.inputHour != null && this.inputMinute != null) {
-        this.$emit('input', `${pad(this.inputHour)}:${pad(this.inputMinute)}`)
-      }
-    }
-  },
-
-  methods: {
     getInputTime (value) {
       if (value instanceof Date) {
         return {
