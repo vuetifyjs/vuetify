@@ -165,10 +165,26 @@ test('VTimePicker.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.vm.getInputTime('12:34am')).toEqual({ inputHour: 0, inputMinute: 34 })
-    expect(wrapper.vm.getInputTime('7:34am').inputHour).toBe(7)
-    expect(wrapper.vm.getInputTime('12:34pm').inputHour).toBe(12)
-    expect(wrapper.vm.getInputTime('7:34pm').inputHour).toBe(19)
+    wrapper.vm.setInputData(new Date('2001-01-01 17:35'))
+    expect(wrapper.vm.inputHour).toBe(17)
+    expect(wrapper.vm.inputMinute).toBe(35)
+
+    wrapper.vm.setInputData(null)
+    expect(wrapper.vm.inputHour).toBe(null)
+    expect(wrapper.vm.inputMinute).toBe(null)
+
+    wrapper.vm.setInputData('12:34am')
+    expect(wrapper.vm.inputHour).toBe(0)
+    expect(wrapper.vm.inputMinute).toBe(34)
+
+    wrapper.vm.setInputData('7:34am')
+    expect(wrapper.vm.inputHour).toBe(7)
+
+    wrapper.vm.setInputData('12:34pm')
+    expect(wrapper.vm.inputHour).toBe(12)
+
+    wrapper.vm.setInputData('7:34pm')
+    expect(wrapper.vm.inputHour).toBe(19)
   })
 
   it('should update hour when changing period', async () => {

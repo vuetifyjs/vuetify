@@ -105,31 +105,23 @@ export default {
       }
     },
     setInputData (value) {
-      const { inputHour, inputMinute } = this.getInputTime(value)
-      this.inputHour = inputHour
-      this.inputMinute = inputMinute
-      if (inputHour != null) {
-        this.period = inputHour < 12 ? 'am' : 'pm'
-      }
-    },
-    getInputTime (value) {
-      if (value instanceof Date) {
-        return {
-          inputHour: value.getHours(),
-          inputMinute: value.getMinutes()
-        }
+      if (value == null) {
+        this.inputHour = null
+        this.inputMinute = null
+        return
       }
 
-      if (value) {
+      if (value instanceof Date) {
+        this.inputHour = value.getHours()
+        this.inputMinute = value.getMinutes()
+      } else {
         const [, hour, minute, , period] = value.trim().toLowerCase().match(/^(\d+):(\d+)(:\d+)?([ap]m)?$/, '') || []
 
-        return {
-          inputMinute: parseInt(minute, 10),
-          inputHour: period ? this.convert12to24(parseInt(hour, 10), period) : parseInt(hour, 10)
-        }
+        this.inputHour = period ? this.convert12to24(parseInt(hour, 10), period) : parseInt(hour, 10)
+        this.inputMinute = parseInt(minute, 10)
       }
 
-      return {}
+      this.period = this.inputHour < 12 ? 'am' : 'pm'
     },
     convert24to12 (hour) {
       return hour ? ((hour - 1) % 12 + 1) : 12
@@ -138,10 +130,10 @@ export default {
       return hour % 12 + (period === 'pm' ? 12 : 0)
     },
     onInput (value) {
-      if (!this.selectingHour) {
-        this.inputMinute = value
-      } else {
+      if (this.selectingHour) {
         this.inputHour = this.isAmPm ? this.convert12to24(value, this.period) : value
+      } else {
+        this.inputMinute = value
       }
       this.emitValue()
     },
