@@ -63,7 +63,11 @@
 
         const toc = `${this.namespace}.toc`
 
-        return this.$te(toc) ? this.$t(toc) : []
+        return this.$te(toc)
+          ? this.$t(toc)
+          : this.$te(toc, 'en')
+            ? this.$t(toc, 'en')
+            : []
       }
     }
   }
