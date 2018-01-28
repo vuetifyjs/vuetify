@@ -8,37 +8,19 @@
   pointer-events: none
   visibility: visible
   background-color: $snackbar-background-color
-  transition: all .4s $transition.swing
 
   &--absolute
     position: absolute
 
   &--top, &--bottom
     transform: translate(-50%, 0)
-
-    &.v-enter
-      .snack__content
-        opacity: 0
-
-    &.v-enter-to, &.v-leave
-      transform: translate(-50%, 0)
-
-      .snack__content
-        opacity: 1
+    left: 50%
 
   &--top
     top: 0
-    left: 50%
-
-    &.v-enter, &.v-leave-to
-      transform: translate(-50%, -100%)
 
   &--bottom
     bottom: 0
-    left: 50%
-
-    &.v-enter, &.v-leave-to
-      transform: translate(-50%, 100%)
 
   &__content
     background-color: inherit
@@ -52,8 +34,6 @@
     font-size: 14px
     justify-content: space-between
     position: relative !important
-    transition: opacity .4s linear
-    opacity: 1
     elevation(6)
 
     .snack__action
@@ -62,10 +42,10 @@
     .btn
       color: $snackbar-color
       margin: 0 0 0 24px
-      
+
       &__content
         padding: 0 !important
-        
+
         &::before
           display: none
 
@@ -87,45 +67,18 @@
     width: auto
 
     &--left, &--right
-      transform: translate(0, 0)
+      &^[0]--top
+        transform: translate(0, $snackbar-corner-offset)
+      &^[0]--bottom
+        transform: translate(0, 0 - $snackbar-corner-offset)
 
-    &--top
-      &.snack--left, &.snack--right
-        &.v-enter, &.v-leave-to
-          top: 0
-          transform: translate(0, -100%)
-        &.v-enter-to, &.v-leave
-          top: $snackbar-corner-offset
-          transform: translate(0, 0)
+    &--left
+      left: $snackbar-corner-offset
+      right: initial
 
-      &.snack--left
-        top: $snackbar-corner-offset
-        left: $snackbar-corner-offset
-        right: initial
-        
-      &.snack--right
-        top: $snackbar-corner-offset
-        right: $snackbar-corner-offset
-        left: initial
-
-    &--bottom
-      &.snack--left, &.snack--right
-        &.v-enter, &.v-leave-to
-          bottom: 0
-          transform: translate(0, 100%)
-        &.v-enter-to, &.v-leave
-          bottom: $snackbar-corner-offset
-          transform: translate(0, 0)
-
-      &.snack--left
-        bottom: $snackbar-corner-offset
-        left: $snackbar-corner-offset
-        right: initial
-        
-      &.snack--right
-        bottom: $snackbar-corner-offset
-        right: $snackbar-corner-offset
-        left: initial
+    &--right
+      right: $snackbar-corner-offset
+      left: initial
 
     &__content
       border-radius: 2px
@@ -134,3 +87,32 @@
 
       .btn
         margin: 0 0 0 48px
+
+.snack-transition
+  &-enter-active,
+  &-leave-active
+    transition: transform .4s $transition.swing
+    .snack__content
+      transition: opacity .4s linear
+
+  &-enter
+    .snack__content
+      opacity: 0
+
+  &-enter-to,
+  &-leave
+    .snack__content
+      opacity: 1
+
+  &-enter,
+  &-leave-to
+    &.snack--top
+      transform: translate(-50%, -100%)
+    &.snack--bottom
+      transform: translate(-50%, 100%)
+    @media $display-breakpoints.sm-and-up
+      &.snack--left, &.snack--right
+        &.snack--top
+          transform: translate(0, -100%)
+        &.snack--bottom
+          transform: translate(0, 100%)
