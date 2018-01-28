@@ -16,9 +16,6 @@ export default {
   },
 
   props: {
-    action: String,
-    actionColor: String,
-    message: String,
     multiLine: Boolean,
     // TODO: change this to closeDelay to match other API in delayable.js
     timeout: {
@@ -67,39 +64,19 @@ export default {
 
   render (h) {
     const children = []
-    let content
-
-    if (this.message) {
-      content = [h('span', this.message)]
-      if (this.action) {
-        content.push(h('v-btn', {
-          staticClass: 'snack__action',
-          props: {
-            color: this.actionColor,
-            flat: true,
-            ripple: false
-          },
-          on: {
-            click: () => {
-              this.$emit('action')
-            }
-          }
-        }, this.action))
-      }
-    } else {
-      // Developer should remove ripple from button if using slot
-      // https://material.io/guidelines/components/snackbars-toasts.html
-      content = this.$slots.default
-    }
 
     if (this.isActive) {
-      children.push(h('div', {
-        staticClass: 'snack',
-        'class': this.classes,
-        on: this.$listeners
-      }, [h('div', {
-        staticClass: 'snack__content'
-      }, content)]))
+      children.push(
+        h('div', {
+          staticClass: 'snack',
+          class: this.classes,
+          on: this.$listeners
+        }, [
+          h('div', {
+            staticClass: 'snack__content'
+          }, this.$slots.default)
+        ])
+      )
     }
 
     return h('transition', children)
