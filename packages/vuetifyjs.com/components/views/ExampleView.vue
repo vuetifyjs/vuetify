@@ -179,9 +179,12 @@
         return `${section}.${component}`
       },
       supplemental () {
-        return this.$te(`${this.namespace}.supplemental`)
-          ? this.$t(`${this.namespace}.supplemental`)
-          : []
+        const namespace = `${this.namespace}.supplemental`
+        return this.$te(namespace)
+          ? this.$t(namespace)
+          : this.$te(namespace, 'en')
+            ? this.$t(namespace, 'en')
+            : []
       },
       toc () {
         return this.$t(`Generic.Pages.toc`)
