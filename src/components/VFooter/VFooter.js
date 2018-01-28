@@ -27,13 +27,6 @@ export default {
   },
 
   computed: {
-    computedHeight () {
-      const height = parseInt(this.height)
-
-      if (isNaN(height)) return 0
-
-      return height
-    },
     computedMarginBottom () {
       if (!this.app) return
 
@@ -51,7 +44,7 @@ export default {
     },
     styles () {
       const styles = {
-        height: `${this.computedHeight}px`
+        height: isNaN(this.height) ? this.height : `${this.height}px`
       }
 
       if (this.computedPaddingLeft) {
@@ -77,9 +70,11 @@ export default {
      * @return {number}
      */
     updateApplication () {
-      return this.height === 'auto'
+      const height = parseInt(this.height)
+
+      return isNaN(height)
         ? this.$el.clientHeight
-        : this.computedHeight
+        : height
     }
   },
 

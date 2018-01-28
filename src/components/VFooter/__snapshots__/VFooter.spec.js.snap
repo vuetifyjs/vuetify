@@ -3,7 +3,7 @@
 exports[`VFooter.js should accept an auto height 1`] = `
 
 <footer class="footer"
-        style="height: 0px;"
+        style="height: auto;"
 >
 </footer>
 
