@@ -1,4 +1,4 @@
-require('../stylus/components/_overlay.styl')
+import '../stylus/components/_overlay.styl'
 
 export default {
   name: 'overlayable',
@@ -48,6 +48,7 @@ export default {
 
       parent && parent.insertBefore(this.overlay, parent.firstChild)
 
+      // eslint-disable-next-line no-unused-expressions
       this.overlay.clientHeight // Force repaint
       requestAnimationFrame(() => {
         this.overlay.className += ' overlay--active'

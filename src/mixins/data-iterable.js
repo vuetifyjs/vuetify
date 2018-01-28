@@ -300,7 +300,7 @@ export default {
 
       Object.defineProperty(props, 'selected', {
         get: () => this.selected[item[this.itemKey]],
-        set: (value) => {
+        set: value => {
           if (itemKey == null) {
             consoleWarn(`"${keyProp}" attribute must be defined for item`, this)
           }
@@ -314,7 +314,7 @@ export default {
 
       Object.defineProperty(props, 'expanded', {
         get: () => this.expanded[item[this.itemKey]],
-        set: (value) => {
+        set: value => {
           if (itemKey == null) {
             consoleWarn(`"${keyProp}" attribute must be defined for item`, this)
           }
@@ -405,7 +405,7 @@ export default {
             minWidth: '75px'
           },
           on: {
-            input: (val) => {
+            input: val => {
               this.updatePagination({
                 page: 1,
                 rowsPerPage: val

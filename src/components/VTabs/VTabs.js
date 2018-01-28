@@ -1,5 +1,5 @@
 // Styles
-require('../../stylus/components/_tabs.styl')
+import '../../stylus/components/_tabs.styl'
 
 // Component imports
 import VIcon from '../VIcon'
@@ -95,7 +95,7 @@ export default {
     },
     callSlider () {
       this.setOverflow()
-      if (!this.activeTab) return false
+      if (this.hideSlider || !this.activeTab) return false
 
       // Give screen time to paint
       const action = this.activeTab.action
@@ -236,7 +236,7 @@ export default {
         value: this.onResize
       }]
     }, [
-      this.genBar([this.genSlider(slider), tab]),
+      this.genBar([this.hideSlider ? null : this.genSlider(slider), tab]),
       this.genItems(items, item)
     ])
   }

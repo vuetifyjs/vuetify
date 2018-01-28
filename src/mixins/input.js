@@ -85,11 +85,10 @@ export default {
     genMessages () {
       let messages = null
 
-      if ((this.hint &&
-            this.isFocused ||
-            this.hint &&
-            this.persistentHint) &&
-          this.validations.length === 0
+      if (
+        this.hint &&
+        (this.isFocused || this.persistentHint) &&
+        !this.validations.length
       ) {
         messages = [this.genHint()]
       } else if (this.validations.length) {

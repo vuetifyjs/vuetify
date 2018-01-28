@@ -1,4 +1,4 @@
-import { test } from '@/util/testing'
+import { test } from '@util/testing'
 import VTab from './VTab'
 import Vue from 'vue'
 

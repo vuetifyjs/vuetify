@@ -1,4 +1,4 @@
-require('../../stylus/components/_chips.styl')
+import '../../stylus/components/_chips.styl'
 
 import VIcon from '../VIcon'
 import Colorable from '../../mixins/colorable'

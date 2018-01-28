@@ -1,10 +1,11 @@
-require('../../stylus/components/_menus.styl')
+import '../../stylus/components/_menus.styl'
 
 // Mixins
 import Delayable from '../../mixins/delayable'
 import Dependent from '../../mixins/dependent'
 import Detachable from '../../mixins/detachable'
 import Menuable from '../../mixins/menuable.js'
+import Returnable from '../../mixins/returnable'
 import Toggleable from '../../mixins/toggleable'
 
 // Component level mixins
@@ -29,6 +30,7 @@ export default {
     Keyable,
     Menuable,
     Position,
+    Returnable,
     Toggleable
   ],
 
@@ -159,11 +161,15 @@ export default {
       // Once transitioning, calculate scroll position
       setTimeout(this.calculateScroll, 50)
     },
+    closeConditional () {
+      return this.isActive && this.closeOnClick
+    },
     onResize () {
       if (!this.isActive) return
 
       // Account for screen resize
       // and orientation change
+      // eslint-disable-next-line no-unused-expressions
       this.$refs.content.offsetWidth
       this.updateDimensions()
 

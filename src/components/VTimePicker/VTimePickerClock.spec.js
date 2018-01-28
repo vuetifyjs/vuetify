@@ -129,19 +129,19 @@ test('VTimePickerClock.js', ({ mount }) => {
         min: 0,
         max: 7,
         value: 0,
-        size: 100,
+        size: 300,
         double: true
       }
     })
 
     wrapper.vm.$refs.clock.getBoundingClientRect = () => {
       return {
-        width: 100,
-        height: 100,
+        width: 300,
+        height: 300,
         top: 0,
         left: 0,
-        right: 100,
-        bottom: 0,
+        right: 300,
+        bottom: 300,
         x: 0,
         y: 0
       }
@@ -151,17 +151,17 @@ test('VTimePickerClock.js', ({ mount }) => {
     const finger = touch(wrapper).start(0, 0)
     wrapper.vm.$on('input', input)
 
-    finger.move(100, 50)
+    finger.move(300, 150)
     expect(input).toBeCalledWith(1)
-    finger.move(50, 100)
+    finger.move(150, 300)
     expect(input).toBeCalledWith(2)
-    finger.move(50, 70)
+    finger.move(150, 200)
     expect(input).toBeCalledWith(6)
 
     // edge case
-    finger.move(40, 0)
+    finger.move(120, 0)
     expect(input).toBeCalledWith(0)
-    finger.move(45, 30)
+    finger.move(135, 90)
     expect(input).toBeCalledWith(7)
   })
 })
