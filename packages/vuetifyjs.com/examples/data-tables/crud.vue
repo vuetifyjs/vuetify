@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-dialog v-model="dialog" persistent max-width="500px">
+    <v-dialog v-model="dialog" max-width="500px">
       <v-btn color="primary" dark slot="activator" class="mb-2">New Item</v-btn>
       <v-card>
         <v-card-title>
@@ -10,26 +10,26 @@
           <v-container grid-list-md>
             <v-layout wrap>
               <v-flex xs12 sm6 md4>
-                <v-text-field label="Dessert name" v-model="item.name"></v-text-field>
+                <v-text-field label="Dessert name" v-model="editedItem.name"></v-text-field>
               </v-flex>
               <v-flex xs12 sm6 md4>
-                <v-text-field label="Calories" v-model="item.calories"></v-text-field>
+                <v-text-field label="Calories" v-model="editedItem.calories"></v-text-field>
               </v-flex>
               <v-flex xs12 sm6 md4>
-                <v-text-field label="Fat (g)" v-model="item.fat"></v-text-field>
+                <v-text-field label="Fat (g)" v-model="editedItem.fat"></v-text-field>
               </v-flex>
               <v-flex xs12 sm6 md4>
-                <v-text-field label="Carbs (g)" v-model="item.carbs"></v-text-field>
+                <v-text-field label="Carbs (g)" v-model="editedItem.carbs"></v-text-field>
               </v-flex>
               <v-flex xs12 sm6 md4>
-                <v-text-field label="Protein (g)" v-model="item.protein"></v-text-field>
+                <v-text-field label="Protein (g)" v-model="editedItem.protein"></v-text-field>
               </v-flex>
             </v-layout>
           </v-container>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" flat @click.native="close">Close</v-btn>
+          <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
           <v-btn color="blue darken-1" flat @click.native="save">Save</v-btn>
         </v-card-actions>
       </v-card>
@@ -50,7 +50,7 @@
           <v-btn icon class="mx-0" @click="editItem(props.item)">
             <v-icon color="teal">edit</v-icon>
           </v-btn>
-          <v-btn icon class="mx-0" @click="deleteItem(props.index)">
+          <v-btn icon class="mx-0" @click="deleteItem(props.item)">
             <v-icon color="pink">delete</v-icon>
           </v-btn>
         </td>
@@ -80,8 +80,15 @@
         { text: 'Actions', value: 'name', sortable: false }
       ],
       items: [],
-      item: {
-        edit: false,
+      editedIndex: -1,
+      editedItem: {
+        name: '',
+        calories: 0,
+        fat: 0,
+        carbs: 0,
+        protein: 0
+      },
+      defaultItem: {
         name: '',
         calories: 0,
         fat: 0,
@@ -92,7 +99,13 @@
 
     computed: {
       formTitle () {
-        return this.item.edit ? 'Edit Item' : 'New Item'
+        return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+      }
+    },
+
+    watch: {
+      dialog (val) {
+        val || this.close()
       }
     },
 
@@ -104,7 +117,6 @@
       initialize () {
         this.items = [
           {
-            edit: false,
             name: 'Frozen Yogurt',
             calories: 159,
             fat: 6.0,
@@ -112,7 +124,6 @@
             protein: 4.0
           },
           {
-            edit: false,
             name: 'Ice cream sandwich',
             calories: 237,
             fat: 9.0,
@@ -120,7 +131,6 @@
             protein: 4.3
           },
           {
-            edit: false,
             name: 'Eclair',
             calories: 262,
             fat: 16.0,
@@ -128,7 +138,6 @@
             protein: 6.0
           },
           {
-            edit: false,
             name: 'Cupcake',
             calories: 305,
             fat: 3.7,
@@ -136,7 +145,6 @@
             protein: 4.3
           },
           {
-            edit: false,
             name: 'Gingerbread',
             calories: 356,
             fat: 16.0,
@@ -144,7 +152,6 @@
             protein: 3.9
           },
           {
-            edit: false,
             name: 'Jelly bean',
             calories: 375,
             fat: 0.0,
@@ -152,7 +159,6 @@
             protein: 0.0
           },
           {
-            edit: false,
             name: 'Lollipop',
             calories: 392,
             fat: 0.2,
@@ -160,7 +166,6 @@
             protein: 0
           },
           {
-            edit: false,
             name: 'Honeycomb',
             calories: 408,
             fat: 3.2,
@@ -168,7 +173,6 @@
             protein: 6.5
           },
           {
-            edit: false,
             name: 'Donut',
             calories: 452,
             fat: 25.0,
@@ -176,7 +180,6 @@
             protein: 4.9
           },
           {
-            edit: false,
             name: 'KitKat',
             calories: 518,
             fat: 26.0,
@@ -187,29 +190,31 @@
       },
 
       editItem (item) {
-        this.item = item
-        this.item.edit = true
+        this.editedIndex = this.items.indexOf(item)
+        this.editedItem = Object.assign({}, item)
         this.dialog = true
       },
 
-      deleteItem (index) {
-        // alert user for delete
-        this.items.splice(index, 1)
+      deleteItem (item) {
+        const index = this.items.indexOf(item)
+        confirm('Are you sure you want to delete this item?') && this.items.splice(index, 1)
       },
 
       close () {
-        this.item.edit = false
         this.dialog = false
+        setTimeout(() => {
+          this.editedItem = Object.assign({}, this.defaultItem)
+          this.editedIndex = -1
+        }, 300)
       },
 
       save () {
-        if (this.item.edit) {
-          // edit item
-          this.item.edit = false
+        if (this.editedIndex > -1) {
+          Object.assign(this.items[this.editedIndex], this.editedItem)
         } else {
-          this.items.push(this.item)
+          this.items.push(this.editedItem)
         }
-        this.dialog = false
+        this.close()
       }
     }
   }
