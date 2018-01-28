@@ -26,7 +26,7 @@ const touchmove = (event, wrapper) => {
   wrapper.move && wrapper.move(Object.assign(event, wrapper))
 }
 
-const handleGesture = (wrapper) => {
+const handleGesture = wrapper => {
   const { touchstartX, touchendX, touchstartY, touchendY } = wrapper
   const dirRatio = 0.5
   const minDistance = 16

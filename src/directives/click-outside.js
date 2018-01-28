@@ -35,7 +35,9 @@ function directive (e, el, binding) {
   // Toggleable can return true if it wants to deactivate.
   // Note that, because we're in the capture phase, this callback will occure before
   // the bubbling click event on any outside elements.
-  !clickedInEls(e, elements) && binding.value()
+  !clickedInEls(e, elements) && setTimeout(() => {
+    isActive(e) && binding.value()
+  }, 0)
 }
 
 function clickedInEls (e, elements) {

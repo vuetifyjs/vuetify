@@ -3,6 +3,7 @@ import Positionable from './positionable'
 import Stackable from './stackable'
 import Themeable from './themeable'
 
+/* eslint-disable object-property-newline */
 const dimensions = {
   activator: {
     top: 0, left: 0,
@@ -18,6 +19,7 @@ const dimensions = {
   },
   hasWindow: false
 }
+/* eslint-enable object-property-newline */
 
 /**
  * Menuable
@@ -138,7 +140,7 @@ export default {
     isActive (val) {
       if (this.disabled) return
 
-      val && this.callActivate() || this.callDeactivate()
+      val ? this.callActivate() : this.callDeactivate()
     }
   },
 
@@ -266,7 +268,7 @@ export default {
       return window.pageYOffset ||
         document.documentElement.scrollTop
     },
-    getRoundedBoundedClientRect(el) {
+    getRoundedBoundedClientRect (el) {
       const rect = el.getBoundingClientRect()
       return {
         top: Math.round(rect.top),

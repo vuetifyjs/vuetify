@@ -1,5 +1,5 @@
 // Styles
-require('../../stylus/components/_footer.styl')
+import '../../stylus/components/_footer.styl'
 
 // Mixins
 import Applicationable from '../../mixins/applicationable'

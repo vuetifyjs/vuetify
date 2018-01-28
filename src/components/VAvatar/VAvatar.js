@@ -1,4 +1,4 @@
-require('../../stylus/components/_avatars.styl')
+import '../../stylus/components/_avatars.styl'
 
 // Mixins
 import Colorable from '../../mixins/colorable'

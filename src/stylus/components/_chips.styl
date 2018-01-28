@@ -52,6 +52,7 @@ theme(chip, "chip")
   &--selected
     &:not(.chip--disabled)
       border-color: rgba(#000, .13)
+      overflow: hidden
       elevation(2)
 
       &:after
@@ -61,6 +62,7 @@ theme(chip, "chip")
         height: 100%
         position: absolute
         top: 0
+        left: 0
         transition: inherit
         width: 100%
         pointer-events: none

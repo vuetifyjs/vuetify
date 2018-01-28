@@ -1,4 +1,4 @@
-require('../../stylus/components/_button-toggle.styl')
+import '../../stylus/components/_button-toggle.styl'
 
 import ButtonGroup from '../../mixins/button-group'
 import Themeable from '../../mixins/themeable'
