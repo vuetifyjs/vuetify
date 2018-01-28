@@ -11,8 +11,6 @@
       <td class="text-xs-right">{{ props.item.fat }}</td>
       <td class="text-xs-right">{{ props.item.carbs }}</td>
       <td class="text-xs-right">{{ props.item.protein }}</td>
-      <td class="text-xs-right">{{ props.item.sodium }}</td>
-      <td class="text-xs-right">{{ props.item.calcium }}</td>
       <td class="text-xs-right">{{ props.item.iron }}</td>
     </template>
     <template slot="no-data">
@@ -38,8 +36,6 @@
           { text: 'Fat (g)', value: 'fat' },
           { text: 'Carbs (g)', value: 'carbs' },
           { text: 'Protein (g)', value: 'protein' },
-          { text: 'Sodium (mg)', value: 'sodium' },
-          { text: 'Calcium (%)', value: 'calcium' },
           { text: 'Iron (%)', value: 'iron' }
         ],
         items: [

@@ -22,8 +22,6 @@
         <td class="text-xs-right">{{ props.item.fat }}</td>
         <td class="text-xs-right">{{ props.item.carbs }}</td>
         <td class="text-xs-right">{{ props.item.protein }}</td>
-        <td class="text-xs-right">{{ props.item.sodium }}</td>
-        <td class="text-xs-right">{{ props.item.calcium }}</td>
         <td class="text-xs-right">{{ props.item.iron }}</td>
       </template>
       <v-alert slot="no-results" :value="true" color="error" icon="warning">
@@ -49,8 +47,6 @@
           { text: 'Fat (g)', value: 'fat' },
           { text: 'Carbs (g)', value: 'carbs' },
           { text: 'Protein (g)', value: 'protein' },
-          { text: 'Sodium (mg)', value: 'sodium' },
-          { text: 'Calcium (%)', value: 'calcium' },
           { text: 'Iron (%)', value: 'iron' }
         ],
         items: [
@@ -61,8 +57,6 @@
             fat: 6.0,
             carbs: 24,
             protein: 4.0,
-            sodium: 87,
-            calcium: '14%',
             iron: '1%'
           },
           {
@@ -72,8 +66,6 @@
             fat: 9.0,
             carbs: 37,
             protein: 4.3,
-            sodium: 129,
-            calcium: '8%',
             iron: '1%'
           },
           {
@@ -83,8 +75,6 @@
             fat: 16.0,
             carbs: 23,
             protein: 6.0,
-            sodium: 337,
-            calcium: '6%',
             iron: '7%'
           },
           {
@@ -94,8 +84,6 @@
             fat: 3.7,
             carbs: 67,
             protein: 4.3,
-            sodium: 413,
-            calcium: '3%',
             iron: '8%'
           },
           {
@@ -105,8 +93,6 @@
             fat: 16.0,
             carbs: 49,
             protein: 3.9,
-            sodium: 327,
-            calcium: '7%',
             iron: '16%'
           },
           {
@@ -116,8 +102,6 @@
             fat: 0.0,
             carbs: 94,
             protein: 0.0,
-            sodium: 50,
-            calcium: '0%',
             iron: '0%'
           },
           {
@@ -127,8 +111,6 @@
             fat: 0.2,
             carbs: 98,
             protein: 0,
-            sodium: 38,
-            calcium: '0%',
             iron: '2%'
           },
           {
@@ -138,8 +120,6 @@
             fat: 3.2,
             carbs: 87,
             protein: 6.5,
-            sodium: 562,
-            calcium: '0%',
             iron: '45%'
           },
           {
@@ -149,8 +129,6 @@
             fat: 25.0,
             carbs: 51,
             protein: 4.9,
-            sodium: 326,
-            calcium: '2%',
             iron: '22%'
           },
           {
@@ -160,8 +138,6 @@
             fat: 26.0,
             carbs: 65,
             protein: 7,
-            sodium: 54,
-            calcium: '12%',
             iron: '6%'
           }
         ]
