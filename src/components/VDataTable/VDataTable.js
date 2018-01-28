@@ -77,8 +77,8 @@ export default {
   },
 
   methods: {
-    needsTR (row) {
-      return row.length && row.find(c => c.tag === 'td' || c.tag === 'th')
+    hasTag (elements, tag) {
+      return Array.isArray(elements) && elements.find(e => e.tag === tag)
     },
     genTR (children, data = {}) {
       return this.$createElement('tr', data, children)

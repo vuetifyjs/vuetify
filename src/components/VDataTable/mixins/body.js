@@ -41,7 +41,7 @@ export default {
         const props = this.createProps(item, index)
         const row = this.$scopedSlots.items(props)
 
-        rows.push(this.needsTR(row)
+        rows.push(this.hasTag(row, 'td')
           ? this.genTR(row, {
             key: index,
             attrs: { active: this.isSelected(item) }
@@ -57,13 +57,17 @@ export default {
       return rows
     },
     genEmptyItems (content) {
-      if (typeof content === 'string') {
-        return this.genTR([this.$createElement('td', {
-          'class': 'text-xs-center',
-          attrs: { colspan: '100%' }
-        }, content)])
+      if (this.hasTag(content, 'tr')) {
+        return content
+      } else if (this.hasTag(content, 'td')) {
+        return this.genTR(content)
       } else {
-        return this.needsTR(content) ? this.genTR(content) : content
+        return this.genTR([this.$createElement('td', {
+          class: {
+            'text-xs-center': typeof content === 'string'
+          },
+          attrs: { colspan: `${this.headers.length}` }
+        }, content)])
       }
     }
   }
