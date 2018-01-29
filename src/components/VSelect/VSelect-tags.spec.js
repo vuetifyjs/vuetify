@@ -293,6 +293,10 @@ test('VSelect - tags', ({ mount, compileToFunctions }) => {
     expect(change).toHaveBeenCalledWith(['foo'])
     expect(wrapper.vm.selectedIndex).toBe(0)
 
+    // Must be reset for input to update
+    wrapper.vm.selectedIndex = -1
+    await wrapper.vm.$nextTick()
+
     input.element.value = 'baz'
     await wrapper.vm.$nextTick()
     input.trigger('input')
@@ -343,6 +347,57 @@ test('VSelect - tags', ({ mount, compileToFunctions }) => {
     await wrapper.vm.$nextTick()
 
     expect(change).toBeCalledWith(['foo', 'baz'])
+    expect(wrapper.vm.selectedIndex).toBe(-1)
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should not change search when selecting an index', () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        chips: true,
+        multiple: true,
+        tags: true,
+        value: ['foo', 'bar']
+      }
+    })
+
+    const input = wrapper.find('input')[0]
+
+    input.trigger('focus')
+    expect(wrapper.vm.selectedIndex).toBe(-1)
+
+    input.trigger('keydown.left')
+    expect(wrapper.vm.selectedIndex).toBe(1)
+
+    input.element.value = 'fizz'
+    input.trigger('input')
+    expect(wrapper.vm.searchValue).toBe(null)
+
+    input.trigger('keydown.right')
+    expect(wrapper.vm.selectedIndex).toBe(-1)
+
+    input.element.value = 'fizz'
+    input.trigger('input')
+    expect(wrapper.vm.searchValue).toBe('fizz')
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should reset selected index when clicked', () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: ['foo']
+      }
+    })
+
+    const input = wrapper.find('input')[0]
+
+    wrapper.vm.selectedIndex = 0
+    input.trigger('focus')
+    expect(wrapper.vm.selectedIndex).toBe(0)
+    wrapper.trigger('click')
     expect(wrapper.vm.selectedIndex).toBe(-1)
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
