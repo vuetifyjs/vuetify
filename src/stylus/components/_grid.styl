@@ -15,11 +15,11 @@
 
   &.fluid
     max-width: 100%
-    
+
   &.fill-height
     align-items: center
     display: flex
-    
+
     .layout
       height: 100%
       flex: 1 1 auto
@@ -32,14 +32,36 @@
         .layout
           .flex
             padding: ($gutter / 2)
-            
+
         .layout:only-child
           margin: -($gutter / 2)
 
         .layout:not(:only-child)
           margin: auto -($gutter / 2)
-        
+
         *:not(:only-child)
+          .layout:first-child
+            margin-top: -($gutter / 2)
+
+          .layout:last-child
+            margin-bottom: -($gutter / 2)
+
+  &.outer-grid
+    for $size, $gutter in $grid-gutters
+      &-{$size}
+        padding: $gutter
+
+        > .layout
+          > .flex
+            padding: ($gutter / 2)
+
+        > .layout:only-child
+          margin: -($gutter / 2)
+
+        > .layout:not(:only-child)
+          margin: auto -($gutter / 2)
+
+        > *:not(:only-child)
           .layout:first-child
             margin-top: -($gutter / 2)
 
@@ -96,7 +118,7 @@ for size, width in $grid-breakpoints
 
   &-baseline
     align-items: baseline
-    
+
 .align-content
   &-start
     align-content: flex-start
@@ -152,26 +174,26 @@ for size, width in $grid-breakpoints
 
 .no-wrap
   white-space: nowrap
-  
+
 .ellipsis
   white-space: nowrap
   overflow: hidden
   text-overflow: ellipsis
-  
+
 // Display helpers
 .d-flex
   display: flex !important
-    
+
 .d-inline-flex
   display: inline-flex !important
-  
+
 .d-flex,
 .d-inline-flex
   > *
     flex: 1 1 auto !important
-    
+
 .d-block
   display: block !important
-  
+
 .d-inline-block
   display: inline-block !important
