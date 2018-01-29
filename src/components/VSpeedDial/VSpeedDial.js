@@ -1,4 +1,4 @@
-require('../../stylus/components/_speed-dial.styl')
+import '../../stylus/components/_speed-dial.styl'
 
 import Toggleable from '../../mixins/toggleable'
 import Positionable from '../../mixins/positionable'
@@ -17,7 +17,7 @@ export default {
     direction: {
       type: String,
       default: 'top',
-      validator: (val) => {
+      validator: val => {
         return ['top', 'right', 'bottom', 'left'].includes(val)
       }
     },

@@ -14,7 +14,7 @@ export default {
           all: this.everyItem
         })
 
-        children = [this.needsTR(row) ? this.genTR(row) : row, this.genTProgress()]
+        children = [this.hasTag(row, 'th') ? this.genTR(row) : row, this.genTProgress()]
       } else {
         const row = this.headers.map(o => this.genHeader(o))
         const checkbox = this.$createElement('v-checkbox', {
@@ -58,13 +58,13 @@ export default {
         }
       }
 
-      if ('sortable' in header && header.sortable || !('sortable' in header)) {
+      if (header.sortable == null || header.sortable) {
         this.genHeaderSortingData(header, children, data, classes)
       } else {
         data.attrs['aria-label'] += ': Not sorted.' // TODO: Localization
       }
 
-      classes.push(`text-xs-${header.align || 'right'}`)
+      classes.push(`text-xs-${header.align || 'left'}`)
       if (Array.isArray(header.class)) {
         classes.push(...header.class)
       } else if (header.class) {
@@ -100,7 +100,7 @@ export default {
           small: true
         }
       }, 'arrow_upward')
-      if (header.align && header.align === 'left') {
+      if (!header.align || header.align === 'left') {
         children.push(icon)
       } else {
         children.unshift(icon)

@@ -131,7 +131,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     data.propsData.search = "no such item"
     const wrapper = mount(VDataTable, data)
 
-    expect(wrapper.find('tbody td')[0].html()).toMatchSnapshot()
+    expect(wrapper.find('tbody tr td')[0].html()).toMatchSnapshot()
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
@@ -237,6 +237,62 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.instance().filteredItems).toHaveLength(data.propsData.items.length)
 
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should allow custom tr when using no-data slot', async () => {
+    const wrapper = mount(Vue.component('test', {
+      components: {
+        VDataTable
+      },
+      render (h) {
+        return h('v-data-table', {
+          props: {
+            items: []
+          },
+        }, [h('tr', { slot: 'no-data', class: 'custom-class' })])
+      }
+    }))
+
+    expect(wrapper.find('table tbody tr.custom-class').length).toBe(1)
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should allow custom td when using no-results slot', async () => {
+    const wrapper = mount(Vue.component('test', {
+      components: {
+        VDataTable
+      },
+      render (h) {
+        return h('v-data-table', {
+          props: {
+            items: [{}],
+            search: 'foo'
+          },
+        }, [h('td', { slot: 'no-results', class: 'custom-class' })])
+      }
+    }))
+
+    expect(wrapper.find('table tbody tr td.custom-class').length).toBe(1)
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should render tr and td when using no-results slot', async () => {
+    const wrapper = mount(Vue.component('test', {
+      components: {
+        VDataTable
+      },
+      render (h) {
+        return h('v-data-table', {
+          props: {
+            items: [{}],
+            search: 'foo'
+          },
+        }, [h('div', { slot: 'no-results', class: 'custom-class' })])
+      }
+    }))
+
+    expect(wrapper.find('table tbody tr td div.custom-class').length).toBe(1)
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 

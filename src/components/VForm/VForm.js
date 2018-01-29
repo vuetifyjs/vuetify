@@ -58,8 +58,8 @@ export default {
       }
     },
     watchChild (child) {
-      const watcher = (child) => {
-        child.$watch('valid', (val) => {
+      const watcher = child => {
+        child.$watch('valid', val => {
           this.$set(this.errorBag, child._uid, !val)
         }, { immediate: true })
       }
@@ -67,7 +67,7 @@ export default {
       if (!this.lazyValidation) return watcher(child)
 
       // Only start watching inputs if we need to
-      child.$watch('shouldValidate', (val) => {
+      child.$watch('shouldValidate', val => {
         if (!val) return
 
         // Only watch if we're not already doing it

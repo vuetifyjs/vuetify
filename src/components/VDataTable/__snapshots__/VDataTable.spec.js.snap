@@ -12,21 +12,21 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
               aria-label="First Column: Sorted ascending. Activate to sort descending."
               aria-sort="ascending"
               tabindex="0"
-              class="column sortable active asc text-xs-right a-string"
+              class="column sortable active asc text-xs-left a-string"
           >
+            First Column
             <i aria-hidden="true"
                class="icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
             </i>
-            First Column
           </th>
           <th role="columnheader"
               scope="col"
               aria-label="Second Column: Not sorted."
               aria-sort="none"
-              class="column text-xs-right"
+              class="column text-xs-left"
           >
             Second Column
           </th>
@@ -35,15 +35,15 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
               aria-label="Third Column: Not sorted. Activate to sort ascending."
               aria-sort="none"
               tabindex="0"
-              class="column sortable text-xs-right an array"
+              class="column sortable text-xs-left an array"
           >
+            Third Column
             <i aria-hidden="true"
                class="icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
             </i>
-            Third Column
           </th>
         </tr>
         <tr class="datatable__progress">
@@ -55,7 +55,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
       </thead>
       <tbody>
         <tr>
-          <td colspan="100%"
+          <td colspan="3"
               class="text-xs-center"
           >
             No data available
@@ -194,21 +194,21 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
               aria-label="First Column: Sorted ascending. Activate to sort descending."
               aria-sort="ascending"
               tabindex="0"
-              class="column sortable active asc text-xs-right a-string"
+              class="column sortable active asc text-xs-left a-string"
           >
+            First Column
             <i aria-hidden="true"
                class="icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
             </i>
-            First Column
           </th>
           <th role="columnheader"
               scope="col"
               aria-label="Second Column: Not sorted."
               aria-sort="none"
-              class="column text-xs-right"
+              class="column text-xs-left"
           >
             Second Column
           </th>
@@ -217,15 +217,15 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
               aria-label="Third Column: Not sorted. Activate to sort ascending."
               aria-sort="none"
               tabindex="0"
-              class="column sortable text-xs-right an array"
+              class="column sortable text-xs-left an array"
           >
+            Third Column
             <i aria-hidden="true"
                class="icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
             </i>
-            Third Column
           </th>
         </tr>
         <tr class="datatable__progress">
@@ -237,7 +237,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
       </thead>
       <tbody>
         <tr>
-          <td colspan="100%"
+          <td colspan="3"
               class="text-xs-center"
           >
             No matching records found
@@ -376,21 +376,21 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
               aria-label="First Column: Sorted ascending. Activate to sort descending."
               aria-sort="ascending"
               tabindex="0"
-              class="column sortable active asc text-xs-right a-string"
+              class="column sortable active asc text-xs-left a-string"
           >
+            First Column
             <i aria-hidden="true"
                class="icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
             </i>
-            First Column
           </th>
           <th role="columnheader"
               scope="col"
               aria-label="Second Column: Not sorted."
               aria-sort="none"
-              class="column text-xs-right"
+              class="column text-xs-left"
           >
             Second Column
           </th>
@@ -399,15 +399,15 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
               aria-label="Third Column: Not sorted. Activate to sort ascending."
               aria-sort="none"
               tabindex="0"
-              class="column sortable text-xs-right an array"
+              class="column sortable text-xs-left an array"
           >
+            Third Column
             <i aria-hidden="true"
                class="icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
             </i>
-            Third Column
           </th>
         </tr>
         <tr class="datatable__progress">
@@ -560,21 +560,21 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
               aria-label="First Column: Sorted ascending. Activate to sort descending."
               aria-sort="ascending"
               tabindex="0"
-              class="column sortable active asc text-xs-right a-string"
+              class="column sortable active asc text-xs-left a-string"
           >
+            First Column
             <i aria-hidden="true"
                class="icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
             </i>
-            First Column
           </th>
           <th role="columnheader"
               scope="col"
               aria-label="Second Column: Not sorted."
               aria-sort="none"
-              class="column text-xs-right"
+              class="column text-xs-left"
           >
             Second Column
           </th>
@@ -583,15 +583,15 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
               aria-label="Third Column: Not sorted. Activate to sort ascending."
               aria-sort="none"
               tabindex="0"
-              class="column sortable text-xs-right an array"
+              class="column sortable text-xs-left an array"
           >
+            Third Column
             <i aria-hidden="true"
                class="icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
             </i>
-            Third Column
           </th>
         </tr>
         <tr class="datatable__progress">
@@ -645,7 +645,7 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
 
 exports[`VDataTable.vue should match display no-data-text when no data 1`] = `
 
-<td colspan="100%"
+<td colspan="3"
     class="text-xs-center"
 >
   foo
@@ -655,7 +655,7 @@ exports[`VDataTable.vue should match display no-data-text when no data 1`] = `
 
 exports[`VDataTable.vue should match display no-results-text when no results 1`] = `
 
-<td colspan="100%"
+<td colspan="3"
     class="text-xs-center"
 >
   bar

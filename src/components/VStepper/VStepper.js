@@ -1,4 +1,4 @@
-require('../../stylus/components/_steppers.styl')
+import '../../stylus/components/_steppers.styl'
 
 import Themeable from '../../mixins/themeable'
 

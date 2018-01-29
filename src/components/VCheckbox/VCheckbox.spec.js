@@ -173,12 +173,12 @@ test('VCheckbox.js', ({ mount }) => {
 
     const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
 
-    expect(ripple.element.__ripple.enabled).toBe(true)
-    expect(ripple.element.__ripple.centered).toBe(true)
+    expect(ripple.element._ripple.enabled).toBe(true)
+    expect(ripple.element._ripple.centered).toBe(true)
 
     wrapper.setProps({ disabled: true })
 
-    expect(ripple.element.__ripple.enabled).toBe(false)
+    expect(ripple.element._ripple.enabled).toBe(false)
   })
 
   it('should set ripple centered property when enabled', () => {
@@ -191,12 +191,12 @@ test('VCheckbox.js', ({ mount }) => {
 
     const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
 
-    expect(ripple.element.__ripple.enabled).toBe(false)
+    expect(ripple.element._ripple.enabled).toBe(false)
 
     wrapper.setProps({ disabled: false })
 
-    expect(ripple.element.__ripple.enabled).toBe(true)
-    expect(ripple.element.__ripple.centered).toBe(true)
+    expect(ripple.element._ripple.enabled).toBe(true)
+    expect(ripple.element._ripple.centered).toBe(true)
   })
 
   it('should not render ripple when ripple prop is false', () => {
@@ -221,7 +221,7 @@ test('VCheckbox.js', ({ mount }) => {
 
     const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
 
-    expect(ripple.element.__ripple.enabled).toBe(true)
-    expect(ripple.element.__ripple.centered).toBe(true)
+    expect(ripple.element._ripple.enabled).toBe(true)
+    expect(ripple.element._ripple.centered).toBe(true)
   })
 })

@@ -1,4 +1,4 @@
-require('../../stylus/components/_alerts.styl')
+import '../../stylus/components/_alerts.styl'
 
 import VIcon from '../VIcon'
 

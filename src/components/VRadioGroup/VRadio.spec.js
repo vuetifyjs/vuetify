@@ -152,8 +152,8 @@ test('VRadio.vue', ({ mount }) => {
 
     const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
 
-    expect(ripple.element.__ripple.enabled).toBe(true)
-    expect(ripple.element.__ripple.centered).toBe(true)
+    expect(ripple.element._ripple.enabled).toBe(true)
+    expect(ripple.element._ripple.centered).toBe(true)
 
     expect(warning).toHaveBeenTipped()
   })

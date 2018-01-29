@@ -10,7 +10,7 @@ const ripple = {
    * @param {{ class?: string, center?: boolean }} [value={}]
    */
   show: (e, el, value = {}) => {
-    if (!el.__ripple || !el.__ripple.enabled) {
+    if (!el._ripple || !el._ripple.enabled) {
       return
     }
 
@@ -50,10 +50,8 @@ const ripple = {
     }, 0)
   },
 
-  hide: (el) => {
-    if (!el.__ripple || !el.__ripple.enabled) {
-      return
-    }
+  hide: el => {
+    if (!el._ripple || !el._ripple.enabled) return
 
     const ripples = el.getElementsByClassName('ripple__animation')
 
@@ -85,9 +83,9 @@ function isRippleEnabled (value) {
 function rippleShow (e) {
   const value = {}
   const element = e.currentTarget
-  value.center = element.__ripple.centered
-  if (element.__ripple.class) {
-    value.class = element.__ripple.class
+  value.center = element._ripple.centered
+  if (element._ripple.class) {
+    value.class = element._ripple.class
   }
   ripple.show(e, element, value)
 }
@@ -101,14 +99,14 @@ function updateRipple (el, binding, wasEnabled) {
   if (!enabled) {
     ripple.hide(el)
   }
-  el.__ripple = el.__ripple || {}
-  el.__ripple.enabled = enabled
+  el._ripple = el._ripple || {}
+  el._ripple.enabled = enabled
   const value = binding.value || {}
   if (value.center) {
-    el.__ripple.centered = true
+    el._ripple.centered = true
   }
   if (value.class) {
-    el.__ripple.class = binding.value.class
+    el._ripple.class = binding.value.class
   }
   if (enabled && !wasEnabled) {
     if ('ontouchstart' in window) {
@@ -141,7 +139,7 @@ function directive (el, binding) {
 }
 
 function unbind (el, binding) {
-  delete el.__ripple
+  delete el._ripple
   removeListeners(el)
 }
 

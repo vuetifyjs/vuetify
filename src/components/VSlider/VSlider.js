@@ -1,4 +1,4 @@
-require('../../stylus/components/_sliders.styl')
+import '../../stylus/components/_sliders.styl'
 
 import { addOnceEventListener, createRange } from '../../util/helpers'
 
@@ -282,7 +282,7 @@ export default {
       }, children)
     },
     genSteps (h) {
-      const ticks = createRange(this.numTicks + 1).map((i) => {
+      const ticks = createRange(this.numTicks + 1).map(i => {
         const span = h('span', {
           key: i,
           staticClass: 'slider__tick',

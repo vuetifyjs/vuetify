@@ -21,7 +21,7 @@ test('VRipple', ({ mount }) => {
     const wrapper = mount(testComponent)
 
     const div = wrapper.find('div')[0]
-    expect(div.element.__ripple.enabled).toBe(true)
+    expect(div.element._ripple.enabled).toBe(true)
   })
 
   it('Ripple should update element property reactively', () => {
@@ -51,12 +51,12 @@ test('VRipple', ({ mount }) => {
     })
 
     const div = wrapper.find('div')[0]
-    expect(div.element.__ripple.enabled).toBe(true)
+    expect(div.element._ripple.enabled).toBe(true)
 
     wrapper.setProps({ ripple: false })
-    expect(div.element.__ripple.enabled).toBe(false)
+    expect(div.element._ripple.enabled).toBe(false)
 
     wrapper.setProps({ ripple: true })
-    expect(div.element.__ripple.enabled).toBe(true)
+    expect(div.element._ripple.enabled).toBe(true)
   })
 })

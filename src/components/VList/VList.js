@@ -1,5 +1,5 @@
 // Styles
-require('../../stylus/components/_lists.styl')
+import '../../stylus/components/_lists.styl'
 
 // Mixins
 import Themeable from '../../mixins/themeable'
